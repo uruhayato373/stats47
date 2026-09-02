@@ -3,8 +3,8 @@ title: 湖の面積差はなぜ北海道と滋賀に集中するのか
 seoTitle: "主要湖沼面積ランキング|北海道・滋賀が突出、0ha県が26県ある理由 (2024年)"
 description: 日本の主要湖沼面積は北海道と滋賀県に集中し、47都道府県のうち26県はデータ上0haです。この極端な偏りがどこから生まれるのかを、地形の成り立ちから読み解きます。
 slug: major-lake-area-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

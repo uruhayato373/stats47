@@ -3,8 +3,8 @@ title: 食塩消費量は県で3.3倍差｜日本海側になぜ集中するの�
 seoTitle: "食塩消費量ランキング2024｜都道府県別1位新潟県・47位群馬県の差"
 description: 同じ日本に暮らしていても、食卓に上る塩の量は県によって大きく違います。2024年の家計調査から都道府県別の食塩消費量を読み解き、上位と下位に3.3倍の差が生まれる理由を探ります。
 slug: table-salt-consumption-quantity-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

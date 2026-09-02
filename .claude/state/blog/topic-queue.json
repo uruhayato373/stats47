@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 76,
+    "pending": 74,
     "inProgress": 2,
-    "done": 40,
+    "done": 42,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 12,
-      "A": 24,
+      "D2": 11,
+      "A": 23,
       "F": 12,
       "G": 9
     }
@@ -2780,8 +2780,10 @@
       "suggestedTitle": "食塩消費量 日本一はどこ",
       "combinedScore": 0.279,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 97
+      "status": "done",
+      "priority": 97,
+      "done_at": "2026-09-02",
+      "published_slug": "table-salt-consumption-quantity-prefecture-gap"
     },
     {
       "topicKey": "gap-wholesale-annual-sales-amount",
@@ -3139,8 +3141,10 @@
       "suggestedTitle": "主要湖沼面積が多い県はどこ",
       "combinedScore": 0.269,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 110
+      "status": "done",
+      "priority": 110,
+      "done_at": "2026-09-02",
+      "published_slug": "major-lake-area-prefecture-gap"
     },
     {
       "topicKey": "gap-governor-salary-prefecture",
