@@ -3,8 +3,8 @@ title: 日照時間1位はなぜ高知?日本海側との差
 seoTitle: "年間日照時間ランキング2024年 都道府県別データ"
 description: 同じ日本なのに、太陽の当たる時間は県によって大きく違います。2024年の年間日照時間を都道府県別に比較すると、高知県が全国トップに立つ一方、日本海側の県は軒並み下位に沈んでいることがわかります。
 slug: annual-sunshine-duration-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
