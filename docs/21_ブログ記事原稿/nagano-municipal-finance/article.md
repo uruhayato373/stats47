@@ -3,8 +3,8 @@ title: 財政力指数に14倍の差、長野県77市町村の内実
 seoTitle: "長野県77市町村の財政力指数・実質公債費比率でみる財政格差 2024年度決算"
 description: 同じ長野県内なのに、自治体の財政力指数には14倍以上の開きがあります。軽井沢町が突出する理由と、実質公債費比率が低い自治体に共通する背景を、77市町村の決算データから読み解きます。
 slug: nagano-municipal-finance
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
