@@ -3,8 +3,8 @@ title: 上水道給水人口、なぜ都市部に偏るのか
 seoTitle: "上水道給水人口ランキング2023年｜都道府県別の地域差"
 description: 日本で上水道を使う人の数は、住む県によって大きく違います。この記事では2023年の上水道給水人口を都道府県別に比較し、上位と下位でおよそ28.9倍もの開きが生まれる理由を地理と人口構造から読み解きます。
 slug: water-supply-population-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

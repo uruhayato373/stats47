@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 74,
+    "pending": 73,
     "inProgress": 2,
-    "done": 42,
+    "done": 43,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 11,
-      "A": 23,
+      "A": 22,
       "F": 12,
       "G": 9
     }
@@ -3058,8 +3058,10 @@
       "suggestedTitle": "上水道給水人口が多い県はどこ",
       "combinedScore": 0.271,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 107
+      "status": "done",
+      "priority": 107,
+      "done_at": "2026-09-02",
+      "published_slug": "water-supply-population-prefecture-gap"
     },
     {
       "topicKey": "gap-retail-sales-amount-by-prefecture",
