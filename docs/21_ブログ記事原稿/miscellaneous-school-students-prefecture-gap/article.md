@@ -3,8 +3,8 @@ title: 各種学校の生徒数、東京都が716倍の格差
 seoTitle: "各種学校生徒数ランキング|都道府県別2024年データで見る地域差"
 description: 東京都に暮らす生徒と宮崎県に暮らす生徒では、通える各種学校の数がまるで違います。2024年の各種学校生徒数は都道府県間で最大716倍の開きがあり、専門的な技芸を教える学校や外国人学校が集まる都市圏と、そうした学校がほとんど無い県とに分かれています。この記事では偏りの背景を都市機能と産業構造から読み解きます。
 slug: miscellaneous-school-students-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
