@@ -139,6 +139,7 @@ jobs:
             fetch-metrics-weekly.yml|\
             purge-cdn.yml|\
             generate-ogp-images.yml|\
+            blog-auto-publish.yml|\
             publish-blog.yml|\
             regenerate-blog-svgs.yml|\
             gsc-auto-resubmit-daily.yml|\
