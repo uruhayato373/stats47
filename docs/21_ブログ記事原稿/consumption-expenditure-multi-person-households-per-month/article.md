@@ -3,8 +3,8 @@ title: 消費支出が多い県ほど社会福祉費が少ないのはなぜ
 seoTitle: "消費支出と社会福祉費ランキング|逆相関の理由 (2024年・2022年)"
 description: 消費支出が多い埼玉県や千葉県ほど、一人当たり社会福祉費は少ない側に位置しています。47都道府県のデータで消費支出と社会福祉費の関係を確かめ、見かけの相関の背景にある年齢構成や地域の違いを読み解きます。
 slug: consumption-expenditure-multi-person-households-per-month
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
