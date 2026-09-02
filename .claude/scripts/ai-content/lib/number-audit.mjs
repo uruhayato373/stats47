@@ -98,9 +98,13 @@ export function unitMultiplier(unit) {
 /**
  * 数値の直後が「分母の表現」か (指標の定義であって数値主張ではない)。
  * 例: 「人口10万対」「10万人あたり」「1万人当たり」「10万人につき」
+ *     「出産10万件あたり」「施設1000件当たり」(助数詞は人に限らない)
  */
+const DENOMINATOR_COUNTER = "(?:人|件|施設|世帯|台|校|園|store|回|床|戸)";
 function isDenominatorContext(after) {
-  return /^\s*(?:人?\s*(?:あたり|当たり|当り|につき)|対\b|対[^0-9]|人?対)/.test(after);
+  return new RegExp(
+    `^\\s*(?:${DENOMINATOR_COUNTER}?\\s*(?:あたり|当たり|当り|につき)|対\\b|対[^0-9]|${DENOMINATOR_COUNTER}?対)`,
+  ).test(after);
 }
 
 /**
