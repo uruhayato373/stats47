@@ -3,8 +3,8 @@ title: 卸売業の販売額はなぜ東京都に集中するのか
 seoTitle: "卸売業年間商品販売額ランキング｜1位東京都・47位鳥取県 2023年"
 description: 同じ日本国内でも、卸売業の商いの規模はこれほど違います。この記事では2023年の卸売業年間商品販売額を都道府県別に比較し、東京都への集中と地方の水準が分かれる背景を明らかにします。
 slug: wholesale-annual-sales-amount-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
