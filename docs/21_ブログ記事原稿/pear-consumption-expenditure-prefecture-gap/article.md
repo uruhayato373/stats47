@@ -3,8 +3,8 @@ title: 梨消費支出額、鳥取県はなぜ首位なのか
 seoTitle: "梨消費支出額ランキング 都道府県別2024年 鳥取県が1位"
 description: 梨の消費支出額は都道府県で大きく異なり、鳥取県は全国のなかで突出した8,846円で1位となりました。最も少ない山梨県との差はおよそ14倍にのぼります。この記事では上位と下位の顔ぶれを図で確認し、その背景にある産地や食文化とのつながりを読み解きます。
 slug: pear-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
