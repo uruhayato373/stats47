@@ -3,8 +3,8 @@ title: 愛媛県、なぜ隣の香川より遠い岐阜から人が来る
 seoTitle: "愛媛県の人口移動 東京都へ1,007人・大阪府へ932人が転出 隣県香川へも385人"
 description: 愛媛県は2025年に転出超過が5,694人まで拡大しました。東京都や大阪府への転出だけでなく、同じ四国の香川県への転出超過も385人と大きく、一方で岐阜県など遠方の数県からはわずかに人を集めています。
 slug: ehime-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
