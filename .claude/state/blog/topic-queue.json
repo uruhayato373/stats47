@@ -4,13 +4,13 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 82,
+    "pending": 81,
     "inProgress": 2,
-    "done": 34,
+    "done": 35,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 14,
+      "D2": 13,
       "A": 28,
       "F": 12,
       "G": 9
@@ -2695,8 +2695,10 @@
       "suggestedTitle": "梅干し消費量 日本一はどこ",
       "combinedScore": 0.28,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 94
+      "status": "done",
+      "priority": 94,
+      "done_at": "2026-09-02",
+      "published_slug": "pickled-plum-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-nuclear-family-household-count",

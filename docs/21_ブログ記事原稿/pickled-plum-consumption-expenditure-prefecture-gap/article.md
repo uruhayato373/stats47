@@ -3,8 +3,8 @@ title: 梅干し消費額、なぜ紀州より青森が僅差なのか
 seoTitle: "梅干し消費支出額ランキング｜1位和歌山・2位青森 47都道府県2024年"
 description: 梅干しの本場といえば和歌山のはずなのに、支出額で肉薄するのは遠く離れた青森県でした。47都道府県の家計調査データから、消費額の地域差を生む食文化と気候の関係を読み解きます。
 slug: pickled-plum-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
