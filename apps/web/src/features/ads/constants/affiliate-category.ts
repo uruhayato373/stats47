@@ -162,9 +162,11 @@ export const TAG_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
   //   記事数 311→363 / imp 44%→89% に上げる。寄せ先は CATEGORY_AFFILIATE_MAP と
   //   THEME_AFFILIATE_MAP の既存判断に揃える (同じ主題の ranking / theme ページと同じ広告が出る)。
   //   「都道府県格差」「地域差」「地名」「公務員」等の汎用・無意図タグは引き続き入れない。
-  // 教育スポーツ (educationsports → education)。学校保健統計の体位も同カテゴリ
-  "身長": "education", "体重": "education", "体格": "education", "体位": "education",
-  "学校保健統計": "education", "高校生": "education", "中学生": "education",
+  //   同日、出典調査による上書き (SURVEY_AFFILIATE_MAP) を導入したので、身長・気候のような
+  //   「主題はあるが商材が無い」タグは写像せず調査側で null にする。
+  // 教育 (educationsports → education)。身長・体重等の学校保健統計は意図が無いので
+  //   写像せず、SURVEY_AFFILIATE_MAP の school-health-survey: null で広告を止める
+  "高校生": "education", "中学生": "education",
   "教育スポーツ": "education", "大学": "education", "進学率": "education",
   "教育格差": "education", "収容力指数": "education", "図書館": "education",
   "博物館": "education", "文化施設": "education", "社会教育": "education",
@@ -193,9 +195,8 @@ export const TAG_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
   "共働き": "population",
   // 国土・気候 (landweather / construction → housing)
   "可住地面積": "housing", "土地利用": "housing", "国土": "housing", "林野面積": "housing",
-  "地価": "housing", "移住": "housing", "気候": "housing", "気温": "housing",
-  "猛暑日": "housing", "真冬日": "housing", "降水量": "housing", "降雪量": "housing",
-  "積雪": "housing", "雪国": "housing",
+  "地価": "housing", "移住": "housing",
+  //   気候・気温・降雪は意図が無いので写像しない (weather-statistics: null で止める)
   // エネルギー (太陽光・再エネは電力・蓄電池の案件と直結)
   "再生可能エネルギー": "energy", "太陽光発電": "energy", "風力発電": "energy",
   "カーボンニュートラル": "energy", "GX": "energy", "太陽光": "energy",
@@ -258,3 +259,97 @@ export const AFFILIATE_THEME: Record<
   education:  { border: "border-indigo-100", bg: "bg-indigo-50/50", icon: "text-indigo-400", emoji: "📚" },
   mobility:   { border: "border-slate-200",  bg: "bg-slate-50/50",  icon: "text-slate-500",  emoji: "🚗" },
 };
+
+/**
+ * 出典調査 (surveys.json の id) → vertical。**カテゴリより細かい主題**で意図を決める最上位の写像。
+ *
+ * 17 軸のカテゴリは「納豆消費量」と「県民所得」を同じ economy に落とすが、出典調査
+ * (家計調査 / 県民経済計算) なら区別できる。ランキングは item.json、ブログは all.json に
+ * surveyIds が焼き込み済みなので推測は入らない (正典 `survey-linkage-standards.md`)。
+ *
+ * 値の意味:
+ *   - vertical: その調査のページはカテゴリ・タグに関わらずこの軸で解決する
+ *   - null:     主題はあるが合う商材が無い。意図軸の広告を**出さない** (ハウス枠・AdSense のみ)。
+ *               意図の合わない広告を上位に置くより空の方が無害 (rules §5)
+ *
+ * ここに無い調査はタグ → カテゴリの従来解決に落ちる。追加は「カテゴリ写像より明らかに
+ * 良い/悪い」と実測で言える調査だけ (2026-09-03: GSC 2026-W35 の imp 上位から選定)。
+ */
+export const SURVEY_AFFILIATE_MAP: Readonly<Record<string, AffiliateVertical | null>> = {
+  // 家計調査 (品目別): ランキング 28,867 imp/週・ブログ 12,366。読者は「◯◯をよく買う県」を見に来る。
+  //   金融 (economy) ではなく返礼品 (furusato) と楽天商品カードが合う
+  "kakei-chousa": "furusato",
+  // 学校保健統計 (身長・体重): 6,370 imp。合う商材が無い (資格講座・研修が出ていた)
+  "school-health-survey": null,
+  // 気象統計 (日照・気温・降雪): 合う商材が無い (不動産・バーチャルオフィスが出ていた)
+  "weather-statistics": null,
+  // 面積調 / 自然公園面積: 同上
+  "area-survey": null,
+  "natural-park-area": null,
+  // 犯罪・火災・水害: safetyenvironment → mobility (自動車保険) は交通事故には合うがこれらには合わない
+  "police-statistics": null,
+  "fire-annual-report": null,
+  "flood-statistics": null,
+  // 廃棄物・水質・上下水道: infrastructure/safetyenvironment → mobility は合わない
+  "waste-management-survey": null,
+  "water-pollution-survey": null,
+  "sewerage-statistics": null,
+  "waterworks-statistics": null,
+  // 地方公務員給与: administrativefinancial → furusato ではなく転職 (labor)
+  "local-public-employee-salary": "labor",
+  // 在留外国人統計: international → travel (旅行) ではなく population (foreign-residents テーマと同じ)
+  "foreign-residents-statistics": "population",
+};
+
+/** tagKey 群 → 重複なし vertical 群 (出現順)。 */
+export function verticalsFromTagKeys(tagKeys: readonly string[]): AffiliateVertical[] {
+  const seen = new Set<AffiliateVertical>();
+  for (const tagKey of tagKeys) {
+    const v = TAG_AFFILIATE_MAP[tagKey];
+    if (v) seen.add(v);
+  }
+  return [...seen];
+}
+
+export interface ContentVerticalInput {
+  /** 出典調査 id (先頭が主調査)。ranking item.json / blog all.json の surveyIds */
+  surveyIds?: readonly string[] | null;
+  /** 記事・指標のタグキー */
+  tagKeys?: readonly string[] | null;
+  /** e-Stat 17 軸カテゴリ */
+  categoryKey?: string | null;
+}
+
+export type ContentVerticalResolution =
+  | { source: "survey"; vertical: AffiliateVertical; verticals: AffiliateVertical[] }
+  | { source: "survey-none"; vertical: null; verticals: [] }
+  | { source: "tags"; vertical: AffiliateVertical; verticals: AffiliateVertical[] }
+  | { source: "category"; vertical: AffiliateVertical; verticals: AffiliateVertical[] }
+  | { source: "none"; vertical: null; verticals: [] };
+
+/**
+ * ページの内容から広告の意図軸を 1 つ決める。全ページ共通の解決順:
+ *   1. 出典調査 (SURVEY_AFFILIATE_MAP に載っている調査。null なら意図軸の広告を出さない)
+ *   2. タグ (TAG_AFFILIATE_MAP。複数 vertical に解決した場合は `verticals` に全部残す)
+ *   3. カテゴリ (CATEGORY_AFFILIATE_MAP)
+ *   4. 無し (推測で別の軸へ流さない)
+ * 純関数。R2 を読まない。
+ */
+export function resolveContentVertical(input: ContentVerticalInput): ContentVerticalResolution {
+  for (const surveyId of input.surveyIds ?? []) {
+    if (!(surveyId in SURVEY_AFFILIATE_MAP)) continue;
+    const v = SURVEY_AFFILIATE_MAP[surveyId];
+    return v
+      ? { source: "survey", vertical: v, verticals: [v] }
+      : { source: "survey-none", vertical: null, verticals: [] };
+  }
+  const byTags = verticalsFromTagKeys(input.tagKeys ?? []);
+  if (byTags.length > 0) {
+    return { source: "tags", vertical: byTags[0], verticals: byTags };
+  }
+  const byCategory = input.categoryKey ? CATEGORY_AFFILIATE_MAP[input.categoryKey] : undefined;
+  if (byCategory) {
+    return { source: "category", vertical: byCategory, verticals: [byCategory] };
+  }
+  return { source: "none", vertical: null, verticals: [] };
+}

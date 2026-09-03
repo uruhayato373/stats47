@@ -165,14 +165,35 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 | ページ種別 | 解決キー |
 |---|---|
-| ranking / category | `categoryKey` → vertical の banner (priority 上位) → text → AdSense fallback |
-| blog | 記事 `tags` → vertical の banner/text。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
+| ranking | **出典調査 → タグ → categoryKey** (`resolveContentVertical`。2026-09-03) → vertical の banner (priority 上位) → text → AdSense fallback。native 枠とサイドバー (`AffiliateAdSlot vertical=`) は同じ解決結果を使う |
+| category | `categoryKey` → vertical |
+| blog | **出典調査 → 記事 `tags`** (`resolveContentVertical`。2026-09-03) → vertical の banner/text。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
+| survey | `SURVEY_AFFILIATE_MAP[surveyKey]` → 無ければ所属ランキングの categoryKey 最頻値 |
 | theme | `relatedArticleTagKeys` → vertical、空なら `THEME_AFFILIATE_MAP[themeKey]` → vertical (フォールバック) |
 | area | `locationCode="area-sidebar"` の banner。AdSense停止中の県本文枠は地域意図として `furusato` vertical |
 
 - **desktop の右レールに置く PR は画像バナー (`BannerAd`) のみ**。独自テキスト promo card、`FurusatoNozeiCard`、
   `AffiliateTextAdList` は右レールへ置かない。banner 在庫が無い場合は AdSense へフォールバックし、テキスト広告は
   本文 inline / footer に限定する。
+
+### 出典調査による上書き (`SURVEY_AFFILIATE_MAP`・2026-09-03)
+
+17 軸のカテゴリは「納豆消費量」と「県民所得」を同じ economy に落とす。実測 (GSC 2026-W35) では
+**ランキング流入の 38% (28,867 imp/週) が家計調査の食品品目**で、そこに FP 相談・ファクタリング・NISA が
+出ていた。出典調査 (`survey-linkage-standards.md` の surveyIds 焼き込み) はカテゴリより細かい主題を持つので、
+`affiliate-category.ts` の `SURVEY_AFFILIATE_MAP` を **最上位の写像**にし、全ページ共通の解決順を
+`resolveContentVertical` に一本化した:
+
+```
+出典調査 (SURVEY_AFFILIATE_MAP に載っている調査) → タグ (TAG_AFFILIATE_MAP) → カテゴリ (CATEGORY_AFFILIATE_MAP) → 無し
+```
+
+- 値 `null` は「主題はあるが合う商材が無い」。意図軸の広告を**出さず**ハウス枠・AdSense だけにする
+  (身長・気候・犯罪・廃棄物など。意図の合わない広告を上位に置くより空の方が無害 = §5)。
+- 追加は「カテゴリ写像より明らかに良い/悪い」と流入実測で言える調査だけ。推測で全調査を埋めない。
+- ranking (native + サイドバー) / blog (本文・末尾・右レール・テキスト) / survey が同じ関数を通る。
+  theme / area / home はページ種別が主題を決めるため従来どおり。
+- 契約テスト: `affiliate-category-map-contract.test.ts` (解決順・null の伝播・調査 id の実在)。
 
 ### priority 規約
 
@@ -544,7 +565,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 
 | ページ | 追加した枠 | 解決 |
 |---|---|---|
-| blog 本文 | **A/B**: `text` 版はテキスト 3 本 (従来通り) / `banner` 版は 300x250 を 3 枚。slug ハッシュで記事ごとに固定 (実測 432 記事で 219/213)。GA4 は `experiment_id=blog-inbody-format` / `variant_id=text\|banner` | tagKeys → vertical で 6 件解決し用途別に切り出す |
+| blog 本文 | **A/B**: `text` 版はテキスト 3 本 (従来通り) / `banner` 版は 300x250 を 3 枚。slug ハッシュで記事ごとに固定 (実測 432 記事で 219/213)。GA4 は `experiment_id=blog-inbody-format` / `variant_id=text\|banner` | 出典調査 → tagKeys → vertical で 6 件解決し用途別に切り出す (2026-09-03) |
 | blog 記事末尾 | **常に 300x250 バナー 1 枚** (`variant_id=end-banner`)。完読者は意図が強いため A/B の対象外 | 同上 |
 | blog 右レール | 300x250 を最大 2 枚。**右レールはバナーのみ**でテキストは本文 inline に寄せる方針は不変 | 同上 (本文で使った分より後ろを回し重複回避) |
 | ranking 右レール | 1 → **2 枚** (`AffiliateAdSlot bannerLimit`) | categoryKey → vertical |

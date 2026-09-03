@@ -21,8 +21,8 @@ import {
     SidebarPromoBanner,
     selectPromoBannerIndexForRanking,
 } from "@/features/ads";
-import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
-import { RakutenItemsCard, resolveAffiliateBanners, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
+import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
+import { RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { BLOG_IN_BODY_BANNER_COUNT, BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
@@ -139,18 +139,22 @@ export default async function BlogPostPage({ params }: PageProps) {
     const tagKeys = articleTagData.map((t) => t.tagKey);
     // テキスト広告は本文 inline のみに置く。右レールの PR は画像バナーへ統一する。
     // 在庫が薄い vertical では空枠を作らない (md-content 側が index 不足を握りつぶす)。
-    const affiliateTextAds = await resolveAffiliateTextAdsByTagKeys(
-        tagKeys,
+    // ★ 2026-09-03: 解決順を **出典調査 → タグ** に統一 (`resolveContentVertical`、ranking と同じ)。
+    //   家計調査の記事 (ブログ imp の 17%) は食文化タグで economy に落ち金融広告が出ていた。
+    //   all.json の surveyIds 焼き込みで家計調査 → furusato、気象統計 → 広告なし、のように決める。
+    const affiliateInput = { surveyIds: article.surveyIds, tagKeys };
+    const affiliateTextAds = await resolveAffiliateTextAdsForContent(
+        affiliateInput,
         "sidebar-bottom",
         4,
     );
     // 本文3 + 末尾1 + サイドバー2 = 最大6件を1回で解決し、用途ごとに切り出す。
     //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
-    const affiliateBannerPool = await resolveAffiliateBanners(tagKeys, BLOG_IN_BODY_BANNER_COUNT + 2);
+    const affiliateBannerPool = await resolveAffiliateBannersForContent(affiliateInput, BLOG_IN_BODY_BANNER_COUNT + 2);
     const articleBanners = affiliateBannerPool.slice(0, BLOG_IN_BODY_BANNER_COUNT);
     // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
     const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
-    const affiliateVertical = tagKeys.map((t) => TAG_AFFILIATE_MAP[t]).find(Boolean) ?? null;
+    const affiliateVertical = resolveContentVertical(affiliateInput).vertical;
     // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
     const articleTagsMap = await getTagsForArticles(relatedArticles.map((a) => a.slug));
