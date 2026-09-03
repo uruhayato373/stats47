@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { getMetricConfig } from '@stats47/data-configs';
 import { KNOWN_MUNICIPALITY_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
 import {
   readMunicipalityRankingItem,
@@ -27,7 +28,9 @@ import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
 
-
+import { NativeAffiliateRow } from '@/features/ads';
+import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
+import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import {
   MunicipalityRankingViewTracker,
   binMunicipalityValues,
@@ -108,9 +111,17 @@ export default async function MunicipalityRankingPage({
     searchParams,
   ]);
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) notFound();
-  const [item, snapshot] = await Promise.all([
+  // 広告の意図軸は metric config (git TS SSOT) の category → vertical。都道府県ランキングと同じ写像
+  const affiliateVertical = (() => {
+    const category = getMetricConfig(rankingKey)?.category;
+    return category ? CATEGORY_AFFILIATE_MAP[category] : undefined;
+  })();
+  const [item, snapshot, nativeBanners] = await Promise.all([
     readMunicipalityRankingItem(rankingKey),
     readMunicipalityRankingValues(rankingKey),
+    affiliateVertical
+      ? resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => [])
+      : Promise.resolve([]),
   ]);
   if (!item || !snapshot) {
     return (
@@ -413,6 +424,18 @@ export default async function MunicipalityRankingPage({
             </Link>
           )}
         </nav>
+      )}
+
+      {/* ネイティブアフィリエイト枠 (categoryKey → vertical。写像が無ければ描画しない) */}
+      {nativeBanners.length > 0 && (
+        <div className="mt-8">
+          <NativeAffiliateRow
+            banners={nativeBanners}
+            position="municipality-native"
+            trackingCategory={`municipality-${item.rankingKey}`}
+            variant="three-up"
+          />
+        </div>
       )}
 
       <footer className="mt-8 border-t border-border pt-5 text-sm leading-relaxed text-muted-foreground">
