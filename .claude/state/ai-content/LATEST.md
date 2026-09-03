@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-09-02T11:23:39.937Z
+- 生成: 2026-09-03T00:18:42.114Z
 - GSC snapshot: 2026-W35 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 171 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
@@ -14,23 +14,23 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **15.4 件/日** (2026-07-30 からの平均)
-- 残り 1445 件 → **完了見込み 約 95 日**
+- 消化ペース: **14.9 件/日** (2026-07-30 からの平均)
+- 残り 1445 件 → **完了見込み 約 97 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
-| Wed, 02 Sep 2026 11:21:48 GMT | whisky-consumption-expenditure | 8 |
-| Wed, 02 Sep 2026 11:21:48 GMT | womens-sweater-consumption-expenditure | 7 |
-| Wed, 02 Sep 2026 11:21:47 GMT | toothpaste-consumption-expenditure | 8 |
-| Wed, 02 Sep 2026 11:21:47 GMT | treatment-rate-cerebrovascular-inpatient | 8 |
-| Wed, 02 Sep 2026 11:21:47 GMT | total-museum-count | 7 |
-| Wed, 02 Sep 2026 11:21:47 GMT | travel-bag-consumption-quantity | 7 |
-| Wed, 02 Sep 2026 11:21:47 GMT | travel-participation-rate-domestic | 7 |
-| Wed, 02 Sep 2026 11:21:47 GMT | unmarried-ratio-female-35-39 | 7 |
-| Wed, 02 Sep 2026 11:21:47 GMT | vinegar-consumption-expenditure | 7 |
-| Wed, 02 Sep 2026 11:21:47 GMT | wakame-consumption-expenditure | 7 |
+| Wed, 02 Sep 2026 11:26:57 GMT | whisky-consumption-expenditure | 8 |
+| Wed, 02 Sep 2026 11:26:57 GMT | womens-sweater-consumption-expenditure | 7 |
+| Wed, 02 Sep 2026 11:26:56 GMT | toothpaste-consumption-expenditure | 8 |
+| Wed, 02 Sep 2026 11:26:56 GMT | treatment-rate-cerebrovascular-inpatient | 8 |
+| Wed, 02 Sep 2026 11:26:56 GMT | total-museum-count | 7 |
+| Wed, 02 Sep 2026 11:26:56 GMT | travel-bag-consumption-quantity | 7 |
+| Wed, 02 Sep 2026 11:26:56 GMT | travel-participation-rate-domestic | 7 |
+| Wed, 02 Sep 2026 11:26:56 GMT | unmarried-ratio-female-35-39 | 7 |
+| Wed, 02 Sep 2026 11:26:56 GMT | vinegar-consumption-expenditure | 7 |
+| Wed, 02 Sep 2026 11:26:56 GMT | wakame-consumption-expenditure | 7 |
 | Wed, 02 Sep 2026 11:15:08 GMT | solar-power-housing | 7 |
 | Wed, 02 Sep 2026 11:15:07 GMT | sardine-consumption-quantity | 9 |
 | Wed, 02 Sep 2026 11:15:07 GMT | senility-death-rate | 9 |

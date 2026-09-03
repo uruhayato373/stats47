@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T19:45:05.145Z",
+  "updatedAt": "2026-09-02T19:30:11.259Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3533,6 +3533,19 @@
           "evidence": "誤って .github/workflows/{blog-auto-publish,generate-article-charts}.yml を編集し gate 相当の実測(cut -d/でのfield index確認・git status --porcelainでのquotepath既定挙動確認)まで行ったが、backlog-loop.md の禁止パスに抵触すると気づき両ファイルを編集前の内容へ手動で復元した(git diff --stat で .github/ 配下の差分が0であることを確認済み)。修正方針自体はfable-solver-hard等、人",
           "failReason": "完了条件を満たす修正は .github/workflows/blog-auto-publish.yml の編集を要するが、これは backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ループが自分の権限を広げる口になるため恒久禁止)。前回の記録(class=impl-small/outcome=deferred)は誤分類だったため本エントリで上書き。ワークフロー変更は人間のPRで行うこと。",
           "followUps": []
+        },
+        {
+          "at": "2026-09-02T19:30:07.727Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "修正は .github/workflows/blog-auto-publish.yml の編集を要し、backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ワークフロー無人書き換え禁止) に該当する。前回 run で原因と修正案 (ci-factual-gate/quality-gate と同じ if!/continue パターンで per-slug skip) を特定済み。人間の PR で適用する必要がある。",
+          "failReason": "needs-owner",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -3586,6 +3599,19 @@
           "gate": null,
           "evidence": "誤って .github/workflows/generate-article-charts.yml を編集し(depth=1削除・awk $2→$3・quotepath=false追加)、field index誤りと quotepath既定挙動を実機コマンドで確認したが、backlog-loop.md の禁止パスに抵触すると気づき編集前の内容へ手動で復元した(git diff --stat で .github/ 配下の差分が0であることを確認済み)。3点の原因特定と修正内容は本記録に残すので、人間承認PRで適用する際の参考にすること。",
           "failReason": "完了条件を満たす修正は .github/workflows/generate-article-charts.yml の編集を要するが、これは backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ワークフローの無人書き換え禁止)。前回の記録(class=impl-small/outcome=deferred)は誤分類だったため本エントリで上書き。ワークフロー変更は人間のPRで行うこと。",
+          "followUps": []
+        },
+        {
+          "at": "2026-09-02T19:30:11.259Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "修正は .github/workflows/generate-article-charts.yml の編集を要し、backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ワークフロー無人書き換え禁止) に該当する。前回 run で3つの原因 (--depth=1 削除・awk $2→$3・quotepath=false 追加) を実機コマンドで特定済み。人間の PR で適用する必要がある。",
+          "failReason": "needs-owner",
           "followUps": []
         }
       ],

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T11:23:39.937Z",
+  "generatedAt": "2026-09-03T00:18:42.114Z",
   "gscSnapshot": "2026-W35",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
@@ -8268,7 +8268,7 @@
       "warns": [
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:18.135Z"
     },
     {
@@ -8284,7 +8284,7 @@
         "length-short",
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:19.248Z"
     },
     {
@@ -8310,7 +8310,7 @@
       "warns": [
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:48 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:57 GMT",
       "updatedAt": "2026-09-02T11:18:20.222Z"
     },
     {
@@ -8678,7 +8678,7 @@
       "warns": [
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:18.535Z"
     },
     {
@@ -8693,7 +8693,7 @@
         "causal-insights",
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:18.770Z"
     },
     {
@@ -8708,7 +8708,7 @@
         "length-short",
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:19.015Z"
     },
     {
@@ -8722,7 +8722,7 @@
       "warns": [
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:19.487Z"
     },
     {
@@ -8737,7 +8737,7 @@
         "length-short",
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:19.725Z"
     },
     {
@@ -8751,7 +8751,7 @@
       "warns": [
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:47 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:56 GMT",
       "updatedAt": "2026-09-02T11:18:19.962Z"
     },
     {
@@ -8765,7 +8765,7 @@
       "warns": [
         "pref-len"
       ],
-      "lastModified": "Wed, 02 Sep 2026 11:21:48 GMT",
+      "lastModified": "Wed, 02 Sep 2026 11:26:57 GMT",
       "updatedAt": "2026-09-02T11:18:20.469Z"
     },
     {
