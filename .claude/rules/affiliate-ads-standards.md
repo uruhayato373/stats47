@@ -496,11 +496,27 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | themes | native ≤4 / theme-end 300×250 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` (本文中央ハウス枠は 2026-08-06 撤去。bespoke の themes/local-finance は InContent×2 のみで native なし) |
 | areas 県 | ハウス枠 / `AreaBannerAd`。AdSense停止中は本文中段 banner 1 | `area-sidebar` / 本文は `furusato` vertical |
 | areas 市区町村 | `AreaBannerAd` / 楽天ふるさと納税 | `area-sidebar` / 親県コード |
+| areas 市区町村 カテゴリ (`/areas/*/cities/*/<categoryKey>`) | native ≤3 (`position=city-native`) | URL の categoryKey → vertical (2026-09-02) |
+| japan (`/japan/<themeSlug>`) | native ≤3 (`position=japan-native`) | 都道府県テーマと同じ slug → `THEME_AFFILIATE_MAP` (2026-09-02) |
+| municipalities テーマ (`/municipalities/themes/<slug>`) | native ≤3 (`position=municipality-theme-native`) | `MUNICIPALITY_THEME_AFFILIATE_MAP` (2026-09-02。slug を足したら写像も足す — 契約テストが全件を要求) |
+| municipalities ランキング (`/municipalities/ranking/<key>`) | native ≤3 (`position=municipality-native`) | metric config の `category` → vertical (2026-09-02) |
 | home | ハウス枠 / native ≤4 (economy 固定) / **sidebar-sticky (縦長の受け皿・左レール lg+)** | 無し (vertical 解決の手掛かりが無いページ)・`sidebar-sticky` |
 | compare | native ≤4 | categoryKey → vertical |
 
 > 上表は 2026-08-06 にコード実態と突合して是正した (旧版は blog/ranking/areas 県に
 > ふるさと納税を過剰記載。`FurusatoNozeiCard` の実使用は市区町村ページのみ)。
+>
+> **2026-09-02 の全ページ棚卸し**: GSC 2026-W35 の imp を route 別に集計し、枠の無い route が
+> `/japan` (54 imp/週)・`/municipalities` (0)・`/geo` (0)・法務ページだけであることを確認した。
+> japan / municipalities / 市区町村カテゴリは上表のとおり既存の写像で native 枠を足した
+> (vertical を推測しない = 写像が無ければ描画しない)。`/geo` は
+> `geo-analysis-standards.md` が canonical ページの構成を規定しているため触っていない。
+> **最大の穴は blog だった**: 公開 523 記事のうち 212 記事 (ブログ imp の 56%) でタグが
+> vertical に解決されず、本文 3・末尾 1・右レール 2・テキスト 4 の枠がすべて空 (ハウス枠と
+> 楽天カードだけが出る)。`TAG_AFFILIATE_MAP` に 75 タグを足し、記事数 311→363 /
+> imp 44%→89% に上げた。寄せ先は同じ主題の CATEGORY / THEME 写像に揃えている
+> (`affiliate-category-map-contract.test.ts`)。残る 160 記事 (imp 11%) は地名・公務員向け
+> how-to 等の**意図の無い記事**で、rules §4 のとおり推測で埋めない。
 
 > **★`RankingItem.tags` は空である前提で設計する (2026-08-06 実測)**: tags の SSOT である
 > `MetricConfig.tags` は 2026-06-03 に型へ追加されて以来 **2,295 config すべてで未記入**で、

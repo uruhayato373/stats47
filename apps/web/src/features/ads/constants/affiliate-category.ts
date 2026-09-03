@@ -157,6 +157,76 @@ export const TAG_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
   "学校": "education", "進学": "education",
   "エネルギー": "energy", "電力": "energy", "通信": "energy",
   "交通事故": "mobility", "道路": "mobility", "鉄道": "mobility",
+  // ★ 2026-09-02 追加: 公開 523 記事の実タグ × GSC 2026-W35 imp で棚卸しした。
+  //   写像なしの 212 記事 (ブログ imp の 56%) のうち意図が明確なものを足し、解決率を
+  //   記事数 311→363 / imp 44%→89% に上げる。寄せ先は CATEGORY_AFFILIATE_MAP と
+  //   THEME_AFFILIATE_MAP の既存判断に揃える (同じ主題の ranking / theme ページと同じ広告が出る)。
+  //   「都道府県格差」「地域差」「地名」「公務員」等の汎用・無意図タグは引き続き入れない。
+  // 教育スポーツ (educationsports → education)。学校保健統計の体位も同カテゴリ
+  "身長": "education", "体重": "education", "体格": "education", "体位": "education",
+  "学校保健統計": "education", "高校生": "education", "中学生": "education",
+  "教育スポーツ": "education", "大学": "education", "進学率": "education",
+  "教育格差": "education", "収容力指数": "education", "図書館": "education",
+  "博物館": "education", "文化施設": "education", "社会教育": "education",
+  "文化資本": "education",
+  // 社会保障 (socialsecurity → health)
+  "熱中症": "health", "平均寿命": "health", "健康寿命": "health",
+  // 鉱工業・商業 (miningindustry / commercial → economy)。manufacturing テーマも economy
+  "製造業": "economy", "工業統計": "economy", "ものづくり": "economy",
+  "製造品出荷額": "economy", "付加価値": "economy", "自動化": "economy",
+  "半導体": "economy", "電子部品": "economy", "商業": "economy", "小売": "economy",
+  "コンビニ": "economy", "酒類消費": "economy", "アルコール": "economy",
+  "酒税改正": "economy", "消費": "economy",
+  // 労働
+  "労働生産性": "labor",
+  // 農林水産 (agriculture → furusato: 産品は返礼品と直結) / 地方財政 (administrativefinancial → furusato)
+  "農業": "furusato", "米": "furusato", "水稲収穫量": "furusato", "作物統計": "furusato",
+  "漁獲量": "furusato", "水産": "furusato", "カツオ": "furusato", "特産品": "furusato",
+  "地方債": "furusato", "借金": "furusato", "財政健全性": "furusato",
+  "将来負担比率": "furusato", "財政力指数": "furusato",
+  // 人口 (外国人住民は foreign-residents テーマと同じ population)
+  "人口密度": "population", "都市化": "population", "人口集中地区": "population",
+  "昼夜間人口": "population", "ベッドタウン": "population", "人口構成": "population",
+  "人口流出": "population", "在留外国人": "population", "外国人": "population",
+  "多文化共生": "population", "国際化": "population", "世帯構造": "population",
+  "単独世帯": "population", "核家族": "population", "ひとり親世帯": "population",
+  "共働き": "population",
+  // 国土・気候 (landweather / construction → housing)
+  "可住地面積": "housing", "土地利用": "housing", "国土": "housing", "林野面積": "housing",
+  "地価": "housing", "移住": "housing", "気候": "housing", "気温": "housing",
+  "猛暑日": "housing", "真冬日": "housing", "降水量": "housing", "降雪量": "housing",
+  "積雪": "housing", "雪国": "housing",
+  // エネルギー (太陽光・再エネは電力・蓄電池の案件と直結)
+  "再生可能エネルギー": "energy", "太陽光発電": "energy", "風力発電": "energy",
+  "カーボンニュートラル": "energy", "GX": "energy", "太陽光": "energy",
+  "日照時間": "energy", "快晴日数": "energy", "電気代": "energy",
+};
+
+/**
+ * 市区町村テーマ (`/municipalities/themes/<slug>`) → vertical。
+ * slug の SSOT は `packages/data-configs/src/geo-scope/` の MUNICIPALITY_THEME_CATALOGS。
+ * 寄せ先は同じ主題の CATEGORY_AFFILIATE_MAP / THEME_AFFILIATE_MAP と揃える (2026-09-02)。
+ */
+export const MUNICIPALITY_THEME_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
+  "aging-society":        "health",
+  "population":           "population",
+  "households":           "population",
+  "migration":            "population",
+  "vital-statistics":     "population",
+  "foreign-residents":    "population",
+  "urban-structure":      "housing",
+  "local-finance":        "furusato",
+  "commerce":             "economy",
+  "establishments":       "economy",
+  "manufacturing":        "economy",
+  "medical-welfare":      "health",
+  "education":            "education",
+  "housing":              "housing",
+  "commuting":            "mobility",
+  "labor":                "labor",
+  "safety-environment":   "mobility",
+  "agriculture-forestry": "furusato",
+  "land-area":            "housing",
 };
 
 /**
