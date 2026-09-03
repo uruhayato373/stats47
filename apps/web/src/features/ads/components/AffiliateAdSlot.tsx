@@ -124,13 +124,17 @@ export async function AffiliateAdSlot({
   }
 
   // 2. テキスト広告
-  if (!bannerOnly && affiliateCategory) {
-    const ads = await resolveAffiliateTextAdsByVertical(
-      affiliateCategory,
-      locationCode,
-      textLimit,
-      rankingKey,
-    );
+  //    ★ 条件を `!bannerOnly` 単独に保つ (check-ad-placement.cjs がこのリテラルで
+  //      「テキストへ戻さない」ゲートの存在を検査する)。意図軸の有無は内側で分岐する。
+  if (!bannerOnly) {
+    const ads = affiliateCategory
+      ? await resolveAffiliateTextAdsByVertical(
+          affiliateCategory,
+          locationCode,
+          textLimit,
+          rankingKey,
+        )
+      : [];
     if (ads.length > 0) {
       return (
         <AffiliateTextAdList
