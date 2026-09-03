@@ -6,10 +6,10 @@ import {
   RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
 
-import { CATEGORY_AFFILIATE_MAP } from "../constants/affiliate-category";
+import { CATEGORY_AFFILIATE_MAP, type AffiliateVertical } from "../constants/affiliate-category";
 import {
-  resolveAffiliateBannersByCategoryKey,
-  resolveAffiliateTextAds,
+  resolveAffiliateBannersByVertical,
+  resolveAffiliateTextAdsByVertical,
   resolveExperimentVariantsByCategoryKey,
 } from "../services";
 
@@ -22,6 +22,12 @@ import type { AffiliateLocationCode } from "../types";
 
 interface AffiliateAdSlotProps {
   categoryKey: string;
+  /**
+   * ページ内容から解決済みの意図軸 (`resolveContentVertical`)。渡されたときは categoryKey 由来の
+   * 写像より優先する。**null は「意図軸の広告を出さない」**(出典調査が null の指標) で、
+   * その場合は AdSense フォールバックへ直行する。undefined は従来どおり categoryKey で解決。
+   */
+  vertical?: AffiliateVertical | null;
   position?: "sidebar" | "footer";
   /** ranking ページで指定。targetRankingKeys を持つ広告の文脈一致フィルタに使う (任意) */
   rankingKey?: string;
@@ -55,6 +61,7 @@ function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocatio
  */
 export async function AffiliateAdSlot({
   categoryKey,
+  vertical,
   position = "sidebar",
   rankingKey,
   bannerOnly = false,
@@ -62,7 +69,8 @@ export async function AffiliateAdSlot({
   textLimit = 2,
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
-  const affiliateCategory = CATEGORY_AFFILIATE_MAP[categoryKey] ?? null;
+  const affiliateCategory =
+    vertical !== undefined ? vertical : (CATEGORY_AFFILIATE_MAP[categoryKey] ?? null);
 
   // 0. A/B 実験 (sidebar のみ)。experimentId 付き variant が 2 件以上あればクライアント加重ランダム出し分け。
   if (position === "sidebar") {
@@ -85,9 +93,9 @@ export async function AffiliateAdSlot({
 
   // 1. バナー優先 (sidebar のみ)。ranking の主要トラフィックに視認性の高い枠を出す。
   //    ★ 2026-08-04: 上位 1 件の早期 return をやめ bannerLimit 件まで積む。
-  if (position === "sidebar") {
-    const banners = await resolveAffiliateBannersByCategoryKey(
-      categoryKey,
+  if (position === "sidebar" && affiliateCategory) {
+    const banners = await resolveAffiliateBannersByVertical(
+      affiliateCategory,
       Math.max(1, bannerLimit),
       rankingKey,
     );
@@ -116,9 +124,9 @@ export async function AffiliateAdSlot({
   }
 
   // 2. テキスト広告
-  if (!bannerOnly) {
-    const ads = await resolveAffiliateTextAds(
-      categoryKey,
+  if (!bannerOnly && affiliateCategory) {
+    const ads = await resolveAffiliateTextAdsByVertical(
+      affiliateCategory,
       locationCode,
       textLimit,
       rankingKey,

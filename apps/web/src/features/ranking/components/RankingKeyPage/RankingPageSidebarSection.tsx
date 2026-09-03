@@ -6,6 +6,7 @@ import {
   SidebarPromoBanner,
   selectPromoBannerIndexForRanking,
 } from "@/features/ads";
+import type { AffiliateVertical } from "@/features/ads/constants/affiliate-category";
 import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
 
@@ -22,10 +23,13 @@ import { SurveyCard } from "../RankingSidebar/SurveyCard";
 
 import type { RankingItem } from "@stats47/ranking";
 
+
 interface RankingPageSidebarSectionProps {
   rankingKey: string;
   areaType: AreaType;
   rankingItem: Pick<RankingItem, "categoryKey" | "groupKey">;
+  /** ページ内容 (出典調査 → タグ → カテゴリ) から解決した意図軸。null = 意図軸の広告を出さない */
+  affiliateVertical?: AffiliateVertical | null;
   /** この統計の出典調査 (originalSurveys 焼き込み、1-2 件) */
   surveys: { id: string; name: string }[];
   /** 同じ調査の関連ランキング (上位 5 件) */
@@ -47,6 +51,7 @@ export function RankingPageSidebarSection({
   rankingKey,
   areaType,
   rankingItem,
+  affiliateVertical,
   surveys,
   surveyRelatedItems,
   rankingName,
@@ -54,6 +59,7 @@ export function RankingPageSidebarSection({
   const contextualAffiliateBanners = (
     <AffiliateAdSlot
       categoryKey={rankingItem.categoryKey ?? ""}
+      vertical={affiliateVertical}
       position="sidebar"
       rankingKey={rankingKey}
       bannerOnly

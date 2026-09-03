@@ -28,6 +28,7 @@ import {
 } from '@/features/ads';
 import {
   CATEGORY_AFFILIATE_MAP,
+  SURVEY_AFFILIATE_MAP,
   type AffiliateVertical,
 } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
@@ -180,10 +181,16 @@ export default async function SurveyPage({ params }: PageProps) {
   //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
   //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
   // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
-  const nativeBanners = await resolveAffiliateBannersByVertical(
-    dominantVertical(rankingItems),
-    8
-  ).catch(() => []);
+  // ★ 2026-09-03: 調査ハブは調査そのものが主題なので SURVEY_AFFILIATE_MAP を最優先する
+  //   (家計調査 → furusato、学校保健統計 → 広告なし)。載っていない調査は従来の最頻カテゴリ。
+  const surveyVertical = SURVEY_AFFILIATE_MAP[surveyKey];
+  const nativeBanners =
+    surveyVertical === null
+      ? []
+      : await resolveAffiliateBannersByVertical(
+          surveyVertical ?? dominantVertical(rankingItems),
+          8
+        ).catch(() => []);
   const editorial = getSurveyEditorialContent(surveyKey);
 
   // Hero KPI: 最新年, 代表件数, etc.

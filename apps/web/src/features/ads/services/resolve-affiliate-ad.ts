@@ -1,7 +1,9 @@
 import {
   CATEGORY_AFFILIATE_MAP,
-  TAG_AFFILIATE_MAP,
+  resolveContentVertical,
+  verticalsFromTagKeys,
   type AffiliateVertical,
+  type ContentVerticalInput,
 } from "../constants/affiliate-category";
 import {
   readActiveBannersByVerticalsFromR2 as findActiveBannersByVerticals,
@@ -40,16 +42,6 @@ interface ResolvedAffiliateVariant {
 /** categoryKey (e-Stat 17 軸) → vertical。写像外は undefined。 */
 function verticalFromCategoryKey(categoryKey: string): AffiliateVertical | undefined {
   return CATEGORY_AFFILIATE_MAP[categoryKey];
-}
-
-/** tagKey 群 → 重複なし vertical 群 (出現順)。 */
-function verticalsFromTagKeys(tagKeys: string[]): AffiliateVertical[] {
-  const seen = new Set<AffiliateVertical>();
-  for (const tagKey of tagKeys) {
-    const v = TAG_AFFILIATE_MAP[tagKey];
-    if (v) seen.add(v);
-  }
-  return [...seen];
 }
 
 function toBanner(b: {
@@ -176,6 +168,64 @@ export async function resolveAffiliateBannersByCategoryKey(
   if (!vertical) return [];
   const banners = await findActiveBannersByVerticals([vertical], limit, rankingKey);
   return banners.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+}
+
+/**
+ * vertical 直指定でテキスト広告を複数解決する (priority 降順、最大 limit 件)。
+ */
+export async function resolveAffiliateTextAdsByVertical(
+  vertical: AffiliateVertical,
+  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  limit = 2,
+  rankingKey?: string,
+): Promise<ResolvedAffiliateAd[]> {
+  const ads = await findActiveTextAdsByVerticals([vertical], locationCode, limit, rankingKey);
+  return ads.map((ad) => ({
+    id: ad.id,
+    title: ad.title,
+    href: ad.htmlContent,
+    trackingPixelUrl: ad.trackingPixelUrl,
+  }));
+}
+
+/**
+ * ページ内容 (出典調査 → タグ → カテゴリ) から意図軸を決めてバナーを解決する。
+ * ranking / blog / 市区町村 など「内容を持つページ」の共通入口 (2026-09-03)。
+ * 解決順の正典は `resolveContentVertical`。調査が null を返した場合は空 (広告を出さない)。
+ */
+export async function resolveAffiliateBannersForContent(
+  input: ContentVerticalInput,
+  limit = 8,
+  rankingKey?: string,
+): Promise<ResolvedAffiliateBanner[]> {
+  const resolution = resolveContentVertical(input);
+  if (resolution.verticals.length === 0) return [];
+  const banners = await findActiveBannersByVerticals(resolution.verticals, limit, rankingKey);
+  return banners.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+}
+
+/**
+ * ページ内容から意図軸を決めてテキスト広告を解決する (`resolveAffiliateBannersForContent` の text 版)。
+ * 同一広告が複数 vertical に重複しうるため title で dedupe する。
+ */
+export async function resolveAffiliateTextAdsForContent(
+  input: ContentVerticalInput,
+  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  limit = 2,
+  rankingKey?: string,
+): Promise<ResolvedAffiliateAd[]> {
+  const resolution = resolveContentVertical(input);
+  if (resolution.verticals.length === 0) return [];
+  const ads = await findActiveTextAdsByVerticals(resolution.verticals, locationCode, 20, rankingKey);
+  const seen = new Set<string>();
+  const unique: ResolvedAffiliateAd[] = [];
+  for (const ad of ads) {
+    if (seen.has(ad.title)) continue;
+    seen.add(ad.title);
+    unique.push({ id: ad.id, title: ad.title, href: ad.htmlContent, trackingPixelUrl: ad.trackingPixelUrl });
+    if (unique.length >= limit) break;
+  }
+  return unique;
 }
 
 /**
