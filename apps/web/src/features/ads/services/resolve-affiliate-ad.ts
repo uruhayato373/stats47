@@ -1,6 +1,6 @@
 import {
   CATEGORY_AFFILIATE_MAP,
-  resolveContentVertical,
+  resolveContentVerticalChain,
   verticalsFromTagKeys,
   type AffiliateVertical,
   type ContentVerticalInput,
@@ -198,10 +198,15 @@ export async function resolveAffiliateBannersForContent(
   limit = 8,
   rankingKey?: string,
 ): Promise<ResolvedAffiliateBanner[]> {
-  const resolution = resolveContentVertical(input);
-  if (resolution.verticals.length === 0) return [];
-  const banners = await findActiveBannersByVerticals(resolution.verticals, limit, rankingKey);
-  return banners.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+  const chain = resolveContentVerticalChain(input);
+  if (chain.blocked) return [];
+  // 上位段の在庫がゼロのときだけ次段へ落とす (旧 ranking の tags → categoryKey と同じ)。
+  for (const step of chain.steps) {
+    const rows = await findActiveBannersByVerticals(step.verticals, limit, rankingKey);
+    const banners = rows.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+    if (banners.length > 0) return banners;
+  }
+  return [];
 }
 
 /**
@@ -214,18 +219,21 @@ export async function resolveAffiliateTextAdsForContent(
   limit = 2,
   rankingKey?: string,
 ): Promise<ResolvedAffiliateAd[]> {
-  const resolution = resolveContentVertical(input);
-  if (resolution.verticals.length === 0) return [];
-  const ads = await findActiveTextAdsByVerticals(resolution.verticals, locationCode, 20, rankingKey);
-  const seen = new Set<string>();
-  const unique: ResolvedAffiliateAd[] = [];
-  for (const ad of ads) {
-    if (seen.has(ad.title)) continue;
-    seen.add(ad.title);
-    unique.push({ id: ad.id, title: ad.title, href: ad.htmlContent, trackingPixelUrl: ad.trackingPixelUrl });
-    if (unique.length >= limit) break;
+  const chain = resolveContentVerticalChain(input);
+  if (chain.blocked) return [];
+  for (const step of chain.steps) {
+    const ads = await findActiveTextAdsByVerticals(step.verticals, locationCode, 20, rankingKey);
+    const seen = new Set<string>();
+    const unique: ResolvedAffiliateAd[] = [];
+    for (const ad of ads) {
+      if (seen.has(ad.title)) continue;
+      seen.add(ad.title);
+      unique.push({ id: ad.id, title: ad.title, href: ad.htmlContent, trackingPixelUrl: ad.trackingPixelUrl });
+      if (unique.length >= limit) break;
+    }
+    if (unique.length > 0) return unique;
   }
-  return unique;
+  return [];
 }
 
 /**
