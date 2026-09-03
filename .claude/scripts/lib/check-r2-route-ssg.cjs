@@ -60,6 +60,43 @@ for (const rel of R2_DEPENDENT_ROUTES) {
   }
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// 2026-09-03: params を持たない **静的 route** の同型事故。
+//
+// /geo/2050-population は loadRankingPageModel() で R2 を読むのに、動的セグメントが無く
+// `revalidate` しか持たなかったため build 時に `○` (静的) として prerender され、
+// 「分析データを準備しています」のプレースホルダが焼き込まれていた。build 環境から R2 は
+// 読めない (同日のビルドログでも blog / categories snapshot が「存在しません」と出ている)。
+// revalidate 24h はデプロイのたびに焼き直されるので自然回復しない。
+//
+// generateStaticParams を持てない route なので上のガードでは捕まらない。static route は
+// `dynamic = "force-dynamic"` を宣言してランタイム描画にする (home `/` と同じ)。
+// ──────────────────────────────────────────────────────────────────────────
+const R2_DEPENDENT_STATIC_ROUTES = [
+  "apps/web/src/app/page.tsx",
+  "apps/web/src/app/geo/2050-population/page.tsx",
+];
+
+for (const rel of R2_DEPENDENT_STATIC_ROUTES) {
+  const abs = path.join(PROJECT_ROOT, rel);
+  if (!fs.existsSync(abs)) continue;
+  const src = fs.readFileSync(abs, "utf8");
+  const codeLines = src
+    .split("\n")
+    .filter((l) => !l.trim().startsWith("*") && !l.trim().startsWith("//"));
+  const joined = codeLines.join("\n");
+  if (!/export\s+const\s+dynamic\s*=\s*['"]force-dynamic['"]/.test(joined)) {
+    violations++;
+    console.error(`❌ ${rel}`);
+    console.error(
+      "   R2 を読む静的 route に force-dynamic が無い。build 時 prerender で空/準備中の",
+    );
+    console.error(
+      "   HTML が焼き込まれ、デプロイのたびに焼き直されるため自然回復しない。",
+    );
+  }
+}
+
 if (violations > 0) {
   console.error("");
   console.error(
