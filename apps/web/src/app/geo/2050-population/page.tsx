@@ -28,7 +28,13 @@ const path = `/geo/${spec.slug}`;
 const description =
   '2020年から2050年の将来人口増減率を47都道府県で比較。地図、上位・下位、最大3県比較と出典・注意点を確認できます。';
 
-export const revalidate = 86400;
+// ★ R2 を読むページは build 時に prerender させない (`ƒ`)。
+//   build 環境から R2 は読めず (2026-09-03 のビルドログでも blog / categories snapshot が
+//   「存在しません」と出ていた)、静的生成すると `!model` の「準備しています」プレースホルダが
+//   焼き込まれる。revalidate 24h は次のデプロイで焼き直されるため自然回復しない。
+//   home `/` と同じ force-dynamic でランタイム描画にする。
+//   正典: .claude/rules/nextjs-ssg-preservation.md
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: `${spec.title} | stats47地域分析`,
