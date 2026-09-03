@@ -26,6 +26,8 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import { resolveContentVerticalChain } from "@/features/ads/constants/affiliate-category";
+
 const MODEL_SRC = readFileSync(
   resolve(import.meta.dirname, "../services/load-ranking-page-model.ts"),
   "utf8",
@@ -47,8 +49,11 @@ const AFFILIATE_SECTION_SRC = readFileSync(
 );
 
 describe("ranking native アフィリエイトの解決契約", () => {
-  it("categoryKey フォールバックを持つ (tags は全 config 未記入のため必須)", () => {
-    expect(MODEL_SRC).toContain("resolveAffiliateBannersByCategoryKey");
+  it("categoryKey を解決入力に必ず渡す (tags は全 config 未記入のため必須)", () => {
+    // 2026-09-03: 解決は resolveContentVertical(Chain) に一本化された。model 側の契約は
+    // 「categoryKey を入力に含めること」で、鎖の順序と在庫フォールバックは下の純関数テストが持つ。
+    expect(MODEL_SRC).toContain("resolveAffiliateBannersForContent");
+    expect(MODEL_SRC).toMatch(/categoryKey:\s*rankingItem\.categoryKey/);
   });
 
   it("tagKeys が空でも解決を打ち切らない", () => {
@@ -58,9 +63,24 @@ describe("ranking native アフィリエイトの解決契約", () => {
   });
 
   it("tagKeys 解決が 0 件だったときも categoryKey を試す", () => {
-    // 「tags があるが在庫が無い」ケースでも枠を落とさない。length チェックだけでなく
-    // 解決結果の空判定でフォールバックすることを要求する。
-    expect(MODEL_SRC).toMatch(/byTags\.length\s*>\s*0/);
+    // 「tags があるが在庫が無い」ケースでも枠を落とさない。鎖に category 段が残ることを要求する。
+    const chain = resolveContentVerticalChain({
+      tagKeys: ["移住"],
+      categoryKey: "economy",
+    });
+    expect(chain.blocked).toBe(false);
+    expect(chain.steps.map((s) => s.source)).toEqual(["tags", "category"]);
+  });
+
+  it("出典調査が null の指標は下位段へフォールバックしない", () => {
+    // 身長・気候など商材の無い調査。tags / categoryKey があっても意図軸の広告を出さない。
+    const chain = resolveContentVerticalChain({
+      surveyIds: ["school-health-survey"],
+      tagKeys: ["移住"],
+      categoryKey: "economy",
+    });
+    expect(chain.blocked).toBe(true);
+    expect(chain.steps).toEqual([]);
   });
 
   it("AdSense停止中は先頭の横長バナー1件を本文中段へ配線し、末尾で重複させない", () => {

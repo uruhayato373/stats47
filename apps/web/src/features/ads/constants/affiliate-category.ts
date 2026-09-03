@@ -335,6 +335,52 @@ export type ContentVerticalResolution =
  *   4. 無し (推測で別の軸へ流さない)
  * 純関数。R2 を読まない。
  */
+/** 在庫フォールバック鎖の 1 段。上から順に試し、在庫が出た段で止める。 */
+export interface ContentVerticalStep {
+  source: "survey" | "tags" | "category";
+  verticals: AffiliateVertical[];
+}
+
+/**
+ * 意図軸の候補を specific → general の順に並べた在庫フォールバック鎖。
+ *
+ * `resolveContentVertical` は「この面の意図軸は何か」を 1 つ返すが、その軸に在庫が無いと
+ * 枠が空になる。2026-09-03 以前の ranking は「tags で 0 件なら categoryKey で再試行」する
+ * 在庫フォールバックを持っており、意図軸の統一 (PR #913) でこれが落ちていた。鎖を返して
+ * 呼び出し側が上から順に在庫を引く。
+ *
+ * `blocked: true` は出典調査が `null` を指す指標 (身長・気候など商材が無いもの)。
+ * **下位段へフォールバックしない** — 「意図軸の広告を出さない」判断を打ち消さないため。
+ * 純関数。R2 を読まない。
+ */
+export interface ContentVerticalChain {
+  blocked: boolean;
+  steps: ContentVerticalStep[];
+}
+
+export function resolveContentVerticalChain(input: ContentVerticalInput): ContentVerticalChain {
+  const tagVerticals = verticalsFromTagKeys(input.tagKeys ?? []);
+  const categoryVertical = input.categoryKey
+    ? CATEGORY_AFFILIATE_MAP[input.categoryKey]
+    : undefined;
+
+  const steps: ContentVerticalStep[] = [];
+  const push = (source: ContentVerticalStep["source"], verticals: AffiliateVertical[]) => {
+    if (verticals.length > 0) steps.push({ source, verticals });
+  };
+
+  for (const surveyId of input.surveyIds ?? []) {
+    if (!(surveyId in SURVEY_AFFILIATE_MAP)) continue;
+    const v = SURVEY_AFFILIATE_MAP[surveyId];
+    if (!v) return { blocked: true, steps: [] };
+    push("survey", [v]);
+    break;
+  }
+  push("tags", tagVerticals);
+  push("category", categoryVertical ? [categoryVertical] : []);
+  return { blocked: false, steps };
+}
+
 export function resolveContentVertical(input: ContentVerticalInput): ContentVerticalResolution {
   for (const surveyId of input.surveyIds ?? []) {
     if (!(surveyId in SURVEY_AFFILIATE_MAP)) continue;
