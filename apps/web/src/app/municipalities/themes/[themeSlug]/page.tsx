@@ -11,6 +11,9 @@ import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 
+import { NativeAffiliateRow } from '@/features/ads';
+import { MUNICIPALITY_THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
+import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { TrackedMunicipalityThemeLink } from '@/features/municipalities';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -51,11 +54,14 @@ export default async function MunicipalityThemePage({
   const theme = MUNICIPALITY_THEME_CATALOGS[themeSlug];
   if (!theme || theme.status !== 'active') notFound();
 
-  const items = (
-    await Promise.all(
-      theme.metricKeys.map((key) => readMunicipalityRankingItem(key))
-    )
-  ).filter((item) => item !== null);
+  const themeVertical = MUNICIPALITY_THEME_AFFILIATE_MAP[theme.slug];
+  const [itemsOrNull, nativeBanners] = await Promise.all([
+    Promise.all(theme.metricKeys.map((key) => readMunicipalityRankingItem(key))),
+    themeVertical
+      ? resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => [])
+      : Promise.resolve([]),
+  ]);
+  const items = itemsOrNull.filter((item) => item !== null);
 
   return (
     <PageShell>
@@ -113,6 +119,18 @@ export default async function MunicipalityThemePage({
               </p>
             </TrackedMunicipalityThemeLink>
           ))}
+        </div>
+      )}
+
+      {/* ネイティブアフィリエイト枠 (テーマ slug → vertical。写像が無ければ描画しない) */}
+      {nativeBanners.length > 0 && (
+        <div className="mt-8">
+          <NativeAffiliateRow
+            banners={nativeBanners}
+            position="municipality-theme-native"
+            trackingCategory={`municipality-theme-${theme.slug}`}
+            variant="three-up"
+          />
         </div>
       )}
 

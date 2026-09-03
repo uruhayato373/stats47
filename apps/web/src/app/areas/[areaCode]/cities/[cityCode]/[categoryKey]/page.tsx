@@ -4,6 +4,9 @@ import { isOk } from "@stats47/types";
 
 import { PageHeader, PageShell } from "@/components/layout";
 
+import { NativeAffiliateRow } from "@/features/ads";
+import { CATEGORY_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
+import { resolveAffiliateBannersByVertical } from "@/features/ads/server";
 import {
   CityBreadcrumbs,
   CityPageFooter,
@@ -82,6 +85,12 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
     parentAreaCode: areaCode,
   };
 
+  // URL の categoryKey (17 軸) → vertical。ranking / category ページと同じ写像
+  const affiliateVertical = CATEGORY_AFFILIATE_MAP[categoryKey];
+  const nativeBanners = affiliateVertical
+    ? await resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => [])
+    : [];
+
   return (
     <PageShell>
       <CityBreadcrumbs
@@ -104,6 +113,16 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
           basePath={context.cityBasePath}
           selectedRankingKey={ranking}
         />
+
+        {/* ネイティブアフィリエイト枠 (categoryKey → vertical。写像が無ければ描画しない) */}
+        {nativeBanners.length > 0 && (
+          <NativeAffiliateRow
+            banners={nativeBanners}
+            position="city-native"
+            trackingCategory={`city-${categoryKey}`}
+            variant="three-up"
+          />
+        )}
 
         <CityPageFooter
           areaCode={areaCode}

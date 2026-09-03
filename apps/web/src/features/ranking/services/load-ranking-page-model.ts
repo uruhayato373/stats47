@@ -11,10 +11,8 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
-import {
-  resolveAffiliateBanners,
-  resolveAffiliateBannersByCategoryKey,
-} from "@/features/ads/server";
+import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
+import { resolveAffiliateBannersForContent } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
   generateRankingBreadcrumbStructuredData,
@@ -120,18 +118,20 @@ export async function loadRankingPageModel(rankingKey: string) {
   //   常に空配列だったため。規約 §12 は ranking の解決キーを「categoryKey → vertical
   //   + tagKeys」と定めており、実装が tagKeys しか見ていないのがドリフトだった。
   //   themes が relatedArticleTagKeys → THEME_AFFILIATE_MAP でフォールバックするのと同型。
-  const affiliateTagKeys = (rankingItem.tags ?? []).map((tag) => tag.tagKey);
-  const categoryKeyForAds = rankingItem.categoryKey;
+  // ★ 2026-09-03: 解決順を **出典調査 → タグ → カテゴリ** に統一 (`resolveContentVertical`)。
+  //   カテゴリ 17 軸では「納豆消費量」と「県民所得」が同じ economy に落ち、家計調査の
+  //   食品品目 (ランキング流入の 38%) に金融広告が出ていた。出典調査 (item.json の surveyIds
+  //   焼き込み) で家計調査 → furusato、学校保健統計 → 広告なし、のように主題単位で決める。
+  //   サイドバー (AffiliateAdSlot) も同じ解決結果 `affiliateVertical` を使う。
+  const affiliateInput = {
+    surveyIds: rankingItem.surveyIds ?? (rankingItem.surveyId ? [rankingItem.surveyId] : []),
+    tagKeys: (rankingItem.tags ?? []).map((tag) => tag.tagKey),
+    categoryKey: rankingItem.categoryKey,
+  };
+  const affiliateVertical = resolveContentVertical(affiliateInput).vertical;
   const nativeBannersPromise = (async () => {
     try {
-      if (affiliateTagKeys.length > 0) {
-        const byTags = await resolveAffiliateBanners(affiliateTagKeys, 8, rankingKey);
-        if (byTags.length > 0) return byTags;
-      }
-      if (categoryKeyForAds) {
-        return await resolveAffiliateBannersByCategoryKey(categoryKeyForAds, 8, rankingKey);
-      }
-      return [];
+      return await resolveAffiliateBannersForContent(affiliateInput, 8, rankingKey);
     } catch (error) {
       logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
       return [];
@@ -198,6 +198,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     groupMembers,
     category,
     nativeBanners,
+    affiliateVertical,
     breadcrumbCategory,
     structuredData,
     breadcrumbStructuredData,

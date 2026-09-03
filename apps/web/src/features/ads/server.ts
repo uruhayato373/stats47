@@ -5,7 +5,10 @@ export {
   resolveAffiliateBannersByCategory,
   resolveAffiliateBannersByCategoryKey,
   resolveAffiliateBannersByVertical,
+  resolveAffiliateBannersForContent,
   resolveAffiliateTextAdsByTagKeys,
+  resolveAffiliateTextAdsByVertical,
+  resolveAffiliateTextAdsForContent,
 } from "./services/resolve-affiliate-ad";
 export { AffiliateAdSlot } from "./components/AffiliateAdSlot";
 export { AreaBannerAd } from "./components/AreaBannerAd";

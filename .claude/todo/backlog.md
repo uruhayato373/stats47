@@ -21,6 +21,45 @@ updated: 2026-08-30
 
 ## 🔴 高 — 今月中に着手したい
 
+### [AFF-DEPLOY-RESOLUTION-01] 広告解決順の変更 (#912/#913) を本番反映し、代表ページで実測する
+
+タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:curl -sA Googlebot https://stats47.jp/ranking/natto-consumption-expenditure | grep -c ふるさと] [起票:2026-09-03] [期日:2026-09-10]
+
+- **owner**: uruhayato373 (デプロイ承認) / Claude Code (実測)
+- **何を**: PR #912 (タグ写像 75 件 + japan/municipalities/市区町村カテゴリの native 枠) と PR #913
+  (解決順を出典調査 → タグ → カテゴリに統一、`SURVEY_AFFILIATE_MAP`) は develop にマージ済みだが
+  コード変更なので **develop → main のデプロイまで本番に出ない**。在庫 SSOT の priority 変更だけは
+  `publish-affiliate-ads.yml` で R2 反映済み (2026-09-03 実測 5/1/5)。
+- **なぜ**: ランキング流入の 38% (家計調査の食品品目 28,867 imp/週) に金融広告が出ている状態が
+  本番では続いている。試算では economy 35,613 → 6,746、furusato 2,904 → 31,465 imp/週。
+- **同時にデプロイされるもの**: improvements の `AFF-IMPRESSION-ROUTING-01` (AdSense 停止中の空き
+  位置へ文脈バナーを配線・コード実装済・未デプロイ) も同じデプロイに乗る。効果判定の窓が重なる
+  ので、判定は vertical 別 (furusato の増分) と position 別 (ranking-incontent) を分けて読む。
+- **次**: `/deploy` (develop → main PR → CI green → merge → CDN purge)。
+- **完了条件**:
+  - `/ranking/natto-consumption-expenditure` の native 枠にふるさと納税サイトが出る
+  - `/ranking/avg-height-high-school-2nd-male` に意図軸の広告が出ない (ハウス枠のみ)
+  - `/blog/local-government-debt-burden` の本文バナーが furusato
+  - 完了したら improvements の `AFF-RESOLUTION-EFFECT-01` へ引き渡す (baseline は起票済み)
+- **停止条件**: デプロイ後の smoke (`.github/scripts/smoke-test-routes.sh`) で ranking / blog が
+  200 以外、または `x-nextjs-prerender` の notFound 固着 → main を前 SHA へ戻す。
+
+### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 4 本 / 週 5.4 万 imp)
+
+タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node .claude/scripts/ads/audit-affiliate-inventory.ts の furusato 横長 banner ≥ 7] [起票:2026-09-03] [期日:2026-09-30]
+
+- **owner**: uruhayato373 (ASP 提携) / affiliate-manager (登録)
+- **なぜ**: #913 で家計調査 (ランキング 28,867 + ブログ 12,366 imp/週) と農業・地方財政が furusato に
+  集まる。一方 furusato の横長バナーは **4 本** (イオン九州 ×2・ふるさと本舗・au PAY) で、3 枠を
+  埋めると毎ページ同じ並びになる。需要と在庫が最も逆転している軸。
+- **候補**: さとふる / ふるなび / 楽天ふるさと納税 / ANA のふるさと納税 (A8・もしも・afb のどこで
+  提携できるかは `/affiliate-operate` の走査で確認。ブランド適合は人の判断)。
+- **手順**: ユーザーが ASP で提携申請 → 承認後 `/register-affiliate-banner register` で 300x250
+  を 1 案件 1 エントリ登録 (vertical=furusato、priority は確定 EPC バンド) → develop push で R2 反映。
+- **完了条件**: furusato の横長 300x250 が 7 本以上、かつ priority 上位 3 が全国対応ポータル
+  (地域限定のイオン九州が上位 3 に入らない)。
+- **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
+
 ### [BLOG-PUBLISH-THUMBNAIL-GUARD-01] 背景1件の欠落で公開run全体が止まるのを per-slug skip にする
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:背景の無い slug を1件混ぜても他 slug が公開されること] [起票:2026-08-31]
@@ -411,6 +450,65 @@ updated: 2026-08-30
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [AFF-PLACEMENT-MAP-CORE-01] placement-map-core を「出典調査 → タグ → カテゴリ」に追従させ、survey の stale 判定を直す
+
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/ads/__tests__/placement-map-core.test.mjs] [起票:2026-09-03] [期日:2026-09-30]
+
+- **owner**: affiliate-manager
+- **症状**: `.claude/scripts/ads/lib/placement-map-core.mjs` はブログを tags → vertical だけで判定し、
+  ranking を categoryKey だけで判定する。#913 以降の実装は出典調査を最上位に見るので、
+  `placement-map-latest.json` の `unmapped.byReason.tags-unmapped` と `demand.byVertical` が
+  実態と食い違う (家計調査ページが economy に計上され続ける)。`survey-hardcoded-tags` の理由コードも
+  2026-07-28 に survey ページが categoryKey 最頻値へ変わった時点で stale。
+- **次**: builder の入力に surveyIds (R2 `app/ranking/<key>/item.json` / `app/blog/all.json`) を足し、
+  `resolveContentVertical` と同じ順で判定する。判定は純関数のまま (`placement-map-core.test.mjs` に
+  「調査 null → 広告なし」「調査あり → カテゴリより優先」のケースを追加)。
+- **完了条件**: 週次 `affiliate-dashboard-refresh.yml` の出力で家計調査ページが furusato に、
+  学校保健統計ページが `no-intent` (新理由コード) に計上される。
+
+### [AFF-OFFER-LANE-01] offer profile の lane / friction 分類を進めて pilot readiness の blocked を解く
+
+タグ: [収益化] [種類:改善] [実行:対話] [検証:.claude/state/ads/affiliate-pilot-readiness-latest.json の readiness.status が blocked 以外] [起票:2026-09-03] [期日:2026-10-15]
+
+- **owner**: affiliate-manager (排他 writer)
+- **現状**: `affiliate-pilot-readiness-latest.json` は `eligible-lane-pair-missing` で blocked。
+  `affiliate-offer-profiles-data.ts` に discovery / decision の lane と F0〜F4 の行動負担が
+  付いた案件が pilot 可能な組になっていない。
+- **次**: furusato・economy・labor の上位案件から順に、ASP の成果条件 (確認元・確認日つき) を
+  読んで lane / friction を記録する。案件名や報酬額から推測しない (rules §2)。
+- **完了条件**: discovery と decision に 1 件ずつ以上 approved の案件があり、pilot plan を作れる。
+
+### [AFF-VERTICAL-FIT-02] population / health / education 軸の上位在庫を主題に合わせて入れ替える
+
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-03] [期日:2026-10-15]
+
+- **owner**: affiliate-manager / 判断は uruhayato373
+- **実測 (2026-09-03)**: priority 上位 3 が主題と合っていない軸が残る。
+  - population: マッチングアプリ ×2 が最上位。未婚率・婚姻には合うが、人口密度・在留外国人・
+    世帯構造 (週 8K imp) には合わない
+  - health: RIZAP / ClassPass が難病・精神病床・中絶率のページに出る。精力サプリは #913 で
+    priority 1 に下げたが停止はしていない (improvements `AFF-BRAND-FIT-01` の判断待ち)
+  - education: AI Agent Camp (Claude Code 研修) / LEC 資格講座が図書館・学校数のページに出る
+- **次**: (a) マッチングアプリ・結婚相談所は `targetRankingKeys` で未婚率・婚姻・初婚年齢の
+  ranking に限定する (b) 人口密度・世帯構造には子育て・保険系を上位にする (c) 図書館・学校数には
+  通信教育・塾探し (エデュスタ p20) を上位にする。priority 変更は週 1 vertical 1 変更まで (rules §10)。
+- **完了条件**: 3 軸とも GSC imp 上位 3 ページで priority 上位 3 の広告が主題と合っている
+  (人が読んで判定。表を PR に残す)。
+
+### [AFF-RAKUTEN-FIRST-01] 家計調査ページで楽天商品カードを native 枠より上に出し、計測を分離する
+
+タグ: [UI・UX] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- src/features/ads] [起票:2026-09-03] [期日:2026-10-31]
+
+- **owner**: ranking-ui-manager / affiliate-manager
+- **なぜ**: 「納豆消費量ランキング」の読者に最も合うのは品目一致の楽天商品カードだが、現在は
+  右レールの末尾 (`RakutenItemsCard`) にあり、GA4 では `blog-sidebar` / `ranking-sidebar` に
+  混ざって計測されるため効果を分離できない。
+- **次**: (a) 出典調査が kakei-chousa のページでは楽天商品カードを右レール先頭 (関連ランキングの
+  直後) に置く (b) `position` を `rakuten-sidebar` に分けて `link_position` で読めるようにする
+  (dimension は登録済みなので値追加のみ、`analytics-event-standards.md` §2 に追記)。
+- **完了条件**: GA4 の `link_position=rakuten-sidebar` が家計調査ページで取れ、CTR が
+  native 枠と比較できる。
 
 ### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する
 
@@ -847,6 +945,32 @@ updated: 2026-08-30
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [AFF-NO-INTENT-FALLBACK-01] 「広告なし」にした主題 (身長・気候・犯罪など週 7,757+ imp) に何を出すか
+
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-03]
+
+- **owner**: uruhayato373
+- **背景**: #913 で `SURVEY_AFFILIATE_MAP` に null を置いた調査 (学校保健統計・気象統計・面積・
+  犯罪・火災・水害・廃棄物・上下水道) はランキングで週 7,757 imp、ブログで 20,501 imp (気候・地名・
+  公務員向け how-to 含む) が意図軸の広告なし (ハウス枠 + AdSense) になる。意図の合わない広告を
+  上位に置くより空の方が無害という判断だが、収益機会としては空いている。
+- **選択肢**: (a) 現状維持 (AdSense のみ) (b) 汎用ハウス枠 (転職 neo-recruit は 28 日で
+  5,093 imp / 5 click と全広告中最多) を 2 枚に増やす (c) 主題ごとに商材を開拓する
+  (身長 → 成長サプリ・子ども向け通信教育、気候 → 引越し・家電)。
+- **決めること**: (b) にするか、(c) をどの主題からやるか。決まったら 🟡 に実装カードを切る。
+
+### [AFF-GEO-SLOT-01] /geo に広告枠を置くか
+
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-03]
+
+- **owner**: uruhayato373
+- **背景**: 2026-09-02 の棚卸しで枠の無い route は `/japan` (54 imp/週)・`/municipalities` (0)・
+  `/geo` (0)・法務ページのみ。japan / municipalities は #912 で足した。`/geo` は
+  `geo-analysis-standards.md` が canonical ページの 7 構成 (問い → 途中地図 → 検算 → 集計 → 補助
+  レイヤー → 方法) を規定しており、広告の置き場を規定していない。流入 0 なので急がない。
+- **決めること**: 置くなら「方法・限界」の後 (読了位置) に native 1 段、vertical は分析の主題
+  (駅アクセス → mobility、2050 人口 → population)。置かないなら本カードを削除。
 
 ### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
 

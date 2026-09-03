@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/hamburger-consumption-expenditure/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug hamburger-consumption-expenditure-prefecture-gap --keys hamburger-consumption-expenditure --with-map",
-  "fetchedAt": "2026-08-30T06:14:19.817Z",
+  "fetchedAt": "2026-09-01T23:03:06.817Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

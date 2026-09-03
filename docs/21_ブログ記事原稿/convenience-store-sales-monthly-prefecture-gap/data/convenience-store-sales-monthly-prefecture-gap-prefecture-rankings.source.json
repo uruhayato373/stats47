@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/convenience-store-sales-monthly/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug convenience-store-sales-monthly-prefecture-gap --keys convenience-store-sales-monthly --data-name convenience-store-sales-monthly-prefecture-gap-prefecture-rankings",
-  "fetchedAt": "2026-08-30T06:14:34.743Z",
+  "fetchedAt": "2026-09-01T23:04:30.152Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/new-hire-count/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug new-hire-count-prefecture-gap --keys new-hire-count --data-name new-hire-count-prefecture-gap-prefecture-rankings",
-  "fetchedAt": "2026-08-30T06:14:27.622Z",
+  "fetchedAt": "2026-09-01T23:04:20.535Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

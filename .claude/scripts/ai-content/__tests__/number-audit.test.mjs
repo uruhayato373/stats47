@@ -75,6 +75,18 @@ test("★回帰: 分母表現 (人口10万対 / 10万人あたり) は数値主�
   assert.deepEqual(extractNumericClaims("1万人当たりでみると"), []);
 });
 
+test("★回帰: 助数詞が人以外の分母表現も数値主張として扱わない", () => {
+  // 実測 2026-09-02: maternal-mortality-rate の「出産10万件あたり」と
+  // food-business-facility-penalties の「施設1000件当たり」を捏造と誤検知した。
+  // 「人」だけを助数詞として許していたのが原因。
+  assert.deepEqual(extractNumericClaims("出産10万件あたりで算出されます"), []);
+  assert.deepEqual(extractNumericClaims("施設1000件当たりの件数です"), []);
+  assert.deepEqual(extractNumericClaims("1000世帯あたりでみると"), []);
+  // 陰性対照: 助数詞を広げても、分母でない数値は従来どおり主張として拾う
+  assert.ok(extractNumericClaims("東京都は86,800店です").length > 0);
+  assert.ok(extractNumericClaims("最も少ないのは4,688件です").length > 0);
+});
+
 // --- A. テキストの数値 (区間判定) ---
 
 test("実値をそのまま使った本文は 0 件", () => {

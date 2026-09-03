@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/coffee-shop-consumption-expenditure/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug coffee-shop-consumption-expenditure-prefecture-gap --keys coffee-shop-consumption-expenditure --data-name coffee-shop-consumption-expenditure-prefecture-gap-prefecture-rankings",
-  "fetchedAt": "2026-08-30T06:14:24.775Z",
+  "fetchedAt": "2026-09-01T23:03:01.909Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

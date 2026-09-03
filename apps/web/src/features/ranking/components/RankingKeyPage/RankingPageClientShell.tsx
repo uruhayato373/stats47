@@ -54,6 +54,7 @@ export function RankingPageClientShell({
       sections={{
         sidebar: (
           <RankingPageSidebarSection
+            affiliateVertical={model.affiliateVertical}
             key="sidebar"
             rankingKey={rankingKey}
             areaType={model.areaType}

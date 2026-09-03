@@ -184,6 +184,21 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
 `data/ai-content-staging/*.json` なので `app/ranking/<key>/` 配下に置くと拾われない)。
 `--out data/ai-content-staging` では階層が付くため公開されない → **`--outbox` を使う**。
 
+### ★1 回の push で公開できるのは「その push の差分 × MAX_PUBLISH 件」まで (2026-09-02 実測)
+
+push トリガーの対象選定は `git diff HEAD~1 HEAD` で、さらに `MAX_PUBLISH` (現在 40) で
+上限を掛ける。**50 件を 1 つの PR で載せると 40 件しか公開されず、残りは outbox に滞留する**
+(alphabetical に後ろの key が落ちる)。取りこぼしは次の push の差分にも載らないので、
+放置すると永久に公開されない。
+
+- 大量に載せるときは **1 PR あたり 40 件未満**に分けるか、公開後に未反映分を触って再度 push する
+- **公開確認は「R2 にファイルがあるか」で判定しない。** 旧版が残っている key は構造検査
+  (47 件の県別解説がある等) を通ってしまう。**今回生成した内容と R2 の内容を突合する**
+  (2026-09-02 に `subsidy-expenses-prefecture` が旧版のまま「公開済み」と誤判定された)
+- R2 の一時的な内部エラー (`We encountered an internal error`) で `diff-push-r2` が
+  部分失敗すると、CDN purge と outbox 掃除ごとスキップされる。コンテンツ起因ではないので
+  該当 key を触って再 push すればよい
+
 - blog の `quality-gate.mjs` / blog-critic / `review.md` モデルを流用 (実装パターン再利用・drift 防止)。
 - スクリプト配置は `.claude/scripts/ai-content/` (`skill-code-placement.md` 準拠)。R2 書き込みは CI 専用 (`r2-storage-design.md`)。
 - **安いモデルで数をこなす方針** を採る場合、品質は「モデルを賢くする」ではなく

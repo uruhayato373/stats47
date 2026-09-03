@@ -1,0 +1,98 @@
+{
+  "title": "大阪府の都道府県間の転入・転出の推移",
+  "unit": "人",
+  "label": "大阪府の転入・転出",
+  "year": "2025",
+  "rankingKey": "population-migration-inter-prefecture",
+  "source": "住民基本台帳人口移動報告",
+  "generatedBy": "fetch-migration-flow.mjs",
+  "series": [
+    {
+      "label": "他県からの転入",
+      "data": [
+        {
+          "year": "2020",
+          "value": 172563
+        },
+        {
+          "year": "2021",
+          "value": 168009
+        },
+        {
+          "year": "2022",
+          "value": 173710
+        },
+        {
+          "year": "2023",
+          "value": 177874
+        },
+        {
+          "year": "2024",
+          "value": 183472
+        },
+        {
+          "year": "2025",
+          "value": 184232
+        }
+      ]
+    },
+    {
+      "label": "他県への転出",
+      "data": [
+        {
+          "year": "2020",
+          "value": 159207
+        },
+        {
+          "year": "2021",
+          "value": 162387
+        },
+        {
+          "year": "2022",
+          "value": 167171
+        },
+        {
+          "year": "2023",
+          "value": 167082
+        },
+        {
+          "year": "2024",
+          "value": 166624
+        },
+        {
+          "year": "2025",
+          "value": 168565
+        }
+      ]
+    },
+    {
+      "label": "純移動",
+      "data": [
+        {
+          "year": "2020",
+          "value": 13356
+        },
+        {
+          "year": "2021",
+          "value": 5622
+        },
+        {
+          "year": "2022",
+          "value": 6539
+        },
+        {
+          "year": "2023",
+          "value": 10792
+        },
+        {
+          "year": "2024",
+          "value": 16848
+        },
+        {
+          "year": "2025",
+          "value": 15667
+        }
+      ]
+    }
+  ]
+}

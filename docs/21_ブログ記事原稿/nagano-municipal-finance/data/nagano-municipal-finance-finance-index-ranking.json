@@ -1,0 +1,629 @@
+{
+  "title": "長野県の市町村別 財政力指数",
+  "subtitle": "2024年度",
+  "label": "財政力指数",
+  "unit": "",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "blue",
+  "decimalPlaces": 2,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "軽井沢町",
+      "pref": "軽井沢町",
+      "value": 1.6,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 2,
+      "areaName": "長野市",
+      "pref": "長野市",
+      "value": 0.71,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 3,
+      "areaName": "松本市",
+      "pref": "松本市",
+      "value": 0.7,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 4,
+      "areaName": "諏訪市",
+      "pref": "諏訪市",
+      "value": 0.68,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 5,
+      "areaName": "塩尻市",
+      "pref": "塩尻市",
+      "value": 0.63,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 6,
+      "areaName": "坂城町",
+      "pref": "坂城町",
+      "value": 0.63,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 7,
+      "areaName": "岡谷市",
+      "pref": "岡谷市",
+      "value": 0.6,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 8,
+      "areaName": "御代田町",
+      "pref": "御代田町",
+      "value": 0.6,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 9,
+      "areaName": "上田市",
+      "pref": "上田市",
+      "value": 0.59,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 10,
+      "areaName": "小諸市",
+      "pref": "小諸市",
+      "value": 0.58,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 11,
+      "areaName": "駒ケ根市",
+      "pref": "駒ケ根市",
+      "value": 0.57,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 12,
+      "areaName": "中野市",
+      "pref": "中野市",
+      "value": 0.57,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 13,
+      "areaName": "南相木村",
+      "pref": "南相木村",
+      "value": 0.56,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 14,
+      "areaName": "箕輪町",
+      "pref": "箕輪町",
+      "value": 0.56,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 15,
+      "areaName": "須坂市",
+      "pref": "須坂市",
+      "value": 0.55,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 16,
+      "areaName": "茅野市",
+      "pref": "茅野市",
+      "value": 0.55,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 17,
+      "areaName": "飯田市",
+      "pref": "飯田市",
+      "value": 0.54,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 18,
+      "areaName": "南箕輪村",
+      "pref": "南箕輪村",
+      "value": 0.54,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 19,
+      "areaName": "富士見町",
+      "pref": "富士見町",
+      "value": 0.53,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 20,
+      "areaName": "下諏訪町",
+      "pref": "下諏訪町",
+      "value": 0.52,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 21,
+      "areaName": "佐久市",
+      "pref": "佐久市",
+      "value": 0.51,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 22,
+      "areaName": "安曇野市",
+      "pref": "安曇野市",
+      "value": 0.51,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 23,
+      "areaName": "千曲市",
+      "pref": "千曲市",
+      "value": 0.5,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 24,
+      "areaName": "伊那市",
+      "pref": "伊那市",
+      "value": 0.48,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 25,
+      "areaName": "東御市",
+      "pref": "東御市",
+      "value": 0.48,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 26,
+      "areaName": "辰野町",
+      "pref": "辰野町",
+      "value": 0.47,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 27,
+      "areaName": "宮田村",
+      "pref": "宮田村",
+      "value": 0.46,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 28,
+      "areaName": "大町市",
+      "pref": "大町市",
+      "value": 0.44,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 29,
+      "areaName": "白馬村",
+      "pref": "白馬村",
+      "value": 0.43,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 30,
+      "areaName": "高森町",
+      "pref": "高森町",
+      "value": 0.42,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 31,
+      "areaName": "山形村",
+      "pref": "山形村",
+      "value": 0.42,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 32,
+      "areaName": "朝日村",
+      "pref": "朝日村",
+      "value": 0.4,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 33,
+      "areaName": "小布施町",
+      "pref": "小布施町",
+      "value": 0.4,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 34,
+      "areaName": "松川町",
+      "pref": "松川町",
+      "value": 0.39,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 35,
+      "areaName": "原村",
+      "pref": "原村",
+      "value": 0.37,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 36,
+      "areaName": "飯島町",
+      "pref": "飯島町",
+      "value": 0.37,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 37,
+      "areaName": "山ノ内町",
+      "pref": "山ノ内町",
+      "value": 0.37,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 38,
+      "areaName": "松川村",
+      "pref": "松川村",
+      "value": 0.34,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 39,
+      "areaName": "飯山市",
+      "pref": "飯山市",
+      "value": 0.33,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 40,
+      "areaName": "立科町",
+      "pref": "立科町",
+      "value": 0.32,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 41,
+      "areaName": "池田町",
+      "pref": "池田町",
+      "value": 0.32,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 42,
+      "areaName": "信濃町",
+      "pref": "信濃町",
+      "value": 0.31,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 43,
+      "areaName": "豊丘村",
+      "pref": "豊丘村",
+      "value": 0.3,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 44,
+      "areaName": "高山村",
+      "pref": "高山村",
+      "value": 0.29,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 45,
+      "areaName": "南牧村",
+      "pref": "南牧村",
+      "value": 0.28,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 46,
+      "areaName": "川上村",
+      "pref": "川上村",
+      "value": 0.27,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 47,
+      "areaName": "小海町",
+      "pref": "小海町",
+      "value": 0.26,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 48,
+      "areaName": "木祖村",
+      "pref": "木祖村",
+      "value": 0.26,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 49,
+      "areaName": "木曽町",
+      "pref": "木曽町",
+      "value": 0.26,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 50,
+      "areaName": "佐久穂町",
+      "pref": "佐久穂町",
+      "value": 0.25,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 51,
+      "areaName": "阿智村",
+      "pref": "阿智村",
+      "value": 0.25,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 52,
+      "areaName": "喬木村",
+      "pref": "喬木村",
+      "value": 0.25,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 53,
+      "areaName": "飯綱町",
+      "pref": "飯綱町",
+      "value": 0.25,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 54,
+      "areaName": "青木村",
+      "pref": "青木村",
+      "value": 0.24,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 55,
+      "areaName": "上松町",
+      "pref": "上松町",
+      "value": 0.24,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 56,
+      "areaName": "大桑村",
+      "pref": "大桑村",
+      "value": 0.24,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 57,
+      "areaName": "南木曽町",
+      "pref": "南木曽町",
+      "value": 0.23,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 58,
+      "areaName": "長和町",
+      "pref": "長和町",
+      "value": 0.22,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 59,
+      "areaName": "下條村",
+      "pref": "下條村",
+      "value": 0.22,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 60,
+      "areaName": "小谷村",
+      "pref": "小谷村",
+      "value": 0.22,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 61,
+      "areaName": "中川村",
+      "pref": "中川村",
+      "value": 0.21,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 62,
+      "areaName": "木島平村",
+      "pref": "木島平村",
+      "value": 0.2,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 63,
+      "areaName": "阿南町",
+      "pref": "阿南町",
+      "value": 0.19,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 64,
+      "areaName": "王滝村",
+      "pref": "王滝村",
+      "value": 0.19,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 65,
+      "areaName": "野沢温泉村",
+      "pref": "野沢温泉村",
+      "value": 0.18,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 66,
+      "areaName": "麻績村",
+      "pref": "麻績村",
+      "value": 0.17,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 67,
+      "areaName": "筑北村",
+      "pref": "筑北村",
+      "value": 0.16,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 68,
+      "areaName": "天龍村",
+      "pref": "天龍村",
+      "value": 0.15,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 69,
+      "areaName": "泰阜村",
+      "pref": "泰阜村",
+      "value": 0.15,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 70,
+      "areaName": "大鹿村",
+      "pref": "大鹿村",
+      "value": 0.15,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 71,
+      "areaName": "北相木村",
+      "pref": "北相木村",
+      "value": 0.14,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 72,
+      "areaName": "平谷村",
+      "pref": "平谷村",
+      "value": 0.14,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 73,
+      "areaName": "生坂村",
+      "pref": "生坂村",
+      "value": 0.13,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 74,
+      "areaName": "小川村",
+      "pref": "小川村",
+      "value": 0.13,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 75,
+      "areaName": "栄村",
+      "pref": "栄村",
+      "value": 0.13,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 76,
+      "areaName": "根羽村",
+      "pref": "根羽村",
+      "value": 0.11,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 77,
+      "areaName": "売木村",
+      "pref": "売木村",
+      "value": 0.11,
+      "label": "財政力指数",
+      "unit": ""
+    }
+  ]
+}

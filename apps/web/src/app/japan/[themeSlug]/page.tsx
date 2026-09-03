@@ -12,6 +12,10 @@ import { ChartPanel } from '@/components/charts/ChartPanel';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 
+import { NativeAffiliateRow } from '@/features/ads';
+import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
+import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { JapanMetricChart } from './JapanMetricChart';
@@ -88,9 +92,15 @@ export default async function JapanThemePage({ params }: { params: Params }) {
   const theme = getJapanCatalogTheme(params.themeSlug);
   if (!theme) notFound();
 
-  const metricViews = await loadMetricSeries(
-    theme.metrics.map((m) => m.metricKey)
-  );
+  // 全国テーマは都道府県テーマと同じ slug を使うので、同じ意図軸の広告を出す
+  // (THEME_AFFILIATE_MAP の写像を共有。写像が無い slug は空 = 何も描画しない)。
+  const themeVertical = THEME_AFFILIATE_MAP[theme.themeSlug];
+  const [metricViews, nativeBanners] = await Promise.all([
+    loadMetricSeries(theme.metrics.map((m) => m.metricKey)),
+    themeVertical
+      ? resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => [])
+      : Promise.resolve([]),
+  ]);
 
   return (
     <PageShell>
@@ -147,6 +157,18 @@ export default async function JapanThemePage({ params }: { params: Params }) {
               />
             </ChartPanel>
           ))}
+        </div>
+      )}
+
+      {/* ネイティブアフィリエイト枠 (テーマページと同じ vertical 解決・読了位置) */}
+      {nativeBanners.length > 0 && (
+        <div className="mt-8">
+          <NativeAffiliateRow
+            banners={nativeBanners}
+            position="japan-native"
+            trackingCategory={`japan-${theme.themeSlug}`}
+            variant="three-up"
+          />
         </div>
       )}
     </PageShell>
