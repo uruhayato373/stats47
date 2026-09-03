@@ -451,6 +451,27 @@ updated: 2026-08-30
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CI-DEVELOP-GATE-COVERAGE-01] develop 向け PR で決定的ゲートを走らせ、main への PR で初めて落ちる状態を止める
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:develop 向け PR で Static Gates 相当と Unit Tests が走ること] [起票:2026-09-03] [期日:2026-10-15]
+
+- **owner**: devops-runner
+- **症状 (2026-09-03 実測)**: PR #913 が入れた 2 つの欠陥 (check-ad-placement のリテラル不一致・
+  native 枠の在庫フォールバック喪失) が develop では一度も検知されず、デプロイ PR #915 で初めて落ちた。
+  `pr-quality-check.yml` は `pull_request: branches: [main]` でしか発火せず、develop 向け PR が通る
+  `develop-quality-gate.yml` は eslint・env registry・maintenance debt の 3 つだけ。husky は
+  依存に無く `core.hooksPath` も設定されないため pre-commit も発火しない。
+  結果、develop は「決定的ゲートを通っていないコードが積まれる場所」になっている。
+- **次**: `develop-quality-gate.yml` に、決定的で速い検査だけを足す。候補は
+  `check-ad-placement.cjs` / `design-system:check` / `check-card-census.cjs` (いずれも数秒) と
+  `vitest run` (apps/web で実測 98 秒)。**Build Check・Full E2E・Remotion は足さない**
+  (develop への push が詰まると `--no-verify` を誘発し、ゲートを足した意味が消える →
+  `branch-workflow.md`「ここに重い検査を足さない」)。
+- **停止条件**: 追加後の develop-quality-gate が実測 3 分を超えるなら、超えた分を外して
+  main 向けに残す。判断は実測値で行い、推測で足さない。
+- **完了条件**: develop 向け PR で上記ゲートが走り、意図的に壊した変更が develop マージ前に落ちる
+  ことを 1 度実測する。
+
 ### [AFF-PLACEMENT-MAP-CORE-01] placement-map-core を「出典調査 → タグ → カテゴリ」に追従させ、survey の stale 判定を直す
 
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/ads/__tests__/placement-map-core.test.mjs] [起票:2026-09-03] [期日:2026-09-30]
