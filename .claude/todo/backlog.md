@@ -60,6 +60,40 @@ updated: 2026-08-30
   (地域限定のイオン九州が上位 3 に入らない)。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
 
+### [BLOG-BACKGROUND-BATCH-01] 公開待ち 91 記事の背景画像を生成して公開・デプロイまで届ける
+
+タグ: [コンテンツ品質] [種類:制作] [実行:ユーザー] [検証:blog-auto-publish の Summary が「公開: 91 件 / スキップ: なし」] [起票:2026-09-02]
+
+- **owner**: オーナー (画像生成) → Claude Code (公開起動・確認・デプロイ)
+- **現状**: `docs/21_ブログ記事原稿` の `published: true` は 91 本。すべて quality-gate blocker 0 +
+  blog-critic PASS を得ており、公開に足りないのは**記事固有の背景画像だけ**。
+- **止まっている実測**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
+  (`annual-sunshine-duration-prefecture-gap`) の `Fatal: 記事固有背景がありません` で exit 1 になり、
+  公開 0 件。`generate-blog-thumbnails.ts` は共有背景へフォールバックしない (`ogp-image-standards.md` §5)
+  ので、ゲートを緩めるのではなく画像を用意して通す。
+- **なぜユーザー実行か**: Codex MCP はクラウドセッションで `ENOENT` (codex 未インストール)。
+  背景生成はローカル Mac の Codex built-in imagegen で行う。
+- **手順** (`/generate-blog-images` Mode A): 公開前の記事なので `--article <article.md>` が必須
+  (省くと R2 404)。
+
+  ```bash
+  npm run blog-images:codex -- request-article --slug <slug> \
+    --article "docs/21_ブログ記事原稿/<slug>/article.md"
+  npm run blog-images:codex -- ingest-article --slug <slug> \
+    --article "docs/21_ブログ記事原稿/<slug>/article.md" \
+    --input <generated.png> --prompt-hash <sha256-...>
+  npm run check:blog-images
+  ```
+
+  生成物は `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` (git tracked)。
+- **公開の起動**: 画像だけの push では auto-publish は発火しない (paths フィルタが `article.md` と
+  workflow 自身のみ)。`workflow-dispatch-proxy.yml` の allowlist に `blog-auto-publish.yml` を
+  追加済 (PR #899) なので、クラウドからも slugs 空 = reconcile で代理起動できる。
+- **順序の注意**: 現行の workflow は背景の無い slug で run 全体が止まる (`BLOG-PUBLISH-THUMBNAIL-GUARD-01`)。
+  91 枚すべて揃えてから push するか、揃った分だけ `-f slugs="..."` で明示指定する。
+- **完了条件**: 91 本が R2 `app/blog/<slug>/` に載り、`docs/21` から commit-back で消え、
+  develop→main のデプロイ (`deploy-workers.yml` success) まで終わること。
+
 ### [BLOG-PUBLISH-THUMBNAIL-GUARD-01] 背景1件の欠落で公開run全体が止まるのを per-slug skip にする
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:背景の無い slug を1件混ぜても他 slug が公開されること] [起票:2026-08-31]
@@ -76,6 +110,9 @@ updated: 2026-08-30
 - **影響が滞留として現れている**: reconcile (`select-republish-slugs.mjs`) は現在 24 件を返すが、
   そのうち少なくとも 24 件が背景未生成で、先頭で止まるため**どれも公開されない**。
   背景待ちの記事が 1 件でもあると、背景が揃っている記事まで巻き添えで止まる構造。
+- **2026-09-02 に規模が拡大**: run 33587682293 では公開待ち **91 件**が 1 本目
+  (`annual-sunshine-duration-prefecture-gap`) の同じ Fatal で全滅した。滞留は 24 → 91 件。
+  per-slug skip になっていれば、背景が揃った分から順に公開できる (`BLOG-BACKGROUND-BATCH-01`)。
 - **完了条件**: 背景が無い slug は SKIPPED に積んで次へ進み、他 slug が公開されること。
   **背景の無い slug を 1 件混ぜた状態で run を通し、他が公開されることを実測する**
   (全 PASS は「何も見ていない」と区別がつかない)。

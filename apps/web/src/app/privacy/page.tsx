@@ -22,6 +22,8 @@
 
 import { ReactNode } from "react";
 
+import Image from "next/image";
+
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Button } from "@stats47/components/atoms/ui/button";
 import { Separator } from "@stats47/components/atoms/ui/separator";
@@ -117,7 +119,7 @@ export default function PrivacyPage() {
         <LegalSection number="1" title="運営者情報">
           {/* プロフィール */}
           <div className="flex items-center gap-4 mb-4">
-            <img
+            <Image
               src={OPERATOR_PROFILE.avatarSrc}
               alt={OPERATOR_PROFILE.avatarAlt}
               width={48}
