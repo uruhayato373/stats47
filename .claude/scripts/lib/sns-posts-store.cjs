@@ -60,6 +60,25 @@ function maxId(posts) {
   return posts.reduce((m, p) => Math.max(m, p.id || 0), 0);
 }
 
+function isVerifiedXPostUrl(postUrl) {
+  return /^https:\/\/(?:x\.com|twitter\.com)\/[A-Za-z0-9_]+\/status\/\d+(?:[/?#]|$)/.test(
+    postUrl || "",
+  );
+}
+
+function assertRecordIntegrity(record) {
+  if (
+    record.platform === "x" &&
+    record.status === "posted" &&
+    !record.deleted_at &&
+    !isVerifiedXPostUrl(record.post_url)
+  ) {
+    throw new Error(
+      `X の posted レコードには確認済み post_url が必要です (id=${record.id ?? "new"})`,
+    );
+  }
+}
+
 function read() {
   try {
     const data = JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
@@ -115,6 +134,7 @@ function insert(record) {
     updated_at: now,
     ...record,
   };
+  assertRecordIntegrity(row);
   data.posts.push(row);
   data._meta.nextId = id + 1;
   write(data);
@@ -129,7 +149,13 @@ function updateById(id, patch) {
   const data = read();
   const row = data.posts.find((p) => p.id === id);
   if (!row) return null;
-  Object.assign(row, patch, { updated_at: patch.updated_at ?? new Date().toISOString() });
+  const next = {
+    ...row,
+    ...patch,
+    updated_at: patch.updated_at ?? new Date().toISOString(),
+  };
+  assertRecordIntegrity(next);
+  Object.assign(row, next);
   write(data);
   return row;
 }
@@ -139,6 +165,8 @@ module.exports = {
   loadAll,
   query,
   getById,
+  isVerifiedXPostUrl,
+  assertRecordIntegrity,
   insert,
   updateById,
 };
