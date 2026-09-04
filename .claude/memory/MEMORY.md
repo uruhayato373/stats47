@@ -23,6 +23,7 @@
 - [project_blog_topic_queue_seo_expansion.md](project_blog_topic_queue_seo_expansion.md) — 新規ブログSEO拡充(2026-07-05)。「次に何を書くか」=topic-queue.json(build-topic-queue.mjs)。型8種に拡張(D2食品/F市区町村/G移動)。タイトル~17字・gap1要素。/plan-article-queue。戦略正典=docs/02_実装計画/15
 - [feedback_theme_indicator_research_pattern.md](feedback_theme_indicator_research_pattern.md) — テーマ指標調査は同一セッションで一次資料/e-Stat IDを解決。未解決候補は保存せず、tool回数を証拠にしない
 - [project_sns_reorg_2026_07.md](project_sns_reorg_2026_07.md) — SNS/Remotion整理+SSOT化。正典=sns-content-standards.md、投稿台帳=posts.json。YouTubeは2026-08-23から通常動画3本のmaster-first pilot、TikTok撤退。専任agent/OAuthは成功判定まで復活させない
+- [feedback_x_post_url_integrity.md](feedback_x_post_url_integrity.md) — Xのposted判定は予約時刻/旧台帳日付で推定せず、自アカウントのstatus URLと本文一致を証拠にする。中央store gateでURLなしpostedを拒否
 - [project_react_to_news_pipeline.md](project_react_to_news_pipeline.md) — じじネタ→即SNS瞬発パイプライン(2026-07-02)。find-metrics(発見索引・同義語レイヤー必須)+quick-still(指標key→SVG+PNG+caption)+/react-to-news。未決=tags恒久バックフィル/quick-still→publish-x連結
 - [feedback_generatestaticparams_r2_notfound_stuck.md](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParams付けると●SSG化→build時R2不可でnotFound永久固着(2026-06-22 ranking/areas/cities)。修正=撤去しrevalidateのみ→ƒ。正典nextjs-ssg-preservation.md
 - [project_ai_content_remediation_queue.md](project_ai_content_remediation_queue.md) — ranking ai-content(考察/地域別/FAQ/県別)DBレス生成+状態付き是正キュー。doneはR2 auditRow通過で再導出=R2真実源。build-ai-content-queue.mjs→ranking-content-author並列。正典02_機能バックログ
