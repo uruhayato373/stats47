@@ -366,7 +366,8 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     miningindustry: 'manufacturing',
     construction: 'living-housing',
     commercial: 'local-economy',
-    tourism: 'tourism',
+    // tourism は旧 categoryKey と現行 themeSlug が同一なので転送しない。
+    // ここへ含めると同一 URL への 301 ループになる。
     socialsecurity: 'healthcare',
     educationsports: 'education-culture',
     safetyenvironment: 'safety',

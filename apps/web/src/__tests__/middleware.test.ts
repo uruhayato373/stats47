@@ -163,6 +163,30 @@ describe('旧 ranking slug の現行ページ移行', () => {
   });
 });
 
+describe('県別テーマURLの正規化', () => {
+  const originalNext = NextResponse.next;
+
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(pathname: string): NextRequest {
+    const nextRequest = new NextRequest(`https://stats47.jp${pathname}`);
+    Object.defineProperty(nextRequest, 'nextUrl', {
+      value: new URL(nextRequest.url),
+    });
+    return nextRequest;
+  }
+
+  test('categoryKey と themeSlug が同じ tourism は自己リダイレクトしない', () => {
+    expect(middleware(request('/areas/01000/tourism')).status).not.toBe(301);
+  });
+});
+
 describe('/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)', () => {
   const originalNext = NextResponse.next;
 
