@@ -126,6 +126,43 @@ describe('Geo X旧ハブURLのlanding移行', () => {
   });
 });
 
+describe('旧 ranking slug の現行ページ移行', () => {
+  const originalNext = NextResponse.next;
+
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(pathname: string): NextRequest {
+    const nextRequest = new NextRequest('https://stats47.jp' + pathname);
+    Object.defineProperty(nextRequest, 'nextUrl', {
+      value: new URL(nextRequest.url),
+    });
+    return nextRequest;
+  }
+
+  test.each([
+    ['ssdse-c-lb021101', 'tuna-consumption-expenditure'],
+    ['ssdse-c-lb061001', 'apple-consumption-expenditure'],
+    ['ssdse-c-lb092007', 'gyoza-frozen-consumption-expenditure'],
+    ['ssdse-c-lb101001', 'green-tea-consumption-expenditure'],
+    ['ssdse-c-lb121101', 'soba-udon-dining-consumption-expenditure'],
+    ['ssdse-d-md22', 'hobby-participation-rate-diy'],
+    ['per-capita-kenmin-shotoku-h27', 'per-capita-prefectural-income-h27'],
+  ])('%s を %s へ一段で301する', (source, destination) => {
+    const response = middleware(request('/ranking/' + source + '?utm_source=x&utm_medium=social'));
+
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(
+      'https://stats47.jp/ranking/' + destination + '?utm_source=x&utm_medium=social',
+    );
+  });
+});
+
 describe('/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)', () => {
   const originalNext = NextResponse.next;
 

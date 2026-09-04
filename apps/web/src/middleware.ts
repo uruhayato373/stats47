@@ -5,6 +5,7 @@ import { UrlPolicy } from '@/lib/url-policy';
 
 import { BLOG_SLUG_REDIRECTS } from '@/config/blog-redirects';
 import { LEGACY_CATEGORY_KEYS_SET } from '@/config/legacy-category-keys';
+import { RANKING_SLUG_REDIRECTS } from '@/config/ranking-redirects';
 import { REDIRECT_TAG_KEYS } from '@/config/redirect-tag-keys';
 
 /**
@@ -439,6 +440,18 @@ export default function middleware(req: NextRequest) {
     const url = new URL(pathname.slice(0, -1), req.url);
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, { status: 301 });
+  }
+
+  // 公開済みX投稿などに残る旧 ranking slug を、同義の現行ページへ恒久転送する。
+  // GONE / unknown 判定より前に処理し、UTM query は保持する。
+  const legacyRankingMatch = pathname.match(/^\/ranking\/([^/]+)$/);
+  if (legacyRankingMatch) {
+    const destination = RANKING_SLUG_REDIRECTS[legacyRankingMatch[1]];
+    if (destination) {
+      const url = new URL('/ranking/' + destination, req.url);
+      url.search = req.nextUrl.search;
+      return NextResponse.redirect(url, 301);
+    }
   }
 
   // 初期Geo X下書きが使っていた一覧ハブURLを、投稿の約束に合う専用landingへ移す。

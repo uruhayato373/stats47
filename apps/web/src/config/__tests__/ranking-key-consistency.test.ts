@@ -102,6 +102,18 @@ describe("ranking キーリスト集合整合性", () => {
   });
 });
 
+describe("ranking slug redirect の整合性", () => {
+  it("転送先が KNOWN かつ非 GONE、転送元と転送先が同一でない", async () => {
+    const { RANKING_SLUG_REDIRECTS } = await import("@/config/ranking-redirects");
+    const invalid = Object.entries(RANKING_SLUG_REDIRECTS).filter(
+      ([source, destination]) =>
+        source === destination || !KNOWN_RANKING_KEYS.has(destination) || GONE_RANKING_KEYS.has(destination),
+    );
+
+    expect(invalid).toEqual([]);
+  });
+});
+
 describe("tag キーリスト集合整合性 (ranking と同型のドリフト防御)", () => {
   it("GONE_TAG ∩ KNOWN_TAG = ∅（410 対象タグが配信中リストに存在しない）", () => {
     const conflict = intersection(GONE_TAG_KEYS, KNOWN_TAG_KEYS);
