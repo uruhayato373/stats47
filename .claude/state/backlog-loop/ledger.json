@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-02T19:30:11.259Z",
+  "updatedAt": "2026-09-04T06:34:05.548Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3628,6 +3628,39 @@
         }
       ],
       "completedAt": null
+    },
+    "BRANCH-CLOUD-CLEANUP-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "cloud セッションの残ブランチ 2 本を整理する",
+      "attempts": [
+        {
+          "at": "2026-09-04T06:34:05.548Z",
+          "runId": null,
+          "model": "gpt-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git for-each-ref --format=%(refname:short) refs/remotes/origin/"
+            ],
+            "pass": true
+          },
+          "evidence": "Remote branches verified as content-equivalent to develop, deleted, and fetch --prune leaves only origin/main and origin/develop.",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-04T06:34:05.548Z"
     }
   }
 }
