@@ -14,6 +14,7 @@
 
 import { ReactNode } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@stats47/components/atoms/ui/badge";
@@ -127,7 +128,7 @@ export default function AboutPage() {
         {/* 1. 運営者プロフィール */}
         <AboutSection title="運営者プロフィール">
           <div className="flex items-center gap-4 mb-4">
-            <img
+            <Image
               src={OPERATOR_PROFILE.avatarSrc}
               alt={OPERATOR_PROFILE.avatarAlt}
               width={56}

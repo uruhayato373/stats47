@@ -94,26 +94,6 @@ updated: 2026-08-30
 - **完了条件**: 91 本が R2 `app/blog/<slug>/` に載り、`docs/21` から commit-back で消え、
   develop→main のデプロイ (`deploy-workers.yml` success) まで終わること。
 
-### [BRANCH-CLOUD-CLEANUP-01] cloud セッションの残ブランチ 2 本を整理する
-
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:git branch -r が origin/develop と origin/main だけ] [起票:2026-09-04]
-
-- **owner**: Claude Code
-- **なぜ**: リポジトリは main + develop だけに保つ規約 (`branch-workflow.md`)。cloud セッションの
-  残ブランチが増えると、どれが未取り込みか判別できなくなる。
-- **2026-09-04 の実測**:
-  - `origin/claude/prefectures-ranking-ai-content-5cmt35` (ahead 48 / behind 9) —
-    `apps` `packages` `.claude/{rules,agents,skills}` `.github` に対する**実コード差 0**。
-    48 コミットの内容は develop に反映済み (`fix(geo)` の force-dynamic も develop に存在し、
-    本番 `/geo/2050-population` は「準備中」0 箇所)。**削除可**。
-  - `origin/claude/add-blog-posts-20-o89uzb` (ahead 1 / behind 52) — 唯一のコミット
-    `15e06a624` は `BLOG-BACKGROUND-BATCH-01` の起票と topic-queue の in-progress 2 件解消で、
-    **2026-09-04 に develop へ cherry-pick 済み**。**削除可**。
-- **次**: `git push origin --delete <branch>` を 2 本。ローカル追跡があれば `git fetch --prune`。
-- **完了条件**: `git branch -r` が `origin/develop` と `origin/main` だけになる。
-- **禁止**: 削除前に ahead 側の実コード差が 0 であることを毎回確認する。worktree で使用中の
-  ブランチは消さない (`git worktree list` で確認)。
-
 ### [BLOG-PUBLISH-THUMBNAIL-GUARD-01] 背景1件の欠落で公開run全体が止まるのを per-slug skip にする
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:背景の無い slug を1件混ぜても他 slug が公開されること] [起票:2026-08-31]
