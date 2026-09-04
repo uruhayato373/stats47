@@ -65,11 +65,12 @@ function dayCount(dateStr) {
 
 /** dateStr を含む週の月曜 (JST) を "YYYY-MM-DD" で返す。 */
 function isoWeekStart(dateStr) {
-  const d = new Date(`${dateStr}T00:00:00+09:00`);
-  const dow = (d.getUTCDay() + 6) % 7; // 月=0 ... 日=6 (UTC ベースだが日付のみ使用)
-  const monday = new Date(d.getTime() - dow * 24 * 60 * 60 * 1000);
-  const jst = new Date(monday.getTime() + 9 * 60 * 60 * 1000);
-  return jst.toISOString().slice(0, 10);
+  // 日付だけの計算を UTC で行う。JST 00:00 を Date 化して getUTCDay() すると
+  // UTC では前日になり、月曜始まりが1日ずれる。
+  const d = new Date(`${dateStr}T00:00:00Z`);
+  const dow = (d.getUTCDay() + 6) % 7; // 月=0 ... 日=6
+  d.setUTCDate(d.getUTCDate() - dow);
+  return d.toISOString().slice(0, 10);
 }
 
 function weekCount(weekStartMondayStr) {

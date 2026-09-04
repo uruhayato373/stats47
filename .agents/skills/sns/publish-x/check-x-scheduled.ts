@@ -30,9 +30,7 @@ async function main() {
     await page.waitForTimeout(5000);
 
     // 予約投稿カードを列挙
-    const items = await page
-      .locator('article[role="article"], [data-testid="tweet"]')
-      .all();
+    const items = await page.locator('[data-testid="unsentTweet"]').all();
     console.log(`予約投稿: ${items.length} 件`);
 
     // ページ全体のテキストから予約日時を抽出

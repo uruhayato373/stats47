@@ -76,4 +76,13 @@ describe("sitemap: NEXT_PHASE=phase-production-build (実 reader)", () => {
     expect(entries.some((e) => e.url.endsWith("/japan"))).toBe(true);
     expect(entries.some((e) => e.url.endsWith("/japan/education-culture"))).toBe(true);
   });
+
+  it("Xで公開するGeo県別stageをstatic sitemapへ含める", async () => {
+    const staticId = SITEMAP_SEGMENTS.indexOf("static");
+    const entries = await sitemap({ id: staticId });
+    const urls = new Set(entries.map((entry) => entry.url));
+
+    expect(urls.has("https://stats47.jp/geo/population-station-access/13/overlap")).toBe(true);
+    expect(urls.has("https://stats47.jp/geo/population-station-access/01/overlap")).toBe(true);
+  });
 });
