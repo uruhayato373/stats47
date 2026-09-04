@@ -19,9 +19,7 @@ function jstDate(iso) {
   return new Date(d.getTime() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
 }
 
-function isVerifiedPostUrl(postUrl) {
-  return /^https:\/\/(x\.com|twitter\.com)\//.test(postUrl || "");
-}
+const isVerifiedPostUrl = store.isVerifiedXPostUrl;
 
 function main() {
   const apply = process.argv.includes("--apply");

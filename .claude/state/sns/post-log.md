@@ -3,7 +3,7 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**561 件** (最終更新: 2026-09-03)
+**528 件** (最終更新: 2026-09-03)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
@@ -166,24 +166,16 @@
 | 2026-06-02 | 📸 Instagram | bar-chart-race/traffic-accident-deaths-per-100k |  | [🔗](https://www.instagram.com/reel/DZEI6AJGEgM/) |
 | 2026-06-01 | 📸 Instagram | ranking/hobby-participation-rate-video-games |  | [🔗](https://www.instagram.com/p/DZBkOWZETXI/) |
 | 2026-05-31 | 📸 Instagram | ranking/hobby-participation-rate-reading |  | [🔗](https://www.instagram.com/p/DY-_Et2lBrr/) |
-| 2026-05-31 | 𝕏 X | ranking/per-capita-kenmin-shotoku-h27 | 1人当たり県民所得、東京521万円で全国1位。沖縄217万円、その差約2.4倍の地域格差。  1位 東京都 521万円 … | — |
 | 2026-05-30 | 📸 Instagram | ranking/hobby-participation-rate-photography |  | [🔗](https://www.instagram.com/p/DY8ZdbykarB/) |
-| 2026-05-30 | 𝕏 X | ranking/manufacturing-shipment-amount | 製造品出荷額、愛知58兆円で2位の3倍。沖縄0.5兆円、地域格差は100倍超。  1位 愛知県 58兆円 2位 静岡県 … | — |
 | 2026-05-29 | 📸 Instagram | ranking/hobby-participation-rate-manga |  | [🔗](https://www.instagram.com/p/DY51RmCgDqW/) |
-| 2026-05-29 | 𝕏 X | ranking/annual-sunshine-duration | 年間日照時間、高知2309時間で1位。山形1626時間と683時間差。沖縄が下位5に入る意外。  1位 高知県 2309… | — |
 | 2026-05-28 | 📸 Instagram | bar-chart-race/local-tax-ratio-pref-finance |  | [🔗](https://www.instagram.com/reel/DY3PcV5CDmZ/) |
-| 2026-05-28 | 𝕏 X | ranking/foreign-resident-count-per-100k | 人口10万人あたり外国人、東京は秋田の9倍。工業集積地が上位に並ぶ。  1位 東京都 3441人 2位 愛知県 3068… | — |
 | 2026-05-27 | 📸 Instagram | ranking/hobby-participation-rate-karaoke |  | [🔗](https://www.instagram.com/p/DY0rdIrDoyP/) |
-| 2026-05-27 | 𝕏 X | ranking/theft-offenses-recognized-per-1000 | 人口1000人あたり窃盗、大阪は長崎の約4倍。北関東が意外と多い。  1位 大阪府 6.65件 2位 茨城県 5.24件… | — |
 | 2026-05-26 | ▶️ YouTube | ranking/yoy-landscape-v2 | 東京一極集中はいつ始まった？｜47都道府県 人口前年度比1976-2024 | [🔗](https://www.youtube.com/watch?v=3O4v9iVgntE) |
 | 2026-05-26 | 📸 Instagram | ranking/hobby-participation-rate-gardening |  | [🔗](https://www.instagram.com/p/DYyGMkAiRXO/) |
-| 2026-05-26 | 𝕏 X | ranking/traffic-accident-deaths-per-100k | 人口10万人あたり交通事故死者、徳島は東京の5倍。地方の交通リスクの現実。  1位 徳島県 4.8人 2位 愛媛県 4.… | — |
 | 2026-05-25 | 📸 Instagram | port/cargo-total | 日本の港湾、14年で何が起きたのか🚢  ▼海上出入貨物量 トップは14年ずっと #名古屋港 だが貨物量は -15%（2… | [🔗](https://www.instagram.com/reel/DYwuJ_2EsBT/) |
 | 2026-05-25 | 📸 Instagram | ranking/hobby-participation-rate-cooking |  | [🔗](https://www.instagram.com/p/DYvh88xmrwP/) |
-| 2026-05-25 | 𝕏 X | ranking/library-count-per-million | 人口100万人あたり図書館数、山梨は神奈川の7倍。都会ほど図書館が少ない逆転現象。  1位 山梨県 65.8館 2位 島… | — |
 | 2026-05-24 | 📸 Instagram | highway-history/japan-58years | 日本の高速道路は58年で何キロまで広がったのか？  1962年の名神部分開通から2020年まで、毎年の新規開通区間を地図… | [🔗](https://www.instagram.com/reel/DYuApUviuyQ/) |
 | 2026-05-24 | 📸 Instagram | ranking/hobby-participation-rate-cinema |  | [🔗](https://www.instagram.com/p/DYs9AGtleJV/) |
-| 2026-05-24 | 𝕏 X | ranking/divorces-per-total-population | 沖縄の離婚率は富山の2倍。ずっと全国1位。  1位 沖縄県 2.10 2位 宮崎県 1.67 3位 大阪府 1.65  … | — |
 | 2026-05-23 | 📸 Instagram | bar-chart-race/criminal-arrest-rate |  | [🔗](https://www.instagram.com/reel/DYqXswLDqo8/) |
 | 2026-05-23 | ▶️ YouTube | station-passengers/station-passengers-47 | 都道府県別 鉄道駅ランキング｜全国8565駅 日本一忙しい駅は？ | [🔗](https://www.youtube.com/watch?v=wjLQCiuEeNI) |
 | 2026-05-23 | 𝕏 X | ranking/local-debt-current-ratio | 地方債の割合、静岡県が全国ワースト。収入の2倍超の借金。  1位 静岡県 208.5％ 2位 新潟県 205.1％ 3位… | [🔗](https://x.com/stats47jp373/status/2040195137754816611) |
@@ -193,18 +185,15 @@
 | 2026-05-21 | 𝕏 X | ranking/real-balance-ratio | 実質収支比率、島根県7.5%で全国1位。黒字幅が最も大きい県。  1位 島根県 7.5％ 2位 東京都 7.1％ 3位 … | [🔗](https://x.com/stats47jp373/status/2042747783732744666) |
 | 2026-05-21 | 𝕏 X | other/migration-flow-hyogo-2025 | 兵庫県は2025年、引っ越しの収支で2,102人を失った。  最も人が行き交う相手は隣の大阪府。なのに流入31,591＜… | [🔗](https://x.com/stats47jp373/status/2057416096224096350) |
 | 2026-05-20 | 📸 Instagram | ranking/disposable-income-worker-households |  | [🔗](https://www.instagram.com/p/DYip2SWmut7/) |
-| 2026-05-20 | 𝕏 X | ranking/personnel-expenditure-ratio-pref-finance | 人件費割合、三重県25.5%。東京都は17%。財政支出の4分の1が人件費の県がある。  1位 三重県 25.5％ 2位 … | — |
 | 2026-05-19 | 📸 Instagram | ranking/annual-sunshine-duration |  | [🔗](https://www.instagram.com/p/DYgE4KhAHQK/) |
 | 2026-05-19 | 𝕏 X | ranking/governor-salary-prefecture | 東京都知事の月給は全国最下位の73万円。1位神奈川の半分。  1位 神奈川県 145万円 2位 埼玉県 142万円 3位… | [🔗](https://x.com/stats47jp373/status/2036639208568398206) |
 | 2026-05-18 | 📸 Instagram | ranking/annual-precipitation-days |  | [🔗](https://www.instagram.com/p/DYdgBkpETsI/) |
 | 2026-05-18 | 𝕏 X | ranking/laspeyres-index-prefecture | ラスパイレス指数、国家公務員より高い県がある。  1位 静岡県 101.8 2位 愛知県 101.0 3位 三重県 10… | [🔗](https://x.com/stats47jp373/status/2040013944757338576) |
 | 2026-05-17 | 📸 Instagram | ranking/starting-salary-university | 大卒初任給 県別ランキング 2023年最新版📊  1位は秋田の26.77万円、47位鳥取と1.32倍格差。 秋田・山口… | [🔗](https://www.instagram.com/p/DYbFaRvE6ht/) |
-| 2026-05-17 | 𝕏 X | ranking/per-capita-welfare-expenditure-pref-municipal | 住民1人あたり民生費、沖縄県37万円。静岡県の1.7倍。  1位 沖縄県 371.4千円 2位 高知県 347.0千円 … | — |
 | 2026-05-16 | 𝕏 X | ranking/future-burden-ratio | 将来負担比率、兵庫県が全国ワースト。330%は年収の3倍超の借金。  1位 兵庫県 330.8％ 2位 北海道 311.… | [🔗](https://x.com/stats47jp373/status/2039832748727365999) |
 | 2026-05-15 | 𝕏 X | ranking/inflow-population-ratio | 東京都の流入人口比率19.7%。昼間に人口が2割増える異常な都市。  1位 東京都 19.67％ 2位 京都府 7.36… | [🔗](https://x.com/stats47jp373/status/2038564394473595308) |
 | 2026-05-14 | 𝕏 X | ranking/fire-damage-casualties-per-population | 火災で最も死傷者が出る県は青森県。  1位 青森県 10.64人 2位 秋田県 9.19人 3位 岩手県 8.51人  … | [🔗](https://x.com/stats47jp373/status/2038745588016013562) |
 | 2026-05-13 | 𝕏 X | ranking/treatment-rate-hypertension-outpatient | 高血圧の受療率、長崎県は石川県の2.4倍。  1位 長崎県 777人 2位 山形県 745人 3位 島根県 688人  … | [🔗](https://x.com/stats47jp373/status/2039107973973221832) |
-| 2026-05-13 | 𝕏 X | ranking/maximum-temperature | 2024年最も暑かったのは熊本県。36.2℃。北海道との差は7.8℃。  1位 熊本県 36.2℃ 2位 山口県 35.… | — |
 | 2026-05-12 | 𝕏 X | ranking/treatment-rate-diabetes-outpatient | 糖尿病の外来受療率、山口県が全国1位。沖縄の2.5倍。  1位 山口県 246人 2位 香川県 237人 3位 大分県 … | [🔗](https://x.com/stats47jp373/status/2038926781277995389) |
 | 2026-05-11 | 𝕏 X | ranking/rice-harvest-volume | 米の収穫量、新潟県がダントツ1位。64万トン。  1位 新潟県 646,100t 2位 北海道 588,100t 3位 … | [🔗](https://x.com/stats47jp373/status/2038202003416096943) |
 | 2026-05-10 | 📝 note | ranking/a-maximum-temperature |  | [🔗](https://note.com/stats47/n/n863f429319ca) |
@@ -238,14 +227,18 @@
 | 2026-04-14 | 𝕏 X | ranking/private-rental-housing-rent-per-3-3m2 | データで見ると、民営賃貸住宅の家賃(2024年、3.3m²あたり)は1位 東京都9,736円、47位 和歌山県3,442… | [🔗](https://x.com/stats47jp373/status/2043798193461465429) |
 | 2026-04-14 | 𝕏 X | ranking/actual-income-worker-households-per-month | データで見ると、勤労者世帯の実収入(2024年、二人以上世帯)は1位 東京都79.4万円/月、47位 沖縄県49.4万円… | [🔗](https://x.com/stats47jp373/status/2043797804553019739) |
 | 2026-04-14 | 𝕏 X | ranking/total-fertility-rate | データで見ると、都道府県別の合計特殊出生率(2023年)は1位 沖縄県1.60、47位 東京都0.99。1位と47位で1… | [🔗](https://x.com/stats47jp373/status/2043796543929758163) |
+| 2026-04-10 | 𝕏 X | ranking/personnel-expenditure-ratio-pref-finance | 人件費割合、三重県25.5%。東京都は17%。財政支出の4分の1が人件費の県がある。  1位 三重県 25.5％ 2位 … | [🔗](https://x.com/stats47jp373/status/2042747553079513175) |
+| 2026-04-10 | 𝕏 X | ranking/per-capita-welfare-expenditure-pref-municipal | 住民1人あたり民生費、沖縄県37万円。静岡県の1.7倍。  1位 沖縄県 371.4千円 2位 高知県 347.0千円 … | [🔗](https://x.com/stats47jp373/status/2042747476558647374) |
+| 2026-04-10 | 𝕏 X | ranking/maximum-temperature | 2024年最も暑かったのは熊本県。36.2℃。北海道との差は7.8℃。  1位 熊本県 36.2℃ 2位 山口県 35.… | [🔗](https://x.com/stats47jp373/status/2042747162669519152) |
+| 2026-04-10 | 𝕏 X | ranking/divorces-per-total-population | 沖縄の離婚率は富山の2倍。ずっと全国1位。  1位 沖縄県 2.10 2位 宮崎県 1.67 3位 大阪府 1.65  … | [🔗](https://x.com/stats47jp373/status/2042528033429688534) |
 | 2026-03-30 | 𝕏 X | ranking/per-taxpayer-taxable-income | データで見ると、都道府県別の1人当たり課税対象所得（2024年度）は 1位 東京都 542万円 → 47位 秋田県 30… | [🔗](https://x.com/stats47jp373/status/2038584994340487399) |
 | 2026-03-28 | ▶️ YouTube | ranking/ | 都道府県別「泥棒が多い県」ランキング 1位は大阪でも2位は意外すぎる県だった【2023年最新】 | [🔗](https://www.youtube.com/watch?v=gzdSq-COcHM) |
+| 2026-03-25 | 𝕏 X | ranking/minimum-wage-by-region | 最低賃金の都道府県別ランキング、1位の東京（1,163円）と47位の岩手（893円）で時給270円の差。地図で見ると東西… | [🔗](https://x.com/stats47jp373/status/2036728214043955625) |
+| 2026-03-25 | 𝕏 X | ranking/gender-wage-gap | ちなみに男女間の賃金格差を都道府県別で見ると、格差が最も小さいのは愛媛県（女性/男性=89.7%）、最も大きいのは宮城県… | [🔗](https://x.com/stats47jp373/status/2036727050304909532) |
 | 2026-03-25 | ▶️ YouTube | ranking/ | アイス消費ランキング 沖縄46位で山形1位の逆転 #Shorts #アイスクリーム #都道府県ランキング #アイス #S… | [🔗](https://www.youtube.com/watch?v=ukgfKYCHLT0) |
 | 2026-03-25 | ▶️ YouTube | ranking/ | ぎょうざ消費ランキング 1位は宇都宮じゃなかった｜2024年 #Shorts #餃子 #都道府県ランキング #ぎょうざ … | [🔗](https://www.youtube.com/watch?v=GApPs4yHKJs) |
 | 2026-03-25 | ▶️ YouTube | ranking/ | 知事給料ランキング 東京都知事が最下位の理由 #Shorts #知事給料 #都道府県ランキング #公務員給与 #Shor… | [🔗](https://www.youtube.com/watch?v=zy1_p9OpPNc) |
-| 2026-03-25 | 𝕏 X | ranking/gender-wage-gap | ちなみに男女間の賃金格差を都道府県別で見ると、格差が最も小さいのは愛媛県（女性/男性=89.7%）、最も大きいのは宮城県… | — |
 | 2026-03-25 | 𝕏 X | ranking/nurse-salary | 都道府県別の看護師の給与データ。1位は東京都（35.9万円）、47位は鹿児島県（25.3万円）。同じ看護師でも地域で10… | [🔗](https://x.com/stats47jp373/status/2036727635032846571) |
-| 2026-03-25 | 𝕏 X | ranking/minimum-wage-by-region | 最低賃金の都道府県別ランキング、1位の東京（1,163円）と47位の岩手（893円）で時給270円の差。地図で見ると東西… | — |
 | 2026-03-25 | 𝕏 X | ranking/consumer-price-difference-index-overall | これ、データで見ると面白くて。東京は給与が高い分、物価指数も全国1位（104.0）。可処分所得で比べると地方との差はかな… | [🔗](https://x.com/stats47jp373/status/2036728570505232743) |
 | 2026-03-24 | ▶️ YouTube | ranking/ | 外国人人口ランキング 群馬が11位の意外｜都道府県別 #Shorts #外国人人口 #都道府県ランキング #多文化共生 … | [🔗](https://www.youtube.com/watch?v=3hzLSJ_O17k) |
 | 2026-03-24 | ▶️ YouTube | ranking/ | 火災死傷者ランキング TOP5が全て東北｜人口あたり都道府県別 #Shorts #火災 #都道府県ランキング #防災 #… | [🔗](https://www.youtube.com/watch?v=D-l6ZKmduAY) |
@@ -265,10 +258,10 @@
 | 2026-03-20 | ▶️ YouTube | ranking/ | 大阪vs愛知 人口・社会7番勝負 寿命に1年の差がつく #Shorts #都道府県ランキング | [🔗](https://www.youtube.com/watch?v=KhuhIBB4nI8) |
 | 2026-03-19 | ▶️ YouTube | ranking/ | 大阪vs愛知 暮らし7番勝負 月収9万円の差がつく #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=yikEShprAYA) |
 | 2026-03-18 | ▶️ YouTube | ranking/ | 大阪vs愛知 経済力7番勝負 稼ぐ力はどっちが上？ #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=Ak1DAjYbsqA) |
+| 2026-03-17 | 𝕏 X | ranking/retirement-allowance-admin-prefecture | 公務員の退職金、県で1,000万円以上の差がつくって本当。  1位 東京都 約2,483万円 2位 大阪府 約2,419… | [🔗](https://x.com/stats47jp373/status/2033709908336488843) |
 | 2026-03-16 | ▶️ YouTube | ranking/ | 都道府県の一般行政職員（定年退職者）の平均退職手当ランキング（2024年） | [🔗](https://www.youtube.com/watch?v=3NWBwhHh7Ds) |
 | 2026-03-15 | ▶️ YouTube | ranking/ | 1人当たり預金残高ランキング 50年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=utXKp1v1tGU) |
 | 2026-03-15 | ▶️ YouTube | ranking/ | 教員1人当たり児童数ランキング 50年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=6sPMgLOA_yY) |
-| 2026-03-15 | 𝕏 X | ranking/retirement-allowance-admin-prefecture |  | — |
 | 2026-03-15 | 📸 Instagram | ranking/retirement-allowance-admin-prefecture |  | — |
 | 2026-03-15 | ▶️ YouTube | ranking/retirement-allowance-admin-prefecture |  | — |
 | 2026-03-15 | 🎵 TikTok | ranking/retirement-allowance-admin-prefecture |  | — |
@@ -279,16 +272,17 @@
 | 2026-03-14 | 📸 Instagram | ranking/social-increase-rate | 47都道府県中、32県で人口が流出している。 東京に人が集まり続ける日本の現実。  社会増減率とは、転入者数と転出者数の… | [🔗](https://www.instagram.com/stats47jp/reel/DV3NtaGDREa/) |
 | 2026-03-14 | ▶️ YouTube | ranking/social-increase-rate | 32県で人口流出！社会増減率TOP5 #Shorts #都道府県ランキング #お金 #統計データ #都道府県ランキング … | [🔗](https://www.youtube.com/watch?v=jC0ixKJU0zk) |
 | 2026-03-14 | 🎵 TikTok | ranking/social-increase-rate |  | [🔗](https://www.tiktok.com/@stats47jp/video/7616996944866446612) |
+| 2026-03-13 | 𝕏 X | ranking/actual-income-worker-households-per-month | 勤労世帯の月収、東京79.4万vs沖縄49.4万で月30万円の差。  1位 東京都 794.2千円 2位 埼玉県 764… | [🔗](https://x.com/stats47jp373/status/2032577442209251347) |
 | 2026-03-13 | ▶️ YouTube | ranking/ | 【女性労働力比率】最下位は東京じゃない 大阪が47位の理由 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=vkNNHTJEOvg) |
 | 2026-03-13 | ▶️ YouTube | ranking/ | 最高気温ランキング 50年の変遷【都道府県別】猛暑の変化 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=dOmHgWB0Orw) |
-| 2026-03-13 | 𝕏 X | ranking/apple-consumption-expenditure |  | — |
+| 2026-03-13 | 𝕏 X | ranking/avg-savings-rate-worker-households | 貯蓄率1位は福井県（44.7%）。収入の半分近くを貯金してる。  1位 福井県 44.7% 2位 石川県 42.0% 3… | [🔗](https://x.com/stats47jp373/status/2032290562100117713) |
 | 2026-03-13 | 📸 Instagram | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | ▶️ YouTube | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | 🎵 TikTok | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | 📝 note | ranking/apple-consumption-expenditure |  | — |
-| 2026-03-13 | 𝕏 X | ranking/hobby-participation-rate-diy |  | — |
 | 2026-03-13 | 📸 Instagram | ranking/hobby-participation-rate-diy | 【都道府県ランキング】日曜大工の行動者率（2021年）  🏆 1位: 滋賀県 13.6％ 📉 47位: 大分県 9.… | [🔗](https://www.instagram.com/stats47jp/p/DVVt4_KE4vi/) |
 | 2026-03-13 | 📝 note | ranking/hobby-participation-rate-diy |  | — |
+| 2026-03-12 | 𝕏 X | ranking/consumer-price-difference-index-overall | 物価が高い都道府県、3位が北海道って知ってた？  消費者物価地域差指数（2023年） 1位 東京都 104.5 2位 神… | [🔗](https://x.com/stats47jp373/status/2032215058982318334) |
 | 2026-03-11 | ▶️ YouTube | ranking/ | 生活保護受給率ランキング 48年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=HhEW7X9s-O0) |
 | 2026-03-11 | ▶️ YouTube | ranking/ | 人口密度ランキング 49年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=kwSC6cCCG-o) |
 | 2026-03-10 | ▶️ YouTube | ranking/ | 家賃ランキング 49年の変遷｜都道府県別 | [🔗](https://www.youtube.com/watch?v=LSxrK_gFLbI) |
@@ -298,55 +292,42 @@
 | 2026-03-09 | ▶️ YouTube | ranking/ | 合計特殊出生率ランキング 43年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=PgxyBPb8rx4) |
 | 2026-03-09 | ▶️ YouTube | ranking/ | 【まぐろ消費額ランキング】1位静岡県10,654円 47位長崎県1,224円 格差8.7倍 #都道府県ランキング #統計… | [🔗](https://www.youtube.com/watch?v=ov3fA2cJJ_w) |
 | 2026-03-08 | ▶️ YouTube | ranking/ | 1人当たり県民所得 都道府県別ランキング【2020年度】東京と沖縄で2.4倍差 #都道府県ランキング #統計データ #r… | [🔗](https://www.youtube.com/watch?v=oT5Expu918I) |
-| 2026-03-08 | 𝕏 X | bar-chart-race/active-job-opening-ratio |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/active-job-opening-ratio | 📊有効求人倍率ランキング2022！あなたの県は何位？  2022年の有効求人倍率ランキングを発表！1位は福井県で1.9… | [🔗](https://www.instagram.com/stats47jp/reel/DSRToj7jFx0/) |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/active-job-opening-ratio |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/active-job-opening-ratio |  | [🔗](https://www.tiktok.com/@stats47jp/video/7615756480121146645) |
-| 2026-03-08 | 𝕏 X | bar-chart-race/actual-income-worker-households-per-month |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/actual-income-worker-households-per-month |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/actual-income-worker-households-per-month |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/actual-income-worker-households-per-month |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/annual-precipitation |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/annual-precipitation |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/annual-precipitation |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/annual-precipitation |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/annual-sunshine-duration |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/annual-sunshine-duration |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/annual-sunshine-duration |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/annual-sunshine-duration |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/average-temperature |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/average-temperature |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/average-temperature |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/average-temperature |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/avg-savings-rate-worker-households |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/avg-savings-rate-worker-households |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/avg-savings-rate-worker-households |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/avg-savings-rate-worker-households |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/bank-deposit-balance-per-person |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/bank-deposit-balance-per-person |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/bank-deposit-balance-per-person |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/bank-deposit-balance-per-person |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/cultivated-area |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/cultivated-area |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/cultivated-area |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/cultivated-area |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/divorces-per-total-population |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/divorces-per-total-population | 沖縄が47年連続1位。 離婚率の地図は、戦後ずっと同じだった。  都道府県別「離婚率」の48年間（1975〜2022年）… | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/divorces-per-total-population |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/divorces-per-total-population |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/elementary-school-students-per-teacher |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/elementary-school-students-per-teacher |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/elementary-school-students-per-teacher |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/elementary-school-students-per-teacher |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/high-school-advancement-rate |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/high-school-advancement-rate |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/high-school-advancement-rate |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/high-school-advancement-rate |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/household-head-income-worker-households-per-month |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/household-head-income-worker-households-per-month |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/household-head-income-worker-households-per-month | 【世帯主収入】青森5位→45位 50年で変わった収入格差の地図 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=uHUBvmu-vyk) |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/household-head-income-worker-households-per-month |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/labor-force-population-ratio-woman |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/labor-force-population-ratio-woman |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/labor-force-population-ratio-woman |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/labor-force-population-ratio-woman |  | — |
@@ -354,19 +335,15 @@
 | 2026-03-08 | 📸 Instagram | bar-chart-race/maximum-temperature |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/maximum-temperature |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/maximum-temperature |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/moving-in-excess-rate-japanese |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/moving-in-excess-rate-japanese |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/moving-in-excess-rate-japanese | 【転入超過率】47位→1位 東京の大逆転を50年分のデータで見る #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=ZH9Nd9JaTr8) |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/moving-in-excess-rate-japanese |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/owner-occupied-housing-ratio |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/owner-occupied-housing-ratio |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/owner-occupied-housing-ratio | 持ち家比率 都道府県別ランキング【2023年度】東京は半数以上が賃貸 #都道府県ランキング #統計データ #rankin… | [🔗](https://www.youtube.com/watch?v=MTdIGh22a7s) |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/owner-occupied-housing-ratio |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/persons-on-public-assistance-per-1000 |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/persons-on-public-assistance-per-1000 |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/persons-on-public-assistance-per-1000 |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/persons-on-public-assistance-per-1000 |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/population-density-per-km2-total-area |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/population-density-per-km2-total-area |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/population-density-per-km2-total-area |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/population-density-per-km2-total-area |  | — |
@@ -374,7 +351,6 @@
 | 2026-03-08 | 📸 Instagram | bar-chart-race/private-rental-housing-rent-per-3-3m2 |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/private-rental-housing-rent-per-3-3m2 |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/private-rental-housing-rent-per-3-3m2 |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/ratio-65-plus |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/ratio-65-plus |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/ratio-65-plus |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/ratio-65-plus |  | — |
@@ -382,7 +358,6 @@
 | 2026-03-08 | 📸 Instagram | bar-chart-race/suicide-rate-per-100k |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/suicide-rate-per-100k |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/suicide-rate-per-100k |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/total-fertility-rate |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/total-fertility-rate |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/total-fertility-rate |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/total-fertility-rate |  | — |
@@ -390,15 +365,12 @@
 | 2026-03-08 | 📸 Instagram | bar-chart-race/total-population | 大阪府が2位陥落。 50年で人口地図が書き換わった。  都道府県別「総人口」の50年間（1975〜2024年）をバーチャ… | [🔗](https://www.instagram.com/stats47jp/reel/DVqNj_1jTlE/) |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/total-population |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/total-population |  | [🔗](https://www.tiktok.com/@stats47jp/video/7617274817565379861) |
-| 2026-03-08 | 𝕏 X | bar-chart-race/unemployment-rate |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/unemployment-rate |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/unemployment-rate |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/unemployment-rate |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/university-capacity-index |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/university-capacity-index |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/university-capacity-index |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/university-capacity-index |  | — |
-| 2026-03-08 | 𝕏 X | bar-chart-race/vacant-housing-ratio |  | — |
 | 2026-03-08 | 📸 Instagram | bar-chart-race/vacant-housing-ratio |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/vacant-housing-ratio |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/vacant-housing-ratio |  | — |
@@ -417,12 +389,10 @@
 | 2026-03-06 | ▶️ YouTube | ranking/active-job-opening-ratio | 有効求人倍率 都道府県別｜1位は東京じゃなかった【2022年度】 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=1OOUGg54jNQ) |
 | 2026-03-06 | 🎵 TikTok | ranking/active-job-opening-ratio |  | [🔗](https://www.tiktok.com/@stats47jp/video/7614679199470603541) |
 | 2026-03-06 | 📝 note | ranking/active-job-opening-ratio |  | — |
-| 2026-03-06 | 𝕏 X | ranking/actual-income-worker-households-per-month |  | — |
 | 2026-03-06 | 📸 Instagram | ranking/actual-income-worker-households-per-month | 💰勤労者世帯の月収ランキング2023！あなたの地域はいくら？  2023年の勤労者世帯の1ヶ月あたり実収入ランキングを… | [🔗](https://www.instagram.com/reel/DTPcSycDlm-/) |
 | 2026-03-06 | ▶️ YouTube | ranking/actual-income-worker-households-per-month | 勤労世帯の実収入 都道府県別｜東京79万vs沖縄49万【2024年度】 #都道府県ランキング #統計データ #ranki… | [🔗](https://www.youtube.com/watch?v=vmz9RdxSDyQ) |
 | 2026-03-06 | 🎵 TikTok | ranking/actual-income-worker-households-per-month |  | — |
 | 2026-03-06 | 📝 note | ranking/actual-income-worker-households-per-month |  | — |
-| 2026-03-06 | 𝕏 X | ranking/avg-savings-rate-worker-households |  | — |
 | 2026-03-06 | 📸 Instagram | ranking/avg-savings-rate-worker-households | 💰平均貯蓄率ランキング2023！あなたの県は何位？  2023年の勤労者世帯の平均貯蓄率ランキングを発表！1位は福井県… | [🔗](https://www.instagram.com/reel/DTw_bekjf-z/) |
 | 2026-03-06 | ▶️ YouTube | ranking/avg-savings-rate-worker-households | 平均貯蓄率ランキング推移 47都道府県【1975-2024】 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=NH3buCgFcSs) |
 | 2026-03-06 | 🎵 TikTok | ranking/avg-savings-rate-worker-households |  | — |
@@ -432,7 +402,6 @@
 | 2026-03-06 | ▶️ YouTube | ranking/car-ownership-multi-person-households-per-1000 |  | — |
 | 2026-03-06 | 🎵 TikTok | ranking/car-ownership-multi-person-households-per-1000 |  | — |
 | 2026-03-06 | 📝 note | ranking/car-ownership-multi-person-households-per-1000 |  | — |
-| 2026-03-06 | 𝕏 X | ranking/consumer-price-difference-index-overall |  | — |
 | 2026-03-06 | 📸 Instagram | ranking/consumer-price-difference-index-overall | 👗服の値段、地域差ありすぎ！被服・履物物価指数2023  2023年の「被服及び履物」の消費者物価地域差指数ランキング… | [🔗](https://www.instagram.com/reel/DTWyAI3DW5I/) |
 | 2026-03-06 | ▶️ YouTube | ranking/consumer-price-difference-index-overall |  | — |
 | 2026-03-06 | 🎵 TikTok | ranking/consumer-price-difference-index-overall |  | — |
@@ -477,7 +446,6 @@
 | 2026-03-06 | ▶️ YouTube | ranking/owner-occupied-housing-ratio | 持ち家比率ランキング 45年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=GkuaX0OmmIA) |
 | 2026-03-06 | 🎵 TikTok | ranking/owner-occupied-housing-ratio |  | [🔗](https://www.tiktok.com/@stats47jp/video/7614675599440825621) |
 | 2026-03-06 | 📝 note | ranking/owner-occupied-housing-ratio |  | — |
-| 2026-03-06 | 𝕏 X | ranking/per-capita-prefectural-income-h27 |  | — |
 | 2026-03-06 | 📸 Instagram | ranking/per-capita-prefectural-income-h27 |  | — |
 | 2026-03-06 | ▶️ YouTube | ranking/per-capita-prefectural-income-h27 |  | — |
 | 2026-03-06 | 🎵 TikTok | ranking/per-capita-prefectural-income-h27 |  | — |
@@ -531,7 +499,6 @@
 | 2026-03-06 | ▶️ YouTube | ranking/traffic-accident-count-per-population |  | — |
 | 2026-03-06 | 🎵 TikTok | ranking/traffic-accident-count-per-population |  | — |
 | 2026-03-06 | 📝 note | ranking/traffic-accident-count-per-population |  | — |
-| 2026-03-06 | 𝕏 X | ranking/unemployment-rate |  | — |
 | 2026-03-06 | 📸 Instagram | ranking/unemployment-rate |  | — |
 | 2026-03-06 | ▶️ YouTube | ranking/unemployment-rate | 完全失業率 都道府県ランキング【2020年度】東京は30位。仕事があるのは意外な地方だった #都道府県ランキング #統計… | [🔗](https://www.youtube.com/watch?v=G4NLnVFbfxk) |
 | 2026-03-06 | 🎵 TikTok | ranking/unemployment-rate |  | [🔗](https://www.tiktok.com/@stats47jp/video/7612998598891965717) |
