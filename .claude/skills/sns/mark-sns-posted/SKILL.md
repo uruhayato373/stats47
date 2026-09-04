@@ -32,8 +32,8 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --dry-run   # 昇格対象を�
 node .claude/scripts/sns/promote-scheduled-x.cjs --apply     # scheduled→posted (posted_at=予約日)
 ```
 
-- `post_url` は自動取得できないため空のまま。必要なら後から `/mark-sns-posted <key> --url <postUrl>` で補完。
-- 週次運用で定期実行する (予約が実投稿に変わったことを台帳へ反映)。
+- X の実投稿 URL (`post_url`) が確認済みの行だけ昇格する。時刻超過だけの行は `HOLD` として保留する。
+- 週次運用では先に X 側で実投稿 URL を照合・記録し、その後に実行する。
 
 ## 手順
 

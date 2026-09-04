@@ -2,8 +2,8 @@
  * promote-scheduled-x.cjs — 予約時刻を過ぎた X の scheduled 投稿を posted に昇格する
  *
  * publish-x --from-queue は予約成功で status=scheduled にする (X 側が予約時刻に自動投稿)。
- * 予約時刻を過ぎたら台帳上も posted に昇格させる。post_url は自動取得できないため空のまま
- * (後から /mark-sns-posted --url で補完可)。posted_at は予約時刻の JST 日付。
+ * 予約時刻を過ぎ、実投稿 URL が確認済みの行だけ posted に昇格させる。
+ * 時刻経過だけでは X 側の投稿成功を証明できないため、post_url が無い行は保留する。
  *
  * Usage:
  *   node .claude/scripts/sns/promote-scheduled-x.cjs --dry-run
@@ -17,6 +17,10 @@ function jstDate(iso) {
   const d = new Date(iso);
   if (isNaN(d.getTime())) return (iso || "").slice(0, 10);
   return new Date(d.getTime() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+}
+
+function isVerifiedPostUrl(postUrl) {
+  return /^https:\/\/(x\.com|twitter\.com)\//.test(postUrl || "");
 }
 
 function main() {
@@ -33,16 +37,28 @@ function main() {
         Date.parse(p.scheduled_at) <= now,
     );
 
-  for (const p of due) {
+  const verified = due.filter((p) => isVerifiedPostUrl(p.post_url));
+  const unverified = due.filter((p) => !verified.includes(p));
+
+  for (const p of verified) {
     console.log(`  id=${p.id}  ${p.content_key} [${p.template}]  ${p.scheduled_at} → posted`);
     if (apply) {
-      store.updateById(p.id, { status: "posted", posted_at: jstDate(p.scheduled_at) });
+      store.updateById(p.id, {
+        status: "posted",
+        posted_at: jstDate(p.scheduled_at),
+      });
     }
   }
+  for (const p of unverified) {
+    console.log(`  HOLD id=${p.id}  ${p.content_key}  ${p.scheduled_at} (post_url 未確認)`);
+  }
   console.log(
-    `\n[promote-scheduled-x] ${apply ? "昇格" : "dry-run"}: ${due.length} 件` +
+    `\n[promote-scheduled-x] ${apply ? "昇格" : "dry-run"}: ${verified.length} 件` +
+      ` / 保留 ${unverified.length} 件` +
       (apply ? "" : " (--apply で反映)"),
   );
 }
 
-main();
+module.exports = { isVerifiedPostUrl };
+
+if (require.main === module) main();
