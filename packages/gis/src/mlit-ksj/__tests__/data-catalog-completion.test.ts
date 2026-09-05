@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   isAcquisitionComplete,
+  isRequiredPublicAcquisitionMissing,
   publicMirrorPolicyErrors,
   type R2Inventory,
 } from '../scripts/build-data-catalog';
@@ -40,6 +41,13 @@ describe('isAcquisitionComplete', () => {
 });
 
 describe('publicMirrorPolicyErrors', () => {
+  it('公開禁止データの撤去を再取得要求にせず、公開可データの不足は検出する', () => {
+    const empty = { registered: true, dataId: 'W01', r2: inventory(0, 0) };
+    expect(isRequiredPublicAcquisitionMissing({ ...empty, publicationPolicy: 'local-only' })).toBe(false);
+    expect(isRequiredPublicAcquisitionMissing({ ...empty, publicationPolicy: 'review-required' })).toBe(false);
+    expect(isRequiredPublicAcquisitionMissing({ ...empty, dataId: 'N02', publicationPolicy: 'public-r2-eligible' })).toBe(true);
+  });
+
   it('fails when a local-only dataset exists in public R2', () => {
     expect(
       publicMirrorPolicyErrors([

@@ -32,6 +32,8 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --dry-run
 ```
 
 `diff-push-r2.ts`はJSON snapshot・記事等の通常staging用。生成画像には使わない。
+KSJ原典とKSJ由来の観測値は、diff/exact/wranglerの全候補を`lib/ksj-publication-guard.ts`で
+公開ライセンス検査してから書き込む。禁止データが1件でも混在すればバッチ全体をPUT前に停止する。
 
 ### 生成画像（exact plan → R2）
 
