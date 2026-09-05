@@ -1,0 +1,7 @@
+{
+  "kind": "scatter",
+  "xKey": "per-capita-prefectural-income-h27",
+  "yKey": "engel-coefficient",
+  "year": "2021",
+  "transform": "R2 app/ranking/<key>/values.json の2021年partitionから都道府県コードで結合。47都道府県全件、除外なし"
+}
