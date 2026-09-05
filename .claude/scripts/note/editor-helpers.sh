@@ -52,20 +52,16 @@ ins_file(){
   if [ ! -f "$FILE" ]; then echo "  [FAIL] attachment missing: $FILE"; return 1; fi
   local BYTES=$(stat -f%z "$FILE" 2>/dev/null || stat -c%s "$FILE" 2>/dev/null)
   if [ "${BYTES:-0}" -gt 52428800 ]; then echo "  [FAIL] attachment exceeds note 50MB: $FILE"; return 1; fi
-  local ESC=$(printf '%s' "$H" | sed "s/'/%27/g")
-  local R=$(BU eval "(function(){const e=document.querySelector('[contenteditable=true]');if(!e)return 'no-editor';const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let t,hit=null;const target=decodeURIComponent('$ESC');while((t=w.nextNode())){if(t.textContent&&t.textContent.trim().startsWith(target)){hit=t;break;}}if(!hit)return 'not-found';(hit.parentElement||e).scrollIntoView({block:'center'});return 'scrolled';})();" 2>&1 | grep -oiE "scrolled|not-found|no-editor" | head -1)
-  if [ "$R" != "scrolled" ]; then echo "  [FAIL] attachment anchor scroll failed ($R): $H"; return 1; fi
-  sleep 1.2
-  BU state 2>&1 > /tmp/ns.txt
-  local ANCHOR=$(awk -v h="$H" '
-    index($0,h){found=1; next}
-    found && /\[[0-9]+\]<p id=/ {match($0,/\[[0-9]+\]/); print substr($0,RSTART+1,RLENGTH-2); exit}
-    ' /tmp/ns.txt)
-  if [ -z "$ANCHOR" ]; then echo "  [FAIL] attachment paragraph not found after: $H"; return 1; fi
-  BU click "$ANCHOR" >/dev/null 2>&1; sleep 0.4
-  BU keys Home >/dev/null 2>&1; sleep 0.3
-  BU keys Enter >/dev/null 2>&1; sleep 0.4
-  BU keys ArrowUp >/dev/null 2>&1; sleep 0.5
+  local NAME HELPER JS R
+  NAME=$(basename "$FILE")
+  HELPER="$(dirname "${BASH_SOURCE[0]}")/attachment-dom.cjs"
+  # argv→JSONでJSを生成する。見出し/ファイル名をshellやJSの文字列へ直書きしない。
+  JS=$(node "$HELPER" prepare "$H" "$NAME") || return 1
+  R=$(BU eval "$JS" 2>&1) || { echo "  [FAIL] attachment anchor eval failed"; return 1; }
+  echo "$R" | grep -q 'note-attachment-prepared' || { echo "  [FAIL] attachment anchor invalid: $R"; return 1; }
+  # DOM Rangeは段落先頭を選ぶ。画面上の折り返し位置には依存しない。
+  BU keys Enter >/dev/null 2>&1 || return 1; sleep 0.4
+  BU keys ArrowUp >/dev/null 2>&1 || return 1; sleep 0.5
   BU state 2>&1 > /tmp/ns.txt
   local MENU=$(grep -oE "\[[0-9]+\]<button aria-label=メニューを開く" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
   [ -n "$MENU" ] || { echo "  [FAIL] attachment menu not found"; return 1; }
@@ -79,9 +75,9 @@ ins_file(){
   [ -n "$UP" ] || { echo "  [FAIL] file upload input not found"; return 1; }
   BU upload "$UP" "$FILE" >/dev/null 2>&1 || { echo "  [FAIL] attachment upload command failed"; return 1; }
   sleep 5
-  BU state 2>&1 > /tmp/ns.txt
-  local NAME=$(basename "$FILE")
-  if ! grep -qF "$NAME" /tmp/ns.txt; then echo "  [FAIL] uploaded attachment not visible: $NAME"; return 1; fi
+  JS=$(node "$HELPER" verify "$H" "$NAME") || return 1
+  R=$(BU eval "$JS" 2>&1) || { echo "  [FAIL] attachment verification eval failed"; return 1; }
+  echo "$R" | grep -q 'note-attachment-verified' || { echo "  [FAIL] attachment placement invalid: $R"; return 1; }
   echo "  [OK] $H <- $NAME (${BYTES} bytes)"
 }
 

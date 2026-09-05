@@ -21,8 +21,6 @@ import {
   type SpatialView,
 } from '../lib/geo-spatial-evidence';
 
-import { GeoLeafletLifecycle } from './GeoLeafletLifecycle';
-
 import type { GeoAnalysisPrefDetail } from '@stats47/gis';
 import type { LatLngBoundsExpression } from 'leaflet';
 
@@ -103,13 +101,14 @@ export function GeoSpatialLeafletMap({
         preferCanvas
         center={[36, 138]}
         zoom={6}
+        // Tabs can unmount the map immediately after zoom; do not leave a zoom-end timer.
+        zoomAnimation={false}
         minZoom={GEO_BASEMAP.minZoom}
         maxZoom={GEO_BASEMAP.maxZoom}
         scrollWheelZoom={false}
         className="h-[480px] rounded-none lg:h-[620px]"
         aria-label={`${detail.areaName}の地点・1kmメッシュ地図`}
       >
-        <GeoLeafletLifecycle />
         <TileLayer
           url={GEO_BASEMAP.url}
           attribution={GEO_BASEMAP.attribution}
