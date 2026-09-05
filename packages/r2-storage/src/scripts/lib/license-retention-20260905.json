@@ -644,5 +644,18 @@
     "objects": [
       {"key":"app/ranking/port-count/values-per-household.json","bytes":9100,"etag":"\"14750f785c0d84efc231b1afb4d969d3\""}
     ]
+  },
+  {
+    "id": "license-remediation-obsolete-roadside-assets-20260906",
+    "prefixes": [
+      "app/blog/roadside-station-count-prefecture-gap/article.prompt.txt",
+      "app/blog/roadside-station-count-vs-forest-road-length/article.prompt.txt",
+      "app/blog/roadside-station-prefecture-gap/data/values.json"
+    ],
+    "objects": [
+      {"key":"app/blog/roadside-station-count-prefecture-gap/article.prompt.txt","bytes":5372,"etag":"\"d71a1072a81d5bd409a179b14165b2e6\""},
+      {"key":"app/blog/roadside-station-count-vs-forest-road-length/article.prompt.txt","bytes":7015,"etag":"\"56cd6e0a157e3af63794bdddcfb08301\""},
+      {"key":"app/blog/roadside-station-prefecture-gap/data/values.json","bytes":8665,"etag":"\"22e74aacb4c157a07b6c0e4adf092282\""}
+    ]
   }
 ]
