@@ -13,3 +13,6 @@ date,run_id,model,targets,passed,rejected,failed,skipped,author_requests,critic_
 2026-09-05,local-20260905-110500,claude-sonnet-5,1,0,0,1,0,2,1,15132,13286,0,28418,0,0,not-recorded,0.4581
 2026-09-05,local-20260905-111304,claude-sonnet-5,1,0,1,0,0,3,3,70545,24235,0,94780,0,0,not-recorded,1.0215
 2026-09-05,local-20260905-111959,claude-sonnet-5,1,1,0,0,0,1,1,18916,8413,0,27329,0,0,not-recorded,0.3487
+2026-09-05,pilot1-haiku,claude-haiku-4-5-20251001,10,0,9,1,0,30,11,421342,264177,0,685519,0,0,not-recorded,3.3462
+2026-09-05,pilot1-sonnet,claude-sonnet-5,9,4,5,0,0,26,24,608385,227580,0,835965,0,0,not-recorded,9.3234
+2026-09-05,verify1-sonnet,claude-sonnet-5,6,6,0,0,0,8,8,185912,73009,0,258921,0,0,not-recorded,3.0357

@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-09-05T00:07:58.266Z
+- 生成: 2026-09-05T02:23:04.759Z
 - GSC snapshot: 2026-W35 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 171 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
@@ -63,5 +63,6 @@
 | 6 | unmarried-ratio-female-45-49 | incomplete | 🟠手動是正候補 | paren-number,paren-number,missing-pref-commentary |
 
 > 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、
-> 既定 3件を outbox 経由で R2 へ公開する。Claude は定期経路で使わない。
+> 既定 3件を outbox 経由で R2 へ公開する。在庫の量産はローカルの headless claude CLI
+> (`run-claude-batch.sh`・同じ監査/critic) で人が量を決めて回す。Agent tool 経路の Claude は例外是正のみ。
 > 🟠手動是正候補は GSC 流入上位30件。自動失敗が続いた場合だけ agent で是正する。
