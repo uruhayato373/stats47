@@ -49,49 +49,25 @@
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "rabies-vaccination-dogs": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
     "total-area-including-northern-territories-and-takeshima": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
     "treatment-rate-diabetes-inpatient": {
+      "failCount": 2,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "education-expense-municipal": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "treatment-rate-musculoskeletal-outpatient": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "treatment-rate-neurosis-inpatient": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "usage-fees-prefecture": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "vet-fee-consumption-expenditure": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "bus-fare-consumption-expenditure": {
+    "enoki-consumption-expenditure": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
