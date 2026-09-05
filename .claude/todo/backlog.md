@@ -415,9 +415,24 @@ updated: 2026-08-30
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: ranking-content-author
-- **次**: 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
-  `ai-content-gemini-daily.yml` を初回実走する。既定 3 件/日・並列 1 を維持し、7 run 以上の
-  通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない。
+- **次**:
+  1. **オーナー**: 端末で `claude login` を一度やり直す (CLI の OAuth token が 401 revoked・2026-09-05 実測)。
+     その後 `cd ~/stats47-ai-content-lean && bash .claude/scripts/ai-content/run-claude-batch.sh --keys library-count-per-million --no-push`
+     で pilot 0 (1 件)。summary の 1 request あたり input が 7-8K 台なら rules 非混入・OK。40K 超なら cwd / `--setting-sources` を疑う
+  2. pilot 1: `--limit 10 --model claude-haiku --retries 2` と `--limit 10 --model claude-sonnet --retries 2` を各 1 回。
+     一次通過率 ≥80% の最安を author に採用。数値を `ranking-content-standards.md` §2026-09-05 と `monthly.md` に書く
+  3. 以後 `--limit 35` を develop で回す (1 push = 1 commit)。manual-escalation 30 件 + quarantine だけ Opus Agent tool
+  4. (並走・別件) 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
+     `ai-content-gemini-daily.yml` を復旧する。既定 3 件/日・並列 1 を維持し、7 run 以上の
+     通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない
+- **2026-09-05 checkpoint**: Gemini 日次 CI は 08-30 から `preflight_status=billing` で 8 run 連続 PASS 0 (鍵の
+  前払いクレジット枯渇。モデル品質ではない)。残 1,445 件 (done 718 / active 2,163) を Claude で消化するため、
+  Agent tool 経路 (1 件 $16-18) ではなく **headless `claude -p` 経路**を整備した:
+  `generate-parallel.ts` の `--model claude-*` を lean 化 (repo 外 cwd・`--tools ""`・`--setting-sources local`・独自
+  system prompt・`--output-format json` で usage/cost 取得・alias allowlist)、`--critic claude-*` 新設、
+  `run-claude-batch.sh` (preflight → キュー → 生成 → 監査 → critic → history.csv/quarantine → 1 commit → push →
+  publish run 待ち)、`history.csv` に `cost_usd` 列。dry-run・型・vitest 50・node test 54 は green。
+  **実 LLM 呼び出しは未実施** (CLI 未ログインのため)。正典 `ranking-content-standards.md` §2026-09-05。
 - **2026-08-30 checkpoint**: 高コストだった Claude Code/OAuth の自動量産を復活させず、
   `gemini-2.5-flash-lite` の structured author → 決定的監査 → 別リクエスト critic → 最大1回再生成 →
   PASS分だけ outbox/publish という日次 CI を実装した。対象あり生成0件、Secret欠損、preflight、

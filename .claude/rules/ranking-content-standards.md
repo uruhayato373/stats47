@@ -253,8 +253,38 @@ billing が OFF かどうかを応答から事前証明できない。コード�
 Secret 発行元の課金無効を人間が保証する。無料 tier の入出力は Google のサービス改善に
 使われ得るため、秘密・個人情報を prompt に入れない。ranking 公開観測値と公開用解説だけを扱う。
 
-Claude Code/OAuth を使う日次 CI は復活させない。Claude は Gemini 自動経路で 3 回
-quarantine に入った高流入 key など、例外的な手動是正にだけ使う。
+Claude Code/OAuth を使う日次 CI は復活させない。**Agent tool 経路** (`ranking-content-author` /
+`ranking-content-critic` を Agent tool で起動する) の Claude は、Gemini 自動経路で 3 回 quarantine に
+入った高流入 key など、例外的な手動是正にだけ使う。**headless `claude -p` 経路**によるローカル量産は
+次節のとおり別扱いにする (2026-09-05)。
+
+### ★2026-09-05: ローカル量産は headless `claude -p` 経路 (Agent tool は使わない)
+
+Gemini 日次 CI は 2026-08-30 から鍵の前払いクレジット枯渇 (`preflight_status=billing`) で 8 run 連続
+PASS 0 のまま止まり、残 1,445 件 (2026-09-04 キュー) の在庫を消化する経路が無かった。
+「Opus / Sonnet に分業して Agent tool で回す」は解にならない — Agent tool 経路は **1 件 $16-18**
+(`claude-usage/history.csv`: 10 件で $120.89、5 件で $79-90) で、原因はサブエージェントが
+CLAUDE.md+rules ≈150K トークンを毎ターン読みながら 46-144 ターン回ることにある。モデルを変えても
+1 桁しか変わらない。
+
+解は **Agent tool を使わないこと**。`generate-parallel.ts --model claude-sonnet --critic claude-sonnet` は
+headless `claude -p` を子プロセスで呼ぶ。prompt は約 5,000 字 (dry-run 実測)、rules 読込なし、
+ツールループなし。実装上の約束:
+
+| 項目 | 内容 |
+|---|---|
+| 入口 | `bash .claude/scripts/ai-content/run-claude-batch.sh` (**ユーザー端末で実行**。Claude Code セッション内は Keychain を読めず「Not logged in」になる・実測 2026-09-05) |
+| lean 化 | cwd を repo 外に固定 (CLAUDE.md / `.claude/rules` / project hooks / `.mcp.json` を読ませない)、`--tools ""`、`--strict-mcp-config`、`--no-session-persistence`、`--setting-sources local` (user hook `sync-memory.sh` を毎 call 走らせない・実測で抑止確認)、独自 `--system-prompt`。`--bare` は OAuth 不可なので使わない |
+| model alias | `claude-haiku` / `claude-sonnet` / `claude-opus` の allowlist のみ (`claude-cli-output.ts`)。typo が黙って haiku に倒れない |
+| 品質ゲート | Gemini 経路と同一: `audit-ai-content.mjs` (機械フロア) → 別プロセスの Claude critic (`buildGeminiCriticPrompt` / `parseGeminiCriticVerdict` を transport 非依存で流用) → REVISE は 1 回再生成。**ゲートは緩めない** |
+| 公開 | outbox → **1 push = 1 commit ≤ 35 件** → develop → `publish-ai-content.yml` (人間 / セッションの push は発火する)。公開確認は R2 の内容一致で行う |
+| 記録 | `--output-format json` の usage / `total_cost_usd` を `history.csv` (`cost_usd` 列・末尾追加) と report に残す。inputTokens は cache を含む合算 = **1 request で 40K を超えたら rules が漏れ込んでいる**合図 |
+| quarantine | `failed` に載せるのは `status=rejected` (ゲート / critic 落ち) のみ。skip や CLI 障害・429 を数えると 3 run で大量 quarantine になる |
+| 分業 | author / critic = Sonnet 5 (Haiku 4.5 とパイロット比較で安い方)。**Opus 5 は manual-escalation 30 件 + quarantine のみ** Agent tool 経由。量産に Opus を使わない |
+| 不変 | Claude を CI cron で無人実行しない。量と時期は人が決める (月次 / 週次計画) |
+
+1 件あたりのトークン実測はパイロット後に `history.csv` の Claude run 行 (model 列 = 実 ID) で読む。
+数字を先に書かない。
 
 #### 履歴: 2026-08-21 に Claude 日次 CI を廃止した理由
 
