@@ -65,6 +65,26 @@ beforeEach(() => {
 });
 
 describe('readBlogIndexPageFromR2', () => {
+  it.each([
+    'airport-count-vs-wind-power-plant-count-facility',
+    'dam-count-prefecture-gap',
+    'dam-count-vs-road-expressway-length',
+  ])('旧索引の終了記事 %s を一覧・タグ・調査・詳細の全導線から除く', async (slug) => {
+    loadSnapshot.mockResolvedValue({
+      ...SNAPSHOT,
+      articles: [...SNAPSHOT.articles, article(slug, '2026-09-06', true, ['mlit-ksj'])],
+      tagMeta: [{ tagKey: 'population', articleCount: 6 }],
+      surveyArticleIndex: { 'mlit-ksj': [slug] },
+    });
+    const reader = await importReader();
+    expect((await reader.readBlogIndexPageFromR2(10, 0)).articles.map((a) => a.slug)).not.toContain(slug);
+    expect((await reader.readArticlesByTagKeyFromR2('population')).map((a) => a.slug)).not.toContain(slug);
+    expect(await reader.readArticleSummariesBySurveyIdFromR2('mlit-ksj')).toEqual([]);
+    expect(await reader.readArticleBySlugFromR2(slug)).toBeNull();
+    expect(await reader.readArticleTitlesBySlugsFromR2([slug, 'a1'])).toEqual({ a1: 'a1 のタイトル' });
+    expect(await reader.readAllTagsWithCountFromR2()).toEqual([{ tag: 'population', tagKey: 'population', count: 5 }]);
+  });
+
   it('1 リクエストにつき snapshot を 1 回だけ読む', async () => {
     const { readBlogIndexPageFromR2 } = await importReader();
 
