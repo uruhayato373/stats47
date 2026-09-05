@@ -276,6 +276,13 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
     // 家計調査は県庁所在市の値を都道府県へ写す (page-data-batch の remapKakeiAreas)。
     // 単発クエリの生値とは違うので必ずレシピに残す。
     ops.areaRemap = "kakei-capital-city";
+    // filter.axisSum (品目合算) は estat と同じ経路で fetch されるので同じ正準形で残す
+    const axisSum = (s.filter as { axisSum?: unknown } | undefined)?.axisSum;
+    if (isRecord(axisSum)) {
+      const axis = parseAxis(axisSum.axis);
+      const codes = parseCodeList(axisSum.codes);
+      if (axis && codes.length > 0) ops.axisSum = { axis, codes: [...codes].sort() };
+    }
   }
 
   // 計算型 (fetcherKey:"calculated") — 分子・分母から作る値。

@@ -2,12 +2,15 @@ import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
 import { REAL_INCOME_CATALOG } from "../theme-catalog/real-income";
+import { METRICS_REGISTRY } from "../registry";
 
 describe("real-income evidence topics", () => {
   it("registers the two verified household-income questions", () => {
     expect(REAL_INCOME_CATALOG.evidenceTopics?.map(({ key, lensKey }) => ({ key, lensKey }))).toEqual([
       { key: "worker-household-income-flow", lensKey: "outcomes" },
       { key: "price-and-rent-adjusted-purchasing-power", lensKey: "equity" },
+      // エンゲル係数の読み方 (高い=貧しい とは限らない)。2026-09-05 追加
+      { key: "engel-coefficient-reading", lensKey: "composition" },
     ]);
   });
 
@@ -16,7 +19,9 @@ describe("real-income evidence topics", () => {
     const chartKeys = new Set(REAL_INCOME_CATALOG.charts.map(({ componentKey }) => componentKey));
 
     for (const topic of REAL_INCOME_CATALOG.evidenceTopics ?? []) {
-      for (const rankingKey of topic.relatedRankingKeys ?? []) expect(rankingKeys.has(rankingKey)).toBe(true);
+      // 同一テーマの指標か、他テーマの active な ranking (エンゲル係数 × 県民所得 の横断は theme-catalog-standards §4.6 の範囲内)
+      for (const rankingKey of topic.relatedRankingKeys ?? [])
+        expect(rankingKeys.has(rankingKey) || METRICS_REGISTRY[rankingKey]?.isActive === true).toBe(true);
       for (const chartKey of topic.relatedChartKeys ?? []) expect(chartKeys.has(chartKey)).toBe(true);
       for (const sourceKey of topic.sourceKeys) {
         const source = EVIDENCE_SOURCE_CATALOG[sourceKey];

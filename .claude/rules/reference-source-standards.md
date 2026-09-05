@@ -80,6 +80,31 @@ $TMPDIR/stats47-source-vault/
 8. 作業後は`npm run source-vault:process -- cleanup --profile <profile>`で`download/`、`work/`、`derived/`を削除し、
    `npm run source-vault:check`でrepo内に資料が残っていないことを確認する。
 
+### 処理段階 (stage) と bundle 構成の契約
+
+PDF → ページ画像 → 文字起こし → 図クロップ → 台帳 → 展開は、次の段階に固定する。段階ごとの成果物は
+bundle 内の規約 directory に置き、段階が進むたびに新しい不変 revision `r<N>` を作る (既存 revision の差し替え禁止)。
+
+| stage | 成果物 (bundle 内) | 作り手 | gate |
+|---|---|---|---|
+| S0 保全 | 原本 PDF | 人 (Drive へ配置) + `source-vault create` | manifest hash・`shared:false` |
+| S1 ページ画像 | `pages/pNNNN.{png\|jpg}` (1ページ1枚) + `page-dims.json` | CLI `extract` (profile の `processing.pageImage` を適用) | ページ数 = PDF ページ数。UI 枠などの本文領域外は `contentCrop` で除き、座標は `page-dims.json` に記録する |
+| S2 文字起こし | `transcripts/pNNNN.txt` (生 OCR / text layer) + `md/pNNNN.md` (Markdown 文字起こし) | txt = CLI `extract`、md = agent が `pages/` 画像と txt を読んで書く | `md-check --check`: 全ページに md があり frontmatter (`page` / `kind` / `figures`) が規約どおり |
+| S3 図クロップ | `figures/<crop-id>.png` + `crop-manifest.json` | CLI `crop` (spec は agent が書く) | crop spec の internal-only 宣言。md の `figures[]` は実在 crop id だけ |
+| S4 台帳 | `.claude/state/source-inventory/<sourceKey>/<edition>/inventory.json` | CLI `source-inventory build` (authored mapping は git TS) | coverage 100%・本文/書籍値/ローカル path を含まない |
+| S5 展開 | 既存 SSOT (metric / theme / area / content) | 利用実装仕様書が定める owner | 各 SSOT の既存 gate |
+
+- **CLI が担うのは決定的な処理** (render、OCR、crop、parity、frontmatter 検査、bundle 化)。**agent が担うのは意味の作業**
+  (Markdown 文字起こし、図の意味付け、crop spec の起票、mapping)。両者を混ぜない。
+- `md/pNNNN.md` の frontmatter は `page: <int>` / `kind: text|figure|table|mixed|blank` / `figures: [<crop-id>, ...]` を持つ。
+  本文は縦書き・段組を読み順に直した Markdown で、図表ページは本文の代わりに図表の要点と `figures[]` を書く。
+  `blank` 以外は本文必須、`figure` / `table` は `figures[]` 必須。
+- 段階の到達状況は `npm run source-vault:process -- stage-status` で manifest の `componentCounts` から読む。
+  bundle にどの段階まで入っているかを人の記憶や Drive の目視で判断しない。
+- `stage --revision <N>` は derived workspace の成果物を規約名で source root へ配置するだけで、bundle 化は
+  `source-vault create` が行う。revision を上げずに既存 bundle へ足すことはできない。
+- ページ画像・文字起こし・図クロップは bundle の内部構成物であり、Git・公開 R2・記事・SNS へは出さない。
+
 ## 4. 利用実装仕様書の必須条件
 
 Drive への保全だけでは stats47 への採用を意味しない。OCR、inventory、指標、Theme、記事、SNS などへ展開する前に、
@@ -139,7 +164,8 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 文書配置: `.claude/rules/docs-vs-issues.md`
 - source vault 設定: `.claude/config/source-vault.json`
 - source vault CLI: `.claude/scripts/source-vault/source-vault.mjs`
-- OCR / page / crop CLI: `.claude/scripts/source-vault/source-processing.mjs`
+- OCR / page / crop / stage CLI: `.claude/scripts/source-vault/source-processing.mjs`
+- 段階運用 skill: `.claude/skills/db/process-reference-source/SKILL.md` (`/process-reference-source`、owner `open-data-curator`)
 - evidence inventory CLI: `.claude/scripts/source-vault/source-inventory.mjs`
 - 実装例: `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md`
 - その他3資料の実装契約: `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md`

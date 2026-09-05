@@ -70,6 +70,10 @@ const OFFICIAL_SOURCES = [
 ];
 const PRIVATE_SOURCE_PATTERN =
   /協会|連合会|研究所|新聞|通信社|株式会社|有限会社|財団|記念会|民間|推計社/;
+const KAKEI_MARKETING_ANALYSES_PATH = path.join(
+  PROJECT_ROOT,
+  'packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json'
+);
 const ANTHROPIC_SKILLS_DOCS =
   'https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview';
 const GUIDE_ADOPTIONS = new Map([
@@ -482,6 +486,33 @@ async function buildJapanZue(context) {
   };
 }
 
+async function kakeiMarketingAnalyses() {
+  const { analyses } = await readJson(KAKEI_MARKETING_ANALYSES_PATH);
+  if (!Array.isArray(analyses) || analyses.length === 0) {
+    throw new Error(`No authored analyses: ${KAKEI_MARKETING_ANALYSES_PATH}`);
+  }
+  const ids = new Set();
+  for (const analysis of analyses) {
+    if (ids.has(analysis.id)) throw new Error(`Duplicate analysis id ${analysis.id}`);
+    ids.add(analysis.id);
+    const [from, to] = analysis.pages ?? [];
+    if (!Number.isInteger(from) || !Number.isInteger(to) || from < 1 || to < from) {
+      throw new Error(`Invalid page range for ${analysis.id}`);
+    }
+    if (!RESOLUTIONS.has(analysis.resolution)) {
+      throw new Error(`Invalid resolution for ${analysis.id}: ${analysis.resolution}`);
+    }
+    for (const other of analyses) {
+      if (other === analysis) continue;
+      const [f2, t2] = other.pages;
+      if (from <= t2 && f2 <= to) {
+        throw new Error(`Overlapping page ranges: ${analysis.id} / ${other.id}`);
+      }
+    }
+  }
+  return analyses;
+}
+
 async function editorialSources() {
   const root = path.join(PROJECT_ROOT, 'packages/data-configs/src/area-databook/editorial');
   return Object.fromEntries(await Promise.all(PREFECTURES.map(async ([code]) => {
@@ -528,6 +559,9 @@ async function buildPageSource(context) {
   const editorial = context.profile.sourceKey === 'prefecture-databook'
     ? await editorialSources()
     : null;
+  const kakeiAnalyses = context.profile.sourceKey === 'kakei-marketing'
+    ? await kakeiMarketingAnalyses()
+    : [];
   const seenPageImages = new Set();
   const items = pages.map(({ document, page, text }) => {
     const id = `${context.profile.sourceKey}-${context.profile.edition}-${document.id}-p${String(page.page).padStart(4, '0')}`;
@@ -583,6 +617,36 @@ async function buildPageSource(context) {
           geoScopes: [],
           contentRoles: ['agent', 'skill', 'internal-documentation'],
           internalFiles: adoption[1],
+        },
+        processing,
+      };
+    }
+
+    if (context.profile.sourceKey === 'kakei-marketing') {
+      const analysis = kakeiAnalyses.find(
+        (entry) => page.page >= entry.pages[0] && page.page <= entry.pages[1]
+      );
+      if (!analysis) {
+        return {
+          id, source,
+          topicHint: `non-analysis page ${document.id} p.${page.page}`,
+          resolution: 'not-applicable',
+          reason: '表紙・目次・Kindle操作画面等で、分析・論点に属さないページ',
+          processing,
+        };
+      }
+      return {
+        id, source,
+        topicHint: analysis.id,
+        resolution: analysis.resolution,
+        reason: analysis.resolutionReason,
+        ...(analysis.primarySources?.[0] ? { primarySource: analysis.primarySources[0] } : {}),
+        mapping: {
+          metricKeys: analysis.metricKeys ?? [],
+          surveyIds: analysis.surveyIds ?? [],
+          themeSlugs: analysis.themeSlugs ?? [],
+          geoScopes: analysis.geoScopes ?? [],
+          contentRoles: analysis.contentRoles ?? [],
         },
         processing,
       };

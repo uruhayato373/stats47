@@ -473,7 +473,29 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "relatedThemeKeys": [
         "aging-society"
       ]
-    }
+    },
+    {
+      key: "fish-consumption-east-west",
+      lensKey: "composition",
+      title: "生鮮魚介の好みは産地ではなく消費地で分かれる",
+      question:
+        "家庭で買う生鮮魚介の支出額を品目別に並べると、県庁所在市はどのような地域のまとまりに分かれるか",
+      summary:
+        "漁獲量が多い産地と、家庭でよく買う消費地は一致しない。太平洋側・東日本はまぐろ・さけ・さんま、日本海側・西日本はぶり・さば・かれい・たい・あじの支出が相対的に大きい。値は県庁所在市の二人以上世帯で、外食は含まない。",
+      sourceKeys: ["stat-family-income-expenditure-survey-2024"],
+      relatedRankingKeys: [
+        "tuna-consumption-expenditure",
+        "yellowtail-consumption-expenditure",
+        "saury-consumption-expenditure",
+        "bonito-consumption-expenditure",
+        "oyster-consumption-expenditure",
+        "mackerel-consumption-expenditure",
+        "fishery-species-catch-tuna",
+        "fishery-species-catch-yellowtail",
+      ],
+      relatedChartKeys: ["theme-fishery-species-share"],
+      relatedThemeKeys: ["tourism", "local-economy"],
+    },
   ],
   "keywords": [
     "漁業",

@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-30
+updated: 2026-09-05
 ---
 
 # バックログ (タスクマスタ)
@@ -589,7 +589,7 @@ updated: 2026-08-30
 - **完了条件**: GA4 の `link_position=rakuten-sidebar` が家計調査ページで取れ、CTR が
   native 枠と比較できる。
 
-### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する
+### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する（家計調査書籍は KAKEI-MARKETING-CONTENT-01）
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:ready] [起票:2026-08-29]
 
@@ -603,6 +603,36 @@ updated: 2026-08-30
   確定し、書籍値の直接投入、原文・元図・内部cropの公開が0である。
 - **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
   `rights-hold`または`primary-source-unavailable`で停止する。remote R2、git push、PR、deploy、外部公開は別途承認。
+
+### [KAKEI-MARKETING-CONTENT-01] 『マーケティングに使える「家計調査」』の分析・論点80件をstats47へ段階展開する
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:inventory:check] [起票:2026-09-05]
+
+- **owner**: 台帳は`open-data-curator`、new-metricは`data-ingester`（実在検証は`estat-researcher`）、evidenceTopicsは`theme-designer`、記事は`article-writer`→`blog-critic`。
+- **現状証拠**: profile `kakei-marketing-2015`（Drive `参考文献/マーケティングに使える家計調査/2015年版`、bundle r3 = PDF + ページ画像307 + 生OCR307 + Markdown文字起こし307 + 図表crop113、`stage-status` で S0〜S4 到達）を全307ページOCR（jpn_vert）し、
+  `packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json` に分析・論点33件＋県庁所在市47件を authored、
+  `.claude/state/source-inventory/kakei-marketing/2015/` は coverage 100%（combined-analysis 259 / new-metric 13 / reuse 3 / context-only 27 / not-applicable 5）。
+  wave 0 として education-culture・real-income・fishery-marine に evidenceTopics を各1件追加済み（`validate:catalog` green）。契約は
+  `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md` §4.4。
+- **次（実行順）**:
+  1. new-metric 2件（config 済・2026-09-05）: `academic-achievement-test-average-rate`（NIER 2025年度・manual・provenance 9点、
+     `packages/data-configs/scripts/ingest-nier-achievement.ts --year 25` が `.local/r2/app/stats/` へ書き込み済み）と
+     `information-communication-expenditure`（kakei-chousa `filter.axisSum` で5品目合算・dry-run 47県OK）→ `information-communication-coefficient`
+     （calculated ratio ÷ 消費支出）。R2 反映済み（2026-09-05: app/stats 3件・app/ranking item/values・all.json 2210件、KNOWN/SITEMAP 再生成済み）。
+     **残り**: commit → develop→main deploy → CDN purge → Googlebot UA で `/ranking/<key>` 200 実測（`ranking-publisher` 手順 6〜8）、OGP/カード画像は sync-snapshots か週次 self-heal。
+  2. 既存記事の更新 wave（最新年で再計算・[!WARNING]の追加）: `spinach-consumption-ranking`（学力との符合は相関≠因果）、
+     `engel-coefficient-prefecture-ranking`（論理の方向・購入価格）、酒類3本、外食2本、魚介2本、ぎょうざ/納豆の集計ルール注記（ranking noteも）。
+  3. 新規記事 wave A（既存接地器で書ける型D/D2/B）: 年収五分位×教育費・大分類・逆進品目・医薬/医療・自動車・家電・教養娯楽・旅行・衣料、
+     れんこん/さやまめ/柑橘、ゴルフ（津・名古屋）、進学率+就職率、エンゲル係数×県民所得の散布図、産地×消費地。
+  4. 新規記事 wave B（月次接地器の新設が前提の型C）: 食パン×CPIのギッフェン財、ビールの最多月シフト、冬物バーゲンの成功条件、
+     ネクタイ・ストッキングの縮小。/japan 時系列候補と併せて設計する。
+  5. `<pref>-food-culture` シリーズ: 既存9本を4分類（多く高く/高く/多く/支出額大）の視点で更新し、残り38県を最新年で新規作成。
+- **停止条件**: 書籍の数値・図表・本文を公開物へ流さない。全国集計（五分位・年齢階級・月次）を/rankingへ載せない。
+  県庁所在市の値を県全体として書かない。一次資料で再取得できない項目は`primary-source-unavailable`へ戻す。
+  R2 write・deploy・SNS公開は別途承認。
+- **完了条件**: new-metric 2件が`validate:config`/`validate:years` green で公開パイプラインに乗り、既存記事更新wave と
+  新規記事wave A の全記事が quality-gate + critic PASS、県別シリーズ47本が公開済みで、inventoryの`combined-analysis`各項目が
+  記事・theme・areaのいずれかへ実在証跡で接続されている（管理画面`/content/references`で確認）。
 
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 

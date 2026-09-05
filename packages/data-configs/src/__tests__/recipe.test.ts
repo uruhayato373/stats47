@@ -122,6 +122,26 @@ describe("buildRecipe — kakei-chousa", () => {
     expect(r.ops?.areaRemap).toBe("kakei-capital-city");
     expect(r.derived).toBe(true);
   });
+
+  it("filter.axisSum (品目合算) を estat と同じ正準形で ops に残し、estatParams には混ぜない", () => {
+    const r = buildRecipe(
+      metric({
+        kind: "kakei-chousa",
+        filter: {
+          statsDataId: "0003348239",
+          axisSum: { axis: "cat01", codes: ["090441010", "070300020"] },
+          cdCat02: "03",
+        },
+      }),
+    );
+    expect(r.ops?.axisSum).toEqual({ axis: "cat01", codes: ["070300020", "090441010"] });
+    expect(r.estatParams).toEqual({ statsDataId: "0003348239", cdCat02: "03" });
+    // 合算の有無で configHash が変わる (監査 (k) が stale を追える)
+    const plain = buildRecipe(
+      metric({ kind: "kakei-chousa", filter: { statsDataId: "0003348239", cdCat02: "03" } }),
+    );
+    expect(r.configHash).not.toBe(plain.configHash);
+  });
 });
 
 describe("buildRecipe — external / mlit", () => {
@@ -384,8 +404,9 @@ describe("parseRecipe — round-trip", () => {
 });
 
 describe("実 registry での健全性", () => {
-  // 2,295 metric を回すので既定 5s では足りない (registry の初回 import も含む)
-  const REGISTRY_TIMEOUT = 60_000;
+  // 2,300 超の metric を回すので既定 5s では足りない (registry の初回 import も含む)。
+  // 単独実行は約 36s だが、suite 全体を並列実行すると 60s を超えて timeout した (2026-09-05 実測) ので余裕を持たせる
+  const REGISTRY_TIMEOUT = 180_000;
 
   it(
     "全 metric でレシピが決定的に作れ、JSON を通しても失われない",

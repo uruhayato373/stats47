@@ -1,0 +1,3919 @@
+{
+  "sourceKey": "kakei-marketing",
+  "edition": "2015",
+  "reviewedAt": "2026-09-05",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "kakei-marketing-2015-a00-01",
+      "chapter": 0,
+      "question": "学力テスト上位の県と、ほうれんそう・かれいの消費が多い県庁所在市はどこまで重なるか？",
+      "thesis": "小学生の学力が高い県の県庁所在市で、特定の食品の家計消費が多いという符合を、家計調査と学力調査の組み合わせで示す論点。相関≠因果を明記して扱う。",
+      "pages": [
+        1,
+        5
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "家計調査の県庁所在市データと学力調査の都道府県データは一次資料で再取得でき、既存の食品metricで検証できる",
+      "metricKeys": [
+        "spinach-consumption-expenditure",
+        "spinach-consumption-quantity",
+        "flounder-consumption-expenditure",
+        "flounder-consumption-quantity",
+        "gyoza-frozen-consumption-expenditure",
+        "natto-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査 (都道府県別 教科正答率)",
+          "url": "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+          "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm",
+          "dataYears": [
+            "2007",
+            "2014"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "spinach-consumption-ranking"
+        ]
+      },
+      "nextAction": "学力調査の47県正答率をnew-metric化した後、散布図(型B)で符合と限界を示す記事へ拡張する"
+    },
+    {
+      "id": "kakei-marketing-2015-a01-01",
+      "chapter": 1,
+      "question": "公立小中学校の学力調査で継続して上位に入る県はどこか？",
+      "thesis": "全国学力・学習状況調査の都道府県別平均正答率で、東北・北陸の5県が常連上位を占めるという事実。stats47には未収載。",
+      "pages": [
+        11,
+        14
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "国立教育政策研究所が都道府県別正答率を公開しており(政府標準利用規約)、47県値を再取得して独立指標にできる",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査 (都道府県別 教科正答率)",
+          "url": "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+          "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm",
+          "dataYears": [
+            "2007",
+            "2014"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "open-data-catalog `nier-gakuryoku-achievement` から小6・中3の国語/算数(数学)正答率をmetric化 (data-ingester・provenance 9点セット)"
+    },
+    {
+      "id": "kakei-marketing-2015-a01-02",
+      "chapter": 1,
+      "question": "高校卒業者の大学等進学率が低い県は、教育水準が低いと言えるか？",
+      "thesis": "進学率は自宅から通える大学の数や地域の就職環境に左右され、義務教育の質の指標にはならないという批判的読み方。",
+      "pages": [
+        15,
+        17
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "学校基本調査由来の高等学校卒業者進学率が既存metricとして公開済み",
+      "metricKeys": [
+        "high-school-advancement-rate"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省",
+          "publicationOrDataset": "学校基本調査 (高等学校卒業後の状況)",
+          "url": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/1267995.htm",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2014"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "進学率ランキングのai-content/注記に『進学先の選択肢と就職環境の影響』の読み方を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a01-03",
+      "chapter": 1,
+      "question": "進学率と就職率を合算すると、堅実な進路選択ができている県はどこか？",
+      "thesis": "大学等進学率と高卒就職率を足した指標で東海4県と北陸・東北が上位に来るという再評価。",
+      "pages": [
+        18,
+        20
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "既存の進学率・就職率metricを合算して再現できる",
+      "metricKeys": [
+        "high-school-advancement-rate",
+        "high-school-new-graduates-employment-rate"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省",
+          "publicationOrDataset": "学校基本調査 (高等学校卒業後の状況)",
+          "url": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/1267995.htm",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2014"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "2指標の散布図または合算派生指標(calculated)で型B記事化。合算の妥当性(分母の一致)を先に検証する"
+    },
+    {
+      "id": "kakei-marketing-2015-a01-04",
+      "chapter": 1,
+      "question": "補習教育にお金をかけずに国公立大学へ進学できている県庁所在市はどこか？",
+      "thesis": "家計調査の教育費内訳(国公立/私立大学授業料・補習教育3段階)から『国公立大学授業料÷教育費』を教育投資効率とみなし、奈良型・東京型・秋田型の3パターンに整理する論点。",
+      "pages": [
+        21,
+        31
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "教育費の各内訳が家計調査由来の既存metricとして公開済みで、比率は再計算できる",
+      "metricKeys": [
+        "public-university-consumption-expenditure",
+        "private-university-consumption-expenditure",
+        "elementary-tutoring-consumption-expenditure",
+        "junior-high-tutoring-consumption-expenditure",
+        "high-school-tutoring-consumption-expenditure",
+        "tuition-consumption-expenditure",
+        "education-cost-all-households"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "themeSlugs": [
+        "education-culture"
+      ],
+      "nextAction": "教育投資効率の派生指標(calculated: 国公立大学授業料/教育費)を設計し、education-culture の evidenceTopic と型D記事で展開する。家計調査の教育費は子の有無を混ぜた世帯平均である旨を注記する"
+    },
+    {
+      "id": "kakei-marketing-2015-a01-05",
+      "chapter": 1,
+      "question": "年収階級によって、子どもの教育投資の中身と成果は10年でどう変わったか？",
+      "thesis": "年間収入五分位階級別に教育費・補習教育・国公立/私立大学授業料の10年変化を見て、高所得層が国公立大学進学のシェアを高めたという論点。全国集計のみ。",
+      "pages": [
+        32,
+        38
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "年間収入五分位階級別の家計調査は全国集計として一次資料から再取得でき、既存記事の接地器(fetch-quintile-data)を再利用できる",
+      "metricKeys": [
+        "public-university-consumption-expenditure",
+        "private-university-consumption-expenditure",
+        "high-school-tutoring-consumption-expenditure",
+        "education-cost-all-households"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2002",
+            "2003",
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "income-quintile-beverage",
+          "income-quintile-alcohol",
+          "income-quintile-dining"
+        ]
+      },
+      "nextAction": "五分位×教育費の型D記事 (fetch-quintile-data.ts で2年平均を接地)。都道府県値ではないため/rankingには載せない"
+    },
+    {
+      "id": "kakei-marketing-2015-a01-06",
+      "chapter": 1,
+      "question": "所得五分位の所得シェアは1990年代から2010年代でどう動いたか？",
+      "thesis": "低所得層の所得シェアが半減し高所得層へ移った、という格差拡大の背景説明。",
+      "pages": [
+        39,
+        42
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "家計調査の年間収入五分位別データで背景として確認できるが、独立指標にはしない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "japan"
+      ],
+      "contentRoles": [
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "1993",
+            "2011"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "教育投資・消費記事の背景注記としてのみ使う"
+    },
+    {
+      "id": "kakei-marketing-2015-a01-07",
+      "chapter": 1,
+      "question": "新聞が独自計算した『大学進学率』はなぜ公表値と食い違うのか？",
+      "thesis": "浪人生を分子だけに含めた進学率計算の誤りを検証し、進学率という数字の限界と小学校教育への投資の重要性を述べる論点。",
+      "pages": [
+        43,
+        48
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "指標定義の注意点として使うのみで、数値を投入しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省",
+          "publicationOrDataset": "学校基本調査 (高等学校卒業後の状況)",
+          "url": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/1267995.htm",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2014"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "進学率系metricのdescription/noteに定義(分母・浪人の扱い)を明記する"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-01",
+      "chapter": 2,
+      "question": "家計調査を年収階級別に読むとき、何を見れば『高所得世帯に売れている』と言えるか？",
+      "thesis": "支出額だけでなく対消費支出額シェア・数量・購入価格に分解し、五分位のV階級で最高かどうかを格付けする読み方。",
+      "pages": [
+        49,
+        56
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "方法論であり数値投入対象ではないが、stats47の年収五分位記事の設計原則として採用する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "japan"
+      ],
+      "contentRoles": [
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査の結果を見る際のポイント / 家計調査のしくみと見方",
+          "url": "https://www.stat.go.jp/data/kakei/point.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2005",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "blog-quality-standards / fetch-quintile-data の記事テンプレに『シェア・数量・価格の分解』を規約化する"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-02",
+      "chapter": 2,
+      "question": "食料・衣料・教育の支出は、年収が上がるとシェアも上がるのか？",
+      "thesis": "食料はシェア低下、被服及び履物と教育はシェア上昇。仕送り金・語学月謝も高所得世帯に偏る。",
+      "pages": [
+        57,
+        59
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "大分類の消費支出は既存metric(食料費・教育費)と家計調査五分位で再取得できる",
+      "metricKeys": [
+        "food-expenditure-total",
+        "education-cost-all-households",
+        "domestic-student-remittance-consumption-expenditure",
+        "language-lesson-consumption-expenditure",
+        "consumption-expenditure-total"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "五分位×大分類シェアの型D記事 (fetch-quintile-data.ts)"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-03",
+      "chapter": 2,
+      "question": "年収が低い世帯ほど支出が大きい商品は何か？",
+      "thesis": "たばこは低所得層ほど支出が大きく、砂糖は数量が低所得で多く価格は高所得で高い。ストーブ・エアコンは高所得世帯が最高価格を選ばない。",
+      "pages": [
+        60,
+        63
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "該当品目は既存metricがあり、五分位データも一次資料で再取得できる",
+      "metricKeys": [
+        "tobacco-consumption-expenditure",
+        "sugar-consumption-expenditure",
+        "sugar-consumption-quantity",
+        "heater-consumption-expenditure",
+        "air-conditioner-consumption-expenditure",
+        "air-conditioner-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "air-conditioner-consumption-quantity-prefecture-gap"
+        ]
+      },
+      "nextAction": "『逆進的な品目』の型D記事 (たばこ・砂糖・暖房機器)"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-04",
+      "chapter": 2,
+      "question": "高所得世帯は薬や医療の何にお金を払い、何に払わないのか？",
+      "thesis": "感冒薬・外傷薬は高所得層で小さく、栄養剤・サプリ・マッサージ・眼鏡・歯科は高所得層のシェアが高い。機能ではなく感情に払うという解釈。",
+      "pages": [
+        64,
+        72
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "主要品目は既存metricがあり、五分位データも再取得できる (健康保持用摂取品は未収載)",
+      "metricKeys": [
+        "cold-medicine-consumption-expenditure",
+        "supplement-consumption-expenditure",
+        "massage-fee-consumption-expenditure",
+        "eyeglasses-consumption-expenditure",
+        "contact-lens-consumption-expenditure",
+        "dental-fee-consumption-expenditure",
+        "medical-fee-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "『機能より感情』の型D記事。健康保持用摂取品はmetric化候補として estat-researcher へ"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-05",
+      "chapter": 2,
+      "question": "高所得世帯への販売に安定して成功している食料品は何か？",
+      "thesis": "かき(貝)・れんこん・さやまめ・もも・他の柑橘類は2013年に高所得層のシェアが最高、紅茶は2009-2013の5年連続で最高。コーヒー・緑茶は該当しない。",
+      "pages": [
+        73,
+        77
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "品目ごとの既存metric(県庁所在市)と五分位データで再検証できる",
+      "metricKeys": [
+        "oyster-consumption-expenditure",
+        "oyster-consumption-quantity",
+        "lotus-root-consumption-expenditure",
+        "lotus-root-consumption-quantity",
+        "green-beans-consumption-expenditure",
+        "green-beans-consumption-quantity",
+        "other-citrus-consumption-expenditure",
+        "other-citrus-consumption-quantity",
+        "black-tea-consumption-expenditure",
+        "black-tea-consumption-quantity",
+        "coffee-consumption-expenditure",
+        "green-tea-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2009",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "income-quintile-beverage",
+          "black-tea-income-gap",
+          "black-tea-expenditure-ranking"
+        ]
+      },
+      "nextAction": "紅茶は既存記事あり。れんこん(佐賀・金沢)・さやまめ(新潟)・柑橘(松山・高知)の型D2記事と、五分位の再検証(最新年)"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-06",
+      "chapter": 2,
+      "question": "自動車関連で高所得世帯に高く売れているものは何か？",
+      "thesis": "自動車購入は全項目で高所得層が突出、ガソリンは年収差がほぼ無く、レンタカー料金は高所得層のシェアが高い。",
+      "pages": [
+        78,
+        82
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "既存metric(自動車購入・ガソリン・レンタカー)と五分位で再取得できる",
+      "metricKeys": [
+        "car-purchase-consumption-expenditure",
+        "car-purchase-consumption-quantity",
+        "gasoline-consumption-expenditure",
+        "gasoline-consumption-quantity",
+        "rental-car-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "自動車×年収の型D記事 (数量×価格の分解)"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-07",
+      "chapter": 2,
+      "question": "家電のうち高所得世帯に高い機種を売れているものと売れていないものは何か？",
+      "thesis": "テレビ・冷蔵庫・掃除機・洗濯機は高所得層が最高価格を選ばず、電子レンジ・炊事用電気器具・パソコン・カメラは成功。テレビ支出は2010年ピークから2013年に1/8。",
+      "pages": [
+        83,
+        92
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "主要家電は既存metricがあり、五分位と時系列で再取得できる",
+      "metricKeys": [
+        "television-consumption-expenditure",
+        "television-consumption-quantity",
+        "cable-tv-fee-consumption-expenditure",
+        "recorded-media-consumption-expenditure",
+        "refrigerator-consumption-expenditure",
+        "refrigerator-consumption-quantity",
+        "vacuum-cleaner-consumption-expenditure",
+        "washing-machine-consumption-expenditure",
+        "microwave-consumption-expenditure",
+        "cooking-appliance-consumption-expenditure",
+        "personal-computer-consumption-expenditure",
+        "camera-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2006",
+            "2010",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "『買い替えサイクル仮説』の型D記事 (数量と価格の分解)。テレビは/japan時系列候補"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-08",
+      "chapter": 2,
+      "question": "教養娯楽サービスのうち高所得世帯の消費が伸びているものは何か？",
+      "thesis": "植木・庭手入れ、映画・演劇、ゴルフ、スポーツクラブは高所得層に成功、文化施設・遊園地は中間所得層中心。ゴルフは東海(津市)が突出。",
+      "pages": [
+        93,
+        101
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "該当サービスは既存metricがあり、五分位・都市別で再取得できる",
+      "metricKeys": [
+        "garden-maintenance-consumption-expenditure",
+        "interior-decoration-consumption-expenditure",
+        "curtain-consumption-expenditure",
+        "movie-theater-consumption-expenditure",
+        "cultural-facility-admission-consumption-expenditure",
+        "amusement-park-consumption-expenditure",
+        "golf-equipment-consumption-expenditure",
+        "golf-green-fee-consumption-expenditure",
+        "sports-club-fee-consumption-expenditure",
+        "sports-spectating-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2010",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "ゴルフプレー料金(津・名古屋)の型D2記事、教養娯楽サービス×年収の型D記事"
+    },
+    {
+      "id": "kakei-marketing-2015-a02-09",
+      "chapter": 2,
+      "question": "旅行のうち、高所得世帯に最も売れているのは外国パック旅行か？",
+      "thesis": "宿泊料・国内パック旅行・外国パック旅行はいずれも高所得層が突出し、外国パック旅行はシェアが平均の2.4倍で最大。国内パックは減少・外国パックは増加傾向。",
+      "pages": [
+        102,
+        107
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "既存metric(宿泊料・国内/外国パック旅行費)と五分位で再取得できる",
+      "metricKeys": [
+        "accommodation-consumption-expenditure",
+        "domestic-package-tour-consumption-expenditure",
+        "overseas-package-tour-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "passport-issuance-prefecture-gap"
+        ]
+      },
+      "nextAction": "国内/外国パック旅行費の対比 型D記事 + tourismテーマの evidenceTopic 候補"
+    },
+    {
+      "id": "kakei-marketing-2015-a03-01",
+      "chapter": 3,
+      "question": "衣料品の中で、高所得世帯が最も差をつけて買うのは何か？",
+      "thesis": "洋服・セーター・靴は高所得層が数量も価格も高く、下着は差が小さく、コートが最大差 (男子用2.6倍)。外見ほど差をつける。",
+      "pages": [
+        108,
+        117
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "主要衣料品は既存metric(数量・支出額)があり、五分位で再取得できる",
+      "metricKeys": [
+        "mens-clothing-consumption-expenditure",
+        "womens-clothing-consumption-expenditure",
+        "childrens-clothing-consumption-expenditure",
+        "mens-sweater-consumption-expenditure",
+        "womens-sweater-consumption-expenditure",
+        "mens-coat-consumption-expenditure",
+        "womens-coat-consumption-expenditure",
+        "mens-underwear-consumption-expenditure",
+        "other-womens-underwear-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "『外見ほど差がつく』衣料品×年収の型D記事"
+    },
+    {
+      "id": "kakei-marketing-2015-a03-02",
+      "chapter": 3,
+      "question": "冬物バーゲンが成功したかどうかは、家計調査の何を見れば判定できるか？",
+      "thesis": "1月のバーゲンで店頭価格は2割下がるのに、購入価格が前月より上がり数量も増えるのが成功パターン。婦人用コート・セーターの月次データとCPIで判定する。",
+      "pages": [
+        118,
+        126
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "家計調査の月次数量・平均価格とCPIは一次資料から再取得できる (全国集計・月次)",
+      "metricKeys": [
+        "womens-coat-consumption-expenditure",
+        "womens-coat-consumption-quantity",
+        "womens-sweater-consumption-expenditure",
+        "womens-sweater-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 月次 (品目別 数量・平均価格)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2002",
+            "2004",
+            "2006",
+            "2008",
+            "2013",
+            "2014"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "消費者物価指数",
+          "datasetId": "00200573",
+          "url": "https://www.stat.go.jp/data/cpi/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2002",
+            "2014"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "月次数量×購入価格×CPIの接地器を新設し、最新シーズンで型C記事化 (stats47の月次系列は未整備)"
+    },
+    {
+      "id": "kakei-marketing-2015-a03-03",
+      "chapter": 3,
+      "question": "帽子・ネクタイ・婦人用ストッキングの市場はどれだけ縮んだか？",
+      "thesis": "ネクタイと婦人用ストッキングは10年で市場規模が1/4未満に縮小。高所得層にしか売れなくなった。",
+      "pages": [
+        127,
+        129
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "既存metric(帽子・ネクタイ・ストッキングの支出額・数量)の全年系列で再検証できる",
+      "metricKeys": [
+        "hat-consumption-expenditure",
+        "hat-consumption-quantity",
+        "necktie-consumption-expenditure",
+        "necktie-consumption-quantity",
+        "womens-stockings-consumption-expenditure",
+        "womens-stockings-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2003",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "ネクタイ・ストッキングの縮小 型C記事 (/japan 時系列候補)"
+    },
+    {
+      "id": "kakei-marketing-2015-a03-04",
+      "chapter": 3,
+      "question": "腕時計・装身具・ハンドバッグなど外見に関わる品目は高所得世帯にどれだけ売れているか？",
+      "thesis": "腕時計は高所得層が平均の3.2倍で2013年に市場が2000年水準へ回復、ハンドバッグ・旅行かばん・傘も成功。通学定期・化粧品・理美容等の格付け上位リスト。",
+      "pages": [
+        130,
+        135
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "主要品目は既存metricがあり、五分位で再取得できる (装身具は未収載)",
+      "metricKeys": [
+        "wristwatch-consumption-expenditure",
+        "handbag-consumption-expenditure",
+        "handbag-consumption-quantity",
+        "umbrella-consumption-expenditure",
+        "umbrella-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2000",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "腕時計の型C記事 (資産効果の検証は年次で再確認)"
+    },
+    {
+      "id": "kakei-marketing-2015-a04-01",
+      "chapter": 4,
+      "question": "エンゲル係数が高いほど生活水準が低い、は本当か？",
+      "thesis": "所得→エンゲル係数の方向の論理は成り立つが逆は成り立たない。長期推移(1946年→2005年最低)と五分位別で確認する。",
+      "pages": [
+        136,
+        142
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "エンゲル係数は既存metric(都道府県)があり、長期系列・五分位も一次資料で再取得できる",
+      "metricKeys": [
+        "engel-coefficient",
+        "food-expenditure-total",
+        "consumption-expenditure-total"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "1946",
+            "2005",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査の結果を見る際のポイント / 家計調査のしくみと見方",
+          "url": "https://www.stat.go.jp/data/kakei/point.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2005",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "engel-coefficient-prefecture-ranking"
+        ]
+      },
+      "themeSlugs": [
+        "real-income",
+        "consumer-prices"
+      ],
+      "nextAction": "既存記事へ『論理の方向』注記を追加し、real-income/consumer-prices の evidenceTopic で読み方を提示する"
+    },
+    {
+      "id": "kakei-marketing-2015-a04-02",
+      "chapter": 4,
+      "question": "70歳以上世帯のエンゲル係数が最も高いのは、生活水準が低いからか？",
+      "thesis": "70歳以上世帯は米・魚介・肉・コーヒーを最も高い価格で買い、交際費・贈答用食料の割合も最高。高い係数は高級志向の結果という解釈(用途別/品目別の差も説明)。",
+      "pages": [
+        143,
+        154
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "世帯主年齢階級別の家計調査(全国)から再取得でき、購入価格の比較は一次資料で検証できる",
+      "metricKeys": [
+        "engel-coefficient",
+        "rice-consumption-expenditure",
+        "coffee-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "japan"
+      ],
+      "contentRoles": [
+        "japan",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "年齢階級別の購入価格比較 型D記事 (全国集計)。都道府県値ではないので/rankingには載せない"
+    },
+    {
+      "id": "kakei-marketing-2015-a04-03",
+      "chapter": 4,
+      "question": "エンゲル係数の順に県庁所在市を並べると、生活水準の指標として使えるか？",
+      "thesis": "東京都区部(消費支出・食料支出・県民所得すべて1位)と那覇(すべて最下位)がエンゲル係数では近接する。地方別では沖縄>近畿>関東。",
+      "pages": [
+        155,
+        158
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "エンゲル係数・消費支出・食料費・1人当たり県民所得は既存metricで揃う",
+      "metricKeys": [
+        "engel-coefficient",
+        "consumption-expenditure-total",
+        "food-expenditure-total",
+        "per-capita-prefectural-income-h27"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        },
+        {
+          "organization": "内閣府",
+          "publicationOrDataset": "県民経済計算 (1人当たり県民所得)",
+          "url": "https://www.esri.cao.go.jp/jp/sna/sonota/kenmin/kenmin_top.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2011"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "engel-coefficient-prefecture-ranking"
+        ]
+      },
+      "nextAction": "エンゲル係数×県民所得の散布図(型B)で『指標として使えない』ことを示す"
+    },
+    {
+      "id": "kakei-marketing-2015-a04-04",
+      "chapter": 4,
+      "question": "エンゲル係数の代わりに、生活水準を映す係数はあるか？",
+      "thesis": "情報通信関係費(インターネット接続料を除く)÷消費支出を『情報通信係数』とすると都市別では東京区部が最低・那覇が高く指標として使えそうだが、時系列では上昇一途で使えない。",
+      "pages": [
+        159,
+        167
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "構成品目(固定電話・移動電話・NHK・ケーブルテレビ・他の受信料)は既存metricがあり、比率は calculated metric として派生できる",
+      "metricKeys": [
+        "landline-bill-consumption-expenditure",
+        "mobile-phone-bill-consumption-expenditure",
+        "nhk-fee-consumption-expenditure",
+        "cable-tv-fee-consumption-expenditure",
+        "other-broadcast-fee-consumption-expenditure",
+        "internet-fee-consumption-expenditure",
+        "consumption-expenditure-total"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "1963",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "『情報通信係数』を calculated metric (分子=5品目合算/分母=消費支出) として設計し、engel-coefficient と並べる"
+    },
+    {
+      "id": "kakei-marketing-2015-a05-01",
+      "chapter": 5,
+      "question": "家庭で飲む酒はビールから何へ移り、勝ち組の酒は何か？",
+      "thesis": "2000→2013でビール支出は半減以下、発泡酒・第3のビールが数量で逆転、焼酎だけが支出額・購入世帯比率・価格すべて上昇。ビールの最多月は7月から12月へ。年収別でもVを除きビール<発泡酒。",
+      "pages": [
+        168,
+        180
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "酒類6品目は既存metricがあり、全年系列・月次・五分位も一次資料で再取得できる",
+      "metricKeys": [
+        "beer-consumption-expenditure",
+        "beer-consumption-quantity",
+        "happoshu-consumption-expenditure",
+        "happoshu-consumption-quantity",
+        "shochu-consumption-expenditure",
+        "shochu-consumption-quantity",
+        "sake-consumption-expenditure",
+        "wine-consumption-expenditure",
+        "whisky-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2000",
+            "2010",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "beer-vs-happoshu-shift",
+          "income-quintile-alcohol",
+          "shochu-consumption-prefecture-gap",
+          "shochu-expenditure-vs-sake-ranking"
+        ]
+      },
+      "nextAction": "『ビールが特別な酒になった』月次パターンの型C記事 (月次接地器が要る)。都道府県の対比は既存記事を更新"
+    },
+    {
+      "id": "kakei-marketing-2015-a05-02",
+      "chapter": 5,
+      "question": "食パンの価格が上がると消費量が増えるのはなぜか？",
+      "thesis": "米・食パン・他のパンのCPIと購入数量の推移(1991=100)から、値上がり時に最も割安な主食である食パンへ需要が移るギッフェン財現象を示す。マーガリンも2008年に一時的に同現象。",
+      "pages": [
+        181,
+        188
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "米・パン類・バター・マーガリン・ジャムは既存metricがあり、CPIと数量の全国時系列は一次資料で再取得できる",
+      "metricKeys": [
+        "white-bread-consumption-expenditure",
+        "white-bread-consumption-quantity",
+        "other-bread-consumption-expenditure",
+        "other-bread-consumption-quantity",
+        "rice-consumption-expenditure",
+        "rice-consumption-quantity",
+        "butter-consumption-expenditure",
+        "margarine-consumption-expenditure",
+        "margarine-consumption-quantity",
+        "jam-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "1991",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "消費者物価指数",
+          "datasetId": "00200573",
+          "url": "https://www.stat.go.jp/data/cpi/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "1991",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "butter-vs-margarine-expenditure",
+          "hyogo-food-culture"
+        ]
+      },
+      "nextAction": "米vsパンの支出額逆転と食パン数量×CPIの型C記事 (/japan 時系列候補)。関西のマーガリン消費は型D2"
+    },
+    {
+      "id": "kakei-marketing-2015-a05-03",
+      "chapter": 5,
+      "question": "発泡酒・第3のビールの増税は消費者の行動をどう変えるか？",
+      "thesis": "税額差を縮める案は大半の世帯には増税となり、さらに安い酒への移行(ギッフェン財的行動)を加速するという政策論。",
+      "pages": [
+        189,
+        190
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "政策論であり観測値ではない。酒類記事の背景注記としてのみ使う",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "japan"
+      ],
+      "contentRoles": [
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "酒類記事の背景注記 (酒税改正の年表は国税庁一次資料で確認)"
+    },
+    {
+      "id": "kakei-marketing-2015-a05-04",
+      "chapter": 5,
+      "question": "外食のうち高所得世帯にうまく売れている業態はどれか？",
+      "thesis": "日本そば・うどん、和食、中華食、洋食は成功、すし・中華そばは支出額のみ、ハンバーガーは失敗。",
+      "pages": [
+        191,
+        192
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "外食業態別の既存metricがあり、五分位で再取得できる",
+      "metricKeys": [
+        "dining-out-consumption-expenditure",
+        "soba-udon-dining-consumption-expenditure",
+        "japanese-food-dining-consumption-expenditure",
+        "chinese-food-dining-consumption-expenditure",
+        "western-food-dining-consumption-expenditure",
+        "sushi-dining-consumption-expenditure",
+        "ramen-dining-consumption-expenditure",
+        "hamburger-consumption-expenditure",
+        "drinking-out-consumption-expenditure",
+        "coffee-shop-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set",
+        "japan"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "income-quintile-dining",
+          "dining-out-expenditure-ranking",
+          "sushi-dining-consumption-expenditure",
+          "soba-udon-dining-consumption-expenditure-prefecture-gap"
+        ]
+      },
+      "nextAction": "業態別×年収の型D記事 (既存の外食記事に業態分解を追加)"
+    },
+    {
+      "id": "kakei-marketing-2015-a05-05",
+      "chapter": 5,
+      "question": "『ぎょうざ消費日本一』は何を数えていて、何を数えていないのか？",
+      "thesis": "家計調査は県庁所在市と政令市だけが対象で、テイクアウト消費のみ(外食・冷凍は別分類)。宇都宮vs浜松の推移と、消費地を誇る地域振興の意義。",
+      "pages": [
+        193,
+        196
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "ぎょうざ・納豆の既存metric(県庁所在市)と全年系列で再取得できる",
+      "metricKeys": [
+        "gyoza-frozen-consumption-expenditure",
+        "natto-consumption-expenditure",
+        "frozen-food-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2010",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査の結果を見る際のポイント / 家計調査のしくみと見方",
+          "url": "https://www.stat.go.jp/data/kakei/point.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2005",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "ぎょうざ・納豆の『消費日本一』記事に集計ルール(対象都市・テイクアウト)の注記を必ず付ける。ranking noteにも反映"
+    },
+    {
+      "id": "kakei-marketing-2015-a05-06",
+      "chapter": 5,
+      "question": "生鮮魚介の好みは日本のどこで東西に分かれるか？",
+      "thesis": "18種の生鮮魚介の支出額1位都市を並べると太平洋側・東日本(まぐろ・さんま・さけ)と日本海側・西日本(ぶり・さば・かれい・たい・あじ)に分かれ、かつお(高知)とかき(広島)は2位の2倍超。",
+      "pages": [
+        197,
+        206
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "魚介18品目の既存metric(県庁所在市)で再現できる",
+      "metricKeys": [
+        "tuna-consumption-expenditure",
+        "salmon-consumption-expenditure",
+        "saury-consumption-expenditure",
+        "scallop-consumption-expenditure",
+        "clam-consumption-expenditure",
+        "bonito-consumption-expenditure",
+        "squid-consumption-expenditure",
+        "yellowtail-consumption-expenditure",
+        "octopus-consumption-expenditure",
+        "shrimp-consumption-expenditure",
+        "mackerel-consumption-expenditure",
+        "flounder-consumption-expenditure",
+        "crab-consumption-expenditure",
+        "sardine-consumption-expenditure",
+        "freshwater-clam-consumption-expenditure",
+        "oyster-consumption-expenditure",
+        "sea-bream-consumption-expenditure",
+        "horse-mackerel-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "existing": {
+        "blogSlugs": [
+          "bonito-vs-oyster-fish-map",
+          "kochi-food-culture",
+          "hiroshima-food-culture",
+          "food-consumption-prefecture-battle"
+        ]
+      },
+      "themeSlugs": [
+        "fishery-marine"
+      ],
+      "nextAction": "18魚介の1位都市マップ(型E/H相当のタイルマップ)と fishery-marine の evidenceTopic (産地より消費地)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-00",
+      "chapter": 6,
+      "question": "県庁所在市別の食生活データはどう読むべきか？",
+      "thesis": "二人以上世帯の品目別データを2012・2013年平均、全国平均=100で指数化し、支出額=数量×価格に分解して『多く高く買う/高く買う/多く買う/支出額が大きい』の4分類で整理する凡例。",
+      "pages": [
+        207,
+        209
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "方法論であり数値投入対象ではないが、都道府県の食文化記事の型として採用する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査の結果を見る際のポイント / 家計調査のしくみと見方",
+          "url": "https://www.stat.go.jp/data/kakei/point.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2005",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "<pref>-food-culture 記事シリーズの共通テンプレ(4分類・閾値)として blog-quality-standards に紐づける"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-01",
+      "chapter": 6,
+      "question": "札幌市(北海道)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ札幌市の食生活プロファイル。",
+      "pages": [
+        210,
+        211
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "01000"
+      ],
+      "nextAction": "北海道の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-02",
+      "chapter": 6,
+      "question": "青森市(青森県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ青森市の食生活プロファイル。",
+      "pages": [
+        212,
+        213
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "02000"
+      ],
+      "nextAction": "青森県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-03",
+      "chapter": 6,
+      "question": "盛岡市(岩手県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ盛岡市の食生活プロファイル。",
+      "pages": [
+        214,
+        215
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "03000"
+      ],
+      "nextAction": "岩手県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-04",
+      "chapter": 6,
+      "question": "仙台市(宮城県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ仙台市の食生活プロファイル。",
+      "pages": [
+        216,
+        217
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "04000"
+      ],
+      "nextAction": "宮城県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-05",
+      "chapter": 6,
+      "question": "秋田市(秋田県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ秋田市の食生活プロファイル。",
+      "pages": [
+        218,
+        219
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "05000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "akita-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 akita-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-06",
+      "chapter": 6,
+      "question": "山形市(山形県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ山形市の食生活プロファイル。",
+      "pages": [
+        220,
+        221
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "06000"
+      ],
+      "nextAction": "山形県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-07",
+      "chapter": 6,
+      "question": "福島市(福島県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ福島市の食生活プロファイル。",
+      "pages": [
+        222,
+        223
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "07000"
+      ],
+      "nextAction": "福島県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-08",
+      "chapter": 6,
+      "question": "水戸市(茨城県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ水戸市の食生活プロファイル。",
+      "pages": [
+        224,
+        225
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "08000"
+      ],
+      "nextAction": "茨城県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-09",
+      "chapter": 6,
+      "question": "宇都宮市(栃木県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ宇都宮市の食生活プロファイル。",
+      "pages": [
+        226,
+        227
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "09000"
+      ],
+      "nextAction": "栃木県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-10",
+      "chapter": 6,
+      "question": "前橋市(群馬県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ前橋市の食生活プロファイル。",
+      "pages": [
+        228,
+        229
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "10000"
+      ],
+      "nextAction": "群馬県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-11",
+      "chapter": 6,
+      "question": "さいたま市(埼玉県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んださいたま市の食生活プロファイル。",
+      "pages": [
+        230,
+        231
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "11000"
+      ],
+      "nextAction": "埼玉県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-12",
+      "chapter": 6,
+      "question": "千葉市(千葉県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ千葉市の食生活プロファイル。",
+      "pages": [
+        232,
+        233
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "12000"
+      ],
+      "nextAction": "千葉県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-13",
+      "chapter": 6,
+      "question": "東京都区部(東京都)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ東京都区部の食生活プロファイル。",
+      "pages": [
+        234,
+        235
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "13000"
+      ],
+      "nextAction": "東京都の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-14",
+      "chapter": 6,
+      "question": "横浜市(神奈川県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ横浜市の食生活プロファイル。",
+      "pages": [
+        236,
+        237
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "14000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "kanagawa-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 kanagawa-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-19",
+      "chapter": 6,
+      "question": "甲府市(山梨県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ甲府市の食生活プロファイル。",
+      "pages": [
+        238,
+        239
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "19000"
+      ],
+      "nextAction": "山梨県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-20",
+      "chapter": 6,
+      "question": "長野市(長野県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ長野市の食生活プロファイル。",
+      "pages": [
+        240,
+        241
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "20000"
+      ],
+      "nextAction": "長野県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-15",
+      "chapter": 6,
+      "question": "新潟市(新潟県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ新潟市の食生活プロファイル。",
+      "pages": [
+        242,
+        243
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "15000"
+      ],
+      "nextAction": "新潟県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-16",
+      "chapter": 6,
+      "question": "富山市(富山県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ富山市の食生活プロファイル。",
+      "pages": [
+        244,
+        245
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "16000"
+      ],
+      "nextAction": "富山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-17",
+      "chapter": 6,
+      "question": "金沢市(石川県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ金沢市の食生活プロファイル。",
+      "pages": [
+        246,
+        247
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "17000"
+      ],
+      "nextAction": "石川県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-18",
+      "chapter": 6,
+      "question": "福井市(福井県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ福井市の食生活プロファイル。",
+      "pages": [
+        248,
+        249
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "18000"
+      ],
+      "nextAction": "福井県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-21",
+      "chapter": 6,
+      "question": "岐阜市(岐阜県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ岐阜市の食生活プロファイル。",
+      "pages": [
+        250,
+        251
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "21000"
+      ],
+      "nextAction": "岐阜県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-22",
+      "chapter": 6,
+      "question": "静岡市(静岡県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ静岡市の食生活プロファイル。",
+      "pages": [
+        252,
+        253
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "22000"
+      ],
+      "nextAction": "静岡県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-23",
+      "chapter": 6,
+      "question": "名古屋市(愛知県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ名古屋市の食生活プロファイル。",
+      "pages": [
+        254,
+        255
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "23000"
+      ],
+      "nextAction": "愛知県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-24",
+      "chapter": 6,
+      "question": "津市(三重県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ津市の食生活プロファイル。",
+      "pages": [
+        256,
+        257
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "24000"
+      ],
+      "nextAction": "三重県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-25",
+      "chapter": 6,
+      "question": "大津市(滋賀県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ大津市の食生活プロファイル。",
+      "pages": [
+        258,
+        259
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "25000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "shiga-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 shiga-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-26",
+      "chapter": 6,
+      "question": "京都市(京都府)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ京都市の食生活プロファイル。",
+      "pages": [
+        260,
+        261
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "26000"
+      ],
+      "nextAction": "京都府の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-27",
+      "chapter": 6,
+      "question": "大阪市(大阪府)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ大阪市の食生活プロファイル。",
+      "pages": [
+        262,
+        263
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "27000"
+      ],
+      "nextAction": "大阪府の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-28",
+      "chapter": 6,
+      "question": "神戸市(兵庫県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ神戸市の食生活プロファイル。",
+      "pages": [
+        264,
+        265
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "28000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "hyogo-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 hyogo-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-29",
+      "chapter": 6,
+      "question": "奈良市(奈良県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ奈良市の食生活プロファイル。",
+      "pages": [
+        266,
+        267
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "29000"
+      ],
+      "nextAction": "奈良県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-30",
+      "chapter": 6,
+      "question": "和歌山市(和歌山県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ和歌山市の食生活プロファイル。",
+      "pages": [
+        268,
+        269
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "30000"
+      ],
+      "nextAction": "和歌山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-31",
+      "chapter": 6,
+      "question": "鳥取市(鳥取県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ鳥取市の食生活プロファイル。",
+      "pages": [
+        270,
+        271
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "31000"
+      ],
+      "nextAction": "鳥取県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-32",
+      "chapter": 6,
+      "question": "松江市(島根県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ松江市の食生活プロファイル。",
+      "pages": [
+        272,
+        273
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "32000"
+      ],
+      "nextAction": "島根県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-33",
+      "chapter": 6,
+      "question": "岡山市(岡山県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ岡山市の食生活プロファイル。",
+      "pages": [
+        274,
+        275
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "33000"
+      ],
+      "nextAction": "岡山県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-34",
+      "chapter": 6,
+      "question": "広島市(広島県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ広島市の食生活プロファイル。",
+      "pages": [
+        276,
+        277
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "34000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "hiroshima-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 hiroshima-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-35",
+      "chapter": 6,
+      "question": "山口市(山口県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ山口市の食生活プロファイル。",
+      "pages": [
+        278,
+        279
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "35000"
+      ],
+      "nextAction": "山口県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-36",
+      "chapter": 6,
+      "question": "徳島市(徳島県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ徳島市の食生活プロファイル。",
+      "pages": [
+        280,
+        281
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "36000"
+      ],
+      "nextAction": "徳島県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-37",
+      "chapter": 6,
+      "question": "高松市(香川県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ高松市の食生活プロファイル。",
+      "pages": [
+        282,
+        283
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "37000"
+      ],
+      "nextAction": "香川県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-38",
+      "chapter": 6,
+      "question": "松山市(愛媛県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ松山市の食生活プロファイル。",
+      "pages": [
+        284,
+        285
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "38000"
+      ],
+      "nextAction": "愛媛県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-39",
+      "chapter": 6,
+      "question": "高知市(高知県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ高知市の食生活プロファイル。",
+      "pages": [
+        286,
+        287
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "39000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "kochi-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 kochi-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-40",
+      "chapter": 6,
+      "question": "福岡市(福岡県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ福岡市の食生活プロファイル。",
+      "pages": [
+        288,
+        289
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "40000"
+      ],
+      "nextAction": "福岡県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-41",
+      "chapter": 6,
+      "question": "佐賀市(佐賀県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ佐賀市の食生活プロファイル。",
+      "pages": [
+        290,
+        291
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "41000"
+      ],
+      "nextAction": "佐賀県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-42",
+      "chapter": 6,
+      "question": "長崎市(長崎県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ長崎市の食生活プロファイル。",
+      "pages": [
+        292,
+        293
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "42000"
+      ],
+      "nextAction": "長崎県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-43",
+      "chapter": 6,
+      "question": "熊本市(熊本県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ熊本市の食生活プロファイル。",
+      "pages": [
+        294,
+        295
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "43000"
+      ],
+      "nextAction": "熊本県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-44",
+      "chapter": 6,
+      "question": "大分市(大分県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ大分市の食生活プロファイル。",
+      "pages": [
+        296,
+        297
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "44000"
+      ],
+      "nextAction": "大分県の <pref>-food-culture 記事を最新年の家計調査で新規作成する (型D2)"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-45",
+      "chapter": 6,
+      "question": "宮崎市(宮崎県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ宮崎市の食生活プロファイル。",
+      "pages": [
+        298,
+        299
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "45000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "miyazaki-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 miyazaki-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-46",
+      "chapter": 6,
+      "question": "鹿児島市(鹿児島県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ鹿児島市の食生活プロファイル。",
+      "pages": [
+        300,
+        301
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "46000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "kagoshima-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 kagoshima-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a06-47",
+      "chapter": 6,
+      "question": "那覇市(沖縄県)の世帯は、全国平均と比べて何を多く・高く買っているか？",
+      "thesis": "家計調査(二人以上世帯・2012-2013年平均)の品目別の数量・価格・支出額を全国平均=100で読んだ那覇市の食生活プロファイル。",
+      "pages": [
+        302,
+        303
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県庁所在市別の品目データは既存の家計調査metric(約690件)で再取得でき、県の食文化記事・areaページへ統合できる",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "47000"
+      ],
+      "existing": {
+        "blogSlugs": [
+          "okinawa-food-culture"
+        ]
+      },
+      "nextAction": "既存記事 okinawa-food-culture を最新年で更新し、4分類(多く高く/高く/多く/支出額大)の視点を追加する"
+    },
+    {
+      "id": "kakei-marketing-2015-a07-01",
+      "chapter": 7,
+      "question": "『地産地消』は本当に地元の消費者に支持されているか？",
+      "thesis": "北海道(牛肉)や九州(豚肉・鶏肉)では生産地の消費者が必ずしもその品目を多く消費しておらず、地産地消を価値観として押しつけるより、好んで消費する地域と組むべきという結び。家計調査の国際的な希少性も述べる。",
+      "pages": [
+        304,
+        307
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "結論的な主張であり観測値ではないが、産地×消費地の記事の視点として使える",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (二人以上の世帯・都道府県庁所在市別／年間収入五分位階級別)",
+          "datasetId": "00200561",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査の結果を見る際のポイント / 家計調査のしくみと見方",
+          "url": "https://www.stat.go.jp/data/kakei/point.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2005",
+            "2013"
+          ],
+          "checkedAt": "2026-09-05",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "『産地と消費地のギャップ』型B記事 (農業産出額×家計消費量の散布図)"
+    }
+  ]
+}
