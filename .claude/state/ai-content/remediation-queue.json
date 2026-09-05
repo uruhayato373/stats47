@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-09-05T04:27:45.519Z",
+  "generatedAt": "2026-09-05T05:36:10.128Z",
   "gscSnapshot": "2026-W35",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2163,
-    "done": 735,
-    "needsRegen": 1428,
+    "total": 2166,
+    "done": 747,
+    "needsRegen": 1419,
     "needsByReason": {
-      "incomplete": 1238,
-      "blocker": 51,
-      "missing": 139
+      "incomplete": 1230,
+      "missing": 139,
+      "blocker": 50
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 60689,
-    "needsImpressions": 1350,
+    "doneImpressions": 60752,
+    "needsImpressions": 1287,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -9341,14 +9341,16 @@
       "impressions": 6,
       "clicks": 0,
       "position": 10.33,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T04:28:42.320Z"
     },
     {
       "rankingKey": "other-clothing-service-consumption-expenditure",
@@ -9403,14 +9405,16 @@
       "impressions": 6,
       "clicks": 0,
       "position": 6.17,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T04:31:04.500Z"
     },
     {
       "rankingKey": "public-kindergarten-ratio",
@@ -9600,12 +9604,16 @@
       "impressions": 6,
       "clicks": 0,
       "position": 2.83,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "causal-insights",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T05:16:47.732Z"
     },
     {
       "rankingKey": "womens-clothing-consumption-expenditure",
@@ -9622,30 +9630,31 @@
       "impressions": 5,
       "clicks": 0,
       "position": 8.8,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T05:19:26.425Z"
     },
     {
       "rankingKey": "beauty-appliance-consumption-expenditure",
       "impressions": 5,
       "clicks": 0,
       "position": 5.2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T04:47:52.919Z"
     },
     {
       "rankingKey": "bonus-admin-prefecture",
@@ -9667,40 +9676,48 @@
       "impressions": 5,
       "clicks": 0,
       "position": 4.6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T05:22:11.083Z"
     },
     {
       "rankingKey": "clothing-rental-consumption-expenditure",
       "impressions": 5,
       "clicks": 1,
       "position": 4.2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T04:52:14.745Z"
     },
     {
       "rankingKey": "convenience-store-sales-yoy",
       "impressions": 5,
       "clicks": 0,
       "position": 2.4,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T04:53:41.253Z"
     },
     {
       "rankingKey": "curry-roux-consumption-expenditure",
@@ -9722,14 +9739,16 @@
       "impressions": 5,
       "clicks": 2,
       "position": 2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T04:58:27.340Z"
     },
     {
       "rankingKey": "dementia-death-rate",
@@ -9751,38 +9770,52 @@
       "impressions": 5,
       "clicks": 0,
       "position": 7.4,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T05:03:12.398Z"
     },
     {
       "rankingKey": "earmarked-tax-local",
       "impressions": 5,
       "clicks": 0,
       "position": 5.4,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T05:25:45.728Z"
     },
     {
       "rankingKey": "factory-industrial-park-rate",
       "impressions": 5,
       "clicks": 1,
       "position": 4.8,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-count",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 05:34:18 GMT",
+      "updatedAt": "2026-09-05T05:09:15.074Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "manual-escalation"
+      ]
     },
     {
       "rankingKey": "fishing-vessel-crew",
@@ -10005,7 +10038,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "other-dried-vegetables-seaweed-consumption-expenditure",
@@ -10019,7 +10052,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "other-noodles-consumption-quantity",
@@ -10032,7 +10065,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "per-capita-kenmin-shotoku-h17",
@@ -10047,7 +10080,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "per-capita-public-works-expenditure-pref-municipal",
@@ -10074,7 +10107,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "per-student-public-junior-high-school-expenditure-pref-municipal",
@@ -10089,7 +10122,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "relaxation-avg-time-female",
@@ -10099,7 +10132,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "relaxation-avg-time-male",
@@ -10109,7 +10142,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "resident-foreigner-korea",
@@ -10122,7 +10155,7 @@
         "missing-insights",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "salted-salmon-consumption-expenditure",
@@ -10136,7 +10169,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "scallop-consumption-quantity",
@@ -10149,7 +10182,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "sewerage-drainage-population",
@@ -10163,7 +10196,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "sleep-avg-time-female",
@@ -24906,6 +24939,36 @@
       "blockers": [
         "missing-pref-commentary"
       ],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "information-communication-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "information-communication-coefficient",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "academic-achievement-test-average-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "gemini-auto"
     },
     {
