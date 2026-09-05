@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-09-05T03:32:12.164Z",
+  "generatedAt": "2026-09-05T04:27:45.519Z",
   "gscSnapshot": "2026-W35",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2163,
-    "done": 729,
-    "needsRegen": 1434,
+    "done": 735,
+    "needsRegen": 1428,
     "needsByReason": {
-      "incomplete": 1243,
-      "missing": 140,
-      "blocker": 51
+      "incomplete": 1238,
+      "blocker": 51,
+      "missing": 139
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 60653,
-    "needsImpressions": 1386,
+    "doneImpressions": 60689,
+    "needsImpressions": 1350,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -9309,25 +9309,32 @@
       "impressions": 6,
       "clicks": 0,
       "position": 1.33,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 04:01:09 GMT",
+      "updatedAt": "2026-09-05T03:33:44.855Z"
     },
     {
       "rankingKey": "midwife-by-prefecture",
       "impressions": 6,
       "clicks": 0,
       "position": 6.17,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 04:01:09 GMT",
+      "updatedAt": "2026-09-05T03:35:03.459Z"
     },
     {
       "rankingKey": "number-of-hotel-rooms",
@@ -9348,42 +9355,48 @@
       "impressions": 6,
       "clicks": 0,
       "position": 7.83,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 04:01:09 GMT",
+      "updatedAt": "2026-09-05T03:38:37.435Z"
     },
     {
       "rankingKey": "port-ships-tonnage",
       "impressions": 6,
       "clicks": 0,
       "position": 7,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-count",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 04:01:09 GMT",
+      "updatedAt": "2026-09-05T03:41:46.783Z"
     },
     {
       "rankingKey": "practical-nurse-annual-income",
       "impressions": 6,
       "clicks": 1,
       "position": 4.17,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 04:01:09 GMT",
+      "updatedAt": "2026-09-05T03:44:55.504Z"
     },
     {
       "rankingKey": "public-bath-count-per-100k",
@@ -9419,14 +9432,16 @@
       "impressions": 6,
       "clicks": 0,
       "position": 4.5,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 04:01:09 GMT",
+      "updatedAt": "2026-09-05T03:54:02.535Z"
     },
     {
       "rankingKey": "rice-harvest-volume",
@@ -9902,7 +9917,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "municipal-intellectual-disability-consultations",
@@ -9916,7 +9931,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "music-lesson-consumption-expenditure",
@@ -9931,7 +9946,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "national-pension-enrollees-type1-per-1000-20-59",
@@ -9946,7 +9961,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "new-graduate-scheduled-salary-college-female",
@@ -9961,7 +9976,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "orange-consumption-expenditure",
@@ -9975,7 +9990,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "other-consumption-expenditure-ratio-multi-person-households",

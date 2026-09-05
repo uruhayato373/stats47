@@ -38,6 +38,24 @@
       "firstFailedAt": "2026-09-05"
     },
     "public-kindergarten-ratio": {
+      "failCount": 2,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "womens-clothing-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "curry-roux-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "dementia-death-rate": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
