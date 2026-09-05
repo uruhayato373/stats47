@@ -44,6 +44,22 @@ function fixture(generatedAt: string) {
 }
 
 describe('表示中のGeo証跡に固定したserver action', () => {
+  it.each([
+    ['https://example.com', '13'],
+    ['//example.com', '13'],
+    ['population-flood-risk/../../private', '13'],
+    ['population-flood-risk', '../13'],
+    ['population-flood-risk', '13?redirect=https://example.com'],
+    ['population-flood-risk', '%31%33'],
+    ['population-flood-risk', '13\n'],
+  ])('定義外の取得先をR2へ渡さない (%s, %s)', async (slug, pref) => {
+    vi.mocked(fetchFromR2AsJson).mockClear();
+    expect(await fetchGeoDetailAction(slug, pref, {
+      generatedAt: '2026-09-05T00:00:00.000Z',
+      sha256: 'a'.repeat(64),
+    })).toBeNull();
+    expect(fetchFromR2AsJson).not.toHaveBeenCalled();
+  });
   it('ページAの表示中に配信がBへ切り替わった場合、Bの地図を混ぜず拒否する', async () => {
     const a = fixture('2026-09-05T00:00:00.000Z');
     const b = fixture('2026-09-06T00:00:00.000Z');

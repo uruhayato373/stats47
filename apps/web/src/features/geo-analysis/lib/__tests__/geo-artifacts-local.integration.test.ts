@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
@@ -21,26 +21,33 @@ import {
   loadGeoStationAccessPrefDetail,
 } from '../load-geo-station-access-evidence';
 
-// 任意のローカル生成物を実際の配信parserで検証する。CIではR2 mirrorなしならスキップ。
-const root =
-  process.env.GEO_ARTIFACT_ROOT ??
-  resolve(process.cwd(), '../../.local/r2/app/geo');
-const available = GEO_CROSS_ANALYSIS_SLUGS.every((slug) =>
-  existsSync(resolve(root, slug, 'manifest.json'))
-);
-describe.skipIf(!available)('Geoローカル生成物の配信契約', () => {
+import { geoArtifactBundleFixture } from './geo-artifact-bundle-fixture';
+
+// CIは合成fixtureで全契約を実行する。実artifact監査はnpm run audit:geo-runtime。
+// 明示されたrootの欠落・破損は必ず失敗し、fixtureへフォールバックしない。
+const root = process.env.GEO_ARTIFACT_ROOT;
+describe(`Geo配信契約 (${root ? '実artifact・141県詳細' : '合成fixture・141県詳細'})`, () => {
   for (const slug of GEO_CROSS_ANALYSIS_SLUGS) {
-    const read = (key: string) =>
-      JSON.parse(readFileSync(resolve(root, slug, `${key}.json`), 'utf8'));
+    const fixtures = geoArtifactBundleFixture(slug);
+    const read = (key: string) => {
+      if (root !== undefined)
+        return JSON.parse(
+          readFileSync(resolve(root, slug, `${key}.json`), 'utf8')
+        );
+      if (!fixtures.has(key))
+        throw new Error(`Missing fixture: ${slug}/${key}`);
+      return structuredClone(fixtures.get(key));
+    };
     it(`${slug}: manifest・集計・47県の再計算値と正準JSON SHA/bytesが有効`, async () => {
       const manifest = parseGeoAnalysisManifest(read('manifest'), slug);
-      vi.mocked(fetchFromR2AsJson).mockImplementation(async (key) =>
-        JSON.parse(
-          readFileSync(resolve(root, key.replace('app/geo/', '')), 'utf8')
-        )
-      );
+      vi.mocked(fetchFromR2AsJson).mockImplementation(async (key) => {
+        const prefix = `app/geo/${slug}/`;
+        if (!key.startsWith(prefix) || !key.endsWith('.json'))
+          throw new Error(`Unexpected artifact key: ${key}`);
+        return read(key.slice(prefix.length, -5));
+      });
       expect(manifest).not.toBeNull();
-      if (!manifest) return;
+      if (!manifest) throw new Error(`${slug}: invalid manifest`);
       const snapshot = parseGeoAnalysisSnapshot(read('item'), slug);
       expect(snapshot).not.toBeNull();
       expect(await loadGeoAnalysisSnapshot(slug)).toEqual(snapshot);

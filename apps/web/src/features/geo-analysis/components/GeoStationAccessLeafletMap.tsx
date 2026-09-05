@@ -17,6 +17,8 @@ import {
 import { buildGeoStationAccessMapModel } from '../lib/build-geo-station-access-map-model';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
 
+import { GeoLeafletLifecycle } from './GeoLeafletLifecycle';
+
 
 import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
 import type { GeoStationAccessPrefDetail } from '@stats47/gis';
@@ -101,6 +103,7 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
       className="h-[480px] overflow-hidden rounded-none lg:h-[620px]"
       aria-label={`${detail.areaName}の1kmメッシュ分析地図`}
     >
+      <GeoLeafletLifecycle />
       <TileLayer url={GEO_BASEMAP.url} attribution={GEO_BASEMAP.attribution} />
       <GeoJSON
         key={`${detail.areaCode}-${view}`}
