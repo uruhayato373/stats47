@@ -48,60 +48,6 @@
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
-    },
-    "treatment-rate-neurosis-outpatient": {
-      "failCount": 2,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "air-conditioner-consumption-expenditure": {
-      "failCount": 2,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "healthy-life-expectancy-female": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "hobby-participation-rate-cooking": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "hobby-participation-rate-theater": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "kerosene-consumption-expenditure": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "kindergarten-expenses-prefecture": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "miscellaneous-school-count-per-100k": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "other-staple-prepared-consumption-expenditure": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
     }
   }
 }
