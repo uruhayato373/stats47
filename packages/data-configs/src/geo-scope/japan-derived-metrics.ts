@@ -43,6 +43,22 @@ export type JapanDerivedMetricDecision =
  */
 export const JAPAN_DERIVED_METRIC_DECISIONS: readonly JapanDerivedMetricDecision[] = [
   {
+    metricKey: "port-count",
+    themeKey: "ports",
+    verdict: "adopted",
+    availability: {
+      status: "derived-additive",
+      recipeKey: JAPAN_DERIVED_ADDITIVE_RECIPE_KEY,
+    },
+    sourceMetricKey: "port-count",
+    observedAt: "2026-09-06",
+    evidence: [
+      "港湾調査規則2025年1月1日施行版の別表。全港湾ではなく甲種163港・乙種501港の調査対象664港",
+      "40県の指定港と未掲載7県の0で47県。共同港の境港は国交省みなと一覧の鳥取県欄に従い一度だけ計上",
+      "固定原典SHA・施行日・甲乙別合計・全国保存則を検証し、旧2024年699港と接続しない",
+    ],
+  },
+  {
     metricKey: "fishing-port-count",
     themeKey: "fishery-marine",
     verdict: "rejected",
