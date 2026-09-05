@@ -12,7 +12,33 @@
  *
  * generate-parallel.ts から使う。I/O を持たないので vitest で直接テストする。
  */
+import { StringDecoder } from "node:string_decoder";
+
 import type { GeminiTokenUsage } from "./gemini-text-client";
+
+/**
+ * 子プロセスの stdout / stderr を UTF-8 として正しく結合する collector。
+ *
+ * ★2026-09-05 実測: chunk ごとに `Buffer.toString()` していたため、chunk 境界で割れたマルチバイト文字が
+ *   U+FFFD になり「滋賀県」→「��賀県」「全国平均」→「全��国平均」が候補に混入、critic が BLOCK / MAJOR を
+ *   出していた (JSON 崩れや数値の範囲外にも波及しうる)。StringDecoder は境界をまたいで復号する。
+ */
+export function createUtf8Collector(): {
+  push(chunk: Buffer | string): void;
+  end(): string;
+} {
+  const decoder = new StringDecoder("utf-8");
+  let text = "";
+  return {
+    push(chunk) {
+      text += typeof chunk === "string" ? chunk : decoder.write(chunk);
+    },
+    end() {
+      text += decoder.end();
+      return text;
+    },
+  };
+}
 
 /**
  * `--model` / `--critic` で受け付ける alias → 実 model ID。

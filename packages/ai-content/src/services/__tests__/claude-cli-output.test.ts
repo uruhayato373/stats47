@@ -3,9 +3,32 @@ import { describe, expect, it } from "vitest";
 import {
   CLAUDE_CLI_MODELS,
   ClaudeCliError,
+  createUtf8Collector,
   isClaudeCliAlias,
   parseClaudeCliOutput,
 } from "../claude-cli-output";
+
+describe("UTF-8 collector (子プロセス stdout の結合)", () => {
+  it("chunk 境界でマルチバイト文字が割れても U+FFFD にしない (実測: 「滋賀県」→「��賀県」)", () => {
+    const bytes = Buffer.from("滋賀県は全国平均を上回ります", "utf-8");
+    // 「滋」(3 バイト) の途中で割る
+    const chunks = [bytes.subarray(0, 1), bytes.subarray(1, 4), bytes.subarray(4)];
+    const naive = chunks.map((c) => c.toString()).join("");
+    expect(naive).toContain("�"); // 旧実装の再現 (これが出ない分割ならテストの意味が無い)
+
+    const collector = createUtf8Collector();
+    for (const c of chunks) collector.push(c);
+    expect(collector.end()).toBe("滋賀県は全国平均を上回ります");
+  });
+
+  it("文字列 chunk と空入力も扱える", () => {
+    const collector = createUtf8Collector();
+    collector.push("abc");
+    collector.push(Buffer.from(""));
+    expect(collector.end()).toBe("abc");
+    expect(createUtf8Collector().end()).toBe("");
+  });
+});
 
 const successWrapper = {
   type: "result",

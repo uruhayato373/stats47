@@ -80,6 +80,7 @@ import {
 import {
   CLAUDE_CLI_MODELS,
   ClaudeCliError,
+  createUtf8Collector,
   isClaudeCliAlias,
   parseClaudeCliOutput,
   type ClaudeCliAlias,
@@ -288,11 +289,14 @@ function callCli(
       env: childEnv,
       ...(cwd ? { cwd } : {}),
     });
-    let stdout = "";
-    let stderr = "";
-    proc.stdout.on("data", (d: Buffer) => (stdout += d.toString()));
-    proc.stderr.on("data", (d: Buffer) => (stderr += d.toString()));
+    // ★chunk ごとに toString しない (境界で割れたマルチバイト文字が U+FFFD になる。2026-09-05 に文字化けで critic BLOCK)
+    const outCollector = createUtf8Collector();
+    const errCollector = createUtf8Collector();
+    proc.stdout.on("data", (d: Buffer) => outCollector.push(d));
+    proc.stderr.on("data", (d: Buffer) => errCollector.push(d));
     proc.on("close", (code) => {
+      const stdout = outCollector.end();
+      const stderr = errCollector.end();
       if (code !== 0) {
         reject(new Error(`${model} CLI failed (code ${code}): ${stderr.slice(0, 300)}`));
         return;
@@ -364,9 +368,10 @@ function runAuditGate(row: AiContentSnapshotRow): Promise<{ ok: boolean; detail:
       stdio: ["ignore", "pipe", "pipe"],
       env: childEnv,
     });
-    let out = "";
-    proc.stdout.on("data", (d: Buffer) => (out += d.toString()));
+    const outCollector = createUtf8Collector();
+    proc.stdout.on("data", (d: Buffer) => outCollector.push(d));
     proc.on("close", (code) => {
+      const out = outCollector.end();
       rmSync(dir, { recursive: true, force: true });
       // exit 0 = blocker なし / exit 1 = blocker あり / exit 2 = audit 自体のエラー
       let detail = "";
