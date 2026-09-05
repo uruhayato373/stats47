@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { gunzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
@@ -95,6 +95,28 @@ afterEach(() => {
 });
 
 describe('exact R2 asset publisher', () => {
+  it('gzip済みの旧観測値も展開して検査し、混在バッチをPUT前に拒否する', async () => {
+    const root = makeRoot();
+    const allowedKey = 'app/blog/article-a/chart.svg';
+    const oldKey = 'app/stats/roadside-station-count/values.json';
+    mkdirSync(join(root, '.local/r2/app/stats/roadside-station-count'), { recursive: true });
+    writeFileSync(join(root, '.local/r2', allowedKey), '<svg/>');
+    writeFileSync(join(root, '.local/r2', oldKey), JSON.stringify({ stale: 'x'.repeat(10000) }));
+    const candidates = resolveExactAssetCandidates(root, {
+      keys: [allowedKey, oldKey], prefix: null, extensions: [],
+    });
+    // JSONの通常選択はidentity。圧縮済み候補を渡す経路も検査する。
+    const old = candidates.find((candidate) => candidate.key === oldKey)!;
+    old.body = gzipSync(old.body);
+    old.contentEncoding = 'gzip';
+    old.size = old.body.length;
+    old.sha256 = createHash('sha256').update(old.body).digest('hex');
+    const { store, puts } = makeStore();
+    await expect(publishExactR2Assets({ candidates, store, dryRun: false }))
+      .rejects.toThrow('一次資料移行後の旧版');
+    expect(puts).toEqual([]);
+  });
+
   it.each([false, true])('非商用KSJが混在したバッチは全件PUT前に拒否する (dryRun=%s)', async (dryRun) => {
     const root = makeRoot();
     const key = 'app/blog/article-a/chart.svg';
