@@ -49,61 +49,55 @@
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "other-consumption-expenditure-ratio-multi-person-households": {
-      "failCount": 2,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "tableware-consumption-quantity": {
-      "failCount": 2,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "per-student-public-high-school-expenditure-pref-municipal": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
     "treatment-rate-neurosis-outpatient": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "water-supply-annual-volume": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
     "air-conditioner-consumption-expenditure": {
+      "failCount": 2,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "healthy-life-expectancy-female": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "amusement-park-consumption-expenditure": {
+    "hobby-participation-rate-cooking": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "cocoa-consumption-expenditure": {
+    "hobby-participation-rate-theater": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "dried-mackerel-consumption-quantity": {
+    "kerosene-consumption-expenditure": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "dried-mackerel-consumption-expenditure": {
+    "kindergarten-expenses-prefecture": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "miscellaneous-school-count-per-100k": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "other-staple-prepared-consumption-expenditure": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
