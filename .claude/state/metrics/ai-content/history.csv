@@ -23,3 +23,4 @@ date,run_id,model,targets,passed,rejected,failed,skipped,author_requests,critic_
 2026-09-05,batch100v2-20260905-1,claude-sonnet-5,35,24,11,0,0,51,50,1161496,521699,0,1683195,0,0,not-recorded,21.1233
 2026-09-05,batch100v2-20260905-2,claude-sonnet-5,35,26,9,0,0,50,48,1052397,468712,0,1521109,0,0,not-recorded,18.6438
 2026-09-05,batch100v2-20260905-3,claude-sonnet-5,35,11,0,24,0,17,14,349926,148741,0,498667,0,0,not-recorded,5.7299
+2026-09-05,opus-escalation-20260905,claude-opus-5,2,0,0,2,0,2,0,11679,14298,0,25977,0,0,not-recorded,0.4865
