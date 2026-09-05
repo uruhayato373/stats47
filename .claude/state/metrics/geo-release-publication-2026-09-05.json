@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-05T12:29:23.035Z",
   "scope": "geo-release-publication",
   "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_DECISION_PENDING",
-  "updatedAt": "2026-09-05T13:34:38.223Z",
+  "updatedAt": "2026-09-05T14:02:25.009Z",
   "evidenceDigests": [
     { "path": "/tmp/stats47-geo-source-head-check.json", "bytes": 33419, "sha256": "fa68c618f8905f07cb1ebc8817ff1ce1c743429657583c27b081c4a92f331242" },
     { "path": "/tmp/geo-flood-source-publish-20260905/apply.json", "bytes": 98294, "sha256": "055c871c1750c460e97493475d800f82cd1377530c2f01cc2383f5b4eb08ec73" },
@@ -3060,7 +3060,55 @@
     "backupVerifiedObjects": 435,
     "backupReceipt": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/inventory-2026-09-05T13-21-55-281Z/report.json",
     "backupReceiptSha256": "34e816c09047c30586e3169bf36b6a5356fd384e21aaa7ae4acc71de03ff479b",
+    "rankingBackup": {
+      "path": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/rankings-2026-09-05T13-47-55-827Z/report.json",
+      "sha256": "c20b9c3e40f405d0aba34d3ed631d7d66e579f662ac95fb8fb57bb6db4e4ea05",
+      "dedicatedObjects": 152,
+      "sharedReferenceOnlyObjects": 7,
+      "allBytes": 9182100,
+      "publicRankingCsvJsonHttp200": 33,
+      "sharedIndexesMustNotBeDeletedOrRestoredWholesale": true,
+      "relatedLegacySns": { "postedLedgerReferences": 6, "draftLedgerReferences": 2, "externalStatusVerified": false }
+    },
+    "officialReplacementCandidates": {
+      "status": "STAGED_AND_VERIFIED_NOT_PUBLISHED",
+      "keys": ["roadside-station-count", "fishing-port-count-ksj"],
+      "manifest": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/official-replacements-20260905/handoff-manifest.json",
+      "manifestSha256": "4cfa9b37640ec31757af9777b80986ea14986688b66ca89c281f4570ac9b43ab",
+      "candidateObjects": 13,
+      "preservedEvidenceFiles": 56,
+      "sourceTotals": [1234, 2768],
+      "sourceDates": ["2026-09-04", "2026-04-01"],
+      "prefectureRowsEach": 47,
+      "roadsideAiIndependentCritic": "PASS",
+      "normalizationDenominatorYears": { "population": "2024", "area": "2023" },
+      "remainingRolloutChecks": "Coordinate code, exact snapshots, Japan derivations, affected images/correlations and live pages; never publish historical comparison evidence"
+    },
+    "ownerDecisionKeys": ["dam-count", "hydroelectric-power-plant-count", "thermal-power-plant-count", "nuclear-power-plant-count", "geothermal-power-plant-count", "wind-power-plant-count-facility", "biomass-power-station-count", "tourism-resource-count", "fishing-port-count"],
+    "remoteCatalogCheck": {
+      "status": "FAIL_EXPECTED",
+      "exitCode": 1,
+      "checkedAt": "2026-09-05T14:02:25.009Z",
+      "inventoryMode": "remote-r2",
+      "listedObjects": 11217,
+      "findings": "Only the eleven noncommercial datasets above; no missing public acquisition or other error",
+      "log": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/inventory-2026-09-05T13-21-55-281Z/remote-catalog-check.log",
+      "logSha256": "0d937a762dcbc3fd32bd96852cd2d2cf480789c2da6f77cd5e3b4443db1a21c5"
+    },
     "remoteDelete": "NOT_RUN",
-    "next": "Owner chooses licensed source replacement, documented permission, or coordinated retirement before exact removal"
+    "next": "Obtain explicit approval for exact raw removal, rollout of the two official replacements, and permission or retirement/redirect policy for the remaining nine metrics"
+  },
+  "followupVerification": {
+    "genericPublisherAndMigrationTests": { "passed": 20, "failed": 0 },
+    "catalogCompletionTests": { "passed": 7, "failed": 0 },
+    "officialSourceParserTests": { "passed": 9, "failed": 0 },
+    "normalizationTests": { "passed": 25, "failed": 0 },
+    "all25WorkspacesAndScriptsTypeCheck": "PASS",
+    "noteCatalog": { "errors": 0, "preexistingWarnings": 44 },
+    "docsCheck": { "errors": 0, "preexistingWarnings": 39 },
+    "agentSkillConsistency": { "errors": 0, "preexistingWarnings": 34 },
+    "fullWebBuildThisFollowup": "NOT_RUN; no followup code deployment",
+    "paidNoteBacklogClosure": "Ledger CLI recorded actual passing gates; removal verification PASS",
+    "recurrenceGuardDeployment": "NOT_DEPLOYED; tested implementation on codex/geo-license-publish-guard"
   }
 }
