@@ -24,6 +24,11 @@ Canvas再描画の副作用を生んだため、公開optionでアニメーシ�
 note商品添付は無料説明文中の同名言及へ誤着地し得るため、完全一致する一意H2とDOM順序で検証する。
 一時保存で有料境界が保持されると推定せず、再読込で確かめ、保持されない場合は人間の境界再設定・公開確定を残す。
 
+**出典カタログの教訓（2026-09-05）**: 固定パスのR2依存pageは`revalidate`だけでは静的生成を防げない。
+ローカルでは出典が読めても、CIではnullの代替表示が焼き付いてHTTP200のまま本番に残り得る。
+`/geo/data-catalog`をpage単位の`force-dynamic`とし、既存R2-route SSG guardで静的化への後退を拒否する。
+公開検証はstatus/canonicalに加え、3分析の出典・版・ライセンス表示と欠損メッセージ不在を確認する。
+
 **問題**: `/geo/2050-population`が、単一指標の都道府県コロプレスと順位比較だけをGeo分析として公開していた。Geoハブとテーマ導線もこのbaselineを空間分析の1件として数え、ランキングページと責務が重複した。
 
 **原因**: データ定義は`analysisKind: 'baseline'`と正しく分類していたが、`BUSINESS_PLAN_M1_GEO_ANALYSES`がbaselineとspatial-crossを同じ配列に保持し、公開UIが全件を無条件に列挙していた。さらにbaselineだけ専用static routeを持ち、snapshot・lineage manifest・県別途中artifactを必須にする共通Geo routeを迂回していた。当時の受入条件も「地図・上位下位・県比較」を完了条件にしており、空間演算の有無を検証していなかった。
