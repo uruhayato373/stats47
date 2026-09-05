@@ -1,0 +1,411 @@
+<!-- data-source: gyoza-frozen-consumption-expenditure-map.json | generated: 2026-09-05T09:51:32.572Z -->
+<svg width="720" height="720" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-label="冷凍ぎょうざ購入額 都道府県マップ">
+  <title>冷凍ぎょうざ購入額 都道府県マップ</title>
+  <desc>2024年</desc>
+  <text x="22" y="46" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="19" font-weight="bold" fill="#6e7d94">冷凍ぎょうざ購入額 都道府県マップ</text>
+  <text x="22" y="66" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="12" fill="#6e7d94">2024年</text>
+  <rect x="22" y="113" width="15" height="15" rx="2" fill="rgb(165,15,21)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">1. 宮崎県</text>
+  <text x="185.8" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">3,517</text>
+  <text x="190.8" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">円</text>
+  <rect x="22" y="143" width="15" height="15" rx="2" fill="rgb(216,69,52)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">2. 栃木県</text>
+  <text x="185.8" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">2,801</text>
+  <text x="190.8" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">円</text>
+  <rect x="22" y="173" width="15" height="15" rx="2" fill="rgb(245,100,70)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">3. 埼玉県</text>
+  <text x="185.8" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">2,393</text>
+  <text x="190.8" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">円</text>
+  <g aria-label="群馬県 2,128円">
+    <title>群馬県：2,128円</title>
+    <rect x="579.0" y="327.0" width="39" height="39" rx="3" fill="rgb(251,125,96)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="598.5" y="346.0" font-size="11" font-weight="700">群馬</tspan>
+      <tspan x="598.5" y="356.5" font-size="9" font-weight="600">2,128円</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉県 2,393円">
+    <title>埼玉県：2,393円</title>
+    <rect x="621.0" y="369.0" width="39" height="39" rx="3" fill="rgb(245,100,70)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="388.0" font-size="11" font-weight="700">埼玉</tspan>
+      <tspan x="640.5" y="398.5" font-size="9" font-weight="600">2,393円</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉県 1,694円">
+    <title>千葉県：1,694円</title>
+    <rect x="663.0" y="369.0" width="39" height="81" rx="3" fill="rgb(253,169,147)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="409.0" font-size="11" font-weight="700">千葉</tspan>
+      <tspan x="682.5" y="419.5" font-size="9" font-weight="600">1,694円</tspan>
+    </text>
+  </g>
+  <g aria-label="東京都 2,153円">
+    <title>東京都：2,153円</title>
+    <rect x="621.0" y="411.0" width="39" height="39" rx="3" fill="rgb(251,122,93)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="430.0" font-size="11" font-weight="700">東京</tspan>
+      <tspan x="640.5" y="440.5" font-size="9" font-weight="600">2,153円</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川県 1,934円">
+    <title>神奈川県：1,934円</title>
+    <rect x="621.0" y="453.0" width="39" height="39" rx="3" fill="rgb(252,144,119)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="472.0" font-size="11" font-weight="700">神奈川</tspan>
+      <tspan x="640.5" y="482.5" font-size="9" font-weight="600">1,934円</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟県 1,614円">
+    <title>新潟県：1,614円</title>
+    <rect x="537.0" y="285.0" width="81" height="39" rx="3" fill="rgb(253,177,157)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="577.5" y="304.0" font-size="11" font-weight="700">新潟</tspan>
+      <tspan x="577.5" y="314.5" font-size="9" font-weight="600">1,614円</tspan>
+    </text>
+  </g>
+  <g aria-label="富山県 1,706円">
+    <title>富山県：1,706円</title>
+    <rect x="495.0" y="285.0" width="39" height="39" rx="3" fill="rgb(253,168,146)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="304.0" font-size="11" font-weight="700">富山</tspan>
+      <tspan x="514.5" y="314.5" font-size="9" font-weight="600">1,706円</tspan>
+    </text>
+  </g>
+  <g aria-label="石川県 1,537円">
+    <title>石川県：1,537円</title>
+    <rect x="453.0" y="285.0" width="39" height="39" rx="3" fill="rgb(253,185,166)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="304.0" font-size="11" font-weight="700">石川</tspan>
+      <tspan x="472.5" y="314.5" font-size="9" font-weight="600">1,537円</tspan>
+    </text>
+  </g>
+  <g aria-label="福井県 2,058円">
+    <title>福井県：2,058円</title>
+    <rect x="453.0" y="327.0" width="39" height="39" rx="3" fill="rgb(252,132,104)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="346.0" font-size="11" font-weight="700">福井</tspan>
+      <tspan x="472.5" y="356.5" font-size="9" font-weight="600">2,058円</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨県 1,938円">
+    <title>山梨県：1,938円</title>
+    <rect x="579.0" y="369.0" width="39" height="39" rx="3" fill="rgb(252,144,118)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="598.5" y="388.0" font-size="11" font-weight="700">山梨</tspan>
+      <tspan x="598.5" y="398.5" font-size="9" font-weight="600">1,938円</tspan>
+    </text>
+  </g>
+  <g aria-label="長野県 1,674円">
+    <title>長野県：1,674円</title>
+    <rect x="537.0" y="327.0" width="39" height="81" rx="3" fill="rgb(253,171,150)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="556.5" y="367.0" font-size="11" font-weight="700">長野</tspan>
+      <tspan x="556.5" y="377.5" font-size="9" font-weight="600">1,674円</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜県 2,043円">
+    <title>岐阜県：2,043円</title>
+    <rect x="495.0" y="327.0" width="39" height="81" rx="3" fill="rgb(252,133,106)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="367.0" font-size="11" font-weight="700">岐阜</tspan>
+      <tspan x="514.5" y="377.5" font-size="9" font-weight="600">2,043円</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡県 1,952円">
+    <title>静岡県：1,952円</title>
+    <rect x="537.0" y="411.0" width="81" height="39" rx="3" fill="rgb(252,143,117)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="577.5" y="430.0" font-size="11" font-weight="700">静岡</tspan>
+      <tspan x="577.5" y="440.5" font-size="9" font-weight="600">1,952円</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知県 2,186円">
+    <title>愛知県：2,186円</title>
+    <rect x="495.0" y="411.0" width="39" height="39" rx="3" fill="rgb(251,119,89)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="430.0" font-size="11" font-weight="700">愛知</tspan>
+      <tspan x="514.5" y="440.5" font-size="9" font-weight="600">2,186円</tspan>
+    </text>
+  </g>
+  <g aria-label="三重県 1,950円">
+    <title>三重県：1,950円</title>
+    <rect x="453.0" y="411.0" width="39" height="81" rx="3" fill="rgb(252,143,117)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="451.0" font-size="11" font-weight="700">三重</tspan>
+      <tspan x="472.5" y="461.5" font-size="9" font-weight="600">1,950円</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀県 2,344円">
+    <title>滋賀県：2,344円</title>
+    <rect x="453.0" y="369.0" width="39" height="39" rx="3" fill="rgb(249,104,73)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="388.0" font-size="11" font-weight="700">滋賀</tspan>
+      <tspan x="472.5" y="398.5" font-size="9" font-weight="600">2,344円</tspan>
+    </text>
+  </g>
+  <g aria-label="京都府 1,969円">
+    <title>京都府：1,969円</title>
+    <rect x="369.0" y="369.0" width="81" height="39" rx="3" fill="rgb(252,141,115)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="409.5" y="388.0" font-size="11" font-weight="700">京都</tspan>
+      <tspan x="409.5" y="398.5" font-size="9" font-weight="600">1,969円</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪府 2,238円">
+    <title>大阪府：2,238円</title>
+    <rect x="369.0" y="411.0" width="39" height="39" rx="3" fill="rgb(251,113,83)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="388.5" y="430.0" font-size="11" font-weight="700">大阪</tspan>
+      <tspan x="388.5" y="440.5" font-size="9" font-weight="600">2,238円</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫県 2,150円">
+    <title>兵庫県：2,150円</title>
+    <rect x="327.0" y="369.0" width="39" height="81" rx="3" fill="rgb(251,122,93)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="346.5" y="409.0" font-size="11" font-weight="700">兵庫</tspan>
+      <tspan x="346.5" y="419.5" font-size="9" font-weight="600">2,150円</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良県 1,955円">
+    <title>奈良県：1,955円</title>
+    <rect x="411.0" y="411.0" width="39" height="39" rx="3" fill="rgb(252,142,116)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="430.5" y="430.0" font-size="11" font-weight="700">奈良</tspan>
+      <tspan x="430.5" y="440.5" font-size="9" font-weight="600">1,955円</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山県 1,990円">
+    <title>和歌山県：1,990円</title>
+    <rect x="369.0" y="453.0" width="81" height="39" rx="3" fill="rgb(252,139,112)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="409.5" y="472.0" font-size="11" font-weight="700">和歌山</tspan>
+      <tspan x="409.5" y="482.5" font-size="9" font-weight="600">1,990円</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取県 1,494円">
+    <title>鳥取県：1,494円</title>
+    <rect x="285.0" y="369.0" width="39" height="39" rx="3" fill="rgb(253,189,171)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="388.0" font-size="11" font-weight="700">鳥取</tspan>
+      <tspan x="304.5" y="398.5" font-size="9" font-weight="600">1,494円</tspan>
+    </text>
+  </g>
+  <g aria-label="島根県 2,000円">
+    <title>島根県：2,000円</title>
+    <rect x="243.0" y="369.0" width="39" height="39" rx="3" fill="rgb(252,138,111)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="388.0" font-size="11" font-weight="700">島根</tspan>
+      <tspan x="262.5" y="398.5" font-size="9" font-weight="600">2,000円</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山県 2,164円">
+    <title>岡山県：2,164円</title>
+    <rect x="285.0" y="411.0" width="39" height="39" rx="3" fill="rgb(251,121,91)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="430.0" font-size="11" font-weight="700">岡山</tspan>
+      <tspan x="304.5" y="440.5" font-size="9" font-weight="600">2,164円</tspan>
+    </text>
+  </g>
+  <g aria-label="広島県 1,787円">
+    <title>広島県：1,787円</title>
+    <rect x="243.0" y="411.0" width="39" height="39" rx="3" fill="rgb(252,159,136)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="430.0" font-size="11" font-weight="700">広島</tspan>
+      <tspan x="262.5" y="440.5" font-size="9" font-weight="600">1,787円</tspan>
+    </text>
+  </g>
+  <g aria-label="山口県 1,617円">
+    <title>山口県：1,617円</title>
+    <rect x="201.0" y="369.0" width="39" height="81" rx="3" fill="rgb(253,177,156)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="220.5" y="409.0" font-size="11" font-weight="700">山口</tspan>
+      <tspan x="220.5" y="419.5" font-size="9" font-weight="600">1,617円</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島県 1,430円">
+    <title>徳島県：1,430円</title>
+    <rect x="285.0" y="537.0" width="39" height="39" rx="3" fill="rgb(253,196,178)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="556.0" font-size="11" font-weight="700">徳島</tspan>
+      <tspan x="304.5" y="566.5" font-size="9" font-weight="600">1,430円</tspan>
+    </text>
+  </g>
+  <g aria-label="香川県 1,533円">
+    <title>香川県：1,533円</title>
+    <rect x="285.0" y="495.0" width="39" height="39" rx="3" fill="rgb(253,185,166)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="514.0" font-size="11" font-weight="700">香川</tspan>
+      <tspan x="304.5" y="524.5" font-size="9" font-weight="600">1,533円</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛県 1,605円">
+    <title>愛媛県：1,605円</title>
+    <rect x="243.0" y="495.0" width="39" height="39" rx="3" fill="rgb(253,178,158)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="514.0" font-size="11" font-weight="700">愛媛</tspan>
+      <tspan x="262.5" y="524.5" font-size="9" font-weight="600">1,605円</tspan>
+    </text>
+  </g>
+  <g aria-label="高知県 1,105円">
+    <title>高知県：1,105円</title>
+    <rect x="243.0" y="537.0" width="39" height="39" rx="3" fill="rgb(254,229,217)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="556.0" font-size="11" font-weight="700">高知</tspan>
+      <tspan x="262.5" y="566.5" font-size="9" font-weight="600">1,105円</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡県 2,383円">
+    <title>福岡県：2,383円</title>
+    <rect x="159.0" y="453.0" width="39" height="39" rx="3" fill="rgb(246,101,71)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="472.0" font-size="11" font-weight="700">福岡</tspan>
+      <tspan x="178.5" y="482.5" font-size="9" font-weight="600">2,383円</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀県 1,492円">
+    <title>佐賀県：1,492円</title>
+    <rect x="117.0" y="453.0" width="39" height="39" rx="3" fill="rgb(253,190,171)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="472.0" font-size="11" font-weight="700">佐賀</tspan>
+      <tspan x="136.5" y="482.5" font-size="9" font-weight="600">1,492円</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎県 1,773円">
+    <title>長崎県：1,773円</title>
+    <rect x="117.0" y="495.0" width="39" height="39" rx="3" fill="rgb(252,161,138)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="514.0" font-size="11" font-weight="700">長崎</tspan>
+      <tspan x="136.5" y="524.5" font-size="9" font-weight="600">1,773円</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本県 1,670円">
+    <title>熊本県：1,670円</title>
+    <rect x="117.0" y="537.0" width="39" height="39" rx="3" fill="rgb(253,171,150)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="556.0" font-size="11" font-weight="700">熊本</tspan>
+      <tspan x="136.5" y="566.5" font-size="9" font-weight="600">1,670円</tspan>
+    </text>
+  </g>
+  <g aria-label="大分県 1,683円">
+    <title>大分県：1,683円</title>
+    <rect x="159.0" y="495.0" width="39" height="39" rx="3" fill="rgb(253,170,148)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="514.0" font-size="11" font-weight="700">大分</tspan>
+      <tspan x="178.5" y="524.5" font-size="9" font-weight="600">1,683円</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎県 3,517円">
+    <title>宮崎県：3,517円</title>
+    <rect x="159.0" y="537.0" width="39" height="39" rx="3" fill="rgb(165,15,21)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="556.0" font-size="11" font-weight="700">宮崎</tspan>
+      <tspan x="178.5" y="566.5" font-size="9" font-weight="600">3,517円</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島県 2,195円">
+    <title>鹿児島県：2,195円</title>
+    <rect x="117.0" y="579.0" width="81" height="39" rx="3" fill="rgb(251,118,88)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="157.5" y="598.0" font-size="11" font-weight="700">鹿児島</tspan>
+      <tspan x="157.5" y="608.5" font-size="9" font-weight="600">2,195円</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄県 1,744円">
+    <title>沖縄県：1,744円</title>
+    <rect x="117.0" y="663.0" width="39" height="39" rx="3" fill="rgb(252,164,141)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="682.0" font-size="11" font-weight="700">沖縄</tspan>
+      <tspan x="136.5" y="692.5" font-size="9" font-weight="600">1,744円</tspan>
+    </text>
+  </g>
+  <g aria-label="北海道 1,659円">
+    <title>北海道：1,659円</title>
+    <rect x="621.0" y="33.0" width="81" height="81" rx="3" fill="rgb(253,172,151)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="73.0" font-size="11" font-weight="700">北海道</tspan>
+      <tspan x="661.5" y="83.5" font-size="9" font-weight="600">1,659円</tspan>
+    </text>
+  </g>
+  <g aria-label="青森県 1,667円">
+    <title>青森県：1,667円</title>
+    <rect x="621.0" y="159.0" width="81" height="39" rx="3" fill="rgb(253,172,150)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="178.0" font-size="11" font-weight="700">青森</tspan>
+      <tspan x="661.5" y="188.5" font-size="9" font-weight="600">1,667円</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手県 1,686円">
+    <title>岩手県：1,686円</title>
+    <rect x="663.0" y="201.0" width="39" height="39" rx="3" fill="rgb(253,170,148)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="220.0" font-size="11" font-weight="700">岩手</tspan>
+      <tspan x="682.5" y="230.5" font-size="9" font-weight="600">1,686円</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城県 2,048円">
+    <title>宮城県：2,048円</title>
+    <rect x="663.0" y="243.0" width="39" height="39" rx="3" fill="rgb(252,133,105)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="262.0" font-size="11" font-weight="700">宮城</tspan>
+      <tspan x="682.5" y="272.5" font-size="9" font-weight="600">2,048円</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田県 1,484円">
+    <title>秋田県：1,484円</title>
+    <rect x="621.0" y="201.0" width="39" height="39" rx="3" fill="rgb(253,190,172)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="220.0" font-size="11" font-weight="700">秋田</tspan>
+      <tspan x="640.5" y="230.5" font-size="9" font-weight="600">1,484円</tspan>
+    </text>
+  </g>
+  <g aria-label="山形県 1,282円">
+    <title>山形県：1,282円</title>
+    <rect x="621.0" y="243.0" width="39" height="39" rx="3" fill="rgb(254,211,196)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="262.0" font-size="11" font-weight="700">山形</tspan>
+      <tspan x="640.5" y="272.5" font-size="9" font-weight="600">1,282円</tspan>
+    </text>
+  </g>
+  <g aria-label="福島県 2,220円">
+    <title>福島県：2,220円</title>
+    <rect x="621.0" y="285.0" width="81" height="39" rx="3" fill="rgb(251,115,85)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="304.0" font-size="11" font-weight="700">福島</tspan>
+      <tspan x="661.5" y="314.5" font-size="9" font-weight="600">2,220円</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城県 1,747円">
+    <title>茨城県：1,747円</title>
+    <rect x="663.0" y="327.0" width="39" height="39" rx="3" fill="rgb(252,164,141)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="346.0" font-size="11" font-weight="700">茨城</tspan>
+      <tspan x="682.5" y="356.5" font-size="9" font-weight="600">1,747円</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木県 2,801円">
+    <title>栃木県：2,801円</title>
+    <rect x="621.0" y="327.0" width="39" height="39" rx="3" fill="rgb(216,69,52)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="346.0" font-size="11" font-weight="700">栃木</tspan>
+      <tspan x="640.5" y="356.5" font-size="9" font-weight="600">2,801円</tspan>
+    </text>
+  </g>
+  <defs>
+    <linearGradient id="choropleth-lg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#fee5d9"/>
+      <stop offset="50%" stop-color="#fb6a4a"/>
+      <stop offset="100%" stop-color="#a50f15"/>
+    </linearGradient>
+    <filter id="txt-halo-dark" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <text x="468" y="678" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="11" fill="#6e7d94" text-anchor="end">低い</text>
+  <rect x="474" y="670" width="200" height="11" rx="2" fill="url(#choropleth-lg)"/>
+  <text x="680" y="678" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="11" fill="#6e7d94">高い</text>
+  <text x="474" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="10" fill="#6e7d94">1,105円</text>
+  <text x="574" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="10" fill="#6e7d94" text-anchor="middle">2,311円</text>
+  <text x="674" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="10" fill="#6e7d94" text-anchor="end">3,517円</text>
+</svg>
