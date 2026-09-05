@@ -14,7 +14,7 @@ tags:
   - 地方
 publishedAt: 2026-06-13
 updatedAt: 2026-09-06
-published: false
+published: true
 ogImage: /blog/roadside-station-prefecture-gap/og.png
 ---
 
