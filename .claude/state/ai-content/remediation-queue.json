@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-09-05T08:45:45.407Z",
+  "generatedAt": "2026-09-05T08:54:41.419Z",
   "gscSnapshot": "2026-W35",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2166,
-    "done": 772,
-    "needsRegen": 1394,
+    "total": 2163,
+    "done": 773,
+    "needsRegen": 1390,
     "needsByReason": {
       "incomplete": 1209,
-      "missing": 135,
+      "missing": 131,
       "blocker": 50
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 60877,
-    "needsImpressions": 1162,
+    "doneImpressions": 60883,
+    "needsImpressions": 1156,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -9620,10 +9620,16 @@
       "impressions": 6,
       "clicks": 1,
       "position": 3.67,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 08:53:14 GMT",
+      "updatedAt": "2026-09-05T08:46:48.491Z"
     },
     {
       "rankingKey": "avg-savings-rate-worker-households",
@@ -10620,7 +10626,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "donations-prefecture",
@@ -24993,36 +24999,6 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
-    },
-    {
-      "rankingKey": "information-communication-expenditure",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": [],
-      "reviewTier": "gemini-auto"
-    },
-    {
-      "rankingKey": "information-communication-coefficient",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": [],
-      "reviewTier": "gemini-auto"
-    },
-    {
-      "rankingKey": "academic-achievement-test-average-rate",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": [],
       "reviewTier": "gemini-auto"
     },
     {

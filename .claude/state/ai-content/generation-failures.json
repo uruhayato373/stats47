@@ -44,42 +44,66 @@
       "firstFailedAt": "2026-09-05"
     },
     "mayonnaise-consumption-quantity": {
-      "failCount": 2,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "mochi-consumption-expenditure": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "orange-consumption-expenditure": {
-      "failCount": 1,
+      "failCount": 3,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
     "other-consumption-expenditure-ratio-multi-person-households": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "per-capita-kenmin-shotoku-h17": {
-      "failCount": 1,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
-    "salted-salmon-consumption-expenditure": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
     "tableware-consumption-quantity": {
+      "failCount": 2,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "per-student-public-high-school-expenditure-pref-municipal": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "treatment-rate-neurosis-outpatient": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "water-supply-annual-volume": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "air-conditioner-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "amusement-park-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "cocoa-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "dried-mackerel-consumption-quantity": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "dried-mackerel-consumption-expenditure": {
       "failCount": 1,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",

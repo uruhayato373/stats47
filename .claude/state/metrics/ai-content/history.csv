@@ -20,3 +20,4 @@ date,run_id,model,targets,passed,rejected,failed,skipped,author_requests,critic_
 2026-09-05,verify2-sonnet,claude-sonnet-5,8,4,4,0,0,13,12,315349,132253,0,447602,0,0,not-recorded,5.3352
 2026-09-05,batch3-20260905,claude-sonnet-5,35,25,9,1,0,51,47,1171882,488229,0,1660111,0,0,not-recorded,20.2908
 2026-09-05,batch100-20260905-1,claude-sonnet-5,35,1,1,33,0,5,3,76898,40552,0,117450,0,0,not-recorded,1.6289
+2026-09-05,batch100v2-20260905-1,claude-sonnet-5,35,24,11,0,0,51,50,1161496,521699,0,1683195,0,0,not-recorded,21.1233
