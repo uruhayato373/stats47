@@ -60,6 +60,11 @@ describe('Geo記事制作用の県別artifact', () => {
       assertLandPriceConservation(
         detail,
         row({
+          matchedPointCount: 1,
+          unmatchedPointCount: 1,
+          comparablePointCount: 1,
+          risingDecliningPointCount: 1,
+          risingDecliningPointShare: 100,
           sampleCount: 2,
           medianResidentialLandPrice: 200,
           medianLandPriceChange: 2,
@@ -68,6 +73,26 @@ describe('Geo記事制作用の県別artifact', () => {
         })
       )
     ).not.toThrow();
+  });
+
+  it('同じ県・同じ価格でも地点を動かすと空間判定が変わる。境界・欠測は分母を増やさない', () => {
+    const input = {
+      generatedAt: '2026-09-05T00:00:00Z', areaCode: '13000', areaName: '東京都',
+      meshes: [meshes[0]!, { ...meshes[1]!, population2050: 70 }],
+      points: [
+        { id: 'a', areaCode: '13000', longitude: 139.71, latitude: 35.601, price: 100, change: 1 },
+        { id: 'b', areaCode: '13000', longitude: 139.7125, latitude: 35.601, price: 100, change: 1 },
+        { id: 'c', areaCode: '13000', longitude: 139.71, latitude: 35.601, price: 100, change: null },
+        { id: 'd', areaCode: '13000', longitude: 139.8, latitude: 35.7, price: 100, change: 1 },
+      ],
+    };
+    const detail = buildLandPricePrefDetail(input);
+    expect(detail.pointMeshIds).toEqual(['53394525', '53394526', '53394525', null]);
+    expect(detail.summary).toMatchObject({ matchedPointCount: 3, unmatchedPointCount: 1, comparablePointCount: 2, risingDecliningPointCount: 1, risingDecliningPointShare: 50 });
+    const moved = buildLandPricePrefDetail({ ...input, points: input.points.map(point => ({ ...point, longitude: 139.72 })) });
+    expect(moved.summary.risingDecliningPointShare).toBe(0);
+    expect(input.points[0]?.longitude).toBe(139.71);
+    expect(() => assertLandPriceConservation({ ...detail, pointMeshIds: [null, ...detail.pointMeshIds.slice(1)] }, row({}))).toThrow(/空間結合不一致/);
   });
 
   it('洪水包含結果・人口とaggregateの保存則を固定する', () => {

@@ -74,7 +74,8 @@ for (const rel of R2_DEPENDENT_ROUTES) {
 // ──────────────────────────────────────────────────────────────────────────
 const R2_DEPENDENT_STATIC_ROUTES = [
   "apps/web/src/app/page.tsx",
-  "apps/web/src/app/geo/2050-population/page.tsx",
+  // 旧 /geo/2050-population はランキングへの純粋な恒久転送となり、R2 を読まない。
+  // 転送先・UTM維持は middleware.test.ts、sitemap除外は sitemap-index-parity.test.ts で固定する。
 ];
 
 for (const rel of R2_DEPENDENT_STATIC_ROUTES) {

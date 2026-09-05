@@ -100,21 +100,21 @@ describe('Geo X旧ハブURLのlanding移行', () => {
   test('意思決定投稿を1県4問比較へUTM付きで移す', () => {
     const response = middleware(
       request(
-        'utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-experience',
-      ),
+        'utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-experience'
+      )
     );
 
     expect(response.status).toBe(301);
     expect(response.headers.get('location')).toBe(
-      'https://stats47.jp/geo/compare?utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-experience',
+      'https://stats47.jp/geo/compare?utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-experience'
     );
   });
 
   test('方法投稿を方法・限界ページへ移す', () => {
     const response = middleware(
       request(
-        'utm_source=x&utm_medium=social&utm_campaign=geo-016&utm_content=angle-howto',
-      ),
+        'utm_source=x&utm_medium=social&utm_campaign=geo-016&utm_content=angle-howto'
+      )
     );
 
     expect(response.status).toBe(301);
@@ -123,6 +123,22 @@ describe('Geo X旧ハブURLのlanding移行', () => {
 
   test('通常のGeoハブ閲覧はリダイレクトしない', () => {
     expect(middleware(request('utm_source=internal')).status).not.toBe(301);
+  });
+
+  test('単一指標だった旧Geo URLをランキングへUTM付きで統合する', () => {
+    const nextRequest = new NextRequest(
+      'https://stats47.jp/geo/2050-population?utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-howto'
+    );
+    Object.defineProperty(nextRequest, 'nextUrl', {
+      value: new URL(nextRequest.url),
+    });
+
+    const response = middleware(nextRequest);
+
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(
+      'https://stats47.jp/ranking/future-population-change-rate-2050?utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-howto'
+    );
   });
 });
 
@@ -154,11 +170,15 @@ describe('旧 ranking slug の現行ページ移行', () => {
     ['ssdse-d-md22', 'hobby-participation-rate-diy'],
     ['per-capita-kenmin-shotoku-h27', 'per-capita-prefectural-income-h27'],
   ])('%s を %s へ一段で301する', (source, destination) => {
-    const response = middleware(request('/ranking/' + source + '?utm_source=x&utm_medium=social'));
+    const response = middleware(
+      request('/ranking/' + source + '?utm_source=x&utm_medium=social')
+    );
 
     expect(response.status).toBe(301);
     expect(response.headers.get('location')).toBe(
-      'https://stats47.jp/ranking/' + destination + '?utm_source=x&utm_medium=social',
+      'https://stats47.jp/ranking/' +
+        destination +
+        '?utm_source=x&utm_medium=social'
     );
   });
 });

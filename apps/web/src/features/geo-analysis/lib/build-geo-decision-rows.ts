@@ -7,6 +7,8 @@ export interface GeoDecisionRow {
   readonly populationChangeRate: number;
   readonly landPriceChange: number;
   readonly medianResidentialLandPrice: number;
+  readonly risingDecliningPointShare: number | null;
+  readonly comparablePointCount: number;
   readonly floodExposurePopulation: number;
   readonly floodExposureShare: number;
   readonly stationAccessPopulation: number;
@@ -92,6 +94,8 @@ export function buildGeoDecisionRows(
         populationChangeRate,
         landPriceChange,
         medianResidentialLandPrice,
+        risingDecliningPointShare: numberValue(landRow.values, 'risingDecliningPointShare'),
+        comparablePointCount: numberValue(landRow.values, 'comparablePointCount') ?? 0,
         floodExposurePopulation,
         floodExposureShare,
         stationAccessPopulation,

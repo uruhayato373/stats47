@@ -77,7 +77,7 @@ export interface GisDatasetMeta {
 }
 
 /**
- * 登録済み 42 データセット (status='registered')。
+ * 登録済みデータセット。件数は配列から導出し、文書へ固定値を複製しない。
  * 本ファイル (datasets.ts) が git TS メタ SSOT (完全DBレス)。
  * 旧 doc 04 の生成表 (generate-docs.ts) は datasets.ts と重複するため 2026-07-12 廃止。
  * ranking 定義は旧 RANKINGS (seed-from-registry.ts) を統合。

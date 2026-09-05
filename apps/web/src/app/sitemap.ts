@@ -11,7 +11,7 @@
 
 import { readCategoriesFromR2 } from '@stats47/category/server';
 import { CATEGORY_KEYS } from '@stats47/data-configs';
-import { BUSINESS_PLAN_M1_X_POSTS } from '@stats47/data-configs/business-plan';
+import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   KNOWN_MUNICIPALITY_THEME_SLUGS,
@@ -62,13 +62,7 @@ const TYPE_A_THEME_SLUGS = ALL_THEMES.filter(
   (t) => !TYPE_B_THEMES.has(t.themeKey)
 ).map((t) => t.themeKey);
 
-const GEO_X_STAGE_PAGES: MetadataRoute.Sitemap = [
-  ...new Set(
-    BUSINESS_PLAN_M1_X_POSTS.map((post) => post.canonicalUrl).filter((path) =>
-      /^\/geo\/population-station-access\/\d{2}\/(population|overlap|audit)$/.test(path),
-    ),
-  ),
-].map((path) => ({
+const GEO_PAGES: MetadataRoute.Sitemap = GEO_INDEXABLE_ROUTES.map((path) => ({
   url: BASE_URL + path,
   changeFrequency: 'monthly' as const,
   priority: 0.5,
@@ -99,15 +93,7 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/ranking`, changeFrequency: 'weekly', priority: 0.8 },
   { url: `${BASE_URL}/areas`, changeFrequency: 'weekly', priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: 'weekly', priority: 0.8 },
-  { url: `${BASE_URL}/geo`, changeFrequency: 'weekly', priority: 0.8 },
-  { url: `${BASE_URL}/geo/2050-population`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/geo/population-land-price`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/geo/population-flood-risk`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/geo/population-station-access`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/geo/compare`, changeFrequency: 'monthly', priority: 0.6 },
-  { url: `${BASE_URL}/geo/method`, changeFrequency: 'monthly', priority: 0.5 },
-  { url: `${BASE_URL}/geo/data-catalog`, changeFrequency: 'weekly', priority: 0.5 },
-  ...GEO_X_STAGE_PAGES,
+  ...GEO_PAGES,
   // /gis-cross/* (廃止 2026-05-29) → /themes に統合。各ページは middleware で 301 転送:
   //  migration-flow → /themes/population-dynamics, depopulation-medical → /themes/healthcare,
   //  sunshine-map → /themes/climate, hub → /themes。テーマ URL は THEME_PAGES に含まれる。

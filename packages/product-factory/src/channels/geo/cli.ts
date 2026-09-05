@@ -42,17 +42,22 @@ interface ProductManifest {
   sourceArtifact: string;
   generatedAt: string;
   files: Array<{ name: string; sha256: string; bytes: number }>;
+  codeRevision: string;
+  uncommittedCode: boolean;
+  sourceAcquisitionStatus: 'unknown';
+  verificationAt: string;
 }
 
 const archiveDate = new Date('1980-01-01T00:00:00.000Z');
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
-const pipelinePath = path.join(repoRoot, '.local/r2/app/geo/content-pipeline/items.json');
+const pipelinePath = path.join(repoRoot, '.local/geo-content-pipeline/items.json');
 const outputRoot = path.join(repoRoot, '.local/geo-products');
 const remoteBase = process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
 const args = process.argv.slice(2);
 const command = args[0] ?? 'plan';
 const gitRevision = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repoRoot, encoding: 'utf8' }).trim();
+const uncommittedCode = execFileSync('git', ['status', '--porcelain', '--untracked-files=normal', '--', 'packages/gis', 'packages/data-configs', 'packages/product-factory', 'package.json', 'package-lock.json'], { cwd: repoRoot, encoding: 'utf8' }).trim().length > 0;
 const articleKeyIndex = args.indexOf('--article-key');
 const requestedArticleKey = articleKeyIndex >= 0 ? args[articleKeyIndex + 1] : null;
 if (articleKeyIndex >= 0 && !requestedArticleKey) throw new Error('--article-key requires a value');
@@ -116,7 +121,7 @@ function limitations(item: PipelineItem): string {
     return '駅代表点からメッシュ中心点までの大円距離800m判定です。道路距離、徒歩時間、入口位置、運行本数、バリアフリー条件は含みません。';
   }
   if (item.analysisSlug === 'population-land-price') {
-    return '人口メッシュの県合計と住宅地の地価公示地点中央値を県コードで結合した分析です。相関は因果を示さず、個別地点の将来価格を保証しません。';
+    return '住宅地点の座標を1km人口メッシュへ包含判定で接続し、地価上昇と将来人口減少の重なりを地点単位で照合します。未接続・変動率欠測・基準人口0は分母から除外。地点割合は人口割合ではありません。地価は2025→2026年、人口は2020→2050年で期間が異なり、因果関係や将来価格を示しません。';
   }
   return '推計値は将来実績を保証せず、都道府県集計を市区町村・個別地点へ外挿できません。';
 }
@@ -306,7 +311,34 @@ function metricDefinitions(item: PipelineItem, aggregate: Record<string, unknown
   throw new Error(`aggregate metric definitions missing: ${item.analysisSlug}`);
 }
 
-function dictionary(item: PipelineItem, aggregate: Record<string, unknown>): string {
+export function reproductionInstructions(slug: string, articleKey: string, revision: string, dirty: boolean): string {
+  const recipes: Record<string, { explanation: string; command: string }> = {
+    'population-flood-risk': {
+      explanation: '人口47入力と洪水201入力（河川区分10の107ファイル、区分20の94ファイル）を取得・照合します。ZIP名の河川区分10は洪水予報河川・水位周知河川、20はその他の河川です。両区分からZIP内部の想定最大規模20を使い、包含結果を和集合として人口を二重加算せず集計します。',
+      command: 'npm run geo:build-flood-analysis',
+    },
+    'population-station-access': {
+      explanation: '人口47入力とS12全国TopoJSONのbytes・SHA-256を照合し、駅代表点と人口メッシュ中心点の大円距離800m判定、県別途中artifact、47県aggregate、保存則を生成します。S12 input URL: ' + remoteBase + '/gis/mlit-ksj/S12/25/national.topojson。S12 expected bytes: 10,639,010。S12 expected SHA-256: 3e69811eee825cc1346ff17340f5ee224562478f71879f7b34d0da6fc7d49fc9。',
+      command: 'npm run geo:build-station-access',
+    },
+    'population-land-price': {
+      explanation: '人口47入力と2026年住宅地価地点を照合し、同じ県の1km人口メッシュへ地点を包含結合します。西・南を含み東・北を含まない境界でpointMeshIdsを記録し、未接続・変動率欠測・2020年人口0を比較分母から除きます。地価2025→2026年の上昇と人口2020→2050年の減少が重なる地点を数え、県別途中artifact・47県aggregate・保存則を検証します。',
+      command: 'npx tsx packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts --land-price-only\nnpm run geo:audit-analysis',
+    },
+  };
+  const recipe = recipes[slug];
+  if (!recipe) return '';
+  const state = dirty
+    ? '未コミットの生成コードを含む確認用成果物です。以下のHEADだけでは今回の結果を再現できません。公開commit確定後に再生成・検証してから配布してください。'
+    : '生成コードのcommitを記録しています。公開リポジトリからこのcommitを取得できることと再現結果は、配布前に別途確認してください。';
+  return `## 決定的な空間演算の再実行\n\n${state}\n\n${recipe.explanation}\n\n- repository: https://github.com/uruhayato373/stats47\n- source revision: \`${revision}\`\n- uncommitted code: ${dirty}\n- working directory: clone後の \`stats47/\`\n\n\`\`\`bash\ngit clone https://github.com/uruhayato373/stats47.git\ncd stats47\ngit checkout ${revision}\nnpm ci\n${recipe.command}\nnpm run geo:export-content-pipeline\nnpm run products:geo:generate --workspace packages/product-factory -- --article-key ${articleKey}\nnpm run products:geo:validate --workspace packages/product-factory -- --article-key ${articleKey}\n\`\`\`\n\n実装: \`packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts\`\n\n`;
+}
+
+export function sourceHistoryNotice(verificationAt: string): string {
+  return `初回原典取得日時は旧パイプラインで未記録です。固定した版・出典URL・SHA-256は入力の同一性を確かめる情報であり、取得日時の記録ではありません。\n\n今回の商品生成時の確認日時（verificationAt）は ${verificationAt} です。同梱データの47行とファイルSHAを確認した今回の日時であり、原典取得日時や旧入力の変換日時ではありません。`;
+}
+
+function dictionary(item: PipelineItem, aggregate: Record<string, unknown>, verificationAt: string): string {
   const definitions = metricDefinitions(item, aggregate);
   const metrics = definitions.map((metric) =>
     `| \`${metric.key}\` | ${metric.label} | ${metric.description} | ${metric.unit} | \`${metric.format}\` |`,
@@ -315,13 +347,12 @@ function dictionary(item: PipelineItem, aggregate: Record<string, unknown>): str
   const evidenceLines = evidence
     ? `- evidence manifest key: \`${evidence}\`\n- evidence manifest URL: ${remoteBase}/${evidence}`
     : '- evidence: 都道府県ランキングの出典情報を参照';
-  const reproduction = item.analysisSlug === 'population-flood-risk'
-    ? `## 決定的な空間演算の再実行\n\n次の公開commitを固定して実行します。人口47入力と洪水94入力を取得・照合し、メッシュ中心点のpoint-in-polygon、県別途中artifact、47県aggregate、保存則監査を順に実行します。\n\n- repository: https://github.com/uruhayato373/stats47\n- verified revision: \`${gitRevision}\`\n- working directory: clone後の \`stats47/\`\n\n\`\`\`bash\ngit clone https://github.com/uruhayato373/stats47.git\ncd stats47\ngit checkout ${gitRevision}\nnpm ci\nnpm run geo:build-flood-analysis\nnpm run geo:export-content-pipeline\nnpm run products:geo:generate --workspace packages/product-factory -- --article-key ${item.paid.articleKey}\nnpm run products:geo:validate --workspace packages/product-factory\n\`\`\`\n\n実装: \`packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts\`\n\n`
-    : item.analysisSlug === 'population-station-access'
-      ? `## 決定的な空間演算の再実行\n\n次の公開commitを固定して実行します。\`geo:build-station-access\` は人口47入力に加え、S12全国TopoJSONがなければ公開R2から取得し、bytesとSHA-256を固定値で照合してから駅代表点、大円距離800m判定、県別途中artifact、47県aggregate、保存則監査を生成します。\n\n- repository: https://github.com/uruhayato373/stats47\n- verified revision: \`${gitRevision}\`\n- working directory: clone後の \`stats47/\`\n- S12 input URL: ${remoteBase}/gis/mlit-ksj/S12/25/national.topojson\n- S12 expected bytes: 10,639,010\n- S12 expected SHA-256: \`3e69811eee825cc1346ff17340f5ee224562478f71879f7b34d0da6fc7d49fc9\`\n\n\`\`\`bash\ngit clone https://github.com/uruhayato373/stats47.git\ncd stats47\ngit checkout ${gitRevision}\nnpm ci\nnpm run geo:build-station-access\nnpm run geo:export-content-pipeline\nnpm run products:geo:generate --workspace packages/product-factory -- --article-key ${item.paid.articleKey}\nnpm run products:geo:validate --workspace packages/product-factory\n\`\`\`\n\n実装: \`packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts\`\n\n`
-      : '';
-  return `# データ辞書\n\n## 指標定義\n\n| キー | 表示名 | 定義・時点・集計法 | 単位 | 表示形式 |\n|---|---|---|---|---|\n${metrics}\n\n` +
+  const reproduction = reproductionInstructions(item.analysisSlug, item.paid.articleKey, gitRevision, uncommittedCode);
+  return `# データ辞書\n\n## 取得日時と今回の確認日時\n\n${sourceHistoryNotice(verificationAt)}\n\n` +
+    `## この辞書の用語\n\ncanonicalは結果の正規の参照ページ、artifactは入力・途中結果・集計を保存したデータファイル、aggregateは県別にまとめた最終集計、lineageは入力から加工を経て最終集計へ至る経路の記録です。\n\n` +
+    `## 指標定義\n\n| キー | 表示名 | 定義・時点・集計法 | 単位 | 表示形式 |\n|---|---|---|---|---|\n${metrics}\n\n` +
     `## 行の識別子\n\n- \`areaCode\`: 5桁の都道府県コード\n- \`areaName\`: 都道府県名\n- \`rank\`: 主指標を降順で並べた順位（同値処理はanalysis.jsonの生成結果に従う）\n\n` +
+    `## 地図境界へ結合するとき\n\n「47地物」の検算は、境界を都道府県コードで統合（dissolve）し、1県を1地物にした後に行います。離島も削除せず同じ県のMultiPolygon（複数の離れた面を持つ一つの地物）へ含めます。統合前の島別・区域別の地物数が47であることは要求しません。\n\n` +
     `## 空間演算\n\n${item.spatialOperations.length > 0 ? item.spatialOperations.map((op) => `- ${op}`).join('\n') : '- 単一指標の都道府県集計（空間横断ではありません）'}\n\n` +
     stationCountExplanation(item, aggregate) +
     reproduction +
@@ -340,11 +371,12 @@ async function generate(item: PipelineItem): Promise<ProductManifest> {
       ? (aggregateMeta as Record<string, string>).generatedAt
       : null;
   if (!generatedAt) throw new Error(`source generatedAt missing: ${item.analysisSlug}`);
+  const verificationAt = new Date().toISOString();
   const dir = path.join(outputRoot, item.paid.articleKey);
   fs.mkdirSync(dir, { recursive: true });
   const payloads = new Map<string, string>([
     ['README.md', readme(item, aggregate.value)],
-    ['DATA-DICTIONARY.md', dictionary(item, aggregate.value)],
+    ['DATA-DICTIONARY.md', dictionary(item, aggregate.value, verificationAt)],
     ['analysis.csv', toCsv(rows)],
     ['analysis.json', `${JSON.stringify(aggregate.value, null, 2)}\n`],
   ]);
@@ -364,6 +396,10 @@ async function generate(item: PipelineItem): Promise<ProductManifest> {
     sourceArtifact: aggregate.source,
     generatedAt,
     files,
+    codeRevision: gitRevision,
+    uncommittedCode,
+    sourceAcquisitionStatus: 'unknown',
+    verificationAt,
   };
   const manifestBody = `${JSON.stringify(manifest, null, 2)}\n`;
   fs.writeFileSync(path.join(dir, 'MANIFEST.json'), manifestBody, 'utf8');
@@ -397,6 +433,12 @@ async function validate(items: PipelineItem[]): Promise<void> {
       continue;
     }
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as ProductManifest;
+    if (manifest.sourceAcquisitionStatus !== 'unknown' || !Number.isFinite(Date.parse(manifest.verificationAt))) {
+      failures.push(`${item.paid.articleKey}: missing source acquisition status / product verification timestamp`);
+    }
+    if (item.analysisKind === 'spatial-cross' && (manifest.uncommittedCode !== false || !manifest.codeRevision)) {
+      failures.push(`${item.paid.articleKey}: uncommitted/unrecorded reproduction code; regenerate after commit before distribution`);
+    }
     if (manifest.rowCount !== 47 || manifest.canonicalPath !== item.free.canonicalPath) {
       failures.push(`${item.paid.articleKey}: row/canonical mismatch`);
     }
@@ -407,7 +449,7 @@ async function validate(items: PipelineItem[]): Promise<void> {
       }
     }
     const readmePath = path.join(dir, 'README.md');
-    if (fs.existsSync(readmePath) && fs.readFileSync(readmePath, 'utf8').includes('市区町村')) {
+    if (fs.existsSync(readmePath) && /市区町村(?:別データ|別集計|データを提供)/.test(fs.readFileSync(readmePath, 'utf8'))) {
       failures.push(`${item.paid.articleKey}: 47都道府県商品に市区町村表記があります`);
     }
     if (item.analysisSlug === 'population-station-access' && fs.existsSync(readmePath)) {
@@ -422,6 +464,9 @@ async function validate(items: PipelineItem[]): Promise<void> {
     const dictionaryPath = path.join(dir, 'DATA-DICTIONARY.md');
     if (fs.existsSync(dictionaryPath)) {
       const body = fs.readFileSync(dictionaryPath, 'utf8');
+      if (!body.includes(sourceHistoryNotice(manifest.verificationAt))) {
+        failures.push(`${item.paid.articleKey}: dictionary source history mismatch`);
+      }
       for (const key of item.metricKeys) {
         if (!body.includes(`\`${key}\``)) failures.push(`${item.paid.articleKey}: dictionary missing ${key}`);
       }
@@ -431,7 +476,7 @@ async function validate(items: PipelineItem[]): Promise<void> {
       if (item.analysisSlug === 'population-station-access') {
         for (const required of [
           'repository: https://github.com/uruhayato373/stats47',
-          'verified revision:',
+          'source revision:',
           'npm run geo:build-station-access',
           'S12 expected SHA-256',
           '県別途中artifact',
@@ -495,7 +540,7 @@ async function main(): Promise<void> {
   throw new Error('usage: geo/cli.ts <plan|generate|validate>');
 }
 
-main().catch((error: unknown) => {
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((error: unknown) => {
   console.error(error instanceof Error ? error.message : error);
   process.exit(1);
 });

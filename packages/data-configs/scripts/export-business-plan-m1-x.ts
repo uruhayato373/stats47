@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  BUSINESS_PLAN_M1_GEO_ANALYSES,
+  BUSINESS_PLAN_M1_ANALYSES,
   BUSINESS_PLAN_M1_X_POSTS,
 } from '../src/business-plan';
 import type { BusinessPlanM1Analysis } from '../src/business-plan/types';
@@ -18,7 +18,7 @@ const outputPath = path.join(
 );
 
 const analysesById = new Map<string, BusinessPlanM1Analysis>(
-  BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => [analysis.id, analysis])
+  BUSINESS_PLAN_M1_ANALYSES.map((analysis) => [analysis.id, analysis])
 );
 
 const queue = BUSINESS_PLAN_M1_X_POSTS.map((post) => ({

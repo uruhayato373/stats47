@@ -1,6 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
+import { describe, expect, it, vi } from "vitest";
 
 import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
+
+// この試験はstatic集合とindexを検証する。R2や全テーマの読み込みは対象外。
+vi.mock('@stats47/category/server', () => ({ readCategoriesFromR2: vi.fn() }));
+vi.mock('@stats47/ranking/server', () => ({ readActiveKeysForSitemapFromR2: vi.fn(), readSurveysFromR2: vi.fn() }));
+vi.mock('@/features/blog/server', () => ({ listLatestArticles: vi.fn(), listAllTagsWithCount: vi.fn() }));
+vi.mock('@/features/theme-dashboard/config/all-themes', () => ({ ALL_THEMES: [] }));
+vi.mock('@stats47/data-configs', () => ({ CATEGORY_KEYS: [] }));
+vi.mock('@stats47/data-configs/geo-scope', () => ({ KNOWN_MUNICIPALITY_RANKING_KEYS: [], KNOWN_MUNICIPALITY_THEME_SLUGS: [], listJapanCatalogThemes: () => [] }));
 
 /**
  * sitemap index (`/sitemap.xml`) と各 shard (`/sitemap/<id>.xml`) の件数一致を固定する。
@@ -33,6 +42,25 @@ describe("sitemap index ↔ shard の件数整合", () => {
     expect(ids.length).toBe(SITEMAP_SEGMENTS.length);
     // id は配列 index と 1:1 (順序を変えると公開済み URL が変わるため)
     expect(ids.map((x) => x.id)).toEqual(SITEMAP_SEGMENTS.map((_, i) => i));
+  });
+
+  it("単一指標だった旧Geo URLをsitemapへ戻さない", { timeout: 60_000 }, async () => {
+    const { default: sitemap } = await import("@/app/sitemap");
+    const staticSegmentId = SITEMAP_SEGMENTS.indexOf("static");
+    expect(staticSegmentId).toBeGreaterThanOrEqual(0);
+
+    const paths = (await sitemap({ id: staticSegmentId })).map(
+      (entry) => new URL(entry.url).pathname,
+    );
+    expect(paths).not.toContain("/geo/2050-population");
+    expect(paths.filter((path) => path === '/geo' || path.startsWith('/geo/'))).toEqual(GEO_INDEXABLE_ROUTES);
+    expect(paths).toEqual(
+      expect.arrayContaining([
+        "/geo/population-land-price",
+        "/geo/population-flood-risk",
+        "/geo/population-station-access",
+      ]),
+    );
   });
 
   it("index が列挙する URL に全 shard が含まれる (欠番なし)", async () => {

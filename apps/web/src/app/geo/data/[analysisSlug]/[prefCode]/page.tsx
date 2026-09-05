@@ -24,8 +24,8 @@ import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   geoAnalysisPublicDataUrl,
   isGeoCrossAnalysisSlug,
-  loadGeoAnalysisManifest,
-  loadGeoAnalysisPrefDetail,
+  GeoSpatialEvidenceExplorer,
+  loadGeoAnalysisPrefBundle,
 } from '@/features/geo-analysis';
 
 import type { Metadata } from 'next';
@@ -39,8 +39,8 @@ export const revalidate = 86400;
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { analysisSlug } = await params;
   return {
-    title: 'Geo分析の記事制作用データ | stats47',
-    description: 'Geo分析の県別途中artifact、入力、空間演算、保存則を確認できます。',
+    title: '地域分析の県別地図・検算データ | stats47',
+    description: '選択県の人口メッシュ、地点の空間判定、集計の分母と出典を確認できます。',
     alternates: {
       canonical: isGeoCrossAnalysisSlug(analysisSlug)
         ? `/geo/${analysisSlug}`
@@ -53,6 +53,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const summaryLabels: Record<string, string> = {
   meshCount: '人口メッシュ数',
   pointCount: '地価地点数',
+  matchedPointCount: '人口メッシュ接続地点',
+  unmatchedPointCount: '人口メッシュ未接続地点',
+  comparablePointCount: '比較可能地点（分母）',
+  risingDecliningPointCount: '地価上昇×人口減少地点',
+  risingDecliningPointShare: '地価上昇×人口減少の地点比率',
   displayedStationCount: '表示対象駅数',
   accessibleMeshCount: '駅800m圏メッシュ数',
   exposedMeshCount: '浸水想定区域内メッシュ数',
@@ -84,10 +89,10 @@ function previewRows(detail: GeoAnalysisPrefDetail): Array<{
   value: string;
 }> {
   if (detail.slug === 'population-land-price') {
-    return detail.landPricePoints.slice(0, 20).map((point) => ({
+    return detail.landPricePoints.slice(0, 20).map((point, index) => ({
       id: point[0],
       kind: '住宅地地点',
-      value: `${point[3].toLocaleString('ja-JP')}円/㎡ / ${point[4] === null ? '変動率なし' : `${point[4]}%`}`,
+      value: `${point[3].toLocaleString('ja-JP')}円/㎡ / ${point[4] === null ? '変動率なし' : `${point[4]}%`} / 人口メッシュ ${detail.pointMeshIds[index] ?? '未接続'}`,
     }));
   }
   if (detail.slug === 'population-flood-risk') {
@@ -115,11 +120,9 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
   ) {
     notFound();
   }
-  const [manifest, detail] = await Promise.all([
-    loadGeoAnalysisManifest(analysisSlug),
-    loadGeoAnalysisPrefDetail(analysisSlug, prefCode),
-  ]);
-  if (!manifest || !detail) notFound();
+  const bundle = await loadGeoAnalysisPrefBundle(analysisSlug, prefCode);
+  if (!bundle) notFound();
+  const { manifest, detail } = bundle;
   const config = GEO_CROSS_ANALYSIS_CONFIGS[analysisSlug];
   const previews = previewRows(detail);
   const detailKey = geoAnalysisPrefKey(analysisSlug, prefCode);
@@ -131,26 +134,28 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
           { label: 'ホーム', href: '/' },
           { label: '地域分析', href: '/geo' },
           { label: config.shortTitle, href: `/geo/${analysisSlug}` },
-          { label: `${detail.areaName}の制作データ` },
+          { label: `${detail.areaName}の地図・検算データ` },
         ]}
       />
       <PageHeader
-        eyebrow="記事制作用データ"
-        title={`${detail.areaName}｜${config.shortTitle}の途中artifact`}
-        description="記事・図解・有料レポートを同じ根拠から作るための閲覧画面です。数値の正典はaggregate、地図の途中経過は県別artifact、再現情報はmanifestに分離しています。"
+        eyebrow="県別の地図・検算"
+        title={`${detail.areaName}｜${config.shortTitle}`}
+        description="地図上の判定と集計の根拠を確認できます。地点・メッシュの全件データと、使用した一次資料の情報も取得できます。"
         stats={`coverage ${manifest.quality.detailAreas}/47 ・ 保存則 ${manifest.quality.conservationChecks}/47`}
       />
+
+      <GeoSpatialEvidenceExplorer slug={analysisSlug} analysisId={`geo-data-${analysisSlug}`} dataVersion={manifest.generatedAt} initialPrefCode={prefCode} initialView="overlap" manifest={manifest} fixedPrefecture />
 
       <SurfaceSection>
         <SectionHeader title="この県の検算済み集計" hideRule />
         <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {Object.entries(detail.summary).map(([key, value]) => (
-            <div key={key} className="border-l-2 border-primary pl-3">
+            <div key={key} className="border p-3">
               <dt className="text-xs text-muted-foreground">
                 {summaryLabels[key] ?? key}
               </dt>
               <dd className="mt-1 font-semibold tabular-nums">
-                {typeof value === 'number' ? value.toLocaleString('ja-JP') : String(value)}
+                {typeof value === 'number' ? value.toLocaleString('ja-JP') : '—'}
                 {valueUnit(key)}
               </dd>
             </div>
@@ -174,6 +179,15 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
+              {previews.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={3} className="text-muted-foreground">
+                    {detail.slug === 'population-flood-risk'
+                      ? '今回の入力・中心点判定では、浸水想定区域内の人口メッシュはありません。洪水の安全性を示すものではありません。'
+                      : 'プレビュー対象の地点はありません。集計値と全件JSONを確認してください。'}
+                  </TableCell>
+                </TableRow>
+              )}
               {previews.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell className="font-mono text-xs">{row.id}</TableCell>
@@ -187,7 +201,7 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
       </SurfaceSection>
 
       <SurfaceSection className="mt-6">
-        <SectionHeader title="取得・公開経路" hideRule />
+        <SectionHeader title="全件データと出典の取得" hideRule />
         <ul className="mt-3 space-y-2 text-sm">
           <li>
             <a className="font-medium text-primary underline" href={geoAnalysisPublicDataUrl(detailKey)}>

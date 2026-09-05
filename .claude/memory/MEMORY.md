@@ -1,5 +1,6 @@
 # Memory Index
 
+- [feedback_geo_publication_boundary.md](feedback_geo_publication_boundary.md) — Geoは空間演算・全入力集合・途中artifactを必須化。保存則だけでは洪水107入力の欠落を検出できず、生成・R2・外部公開を別ゲートで検証する
 - [feedback_geo_mesh_evidence_integrity.md](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
 - [project_business_plan_adaptation_contract.md](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
 - [project_kindle_publishing_factory.md](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成器(jszip)・32冊カタログ(S1論点/S2テーマ/S3地域/S4大全)・パイロットK-S1-01『実質手取りの地図』生成済(13章37図)。本文=既存ブログR2、SVG→PNG同梱、カバーsatori→sharp。30%書き下ろし必須(KDP Web公開規定)。KDPアップロードは人間工程。正典coconala-product-standards.md §8

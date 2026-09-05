@@ -50,6 +50,61 @@ function populationChangeRate(population2020: number, population2050: number): n
     : 0;
 }
 
+/** 配信用座標精度で半開区間[西,東)×[南,北)を使い、境界点を一意に接続する。 */
+export function joinLandPricePointsToMeshes(
+  meshes: readonly GeoPopulationMeshCell[],
+  points: readonly GeoLandPricePoint[]
+): (string | null)[] {
+  const bucketSize = 100_000; // E6座標で0.1度。候補を絞り、最終判定は境界で行う。
+  const buckets = new Map<string, GeoPopulationMeshCell[]>();
+  for (const mesh of meshes) {
+    for (let x = Math.floor(mesh[1] / bucketSize); x <= Math.floor(mesh[3] / bucketSize); x++) {
+      for (let y = Math.floor(mesh[2] / bucketSize); y <= Math.floor(mesh[4] / bucketSize); y++) {
+        const key = `${x}:${y}`;
+        const bucket = buckets.get(key) ?? [];
+        bucket.push(mesh);
+        buckets.set(key, bucket);
+      }
+    }
+  }
+  return points.map((point) => {
+    const candidates = buckets.get(`${Math.floor(point[1] / bucketSize)}:${Math.floor(point[2] / bucketSize)}`) ?? [];
+    const matches = candidates.filter((mesh) =>
+      point[1] >= mesh[1] && point[1] < mesh[3] && point[2] >= mesh[2] && point[2] < mesh[4]
+    );
+    if (matches.length > 1) throw new Error(`${point[0]}: 人口メッシュが重複して包含`);
+    return matches[0]?.[0] ?? null;
+  });
+}
+
+export function summarizeLandPriceJoin(
+  meshes: readonly GeoPopulationMeshCell[],
+  points: readonly GeoLandPricePoint[],
+  pointMeshIds: readonly (string | null)[]
+) {
+  const byId = new Map(meshes.map((mesh) => [mesh[0], mesh]));
+  let matchedPointCount = 0;
+  let comparablePointCount = 0;
+  let risingDecliningPointCount = 0;
+  points.forEach((point, index) => {
+    const meshId = pointMeshIds[index];
+    const mesh = meshId ? byId.get(meshId) : undefined;
+    if (!mesh) return;
+    matchedPointCount++;
+    if (point[4] === null || mesh[5] <= 0) return;
+    comparablePointCount++;
+    if (point[4] > 0 && mesh[6] < mesh[5]) risingDecliningPointCount++;
+  });
+  return {
+    matchedPointCount,
+    unmatchedPointCount: points.length - matchedPointCount,
+    comparablePointCount,
+    risingDecliningPointCount,
+    risingDecliningPointShare: comparablePointCount > 0
+      ? round(risingDecliningPointCount / comparablePointCount * 100, 1) : null,
+  };
+}
+
 export function buildLandPricePrefDetail(input: {
   readonly generatedAt: string;
   readonly areaCode: string;
@@ -72,6 +127,7 @@ export function buildLandPricePrefDetail(input: {
   ]);
   const population2020 = meshes.reduce((sum, mesh) => sum + mesh[5], 0);
   const population2050 = meshes.reduce((sum, mesh) => sum + mesh[6], 0);
+  const pointMeshIds = joinLandPricePointsToMeshes(meshes, landPricePoints);
   return {
     schemaVersion: 1,
     slug: 'population-land-price',
@@ -80,7 +136,10 @@ export function buildLandPricePrefDetail(input: {
     areaName: input.areaName,
     meshes,
     landPricePoints,
+    pointMeshIds,
+    spatialMethod: 'point-in-mesh',
     summary: {
+      ...summarizeLandPriceJoin(meshes, landPricePoints, pointMeshIds),
       meshCount: meshes.length,
       pointCount: landPricePoints.length,
       population2020,
@@ -103,6 +162,17 @@ export function assertLandPriceConservation(
   detail: GeoLandPricePrefDetail,
   aggregate: GeoAnalysisSnapshotRow
 ): void {
+  const expectedIds = joinLandPricePointsToMeshes(detail.meshes, detail.landPricePoints);
+  if (detail.spatialMethod !== 'point-in-mesh' ||
+      JSON.stringify(expectedIds) !== JSON.stringify(detail.pointMeshIds)) {
+    throw new Error(`${detail.areaCode}: 地価地点の空間結合不一致`);
+  }
+  const joined = summarizeLandPriceJoin(detail.meshes, detail.landPricePoints, expectedIds);
+  for (const key of Object.keys(joined) as (keyof typeof joined)[]) {
+    if (detail.summary[key] !== joined[key] || aggregate.values[key] !== joined[key]) {
+      throw new Error(`${detail.areaCode}: ${key} conservation不一致`);
+    }
+  }
   const checks: ReadonlyArray<readonly [string, number, number]> = [
     ['sampleCount', Number(aggregate.values.sampleCount), detail.summary.pointCount],
     [

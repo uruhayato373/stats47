@@ -1,4 +1,7 @@
-import { BUSINESS_PLAN_M1_GEO_ANALYSES, BUSINESS_PLAN_M1_NOTE_PRODUCTS } from './m1';
+import {
+  BUSINESS_PLAN_M1_ANALYSES,
+  BUSINESS_PLAN_M1_NOTE_PRODUCTS,
+} from './m1';
 
 import type { BusinessPlanGeoContentLifecycle } from './types';
 
@@ -19,7 +22,13 @@ const CONTENT_DEFINITIONS = {
         'GD Freakの更新日・時系列を前面に出す構成',
         'とどランの一問一答型タイトルと県別回遊',
       ],
-      surfaceOrder: ['geo-canonical', 'blog', 'area', 'social', 'paid-pilot'],
+      surfaceOrder: [
+        'ranking-canonical',
+        'blog',
+        'area',
+        'social',
+        'paid-pilot',
+      ],
       reusableOutputs: [
         '3本の空間横断分析を束ねる基準記事',
         '都道府県別の入口カード',
@@ -36,7 +45,7 @@ const CONTENT_DEFINITIONS = {
   'geo-016': {
     themeKeys: ['living-housing', 'population-dynamics', 'local-economy'],
     blogSlug: 'population-decline-land-price-divergence',
-    suggestedTitle: '人口減でも地価が上がる20府県',
+    suggestedTitle: '地価上昇地点の周囲でも人口は減るのか',
     launch: {
       order: 1,
       role: 'commercial-lead',
@@ -44,7 +53,7 @@ const CONTENT_DEFINITIONS = {
       readerJob: '人口減少と地価変動が逆行する地域を根拠付きで比較する',
       promise:
         '人口だけでは読めない住宅市場の地域差を、地価地点と将来人口メッシュの同一artifactで検証できる',
-      hook: '人口が減るのに地価が上がる府県はどこか',
+      hook: '地価上昇と将来人口減少が同じ1kmメッシュで重なる住宅地点はどこか',
       borrowedPatterns: [
         'SNS競合の逆説を1枚で伝えるフック',
         '地理院地図のレイヤー比較と共有状態',
@@ -148,7 +157,7 @@ const COMMON_GATES = [
 ] as const;
 
 export const BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE: readonly BusinessPlanGeoContentLifecycle[] =
-  BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => {
+  BUSINESS_PLAN_M1_ANALYSES.map((analysis) => {
     const content = CONTENT_DEFINITIONS[analysis.contentId];
     const paid = BUSINESS_PLAN_M1_NOTE_PRODUCTS.find((product) =>
       product.sourceContentIds.includes(analysis.contentId)
@@ -158,7 +167,10 @@ export const BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE: readonly BusinessPlanGeoConten
         `Geoコンテンツライフサイクル定義がありません: ${analysis.contentId}`
       );
     }
-    const canonicalPath = `/geo/${analysis.slug}`;
+    const canonicalPath =
+      analysis.analysisKind === 'baseline'
+        ? `/ranking/${analysis.rankingKey}`
+        : `/geo/${analysis.slug}`;
     const hasEvidenceContract =
       analysis.analysisKind === 'baseline' ||
       Boolean(analysis.evidenceManifestKey && analysis.detailR2KeyPattern);
