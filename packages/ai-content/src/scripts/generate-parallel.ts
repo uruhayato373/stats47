@@ -232,11 +232,13 @@ let cliEffort: string | null = "low";
 
 /** サーバー側の一時スロットリング。利用枠 (usage limit) とは別物で、待てば通る */
 const TRANSIENT_CLI_ERROR_RE = /temporarily limiting|rate limited|overloaded|529|503/i;
-const CLI_TRANSIENT_RETRIES = 3;
-const CLI_TRANSIENT_BACKOFF_MS = 30_000;
+const CLI_TRANSIENT_RETRIES = 5;
+const CLI_TRANSIENT_BACKOFF_MS = 60_000;
 
 /**
- * callCliOnce を包み、一時スロットリングだけを待って再試行する (最大 CLI_TRANSIENT_RETRIES 回・30s/60s/90s)。
+ * callCliOnce を包み、一時スロットリングだけを待って再試行する (最大 CLI_TRANSIENT_RETRIES 回・60s/120s/180s/240s/300s = 計 15 分)。
+ * 2026-09-05 深夜の実測: スロットリング episode は 5〜10 分続き、30/60/90s (計 3 分) では author が通った直後の critic が落ちて
+ * author 出力ごと FAIL になっていた。待ちは時間で払い、トークンは捨てない。
  * 2026-09-05 実測: "API Error: Server is temporarily limiting requests (not your usage limit) · Rate limited" が
  * exit 1 で返り、そのまま key の attempt を消費して FAIL になっていた (batch1 の 26 件即失敗もこれの疑い)。
  * 利用枠の枯渇・未ログイン等は再試行しない (待っても通らない)。
