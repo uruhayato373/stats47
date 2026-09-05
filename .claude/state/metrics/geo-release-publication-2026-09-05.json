@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-05T12:29:23.035Z",
   "scope": "geo-release-publication",
   "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_ROLLOUT_IN_PROGRESS",
-  "updatedAt": "2026-09-05T15:58:54Z",
+  "updatedAt": "2026-09-05T22:39:38Z",
   "evidenceDigests": [
     { "path": "/tmp/stats47-geo-source-head-check.json", "bytes": 33419, "sha256": "fa68c618f8905f07cb1ebc8817ff1ce1c743429657583c27b081c4a92f331242" },
     { "path": "/tmp/geo-flood-source-publish-20260905/apply.json", "bytes": 98294, "sha256": "055c871c1750c460e97493475d800f82cd1377530c2f01cc2383f5b4eb08ec73" },
@@ -3045,6 +3045,8 @@
       "approvedScope": "Remove the exact 435 legacy raw objects; replace roadside-station-count and fishing-port-count-ksj with official 2026 sources; retire the other nine rankings with appropriate redirects and one consolidated deployment",
       "retiredPagePolicy": "fishing-port-count redirects to fishing-port-count-ksj with query preservation; eight non-equivalent rankings return 410",
       "deletionPrecondition": "Immutable backup inventory, exact key/size/ETag match before deletion, code retirement deployed before removing ranking assets"
+      ,"additionalUserResponse": "進めて",
+      "additionalApprovedScope": "Recompute port-count from primary single-year sources and retire the three identified legacy-data blog articles; include in consolidated release"
     },
     "datasetIds": [
       "C02",
@@ -3123,7 +3125,7 @@
       "draftPullRequest": "https://github.com/uruhayato373/stats47/pull/928",
       "postRemovalCatalogAudit": "PASS; final-rollout-20260905/postraw-remote-catalog.json; eleven legacy prefixes empty",
       "planSha256": "9dc23982f1c7145bd130f61ccf897290ae92b0483633efa386e2a16772daedd1",
-      "additionalBlogRetirement": "Owner approval requested for three newly discovered legacy blogs; no answer yet"
+      "additionalBlogRetirement": "APPROVED; code retirement and exact backup preparation in progress for airport-count-vs-wind-power-plant-count-facility, dam-count-prefecture-gap and dam-count-vs-road-expressway-length"
     },
     "next": "Resolve port-count provenance without weakening the guard, publish exact verified candidates, deploy retirement code once, remove approved old ranking assets, purge CDN and verify live acceptance"
   },

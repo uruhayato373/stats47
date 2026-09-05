@@ -91,6 +91,10 @@ config.surveyId (手動オーバーライド・先頭固定)
   `--offline --check` で git drift・10日 freshness・ratchet を検査し、週次 workflow が R2 blog を
   全量再取得して ratchet を改善方向だけに更新する。
 
+  承認済みの公開終了や原典訂正で母集団が変わる場合は、旧件数を満たすために指標を再公開したり
+  偽の調査へ紐付けたりしない。基準の訂正は旧母数・exact対象キー・理由をratchet設定へ記録し、
+  減少幅がその対象だけに限られる回帰テストを同時に追加する。無関係な未解決の増加は引き続き拒否する。
+
 ### 新しい調査を追加する
 1. `packages/ranking/src/data/surveys.json` にエントリ追加 (id は kebab-case)
 2. その調査に属する metric が辞書で解決されるようにする:

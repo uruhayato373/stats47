@@ -4,13 +4,13 @@
   "masterSurveyCount": 105,
   "ranking": {
     "metrics": 2299,
-    "activeMetrics": 2163,
-    "resolved": 2087,
-    "unresolved": 212,
-    "coveragePct": 90.78,
-    "activeResolved": 1961,
-    "activeUnresolved": 202,
-    "activeCoveragePct": 90.66,
+    "activeMetrics": 2154,
+    "resolved": 2085,
+    "unresolved": 214,
+    "coveragePct": 90.69,
+    "activeResolved": 1950,
+    "activeUnresolved": 204,
+    "activeCoveragePct": 90.53,
     "activeUnresolvedKeys": [
       "accident-death-30day",
       "agricultural-land-conversion-area",
@@ -63,6 +63,7 @@
       "fishery-workers",
       "fishery-workers-coastal-offshore",
       "fishing-port-count-by-type",
+      "fishing-port-count-ksj",
       "fishing-vessel-crew",
       "fishing-vessel-tonnage-class",
       "food-business-establishments",
@@ -152,6 +153,7 @@
       "retail-establishments-by-prefecture",
       "retail-sales-amount-by-prefecture",
       "retail-sales-area-by-class",
+      "roadside-station-count",
       "senility-death-count",
       "sewage-treatment-coverage-rate",
       "sewerage-coverage-rate",
@@ -264,7 +266,7 @@
       "local-tax": 7,
       "medical-facility-survey": 40,
       "minimum-wage": 1,
-      "mlit-ksj": 16,
+      "mlit-ksj": 5,
       "municipal-settlement-survey": 29,
       "national-household-survey": 20,
       "national-medical-expenditure": 3,
@@ -417,9 +419,7 @@
         "local-economy"
       ],
       "mlit-ksj": [
-        "fishery-marine",
-        "railway",
-        "roads"
+        "railway"
       ],
       "municipal-settlement-survey": [
         "local-finance"
@@ -3930,11 +3930,9 @@
     },
     {
       "surveyId": "mlit-ksj",
-      "rankingCount": 16,
+      "rankingCount": 5,
       "themeKeys": [
-        "fishery-marine",
-        "railway",
-        "roads"
+        "railway"
       ],
       "blogSlugs": [
         "airport-count-prefecture-gap",
