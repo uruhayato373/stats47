@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "information-communication-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "情報通信関係費",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/information-communication-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug information-communication-coefficient-ranking --keys information-communication-expenditure --data-name info-comm-expenditure-ranking",
+  "fetchedAt": "2026-09-05T10:15:07.413Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "information-communication-coefficient",
+  "year": "2024",
+  "unit": "％",
+  "label": "情報通信係数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/information-communication-coefficient/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug information-communication-coefficient-ranking --keys information-communication-coefficient --with-map",
+  "fetchedAt": "2026-09-05T10:14:59.228Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
