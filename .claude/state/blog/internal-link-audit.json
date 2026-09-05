@@ -1,33 +1,47 @@
 {
-  "generatedAt": "2026-08-29T21:32:42.055Z",
+  "generatedAt": "2026-09-05T20:57:39.338Z",
   "site": "https://stats47.jp",
-  "articles": 459,
-  "totalLinks": 2751,
+  "articles": 532,
+  "totalLinks": 3145,
   "absoluteLinks": 129,
-  "uniqueLinks": 810,
+  "uniqueLinks": 896,
   "byType": {
     "areas": {
       "total": 47,
       "broken": 0
     },
     "blog": {
-      "total": 173,
+      "total": 183,
       "broken": 0
     },
     "category": {
       "total": 17,
       "broken": 0
     },
+    "geo": {
+      "total": 7,
+      "broken": 0
+    },
     "ranking": {
-      "total": 562,
-      "broken": 4
+      "total": 630,
+      "broken": 6
     },
     "themes": {
-      "total": 11,
+      "total": 12,
       "broken": 0
     }
   },
   "broken": [
+    {
+      "href": "/ranking/academic-achievement-test-average-rate",
+      "status": 410,
+      "title": "",
+      "ok": false,
+      "reason": "HTTP 410",
+      "referencedBy": [
+        "academic-achievement-test-prefecture-ranking"
+      ]
+    },
     {
       "href": "/ranking/elderly-population-ratio",
       "status": 410,
@@ -46,6 +60,16 @@
       "reason": "HTTP 410",
       "referencedBy": [
         "foreign-resident-five-percent-municipalities"
+      ]
+    },
+    {
+      "href": "/ranking/information-communication-coefficient",
+      "status": 410,
+      "title": "",
+      "ok": false,
+      "reason": "HTTP 410",
+      "referencedBy": [
+        "engel-coefficient-prefecture-ranking"
       ]
     },
     {
