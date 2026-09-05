@@ -170,7 +170,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "agriculture",
     "categoryName": "農林水産業",
-    "count": 60,
+    "count": 59,
     "representatives": [
       {
         "rankingKey": "fishery-workers",
@@ -385,7 +385,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "energy",
     "categoryName": "エネルギー・水",
-    "count": 21,
+    "count": 15,
     "representatives": [
       {
         "rankingKey": "final-disposal-site-remaining-capacity",
@@ -400,18 +400,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "ガソリン販売量が最も多い県は？"
       },
       {
-        "rankingKey": "geothermal-power-plant-count",
-        "title": "地熱発電施設数",
-        "readerLabel": "地熱発電施設数",
-        "hook": "地熱発電施設数が最も多い県は？"
-      },
-      {
-        "rankingKey": "nuclear-power-plant-count",
-        "title": "原子力発電所数",
-        "readerLabel": "原子力発電所数",
-        "hook": "原子力発電所数が最も多い県は？"
-      },
-      {
         "rankingKey": "utilities-expenditure-ratio-multi-person-households",
         "title": "光熱・水道費割合",
         "readerLabel": "光熱・水道費割合",
@@ -422,13 +410,25 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "title": "工業用水量",
         "readerLabel": "工業用水量",
         "hook": "工業用水量が最も多い県は？"
+      },
+      {
+        "rankingKey": "wind-power-turbine-count",
+        "title": "風力発電導入量（設置基数）",
+        "readerLabel": "風力発電導入量（設置基数）",
+        "hook": "風力発電導入量（設置基数）が最も多い県は？"
+      },
+      {
+        "rankingKey": "electricity-demand",
+        "title": "電力需要量",
+        "readerLabel": "電力需要量",
+        "hook": "電力需要量が最も多い県は？"
       }
     ]
   },
   {
     "categoryKey": "tourism",
     "categoryName": "運輸・観光",
-    "count": 49,
+    "count": 48,
     "representatives": [
       {
         "rankingKey": "total-overnight-guests",
@@ -461,10 +461,10 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "外国人延べ宿泊者数が最も多い県は？"
       },
       {
-        "rankingKey": "jr-freight-shipment",
-        "title": "ＪＲ貨物発送量",
-        "readerLabel": "ＪＲ貨物発送量",
-        "hook": "ＪＲ貨物発送量が最も多い県は？"
+        "rankingKey": "roadside-station-count",
+        "title": "道の駅数",
+        "readerLabel": "道の駅数",
+        "hook": "道の駅数が最も多い県は？"
       }
     ]
   },
@@ -662,7 +662,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "infrastructure",
     "categoryName": "社会基盤施設",
-    "count": 47,
+    "count": 46,
     "representatives": [
       {
         "rankingKey": "main-road-paving-rate",
@@ -874,16 +874,16 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "architect-annual-income",
   "final-disposal-site-remaining-capacity",
   "gasoline-sales-volume",
-  "geothermal-power-plant-count",
-  "nuclear-power-plant-count",
   "utilities-expenditure-ratio-multi-person-households",
   "industrial-water-usage",
+  "wind-power-turbine-count",
+  "electricity-demand",
   "total-overnight-guests",
   "kei-car-count",
   "moped-count",
   "motorcycle-count",
   "total-overnight-guests-foreign",
-  "jr-freight-shipment",
+  "roadside-station-count",
   "swimming-pool-public",
   "school-teacher-annual-income",
   "avg-height-high-school-2nd-male",

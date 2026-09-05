@@ -66,6 +66,16 @@
  *   更新不能を解消できないため config isActive:false + KNOWN/SITEMAP再生成とセットで退役。）
  */
 export const GONE_RANKING_KEYS = new Set([
+  // 2026-09-05: 非商用KSJ入力の公開終了。fishing-port-countはURL層で新版へ301を優先。
+  "dam-count",
+  "hydroelectric-power-plant-count",
+  "thermal-power-plant-count",
+  "nuclear-power-plant-count",
+  "geothermal-power-plant-count",
+  "wind-power-plant-count-facility",
+  "biomass-power-station-count",
+  "tourism-resource-count",
+  "fishing-port-count",
   // 2026-08-28 退役 (SSDS 項目削除・後継なし)
   "kindergarten-education-diffusion-rate",
   "nursery-education-diffusion-rate",

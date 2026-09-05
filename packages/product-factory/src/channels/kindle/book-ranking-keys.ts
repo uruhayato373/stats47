@@ -604,7 +604,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "maternal-mortality-rate-per-100k-births", // 妊娠等による死亡率 — 本文 1694字 / 地域特徴度 0.85
     "womens-sweater-consumption-expenditure", // 婦人用セーター消費支出額 — 本文 1962字 / 地域特徴度 0.76
     "land-rent-consumption-expenditure", // 地代消費支出額 — 本文 1870字 / 地域特徴度 0.74
-    "geothermal-power-plant-count", // 地熱発電施設数 — 本文 852字 / 地域特徴度 0.91
     "new-graduate-starting-salary-university-male", // 新規学卒者初任給 — 本文 1798字 / 地域特徴度 0.70
     "nursing-home-count-per-100k-65plus", // 老人ホーム数 — 本文 1533字 / 地域特徴度 0.75
     "burdock-consumption-quantity", // ごぼう消費量 — 本文 1930字 / 地域特徴度 0.66
@@ -625,7 +624,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "horse-mackerel-consumption-quantity", // あじ消費量 — 本文 1383字 / 地域特徴度 0.71
     "other-topical-medicine-consumption-expenditure", // 他の外用薬消費支出額 — 本文 1683字 / 地域特徴度 0.65
     "per-capita-inhabitant-tax-pref-municipal", // 住民税 — 本文 1729字 / 地域特徴度 0.64
-    "nuclear-power-plant-count", // 原子力発電所数 — 本文 824字 / 地域特徴度 0.83
     "specialized-school-count-per-100k", // 専修学校数 — 本文 1964字 / 地域特徴度 0.58
     "futon-consumption-expenditure", // 布団消費支出額 — 本文 1678字 / 地域特徴度 0.64
     "high-school-graduates-job-ratio", // 高等学校卒業者に占める就職者の割合 — 本文 1475字 / 地域特徴度 0.68

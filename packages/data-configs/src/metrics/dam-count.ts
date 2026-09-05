@@ -52,5 +52,5 @@ export const damCount: MetricConfig = {
   // (KSJ-PREF-ASSIGN-01)。
   "seoTitle": "ダム数ランキング都道府県｜なぜ北海道が190か所で突出?【2014】",
   "seoDescription": "ダムの数は都道府県で大きく偏ります──1位北海道190か所に対し、最下位は東京都の8か所。地形・河川・電力需要が決める分布の理由を47都道府県の2014年データで解説します。",
-  "isActive": true,
+  "isActive": false,
 };

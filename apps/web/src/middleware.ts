@@ -90,6 +90,12 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
       });
     }
     if (pageType === 'ranking' && key) {
+      const destination = RANKING_SLUG_REDIRECTS[key];
+      if (destination) {
+        const url = new URL(baseUrl);
+        url.pathname = `/ranking/${destination}`;
+        return NextResponse.redirect(url, 301);
+      }
       if (UrlPolicy.ranking.isGone(key) || !UrlPolicy.ranking.isKnown(key))
         return gone();
       return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), {
@@ -448,7 +454,7 @@ export default function middleware(req: NextRequest) {
 
   // 公開済みX投稿などに残る旧 ranking slug を、同義の現行ページへ恒久転送する。
   // GONE / unknown 判定より前に処理し、UTM query は保持する。
-  const legacyRankingMatch = pathname.match(/^\/ranking\/([^/]+)$/);
+  const legacyRankingMatch = pathname.match(/^\/ranking\/(?:prefecture\/)?([^/]+)$/);
   if (legacyRankingMatch) {
     const destination = RANKING_SLUG_REDIRECTS[legacyRankingMatch[1]];
     if (destination) {

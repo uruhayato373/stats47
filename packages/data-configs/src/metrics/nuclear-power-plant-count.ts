@@ -54,5 +54,5 @@ export const nuclearPowerPlantCount: MetricConfig = {
   // (福島県 13 → 3、全国 68 → 21)。
   "seoTitle": "原子力発電所数ランキング都道府県【2013年】｜1位福井県（4か所）",
   "seoDescription": "2013年の原子力発電所数の都道府県別ランキング。1位福井県（4か所）、立地は14都道府県で全国21か所。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

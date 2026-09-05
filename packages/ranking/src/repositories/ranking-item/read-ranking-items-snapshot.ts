@@ -183,6 +183,7 @@ export async function readRankingItemFromR2(
   rankingKey: string,
   areaType: AreaType,
 ): Promise<Result<RankingItem | null, Error>> {
+  if (GONE_RANKING_KEYS.has(rankingKey)) return ok(null);
   try {
     const snapshot = await readValidatedSnapshot(
       rankingItemKeyPath(rankingKey),
@@ -205,6 +206,7 @@ export async function readRankingItemFromR2(
 export async function readRankingItemByKeyFromR2(
   rankingKey: string,
 ): Promise<Result<RankingItem | null, Error>> {
+  if (GONE_RANKING_KEYS.has(rankingKey)) return ok(null);
   try {
     const snapshot = await readValidatedSnapshot(
       rankingItemKeyPath(rankingKey),
@@ -289,6 +291,7 @@ export async function readRankingItemByKeyAndAreaTypeFromR2(
   rankingKey: string,
   areaType: AreaType,
 ): Promise<Result<RankingItem[], Error>> {
+  if (GONE_RANKING_KEYS.has(rankingKey)) return ok([]);
   try {
     const snapshot = await readValidatedSnapshot(
       rankingItemKeyPath(rankingKey),
