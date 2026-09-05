@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "watermelon-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "すいか消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/watermelon-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug nagano-food-culture --keys watermelon-consumption-expenditure --data-name watermelon-ranking",
+  "fetchedAt": "2026-09-05T15:57:06.588Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
