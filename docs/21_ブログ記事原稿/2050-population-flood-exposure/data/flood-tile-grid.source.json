@@ -1,5 +1,7 @@
 {
   "kind": "derived",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "将来人口メッシュの中心点を洪水ポリゴンに包含判定し、重複を除いた区域内人口比率を県別に示す独自GIS派生値であり、統計調査の集計表ではない。入力・演算・保存則はcanonical Geo manifestへ接続する。",
   "source": "r2:app/geo/population-flood-risk/item.json",
   "inputs": [
     {
