@@ -425,7 +425,12 @@ updated: 2026-08-30
      通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない
 - **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
   2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
-  運転設定を `run-claude-batch.sh` の既定に焼いた。outbox 11 件を最初の publish に載せる。正典 `ranking-content-standards.md` §2026-09-05
+  運転設定を `run-claude-batch.sh` の既定に焼いた。正典 `ranking-content-standards.md` §2026-09-05
+- **2026-09-05 本番 3 バッチ**: 公開 54 件 (done 718 → 772・残 1,394)。batch1 は 26 件が原因不明の CLI 失敗 (stdout を
+  捨てる欠陥 → 修正)、batch2 は定型化 REVISE が支配的 → prompt に県数・地方別順位表を機械計算で渡し、critic に author の
+  制約を前提として明文化。batch3 (35 件・concurrency 2) は **OK 25 / REJECT 9 / FAIL 1・$0.81/公開件・50 分・レート制限なし**。
+  `public-kindergarten-ratio` が 3 連続不合格で quarantine 入り (Opus 例外是正の初例)。次は 1 日 1〜2 バッチで回し、
+  `claude-error_*` が出たら止める
 - **2026-09-05 checkpoint**: Gemini 日次 CI は 08-30 から `preflight_status=billing` で 8 run 連続 PASS 0 (鍵の
   前払いクレジット枯渇。モデル品質ではない)。残 1,445 件 (done 718 / active 2,163) を Claude で消化するため、
   Agent tool 経路 (1 件 $16-18) ではなく **headless `claude -p` 経路**を整備した:
