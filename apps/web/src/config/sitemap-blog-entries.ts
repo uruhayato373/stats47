@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-09-05
- * 件数: blog 528 / tag 63 / survey 85
+ * 件数: blog 531 / tag 64 / survey 85
  */
 
 export interface SitemapBlogEntry {
@@ -60,6 +60,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "beef-consumption-quantity-vs-municipal-road-paving-rate", lastModified: "2026-08-29" },
   { slug: "beef-consumption-quantity-vs-unmarried-ratio-male-45-49", lastModified: "2026-08-29" },
   { slug: "beef-unmarried-ratio", lastModified: "2026-08-28" },
+  { slug: "beer-peak-month-july-to-december", lastModified: "2026-09-06" },
   { slug: "beer-vs-happoshu-shift", lastModified: "2026-07-10" },
   { slug: "birth-death-gap-decline", lastModified: "2026-03-04" },
   { slug: "black-tea-expenditure-ranking", lastModified: "2026-07-10" },
@@ -354,6 +355,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "natto-consumption-expenditure", lastModified: "2026-06-14" },
   { slug: "natto-production-vs-consumption", lastModified: "2026-07-19" },
   { slug: "natural-increase-rate-prefecture-gap", lastModified: "2026-08-29" },
+  { slug: "necktie-stockings-market-shrink", lastModified: "2026-09-05" },
   { slug: "niigata-food-culture", lastModified: "2026-07-10" },
   { slug: "niigata-migration-flow", lastModified: "2026-08-30" },
   { slug: "noodle-consumption-prefecture-character", lastModified: "2026-05-06" },
@@ -541,6 +543,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "whisky-consumption-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "wind-power-capacity-prefecture-gap", lastModified: "2026-06-02" },
   { slug: "wine-expenditure-ranking", lastModified: "2026-07-10" },
+  { slug: "winter-coat-bargain-purchase-price", lastModified: "2026-09-05" },
   { slug: "womens-clothing-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "working-hours-overtime-gap", lastModified: "2026-06-02" },
   { slug: "workplace-accident-regional-map", lastModified: "2026-03-09" },
@@ -580,7 +583,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "地方財政", lastModified: "2026-08-28" },
   { tagKey: "子育て", lastModified: "2026-07-11" },
   { tagKey: "家計", lastModified: "2026-08-29" },
-  { tagKey: "家計調査", lastModified: "2026-09-05" },
+  { tagKey: "家計調査", lastModified: "2026-09-06" },
   { tagKey: "少子化", lastModified: "2026-06-14" },
   { tagKey: "市区町村", lastModified: "2026-07-16" },
   { tagKey: "年収", lastModified: "2026-09-05" },
@@ -590,8 +593,9 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "教育費", lastModified: "2026-08-28" },
   { tagKey: "東北", lastModified: "2026-07-12" },
   { tagKey: "格差", lastModified: "2026-09-05" },
-  { tagKey: "消費支出", lastModified: "2026-09-05" },
-  { tagKey: "消費者物価指数", lastModified: "2026-06-07" },
+  { tagKey: "消費", lastModified: "2026-09-05" },
+  { tagKey: "消費支出", lastModified: "2026-09-06" },
+  { tagKey: "消費者物価指数", lastModified: "2026-09-05" },
   { tagKey: "消費量", lastModified: "2026-08-04" },
   { tagKey: "漁獲量", lastModified: "2026-09-05" },
   { tagKey: "焼酎", lastModified: "2026-07-10" },
