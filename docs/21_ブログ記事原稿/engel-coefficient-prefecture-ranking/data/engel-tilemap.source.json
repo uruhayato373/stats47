@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "food-expenditure-ratio-multi-person-households",
+  "year": "2024",
+  "unit": "％",
+  "source": "r2:app/ranking/food-expenditure-ratio-multi-person-households/values.json",
+  "verifiedMatchRate": 100,
+  "schemeSource": "item.json",
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
+}

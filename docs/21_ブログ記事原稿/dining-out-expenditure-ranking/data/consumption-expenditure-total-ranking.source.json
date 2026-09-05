@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "consumption-expenditure-total",
+  "year": "2024",
+  "unit": "円",
+  "label": "消費支出総額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/consumption-expenditure-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dining-out-expenditure-ranking --keys consumption-expenditure-total --data-name consumption-expenditure-total-ranking",
+  "fetchedAt": "2026-09-05T08:53:01.808Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

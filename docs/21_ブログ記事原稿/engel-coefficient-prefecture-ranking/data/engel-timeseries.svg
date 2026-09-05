@@ -1,0 +1,82 @@
+<!-- data-source: engel-timeseries.json | generated: 2026-09-05T09:06:07.208Z -->
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="エンゲル係数（食料費割合）の推移">
+  <title>エンゲル係数（食料費割合）の推移</title>
+  <desc>47都道府県の単純平均</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="680" height="420" class="svg-bg"/>
+  <text x="340" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">エンゲル係数（食料費割合）の推移</text>
+  <text x="340" y="37" text-anchor="middle" font-size="9" class="svg-tick">47都道府県の単純平均</text>
+  <text x="55.0" y="52.0" font-size="8.5" class="svg-tick">(％)</text>
+  <!-- プロットエリア -->
+  <rect x="55.0" y="58.0" width="611.0" height="302.0" class="svg-plot svg-plot-border" stroke-width="1"/>
+  <!-- Y グリッド -->
+  <line x1="55.0" y1="360.0" x2="666.0" y2="360.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="363.5" text-anchor="end" font-size="8.5" class="svg-tick">0</text>
+  <line x1="55.0" y1="309.7" x2="666.0" y2="309.7" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="313.2" text-anchor="end" font-size="8.5" class="svg-tick">5</text>
+  <line x1="55.0" y1="259.3" x2="666.0" y2="259.3" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="262.8" text-anchor="end" font-size="8.5" class="svg-tick">10</text>
+  <line x1="55.0" y1="209.0" x2="666.0" y2="209.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="212.5" text-anchor="end" font-size="8.5" class="svg-tick">15</text>
+  <line x1="55.0" y1="158.7" x2="666.0" y2="158.7" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="162.2" text-anchor="end" font-size="8.5" class="svg-tick">20</text>
+  <line x1="55.0" y1="108.3" x2="666.0" y2="108.3" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="111.8" text-anchor="end" font-size="8.5" class="svg-tick">25</text>
+  <line x1="55.0" y1="58.0" x2="666.0" y2="58.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="61.5" text-anchor="end" font-size="8.5" class="svg-tick">30</text>
+
+  <!-- X 軸ラベル -->
+  <text x="55.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,55.0,374.0)">2000</text>
+  <text x="102.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,102.0,374.0)">2001</text>
+  <text x="149.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,149.0,374.0)">2002</text>
+  <text x="196.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,196.0,374.0)">2003</text>
+  <text x="243.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,243.0,374.0)">2004</text>
+  <text x="290.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,290.0,374.0)">2005</text>
+  <text x="337.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,337.0,374.0)">2006</text>
+  <text x="384.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,384.0,374.0)">2007</text>
+  <text x="431.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,431.0,374.0)">2008</text>
+  <text x="478.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,478.0,374.0)">2009</text>
+  <text x="525.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,525.0,374.0)">2010</text>
+  <text x="572.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,572.0,374.0)">2011</text>
+  <text x="619.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,619.0,374.0)">2012</text>
+  <text x="666.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,666.0,374.0)">2024</text>
+  <!-- 系列 -->
+  <polyline points="55.0,129.5 102.0,130.5 149.0,131.5 196.0,128.5 243.0,129.5 290.0,130.5 337.0,129.5 384.0,132.5 431.0,127.5 478.0,126.5 525.0,127.5 572.0,123.4 619.0,125.4 666.0,80.1" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="129.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="102.0" cy="130.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="149.0" cy="131.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="196.0" cy="128.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="243.0" cy="129.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="290.0" cy="130.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="337.0" cy="129.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="384.0" cy="132.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="431.0" cy="127.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="478.0" cy="126.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="525.0" cy="127.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="572.0" cy="123.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="619.0" cy="125.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="80.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <!-- 凡例 -->
+  <rect x="678.0" y="58.0" width="12" height="3" fill="#1e88e5" rx="1.5"/>
+  <text x="693.0" y="62.0" font-size="9" class="svg-axis">全国平均</text>
+  <!-- 軸ラベル -->
+
+  <text x="13" y="209.0" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,209.0)">エンゲル係数（食料費割合）の推移（％）</text>
+</svg>
