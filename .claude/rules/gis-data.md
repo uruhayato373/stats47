@@ -77,6 +77,10 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 `app/stats/.../values.json`が公開構造化データなので権利確認が必要。`generate-ksj-stats-values.ts`は再生成を停止し、
 商用可の一次資料へ置換、権利者/事務局の書面許諾、または非データベース成果だけに縮退するまで公開更新しない。
 
+生成時だけでなく汎用R2 publisher（diff-push、exact asset、wrangler）も
+`ksj-publication-guard.ts`で全候補をPUT前に検査する。判定は`datasets.ts`と`license-policy.ts`から導出し、
+未登録KSJ、公開不可の原典、同原典由来の観測値を拒否する。旧stagingや同期manifestの一致を許可根拠にしない。
+
 公開時の出典は「データ名、国土交通省、個別ページURL、取得日、stats47が加工した事実」を最低限表示し、
 個別データページの条件が一般規約より優先される。利用範囲が曖昧なら推測せず国土数値情報運営事務局へ確認する。
 

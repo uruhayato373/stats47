@@ -42,6 +42,7 @@ import { geoCentroid, geoLength } from "d3-geo";
 import type { Feature, Geometry, Position } from "geojson";
 import { feature } from "topojson-client";
 import type { Topology, GeometryCollection } from "topojson-specification";
+import { assertKsjPublicKeysAllowed } from "../../../packages/r2-storage/src/scripts/lib/ksj-publication-guard";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
@@ -180,6 +181,12 @@ interface LoadResult {
 }
 
 async function loadFeatures(opts: ReturnType<typeof parseArgs>): Promise<LoadResult> {
+  // 原典のコピーだけでなく点座標を含む公開specも、KSJの商用公開境界を守る。
+  const sourceKeys = [
+    ...(opts.dataId ? [`gis/mlit-ksj/${opts.dataId}/${opts.version ?? 'unknown'}/source`] : []),
+    ...(opts.r2Key ? [opts.r2Key] : []),
+  ];
+  assertKsjPublicKeysAllowed(sourceKeys);
   if (opts.geojson) {
     const gj = JSON.parse(readFileSync(opts.geojson, "utf8")) as {
       type: string;

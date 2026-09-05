@@ -95,6 +95,22 @@ afterEach(() => {
 });
 
 describe('exact R2 asset publisher', () => {
+  it.each([false, true])('非商用KSJが混在したバッチは全件PUT前に拒否する (dryRun=%s)', async (dryRun) => {
+    const root = makeRoot();
+    const key = 'app/blog/article-a/chart.svg';
+    writeFileSync(join(root, '.local/r2', key), '<svg/>');
+    const [allowed] = resolveExactAssetCandidates(root, {
+      keys: [key], prefix: null, extensions: [],
+    });
+    const { store, puts } = makeStore();
+
+    await expect(publishExactR2Assets({
+      candidates: [allowed, { ...allowed, key: 'gis/mlit-ksj/P03/13/data.topojson' }],
+      store, dryRun,
+    })).rejects.toThrow('KSJ public mirror禁止');
+    expect(puts).toEqual([]);
+  });
+
   it('同一bytes・size・MIME・metadataならPUTしない', async () => {
     const root = makeRoot();
     const key = 'app/blog/article-a/chart.svg';

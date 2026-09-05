@@ -17,6 +17,7 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import { assertDiffPushComplete } from "./lib/diff-push-result";
+import { assertKsjPublicKeysAllowed } from "./lib/ksj-publication-guard";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
@@ -111,6 +112,7 @@ async function main(): Promise<void> {
   if (prefix) console.log(`プレフィックス: ${prefix}`);
 
   const localFiles = collectLocalFiles(localDir, outputDir);
+  assertKsjPublicKeysAllowed(localFiles.map((file) => file.key));
   console.log(`ローカルファイル: ${localFiles.length}`);
 
   const manifest = loadManifest(prefix);

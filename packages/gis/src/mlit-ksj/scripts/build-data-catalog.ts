@@ -447,7 +447,7 @@ export async function buildCatalog() {
       registered: GIS_DATASETS.length,
       r2Acquired: count((item) => isAcquisitionComplete(item.dataId, item.r2)),
       registeredMissingR2: count(
-        (item) => item.registered && !isAcquisitionComplete(item.dataId, item.r2),
+        isRequiredPublicAcquisitionMissing,
       ),
       analysisSources: count((item) => item.usedInAnalyses.length > 0),
       readyToAcquire: count((item) => item.state === "ready-to-acquire"),
@@ -462,6 +462,14 @@ export async function buildCatalog() {
     openDataCatalog: buildOpenDataCatalog(acquiredIds, openDataInventories),
     items,
   };
+}
+
+/** 公開禁止の元データは、R2から撤去しても「再取得不足」に戻さない。 */
+export function isRequiredPublicAcquisitionMissing(
+  item: Pick<CatalogItem, "registered" | "publicationPolicy" | "dataId" | "r2">,
+): boolean {
+  return item.registered && item.publicationPolicy === "public-r2-eligible" &&
+    !isAcquisitionComplete(item.dataId, item.r2);
 }
 
 export function publicMirrorPolicyErrors(
@@ -502,7 +510,7 @@ export function validateCatalog(catalog: Awaited<ReturnType<typeof buildCatalog>
   }
   if (checkRemote && catalog.summary.registeredMissingR2 > 0) {
     const missing = registered
-      .filter((item) => !isAcquisitionComplete(item.dataId, item.r2))
+      .filter(isRequiredPublicAcquisitionMissing)
       .map((item) => item.dataId);
     errors.push(`R2未取得の登録データ: ${missing.join(", ")}`);
   }
