@@ -298,7 +298,24 @@ function callCli(
       const stdout = outCollector.end();
       const stderr = errCollector.end();
       if (code !== 0) {
-        reject(new Error(`${model} CLI failed (code ${code}): ${stderr.slice(0, 300)}`));
+        // ★claude CLI はレート制限・未ログイン等を exit 1 + stdout の wrapper (is_error / result) で返し、
+        //   stderr は空のことが多い (batch1 で 26 件が「CLI failed (code 1):」だけになり原因不明だった)。
+        //   stdout を wrapper として読めれば ClaudeCliError (subtype 付き) にして原因を残す。
+        if (isClaudeCliAlias(model) && stdout.trim()) {
+          try {
+            parseClaudeCliOutput(stdout);
+          } catch (e) {
+            if (e instanceof ClaudeCliError && e.subtype !== "invalid-output") {
+              reject(e);
+              return;
+            }
+          }
+        }
+        reject(
+          new Error(
+            `${model} CLI failed (code ${code}): ${stderr.slice(0, 300) || stdout.slice(0, 300)}`,
+          ),
+        );
         return;
       }
       if (!isClaudeCliAlias(model)) {
