@@ -32,6 +32,14 @@ diff/exact/wranglerで全候補をPUT前に`ksj-publication-guard.ts`へ通す�
 GISのrankingConfigだけでなく全metricの実sourceを走査する（別系列の漁港を含め旧対象11本）。
 商用一次資料への置換後も同じkeyには旧stagingが残るため、現config recipe・原典SHA・版日付・47県・全国合計を検査する。
 公開禁止原典の撤去後にカタログが「不足」と再取得を促さないことも回帰テストする。
+公開終了後の復活を防ぐ対象は観測値だけでなくranking画像・全国派生・相関の専用keyも含む。
+画像bundle専用publisherも同じgateをlock取得前に通し、混在planはPUTゼロで止める。
+撤去は原本backupのexact key/size/ETagを固定してから行い、共有一覧・逆向き相関は無関係レコードを保持する。
+
+**画像の出典・実描画（2026-09-06）**: 新版itemの出典は`sourceConfig.source.name`を優先する。
+旧`source`だけを読むと国交省・水産庁の資料をe-Statと誤表示する。さらに画像生成用tsconfigの
+includeがscriptsだけだと輸入したOGP TSXへautomatic JSX設定が適用されず、React未定義で
+タイトルだけのfallbackになることがある。OGP componentもincludeし、通常描画・出典表示を確認する。
 
 **出典カタログの教訓（2026-09-05）**: 固定パスのR2依存pageは`revalidate`だけでは静的生成を防げない。
 ローカルでは出典が読めても、CIではnullの代替表示が焼き付いてHTTP200のまま本番に残り得る。

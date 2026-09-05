@@ -10,6 +10,11 @@ function source(path: string): string {
 }
 
 describe('generated image source policy', () => {
+  it('applies the automatic JSX runtime to the imported OGP components as well as scripts', () => {
+    const config = JSON.parse(source('apps/web/scripts/tsconfig.ogp.json'));
+    expect(config.compilerOptions.jsx).toBe('react-jsx');
+    expect(config.include).toContain('../src/features/ogp/**/*.tsx');
+  });
   const buzzMapPublishers = [
     '.claude/scripts/sns/prepare-buzz-map-batch.ts',
   ] as const;
