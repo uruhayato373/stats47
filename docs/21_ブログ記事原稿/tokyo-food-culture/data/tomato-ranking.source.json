@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "tomato-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "トマト消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/tomato-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tokyo-food-culture --keys tomato-consumption-expenditure --data-name tomato-ranking",
+  "fetchedAt": "2026-09-05T15:23:54.329Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
