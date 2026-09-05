@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedAt": "2026-09-05T12:29:23.035Z",
   "scope": "geo-release-publication",
-  "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_DECISION_PENDING",
+  "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_ROLLOUT_IN_PROGRESS",
   "updatedAt": "2026-09-05T14:02:25.009Z",
   "evidenceDigests": [
     { "path": "/tmp/stats47-geo-source-head-check.json", "bytes": 33419, "sha256": "fa68c618f8905f07cb1ebc8817ff1ce1c743429657583c27b081c4a92f331242" },
@@ -3039,7 +3039,13 @@
     "paidBodyIncludedInReceipt": false
   },
   "legacyLicense": {
-    "status": "NEEDS_OWNER",
+    "status": "AUTHORIZED_ROLLOUT_IN_PROGRESS",
+    "authorization": {
+      "userResponse": "やって",
+      "approvedScope": "Remove the exact 435 legacy raw objects; replace roadside-station-count and fishing-port-count-ksj with official 2026 sources; retire the other nine rankings with appropriate redirects and one consolidated deployment",
+      "retiredPagePolicy": "fishing-port-count redirects to fishing-port-count-ksj with query preservation; eight non-equivalent rankings return 410",
+      "deletionPrecondition": "Immutable backup inventory, exact key/size/ETag match before deletion, code retirement deployed before removing ranking assets"
+    },
     "datasetIds": [
       "C02",
       "C09",
@@ -3096,7 +3102,7 @@
       "logSha256": "0d937a762dcbc3fd32bd96852cd2d2cf480789c2da6f77cd5e3b4443db1a21c5"
     },
     "remoteDelete": "NOT_RUN",
-    "next": "Obtain explicit approval for exact raw removal, rollout of the two official replacements, and permission or retirement/redirect policy for the remaining nine metrics"
+    "next": "Complete isolated code integration, exact replacement snapshots and images, retirement deployment, approved inventory-locked removal and live acceptance"
   },
   "followupVerification": {
     "genericPublisherAndMigrationTests": { "passed": 20, "failed": 0 },

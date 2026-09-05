@@ -31,7 +31,7 @@ on:
         required: false
         default: "1"
       target:
-        description: "retention-prefixes で 1 target だけ実行する場合の id (空なら全 target)"
+        description: "retention-prefixes の target id (実削除時は必須。空ならdry-runのみ)"
         required: false
         default: ""
       keep:
@@ -57,10 +57,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: 🧰 Checkout develop
+      - name: 🧰 Checkout dispatch revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: develop
+          ref: ${{ github.sha }}
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
@@ -80,6 +80,8 @@ jobs:
 
       - name: 🧹 Retention (移行済み旧 prefix)
         if: inputs.mode == 'retention-prefixes'
+        env:
+          NODE_ENV: production
         run: |
           # pipefail 必須: パイプ末尾 (tee) の exit code に隠れて削除エラーが success になるのを防ぐ
           set -o pipefail

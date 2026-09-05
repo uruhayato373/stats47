@@ -37,6 +37,11 @@ describe('KSJ汎用publisherの公開境界', () => {
     // GISのrankingConfigから漏れていた旧系列もmetricの実sourceで拒否する。
     expect(() => assertKsjPublicKeysAllowed(['app/stats/fishing-port-count/values.json']))
       .toThrow('KSJ公開構造化データ禁止');
+    for (const key of ['app/ranking/fishing-port-count/item.json',
+      'app/ranking/dam-count/ogp/ogp.png', 'app/japan/dam-count/series.json',
+      'app/correlation/by-ranking-key/dam-count.json']) {
+      expect(() => assertKsjPublicKeysAllowed([key])).toThrow('KSJ公開構造化データ禁止');
+    }
   });
 
   it('datasetのrankingConfigだけでなく全metricの実入力を検査する', () => {

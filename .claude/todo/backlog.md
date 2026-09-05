@@ -21,7 +21,7 @@ updated: 2026-09-05
 
 ## 🔴 高 — 今月中に着手したい
 
-### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] 非商用KSJのpublic mirrorと公開構造化ランキングを是正する
+### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] [進行中] 非商用KSJのpublic mirrorと公開構造化ランキングを是正する
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
 
@@ -47,13 +47,13 @@ updated: 2026-09-05
   KSJ ranking生成、Geo bundle生成、汎用R2 publisher、KSJバズ地図入力をfail-closed化。
   同一keyの一次資料置換後もrecipe/SHA/版/47県/合計で旧stagingを拒否。11 prefixと旧Geo運用JSONは`r2-retention.ts`のexact allowlist。
 - **次（実行順）**:
-  1. `r2-retention.ts --target license-remediation-ksj-<id>`のdry-run結果を保存し、承認後にworkflowで11 prefixを削除する。
-  2. 置換候補2本は派生データを含め一括更新する。残り9本は商用可一次資料への置換、書面許諾、公開終了+適切な転送のいずれかを決める。
-  3. 書面許諾の場合は、非データベースの空間演算結果、広告付きWeb表示、47行JSON、CSV/販売物の各利用形態を明記して回答を保存する。
-  4. 許諾/置換が完了するまでは旧KSJからの新規生成・更新・SNS転用・有料商品化を止める。既存ページは対応方針決定後に一括是正する。
+  1. ユーザー「やって」により、元GIS435件撤去・新版2置換・残9終了/転送・一括deployを承認済み。
+  2. 置換候補2本は派生データ・画像・相関を含め一括更新する。旧`fishing-port-count`は新版へ301、代替のない8本は410にする。
+  3. config/一覧/ダウンロード/転送コードを検証して一括deploy後、旧ランキング資産をexact削除する。
+  4. 削除は保全済みkey/size/ETagを固定した`license-retention-20260905.json`の3targetをworkflow経由で実行する。旧KSJの再公開は引き続き禁止する。
   5. 関連SNSは台帳posted6/draft2を検出。旧11ランキング系列の外部投稿は未検証のため、Geo15投稿の検証済み結果と混同せず、方針決定後に個別確認する。
-- **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。remote削除、ランキング停止、
-  301/410、sitemap変更、デプロイは影響URLとrollbackを提示して別途承認を得る。
+- **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。承認されたexact対象以外は削除しない。
+  削除前のkey/size/ETagが保全時から変化していれば停止する。共有一覧は無関係レコードを保持する。
 - **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。11ランキングは商用可source/書面許諾IDを持つか、
   config・R2・sitemap・内部リンク・記事/SNSを含めて廃止され、本番URLとGooglebot UAで方針どおりのstatusを確認する。
 
