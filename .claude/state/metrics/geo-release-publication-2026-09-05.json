@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-05T12:29:23.035Z",
   "scope": "geo-release-publication",
   "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_ROLLOUT_IN_PROGRESS",
-  "updatedAt": "2026-09-05T14:02:25.009Z",
+  "updatedAt": "2026-09-05T15:58:54Z",
   "evidenceDigests": [
     { "path": "/tmp/stats47-geo-source-head-check.json", "bytes": 33419, "sha256": "fa68c618f8905f07cb1ebc8817ff1ce1c743429657583c27b081c4a92f331242" },
     { "path": "/tmp/geo-flood-source-publish-20260905/apply.json", "bytes": 98294, "sha256": "055c871c1750c460e97493475d800f82cd1377530c2f01cc2383f5b4eb08ec73" },
@@ -3101,8 +3101,31 @@
       "log": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/inventory-2026-09-05T13-21-55-281Z/remote-catalog-check.log",
       "logSha256": "0d937a762dcbc3fd32bd96852cd2d2cf480789c2da6f77cd5e3b4443db1a21c5"
     },
-    "remoteDelete": "NOT_RUN",
-    "next": "Complete isolated code integration, exact replacement snapshots and images, retirement deployment, approved inventory-locked removal and live acceptance"
+    "remoteDelete": {
+      "raw": "PASS",
+      "workflowRun": 33974655560,
+      "headSha": "043f8642fcf5d977cdc068b992d6cb013192507b",
+      "completedAt": "2026-09-05T15:26:08Z",
+      "deletedObjects": 435,
+      "deletedBytes": 48973241,
+      "errors": 0,
+      "remainingObjects": 0,
+      "publicHead404": 435,
+      "backupPreserved": true,
+      "retiredRankingAssets": "HOLD_UNTIL_CODE_DEPLOYED",
+      "receiptDirectory": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905"
+    },
+    "publicationPreflight": {
+      "exactPutCandidates": 169,
+      "published": 0,
+      "status": "HOLD_SOURCE_PROVENANCE",
+      "reason": "Expanded structured-data guard rejects port-count correlation. Primary e-Stat metadata 0003130814 and 0003130816 match the 699-code union, but cross-class code collisions may drop distinct ports and metadata only supplies 2010-2023, not the hardcoded 2024 reference date. Relabeling provenance is not a valid fix; seek scope approval for recomputation",
+      "draftPullRequest": "https://github.com/uruhayato373/stats47/pull/928",
+      "postRemovalCatalogAudit": "PASS; final-rollout-20260905/postraw-remote-catalog.json; eleven legacy prefixes empty",
+      "planSha256": "9dc23982f1c7145bd130f61ccf897290ae92b0483633efa386e2a16772daedd1",
+      "additionalBlogRetirement": "Owner approval requested for three newly discovered legacy blogs; no answer yet"
+    },
+    "next": "Resolve port-count provenance without weakening the guard, publish exact verified candidates, deploy retirement code once, remove approved old ranking assets, purge CDN and verify live acceptance"
   },
   "followupVerification": {
     "genericPublisherAndMigrationTests": { "passed": 20, "failed": 0 },
@@ -3113,7 +3136,10 @@
     "noteCatalog": { "errors": 0, "preexistingWarnings": 44 },
     "docsCheck": { "errors": 0, "preexistingWarnings": 39 },
     "agentSkillConsistency": { "errors": 0, "preexistingWarnings": 34 },
-    "fullWebBuildThisFollowup": "NOT_RUN; no followup code deployment",
+    "fullWebBuildThisFollowup": "PASS; 1436 prerendered pages audited",
+    "webTests": { "passed": 1238, "failed": 0, "files": 202, "log": "/tmp/stats47-legacy-release-web-tests-final.log" },
+    "lint": "PASS",
+    "testInvocationCorrection": "Build-only localhost base URL was inadvertently inherited by a combined test wrapper, causing two origin assertions; standard test environment rerun passes all 1238 without code changes",
     "paidNoteBacklogClosure": "Ledger CLI recorded actual passing gates; removal verification PASS",
     "recurrenceGuardDeployment": "NOT_DEPLOYED; tested implementation on codex/geo-license-publish-guard"
   }

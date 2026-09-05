@@ -52,6 +52,10 @@ updated: 2026-08-30
   3. config/一覧/ダウンロード/転送コードを検証して一括deploy後、旧ランキング資産をexact削除する。
   4. 削除は保全済みkey/size/ETagを固定した`license-retention-20260905.json`の3targetをworkflow経由で実行する。旧KSJの再公開は引き続き禁止する。
   5. 関連SNSは台帳posted6/draft2を検出。旧11ランキング系列の外部投稿は未検証のため、Geo15投稿の検証済み結果と混同せず、方針決定後に個別確認する。
+- **2026-09-06 checkpoint**: raw435件はworkflow `33974655560`でexact削除済み（48,973,241 bytes、エラー0、S3残0、公開HEAD435件404、backup保持）。remote catalog再監査PASS。
+  新版2・画像・共有一覧・相関・カタログ169候補は全backup/SHA/ETag一致、PUT0。PR #928はdraft、未デプロイ。build・1436 prerender・全workspace型・lint・web1238テストPASS。
+  追加の`port-count`は現R2=master699港と一致するが、甲乙種のコード衝突と固定年2024の根拠不足を一次APIで検出。出典名だけを変えてguardを解除しない。
+  原典再集計への範囲拡張と、旧値使用ブログ3本（`airport-count-vs-wind-power-plant-count-facility`、`dam-count-prefecture-gap`、`dam-count-vs-road-expressway-length`）の公開終了は追加承認待ち。
 - **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。承認されたexact対象以外は削除しない。
   削除前のkey/size/ETagが保全時から変化していれば停止する。共有一覧は無関係レコードを保持する。
 - **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。11ランキングは商用可source/書面許諾IDを持つか、
