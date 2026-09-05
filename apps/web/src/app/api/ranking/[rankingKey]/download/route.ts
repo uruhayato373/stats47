@@ -7,6 +7,7 @@ import {
 } from "@stats47/ranking/server";
 
 import { DOWNLOAD_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
+import { getRankingRetirementResponse } from "@/lib/ranking-retirement-response";
 
 /**
  * ランキングデータ ダウンロード API
@@ -68,6 +69,8 @@ export async function GET(
   { params }: { params: Promise<{ rankingKey: string }> },
 ) {
   const { rankingKey } = await params;
+  const retirementResponse = getRankingRetirementResponse(req, rankingKey);
+  if (retirementResponse) return retirementResponse;
   const sp = req.nextUrl.searchParams;
 
   const formatParam = sp.get("format");

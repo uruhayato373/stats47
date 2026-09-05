@@ -10,8 +10,8 @@
  *
  * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35
  *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293
- * 和集合: 2163 キー (INDEXABLE +0 / KNOWN +656 / INDEXABLE 総数 336 / KNOWN 総数 2163)
- * 生成日: 2026-08-31
+ * 和集合: 2154 キー (INDEXABLE +0 / KNOWN +656 / INDEXABLE 総数 335 / KNOWN 総数 2154)
+ * 生成日: 2026-09-05
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -155,7 +155,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "beer-consumption-expenditure",
   "beer-consumption-quantity",
   "bento-consumption-expenditure",
-  "biomass-power-station-count",
   "births",
   "biscuit-consumption-expenditure",
   "black-tea-consumption-expenditure",
@@ -385,7 +384,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "daikon-consumption-expenditure",
   "daikon-consumption-quantity",
   "dairy-cattle-count",
-  "dam-count",
   "day-time-population",
   "day-time-population-ratio",
   "daytime-population-ratio",
@@ -616,7 +614,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "fishery-species-catch-yellowtail",
   "fishery-workers",
   "fishery-workers-coastal-offshore",
-  "fishing-port-count",
   "fishing-port-count-by-type",
   "fishing-port-count-ksj",
   "fishing-vessel-crew",
@@ -727,7 +724,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "general-project-investment-urban-planning",
   "general-project-investment-welfare",
   "general-revenue-ratio-pref-finance",
-  "geothermal-power-plant-count",
   "girls-school-uniform-consumption-expenditure",
   "girls-school-uniform-consumption-quantity",
   "gloves-consumption-expenditure",
@@ -875,7 +871,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "housing-land-liabilities-ratio-multi-person-households",
   "housing-site-value-per-3-3m2",
   "husband-childcare-rate",
-  "hydroelectric-power-plant-count",
   "icecream-consumption-expenditure",
   "in-pref-university-entrance-ratio-by-highschool-origin",
   "in-prefecture-employed-people-ratio",
@@ -1225,7 +1220,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "notebooks-paper-consumption-expenditure",
   "nuclear-family-household-count",
   "nuclear-family-households-ratio",
-  "nuclear-power-plant-count",
   "number-of-commercial-employees-wholesale-retail",
   "number-of-constructed-buildings",
   "number-of-establishments-agriculture-forestry",
@@ -1945,7 +1939,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "theft-criminal-arrest-rate",
   "theft-offenses-recognized",
   "theft-offenses-recognized-per-1000",
-  "thermal-power-plant-count",
   "tissue-paper-consumption-expenditure",
   "tobacco-consumption-expenditure",
   "tofu-consumption-expenditure",
@@ -1977,7 +1970,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "total-production-in-the-prefecture",
   "total-public-enterprise-investment",
   "total-revenue-prefecture",
-  "tourism-resource-count",
   "towel-consumption-expenditure",
   "traffic-accident-casualties-elderly-65plus",
   "traffic-accident-casualties-per-100-accidents",
@@ -2137,7 +2129,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "widowed-ratio-female-60plus",
   "widowed-ratio-male-60plus",
   "wind-power-capacity",
-  "wind-power-plant-count-facility",
   "wind-power-turbine-count",
   "wine-consumption-expenditure",
   "wine-consumption-quantity",

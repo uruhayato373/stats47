@@ -52,5 +52,5 @@ export const geothermalPowerPlantCount: MetricConfig = {
   // あわせて KSJ P03 の号機単位レコードを施設名 + 住所で畳み「か所」に揃えた (大分県 7 → 6)。
   "seoTitle": "地熱発電施設数ランキング都道府県【2013年】｜1位大分県（6か所）",
   "seoDescription": "2013年の地熱発電施設数の都道府県別ランキング。1位大分県（6か所）、立地は8道県で全国17か所。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

@@ -187,7 +187,6 @@ export const INDEXABLE_RANKING_KEYS = new Set<string>([
   "necktie-consumption-quantity",
   "neighborhood-park-count",
   "newspaper-consumption-expenditure",
-  "nuclear-power-plant-count",
   "number-of-hotel-rooms",
   "nurses-per-100k-population",
   "nursing-home-capacity-per-1000-65plus",

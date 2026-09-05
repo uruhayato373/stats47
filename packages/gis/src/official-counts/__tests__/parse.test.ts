@@ -156,4 +156,11 @@ describe('official commercial count extraction (no network / no observations in 
         false
       );
   });
+  it('does not regenerate retired non-commercial dam, power or tourism rankings', () => {
+    for (const id of ['W01', 'P03', 'P12']) {
+      const dataset = GIS_DATASETS.find((ds) => ds.dataId === id);
+      expect(dataset?.license).toBe('non-commercial');
+      expect(dataset?.isRankingTarget).toBe(false);
+    }
+  });
 });
