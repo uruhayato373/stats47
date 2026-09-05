@@ -1,0 +1,48 @@
+<!-- data-source: tokyo-station-access-artifact-summary-findings.json | generated: 2026-08-31T21:44:14.489Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 504" width="960" height="504" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="東京都の駅800m圏人口を途中データで追う">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="504" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">東京都の駅800m圏人口を途中データで追う</text>
+  <rect x="40" y="72" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="108" r="18" fill="#dc2626"/>
+  <text x="58" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">入力｜人口メッシュ1,611件・表示駅680駅</tspan></text>
+  <text x="90" y="125.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">東京都だけを切り出した県別途中データです。</tspan></text>
+  <rect x="40" y="154" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="190" r="18" fill="#dc2626"/>
+  <text x="58" y="196" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="185.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">判定｜800m圏は692メッシュ</tspan></text>
+  <text x="90" y="207.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">メッシュ中心点と駅代表点の大円距離で圏内外を決めます。</tspan></text>
+  <rect x="40" y="236" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="272" r="18" fill="#dc2626"/>
+  <text x="58" y="278" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="267.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">2020年｜9,758,504人・69.5%</tspan></text>
+  <text x="90" y="289.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">駅800m圏人口と東京都の人口に占める比率です。</tspan></text>
+  <rect x="40" y="318" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="354" r="18" fill="#dc2626"/>
+  <text x="58" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="349.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">2050年｜10,196,427人・70.8%</tspan></text>
+  <text x="90" y="371.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">駅800m圏人口も比率も2020年より増える推計です。</tspan></text>
+  <rect x="40" y="400" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="436" r="18" fill="#dc2626"/>
+  <text x="58" y="442" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="431.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">保持項目｜境界・2時点人口・内外フラグ</tspan></text>
+  <text x="90" y="453.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">最寄り駅IDと実距離は保存せず、必要時は同じ演算を再実行します。</tspan></text>
+</svg>

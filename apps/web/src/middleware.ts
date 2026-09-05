@@ -1,9 +1,12 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
+import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
+
 import { resolvePageCacheHeaders } from '@/lib/cache-policy';
 import { UrlPolicy } from '@/lib/url-policy';
 
 import { BLOG_SLUG_REDIRECTS } from '@/config/blog-redirects';
+import { GEO_BASELINE_REDIRECTS } from '@/config/geo-redirects';
 import { LEGACY_CATEGORY_KEYS_SET } from '@/config/legacy-category-keys';
 import { RANKING_SLUG_REDIRECTS } from '@/config/ranking-redirects';
 import { REDIRECT_TAG_KEYS } from '@/config/redirect-tag-keys';
@@ -455,6 +458,24 @@ export default function middleware(req: NextRequest) {
     }
   }
 
+  // 単一指標のコロプレスはGeo空間分析ではないため、指標ハブへ恒久統合する。
+  // 公開済み・予約済みX投稿のUTM queryは保持する。
+  const geoBaselineDestination = GEO_BASELINE_REDIRECTS[pathname];
+  if (geoBaselineDestination) {
+    const url = new URL(geoBaselineDestination, req.url);
+    url.search = req.nextUrl.search;
+    return NextResponse.redirect(url, 301);
+  }
+
+  const geoStage = resolveGeoStageRoute(pathname);
+  if (geoStage?.kind === 'redirect') {
+    const url = new URL(geoStage.canonical, req.url);
+    url.search = req.nextUrl.search;
+    url.searchParams.set('pref', geoStage.prefCode);
+    url.searchParams.set('stage', geoStage.stage);
+    return NextResponse.redirect(url, 301);
+  }
+
   // 初期Geo X下書きが使っていた一覧ハブURLを、投稿の約束に合う専用landingへ移す。
   // UTMはそのまま保持し、投稿別の流入計測を壊さない。
   if (pathname === '/geo') {
@@ -485,7 +506,10 @@ export default function middleware(req: NextRequest) {
       );
     }
     if (!UrlPolicy.ranking.isKnown(rankingKey)) return gone();
-    return NextResponse.redirect(new URL(`/ranking/${rankingKey}`, req.url), 301);
+    return NextResponse.redirect(
+      new URL(`/ranking/${rankingKey}`, req.url),
+      301
+    );
   }
 
   // baseUrl は req.url 由来の origin を使う (preview/staging が prod へ 301 しないように)。

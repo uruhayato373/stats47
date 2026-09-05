@@ -215,6 +215,7 @@ function genBarChartSvg(
     layoutOverride ?? (Array.isArray(data) ? null : data.layout) ?? 'columns';
   const highLabel = (Array.isArray(data) ? null : data.highLabel) ?? '上位';
   const lowLabel = (Array.isArray(data) ? null : data.lowLabel) ?? '下位';
+  const showBars = (Array.isArray(data) ? null : data.showBars) ?? true;
 
   const sorted = [...items].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
   const top = sorted.slice(0, N);
@@ -249,6 +250,7 @@ function genBarChartSvg(
     layout,
     highLabel,
     lowLabel,
+    showBars,
   });
 }
 

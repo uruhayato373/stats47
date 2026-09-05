@@ -49,6 +49,8 @@ const landPrice = () =>
     populationChangeRate: -index,
     medianLandPriceChange: index / 10,
     medianResidentialLandPrice: 50_000 + index,
+    risingDecliningPointShare: 25,
+    comparablePointCount: 100,
   }));
 const floodRisk = () =>
   snapshot('population-flood-risk', (index) => ({
@@ -77,6 +79,8 @@ describe('buildGeoDecisionRows', () => {
       populationChangeRate: -1,
       landPriceChange: 0.1,
       medianResidentialLandPrice: 50_001,
+      risingDecliningPointShare: 25,
+      comparablePointCount: 100,
       floodExposurePopulation: 10_001,
       floodExposureShare: 0.5,
       stationAccessPopulation: 20_001,

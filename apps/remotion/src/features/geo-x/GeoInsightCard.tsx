@@ -13,15 +13,9 @@ import type { RankingEntry } from '@/shared';
 import { GEO_X_LAYOUT, GEO_X_MAP_TRANSFORMS } from './layout';
 
 export type GeoInsightRole =
-  | 'baseline'
-  | 'cross-analysis'
-  | 'method'
-  | 'decision';
+  'baseline' | 'cross-analysis' | 'method' | 'decision';
 export type GeoInsightPanelKind =
-  | 'selected-values'
-  | 'statement'
-  | 'method'
-  | 'layers';
+  'selected-values' | 'statement' | 'method' | 'layers';
 
 export interface GeoInsightCardProps extends Record<string, unknown> {
   title: string;
@@ -55,7 +49,8 @@ function normalizePrefCode(code: string): string {
 }
 
 function formatValue(value: number, unit: string, format: string): string {
-  if (format === 'integer') return `${Math.round(value).toLocaleString('ja-JP')}${unit}`;
+  if (format === 'integer')
+    return `${Math.round(value).toLocaleString('ja-JP')}${unit}`;
   const decimals = format.includes('2') ? 2 : 1;
   const sign = format.toLowerCase().includes('signed') && value > 0 ? '+' : '';
   if (unit === '%') return `${sign}${value.toFixed(decimals)}%`;
@@ -72,7 +67,11 @@ function selectedEntries(
     .filter((entry): entry is RankingEntry => entry !== undefined);
 }
 
-function continuousFill(value: number | undefined, min: number, max: number): string {
+function continuousFill(
+  value: number | undefined,
+  min: number,
+  max: number
+): string {
   if (value === undefined) return COLORS.land;
   const ramp = BUZZ_MAP_RAMPS.blue;
   if (min < 0 && max > 0) {
@@ -81,10 +80,21 @@ function continuousFill(value: number | undefined, min: number, max: number): st
     return ramp[Math.round(ratio * (ramp.length - 1))];
   }
   const ratio = max === min ? 0.5 : (value - min) / (max - min);
-  return ramp[Math.max(0, Math.min(ramp.length - 1, Math.round(ratio * (ramp.length - 1))))];
+  return ramp[
+    Math.max(
+      0,
+      Math.min(ramp.length - 1, Math.round(ratio * (ramp.length - 1)))
+    )
+  ];
 }
 
-function PanelShell({ label, children }: { label: string; children: React.ReactNode }) {
+function PanelShell({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div
       style={{
@@ -136,7 +146,15 @@ function ValueRow({
         minWidth: 0,
       }}
     >
-      <span style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 25, fontWeight: 700 }}>
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          fontSize: 25,
+          fontWeight: 700,
+        }}
+      >
         <span style={{ width: 16, height: 16, background: color }} />
         {entry.areaName}
       </span>
@@ -172,7 +190,13 @@ function DataPanel({
   if (kind === 'selected-values') {
     return (
       <PanelShell label={label}>
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.max(1, highlighted.length)}, minmax(0, 1fr))`, gap: 28 }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${Math.max(1, highlighted.length)}, minmax(0, 1fr))`,
+            gap: 28,
+          }}
+        >
           {highlighted.map((entry, index) => (
             <ValueRow
               key={entry.areaCode}
@@ -326,10 +350,20 @@ function MapLegend({
 }) {
   if (mapMode === 'focus') {
     return (
-      <div style={{ display: 'flex', maxWidth: 540, flexWrap: 'wrap', gap: '8px 18px', fontSize: 21, fontWeight: 700 }}>
+      <div
+        style={{
+          display: 'flex',
+          maxWidth: 540,
+          flexWrap: 'wrap',
+          gap: '8px 18px',
+          fontSize: 21,
+          fontWeight: 700,
+        }}
+      >
         {highlighted.map((entry, index) => (
           <span key={entry.areaCode} style={{ whiteSpace: 'nowrap' }}>
-            <span style={{ color: HIGHLIGHT_COLORS[index] }}>■</span> {entry.areaName}{' '}
+            <span style={{ color: HIGHLIGHT_COLORS[index] }}>■</span>{' '}
+            {entry.areaName}{' '}
             {formatValue(entry.value, metricUnit, metricFormat)}
           </span>
         ))}
@@ -367,13 +401,20 @@ function LayerContract({
   layers: string[];
   operations: string[];
 }) {
-  const geometries = [...new Set(
-    layers
-      .map((layer) => layer.match(/［([^］]+)］/)?.[1])
-      .filter((geometry): geometry is string => Boolean(geometry))
-  )];
+  const geometries = [
+    ...new Set(
+      layers
+        .map((layer) => layer.match(/［([^］]+)］/)?.[1])
+        .filter((geometry): geometry is string => Boolean(geometry))
+    ),
+  ];
   const isMultiAnalysis = layers.length > 2;
   const finalOperation = operations[operations.length - 1];
+  // 詳細な演算契約は着地ページに保持し、カードでは長文を画面外へ流さない。
+  const operationLabel =
+    finalOperation && finalOperation.length > 24
+      ? `${operations.length}工程・手順は着地で確認`
+      : finalOperation;
   return (
     <div
       style={{
@@ -396,7 +437,9 @@ function LayerContract({
         <>
           <span>{analysisLabel}</span>
           <span style={{ color: COLORS.accentSocial }}>·</span>
-          <span>{layers.length}レイヤー（{geometries.join(' / ')}）</span>
+          <span>
+            {layers.length}レイヤー（{geometries.join(' / ')}）
+          </span>
           <span style={{ color: COLORS.accentInfra }}>→</span>
           <span>空間処理 {operations.length}工程</span>
         </>
@@ -404,14 +447,16 @@ function LayerContract({
         <>
           {layers.map((layer, index) => (
             <React.Fragment key={layer}>
-              {index > 0 ? <span style={{ color: COLORS.accentSocial }}>×</span> : null}
+              {index > 0 ? (
+                <span style={{ color: COLORS.accentSocial }}>×</span>
+              ) : null}
               <span>{layer}</span>
             </React.Fragment>
           ))}
           {finalOperation ? (
             <>
               <span style={{ color: COLORS.accentInfra }}>→</span>
-              <span>{finalOperation}</span>
+              <span>{operationLabel}</span>
             </>
           ) : null}
         </>
@@ -440,7 +485,14 @@ export const GeoInsightCard: React.FC<GeoInsightCardProps> = ({
 }) => {
   useBuzzMapFonts();
   const highlighted = selectedEntries(allEntries, highlightAreaCodes);
-  const titleSize = title.length > 18 ? 46 : title.length > 16 ? 50 : title.length > 14 ? 54 : 60;
+  const titleSize =
+    title.length > 18
+      ? 46
+      : title.length > 16
+        ? 50
+        : title.length > 14
+          ? 54
+          : 60;
 
   return (
     <AbsoluteFill
@@ -473,9 +525,29 @@ export const GeoInsightCard: React.FC<GeoInsightCardProps> = ({
             fontWeight: 700,
           }}
         >
-          <span style={{ width: 180, flexShrink: 0, color: COLORS.ink, fontSize: 20 }}>GeoAI地域分析</span>
-          <span style={{ width: 650, flexShrink: 0, textAlign: 'right', fontSize: 12, lineHeight: 1.35 }}>
-            {analysisLabel} ・ {sourceLabels.length === 1 ? sourceLabels[0] : `公式出典${sourceLabels.length}件`}
+          <span
+            style={{
+              width: 180,
+              flexShrink: 0,
+              color: COLORS.ink,
+              fontSize: 20,
+            }}
+          >
+            GeoAI地域分析
+          </span>
+          <span
+            style={{
+              width: 650,
+              flexShrink: 0,
+              textAlign: 'right',
+              fontSize: 12,
+              lineHeight: 1.35,
+            }}
+          >
+            {analysisLabel} ・{' '}
+            {sourceLabels.length === 1
+              ? sourceLabels[0]
+              : `公式出典${sourceLabels.length}件`}
           </span>
         </div>
         <h1
@@ -510,7 +582,13 @@ export const GeoInsightCard: React.FC<GeoInsightCardProps> = ({
         operations={operationLabels}
       />
 
-      <div style={{ position: 'absolute', left: GEO_X_LAYOUT.insight.x, top: GEO_X_LAYOUT.insight.y }}>
+      <div
+        style={{
+          position: 'absolute',
+          left: GEO_X_LAYOUT.insight.x,
+          top: GEO_X_LAYOUT.insight.y,
+        }}
+      >
         <DataPanel
           kind={panelKind}
           label={panelLabel}
@@ -554,9 +632,13 @@ export const GeoInsightCard: React.FC<GeoInsightCardProps> = ({
           letterSpacing: '.04em',
         }}
       >
-        <span style={{ color: COLORS.ink, fontSize: 24, fontWeight: 700 }}>stats47.jp</span>
+        <span style={{ color: COLORS.ink, fontSize: 24, fontWeight: 700 }}>
+          stats47.jp
+        </span>
         <span>地図で重ねて、地域の選択肢を読む。</span>
-        <span style={{ marginLeft: 'auto', fontSize: 14 }}>公式データをstats47.jpで加工</span>
+        <span style={{ marginLeft: 'auto', fontSize: 14 }}>
+          公式データをstats47.jpで加工
+        </span>
       </footer>
     </AbsoluteFill>
   );

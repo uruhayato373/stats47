@@ -1,0 +1,256 @@
+{
+  "kind": "derived",
+  "source": "r2:app/geo/population-land-price/item.json",
+  "sourceName": "国土交通省の将来推計人口メッシュ・地価公示をstats47が包含結合",
+  "generatedAt": "2026-09-05T04:30:39.794Z",
+  "retrievedAt": "2026-09-05T10:15:39.450Z",
+  "inputs": [
+    {
+      "key": "app/geo/population-land-price/item.json",
+      "sha256": "e50c18be8880fb3566e897fce999af0d55d13706a099046e07b953b2afcae5c1",
+      "bytes": 33326
+    },
+    {
+      "key": "app/geo/population-land-price/manifest.json",
+      "sha256": "d84d08bb36048740d6559156e5e2bbba8adad4b1562336e1e49c68eabbe770ab",
+      "bytes": 57097
+    },
+    {
+      "key": "app/geo/population-land-price/pref/01.json",
+      "sha256": "3d49c2674129416f711618ba2a1743711ed26c3fbde8b3ae154cdd251a28acb7",
+      "bytes": 1302362
+    },
+    {
+      "key": "app/geo/population-land-price/pref/02.json",
+      "sha256": "9a4f0c7d58c5ce50f8ec99c6fded49644b8dffe31c20831309e2795e9046ee61",
+      "bytes": 244604
+    },
+    {
+      "key": "app/geo/population-land-price/pref/03.json",
+      "sha256": "e6b48b92b73de5f9e9d144d73a736e80145ec89e2fef3ddf5f724aa0dc720a31",
+      "bytes": 443677
+    },
+    {
+      "key": "app/geo/population-land-price/pref/04.json",
+      "sha256": "e06540e1647a265ebb0e5250e194a2b93e8c2656d237c163388ffea422acef55",
+      "bytes": 328561
+    },
+    {
+      "key": "app/geo/population-land-price/pref/05.json",
+      "sha256": "acdc4f3580e78fac036e8d6bdf0156eace477124eee1eff635a30b4dd4640141",
+      "bytes": 279068
+    },
+    {
+      "key": "app/geo/population-land-price/pref/06.json",
+      "sha256": "bf0678dbf2d48380e0d0fc0d3d85c2a072be74bdbd9627b780292ed9b68b4571",
+      "bytes": 222844
+    },
+    {
+      "key": "app/geo/population-land-price/pref/07.json",
+      "sha256": "cd1901c06e3aa8b9977150e0ad4bff41572a520a293be49916ffdab6db8e672e",
+      "bytes": 450122
+    },
+    {
+      "key": "app/geo/population-land-price/pref/08.json",
+      "sha256": "555eb281dc285f4cf609f4e049cdf869cd416c9915200ac6f4d4d9b91f02adca",
+      "bytes": 374129
+    },
+    {
+      "key": "app/geo/population-land-price/pref/09.json",
+      "sha256": "4012c1fc6ce14689c433884528725cb122819f16bae21bf6a2abb0dac11a7f09",
+      "bytes": 295717
+    },
+    {
+      "key": "app/geo/population-land-price/pref/10.json",
+      "sha256": "ab894b77fcd31b65dc8e00c84b9a5f9e817be505da3168089e31bfeb932d0f7d",
+      "bytes": 219363
+    },
+    {
+      "key": "app/geo/population-land-price/pref/11.json",
+      "sha256": "97aa161aacd521b803271ea39fddcbbb515518f280030214b50d9161f8dce686",
+      "bytes": 267444
+    },
+    {
+      "key": "app/geo/population-land-price/pref/12.json",
+      "sha256": "a8daa944ae2fae6c4786604dbd0ace6c0a13f6b114111abcfeff80c58c754994",
+      "bytes": 367224
+    },
+    {
+      "key": "app/geo/population-land-price/pref/13.json",
+      "sha256": "669e54fa25d50bd16593b01b8fbf311347c04944a664c45645e46e5344181c0b",
+      "bytes": 204911
+    },
+    {
+      "key": "app/geo/population-land-price/pref/14.json",
+      "sha256": "4ebf6fdb3c7c44355d7a53d9cf243222e0788bf6807447358ac23e04b41ad212",
+      "bytes": 201219
+    },
+    {
+      "key": "app/geo/population-land-price/pref/15.json",
+      "sha256": "48f22e2cb403178ca2314cae6ed232446dde0cbf4df8fcfc270d137b8e9e42af",
+      "bytes": 368126
+    },
+    {
+      "key": "app/geo/population-land-price/pref/16.json",
+      "sha256": "70ebbf2687e8b879f4d36bf90307080c34ac14e6c13c419a5702e49c0cd7a924",
+      "bytes": 131313
+    },
+    {
+      "key": "app/geo/population-land-price/pref/17.json",
+      "sha256": "f18488218d6f98815d24399389bd4ded1165dcc0c6a50b2e9de25aa6538ca863",
+      "bytes": 158447
+    },
+    {
+      "key": "app/geo/population-land-price/pref/18.json",
+      "sha256": "782213e6665bd9dbf343a27101c327629b7e6bb787c13c272acbe5ee31630527",
+      "bytes": 120673
+    },
+    {
+      "key": "app/geo/population-land-price/pref/19.json",
+      "sha256": "a822a25c3cb13d0ec5a9083a123417aee8a12290502a75945c2f8a60d7495e22",
+      "bytes": 119237
+    },
+    {
+      "key": "app/geo/population-land-price/pref/20.json",
+      "sha256": "33fb59964ff7a1e40ccdfd859bdc22f8bc68bc90e11eb74b1b694a02680c2761",
+      "bytes": 354672
+    },
+    {
+      "key": "app/geo/population-land-price/pref/21.json",
+      "sha256": "39b4bf5e463b95ed4802d8c0045fac10654e4e06c20b84bb0800d5c688501a2b",
+      "bytes": 281277
+    },
+    {
+      "key": "app/geo/population-land-price/pref/22.json",
+      "sha256": "c6846a73ae22341ab9c4affd7dd85aee37d67a018dfb1c11b4949e8a5656a001",
+      "bytes": 305673
+    },
+    {
+      "key": "app/geo/population-land-price/pref/23.json",
+      "sha256": "10c4d540fbd66837798947a9eb7574a6feb81d350f76b8b70aaf619f7ca9071d",
+      "bytes": 340132
+    },
+    {
+      "key": "app/geo/population-land-price/pref/24.json",
+      "sha256": "8dea54c050427cf0adefab8d9c52b84ac98045bd2e654872e426122ba8717723",
+      "bytes": 222794
+    },
+    {
+      "key": "app/geo/population-land-price/pref/25.json",
+      "sha256": "1b899e2d4d22677aa55e040665f52a393476113a2b8a28b3aaffc3d7af4d4632",
+      "bytes": 137593
+    },
+    {
+      "key": "app/geo/population-land-price/pref/26.json",
+      "sha256": "145c7346920fb97f802667d238a086c73bbb12f28e746695b7150c2d7c8bc883",
+      "bytes": 195426
+    },
+    {
+      "key": "app/geo/population-land-price/pref/27.json",
+      "sha256": "8b49148da902f526d8cb799c8ae3b86e29f996070a4b96691b9fa398b19c8315",
+      "bytes": 173356
+    },
+    {
+      "key": "app/geo/population-land-price/pref/28.json",
+      "sha256": "eab8f43383e07a2641123aa50d62c1bab983240cc24a3043410808d70f5a23e6",
+      "bytes": 394002
+    },
+    {
+      "key": "app/geo/population-land-price/pref/29.json",
+      "sha256": "8c480467eb4fd00cce302be67ebd3d2f332c5242ae074bb0da5786bf79308e76",
+      "bytes": 124364
+    },
+    {
+      "key": "app/geo/population-land-price/pref/30.json",
+      "sha256": "ece8ce8e53a3aa7a701bb7b9caf2d9289517d47aca9c749356cda022a51d9644",
+      "bytes": 154191
+    },
+    {
+      "key": "app/geo/population-land-price/pref/31.json",
+      "sha256": "591161fb15a313121bde87a24fcafb839c1882c722554f691231b8bffec4fcd6",
+      "bytes": 121064
+    },
+    {
+      "key": "app/geo/population-land-price/pref/32.json",
+      "sha256": "ccf01bd55615f6c63557da4d63073b36aca09749860c7b4b97b00052f48fc27b",
+      "bytes": 269672
+    },
+    {
+      "key": "app/geo/population-land-price/pref/33.json",
+      "sha256": "e7eff669cd001b5bd3ff32160d46dda14f4d31a6093412b34b776f86f89174d8",
+      "bytes": 335649
+    },
+    {
+      "key": "app/geo/population-land-price/pref/34.json",
+      "sha256": "9b0ddaf64050b4bde18047ae072f37c0f3b0ba2323cb754a2bf4504914c6cb3c",
+      "bytes": 387902
+    },
+    {
+      "key": "app/geo/population-land-price/pref/35.json",
+      "sha256": "5cfba726640f6e414fcbe5170e31513c32a68714effd3b7b861e7147ba1571ef",
+      "bytes": 270293
+    },
+    {
+      "key": "app/geo/population-land-price/pref/36.json",
+      "sha256": "e7e3e9dfd6e73575f587103e4c84405cb86ab0830f7555701e45013ee6e3d691",
+      "bytes": 144631
+    },
+    {
+      "key": "app/geo/population-land-price/pref/37.json",
+      "sha256": "75fe2ae3e8c02e6b500631a20f4ead43790839ade986714e83031d205077f00c",
+      "bytes": 113877
+    },
+    {
+      "key": "app/geo/population-land-price/pref/38.json",
+      "sha256": "5d83b5128fdd18f0b5ea00e3f08439a4717bc8751fcef84b9be95df099407d32",
+      "bytes": 225750
+    },
+    {
+      "key": "app/geo/population-land-price/pref/39.json",
+      "sha256": "e125f5a23c8895139e679d8a7af587f103043aabab22aa7c32d87d388610405b",
+      "bytes": 206902
+    },
+    {
+      "key": "app/geo/population-land-price/pref/40.json",
+      "sha256": "c633b164d94d555283b1a4c4681059dc880b0dc17582a77913cebccddb1dc3b3",
+      "bytes": 290700
+    },
+    {
+      "key": "app/geo/population-land-price/pref/41.json",
+      "sha256": "fcf461d88a371768fcadb180b3ea246bf2cb8977f0f47e951df0cc2e4528bf55",
+      "bytes": 129541
+    },
+    {
+      "key": "app/geo/population-land-price/pref/42.json",
+      "sha256": "64d7f1e6073896d4ad905db6df550fb76ad037eabb3158cf3d461d11686f5cb3",
+      "bytes": 226787
+    },
+    {
+      "key": "app/geo/population-land-price/pref/43.json",
+      "sha256": "357a889bb0a5a8e3c41dd3b81917c0818f4de678d12cdcd97c5d5029c837b10c",
+      "bytes": 303086
+    },
+    {
+      "key": "app/geo/population-land-price/pref/44.json",
+      "sha256": "16c91a65ede600241472a6e0ced5b05699292447eb9fba812577e2bad03d42d6",
+      "bytes": 266077
+    },
+    {
+      "key": "app/geo/population-land-price/pref/45.json",
+      "sha256": "3c3d52259814e00141ccb2f23f8959ccff0e17261490dfecc9d6e17727666821",
+      "bytes": 232460
+    },
+    {
+      "key": "app/geo/population-land-price/pref/46.json",
+      "sha256": "55b4eb2c118b7117758d4eed8d72fe72cfdb2d5b6097209b2b4ca97cbcee7b96",
+      "bytes": 384763
+    },
+    {
+      "key": "app/geo/population-land-price/pref/47.json",
+      "sha256": "35fc4647b5c20cb45e89f44c2ddda4ea33989375437bddc746e5e65d81364244",
+      "bytes": 97436
+    }
+  ],
+  "transform": "各地点を同県メッシュ[西,東)×[南,北)へ包含結合。前年比欠測・2020人口0・未接続を除外し、前年比>0かつ2050人口<2020人口の地点数/比較可能地点数×100。",
+  "restore": "npx tsx docs/21_ブログ記事原稿/population-decline-land-price-divergence/generate-data.ts <verified-geo-bundle>"
+}

@@ -16,9 +16,6 @@ import type {
   Geometry,
   LineString,
   MultiLineString,
-  MultiPolygon,
-  Polygon,
-  Position,
 } from "geojson";
 import type { GeometryObject, Topology } from "topojson-specification";
 import unzipper from "unzipper";
@@ -31,11 +28,9 @@ import {
   type LandPriceDetailPointInput,
 } from "../../geo-analysis/content-details";
 import {
-  coordinateBounds,
   geometryCenter,
   mesh1000BoundsFromCode,
   median,
-  pointInMultiPolygon,
   rankAreaRows,
   round,
   type Coordinate,
@@ -67,6 +62,18 @@ import type {
   GeoStationAccessPrefDetail,
   GeoStationAccessStation,
 } from "../../geo-analysis/snapshot";
+import { GIS_DATASETS_BY_ID } from "../datasets";
+import { createFloodFeatureMarker } from "../../geo-analysis/flood-exposure";
+import { readFloodFeatures } from "../../geo-analysis/flood-source-reader";
+import {
+  FLOOD_ARCHIVES,
+  FLOOD_VERSION,
+  FLOOD_SOURCE_PAGE,
+  parseFloodArchiveCatalog,
+  assertFloodArchiveKeys,
+  type FloodRiverClass,
+} from "../../geo-analysis/flood-inputs";
+import { assertKsjPublicStructuredOutputAllowed } from "../license-policy";
 
 const R2_PUBLIC_BASE = (
   process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp"
@@ -78,17 +85,13 @@ const STATION_INPUT_KEY = `gis/mlit-ksj/S12/${STATION_VERSION}/national.topojson
 const STATION_INPUT_BYTES = 10_639_010;
 const STATION_INPUT_SHA256 =
   "3e69811eee825cc1346ff17340f5ee224562478f71879f7b34d0da6fc7d49fc9";
-const FLOOD_VERSION = "25";
-const FLOOD_GRID_DEGREES = 0.01;
-const EXPECTED_FLOOD_FILES = 94;
 const LOCAL_R2_ROOT = path.resolve(".local/r2");
 const OUTPUT_ROOT = path.resolve(".local/r2/app/geo");
 const MAX_GEO_DETAIL_BYTES = 5_000_000;
 const FLOOD_SOURCE_ROOT = path.resolve(
   `.local/r2/gis/mlit-ksj/A31b/${FLOOD_VERSION}/source`,
 );
-const FLOOD_PAGE =
-  "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html";
+const FLOOD_PAGE = FLOOD_SOURCE_PAGE;
 
 type JsonFeature = Feature<Geometry, GeoJsonProperties>;
 type NumericProperties = Record<string, unknown>;
@@ -117,6 +120,18 @@ interface InputJsonEvidence {
 interface PassengerContextEvidence {
   readonly inputs: GeoAnalysisInputEvidence[];
   readonly outputs: GeoAnalysisArtifactEvidence[];
+}
+
+function assertGeoInputsCanBePublished(dataIds: readonly string[]): void {
+  for (const dataId of dataIds) {
+    const dataset = GIS_DATASETS_BY_ID.get(dataId);
+    if (!dataset) throw new Error(`Geo入力がKSJメタSSOTにありません: ${dataId}`);
+    assertKsjPublicStructuredOutputAllowed({
+      dataId,
+      license: dataset.license,
+      output: "app/geo/<slug>/{item,manifest,pref}.json",
+    });
+  }
 }
 
 function assertOk(response: Response, url: string): Response {
@@ -343,7 +358,9 @@ function loadLandPricePoints(
     if (stringProperty(current.properties, "L01_002") !== "000") continue;
     const municipalityCode = stringProperty(current.properties, "L01_001");
     const price = numberProperty(current.properties, "L01_008");
-    const priceChange = numberProperty(current.properties, "L01_009");
+    // 新設標準地の0を「横ばい」に数えない（L01_004は新設時00000）。
+    const priceChange = stringProperty(current.properties, "L01_004") === "00000"
+      ? null : numberProperty(current.properties, "L01_009");
     if (!municipalityCode || price === null || price <= 0) continue;
     if (!current.geometry) continue;
     const center = geometryCenter(flattenPositions(current.geometry));
@@ -445,72 +462,6 @@ function loadStationPoints(): {
   };
 }
 
-function floodPolygons(
-  geometry: Polygon | MultiPolygon,
-): readonly (readonly (readonly Coordinate[])[])[] {
-  const convertPolygon = (polygon: Position[][]): Coordinate[][] =>
-    polygon.map((ring) =>
-      ring.map((position) => [Number(position[0]), Number(position[1])]),
-    );
-  if (geometry.type === "Polygon") {
-    return [convertPolygon(geometry.coordinates)];
-  }
-  return geometry.coordinates.map(convertPolygon);
-}
-
-function buildFloodMeshGrid(
-  meshes: readonly PopulationMeshPoint[],
-): Map<string, PopulationMeshPoint[]> {
-  const result = new Map<string, PopulationMeshPoint[]>();
-  for (const mesh of meshes) {
-    const key = `${Math.floor(mesh.longitude / FLOOD_GRID_DEGREES)}:${Math.floor(
-      mesh.latitude / FLOOD_GRID_DEGREES,
-    )}`;
-    result.set(key, [...(result.get(key) ?? []), mesh]);
-  }
-  return result;
-}
-
-function applyFloodFeatures(
-  collection: FeatureCollection<Polygon | MultiPolygon, NumericProperties>,
-  meshes: readonly PopulationMeshPoint[],
-): number {
-  const meshGrid = buildFloodMeshGrid(meshes);
-  let matchedFeatures = 0;
-  for (const current of collection.features) {
-    const polygons = floodPolygons(current.geometry);
-    const bounds = coordinateBounds(polygons);
-    if (!bounds) continue;
-    const depthClass = Number(current.properties?.A31b_201 ?? 0);
-    const minLongitudeBin = Math.floor(bounds[0] / FLOOD_GRID_DEGREES);
-    const minLatitudeBin = Math.floor(bounds[1] / FLOOD_GRID_DEGREES);
-    const maxLongitudeBin = Math.floor(bounds[2] / FLOOD_GRID_DEGREES);
-    const maxLatitudeBin = Math.floor(bounds[3] / FLOOD_GRID_DEGREES);
-    let featureMatched = false;
-    for (let x = minLongitudeBin; x <= maxLongitudeBin; x += 1) {
-      for (let y = minLatitudeBin; y <= maxLatitudeBin; y += 1) {
-        const candidates = meshGrid.get(`${x}:${y}`);
-        if (!candidates) continue;
-        for (const mesh of candidates) {
-          if (
-            pointInMultiPolygon(
-              [mesh.longitude, mesh.latitude],
-              polygons,
-            )
-          ) {
-            mesh.floodDepthClass = Math.max(
-              mesh.floodDepthClass ?? 0,
-              depthClass,
-            );
-            featureMatched = true;
-          }
-        }
-      }
-    }
-    if (featureMatched) matchedFeatures += 1;
-  }
-  return matchedFeatures;
-}
 
 async function downloadFile(url: string, outputPath: string): Promise<void> {
   const response = assertOk(
@@ -528,21 +479,10 @@ function fileSha256(filePath: string): string {
   return createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }
 
-async function loadFloodUrls(): Promise<string[]> {
+async function loadFloodArchives() {
   const response = assertOk(await fetch(FLOOD_PAGE), FLOOD_PAGE);
   const html = await response.text();
-  const matches = html.match(
-    /\/ksj\/gml\/data\/A31b\/A31b-25\/A31b-25_20_[0-9]{4}_GEOJSON\.zip/g,
-  );
-  const urls = [...new Set(matches ?? [])]
-    .sort()
-    .map((value) => `https://nlftp.mlit.go.jp${value}`);
-  if (urls.length !== EXPECTED_FLOOD_FILES) {
-    throw new Error(
-      `A31b 2025 想定最大規模のファイル数が想定外です: expected=${EXPECTED_FLOOD_FILES} actual=${urls.length}`,
-    );
-  }
-  return urls;
+  return parseFloodArchiveCatalog(html);
 }
 
 async function markFloodExposure(
@@ -560,41 +500,66 @@ async function markFloodExposure(
     byFirstMesh.set(firstMesh, [...(byFirstMesh.get(firstMesh) ?? []), mesh]);
   }
 
-  const urls = await loadFloodUrls();
+  const archives = await loadFloodArchives();
   fs.mkdirSync(FLOOD_SOURCE_ROOT, { recursive: true });
   const sourceFiles: Array<{
     objectKey: string;
     sourceUrl: string;
     bytes: number;
     sha256: string;
+    riverClass: FloodRiverClass;
+    meshCode: string;
   }> = [];
   let featureCount = 0;
   let matchedFeatureCount = 0;
   const inputs: GeoAnalysisInputEvidence[] = [];
   const sourceOutputs: GeoAnalysisArtifactEvidence[] = [];
 
-  for (const [index, url] of urls.entries()) {
-    const firstMesh = url.match(/_([0-9]{4})_GEOJSON\.zip$/)?.[1];
-    if (!firstMesh) throw new Error(`一次メッシュコードを読めません: ${url}`);
-    const zipPath = path.join(FLOOD_SOURCE_ROOT, `${firstMesh}.zip`);
-    if (!fs.existsSync(zipPath)) await downloadFile(url, zipPath);
+  // 旧source/<mesh>.zipは削除しない。URLとSHAが一致する区分20だけコピーして再利用する。
+  const legacyMetaPath = path.join(FLOOD_SOURCE_ROOT, "_meta.json");
+  const legacyMeta = fs.existsSync(legacyMetaPath)
+    ? JSON.parse(fs.readFileSync(legacyMetaPath, "utf8")) as {
+        files?: { sourceUrl: string; sha256: string }[];
+      }
+    : null;
+  for (const [index, input] of archives.entries()) {
+    const { url, meshCode: firstMesh, riverClass, key: objectKey } = input;
+    const zipPath = path.join(LOCAL_R2_ROOT, objectKey);
+    fs.mkdirSync(path.dirname(zipPath), { recursive: true });
+    if (!fs.existsSync(zipPath)) {
+      const legacyPath = path.join(FLOOD_SOURCE_ROOT, `${firstMesh}.zip`);
+      const legacy = legacyMeta?.files?.find((file) => file.sourceUrl === url);
+      if (
+        riverClass === "20" && legacy && fs.existsSync(legacyPath) &&
+        fileSha256(legacyPath) === legacy.sha256
+      ) {
+        fs.copyFileSync(legacyPath, zipPath, fs.constants.COPYFILE_FICLONE);
+      } else {
+        const partialPath = `${zipPath}.partial`;
+        await downloadFile(url, partialPath);
+        fs.renameSync(partialPath, zipPath);
+      }
+    }
     const zipStat = fs.statSync(zipPath);
     sourceFiles.push({
-      objectKey: `gis/mlit-ksj/A31b/${FLOOD_VERSION}/source/${firstMesh}.zip`,
+      objectKey,
       sourceUrl: url,
       bytes: zipStat.size,
       sha256: fileSha256(zipPath),
+      riverClass,
+      meshCode: firstMesh,
     });
     const archive = await unzipper.Open.file(zipPath);
     const entry = archive.files.find((current: { path: string }) =>
-      current.path.endsWith(`A31b-20-25_20_${firstMesh}.geojson`),
+      current.path.endsWith(input.entrySuffix),
     );
     if (!entry) throw new Error(`想定最大規模GeoJSONがありません: ${url}`);
-    const collection = JSON.parse(
-      (await entry.buffer()).toString("utf8"),
-    ) as FeatureCollection<Polygon | MultiPolygon, NumericProperties>;
-    featureCount += collection.features.length;
-    const objectKey = `gis/mlit-ksj/A31b/${FLOOD_VERSION}/source/${firstMesh}.zip`;
+    const candidates = byFirstMesh.get(firstMesh) ?? [];
+    const markFeature = createFloodFeatureMarker(candidates);
+    const archiveFeatureCount = await readFloodFeatures(entry.stream(), (feature) => {
+      if (markFeature(feature)) matchedFeatureCount += 1;
+    });
+    featureCount += archiveFeatureCount;
     const sha256 = fileSha256(zipPath);
     inputs.push({
       layerId: "ksj-a31b-flood-polygon",
@@ -611,25 +576,23 @@ async function markFloodExposure(
       key: objectKey,
       sha256,
       bytes: zipStat.size,
-      recordCount: collection.features.length,
+      recordCount: archiveFeatureCount,
     });
-    const candidates = byFirstMesh.get(firstMesh) ?? [];
-    if (candidates.length > 0) {
-      matchedFeatureCount += applyFloodFeatures(collection, candidates);
-    }
     console.log(
-      `洪水 ${index + 1}/${urls.length} ${firstMesh}: ${collection.features.length} features / ${candidates.length} populated meshes`,
+      `洪水 ${index + 1}/${archives.length} 河川区分${riverClass}/${firstMesh}: ${archiveFeatureCount} features / ${candidates.length} populated meshes`,
     );
   }
+  assertFloodArchiveKeys(inputs.map((input) => input.key));
   fs.writeFileSync(
     path.join(FLOOD_SOURCE_ROOT, "_meta.json"),
     `${JSON.stringify(
       {
-        schemaVersion: 1,
+        schemaVersion: 2,
         datasetId: "A31b",
         version: FLOOD_VERSION,
         layer: "20",
         layerName: "想定最大規模",
+        riverClasses: ["10", "20"],
         license: "CC BY 4.0",
         sourcePage: FLOOD_PAGE,
         fileCount: sourceFiles.length,
@@ -642,7 +605,7 @@ async function markFloodExposure(
     "utf8",
   );
   return {
-    files: urls.length,
+    files: archives.length,
     features: featureCount,
     matchedFeatures: matchedFeatureCount,
     inputs,
@@ -1060,36 +1023,27 @@ function writeStationAccessManifest(input: {
 }
 
 function writeLandPriceDetails(input: {
-  generatedAt: string;
-  meshes: readonly PopulationMeshPoint[];
-  points: readonly LandPriceDetailPointInput[];
+  details: readonly GeoLandPricePrefDetail[];
   snapshot: GeoAnalysisSnapshot;
 }): Array<{
   readonly detail: GeoLandPricePrefDetail;
   readonly evidence: GeoAnalysisArtifactEvidence;
 }> {
-  return fetchPrefectures().map((prefecture) => {
-    const detail = buildLandPricePrefDetail({
-      generatedAt: input.generatedAt,
-      areaCode: prefecture.prefCode,
-      areaName: prefecture.prefName,
-      meshes: input.meshes,
-      points: input.points,
-    });
+  return input.details.map((detail) => {
     const aggregateRow = input.snapshot.rows.find(
-      (row) => row.areaCode === prefecture.prefCode,
+      (row) => row.areaCode === detail.areaCode,
     );
-    if (!aggregateRow) throw new Error(`${prefecture.prefCode}: aggregate row欠落`);
+    if (!aggregateRow) throw new Error(`${detail.areaCode}: aggregate row欠落`);
     assertLandPriceConservation(detail, aggregateRow);
     const evidence = writeJsonArtifact(
-      geoAnalysisPrefKey("population-land-price", prefecture.prefCode.slice(0, 2)),
+      geoAnalysisPrefKey("population-land-price", detail.areaCode.slice(0, 2)),
       detail,
       detail.meshes.length + detail.landPricePoints.length,
       false,
-      prefecture.prefCode,
+      detail.areaCode,
     );
     if (evidence.bytes > MAX_GEO_DETAIL_BYTES) {
-      throw new Error(`${prefecture.prefCode}: 地価detail上限超過 bytes=${evidence.bytes}`);
+      throw new Error(`${detail.areaCode}: 地価detail上限超過 bytes=${evidence.bytes}`);
     }
     return { detail, evidence };
   });
@@ -1143,12 +1097,22 @@ function writeLandPriceManifest(input: {
         ),
       },
       {
+        id: "land-price-mesh-join",
+        label: "住宅地点と1km人口メッシュの包含判定",
+        kind: "spatial-operation",
+        role: "derived",
+        inputIds: ["population-mesh", "residential-land-price-points"],
+        operation: "地点座標を同じ県の人口メッシュ境界[西,東)×[南,北)へ接続し、未接続をnullとして保持",
+        outputKeyPattern: "app/geo/population-land-price/pref/{NN}.json#pointMeshIds",
+        outputs: stageOutputs(input.details, (detail) => detail.pointMeshIds.length),
+      },
+      {
         id: "prefecture-aggregate",
         label: "都道府県別集計",
         kind: "aggregate",
         role: "aggregate",
-        inputIds: ["population-mesh", "residential-land-price-points"],
-        operation: "人口合計と住宅地地点の中央値を同じ都道府県コードで結合",
+        inputIds: ["land-price-mesh-join"],
+        operation: "比較可能地点を分母に、地価上昇かつ包含メッシュの将来人口減少地点を集計。未接続・比較不能を別計上",
         outputKeyPattern: "app/geo/population-land-price/item.json",
         outputs: [input.aggregate],
       },
@@ -1163,7 +1127,7 @@ function writeLandPriceManifest(input: {
           sum + item.detail.meshes.length + item.detail.landPricePoints.length,
         0,
       ),
-      derivedRecords: input.details.length,
+      derivedRecords: input.details.reduce((sum, item) => sum + item.detail.pointMeshIds.length, 0),
       populatedMeshes: input.details.reduce(
         (sum, item) => sum + item.detail.meshes.length,
         0,
@@ -1259,7 +1223,7 @@ function writeFloodManifest(input: {
         role: "calculation-input",
         inputIds: ["ksj-a31b-flood-polygon"],
         operation: "一次メッシュ別の公式GeoJSONを展開してポリゴンを検証",
-        outputKeyPattern: "gis/mlit-ksj/A31b/25/source/{mesh}.zip",
+        outputKeyPattern: "gis/mlit-ksj/A31b/25/source/{riverClass}/{mesh}.zip",
         outputs: input.floodSourceOutputs,
       },
       {
@@ -1315,36 +1279,32 @@ function writeFloodManifest(input: {
 
 function buildLandPriceSnapshot(
   generatedAt: string,
-  accumulators: Map<string, AreaAccumulator>,
+  details: readonly GeoLandPricePrefDetail[],
   acceptedPoints: number,
 ): GeoAnalysisSnapshot {
-  const rows = fetchPrefectures().map((prefecture) => {
-    const accumulator = accumulators.get(prefecture.prefCode);
-    if (!accumulator || accumulator.residentialPrices.length === 0) {
-      throw new Error(`住宅地の地価公示点がありません: ${prefecture.prefCode}`);
-    }
+  const rows = details.map((detail) => {
     return {
-      areaCode: prefecture.prefCode,
-      areaName: prefecture.prefName,
+      areaCode: detail.areaCode,
+      areaName: detail.areaName,
       values: {
-        medianResidentialLandPrice: round(median(accumulator.residentialPrices), 0),
-        medianLandPriceChange: round(
-          median(accumulator.residentialPriceChanges),
-          1,
-        ),
-        populationChangeRate: populationChangeRate(accumulator),
-        population2050: round(accumulator.population2050, 0),
-        sampleCount: accumulator.residentialPrices.length,
+        ...detail.summary,
+        population2050: round(detail.summary.population2050, 0),
+        sampleCount: detail.summary.pointCount,
       },
     };
   });
   return createSnapshot({
     slug: "population-land-price",
     generatedAt,
-    title: "人口が減る県でも、住宅地の価格は同じように下がるのか",
-    question: "2050年人口増減率と2026年住宅地の地価水準・変動率にはどんな地域差があるか",
-    primaryMetricKey: "medianResidentialLandPrice",
+    title: "地価が上がる住宅地でも、周囲の人口は減るのか",
+    question: "2026年に地価が上昇した住宅地点を1km人口メッシュに接続し、2020→2050年の人口減少と重なる場所を調べる",
+    primaryMetricKey: "risingDecliningPointShare",
     metrics: [
+      { key: "risingDecliningPointShare", label: "地価上昇×人口減少の地点比率", unit: "%", format: "percent1", description: "人口メッシュに接続でき、2020年人口が正で地価変動率がある住宅地点のうち、地価変動率>0かつ2050年人口<2020年人口の地点割合。人口比率ではない" },
+      { key: "risingDecliningPointCount", label: "地価上昇×人口減少地点", unit: "地点", format: "integer", description: "地価上昇と包含メッシュの将来人口減少が重なる地点数" },
+      { key: "comparablePointCount", label: "比較可能地点（分母）", unit: "地点", format: "integer", description: "人口メッシュに接続し、基準人口と対前年地価変動率を比較できる地点数" },
+      { key: "matchedPointCount", label: "人口メッシュ接続地点", unit: "地点", format: "integer", description: "地点座標を同じ県の人口メッシュ境界内に接続できた地点数" },
+      { key: "unmatchedPointCount", label: "人口メッシュ未接続地点", unit: "地点", format: "integer", description: "利用した人口メッシュに含まれなかった地点。人口ゼロや安全・不適地と解釈しない" },
       { key: "medianResidentialLandPrice", label: "住宅地の地価中央値", unit: "円/㎡", format: "integer", description: "2026年地価公示の用途区分000（住宅地）の都道府県別中央値" },
       { key: "medianLandPriceChange", label: "対前年変動率中央値", unit: "%", format: "signedPercent1", description: "継続標準地を含む住宅地点の対前年変動率中央値" },
       { key: "populationChangeRate", label: "2050年人口増減率", unit: "%", format: "signedPercent1", description: "1kmメッシュ人口の2020年合計に対する2050年合計の増減率" },
@@ -1353,9 +1313,10 @@ function buildLandPriceSnapshot(
     ],
     rows,
     method: [
-      "2026年地価公示の用途区分000（住宅地）だけを抽出し、都道府県別の中央値を計算した",
-      "1kmメッシュの2020年人口と2050年推計人口を都道府県別に合計し、増減率を計算した",
-      "地価は平均値ではなく中央値を使い、一部の非常に高い地点の影響を抑えた",
+      "2026年地価公示から用途区分000（住宅地）を抽出。新設標準地は対前年変動率を欠測として扱う",
+      "地点の位置と同じ県の1km人口メッシュ境界を包含判定する。座標は小数6桁、境界は西・南を含み東・北を含まない。未接続はnullで保持する",
+      "各地点を、地価の上昇・非上昇と包含メッシュの2020→2050年人口の減少・非減少で分類する。変動率欠測や2020年人口0は比較対象外とする",
+      "比較可能地点を分母に『地価上昇かつ人口減少』の地点割合を集計する。同一メッシュの人口を地点数だけ重複加算しない",
     ],
     sources: [
       commonPopulationSource(),
@@ -1369,11 +1330,13 @@ function buildLandPriceSnapshot(
     ],
     caveats: [
       "地価公示は標準地の地点データであり、都道府県内すべての土地価格を代表するものではない",
-      "人口変化と地価の関係は相関の観察であり、因果関係を示さない",
+      "2025→2026年の地価変動と2020→2050年の人口推計は期間が異なる。将来価格や因果関係を推定しない",
+      "人口は約1km四方のメッシュ全体の推計で、標準地やその住宅の居住人数ではない。徒歩圏や生活利便性も測っていない",
+      "未接続・比較不能地点を分母から外し件数を開示する。標準地の選び方による偏りがあり、土地全体や人口全体の比率へ一般化しない",
       "住宅地の構成や標準地点数が県ごとに異なるため、中央値と地点数を併記する",
     ],
     inputCounts: { residentialLandPricePoints: acceptedPoints },
-    coverageNote: "47都道府県すべてで住宅地標準地点と人口メッシュを確認",
+    coverageNote: "47都道府県で地点の包含判定を実施。接続・未接続・比較可能地点の件数を区別し、地点と集計を照合",
   });
 }
 
@@ -1531,16 +1494,27 @@ function buildFloodSnapshot(
       matchedFloodFeatures: floodCounts.matchedFeatures,
       populatedMeshes: meshes.length,
     },
-    coverageNote: "想定最大規模94ファイルと47都道府県の人口メッシュを一次メッシュ単位で照合",
+    coverageNote: `洪水予報河川・水位周知河川とその他の河川の想定最大規模${FLOOD_ARCHIVES.length}ファイルを47都道府県の人口メッシュと照合。同じ地点で重なる区域の人口は二重加算しない`,
   });
 }
 
 async function main(): Promise<void> {
   const stationAccessOnly = process.argv.includes("--station-access-only");
   const floodOnly = process.argv.includes("--flood-only");
+  const landPriceOnly = process.argv.includes("--land-price-only");
+  if ([stationAccessOnly, floodOnly, landPriceOnly].filter(Boolean).length > 1) {
+    throw new Error("分析のonly指定は1つだけにしてください");
+  }
   if (stationAccessOnly && floodOnly) {
     throw new Error("--station-access-only と --flood-only は同時に指定できません");
   }
+  assertGeoInputsCanBePublished(
+    landPriceOnly ? ["mesh1000r6", "L01"] : floodOnly
+      ? ["mesh1000r6", "A31b"]
+      : stationAccessOnly
+        ? ["mesh1000r6", "S12"]
+        : ["mesh1000r6", "L01", "S12", "A31b"],
+  );
   const generatedAt = new Date().toISOString();
   console.log(`R2 input: ${R2_PUBLIC_BASE}`);
   const { meshes, inputs: populationInputs } = await loadPopulationMeshes();
@@ -1570,16 +1544,21 @@ async function main(): Promise<void> {
     const accumulators = createAreaAccumulators(meshes);
     const landPrice = loadLandPricePoints(accumulators);
     landPricePointCount = landPrice.points.length;
+    const details = fetchPrefectures().map((prefecture) => buildLandPricePrefDetail({
+      generatedAt,
+      areaCode: prefecture.prefCode,
+      areaName: prefecture.prefName,
+      meshes,
+      points: landPrice.points,
+    }));
     const landPriceSnapshot = buildLandPriceSnapshot(
       generatedAt,
-      accumulators,
+      details,
       landPricePointCount,
     );
     const landPriceAggregate = writeSnapshot(landPriceSnapshot);
     const landPriceDetails = writeLandPriceDetails({
-      generatedAt,
-      meshes,
-      points: landPrice.points,
+      details,
       snapshot: landPriceSnapshot,
     });
     writeLandPriceManifest({
@@ -1589,6 +1568,7 @@ async function main(): Promise<void> {
       details: landPriceDetails,
       aggregate: landPriceAggregate,
     });
+    if (landPriceOnly) return;
   }
 
   await ensureStationInput();

@@ -5,6 +5,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { fetchPrefectures } from '@stats47/area';
+import { FLOOD_ARCHIVES, assertFloodArchiveKeys } from '../../geo-analysis/flood-inputs';
 
 import {
   assertFloodConservation,
@@ -125,6 +126,7 @@ function auditLandPrice(): void {
   let maxDetailBytes = 0;
   let populatedMeshes = 0;
   let sourceRecords = 0;
+  let joinedRecords = 0;
   for (const prefecture of fetchPrefectures()) {
     const key = geoAnalysisPrefKey(
       'population-land-price',
@@ -143,7 +145,7 @@ function auditLandPrice(): void {
     ) {
       throw new Error(`${key}: detail schema不良`);
     }
-    for (const stageId of ['population-mesh', 'residential-land-price-points']) {
+    for (const stageId of ['population-mesh', 'residential-land-price-points', 'land-price-mesh-join']) {
       assertArtifactEvidence(stageOutput(manifest, stageId, key), body);
     }
     const aggregateRow = aggregate.rows.find(
@@ -154,12 +156,13 @@ function auditLandPrice(): void {
     maxDetailBytes = Math.max(maxDetailBytes, body.byteLength);
     populatedMeshes += detail.meshes.length;
     sourceRecords += detail.meshes.length + detail.landPricePoints.length;
+    joinedRecords += detail.pointMeshIds.length;
   }
   if (
     manifest.quality.maxDetailBytes !== maxDetailBytes ||
     manifest.quality.populatedMeshes !== populatedMeshes ||
     manifest.quality.sourceRecords !== sourceRecords ||
-    manifest.quality.derivedRecords !== 47
+    manifest.quality.derivedRecords !== joinedRecords
   ) {
     throw new Error('population-land-price: manifest quality集計不一致');
   }
@@ -173,6 +176,7 @@ function auditFlood(): void {
     geoAnalysisManifestKey('population-flood-risk')
   );
   assertManifestBase(manifest, 'population-flood-risk');
+  assertFloodArchiveKeys(manifest.inputs.filter(input => input.datasetId === 'A31b').map(input => input.key));
   const { value: aggregate, body: aggregateBody } =
     readArtifact<GeoAnalysisSnapshot>(manifest.aggregate.key);
   assertArtifactEvidence(manifest.aggregate, aggregateBody);
@@ -182,10 +186,15 @@ function auditFlood(): void {
   const floodSourceStage = manifest.stages.find(
     (stage) => stage.id === 'flood-maximum-polygons'
   );
-  if (!floodSourceStage || floodSourceStage.outputs.length !== 94) {
-    throw new Error('population-flood-risk: 洪水入力94ファイルのlineageがありません');
+  if (!floodSourceStage) {
+    throw new Error('population-flood-risk: 洪水入力のlineageがありません');
   }
+  assertFloodArchiveKeys(floodSourceStage.outputs.map(output => output.key));
   for (const evidence of floodSourceStage.outputs) {
+    const input = manifest.inputs.find(input => input.key === evidence.key);
+    if (!input || input.sha256 !== evidence.sha256 || input.bytes !== evidence.bytes || input.role !== 'calculation-input' || !input.usedInCalculation) {
+      throw new Error(`洪水入力とsource段階の証跡不一致: ${evidence.key}`);
+    }
     const filePath = path.join(LOCAL_R2_ROOT, evidence.key);
     if (!fs.existsSync(filePath)) throw new Error(`artifact欠落: ${evidence.key}`);
     const body = fs.readFileSync(filePath);
@@ -225,6 +234,11 @@ function auditFlood(): void {
   const sourceRecords =
     populatedMeshes +
     floodSourceStage.outputs.reduce((sum, output) => sum + output.recordCount, 0);
+  if (aggregate.dataQuality.inputCounts.floodZipFiles !== FLOOD_ARCHIVES.length ||
+      aggregate.dataQuality.inputCounts.floodFeatures !== sourceRecords - populatedMeshes ||
+      aggregate.dataQuality.inputCounts.populatedMeshes !== populatedMeshes) {
+    throw new Error('population-flood-risk: aggregate入力件数不一致');
+  }
   if (
     manifest.quality.maxDetailBytes !== maxDetailBytes ||
     manifest.quality.populatedMeshes !== populatedMeshes ||

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   isAcquisitionComplete,
+  publicMirrorPolicyErrors,
   type R2Inventory,
 } from '../scripts/build-data-catalog';
 import { PUBLIC_KSJ_EXPECTED_ARCHIVE_COUNTS } from '../official-policy';
@@ -35,5 +36,24 @@ describe('isAcquisitionComplete', () => {
   it('keeps the legacy R2-object completion rule for older registered datasets', () => {
     expect(isAcquisitionComplete('N02', inventory(1, 0))).toBe(true);
     expect(isAcquisitionComplete('N02', inventory(0, 0))).toBe(false);
+  });
+});
+
+describe('publicMirrorPolicyErrors', () => {
+  it('fails when a local-only dataset exists in public R2', () => {
+    expect(
+      publicMirrorPolicyErrors([
+        { dataId: 'W01', compliance: { publicMirrorPolicyMismatch: true } },
+        { dataId: 'S12', compliance: { publicMirrorPolicyMismatch: false } },
+      ]),
+    ).toEqual(['公開不可KSJがpublic R2に存在します: W01']);
+  });
+
+  it('passes when there are no public mirror mismatches', () => {
+    expect(
+      publicMirrorPolicyErrors([
+        { dataId: 'S12', compliance: { publicMirrorPolicyMismatch: false } },
+      ]),
+    ).toEqual([]);
   });
 });

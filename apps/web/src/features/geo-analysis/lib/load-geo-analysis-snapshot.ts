@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { FLOOD_ARCHIVES, type GeoAnalysisEvidenceManifest } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
 import {
@@ -7,13 +8,21 @@ import {
   type GeoAnalysisSnapshot,
   type GeoCrossAnalysisSlug,
 } from './geo-cross-analysis';
+import {
+  GEO_AREA_CODES,
+  isTimestamp,
+  matchesGeoArtifact,
+} from './geo-runtime-contract';
+import { loadGeoAnalysisManifest } from './load-geo-analysis-evidence';
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 function isStringArray(value: unknown): value is string[] {
-  return Array.isArray(value) && value.every((item) => typeof item === 'string');
+  return (
+    Array.isArray(value) && value.every((item) => typeof item === 'string')
+  );
 }
 
 export function parseGeoAnalysisSnapshot(
@@ -25,7 +34,7 @@ export function parseGeoAnalysisSnapshot(
     value.schemaVersion !== 1 ||
     value.slug !== expectedSlug ||
     value.geography !== 'prefecture' ||
-    typeof value.generatedAt !== 'string' ||
+    !isTimestamp(value.generatedAt) ||
     typeof value.dataVersion !== 'string' ||
     typeof value.title !== 'string' ||
     typeof value.question !== 'string' ||
@@ -33,8 +42,10 @@ export function parseGeoAnalysisSnapshot(
     !Array.isArray(value.metrics) ||
     !Array.isArray(value.rows) ||
     value.rows.length !== 47 ||
-    !Array.isArray(value.method) ||
+    !isStringArray(value.method) ||
+    value.method.length === 0 ||
     !Array.isArray(value.sources) ||
+    value.sources.length === 0 ||
     !isStringArray(value.caveats) ||
     !isRecord(value.summary) ||
     !isRecord(value.dataQuality)
@@ -64,9 +75,12 @@ export function parseGeoAnalysisSnapshot(
     if (
       !isRecord(row) ||
       typeof row.areaCode !== 'string' ||
-      !/^\d{2}000$/.test(row.areaCode) ||
+      !/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(row.areaCode) ||
       typeof row.areaName !== 'string' ||
       typeof row.rank !== 'number' ||
+      !Number.isInteger(row.rank) ||
+      row.rank < 1 ||
+      row.rank > 47 ||
       !isRecord(row.values) ||
       areaCodes.has(row.areaCode)
     ) {
@@ -74,9 +88,19 @@ export function parseGeoAnalysisSnapshot(
     }
     areaCodes.add(row.areaCode);
     const rowValues = row.values;
+    if (
+      !Object.values(rowValues).every(
+        (item) =>
+          item === null || (typeof item === 'number' && Number.isFinite(item))
+      )
+    )
+      return false;
     return [...metricKeys].every((key) => {
       const metricValue = rowValues[key];
-      return metricValue === null || typeof metricValue === 'number';
+      return (
+        metricValue === null ||
+        (typeof metricValue === 'number' && Number.isFinite(metricValue))
+      );
     });
   });
   const sourcesValid = value.sources.every(
@@ -91,6 +115,8 @@ export function parseGeoAnalysisSnapshot(
 
   if (
     !metricsValid ||
+    value.metrics.length === 0 ||
+    metricKeys.size !== value.metrics.length ||
     !metricKeys.has(value.primaryMetricKey) ||
     !rowsValid ||
     !sourcesValid ||
@@ -102,20 +128,71 @@ export function parseGeoAnalysisSnapshot(
   ) {
     return null;
   }
+  if (
+    !Number.isFinite(value.summary.medianValue) ||
+    ![value.summary.topAreaCodes, value.summary.bottomAreaCodes].every(
+      (codes) =>
+        isStringArray(codes) &&
+        codes.length > 0 &&
+        new Set(codes).size === codes.length &&
+        codes.every((code) => GEO_AREA_CODES.includes(code))
+    ) ||
+    !isRecord(value.dataQuality.inputCounts) ||
+    !Object.keys(value.dataQuality.inputCounts).length ||
+    !Object.values(value.dataQuality.inputCounts).every(
+      (count) =>
+        typeof count === 'number' && Number.isSafeInteger(count) && count >= 0
+    ) ||
+    typeof value.dataQuality.coverageNote !== 'string'
+  )
+    return null;
+
+  // 別分析や旧県別併置snapshotを新しい空間分析の説明と混ぜない。
+  const primaryMetricKeys = {
+    'population-land-price': 'risingDecliningPointShare',
+    'population-flood-risk': 'floodExposureShare2050',
+    'population-station-access': 'stationAccessShare2050',
+  };
+  if (value.primaryMetricKey !== primaryMetricKeys[expectedSlug]) return null;
+  // 旧94件は河川区分10が欠落。manifestを使わない比較・area/themeにも配信しない。
+  if (
+    expectedSlug === 'population-flood-risk' &&
+    (!isRecord(value.dataQuality.inputCounts) ||
+      value.dataQuality.inputCounts.floodZipFiles !== FLOOD_ARCHIVES.length)
+  )
+    return null;
 
   return value as unknown as GeoAnalysisSnapshot;
 }
 
-export async function loadGeoAnalysisSnapshot(
+export async function loadGeoAnalysisBundle(
   slug: GeoCrossAnalysisSlug
-): Promise<GeoAnalysisSnapshot | null> {
+): Promise<{
+  snapshot: GeoAnalysisSnapshot;
+  manifest: GeoAnalysisEvidenceManifest;
+} | null> {
   const config = GEO_CROSS_ANALYSIS_CONFIGS[slug];
   try {
     const value = await fetchFromR2AsJson<unknown>(
       `app/geo/${config.slug}/item.json`
     );
-    return parseGeoAnalysisSnapshot(value, slug);
+    const snapshot = parseGeoAnalysisSnapshot(value, slug);
+    const manifest = await loadGeoAnalysisManifest(slug);
+    if (
+      !manifest ||
+      !snapshot ||
+      snapshot.generatedAt !== manifest.generatedAt ||
+      !(await matchesGeoArtifact(value, manifest.aggregate, true))
+    )
+      return null;
+    return { snapshot, manifest };
   } catch {
     return null;
   }
+}
+
+export async function loadGeoAnalysisSnapshot(
+  slug: GeoCrossAnalysisSlug
+): Promise<GeoAnalysisSnapshot | null> {
+  return (await loadGeoAnalysisBundle(slug))?.snapshot ?? null;
 }

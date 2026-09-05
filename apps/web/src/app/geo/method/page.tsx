@@ -38,10 +38,10 @@ export default function GeoMethodPage() {
         ]}
       />
       <PageHeader
-        eyebrow="GeoAI 方法・説明責任"
+        eyebrow="空間分析の読み方"
         title="地図の答えと、答えられないことを分ける"
-        description="AIに数値計算や空間判定を任せません。公式データを決定的な処理で重ね、入力、演算、出力、利用上の停止線を分析ごとに確認できるようにします。"
-        stats="3空間分析 ・ 5入力レイヤー ・ coverage 47/47"
+        description="地点がメッシュに入るか、メッシュの中心が浸水区域に入るか、駅まで直線800m以内か。分析ごとの判定方法と、その近似が結果に与える影響を説明します。"
+        stats={`${crossAnalyses.length}空間分析 ・ 1kmメッシュ・地点・距離の判定`}
       />
 
       <SectionHeader
@@ -73,7 +73,7 @@ export default function GeoMethodPage() {
       </div>
 
       <SurfaceSection className="mt-6">
-        <SectionHeader title="判断の停止線" hideRule />
+        <SectionHeader title="この分析だけでは判断できないこと" hideRule />
         <div className="mt-3 grid gap-5 md:grid-cols-3">
           {crossAnalyses.map((analysis) => (
             <div key={analysis.slug}>

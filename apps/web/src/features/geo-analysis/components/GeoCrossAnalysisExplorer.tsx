@@ -20,19 +20,17 @@ import {
 } from '@stats47/components/atoms/ui/table';
 
 
+import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
 
-import { RankingMapChartClient } from '@/features/ranking';
 
 import {
   trackGeoCompareAdd,
-  trackGeoMapInteraction,
   trackGeoRegionSelect,
 } from '@/lib/analytics/events';
 
 import { formatGeoValue, type GeoAnalysisSnapshot } from '../lib/geo-cross-analysis';
 
-import type { RankingItem, RankingValue } from '@stats47/ranking';
 
 interface Props {
   analysisId: string;
@@ -40,8 +38,6 @@ interface Props {
   mapTitle: string;
   mapSubtitle: string;
   snapshot: GeoAnalysisSnapshot;
-  rankingItem: RankingItem;
-  rankingValues: RankingValue[];
 }
 
 const NONE = '__none__';
@@ -52,8 +48,6 @@ export function GeoCrossAnalysisExplorer({
   mapTitle,
   mapSubtitle,
   snapshot,
-  rankingItem,
-  rankingValues,
 }: Props) {
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   const [comparisonCodes, setComparisonCodes] = useState<string[]>([]);
@@ -74,15 +68,6 @@ export function GeoCrossAnalysisExplorer({
         ),
     [comparisonCodes, snapshot.rows]
   );
-
-  const selectFromMap = (code: string | null) => {
-    setSelectedCode(code);
-    trackGeoMapInteraction({
-      ...common,
-      interactionType: code ? 'select-prefecture' : 'clear-prefecture',
-      ...(code ? { areaCode: code } : {}),
-    });
-  };
 
   const selectFromList = (code: string) => {
     const next = code === NONE ? null : code;
@@ -113,15 +98,7 @@ export function GeoCrossAnalysisExplorer({
 
   return (
     <div className="space-y-6">
-      <RankingMapChartClient
-        rankingItem={rankingItem}
-        rankingValues={rankingValues}
-        areaType="prefecture"
-        selectedPrefectureCode={selectedCode}
-        onPrefectureClick={selectFromMap}
-        cardTitle={mapTitle}
-        cardSubtitle={mapSubtitle}
-      />
+      <SectionHeader title={mapTitle} description={mapSubtitle} hideRule />
 
       <SurfaceSection aria-labelledby="geo-cross-compare-title">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -130,7 +107,7 @@ export function GeoCrossAnalysisExplorer({
               都道府県を最大{comparisonLimit}件で比較
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              地図または一覧から県を選び、比較リストへ追加してください。
+              一覧から県を選び、比較リストへ追加してください。詳しい場所は上の県内地図で確認できます。
             </p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row">
@@ -167,13 +144,12 @@ export function GeoCrossAnalysisExplorer({
         </div>
 
         {selected && primaryMetric ? (
-          <p className="mt-4 border-l-2 border-primary pl-3 text-sm">
+          <p className="mt-4 text-sm">
             選択中: <strong>{selected.areaName}</strong>{' '}
             {formatGeoValue(
               primaryMetric,
               selected.values[snapshot.primaryMetricKey]
             )}
-            （{selected.rank}位）
           </p>
         ) : null}
 

@@ -16,6 +16,8 @@ import { SurfaceCard, SurfaceSection } from '@/components/surface';
 
 import { trackGeoRegionSelect } from '@/lib/analytics/events';
 
+import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
+
 import type { GeoDecisionRow } from '../lib/build-geo-decision-rows';
 
 interface Props {
@@ -46,13 +48,16 @@ export function GeoDecisionExplorer({
   const [selectedCode, setSelectedCode] = useState(validInitialCode);
   const selected = useMemo(
     () => rows.find((row) => row.areaCode === selectedCode) ?? rows[0],
-    [rows, selectedCode],
+    [rows, selectedCode]
   );
 
   if (!selected) return null;
 
   const selectArea = (areaCode: string) => {
     setSelectedCode(areaCode);
+    const url = new URL(window.location.href);
+    url.searchParams.set('pref', areaCode);
+    window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
     trackGeoRegionSelect({
       analysisId: 'm1-geo-decision-compare',
       analysisSlug: 'compare',
@@ -68,28 +73,32 @@ export function GeoDecisionExplorer({
       question: '2050年に何人暮らすか',
       value: integer(selected.population2050),
       detail: `2020年比 ${signedPercent(selected.populationChangeRate)}`,
-      href: '/geo/2050-population',
+      href: POPULATION_BASELINE_RANKING_PATH,
+      linkLabel: '47都道府県ランキングを見る →',
     },
     {
       label: '人口 × 地価',
-      question: '住宅地価格はどう動いているか',
-      value: signedPercent(selected.landPriceChange),
-      detail: `住宅地中央値 ${Math.round(selected.medianResidentialLandPrice).toLocaleString('ja-JP')}円/㎡`,
-      href: '/geo/population-land-price',
+      question: '地価上昇と周囲の人口減少が重なるか',
+      value: selected.risingDecliningPointShare === null ? '算出不可' : percent(selected.risingDecliningPointShare),
+      detail: `比較可能な住宅地点 ${selected.comparablePointCount.toLocaleString('ja-JP')}地点のうち`,
+      href: `/geo/population-land-price/${selectedCode.slice(0, 2)}/overlap`,
+      linkLabel: 'この県の地点の重なりを見る →',
     },
     {
       label: '人口 × 洪水',
       question: '浸水想定区域に何人暮らすか',
       value: integer(selected.floodExposurePopulation),
       detail: `2050年県人口の ${percent(selected.floodExposureShare)}`,
-      href: '/geo/population-flood-risk',
+      href: `/geo/population-flood-risk/${selectedCode.slice(0, 2)}/overlap`,
+      linkLabel: '空間分析を見る →',
     },
     {
       label: '人口 × 駅800m圏',
       question: '駅の近くに何人残るか',
       value: integer(selected.stationAccessPopulation),
       detail: `2050年県人口の ${percent(selected.stationAccessShare)}`,
-      href: '/geo/population-station-access',
+      href: `/geo/population-station-access/${selectedCode.slice(0, 2)}/overlap`,
+      linkLabel: '空間分析を見る →',
     },
   ] as const;
 
@@ -97,7 +106,9 @@ export function GeoDecisionExplorer({
     <SurfaceSection aria-labelledby="geo-decision-title">
       <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-semibold text-primary">都道府県を1つ選ぶ</p>
+          <p className="text-xs font-semibold text-primary">
+            都道府県を1つ選ぶ
+          </p>
           <h2 id="geo-decision-title" className="mt-1 text-lg font-bold">
             {selected.areaName}を4つの問いで読む
           </h2>
@@ -130,7 +141,7 @@ export function GeoDecisionExplorer({
               className="mt-4 inline-block text-sm font-medium text-primary underline"
               href={card.href}
             >
-              地図・47県比較・計算方法を見る →
+              {card.linkLabel}
             </Link>
           </SurfaceCard>
         ))}
