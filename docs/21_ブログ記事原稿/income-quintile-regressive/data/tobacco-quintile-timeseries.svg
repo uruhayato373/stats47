@@ -1,0 +1,156 @@
+<!-- data-source: tobacco-quintile-timeseries.json | generated: 2026-07-10T23:12:34.779Z -->
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="たばこの推移（年収五分位別）">
+  <title>たばこの推移（年収五分位別）</title>
+  <desc>1985〜 二人以上世帯・全国</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="680" height="420" class="svg-bg"/>
+  <text x="340" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">たばこの推移（年収五分位別）</text>
+  <text x="340" y="37" text-anchor="middle" font-size="9" class="svg-tick">1985〜 二人以上世帯・全国</text>
+  <text x="55.0" y="52.0" font-size="8.5" class="svg-tick">(円)</text>
+  <!-- プロットエリア -->
+  <rect x="55.0" y="58.0" width="611.0" height="280.0" class="svg-plot svg-plot-border" stroke-width="1"/>
+  <!-- Y グリッド -->
+  <line x1="55.0" y1="338.0" x2="666.0" y2="338.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="341.5" text-anchor="end" font-size="8.5" class="svg-tick">0</text>
+  <line x1="55.0" y1="268.0" x2="666.0" y2="268.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="271.5" text-anchor="end" font-size="8.5" class="svg-tick">5000</text>
+  <line x1="55.0" y1="198.0" x2="666.0" y2="198.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="201.5" text-anchor="end" font-size="8.5" class="svg-tick">10000</text>
+  <line x1="55.0" y1="128.0" x2="666.0" y2="128.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="131.5" text-anchor="end" font-size="8.5" class="svg-tick">15000</text>
+  <line x1="55.0" y1="58.0" x2="666.0" y2="58.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="61.5" text-anchor="end" font-size="8.5" class="svg-tick">20000</text>
+
+  <!-- X 軸ラベル -->
+  <text x="55.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,55.0,352.0)">2000</text>
+  <text x="80.5" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,80.5,352.0)">2001</text>
+  <text x="105.9" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,105.9,352.0)">2002</text>
+  <text x="131.4" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,131.4,352.0)">2003</text>
+  <text x="156.8" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,156.8,352.0)">2004</text>
+  <text x="182.3" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,182.3,352.0)">2005</text>
+  <text x="207.8" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,207.8,352.0)">2006</text>
+  <text x="233.2" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,233.2,352.0)">2007</text>
+  <text x="258.7" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,258.7,352.0)">2008</text>
+  <text x="284.1" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,284.1,352.0)">2009</text>
+  <text x="309.6" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,309.6,352.0)">2010</text>
+  <text x="335.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,335.0,352.0)">2011</text>
+  <text x="360.5" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,360.5,352.0)">2012</text>
+  <text x="386.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,386.0,352.0)">2013</text>
+  <text x="411.4" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,411.4,352.0)">2014</text>
+  <text x="436.9" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,436.9,352.0)">2015</text>
+  <text x="462.3" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,462.3,352.0)">2016</text>
+  <text x="487.8" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,487.8,352.0)">2017</text>
+  <text x="513.3" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,513.3,352.0)">2018</text>
+  <text x="538.7" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,538.7,352.0)">2019</text>
+  <text x="564.2" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,564.2,352.0)">2020</text>
+  <text x="589.6" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,589.6,352.0)">2021</text>
+  <text x="615.1" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,615.1,352.0)">2022</text>
+  <text x="640.5" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,640.5,352.0)">2023</text>
+  <text x="666.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,666.0,352.0)">2024</text>
+  <!-- 系列 -->
+  <polyline points="55.0,122.3 80.5,118.7 105.9,142.3 131.4,136.6 156.8,145.6 182.3,155.0 207.8,162.0 233.2,161.6 258.7,161.4 284.1,158.4 309.6,172.9 335.0,155.8 360.5,171.6 386.0,159.9 411.4,170.2 436.9,193.9 462.3,193.9 487.8,208.2 513.3,198.7 538.7,186.3 564.2,188.6 589.6,145.5 615.1,171.5 640.5,155.7 666.0,188.6" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="122.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="80.5" cy="118.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="105.9" cy="142.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="131.4" cy="136.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="156.8" cy="145.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="182.3" cy="155.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="207.8" cy="162.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="233.2" cy="161.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="258.7" cy="161.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="284.1" cy="158.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="309.6" cy="172.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="335.0" cy="155.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="360.5" cy="171.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="386.0" cy="159.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="411.4" cy="170.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="436.9" cy="193.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="462.3" cy="193.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="487.8" cy="208.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="513.3" cy="198.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="538.7" cy="186.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="564.2" cy="188.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="589.6" cy="145.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="615.1" cy="171.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="640.5" cy="155.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="188.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <polyline points="55.0,126.9 80.5,136.2 105.9,146.9 131.4,149.7 156.8,160.1 182.3,149.6 207.8,163.6 233.2,148.7 258.7,145.2 284.1,160.5 309.6,168.8 335.0,133.7 360.5,134.6 386.0,147.2 411.4,145.0 436.9,152.2 462.3,154.6 487.8,179.6 513.3,172.6 538.7,155.4 564.2,146.4 589.6,139.3 615.1,110.7 640.5,117.1 666.0,128.9" fill="none" stroke="#e53935" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="126.9" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="80.5" cy="136.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="105.9" cy="146.9" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="131.4" cy="149.7" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="156.8" cy="160.1" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="182.3" cy="149.6" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="207.8" cy="163.6" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="233.2" cy="148.7" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="258.7" cy="145.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="284.1" cy="160.5" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="309.6" cy="168.8" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="335.0" cy="133.7" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="360.5" cy="134.6" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="386.0" cy="147.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="411.4" cy="145.0" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="436.9" cy="152.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="462.3" cy="154.6" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="487.8" cy="179.6" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="513.3" cy="172.6" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="538.7" cy="155.4" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="564.2" cy="146.4" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="589.6" cy="139.3" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="615.1" cy="110.7" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="640.5" cy="117.1" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="128.9" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <polyline points="55.0,164.8 80.5,161.7 105.9,173.8 131.4,185.2 156.8,191.4 182.3,188.8 207.8,197.2 233.2,195.9 258.7,199.7 284.1,188.5 309.6,172.2 335.0,177.9 360.5,180.1 386.0,180.5 411.4,167.8 436.9,198.6 462.3,175.1 487.8,200.6 513.3,187.5 538.7,200.5 564.2,147.4 589.6,104.5 615.1,146.8 640.5,159.3 666.0,120.7" fill="none" stroke="#43a047" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="164.8" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="80.5" cy="161.7" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="105.9" cy="173.8" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="131.4" cy="185.2" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="156.8" cy="191.4" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="182.3" cy="188.8" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="207.8" cy="197.2" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="233.2" cy="195.9" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="258.7" cy="199.7" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="284.1" cy="188.5" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="309.6" cy="172.2" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="335.0" cy="177.9" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="360.5" cy="180.1" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="386.0" cy="180.5" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="411.4" cy="167.8" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="436.9" cy="198.6" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="462.3" cy="175.1" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="487.8" cy="200.6" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="513.3" cy="187.5" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="538.7" cy="200.5" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="564.2" cy="147.4" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="589.6" cy="104.5" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="615.1" cy="146.8" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="640.5" cy="159.3" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="120.7" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <!-- 凡例 -->
+  <rect x="205.0" y="353.0" width="12" height="3" fill="#1e88e5" rx="1.5"/>
+  <text x="221.0" y="356.0" font-size="9" class="svg-axis">第Ⅰ階級（下位20%）</text>
+  <rect x="295.0" y="353.0" width="12" height="3" fill="#e53935" rx="1.5"/>
+  <text x="311.0" y="356.0" font-size="9" class="svg-axis">第Ⅲ階級（中位）</text>
+  <rect x="385.0" y="353.0" width="12" height="3" fill="#43a047" rx="1.5"/>
+  <text x="401.0" y="356.0" font-size="9" class="svg-axis">第Ⅴ階級（上位20%）</text>
+  <!-- 軸ラベル -->
+
+  <text x="13" y="198.0" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,198.0)">たばこ（円）</text>
+</svg>

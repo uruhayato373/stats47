@@ -1,0 +1,43 @@
+{
+ "title": "食料（年収五分位別）",
+ "unit": "円",
+ "year": "2024",
+ "data": [
+  {
+   "areaName": "平均",
+   "rank": 0,
+   "value": 1079228,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅰ階級（下位20%）",
+   "rank": 1,
+   "value": 845373,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅱ階級",
+   "rank": 2,
+   "value": 1014737,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅲ階級（中位）",
+   "rank": 3,
+   "value": 1042369,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅳ階級",
+   "rank": 4,
+   "value": 1122607,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅴ階級（上位20%）",
+   "rank": 5,
+   "value": 1371054,
+   "unit": "円"
+  }
+ ]
+}
