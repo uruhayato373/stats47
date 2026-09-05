@@ -1,0 +1,24 @@
+{
+  "kind": "correlation",
+  "base": "roadside-station-count",
+  "pair": "forest-road-length",
+  "xKey": "roadside-station-count",
+  "yKey": "forest-road-length",
+  "pearsonR": 0.9223285525988836,
+  "partialRPopulation": 0.9228031066714161,
+  "unit": "か所 × km",
+  "label": "道の駅数と林道延長",
+  "source": "r2:app/correlation/by-ranking-key/roadside-station-count.json",
+  "restore": "node docs/21_ブログ記事原稿/roadside-station-count-prefecture-gap/refresh-data.mjs",
+  "year": "2026 / 2022",
+  "xYear": "2026",
+  "yYear": "2022",
+  "partialRArea": 0.4098710483784231,
+  "areaControl": {
+    "key": "total-area-excluding-northern-territories-and-takeshima",
+    "year": "2024",
+    "source": "r2:app/stats/total-area-excluding-northern-territories-and-takeshima/values.json",
+    "sha256": "c3808726962eefd82927050c76a822d7abbf435814d212f124aa6d53f32f00d5"
+  },
+  "inputSha256": "e4f3d66e1b1c52efafd589933eb755fb7eebc4f4ec6896348917ac95d11c5263"
+}
