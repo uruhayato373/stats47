@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "yogurt-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "ヨーグルト消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/yogurt-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug yamagata-food-culture --keys yogurt-consumption-expenditure --data-name yogurt-ranking",
+  "fetchedAt": "2026-09-05T11:03:21.877Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
