@@ -74,6 +74,8 @@ for (const rel of R2_DEPENDENT_ROUTES) {
 // ──────────────────────────────────────────────────────────────────────────
 const R2_DEPENDENT_STATIC_ROUTES = [
   "apps/web/src/app/page.tsx",
+  // 2026-09-05: build時のsnapshot nullで、一次資料・対象版が欠落したHTMLが固着。
+  "apps/web/src/app/geo/data-catalog/page.tsx",
   // 旧 /geo/2050-population はランキングへの純粋な恒久転送となり、R2 を読まない。
   // 転送先・UTM維持は middleware.test.ts、sitemap除外は sitemap-index-parity.test.ts で固定する。
 ];
