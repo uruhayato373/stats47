@@ -2593,9 +2593,12 @@ const SURVEY_EDITORIAL_CONTENT = {
     whatYouCanLearn: [
       '湖沼など地形と水系に関わる分布',
       '空港・鉄道駅・港湾といった交通拠点の地域差',
+      '乗降客数が登録されている鉄道駅を対象とした、県内の1日あたり乗降客数合計の違い',
     ],
     readerQuestions: [
       { question: '鉄道駅が多い都道府県は？', rankingKey: 'railway-station-count' },
+      { question: '登録駅の1日あたり乗降客数の合計が多い都道府県は？', rankingKey: 'railway-passengers' },
+      { question: '港湾が多い都道府県は？', rankingKey: 'port-count' },
       { question: '空港が多い都道府県は？', rankingKey: 'airport-count' },
       { question: '湖沼が多い都道府県は？', rankingKey: 'lake-count' },
     ],
