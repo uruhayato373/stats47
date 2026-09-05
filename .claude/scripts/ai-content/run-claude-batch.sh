@@ -86,7 +86,9 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [ "$NO_PUSH" = 0 ] && [ "$DRY_RUN" = 0 ] && [ "$BRANCH" != develop ]; then
   die "publish-ai-content.yml は develop への push でしか発火しない。develop に切り替えるか --no-push を付ける (現在: $BRANCH)"
 fi
-if [ -n "$(git status --porcelain -- data/ai-content-staging)" ]; then
+# push する run だけ outbox の清浄を要求する (1 push = 1 commit に前 run の残骸を混ぜない)。
+# --no-push / --dry-run は outbox を溜める運用 (パイロット) なので通す。
+if [ "$NO_PUSH" = 0 ] && [ "$DRY_RUN" = 0 ] && [ -n "$(git status --porcelain -- data/ai-content-staging)" ]; then
   die "data/ai-content-staging に未コミットの変更がある。先に片付ける (前 run の残骸を今回の commit に混ぜない)"
 fi
 
