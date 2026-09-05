@@ -65,6 +65,24 @@ beforeEach(() => {
 });
 
 describe('readBlogIndexPageFromR2', () => {
+  it('限定保守は承認した終了記事だけ除き、他の終了記事と公開記事を変更しない', async () => {
+    const { excludeGoneBlogArticles } = await import('../../utils/exclude-gone-blog-articles');
+    const target = 'dam-count-prefecture-gap';
+    const unrelated = 'job-salary-39-comparison';
+    const snapshot = {
+      ...SNAPSHOT,
+      tagMeta: [{ tagKey: 'population', articleCount: 7 }],
+      articles: [...SNAPSHOT.articles, article(target, '2026-09-06'), article(unrelated, '2026-09-06')],
+      surveyArticleIndex: { 'mlit-ksj': [target, unrelated, 'a1'] },
+    };
+    const result = excludeGoneBlogArticles(snapshot, new Set([target, 'a1']));
+    expect(result.articles).toEqual(snapshot.articles.filter((row) => row.slug !== target));
+    expect(result.tagMeta).toEqual([{ tagKey: 'population', articleCount: 6 }]);
+    expect(result.surveyArticleIndex).toEqual({ 'mlit-ksj': [unrelated, 'a1'] });
+    expect(snapshot.articles).toHaveLength(8);
+    expect(excludeGoneBlogArticles(result, new Set([target]))).toBe(result);
+  });
+
   it.each([
     'airport-count-vs-wind-power-plant-count-facility',
     'dam-count-prefecture-gap',
