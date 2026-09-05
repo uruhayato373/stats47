@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-09-05
- * 件数: blog 531 / tag 64 / survey 85
+ * 件数: blog 535 / tag 64 / survey 85
  */
 
 export interface SitemapBlogEntry {
@@ -29,6 +29,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "abortion-rate-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "academic-achievement-test-prefecture-ranking", lastModified: "2026-09-05" },
   { slug: "accommodation-expenditure-ranking", lastModified: "2026-07-09" },
+  { slug: "advancement-plus-employment-rate-prefecture", lastModified: "2026-09-05" },
   { slug: "aging-rate-akita-vs-okinawa", lastModified: "2026-03-09" },
   { slug: "aging-solo-living-crisis", lastModified: "2026-03-05" },
   { slug: "agriculture-hokkaido-dominance", lastModified: "2026-06-13" },
@@ -165,6 +166,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "energy-consumption-structure-shift", lastModified: "2026-03-06" },
   { slug: "energy-infrastructure-gas-electricity", lastModified: "2026-03-06" },
   { slug: "engel-coefficient-prefecture-ranking", lastModified: "2026-03-16" },
+  { slug: "engel-coefficient-vs-prefectural-income", lastModified: "2026-09-05" },
   { slug: "engineer-telework-prefecture", lastModified: "2026-06-02" },
   { slug: "engineer-vs-professions-income", lastModified: "2026-06-02" },
   { slug: "estat-7-techniques-from-unusable-to-usable", lastModified: "2026-05-25" },
@@ -311,6 +313,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "local-tax-regional-gap", lastModified: "2026-03-05" },
   { slug: "local-tax-revenue-gap", lastModified: "2026-03-09" },
   { slug: "long-commute-telework-potential", lastModified: "2026-06-02" },
+  { slug: "lotus-root-green-beans-mandarin-consumption", lastModified: "2026-09-05" },
   { slug: "low-birthweight-rate-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "low-cost-low-income-prefectures", lastModified: "2026-07-16" },
   { slug: "mackerel-expenditure-ranking", lastModified: "2026-07-10" },
@@ -541,6 +544,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "wheat-flour-consumption-prefecture", lastModified: "2026-05-17" },
   { slug: "wheat-flour-expenditure-vs-quantity", lastModified: "2026-06-07" },
   { slug: "whisky-consumption-prefecture-gap", lastModified: "2026-05-17" },
+  { slug: "white-bread-price-up-quantity-up", lastModified: "2026-09-05" },
   { slug: "wind-power-capacity-prefecture-gap", lastModified: "2026-06-02" },
   { slug: "wine-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "winter-coat-bargain-purchase-price", lastModified: "2026-09-05" },
@@ -565,7 +569,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "まぐろ", lastModified: "2026-09-05" },
   { tagKey: "インバウンド", lastModified: "2026-05-29" },
   { tagKey: "インフラ", lastModified: "2026-06-14" },
-  { tagKey: "エンゲル係数", lastModified: "2026-07-11" },
+  { tagKey: "エンゲル係数", lastModified: "2026-09-05" },
   { tagKey: "テレワーク", lastModified: "2026-06-02" },
   { tagKey: "人口", lastModified: "2026-08-29" },
   { tagKey: "人口減少", lastModified: "2026-09-01" },
@@ -588,7 +592,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "市区町村", lastModified: "2026-07-16" },
   { tagKey: "年収", lastModified: "2026-09-05" },
   { tagKey: "所得格差", lastModified: "2026-07-19" },
-  { tagKey: "教育", lastModified: "2026-08-28" },
+  { tagKey: "教育", lastModified: "2026-09-05" },
   { tagKey: "教育格差", lastModified: "2026-09-05" },
   { tagKey: "教育費", lastModified: "2026-08-28" },
   { tagKey: "東北", lastModified: "2026-07-12" },
@@ -613,11 +617,11 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "賃金構造基本統計調査", lastModified: "2026-06-13" },
   { tagKey: "転職", lastModified: "2026-06-15" },
   { tagKey: "農業", lastModified: "2026-07-16" },
-  { tagKey: "都道府県", lastModified: "2026-07-16" },
+  { tagKey: "都道府県", lastModified: "2026-09-05" },
   { tagKey: "都道府県ランキング", lastModified: "2026-09-05" },
   { tagKey: "都道府県別", lastModified: "2026-06-21" },
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
-  { tagKey: "食文化", lastModified: "2026-07-19" },
+  { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-07-11" },
   { tagKey: "食費", lastModified: "2026-07-10" },
   { tagKey: "高齢化", lastModified: "2026-07-20" },
