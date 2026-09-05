@@ -27,6 +27,29 @@ function buildRegionMapText(): string {
   }).join("\n");
 }
 
+/**
+ * 地方ごとに順位の良い順で並べた表 (プロンプト埋め込み用)。
+ * 「地方内で最も高い/低い」の主張が同じ地方の 2 県で矛盾する誤りを、モデルの記憶ではなく提供データで防ぐ
+ * (2026-09-05 batch2 で critic が検出した事実誤り)。括弧を使わない (paren-number を実演しない)。
+ * 県名の対応付けが 9 割未満なら空文字を返し、誤った表を出さない。
+ */
+function buildRegionRankText(rows: RankingContentInput["allPrefectures"]): string {
+  const prefectures = fetchPrefectures();
+  const codeToName = new Map(prefectures.map((p) => [p.prefCode, p.prefName]));
+  const byName = new Map(rows.map((r) => [r.areaName, r]));
+  let matched = 0;
+  const lines = REGIONS.map((region) => {
+    const members = region.prefectures
+      .map((code) => byName.get(codeToName.get(code) ?? ""))
+      .filter((r): r is NonNullable<typeof r> => Boolean(r))
+      .sort((a, b) => a.rank - b.rank);
+    matched += members.length;
+    return `- ${region.regionName}: ${members.map((r) => `${r.areaName} ${r.rank}位`).join(", ") || "該当県なし"}`;
+  });
+  if (rows.length === 0 || matched < rows.length * 0.9) return "";
+  return lines.join("\n");
+}
+
 export interface RankingContentPromptOptions {
   /**
    * NotebookLM 等から取得した追加コンテキスト（白書・政府統計の出典等）。
@@ -55,6 +78,16 @@ export function buildRankingContentPrompt(
     .join("\n");
 
   const regionMapText = buildRegionMapText();
+  // FAQ の「平均を上回る県数」をモデルに数えさせない (batch2 で 2 件が誤集計・critic MAJOR)。機械計算して渡す
+  const aboveAverage = input.allPrefectures.filter((r) => r.value > input.average).length;
+  const belowAverage = input.allPrefectures.filter((r) => r.value < input.average).length;
+  const regionRankText = buildRegionRankText(input.allPrefectures);
+  const regionRankSection = regionRankText
+    ? `
+
+## 地方別の順位（順位の良い順。「地方の中で最も高い / 低い」はここで確認する）
+${regionRankText}`
+    : "";
 
   const extraContextSection = options?.extraContext
     ? `
@@ -89,11 +122,12 @@ ${options.extraContext}
 - 平均値: ${input.average.toLocaleString()}${input.unit}
 - 最大値: ${input.max.toLocaleString()}${input.unit}
 - 最小値: ${input.min.toLocaleString()}${input.unit}
+- 平均を上回る県: ${aboveAverage} 県 / 平均を下回る県: ${belowAverage} 県（平均と同値の県は含めない。FAQ ではこの数をそのまま使い、自分で数え直さない）
 
 ${allPrefText}
 
 ## 7地方区分
-${regionMapText}
+${regionMapText}${regionRankSection}
 
 ## 出力形式
 
@@ -115,7 +149,7 @@ ${regionMapText}
       },
       {
         "question": "<全国平均はいくつ？という趣旨の質問文>",
-        "answer": "<平均値と、平均を上回る県数・下回る県数を含む回答>",
+        "answer": "<平均値と、上の「平均を上回る県 / 下回る県」の県数をそのまま使った回答。自分で数え直さない>",
         "type": "average"
       },
       {
@@ -192,6 +226,11 @@ ${regionMapText}
   - 「○○地方の中では最上位に近く、全国でも上位帯に入ります。平均との差は小さくありません。」
   - 「順位は中位ですが、前後の県と僅差で並ぶ帯にあります。地方内では△△県に次ぐ位置です。」
   - 「全国平均を下回る下位帯です。同じ地方の□□県とは対照的な位置にあります。」
+- **書き出しの回し方**: 「○○地方の中では」で始める解説は ${input.totalCount} 件中 12 件以下にする。残りは順位帯・
+  平均との距離・隣接県との対比・順位帯の密集度のどれかから書き始める。読者は自県の 1 件しか読まないが、
+  レビューは ${input.totalCount} 件を並べて読む
+- 「地方の中で最も高い / 最も低い」と書く前に「地方別の順位」で確認する。同じ地方の 2 県に「最も低い」と書くのは事実誤り
+- 長さは 2 文で合計 60〜100 字を目安にする（1 文だけの解説は 60 字に届かない）
 - **禁止事項**:
   - 数値を 2 つ以上列挙しない（順位と値はテンプレで表示するため、commentary 文内で繰り返さない）
   - 「〜のため」「〜が原因」などの因果推測
