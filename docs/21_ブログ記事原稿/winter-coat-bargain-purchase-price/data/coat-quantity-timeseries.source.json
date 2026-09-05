@@ -1,0 +1,23 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003343670",
+  "statsName": "家計調査 家計収支編 二人以上の世帯 品目分類(2020年改定) 月次 (数量)",
+  "params": {
+    "cdArea": "00000",
+    "cdCat02": "03",
+    "cdCat01": "050220050"
+  },
+  "items": [
+    {
+      "code": "050220050",
+      "label": "婦人用コート"
+    }
+  ],
+  "year": "2019,2023,2024",
+  "unit": "着",
+  "label": "婦人用コートの月別購入数量 (二人以上の世帯・全国)",
+  "transform": "指定年 (2019, 2023, 2024) の月次値を月ごとに並べた季節パターン",
+  "source": "estat:0003343670",
+  "restore": "node .claude/scripts/blog/fetch-kakei-monthly.mjs --slug winter-coat-bargain-purchase-price --name coat-quantity --source kakei-quantity --items 050220050:婦人用コート --layout months-by-year --from 2000-01 --to 2024-12 --years 2019,2023,2024 --title \"婦人用コートの月別購入数量 (二人以上の世帯・全国)\" --unit \"着\"",
+  "accessedAt": "2026-09-05"
+}

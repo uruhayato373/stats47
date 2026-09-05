@@ -1,0 +1,128 @@
+<!-- data-source: alcohol-expenditure-timeseries.json | generated: 2026-09-05T14:57:46.354Z -->
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="ビール・発泡酒/ビール風・チューハイの年間支出額 (二人以上の世帯・全国)">
+  <title>ビール・発泡酒/ビール風・チューハイの年間支出額 (二人以上の世帯・全国)</title>
+  
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="680" height="420" class="svg-bg"/>
+  <text x="340" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">ビール・発泡酒/ビール風・チューハイの年間支出額 (二人以上の世帯・全国)</text>
+  <text x="55.0" y="52.0" font-size="8.5" class="svg-tick">(円)</text>
+  <!-- プロットエリア -->
+  <rect x="55.0" y="58.0" width="611.0" height="280.0" class="svg-plot svg-plot-border" stroke-width="1"/>
+  <!-- Y グリッド -->
+  <line x1="55.0" y1="338.0" x2="666.0" y2="338.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="341.5" text-anchor="end" font-size="8.5" class="svg-tick">0</text>
+  <line x1="55.0" y1="291.3" x2="666.0" y2="291.3" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="294.8" text-anchor="end" font-size="8.5" class="svg-tick">5000</text>
+  <line x1="55.0" y1="244.7" x2="666.0" y2="244.7" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="248.2" text-anchor="end" font-size="8.5" class="svg-tick">10000</text>
+  <line x1="55.0" y1="198.0" x2="666.0" y2="198.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="201.5" text-anchor="end" font-size="8.5" class="svg-tick">15000</text>
+  <line x1="55.0" y1="151.3" x2="666.0" y2="151.3" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="154.8" text-anchor="end" font-size="8.5" class="svg-tick">20000</text>
+  <line x1="55.0" y1="104.7" x2="666.0" y2="104.7" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="108.2" text-anchor="end" font-size="8.5" class="svg-tick">25000</text>
+  <line x1="55.0" y1="58.0" x2="666.0" y2="58.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="61.5" text-anchor="end" font-size="8.5" class="svg-tick">30000</text>
+
+  <!-- X 軸ラベル -->
+  <text x="55.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,55.0,352.0)">2000</text>
+  <text x="131.4" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,131.4,352.0)">2003</text>
+  <text x="207.8" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,207.8,352.0)">2006</text>
+  <text x="284.1" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,284.1,352.0)">2009</text>
+  <text x="360.5" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,360.5,352.0)">2012</text>
+  <text x="436.9" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,436.9,352.0)">2015</text>
+  <text x="513.3" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,513.3,352.0)">2018</text>
+  <text x="589.6" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,589.6,352.0)">2021</text>
+  <text x="666.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,666.0,352.0)">2024</text>
+  <!-- 系列 -->
+  <polyline points="55.0,98.8 80.5,138.0 105.9,148.5 131.4,167.0 156.8,167.3 182.3,176.1 207.8,185.6 233.2,177.3 258.7,182.6 284.1,202.5 309.6,206.6 335.0,218.9 360.5,227.1 386.0,227.4 411.4,230.7 436.9,235.3 462.3,238.2 487.8,233.4 513.3,237.1 538.7,237.9 564.2,231.9 589.6,231.9 615.1,230.1 640.5,220.6 666.0,217.3" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="98.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="80.5" cy="138.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="105.9" cy="148.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="131.4" cy="167.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="156.8" cy="167.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="182.3" cy="176.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="207.8" cy="185.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="233.2" cy="177.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="258.7" cy="182.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="284.1" cy="202.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="309.6" cy="206.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="335.0" cy="218.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="360.5" cy="227.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="386.0" cy="227.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="411.4" cy="230.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="436.9" cy="235.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="462.3" cy="238.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="487.8" cy="233.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="513.3" cy="237.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="538.7" cy="237.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="564.2" cy="231.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="589.6" cy="231.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="615.1" cy="230.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="640.5" cy="220.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="217.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <polyline points="55.0,304.6 80.5,282.2 105.9,274.8 131.4,269.3 156.8,272.2 182.3,277.2 207.8,285.7 233.2,282.1 258.7,278.3 284.1,280.7 309.6,256.0 335.0,253.2 360.5,251.4 386.0,248.0 411.4,249.8 436.9,251.0 462.3,249.5 487.8,253.4 513.3,257.9 538.7,255.7 564.2,242.0 589.6,250.2 615.1,255.2 640.5,250.5 666.0,261.8" fill="none" stroke="#e53935" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="304.6" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="80.5" cy="282.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="105.9" cy="274.8" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="131.4" cy="269.3" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="156.8" cy="272.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="182.3" cy="277.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="207.8" cy="285.7" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="233.2" cy="282.1" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="258.7" cy="278.3" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="284.1" cy="280.7" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="309.6" cy="256.0" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="335.0" cy="253.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="360.5" cy="251.4" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="386.0" cy="248.0" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="411.4" cy="249.8" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="436.9" cy="251.0" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="462.3" cy="249.5" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="487.8" cy="253.4" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="513.3" cy="257.9" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="538.7" cy="255.7" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="564.2" cy="242.0" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="589.6" cy="250.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="615.1" cy="255.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="640.5" cy="250.5" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="261.8" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <polyline points="436.9,317.6 462.3,314.3 487.8,312.6 513.3,309.0 538.7,304.9 564.2,294.1 589.6,292.2 615.1,291.6 640.5,292.5 666.0,289.5" fill="none" stroke="#43a047" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="436.9" cy="317.6" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="462.3" cy="314.3" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="487.8" cy="312.6" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="513.3" cy="309.0" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="538.7" cy="304.9" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="564.2" cy="294.1" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="589.6" cy="292.2" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="615.1" cy="291.6" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="640.5" cy="292.5" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="289.5" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <!-- 凡例 -->
+  <rect x="205.0" y="353.0" width="12" height="3" fill="#1e88e5" rx="1.5"/>
+  <text x="221.0" y="356.0" font-size="9" class="svg-axis">ビール</text>
+  <rect x="295.0" y="353.0" width="12" height="3" fill="#e53935" rx="1.5"/>
+  <text x="311.0" y="356.0" font-size="9" class="svg-axis">発泡酒・ビール風</text>
+  <rect x="385.0" y="353.0" width="12" height="3" fill="#43a047" rx="1.5"/>
+  <text x="401.0" y="356.0" font-size="9" class="svg-axis">チューハイ・カクテル</text>
+  <!-- 軸ラベル -->
+
+  <text x="13" y="198.0" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,198.0)">ビール・発泡酒/ビール風・チューハイの年間支出額 (二人以上の世帯・全国)（円）</text>
+</svg>
