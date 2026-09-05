@@ -43,14 +43,8 @@
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"
     },
-    "womens-clothing-consumption-expenditure": {
-      "failCount": 2,
-      "lastReason": "claude-local",
-      "lastFailedAt": "2026-09-05",
-      "firstFailedAt": "2026-09-05"
-    },
     "mayonnaise-consumption-quantity": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "claude-local",
       "lastFailedAt": "2026-09-05",
       "firstFailedAt": "2026-09-05"

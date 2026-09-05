@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-09-05T05:36:10.128Z",
+  "generatedAt": "2026-09-05T08:45:45.407Z",
   "gscSnapshot": "2026-W35",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2166,
-    "done": 747,
-    "needsRegen": 1419,
+    "done": 772,
+    "needsRegen": 1394,
     "needsByReason": {
-      "incomplete": 1230,
-      "missing": 139,
+      "incomplete": 1209,
+      "missing": 135,
       "blocker": 50
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 60752,
-    "needsImpressions": 1287,
+    "doneImpressions": 60877,
+    "needsImpressions": 1162,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -9724,15 +9724,16 @@
       "impressions": 5,
       "clicks": 1,
       "position": 6.6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T05:41:53.542Z"
     },
     {
       "rankingKey": "death-accident",
@@ -9755,15 +9756,16 @@
       "impressions": 5,
       "clicks": 0,
       "position": 10.8,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:03 GMT",
+      "updatedAt": "2026-09-05T05:43:09.234Z"
     },
     {
       "rankingKey": "dried-nori-consumption-expenditure",
@@ -9822,104 +9824,113 @@
       "impressions": 5,
       "clicks": 1,
       "position": 8.8,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-count",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 06:34:03 GMT",
+      "updatedAt": "2026-09-05T05:45:02.333Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "manual-escalation"
+      ]
     },
     {
       "rankingKey": "frozen-food-consumption-expenditure",
       "impressions": 5,
       "clicks": 1,
       "position": 6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:03 GMT",
+      "updatedAt": "2026-09-05T05:46:41.295Z"
     },
     {
       "rankingKey": "hobby-participation-rate-diy",
       "impressions": 5,
       "clicks": 0,
       "position": 5,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:03 GMT",
+      "updatedAt": "2026-09-05T05:48:30.897Z"
     },
     {
       "rankingKey": "hobby-participation-rate-popular-music",
       "impressions": 5,
       "clicks": 2,
       "position": 6.4,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:03 GMT",
+      "updatedAt": "2026-09-05T05:48:52.485Z"
     },
     {
       "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
       "impressions": 5,
       "clicks": 0,
       "position": 9,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:03 GMT",
+      "updatedAt": "2026-09-05T05:50:31.033Z"
     },
     {
       "rankingKey": "inpatient-rate-per-100k",
       "impressions": 5,
       "clicks": 0,
       "position": 4,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "faq-speculation",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T05:50:08.617Z"
     },
     {
       "rankingKey": "kiwi-consumption-expenditure",
       "impressions": 5,
       "clicks": 0,
       "position": 13.6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T05:52:24.746Z"
     },
     {
       "rankingKey": "mayonnaise-consumption-quantity",
@@ -9957,59 +9968,65 @@
       "impressions": 5,
       "clicks": 0,
       "position": 2.8,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T05:54:40.527Z"
     },
     {
       "rankingKey": "music-lesson-consumption-expenditure",
       "impressions": 5,
       "clicks": 0,
       "position": 1.8,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T05:58:27.113Z"
     },
     {
       "rankingKey": "national-pension-enrollees-type1-per-1000-20-59",
       "impressions": 5,
       "clicks": 0,
       "position": 6.2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "causal-insights",
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T05:58:01.874Z"
     },
     {
       "rankingKey": "new-graduate-scheduled-salary-college-female",
       "impressions": 5,
       "clicks": 0,
       "position": 8,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T06:02:38.114Z"
     },
     {
       "rankingKey": "orange-consumption-expenditure",
@@ -10045,27 +10062,32 @@
       "impressions": 5,
       "clicks": 0,
       "position": 5.2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T06:04:04.150Z"
     },
     {
       "rankingKey": "other-noodles-consumption-quantity",
       "impressions": 5,
       "clicks": 1,
       "position": 6.6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:04 GMT",
+      "updatedAt": "2026-09-05T06:07:56.794Z"
     },
     {
       "rankingKey": "per-capita-kenmin-shotoku-h17",
@@ -10114,48 +10136,62 @@
       "impressions": 5,
       "clicks": 0,
       "position": 4.2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:05 GMT",
+      "updatedAt": "2026-09-05T06:09:54.545Z"
     },
     {
       "rankingKey": "relaxation-avg-time-female",
       "impressions": 5,
       "clicks": 1,
       "position": 4.6,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:12:26.466Z"
     },
     {
       "rankingKey": "relaxation-avg-time-male",
       "impressions": 5,
       "clicks": 1,
       "position": 5.8,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:12:28.236Z"
     },
     {
       "rankingKey": "resident-foreigner-korea",
       "impressions": 5,
       "clicks": 0,
       "position": 9,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-insights",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:13:57.039Z"
     },
     {
       "rankingKey": "salted-salmon-consumption-expenditure",
@@ -10176,62 +10212,78 @@
       "impressions": 5,
       "clicks": 0,
       "position": 7.4,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:17:57.267Z"
     },
     {
       "rankingKey": "sewerage-drainage-population",
       "impressions": 5,
       "clicks": 0,
       "position": 2.4,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "manual-escalation"
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:19:30.500Z"
     },
     {
       "rankingKey": "sleep-avg-time-female",
       "impressions": 5,
       "clicks": 1,
       "position": 8.6,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:20:56.122Z"
     },
     {
       "rankingKey": "sports-annual-participation-rate-10plus",
       "impressions": 5,
       "clicks": 2,
       "position": 3.6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "gemini-auto"
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:22:48.021Z"
     },
     {
       "rankingKey": "sports-participation-rate-skiing",
       "impressions": 5,
       "clicks": 1,
       "position": 6.6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "gemini-auto"
+      "lastModified": "Sat, 05 Sep 2026 06:34:06 GMT",
+      "updatedAt": "2026-09-05T06:29:25.811Z"
     },
     {
       "rankingKey": "tableware-consumption-quantity",
@@ -10245,21 +10297,23 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "travel-bag-consumption-expenditure",
       "impressions": 5,
       "clicks": 0,
       "position": 98,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "gemini-auto"
+      "lastModified": "Sat, 05 Sep 2026 06:34:07 GMT",
+      "updatedAt": "2026-09-05T06:30:53.579Z"
     },
     {
       "rankingKey": "treatment-rate-hypertension-inpatient",
@@ -10274,7 +10328,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "treatment-rate-neurosis-outpatient",
@@ -10286,7 +10340,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "tuna-consumption-expenditure",
@@ -10299,7 +10353,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "unmarried-ratio-female-25-29",
@@ -10313,7 +10367,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "unmarried-ratio-female-30-34",
@@ -10325,7 +10379,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "water-supply-annual-volume",
@@ -10338,7 +10392,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "water-supply-capacity",
@@ -10350,7 +10404,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "youth-class-lecture-count-per-million",
@@ -10364,7 +10418,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "accommodation-consumption-expenditure",
@@ -10374,7 +10428,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "air-conditioner-consumption-expenditure",
@@ -10389,7 +10443,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "amusement-park-consumption-expenditure",
@@ -10404,7 +10458,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "bamboo-shoot-consumption-expenditure",
@@ -10419,7 +10473,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "bank-loan-balance",
@@ -10434,7 +10488,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "car-purchase-consumption-expenditure",
@@ -10448,7 +10502,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "cheese-consumption-expenditure",
@@ -10463,7 +10517,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "chinese-noodles-consumption-quantity",
@@ -10478,7 +10532,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "cocoa-consumption-expenditure",
@@ -10493,7 +10547,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "commission-fees-prefecture",
@@ -10521,7 +10575,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "current-deposit-balance-ratio-multi-person-households",
@@ -10536,7 +10590,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "deaths-lifestyle-diseases-per-100k",
@@ -10551,7 +10605,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "dog-registration-count",
