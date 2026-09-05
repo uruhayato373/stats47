@@ -9,12 +9,13 @@ import {
   type SnapshotArticle,
   type SnapshotTagMeta,
 } from '../types/snapshot';
+import { excludeGoneBlogArticles } from '../utils/exclude-gone-blog-articles';
 
 import type { Article, ArticleFrontmatter } from '../types/article.types';
 
 // module-level キャッシュは持たない (r2-storage-design.md)。
 // re-push 直後の取りこぼしや warm isolate の stale 保持を防ぐため毎回 R2 を直接 fetch する。
-const loadSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
+const readSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
   key: BLOG_SNAPSHOT_KEY,
   label: 'blog',
   parse: parseBlogSnapshot,
@@ -25,6 +26,11 @@ const loadSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
     tagMeta: [],
   },
 });
+
+async function loadSnapshot(): Promise<BlogSnapshot> {
+  // R2/CDN の旧索引が残っていても恒久終了記事への導線を復活させない。
+  return excludeGoneBlogArticles(await readSnapshot());
+}
 
 function toArticle(row: SnapshotArticle): Article {
   const frontmatter: ArticleFrontmatter = {

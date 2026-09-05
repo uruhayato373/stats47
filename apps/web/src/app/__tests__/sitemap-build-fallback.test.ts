@@ -48,6 +48,14 @@ const SEGMENT_ID = {
 } as const;
 
 describe("sitemap ビルド時フォールバック (R2 が空でも空にしない)", () => {
+  it('公開終了した3記事をR2不在時にもサイトマップへ戻さない', async () => {
+    const entries = await sitemap({ id: SEGMENT_ID.blog });
+    for (const slug of ['airport-count-vs-wind-power-plant-count-facility', 'dam-count-prefecture-gap', 'dam-count-vs-road-expressway-length']) {
+      expect(entries.some((entry) => entry.url.endsWith(`/blog/${slug}`))).toBe(false);
+      expect(SITEMAP_BLOG_ENTRIES.some((entry) => entry.slug === slug)).toBe(false);
+    }
+  });
+
   it("blog: 公開記事が全件出る (/blog + 記事)", async () => {
     const entries = await sitemap({ id: SEGMENT_ID.blog });
     expect(SITEMAP_BLOG_ENTRIES.length).toBeGreaterThan(0);

@@ -14,6 +14,10 @@
  * - 記事を復活させる場合はここから削除
  */
 export const GONE_BLOG_SLUGS = new Set<string>([
+  // 非商用KSJ原典に依存する旧記事を承認済み公開終了 (2026-09-06)。再公開不可。
+  "airport-count-vs-wind-power-plant-count-facility",
+  "dam-count-prefecture-gap",
+  "dam-count-vs-road-expressway-length",
   // GSC soft-404 監査で「記事実体なし + HTTP 200 not-found」を確認 (2026-08-24)
   "BarChartRace",
   "cc-estat-12-industry-treemap",
