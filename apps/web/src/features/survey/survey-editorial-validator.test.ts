@@ -76,7 +76,7 @@ describe('validate-survey-portfolio editorial gates', () => {
     const result = runValidator([]);
     const output = JSON.parse(result.stdout);
 
-    expect(result.status).toBe(0);
+    expect(result.status, result.stdout || result.stderr).toBe(0);
     expect(output.editorialImplemented).toBe(88);
     expect(output.editorialRequired).toBe(88);
     expect(output.violations).toEqual([]);
