@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "whitebait-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "しらす干し消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/whitebait-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug wakayama-food-culture --keys whitebait-consumption-quantity --data-name whitebait-quantity-ranking",
+  "fetchedAt": "2026-09-05T16:15:53.519Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "vegetable-seaweed-tsukudani-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "他の野菜・海藻のつくだ煮消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/vegetable-seaweed-tsukudani-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug yamaguchi-food-culture --keys vegetable-seaweed-tsukudani-consumption-expenditure --data-name tsukudani-ranking",
+  "fetchedAt": "2026-09-05T23:26:17.123Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
