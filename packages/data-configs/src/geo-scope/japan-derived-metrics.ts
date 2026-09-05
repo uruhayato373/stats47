@@ -12,7 +12,7 @@ type UnsupportedAvailability = Extract<JapanAvailability, { status: "unsupported
 interface JapanDerivedMetricDecisionBase {
   readonly metricKey: string;
   readonly themeKey: string;
-  readonly observedAt: "2026-08-28";
+  readonly observedAt: `${number}-${number}-${number}`;
   readonly evidence: readonly string[];
 }
 
@@ -67,11 +67,11 @@ export const JAPAN_DERIVED_METRIC_DECISIONS: readonly JapanDerivedMetricDecision
       recipeKey: JAPAN_DERIVED_ADDITIVE_RECIPE_KEY,
     },
     sourceMetricKey: "fishing-port-count-ksj",
-    observedAt: "2026-08-28",
+    observedAt: "2026-09-05",
     evidence: [
-      "KSJ C09/06はcoverage=national",
-      "配信2006年は47県・有限47行・合計2931港",
-      "KSJ生成器は県帰属未解決が1件でもあれば書かない",
+      "水産庁2026年4月1日現在の指定漁港全数表（PDL1.0）へ入力を移行",
+      "新版stagingは40県掲載と未掲載7県の0補完で47県・合計2768港。滋賀20港を含む",
+      "official-counts生成器が版SHA・各行内訳・全国15列の保存則を検証し旧年を混在させない",
     ],
   },
   {
@@ -175,11 +175,11 @@ export const JAPAN_DERIVED_METRIC_DECISIONS: readonly JapanDerivedMetricDecision
       recipeKey: JAPAN_DERIVED_ADDITIVE_RECIPE_KEY,
     },
     sourceMetricKey: "roadside-station-count",
-    observedAt: "2026-08-28",
+    observedAt: "2026-09-05",
     evidence: [
-      "KSJ P35/18はcoverage=national",
-      "配信2018年は47県・有限47行・合計1145か所",
-      "KSJ生成器は県帰属未解決が1件でもあれば書かない",
+      "国土交通省2026年9月4日現在の登録一覧（PDL1.0）へ入力を移行",
+      "新版stagingは47県・有限47行・合計1234か所。公表一覧の登録駅数と一致",
+      "official-counts生成器が版SHA・行の一意性・県集合・全国合計を検証し旧年を混在させない",
     ],
   },
 ];
