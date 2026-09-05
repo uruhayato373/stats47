@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-05T12:29:23.035Z",
   "scope": "geo-release-publication",
   "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_ROLLOUT_IN_PROGRESS",
-  "updatedAt": "2026-09-05T22:39:38Z",
+  "updatedAt": "2026-09-05T23:21:00Z",
   "evidenceDigests": [
     { "path": "/tmp/stats47-geo-source-head-check.json", "bytes": 33419, "sha256": "fa68c618f8905f07cb1ebc8817ff1ce1c743429657583c27b081c4a92f331242" },
     { "path": "/tmp/geo-flood-source-publish-20260905/apply.json", "bytes": 98294, "sha256": "055c871c1750c460e97493475d800f82cd1377530c2f01cc2383f5b4eb08ec73" },
@@ -3079,7 +3079,7 @@
       "relatedLegacySns": { "postedLedgerReferences": 6, "draftLedgerReferences": 2, "externalStatusVerified": false }
     },
     "officialReplacementCandidates": {
-      "status": "STAGED_AND_VERIFIED_NOT_PUBLISHED",
+      "status": "PUBLISHED_R2_SHA_VERIFIED_CODE_DEPLOY_PENDING",
       "keys": ["roadside-station-count", "fishing-port-count-ksj"],
       "manifest": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/official-replacements-20260905/handoff-manifest.json",
       "manifestSha256": "4cfa9b37640ec31757af9777b80986ea14986688b66ca89c281f4570ac9b43ab",
@@ -3090,7 +3090,7 @@
       "prefectureRowsEach": 47,
       "roadsideAiIndependentCritic": "PASS",
       "normalizationDenominatorYears": { "population": "2024", "area": "2023" },
-      "remainingRolloutChecks": "Coordinate code, exact snapshots, Japan derivations, affected images/correlations and live pages; never publish historical comparison evidence"
+      "remainingRolloutChecks": "Exact snapshots, Japan derivations, images and correlations published and SHA verified; code deployment and full live route acceptance pending"
     },
     "ownerDecisionKeys": ["dam-count", "hydroelectric-power-plant-count", "thermal-power-plant-count", "nuclear-power-plant-count", "geothermal-power-plant-count", "wind-power-plant-count-facility", "biomass-power-station-count", "tourism-resource-count", "fishing-port-count"],
     "remoteCatalogCheck": {
@@ -3118,16 +3118,25 @@
       "receiptDirectory": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905"
     },
     "publicationPreflight": {
-      "exactPutCandidates": 169,
-      "published": 0,
-      "status": "HOLD_SOURCE_PROVENANCE",
-      "reason": "Expanded structured-data guard rejects port-count correlation. Primary e-Stat metadata 0003130814 and 0003130816 match the 699-code union, but cross-class code collisions may drop distinct ports and metadata only supplies 2010-2023, not the hardcoded 2024 reference date. Relabeling provenance is not a valid fix; seek scope approval for recomputation",
+      "exactPutCandidates": 194,
+      "published": 194,
+      "publishedBytes": 17452138,
+      "s3ReadbackMatched": 194,
+      "publicSharedAndReplacementReadbackMatched": 19,
+      "status": "R2_PUBLISHED_CODE_DEPLOY_PENDING",
+      "reason": "Owner approved port recomputation and three blog retirements. Pinned 2025 law gives 664 designated ports across 47 prefectures; frozen sources, normalization, independent AI review and full correlation verification passed. Code deploy remains gated on final checks.",
       "draftPullRequest": "https://github.com/uruhayato373/stats47/pull/928",
       "postRemovalCatalogAudit": "PASS; final-rollout-20260905/postraw-remote-catalog.json; eleven legacy prefixes empty",
-      "planSha256": "9dc23982f1c7145bd130f61ccf897290ae92b0483633efa386e2a16772daedd1",
-      "additionalBlogRetirement": "APPROVED; code retirement and exact backup preparation in progress for airport-count-vs-wind-power-plant-count-facility, dam-count-prefecture-gap and dam-count-vs-road-expressway-length"
+      "planSha256": "bcb9be9e84086fdaaed5c03050d10d8382de1ce507556a8109d36462bddf82f7",
+      "receipt": "/Users/minamidaisuke/stats47-geo-r2-finalize/.local/license-remediation/recovery-20260906/publish-receipt-resume.json",
+      "receiptSha256": "af0489b479855cca52c62a069667199deb4a58bde9bd43143217c30efc6393d2",
+      "resume": "23 snapshots published before narrow wrapper rejected asset lock keys; existing 23 verified and skipped, remaining 171 published after deriving exact lock hashes from the unchanged plan. All locks released; no broad restore.",
+      "additionalBlogRetirement": "APPROVED; three slugs removed from shared R2 index, code retirement implemented, exact 53 asset deletion held until live 410",
+      "remainingExactDeletions": { "retiredRankingAssets": 125, "oldNormalization": 2, "retiredBlogAssets": 53, "oldPortNormalization": 1 },
+      "freshTaxonomyFinding": "Post-publication full blog audit:529articles/1371charts/965resolved/136unresolved/190missing/74.75%coverage; exceeds existing ratchet. Do not lower gates or restore old state to hide findings. Three additional roadside blogs retain old2018 values; user choice requested before rewriting.",
+      "localAcceptance": { "passed": 1038, "failed": 0, "report": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905/final-local-acceptance-v2.json", "scope": "Geo stage200/301 according to canonical resolver, final query routes, replacements/downloads and retirement URLs; code not deployed" }
     },
-    "next": "Resolve port-count provenance without weakening the guard, publish exact verified candidates, deploy retirement code once, remove approved old ranking assets, purge CDN and verify live acceptance"
+    "next": "Resolve final taxonomy findings, finish search and survey checks, deploy retirement code once, remove 181 approved old assets, purge CDN and verify live acceptance"
   },
   "followupVerification": {
     "genericPublisherAndMigrationTests": { "passed": 20, "failed": 0 },
@@ -3138,11 +3147,12 @@
     "noteCatalog": { "errors": 0, "preexistingWarnings": 44 },
     "docsCheck": { "errors": 0, "preexistingWarnings": 39 },
     "agentSkillConsistency": { "errors": 0, "preexistingWarnings": 34 },
-    "fullWebBuildThisFollowup": "PASS; 1436 prerendered pages audited",
+    "fullWebBuildThisFollowup": "PASS; latest build1484 prerendered pages; subsequent search/survey-only correction needs final CI build",
     "webTests": { "passed": 1238, "failed": 0, "files": 202, "log": "/tmp/stats47-legacy-release-web-tests-final.log" },
     "lint": "PASS",
     "testInvocationCorrection": "Build-only localhost base URL was inadvertently inherited by a combined test wrapper, causing two origin assertions; standard test environment rerun passes all 1238 without code changes",
     "paidNoteBacklogClosure": "Ledger CLI recorded actual passing gates; removal verification PASS",
+    "latestWebTestRun": { "passed": 1253, "failed": 0, "files": 203, "log": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905/final-web-tests-v2.log", "priorFailure": "port-count readerQuestion remained in mlit-ksj after source migration", "correction": "Moved readerQuestion to port-statistics; survey tests9/9 and full rerun1253/1253 PASS" },
     "recurrenceGuardDeployment": "NOT_DEPLOYED; tested implementation on codex/geo-license-publish-guard"
   }
 }

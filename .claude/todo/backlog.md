@@ -56,6 +56,10 @@ updated: 2026-08-30
   ユーザー「進めて」で追加の港再集計・旧値使用ブログ3本の終了も承認済み。`port-count`は旧699の甲乙種コード衝突/固定年2024を廃し、2025年施行の港湾調査規則から664港（甲163+乙501、47県）へ再生成。共同港は1回のみ計上、AI独立レビューPASS。
   2026-09-06 08:12 JST: 新版3・画像・共有一覧・相関・カタログ194候補（17,452,138 bytes）を全backup/SHA/ETag一致・dry-run PASSで固定しexact PUT実行へ移行。相関1,985指標を正規producerで再計算し無関係39,802pair不変。耐久領域`stats47-geo-r2-finalize/.local/license-remediation/recovery-20260906/publish-plan.json`が対象正典。PR #928はdraft、未デプロイ。最終build 1,484 prerender PASS、型/lint/webテスト再実行中。
   ブログ3本（`airport-count-vs-wind-power-plant-count-facility`、`dam-count-prefecture-gap`、`dam-count-vs-road-expressway-length`）は410コード・再公開防止・共有一覧の限定除去を実装済み。R2反映とデプロイ・最終実測は未完了。
+- **2026-09-06 08:23 JST checkpoint**: R2 exact194件（17,452,138 bytes）反映済み、S3全194・公開HTTP19のSHA一致。初回23件後に画像lockのwrapper過小許可で停止したが、固定plan由来のlockだけ追加し残171件を完了。ローカルURLはGeo正典の301/200区分・ダウンロード・終了URLを含む1,038件PASS。コードはまだ未デプロイ、旧125+正規化3+ブログ53=181件はHOLD。
+  fresh全ブログtaxonomy監査は529記事・1,371図、resolved965/unresolved136/missing190、coverage74.75%で既存ratchet未達。基準緩和や旧監査stateへの差し戻しで隠さない。
+  道の駅旧2018値が残る追加3記事 `roadside-station-count-prefecture-gap`、`roadside-station-count-vs-forest-road-length`、`roadside-station-prefecture-gap`（4図）は2026版への本文/図/出典更新の追加確認中。削除は未承認なので行わない。
+  Geo図のsurveyScope不足、既存家計/CPI記事の辞書未登録、別作業の学力metric未統合を区別して対処する。監査診断は`stats47-geo-release/.local/license-remediation/`、公開receiptは`stats47-geo-r2-finalize/.local/license-remediation/recovery-20260906/publish-receipt-resume.json`に保全。
 - **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。承認されたexact対象以外は削除しない。
   削除前のkey/size/ETagが保全時から変化していれば停止する。共有一覧は無関係レコードを保持する。
 - **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。11ランキングは商用可source/書面許諾IDを持つか、
