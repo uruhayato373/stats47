@@ -19,8 +19,11 @@ export function assertKsjPublicKeysAllowed(keys: readonly string[]): void {
       }
     }
 
-    if (key.startsWith('app/stats/')) {
-      const rankingKey = key.split('/')[2];
+    if (key.startsWith('app/stats/') || key.startsWith('app/ranking/') ||
+      key.startsWith('app/japan/') || key.startsWith('app/correlation/by-ranking-key/')) {
+      const rankingKey = key.startsWith('app/correlation/by-ranking-key/')
+        ? key.slice('app/correlation/by-ranking-key/'.length).replace(/\.json$/, '')
+        : key.split('/')[2];
       const source = METRICS_REGISTRY[rankingKey]?.source;
       if (source?.kind === 'external' && source.fetcherKey === 'mlit_ksj') {
         const dataId = source.config?.ksjDataId;
