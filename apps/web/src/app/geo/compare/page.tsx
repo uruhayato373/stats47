@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -22,7 +23,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: 'あなたの県を人口・地価・洪水・駅で比較 | stats47地域分析',
   description:
-    '都道府県を1つ選び、2050年人口、住宅地価、洪水浸水想定区域内人口、駅800m圏人口を同じ画面で比較します。',
+    '都道府県を1つ選び、人口変化、住宅地点と人口減少の重なり、浸水想定区域内人口、駅800m圏人口を確認し、県内の判定地図へ進みます。',
   alternates: { canonical: '/geo/compare' },
 };
 
@@ -37,6 +38,7 @@ export default async function GeoComparePage({ searchParams }: PageProps) {
     landPrice && floodRisk && stationAccess
       ? buildGeoDecisionRows(landPrice, floodRisk, stationAccess)
       : [];
+  if (rows.length !== 47) notFound();
 
   return (
     <PageShell>
@@ -56,27 +58,21 @@ export default async function GeoComparePage({ searchParams }: PageProps) {
       <PageHeader
         eyebrow="GeoAI 横断比較"
         title="1つの県を、4つの問いで読む"
-        description="あなたの県は2050年に何人暮らすか。住宅地価格はどう動いているか。洪水浸水想定区域と駅800m圏に何人暮らすか。都道府県を一度選ぶだけで横断できます。"
+        description="住宅地点と人口減少の重なり、浸水想定区域内人口、駅800m圏人口を一県ずつ確認し、県内の詳しい地図へ進みます。各分析の分母や判定条件は異なります。"
         stats="47都道府県 ・ 4つの問い ・ 3つの空間演算"
       />
 
-      {rows.length === 47 ? (
-        <GeoDecisionExplorer rows={rows} initialAreaCode={pref} />
-      ) : (
-        <div role="status" className="border bg-muted/20 p-5 text-sm text-muted-foreground">
-          3分析すべての47都道府県データが揃うまで、横断比較の公開表示を止めています。
-        </div>
-      )}
+      <GeoDecisionExplorer rows={rows} initialAreaCode={pref} />
 
       <SectionHeader
-        title="この画面がランキングと違う理由"
-        description="1位を探すのではなく、同じ地域に複数の条件がどう重なるかを確認します。"
+        title="比較するときの注意"
+        description="この画面は各分析の集計を並べる入口です。住宅・洪水・駅の三条件を同じ地点で同時に満たすことは判定していません。"
       />
       <div className="grid gap-4 md:grid-cols-3">
         <SurfaceCard className="p-5">
-          <h3 className="font-bold">同じ地域コードで結合</h3>
+          <h3 className="font-bold">詳しい場所は個別の地図へ</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            人口・地価・洪水・駅の結果を、同じ5桁都道府県コードで結びます。
+            県内の中心部や郊外の違いは集計値に隠れます。各カードから選択県の判定地図へ進めます。
           </p>
         </SurfaceCard>
         <SurfaceCard className="p-5">

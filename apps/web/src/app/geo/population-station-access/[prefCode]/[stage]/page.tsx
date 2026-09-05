@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
-import { BUSINESS_PLAN_M1_X_POSTS } from '@stats47/data-configs/business-plan';
+import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
 
 import {
   GeoCrossAnalysisArticle,
@@ -23,20 +23,26 @@ const STAGE_LABELS = {
   audit: '集計検算',
 } as const;
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { prefCode, stage } = await params;
-  const prefecture = PREFECTURE_LIST_2DIGIT.find((candidate) => candidate.code === prefCode);
+  const prefecture = PREFECTURE_LIST_2DIGIT.find(
+    (candidate) => candidate.code === prefCode
+  );
   const isValidStage = isGeoStationAccessView(stage);
   const path = '/geo/population-station-access/' + prefCode + '/' + stage;
   const isPublishedXLanding =
-    Boolean(prefecture && isValidStage) && BUSINESS_PLAN_M1_X_POSTS.some((post) => post.canonicalUrl === path);
+    Boolean(prefecture && isValidStage) &&
+    resolveGeoStageRoute(path)?.kind === 'landing';
 
   return {
     title:
       prefecture && isValidStage
         ? prefecture.name + 'の' + STAGE_LABELS[stage] + ' | stats47地域分析'
         : '人口×駅アクセスの途中地図 | stats47地域分析',
-    description: '1km将来人口、駅800m圏との重なり、集計検算から最終結果までを都道府県別に確認します。',
+    description:
+      '1km将来人口、駅800m圏との重なり、集計検算から最終結果までを都道府県別に確認します。',
     alternates: {
       canonical: isPublishedXLanding ? path : '/geo/population-station-access',
     },
@@ -62,7 +68,9 @@ export default async function GeoStationAccessEvidencePage({
       slug="population-station-access"
       initialPrefCode={prefCode}
       initialStage={stage}
-      contextLayer={<ThemeStationPassengersSection initialPrefCode={prefCode} />}
+      contextLayer={
+        <ThemeStationPassengersSection initialPrefCode={prefCode} />
+      }
     />
   );
 }

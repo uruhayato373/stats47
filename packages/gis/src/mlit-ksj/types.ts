@@ -26,10 +26,8 @@ export interface KsjSimplifyOptions {
 }
 
 /**
- * pipeline 実行時に必要な「コードに残さざるを得ない」設定のみを保持する slim 型。
- * 純メタデータ (name, category, license 等) は D1 gis_datasets に寄せる。
- *
- * Phase 2 of GIS dataset management refactor (plan: stateless-stargazing-teapot).
+ * pipeline 実行時に必要な技術設定だけを保持するslim型。
+ * 純メタデータ (name, category, license 等) のSSOTは `datasets.ts`。
  */
 export interface KsjCodeConfig {
   dataId: string;
@@ -58,7 +56,7 @@ export interface KsjCodeConfig {
 }
 
 /**
- * D1 から取得した純メタデータと registry の KsjCodeConfig をマージした実行時オブジェクト。
+ * `datasets.ts`の純メタデータとregistryのKsjCodeConfigをマージした実行時オブジェクト。
  * pipeline.ts 内部で組み立てる。
  */
 export interface KsjResolvedDataset {

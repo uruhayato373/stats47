@@ -15,10 +15,12 @@ GIS を扱う agent (`gis-curator` / `gis-pipeline-runner` / `geo-analysis-curat
 | 登録データセットのメタ + ranking 定義 | **`packages/gis/src/mlit-ksj/datasets.ts`** (git TS) | `GIS_DATASETS: GisDatasetMeta[]` | name/category/geometryType/coverage/license/stats47Category/isRankingTarget/rankingConfig/latestVersion |
 | pipeline 技術設定 | **`packages/gis/src/mlit-ksj/registry.ts`** (git TS) | `KSJ_CODE_CONFIG: Map` | downloadUrlPattern/geojsonDirInZip/propertyMap/simplifyOptions |
 | 候補メタの superset (126 件) | `packages/database/seed/ksj-catalog.json` (git) | JSON snapshot | jpksj-api フォールバック。`seed-ksj-catalog.ts` が status='available' で投入 |
-| 配信 GIS データ (TopoJSON 等) | **R2** `gis/mlit-ksj/{dataId}/{version}/` | gzip TopoJSON + manifest | 本番アプリ・Remotion が読む |
-| ランキング観測値 | **R2** `app/ranking/<key>/values.json` | JSON | GIS ranking も他 metric と同じ R2 配信 |
+| 公開可能な GIS 原典 (TopoJSON 等) | **R2** `gis/mlit-ksj/{dataId}/{version}/` | gzip TopoJSON + manifest | `license-policy.ts`が`public-r2-eligible`と判定したものだけ。本番アプリ・Remotion が読む |
+| 非商用・審査中の GIS 原典 | 公式配布元 + ローカル作業キャッシュ `.local/r2/gis/mlit-ksj/...` | zip / TopoJSON | **public R2へ置かない**。ローカルキャッシュはSSOTではなく再取得可能な作業物 |
+| ランキング観測値 | **R2** `app/stats/<key>/values.json` | JSON | GIS ranking も他 metric と同じR2配信。公開構造化データgateを通す |
 | Geo分析の途中artifact・lineage・集計 | **R2** `app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json}` | JSON | 定義はgit TS。47県coverageと保存則を`geo-analysis-curator`が監査 |
 | 取得カタログ | R2 `app/geo/data-catalog/items.json` | JSON | git TS + **実R2一覧**から生成。URL・alias・版・取得件数・公開条件を分離 |
+| Geo販売・媒体展開の運用台帳 | `.local/geo-content-pipeline/items.json` | JSON | 公開ページのreaderなし。`app/geo/`へ置かず、商品生成・記事queueだけが読む |
 | 互換用キャッシュ | `packages/database/.data/stats47.sqlite` の `gis_datasets` テーブル | SQLite | 旧一覧/集計script用。pipelineは読まず、**SSOTではない** |
 
 **「D1 gis_datasets」= 上記ローカル使い捨て SQLite** であり Cloudflare 永続/リモート D1 ではない (廃止済)。
@@ -34,7 +36,8 @@ datasets.ts (メタ SSOT) + registry.ts (技術設定) + ksj-catalog.json (候�
   │  → 公式配布manifest選択 → zip download → TopoJSON + scope別provenance manifest
   ▼
 .local/r2/gis/mlit-ksj/{dataId}/{version}/
-  │  r2-publisher exact push（公開可否gateを先に判定）
+  │  license-policy.ts → public-r2-eligibleだけr2-publisher exact push
+  │  local-only/review-requiredはローカル処理で停止
   ▼
 R2 gis/mlit-ksj/{dataId}/{version}/  →  build-data-catalog.tsが実査 → 本番アプリ / Remotion
   │  /build-geo-analysis → calculation-input / derived / context-only を分離
@@ -54,6 +57,28 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 
 > ranking 定義 (`rankingConfig`) は datasets.ts に統合済 (旧 `seed-from-registry.ts` の RANKINGS 配列は廃止)。
 > ranking 対象は `isRankingTarget: true` + `rankingConfig[]` を持たせる。年は 4 桁 (`yearCode`、estat-api.md 準拠)。
+
+## 商用利用・公開ライセンス境界
+
+判定のコードSSOTは`packages/gis/src/mlit-ksj/license-policy.ts`。公式の個別データページにある利用条件を
+`datasets.ts`へ記録し、元データの公開と商用成果物を同じ「利用可」で済ませない。
+
+| license | 元TopoJSONのpublic R2 | 広告・販売を伴う成果物 | 公開JSON/CSV |
+|---|---|---|---|
+| `cc-by-4.0` / `commercial-ok` | 可 | 出典・加工表示付きで可 | 可 |
+| `cc-by-4.0-partial` | 不可（個別確認まで） | 個別条件を確認 | 書面/個別条件確認まで不可 |
+| `non-commercial` | **不可。ローカル限定** | 非データベースのGIS空間演算結果だけ利用余地あり。出典・加工者表示必須 | **書面確認または商用可ソースへの置換まで不可** |
+
+`non-commercial`の登録済み11件は`C02, C09, C23, P03, P12, P13, P17, P18, P35, W01, W05`。
+2026-09-05の実R2監査で全11件のpublic mirrorを検出したため、`r2-retention.ts`のexact prefix
+`license-remediation-ksj-*`で撤去対象に固定した。削除は必ずdry-run→ユーザー承認→R2 workflowの順とする。
+
+このうち`W01/P03/P12/P35/C09`由来の既存ランキング10本は、画面上の図表まで直ちに利用不可と断定しないが、
+`app/stats/.../values.json`が公開構造化データなので権利確認が必要。`generate-ksj-stats-values.ts`は再生成を停止し、
+商用可の一次資料へ置換、権利者/事務局の書面許諾、または非データベース成果だけに縮退するまで公開更新しない。
+
+公開時の出典は「データ名、国土交通省、個別ページURL、取得日、stats47が加工した事実」を最低限表示し、
+個別データページの条件が一般規約より優先される。利用範囲が曖昧なら推測せず国土数値情報運営事務局へ確認する。
 
 ## 県の帰属 — 属性 → 空間結合 → 距離上限つき許容 (★2026-08-17 新設)
 
@@ -108,6 +133,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
 | **座標から最寄りの県庁所在地で県を決める** | `prefecture-assign.ts` の 3 段 (決まらなければ null) |
 | **全プロパティを走査して「それらしい値」を県コードに使う** | `registry.ts` の `prefectureSource` で明示宣言 |
 | **metric config も R2 データも無い ranking を datasets.ts に残す** | 実体が無ければ `isRankingTarget:false` か定義削除 (soft 404 になる) |
+| **`non-commercial`を「加工したから自由」とみなしてpublic R2/JSONへ置く** | 元データはlocal-only。非DB空間演算結果以外は書面確認か商用可ソースへ置換 |
 
 ## 検証
 
