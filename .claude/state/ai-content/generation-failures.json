@@ -24,6 +24,24 @@
       "lastReason": "agent-record-missing:ranking-content-author",
       "lastFailedAt": "2026-08-20",
       "firstFailedAt": "2026-08-20"
+    },
+    "number-of-hotel-rooms": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "public-bath-count-per-100k": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "public-kindergarten-ratio": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
     }
   }
 }
