@@ -29,6 +29,9 @@ note商品添付は無料説明文中の同名言及へ誤着地し得るため�
 **ライセンス再公開の教訓（2026-09-05）**: 生成時gateだけでは、旧ローカルstagingを汎用publisherで再公開できた。
 diff/exact/wranglerで全候補をPUT前に`ksj-publication-guard.ts`へ通す。元GISと派生JSONの可否は既存license SSOTから
 導出し、混在バッチは1件もPUTしない。証拠はguardとexact publisherの回帰テスト。
+GISのrankingConfigだけでなく全metricの実sourceを走査する（別系列の漁港を含め旧対象11本）。
+商用一次資料への置換後も同じkeyには旧stagingが残るため、現config recipe・原典SHA・版日付・47県・全国合計を検査する。
+公開禁止原典の撤去後にカタログが「不足」と再取得を促さないことも回帰テストする。
 
 **出典カタログの教訓（2026-09-05）**: 固定パスのR2依存pageは`revalidate`だけでは静的生成を防げない。
 ローカルでは出典が読めても、CIではnullの代替表示が焼き付いてHTTP200のまま本番に残り得る。

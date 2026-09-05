@@ -1,10 +1,10 @@
 import { createHash } from 'node:crypto';
 import { lstatSync, readdirSync, readFileSync, realpathSync } from 'node:fs';
 import { extname, isAbsolute, relative, resolve, sep } from 'node:path';
-import { gzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 
 import type { ImageObjectStore } from '../image-pipeline';
-import { assertKsjPublicKeysAllowed } from './lib/ksj-publication-guard';
+import { assertKsjPublicAssetsAllowed } from './lib/ksj-publication-guard';
 
 const SHA256_METADATA_KEY = 'stats47-sha256';
 const SIZE_METADATA_KEY = 'stats47-size';
@@ -291,7 +291,11 @@ export async function publishExactR2Assets(options: {
     throw new Error('publish対象ファイルが0件です');
   }
   // 全候補を先に検査し、混在バッチの途中までPUTされることを防ぐ。
-  assertKsjPublicKeysAllowed(options.candidates.map((candidate) => candidate.key));
+  const candidatesByKey = new Map(options.candidates.map((candidate) => [candidate.key, candidate]));
+  assertKsjPublicAssetsAllowed([...candidatesByKey.keys()], (key) => {
+    const candidate = candidatesByKey.get(key)!;
+    return candidate.contentEncoding === 'gzip' ? gunzipSync(candidate.body) : candidate.body;
+  });
 
   let uploaded = 0;
   let skipped = 0;

@@ -73,13 +73,16 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 2026-09-05の実R2監査で全11件のpublic mirrorを検出したため、`r2-retention.ts`のexact prefix
 `license-remediation-ksj-*`で撤去対象に固定した。削除は必ずdry-run→ユーザー承認→R2 workflowの順とする。
 
-このうち`W01/P03/P12/P35/C09`由来の既存ランキング10本は、画面上の図表まで直ちに利用不可と断定しないが、
+このうち`W01/P03/P12/P35/C09`由来の既存ランキングは、metricの実sourceまで走査すると11本あった
+（GISのrankingConfigだけでは別系列`fishing-port-count`を見落とす）。画面上の図表まで直ちに利用不可と断定しないが、
 `app/stats/.../values.json`が公開構造化データなので権利確認が必要。`generate-ksj-stats-values.ts`は再生成を停止し、
 商用可の一次資料へ置換、権利者/事務局の書面許諾、または非データベース成果だけに縮退するまで公開更新しない。
 
 生成時だけでなく汎用R2 publisher（diff-push、exact asset、wrangler）も
-`ksj-publication-guard.ts`で全候補をPUT前に検査する。判定は`datasets.ts`と`license-policy.ts`から導出し、
+`ksj-publication-guard.ts`で全候補をPUT前に検査する。判定は`datasets.ts`、全metricの実source、`license-policy.ts`から導出し、
 未登録KSJ、公開不可の原典、同原典由来の観測値を拒否する。旧stagingや同期manifestの一致を許可根拠にしない。
+一次資料へ置換した道の駅・漁港KSJは、現行configのrecipe hash・原典SHA・版日付・47県の一意性・全国合計も照合する。
+sourceを書き換えただけでは同じkeyの旧values.jsonを公開できない。取得カタログは公開禁止原典の撤去を「R2不足」に戻さない。
 
 公開時の出典は「データ名、国土交通省、個別ページURL、取得日、stats47が加工した事実」を最低限表示し、
 個別データページの条件が一般規約より優先される。利用範囲が曖昧なら推測せず国土数値情報運営事務局へ確認する。
