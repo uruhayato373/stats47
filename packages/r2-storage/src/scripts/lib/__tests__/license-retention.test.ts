@@ -20,10 +20,10 @@ describe('approved license remediation deletion boundary', () => {
   ])('rejects missing, added, changed or duplicate objects before any deletion', (...objects) => {
     expect(() => assertUnchangedRetentionInventory(expected, objects)).toThrow();
   });
-  it('pins the approved 435 raw, 125 retired and 2 obsolete assets only', () => {
-    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2]);
+  it('pins the approved raw, retired rankings, obsolete sidecars and three blogs only', () => {
+    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2, 53]);
     expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.reduce((sum, object) => sum + object.bytes, 0)))
-      .toEqual([48973241, 2111153, 19632]);
+      .toEqual([48973241, 2111153, 19632, 2408761]);
     const rawIds = new Set(LICENSE_RETENTION_TARGETS[0].objects.map((object) => object.key.split('/')[2]));
     expect([...rawIds].sort()).toEqual(['C02', 'C09', 'C23', 'P03', 'P12', 'P13', 'P17', 'P18', 'P35', 'W01', 'W05']);
     const retired = ['dam-count', 'hydroelectric-power-plant-count', 'thermal-power-plant-count',
@@ -36,6 +36,11 @@ describe('approved license remediation deletion boundary', () => {
     expect(LICENSE_RETENTION_TARGETS[2].objects.map((object) => object.key).sort()).toEqual([
       'app/ranking/fishing-port-count-ksj/values-per-household.json',
       'app/ranking/roadside-station-count/values-per-household.json',
+    ]);
+    expect(LICENSE_RETENTION_TARGETS[3].prefixes).toEqual([
+      'app/blog/airport-count-vs-wind-power-plant-count-facility/',
+      'app/blog/dam-count-prefecture-gap/',
+      'app/blog/dam-count-vs-road-expressway-length/',
     ]);
     for (const target of LICENSE_RETENTION_TARGETS) {
       expect(new Set(target.objects.map((object) => object.key)).size).toBe(target.objects.length);
