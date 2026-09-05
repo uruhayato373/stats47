@@ -32,6 +32,7 @@ import type { ContentType, SearchDocument } from "../src/features/search/types/s
 import {
   assertCompleteSearchIndexSources,
   configureSearchIndexR2Environment,
+  selectSearchBlogArticles,
   selectSearchRankingItems,
 } from "./lib/search-index-r2-env";
 
@@ -146,7 +147,7 @@ async function main() {
   // 2. ブログ記事（R2 app/blog/all.json）
   try {
     const snapshot = await fetchFromR2AsJson<BlogSnapshot>(BLOG_SNAPSHOT_KEY);
-    const articles = (snapshot?.articles ?? []).filter((a) => a.published === true);
+    const articles = selectSearchBlogArticles(snapshot);
 
     for (const a of articles) {
       const tags = a.tags.map((t) => t.tagKey);
