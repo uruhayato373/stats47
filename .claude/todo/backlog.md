@@ -50,12 +50,12 @@ updated: 2026-08-30
   1. ユーザー「やって」により、元GIS435件撤去・新版2置換・残9終了/転送・一括deployを承認済み。
   2. 置換候補2本は派生データ・画像・相関を含め一括更新する。旧`fishing-port-count`は新版へ301、代替のない8本は410にする。
   3. config/一覧/ダウンロード/転送コードを検証して一括deploy後、旧ランキング資産をexact削除する。
-  4. 削除は保全済みkey/size/ETagを固定した`license-retention-20260905.json`の3targetをworkflow経由で実行する。旧KSJの再公開は引き続き禁止する。
+  4. 削除は保全済みkey/size/ETagを固定した`license-retention-20260905.json`のtargetをworkflow経由で実行する。raw435は完了済みのため再実行しない。残りは旧ランキング125・旧正規化2・ブログ53・港旧正規化1。旧KSJの再公開は引き続き禁止する。
   5. 関連SNSは台帳posted6/draft2を検出。旧11ランキング系列の外部投稿は未検証のため、Geo15投稿の検証済み結果と混同せず、方針決定後に個別確認する。
 - **2026-09-06 checkpoint**: raw435件はworkflow `33974655560`でexact削除済み（48,973,241 bytes、エラー0、S3残0、公開HEAD435件404、backup保持）。remote catalog再監査PASS。
-  新版2・画像・共有一覧・相関・カタログ169候補は全backup/SHA/ETag一致、PUT0。PR #928はdraft、未デプロイ。build・1436 prerender・全workspace型・lint・web1238テストPASS。
-  追加の`port-count`は現R2=master699港と一致するが、甲乙種のコード衝突と固定年2024の根拠不足を一次APIで検出。出典名だけを変えてguardを解除しない。
-  原典再集計への範囲拡張と、旧値使用ブログ3本（`airport-count-vs-wind-power-plant-count-facility`、`dam-count-prefecture-gap`、`dam-count-vs-road-expressway-length`）の公開終了は追加承認待ち。
+  ユーザー「進めて」で追加の港再集計・旧値使用ブログ3本の終了も承認済み。`port-count`は旧699の甲乙種コード衝突/固定年2024を廃し、2025年施行の港湾調査規則から664港（甲163+乙501、47県）へ再生成。共同港は1回のみ計上、AI独立レビューPASS。
+  2026-09-06 08:12 JST: 新版3・画像・共有一覧・相関・カタログ194候補（17,452,138 bytes）を全backup/SHA/ETag一致・dry-run PASSで固定しexact PUT実行へ移行。相関1,985指標を正規producerで再計算し無関係39,802pair不変。耐久領域`stats47-geo-r2-finalize/.local/license-remediation/recovery-20260906/publish-plan.json`が対象正典。PR #928はdraft、未デプロイ。最終build 1,484 prerender PASS、型/lint/webテスト再実行中。
+  ブログ3本（`airport-count-vs-wind-power-plant-count-facility`、`dam-count-prefecture-gap`、`dam-count-vs-road-expressway-length`）は410コード・再公開防止・共有一覧の限定除去を実装済み。R2反映とデプロイ・最終実測は未完了。
 - **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。承認されたexact対象以外は削除しない。
   削除前のkey/size/ETagが保全時から変化していれば停止する。共有一覧は無関係レコードを保持する。
 - **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。11ランキングは商用可source/書面許諾IDを持つか、

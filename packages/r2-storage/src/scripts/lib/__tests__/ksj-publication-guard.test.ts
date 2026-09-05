@@ -70,14 +70,14 @@ describe('KSJ汎用publisherの公開境界', () => {
 });
 
 describe('商用一次資料への置換後も旧stagingを拒否する', () => {
-  for (const key of ['roadside-station-count', 'fishing-port-count-ksj']) {
+  for (const key of ['roadside-station-count', 'fishing-port-count-ksj', 'port-count']) {
     const metric = METRICS_REGISTRY[key];
     const input = metric.source.kind === 'external' ? metric.source.config! : {};
     const makePayload = () => ({
       metricKey: key,
       rows: Array.from({ length: 47 }, (_, i) => ({
         areaCode: `${String(i + 1).padStart(2, '0')}000`,
-        yearCode: '2026', value: i === 0 ? Number(input.nationalTotal) : 0,
+        yearCode: String(input.dataDate).slice(0, 4), value: i === 0 ? Number(input.nationalTotal) : 0,
       })),
       meta: { recipe: buildRecipe(metric), source: {
         sourceSha256: input.sourceSha256, sha256: input.sourceSha256,

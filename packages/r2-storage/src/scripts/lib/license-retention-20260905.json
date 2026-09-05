@@ -637,5 +637,12 @@
       {"key":"app/blog/dam-count-vs-road-expressway-length/thumbnail-dark.webp","bytes":11494,"etag":"\"141dc6989588ab5d078d0b32fc3d07f1\""},
       {"key":"app/blog/dam-count-vs-road-expressway-length/thumbnail-light.webp","bytes":21344,"etag":"\"0448ec16d0cd95178c42dd69c6e89df6\""}
     ]
+  },
+  {
+    "id": "license-remediation-obsolete-port-normalization-20260906",
+    "prefixes": ["app/ranking/port-count/values-per-household.json"],
+    "objects": [
+      {"key":"app/ranking/port-count/values-per-household.json","bytes":9100,"etag":"\"14750f785c0d84efc231b1afb4d969d3\""}
+    ]
   }
 ]

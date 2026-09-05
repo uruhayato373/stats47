@@ -266,7 +266,7 @@
       "local-tax": 7,
       "medical-facility-survey": 40,
       "minimum-wage": 1,
-      "mlit-ksj": 5,
+      "mlit-ksj": 4,
       "municipal-settlement-survey": 29,
       "national-household-survey": 20,
       "national-medical-expenditure": 3,
@@ -277,7 +277,7 @@
       "physician-survey": 5,
       "police-statistics": 21,
       "population-estimates": 209,
-      "port-statistics": 3,
+      "port-statistics": 4,
       "prefectural-accounts": 16,
       "prefectural-land-price-survey": 5,
       "prefectural-settlement-survey": 121,
@@ -3930,7 +3930,7 @@
     },
     {
       "surveyId": "mlit-ksj",
-      "rankingCount": 5,
+      "rankingCount": 4,
       "themeKeys": [
         "railway"
       ],
@@ -4194,7 +4194,7 @@
     },
     {
       "surveyId": "port-statistics",
-      "rankingCount": 3,
+      "rankingCount": 4,
       "themeKeys": [
         "ports"
       ],
