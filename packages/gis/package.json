@@ -42,6 +42,7 @@
     }
   },
   "scripts": {
+    "generate:official-facility-counts": "tsx src/official-counts/generate.ts",
     "check:thumbnail-topology": "node scripts/generate-prefecture-thumbnail-topology.mjs --check",
     "generate:thumbnail-topology": "node scripts/generate-prefecture-thumbnail-topology.mjs",
     "test": "vitest",

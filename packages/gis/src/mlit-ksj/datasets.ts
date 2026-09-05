@@ -154,8 +154,8 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "P29", name: "学校", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "educationsports", isRankingTarget: false, latestVersion: "23" },
   {
     dataId: "P35", name: "道の駅", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
-    stats47Category: "tourism", isRankingTarget: true, latestVersion: "18",
-    rankingConfig: [{ rankingKey: "roadside-station-count", rankingName: "道の駅数", unit: "か所", categoryKey: "tourism", yearCode: "2018", description: "国土数値情報に登録されている道の駅の都道府県別数" }],
+    // 登録駅数は国交省の商用可一次一覧へ移行。非商用KSJで上書きしない。
+    stats47Category: "tourism", isRankingTarget: false, latestVersion: "18",
   },
   { dataId: "P36", name: "高速バス停留所", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "23" },
 
@@ -163,8 +163,8 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "C02", name: "港湾", category: "transport", geometryType: "point", coverage: "national", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "08" },
   {
     dataId: "C09", name: "漁港", category: "transport", geometryType: "point", coverage: "national", license: "non-commercial",
-    stats47Category: "agriculture", isRankingTarget: true, latestVersion: "06",
-    rankingConfig: [{ rankingKey: "fishing-port-count-ksj", rankingName: "漁港数", unit: "港", categoryKey: "agriculture", filenamePattern: "FishingPort.topojson", yearCode: "2006", description: "国土数値情報に登録されている漁港の都道府県別数" }],
+    // 漁港数は水産庁の商用可一次一覧へ移行。非商用KSJで上書きしない。
+    stats47Category: "agriculture", isRankingTarget: false, latestVersion: "06",
   },
   {
     dataId: "C28", name: "空港", category: "transport", geometryType: "point", coverage: "national", license: "commercial-ok",
