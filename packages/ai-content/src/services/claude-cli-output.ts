@@ -45,8 +45,12 @@ export interface ClaudeCliParsed {
   breakdown: ClaudeCliUsageBreakdown;
   /** CLI が返す API 換算費用。Pro/Max OAuth では実請求ではない */
   costUsd: number;
-  /** modelUsage の先頭キー (実際に使われた model ID)。alias ではなくこれを記録する */
+  /** modelUsage のうち最も多くトークンを使った model ID (CLI は補助 call に別モデルを混ぜることがある)。alias ではなくこれを記録する */
   modelId: string | null;
+  /** modelUsage に現れた全 model ID (使用量の多い順) */
+  modelIds: string[];
+  /** CLI 内部の API ターン数。1 request なのに 2 以上なら構造化出力の tool 往復などで input が倍加している */
+  numTurns: number;
 }
 
 /** CLI が `is_error` / 非 success subtype を返したとき。429・billing を JSON parse error と混同しないための型 */
@@ -119,10 +123,21 @@ export function parseClaudeCliOutput(stdout: string): ClaudeCliParsed {
     typeof wrapper.total_cost_usd === "number" && Number.isFinite(wrapper.total_cost_usd)
       ? wrapper.total_cost_usd
       : 0;
-  const modelKeys =
-    wrapper.modelUsage && typeof wrapper.modelUsage === "object"
-      ? Object.keys(wrapper.modelUsage as Record<string, unknown>)
-      : [];
+  const modelUsage =
+    wrapper.modelUsage && typeof wrapper.modelUsage === "object" && !Array.isArray(wrapper.modelUsage)
+      ? (wrapper.modelUsage as Record<string, unknown>)
+      : {};
+  // 重み = そのモデルの数値フィールド合計 (input/output/cache/cost を区別せず「使った量」の代理)。
+  // CLI が補助 call に別モデルを混ぜても、主 call のモデルが先頭に来る。
+  const weight = (value: unknown): number =>
+    value && typeof value === "object"
+      ? Object.values(value as Record<string, unknown>).reduce<number>(
+          (acc, x) => acc + (typeof x === "number" && Number.isFinite(x) ? x : 0),
+          0,
+        )
+      : 0;
+  const modelIds = Object.keys(modelUsage).sort((a, b) => weight(modelUsage[b]) - weight(modelUsage[a]));
+  const numTurns = int(wrapper.num_turns);
 
-  return { text, usage, breakdown, costUsd, modelId: modelKeys[0] ?? null };
+  return { text, usage, breakdown, costUsd, modelId: modelIds[0] ?? null, modelIds, numTurns };
 }

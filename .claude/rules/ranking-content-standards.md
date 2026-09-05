@@ -274,7 +274,8 @@ headless `claude -p` を子プロセスで呼ぶ。prompt は約 5,000 字 (dry-
 | 項目 | 内容 |
 |---|---|
 | 入口 | `bash .claude/scripts/ai-content/run-claude-batch.sh` (**ユーザー端末で実行**。Claude Code セッション内は Keychain を読めず「Not logged in」になる・実測 2026-09-05) |
-| lean 化 | cwd を repo 外に固定 (CLAUDE.md / `.claude/rules` / project hooks / `.mcp.json` を読ませない)、`--tools ""`、`--strict-mcp-config`、`--no-session-persistence`、`--setting-sources local` (user hook `sync-memory.sh` を毎 call 走らせない・実測で抑止確認)、独自 `--system-prompt`。`--bare` は OAuth 不可なので使わない |
+| lean 化 | cwd を repo 外に固定 (CLAUDE.md / `.claude/rules` / project hooks / `.mcp.json` を読ませない)、`--tools ""`、`--strict-mcp-config`、`--no-session-persistence`、`--setting-sources local` (user hook `sync-memory.sh` を毎 call 走らせない・実測で抑止確認)、独自 `--system-prompt`、子 env から `CLAUDE_*` を除去 (継ぐと Keychain を読まず「Not logged in」)。`--bare` は OAuth 不可なので使わない |
+| 費用を決める 2 つ | **author は `--json-schema` を使わない** (構造化出力は CLI 内部が 2 ターンになり input 4.3K → 32K。構造は監査が見る)。**`--effort low` 既定** (同一 prompt・Sonnet 5 で $0.54/148 秒/出力 19.7K → $0.23/69 秒/7.5K。`MAX_THINKING_TOKENS=1024` は $0.33)。critic だけは `--json-schema` を使う (schema なしだと section 欠落や平文が返り parse 失敗で author 分が無駄になる。出力 ~1K なので追加 ≈$0.02) |
 | model alias | `claude-haiku` / `claude-sonnet` / `claude-opus` の allowlist のみ (`claude-cli-output.ts`)。typo が黙って haiku に倒れない |
 | 品質ゲート | Gemini 経路と同一: `audit-ai-content.mjs` (機械フロア) → 別プロセスの Claude critic (`buildGeminiCriticPrompt` / `parseGeminiCriticVerdict` を transport 非依存で流用) → REVISE は 1 回再生成。**ゲートは緩めない** |
 | 公開 | outbox → **1 push = 1 commit ≤ 35 件** → develop → `publish-ai-content.yml` (人間 / セッションの push は発火する)。公開確認は R2 の内容一致で行う |
@@ -283,8 +284,18 @@ headless `claude -p` を子プロセスで呼ぶ。prompt は約 5,000 字 (dry-
 | 分業 | author / critic = Sonnet 5 (Haiku 4.5 とパイロット比較で安い方)。**Opus 5 は manual-escalation 30 件 + quarantine のみ** Agent tool 経由。量産に Opus を使わない |
 | 不変 | Claude を CI cron で無人実行しない。量と時期は人が決める (月次 / 週次計画) |
 
-1 件あたりのトークン実測はパイロット後に `history.csv` の Claude run 行 (model 列 = 実 ID) で読む。
-数字を先に書かない。
+**pilot 0 実測 (2026-09-05・`library-count-per-million`・Sonnet 5 author+critic・1 回目 PASS)**:
+author prompt 4.7K トークン (10,250 字) / 出力 7.4K / $0.238、critic 2 ターン 14K / 出力 1K / $0.111 →
+**1 件 27K トークン・$0.35 (API 換算)**。Agent tool 経路の $12-17/件 (10 件 $120.89) の約 1/35〜1/50。
+history.csv の run `local-20260905-*` に author/critic request 数・トークン・`cost_usd` が残る。
+
+**通過率は author prompt で上げた (ゲートは触っていない)**。同 key は改修前に critic REVISE を 3 連続で受けて
+REJECT だった。critic の指摘は正当で、原因は prompt の内部矛盾: insights の例に「地方ブロック間の平均値比較」を
+挙げていたため regionalAnalysis の結論をなぞる / ですます調の指定が無かった / 県別解説が 43-59 字と規定の
+60-120 字を下回っていた。`ranking-content-prompt.ts` を直し (insights は全国横断の分布に徹し regionalAnalysis を
+繰り返さない・全セクションですます調・commentary は 2 文で 60 字以上・47 件で文型を変える)、次の 1 回で PASS。
+REJECT した候補と critic 指摘は `.local/ci/rejected/<key>-<ts>.json` に残る (公開しない) ので、落ちたら
+まずそれを読んで prompt 側を直す。
 
 #### 履歴: 2026-08-21 に Claude 日次 CI を廃止した理由
 

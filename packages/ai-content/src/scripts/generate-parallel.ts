@@ -27,7 +27,8 @@ import "dotenv/config";
  *   NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
  *     tsx packages/ai-content/src/scripts/generate-parallel.ts \
  *       [--model gemini-api|claude-haiku|claude-sonnet|claude-opus|gemini] \
- *       [--critic none|gemini-api|claude-haiku|claude-sonnet|claude-opus] [--concurrency N] [--no-json-schema] \
+ *       [--critic none|gemini-api|claude-haiku|claude-sonnet|claude-opus] [--concurrency N] \
+ *       [--cli-json-schema] [--cli-max-thinking N] [--cli-effort low|medium|high|xhigh|max] \
  *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2] \
  *       [--retries N] [--outbox] [--report <file>]
  *
@@ -35,8 +36,13 @@ import "dotenv/config";
  *   --keys    : 対象 key をカンマ区切りで明示 (pending 走査をスキップ)
  *   --retries : ゲート落ち / JSON 崩れ時に同じ prompt でやり直す回数 (既定 1)。安価モデルの
  *               失敗率を実行時間で吸収する。**ゲートを緩めて通すことはしない**
- *   --no-json-schema : claude CLI に --json-schema (構造化出力) を渡さず、本文の json fence を parse する
- *               (構造化出力が拒否される環境の fallback。gemini-api には影響しない)
+ *   --cli-json-schema : claude CLI に --json-schema (構造化出力) を渡す。**既定は渡さない** — 実測 (2026-09-05)
+ *               で構造化出力は CLI 内部が 2 ターンになり input が 4.3K → 32K に増えた。構造は audit ゲートが
+ *               検証するので、本文の json fence を parse する経路で足りる
+ *   --cli-max-thinking N : claude CLI 子プロセスの MAX_THINKING_TOKENS (既定 1024)。実測で Sonnet の output が
+ *               19.7K → 13.1K、費用 $0.54 → $0.33。0 で無効化を試みる
+ *   --cli-effort L : claude CLI に --effort L を渡す (既定 low・none で渡さない)。実測 (同一 prompt・Sonnet 5):
+ *               既定 $0.54 / 148 秒 / output 19.7K → low $0.23 / 69 秒 / output 7.5K。生成物は監査・critic を通す
  *   --outbox  : staging ではなく git 公開 outbox (data/ai-content-staging/<key>.json) へ書く。
  *               R2 creds を持たない環境 (クラウドセッション / Routine) はこちらを使い、
  *               develop へ push すると publish-ai-content.yml が gate → R2 → CDN purge まで実行する
@@ -114,8 +120,12 @@ interface Options {
   outbox: boolean;
   /** CI 用の機械可読 run report (本文は含めない) */
   reportPath: string | null;
-  /** claude CLI に --json-schema を渡すか (false = 本文の json fence を parse する fallback) */
+  /** claude CLI に --json-schema を渡すか (既定 false = 本文の json fence を parse する。true は 2 ターン化して高い) */
   cliJsonSchema: boolean;
+  /** claude CLI 子プロセスの MAX_THINKING_TOKENS (0 = 設定しない) */
+  cliMaxThinking: number;
+  /** claude CLI の --effort (null = 渡さない) */
+  cliEffort: string | null;
 }
 
 function parseArgs(): Options {
@@ -146,8 +156,19 @@ function parseArgs(): Options {
     retries: Number(get("--retries") ?? 1),
     outbox: a.includes("--outbox"),
     reportPath: get("--report") ?? null,
-    cliJsonSchema: !a.includes("--no-json-schema"),
+    cliJsonSchema: a.includes("--cli-json-schema"),
+    cliMaxThinking: Number(get("--cli-max-thinking") ?? 1024),
+    cliEffort: (() => {
+      const v = get("--cli-effort") ?? "low";
+      return v === "none" ? null : v;
+    })(),
   };
+  if (!Number.isInteger(options.cliMaxThinking) || options.cliMaxThinking < 0) {
+    throw new Error("--cli-max-thinking は 0 以上の整数です");
+  }
+  if (options.cliEffort && !["low", "medium", "high", "xhigh", "max"].includes(options.cliEffort)) {
+    throw new Error(`--cli-effort は low | medium | high | xhigh | max のいずれかです: ${options.cliEffort}`);
+  }
   if (!Number.isInteger(options.concurrency) || options.concurrency < 1) {
     throw new Error("--concurrency は 1 以上の整数です");
   }
@@ -201,13 +222,19 @@ const CLAUDE_CLI_CWD = path.join(tmpdir(), "stats47-ai-content-claude-cli");
 
 /** run 中に CLI が実際に使った model ID (report の resolvedModel に載せる)。alias ではなく実 ID を記録する */
 let observedClaudeModelId: string | null = null;
-/** --no-json-schema で false。parseArgs 後に main が設定する */
-let cliJsonSchemaEnabled = true;
+/** --cli-json-schema で true。parseArgs 後に main が設定する */
+let cliJsonSchemaEnabled = false;
+/** --cli-max-thinking。子 env の MAX_THINKING_TOKENS に載せる (0 なら載せない) */
+let cliMaxThinking = 1024;
+/** --cli-effort。claude CLI の --effort に渡す (既定 low) */
+let cliEffort: string | null = "low";
 
 function callCli(
   model: string,
   promptContent: string,
   jsonSchema: Record<string, unknown> | null = null,
+  label = "cli",
+  useJsonSchema: boolean = cliJsonSchemaEnabled,
 ): Promise<ModelCallResult> {
   return new Promise((resolve, reject) => {
     let cmd: string;
@@ -235,9 +262,10 @@ function callCli(
         "--system-prompt",
         CLAUDE_CLI_SYSTEM_PROMPT,
       ];
-      if (jsonSchema && cliJsonSchemaEnabled) {
+      if (jsonSchema && useJsonSchema) {
         args.push("--json-schema", JSON.stringify(jsonSchema));
       }
+      if (cliEffort) args.push("--effort", cliEffort);
     } else if (model === "gemini") {
       cmd = "gemini";
       args = ["-p", "", "-o", "text"];
@@ -253,6 +281,8 @@ function callCli(
       if (key === "NODE_OPTIONS" || key === "CLAUDECODE" || key.startsWith("CLAUDE_")) continue;
       childEnv[key] = value;
     }
+    // thinking の上限。生成タスクは書式順守が主で長考の効果が薄く、output トークン (費用の主因) を直接減らす。
+    if (cwd && cliMaxThinking > 0) childEnv.MAX_THINKING_TOKENS = String(cliMaxThinking);
     const proc = spawn(cmd, args, {
       stdio: ["pipe", "pipe", "pipe"],
       env: childEnv,
@@ -274,6 +304,12 @@ function callCli(
       try {
         const parsed = parseClaudeCliOutput(stdout);
         if (parsed.modelId && !observedClaudeModelId) observedClaudeModelId = parsed.modelId;
+        // パイロットの実測用: どのモデルが何ターン回り、prompt が何トークンだったか (本文は出さない)
+        const b = parsed.breakdown;
+        process.stdout.write(
+          `  [cli:${label}] ${parsed.modelIds.join("+") || "?"} turns=${parsed.numTurns} ` +
+            `in=${b.input} cache_w=${b.cacheWrite} cache_r=${b.cacheRead} out=${b.output} cost=$${parsed.costUsd.toFixed(3)}\n`,
+        );
         resolve({
           text: parsed.text,
           attempts: 1,
@@ -295,7 +331,7 @@ async function callAI(options: {
   responseJsonSchema: Record<string, unknown>;
 }): Promise<ModelCallResult> {
   if (options.model !== "gemini-api") {
-    return callCli(options.model, options.prompt, options.responseJsonSchema);
+    return callCli(options.model, options.prompt, options.responseJsonSchema, "author");
   }
   const generated = await generateContentText({
     prompt: options.prompt,
@@ -441,6 +477,38 @@ function criticRevisionPrompt(
   return `${originalPrompt}\n\n## 前回候補の独立レビュー指摘\n\n次の問題をすべて解消し、JSON 全体を再生成してください。\n${feedback}`;
 }
 
+/**
+ * REJECT / FAIL した候補と critic 指摘を .local/ci/rejected に残す (git 管理外・outbox ではないので公開されない)。
+ * 何を書いて何を指摘されたかが残らないと prompt 側を直せない。
+ */
+function dumpDiagnostic(
+  rankingKey: string,
+  opts: Options,
+  diag: { attempts: number; failure: unknown; issues: unknown[]; row: AiContentSnapshotRow | null },
+): void {
+  const dir = path.join(PROJECT_ROOT, ".local/ci/rejected");
+  mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, `${rankingKey}-${Date.now()}.json`);
+  writeFileSync(
+    file,
+    `${JSON.stringify(
+      {
+        rankingKey,
+        model: opts.model,
+        critic: opts.critic,
+        attempts: diag.attempts,
+        failure: diag.failure,
+        criticIssues: diag.issues,
+        candidate: diag.row,
+      },
+      null,
+      2,
+    )}\n`,
+    "utf-8",
+  );
+  process.stdout.write(`        → 候補と critic 指摘を保存 (公開しない): ${file}\n`);
+}
+
 async function processOne(
   rankingKey: string,
   opts: Options,
@@ -450,6 +518,9 @@ async function processOne(
   const usage = { ...ZERO_USAGE };
   let authorRequests = 0;
   let criticRequests = 0;
+  // 診断用 (REJECT / FAIL のどちらでも残す)
+  let lastRow: AiContentSnapshotRow | null = null;
+  let lastIssues: Array<{ section: string; severity: string; message: string }> = [];
   try {
     const built = await buildRankingContentPromptForKey(rankingKey, opts.areaType);
     if (!built) {
@@ -517,6 +588,7 @@ async function processOne(
         createdAt: now,
         updatedAt: now,
       };
+      lastRow = row;
 
       const gate = await runAuditGate(row);
       if (!gate.ok) {
@@ -545,10 +617,14 @@ async function processOne(
           maxAttempts: 1,
         });
       } else if (isClaudeCliAlias(opts.critic)) {
+        // critic は常に --json-schema。schema なしだと section 欠落や平文「判定: REVISE」が返り parse 失敗で
+        // author の費用が無駄になる (2026-09-05 実測)。出力 ~600 トークンなので 2 ターン化の追加は ≈$0.02。
         const called = await callCli(
           opts.critic,
           buildGeminiCriticPrompt(rankingKey, parsed),
           GEMINI_CRITIC_RESPONSE_SCHEMA,
+          "critic",
+          true,
         );
         const verdict = parseGeminiCriticVerdict(stripCodeFence(called.text.trim()));
         reviewed = { ...verdict, attempts: called.attempts, usage: called.usage };
@@ -563,6 +639,7 @@ async function processOne(
             .map((issue) => `${issue.section}:${issue.severity}`)
             .join(" / ");
           lastFailure = { kind: "critic", detail: detail || "semantic review" };
+          lastIssues = reviewed.issues;
           if (attempt < maxAttempts) {
             authorPrompt = criticRevisionPrompt(prompt, reviewed.issues);
             process.stdout.write(
@@ -589,6 +666,12 @@ async function processOne(
       process.stdout.write(
         `[REJECT] ${rankingKey}: ${lastFailure?.kind ?? "gate"} (${maxAttempts} 回) ${lastFailure?.detail ?? ""}\n`,
       );
+      dumpDiagnostic(rankingKey, opts, {
+        attempts: maxAttempts,
+        failure: lastFailure,
+        issues: lastIssues,
+        row: lastRow,
+      });
       counters.rejected++;
       pushResult(
         results,
@@ -606,6 +689,14 @@ async function processOne(
     process.stdout.write(
       `[FAIL] ${rankingKey}: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}\n`,
     );
+    if (lastRow) {
+      dumpDiagnostic(rankingKey, opts, {
+        attempts: 0,
+        failure: { kind: "error", detail: err instanceof Error ? err.message.slice(0, 300) : String(err) },
+        issues: lastIssues,
+        row: lastRow,
+      });
+    }
     counters.fail++;
     pushResult(
       results,
@@ -717,6 +808,8 @@ async function main() {
   const startedAt = new Date().toISOString();
   const opts = parseArgs();
   cliJsonSchemaEnabled = opts.cliJsonSchema;
+  cliMaxThinking = opts.cliMaxThinking;
+  cliEffort = opts.cliEffort;
   const pending = await collectPendingKeys(opts);
   const targets = Number.isFinite(opts.limit)
     ? pending.slice(0, opts.limit)

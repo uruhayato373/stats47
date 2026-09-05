@@ -56,7 +56,9 @@ while [ $# -gt 0 ]; do
     --run-id) RUN_ID="$2"; shift 2 ;;
     --dry-run) DRY_RUN=1; shift ;;
     --no-push) NO_PUSH=1; shift ;;
-    --no-json-schema) EXTRA_GEN+=(--no-json-schema); shift ;;
+    --cli-json-schema) EXTRA_GEN+=(--cli-json-schema); shift ;;
+    --cli-max-thinking) EXTRA_GEN+=(--cli-max-thinking "$2"); shift 2 ;;
+    --cli-effort) EXTRA_GEN+=(--cli-effort "$2"); shift 2 ;;
     -h|--help) usage; exit 0 ;;
     *) die "unknown arg: $1 (--help で使い方)" ;;
   esac

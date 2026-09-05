@@ -1,13 +1,14 @@
-# Ranking AI content / Gemini latest
+# Ranking AI content / latest run
 
 - 更新日: 2026-09-05
-- GitHub Actions run: 33931685064-1
-- モデル: gemini-3.7-flash
-- 対象: 3 / PASS: 0 / REJECT: 0 / FAIL: 0 / SKIP: 3
-- 通過率: 0.0%
-- APIリクエスト: author 0 / critic 0
-- Preflight: billing / requests 1
-- トークン: input 0 / output 0 / thinking 0 / total 0
-- quota/billing 停止: 1
+- run: local-20260905-111959 (GitHub Actions run id、またはローカル batch の local-<date>-<time>)
+- モデル: claude-sonnet-5
+- 対象: 1 / PASS: 1 / REJECT: 0 / FAIL: 0 / SKIP: 0
+- 通過率: 100.0%
+- APIリクエスト: author 1 / critic 1
+- Preflight: not-recorded / requests 0
+- トークン: input 18916 / output 8413 / thinking 0 / total 27329
+- quota/billing 停止: 0
+- 費用 (API 換算。OAuth 実行では実請求ではない): $0.3487
 
 > 生成本文と prompt は記録しません。詳細履歴は [history.csv](./history.csv) を参照してください。

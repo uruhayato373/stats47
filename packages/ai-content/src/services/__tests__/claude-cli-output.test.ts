@@ -32,6 +32,22 @@ describe("claude CLI output", () => {
     expect(parsed.costUsd).toBe(0.1234);
   });
 
+  it("modelUsage に複数モデルがあれば使用量の多い方を modelId にする (補助 call の小モデルを主と誤認しない)", () => {
+    const parsed = parseClaudeCliOutput(
+      JSON.stringify({
+        ...successWrapper,
+        num_turns: 2,
+        modelUsage: {
+          "claude-haiku-4-5-20251001": { inputTokens: 300, outputTokens: 20 },
+          "claude-sonnet-5": { inputTokens: 7000, outputTokens: 6000 },
+        },
+      }),
+    );
+    expect(parsed.modelId).toBe("claude-sonnet-5");
+    expect(parsed.modelIds).toEqual(["claude-sonnet-5", "claude-haiku-4-5-20251001"]);
+    expect(parsed.numTurns).toBe(2);
+  });
+
   it("structured_output が無ければ result のテキストをそのまま返す (json fence は呼び元が剥がす)", () => {
     const parsed = parseClaudeCliOutput(JSON.stringify(successWrapper));
     expect(parsed.text).toBe(successWrapper.result);

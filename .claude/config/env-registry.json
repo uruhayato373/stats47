@@ -534,6 +534,13 @@
       ]
     },
     {
+      "name": "MAX_THINKING_TOKENS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "META_PAGE_ACCESS_TOKEN",
       "visibility": "server",
       "contexts": [
