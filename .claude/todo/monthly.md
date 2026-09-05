@@ -95,8 +95,11 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
   - **blog: 月 17-19 本**。既存の `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`
     (B5 / D2 4 / A 3-4 / F3 / G 1-2 / C_E 1-2) をそのまま SSOT として使う。**新しい数値を作らない。**
     月初からの実績を差し引いた残りを、残り週で割って weekly の Must に置く。
-  - **ai-content: Gemini 既定 3 件/日**。キューの残数は**目標ではなく在庫**として扱う。
-    `.claude/state/metrics/ai-content/history.csv` の quota 失敗・通過率・トークンを 7 回以上観測してから件数を見直す。
+  - **ai-content**: Gemini 日次 3 件/日は 08-30 から鍵の課金枯渇で停止中 (是正はオーナー)。在庫 1,445 件は
+    **ローカル headless Claude CLI バッチ** (`run-claude-batch.sh`・35 件/push・人が量と時期を決める) で消化する。
+    実測 (09-05 verify1): 1 件 ≈43K トークン・$0.51 API 換算・6/6 通過。「Gemini 3 件/日、在庫は目標にしない」の
+    前提だった 1 件 $17 (Agent tool 経路) は崩れたので、**月内の件数は最初の 35 件バッチで Pro/Max 枠の
+    レート制限が出るかを観測してから決める** (推測で置かない)。正典 `ranking-content-standards.md` §2026-09-05。
 
 - **今月のゴール（月末に検証可能）**:
   1. Claude Code/OAuth の ai-content 日次 workflow は廃止のまま

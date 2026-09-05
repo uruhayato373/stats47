@@ -281,7 +281,8 @@ headless `claude -p` を子プロセスで呼ぶ。prompt は約 5,000 字 (dry-
 | 公開 | outbox → **1 push = 1 commit ≤ 35 件** → develop → `publish-ai-content.yml` (人間 / セッションの push は発火する)。公開確認は R2 の内容一致で行う |
 | 記録 | `--output-format json` の usage / `total_cost_usd` を `history.csv` (`cost_usd` 列・末尾追加) と report に残す。inputTokens は cache を含む合算 = **1 request で 40K を超えたら rules が漏れ込んでいる**合図 |
 | quarantine | `failed` に載せるのは `status=rejected` (ゲート / critic 落ち) のみ。skip や CLI 障害・429 を数えると 3 run で大量 quarantine になる |
-| 分業 | author / critic = Sonnet 5 (Haiku 4.5 とパイロット比較で安い方)。**Opus 5 は manual-escalation 30 件 + quarantine のみ** Agent tool 経由。量産に Opus を使わない |
+| 分業 | author / critic = **Sonnet 5** (`--effort low`)。Haiku 4.5 は pilot 1 で **0/10** (括弧数値 4・数値範囲外 3・JSON 崩れ 1・京都府を中部に置く等の事実誤り) で author 不適。**Opus 5 は manual-escalation 30 件 + quarantine のみ** Agent tool 経由。量産に Opus を使わない |
+| 運転設定 | `--model claude-sonnet --critic claude-sonnet --retries 1 --concurrency 2 --limit 35` (= `run-claude-batch.sh` 既定)。verify1 実測: 6/6 通過 (1 回目 4・2 回目 2)、**$0.51/件・43K トークン/件・6 件 8 分** |
 | 不変 | Claude を CI cron で無人実行しない。量と時期は人が決める (月次 / 週次計画) |
 
 **pilot 0 実測 (2026-09-05・`library-count-per-million`・Sonnet 5 author+critic・1 回目 PASS)**:
@@ -296,6 +297,13 @@ REJECT だった。critic の指摘は正当で、原因は prompt の内部矛�
 繰り返さない・全セクションですます調・commentary は 2 文で 60 字以上・47 件で文型を変える)、次の 1 回で PASS。
 REJECT した候補と critic 指摘は `.local/ci/rejected/<key>-<ts>.json` に残る (公開しない) ので、落ちたら
 まずそれを読んで prompt 側を直す。
+
+**pilot 1 → verify1 (2026-09-05)**: Sonnet 9 件は 4/9 (全て 2-3 回目・$1.04/件) で、critic REVISE 15 回中 10 回が
+prefectureCommentary だった。dump を読むと原因は 2 つ: (a) **文字化け** — 子プロセス stdout を chunk ごとに
+`toString()` していて「滋賀県」が「��賀県」になっていた (transport のバグ・`createUtf8Collector` で修正、
+再現テストあり) (b) **定型化** — prompt が 47 件すべてに同じ 3 要素を義務づけていた (視点を県ごとに
+入れ替える指示へ変更)。両方入れた verify1 は落ちた 5 件 + 1 件で **6/6 (1 回目 4・2 回目 2)、$0.51/件**。
+critic の指摘は毎回正当だった (事実誤り・文字化け・反復)。**critic を緩めずに author 側を直す**のが正しい順序。
 
 #### 履歴: 2026-08-21 に Claude 日次 CI を廃止した理由
 

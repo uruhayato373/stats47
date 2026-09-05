@@ -416,15 +416,16 @@ updated: 2026-08-30
 
 - **owner**: ranking-content-author
 - **次**:
-  1. **オーナー**: 端末で `claude login` を一度やり直す (CLI の OAuth token が 401 revoked・2026-09-05 実測)。
-     その後 `cd ~/stats47-ai-content-lean && bash .claude/scripts/ai-content/run-claude-batch.sh --keys library-count-per-million --no-push`
-     で pilot 0 (1 件)。summary の 1 request あたり input が 7-8K 台なら rules 非混入・OK。40K 超なら cwd / `--setting-sources` を疑う
-  2. pilot 1: `--limit 10 --model claude-haiku --retries 2` と `--limit 10 --model claude-sonnet --retries 2` を各 1 回。
-     一次通過率 ≥80% の最安を author に採用。数値を `ranking-content-standards.md` §2026-09-05 と `monthly.md` に書く
-  3. 以後 `--limit 35` を develop で回す (1 push = 1 commit)。manual-escalation 30 件 + quarantine だけ Opus Agent tool
-  4. (並走・別件) 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
+  1. develop で `bash .claude/scripts/ai-content/run-claude-batch.sh` (既定 35 件 / Sonnet / retries 1 / concurrency 2) を
+     1 push = 1 commit で回す。**最初の 35 件バッチで Pro/Max 枠のレート制限 (`claude-error_*` reason) が出るかを観測**し、
+     1 日の件数はそこから決める (推測で置かない)。公開後は `audit-ai-content.mjs <key>` で R2 の内容一致を見る
+  2. manual-escalation 30 件 + quarantine だけ Opus Agent tool (`ranking-content-author` を `model: opus` で起動)
+  3. (並走・別件) 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
      `ai-content-gemini-daily.yml` を復旧する。既定 3 件/日・並列 1 を維持し、7 run 以上の
      通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない
+- **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
+  2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
+  運転設定を `run-claude-batch.sh` の既定に焼いた。outbox 11 件を最初の publish に載せる。正典 `ranking-content-standards.md` §2026-09-05
 - **2026-09-05 checkpoint**: Gemini 日次 CI は 08-30 から `preflight_status=billing` で 8 run 連続 PASS 0 (鍵の
   前払いクレジット枯渇。モデル品質ではない)。残 1,445 件 (done 718 / active 2,163) を Claude で消化するため、
   Agent tool 経路 (1 件 $16-18) ではなく **headless `claude -p` 経路**を整備した:
