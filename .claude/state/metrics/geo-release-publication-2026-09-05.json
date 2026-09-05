@@ -3046,7 +3046,16 @@
       "retiredPagePolicy": "fishing-port-count redirects to fishing-port-count-ksj with query preservation; eight non-equivalent rankings return 410",
       "deletionPrecondition": "Immutable backup inventory, exact key/size/ETag match before deletion, code retirement deployed before removing ranking assets"
       ,"additionalUserResponse": "進めて",
-      "additionalApprovedScope": "Recompute port-count from primary single-year sources and retire the three identified legacy-data blog articles; include in consolidated release"
+      "additionalApprovedScope": "Recompute port-count from primary single-year sources and retire the three identified legacy-data blog articles; include in consolidated release",
+      "roadsideRefreshUserResponse": "更新すべきものは更新して　古い資産は削除して",
+      "roadsideRefreshApprovedScope": "Update the three identified roadside blogs from the current official registration source and delete only verified obsolete exact assets after replacement publication; preserve verified backups",
+      "roadsideRefreshBackup": {
+        "inventory": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/backup-inventory.json",
+        "objects": 47,
+        "bytes": 2379446,
+        "verification": "S3 IfMatch GET, SHA-256, exact bytes, and before/after inventory equality",
+        "deleted": 0
+      }
     },
     "datasetIds": [
       "C02",
@@ -3133,7 +3142,7 @@
       "resume": "23 snapshots published before narrow wrapper rejected asset lock keys; existing 23 verified and skipped, remaining 171 published after deriving exact lock hashes from the unchanged plan. All locks released; no broad restore.",
       "additionalBlogRetirement": "APPROVED; three slugs removed from shared R2 index, code retirement implemented, exact 53 asset deletion held until live 410",
       "remainingExactDeletions": { "retiredRankingAssets": 125, "oldNormalization": 2, "retiredBlogAssets": 53, "oldPortNormalization": 1 },
-      "freshTaxonomyFinding": "Post-publication full blog audit:529articles/1371charts/965resolved/136unresolved/190missing/74.75%coverage; exceeds existing ratchet. Do not lower gates or restore old state to hide findings. Three additional roadside blogs retain old2018 values; user choice requested before rewriting.",
+      "freshTaxonomyFinding": "Post-publication full blog audit:529articles/1371charts/965resolved/136unresolved/190missing/74.75%coverage; exceeds existing ratchet. Do not lower gates or restore old state to hide findings. User has approved rewriting the three roadside blogs and removing verified obsolete assets; author and independent-review pipeline in progress.",
       "localAcceptance": { "passed": 1038, "failed": 0, "report": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905/final-local-acceptance-v2.json", "scope": "Geo stage200/301 according to canonical resolver, final query routes, replacements/downloads and retirement URLs; code not deployed" }
     },
     "next": "Resolve final taxonomy findings, finish search and survey checks, deploy retirement code once, remove 181 approved old assets, purge CDN and verify live acceptance"

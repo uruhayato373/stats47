@@ -46,6 +46,11 @@ describe("resolveSurveyTaxonomy", () => {
   it.each([
     ["0003130738", "port-statistics"],
     ["0003441258", "retail-price-survey"],
+    ["0003348240", "kakei-chousa"],
+    ["0003343671", "kakei-chousa"],
+    ["0003343670", "kakei-chousa"],
+    ["0003427113", "cpi-annual"],
+    ["0003423613", "resident-registry-migration-report"],
   ])("registry 外の一次統計 %s も statsDataId override で %s へ解決する", (statsDataId, surveyId) => {
     const result = resolveSurveyTaxonomy(
       { estatReferences: [{ statsDataId }] },
@@ -75,6 +80,15 @@ describe("resolveSurveyTaxonomy", () => {
     expect(result.surveys.map((survey) => survey.id)).toEqual(["weather-statistics"]);
     expect(result.resolvedSourceNames).toEqual(["過去の気象データ"]);
     expect(result.unresolvedSourceNames).toEqual(["存在しない資料源"]);
+  });
+
+  it.each(["future-population", "future-population-change-rate-2050"])("IPSS 指標 %s の版付き正式名を既存の調査へ接続する", (metricKey) => {
+    const result = resolveSurveyTaxonomy(
+      { metricKeys: [metricKey] },
+      METRICS_REGISTRY,
+    );
+    expect(result.surveys.map((survey) => survey.id)).toEqual(["population-projection"]);
+    expect(result.unresolvedMetricKeys).toEqual([]);
   });
 
   it.each([
