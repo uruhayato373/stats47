@@ -252,5 +252,7 @@
     }
   ],
   "transform": "各地点を同県メッシュ[西,東)×[南,北)へ包含結合。前年比欠測・2020人口0・未接続を除外し、前年比>0かつ2050人口<2020人口の地点数/比較可能地点数×100。",
-  "restore": "npx tsx docs/21_ブログ記事原稿/population-decline-land-price-divergence/generate-data.ts <verified-geo-bundle>"
+  "restore": "npx tsx docs/21_ブログ記事原稿/population-decline-land-price-divergence/generate-data.ts <verified-geo-bundle>",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "地価地点と人口メッシュの包含結合、比較対象の選別、東京都の保存則と1地点の数値例を説明するGIS計算工程図であり、統計調査の集計表を再掲する図ではない。"
 }

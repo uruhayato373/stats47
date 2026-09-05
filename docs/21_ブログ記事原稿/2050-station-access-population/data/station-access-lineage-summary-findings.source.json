@@ -1,5 +1,7 @@
 {
   "kind": "derived",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "人口メッシュと駅データの入力、直線距離判定、47県集計までの処理順と件数をcanonical Geo manifestから説明するGIS計算工程図であり、統計調査の集計表ではない。",
   "source": "r2:app/geo/population-station-access/manifest.json",
   "formula": "inputs[]・stages[]・quality の件数と処理順を要約",
   "label": "人口メッシュから47県集計までの計算系譜",

@@ -1,5 +1,7 @@
 {
   "kind": "derived",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "人口メッシュと洪水ポリゴンの入力件数、中心点包含、重複除去、県別保存則を数値付きで説明するGIS計算工程図であり、統計調査の観測結果を転載する図ではない。",
   "source": "r2:app/geo/population-flood-risk/item.json",
   "inputs": [
     {

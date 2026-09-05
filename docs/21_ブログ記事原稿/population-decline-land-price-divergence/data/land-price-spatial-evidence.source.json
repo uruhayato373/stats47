@@ -252,5 +252,7 @@
     }
   ],
   "transform": "各地点を同県メッシュ[西,東)×[南,北)へ包含結合。前年比欠測・2020人口0・未接続を除外し、前年比>0かつ2050人口<2020人口の地点数/比較可能地点数×100。",
-  "restore": "npx tsx docs/21_ブログ記事原稿/population-decline-land-price-divergence/generate-data.ts <verified-geo-bundle>"
+  "restore": "npx tsx docs/21_ブログ記事原稿/population-decline-land-price-divergence/generate-data.ts <verified-geo-bundle>",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "地価公示地点と将来人口メッシュの包含結合を独自に計算した県別値、全国保存則、地点追跡例の補助成果物であり、統計調査の集計表ではない。入力49件のSHAと計算手順は本manifestに保持する。"
 }
