@@ -529,8 +529,9 @@ async function main() {
     await writeFile(OUTPUT_PATH, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
   }
   if (errors.length > 0) throw new Error(errors.join("\n"));
+  const verdict = command === "check" && !checkRemote ? "METADATA_ONLY remote=NOT_CHECKED" : "PASS";
   console.log(
-    `[geo-data-catalog] PASS inventory=${catalog.source.inventoryMode} candidates=${catalog.summary.candidateCatalog} registered=${catalog.summary.registered} acquired=${catalog.summary.r2Acquired} missing=${catalog.summary.registeredMissingR2} openGeo=${catalog.openDataCatalog.geometryDatasetCount}`,
+    `[geo-data-catalog] ${verdict} inventory=${catalog.source.inventoryMode} candidates=${catalog.summary.candidateCatalog} registered=${catalog.summary.registered} acquired=${catalog.summary.r2Acquired} missing=${catalog.summary.registeredMissingR2} openGeo=${catalog.openDataCatalog.geometryDatasetCount}`,
   );
 }
 

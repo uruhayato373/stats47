@@ -21,18 +21,6 @@ updated: 2026-08-30
 
 ## 🔴 高 — 今月中に着手したい
 
-### [GEO-NOTE-PAID-BOUNDARY-UPDATE-01] Geo有料note4本の有料境界を再設定して修正版へ更新する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:ユーザー] [起票:2026-09-05]
-
-- **owner**: uruhayato373（有料境界と更新確定）/ note-manager（反映後記録）/ r2-publisher（private保存）
-- **状態**: 修正版4本は下書き保存後の再読込まで完了。有料境界の再設定と最終更新は未実行。
-- **対象**: `n137cfc540d23`（人口・1,980円）、`n23a2071a016f`（地価・2,980円）、`nfe50fb61efc0`（洪水・2,980円）、`n041e38af8fb5`（駅・2,980円）。既存記事の更新であり、新規出品しない。
-- **復元元**: `.local/note-private-staging/2026-09-05-geo-update-7bb259699/`に修正版・ZIP・UI証拠71ファイルをSHA検証付き保存。`ui-handoff.json`が編集URLと境界手順を持つ。公開済み原稿/private R2を先に上書きしない。
-- **次**: 各記事の有料境界を所定位置へ戻し、プレビューで無料/有料部分を確認して更新を確定する。公開版との一致確認後、承認済みprivate保存経路で修正版本文・画像・manifestを保存し、SHA/bytesと公開記録を更新する。
-- **停止条件**: 境界未確認で更新しない。有料本文・画像・商品ZIPをpublic bucketへ置かない。下書き保存を公開完了と扱わない。
-- **完了条件**: 4本すべて有料境界・公開修正版が確認済みで、private bundleのSHA/bytesと運用記録が一致する。
-
 ### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] 非商用KSJのpublic mirrorと公開構造化ランキングを是正する
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
@@ -40,18 +28,33 @@ updated: 2026-08-30
 - **owner**: gis-curator（利用条件SSOT）/ r2-publisher（exact削除）/ ranking-publisher（代替・廃止）
 - **現状証拠**: 公式個別ページで`non-commercial`の11件
   `C02,C09,C23,P03,P12,P13,P17,P18,P35,W01,W05`がpublic R2にあり、合計48,973,241 bytes。
-  `W01/P03/P12/P35/C09`由来の公開ランキング10本（`dam-count`、発電施設6本、`tourism-resource-count`、
-  `roadside-station-count`、`fishing-port-count-ksj`）も`app/stats` JSONを公開している。
+  `W01/P03/P12/P35/C09`由来の公開ランキングは11本（`dam-count`、発電施設6本、`tourism-resource-count`、
+  `roadside-station-count`、`fishing-port-count-ksj`、GIS側のmappingから漏れていた`fishing-port-count`）。
+  11ランキング・CSV11・JSON11はGooglebot UAで全200。元GIS435件だけの撤去では是正にならない。
+- **検証付き退避**: `.local/license-remediation/inventory-2026-09-05T13-21-55-281Z/`に元GIS435件、
+  `rankings-2026-09-05T13-47-55-827Z/`にランキング専有152件・共有参照7件をSHA/ETag付きで保存。
+  後者の`public-urls.json`がexact URL、`impact-assessment.json`が影響/復元条件。共有一覧は丸ごと削除・旧版復元しない。
+- **置換候補2本**: 道の駅は国交省2026-09-04一覧1234駅、漁港KSJは水産庁2026-04-01一覧2768港。
+  PDL一次資料のSHA・47県・全国保存則を確認しconfig/抽出器を実装。公開R2は旧版のまま。
+  `.local/license-remediation/official-replacements-20260905/handoff-manifest.json`に13候補と証拠56件を固定。
+  道の駅の解説は独立critic PASS、両系列の正規化・national-trendまで再生成済み（分母は既存規則で人口2024/面積2023年）。
+  公開時はitem/valuesだけでなく解説・人口/面積正規化・national-trend・全国派生・画像/相関を同時点検する。
+- **方針判断9本**: `dam-count`、`hydroelectric-power-plant-count`、`thermal-power-plant-count`、
+  `nuclear-power-plant-count`、`geothermal-power-plant-count`、`wind-power-plant-count-facility`、
+  `biomass-power-station-count`、`tourism-resource-count`、`fishing-port-count`。
+  発電所の代替統計は集計対象が異なり単純置換不可。ダム/観光資源も同一定義の商用可一次資料は未確定。
 - **実装済みの再発防止**: `license-policy.ts`で元データ公開と商用成果物を分離し、data-catalog check、
-  KSJ ranking生成、Geo bundle生成をfail-closed化。11 prefixと旧Geo運用JSONを`r2-retention.ts`のexact allowlistへ追加。
+  KSJ ranking生成、Geo bundle生成、汎用R2 publisher、KSJバズ地図入力をfail-closed化。
+  同一keyの一次資料置換後もrecipe/SHA/版/47県/合計で旧stagingを拒否。11 prefixと旧Geo運用JSONは`r2-retention.ts`のexact allowlist。
 - **次（実行順）**:
   1. `r2-retention.ts --target license-remediation-ksj-<id>`のdry-run結果を保存し、承認後にworkflowで11 prefixを削除する。
-  2. 10ランキングごとに、商用可の一次資料への置換、国土数値情報事務局/原権利者の書面許諾、公開終了+適切な転送のいずれかを決める。
+  2. 置換候補2本は派生データを含め一括更新する。残り9本は商用可一次資料への置換、書面許諾、公開終了+適切な転送のいずれかを決める。
   3. 書面許諾の場合は、非データベースの空間演算結果、広告付きWeb表示、47行JSON、CSV/販売物の各利用形態を明記して回答を保存する。
-  4. 許諾/置換が完了するまでは新規生成・更新・SNS転用・有料商品化を止める。既存ページは対応方針決定後に一括是正する。
+  4. 許諾/置換が完了するまでは旧KSJからの新規生成・更新・SNS転用・有料商品化を止める。既存ページは対応方針決定後に一括是正する。
+  5. 関連SNSは台帳posted6/draft2を検出。旧11ランキング系列の外部投稿は未検証のため、Geo15投稿の検証済み結果と混同せず、方針決定後に個別確認する。
 - **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。remote削除、ランキング停止、
   301/410、sitemap変更、デプロイは影響URLとrollbackを提示して別途承認を得る。
-- **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。10ランキングは商用可source/書面許諾IDを持つか、
+- **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。11ランキングは商用可source/書面許諾IDを持つか、
   config・R2・sitemap・内部リンク・記事/SNSを含めて廃止され、本番URLとGooglebot UAで方針どおりのstatusを確認する。
 
 
