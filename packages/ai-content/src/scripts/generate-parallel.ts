@@ -230,12 +230,49 @@ let cliMaxThinking = 1024;
 /** --cli-effort。claude CLI の --effort に渡す (既定 low) */
 let cliEffort: string | null = "low";
 
-function callCli(
+/** サーバー側の一時スロットリング。利用枠 (usage limit) とは別物で、待てば通る */
+const TRANSIENT_CLI_ERROR_RE = /temporarily limiting|rate limited|overloaded|529|503/i;
+const CLI_TRANSIENT_RETRIES = 3;
+const CLI_TRANSIENT_BACKOFF_MS = 30_000;
+
+/**
+ * callCliOnce を包み、一時スロットリングだけを待って再試行する (最大 CLI_TRANSIENT_RETRIES 回・30s/60s/90s)。
+ * 2026-09-05 実測: "API Error: Server is temporarily limiting requests (not your usage limit) · Rate limited" が
+ * exit 1 で返り、そのまま key の attempt を消費して FAIL になっていた (batch1 の 26 件即失敗もこれの疑い)。
+ * 利用枠の枯渇・未ログイン等は再試行しない (待っても通らない)。
+ */
+async function callCli(
   model: string,
   promptContent: string,
   jsonSchema: Record<string, unknown> | null = null,
   label = "cli",
   useJsonSchema: boolean = cliJsonSchemaEnabled,
+): Promise<ModelCallResult> {
+  let attempt = 0;
+  for (;;) {
+    try {
+      const result = await callCliOnce(model, promptContent, jsonSchema, label, useJsonSchema);
+      if (attempt > 0) result.attempts += attempt;
+      return result;
+    } catch (e) {
+      const transient = e instanceof ClaudeCliError && TRANSIENT_CLI_ERROR_RE.test(e.message);
+      if (!transient || attempt >= CLI_TRANSIENT_RETRIES) throw e;
+      attempt += 1;
+      const wait = CLI_TRANSIENT_BACKOFF_MS * attempt;
+      process.stdout.write(
+        `  [cli:${label}] 一時スロットリング → ${wait / 1000}s 待って再試行 (${attempt}/${CLI_TRANSIENT_RETRIES})\n`,
+      );
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+}
+
+function callCliOnce(
+  model: string,
+  promptContent: string,
+  jsonSchema: Record<string, unknown> | null,
+  label: string,
+  useJsonSchema: boolean,
 ): Promise<ModelCallResult> {
   return new Promise((resolve, reject) => {
     let cmd: string;
