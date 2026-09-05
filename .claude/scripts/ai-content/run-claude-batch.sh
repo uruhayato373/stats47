@@ -123,7 +123,8 @@ if [ -z "$KEYS" ]; then
     | sed '/^$/d' > "$CI_DIR/targets-$RUN_ID.txt"
   KEYS="$(paste -sd, "$CI_DIR/targets-$RUN_ID.txt")"
 fi
-COUNT="$(printf '%s' "$KEYS" | tr ',' '\n' | sed '/^$/d' | wc -l | tr -d ' ')"
+# ★末尾改行を付けてから数える。'%s' だと最後のキーに改行が無く wc -l が 1 少なくなる (1 件指定で 0 = 「対象なし」・2026-09-05 実測)
+COUNT="$(printf '%s\n' "$KEYS" | tr ',' '\n' | sed '/^$/d' | wc -l | tr -d ' ')"
 [ "$COUNT" -gt 0 ] || { log "対象なし (キューが空か全件 quarantine)"; exit 0; }
 [ "$COUNT" -le 40 ] || die "対象 $COUNT 件 > publish MAX_PUBLISH=40。--limit か --keys を減らす"
 log "対象 $COUNT 件: $(printf '%s' "$KEYS" | tr ',' ' ')"
