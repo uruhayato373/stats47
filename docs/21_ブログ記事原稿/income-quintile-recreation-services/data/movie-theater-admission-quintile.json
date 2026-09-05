@@ -1,0 +1,43 @@
+{
+ "title": "映画・演劇等入場料（年収五分位別）",
+ "unit": "円",
+ "year": "2024",
+ "data": [
+  {
+   "areaName": "平均",
+   "rank": 0,
+   "value": 7059,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅰ階級（下位20%）",
+   "rank": 1,
+   "value": 3523,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅱ階級",
+   "rank": 2,
+   "value": 4446,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅲ階級（中位）",
+   "rank": 3,
+   "value": 7231,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅳ階級",
+   "rank": 4,
+   "value": 7196,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅴ階級（上位20%）",
+   "rank": 5,
+   "value": 12898,
+   "unit": "円"
+  }
+ ]
+}

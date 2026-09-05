@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "tuna-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "まぐろ消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/tuna-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fish-catch-vs-consumption-prefecture --keys tuna-consumption-expenditure --data-name tuna-consumption-ranking",
+  "fetchedAt": "2026-09-05T10:05:05.788Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

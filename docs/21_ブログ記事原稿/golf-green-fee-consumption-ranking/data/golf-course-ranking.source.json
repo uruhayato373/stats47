@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "golf-course-public",
+  "year": "2021",
+  "unit": "施設",
+  "label": "ゴルフ場数（公共）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/golf-course-public/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug golf-green-fee-consumption-ranking --keys golf-course-public --data-name golf-course-ranking",
+  "fetchedAt": "2026-09-05T10:13:44.827Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
