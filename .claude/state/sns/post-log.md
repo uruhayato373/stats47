@@ -3,7 +3,7 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**529 件** (最終更新: 2026-09-05)
+**526 件** (最終更新: 2026-09-05)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
@@ -62,12 +62,10 @@
 | 2026-07-30 | 📸 Instagram | ranking/grade-separated-pedestrian-crossings-per-1000-km |  | [🔗](https://www.instagram.com/p/DbZ9iyUEbpk/) |
 | 2026-07-30 | 📸 Instagram | ranking/wooden-housing-ratio |  | [🔗](https://www.instagram.com/p/DbZXQL3EegH/) |
 | 2026-07-30 | 𝕏 X | ranking/police-expenses-prefecture | 1位東京都6,295億円、2位大阪府2,657億円、3位神奈川県1,967億円。  47位鳥取県はわずか161億円で、最… | [🔗](https://x.com/stats47jp373/status/2082602074676900203) |
-| 2026-07-30 | 𝕏 X | ranking/nuclear-power-plant-count | このデータを使う3ステップ。 ①1位福島県13か所を起点に立地県の分布を確認 ②2位京都府8か所・3位新潟県7か所と比較… | [🔗](https://x.com/stats47jp373/status/2082632267172638960) |
 | 2026-07-30 | 𝕏 X | ranking/foreign-resident-count-china-per-100k | なぜ東京都の外国人人口比率がこれほど高いのか?  1位東京都1,393.4人、2位埼玉県783.9人、3位千葉県780.… | [🔗](https://x.com/stats47jp373/status/2082768166065705405) |
 | 2026-07-29 | 📸 Instagram | ranking/port-vehicle-ferry |  | [🔗](https://www.instagram.com/p/DbYFUQmFnqQ/) |
 | 2026-07-29 | 📸 Instagram | ranking/household-head-annual-income-per-household |  | [🔗](https://www.instagram.com/p/DbXaBOqG-sk/) |
 | 2026-07-29 | 📸 Instagram | ranking/public-rent-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbWya3Qlh-7/) |
-| 2026-07-29 | 𝕏 X | ranking/wind-power-plant-count-facility | 「風力発電は西日本が盛ん」と思われがちですが、実際は北海道50か所、青森県30か所と北日本が上位を独占。  山梨県・岐阜… | [🔗](https://x.com/stats47jp373/status/2082284982047760819) |
 | 2026-07-29 | 𝕏 X | ranking/air-conditioner-consumption-quantity | エアコン消費量、1位香川県0.2台 vs 47位大分県0.022台。  差は9.1倍。  意外にも猛暑イメージの強い九州… | [🔗](https://x.com/stats47jp373/status/2082300082095820912) |
 | 2026-07-29 | 𝕏 X | ranking/unmarried-ratio-male-30-34 | もし未婚率51.8%の秋田県で30代前半を過ごしていたら、周囲も独身の人が多いはずです。  47位大阪府は39.3%で差… | [🔗](https://x.com/stats47jp373/status/2082435984461812118) |
 | 2026-07-28 | 📸 Instagram | ranking/psychiatric-hospital-bed-occupancy-rate |  | [🔗](https://www.instagram.com/p/DbVf8ltmpdj/) |
@@ -135,7 +133,6 @@
 | 2026-07-15 | 📸 Instagram | ranking/maritime-import-export-cargo |  | [🔗](https://www.instagram.com/p/Daz_HUxGUkv/) |
 | 2026-07-15 | 📸 Instagram | ranking/total-overnight-guests-foreign |  | [🔗](https://www.instagram.com/p/DazUc2hG6Bo/) |
 | 2026-07-15 | 📸 Instagram | bar-chart-race/serious-crime-per-100k |  | [🔗](https://www.instagram.com/reel/DayurtyCTDN/) |
-| 2026-07-15 | 𝕏 X | ranking/tourism-resource-count | もし福岡県に住んでいたら。  観光資源数は全国最多の389件。 2位佐賀県366件、3位茨城県246件と続きます。 47… | [🔗](https://x.com/stats47jp373/status/2077362549981331845) |
 | 2026-07-14 | 📸 Instagram | ranking/travel-participation-rate-overseas |  | [🔗](https://www.instagram.com/p/DaxZ6WPoG_e/) |
 | 2026-07-14 | 📸 Instagram | ranking/flood-affected-rivers |  | [🔗](https://www.instagram.com/p/Dawvjw3G6B2/) |
 | 2026-07-14 | 📸 Instagram | bar-chart-race/total-outpatients |  | [🔗](https://www.instagram.com/reel/DawJ5ZTgJQG/) |
