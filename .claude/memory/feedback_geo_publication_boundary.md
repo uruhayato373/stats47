@@ -69,6 +69,13 @@ active指標へのreaderQuestionsと対象年の説明を更新し、`build-surv
 一覧を退避し、canonical resolverによる出典再計算と終了slug除外だけをCASで反映する。
 別記事の更新日・行を保持し、旧一覧を丸ごと復元しない。writer未特定・再発防止未検証は残件にする。
 
+**共有索引の生成基底（2026-09-06）**: 巻き戻りの実行元は`blog-auto-publish.yml` run34002167867。
+修正前checkoutが共有一覧を再生成し、生成時刻00:53:34と保存した不具合bodyの時刻が一致した。
+PUT直前のHEADだけを条件にしても、生成後の別更新は検出できない。生成器・出典辞書のfingerprintと
+生成時R2の内容hashをsnapshotへ焼き、`blog-publication-guard.ts`で終了slug・基底一致・ETag条件を検査する。
+旧stagingへ印だけ後付けしない。guardを持たない旧checkoutは保護できないため、mainだけでなく
+developを読む公開workflowにも変更を届け、競合時は最新R2から再生成する。
+
 **問題**: `/geo/2050-population`が、単一指標の都道府県コロプレスと順位比較だけをGeo分析として公開していた。Geoハブとテーマ導線もこのbaselineを空間分析の1件として数え、ランキングページと責務が重複した。
 
 **原因**: データ定義は`analysisKind: 'baseline'`と正しく分類していたが、`BUSINESS_PLAN_M1_GEO_ANALYSES`がbaselineとspatial-crossを同じ配列に保持し、公開UIが全件を無条件に列挙していた。さらにbaselineだけ専用static routeを持ち、snapshot・lineage manifest・県別途中artifactを必須にする共通Geo routeを迂回していた。当時の受入条件も「地図・上位下位・県比較」を完了条件にしており、空間演算の有無を検証していなかった。

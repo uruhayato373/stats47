@@ -18,6 +18,8 @@ export interface SnapshotTagMeta {
 }
 
 export interface BlogSnapshot {
+  /** Publisher-only generation/base guard; legacy readers remain compatible. */
+  publication?: { contractSha256: string; baseSnapshotSha256: string };
   /** v2: surveyIds と surveyArticleIndex を同時に焼き込む。未指定は旧 snapshot。 */
   schemaVersion?: 2;
   generatedAt: string;

@@ -3245,13 +3245,23 @@
           "diagnosis": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/shared-index-final-verification.json",
           "backupPreserved": true,
           "repairBoundary": "Current S3 used as base; canonical resolver recalculated20 surveyIds; retired3 removed through existing excludeGoneBlogArticles; every other article field preserved; exact IfMatch PUT plus SHA readback",
-          "writerIdentified": false,
+          "writerIdentified": true,
+          "writerEvidence": {
+            "workflow": "blog-auto-publish.yml",
+            "runId": 34002167867,
+            "headSha": "e9bdc49532f9545c0c5ccf9c7771f2ed7ee8dc3c",
+            "generatedAt": "2026-09-06T00:53:34.197Z",
+            "logExportCompletedAt": "2026-09-06T00:53:34.209955Z",
+            "logUploadCompletedAt": "2026-09-06T00:53:36.839192Z",
+            "uploadedAssets": 18,
+            "explanation": "The pre-retirement exporter generated548 rows and diff-push overwrote the shared index without a generation-base check. Saved faulty body generatedAt matches this run."
+          },
           "publicVerification": "SEMANTIC_PASS_CURRENT_S3_MATCH; checked2026-09-06T01:52:58.505Z;545 rows, no target drift, retired slug reappearance0, duplicates0;11 unrelated updatedAt changes preserved",
           "publicVerificationReport": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/shared-index-post-repair-verification.json",
           "publicVerificationReportSha256": "98b88904d98dd2c148147268f580e06ab53430e43f031e556ebad62cf73dfe41",
           "targetedPurgeRun": 34004969504,
           "targetedPurgeStatus": "SUCCESS",
-          "recurrencePreventionStatus": "OPEN; current exporter filters GONE slugs, but stale shared-index upload writer is not yet identified or proven blocked"
+          "recurrencePreventionStatus": "LOCAL_GUARD_TESTS_PASS; generator/taxonomy fingerprint, retired slug rejection, generation-base hash and conditional ETag PUT added to diff/exact. Wrangler rejects shared index. Main/develop rollout and live guarded publication still pending."
         },
         "sharedBlogRows": 545,
         "unrelatedRecordsPreserved": true
@@ -3265,7 +3275,20 @@
       "mergeCommit": "2c83dadfd",
       "verification": "After fetch, origin/develop..origin/main is empty; PR929 OPEN/MERGEABLE. Historical preview conflicts superseded. This task did not resolve conflicts or publish unrelated develop work."
     },
-    "next": "Approved exact legacy cleanup is complete; do not rerun deleted targets or delete backups. Identify stale shared-index writer and prevent retirement/taxonomy regression across all publication paths. Separate legacy SNS posted6/draft2 references remain externally unverified. Do not interfere with separate develop release work."
+    "legacySnsVerification": {
+      "checkedDate": "2026-09-06",
+      "xPublishedConfirmedIds": [592, 632, 636],
+      "instagramPublishedConfirmedIds": [749, 796, 800],
+      "xScheduledCardsInspected": 72,
+      "targetScheduledMatches": 0,
+      "themeDraftsUpdatedIds": [841, 855],
+      "themeDraftGate": "2/2 caption lint, landing200/no redirect,1200x630 image/SHA PASS; old fishing-port-count removed; status=draft,scheduled_at=null; no new post inserted",
+      "externalMutation": "NONE; deletion approval pending for the exact six old-data posts",
+      "evidenceDirectory": ".local/license-remediation/roadside-refresh-20260906/",
+      "xEvidence": "legacy-x-confirmed.json",
+      "instagramAndScheduleEvidence": "legacy-sns-live-audit.json"
+    },
+    "next": "Approved legacy R2 cleanup complete; preserve backups. Ship verified blog guard to main and develop, regenerate shared index and verify readback. Exact6 old SNS posts remain publicly visible pending deletion approval; theme draft2 remediated and unscheduled. Do not interfere with separate develop work."
   },
   "followupVerification": {
     "publishedOutboxCleanup": {
