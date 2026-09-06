@@ -310,70 +310,77 @@ async function installPatch(page, before, updatedBody, plan, visibilityNudge = n
       await route.continue();
       return;
     }
-    const payload = request.postDataJSON();
-    if (Number(payload.price || 0) !== before.price) throw new Error("price changed before update");
-    const targetSeparator = visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")
-      ? visibilityNudge.restoreSeparator
-      : before.separator;
-    if (visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")) {
-      payload.separator = targetSeparator;
-    }
-    const legacyFreeBoundary = before.price === 0 && Boolean(targetSeparator);
-    if (!legacyFreeBoundary && (payload.separator || null) !== targetSeparator) {
-      throw new Error("separator changed before update");
-    }
-    if (!Array.isArray(payload.hashtags)) throw new Error("hashtags are missing");
-    if (payload.hashtags.length !== before.hashtagCount) {
-      throw new Error("hashtags changed before update");
-    }
-    if (typeof payload.free_body !== "string") throw new Error("free body is missing");
-    if (before.price > 0 && typeof payload.pay_body !== "string") throw new Error("paid body is missing");
-    if (legacyFreeBoundary && String(payload.pay_body || "").length > 0) {
-      throw new Error("legacy free article unexpectedly has paid body");
-    }
-    const currentBody = before.price > 0
-      ? `${payload.free_body}${payload.pay_body}`
-      : payload.free_body;
-    if (visibilityNudge) {
-      if (payload.exclude_from_creator_top !== visibilityNudge.expectedExclude) {
-        throw new Error("クリエイターページ表示の一時変更を確認できません");
+    try {
+      const payload = request.postDataJSON();
+      if (Number(payload.price || 0) !== before.price) throw new Error("price changed before update");
+      const targetSeparator = visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")
+        ? visibilityNudge.restoreSeparator
+        : before.separator;
+      if (visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")) {
+        payload.separator = targetSeparator;
       }
-      payload.exclude_from_creator_top = visibilityNudge.restoreExclude;
-    }
-    if (!legacyFreeBoundary && fnv1a(currentBody) !== before.bodySignature) {
-      throw new Error("published body changed before update");
-    }
-    const payBodySignature = before.price > 0 ? fnv1a(payload.pay_body) : null;
-    if (legacyFreeBoundary) payload.separator = targetSeparator;
-    if (before.price > 0) {
-      const freeRepairs = plan.repairs.filter(
-        (repair) => payload.free_body.includes(repair.fromUrl) || payload.free_body.includes(repair.toUrl),
-      );
-      const updatedFreeBody = applyPublishedLinkRepairs(payload.free_body, freeRepairs).body;
-      if (!updatedBody.startsWith(updatedFreeBody)) {
-        throw new Error("有料境界を保持したまま本文を分割できません");
+      const legacyFreeBoundary = before.price === 0 && Boolean(targetSeparator);
+      if (!legacyFreeBoundary && (payload.separator || null) !== targetSeparator) {
+        throw new Error("separator changed before update");
       }
-      payload.free_body = updatedFreeBody;
-      payload.pay_body = updatedBody.slice(updatedFreeBody.length);
-    } else {
-      payload.free_body = updatedBody;
+      if (!Array.isArray(payload.hashtags)) throw new Error("hashtags are missing");
+      if (payload.hashtags.length !== before.hashtagCount) {
+        throw new Error("hashtags changed before update");
+      }
+      if (typeof payload.free_body !== "string") throw new Error("free body is missing");
+      if (before.price > 0 && typeof payload.pay_body !== "string") throw new Error("paid body is missing");
+      if (legacyFreeBoundary && String(payload.pay_body || "").length > 0) {
+        throw new Error("legacy free article unexpectedly has paid body");
+      }
+      const currentBody = before.price > 0
+        ? `${payload.free_body}${payload.pay_body}`
+        : payload.free_body;
+      if (visibilityNudge) {
+        if (payload.exclude_from_creator_top !== visibilityNudge.expectedExclude) {
+          throw new Error("クリエイターページ表示の一時変更を確認できません");
+        }
+        payload.exclude_from_creator_top = visibilityNudge.restoreExclude;
+      }
+      const sameAuthoredBody = canonicalizeNoteEditorBody(currentBody)
+        === canonicalizeNoteEditorBody(before.body);
+      if (!legacyFreeBoundary && fnv1a(currentBody) !== before.bodySignature && !sameAuthoredBody) {
+        throw new Error("published body changed before update");
+      }
+      const payBodySignature = before.price > 0 ? fnv1a(payload.pay_body) : null;
+      if (legacyFreeBoundary) payload.separator = targetSeparator;
+      if (before.price > 0) {
+        const freeRepairs = plan.repairs.filter(
+          (repair) => payload.free_body.includes(repair.fromUrl) || payload.free_body.includes(repair.toUrl),
+        );
+        const updatedFreeBody = applyPublishedLinkRepairs(payload.free_body, freeRepairs).body;
+        if (!updatedBody.startsWith(updatedFreeBody)) {
+          throw new Error("有料境界を保持したまま本文を分割できません");
+        }
+        payload.free_body = updatedFreeBody;
+        payload.pay_body = updatedBody.slice(updatedFreeBody.length);
+      } else {
+        payload.free_body = updatedBody;
+      }
+      Object.assign(state, {
+        status: "sending",
+        beforeBodySignature: before.bodySignature,
+        sentBodySignature: fnv1a(updatedBody),
+        sentBodyLength: updatedBody.length,
+        price: Number(payload.price || 0),
+        separator: payload.separator || null,
+        hashtagCount: payload.hashtags.length,
+        payBodySignature,
+        payBodyLength: payload.pay_body?.length || 0,
+        restoredLegacyFreeSeparator: legacyFreeBoundary,
+      });
+      await route.continue({
+        postData: JSON.stringify(payload),
+        headers: { ...request.headers(), "content-type": "application/json" },
+      });
+    } catch (error) {
+      Object.assign(state, { status: 409, guardError: error.message });
+      await route.fulfill({ status: 409, contentType: "application/json", body: '{"error":"blocked by navigation guard"}' });
     }
-    Object.assign(state, {
-      status: "sending",
-      beforeBodySignature: before.bodySignature,
-      sentBodySignature: fnv1a(updatedBody),
-      sentBodyLength: updatedBody.length,
-      price: Number(payload.price || 0),
-      separator: payload.separator || null,
-      hashtagCount: payload.hashtags.length,
-      payBodySignature,
-      payBodyLength: payload.pay_body?.length || 0,
-      restoredLegacyFreeSeparator: legacyFreeBoundary,
-    });
-    await route.continue({
-      postData: JSON.stringify(payload),
-      headers: { ...request.headers(), "content-type": "application/json" },
-    });
   });
   page.on("response", (response) => {
     const request = response.request();
@@ -503,7 +510,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
       throw new Error(`更新APIが発火しません: api=${JSON.stringify(patch)}`);
     }
     if (patch.status < 200 || patch.status >= 300) {
-      throw new Error(`更新APIが失敗しました: api=${JSON.stringify(patch)}`);
+      throw new Error(patch.guardError || `更新APIが失敗しました: api=${JSON.stringify(patch)}`);
     }
 
     let live;
