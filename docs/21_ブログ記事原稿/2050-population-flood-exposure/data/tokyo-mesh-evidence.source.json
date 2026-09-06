@@ -1,5 +1,7 @@
 {
   "kind": "derived",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "東京都の県別途中artifactから実メッシュ境界と洪水区域への中心点包含判定を図示し、県全体の人口集計も併記するGIS検算図であり、統計調査の集計表ではない。",
   "source": "r2:app/geo/population-flood-risk/item.json",
   "inputs": [
     {
