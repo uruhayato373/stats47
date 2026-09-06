@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generated_by": "generate-note-catalog.ts",
-    "generated_at": "2026-08-31",
+    "generated_at": "2026-09-05",
     "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
     "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
   },
@@ -593,7 +593,7 @@
     },
     "d-geo-flood-population-mesh": {
       "vertical": "stats47-note",
-      "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
+      "title": "洪水浸水想定区域×2050年人口｜47都道府県・29,737メッシュを再現",
       "url": "https://note.com/stats47/n/nfe50fb61efc0",
       "is_paid": true,
       "published_at": "2026-09-01",
@@ -617,7 +617,7 @@
     },
     "d-geo-land-price-future-population": {
       "vertical": "stats47-note",
-      "title": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",
+      "title": "地価上昇地点と周囲の人口減少を照合する｜47都道府県CSV・包含結合・検算",
       "url": "https://note.com/stats47/n/n23a2071a016f",
       "is_paid": true,
       "published_at": "2026-09-01",

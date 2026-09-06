@@ -28,6 +28,8 @@ import {
 import dotenv from 'dotenv';
 import yaml from 'js-yaml';
 
+import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
+
 import { resolveArticleSurveyIds } from '../src/features/blog/services/article-survey-taxonomy';
 import {
   BLOG_SNAPSHOT_KEY,
@@ -161,7 +163,8 @@ async function main() {
       .filter(([, v]) => v.ext !== null)
       .map(([s]) => s),
   ]);
-  const slugs = [...allSlugs].sort();
+  // 旧本文・sticky prior・seed が残っていても終了記事を再掲載しない。
+  const slugs = [...allSlugs].filter((slug) => !GONE_BLOG_SLUGS.has(slug)).sort();
   console.log(
     `📄 対象記事: ${slugs.length} 件 (配信 ${priorBySlug.size} ∪ ローカル ${slugInfo.size})`
   );

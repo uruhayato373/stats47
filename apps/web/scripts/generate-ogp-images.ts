@@ -75,6 +75,7 @@ import {
 } from './lib/image-generation-manifest';
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
 import { isSafeNoteSlug } from './lib/image-entity-policy';
+import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
@@ -319,6 +320,7 @@ interface RankingItemRaw {
     seoTitle?: string;
     unit?: string;
     source?: { source?: { name?: string }; name?: string };
+    sourceConfig?: { source?: { name?: string } };
     availableYears?: { yearCode?: string; yearName?: string }[];
     latestYear?: { yearCode?: string; yearName?: string };
   };
@@ -345,7 +347,7 @@ async function buildRankingOgpData(key: string) {
   }
   const title = it.seoTitle ?? it.title ?? it.rankingName ?? '';
   const unit = it.unit ?? '';
-  const source = it.source?.source?.name ?? it.source?.name ?? 'e-Stat';
+  const source = resolveRankingOgpSource(it);
   const latestYear =
     it.availableYears?.[it.availableYears.length - 1]?.yearCode ??
     it.latestYear?.yearCode ??

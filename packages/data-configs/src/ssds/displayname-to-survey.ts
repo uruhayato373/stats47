@@ -36,6 +36,9 @@ export const DISPLAYNAME_TO_SURVEY: Record<string, string> = {
   地方公務員給与実態調査: "local-public-employee-salary",
   畜産統計調査: "livestock-statistics",
   工場立地動向調査: "factory-location-survey",
+  // IPSS 令和5年推計の正式な地域別人口推計名。全国推計・GISメッシュとの推測同一視はしない。
+  // https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/t-page.asp (確認: 2026-09-06)
+  "日本の地域別将来推計人口（令和5年推計）": "population-projection",
 };
 
 /**
@@ -54,4 +57,20 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
     id: "retail-price-survey",
     name: "小売物価統計調査（構造編）",
   },
+  // 家計調査・品目分類（2020年改定）年間収入五分位階級の金額（年次）。
+  // https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003348240
+  // 確認: 2026-09-06。月次の総数・金額/数量は公式API変更告知でIDを確認。
+  // https://www.e-stat.go.jp/api/node/208
+  "0003348240": { id: "kakei-chousa", name: "家計調査（品目別）" },
+  "0003343671": { id: "kakei-chousa", name: "家計調査（品目別）" },
+  "0003343670": { id: "kakei-chousa", name: "家計調査（品目別）" },
+  // 月次CPIは年報そのものではなく同一統計の時系列。cpi-annualは既存URL互換のID。
+  // master名称は「消費者物価指数」、年次/月次を含む公式結果ページへ接続する。
+  // https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003427113
+  // https://www.stat.go.jp/data/cpi/1.html (確認: 2026-09-06)
+  "0003427113": { id: "cpi-annual", name: "消費者物価指数" },
+  // 既存生成辞書の手動追記を正典へ回収し、再生成で失わない。metric は displayName を持たない。
+  // https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003423613
+  // 確認: 2026-09-06。住民基本台帳人口移動報告・月報の都道府県間移動表。
+  "0003423613": { id: "resident-registry-migration-report", name: "住民基本台帳人口移動報告" },
 };

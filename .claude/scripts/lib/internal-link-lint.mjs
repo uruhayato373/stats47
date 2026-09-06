@@ -143,6 +143,11 @@ export function resetKeySetCache() {
   cache = null;
 }
 
+/** 公開処理もリンク検査と同じ恒久終了SSOTを使う。 */
+export function isGoneBlogSlug(slug) {
+  return loadKeySets().blogGone.has(slug);
+}
+
 /**
  * 導出した key 集合を返す (drift 検出テスト専用)。
  * TS を実行せず正規表現で読んでいるため、正典のリネームで黙って別物を見る危険がある。

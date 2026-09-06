@@ -1,8 +1,0 @@
-{
-  "kind": "derived",
-  "source": "r2:app/geo/population-station-access/manifest.json",
-  "formula": "inputs[]・stages[]・quality の件数と処理順を要約",
-  "label": "人口メッシュから47県集計までの計算系譜",
-  "sourceSha256": "80b0befab53f951218f7d3496bf24758a97e0058cf64de75affb10dd848abe7d",
-  "note": "canonical Geo manifestのみから生成"
-}

@@ -5,6 +5,7 @@
     "jsxImportSource": "react"
   },
   "include": [
+    "../src/features/ogp/**/*.tsx",
     "generate-ogp-images.ts",
     "generate-blog-thumbnails.ts",
     "generate-blog-thumbnails-cloud.ts",

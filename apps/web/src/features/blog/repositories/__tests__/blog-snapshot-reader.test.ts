@@ -65,6 +65,44 @@ beforeEach(() => {
 });
 
 describe('readBlogIndexPageFromR2', () => {
+  it('限定保守は承認した終了記事だけ除き、他の終了記事と公開記事を変更しない', async () => {
+    const { excludeGoneBlogArticles } = await import('../../utils/exclude-gone-blog-articles');
+    const target = 'dam-count-prefecture-gap';
+    const unrelated = 'job-salary-39-comparison';
+    const snapshot = {
+      ...SNAPSHOT,
+      tagMeta: [{ tagKey: 'population', articleCount: 7 }],
+      articles: [...SNAPSHOT.articles, article(target, '2026-09-06'), article(unrelated, '2026-09-06')],
+      surveyArticleIndex: { 'mlit-ksj': [target, unrelated, 'a1'] },
+    };
+    const result = excludeGoneBlogArticles(snapshot, new Set([target, 'a1']));
+    expect(result.articles).toEqual(snapshot.articles.filter((row) => row.slug !== target));
+    expect(result.tagMeta).toEqual([{ tagKey: 'population', articleCount: 6 }]);
+    expect(result.surveyArticleIndex).toEqual({ 'mlit-ksj': [unrelated, 'a1'] });
+    expect(snapshot.articles).toHaveLength(8);
+    expect(excludeGoneBlogArticles(result, new Set([target]))).toBe(result);
+  });
+
+  it.each([
+    'airport-count-vs-wind-power-plant-count-facility',
+    'dam-count-prefecture-gap',
+    'dam-count-vs-road-expressway-length',
+  ])('旧索引の終了記事 %s を一覧・タグ・調査・詳細の全導線から除く', async (slug) => {
+    loadSnapshot.mockResolvedValue({
+      ...SNAPSHOT,
+      articles: [...SNAPSHOT.articles, article(slug, '2026-09-06', true, ['mlit-ksj'])],
+      tagMeta: [{ tagKey: 'population', articleCount: 6 }],
+      surveyArticleIndex: { 'mlit-ksj': [slug] },
+    });
+    const reader = await importReader();
+    expect((await reader.readBlogIndexPageFromR2(10, 0)).articles.map((a) => a.slug)).not.toContain(slug);
+    expect((await reader.readArticlesByTagKeyFromR2('population')).map((a) => a.slug)).not.toContain(slug);
+    expect(await reader.readArticleSummariesBySurveyIdFromR2('mlit-ksj')).toEqual([]);
+    expect(await reader.readArticleBySlugFromR2(slug)).toBeNull();
+    expect(await reader.readArticleTitlesBySlugsFromR2([slug, 'a1'])).toEqual({ a1: 'a1 のタイトル' });
+    expect(await reader.readAllTagsWithCountFromR2()).toEqual([{ tag: 'population', tagKey: 'population', count: 5 }]);
+  });
+
   it('1 リクエストにつき snapshot を 1 回だけ読む', async () => {
     const { readBlogIndexPageFromR2 } = await importReader();
 
