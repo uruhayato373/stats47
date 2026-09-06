@@ -119,33 +119,33 @@ export async function fillServiceForm(page, fields, { tag = '[form]' } = {}) {
     await sleep(500);
   }
 
-  // 提供形式ラジオ: ★2026-10/11 刷新で、変更時に確認モーダルが出る/保存時に既定(2 制作物)へ
-  //   戻ることがある。クリック→確認ボタン承認→checked 保持を検証し、保持されるまで数回試行する。
+  // カテゴリによって提供形式のsection自体が非表示。隠れたradioを書き換えて成功扱いしない。
   if (fields.provisionFormat) {
     const v = String(fields.provisionFormat);
-    let checked = false;
-    for (let attempt = 0; attempt < 3 && !checked; attempt++) {
-      await page.evaluate((val) => {
-        const r = document.querySelector(`#ServiceProvisionFormat${val}`) ||
-          document.querySelector(`input[name="data[Service][provision_format]"][value="${val}"]`);
-        if (!r) return;
-        const lbl = r.closest('label') || document.querySelector(`label[for="${r.id}"]`);
-        (lbl || r).click();
-        if (!r.checked) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
-      }, v);
-      await sleep(900);
-      for (const name of ['変更する', 'はい', 'OK', '変更', '続ける']) {
-        const b = page.getByRole('button', { name, exact: true });
-        if (await b.count()) { try { await b.first().click({ timeout: 3000 }); } catch {} await sleep(700); break; }
+    const label = page.locator(`label[for="ServiceProvisionFormat${v}"]`);
+    const visible = await label.isVisible();
+    if (!(await label.count())) {
+      warn.push('provision_format selector 不在（UI変更を確認する）');
+    } else if (!visible) {
+      log.push('provisionFormat: category-inactive (非表示のため変更しない)');
+    } else {
+      let checked = false;
+      for (let attempt = 0; attempt < 3 && !checked; attempt++) {
+        await label.click();
+        await sleep(900);
+        for (const name of ['変更する', 'はい', 'OK', '変更', '続ける']) {
+          const b = page.getByRole('button', { name, exact: true });
+          if (await b.count()) { try { await b.first().click({ timeout: 3000 }); } catch {} await sleep(700); break; }
+        }
+        checked = await page.evaluate((val) => {
+          const r = document.querySelector(`input[name="data[Service][provision_format]"][value="${val}"]`);
+          return !!(r && r.checked);
+        }, v);
       }
-      checked = await page.evaluate((val) => {
-        const r = document.querySelector(`input[name="data[Service][provision_format]"][value="${val}"]`);
-        return !!(r && r.checked);
-      }, v);
+      log.push(checked ? `provisionFormat=${v} (checked 保持確認)` : `provisionFormat=${v} 未確定`);
+      if (!checked) warn.push('provision_format が保持されない（確認モーダル/カテゴリ依存の可能性）');
+      await sleep(500);
     }
-    log.push(checked ? `provisionFormat=${v} (checked 保持確認)` : `provisionFormat=${v} 未確定`);
-    if (!checked) warn.push('provision_format が保持されない（確認モーダル/カテゴリ依存の可能性）');
-    await sleep(500);
   }
 
   if (fields.body !== undefined) {

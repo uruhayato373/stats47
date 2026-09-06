@@ -19,6 +19,7 @@ import { PREFECTURE_CODES5 } from "./prefectures";
 import type { Dataset, PrefectureDatum } from "./dataset";
 import type { SourceRow } from "./sources";
 import { fetchRankingValues } from "./load-ranking-values";
+import { productIndicatorLabel } from "./product-indicator-label";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const PACK_SNAPSHOT_DIR = resolve(HERE, "pack-snapshots");
@@ -57,12 +58,10 @@ function toSourceRow(
   const statsDataId = String(src.statsDataId ?? filter.statsDataId ?? "-");
   const displayName = String(src.displayName ?? cfg.title ?? key);
   const url = typeof src.url === "string" && src.url ? src.url : R2_TOP;
-  const title = String(cfg.title ?? key);
-  const subtitle = typeof cfg.subtitle === "string" ? cfg.subtitle : "";
   const note = typeof cfg.note === "string" ? cfg.note : "";
   return {
     surveyName: displayName,
-    tableName: subtitle ? `${title}（${subtitle}）` : title,
+    tableName: productIndicatorLabel(key, cfg),
     statsDataId,
     url,
     year,
@@ -106,7 +105,7 @@ async function fetchOne(
     const unit = fetched.unit || String(cfg.unit ?? "");
     const indicator: SnapshotIndicator = {
       rankingKey: key,
-      indicator: String(cfg.title ?? key),
+      indicator: productIndicatorLabel(key, cfg),
       unit,
       category: String(cfg.category ?? "?"),
       year: fetched.year,

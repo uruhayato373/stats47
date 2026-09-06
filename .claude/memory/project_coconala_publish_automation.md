@@ -15,20 +15,23 @@ metadata:
   (`login.mjs`→初回手動ログイン / `capture-account.mjs`→userId取得 / `discover-categories.mjs`→カテゴリ実value取得 /
   `coconala-{publish,edit,delete-draft}.mjs` + `lib/coconala-{session,form}.mjs`)
 - 出品内容SoT=`.claude/config/coconala-listings.json`(product id別)、アカウント=`coconala-account.json`
-  (sellerName=IGWORKS / **userId=1269384** / profile=`.local/playwright-coconala-profile`)。
+  (期待ID・表示名は同configのみを参照 / profile=`.local/playwright-coconala-profile`)。
 - 商品設計の上流SSOT=`packages/product-factory`(174商品)。規約=`.claude/rules/coconala-product-standards.md §6`
   (2026-07-23に「出品自動化しない」→「フォーム入力は自動化・実公開`--commit`とログインは人間工程」へ改訂)。
 
 ## account assert は userId で照合 (sellerName不可)
 新規セラー(出品0件)は表示名が /mypage/services_lists 本文に出ないため、sellerNameテキスト照合は機能しない。
-→ `assertAccount` は **ログイン中セッション自身の a[href*="/users/NNNN"] の id** を照合する方式に改修済。
+**問題**: ダッシュボードの最初の`/users/NNNN`を本人と誤認し、正しいセッションでも照合が停止した。
+**原因**: おすすめ出品者のプロフィールリンクが本人リンクより前に並ぶ。
+**対策**: `assertAccount`は`/mypage/user`の「表示を確認する」リンクに限定する。IDが空・複数・異なる場合は停止し、表示名へフォールバックしない。
+**証拠**: `.claude/scripts/coconala/__tests__/session.test.mjs`。おすすめリンクの混入、曖昧ID、別ドメインを拒否する回帰テスト（2026-09-06）。`readListings`は`fixLimit`もフォームへ渡す。
 
 ## ★コナラ10/11フォーム刷新の非自明な必須項目 (移植元2026-07-18以降に変わった。form.mjsで対応済)
 1. **価格 value skew**: #ServicePrice の option は value=表示×1.1(手数料込。表示"4,000円"⇔value"4400")。
    value一致・Playwright label一致(30sタイムアウト)で選べない→**表示テキスト一致でin-page選択**。
 2. **サービスタイトル25字以内** (末尾「ます」自動付与を含む)。超過は下書き保存が記入エラー。
-3. **提供形式(provision_format)が保存時に既定2(制作物)へ戻る**。radioクリックだけでは永続しない
-   →確認モーダル承認+checked保持を数回検証。ready-mファイルは**3(PDF・定型ファイル)**が正。
+3. **提供形式(provision_format)はカテゴリによって非表示**。2026-09-06に既存13商品（13/427/482）で確認。非表示radioをDOMで3へ強制変更しても保存値は2のまま。
+   →visibleな場合だけ実クリックし保存後read-back。非表示はcategory-inactiveとして保持し、本文の納品内容・納期・修正回数を照合する。selector不在はUI変更として警告する。
 4. **無料修正回数 `select[name="data[Service][fix_limit]"]` が公開時のみ必須**(下書き保存では任意)。
    値 -1=無料修正なし/1=1回…。ready-mファイルは -1。
 - カテゴリはコナラ実機依存: `discover-categories.mjs --master N` で master→sub→type→facet の実valueを取得して確定。
@@ -36,9 +39,9 @@ metadata:
 
 ## 公開実績 (2026-07-23: 13商品 live)
 product-factory の13パック(P-01〜P-12・P-14。旧D-01=P-01にrename)を全て「テーマ別・全指標入り」
-データ集としてコナラ公開。各 ¥4,000〜15,000・28〜2,054指標・Excel/PowerPoint(県別コロプレス地図)/CSV/PDF同梱。
+データ集としてコナラ公開。実際の納品範囲はlistingの`_delivery`を参照する。旧販売文の全数・形式は検証証拠ではない。
 serviceId: P-01=4323722/P-02=4323916/P-03=4323937/P-04=4324057/P-05=4324061/P-06=4324062/P-07=4324065/
-P-08=4324067/P-09=4324069/P-10=4324073/P-11=4324076/P-12=(全部入り2054)/P-14=4323941。P-13(無料)は非出品。
+P-08=4324067/P-09=4324069/P-10=4324073/P-11=4324076/P-12=4324231/P-14=4323941。P-13(無料)は非出品。
 - **テーマ整合是正**: e-Statカテゴリ≠商品テーマ名の不整合(観光カテゴリ=実は運輸/economy=家計等)を、
   listing レベルで実内容に合わせ改名(P-03観光・交通/P-06教育・文化/P-07気候・土地/P-09農業・産業 等)。
 - **個別サムネ**: Codex ビルトイン画像生成で12テーマ別画像(日本地図×モチーフ・文字なし)→各 live に差し替え。
@@ -50,5 +53,11 @@ P-08=4324067/P-09=4324069/P-10=4324073/P-11=4324076/P-12=(全部入り2054)/P-14
   併走の未baseline Card で落ちると全コミットが止まる→ --no-verify で自ファイルのみ commit で回避したことあり。
 
 ## 関連
+
+**問題**: 図書館数31.8館など、人口当たりの値が総数に見える納品ファイルと、件数・Excel同梱・PPT全数の販売文不一致があった。
+**原因**: pack-snapshotが短いtitleだけを納品indicatorへ渡し、subtitleも公式の分母も失った。販売文をバイナリmanifestへ照合していなかった。
+**対策**: `product-indicator-label.ts`の公式表ID・分類コード付き定義を全形式に使い、`pack-evidence.mjs`で固定版のSHA・47地域・収録数・形式・PPT抜粋数を検査する。旧版は上書きせず別版とし、Office実機検証と観測値の再取得を区別する。
+**証拠**: `product-indicator-label.test.ts`、`pack-evidence.test.mjs`（2026-09-06）。
+
 [[project_coconala_product_factory]] (商品ファクトリー・D-01は実データ多指標化済=人口/面積/世帯/所得) /
 [[feedback_note_publish_automation]] (同系のbrowser自動化) / 正典 `.claude/rules/coconala-product-standards.md`

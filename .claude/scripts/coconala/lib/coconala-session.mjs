@@ -122,6 +122,8 @@ export function readListings() {
       body: e.body,
       purchaseNote: e.purchaseNote,
       deliveryDays: e.deliveryDays,
+      fixLimit: e.fixLimit,
+      _delivery: e._delivery,
       faq: e.faq || [],
       options: e.options || [],
     };
@@ -247,79 +249,29 @@ export async function waitForLogin(page, { waitMinutes = 6, tag = '[login]' } = 
   }
   return { ok: false, reason: `ログイン待機がタイムアウト (${waitMinutes}分)` };
 }
-
-/**
- * ログイン中のアカウントが期待アカウントと一致するか assert。
- * 照合は 2 段:
- *   1) userId (coconala-account.json の userId or profileUrl の users/NNNN) —★推奨・堅牢。
- *      マイページはログイン中アカウント自身のプロフィールリンク (a[href*="/users/NNNN"]) を
- *      常に露出するため、新規セラー (出品0件で表示名が本文に出ない) でも確実に判定でき、
- *      別アカウント (dobokunote 等) は id 不一致で確実に弾ける。
- *   2) sellerName のテキスト照合 (userId 未設定時のフォールバック) — /mypage/services_lists 本文。
- * どちらも未設定なら「ログイン済み」だけを確認して pass する。
- * @returns {Promise<{ok:boolean, seller?:string, userId?:string, reason?:string}>}
- */
-export async function assertAccount(page, { tag = '[account]' } = {}) {
-  const acct = readAccount();
-  const expectedName = (acct.sellerName || '').trim();
-  const expectedId = String(acct.userId || (acct.profileUrl || '').match(/\/users\/(\d+)/)?.[1] || '').trim();
-
-  if (!expectedName && !expectedId) {
-    console.log(`${tag} sellerName/userId 未設定のため「ログイン済み」のみ確認 (coconala-account.json に userId を入れると厳格 assert = 誤アカウント操作を確実に防げる)`);
-    return { ok: true, seller: '' };
-  }
-
-  // 1) userId 照合 (堅牢): ログイン中セッション自身のプロフィール user id を拾う
-  if (expectedId) {
-    let foundId = '';
-    for (const url of ['https://coconala.com/mypage/dashboard', 'https://coconala.com/mypage']) {
-      await gotoResilient(page, url);
-      try {
-        await page.waitForLoadState('networkidle', { timeout: 10000 });
-      } catch {}
-      for (let i = 0; i < 4 && !foundId; i++) {
-        foundId = await page.evaluate(() => {
-          const hrefs = Array.from(document.querySelectorAll('a[href*="/users/"]')).map((a) => a.getAttribute('href') || '');
-          const m = hrefs.map((h) => h.match(/\/users\/(\d+)/)).find(Boolean);
-          return m ? m[1] : '';
-        });
-        if (!foundId) await sleep(1500);
-      }
-      if (foundId) break;
-    }
-    if (foundId && foundId === expectedId) {
-      console.log(`${tag} OK: ログイン中アカウント users/${foundId} が期待 userId と一致`);
-      return { ok: true, seller: expectedName, userId: foundId };
-    }
-    if (foundId && foundId !== expectedId) {
-      return { ok: false, reason: `別アカウントでログイン中 (期待 users/${expectedId} / 実 users/${foundId} = dobokunote 等との取り違えの疑い)` };
-    }
-    // foundId 空 = id を取得できず照合不能。sellerName があればフォールバック、無ければ中断。
-    if (!expectedName) {
-      return { ok: false, reason: `ログイン中の userId を取得できず照合不能 (期待 users/${expectedId})` };
-    }
-    console.log(`${tag} userId を取得できず sellerName テキスト照合にフォールバック`);
-  }
-
-  // 2) sellerName テキスト照合 (フォールバック)
-  await gotoResilient(page, 'https://coconala.com/mypage/services_lists');
-  try {
-    await page.waitForLoadState('networkidle', { timeout: 12000 });
-  } catch {}
-  let contains = false;
-  for (let i = 0; i < 6; i++) {
-    contains = await page.evaluate((exp) => (document.body?.innerText || '').includes(exp), expectedName);
-    if (contains) break;
-    await sleep(1500);
-  }
-  if (contains) {
-    console.log(`${tag} OK: マイページに期待アカウント "${expectedName}" を確認`);
-    return { ok: true, seller: expectedName };
-  }
-  return { ok: false, seller: '', reason: `マイページに期待 sellerName "${expectedName}" が見つからない (別アカウントでログイン中の疑い)` };
+/** 本人のプロフィール編集画面にあるプレビューリンクだけを採用する。 */
+export function ownProfileId(links) {
+  const ids = [...new Set(links.filter(l => l.text.trim() === '表示を確認する')
+    .map(l => { try { const u = new URL(l.href, 'https://coconala.com'); return u.origin === 'https://coconala.com' ? u.pathname.match(/^\/users\/(\d+)\/?$/)?.[1] : undefined; } catch { return undefined; } })
+    .filter(Boolean))];
+  return ids.length === 1 ? ids[0] : '';
 }
 
-/** .local/coconala-debug/ 配下のスクショパスを返す */
+/** 名前・おすすめ出品者で代替せず、本人IDが取得不能なら停止する。 */
+export async function assertAccount(page, { tag = '[account]' } = {}) {
+  const acct = readAccount();
+  const expectedId = String(acct.userId || '').trim();
+  if (!/^\d+$/.test(expectedId)) return { ok: false, reason: 'account userId 未設定' };
+  if (!await gotoResilient(page, 'https://coconala.com/mypage/user', { tries: 1, timeout: 30000 })) return { ok: false, reason: '本人プロフィール画面へ到達できない' };
+  const current = new URL(page.url());
+  if (current.origin !== 'https://coconala.com' || current.pathname !== '/mypage/user') return { ok: false, reason: '本人プロフィール画面ではない（ログイン・認証を確認）' };
+  await page.getByRole('link', { name: '表示を確認する', exact: true }).first().waitFor({ timeout: 10000 }).catch(() => {});
+  const links = await page.locator('a').evaluateAll(as => as.map(a => ({ href: a.getAttribute('href') || '', text: a.textContent || '' })));
+  const userId = ownProfileId(links);
+  if (!userId || userId !== expectedId) return { ok: false, reason: `本人ID照合失敗 (期待 ${expectedId} / 実 ${userId || '取得不能'})` };
+  console.log(`${tag} OK: 本人プロフィール users/${userId}`);
+  return { ok: true, seller: acct.sellerName, userId };
+}
 export function shotPath(name) {
   mkdirSync(DEBUG_DIR, { recursive: true });
   return join(DEBUG_DIR, name);

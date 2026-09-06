@@ -90,7 +90,7 @@ npm run test:run   --workspace=@stats47/product-factory
 > **出品フォームの入力は Playwright で自動化する**が、下記のガードを**人間工程として維持**する。
 
 - **ログイン認証はエージェントが行わない**。初回のみ人間が headed ブラウザで **stats47 のココナラアカウント**へ手動ログインし、永続プロファイル `.local/playwright-coconala-profile` に保持する（★doboku-note の `dobokunote` とは別アカウント・別プロファイル）。
-- **account assert 必須**: `coconala-account.json` の `sellerName`（stats47 の出品者名）がマイページ本文に含まれることを確認してから操作する。別アカウント（dobokunote 等との取り違え）は即中断。**sellerName が空の間は「ログイン済み」しか確認できない**ので、出品者名が確定したら必ず設定する。
+- **account assert 必須**: `coconala-account.json`の期待`userId`と`/mypage/user`の本人プロフィール「表示を確認する」リンクを照合する。おすすめ出品者リンクやページ全体の表示名では代替しない。ID未設定・取得不能・複数・不一致では停止する。期待アカウントの変更はオーナー承認が必要。
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書きで保存」。**実公開（`--commit`）は outward-facing・不可逆寄りのため、オーナーが明示承認したときだけ**実行する。バリデーションエラー（記入エラー）時は「公開した」と報告しない。
 - **1 商品ずつ検証**。一括出品しない。閲覧・お気に入り・問い合わせ・購入・サポート工数・手取りを記録する。
 - 反応が無ければ同系統を増やさず、対象・用途・価格・サンプルを見直す（レビュー §実行規律）。

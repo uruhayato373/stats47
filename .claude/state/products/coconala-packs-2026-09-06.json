@@ -1,0 +1,550 @@
+{
+  "updatedAt": "2026-09-06T08:06:53.185Z",
+  "sellerUserId": "6198620",
+  "status": "public-updated-deliveries-rebuilt-owner-office-check-pending",
+  "authorization": "ユーザー「全てやり切って」: プロフィール・商品画像・説明と納品物の整合を改善。本人手続き・税務・未確認の経歴追加は含めない。",
+  "previousProfileReceipt": ".claude/state/products/coconala-profile-2026-09-06.json",
+  "listingsSource": ".claude/config/coconala-listings.json",
+  "deliveryRevision": "v2-20260906-r1",
+  "observationsChanged": 0,
+  "originalArtifacts": "v1を変更せず保存。旧版は納品しない。全CSV値・欠測位置・年・単位を保存照合。",
+  "officialDefinitions": {
+    "verifiedLabelCount": 1095,
+    "source": "e-Stat getMetaInfo + source statsDataId/cdCat01 exact match",
+    "observationsRefetched": false,
+    "historicalNotReverified": [
+      "kindergarten-education-diffusion-rate (E0910101/0000010205)",
+      "nursery-education-diffusion-rate (E0910102/0000010205)"
+    ],
+    "exceptionHandling": "現行APIにない歴史的2指標は既存年次データを保持しSOURCESに再確認未了を注記。最新の意思決定には使用しない。"
+  },
+  "corrections": [
+    "指標数: P01 129 / P12 2076",
+    "P14 685指標・県庁所在市・二人以上世帯・2024年",
+    "P11 Excel非同梱を明記",
+    "全商品の指標名に分母・調査対象を保持",
+    "PPTは最大30指標抜粋を明記",
+    "ライセンス用途と独自制作物/政府原データの権利を分離",
+    "PDF長見出し・概要のはみ出し修正",
+    "実CSVプレビューを全13商品の2枚目に追加"
+  ],
+  "items": [
+    {
+      "id": "P-01",
+      "url": "https://coconala.com/services/4323722",
+      "status": 200,
+      "title": "47都道府県の人口・世帯データ集をお渡しします",
+      "bodySha256": "452014b246bfa28f25a4b143a8e6b09bde3601e7761ca7cdea5b715c0748e258",
+      "priceYen": 4000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:42:03.318Z",
+      "finalVerification": {
+        "id": "P-01",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/6315bf79-9641268.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/6315bf79-9641268.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 4000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-01",
+        "valuesChanged": 0,
+        "manifestSha256": "35768b1d39643a4dc7ddcd3ffccfc95b8759fdd7642ad223f237711537fbbeb6"
+      }
+    },
+    {
+      "id": "P-02",
+      "url": "https://coconala.com/services/4323916",
+      "status": 200,
+      "title": "47都道府県の所得・賃金データ集をお渡しします",
+      "bodySha256": "cd10f95a72ddb3b7e76884a474dcfbe74c7fdaf700f825b3e6eb573e68829a31",
+      "priceYen": 5000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:43:38.386Z",
+      "finalVerification": {
+        "id": "P-02",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/1f3b96d3-9641274.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/1f3b96d3-9641274.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 5000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-02",
+        "valuesChanged": 0,
+        "manifestSha256": "c63df1ba168412b7ea0a7702029e47eed491ce931083f24be5f919bd4b15a5cf"
+      }
+    },
+    {
+      "id": "P-03",
+      "url": "https://coconala.com/services/4323937",
+      "status": 200,
+      "title": "47都道府県の観光・交通データ集をお渡しします",
+      "bodySha256": "79a5fa2f5e372648bf58e3c3077864f1f17a5c939f272a0a58b6a0346daa22b7",
+      "priceYen": 5000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:44:39.073Z",
+      "finalVerification": {
+        "id": "P-03",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/ebbb52e6-9641282.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/ebbb52e6-9641282.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 5000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-03",
+        "valuesChanged": 0,
+        "manifestSha256": "9ecf70971dc18272707de812fdf33ab322cab3200ccd560bdec4dd541d6426da"
+      }
+    },
+    {
+      "id": "P-04",
+      "url": "https://coconala.com/services/4324057",
+      "status": 200,
+      "title": "47都道府県の自治体財政データ集をお渡しします",
+      "bodySha256": "6469d77537b955bee14b1bc09891f9eeef0de48e817f26615180b54092526c07",
+      "priceYen": 6000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:45:35.777Z",
+      "finalVerification": {
+        "id": "P-04",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/cd8438e3-9641303.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/cd8438e3-9641303.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 6000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-04",
+        "valuesChanged": 0,
+        "manifestSha256": "8e0460c2acee3b6d86b636aaca4b9cf6f89bd55ac57db52c1baa73e9b0624fb0"
+      }
+    },
+    {
+      "id": "P-05",
+      "url": "https://coconala.com/services/4324061",
+      "status": 200,
+      "title": "47都道府県の医療・介護データ集をお渡しします",
+      "bodySha256": "c9afd458363f4f5e0a953e640d8644b95ff82e6cdf14a0a6eccfad87272cf2f2",
+      "priceYen": 7000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:47:12.959Z",
+      "finalVerification": {
+        "id": "P-05",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/9bc74159-9641310.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/9bc74159-9641310.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 7000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-05",
+        "valuesChanged": 0,
+        "manifestSha256": "4936c9d7e6960960bb67da19d22aa605173c2c13c2df69b1bbb166da3a99539d"
+      }
+    },
+    {
+      "id": "P-06",
+      "url": "https://coconala.com/services/4324062",
+      "status": 200,
+      "title": "47都道府県の教育・文化データ集をお渡しします",
+      "bodySha256": "1b58281a48b2f5e1068f8d9442e0e1b5fc921c003c8d13204da98d8b586a7e04",
+      "priceYen": 6500,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:48:38.523Z",
+      "finalVerification": {
+        "id": "P-06",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/e503b38f-9641312.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 6500,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-06",
+        "valuesChanged": 0,
+        "manifestSha256": "30b1fab1cdc24538857301a3ee8d1389c1e6e78b686f89814bac1f49123a3701"
+      }
+    },
+    {
+      "id": "P-07",
+      "url": "https://coconala.com/services/4324065",
+      "status": 200,
+      "title": "47都道府県の気候・土地データ集をお渡しします",
+      "bodySha256": "88f4be4bea703328c517d30c26685d2ed1415aecf2ad77ea51941699a7d51901",
+      "priceYen": 4500,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:49:47.788Z",
+      "finalVerification": {
+        "id": "P-07",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/8031aadf-9641314.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/8031aadf-9641314.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 4500,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-07",
+        "valuesChanged": 0,
+        "manifestSha256": "b154ad5a6a4f674039893cbe9c85680ab0014fc5dea1efff8d158d90734f1537"
+      }
+    },
+    {
+      "id": "P-08",
+      "url": "https://coconala.com/services/4324067",
+      "status": 200,
+      "title": "47都道府県の商業・小売データ集をお渡しします",
+      "bodySha256": "940ff6a8e7973c6b3612c353dc05b8248d420523406ee1708def1ffa4cd7af56",
+      "priceYen": 5000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:50:42.271Z",
+      "finalVerification": {
+        "id": "P-08",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/eb6f1668-9641328.png",
+            "width": 460
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 5000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-08",
+        "valuesChanged": 0,
+        "manifestSha256": "9551e6b0de687b1c147d69ccf2fc14b688638d8c532a5c5ad20306ef7db1dd32"
+      }
+    },
+    {
+      "id": "P-09",
+      "url": "https://coconala.com/services/4324069",
+      "status": 200,
+      "title": "47都道府県の農業・産業データ集をお渡しします",
+      "bodySha256": "e34ea0c5d6b1322912dc030f48a495f34b8119728d562f8fb62938d02d3e5c0d",
+      "priceYen": 6000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:51:51.185Z",
+      "finalVerification": {
+        "id": "P-09",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/3239e20b-9641334.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/3239e20b-9641334.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 6000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-09",
+        "valuesChanged": 0,
+        "manifestSha256": "758e6d1e51daccba2638f1c057b06692ca19e02fde917c6d5513fb4f5ff3f52e"
+      }
+    },
+    {
+      "id": "P-10",
+      "url": "https://coconala.com/services/4324073",
+      "status": 200,
+      "title": "47都道府県の防災・インフラデータ集をお渡しします",
+      "bodySha256": "2b15a748c7f70c70cebf9506143d980a3e1e63bd5e2c60466c5b96e8c1ced72c",
+      "priceYen": 6500,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:52:42.021Z",
+      "finalVerification": {
+        "id": "P-10",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/e31c0f7d-9641340.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/e31c0f7d-9641340.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 6500,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-10",
+        "valuesChanged": 0,
+        "manifestSha256": "4ff674970c0e4a64dd73f1e199a11b50c95ea203b5ba3c37a93b9dd1a29815e9"
+      }
+    },
+    {
+      "id": "P-11",
+      "url": "https://coconala.com/services/4324076",
+      "status": 200,
+      "title": "47都道府県 汎用統計データ集をお渡しします",
+      "bodySha256": "ebe813692121fd84685e73904a9bfdc729564229535a768260409c52906d70fe",
+      "priceYen": 4000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:54:05.922Z",
+      "finalVerification": {
+        "id": "P-11",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/6766ce3e-9641357.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/6766ce3e-9641357.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 4000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-11",
+        "valuesChanged": 0,
+        "manifestSha256": "f8d4b6d5aeabf3c0ca61020ff85ed62e427e98a473c568934373e01aca890128"
+      }
+    },
+    {
+      "id": "P-14",
+      "url": "https://coconala.com/services/4323941",
+      "status": 200,
+      "title": "県庁所在市の家計消費データ集をお渡しします",
+      "bodySha256": "1ce016fd675fe455b4cac0e3a67012844e86370e00d26e9810ce39b1b2ce24ae",
+      "priceYen": 9000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:55:18.296Z",
+      "finalVerification": {
+        "id": "P-14",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/acda0d86-9641370.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/acda0d86-9641370.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 2,
+        "fixLimit": "-1",
+        "priceYen": 9000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-14",
+        "valuesChanged": 0,
+        "manifestSha256": "1692ae1cb202ac749d2b71728112c9c66a82459901ed9c4f95ef72161aabd835"
+      }
+    },
+    {
+      "id": "P-12",
+      "url": "https://coconala.com/services/4324231",
+      "status": 200,
+      "title": "47都道府県の統計データ総合集をお渡しします",
+      "bodySha256": "196645f2413e74f4662f76b19740404d806b61fbbaf4e8a81f144941eefb1e16",
+      "priceYen": 15000,
+      "secondImage": true,
+      "savedReadback": true,
+      "verifiedAt": "2026-09-06T07:56:20.905Z",
+      "finalVerification": {
+        "id": "P-12",
+        "publicBody": true,
+        "purchaseCta": true,
+        "images": [
+          {
+            "src": "https://service-cdn.coconala.com/crop/460/380/service_images/original/209f4338-9641372.png",
+            "width": 460
+          },
+          {
+            "src": "https://service-cdn.coconala.com/crop/132/108/service_images/original/209f4338-9641372.png",
+            "width": 132
+          }
+        ],
+        "deliveryDays": 3,
+        "fixLimit": "-1",
+        "priceYen": 15000,
+        "categoriesUnchanged": true,
+        "provisioning": {
+          "storedValue": "2",
+          "visible": false
+        }
+      },
+      "delivery": {
+        "id": "P-12",
+        "valuesChanged": 0,
+        "manifestSha256": "20cfd6398c7bbdaa3b4794ff4f73173856f86409ffa60939e5dfa403ceb9b690"
+      }
+    }
+  ],
+  "validation": {
+    "deliveryAudit": "13/13 PASS: SHA256, CSV保存則, Excelセル照合(P11非同梱), PPT指標名, PDF全指標名・全ページ文字bbox",
+    "productFactoryTests": "208/208 PASS; serial --maxWorkers=1",
+    "coconalaTests": "9/9 PASS",
+    "typeCheck": "25/25 packages and scripts PASS",
+    "docsCheck": "PASS: 0 errors / 39 pre-existing warnings",
+    "strictDocsCheckAll": "FAIL: same pre-existing warnings under fail-on-warn",
+    "fullWebBuild": "NOT RUN: no web application changes",
+    "webDeploy": "NOT RUN"
+  },
+  "ownerOnly": [
+    "本人確認・NDA本人手続き",
+    "実際の技術経験年数の申告",
+    "Windows/Mac Office 365で表示・県図形編集・チャート編集・Excel順位再計算の実機確認"
+  ],
+  "salesEffect": "未計測。公開改善は売上向上の実証ではない。",
+  "browserCleanup": "Owned Playwright contexts closed; user's in-app browser untouched",
+  "gitEvidence": "Commit containing this receipt records implementation and publication evidence; integration/push completion must be checked in Git."
+}
