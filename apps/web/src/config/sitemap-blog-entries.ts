@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-09-05
- * 件数: blog 535 / tag 64 / survey 85
+ * 最終生成日: 2026-09-06
+ * 件数: blog 536 / tag 65 / survey 85
  */
 
 export interface SitemapBlogEntry {
@@ -273,6 +273,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "industrial-water-manufacturing-nexus", lastModified: "2026-03-06" },
   { slug: "inflation-rate-prefecture-gap", lastModified: "2026-03-09" },
   { slug: "inflow-population-ratio-prefecture-gap", lastModified: "2026-05-17" },
+  { slug: "information-communication-coefficient-ranking", lastModified: "2026-09-05" },
   { slug: "inpatient-rate-aging-burden", lastModified: "2026-03-29" },
   { slug: "inpatient-rate-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "instant-noodles-consumption-prefecture-gap", lastModified: "2026-05-31" },
@@ -605,6 +606,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "焼酎", lastModified: "2026-07-10" },
   { tagKey: "物価", lastModified: "2026-08-28" },
   { tagKey: "環境", lastModified: "2026-06-21" },
+  { tagKey: "生活コスト", lastModified: "2026-09-05" },
   { tagKey: "生活費", lastModified: "2026-07-11" },
   { tagKey: "産業構造", lastModified: "2026-06-02" },
   { tagKey: "社会保障", lastModified: "2026-08-11" },

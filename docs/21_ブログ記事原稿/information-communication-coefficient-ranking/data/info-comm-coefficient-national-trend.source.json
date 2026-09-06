@@ -1,8 +1,0 @@
-{
-  "kind": "derived",
-  "metricKey": "information-communication-coefficient",
-  "year": "2007-2024",
-  "transform": "47都道府県の単純算術平均を年ごとに算出",
-  "source": "r2:app/stats/information-communication-coefficient/values.json",
-  "restore": "curl -s https://storage.stats47.jp/app/stats/information-communication-coefficient/values.json | 年別に47件の value を平均"
-}
