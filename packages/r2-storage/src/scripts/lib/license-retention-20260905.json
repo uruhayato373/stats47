@@ -657,5 +657,12 @@
       {"key":"app/blog/roadside-station-count-vs-forest-road-length/article.prompt.txt","bytes":7015,"etag":"\"56cd6e0a157e3af63794bdddcfb08301\""},
       {"key":"app/blog/roadside-station-prefecture-gap/data/values.json","bytes":8665,"etag":"\"22e74aacb4c157a07b6c0e4adf092282\""}
     ]
+  },
+  {
+    "id": "license-remediation-added-biomass-ai-20260906",
+    "prefixes": ["app/ranking/biomass-power-station-count/ai-content.json"],
+    "objects": [
+      {"key":"app/ranking/biomass-power-station-count/ai-content.json","bytes":15317,"etag":"\"fa40218b7e3a98e332015dcd52371ad8\""}
+    ]
   }
 ]

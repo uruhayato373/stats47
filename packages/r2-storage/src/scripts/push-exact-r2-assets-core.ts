@@ -5,6 +5,7 @@ import { gunzipSync, gzipSync } from 'node:zlib';
 
 import type { ImageObjectStore } from '../image-pipeline';
 import { assertKsjPublicAssetsAllowed } from './lib/ksj-publication-guard';
+import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY, blogSnapshotWriteCondition } from './lib/blog-publication-guard';
 
 const SHA256_METADATA_KEY = 'stats47-sha256';
 const SIZE_METADATA_KEY = 'stats47-size';
@@ -296,6 +297,13 @@ export async function publishExactR2Assets(options: {
     const candidate = candidatesByKey.get(key)!;
     return candidate.contentEncoding === 'gzip' ? gunzipSync(candidate.body) : candidate.body;
   });
+  const decodedBody = (key: string) => {
+    const candidate = candidatesByKey.get(key)!;
+    return candidate.contentEncoding === 'gzip' ? gunzipSync(candidate.body) : candidate.body;
+  };
+  assertBlogPublicAssetsAllowed([...candidatesByKey.keys()], decodedBody);
+  const blogCondition = candidatesByKey.has(BLOG_INDEX_KEY)
+    ? await blogSnapshotWriteCondition(decodedBody(BLOG_INDEX_KEY), options.store) : null;
 
   let uploaded = 0;
   let skipped = 0;
@@ -320,7 +328,7 @@ export async function publishExactR2Assets(options: {
         : {}),
       cacheControl: CACHE_CONTROL,
       metadata: metadataFor(candidate),
-      ...(before?.etag
+      ...(candidate.key === BLOG_INDEX_KEY && blogCondition ? blogCondition : before?.etag
         ? { ifMatch: before.etag }
         : { ifNoneMatch: '*' as const }),
     });

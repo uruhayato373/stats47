@@ -52,6 +52,30 @@ includeがscriptsだけだと輸入したOGP TSXへautomatic JSX設定が適用�
 `/geo/data-catalog`をpage単位の`force-dynamic`とし、既存R2-route SSG guardで静的化への後退を拒否する。
 公開検証はstatus/canonicalに加え、3分析の出典・版・ライセンス表示と欠損メッセージ不在を確認する。
 
+**出典の接続後の整合（2026-09-06）**: 辞書訂正でIPSSのactive2指標が調査へ接続すると、
+それまでactive0を前提にしていたsurvey本文の問いが不足する。接続だけで完了にせず、実在する
+active指標へのreaderQuestionsと対象年の説明を更新し、`build-survey-portfolio.ts`で派生件数を再生成する。
+`survey-editorial-validator.test.ts`は本文の不足とportfolioのdriftを別々に拒否する。閾値を緩めない。
+
+**削除直前の集合検査（2026-09-06）**: 退避した125キーをHEADで再確認するだけでは、
+その後追加されたAI解説1件を検出できない。`listLicenseRetentionObjects`で対象prefixを全列挙し、
+`assertUnchangedRetentionInventory`で集合・size・ETagを照合してから削除する。既存125件が不変でも
+126件に増えていればバッチ全体を停止し、追加を退避して承認境界を再確認する。孤立した追加1件を
+黙って残して「撤去完了」とせず、許可集合を広げて通過させることもしない。
+
+**共有索引の公開後検証（2026-09-06）**: 専用assetが全件一致していても、後続writerの
+`app/blog/all.json`更新で終了記事や旧surveyIdsが戻ることがある。SHA差を「別記事の正常更新」と
+推測せず、現行S3と公開bodyの一致・終了slug不在・対象記事の出典を意味検証する。修復では現在の
+一覧を退避し、canonical resolverによる出典再計算と終了slug除外だけをCASで反映する。
+別記事の更新日・行を保持し、旧一覧を丸ごと復元しない。writer未特定・再発防止未検証は残件にする。
+
+**共有索引の生成基底（2026-09-06）**: 巻き戻りの実行元は`blog-auto-publish.yml` run34002167867。
+修正前checkoutが共有一覧を再生成し、生成時刻00:53:34と保存した不具合bodyの時刻が一致した。
+PUT直前のHEADだけを条件にしても、生成後の別更新は検出できない。生成器・出典辞書のfingerprintと
+生成時R2の内容hashをsnapshotへ焼き、`blog-publication-guard.ts`で終了slug・基底一致・ETag条件を検査する。
+旧stagingへ印だけ後付けしない。guardを持たない旧checkoutは保護できないため、mainだけでなく
+developを読む公開workflowにも変更を届け、競合時は最新R2から再生成する。
+
 **問題**: `/geo/2050-population`が、単一指標の都道府県コロプレスと順位比較だけをGeo分析として公開していた。Geoハブとテーマ導線もこのbaselineを空間分析の1件として数え、ランキングページと責務が重複した。
 
 **原因**: データ定義は`analysisKind: 'baseline'`と正しく分類していたが、`BUSINESS_PLAN_M1_GEO_ANALYSES`がbaselineとspatial-crossを同じ配列に保持し、公開UIが全件を無条件に列挙していた。さらにbaselineだけ専用static routeを持ち、snapshot・lineage manifest・県別途中artifactを必須にする共通Geo routeを迂回していた。当時の受入条件も「地図・上位下位・県比較」を完了条件にしており、空間演算の有無を検証していなかった。

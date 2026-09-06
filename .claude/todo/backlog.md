@@ -26,16 +26,13 @@ updated: 2026-09-05
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
 
 - **owner**: gis-curator（利用条件SSOT）/ r2-publisher（exact削除）/ ranking-publisher（公開）/ x-strategist（関連SNS）
-- **現在地**: 元GIS435件は検証付き退避後に削除済み。新版の道の駅・漁港・港湾対象港、派生データ・画像・共有一覧194件と、道の駅3記事・Geo出典・分類辞書の追補69件はR2公開/SHA照合済み。
-  証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
-  出典監査はfresh stateで既存ratchet PASS、webテスト1,254件PASS。コードはPR #928で未デプロイ。
+- **現在地**: 承認済み旧資産の撤去・公開404確認は完了。残件は共有一覧の巻き戻り再発防止と関連SNSの外部実測。
+  公開・削除・退避・検証の証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
 - **次（実行順）**:
-  1. PR #928の最終CI通過後に一括deploy。旧`fishing-port-count`の新版への301、代替のない8ランキングと終了3記事の410、新版3ランキング・道の駅3記事・Geoページの200を実測する。
-  2. `license-retention-20260905.json` の旧ランキング125・旧正規化2・終了ブログ53・旧港正規化1・旧道の駅資産3、合計184件だけをworkflow経由で削除する。raw435は再実行しない。
-  3. CDNを更新し、公開69ファイルのSHA、廃止184キーの404、Googlebot UAによるGeo/ランキング/ダウンロードの全対象を確認する。
-  4. 関連SNSの台帳posted6/draft2を外部実測する。旧11ランキング系列の未検証投稿を、Geo15投稿の既存検証結果と混同しない。
+  1. 特定済みの旧writer（blog-auto-publish run34002167867）へ、ローカル検証済みの共有索引guardをmain/develop両経路で届け、再生成・公開後検証する。guardを持たない旧checkoutまで保護済みとみなさない。
+  2. 外部実測で公開中の旧投稿6件（X3/Instagram3）の削除承認を得て、対象だけ撤去・再確認する。X予約一覧72件に対象なし、theme draft2は現行指標・画像へ同期済み。Geo15投稿の既存検証結果と混同しない。
 - **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
-- **停止条件**: key/size/ETagが退避時と変わった対象は削除しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。main→developは生成3ファイルの競合をpreviewで検出済みのため、指示なく解消しない。
+- **停止条件**: key集合/size/ETagが退避時と変わった対象は削除しない。削除済みraw435・派生59・旧ランキング126件を再実行しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。別作業のdevelopリリースと競合する変更は行わない。
 - **完了条件**: public R2の非商用11prefixが0件、catalog gate PASS、新版の出典・保存則・公開値が一致し、終了URL/ダウンロード・記事/SNSまで承認方針どおりの状態を本番実測する。
 
 

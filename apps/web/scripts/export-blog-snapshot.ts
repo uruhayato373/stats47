@@ -29,6 +29,7 @@ import dotenv from 'dotenv';
 import yaml from 'js-yaml';
 
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
+import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 
 import { resolveArticleSurveyIds } from '../src/features/blog/services/article-survey-taxonomy';
 import {
@@ -233,6 +234,7 @@ async function main() {
     .sort((a, b) => b.articleCount - a.articleCount);
 
   const snapshot: BlogSnapshot = {
+    publication: blogPublicationContract(prior),
     schemaVersion: 2,
     generatedAt: new Date().toISOString(),
     articles,
