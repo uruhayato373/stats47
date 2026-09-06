@@ -178,6 +178,8 @@ if [ "$DRY_RUN" = "0" ]; then
     # municipality ranking は専用 URL namespace のため prefix を安全に限定できる。
     if [ "$ONLY" = "municipality-ranking" ]; then
       PUSH_ARGS+=(--prefix app/municipalities)
+    elif [ "$ONLY" = "blog" ]; then
+      PUSH_ARGS+=(--prefix app/blog)
     fi
     if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts "${PUSH_ARGS[@]}"; then
       echo "✅ snapshot を R2 に push 完了"

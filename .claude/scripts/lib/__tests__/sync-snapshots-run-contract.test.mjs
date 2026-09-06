@@ -80,6 +80,16 @@ function finalPushIndex(calls) {
   return calls.findIndex((c) => c.includes("diff-push-r2.ts") && !c.includes("--prefix"));
 }
 
+test("blog単独更新では無関係な県画像stagingをpushしない", () => {
+  const { status, calls } = runRunSh({ args: ["--only", "blog"] });
+  assert.equal(status, 0);
+  assert.equal(calls.filter(c => c.includes("export-blog-snapshot.ts")).length, 1);
+  const pushes = calls.filter(c => c.includes("diff-push-r2.ts"));
+  assert.equal(pushes.length, 1);
+  assert.ok(pushes[0].endsWith("--prefix app/blog"));
+  assert.equal(finalPushIndex(calls), -1);
+});
+
 test("ranking-items を master より先に生成し metadata refresh を master 直前に保つ", () => {
   const source = fs.readFileSync(RUN_SH, "utf8");
   const taskBlock = source.match(/declare -a TASKS=\(\n([\s\S]*?)\n\)/)?.[1] ?? "";

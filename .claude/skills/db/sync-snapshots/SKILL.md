@@ -168,6 +168,9 @@ bash .claude/skills/db/sync-snapshots/run.sh --only municipality-ranking
 bash .claude/skills/db/sync-snapshots/run.sh --only station-passengers
 ```
 
+`--only blog` のpushは`app/blog`に限定する。CIが別用途にstagingした県画像等を巻き込まない。
+共有索引は生成契約と生成時R2の基底をpublisherで照合し、競合時は最新R2から再生成する。
+
 ### dry-run (実行しない、走るスクリプトをリスト表示)
 
 ```bash
