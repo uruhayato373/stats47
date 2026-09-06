@@ -4,6 +4,7 @@
  * 出典メタ (title/description/tags) は frontmatter から取り出し、書籍の出典一覧に使う。
  */
 import sharp from "sharp";
+import { correctBookArticle } from "./editorial-corrections";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 
@@ -80,7 +81,9 @@ export async function fetchBlogArticle(slug: string): Promise<FetchedArticle> {
   const res = await fetch(`${R2_BASE}/app/blog/${slug}/article.md`);
   if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): app/blog/${slug}/article.md`);
   const md = await res.text();
-  const { fm, body } = parseFrontmatter(md);
+  const { fm, body: originalBody } = parseFrontmatter(md);
+  const body = correctBookArticle(slug, originalBody);
+  if (!body.trim()) throw new Error(`Empty blog body: ${slug}`);
 
   const images: FetchedImage[] = [];
   const imgRe = /!\[([^\]]*)\]\(data\/([a-z0-9-]+)\.svg\)/gi;
@@ -99,12 +102,13 @@ export async function fetchBlogArticle(slug: string): Promise<FetchedArticle> {
         const png = await svgToPng(svgBuf);
         images.push({ fileName: epubName, png, alt: ref.alt });
         rewritten = rewritten.split(`data/${ref.name}.svg`).join(`images/${epubName}`);
-      } catch {
-        // 変換失敗は図を落として本文を残す (書籍が壊れるより図欠落のほうが軽い)。
-        rewritten = rewritten.replace(new RegExp(`!\\[[^\\]]*\\]\\(data/${ref.name}\\.svg\\)\\n?`), "");
+      } catch (error) {
+        throw new Error(
+          `Blog image conversion failed: ${slug}/data/${ref.name}.svg: ${error instanceof Error ? error.message : String(error)}`,
+        );
       }
     } else {
-      rewritten = rewritten.replace(new RegExp(`!\\[[^\\]]*\\]\\(data/${ref.name}\\.svg\\)\\n?`), "");
+      throw new Error(`Blog image fetch failed (${svgRes.status}): ${slug}/data/${ref.name}.svg`);
     }
   }
 

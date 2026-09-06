@@ -377,6 +377,7 @@ export async function goToNextKdpStep(page, expectStep, { tag = "[kdp]" } = {}) 
 export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = true, ai = null, tag = "[kdp]" } = {}) {
   const log = [];
   const warnings = [];
+  let coverUploaded = false;
   await sleep(2500);
   // 原稿 (EPUB) アップロード
   // ★file input を「最初に見つかったもの」で決めない。content ステップには
@@ -536,7 +537,10 @@ export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = tru
     const stillEmpty = await page
       .evaluate(() => /表紙がアップロードされていません/.test(document.body?.innerText || ""))
       .catch(() => true);
-    if ((c1 || c2) && !stillEmpty) log.push(`${tag} ✓ カバー アップロード完了`);
+    if ((c1 || c2) && !stillEmpty) {
+      coverUploaded = true;
+      log.push(`${tag} ✓ カバー アップロード完了`);
+    }
     else
       warnings.push(
         `カバーをアップロードできず (方式選択 ${modeOk ? "済" : "不要/失敗"}、input ${c1 ? "共通" : "-"}/${c2 ? "日本版" : "-"}、画面はまだ未アップロード表示)`,
@@ -570,7 +574,7 @@ export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = tru
     }
   }
 
-  return { log, warnings };
+  return { log, warnings, uploaded: { manuscript: epubOk, cover: coverUploaded } };
 }
 
 /** Pricing ステップ: KU・地域・ロイヤリティ・価格。 */

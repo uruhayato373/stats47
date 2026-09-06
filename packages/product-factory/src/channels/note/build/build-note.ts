@@ -3,7 +3,7 @@
  * article-plan + 商品 manifest から 7 ファイルを `.local/note-products/<series>/<slug>/` に書き出す
  * (git 管理外・note.com へは投稿しない)。
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { resolve, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { NoteArticlePlan } from "../types";
@@ -42,8 +42,10 @@ export function buildNoteArticle(
   products: readonly ProductDefinition[] = ALL_PRODUCTS,
   opts: NoteBuildOptions = {},
 ): NoteBuildResult {
+  if (!opts.outRoot) throw new Error('Legacy note generation is disabled: use generate --revision <new-id> --all for pinned deliveries');
   const outRoot = opts.outRoot ?? NOTE_OUT_ROOT_DEFAULT;
   const outDir = join(outRoot, article.series, article.slug);
+  if (existsSync(outDir)) throw new Error('Existing note draft directory: never overwrite; choose a new revision');
   mkdirSync(outDir, { recursive: true });
 
   const { attachments, missing } = resolveAttachments(article, products, {

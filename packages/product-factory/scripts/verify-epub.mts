@@ -22,15 +22,19 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { assertBookVersion } from "../src/channels/kindle/build-book";
+import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
+import { xhtmlChapterEvidence, type ReviewedChapter } from "../src/channels/kindle/revision-evidence";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PF_ROOT = resolve(HERE, "..");
 const BOOKS_DIR = resolve(PF_ROOT, "../../.local/kindle-books");
 
-const KNOWN_FLAGS = new Set(["--book", "--json", "--skip-epubcheck"]);
+const KNOWN_FLAGS = new Set(["--book", "--json", "--skip-epubcheck", "--version", "--report"]);
 function assertKnownFlags(): void {
   const unknown = process.argv.slice(2).filter((a) => a.startsWith("--") && !KNOWN_FLAGS.has(a));
   if (unknown.length > 0) {
@@ -40,7 +44,10 @@ function assertKnownFlags(): void {
 }
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
-  return i >= 0 ? process.argv[i + 1] : undefined;
+  if (i < 0) return undefined;
+  const value = process.argv[i + 1];
+  if (!value || value.startsWith("--")) throw new Error(`--${name} requires a value`);
+  return value;
 }
 
 /** zip から 1 エントリを取り出す (無ければ null)。 */
@@ -54,7 +61,10 @@ function unzipText(epub: string, entry: string): string | null {
 
 function listEntries(epub: string): string[] {
   const out = execFileSync("unzip", ["-Z1", epub], { encoding: "utf8", maxBuffer: 8 * 1024 * 1024 });
-  return out.split("\n").map((s) => s.trim()).filter(Boolean);
+  return out
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
 }
 
 interface Finding {
@@ -105,7 +115,11 @@ function checkLayout(epub: string): Finding[] {
         f.push({ level: "error", code: "cover-no-svg-property", msg: 'OPF の cover item に properties="svg" が無い' });
       }
       if (!/<meta\s+name\s*=\s*"cover"/.test(opf)) {
-        f.push({ level: "warn", code: "no-legacy-cover-meta", msg: "legacy の <meta name=\"cover\"> が無い (Kindle のサムネイル識別)" });
+        f.push({
+          level: "warn",
+          code: "no-legacy-cover-meta",
+          msg: 'legacy の <meta name="cover"> が無い (Kindle のサムネイル識別)',
+        });
       }
     }
   }
@@ -128,8 +142,9 @@ function checkLayout(epub: string): Finding[] {
     f.push({ level: "error", code: "no-spine", msg: "spine が空" });
   }
   if (navPath) {
-    const navId = opf.match(new RegExp(`<item[^>]+href="[^"]*${navPath.split("/").pop()}"[^>]*id="([^"]+)"`))?.[1]
-      ?? opf.match(new RegExp(`<item[^>]+id="([^"]+)"[^>]*href="[^"]*${navPath.split("/").pop()}"`))?.[1];
+    const navId =
+      opf.match(new RegExp(`<item[^>]+href="[^"]*${navPath.split("/").pop()}"[^>]*id="([^"]+)"`))?.[1] ??
+      opf.match(new RegExp(`<item[^>]+id="([^"]+)"[^>]*href="[^"]*${navPath.split("/").pop()}"`))?.[1];
     if (navId && !new RegExp(`idref\\s*=\\s*"${navId}"`).test(opf)) {
       f.push({ level: "error", code: "nav-not-in-spine", msg: "目次が spine に無い (目次ページが表示されない)" });
     }
@@ -142,7 +157,11 @@ function checkLayout(epub: string): Finding[] {
   } else {
     // 「改ページが不適切」の再発防止。
     if (!/page-break-after\s*:\s*avoid/.test(css)) {
-      f.push({ level: "error", code: "no-heading-break-guard", msg: "見出しの孤立を止める page-break-after:avoid が無い" });
+      f.push({
+        level: "error",
+        code: "no-heading-break-guard",
+        msg: "見出しの孤立を止める page-break-after:avoid が無い",
+      });
     }
     if (!/max-height/.test(css)) {
       f.push({ level: "warn", code: "no-figure-height-cap", msg: "図の高さ上限が無い (図がページを跨ぐ)" });
@@ -160,7 +179,7 @@ function runEpubcheck(epub: string): Finding[] {
     return [];
   } catch (e) {
     const out = `${(e as { stdout?: string }).stdout ?? ""}\n${(e as { stderr?: string }).stderr ?? ""}`;
-    return out
+    const findings = out
       .split("\n")
       .filter((l) => /^(ERROR|WARNING)/.test(l))
       .map((l) => ({
@@ -168,12 +187,26 @@ function runEpubcheck(epub: string): Finding[] {
         code: "epubcheck",
         msg: l.trim().slice(0, 200),
       }));
+    // A crashed validator or unexpected output must not look like a successful check.
+    return findings.length > 0
+      ? findings
+      : [
+          {
+            level: "error",
+            code: "epubcheck-failed",
+            msg: out.trim().slice(0, 200) || "epubcheck exited unsuccessfully",
+          },
+        ];
   }
 }
 
 function main(): void {
   assertKnownFlags();
   const only = arg("book");
+  const version = arg("version") ?? "v1";
+  assertBookVersion(version);
+  const reportPath = arg("report");
+  if (reportPath && existsSync(resolve(reportPath))) throw new Error(`Report already exists: ${reportPath}`);
   const skipEpubcheck = process.argv.includes("--skip-epubcheck");
   const asJson = process.argv.includes("--json");
 
@@ -181,7 +214,9 @@ function main(): void {
     console.error(`生成物が無い: ${BOOKS_DIR}\n先に products:kindle:generate --all-manuscript を実行する。`);
     process.exit(1);
   }
-  const ids = readdirSync(BOOKS_DIR).filter((d) => (only ? d === only : true)).sort();
+  const ids = KINDLE_BOOKS.filter((book) => !only || book.id === only)
+    .map((book) => book.id)
+    .sort();
   if (ids.length === 0) {
     console.error(only ? `書籍が見つからない: ${only}` : "書籍が 1 冊も無い");
     process.exit(1);
@@ -198,19 +233,46 @@ function main(): void {
   })();
   if (!skipEpubcheck && !hasEpubcheck) {
     // ★「入っていないから素通り」を黙ってやらない。何を検査しなかったかを出す。
-    console.log("⚠️  epubcheck が無いので仕様適合検査はスキップ (brew install epubcheck)。レイアウト不変量だけ検査します。");
+    console.error(
+      "⚠️  epubcheck が無いので仕様適合検査はスキップ (brew install epubcheck)。レイアウト不変量だけ検査します。",
+    );
   }
 
-  const report: Array<{ id: string; errors: number; warns: number; findings: Finding[] }> = [];
+  const report: Array<{
+    id: string;
+    version: string;
+    epubPath: string;
+    epubSha256: string | null;
+    chapters: ReviewedChapter[];
+    errors: number;
+    warns: number;
+    findings: Finding[];
+  }> = [];
   let totalErr = 0;
   for (const id of ids) {
-    const epub = join(BOOKS_DIR, id, "v1", "book.epub");
-    if (!existsSync(epub)) continue;
-    const findings = [...checkLayout(epub), ...(hasEpubcheck ? runEpubcheck(epub) : [])];
+    const epub = join(BOOKS_DIR, id, version, "book.epub");
+    let findings: Finding[];
+    let epubSha256: string | null = null;
+    let chapters: ReviewedChapter[] = [];
+    if (!existsSync(epub)) {
+      findings = [{ level: "error", code: "missing-epub", msg: `生成物が無い: ${id}/${version}/book.epub` }];
+    } else {
+      epubSha256 = createHash("sha256").update(readFileSync(epub)).digest("hex");
+      try {
+        findings = [...checkLayout(epub), ...(hasEpubcheck ? runEpubcheck(epub) : [])];
+        chapters = xhtmlChapterEvidence(listEntries(epub).filter(path => path.endsWith(".xhtml")).map(path => ({
+          fileName: path.replace(/^OEBPS\//, ""), xhtml: unzipText(epub, path) ?? "",
+        })));
+      } catch (error) {
+        findings = [
+          { level: "error", code: "unreadable-epub", msg: error instanceof Error ? error.message : String(error) },
+        ];
+      }
+    }
     const errors = findings.filter((x) => x.level === "error").length;
     const warns = findings.length - errors;
     totalErr += errors;
-    report.push({ id, errors, warns, findings });
+    report.push({ id, version, epubPath: epub, epubSha256, chapters, errors, warns, findings });
     if (!asJson) {
       const mark = errors > 0 ? "NG " : warns > 0 ? "WARN" : "OK ";
       console.log(`${mark} ${id.padEnd(10)} error ${errors} / warn ${warns}`);
@@ -218,12 +280,28 @@ function main(): void {
     }
   }
 
+  const payload = {
+    schemaVersion: 1,
+    generatedAt: new Date().toISOString(),
+    version,
+    epubcheckExecuted: hasEpubcheck,
+    books: report.length,
+    totalErrors: totalErr,
+    report,
+  };
+  const json = JSON.stringify(payload, null, 2);
+  if (reportPath) writeFileSync(resolve(reportPath), `${json}\n`, { flag: "wx" });
   if (asJson) {
-    console.log(JSON.stringify({ books: report.length, totalErrors: totalErr, report }, null, 2));
+    console.log(json);
   } else {
     console.log(`\n合計: ${report.length} 冊 / error ${totalErr} 件${hasEpubcheck ? "" : " (epubcheck 未実行)"}`);
   }
   process.exit(totalErr > 0 ? 1 : 0);
 }
 
-main();
+try {
+  main();
+} catch (error) {
+  console.error(error instanceof Error ? error.message : String(error));
+  process.exit(1);
+}

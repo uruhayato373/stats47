@@ -1,5 +1,5 @@
 /**
- * データブック PDF ジェネレータ。pdf-lib + NotoSansJP subset で、収録指標ごとに
+ * データブック PDF ジェネレータ。pdf-lib + NotoSansJP 埋め込みで、収録指標ごとに
  * 47 都道府県のランキング表 (順位・都道府県・値) を実データで描画する。末尾に出典・利用許諾。
  * D-01 のように pdf を「データ本体」として納品する商品向け (manual.pdf ではなくデータブック本体)。
  */
@@ -36,7 +36,9 @@ export async function buildDatabookPdf(
 ): Promise<void> {
   const doc = await PDFDocument.create();
   doc.registerFontkit(fontkit);
-  const font = await doc.embedFont(notoSansJpBytes(), { subset: true });
+  // Noto JP subsetting can preserve text extraction but lose rendered glyphs (#1232).
+  // P-13 reproduced this in Poppler; embed the complete font rather than ship invisible text.
+  const font = await doc.embedFont(notoSansJpBytes(), { subset: false });
   doc.setTitle(title);
 
   const cur: Cursor = { page: doc.addPage([PAGE_W, PAGE_H]), y: PAGE_H - MARGIN };

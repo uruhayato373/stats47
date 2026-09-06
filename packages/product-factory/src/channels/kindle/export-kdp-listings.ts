@@ -1,11 +1,9 @@
 /**
- * KDP 出品内容 SSOT (.claude/config/kdp-listings.json) を KINDLE_BOOKS から生成する。
- * coconala-listings.json と同じ役割: ブラウザ自動化 (kdp-operator) が読む出品内容 (title/description/
- * keywords/price/epubPath 等) と公開状態 (status/asin) の一元 SoT。既存エントリの status/asin/
- * publishedAt / KDP運用状態は保持 (upsert)。カテゴリは kdp-category.ts が SSOT なので毎回生成する。
+ * KINDLE_BOOKS と検証対象の版から、未公開の入稿提案を生成する。
+ * 公開台帳 (.claude/config/kdp-listings.json) は参照のみ。過去の公開記録を提案内に保持する。
  *
- * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory [-- --apply]
- * 既定は dry-run (差分表示のみ)。--apply で書き込む。
+ * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <版>
+ * .local/kindle-listing-revisions/<版>.json を上書き禁止で作成する。--apply は禁止。
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
@@ -14,6 +12,8 @@ import { KINDLE_BOOKS } from "./book-catalog";
 import { KDP_AUTHOR, KDP_READINGS } from "./kdp-reading";
 import { kdpCategoriesFor } from "./kdp-category";
 import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
+import { assertBookVersion } from "./build-book";
+import { authoredBookSha256 } from "./revision-evidence";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const OUT = join(REPO_ROOT, ".claude/config/kdp-listings.json");
@@ -101,7 +101,7 @@ interface KdpListing {
  * ★内部メモを流し込まない (2026-08-12 実測で 11 冊が該当)
  *   もとは concept + newContentNote をそのまま連結していたため、商品ページに
  *   「ココナラ商品 P-02 へ誘導するファネル」「(上位5+下位5・格差・全国平均)」という
- *   社内の言葉が出る状態だった。`newContentNote` は KDP の 30% 規定を説明する**内部の記録**で、
+   *   社内の言葉が出る状態だった。`newContentNote` は自社の編集品質方針を説明する**内部の記録**で、
  *   読者に向けた文章ではないので紹介文には使わない。
  *   混入は `__tests__/export-kdp-listings.test.ts` が機械的に弾く。
  */
@@ -109,10 +109,10 @@ function buildDescription(concept: string): string {
   return (
     `${concept}\n\n` +
     `【本書の構成】\n` +
-    `指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n` +
+    `統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n` +
     `【データについて】\n` +
-    `本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\n` +
-    `データは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。`
+    `e-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n` +
+    `基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。`
   );
 }
 
@@ -126,6 +126,10 @@ function readExisting(): Record<string, KdpListing> {
 
 function main(): void {
   const apply = process.argv.includes("--apply");
+  if (apply) throw new Error("--apply is blocked: prepare an immutable revision proposal, then complete review/Previewer/archive and obtain owner approval before switching the publication record");
+  const versionIndex = process.argv.indexOf("--version");
+  const version = versionIndex >= 0 ? process.argv[versionIndex + 1] : "";
+  assertBookVersion(version);
   const existing = readExisting();
   const listings: Record<string, KdpListing> = {};
   let generatedCount = 0;
@@ -133,12 +137,16 @@ function main(): void {
 
   for (const b of KINDLE_BOOKS) {
     if (b.status !== "generated" && b.status !== "published") continue;
-    const epubPath = join(BOOKS_ROOT, b.id, "v1", "book.epub");
+    const epubPath = join(BOOKS_ROOT, b.id, version, "book.epub");
     // ★KDP は JPEG/TIFF しか受け付けないので出品に使うのは cover.jpg (cover.png は EPUB 用)。
-    const coverPath = join(BOOKS_ROOT, b.id, "v1", "cover.jpg");
-    if (!existsSync(epubPath)) {
+    const coverPath = join(BOOKS_ROOT, b.id, version, "cover.jpg");
+    if (!existsSync(epubPath) || !existsSync(coverPath)) {
       missingEpub += 1;
       continue;
+    }
+    const metadata = JSON.parse(readFileSync(join(BOOKS_ROOT, b.id, version, "metadata.json"), "utf8"));
+    if (metadata.version !== version || metadata.title !== b.title || metadata.authoredSha256 !== authoredBookSha256(b, join(REPO_ROOT, "packages/product-factory"))) {
+      throw new Error(`${b.id}: current manuscript/catalog differs from the requested EPUB edition`);
     }
     const prev = existing[b.id];
     listings[b.id] = {
@@ -168,8 +176,8 @@ function main(): void {
       priceYen: b.priceYen,
       royaltyPlan: b.priceYen >= 250 && b.priceYen <= 1250 ? 70 : 35,
       kuEnrolled: prev?.kuEnrolled ?? false,
-      epubPath: `.local/kindle-books/${b.id}/v1/book.epub`,
-      coverPath: `.local/kindle-books/${b.id}/v1/cover.jpg`,
+      epubPath: `.local/kindle-books/${b.id}/${version}/book.epub`,
+      coverPath: `.local/kindle-books/${b.id}/${version}/cover.jpg`,
       ...(prev?.draftId ? { draftId: prev.draftId } : {}), // 下書き ID を保持
       status: prev?.status ?? "draft",
       asin: prev?.asin ?? null,
@@ -180,27 +188,29 @@ function main(): void {
       ...(prev?.kdpStatusLabel ? { kdpStatusLabel: prev.kdpStatusLabel } : {}),
       ...(prev?.kdpStatusCheckedAt ? { kdpStatusCheckedAt: prev.kdpStatusCheckedAt } : {}),
     };
-    void coverPath;
     generatedCount += 1;
   }
 
   const payload = {
+    schemaVersion: 1,
+    version,
+    generatedAt: new Date().toISOString(),
+    readyToPublish: false,
+    publicationRecordsChanged: false,
     _note:
-      "KDP (kdp.amazon.com) 出品内容の機械可読 SSOT (stats47 専用)。kdp-operator (Playwright) が読む。" +
-      "ログイン・税務/銀行情報の入力は人間工程 (自動化しない)。実公開 (--commit) はオーナー承認時のみ。" +
-      "status/asin/kuEnrolled は upsert 保持 (カテゴリは kdp-category.ts が SSOT で毎回生成)。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、" +
-      "EPUB は .local/kindle-books/<id>/v1/book.epub (git 管理外)。",
+      "未公開の入稿提案。listings 内の公開属性は旧台帳から引き継いだ履歴で、この改訂版の公開証明ではありません。" +
+      "独立レビュー・Previewer・保全確認・オーナー承認後のみ対象IDを公開台帳へ反映します。" +
+      "ログイン・税務/銀行情報の入力は人間工程です。書籍設計の正典は KINDLE_BOOKS、対象EPUBは明示した version のものです。",
     listings,
+    previousPublicationRecords: existing,
   };
 
-  console.log(`KDP listings: ${generatedCount} 冊 (generated 済) / EPUB 不在でスキップ ${missingEpub}`);
-  if (apply) {
-    mkdirSync(dirname(OUT), { recursive: true });
-    writeFileSync(OUT, JSON.stringify(payload, null, 2) + "\n");
-    console.log(`✅ 書き込み: ${OUT}`);
-  } else {
-    console.log(`ℹ️ dry-run (--apply で ${OUT} に書き込み)`);
-  }
+  console.log(`KDP listings: ${generatedCount} 冊 (generated 済) / 入稿資産不在でスキップ ${missingEpub}`);
+  if (missingEpub) throw new Error(`改訂EPUBまたは表紙欠落 ${missingEpub} 冊。部分台帳を出力しません`);
+  const proposalPath = join(REPO_ROOT, ".local/kindle-listing-revisions", `${version}.json`);
+  mkdirSync(dirname(proposalPath), { recursive: true });
+  writeFileSync(proposalPath, JSON.stringify(payload, null, 2) + "\n", { flag: "wx" });
+  console.log(`準備用提案を書き出しました（公開台帳は未変更）: ${proposalPath}`);
 }
 
 main();

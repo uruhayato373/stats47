@@ -77,6 +77,9 @@ li{margin:0.3em 0;}
 aside.callout{border:1px solid #bbb;background:#f6f6f6;border-radius:4px;padding:0.6em 1em;margin:1.2em 0;}
 aside.callout .callout-label{font-weight:bold;margin:0 0 0.3em;font-size:0.9em;color:#444;}
 aside.callout p{margin:0.3em 0;font-size:0.95em;}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:0.9em;}
+th,td{padding:0.3em;border-bottom:1px solid currentColor;text-align:left;}
+tr{page-break-inside:avoid;break-inside:avoid;}
 .sources h2{font-size:1.1em;}
 .sources p{font-size:0.85em;margin:0.4em 0;}`;
 

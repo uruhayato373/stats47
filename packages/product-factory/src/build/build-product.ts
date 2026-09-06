@@ -46,6 +46,13 @@ export interface ProductBuildResult {
   readonly manifest: ProductManifest;
 }
 
+/** Existing delivery editions must remain immutable, including failed generation folders. */
+export function reserveProductVersion(outRoot: string, id: string, version: string): void {
+  if (!/^P-\d{2}$/.test(id) || !/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$/.test(version)) throw new Error("unsafe product id/version");
+  mkdirSync(join(outRoot, id), { recursive: true });
+  mkdirSync(join(outRoot, id, version));
+}
+
 export async function buildProduct(
   product: ProductDefinition,
   ds: Dataset,
@@ -56,6 +63,7 @@ export async function buildProduct(
   const generatedAt = opts.generatedAt ?? new Date().toISOString();
   const geo = opts.geo ?? loadPrefectureGeometry(1000, JAPAN_CLIP);
   const outDir = join(outRoot, product.id, version);
+  reserveProductVersion(outRoot, product.id, version);
   mkdirSync(join(outDir, "preview"), { recursive: true });
   mkdirSync(join(outDir, "listing"), { recursive: true });
 

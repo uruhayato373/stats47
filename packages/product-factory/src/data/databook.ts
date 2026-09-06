@@ -75,6 +75,7 @@ export interface Databook {
  * P-12 は接続済み全パックの指標の和集合。
  */
 export const DATABOOKS: Readonly<Record<string, Databook>> = {
+  "P-13": { title: "無料お試し — 総人口2024の地図と47都道府県一覧", datasets: [TOTAL_POPULATION_2024] },
   "P-01": {
     title: "47都道府県基礎統計データブック",
     datasets: [
