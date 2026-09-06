@@ -21,9 +21,9 @@ describe('approved license remediation deletion boundary', () => {
     expect(() => assertUnchangedRetentionInventory(expected, objects)).toThrow();
   });
   it('pins the approved raw, retired rankings, obsolete sidecars and three blogs only', () => {
-    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2, 53, 1, 3]);
+    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2, 53, 1, 3, 1]);
     expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.reduce((sum, object) => sum + object.bytes, 0)))
-      .toEqual([48973241, 2111153, 19632, 2408761, 9100, 21052]);
+      .toEqual([48973241, 2111153, 19632, 2408761, 9100, 21052, 15317]);
     const rawIds = new Set(LICENSE_RETENTION_TARGETS[0].objects.map((object) => object.key.split('/')[2]));
     expect([...rawIds].sort()).toEqual(['C02', 'C09', 'C23', 'P03', 'P12', 'P13', 'P17', 'P18', 'P35', 'W01', 'W05']);
     const retired = ['dam-count', 'hydroelectric-power-plant-count', 'thermal-power-plant-count',
@@ -61,5 +61,12 @@ describe('approved license remediation deletion boundary', () => {
     const workflow = readFileSync(path.resolve(__dirname, '../../../../../../.github/workflows/r2-maintenance.yml'), 'utf8');
     expect(workflow).toContain('ref: ${{ github.sha }}');
     expect(workflow).not.toContain('ref: develop');
+  });
+  it('pins separately approved added AI object without widening the original125 inventory', () => {
+    const added = LICENSE_RETENTION_TARGETS[6];
+    expect(added.id).toBe('license-remediation-added-biomass-ai-20260906');
+    expect(added.prefixes).toEqual(['app/ranking/biomass-power-station-count/ai-content.json']);
+    expect(added.objects).toEqual([{ key: added.prefixes[0], bytes: 15317, etag: '"fa40218b7e3a98e332015dcd52371ad8"' }]);
+    expect(LICENSE_RETENTION_TARGETS[1].objects.some((object) => object.key === added.prefixes[0])).toBe(false);
   });
 });
