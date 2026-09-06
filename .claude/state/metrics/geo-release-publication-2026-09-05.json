@@ -3124,6 +3124,19 @@
       "publicHead404": 435,
       "backupPreserved": true,
       "retiredRankingAssets": "HOLD_UNTIL_CODE_DEPLOYED",
+      "latestPreflight": {
+        "status": "HOLD_ADDITIONAL_OBJECT_OWNER_DECISION",
+        "checkedAt": "2026-09-06T01:04:27.039Z",
+        "original184Changed": 0,
+        "retiredRankingExpected": 125,
+        "retiredRankingActual": 126,
+        "addedKey": "app/ranking/biomass-power-station-count/ai-content.json",
+        "addedBytes": 15317,
+        "addedSha256": "f477390e60d769a8c4bc3e692d550e60eb02431b92da999fc976d8f658335265",
+        "backup": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/added-asset-backup.json",
+        "otherFourTargets": "EXACT_KEY_SIZE_ETAG_MATCH; total59; still held until live retirement verified",
+        "deletedThisPreflight": 0
+      },
       "receiptDirectory": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905"
     },
     "publicationPreflight": {
