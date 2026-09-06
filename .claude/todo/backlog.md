@@ -648,19 +648,19 @@ updated: 2026-09-05
   `.claude/state/source-inventory/kakei-marketing/2015/` は coverage 100%（combined-analysis 259 / new-metric 13 / reuse 3 / context-only 27 / not-applicable 5）。
   wave 0 として education-culture・real-income・fishery-marine に evidenceTopics を各1件追加済み（`validate:catalog` green）。契約は
   `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md` §4.4。
+- **進捗（2026-09-06）**: step 2〜5 は記事側が完了。既存記事更新 wave・新規記事 wave A/B の全記事と
+  `<pref>-food-culture` 47本すべてが quality-gate + blog-critic PASS で R2 公開済み（live md5 一致で実測）。
+  47本すべての live 本文に「数量×価格で分解する」H2 がある。接地器 `build-kakei-quantity-price.mjs` は
+  未 commit だったので `countsNote`（counts は「他の〜」残余品目を除いた数）付きで develop へ載せた。
 - **次（実行順）**:
-  1. new-metric 2件（config 済・2026-09-05）: `academic-achievement-test-average-rate`（NIER 2025年度・manual・provenance 9点、
-     `packages/data-configs/scripts/ingest-nier-achievement.ts --year 25` が `.local/r2/app/stats/` へ書き込み済み）と
-     `information-communication-expenditure`（kakei-chousa `filter.axisSum` で5品目合算・dry-run 47県OK）→ `information-communication-coefficient`
-     （calculated ratio ÷ 消費支出）。R2 反映済み（2026-09-05: app/stats 3件・app/ranking item/values・all.json 2210件、KNOWN/SITEMAP 再生成済み）。
-     **残り**: commit → develop→main deploy → CDN purge → Googlebot UA で `/ranking/<key>` 200 実測（`ranking-publisher` 手順 6〜8）、OGP/カード画像は sync-snapshots か週次 self-heal。
-  2. 既存記事の更新 wave（最新年で再計算・[!WARNING]の追加）: `spinach-consumption-ranking`（学力との符合は相関≠因果）、
-     `engel-coefficient-prefecture-ranking`（論理の方向・購入価格）、酒類3本、外食2本、魚介2本、ぎょうざ/納豆の集計ルール注記（ranking noteも）。
-  3. 新規記事 wave A（既存接地器で書ける型D/D2/B）: 年収五分位×教育費・大分類・逆進品目・医薬/医療・自動車・家電・教養娯楽・旅行・衣料、
-     れんこん/さやまめ/柑橘、ゴルフ（津・名古屋）、進学率+就職率、エンゲル係数×県民所得の散布図、産地×消費地。
-  4. 新規記事 wave B（月次接地器の新設が前提の型C）: 食パン×CPIのギッフェン財、ビールの最多月シフト、冬物バーゲンの成功条件、
-     ネクタイ・ストッキングの縮小。/japan 時系列候補と併せて設計する。
-  5. `<pref>-food-culture` シリーズ: 既存9本を4分類（多く高く/高く/多く/支出額大）の視点で更新し、残り38県を最新年で新規作成。
+  1. **残るのは deploy のみ**: new-metric 2件（`academic-achievement-test-average-rate` / `information-communication-expenditure`
+     → `information-communication-coefficient`）は config・R2・KNOWN/SITEMAP まで反映済み。
+     develop→main PR → CI green → merge → CDN purge → Googlebot UA で `/ranking/academic-achievement-test-average-rate` /
+     `/ranking/information-communication-coefficient` / `/ranking/information-communication-expenditure` が 200
+     （title が「見つかりません」でない）を実測する（`ranking-publisher` 手順 6〜8）。
+     既存記事の改稿（`income-quintile-education` 等の prerender 済みページ）もこの deploy で本番反映される。
+  2. inventory の `combined-analysis` 各項目が記事・theme・area のいずれかへ接続されているかを
+     管理画面 `/content/references` で確認し、未接続分だけを次の wave に回す。
 - **停止条件**: 書籍の数値・図表・本文を公開物へ流さない。全国集計（五分位・年齢階級・月次）を/rankingへ載せない。
   県庁所在市の値を県全体として書かない。一次資料で再取得できない項目は`primary-source-unavailable`へ戻す。
   R2 write・deploy・SNS公開は別途承認。
