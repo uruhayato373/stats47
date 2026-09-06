@@ -488,9 +488,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-convenience-store-sales",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-current-liabilities-balance-multi-person-households-per-household": {
       "vertical": "stats47-note",
@@ -521,9 +521,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-electricity-demand",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-electricity-generation-capacity": {
       "vertical": "stats47-note",
@@ -543,9 +543,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-final-energy-consumption-per-capita",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-general-households": {
       "vertical": "stats47-note",
@@ -565,9 +565,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-aichi",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-aomori": {
       "vertical": "stats47-note",
@@ -576,9 +576,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-aomori",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-hiroshima": {
       "vertical": "stats47-note",
@@ -587,9 +587,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-hiroshima",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-hokkaido": {
       "vertical": "stats47-note",
@@ -598,9 +598,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-hokkaido",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-late-elderly-medical-expense-per-insured": {
       "vertical": "stats47-note",
@@ -653,9 +653,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-private-rental-housing-rent-per-3-3m2",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-railway-station-count": {
       "vertical": "stats47-note",
@@ -664,9 +664,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-railway-station-count",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-road-total-length": {
       "vertical": "stats47-note",
@@ -675,9 +675,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-road-total-length",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-room-utilization-rate": {
       "vertical": "stats47-note",
@@ -708,9 +708,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-total-overnight-guests",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-vacant-housing-rate": {
       "vertical": "stats47-note",
@@ -719,9 +719,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-vacant-housing-rate",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "d-geo-flood-population-mesh": {
       "vertical": "stats47-note",
