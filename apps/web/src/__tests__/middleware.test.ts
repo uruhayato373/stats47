@@ -351,4 +351,17 @@ describe('動的コンテンツの soft-404 防止', () => {
     ).not.toBe(410);
     expect(middleware(request('/blog/tags')).status).not.toBe(410);
   });
+
+  test.each([
+    'airport-count-vs-wind-power-plant-count-facility',
+    'dam-count-prefecture-gap',
+    'dam-count-vs-road-expressway-length',
+  ])('公開終了ブログ %s は旧R2本文の有無にかかわらず410', (slug) => {
+    expect(middleware(request(`/blog/${slug}`)).status).toBe(410);
+    expect(middleware(request(`/blog/${slug}?utm_source=old-link`)).status).toBe(410);
+  });
+
+  test('既にR2公開済みの記事は古いallowlist由来の410にしない', () => {
+    expect(middleware(request('/blog/beer-peak-month-july-to-december')).status).not.toBe(410);
+  });
 });

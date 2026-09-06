@@ -9,6 +9,7 @@ import {
 import { JAPAN_DERIVED_ADDITIVE_RECIPE_KEY } from "../types";
 
 const EXPECTED_KEYS = [
+  "port-count",
   "fishing-port-count",
   "fishing-port-count-ksj",
   "laspeyres-index-prefecture",
@@ -21,6 +22,7 @@ const EXPECTED_KEYS = [
 ] as const;
 
 const ADOPTED_KEYS = [
+  "port-count",
   "fishing-port-count-ksj",
   "railway-passengers",
   "railway-station-count",
@@ -28,15 +30,15 @@ const ADOPTED_KEYS = [
 ] as const;
 
 describe("JAPAN_DERIVED_METRIC_DECISIONS", () => {
-  it("unknown-non-estat 9件を重複なく全て判定する", () => {
-    expect(JAPAN_DERIVED_METRIC_DECISIONS).toHaveLength(9);
+  it("既存9件と単年指定港数を重複なく全て判定する", () => {
+    expect(JAPAN_DERIVED_METRIC_DECISIONS).toHaveLength(10);
     expect(
       [...JAPAN_DERIVED_METRIC_DECISIONS.map((decision) => decision.metricKey)].sort(),
     ).toEqual([...EXPECTED_KEYS].sort());
-    expect(new Set(JAPAN_DERIVED_METRIC_DECISIONS.map((decision) => decision.metricKey)).size).toBe(9);
+    expect(new Set(JAPAN_DERIVED_METRIC_DECISIONS.map((decision) => decision.metricKey)).size).toBe(10);
   });
 
-  it("採用4件はderived-additive recipeと入力metricを持つ", () => {
+  it("採用5件はderived-additive recipeと入力metricを持つ", () => {
     const adopted = JAPAN_DERIVED_METRIC_DECISIONS.filter(
       (decision) => decision.verdict === "adopted",
     );
@@ -62,7 +64,7 @@ describe("JAPAN_DERIVED_METRIC_DECISIONS", () => {
     }
   });
 
-  it("全9件がregistryに実在し、採用分はJapan catalogへ載る", () => {
+  it("全件がregistryに実在し、採用分はJapan catalogへ載る", () => {
     for (const decision of JAPAN_DERIVED_METRIC_DECISIONS) {
       expect(getMetricConfig(decision.metricKey)).toBeDefined();
       if (decision.verdict === "rejected") continue;

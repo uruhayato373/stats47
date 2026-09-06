@@ -5,6 +5,15 @@
   "status": "PASS",
   "method": "Independent mesh tuple sums and old/new subset comparison; not independent polygon geometry recomputation",
   "publicDeployment": "NOT_EXECUTED",
+  "sourcePublication": {
+    "status": "PASS",
+    "date": "2026-09-05",
+    "exactArchives": 201,
+    "bytes": 2920196187,
+    "verifiedRemoteHashes": 201,
+    "existingObjectsOverwritten": 0,
+    "analysisBundlePublished": false
+  },
   "beforeGeneratedAt": "2026-08-31T22:51:31.116Z",
   "afterGeneratedAt": "2026-09-05T09:04:49.856Z",
   "inputArchives": {

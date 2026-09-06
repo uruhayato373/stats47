@@ -17,6 +17,9 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import { assertDiffPushComplete } from "./lib/diff-push-result";
+import { assertKsjPublicAssetsAllowed } from "./lib/ksj-publication-guard";
+import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY, blogSnapshotWriteCondition } from './lib/blog-publication-guard';
+import { createS3ImageObjectStore } from '../image-pipeline';
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
@@ -111,6 +114,10 @@ async function main(): Promise<void> {
   if (prefix) console.log(`プレフィックス: ${prefix}`);
 
   const localFiles = collectLocalFiles(localDir, outputDir);
+  assertKsjPublicAssetsAllowed(localFiles.map((file) => file.key), (key) =>
+    fs.readFileSync(path.join(outputDir, key)));
+  assertBlogPublicAssetsAllowed(localFiles.map((file) => file.key), (key) =>
+    fs.readFileSync(path.join(outputDir, key)));
   console.log(`ローカルファイル: ${localFiles.length}`);
 
   const manifest = loadManifest(prefix);
@@ -163,6 +170,10 @@ async function main(): Promise<void> {
     process.exit(1);
   }
   const s3 = new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+  const blogCandidate = toUpload.find((file) => file.key === BLOG_INDEX_KEY);
+  const blogBody = blogCandidate ? fs.readFileSync(blogCandidate.absolutePath) : null;
+  const blogCondition = blogBody
+    ? await blogSnapshotWriteCondition(blogBody, createS3ImageObjectStore(s3, BUCKET)) : null;
 
   let success = 0;
   let errors = 0;
@@ -173,12 +184,15 @@ async function main(): Promise<void> {
     await Promise.all(
       chunk.map(async (f) => {
         try {
-          const body = fs.readFileSync(f.absolutePath);
+          const body = f.key === BLOG_INDEX_KEY && blogBody ? blogBody : fs.readFileSync(f.absolutePath);
           await s3.send(new PutObjectCommand({
             Bucket: BUCKET,
             Key: f.key,
             Body: body,
             ContentType: getContentType(f.key),
+            ...(f.key === BLOG_INDEX_KEY && blogCondition ? {
+              IfMatch: blogCondition.ifMatch, IfNoneMatch: blogCondition.ifNoneMatch,
+            } : {}),
           }));
           success++;
           updatedManifest[f.key] = { size: f.size, mtime: f.mtime };

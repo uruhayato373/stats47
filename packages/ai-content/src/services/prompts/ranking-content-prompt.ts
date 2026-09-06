@@ -27,6 +27,29 @@ function buildRegionMapText(): string {
   }).join("\n");
 }
 
+/**
+ * 地方ごとに順位の良い順で並べた表 (プロンプト埋め込み用)。
+ * 「地方内で最も高い/低い」の主張が同じ地方の 2 県で矛盾する誤りを、モデルの記憶ではなく提供データで防ぐ
+ * (2026-09-05 batch2 で critic が検出した事実誤り)。括弧を使わない (paren-number を実演しない)。
+ * 県名の対応付けが 9 割未満なら空文字を返し、誤った表を出さない。
+ */
+function buildRegionRankText(rows: RankingContentInput["allPrefectures"]): string {
+  const prefectures = fetchPrefectures();
+  const codeToName = new Map(prefectures.map((p) => [p.prefCode, p.prefName]));
+  const byName = new Map(rows.map((r) => [r.areaName, r]));
+  let matched = 0;
+  const lines = REGIONS.map((region) => {
+    const members = region.prefectures
+      .map((code) => byName.get(codeToName.get(code) ?? ""))
+      .filter((r): r is NonNullable<typeof r> => Boolean(r))
+      .sort((a, b) => a.rank - b.rank);
+    matched += members.length;
+    return `- ${region.regionName}: ${members.map((r) => `${r.areaName} ${r.rank}位`).join(", ") || "該当県なし"}`;
+  });
+  if (rows.length === 0 || matched < rows.length * 0.9) return "";
+  return lines.join("\n");
+}
+
 export interface RankingContentPromptOptions {
   /**
    * NotebookLM 等から取得した追加コンテキスト（白書・政府統計の出典等）。
@@ -55,6 +78,16 @@ export function buildRankingContentPrompt(
     .join("\n");
 
   const regionMapText = buildRegionMapText();
+  // FAQ の「平均を上回る県数」をモデルに数えさせない (batch2 で 2 件が誤集計・critic MAJOR)。機械計算して渡す
+  const aboveAverage = input.allPrefectures.filter((r) => r.value > input.average).length;
+  const belowAverage = input.allPrefectures.filter((r) => r.value < input.average).length;
+  const regionRankText = buildRegionRankText(input.allPrefectures);
+  const regionRankSection = regionRankText
+    ? `
+
+## 地方別の順位（順位の良い順。「地方の中で最も高い / 低い」はここで確認する）
+${regionRankText}`
+    : "";
 
   const extraContextSection = options?.extraContext
     ? `
@@ -78,7 +111,8 @@ ${options.extraContext}
 4. **データ外の知識を混ぜない**: 特定の施設名、政策名、制度名、企業名への言及は禁止（提供データに含まれていない限り）
 5. **括弧の中に数値を書かない**: 全セクション共通。決定的ゲートが機械検出して公開を止める最頻の違反。
    - NG:「愛知県（746.0万人）が4位」「石川県（2.5人、31位）」
-   - OK:「愛知県は4位」「石川県は31位で全国平均をやや下回る」
+   - NG:「受療率（人口10万対）」「支出額（2人以上の世帯）」← 単位・対象の注記でも括弧に数字が入れば同じく違反
+   - OK:「愛知県は4位」「石川県は31位で全国平均をやや下回る」「人口10万人あたりの受療率」「2人以上の世帯の支出額」
    - 許容されるのは「（2020年度）」のような年度表記と「（出典…）」のみ。詳細は末尾の文体ルール参照${extraContextSection}
 
 ## ランキングデータ（全${input.totalCount}都道府県）
@@ -89,11 +123,12 @@ ${options.extraContext}
 - 平均値: ${input.average.toLocaleString()}${input.unit}
 - 最大値: ${input.max.toLocaleString()}${input.unit}
 - 最小値: ${input.min.toLocaleString()}${input.unit}
+- 平均を上回る県: ${aboveAverage} 県 / 平均を下回る県: ${belowAverage} 県（平均と同値の県は含めない。FAQ ではこの数をそのまま使い、自分で数え直さない）
 
 ${allPrefText}
 
 ## 7地方区分
-${regionMapText}
+${regionMapText}${regionRankSection}
 
 ## 出力形式
 
@@ -115,7 +150,7 @@ ${regionMapText}
       },
       {
         "question": "<全国平均はいくつ？という趣旨の質問文>",
-        "answer": "<平均値と、平均を上回る県数・下回る県数を含む回答>",
+        "answer": "<平均値と、上の「平均を上回る県 / 下回る県」の県数をそのまま使った回答。自分で数え直さない>",
         "type": "average"
       },
       {
@@ -163,9 +198,11 @@ ${regionMapText}
 - 書くべき内容の例:
   - 上位5県の値の合計が全体の何%を占めるか（集中度）
   - 1位と47位の倍率（格差の大きさ）
-  - 地方ブロック間の平均値比較
+  - 中位帯の厚み（平均付近に何県が集まるか、分布は偏っているか）
   - 上位県・下位県に共通する地理的特徴（太平洋側/日本海側、都市部/地方部 等）
-- 「なぜそうなるか」の因果は書かない。「〜という傾向が見られる」で止める
+- **regionalAnalysis と同じ結論を別の言葉で繰り返さない**。「どの地方が高く、どの地方が低いか」は
+  regionalAnalysis の担当。insights は地方単位ではなく、全国横断の集計・分布・格差の読みに徹する
+- 「なぜそうなるか」の因果は書かない。「〜という傾向が見られます」で止める
 
 ### FAQ のルール
 
@@ -176,11 +213,25 @@ ${regionMapText}
 ### prefectureCommentary のルール（最重要 - 必ず ${input.totalCount} 件すべて含める）
 
 - 提供されたランキングリストに含まれる全 ${input.totalCount} 都道府県について、1 件ずつ commentary を作成する
-- 各 commentary は **60〜120 字**。短すぎても長すぎてもいけない
-- 内容に含める要素（順序は自由）:
-  1. その県が「上位 / 中位 / 下位」のどこに位置するか（順位帯）
-  2. 属する地方区分（北海道・東北 / 関東 / 中部 / 近畿 / 中国 / 四国 / 九州・沖縄）の中での相対位置
-  3. 全国平均（${input.average.toLocaleString()}${input.unit}）との比較（上か下か、どの程度離れているか）
+- 各 commentary は **60〜120 字**。短すぎても長すぎてもいけない。59 字以下は不合格。
+  「順位帯の位置づけ」と「地方内での相対位置または全国平均との比較」の 2 文で組むと 60 字を下回らない
+- 47 件で同じ文型を繰り返さない。書き出し（「全国◯位の水準で」等）と述部を県ごとに変え、
+  同順位帯の県でも着眼点（地方内の位置 / 平均との距離 / 隣接県との対比）を入れ替える
+- 内容: 「順位帯（上位 / 中位 / 下位）」は必ず入れる。それに加えて次の視点から **県ごとに 1〜2 つを選び、
+  47 件で組み合わせを入れ替える**（全県に同じ 3 要素を同じ順で書くと定型の穴埋めになり不合格）:
+  - 属する地方区分（北海道・東北 / 関東 / 中部 / 近畿 / 中国 / 四国 / 九州・沖縄）の中での相対位置
+  - 全国平均（${input.average.toLocaleString()}${input.unit}）との距離感（大きく上回る / わずかに下回る 等）
+  - 同地方または隣接する 1 県との対比（引用は 1 県まで）
+  - その順位帯の密集度（僅差で並ぶ帯にいるのか、前後と差が開いているのか）
+- 文型の例（これらを混ぜ、同じ書き出しを連続させない）:
+  - 「○○地方の中では最上位に近く、全国でも上位帯に入ります。平均との差は小さくありません。」
+  - 「順位は中位ですが、前後の県と僅差で並ぶ帯にあります。地方内では△△県に次ぐ位置です。」
+  - 「全国平均を下回る下位帯です。同じ地方の□□県とは対照的な位置にあります。」
+- **書き出しの回し方**: 「○○地方の中では」で始める解説は ${input.totalCount} 件中 12 件以下にする。残りは順位帯・
+  平均との距離・隣接県との対比・順位帯の密集度のどれかから書き始める。読者は自県の 1 件しか読まないが、
+  レビューは ${input.totalCount} 件を並べて読む
+- 「地方の中で最も高い / 最も低い」と書く前に「地方別の順位」で確認する。同じ地方の 2 県に「最も低い」と書くのは事実誤り
+- 長さは 2 文で合計 60〜100 字を目安にする（1 文だけの解説は 60 字に届かない）
 - **禁止事項**:
   - 数値を 2 つ以上列挙しない（順位と値はテンプレで表示するため、commentary 文内で繰り返さない）
   - 「〜のため」「〜が原因」などの因果推測
@@ -191,6 +242,8 @@ ${regionMapText}
 
 ### 文体ルール（全セクション共通）
 
+- **ですます調で統一する**: insights / regionalAnalysis / FAQ / commentary のすべての文を「〜です」「〜ます」で終える。
+  「〜である」「〜だ」「〜見られる。」「〜表れている。」のような常体で文を終えない（見出しは除く）
 - **数値の羅列・列挙は禁止**: 同じページにチャートとテーブルがあるため、テキストの役割は「データを読み解いた分析」を提供すること。都道府県名と数値を並べるだけの文章は価値がない
 - **括弧による数値挿入を全面禁止**: 都道府県名の直後に括弧で値・順位を入れてはならない。
   - NG:「愛知県（746.0万人）が4位」「石川県（2.5人、31位）」「鹿児島県（2.6人）が25位」

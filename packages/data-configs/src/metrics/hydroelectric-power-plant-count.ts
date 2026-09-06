@@ -52,5 +52,5 @@ export const hydroelectricPowerPlantCount: MetricConfig = {
   // (KSJ-PREF-ASSIGN-01)。
   "seoTitle": "水力発電所数ランキング都道府県【2013年】｜1位長野県（54か所）",
   "seoDescription": "2013年の水力発電所数の都道府県別ランキング。1位長野県（54か所）、最下位香川県（0か所）で地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

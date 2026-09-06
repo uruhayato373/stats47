@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
+import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
 
 import {
   GeoCrossAnalysisArticle,
@@ -17,18 +18,24 @@ type Props = {
 export const revalidate = 86400;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { analysisSlug, prefCode } = await params;
+  const { analysisSlug, prefCode, stage } = await params;
+  const route = resolveGeoStageRoute(
+    `/geo/${analysisSlug}/${prefCode}/${stage}`
+  );
   const prefecture = PREFECTURE_LIST_2DIGIT.find((p) => p.code === prefCode);
   return {
     title: isGeoCrossAnalysisSlug(analysisSlug)
       ? `${prefecture?.name ?? ''}｜${GEO_CROSS_ANALYSIS_CONFIGS[analysisSlug].shortTitle}`
       : '地域分析',
     alternates: {
-      canonical: isGeoCrossAnalysisSlug(analysisSlug)
-        ? `/geo/${analysisSlug}`
-        : '/geo',
+      canonical:
+        route?.kind === 'landing'
+          ? route.canonical
+          : isGeoCrossAnalysisSlug(analysisSlug)
+            ? `/geo/${analysisSlug}`
+            : '/geo',
     },
-    robots: { index: false, follow: true },
+    robots: { index: route?.kind === 'landing', follow: true },
   };
 }
 

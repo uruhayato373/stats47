@@ -14,7 +14,7 @@ test.describe('/content/references 参考文献の活用・展開管理', () => 
       page.getByRole('heading', { name: /展開先別の状況/ })
     ).toBeVisible();
     await expect(
-      page.getByRole('row', { name: /テーマページ 11 19 0 3 28/ })
+      page.getByRole('row', { name: /テーマページ 12 18 0 3 28/ })
     ).toBeVisible();
     await expect(
       page.getByRole('row', { name: /YouTube動画 0 1 15 0 45/ })

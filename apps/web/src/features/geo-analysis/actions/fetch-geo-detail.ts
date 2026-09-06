@@ -1,13 +1,36 @@
 'use server';
 
-import { isGeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
-import { loadGeoAnalysisPrefDetail } from '../lib/load-geo-analysis-evidence';
+import { GEO_PREF_CODES } from '@stats47/data-configs/business-plan';
 
-export async function fetchGeoDetailAction(slug: string, prefCode: string) {
+import { GEO_CROSS_ANALYSIS_SLUGS } from '../lib/geo-cross-analysis';
+import { isTimestamp } from '../lib/geo-runtime-contract';
+import { loadGeoAnalysisPrefBundle } from '../lib/load-geo-analysis-evidence';
+
+export async function fetchGeoDetailAction(
+  slug: string,
+  prefCode: string,
+  expected: { generatedAt: string; sha256: string }
+) {
+  // 入力文字列を取得先へ引き継がず、git定義の有限集合からキーを選び直す。
+  const canonicalSlug = GEO_CROSS_ANALYSIS_SLUGS.find((value) => value === slug);
+  const canonicalPrefCode = GEO_PREF_CODES.find((value) => value === prefCode);
   if (
-    !isGeoCrossAnalysisSlug(slug) ||
-    !/^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(prefCode)
+    !canonicalSlug ||
+    !canonicalPrefCode ||
+    !expected ||
+    !isTimestamp(expected.generatedAt) ||
+    !/^[a-f0-9]{64}$/.test(expected.sha256)
   )
     return null;
-  return loadGeoAnalysisPrefDetail(slug, prefCode);
+  const bundle = await loadGeoAnalysisPrefBundle(canonicalSlug, canonicalPrefCode);
+  const artifact = bundle?.manifest.stages
+    .find((stage) => stage.id === 'population-mesh')
+    ?.outputs.find((output) => output.areaCode === `${canonicalPrefCode}000`);
+  if (
+    !bundle ||
+    bundle.manifest.generatedAt !== expected.generatedAt ||
+    artifact?.sha256 !== expected.sha256
+  )
+    return null;
+  return bundle.detail;
 }

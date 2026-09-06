@@ -9,7 +9,11 @@ model: sonnet
 > **2026-08-30 運用境界**: 日次の新規量産は `ai-content-gemini-daily.yml` が
 > Gemini API author → 決定的監査 → 別リクエストの Gemini critic で行う。
 > 本 agent は quarantine・高流入 key・根拠補強などの**例外的な手動是正**を所有する。
-> Claude を定期自動経路に戻さない。正典: `.claude/rules/ranking-content-standards.md`。
+> Claude を定期自動経路 (CI cron) に戻さない。正典: `.claude/rules/ranking-content-standards.md`。
+>
+> **2026-09-05 追記**: 在庫の量産は本 agent (Agent tool 経路・1 件 $16-18) ではなく
+> headless `claude -p` 経路 `.claude/scripts/ai-content/run-claude-batch.sh` で行う (ユーザー端末実行)。
+> 本 agent を量産に使わない。理由と実装契約は正典 §2026-09-05。
 
 ランキング詳細ページに載る **AI 生成テキスト (考察・地域傾向・FAQ・県別解説) の生成と是正を所有する**
 専任エージェント。blog の `article-writer` に相当する ranking ai-content 版。従来この生成は

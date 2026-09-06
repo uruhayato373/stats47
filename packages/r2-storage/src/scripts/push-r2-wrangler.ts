@@ -24,6 +24,8 @@ import path from "node:path";
 import { findLocalR2Root } from "../lib/utils/find-local-r2-root";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import { assertKsjPublicAssetsAllowed } from "./lib/ksj-publication-guard";
+import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY } from './lib/blog-publication-guard';
 
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
 
@@ -66,6 +68,9 @@ function main(): void {
   }
 
   const files = listFilesRecursive(root, prefix);
+  assertKsjPublicAssetsAllowed(files, (key) => fs.readFileSync(path.join(root, key)));
+  assertBlogPublicAssetsAllowed(files, (key) => fs.readFileSync(path.join(root, key)));
+  if (files.includes(BLOG_INDEX_KEY)) throw new Error('blog索引はCAS必須: S3 exact/diff publisherを使用してください');
   console.log(`${apply ? "PUSH" : "DRY-RUN"}: bucket=${BUCKET} prefix=${prefix} files=${files.length}`);
 
   if (!apply) {

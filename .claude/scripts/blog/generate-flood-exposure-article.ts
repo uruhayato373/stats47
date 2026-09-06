@@ -1,0 +1,65 @@
+/** Article-only derivation. Usage: tsx this-file.ts /absolute/path/to/local/r2 */
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import { generateChoroplethSvg } from '../../../packages/svg-builder/src/charts/choropleth.ts';
+import { svgThemeStyle } from '../../../packages/svg-builder/src/shared/theme.ts';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+const dir = path.join(root, 'docs/21_ブログ記事原稿/2050-population-flood-exposure/data');
+const inputRoot = process.argv[2];
+assert(inputRoot && path.isAbsolute(inputRoot), 'Pass an absolute local R2 root');
+const prefix = 'app/geo/population-flood-risk';
+const sources: Record<string, unknown>[] = [];
+fs.mkdirSync(dir, { recursive: true });
+const write = (name: string, value: unknown) => fs.writeFileSync(path.join(dir, name), `${JSON.stringify(value, null, 2)}\n`);
+function read(name: string) {
+  const bytes = fs.readFileSync(path.join(inputRoot, prefix, name));
+  const sha256 = createHash('sha256').update(bytes).digest('hex');
+  sources.push({ url: `https://storage.stats47.jp/${prefix}/${name}`, key: `${prefix}/${name}`, sha256, bytes: bytes.length });
+  fs.writeFileSync(path.join(dir, `geo-${name.replaceAll('/', '-')}`), bytes);
+  return JSON.parse(bytes.toString());
+}
+const item = read('item.json');
+const manifest = read('manifest.json');
+const tokyo = read('pref/13.json');
+const toyama = read('pref/16.json');
+assert.equal(item.dataQuality.inputCounts.floodZipFiles, 201);
+assert.equal(item.rows.length, 47);
+assert.equal(manifest.generatedAt, item.generatedAt);
+assert.equal(tokyo.generatedAt, item.generatedAt);
+assert.equal(toyama.generatedAt, item.generatedAt);
+assert.equal(manifest.quality.conservationChecks, 47);
+assert.equal(manifest.aggregate.sha256, sources[0].sha256);
+const floodInputs = manifest.inputs.filter((i: any) => i.datasetId === 'A31b');
+assert.equal(floodInputs.filter((i: any) => i.key.includes('/source/10/')).length, 107);
+assert.equal(floodInputs.filter((i: any) => i.key.includes('/source/20/')).length, 94);
+const fmt = (n: number) => Math.round(n).toLocaleString('en-US');
+const ranks = item.rows.map((r: any) => ({ areaCode: r.areaCode, areaName: r.areaName, rank: r.rank, value: r.values.floodExposureShare2050 }));
+write('flood-prefecture-rankings.json', { label: '2050年浸水想定区域人口比率', unit: '%', data: ranks });
+const map = { title: '2050年 浸水想定区域人口比率', subtitle: '1kmメッシュ中心点による近似', unit: '%', scheme: 'Oranges', legendLabels: ['比率が低い', '比率が高い'], data: ranks };
+write('flood-tile-grid.json', map);
+fs.writeFileSync(path.join(dir, 'flood-tile-grid.svg'), generateChoroplethSvg(ranks.map((r: any) => ({ code: r.areaCode, name: r.areaName, value: r.value })), { ...map, legendLabels: ['比率が低い', '比率が高い'], formatValue: (v) => v.toFixed(1) }));
+const sourceFor = (name: string, formula: string, surveyScopeReason: string) => write(`${name}.source.json`, { kind: 'derived', surveyScope: 'not-applicable', surveyScopeReason, source: `r2:${prefix}/item.json`, inputs: sources, generatedAt: item.generatedAt, generatedBy: '.claude/scripts/blog/generate-flood-exposure-article.ts', formula, license: 'CC BY 4.0; 国土交通省データを加工', dataFile: `${name}.json` });
+sourceFor('flood-tile-grid', 'item.rows[].values.floodExposureShare2050; no rank-to-rank join', '将来人口メッシュの中心点を洪水ポリゴンに包含判定し、重複を除いた区域内人口比率を県別に示す独自GIS派生値であり、統計調査の集計表ではない。入力・演算・保存則はcanonical Geo manifestへ接続する。');
+const line = { populationMeshes: manifest.quality.populatedMeshes, riverClass10: 107, riverClass20: 94, floodFeatures: item.dataQuality.inputCounts.floodFeatures, exposedMeshes: manifest.quality.exposedMeshes, prefectures: 47, conservationChecks: 47 };
+write('flood-lineage.json', line);
+const svg = (title: string, content: string, height = 600) => `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="${height}" viewBox="0 0 960 ${height}" role="img" aria-label="${title}" font-family="Hiragino Sans,Noto Sans JP,sans-serif"><title>${title}</title>${svgThemeStyle()}<rect width="960" height="${height}" class="svg-bg"/><g class="svg-axis">${content}</g></svg>`;
+const box = (y: number, title: string, detail: string) => `<rect x="60" y="${y}" width="840" height="86" rx="8" fill="none" stroke="#8495a7"/><text x="90" y="${y + 34}" font-size="24" font-weight="700">${title}</text><text x="90" y="${y + 65}" font-size="20">${detail}</text>`;
+fs.writeFileSync(path.join(dir, 'flood-lineage.svg'), svg('人口と洪水区域から県別比率を作る工程', `<text x="60" y="44" font-size="28" font-weight="700">人口と洪水区域から県別比率を作る工程</text>${box(76, '計算入力：人口メッシュと洪水ポリゴン', `${fmt(line.populationMeshes)}メッシュ × 201ファイル（107＋94）`)}<text x="480" y="194" font-size="28" text-anchor="middle">↓</text>${box(214, '空間演算：メッシュ中心点の包含判定', '複数の洪水区域に含まれても、人口は1回だけ加算')}<text x="480" y="332" font-size="28" text-anchor="middle">↓</text>${box(352, '県別途中データ：判定結果と人口を保存', `全国 ${fmt(line.exposedMeshes)}メッシュが区域内と判定`)}<text x="480" y="470" font-size="28" text-anchor="middle">↓</text>${box(490, '集計：区域内人口 ÷ 県内人口', `${line.prefectures}県の結果と、${line.conservationChecks}県の保存則を照合`)}`));
+sourceFor('flood-lineage', 'manifest.quality and exact A31b river-class input inventory', '人口メッシュと洪水ポリゴンの入力件数、中心点包含、重複除去、県別保存則を数値付きで説明するGIS計算工程図であり、統計調査の観測結果を転載する図ではない。');
+// Tokyo mainland crop; rectangles are actual output mesh bounds, not invented geography.
+const bbox = [138.9, 35.5, 139.95, 35.93];
+const meshes = tokyo.meshes.filter((m: number[]) => m[1]/1e6 >= bbox[0] && m[3]/1e6 <= bbox[2] && m[2]/1e6 >= bbox[1] && m[4]/1e6 <= bbox[3]);
+const view = { title: '東京都・本土側の中心点包含結果', bbox, coordinateScale: 1e6, selection: '全境界がbbox内のメッシュのみ。島しょ部・範囲外を図示しない。県全体集計は全1611メッシュ。', meshes, prefectureSummary: tokyo.summary };
+write('tokyo-mesh-evidence.json', view);
+const scale = 800/(bbox[2]-bbox[0]);
+const x = (n: number) => 80+(n/1e6-bbox[0])*scale;
+const y = (n: number) => 100+(bbox[3]-n/1e6)*scale;
+const rects = meshes.map((m: number[]) => `<rect x="${x(m[1]).toFixed(2)}" y="${y(m[4]).toFixed(2)}" width="${((m[3]-m[1])/1e6*scale).toFixed(2)}" height="${((m[4]-m[2])/1e6*scale).toFixed(2)}" fill="${m[7] > 0 ? '#e25d3d' : '#ccd5df'}" stroke="#ffffff" stroke-width="0.4"><title>${m[0]}：${m[7] > 0 ? '区域内' : '区域外'}、2050年人口${fmt(m[6])}人</title></rect>`).join('');
+fs.writeFileSync(path.join(dir, 'tokyo-mesh-evidence.svg'), svg(view.title, `<text x="60" y="46" font-size="28" font-weight="700">${view.title}</text><text x="60" y="78" font-size="19">実データの1kmメッシュ・島しょ部は図の範囲外／北が上</text>${rects}<rect x="260" y="456" width="20" height="20" fill="#e25d3d"/><text x="290" y="473" font-size="20">区域内と判定</text><rect x="510" y="456" width="20" height="20" fill="#ccd5df"/><text x="540" y="473" font-size="20">区域外と判定</text><text x="60" y="532" font-size="23">東京都全体：${fmt(tokyo.summary.exposedMeshCount)} / ${fmt(tokyo.summary.meshCount)}メッシュが区域内</text><text x="60" y="570" font-size="23">2050年の区域内人口 ${fmt(tokyo.summary.exposedPopulation2050)}人 ／ 比率 ${tokyo.summary.floodExposureShare2050.toFixed(1)}%</text>`));
+sourceFor('tokyo-mesh-evidence', 'pref/13 meshes bounds, meshes[7]>0 classification; mainland crop only; full-prefecture summary unchanged', '東京都の県別途中artifactから実メッシュ境界と洪水区域への中心点包含判定を図示し、県全体の人口集計も併記するGIS検算図であり、統計調査の集計表ではない。');
+write('article-data-facts.json', { generatedAt: item.generatedAt, inputCounts: item.dataQuality.inputCounts, quality: manifest.quality, increasingSharePrefectures: item.rows.filter((r: any) => r.values.floodExposureShare2050 > r.values.floodExposureShare2020).length, median: item.summary.medianValue, rows: item.rows, toyama: toyama.summary });
+console.log(JSON.stringify({ status: 'PASS', inputs: sources, charts: 3, tokyoCropMeshes: meshes.length, generatedAt: item.generatedAt }, null, 2));

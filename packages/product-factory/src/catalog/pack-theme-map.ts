@@ -12,8 +12,8 @@ import type { PackTheme } from "./types";
 
 /**
  * 有償商品へ収録しない ranking key。
- * P12 は「非商用」データで、約款が許す集計結果のサイト表示と、編集可能な表データの
- * 有償再配布はリスクが異なる。商品化は権利者確認が取れるまで fail-closed で除外する。
+ * P12 は「非商用」データであり、商用利用可能な根拠が確認できないため除外する。
+ * 2026-09-05 にサイトの旧ランキングも公開終了対象とした。設定の再活性化でも商品へ戻さない。
  */
 export const PRODUCT_EXCLUDED_RANKING_KEYS: ReadonlySet<string> = new Set([
   "tourism-resource-count",

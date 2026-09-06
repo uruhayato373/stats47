@@ -1,0 +1,237 @@
+{
+  "23000": {
+    "prefName": "愛知県",
+    "slug": "aichi",
+    "cityName": "名古屋市"
+  },
+  "05000": {
+    "prefName": "秋田県",
+    "slug": "akita",
+    "cityName": "秋田市"
+  },
+  "02000": {
+    "prefName": "青森県",
+    "slug": "aomori",
+    "cityName": "青森市"
+  },
+  "12000": {
+    "prefName": "千葉県",
+    "slug": "chiba",
+    "cityName": "千葉市"
+  },
+  "38000": {
+    "prefName": "愛媛県",
+    "slug": "ehime",
+    "cityName": "松山市"
+  },
+  "18000": {
+    "prefName": "福井県",
+    "slug": "fukui",
+    "cityName": "福井市"
+  },
+  "40000": {
+    "prefName": "福岡県",
+    "slug": "fukuoka",
+    "cityName": "福岡市"
+  },
+  "07000": {
+    "prefName": "福島県",
+    "slug": "fukushima",
+    "cityName": "福島市"
+  },
+  "21000": {
+    "prefName": "岐阜県",
+    "slug": "gifu",
+    "cityName": "岐阜市"
+  },
+  "10000": {
+    "prefName": "群馬県",
+    "slug": "gunma",
+    "cityName": "前橋市"
+  },
+  "34000": {
+    "prefName": "広島県",
+    "slug": "hiroshima",
+    "cityName": "広島市"
+  },
+  "01000": {
+    "prefName": "北海道",
+    "slug": "hokkaido",
+    "cityName": "札幌市"
+  },
+  "28000": {
+    "prefName": "兵庫県",
+    "slug": "hyogo",
+    "cityName": "神戸市"
+  },
+  "08000": {
+    "prefName": "茨城県",
+    "slug": "ibaraki",
+    "cityName": "水戸市"
+  },
+  "17000": {
+    "prefName": "石川県",
+    "slug": "ishikawa",
+    "cityName": "金沢市"
+  },
+  "03000": {
+    "prefName": "岩手県",
+    "slug": "iwate",
+    "cityName": "盛岡市"
+  },
+  "37000": {
+    "prefName": "香川県",
+    "slug": "kagawa",
+    "cityName": "高松市"
+  },
+  "46000": {
+    "prefName": "鹿児島県",
+    "slug": "kagoshima",
+    "cityName": "鹿児島市"
+  },
+  "14000": {
+    "prefName": "神奈川県",
+    "slug": "kanagawa",
+    "cityName": "横浜市"
+  },
+  "39000": {
+    "prefName": "高知県",
+    "slug": "kochi",
+    "cityName": "高知市"
+  },
+  "43000": {
+    "prefName": "熊本県",
+    "slug": "kumamoto",
+    "cityName": "熊本市"
+  },
+  "26000": {
+    "prefName": "京都府",
+    "slug": "kyoto",
+    "cityName": "京都市"
+  },
+  "24000": {
+    "prefName": "三重県",
+    "slug": "mie",
+    "cityName": "津市"
+  },
+  "04000": {
+    "prefName": "宮城県",
+    "slug": "miyagi",
+    "cityName": "仙台市"
+  },
+  "45000": {
+    "prefName": "宮崎県",
+    "slug": "miyazaki",
+    "cityName": "宮崎市"
+  },
+  "20000": {
+    "prefName": "長野県",
+    "slug": "nagano",
+    "cityName": "長野市"
+  },
+  "42000": {
+    "prefName": "長崎県",
+    "slug": "nagasaki",
+    "cityName": "長崎市"
+  },
+  "29000": {
+    "prefName": "奈良県",
+    "slug": "nara",
+    "cityName": "奈良市"
+  },
+  "15000": {
+    "prefName": "新潟県",
+    "slug": "niigata",
+    "cityName": "新潟市"
+  },
+  "44000": {
+    "prefName": "大分県",
+    "slug": "oita",
+    "cityName": "大分市"
+  },
+  "33000": {
+    "prefName": "岡山県",
+    "slug": "okayama",
+    "cityName": "岡山市"
+  },
+  "47000": {
+    "prefName": "沖縄県",
+    "slug": "okinawa",
+    "cityName": "那覇市"
+  },
+  "27000": {
+    "prefName": "大阪府",
+    "slug": "osaka",
+    "cityName": "大阪市"
+  },
+  "41000": {
+    "prefName": "佐賀県",
+    "slug": "saga",
+    "cityName": "佐賀市"
+  },
+  "11000": {
+    "prefName": "埼玉県",
+    "slug": "saitama",
+    "cityName": "さいたま市"
+  },
+  "25000": {
+    "prefName": "滋賀県",
+    "slug": "shiga",
+    "cityName": "大津市"
+  },
+  "32000": {
+    "prefName": "島根県",
+    "slug": "shimane",
+    "cityName": "松江市"
+  },
+  "22000": {
+    "prefName": "静岡県",
+    "slug": "shizuoka",
+    "cityName": "静岡市"
+  },
+  "09000": {
+    "prefName": "栃木県",
+    "slug": "tochigi",
+    "cityName": "宇都宮市"
+  },
+  "36000": {
+    "prefName": "徳島県",
+    "slug": "tokushima",
+    "cityName": "徳島市"
+  },
+  "13000": {
+    "prefName": "東京都",
+    "slug": "tokyo",
+    "cityName": "東京"
+  },
+  "31000": {
+    "prefName": "鳥取県",
+    "slug": "tottori",
+    "cityName": "鳥取市"
+  },
+  "16000": {
+    "prefName": "富山県",
+    "slug": "toyama",
+    "cityName": "富山市"
+  },
+  "30000": {
+    "prefName": "和歌山県",
+    "slug": "wakayama",
+    "cityName": "和歌山市"
+  },
+  "06000": {
+    "prefName": "山形県",
+    "slug": "yamagata",
+    "cityName": "山形市"
+  },
+  "35000": {
+    "prefName": "山口県",
+    "slug": "yamaguchi",
+    "cityName": "山口市"
+  },
+  "19000": {
+    "prefName": "山梨県",
+    "slug": "yamanashi",
+    "cityName": "甲府市"
+  }
+}

@@ -1,144 +1,140 @@
-import { FLOOD_ARCHIVES } from '@stats47/gis';
 import { describe, expect, it } from 'vitest';
 
+import { GEO_CROSS_ANALYSIS_SLUGS } from '../geo-cross-analysis';
 import {
   parseGeoAnalysisManifest,
   parseGeoAnalysisPrefDetail,
 } from '../load-geo-analysis-evidence';
 
-describe('Geo分析lineage parser', () => {
-  it('洪水の河川区分欠落・同件数の入力差替・source出力漏れを拒否する', () => {
-    const inputs = FLOOD_ARCHIVES.map(({ key }) => ({
-      key,
-      datasetId: 'A31b',
-      layerId: 'flood',
-      role: 'calculation-input',
-      usedInCalculation: true,
-    }));
-    const manifest = {
-      schemaVersion: 1,
-      slug: 'population-flood-risk',
-      generatedAt: '2026-09-05',
-      definitionSha256: 'a'.repeat(64),
-      inputs: [
-        {
-          layerId: 'population',
-          role: 'calculation-input',
-          usedInCalculation: true,
-        },
-        ...inputs,
-      ],
-      stages: [
-        { kind: 'spatial-operation', inputIds: ['population', 'flood'] },
-        {
-          id: 'flood-maximum-polygons',
-          outputs: inputs.map(({ key }) => ({ key })),
-        },
-      ],
-      aggregate: {},
-      quality: { expectedAreas: 47, detailAreas: 47, conservationChecks: 47 },
-    };
-    expect(
-      parseGeoAnalysisManifest(manifest, 'population-flood-risk')
-    ).not.toBeNull();
-    expect(
-      parseGeoAnalysisManifest(
-        {
-          ...manifest,
-          inputs: manifest.inputs.filter(
-            (input) => !('key' in input) || !input.key.includes('/source/10/')
-          ),
-        },
-        'population-flood-risk'
-      )
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisManifest(
-        {
-          ...manifest,
-          inputs: manifest.inputs.map((input, index) =>
-            index === 1
-              ? { ...input, key: 'gis/mlit-ksj/A31b/25/source/10/9999.zip' }
-              : input
-          ),
-        },
-        'population-flood-risk'
-      )
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisManifest(
-        {
-          ...manifest,
-          stages: [
-            manifest.stages[0],
-            { id: 'flood-maximum-polygons', outputs: inputs.slice(1) },
-          ],
-        },
-        'population-flood-risk'
-      )
-    ).toBeNull();
-  });
-  it('47県・保存則PASSのmanifestだけを受け入れる', () => {
-    expect(
-      parseGeoAnalysisManifest(
-        {
-          schemaVersion: 1,
-          slug: 'population-flood-risk',
-          generatedAt: '2026-08-31T00:00:00.000Z',
-          definitionSha256: 'a'.repeat(64),
-          inputs: [
-            {
-              layerId: 'population',
-              role: 'calculation-input',
-              usedInCalculation: true,
-            },
-            ...FLOOD_ARCHIVES.map(({ key }) => ({
-              layerId: 'flood',
-              datasetId: 'A31b',
-              key,
-              role: 'calculation-input',
-              usedInCalculation: true,
-            })),
-          ],
-          stages: [
-            {
-              id: 'flood-maximum-polygons',
-              outputs: FLOOD_ARCHIVES.map(({ key }) => ({ key })),
-            },
-            { kind: 'spatial-operation', inputIds: ['population', 'flood'] },
-          ],
-          aggregate: {},
-          quality: {
-            expectedAreas: 47,
-            detailAreas: 47,
-            conservationChecks: 47,
-          },
-        },
-        'population-flood-risk'
-      )
-    ).not.toBeNull();
-    expect(
-      parseGeoAnalysisManifest(
-        {
-          schemaVersion: 1,
-          slug: 'population-flood-risk',
-          generatedAt: '2026-08-31T00:00:00.000Z',
-          definitionSha256: 'a'.repeat(64),
-          inputs: [],
-          stages: [],
-          aggregate: {},
-          quality: {
-            expectedAreas: 47,
-            detailAreas: 46,
-            conservationChecks: 46,
-          },
-        },
-        'population-flood-risk'
-      )
-    ).toBeNull();
-  });
+import { manifestFixture } from './geo-manifest-fixture';
 
-  it('slug・県コード・分析固有配列が一致するdetailだけを受け入れる', () => {
+describe('Geo分析lineage parser', () => {
+  for (const slug of GEO_CROSS_ANALYSIS_SLUGS) {
+    it(`${slug}: 正常契約だけを受理しSHA・bytes・role・参照・coverage異常を拒否`, () => {
+      const manifest = manifestFixture(slug);
+      expect(parseGeoAnalysisManifest(manifest, slug)).not.toBeNull();
+      const badInputs = [
+        manifest.inputs.slice(1),
+        [...manifest.inputs, manifest.inputs[0]],
+        manifest.inputs.map((input, i) =>
+          i ? input : { ...input, sha256: 'bad' }
+        ),
+        manifest.inputs.map((input, i) =>
+          i ? input : { ...input, bytes: Number.POSITIVE_INFINITY }
+        ),
+        manifest.inputs.map((input, i) =>
+          i
+            ? input
+            : { ...input, role: 'context-only', usedInCalculation: true }
+        ),
+        manifest.inputs.map((input, i) =>
+          i
+            ? input
+            : { ...input, role: 'context-only', usedInCalculation: false }
+        ),
+      ];
+      for (const inputs of badInputs)
+        expect(
+          parseGeoAnalysisManifest({ ...manifest, inputs }, slug)
+        ).toBeNull();
+      const badStages = [
+        manifest.stages.slice(1),
+        manifest.stages.map((stage, i) =>
+          i ? stage : { ...stage, inputIds: ['missing-layer'] }
+        ),
+        manifest.stages.map((stage, i) =>
+          i ? stage : { ...stage, role: 'context-only' }
+        ),
+        manifest.stages.map((stage, i) =>
+          i ? stage : { ...stage, outputs: stage.outputs.slice(1) }
+        ),
+        manifest.stages.map((stage, i) =>
+          i
+            ? stage
+            : {
+                ...stage,
+                outputs: stage.outputs.map((output, j) =>
+                  j ? output : { ...output, sha256: 'b'.repeat(64) }
+                ),
+              }
+        ),
+        manifest.stages.map((stage, i) =>
+          i
+            ? stage
+            : {
+                ...stage,
+                outputs: stage.outputs.map((output, j) =>
+                  j ? output : { ...output, bytes: -1 }
+                ),
+              }
+        ),
+      ];
+      for (const stages of badStages)
+        expect(
+          parseGeoAnalysisManifest({ ...manifest, stages }, slug)
+        ).toBeNull();
+      for (const patch of [
+        { conservationChecks: 46 },
+        { derivedRecords: 46 },
+        { maxDetailBytes: 5_000_001 },
+        { populatedMeshes: NaN },
+      ]) {
+        expect(
+          parseGeoAnalysisManifest(
+            { ...manifest, quality: { ...manifest.quality, ...patch } },
+            slug
+          )
+        ).toBeNull();
+      }
+      expect(
+        parseGeoAnalysisManifest(
+          { ...manifest, generatedAt: 'not-a-date' },
+          slug
+        )
+      ).toBeNull();
+      expect(
+        parseGeoAnalysisManifest(
+          { ...manifest, definitionSha256: 'invalid' },
+          slug
+        )
+      ).toBeNull();
+      expect(
+        parseGeoAnalysisManifest({ ...manifest, aggregate: {} }, slug)
+      ).toBeNull();
+    });
+  }
+  it('洪水の河川区分10欠落・同件数差替・source出力漏れを拒否', () => {
+    const manifest = manifestFixture('population-flood-risk');
+    for (const inputs of [
+      manifest.inputs.filter((input) => !input.key.includes('/source/10/')),
+      manifest.inputs.map((input, i) =>
+        i === 47
+          ? { ...input, key: 'gis/mlit-ksj/A31b/25/source/10/9999.zip' }
+          : input
+      ),
+    ]) {
+      expect(
+        parseGeoAnalysisManifest(
+          { ...manifest, inputs },
+          'population-flood-risk'
+        )
+      ).toBeNull();
+    }
+    expect(
+      parseGeoAnalysisManifest(
+        {
+          ...manifest,
+          stages: manifest.stages.map((stage) =>
+            stage.id === 'flood-maximum-polygons'
+              ? { ...stage, outputs: stage.outputs.slice(1) }
+              : stage
+          ),
+        },
+        'population-flood-risk'
+      )
+    ).toBeNull();
+  });
+  it('地点対応・保存則・重複・座標の不正を拒否する', () => {
     const detail = {
       schemaVersion: 1,
       slug: 'population-land-price',
@@ -167,91 +163,24 @@ describe('Geo分析lineage parser', () => {
     expect(
       parseGeoAnalysisPrefDetail(detail, 'population-land-price', '13000')
     ).not.toBeNull();
-    expect(
-      parseGeoAnalysisPrefDetail(detail, 'population-land-price', '14000')
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisPrefDetail(
-        { ...detail, pointMeshIds: ['missing'] },
-        'population-land-price',
-        '13000'
-      )
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisPrefDetail(
-        { ...detail, spatialMethod: undefined },
-        'population-land-price',
-        '13000'
-      )
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisPrefDetail(
-        { ...detail, summary: {} },
-        'population-land-price',
-        '13000'
-      )
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisPrefDetail(
-        {
-          ...detail,
-          summary: { ...detail.summary, risingDecliningPointCount: 0 },
-        },
-        'population-land-price',
-        '13000'
-      )
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisPrefDetail(
-        {
-          ...detail,
-          landPricePoints: [['point', 140001000, 35001000, 10000, 1]],
-        },
-        'population-land-price',
-        '13000'
-      )
-    ).toBeNull();
-  });
-
-  it('47県が揃っていても空間演算のない旧県コード結合を拒否する', () => {
-    const manifest = {
-      schemaVersion: 1,
-      slug: 'population-land-price',
-      generatedAt: '2026-09-05',
-      definitionSha256: 'a'.repeat(64),
-      inputs: [
-        {
-          layerId: 'population',
-          role: 'calculation-input',
-          usedInCalculation: true,
-        },
-        {
-          layerId: 'price',
-          role: 'calculation-input',
-          usedInCalculation: true,
-        },
-      ],
-      stages: [{ kind: 'aggregate', inputIds: ['population', 'price'] }],
-      aggregate: {},
-      quality: { expectedAreas: 47, detailAreas: 47, conservationChecks: 47 },
-    };
-    expect(
-      parseGeoAnalysisManifest(manifest, 'population-land-price')
-    ).toBeNull();
-    expect(
-      parseGeoAnalysisManifest(
-        {
-          ...manifest,
-          stages: [
-            {
-              id: 'land-price-mesh-join',
-              kind: 'spatial-operation',
-              inputIds: ['population', 'price'],
-            },
-          ],
-        },
-        'population-land-price'
-      )
-    ).not.toBeNull();
+    for (const patch of [
+      { areaCode: '14000' },
+      { pointMeshIds: ['missing'] },
+      { spatialMethod: undefined },
+      { summary: {} },
+      { landPricePoints: [['point', 140001000, 35001000, 10000, 1]] },
+      {
+        landPricePoints: [detail.landPricePoints[0], detail.landPricePoints[0]],
+        pointMeshIds: ['mesh', 'mesh'],
+      },
+      { landPricePoints: [['point', 200000000, 35001000, 10000, 1]] },
+    ])
+      expect(
+        parseGeoAnalysisPrefDetail(
+          { ...detail, ...patch },
+          'population-land-price',
+          '13000'
+        )
+      ).toBeNull();
   });
 });

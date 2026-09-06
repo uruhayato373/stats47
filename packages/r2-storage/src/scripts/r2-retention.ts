@@ -20,6 +20,11 @@ import path from "path";
 import { deleteMultipleFromR2, listFromR2WithSize } from "../lib";
 import { formatBytes } from "../lib/utils/format-bytes";
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import {
+  LICENSE_RETENTION_TARGETS,
+  assertUnchangedRetentionInventory,
+  listLicenseRetentionObjects,
+} from "./lib/license-retention";
 
 config({ path: path.resolve(__dirname, "../../../..", ".env.local") });
 
@@ -201,7 +206,10 @@ function parseArgs(): { apply: boolean; targetId?: string } {
   if (targetIdx >= 0 && !targetId) {
     throw new Error("--target requires an id");
   }
-  if (targetId && !RETENTION_TARGETS.some((t) => t.id === targetId)) {
+  if (args.includes("--apply") && !targetId) {
+    throw new Error("--apply requires one explicit --target; broad deletion is forbidden");
+  }
+  if (targetId && ![...RETENTION_TARGETS, ...LICENSE_RETENTION_TARGETS].some((t) => t.id === targetId)) {
     throw new Error(
       `unknown --target "${targetId}". known: ${RETENTION_TARGETS.map((t) => t.id).join(", ")}`,
     );
@@ -242,6 +250,28 @@ async function main(): Promise<void> {
     assertR2WriteAllowed({ op: "r2-retention --apply (R2 retired prefix deletion)" });
   }
 
+  const exactTarget = LICENSE_RETENTION_TARGETS.find((target) => target.id === targetId);
+  if (exactTarget) {
+    if (process.env.NODE_ENV === "development" ||
+      (process.env.CLOUDFLARE_R2_BUCKET_NAME && process.env.CLOUDFLARE_R2_BUCKET_NAME !== "stats47")) {
+      throw new Error("License retention requires remote stats47 bucket, not local/other-site data");
+    }
+    const actual = await listLicenseRetentionObjects(exactTarget.prefixes);
+    assertUnchangedRetentionInventory(exactTarget.objects, actual);
+    console.log(JSON.stringify({ target: exactTarget.id, mode: apply ? "apply" : "dry-run",
+      objects: actual.length, bytes: actual.reduce((sum, object) => sum + object.bytes, 0),
+      inventory: "EXACT_KEY_SIZE_ETAG_MATCH" }));
+    if (apply) {
+      const result = await deleteKeys(exactTarget.objects.map((object) => object.key));
+      const remaining = await listLicenseRetentionObjects(exactTarget.prefixes);
+      if (result.errors || result.deleted !== actual.length || remaining.length) {
+        throw new Error(`License retention incomplete: deleted=${result.deleted}, remaining=${remaining.length}`);
+      }
+      console.log("License retention complete: exact approved objects deleted, remote remainder=0");
+    }
+    return;
+  }
+
   const targets = targetId
     ? RETENTION_TARGETS.filter((t) => t.id === targetId)
     : RETENTION_TARGETS;
@@ -273,6 +303,10 @@ async function main(): Promise<void> {
     }
 
     if (apply && files.length > 0) {
+      if (NONCOMMERCIAL_KSJ_PREFIXES.has(target.prefix)) {
+        const expected = LICENSE_RETENTION_TARGETS[0].objects.filter((object) => object.key.startsWith(target.prefix));
+        assertUnchangedRetentionInventory(expected, await listLicenseRetentionObjects([target.prefix]));
+      }
       const result = await deleteKeys(files.map((f) => f.key));
       totalDeleted += result.deleted;
       totalErrors += result.errors;

@@ -33,7 +33,7 @@ import { fileURLToPath } from 'node:url';
 import { checkArticleFactual } from '../lib/article-factual-check.mjs';
 import { lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
 import { lintParenNumbers } from '../lib/paren-number-lint.mjs';
-import { lintInternalLinks } from '../lib/internal-link-lint.mjs';
+import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import {
   lintSvgContent,
@@ -74,6 +74,10 @@ if (looksLikePath) {
   dataDir = path.join(PROJECT_ROOT, '.local/r2/app/blog', arg, 'data');
 }
 const slug = looksLikePath ? path.basename(path.dirname(articlePath)) : arg;
+if (isGoneBlogSlug(slug)) {
+  console.log(JSON.stringify({ pass: false, checks: { publicationAllowed: false }, warnings: [], blockers: [`公開終了済みのため再公開不可: ${slug} (GONE_BLOG_SLUGS)`] }));
+  process.exit(1);
+}
 if (!fs.existsSync(articlePath)) {
   console.error(`[error] article not found: ${articlePath}`);
   process.exit(2);
@@ -124,13 +128,7 @@ function countCallouts(text) {
 }
 
 function countInternalLinks(text) {
-  const absMatches =
-    text.match(
-      /https:\/\/stats47\.jp\/(ranking|areas|category|blog|themes|tag|survey)/g
-    ) || [];
-  const relMatches =
-    text.match(/\]\(\/(ranking|areas|category|blog|themes|tag|survey)/g) || [];
-  return absMatches.length + relMatches.length;
+  return extractInternalLinks(text).length;
 }
 
 function countSvgCharts(text) {

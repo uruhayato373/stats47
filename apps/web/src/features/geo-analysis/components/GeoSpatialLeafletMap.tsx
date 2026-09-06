@@ -101,6 +101,8 @@ export function GeoSpatialLeafletMap({
         preferCanvas
         center={[36, 138]}
         zoom={6}
+        // Tabs can unmount the map immediately after zoom; do not leave a zoom-end timer.
+        zoomAnimation={false}
         minZoom={GEO_BASEMAP.minZoom}
         maxZoom={GEO_BASEMAP.maxZoom}
         scrollWheelZoom={false}

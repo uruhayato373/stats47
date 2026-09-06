@@ -22,8 +22,7 @@ import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,
 } from '../lib/geo-cross-analysis';
-import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
-import { loadGeoAnalysisSnapshot } from '../lib/load-geo-analysis-snapshot';
+import { loadGeoAnalysisBundle } from '../lib/load-geo-analysis-snapshot';
 
 import { GeoAnalysisTracker } from './GeoAnalysisTracker';
 import { GeoContentPublicationSection } from './GeoContentPublicationSection';
@@ -58,21 +57,16 @@ export async function GeoCrossAnalysisArticle({
   const spec = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
     (analysis) => analysis.slug === slug
   );
-  const [snapshot, evidenceManifest] = await Promise.all(
-    [
-      loadGeoAnalysisSnapshot(slug),
-      loadGeoAnalysisManifest(slug),
-    ]
-  );
-
-  if (!spec || !snapshot || !evidenceManifest) {
+  const bundle = await loadGeoAnalysisBundle(slug);
+  if (!spec || !bundle) {
     notFound();
   }
+  const { snapshot, manifest: evidenceManifest } = bundle;
 
   const primaryMetric = snapshot.metrics.find(
     (metric) => metric.key === snapshot.primaryMetricKey
   );
-  if (!primaryMetric) return null;
+  if (!primaryMetric) notFound();
 
   const generatedDate = new Intl.DateTimeFormat('ja-JP', {
     year: 'numeric',
@@ -125,20 +119,28 @@ export async function GeoCrossAnalysisArticle({
         </div>
       ) : null}
 
-      <nav aria-label="分析の読み順" className="mb-5 flex flex-wrap gap-4 text-sm text-primary underline">
+      <nav
+        aria-label="分析の読み順"
+        className="mb-5 flex flex-wrap gap-4 text-sm text-primary underline"
+      >
         <a href="#spatial-evidence">県内の地図</a>
         <a href="#prefecture-comparison">県別の集計</a>
         <a href="#methods">方法・出典・限界</a>
       </nav>
       <GeoSpatialEvidenceExplorer
-          slug={slug}
-          analysisId={spec.id}
-          dataVersion={snapshot.dataVersion}
-          initialPrefCode={initialPrefCode}
-          initialView={initialStage}
-          manifest={evidenceManifest}
+        slug={slug}
+        analysisId={spec.id}
+        dataVersion={snapshot.dataVersion}
+        initialPrefCode={initialPrefCode}
+        initialView={initialStage}
+        manifest={evidenceManifest}
+      />
+      <div id="prefecture-comparison" className="scroll-mt-24">
+        <SectionHeader
+          title="空間判定の結果を都道府県で比較"
+          description="県内の地点・メッシュの判定を集計した結果です。値の大小は地域の優劣を表しません。"
         />
-      <div id="prefecture-comparison" className="scroll-mt-24"><SectionHeader title="空間判定の結果を都道府県で比較" description="県内の地点・メッシュの判定を集計した結果です。値の大小は地域の優劣を表しません。" /></div>
+      </div>
       <GeoCrossAnalysisExplorer
         analysisId={spec.id}
         comparisonLimit={spec.comparisonLimit}
@@ -169,7 +171,14 @@ export async function GeoCrossAnalysisArticle({
               {snapshot.rows.map((row) => (
                 <TableRow key={row.areaCode}>
                   <TableCell className="tabular-nums">{row.rank}</TableCell>
-                  <TableCell className="font-medium"><Link className="text-primary underline" href={`/geo/${slug}/${row.areaCode.slice(0, 2)}/overlap`}>{row.areaName}の地図</Link></TableCell>
+                  <TableCell className="font-medium">
+                    <Link
+                      className="text-primary underline"
+                      href={`/geo/${slug}/${row.areaCode.slice(0, 2)}/overlap`}
+                    >
+                      {row.areaName}の地図
+                    </Link>
+                  </TableCell>
                   {snapshot.metrics.map((metric) => (
                     <TableCell
                       key={metric.key}
@@ -269,6 +278,10 @@ export async function GeoCrossAnalysisArticle({
           上記の国土数値情報をもとにstats47が空間演算・集計・表示用加工を行いました（生成日:{' '}
           {generatedDate}）。
           国土交通省または原典提供者が本分析の内容を保証・推奨するものではありません。
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          原典の初回取得日時は旧パイプラインで未記録です。上記の生成日は取得日ではありません。
+          対象版・入力ファイルのSHA-256・途中データは「検算」とデータ導線で確認できます。
         </p>
       </SurfaceSection>
 

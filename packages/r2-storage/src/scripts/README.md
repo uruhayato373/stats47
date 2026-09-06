@@ -32,6 +32,16 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --dry-run
 ```
 
 `diff-push-r2.ts`はJSON snapshot・記事等の通常staging用。生成画像には使わない。
+KSJ原典とKSJ由来の観測値は、diff/exact/wranglerの全候補を`lib/ksj-publication-guard.ts`で
+公開ライセンス検査してから書き込む。禁止データが1件でも混在すればバッチ全体をPUT前に停止する。
+
+共有ブログ索引 `app/blog/all.json` は現行 `export-blog-snapshot.ts` で再生成する。
+`lib/blog-publication-guard.ts` が生成器・出典辞書の fingerprint と終了slugを検査し、
+生成時に読んだR2の内容hashが現在のS3と一致する場合だけETag条件付きで書き込む。
+競合時は最新R2から再生成する。古いstagingへのpublicationフィールド後付けは禁止する。
+wrangler経路は条件付き更新を保証できないため共有索引を拒否する（diff/exactのS3経路を使う）。
+diffのdry-runはローカル検査のみ。S3の基底一致まで検査するにはexactのdry-runを使う。
+この検査を持たない旧checkoutのwriterは保護されないため、CIのmain/develop両方へ反映してから運用する。
 
 ### 生成画像（exact plan → R2）
 

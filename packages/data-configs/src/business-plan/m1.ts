@@ -28,11 +28,8 @@ export function buildM1XCanonicalUrl(input: {
     }
     return `/ranking/${input.rankingKey}`;
   }
-  if (input.analysisSlug === 'population-station-access') {
-    const prefCode2 = (input.highlightAreaCodes[0] ?? '13000').slice(0, 2);
-    return `/geo/${input.analysisSlug}/${prefCode2}/overlap`;
-  }
-  return `/geo/${input.analysisSlug}`;
+  const prefCode2 = (input.highlightAreaCodes[0] ?? '13000').slice(0, 2);
+  return `/geo/${input.analysisSlug}/${prefCode2}/overlap`;
 }
 
 const POPULATION_ANALYSIS = {
@@ -309,7 +306,7 @@ const x = (
 
 /**
  * 2026年9月の初期15投稿。入口3、空間横断分析9、方法2、意思決定1の構成を固定する。
- * 数値は 2026-08-29 生成の47都道府県 Geo snapshot で照合済み。
+ * 数値は 2026-09-05 修正版の47都道府県 Geo snapshot で照合済み。
  * URL は register 時に {{url}} を決定的な UTM URL へ置換する。
  */
 export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
@@ -373,67 +370,71 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
   ),
   x(
     4,
-    '人口減でも地価上昇は20府県',
+    '人口減のメッシュでも地価は上がる',
     'paradox',
-    '人口が減る県では地価も必ず下がるのか。2050年人口が減少見込みでも、2026年の住宅地地価変動率がプラスの地域は20府県ありました。人口メッシュと地価地点を県単位で結合した結果です。\n\n{{url}}\n\n#地価 #将来人口 #地域分析',
+    '地価が上がる住宅地でも、周囲の人口は減るのか。沖縄県では比較可能119地点中78地点（65.5%）で、2025→2026年の地価上昇と2020→2050年の人口減少推計が重なりました。地点を1km人口メッシュへ包含判定した結果で、人口の割合ではありません。\n\n{{url}}\n\n#地価 #将来人口 #地域分析',
     '2026-09-07T19:10:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-land-price'],
-    'medianLandPriceChange',
-    ['medianLandPriceChange', 'populationChangeRate'],
+    'risingDecliningPointShare',
+    ['risingDecliningPointShare', 'comparablePointCount'],
     {
-      description: '人口増減率と地価変動率は同じ方向へ動くとは限りません。',
+      description: '住宅地点を包含する人口メッシュの将来変化と照合します。',
       mapMode: 'derived-choropleth',
       highlightAreaCodes: ['47000', '14000', '27000'],
       panelKind: 'statement',
       panelLabel: '人口減 × 地価上昇',
-      panelItems: ['該当：20府県', '相関の観察であり因果ではない'],
+      panelItems: [
+        '沖縄：78 / 119地点（65.5%）',
+        '地点比率であり人口比率ではない',
+      ],
     }
   ),
   x(
     5,
-    '沖縄は人口-5.21%、地価+6.1%',
+    '沖縄の重なりは78 / 119地点',
     'number',
-    '沖縄県は2050年人口が2020年比-5.21%の推計。一方、2026年住宅地の地価変動率中央値は+6.1%です。人口と地価を1指標ずつ眺めるだけでは見えない組み合わせです。\n\n{{url}}\n\n#沖縄 #地価公示 #地域分析',
+    '沖縄県では人口メッシュに接続した住宅地122地点のうち、比較可能119地点が分母です。地価上昇と将来人口減少が重なるのは78地点、65.5%。県平均の併置ではなく同じ場所で照合。期間の異なる比較で、将来地価の予測ではありません。\n\n{{url}}\n\n#沖縄 #地価公示 #地域分析',
     '2026-09-09T10:30:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-land-price'],
-    'medianLandPriceChange',
-    ['medianLandPriceChange', 'populationChangeRate'],
+    'risingDecliningPointShare',
+    ['risingDecliningPointShare', 'comparablePointCount'],
     {
-      description: '将来人口と現在の地価変動を、同じ県コードで横断比較します。',
+      description:
+        '地点座標で包含メッシュへ接続し、比較可能地点だけを分母にします。',
       mapMode: 'focus',
       highlightAreaCodes: ['47000'],
       panelKind: 'statement',
-      panelLabel: '沖縄県の2指標',
-      panelItems: ['2050年人口：-5.21%', '住宅地地価変動：+6.1%'],
+      panelLabel: '沖縄県・地点の重なり',
+      panelItems: ['重なり：78 / 119地点', '地点比率：65.5%'],
     }
   ),
   x(
     6,
-    '地価水準と人口維持は別の問い',
+    '大阪の住宅地、869地点で重なる',
     'question',
-    '大阪府の住宅地地価中央値は14.5万円/㎡ですが、2050年人口は2020年比-17.82%の推計です。「地価が高い」と「人口が維持される」を同じ意味にしないための横断分析です。\n\n{{url}}\n\n#大阪 #住宅地 #将来人口',
+    '大阪府では比較可能な住宅地1,181地点中869地点（73.6%）で、現在の地価上昇と周囲1kmメッシュの将来人口減少が重なります。地価は2025→2026年、人口は2020→2050年。同期間の因果関係や将来価格を示す値ではありません。\n\n{{url}}\n\n#大阪 #住宅地 #将来人口',
     '2026-09-11T12:20:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-land-price'],
-    'medianResidentialLandPrice',
-    ['medianResidentialLandPrice', 'populationChangeRate'],
+    'risingDecliningPointShare',
+    ['risingDecliningPointShare', 'comparablePointCount'],
     {
       description:
-        '地価水準と将来人口を別々に測り、関係を読み違えないようにします。',
+        '住宅地点と包含メッシュを接続し、時期と分母を明示して読みます。',
       mapMode: 'focus',
       highlightAreaCodes: ['27000'],
       panelKind: 'statement',
-      panelLabel: '大阪府の2指標',
-      panelItems: ['住宅地中央値：145,000円/㎡', '2050年人口：-17.82%'],
+      panelLabel: '大阪府・地点の重なり',
+      panelItems: ['重なり：869 / 1,181地点', '地点比率：73.6%'],
     }
   ),
   x(
     7,
-    '新潟は2050年人口の29.8%が区域内',
+    '新潟は中心点判定で62.1%が区域内',
     'shock',
-    '想定最大規模の洪水浸水想定区域と1km将来人口メッシュを重ねると、新潟県は2050年人口の29.8%が区域内と推計されました。メッシュ中心点の包含判定を県別に集計しています。\n\n{{url}}\n\n#防災 #洪水 #地域分析',
+    '想定最大規模の洪水区域に中心点が入る1kmメッシュの2050年人口を合計すると、新潟県は62.1%。メッシュ人口全体を中心点で割り当てる概算で、実際の浸水人口や災害確率ではありません。最新の自治体ハザードマップと併せて確認してください。\n\n{{url}}\n\n#防災 #洪水 #地域分析',
     '2026-09-13T08:10:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-flood-risk'],
@@ -450,9 +451,9 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
   ),
   x(
     8,
-    '東京は区域内人口316万8442人',
+    '東京は中心点判定で660万3525人',
     'number',
-    '東京都は2050年の浸水想定区域内人口が3,168,442人、県人口比では22.0%です。人数と比率は別の問い。防災判断には必ず国・自治体の最新ハザードマップを使ってください。\n\n{{url}}\n\n#東京 #ハザードマップ #防災',
+    '東京都では、洪水浸水想定区域に中心点が入る1kmメッシュの2050年人口合計は6,603,525人、都人口比45.9%。実際の浸水人口ではなく中心点で割り当てた概算です。防災判断には国・自治体の最新ハザードマップを使ってください。\n\n{{url}}\n\n#東京 #ハザードマップ #防災',
     '2026-09-15T08:20:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-flood-risk'],
@@ -464,14 +465,14 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
       highlightAreaCodes: ['13000'],
       panelKind: 'statement',
       panelLabel: '東京都・2050年',
-      panelItems: ['区域内人口：3,168,442人', '県人口比：22.0%'],
+      panelItems: ['中心点判定：6,603,525人', '都人口比：45.9%'],
     }
   ),
   x(
     9,
     '人口減でも区域内比率は上がり得る',
     'paradox',
-    '北海道の浸水想定区域内人口比率は2020年25.8%から2050年27.5%へ+1.7ポイント。総人口が減っても、区域内に残る人口の比率は上がり得ます。比率上昇を人数増加と混同しないことが重要です。\n\n{{url}}\n\n#北海道 #洪水 #将来人口',
+    '北海道では、洪水区域に中心点が入る1kmメッシュの人口比率が2020年49.2%から2050年52.6%へ。表示値の差は+3.4ポイントですが、比率上昇は人数増加を意味しません。中心点による概算で、実際の浸水人口ではありません。\n\n{{url}}\n\n#北海道 #洪水 #将来人口',
     '2026-09-17T21:10:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-flood-risk'],
@@ -484,14 +485,18 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
       highlightAreaCodes: ['01000'],
       panelKind: 'statement',
       panelLabel: '北海道・区域内人口比率',
-      panelItems: ['2020年：25.8%', '2050年：27.5%', '変化：+1.7ポイント'],
+      panelItems: [
+        '2020年：49.2%',
+        '2050年：52.6%',
+        '表示差：+3.4ポイント',
+      ],
     }
   ),
   x(
     10,
-    '東京は2050年人口の69.6%が駅圏',
+    '東京は中心点判定で70.8%が駅圏',
     'number',
-    '駅代表点から直線800m以内に中心点がある1km人口メッシュを集計すると、東京都は2050年人口の69.6%が駅アクセス圏。大阪府65.8%、京都府55.4%でした。\n\n{{url}}\n\n#鉄道 #駅勢圏 #地域分析',
+    '駅代表点から直線800m以内に中心点がある1km人口メッシュを集計すると、東京都は2050年人口の70.8%。大阪府65.8%、京都府55.0%でした。中心点で人口を割り当てた概算で、実際の徒歩800m圏ではありません。\n\n{{url}}\n\n#鉄道 #駅勢圏 #地域分析',
     '2026-09-19T09:30:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-station-access'],
@@ -508,9 +513,9 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
   ),
   x(
     11,
-    '東京の駅圏人口は1001万6530人',
+    '東京の駅圏は概算1019万6427人',
     'shock',
-    '東京都では2050年に10,016,530人が駅800m圏に暮らす推計です。駅圏人口比率69.6%と、人数1001万6530人は別の指標。割合と規模を同時に見ると交通需要の見え方が変わります。\n\n{{url}}\n\n#東京 #公共交通 #将来人口',
+    '東京都では、駅代表点から直線800m以内に中心点があるメッシュの2050年人口合計は10,196,427人、都人口比70.8%。1kmメッシュ人口を中心点で割り当てる概算です。実際の徒歩圏や利用客数ではなく、割合と規模を分けて読みます。\n\n{{url}}\n\n#東京 #公共交通 #将来人口',
     '2026-09-21T10:20:00+09:00',
     'cross-analysis',
     ['m1-analysis-population-station-access'],
@@ -523,7 +528,7 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
       highlightAreaCodes: ['13000'],
       panelKind: 'statement',
       panelLabel: '東京都・2050年',
-      panelItems: ['駅800m圏人口：10,016,530人', '県人口比：69.6%'],
+      panelItems: ['中心点判定：10,196,427人', '都人口比：70.8%'],
     }
   ),
   x(
@@ -550,7 +555,7 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     13,
     'Geo分析は3つの空間処理で作る',
     'angle-howto',
-    '今回のGeo分析は、地価＝県別集計と指標結合、洪水＝メッシュ中心点のポリゴン包含判定、駅＝代表点から800mの距離判定。AIに数値計算や空間判定を任せず、決定的な処理で再生成します。\n\n{{url}}\n\n#GIS #オープンデータ #地域分析',
+    '今回のGeo分析は、地価＝地点を人口メッシュへ包含判定で接続、洪水＝メッシュ中心点のポリゴン包含判定、駅＝代表点から800mの距離判定。AIに数値計算や空間判定を任せず、入力・途中データ・集計まで決定的な処理で再生成します。\n\n{{url}}\n\n#GIS #オープンデータ #地域分析',
     '2026-09-25T09:40:00+09:00',
     'method',
     [
@@ -558,9 +563,9 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
       'm1-analysis-population-flood-risk',
       'm1-analysis-population-station-access',
     ],
-    'medianLandPriceChange',
+    'risingDecliningPointShare',
     [
-      'medianLandPriceChange',
+      'risingDecliningPointShare',
       'floodExposureShare2050',
       'stationAccessShare2050',
     ],
@@ -572,7 +577,7 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
       panelKind: 'method',
       panelLabel: '3つの空間処理',
       panelItems: [
-        '地価：県別集計・結合',
+        '地価：地点を人口メッシュへ接続',
         '洪水：ポリゴン包含判定',
         '駅：800m距離判定',
       ],

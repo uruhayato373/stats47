@@ -1,9 +1,11 @@
 import { createHash } from 'node:crypto';
 import { lstatSync, readdirSync, readFileSync, realpathSync } from 'node:fs';
 import { extname, isAbsolute, relative, resolve, sep } from 'node:path';
-import { gzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 
 import type { ImageObjectStore } from '../image-pipeline';
+import { assertKsjPublicAssetsAllowed } from './lib/ksj-publication-guard';
+import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY, blogSnapshotWriteCondition } from './lib/blog-publication-guard';
 
 const SHA256_METADATA_KEY = 'stats47-sha256';
 const SIZE_METADATA_KEY = 'stats47-size';
@@ -289,6 +291,19 @@ export async function publishExactR2Assets(options: {
   if (options.candidates.length === 0) {
     throw new Error('publish対象ファイルが0件です');
   }
+  // 全候補を先に検査し、混在バッチの途中までPUTされることを防ぐ。
+  const candidatesByKey = new Map(options.candidates.map((candidate) => [candidate.key, candidate]));
+  assertKsjPublicAssetsAllowed([...candidatesByKey.keys()], (key) => {
+    const candidate = candidatesByKey.get(key)!;
+    return candidate.contentEncoding === 'gzip' ? gunzipSync(candidate.body) : candidate.body;
+  });
+  const decodedBody = (key: string) => {
+    const candidate = candidatesByKey.get(key)!;
+    return candidate.contentEncoding === 'gzip' ? gunzipSync(candidate.body) : candidate.body;
+  };
+  assertBlogPublicAssetsAllowed([...candidatesByKey.keys()], decodedBody);
+  const blogCondition = candidatesByKey.has(BLOG_INDEX_KEY)
+    ? await blogSnapshotWriteCondition(decodedBody(BLOG_INDEX_KEY), options.store) : null;
 
   let uploaded = 0;
   let skipped = 0;
@@ -313,7 +328,7 @@ export async function publishExactR2Assets(options: {
         : {}),
       cacheControl: CACHE_CONTROL,
       metadata: metadataFor(candidate),
-      ...(before?.etag
+      ...(candidate.key === BLOG_INDEX_KEY && blogCondition ? blogCondition : before?.etag
         ? { ifMatch: before.etag }
         : { ifNoneMatch: '*' as const }),
     });

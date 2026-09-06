@@ -14,6 +14,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
+    "audit:geo-runtime": "cross-env GEO_ARTIFACT_ROOT=../../.local/r2/app/geo vitest run src/features/geo-analysis/lib/__tests__/geo-artifacts-local.integration.test.ts",
     "test:coverage": "vitest run --coverage",
     "test:stats-data": "vitest run --dir ../../packages/estat-api/src/stats-data/__tests__",
     "test:ai-content": "vitest run --dir ../../packages/ai-content/src/services/__tests__",

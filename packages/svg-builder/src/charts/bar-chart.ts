@@ -73,6 +73,8 @@ export interface BarChartOptions {
   highLabel?: string;
   /** "columns" 右カラムのヘッダーラベル。デフォルト "下位"。 */
   lowLabel?: string;
+  /** カード型(columns/portrait)の値バーを表示するか。既定 true。符号付き値を数値カードだけで比較するときは false。 */
+  showBars?: boolean;
   /**
    * X 軸の起点値。デフォルト: 0。"single" レイアウトのみ対応。
    * 例: 保険普及率のように最小値が 20% 付近の場合は 0 より大きい値を指定する。
@@ -138,6 +140,7 @@ function renderCardColumn(
   unit: string,
   /** データセット全体で解決した小数桁。上位/下位で揃わないと読み比べられないので呼び元が決める */
   precision: number,
+  showBars: boolean,
 ): string {
   const header = [
     `  <rect x="${colX}" y="${HEADER_Y}" width="${CARD_W}" height="${HEADER_H}" rx="8" fill="${theme.header}"/>`,
@@ -160,8 +163,8 @@ function renderCardColumn(
         `  <circle cx="${colX + BADGE_DX}" cy="${cy}" r="${BADGE_R}" fill="${theme.header}"/>`,
         `  <text x="${colX + BADGE_DX}" y="${cy + 4.3}" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">${rank}</text>`,
         `  <text x="${colX + NAME_DX}" y="${cy + 4.7}" font-size="13" font-weight="bold" fill="#1f2937">${name}</text>`,
-        `  <text x="${colX + VALUE_DX}" y="${cy + 4.3}" text-anchor="end" font-size="14" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
-        `  <rect x="${colX + BAR_DX}" y="${rowY + 15}" width="${w}" height="${BAR_H_CARD}" rx="4" fill="${theme.bar}" opacity="0.8"/>`,
+        `  <text x="${colX + (showBars ? VALUE_DX : CARD_W - 20)}" y="${cy + 4.3}" text-anchor="end" font-size="14" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
+        ...(showBars ? [`  <rect x="${colX + BAR_DX}" y="${rowY + 15}" width="${w}" height="${BAR_H_CARD}" rx="4" fill="${theme.bar}" opacity="0.8"/>`] : []),
       ].join("\n");
     })
     .join("\n");
@@ -201,8 +204,9 @@ function renderColumnsLayout(
   const N = Math.max(topItems.length, bottomItems.length);
   const totalH = FIRST_ROW_Y + N * ROW_GAP + BOTTOM_PAD;
 
-  const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit, precision);
-  const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit, precision);
+  const showBars = options.showBars ?? true;
+  const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit, precision, showBars);
+  const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit, precision, showBars);
 
   // ★区切りの空白はタイトル側 (大きいフォント) に置く。tspan の中に入れると 14px 幅の
   //   空きしか取れず、「第3次産業就業者比率2020年」のように指標名と年が詰まって読める
@@ -262,6 +266,7 @@ function renderPortraitSection(
   unit: string,
   /** データセット全体で解決した小数桁 (呼び元が 1 度だけ決める) */
   precision: number,
+  showBars: boolean,
 ): string {
   const x = PORT_PAD;
   const header = [
@@ -289,7 +294,7 @@ function renderPortraitSection(
         `  <text x="${badgeCx}" y="${badgeCy + 8}" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">${rank}</text>`,
         `  <text x="${x + 84}" y="${y + 46}" font-size="30" font-weight="bold" fill="#1f2937">${name}</text>`,
         `  <text x="${x + PORT_CONTENT_W - 24}" y="${y + 46}" text-anchor="end" font-size="28" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
-        `  <rect x="${x + 84}" y="${barY}" width="${w}" height="16" rx="4" fill="${theme.bar}" opacity="0.85"/>`,
+        ...(showBars ? [`  <rect x="${x + 84}" y="${barY}" width="${w}" height="16" rx="4" fill="${theme.bar}" opacity="0.85"/>`] : []),
       ].join("\n");
     })
     .join("\n");
@@ -337,11 +342,11 @@ function renderPortraitLayout(
   const startY = PORT_TITLE_BOTTOM + Math.max(0, Math.floor((avail - contentH) / 2));
 
   const sec1 = renderPortraitSection(
-    topItems, startY, rowH, topTheme, `${highLabel}${tN}`, toBarW, unit, precision,
+    topItems, startY, rowH, topTheme, `${highLabel}${tN}`, toBarW, unit, precision, options.showBars ?? true,
   );
   const sec2Top = startY + sec1H + PORT_SECTION_GAP;
   const sec2 = renderPortraitSection(
-    bottomItems, sec2Top, rowH, bottomTheme, `${lowLabel}${bN}`, toBarW, unit, precision,
+    bottomItems, sec2Top, rowH, bottomTheme, `${lowLabel}${bN}`, toBarW, unit, precision, options.showBars ?? true,
   );
 
   // 長いタイトルは見切れるため概算幅でフォントを自動フィット。年(サブタイトル)は別行・大きめ。

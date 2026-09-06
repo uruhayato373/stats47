@@ -216,7 +216,9 @@ jobs:
         # R2 依存 route への generateStaticParams 再混入を弾く (notFound 固着の再発防止)。
         # pre-commit と同一だが --no-verify 素通り対策で CI でも実行する。
         # 正典: .claude/rules/nextjs-ssg-preservation.md
-        run: node .claude/scripts/lib/check-r2-route-ssg.cjs
+        run: |
+          node --test .claude/scripts/lib/__tests__/check-r2-route-ssg.test.cjs
+          node .claude/scripts/lib/check-r2-route-ssg.cjs
         continue-on-error: false
 
       - name: 📚 Private Reference Source Guard

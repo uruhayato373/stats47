@@ -17,7 +17,6 @@ import {
 import { buildGeoStationAccessMapModel } from '../lib/build-geo-station-access-map-model';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
 
-
 import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
 import type { GeoStationAccessPrefDetail } from '@stats47/gis';
 import type { Feature, Geometry } from 'geojson';
@@ -68,7 +67,9 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
       ),
     [detail, view]
   );
-  const style = (feature?: Feature<Geometry, Record<string, unknown>>): PathOptions => {
+  const style = (
+    feature?: Feature<Geometry, Record<string, unknown>>
+  ): PathOptions => {
     const properties = feature?.properties;
     const accessible = properties?.accessible === true;
     const fillColor =
@@ -95,6 +96,8 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
       preferCanvas
       center={[36.5, 137.5]}
       zoom={6}
+      // Tabs can unmount the map immediately after zoom; do not leave a zoom-end timer.
+      zoomAnimation={false}
       minZoom={GEO_BASEMAP.minZoom}
       maxZoom={14}
       scrollWheelZoom={false}

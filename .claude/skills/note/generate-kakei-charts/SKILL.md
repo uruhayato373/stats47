@@ -16,6 +16,25 @@ a-kakei 記事用のチャート 2 枚を chart-data.json から生成する。
 | `category-ratio.svg` | 大分類別 対全国平均比率（diverging bar） | `categoryBreakdown` |
 | `extreme-items.svg` | 特徴的な品目 上位10・下位10（横棒） | `topRatioItems` / `bottomRatioItems` |
 
+## Phase 0: chart-data.json を作る (★2026-09-06 追加)
+
+本スキルは chart-data.json を**読む側**だけを持っており、作る側が無かったため
+a-kakei-* の記事は 1 本も存在しなかった。producer は次のスクリプト:
+
+```bash
+node .claude/scripts/note/build-kakei-note-chart-data.mjs --all
+# 1 県だけ: --pref 01000 / 出力先を変える: --out <dir>
+```
+
+R2 の `app/stats/<key>/values.json` から十大費目 10 件と家計調査の品目 500 件超を読み、
+47 県庁所在市の単純平均を 1.00 とした比率にして書き出す。依存する辞書は 2 つ:
+
+- `.claude/scripts/note/data/kakei-item-titles.json` — 品目キー → 日本語名 (registry から生成)
+- `.claude/scripts/note/data/kakei-capital-cities.json` — 県コード → 県庁所在市名・slug
+
+十大費目の metric (`*-expenditure-total` 10 件) が R2 に無いと停止する。
+**検算**: 十大費目の合計は消費支出合計と一致する (2026-09-06 実測で 47/47 県が誤差 1 円以内)。
+
 ## 引数
 
 - **slug**: 記事ディレクトリ名（例: `a-kakei-hokkaido`）
@@ -88,3 +107,15 @@ docs/31_note記事原稿/<slug>/
 - `chart-data.json` が存在しない記事はスキップされる
 - ランキング型 A 記事（`a-pharmacy-count-per-100k` 等）は対象外（chart-data.json の構造が異なる）
 - デザインシステムは `.claude/skills/note/generate-note-charts/reference/design-system.md` に準拠
+
+## 基準の表記 (★2026-09-06 是正)
+
+チャートの見出しは **「47県庁所在市平均」** と書く。「全国平均」ではない。
+
+比率の基準は 47 県庁所在市の**単純平均** = 1.00 で、家計調査が公表する全国平均
+(世帯数で重み付け) とは一致しない。以前の生成器は 5 箇所すべてで「全国平均」と
+表示しており、記事本文の注記 (「全国値ではない」) と矛盾していた。
+**図は本文より先に読まれる**ので、ここが誤っていると注記が意味を失う。
+
+品目名は倍率ラベルの手前で打ち切る (`…`)。長い品目名が倍率と重なって
+どちらも読めなくなる事故があった (例: 「教養娯楽用耐久財修理代 0.16倍」)。

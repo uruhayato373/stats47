@@ -24,9 +24,8 @@ import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   geoAnalysisPublicDataUrl,
   isGeoCrossAnalysisSlug,
-  loadGeoAnalysisManifest,
-  loadGeoAnalysisPrefDetail,
   GeoSpatialEvidenceExplorer,
+  loadGeoAnalysisPrefBundle,
 } from '@/features/geo-analysis';
 
 import type { Metadata } from 'next';
@@ -121,11 +120,9 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
   ) {
     notFound();
   }
-  const [manifest, detail] = await Promise.all([
-    loadGeoAnalysisManifest(analysisSlug),
-    loadGeoAnalysisPrefDetail(analysisSlug, prefCode),
-  ]);
-  if (!manifest || !detail) notFound();
+  const bundle = await loadGeoAnalysisPrefBundle(analysisSlug, prefCode);
+  if (!bundle) notFound();
+  const { manifest, detail } = bundle;
   const config = GEO_CROSS_ANALYSIS_CONFIGS[analysisSlug];
   const previews = previewRows(detail);
   const detailKey = geoAnalysisPrefKey(analysisSlug, prefCode);

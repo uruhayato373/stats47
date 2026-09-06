@@ -665,6 +665,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
     keywords: ["日本", "全国", "港湾", "海上輸送", "貨物", "旅客船"],
     metrics: [
       {
+        metricKey: "port-count",
+        shortLabel: "港湾調査の対象港数（甲種・乙種）",
+      },
+      {
         metricKey: "maritime-import-export-cargo",
         shortLabel: "海上出入貨物",
       },

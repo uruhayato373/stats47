@@ -3,10 +3,11 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**528 件** (最終更新: 2026-09-03)
+**523 件** (最終更新: 2026-09-05)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-05 | 𝕏 X | geo/geo-001-x-03 | 人口の色分け地図だけでは、住みやすさも安全性も分かりません。①人口変化を確認 ②別データを重ねる ③方法と限界を読む。こ… | [🔗](https://x.com/stats47jp373/status/2096030550272418254) |
 | 2026-09-03 | 𝕏 X | geo/geo-001-x-02 | 東京都+2.50%、秋田県-41.59%。同じ2050年推計でも44.09ポイントの幅があります。高低を知るだけで終わら… | [🔗](https://x.com/stats47jp373/status/2095348556827951334) |
 | 2026-09-01 | 𝕏 X | geo/geo-001-x-01 | 2050年の推計人口を2020年と比べると、増加は東京都の+2.50%だけ。46道府県は減少見込みです。これはGeo分析… | [🔗](https://x.com/stats47jp373/status/2094560866867769577) |
 | 2026-08-10 | 📸 Instagram | ranking/sheets-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Db24rrIoBMw/) |
@@ -42,12 +43,10 @@
 | 2026-08-04 | 𝕏 X | ranking/female-part-time-hourly-wage | このデータを使う3ステップ📈  ①女性パートの時給ランキングを確認 ②1位東京都1,534円と自分の地域を比較 ③転職… | [🔗](https://x.com/stats47jp373/status/2084444210426777897) |
 | 2026-08-04 | 𝕏 X | ranking/new-graduate-scheduled-salary-university-male | なぜ群馬県が新規学卒者の給与で全国トップなのでしょうか?  1位 群馬県 317.9千円 2位 長崎県 266.4千円 … | [🔗](https://x.com/stats47jp373/status/2084580106920706453) |
 | 2026-08-03 | 📸 Instagram | ranking/foreign-resident-count-china-per-100k |  | [🔗](https://www.instagram.com/p/DblE1f8HKvm/) |
-| 2026-08-03 | 📸 Instagram | ranking/nuclear-power-plant-count |  | [🔗](https://www.instagram.com/p/DbkVhEEm2Bn/) |
 | 2026-08-03 | 📸 Instagram | ranking/police-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbjqhrCGqL8/) |
 | 2026-08-03 | 𝕏 X | ranking/craft-materials-consumption-expenditure | もし手芸・工芸材料の消費額が全国トップの長野県に住んでいたら、身の回りに手作りの温もりがあふれる暮らしです。  1位 長… | [🔗](https://x.com/stats47jp373/status/2084247923928313864) |
 | 2026-08-02 | 📸 Instagram | ranking/unmarried-ratio-male-30-34 |  | [🔗](https://www.instagram.com/p/DbiTNiHG5cJ/) |
 | 2026-08-02 | 📸 Instagram | ranking/air-conditioner-consumption-quantity |  | [🔗](https://www.instagram.com/p/Dbhtzl9FQFq/) |
-| 2026-08-02 | 📸 Instagram | ranking/wind-power-plant-count-facility |  | [🔗](https://www.instagram.com/p/DbhFlCdIJWI/) |
 | 2026-08-01 | 📸 Instagram | ranking/physical-disability-rehabilitation-cases |  | [🔗](https://www.instagram.com/p/DbfuhnsICZ8/) |
 | 2026-08-01 | 📸 Instagram | ranking/other-grains-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbfIpzHoEFw/) |
 | 2026-08-01 | 📸 Instagram | ranking/nursery-teacher-annual-income |  | [🔗](https://www.instagram.com/p/DbehJyKEWzk/) |
@@ -61,12 +60,10 @@
 | 2026-07-30 | 📸 Instagram | ranking/grade-separated-pedestrian-crossings-per-1000-km |  | [🔗](https://www.instagram.com/p/DbZ9iyUEbpk/) |
 | 2026-07-30 | 📸 Instagram | ranking/wooden-housing-ratio |  | [🔗](https://www.instagram.com/p/DbZXQL3EegH/) |
 | 2026-07-30 | 𝕏 X | ranking/police-expenses-prefecture | 1位東京都6,295億円、2位大阪府2,657億円、3位神奈川県1,967億円。  47位鳥取県はわずか161億円で、最… | [🔗](https://x.com/stats47jp373/status/2082602074676900203) |
-| 2026-07-30 | 𝕏 X | ranking/nuclear-power-plant-count | このデータを使う3ステップ。 ①1位福島県13か所を起点に立地県の分布を確認 ②2位京都府8か所・3位新潟県7か所と比較… | [🔗](https://x.com/stats47jp373/status/2082632267172638960) |
 | 2026-07-30 | 𝕏 X | ranking/foreign-resident-count-china-per-100k | なぜ東京都の外国人人口比率がこれほど高いのか?  1位東京都1,393.4人、2位埼玉県783.9人、3位千葉県780.… | [🔗](https://x.com/stats47jp373/status/2082768166065705405) |
 | 2026-07-29 | 📸 Instagram | ranking/port-vehicle-ferry |  | [🔗](https://www.instagram.com/p/DbYFUQmFnqQ/) |
 | 2026-07-29 | 📸 Instagram | ranking/household-head-annual-income-per-household |  | [🔗](https://www.instagram.com/p/DbXaBOqG-sk/) |
 | 2026-07-29 | 📸 Instagram | ranking/public-rent-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbWya3Qlh-7/) |
-| 2026-07-29 | 𝕏 X | ranking/wind-power-plant-count-facility | 「風力発電は西日本が盛ん」と思われがちですが、実際は北海道50か所、青森県30か所と北日本が上位を独占。  山梨県・岐阜… | [🔗](https://x.com/stats47jp373/status/2082284982047760819) |
 | 2026-07-29 | 𝕏 X | ranking/air-conditioner-consumption-quantity | エアコン消費量、1位香川県0.2台 vs 47位大分県0.022台。  差は9.1倍。  意外にも猛暑イメージの強い九州… | [🔗](https://x.com/stats47jp373/status/2082300082095820912) |
 | 2026-07-29 | 𝕏 X | ranking/unmarried-ratio-male-30-34 | もし未婚率51.8%の秋田県で30代前半を過ごしていたら、周囲も独身の人が多いはずです。  47位大阪府は39.3%で差… | [🔗](https://x.com/stats47jp373/status/2082435984461812118) |
 | 2026-07-28 | 📸 Instagram | ranking/psychiatric-hospital-bed-occupancy-rate |  | [🔗](https://www.instagram.com/p/DbVf8ltmpdj/) |
@@ -120,7 +117,6 @@
 | 2026-07-18 | 𝕏 X | ranking/marine-fishery-catch | 海面漁業漁獲量、1位北海道842,704トン、2位長崎県292,890トン、3位茨城県259,496トン。  最大格差は… | [🔗](https://x.com/stats47jp373/status/2078253412504809629) |
 | 2026-07-18 | 𝕏 X | ranking/other-vegetable-seaweed-processed-consumption-expenditure | 野菜・海藻加工品の支出データ、3ステップで使いこなす方法。  ①上位5県で消費傾向を把握(静岡県3,197円) ②下位県… | [🔗](https://x.com/stats47jp373/status/2078283617877229809) |
 | 2026-07-17 | 📸 Instagram | ranking/overseas-travel-annual-participation-rate-15plus |  | [🔗](https://www.instagram.com/p/Da5H1FGlX4n/) |
-| 2026-07-17 | 📸 Instagram | ranking/tourism-resource-count |  | [🔗](https://www.instagram.com/p/Da4fXEvFWYc/) |
 | 2026-07-17 | 📸 Instagram | bar-chart-race/japanese-entries |  | [🔗](https://www.instagram.com/reel/Da35Hvwkl8b/) |
 | 2026-07-17 | 𝕏 X | ranking/marine-fishery-output-value | もし北海道に住んでいたら。  海面漁業産出額は全国最多の2396億円。 2位長崎県709億円、3位宮城県585億円と続き… | [🔗](https://x.com/stats47jp373/status/2078087332805181810) |
 | 2026-07-17 | 𝕏 X | ranking/overseas-travel-annual-participation-rate-10plus | 海外旅行の行動者率、京都府は0.7％で全国1位。 47位高知県は0.1％。  その差、実に7.0倍。  地域差の実態はこ… | [🔗](https://x.com/stats47jp373/status/2077891029517173109) |
@@ -134,7 +130,6 @@
 | 2026-07-15 | 📸 Instagram | ranking/maritime-import-export-cargo |  | [🔗](https://www.instagram.com/p/Daz_HUxGUkv/) |
 | 2026-07-15 | 📸 Instagram | ranking/total-overnight-guests-foreign |  | [🔗](https://www.instagram.com/p/DazUc2hG6Bo/) |
 | 2026-07-15 | 📸 Instagram | bar-chart-race/serious-crime-per-100k |  | [🔗](https://www.instagram.com/reel/DayurtyCTDN/) |
-| 2026-07-15 | 𝕏 X | ranking/tourism-resource-count | もし福岡県に住んでいたら。  観光資源数は全国最多の389件。 2位佐賀県366件、3位茨城県246件と続きます。 47… | [🔗](https://x.com/stats47jp373/status/2077362549981331845) |
 | 2026-07-14 | 📸 Instagram | ranking/travel-participation-rate-overseas |  | [🔗](https://www.instagram.com/p/DaxZ6WPoG_e/) |
 | 2026-07-14 | 📸 Instagram | ranking/flood-affected-rivers |  | [🔗](https://www.instagram.com/p/Dawvjw3G6B2/) |
 | 2026-07-14 | 📸 Instagram | bar-chart-race/total-outpatients |  | [🔗](https://www.instagram.com/reel/DawJ5ZTgJQG/) |

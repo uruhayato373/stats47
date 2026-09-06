@@ -9,34 +9,46 @@ vi.mock('@stats47/r2-storage/server', () => ({
 
 import {
   buildGeoMapModel,
+  GEO_CROSS_ANALYSIS_SLUGS,
   formatGeoValue,
   type GeoAnalysisSnapshot,
+  type GeoCrossAnalysisSlug,
 } from '../geo-cross-analysis';
 import { loadGeoAnalysisPrefDetail } from '../load-geo-analysis-evidence';
 import {
   parseGeoAnalysisSnapshot,
   loadGeoAnalysisSnapshot,
+  loadGeoAnalysisBundle,
 } from '../load-geo-analysis-snapshot';
 
-function snapshot(): GeoAnalysisSnapshot {
+import { bindFixtureArtifact, manifestFixture } from './geo-manifest-fixture';
+
+function snapshot(
+  slug: GeoCrossAnalysisSlug = 'population-land-price'
+): GeoAnalysisSnapshot {
+  const primaryMetricKey = {
+    'population-land-price': 'risingDecliningPointShare',
+    'population-flood-risk': 'floodExposureShare2050',
+    'population-station-access': 'stationAccessShare2050',
+  }[slug];
   const rows = Array.from({ length: 47 }, (_, index) => ({
     areaCode: `${String(index + 1).padStart(2, '0')}000`,
     areaName: `県${index + 1}`,
     rank: index + 1,
-    values: { risingDecliningPointShare: 47 - index },
+    values: { [primaryMetricKey]: 47 - index },
   }));
   return {
     schemaVersion: 1,
-    slug: 'population-land-price',
+    slug,
     generatedAt: '2026-08-29T00:00:00.000Z',
     dataVersion: '2020-2050',
     geography: 'prefecture',
     title: 'テスト分析',
     question: '何が違うか',
-    primaryMetricKey: 'risingDecliningPointShare',
+    primaryMetricKey,
     metrics: [
       {
-        key: 'risingDecliningPointShare',
+        key: primaryMetricKey,
         label: 'テスト値',
         unit: '%',
         format: 'percent1',
@@ -72,35 +84,107 @@ function snapshot(): GeoAnalysisSnapshot {
 }
 
 describe('Geo cross analysis', () => {
-  it('洪水の読込はmanifest欠落・新旧bundle混在を拒否する', async () => {
-    const base = snapshot();
-    const inputs = FLOOD_ARCHIVES.map(({ key }) => ({
-      key,
-      datasetId: 'A31b',
-      layerId: 'flood',
-      role: 'calculation-input',
-      usedInCalculation: true,
-    }));
-    const manifest = {
-      schemaVersion: 1,
-      slug: 'population-flood-risk',
-      generatedAt: base.generatedAt,
-      definitionSha256: 'a'.repeat(64),
-      inputs: [
-        {
-          layerId: 'population',
-          role: 'calculation-input',
-          usedInCalculation: true,
+  for (const slug of GEO_CROSS_ANALYSIS_SLUGS) {
+    it(`${slug}: 表示するmanifestはsnapshotを検証した一組だけ（A/B切替で二重読込しない）`, async () => {
+      const base = snapshot(slug);
+      const value = {
+        ...base,
+        dataQuality: {
+          ...base.dataQuality,
+          inputCounts: { floodZipFiles: FLOOD_ARCHIVES.length },
         },
-        ...inputs,
-      ],
-      stages: [
-        { kind: 'spatial-operation', inputIds: ['population', 'flood'] },
-        { id: 'flood-maximum-polygons', outputs: inputs },
-      ],
-      aggregate: {},
-      quality: { expectedAreas: 47, detailAreas: 47, conservationChecks: 47 },
-    };
+      };
+      const manifest = bindFixtureArtifact(
+        { ...manifestFixture(slug), generatedAt: value.generatedAt },
+        `app/geo/${slug}/item.json`,
+        value,
+        true
+      );
+      const fetchMock = vi.mocked(fetchFromR2AsJson);
+      fetchMock.mockReset();
+      fetchMock
+        .mockResolvedValueOnce(value)
+        .mockResolvedValueOnce(manifest)
+        .mockResolvedValueOnce({
+          ...manifest,
+          generatedAt: '2026-09-06T00:00:00Z',
+        });
+      expect(await loadGeoAnalysisBundle(slug)).toEqual({
+        snapshot: value,
+        manifest,
+      });
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+      fetchMock.mockReset();
+      fetchMock
+        .mockResolvedValueOnce(value)
+        .mockResolvedValueOnce({
+          ...manifest,
+          generatedAt: '2026-09-06T00:00:00Z',
+        });
+      expect(await loadGeoAnalysisBundle(slug)).toBeNull();
+      fetchMock.mockReset();
+    });
+    it(`${slug}: 集計のmanifest必須・版混在・SHA改変を共通拒否する`, async () => {
+      const base = snapshot(slug);
+      const value = {
+        ...base,
+        slug,
+        dataQuality: {
+          ...base.dataQuality,
+          inputCounts: { floodZipFiles: FLOOD_ARCHIVES.length },
+        },
+      };
+      const manifest = bindFixtureArtifact(
+        { ...manifestFixture(slug), generatedAt: value.generatedAt },
+        `app/geo/${slug}/item.json`,
+        value,
+        true
+      );
+      const fetchMock = vi.mocked(fetchFromR2AsJson);
+      for (const candidate of [
+        null,
+        { ...manifest, generatedAt: '2026-09-04T00:00:00Z' },
+        { ...manifest, definitionSha256: 'invalid' },
+      ]) {
+        fetchMock.mockResolvedValueOnce(value).mockResolvedValueOnce(candidate);
+        expect(await loadGeoAnalysisSnapshot(slug)).toBeNull();
+      }
+      fetchMock
+        .mockResolvedValueOnce({ ...value, title: '別の内容' })
+        .mockResolvedValueOnce(manifest);
+      expect(await loadGeoAnalysisSnapshot(slug)).toBeNull();
+      fetchMock.mockResolvedValueOnce(value).mockResolvedValueOnce(manifest);
+      expect(await loadGeoAnalysisSnapshot(slug)).toEqual(value);
+    });
+  }
+  it('metric重複・順位非finite・summary不正・method不正を拒否する', () => {
+    const value = snapshot();
+    for (const patch of [
+      { metrics: [...value.metrics, value.metrics[0]] },
+      {
+        rows: value.rows.map((row, i) =>
+          i ? row : { ...row, rank: Infinity }
+        ),
+      },
+      {
+        rows: value.rows.map((row, i) =>
+          i ? row : { ...row, values: { risingDecliningPointShare: NaN } }
+        ),
+      },
+      { summary: { ...value.summary, medianValue: Infinity } },
+      { summary: { ...value.summary, topAreaCodes: ['48000'] } },
+      { method: [42] },
+      { dataQuality: { ...value.dataQuality, inputCounts: { records: NaN } } },
+    ])
+      expect(
+        parseGeoAnalysisSnapshot(
+          { ...value, ...patch },
+          'population-land-price'
+        )
+      ).toBeNull();
+  });
+  it('洪水の読込はmanifest欠落・新旧bundle混在を拒否する', async () => {
+    const base = snapshot('population-flood-risk');
     const flood = {
       ...base,
       slug: 'population-flood-risk',
@@ -110,6 +194,15 @@ describe('Geo cross analysis', () => {
       },
     };
     const fetchMock = vi.mocked(fetchFromR2AsJson);
+    const manifest = bindFixtureArtifact(
+      {
+        ...manifestFixture('population-flood-risk'),
+        generatedAt: base.generatedAt,
+      },
+      'app/geo/population-flood-risk/item.json',
+      flood,
+      true
+    );
     for (const candidate of [
       null,
       { ...manifest, generatedAt: 'old' },
@@ -145,13 +238,21 @@ describe('Geo cross analysis', () => {
     expect(
       await loadGeoAnalysisPrefDetail('population-flood-risk', '13')
     ).toBeNull();
-    fetchMock.mockResolvedValueOnce(detail).mockResolvedValueOnce(manifest);
+    fetchMock
+      .mockResolvedValueOnce(detail)
+      .mockResolvedValueOnce(
+        bindFixtureArtifact(
+          manifest,
+          'app/geo/population-flood-risk/pref/13.json',
+          detail
+        )
+      );
     expect(
       await loadGeoAnalysisPrefDetail('population-flood-risk', '13')
     ).toEqual(detail);
   });
   it('比較・area・themeでも河川区分欠落の旧洪水snapshotを拒否する', () => {
-    const base = snapshot();
+    const base = snapshot('population-flood-risk');
     const flood = {
       ...base,
       slug: 'population-flood-risk',

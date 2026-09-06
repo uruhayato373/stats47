@@ -52,5 +52,5 @@ export const biomassPowerStationCount: MetricConfig = {
   // (KSJ-PREF-ASSIGN-01)。
   "seoTitle": "バイオマス発電施設数ランキング都道府県【2013年】｜1位北海道（33か所）",
   "seoDescription": "2013年のバイオマス発電施設数の都道府県別ランキング。1位北海道（33か所）、最下位徳島県（0か所）で地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

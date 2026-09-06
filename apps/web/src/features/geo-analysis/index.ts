@@ -20,6 +20,7 @@ export {
   geoAnalysisPublicDataUrl,
   loadGeoAnalysisManifest,
   loadGeoAnalysisPrefDetail,
+  loadGeoAnalysisPrefBundle,
   parseGeoAnalysisManifest,
   parseGeoAnalysisPrefDetail,
 } from './lib/load-geo-analysis-evidence';

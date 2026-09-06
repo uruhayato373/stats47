@@ -58,15 +58,7 @@ const StationMap = dynamic(
   { ssr: false }
 );
 
-export function GeoSpatialEvidenceExplorer({
-  slug,
-  analysisId,
-  dataVersion,
-  initialPrefCode,
-  initialView,
-  manifest,
-  fixedPrefecture = false,
-}: {
+interface Props {
   slug: GeoCrossAnalysisSlug;
   analysisId: string;
   dataVersion: string;
@@ -74,7 +66,24 @@ export function GeoSpatialEvidenceExplorer({
   initialView: SpatialView;
   manifest: GeoAnalysisEvidenceManifest;
   fixedPrefecture?: boolean;
-}) {
+}
+
+export function GeoSpatialEvidenceExplorer(props: Props) {
+  // Next Link query navigation can preserve this client boundary. Reset its local
+  // state whenever the server-provided selection or evidence generation changes.
+  const key = `${props.slug}:${props.initialPrefCode}:${props.initialView}:${props.manifest.generatedAt}:${props.manifest.aggregate.sha256}`;
+  return <GeoSpatialEvidenceExplorerState key={key} {...props} />;
+}
+
+function GeoSpatialEvidenceExplorerState({
+  slug,
+  analysisId,
+  dataVersion,
+  initialPrefCode,
+  initialView,
+  manifest,
+  fixedPrefecture = false,
+}: Props) {
   const [prefCode, setPrefCode] = useState(initialPrefCode);
   const [view, setView] = useState(initialView);
   const [detail, setDetail] = useState<GeoAnalysisPrefDetail | null>(null);
@@ -90,24 +99,36 @@ export function GeoSpatialEvidenceExplorer({
   };
   useEffect(() => {
     let active = true;
-    const key = `${slug}:${prefCode}`;
+    const artifact = manifest.stages
+      .find((stage) => stage.id === 'population-mesh')
+      ?.outputs.find((output) => output.areaCode === `${prefCode}000`);
+    const key = `${slug}:${prefCode}:${manifest.generatedAt}:${artifact?.sha256 ?? 'missing'}`;
     const cached = cache.current.get(key);
-      void (cached ? Promise.resolve(cached) : fetchGeoDetailAction(slug, prefCode))
-        .then((next) => {
-          if (!active) return;
-          if (next) cache.current.set(key, next);
-          setDetail(next);
-        })
-        .catch(() => {
-          if (active) setDetail(null);
-        })
-        .finally(() => {
-          if (active) setLoading(false);
-        });
+    void (
+      cached
+        ? Promise.resolve(cached)
+        : artifact
+          ? fetchGeoDetailAction(slug, prefCode, {
+              generatedAt: manifest.generatedAt,
+              sha256: artifact.sha256,
+            })
+          : Promise.resolve(null)
+    )
+      .then((next) => {
+        if (!active) return;
+        if (next) cache.current.set(key, next);
+        setDetail(next);
+      })
+      .catch(() => {
+        if (active) setDetail(null);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
     return () => {
       active = false;
     };
-  }, [slug, prefCode, retry]);
+  }, [slug, prefCode, retry, manifest]);
   const updateUrl = (pref: string, stage: SpatialView) => {
     const url = new URL(window.location.href);
     url.pathname = `/geo/${slug}`;
@@ -151,7 +172,11 @@ export function GeoSpatialEvidenceExplorer({
           description={config.spatialReading}
           hideRule
         />
-        <Select value={prefCode} onValueChange={changePref} disabled={fixedPrefecture}>
+        <Select
+          value={prefCode}
+          onValueChange={changePref}
+          disabled={fixedPrefecture}
+        >
           <SelectTrigger className="w-full sm:w-48" aria-label="地図の都道府県">
             <SelectValue />
           </SelectTrigger>
@@ -229,7 +254,10 @@ export function GeoSpatialEvidenceExplorer({
           <Button
             variant="outline"
             className="mt-2"
-            onClick={() => { setLoading(true); setRetry((v) => v + 1); }}
+            onClick={() => {
+              setLoading(true);
+              setRetry((v) => v + 1);
+            }}
           >
             再読み込み
           </Button>
@@ -252,7 +280,10 @@ export function GeoSpatialEvidenceExplorer({
           一次資料と判定方法
         </Link>
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">背景地図は地理院タイルをその都度読み込んでいます。背景の道路・地形は計算には使いません。{GEO_BASEMAP_SHORELINE_ATTRIBUTION}</p>
+      <p className="mt-3 text-xs text-muted-foreground">
+        背景地図は地理院タイルをその都度読み込んでいます。背景の道路・地形は計算には使いません。
+        {GEO_BASEMAP_SHORELINE_ATTRIBUTION}
+      </p>
     </SurfaceSection>
   );
 }

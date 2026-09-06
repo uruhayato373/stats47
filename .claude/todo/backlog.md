@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-05
+updated: 2026-09-06
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,40 @@ updated: 2026-09-05
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [COCONALA-PROFILE-OWNER-01] 本人確認・NDAと技術経験年数を本人が確認する
+
+タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-09-06] [期日:2026-09-13]
+
+- **owner**: オーナー
+- **次**: ココナラ本人確認を本人が実施し、NDAは内容を確認して本人が同意する。HTML・TypeScript・Next.js・Node.jsの実際の経験年数を確認できた場合のみ技術欄へ登録する。既存13パックの修正版はWindows/Mac Office 365で表示・県図形編集・チャート編集・Excel順位再計算を実機確認する。未確認の資格・職歴年月・稼働時間は増やさない。
+- **完了条件**: 本人確認・NDAの公開ステータスと、本人が申告した年数の一致を確認する。修正版13パックのOffice実機検証結果（OS・バージョン・表示・編集・再計算）を記録する。実施しない項目は本人の判断を記録し、未確認表示を維持する。
+- **停止条件**: 2FA・本人確認書類・規約同意はエージェントが代行しない。インボイス登録を売上改善のために自動実施しない。
+- **整備済み範囲の証跡**: `.claude/state/products/coconala-profile-2026-09-06.json`。プロフィール文面・画像・見本の公開更新を再実行しない。
+
+### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] 公開終了・新版切替の完了証跡を照合しカードを回収する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:機械] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
+
+- **owner**: backlog-loop（完了gateとカード回収のみ）
+- **対象**: 外部作業は完了済み。公開・削除を再実行せず、既存証跡を照合してledgerへ記録し、本カードを排他writer経由で削除する。
+  公開・削除・退避・検証の証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
+- **次（実行順）**:
+  1. `legacyLicense` の公開・削除証跡と `legacySnsVerification.deletionApproval.status=COMPLETED`、`deletionEvidence.pendingIds=[]`、投稿台帳IDs592/632/636/749/796/800の`status=deleted`・`deleted_at`を照合する。catalog gateを通し、ledger証拠付きで本カードを回収する。新しい外部操作・認証・コンテンツ生成は不要。
+- **★未解決 (2026-09-06 実測)**: guard は data-refresh / sync-snapshots の派生生成を**恒常的に止めている**。
+  `generate-ranking-items.ts` は「退役の瞬間に stale な isActive:true が R2 に残るのを防ぐため」
+  active/inactive を問わず item.json を書き続ける設計 (同ファイル 136-185 行のコメントが根拠)。
+  一方 guard は isActive を見ず license だけで判定するため、退役済み 9 キーの item.json で必ず throw する。
+  実測 run 34017315294: item.json 2,311 件を書いた直後に
+  `KSJ公開構造化データ禁止: app/ranking/biomass-power-station-count/item.json (P03, non-commercial)` で停止。
+  以後この経路を通る更新はすべて失敗する (月次 data-refresh / sync-snapshots)。
+  判断の分かれ目は「guard 側で isActive:false を対象外にする」か「生成側で退役キーを書かない」か。
+  前者が小さく、上記コメントの設計意図とも整合する。**owner の判断が要るため本カードに留める。**
+- **再発防止の確認**: main/develop両経路にguard反映済み。共有索引544件は全行保持、分類修正20件一致。従来から公開終了指定の未公開1行も除外・HTTP410確認。guardを持たない旧checkoutまで保護済みとは扱わない。
+- **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
+- **停止条件**: key集合/size/ETagが退避時と変わった対象は削除しない。削除済みraw435・派生59・旧ランキング126件を再実行しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。別作業のdevelopリリースと競合する変更は行わない。
+- **完了条件**: public R2の非商用11prefixが0件、catalog gate PASS、新版の出典・保存則・公開値が一致し、終了URL/ダウンロード・記事/SNSまで承認方針どおりの状態を本番実測する。
+
 
 ### [AFF-DEPLOY-RESOLUTION-01] 広告解決順の変更 (#912/#913) を本番反映し、代表ページで実測する
 
@@ -86,7 +120,6 @@ updated: 2026-09-05
   ```
 
   生成物は `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` (git tracked)。
-
 - **公開の起動**: 画像だけの push では auto-publish は発火しない (paths フィルタが `article.md` と
   workflow 自身のみ)。`workflow-dispatch-proxy.yml` の allowlist に `blog-auto-publish.yml` を
   追加済 (PR #899) なので、クラウドからも slugs 空 = reconcile で代理起動できる。
@@ -416,9 +449,30 @@ updated: 2026-09-05
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: ranking-content-author
-- **次**: 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
-  `ai-content-gemini-daily.yml` を初回実走する。既定 3 件/日・並列 1 を維持し、7 run 以上の
-  通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない。
+- **次**:
+  1. develop で `bash .claude/scripts/ai-content/run-claude-batch.sh` (既定 35 件 / Sonnet / retries 1 / concurrency 2) を
+     1 push = 1 commit で回す。**最初の 35 件バッチで Pro/Max 枠のレート制限 (`claude-error_*` reason) が出るかを観測**し、
+     1 日の件数はそこから決める (推測で置かない)。公開後は `audit-ai-content.mjs <key>` で R2 の内容一致を見る
+  2. manual-escalation 30 件 + quarantine だけ Opus Agent tool (`ranking-content-author` を `model: opus` で起動)
+  3. (並走・別件) 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
+     `ai-content-gemini-daily.yml` を復旧する。既定 3 件/日・並列 1 を維持し、7 run 以上の
+     通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない
+- **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
+  2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
+  運転設定を `run-claude-batch.sh` の既定に焼いた。正典 `ranking-content-standards.md` §2026-09-05
+- **2026-09-05 本番 3 バッチ**: 公開 54 件 (done 718 → 772・残 1,394)。batch1 は 26 件が原因不明の CLI 失敗 (stdout を
+  捨てる欠陥 → 修正)、batch2 は定型化 REVISE が支配的 → prompt に県数・地方別順位表を機械計算で渡し、critic に author の
+  制約を前提として明文化。batch3 (35 件・concurrency 2) は **OK 25 / REJECT 9 / FAIL 1・$0.81/公開件・50 分・レート制限なし**。
+  `public-kindergarten-ratio` が 3 連続不合格で quarantine 入り (Opus 例外是正の初例)。次は 1 日 1〜2 バッチで回し、
+  `claude-error_*` が出たら止める
+- **2026-09-05 checkpoint**: Gemini 日次 CI は 08-30 から `preflight_status=billing` で 8 run 連続 PASS 0 (鍵の
+  前払いクレジット枯渇。モデル品質ではない)。残 1,445 件 (done 718 / active 2,163) を Claude で消化するため、
+  Agent tool 経路 (1 件 $16-18) ではなく **headless `claude -p` 経路**を整備した:
+  `generate-parallel.ts` の `--model claude-*` を lean 化 (repo 外 cwd・`--tools ""`・`--setting-sources local`・独自
+  system prompt・`--output-format json` で usage/cost 取得・alias allowlist)、`--critic claude-*` 新設、
+  `run-claude-batch.sh` (preflight → キュー → 生成 → 監査 → critic → history.csv/quarantine → 1 commit → push →
+  publish run 待ち)、`history.csv` に `cost_usd` 列。dry-run・型・vitest 50・node test 54 は green。
+  **実 LLM 呼び出しは未実施** (CLI 未ログインのため)。正典 `ranking-content-standards.md` §2026-09-05。
 - **2026-08-30 checkpoint**: 高コストだった Claude Code/OAuth の自動量産を復活させず、
   `gemini-2.5-flash-lite` の structured author → 決定的監査 → 別リクエスト critic → 最大1回再生成 →
   PASS分だけ outbox/publish という日次 CI を実装した。対象あり生成0件、Secret欠損、preflight、
@@ -487,190 +541,16 @@ updated: 2026-09-05
 - **禁止**: 未確認の順位や、面積割合だけから行政・インフラへの因果を断定しない。
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
-### [GEO-FLOOD-RIVER-CLASS-COVERAGE-01] 洪水分析で欠落した河川区分10の107入力を回収して全47県を再計算する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run geo:audit-analysis] [起票:2026-09-05] [期日:2026-09-06]
-
-- **owner**: geo-analysis-curator / gis-pipeline-runner
-- **優先・判定**: 最優先。本番の旧洪水bundleは保存則47/47でも入力完全性FAIL。再計算・検証・本番反映まで公開品質合格、SNS転用、商品化と判定しない。
-- **進行中（2026-09-05）**: 両区分の承認済み201入力集合・区分別保存先・入力/source段階の完全一致gate・重複人口テストを実装。
-  巨大GeoJSONの全体JSON.parseによるOOMも逐次読込へ修正。旧94件と新旧bundle混在はWebの本文・比較・県別読込で拒否する。
-  201原典（10=107 / 20=94）で全47県の再計算・保存則・SHA/bytes監査が完了。177,791メッシュの人口/形状を保持し、
-  包含メッシュ8,235→29,737、包含0の県12→0。旧包含は全件保持、最大深度の減少なしを別スクリプトで照合した。
-  差分・251 exact key（2,932,615,105 bytes）・SHAは`.claude/state/metrics/geo-flood-repair-2026-09-05.json`。
-  独立照合はtuple集計/旧新包含関係であり、別実装による全原典ポリゴンの再演算ではない。
-  GIS182・Geo Web24・route35テストと全パッケージ型チェックPASS。旧bundleの本文/比較/県別404、新bundle200を確認。
-  神奈川の3段階・実地図・27.8%/2,366,277人、比較の東京45.9%・兵庫44.2%と県選択URLの再読込保持をlocalhostで確認。
-  R2反映・デプロイ・派生媒体の更新・全stage URLの新bundle総当たりは未実行。フル本番buildも未実行。
-- **証拠**: 公式A31b 2025一覧のGeoJSONは河川区分10（洪水予報河川・水位周知河川）107ファイル、20（その他の河川）94ファイル。
-  修正前の`build-geo-cross-snapshots.ts`の`loadFloodUrls()`は`A31b-25_20_*`のみ選び`EXPECTED_FLOOD_FILES=94`で固定していた。
-  ZIP URLの河川区分20と、ZIP内部の`20_想定最大規模/A31b-20-25_<河川区分>_<メッシュ>.geojson`の災害規模20を混同している。
-  修正前manifestは94入力のみ。秋田・神奈川・兵庫・和歌山・鳥取・島根・岡山・広島・山口・徳島・長崎・宮崎の12県で包含メッシュ0、
-  滋賀は包含1メッシュだが表示比率が丸めで0.0%。監査時点の本番と修正前ローカルmanifestのSHAは一致し、本番にも同じ入力漏れがある。
-  一次資料: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html
-- **次（実行順）**:
-  1. 河川区分10/20と災害規模10/20/30/41/42を別fieldで型付けし、公式一覧から両河川区分の入力集合を導出する。片区分を削るmutationを不合格にする。
-  2. 原典キーを`riverClass/mesh`で分離する。現在の`source/<mesh>.zip`は同じメッシュの両区分を保持できないため、上書きせずversion移行する。
-  3. 両区分の想定最大規模レイヤーを包含判定し、重複箇所をunion/max深度で処理する。人口を二重加算せず47県detail・manifest・aggregateを再生成する。
-  4. 全県の入力coverageと0県の理由を原典へ接地し、独立再計算・境界fixture・保存則・SHA/bytes・UI凡例・比較・X/note/商品参照まで再監査する。
-  5. 修正前後の全県差分とexact R2 key、公開URL、rollbackを提示し、承認後にR2反映と一括デプロイする。
-- **停止条件**: 現行の0を「リスクがない」と説明しない。欠けた区分を0埋めしない。原典取得失敗や区分不明で生成を止める。
-  本カードの監査起票は外部の非公開化・投稿編集・R2 write・本番デプロイを許可しない。
-- **完了条件**: 公式集合の両河川区分がmanifestへ解決され、片区分欠落・同メッシュキー衝突・重複人口をテストが拒否する。
-  47県再計算と旧値差分の説明が揃い、地図・表・比較・派生物が同じ修正版を参照し、本番検証後にのみ公開品質PASSとなる。
-
-### [GEO-LAND-PRICE-SPATIAL-CONTRACT-01] 人口×地価を県別併置から実際の空間クロスへ直す
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run validate:business-plan --workspace packages/data-configs] [起票:2026-09-05] [Codex候補]
-
-- **owner**: geo-analysis-curator（分析契約）/ gis-pipeline-runner（決定的演算）/ site-ux-manager（公開面）
-- **進行中（2026-09-05）**: 地点→1km人口メッシュ包含、`pointMeshIds`、比較可能分母、空間stage、47県再生成をローカル実装済み。
-  17,890地点中17,888接続・2未接続、比較可能17,422地点。47県保存則PASS。Webは旧併置bundleを拒否し県内地図を主表示。
-  Web/GIS/data-configs型、GIS176テスト、Web20テスト（実生成物141県parser検算を含む）PASS。残作業は地価49 exact keyのR2反映と一括デプロイ後の再検証。
-- **症状**: `population-land-price`は`spatial-cross`としてハブ・方法・比較・sitemapへ公開されているが、生成処理は
-  人口メッシュを県別合計し、地価地点を所在地コード先頭2桁で県別中央値にした後、同じ都道府県コードで併置している。
-  地価地点のgeometryは表示用座標へ保存されるだけで、人口メッシュとの包含・距離・交差判定に使われない。
-  manifestも`source → source → aggregate`だけで、2入力を消費する`spatial-operation`段階がない。
-- **影響**: `/geo`と`/geo/method`の「3つの空間分析・3つの空間処理」、`/geo/compare`の4問比較が、
-  実際には2つの空間クロスと1つの県別多指標比較を混在させている。`calculation-input`が2層あるだけで
-  Geo公開を許す現行validatorでは、単一ランキングの誤分類と同型の再発を防げない。
-- **次（実行順）**:
-  1. manifestに「2つ以上の計算入力を消費する`spatial-operation`」が無い分析をGeo公開集合・ハブ・方法・比較・sitemapへ出さないgateを先に追加する。
-  2. 地価地点を1km人口メッシュへ決定的に包含結合し、各地点の周辺人口変化と価格・変動率を対応付ける問い、途中artifact、保存則を設計する。
-  3. `input mesh → land-price point → point-in-mesh → aggregate`をmanifestと県別地図で辿れる状態にしてからGeoへ再登録する。
-- **停止条件**: 地価地点と人口メッシュの空間対応が十分なcoverageで作れない、または対応後も読者の問いが
-  県別相関の域を出ない場合は、無理にGeo化せず`multi-indicator`へ再分類して`/geo`外へ移す。geometry未使用のまま
-  `usedInCalculation:true`を維持しない。R2 write・sitemap公開・デプロイは別途承認。
-- **完了条件**: Geoに残す場合は2入力を消費する空間演算、47県detail、保存則47/47、入力・出力SHA、
-  県別の入力/重ね合わせ/検算地図が揃い、geometry寄与を外すmutationでvalidatorが失敗する。再分類する場合は
-  Geo表記・ナビ・比較・sitemap・X canonicalから完全に除外され、適切な既存面へ301または内部リンクを移す。
-
-### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] 非商用KSJのpublic mirrorと公開構造化ランキングを是正する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
-
-- **owner**: gis-curator（利用条件SSOT）/ r2-publisher（exact削除）/ ranking-publisher（代替・廃止）
-- **現状証拠**: 公式個別ページで`non-commercial`の11件
-  `C02,C09,C23,P03,P12,P13,P17,P18,P35,W01,W05`がpublic R2にあり、合計48,973,241 bytes。
-  `W01/P03/P12/P35/C09`由来の公開ランキング10本（`dam-count`、発電施設6本、`tourism-resource-count`、
-  `roadside-station-count`、`fishing-port-count-ksj`）も`app/stats` JSONを公開している。
-- **実装済みの再発防止**: `license-policy.ts`で元データ公開と商用成果物を分離し、data-catalog check、
-  KSJ ranking生成、Geo bundle生成をfail-closed化。11 prefixと旧Geo運用JSONを`r2-retention.ts`のexact allowlistへ追加。
-- **次（実行順）**:
-  1. `r2-retention.ts --target license-remediation-ksj-<id>`のdry-run結果を保存し、承認後にworkflowで11 prefixを削除する。
-  2. 10ランキングごとに、商用可の一次資料への置換、国土数値情報事務局/原権利者の書面許諾、公開終了+適切な転送のいずれかを決める。
-  3. 書面許諾の場合は、非データベースの空間演算結果、広告付きWeb表示、47行JSON、CSV/販売物の各利用形態を明記して回答を保存する。
-  4. 許諾/置換が完了するまでは新規生成・更新・SNS転用・有料商品化を止める。既存ページは対応方針決定後に一括是正する。
-- **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。remote削除、ランキング停止、
-  301/410、sitemap変更、デプロイは影響URLとrollbackを提示して別途承認を得る。
-- **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。10ランキングは商用可source/書面許諾IDを持つか、
-  config・R2・sitemap・内部リンク・記事/SNSを含めて廃止され、本番URLとGooglebot UAで方針どおりのstatusを確認する。
-
-### [GEO-PUBLIC-EVIDENCE-LADDER-01] 全Geo分析で入力・重ね合わせ・検算・結論を画面上で辿れるようにする
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/web -- --run src/features/geo-analysis] [起票:2026-09-05] [Codex候補]
-
-- **owner**: geo-analysis-curator / site-ux-manager / chart-component-builder
-- **公開前の停止ゲート**: `GEO-FLOOD-RIVER-CLASS-COVERAGE-01`はローカル201入力/47県再生成がPASS、本番は旧bundleのまま。
-  旧監査根拠は`.claude/state/metrics/geo-page-audit-2026-09-05.json`、修正差分は`geo-flood-repair-2026-09-05.json`（同じmetrics配下）。
-  新bundleの141県parser検算と3分析の代表地図/3段階、比較の選択保持はPASS。全県実画面・全stage URLの新bundle総当たりは未実行。
-  未確認をPASS扱いせず、公開前build・R2反映・一括デプロイ・公開後URL再監査を残す。
-- **進行中（2026-09-05）**: 3分析共通`GeoSpatialEvidenceExplorer`を実装し、地価/洪水の県別地図・判定・検算を接続。
-  順位先行の冒頭・ランキング用コロプレスを撤去。全分析の県別stage着地とデータ画面の地図を追加。3分析の地図・検算と375px横溢れなし、ハブ/比較/方法/出典/代表stage/データ詳細の200、旧人口URLの301をlocalhostで確認。全stage URLの総当たり・本番反映は未実行。
-  Geo背景のCARTOタイルにAPI key透かしを目視検出し、地理院淡色タイルのリアルタイム取得と出典表示へ変更（他featureのCARTOは本カード外）。
-- **症状**: 3分析とも県別artifactとmanifestを持つが、`GeoCrossAnalysisArticle`が専用の途中地図を表示するのは
-  `population-station-access`だけ。地価・洪水は最終都道府県コロプレス、上位下位、順位表が先行し、
-  入力メッシュ・地点/ポリゴン・空間演算後の重ね合わせ・保存則を記事本文から視覚的に辿れない。
-- **監査経緯**: 初期確認ではlocalhostの主要7ページ、県別データ141ページ、駅stage 141状態はHTTP 200、保存則も47/47だったが、
-  後の原典全件照合で洪水107入力欠落を検出した。保存則や200だけでは入力完全性を証明できない。
-  修正後は3分析ともcoverage 47/47・保存則47/47（最大1.29〜1.31MB）。新bundleのHTTP全件確認は未完了。
-- **次（実行順）**:
-  1. manifestのstageと県別detailを読む共通`GeoEvidenceExplorer`を設計し、県選択を1回だけ持たせる。
-  2. `入力レイヤー → 空間演算後の重ね合わせ → 保存則/coverage → 最終集計`を同じ県で切り替え、query state
-     `?pref=<NN>&stage=<stage>`へ共有可能にする。
-  3. 洪水は人口meshと区域内判定、駅は人口meshと800m圏、地価は前カードの空間契約が成立した場合のみ対応地図を表示する。
-- **停止条件**: 県別detailに表示根拠が無ければクライアントで推測・再計算せず生成工程へ戻す。全国の巨大GeoJSONを
-  初期HTMLへ載せず、県別遅延読込とartifact上限を維持する。context-onlyを計算結果と同じ凡例へ混ぜない。
-- **完了条件**: 公開中の全Geo分析で証拠階段4段、凡例、単位、演算条件、誤読防止注記、47/47・保存則が表示される。
-  PC/375pxで横溢れがなく、detail取得失敗のfixtureでは結論だけを根拠なしに表示しない。
-
-### [GEO-RUNTIME-PUBLISH-GATE-01] GeoのR2 parserと欠損時HTTP状態をfail-closedへ統一する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/web -- --run src/features/geo-analysis/lib/**tests**] [起票:2026-09-05] [Codex候補]
-
-- **owner**: geo-analysis-curator / code-reviewer
-- **進行中（2026-09-05）**: 2入力を消費するspatial-operation、地価専用join段階、新主指標、mesh tuple/重複/有限値/参照IDを検査。
-  分析のsnapshot/manifest欠落・比較の47県欠落はnotFoundへ変更。地価/洪水detailは生成純関数で再計算しsummary・地点対応を照合、駅は既存厳格parserを再利用。実生成141県PASS。SHA/bytesと全公開面の共通readiness契約は残課題。
-- **症状**: runtime manifest parserは配列の存在とqualityの`47`だけを見て型assertしており、inputのSHA/bytes/role、
-  stageのkind/inputIds/output、aggregateとの対応を検証しない。県別detailも非空配列とslug/areaCode中心で、重複ID、
-  座標範囲、summary保存則を検証しない。分析ページはsnapshot/manifest欠損時にindexableな200「準備しています」を返し、
-  primary metricやrow欠損時には空の200を返す。比較ページは3 snapshotだけで表示し、manifest合格を要求しない。
-- **次（実行順）**:
-  1. producerと共有するruntime schemaでmanifest・aggregate・pref detailを完全parseし、unknown payloadを型assertしない。
-  2. `GeoPublicationReadiness`を1か所に置き、分析・比較・ハブ・県導線・metadataが同じ判定を読む。
-  3. 未公開/恒久不整合は404+noindex、一時的なR2障害は明示的なエラー状態+noindexとして、空/準備中の200を禁止する。
-- **停止条件**: 既存R2 payloadを後方互換に読めずremote再生成が必要なら、schema version移行とexact keyを提示して止める。
-  一時障害を欠測0件へ変換しない。汎用R2 reader基盤は`QUALITY-GATE-COVERAGE-01`の契約を再利用し二重実装しない。
-- **完了条件**: malformed、旧schema、SHA/bytes欠落、context混入、stage欠落、coverage 46、保存則46、空rows、R2例外の
-  各fixtureが公開を拒否し、正常bundleだけがindexable 200になる。比較ページも全公開分析のmanifest合格時だけ表示する。
-
-### [GEO-STAGE-LANDING-CONTRACT-01] Geo X着地を全分析の証拠stageへ接続し、重複URLを閉じる
-
-タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/web -- --run src/app/geo] [起票:2026-09-05] [Codex候補]
-
-- **owner**: geo-analysis-curator / x-strategist / site-ux-manager
-- **進行中（2026-09-05）**: 地価・洪水にも全県population/overlap/auditの共有着地を追加（noindex・分析canonical）。
-  既存X台帳の更新とallowlist外URL方針統一は未実行。県・テーマ・比較の導線は選択県のoverlapへ接続。
-- **症状**: Geo標準はXを`/geo/<slug>/<NN>/<stage>`へ着地させるが、現行X canonicalでstage URLを持つのは
-  駅アクセスの北海道・東京`overlap`だけ。地価・洪水投稿は分析トップへ着地する。一方、駅routeは47県×3stageの
-  141 URLすべてが200となり、実際にself-canonical/indexなのは2 URLだけで、残り139 URLも同じ記事全体をSSRする。
-- **次（実行順）**:
-  1. X post SSOTへ`prefCode`とmanifest由来の`stageId`を型付きで持たせ、全spatial postのcanonicalを決定的に生成する。
-  2. 全分析共通のstage landingを用意し、allowlist済み投稿だけself-canonical/index、ページ内共有はquery URLとする。
-  3. allowlist外のpath型stage URLはquery canonicalへ301するか404とし、noindex重複200を量産しない。
-- **停止条件**: manifestに対応stageが無い投稿は生成・予約を止める。既存投稿や予約済みXの外部編集・削除、R2 write、
-  実投稿はこのカードの自動実行範囲に含めず、別途ユーザー承認を得る。
-- **完了条件**: baselineを除くX投稿がすべて実在manifest stageへ着地し、投稿canonical集合=sitemap stage集合=index許可集合。
-  47県×stageのHTTP matrixでallowlistだけ200/self-canonical、その他は定めた転送/404となり、UTMを保持する。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [GEO-PUBLIC-OPS-SEPARATION-01] 公開Geo記事から制作・販売・R2運用UIを分離する
+### [GEO-SERVICE-PILOT-01] Geo納品見本の販売条件を確定し1商品だけ出品判断する
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-06]
 
-タグ: [UI・UX] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- --run src/features/geo-analysis] [起票:2026-09-05] [Codex候補]
-
-- **owner**: site-ux-manager / geo-analysis-curator
-- **進行中（2026-09-05）**: 公開データ画面を地図・検算へ変更し、data-catalogを3分析の実入力・版・出典・利用条件へ縮約。
-  内部在庫は既存の生成カタログ/管理面に保持。主要ページの画面検証とデプロイが残る。
-- **症状**: indexableなGeoハブに「無料記事から再現用の販売物」「公開経路」「R2」があり、各分析にも
-  「記事制作データと公開経路」「有料の再利用物」「note価格」「派生する経路」を表示している。県別データ画面も
-  「記事制作用データ」を主目的にしており、一般読者の問い・根拠・判断より内部コンテンツ運用が前面に出る。
-  `/geo/data-catalog`は本文約1.5万字・195リンクで、公開データ出典とR2取得状態・公開可否・候補在庫を同じindexable面に混在させる。
-- **次（実行順）**:
-  1. 公開ハブ/分析から価格・制作status・媒体展開順を外し、問い、地域差、証拠、限界、関連分析に絞る。
-  2. aggregate/manifest/detailへのリンクは「再現・検証データ」として残し、販売・SNS・制作台帳は管理画面`/strategy`へ移す。
-  3. データカタログは公開中の分析で実際に使う一次資料・版・ライセンス・役割へ縮約し、全71件の取得/compliance運用はadminへ分離する。
-- **停止条件**: provenanceリンクや公開ライセンス表示まで削らない。データカタログ取得失敗を`R2取得0件`という正常値に見せない。
-- **完了条件**: indexable Geo面から内部価格・draft/gated・運用台帳・R2在庫文言が消え、公開データの出典・版・ライセンス・
-  calculation/context区分は維持される。主要7ページを読者タスクでレビューし、PC/375pxの情報順が一致する。
-
-### [GEO-ROUTE-MATRIX-SSOT-01] Geoのroute・canonical・robots・sitemapを単一契約から導出する
-
-タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- --run src/app/**tests**/sitemap-index-parity.test.ts] [起票:2026-09-05] [Codex候補]
-
-- **owner**: geo-analysis-curator / code-reviewer
-- **症状**: `BUSINESS_PLAN_M1.routes`はハブ・比較・方法・3分析だけを列挙し、data-catalog、県別data、stage allowlist、
-  legacy redirectを持たない。sitemapは別配列、stage index可否はX post検索、redirectは別configで決まり、同じ公開URL集合に
-  複数の手動同期先がある。2026-09-05実測では主要7ページ・県別141ページ・stage 141状態は期待statusだったが、
-  新分析や投稿追加時のドリフトを構造的には防げない。
-- **次（実行順）**:
-  1. 分析SSOTから`pageKind / requiredArtifacts / canonicalPolicy / robotsPolicy / sitemapPolicy / stageAllowlist`を導出する。
-  2. sitemap、metadata、middleware、X canonical、HTTP auditが同じprojectionを読み、数値やURLを重複ハードコードしない。
-  3. route matrix testを主要面、全pref detail、全stage、invalid slug/pref/stage、legacy UTM転送まで拡張する。
-- **停止条件**: 既存公開URLを削除・410・301する場合はGSC/既存X着地への影響と転送表を提示する。URL変更、sitemap提出、
-  CDN purge、デプロイは別途承認。
-- **完了条件**: typed route projectionと実route、sitemap、canonical、robots、X allowlistが完全一致し、いずれか1 URLを
-  意図的に片側だけ追加・削除するmutationでtestが失敗する。旧`/geo/2050-population`はUTM保持301を維持する。
+- **owner**: オーナー（販売条件・承認）/ coconala-product-manager（再生成）/ coconala-operator（承認後の出品）
+- **対象**: `packages/product-factory/src/channels/geo/service-offer.ts`。生成・見本・検証状態は `.claude/state/products/geo-service-readiness-2026-09-06.json` を参照する。
+- **次**: 外部公開と匿名閲覧の検証結果は上記stateのpublicationを参照。出品の再実行は不要。商品生成コード・本人照合修正・出品台帳・`.claude/state/products/coconala-packs-2026-09-06.json`を含むcommitのdevelop反映をGitで照合し、ledger gateでカードを閉じる。Office実機確認・本人手続きはCOCONALA-PROFILE-OWNER-01へ分離済み。
+- **停止条件**: 価格・公開未承認、公開manifestと不一致、空間結合・保存則FAILでは出品しない。需要未確認の公開はオーナーの明示指示を記録し、購入実績があるとは扱わない。note自動取得403を非公開・閲覧ゼロと誤判定しない。任意商圏・住所検索・鑑定・安全保証へ範囲を拡大しない。
+- **完了条件**: 承認記録、納品ZIPのSHA、サービスURL・販売条件・実際の納品物の一致を確認するか、オーナーが出品見送りを決定する。カード削除はbacklog-loopのledger gate経由。
 
 ### [CI-DEVELOP-GATE-COVERAGE-01] develop 向け PR で決定的ゲートを走らせ、main への PR で初めて落ちる状態を止める
 
@@ -695,7 +575,7 @@ updated: 2026-09-05
 
 ### [AFF-PLACEMENT-MAP-CORE-01] placement-map-core を「出典調査 → タグ → カテゴリ」に追従させ、survey の stale 判定を直す
 
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/ads/**tests**/placement-map-core.test.mjs] [起票:2026-09-03] [期日:2026-09-30]
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/ads/__tests__/placement-map-core.test.mjs] [起票:2026-09-03] [期日:2026-09-30]
 
 - **owner**: affiliate-manager
 - **症状**: `.claude/scripts/ads/lib/placement-map-core.mjs` はブログを tags → vertical だけで判定し、
@@ -806,32 +686,29 @@ updated: 2026-09-05
 - **テーマ企画**: 参考文献で`theme`対象になり、既存ThemeCatalogまたはIndicatorSetへ未統合の制作単位だけを保持する。`draft`は採択・チャート設計待ち、`blocked`はactiveな公開metricが無いため停止中。
 
 <!-- reference-theme-plans:start -->
-
-| metricKey                                                         | title                        | targetTheme         | status  | hypothesis                                                               |
-| ----------------------------------------------------------------- | ---------------------------- | ------------------- | ------- | ------------------------------------------------------------------------ |
-| general-households                                                | 一般世帯数                   | population-dynamics | draft   | 人口総数だけでは見えない世帯構造を人口動態の基礎軸に加える               |
-| projected-population-2020                                         | 将来推計人口                 | population-dynamics | blocked | 将来人口と現在の人口動態を同じ時間軸で比較する                           |
-| area-ratio-of-total                                               | 面積割合                     | climate             | draft   | 国土面積の差を気候・居住条件の解釈に使う前提軸として置く                 |
-| sex-ratio-total                                                   | 人口性比                     | population-dynamics | draft   | 男女構成の地域差を人口移動・年齢構成と合わせて読む                       |
-| day-time-population                                               | 昼間人口                     | labor-mobility      | draft   | 就業地への流入規模を通勤移動の絶対数コンテキストとして示す               |
-| gross-prefectural-product-expenditure-nominal-h27                 | 県内総生産                   | local-economy       | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する                       |
-| electricity-generation-capacity                                   | 発電電力量                   | local-economy       | draft   | 電力供給規模と地域の産業基盤を並べて読む                                 |
-| agricultural-output                                               | 農業産出額                   | local-economy       | draft   | 農業の生産規模を地域経済の産業構成へ接続する                             |
-| current-liabilities-balance-multi-person-households-per-household | 負債現在高                   | real-income         | draft   | 所得・消費だけでなく家計の負債側を購買力の文脈に加える                   |
-| consumption-expenditure-multi-person-households-per-month         | 消費支出                     | real-income         | draft   | 可処分所得と実際の支出水準の差を家計フローとして示す                     |
-| avg-propensity-to-consume-worker-households                       | 平均消費性向                 | real-income         | draft   | 所得のうち消費へ回る割合を地域別の家計行動として比較する                 |
-| municipality-count                                                | 市町村数                     | local-finance       | draft   | 自治体数を行政サービス・財政構造の基礎条件として示す                     |
-| agricultural-employment-population                                | 農業就業人口                 | local-economy       | draft   | 農業産出額と担い手規模を組み合わせて産業構造を読む                       |
-| number-of-establishments-manufacturing                            | 製造業事業所数               | manufacturing       | draft   | 製造品出荷額だけでは見えない生産拠点の厚みを示す                         |
-| households-on-public-assistance                                   | 生活保護被保護実世帯数       | local-finance       | draft   | 実数を制度利用者の優劣にせず、人口規模と自治体財政の基礎条件として読む   |
-| households-on-public-assistance-per-1000                          | 生活保護被保護実世帯数       | local-finance       | draft   | 実数と世帯千対を分け、地域規模を調整した制度利用状況として読む           |
-| infant-deaths                                                     | 乳児死亡数                   | healthcare          | draft   | 小標本の年次変動を明示し、実数と出生千対を分けて医療・人口動態を読む     |
-| infant-mortality-rate-per-1000-births                             | 乳児死亡率                   | healthcare          | draft   | 出生千対の率を単年順位へ短絡せず、複数年推移と出生数を合わせて読む       |
-| average-life-expectancy-female-20                                 | 20歳女性の平均余命           | healthcare          | draft   | 出生時平均余命と年齢別平均余命を分離し、女性20歳時点の地域差を読む       |
-| average-life-expectancy-female-65                                 | 65歳女性の平均余命           | healthcare          | draft   | 高齢期の平均余命を出生時平均余命と混同せず、医療・生活条件と合わせて読む |
-| average-life-expectancy-male                                      | 男性の平均余命               | healthcare          | draft   | 男女・年齢別系列を同じ値として扱わず、男性系列の地域差を検証する         |
-| students-requiring-japanese-instruction                           | 日本語指導が必要な児童生徒数 | education-culture   | blocked | 国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む   |
-
+| metricKey | title | targetTheme | status | hypothesis |
+| --- | --- | --- | --- | --- |
+| general-households | 一般世帯数 | population-dynamics | draft | 人口総数だけでは見えない世帯構造を人口動態の基礎軸に加える |
+| projected-population-2020 | 将来推計人口 | population-dynamics | blocked | 将来人口と現在の人口動態を同じ時間軸で比較する |
+| area-ratio-of-total | 面積割合 | climate | draft | 国土面積の差を気候・居住条件の解釈に使う前提軸として置く |
+| sex-ratio-total | 人口性比 | population-dynamics | draft | 男女構成の地域差を人口移動・年齢構成と合わせて読む |
+| day-time-population | 昼間人口 | labor-mobility | draft | 就業地への流入規模を通勤移動の絶対数コンテキストとして示す |
+| gross-prefectural-product-expenditure-nominal-h27 | 県内総生産 | local-economy | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する |
+| electricity-generation-capacity | 発電電力量 | local-economy | draft | 電力供給規模と地域の産業基盤を並べて読む |
+| agricultural-output | 農業産出額 | local-economy | draft | 農業の生産規模を地域経済の産業構成へ接続する |
+| current-liabilities-balance-multi-person-households-per-household | 負債現在高 | real-income | draft | 所得・消費だけでなく家計の負債側を購買力の文脈に加える |
+| avg-propensity-to-consume-worker-households | 平均消費性向 | real-income | draft | 所得のうち消費へ回る割合を地域別の家計行動として比較する |
+| municipality-count | 市町村数 | local-finance | draft | 自治体数を行政サービス・財政構造の基礎条件として示す |
+| agricultural-employment-population | 農業就業人口 | local-economy | draft | 農業産出額と担い手規模を組み合わせて産業構造を読む |
+| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | 製造品出荷額だけでは見えない生産拠点の厚みを示す |
+| households-on-public-assistance | 生活保護被保護実世帯数 | local-finance | draft | 実数を制度利用者の優劣にせず、人口規模と自治体財政の基礎条件として読む |
+| households-on-public-assistance-per-1000 | 生活保護被保護実世帯数 | local-finance | draft | 実数と世帯千対を分け、地域規模を調整した制度利用状況として読む |
+| infant-deaths | 乳児死亡数 | healthcare | draft | 小標本の年次変動を明示し、実数と出生千対を分けて医療・人口動態を読む |
+| infant-mortality-rate-per-1000-births | 乳児死亡率 | healthcare | draft | 出生千対の率を単年順位へ短絡せず、複数年推移と出生数を合わせて読む |
+| average-life-expectancy-female-20 | 20歳女性の平均余命 | healthcare | draft | 出生時平均余命と年齢別平均余命を分離し、女性20歳時点の地域差を読む |
+| average-life-expectancy-female-65 | 65歳女性の平均余命 | healthcare | draft | 高齢期の平均余命を出生時平均余命と混同せず、医療・生活条件と合わせて読む |
+| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | 男女・年齢別系列を同じ値として扱わず、男性系列の地域差を検証する |
+| students-requiring-japanese-instruction | 日本語指導が必要な児童生徒数 | education-culture | blocked | 国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む |
 <!-- reference-theme-plans:end -->
 
 - **ブログ下書き**: `docs/21_ブログ記事原稿/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。
@@ -919,21 +796,16 @@ updated: 2026-09-05
 タグ: [起票:2026-07-18]
 
 - **owner**: Claude Code
-- **2026-09-06 実装・live pilot 済**:
-  - note metrics のアカウントゲートを修正し、`note.com/stats47` の24記事（2026-09-06再取得: 5,263 views / 8 likes / 0 comments）とcatalog IDが一致。
-  - `nextBestArticle` + magazine をcatalogから決定的に生成し、月間view上位の日照時間・実質公債費比率・県民所得の3記事へ反映。価格・境界・99タグ・既存本文・アカウントを更新前後で照合済み。
-  - GA4はカードと両立しないUTMを使わず、`sessionSource=note.com × landingPagePlusQueryString`。Japan 28日 baseline（2026-08-09〜09-05）は合計502 sessions、対象着地は80 / 86 / 4 sessions。遷移先note viewのbaselineは取得対象に入った2件のみ保存し、1件は欠測として扱う。
-  - 公開222記事を全量是正・横断監査し、hard error / warning 0、95タグ以上222/222、サイト導線184、関連記事180、マガジン導線157、マガジン所属19/19一致、到達性確認211 URLすべて正常。固定・プロフィール記事各1、既定マガジンカバー0、プロフィールbio / stats47 URL / ヘッダーも反映済み。
-  - 無料記事のcatalog駆動更新対象145件はaudit-only再実行でpending 0。価格・公開状態・有料境界・本文を更新前後で保全するfail-closed契約とunit testを追加した。
-- **次**: 2026-10-04以降に同じ28日条件で3件の着地sessionと次記事view増分を比較し、CTA文言・リンク先の採否を判断する。構造の全量整備は完了しているため、効果測定後は不調な型だけを差し替える。
-- **完了条件**: pilot効果判定を記録し、`note:circulation:audit` のhard error / warning 0を維持する。
+- **2026-08-27 監査**: 最新note metricsの上位24記事はcatalogのnote IDと一致0件で、対象アカウントの
+  series別流入・clickを判定できない。誤ったseriesをpilotに選ばず、stats47 note側の計測が揃うまで待つ。
+- **trigger**: note既存記事の流入・クリックを確認し、上位1シリーズだけをpilotできること。
+- **完了条件**: 記事、マガジン、stats47 CTAの対応をcatalogから決定的に生成し、全記事一括変更しない。
 
 ### [NOTE-MAGAZINE-REORG-01] note既存投稿のマガジン再編成 + 新規投稿の増産
 
 タグ: [実行:windows] [起票:2026-08-03]
 
 - **owner**: Claude Code
-- **2026-09-06 live 再監査**: 公開222記事はcatalog指定マガジンへ全件所属し、19マガジンすべて missing/unexpected 0。`s47-energy`を新設し、GIS入門・剣道・将来人口Geoを追加、Claude/GIS間の誤所属2件を削除した。全19マガジンを専用カバーへ統一し既定カバー0。記事本文内のマガジン導線は157件へ反映済み。3記事未満の薄いマガジン5件は設定不備ではなく実記事供給待ち。
 - **方針**: ココナラ商品カタログと同型 (git TS カタログ = SSOT)。ただし公開済み stats47-note 159 件は回収スタブ (key = note ID・不透明・`r2Body:false`) で、カテゴリはタイトルからしか導出できない点がココナラと異なる。
 - **済 (Phase 1)**: `magazines.ts` を e-Stat 17 カテゴリ + 行動者率クラスタ = 18 マガジンに細分化。`assign-magazines-by-title.mjs` (タイトル分類・決定的) で公開済み 159 件中 143 件 (90%) を `s47-*` マガジンへ割当。validator pass・派生インデックス再生成済。
 - **残り**:
@@ -956,7 +828,7 @@ updated: 2026-09-05
      - **パイプライン (1本ごと)**: `node .claude/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` → `bash .claude/scripts/note/restore-from-r2.sh <slug>` → `node generate-note-covers.mjs --slug <slug>`(koumuin は `generate-koumuin-covers.cjs`) → `node generate-note-hashtags.mjs --slug <slug>` → `bash .claude/scripts/note/publish-new-note.sh <slug> <vertical> --publish` → live 確認 (`curl -sI note.com/stats47/n/<id>`) → catalog を published+noteUrl+magazine に更新 → `note-magazine.mjs add-articles --key <mag> --commit` で束ね。
      - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
      - **注意**: `koumuin-shigoto-kouritsuka-ai`/`pinned-intro` は vertical/性質が特殊 → 個別判断。誤配置の旧ドラフト `ndd6577272515` は削除確認ボタンが取れず残存 → note.com で手動削除。browser-use は毎回 daemon kill + editor.note.com タブ close (`browser-use-cleanup.md`)。
-  2. **誤 vertical 16 件の再評価 (済/残)**: D3配色の章5件は実在有料マガジン (¥500) の中身 → 帰属済。Claude Code 記事は koumuin 有料マガジンの member (membership 検証で確認)。公開記事のマガジン帰属は2026-09-06時点で全件一致。note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) は削除判断 = オーナー領域 (残)。
+  2. **誤 vertical 16 件の再評価 (済/残)**: D3配色の章5件は実在有料マガジン (¥500) の中身 → 帰属済。Claude Code 記事は koumuin 有料マガジンの member (membership 検証で確認)。note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) は削除判断 = オーナー領域 (残)。
   3. **未解決 22 件 (未公開ドラフトの英語キー)** をカテゴリ手当て or ドラフト整理。
   4. **新規投稿の増産**: カテゴリマガジンを受け皿に増やす。`sns-content-standards.md` の note 頻度上限 (月1-2本) の見直しが要る (別判断)。
 - **完了条件**: 公開済み記事が note.com 上でマガジンに束ねられ、新規投稿が catalog のカテゴリマガジンに自動で割り当たること。記事一括変更しない (1 マガジンずつ実証)。
@@ -1020,12 +892,12 @@ updated: 2026-09-05
   残り 5 枚は**指標を同定できない / SSOT に値が無い**ため、捏造せず flag した。
   ★ SVG のピクセル座標から値を逆算して data json にするのは禁止 (`blog-data-schema.md` §1.7)。
 - **残り 5 枚と律速**:
-  | slug/base                                                                           | 律速                                                                                                                                           |
-  | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-  | `international-cooperation-volunteer-map/{travel,foreign-pop}-vs-volunteer-scatter` | 「国際協力ボランティア率」に該当する metric が SSOT に**存在しない**。e-Stat 側の表を特定して投入する必要がある                                |
-  | `per-capita-income-gap/income-vs-industry-scatter`                                  | Y 軸「1人当たり県民所得」の現行基準が `isActive:false` / 値未投入。`data/data-refresh-requests.json` で 2021 年度取り込みを要求済 (2026-08-12) |
-  | `purchasing-power-adjusted/income-vs-price-scatter`                                 | 同上 (X 軸が同じ指標)                                                                                                                          |
-  | `foreign-residents-diversity-map/manufacturing-vs-foreign-scatter`                  | X 軸「製造品出荷額 1人当たり」の**算出式と年次を特定できない** (最有力候補でも一致率 67-72%)                                                   |
+  | slug/base | 律速 |
+  |---|---|
+  | `international-cooperation-volunteer-map/{travel,foreign-pop}-vs-volunteer-scatter` | 「国際協力ボランティア率」に該当する metric が SSOT に**存在しない**。e-Stat 側の表を特定して投入する必要がある |
+  | `per-capita-income-gap/income-vs-industry-scatter` | Y 軸「1人当たり県民所得」の現行基準が `isActive:false` / 値未投入。`data/data-refresh-requests.json` で 2021 年度取り込みを要求済 (2026-08-12) |
+  | `purchasing-power-adjusted/income-vs-price-scatter` | 同上 (X 軸が同じ指標) |
+  | `foreign-residents-diversity-map/manufacturing-vs-foreign-scatter` | X 軸「製造品出荷額 1人当たり」の**算出式と年次を特定できない** (最有力候補でも一致率 67-72%) |
 - **次**: ① 県民所得の取り込み結果を確認し 2 枚を復元 ② 国際協力ボランティア率の e-Stat 表を
   `estat-researcher` で特定 ③ 製造業の算出式は記事本文の記述から再構成できるか確認する
 - **完了条件**: `chartType === "scatter" && status !== "both"` の非正準が 0 枚
@@ -1034,14 +906,14 @@ updated: 2026-09-05
 
 - **タイルマップ側の残り 6 枚** (2026-08-12 実測。公開 120 枚中、元データを持つ 22 枚は
   現行 svg-builder で再生成し R2 反映済 = 正準 114/120):
-  | slug/base                                                    | 現状    | 律速                                                          |
-  | ------------------------------------------------------------ | ------- | ------------------------------------------------------------- |
-  | `per-capita-income-gap/income-map`                           | 600×665 | 県民所得の現行基準が SSOT 未投入 (散布図と同じ)               |
-  | `purchasing-power-adjusted/income-map`                       | 600×700 | 同上                                                          |
+  | slug/base | 現状 | 律速 |
+  |---|---|---|
+  | `per-capita-income-gap/income-map` | 600×665 | 県民所得の現行基準が SSOT 未投入 (散布図と同じ) |
+  | `purchasing-power-adjusted/income-map` | 600×700 | 同上 |
   | `international-cooperation-volunteer-map/volunteer-rate-map` | 600×700 | 「国際協力ボランティア率」が SSOT に存在しない (散布図と同じ) |
-  | `alcohol-prefecture-map/alcohol-consumption-map`             | 600×690 | 指標・年次の同定が要る                                        |
-  | `food-consumption-prefecture-battle/ramen-gyoza-tilemap`     | 960×520 | 2 指標の対比図。同定が要る                                    |
-  | `waiting-children-progress/waiting-children-map`             | 600×690 | 指標・年次の同定が要る                                        |
+  | `alcohol-prefecture-map/alcohol-consumption-map` | 600×690 | 指標・年次の同定が要る |
+  | `food-consumption-prefecture-battle/ramen-gyoza-tilemap` | 960×520 | 2 指標の対比図。同定が要る |
+  | `waiting-children-progress/waiting-children-map` | 600×690 | 指標・年次の同定が要る |
 - **散布図とタイルマップで律速が重なる**: `per-capita-income-gap` / `purchasing-power-adjusted` /
   `international-cooperation-volunteer-map` の 3 記事は両方の図が同じ SSOT 欠落で止まっている。
   **指標を投入すれば 2 種類まとめて解ける**ので、この 3 記事を先に片付ける
@@ -1096,7 +968,7 @@ updated: 2026-09-05
 | high     | working-age-population-ratio       | population        | population-dynamics | 0000010201          | SSDS #A03502、2024。年齢構造の基礎比率                                | pending |
 | high     | juvenile-offenders-count           | safetyenvironment | safety              | 0000010111          | SSDS K4204、2023、47県。千人比は別calculated metricで扱う             | pending |
 | high     | average-job-tenure                 | laborwage         | labor-wages         | 0003426933          | 賃金構造基本統計 cat04=01,cat03=01、47県                              | pending |
-| high     | equivalized-disposable-income-gini | economy           | real-income         | 0003440743          | 全国家計構造調査2019表7-6、cat01=1（OECD新基準準拠）、47県・小数値    | pending |
+| high     | equivalized-disposable-income-gini | economy           | real-income         | 0003440743          | 全国家計構造調査2019表7-6、cat01=1（OECD新基準準拠）、47県・小数値   | pending |
 | high     | nursing-home-count                 | socialsecurity    | aging-society       | 0000010210          | SSDS #J022011、2023、既存4指標と非重複                                | pending |
 | high     | paid-nursing-home-count            | socialsecurity    | aging-society       | 0000010210          | SSDS #J02204、2023、47県                                              | pending |
 | high     | life-time-use-series               | laborwage         | living-housing      | 0000010113          | SSDS生活時間。sleep/housework/mealsのcdCat01確定後に個別keyへ分割する | pending |
@@ -1177,6 +1049,8 @@ updated: 2026-09-05
   要否そのものから判断する
 - **完了条件**: 採否の判断が実測根拠つきで記録され、採用時は設計が別 backlog として起票されること
 - **関連**: doc 43 (`docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md`) / `MUNI-AI-CONTENT-01`
+
+
 
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 
@@ -1282,12 +1156,12 @@ updated: 2026-09-05
 
 **(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
 
-| 紐づけ先                                                                  | スクリプト                                                                                                                          |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md` | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
-| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                               | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
-| `NOTE-MAGAZINE-REORG-01` (in-progress)                                    | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
-| `CHART-LINEAGE-RESIDUAL-01` (pending)                                     | `blog/resolve-scatter-axes.mjs`                                                                                                     |
+| 紐づけ先                                                                        | スクリプト                                                                                                                          |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`      | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
+| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                                     | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
+| `NOTE-MAGAZINE-REORG-01` (in-progress)                                          | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
+| `CHART-LINEAGE-RESIDUAL-01` (pending)                                           | `blog/resolve-scatter-axes.mjs`                                                                                                     |
 
 `restore-*-from-svg.mjs` は名前に反して**逆復元をしない** — 旧 SVG の表示値を
 「SSOT が正しいことの照合先」としてのみ使い、≥0.95 一致したときだけ SSOT から再生成する

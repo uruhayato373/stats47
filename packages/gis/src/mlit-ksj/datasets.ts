@@ -93,7 +93,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "L03-a", name: "土地利用3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-a-2022.html" },
   {
     dataId: "W01", name: "ダム", category: "land", geometryType: "point", coverage: "national", license: "non-commercial",
-    stats47Category: null, isRankingTarget: true, latestVersion: "14",
+    stats47Category: null, isRankingTarget: false, latestVersion: "14",
     rankingConfig: [{ rankingKey: "dam-count", rankingName: "ダム数", unit: "か所", categoryKey: "infrastructure", yearCode: "2014", description: "国土数値情報に登録されているダムの都道府県別数" }],
   },
   { dataId: "W05", name: "河川", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false, latestVersion: "09" },
@@ -120,7 +120,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   // ── 施設 ───────────────────────────────────────────────────
   {
     dataId: "P03", name: "発電施設", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
-    stats47Category: "energy", isRankingTarget: true, latestVersion: "13",
+    stats47Category: "energy", isRankingTarget: false, latestVersion: "13",
     rankingConfig: [
       // P03 は号機ごとに 1 レコードなので、施設名 + 住所で畳んで「か所」にする
       { rankingKey: "nuclear-power-plant-count", rankingName: "原子力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "NuclearPowerPlant", yearCode: "2013", description: "国土数値情報に登録されている原子力発電所の都道府県別数", dedupeByProperties: ["P03_0002", "P03_0003"] },
@@ -140,7 +140,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "P11", name: "バス停留所", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "22" },
   {
     dataId: "P12", name: "観光資源", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
-    stats47Category: "tourism", isRankingTarget: true, latestVersion: "14",
+    stats47Category: "tourism", isRankingTarget: false, latestVersion: "14",
     // P12 は同じ登録対象を点 (P12a 17,258) / 線 (P12b 85) / 面 (P12c 1,797) の 3 系統で
     // 持つ。例: 小笠原の「南島」は P12a と P12c の両方に P12_001=10034 で入っている。
     // countByPrefecture は解決済み県コードを identity key に自動付加するため、県内の整理番号
@@ -154,8 +154,8 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "P29", name: "学校", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "educationsports", isRankingTarget: false, latestVersion: "23" },
   {
     dataId: "P35", name: "道の駅", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
-    stats47Category: "tourism", isRankingTarget: true, latestVersion: "18",
-    rankingConfig: [{ rankingKey: "roadside-station-count", rankingName: "道の駅数", unit: "か所", categoryKey: "tourism", yearCode: "2018", description: "国土数値情報に登録されている道の駅の都道府県別数" }],
+    // 登録駅数は国交省の商用可一次一覧へ移行。非商用KSJで上書きしない。
+    stats47Category: "tourism", isRankingTarget: false, latestVersion: "18",
   },
   { dataId: "P36", name: "高速バス停留所", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "23" },
 
@@ -163,8 +163,8 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "C02", name: "港湾", category: "transport", geometryType: "point", coverage: "national", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "08" },
   {
     dataId: "C09", name: "漁港", category: "transport", geometryType: "point", coverage: "national", license: "non-commercial",
-    stats47Category: "agriculture", isRankingTarget: true, latestVersion: "06",
-    rankingConfig: [{ rankingKey: "fishing-port-count-ksj", rankingName: "漁港数", unit: "港", categoryKey: "agriculture", filenamePattern: "FishingPort.topojson", yearCode: "2006", description: "国土数値情報に登録されている漁港の都道府県別数" }],
+    // 漁港数は水産庁の商用可一次一覧へ移行。非商用KSJで上書きしない。
+    stats47Category: "agriculture", isRankingTarget: false, latestVersion: "06",
   },
   {
     dataId: "C28", name: "空港", category: "transport", geometryType: "point", coverage: "national", license: "commercial-ok",

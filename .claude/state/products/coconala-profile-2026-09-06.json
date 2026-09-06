@@ -1,0 +1,88 @@
+{
+  "updatedAt": "2026-09-06T07:01:31.118Z",
+  "sellerUserId": "6198620",
+  "profileUrl": "https://coconala.com/users/6198620",
+  "serviceUrl": "https://coconala.com/services/4387096",
+  "status": "public-updated-owner-input-pending",
+  "authorization": "ユーザー「全てやり切って」: プロフィール・アイコン/カバー・制作見本・商品画像を整備。認証・契約同意・税務変更は含めない。",
+  "contentSource": ".claude/config/coconala-profile.ts",
+  "imagePrompts": ".claude/config/coconala/assets/prompts.ts",
+  "imageGeneration": "built-in image_gen; icon reused unchanged; maps and report screenshots are deterministic actual samples",
+  "assets": [
+    {
+      "path": ".claude/config/coconala/assets/profile-cover.png",
+      "sha256": "810b5034c44dcd5edd333580a573056f053351bfc192d36070386dd6d6016516",
+      "bytes": 681462
+    },
+    {
+      "path": ".claude/config/coconala/assets/geo-main.png",
+      "sha256": "49b4ea6d49d4700c28e8f1983211b2bc8cc87a71884f776eacd57c8723979167",
+      "bytes": 997695,
+      "uploadedOriginalSha256": "dc2dd67588bc81b37269555c7b2c6eae99753a27808d82f5ed390ee0bedc11b5",
+      "encodingNote": "Repository PNG losslessly recompressed below 1 MiB; decoded RGB bytes identical. Public image not replaced."
+    },
+    {
+      "path": "apps/web/public/icon-512.png",
+      "sha256": "2de179a7066cd059302a9423164146867ae68bc0441f620a09fd0d156da98da5",
+      "bytes": 21261
+    },
+    {
+      "path": ".local/coconala-profile/2026-09-06/report-evidence.png",
+      "sha256": "ea95ae2e7a6d07d73bc3624916f9b4fda2e76b690e40347e71f25d86cebd93f0",
+      "bytes": 185724
+    }
+  ],
+  "publicVerification": {
+    "anonymous": true,
+    "profileHttpStatus": 200,
+    "desktopViewport": [
+      1366,
+      1000
+    ],
+    "mobileViewport": [
+      390,
+      844
+    ],
+    "iconLoaded": true,
+    "coverLoaded": true,
+    "portfolioCount": 2,
+    "portfolioDescriptionsMatch": true,
+    "specialtyVisible": true,
+    "serviceImages": 3,
+    "serviceImageOrder": [
+      "service-guide",
+      "kanagawa-map",
+      "kanagawa-report-excerpt"
+    ],
+    "servicePriceYen": 5000,
+    "servicePurchaseCta": true,
+    "serviceTermsUnchanged": true,
+    "serviceSampleDisclosure": true
+  },
+  "validation": {
+    "profileTypeCheck": "PASS",
+    "profileTests": "3/3",
+    "accountTests": "3/3",
+    "diffCheck": "PASS",
+    "docsCheck": "PASS: 0 errors / 39 pre-existing warnings",
+    "lint": "SKIP: profile config only, no application code",
+    "security": "public profile fields and artwork only; no authentication state or private account data added",
+    "webBuild": "SKIP: no web application code changed",
+    "webDeploy": "NOT RUN"
+  },
+  "ownerSteps": [
+    "本人確認とNDAの本人手続き",
+    "HTML・TypeScript・Next.js・Node.jsの実際の経験年数申告（未保存でキャンセル済み）"
+  ],
+  "unchanged": [
+    "本人確認・NDA・税務・インボイス登録",
+    "既存13商品の内容・価格・画像",
+    "年齢公開設定・受注可否",
+    "未確認の資格・職歴年月・稼働時間"
+  ],
+  "browserCleanup": "task contexts closed",
+  "salesEffect": "未計測。公開改善は売上向上の実証ではない。",
+  "gitStatus": "tracked in the commit containing this receipt",
+  "followUpReceipt": ".claude/state/products/coconala-packs-2026-09-06.json",
+  "followUpNote": "本記録時点で未変更だった既存13商品は、後続のpacks receiptで説明・画像・納品物の更新完了を記録。価格は据え置き。"
+}

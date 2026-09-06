@@ -38,6 +38,7 @@
     "check:file-url-guard": "node .claude/scripts/lib/check-file-url-guard.cjs",
     "check:import-meta-dirname": "node .claude/scripts/lib/check-import-meta-dirname-guard.cjs",
     "preflight": "node .claude/scripts/lib/preflight-commit.mjs",
+    "preflight:pr": "node .claude/scripts/lib/preflight-commit.mjs --pr",
     "test:content-routines": "node --test .claude/scripts/lib/__tests__/content-generation-routine.test.cjs .claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs .claude/scripts/lib/__tests__/record-claude-usage.test.mjs",
     "note:catalog:validate": "tsx .claude/scripts/note/catalog/validate-note-catalog.ts",
     "note:circulation:audit": "node .claude/scripts/note/audit-note-circulation.mjs",

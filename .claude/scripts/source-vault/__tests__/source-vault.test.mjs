@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -365,6 +365,12 @@ test('japanese file names round-trip through NFC even when tar extracts NFD', as
   assert.equal(
     await readFile(path.join(target, 'マーケティングに使える家計調査.pdf'), 'utf8'),
     'private-source\n'
+  );
+  // macOS は path 解決が正規化非依存なので readFile だけでは NFD 残留を見逃す。
+  // 復元後の実体名が manifest と同じ NFC であることまで固定する。
+  assert.deepEqual(
+    await readdir(target),
+    ['マーケティングに使える家計調査.pdf'.normalize('NFC')]
   );
 });
 

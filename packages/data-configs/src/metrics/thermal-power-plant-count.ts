@@ -52,5 +52,5 @@ export const thermalPowerPlantCount: MetricConfig = {
   // (KSJ-PREF-ASSIGN-01)。
   "seoTitle": "火力発電所数ランキング都道府県【2013年】｜1位神奈川県（15か所）",
   "seoDescription": "2013年の火力発電所数の都道府県別ランキング。1位神奈川県（15か所）、立地の無い県は9県。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

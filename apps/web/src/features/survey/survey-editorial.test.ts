@@ -65,4 +65,20 @@ describe('getSurveyEditorialContent', () => {
   it('未定義の調査では現行表示へフォールバックできる', () => {
     expect(getSurveyEditorialContent('unknown-survey')).toBeNull();
   });
+
+  it('将来人口の原典を解決した2指標へ案内し、対象年と公表年を混同しない', () => {
+    const content = getSurveyEditorialContent('population-projection');
+
+    expect(content?.readerQuestions.map((item) => item.rankingKey)).toEqual([
+      'future-population',
+      'future-population-change-rate-2050',
+    ]);
+    expect(content?.summary).toContain('2050年の都道府県別人口');
+    expect(content?.caveats).toContainEqual(
+      expect.stringContaining('2050年は推計対象年')
+    );
+    expect(content?.caveats).toContainEqual(
+      expect.stringContaining('1年間の増減率ではありません')
+    );
+  });
 });

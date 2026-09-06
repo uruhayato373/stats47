@@ -94,6 +94,13 @@
       ]
     },
     {
+      "name": "CLAUDE_CLI_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CLAUDE_CODE_OAUTH_TOKEN",
       "visibility": "secret",
       "contexts": [
@@ -548,7 +555,7 @@
       ]
     },
     {
-      "name": "MIN_BODY",
+      "name": "MAX_THINKING_TOKENS",
       "visibility": "server",
       "contexts": [
         "process"
@@ -556,6 +563,13 @@
     },
     {
       "name": "META_PAGE_ACCESS_TOKEN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MIN_BODY",
       "visibility": "server",
       "contexts": [
         "process"

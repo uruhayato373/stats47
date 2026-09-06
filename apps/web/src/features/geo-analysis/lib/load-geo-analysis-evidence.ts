@@ -3,7 +3,6 @@ import 'server-only';
 import {
   buildFloodPrefDetail,
   buildLandPricePrefDetail,
-  assertFloodArchiveKeys,
   geoAnalysisManifestKey,
   geoAnalysisPrefKey,
   type GeoAnalysisEvidenceManifest,
@@ -11,6 +10,11 @@ import {
 } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
+import {
+  isTimestamp,
+  matchesGeoArtifact,
+  validateGeoManifest,
+} from './geo-runtime-contract';
 import { parseGeoStationAccessPrefDetail } from './geo-station-access-evidence';
 
 import type { GeoCrossAnalysisSlug } from './geo-cross-analysis';
@@ -23,58 +27,7 @@ export function parseGeoAnalysisManifest(
   value: unknown,
   expectedSlug: GeoCrossAnalysisSlug
 ): GeoAnalysisEvidenceManifest | null {
-  if (
-    !isRecord(value) ||
-    value.schemaVersion !== 1 ||
-    value.slug !== expectedSlug ||
-    typeof value.generatedAt !== 'string' ||
-    typeof value.definitionSha256 !== 'string' ||
-    !Array.isArray(value.inputs) ||
-    !Array.isArray(value.stages) ||
-    !isRecord(value.aggregate) ||
-    !isRecord(value.quality) ||
-    value.quality.expectedAreas !== 47 ||
-    value.quality.detailAreas !== 47 ||
-    value.quality.conservationChecks !== 47
-  ) {
-    return null;
-  }
-  const inputLayers = new Set(
-    value.inputs
-      .filter(isRecord)
-      .filter(
-        (input) =>
-          input.role === 'calculation-input' && input.usedInCalculation === true
-      )
-      .map((input) => input.layerId)
-  );
-  const hasSpatialJoin = value.stages.some(
-    (stage) =>
-      isRecord(stage) &&
-      stage.kind === 'spatial-operation' &&
-      Array.isArray(stage.inputIds) &&
-      stage.inputIds.length >= 2
-  );
-  if (inputLayers.size < 2 || !hasSpatialJoin) return null;
-  if (expectedSlug === 'population-flood-risk') {
-    const floodStage = value.stages.filter(isRecord).find(stage => stage.id === 'flood-maximum-polygons');
-    if (!floodStage || !Array.isArray(floodStage.outputs)) return null;
-    try {
-      assertFloodArchiveKeys(value.inputs.filter(isRecord).filter(input => input.datasetId === 'A31b').map(input => input.key));
-      assertFloodArchiveKeys(floodStage.outputs.filter(isRecord).map(output => output.key));
-    } catch { return null; }
-  }
-  if (
-    expectedSlug === 'population-land-price' &&
-    !value.stages.some(
-      (stage) =>
-        isRecord(stage) &&
-        stage.id === 'land-price-mesh-join' &&
-        stage.kind === 'spatial-operation'
-    )
-  )
-    return null;
-  return value as unknown as GeoAnalysisEvidenceManifest;
+  return validateGeoManifest(value, expectedSlug);
 }
 
 export function parseGeoAnalysisPrefDetail(
@@ -83,8 +36,24 @@ export function parseGeoAnalysisPrefDetail(
   expectedAreaCode: string
 ): GeoAnalysisPrefDetail | null {
   if (!/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(expectedAreaCode)) return null;
+  if (!isRecord(value) || !isTimestamp(value.generatedAt)) return null;
+  if (typeof value.areaName !== 'string' || value.areaName.trim().length === 0)
+    return null;
   if (expectedSlug === 'population-station-access') {
-    return parseGeoStationAccessPrefDetail(value, expectedAreaCode.slice(0, 2));
+    const detail = parseGeoStationAccessPrefDetail(
+      value,
+      expectedAreaCode.slice(0, 2)
+    );
+    if (
+      !detail ||
+      !Object.values(detail.summary).every(
+        (n) => typeof n === 'number' && Number.isFinite(n)
+      ) ||
+      new Set(detail.stations.map((station) => station[0])).size !==
+        detail.stations.length
+    )
+      return null;
+    return detail;
   }
   if (
     !isRecord(value) ||
@@ -108,6 +77,7 @@ export function parseGeoAnalysisPrefDetail(
         !Array.isArray(mesh) ||
         mesh.length !== meshWidth ||
         typeof mesh[0] !== 'string' ||
+        mesh[0].length === 0 ||
         meshIds.has(mesh[0]) ||
         !mesh.slice(1).every((n) => typeof n === 'number' && Number.isFinite(n))
       )
@@ -146,11 +116,22 @@ export function parseGeoAnalysisPrefDetail(
           Array.isArray(p) &&
           p.length === 5 &&
           typeof p[0] === 'string' &&
+          p[0].length > 0 &&
           p
             .slice(1, 4)
             .every((n) => typeof n === 'number' && Number.isFinite(n)) &&
+          p[1] >= 122_000_000 &&
+          p[1] <= 154_000_000 &&
+          p[2] >= 20_000_000 &&
+          p[2] <= 46_000_000 &&
+          p[3] >= 0 &&
           (p[4] === null || (typeof p[4] === 'number' && Number.isFinite(p[4])))
       )
+    )
+      return null;
+    if (
+      new Set(value.landPricePoints.map((point) => point[0])).size !==
+      value.landPricePoints.length
     )
       return null;
     if (
@@ -239,24 +220,43 @@ export async function loadGeoAnalysisManifest(
   }
 }
 
-export async function loadGeoAnalysisPrefDetail(
+export async function loadGeoAnalysisPrefBundle(
   slug: GeoCrossAnalysisSlug,
   prefCode2: string
-): Promise<GeoAnalysisPrefDetail | null> {
+): Promise<{
+  detail: GeoAnalysisPrefDetail;
+  manifest: GeoAnalysisEvidenceManifest;
+} | null> {
+  if (!/^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(prefCode2)) return null;
   const areaCode = `${prefCode2}000`;
   try {
     const value = await fetchFromR2AsJson<unknown>(
       geoAnalysisPrefKey(slug, prefCode2)
     );
     const detail = parseGeoAnalysisPrefDetail(value, slug, areaCode);
-    if (slug === 'population-flood-risk') {
-      const manifest = await loadGeoAnalysisManifest(slug);
-      if (!manifest || detail?.generatedAt !== manifest.generatedAt) return null;
-    }
-    return detail;
+    const manifest = await loadGeoAnalysisManifest(slug);
+    if (!manifest || !detail || detail.generatedAt !== manifest.generatedAt)
+      return null;
+    const artifact = manifest.stages
+      .find((stage) => stage.id === 'population-mesh')
+      ?.outputs.find((output) => output.areaCode === areaCode);
+    if (
+      !artifact ||
+      artifact.recordCount !== detail.meshes.length ||
+      !(await matchesGeoArtifact(value, artifact))
+    )
+      return null;
+    return { detail, manifest };
   } catch {
     return null;
   }
+}
+
+export async function loadGeoAnalysisPrefDetail(
+  slug: GeoCrossAnalysisSlug,
+  prefCode2: string
+): Promise<GeoAnalysisPrefDetail | null> {
+  return (await loadGeoAnalysisPrefBundle(slug, prefCode2))?.detail ?? null;
 }
 
 export function geoAnalysisPublicDataUrl(key: string): string {
