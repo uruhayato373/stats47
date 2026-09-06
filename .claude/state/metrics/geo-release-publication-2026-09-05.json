@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-05T12:29:23.035Z",
   "scope": "geo-release-publication",
   "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_ROLLOUT_IN_PROGRESS",
-  "updatedAt": "2026-09-06T01:52:58.505Z",
+  "updatedAt": "2026-09-06T02:57:18.292Z",
   "evidenceDigests": [
     { "path": "/tmp/stats47-geo-source-head-check.json", "bytes": 33419, "sha256": "fa68c618f8905f07cb1ebc8817ff1ce1c743429657583c27b081c4a92f331242" },
     { "path": "/tmp/geo-flood-source-publish-20260905/apply.json", "bytes": 98294, "sha256": "055c871c1750c460e97493475d800f82cd1377530c2f01cc2383f5b4eb08ec73" },
@@ -3123,7 +3123,41 @@
       "remainingObjects": 0,
       "publicHead404": 435,
       "backupPreserved": true,
-      "retiredRankingAssets": "HOLD_ADDITIONAL_OBJECT_OWNER_DECISION",
+      "retiredRankingAssets": "ALL126_DELETED_S3_AND_PUBLIC404_VERIFIED",
+      "ranking126Removal": {
+        "status": "ALL126_DELETED_S3_AND_PUBLIC404_VERIFIED",
+        "authorization": "User やって explicitly approved including added biomass AI object in remaining126 deletion",
+        "preflightAt": "2026-09-06T02:46:21.785Z",
+        "objects": 126,
+        "deleted": 126,
+        "remaining": 0,
+        "completedAt": "2026-09-06T02:53:25.649Z",
+        "workflowRuns": [
+          { "runId": 34007384892, "target": "license-remediation-added-biomass-ai-20260906", "deleted": 1, "status": "PASS" },
+          { "runId": 34007495363, "target": "license-remediation-retired-rankings-20260905", "deleted": 125, "status": "PASS" }
+        ],
+        "dispatchSha": "b31ff3a1d92ca3fb7eabfea94ac7466b4ea3f4c5",
+        "zonePurgeRun": 34007655306,
+        "zonePurgeStatus": "SUCCESS",
+        "publicVerification": "PASS;126/126 public404, S3 remaining0; Geo data catalog and three replacement rankings200",
+        "publicVerifiedAt": "2026-09-06T02:57:18.292Z",
+        "publicVerificationReport": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/ranking126-final-verification.json",
+        "publicVerificationReportSha256": "3624588e77b9290d3d02a479df77f041618c335a00d7a016d58b0a2ce5447f9c",
+        "receiptSha256": "42f144dcafe7ac60b45fbc2a69e63fa8a17c58dc681f930992ba5edf030b7486",
+        "backupPreserved": true,
+        "bytes": 2126470,
+        "backupShaVerified": 126,
+        "verification": {
+          "retentionAndPublicationGuardTests": { "passed": 21, "failed": 0 },
+          "all25PackagesAndScriptsTypeCheck": "PASS",
+          "fullWebBuild": "NOT_RERUN; deletion allowlist and regression test only, no app runtime changes",
+          "remoteCatalog": { "status": "PASS", "checkedAt": "2026-09-06T02:50:30.116Z", "inventoryMode": "remote-r2", "listedKsjObjects": 10767, "listedOpenDataObjects": 15, "registered": 71, "acquired": 60, "missing": 0 }
+        },
+        "remoteInventory": "EXACT_KEY_SIZE_ETAG_MATCH",
+        "preflight": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/ranking126-approved-preflight.json",
+        "receipt": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/ranking126-deletion-receipt.json",
+        "approvalBoundary": "Added single-key target is independent; original125 immutable manifest unchanged; separate exact workflow invocations; no re-deployment"
+      },
       "postDeploymentDeletion": {
         "status": "FOUR_EXACT_TARGETS_DELETED_VERIFIED",
         "completedAt": "2026-09-06T01:40:20.196Z",
@@ -3146,7 +3180,7 @@
         "zonePurgeStatus": "SUCCESS"
       },
       "latestPreflight": {
-        "status": "HOLD_ADDITIONAL_OBJECT_OWNER_DECISION",
+        "status": "HISTORICAL_HOLD_SUPERSEDED_BY_APPROVED_RANKING126_REMOVAL",
         "checkedAt": "2026-09-06T01:04:27.039Z",
         "original184Changed": 0,
         "retiredRankingExpected": 125,
@@ -3187,7 +3221,7 @@
       "receiptSha256": "af0489b479855cca52c62a069667199deb4a58bde9bd43143217c30efc6393d2",
       "resume": "23 snapshots published before narrow wrapper rejected asset lock keys; existing 23 verified and skipped, remaining 171 published after deriving exact lock hashes from the unchanged plan. All locks released; no broad restore.",
       "additionalBlogRetirement": "DONE; three slugs removed from shared R2 index, production410 verified, exact53 assets deleted by workflow34004165302; backups preserved",
-      "remainingExactDeletions": { "retiredRankingAssets": 125, "additionalRankingAiObjectAwaitingApproval": 1 },
+      "remainingExactDeletions": { "retiredRankingAssets": 0, "approvedAdditionalRankingAiObject": 0 },
       "freshTaxonomyFinding": "PASS: fresh audit 534 published articles / 1413 charts / 1074 resolved / 62 unresolved / 184 missing / 93 not applicable / 81.36% coverage. Existing ratchet unchanged; offline check PASS. Geo chart scope explicit, existing source dictionaries corrected, roadside3 independently reviewed and published. Unrelated academic metric WIP not imported.",
       "followupPublication": {
         "status": "PUBLISHED_S3_READBACK_PASS",
@@ -3231,7 +3265,7 @@
       "mergeCommit": "2c83dadfd",
       "verification": "After fetch, origin/develop..origin/main is empty; PR929 OPEN/MERGEABLE. Historical preview conflicts superseded. This task did not resolve conflicts or publish unrelated develop work."
     },
-    "next": "Obtain direction for the added AI object before exact ranking126 cleanup, without mutating the approved immutable inventory. Identify stale shared-index writer and prevent retirement/taxonomy regression across all publication paths. Separate legacy SNS posted6/draft2 references remain externally unverified. Main is already integrated into develop by separate work; do not interfere with PR929."
+    "next": "Approved exact legacy cleanup is complete; do not rerun deleted targets or delete backups. Identify stale shared-index writer and prevent retirement/taxonomy regression across all publication paths. Separate legacy SNS posted6/draft2 references remain externally unverified. Do not interfere with separate develop release work."
   },
   "followupVerification": {
     "publishedOutboxCleanup": {
