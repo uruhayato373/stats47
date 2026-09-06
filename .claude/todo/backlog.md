@@ -672,7 +672,6 @@ updated: 2026-09-05
 | electricity-generation-capacity | 発電電力量 | local-economy | draft | 電力供給規模と地域の産業基盤を並べて読む |
 | agricultural-output | 農業産出額 | local-economy | draft | 農業の生産規模を地域経済の産業構成へ接続する |
 | current-liabilities-balance-multi-person-households-per-household | 負債現在高 | real-income | draft | 所得・消費だけでなく家計の負債側を購買力の文脈に加える |
-| consumption-expenditure-multi-person-households-per-month | 消費支出 | real-income | draft | 可処分所得と実際の支出水準の差を家計フローとして示す |
 | avg-propensity-to-consume-worker-households | 平均消費性向 | real-income | draft | 所得のうち消費へ回る割合を地域別の家計行動として比較する |
 | municipality-count | 市町村数 | local-finance | draft | 自治体数を行政サービス・財政構造の基礎条件として示す |
 | agricultural-employment-population | 農業就業人口 | local-economy | draft | 農業産出額と担い手規模を組み合わせて産業構造を読む |
