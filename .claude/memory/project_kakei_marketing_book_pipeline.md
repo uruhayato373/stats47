@@ -46,6 +46,21 @@ inventory は coverage 100%。展開 (new-metric 2 件・記事 wave・県別食
   新 metric へリンクする記事は KNOWN keys を含む code commit が develop に載ってからでないと CI の quality-gate (soft 404 lint) で skip される。
 - **公開で実際に踏んだ罠 (2026-09-06)**: ①新規 slug と title を変えた既存記事は `generate-blog-thumbnails.ts` が「記事固有背景がありません / AI背景promptが変わりました」で fatal になる → 公開前に `npm run blog-images:codex -- request-article --slug <slug> --article docs/21/<slug>/article.md` → `mcp__codex__codex` (read-only・never) で `$imagegen` 1 枚 → `ingest-article` で `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` を作り、記事と同じ commit に載せる (prompt hash は title + visualType/motif。description 変更は無関係)。②push トリガーの `blog-auto-publish` は diff 分に加えて docs/21 の未公開ドラフト全部を reconcile するので、他セッションの背景無し記事があると alphabetical 順で fatal → 自分の slug は `gh workflow run blog-auto-publish.yml -f slugs=...` で明示 dispatch する (concurrency group `r2-write` は pending 1 本しか持てず、後続 push が pending dispatch を cancel する)。③Workflow の `resumeFromRunId` は 2 回目の resume で cache が効かず全 agent が再実行された (16 本で ~15M tokens)。失敗分だけ新規 run にして args を絞る方が安い。④サーバー側レート制限 (usage limit ではない) は同時 ~25 agent で連発する。Workflow は 16 + 5 程度までに分けて起動する。
 - **2026-09-06 の完遂セッションで踏んだ罠**: ①`$TMPDIR/stats47-source-vault/` と scratchpad はセッションを跨ぐと消える。復元は Drive のローカルマウント (`~/Library/CloudStorage/GoogleDrive-…/マイドライブ/stats47/参考文献/マーケティングに使える家計調査/2015年版`) を `--parts-dir` にそのまま渡して `npm run source-vault -- restore --manifest .claude/state/source-inventory/kakei-marketing/2015/source-bundle-manifest.json` (md 307 ページが戻る)。県別 batch の args (`{slug,prefCode,prefName,city,pages}`) は `analyses.json` の `a06-01`〜`a06-47` の question 「◯◯市(◯◯県)」を parse し `packages/area/src/data/prefectures.json` (`prefCode`/`prefName`) で県コードを引いて再生成できる。②`build-kakei-quantity-price.mjs` の `counts` は「他の〜」残余品目を**除いた**数で `rows` より少ない (仕様)。記事が counts をそのまま「N 品目」と書くと図・生データと食い違う。`countsNote` を full JSON に足して writer/critic 双方の prompt にも明記した (shizuoka/nara/miyazaki/okayama で実際に発生)。③既存 slug の title 変更は**公開 CI を落とさない**。`resolveArticleBackgroundSource` は git の jpg を読み prompt hash を**その場で再計算**するだけで、保存済み hash と照合しない (照合は `ingest-article` 時のみ)。fatal になるのは「記事固有背景の jpg が無い」新規 slug だけ。④push トリガーの publish は docs/21 の未公開ドラフトを全部 reconcile するので、他セッションの背景なし記事があると Fatal で自分の分も公開されない。**失敗したら `gh workflow run blog-auto-publish.yml -f slugs=…` で明示 dispatch すれば通る** (実際に 2 回踏んで 2 回とも dispatch で回復)。⑤critic の指摘は「倍率・指数の誤り」が最頻。次点は「`rank` フィールドを『品目中 N 位』と誤読」「指数の高低の向き (100 基準) を逆に書く」「図だけ直して本文が旧値」。writer/critic の prompt に json 突合と SVG grep を明示すると 1 巡で収束する。⑥Agent tool の同時 16 体は sonnet で 429 (server rate limit) を誘発する。12〜13 体に抑え、429 が出た分だけ数分後に fresh 起動する。
+- **note 展開 (2026-09-06 完了)**: 56 本を draft で登録済 (県別47 = `a-kakei-*` / 論点8 = `b-kakei-*` /
+  有料データセット1 = `d-kakei-category-dataset` ¥2,980)。マガジン `s47-kakei-reading`「家計調査の読み方」を新設。
+  **切り口を分けるのが肝**: サイトの `<pref>-food-culture` は食料品目の数量×価格、note は家計全体の十大費目。
+  note は全文重複禁止なので同じ切り口で出さない (実測: サイト側の語「数量指数/価格指数/単価」は note 本文 0 件)。
+  既存 note に家計調査系が 15 本あり「690品目でわかる消費グセ」等と重複しうるので、新規は未掲載の論点だけにした。
+- **十大費目の metric 9 件を新設 (2026-09-06)**: 食料と消費支出合計は既存だったが残り 9 費目が無く、
+  そのため `generate-kakei-charts` skill は**読む側だけ実装され producer が無く**、a-kakei 記事が 1 本も無かった。
+  producer = `.claude/scripts/note/build-kakei-note-chart-data.mjs` (辞書 2 つに依存: kakei-item-titles / kakei-capital-cities)。
+  **検算**: 十大費目の合計 = 消費支出合計 が 47/47 県で誤差 1 円以内。費目取り違えと二重計上の検出に使える。
+  県庁所在市名の一覧は SSOT が無く、公開済み食卓記事の H2 から抽出して辞書化した。
+- **R2 反映の落とし穴 (2026-09-06)**: 手元に R2 書き込み鍵が無い場合、`data-refresh.yml` の
+  **workflow_dispatch は main を checkout する**ので develop の新 metric を見つけられない。
+  develop を見るのは push トリガー (`data/data-refresh-requests.json`) の経路だけ。
+  さらに派生生成は KSJ 権利 guard で恒常的に停止中 (backlog `GIS-COMMERCIAL-LICENSE-BOUNDARY-01` に実測を記載)。
+  app/stats への metric 反映自体は guard 前に完了するので、値だけ欲しいなら止まらない。
 - **restore の NFC/NFD 罠**: macOS の bsdtar は展開時に日本語ファイル名を NFD で書くため、`normalizeRelative` で NFC に揃えるまで
   「missing / unexpected」が同名で出て restore が失敗した (2026-09-05 に修正・回帰テストあり)。
 - 関連: [[project_docs_reorg_todo_handoffs]]

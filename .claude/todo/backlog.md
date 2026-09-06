@@ -40,6 +40,15 @@ updated: 2026-09-06
   公開・削除・退避・検証の証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
 - **次（実行順）**:
   1. `legacyLicense` の公開・削除証跡と `legacySnsVerification.deletionApproval.status=COMPLETED`、`deletionEvidence.pendingIds=[]`、投稿台帳IDs592/632/636/749/796/800の`status=deleted`・`deleted_at`を照合する。catalog gateを通し、ledger証拠付きで本カードを回収する。新しい外部操作・認証・コンテンツ生成は不要。
+- **★未解決 (2026-09-06 実測)**: guard は data-refresh / sync-snapshots の派生生成を**恒常的に止めている**。
+  `generate-ranking-items.ts` は「退役の瞬間に stale な isActive:true が R2 に残るのを防ぐため」
+  active/inactive を問わず item.json を書き続ける設計 (同ファイル 136-185 行のコメントが根拠)。
+  一方 guard は isActive を見ず license だけで判定するため、退役済み 9 キーの item.json で必ず throw する。
+  実測 run 34017315294: item.json 2,311 件を書いた直後に
+  `KSJ公開構造化データ禁止: app/ranking/biomass-power-station-count/item.json (P03, non-commercial)` で停止。
+  以後この経路を通る更新はすべて失敗する (月次 data-refresh / sync-snapshots)。
+  判断の分かれ目は「guard 側で isActive:false を対象外にする」か「生成側で退役キーを書かない」か。
+  前者が小さく、上記コメントの設計意図とも整合する。**owner の判断が要るため本カードに留める。**
 - **再発防止の確認**: main/develop両経路にguard反映済み。共有索引544件は全行保持、分類修正20件一致。従来から公開終了指定の未公開1行も除外・HTTP410確認。guardを持たない旧checkoutまで保護済みとは扱わない。
 - **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
 - **停止条件**: key集合/size/ETagが退避時と変わった対象は削除しない。削除済みraw435・派生59・旧ランキング126件を再実行しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。別作業のdevelopリリースと競合する変更は行わない。
