@@ -282,6 +282,21 @@ describe('publishGeneratedImageSet', () => {
   const publishedObjectPuts = (puts: string[]) =>
     puts.filter((key) => !key.startsWith('ops/image-publish-locks/'));
 
+  it('rejects a mixed plan containing retired KSJ images before any lock or asset PUT', async () => {
+    const fixture = await makeFixture();
+    const retired = await makeFixture({
+      entityId: 'dam-count',
+      assetKey: 'app/ranking/dam-count/thumbnail-light.webp',
+      manifestKey: 'app/ranking/dam-count/thumbnail.json',
+    });
+    mergeFixtureItem(fixture, retired);
+    const fake = makeStore();
+    await expect(publishGeneratedImageSet({
+      planPath: fixture.planPath, projectRoot: fixture.root, store: fake.store,
+    })).rejects.toThrow('KSJ公開構造化データ禁止');
+    expect(fake.puts).toEqual([]);
+  });
+
   it('uploads and verifies exact-plan assets before the manifest', async () => {
     const fixture = await makeFixture();
     const fake = makeStore();

@@ -1,3 +1,8 @@
+import { GONE_RANKING_KEYS } from "@stats47/ranking/config";
+
+import type { BlogSnapshot, SnapshotArticle } from "../../src/features/blog/types/snapshot";
+import { excludeGoneBlogArticles } from "../../src/features/blog/utils/exclude-gone-blog-articles";
+
 type MutableEnvironment = Record<string, string | undefined>;
 
 const PUBLIC_R2_BASE_URL = "https://storage.stats47.jp";
@@ -45,7 +50,7 @@ interface RankingSnapshotLike<T> {
 
 /** 単一snapshotの件数契約を検証し、検索対象の公開都道府県itemだけを返す。 */
 export function selectSearchRankingItems<
-  T extends { areaType: string; isActive: boolean },
+  T extends { rankingKey: string; areaType: string; isActive: boolean },
 >(snapshot: RankingSnapshotLike<T> | null): T[] {
   if (!snapshot || !Array.isArray(snapshot.items)) {
     throw new Error("ranking-items snapshot が取得できませんでした");
@@ -56,8 +61,17 @@ export function selectSearchRankingItems<
     );
   }
   return snapshot.items.filter(
-    (item) => item.isActive === true && item.areaType === "prefecture",
+    (item) => item.isActive === true && item.areaType === "prefecture" &&
+      !GONE_RANKING_KEYS.has(item.rankingKey),
   );
+}
+
+/** 旧R2がpublishedのままでも恒久終了記事を検索へ戻さない。 */
+export function selectSearchBlogArticles(snapshot: BlogSnapshot | null): SnapshotArticle[] {
+  if (!snapshot || !Array.isArray(snapshot.articles)) {
+    throw new Error("blog snapshot が取得できませんでした");
+  }
+  return excludeGoneBlogArticles(snapshot).articles.filter((article) => article.published === true);
 }
 
 /**

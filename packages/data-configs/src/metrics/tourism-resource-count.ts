@@ -52,5 +52,5 @@ export const tourismResourceCount: MetricConfig = {
   },
   "seoTitle": "観光資源データ登録件数ランキング【2014年】｜都道府県比較",
   "seoDescription": "国土数値情報P12に収録された観光資源・観光地点の2014年都道府県別登録件数を比較。元台帳の収録差を含むため、観光地の網羅数や魅力度を示すランキングではありません。",
-  "isActive": true,
+  "isActive": false,
 };

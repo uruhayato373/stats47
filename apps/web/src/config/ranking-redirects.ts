@@ -5,6 +5,8 @@
  * 転送先は KNOWN かつ非 GONE であることをテストで固定する。
  */
 export const RANKING_SLUG_REDIRECTS: Readonly<Record<string, string>> = {
+  // 旧KSJ漁港系列は終了し、水産庁の公式登録総数へ統合。旧年の系列は接続しない。
+  'fishing-port-count': 'fishing-port-count-ksj',
   'ssdse-c-lb021101': 'tuna-consumption-expenditure',
   'ssdse-c-lb061001': 'apple-consumption-expenditure',
   'ssdse-c-lb092007': 'gyoza-frozen-consumption-expenditure',

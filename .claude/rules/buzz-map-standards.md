@@ -194,7 +194,9 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   `--data-id S12 --version 24 --mode point-plot --filter "S12_057>=5000" --id <id> --title "..." --accent social
   --label-hit "..." [--data-year "令和4年度"]`（R2 KSJ topojson → 属性フィルタ → 代表点 geoCentroid → 型C spec）。
   `--mode point-muni [--invert]` で「◯◯がある/ない自治体」の型A に。DPF は GraphQL 取得した GeoJSON を `--geojson <path>` で投入。
-  ライセンスが `non-commercial` のデータセット（W01 ダム・P35 道の駅・C02 港湾 等）の SNS 利用可否は人間が判断する（S12 駅乗降は cc-by-4.0 で商用可）
+  KSJ指定入力は取得前に`ksj-publication-guard.ts`で検査する。`non-commercial`、部分許諾、未判定の
+  座標spec/原典コピーは停止し、公式条件・書面許諾を解決してから利用する（S12はcc-by-4.0）。
+  `--r2-key`のKSJ入力と`--geojson`に併記したKSJ IDにも同じ検査を適用する。DPF等のローカル入力は各providerの条件確認が別途必要。
 - **型D 線ネットワーク（時系列）は `--mode line-network`**:
   `--r2-key app/highway-history/highway-sections.topojson --id <id> --year-prop N06_002 --title "..." --accent infra
   --label-hit "高速道路 総延長km" [--data-year "1962-2020"]`（R2 線 topojson → `public/buzz-map/assets/<id>.topojson`

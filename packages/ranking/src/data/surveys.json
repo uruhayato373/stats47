@@ -783,9 +783,9 @@
     "sourceKind": "survey",
     "externalId": null,
     "parentSourceId": "estat",
-    "name": "消費者物価指数年報",
+    "name": "消費者物価指数",
     "organization": "総務省統計局",
-    "url": null,
+    "url": "https://www.stat.go.jp/data/cpi/1.html",
     "description": null,
     "attributionText": null,
     "license": null,
@@ -795,7 +795,7 @@
     "displayOrder": 0,
     "isActive": true,
     "createdAt": "2026-06-02 00:00:00",
-    "updatedAt": "2026-06-02 00:00:00"
+    "updatedAt": "2026-09-06 00:00:00"
   },
   {
     "id": "retail-price-survey",

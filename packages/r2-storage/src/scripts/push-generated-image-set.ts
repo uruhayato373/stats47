@@ -32,6 +32,7 @@ import {
   type StoredImageObject,
 } from '../image-pipeline';
 import { assertR2WriteAllowed } from './_assert-ci-write';
+import { assertKsjPublicKeysAllowed } from './lib/ksj-publication-guard';
 
 export type { ImageObjectStore } from '../image-pipeline';
 
@@ -634,6 +635,9 @@ export async function publishGeneratedImageSet(options: {
   dryRun?: boolean;
 }): Promise<{ bundles: number; assets: number }> {
   const plan = readPublishPlan(options.planPath);
+  assertKsjPublicKeysAllowed(plan.items.flatMap((item) => [
+    item.manifestKey, ...item.assets.map((asset) => asset.key),
+  ]));
   const stageRoot = resolve(options.projectRoot, plan.stageRoot);
   // ★区切り文字を直書きした前方一致にしない (2026-08-18)。`${dir}/` を付けて startsWith すると
   //   Windows では resolve() が `\` を返すため常に不一致になり、正当な stage まで弾く

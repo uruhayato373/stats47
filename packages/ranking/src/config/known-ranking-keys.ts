@@ -15,8 +15,9 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-09-05
- * 件数: 2166
+ * 最終生成日: 2026-09-06
+ * 公開終了反映: 2026-09-05 — 非商用KSJ旧9キーのみ除外（他の公開実在判定は維持）
+ * 件数: 2157
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -158,7 +159,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "beer-consumption-expenditure",
   "beer-consumption-quantity",
   "bento-consumption-expenditure",
-  "biomass-power-station-count",
   "births",
   "biscuit-consumption-expenditure",
   "black-tea-consumption-expenditure",
@@ -388,7 +388,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "daikon-consumption-expenditure",
   "daikon-consumption-quantity",
   "dairy-cattle-count",
-  "dam-count",
   "day-time-population",
   "day-time-population-ratio",
   "daytime-population-ratio",
@@ -619,7 +618,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "fishery-species-catch-yellowtail",
   "fishery-workers",
   "fishery-workers-coastal-offshore",
-  "fishing-port-count",
   "fishing-port-count-by-type",
   "fishing-port-count-ksj",
   "fishing-vessel-crew",
@@ -730,7 +728,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "general-project-investment-urban-planning",
   "general-project-investment-welfare",
   "general-revenue-ratio-pref-finance",
-  "geothermal-power-plant-count",
   "girls-school-uniform-consumption-expenditure",
   "girls-school-uniform-consumption-quantity",
   "gloves-consumption-expenditure",
@@ -878,7 +875,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "housing-land-liabilities-ratio-multi-person-households",
   "housing-site-value-per-3-3m2",
   "husband-childcare-rate",
-  "hydroelectric-power-plant-count",
   "icecream-consumption-expenditure",
   "in-pref-university-entrance-ratio-by-highschool-origin",
   "in-prefecture-employed-people-ratio",
@@ -1230,7 +1226,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "notebooks-paper-consumption-expenditure",
   "nuclear-family-household-count",
   "nuclear-family-households-ratio",
-  "nuclear-power-plant-count",
   "number-of-commercial-employees-wholesale-retail",
   "number-of-constructed-buildings",
   "number-of-establishments-agriculture-forestry",
@@ -1950,7 +1945,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "theft-criminal-arrest-rate",
   "theft-offenses-recognized",
   "theft-offenses-recognized-per-1000",
-  "thermal-power-plant-count",
   "tissue-paper-consumption-expenditure",
   "tobacco-consumption-expenditure",
   "tofu-consumption-expenditure",
@@ -1982,7 +1976,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "total-production-in-the-prefecture",
   "total-public-enterprise-investment",
   "total-revenue-prefecture",
-  "tourism-resource-count",
   "towel-consumption-expenditure",
   "traffic-accident-casualties-elderly-65plus",
   "traffic-accident-casualties-per-100-accidents",
@@ -2142,7 +2135,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "widowed-ratio-female-60plus",
   "widowed-ratio-male-60plus",
   "wind-power-capacity",
-  "wind-power-plant-count-facility",
   "wind-power-turbine-count",
   "wine-consumption-expenditure",
   "wine-consumption-quantity",

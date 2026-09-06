@@ -28,6 +28,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { GONE_BLOG_SLUGS } from "../src/config/gone-blog-slugs";
+
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 const OUT_PATH = path.resolve(__dirname, "../src/config/sitemap-blog-entries.ts");
 const CHECK_ONLY = process.argv.includes("--check");
@@ -147,7 +149,7 @@ async function run() {
   }
 
   const published = articles.filter(
-    (a) => a.published !== false && typeof a.publishedAt === "string" && a.publishedAt.length > 0,
+    (a) => !GONE_BLOG_SLUGS.has(a.slug) && a.published !== false && typeof a.publishedAt === "string" && a.publishedAt.length > 0,
   );
   if (published.length === 0) {
     throw new Error("公開記事が 0 件です。生成を中止します。");

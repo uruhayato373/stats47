@@ -2,8 +2,16 @@
   "schemaVersion": 1,
   "maxStateAgeDays": 10,
   "ranking": {
-    "minActiveResolved": 1961,
-    "minActiveCoveragePct": 90.66
+    "minActiveResolved": 1950,
+    "minActiveCoveragePct": 90.53
+  },
+  "rankingBaselineAdjustment": {
+    "date": "2026-09-06",
+    "reason": "Owner-approved retirement of nine non-commercial KSJ rankings and correction of two registry-based replacements that are not statistical surveys; do not invent survey IDs to retain the old count",
+    "previousActiveMetrics": 2163,
+    "previousActiveResolved": 1961,
+    "retiredResolvedKeys": ["dam-count", "hydroelectric-power-plant-count", "thermal-power-plant-count", "nuclear-power-plant-count", "geothermal-power-plant-count", "wind-power-plant-count-facility", "biomass-power-station-count", "tourism-resource-count", "fishing-port-count"],
+    "officialRegistryKeys": ["roadside-station-count", "fishing-port-count-ksj"]
   },
   "theme": {
     "minResolvedCharts": 82,

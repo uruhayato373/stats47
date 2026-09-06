@@ -23,13 +23,8 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "role": "context"
     },
     {
-      "rankingKey": "fishing-port-count",
-      "shortLabel": "漁港数",
-      "role": "context"
-    },
-    {
       "rankingKey": "fishing-port-count-ksj",
-      "shortLabel": "漁港数(KSJ)",
+      "shortLabel": "指定漁港総数",
       "role": "context"
     },
     {

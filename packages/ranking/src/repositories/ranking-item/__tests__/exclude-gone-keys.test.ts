@@ -43,6 +43,9 @@ import {
   readRankingItemsBySurveyFromR2,
   readRankingItemsByTagFromR2,
   readRelatedRankingItemsByTagKeysFromR2,
+  readRankingItemFromR2,
+  readRankingItemByKeyFromR2,
+  readRankingItemByKeyAndAreaTypeFromR2,
 } from "../read-ranking-items-snapshot";
 
 /** 一覧 snapshot の 1 行。全リーダーの filter 条件を同時に満たす形にしてある */
@@ -67,6 +70,14 @@ function item(rankingKey: string) {
 }
 
 const ROWS = [item(GONE_KEY), item(LIVE_KEY)];
+
+it("退役済みの個別itemはR2に残っていても取得しない", async () => {
+  fetchFromR2AsJson.mockClear();
+  expect(await readRankingItemFromR2("dam-count", "prefecture")).toEqual({ success: true, data: null });
+  expect(await readRankingItemByKeyFromR2("fishing-port-count")).toEqual({ success: true, data: null });
+  expect(await readRankingItemByKeyAndAreaTypeFromR2("dam-count", "prefecture")).toEqual({ success: true, data: [] });
+  expect(fetchFromR2AsJson).not.toHaveBeenCalled();
+});
 
 function snapshot(items: ReturnType<typeof item>[]) {
   return {

@@ -215,7 +215,7 @@ async function getBlogPages(): Promise<MetadataRoute.Sitemap> {
 
   const redirected = new Set(Object.keys(BLOG_SLUG_REDIRECTS));
   const live = rows
-    .filter((row) => row.publishedAt && !redirected.has(row.slug))
+    .filter((row) => row.publishedAt && !redirected.has(row.slug) && !UrlPolicy.blog.isGone(row.slug))
     .map((row) => ({
       slug: row.slug,
       lastModified: row.publishedAt as string,
@@ -223,7 +223,7 @@ async function getBlogPages(): Promise<MetadataRoute.Sitemap> {
   const entries =
     live.length > 0
       ? live
-      : SITEMAP_BLOG_ENTRIES.filter((e) => !redirected.has(e.slug));
+      : SITEMAP_BLOG_ENTRIES.filter((e) => !redirected.has(e.slug) && !UrlPolicy.blog.isGone(e.slug));
 
   return [
     { url: `${BASE_URL}/blog`, changeFrequency: 'daily', priority: 0.8 },
@@ -447,7 +447,7 @@ export default async function sitemap({
       case 'blog':
         return [
           { url: `${BASE_URL}/blog`, changeFrequency: 'daily', priority: 0.8 },
-          ...SITEMAP_BLOG_ENTRIES.map((e) => ({
+          ...SITEMAP_BLOG_ENTRIES.filter((e) => !UrlPolicy.blog.isGone(e.slug)).map((e) => ({
             url: `${BASE_URL}/blog/${e.slug}`,
             lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
             changeFrequency: 'monthly' as const,
