@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T13:57:38.507Z",
+  "updatedAt": "2026-09-06T18:37:23.991Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3546,6 +3546,19 @@
           "evidence": "修正は .github/workflows/blog-auto-publish.yml の編集を要し、backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ワークフロー無人書き換え禁止) に該当する。前回 run で原因と修正案 (ci-factual-gate/quality-gate と同じ if!/continue パターンで per-slug skip) を特定済み。人間の PR で適用する必要がある。",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-09-06T18:37:23.991Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "既存3回の記録どおり、修正はblog-auto-publish.ymlの編集を要しbacklog-loop.mdのFORBIDDEN_PATH_PATTERNSに該当する。原因と修正案(ci-factual-gate/quality-gateと同じif!/continueでper-slug skip化)は前回runで特定済み。route.classは既にneeds-owner(escalatedFrom=fable, attempts=3)。人間PRでの適用待ちのため今回も触らず次へ。",
+          "failReason": "needs-owner",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -3695,6 +3708,34 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-05T13:57:38.507Z"
+    },
+    "GIS-COMMERCIAL-LICENSE-BOUNDARY-01": {
+      "class": "needs-owner",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-06T18:37:18.111Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "完了条件未達を確認。state legacySnsVerification.externalMutation=NONE、deletion approval pending for the exact six old posts（COMPLETEDでない）。deletionEvidence自体が state に存在しない。加えてguardがisActive無視でdata-refresh/sync-snapshotsを恒常throwする設計判断がカード自身の記述どおり owner 判断待ち。geo:check-data-catalogはremote=NOT_",
+          "failReason": "needs-owner",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
