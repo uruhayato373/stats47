@@ -157,6 +157,8 @@ node .claude/scripts/blog/build-article-prompt.mjs --slug <slug> --archetype <F|
 - `.claude/skills/blog/discover-trends/SKILL.md` (トレンド発見・任意の入力源)
 - `.claude/scripts/blog/fetch-ranking-data-r2.mjs` (R2 直データ接地)
 - `.claude/scripts/blog/fetch-migration-flow.mjs` (型G 移動フローの接地)
+- `.claude/scripts/blog/build-kakei-quantity-price.mjs` (家計調査の食料品目を「支出額 = 数量 × 価格」に分解し、県庁所在市の 4 区分 findings カードを接地。県別食卓記事 `<pref>-food-culture` の更新用)
+- `.claude/scripts/blog/fetch-kakei-monthly.mjs` (型C 用。家計調査 全国・二人以上の世帯の月次品目表と 2020 年基準 CPI を e-Stat から直接読み、年次集計・指数化・月別パターン・購入単価 (金額÷数量) の折れ線 data JSON を作る。source.json は kind:estat)
 - `.claude/scripts/blog/fetch-municipal-finance.mjs` (型F 市町村財政の接地)
 - `.claude/scripts/blog/build-article-prompt.mjs` (型 F/G/E の執筆プロンプト生成)
 - `.claude/skills/blog/generate-article-charts/SKILL.md`

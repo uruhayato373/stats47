@@ -28,6 +28,7 @@ import {
   listLatestArticles,
   listAllTagsWithCount,
 } from '@/features/blog/server';
+import { STOREFRONT_PRODUCTS } from '@/features/products';
 import { ALL_THEMES } from '@/features/theme-dashboard/config/all-themes';
 import { themeHref } from '@/features/theme-dashboard/config/theme-urls';
 
@@ -99,6 +100,12 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   //  sunshine-map → /themes/climate, hub → /themes。テーマ URL は THEME_PAGES に含まれる。
   // /search は robots: noindex のため sitemap に含めない (2026-06 削除)。
   { url: `${BASE_URL}/about`, changeFrequency: 'monthly', priority: 0.5 },
+  { url: `${BASE_URL}/products`, changeFrequency: 'weekly', priority: 0.6 },
+  ...STOREFRONT_PRODUCTS.map((product) => ({
+    url: `${BASE_URL}/products/${product.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  })),
   { url: `${BASE_URL}/privacy`, changeFrequency: 'yearly', priority: 0.2 },
   { url: `${BASE_URL}/terms`, changeFrequency: 'yearly', priority: 0.2 },
 ];

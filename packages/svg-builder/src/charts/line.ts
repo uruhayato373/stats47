@@ -112,9 +112,11 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
     ].join("\n");
   });
 
-  // X 軸ラベル（7個超は斜め表示）
+  // X 軸ラベル（7個超は斜め表示。12 個超は間引いて重なりを防ぐ — 月次・長期年次の系列用）
   const rotateTick = xItems.length > 7;
-  const xTickLabels = xItems.map((item, i) => {
+  const tickStep = Math.max(1, Math.ceil(xItems.length / 12));
+  const xTickLabels = xItems.flatMap((item, i) => {
+    if (tickStep > 1 && i % tickStep !== 0 && i !== xItems.length - 1) return [];
     const x = toSvgX(i).toFixed(1);
     const y = (plot.bottom + 14).toFixed(1);
     return rotateTick

@@ -4,7 +4,7 @@
  * に書き出す (git 管理外)。単一デモデータの汎用ビルダー (build-product.ts) とは別経路で、
  * 他 173 商品の挙動は変えない。
  */
-import { mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { resolve, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -24,7 +24,7 @@ import { buildDatabookPdf } from "../generators/databook-pdf";
 import { buildDatabookPptx } from "../generators/databook-pptx";
 import { LICENSE_REGISTRY, type LicenseId } from "../catalog/licenses";
 import { buildInputHash, sha256, type ProductManifest, type ManifestFile } from "../generators/manifest";
-import type { ProductBuildOptions, ProductBuildResult } from "./build-product";
+import { reserveProductVersion, type ProductBuildOptions, type ProductBuildResult } from "./build-product";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/coconala-products");
@@ -57,7 +57,8 @@ function renderDatabookReadiness(product: ProductDefinition, databook: Databook)
   const pptxHighlighted = product.formats.includes("pptx") && n > PPTX_HIGHLIGHT;
   const officeCheck = product.formats.includes("pptx")
     ? "**PowerPoint（Windows/Mac 365）で実機確認**: 県クリック→塗りつぶし色変更 / チャート編集→再計算 / 表示崩れ / 日本語フォント"
-    : "**Excel（Windows/Mac 365）で実機確認**: カテゴリ別シートの値編集→順位（RANK）再計算 / 「一覧」シートの表示 / 表示崩れ / 日本語フォント";
+    : product.formats.includes("xlsx") ? "**Excel（Windows/Mac 365）で実機確認**: カテゴリ別シートの値編集→順位（RANK）再計算 / 「一覧」シートの表示 / 表示崩れ / 日本語フォント"
+    : "PDF・PNGの文字切れと47地域の値を確認（Officeファイルは非同梱。編集互換性の見本ではありません）";
   const lines = [
     `# 出品前チェックリスト — ${product.id} ${product.name}`,
     "",
@@ -75,8 +76,8 @@ function renderDatabookReadiness(product: ProductDefinition, databook: Databook)
     "- [x] 全指標の出典・調査名・statsDataId・年次・取得日・加工式を SOURCES.csv に収録",
     "- [x] 利用許諾（再販売禁止・出典義務・免責）を LICENSE-ja.txt に収録",
     "- [x] data.csv は UTF-8 BOM・複数指標を横並び（日本語 Excel で文字化けしない）",
-    "- [x] Excel は指標ごとにシート分割し、値編集で順位（RANK）が再計算",
-    "- [x] PDF は指標ごとの 47 県ランキング表を実データで収録",
+    ...(product.formats.includes("xlsx") ? ["- [x] Excel は値編集で順位（RANK）が再計算する数式を収録（実機の再計算は未確認）"] : ["- Excelは非同梱"]),
+    ...(product.formats.includes("pdf") ? ["- [x] PDF は指標ごとの 47 県ランキング表を実データで収録"] : []),
     "- [x] 販売文（listing.md）の納品物を実際の形式（xlsx/csv/pdf）で記述",
     "- [x] 620×620 サムネイル生成（代表指標のコロプレス地図）",
     "- [x] e-Stat の公認・推奨と誤認させる表現なし",
@@ -108,11 +109,9 @@ export async function buildDatabook(
   const generatedAt = opts.generatedAt ?? new Date().toISOString();
   const geo: PrefectureGeometry = opts.geo ?? loadPrefectureGeometry(1000, JAPAN_CLIP);
   const outDir = join(outRoot, product.id, version);
+  reserveProductVersion(outRoot, product.id, version);
   mkdirSync(join(outDir, "preview"), { recursive: true });
   mkdirSync(join(outDir, "listing"), { recursive: true });
-  // データブックは PDF を databook.pdf として出す。旧デモ経路 (build-product) が残した
-  // manual.pdf があれば取り除き、成果物ディレクトリに紛れ込ませない。
-  rmSync(join(outDir, "manual.pdf"), { force: true });
 
   const datasets = databook.datasets;
   const built: ProductFormat[] = [];

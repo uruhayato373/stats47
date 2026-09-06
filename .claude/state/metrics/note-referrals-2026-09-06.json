@@ -1,0 +1,1281 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T04:12:21.003Z",
+  "period": {
+    "startDate": "2026-08-09",
+    "endDate": "2026-09-05",
+    "inclusiveDays": 28
+  },
+  "account": "stats47",
+  "attribution": {
+    "source": "GA4 sessionSource=note.com",
+    "dimension": "landingPagePlusQueryString",
+    "cardUrlPolicy": "query-free HTTPS URL; no UTM"
+  },
+  "raw": {
+    "summary": {
+      "sessions": 505,
+      "activeUsers": 465,
+      "engagedSessions": 372,
+      "screenPageViews": 2441
+    },
+    "landings": [
+      {
+        "landingPagePlusQueryString": "/ranking/real-public-debt-service-ratio",
+        "sessions": 87,
+        "activeUsers": 82,
+        "engagedSessions": 74,
+        "screenPageViews": 313
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-sunshine-duration",
+        "sessions": 80,
+        "activeUsers": 68,
+        "engagedSessions": 58,
+        "screenPageViews": 221
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/fiscal-strength-index-prefecture",
+        "sessions": 41,
+        "activeUsers": 41,
+        "engagedSessions": 33,
+        "screenPageViews": 144
+      },
+      {
+        "landingPagePlusQueryString": "/",
+        "sessions": 29,
+        "activeUsers": 23,
+        "engagedSessions": 24,
+        "screenPageViews": 217
+      },
+      {
+        "landingPagePlusQueryString": "(not set)",
+        "sessions": 24,
+        "activeUsers": 18,
+        "engagedSessions": 1,
+        "screenPageViews": 0
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/future-burden-ratio",
+        "sessions": 20,
+        "activeUsers": 19,
+        "engagedSessions": 15,
+        "screenPageViews": 39
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/owner-occupied-housing-ratio",
+        "sessions": 19,
+        "activeUsers": 17,
+        "engagedSessions": 6,
+        "screenPageViews": 21
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-clear-days",
+        "sessions": 16,
+        "activeUsers": 16,
+        "engagedSessions": 14,
+        "screenPageViews": 30
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-cloudy-days",
+        "sessions": 10,
+        "activeUsers": 10,
+        "engagedSessions": 6,
+        "screenPageViews": 57
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-reading",
+        "sessions": 10,
+        "activeUsers": 10,
+        "engagedSessions": 9,
+        "screenPageViews": 27
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/local-debt-current-ratio",
+        "sessions": 10,
+        "activeUsers": 10,
+        "engagedSessions": 6,
+        "screenPageViews": 96
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/university-count-per-100k",
+        "sessions": 9,
+        "activeUsers": 9,
+        "engagedSessions": 6,
+        "screenPageViews": 19
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/consumption-expenditure-multi-person-households-per-month",
+        "sessions": 7,
+        "activeUsers": 6,
+        "engagedSessions": 7,
+        "screenPageViews": 222
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-swimming",
+        "sessions": 6,
+        "activeUsers": 3,
+        "engagedSessions": 6,
+        "screenPageViews": 75
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/total-fertility-rate",
+        "sessions": 6,
+        "activeUsers": 6,
+        "engagedSessions": 5,
+        "screenPageViews": 8
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-snow-days",
+        "sessions": 5,
+        "activeUsers": 5,
+        "engagedSessions": 5,
+        "screenPageViews": 34
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-classical-music",
+        "sessions": 5,
+        "activeUsers": 5,
+        "engagedSessions": 5,
+        "screenPageViews": 11
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-fishing",
+        "sessions": 5,
+        "activeUsers": 5,
+        "engagedSessions": 5,
+        "screenPageViews": 9
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/per-capita-prefectural-income-h27",
+        "sessions": 4,
+        "activeUsers": 4,
+        "engagedSessions": 2,
+        "screenPageViews": 4
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-hiking",
+        "sessions": 4,
+        "activeUsers": 4,
+        "engagedSessions": 4,
+        "screenPageViews": 13
+      },
+      {
+        "landingPagePlusQueryString": "/category/economy",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 17
+      },
+      {
+        "landingPagePlusQueryString": "/category/educationsports",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 14
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/current-balance-ratio",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 2,
+        "screenPageViews": 18
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-calligraphy",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-chorus",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 2,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-cooking",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 2,
+        "screenPageViews": 8
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/pharmacy-count-per-100k",
+        "sessions": 3,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-jogging",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/study-participation-rate-arts-culture",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 8
+      },
+      {
+        "landingPagePlusQueryString": "",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 0,
+        "screenPageViews": 0
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/average-temperature",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/electricity-generation-capacity",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-camping",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-pottery",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-sports-spectating",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 6
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-tea-ceremony",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 12
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-writing",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/maximum-temperature",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-badminton",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 9
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-baseball",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-basketball",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-bowling",
+        "sessions": 2,
+        "activeUsers": 1,
+        "engagedSessions": 2,
+        "screenPageViews": 13
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-golf",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-soccer",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-table-tennis",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-walking",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/swimming-pool-public",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/swimming-pool-public?year=2021?year=2021",
+        "sessions": 2,
+        "activeUsers": 1,
+        "engagedSessions": 2,
+        "screenPageViews": 7
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/traffic-accident-count-per-population",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 53
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/travel-participation-rate-domestic-tourism",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 12
+      },
+      {
+        "landingPagePlusQueryString": "/areas/19000",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/education-expenses-gap",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/fertility-rate-prefecture-gap",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/blog/local-government-debt-burden",
+        "sessions": 1,
+        "activeUsers": 0,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/population-density-urbanization",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/blog/price-index-high-low-prefecture",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/savings-rate-gap",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/sunshine-pacific-vs-nihonkai",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/geo/population-land-price",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/geo/population-station-access",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/agricultural-output",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-precipitation",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-sunshine-duration?norm=per_population?norm=per_population",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 32
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/avg-height-high-school-2nd-male",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/final-education-university-graduate-school-ratio",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-art-appreciation",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-cinema",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-flower-arrangement",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 6
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-go",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-instrument",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-karaoke",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-manga",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-pachinko",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-popular-music",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/household-ratio-with-65plus",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 518
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/number-of-hotel-rooms",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/population-density-per-km2-total-area",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/real-balance-ratio",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/single-person-household-ratio",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-cycling",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-ground-golf",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-kendo",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-tennis",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/swimming-pool-public?year=2021&norm=per_population?year=2021&norm=per_population",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 4
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/travel-participation-rate-domestic",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/whisky-consumption-quantity?year=2023?year=2023",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/search",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 7
+      },
+      {
+        "landingPagePlusQueryString": "/search?q=%E3%82%A2%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%AB?q=%E3%82%A2%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%AB",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 37
+      },
+      {
+        "landingPagePlusQueryString": "/survey/social-life-basic-survey",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 4
+      }
+    ]
+  },
+  "japan": {
+    "summary": {
+      "sessions": 502,
+      "activeUsers": 462,
+      "engagedSessions": 370,
+      "screenPageViews": 2437
+    },
+    "landings": [
+      {
+        "landingPagePlusQueryString": "/ranking/real-public-debt-service-ratio",
+        "sessions": 86,
+        "activeUsers": 81,
+        "engagedSessions": 73,
+        "screenPageViews": 312
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-sunshine-duration",
+        "sessions": 80,
+        "activeUsers": 68,
+        "engagedSessions": 58,
+        "screenPageViews": 221
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/fiscal-strength-index-prefecture",
+        "sessions": 41,
+        "activeUsers": 41,
+        "engagedSessions": 33,
+        "screenPageViews": 144
+      },
+      {
+        "landingPagePlusQueryString": "/",
+        "sessions": 29,
+        "activeUsers": 23,
+        "engagedSessions": 24,
+        "screenPageViews": 217
+      },
+      {
+        "landingPagePlusQueryString": "(not set)",
+        "sessions": 24,
+        "activeUsers": 18,
+        "engagedSessions": 1,
+        "screenPageViews": 0
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/future-burden-ratio",
+        "sessions": 19,
+        "activeUsers": 18,
+        "engagedSessions": 14,
+        "screenPageViews": 37
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/owner-occupied-housing-ratio",
+        "sessions": 19,
+        "activeUsers": 17,
+        "engagedSessions": 6,
+        "screenPageViews": 21
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-clear-days",
+        "sessions": 16,
+        "activeUsers": 16,
+        "engagedSessions": 14,
+        "screenPageViews": 30
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-cloudy-days",
+        "sessions": 10,
+        "activeUsers": 10,
+        "engagedSessions": 6,
+        "screenPageViews": 57
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-reading",
+        "sessions": 10,
+        "activeUsers": 10,
+        "engagedSessions": 9,
+        "screenPageViews": 27
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/local-debt-current-ratio",
+        "sessions": 10,
+        "activeUsers": 10,
+        "engagedSessions": 6,
+        "screenPageViews": 96
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/university-count-per-100k",
+        "sessions": 9,
+        "activeUsers": 9,
+        "engagedSessions": 6,
+        "screenPageViews": 19
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/consumption-expenditure-multi-person-households-per-month",
+        "sessions": 7,
+        "activeUsers": 6,
+        "engagedSessions": 7,
+        "screenPageViews": 222
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-swimming",
+        "sessions": 6,
+        "activeUsers": 3,
+        "engagedSessions": 6,
+        "screenPageViews": 75
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/total-fertility-rate",
+        "sessions": 6,
+        "activeUsers": 6,
+        "engagedSessions": 5,
+        "screenPageViews": 8
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-snow-days",
+        "sessions": 5,
+        "activeUsers": 5,
+        "engagedSessions": 5,
+        "screenPageViews": 34
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-classical-music",
+        "sessions": 5,
+        "activeUsers": 5,
+        "engagedSessions": 5,
+        "screenPageViews": 11
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-fishing",
+        "sessions": 5,
+        "activeUsers": 5,
+        "engagedSessions": 5,
+        "screenPageViews": 9
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/per-capita-prefectural-income-h27",
+        "sessions": 4,
+        "activeUsers": 4,
+        "engagedSessions": 2,
+        "screenPageViews": 4
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-hiking",
+        "sessions": 4,
+        "activeUsers": 4,
+        "engagedSessions": 4,
+        "screenPageViews": 13
+      },
+      {
+        "landingPagePlusQueryString": "/category/economy",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 17
+      },
+      {
+        "landingPagePlusQueryString": "/category/educationsports",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 14
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/current-balance-ratio",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 2,
+        "screenPageViews": 18
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-calligraphy",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-chorus",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 2,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-cooking",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 2,
+        "screenPageViews": 8
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/pharmacy-count-per-100k",
+        "sessions": 3,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-jogging",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/study-participation-rate-arts-culture",
+        "sessions": 3,
+        "activeUsers": 3,
+        "engagedSessions": 3,
+        "screenPageViews": 8
+      },
+      {
+        "landingPagePlusQueryString": "",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 0,
+        "screenPageViews": 0
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/average-temperature",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/electricity-generation-capacity",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-pottery",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-sports-spectating",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 6
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-tea-ceremony",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 12
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-writing",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/maximum-temperature",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-badminton",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 9
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-baseball",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-basketball",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-bowling",
+        "sessions": 2,
+        "activeUsers": 1,
+        "engagedSessions": 2,
+        "screenPageViews": 13
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-golf",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-soccer",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-table-tennis",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-walking",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/swimming-pool-public",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/swimming-pool-public?year=2021?year=2021",
+        "sessions": 2,
+        "activeUsers": 1,
+        "engagedSessions": 2,
+        "screenPageViews": 7
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/traffic-accident-count-per-population",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 1,
+        "screenPageViews": 53
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/travel-participation-rate-domestic-tourism",
+        "sessions": 2,
+        "activeUsers": 2,
+        "engagedSessions": 2,
+        "screenPageViews": 12
+      },
+      {
+        "landingPagePlusQueryString": "/areas/19000",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/education-expenses-gap",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/fertility-rate-prefecture-gap",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/blog/local-government-debt-burden",
+        "sessions": 1,
+        "activeUsers": 0,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/population-density-urbanization",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/blog/price-index-high-low-prefecture",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/savings-rate-gap",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/blog/sunshine-pacific-vs-nihonkai",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/geo/population-land-price",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/geo/population-station-access",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/agricultural-output",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-precipitation",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/annual-sunshine-duration?norm=per_population?norm=per_population",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 32
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/avg-height-high-school-2nd-male",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/final-education-university-graduate-school-ratio",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-art-appreciation",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-camping",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-cinema",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-flower-arrangement",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 6
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-go",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-instrument",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 5
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-karaoke",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-manga",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-pachinko",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/hobby-participation-rate-popular-music",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 3
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/household-ratio-with-65plus",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 518
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/number-of-hotel-rooms",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/population-density-per-km2-total-area",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/real-balance-ratio",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/single-person-household-ratio",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-cycling",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-ground-golf",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-kendo",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/sports-participation-rate-tennis",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/swimming-pool-public?year=2021&norm=per_population?year=2021&norm=per_population",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 4
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/travel-participation-rate-domestic",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 2
+      },
+      {
+        "landingPagePlusQueryString": "/ranking/whisky-consumption-quantity?year=2023?year=2023",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 1
+      },
+      {
+        "landingPagePlusQueryString": "/search",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 1,
+        "screenPageViews": 7
+      },
+      {
+        "landingPagePlusQueryString": "/search?q=%E3%82%A2%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%AB?q=%E3%82%A2%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%AB",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 37
+      },
+      {
+        "landingPagePlusQueryString": "/survey/social-life-basic-survey",
+        "sessions": 1,
+        "activeUsers": 1,
+        "engagedSessions": 0,
+        "screenPageViews": 4
+      }
+    ]
+  }
+}

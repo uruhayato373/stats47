@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "black-tea-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "紅茶消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/black-tea-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug kanagawa-food-culture --keys black-tea-consumption-expenditure --data-name blacktea-ranking",
+  "fetchedAt": "2026-09-05T15:27:56.805Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

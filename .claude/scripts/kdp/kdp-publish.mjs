@@ -19,7 +19,7 @@ import {
   ROOT, launchContext, waitForLogin, assertAccount, readListings, resolveAsset, shotPath, sleep,
 } from "./lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft } from "./lib/kdp-flow.mjs";
-import { assertKindleAssetsArchived } from "./lib/kdp-archive-gate.mjs";
+import { assertKindleReleaseReady } from "./lib/kdp-release-gate.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
@@ -32,7 +32,7 @@ if (!ID) { console.error("--id <K-S1-01> required"); process.exit(1); }
 
 const listings = readListings();
 const lst = listings[ID];
-if (!lst) { console.error(`ABORT: kdp-listings.json に "${ID}" が無い (先に products:kindle:kdp-listings --apply)`); process.exit(1); }
+if (!lst) { console.error(`ABORT: kdp-listings.json に "${ID}" がありません。明示版の入稿提案を作り、独立レビュー・実機確認・保全・承認後に対象IDの公開台帳を確定してください。`); process.exit(1); }
 if (UPDATE && lst.status !== "listed") { console.error("ABORT: --update は既刊 (status=listed) 専用です"); process.exit(1); }
 if (!UPDATE && lst.status === "listed" && !VERIFY && !PROBE) {
   console.error("ABORT: 既刊を修正する場合は --update を明示してください");
@@ -51,7 +51,7 @@ if (lst.keywords.length > 7) { console.error("ABORT: keywords は最大 7"); pro
 if (COMMIT && lst.kuEnrolled === undefined) { console.error("ABORT: kuEnrolled 未設定"); process.exit(1); }
 
 if (COMMIT || UPDATE) {
-  const archive = assertKindleAssetsArchived(ROOT, ID);
+  const archive = assertKindleReleaseReady(ROOT, ID, lst);
   if (!archive.ok) {
     console.error(`ABORT: ${archive.reason}。先に Kindle archive --push を実行してください`);
     process.exit(1);

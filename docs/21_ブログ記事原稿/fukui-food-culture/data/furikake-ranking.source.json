@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "furikake-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "ふりかけ消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/furikake-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fukui-food-culture --keys furikake-consumption-expenditure --data-name furikake-ranking",
+  "fetchedAt": "2026-09-05T15:57:04.529Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "other-noodles-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "他の麺類消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/other-noodles-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug kagawa-food-culture --keys other-noodles-consumption-expenditure --data-name othernoodles-ranking",
+  "fetchedAt": "2026-07-10T22:23:08.777Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

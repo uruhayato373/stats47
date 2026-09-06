@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "ham-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "ハム消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/ham-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug kanagawa-food-culture --keys ham-consumption-expenditure --data-name ham-ranking",
+  "fetchedAt": "2026-09-05T15:27:42.088Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

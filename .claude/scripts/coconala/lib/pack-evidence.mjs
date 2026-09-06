@@ -29,6 +29,9 @@ export async function inspectPack(root, listing) {
   if (sources.length !== count || count !== contract.indicatorCount) throw new Error('indicator count mismatch');
   const hasXlsx = manifest.files.some(f => f.path === 'product.xlsx') && existsSync(resolve(dir, 'product.xlsx'));
   if (hasXlsx !== contract.hasXlsx) throw new Error('Excel delivery mismatch');
+  const hasPptx = manifest.files.some(f => f.path === 'product.pptx');
+  if (!hasPptx && contract.pptxIndicatorCount !== 0) throw new Error('PowerPoint delivery missing');
+  if (!hasPptx) return { manifest, manifestSha256: sha256(manifestBytes), rows, sources, count, slides: 0, hasXlsx };
   const ppt = await JSZip.loadAsync(readFileSync(resolve(dir, 'product.pptx')));
   // Existing databook generator: six framing slides + three per indicator.
   const slides = Object.keys(ppt.files).filter(p => /^ppt\/slides\/slide\d+\.xml$/.test(p)).length;

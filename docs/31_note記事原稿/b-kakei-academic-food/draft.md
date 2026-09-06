@@ -1,8 +1,10 @@
 ---
 title: "学力テスト上位の県は何を食べているのか ── 符合を相関で終わらせないために"
 description: "ほうれんそうをよく食べる県は学力テストの上位県と重なる、という話をご存じでしょうか。両方のランキングを全県で突き合わせると、この符合はどこまで成り立つのでしょうか。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n78ffa2c7da3b"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 統計データ

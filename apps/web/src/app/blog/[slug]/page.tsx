@@ -35,6 +35,7 @@ import {
     articleService,
     resolveArticleSurveyTaxonomy,
 } from "@/features/blog/server";
+import { BlogProductCta } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { getRequiredBaseUrl } from "@/lib/env";
@@ -326,6 +327,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 affiliateVertical={affiliateVertical}
                                 affiliateBanners={articleBanners}
                             />
+
+                            <BlogProductCta blogSlug={slug} />
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">

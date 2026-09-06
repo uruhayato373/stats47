@@ -1,8 +1,10 @@
 ---
 title: "冬物バーゲンが成功したかは家計調査でわかる ── 数量と単価のどちらが動いたか"
 description: "バーゲンで値札が下がれば、消費者が払う金額も下がるはずでしょうか。婦人用コートの月次データを見ると、実際に払った1着の値段は上がる年もありました。読み分けの手順を解説します。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/neb44a932f9f2"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 統計データ

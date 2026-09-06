@@ -59,8 +59,10 @@ export function renderListing(product: ProductDefinition, datasets: readonly Dat
     );
   }
   if (hasMap) {
-    canDoLines.push("- 47 都道府県のコロプレス地図・ランキング・チャートを、資料にそのまま使えます。");
-    canDoLines.push("- 地図は都道府県ごとに色を変更できる編集可能な図形として収録しています。");
+    canDoLines.push("- 47 都道府県のコロプレス地図を確認できます。利用範囲は同梱ライセンスに従ってください。");
+    canDoLines.push(product.formats.includes("pptx") || product.formats.includes("svg")
+      ? "- 地図は都道府県ごとに色を変更できる編集可能な図形として収録しています。"
+      : "- PNGは固定画像です。県別の再着色・数値編集による地図の自動更新機能はありません。");
   } else {
     canDoLines.push("- 47 都道府県の値・順位を、資料や分析にそのまま使えます（Excel は値編集で順位が再計算されます）。");
   }

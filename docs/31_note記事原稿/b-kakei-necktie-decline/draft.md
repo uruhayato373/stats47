@@ -1,8 +1,10 @@
 ---
 title: "ネクタイとストッキングはどれだけ売れなくなったか ── 家計調査で見る市場の縮小"
 description: "市場が縮んだと聞いたとき、値段が下がったのか買う人が減ったのか、どちらを思い浮かべるでしょうか。ネクタイの支出は8割減りましたが、単価は1割しか下がっていません。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ncbfe818867f4"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 統計データ

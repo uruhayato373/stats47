@@ -19,7 +19,10 @@ const BASELINE_PATH = path.resolve(
 const MAX_FILE_SIZE = Number(process.env.REPO_HYGIENE_MAX_BYTES ?? 1_048_576);
 
 function git(args) {
-  return execFileSync("git", ["-C", ROOT, ...args], { encoding: "buffer" });
+  return execFileSync("git", ["-C", ROOT, ...args], {
+    encoding: "buffer",
+    maxBuffer: 128 * 1024 * 1024,
+  });
 }
 
 function listFiles() {

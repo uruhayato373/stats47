@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sake-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "清酒消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sake-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug akita-food-culture --keys sake-consumption-expenditure --data-name sake-ranking",
+  "fetchedAt": "2026-09-05T11:02:45.567Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

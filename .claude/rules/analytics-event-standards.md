@@ -112,6 +112,16 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`を許可�
 | `share` | `trackShare` | `method` / `content_type` / `item_id` は GA4 標準（要否×） | 要否× | 共有 |
 | `page_not_found` | `trackNotFound` | `page_path` / `page_referrer`（登録不要・レポート可） | 要否× | 監視 |
 
+> **nav_surface の値追加 (2026-09-06・商品導線)**: 商品一覧→商品詳細を
+> `product_catalog`、ブログ本文末→文脈一致したKindle詳細を `blog_product` として追加した。
+> どちらも登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
+> 商品詳細→Amazon/ココナラは `cta_click` の登録済み `link_position`
+> (`product_kindle` / `product_coconala`) と当該ページ path の組み合わせで商品別に集計する。
+> note のリンクカードは query 付き UTM を使わず、記事別 clean path
+> `/products/<slug>/from/note/<noteId>` を経由する。サイト側で
+> `utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=<noteId>`
+> へ転送するため、新しい custom dimension なしで記事別の送客と販売先 CTA を結合できる。
+
 > `❓要確認` は「code コメントで登録前提と書かれているが、GA4 管理画面での実登録を確認していない」状態。
 > `.claude/rules/evidence-based-judgment.md` に従い、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。
 > 推測で `✅` にしない。

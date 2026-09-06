@@ -17,12 +17,12 @@ PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2
   `sourceIds` に由来情報として残す。
 - `src/build/` と `src/generators/` に PPTX / XLSX / CSV / SVG / PNG / PDF / 販売文 /
   manifest / readiness の生成器を実装済み。
-- P-01は `listed`、P-02〜P-11は `approved`、P-12〜P-14は `cataloged`。出品可否の正典は
-  `packs.ts` の status と validator であり、このREADMEへ個別条件を重複定義しない。
+- 設計statusは `packs.ts`、外部公開実績は `.claude/config/{coconala,kdp}-listings.json`。
+  生成・公開・販売品質を同じstatusで代用しない。横断一覧は `products:report` で再生成する。
 - PowerPoint / Excel の構造検証と自動テストは実装済み。Windows/Mac Office実機での表示、
   再着色、再計算は人間が `READINESS.md` に沿って確認する。
-- noteチャネルは旧174商品前提のため一時的に型検査・テスト対象外。14パックへの移行が完了するまで
-  `products:note:*` を実運用しない。
+- noteチャネルは現行14パックから計画を導出し、型検査・テスト対象。販売準備は `revision` を使い、
+  公開済みパックの `_delivery` 固定SHAから別版を作る。旧v1直参照のgenerate/promoteは使わない。
 - Kindleチャネルは `src/channels/kindle/` に同居する。EPUB生成とKDPフォーム操作を分離し、
   ログイン、税務・銀行情報、実公開は人間工程とする。
 
@@ -32,13 +32,32 @@ PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2
 # ココナラ商品
 npm run products:catalog  --workspace=@stats47/product-factory -- --check
 npm run products:validate --workspace=@stats47/product-factory -- --id P-01
-npm run products:generate --workspace=@stats47/product-factory -- --id P-01
-npm run products:report   --workspace=@stats47/product-factory
+npm run products:generate --workspace=@stats47/product-factory -- --id P-01 --version <NEW_VERSION>
+npm run products:report   --workspace=@stats47/product-factory -- --kindle-version <VERSION> --note-revision <REVISION>
 
 # Kindle
 npm run products:kindle:plan     --workspace=@stats47/product-factory
 npm run products:kindle:validate --workspace=@stats47/product-factory
-npm run products:kindle:generate --workspace=@stats47/product-factory -- --id <BOOK_ID>
+npm run products:kindle:generate --workspace=@stats47/product-factory -- --id <BOOK_ID> --version <NEW_VERSION>
+npm run products:kindle:verify-epub --workspace=@stats47/product-factory -- --version <VERSION>
+npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <VERSION>
+
+# note販売準備（新規revisionのみ。既存原稿・公開台帳は上書きしない）
+npx tsx packages/product-factory/src/channels/note/cli.ts revision --revision <NEW_REVISION> --all
+npx tsx packages/product-factory/src/channels/note/cli.ts revision --revision <REVISION> --all --validate
+
+# 販売実績 (証拠ファイルのsha256付き。未記録と0件を分離)
+npm run products:sales --workspace=@stats47/product-factory -- validate
+npm run products:sales --workspace=@stats47/product-factory -- summary
+npm run products:sales --workspace=@stats47/product-factory -- record \
+  --channel kdp --product-id K-S1-01 \
+  --period-start 2026-09-01 --period-end 2026-09-30 \
+  --orders 0 --units 0 --net-yen 0 --refunds 0 --kenp 0 \
+  --evidence .local/product-sales-evidence/kdp-2026-09.csv
+
+販売明細の原本は個人・取引情報を含み得るため、git対象外の
+`.local/product-sales-evidence/` にだけ置く。台帳には相対パスとsha256を記録し、
+未計測と実測0件を区別する。
 
 # 共通検証
 npm run type-check --workspace=@stats47/product-factory
@@ -49,6 +68,48 @@ npm run test:run   --workspace=@stats47/product-factory
 専用Playwrightスクリプトの `--commit` とオーナー承認を必須とする。
 
 ## 技術上の制約
+
+### 横断販売カタログ
+
+`src/build/sales-catalog.ts` は既存の商品・書籍・Geo企画TSと出品証跡を結合する読み取り専用の派生器。
+`products:report` は `.claude/state/products/catalog-status.json` と
+`.local/product-portfolio/catalog.{html,csv}` を生成する。HTMLは商品ID・販売先・残工程で検索できる。
+商品IDを販売先ごとに増殖させず、無料サンプル・未制作企画も区別する。
+既定の改訂候補は`CURRENT_SALES_REVISIONS`（git TS）で固定する。ディレクトリ名順で実験版を採用したり、通常の再集計でnote原稿が旧版へ戻ったりしない。明示フラグによる別版の監査は可能だが、公開記録は変更しない。
+
+納品版はmanifestと全ファイルのSHA/容量を検査。Kindleは指定版のmetadataで欠落・内部比率・本文量を判定し、
+意味レビュー・Previewer・暗号化保全・公開承認を別ゲートにする。公開statusには元の確認日を保持し、
+レポート生成日を公開確認日にしない。生成・ハッシュ一致・カタログvalidator PASSだけでは販売準備完了にならない。
+Kindle改訂版は全予定指標を処理し、旧24件打切りを使わない。書き下ろし30%は内部編集品質基準であり、
+Amazonの許諾・審査合格を保証する閾値ではない。旧公開版と新しい改訂候補を削除・上書きしない。
+
+Kindleの`metadata.authoredSha256`は書誌・章定義・fresh原稿・入稿専用校訂を固定し、変更後に旧EPUBを現行版と表示しない。
+`editorial-corrections.ts`は原文完全一致の校訂だけを入稿版へ適用し、原文が変われば生成を停止する。
+公開ブログ自体は変更しない。部分校訂済みでも、図・他段落を含む章全体の独立レビューは省略しない。
+ランキング章は未レビューのサイトAI解説を転載せず、観測値からの決定的集計・同順位処理・全県の数値表を採用する。
+数値の範囲検査だけでは分母の誤解や無根拠の因果説明を保証できないためであり、書き下ろし章の意味レビューとは別に扱う。
+元のサイト解説・旧版EPUBは保持する。除外で本文量が基準を下回った巻は未達のまま記録し、閾値を下げたり定型文で水増ししたりしない。
+書き下ろし比率や制作方針を記録する`newContentNote`は内部メタデータであり、EPUBの扉へ表示しない。
+単発・バッチの入稿は`kdp-release-gate.mjs`が保全版一致とカタログ共通の本文検査を実行する。
+`verify-publishable --content-only`は本文の検査専用で、保全やオーナー承認の代わりにはならない。
+独立レビューは同じ版の`review.json`（schemaVersion=1、bookId/version/epubSha256/authoredSha256、
+verdict、scope=all-chapters、reviewer、authorIds、reviewedAt、chapters、unresolvedFindings）を読む。
+実EPUBの全本文から仕様検証時に抽出したfileName/sha256を正とし、metadata.reviewChaptersとreview.jsonの両方が一致することを求める。
+reviewer/authorIdsは正規化済みIDのみ。git TSの`revisionEditorIds`にある当該版の編集参加者をreceipt側で省略できず、別reviewerによるPASSかつ未解決0でのみ通す。
+これは公開承認の代用ではない。KDP書誌出力は`.local/kindle-listing-revisions/<version>.json`の準備提案のみで、
+旧`--apply`による公開台帳一括上書きを拒否する。出品台帳の切替は実機確認・保全・承認後の別工程。
+
+暗号化保全は`kindle:archive --push --id <ID> --version <VERSION>`、検証済み記録は
+`--audit --id <ID> --version <VERSION> --deep --record`。push成功だけでは検証済みにしない。
+過去revisionの版を保持し、`--restore --id <ID> --version <VERSION>`で別版も復元できる。
+KDPの単発・バッチは共有flowで送信版と保全済み必須5ファイルのSHA/容量を照合する。
+画面の既存「アップロード済み」だけを現行版の証拠にしない。同じセッションで検証済みEPUB/表紙の固定bytesを送信し、処理完了と最終read-backを確認する。公開直前に版とSHAを再照合し、送信証拠がなければ再投入する。これはPreviewer・本人による申告/公開承認を代替しない。
+
+無料P-13は総人口2024のPDF・PNG・CSV見本（Office非同梱）。生成時の固定先は
+`.claude/state/products/free-sample-delivery.json`に記録し、Coconalaの公開記録へ混ぜない。
+note無料原稿はこのpinだけを参照し、有料パックの添付を露出しない。
+Noto JPのPDFはフォント全体を埋め込む。subsetでは文字抽出が成功しても描画文字が欠けるため、
+`tests/free-sample.test.ts`で埋め込みバイトを検査し、生成後にはページ画像も確認する。
 
 ### 公開済み定型パックの納品物照合
 

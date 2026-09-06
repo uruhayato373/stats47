@@ -1,0 +1,396 @@
+{
+  "_meta": {
+    "rankingKey": "convenience-store-sales",
+    "year": 2025,
+    "source": "post-note-ranking",
+    "generatedAt": "2026-09-06T07:04:45.128Z"
+  },
+  "copy": {
+    "canonicalTitle": "コンビニエンスストア販売額",
+    "readerLabel": "コンビニエンスストア販売額",
+    "hook": "コンビニエンスストア販売額が最も多い県は？"
+  },
+  "summary": {
+    "mean": 22332.89,
+    "stddev": 27149.98,
+    "topBottomRatio": 39.8
+  },
+  "data": [
+    {
+      "rank": 1,
+      "area_code": "13000",
+      "area_name": "東京都",
+      "year": "2025",
+      "value": 155869,
+      "deviation": 99.2
+    },
+    {
+      "rank": 2,
+      "area_code": "27000",
+      "area_name": "大阪府",
+      "year": "2025",
+      "value": 76107,
+      "deviation": 69.8
+    },
+    {
+      "rank": 3,
+      "area_code": "14000",
+      "area_name": "神奈川県",
+      "year": "2025",
+      "value": 75506,
+      "deviation": 69.6
+    },
+    {
+      "rank": 4,
+      "area_code": "23000",
+      "area_name": "愛知県",
+      "year": "2025",
+      "value": 60685,
+      "deviation": 64.1
+    },
+    {
+      "rank": 5,
+      "area_code": "11000",
+      "area_name": "埼玉県",
+      "year": "2025",
+      "value": 56764,
+      "deviation": 62.7
+    },
+    {
+      "rank": 6,
+      "area_code": "12000",
+      "area_name": "千葉県",
+      "year": "2025",
+      "value": 54270,
+      "deviation": 61.8
+    },
+    {
+      "rank": 7,
+      "area_code": "01000",
+      "area_name": "北海道",
+      "year": "2025",
+      "value": 51986,
+      "deviation": 60.9
+    },
+    {
+      "rank": 8,
+      "area_code": "40000",
+      "area_name": "福岡県",
+      "year": "2025",
+      "value": 44853,
+      "deviation": 58.3
+    },
+    {
+      "rank": 9,
+      "area_code": "28000",
+      "area_name": "兵庫県",
+      "year": "2025",
+      "value": 36182,
+      "deviation": 55.1
+    },
+    {
+      "rank": 10,
+      "area_code": "22000",
+      "area_name": "静岡県",
+      "year": "2025",
+      "value": 29750,
+      "deviation": 52.7
+    },
+    {
+      "rank": 11,
+      "area_code": "08000",
+      "area_name": "茨城県",
+      "year": "2025",
+      "value": 25841,
+      "deviation": 51.3
+    },
+    {
+      "rank": 12,
+      "area_code": "34000",
+      "area_name": "広島県",
+      "year": "2025",
+      "value": 21577,
+      "deviation": 49.7
+    },
+    {
+      "rank": 13,
+      "area_code": "04000",
+      "area_name": "宮城県",
+      "year": "2025",
+      "value": 19902,
+      "deviation": 49.1
+    },
+    {
+      "rank": 14,
+      "area_code": "26000",
+      "area_name": "京都府",
+      "year": "2025",
+      "value": 19256,
+      "deviation": 48.9
+    },
+    {
+      "rank": 15,
+      "area_code": "09000",
+      "area_name": "栃木県",
+      "year": "2025",
+      "value": 17103,
+      "deviation": 48.1
+    },
+    {
+      "rank": 16,
+      "area_code": "07000",
+      "area_name": "福島県",
+      "year": "2025",
+      "value": 16832,
+      "deviation": 48
+    },
+    {
+      "rank": 17,
+      "area_code": "20000",
+      "area_name": "長野県",
+      "year": "2025",
+      "value": 16639,
+      "deviation": 47.9
+    },
+    {
+      "rank": 18,
+      "area_code": "10000",
+      "area_name": "群馬県",
+      "year": "2025",
+      "value": 15805,
+      "deviation": 47.6
+    },
+    {
+      "rank": 19,
+      "area_code": "15000",
+      "area_name": "新潟県",
+      "year": "2025",
+      "value": 14853,
+      "deviation": 47.2
+    },
+    {
+      "rank": 20,
+      "area_code": "43000",
+      "area_name": "熊本県",
+      "year": "2025",
+      "value": 14674,
+      "deviation": 47.2
+    },
+    {
+      "rank": 21,
+      "area_code": "47000",
+      "area_name": "沖縄県",
+      "year": "2025",
+      "value": 14377,
+      "deviation": 47.1
+    },
+    {
+      "rank": 22,
+      "area_code": "33000",
+      "area_name": "岡山県",
+      "year": "2025",
+      "value": 13979,
+      "deviation": 46.9
+    },
+    {
+      "rank": 23,
+      "area_code": "24000",
+      "area_name": "三重県",
+      "year": "2025",
+      "value": 13166,
+      "deviation": 46.6
+    },
+    {
+      "rank": 24,
+      "area_code": "21000",
+      "area_name": "岐阜県",
+      "year": "2025",
+      "value": 13045,
+      "deviation": 46.6
+    },
+    {
+      "rank": 25,
+      "area_code": "46000",
+      "area_name": "鹿児島県",
+      "year": "2025",
+      "value": 11770,
+      "deviation": 46.1
+    },
+    {
+      "rank": 26,
+      "area_code": "35000",
+      "area_name": "山口県",
+      "year": "2025",
+      "value": 10009,
+      "deviation": 45.5
+    },
+    {
+      "rank": 27,
+      "area_code": "42000",
+      "area_name": "長崎県",
+      "year": "2025",
+      "value": 9752,
+      "deviation": 45.4
+    },
+    {
+      "rank": 28,
+      "area_code": "25000",
+      "area_name": "滋賀県",
+      "year": "2025",
+      "value": 9437,
+      "deviation": 45.3
+    },
+    {
+      "rank": 29,
+      "area_code": "44000",
+      "area_name": "大分県",
+      "year": "2025",
+      "value": 9032,
+      "deviation": 45.1
+    },
+    {
+      "rank": 30,
+      "area_code": "38000",
+      "area_name": "愛媛県",
+      "year": "2025",
+      "value": 8772,
+      "deviation": 45
+    },
+    {
+      "rank": 31,
+      "area_code": "02000",
+      "area_name": "青森県",
+      "year": "2025",
+      "value": 8757,
+      "deviation": 45
+    },
+    {
+      "rank": 32,
+      "area_code": "03000",
+      "area_name": "岩手県",
+      "year": "2025",
+      "value": 8492,
+      "deviation": 44.9
+    },
+    {
+      "rank": 33,
+      "area_code": "45000",
+      "area_name": "宮崎県",
+      "year": "2025",
+      "value": 8319,
+      "deviation": 44.8
+    },
+    {
+      "rank": 34,
+      "area_code": "19000",
+      "area_name": "山梨県",
+      "year": "2025",
+      "value": 8020,
+      "deviation": 44.7
+    },
+    {
+      "rank": 35,
+      "area_code": "17000",
+      "area_name": "石川県",
+      "year": "2025",
+      "value": 7961,
+      "deviation": 44.7
+    },
+    {
+      "rank": 36,
+      "area_code": "29000",
+      "area_name": "奈良県",
+      "year": "2025",
+      "value": 7627,
+      "deviation": 44.6
+    },
+    {
+      "rank": 37,
+      "area_code": "06000",
+      "area_name": "山形県",
+      "year": "2025",
+      "value": 7103,
+      "deviation": 44.4
+    },
+    {
+      "rank": 38,
+      "area_code": "16000",
+      "area_name": "富山県",
+      "year": "2025",
+      "value": 7060,
+      "deviation": 44.4
+    },
+    {
+      "rank": 39,
+      "area_code": "41000",
+      "area_name": "佐賀県",
+      "year": "2025",
+      "value": 6819,
+      "deviation": 44.3
+    },
+    {
+      "rank": 40,
+      "area_code": "37000",
+      "area_name": "香川県",
+      "year": "2025",
+      "value": 6357,
+      "deviation": 44.1
+    },
+    {
+      "rank": 41,
+      "area_code": "05000",
+      "area_name": "秋田県",
+      "year": "2025",
+      "value": 6247,
+      "deviation": 44.1
+    },
+    {
+      "rank": 42,
+      "area_code": "30000",
+      "area_name": "和歌山県",
+      "year": "2025",
+      "value": 5959,
+      "deviation": 44
+    },
+    {
+      "rank": 43,
+      "area_code": "18000",
+      "area_name": "福井県",
+      "year": "2025",
+      "value": 5128,
+      "deviation": 43.7
+    },
+    {
+      "rank": 44,
+      "area_code": "36000",
+      "area_name": "徳島県",
+      "year": "2025",
+      "value": 4875,
+      "deviation": 43.6
+    },
+    {
+      "rank": 45,
+      "area_code": "39000",
+      "area_name": "高知県",
+      "year": "2025",
+      "value": 4795,
+      "deviation": 43.5
+    },
+    {
+      "rank": 46,
+      "area_code": "32000",
+      "area_name": "島根県",
+      "year": "2025",
+      "value": 4422,
+      "deviation": 43.4
+    },
+    {
+      "rank": 47,
+      "area_code": "31000",
+      "area_name": "鳥取県",
+      "year": "2025",
+      "value": 3912,
+      "deviation": 43.2
+    }
+  ]
+}

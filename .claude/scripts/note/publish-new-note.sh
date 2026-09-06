@@ -14,6 +14,46 @@ J="/tmp/note-data-$SLUG.json"
 ADIR="$ROOT/docs/31_note記事原稿/$VERT/$SLUG"
 [ -d "$ADIR" ] || ADIR="$ROOT/docs/31_note記事原稿/$SLUG"
 BU(){ browser-use --headed --profile "Profile 5" "$@"; }
+
+LOCK_DIR="${TMPDIR:-/tmp}/stats47-note-profile5.lock"
+acquire_note_profile_lock(){
+  if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+    local holder=""
+    [ -f "$LOCK_DIR/pid" ] && holder=$(sed -n '1p' "$LOCK_DIR/pid")
+    if [[ "$holder" =~ ^[0-9]+$ ]] && kill -0 "$holder" 2>/dev/null; then
+      echo "FAIL Profile 5 is already in use by publish-new-note.sh (pid=$holder)"
+      exit 75
+    fi
+    rm -rf -- "$LOCK_DIR"
+    mkdir "$LOCK_DIR" || { echo "FAIL cannot acquire Profile 5 lock"; exit 75; }
+  fi
+  printf '%s\n' "$$" > "$LOCK_DIR/pid"
+}
+cleanup_note_browser(){
+  trap - EXIT INT TERM
+  BU close >/dev/null 2>&1 || true
+  pkill -TERM -f "browser_use.skill_cli.daemon" 2>/dev/null || true
+  sleep 1
+  pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null || true
+  pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null || true
+  ps -Axo pid,command | grep "browser-use-user-data-dir" | grep -v grep \
+    | awk '{print $1}' | xargs -n1 kill -9 2>/dev/null || true
+  find "${TMPDIR:-/tmp}" -maxdepth 1 -type d -name 'browser-use-user-data-dir-*' \
+    -exec rm -rf -- {} + 2>/dev/null || true
+  osascript -e 'tell application "Google Chrome"
+    repeat with w in windows
+      repeat with t in tabs of w
+        if URL of t contains "editor.note.com" then close t
+      end repeat
+    end repeat
+  end tell' 2>/dev/null || true
+  rm -rf -- "$LOCK_DIR"
+}
+if [ "${NOTE_PROFILE_LOCK_HELD:-0}" != "1" ]; then
+  acquire_note_profile_lock
+  trap cleanup_note_browser EXIT INT TERM
+fi
+
 source "$ROOT/.claude/scripts/note/editor-helpers.sh" >/dev/null 2>&1
 TITLE=$(node -e "process.stdout.write(require('$J').title)")
 
@@ -69,7 +109,7 @@ if [ "$NIMG" -gt 0 ]; then
   for i in $(seq 0 $((NIMG-1))); do
     FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')
     HEAD=$(jq -r ".imgRefs[$i].afterHeading" "$J")
-    ins_img "$HEAD" "$ADIR/images/$FILE"
+    ins_img "$HEAD" "$ADIR/images/$FILE" || { echo "FAIL image insert: $FILE"; exit 1; }
   done
 fi
 
@@ -83,6 +123,8 @@ fi
 echo "[5.8] 下書き保存 + screenshot ..."
 BU state 2>&1 > /tmp/ns.txt
 SAVE=$(grep -oE '\[[0-9]+\]<button[^>]*>下書き保存|\[[0-9]+\]<button aria-label=下書き保存' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
+# state 出力は <button id=:ra: /> と ラベルが別行になる形式があるため awk で補完する
+[ -z "$SAVE" ] && SAVE=$(awk '/下書き保存/{print prev; exit} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | head -1)
 [ -n "$SAVE" ] && { BU click "$SAVE" >/dev/null 2>&1; sleep 3; echo "    下書き保存 clicked (btn=$SAVE)"; } || echo "    [WARN] 下書き保存ボタン未検出 (自動保存に依存)"
 BU screenshot "/tmp/note-new-$SLUG.png" >/dev/null 2>&1 || BU state 2>&1 | head -40 > /tmp/note-new-$SLUG.txt
 echo "    screenshot: /tmp/note-new-$SLUG.png"
@@ -93,7 +135,7 @@ echo "[6] 公開に進む → 価格/タグ → 公開ライン ..."
 BU state 2>&1 > /tmp/ns.txt
 GO=$(grep -oE '\[[0-9]+\]<button[^>]*>公開に進む|\[[0-9]+\]<button aria-label=公開に進む' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
 [ -z "$GO" ] && GO=$(awk '/公開に進む/{print prev} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | tail -1)
-[ -n "$GO" ] && { BU click "$GO" >/dev/null 2>&1; sleep 3; } || echo "    [WARN] 公開に進む 未検出"
+[ -n "$GO" ] && { BU click "$GO" >/dev/null 2>&1; sleep 3; } || { echo "FAIL 公開に進む 未検出"; exit 1; }
 IS_PAID=$(jq -r '.isPaid' "$J")
 PRICE=$(jq -r '.priceJpy' "$J")
 if [ "$IS_PAID" = "true" ]; then
@@ -108,7 +150,9 @@ fi
 # タグ
 TAGS=$(head -99 "$ADIR/hashtags.txt" 2>/dev/null | tr '\n' ' ')
 [ -n "$TAGS" ] && new_post_tags "$TAGS"
-[ -n "$MAGAZINE" ] && new_post_magazine "$MAGAZINE"
+[ -n "$MAGAZINE" ] && new_post_magazine "$MAGAZINE" || {
+  [ -z "$MAGAZINE" ] || { echo "FAIL magazine assignment: $MAGAZINE"; exit 1; }
+}
 # 公開ライン
 if [ "$IS_PAID" = "true" ]; then
   PAID_HEAD=$(jq -r '.segmentsPaid[0].content' "$J" | head -1 | sed 's/^#* *//')
@@ -134,7 +178,36 @@ fi
 BU state 2>&1 > /tmp/ns.txt
 POST=$(grep -oE '\[[0-9]+\]<button[^>]*>投稿する|\[[0-9]+\]<button[^>]*>今すぐ公開' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
 [ -z "$POST" ] && POST=$(awk '/^\t+投稿する$|^\t+今すぐ公開$/{print prev} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | head -1)
-[ -n "$POST" ] && { BU click "$POST" >/dev/null 2>&1; sleep 5; echo "    投稿する clicked"; } || echo "    [WARN] 投稿する 未検出"
+[ -n "$POST" ] && { BU click "$POST" >/dev/null 2>&1; sleep 5; echo "    投稿する clicked"; } || { echo "FAIL 投稿する 未検出"; exit 1; }
 BU screenshot "/tmp/note-published-$SLUG.png" >/dev/null 2>&1
-BU eval "location.href" 2>&1 | grep -oE 'https://note.com/[^ ]+' | head -1
+NOTE_KEY=$(BU eval "location.pathname.match(/\\/notes\\/(n[0-9a-f]+)\\//)?.[1]||''" 2>&1 | grep -oE 'n[0-9a-f]+' | head -1)
+[ -n "$NOTE_KEY" ] || { echo "FAIL published note key not found"; exit 1; }
+EXPECTED_EMBEDS=$(( $(jq -r '.urlCount' "$J") + NIMG ))
+EXPECTED_PRICE=0
+[ "$IS_PAID" = "true" ] && EXPECTED_PRICE="$PRICE"
+NOTE_KEY="$NOTE_KEY" EXPECTED_TITLE="$TITLE" EXPECTED_PRICE="$EXPECTED_PRICE" EXPECTED_EMBEDS="$EXPECTED_EMBEDS" node - <<'NODE'
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+let note;
+for (let attempt = 1; attempt <= 5; attempt += 1) {
+  const response = await fetch(`https://note.com/api/v3/notes/${process.env.NOTE_KEY}?ts=${Date.now()}`);
+  if (response.ok) note = (await response.json()).data;
+  if (note?.status === 'published') break;
+  await sleep(attempt * 700);
+}
+const embedded = (note?.body || '').match(/<figure\b/g)?.length || 0;
+const checks = {
+  account: note?.user?.urlname === 'stats47',
+  status: note?.status === 'published',
+  title: note?.name === process.env.EXPECTED_TITLE,
+  price: Number(note?.price || 0) === Number(process.env.EXPECTED_PRICE),
+  hashtags: (note?.hashtag_notes?.length || 0) >= 95,
+  embedded: embedded === Number(process.env.EXPECTED_EMBEDS),
+};
+console.log(`    verify: ${process.env.NOTE_KEY} tags=${note?.hashtag_notes?.length || 0} embedded=${embedded}`);
+if (Object.values(checks).some((ok) => !ok)) {
+  console.error(`FAIL published API verification: ${JSON.stringify(checks)}`);
+  process.exit(1);
+}
+NODE
+echo "https://note.com/stats47/n/$NOTE_KEY"
 echo "done"

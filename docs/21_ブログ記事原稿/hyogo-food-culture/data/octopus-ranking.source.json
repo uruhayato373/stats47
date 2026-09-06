@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "octopus-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "たこ消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/octopus-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug hyogo-food-culture --keys octopus-consumption-expenditure --data-name octopus-ranking",
+  "fetchedAt": "2026-09-05T16:11:51.236Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

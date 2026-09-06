@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "natto-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "納豆消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/natto-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ibaraki-food-culture --keys natto-consumption-expenditure --data-name natto-ranking",
+  "fetchedAt": "2026-09-05T11:17:36.549Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

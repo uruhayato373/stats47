@@ -44,6 +44,7 @@
     "products:kindle:verify-epub": "tsx scripts/verify-epub.mts",
     "products:kindle:audit-facts": "tsx scripts/audit-book-facts.mts",
     "products:kindle:kdp-listings": "tsx src/channels/kindle/export-kdp-listings.ts",
+    "products:sales": "tsx src/sales/cli.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"

@@ -15,12 +15,8 @@ import {
 } from "./state-io";
 
 /**
- * 収益。**実測できるのは AdSense だけ**で、他チャネルは計測経路が無い。
- *
- * ★「未計測」を「0 円」として出さない。A8 の成果 state は未作成
- *   (`.claude/state/metrics/affiliate/` が存在しない)、KDP は 32 冊すべて asin が
- *   null で売上経路が無く、ココナラは手動確認。ここで 0 のカードを並べると
- *   「収益ゼロ」と読めてしまい、実態 (そもそも測っていない) と食い違う。
+ * 収益。★「未計測」を「0 円」として出さない。
+ * 商品売上は証拠ファイルのsha256を持つ sales-ledger.json だけを実測として扱う。
  */
 
 const ADSENSE = ".claude/state/metrics/adsense";
@@ -33,16 +29,34 @@ export interface RevenueChannel {
 }
 
 /** 計測範囲。画面の冒頭バナーで必ず出す */
-export const REVENUE_COVERAGE: RevenueChannel[] = [
-  { channel: "AdSense", state: "measured", note: "週次 CSV (history.csv ほか 5 種)" },
-  {
-    channel: "アフィリエイト",
-    state: "unmeasured",
-    note: "成果 state 未作成。GA4 の impressions / clicks は表示指標であって売上ではない",
-  },
-  { channel: "Kindle (KDP)", state: "unmeasured", note: "32 冊すべて asin が null。売上取得経路なし" },
-  { channel: "ココナラ", state: "unmeasured", note: "手動確認のみ" },
-];
+interface ProductSalesObservation {
+  id: string;
+  channel: "kdp" | "coconala";
+  productId: string;
+  periodStart: string;
+  periodEnd: string;
+  orders: number;
+  units: number;
+  netRevenueYen: number;
+  refunds: number;
+  kenpRead?: number;
+  evidencePath: string;
+  evidenceSha256: string;
+  recordedAt: string;
+}
+
+interface ProductSalesLedger {
+  schemaVersion: 1;
+  observations: ProductSalesObservation[];
+}
+
+export interface ProductSalesSummary {
+  observations: ProductSalesObservation[];
+  netRevenueYen: number;
+  orders: number;
+  units: number;
+  latestPeriodEnd: string | null;
+}
 
 export interface AdsenseWeek {
   week: string;
@@ -69,6 +83,7 @@ export interface RevenueSummary {
   latestMd: Wrapped<string>;
   impactMd: Wrapped<string>;
   candidates: Wrapped<{ week: string | null; candidates: Array<Record<string, unknown>> }>;
+  productSales: Wrapped<ProductSalesSummary>;
   coverage: RevenueChannel[];
 }
 
@@ -132,14 +147,86 @@ function readCandidates(): RevenueSummary["candidates"] {
   });
 }
 
+function readProductSales(): RevenueSummary["productSales"] {
+  return wrap(() => {
+    const ledger = readJson<ProductSalesLedger>(
+      ".claude/state/products/sales-ledger.json",
+    );
+    if (ledger.schemaVersion !== 1 || !Array.isArray(ledger.observations)) {
+      throw new Error("sales-ledger.json のschemaが不正");
+    }
+    const observations = [...ledger.observations].sort((a, b) =>
+      b.periodEnd.localeCompare(a.periodEnd),
+    );
+    return {
+      observations,
+      netRevenueYen: observations.reduce((sum, row) => sum + row.netRevenueYen, 0),
+      orders: observations.reduce((sum, row) => sum + row.orders, 0),
+      units: observations.reduce((sum, row) => sum + row.units, 0),
+      latestPeriodEnd: observations[0]?.periodEnd ?? null,
+    };
+  });
+}
+
+function readPublishedCounts(): { kindle: number; coconala: number } {
+  const kdp = readJson<{
+    listings: Record<string, { kdpStatus?: string; asin?: string | null }>;
+  }>(".claude/config/kdp-listings.json");
+  const coconala = readJson<{
+    listings: Record<string, { status?: string; serviceUrl?: string | null }>;
+  }>(".claude/config/coconala-listings.json");
+  return {
+    kindle: Object.values(kdp.listings).filter(
+      (row) => row.kdpStatus === "live" && Boolean(row.asin),
+    ).length,
+    coconala: Object.values(coconala.listings).filter(
+      (row) => row.status === "listed" && Boolean(row.serviceUrl),
+    ).length,
+  };
+}
+
+function revenueCoverage(
+  productSales: RevenueSummary["productSales"],
+): RevenueChannel[] {
+  const counts = wrap(readPublishedCounts);
+  const observations = "error" in productSales ? [] : productSales.observations;
+  const kindlePeriods = observations.filter((row) => row.channel === "kdp").length;
+  const coconalaPeriods = observations.filter((row) => row.channel === "coconala").length;
+  const kindleCount = "error" in counts ? "?" : String(counts.kindle);
+  const coconalaCount = "error" in counts ? "?" : String(counts.coconala);
+
+  return [
+    { channel: "AdSense", state: "measured", note: "週次 CSV (history.csv ほか 5 種)" },
+    {
+      channel: "アフィリエイト",
+      state: "unmeasured",
+      note: "成果 state 未作成。GA4 の表示・クリックは売上ではない",
+    },
+    {
+      channel: "Kindle (KDP)",
+      state: kindlePeriods > 0 ? "measured" : "unmeasured",
+      note: `${kindleCount}冊販売中・証拠付き販売期間 ${kindlePeriods}件`,
+    },
+    {
+      channel: "ココナラ",
+      state: coconalaPeriods > 0 ? "measured" : "unmeasured",
+      note: `${coconalaCount}商品公開中・証拠付き販売期間 ${coconalaPeriods}件`,
+    },
+  ];
+}
+
 export function revenueSummary(): RevenueSummary {
   // 週次更新なので 60 秒で読み直しても意味がない
-  return cached("revenue", TTL.weekly, () => ({
-    adsense: readAdsense(),
-    breakdowns: readBreakdowns(),
-    latestMd: readMd(`${ADSENSE}/LATEST.md`),
-    impactMd: readMd(`${ADSENSE}/impact-LATEST.md`),
-    candidates: readCandidates(),
-    coverage: REVENUE_COVERAGE,
-  }));
+  return cached("revenue", TTL.weekly, () => {
+    const productSales = readProductSales();
+    return {
+      adsense: readAdsense(),
+      breakdowns: readBreakdowns(),
+      latestMd: readMd(`${ADSENSE}/LATEST.md`),
+      impactMd: readMd(`${ADSENSE}/impact-LATEST.md`),
+      candidates: readCandidates(),
+      productSales,
+      coverage: revenueCoverage(productSales),
+    };
+  });
 }

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "snack-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "スナック菓子消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/snack-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug saga-food-culture --keys snack-consumption-expenditure --data-name snack-ranking",
+  "fetchedAt": "2026-07-10T22:24:20.733Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

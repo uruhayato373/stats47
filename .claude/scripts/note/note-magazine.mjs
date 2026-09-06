@@ -174,6 +174,21 @@ async function fetchNoteIdMap(ctx) {
   }
   return map;
 }
+async function fetchOwnedPublishedNoteId(ctx, noteKey) {
+  const r = await ctx.request.get(`https://note.com/api/v3/notes/${noteKey}?ts=${Date.now()}`, {
+    headers: { "User-Agent": UA },
+  });
+  if (r.status() !== 200) return null;
+  const j = await r.json().catch(() => ({}));
+  const note = j?.data;
+  if (
+    note?.key !== noteKey ||
+    note?.status !== "published" ||
+    note?.user?.urlname !== "stats47" ||
+    !Number.isInteger(note?.id)
+  ) return null;
+  return note.id;
+}
 async function fetchMemberKeys(ctx, magNoteKey) {
   const keys = new Set();
   for (let p = 1; p <= 60; p++) {
@@ -215,6 +230,7 @@ async function cmdAddArticles() {
         const nk = noteKeyOf(a.noteUrl);
         if (!nk) continue;
         if (current.has(nk)) continue; // 既にメンバー
+        if (!idMap[nk]) idMap[nk] = await fetchOwnedPublishedNoteId(ctx, nk);
         if (!idMap[nk]) { noId.push(a); continue; } // note_id 不明 (下書き等)
         toAdd.push({ ...a, nk });
       }

@@ -4,6 +4,8 @@ import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
 import type { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: '2050年人口増減率ランキングへ移動',
   alternates: { canonical: POPULATION_BASELINE_RANKING_PATH },

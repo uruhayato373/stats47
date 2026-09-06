@@ -50,14 +50,14 @@ export const KDP_AUTHOR = {
 export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
   // ── S1 論点読み物 ──────────────────────────────────────────────
   "K-S1-01": {
-    titleKana: "ジッシツテドリノチズ スムケンデカワル クラシノオカネ",
-    titleRomaji: "Jisshitsu Tedori no Chizu - Sumu Ken de Kawaru Kurashi no Okane",
-    subtitleKana: "ネンシュウランキングデハミエナイヨンジュウナナトドウフケンノカケイ",
-    subtitleRomaji: "Nenshu Ranking dewa Mienai 47 Todofuken no Kakei",
+    titleKana: "ショトクトシシュツノチイキサ カケイトウケイヲヒカクスルマエニ",
+    titleRomaji: "Shotoku to Shishutsu no Chiikisa - Kakei Tokei wo Hikaku Suru Mae ni",
+    subtitleKana: "タイショウセタイ ネンジ ブンボカラヨミナオスチイキノスウジ",
+    subtitleRomaji: "Taisho Setai Nenji Bunbo kara Yominaosu Chiiki no Suji",
   },
   "K-S1-02": {
-    titleKana: "ショウヒリョウニホンイチノショクタク カケイチョウサデヨムヨンジュウナナトドウフケンノショク",
-    titleRomaji: "Shohiryo Nihonichi no Shokutaku - Kakei Chosa de Yomu 47 Todofuken no Shoku",
+    titleKana: "ショクタクノシシュツトコウニュウスウリョウ カケイチョウサノチイキサヲヨム",
+    titleRomaji: "Shokutaku no Shishutsu to Konyu Suryo - Kakei Chosa no Chiikisa wo Yomu",
   },
   "K-S1-03": {
     titleKana: "ジンコウゲンショウトセタイノチズ ミコン タンシン トウキョウシュウチュウ",
@@ -80,12 +80,12 @@ export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
     titleRomaji: "Kanko to Inbound no Chizu - Shukuhaku Kokuseki Kaifuku",
   },
   "K-S1-08": {
-    titleKana: "エネルギートインフラノチズ デンリョク サイエネ スイドウ",
-    titleRomaji: "Energy to Infra no Chizu - Denryoku Saiene Suido",
+    titleKana: "エネルギートインフラノチズ デンリョク サイエネ ガス",
+    titleRomaji: "Energy to Infra no Chizu - Denryoku Saiene Gas",
   },
   "K-S1-09": {
-    titleKana: "サンギョウトチイキケイザイノチズ セイゾウ チュウショウ ノウリン",
-    titleRomaji: "Sangyo to Chiiki Keizai no Chizu - Seizo Chusho Norin",
+    titleKana: "サンギョウトチイキケイザイノチズ セイゾウ チュウショウ チカ",
+    titleRomaji: "Sangyo to Chiiki Keizai no Chizu - Seizo Chusho Chika",
   },
   "K-S1-10": {
     titleKana: "アンゼントカンキョウノチズ ハンザイ ロウサイ コウガイ ボウサイ",

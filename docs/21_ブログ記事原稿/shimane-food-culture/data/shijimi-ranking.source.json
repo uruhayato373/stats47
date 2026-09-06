@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "freshwater-clam-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "しじみ消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/freshwater-clam-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug shimane-food-culture --keys freshwater-clam-consumption-expenditure --data-name shijimi-ranking",
+  "fetchedAt": "2026-09-05T16:16:17.443Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

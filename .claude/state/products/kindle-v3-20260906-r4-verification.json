@@ -1,0 +1,4398 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T11:17:00.749Z",
+  "version": "v3-20260906-r4",
+  "epubcheckExecuted": true,
+  "books": 32,
+  "totalErrors": 0,
+  "report": [
+    {
+      "id": "K-S1-01",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-01/v3-20260906-r4/book.epub",
+      "epubSha256": "4d337777c6dafb628fdaf1cf4f849931a1fad5455e1ab4232ca44111b5bb85d4",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "268440af6b52158355d857e930275bc6c3417f1189403c3f421c0ffbd2bf0feb"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "65f9bea0e24b9e0c2a3f4c72ca1ce0cf020ab0345c2aa5a1fb0f7ad5fdd3ff6e"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "874ebb797430724a1ea5bd31e3fba2ef4f1779562f0cd1d6d71062a4de42c5d9"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "16e9a83a594f8b70cc7d31f0b06cd0f3740bfc457e4e4af9c0a7456033debf96"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "beb08cb57d8b6d209ef41ea710ff55da78aa7fe3ea970cbc558875ed8e5140ba"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "ffb1e150fdcbc2fbb9913f5c4876d76eadc8183da1c64afe968faf245f429b68"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "4c0e07b800e14302d29e4cb03c4ce3c399ba38b4986f89b8bdedc8324848764f"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "97cf697f85fb1469525f4c40ac4ac3f958d193c97c80c1ce6314e672d150c062"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "04ad1b1eb50ade43d0677c010c5cbd4f14af2fdda993585b90cce14cbdd73755"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "f4821529a3895b63efad8417108a6ba151a8d4b16ada55829fd373172ece8f22"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "9b9e140720cd1846c9807f9e232c8885ae5d4309f96b2d1b6fb18452d97976da"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "2d0b3a210cc0600a01f38ef5c7f0252a5c87fd38678cb6389b9f1ee2f1af93b4"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "20fefd83cd7ffda8cad4bbdc697d3563cdc8b150be0d2b79f224818b1d74bc55"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "ce92194d04a03e2b71424f496ab6447ea9690c903ab033ce141a297f410accd4"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "f79ecbd55050a4e79e5f9d849ccbebc0100241709b40ae8f343d83c4a5a08c82"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-02",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-02/v3-20260906-r4/book.epub",
+      "epubSha256": "ca02a5fd12e06bd3df4a1b88fb64159aeacdb565a9221601f5b6d8c4c5af1d3b",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "90ce781d0dfcfacfdd41ed72630a168ebc9f932e0e9e3459a00667534340c2ca"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "95215e78c156be8fdbadb2dfeacb252ce3e132e01facb8d66499c1c40f5512d3"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "8aea5560022563e9e80e6ba691f27745f1aecc07c8c1b2f375afb64938da47b6"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "5d10712eb43c254854a29adb4781ed8baafa0d95dea92525964ecd86e2f752ea"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "343b48d678ae6bbda92b2036eb955571d2f861a2dae6e82993c32778d53034b9"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "f6e22c8e3a2177c7189bd5f04b22b7264368b5a585ccea021ec121ce9dc2dfde"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "cad9d3b188d24e83939362734eac2d328ff98c3ce4868b8ee6d82fdba2487df2"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "dc46789c3420e2f2056ab2e3d80dfb1fffbf816dc9e7a1569b912a4634a2caff"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "31d1286ce85443c5eef4733697db6ce252815db8aa3317780128491b7c9e8965"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "8fa597dec3d0dd2b3def1284237b90af0e7237a776e0d124cb9db71ae503c970"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-03",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-03/v3-20260906-r4/book.epub",
+      "epubSha256": "bc6903f68763ebe9998f9ce13bf05a4a638e03e323a8055cb639e5cb41e3f681",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "44acbc32c063c28be441262c592fd324a51bb2a25752c241becce9b151f647d2"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "29147c78b771e207802648d99833cf057529d1ae9752b8d8c3f99aa8dbb03071"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "63adc6ac4dc81417ff86176ac8d5321777c2342d425c6dfee6b3809554eefcb2"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "0de0cfcaa32318ebccd1cc39197fa7165ab8dd39422ca9e60420f27e5f4d1b8d"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "8a0949369b8285cc4c3fc027ae056546d5d992a4c7f45afbba9af443f39328bc"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "69b97ddb37a5b3bd83aa9fa7c20fe50a9215d1bbb2856273e4381e49c5d3fa59"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "598fb8ab31bdea44ad9f0372697f3aba48f9ee3b9d518dc3e1d8ffcfc465f2b8"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "1c4e9c0da166c73f4af09e9d667c0695ca71f9f041c50d1c9d6ba41e477d0dbc"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "92a6cac64487467a4c482d77433189b32ef42cb07ccb63b37d8e3160a1db3287"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "1e0301638baa06d1d0195cab30fa20774cd684a443c728097739e287b456e209"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-04",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-04/v3-20260906-r4/book.epub",
+      "epubSha256": "797ca1e0c5fe665658436594942d0e3970a10992a95be8e1b5b840a0f971d7be",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "fb070d36d5e36ca6d3cd38b9c45a81814be204cedf369b8cd0fe02c4d0a84766"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "780cdb83dbc8d33a0032c8cbdeaf468819b7d618b4573faa504b3a48e9cc67d2"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "70be9fc023ef72eaf4e27c427ff3b08548e0102a078edd505bbc91ff2170e551"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "c0cb82f9c7e13073c04674e008609620f55a16aee7d850d42cff9069acfa77b2"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "24c98cdbeaedd2cdae82836d9054361f19f8f7ee9fc09b345052e9326db12305"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "921b50c2ce29dd819148d120c6a527260f85badd7a3cf4dd0ba706a63d18f82a"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "87592095f9a6a4c9ed04ef41245a1d78c6a60322d4253a69a45d2fb5a6f7242f"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "b23fb449f314c72cf20540ddf0e5418887a32d5004e18f422a4e9b01038bf07d"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "2d99ddf43858e40b64038a3adb478a6827a548d2455d78e409cf65971ae89136"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "bc6852371a00a0e564b7a61db555c5dd99c767b2f0430326407d0f41fb9d4b65"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-05",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-05/v3-20260906-r4/book.epub",
+      "epubSha256": "827744a46d764d671fb11f15707b5dcea3a61431394e03578ee3572ec3f644e3",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "23fb7bdbf51e48017f9ffbe6ca7d45bc242c5c27e34d3ed1fe2e5c84b7a33957"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "ac823a6866d9850bf89fa7e73526934719f5eefa31fc27887f6486b5ad661279"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "b857e44036199df383064518e910f280f0dd842380ed605b89ed5446fe81483e"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "849a7b5ea55fa899cbea10fff343a0293b2809a810065dac2743f3c4ee7c49d5"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "4e81a94f861c9c654037fc0c09fd5d7d0af70ec72e1721ea07f8b0d7593a1c59"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "11c07b014a3aa3648e2bc389c0c56261d63d2a002c1025d93faf725ccd3389a8"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "48a77e8d183fe5be4d54232576162d41efced2bd32f787744038356909d5d52e"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "244e52b2d692c6761c638e154fd511db5cefd9422f5274ef9c0b288d08c62f58"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "67541dfd853306e401139049f7fc7d898d10386b13540e7c172548f351aa48ba"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "1dddc54f944dfbfe1fa3f1bba0851a74713a000e160d89c91e65f698762ab6c5"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-06",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-06/v3-20260906-r4/book.epub",
+      "epubSha256": "7566189c4cfb44e0cd6fab658c28bf5f2d6099c0b2a8205028f077f5abd57a97",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "9b26fb0d3701106c58316f73607c8eddba879f9ae30971a268fb1af2a84453c9"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "b840b876ebbd3b1fd1c318d6f8acb0262c0346ba9923e676c6fd0fec49e26194"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "715ff1ce3538ff01af1f5c09b6ecae2b121b909be10c32b67fb08dbbd27a4dfb"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "18e98a70dbf9dc13466b56f513e8d880d0d731678593eee3ccb7fbdf16a5af39"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "3a07534c2ce22a446fa7e43ec9c7c87be3a60faed7c8aea28414abfac518a22c"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "f338a098006d27355143ea2dc5e19ebfc4ae1b7650531c84b59fd1b130a36694"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "fa0994c1c65a837542bf8036615acc1a43d333a35ad8666e902b7d3ea61cabee"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "4c620210e059b38b23dda8a51f0a697a4a3dcfb92b4610d05270ee592aef1706"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "9aa81ef5eefd23e41fea04fa4c85ce687d469659ab5e627734bfeb65f990a003"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "0aa0770fd9033a696fa5273f0d49a18da2c4f28de685ec593ccc3909ec829be9"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-07",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-07/v3-20260906-r4/book.epub",
+      "epubSha256": "43435ddacd1511b48b3883118e16da3cc37f0e913270a77c235093b157732c61",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "44dd2f2dd78e016ed2c33ef08a9089527f57cbcf8c12b8e1a1efd731bd41f79f"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "8a1a0f119dfe13da5b745303cdf0be00b1e5feeb49b124ad180c9cc6b3399572"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "38ff28eb3396ecb07c4d08b9dd8ff7b6271f314929dd507e2a981f32af2e1fa8"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "76fccc7343d9da04c36244fbb9c1f6afa4c31f0f27fe68e7811f147db6153d20"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "c2df96f2cc76183706fd4a5951dbe9410ba6f77a397be07094e8caeffc7dde0a"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "4d91d934d9b98186f1b791cb36e47d1e8a75ab033437a64dff3e909de157252a"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "cea211840d51478f44b3c0c00706ae9aa874ddc72ab044c30fb348921268819e"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "1e8902d8c8c27785fe4b7f9c6b866e40c91e0251b5a08cfea121f4cd4c93e21a"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "a45e1feb7ebaf40d7f5b025ba4345b4cadfb4cd448787b05dfe87ddd0e39b810"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "45c610a76df302d7047e310735e55179ec1f6ee8f84d30885d361cfcfc9014ed"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-08",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-08/v3-20260906-r4/book.epub",
+      "epubSha256": "8b6bea4df2f09082104a3e439c65ad8cac2f63813dff75a2448318486791e6bf",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "cad7d4eb061d1e9a5eba46bf37b79aab7f513b8da1c575527561d88d9331475e"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "97a01329e6abb0527457d87019ec62ea1960c403f3fc97efa81ed3089312fb8e"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "254e0ec1cfa08c2076140401f2837a5691265692a8d228f45ae96f5531d49eee"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "05d8365e69372e782f1bbc232a9eb1e21cb9b4f6057f721df5a5eefc822b3c8a"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "681f6279b81c0900059f03a707d0e56d2b71b51105c7342b2e5848b84c5d5a2f"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "5467741ae05f592af370a10d7d0a8687af7eb7723dd5c70f4f999e2aebeaa90d"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "2479cd6b0463bfbe7bc35e30a998878a2532c2f9bdc796b4a3be3151ec4c34e7"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "ac75d76b4e92667b146b771b083082e6639acf5216ae725c8666dfc6f054f98a"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "3bce06d281d8e819cc3c79a23030476457c3feab7c9384c1f0665a3bd52027ee"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "48a0bfb454f6117a1b947f73f0353bb80882a3d2ef9ffe16ab68a258e7983d17"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-09",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-09/v3-20260906-r4/book.epub",
+      "epubSha256": "772b571313e0610457204f6271eaebd491791cd44a47977dbcffdb364d9339d7",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "62f215f66658905441e4a446de8f30ecb0c11e01f84e24c8f245f4e7bc97d45d"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "283d716d15b013a4352e1e8b3b1ebeedd09b5255f5d5de2707e9ea9b7c45a44c"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "8fdc39f9f802d6c39659b1f9b5867813ecafe4659c968f1e91bc7e3057ae3327"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "41bf6ccd098c95502eb3d1a7d64aaa0b0a2accbd01aae836ae93af5e847d234f"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "60bfc3d3af8525735823010c044c7e29407aad18329db95ac1506d033b001081"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "10444ab44814bf4780bd1f146bf25eaa90c02d0e0cbc214bd80ea0e3d4e1de2c"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "2958b2b592f9168a6fb3a6543392ab5e68288e58e616a8c4ee20acce6613b1d4"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "5cfa4dba3ed4574fb219009c6a81aae6f50e8f79236cae765eeb54dca62a68f3"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "95aa3d4d6666a2719bc6fe4d9184e29685f1192deaae4355aa17e47d91938f39"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "290e6ad7c0a0f34f30c180aeeb6bd6303eb7a081e75bec31f4faace02f90e0b7"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-10",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-10/v3-20260906-r4/book.epub",
+      "epubSha256": "cc10f105b213289526dafcd36faa6e9870b354949e7cef32bd27b8e0edae8019",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "b64b695d349bb3123abae93e056b1e0eacca09ecd4872c084b15686e4561cf1f"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "7c145ca71125838d1354f7414b5771aba8dc56e904934d43d4bdf820e2ba6495"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "be5ce0e21e2ba525d5616177134b0d96c15d5057f5646da5895435bd67f3b3d3"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "16cdae715866542e2068700750c42ef4b00c4c60ff15a07a527f647460b229ed"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "636f2c9328c480e5f151533fdf30af7b6917a1ff28a8504c0548c35fdd893d48"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "a4bf4add80d0d1ed18f95a7259234d80f952fc52f50608bed6cd59cddb87a9a8"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "f58e320e6d29277f77349bab548f7f37d6b21b9de251f19d5129a415ef3e7f51"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "18cf39f74416974bd4207d584f6e59951fb94179d26d1a2459e24ace025664de"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "bb1aa3ca9abf347755dbc0691afb346a1614be5a1c180654a2d33c8c9d866a18"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "c8f04921bd714369fbd98a0f2f126424176d785e7d9842cc4602da6cbb96e803"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-11",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-11/v3-20260906-r4/book.epub",
+      "epubSha256": "773f03b91d09af8b920a993d2d7495d0254e3b89c02cd8c03c0821648026261a",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "61d3c79fa6c14dfccecd0f8b6c4ffff00d1fb0093f8ffc6a35fd80b274593bb8"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "0ea517cb6d9ac2e3d6183b414b9d355e1180c2c2a64b8f267c05673424159b08"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "7433faebb116729b9ffae49987ef469dd05dbc114850e29b1922fa53aabff463"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "682d2dbd2083aecb7752698df840267f1db3833ba619c2b548ff56ff66189f38"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "eb01b59dd915a9900d0342f25482d7a32778008b055b818d392f21e2a2594200"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "c78cb074356b0bb14aa80e08bbc550443a528358495806682bb286e717f330a3"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "3522e2935f71342c623198d14df357b3a4dbcb2a6fca6b9137cf21c03b65ae22"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "9db8e83497414b6a45841d0d79afa31328fc8122d674aaa0fed7e79801101d3e"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "3a8808301541b58811a3d449eb1e387d38c21cd8e861bde7469e0cbd75e9f571"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "0964ac9e4082629e2d7e600d67aec741ab00279d87547fa97a8d6ae9629d66d0"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-12",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S1-12/v3-20260906-r4/book.epub",
+      "epubSha256": "a0a7f67d75da65780273b31c15a3a5eb2f74ca7e5d589e5dc883a883f077430e",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "28573a4258359f9c5e96758ddbf2600eb5bd29681279aae28b19c5d2c29b5355"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "ed6e841fa53a08c73295f5e3e8358e61b8b1d6fa1cabf5510a9e05cd3176a7c3"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "063a09cb27e8730a06c656c0c64192aa09954be5144a9b22e036ff7894ef4d7b"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "4598b191a0907459ad737c9831b96951f690a3e6d3e69f164e8e65343a111691"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "679bec1fab9ec6ae8cc5ed668b491bd8fc9df3e05d0c58e164f6d0d4051b4c23"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "cec9943f844c7cf9fe899362ca54de8763dca7ce6e1e6c97c354c3adf2b4306f"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "ee5bf7c9d82d68c7edffd3f7d3933a6e85b134ac088564ef56e9e6e99f4103b6"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "eb900ea8cc1db2b2692510ab8dd82a37c1889ff59167c2dff245ebc85054e260"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "8a834ea45b2dddc699d4c8758a14a4ad48e013b9a2ca3c1aa760d59939f96214"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "bedfd1b5614deb814c2c0857283ed6ad9e91b85bfa043ba53ba381542b5b987f"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-01",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-01/v3-20260906-r4/book.epub",
+      "epubSha256": "851e9ba0ec73f6d75f8efe823bdfce6b01c7ad7532924b7e7406366d43a11278",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "e29bc174344dc08320e9a10e80bd3abea75a81e7c0acb1955bb2cdd62d9af164"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "92e53fbd4bae80aea9e47d9386e1c2cf2a7e2b5d30672039fdaf7122ba1651a9"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "a72e2a89800b5fbaaea4b42839d9698673e11bf414e3b76de7ddd5a927b7b029"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "af4cc83e1af8324d0da3ac7d2b26adc16ad1e9883ea714ba207c659e330d0c67"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "5d64fd35b6a51786f06e7cf12f602e05145951632b34d98b964743350e11ea52"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "a79d0a60c28ba68e8c08d6fa3f455da7d25470a71fe8876c8a979ac77a454a4e"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "897535bb8412858b35eb3bb53b83b61105f281aa79d5166d95a519f0440d80e7"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "2916eca976f142de4367e2f756eb0ab2696c60a3845a1ed80d938db8638ab8d5"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "3a29b53ab00770f1473e300b94129931b6cdeb72b8cf9ff09ac106b70989403b"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "bee5e0235bea7a754d6a748b758eff7235f66022297cb2d958f5fb9fca32897a"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "0c25d62a14a2837e199d82ada025dcb4781eb60900aa9b34c82cef1eea62b942"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "1c17a1ca119de22174b632febac4f7741153e920d70c2c4a6f0eeadd51977bb3"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "889c6fbd701abb21820865b7d80ce4e12f8442633d834ecb5d170ca40cfe83bb"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "2511512ffc1740cd20ddaf1076e57205f6853a6e498fd909d37b7ab0ca361313"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "52f3d44bd0fd9df10dbfaaa8603e524e5e1dfb3b2fc6808a72d0f81c6329da3d"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "db525afc4f85abaa75be6e183f994bb14891787e44d5bd6eb3a16b43f7791319"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "3efc328b74997f88b0778546528c58c7f2c87695a320f3b51ca41216549dab7b"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "b377141d10555dc0b5b595957a1229fef367a22a353dc5bbfe2a403f5c1256ac"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "1342826867d2456b844f938bd18c61aa94706aae755f6f9482729cb6f658f716"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "5858dd9e4f3ef1af002cdd17f6756294b5097f1f61142b115e65767e7b5bce08"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "944dd3a5c1b89c5c33a9720102066aa5527b7a0f85f088e78f6e05deae4b6a6b"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "da13ae92ffbfabc3a6cb995198efbebe9ac67f6187800183d26d568d3b01b2b3"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "c61b1d3985634f64b7d239bdb62a7ba7a46a4cac30558819f63b6d19d34771a1"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "bbe1d2b4577c61fc89e5a44a209f2b12c61e445ff2e266198b99bf9b165e256a"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "e75574c653760c1c3dd1a54f85f0bf6e55d669c136c9c6a7113cd622f3c445b5"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "59a6e159a5cb242535e41255d616767e5749c790363a1177ed64e0d552418f15"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "c18cd1f21d1415c8561b7097d43d411adf6b9e2e679c0f9d02d0be09001af5c1"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "f7f75c831977cb5b7d05f1a3fa8b03ccfc445a2396bda377a3d4bb28eb87d7d6"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "1fbecebcfbcf82b2e61104300cc4df5cc060a55956c979193c1fcbbf2acb802c"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "ab2b4f6aba7c494f650fe390413ac0bcb8ffdbba9c48ffba19dea9f350235b9f"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "05dc77049c51107e81587040b2a952eeb582d5a3d94f4f6d0e0b1124f66511c1"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "ef08715cf3075eba73ab208e3e3200cec1bd5c75b1c83da31f56b8a12cc74e2e"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "cdaa151090f6a411cc6e080b70fd9f54a22a711e4114659adbadb5f720e0bfa1"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "203863b2ab8891ff230f58a8d877527476c4dab974ec577fd96b5a1e41213de8"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "b280273b856c9fcb853bab6b965255d3b69a2f77cf5a1e9ef46d14a74eecb489"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "05db8b58ba28164d2fb4b8150e2a28ad927e0e6269e330ac2b41632152d53932"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "fb68b85a773f959a160831b5a0f733ed0ef6b322e5570e4b12f92e307b88e972"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "634ceda4413441613f41b630a2f5c56f91ac0fdd55727f6e759c2169fb262d81"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "bb42e54eb2fce6af2c2fce1cf1c83d498effb97a691f0f1e4b3342d889424b88"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "8e426114be411d107e233c6bc1b65aed556845b360d0ab1db9e0319d778d4dfc"
+        },
+        {
+          "fileName": "chap040.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "dc559325cedca88e865a2b215fa500afcf1bd4266500dbf45b702b89c7d1edec"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-02",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-02/v3-20260906-r4/book.epub",
+      "epubSha256": "6c6a2440c3c628533fd9bbb840353e30b5903c65d7aec03241439773264c68ce",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "c4f9dd5c4ca16b03791bdc46d252ec40f8bbecd9a553f55a51df42f4a6dd63d7"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "d287794e1ec62d90cbef94ae45b84a1530a16e127ddb36d139ca9b1f9b8bcc98"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "b891517755afa056ee7e7d3d5d670cb69f20056a29b38073cac58bf347d9f478"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "23100e0a022fd938084f3dea78cf7513549f9df836b429239456baaa863a7acd"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "0eca124537e10dd6ba9bc461256a13d067e21a8438134f3f3f44cce8c959d118"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "72d6e78f5ab851e7c70cd16cc39940bee261e5c4811bc2a612d145c6df3a29ce"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "a553cd51b7409ac7125b3c406a57d4f8671acb6b1698bcfc394c9bbb0a35e397"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "11dfc72643abf3400e232aa908a2587410e8bc7b7bf1903acbead8d7977af4af"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "0c604c8bdf0b5341ac6933386bbb7072403d565e998550e04167419f2c000c0b"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e622677dcf6bed1caadcdab17c0269cdf83d1c9b0231164fe7fa837ceb0bc2b5"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "ad995a23bba5098bebd35b30fac13287d1dfc27cb8048bd84d0fa3e1df52240f"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "34460b8703fe410dbfc27de4919a4e63b90558182e8769e25b7ac967858f915f"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "33a31a2221d691ed619514cf7a5db299bb247562c3f8ab844651ccd1806b6255"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "b2db5889cb37f35d345fea7a8bbb81cfc750eeb90535c9fcce02beb2bff93c79"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "52701f11a8371bb2e29fce82eca30538eec5c75b75a1e9a3c6385dda9e344226"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "d41d22c2b5d14294a361be1cda847213b9890e043b9b0c59fa3d429617d66c7b"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "a3f292ff3f7965df007f7a94e65e5688c4a9d84e733e984eb561549bd0eb2aa5"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "82bbdcdab5ff37846a24820a4214c91579091099a5e1b3db3acf688b4955fc0b"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "2b0d7f99d396fb150dc7e05186dfa89bee2b04aaabd9c742c022a87c3d2c5858"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "13403aebc0bebf5399fa4484fcc80fef960144f3bf4f5160f34656b714fad037"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "006d35caa00fc150e2e13df1807ac0d9d125ad2861f1cf4707743278d69604ee"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "9ee57e18ebb5f71103cc6dd0126b0b60d423a9b8d37b1722b0193806922e8aa1"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "c28e2b19b6c77c708eae489a200a8444f09743d6a29614d3fc7841068d199c46"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "88c89a34f1f0d9fe3d575e8591eb3835f2e806f3312b58c0de44b8cdf83bd7f9"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "e6f93c8d32afca033bb098212a2bbeb7859b1ac7d0069646d416b0581657dfa6"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "67e002c72d7c3ae4cbd6ad1b2d28841f68660dcbeae82031927087540754823f"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "31887f714d201d3762425856e81bc1f30d3c403d0f3236ca5c8c54b4eeb7aedf"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "70f4521a290205b7a3f0c651bfee8d4c9dba2e0730f4ee82e4d4b418f04269d8"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "9c09a5af2c9580b93f95cbf0637a8d49236ae34c0507911b1e0c01a307ceb966"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "202f2ff78a1597d944850d46220d1a7eff4a0e2d9dee54f4934d185aaed85e11"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "ed0551c8c5f0d445285baea5e6e6b9d0f7b0800d904bc024e6962e56fa4bad53"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "a9b0c25f8d2df4894be4e33952cdc34f7287978908bd731e22b4aea97f02478c"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "0414a28ab4aec56233e5856a7443d423faafe1c12541cac7761f30b9a7c075b8"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "b2936a886db4123541cd806da8e1dc284f263aec8d322c709bda4c6f4ce54053"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "d06a5e5b33e5d9cc859eb7568c9dc2af81328c69a15391dea1ef8e72348c69d4"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "f0e99bfff0f8f741af91cedc94bf463b0ee1b85d719a6f554c59b47fcec8f415"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "e95410ff2762ffb8fc2a4266aa9cfefe121290fabb5df150e4057e86228bd97c"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "11cab899a5dfff91c023c5f6feb554ea4366fd1153eb117a1bc04b9d4a0994e3"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "bc9c4fcff56f44e29681359ddc168e2f24bd9f7ec8978aa0ed42f7c046d7e4b3"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "99fe07599f9a45556bc83e843aae19edacbfdf4dfb02c237315502b45220e42f"
+        },
+        {
+          "fileName": "chap040.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "885ceeeaa93696df47f0b868499f5ba3a10fb670845f12b181d4c0c6c96ce179"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-03",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-03/v3-20260906-r4/book.epub",
+      "epubSha256": "57bf43618513d2004a3656f0ce3aa3a76b9da8500fea29599ded4b43836dc6bf",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "26d2f046b5b4e9bb69a75cb5e179066610526ba8916119fc49412458a713870a"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "585567cbdb2fdcf402f1147572b1dde8cb519aa49164729972da524d6c50a73d"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "e146051ec3966ec44749f5059a06a1ad831d246a4f0ad0d0ffb5241d6da6e063"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "a66924cdae40e67b681045d728e6d312fdd9b1d53e17b21399e74198aed6cf9f"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "fb96361eac9761380f93270c45e4207d7eb259087070ef7a7d0f5a333ca56360"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "8500d51a8688e362309640edfe1a6c460c21788c784bf343a38b06bd4831d9b3"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "b5eb2e814731bfb4d227cf7c889c4af17e2062adb818eae440d74591a0ae557e"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "c03b0fc9134d8c6ff9d4b1e73489dca43aff5fe54d7073711b0b86122ff9b2ab"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "7bf8c0a9d79898ec033244c8c697b22c2cb6284b76f5d73e98fba0334581e18a"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "844ad6fecf641e9e2e613d15167c99f68ff1b9162e95f9cb5a7556fdb3e2246d"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "600b2b6c9b43de2adfb5faf62331372406332117b5e56933899c5826b67c0168"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "62a9c97467f983b2f34995f1cbecb9f8d13756b4d4f149921578b28f2ee41f42"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "ef93043fab5c018ab0908315ecb3fe832f3447d1985127b74f439570e92c1dc8"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "2bdac0985a79a3a1e04e2895284ced3a9145743cf920eb6b31ca6b63d0934ce2"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "b38ee40930e15b2758e3ed347fdf5618ffb41b24702ef58151a86f7cd47920e7"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "df8046fc6fac00dbec591d4cb3b86bbfc46516f69db97bf543ded40108cfd8a0"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "c5202cb87c2c03c53b8a5c7518d6eb93497d99837ff9c522098515ba6d103a36"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "a177b57511705786debb57c72fcd50ea46dbd241d8c39d923bcaed8fad6d42f1"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "27a3d33a456229ebccdbb55c13a5fbc35f45ecd49d60de0b8f5d6b720255ca2c"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "d031cb2c74dc3d38f734dcc70beb29f5bfdbec236cfb2ef22eeef0058f38a1c8"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "e708a4c8606c7ce0a6898b84d3f5f282d03a4113356eb08c8c3ede5e8ebf4df4"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "5853366dec28c67d3e6c117f964e6d7a2796e03c16680c5cee57051d4803fda1"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "c047bf87abd7e1431d68bd523d89d96987619cd6665c89577434dc78f036981a"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "8f908c2463e3ccfa5473a4c3accad28e0f949f1b48a8f9723c0a4c2b561f83d2"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "3d02d992b39125d8e2c30378481f21aa3ebbba46eadb621627d2a137000677d9"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "5232f312b61ee81fe3e42c694dd7ec66071b8296bd57e4fe892b7ca39d89b509"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "c2a0ef345ec34d1310982d15d4de4ad33556a2e42ec7df11972e35fcb96a1a78"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "2ab1e6b82c456d2e429d5f407d62604dffd6b440deaf9673af96fc75073a0ace"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "ca9060152132ce91008ffda14f7fee4368e5559da129c62c5e9d58f42b6f2d14"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "428f96319b001bfc768582b1fd9b419e7012b63f6c5474f17ec865ffcd8d8de6"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "10593f14b398db78b7fb1c9142c36decc8cc68a30a3578d78f3876eed613e6ea"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "1da2d4a4082ce382944d94b4d8097a40a70ab6ae7338810b381223e5d898943a"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "785d2a44724928b22bdf1c56319e09490c1cea5cb4a33d25862cbcb26dae1172"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "c3beeba74983b6eb0a001aa6ebf710b6b53e71beacad02b45ddec4b6247b4535"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "28ac596ced11eaa6797ecb5204c6aa15fb4ed6bde4b6503972ea9f3acfde4fda"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "96dcb99ceb1f6bd4291659d35a006d75111b401818a95b130601bed8729c26fd"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "403d1ccc0a237aef48d6f2896e6a18bf9cebe669b259617023f9387c49b8fd3c"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "70235b7f6b94064bc1d0bd3b463e0933e608982a254c11c2f2814d2b0b034317"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "eb8832a24d55b38543fe927716b16aa317e9fee89308815e5d613e9a2e343564"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-04",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-04/v3-20260906-r4/book.epub",
+      "epubSha256": "d43eb3d60fb05ce93fc26c28487582ad790c0f46a53e6a34025bbd09476c92cc",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "d6f241734dc758171d9474d310e0fc14496a6684091beadc7c5eb4a6c680d60e"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "73ba1fee343e00760cd43a85719fee3f28acea10eae8e1b11ed90280dbae8f6d"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "f54009b5dbce401bc34b745e0a7a8b43712b717d028ac6e11850658d11d189da"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "33f63310935d8d4952ec3048f53339fa9978ab19e7638c93d0ff4939c64c5fbf"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "3b6b4065b5951c21cf9179c97b1eb888bcec085caa793db6a876c31021c1ac1b"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "9dbd8733417faccbab901f9fa785b6edf6ba62f7d4fc49eb19c2cb12d18b2502"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "84215c4ecac230215387f8e7183c41727258591979c653f7ad1c552709e18714"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "81825794547c58705b5eb3be511af0eddcad004d998388b06c1cddbb6e66bcbb"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "c6d3baa391b2bec7ca31c1636311ccbf5cbe1cd4fcbfe6dea2e61ab7f182a737"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "55523481b91a0cc398b880b180f49f09beed1b4f389fdc07f69f8a4a8b161982"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "0298c85663f0e6dedb83a959c6cd9e37313beae2e063d026bde4c46611b2fe79"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "129292e8d0558e58e22ccbdcea923d0c563d1257ccede0a78192c791a77ba0aa"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "8410891c134a88af96174117f11d72d28bd605d893d84dacff211e580446579f"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "457c45ab780e19133c9312891bd51a7be4c160f2bb6dc2a95f04332662e43cdd"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "bf15f97e759e32bb0d3b1e0874fd0c02b7b77b19c612c551b633b22e624be8c2"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "987217cc82023b0ca3936266c74a6898587b94bbf00ac9bf6f5f26a4f4d4127d"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "79a5c62f4e2de0cd0e92e758677019b43aba981e1c1333a082cc05293b2cf954"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "43d388eed810987c7c64769538590a6b8078176c82144ab450c8e05ed57fdcf3"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "b41b268e8c0eefe92eeec379e63e09053184172bbae09730d84565cd1038a91e"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "fd867cb1da38d25faecebeb34d2db7d5178e6d0ea63c913360c19179d8cd395b"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "6b6134c7d110af3efc44ebd7ac21849cdfe48352c5b41a8a08a99479bff7268f"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "e0afb50aa30277c4c141a5de4d60e97e95b5506f7dc200f0eac58ded741e5af9"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "249a5a9b5022866bf3acaeaa114bae04a66bbf79d024c08a071e3269ad3fb5d2"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "80f00a14e00154247b1bc4b642ea33a05483d80fd415d3748f225cb60789d33b"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "dd98079500a470980fadf0c899ae010540873683ae0f2757802b513d249668e7"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "592a8a010c055b6e161f24729bd32e97260b6cc1af799a1f5e71b66410c16b43"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "f498894022a71862cc746342bdf5d23415c4511f2a2b94479600755f3307b4ea"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "5d856914b2f5b35c80f1355491f0b261ca6908487dbb3c33ece789c8f89976ce"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "632bbf68857c7816735cf9b5621d31603ba11e49b24936b773249cea2920fe62"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "d354af5aae2aa7846f3a27509618b729a22cb8be50b089328be9d7e205569db7"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "d9593b1e73371867ecd5f4bbfeeaf560518c8b6a3b85fdb4719cd47bc8dcb7ca"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "6318cc3cb3d876c3db3deaa060d0ae695dfecc7052f219822c54523a0b040465"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "1ab6d3e336e5cfc2f8ec439070fa4a298d5e2a8dca031e1898b135b2ca9f7f2d"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "7258c847a5dbeffbab9687416681fb509879d6d05453f38144c20dfad2ad2f2f"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "1568cdf07a557ac1c73dc9200858e1a02fcba85a709552b1528388757a54ce2e"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "3d10538eea5ab4fb04a4874f63f1531ca7a439a9c4894f9441cd73663caf08fb"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "1aa79ffb19af3da286b4c717c2e53d1e23bb48d501fc4408a9048682cfe8d971"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "7c50e90991ede511ea051e9ed717bb6e3bae7411b00a8bfdd4f3abf0869f0e0e"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "5d4f5b4ca928e4d644200a523ee6d3fa4ea0969dcf46652f2a181198edac99d9"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "2086491e8ea347c1d705678e3ee523a5800195f12b46e0ee8b1f6de4e40d8745"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-05",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-05/v3-20260906-r4/book.epub",
+      "epubSha256": "768f2a757df4fab94bc7e129c18b7715c82e1d4fa2e47525787e387f8cbaa849",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "5cbba474063cd7aa2ced30b7fc043839d66cf1e383557a73157b634fdac14c7b"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "fdaaa33bd3c0cab400ce4b9ba2962f4a129872cdeb9563b5ad014593b5f7fc5d"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "20235f4a536a1b37232aefac1b050c61f680aa2df27e81629845445c6e18414e"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "dec318fd9fc8dc0f3e0a36cd4e07bfc7a1aac82a5abc91647f0d2fcf4fd9495c"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "46e66f71c504ca7f77e141b03b7ada9b3d19ba840dd55220623fc1ae1eee318f"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "3c2a10c46ca6e29f492dc229b551fd31c0f5112f0342d6f098a9bbad4eb0b123"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "a6a3dae084e82d643f1e1625190a492786c84bebec5af9e9b2cadee185d9677e"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "784eda06f9071fd1d5729a63b9f6304cee94c1104c0bf4844503c8f4e761d4e3"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "8ec67a0f2e6db1ede2c17845d80d4477a0a1194cfab1d27167c31739e2e66acf"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0e9cdca083a121e51ddc37b596aac15ebb3753f7e5df4ab8329ef6e2870df10b"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "d67c9696c7e5ea9fe384d8ee664122fe17cf4a303a0dc312f575eef29cf106d7"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "c82708c6c664d1f6835ae9a8c3bb50fb82127eec49abef1579c345c0d74e4908"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "96264ee161ff65fd1919d919224325b8a899df2f27241c5937d52227ae3ad5ea"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "358026104e0f03b10116d4da2f5dcf51e3efcfdcb18ffc923553f954a11a2027"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "c3c51422c21dc0051fab0dc0dee95a2a857b0e0450bdfd5f66b26aad46a413db"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "e3d46698fa20a3059171626f9461d805577cc7108b2210870def9fb719a31f4d"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "aaf79b9effd76921eb525aecf84858587afa0f955968d7e5087d9ca160f9fbf8"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "973a40b642dea0421f0b460a86d23f8c474d348cd67ea09912a84c8b171e087f"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "3f4efa2f2e97be4149923a19d0fa16a6e7e1b124185e7e69e567ef13233d2fea"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "03b0d2ddd605ed8e56c0e5441f3bea0318c73f8fa173cdcaba9de3a3791dc898"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "3ce328afc5d29fa6ffadd7444899b7d1e8120e728b8dcde00c63fae2de59bc26"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "a48eea50f2706debc6ab9f97f71dcb4f3ead366e675429cd9d29f68e8906ab01"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "63719618dcfbcd2ac1d88d8e0357b3ef752f078a14c738b8199d9aae147c01fb"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "635ddc2847cb347e233313c4553e0dd9232a1f63108c43d3e33cd31aba04cb76"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "6d2802272669bc93c8a0e135855f23244b6d43232d8be987afac6e95677e4a2e"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "48bbb824808f6fad8493b81e50017779b0f626f1508e7092666ddd1525121e41"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "17536c3b197bc5258c6c95f9cb202678bccaf90e525928aa9a7c34d79c4d02eb"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "acd1409c68979234f209d2172deebc3525aa570955bbd2b0e5f8d5c4ac05be91"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "dc4d6830816eaf1278e2514fdb6beb57eb50c8a6bd31fe64167f8bb67add7e2b"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "b508c92a908dcccd71f2432d4ea18de87e3a431638304d978b57fce8d6dd4e6c"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "d39358ac4e6ca6b8fa59a3aaeefc94357e2d20613303eba6928bc61e93c23e1d"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "f8da270298e9924f460a07115408804c0c3b01e1105e9e4e3c8b61f5240895ba"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "254ac109e87e6ace62d8158e6fbb094151666d7d7afb5e33faf586b8b0f454d8"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "e79777dc425a3470caa973ed765dc6b2eaf63248186b90b2a5660d033bc0a97d"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "8a404405dc822e7c8e446e01569e456a1ae8e1bd829de6932e44650f03bb2a8a"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "0de418643e73357248b4b14ee1bd33aea44a68e66288d1c721a4f06c94a34cae"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "d584c220be43ca3a71a9ab21ab2c9b09a96ff7335237aefd75eb349b1513dd18"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "fbfb36f62941387e23cbc75d7bdb1156fcfc10ae65a0fbacd04278d22e4c1b4b"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "f8aab0ae17000bf68a5633988b8dbbe503a0e8baad0868d6797e913d89b43d29"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "1632b4bf1bf95ebdba8f9d41ce3092a4b920da4d0817277b0c3927709fa77649"
+        },
+        {
+          "fileName": "chap040.xhtml",
+          "sha256": "43da01cb81090336d37a9342e790102aee5dd06fe2f28ebbac057da8d2ab1af0"
+        },
+        {
+          "fileName": "chap041.xhtml",
+          "sha256": "35c6f53275e046e0b26a04609e905943e10295e5262c1825f4b1e102d8273bd8"
+        },
+        {
+          "fileName": "chap042.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "fe805b5a9b043139fc4868a2631483c5107eab7f804a463f4b1c1db994f73c74"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-06",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-06/v3-20260906-r4/book.epub",
+      "epubSha256": "199e25e37ee509f405b8522f69233a156948e572835961af51fb840da9dcc48d",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "925683b6e33af56193a9de870a9fbd20b20890e8cce4988c7a784df37d4e52ff"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "3ca69932ceda944638a39c034ba98eb22a5e62c94da2d83934b804e119fbc8cf"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "e957b78b6d8b133c6430cf1d02e6d8ba8c1b8e9abe616d4cbd41af3fedbe317b"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "1927f5a70626cc840fb4f4ef0c3e4c42cefc57aae6e6abbc6d817c2008fb43eb"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "4943029664a7ef3a065f3a1314b2d2178bc475cd6f88e75b21c84d0049ad4e0f"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "6028174ee776776865fcfbb33d4257e6a3eefda3897cad7f995546990a0aa2de"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "d0017c4cc77ac4a67c738a2808528768e0d830a56f655ea4a12913e90a230fa7"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "c5eb8af28dda87eb0360399331029adf8aae44a8dd00cb89ebac8a6306d3190c"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "74919cd7293fae9da84cdf5e095ed5da0374183f59570b7b3e92143c799f3dbd"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "a63e3b6d17b8d7d702e1742f5ce96e1e26c914f8a2b1c47d792f8623d6f95f84"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "4099060cf5f8638ee835bc3a73833a5f2ac45da7935f0a7c077e828c9cd291f9"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "6539f261404c5b7e7bb0e7af3aa4532475ff7652ba293cfd5f085e912f52f68f"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "ab343a7b72bf9aa8af77391f3cd0b4f3dcd6646f849774f73913bf7da8e71e7b"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "b1414e17ef134697501f3ef5ededfdf0cd7109df2f693a9a44973564ccd4c977"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "d56024c76f33b60df22ecc8edda6378d4ac0e6d2b6c83b5f5594c5d0d0acc4b3"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "9a2c952db9f165ce302216b569359007ef687e0a5ad3cdd2b36d01ef52be6a61"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "08a3f7d3ad09a158fec97c04da87d20a0506ede0fabb795236f973821b11d974"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "10802eaa286e19455b2a42b3201eb129231cbb1da73fd259806042b1e3bcb886"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "85f61b3298c438531654db4623f85b6d7028d7f858c5b1dc4396edd27d83ca49"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "7176eca56e82abae324f56d74e017b6d57c3294364632fadcb8555a7cfd6745d"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "60edba58d22363e0003d8458ca955a769f3f04eb6c93ae08b000171a7b210b88"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "95cd37c30d61b1a7bdee9c4279319053572cdb87ea79760344677418ae9b8a44"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "6d12333a9a76c3c6340471cb49593f545f7e5bd05db35db9ac663e1cb7f37aa0"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "cdda53b83ff7524b2bae1483a1e4ca0b32011aa380453bf983cde85237c3727e"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "138187e1e4c1f38fe179bc2b04955a16f0216678b25db6195cc7e5db6b6a2c51"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "db7cea50eb784f4769efc310c6f409c1324d381a85c0c737ec9467e2eef6df2e"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "835e179ede59e32c63d5f5f84bd977790df7d3a7ba03f2ff5ab16af59b4140e4"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "aa9487fd4d68d3ac040ccae1e6c1f488822b31d1b8ab1ea7df04990507cb178c"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "0a618c590b579c9454e11466dfc7cb70ad7911d192f40548ded49cb9cb62be79"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "85d17adc793b474d2b6cc13a453ca3d9f257833d76dc4c44aad490d8f07ab044"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "0ffd69a2bfdc6f8c3e5214151908a48961206e25cc92ee6802e64bde31b4385c"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "89ea5b5eae6987f4d43d12c21e7e0a9afb92d98282d39aa98a56e9be0ba9d7f5"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "2bc8879e735804d28b63e96aad1e46739cdeb18b1aff73763aecc77a09e035e2"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "51bc47142b40be088a0ce8404c1006a12c0feb824258ea17a651d47a9d1a45ff"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "7fd568aa3c0574bc9022989d9b7e4afa3a6d17b7c81da1244aae85237de8a5cc"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "31f0d9399d9e33d7678e40dd175875eb3f0e97862af8878a2efe6970116989f6"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "40b4c85209c4ef7f0b371d0603db72471599773764f24774e116974808e90ff9"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "bd7823bb18984f7c9efe3e0f530b67c41ed701d852e92fcfae48966b0fe112e8"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "2115f44a45f1cef74ff3f6d63c50f4a28f672ed46039739bc7eaf3b61fd9a246"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "7ea617568cb8cabb168ea7de253de135b2b456d301a01286cf47de9e52d2eebc"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-07",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-07/v3-20260906-r4/book.epub",
+      "epubSha256": "81b354cb4505baba320b9b248e89cb7faba9a283e9a54ec751a0878ccc63e22f",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "67d658aee9270db248476761e949374c9f708466361b4f4d0bf28c526f59da26"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "4527ed5e57d1062741dd5a40d34a65ac48070383f786c3be3bf91aef5fefeff2"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "f5d8863c136abc6caab8754d23ec8a39f2f3de5e98b1e71babe10f71771a2a46"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "c89114e4e707d0c4700406479c3bb9ad74f4379dbde0978c99bbd98730936f4b"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "c20327a5dd0ea2a9c9819a91ba15b905ce5a4b80662399c777f1b391e170ee26"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "e8a3846e05cfc3cecb1bc96958d5c7983252d9b92c55d8b6d8a9104fc2b307df"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "3caf7084b5b0a4f63aeebdcba09c370394ef68df6fbbecd98a83d36122116ec8"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "e750a7d9f2a1b3e493f8aa38007ead50cc057e1838319c6afa07384b70a77ed0"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "f3ec1b3267e400889a8f900fb2ebda58c0f1bd71bfc77ce7da17958115e2975a"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "cc8558ae7bfcac9bbc7df5d6af992ed29518d4c58455689f1772267da474c975"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "633921d9ac4be981f39fcc581940ee655b1869c46687a82944c29b0d33b05707"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "ecf297fbc535bfaeebeddad2c8d4c4fecb0f77ea5c54c2de9887ad3a6ff6f46f"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "03e8ff071f93209e83ff0312d5bf37d5a28170ef4ed8ae04e37b77fd90bcc441"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "a1d9606921468f2648ae018c44227adb7fc219ffa65f1004bffe3b475a9d9511"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "2c22a9a3415ddaeedff936e874885bfbe31bb56a52b5a6941c535f6f9d93d710"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "8fbb42cbed8b6fbe10d90f2ace5108adaec57c840d53503baef5e3379a6c07f5"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "d6478e0c1f5db7dd47df1eaddcfbda6c4ae6faf84ecc586b42dcad2692af6636"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "1d8fb649a2ccf120b13a770f05f7127110821dc46bc60207145b6d1cf9cf0287"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "46d19a0a022ab8d51adf5d5a6bf07fab5b11f3baefc9002b85a93140642524e6"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "c00e003c81fcc333dcf1bb19c345d4ec8e79e658ce6d702de6422e6d3172ce94"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "5c50e5feb6be03bcdf8ca98a8f28a418d57011f81f2ee0ecb0a50eddc9beb9ed"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "88153e49a6ff3ee12864e33a06d9c7e539521e4996e3a710302d57db83e28c4b"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "c79e8829085d30abfe829ca226bf7b7a6dedce10d234a09d861fe7d90e759768"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "8e35a7f5091056e3207cd30958f2f17e7ba597db017c78fb19ab6e26f85040f6"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "575f1281c4f3a87d93245f2008ec3a114448978f34d6451e32ea9cf285fcbda6"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "684a7cd6ed404d46980498d00ebbf5eb4192a9353d927d2cb5f15ff97d5551a3"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "95a86a6ba60451a3cd9341aac547f6c2bc8ceb85e8021a6a71cd8859b1a13514"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "14e64b3313463bafdf941c9b79c3c64522ca755f2f891a7c6a3d6b43f0396e28"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "cfe6b9abfe55b349b25407492c9b06b5886476dd5af6cc3be236380e4541a150"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "abc5a711eb975fc581789595ac1db5fb59e631891fca5d62ae26f30e22275b7b"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "71882a68e60be8d63c9a1ca3949c0896bdc944351fbe6a36e9ef3babac627c14"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "1bdaeba15a00c25dba3054e47267782daa7709fb99f30eaedbeaad8fd0d04c79"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "8ab290a6c5af39da2aae63d20be17cfe8d3ea7394dbb3baadbd24173f40f4bfb"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "fc4a8a6c34a1a291760f5c9c78f96d5034f8a029dcd0d902e356f5a4190e7852"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "63adeeba126dfd16934e12de834565d2f44e30de9058bbacf1339fa05f271ea2"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "1bd344d16821be4905f4d63dcb8983d54dbaf88789fc99a4330a4eca7ca16dfa"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "ba50154fa28847b4ab8462e18faca441d0bbbb8453f4dda0a3af8aa3784fd22e"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "2987226a6dd020c9a9ced17fcf5c795f36614ce970318dd507b819ccc92ef35c"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "2cf35cca801900acb171a7027131ef13c32bfff5f5e57b67cea9e77170c0c2ba"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "fdbdffc877e766091d1f6729adadfd4936ae45b524e8dc63ebf1e7916fb3bf79"
+        },
+        {
+          "fileName": "chap040.xhtml",
+          "sha256": "27c79aa38a955ebbd6d9d987bbd89b81016aa79caf164c63fae9fe991884c572"
+        },
+        {
+          "fileName": "chap041.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "b74528dc31cd0c97d088ba5772ce6a4f0c43e9b2a14b549025c63442d4586d75"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-08",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-08/v3-20260906-r4/book.epub",
+      "epubSha256": "b41f5df49babaf0b942ab82429d13d4a439862eb2a1beedd2cc73b123597fd4d",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "f075436091fe503b2968ce49a21002bd58c7ff681fa57e22ead8ef4ad3b945f7"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "3c57978ca7ec04c1c4773d8158c38ba8085c7ce18df6db9d8d8b8749b6911da7"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "dbce677962c09146756d39e147b04293b2d5291dc355cfe87d984ce1c7b26883"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "8266674d55ac9b7a5af33b7d041ac7915a3d13baacc16ab20c6dfdbf86c4a30c"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "9d5caffe7e22d8a014e76521ba1fda33d254574191c7d7e7608010fa426643d6"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "05b41f038776c863cb5385b084b80d81d13df091a91f827f81a7b53a7e866be0"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "67c87074ec5b1b43665de99218ae6bc378f07e4d2dc7e4be58bf4baceda03116"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "ed3549ab798471c539992e639e8b6acd34bb17720914aa17a48eb299251aebae"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "d7f68bc499d77f3e2315a7f226c80008f0ce06a4ca1f5331df138df6f4bba839"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "9ccc145259ddf195bc1d8a8d4ed433f16cd01c8dbda195746f720c68a2824310"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "d22b606ad9fa278dd0311570d9bedeb58f4130f3a6175f46885d8d653358feb8"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "c7fad4efd1049c73c21eabdbcf2f770933041f4861731dc064c96700ed7a649d"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "753f6dabc3a0066577323e7071cad8f90e1277a6feda274463f9b5675482e098"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "81b145eb42e73b8d78cfdd986868c8eb99b6a73af4daaa21e153832024999f4d"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "3550f12d51d9bcb554f23e70ae68ad682fbd4b22748d14282aaa561cb2fd1159"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "6db1b7b54220313a84eb8144b80b492d592c76be266516ac279b44dd310a81f3"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "3759a6cde4d9d2c73a6ac89fc63d9468bbffc3be9c6d33003303287d397f2602"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "471d0e4d13fdc8aa2b62ef6d20ccd2b4a1b8cfbb72c55b0daac222d36cbc1096"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "cf2fd956f1df9c23a79e2e2ee634298435a754d5a22633bbeda2772fff33ee6a"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "68845b5deb0d717839938443ba774e0605fbdf57baa6c76d88e4f1d4fadf73d4"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "abccc9ba3101d0e871defc022384166bf1aaaa56c9f91d0d54203961e991cc1e"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "15d174509c13a36179833847c3987b5001945a1956c2706a6b7cde125ac5b25b"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "5d676a8638df7a385924295ba2d28e98988bbb448fbeabb318a139ada5dbcee9"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "9173f4ce135242362c51c55ce5e0ca5d3c2878e79d531b8695d8dbeceae49072"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "c6e5e2d5b502e534b0143171c869eb37eb1f4afe252016c20a770dfd23df7208"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "6fb23cb2f47db506783ac9e2ece4d84bf68463e3c956a54de46688d68f548428"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "d872801c2d78327b3a79e52895b30626f29433884b4374dacbc46b8a433edddc"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "d80788141bcf8e36cf85f08ce3a8f46f771e17bd33a339f69841d1ad345622e8"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "e7470d75ceb9ff7b2a83dd17eefb0a7616ea9ac5268d24d880e427e6942b68e3"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "b4b05b69e1d03cbf9017e29ba07efbcbec77e10aa93b78e8156664b1fe21af48"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "c247fe71d4402daf5d7bd16e66488e3957d5af08ca92fc3d93c6202d3799d1cc"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "3a0d588ad08a6e3810458c27fbec58e24b9dc115ee18152cab142749a1c41a02"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "c99c80487ba6e109b02e3c1a9dd1e2f0b1710248b34452cd50840e636e8a6110"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "c59db17ea8d1e749476bc4303fd77e32dce7dd6dd022d213813c201215c91b95"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "8f169545aadd4e90fa2979e46d4e0481b04f315587a49bfa2d59f15918d80830"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "77fe974d09bdd56501e5fbd93a85ced962741cccd688120e9ef86ca3c6da5429"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "a8b5a730ed1969f1a082fcef86596234bc297e36644e8529d8c78cc8665d6861"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "5271e64baf127d4864734d522726d203f75a8212f31ff93d3929aae5f72b0a50"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "bf1215eaef674334378c9954ddc000b69d0ca050ecfd1db372e49accdb8501c2"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "3ed0625ad9a04234a78255a502b8760a063f5d3ddccf0140a7137f8faea43092"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-09",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-09/v3-20260906-r4/book.epub",
+      "epubSha256": "887177e5abebaf3b8b4d3df643f6b6e3bf4731862f243a26fe5b2d00fd87bb32",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "a68d92f0f585dcae889def39fc10b2c87b8c8649ddbc427c2d8c1740d90795ba"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "44468837fa4db6ddfb5006c34c4fbd99ee18d89ef60564f1286f7d5d63c0a96d"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "9d4fcd6adb039cd0dac8c6f35bf054e58370acd90393cb0dc130b779ec134f2c"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "3806467d434db90e62c856ae8f071f9ef98e8a8a9c361e9bce9b1ba911c88d06"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "a5f025e2baed7332fb0487f95781fd19b1791c4d03d779e9fa1ff783f3376bdc"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "c8c72445782a226043372cf58e8cbc89cc00a183becb6f0b8895357249a87711"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "d3c8d2cf6cf413afb28d4a3865a95f12f6d9e4db4d9fbcca4188277169e4440c"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "657436849b51b9be3f884e32bb4fe4669ed6dd158233515fa8a2040488d3ab86"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "c5e8450efd4b1a15bad239e99a566666b6082d031c7060c05d132a9414114aa3"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "33dcfc97fe641e8b1becc8a3374130a8ae1bce74b9bfb5f3f83dbc74f83d09ab"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "952b7d23d447e6f9089c6cb04caa5193a407b6de5a9de899adf39b6894156db4"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "e8f92416395ce293cb705cd04a5fe0264de83af8044cc0d5c93648bfac9d1408"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "b3ee167dc6054e0f6a876de2eaacaf7b2e2c0e30b9dda442fa86209df54bb043"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "cee2aa46606599a4861dbf6f411e59f097ef3c4e4ed120ef76e046d1aec0a884"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "31ebcfc618fca404d9fdee564242d25c6ac15b2ab93bb799a062c39713407fad"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "5e712ab86d9d5189461281c754dda6cddefd1fca5ed28e4abb29948b9810ae27"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "9e554a49d25bb305349269fc6ce17b073ae62f0e28f57e5eb829c60bcc4933a6"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "76273e518853b9d3cc125f96337f985ed3da2332924c6929b95a82c7c96d320f"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "6137e5abc19b67f85a096fba55bbb3d3bcef55dc8745081776ce195fda810ca7"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "d8903f30be4d48f116f6adf3fb6fc4f32bc8af331652b1f384a87c7319f54f75"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "ca2cf0954ab0d0acc9ed85a58556e5b50730de0a05d917c2bd803fbb011ac828"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "bd8be2407a5d3f626170c2adb1e749ba552a27005a3d601e86b6609a01d1fce4"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "106aeb7ed8080bc1c43d48287a894d58dbd82c275b77f83f8063eef7b1e174a6"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "cdc98654d7cc48202d6f093485ab9a980870e61fe7015de307ccb6424044c7e8"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "1271ccab51611aeb54f68e75a088019033d213b59c12088dd605e38c834b6e92"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "646dcaa4846d0c9af06e840c660d25dec9f72fa7f592503dde5918cf14d68252"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "9975ef5d3526d6951c8be882648590495d3b22bc2a467316b7a668d3644d68ee"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "e29d50a6a6bcd1e4fb0964ac796679499ee8695c0c143d65f661df712da61553"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "c7f15f9ee3fe3a8572e3e2e4f0a2bee9e0e4e08942100033a6001779a02c46bf"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "ee0e571dbe0e4807d549b96d02f8915fd9c3f59824fa1161291d94d7dd780a34"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "938a1cbdf4008ec3c21d6145d0802fb83b7597f4b728d71c20af58da8776ce24"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "dd547313bf5820f2a9f886a7878fdc2c4587e10c993f213d8f2609b04ab624d3"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "bbe1679348b916deacb43aa35d3a91e03a7615cbe4b7ea7378ee2304af1f1273"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "f2a66037360b62d3297f62736b27974cc95a10dcaaf04af022986746b47ab236"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "ea7c211c0a70458c854fb21eba9ece31a8fe487471266c052f3fad01ffeb5a5b"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "78a424885303226cc7b4da45ef7921bba54ad340353ec6951f625cdb0ce80ed1"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "8b79b2b9960f25b467e4fcb749f8ee83ef2e0187246f9bf037e7b0da6890b402"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "e5edb56f6d6e5ed77e02761491fed2adae7cc8e3d6f538c02ff24d5bc2238cb1"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "5619e2c0a57f3bb0946a5b93cc1173512f61f0d3962bbf36cfcfd31123d65cd0"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "2f64af3ea5c581ee1400b19465fda2cccdd1cca30dfa2239445305e4d8da49a4"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-10",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-10/v3-20260906-r4/book.epub",
+      "epubSha256": "d45d9ac32907f8f1ceeb9adaae79837e37ba6a6bb7311adc764b597749c66c5b",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "fdc9a27ee80c44e2aa418b29ef08ce81394aaa80e3b775088a1178ce6110c5fd"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "9de0bc0de96277c1267eda7395441479c0baedcb88448514a86b97a504330795"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "af2967ae58a1e24181f370c737b22ec4110e9898ce8b243e06d8b37d72fb03d4"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "9b94c03524e7b4622b02a91e9dcbd6809a163c6f3c3669c0f842491f1a1f6a06"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "0ba6627d0022768a708a2146a394fe02c035705e6713ca48136006791fece7e4"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "b2b6b65e131e195349435fba651e0ba0bfa13e9bf8980771e8ac11058287a82b"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "4b87e9c5da03eff716c77da4db8c79e21d0b7288a4e06ff2ded292505cf06d4b"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "8820f85b6a9c78bb62af546bce3c003218a7115d4192b47d8b3196e8d3a4457e"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "8c875718706265ee53a9bf57da2f8c1d2fca32ab49dca642f85b3406a8498a28"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "5448b86381ab30f197e580269a8142a193d388acbf7cf1f6961fdc38d20df47e"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "7e4aa21d36cdaef4338b178d5a47e18af72bd5f16447a5259777365ce448dbb1"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "37a9e27184b118e2bc05e73015c44fb37fd8493925dae1bb881e8db0e5c903bb"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "68ab3fadb034210aee08a3661bd449b5813105dd79559b1fff6b41a9f321400f"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "7e1708ffa6d5dea1a287a016dbbef9a8504557813e4515bff06e3765dd2f117d"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "d0069f27d2ff419ce21eb77cc459814d6a4af4df108f598cdaa617de487a811f"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "a3312bf8ada9357ad7df1273afac405c90f9d32a1b43537640607f0608ac3250"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "71cfb9b66d80140e049cde040d3d46cb8e0ed6b346c96e3616cd9a90fa1e950a"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "a7ab87f337b181b358fca4440beae7da69c8a4de809c90d9f226a1fd02a41167"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "9578e31f49dbe93c85df56aab47a9484e4d66f93484f5de270a53fd088ee3a92"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "33b6d04da02f8079e180680ad27c9825dfa4afcbd15fb14fd88c203c67d98120"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "63d402ec62fa27b6c4c74b86fef105ba9283ee4405c6def5bd3c29a1f2f1ac5a"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "3a33b8134b9a2fd4dd484a11d1bc1d89ca0ee89fdbb36d23b7cfab19ee12a1bf"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "49b01a89824016dca3d7f288aba3b071beaaa1225199b540dcc6567625771049"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "d3a8ea5f28262beff8eccdcf7aba5fed882c392b261c40c48fd80368c74a2001"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "8d5ffb72121716013117798d3be83f762a1e96941b944818e40e8352755e5865"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "cc2cd94894a41ffcdd3bc6ee9dd8012d4d330d18a722ede2990d23494e1d5d33"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "d0d3cad95dcb59172ee5d47e77e5760bb0f63c100c82266b447f0ef22e45853a"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "f248a1e4ecf3244be6528b52bf6246f4d715540cdb7e013af235cd1748387615"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "290393541684ac3493d238dc673d2a1cd4834fd6e6068090eff8ef3f3248a6d5"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "48ef4d88c5967c6c10541b6f7cf469b2c378ac92ea429fa0f2b962600ccbc5ed"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "ac42c2ab0f0d2f88e42dbb5100c9f23caf6a79180b54c917cc81ae8330c83d0e"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "c510c8fb371311c5308bb1d2978088f43eed878f7666d1b19beb8b22ddae6155"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "75caeecdfcb1ca2c89682f91f194a5f7bfab89348cba29d45fc8bd574f335f3c"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "74ea8ec5f130f0a46b916c1bf94401405695e999062be29c485000639b790397"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "2c8ed675113e7ed41128f983376e475d90c647fa4eb96e4291505c51daf3bfe6"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "39f662fd07bb36e77d645808b175b52f2accc921dbdebd641e8582c920fac45e"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "7935dbf71dbac6c62a01e9b3c876e93ee1962a22838c58c4370cdec7f2db3d88"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "444e908c03c6b65a5f8b1d3b9ca500dbe882179c65b84786df1635f61824650b"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "e0a7ae9b07ba23e80060e9a388dc9a6d1b54f4afa8fc13eb40cb88a511619351"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-11",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S2-11/v3-20260906-r4/book.epub",
+      "epubSha256": "b1341f7b555489b692ab83c44d97bb0d2f9de2d97293d8c2cbcf4394b02dd317",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "50e5ed748e2b8463349049de132a70dc3377cbbb19fdfdbc945f9bf9763c0cf1"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "0f33c1b51429c3b3cd8a0f3fdba75ac0364ab3b89e01cf56dff7e4f9a97f6a45"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "f62150fd6ebe99c56a61cfcd61324b900d3023804e6fda5055f39700c9c9c8b3"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "116df08df7093822c9dafef6fdcad1b238945133f03f56c97eda897111088639"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "14b34bf499633ffe5e4b1a4f354943c058ab463df1294ae718bc22539eb96a8f"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "5d59db6c284281a8a7a0e6db84500e9199e67d8f08d993f41db2951114d7d0e2"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "31dd655879810c7f425af96e6d0594f82065ce8bf85c6e08f51ec305dd67f771"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "7d972001e73bee3a427c0a89946e113beb1affc1d879b57fe45c4e85d9ffc90c"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "7d64604cce111667e23c5c95c9ef17d04a81a744a74572df4fe1e60290dd3385"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "a660323ae8edd5caa6ac9c5c484340c995593d074a28848cff6e252744f8bda1"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "b337758920d6a4d31667b9e5deae85e70bfe79cdea75433ab01d39232108e5ca"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "aec37c940d24e968bfd0fd82e0df213025aa26306a478a874db42054875cf725"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "ac1d635dc38325b4ddd5f50ad9e2e0a0fe66d1cac898c87ff5dbebb987c62645"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "13675f3203acfe3fc0435c355126701210c7ef40685e891d379e55fdfbedc703"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "16a65525044a86e5ff2fec85e17140bddb71e9813a8c189d0c594953c486adcd"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "11be77f75a1f48d1ddbc08da3b0c28172ab244c63635e2ba74fdd0cdf77fcf37"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "a6775e4cf5f3769786d5b7922e092395288fb75d8e62250db5e37f6af2527cef"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "3ebea71f47fc514e0f633ff331ddf465e4d9ad940dc7187e82d41abbd431111a"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "6c44a92270d715bbcc90b6c700f818cef673229d9faf2d689d5e3543dc0f1926"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "3d5f1c951b9b0755ce3ec7de791ed74cc0db5718ed7e608d776655c682b4f3bd"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "70e266b9a59391f9fe45454ca9835022a35480f1ce7b90a1a1cf9044bacacee7"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "38902c14813d154029f243785c5401a13703cd7ef87483540880b248ca1558c7"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "2df6418279810e8b448f9193b610fa803a12ff5a31ac2366c7fd1fa9cc9f969d"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "58aa453dfd4c7e27f5f922e7b68080e865b3029783ed41eae67b170e4b153b64"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "7abe18d03e3276ca25bef0749945917ccf1c9baef227165d3090b39a858cccf4"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "1bb8576690831e6c1e849117bbfbc00fc6242c4a9ad92a2f0a374d8e97befe17"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "ec828b6ed28b6f57b3bf91ed25fff8a657358e7378c0a9332386e6ad0a5058e1"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "e4d70e4646b5edad11435a2d56e0d78a26ed29d73419c17c6913e7b10e6a5022"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "eae65417a81db57ad440e8205a0973bfee816a88f06b102b5f912dfcbd9f78e0"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "e4304bc4b08beff49b79f48b7e653dd7bdf3f256422fd3995834e2830d47ad7e"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "49e6ffc1e4d3dc33f314d25562358c8a7386fb28704ccdabdea8325ed269684b"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "2ceef3ef95c7fa94d44341a091b7b1cc127d86809ea3762813e4cbb7874e4ac6"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "fff903b4a70ea731e9877af3d392faa0e96fa9db385ffd3308d8dae48d9b6f87"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "b4c229f4aed60f3d7670704b9b6ff0d2f1c44be12cd59a39be8a3c0496d41065"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "104dffe1bf3561b38152a3e15163e1ecdff004ae012c44caf1d3386886b81cd4"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "b2badc2012929b283948579837f892108e1a67e2df6d352db985cf05ba889174"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "8d245e46226fb6d797e0d3fb4009a9d77e02bc3930d78733ae33b7f5448af457"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "0cdad90eb524e9dafd5d65093c256eaded5bcc41b0f376e52fc3afde4bf7fb26"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "95fc3d8b1d3f4f861df97893d402e99622082f7885471096198a6aa8b6028bcd"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "cf8c4cb99db346415964b99da8dcaeaafb2efed526a0947317a89aaf4da17647"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-01",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-01/v3-20260906-r4/book.epub",
+      "epubSha256": "aa7d0c29676a222b9f66a9655557da09006258bcd3e29181df267b32b11fc158",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "3727cbb586f0e0a3bd7374d0d5ca1d62fe88614e8a1625af39efa1b1a65d43ef"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "bcebed4a07641c8465c528479578d12c8e3c0c7cf7b3fea7c79d66f534a2abcb"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "4f04b11708b4a7cd067409b530c7dbfb03da0399cf61dc411e11e969a4be635a"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "2ae39ceb06e25140957f79a7049e68f70c7b46d0d0fb8d6cc10e91011eec967e"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "5190809e67ec2016dd8f3933f52fc51b44097283c3e0c7a40f1be8d4f6711b88"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "10f505ea984ba231cdced0a1eb3b93f1b3c8c154309652cf1a4cdad57643b31a"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "89c7dc63b1ef9525605b1dc35fe3144902a686aa55600174fd27f3b5bac266f9"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "b6b5d94a18bff1b06c5a6583ff4a01c55254e8573f1dfc82ec53a3c20075c78d"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "30d8f826a7839fbce2da19c4a96e7dfa6f30a49e8baaf1f1bc7a8f818dff351d"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "f91364e47322f20b2091d13fc60cb960a1c71ba6426f667c673baa72cad62db5"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "140ac0a66ac66390751f5ff37ff5eddc0b0d4ae033e814d9db526d492c96234a"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "68687d6e640f38ffd776c14da7809cd8779ed047d8342a7f0b670ced55d25147"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "9a3ab6dc0f913f9fef67eb236288360ad67c7b8c22911b7f8114ec74504efac5"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "5fcf7301794d7963845bc2d8d0e911404f6d94d619eb592354bd42fe3e919ef3"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "4313c702e03e2b55ae21e1ac5fe702c0e4009a8ccfc577454a37327b2a47caee"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "c0635a8f507fc97fb3647ad5bb071e4374b9a77c4d97c7b63cd2449062401f9b"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "1ebe41562620fb53a98d31a57c23e9254c51d85a46b2e1272e1633c9d8785b01"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "5b8faf6abc819b2673aabb321fd76ca31e81f43765fb52a42e37ba0e5e1ed6d8"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "cb64711f65785e280b1544cbe32ea2f2c0fbb78b3d9cc91e77fd763a06d6a60a"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "d032d0de41245b305fdf16a645d55d61910ff51ad54e3f33617806b992f5b06a"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "a8829b665d7a893fdd4a09ce212a8f36999487165558cfa392ef60dc0920e897"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "532c96d7724d778ab260f453a23e11728e0fe6c8c9bd9e08b34f2923ff4e227c"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "abd258a2eebf1d1873a42b9cd17c0faf8fdf310fe1ff20b9a2bf815617b0b1f9"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "d151d77b728e381d518d1958aff95bcf766c7bd0fae67b83e5feb21d89cd328c"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "f3a40d653042a49d6227b183a03a84a62a5ebbe8497e6d5d2a7a8c1ca651bee4"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "91ce12dfd8d3a344d768528a1f3a45e755771f3acc84d60a45ff4b841ab33716"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "44ee585f05c31d0c6cb7f05f47bce3b8d722107fbbc6290504ea6c418b398e08"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "15f76b5f696f2c2f53008caa71db7fe173789f5f829aac95435e3b087da9e14d"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "d7e0d485ca65f7516f264ceac2162c526cd269e9431156ed24fcb1b3852fa7bc"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "c576c667b646fdb9ce73a87cb8f0dd0a78dcdf913326993ab40b11d449b143c0"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "760c633c803e836ce163782e1bf65c49899d030cbb120afccd55e3fbea75b96a"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "dbeef2b989647fba60c6e67d70ebe4b40ea7e6112328dcaa39e71bdcb44f9c2f"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "18f82b4a65eef258b38f1da361b36db2220a7e1d73b5e15e75ee3ca1bf23a806"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "d0e6d2b151b87c766c858cf19bc60ac7856732efbedf7d5c8dcd58f7d51c9a34"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "111377c32cebe7182d256f290c1204667da658b91bd737b0b204e606ff587a5b"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "931ddf2225d3d93e5cdb94af256bbc6f903a611676ca961f74dbb167c720cfb8"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "d65c29efd3dfa9b9748ec56a1a59e3fe5c90479c14d2196390c0e4eb65d9d4f9"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "01b2d40cdaea1fb15a40c031924b8555da308e6b4966f150f6bc985effc7507a"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "f0d74769adc50bedf080a05bb0f72212b21a6104006d6157801fb1c51dca0607"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "77032fb7c40321cd5f3c2254384d87b72ac9a12f4b9d133a4f75ca358d8d343f"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-02",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-02/v3-20260906-r4/book.epub",
+      "epubSha256": "3db46849b9bf0bf793811994040d0aa1140d39e42a1a15693a791b275d309756",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "a8dee43246e86bc0d89e1c2f61a2a92f82185f3ec03cd68f29fc456aca25b78c"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "137701e4a5c795b79620c5311045bf3d526e26a1528b53917f3b4c2f294d8555"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "c2f882bf3b3a62b5fef57b3bf3600ca93c02e89ccefeb9a9dcc38dec8b82a194"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "efd5b8629b808b3fdb5305e1700de53d7e5f63e4c775220c0a961b9fdd5999fa"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "1fba795e7057fc353e7b3371d61f07325a2e83be46a0288ce3955ef0039f1919"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "d95c63653b07ce099c775d48ed46c89cd6c73f4b4ec0fb2c08211e2f135750b6"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "84ea659758ae5733a7500fff93afbb3b59e948fdd76957dd58c87a86e8d7cbd5"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "425eb861a54977c2464bcb0fbda32320680ffc5744f98c37120db252120fd43f"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "44a01d9eb360d843766c2d6c727a216c3f868af6c55a91206b1447ebcf0e9176"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "f0c55656bc866a4fd83453472b3b35f00fc9e8b9cc1d46c4580d233ffe741075"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "c74059642a5e1a3966361d4e848e6665b43f747229af8718888e872d38c92eee"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "ce2e8d5df10fd9855b31b89b72069365471bbbbad78771e5d527016d1b4e1f74"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "c84e0d570f8cdaab6816139fc6584b5eed0af9f9f5bcd2b96ae4da0672f1c1f9"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "4d74d7d41fbcc6753c743c6e02cccd4fb9218a5c6f7ac32f9b2213d0e0a6d9e2"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "1d8d9f80dda74d16631d511507be1c20106790f6c85eb780c80481ab66281d2c"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "66a48773b54ede6891bc62b65c6c0ff5c8c1eab3293e6128c5f4d06fa9ee8522"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "fc2bf7d3e6ef2d40d96b93b824b3c7c3ebc962c626fa16273e04eaca15a12e45"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "f38256e03f2801c1eec80d37f39cc7c5eacaab8563b9a70d81f42db673f4864b"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "5d2d31f865542b7fa95ea42d7e6869c72552934add83e3b23e1b75869e33ff1a"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "bb6ebaa2ad2eefb5ed66c31658ef711540ac4a4333d9d1637a2bf7cbd9522325"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "750a8e1da5f7857f87d620c7582bf52de26b6162f89ad88cd80669e525d4781a"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "3772143f8d35802af033730e1409c2adab3458b3fc179a3f2a686035f7977944"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "67c9d04b2049ce426b6a47229963f2b10c9c578f8db68d4ff1af37ff1da0ff3d"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "3a887a8648f05cdbb1ab7c7fab19d73dc869f700cecda1da7e323e8e13019fa4"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "c98707022cfde958d7570271dced72568d399897242d96bb3436d77d6e405c95"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "d10ab763d27279b64894d153c8cc934b45163dd8bacb643a2ab7d7fe5cdd4cd7"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "ecccf00f84bcbb01f008d7dbf040acb64fcd961a26a1ab6d2018cc91cfc62977"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "951117e7f81905cc5091649c446a91b47529aaec6e47ae1ac1881db9361dc320"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "caa46b10bf31adcd13b17156034229c03f885deb5b6450e1f261d128982d2792"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "ff740d75d127314d24bf79939e6742525c961527307899367741575ebca9dd84"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "bb4fb7a01d9c82b0ad30f747c0f6653a750adf070b023282bfbcf0e71a1a5e07"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "bb9829e5a8a964f2e10dcc7409c9d83d9ba994d0e2801860047cc1777c128d6a"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "19a831c8cf98ce5f770a2fa924f0dee812d6e9d197ac075e873c1de5f0e09a53"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "38575805a17af2d5d39cbde83431e7dae7562207e8070b047ca7b499ae823887"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "b589de5418fcbbe1849f31dd8fba5899141b9787557d15ec7eb0d8e4773074d3"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "91d4b7632970b518314a61bd7142c06ffac8361858cbe75ece8afed361f85f31"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "3ccfd89e4763115fbfffbca25d9b9cc298d02b53af6ae81c37c71182514d182b"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "3b56b0428a4e53985838bb3bb6466fcab3bbbd034b7cdd9b925910b24f78315a"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "9ad621e322a03dbf681628ca8993afa73688496ae46f287809e601531b3e5a79"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "852dd3d70d9e61e7f14bfbd6b2e9187d9e75e74f712e1046e2e765b1d2228457"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-03",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-03/v3-20260906-r4/book.epub",
+      "epubSha256": "7a0fe8fc92170763631c5d6ac89e78e34f4c6f948bb6bd99d27c78d69040a545",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "428e3dca821b5446366c930b64d018680e6a4ef07b05ca70898a6c9958f547a7"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "d09bfa224f6080172ab0327c1eddc688b0be27e4c28f6d09a26907e6ae90d5a7"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "e4193a2b9e6bdc9d35ba731742b5d02522919d51194c20c752ba39ea52662382"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "f92b24156d7d7dec56bc0b0aefce90ee4e806020e0c7338aa06e783139075d5e"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "f5bb77929a1d1fc6d319282a7c43bdd923b1d68f736d49d74ffd9fb8fc22b30b"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "3041ba39756783ea1710593dad129ec95a2d6a5a1c6ee21d8a10807063990ba9"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "de31d72d3bcd4724627599c334004f062512f1f87eee45a1071ed6fbd44612e9"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "9948a09888c08fa3fc1c6b3769b2ab48e9adbee69b6110fd6ba7d96c47c0bf7d"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "6b7c8b51451fbcdff276194357100f9ea3533836c661f6ea21ef5f31b710f8e2"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "d88890129df0b95ce1c687bd936489f23079e17afee8722cd310e3b62b4fc841"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "13a9d511bec42ebef3ea82fb4f99619b0138d880b70da09192958c63a0d36c51"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "4aabcc2bf2e91f77b599f43bfc9bdb8d7d17d5018296d72f644deea170cc6e11"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "29dcae44b7781f79c3e9c8c5880be93584691c29b6825d20f1b9339a773df6b1"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "5d08f1019a881e47fb91d99ed1a700a36ca2c013f97fffc4b27ff05443d52e60"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "a86f92b38a82646a7aead6dc3845ed4fcbe3a268f65d7557c6af7f220a84fb98"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "7ba0eec43b1e91a29690832adffb6f07b42974cb87803eeee9704dc8102e7c8b"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "c68873a0785bd9f51cee829f02bac2ed8620da199cb7e3c1da8782a84dff9bcd"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "5420ed8c651a8089f18bcb8bdc74539c2588165899ab1a39776dfd51e23dd96a"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "ba98f51d08394096c925c3aaa60a44b099c3177444d7a39b7361de068ed6add1"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "858c5556716a441d0c3213923356e89aaf6839ee96f8bddd95f3e200a4006726"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "e73e396855fd49fa3ed7103013ffb2e64489f7f42737195ba03231dd0b8b4735"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "a8b3769bdd4e6a4e3e32736c45591cca351bb3a232e55c59ba16ad90bb9736d6"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "c2f7a8fe179a228396007cd630f4d3a075d0ef4a24988741f3c5c154470a68c2"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "7cafd95611f4dfa56597ec098aff0d604339f634e2cd13071c624c57a938d054"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "c4aa6f743e867cd27e781904ae8183ce64df9aef58b11a2f3954d41b96ff27c9"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "8367525c3aaa76562d002dec6537d9b10450af7f8ca01f3adaf80f9551ae28be"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "bd1509aad829faa79d731aac580d9ba66f650fefe96266116413661dd21e3466"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "0f1f8108a35ff1739bc3d335064e5c154c266088d7a7561d6308b9c93214ae4a"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "0f941d7c61c93db222be91b060313ca637585384d16b13e2f56c9f4cbb6f15b4"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "0bd4db5ee6cfa939e4982728c0f96b37d8d21552a3efde6b96179d61d8147793"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "f37fc0e38576abb6046f887274fca44d9c772440f39fa9ae88051de515ddad1d"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "062f9fce9d4e8838fa28febe68ed0569c5f60215230be6e3490949b2db956ac2"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "6d5ab1bbd893824d05148d26aeaa292d2a107eb16e9483995463f30a5c09ba1f"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "0130970b249012039f1a91af90db13484e1ed3f5a70e8d41049ecb945122f89a"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "6d6cd2d0521454a36ad68374e9a4ccc907464fba59c32f13295f7a1ca0ab25bf"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "617698f30e23a833239dbd90a792db1f83a928b3fe1d876251858cce8a02bfe9"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "404c272150cfe93b72f90d5e05fefec7e26a56752edad62d0e42579425d30b68"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "7e7f1ef9f0b68cf90f8c936995b00a4b2316f1b76905c53fe379ea3c21a1f92b"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "4b84ab3e1ce2c7c1da6234e5748e3188cb0108a27d8e47423a5b82f9cc753380"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "1a55ea5c8627a034b0564a877e0ae51300e6475a4b21c7e71942b090d003d6bd"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-04",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-04/v3-20260906-r4/book.epub",
+      "epubSha256": "8ae15d4795a35dc375d272c2de4db201d7e5ad798d52c02cc613568735c6da38",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "0fe1c9b0b2505523238fcd69d73f129d23df45c0c4cd54d4f6ff68134fb2b4ae"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "42027e2faed6477270ecbb5fe4704af284e908d5ad1e8adb2a4363cf4c66de20"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "afb2e07864a6881aaa7a21955948af695b349e178fa4095802a1c4dc1ee5bc7d"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "b4679f7ad08f6268feb644701397c8fe7c0988c6e12af47764ab1956b68ac6e1"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "c631b5b3fb5d04eb952c110c64be83e19eab9aca8429520d1cebe945d61ad637"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "cdb750344e9dc698f5e8e0370a636cd25890fbb1bc4097b3da0ca18cc9a04697"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "64777734a556ae6b349c8ac7d900ba3036e0438b69a46770c9634ee18ecbd357"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "5e231a4736f8fc76236f3d03c9b20c16fd5cd734bfc933ca26c487ee1732d546"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "a7b021113e95ff48a39ed4d0703cb86fd670c57bed9e3872ed0c70ec9e7b75a6"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "091e9b80e0cae48434ab9654705b1692c8cbb5f798a1d806894c0d2c7fc9e1ff"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "5a8d05096f3ea49d814c6f7e731f5d4069d31e6e23cd1431dabd59a81bfbe87c"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "1a002806275438cb08e102d8b1c32b23a0214c611f0fe97e93d5f4b0cde26ae8"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "40764ce342b372c4de44449ebe4f5b429749ae2a81d383ad0e9af52e7585cbb0"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "d7b3bef7bfde2449c6bbfe0c2a9d2712bf442d81ba6d5cabffc320b35b6035ef"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "dbace5451a119398a22a9ddccee68b07c51d81152ae4501dc59ba0e02716f882"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "02914b6281e53ac56a1f815946744555c43042baedcb80f366bbf7044dd35f72"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "d45e0732a745937319c27865cedcaf7d0b87b7c265acedbabe169a01f3e1757c"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "501b16cff861362f1075993a7c6ebd33c34bbbe3aac125fc3ca1c7d9ed5f7c9c"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "07954929fae22c8d5f7c025a95e57297d7a720e413977218dcaab5ece2249976"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "66edc1f0e9fb1d1cf676b97424bdfaeb2a9b8676b0e68a9b885194e2a0612f18"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "de511b468c63fd9b3a8234e4524be3d82ca242ac000d5bcb132fb43293ea330c"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "f3366c201cbe954913026022d238ea9ef3ad776b7af706ad858515a765ee9bed"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "e87f65f1dd1bb32343b294c01b8f695f08a409b518bcb8d8e4c8b6626ac21d67"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "30ee0438afcadb3ae531109a03859b803f234551368a808f6d0e1eb46a1e8a41"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "a72b2a565923857614ca8806936420bd1e534a7dada2faaf27edc42563d58a55"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "fe64d279e98ab6a6b7878c67a054a95e42611da6c0fb18e8c9b7a020c88433d1"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "e957dada13462d1b806c6991bf81ac0c58452464b7338a47f34c0ae0f221b62f"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "0ef55a02051784dd09bc4461b6e4ca4ea1c8d7e781cb37600aeaaec83f0c7db0"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "c1ba616362d03943b98dd7a30968521f77cd154369ff3f213f3cffbaf1c09d8f"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "aa8587141f1c10933879db13dab715f8a7c453e4c693f278373644554f83f633"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "bb565c76bfdede475968dfe23275702f272b87251feda55a43750c6a20c2c3d1"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "f248e015a5c094f37dca81e52028fc45bbe790e55b0f8155af1f26b0cc760858"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "9217d5ceedf16ea788f90f18cd7f88768c5b97f4608936d9acc0171ae179a2df"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "0c146d63d9862af42a15055c2e825db06f8e0673bb7d096137217e83ec65e33f"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "92bd06bce5a40415f4e4bbfdaa5f54d46fd0efbf8480f08affba353e1400c4a3"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "7581a718ea812a632fe6a3b62ed3f46af3c074116b17afa877e04f41a6f43b2c"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "d7e50b500b5f66209b82101b42bbc1d20197dfabe181147cabc878ec017868d5"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "fcc5f07d6eac0050fc8123339dbfbdcd5a76affd9bfc4dc566e5499ac58da04b"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "3f602f8de6ad437d346be3a8ead977ac2cfb00fc4868496967cd7243ac8aee76"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "e4dc9edb1bc257d9740fe583335e228a9684d84a17cf8c5ee1d82ce378d37fae"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-05",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-05/v3-20260906-r4/book.epub",
+      "epubSha256": "08ef2b3e74ca9923fa20a4b1bfdc5271b86e1bd58d7a45051638062c00256d92",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "5eb4e944db5ad23cd345e0533580911ddc9d28ee4d7530087c3ebd7e0f46c47b"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "b8167695d9426dca2e1f0dad518ca48a62d1eeb988a6c9d55fd6699c93754a73"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "e8bddff9bc959ad36f6ea5947d8ad5ce9917c2c294a07a1365706ef47d8d55b1"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "589621ea4e0b61993a017449cf218c99fe6fb8bc56234d892b5765c92b93aed8"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "12a5a4ca1e2c3f09f2aa777b8b1d99563e98e7ce0941c31f3c0a6d3074b36bd4"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "ded25c3170b9932b284c11795a02ca46b1fb70c9be36fba1bd04b7e23d13fd09"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "9ab9a4728119aa7e183e70db8b137152c609e89cbe252d645534ad8990ef718e"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "5fea31ec6b4500609a536f4766dfa02dfe9a439d84236165e091001ef564f558"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "61193040cb561f4de2514f9273027cd39b94b1e1ff4e80092f809f0907ea31cc"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "f39d530a4c9e3bddae91d01dbb4ab3d0393541555008aa477cd120dbfed2f2ee"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "0058bac44209cd65cea6d208031a5d05c96946382f53851f2af976b49104bd8a"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "8d38bd54b50c6dacaac2eccc844c060fe98b07fbb6ad3ad8da26801aff24b1b9"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "790108a6dc4cb2877c1ed575debd93fe0cf2843a6c81c44a28d1db267255a4b6"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "a3538d0ed5e04f877db228c50ad07ef86ef8b4230265bf7f0ea36c2a07293e36"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "48842f3c97f52de358e7fbf4ad86007953f211a7d93d27055a9e6e7a527475cf"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "9063f527ddd4861f57ece234baa2af149ec03176aa21e378e17e223486140cb6"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "113f81a80702141212e33fa57e5260dccd5b0c85dffee618d99979343479d303"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "0638a9db988f3ec253e8c119c6128628a656068f91f8bf67f62fc89b0636c6df"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "a3d772e7cb2b0f4a9d1b8238d87bb5b2017461ffedd93ab5c8d13c85b30f714b"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "eb4e693d4cd1ca99279438ba32cf5d88e86fbf8da0861c33997825654afe0f3a"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "f1ff30477151d7fd7905b5437ec2d4242c7b7d3318960dae2bd61f677f7e289a"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "52e8657eb7ac2fa6510b63bdc95ac653e3ae4834ab463cbd6c21d220488938ae"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "d94f4a0eebfc9a718572b687909ce620b884bae02da1956a3ffe7d89f84bafbc"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "21ba40e306226be05a20f5130bbcd5f0356be2b42455ea100864008df38bfaf2"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "4ad882460ed7ae0f6bfc67df31cae6548714fc23ab484b7db032640286cabf81"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "84d0a3c26068005a8ec35861d203888d09c81baac37c6801e805a13e2e6a5739"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "76befb5b2650f3c7118cc7bb2a006b00ff16971c0cd1bd08c8f26f06fb9a9fa5"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "d0e81a4e9bc760a23812241eabe8b4859b417619c9d0d4848144d5d3929bb2fc"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "4281549b37f6db39e72b35ec59aff8375ed27c44b2f0c261ecec876de9fab6ee"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "07592d13313c770f34736b74369d2b530a65a03932e38544b4c1dde45e236689"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "f4fe81125d3e806efd6dfe8f182a874b2b48158195e829acc1fc5df901528d56"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "cccd2ab737807e852b30aeed11ea633cda7e26b1496c23948265fe84f295c480"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "36df259a1217812155c0ee95c0922b5cf0cc33c196b0018566c912920390ecfe"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "6c828b53a77e981f358a2ba2d773f5e74909231428b79db27bf5a0e715640a26"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "43a052fe35556bd9fb06e61e1a63247930bf04ff7356e3a4434b099c5f54e5f3"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "a96a7490e2997e64205ab40798190f838001053075d2e4931269a1ae520bd9d0"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "1b3118a09cd38ea25d0a0c52c641ecf6ebea4a3559eabf21506c9e1730b9c316"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "1d5e8c50e8c66300e4dc4da91cbf79a6fa794580df1035e8f15f6e0fe8c7ccd2"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "a1469ae39c8c1bce160ca86f7f930e0cbac8f625b97e002f385df8272606d171"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "974a2a06134f6206414e2a865e2df4796592aadc4e0771e74c9c6d856ff99671"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-06",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-06/v3-20260906-r4/book.epub",
+      "epubSha256": "df7253a10ef1a1b2bc0fcf78cef68624ec23f40681fac627f510ed04b317044c",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "5eb5bfc2533dace5612cd737f35cab51451c1a1540a8d8abf6aaefe645475421"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "921b3ef2d1205c7bbab183947428b30f9b544b31050f05392a1d1f63e7e746cc"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "31be063ca599bec6a8f47050db98684d3abd15e496731408072f8857a9deb6f5"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "da9606480983b066174aaa3cbdf35da981e0833bbac4a1d5db9cd808ccafbd63"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "406d673df657ed34a20b3286073479f93498240162a104e40c3b457bb05cecf2"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "1c37ae6535affc9d22bb28b033370611b46b46c6219adb23b6f01640e4e70fbf"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "f00bf02e8e91bd63fae484482226eba6cbe5ae5190d805f19fbe556130bcf3af"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "9eb51eacd54d079b43226460032c28ab58ccf62156645fb23d932dfa755147ef"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "f1d9178551e617cf0809a113ec4d837456e15b2f609928b7104184a3b9fec1a5"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "642e22ff1baa3ea100994b0b787720f3c02c80f44bb4c16cd21777aa9c4c203a"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "eb09038c59de13848c106e335e70334de438667b379a3f0559570e3fdbfd2bde"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "0358b29d81b4475a2625786ae6ae0ce76fa829cf3a9c31db357a827fc53c2418"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "47ea908cfe861bf65cb36e996443a45a23f75ccbdebc1eb2d264fbddfb3380db"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "3d5ed32da07e225fe1559592d9ffa004c22e66137814b28bc28d33d03dbf4e88"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "fcfb2a404e43fb75d638146c15729aa4a1a1f5fa6592467ce4412ed4d83141d8"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "8edc23af4c544af7a7934638e63106f5355567607c1211e8bd2e0003a6057fe5"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "ba8a23aa10844478043db8056495f641388ae8399305bca44caca1651c59eb25"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "cc2485f106e726b905dbe6284b97a6c4a2545cc8dfa8cd07146c45173cc44ab3"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "87c5be90381829f94c72a2fdad68f3424a68bc6dbee8d3eccfe3065ff99b9bd7"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "a98240cda5236106bf1b888c4073cd1235b3eaa831a3e1b7ca6526d05c588ab4"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "b86e86cbf13fee853046b10d7b41856cf9f0f8c3159a08252cada419a2f7d9e6"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "101ef6113e4af48486268039a7ab2ef355d39f988eac9533f13e1f83a113b238"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "239b2ce7a558829bd51edf5a063f606e795ee7d1f09d80128c160e0e55779514"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "99e4c6b7e229aa45d97c3f48be0cf2ec476d47e1faca93d920d4c8dfe5bab725"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "7b5f7937c053b85ade070bddbe90bb74a947ae3287674ca57d0410161a46dde4"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "50a027322f9386ee7d7f8f10dd2fa984816022bf5cc895305119d92e01b36c69"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "d2c0170fad71d5e94899497d08610a90b02e28aa7051b0b6de5c33218f17c3f3"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "d07e3a5b6f727663d2d64e13008ab0785d783d099e050da00fd55f61c43c9071"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "e05176d27f4fde775d28f964bff994d52915fef18519889de655e6b9b55919df"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "e0e1d9590e3a676c3e29a3760ef350397abec9c9b9d01a13133cb0b892b2e689"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "93d0726c58c028128f6a21e2705b6ec3758398388227aa7a26d748ddc132f52b"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "cefeb66452e2ff4dc9eda2f48055f504d2d9a1c571cce4814e312687e70272ca"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "38c9d4b892f24296e81bf7ec48baaf9e061225dfbf3f2b55934ff7d337b4eec9"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "3a79b1d0e72109b16eec9bef9e70b715e0e541b880b586d0c0b485ec05b93757"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "f89c36682574b506bf856ba5b5dc1b282dd33787fe87d406661ffe5ad56ce8da"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "6c3bab55f452ff3a4390f4c23150dcf3a947dc770125e7cf0d42af26cd2f8eee"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "7c9809f1eeac910c381ad5277648026c763e84c39f65defdf9abf4bc7419ef88"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "88d5d8ccdab0ecafb0e07df66f55b872812c87ce3940ed23841a2da81f65a524"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "a432eba00a135102c7ef5dcd4a2964fe5db329c80c1c09eb40505e04d78f69e4"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "7ca0e59116389a2af461746b05e0e8cfac0c2efdddeed8206372566a8946daf1"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-07",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-07/v3-20260906-r4/book.epub",
+      "epubSha256": "81de6d12a244c60f7e5e82ac6deefbe64e41b8e25cc4ff8dc2ea26a0915fe819",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "1bcc848c1d9cd784d78bc67afcc3022111c3840b304cc388918058545ea9a7e0"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "0d838b9226c34397a26f7d23b0a29f2f34602a2587ef66147456cb428273a662"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "233603df5b2ca95e012fb5ffcf2d1b1b9e3ed506ad482e06fd105fe3300b2dee"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "bc3abfb481d25a826ce3ba2d41e3e89f330aa8de07f48e1ed046a6a3835f1fc1"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "c8ebcd3321c4948b9dcf74cdf222ac740b7346dbed9b95b15e3d7de233716c82"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "f10988e9ce63eebba92684c4cc9f83e2c932f28c1b855c5641726e9371aaa9a2"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "dfe585fd4e72d97149eedff3e4bb8446c34a4028e3627beb9fe88c9d51f51ea1"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "d25e32507b8230e355899d86bdfbec1439bed982ecb69838b60de2822d9fd548"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "93963bd79fe53d1570e291fe32d44e19a5e549dad23e4b405bc8285fcbe9bcc0"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "854e3a7205d3f3e9145a9ccbcb6aa789e16bd881faad9309793d5dc7599dd4de"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "c2cefbab81b0e2bde6e4c8261e51f1a0f9c5c7ed3079d8567d958c509d1fdb31"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "b77a824e05df9db7377fec2c4e6c96848604e3a4bbe498a38d9165dbe8e56991"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "e1fe0e68ea90362e43c53085d457f25219cc65960987f1383475d624db08f613"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "cd77adfa269cbccad00456bf8ed744034d9d223f6dab091cd01650e705e65ac0"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "c28993ec48de23609e4c1cc3bdb0cc5480b8c81a30537f7f4ae5ddec2d5a069a"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "c99f8bb9713efe53cd33f939794128056f3bcaf7e9a41572d2ea86cc06917540"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "5fb1ec3c0115f34bbf575a331c0328ca1f1abdf5f99f15dd5db7fb9cd8441db6"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "61618347511eb520556f580b59998f076a8b862583cb226df2a5062ab3cc7270"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "ef6c55a6e80d47fe67ad412d848b297355154329673d7c507ecd2d05827376d6"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "1afd71b823393116711309d2c66507a05cafcd5680e1d8fd58aae9be754f5144"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "bc59f14bd885adf9916265cc4364d5a7eea91298a3b7a56f86910317d75c3a87"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "3ad51852ed165bb3bfd446c536d4b3a4bad512d5b24e43bc8e8a947b868e4687"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "e9224272d2dd0f3662a8ce5ee0df640b6c1c74c2c730ff24a5514c5256a8c4da"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "0b0f41662ddab83c5bfbac52891766ab85b1708f3c46deb6de88b417a1b3b9a8"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "1ac4eb8c80fde9ef32c60557e0f3482c25ba128c6945408d4ba841b500ca62cc"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "65f1e69171f5854af8b788a30782525227c58459834b118f9fca23da16c48df7"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "d08891c9d70b4bddaf9c2a80992ad15645efb9d6d4a227ea66d4624d4064ade6"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "54234827af0ebcea22c5c80bd9068c4678e48730723b9954fc83fdb81be352e4"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "0f63f2abd9aa3a2689d827f6843141a13506fee6d93708633cee25d44a59492d"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "7bdd0ddacf3bf80cd7937c7eb482ae19a57e6f50c0eeef97cbbaf66e1a925649"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "037d1998abb0a4e0d6baec96a058fe6a255cc1791761ecfda9a9243273d38949"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "67da319ecb16f04f5bdc0051babd00927655129b644816eea509bc369484beef"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "1bbb56c2f76a4c5faea0283c0c5917d5ef4d4eaf62d9d23eea9478baa60aecf6"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "8219396c25354b457fb2efa6569c1663df66c21b5613f1f29b75ff1a7be669d8"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "23304f4afa746e05c646f0814fb4e8df09b2bdfc8edccbb5740320f7d385132b"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "ba0c778cd68f55252942c4e034a94efd60be8493a37ed735a803847016e9f5e7"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "cf3c702d155c7e6a09cb5eea3dba891119d42f1f3f978b68415e43014a459f60"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "3e3685d946c95e569d512ee4172cb5189d58f74701234fef948ed76814c5ee36"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "9e7036ca2ae402c90cc715681898ff6a89e3a909e8dac9548285889fdf1aba69"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "f1cf9176eb94b0d901dc3a7896c26d5642fd3a6036ea648abe999f709e396c04"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-08",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S3-08/v3-20260906-r4/book.epub",
+      "epubSha256": "a0c3c5f52ccd8f656e40cd9ed24afb3da3051e2ce1ede304087fb6b423c47d9b",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "48f055565ce0c968fa8822a9a871a9ddf62788cc27f02cdd0ab4a80a77a39cbb"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "05b8ac125a6c703e96987ad7460d07f5742ae071e2c56276dee34838de146446"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "16c71978b90d9912e28eb90b0a5232031cabc633ef26d5db55f72768f3a8a7c0"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "79281f518ff84222631f569730d33b5a2e19236f2b0caa85082886226481c166"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "b75822fda250698fb975af51db554090417d433d24e5bcfc0661e771abe6be35"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "51ea0ef3a5e9e54d9be3db55b70da64518a1cb1912b72c0f3b39a6121ac55a2e"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "895c5766bd13f01565ac673e1b6376a983b34d1ef4ac93742824f00319682be5"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "dfee14dae0b469624a0509dbbbb9ac0efc737cda2a0805130d5158d9c37302f1"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "137ecec48ae14f88f852785c43916313605310a3f1ec80669cb7a85498793cba"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "199d085775823ddb878b3292846259b5f01deebcad3b0d7060931c7f7658c4bb"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "13e5726d017cc014c29bc618aecbbc5916dcf584e8da8f3517a0236576d6b4a6"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "2df1a29866b2ea61b41351743bb8bd0cc137eeef0f22ef0502a71c47e0f669fe"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "8ea741afc1a73ce372ce9e29e333f825341bbfbbef3a807dc54357047fbdc554"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "a701ca3d1a73c9031660cd088e72aca28c6aec2046507d0489eb5f8d577af103"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "f1131503d1af80d0dd0d95c28f3f2cc8f0b2088013629ce6accb2fdcc5ba6b4a"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "28bf9d81682ba4a10bfafb132fc0ac75dd233fc9d8aa44e6e03cf90df2f3c28e"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "75a915cc0d64e0199309a008848d052ccdcdd454cd5848e8f35574a7c14c0dac"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "8470a6d884cd62933998104e58028a6ef6f10ef7ce1e403dc9e9dc68834b44cb"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "5816769fd0e63b007b4e184090f5535018366a18b11d6d132a2daae40414ce9f"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "1437206cd39632a694fc580df4c1c6c61077088f9526acd181ef2a786014f814"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "4614821d24e1b86088b23b64f68ff39921d42d323ebb2d3db9b6dbddc927e120"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "cb3921ecd563fa7c651b0fc31f893fc890eef336a15faa21958fc53875899251"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "1c7620e30cbbbbbb7969975603b4c27e08bae5c99903ea99da836ad120b419c0"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "523e9e8926b27e0966f0354938ca5ec40fad475055ddd075710ae7de073488dc"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "463e1631536c5306c5fa713f82d04f2ded54388aa72aa963013b5ae099744bbd"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "45963d5c0eb3789bfd405073fbea1e8ed67df4f6333b5ea94144860a499e82b7"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "a2b1ed1e492c3afc4e0890a8f4eb351609cde7d2df423551797e68639a866e89"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "3d1567dfd7ca031270cb17b3ffde1737dfa1a3418161313ad7ed4e7a69e22e8b"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "9b8dca395c4c4e5732bc9081c41199d94a0968c28fe5316dfe26ee7cdbc8d5bf"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "247868d617ba6614b24714138fba5576d65ed13fad3b21ec684a2b3679fc7fef"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "895f90d6e7d183473189bd8ccdb36f933ae0eba3df880a0d3dd5fd81ffd759a8"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "e107f7dbcdc6cc69c92c2209e35f1e90d48b752ecc62d5fe44b116f8dd67e798"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "46a611f84ebf6ee96b5172e65964488b572663c394f62acc42d3f3bf80c1212f"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "6e0ef6ae09d73be72d5adfa0c673e4b4192b651aeac0c012b656d3548339fe03"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "452d386de818dd4cb40cede8c36d14309ee4fe72f6c9b286cc84bbf42152d4c0"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "d1080f215ebbe0ffff0f71b9c939ca5d305e133b6ae821c7101e2a3da1933891"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "0d3b606dc6e7e329945f5f41e0006d5e4eb6d6c985761588edb88601409b320a"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S4-01",
+      "version": "v3-20260906-r4",
+      "epubPath": "/Users/minamidaisuke/stats47-geo-release/.local/kindle-books/K-S4-01/v3-20260906-r4/book.epub",
+      "epubSha256": "11a327ce0233b07be60969574fb729d82170ff638ad3c4b04f5eba013da3820d",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "0aa120c96e4285394939a47f84423a6ad6b900d35cc5ded12eb8ef0abd783272"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "9a4ef350b7d57f31d44a82e5a30150def4430f5585819cc194fa038060d3e37b"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "a687f5021595c82609a04c7e90ad9932f19fd545c388be0b9e1a98442a7e3cb3"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "6ecd05a38b6879b3700b058bdd36e3b5a8a9b49964b73f328d3060f3f7f71139"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "a660323ae8edd5caa6ac9c5c484340c995593d074a28848cff6e252744f8bda1"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "7abe18d03e3276ca25bef0749945917ccf1c9baef227165d3090b39a858cccf4"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "71cfb9b66d80140e049cde040d3d46cb8e0ed6b346c96e3616cd9a90fa1e950a"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "b4c229f4aed60f3d7670704b9b6ff0d2f1c44be12cd59a39be8a3c0496d41065"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "ec4c725cf71d246bfe684e82985bc020d891a565801faf2bad63e94b595dea3a"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "7cbb56fc905a941cb978514dc90dee97602a245397fa5694126e4faebe4b2004"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e88dd222962f3c512eb15ee0ac19c8ba7ea7c7b400ff1846b1e5051e7087716e"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "7c239b7c329699f471f6c419401323ece791f38bc19c4ff571206924cbfbef8c"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "6aa0a77a3ab90194c356b906954d45ee0b870066c8a57ccd7136accfa8a81af4"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "bbe149f18abe9c00929f787109c5773f1d7a086c4bfe26eced467a6d3f2d495f"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "2fd560f9980ea3c254bfa1e41740ecacf375481c4f8c73e3126de97198f4cd69"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "c3ee01c75a2026687ab27ed950320bdebe9ca0515216453c0966fe2fa2315354"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "c0a4fab2d63f5008444028c3e4549db9d972cdfc8ef5475961bfdad7f06b94fe"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "df35c055ffb25588d7b051919eb84c000e3f0a10f744f80f197ddc15c969b2c6"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "7513101c88ee7867a92338a49799c8065f4ac4f6031b86464816572dadc75034"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "b337758920d6a4d31667b9e5deae85e70bfe79cdea75433ab01d39232108e5ca"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "50d8a1d42e490a89a9670ce2587aea371b29a8f18b4819a302710b8b064896b7"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "362b56610dcc853eb013c18becb3483630c5aaee71c408b6e84a9531c91e12c3"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "d3115e08988ac9a90461bdb59666f517e88c9e569907d3bec7b35c27d65b7978"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "36d3a593c72737d4619992b57e7642abc5f7735b236c154464e55b952db7ec20"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "592a8a010c055b6e161f24729bd32e97260b6cc1af799a1f5e71b66410c16b43"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "c47579b324b49c29ea0950d1e8a51c58449173203ca1146d0ac50ec8e5ee8c12"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "de42a045ff3c7cb107735b15df1588ca1c1ab5a9b41908587df7b589c84765fe"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "f8b700671881ed7bc5bf7b8277bfeec43e407a1a5731c60a8724a50204c51086"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "8b6105b8471e5df13da11877d9619842cb3555fbea83053faa3c523ead0bd8b7"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "c26de2e70d56619973e706864cc129db7b70c07dda5da7fd6e132f9b264d7873"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "c3a988cc41267dccbc73d75be2695ef125c168c13813b32bf924f07ba9aeea56"
+        },
+        {
+          "fileName": "chap030.xhtml",
+          "sha256": "96264ee161ff65fd1919d919224325b8a899df2f27241c5937d52227ae3ad5ea"
+        },
+        {
+          "fileName": "chap031.xhtml",
+          "sha256": "b65fa366967620146e2be780a745de2a6ea85d3667d5700ee7a5c4a3a02e050d"
+        },
+        {
+          "fileName": "chap032.xhtml",
+          "sha256": "c13be0b9cf5c0b72dae2396df49b0f59ab20bb376921b8a36b7f47306f02d2f8"
+        },
+        {
+          "fileName": "chap033.xhtml",
+          "sha256": "6ea0dc7b666fd091163149ec7a9d57abc5980ea050ca507dbd86bab994795224"
+        },
+        {
+          "fileName": "chap034.xhtml",
+          "sha256": "b23d3d162ef7985241f8972806df273d73008832ae695afad51f2005f377e1cf"
+        },
+        {
+          "fileName": "chap035.xhtml",
+          "sha256": "044e429ab89c9780de6f84239692a6a45f590077956742bc0faef5ae2c4138ae"
+        },
+        {
+          "fileName": "chap036.xhtml",
+          "sha256": "57f23ede07cb0d4a17c4b1fa3af8a6dad0dc44edcd98e9657c6c77aad8734481"
+        },
+        {
+          "fileName": "chap037.xhtml",
+          "sha256": "9ce71dba36498fc9b63a4dd1db2d09d228efc146b0c12e8f9b312641826c4953"
+        },
+        {
+          "fileName": "chap038.xhtml",
+          "sha256": "b353cd6fd43da82e49f22194221bb7720c1a73b9ca2f656a4d97cce40a2f6852"
+        },
+        {
+          "fileName": "chap039.xhtml",
+          "sha256": "0ae5249e210e8b3aff177edf9ddd3f8460fe2ca2a780fe095e28c4f0b09b7dca"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "5ffb1092cca051b232f3e27825de0199d3d215e8ce84a6d0dd6081b31ce552d4"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "463f17f7e96aba4f13739cf305260d8d6b0ed304b02fdba17433447cf2d361be"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    }
+  ]
+}

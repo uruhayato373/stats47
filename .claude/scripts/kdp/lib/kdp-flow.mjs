@@ -20,9 +20,16 @@ import {
   setKdpPricing,
   saveDraft,
 } from "./kdp-form.mjs";
-import { writeBackDraftId, writeBackListing, shotPath, sleep } from "./kdp-session.mjs";
+import { ROOT, writeBackDraftId, writeBackListing, shotPath, sleep } from "./kdp-session.mjs";
+import { assertKindleReleaseReady } from "./kdp-release-gate.mjs";
+import { captureKindleUpload } from "./kdp-archive-gate.mjs";
+import { resolve } from "node:path";
 
 const BASE = "https://kdp.amazon.co.jp/ja_JP";
+// Remote KDP does not expose the EPUB hash. An old "uploaded" label cannot attest to a new revision.
+// Keep only this page/session's actual upload + completed read-back, never persist it as approval.
+const submittedRevisions = new WeakMap();
+const submissionKey = (id, lst, archive) => JSON.stringify([id, lst.draftId, archive.version, archive.revision, lst.epubPath, lst.coverPath, archive.fileSha256]);
 
 async function gotoStep(page, draftId, step) {
   await page.goto(`${BASE}/title-setup/kindle/${draftId}/${step}`, { waitUntil: "domcontentloaded", timeout: 60000 });
@@ -144,7 +151,17 @@ export async function verifyDraft(page, lst, { tag = "[verify]" } = {}) {
  * - draftId あり → verify して**欠けたステップだけ**やり直す。
  */
 export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll = false, tag = "[kdp]", log = console.log } = {}) {
+  submittedRevisions.delete(page);
+  const archive = assertKindleReleaseReady(ROOT, id, lst);
+  if (!archive.ok) return { ok: false, warnings: [archive.reason], reason: archive.reason };
+  if (epubAbs !== resolve(ROOT, lst.epubPath) || coverAbs !== resolve(ROOT, lst.coverPath)) {
+    return { ok: false, warnings: ["送信pathと出品台帳が不一致"], reason: "送信pathと出品台帳が不一致" };
+  }
+  let payload;
+  try { payload = captureKindleUpload(ROOT, lst, archive); }
+  catch (error) { return { ok: false, warnings: [error.message], reason: error.message }; }
   const warnings = [];
+  let currentFilesUploaded = false;
 
   const runDetails = async () => {
     const f = await fillKdpDetails(page, lst, { tag });
@@ -160,14 +177,15 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
 
   const runContent = async ({ uploadManuscript = true, uploadCover = true } = {}) => {
     const u = await uploadKdpContent(page, {
-      epubAbs: uploadManuscript ? epubAbs : null,
-      coverAbs: uploadCover ? coverAbs : null,
+      epubAbs: uploadManuscript ? payload.epub : null,
+      coverAbs: uploadCover ? payload.cover : null,
       applyDrm: lst.applyDrm !== false,
       ai: lst.aiDisclosure ?? null,
       tag,
     });
     u.log.forEach((l) => log("   ", l));
     warnings.push(...u.warnings);
+    if (u.warnings.length || (uploadManuscript && !u.uploaded?.manuscript) || (uploadCover && !u.uploaded?.cover)) return false;
     // KDP は setInputFiles 後もしばらく原稿・表紙を非同期処理する。処理中に
     // 「保存して続行」を押すと、入力が正しくても pricing へ進めない。
     let processing = false;
@@ -183,7 +201,7 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
       if (i === 0) log(`${tag} KDP のファイル処理完了を待機`);
       await sleep(3000);
     }
-    if (processing) warnings.push("KDP のファイル処理が 4 分以内に完了せず");
+    if (processing) { warnings.push("KDP のファイル処理が 4 分以内に完了せず"); return false; }
     // 原稿・表紙の処理完了時に、KDP が確認チェックを未選択へ戻す場合がある。
     // 処理後の状態を read-back し、未選択の可視チェックだけを再投入する。
     const confirmations = page.locator('div[role="checkbox"][aria-labelledby*="mdn-checkbox-label"]');
@@ -205,6 +223,7 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
       warnings.push(`pricing へ進めず: ${(step.errors || []).join(" / ") || step.reason}`);
       return false;
     }
+    currentFilesUploaded = uploadManuscript && uploadCover && !confirmationMissing;
     return true;
   };
 
@@ -268,6 +287,7 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
 
   // 最終判定は verify (read-back)。ensure 内の ✓ ログは参考でしかない。
   const final = await verifyDraft(page, lst, { tag });
+  if (final.ok && currentFilesUploaded && warnings.length === 0) submittedRevisions.set(page, submissionKey(id, lst, archive));
   if (!final.ok) {
     // ★失敗の瞬間の画面を残す (バッチは警告を最後まで印字しないので、これが唯一の一次証拠)。
     await page.screenshot({ path: shotPath(`fail-${id}.png`), fullPage: true }).catch(() => {});
@@ -333,7 +353,19 @@ export async function readBookshelfState(page, draftId, { asin = "", title = "" 
  * 成功条件は「公開ボタンを押せた」ではなく **本棚でその本が下書きでなくなった**こと。
  */
 export async function publishDraft(page, id, lst, { tag = "[publish]", log = console.log } = {}) {
+  const archive = assertKindleReleaseReady(ROOT, id, lst);
+  if (!archive.ok) return { ok: false, reason: archive.reason };
   if (!lst.draftId) return { ok: false, reason: "draftId なし" };
+
+  if (submittedRevisions.get(page) !== submissionKey(id, lst, archive)) {
+    log(`${tag} 現行版の送信証拠がないため、検証済み原稿・表紙を再投入します`);
+    const ensured = await ensureDraft(page, id, lst, {
+      epubAbs: resolve(ROOT, lst.epubPath), coverAbs: resolve(ROOT, lst.coverPath), forceAll: true, tag, log,
+    });
+    if (!ensured.ok || submittedRevisions.get(page) !== submissionKey(id, lst, archive)) {
+      return { ok: false, reason: `現行版の原稿・表紙送信と処理完了を確認できません: ${ensured.warnings?.join(" / ") || "送信証拠なし"}` };
+    }
+  }
 
   await gotoStep(page, lst.draftId, "pricing");
   // pricing に必須エラーが出ていないか先に見る (出ていれば押しても無駄)。
@@ -348,6 +380,11 @@ export async function publishDraft(page, id, lst, { tag = "[publish]", log = con
     .catch(() => []);
   if (preErr.length) return { ok: false, reason: `pricing にエラー: ${preErr.join(" / ")}` };
 
+  const beforePublish = assertKindleReleaseReady(ROOT, id, lst);
+  if (!beforePublish.ok || submittedRevisions.get(page) !== submissionKey(id, lst, beforePublish)) {
+    return { ok: false, reason: beforePublish.reason || "送信後に対象版が変化したため公開を停止" };
+  }
+  submittedRevisions.delete(page);
   const clicked = await page
     .locator("text=Kindle 本を出版")
     .first()

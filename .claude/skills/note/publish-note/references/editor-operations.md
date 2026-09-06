@@ -106,7 +106,7 @@ const tagsPath = fs.existsSync(path.join(articleDir, 'hashtags.txt'))
   ? path.join(articleDir, 'hashtags.txt')
   : path.join(articleDir, 'tags.txt');
 const tags = fs.existsSync(tagsPath)
-  ? fs.readFileSync(tagsPath, 'utf8').trim().split('\n').map(s => s.trim()).filter(Boolean).slice(0, 50)
+  ? fs.readFileSync(tagsPath, 'utf8').trim().split('\n').map(s => s.trim()).filter(Boolean).slice(0, 99)
   : [];
 
 // 画像ファイルの検出

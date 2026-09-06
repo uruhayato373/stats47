@@ -16,11 +16,11 @@ import { join } from "node:path";
 import { CANONICAL_ARTICLES } from "./article-plan";
 import { NOTE_PRODUCT_MAPPINGS } from "./product-note-mapping";
 import { validateNoteChannel, scanText } from "./validators";
-import { buildNoteArticle, NOTE_OUT_ROOT_DEFAULT } from "./build/build-note";
-import { buildAllNoteArticles } from "./build/build-note-all";
+import { NOTE_OUT_ROOT_DEFAULT } from "./build/build-note";
 import { writeNoteReport } from "./build/note-report";
 import { promoteNoteArticle, promoteAllNoteArticles } from "./build/promote-note";
 import { buildNoteCover, buildAllNoteCovers } from "./build/build-note-covers";
+import { buildNoteRevision, validateNoteRevision } from "./build/build-revision";
 
 const argv = process.argv.slice(2);
 const sub = argv[0] ?? "";
@@ -49,36 +49,6 @@ function runPlan(): number {
   }
   console.error(`\n❌ note plan: ${v.errors.length} error(s)`);
   for (const e of v.errors.slice(0, 40)) console.error(`  [${e.code}] ${e.ref ?? ""} ${e.message}`);
-  return 1;
-}
-
-function runGenerate(): number {
-  if (slugArg) {
-    const article = CANONICAL_ARTICLES.find((a) => a.slug === slugArg);
-    if (!article) {
-      console.error(`❌ 記事が見つからない: ${slugArg}`);
-      return 1;
-    }
-    const res = buildNoteArticle(article);
-    console.log(`✅ 生成: ${res.slug} → ${res.outDir}`);
-    console.log(`   files: ${res.files.join(", ")} | 添付 ${res.attachmentCount}` + (res.missingProducts.length ? ` | 未生成商品 ${res.missingProducts.join(",")}` : ""));
-    return 0;
-  }
-  if (flags.has("--all")) {
-    const results = buildAllNoteArticles(undefined, undefined, {
-      onProgress: (done, total, res) => {
-        if (done % 10 === 0 || done === total || done === 1) {
-          console.log(`  [${done}/${total}] ${res.slug} (${res.access}, 添付 ${res.attachmentCount})`);
-        }
-      },
-    });
-    const missing = new Set<string>();
-    for (const r of results) for (const m of r.missingProducts) missing.add(m);
-    console.log(`✅ 全 ${results.length} 記事のドラフトを生成 → .local/note-products/`);
-    if (missing.size) console.log(`   未生成商品 (pending 添付): ${[...missing].join(", ")}`);
-    return 0;
-  }
-  console.log("usage: generate --all [--draft-only] | generate --slug <slug>");
   return 1;
 }
 
@@ -178,10 +148,25 @@ async function runCovers(): Promise<number> {
 
 async function main(): Promise<number> {
   switch (sub) {
+    case "generate":
+    case "revision": {
+      const revisionIndex = argv.indexOf("--revision");
+      const revision = revisionIndex >= 0 ? argv[revisionIndex + 1] : undefined;
+      if (!revision || !flags.has("--all")) throw new Error('revision requires --revision <new-id> --all; private generation only');
+      if (flags.has("--validate")) {
+        const errors = await validateNoteRevision(revision);
+        console.log(JSON.stringify({ revision, validationErrors: errors, readyToPublish: false }, null, 2));
+        return errors.length ? 1 : 0;
+      }
+      const report = await buildNoteRevision({ revision });
+      console.log(JSON.stringify({ outputRoot: report.outputRoot, total: report.items.length,
+        inputVerified: report.items.filter(item => item.sourceManifestSha256).length,
+        missing: report.items.flatMap(item => item.missingProducts),
+        validationErrors: report.items.flatMap(item => item.validationErrors), readyToPublish: false }, null, 2));
+      return report.items.some(item => item.validationErrors.length) ? 1 : 0;
+    }
     case "plan":
       return runPlan();
-    case "generate":
-      return runGenerate();
     case "validate":
       return runValidate();
     case "promote":
@@ -191,7 +176,7 @@ async function main(): Promise<number> {
     case "report":
       return runReport();
     default:
-      console.log("usage: note-cli <plan|generate|validate|promote|covers|report> [--check|--all|--apply|--slug <slug>]");
+      console.log("usage: note-cli <plan|generate|validate|promote|covers|report|revision> [--check|--all|--apply|--slug <slug>|--revision <new-id>]");
       return sub === "" ? 0 : 1;
   }
 }
