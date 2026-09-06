@@ -719,6 +719,26 @@ async function verify(options) {
   return result;
 }
 
+/**
+ * 展開直後のファイル名を manifest と同じ NFC へ揃える。
+ *
+ * tar は作成時のバイト列をそのまま復元するため、macOS で NFD のまま固めた bundle を
+ * Linux (byte-exact な ext4) で展開すると、manifest が NFC で宣言した path のファイルが
+ * 開けない (verifySource は normalizeRelative で NFC に畳んでから比較するので気付けない)。
+ * manifest の path が復元後の実体と一致することを restore の契約とし、ここで揃える。
+ * 深い側から rename するので親の改名で子の path が無効にならない。
+ */
+async function normalizeTreeToNfc(root) {
+  const entries = await readdir(root, { withFileTypes: true });
+  for (const entry of entries) {
+    const current = path.join(root, entry.name);
+    if (entry.isDirectory()) await normalizeTreeToNfc(current);
+    const nfc = entry.name.normalize('NFC');
+    if (nfc === entry.name) continue;
+    await rename(current, path.join(root, nfc));
+  }
+}
+
 async function restore(options) {
   if (!options.manifest || (!options.bundle && !options['parts-dir'])) {
     throw new Error(
@@ -768,7 +788,8 @@ async function restore(options) {
   await mkdir(staging, { recursive: false });
   try {
     await runTar(['-xzf', bundlePath, '-C', staging], PROJECT_ROOT);
-    const extractedRoot = path.join(staging, manifest.sourceRootName);
+    await normalizeTreeToNfc(staging);
+    const extractedRoot = path.join(staging, manifest.sourceRootName.normalize('NFC'));
     await verifySource(extractedRoot, manifest);
     await rename(extractedRoot, targetPath);
   } finally {
