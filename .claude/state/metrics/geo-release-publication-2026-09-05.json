@@ -3261,7 +3261,35 @@
           "publicVerificationReportSha256": "98b88904d98dd2c148147268f580e06ab53430e43f031e556ebad62cf73dfe41",
           "targetedPurgeRun": 34004969504,
           "targetedPurgeStatus": "SUCCESS",
-          "recurrencePreventionStatus": "LOCAL_GUARD_TESTS_PASS; generator/taxonomy fingerprint, retired slug rejection, generation-base hash and conditional ETag PUT added to diff/exact. Wrangler rejects shared index. Main/develop rollout and live guarded publication still pending."
+          "recurrencePreventionStatus": "DEPLOYED_MAIN_AND_DEVELOP_AND_PUBLIC_READBACK_PASS; generator/taxonomy fingerprint, retired slug rejection, generation-base hash and conditional ETag PUT added to diff/exact. Wrangler rejects shared index. Guarded regeneration run34010311847 SUCCESS. Old checkouts without the guard are not protected.",
+          "guardRollout": {
+            "pullRequest": "https://github.com/uruhayato373/stats47/pull/930",
+            "mainSha": "15abc7e8406bcc5ba8ba3ee967873e94659b673a",
+            "developIntegrationSha": "059f5997b31d11dade863e29d74871a149d13be2",
+            "pullRequestQuality": { "runId": 34009405220, "status": "SUCCESS", "e2ePassed": 102 },
+            "deploy": { "runId": 34009803542, "status": "SUCCESS" },
+            "productionSmoke": { "runId": 34010131636, "status": "SUCCESS" },
+            "developQuality": { "runId": 34009851976, "status": "SUCCESS" },
+            "localVerification": { "typeCheck": "PASS_ALL_25_WORKSPACES_AND_SCRIPTS", "webTestsPassed": 1254, "r2TestsPassed": 109, "snapshotSyncContractTestsPassed": 11, "actualRollbackFixture": "REJECTED_BEFORE_ANY_R2_OPERATION", "localFullWebBuild": "NOT_RUN; CI Build Check and production build passed" },
+            "guardedPublication": {
+              "runId": 34010311847,
+              "status": "SUCCESS_PUBLIC_READBACK_PASS",
+              "uploadedObjects": 1,
+              "key": "app/blog/all.json",
+              "checkedAt": "2026-09-06T04:08:09.344Z",
+              "rows": 544,
+              "existingRowsUnchanged": 544,
+              "targetSurveyRowsVerified": 20,
+              "retiredRowsRemoved": ["job-salary-39-comparison"],
+              "retirementReason": "Already in canonical GONE_BLOG_SLUGS since2026-08-24; baseline row published=false, live route410. Strict545-row preservation check correctly flagged the removal; verified it against pre-existing policy, not restored or silently ignored.",
+              "contractSha256": "ae8550638d5a0811e8ad405e9e08e7af0f06473d93c09ee9a73dc8fb6ec42fb0",
+              "generationBaseSha256": "0c077ab429e107019c0fc87ee9b5b5d42eea110e2b755bd6c1728026a66249fa",
+              "publicSha256": "f66d367064d7ca7a38e1e0b0629639e598e5d07f2a528575a463679a8c8d097b",
+              "report": ".local/license-remediation/roadside-refresh-20260906/guard-publication-verification.json",
+              "reportSha256": "83291a0042bc98b62fc656a3b1212ed56c6bce0b22d29467a643a06de12f9956",
+              "verificationBoundary": "S3 generation-base preflight and conditional PUT succeeded in CI; public readback validates contract, no retired rows/duplicates,20 repaired survey mappings,544 unchanged complete article rows and7 route statuses. Not a direct post-write S3 GET assertion. Other prefixes were not pushed."
+            }
+          }
         },
         "sharedBlogRows": 545,
         "unrelatedRecordsPreserved": true
@@ -3269,11 +3297,12 @@
       "localAcceptance": { "passed": 1038, "failed": 0, "report": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905/final-local-acceptance-v2.json", "scope": "Pre-deployment evidence: Geo stage200/301 according to canonical resolver, final query routes, replacements/downloads and retirement URLs. Subsequent production verification recorded in deployment.productionAcceptance." }
     },
     "gitSynchronization": {
-      "status": "MAIN_ALREADY_IN_DEVELOP_BY_SEPARATE_WORK",
-      "mainSha": "6fc6eedc26b540fc81fa68c8706848433c3bcad4",
-      "developSha": "2d6e1841ccadaa445d3685682d6d6376240cca67",
-      "mergeCommit": "2c83dadfd",
-      "verification": "After fetch, origin/develop..origin/main is empty; PR929 OPEN/MERGEABLE. Historical preview conflicts superseded. This task did not resolve conflicts or publish unrelated develop work."
+      "status": "GUARD_RELEASE_MERGED_TO_MAIN_AND_DEVELOP",
+      "mainSha": "15abc7e8406bcc5ba8ba3ee967873e94659b673a",
+      "developIntegrationSha": "059f5997b31d11dade863e29d74871a149d13be2",
+      "preflightDirectionFixSha": "af3a2dc7c",
+      "verification": "PR930 merged and deployed; main fast-forwarded into this isolated worktree, then origin/develop merged and HEAD:develop pushed without force. Main-only commits0. Other task's develop-only preflight work preserved, not deployed to main; its false-positive tip-to-tip diff fixed with merge-base-to-main comparison,7 tests and11 preflight gates PASS. No other worktree HEAD/index changed.",
+      "documentationChecks": "docs:fix and docs:check PASS(errors0); docs:check:all remains FAIL on39 pre-existing unrelated freshness/backlog warnings; no dates falsified"
     },
     "legacySnsVerification": {
       "checkedDate": "2026-09-06",
@@ -3288,7 +3317,7 @@
       "xEvidence": "legacy-x-confirmed.json",
       "instagramAndScheduleEvidence": "legacy-sns-live-audit.json"
     },
-    "next": "Approved legacy R2 cleanup complete; preserve backups. Ship verified blog guard to main and develop, regenerate shared index and verify readback. Exact6 old SNS posts remain publicly visible pending deletion approval; theme draft2 remediated and unscheduled. Do not interfere with separate develop work."
+    "next": "Site/Geo release, approved legacy R2 cleanup and guarded blog publication verified complete; preserve backups. Exact6 old SNS posts remain publicly visible pending deletion approval: X592/632/636 andInstagram749/796/800. Theme drafts841/855 remediated and unscheduled; target matches0 in72 X scheduled cards. Do not interfere with separate develop work."
   },
   "followupVerification": {
     "publishedOutboxCleanup": {
