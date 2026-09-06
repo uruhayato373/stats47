@@ -253,8 +253,80 @@ billing が OFF かどうかを応答から事前証明できない。コード�
 Secret 発行元の課金無効を人間が保証する。無料 tier の入出力は Google のサービス改善に
 使われ得るため、秘密・個人情報を prompt に入れない。ranking 公開観測値と公開用解説だけを扱う。
 
-Claude Code/OAuth を使う日次 CI は復活させない。Claude は Gemini 自動経路で 3 回
-quarantine に入った高流入 key など、例外的な手動是正にだけ使う。
+Claude Code/OAuth を使う日次 CI は復活させない。**Agent tool 経路** (`ranking-content-author` /
+`ranking-content-critic` を Agent tool で起動する) の Claude は、Gemini 自動経路で 3 回 quarantine に
+入った高流入 key など、例外的な手動是正にだけ使う。**headless `claude -p` 経路**によるローカル量産は
+次節のとおり別扱いにする (2026-09-05)。
+
+### ★2026-09-05: ローカル量産は headless `claude -p` 経路 (Agent tool は使わない)
+
+Gemini 日次 CI は 2026-08-30 から鍵の前払いクレジット枯渇 (`preflight_status=billing`) で 8 run 連続
+PASS 0 のまま止まり、残 1,445 件 (2026-09-04 キュー) の在庫を消化する経路が無かった。
+「Opus / Sonnet に分業して Agent tool で回す」は解にならない — Agent tool 経路は **1 件 $16-18**
+(`claude-usage/history.csv`: 10 件で $120.89、5 件で $79-90) で、原因はサブエージェントが
+CLAUDE.md+rules ≈150K トークンを毎ターン読みながら 46-144 ターン回ることにある。モデルを変えても
+1 桁しか変わらない。
+
+解は **Agent tool を使わないこと**。`generate-parallel.ts --model claude-sonnet --critic claude-sonnet` は
+headless `claude -p` を子プロセスで呼ぶ。prompt は約 5,000 字 (dry-run 実測)、rules 読込なし、
+ツールループなし。実装上の約束:
+
+| 項目 | 内容 |
+|---|---|
+| 入口 | `bash .claude/scripts/ai-content/run-claude-batch.sh` (**ユーザー端末で実行**。Claude Code セッション内は Keychain を読めず「Not logged in」になる・実測 2026-09-05) |
+| lean 化 | cwd を repo 外に固定 (CLAUDE.md / `.claude/rules` / project hooks / `.mcp.json` を読ませない)、`--tools ""`、`--strict-mcp-config`、`--no-session-persistence`、`--setting-sources local` (user hook `sync-memory.sh` を毎 call 走らせない・実測で抑止確認)、独自 `--system-prompt`、子 env から `CLAUDE_*` を除去 (継ぐと Keychain を読まず「Not logged in」)。`--bare` は OAuth 不可なので使わない |
+| 費用を決める 2 つ | **author は `--json-schema` を使わない** (構造化出力は CLI 内部が 2 ターンになり input 4.3K → 32K。構造は監査が見る)。**`--effort low` 既定** (同一 prompt・Sonnet 5 で $0.54/148 秒/出力 19.7K → $0.23/69 秒/7.5K。`MAX_THINKING_TOKENS=1024` は $0.33)。critic だけは `--json-schema` を使う (schema なしだと section 欠落や平文が返り parse 失敗で author 分が無駄になる。出力 ~1K なので追加 ≈$0.02) |
+| model alias | `claude-haiku` / `claude-sonnet` / `claude-opus` の allowlist のみ (`claude-cli-output.ts`)。typo が黙って haiku に倒れない |
+| 品質ゲート | Gemini 経路と同一: `audit-ai-content.mjs` (機械フロア) → 別プロセスの Claude critic (`buildGeminiCriticPrompt` / `parseGeminiCriticVerdict` を transport 非依存で流用) → REVISE は 1 回再生成。**ゲートは緩めない** |
+| 公開 | outbox → **1 push = 1 commit ≤ 35 件** → develop → `publish-ai-content.yml` (人間 / セッションの push は発火する)。公開確認は R2 の内容一致で行う |
+| 記録 | `--output-format json` の usage / `total_cost_usd` を `history.csv` (`cost_usd` 列・末尾追加) と report に残す。inputTokens は cache を含む合算 = **1 request で 40K を超えたら rules が漏れ込んでいる**合図 |
+| quarantine | `failed` に載せるのは `status=rejected` (ゲート / critic 落ち) のみ。skip や CLI 障害・429 を数えると 3 run で大量 quarantine になる |
+| 分業 | author / critic = **Sonnet 5** (`--effort low`)。Haiku 4.5 は pilot 1 で **0/10** (括弧数値 4・数値範囲外 3・JSON 崩れ 1・京都府を中部に置く等の事実誤り) で author 不適。**Opus 5 は manual-escalation 30 件 + quarantine のみ** Agent tool 経由。量産に Opus を使わない |
+| 運転設定 | `--model claude-sonnet --critic claude-sonnet --retries 1 --concurrency 2 --limit 35` (= `run-claude-batch.sh` 既定)。verify1 実測: 6/6 通過 (1 回目 4・2 回目 2)、**$0.51/件・43K トークン/件・6 件 8 分** |
+| 不変 | Claude を CI cron で無人実行しない。量と時期は人が決める (月次 / 週次計画) |
+
+**pilot 0 実測 (2026-09-05・`library-count-per-million`・Sonnet 5 author+critic・1 回目 PASS)**:
+author prompt 4.7K トークン (10,250 字) / 出力 7.4K / $0.238、critic 2 ターン 14K / 出力 1K / $0.111 →
+**1 件 27K トークン・$0.35 (API 換算)**。Agent tool 経路の $12-17/件 (10 件 $120.89) の約 1/35〜1/50。
+history.csv の run `local-20260905-*` に author/critic request 数・トークン・`cost_usd` が残る。
+
+**通過率は author prompt で上げた (ゲートは触っていない)**。同 key は改修前に critic REVISE を 3 連続で受けて
+REJECT だった。critic の指摘は正当で、原因は prompt の内部矛盾: insights の例に「地方ブロック間の平均値比較」を
+挙げていたため regionalAnalysis の結論をなぞる / ですます調の指定が無かった / 県別解説が 43-59 字と規定の
+60-120 字を下回っていた。`ranking-content-prompt.ts` を直し (insights は全国横断の分布に徹し regionalAnalysis を
+繰り返さない・全セクションですます調・commentary は 2 文で 60 字以上・47 件で文型を変える)、次の 1 回で PASS。
+REJECT した候補と critic 指摘は `.local/ci/rejected/<key>-<ts>.json` に残る (公開しない) ので、落ちたら
+まずそれを読んで prompt 側を直す。
+
+**pilot 1 → verify1 (2026-09-05)**: Sonnet 9 件は 4/9 (全て 2-3 回目・$1.04/件) で、critic REVISE 15 回中 10 回が
+prefectureCommentary だった。dump を読むと原因は 2 つ: (a) **文字化け** — 子プロセス stdout を chunk ごとに
+`toString()` していて「滋賀県」が「��賀県」になっていた (transport のバグ・`createUtf8Collector` で修正、
+再現テストあり) (b) **定型化** — prompt が 47 件すべてに同じ 3 要素を義務づけていた (視点を県ごとに
+入れ替える指示へ変更)。両方入れた verify1 は落ちた 5 件 + 1 件で **6/6 (1 回目 4・2 回目 2)、$0.51/件**。
+critic の指摘は毎回正当だった (事実誤り・文字化け・反復)。**critic を緩めずに author 側を直す**のが正しい順序。
+
+**batch1 → batch2 → verify2 (2026-09-05 午後)**: batch1 (35 件・concurrency 2) は 9 件処理 (OK 6) の後 **26 件が
+`CLI failed (code 1)` で即失敗**。stderr が空で原因を残せなかった (非ゼロ終了時に stdout の wrapper を捨てる
+実装の欠陥 → 修正済み。次に起きれば `claude-<subtype>: <message>` として残る)。batch2 (concurrency 1) は 16 件で
+OK 8 / REJECT 8、REVISE 11 回中 8 回が「県別解説の定型化」MAJOR。dump を読むと critic は **author が禁止されている
+外部知識に基づく「県固有の読み解き」を要求**しており、実物は隣接県対比・地方内位置などデータ由来の固有性を
+持っていた。一方で FAQ の平均超え県数の誤集計 (2 件) と「地方内で最も低い」の 2 県矛盾は本物の誤りだった。対処:
+(a) prompt に「平均を上回る県 N / 下回る県 M」と「地方別の順位表」を機械計算で与える (数えさせない)
+(b) author に書き出しの回し方 (地方名で始めるのは 12 件以下) と 2 文 60-100 字を指示
+(c) **critic に author の制約を前提として書く** (施設名・政策名・制度名・企業名は禁止だが一般的な地理の言及は可・
+誤りは MAJOR / 定型化は「着眼点の組み合わせも文構造も同じ解説が半数超」のときだけ MAJOR / regionalAnalysis に
+登場しない県があるのは規定どおりで矛盾ではない)。これは critic の**判定基準の明文化**であり、事実誤り・文字化けは
+従来どおり MAJOR / BLOCK。verify2 (batch2 で落ちた 8 件・`--retries 1`) は **4/8、$0.67/件**。残った MAJOR は
+すべて事実誤り (静岡・長野を日本海側と書く等) で、定型化は全件 MINOR に降格した。
+
+**定常値 (batch3・2026-09-05・35 件・concurrency 2・`--retries 1`)**: **OK 25 / REJECT 9 / FAIL 1 (通過率 71%)、
+$0.58/件 → 公開 1 件 ≈$0.81 API 換算・≈47K トークン、35 件で約 50 分**。CLI 側の失敗は構造化出力の再試行上限
+(`claude-error_max_structured_output_retries`) 1 件だけで、レート制限は観測されなかった (batch1 の 26 件即失敗は
+本文を捨てていたため原因不明のまま。再発すれば本文が残る)。旧 Agent tool 経路 ($13.6・586 万トークン/件) 比で
+$ は約 1/17、トークンは約 1/120。本日通算 (実験込み・10 run): PASS 46・$50.87・468 万トークン = $1.11/PASS。
+落ちた key は次回のキューが再ピックし、3 連続で quarantine (初例: `public-kindergarten-ratio`) → Opus 例外是正。
+1 日の件数は `claude-error_*` reason が出るまでは 1〜2 バッチ (35〜70 件) から始め、出たらそこで止めて窓の
+リセットを待つ (推測で上限を置かない)。
 
 #### 履歴: 2026-08-21 に Claude 日次 CI を廃止した理由
 

@@ -7,6 +7,7 @@ import type { MetricConfig, MetricRegistry } from "./types";
 // AUTOGEN_IMPORTS_START
 import { abandonedCultivatedLandArea } from "./metrics/abandoned-cultivated-land-area";
 import { abortionRate } from "./metrics/abortion-rate";
+import { academicAchievementTestAverageRate } from "./metrics/academic-achievement-test-average-rate";
 import { accessoriesConsumptionExpenditure } from "./metrics/accessories-consumption-expenditure";
 import { accidentDeath30day } from "./metrics/accident-death-30day";
 import { accidentalDeathsPer100k } from "./metrics/accidental-deaths-per-100k";
@@ -948,6 +949,8 @@ import { infantClothesConsumptionQuantity } from "./metrics/infant-clothes-consu
 import { infantDeaths } from "./metrics/infant-deaths";
 import { infantMortalityRatePer1000Births } from "./metrics/infant-mortality-rate-per-1000-births";
 import { inflowPopulationRatio } from "./metrics/inflow-population-ratio";
+import { informationCommunicationCoefficient } from "./metrics/information-communication-coefficient";
+import { informationCommunicationExpenditure } from "./metrics/information-communication-expenditure";
 import { inlandAquacultureHarvest } from "./metrics/inland-aquaculture-harvest";
 import { inlandFisheryCatch } from "./metrics/inland-fishery-catch";
 import { inpatientRateByBedtype } from "./metrics/inpatient-rate-by-bedtype";
@@ -2350,6 +2353,7 @@ import { zooCount } from "./metrics/zoo-count";
 export const METRICS_REGISTRY: MetricRegistry = {
   "abandoned-cultivated-land-area": abandonedCultivatedLandArea,
   "abortion-rate": abortionRate,
+  "academic-achievement-test-average-rate": academicAchievementTestAverageRate,
   "accessories-consumption-expenditure": accessoriesConsumptionExpenditure,
   "accident-death-30day": accidentDeath30day,
   "accidental-deaths-per-100k": accidentalDeathsPer100k,
@@ -3291,6 +3295,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "infant-deaths": infantDeaths,
   "infant-mortality-rate-per-1000-births": infantMortalityRatePer1000Births,
   "inflow-population-ratio": inflowPopulationRatio,
+  "information-communication-coefficient": informationCommunicationCoefficient,
+  "information-communication-expenditure": informationCommunicationExpenditure,
   "inland-aquaculture-harvest": inlandAquacultureHarvest,
   "inland-fishery-catch": inlandFisheryCatch,
   "inpatient-rate-by-bedtype": inpatientRateByBedtype,

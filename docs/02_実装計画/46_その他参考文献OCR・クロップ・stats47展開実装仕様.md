@@ -2,9 +2,9 @@
 title: その他参考文献OCR・クロップ・stats47展開実装仕様
 type: implementation-spec
 date: 2026-08-29
-updated: 2026-08-29
+updated: 2026-09-05
 status: active
-related_backlog: REFERENCE-SOURCE-EXPANSION-01
+related_backlog: KAKEI-MARKETING-CONTENT-01
 owner: open-data-curator
 tags: [evidence, provenance, ocr, crop, source-vault, content-pipeline]
 ---
@@ -13,10 +13,10 @@ tags: [evidence, provenance, ocr, crop, source-vault, content-pipeline]
 
 ## 0. 位置づけ
 
-本書は、日本国勢図会以外でprivate Google Driveへ保全済みの3資料を、検証付きで一時復元し、文字抽出、
+本書は、日本国勢図会以外でprivate Google Driveへ保全済みの4資料を、検証付きで一時復元し、文字抽出、
 OCR、ページ画像化、内部照合用クロップを行った後、既存のstats47 SSOTへ安全に展開するための資料別契約である。
 保存、復元、権利、一次資料への昇格条件は`.claude/rules/reference-source-standards.md`を正典とし、進捗は
-`.claude/todo/backlog.md`の`REFERENCE-SOURCE-EXPANSION-01`だけで管理する。
+`.claude/todo/backlog.md`の`REFERENCE-SOURCE-EXPANSION-01`（3資料）と`KAKEI-MARKETING-CONTENT-01`（家計調査書籍）で管理する。
 
 この契約は原本画像やOCRを公開してよいという許可ではない。クロップは内部照合専用で、公開物は一次資料から
 再取得した事実・数値とstats47独自の文章・図表だけで構成する。Drive bundleの差し替え、remote R2 write、
@@ -29,6 +29,7 @@ git push、PR、deploy、SNS・note公開は別途オーナー承認を要する
 | `prefecture-deviation` / `prefecture-deviation` | 久保哲朗『47都道府県の偏差値』小学館、2018年2月、ISBN 978-4-09-825317-3。スキャンPDF 6件 | `参考文献/47都道府県の偏差値/2018年版` / `.claude/state/source-inventory/prefecture-deviation/2018/source-bundle-manifest.json` | `open-data-curator`。ランキング・survey・theme・記事の候補発見。書誌は国立国会図書館で確認済み。図表の権利と一次資料の照合までは`rights-hold` |
 | `prefecture-databook-2021` / `prefecture-databook` | 『2021都道府県DataBook』2021年版。地域別PDF 8件、補助PNG 7件 | `参考文献/2021都道府県DataBook/2021年版` / `.claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json` | `area-curator`。県シンボル・特産品候補、area・ranking・theme・記事。数値は公的統計から再取得 |
 | `claude-skills-guide-2026` / `claude-skills-guide` | 『Claudeスキル構築ガイド』2026年版、`guide.pdf` 1件 | `参考文献/Claudeスキル構築ガイド/2026年版` / `.claude/state/source-inventory/claude-skills-guide/2026/source-bundle-manifest.json` | `knowledge-curator`。stats47のagent・skill・内部文書改善だけに使い、統計ページや公開記事の根拠にはしない |
+| `kakei-marketing-2015` / `kakei-marketing` | 吉本佳生『マーケティングに使える「家計調査」 世界最大の消費者ビッグデータは「宝の山」だ』講談社、2015年7月、ISBN 978-4-06-219375-7。Kindle画面のスキャンPDF 1件・307ページ（縦書き・text layerなし） | `参考文献/マーケティングに使える家計調査/2015年版` / `.claude/state/source-inventory/kakei-marketing/2015/source-bundle-manifest.json` | `open-data-curator`（分析・論点の台帳）、展開は`data-ingester`（new-metric）・`theme-designer`（evidenceTopics）・`article-writer`（記事）。書誌は講談社公式ページで確認済み。数値はすべて総務省家計調査から再取得し、書籍値・図表・本文を公開物へ流さない |
 
 2026-08-29の全ページ処理・台帳生成結果は次のとおり。全資料で内部照合用cropを1件ずつ実見し、原本、OCR本文、
 ページ画像、crop画像をGit・R2・公開assetへ保存していない。
@@ -38,6 +39,19 @@ git push、PR、deploy、SNS・note公開は別途オーナー承認を要する
 | `prefecture-deviation` | 6 / 103 | `rights-hold` 103 | 100%。書誌は確定済み。図表権利と一次資料が確定するまで公開禁止 |
 | `prefecture-databook-2021` | 8 / 580 | `combined-analysis` 61 / `context-only` 19 / `not-applicable` 500 | 100%。80件は県公式等を根拠に既存area/editorial責務へ接続 |
 | `claude-skills-guide-2026` | 1 / 33 | `context-only` 7 / `not-applicable` 26 | 100%。7件をagent・skill・内部文書の改善方針へ接続 |
+| `kakei-marketing-2015`（2026-09-05） | 1 / 307 | `combined-analysis` 259 / `new-metric` 13 / `reuse-existing-metric` 3 / `context-only` 27 / `not-applicable` 5 | 100%。分析・論点33件＋県庁所在市47件をauthored inventory（§4.4）で解決。内部cropは未実施（Kindle画面のスキャンで図表はページ画像で照合） |
+
+Kindle画面のスキャン（`kakei-marketing`）は縦書きのためprofileの`ocrLanguages`を`jpn_vert`・psm 5にし、
+読解時はKindleのUI枠を除いた領域だけをOCRする（枠を含めると縦書きの読み始めが欠ける）。ローカルにGoogle Driveを
+マウントしているPCでは、`--parts-dir`にマウント上の版フォルダを直接渡してよい（一時downloadは不要）。
+
+`kakei-marketing-2015` は **r2** で1ページ1枚のページ画像を同梱した（`pages/pNNNN.jpg`＝UI枠を除いた本文領域・220dpi・307枚、
+`transcripts/pNNNN.txt`＝同画像の縦書きOCR・307本、`page-dims.json`＝crop枠と解像度の記録、PDF 1件。計616ファイル・約75MB・1 part）。
+OCRや図クロップの品質確認、図表ページの目視照合はこの`pages/`を使い、PDFの再レンダーを繰り返さない。r1（PDFのみ）はDriveに不変のまま残す。
+`transcripts/`は照合用で、数値の確定には使わない。
+**r3**（2026-09-05）は r2 に `md/pNNNN.md`（Markdown文字起こし307本・frontmatter page/kind/figures）と `figures/`（図表crop 113枚）・`crop-manifest.json` を加えた
+完全bundle（2 part・約133MB）で、`stage-status` は S0〜S4 すべて到達。文字起こしは Workflow で本文ページを sonnet、図表ページと crop 座標を opus に分業して作成した。
+書籍の本文・図表を読む作業は今後 r3 の `md/` と `figures/` を restore して行い、PDF や OCR を再処理しない。
 
 ローカル復元先は全資料とも
 `$TMPDIR/stats47-source-vault/work/<sourceKey>/<edition>/<sourceRootName>/`、派生物は
@@ -81,6 +95,15 @@ npm run source-vault:process -- extract --workspace <derived-dir> --document <pd
 # crop-spec.jsonに指定したpixel boxだけを内部照合用に切り出す
 npm run source-vault:process -- crop --workspace <derived-dir> --spec <derived-dir>/crop-spec.json
 
+# agentが書いた md/pNNNN.md (Markdown文字起こし) の全ページ有無・frontmatter・figure参照を検査
+npm run source-vault:process -- md-check --workspace <derived-dir> --check
+
+# derivedの pages / transcripts / md / figures / page-dims を次revisionのsource rootへ配置 (bundle化はsource-vault create)
+npm run source-vault:process -- stage --workspace <derived-dir> --revision <N+1>
+
+# manifestのcomponentCountsから S0保全〜S4台帳 の到達段階を読む
+npm run source-vault:process -- stage-status --profile <profile>
+
 # 全ページを候補母数にして解決台帳を生成・検証
 npm run source-vault:inventory -- build --profile <profile>
 npm run source-vault:inventory -- coverage --profile <profile> --check
@@ -95,6 +118,11 @@ npm run source-vault:process -- cleanup --profile <profile>
 - crop specは`internalUseOnly:true`、`publicOriginalReuse:"forbidden"`、ページ参照、利用目的、
   stats47での意図、`primarySourceRequired:true`が無ければ失敗する。
 - 座標がページ画像外へ出るcrop、PDF SHA不一致、既存出力への暗黙上書き、repo内の入出力は拒否する。
+- ページ画像はprofileの`processing.pageImage` (dpi / format / quality / `contentCrop`) を適用して1ページ1枚で出し、render条件と
+  本文領域の座標を`page-dims.json`へ記録する。Kindle画面のようにUI枠を含むスキャンは`contentCrop`を必須とする。
+- 処理段階 (S0保全 → S1ページ画像 → S2文字起こし → S3図クロップ → S4台帳 → S5展開) と bundle 内 directory
+  (`pages/` `transcripts/` `md/` `figures/`) の契約は `.claude/rules/reference-source-standards.md` §3、運用手順は
+  skill `/process-reference-source` (owner `open-data-curator`) を正典とする。段階が進むたびに revision を上げる。
 
 ## 4. 一次資料・権利・mapping
 
@@ -117,12 +145,39 @@ OCRとクロップは、掲載テーマ、統計名、調査主体、調査年�
 ランキング候補にはしない。採択する判断は既存の`.claude/rules/`またはskillへ要約して統合し、PDF本文、
 スクリーンショット、ページ構成を複製しない。
 
+### 4.4 マーケティングに使える「家計調査」（吉本佳生・講談社 2015）
+
+第1部（経済理論をくつがえすデータ分析編・5章）と第2部（47都道府県庁所在市別食生活データ編）、はじめに・おわりにを、
+**分析・論点単位のauthored inventory** `packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json`
+（TS入口は同ディレクトリ`index.ts`、型は`KakeiMarketingAnalysis`）で解決する。source-inventory CLIは同じJSONを読み、
+ページ範囲→解決結果を決定的に展開する（範囲の重複・未知resolutionはbuildが拒否）。各項目は書籍の文章・図表・数値を
+持たず、stats47として検証する独立した問い・ページ範囲・既存metric・一次資料・次の制作単位だけを持つ。
+
+| 章 | 論点数 | 主な解決 | stats47での受け皿 |
+| --- | ---: | --- | --- |
+| はじめに | 1 | `combined-analysis`（学力×ほうれんそう・かれい、ぎょうざ・納豆） | 既存metric＋`spinach-consumption-ranking`更新 |
+| 第1章 秋田の小学校教育 | 7 | `new-metric`（全国学力・学習状況調査の47県正答率）、`reuse-existing-metric`（進学率・就職率）、`combined-analysis`（教育投資効率＝国公立大学授業料÷教育費、年収五分位×教育費）、`context-only`（所得シェア、進学率報道の検証） | education-culture evidenceTopic、型D/B記事、教育費metricのnote整備 |
+| 第2章 カフェでは紅茶を売れ | 9 | `context-only`（読み方＝シェア・数量×価格・格付け）、`combined-analysis`（食料/衣料/教育、逆進品目、感情に払う医薬・医療、高所得に売れる食料品、自動車、家電、教養娯楽、旅行） | 年収五分位の型D記事群（既存`income-quintile-*`の拡張）、型D2（れんこん・さやまめ・柑橘・ゴルフ） |
+| 第3章 冬服バーゲン | 4 | `combined-analysis`（衣料品×年収、バーゲン成功条件＝月次数量×購入価格×CPI、帽子・ネクタイ・ストッキングの縮小、腕時計・かばん） | 月次接地器の新設が前提の型C記事、/japan時系列候補 |
+| 第4章 エンゲル係数 | 4 | `combined-analysis`（論理の方向・五分位・年齢階級・都市別×県民所得）、`new-metric`（情報通信係数＝情報通信関係費÷消費支出のcalculated metric） | real-income / consumer-prices evidenceTopic、`engel-coefficient-prefecture-ranking`更新、型B散布図 |
+| 第5章 食パン・酒類・魚介 | 6 | `combined-analysis`（酒類の構造変化、食パン・マーガリンのギッフェン財、外食業態、ぎょうざの集計ルール、生鮮魚介18種の東西）、`context-only`（酒税増税案） | fishery-marine evidenceTopic、既存酒類・魚介記事の更新、型C（CPI×数量） |
+| 第2部 47都市 | 48 | `context-only`（凡例）、`combined-analysis`×47（`areaCodes`付き） | `<pref>-food-culture`記事シリーズ（既存9本の更新＋38本の新規）、areaページの食文化編集候補 |
+| おわりに | 1 | `context-only`（地産地消の光と影） | 産地×消費地の型B記事 |
+
+- 年間収入五分位階級別・世帯主年齢階級別・月次の分析は**全国集計**であり、都道府県値ではない。`geoScopes: ["japan"]`の項目は
+  `/ranking`へ載せず、`/japan`時系列と記事（`fetch-quintile-data.ts`等の接地器）で扱う。
+- 都道府県庁所在市の値は県全体ではない。第2部の県別項目は`areaCodes`で県へ写像するが、記事・areaページでは
+  「県庁所在市の二人以上世帯」である旨を必ず注記する（`subtitle`の既存規約と同じ）。
+- 「ぎょうざ消費日本一」「納豆」のように集計ルール（対象都市・テイクアウトのみ・冷凍は別分類）で誤読しやすい品目は、
+  ranking noteと記事の`[!WARNING]`で明記する。
+- 書籍の格付け（「+++」）や指数化した図表は再掲しない。同じ問いを最新年の家計調査で再計算し、独自の図表で示す。
+
 全資料で、一次資料URL、取得日、利用条件URL、対象年度、単位、地域粒度、変換式、検証コマンドを
 `.claude/rules/data-provenance-standards.md`の既存contractへ接続する。新しい公開taxonomyや保存層は作らない。
 
 ## 5. 実行順と停止・承認境界
 
-1. `npm run source-vault:ready`で4profileのmanifest、active仕様、Poppler、Tesseract日本語、ImageMagickを確認する。
+1. `npm run source-vault:ready`で5profileのmanifest、active仕様、Poppler、Tesseract日本語（縦書きは`jpn_vert`）、ImageMagickを確認する。
 2. Drive folderをreadbackし、owner-only、manifest、全partの名前とsizeを確認する。
 3. 一時downloadへ取得し、`verify`、`restore`、`prepare`の順でhashと全入力を確定する。
 4. PDF・ページを明示して`extract`し、必要な範囲だけcropする。OCR・cropは必ず原ページと目視照合する。
@@ -143,7 +198,7 @@ npm run source-vault:check
 npm run docs:check
 ```
 
-処理基盤の準備完了は、4profileすべてでmanifestとactive仕様が一致し、PDF入力が1件以上あり、日本語OCR、
+処理基盤の準備完了は、5profileすべてでmanifestとactive仕様が一致し、PDF入力が1件以上あり、日本語OCR、
 ページ画像、rights-gated crop、profile単位cleanupを同じCLIで実行でき、repo内残存をCIが拒否する状態とする。
 コンテンツ展開の完了は、資料別inventory coverage 100%、公開候補の一次資料・rights・provenance 100%、
 書籍値の直接投入0、原文・元図・cropの公開0を満たすこととする。

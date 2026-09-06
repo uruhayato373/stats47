@@ -4,6 +4,7 @@ export const gyozaFrozenConsumptionExpenditure: MetricConfig = {
   "key": "gyoza-frozen-consumption-expenditure",
   "title": "ぎょうざ消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間ぎょうざ消費支出額",
+  "note": "家計調査の「ぎょうざ」は県庁所在市の二人以上世帯が持ち帰り（冷凍・調理済み）で購入した支出額。店内で食べた分は外食に含まれ、この値には入らない。対象は県庁所在市のみで県全体の値ではない",
   "unit": "円",
   "category": "economy",
   "source": {

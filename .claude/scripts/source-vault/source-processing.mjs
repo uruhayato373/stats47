@@ -2,7 +2,7 @@
 
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
-import {
+import { copyFile, readdir,
   access,
   mkdir,
   mkdtemp,
@@ -22,7 +22,8 @@ const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
 const CONFIG_PATH = path.join(PROJECT_ROOT, '.claude/config/source-vault.json');
 const VAULT_SCRIPT = path.join(SCRIPT_DIR, 'source-vault.mjs');
 const TEMP_VAULT_ROOT = path.join(tmpdir(), 'stats47-source-vault');
-const BOOLEAN_OPTIONS = new Set(['force', 'contract-only', 'allow-all-pages']);
+const BOOLEAN_OPTIONS = new Set(['force', 'contract-only', 'allow-all-pages', 'check']);
+const MD_PAGE_KINDS = new Set(['text', 'figure', 'table', 'mixed', 'blank']);
 const PDF_TOOLS = ['pdfinfo', 'pdftotext', 'pdftoppm', 'tesseract', 'magick'];
 
 function usage() {
@@ -31,6 +32,9 @@ function usage() {
   node .claude/scripts/source-vault/source-processing.mjs prepare --profile <name> [--manifest <file>] [--source <dir>] [--output-dir <dir>]
   node .claude/scripts/source-vault/source-processing.mjs extract --workspace <dir> --document <id-or-path> --pages <selector> [--mode auto|text|ocr] [--dpi <n>] [--rotate 0|90|180|270] [--psm <0-13>] [--force]
   node .claude/scripts/source-vault/source-processing.mjs crop --workspace <dir> --spec <json> [--force]
+  node .claude/scripts/source-vault/source-processing.mjs md-check --workspace <dir> [--md-dir <dir>] [--check]
+  node .claude/scripts/source-vault/source-processing.mjs stage --workspace <dir> --revision <n> [--md-dir <dir>] [--force]
+  node .claude/scripts/source-vault/source-processing.mjs stage-status [--profile <name>]
   node .claude/scripts/source-vault/source-processing.mjs cleanup --profile <name>
 
 Page selectors: 1,3-5 or all (all requires --allow-all-pages).
@@ -138,6 +142,97 @@ export function validateOcrLayout(rotation, psm) {
     throw new Error('Tesseract --psm must be an integer from 0 to 13');
   }
   return { rotationDegrees, pageSegmentationMode };
+}
+
+/**
+ * ページ画像の本文領域 (Kindle の UI 枠などを除く) を "WxH+X+Y" で宣言する。
+ * 座標は render 後のフルページ画像の pixel。宣言は profile.processing.pageImage.contentCrop に置き、
+ * page-dims.json へ記録して crop 座標の基準を追跡できるようにする。
+ */
+export function parseContentCrop(geometry) {
+  if (geometry == null) return null;
+  const match =
+    typeof geometry === 'string' &&
+    geometry.match(/^(\d+)x(\d+)\+(\d+)\+(\d+)$/);
+  if (!match) throw new Error(`contentCrop must be WxH+X+Y: ${String(geometry)}`);
+  const [width, height, x, y] = match.slice(1).map(Number);
+  if (width < 1 || height < 1) throw new Error('contentCrop size must be positive');
+  return { geometry, width, height, x, y };
+}
+
+export function validatePageImageContract(pageImage, label = 'pageImage') {
+  if (pageImage == null) return null;
+  if (typeof pageImage !== 'object') throw new Error(`${label} must be an object`);
+  const dpi = Number(pageImage.dpi ?? 180);
+  if (!Number.isInteger(dpi) || dpi < 72 || dpi > 600)
+    throw new Error(`${label}.dpi must be an integer from 72 to 600`);
+  const format = pageImage.format ?? 'png';
+  if (!['png', 'jpg'].includes(format))
+    throw new Error(`${label}.format must be png or jpg`);
+  const quality = Number(pageImage.quality ?? 85);
+  if (!Number.isInteger(quality) || quality < 1 || quality > 100)
+    throw new Error(`${label}.quality must be an integer from 1 to 100`);
+  const contentCrop = parseContentCrop(pageImage.contentCrop);
+  return { dpi, format, quality, contentCrop };
+}
+
+/**
+ * md/pNNNN.md の frontmatter と本文を検査する純関数。書籍本文の内容は見ない (内部専用の文字起こしなので)。
+ * 必須: page (ファイル名と一致) / kind (text|figure|table|mixed|blank)。figures は crop id の配列で、
+ * 実在する crop に限る。blank 以外は本文が要る。
+ */
+export function validateMdPage({ fileName, frontmatter, body, knownFigureIds }) {
+  const errors = [];
+  const match = fileName.match(/^p(\d{4})\.md$/);
+  if (!match) {
+    errors.push(`file name must be pNNNN.md: ${fileName}`);
+    return errors;
+  }
+  const page = Number(match[1]);
+  if (Number(frontmatter.page) !== page)
+    errors.push(`${fileName}: frontmatter.page must be ${page}`);
+  if (!MD_PAGE_KINDS.has(frontmatter.kind))
+    errors.push(`${fileName}: kind must be one of ${[...MD_PAGE_KINDS].join('|')}`);
+  const figures = frontmatter.figures ?? [];
+  const figureList = Array.isArray(figures)
+    ? figures
+    : String(figures)
+        .replace(/^\[|\]$/g, '')
+        .split(',')
+        .map((value) => value.trim())
+        .filter(Boolean);
+  for (const id of figureList) {
+    if (!knownFigureIds.has(id)) errors.push(`${fileName}: unknown figure id ${id}`);
+  }
+  if ((frontmatter.kind === 'figure' || frontmatter.kind === 'table') && figureList.length === 0) {
+    errors.push(`${fileName}: kind ${frontmatter.kind} requires figures[]`);
+  }
+  if (frontmatter.kind !== 'blank' && body.replace(/\s/g, '').length === 0)
+    errors.push(`${fileName}: body is empty`);
+  return errors;
+}
+
+/**
+ * manifest の componentCounts と inventory summary から処理段階の到達状況を決める純関数。
+ * S0 保全 → S1 ページ画像 → S2 文字起こし (transcript / markdown) → S3 図クロップ → S4 台帳。
+ */
+export function stageStatus(manifest, summary) {
+  const counts = manifest.componentCounts ?? {};
+  const pages = summary?.input?.pages ?? null;
+  const parity = (count) => (pages == null ? count > 0 : count >= pages);
+  return {
+    revision: manifest.revision,
+    pages,
+    stages: {
+      s0Preserved: (counts.pdfs ?? 0) > 0,
+      s1PageImages: parity(counts.pageImages ?? 0),
+      s2Transcripts: parity(counts.transcripts ?? 0),
+      s2Markdown: parity(counts.markdown ?? 0),
+      s3Figures: (counts.figures ?? 0) > 0,
+      s4Inventory: summary?.resolutionCoverage === 1,
+    },
+    counts,
+  };
 }
 
 async function readJson(filePath) {
@@ -286,6 +381,7 @@ function validateProcessingContract(profileName, profile) {
   if (processing.publicOriginalReuse !== 'forbidden') {
     throw new Error(`publicOriginalReuse must be forbidden: ${profileName}`);
   }
+  validatePageImageContract(processing.pageImage, `${profileName}.processing.pageImage`);
   if (
     !Array.isArray(processing.stats47Targets) ||
     processing.stats47Targets.length === 0
@@ -553,6 +649,7 @@ async function prepare(options) {
     ocrLanguages: profile.processing.ocrLanguages,
     ocrRotationDegrees: profile.processing.ocrRotationDegrees,
     ocrPageSegmentationMode: profile.processing.ocrPageSegmentationMode,
+    pageImage: validatePageImageContract(profile.processing.pageImage),
     documents,
     images,
     preparedAt: new Date().toISOString(),
@@ -684,9 +781,12 @@ async function extract(options) {
   const mode = options.mode ?? 'auto';
   if (!new Set(['auto', 'text', 'ocr']).has(mode))
     throw new Error(`Invalid extraction mode: ${mode}`);
-  const dpi = Number(options.dpi ?? 180);
+  const pageImageContract = workspace.pageImage ?? null;
+  const dpi = Number(options.dpi ?? pageImageContract?.dpi ?? 180);
   if (!Number.isInteger(dpi) || dpi < 72 || dpi > 600)
     throw new Error('--dpi must be an integer from 72 to 600');
+  const pageFormat = pageImageContract?.format ?? 'png';
+  const contentCrop = pageImageContract?.contentCrop ?? null;
   const { rotationDegrees, pageSegmentationMode } = validateOcrLayout(
     options.rotate ?? workspace.ocrRotationDegrees ?? 0,
     options.psm ?? workspace.ocrPageSegmentationMode ?? 6
@@ -724,9 +824,11 @@ async function extract(options) {
   await mkdir(pageDir, { recursive: true });
   await mkdir(transcriptDir, { recursive: true });
   const results = [];
+  let fullPagePixels = null;
   for (const page of pages) {
     const pageName = `p${String(page).padStart(4, '0')}`;
-    const pageImage = path.join(pageDir, `${pageName}.png`);
+    const renderedPng = path.join(pageDir, `${pageName}.png`);
+    const pageImage = path.join(pageDir, `${pageName}.${pageFormat}`);
     const transcript = path.join(transcriptDir, `${pageName}.txt`);
     if (
       !options.force &&
@@ -735,6 +837,7 @@ async function extract(options) {
       throw new Error(`Page output already exists; use --force: ${pageName}`);
     }
     await rm(pageImage, { force: true });
+    await rm(renderedPng, { force: true });
     await rm(transcript, { force: true });
     await renderPage(
       documentPath,
@@ -743,6 +846,30 @@ async function extract(options) {
       path.join(pageDir, pageName),
       rotationDegrees
     );
+    if (fullPagePixels == null) {
+      const dimensions = await run('magick', ['identify', '-format', '%w %h', renderedPng]);
+      const [width, height] = dimensions.stdout.trim().split(/\s+/).map(Number);
+      fullPagePixels = { width, height };
+    }
+    if (contentCrop) {
+      if (
+        contentCrop.x + contentCrop.width > fullPagePixels.width ||
+        contentCrop.y + contentCrop.height > fullPagePixels.height
+      ) {
+        throw new Error(
+          `contentCrop ${contentCrop.geometry} exceeds rendered page ${fullPagePixels.width}x${fullPagePixels.height}`
+        );
+      }
+      const croppedPath = `${renderedPng}.cropped.png`;
+      await run('magick', [renderedPng, '-crop', contentCrop.geometry, '+repage', croppedPath]);
+      await rm(renderedPng, { force: true });
+      await run('magick', [croppedPath, renderedPng]);
+      await rm(croppedPath, { force: true });
+    }
+    if (pageFormat === 'jpg') {
+      await run('magick', [renderedPng, '-quality', String(pageImageContract.quality), pageImage]);
+      await rm(renderedPng, { force: true });
+    }
     let engine = mode;
     if (mode === 'text' || mode === 'auto') {
       await run('pdftotext', [
@@ -792,6 +919,30 @@ async function extract(options) {
       transcriptSha256: await sha256File(transcript),
     });
   }
+  const pageDimsPath = path.join(workspaceDir, 'page-dims.json');
+  const pageDims = (await pathExists(pageDimsPath)) ? await readJson(pageDimsPath) : {
+    schemaVersion: 1,
+    sourceKey: workspace.sourceKey,
+    edition: workspace.edition,
+    revision: workspace.revision,
+    publicOriginalReuse: 'forbidden',
+    documents: {},
+  };
+  pageDims.documents[document.id] = {
+    path: document.path,
+    pageCount: document.pages,
+    render: { tool: 'pdftoppm', dpi, rotationDegrees, fullPagePixels },
+    pageFormat,
+    contentCrop: contentCrop
+      ? {
+          geometry: contentCrop.geometry,
+          outputPixels: { width: contentCrop.width, height: contentCrop.height },
+          note: 'pages/ の画像と crop 座標は contentCrop 適用後の pixel を基準にする',
+        }
+      : null,
+    updatedAt: new Date().toISOString(),
+  };
+  await writeJson(pageDimsPath, pageDims);
   await writeJson(extractionManifestPath, {
     schemaVersion: 1,
     profile: workspace.profile,
@@ -1001,6 +1152,138 @@ async function crop(options) {
   return { cropped: true, cropManifestPath, crops: results };
 }
 
+function mdDirFor(workspaceDir, options) {
+  return options['md-dir']
+    ? assertOutsideRepository(options['md-dir'], 'Markdown directory')
+    : path.join(workspaceDir, 'md');
+}
+
+async function knownFigureIds(workspaceDir) {
+  const cropManifestPath = path.join(workspaceDir, 'crop-manifest.json');
+  if (!(await pathExists(cropManifestPath))) return new Set();
+  const manifest = await readJson(cropManifestPath);
+  return new Set((manifest.crops ?? []).map((crop) => crop.id));
+}
+
+async function mdCheck(options) {
+  if (!options.workspace) throw new Error('md-check requires --workspace');
+  const { workspaceDir, workspace } = await loadWorkspace(options.workspace);
+  const mdRoot = mdDirFor(workspaceDir, options);
+  const figureIds = await knownFigureIds(workspaceDir);
+  const documents = [];
+  const errors = [];
+  for (const document of workspace.documents) {
+    const dir = workspace.documents.length === 1 ? mdRoot : path.join(mdRoot, document.id);
+    const present = new Set();
+    if (await pathExists(dir)) {
+      for (const name of await readdir(dir)) {
+        if (!/^p\d{4}\.md$/.test(name)) continue;
+        const text = await readFile(path.join(dir, name), 'utf8');
+        const frontmatter = parseFrontmatter(text);
+        const end = text.startsWith('---\n') ? text.indexOf('\n---\n', 4) : -1;
+        const body = end === -1 ? text : text.slice(end + 5);
+        errors.push(...validateMdPage({ fileName: name, frontmatter, body, knownFigureIds: figureIds }));
+        present.add(Number(name.slice(1, 5)));
+      }
+    }
+    const missing = [];
+    for (let page = 1; page <= document.pages; page += 1) if (!present.has(page)) missing.push(page);
+    documents.push({
+      id: document.id,
+      path: document.path,
+      pages: document.pages,
+      markdown: present.size,
+      coverage: present.size === 0 ? 0 : (document.pages - missing.length) / document.pages,
+      missing: missing.slice(0, 20),
+    });
+  }
+  const complete = errors.length === 0 && documents.every((entry) => entry.missing.length === 0);
+  if (options.check && !complete) {
+    throw new Error(`Markdown transcription incomplete:\n- ${[...errors, ...documents.filter((d) => d.missing.length).map((d) => `${d.path}: missing ${d.pages - d.markdown} pages`)].join('\n- ')}`);
+  }
+  return { checked: true, complete, mdRoot, documents, errors };
+}
+
+/**
+ * 派生 workspace の pages / transcripts / crops / md / page-dims を、次の revision の bundle 用に
+ * source root へ規約名で配置する。配置後に `source-vault create` で r<N> を作る。
+ */
+async function stage(options) {
+  if (!options.workspace || !options.revision)
+    throw new Error('stage requires --workspace and --revision');
+  const { workspaceDir, workspace } = await loadWorkspace(options.workspace);
+  const { profile } = await loadProfile(workspace.profile);
+  const revision = Number(options.revision);
+  if (!Number.isInteger(revision) || revision <= workspace.revision) {
+    throw new Error(`--revision must be an integer greater than the processed revision r${workspace.revision}`);
+  }
+  if (profile.revision !== revision) {
+    throw new Error(`Set profiles.${workspace.profile}.revision to ${revision} in .claude/config/source-vault.json before staging`);
+  }
+  const sourceRoot = assertOutsideRepository(workspace.sourceRoot, 'Source root');
+  const single = workspace.documents.length === 1;
+  const copies = [];
+  async function copyTree(fromDir, toDir, filter) {
+    if (!(await pathExists(fromDir))) return 0;
+    let count = 0;
+    for (const name of (await readdir(fromDir)).sort()) {
+      if (!filter(name)) continue;
+      await mkdir(toDir, { recursive: true });
+      const target = path.join(toDir, name);
+      if ((await pathExists(target)) && !options.force)
+        throw new Error(`Staged file already exists; use --force: ${target}`);
+      await copyFile(path.join(fromDir, name), target);
+      count += 1;
+    }
+    return count;
+  }
+  for (const document of workspace.documents) {
+    const sub = single ? '' : document.id;
+    copies.push({
+      document: document.id,
+      pages: await copyTree(path.join(workspaceDir, 'pages', document.id), path.join(sourceRoot, 'pages', sub), (n) => /^p\d{4}\.(?:png|jpg)$/.test(n)),
+      transcripts: await copyTree(path.join(workspaceDir, 'transcripts', document.id), path.join(sourceRoot, 'transcripts', sub), (n) => /^p\d{4}\.txt$/.test(n)),
+      markdown: await copyTree(single ? mdDirFor(workspaceDir, options) : path.join(mdDirFor(workspaceDir, options), document.id), path.join(sourceRoot, 'md', sub), (n) => /^p\d{4}\.md$/.test(n)),
+    });
+  }
+  const figures = await copyTree(path.join(workspaceDir, 'crops'), path.join(sourceRoot, 'figures'), (n) => /\.(?:png|jpg)$/.test(n));
+  const auxiliary = [];
+  for (const name of ['page-dims.json', 'crop-manifest.json']) {
+    const from = path.join(workspaceDir, name);
+    if (!(await pathExists(from))) continue;
+    const target = path.join(sourceRoot, name);
+    if ((await pathExists(target)) && !options.force)
+      throw new Error(`Staged file already exists; use --force: ${target}`);
+    await copyFile(from, target);
+    auxiliary.push(name);
+  }
+  return {
+    staged: true,
+    profile: workspace.profile,
+    revision,
+    sourceRoot,
+    copies,
+    figures,
+    auxiliary,
+    next: `node .claude/scripts/source-vault/source-vault.mjs create --profile ${workspace.profile}`,
+  };
+}
+
+async function stageStatusCommand(options) {
+  const config = await loadConfig();
+  const names = options.profile ? [options.profile] : Object.keys(config.profiles);
+  const profiles = [];
+  for (const name of names) {
+    const profile = config.profiles[name];
+    if (!profile) throw new Error(`Unknown source vault profile: ${name}`);
+    const manifest = await readJson(path.join(PROJECT_ROOT, profile.manifestPath));
+    const summaryPath = path.join(path.dirname(path.join(PROJECT_ROOT, profile.manifestPath)), 'summary.json');
+    const summary = (await pathExists(summaryPath)) ? await readJson(summaryPath) : null;
+    profiles.push({ profile: name, sourceKey: profile.sourceKey, edition: profile.edition, ...stageStatus(manifest, summary) });
+  }
+  return { profiles };
+}
+
 async function cleanup(options) {
   if (!options.profile) throw new Error('cleanup requires --profile');
   const { profileName, profile } = await loadProfile(options.profile);
@@ -1026,6 +1309,9 @@ async function main() {
   else if (command === 'prepare') result = await prepare(options);
   else if (command === 'extract') result = await extract(options);
   else if (command === 'crop') result = await crop(options);
+  else if (command === 'md-check') result = await mdCheck(options);
+  else if (command === 'stage') result = await stage(options);
+  else if (command === 'stage-status') result = await stageStatusCommand(options);
   else if (command === 'cleanup') result = await cleanup(options);
   else throw new Error(`Unknown command: ${command}\n${usage()}`);
   console.log(JSON.stringify(result, null, 2));

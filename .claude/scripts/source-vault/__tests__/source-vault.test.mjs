@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -68,6 +68,7 @@ test('source vault profiles follow the canonical private Drive hierarchy', async
       'prefecture-deviation': '参考文献/47都道府県の偏差値/2018年版',
       'prefecture-databook-2021': '参考文献/2021都道府県DataBook/2021年版',
       'claude-skills-guide-2026': '参考文献/Claudeスキル構築ガイド/2026年版',
+      'kakei-marketing-2015': '参考文献/マーケティングに使える家計調査/2015年版',
     }
   );
   assert.deepEqual(config.profiles['prefecture-deviation'].bibliography, {
@@ -315,6 +316,61 @@ test('profile creates and restores a second private source', async (t) => {
   assert.equal(
     await readFile(path.join(target, 'scan.pdf'), 'utf8'),
     'private-source\n'
+  );
+});
+
+test('japanese file names round-trip through NFC even when tar extracts NFD', async (t) => {
+  const root = path.join(
+    tmpdir(),
+    `stats47-source-vault-nfc-test-${process.pid}-${Date.now()}`
+  );
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const source = path.join(root, 'マーケティングに使える家計調査');
+  const bundle = path.join(root, 'stats47-kakei-marketing-2015-r1.tar.gz');
+  const manifestPath = path.join(root, 'stats47-kakei-marketing-2015-r1.manifest.json');
+  const parts = path.join(root, 'parts');
+  await mkdir(source, { recursive: true });
+  // macOS の bsdtar は展開時に NFD を書くため、作成側が NFD でも NFC でも manifest は NFC で固定する
+  const nfdName = 'マーケティングに使える家計調査.pdf'.normalize('NFD');
+  await writeFile(path.join(source, nfdName), 'private-source\n');
+
+  await run([
+    'create',
+    '--profile',
+    'kakei-marketing-2015',
+    '--source',
+    source,
+    '--bundle',
+    bundle,
+    '--manifest',
+    manifestPath,
+    '--parts-dir',
+    parts,
+  ]);
+  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  assert.equal(manifest.files.length, 1);
+  assert.equal(manifest.files[0].path, 'マーケティングに使える家計調査.pdf'.normalize('NFC'));
+
+  await rm(bundle);
+  const target = path.join(root, 'restored', 'マーケティングに使える家計調査');
+  await run([
+    'restore',
+    '--manifest',
+    manifestPath,
+    '--parts-dir',
+    parts,
+    '--target',
+    target,
+  ]);
+  assert.equal(
+    await readFile(path.join(target, 'マーケティングに使える家計調査.pdf'), 'utf8'),
+    'private-source\n'
+  );
+  // macOS は path 解決が正規化非依存なので readFile だけでは NFD 残留を見逃す。
+  // 復元後の実体名が manifest と同じ NFC であることまで固定する。
+  assert.deepEqual(
+    await readdir(target),
+    ['マーケティングに使える家計調査.pdf'.normalize('NFC')]
   );
 });
 

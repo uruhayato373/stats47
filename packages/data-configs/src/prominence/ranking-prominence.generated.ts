@@ -471,7 +471,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 255,
+    "count": 256,
     "representatives": [
       {
         "rankingKey": "swimming-pool-public",
@@ -705,7 +705,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "ict",
     "categoryName": "情報通信・科学技術",
-    "count": 16,
+    "count": 18,
     "representatives": [
       {
         "rankingKey": "public-phone-count",
@@ -732,16 +732,16 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "電話加入数が最も多い県は？"
       },
       {
-        "rankingKey": "average-broadcast-media-consumption-time-employed-woman",
-        "title": "テレビ・ラジオ・新聞・雑誌の平均時間",
-        "readerLabel": "テレビ・ラジオ・新聞・雑誌の平均時間",
-        "hook": "テレビ・ラジオ・新聞・雑誌の平均時間が最も長い県は？"
+        "rankingKey": "information-communication-coefficient",
+        "title": "情報通信係数",
+        "readerLabel": "情報通信係数",
+        "hook": "情報通信係数が最も多い県は？"
       },
       {
-        "rankingKey": "mobile-phone-contract-count-per-1000",
-        "title": "携帯電話契約数",
-        "readerLabel": "携帯電話契約数",
-        "hook": "携帯電話契約数が最も多い県は？"
+        "rankingKey": "information-communication-expenditure",
+        "title": "情報通信関係費",
+        "readerLabel": "情報通信関係費",
+        "hook": "情報通信関係費が最も多い県は？"
       }
     ]
   }
@@ -920,6 +920,6 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "post-office-count",
   "transport-communication-expenditure-ratio-multi-person-households",
   "telephone-subscription-count",
-  "average-broadcast-media-consumption-time-employed-woman",
-  "mobile-phone-contract-count-per-1000"
+  "information-communication-coefficient",
+  "information-communication-expenditure"
 ];

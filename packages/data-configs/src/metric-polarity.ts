@@ -39,6 +39,8 @@ export interface PolarityEntry {
 
 /** 明示的に極性が確定した metric のみ。未収載 = 未割当 (推測しない)。 */
 export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
+  // 全国学力・学習状況調査 平均正答率
+  "academic-achievement-test-average-rate": { polarity: "higher-is-better", evidence: "学力調査の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
   // 救急搬送 病院収容所要時間
   "ambulance-hospital-arrival-time": { polarity: "higher-is-worse", evidence: "救急搬送の所要時間は長いほど悪い (争いのない事象)" },
   // BOD汚濁負荷量 / 生化学的酸素要求量（BOD）の汚濁負荷量
@@ -103,6 +105,10 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "garbage-total-output": { polarity: "higher-is-worse", evidence: "ごみの排出・最終処分量は多いほど環境負荷が大きい (争いのない事象)" },
   // 乳児死亡数
   "infant-deaths": { polarity: "higher-is-worse", evidence: "死亡は多いほど悪い (争いのない事象)" },
+  // 情報通信費 消費支出に占める割合
+  "information-communication-coefficient": { polarity: "neutral", evidence: "通信費の割合は利用の活発さとも家計負担とも読め、大小を良し悪しと解釈しない" },
+  // 情報通信費 支出額
+  "information-communication-expenditure": { polarity: "neutral", evidence: "通信費の支出額は利用の活発さとも家計負担とも読め、大小を良し悪しと解釈しない" },
   // 知能犯認知件数
   "intellectual-crime-per-100k": { polarity: "higher-is-worse", evidence: "犯罪の認知件数は多いほど悪い (争いのない事象)" },
   // 腎不全による死亡者数 / 総数
@@ -202,7 +208,7 @@ export const EXCLUDED_FROM_SEED: ReadonlyArray<{ key: string; reason: string }> 
  * 極性が付いた metric を**減らさない**ための床。metric を消して分母が減るのは正常なので
  * 件数そのものではなく「収載件数」で見る。増やすときだけこの定数を上げる。
  */
-export const MIN_POLARITY_COVERAGE = 55;
+export const MIN_POLARITY_COVERAGE = 58;
 
 /** 極性を引く。未収載なら null (既定に化けない)。 */
 export function findMetricPolarity(key: string): PolarityEntry | null {

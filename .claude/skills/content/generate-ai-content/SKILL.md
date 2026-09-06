@@ -140,9 +140,30 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 **outbox はフラットな `<rankingKey>.json` でなければならない**。workflow の検出 glob が
 `data/ai-content-staging/*.json` なので、`app/ranking/<key>/` の階層を作ると拾われない。
 
+## ローカル量産（headless claude CLI・Agent tool は使わない）
+
+Gemini 日次 CI が止まっている間、または在庫を人が決めた量だけ消化するときの入口。
+**ユーザー端末で実行する**（Claude Code セッション内は Keychain を読めず未ログインになる。
+セッションからは `--dry-run` だけ）。1 件は prompt ≈5,000 字 + 出力で終わり、Agent tool 経路
+（1 件 $16-18）の約 1/60。正典: `ranking-content-standards.md` §2026-09-05。
+
+```bash
+# 既定: キューの needs-regen 上位 35 件 / author=critic=Sonnet 5 / 1 push = 1 commit → publish-ai-content.yml
+bash .claude/scripts/ai-content/run-claude-batch.sh
+# パイロット (モデル比較): 10 件ずつ、通過率と 1 件あたり input/output トークンを summary で読む
+bash .claude/scripts/ai-content/run-claude-batch.sh --limit 10 --model claude-haiku --retries 2
+bash .claude/scripts/ai-content/run-claude-batch.sh --limit 10 --model claude-sonnet --retries 2
+# 1 件だけ試す (push しない)
+bash .claude/scripts/ai-content/run-claude-batch.sh --keys <rankingKey> --no-push
+```
+
+スクリプトは preflight (最小 1 call で認証確認) → キュー再導出 → 生成 → `audit-ai-content.mjs` →
+Claude critic → `history.csv` / quarantine state 記録 → 1 commit → rebase → push → publish run 待ち、まで行う。
+summary の「1 request あたり input が 40K 超」警告が出たら rules が漏れ込んでいる (cwd / `--setting-sources`)。
+
 ## 手動例外是正（quarantine / 高流入 key のみ）
 
-以下は日次量産の代替ではない。Gemini 自動経路で 3 回失敗したキーや、公開優先度が高く
+以下は日次量産・ローカル量産の代替ではない。Gemini 自動経路で 3 回失敗したキーや、公開優先度が高く
 人手判断が必要なキーだけを対象にする。
 
 1. **対象を出す。** quarantine state と GSC 優先度を確認し、明示キーだけを選ぶ。

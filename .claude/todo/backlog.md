@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-30
+updated: 2026-09-05
 ---
 
 # バックログ (タスクマスタ)
@@ -433,9 +433,30 @@ updated: 2026-08-30
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: ranking-content-author
-- **次**: 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
-  `ai-content-gemini-daily.yml` を初回実走する。既定 3 件/日・並列 1 を維持し、7 run 以上の
-  通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない。
+- **次**:
+  1. develop で `bash .claude/scripts/ai-content/run-claude-batch.sh` (既定 35 件 / Sonnet / retries 1 / concurrency 2) を
+     1 push = 1 commit で回す。**最初の 35 件バッチで Pro/Max 枠のレート制限 (`claude-error_*` reason) が出るかを観測**し、
+     1 日の件数はそこから決める (推測で置かない)。公開後は `audit-ai-content.mjs <key>` で R2 の内容一致を見る
+  2. manual-escalation 30 件 + quarantine だけ Opus Agent tool (`ranking-content-author` を `model: opus` で起動)
+  3. (並走・別件) 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
+     `ai-content-gemini-daily.yml` を復旧する。既定 3 件/日・並列 1 を維持し、7 run 以上の
+     通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない
+- **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
+  2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
+  運転設定を `run-claude-batch.sh` の既定に焼いた。正典 `ranking-content-standards.md` §2026-09-05
+- **2026-09-05 本番 3 バッチ**: 公開 54 件 (done 718 → 772・残 1,394)。batch1 は 26 件が原因不明の CLI 失敗 (stdout を
+  捨てる欠陥 → 修正)、batch2 は定型化 REVISE が支配的 → prompt に県数・地方別順位表を機械計算で渡し、critic に author の
+  制約を前提として明文化。batch3 (35 件・concurrency 2) は **OK 25 / REJECT 9 / FAIL 1・$0.81/公開件・50 分・レート制限なし**。
+  `public-kindergarten-ratio` が 3 連続不合格で quarantine 入り (Opus 例外是正の初例)。次は 1 日 1〜2 バッチで回し、
+  `claude-error_*` が出たら止める
+- **2026-09-05 checkpoint**: Gemini 日次 CI は 08-30 から `preflight_status=billing` で 8 run 連続 PASS 0 (鍵の
+  前払いクレジット枯渇。モデル品質ではない)。残 1,445 件 (done 718 / active 2,163) を Claude で消化するため、
+  Agent tool 経路 (1 件 $16-18) ではなく **headless `claude -p` 経路**を整備した:
+  `generate-parallel.ts` の `--model claude-*` を lean 化 (repo 外 cwd・`--tools ""`・`--setting-sources local`・独自
+  system prompt・`--output-format json` で usage/cost 取得・alias allowlist)、`--critic claude-*` 新設、
+  `run-claude-batch.sh` (preflight → キュー → 生成 → 監査 → critic → history.csv/quarantine → 1 commit → push →
+  publish run 待ち)、`history.csv` に `cost_usd` 列。dry-run・型・vitest 50・node test 54 は green。
+  **実 LLM 呼び出しは未実施** (CLI 未ログインのため)。正典 `ranking-content-standards.md` §2026-09-05。
 - **2026-08-30 checkpoint**: 高コストだった Claude Code/OAuth の自動量産を復活させず、
   `gemini-2.5-flash-lite` の structured author → 決定的監査 → 別リクエスト critic → 最大1回再生成 →
   PASS分だけ outbox/publish という日次 CI を実装した。対象あり生成0件、Secret欠損、preflight、
@@ -586,7 +607,7 @@ updated: 2026-08-30
 - **完了条件**: GA4 の `link_position=rakuten-sidebar` が家計調査ページで取れ、CTR が
   native 枠と比較できる。
 
-### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する
+### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する（家計調査書籍は KAKEI-MARKETING-CONTENT-01）
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:ready] [起票:2026-08-29]
 
@@ -600,6 +621,36 @@ updated: 2026-08-30
   確定し、書籍値の直接投入、原文・元図・内部cropの公開が0である。
 - **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
   `rights-hold`または`primary-source-unavailable`で停止する。remote R2、git push、PR、deploy、外部公開は別途承認。
+
+### [KAKEI-MARKETING-CONTENT-01] 『マーケティングに使える「家計調査」』の分析・論点80件をstats47へ段階展開する
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:inventory:check] [起票:2026-09-05]
+
+- **owner**: 台帳は`open-data-curator`、new-metricは`data-ingester`（実在検証は`estat-researcher`）、evidenceTopicsは`theme-designer`、記事は`article-writer`→`blog-critic`。
+- **現状証拠**: profile `kakei-marketing-2015`（Drive `参考文献/マーケティングに使える家計調査/2015年版`、bundle r3 = PDF + ページ画像307 + 生OCR307 + Markdown文字起こし307 + 図表crop113、`stage-status` で S0〜S4 到達）を全307ページOCR（jpn_vert）し、
+  `packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json` に分析・論点33件＋県庁所在市47件を authored、
+  `.claude/state/source-inventory/kakei-marketing/2015/` は coverage 100%（combined-analysis 259 / new-metric 13 / reuse 3 / context-only 27 / not-applicable 5）。
+  wave 0 として education-culture・real-income・fishery-marine に evidenceTopics を各1件追加済み（`validate:catalog` green）。契約は
+  `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md` §4.4。
+- **進捗（2026-09-06）**: step 2〜5 は記事側が完了。既存記事更新 wave・新規記事 wave A/B の全記事と
+  `<pref>-food-culture` 47本すべてが quality-gate + blog-critic PASS で R2 公開済み（live md5 一致で実測）。
+  47本すべての live 本文に「数量×価格で分解する」H2 がある。接地器 `build-kakei-quantity-price.mjs` は
+  未 commit だったので `countsNote`（counts は「他の〜」残余品目を除いた数）付きで develop へ載せた。
+- **次（実行順）**:
+  1. **残るのは deploy のみ**: new-metric 2件（`academic-achievement-test-average-rate` / `information-communication-expenditure`
+     → `information-communication-coefficient`）は config・R2・KNOWN/SITEMAP まで反映済み。
+     develop→main PR → CI green → merge → CDN purge → Googlebot UA で `/ranking/academic-achievement-test-average-rate` /
+     `/ranking/information-communication-coefficient` / `/ranking/information-communication-expenditure` が 200
+     （title が「見つかりません」でない）を実測する（`ranking-publisher` 手順 6〜8）。
+     既存記事の改稿（`income-quintile-education` 等の prerender 済みページ）もこの deploy で本番反映される。
+  2. inventory の `combined-analysis` 各項目が記事・theme・area のいずれかへ接続されているかを
+     管理画面 `/content/references` で確認し、未接続分だけを次の wave に回す。
+- **停止条件**: 書籍の数値・図表・本文を公開物へ流さない。全国集計（五分位・年齢階級・月次）を/rankingへ載せない。
+  県庁所在市の値を県全体として書かない。一次資料で再取得できない項目は`primary-source-unavailable`へ戻す。
+  R2 write・deploy・SNS公開は別途承認。
+- **完了条件**: new-metric 2件が`validate:config`/`validate:years` green で公開パイプラインに乗り、既存記事更新wave と
+  新規記事wave A の全記事が quality-gate + critic PASS、県別シリーズ47本が公開済みで、inventoryの`combined-analysis`各項目が
+  記事・theme・areaのいずれかへ実在証跡で接続されている（管理画面`/content/references`で確認）。
 
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
@@ -621,7 +672,6 @@ updated: 2026-08-30
 | electricity-generation-capacity | 発電電力量 | local-economy | draft | 電力供給規模と地域の産業基盤を並べて読む |
 | agricultural-output | 農業産出額 | local-economy | draft | 農業の生産規模を地域経済の産業構成へ接続する |
 | current-liabilities-balance-multi-person-households-per-household | 負債現在高 | real-income | draft | 所得・消費だけでなく家計の負債側を購買力の文脈に加える |
-| consumption-expenditure-multi-person-households-per-month | 消費支出 | real-income | draft | 可処分所得と実際の支出水準の差を家計フローとして示す |
 | avg-propensity-to-consume-worker-households | 平均消費性向 | real-income | draft | 所得のうち消費へ回る割合を地域別の家計行動として比較する |
 | municipality-count | 市町村数 | local-finance | draft | 自治体数を行政サービス・財政構造の基礎条件として示す |
 | agricultural-employment-population | 農業就業人口 | local-economy | draft | 農業産出額と担い手規模を組み合わせて産業構造を読む |

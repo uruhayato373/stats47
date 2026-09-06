@@ -267,9 +267,9 @@ async function buildQueue(scope = "gsc") {
   const doneUnhealthy = done.filter((e) => e.dataBlockers?.length);
   const byReason = needs.reduce((acc, e) => ((acc[e.reason] = (acc[e.reason] ?? 0) + 1), acc), {});
 
-  // 自動経路は全件 Gemini author + 別リクエストの Gemini critic。
-  // GSC 流入上位 N 件だけ、自動失敗が続いたときの手動 agent 是正候補として機械表示する。
-  // Claude モデルは定期経路で使わない。
+  // 自動量産は Gemini 日次 CI (author + 別リクエスト critic) か、ローカルの headless claude CLI
+  // (run-claude-batch.sh。同じ監査・critic を通す)。GSC 流入上位 N 件だけ、自動失敗が続いたときの
+  // 手動 agent (Agent tool 経路・高コスト) 是正候補として機械表示する。reviewTier の値名は互換のため維持。
   const MANUAL_ESCALATION_TOP_N = 30;
   needs.forEach((e, i) => {
     e.reviewTier = i < MANUAL_ESCALATION_TOP_N ? "manual-escalation" : "gemini-auto";
@@ -485,7 +485,8 @@ function writeLatestMd(queue, progress = null) {
     ...top.map((e) => `| ${e.impressions} | ${e.rankingKey} | ${e.reason} | ${e.reviewTier === "manual-escalation" ? "🟠手動是正候補" : "Gemini自動"} | ${(e.blockers || []).join(",") || "-"} |`),
     ``,
     `> 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、`,
-    `> 既定 ${queue.summary.geminiDailyLimit ?? 3}件を outbox 経由で R2 へ公開する。Claude は定期経路で使わない。`,
+    `> 既定 ${queue.summary.geminiDailyLimit ?? 3}件を outbox 経由で R2 へ公開する。在庫の量産はローカルの headless claude CLI`,
+    `> (\`run-claude-batch.sh\`・同じ監査/critic) で人が量を決めて回す。Agent tool 経路の Claude は例外是正のみ。`,
     `> 🟠手動是正候補は GSC 流入上位${queue.summary.manualEscalationTier ?? 30}件。自動失敗が続いた場合だけ agent で是正する。`,
   ];
   writeFileSync(LATEST_MD, lines.join("\n") + "\n");

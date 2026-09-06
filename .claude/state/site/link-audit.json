@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-08-29T21:40:56.051Z",
+  "generatedAt": "2026-09-05T21:06:06.575Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
-  "pagesCrawled": 124,
-  "pagesKnown": 5635,
-  "uniqueTargets": 3452,
+  "pagesCrawled": 141,
+  "pagesKnown": 5948,
+  "uniqueTargets": 3709,
   "statusCount": {
-    "0": 1,
-    "200": 3316,
-    "301": 10,
-    "410": 125
+    "200": 3442,
+    "301": 136,
+    "410": 131
   },
-  "brokenCount": 126,
+  "brokenCount": 131,
   "brokenByRoute": {
     "/ranking/[k]": 5,
-    "/areas/[c]/[theme]": 121
+    "/blog/[k]": 6,
+    "/areas/[c]/[theme]": 120
   },
   "broken": [
     {
@@ -25,9 +25,9 @@
       "refCount": 10,
       "from": [
         "/areas/01000",
-        "/areas/10000",
         "/areas/05000",
         "/areas/15000",
+        "/areas/10000",
         "/areas/19000"
       ]
     },
@@ -39,21 +39,93 @@
       "refCount": 10,
       "from": [
         "/areas/01000",
-        "/areas/10000",
         "/areas/05000",
         "/areas/15000",
+        "/areas/10000",
         "/areas/19000"
       ]
     },
     {
-      "target": "/areas/29000/living-housing",
-      "status": 0,
-      "kind": "http-0",
+      "target": "/blog/academic-achievement-test-prefecture-ranking",
+      "status": 410,
+      "kind": "gone",
       "title": "",
-      "refCount": 2,
+      "refCount": 8,
       "from": [
-        "/areas/29000",
-        "/areas/29000/local-economy"
+        "/blog/carbonated-drink-spending-prefecture-gap",
+        "/blog/2050-population-flood-exposure",
+        "/blog/households-on-public-assistance-per-1000-prefecture-gap",
+        "/blog/udon-soba-food-culture-prefecture-map",
+        "/blog/national-pension-payment-rate-prefecture-gap"
+      ]
+    },
+    {
+      "target": "/blog/beer-peak-month-july-to-december",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 8,
+      "from": [
+        "/blog/carbonated-drink-spending-prefecture-gap",
+        "/blog/2050-population-flood-exposure",
+        "/blog/households-on-public-assistance-per-1000-prefecture-gap",
+        "/blog/udon-soba-food-culture-prefecture-map",
+        "/blog/national-pension-payment-rate-prefecture-gap"
+      ]
+    },
+    {
+      "target": "/blog/fish-catch-vs-consumption-prefecture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 8,
+      "from": [
+        "/blog/carbonated-drink-spending-prefecture-gap",
+        "/blog/2050-population-flood-exposure",
+        "/blog/households-on-public-assistance-per-1000-prefecture-gap",
+        "/blog/udon-soba-food-culture-prefecture-map",
+        "/blog/national-pension-payment-rate-prefecture-gap"
+      ]
+    },
+    {
+      "target": "/blog/golf-green-fee-consumption-ranking",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 8,
+      "from": [
+        "/blog/carbonated-drink-spending-prefecture-gap",
+        "/blog/2050-population-flood-exposure",
+        "/blog/households-on-public-assistance-per-1000-prefecture-gap",
+        "/blog/udon-soba-food-culture-prefecture-map",
+        "/blog/national-pension-payment-rate-prefecture-gap"
+      ]
+    },
+    {
+      "target": "/blog/income-quintile-medical-health",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 8,
+      "from": [
+        "/blog/carbonated-drink-spending-prefecture-gap",
+        "/blog/2050-population-flood-exposure",
+        "/blog/households-on-public-assistance-per-1000-prefecture-gap",
+        "/blog/national-pension-payment-rate-prefecture-gap",
+        "/blog/lake-count-prefecture-gap"
+      ]
+    },
+    {
+      "target": "/blog/income-quintile-recreation-services",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 4,
+      "from": [
+        "/blog/households-on-public-assistance-per-1000-prefecture-gap",
+        "/blog/national-pension-payment-rate-prefecture-gap",
+        "/blog/lake-count-prefecture-gap",
+        "/blog/prefecture-salary-gap-career"
       ]
     },
     {
@@ -1288,5 +1360,10 @@
     }
   ],
   "redirectToBroken": [],
-  "unreachablePages": []
+  "unreachablePages": [
+    {
+      "page": "/survey/national-accounts",
+      "status": 404
+    }
+  ]
 }
