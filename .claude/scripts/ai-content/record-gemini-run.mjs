@@ -1,5 +1,5 @@
 /**
- * Gemini ai-content run report を長期指標と最新ダイジェストに変換する。
+ * ai-content run report (Gemini 日次 CI / ローカル claude CLI batch 共通) を長期指標と最新ダイジェストに変換する。
  *
  * 入力: generate-parallel.ts --report の JSON (本文・prompt・API key は含まない)
  * 出力: .claude/state/metrics/ai-content/{history.csv,LATEST.md}
@@ -28,6 +28,9 @@ const HEADER = [
   "quota_failures",
   "preflight_requests",
   "preflight_status",
+  // 末尾に追加 (既存行は空欄で読める)。API 換算費用。claude CLI の total_cost_usd 合計、gemini-api は 0。
+  // Pro/Max OAuth で回した run では実請求ではない (換算値)。
+  "cost_usd",
 ].join(",");
 
 function csvCell(value) {
@@ -95,6 +98,7 @@ function toRow(report, preflightReport, runId) {
     preflight_status: preflightReport?.ok
       ? "ok"
       : (preflightReport?.classification ?? (report ? "not-recorded" : "unknown")),
+    cost_usd: Number((base.usage.costUsd ?? 0).toFixed(4)),
   };
 }
 
@@ -107,16 +111,17 @@ function latestMarkdown(row) {
   const attempted = Number(row.targets);
   const passed = Number(row.passed);
   const rate = attempted > 0 ? `${((passed / attempted) * 100).toFixed(1)}%` : "n/a";
-  return `# Ranking AI content / Gemini latest\n\n` +
+  return `# Ranking AI content / latest run\n\n` +
     `- 更新日: ${row.date}\n` +
-    `- GitHub Actions run: ${row.run_id}\n` +
+    `- run: ${row.run_id} (GitHub Actions run id、またはローカル batch の local-<date>-<time>)\n` +
     `- モデル: ${row.model}\n` +
     `- 対象: ${row.targets} / PASS: ${row.passed} / REJECT: ${row.rejected} / FAIL: ${row.failed} / SKIP: ${row.skipped}\n` +
     `- 通過率: ${rate}\n` +
     `- APIリクエスト: author ${row.author_requests} / critic ${row.critic_requests}\n` +
     `- Preflight: ${row.preflight_status} / requests ${row.preflight_requests}\n` +
     `- トークン: input ${row.input_tokens} / output ${row.output_tokens} / thinking ${row.thinking_tokens} / total ${row.total_tokens}\n` +
-    `- quota/billing 停止: ${row.quota_failures}\n\n` +
+    `- quota/billing 停止: ${row.quota_failures}\n` +
+    `- 費用 (API 換算。OAuth 実行では実請求ではない): $${row.cost_usd}\n\n` +
     `> 生成本文と prompt は記録しません。詳細履歴は [history.csv](./history.csv) を参照してください。\n`;
 }
 

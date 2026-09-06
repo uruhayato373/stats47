@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "profile": "kakei-marketing-2015",
+  "sourceKey": "kakei-marketing",
+  "edition": "2015",
+  "input": {
+    "documents": 1,
+    "pages": 307,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 307,
+  "resolvedCount": 307,
+  "resolutionCoverage": 1,
+  "actionableCount": 302,
+  "blockedCount": 0,
+  "byResolution": {
+    "combined-analysis": 259,
+    "not-applicable": 5,
+    "new-metric": 13,
+    "reuse-existing-metric": 3,
+    "context-only": 27
+  },
+  "byKind": {
+    "page": 307
+  },
+  "publicOriginalReuse": "forbidden"
+}

@@ -15,13 +15,14 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-08-31
+ * 最終生成日: 2026-09-06
  * 公開終了反映: 2026-09-05 — 非商用KSJ旧9キーのみ除外（他の公開実在判定は維持）
- * 件数: 2154
+ * 件数: 2157
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
   "abortion-rate",
+  "academic-achievement-test-average-rate",
   "accessories-consumption-expenditure",
   "accident-death-30day",
   "accidental-deaths-per-100k",
@@ -887,6 +888,8 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "infant-deaths",
   "infant-mortality-rate-per-1000-births",
   "inflow-population-ratio",
+  "information-communication-coefficient",
+  "information-communication-expenditure",
   "inland-aquaculture-harvest",
   "inland-fishery-catch",
   "inpatient-rate-per-100k",

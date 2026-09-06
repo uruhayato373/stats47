@@ -15,10 +15,17 @@
       "processing": {
         "usageSpecPath": "docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md",
         "owner": "open-data-curator",
-        "ocrLanguages": ["jpn", "eng"],
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
         "ocrRotationDegrees": 0,
         "ocrPageSegmentationMode": 6,
-        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
         "publicOriginalReuse": "forbidden",
         "stats47Targets": [
           "ranking",
@@ -53,10 +60,17 @@
       "processing": {
         "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
         "owner": "open-data-curator",
-        "ocrLanguages": ["jpn", "eng"],
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
         "ocrRotationDegrees": 90,
         "ocrPageSegmentationMode": 4,
-        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
         "publicOriginalReuse": "forbidden",
         "stats47Targets": [
           "ranking",
@@ -80,10 +94,17 @@
       "processing": {
         "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
         "owner": "area-curator",
-        "ocrLanguages": ["jpn", "eng"],
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
         "ocrRotationDegrees": 0,
         "ocrPageSegmentationMode": 6,
-        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
         "publicOriginalReuse": "forbidden",
         "stats47Targets": [
           "area",
@@ -107,12 +128,71 @@
       "processing": {
         "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
         "owner": "knowledge-curator",
-        "ocrLanguages": ["jpn", "eng"],
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
         "ocrRotationDegrees": 0,
         "ocrPageSegmentationMode": 6,
-        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
         "publicOriginalReuse": "forbidden",
-        "stats47Targets": ["agent", "skill", "internal-documentation"]
+        "stats47Targets": [
+          "agent",
+          "skill",
+          "internal-documentation"
+        ]
+      }
+    },
+    "kakei-marketing-2015": {
+      "sourceKey": "kakei-marketing",
+      "edition": "2015",
+      "revision": 3,
+      "sourceRootName": "マーケティングに使える家計調査",
+      "driveSourceFolderName": "マーケティングに使える家計調査",
+      "driveEditionFolderName": "2015年版",
+      "manifestPath": ".claude/state/source-inventory/kakei-marketing/2015/source-bundle-manifest.json",
+      "bibliography": {
+        "title": "マーケティングに使える「家計調査」 世界最大の消費者ビッグデータは「宝の山」だ",
+        "author": "吉本佳生",
+        "publisher": "講談社",
+        "published": "2015-07",
+        "isbn": "978-4-06-219375-7",
+        "verifiedAt": "https://www.kodansha.co.jp/r/book/product?item=0000189117"
+      },
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn_vert"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 5,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "survey",
+          "theme",
+          "japan",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ],
+        "pageImage": {
+          "dpi": 220,
+          "format": "jpg",
+          "quality": 85,
+          "contentCrop": "1970x2550+236+268"
+        }
       }
     }
   }

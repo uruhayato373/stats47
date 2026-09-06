@@ -59,7 +59,7 @@ export const NIER_DATASETS: readonly OpenDatasetDefinition[] = [
     license: NIER_LICENSE,
     stats47Uses: ["ranking", "theme"],
     suggestedCategories: ["educationsports"],
-    existingMetricKeys: [],
+    existingMetricKeys: ["academic-achievement-test-average-rate"],
     existingGisDataIds: [],
     candidateMetricConcepts: [
       "小学生 国語 正答率 (都道府県別)",

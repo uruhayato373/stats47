@@ -199,6 +199,22 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
       relatedChartKeys: ["real-income-cpi-breakdown"],
       relatedThemeKeys: ["consumer-prices", "living-housing"],
     },
+    {
+      key: "engel-coefficient-reading",
+      lensKey: "composition",
+      title: "エンゲル係数の読み方",
+      question: "食料費の割合が高い地域は、本当に生活が苦しいと言えるのか。",
+      summary:
+        "エンゲル係数は消費支出に占める食料費の割合なので、分子の食料費が増えても分母の消費支出が減っても上がる。外食・調理食品への支出が多い地域や、高齢世帯の比率が高い地域でも高く出るため、単独では豊かさの指標にならない。県民所得や消費支出の水準と併せて読む。都道府県の値は県全体ではなく県庁所在市の二人以上世帯の調査結果である。",
+      sourceKeys: ["stat-family-income-expenditure-survey-2024"],
+      relatedRankingKeys: [
+        "engel-coefficient",
+        "consumption-expenditure-multi-person-households-per-month",
+        "per-capita-prefectural-income-h27",
+      ],
+      relatedChartKeys: ["real-income-cpi-breakdown"],
+      relatedThemeKeys: ["consumer-prices", "local-economy"],
+    },
   ],
   "keywords": [
     "実質年収",

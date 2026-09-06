@@ -1,0 +1,10 @@
+{
+  "kind": "derived",
+  "rankingKey": "natto-consumption-expenditure",
+  "source": "r2:app/ranking/natto-consumption-expenditure/values.json",
+  "transform": "全18パーティション(2007-2024年)それぞれで47県を値降順に並べ、1位・2位・最下位の値を年ごとに抽出した3系列の折れ線",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/ranking/natto-consumption-expenditure/values.json | python3 -c \"import json,sys; d=json.load(sys.stdin); [print(p['yearCode'], sorted(p['values'], key=lambda v: -v['value'])[0]['value']) for p in sorted(d['partitions'], key=lambda p: p['yearCode'])]\"",
+  "fetchedAt": "2026-09-05T09:28:11.397157Z",
+  "generatedBy": "manual-restore-from-r2-values"
+}

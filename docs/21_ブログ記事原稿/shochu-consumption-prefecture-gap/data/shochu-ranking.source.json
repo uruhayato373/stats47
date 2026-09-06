@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "shochu-consumption-quantity",
+  "year": "2024",
+  "unit": "ml",
+  "label": "焼酎消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/shochu-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug shochu-consumption-prefecture-gap --keys shochu-consumption-quantity --data-name shochu-ranking",
+  "fetchedAt": "2026-06-23T05:18:57.516Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

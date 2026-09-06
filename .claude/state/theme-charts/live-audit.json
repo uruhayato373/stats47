@@ -1,8 +1,8 @@
 {
-  "auditedAt": "2026-08-29T22:22:44.141Z",
-  "distinctExpected": 192,
-  "audited": 192,
-  "r2MetricExpected": 192,
+  "auditedAt": "2026-09-05T21:56:43.360Z",
+  "distinctExpected": 190,
+  "audited": 190,
+  "r2MetricExpected": 190,
   "legacyEstatExpected": 0,
   "staged": false,
   "partial": false,
@@ -541,22 +541,6 @@
       "rows": 611,
       "areaCount": 47,
       "yearCount": 13,
-      "unit": "人",
-      "source": "public-r2"
-    },
-    {
-      "kind": "r2",
-      "key": "r2:deaths-lifestyle-diseases-per-100k",
-      "metricKey": "deaths-lifestyle-diseases-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "cc33d21721ba59ec",
-      "theme": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
-      "componentType": "line-chart",
-      "status": "ok",
-      "rows": 1081,
-      "areaCount": 47,
-      "yearCount": 23,
       "unit": "人",
       "source": "public-r2"
     },
@@ -1194,22 +1178,6 @@
       "areaCount": 47,
       "yearCount": 27,
       "unit": "施設",
-      "source": "public-r2"
-    },
-    {
-      "kind": "r2",
-      "key": "r2:health-checkup-rate-lifestyle-diseases",
-      "metricKey": "health-checkup-rate-lifestyle-diseases",
-      "expectedUnit": "％",
-      "expectedConfigHash": "594f7e76ac816089",
-      "theme": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
-      "componentType": "line-chart",
-      "status": "ok",
-      "rows": 1594,
-      "areaCount": 47,
-      "yearCount": 34,
-      "unit": "％",
       "source": "public-r2"
     },
     {

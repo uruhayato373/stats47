@@ -122,6 +122,26 @@ describe("buildRecipe — kakei-chousa", () => {
     expect(r.ops?.areaRemap).toBe("kakei-capital-city");
     expect(r.derived).toBe(true);
   });
+
+  it("filter.axisSum (品目合算) を estat と同じ正準形で ops に残し、estatParams には混ぜない", () => {
+    const r = buildRecipe(
+      metric({
+        kind: "kakei-chousa",
+        filter: {
+          statsDataId: "0003348239",
+          axisSum: { axis: "cat01", codes: ["090441010", "070300020"] },
+          cdCat02: "03",
+        },
+      }),
+    );
+    expect(r.ops?.axisSum).toEqual({ axis: "cat01", codes: ["070300020", "090441010"] });
+    expect(r.estatParams).toEqual({ statsDataId: "0003348239", cdCat02: "03" });
+    // 合算の有無で configHash が変わる (監査 (k) が stale を追える)
+    const plain = buildRecipe(
+      metric({ kind: "kakei-chousa", filter: { statsDataId: "0003348239", cdCat02: "03" } }),
+    );
+    expect(r.configHash).not.toBe(plain.configHash);
+  });
 });
 
 describe("buildRecipe — external / mlit", () => {
@@ -384,8 +404,9 @@ describe("parseRecipe — round-trip", () => {
 });
 
 describe("実 registry での健全性", () => {
-  // 2,295 metric を回すので既定 5s では足りない (registry の初回 import も含む)
-  const REGISTRY_TIMEOUT = 60_000;
+  // 2,300 超の metric を回すので既定 5s では足りない (registry の初回 import も含む)。
+  // 単独実行は約 36s だが、suite 全体を並列実行すると 60s を超えて timeout した (2026-09-05 実測) ので余裕を持たせる
+  const REGISTRY_TIMEOUT = 180_000;
 
   it(
     "全 metric でレシピが決定的に作れ、JSON を通しても失われない",
@@ -488,5 +509,51 @@ describe("プロトタイプ汚染キーの扱い (★任意 JSON を扱う再�
     expect(canonicalRecipeJson({ kind: "estat", derived: false })).toBe(
       '{"derived":false,"kind":"estat"}',
     );
+  });
+});
+
+/**
+ * parseOps の防御分岐 (2026-09-06 追加)。
+ *
+ * R2 の payload から読み戻す経路なので、壊れた ops を「部分的に採用」すると
+ * 実際とは違うレシピで configHash を計算し、監査が stale を見逃す。
+ * 各 op は必須要素が欠けたら**丸ごと捨てる**ことを固定する。
+ */
+describe("parseRecipe — 壊れた ops を部分採用しない", () => {
+  const base = { kind: "estat", configHash: "0123456789abcdef" };
+  const parseOpsOf = (ops: unknown) => parseRecipe({ ...base, ops })?.ops;
+
+  it("axisRatio は軸・分子・分母のどれかが欠けたら捨てる", () => {
+    expect(parseOpsOf({ axisRatio: { numeratorCodes: ["322"], denominatorCodes: ["321"] } })).toBeUndefined();
+    expect(parseOpsOf({ axisRatio: { axis: "cat01", numeratorCodes: [], denominatorCodes: ["321"] } })).toBeUndefined();
+    expect(parseOpsOf({ axisRatio: { axis: "cat01", numeratorCodes: ["322"], denominatorCodes: [] } })).toBeUndefined();
+    expect(
+      parseOpsOf({ axisRatio: { axis: "cat01", numeratorCodes: ["322"], denominatorCodes: ["321"] } })?.axisRatio,
+    ).toEqual({ axis: "cat01", numeratorCodes: ["322"], denominatorCodes: ["321"] });
+  });
+
+  it("areaAxis は未知の scheme を捨てる (地域軸の取り違えは全県の値がずれる)", () => {
+    expect(parseOpsOf({ areaAxis: { axis: "cat03", scheme: "unknown-scheme" } })).toBeUndefined();
+    expect(parseOpsOf({ areaAxis: { scheme: "seq-pref" } })).toBeUndefined();
+    expect(parseOpsOf({ areaAxis: { axis: "cat03", scheme: "seq-pref" } })?.areaAxis).toEqual({
+      axis: "cat03",
+      scheme: "seq-pref",
+    });
+  });
+
+  it("calc は type か分子キーが欠けたら捨てる", () => {
+    expect(parseOpsOf({ calc: { numeratorKey: "a" } })).toBeUndefined();
+    expect(parseOpsOf({ calc: { type: "ratio" } })).toBeUndefined();
+    expect(parseOpsOf({ calc: { type: "not-a-type", numeratorKey: "a" } })).toBeUndefined();
+    expect(parseOpsOf({ calc: { type: "ratio", numeratorKey: "a", denominatorKey: "b" } })?.calc).toEqual({
+      type: "ratio",
+      numeratorKey: "a",
+      denominatorKey: "b",
+    });
+  });
+
+  it("採用できる op が 1 つも無ければ ops 自体を持たない (空オブジェクトを作らない)", () => {
+    expect(parseOpsOf({})).toBeUndefined();
+    expect(parseOpsOf({ axisSum: { axis: "cat01" }, timeScope: "monthly", valueScale: 1 })).toBeUndefined();
   });
 });

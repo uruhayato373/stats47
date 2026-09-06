@@ -9,7 +9,10 @@ import { describe, expect, it } from "vitest";
 import { resolveColorScheme } from "../color-scheme-policy";
 import { METRIC_POLARITY } from "../metric-polarity";
 
-const worseKey = Object.keys(METRIC_POLARITY)[0];
+// 挿入順ではなく「higher-is-worse であること」で選ぶ (先頭に別の極性が入っても壊れない)
+const worseKey = Object.keys(METRIC_POLARITY).find(
+  (k) => METRIC_POLARITY[k].polarity === "higher-is-worse",
+)!;
 
 describe("resolveColorScheme の決定順序", () => {
   it("1. Blues 以外の明示指定は最優先 (既存 255 件を壊さない)", () => {

@@ -94,6 +94,13 @@
       ]
     },
     {
+      "name": "CLAUDE_CLI_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CLAUDE_CODE_OAUTH_TOKEN",
       "visibility": "secret",
       "contexts": [
@@ -521,6 +528,13 @@
     },
     {
       "name": "MAINTENANCE_DEBT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MAX_THINKING_TOKENS",
       "visibility": "server",
       "contexts": [
         "process"

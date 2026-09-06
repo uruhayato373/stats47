@@ -1,17 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-06T00:21:40.345Z",
+  "generatedAt": "2026-09-06T01:52:54.040Z",
   "masterSurveyCount": 105,
   "ranking": {
-    "metrics": 2299,
-    "activeMetrics": 2154,
-    "resolved": 2087,
-    "unresolved": 212,
-    "coveragePct": 90.78,
-    "activeResolved": 1952,
-    "activeUnresolved": 202,
-    "activeCoveragePct": 90.62,
+    "metrics": 2302,
+    "activeMetrics": 2157,
+    "resolved": 2088,
+    "unresolved": 214,
+    "coveragePct": 90.7,
+    "activeResolved": 1953,
+    "activeUnresolved": 204,
+    "activeCoveragePct": 90.54,
     "activeUnresolvedKeys": [
+      "academic-achievement-test-average-rate",
       "accident-death-30day",
       "agricultural-land-conversion-area",
       "ambulance-hospital-arrival-time",
@@ -86,6 +87,7 @@
       "household-income-by-type",
       "household-types-by-area",
       "housing-site-value-per-3-3m2",
+      "information-communication-coefficient",
       "japan-health-insurance-society-medical-expense-dependents-per-person",
       "japan-health-insurance-society-medical-expense-insured-per-person",
       "japan-health-insurance-society-visit-rate-dependents-per-1000",
@@ -253,7 +255,7 @@
       "insurance-rate-org-statistics": 8,
       "japan-post-statistics": 3,
       "job-placement-statistics": 8,
-      "kakei-chousa": 694,
+      "kakei-chousa": 695,
       "labor-market-annual": 9,
       "late-elderly-medical-annual-report": 1,
       "livestock-statistics": 1,
@@ -507,15 +509,15 @@
   },
   "blog": {
     "articles": 534,
-    "charts": 1413,
-    "applicableCharts": 1320,
+    "charts": 1425,
+    "applicableCharts": 1332,
     "byStatus": {
-      "resolved": 1074,
-      "unresolved": 62,
+      "resolved": 1087,
+      "unresolved": 61,
       "not-applicable": 93,
       "missing-lineage": 184
     },
-    "coveragePct": 81.36,
+    "coveragePct": 81.61,
     "unresolvedCharts": [
       {
         "slug": "abortion-rate-prefecture-gap",
@@ -1035,11 +1037,6 @@
       {
         "slug": "information-communication-coefficient-ranking",
         "base": "information-communication-coefficient-ranking-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "information-communication-coefficient-ranking",
-        "base": "info-comm-expenditure-ranking",
         "status": "unresolved"
       },
       {
@@ -2172,6 +2169,7 @@
         "income-quintile-recreation-services",
         "income-quintile-regressive",
         "income-quintile-travel",
+        "information-communication-coefficient-ranking",
         "instant-noodles-consumption-prefecture-gap",
         "ishikawa-food-culture",
         "iwate-food-culture",
@@ -3387,7 +3385,7 @@
     },
     {
       "surveyId": "kakei-chousa",
-      "rankingCount": 694,
+      "rankingCount": 695,
       "themeKeys": [
         "real-income"
       ],
@@ -3482,6 +3480,7 @@
         "income-quintile-recreation-services",
         "income-quintile-regressive",
         "income-quintile-travel",
+        "information-communication-coefficient-ranking",
         "instant-noodles-consumption-prefecture-gap",
         "ishikawa-food-culture",
         "iwate-food-culture",

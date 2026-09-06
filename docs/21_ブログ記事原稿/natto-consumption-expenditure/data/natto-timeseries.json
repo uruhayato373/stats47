@@ -1,0 +1,242 @@
+{
+  "chartType": "line",
+  "title": "1位・2位・最下位の年間消費支出額の推移",
+  "subtitle": "2007〜2024年",
+  "unit": "円",
+  "series": [
+    {
+      "label": "1位県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 6701
+        },
+        {
+          "year": 2008,
+          "value": 6435
+        },
+        {
+          "year": 2009,
+          "value": 7089
+        },
+        {
+          "year": 2010,
+          "value": 5612
+        },
+        {
+          "year": 2011,
+          "value": 5290
+        },
+        {
+          "year": 2012,
+          "value": 5694
+        },
+        {
+          "year": 2013,
+          "value": 5916
+        },
+        {
+          "year": 2014,
+          "value": 5519
+        },
+        {
+          "year": 2015,
+          "value": 6153
+        },
+        {
+          "year": 2016,
+          "value": 5563
+        },
+        {
+          "year": 2017,
+          "value": 6735
+        },
+        {
+          "year": 2018,
+          "value": 6631
+        },
+        {
+          "year": 2019,
+          "value": 6785
+        },
+        {
+          "year": 2020,
+          "value": 7251
+        },
+        {
+          "year": 2021,
+          "value": 6157
+        },
+        {
+          "year": 2022,
+          "value": 6949
+        },
+        {
+          "year": 2023,
+          "value": 6810
+        },
+        {
+          "year": 2024,
+          "value": 7830
+        }
+      ]
+    },
+    {
+      "label": "2位県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 6432
+        },
+        {
+          "year": 2008,
+          "value": 6229
+        },
+        {
+          "year": 2009,
+          "value": 5623
+        },
+        {
+          "year": 2010,
+          "value": 5169
+        },
+        {
+          "year": 2011,
+          "value": 5123
+        },
+        {
+          "year": 2012,
+          "value": 5672
+        },
+        {
+          "year": 2013,
+          "value": 5569
+        },
+        {
+          "year": 2014,
+          "value": 5424
+        },
+        {
+          "year": 2015,
+          "value": 5850
+        },
+        {
+          "year": 2016,
+          "value": 5562
+        },
+        {
+          "year": 2017,
+          "value": 5538
+        },
+        {
+          "year": 2018,
+          "value": 6352
+        },
+        {
+          "year": 2019,
+          "value": 6647
+        },
+        {
+          "year": 2020,
+          "value": 6543
+        },
+        {
+          "year": 2021,
+          "value": 6111
+        },
+        {
+          "year": 2022,
+          "value": 6367
+        },
+        {
+          "year": 2023,
+          "value": 6539
+        },
+        {
+          "year": 2024,
+          "value": 7199
+        }
+      ]
+    },
+    {
+      "label": "最下位県",
+      "data": [
+        {
+          "year": 2007,
+          "value": 2073
+        },
+        {
+          "year": 2008,
+          "value": 1758
+        },
+        {
+          "year": 2009,
+          "value": 1600
+        },
+        {
+          "year": 2010,
+          "value": 1599
+        },
+        {
+          "year": 2011,
+          "value": 1647
+        },
+        {
+          "year": 2012,
+          "value": 1778
+        },
+        {
+          "year": 2013,
+          "value": 1945
+        },
+        {
+          "year": 2014,
+          "value": 1613
+        },
+        {
+          "year": 2015,
+          "value": 1515
+        },
+        {
+          "year": 2016,
+          "value": 1766
+        },
+        {
+          "year": 2017,
+          "value": 2055
+        },
+        {
+          "year": 2018,
+          "value": 2593
+        },
+        {
+          "year": 2019,
+          "value": 2190
+        },
+        {
+          "year": 2020,
+          "value": 2551
+        },
+        {
+          "year": 2021,
+          "value": 2039
+        },
+        {
+          "year": 2022,
+          "value": 2197
+        },
+        {
+          "year": 2023,
+          "value": 2044
+        },
+        {
+          "year": 2024,
+          "value": 2627
+        }
+      ]
+    }
+  ],
+  "source": "家計調査",
+  "rankingKey": "natto-consumption-expenditure",
+  "generatedBy": "manual-restore-from-r2-values"
+}

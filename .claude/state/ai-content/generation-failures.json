@@ -24,6 +24,54 @@
       "lastReason": "agent-record-missing:ranking-content-author",
       "lastFailedAt": "2026-08-20",
       "firstFailedAt": "2026-08-20"
+    },
+    "number-of-hotel-rooms": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "public-bath-count-per-100k": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "public-kindergarten-ratio": {
+      "failCount": 3,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "mayonnaise-consumption-quantity": {
+      "failCount": 3,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "total-area-including-northern-territories-and-takeshima": {
+      "failCount": 2,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "treatment-rate-diabetes-inpatient": {
+      "failCount": 2,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "education-expense-municipal": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
+    },
+    "enoki-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "claude-local",
+      "lastFailedAt": "2026-09-05",
+      "firstFailedAt": "2026-09-05"
     }
   }
 }

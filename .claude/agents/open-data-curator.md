@@ -30,6 +30,10 @@ No prose before/after. No section headers.
 - `ranking / theme / map / area / research-only` の利用可能性判定
 - 既存metric、ThemeCatalog、KSJ登録済みデータとの重複確認
 - URL到達性、必須項目、列挙値、重複ID、確認日のvalidator維持
+- **参考文献の段階処理オーナー** (2026-09-05〜): 書籍・PDF を S0 保全 → S1 ページ画像 → S2 文字起こし (生 OCR + Markdown) →
+  S3 図クロップ → S4 台帳 の段階で private Drive bundle へ積む (`/process-reference-source`)。決定的処理は
+  `source-processing.mjs` の `extract` / `md-check` / `crop` / `stage` / `stage-status`、Markdown 文字起こし・図の意味付け・
+  crop spec は本 agent。正典 `.claude/rules/reference-source-standards.md` §3。書籍本文・画像を Git / 公開 R2 へ出さない。
 - **provenance 監査オーナー** (2026-07-19〜): データ出典・再現性の全量棚卸し (`/audit-provenance`) の実行と、
   クラス B/C/D (出典薄・手動抽出・出典不明) の是正。週次 cron (`provenance-audit-weekly.yml`) が起票した Issue を消化。
   fetcher コードから出典を復元し config に backfill、`validate:config` の `[provenance]`/`[provenance-thin]`/`[calc-ref]`
@@ -42,6 +46,7 @@ No prose before/after. No section headers.
 ## 必読rules・参照
 
 - `.claude/rules/data-storage.md` — authored configはgit TS、観測値はR2
+- `.claude/rules/reference-source-standards.md` — 参考文献の保全・段階処理・昇格条件
 - `.claude/rules/gis-data.md` — KSJ GISとの責務境界
 - `.claude/rules/docs-vs-issues.md` — 記録先
 - `.claude/rules/metric-config-standards.md` — categoryとmetric品質
@@ -58,6 +63,8 @@ npm run check:open-data-links --workspace packages/data-configs        # URL 到
 npm run validate:prefecture-statistics --workspace packages/data-configs
 npm run check:prefecture-statistics-links --workspace packages/data-configs
 npm run type-check --workspace @stats47/data-configs
+npm run source-vault:process -- stage-status            # 参考文献 bundle の到達段階 (S0-S4)
+npm run source-vault:test                               # source-vault CLI 3 本のテスト
 npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KSJ 参照を触った場合
 ```
 
@@ -126,7 +133,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 
 ## File Boundary
 
-- 排他write: `packages/data-configs/src/open-data-catalog/**`
+- 排他write: `packages/data-configs/src/open-data-catalog/**`, `.claude/config/source-vault.json`, `.claude/state/source-inventory/**`
 - 共有write: `packages/data-configs/src/prefecture-statistics-catalog/**` は本agentのみがカタログ編集する
 - read-only: `packages/gis/src/mlit-ksj/**`, `packages/data-configs/src/metrics/**`, `theme-catalog/**`
 - `.claude/todo/backlog.md` へ直接大量追記せず、取得可能性を実証した候補だけを既存agentへ渡す
