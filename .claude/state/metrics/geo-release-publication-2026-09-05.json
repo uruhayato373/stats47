@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-05T12:29:23.035Z",
   "scope": "geo-release-publication",
   "status": "PUBLIC_SITE_X_AND_PAID_NOTE_COMPLETE_LEGACY_LICENSE_ROLLOUT_IN_PROGRESS",
-  "updatedAt": "2026-09-05T23:21:00Z",
+  "updatedAt": "2026-09-06T01:52:58.505Z",
   "evidenceDigests": [
     { "path": "/tmp/stats47-geo-source-head-check.json", "bytes": 33419, "sha256": "fa68c618f8905f07cb1ebc8817ff1ce1c743429657583c27b081c4a92f331242" },
     { "path": "/tmp/geo-flood-source-publish-20260905/apply.json", "bytes": 98294, "sha256": "055c871c1750c460e97493475d800f82cd1377530c2f01cc2383f5b4eb08ec73" },
@@ -3088,7 +3088,7 @@
       "relatedLegacySns": { "postedLedgerReferences": 6, "draftLedgerReferences": 2, "externalStatusVerified": false }
     },
     "officialReplacementCandidates": {
-      "status": "PUBLISHED_R2_SHA_VERIFIED_CODE_DEPLOY_PENDING",
+      "status": "PUBLISHED_R2_AND_PRODUCTION_VERIFIED",
       "keys": ["roadside-station-count", "fishing-port-count-ksj"],
       "manifest": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/official-replacements-20260905/handoff-manifest.json",
       "manifestSha256": "4cfa9b37640ec31757af9777b80986ea14986688b66ca89c281f4570ac9b43ab",
@@ -3099,7 +3099,7 @@
       "prefectureRowsEach": 47,
       "roadsideAiIndependentCritic": "PASS",
       "normalizationDenominatorYears": { "population": "2024", "area": "2023" },
-      "remainingRolloutChecks": "Exact snapshots, Japan derivations, images and correlations published and SHA verified; code deployment and full live route acceptance pending"
+      "remainingRolloutChecks": "Code deployed by PR928; all1038 live route/data/download checks PASS. Exact legacy deletion and final CDN readback tracked separately."
     },
     "ownerDecisionKeys": ["dam-count", "hydroelectric-power-plant-count", "thermal-power-plant-count", "nuclear-power-plant-count", "geothermal-power-plant-count", "wind-power-plant-count-facility", "biomass-power-station-count", "tourism-resource-count", "fishing-port-count"],
     "remoteCatalogCheck": {
@@ -3123,7 +3123,28 @@
       "remainingObjects": 0,
       "publicHead404": 435,
       "backupPreserved": true,
-      "retiredRankingAssets": "HOLD_UNTIL_CODE_DEPLOYED",
+      "retiredRankingAssets": "HOLD_ADDITIONAL_OBJECT_OWNER_DECISION",
+      "postDeploymentDeletion": {
+        "status": "FOUR_EXACT_TARGETS_DELETED_VERIFIED",
+        "completedAt": "2026-09-06T01:40:20.196Z",
+        "deletedObjects": 59,
+        "deletedBytes": 2458545,
+        "remainingObjectsInDeletedTargets": 0,
+        "runs": [
+          { "target": "license-remediation-obsolete-normalization-20260905", "runId": 34003947522, "deleted": 2, "status": "PASS" },
+          { "target": "license-remediation-retired-blogs-20260906", "runId": 34004165302, "deleted": 53, "status": "PASS" },
+          { "target": "license-remediation-obsolete-port-normalization-20260906", "runId": 34004287754, "deleted": 1, "status": "PASS" },
+          { "target": "license-remediation-obsolete-roadside-assets-20260906", "runId": 34004402602, "deleted": 3, "status": "PASS" }
+        ],
+        "receipt": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/retention-four-receipt.json",
+        "backupPreserved": true,
+        "heldRankingObjects": 126,
+        "publicReadback": "PASS; all59 deleted public keys404; all four S3 targets empty; held ranking126 untouched",
+        "publicReadbackReport": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/retention-final-verification.json",
+        "publicReadbackReportSha256": "0e94c994503dc06e56911ec15de92001b9edffd2f398771dba676c3c94e4ac58",
+        "zonePurgeRun": 34004647049,
+        "zonePurgeStatus": "SUCCESS"
+      },
       "latestPreflight": {
         "status": "HOLD_ADDITIONAL_OBJECT_OWNER_DECISION",
         "checkedAt": "2026-09-06T01:04:27.039Z",
@@ -3145,16 +3166,28 @@
       "publishedBytes": 17452138,
       "s3ReadbackMatched": 194,
       "publicSharedAndReplacementReadbackMatched": 19,
-      "status": "R2_PUBLISHED_CODE_DEPLOY_PENDING",
-      "reason": "Owner approved port recomputation and three blog retirements. Pinned 2025 law gives 664 designated ports across 47 prefectures; frozen sources, normalization, independent AI review and full correlation verification passed. Code deploy remains gated on final checks.",
-      "draftPullRequest": "https://github.com/uruhayato373/stats47/pull/928",
+      "status": "R2_AND_CODE_PUBLISHED_LIVE_ACCEPTANCE_PASS",
+      "reason": "Owner-approved replacements and retirements deployed by PR928 after all CI checks passed. Production acceptance1038/1038 and post-deploy smoke passed. Four unchanged exact deletion targets completed; ranking target held because an additional AI object requires an owner decision.",
+      "pullRequest": "https://github.com/uruhayato373/stats47/pull/928",
+      "deployment": {
+        "mergeSha": "6fc6eedc26b540fc81fa68c8706848433c3bcad4",
+        "mergedAt": "2026-09-06T01:18:27Z",
+        "ciRun": 34003188810,
+        "ciStatus": "PASS_ALL_CHECKS",
+        "deployRun": 34003551749,
+        "deployStatus": "SUCCESS",
+        "postDeploySmokeRun": 34003916217,
+        "postDeploySmokeStatus": "SUCCESS",
+        "productionAcceptance": { "passed": 1038, "failed": 0, "report": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/production-acceptance.json" },
+        "browserCheck": "Geo data-catalog and roadside3 article bodies verified in production; target years, sources, total/density/correlation limitations visible"
+      },
       "postRemovalCatalogAudit": "PASS; final-rollout-20260905/postraw-remote-catalog.json; eleven legacy prefixes empty",
       "planSha256": "bcb9be9e84086fdaaed5c03050d10d8382de1ce507556a8109d36462bddf82f7",
       "receipt": "/Users/minamidaisuke/stats47-geo-r2-finalize/.local/license-remediation/recovery-20260906/publish-receipt-resume.json",
       "receiptSha256": "af0489b479855cca52c62a069667199deb4a58bde9bd43143217c30efc6393d2",
       "resume": "23 snapshots published before narrow wrapper rejected asset lock keys; existing 23 verified and skipped, remaining 171 published after deriving exact lock hashes from the unchanged plan. All locks released; no broad restore.",
-      "additionalBlogRetirement": "APPROVED; three slugs removed from shared R2 index, code retirement implemented, exact 53 asset deletion held until live 410",
-      "remainingExactDeletions": { "retiredRankingAssets": 125, "oldNormalization": 2, "retiredBlogAssets": 53, "oldPortNormalization": 1, "obsoleteRoadsideAssets": 3 },
+      "additionalBlogRetirement": "DONE; three slugs removed from shared R2 index, production410 verified, exact53 assets deleted by workflow34004165302; backups preserved",
+      "remainingExactDeletions": { "retiredRankingAssets": 125, "additionalRankingAiObjectAwaitingApproval": 1 },
       "freshTaxonomyFinding": "PASS: fresh audit 534 published articles / 1413 charts / 1074 resolved / 62 unresolved / 184 missing / 93 not applicable / 81.36% coverage. Existing ratchet unchanged; offline check PASS. Geo chart scope explicit, existing source dictionaries corrected, roadside3 independently reviewed and published. Unrelated academic metric WIP not imported.",
       "followupPublication": {
         "status": "PUBLISHED_S3_READBACK_PASS",
@@ -3165,13 +3198,40 @@
         "planSha256": "9240c6e62c037f80c92e0fef2410b01a3d610e13badfd7498c96b7376726093c",
         "s3ReadbackMatched": 69,
         "publicReadbackMatchedBeforePurge": 63,
-        "remainingPublicCacheMismatches": "Six SVGs return HTTP200 with previous CDN bytes; all six S3 bodies match. Purge after code deployment and exact deletion.",
+        "publicReadbackMatchedAfterZonePurge": 68,
+        "remainingPublicCacheMismatches": "NONE;68 dedicated objects match original SHA. Shared index matches repaired current S3 SHA and passes semantic checks;11 unrelated updatedAt changes intentionally preserved instead of restoring the original whole-file SHA.",
+        "sharedIndexRepair": {
+          "status": "PUBLISHED_S3_READBACK_PASS",
+          "completedAt": "2026-09-06T01:51:07.642Z",
+          "restoredSurveyRows": 20,
+          "removedRetiredRows": 3,
+          "preservedRows": 545,
+          "sha256": "0c077ab429e107019c0fc87ee9b5b5d42eea110e2b755bd6c1728026a66249fa",
+          "receipt": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/shared-index-repair-receipt.json",
+          "diagnosis": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/shared-index-final-verification.json",
+          "backupPreserved": true,
+          "repairBoundary": "Current S3 used as base; canonical resolver recalculated20 surveyIds; retired3 removed through existing excludeGoneBlogArticles; every other article field preserved; exact IfMatch PUT plus SHA readback",
+          "writerIdentified": false,
+          "publicVerification": "SEMANTIC_PASS_CURRENT_S3_MATCH; checked2026-09-06T01:52:58.505Z;545 rows, no target drift, retired slug reappearance0, duplicates0;11 unrelated updatedAt changes preserved",
+          "publicVerificationReport": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/shared-index-post-repair-verification.json",
+          "publicVerificationReportSha256": "98b88904d98dd2c148147268f580e06ab53430e43f031e556ebad62cf73dfe41",
+          "targetedPurgeRun": 34004969504,
+          "targetedPurgeStatus": "SUCCESS",
+          "recurrencePreventionStatus": "OPEN; current exporter filters GONE slugs, but stale shared-index upload writer is not yet identified or proven blocked"
+        },
         "sharedBlogRows": 545,
         "unrelatedRecordsPreserved": true
       },
-      "localAcceptance": { "passed": 1038, "failed": 0, "report": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905/final-local-acceptance-v2.json", "scope": "Geo stage200/301 according to canonical resolver, final query routes, replacements/downloads and retirement URLs; code not deployed" }
+      "localAcceptance": { "passed": 1038, "failed": 0, "report": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/final-rollout-20260905/final-local-acceptance-v2.json", "scope": "Pre-deployment evidence: Geo stage200/301 according to canonical resolver, final query routes, replacements/downloads and retirement URLs. Subsequent production verification recorded in deployment.productionAcceptance." }
     },
-    "next": "Deploy retirement code once after PR checks, remove 184 approved exact old assets, purge CDN and verify live acceptance. Separate legacy SNS references remain unverified. Main-to-develop synchronization preview has three generated-file conflicts; do not resolve without direction."
+    "gitSynchronization": {
+      "status": "MAIN_ALREADY_IN_DEVELOP_BY_SEPARATE_WORK",
+      "mainSha": "6fc6eedc26b540fc81fa68c8706848433c3bcad4",
+      "developSha": "2d6e1841ccadaa445d3685682d6d6376240cca67",
+      "mergeCommit": "2c83dadfd",
+      "verification": "After fetch, origin/develop..origin/main is empty; PR929 OPEN/MERGEABLE. Historical preview conflicts superseded. This task did not resolve conflicts or publish unrelated develop work."
+    },
+    "next": "Obtain direction for the added AI object before exact ranking126 cleanup, without mutating the approved immutable inventory. Identify stale shared-index writer and prevent retirement/taxonomy regression across all publication paths. Separate legacy SNS posted6/draft2 references remain externally unverified. Main is already integrated into develop by separate work; do not interfere with PR929."
   },
   "followupVerification": {
     "publishedOutboxCleanup": {
@@ -3179,7 +3239,7 @@
       "removedLocalFiles": 84,
       "proof": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/outbox/cleanup-proof.json",
       "verification": "All 84 local and S3 SHA-256 matched before removing the published outbox copies; source data and recipes remain in R2 and Git history",
-      "recipePublication": { "objects": 2, "status": "PUBLISHED_S3_READBACK_PASS", "receipt": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/outbox/recipe-receipt.json" }
+      "recipePublication": { "objects": 2, "status": "PUBLISHED_S3_AND_PUBLIC_SHA_READBACK_PASS", "receipt": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/outbox/recipe-receipt.json" }
     },
     "genericPublisherAndMigrationTests": { "passed": 20, "failed": 0 },
     "catalogCompletionTests": { "passed": 7, "failed": 0 },
@@ -3189,12 +3249,12 @@
     "noteCatalog": { "errors": 0, "preexistingWarnings": 44 },
     "docsCheck": { "errors": 0, "preexistingWarnings": 39 },
     "agentSkillConsistency": { "errors": 0, "preexistingWarnings": 34 },
-    "fullWebBuildThisFollowup": "PASS; latest build1484 prerendered pages; subsequent search/survey-only correction needs final CI build",
+    "fullWebBuildThisFollowup": "PASS; local1496 prerendered pages, final CI build and production build PASS for PR928",
     "webTests": { "passed": 1238, "failed": 0, "files": 202, "log": "/tmp/stats47-legacy-release-web-tests-final.log" },
     "lint": "PASS",
     "testInvocationCorrection": "Build-only localhost base URL was inadvertently inherited by a combined test wrapper, causing two origin assertions; standard test environment rerun passes all 1238 without code changes",
     "paidNoteBacklogClosure": "Ledger CLI recorded actual passing gates; removal verification PASS",
     "latestWebTestRun": { "passed": 1254, "failed": 0, "files": 203, "log": "/Users/minamidaisuke/stats47-geo-release/.local/license-remediation/roadside-refresh-20260906/release-tests-final.log", "priorFailure": "Resolving two active IPSS metrics exposed missing population-projection readerQuestions; updated editorial also requires portfolio regeneration", "correction": "Added two active ranking links, corrected target-year explanation, added regression test, rebuilt portfolio with canonical builder. All1254 tests PASS; full source ESLint from apps/web PASS; web type-check PASS." },
-    "recurrenceGuardDeployment": "NOT_DEPLOYED; tested implementation on codex/geo-license-publish-guard"
+    "recurrenceGuardDeployment": "DEPLOYED; PR928 merge6fc6eedc26b540fc81fa68c8706848433c3bcad4, production acceptance1038/1038 PASS"
   }
 }
