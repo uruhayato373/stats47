@@ -1,7 +1,0 @@
-{
-  "metric": "housing-expenditure-total,utilities-expenditure-total,furniture-household-expenditure-total,clothing-footwear-expenditure-total,health-medical-expenditure-total,transport-communication-expenditure-total,education-expenditure-total,culture-recreation-expenditure-total,other-living-expenditure-total,food-expenditure-total,consumption-expenditure-total",
-  "since": "",
-  "dryRun": false,
-  "migrateLegacyRecipes": false,
-  "requestedAt": "2026-09-06T06:45:00Z"
-}
