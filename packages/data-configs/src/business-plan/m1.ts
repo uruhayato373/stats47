@@ -14,11 +14,19 @@ const POPULATION_KEY = 'future-population-change-rate-2050';
 export function buildM1XCanonicalUrl(input: {
   analysisCount: number;
   geoRole: BusinessPlanM1XPost['geoRole'];
+  analysisKind: BusinessPlanM1Analysis['analysisKind'];
   analysisSlug: string;
+  rankingKey?: string;
   highlightAreaCodes: readonly string[];
 }): string {
   if (input.analysisCount !== 1) {
     return input.geoRole === 'decision' ? '/geo/compare' : '/geo/method';
+  }
+  if (input.analysisKind === 'baseline') {
+    if (!input.rankingKey) {
+      throw new Error('baseline投稿にはrankingKeyが必要です');
+    }
+    return `/ranking/${input.rankingKey}`;
   }
   if (input.analysisSlug === 'population-station-access') {
     const prefCode2 = (input.highlightAreaCodes[0] ?? '13000').slice(0, 2);
@@ -63,15 +71,17 @@ const POPULATION_ANALYSIS = {
   ],
 } as const satisfies BusinessPlanM1Analysis;
 
+export const BUSINESS_PLAN_M1_BASELINE_ANALYSIS = POPULATION_ANALYSIS;
+
+/** Geo公開面に出せる、証拠manifest付きの複数レイヤー空間分析だけを保持する。 */
 export const BUSINESS_PLAN_M1_GEO_ANALYSES = [
-  POPULATION_ANALYSIS,
   {
     id: 'm1-analysis-population-land-price',
     contentId: 'geo-016',
     slug: 'population-land-price',
-    title: '人口が減る県でも、住宅地の価格は同じように下がるのか',
+    title: '地価が上がる住宅地でも、周囲の人口は減るのか',
     question:
-      '2050年人口増減率と2026年住宅地の地価水準・変動率にはどんな地域差があるか',
+      '2026年の住宅地価上昇地点と、2020→2050年に人口が減る1kmメッシュはどこで重なるか',
     analysisKind: 'spatial-cross',
     sourceLayers: [
       {
@@ -90,12 +100,17 @@ export const BUSINESS_PLAN_M1_GEO_ANALYSES = [
       },
     ],
     spatialOperations: [
-      '人口メッシュを都道府県別に集計',
-      '住宅地地点の地価中央値を都道府県別に集計',
-      '同じ都道府県コードで2指標を結合',
+      '住宅地点座標を同じ県の1km人口メッシュ境界へ包含判定で接続（西・南を含み東・北を含まない）',
+      '地価上昇と包含メッシュの将来人口減少を地点単位で照合。未接続・変動率欠測・基準人口0は比較対象外',
+      '比較可能地点を分母に、地価上昇かつ人口減少地点の割合を県別集計。地点を人口で重み付けしない',
     ],
-    primaryMetricKey: 'medianLandPriceChange',
+    primaryMetricKey: 'risingDecliningPointShare',
     metricKeys: [
+      'risingDecliningPointShare',
+      'risingDecliningPointCount',
+      'comparablePointCount',
+      'matchedPointCount',
+      'unmatchedPointCount',
       'medianResidentialLandPrice',
       'medianLandPriceChange',
       'populationChangeRate',
@@ -117,6 +132,8 @@ export const BUSINESS_PLAN_M1_GEO_ANALYSES = [
     caveats: [
       '地価公示は標準地点の観測であり、県内すべての土地価格を代表しない',
       '人口変化との関係は相関の観察であり、因果関係を示さない',
+      '地価は2025→2026年、人口は2020→2050年の比較で期間が異なる。将来地価を予測しない',
+      '約1kmメッシュの人口を地点の居住人数や徒歩圏と解釈しない。未接続地点は人口0ではない',
     ],
   },
   {
@@ -216,10 +233,8 @@ export const BUSINESS_PLAN_M1_GEO_ANALYSES = [
       'accessibleMeshCount',
     ],
     r2Key: 'app/geo/population-station-access/item.json',
-    evidenceManifestKey:
-      'app/geo/population-station-access/manifest.json',
-    detailR2KeyPattern:
-      'app/geo/population-station-access/pref/{NN}.json',
+    evidenceManifestKey: 'app/geo/population-station-access/manifest.json',
+    detailR2KeyPattern: 'app/geo/population-station-access/pref/{NN}.json',
     status: 'ready',
     geography: 'prefecture',
     comparisonLimit: 3,
@@ -236,6 +251,12 @@ export const BUSINESS_PLAN_M1_GEO_ANALYSES = [
   },
 ] as const satisfies readonly BusinessPlanM1Analysis[];
 
+/** X・note・横断比較では、基準ランキングを含む全4系列を参照する。 */
+export const BUSINESS_PLAN_M1_ANALYSES = [
+  BUSINESS_PLAN_M1_BASELINE_ANALYSIS,
+  ...BUSINESS_PLAN_M1_GEO_ANALYSES,
+] as const satisfies readonly BusinessPlanM1Analysis[];
+
 const x = (
   index: number,
   title: string,
@@ -248,7 +269,7 @@ const x = (
   metricKeys: readonly string[],
   visual: BusinessPlanM1XPost['visual']
 ): BusinessPlanM1XPost => {
-  const primaryAnalysis = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
+  const primaryAnalysis = BUSINESS_PLAN_M1_ANALYSES.find(
     (analysis) => analysis.id === analysisIds[0]
   );
   if (!primaryAnalysis) {
@@ -268,7 +289,12 @@ const x = (
     canonicalUrl: buildM1XCanonicalUrl({
       analysisCount: analysisIds.length,
       geoRole,
+      analysisKind: primaryAnalysis.analysisKind,
       analysisSlug: primaryAnalysis.slug,
+      rankingKey:
+        'rankingKey' in primaryAnalysis
+          ? primaryAnalysis.rankingKey
+          : undefined,
       highlightAreaCodes: visual.highlightAreaCodes,
     }),
     campaign: primaryAnalysis.contentId,
@@ -298,7 +324,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     POPULATION_KEY,
     [POPULATION_KEY],
     {
-      description: '単一指標の分布を確認し、重ね合わせ分析へ進むための基準地図です。',
+      description:
+        '単一指標の分布を確認し、重ね合わせ分析へ進むための基準地図です。',
       mapMode: 'baseline-choropleth',
       highlightAreaCodes: ['13000'],
       panelKind: 'statement',
@@ -317,7 +344,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     POPULATION_KEY,
     [POPULATION_KEY],
     {
-      description: '人口変化を後続の空間分析で共通して使う基準値として確認します。',
+      description:
+        '人口変化を後続の空間分析で共通して使う基準値として確認します。',
       mapMode: 'focus',
       highlightAreaCodes: ['13000', '05000'],
       panelKind: 'selected-values',
@@ -392,7 +420,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     'medianResidentialLandPrice',
     ['medianResidentialLandPrice', 'populationChangeRate'],
     {
-      description: '地価水準と将来人口を別々に測り、関係を読み違えないようにします。',
+      description:
+        '地価水準と将来人口を別々に測り、関係を読み違えないようにします。',
       mapMode: 'focus',
       highlightAreaCodes: ['27000'],
       panelKind: 'statement',
@@ -411,7 +440,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     'floodExposureShare2050',
     ['floodExposureShare2050', 'exposedPopulation2050'],
     {
-      description: '将来人口メッシュと洪水ポリゴンの重なりから導いた人口比率です。',
+      description:
+        '将来人口メッシュと洪水ポリゴンの重なりから導いた人口比率です。',
       mapMode: 'derived-choropleth',
       highlightAreaCodes: ['15000'],
       panelKind: 'selected-values',
@@ -448,7 +478,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     'floodExposureShare2050',
     ['floodExposureShare2050', 'floodExposureShare2020'],
     {
-      description: '区域内人口の実数だけでなく、総人口に占める構成比の変化を読みます。',
+      description:
+        '区域内人口の実数だけでなく、総人口に占める構成比の変化を読みます。',
       mapMode: 'focus',
       highlightAreaCodes: ['01000'],
       panelKind: 'statement',
@@ -467,7 +498,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     'stationAccessShare2050',
     ['stationAccessShare2050', 'accessiblePopulation2050'],
     {
-      description: '駅位置と人口メッシュの距離判定から導いた2050年人口比率です。',
+      description:
+        '駅位置と人口メッシュの距離判定から導いた2050年人口比率です。',
       mapMode: 'derived-choropleth',
       highlightAreaCodes: ['13000', '27000', '26000'],
       panelKind: 'selected-values',
@@ -485,7 +517,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     'accessiblePopulation2050',
     ['accessiblePopulation2050', 'stationAccessShare2050'],
     {
-      description: '駅アクセス圏の人口規模と、県人口に占める比率を分けて読みます。',
+      description:
+        '駅アクセス圏の人口規模と、県人口に占める比率を分けて読みます。',
       mapMode: 'focus',
       highlightAreaCodes: ['13000'],
       panelKind: 'statement',
@@ -504,7 +537,8 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     'stationAccessShare2050',
     ['stationAccessShare2050', 'stationAccessShare2020'],
     {
-      description: '2020年と2050年の駅圏人口比率を比較し、構成変化を確認します。',
+      description:
+        '2020年と2050年の駅圏人口比率を比較し、構成変化を確認します。',
       mapMode: 'derived-choropleth',
       highlightAreaCodes: ['01000', '04000', '34000'],
       panelKind: 'statement',
@@ -525,14 +559,23 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
       'm1-analysis-population-station-access',
     ],
     'medianLandPriceChange',
-    ['medianLandPriceChange', 'floodExposureShare2050', 'stationAccessShare2050'],
+    [
+      'medianLandPriceChange',
+      'floodExposureShare2050',
+      'stationAccessShare2050',
+    ],
     {
-      description: '分析ごとに異なる空間処理を明示し、再現可能な結果だけを使います。',
+      description:
+        '分析ごとに異なる空間処理を明示し、再現可能な結果だけを使います。',
       mapMode: 'derived-choropleth',
       highlightAreaCodes: [],
       panelKind: 'method',
       panelLabel: '3つの空間処理',
-      panelItems: ['地価：県別集計・結合', '洪水：ポリゴン包含判定', '駅：800m距離判定'],
+      panelItems: [
+        '地価：県別集計・結合',
+        '洪水：ポリゴン包含判定',
+        '駅：800m距離判定',
+      ],
     }
   ),
   x(
@@ -548,14 +591,22 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
       'm1-analysis-population-land-price',
     ],
     'floodExposureShare2050',
-    ['floodExposureShare2050', 'stationAccessShare2050', 'medianLandPriceChange'],
+    [
+      'floodExposureShare2050',
+      'stationAccessShare2050',
+      'medianLandPriceChange',
+    ],
     {
       description: '結果の利用範囲を、分析方法と同じレベルで明示します。',
       mapMode: 'derived-choropleth',
       highlightAreaCodes: [],
       panelKind: 'method',
       panelLabel: '判断の停止線',
-      panelItems: ['洪水：個別地点の安全判定不可', '駅：実徒歩経路ではない', '地価：因果関係ではない'],
+      panelItems: [
+        '洪水：個別地点の安全判定不可',
+        '駅：実徒歩経路ではない',
+        '地価：因果関係ではない',
+      ],
     }
   ),
   x(
@@ -565,7 +616,7 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
     'あなたの県は2050年に何人残るか。住宅地価格はどう動くか。洪水区域内に何人暮らすか。駅800m圏に何人残るか。ランキング1つではなく、4つの問いを同じ地域で比較できます。\n\n{{url}}\n\n#地域比較 #暮らし #stats47',
     '2026-09-29T19:30:00+09:00',
     'decision',
-    BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => analysis.id),
+    BUSINESS_PLAN_M1_ANALYSES.map((analysis) => analysis.id),
     POPULATION_KEY,
     [
       POPULATION_KEY,
@@ -648,7 +699,7 @@ export const BUSINESS_PLAN_M1_NOTE_PRODUCTS: readonly BusinessPlanM1NoteProduct[
 export const BUSINESS_PLAN_M1: BusinessPlanM1ExecutionPlan = {
   month: '2026-09',
   objective:
-    '都道府県版の4分析を実画面にし、X 15投稿とnote 15商品を同じ運用台帳で追跡できる状態にする。',
+    '3つの空間分析と1つの基準ランキングを公開面で分離し、X 15投稿とnote 15商品を同じ運用台帳で追跡できる状態にする。',
   routes: [
     {
       path: '/geo',
@@ -658,18 +709,8 @@ export const BUSINESS_PLAN_M1: BusinessPlanM1ExecutionPlan = {
       acceptance: [
         '実データのある分析だけを公開可能として表示する',
         '未検証の市区町村・メッシュ分析を公開済みに見せない',
-        '4分析・県別artifact・保存則監査を満たした後だけナビとsitemapへ追加する',
-      ],
-    },
-    {
-      path: '/geo/2050-population',
-      title: '2050年人口分析',
-      status: 'ready',
-      searchVisibility: 'index',
-      acceptance: [
-        '47都道府県の地図・上位下位・県選択・最大3県比較を提供する',
-        '出典、基準年、単位、推計の限界を常設表示する',
-        '閲覧・地図操作・県選択・比較追加を別イベントで送る',
+        '3分析・県別artifact・保存則監査を満たした後だけナビとsitemapへ追加する',
+        '単一指標の基準データはランキングへ接続し、Geo分析として列挙しない',
       ],
     },
     {
@@ -694,7 +735,7 @@ export const BUSINESS_PLAN_M1: BusinessPlanM1ExecutionPlan = {
         '各分析の結果・一次資料・データカタログへ遷移できる',
       ],
     },
-    ...BUSINESS_PLAN_M1_GEO_ANALYSES.slice(1).map((analysis) => ({
+    ...BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => ({
       path: `/geo/${analysis.slug}`,
       title: analysis.title,
       status: analysis.status,
@@ -707,7 +748,7 @@ export const BUSINESS_PLAN_M1: BusinessPlanM1ExecutionPlan = {
     })),
   ],
   analysis: POPULATION_ANALYSIS,
-  analyses: BUSINESS_PLAN_M1_GEO_ANALYSES,
+  analyses: BUSINESS_PLAN_M1_ANALYSES,
   xPosts: BUSINESS_PLAN_M1_X_POSTS,
   noteProducts: BUSINESS_PLAN_M1_NOTE_PRODUCTS,
   eventIds: ['geo-view', 'map-interaction', 'region-search', 'compare-add'],
@@ -715,21 +756,21 @@ export const BUSINESS_PLAN_M1: BusinessPlanM1ExecutionPlan = {
     {
       id: 'm1-site-01',
       workstream: 'site',
-      title: '/geoハブと4本の地域分析画面',
+      title: '/geoハブと3本の空間分析画面',
       status: 'ready',
       owner: 'site-ux-manager',
       deliverablePath: 'apps/web/src/app/geo/',
       doneWhen:
-        '4分析すべてで実データ47件、地図、表、比較、出典、noindexをローカルbuildで確認できる',
+        '3空間分析すべてで実データ47件、途中artifact、地図、表、比較、出典をローカルbuildで確認でき、基準ランキングがGeo一覧に混入しない',
     },
     {
       id: 'm1-data-01',
       workstream: 'data',
-      title: '都道府県4分析snapshot健全性',
+      title: '都道府県3空間分析snapshot健全性',
       status: 'ready',
       owner: 'data-ingester',
       deliverablePath: 'app/geo/*/item.json',
-      doneWhen: '4分析の47都道府県・単位・出典・入力件数を検証する',
+      doneWhen: '3空間分析の47都道府県・単位・出典・入力件数・保存則を検証する',
     },
     {
       id: 'm1-x-01',

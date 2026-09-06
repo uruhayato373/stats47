@@ -35,6 +35,24 @@ describe("sitemap index ↔ shard の件数整合", () => {
     expect(ids.map((x) => x.id)).toEqual(SITEMAP_SEGMENTS.map((_, i) => i));
   });
 
+  it("単一指標だった旧Geo URLをsitemapへ戻さない", { timeout: 60_000 }, async () => {
+    const { default: sitemap } = await import("@/app/sitemap");
+    const staticSegmentId = SITEMAP_SEGMENTS.indexOf("static");
+    expect(staticSegmentId).toBeGreaterThanOrEqual(0);
+
+    const paths = (await sitemap({ id: staticSegmentId })).map(
+      (entry) => new URL(entry.url).pathname,
+    );
+    expect(paths).not.toContain("/geo/2050-population");
+    expect(paths).toEqual(
+      expect.arrayContaining([
+        "/geo/population-land-price",
+        "/geo/population-flood-risk",
+        "/geo/population-station-access",
+      ]),
+    );
+  });
+
   it("index が列挙する URL に全 shard が含まれる (欠番なし)", async () => {
     const { GET } = await import("@/app/sitemap.xml/route");
     const xml = await (await GET()).text();

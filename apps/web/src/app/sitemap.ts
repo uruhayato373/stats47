@@ -65,8 +65,10 @@ const TYPE_A_THEME_SLUGS = ALL_THEMES.filter(
 const GEO_X_STAGE_PAGES: MetadataRoute.Sitemap = [
   ...new Set(
     BUSINESS_PLAN_M1_X_POSTS.map((post) => post.canonicalUrl).filter((path) =>
-      /^\/geo\/population-station-access\/\d{2}\/(population|overlap|audit)$/.test(path),
-    ),
+      /^\/geo\/population-station-access\/\d{2}\/(population|overlap|audit)$/.test(
+        path
+      )
+    )
   ),
 ].map((path) => ({
   url: BASE_URL + path,
@@ -100,13 +102,28 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/areas`, changeFrequency: 'weekly', priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: 'weekly', priority: 0.8 },
   { url: `${BASE_URL}/geo`, changeFrequency: 'weekly', priority: 0.8 },
-  { url: `${BASE_URL}/geo/2050-population`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/geo/population-land-price`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/geo/population-flood-risk`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/geo/population-station-access`, changeFrequency: 'monthly', priority: 0.7 },
+  {
+    url: `${BASE_URL}/geo/population-land-price`,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  },
+  {
+    url: `${BASE_URL}/geo/population-flood-risk`,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  },
+  {
+    url: `${BASE_URL}/geo/population-station-access`,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  },
   { url: `${BASE_URL}/geo/compare`, changeFrequency: 'monthly', priority: 0.6 },
   { url: `${BASE_URL}/geo/method`, changeFrequency: 'monthly', priority: 0.5 },
-  { url: `${BASE_URL}/geo/data-catalog`, changeFrequency: 'weekly', priority: 0.5 },
+  {
+    url: `${BASE_URL}/geo/data-catalog`,
+    changeFrequency: 'weekly',
+    priority: 0.5,
+  },
   ...GEO_X_STAGE_PAGES,
   // /gis-cross/* (廃止 2026-05-29) → /themes に統合。各ページは middleware で 301 転送:
   //  migration-flow → /themes/population-dynamics, depopulation-medical → /themes/healthcare,

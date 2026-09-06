@@ -21,6 +21,10 @@ export interface GeoCrossAnalysisConfig {
   readonly mapTitle: string;
   readonly mapSubtitle: string;
   readonly takeaways: readonly string[];
+  readonly spatialReading: string;
+  readonly overlapLabel: string;
+  readonly overlapLegend: string;
+  readonly mapLimit: string;
   readonly hazardMapUrl?: string;
 }
 
@@ -30,22 +34,30 @@ export const GEO_CROSS_ANALYSIS_CONFIGS: Readonly<
   'population-land-price': {
     slug: 'population-land-price',
     eyebrow: '人口 × 地価',
-    shortTitle: '人口と住宅地価',
+    shortTitle: '住宅地点と将来人口',
     description:
-      '2026年の住宅地地価公示と1km将来人口メッシュを都道府県別に集計し、現在の価格水準と2050年人口変化を並べて読みます。',
-    mapTitle: '2026年 住宅地の地価中央値',
+      '2026年の住宅地点を1km人口メッシュに接続し、地価上昇と2020→2050年の人口減少が重なる場所を調べます。',
+    spatialReading: '住宅地点を含む1kmメッシュの人口変化を確認します。同じ県内の中心部・郊外で、地価と人口変化の組み合わせがどう違うかを探してください。',
+    overlapLabel: '住宅地点と人口の重なり',
+    overlapLegend: '点の色：赤＝地価上昇×人口減少、青緑＝地価上昇×人口維持・増加、橙＝地価横ばい・下落×人口減少、青＝地価横ばい・下落×人口維持・増加、灰＝未接続または比較対象外。背景は1kmメッシュの人口変化です。',
+    mapLimit: '地点は2026年地価公示、人口は2020→2050年推計。住宅地点を含むメッシュ全体の人口であり、地価の将来予測や徒歩圏ではありません。',
+    mapTitle: '県別集計：地価上昇 × 人口減少の地点比率',
     mapSubtitle:
-      '用途区分「住宅地」の標準地点を都道府県別に集計した中央値です。県を選ぶと人口変化も比較できます。',
+      '分母は人口メッシュへ接続でき、人口増減と地価前年比を比較できる住宅地点。人口比率ではありません。',
     takeaways: [
-      '地図は2026年の価格水準を示し、2050年の将来価格を予測するものではありません。',
-      '人口増減率と地価変動率を同じ表で確認できますが、相関だけで因果関係は判断できません。',
-      '県ごとの標準地点数を併記し、地点の構成差を隠さない設計にしています。',
+      '同じ県でも住宅地点の周囲で将来人口の動きが異なり、県の平均的な変化だけでは読み取れない組み合わせを確認できます。',
+      '地価の直近1年と人口の30年間を照合した分析です。地価が今後下落するという予測や、割安・割高の判定には使えません。',
+      '気になる地点は公示価格の原票・用途地域・現地条件を確認し、地域の検討候補を絞る材料にしてください。',
     ],
   },
   'population-flood-risk': {
     slug: 'population-flood-risk',
     eyebrow: '人口 × 洪水',
     shortTitle: '人口と洪水浸水想定',
+    spatialReading: '人口の残る場所と、今回の洪水包含判定が重なる場所を確認します。2020年と2050年で同じ浸水条件を使い、区域内人口と区域外人口の変化を比べます。',
+    overlapLabel: '浸水包含の判定結果',
+    overlapLegend: '赤＝中心点が浸水想定区域に含まれた1kmメッシュ、灰＝今回の入力では含まれなかったメッシュ。色は浸水深ではありません。原典の洪水ポリゴンそのものではなく、人口メッシュへの判定結果です。',
+    mapLimit: '1kmメッシュ全体の浸水や個別住宅の安全を示しません。0や灰色も安全を意味せず、住所ごとの確認は最新の自治体ハザードマップを使ってください。',
     description:
       '想定最大規模の洪水浸水想定区域と1km将来人口メッシュを空間結合し、区域内と判定された人口の比率を都道府県別に比較します。',
     mapTitle: '2050年 浸水想定区域人口比率',
@@ -62,6 +74,10 @@ export const GEO_CROSS_ANALYSIS_CONFIGS: Readonly<
     slug: 'population-station-access',
     eyebrow: '人口 × 駅',
     shortTitle: '人口と駅アクセス',
+    spatialReading: '駅の位置を固定して、駅800m圏に入るメッシュと外れるメッシュの人口変化を調べます。駅が多いことと、人口の近くに駅があることを分けて読みます。',
+    overlapLabel: '駅800m圏との重なり',
+    overlapLegend: '緑＝中心点が駅代表点から直線800m以内の1kmメッシュ、灰＝圏外、白い点＝判定に寄与した駅代表点。',
+    mapLimit: '道路距離、駅入口、高低差、運行本数や2050年の駅存続を含みません。徒歩圏・交通利便性の総合評価ではありません。',
     description:
       '全国の駅を重複整理し、駅代表点から直線800m以内に中心がある1km人口メッシュを都道府県別に集計します。',
     mapTitle: '2050年 駅800m圏人口比率',

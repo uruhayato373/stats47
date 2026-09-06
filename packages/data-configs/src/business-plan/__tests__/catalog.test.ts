@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { BUSINESS_PLAN_2026 } from '../catalog';
+import {
+  BUSINESS_PLAN_M1_BASELINE_ANALYSIS,
+  BUSINESS_PLAN_M1_GEO_ANALYSES,
+} from '../m1';
 
 describe('stats47 2.0事業計画カタログ', () => {
   it('原案の全在庫を欠落・重複なく保持する', () => {
@@ -26,7 +30,14 @@ describe('stats47 2.0事業計画カタログ', () => {
     );
     for (const content of BUSINESS_PLAN_2026.geoContentLifecycle) {
       expect(analysisIds.has(content.analysisId)).toBe(true);
-      expect(content.free.canonicalPath).toBe(`/geo/${content.analysisSlug}`);
+      const analysis = BUSINESS_PLAN_2026.m1.analyses.find(
+        (item) => item.id === content.analysisId
+      );
+      expect(content.free.canonicalPath).toBe(
+        analysis?.analysisKind === 'baseline'
+          ? `/ranking/${analysis.rankingKey}`
+          : `/geo/${content.analysisSlug}`
+      );
       expect(content.editorial.topicKey).toBe(`geo:${content.analysisSlug}`);
       expect(content.editorial.blogPath).toBe(
         `/blog/${content.editorial.blogSlug}`
@@ -43,6 +54,29 @@ describe('stats47 2.0事業計画カタログ', () => {
         .map((content) => content.launch.order)
         .sort((a, b) => a - b)
     ).toEqual([1, 2, 3, 4]);
+  });
+
+  it('Geo公開集合へ単一指標を混ぜず、証拠階段のある空間分析だけを許可する', () => {
+    expect(BUSINESS_PLAN_M1_GEO_ANALYSES).toHaveLength(3);
+    expect(BUSINESS_PLAN_M1_GEO_ANALYSES).not.toContain(
+      BUSINESS_PLAN_M1_BASELINE_ANALYSIS
+    );
+
+    for (const analysis of BUSINESS_PLAN_M1_GEO_ANALYSES) {
+      const calculationInputs = analysis.sourceLayers.filter(
+        (layer) => layer.role === 'calculation-input'
+      );
+      expect(analysis.analysisKind).toBe('spatial-cross');
+      expect(calculationInputs.length).toBeGreaterThanOrEqual(2);
+      expect(calculationInputs.map((layer) => layer.geometry)).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/^(mesh|point|polygon)$/),
+        ])
+      );
+      expect(analysis.r2Key).toMatch(/^app\/geo\//);
+      expect(analysis.evidenceManifestKey).toMatch(/\/manifest\.json$/);
+      expect(analysis.detailR2KeyPattern).toContain('/pref/{NN}.json');
+    }
   });
 
   it('最初の4系列だけを実行可能にし、残りを一括量産しない', () => {

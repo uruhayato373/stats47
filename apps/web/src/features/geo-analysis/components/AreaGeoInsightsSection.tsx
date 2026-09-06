@@ -50,15 +50,14 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
             <p className="text-xs text-muted-foreground">
               保存則 {manifest.quality.conservationChecks}/47
             </p>
-            <h3 className="mt-1 font-bold">{item.title}</h3>
+            <h3 className="mt-1 font-bold">{metric.label}</h3>
             <p className="mt-3 text-lg font-bold tabular-nums">
               {formatGeoValue(metric, row.values[metric.key])}
             </p>
-            <p className="text-xs text-muted-foreground">全国{row.rank}位</p>
             <div className="mt-4 space-y-1 text-sm">
               <Link
                 className="block font-medium text-primary underline"
-                href={`${item.free.canonicalPath}?pref=${prefCode2}#article-data`}
+                href={`${item.free.canonicalPath}/${prefCode2}/overlap`}
               >
                 地図と結論を見る
               </Link>
@@ -66,7 +65,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
                 className="block text-primary underline"
                 href={`/geo/data/${item.analysisSlug}/${prefCode2}`}
               >
-                県別の制作データを見る
+                この県の地点・検算データを見る
               </Link>
             </div>
           </SurfaceCard>

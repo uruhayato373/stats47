@@ -153,6 +153,9 @@ export interface GeoLandPricePrefDetail {
   readonly areaName: string;
   readonly meshes: readonly GeoPopulationMeshCell[];
   readonly landPricePoints: readonly GeoLandPricePoint[];
+  /** 同じindexの地価地点を包含する人口メッシュ。未接続はnull。 */
+  readonly pointMeshIds: readonly (string | null)[];
+  readonly spatialMethod: 'point-in-mesh';
   readonly summary: {
     readonly meshCount: number;
     readonly pointCount: number;
@@ -161,6 +164,11 @@ export interface GeoLandPricePrefDetail {
     readonly medianResidentialLandPrice: number;
     readonly medianLandPriceChange: number;
     readonly populationChangeRate: number;
+    readonly matchedPointCount: number;
+    readonly unmatchedPointCount: number;
+    readonly comparablePointCount: number;
+    readonly risingDecliningPointCount: number;
+    readonly risingDecliningPointShare: number | null;
   };
 }
 

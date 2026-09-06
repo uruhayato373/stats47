@@ -78,14 +78,23 @@ gis/mlit-ksj/{dataId}/{version}/{scope}/
 └── manifest.json
 ```
 
+### 洪水Geo分析の保存先
+
+洪水Geo分析の原典ZIPは例外として`gis/mlit-ksj/A31b/25/source/{riverClass}/{mesh}.zip`に保持する。
+`source/_meta.json`はURL・河川区分・メッシュ・SHA・bytesを記録する。旧`source/{mesh}.zip`は
+片区分専用のため上書きせず、URL/SHA一致時だけ区分20の新キーへコピーする。
+配信結果は`app/geo/population-flood-risk/{item,manifest}.json`と`pref/{NN}.json`。
+逐次読込ライブラリの対応環境に合わせ、洪水再生成はNode.js 22以上で実行する。
+入力集合と演算の契約は`.claude/rules/geo-analysis-standards.md`を参照する。
+
 ## ジオメトリ型別の実装パターン
 
-| 型 | 既存実装例 | Leaflet コンポーネント |
-|---|---|---|
-| **point** | PortLeafletMap, FishingPortLeafletMap | CircleMarker + Tooltip |
-| **line** | （新規） | GeoJSON + Polyline style |
-| **polygon** | LeafletChoroplethMap, ChoroplethGeoJsonLayer | GeoJSON + fillColor/fillOpacity |
-| **mesh** | （新規） | Canvas ヒートマップ or GeoJSON グリッド |
+| 型          | 既存実装例                                   | Leaflet コンポーネント                  |
+| ----------- | -------------------------------------------- | --------------------------------------- |
+| **point**   | PortLeafletMap, FishingPortLeafletMap        | CircleMarker + Tooltip                  |
+| **line**    | （新規）                                     | GeoJSON + Polyline style                |
+| **polygon** | LeafletChoroplethMap, ChoroplethGeoJsonLayer | GeoJSON + fillColor/fillOpacity         |
+| **mesh**    | （新規）                                     | Canvas ヒートマップ or GeoJSON グリッド |
 
 ## モジュール構成
 
@@ -94,6 +103,7 @@ packages/gis/src/mlit-ksj/
 ├── types.ts           # KsjCodeConfig, KsjResolvedDataset, KsjPipelineOptions 等の型定義
 ├── datasets.ts        # ★メタ SSOT (git TS): 登録データセットのメタ + ranking 定義 (完全DBレス・2026-06-21)
 ├── registry.ts        # KSJ_CODE_CONFIG: 技術設定のみ (downloadUrlPattern/propertyMap/simplifyOptions)
+├── license-policy.ts  # 元データ公開 / 商用成果物 / 公開構造化データのfail-closed判定
 ├── property-map.ts    # KSJ 属性コード → 人間可読名マッピング（N02_001 → railwayType）
 ├── r2-path.ts         # R2 保存パス構築
 ├── downloader.ts      # zip ダウンロード・GeoJSON/Shapefile 抽出
@@ -137,6 +147,7 @@ packages/gis/src/mlit-ksj/
 新規データセットは以下の順序で追加します（規約の正典: `.claude/rules/gis-data.md` / 担当 agent: `gis-curator`）。
 
 1. **`datasets.ts` の `GIS_DATASETS` にエントリを追加**（メタ + ranking 定義）:
+
    ```ts
    { dataId: "X99", name: "新データセット名", category: "land", geometryType: "point",
      coverage: "national", license: "cc-by-4.0", stats47Category: "population",
@@ -169,6 +180,10 @@ pipeline本体と取得完了判定には不要。
 
 > 出典: 国土交通省「国土数値情報（{データ名}）」
 
-- **CC BY 4.0 / 商用可**: stats47 で自由に利用可能
-- **CC BY 4.0（一部制限）**: 個別に制限内容を確認
-- **非商用**: public R2へ新規保存しない。ローカル利用に限定する
+- **CC BY 4.0 / 商用可**: 出典、個別ページURL、取得日、stats47による加工を表示すれば商用利用・公開構造化データに利用可能
+- **CC BY 4.0（一部制限）**: 個別条件を確認し、確認完了までpublic R2・公開JSON・有料成果物を止める
+- **非商用**: 元データ/TopoJSONはpublic R2へ置かずローカル限定。旧約款上の「非データベースのGIS空間演算結果」は
+  出典・加工者表示付きで利用余地があるが、公開JSON/CSV、販売物、広告付きページへの適用は書面確認または商用可ソースへの置換まで止める
+
+判定は`license-policy.ts`を必ず使う。`build-data-catalog.ts check`はpublic R2にlocal-onlyデータを見つけると失敗し、
+`generate-ksj-stats-values.ts`とGeo bundle生成は公開構造化データを許可しない入力で書き込み前に停止する。

@@ -38,7 +38,9 @@ import type { StatsValuesPayload } from "@stats47/stats-r2/types";
 import * as topojsonClient from "topojson-client";
 
 import { GIS_DATASETS } from "../datasets";
+import { assertKsjPublicStructuredOutputAllowed } from "../license-policy";
 import { KSJ_CODE_CONFIG } from "../registry";
+import type { KsjLicense } from "../types";
 import {
   buildStatsPayload,
   countByPrefecture,
@@ -58,6 +60,7 @@ interface Target {
   readonly metricKey: string;
   readonly dataId: string;
   readonly version: string;
+  readonly license: KsjLicense;
   readonly unit: string;
   readonly yearCode: string;
   readonly filename?: string;
@@ -89,6 +92,7 @@ function collectTargets(only?: readonly string[]): Target[] {
         metricKey: rc.rankingKey,
         dataId: ds.dataId,
         version: ds.latestVersion,
+        license: ds.license,
         unit: rc.unit,
         yearCode: rc.yearCode,
         filename: rc.filename,
@@ -191,6 +195,13 @@ async function main(): Promise<void> {
   if (targets.length === 0) {
     console.error("対象がありません (--metric の指定を確認してください)");
     process.exit(1);
+  }
+  for (const target of targets) {
+    assertKsjPublicStructuredOutputAllowed({
+      dataId: target.dataId,
+      license: target.license,
+      output: `app/stats/${target.metricKey}/values.json`,
+    });
   }
 
   let locator: PrefectureLocator | null = null;

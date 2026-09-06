@@ -1,7 +1,7 @@
-
 import type { ReactNode } from 'react';
 
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 import {
   Table,
@@ -15,22 +15,20 @@ import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '@stats47/data-configs/business-pl
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard, SurfaceSection } from '@/components/surface';
+import { SurfaceSection } from '@/components/surface';
 
 import {
-  buildGeoMapModel,
   formatGeoValue,
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,
 } from '../lib/geo-cross-analysis';
 import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
 import { loadGeoAnalysisSnapshot } from '../lib/load-geo-analysis-snapshot';
-import { loadGeoStationAccessManifest } from '../lib/load-geo-station-access-evidence';
 
 import { GeoAnalysisTracker } from './GeoAnalysisTracker';
 import { GeoContentPublicationSection } from './GeoContentPublicationSection';
 import { GeoCrossAnalysisExplorer } from './GeoCrossAnalysisExplorer';
-import { GeoStationAccessEvidenceExplorer } from './GeoStationAccessEvidenceExplorer';
+import { GeoSpatialEvidenceExplorer } from './GeoSpatialEvidenceExplorer';
 
 import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
 
@@ -60,32 +58,15 @@ export async function GeoCrossAnalysisArticle({
   const spec = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
     (analysis) => analysis.slug === slug
   );
-  const [snapshot, evidenceManifest, stationAccessManifest] = await Promise.all([
-    loadGeoAnalysisSnapshot(slug),
-    loadGeoAnalysisManifest(slug),
-    slug === 'population-station-access'
-      ? loadGeoStationAccessManifest()
-      : Promise.resolve(null),
-  ]);
+  const [snapshot, evidenceManifest] = await Promise.all(
+    [
+      loadGeoAnalysisSnapshot(slug),
+      loadGeoAnalysisManifest(slug),
+    ]
+  );
 
   if (!spec || !snapshot || !evidenceManifest) {
-    return (
-      <PageShell>
-        <Breadcrumbs
-          items={[
-            { label: 'ホーム', href: '/' },
-            { label: '地域分析', href: '/geo' },
-            { label: config.shortTitle },
-          ]}
-        />
-        <div
-          role="status"
-          className="border bg-muted/20 p-5 text-sm text-muted-foreground"
-        >
-          分析データを準備しています。47都道府県の配信用snapshotを確認後に表示します。
-        </div>
-      </PageShell>
-    );
+    notFound();
   }
 
   const primaryMetric = snapshot.metrics.find(
@@ -93,10 +74,6 @@ export async function GeoCrossAnalysisArticle({
   );
   if (!primaryMetric) return null;
 
-  const top = snapshot.rows[0];
-  const bottom = snapshot.rows.at(-1);
-  if (!top || !bottom) return null;
-  const { rankingItem, rankingValues } = buildGeoMapModel(snapshot);
   const generatedDate = new Intl.DateTimeFormat('ja-JP', {
     year: 'numeric',
     month: '2-digit',
@@ -132,7 +109,9 @@ export async function GeoCrossAnalysisArticle({
           role="note"
           className="mb-6 border border-destructive/40 bg-destructive/5 p-4 text-sm leading-relaxed"
         >
-          <strong>この分析は避難判断や個別地点の安全確認には使えません。</strong>{' '}
+          <strong>
+            この分析は避難判断や個別地点の安全確認には使えません。
+          </strong>{' '}
           0%も安全を意味しません。住所ごとの確認は、自治体の最新情報と
           <a
             href={config.hazardMapUrl}
@@ -146,90 +125,38 @@ export async function GeoCrossAnalysisArticle({
         </div>
       ) : null}
 
-      <SurfaceSection className="mb-6">
-        <SectionHeader title="まず結論" hideRule />
-        <p className="mt-2 text-base leading-relaxed">
-          {primaryMetric.label}が最も高いのは
-          <strong>{top.areaName}</strong>の
-          <strong>
-            {formatGeoValue(primaryMetric, top.values[snapshot.primaryMetricKey])}
-          </strong>
-          。47都道府県の中央値は
-          <strong>
-            {formatGeoValue(primaryMetric, snapshot.summary.medianValue)}
-          </strong>
-          、最も低いのは{bottom.areaName}の
-          {formatGeoValue(primaryMetric, bottom.values[snapshot.primaryMetricKey])}
-          です。
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {config.description}
-        </p>
-      </SurfaceSection>
-
-      <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <SurfaceCard>
-          <p className="text-xs text-muted-foreground">全国1位</p>
-          <p className="mt-1 text-lg font-bold">{top.areaName}</p>
-          <p className="text-sm tabular-nums text-muted-foreground">
-            {formatGeoValue(primaryMetric, top.values[snapshot.primaryMetricKey])}
-          </p>
-        </SurfaceCard>
-        <SurfaceCard>
-          <p className="text-xs text-muted-foreground">全国中央値</p>
-          <p className="mt-1 text-2xl font-bold tabular-nums">
-            {formatGeoValue(primaryMetric, snapshot.summary.medianValue)}
-          </p>
-        </SurfaceCard>
-        <SurfaceCard>
-          <p className="text-xs text-muted-foreground">全国47位</p>
-          <p className="mt-1 text-lg font-bold">{bottom.areaName}</p>
-          <p className="text-sm tabular-nums text-muted-foreground">
-            {formatGeoValue(
-              primaryMetric,
-              bottom.values[snapshot.primaryMetricKey]
-            )}
-          </p>
-        </SurfaceCard>
-        <SurfaceCard>
-          <p className="text-xs text-muted-foreground">データ充足</p>
-          <p className="mt-1 text-2xl font-bold tabular-nums">
-            {snapshot.dataQuality.actualAreas}/47
-          </p>
-          <p className="text-sm text-muted-foreground">都道府県</p>
-        </SurfaceCard>
-      </div>
-
-      {stationAccessManifest ? (
-        <GeoStationAccessEvidenceExplorer
+      <nav aria-label="分析の読み順" className="mb-5 flex flex-wrap gap-4 text-sm text-primary underline">
+        <a href="#spatial-evidence">県内の地図</a>
+        <a href="#prefecture-comparison">県別の集計</a>
+        <a href="#methods">方法・出典・限界</a>
+      </nav>
+      <GeoSpatialEvidenceExplorer
+          slug={slug}
           analysisId={spec.id}
           dataVersion={snapshot.dataVersion}
           initialPrefCode={initialPrefCode}
           initialView={initialStage}
-          manifest={stationAccessManifest}
+          manifest={evidenceManifest}
         />
-      ) : null}
-
+      <div id="prefecture-comparison" className="scroll-mt-24"><SectionHeader title="空間判定の結果を都道府県で比較" description="県内の地点・メッシュの判定を集計した結果です。値の大小は地域の優劣を表しません。" /></div>
       <GeoCrossAnalysisExplorer
         analysisId={spec.id}
         comparisonLimit={spec.comparisonLimit}
         mapTitle={config.mapTitle}
         mapSubtitle={config.mapSubtitle}
         snapshot={snapshot}
-        rankingItem={rankingItem}
-        rankingValues={rankingValues}
       />
 
       <SurfaceSection className="mt-6">
         <SectionHeader title="47都道府県の全データ" hideRule />
         <p className="mt-2 text-sm text-muted-foreground">
-          地図の主指標による順位です。横にスクロールすると、人口変化や標本数などの補助指標も確認できます。
+          空間判定の主指標が高い順です。横にスクロールすると、人口変化や標本数などの補助指標も確認できます。
         </p>
         <div className="mt-4 overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>順位</TableHead>
+                <TableHead>表示順</TableHead>
                 <TableHead>都道府県</TableHead>
                 {snapshot.metrics.map((metric) => (
                   <TableHead key={metric.key} className="text-right">
@@ -241,8 +168,8 @@ export async function GeoCrossAnalysisArticle({
             <TableBody>
               {snapshot.rows.map((row) => (
                 <TableRow key={row.areaCode}>
-                  <TableCell className="tabular-nums">{row.rank}位</TableCell>
-                  <TableCell className="font-medium">{row.areaName}</TableCell>
+                  <TableCell className="tabular-nums">{row.rank}</TableCell>
+                  <TableCell className="font-medium"><Link className="text-primary underline" href={`/geo/${slug}/${row.areaCode.slice(0, 2)}/overlap`}>{row.areaName}の地図</Link></TableCell>
                   {snapshot.metrics.map((metric) => (
                     <TableCell
                       key={metric.key}
@@ -289,7 +216,7 @@ export async function GeoCrossAnalysisArticle({
         </SurfaceSection>
       </div>
 
-      <SurfaceSection className="mt-6">
+      <SurfaceSection id="methods" className="mt-6 scroll-mt-24">
         <SectionHeader title="方法・出典・限界" hideRule />
         <ol className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
           {snapshot.method.map((step, index) => (
@@ -338,6 +265,11 @@ export async function GeoCrossAnalysisArticle({
             </li>
           ))}
         </ul>
+        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+          上記の国土数値情報をもとにstats47が空間演算・集計・表示用加工を行いました（生成日:{' '}
+          {generatedDate}）。
+          国土交通省または原典提供者が本分析の内容を保証・推奨するものではありません。
+        </p>
       </SurfaceSection>
 
       {contextLayer ? (
