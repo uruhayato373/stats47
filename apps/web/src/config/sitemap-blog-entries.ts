@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-09-06
- * 件数: blog 536 / tag 65 / survey 85
+ * 件数: blog 536 / tag 65 / survey 86
  */
 
 export interface SitemapBlogEntry {
@@ -613,7 +613,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "納豆", lastModified: "2026-07-19" },
   { tagKey: "経済", lastModified: "2026-06-21" },
   { tagKey: "製造業", lastModified: "2026-08-29" },
-  { tagKey: "観光", lastModified: "2026-06-13" },
+  { tagKey: "観光", lastModified: "2026-08-30" },
   { tagKey: "財政", lastModified: "2026-08-28" },
   { tagKey: "賃金", lastModified: "2026-06-15" },
   { tagKey: "賃金構造基本統計調査", lastModified: "2026-06-13" },
@@ -621,7 +621,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "農業", lastModified: "2026-07-16" },
   { tagKey: "都道府県", lastModified: "2026-09-05" },
   { tagKey: "都道府県ランキング", lastModified: "2026-09-05" },
-  { tagKey: "都道府県別", lastModified: "2026-06-21" },
+  { tagKey: "都道府県別", lastModified: "2026-08-30" },
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
   { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-07-11" },
@@ -695,6 +695,7 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "physician-survey",
   "police-statistics",
   "population-estimates",
+  "population-projection",
   "port-statistics",
   "prefectural-accounts",
   "prefectural-land-price-survey",
