@@ -3,7 +3,7 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**526 件** (最終更新: 2026-09-05)
+**523 件** (最終更新: 2026-09-05)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
@@ -43,12 +43,10 @@
 | 2026-08-04 | 𝕏 X | ranking/female-part-time-hourly-wage | このデータを使う3ステップ📈  ①女性パートの時給ランキングを確認 ②1位東京都1,534円と自分の地域を比較 ③転職… | [🔗](https://x.com/stats47jp373/status/2084444210426777897) |
 | 2026-08-04 | 𝕏 X | ranking/new-graduate-scheduled-salary-university-male | なぜ群馬県が新規学卒者の給与で全国トップなのでしょうか?  1位 群馬県 317.9千円 2位 長崎県 266.4千円 … | [🔗](https://x.com/stats47jp373/status/2084580106920706453) |
 | 2026-08-03 | 📸 Instagram | ranking/foreign-resident-count-china-per-100k |  | [🔗](https://www.instagram.com/p/DblE1f8HKvm/) |
-| 2026-08-03 | 📸 Instagram | ranking/nuclear-power-plant-count |  | [🔗](https://www.instagram.com/p/DbkVhEEm2Bn/) |
 | 2026-08-03 | 📸 Instagram | ranking/police-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbjqhrCGqL8/) |
 | 2026-08-03 | 𝕏 X | ranking/craft-materials-consumption-expenditure | もし手芸・工芸材料の消費額が全国トップの長野県に住んでいたら、身の回りに手作りの温もりがあふれる暮らしです。  1位 長… | [🔗](https://x.com/stats47jp373/status/2084247923928313864) |
 | 2026-08-02 | 📸 Instagram | ranking/unmarried-ratio-male-30-34 |  | [🔗](https://www.instagram.com/p/DbiTNiHG5cJ/) |
 | 2026-08-02 | 📸 Instagram | ranking/air-conditioner-consumption-quantity |  | [🔗](https://www.instagram.com/p/Dbhtzl9FQFq/) |
-| 2026-08-02 | 📸 Instagram | ranking/wind-power-plant-count-facility |  | [🔗](https://www.instagram.com/p/DbhFlCdIJWI/) |
 | 2026-08-01 | 📸 Instagram | ranking/physical-disability-rehabilitation-cases |  | [🔗](https://www.instagram.com/p/DbfuhnsICZ8/) |
 | 2026-08-01 | 📸 Instagram | ranking/other-grains-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbfIpzHoEFw/) |
 | 2026-08-01 | 📸 Instagram | ranking/nursery-teacher-annual-income |  | [🔗](https://www.instagram.com/p/DbehJyKEWzk/) |
@@ -119,7 +117,6 @@
 | 2026-07-18 | 𝕏 X | ranking/marine-fishery-catch | 海面漁業漁獲量、1位北海道842,704トン、2位長崎県292,890トン、3位茨城県259,496トン。  最大格差は… | [🔗](https://x.com/stats47jp373/status/2078253412504809629) |
 | 2026-07-18 | 𝕏 X | ranking/other-vegetable-seaweed-processed-consumption-expenditure | 野菜・海藻加工品の支出データ、3ステップで使いこなす方法。  ①上位5県で消費傾向を把握(静岡県3,197円) ②下位県… | [🔗](https://x.com/stats47jp373/status/2078283617877229809) |
 | 2026-07-17 | 📸 Instagram | ranking/overseas-travel-annual-participation-rate-15plus |  | [🔗](https://www.instagram.com/p/Da5H1FGlX4n/) |
-| 2026-07-17 | 📸 Instagram | ranking/tourism-resource-count |  | [🔗](https://www.instagram.com/p/Da4fXEvFWYc/) |
 | 2026-07-17 | 📸 Instagram | bar-chart-race/japanese-entries |  | [🔗](https://www.instagram.com/reel/Da35Hvwkl8b/) |
 | 2026-07-17 | 𝕏 X | ranking/marine-fishery-output-value | もし北海道に住んでいたら。  海面漁業産出額は全国最多の2396億円。 2位長崎県709億円、3位宮城県585億円と続き… | [🔗](https://x.com/stats47jp373/status/2078087332805181810) |
 | 2026-07-17 | 𝕏 X | ranking/overseas-travel-annual-participation-rate-10plus | 海外旅行の行動者率、京都府は0.7％で全国1位。 47位高知県は0.1％。  その差、実に7.0倍。  地域差の実態はこ… | [🔗](https://x.com/stats47jp373/status/2077891029517173109) |

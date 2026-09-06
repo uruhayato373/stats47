@@ -21,15 +21,15 @@ updated: 2026-09-05
 
 ## 🔴 高 — 今月中に着手したい
 
-### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] [進行中] 非商用KSJの公開終了・新版への切替を本番確認する
+### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] 公開終了・新版切替の完了証跡を照合しカードを回収する
 
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
+タグ: [コンテンツ品質] [種類:不具合] [実行:機械] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
 
-- **owner**: gis-curator（利用条件SSOT）/ r2-publisher（exact削除）/ ranking-publisher（公開）/ x-strategist（関連SNS）
-- **現在地**: 承認済み旧資産の撤去・公開404確認、PR930の再発防止guard反映、共有一覧の再生成・公開照合まで完了（run34010311847）。旧SNS6投稿の削除と今回限定のブラウザ例外は2026-09-06承認済み。X3件は削除・URL消失確認・台帳反映済み。残るInstagram3件は人による認証復旧待ち。
+- **owner**: backlog-loop（完了gateとカード回収のみ）
+- **対象**: 外部作業は完了済み。公開・削除を再実行せず、既存証跡を照合してledgerへ記録し、本カードを排他writer経由で削除する。
   公開・削除・退避・検証の証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
 - **次（実行順）**:
-  1. Instagramの人による認証復旧後、対象アカウントとURLを照合し、IDs749/796/800だけ削除・再読込確認・台帳反映する。削除と今回限定UI例外の再承認は不要。削除済みX IDs592/632/636を再実行しない。X予約一覧72件に対象なし、theme draft2（841/855）は現行指標・画像へ同期済み。Geo15投稿の既存検証結果と混同しない。
+  1. `legacyLicense` の公開・削除証跡と `legacySnsVerification.deletionApproval.status=COMPLETED`、`deletionEvidence.pendingIds=[]`、投稿台帳IDs592/632/636/749/796/800の`status=deleted`・`deleted_at`を照合する。catalog gateを通し、ledger証拠付きで本カードを回収する。新しい外部操作・認証・コンテンツ生成は不要。
 - **再発防止の確認**: main/develop両経路にguard反映済み。共有索引544件は全行保持、分類修正20件一致。従来から公開終了指定の未公開1行も除外・HTTP410確認。guardを持たない旧checkoutまで保護済みとは扱わない。
 - **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
 - **停止条件**: key集合/size/ETagが退避時と変わった対象は削除しない。削除済みraw435・派生59・旧ランキング126件を再実行しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。別作業のdevelopリリースと競合する変更は行わない。
