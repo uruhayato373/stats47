@@ -256,7 +256,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-12",
     "channel": "coconala",
     "channelLabel": "編集可能データ",
-    "title": "47都道府県の統計データ完全版をお渡しします",
+    "title": "47都道府県の統計データ総合集をお渡しします",
     "description": "テーマ横断で都道府県データと図表を一括で入手する",
     "priceYen": 15000,
     "externalUrl": "https://coconala.com/services/4324231",
@@ -280,7 +280,7 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "data-p-14",
     "channel": "coconala",
     "channelLabel": "編集可能データ",
-    "title": "47都道府県の家計消費データ集をお渡しします",
+    "title": "県庁所在市の家計消費データ集をお渡しします",
     "description": "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
     "priceYen": 9000,
     "externalUrl": "https://coconala.com/services/4323941",
@@ -304,7 +304,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "実質手取りの地図 — 住む県で変わる、暮らしのお金",
-    "description": "名目年収と、家賃・物価を差し引いた実質手取りの逆転を軸に、県民所得・貯蓄・エンゲル係数・消費のクセを一冊で見渡す家計の地図。",
+    "description": "県民所得、家計調査の所得・支出、貯蓄と地域財政を別の対象として読み、対象世帯・年次・分母の一致を確認する。地域の平均を個人の手取りや県民性へ置き換えず、比較の限界と確認手順を整理する。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HF17SQ9N",
     "included": [
@@ -333,7 +333,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "消費量日本一の食卓 — 家計調査で読む47都道府県の食",
-    "description": "家計調査の品目別支出から「消費量日本一」の県を追い、食文化・気候・産地との結びつきを読む雑学読み物。",
+    "description": "家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読む。生産地や県民全体の消費を直接測る統計ではないことも整理する読み物。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HF1N51T8",
     "included": [
@@ -383,7 +383,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "健康と医療の地図 — 寿命・自殺・介護2040",
-    "description": "健康寿命・自殺率・2040年の介護不足・病床利用を束ね、医療アクセスの地域差を読む。",
+    "description": "寿命、自殺に関する指標、介護職員の必要数と病院の利用指標を比較し、医療資源の数と個人の健康状態を区別して読む。掲載した化学工業の集計は医薬品・医療機器だけの生産額ではないことも整理する。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HF1C5QZ6",
     "included": [
@@ -408,7 +408,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "教育と子育ての地図 — 教育費・進学率・待機児童",
-    "description": "教育費・進学率・不登校・待機児童・子育て支援を束ね、子どもを取り巻く環境の地域差を読む。",
+    "description": "公費と家計の教育費、授業料、大学進学に関する指標、子育て関連の統計を比較する。支出額と教育成果、入学者数と定員、保育所等の利用率と入所希望の充足を区別して読む。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HF356WR9",
     "included": [
@@ -433,7 +433,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "自治体財政の地図 — 財政力・借金・将来負担",
-    "description": "財政力指数・50年の推移・地方税収・債務・将来負担比率を束ね、自治体の家計の健全性を読む。",
+    "description": "財政力指数、時系列、地方税、地方債務と将来負担比率を比較し、指標ごとの分母・控除・平均期間を確認する。家計の収支とは異なる地方財政の集計として読み、単一指標から健全性を断定しない。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HF1XFXBY",
     "included": [
@@ -458,7 +458,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
-    "description": "宿泊数・国籍別の嗜好・集中・回復・海外旅行を束ね、観光の地域差とインバウンドの実像を読む。",
+    "description": "延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読む。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別する。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HDYG6DLX",
     "included": [
@@ -483,7 +483,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "エネルギーとインフラの地図 — 電力・再エネ・水道",
-    "description": "エネルギー消費構造・再エネ・電力需要・ガソリン社会・道路・水道インフラを束ねる。",
+    "description": "エネルギー消費、再エネ設備、電力需要、ガス・電気、給油所の指標を読む。設備容量・契約件数・供給区域・道路当たり密度を区別し、実際の送電経路や住民の移動距離を示す値とは扱わない。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HDYLY7WM",
     "included": [
@@ -508,7 +508,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "産業と地域経済の地図 — 製造・中小・農林",
-    "description": "製造業の集積・生産性・中小企業・工業用水・地価・林業・農地を束ね、地域経済の骨格を読む。",
+    "description": "製造業の集計、事業所規模、工業用水、商業地地価を比較する。出荷額と付加価値、従業者当たりと事業所当たり、企業と事業所、地価の金額と変動率を分けて読む。",
     "priceYen": 800,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HDYB4CBV",
     "included": [
@@ -533,7 +533,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
-    "description": "犯罪率・労働災害・公害苦情・廃棄物リサイクル・地震保険を束ね、安全と環境の地域差を読む。",
+    "description": "犯罪の認知・検挙、労働災害、公害苦情、廃棄物、火災・地震保険料支出を、各指標の対象と分母に沿って読む。集計値から個人の被害確率や地域の安全性全般を断定しない。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HDZ45H6C",
     "included": [
@@ -558,7 +558,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "文化・スポーツ・余暇の地図",
-    "description": "図書館・博物館・スポーツ施設・スポーツ参加・映画・都市公園を束ね、余暇と文化資本の地域差を読む。",
+    "description": "図書館・博物館・スポーツ施設、スポーツの行動者率、映画・演劇等への支出を比較する。施設数と利用、参加と頻度、市の家計と県全体を区別して読む。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HH88J9YH",
     "included": [
@@ -583,7 +583,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "デジタル生活の地図 — 通信・PC・テレワーク",
-    "description": "ICTメディア消費・携帯契約・PC支出・テレワーク・通信費・コンビニ密度を束ね、デジタル生活の地域差を読む。",
+    "description": "ICTメディアの利用、携帯契約件数、パソコン支出、テレワーク、コンビニ密度を比較する。契約件数と利用者数、支出額と保有率、有業者と雇用者の範囲を区別して読む。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HG55D649",
     "included": [
@@ -608,7 +608,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "データで見る47都道府県 人口・世帯",
-    "description": "人口・世帯に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。",
+    "description": "人口・世帯に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HG543VG9",
     "included": [
@@ -627,7 +627,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "データで見る47都道府県 所得・賃金・採用",
-    "description": "所得・賃金・採用に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。",
+    "description": "所得・賃金・採用に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HH8D631S",
     "included": [
@@ -646,7 +646,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "データで見る47都道府県 観光・宿泊",
-    "description": "観光・宿泊に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。",
+    "description": "観光・宿泊に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HH8G8JGV",
     "included": [
@@ -665,7 +665,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "データで見る47都道府県 医療・介護",
-    "description": "医療・介護に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。",
+    "description": "医療・介護に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HH8JHDSZ",
     "included": [
@@ -684,7 +684,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "データで見る47都道府県 教育・子育て",
-    "description": "教育・子育てに関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。",
+    "description": "教育・子育てに関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HH91VJZD",
     "included": [
@@ -703,7 +703,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "データで見る47都道府県 家計・消費",
-    "description": "家計・消費に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。",
+    "description": "家計・消費に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
     "priceYen": 500,
     "externalUrl": "https://www.amazon.co.jp/dp/B0HH8H3WXV",
     "included": [
@@ -789,6 +789,25 @@ export const STOREFRONT_PRODUCTS = [
     ],
     "audience": [
       "地域差を読み物として知りたい方"
+    ],
+    "sourceBlogSlugs": []
+  },
+  {
+    "id": "GEO-SERVICE-01",
+    "slug": "service-geo-service-01",
+    "channel": "coconala",
+    "channelLabel": "個別分析サービス",
+    "title": "地価と将来人口の重なりを県別に資料化します",
+    "description": "住宅地の標準地点と1km人口メッシュの対応を、根拠と除外理由付きで説明できる",
+    "priceYen": 5000,
+    "externalUrl": "https://coconala.com/services/4387096",
+    "included": [
+      "説明付きHTMLレポート",
+      "地点・メッシュCSV",
+      "出典・検算結果"
+    ],
+    "audience": [
+      "自治体・地域メディア・調査担当者"
     ],
     "sourceBlogSlugs": []
   }

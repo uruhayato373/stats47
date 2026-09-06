@@ -1,7 +1,7 @@
 ---
 name: project_kakei_marketing_book_pipeline
 description: 吉本佳生『マーケティングに使える「家計調査」』(2015) を source-vault profile kakei-marketing-2015 として保全・全ページ解決済み。展開は backlog KAKEI-MARKETING-CONTENT-01。Kindle縦書きスキャンのOCR手順とDriveマウント経路の要点
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: 78c7e753-be3e-44e0-a16c-0ad0c536109c

@@ -11,6 +11,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/products";
+import { GEO_SERVICE_OFFER } from "../../../packages/product-factory/src/channels/geo/service-offer";
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
 
 import type { StorefrontProduct } from "../src/features/products/types";
@@ -84,7 +85,25 @@ function buildStorefrontProducts(): StorefrontProduct[] {
     .filter(([, listing]) => listing.status === "listed" && Boolean(listing.serviceUrl))
     .map(([id, listing]): StorefrontProduct => {
       const product = productsById.get(id);
-      if (!product) throw new Error(`Coconala listing ${id}: ALL_PRODUCTS に定義がありません`);
+      if (!product && id !== GEO_SERVICE_OFFER.id) {
+        throw new Error(`Coconala listing ${id}: 商品契約に定義がありません`);
+      }
+      if (id === GEO_SERVICE_OFFER.id) {
+        return {
+          id,
+          slug: `service-${id.toLowerCase()}`,
+          channel: "coconala",
+          channelLabel: "個別分析サービス",
+          title: listing.title,
+          description: GEO_SERVICE_OFFER.outcome,
+          priceYen: listing.priceYen,
+          externalUrl: listing.serviceUrl as string,
+          included: ["説明付きHTMLレポート", "地点・メッシュCSV", "出典・検算結果"],
+          audience: [GEO_SERVICE_OFFER.audience],
+          sourceBlogSlugs: [],
+        };
+      }
+      if (!product) throw new Error(`Coconala listing ${id}: 商品契約に定義がありません`);
       return {
         id,
         slug: `data-${id.toLowerCase()}`,

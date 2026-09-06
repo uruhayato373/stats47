@@ -42,6 +42,10 @@ describe("product storefront", () => {
 
   it("商品slugから詳細を引け、未知slugはnullになる", () => {
     expect(findStorefrontProduct("data-p-04")).toMatchObject({ id: "P-04" });
+    expect(findStorefrontProduct("service-geo-service-01")).toMatchObject({
+      id: "GEO-SERVICE-01",
+      channelLabel: "個別分析サービス",
+    });
     expect(findStorefrontProduct("unknown")).toBeNull();
   });
 
