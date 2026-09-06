@@ -156,6 +156,37 @@ npm run preflight
 pre-commit の代替ではない (型・docs・画像 pipeline の深い検査は含まない)。
 **通っても commit が通る保証はしないが、ここで落ちれば確実に落ちる。**
 
+### push 前に「生成物の鮮度」をまとめて確認する (★2026-09-06 追加)
+
+PR CI の Static Gates は **61 個の検査を直列に回し、最初の失敗で残りを実行しない**。
+指標や記事の母集団が変わると registry・sitemap・survey taxonomy・theme catalog・
+polarity などが**連鎖して同時に古くなる**ので、1 回の CI が 1 個しか報告せず往復が積み上がる。
+
+実測 (2026-09-06 の develop→main): 独立した 6 個が同時に古く、CI 往復 **8 回**を要した
+(1 回あたり検査 6 分 + 事前 commit 5 分)。まとめて分かれば 1 回で済んだ。
+
+```bash
+npm run preflight:pr
+```
+
+CI と同じコマンドを**並列**で回し、落ちたもの全部を 1 回で出す (実測 ~70 秒)。
+`main` が develop 非経由で進んでいないかも同時に見る (下記の同期規約)。
+重い検査 (型 / build / vitest / coverage / e2e) は含まないので **CI が権威**。
+
+ローカルと CI のコマンドがずれると意味が消えるため、両者が同じコマンドを指すことを
+`.claude/scripts/lib/__tests__/preflight-commit.test.mjs` が静的に固定する
+(片方から 1 つ落とすとテストが落ちることを実測済み)。
+
+### ★merge commit の後に rebase しない (2026-09-06 に実際に壊した)
+
+`git merge origin/main` の後に `git rebase origin/develop` を実行すると、rebase が
+**merge を平坦化**しようとして main 側の commit を 1 つずつ replay し、途中で競合して停止する。
+このとき HEAD は detached な中途状態になり、**そのまま push すると共有ブランチが
+「main を含まない部分適用状態」になる**。実際にそうなり、復旧に merge をやり直す往復が発生した。
+
+merge の後に上流へ追随するときは `git merge origin/develop` (または `git pull --no-rebase`) を使う。
+`git rebase` を使うのは、merge commit を持たない自分専用の直線的なブランチだけ。
+
 ### マージ中にゲートが落ちたら「継承か自作か」を先に切り分ける
 
 develop をマージした直後の失敗は、自分の変更ではなく**取り込んだ側に元からあった**ことが多い。
