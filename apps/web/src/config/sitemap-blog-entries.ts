@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-09-06
- * 件数: blog 536 / tag 65 / survey 86
+ * 件数: blog 533 / tag 65 / survey 86
  */
 
 export interface SitemapBlogEntry {
