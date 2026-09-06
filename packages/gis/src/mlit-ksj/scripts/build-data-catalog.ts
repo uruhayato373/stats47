@@ -9,6 +9,11 @@ import { config } from "dotenv";
 
 import { GIS_DATASETS, type GisDatasetMeta } from "../datasets";
 import {
+  getKsjLicensePolicy,
+  type KsjCommercialUsePolicy,
+  type KsjSourcePublicationPolicy,
+} from "../license-policy";
+import {
   EXPECTED_PUBLIC_ACQUISITION_COUNT,
   EXPECTED_UNREGISTERED_POLICY_COUNT,
   PUBLIC_KSJ_EXPECTED_ARCHIVE_COUNTS,
@@ -73,7 +78,8 @@ type CatalogItem = {
   latestVersion: string | null;
   hasCodeConfig: boolean;
   isRankingTarget: boolean;
-  publicationPolicy: "unassessed" | "local-only" | "review-required" | "public-r2-eligible";
+  publicationPolicy: KsjSourcePublicationPolicy;
+  commercialUsePolicy: KsjCommercialUsePolicy;
   state: CatalogState;
   usedInAnalyses: string[];
   compliance: { publicMirrorPolicyMismatch: boolean };
@@ -223,11 +229,7 @@ function publicationPolicy(
   meta: GisDatasetMeta | undefined,
   official: KsjOfficialPolicy | undefined,
 ) {
-  const license = meta?.license ?? official?.license;
-  if (!license) return "unassessed" as const;
-  if (license === "non-commercial") return "local-only" as const;
-  if (license === "cc-by-4.0-partial") return "review-required" as const;
-  return "public-r2-eligible" as const;
+  return getKsjLicensePolicy(meta?.license ?? official?.license).sourcePublication;
 }
 
 export function isAcquisitionComplete(dataId: string, inventory: R2Inventory): boolean {
@@ -375,7 +377,8 @@ export async function buildCatalog() {
     const official = UNREGISTERED_KSJ_OFFICIAL_POLICY.get(dataId);
     const inventory = inventories.get(dataId) ?? emptyInventory;
     const usedInAnalyses = [...new Set(usage.get(dataId) ?? [])].sort();
-    const policy = publicationPolicy(meta, official);
+    const licensePolicy = getKsjLicensePolicy(meta?.license ?? official?.license);
+    const policy = licensePolicy.sourcePublication;
     const configEntry = KSJ_CODE_CONFIG.get(dataId);
     return {
       dataId,
@@ -395,10 +398,14 @@ export async function buildCatalog() {
       hasCodeConfig: Boolean(configEntry),
       isRankingTarget: meta?.isRankingTarget ?? false,
       publicationPolicy: policy,
+      commercialUsePolicy: licensePolicy.commercialUse,
       state: catalogState(dataId, meta, official, inventory, usedInAnalyses),
       usedInAnalyses,
       compliance: {
-        publicMirrorPolicyMismatch: policy === "local-only" && inventory.fileCount > 0,
+        publicMirrorPolicyMismatch:
+          inventorySource.mode === "remote-r2" &&
+          policy === "local-only" &&
+          inventory.fileCount > 0,
       },
       r2: {
         prefix: inventory.fileCount > 0 ? `${R2_PREFIX}${dataId}/` : null,
@@ -429,6 +436,8 @@ export async function buildCatalog() {
         "new public KSJ datasets require the expected official archive count to match R2 manifest.json count; legacy datasets require at least one R2 object",
       partialLicense: "manual review required before new public publication",
       nonCommercial: "local-only; existing public mirror is reported as a compliance mismatch",
+      commercialUse:
+        "CC BY/commercial-ok are allowed with attribution; non-commercial is limited to non-database spatial results and public structured output requires written clearance",
       openData:
         "catalog visibility is not acquisition: APIs/tiles need an adapter and specification workbooks are not observation data",
     },
@@ -455,7 +464,18 @@ export async function buildCatalog() {
   };
 }
 
-function validateCatalog(catalog: Awaited<ReturnType<typeof buildCatalog>>, checkRemote: boolean): string[] {
+export function publicMirrorPolicyErrors(
+  items: readonly Pick<CatalogItem, "dataId" | "compliance">[],
+): string[] {
+  const mismatches = items
+    .filter((item) => item.compliance.publicMirrorPolicyMismatch)
+    .map((item) => item.dataId);
+  return mismatches.length > 0
+    ? [`公開不可KSJがpublic R2に存在します: ${mismatches.join(", ")}`]
+    : [];
+}
+
+export function validateCatalog(catalog: Awaited<ReturnType<typeof buildCatalog>>, checkRemote: boolean): string[] {
   const errors: string[] = [];
   if (catalog.summary.candidateCatalog !== 126) errors.push("candidate catalogは126件である必要があります");
   if (UNREGISTERED_KSJ_OFFICIAL_POLICY.size !== EXPECTED_UNREGISTERED_POLICY_COUNT) {
@@ -486,6 +506,7 @@ function validateCatalog(catalog: Awaited<ReturnType<typeof buildCatalog>>, chec
       .map((item) => item.dataId);
     errors.push(`R2未取得の登録データ: ${missing.join(", ")}`);
   }
+  if (checkRemote) errors.push(...publicMirrorPolicyErrors(catalog.items));
   return errors;
 }
 

@@ -217,6 +217,26 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       relatedChartKeys: ["theme-edu-higher-education-trend"],
       relatedThemeKeys: ["labor-mobility", "population-dynamics"],
     },
+    {
+      key: "education-investment-efficiency",
+      lensKey: "equity",
+      title: "教育費のかけ方と国公立大学への進学",
+      question:
+        "補習教育にかける支出と国公立大学の授業料支出は、県庁所在市ごとにどう組み合わさっているか",
+      summary:
+        "家計調査の教育費は、子どもの有無を問わない二人以上世帯の平均で、県全体ではなく県庁所在市の値です。補習教育（幼児・小学校、中学校、高校・予備校）と大学授業料（国公立・私立）を分けて読み、支出の多さを教育水準の高さと同一視しません。",
+      sourceKeys: ["stat-family-income-expenditure-survey-2024", "mext-school-basic-survey-2024"],
+      relatedRankingKeys: [
+        "public-university-consumption-expenditure",
+        "private-university-consumption-expenditure",
+        "elementary-tutoring-consumption-expenditure",
+        "junior-high-tutoring-consumption-expenditure",
+        "high-school-tutoring-consumption-expenditure",
+        "high-school-advancement-rate",
+        "high-school-new-graduates-employment-rate",
+      ],
+      relatedThemeKeys: ["real-income", "population-dynamics"],
+    },
   ],
   "keywords": [
     "学校数",

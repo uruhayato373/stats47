@@ -1,5 +1,6 @@
 export { GeoAnalysisTracker } from './components/GeoAnalysisTracker';
 export { GeoCrossAnalysisArticle } from './components/GeoCrossAnalysisArticle';
+export { GeoSpatialEvidenceExplorer } from './components/GeoSpatialEvidenceExplorer';
 export { GeoDecisionExplorer } from './components/GeoDecisionExplorer';
 export { GeoPopulationExplorer } from './components/GeoPopulationExplorer';
 export { GeoCrossAnalysisExplorer } from './components/GeoCrossAnalysisExplorer';

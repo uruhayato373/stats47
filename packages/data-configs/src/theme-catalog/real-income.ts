@@ -199,6 +199,22 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
       relatedChartKeys: ["real-income-cpi-breakdown"],
       relatedThemeKeys: ["consumer-prices", "living-housing"],
     },
+    {
+      key: "engel-coefficient-reading",
+      lensKey: "composition",
+      title: "エンゲル係数の読み方",
+      question: "食料費の割合が高い都市は、生活水準が低いと言えるのか。",
+      summary:
+        "所得が上がると食料費の割合は下がりやすいが、割合が高いことから生活水準の低さは導けない。食料費は購入価格×数量なので、外食や高価格の食材を好む都市でも係数は上がる。消費支出、食料費、1人当たり県民所得を並べて読み、係数だけで順位づけしない。",
+      sourceKeys: ["stat-family-income-expenditure-survey-2024"],
+      relatedRankingKeys: [
+        "engel-coefficient",
+        "food-expenditure-total",
+        "consumption-expenditure-total",
+        "per-capita-prefectural-income-h27",
+      ],
+      relatedThemeKeys: ["consumer-prices", "local-economy"],
+    },
   ],
   "keywords": [
     "実質年収",

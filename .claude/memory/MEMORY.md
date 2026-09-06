@@ -1,6 +1,8 @@
 # Memory Index
 
+- [project_ai_content_headless_claude_batch.md](project_ai_content_headless_claude_batch.md) — ai-content 量産は headless claude -p (Sonnet、Opus は quarantine 例外)。≈$0.55/key。枠枯渇・リセット直後スロットリング・先行公開→再選定→rebase 競合・未コミット変更で rebase 停止、の罠
 - [feedback_geo_mesh_evidence_integrity.md](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
+- [feedback_geo_publication_boundary.md](feedback_geo_publication_boundary.md) — Geo公開集合はbaselineを含めず、2入力層・細粒度geometry・snapshot/manifest/県別artifactを機械ゲートする
 - [project_business_plan_adaptation_contract.md](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
 - [project_kindle_publishing_factory.md](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成器(jszip)・32冊カタログ(S1論点/S2テーマ/S3地域/S4大全)・パイロットK-S1-01『実質手取りの地図』生成済(13章37図)。本文=既存ブログR2、SVG→PNG同梱、カバーsatori→sharp。30%書き下ろし必須(KDP Web公開規定)。KDPアップロードは人間工程。正典coconala-product-standards.md §8
 - [project_coconala_publish_automation.md](project_coconala_publish_automation.md) — ココナラ出品自動化(Playwright)をdoboku-noteから移植・稼働。★別アカウント(userId=1269384/IGWORKS)、account assertはuserId照合。コナラ10/11フォーム刷新の必須項目=価格value skew(表示×1.1)/タイトル25字/提供形式が保存時に制作物へ戻る/無料修正回数fix_limit公開時必須/公開済み画像差し替えは--image(全フィールド再適用)。★2026-07-23に13商品(P-01〜P-12/P-14・テーマ別データ集28〜2054指標・個別AI画像)公開。テーマ整合はlistingレベルで改名(観光カテゴリ=実運輸等)。scripts=.claude/scripts/coconala/、規約§6改訂
@@ -100,3 +102,4 @@
 - [feedback_playwright_profile_dual_os.md](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂
 - [feedback_windows_script_portability.md](feedback_windows_script_portability.md) — Windowsで落ちる3パターン: URL().pathnameの先頭スラッシュ(C:\C:\)/npxのspawn(ENOENT・Node22は.cmdをEINVAL)/Macパス直書き。node直起動とfileURLToPathで書く
 - [project_affiliate_banner_text_asymmetry.md](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する
+- [project_kakei_marketing_book_pipeline.md](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』(2015)をsource-vault profile kakei-marketing-2015で保全(r2=ページ画像同梱)・全307ページ解決済(analyses.json 80件)。展開はbacklog KAKEI-MARKETING-CONTENT-01。Kindle縦書きスキャンはjpn_vert+UI枠crop、Driveはローカルマウントをそのまま--parts-dirに渡せる

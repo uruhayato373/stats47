@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pear-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "梨消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/pear-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tochigi-food-culture --keys pear-consumption-expenditure --data-name pear-ranking",
+  "fetchedAt": "2026-09-05T15:19:05.454Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

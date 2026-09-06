@@ -1,0 +1,43 @@
+{
+ "title": "人間ドック等受診料（年収五分位別）",
+ "unit": "円",
+ "year": "2024",
+ "data": [
+  {
+   "areaName": "平均",
+   "rank": 0,
+   "value": 4320,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅰ階級（下位20%）",
+   "rank": 1,
+   "value": 2725,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅱ階級",
+   "rank": 2,
+   "value": 2891,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅲ階級（中位）",
+   "rank": 3,
+   "value": 3853,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅳ階級",
+   "rank": 4,
+   "value": 4571,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅴ階級（上位20%）",
+   "rank": 5,
+   "value": 7560,
+   "unit": "円"
+  }
+ ]
+}

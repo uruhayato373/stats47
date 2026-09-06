@@ -1,0 +1,152 @@
+name: 📝 note Circulation Audit (weekly)
+
+# note.com/stats47 の公開記事・タグ・導線・マガジン・プロフィールを read-only で全量監査する。
+# 失敗時は最新結果を1件の Issue に集約し、復旧後は自動 Close する。
+
+on:
+  schedule:
+    - cron: '15 20 * * 6' # 土 20:15 UTC = 日 05:15 JST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: note-circulation-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Catalog・unit・live audit
+        id: audit
+        run: |
+          set +e
+          STATUS=0
+          npm run note:catalog:validate 2>&1 | tee /tmp/note-catalog.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          npm run note:circulation:test 2>&1 | tee /tmp/note-tests.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          npm run note:circulation:audit 2>&1 | tee /tmp/note-circulation.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          npm run note:navigation:products:check 2>&1 | tee /tmp/note-product-navigation.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+
+          REPORT=$(ls -t .claude/state/metrics/note-circulation-audit-*.json 2>/dev/null | head -1)
+          if [ -z "$REPORT" ]; then
+            STATUS=1
+          else
+            node - "$REPORT" <<'NODE'
+          const fs = require('node:fs');
+          const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const summary = report.summary || {};
+          const failures = [
+            summary.errors !== 0 && `errors=${summary.errors}`,
+            summary.warnings !== 0 && `warnings=${summary.warnings}`,
+            summary.compliantHashtags !== summary.total && `hashtags=${summary.compliantHashtags}/${summary.total}`,
+            summary.exactMagazineMemberships !== summary.liveMagazines
+              && `magazines=${summary.exactMagazineMemberships}/${summary.liveMagazines}`,
+            summary.defaultMagazineCovers !== 0 && `defaultCovers=${summary.defaultMagazineCovers}`,
+            summary.magazineMetadataWarnings !== 0 && `magazineMetadata=${summary.magazineMetadataWarnings}`,
+            summary.profileWarnings !== 0 && `profileWarnings=${summary.profileWarnings}`,
+            summary.pinnedArticles !== 1 && `pinned=${summary.pinnedArticles}`,
+            summary.profiledArticles !== 1 && `profiled=${summary.profiledArticles}`,
+          ].filter(Boolean);
+          if (failures.length) {
+            console.error(`note circulation gate failed: ${failures.join(', ')}`);
+            process.exit(1);
+          }
+          console.log(`note circulation gate passed: ${summary.total} articles`);
+          NODE
+            [ "$?" -eq 0 ] || STATUS=1
+          fi
+          echo "exit_code=$STATUS" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: 📤 Upload audit report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: note-circulation-audit
+          path: |
+            .claude/state/metrics/note-circulation-audit-*.json
+            /tmp/note-catalog.log
+            /tmp/note-tests.log
+            /tmp/note-circulation.log
+            /tmp/note-product-navigation.log
+          if-no-files-found: warn
+
+      - name: 🚨 Open or update note circulation alert
+        if: always() && steps.audit.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[note Circulation Alert] 公開記事・導線・マガジン監査の異常"
+          REPORT=$(ls -t .claude/state/metrics/note-circulation-audit-*.json 2>/dev/null | head -1)
+          {
+            echo "## note 回遊性 週次監査"
+            echo ""
+            echo "95タグ、公開状態、stats47/関連記事/マガジン/商品導線、リンク到達性、所属、カバー、プロフィール固定のいずれかに異常があります。"
+            echo ""
+            echo "- Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "- Report artifact: note-circulation-audit"
+            if [ -n "$REPORT" ]; then
+              node - "$REPORT" <<'NODE'
+          const fs = require('node:fs');
+          const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          console.log(`- Summary: \`${JSON.stringify(report.summary)}\``);
+          const affected = report.articles.filter((article) => article.errors.length || article.warnings.length).slice(0, 30);
+          if (affected.length) {
+            console.log('');
+            console.log('### 対象記事（先頭30件）');
+            for (const article of affected) {
+              const codes = [...article.errors, ...article.warnings].map((issue) => issue.code).join(', ');
+              console.log(`- \`${article.key}\`: ${codes}`);
+            }
+          }
+          NODE
+            fi
+          } > /tmp/note-circulation-issue.md
+
+          gh label create note-circulation-alert \
+            --description "note公開記事・回遊導線の週次監査異常" --color "d93f0b" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label note-circulation-alert \
+            --search '"[note Circulation Alert]" in:title' --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/note-circulation-issue.md
+          else
+            gh issue create --title "$TITLE" --label "note-circulation-alert,auto-generated" \
+              --body-file /tmp/note-circulation-issue.md
+          fi
+
+      - name: ✅ Close recovered note circulation alert
+        if: always() && steps.audit.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label note-circulation-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "noteの公開記事・タグ・導線・マガジン・プロフィール監査がすべて正常へ復旧したため自動Closeします。"
+            done
+
+      - name: ❌ Fail on unresolved note circulation drift
+        if: always() && steps.audit.outputs.exit_code != '0'
+        run: exit 1

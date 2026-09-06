@@ -85,7 +85,7 @@ node .claude/scripts/note/generate-koumuin-covers.cjs --slug <slug>
 #    それ以外 (stats47-note 等) は汎用版:
 # node .claude/scripts/note/generate-note-covers.mjs --slug <slug>
 
-# 3. ハッシュタグ 90 個を生成 (hashtags.txt)
+# 3. ハッシュタグ 99 個を生成 (hashtags.txt)
 node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
 ```
 
@@ -94,7 +94,7 @@ node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
   `.claude/scripts/note/assets/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
   アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
   `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
-- ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 90 個。Phase 7 でタグ入力時に使う。
+- ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 99 個。Phase 7 でタグ入力時に使う。
 
 ## 前提条件
 
@@ -222,7 +222,7 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 主なポイント:
 - **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
 - **Phase 7-Boundary（有料境界・自動・2026-06-16 実機確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭見出しを錨**に有料ラインを自動設定。✅ **境界画面 DOM は確定済（update 11 本 + 新規 2 本連続成功）**。⚠️ **誤露出防止で最終「投稿/更新」前に境界を screenshot で目視確認**してから押す（エージェントが Read で screenshot 検証後に押下して可）。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
-- **Phase 7-Tags**: ハッシュタグは `hashtags.txt` から読んで入力する（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）。note は最大 99 タグまで設定可能。`hashtags.txt` に 90 個生成しているので全行を使う（99 未満に抑えてエラー回避）。
+- **Phase 7-Tags**: ハッシュタグは `hashtags.txt` から読んで入力する（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）。note の実機上限は 99 タグ。`hashtags.txt` の 99 行を使い、公開後に API で 95 個以上を確認する。
   ```bash
   cat docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt
   ```
@@ -231,6 +231,25 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - ★**エディタ操作の実体は関数ライブラリ `.claude/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`ins_file`+`new_post_tags`+`new_post_magazine`+`paid_setline_from_settings`（新規）/ `do_update`）。新規有料記事は`publish-new-note.sh ... --prepare-publish`で境界 screenshot まで進め、エージェントが目視してから同じセッションで`--commit-publish`を実行する。手書きせずこれを使う
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
+
+### 公開済み記事のハッシュタグ専用更新
+
+本文の差し替えを行わず、公開済み記事を 95〜99 タグに揃えるときは専用スクリプトを使う。
+
+```bash
+# 棚卸しのみ
+node .claude/scripts/note/update-published-hashtags.mjs --all --audit-only
+
+# 無料・有料を含む全公開記事（95未満のみ更新）
+node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid
+```
+
+- Phase 1 の `stats47` アカウント照合は省略しない
+- 元のタグを優先し、数値のみのタグと note が受理しないハイフン入りタグを除外して 99 個まで補完する
+- 公開版の再編集 URL（`?draft_reedit=true`）から開き、送信前の無料本文が現在の公開版と一致することを検証する
+- 95 タグ未満の記事に未公開下書きがある場合は fail-closed で停止し、下書きを公開・破棄しない
+- 有料記事は既存境界が選択済みであることを検証し、`/tmp/stats47-note-hashtag-boundaries/` に screenshot を保存する
+- 更新前後で価格・有料境界・note が送信した無料本文を照合し、更新後の公開 API が 95 タグ未満なら失敗とする
 
 ### Phase 8 後: 公開 URL をフロントマターに記録（★真実源への書き込み）
 

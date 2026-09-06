@@ -1,0 +1,16 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003348240",
+  "params": {
+    "cdCat01": "080100080",
+    "cdCat02": "03",
+    "cdCat03": "00,01,02,03,04,05",
+    "cdTime": "2024000000"
+  },
+  "year": "2024",
+  "unit": "円",
+  "label": "私立大学授業料等",
+  "transform": "quintile bars (平均+I〜V or I〜V)",
+  "fetchedAt": "2026-09-05T10:22:52.136Z",
+  "restore": "npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug income-quintile-education --name private-univ --item 080100080 --year 2024"
+}

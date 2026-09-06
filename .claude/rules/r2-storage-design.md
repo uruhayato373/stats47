@@ -145,6 +145,7 @@ objectはPUTしない。mtime・ローカルcache・`app/blog`等の広域prefix
 | `incremental-cache/<buildId>/` (ISR キャッシュ) | **最新 3 世代のみ保持**。旧世代は二度と読まれない | デプロイ完了後に自動 GC (`.github/workflows/r2-isr-gc.yml`、`workflow_run` トリガー + 日曜 03:30 JST の取りこぼし回収) + 手動 `r2-maintenance.yml` (`mode: isr-generations`) |
 | `sns/**/*.mp4` (投稿済み) | 投稿後 30 日で削除 | `.github/workflows/cleanup-r2-sns-videos.yml` (週次。正典 `sns-content-standards.md` §5.5) |
 | 移行済み旧 prefix (下記「既存キーの移行状態」) | `packages/r2-storage/src/scripts/r2-retention.ts` の `RETENTION_TARGETS` (コード内 allowlist) のみ | 手動 `r2-maintenance.yml` (`mode: retention-prefixes`) |
+| 公開不可KSJ source mirror | `gis/mlit-ksj/{C02,C09,C23,P03,P12,P13,P17,P18,P35,W01,W05}/` のexact allowlistのみ | `r2-retention.ts` `license-remediation-ksj-*`。dry-run→承認→手動workflow |
 
 **削除の唯一の入口は `.github/workflows/r2-maintenance.yml`** (`mode: du` / `retention-prefixes` /
 `isr-generations`、既定 `dry_run: true`)。任意 prefix を削除できる `delete-r2-prefix.ts` は緊急時のみで、
@@ -199,6 +200,11 @@ Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<
 | `app/fishing-ports/all.json`            | (後継なし・ルート廃止)                                                                                                            | 🗑️ 削除対象 (`r2-retention.ts` `retired-fishing-ports`) |
 | `app/ports/all.json`                    | (後継なし・ルート廃止)                                                                                                            | 🗑️ 削除対象 (`retired-ports`) |
 | `app/port-statistics/by-port/[code].json` | (後継なし・ルート廃止)                                                                                                          | 🗑️ 削除対象 (`retired-port-statistics`) |
+| `app/geo/content-pipeline/items.json` | `.local/geo-content-pipeline/items.json`（非公開運用台帳） | 🗑️ 削除対象 (`retired-geo-content-pipeline`) |
+
+`app/`は「すべて置いてよい一般公開フォルダ」ではなく、公開URLの配信契約を持つsnapshot専用。
+販売価格、媒体展開順、draft/gated状態などの運用JSONは`.local/`または型付きgit SSOTへ置き、R2へpushしない。
+`gis/`も原典のライセンスがpublic mirrorを許す場合だけ保持する。非商用原典はローカル作業キャッシュに限定する。
 
 ## JSON ファイル命名規則
 

@@ -23,7 +23,7 @@ test('all reference inventories have 100% resolution coverage', async () => {
     { cwd: PROJECT_ROOT }
   );
   const checked = JSON.parse(stdout);
-  assert.equal(checked.length, 4);
+  assert.equal(checked.length, 5);
   for (const profile of checked) {
     assert.equal(profile.valid, true);
     assert.equal(profile.coverage, 1);
@@ -58,6 +58,7 @@ test('committed inventories contain no book body, OCR body, or local path', asyn
     'prefecture-deviation/2018',
     'prefecture-databook/2021',
     'claude-skills-guide/2026',
+    'kakei-marketing/2015',
   ];
   for (const profile of profiles) {
     const inventory = await readFile(

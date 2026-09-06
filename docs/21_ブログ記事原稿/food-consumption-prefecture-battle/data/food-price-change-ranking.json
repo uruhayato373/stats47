@@ -1,0 +1,21 @@
+{
+  "title": "食品9品目の47市平均変化率",
+  "subtitle": "2019年→2024年",
+  "label": "47市平均支出額の変化率",
+  "unit": "%",
+  "source": "総務省「家計調査」47都道府県庁所在市平均（二人以上の世帯）",
+  "generatedBy": "manual-calculation-from-r2-values",
+  "highLabel": "上昇幅が大きい",
+  "lowLabel": "上昇幅が小さい・下落",
+  "data": [
+    { "pref": "アイスクリーム", "value": 32.5 },
+    { "pref": "ラーメン外食", "value": 25.5 },
+    { "pref": "コーヒー", "value": 24.1 },
+    { "pref": "焼肉", "value": 23.7 },
+    { "pref": "ビール", "value": 18.0 },
+    { "pref": "すし外食", "value": 10.7 },
+    { "pref": "食パン", "value": 9.6 },
+    { "pref": "ワイン", "value": 7.1 },
+    { "pref": "冷凍ぎょうざ", "value": -7.8 }
+  ]
+}

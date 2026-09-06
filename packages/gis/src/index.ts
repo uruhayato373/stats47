@@ -10,6 +10,7 @@ export {
 } from "./geoshape/utils/geoshape-url-builder";
 
 export { extractPrefectureCode } from "@stats47/area";
+export { FLOOD_ARCHIVES, assertFloodArchiveKeys } from './geo-analysis/flood-inputs';
 
 export {
   validateTopojson,

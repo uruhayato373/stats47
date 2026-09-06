@@ -1,0 +1,16 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003348240",
+  "params": {
+    "cdCat01": "040300030",
+    "cdCat02": "03",
+    "cdCat03": "00,01,02,03,04,05",
+    "cdTime": "2024000000"
+  },
+  "year": "2024",
+  "unit": "円",
+  "label": "pc",
+  "transform": "quintile bars (平均+I〜V or I〜V)",
+  "fetchedAt": "2026-09-05T10:34:26.832Z",
+  "restore": "npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug income-quintile-appliance --name pc --item 040300030 --year 2024"
+}

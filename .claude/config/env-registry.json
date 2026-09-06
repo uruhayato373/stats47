@@ -238,6 +238,27 @@
       ]
     },
     {
+      "name": "EXPECTED_EMBEDS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPECTED_PRICE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPECTED_TITLE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "EXPANSION_QUEUE_NOW",
       "visibility": "server",
       "contexts": [
@@ -527,6 +548,13 @@
       ]
     },
     {
+      "name": "MIN_BODY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "META_PAGE_ACCESS_TOKEN",
       "visibility": "server",
       "contexts": [
@@ -711,7 +739,21 @@
       ]
     },
     {
+      "name": "NOTE_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "OGP_DEBUG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PATH",
       "visibility": "server",
       "contexts": [
         "process"

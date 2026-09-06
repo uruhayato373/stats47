@@ -1,6 +1,6 @@
 ---
 name: fetch-note-metrics
-description: note.com sitesettings/stats から記事別メトリクス (view / comment / like) を取得する。Use when user says "noteメトリクス", "note統計", "note ビュー数取得", "fetch-note-metrics". browser-use CLI で Chrome Profile 1 (note ログイン済) 経由で取得、.claude/state/metrics/note/ に JSON snapshot 保存。
+description: note.com sitesettings/stats から記事別メトリクス (view / comment / like) を取得する。Use when user says "noteメトリクス", "note統計", "note ビュー数取得", "fetch-note-metrics". browser-use CLI で Chrome Profile 5 (stats47 ログイン済) 経由で取得、.claude/state/metrics/note/ に JSON snapshot 保存。
 disable-model-invocation: true
 primary_agent: sns-metrics-sync
 ---
@@ -17,12 +17,12 @@ note.com の著者ダッシュボード `sitesettings/stats` から、全記事�
 
 ## 前提
 
-- **Chrome の "Profile 1" に note.com のログインセッションが必要**
-  - GUI で `chrome://version/` を開き「Profile Path」末尾が `Profile 1` のユーザーが note.com にログイン済みであること
+- **Chrome の "Profile 5" に `note.com/stats47` のログインセッションが必要**
+  - 公開操作と計測の両方を stats47 専用 Profile 5 に統一する
   - 最初の 1 回は手動ログイン、以降は Chrome の persistent cookie で維持される（数週間〜数ヶ月）
   - sitesettings は sensitive なので稀に再認証が要求される可能性あり
 - browser-use CLI が `~/.browser-use-env/bin/browser-use` に install 済み
-- publish-note 用の Chrome Default プロファイルとは**別**（publish-note は Default、dashboard は Profile 1 / display 名「ユーザー 1」）
+- アカウント設定画面の `note ID === "stats47"` と取得記事 URL のハンドルを照合し、不一致は保存前に停止する
 
 ## 引数
 
@@ -40,12 +40,13 @@ bash .claude/scripts/note/fetch-note-metrics.sh
 
 スクリプトの動作:
 
-1. `browser-use --profile "Profile 1"` で note.com/sitesettings/stats を開く
-2. ログイン画面に reflect したら exit 2（手動再ログインを要請）
-3. 「もっとみる」ボタンを全展開（記事数が 12 を超える場合にページング）
-4. 全記事の DOM から `{url, noteId, title, views, comments, likes}` を抽出
-5. URL で重複排除、totals 付与
-6. `.claude/state/metrics/note/note-YYYY-MM-DD.json` に保存
+1. `browser-use --profile "Profile 5"` で note.com/sitesettings/stats を開く
+2. ログイン画面に遷移したら exit 2
+3. アカウント設定画面の `note ID === "stats47"` を照合する（不一致は exit 4）
+4. 「もっとみる」ボタンを全展開
+5. 全記事の DOM から `{url, noteId, title, views, comments, likes}` を抽出
+6. 全URLが `note.com/stats47/n/*` かつ note catalog 登録済みであることを照合
+7. URL で重複排除、totals 付与後にのみ `.claude/state/metrics/note/note-YYYY-MM-DD.json` へ atomic 保存
 
 ## 出力
 
@@ -79,17 +80,20 @@ bash .claude/scripts/note/fetch-note-metrics.sh
 - `0`: 成功
 - `2`: ログイン切れ（手動再ログインが必要）
 - `3`: browser-use 実行エラー
-- それ以外: python/bash のエラー
+- `4`: stats47 以外のアカウントを検出
+- それ以外: Node.js / bash のエラー
 
 ## ⚠️ 必須: 終了時クリーンアップ
 
-`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。さらに `--profile "Profile 1"` で起動した場合は **ユーザーの実 Chrome 内にタブを開く** ため、daemon を kill してもタブが残る。スクリプト末尾と `trap` で必ず以下 3 段すべてを実行する:
+`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。さらに named profile は `$TMPDIR/browser-use-user-data-dir-*` へ複製され、異常終了時に Chrome と複製が残る。スクリプト末尾と `trap` で必ず以下 4 段すべてを実行する:
 
 ```bash
 trap '
-  browser-use --headed --profile "Profile 1" close 2>/dev/null || true
+  browser-use --headed --profile "Profile 5" close 2>/dev/null || true
   pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null
   pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null
+  pkill -KILL -f "browser-use-user-data-dir-" 2>/dev/null
+  find "${TMPDIR:-/tmp}" -maxdepth 1 -type d -name "browser-use-user-data-dir-*" -exec rm -rf -- {} + 2>/dev/null || true
   osascript -e "tell application \"Google Chrome\"
     repeat with w in windows
       repeat with t in tabs of w
@@ -104,13 +108,13 @@ trap '
 # ... メイン処理 ...
 ```
 
-trap を入れずに 1 日に何度も実行すると Chrome / Python daemon + note タブが累積する（2026-04-25 検証で daemon 6 個 + タブ 5 個残存を確認）。
+trap を入れずに 1 日に何度も実行すると Chrome / Python daemon + note タブ + 一時 profile 複製が累積する（2026-09-06 に複製18個・約1.2GBと孤立Chrome 4系統を確認）。
 
 ## ログイン切れの対応
 
 Exit 2 が出た場合:
 
-1. 通常の Chrome を起動（**Chrome メニュー → ユーザー → 「ユーザー 1」を選択**）
+1. 通常の Chrome を起動（**Chrome メニュー → Profile 5 を選択**）
 2. https://note.com/login でログイン（「ログインしたままにする」チェック）
 3. 試しに https://note.com/sitesettings/stats を開いてダッシュボードが見えることを確認
 4. Chrome を閉じる（cookie は残る）

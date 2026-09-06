@@ -20,6 +20,13 @@ export const koumuinEstatClaudeCodeArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n258277f96f88",
     publishedAt: "2026-06-14",
     r2Path: "note/koumuin-estat-claude-code/00-estat-claude-code-intro",
+    publishedLinkRepairs: [
+      {
+        mode: "replace-url",
+        fromUrl: "https://stats47.jp/ranking/population",
+        toUrl: "https://stats47.jp/ranking/total-population",
+      },
+    ],
   },
   {
     key: "01-estat-api-key-setup",
@@ -91,6 +98,18 @@ export const koumuinEstatClaudeCodeArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7ba7ee560bbb",
     publishedAt: "2026-06-14",
     r2Path: "note/koumuin-estat-claude-code/06-prefecture-code-and-merge",
+    publishedLinkRepairs: [
+      {
+        mode: "replace-url",
+        fromUrl: "https://stats47.jp/ranking/doctors-per-100k",
+        toUrl: "https://stats47.jp/ranking/physicians-in-medical-facilities-per-100k",
+      },
+      {
+        mode: "replace-url",
+        fromUrl: "https://stats47.jp/ranking/household-income",
+        toUrl: "https://stats47.jp/ranking/annual-income-per-household",
+      },
+    ],
   },
   {
     key: "07-year-on-year-diff",
@@ -113,6 +132,7 @@ export const koumuinEstatClaudeCodeArticles: NoteArticle[] = [
     status: "published",
     noteUrl: "https://note.com/stats47/n/nd4afc48385a3",
     publishedAt: "2026-06-14",
+    publishedSeparator: "291d4dcc-4234-4f1d-ac56-ee4d1f6cb4fa",
     r2Path: "note/koumuin-estat-claude-code/08-benchmark-table-5min",
   },
   {

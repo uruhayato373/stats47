@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "oyster-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "かき(貝)消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/oyster-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug bonito-vs-oyster-fish-map --keys oyster-consumption-expenditure --data-name oyster-ranking",
+  "fetchedAt": "2026-07-09T21:52:03.385Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

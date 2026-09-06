@@ -7,6 +7,7 @@ import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import { FooterSocialLinks } from "./FooterSocialLinks";
 
 const SITE_LINKS = [
+  { href: "/products", label: "商品・書籍" },
   { href: "/about", label: "このサイトについて" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/terms", label: "利用規約" },

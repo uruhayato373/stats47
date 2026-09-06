@@ -40,6 +40,19 @@ npm run products:kindle:plan     --workspace=@stats47/product-factory
 npm run products:kindle:validate --workspace=@stats47/product-factory
 npm run products:kindle:generate --workspace=@stats47/product-factory -- --id <BOOK_ID>
 
+# 販売実績 (証拠ファイルのsha256付き。未記録と0件を分離)
+npm run products:sales --workspace=@stats47/product-factory -- validate
+npm run products:sales --workspace=@stats47/product-factory -- summary
+npm run products:sales --workspace=@stats47/product-factory -- record \
+  --channel kdp --product-id K-S1-01 \
+  --period-start 2026-09-01 --period-end 2026-09-30 \
+  --orders 0 --units 0 --net-yen 0 --refunds 0 --kenp 0 \
+  --evidence .local/product-sales-evidence/kdp-2026-09.csv
+
+販売明細の原本は個人・取引情報を含み得るため、git対象外の
+`.local/product-sales-evidence/` にだけ置く。台帳には相対パスとsha256を記録し、
+未計測と実測0件を区別する。
+
 # 共通検証
 npm run type-check --workspace=@stats47/product-factory
 npm run test:run   --workspace=@stats47/product-factory

@@ -4,6 +4,7 @@ export const nattoConsumptionExpenditure: MetricConfig = {
   "key": "natto-consumption-expenditure",
   "title": "納豆消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間納豆消費支出額",
+  "note": "県庁所在市の二人以上世帯の支出額であって購入量ではない。上位は僅差で入れ替わりやすく、対象は県庁所在市のみで県全体の値ではない",
   "unit": "円",
   "category": "economy",
   "source": {

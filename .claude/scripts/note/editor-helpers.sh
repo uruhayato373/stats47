@@ -29,7 +29,13 @@ ins_img(){
     ' /tmp/ns.txt)
   if [ -z "$ANCHOR" ]; then echo "  [WARN] anchor para not found after: $H"; return 1; fi
   BU click "$ANCHOR" >/dev/null 2>&1; sleep 0.4
-  BU keys Home >/dev/null 2>&1; sleep 0.3
+  # ★Home は「視覚上の行頭」へ飛ぶ (折り返し行の先頭)。長い段落だと文の途中で
+  #   改行が入り、図が文章を分断する (2026-09-06 に公開 56 本中 46 本で発生)。
+  #   段落ノードの先頭へ Range で確実に置く。
+  #   ※この Range 版は新規公開での実地検証が未了 (46 本の是正は公開 API 側の本文を
+  #     組み直す fix-note-figure-split.sh で行ったため、この経路を通っていない)。
+  #     新規公開のあとは必ず audit-note-figure-split.mjs で分断 0 を実測すること。
+  BU eval "(function(){const s=window.getSelection();if(!s||!s.anchorNode)return 'no-sel';let n=s.anchorNode;while(n&&n.nodeName!=='P'&&n.nodeName!=='LI'&&n.parentElement)n=n.parentElement;if(!n||(n.nodeName!=='P'&&n.nodeName!=='LI'))return 'no-para';const r=document.createRange();r.setStart(n,0);r.collapse(true);s.removeAllRanges();s.addRange(r);return 'caret-at-para-start';})();" >/dev/null 2>&1; sleep 0.3
   BU keys Enter >/dev/null 2>&1; sleep 0.4
   BU keys ArrowUp >/dev/null 2>&1; sleep 0.5
   BU state 2>&1 > /tmp/ns.txt
@@ -40,7 +46,13 @@ ins_img(){
   BU click "$IB" >/dev/null 2>&1; sleep 1.5
   BU state 2>&1 > /tmp/ns.txt
   local UP=$(grep -oE "\[[0-9]+\]<input id=note-editor-image-upload-input" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
-  BU upload "$UP" "$IMG" 2>&1 | grep -iE "uploaded|error" | sed 's/^/  /'
+  local UPLOAD_OUT
+  UPLOAD_OUT=$(BU upload "$UP" "$IMG" 2>&1)
+  echo "$UPLOAD_OUT" | grep -iE "uploaded|error" | sed 's/^/  /'
+  if ! echo "$UPLOAD_OUT" | grep -qi "uploaded" || echo "$UPLOAD_OUT" | grep -qi "error"; then
+    echo "  [FAIL] image upload failed: $IMG"
+    return 1
+  fi
   sleep 5
   echo "  [OK] $H <- $(basename "$IMG") (anchor=$ANCHOR)"
 }
@@ -206,7 +218,9 @@ PY
 process_article(){
   local SLUG="$1" NOTEID="$2" VERT="$3"
   local J="/tmp/note-data-$SLUG.json"
-  local ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG/images"
+  local ARTICLE_DIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG"
+  [ -d "$ARTICLE_DIR" ] || ARTICLE_DIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$SLUG"
+  local ADIR="$ARTICLE_DIR/images"
   node /Users/minamidaisuke/stats47/.claude/scripts/note/build-body.cjs "$SLUG" >/dev/null
   BU open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 6
   BU state 2>&1 > /tmp/ns.txt
@@ -238,7 +252,7 @@ process_article(){
     for i in $(seq 0 $((NIMG-1))); do
       local FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')
       local HEAD=$(jq -r ".imgRefs[$i].afterHeading" "$J")
-      ins_img "$HEAD" "$ADIR/$FILE"
+      ins_img "$HEAD" "$ADIR/$FILE" || return 1
     done
   fi
   # Phase 5.5: アフィリエイトバナー（画像+リンク）
@@ -294,10 +308,12 @@ new_post_cover_title(){
     BU click "$SV" >/dev/null 2>&1; sleep 3
   fi
   BU state 2>&1 > /tmp/ns.txt
-  local TI=$(grep -oE '\[[0-9]+\]<textarea placeholder=記事タイトル' /tmp/ns.txt | grep -oE '[0-9]+')
-  BU click "$TI" >/dev/null 2>&1; sleep 0.5
-  BU type "$TITLE" >/dev/null 2>&1; sleep 1
-  local TV=$(BU eval "(function(){const t=document.querySelector('textarea[placeholder=記事タイトル]');return t?t.value:'';})();" 2>&1 | grep -oiE "title|result" >/dev/null; echo ok)
+  local TITLE_ENCODED TITLE_LENGTH TV
+  TITLE_ENCODED=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]).replace(/'/g,'%27'))" "$TITLE")
+  TITLE_LENGTH=$(node -e "process.stdout.write(String([...process.argv[1]].length))" "$TITLE")
+  TV=$(BU eval "(function(){const t=document.querySelector('textarea[placeholder=記事タイトル]');if(!t)return 'not-found';const setter=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;setter.call(t,decodeURIComponent('$TITLE_ENCODED'));t.dispatchEvent(new Event('input',{bubbles:true}));t.dispatchEvent(new Event('change',{bubbles:true}));t.dispatchEvent(new Event('blur',{bubbles:true}));return 'set:'+Array.from(t.value).length;})();" 2>&1)
+  echo "$TV" | grep -q "set:$TITLE_LENGTH" || { echo "  [FAIL] title was not set exactly: $TV"; return 1; }
+  sleep 1
   echo "  cover+title set: $TITLE"
 }
 new_post_tags(){

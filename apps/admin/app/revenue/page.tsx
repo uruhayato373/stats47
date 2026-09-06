@@ -13,7 +13,7 @@ import { revenueSummary } from "@/lib/server/revenue";
 import { hasError } from "@/lib/server/state-io";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "収益 (AdSense) — stats47 admin" };
+export const metadata = { title: "収益 — stats47 admin" };
 
 const YEN = new Intl.NumberFormat("ja-JP");
 
@@ -24,6 +24,7 @@ export default function RevenuePage() {
   const columns = adsense?.columns ?? [];
   const latest = weeks[0];
   const prev = weeks[1];
+  const productSales = hasError(d.productSales) ? null : d.productSales;
 
   const delta = (a?: number, b?: number) =>
     a === undefined || b === undefined || b === 0 ? null : ((a - b) / b) * 100;
@@ -31,14 +32,17 @@ export default function RevenuePage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="収益 (AdSense)" source=".claude/state/metrics/adsense/" />
+      <PageHeading
+        title="収益"
+        source=".claude/state/metrics/adsense/ + .claude/state/products/sales-ledger.json"
+      />
 
       {/* ★計測範囲。0 と「未計測」を混同させないために必ず出す */}
       <section className="rounded-md border border-console-border bg-console-card p-3">
         <h2 className="text-sm font-bold text-console-fg">計測範囲</h2>
         <p className="mt-1 text-[11px] text-console-muted">
-          実測できているのは AdSense だけです。他チャネルは金額を出していません
-          (0 円ではなく<Unmeasured />= 未計測)。
+          証拠付きの観測だけを実測として扱います。期間がないチャネルは、0 円ではなく
+          <Unmeasured />= 未計測です。
         </p>
         <ul className="mt-2 space-y-1">
           {d.coverage.map((c) => (
@@ -52,6 +56,59 @@ export default function RevenuePage() {
           ))}
         </ul>
       </section>
+
+      <Section title="商品売上 (KDP / ココナラ)">
+        {hasError(d.productSales) ? (
+          <ErrorNote error={d.productSales.error} />
+        ) : (
+          <>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+              <Stat
+                label="実売額"
+                value={
+                  productSales && productSales.observations.length > 0
+                    ? `¥${YEN.format(productSales.netRevenueYen)}`
+                    : <Unmeasured />
+                }
+                sub={productSales?.latestPeriodEnd ? `最終期間 ${productSales.latestPeriodEnd}` : "証拠付き期間なし"}
+              />
+              <Stat
+                label="注文件数"
+                value={productSales && productSales.observations.length > 0 ? YEN.format(productSales.orders) : <Unmeasured />}
+              />
+              <Stat
+                label="販売数"
+                value={productSales && productSales.observations.length > 0 ? YEN.format(productSales.units) : <Unmeasured />}
+              />
+              <Stat
+                label="計測期間数"
+                value={productSales ? YEN.format(productSales.observations.length) : <Unmeasured />}
+              />
+            </div>
+            {productSales && productSales.observations.length > 0 ? (
+              <div className="mt-4">
+                <Table columns={["channel", "product", "period", "orders", "units", "net_yen", "evidence"]}>
+                  {productSales.observations.map((row) => (
+                    <Tr key={row.id}>
+                      <Td nowrap>{row.channel}</Td>
+                      <Td nowrap>{row.productId}</Td>
+                      <Td nowrap muted>{row.periodStart}〜{row.periodEnd}</Td>
+                      <Td nowrap>{row.orders}</Td>
+                      <Td nowrap>{row.units}</Td>
+                      <Td nowrap>¥{YEN.format(row.netRevenueYen)}</Td>
+                      <Td muted>{row.evidencePath}</Td>
+                    </Tr>
+                  ))}
+                </Table>
+              </div>
+            ) : (
+              <p className="mt-3 text-sm text-console-muted">
+                KDPまたはココナラの公式レポートを保存後、product-factoryの販売台帳CLIで記録します。
+              </p>
+            )}
+          </>
+        )}
+      </Section>
 
       {hasError(d.adsense) ? (
         <ErrorNote error={d.adsense.error} />

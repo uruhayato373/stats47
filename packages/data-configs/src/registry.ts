@@ -1287,6 +1287,9 @@ import { newRentalStarts } from "./metrics/new-rental-starts";
 import { newRentedHousingRatio } from "./metrics/new-rented-housing-ratio";
 import { newspaperConsumptionExpenditure } from "./metrics/newspaper-consumption-expenditure";
 import { nhkFeeConsumptionExpenditure } from "./metrics/nhk-fee-consumption-expenditure";
+import { informationCommunicationExpenditure } from "./metrics/information-communication-expenditure";
+import { informationCommunicationCoefficient } from "./metrics/information-communication-coefficient";
+import { academicAchievementTestAverageRate } from "./metrics/academic-achievement-test-average-rate";
 import { nightSoilTreatmentPopulationRatio } from "./metrics/night-soil-treatment-population-ratio";
 import { noiseRegulationRate } from "./metrics/noise-regulation-rate";
 import { nonAgriculturalIncomeRatio } from "./metrics/non-agricultural-income-ratio";
@@ -3630,6 +3633,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "new-rented-housing-ratio": newRentedHousingRatio,
   "newspaper-consumption-expenditure": newspaperConsumptionExpenditure,
   "nhk-fee-consumption-expenditure": nhkFeeConsumptionExpenditure,
+  "information-communication-expenditure": informationCommunicationExpenditure,
+  "information-communication-coefficient": informationCommunicationCoefficient,
+  "academic-achievement-test-average-rate": academicAchievementTestAverageRate,
   "night-soil-treatment-population-ratio": nightSoilTreatmentPopulationRatio,
   "noise-regulation-rate": noiseRegulationRate,
   "non-agricultural-income-ratio": nonAgriculturalIncomeRatio,

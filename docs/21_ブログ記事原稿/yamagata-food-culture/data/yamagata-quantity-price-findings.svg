@@ -1,0 +1,43 @@
+<!-- data-source: yamagata-quantity-price-findings.json | generated: 2026-09-05T11:04:18.496Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 488" width="960" height="488" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="山形の食卓を数量×価格で分解（2024年・47県庁所在市平均=100）">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="488" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">山形の食卓を数量×価格で分解（2024年・47県庁所在市平均=100）</text>
+  <rect x="40" y="72" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="119" r="18" fill="#dc2626"/>
+  <text x="58" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">多く・高く買う（数量も価格も平均より高い）</tspan></text>
+  <text x="90" y="125.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">さといも（数量211・価格129）、しょう油（数量134・価格136）、梨（数量129・</tspan><tspan x="90" dy="22">価格134）</tspan></text>
+  <rect x="40" y="176" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="223" r="18" fill="#dc2626"/>
+  <text x="58" y="229" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="207.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">高く買う（数量は平均並み以下でも単価が高い）</tspan></text>
+  <text x="90" y="229.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">柿（数量88・価格138）、緑茶（数量77・価格127）、ワイン（数量54・価格160）</tspan><tspan x="90" dy="22">、かつお節・削り節（数量62・価格135） ほか1品目</tspan></text>
+  <rect x="40" y="280" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="327" r="18" fill="#dc2626"/>
+  <text x="58" y="333" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="311.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">多く買う（単価は平均並み以下でも量が多い）</tspan></text>
+  <text x="90" y="333.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">塩さけ（数量222・価格94）、たけのこ（数量262・価格78）、さんま（数量181・価</tspan><tspan x="90" dy="22">格93）、はくさい漬（数量154・価格106） ほか41品目</tspan></text>
+  <rect x="40" y="384" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="420" r="18" fill="#dc2626"/>
+  <text x="58" y="426" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="415.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">支出額が大きい（数量・価格とも少し上回る）</tspan></text>
+  <text x="90" y="437.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">生うどん・そば（数量116・価格104）、チーズ（数量116・価格104）</tspan></text>
+</svg>

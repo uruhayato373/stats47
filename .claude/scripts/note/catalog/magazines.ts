@@ -27,7 +27,8 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     isPaid: true,
     description:
       "ターミナル未経験の公務員向けに Claude Code の導入〜実務活用を段階解説する有料マガジン (¥1,980)。",
-    verticals: ["koumuin-claude-code"],
+    // stats47-note に回収された旧URLの有料メンバーも販売継続中。
+    verticals: ["koumuin-claude-code", "stats47-note"],
     noteUrl: "https://note.com/stats47/m/m512ad7023815",
     placeholder: "{{MAGAZINE_URL}}",
   },
@@ -46,8 +47,8 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     name: "自治体職員のための GIS 入門",
     isPaid: false,
     description:
-      "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。note.com 未作成。",
-    verticals: ["koumuin-gis"],
+      "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。",
+    verticals: ["koumuin-gis", "stats47-note"],
     noteUrl: "https://note.com/stats47/m/m599831c3769e",
     placeholder: "{{GIS_MAGAZINE_URL}}",
   },
@@ -70,6 +71,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "社会生活基本調査の行動者率で見る趣味・スポーツ・文化活動 (野球・ヨガ・読書・楽器・書道など) の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/data-p-06",
     noteUrl: "https://note.com/stats47/m/mef7c42c1c86c",
   },
   {
@@ -79,6 +81,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "財政力指数・実質公債費比率・自主財源比率・財政健全化指標・公務員数など、自治体財政と行政の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-06",
     noteUrl: "https://note.com/stats47/m/m30bb1cee28f7",
   },
   {
@@ -88,6 +91,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "県民所得・貯蓄率・消費者物価・費目別支出など、家計と経済の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-01",
     noteUrl: "https://note.com/stats47/m/m2604e003aac4",
   },
   {
@@ -97,6 +101,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "出生率・初婚年齢・人口移動・世帯構造・高齢化など、人口と世帯の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-03",
     noteUrl: "https://note.com/stats47/m/meacbafeb15a1",
   },
   {
@@ -106,6 +111,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "進学率・学力・体力・体格・教育費・図書館など、教育と学びの都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-05",
     noteUrl: "https://note.com/stats47/m/m72e6b89b155e",
   },
   {
@@ -115,6 +121,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "医療・病院・介護・健診・死亡率・平均寿命・社会保障など、健康と福祉の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-04",
     noteUrl: "https://note.com/stats47/m/m83c357247e0c",
   },
   {
@@ -124,6 +131,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "日照時間・気温・降水量・晴天日数・積雪など、気候と自然の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/data-p-07",
     noteUrl: "https://note.com/stats47/m/me574f67ac47f",
   },
   {
@@ -133,6 +141,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "農業産出額・農業所得・漁獲量・畜産・特産品の消費量など、農林水産の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-09",
     noteUrl: "https://note.com/stats47/m/md6aa26278129",
   },
   {
@@ -142,6 +151,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "犯罪・交通事故・警察官数・災害・ごみ・公害など、安全と環境の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-10",
     noteUrl: "https://note.com/stats47/m/md7d4906a40ac",
   },
   {
@@ -151,6 +161,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "賃金・初任給・通勤時間・有効求人倍率・休暇取得など、労働と雇用の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/data-p-02",
     noteUrl: "https://note.com/stats47/m/m4709a61adf77",
   },
   {
@@ -160,6 +171,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "観光入込・宿泊者数・ホテル/旅館・温泉など、観光の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-07",
     noteUrl: "https://note.com/stats47/m/m87e6a79d821b",
   },
   {
@@ -169,6 +181,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "製造品出荷額・工業・商業・小売・店舗数など、産業と商業の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-09",
     noteUrl: "https://note.com/stats47/m/m8c84e9e6e4bd",
   },
   {
@@ -178,6 +191,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "持ち家率・空き家率・家賃・地価・住宅床面積・普及率など、住宅と建設の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/data-p-07",
     noteUrl: "https://note.com/stats47/m/m940fb189a4c0",
   },
   {
@@ -187,6 +201,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "道路・鉄道・駅・港湾・空港・自動車保有など、交通とインフラの都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-08",
     noteUrl: "https://note.com/stats47/m/md9ab5cabf8f8",
   },
   {
@@ -196,6 +211,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "インターネット利用・スマートフォン・情報処理など、情報通信の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-12",
     noteUrl: null,
   },
   {
@@ -205,6 +221,7 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "在留外国人・貿易・訪日外国人など、国際の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-07",
     noteUrl: null,
   },
   {
@@ -214,6 +231,17 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "電力・ガス・水道・再生可能エネルギーなど、エネルギーと水の都道府県ランキングを束ねる無料マガジン。",
     verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-08",
+    noteUrl: "https://note.com/stats47/m/mc659ce45528f",
+  },
+  {
+    key: "s47-kakei-reading",
+    name: "家計調査の読み方｜47都道府県の家計を読み解く",
+    isPaid: false,
+    description:
+      "家計調査の品目別支出から、県庁所在市ごとの暮らしの偏りと、数量と価格・季節性・世代交代といった横断テーマを読む無料マガジン。",
+    verticals: ["stats47-note"],
+    productTarget: "/products/kindle-k-s1-02",
     noteUrl: null,
   },
 ];

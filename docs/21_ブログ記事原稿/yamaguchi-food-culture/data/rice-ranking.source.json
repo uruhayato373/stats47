@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "rice-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "米消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/rice-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug yamaguchi-food-culture --keys rice-consumption-expenditure --data-name rice-ranking",
+  "fetchedAt": "2026-09-05T23:26:17.469Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

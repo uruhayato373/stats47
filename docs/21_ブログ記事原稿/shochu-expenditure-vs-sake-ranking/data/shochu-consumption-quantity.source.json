@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "shochu-consumption-quantity",
+  "year": "2024",
+  "unit": "ml",
+  "label": "焼酎消費数量",
+  "transform": "全47件 (図には使わず、数量×単価の分解を本文で参照するための grounding データ)",
+  "source": "r2:app/ranking/shochu-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/ranking/shochu-consumption-quantity/values.json",
+  "fetchedAt": "2026-09-05T00:00:00.000Z",
+  "generatedBy": "manual (article-writer, quantity x price decomposition backfill)"
+}

@@ -1,0 +1,16 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003348240",
+  "params": {
+    "cdCat01": "050210010",
+    "cdCat02": "03",
+    "cdCat03": "00,01,02,03,04,05",
+    "cdTime": "2024000000"
+  },
+  "year": "2024",
+  "unit": "円",
+  "label": "背広服",
+  "transform": "quintile bars (平均+I〜V or I〜V)",
+  "fetchedAt": "2026-09-05T10:32:04.493Z",
+  "restore": "npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug income-quintile-clothing --name mens-suit --item 050210010 --year 2024"
+}

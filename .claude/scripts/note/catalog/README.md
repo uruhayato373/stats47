@@ -13,7 +13,7 @@ note コーパス全体 (公開済み + ドラフト) の **editorial メタの�
 |---|---|---|
 | 記事本文・画像 | R2 `note/<vertical>/<slug>/` | — |
 | editorial メタ (vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**r2Body**/**stats47Targets**) | **`catalog/data/<vertical>.ts`** | — |
-| マガジン定義 (名称/有料無料/束ねる vertical/URL) | **`catalog/magazines.ts`** | — |
+| マガジン定義 (名称/有料無料/束ねる vertical/URL/商品導線) | **`catalog/magazines.ts`** | 商品導線は記事別 clean path に変換し、サイト到着時だけGA4標準UTMへ転送 |
 | 公開済みインデックス | (派生) | `.claude/state/note-published-urls.json` ← `generate-note-catalog.ts` |
 
 ## ファイル

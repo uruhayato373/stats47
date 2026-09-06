@@ -1,0 +1,31 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003427113",
+  "statsName": "2020年基準 消費者物価指数 品目別 (全国・指数)",
+  "params": {
+    "cdArea": "00000",
+    "cdTab": "1",
+    "cdCat01": "1021,1001,1022"
+  },
+  "items": [
+    {
+      "code": "1021",
+      "label": "食パン"
+    },
+    {
+      "code": "1001",
+      "label": "うるち米A"
+    },
+    {
+      "code": "1022",
+      "label": "あんパン"
+    }
+  ],
+  "year": "2000-2024",
+  "unit": "指数",
+  "label": "食パン・うるち米・あんパンの消費者物価指数 (2000年=100)",
+  "transform": "月次値を暦年で平均 (12 か月そろった年のみ)し、2000年 = 100 で指数化",
+  "source": "estat:0003427113",
+  "restore": "node .claude/scripts/blog/fetch-kakei-monthly.mjs --slug white-bread-price-up-quantity-up --name bread-cpi-index --source cpi --items 1021:食パン,1001:うるち米A,1022:あんパン --layout annual --from 2000-01 --to 2024-12 --index-base 2000 --title \"食パン・うるち米・あんパンの消費者物価指数 (2000年=100)\" --unit \"指数\"",
+  "accessedAt": "2026-09-05"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "happoshu-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "発泡酒・ビール風アルコール飲料消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/happoshu-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug beer-vs-happoshu-shift --keys happoshu-consumption-expenditure --data-name happoshu-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-09-05T08:51:46.897Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

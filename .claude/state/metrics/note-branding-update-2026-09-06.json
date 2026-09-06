@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T05:07:50.473Z",
+  "account": "stats47",
+  "mode": "commit",
+  "profile": {
+    "beforeHeaderImageUrl": "https://assets.st-note.com/production/uploads/images/310830679/wallpaper_landscape_cb81700d14a18b6beada4757c371e76b.png",
+    "needsHeader": false,
+    "afterHeaderImageUrl": "https://assets.st-note.com/production/uploads/images/310830679/wallpaper_landscape_cb81700d14a18b6beada4757c371e76b.png",
+    "status": "verified"
+  },
+  "magazines": [
+    {
+      "key": "koumuin-claude-code",
+      "noteUrl": "https://note.com/stats47/m/m512ad7023815",
+      "before": {
+        "name": "公務員 × Claude Code 実務活用ガイド",
+        "description": "「Claude Code を職場で使いたいけれど、何から始めればいいかわからない」——そんな自治体職員のための、実務特化の全 31 本シリーズです。\n\n環境構築（庁内プロキシの突破）から、議事録・議会答弁・条例レビュー・補助金書類のチェック、個人情報を送らないセキュリティ設定、Excel 集計の自動化、上司への導入説明まで。「ターミナルって何？」というレベルの未経験者でも読める導入記事から、中級の実務適用までをカバーします。\n\nまずは無料記事から。Claude Code が初めての方は「Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド」をどうぞ。",
+        "cover": "https://assets.st-note.com/production/uploads/images/277927596/magazine_cover_large_b91083ac48d758a9678698a833fe6295.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": true,
+      "status": "already_compliant"
+    },
+    {
+      "key": "koumuin-estat-claude-code",
+      "noteUrl": "https://note.com/stats47/m/m1b836e4c8dce",
+      "before": {
+        "name": "公務員のe-Stat×Claude Code実務ガイド",
+        "description": "他自治体比較、議会答弁の根拠データ、県民向け資料——e-Stat で都道府県統計を引く仕事を、検索・取得・整形・派生指標・チャート出力まで Claude Code で完結させる、自治体職員のための実務ガイド(全12本)。API キー取得から Excel/CSV のパース、pandas/DuckDB の集計、議会用チャート生成、月次ルーティンの自動化まで、コピペで動くサンプル付きで解説します。執筆者は Claude Code で47都道府県統計サイト stats47.jp(約2,000ランキングを毎日自動更新)を個人開発・運用。無料3本+有料9本、個別¥300の有料記事が本マガジンなら全部読めます。",
+        "cover": "https://assets.st-note.com/production/uploads/images/285314870/magazine_cover_large_89c8857eb1399cba40c2606265ba3295.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": true,
+      "status": "already_compliant"
+    },
+    {
+      "key": "koumuin-gis",
+      "noteUrl": "https://note.com/stats47/m/m599831c3769e",
+      "before": {
+        "name": "自治体職員のための GIS 入門",
+        "description": "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832181/magazine_cover_large_a26a43ff3c9b7a63557f713227519ff6.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "product-d3-colors",
+      "noteUrl": "https://note.com/stats47/m/mfe0fab2606eb",
+      "before": {
+        "name": "D3.js 地図可視化のための配色完全ガイド",
+        "description": "D3.jsでの地図可視化、最大の悩みである「配色」の正解を網羅した完全ガイドです。\n\nデータ可視化において色は単なる装飾ではなく「情報」です。本マガジンでは、適切な色の選び方（理論）から、TypeScriptですぐに動かせる全98パターンの実装コード（実践）までを体系化しました。\n\n「順序データ」「発散データ」「カテゴリデータ」など、データの性質に合わせた最適なグラデーション選びに迷うことはもうありません。プロのエンジニアやデータアナリストが、辞書代わりに使える「保存版」のリファレンスとしてお届けします。\n\n＼ 実際のアプリで配色を体験できます ／ 本マガジンで解説している配色スキームが、実際の日本地図上でどのように見えるかを確認できる「インタラクティブ・デモサイト」を公開しています。\n\nhttps://nextjs-d3-map.vercel.app/",
+        "cover": "https://assets.st-note.com/production/uploads/images/236478727/magazine_cover_large_37b1624e469520ff7c422057311c8c15.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": true,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-sports-culture",
+      "noteUrl": "https://note.com/stats47/m/mef7c42c1c86c",
+      "before": {
+        "name": "都道府県ランキング｜趣味・スポーツ・文化活動",
+        "description": "社会生活基本調査の行動者率で見る趣味・スポーツ・文化活動 (野球・ヨガ・読書・楽器・書道など) の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310831562/magazine_cover_large_0ce4363bdaa97b3fcab8d076437a1993.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-fiscal",
+      "noteUrl": "https://note.com/stats47/m/m30bb1cee28f7",
+      "before": {
+        "name": "都道府県ランキング｜自治体財政",
+        "description": "財政力指数・実質公債費比率・自主財源比率・財政健全化指標・公務員数など、自治体財政と行政の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832271/magazine_cover_large_80e4a7a70b7ab4e2d271d91ab502b076.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-economy",
+      "noteUrl": "https://note.com/stats47/m/m2604e003aac4",
+      "before": {
+        "name": "都道府県ランキング｜家計・所得・物価",
+        "description": "県民所得・貯蓄率・消費者物価・費目別支出など、家計と経済の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832325/magazine_cover_large_f19d5a540b20717278785c3b0432658a.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-population",
+      "noteUrl": "https://note.com/stats47/m/meacbafeb15a1",
+      "before": {
+        "name": "都道府県ランキング｜人口・世帯",
+        "description": "出生率・初婚年齢・人口移動・世帯構造・高齢化など、人口と世帯の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832411/magazine_cover_large_88d81e48f961aa6d13b3fdbb077a8714.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-education",
+      "noteUrl": "https://note.com/stats47/m/m72e6b89b155e",
+      "before": {
+        "name": "都道府県ランキング｜教育・学び",
+        "description": "進学率・学力・体力・体格・教育費・図書館など、教育と学びの都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832475/magazine_cover_large_698d17b01414eacba6e1abc39e5dadc7.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-health",
+      "noteUrl": "https://note.com/stats47/m/m83c357247e0c",
+      "before": {
+        "name": "都道府県ランキング｜医療・健康・社会保障",
+        "description": "医療・病院・介護・健診・死亡率・平均寿命・社会保障など、健康と福祉の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832527/magazine_cover_large_6d57c3581093d4a5129deb64758f4961.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-climate",
+      "noteUrl": "https://note.com/stats47/m/me574f67ac47f",
+      "before": {
+        "name": "都道府県ランキング｜気候・自然",
+        "description": "日照時間・気温・降水量・晴天日数・積雪など、気候と自然の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832597/magazine_cover_large_5056eb81c0d46042f772b12866c0cd36.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-agriculture",
+      "noteUrl": "https://note.com/stats47/m/md6aa26278129",
+      "before": {
+        "name": "都道府県ランキング｜農林水産",
+        "description": "農業産出額・農業所得・漁獲量・畜産・特産品の消費量など、農林水産の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832668/magazine_cover_large_91f2173a5301b115c3aea0a078096f3b.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-safety",
+      "noteUrl": "https://note.com/stats47/m/md7d4906a40ac",
+      "before": {
+        "name": "都道府県ランキング｜安全・環境",
+        "description": "犯罪・交通事故・警察官数・災害・ごみ・公害など、安全と環境の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310831955/magazine_cover_large_bd91227b366efcf05d0fcdfadbdf67f6.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-labor",
+      "noteUrl": "https://note.com/stats47/m/m4709a61adf77",
+      "before": {
+        "name": "都道府県ランキング｜労働・雇用",
+        "description": "賃金・初任給・通勤時間・有効求人倍率・休暇取得など、労働と雇用の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832717/magazine_cover_large_e10299c79e69d82fb9d90978eb90e0c2.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-tourism",
+      "noteUrl": "https://note.com/stats47/m/m87e6a79d821b",
+      "before": {
+        "name": "都道府県ランキング｜観光・宿泊",
+        "description": "観光入込・宿泊者数・ホテル/旅館・温泉など、観光の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832796/magazine_cover_large_acd8bedc1444ff67df44ba4608eb16e9.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-industry",
+      "noteUrl": "https://note.com/stats47/m/m8c84e9e6e4bd",
+      "before": {
+        "name": "都道府県ランキング｜産業・商業",
+        "description": "製造品出荷額・工業・商業・小売・店舗数など、産業と商業の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832861/magazine_cover_large_01822b10793b68e25f8e45952465e7b5.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-housing",
+      "noteUrl": "https://note.com/stats47/m/m940fb189a4c0",
+      "before": {
+        "name": "都道府県ランキング｜住宅・建設",
+        "description": "持ち家率・空き家率・家賃・地価・住宅床面積・普及率など、住宅と建設の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832909/magazine_cover_large_8351d7acec75e9918487653a4b087fbc.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-infrastructure",
+      "noteUrl": "https://note.com/stats47/m/md9ab5cabf8f8",
+      "before": {
+        "name": "都道府県ランキング｜交通・インフラ",
+        "description": "道路・鉄道・駅・港湾・空港・自動車保有など、交通とインフラの都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310832977/magazine_cover_large_1dd14771aa21ac37b2c1ed8af867f681.png",
+        "defaultCover": false
+      },
+      "needsCover": false,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "status": "already_compliant"
+    },
+    {
+      "key": "s47-energy",
+      "noteUrl": "https://note.com/stats47/m/mc659ce45528f",
+      "before": {
+        "name": "都道府県ランキング｜エネルギー・水",
+        "description": "電力・ガス・水道・再生可能エネルギーなど、エネルギーと水の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://d2l930y2yx77uc.cloudfront.net/assets/default/default_magazine_header-fcef937b52acc29928856475838f16e16c530559fc5e72d04d56d795ceb0dc0f.png",
+        "defaultCover": true
+      },
+      "needsCover": true,
+      "needsName": false,
+      "needsDescription": false,
+      "preservedLiveDescription": false,
+      "after": {
+        "name": "都道府県ランキング｜エネルギー・水",
+        "description": "電力・ガス・水道・再生可能エネルギーなど、エネルギーと水の都道府県ランキングを束ねる無料マガジン。",
+        "cover": "https://assets.st-note.com/production/uploads/images/310833559/magazine_cover_large_826417939f958a40511dc6d0a9d808cb.png",
+        "defaultCover": false
+      },
+      "status": "updated"
+    }
+  ]
+}

@@ -5,9 +5,13 @@ import { promisify } from 'node:util';
 import test from 'node:test';
 
 import {
+  parseContentCrop,
   parsePageSelector,
+  stageStatus,
   validateCropSpec,
+  validateMdPage,
   validateOcrLayout,
+  validatePageImageContract,
 } from '../source-processing.mjs';
 
 const execFileAsync = promisify(execFile);
@@ -26,12 +30,13 @@ test('all source profiles have a restorable processing contract', async () => {
   const readiness = JSON.parse(stdout);
   assert.equal(readiness.ready, true);
   assert.equal(readiness.contractOnly, true);
-  assert.equal(readiness.profiles.length, 4);
+  assert.equal(readiness.profiles.length, 5);
   assert.deepEqual(
     readiness.profiles.map((profile) => profile.profile).sort(),
     [
       'claude-skills-guide-2026',
       'japan-zue',
+      'kakei-marketing-2015',
       'prefecture-databook-2021',
       'prefecture-deviation',
     ]
@@ -111,4 +116,80 @@ test('crop spec requires an internal-only rights and primary-source gate', () =>
       ),
     /primarySourceRequired must be true/
   );
+});
+
+test('page image contract validates dpi, format, quality, and content crop geometry', () => {
+  assert.equal(validatePageImageContract(undefined), null);
+  assert.deepEqual(
+    validatePageImageContract({ dpi: 220, format: 'jpg', quality: 85, contentCrop: '1970x2550+236+268' }),
+    {
+      dpi: 220,
+      format: 'jpg',
+      quality: 85,
+      contentCrop: { geometry: '1970x2550+236+268', width: 1970, height: 2550, x: 236, y: 268 },
+    }
+  );
+  assert.deepEqual(validatePageImageContract({}), { dpi: 180, format: 'png', quality: 85, contentCrop: null });
+  assert.throws(() => validatePageImageContract({ format: 'webp' }), /format must be png or jpg/);
+  assert.throws(() => validatePageImageContract({ dpi: 30 }), /dpi must be an integer/);
+  assert.throws(() => parseContentCrop('1970x2550'), /WxH\+X\+Y/);
+  assert.throws(() => parseContentCrop('0x10+1+1'), /positive/);
+});
+
+test('markdown transcription pages require page/kind frontmatter and existing figure ids', () => {
+  const known = new Set(['p0012-fig-1']);
+  assert.deepEqual(
+    validateMdPage({
+      fileName: 'p0012.md',
+      frontmatter: { page: 12, kind: 'figure', figures: ['p0012-fig-1'] },
+      body: '図の要点',
+      knownFigureIds: known,
+    }),
+    []
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 13, kind: 'text' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /frontmatter.page must be 12/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'poem' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /kind must be one of/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'figure', figures: '[p0099-fig-1]' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /unknown figure id p0099-fig-1/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'table' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /requires figures/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'text' }, body: '  \n', knownFigureIds: known }).join('\n'),
+    /body is empty/
+  );
+  assert.deepEqual(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'blank' }, body: '', knownFigureIds: known }),
+    []
+  );
+  assert.match(validateMdPage({ fileName: 'page12.md', frontmatter: {}, body: '', knownFigureIds: known }).join('\n'), /pNNNN\.md/);
+});
+
+test('stage status derives S0-S4 reach from manifest counts and inventory summary', () => {
+  const manifest = {
+    revision: 2,
+    componentCounts: { markdown: 0, figures: 0, pageImages: 307, ocrRaw: 0, transcripts: 307, pdfs: 1, auxiliary: 1 },
+  };
+  const status = stageStatus(manifest, { input: { pages: 307 }, resolutionCoverage: 1 });
+  assert.deepEqual(status.stages, {
+    s0Preserved: true,
+    s1PageImages: true,
+    s2Transcripts: true,
+    s2Markdown: false,
+    s3Figures: false,
+    s4Inventory: true,
+  });
+  const partial = stageStatus(manifest, { input: { pages: 400 }, resolutionCoverage: 0.5 });
+  assert.equal(partial.stages.s1PageImages, false);
+  assert.equal(partial.stages.s4Inventory, false);
+  assert.equal(stageStatus({ revision: 1, componentCounts: {} }, null).stages.s0Preserved, false);
 });

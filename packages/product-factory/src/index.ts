@@ -17,3 +17,4 @@ export * from "./charts/chart-spec";
 export * from "./licenses/license-text";
 export * from "./maps/prefecture-geometry";
 export * from "./fixtures/sample-dataset";
+export * from "./sales";

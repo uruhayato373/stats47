@@ -40,7 +40,9 @@
     "check:runtime-summaries": "npx tsx scripts/generate-runtime-metric-summaries.ts --check",
     "generate:ranking-prominence": "npx tsx scripts/generate-ranking-prominence.ts",
     "check:ranking-prominence": "npx tsx scripts/generate-ranking-prominence.ts --check",
-    "audit:ranking-hooks": "npx tsx scripts/generate-ranking-prominence.ts --audit"
+    "audit:ranking-hooks": "npx tsx scripts/generate-ranking-prominence.ts --audit",
+    "generate:product-storefront": "npx tsx scripts/generate-product-storefront.ts",
+    "check:product-storefront": "npx tsx scripts/generate-product-storefront.ts --check"
   },
   "dependencies": {
     "@stats47/ai-content": "*",

@@ -1,0 +1,1656 @@
+{
+  "generated_at": "2026-09-06T08:49:09.360Z",
+  "account": "stats47",
+  "minimum": 95,
+  "target": 99,
+  "audit_only": true,
+  "total_indexed": 234,
+  "selected": 234,
+  "summary": {
+    "compliant": 234,
+    "pending": 0,
+    "updated": 0,
+    "skipped_paid": 0,
+    "failed": 0
+  },
+  "articles": [
+    {
+      "slug": "00-claude-code-intro-for-public-servants",
+      "key": "n455ec72c5d62",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "00-estat-claude-code-intro",
+      "key": "n258277f96f88",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "01-claude-code-setup-complete",
+      "key": "nc5126820c00d",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "01-estat-api-key-setup",
+      "key": "nc5a1358141a5",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "02-internal-network-workarounds",
+      "key": "n974a0b7cde75",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "02-search-estat-statsdataid",
+      "key": "n7e4572d23a1b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "03-fetch-prefecture-ranking",
+      "key": "n914ee28ff773",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "03-it-dept-security-doc",
+      "key": "nedcf6ded5c36",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "04-excel-download-and-parse",
+      "key": "n23262330a5e5",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "04-meeting-minutes-30min-to-5min",
+      "key": "n967644e00ad9",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "05-assembly-answer-prompts",
+      "key": "ne4e746d2b0cf",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "05-pandas-duckdb-derived-metrics",
+      "key": "n0477d544669b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "06-ordinance-revision-review",
+      "key": "ne23e18ce9289",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "06-prefecture-code-and-merge",
+      "key": "n7ba7ee560bbb",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "07-official-doc-skills",
+      "key": "n1c78ab40901f",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "07-year-on-year-diff",
+      "key": "n0bd95dda8588",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "08-benchmark-table-5min",
+      "key": "nd4afc48385a3",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "08-proposal-doc-checklist-20",
+      "key": "n59c27bbc973e",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "09-assembly-chart-generation",
+      "key": "nce1681932f40",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "09-assembly-question-points",
+      "key": "nc276079a5317",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "10-ai-without-personal-info",
+      "key": "n9b2109c9f964",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "10-claude-skills-routinize",
+      "key": "n53c16adaf2c7",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "11-hooks-personal-info-masking",
+      "key": "ne54920337944",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "11-mcp-sqlite-search",
+      "key": "n347f923606f1",
+      "status": "compliant",
+      "count": 98,
+      "paid": true
+    },
+    {
+      "slug": "12-audit-ready-settings",
+      "key": "nc53fa60114f8",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "13-ollama-offline-local-llm",
+      "key": "n1e72ba0b4a43",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "14-excel-budget-aggregation",
+      "key": "nc6e02fbe6073",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "15-data-preprocessing-intro",
+      "key": "naf04e81afb7b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "16-subsidy-doc-consistency",
+      "key": "nb62db0d2826f",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "17-year-on-year-analysis",
+      "key": "n5afa58e8e1e4",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "18-pr-magazine-rewrite",
+      "key": "nef4df902db37",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "19-faq-auto-generation",
+      "key": "nb149e4940b5f",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "20-complaint-reply-patterns",
+      "key": "n311eeeba660b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "21-disaster-sns-multilang",
+      "key": "nf01a62d2dc16",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "31-claude-code-how-to-ask",
+      "key": "n159230eb514c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "32-claude-skills-getting-started",
+      "key": "nac5e44284865",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-agricultural-employment-population",
+      "key": "n66a286b5211b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-agricultural-output",
+      "key": "ne6c7d221803a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-average-temperature",
+      "key": "n97ddfadff36a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-avg-propensity-to-consume-worker-households",
+      "key": "n76446d252957",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-consumption-expenditure-multi-person-households-per-month",
+      "key": "n89f8035eb53d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-convenience-store-sales",
+      "key": "n86ef06aa91dc",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-current-liabilities-balance-multi-person-households-per-household",
+      "key": "nbdbde1672cc0",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-day-time-population",
+      "key": "n7a494830e01d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-electricity-demand",
+      "key": "n71b4f712bea4",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-electricity-generation-capacity",
+      "key": "n5b3dbb6c7cef",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-final-energy-consumption-per-capita",
+      "key": "n1374350f7172",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-general-households",
+      "key": "nd93084c0cb0c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-aichi",
+      "key": "nda72a0bed2c4",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-aomori",
+      "key": "n85831c0c47aa",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-hiroshima",
+      "key": "n0be24c40b88d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-kakei-hokkaido",
+      "key": "n39016e5f0002",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-late-elderly-medical-expense-per-insured",
+      "key": "ncd0aea7cd435",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-maximum-temperature",
+      "key": "n91e96edf3950",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-minimum-wage-by-region",
+      "key": "n2a465fecbdec",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-number-of-establishments-manufacturing",
+      "key": "nf28da95897e0",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-private-rental-housing-rent-per-3-3m2",
+      "key": "n27d2efa9bcfb",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-railway-station-count",
+      "key": "nadfe03f70c45",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-road-total-length",
+      "key": "n2e5601e5d4e2",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-room-utilization-rate",
+      "key": "na895280512fc",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-total-fertility-rate",
+      "key": "nf4b16d26f6e8",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-total-overnight-guests",
+      "key": "n4727114e4db6",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "a-vacant-housing-rate",
+      "key": "n002bee397931",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "d-geo-flood-population-mesh",
+      "key": "nfe50fb61efc0",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "d-geo-ipss-prefecture-map",
+      "key": "n137cfc540d23",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "d-geo-land-price-future-population",
+      "key": "n23a2071a016f",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "d-geo-station-access-analysis",
+      "key": "n041e38af8fb5",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "koumuin-gis-01-depopulation-medical",
+      "key": "n686dcc017bbe",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "paid-n0135c75ca76c",
+      "key": "n0135c75ca76c",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n02da130aae01",
+      "key": "n02da130aae01",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n0642ad7f7fdd",
+      "key": "n0642ad7f7fdd",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n066d8687ef00",
+      "key": "n066d8687ef00",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n143a9f6a0050",
+      "key": "n143a9f6a0050",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n2207f3039fd3",
+      "key": "n2207f3039fd3",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n2406ded99484",
+      "key": "n2406ded99484",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n2c2df066e865",
+      "key": "n2c2df066e865",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n2d43e8cd6054",
+      "key": "n2d43e8cd6054",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n2ed31d721531",
+      "key": "n2ed31d721531",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n317c673b1e81",
+      "key": "n317c673b1e81",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n44bedb732274",
+      "key": "n44bedb732274",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n48a11cea7b31",
+      "key": "n48a11cea7b31",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n4b8346d9c17b",
+      "key": "n4b8346d9c17b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n66ffb10aa41b",
+      "key": "n66ffb10aa41b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n67de9d45c426",
+      "key": "n67de9d45c426",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n68eafab07946",
+      "key": "n68eafab07946",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n7290144784d4",
+      "key": "n7290144784d4",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n772ff041af18",
+      "key": "n772ff041af18",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n79fefdbd4d4c",
+      "key": "n79fefdbd4d4c",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n823d76c5cbac",
+      "key": "n823d76c5cbac",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n82a4168eaa19",
+      "key": "n82a4168eaa19",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n8558c1a6503a",
+      "key": "n8558c1a6503a",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n925aa92c4ee4",
+      "key": "n925aa92c4ee4",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n92b846280d1a",
+      "key": "n92b846280d1a",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-n9f666946d105",
+      "key": "n9f666946d105",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-na16afa534c77",
+      "key": "na16afa534c77",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-na76caacd17c3",
+      "key": "na76caacd17c3",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-naa6eba6efec2",
+      "key": "naa6eba6efec2",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-naf942acdbe59",
+      "key": "naf942acdbe59",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nafcc04dcd988",
+      "key": "nafcc04dcd988",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nb17d039bc1aa",
+      "key": "nb17d039bc1aa",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nb216c5776aab",
+      "key": "nb216c5776aab",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nb3c79a94e53a",
+      "key": "nb3c79a94e53a",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nb8f3e05d244b",
+      "key": "nb8f3e05d244b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nba8bf272cc2b",
+      "key": "nba8bf272cc2b",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nbead1fe772c7",
+      "key": "nbead1fe772c7",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-ncab0d7b04228",
+      "key": "ncab0d7b04228",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-ncf695ba6eb35",
+      "key": "ncf695ba6eb35",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nd2fd5adb4bed",
+      "key": "nd2fd5adb4bed",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nd54b2958dc0e",
+      "key": "nd54b2958dc0e",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nd5edff320928",
+      "key": "nd5edff320928",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nead1c21768b5",
+      "key": "nead1c21768b5",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-neecba2a1752d",
+      "key": "neecba2a1752d",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nef7e875ba364",
+      "key": "nef7e875ba364",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nefecfbe76bd2",
+      "key": "nefecfbe76bd2",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nf0c82ce9cee0",
+      "key": "nf0c82ce9cee0",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nf80da34b28c3",
+      "key": "nf80da34b28c3",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nfd3ab8213e1f",
+      "key": "nfd3ab8213e1f",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "paid-nfe2c65e669a8",
+      "key": "nfe2c65e669a8",
+      "status": "compliant",
+      "count": 99,
+      "paid": true
+    },
+    {
+      "slug": "pinned-intro",
+      "key": "na69997771fe5",
+      "status": "compliant",
+      "count": 98,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n023501038bd5",
+      "key": "n023501038bd5",
+      "status": "compliant",
+      "count": 96,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n026bb22ad4eb",
+      "key": "n026bb22ad4eb",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n03844512d58a",
+      "key": "n03844512d58a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n03e45e40d3a7",
+      "key": "n03e45e40d3a7",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n04c2737daf2c",
+      "key": "n04c2737daf2c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n04d95ae14bc1",
+      "key": "n04d95ae14bc1",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n0654ddf27920",
+      "key": "n0654ddf27920",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n08eb33492a93",
+      "key": "n08eb33492a93",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n0b7373c9648a",
+      "key": "n0b7373c9648a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n0e8fd0068d4e",
+      "key": "n0e8fd0068d4e",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n144d350fc14e",
+      "key": "n144d350fc14e",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n14f716fcd76d",
+      "key": "n14f716fcd76d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n15ee88b5169d",
+      "key": "n15ee88b5169d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n1649910097fb",
+      "key": "n1649910097fb",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n16950238dfd8",
+      "key": "n16950238dfd8",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n1b943c7d414d",
+      "key": "n1b943c7d414d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n1e63abcfba72",
+      "key": "n1e63abcfba72",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n218588ef2f67",
+      "key": "n218588ef2f67",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n21cb13582fe6",
+      "key": "n21cb13582fe6",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n24b5000d587f",
+      "key": "n24b5000d587f",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n250b7aab145f",
+      "key": "n250b7aab145f",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n279776fbbbb1",
+      "key": "n279776fbbbb1",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n27cb4242cb67",
+      "key": "n27cb4242cb67",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n285e0ba282d0",
+      "key": "n285e0ba282d0",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n28943c36410a",
+      "key": "n28943c36410a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n2b4298e9ac07",
+      "key": "n2b4298e9ac07",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n361a963fb079",
+      "key": "n361a963fb079",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n36624f1c4134",
+      "key": "n36624f1c4134",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n3908e5981967",
+      "key": "n3908e5981967",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n391d3ef70d29",
+      "key": "n391d3ef70d29",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n3a4efa70c02a",
+      "key": "n3a4efa70c02a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n3a94353f31aa",
+      "key": "n3a94353f31aa",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n3e67c2f80ec1",
+      "key": "n3e67c2f80ec1",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n3e69a23bb946",
+      "key": "n3e69a23bb946",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n3f65c01be9a8",
+      "key": "n3f65c01be9a8",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n46a8eb03072b",
+      "key": "n46a8eb03072b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n48dff1df249f",
+      "key": "n48dff1df249f",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n4d38db115f82",
+      "key": "n4d38db115f82",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n4dae901ea3e8",
+      "key": "n4dae901ea3e8",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n4e1e67f70686",
+      "key": "n4e1e67f70686",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n5158c5766a07",
+      "key": "n5158c5766a07",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n51f946877627",
+      "key": "n51f946877627",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n523b6fbeabdf",
+      "key": "n523b6fbeabdf",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n55cd6de6a733",
+      "key": "n55cd6de6a733",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n567416b632f6",
+      "key": "n567416b632f6",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n578b6e871067",
+      "key": "n578b6e871067",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n581a1409b2c9",
+      "key": "n581a1409b2c9",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n583a06d171e1",
+      "key": "n583a06d171e1",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n5867882dd7ab",
+      "key": "n5867882dd7ab",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n598a096ecbff",
+      "key": "n598a096ecbff",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n5ced125edb74",
+      "key": "n5ced125edb74",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n5ddcfb6bf233",
+      "key": "n5ddcfb6bf233",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n5f183fcf5b97",
+      "key": "n5f183fcf5b97",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n6305d990f2d2",
+      "key": "n6305d990f2d2",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n67729e8be7c4",
+      "key": "n67729e8be7c4",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n68f5e09c8d62",
+      "key": "n68f5e09c8d62",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n6f8a367906d1",
+      "key": "n6f8a367906d1",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n724eab276711",
+      "key": "n724eab276711",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n73a4d300e045",
+      "key": "n73a4d300e045",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n765fc88c67ef",
+      "key": "n765fc88c67ef",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n7ea3a816d39b",
+      "key": "n7ea3a816d39b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n7ff099157abd",
+      "key": "n7ff099157abd",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n80e58a01f660",
+      "key": "n80e58a01f660",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n827191af8c1c",
+      "key": "n827191af8c1c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n863f429319ca",
+      "key": "n863f429319ca",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n88d2a55a9e36",
+      "key": "n88d2a55a9e36",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n8df3cf170cf4",
+      "key": "n8df3cf170cf4",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n91e82ac3b13c",
+      "key": "n91e82ac3b13c",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n93a6656b2096",
+      "key": "n93a6656b2096",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n97bd102186c6",
+      "key": "n97bd102186c6",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n991a75be91ce",
+      "key": "n991a75be91ce",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n99561600d4fe",
+      "key": "n99561600d4fe",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n99f53e7a1f33",
+      "key": "n99f53e7a1f33",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-n9dcb0680cea6",
+      "key": "n9dcb0680cea6",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-na21015ac366d",
+      "key": "na21015ac366d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-na25ccb15a6cb",
+      "key": "na25ccb15a6cb",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-na2720854b1d9",
+      "key": "na2720854b1d9",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-naa474d085c7b",
+      "key": "naa474d085c7b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nabd65a1c893d",
+      "key": "nabd65a1c893d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nafc693255794",
+      "key": "nafc693255794",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nb16c0b751d01",
+      "key": "nb16c0b751d01",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nb2d65c42c28b",
+      "key": "nb2d65c42c28b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nb90f2342ebd8",
+      "key": "nb90f2342ebd8",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nbedecc99f3a3",
+      "key": "nbedecc99f3a3",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nbf1373427ca3",
+      "key": "nbf1373427ca3",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nc0e7474b34e1",
+      "key": "nc0e7474b34e1",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nc18fa33ec65e",
+      "key": "nc18fa33ec65e",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nc60f702445f8",
+      "key": "nc60f702445f8",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ncaddeaf3e2ff",
+      "key": "ncaddeaf3e2ff",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ncbed56eb7c3d",
+      "key": "ncbed56eb7c3d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ncf6086199c7d",
+      "key": "ncf6086199c7d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nd5f8b5072cdb",
+      "key": "nd5f8b5072cdb",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nda04ec118c93",
+      "key": "nda04ec118c93",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ndc600ddb7c44",
+      "key": "ndc600ddb7c44",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nddd927386fce",
+      "key": "nddd927386fce",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nded2d34fc978",
+      "key": "nded2d34fc978",
+      "status": "compliant",
+      "count": 98,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne0d53bfef7ed",
+      "key": "ne0d53bfef7ed",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne31a2574e231",
+      "key": "ne31a2574e231",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne3cdb7819c41",
+      "key": "ne3cdb7819c41",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne4a6ec30706a",
+      "key": "ne4a6ec30706a",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne5b9d2b01255",
+      "key": "ne5b9d2b01255",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne62fa955bcff",
+      "key": "ne62fa955bcff",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne82a6c83ed45",
+      "key": "ne82a6c83ed45",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ne85980349fda",
+      "key": "ne85980349fda",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nead586305cdb",
+      "key": "nead586305cdb",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-ned30a382334d",
+      "key": "ned30a382334d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nefd814b49c5d",
+      "key": "nefd814b49c5d",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nf0c533293f5b",
+      "key": "nf0c533293f5b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nf0fc2a7eb326",
+      "key": "nf0fc2a7eb326",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nf1a5abab3d5e",
+      "key": "nf1a5abab3d5e",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nf5b4ced7a736",
+      "key": "nf5b4ced7a736",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nf962c6702b93",
+      "key": "nf962c6702b93",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nfa4057b9b8de",
+      "key": "nfa4057b9b8de",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nfbdfd99fee1b",
+      "key": "nfbdfd99fee1b",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    },
+    {
+      "slug": "recovered-nfe69996fb5c9",
+      "key": "nfe69996fb5c9",
+      "status": "compliant",
+      "count": 99,
+      "paid": false
+    }
+  ]
+}

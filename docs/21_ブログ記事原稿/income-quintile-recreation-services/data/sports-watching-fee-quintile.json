@@ -1,0 +1,43 @@
+{
+ "title": "スポーツ観覧料（年収五分位別）",
+ "unit": "円",
+ "year": "2024",
+ "data": [
+  {
+   "areaName": "平均",
+   "rank": 0,
+   "value": 1280,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅰ階級（下位20%）",
+   "rank": 1,
+   "value": 467,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅱ階級",
+   "rank": 2,
+   "value": 1177,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅲ階級（中位）",
+   "rank": 3,
+   "value": 1087,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅳ階級",
+   "rank": 4,
+   "value": 1443,
+   "unit": "円"
+  },
+  {
+   "areaName": "第Ⅴ階級（上位20%）",
+   "rank": 5,
+   "value": 2225,
+   "unit": "円"
+  }
+ ]
+}

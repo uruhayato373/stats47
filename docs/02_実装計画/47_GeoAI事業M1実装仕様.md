@@ -2,7 +2,7 @@
 title: GeoAI事業M1実装仕様
 type: implementation-spec
 date: 2026-08-29
-updated: 2026-08-30
+updated: 2026-09-05
 status: active
 related_backlog: null
 tags: [geo, gis, population, x, note, analytics, admin]
@@ -16,56 +16,61 @@ tags: [geo, gis, population, x, note, analytics, admin]
 型付きの実行正典は `packages/data-configs/src/business-plan/m1.ts`、運用確認はローカル管理画面
 `/strategy`、公開サイトの実装は `apps/web/src/app/geo/` とする。
 
-本書の自動承認範囲はローカル実装・テスト・投稿draft登録までである。初回3分析のR2 writeは
+本書の自動承認範囲はローカル実装・テスト・投稿draft登録までである。初回3空間分析のR2 writeは
 2026年8月29日のオーナー明示指示に基づき完了した。Geo X固有画像15枚のexact R2 writeは、画像是正の
 明示指示に基づき2026年8月30日に完了した。本番deploy、X投稿、note公開、GA4 Admin設定は対象と
 検証結果を提示し、対象差分ごとの明示承認後に行う。
 
 ## 1. M1の成功条件
 
-| 面     | 成功条件                                                                 | 機械的な確認先                       |
-| ------ | ------------------------------------------------------------------------ | ------------------------------------ |
-| サイト | `/geo` と4分析が実装され、各分析で47都道府県の実データを表示             | `apps/web` test / type-check / build |
-| 分析   | 入力地図、重ね合わせ、保存則、最終集計、県比較、出典、限界を1画面に持つ | `geo-analysis` test + artifact audit + ローカル表示 |
-| X      | 15投稿がlintを通り、投稿の主張と一致する固有Geo画像・予定日時つきdraftとして台帳に存在 | `.claude/state/sns/posts.json`       |
-| note   | 15商品が価格・記事key・本文有無・公開条件つきでカタログに存在            | note catalog validate                |
-| 計測   | 閲覧、地図操作、県選択、比較追加を別イベントとして送る                   | analytics unit test + GA4台帳        |
-| 管理   | 計画数と実登録数の差、本文有無、GA4登録待ち、公開ゲートを表示            | `http://127.0.0.1:4747/strategy`     |
+| 面     | 成功条件                                                                               | 機械的な確認先                                      |
+| ------ | -------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| サイト | `/geo` と3空間分析を実装し、単一指標の基準値はランキングへ分離する                     | `apps/web` test / type-check / build                |
+| 分析   | 3空間分析が入力地図、重ね合わせ、保存則、最終集計、県比較、出典、限界を1画面に持つ     | `geo-analysis` test + artifact audit + ローカル表示 |
+| X      | 15投稿がlintを通り、投稿の主張と一致する固有Geo画像・予定日時つきdraftとして台帳に存在 | `.claude/state/sns/posts.json`                      |
+| note   | 15商品が価格・記事key・本文有無・公開条件つきでカタログに存在                          | note catalog validate                               |
+| 計測   | 閲覧、地図操作、県選択、比較追加を別イベントとして送る                                 | analytics unit test + GA4台帳                       |
+| 管理   | 計画数と実登録数の差、本文有無、GA4登録待ち、公開ゲートを表示                          | `http://127.0.0.1:4747/strategy`                    |
 
 ## 2. 公開サイト
 
 ### 2.1 URLと検索露出
 
-| URL                                   | 責務                                         | M1の検索状態      |
-| ------------------------------------- | -------------------------------------------- | ----------------- |
-| `/geo`                                | 4分析を束ねる地域分析ハブ                    | `noindex, follow` |
-| `/geo/2050-population`                | 2050年人口分析の問い、地図、比較、方法       | `noindex, follow` |
-| `/geo/population-land-price`          | 人口変化と住宅地地価の都道府県比較           | `noindex, follow` |
-| `/geo/population-flood-risk`          | 人口メッシュと洪水浸水想定区域の重なり       | `noindex, follow` |
-| `/geo/population-station-access`      | 駅800m圏と将来人口の都道府県比較             | `noindex, follow` |
+| URL                                           | 責務                                                | M1の検索状態 |
+| --------------------------------------------- | --------------------------------------------------- | ------------ |
+| `/geo`                                        | 3空間分析を束ねる地域分析ハブ                       | `index`      |
+| `/ranking/future-population-change-rate-2050` | 3分析が共通利用する2050年人口増減率の基準ランキング | `index`      |
+| `/geo/2050-population`                        | 旧URL。上記ランキングへUTMを保持して301転送         | sitemap外    |
+| `/geo/population-land-price`                  | 人口変化と住宅地地価の空間横断分析                  | `index`      |
+| `/geo/population-flood-risk`                  | 人口メッシュと洪水浸水想定区域の重なり              | `index`      |
+| `/geo/population-station-access`              | 駅800m圏と将来人口の空間横断分析                    | `index`      |
 
-4本の実分析は揃った。GA4登録・反映とthin-content監査が揃うまでは、グローバルナビとsitemapへ追加しない。
-M1では直URLで品質を確認できる実画面を成果とし、検索indexを成果に数えない。
+Geo公開集合は`analysisKind=spatial-cross`かつ計算入力2層以上、都道府県より細かいgeometry、
+最終snapshot・manifest・県別途中artifactの3契約を持つ分析だけから生成する。単一指標のbaselineは
+X・横断比較の基準値には利用できるが、Geo記事・Geo件数・sitemapへ含めない。
 
-### 2.2 2050年人口分析
+### 2.2 2050年人口の基準ランキング
 
 - 問い: 2020年から2050年の人口増減率には、どれくらいの地域差があるか。
 - 指標: `future-population-change-rate-2050`。
 - 粒度: 都道府県のみ。47件が揃わない場合は欠損を0にせず警告する。
 - 出典: 国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」。
-- 表示: 正負の県数、全国中央値、最大差、地図、上位5、下位5、最大3県比較。
+- 表示: ランキングの指標ハブへ集約し、地図、全順位、定義、出典、関連記事を提供する。
 - 限界: 推計は将来保証ではない。人口規模と増減率を混同しない。県内の市区町村差は表さない。
+
+都道府県コロプレスと順位だけでは空間演算を行っていないため、Geo分析とは呼ばない。旧URLは
+公開済み・予約済みX投稿のリンクを壊さないため301を維持し、UTM queryをランキングへ引き継ぐ。
 
 2026年8月27日生成snapshotの照合では、東京都+2.50%、秋田県-41.59%、最大差44.09ポイント、
 プラス1都、マイナス46道府県だった。画面の集計値はこの文章を固定値として使わず、R2値から毎回決定的に算出する。
 
 ### 2.3 横断分析3本
 
-| 分析 | 配信snapshot | 検証済み入力 |
-| ---- | ------------ | ------------ |
-| 人口×地価 | `app/geo/population-land-price/item.json` | 人口のある1kmメッシュ177,791件、住宅地標準地点17,890件 |
-| 人口×洪水 | `app/geo/population-flood-risk/item.json` | A31b原典ZIP 94件、洪水ポリゴン3,819,352件 |
-| 人口×駅 | `app/geo/population-station-access/item.json` | 駅グループ9,080件、駅800m圏をメッシュ中心点で近似 |
+| 分析      | 配信snapshot                                  | 検証済み入力                                           |
+| --------- | --------------------------------------------- | ------------------------------------------------------ |
+| 人口×地価 | `app/geo/population-land-price/item.json`     | 人口のある1kmメッシュ177,791件、住宅地標準地点17,890件 |
+| 人口×洪水 | `app/geo/population-flood-risk/item.json`     | A31b原典ZIP 94件、洪水ポリゴン3,819,352件              |
+| 人口×駅   | `app/geo/population-station-access/item.json` | 駅グループ9,080件、駅800m圏をメッシュ中心点で近似      |
 
 3snapshotは47都道府県のcoverageを必須とし、欠損・重複・入力不足では画面をfail-closedにする。
 原典GISとSHA-256 manifestは`gis/mlit-ksj/`、配信用の小さい分析結果は`app/geo/`へ分離した。
@@ -104,8 +109,8 @@ Xは`/geo/population-station-access/<NN>/population|overlap|audit`へ着地さ�
 
 ```text
 M1
-├── routes[5]          /geo のURL・検索状態・受入条件
-├── analyses[4]        kind・sourceLayers・spatialOperations・metricKeys・R2 key・caveat
+├── routes[6]          /geo のURL・検索状態・受入条件（基準ランキングは除外）
+├── analyses[4]        baseline 1系列 + spatial-cross 3分析
 ├── xPosts[15]         Geo role・analysisIds・claimMetric・caption・UTM・Geo画像仕様
 ├── noteProducts[15]   articleKey・価格・読者成果・deliverable・公開条件
 ├── eventIds[4]        事業イベントから実装イベントへの参照
@@ -115,6 +120,8 @@ M1
 
 各`sourceLayer`は`calculation-input`または`context-only`を宣言し、`usedInCalculation`と矛盾できない。
 途中artifactを持つ分析は`evidenceManifestKey`と`detailR2KeyPattern`を両方持ち、片方だけの定義をvalidatorが拒否する。
+Geo公開集合`BUSINESS_PLAN_M1_GEO_ANALYSES`はspatial-crossだけを保持し、計算入力2層以上、細粒度geometry、
+R2 snapshot・manifest・県別artifactの欠落をvalidatorとunit testが拒否する。
 
 Authored設定はgit TS、ランキング観測値はR2、X投稿実績は`.claude/state/sns/posts.json`、
 note本文はR2という既存境界を維持する。管理画面用の第三の台帳や永続DBは作らない。
@@ -125,6 +132,7 @@ note本文はR2という既存境界を維持する。管理画面用の第三�
 ランキング投稿への退行を防ぐため、構成を`baseline=3 / spatial cross=9 / method=2 / decision=1`に固定する。
 baselineは単一指標の入口、crossは人口×地価・人口×洪水・人口×駅を各3件、methodは空間演算と限界、
 decisionは3分析の統合判断を担当する。一般の`post-x-batch`候補選定へGeoを混ぜない。
+baseline投稿のcanonicalはGeo旧URLではなく2050年人口増減率ランキングとする。
 生成・検証・登録は次の順序を固定する。
 
 ```bash
@@ -187,7 +195,8 @@ M1で本文制作を進める先頭2件は「IPSS将来人口を都道府県地�
 管理画面はローカル読み取りビューである。表示のために別stateへコピーせず、各SSOTを直接照合する。
 API routeはGETだけとし、caption編集、draft登録、予約、即時投稿、dry-run、レンダ、R2 push、再生成、
 子プロセス起動を持たない。実行は`/operate-geo-content`と各owner agent/skillに限定する。
-M1ボードでは4分析、X 15件、note 15件、4イベントを個別行で確認し、ローカルPASSと外部操作待ちを分けて表示する。
+M1ボードではbaseline 1系列とspatial-cross 3分析を区別し、X 15件、note 15件、4イベントを個別行で確認する。
+公開サイトのGeo件数はspatial-cross 3分析だけを数え、ローカルPASSと外部操作待ちを分けて表示する。
 
 ## 8. 公開判定
 

@@ -47,7 +47,7 @@ interface ProductManifest {
 const archiveDate = new Date('1980-01-01T00:00:00.000Z');
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
-const pipelinePath = path.join(repoRoot, '.local/r2/app/geo/content-pipeline/items.json');
+const pipelinePath = path.join(repoRoot, '.local/geo-content-pipeline/items.json');
 const outputRoot = path.join(repoRoot, '.local/geo-products');
 const remoteBase = process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
 const args = process.argv.slice(2);

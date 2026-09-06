@@ -8,16 +8,15 @@ import {
   CircleMarker,
   GeoJSON,
   MapContainer,
+  Popup,
   TileLayer,
   Tooltip,
   useMap,
 } from 'react-leaflet';
 
-import { useThemedLeafletTile } from '@/features/map-visualization/client';
-
-import { useTheme } from '@/hooks/useTheme';
-
 import { buildGeoStationAccessMapModel } from '../lib/build-geo-station-access-map-model';
+import { GEO_BASEMAP } from '../lib/geo-basemap';
+
 
 import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
 import type { GeoStationAccessPrefDetail } from '@stats47/gis';
@@ -61,8 +60,6 @@ function escapeHtml(value: string): string {
 
 /** 県内1kmメッシュを人口変化または駅800m圏で切り替えて表示する。 */
 export function GeoStationAccessLeafletMap({ detail, view }: Props) {
-  const { theme } = useTheme();
-  const { currentTile } = useThemedLeafletTile(theme);
   const model = useMemo(
     () =>
       buildGeoStationAccessMapModel(
@@ -98,13 +95,13 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
       preferCanvas
       center={[36.5, 137.5]}
       zoom={6}
-      minZoom={4}
+      minZoom={GEO_BASEMAP.minZoom}
       maxZoom={14}
-      scrollWheelZoom
-      className="h-[480px] overflow-hidden rounded-md lg:h-[620px]"
+      scrollWheelZoom={false}
+      className="h-[480px] overflow-hidden rounded-none lg:h-[620px]"
       aria-label={`${detail.areaName}の1kmメッシュ分析地図`}
     >
-      <TileLayer url={currentTile.url} attribution={currentTile.attribution} />
+      <TileLayer url={GEO_BASEMAP.url} attribution={GEO_BASEMAP.attribution} />
       <GeoJSON
         key={`${detail.areaCode}-${view}`}
         data={model.featureCollection}
@@ -115,6 +112,9 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
             `<strong>${escapeHtml(String(properties.meshId))}</strong><br>2020年 ${Number(properties.population2020).toLocaleString('ja-JP')}人<br>2050年 ${Number(properties.population2050).toLocaleString('ja-JP')}人<br>変化率 ${properties.changeRate === null ? '算出不可' : `${properties.changeRate}%`}<br>${properties.accessible ? '駅800m圏内' : '駅800m圏外'}`,
             { sticky: true }
           );
+          const popup = document.createElement('span');
+          popup.textContent = `メッシュ ${String(properties.meshId)}：2020年 ${Number(properties.population2020).toLocaleString('ja-JP')}人 → 2050年 ${Number(properties.population2050).toLocaleString('ja-JP')}人。${properties.accessible ? '中心点が駅800m圏内' : '中心点が駅800m圏外'}`;
+          layer.bindPopup(popup);
         }}
       />
       {view === 'overlap'
@@ -131,6 +131,7 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
               }}
             >
               <Tooltip>{name}</Tooltip>
+              <Popup>{name}（駅代表点。駅入口ではありません）</Popup>
             </CircleMarker>
           ))
         : null}

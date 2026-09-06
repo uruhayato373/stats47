@@ -229,7 +229,9 @@ function assertOutsideRepository(target, label) {
 }
 
 function normalizeRelative(filePath) {
-  const normalized = filePath.split(path.sep).join('/');
+  // macOS の bsdtar は展開時に NFD で書き出すため、manifest(NFC) と実ファイル一覧の照合が同名で食い違う。
+  // 双方をここで NFC に揃える (2026-09-05 に日本語ファイル名の restore が「missing / unexpected」で失敗した)。
+  const normalized = filePath.split(path.sep).join('/').normalize('NFC');
   if (
     normalized === '' ||
     normalized.startsWith('/') ||

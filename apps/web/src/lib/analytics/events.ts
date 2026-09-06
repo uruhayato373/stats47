@@ -239,6 +239,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  *   OFF は「見るのをやめた」だけで関心の表明ではないため、送ると ON/OFF が
  *   相殺されて「どの指標が見られたか」が読めなくなる
  * - `category_sidebar`: category ページ左のカテゴリナビ（home と同じリストの別配置）
+ * - `product_catalog`: 商品一覧から商品詳細への導線
+ * - `blog_product`: ブログ本文末の商品詳細への文脈一致導線
  *
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
  * (`.claude/rules/analytics-event-standards.md` §2)。
@@ -260,6 +262,8 @@ export type NavSurface =
   | 'theme_kpi_switcher'
   | 'theme_evidence'
   | 'category_sidebar'
+  | 'product_catalog'
+  | 'blog_product'
   | 'ranking_survey'
   | 'category_survey'
   | 'theme_survey'

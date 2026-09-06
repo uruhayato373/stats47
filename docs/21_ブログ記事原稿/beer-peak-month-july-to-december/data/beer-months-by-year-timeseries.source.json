@@ -1,0 +1,23 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003343671",
+  "statsName": "家計調査 家計収支編 二人以上の世帯 品目分類(2020年改定) 月次 (金額)",
+  "params": {
+    "cdArea": "00000",
+    "cdCat02": "03",
+    "cdCat01": "011100030"
+  },
+  "items": [
+    {
+      "code": "011100030",
+      "label": "ビール"
+    }
+  ],
+  "year": "2000,2012,2024",
+  "unit": "円",
+  "label": "ビール支出額の月別パターン (二人以上の世帯・全国)",
+  "transform": "指定年 (2000, 2012, 2024) の月次値を月ごとに並べた季節パターン",
+  "source": "estat:0003343671",
+  "restore": "node .claude/scripts/blog/fetch-kakei-monthly.mjs --slug beer-peak-month-july-to-december --name beer-months-by-year --source kakei-expenditure --items 011100030:ビール --layout months-by-year --from 2000-01 --to 2024-12 --years 2000,2012,2024 --title \"ビール支出額の月別パターン (二人以上の世帯・全国)\" --unit \"円\"",
+  "accessedAt": "2026-09-05"
+}

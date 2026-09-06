@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T17:18:47+09:00",
+  "account": "stats47",
+  "objective": "実記事が1〜2本だった5マガジンを、サイト指標由来のnote Aシリーズで各3本以上へ拡充する",
+  "selectionGate": {
+    "prefectureRows": 47,
+    "rankingPageStatus": 200,
+    "r2ObservationStatus": 200,
+    "duplicateNoteTarget": false,
+    "minimumPublishedHashtags": 95
+  },
+  "magazines": [
+    {
+      "key": "s47-tourism",
+      "noteKey": "m87e6a79d821b",
+      "before": 2,
+      "after": 3,
+      "added": ["a-total-overnight-guests"]
+    },
+    {
+      "key": "s47-industry",
+      "noteKey": "m8c84e9e6e4bd",
+      "before": 2,
+      "after": 3,
+      "added": ["a-convenience-store-sales"]
+    },
+    {
+      "key": "s47-housing",
+      "noteKey": "m940fb189a4c0",
+      "before": 1,
+      "after": 3,
+      "added": [
+        "a-vacant-housing-rate",
+        "a-private-rental-housing-rent-per-3-3m2"
+      ]
+    },
+    {
+      "key": "s47-infrastructure",
+      "noteKey": "md9ab5cabf8f8",
+      "before": 1,
+      "after": 3,
+      "added": ["a-railway-station-count", "a-road-total-length"]
+    },
+    {
+      "key": "s47-energy",
+      "noteKey": "mc659ce45528f",
+      "before": 1,
+      "after": 3,
+      "added": [
+        "a-electricity-demand",
+        "a-final-energy-consumption-per-capita"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "key": "a-total-overnight-guests",
+      "noteUrl": "https://note.com/stats47/n/n4727114e4db6",
+      "magazine": "s47-tourism",
+      "hashtags": 99
+    },
+    {
+      "key": "a-convenience-store-sales",
+      "noteUrl": "https://note.com/stats47/n/n86ef06aa91dc",
+      "magazine": "s47-industry",
+      "hashtags": 99
+    },
+    {
+      "key": "a-vacant-housing-rate",
+      "noteUrl": "https://note.com/stats47/n/n002bee397931",
+      "magazine": "s47-housing",
+      "hashtags": 99
+    },
+    {
+      "key": "a-private-rental-housing-rent-per-3-3m2",
+      "noteUrl": "https://note.com/stats47/n/n27d2efa9bcfb",
+      "magazine": "s47-housing",
+      "hashtags": 99
+    },
+    {
+      "key": "a-railway-station-count",
+      "noteUrl": "https://note.com/stats47/n/nadfe03f70c45",
+      "magazine": "s47-infrastructure",
+      "hashtags": 99
+    },
+    {
+      "key": "a-road-total-length",
+      "noteUrl": "https://note.com/stats47/n/n2e5601e5d4e2",
+      "magazine": "s47-infrastructure",
+      "hashtags": 99
+    },
+    {
+      "key": "a-electricity-demand",
+      "noteUrl": "https://note.com/stats47/n/n71b4f712bea4",
+      "magazine": "s47-energy",
+      "hashtags": 99
+    },
+    {
+      "key": "a-final-energy-consumption-per-capita",
+      "noteUrl": "https://note.com/stats47/n/n1374350f7172",
+      "magazine": "s47-energy",
+      "hashtags": 99
+    }
+  ],
+  "navigation": {
+    "updatedNewArticles": 8,
+    "updatedExistingArticles": [
+      "a-electricity-generation-capacity",
+      "recovered-ne0d53bfef7ed"
+    ],
+    "siteLinksUseTrackingParameters": false,
+    "measurement": "GA4 sessionSource=note.com × landingPagePlusQueryString"
+  },
+  "liveAudit": {
+    "articles": 234,
+    "errors": 0,
+    "warnings": 0,
+    "hashtagsAtLeast95": 234,
+    "exactMagazineMemberships": "19/19",
+    "thinMagazines": 0,
+    "defaultMagazineCovers": 0,
+    "siteUrlsChecked": 236,
+    "catalogLiveParity": "234/234"
+  },
+  "concurrentPublicationClosure": {
+    "repairedPublishedBody": "a-kakei-aomori",
+    "hashtagUpdates": [
+      "a-kakei-aichi",
+      "a-kakei-aomori",
+      "a-kakei-hokkaido",
+      "a-kakei-hiroshima"
+    ],
+    "navigationUpdates": [
+      "recovered-n03e45e40d3a7",
+      "a-kakei-aichi",
+      "a-kakei-aomori",
+      "a-kakei-hokkaido",
+      "a-kakei-hiroshima"
+    ],
+    "economyMagazineMembersAdded": 4
+  },
+  "r2Sync": {
+    "status": "pending-ci",
+    "dryRunCandidates": 12,
+    "errors": 0,
+    "reason": "無料公開記事のR2反映はdevelop pushで起動するsync-note-r2 workflowが所有する"
+  }
+}

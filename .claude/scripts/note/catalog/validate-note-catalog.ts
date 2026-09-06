@@ -10,7 +10,12 @@
 import { existsSync, readFileSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { NOTE_ARTICLES, NOTE_MAGAZINE_KEYS, getMagazine } from "./index";
+import {
+  NOTE_ARTICLES,
+  NOTE_MAGAZINES,
+  NOTE_MAGAZINE_KEYS,
+  getMagazine,
+} from "./index";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
@@ -45,10 +50,34 @@ try {
   warns.push("KNOWN_RANKING_KEYS を読めず stats47Targets の実在検証をスキップ");
 }
 
+// Web商品ハブの生成物から、noteカードに出してよい公開商品だけを読む。
+let storefrontTargets = new Set<string>();
+try {
+  const src = readFileSync(
+    join(ROOT, "apps/web/src/features/products/storefront.generated.ts"),
+    "utf8",
+  );
+  for (const match of src.matchAll(/"slug":\s*"([a-z0-9-]+)"/g)) {
+    storefrontTargets.add(`/products/${match[1]}`);
+  }
+} catch {
+  errors.push("商品ストア生成物を読めず productTarget を検証できない");
+}
+
+for (const magazine of NOTE_MAGAZINES) {
+  if (!magazine.productTarget) continue;
+  if (!/^\/products\/[a-z0-9-]+$/.test(magazine.productTarget)) {
+    errors.push(`${magazine.key}: productTarget は query/hash 無しの商品パス必須 (${magazine.productTarget})`);
+  } else if (!storefrontTargets.has(magazine.productTarget)) {
+    errors.push(`${magazine.key}: productTarget が公開商品ストアに不在 (${magazine.productTarget})`);
+  }
+}
+
 // 1. key 重複 (vertical 横断で一意であること)
 const seen = new Map<string, number>();
 for (const a of NOTE_ARTICLES) seen.set(a.key, (seen.get(a.key) || 0) + 1);
 for (const [key, n] of seen) if (n > 1) errors.push(`key 重複: "${key}" が ${n} 回`);
+const articlesByKey = new Map(NOTE_ARTICLES.map((article) => [article.key, article]));
 
 // 2. title 重複 (recovered-* 等の実質重複を surface)
 const titleSeen = new Map<string, string[]>();
@@ -143,6 +172,12 @@ for (const a of NOTE_ARTICLES) {
   // 5. published は noteUrl 必須
   if (a.status === "published" && !a.noteUrl)
     errors.push(`${a.key}: status=published だが noteUrl なし`);
+  if (
+    a.noteUrl &&
+    !/^https:\/\/note\.com\/stats47\/n\/n[0-9a-f]+$/i.test(a.noteUrl)
+  ) {
+    errors.push(`${a.key}: noteUrl が stats47 公開記事URL形式ではない (${a.noteUrl})`);
+  }
 
   // 6. isPaid=true は priceJpy>0 が望ましい (warn)
   if (a.isPaid && (!a.priceJpy || a.priceJpy <= 0))
@@ -156,6 +191,43 @@ for (const a of NOTE_ARTICLES) {
       if (!knownKeys.has(key))
         warns.push(`${a.key}: stats47Targets "${t}" は KNOWN_RANKING_KEYS に不在`);
     }
+  }
+
+  // 8. nextBestArticle は公開済みの別記事を参照する。
+  if (a.nextBestArticle) {
+    const next = articlesByKey.get(a.nextBestArticle);
+    if (!next) errors.push(`${a.key}: nextBestArticle "${a.nextBestArticle}" が catalog に不在`);
+    else if (next.key === a.key) errors.push(`${a.key}: nextBestArticle が自分自身を参照`);
+    else if (next.status !== "published" || !next.noteUrl)
+      errors.push(`${a.key}: nextBestArticle "${a.nextBestArticle}" が未公開`);
+  }
+
+  // 9. 公開本文のリンク修復は query 無しの stats47 HTTPS URL だけを許可する。
+  for (const repair of a.publishedLinkRepairs || []) {
+    for (const [label, value] of [
+      ["fromUrl", repair.fromUrl],
+      ["toUrl", repair.toUrl],
+    ] as const) {
+      try {
+        const url = new URL(value);
+        if (
+          url.protocol !== "https:" ||
+          url.hostname !== "stats47.jp" ||
+          url.search ||
+          url.hash
+        ) {
+          errors.push(
+            `${a.key}: publishedLinkRepairs.${label} は query 無し stats47 HTTPS URL 必須 (${value})`,
+          );
+        }
+      } catch {
+        errors.push(`${a.key}: publishedLinkRepairs.${label} が不正 (${value})`);
+      }
+    }
+    if (repair.fromUrl === repair.toUrl)
+      errors.push(`${a.key}: publishedLinkRepairs の from/to が同一`);
+    if (repair.mode === "replace-card" && !repair.linkText.trim())
+      errors.push(`${a.key}: replace-card の linkText が空`);
   }
 }
 

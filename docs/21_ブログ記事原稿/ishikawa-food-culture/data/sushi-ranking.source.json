@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sushi-dining-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "すし(外食)消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sushi-dining-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ishikawa-food-culture --keys sushi-dining-consumption-expenditure --data-name sushi-ranking",
+  "fetchedAt": "2026-09-05T15:56:25.581Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

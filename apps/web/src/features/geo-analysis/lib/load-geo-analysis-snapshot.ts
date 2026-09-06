@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { FLOOD_ARCHIVES } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
 import {
@@ -7,6 +8,8 @@ import {
   type GeoAnalysisSnapshot,
   type GeoCrossAnalysisSlug,
 } from './geo-cross-analysis';
+import { loadGeoAnalysisManifest } from './load-geo-analysis-evidence';
+
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -64,7 +67,7 @@ export function parseGeoAnalysisSnapshot(
     if (
       !isRecord(row) ||
       typeof row.areaCode !== 'string' ||
-      !/^\d{2}000$/.test(row.areaCode) ||
+      !/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(row.areaCode) ||
       typeof row.areaName !== 'string' ||
       typeof row.rank !== 'number' ||
       !isRecord(row.values) ||
@@ -76,7 +79,7 @@ export function parseGeoAnalysisSnapshot(
     const rowValues = row.values;
     return [...metricKeys].every((key) => {
       const metricValue = rowValues[key];
-      return metricValue === null || typeof metricValue === 'number';
+      return metricValue === null || typeof metricValue === 'number' && Number.isFinite(metricValue);
     });
   });
   const sourcesValid = value.sources.every(
@@ -103,6 +106,14 @@ export function parseGeoAnalysisSnapshot(
     return null;
   }
 
+  // 旧県別併置snapshotを新しい空間分析の説明と混ぜない。
+  if (expectedSlug === 'population-land-price' && value.primaryMetricKey !== 'risingDecliningPointShare') return null;
+  // 旧94件は河川区分10が欠落。manifestを使わない比較・area/themeにも配信しない。
+  if (expectedSlug === 'population-flood-risk' && (
+    !isRecord(value.dataQuality.inputCounts) ||
+    value.dataQuality.inputCounts.floodZipFiles !== FLOOD_ARCHIVES.length
+  )) return null;
+
   return value as unknown as GeoAnalysisSnapshot;
 }
 
@@ -114,7 +125,12 @@ export async function loadGeoAnalysisSnapshot(
     const value = await fetchFromR2AsJson<unknown>(
       `app/geo/${config.slug}/item.json`
     );
-    return parseGeoAnalysisSnapshot(value, slug);
+    const snapshot = parseGeoAnalysisSnapshot(value, slug);
+    if (slug === 'population-flood-risk') {
+      const manifest = await loadGeoAnalysisManifest(slug);
+      if (!manifest || snapshot?.generatedAt !== manifest.generatedAt) return null;
+    }
+    return snapshot;
   } catch {
     return null;
   }

@@ -52,7 +52,7 @@ const METRICS_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics")
 const PREFS_PATH = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
 const GEO_CONTENT_PIPELINE_PATH = path.join(
   PROJECT_ROOT,
-  ".local/r2/app/geo/content-pipeline/items.json",
+  ".local/geo-content-pipeline/items.json",
 );
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 

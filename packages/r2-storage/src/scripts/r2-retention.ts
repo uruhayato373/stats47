@@ -32,6 +32,24 @@ interface RetentionTarget {
   reason: string;
 }
 
+/** 公式ページで `non-commercial` と確認済みで、public mirrorを撤去するKSJ。 */
+const NONCOMMERCIAL_KSJ_DATA_IDS = [
+  "C02",
+  "C09",
+  "C23",
+  "P03",
+  "P12",
+  "P13",
+  "P17",
+  "P18",
+  "P35",
+  "W01",
+  "W05",
+] as const;
+const NONCOMMERCIAL_KSJ_PREFIXES = new Set(
+  NONCOMMERCIAL_KSJ_DATA_IDS.map((dataId) => `gis/mlit-ksj/${dataId}/`),
+);
+
 /**
  * 削除してよい prefix の allowlist。
  *
@@ -93,6 +111,18 @@ const RETENTION_TARGETS: RetentionTarget[] = [
     reason: "同上",
   },
   {
+    id: "retired-geo-content-pipeline",
+    prefix: "app/geo/content-pipeline/",
+    reason:
+      "販売・媒体展開の運用台帳でWeb readerが無い。.local/geo-content-pipeline/へ移行済み",
+  },
+  ...NONCOMMERCIAL_KSJ_DATA_IDS.map((dataId) => ({
+    id: `license-remediation-ksj-${dataId.toLowerCase()}`,
+    prefix: `gis/mlit-ksj/${dataId}/`,
+    reason:
+      "公式利用条件がnon-commercialのためpublic R2 source mirrorを撤去し、ローカル処理だけに限定する",
+  })),
+  {
     id: "retired-youtube-master-station-passengers",
     prefix: "video/station-passengers-47/",
     reason:
@@ -141,9 +171,13 @@ function assertTargetsAreSafe(): void {
       throw new Error(`[unsafe target] prefix must end with "/": ${target.prefix}`);
     }
     for (const protectedPrefix of PROTECTED_PREFIXES) {
+      const isExactLicenseRemediation =
+        protectedPrefix === "gis/" &&
+        NONCOMMERCIAL_KSJ_PREFIXES.has(target.prefix);
       if (
-        target.prefix.startsWith(protectedPrefix) ||
-        protectedPrefix.startsWith(target.prefix)
+        !isExactLicenseRemediation &&
+        (target.prefix.startsWith(protectedPrefix) ||
+          protectedPrefix.startsWith(target.prefix))
       ) {
         throw new Error(
           `[unsafe target] "${target.prefix}" overlaps protected prefix "${protectedPrefix}"`,
