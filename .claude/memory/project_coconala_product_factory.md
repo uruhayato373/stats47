@@ -1,23 +1,24 @@
 ---
 name: project_coconala_product_factory
-description: ココナラ商品ファクトリー (packages/product-factory) の SSOT・生成パイプライン・限界・正典の在り処
-metadata: 
-  node_type: memory
-  type: project
-  originSessionId: 8c542fb3-8f47-42d1-ba69-1e326eda9b9d
-  modified: 2026-07-23T00:47:39.214Z
+description: 商品設計・公開記録・固定納品版・販売準備を分離するproduct-factoryの正典
+type: project
 ---
 
-ココナラで stats47 の都道府県データ商品を売るための商品ファクトリー。**新規 `packages/product-factory/`**（`@stats47/product-factory`・raw TS・vitest/tsx）。
+**問題**: 商品カタログのgeneratedやmanifest存在を販売準備完了と混同し、旧版や古い商品件数を現行仕様として案内していた。
 
-**★2026-07-23 破壊的縮約: 旧174商品 (A-01〜L-07) → テーマ別13パック (P-01〜P-13) に集約**（同一テーマが family 横断で重複していたため。pptx+xlsx+csv+pdf を1パックに同梱）。型は `family`→`theme`(PackTheme 13slug)、`datasets`(実データ接続台帳)/`variantOptions`(旧K系ライセンス違い)/`sourceIds` 追加。カタログは `src/catalog/products/packs.ts` 1本（旧12ファイル削除）。**P-01=人口・世帯パックのみ実データ接続済**（旧 D-01 の4データセット継承・byte 非回帰）。P-02〜P-13 は datasets 未接続=status cataloged=**出品不可**（validator が approved/listed パックの datasets 実在を検査=誇大表示防止）。ビルドは databook 経路標準化（pptx 複数指標対応 `databook-pptx.ts` 追加）。検証 green: tsc / catalog --check(13) / vitest 25 / build-all 13。未コミット。
+**原因**: 設計status・外部公開state・納品物の品質を同じ欄で表現し、メモが過去の生成件数とコマンドを複製していた。Kindle監査もv1を再生成していた。
 
-**正典**: `.claude/rules/coconala-product-standards.md` + `packages/product-factory/README.md`。商品案の由来は `packs.ts` の `sourceIds`（旧 A-01〜L-07、初期調査はGit履歴）。
+**対策**: 商品定義は `packages/product-factory/src/catalog/` とKindle/GeoのTSを読む。外部公開記録は `.claude/config/{coconala,kdp}-listings.json`、納品版は `_delivery` のmanifest SHAを参照する。横断一覧は `products:report` が同じTSと証跡から生成する `.claude/state/products/catalog-status.json`。件数・状態を本メモへ複製しない。人間向けは `.local/product-portfolio/catalog.{html,csv}`。
 
-**SSOT（完全DBレス準拠）**: 商品定義=git TS（`src/catalog/`）/ 実データ=R2 観測値→git TS スナップショット（`src/data/datasets/*.ts`・基準年固定。取得は `src/data/load-ranking-values.ts`）/ 生成バイナリ=`.local/coconala-products/<id>/<version>/`（**git 管理外・計584M**・手編集を正典にしない・公開R2へ置かない）/ 台帳=`.claude/state/products/catalog-status.json`。永続D1なし・公開R2書込みなし。
+**安全条件**: Kindleは `--version <NEW_VERSION>` で生成し既存版を上書きしない。全予定キーの欠落をmetadataに記録する。内部の書き下ろし比率・本文量、EPUB構造、意味レビュー、Previewer、暗号化版保全、公開承認を別ゲートにする。30%はAmazonの許諾基準ではない。監査の `verify-publishable.mts --apply` は拒否する。
 
-**生成**: `products:generate --all`（~10分・174商品）/ `--id <ID>`（単品）/ `products:catalog --check` / `products:report`。ジェネレータ: pptx（**pptxgenjs custGeom で県別再着色できる地図** + ネイティブチャート）/ xlsx（**exceljs・RANK 数式・ネイティブチャート/塗り分け地図は不可→Excel 挿入手順を案内**）/ csv(BOM) / svg+png / manual.pdf（pdf-lib+NotoSansJP subset）。
+**証拠**: `packages/product-factory/README.md`、`.claude/rules/coconala-product-standards.md`、`tests/{sales-catalog,kindle-revision,kindle-ranking-label,kindle-verify-cli}.test.ts`（2026-09-06）。未完了作業は `.claude/todo/backlog.md`。
 
-**★限界（次の磨き込み）**: (1) **P-02〜P-13 は未接続=共通デモデータ**（日本人人口2024）。実指標接続が出品の律速（各パックに datasets を定義→data-ingester で接続→status 昇格）。(2) **note チャネル凍結中**（PACKS_MIGRATION で tsconfig/vitest exclude・未公開のため実害なし。1パック=1記事の再設計が残タスク）。(3) **Office 実機未検証**（環境に PowerPoint/Excel が無く OOXML 構造検証のみ。オーナーが Windows でまとめて検証する方針）。(3) 地図は概略海岸線・沖縄インセット未実装。docx/web は未対応スキップ。
+**PDF表示の問題**: 小さな日本語データブックで、pdftotextは全文を返すのにPoppler描画では文字の大半が消えた。
+**原因**: 同一内容でNoto JPのsubset埋め込みだけを無効化すると全4ページの文字が復帰した。pdf-lib issue #1232の既知症状とも一致する。
+**対策**: `databook-pdf.ts`はフォント全体を埋め込み、`tests/free-sample.test.ts`で埋め込み原本バイト一致を検証する。抽出テキストだけを根拠にPDF表示PASSにせず、最終ページ画像を確認する。旧納品物は上書きしない。
+**証拠**: https://github.com/Hopding/pdf-lib/issues/1232 、`tests/free-sample.test.ts`（2026-09-06）。
 
-**構造化（2026-07-18 作成済）**: 正典 rule `.claude/rules/coconala-product-standards.md` / skill `/build-coconala-product`（`.claude/skills/product/`）/ agent `coconala-product-manager`（README Tier5 登録）。恒久 workflow(CI) は未作成（生成は手動 CLI）。**出品はオーナーの人間工程**（禁止事項・アカウント操作）。戦略（`docs/02_実装計画/01`）は「1商品ずつ需要実測」。残作業は `.claude/todo/backlog.md#COCONALA-PRODUCT-FACTORY-01`。
+**再利用本文の問題**: 数値範囲監査を通った解説にも、率と人数・調査の分母・因果説明・同順位の誤りが残った。最終図には長い単位の文字重複と負値のゼロ長表示もあった。
+**対策**: 商品のランキング章は未レビューAI本文を外し、決定的集計・全県表・単位を見出しへ分離した数値カードを採用する。書き下ろしと再利用ブログは別途全章レビューし、実EPUB由来の全章SHAと編集参加者IDに結び付ける。例外や定型文追加で比率を通さない。
+**公開境界**: KDPの古いアップロード完了表示は現行版の証拠ではない。共有flowで検証した固定bytes・対象SHA・当該セッションの処理完了を必要とし、公開直前も再照合する。現行の準備版は`CURRENT_SALES_REVISIONS`を参照し、実験版や旧note版へ自動で切り替えない。

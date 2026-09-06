@@ -4,7 +4,7 @@
  * 対応: 見出し (#/##/###)、段落、箇条書き (-)、強調 (**)、画像 (![alt](images/..))、
  *       callout (> [!NOTE]/[!TIP]/[!WARNING])。
  * 除去: <source-link>/<data-source>/<ad-slot>/<affiliate-banner> (書籍内に CTA・外部リンクを撒かない)。
- * ブログ規約で markdown 表は全面禁止のため表処理は不要。出力は整形式 XHTML (要素は self-close/escape)。
+ * 商品の決定的な数値表は pipe 形式に対応。出力は整形式 XHTML (要素は self-close/escape)。
  */
 
 const CALLOUT_LABEL: Record<string, string> = {
@@ -93,6 +93,20 @@ export function mdToXhtml(mdRaw: string, imgResolver?: (src: string) => string):
     }
 
     // 見出し
+    if (trimmed.startsWith("|") && /^\|(?:\s*:?-+:?\s*\|)+$/.test(lines[i + 1]?.trim() ?? "")) {
+      flush();
+      const cells = (row: string): string[] => row.trim().replace(/^\||\|$/g, "").split("|").map(c => c.trim());
+      const head = cells(trimmed);
+      const body: string[][] = [];
+      i += 2;
+      while (i < lines.length && lines[i].trim().startsWith("|") && cells(lines[i]).length === head.length) {
+        body.push(cells(lines[i]));
+        i += 1;
+      }
+      out.push(`<table><thead><tr>${head.map(c => `<th scope="col">${inline(c)}</th>`).join("")}</tr></thead><tbody>${body.map(row => `<tr>${row.map(c => `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`);
+      continue;
+    }
+
     const h = trimmed.match(/^(#{1,4})\s+(.*)$/);
     if (h) {
       flush();

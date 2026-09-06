@@ -8,13 +8,14 @@ import sharp from "sharp";
 import { generateBarChartSvg, type BarItem } from "@stats47/svg-builder";
 import { METRICS_REGISTRY } from "@stats47/data-configs";
 import { fetchRankingValues } from "../../data/load-ranking-values";
+import { productIndicatorLabel } from "../../data/product-indicator-label";
 import { PREFECTURE_BY_CODE5 } from "../../data/prefectures";
-import { fetchRankingAiContent, composeChapterBody } from "./ai-content-composer";
 
 export interface RankingSection {
   readonly rankingKey: string;
   readonly title: string;
-  /** markdown 断片 (画像参照 + 考察 + ai-content 由来の解説)。 */
+  readonly source: RankingSource;
+  /** markdown 断片 (画像参照 + 決定的集計 + 全県表)。未レビューのサイト解説は転載しない。 */
   readonly bodyMd: string;
   readonly image?: { readonly fileName: string; readonly png: Buffer };
   /** 採用した ai-content フィールド (レポート用)。 */
@@ -23,9 +24,20 @@ export interface RankingSection {
   readonly aiDropped?: readonly { field: string; reason: string }[];
 }
 
+export interface RankingSource {
+  readonly rankingKey: string;
+  readonly title: string;
+  readonly year: string;
+  readonly unit: string;
+  readonly rawUrl: string;
+  readonly canonicalUrl: string;
+  readonly source: Readonly<Record<string, unknown>>;
+  readonly observedAreas: number;
+  readonly missingAreas: number;
+}
+
 const nameOf = (code5: string): string => PREFECTURE_BY_CODE5.get(code5)?.name ?? code5;
-const fmt = (n: number): string =>
-  Math.abs(n) >= 100 ? Math.round(n).toLocaleString("ja-JP") : n.toLocaleString("ja-JP", { maximumFractionDigits: 2 });
+const fmt = (n: number): string => n.toLocaleString("ja-JP", { maximumFractionDigits: 20 });
 
 async function svgToPng(svg: string): Promise<Buffer> {
   const m = svg.match(/viewBox="0 0 (\d+(?:\.\d+)?) /);
@@ -42,23 +54,25 @@ export interface RankingSectionOpts {
   readonly regionBlockLabel?: string;
   /** 章に載せる FAQ の最大数 (既定 2)。 */
   readonly faqLimit?: number;
+  readonly onMissing?: (rankingKey: string, reason: string) => void;
 }
 
 /**
  * 1 ranking キーからデータブック章を組む。R2 に無い / 47 県フルが無い / データが薄いキーは null を返す
  * (呼び出し側でスキップ)。palette は指標の善悪が不明なため中立の "blue" 固定。
  */
-export async function buildRankingSection(rankingKey: string, opts: RankingSectionOpts = {}): Promise<RankingSection | null> {
-  const cfg = (METRICS_REGISTRY as Record<string, { title?: string; unit?: string; subtitle?: string } | undefined>)[
-    rankingKey
-  ];
-  const baseTitle = cfg?.title ?? rankingKey;
-  const unit = cfg?.unit ?? "";
+export async function buildRankingSection(
+  rankingKey: string,
+  opts: RankingSectionOpts = {},
+): Promise<RankingSection | null> {
+  const cfg = (METRICS_REGISTRY as unknown as Record<string, Record<string, unknown> | undefined>)[rankingKey];
+  if (!cfg) throw new Error(`Unknown ranking config: ${rankingKey}`);
+  const unit = String(cfg.unit ?? "");
   // ★subtitle を章題に併記する (2026-08-12)。
   //   metric は title / subtitle / unit を分けて持ち、subtitle が対象や分母を担う
   //   (`metric-config-standards.md`)。章題が title だけだと「平均身長 141cm」のように
   //   **対象学年が落ちて意味の通らない章**になる。分母つき指標でも同じ問題が起きる。
-  const title = cfg?.subtitle ? `${baseTitle}（${cfg.subtitle}）` : baseTitle;
+  const title = productIndicatorLabel(rankingKey, cfg);
 
   let fetched;
   try {
@@ -71,22 +85,37 @@ export async function buildRankingSection(rankingKey: string, opts: RankingSecti
     .map((v) => ({ name: nameOf(v.code5), value: v.value }));
   if (rows.length < 20) return null; // 薄いデータは載せない
   rows.sort((a, b) => b.value - a.value);
+  // Competition ranking: identical observations share a rank (1, 2, 2, 4), not an ordinal position.
+  const rankByValue = new Map<number, number>();
+  rows.forEach((row, i) => { if (!rankByValue.has(row.value)) rankByValue.set(row.value, i + 1); });
 
   const n = rows.length;
   const top5 = rows.slice(0, 5);
   const bottom5 = rows.slice(-5);
   const items: BarItem[] = [
-    ...top5.map((r, i) => ({ label: `${i + 1}位 ${r.name}`, name: r.name, rank: i + 1, value: r.value })),
+    ...top5.map((r) => ({
+      label: `${rankByValue.get(r.value)!}位 ${r.name}`,
+      name: r.name,
+      rank: rankByValue.get(r.value)!,
+      value: r.value,
+    })),
     { label: "", value: 0, isSeparator: true },
-    ...bottom5.map((r, i) => ({ label: `${n - 4 + i}位 ${r.name}`, name: r.name, rank: n - 4 + i, value: r.value })),
+    ...bottom5.map((r) => ({
+      label: `${rankByValue.get(r.value)!}位 ${r.name}`,
+      name: r.name,
+      rank: rankByValue.get(r.value)!,
+      value: r.value,
+    })),
   ];
   const svg = generateBarChartSvg(items, {
     title,
     subtitle: `${fetched.year}年 / 単位: ${unit}`,
     source: "e-Stat（政府統計の総合窓口）",
-    unit,
+    // Unit is stated in the subtitle and full table; repeating it in each card overlaps long names.
+    unit: "",
     layout: "columns",
     palette: "blue",
+    showBars: false,
   });
   const png = await svgToPng(svg);
   const fileName = `rk-${rankingKey}.png`;
@@ -94,7 +123,7 @@ export async function buildRankingSection(rankingKey: string, opts: RankingSecti
   const top = rows[0];
   const bot = rows[n - 1];
   const avg = rows.reduce((s, r) => s + r.value, 0) / n;
-  const ratio = bot.value !== 0 && top.value / bot.value > 0 ? top.value / bot.value : null;
+  const ratio = bot.value > 0 ? top.value / bot.value : null;
   // ★「差は約1.0倍」を出さない (2026-08-12)。
   //   141cm と 139cm を「約1.0倍の差」と書いても読者に何も伝わらない。
   //   倍率が意味を持たない範囲では、代わりに県差の小ささを述べる。
@@ -102,19 +131,25 @@ export async function buildRankingSection(rankingKey: string, opts: RankingSecti
     ratio === null
       ? ""
       : ratio < 1.1
-        ? "県による差は小さく、どこでも大きくは変わりません。"
+        ? "この指標の最大値と最小値の比は1.1未満です。地域内の違いや実務上の重要性を判定するものではありません。"
         : `上位と下位の差は約${ratio.toFixed(1)}倍あります。`;
   let 考察 =
-    `${title}（${fetched.year}年）の1位は${top.name}で${fmt(top.value)}${unit}、最下位は${bot.name}で${fmt(bot.value)}${unit}です。` +
-    `全国平均は約${fmt(avg)}${unit}です。` +
-    gapPhrase;
+    `${title}（収録年次: ${fetched.year}）の最大値は${fmt(top.value)}${unit}（${top.name}を含む${rows.filter(r => r.value === top.value).length}地域）、最小値は${fmt(bot.value)}${unit}（${bot.name}を含む${rows.filter(r => r.value === bot.value).length}地域）です。` +
+    `値のある${n}地域の単純平均は約${avg.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${unit}です（全国集計値・人口加重平均ではありません）。` +
+    gapPhrase +
+    "数値の大きい順で同値は同順位です。図は先頭・末尾の各5地域の数値カードで、長さを数値に対応させた棒グラフではありません。同順位の全地域を表示するものではありません。";
 
   // 全国順位つきの行 (S3 の地域列挙と ai-content の数値ゲートの両方で使う)。
   const ranked = fetched.values
     .filter((v): v is { code5: string; value: number } => v.value !== null)
     .slice()
     .sort((a, b) => b.value - a.value)
-    .map((v, i) => ({ areaCode: v.code5, areaName: nameOf(v.code5), value: v.value, rank: i + 1 }));
+    .map((v) => ({
+      areaCode: v.code5,
+      areaName: nameOf(v.code5),
+      value: v.value,
+      rank: rankByValue.get(v.value)!,
+    }));
 
   // ★S3 地域別: 地域内**全県**の全国順位を列挙する (2026-08-12)。
   //   旧実装は「地域内で最上位の 1 県」の 1 文だけで、8 冊の本文がほぼ同一になっていた。
@@ -129,27 +164,37 @@ export async function buildRankingSection(rankingKey: string, opts: RankingSecti
     }
   }
 
-  // ai-content (サイト公開済みの解説) を採用前に数値照合してから合成する。
-  const ai = await fetchRankingAiContent(rankingKey);
-  const composed = composeChapterBody({
-    ai,
-    gate: { values: ranked, unit, yearCode: fetched.year },
-    regionCodes: opts.highlightCodes,
-    regionBlockLabel: opts.regionBlockLabel,
-    // 節の選定は県名で行う (ai-content の見出しは固定の地方区分ではないため)。
-    regionNames: (opts.highlightCodes ?? []).map((c) => nameOf(c)),
-    faqLimit: opts.faqLimit,
-  });
-
-  const body = [`![${title}](images/${fileName})`, 考察, composed.md].filter((s) => s.trim().length > 0).join("\n\n");
+  // Numeric gates cannot verify denominator interpretation or causal claims in reused prose.
+  // Keep source observations usable without silently presenting that prose as reviewed editorial.
+  const table = [
+    "### 全県の収録値",
+    `単位: ${unit}。順位は観測値の降順であり、地域の良し悪しや施策の優先順位ではありません。収録年次の暦年・年度の区別や対象範囲は出典で確認してください。`,
+    "| 順位 | 都道府県 | 収録値 |\n| --- | --- | ---: |\n" + ranked.map(r =>
+      `| ${r.rank} | ${r.areaName} | ${r.value.toLocaleString("ja-JP", { maximumFractionDigits: 20 })} |`,
+    ).join("\n"),
+    ...(n < 47 ? [`欠測: ${fetched.values.filter(v => v.value === null).map(v => nameOf(v.code5)).join("、")}。欠測をゼロや最下位として扱いません。`] : []),
+    `[指標の出典・定義を確認する](https://stats47.jp/ranking/${rankingKey})。単一時点の地域差だけでは、個人の行動や差の原因は判定できません。`,
+  ].join("\n\n");
+  const body = [`![${title}](images/${fileName})`, 考察, table].join("\n\n");
 
   return {
     rankingKey,
     title,
+    source: {
+      rankingKey,
+      title,
+      year: fetched.year,
+      unit,
+      rawUrl: `${process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp"}/app/ranking/${rankingKey}/values.json`,
+      canonicalUrl: `https://stats47.jp/ranking/${rankingKey}`,
+      source: (cfg.source ?? {}) as Record<string, unknown>,
+      observedAreas: n,
+      missingAreas: fetched.values.length - n,
+    },
     bodyMd: body,
     image: { fileName, png },
-    aiUsed: composed.used,
-    aiDropped: composed.dropped,
+    aiUsed: [],
+    aiDropped: [{ field: "all", reason: "unreviewed-site-prose-excluded-from-book-edition" }],
   };
 }
 
@@ -159,14 +204,23 @@ export async function buildRankingSection(rankingKey: string, opts: RankingSecti
  */
 export async function buildRankingSections(
   rankingKeys: readonly string[],
-  limit: number,
+  limit: number = rankingKeys.length,
   opts: RankingSectionOpts = {},
 ): Promise<RankingSection[]> {
   const out: RankingSection[] = [];
   for (const key of rankingKeys) {
-    if (out.length >= limit) break;
-    const sec = await buildRankingSection(key, opts);
-    if (sec) out.push(sec);
+    if (out.length >= limit) {
+      opts.onMissing?.(key, "explicit-ranking-limit");
+      continue;
+    }
+    try {
+      const sec = await buildRankingSection(key, opts);
+      if (sec) out.push(sec);
+      else opts.onMissing?.(key, "source-unavailable-or-insufficient-observations");
+    } catch (error) {
+      if (!opts.onMissing) throw error;
+      opts.onMissing(key, error instanceof Error ? error.message : String(error));
+    }
   }
   return out;
 }

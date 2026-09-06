@@ -80,6 +80,7 @@ export function promoteNoteArticle(
   products: readonly ProductDefinition[] = ALL_PRODUCTS,
   opts: PromoteOptions = {},
 ): NoteCatalogEntry {
+  if (opts.dryRun !== true) throw new Error('promote --apply is blocked: pinned revision, independent review and owner approval are required; generate --revision <new-id> --all first');
   const created = opts.created ?? new Date().toISOString().slice(0, 10);
   const docsRoot = opts.docs31Root ?? DOCS31_ROOT_DEFAULT;
   const outDir = join(docsRoot, article.slug);
@@ -154,6 +155,7 @@ export function promoteAllNoteArticles(
   products: readonly ProductDefinition[] = ALL_PRODUCTS,
   opts: PromoteOptions & { catalogDataPath?: string } = {},
 ): PromoteAllResult {
+  if (opts.dryRun !== true) throw new Error('promote --apply is blocked: existing catalog/drafts must not be overwritten; use a reviewed pinned revision');
   const entries: NoteCatalogEntry[] = [];
   let docsWritten = 0;
   for (const article of articles) {
