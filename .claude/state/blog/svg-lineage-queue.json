@@ -1,19 +1,52 @@
 {
-  "total": 1316,
+  "total": 1420,
   "staged": false,
   "byStatus": {
-    "both": 1217,
+    "both": 1325,
     "jsonOnly": 0,
-    "neither": 99
+    "neither": 95
   },
   "byMethod": {
-    "done": 1217,
-    "manual": 41,
-    "ssot-restore": 24,
-    "ssot-restore-new": 34
+    "done": 1325,
+    "manual": 40,
+    "ssot-restore": 22,
+    "ssot-restore-new": 33
   },
   "autoRecoverableCount": 0,
   "entries": [
+    {
+      "slug": "2050-population-flood-exposure",
+      "base": "flood-tile-grid",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "2050-population-flood-exposure",
+      "base": "flood-lineage",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "2050-population-flood-exposure",
+      "base": "tokyo-mesh-evidence",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
     {
       "slug": "2050-population-map-reading",
       "base": "2050-population-map-reading-map",
@@ -92,6 +125,28 @@
       "residualCard": null
     },
     {
+      "slug": "academic-achievement-test-prefecture-ranking",
+      "base": "academic-achievement-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "academic-achievement-test-prefecture-ranking",
+      "base": "academic-achievement-test-prefecture-ranking-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "accommodation-expenditure-ranking",
       "base": "accommodation-expenditure-ranking",
       "chartType": "ranking",
@@ -106,6 +161,50 @@
       "slug": "accommodation-expenditure-ranking",
       "base": "accommodation-expenditure-timeseries",
       "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "advancement-plus-employment-rate-prefecture",
+      "base": "advancement-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "advancement-plus-employment-rate-prefecture",
+      "base": "job-ratio-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "advancement-plus-employment-rate-prefecture",
+      "base": "advancement-job-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "advancement-plus-employment-rate-prefecture",
+      "base": "combined-index-ranking",
+      "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -213,6 +312,17 @@
       "residualCard": null
     },
     {
+      "slug": "aichi-food-culture",
+      "base": "aichi-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "air-conditioner-consumption-quantity-prefecture-gap",
       "base": "air-conditioner-consumption-quantity-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -257,39 +367,6 @@
       "residualCard": null
     },
     {
-      "slug": "airport-count-vs-wind-power-plant-count-facility",
-      "base": "airport-count-vs-wind-power-plant-count-facility-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "airport-count-vs-wind-power-plant-count-facility",
-      "base": "wind-power-plant-count-facility-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "airport-count-vs-wind-power-plant-count-facility",
-      "base": "airport-count--wind-power-plant-count-facility-scatter",
-      "chartType": "scatter",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
       "slug": "akita-food-culture",
       "base": "saury-ranking",
       "chartType": "ranking",
@@ -315,6 +392,17 @@
       "slug": "akita-food-culture",
       "base": "sake-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "akita-food-culture",
+      "base": "akita-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -502,6 +590,17 @@
       "slug": "aomori-food-culture",
       "base": "apple-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "aomori-food-culture",
+      "base": "aomori-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -854,6 +953,39 @@
       "slug": "beef-unmarried-ratio",
       "base": "beef-unmarried-scatter",
       "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "beer-peak-month-july-to-december",
+      "base": "beer-months-by-year-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "beer-peak-month-july-to-december",
+      "base": "alcohol-expenditure-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "beer-peak-month-july-to-december",
+      "base": "beer-quantity-timeseries",
+      "chartType": "line",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -1654,6 +1786,17 @@
       "residualCard": null
     },
     {
+      "slug": "chiba-food-culture",
+      "base": "chiba-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "chicken-consumption-prefecture-gap",
       "base": "chicken-consumption-ranking",
       "chartType": "ranking",
@@ -2336,61 +2479,6 @@
       "residualCard": null
     },
     {
-      "slug": "dam-count-prefecture-gap",
-      "base": "dam-count-prefecture-gap-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "dam-count-prefecture-gap",
-      "base": "dam-count-prefecture-gap-map",
-      "chartType": "tilemap",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "dam-count-vs-road-expressway-length",
-      "base": "dam-count-vs-road-expressway-length-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "dam-count-vs-road-expressway-length",
-      "base": "road-expressway-length-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "dam-count-vs-road-expressway-length",
-      "base": "dam-count--road-expressway-length-scatter",
-      "chartType": "scatter",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
       "slug": "day-time-population-prefecture-gap",
       "base": "day-time-population-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -2602,6 +2690,17 @@
     {
       "slug": "dining-out-expenditure-ranking",
       "base": "engel-coefficient-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dining-out-expenditure-ranking",
+      "base": "consumption-expenditure-total-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -3095,6 +3194,17 @@
       "residualCard": null
     },
     {
+      "slug": "ehime-food-culture",
+      "base": "ehime-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "elderly-population-care-capacity-gap",
       "base": "elderly-population-care-capacity-gap-ranking",
       "chartType": "ranking",
@@ -3362,12 +3472,56 @@
       "slug": "engel-coefficient-prefecture-ranking",
       "base": "engel-timeseries",
       "chartType": "line",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "base": "engel-coefficient-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "base": "prefectural-income-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "base": "engel-income-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "base": "information-communication-income-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
     },
     {
       "slug": "engineer-telework-prefecture",
@@ -3744,6 +3898,72 @@
       "residualCard": null
     },
     {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "tuna-catch-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "tuna-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "tuna-catch-consumption-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "yellowtail-catch-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "yellowtail-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "base": "yellowtail-catch-consumption-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "fishery-catch-aquaculture-shift",
       "base": "fish-catch-ranking",
       "chartType": "ranking",
@@ -3822,36 +4042,113 @@
     },
     {
       "slug": "food-consumption-prefecture-battle",
-      "base": "ramen-gyoza-tilemap",
+      "base": "ramen-dining-consumption-expenditure-map",
       "chartType": "tilemap",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "TILEMAP-LINEAGE-01"
+      "residualCard": null
     },
     {
       "slug": "food-consumption-prefecture-battle",
-      "base": "food-ranking-comparison",
+      "base": "gyoza-frozen-consumption-expenditure-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "yakiniku-consumption-expenditure-prefecture-rankings",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "food-consumption-prefecture-battle",
-      "base": "price-change-2019-2024",
-      "chartType": "unknown",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "manual",
+      "base": "sushi-dining-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "coffee-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "icecream-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "beer-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "wine-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "white-bread-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "food-price-change-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
     },
     {
       "slug": "food-price-regional-2026",
@@ -4217,6 +4514,17 @@
       "residualCard": null
     },
     {
+      "slug": "frozen-gyoza-spending-prefecture-gap",
+      "base": "frozen-gyoza-spending-prefecture-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "fukui-food-culture",
       "base": "yokan-ranking",
       "chartType": "ranking",
@@ -4242,6 +4550,17 @@
       "slug": "fukui-food-culture",
       "base": "crab-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fukui-food-culture",
+      "base": "fukui-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -4283,6 +4602,17 @@
       "residualCard": null
     },
     {
+      "slug": "fukuoka-food-culture",
+      "base": "fukuoka-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "fukushima-food-culture",
       "base": "peach-ranking",
       "chartType": "ranking",
@@ -4308,6 +4638,17 @@
       "slug": "fukushima-food-culture",
       "base": "natto-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fukushima-food-culture",
+      "base": "fukushima-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -4679,6 +5020,50 @@
       "residualCard": null
     },
     {
+      "slug": "gifu-food-culture",
+      "base": "gifu-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "golf-green-fee-consumption-ranking",
+      "base": "golf-green-fee-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "golf-green-fee-consumption-ranking",
+      "base": "golf-green-fee-consumption-ranking-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "golf-green-fee-consumption-ranking",
+      "base": "golf-equipment-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "golf-participation-prefecture-gap",
       "base": "golf-participation-ranking",
       "chartType": "ranking",
@@ -4770,6 +5155,17 @@
       "slug": "gunma-food-culture",
       "base": "leek-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "gunma-food-culture",
+      "base": "gunma-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -5108,6 +5504,17 @@
       "residualCard": null
     },
     {
+      "slug": "hiroshima-food-culture",
+      "base": "hiroshima-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "hokkaido-food-culture",
       "base": "salmon-ranking",
       "chartType": "ranking",
@@ -5133,6 +5540,17 @@
       "slug": "hokkaido-food-culture",
       "base": "cheese-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "hokkaido-food-culture",
+      "base": "hokkaido-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -5581,6 +5999,17 @@
       "residualCard": null
     },
     {
+      "slug": "hyogo-food-culture",
+      "base": "hyogo-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "ibaraki-food-culture",
       "base": "melon-ranking",
       "chartType": "ranking",
@@ -5606,6 +6035,17 @@
       "slug": "ibaraki-food-culture",
       "base": "sweetpotato-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "ibaraki-food-culture",
+      "base": "ibaraki-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -6153,6 +6593,17 @@
       "residualCard": null
     },
     {
+      "slug": "income-quintile-clothing",
+      "base": "mens-suit-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "income-quintile-dining",
       "base": "dining-out-quintile",
       "chartType": "unknown",
@@ -6211,6 +6662,17 @@
       "slug": "income-quintile-education",
       "base": "remittance-quintile",
       "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-education",
+      "base": "tutoring-academic-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -6362,6 +6824,61 @@
       "residualCard": null
     },
     {
+      "slug": "income-quintile-medical-health",
+      "base": "cold-medicine-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-medical-health",
+      "base": "eyeglasses-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-medical-health",
+      "base": "contact-lens-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-medical-health",
+      "base": "massage-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-medical-health",
+      "base": "health-checkup-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "income-quintile-overview",
       "base": "consumption-quintile",
       "chartType": "unknown",
@@ -6397,6 +6914,61 @@
     {
       "slug": "income-quintile-overview",
       "base": "culture-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-recreation-services",
+      "base": "sports-watching-fee-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-recreation-services",
+      "base": "cultural-facility-admission-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-recreation-services",
+      "base": "movie-theater-admission-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-recreation-services",
+      "base": "sports-club-fee-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-recreation-services",
+      "base": "golf-play-fee-quintile",
       "chartType": "unknown",
       "hasJson": true,
       "hasSource": true,
@@ -6442,6 +7014,39 @@
       "slug": "income-quintile-regressive",
       "base": "tobacco-quintile-timeseries",
       "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-travel",
+      "base": "accommodation-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-travel",
+      "base": "overseas-package-tour-quintile",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "income-quintile-travel",
+      "base": "domestic-package-tour-quintile",
+      "chartType": "unknown",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -6571,6 +7176,50 @@
       "residualCard": null
     },
     {
+      "slug": "information-communication-coefficient-ranking",
+      "base": "info-comm-coefficient-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "information-communication-coefficient-ranking",
+      "base": "information-communication-coefficient-ranking-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "information-communication-coefficient-ranking",
+      "base": "info-comm-expenditure-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "information-communication-coefficient-ranking",
+      "base": "info-comm-coefficient-national-trend",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "inpatient-rate-aging-burden",
       "base": "inpatient-rate-ranking",
       "chartType": "ranking",
@@ -6692,6 +7341,17 @@
       "residualCard": null
     },
     {
+      "slug": "ishikawa-food-culture",
+      "base": "ishikawa-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "ishikawa-migration-flow",
       "base": "ishikawa-migration-flow-migration-ranking",
       "chartType": "ranking",
@@ -6791,6 +7451,17 @@
       "residualCard": null
     },
     {
+      "slug": "iwate-food-culture",
+      "base": "iwate-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "kagawa-food-culture",
       "base": "udon-ranking",
       "chartType": "ranking",
@@ -6827,6 +7498,17 @@
       "slug": "kagawa-food-culture",
       "base": "othernoodles-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "kagawa-food-culture",
+      "base": "kagawa-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -6893,6 +7575,17 @@
       "slug": "kanagawa-food-culture",
       "base": "blacktea-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "kanagawa-food-culture",
+      "base": "kanagawa-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -7014,6 +7707,17 @@
       "slug": "kochi-food-culture",
       "base": "apple-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "kochi-food-culture",
+      "base": "kochi-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -7157,6 +7861,17 @@
       "slug": "kyoto-food-culture",
       "base": "chinese-dining-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "kyoto-food-culture",
+      "base": "kyoto-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -7585,6 +8300,50 @@
     {
       "slug": "long-commute-telework-potential",
       "base": "long-commute-telework-potential-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "lotus-root-green-beans-mandarin-consumption",
+      "base": "lotus-root-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "lotus-root-green-beans-mandarin-consumption",
+      "base": "lotus-root-green-beans-mandarin-consumption-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "lotus-root-green-beans-mandarin-consumption",
+      "base": "green-beans-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "lotus-root-green-beans-mandarin-consumption",
+      "base": "mandarin-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -8067,6 +8826,17 @@
       "residualCard": null
     },
     {
+      "slug": "mie-food-culture",
+      "base": "mie-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "mineral-water-spending-prefecture-gap",
       "base": "mineral-water-top-bottom",
       "chartType": "ranking",
@@ -8191,6 +8961,17 @@
       "slug": "miyagi-food-culture",
       "base": "wakame-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "miyagi-food-culture",
+      "base": "miyagi-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8485,6 +9266,17 @@
       "residualCard": null
     },
     {
+      "slug": "nagano-food-culture",
+      "base": "nagano-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "nagano-migration-flow",
       "base": "nagano-migration-flow-migration-ranking",
       "chartType": "ranking",
@@ -8576,6 +9368,17 @@
       "slug": "nara-food-culture",
       "base": "persimmon-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "nara-food-culture",
+      "base": "nara-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8716,6 +9519,50 @@
       "residualCard": null
     },
     {
+      "slug": "necktie-stockings-market-shrink",
+      "base": "accessory-expenditure-index-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "necktie-stockings-market-shrink",
+      "base": "accessory-quantity-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "necktie-stockings-market-shrink",
+      "base": "necktie-unit-price-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "necktie-stockings-market-shrink",
+      "base": "necktie-stockings-market-shrink-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "niigata-food-culture",
       "base": "pork-ranking",
       "chartType": "ranking",
@@ -8741,6 +9588,17 @@
       "slug": "niigata-food-culture",
       "base": "saltedsalmon-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "niigata-food-culture",
+      "base": "niigata-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8991,6 +9849,17 @@
       "residualCard": null
     },
     {
+      "slug": "oita-food-culture",
+      "base": "oita-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "okayama-food-culture",
       "base": "bread-ranking",
       "chartType": "ranking",
@@ -9115,6 +9984,17 @@
       "slug": "osaka-food-culture",
       "base": "soba-udon-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "osaka-food-culture",
+      "base": "osaka-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -9841,6 +10721,28 @@
       "slug": "pollution-complaints-regional-map",
       "base": "facility-vs-complaints-scatter",
       "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "population-decline-land-price-divergence",
+      "base": "land-price-spatial-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "population-decline-land-price-divergence",
+      "base": "land-price-spatial-lineage",
+      "chartType": "unknown",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -11015,6 +11917,17 @@
       "residualCard": null
     },
     {
+      "slug": "roadside-station-prefecture-gap",
+      "base": "roadside-station-density-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "ryokan-vs-hotel-overnight-shift",
       "base": "overnight-guests-top5-bottom5",
       "chartType": "ranking",
@@ -11103,6 +12016,17 @@
       "residualCard": null
     },
     {
+      "slug": "saga-food-culture",
+      "base": "saga-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "saitama-food-culture",
       "base": "cucumber-ranking",
       "chartType": "ranking",
@@ -11128,6 +12052,17 @@
       "slug": "saitama-food-culture",
       "base": "greenpepper-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "saitama-food-culture",
+      "base": "saitama-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -11488,6 +12423,17 @@
       "residualCard": null
     },
     {
+      "slug": "shiga-food-culture",
+      "base": "shiga-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "shimane-food-culture",
       "base": "shijimi-ranking",
       "chartType": "ranking",
@@ -11521,6 +12467,17 @@
       "residualCard": null
     },
     {
+      "slug": "shimane-food-culture",
+      "base": "shimane-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "shizuoka-food-culture",
       "base": "green-tea-ranking",
       "chartType": "ranking",
@@ -11546,6 +12503,17 @@
       "slug": "shizuoka-food-culture",
       "base": "mandarin-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "shizuoka-food-culture",
+      "base": "shizuoka-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -12610,6 +13578,17 @@
       "residualCard": null
     },
     {
+      "slug": "tochigi-food-culture",
+      "base": "tochigi-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "tofu-consumption-prefecture-gap",
       "base": "tofu-consumption-quantity-prefecture-rankings",
       "chartType": "ranking",
@@ -12654,6 +13633,17 @@
       "residualCard": null
     },
     {
+      "slug": "tokushima-food-culture",
+      "base": "tokushima-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "tokyo-food-culture",
       "base": "tomato-ranking",
       "chartType": "ranking",
@@ -12679,6 +13669,17 @@
       "slug": "tokyo-food-culture",
       "base": "cheese-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "tokyo-food-culture",
+      "base": "tokyo-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -12723,6 +13724,17 @@
       "slug": "tottori-food-culture",
       "base": "flounder-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "tottori-food-culture",
+      "base": "tottori-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -12800,6 +13812,17 @@
       "slug": "toyama-food-culture",
       "base": "mochi-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "toyama-food-culture",
+      "base": "toyama-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -13864,6 +14887,17 @@
       "residualCard": null
     },
     {
+      "slug": "wakayama-food-culture",
+      "base": "wakayama-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "wakayama-migration-flow",
       "base": "wakayama-migration-flow-migration-ranking",
       "chartType": "ranking",
@@ -14194,6 +15228,50 @@
       "residualCard": null
     },
     {
+      "slug": "white-bread-price-up-quantity-up",
+      "base": "bread-cpi-index-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "white-bread-price-up-quantity-up",
+      "base": "bread-quantity-index-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "white-bread-price-up-quantity-up",
+      "base": "bread-expenditure-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "white-bread-price-up-quantity-up",
+      "base": "bread-quantity-by-prefecture-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "wind-power-capacity-prefecture-gap",
       "base": "wind-power-capacity-prefecture-rankings",
       "chartType": "ranking",
@@ -14219,6 +15297,39 @@
       "slug": "wine-expenditure-ranking",
       "base": "wine-expenditure-ranking-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "winter-coat-bargain-purchase-price",
+      "base": "coat-cpi-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "winter-coat-bargain-purchase-price",
+      "base": "coat-unit-price-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "winter-coat-bargain-purchase-price",
+      "base": "coat-quantity-timeseries",
+      "chartType": "line",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -14359,6 +15470,17 @@
       "residualCard": null
     },
     {
+      "slug": "yamagata-food-culture",
+      "base": "yamagata-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "yamaguchi-food-culture",
       "base": "aji-ranking",
       "chartType": "ranking",
@@ -14392,6 +15514,17 @@
       "residualCard": null
     },
     {
+      "slug": "yamaguchi-food-culture",
+      "base": "yamaguchi-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "yamanashi-food-culture",
       "base": "grape-ranking",
       "chartType": "ranking",
@@ -14417,6 +15550,17 @@
       "slug": "yamanashi-food-culture",
       "base": "pear-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "yamanashi-food-culture",
+      "base": "yamanashi-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
