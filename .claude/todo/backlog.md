@@ -488,6 +488,13 @@ updated: 2026-09-06
 - **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
   2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
   運転設定を `run-claude-batch.sh` の既定に焼いた。正典 `ranking-content-standards.md` §2026-09-05
+- **2026-09-07 Codex batch checkpoint**: 2 セッションで選んだ 600 件を Codex Spark / Terra で処理し、
+  critic・決定的ゲート合格の **421 件を R2 公開**。active 2,154 件の全量再監査で done **870 → 1,291**、
+  needs-regen **1,284 → 863** (missing 76 / incomplete 752 / blocker 35) を確定した。公開 421 件は
+  R2 readback SHA-256 一致 421/421、実データ数値照合 421/421、blocker 0。
+  `complainant-rate-per-1000` の無意味な改行水増しと短文 17 件も除去・補筆し、単体 warn 0。
+  再処理中に対象集合を再抽出して slice すると未試行が生じる実測を受け、`run-claude-batch.sh` は
+  明示 key も開始時に immutable manifest へ固定し、不正・重複 key を生成前に拒否するよう是正した。
 - **2026-09-05 本番 3 バッチ**: 公開 54 件 (done 718 → 772・残 1,394)。batch1 は 26 件が原因不明の CLI 失敗 (stdout を
   捨てる欠陥 → 修正)、batch2 は定型化 REVISE が支配的 → prompt に県数・地方別順位表を機械計算で渡し、critic に author の
   制約を前提として明文化。batch3 (35 件・concurrency 2) は **OK 25 / REJECT 9 / FAIL 1・$0.81/公開件・50 分・レート制限なし**。

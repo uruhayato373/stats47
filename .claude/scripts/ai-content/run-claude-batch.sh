@@ -120,18 +120,33 @@ REPORT="$PROJECT_ROOT/$CI_DIR/claude-run-$RUN_ID.json"
 STATE=.claude/state/ai-content/generation-failures.json
 
 # ---- 1-2. 対象選定 -------------------------------------------------------------
+TARGETS_FILE="$CI_DIR/targets-$RUN_ID.txt"
 if [ -z "$KEYS" ]; then
   log "キューを R2 から再導出 (--scope all)"
   node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all
   node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next "$LIMIT" \
-    | sed '/^$/d' > "$CI_DIR/targets-$RUN_ID.txt"
-  KEYS="$(paste -sd, "$CI_DIR/targets-$RUN_ID.txt")"
+    | sed '/^$/d' > "$TARGETS_FILE"
+else
+  # 実行中に staging / queue が変わっても対象がずれないよう、明示 key も開始時に固定する。
+  # retry のたびに pending を再抽出して slice すると、成功済み key の脱落で未試行が生じる。
+  printf '%s\n' "$KEYS" \
+    | tr ',' '\n' \
+    | sed 's/^[[:space:]]*//;s/[[:space:]]*$//;/^$/d' \
+    > "$TARGETS_FILE"
 fi
-# ★末尾改行を付けてから数える。'%s' だと最後のキーに改行が無く wc -l が 1 少なくなる (1 件指定で 0 = 「対象なし」・2026-09-05 実測)
-COUNT="$(printf '%s\n' "$KEYS" | tr ',' '\n' | sed '/^$/d' | wc -l | tr -d ' ')"
+
+INVALID_KEYS="$(grep -Ev '^[a-z0-9-]+$' "$TARGETS_FILE" || true)"
+[ -z "$INVALID_KEYS" ] || die "不正な rankingKey を検出: $(printf '%s' "$INVALID_KEYS" | tr '\n' ' ')"
+DUPLICATE_KEYS="$(sort "$TARGETS_FILE" | uniq -d)"
+[ -z "$DUPLICATE_KEYS" ] || die "重複 rankingKey を検出: $(printf '%s' "$DUPLICATE_KEYS" | tr '\n' ' ')"
+
+# manifest を唯一の入力にして以後は再抽出しない。末尾改行済みなので 1 件指定も正しく数えられる。
+KEYS="$(paste -sd, "$TARGETS_FILE")"
+COUNT="$(wc -l < "$TARGETS_FILE" | tr -d ' ')"
 [ "$COUNT" -gt 0 ] || { log "対象なし (キューが空か全件 quarantine)"; exit 0; }
 [ "$COUNT" -le 40 ] || die "対象 $COUNT 件 > publish MAX_PUBLISH=40。--limit か --keys を減らす"
 log "対象 $COUNT 件: $(printf '%s' "$KEYS" | tr ',' ' ')"
+log "対象 manifest: $TARGETS_FILE"
 
 # ---- 3. 生成 → 決定的監査 → 意味レビュー ------------------------------------------
 GEN=(--model "$MODEL" --critic "$CRITIC" --concurrency "$CONCURRENCY" --retries "$RETRIES"
