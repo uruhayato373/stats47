@@ -74,6 +74,15 @@ const FAILURES_JSON = join(STATE_DIR, "generation-failures.json");
 function loadQuarantinedKeys() {
   return quarantinedKeys(loadFailureState(FAILURES_JSON));
 }
+
+function actionableQuarantinedKeys(queue, allQuarantined = loadQuarantinedKeys()) {
+  const pendingKeys = new Set(
+    queue.entries
+      .filter((entry) => entry.status === "needs-regen")
+      .map((entry) => entry.rankingKey),
+  );
+  return new Set([...allQuarantined].filter((key) => pendingKeys.has(key)));
+}
 const RANKING_ITEMS_URL = `${R2_PUBLIC}/app/ranking-items/all.json`;
 const CONCURRENCY = 16;
 
@@ -397,7 +406,7 @@ function writeLatestMd(queue, progress = null) {
     (e) => e.status === "done" && e.dataBlockers?.length,
   );
   const failureState = loadFailureState(FAILURES_JSON);
-  const quarantined = quarantinedKeys(failureState);
+  const quarantined = actionableQuarantinedKeys(queue, quarantinedKeys(failureState));
   const municipalityKeyCount = countPublishedMunicipalityKeys();
   const lines = [
     `# ranking ai-content 是正キュー (LATEST)`,
@@ -485,8 +494,8 @@ function writeLatestMd(queue, progress = null) {
     ...top.map((e) => `| ${e.impressions} | ${e.rankingKey} | ${e.reason} | ${e.reviewTier === "manual-escalation" ? "🟠手動是正候補" : "Gemini自動"} | ${(e.blockers || []).join(",") || "-"} |`),
     ``,
     `> 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、`,
-    `> 既定 ${queue.summary.geminiDailyLimit ?? 3}件を outbox 経由で R2 へ公開する。在庫の量産はローカルの headless claude CLI`,
-    `> (\`run-claude-batch.sh\`・同じ監査/critic) で人が量を決めて回す。Agent tool 経路の Claude は例外是正のみ。`,
+    `> 既定 ${queue.summary.geminiDailyLimit ?? 3}件を outbox 経由で R2 へ公開する。個別の独自考察改善はローカルの headless author+critic、`,
+    `> 大規模な構造補完は \`ai:backfill\` + 全件監査 + 境界サンプル意味レビューを使う。Agent tool 経路の Claude は例外是正のみ。`,
     `> 🟠手動是正候補は GSC 流入上位${queue.summary.manualEscalationTier ?? 30}件。自動失敗が続いた場合だけ agent で是正する。`,
   ];
   writeFileSync(LATEST_MD, lines.join("\n") + "\n");
@@ -513,7 +522,7 @@ async function main() {
 
   if (nextN != null) {
     // critic に繰り返し落ちる常習キーは自動ピックから外す (毎回バッチを道連れにするのを防ぐ)。
-    const quarantined = loadQuarantinedKeys();
+    const quarantined = actionableQuarantinedKeys(queue);
     const eligible = queue.entries.filter(
       (e) => e.status === "needs-regen" && !quarantined.has(e.rankingKey),
     );
