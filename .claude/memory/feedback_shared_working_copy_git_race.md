@@ -60,4 +60,22 @@ R2 404 を実測確認) が、**レビュー前の他者の成果物を公開し
 (オーナーが同じ develop に push していた) — 内容を検証し、事実を報告して次の commit で記録を正す。
 ④ そもそも「agent の成果物は agent 完了後にレビューしてから自分で commit する」を既定にする。
 
+**Stop フックが繰り返し止まる (2026-09-06 実測)**: 作業ツリーを共有していると、
+`check-consistency-on-stop` が**他セッションの未コミット差分まで数える**
+(`git status --porcelain` ベース。表示は「この会話で」だが実態は作業ツリー全体)。
+`--mark-audited` は差分集合の指紋を記録するので、相手が 1 ファイル触るたびに指紋が変わり再発火する。
+1 セッションで 18 → 26 → 34 件と増えながら 3 回止まった (自分の変更は 2 件だけ)。
+**How to apply:** ① 並行セッションは worktree を分ける (これが恒久対処。同じツリーを共有しない)。
+② 共有せざるを得ないときは、フックが止まっても自分の変更範囲だけを意味レビューし、
+他セッション分は「確認していない」と報告に明記する (監査済み記録は全体に付くため)。
+③ ゲート本体 (`check-agent-skill-consistency.cjs` / `docs:check`) が緑なのに止まる場合、
+落ちているのはゲートではなく**指紋の一致**なので、ゲートを疑って調べ直さない。
+
+**merge の後に rebase しない (2026-09-06 に共有ブランチを壊した)**:
+`git merge origin/main` の後 `git rebase origin/develop` すると merge が平坦化され、
+main の commit を replay して途中で停止する。その detached な中途状態を push すると
+**develop が「main を含まない部分適用状態」**になる。復旧は rebase --abort → merge commit へ戻し、
+現 develop を merge し直して push。追随は常に `git merge` / `git pull --no-rebase`。
+正典: `.claude/rules/branch-workflow.md`。
+
 関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]] [[feedback_sync_snapshots_checks_out_main]]

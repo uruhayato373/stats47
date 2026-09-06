@@ -1,31 +1,31 @@
 {
-  "generatedAt": "2026-09-05T03:03:14.717Z",
+  "generatedAt": "2026-09-06T03:02:57.265Z",
   "results": [
     {
       "key": "app/rakuten/items/うどん.json",
       "maxAgeDays": 3,
       "why": "sync-rakuten-catalog.yml (日次)。古いと商品名・価格が古いまま配信される",
-      "generatedAt": "2026-09-04T21:12:03.677Z",
+      "generatedAt": "2026-09-05T20:52:53.687Z",
       "error": null,
-      "ageDays": 0.24387775462962963,
+      "ageDays": 0.2569858449074074,
       "status": "fresh"
     },
     {
       "key": "app/rakuten/furusato/01000.json",
       "maxAgeDays": 3,
       "why": "sync-rakuten-catalog.yml (日次)。ふるさと納税カードの返礼品が古くなる",
-      "generatedAt": "2026-09-04T21:12:03.677Z",
+      "generatedAt": "2026-09-05T20:52:53.687Z",
       "error": null,
-      "ageDays": 0.24387775462962963,
+      "ageDays": 0.2569858449074074,
       "status": "fresh"
     },
     {
       "key": "app/blog/all.json",
       "maxAgeDays": 14,
       "why": "blog-auto-publish.yml (公開のたび)。止まると新規記事が一覧に出ない",
-      "generatedAt": "2026-08-31T23:31:59.300Z",
+      "generatedAt": "2026-09-06T00:53:34.197Z",
       "error": null,
-      "ageDays": 4.1467061921296295,
+      "ageDays": 0.0898503125,
       "status": "fresh"
     }
   ]

@@ -79,3 +79,67 @@ test("1 つ落ちても他のゲートを最後まで走らせる (fail-fast に
   // (fail-fast に変えるとこの行が消え、blocker を一度に出すという目的が失われる)
   assert.match(result.stdout, /Env Registry/, result.stdout);
 });
+
+/**
+ * --pr モードの契約 (2026-09-06 追加)。
+ *
+ * このモードの価値は「CI と同じ判定を push 前に 1 回で出す」ことなので、
+ * ローカルと CI がドリフトした瞬間に無意味になる。実行は重い (~70s・要ネットワーク) ため、
+ * ここでは**両者が同じコマンドを指していること**を静的に固定する。
+ */
+test("--pr のゲートは PR CI (Static Gates) と同じコマンドを指す", () => {
+  const src = fs.readFileSync(
+    path.join(ROOT, ".claude/scripts/lib/preflight-commit.mjs"),
+    "utf8"
+  );
+  const workflow = fs.readFileSync(
+    path.join(ROOT, ".github/workflows/pr-quality-check.yml"),
+    "utf8"
+  );
+
+  // 母集団が変わると連鎖して古くなる生成物。2026-09-06 の 8 往復の実測が出典。
+  const shared = [
+    "build:registry",
+    "validate:config",
+    "validate:years",
+    "validate:polarity",
+    "validate:catalog",
+    "generate:catalog",
+    "generate-theme-dependency-mirror.ts",
+    "generate-unit-semantics-mirror.ts",
+    "validate:area-databook",
+    "validate:topics",
+    "audit-survey-taxonomy.ts",
+    "generate-sitemap-blog-entries.ts",
+    "generate-known-tag-keys.ts",
+    "generate-ranking-prominence.ts",
+  ];
+  for (const command of shared) {
+    assert.ok(src.includes(command), `preflight --pr が ${command} を失っている`);
+    assert.ok(workflow.includes(command), `CI が ${command} を失っている (ローカルとドリフト)`);
+  }
+});
+
+test("--pr は GATES ではなく PR_GATES を使う (commit 用の 3 ゲートに退行させない)", () => {
+  const src = fs.readFileSync(
+    path.join(ROOT, ".claude/scripts/lib/preflight-commit.mjs"),
+    "utf8"
+  );
+  assert.match(src, /const gates = pr \? PR_GATES : GATES;/);
+  // 集約表示・件数表示が gates 変数を見ていること (GATES 直参照に戻すと --pr の件数が嘘になる)
+  assert.ok(!/\$\{GATES\.length\}/.test(src), "件数表示が GATES 固定に戻っている");
+});
+
+test("--pr は main が develop 非経由で進んだ状態を検出する", () => {
+  const src = fs.readFileSync(
+    path.join(ROOT, ".claude/scripts/lib/preflight-commit.mjs"),
+    "utf8"
+  );
+  assert.ok(src.includes("main 先行チェック"), "main 先行チェックが消えている");
+  // commit 数ではなく内容差分で判定する (cron の state 書き戻しで毎回赤くしない)
+  assert.ok(
+    src.includes('"--name-only"') && src.includes(".claude/state/"),
+    "main 先行チェックが内容差分ベースでなくなっている"
+  );
+});
+
