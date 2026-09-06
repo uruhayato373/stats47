@@ -299,7 +299,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 816,
+    "count": 825,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
