@@ -34,8 +34,8 @@
 # カタログ検証（ID 一意・レビュー集合一致・価格整合・参照存在）
 npm run products:catalog  --workspace=@stats47/product-factory -- --check
 # 生成（単品 / 全商品）— 生成先は .local/coconala-products/<id>/<version>/
-npm run products:generate --workspace=@stats47/product-factory -- --id <ID>
-npm run products:generate --workspace=@stats47/product-factory -- --all
+npm run products:generate --workspace=@stats47/product-factory -- --id <ID> --version <NEW_VERSION>
+npm run products:generate --workspace=@stats47/product-factory -- --all --version <NEW_VERSION>
 # リリース台帳を再生成
 npm run products:report   --workspace=@stats47/product-factory
 # 型 / テスト
@@ -90,7 +90,7 @@ npm run test:run   --workspace=@stats47/product-factory
 > **出品フォームの入力は Playwright で自動化する**が、下記のガードを**人間工程として維持**する。
 
 - **ログイン認証はエージェントが行わない**。初回のみ人間が headed ブラウザで **stats47 のココナラアカウント**へ手動ログインし、永続プロファイル `.local/playwright-coconala-profile` に保持する（★doboku-note の `dobokunote` とは別アカウント・別プロファイル）。
-- **account assert 必須**: `coconala-account.json` の `sellerName`（stats47 の出品者名）がマイページ本文に含まれることを確認してから操作する。別アカウント（dobokunote 等との取り違え）は即中断。**sellerName が空の間は「ログイン済み」しか確認できない**ので、出品者名が確定したら必ず設定する。
+- **account assert 必須**: `coconala-account.json`の期待`userId`と`/mypage/user`の本人プロフィール「表示を確認する」リンクを照合する。おすすめ出品者リンクやページ全体の表示名では代替しない。ID未設定・取得不能・複数・不一致では停止する。期待アカウントの変更はオーナー承認が必要。
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書きで保存」。**実公開（`--commit`）は outward-facing・不可逆寄りのため、オーナーが明示承認したときだけ**実行する。バリデーションエラー（記入エラー）時は「公開した」と報告しない。
 - **1 商品ずつ検証**。一括出品しない。閲覧・お気に入り・問い合わせ・購入・サポート工数・手取りを記録する。
 - 反応が無ければ同系統を増やさず、対象・用途・価格・サンプルを見直す（レビュー §実行規律）。
@@ -153,23 +153,20 @@ npm run test:run   --workspace=@stats47/product-factory
 推定値にすぎず、実測 fresh は必要量の 2.2 倍あったので、そこで 7 字差を落とすと本来の要件から
 外れた数字を守らせることになる。
 
-#### 出品可否は実測で決める（`verify-publishable.mts`）
+#### 生成品質と外部公開状態を分離する
 
-出品停止（`blocked-thin`）は人手で書き込むと、**是正しても誰も戻さない / 中身を直さずに
-status だけ戻せる**の両方が起きる。実際 `blockReason` に是正前の実測値
-（「本文 4,568 字 / 1章 152 字」）が残ったままだった。
+監査でEPUBを再生成・上書きしない。機械検証だけで出品台帳のstatusをdraftへ戻さない。
+`verify-publishable.mts` は既存版を読み取る互換入口であり、`--apply`は拒否する。
 
 ```bash
-npx tsx packages/product-factory/scripts/verify-publishable.mts          # 実測して表示
-npx tsx packages/product-factory/scripts/verify-publishable.mts --apply  # listings も更新
+npx tsx packages/product-factory/scripts/verify-publishable.mts --version <VERSION> --json
+npm run products:report --workspace=@stats47/product-factory -- --kindle-version <VERSION>
 ```
 
-全書籍をビルドし、`build-book.ts` の `volumeOk`（総 20,000字 / 1章 800字）と
-`freshRatioOk`（KDP の 30%）で判定して `.claude/config/kdp-listings.json` の
-`status` / `blockReason` を書き換える。**閾値をここに再定義しない**（build-book が正典）。
-`listed`（公開済み）は巻き戻さない — 公開状態は KDP 側が真実源。
-
-**このスクリプトは実公開しない。** KDP へのアップロードはオーナー工程（§8 の KDP 出品自動化）。
+`build-book.ts` の本文量・書き下ろし比率・予定キーcoverageをmetadataへ記録し、
+対象版の意味レビュー・Previewer・暗号化保全・公開承認とは別に判定する。
+公開実績はKDP出品台帳の確認日付きstatus、販売準備は横断カタログの残工程を読む。
+書き下ろし30%は内部編集品質基準で、Amazonが認める安全基準ではない。
 
 #### EPUB 構造の不変量（2026-08-12 確定・`__tests__/epub.test.ts` が固定）
 
@@ -212,7 +209,9 @@ npm run products:kindle:verify-epub  --workspace=@stats47/product-factory -- --b
   1600×2560 JPEG・**文字を含まない**）。生成は **Codex MCP の built-in imagegen**（`.claude/rules/codex-mcp.md`）で、
   タイトル・著者は satori が**実テキストとして重ねる**。生成 AI に日本語や数字を焼き込ませない家ルールは
   ブログ OGP と同一（`.claude/rules/ogp-image-standards.md` §5）。背景が無い書籍はシリーズ基調色の無地に degrade する。
-- **著作権規律（`data-provenance-standards.md` / pdf-book-survey と同一）**: 参照書籍からは論点・見せ方の型のみ。文言・図案・写真・編集構成は複製しない。数値は e-Stat / R2 の自社データのみ。自ブログの再利用は自己著作物。**ただし KDP の「Web で無料入手可能なコンテンツ」規定に備え、各書籍は再構成 + 30% 以上の書き下ろし（はじめに / おわりに / 章横断の合成分析）を必須**とし、validator が `newContentNote` 非空 + manuscript 以降の fresh 章 1 つ以上を強制する。KU（KDP Select 独占）登録は当面見送り（販売のみ・¥500-1,000）。
+- **著作権規律（`data-provenance-standards.md` / pdf-book-survey と同一）**: 参照書籍からは論点・見せ方の型のみ。文言・図案・写真・編集構成は複製しない。数値は e-Stat / R2 の自社データのみ。自ブログの再利用は自己著作物。**内部編集基準として、各書籍は再構成 + 30% 以上の書き下ろし（はじめに / おわりに / 章横断の合成分析）を必須**とし、validator が `newContentNote` 非空 + manuscript 以降の fresh 章 1 つ以上を強制する。KU（KDP Select 独占）登録は当面見送り（販売のみ・¥500-1,000）。
+
+内部比率はAmazonの許諾・審査合格基準ではない。著作権者自身のWeb公開素材と他者の素材を区別し、AI生成内容の申告を別途確認する（[KDPコンテンツガイドライン](https://kdp.amazon.com/en_US/help/topic/G200635600)）。
 - **CLI**: `products:kindle:{plan,validate,generate,report,kdp-listings}`（`generate --id K-S1-01`）。生成は `.local` への書き出しのみ。
 #### 本文量の床 — 比率ゲートだけでは「本になっていない本」が通る (2026-08-12 実測)
 
@@ -270,7 +269,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **ログイン認証・2FA はエージェントが行わない**。初回のみ人間が headed Chrome で **stats47 の Amazon/KDP アカウント**へ手動ログインし、永続プロファイル `.local/playwright-kdp-profile` に保持する。
 - **税務情報（Tax interview）・銀行口座・支払情報の入力は人間工程**。KDP はこれらが未完了だと公開させない。エージェントは一切触らない。
 - **account assert 必須**: `.claude/config/kdp-account.json` の `accountEmail`/`accountName` が KDP のアカウント表示に一致することを確認してから操作。別アカウントは即中断。
-- **出品内容 SoT = `.claude/config/kdp-listings.json`**（`products:kindle:kdp-listings --apply` で KINDLE_BOOKS から生成。title/description/keywords/price/epubPath。カテゴリは人手で `categories` に記入・upsert 保持）。
+- **出品内容 SoT = `.claude/config/kdp-listings.json`**。改訂書誌は`products:kindle:kdp-listings --version <VERSION>`で`.local/kindle-listing-revisions/`へ準備提案を出し、公開記録と分離する。旧`--apply`での一括上書きは禁止。独立レビュー・Previewer・保全・承認後に対象IDだけ切り替える。カテゴリと読みはgit TSを参照し、公開履歴を保持する。
 - **KDP運用状態も同じSoT**に `kdpStatus`（`draft|in_review|live|unknown`）/ 生の日本語表示 / `kdpStatusCheckedAt` / `lastSubmittedAt` / `salesStartedAt`（販売中を初めて確認した日）/ ASIN を保存する。`listed`だけで審査中を販売中扱いしない。`kdp-batch --phase status`はASIN未割当でも毎回状態を書き戻す。
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開（`--commit`）は outward-facing・取り下げに時間がかかるため、オーナー明示承認時のみ**。未充填フィールド・公開未確定時は「公開した」と報告しない。
 - **★実公開を cron / launchd で無人実行しない（2026-08-16 オーナー判断で確定）**。
@@ -347,11 +346,10 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 商品側は `src/catalog/products/packs.ts`、note editorial メタは
 `.claude/scripts/note/catalog/` の git TS を SSOT とし、mapping で結合する。
 
-> **現在の状態**: note チャネルは旧174商品を前提とする legacy 実装。削除条件は
-> `.claude/todo/backlog.md` の `COCONALA-PRODUCT-FACTORY-01` 完了。現在はTypeScriptとVitestの
-> 対象から一時除外している。P-01〜P-14 の14パックへ移行し、coverage・重複・添付検証を更新して
-> exclude を解除するまでは `products:note:*` を実運用しない。残工程は
-> 同backlog IDを正典とする。
+> **現在の実装**: article-planとmappingはP-01〜P-14から導出し、TypeScript/Vitestの対象。
+> 販売準備は `note/cli.ts revision --revision <NEW_REVISION> --all` を使い、出品台帳の
+> `_delivery` 固定SHAから非公開の別版を作る。旧v1直参照のgenerate/promoteで改訂版を公開しない。
+> 商品別の公開記録・品質・人間確認待ちは `products:report` の派生カタログで分離する。
 
 ### SSOTと生成物
 

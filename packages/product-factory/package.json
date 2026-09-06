@@ -6,6 +6,7 @@
   "main": "./src/index.ts",
   "dependencies": {
     "@stats47/data-configs": "*",
+    "@stats47/gis": "*",
     "@expo-google-fonts/noto-sans-jp": "^0.4.3",
     "@pdf-lib/fontkit": "^1.1.1",
     "@stats47/svg-builder": "*",
@@ -34,6 +35,7 @@
     "products:geo:plan": "tsx src/channels/geo/cli.ts plan",
     "products:geo:generate": "tsx src/channels/geo/cli.ts generate",
     "products:geo:validate": "tsx src/channels/geo/cli.ts validate",
+    "products:geo:delivery": "tsx src/channels/geo/delivery-cli.ts",
     "products:kindle:plan": "tsx src/channels/kindle/cli.ts plan",
     "products:kindle:validate": "tsx src/channels/kindle/cli.ts validate",
     "products:kindle:generate": "tsx src/channels/kindle/cli.ts generate",
@@ -42,6 +44,7 @@
     "products:kindle:verify-epub": "tsx scripts/verify-epub.mts",
     "products:kindle:audit-facts": "tsx scripts/audit-book-facts.mts",
     "products:kindle:kdp-listings": "tsx src/channels/kindle/export-kdp-listings.ts",
+    "products:sales": "tsx src/sales/cli.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"

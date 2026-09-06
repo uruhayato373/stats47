@@ -2,16 +2,29 @@
   "schemaVersion": 1,
   "maxStateAgeDays": 10,
   "ranking": {
-    "minActiveResolved": 1950,
-    "minActiveCoveragePct": 90.53
+    "minActiveResolved": 1962,
+    "minActiveCoveragePct": 90.58
   },
   "rankingBaselineAdjustment": {
     "date": "2026-09-06",
     "reason": "Owner-approved retirement of nine non-commercial KSJ rankings and correction of two registry-based replacements that are not statistical surveys; do not invent survey IDs to retain the old count",
     "previousActiveMetrics": 2163,
     "previousActiveResolved": 1961,
-    "retiredResolvedKeys": ["dam-count", "hydroelectric-power-plant-count", "thermal-power-plant-count", "nuclear-power-plant-count", "geothermal-power-plant-count", "wind-power-plant-count-facility", "biomass-power-station-count", "tourism-resource-count", "fishing-port-count"],
-    "officialRegistryKeys": ["roadside-station-count", "fishing-port-count-ksj"]
+    "retiredResolvedKeys": [
+      "dam-count",
+      "hydroelectric-power-plant-count",
+      "thermal-power-plant-count",
+      "nuclear-power-plant-count",
+      "geothermal-power-plant-count",
+      "wind-power-plant-count-facility",
+      "biomass-power-station-count",
+      "tourism-resource-count",
+      "fishing-port-count"
+    ],
+    "officialRegistryKeys": [
+      "roadside-station-count",
+      "fishing-port-count-ksj"
+    ]
   },
   "theme": {
     "minResolvedCharts": 82,
@@ -19,10 +32,10 @@
     "maxMissingLineageCharts": 0
   },
   "blog": {
-    "minCharts": 1309,
-    "minResolvedCharts": 938,
-    "minCoveragePct": 76.32,
-    "maxUnresolvedCharts": 103,
-    "maxMissingLineageCharts": 188
+    "minCharts": 1425,
+    "minResolvedCharts": 1087,
+    "minCoveragePct": 81.61,
+    "maxUnresolvedCharts": 61,
+    "maxMissingLineageCharts": 184
   }
 }

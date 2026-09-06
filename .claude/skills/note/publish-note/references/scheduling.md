@@ -190,11 +190,11 @@ PUB_IDX=$(find_idx "公開に進む")
 browser-use --headed --profile "Profile 5" click $PUB_IDX
 sleep 3
 
-# ハッシュタグ入力（hashtags.txt 優先・無ければ tags.txt、head -50）
+# ハッシュタグ入力（hashtags.txt 優先・無ければ tags.txt、head -99）
 browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
 TAG_IDX=$(find_idx "ハッシュタグを追加する")
 browser-use --headed --profile "Profile 5" click $TAG_IDX
-# タグファイル | head -50 の各タグを入力（7-2 と同じ手順）
+# タグファイル | head -99 の各タグを入力（7-2 と同じ手順）
 
 # 日時設定をスキップして「今すぐ公開」をクリック
 browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
@@ -224,9 +224,9 @@ TAG_IDX=$(find_idx "ハッシュタグを追加する")
 browser-use --headed --profile "Profile 5" click $TAG_IDX
 ```
 
-タグファイルの各タグについて入力する。タグファイルは **`hashtags.txt` を優先し、無ければ `tags.txt`** を使う（koumuin-claude-code シリーズは各記事に `hashtags.txt`（90 タグのプール）を持つ）。
+タグファイルの各タグについて入力する。タグファイルは **`hashtags.txt` を優先し、無ければ `tags.txt`** を使う（各記事に 99 タグのプールを持つ）。
 
-note のハッシュタグ投稿上限の都合で **`head -50` で上位 50 個に絞る**（hashtags.txt の先頭ほど重要なタグ。実際の上限は投稿時に要確認、超過分は弾かれるだけで害はない）:
+note の実機上限に合わせ、**`head -99` で 99 個に絞る**（hashtags.txt の先頭ほど重要なタグ）:
 
 ```bash
 TAGFILE="<articleDir>/hashtags.txt"
@@ -236,7 +236,7 @@ while IFS= read -r tag; do
   browser-use --headed --profile "Profile 5" type "$tag"
   browser-use --headed --profile "Profile 5" keys Enter
   sleep 0.5
-done < <(head -50 "$TAGFILE")
+done < <(head -99 "$TAGFILE")
 ```
 
 ### 7-3. 予約投稿の日時設定

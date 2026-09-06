@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const housingCostAllHouseholds: MetricConfig = {
   "key": "housing-cost-all-households",
   "title": "住居費（全世帯）",
+  "subtitle": "社会・人口統計体系による全世帯（単身世帯を含む）1世帯当たり年間の住居費",
   "unit": "円",
   "category": "economy",
   "source": {

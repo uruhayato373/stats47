@@ -820,7 +820,14 @@ if (has("--gate")) {
   const findings = runChecks({ orphan: false, scope: new Set(files) });
   const errs = findings.filter((f) => f.level === "error");
   const lines = [];
-  lines.push(`⚠️ 整合性監査が未実施です。この会話で agent/skill/script/hook を ${files.length} 件変更しました。`);
+  // ★「この会話で」ではない: 見ているのは git status = **作業ツリー全体の未コミット差分**。
+  // 並行セッションが同じツリーを触ると件数が増え続け、--mark-audited しても指紋が変わって
+  // また止まる (2026-09-06 に 18 → 26 → 34 件と 3 回発火した)。文言を実態に合わせる。
+  // 恒久対処は worktree 分離 (memory feedback_shared_working_copy_git_race)。
+  lines.push(
+    `⚠️ 整合性監査が未実施です。作業ツリーに未コミットの agent/skill/script/hook 変更が ${files.length} 件あります。`
+  );
+  lines.push(`(並行セッションと作業ツリーを共有している場合、他セッションの変更も数に入ります)`);
   lines.push(`完了前に確認してください (CLAUDE.md 行動原則8「書く前に読む」)。`);
   lines.push(``);
   lines.push(`1) 機械チェック: node .claude/scripts/lib/check-agent-skill-consistency.cjs`);

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "productId": "P-13",
+  "generatedAt": "2026-09-06T10:07:43.498Z",
+  "publicationStatus": "not-published",
+  "delivery": {
+    "title": "都道府県データ 無料お試しサンプル",
+    "_delivery": {
+      "artifactDirectory": ".local/coconala-products/P-13/v3-20260906-r2",
+      "manifestSha256": "aea4d7fe6b21c82a37ba43768cfd0525e301415738e32c61d379f866778f7153",
+      "indicatorCount": 1,
+      "pptxIndicatorCount": 0,
+      "hasXlsx": false,
+      "officeValidation": "not-applicable"
+    }
+  }
+}

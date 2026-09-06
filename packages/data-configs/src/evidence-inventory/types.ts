@@ -44,7 +44,8 @@ export type EvidenceSourceKey =
   | "japan-zue"
   | "prefecture-databook"
   | "prefecture-deviation"
-  | "claude-skills-guide";
+  | "claude-skills-guide"
+  | "kakei-marketing";
 
 export interface ReferenceSourcePolicy {
   sourceKey: EvidenceSourceKey;
@@ -138,4 +139,34 @@ export interface JapanZueCandidate {
   dataYears: string[];
   geoScopes: EvidenceGeoScope[];
   metricCandidates: Array<{ key: string; score: number }>;
+}
+
+/**
+ * 『マーケティングに使える「家計調査」』(吉本佳生・講談社 2015) の分析・論点単位の authored SSOT。
+ * 書籍の文章・図表・数値は保持せず、問い・ページ範囲・stats47 側の lineage だけを持つ。
+ */
+export interface KakeiMarketingAnalysis {
+  id: string;
+  /** 書籍の章 (0 = はじめに, 1-5 = 第1部各章, 6 = 第2部, 7 = おわりに) */
+  chapter: number;
+  /** 書籍の主張をそのまま写さず、stats47 として検証する独立した問い */
+  question: string;
+  /** 論点の要約 (独自表現) */
+  thesis: string;
+  /** PDF ページ範囲 (両端含む) */
+  pages: [number, number];
+  resolution: EvidenceResolution;
+  resolutionReason: string;
+  metricKeys: string[];
+  surveyIds: string[];
+  themeSlugs?: string[];
+  /** 第2部の県庁所在市プロファイルだけが持つ都道府県コード (5桁) */
+  areaCodes?: string[];
+  geoScopes: EvidenceGeoScope[];
+  contentRoles: EvidenceContentRole[];
+  primarySources: EvidencePrimarySource[];
+  /** 既に stats47 に同趣旨のコンテンツがある場合の slug / key */
+  existing?: { blogSlugs?: string[]; themeSlugs?: string[] };
+  /** 次に作る制作単位 */
+  nextAction: string;
 }

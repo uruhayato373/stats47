@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T09:19:25.309Z",
+  "version": "v2-20260906-r1",
+  "epubcheckExecuted": true,
+  "books": 32,
+  "totalErrors": 0,
+  "report": [
+    {
+      "id": "K-S1-01",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-01/v2-20260906-r1/book.epub",
+      "epubSha256": "8cec44b5fce2dd1870fc26f08622167552755b41a2d44459027f364fdbbae0d7",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-02",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-02/v2-20260906-r1/book.epub",
+      "epubSha256": "e5460747f935749874ad8182aa71c424eba6a44253ac36d0a007cd61f4d8a89c",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-03",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-03/v2-20260906-r1/book.epub",
+      "epubSha256": "9cabe6c57904e3b92688cd0bf68862212331f2c35cc63685615fef6a1c6c5a0f",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-04",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-04/v2-20260906-r1/book.epub",
+      "epubSha256": "8dde9840a1f94babb34791709ff2553fedfa6571a353d2c930c87b81dec8ea46",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-05",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-05/v2-20260906-r1/book.epub",
+      "epubSha256": "4c347a2ecb95a1a42d0a69143a1428f1cfeef0e5e99b9669d5f227f45bb497db",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-06",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-06/v2-20260906-r1/book.epub",
+      "epubSha256": "ebcf74c77662fd1e34928002331348af2835961aa8d00598279dea6ae83917f8",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-07",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-07/v2-20260906-r1/book.epub",
+      "epubSha256": "040176bc43dc5867ad1c6ae09466f08482f3178a6c29b34b3c61f7118e567ea7",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-08",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-08/v2-20260906-r1/book.epub",
+      "epubSha256": "1d99661c2b42b580c527313e80c7b4775331ed561ed965a9df237635cb9aff99",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-09",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-09/v2-20260906-r1/book.epub",
+      "epubSha256": "059384924f82b867f782abb997d66f58814e0fb4999e9ee65e6578687463c610",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-10",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-10/v2-20260906-r1/book.epub",
+      "epubSha256": "462658737bdb7f4f8bbf1fcd612ee494a272a549997d887b9bc944fd05fc35a4",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-11",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-11/v2-20260906-r1/book.epub",
+      "epubSha256": "de69f4bd9efab326335deef31f46a46d1ec0123e9c0e2c4002d0558b9ea24d62",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-12",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S1-12/v2-20260906-r1/book.epub",
+      "epubSha256": "cb41481fe38aedcb0818ba348691f676f4524cf7c2434b765de68b5dbe8c964a",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-01",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-01/v2-20260906-r1/book.epub",
+      "epubSha256": "8f5c0303ebc80314f4bcee63d3931c564101b64865eb1ff6bdbec4f8a5e5d1f8",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-02",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-02/v2-20260906-r1/book.epub",
+      "epubSha256": "47d36b33ecfe8794383e612770430064264a62937f2d1c18fc3e161b3cf1e224",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-03",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-03/v2-20260906-r1/book.epub",
+      "epubSha256": "459045e437fc74639b6cb03ec136901ac6ce3735dfe5e8dff432044a980e607d",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-04",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-04/v2-20260906-r1/book.epub",
+      "epubSha256": "c1344a2166e14576a6046fb3e432eb3491c0f9188ac161fd80cf4ac0b1343fb5",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-05",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-05/v2-20260906-r1/book.epub",
+      "epubSha256": "b18456774df33c8ebcedcc949e2e9786b6c2a3c0ce44f027b39133bec617d953",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-06",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-06/v2-20260906-r1/book.epub",
+      "epubSha256": "54e5baebcbf26244995579f5a941f06995f10e3bb412940f0583d6c1e330660b",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-07",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-07/v2-20260906-r1/book.epub",
+      "epubSha256": "67056c1aa0413ce73c0f043c51e1e5e37a56029ebae9fb852cbb80e570bbab97",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-08",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-08/v2-20260906-r1/book.epub",
+      "epubSha256": "a6e1b9c7a07acf89f43983dd1f04ba44da0561b73728fa3188322aaad34644a8",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-09",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-09/v2-20260906-r1/book.epub",
+      "epubSha256": "e107f25cec16689f64530fbaeeaf83e550589cf2e3fe81ffdc1704db18da2fa2",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-10",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-10/v2-20260906-r1/book.epub",
+      "epubSha256": "45da0afafe91ccaab9ec2ff2209f6613614165882ce700e94bf0e6cc8e26749b",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S2-11",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S2-11/v2-20260906-r1/book.epub",
+      "epubSha256": "76c57b89cd45ab8f67440e9e1eaaa11f3e81cef10f05dbda666cec06414de390",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-01",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-01/v2-20260906-r1/book.epub",
+      "epubSha256": "a977a493ee1ab6ac6e4067d2855053bab01e285aeef0e91a6df2494aec3e5a36",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-02",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-02/v2-20260906-r1/book.epub",
+      "epubSha256": "68ad0ab4433cb811ad7a586037038d3f5d08285b7d3985cd371180c8d4f51ec9",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-03",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-03/v2-20260906-r1/book.epub",
+      "epubSha256": "66eeabc70a88e1386c93972ae3e85972c99d35884d129fc5b2c1eb8d871cd45d",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-04",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-04/v2-20260906-r1/book.epub",
+      "epubSha256": "b68106a727a0e1c904e8b9afb66cc2f1633d39f6bc51c979b20e2d50c1f6977e",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-05",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-05/v2-20260906-r1/book.epub",
+      "epubSha256": "3efb4eac9507874da3af6a76362e020125b14a81b8fcf15c0cf3a0a3a11313b0",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-06",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-06/v2-20260906-r1/book.epub",
+      "epubSha256": "b89665df4e2746b244a82242e9aa7662f5172885b75369241dd0a1d49c75f5a9",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-07",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-07/v2-20260906-r1/book.epub",
+      "epubSha256": "0912139dcd141249a49dcc520d70a6391fd289dbc9e904b87e695c2422dea962",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S3-08",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S3-08/v2-20260906-r1/book.epub",
+      "epubSha256": "65746d25acfd6e502ca1de35c9308ba55b7e9e65fbf4c85e8a9725ddee82b59e",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S4-01",
+      "version": "v2-20260906-r1",
+      "epubPath": ".local/kindle-books/K-S4-01/v2-20260906-r1/book.epub",
+      "epubSha256": "41a03298c29df5f637e58236f8015f0f42140ba0548368d330076dc5d4db3384",
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    }
+  ]
+}

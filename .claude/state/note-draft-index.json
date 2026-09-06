@@ -176,15 +176,15 @@
       "r2_path": "note/stats47-note/koumuin-shigoto-kouritsuka-ai",
       "status": "unknown"
     },
-    "pinned-intro": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/pinned-intro",
-      "status": "unknown"
-    },
     "sunshine-solar-housing": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/sunshine-solar-housing",
       "status": "unknown"
+    },
+    "d-kakei-category-dataset": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/d-kakei-category-dataset",
+      "status": "draft"
     }
   }
 }

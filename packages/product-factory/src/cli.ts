@@ -72,9 +72,13 @@ function notImplemented(name: string): number {
 }
 
 async function runGenerate(): Promise<number> {
+  const versionIndex = argv.indexOf("--version");
+  const version = versionIndex >= 0 ? argv[versionIndex + 1] : undefined;
+  if (!version || version.startsWith("--")) throw new Error("generate requires --version <NEW_VERSION>; existing deliveries are immutable");
   if (flags.has("--all")) {
     const { buildAll } = await import("./build/build-all");
     const results = await buildAll({
+      version,
       onProgress: (done, total, res) => {
         if (done % 10 === 0 || done === total || done === 1) {
           console.log(`  [${done}/${total}] ${res.productId} ${res.family} (${res.formatsBuilt.join(",") || "listing"})`);
@@ -102,8 +106,14 @@ async function runGenerate(): Promise<number> {
   }
   const databook = resolveDatabook(product);
   const res = databook
-    ? await buildDatabook(product, databook)
-    : await buildProduct(product, JAPANESE_POPULATION_2024);
+    ? await buildDatabook(product, databook, { version })
+    : await buildProduct(product, JAPANESE_POPULATION_2024, { version });
+  if (product.id === "P-13") {
+    const { recordFreeSampleDelivery } = await import("./build/free-sample-delivery");
+    const { dirname, resolve } = await import("node:path");
+    const { fileURLToPath } = await import("node:url");
+    recordFreeSampleDelivery(resolve(dirname(fileURLToPath(import.meta.url)), "../../.."), res.outDir);
+  }
   console.log(`✅ 生成: ${res.productId} → ${res.outDir}`);
   for (const f of res.manifest.files) console.log(`   ${f.path} (${f.bytes} bytes)`);
   return 0;
@@ -111,7 +121,10 @@ async function runGenerate(): Promise<number> {
 
 async function runReport(): Promise<number> {
   const { writeReport } = await import("./build/report");
-  const path = writeReport();
+  const versionIdx = argv.indexOf("--kindle-version");
+  const noteIdx = argv.indexOf("--note-revision");
+  const path = writeReport(undefined, { kindleVersion: versionIdx >= 0 ? argv[versionIdx + 1] : undefined,
+    noteRevision: noteIdx >= 0 ? argv[noteIdx + 1] : undefined });
   console.log(`✅ catalog-status を書き出しました: ${path}`);
   return 0;
 }

@@ -18,15 +18,17 @@ EPUB3 を生成・検証して、**オーナーの Kindle Previewer 検証・KDP
 - **主エンジンは EPUB3 リフロー型**（PDF は使わない＝KDP 電子は PDF 実質不可）。図表は SVG→PNG で章内同梱。
 - **KDP アップロードはしない**（人間工程・2FA/税務/銀行情報）。「生成成功」を「出品可能」と言わない。
 - **著作権 + KDP 規律**: 参照書籍からは論点・型のみ（文言/図案は複製しない）。数値は e-Stat/R2 自社データ。
-  **再構成 + 30% 以上の書き下ろしが必須**（未達なら `generate` が警告・READINESS に赤字）。KU 登録は当面見送り。
+  **内部編集基準として再構成 + 30% 以上の書き下ろしが必須**。Amazonの許諾・審査合格を保証する基準ではない。未達・欠落は非zero終了とし、KU 登録は当面見送り。
 
 ## コマンド
 
 ```
 npm run products:kindle:plan      --workspace=@stats47/product-factory              # カタログ一覧・status 集計
 npm run products:kindle:validate  --workspace=@stats47/product-factory              # 決定的検証 (id/series/価格/fresh 章)
-npm run products:kindle:generate  --workspace=@stats47/product-factory -- --id K-S1-01   # 単一書籍を EPUB 生成
-npm run products:kindle:generate  --workspace=@stats47/product-factory -- --all-manuscript  # status>=manuscript を一括
+npm run products:kindle:generate  --workspace=@stats47/product-factory -- --id K-S1-01 --version <NEW_VERSION>
+npm run products:kindle:generate  --workspace=@stats47/product-factory -- --all-manuscript --version <NEW_VERSION>
+npm run products:kindle:verify-epub --workspace=@stats47/product-factory -- --version <VERSION> --report <NEW_JSON_PATH>
+npm run products:report --workspace=@stats47/product-factory -- --kindle-version <VERSION>
 npm run products:kindle:report    --workspace=@stats47/product-factory              # 台帳 .claude/state/products/kindle-status.json
 ```
 
@@ -36,11 +38,11 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    `freshFile` で割り当て、blog 章の `blogSlug` が R2 実在することを確認して `status: "manuscript"` にする。
 2. **書き下ろしを執筆・レビュー**: fresh 章の本文は `article-writer` が起草 → `blog-critic` が別コンテキストで
    review.md（verdict:PASS）を出すまで直させる（author/critic 分離）。**書き下ろし比率 30% 以上**を満たす分量にする。
-3. **生成**: `products:kindle:generate -- --id <id>` → `.local/kindle-books/<id>/v1/{book.epub,cover.png,metadata.json,READINESS.md}`。
+3. **生成**: `products:kindle:generate -- --id <id> --version <NEW_VERSION>` → `.local/kindle-books/<id>/<NEW_VERSION>/`。既存版は上書き不可。
    出力の「書き下ろし比率」が 30% 以上（✅）であることを確認する（未達は赤字警告＝出品前提を満たさない）。
 4. **構造検証**: EPUB を unzip し、mimetype 先頭 STORE / 全 XHTML・OPF が整形式 / 画像参照が manifest 整合 を確認。
    vitest（`tests/kindle-channel.test.ts`）で回帰も見る。
-5. **版保全**: `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id>` → `--audit --deep --record`。EPUB・表紙2種・metadata・READINESS（reviewがあれば同梱）をR2へ暗号化保全し、Git台帳とSHAを一致させる。
+5. **版保全**: `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <VERSION>` → `--audit --id <id> --version <VERSION> --deep --record`。EPUB・表紙2種・metadata・READINESS（review.md/review.jsonがあれば同梱）をR2へ暗号化保全し、Git台帳とSHAを一致させる。pushだけでは検証済みにしない。
 6. **オーナーへ受け渡し**: `READINESS.md` に沿って人間が Kindle Previewer で表示確認 → `/kdp-publish`。別PCは`--restore --id <id>`で復元する。
 
 ## スコープ

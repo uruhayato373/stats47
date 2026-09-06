@@ -19,6 +19,8 @@ export type {
   InternalEvidenceAdoption,
   JapanZueCandidate,
   JapanZueEvidenceItem,
+  KakeiMarketingAnalysis,
   ReferenceSourcePolicy,
 } from "./types";
 export * from "./japan-zue";
+export * from "./kakei-marketing";

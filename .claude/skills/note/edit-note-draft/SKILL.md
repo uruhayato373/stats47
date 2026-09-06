@@ -142,7 +142,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 - [ ] 煽りタイトル・攻撃的表現がない
 - [ ] 初心者でも理解できる平易な文章になっている
 - [ ] チャートが記事内容と対応している
-- [ ] `hashtags.txt` が存在し、ハッシュタグが 100 個以内である
+- [ ] `hashtags.txt` が存在し、有効で重複のないハッシュタグが 99 個ある
 - [ ] cover SVG/PNG を新規生成・編集した場合、`node .claude/scripts/note/check-cover-overlap.cjs <slug>/images/cover*.svg` が exit 0 で通る（CJK テキストの重なり検出）
 
 ## 公開準備（編集完了後）

@@ -2,7 +2,7 @@
 title: 改善バックログ
 type: improvement-backlog
 created: 2026-06-06
-updated: 2026-09-03
+updated: 2026-09-06
 status: active
 ---
 
@@ -53,6 +53,7 @@ status: active
 | SITE-LINKROT-01 | 横断リンク監査の壊れ0継続と、タグ・410由来coverageの変化を判定する | effect/pending | 2026-08-24 | claude | gsc |
 | STP-MESSAGE-ROLLOUT-01 | ポジショニング文言をSNSプロフィール・OGP・サイト説明・note導線へ展開し、例外を明示する | pending | 2026-08-31 | claude | brand |
 | THEME-INTERNALNAV-01 | theme→ranking/blog遷移を既存GA4契約で計測できるようにする | pending | 2026-08-31 | claude | ga4 |
+| NOTE-CIRCULATION-PILOT-01 | 2026-09-06に高view 3記事へ次記事+マガジンの素URLカードを反映し、続けて公開222記事を全量是正（95タグ以上222/222、サイト184、関連記事180、マガジン157、live監査error/warning 0）。Japan 28日 baselineは対象着地80/86/4 sessions、遷移先note viewは取得対象の2件だけ保存（1件欠測）。2026-10-04以降に同条件で着地session・次記事view増分を比較する（guard: note内clickは直接取得不可、同一landingの複数記事混在） | effect/pending | 2026-10-04 | claude | ga4/note |
 | THEME-LOCALFINANCE-01 | local-financeの流入増とengagement低下をsource/mediumで切り分ける。**GSC 56日 clicks0/imp32 で organic起因ではない**と確定 (pv 92→183 / engagementRate 0.615→0.165、同週 site-wide は Direct sessions +55%・bounce 0.81)。ページ別 source/medium は GA4 creds 保有環境での実行が必要 | pending | 2026-08-19 | claude | ga4 |
 
 ## Tier 3 (P3)

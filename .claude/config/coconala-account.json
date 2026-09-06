@@ -1,7 +1,9 @@
 {
-  "sellerName": "IGWORKS",
-  "userId": "1269384",
-  "profileUrl": "https://coconala.com/users/1269384",
-  "listedAt": "2026-07-23",
-  "_note": "ココナラ (coconala.com) 出品アカウントの機械可読 SSOT (stats47 専用)。★doboku-note の dobokunote アカウントとは別。account assert (誤アカウント操作の防止) は userId を最優先で照合する = マイページはログイン中アカウント自身のプロフィールリンク (a[href*='/users/NNNN']) を常に露出するため、新規セラー (出品0件で表示名が本文に出ない) でも確実に判定でき、別アカウントは id 不一致で確実に弾ける (2026-07-23 実機で services_lists テキスト照合が新規セラーで機能しないと判明→userId 方式に変更)。sellerName は公開プロフィールの表示名 (フォールバック照合・参考)。ログイン済みプロファイルは .local/playwright-coconala-profile (dobokunote のプロファイルとはディレクトリが分離)。出品内容 (title/price/category/body 等) と公開状態 (status/serviceUrl) の真実源は .claude/config/coconala-listings.json、商品設計 SSOT は packages/product-factory、規約は .claude/rules/coconala-product-standards.md。"
+  "sellerName": "stats47",
+  "userId": "6198620",
+  "profileUrl": "https://coconala.com/users/6198620",
+  "listedAt": "2026-09-06",
+  "approvedAt": "2026-09-06",
+  "approval": "ユーザーがstats47（6198620）への出品を承認。続く「全てやり切って」により、同一アカウントが所有する既存13商品の説明・見本・納品物是正も承認。別アカウントへの移転は含まない。",
+  "_note": "出品アカウントSSOT。assertAccountは/mypage/userの本人プレビューリンクだけでIDを照合し、名前やおすすめ出品者では代替しない。商品設計はproduct-factory、公開状態はcoconala-listings.json。既存listingを他アカウントへ自動移転しない。"
 }

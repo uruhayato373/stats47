@@ -5,9 +5,9 @@
  * クライアント側暗号化してから保存する。暗号鍵そのものはR2/Gitへ置かない。
  * KINDLE_ARCHIVE_KEYがあれば優先し、未設定時はR2_SECRET_ACCESS_KEYからHKDFで導出する。
  *
- *   ... --push --all
- *   ... --audit --all [--deep] [--record]
- *   ... --restore --id K-S1-01 [--revision <hash>] [--target <dir>] [--force]
+ *   ... --push --all --version <version>
+ *   ... --audit --all --version <version> [--deep] [--record]
+ *   ... --restore --id K-S1-01 --version <version> [--revision <hash>] [--target <dir>] [--force]
  */
 import {
   GetObjectCommand,
@@ -52,7 +52,6 @@ const BUCKET = process.env.KINDLE_ARCHIVE_BUCKET || process.env.CLOUDFLARE_R2_BU
 const ARCHIVE_PREFIX = "archive/kindle-encrypted";
 const LOCAL_ROOT = join(PROJECT_ROOT, ".local/kindle-books");
 const STATE_PATH = join(PROJECT_ROOT, ".claude/state/products/kindle-archives.json");
-const VERSION = "v1";
 const REQUIRED_ARCHIVE_FILES = [
   "book.epub",
   "cover.jpg",
@@ -60,10 +59,11 @@ const REQUIRED_ARCHIVE_FILES = [
   "metadata.json",
   "READINESS.md",
 ] as const;
-const OPTIONAL_ARCHIVE_FILES = ["review.md"] as const;
+const OPTIONAL_ARCHIVE_FILES = ["review.md", "review.json"] as const;
 
 interface ArchiveRevisionState {
   revision: string;
+  version?: string;
   archivedAt: string;
   verifiedAt: string;
   remotePrefix: string;
@@ -95,6 +95,13 @@ const value = (flag: string): string | undefined => {
 };
 
 function operation(): "push" | "audit" | "restore" {
+  const known = new Set(["--push", "--audit", "--restore", "--id", "--all", "--version", "--revision", "--target", "--deep", "--record", "--force"]);
+  for (const flag of argv.filter(arg => arg.startsWith("--"))) if (!known.has(flag)) throw new Error(`未知の引数: ${flag}`);
+  for (const flag of ["--id", "--version", "--revision", "--target"]) {
+    if (has(flag) && (!value(flag) || value(flag)!.startsWith("--"))) throw new Error(`${flag} の値がありません`);
+  }
+  if (has("--version") && !/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$/.test(value("--version")!)) throw new Error("不正なversion");
+  if (has("--record") && (!has("--audit") || !has("--deep"))) throw new Error("検証済み記録は --audit --deep --record の場合だけ可能です");
   const selected = (["push", "audit", "restore"] as const).filter((name) => has(`--${name}`));
   if (selected.length !== 1) {
     throw new Error("--push | --audit | --restore のいずれか1つを指定してください");
@@ -181,8 +188,8 @@ async function readRemoteManifest(key: string, encryptionKey: Buffer): Promise<K
   return manifest;
 }
 
-function collectPlainFiles(id: string): Array<{ name: string; path: string; bytes: Buffer; sha: string }> {
-  const dir = join(LOCAL_ROOT, id, VERSION);
+function collectPlainFiles(id: string, version: string): Array<{ name: string; path: string; bytes: Buffer; sha: string }> {
+  const dir = join(LOCAL_ROOT, id, version);
   const required = REQUIRED_ARCHIVE_FILES.map((name) => {
     const path = join(dir, name);
     if (!existsSync(path)) throw new Error(`${id}: archive必須ファイルがありません: ${name}`);
@@ -198,7 +205,7 @@ function collectPlainFiles(id: string): Array<{ name: string; path: string; byte
   return [...required, ...optional];
 }
 
-function writeLocalMarker(id: string, manifest: KindleArchiveManifest, manifestSha256: string): void {
+function writeLocalMarker(id: string, manifest: KindleArchiveManifest, manifestSha256: string, targetDir = join(LOCAL_ROOT, id, manifest.version)): void {
   const marker = {
     schemaVersion: 1,
     bookId: id,
@@ -207,16 +214,18 @@ function writeLocalMarker(id: string, manifest: KindleArchiveManifest, manifestS
     manifestSha256,
     archivedAt: manifest.archivedAt,
   };
-  writeFileSync(join(LOCAL_ROOT, id, VERSION, ".kindle-archive.json"), JSON.stringify(marker, null, 2) + "\n");
+  writeFileSync(join(targetDir, ".kindle-archive.json"), JSON.stringify(marker, null, 2) + "\n");
 }
 
 async function pushBook(id: string, state: ArchiveState, encryptionKey: Buffer): Promise<void> {
   assertBookId(id);
-  const plainFiles = collectPlainFiles(id);
+  const version = value("--version");
+  if (!version) throw new Error("--push には --version が必要です（旧版への暗黙fallbackは禁止）");
+  const plainFiles = collectPlainFiles(id, version);
   const revision = kindleArchiveRevision(
     plainFiles.map((file) => ({ name: file.name, plainSha256: file.sha, plainSize: file.bytes.length })),
   );
-  const remotePrefix = `${ARCHIVE_PREFIX}/${id}/${VERSION}/${revision}`;
+  const remotePrefix = `${ARCHIVE_PREFIX}/${id}/${version}/${revision}`;
   const manifestKey = `${remotePrefix}/manifest.json`;
   const existing = await readRemoteManifest(manifestKey, encryptionKey);
   let manifest: KindleArchiveManifest;
@@ -241,7 +250,7 @@ async function pushBook(id: string, state: ArchiveState, encryptionKey: Buffer):
           CacheControl: "private, no-store",
           Metadata: {
             bookid: id,
-            version: VERSION,
+            version,
             revision,
             plainsha256: file.sha,
             ciphersha256: cipherSha256,
@@ -264,7 +273,7 @@ async function pushBook(id: string, state: ArchiveState, encryptionKey: Buffer):
         schemaVersion: 1,
         archiveFormat: KINDLE_ARCHIVE_FORMAT,
         bookId: id,
-        version: VERSION,
+        version,
         revision,
         archivedAt,
         files,
@@ -288,18 +297,20 @@ async function pushBook(id: string, state: ArchiveState, encryptionKey: Buffer):
   const manifestSha256 = sha256(manifestBytes);
   const revisionState: ArchiveRevisionState = {
     revision,
+    version,
     archivedAt: manifest.archivedAt,
-    verifiedAt: new Date().toISOString(),
+    verifiedAt: "",
     remotePrefix,
     manifestSha256,
     files: manifest.files,
   };
-  const previous = state.books[id]?.revisions ?? [];
+  // Persist the old edition on each historical revision before switching the book-level pointer.
+  const previous = (state.books[id]?.revisions ?? []).map(item => ({ ...item, version: item.version ?? state.books[id].version }));
   state.books[id] = {
     id,
-    version: VERSION,
+    version,
     latestRevision: revision,
-    revisions: [...previous.filter((item) => item.revision !== revision), revisionState].sort((a, b) =>
+    revisions: [...previous.filter((item) => item.revision !== revision || item.version !== version), revisionState].sort((a, b) =>
       a.archivedAt.localeCompare(b.archivedAt),
     ),
   };
@@ -311,7 +322,11 @@ function selectRevision(state: ArchiveState, id: string): ArchiveRevisionState {
   const book = state.books[id];
   if (!book) throw new Error(`${id}: archive stateがありません`);
   const requested = value("--revision") || book.latestRevision;
-  const revision = book.revisions.find((item) => item.revision === requested);
+  const version = value("--version") || book.version;
+  const matchingVersions = book.revisions.filter(item => (item.version ?? book.version) === version);
+  const revision = value("--revision") || !value("--version")
+    ? book.revisions.find((item) => item.revision === requested && (item.version ?? book.version) === version)
+    : matchingVersions[matchingVersions.length - 1];
   if (!revision) throw new Error(`${id}: revision ${requested} がありません`);
   return revision;
 }
@@ -325,6 +340,12 @@ async function auditRevision(
   const manifestKey = `${revision.remotePrefix}/manifest.json`;
   const manifest = await readRemoteManifest(manifestKey, encryptionKey);
   if (!manifest) throw new Error(`${id}: R2 manifestがありません: ${manifestKey}`);
+  if (manifest.bookId !== id || !/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$/.test(manifest.version) || manifest.revision !== revision.revision ||
+    (revision.version && manifest.version !== revision.version)) throw new Error(`${id}: archive identity不一致`);
+  const names = manifest.files.map(file => file.name);
+  const allowedNames = new Set<string>([...REQUIRED_ARCHIVE_FILES, ...OPTIONAL_ARCHIVE_FILES]);
+  if (new Set(names).size !== names.length || REQUIRED_ARCHIVE_FILES.some(name => !names.includes(name)) ||
+    names.some(name => !allowedNames.has(name))) throw new Error(`${id}: archive file集合不一致`);
   const manifestSha256 = sha256(Buffer.from(JSON.stringify(manifest, null, 2) + "\n"));
   if (manifestSha256 !== revision.manifestSha256) {
     throw new Error(`${id}: stateとR2のmanifest SHAが不一致`);
@@ -377,7 +398,7 @@ async function restoreBook(id: string, state: ArchiveState, encryptionKey: Buffe
       renameSync(staging, destination);
     }
     const manifestBytes = Buffer.from(JSON.stringify(manifest, null, 2) + "\n");
-    writeLocalMarker(id, manifest, sha256(manifestBytes));
+    writeLocalMarker(id, manifest, sha256(manifestBytes), targetDir);
     console.log(`[archive] ${id}: restored ${manifest.revision} -> ${targetDir}`);
   } finally {
     rmSync(temp, { recursive: true, force: true });
@@ -386,6 +407,7 @@ async function restoreBook(id: string, state: ArchiveState, encryptionKey: Buffe
 
 async function main(): Promise<void> {
   const op = operation();
+  if (op === "push" && !value("--version")) throw new Error("--push には --version が必要です");
   const state = readState();
   const encryptionKey = deriveKindleArchiveKey(archiveSecret());
   const ids = targetIds(state, op);

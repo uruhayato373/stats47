@@ -1,5 +1,5 @@
 /**
- * データブック PDF ジェネレータ。pdf-lib + NotoSansJP subset で、収録指標ごとに
+ * データブック PDF ジェネレータ。pdf-lib + NotoSansJP 埋め込みで、収録指標ごとに
  * 47 都道府県のランキング表 (順位・都道府県・値) を実データで描画する。末尾に出典・利用許諾。
  * D-01 のように pdf を「データ本体」として納品する商品向け (manual.pdf ではなくデータブック本体)。
  */
@@ -36,19 +36,32 @@ export async function buildDatabookPdf(
 ): Promise<void> {
   const doc = await PDFDocument.create();
   doc.registerFontkit(fontkit);
-  const font = await doc.embedFont(notoSansJpBytes(), { subset: true });
+  // Noto JP subsetting can preserve text extraction but lose rendered glyphs (#1232).
+  // P-13 reproduced this in Poppler; embed the complete font rather than ship invisible text.
+  const font = await doc.embedFont(notoSansJpBytes(), { subset: false });
   doc.setTitle(title);
 
   const cur: Cursor = { page: doc.addPage([PAGE_W, PAGE_H]), y: PAGE_H - MARGIN };
 
   const drawLine = (text: string, size: number, color = rgb(0.12, 0.16, 0.22)): void => {
     const lineHeight = size * 1.5;
-    if (cur.y < MARGIN + lineHeight) {
-      cur.page = doc.addPage([PAGE_W, PAGE_H]);
-      cur.y = PAGE_H - MARGIN;
+    // Long definitions and source URLs must wrap, never disappear beyond the page edge.
+    let line = "";
+    const flush = (): void => {
+      if (cur.y < MARGIN + lineHeight) {
+        cur.page = doc.addPage([PAGE_W, PAGE_H]);
+        cur.y = PAGE_H - MARGIN;
+      }
+      cur.page.drawText(line, { x: MARGIN, y: cur.y, size, font, color });
+      cur.y -= lineHeight;
+      line = "";
+    };
+    for (const char of text) {
+      if (char === "\n") { flush(); continue; }
+      if (line && font.widthOfTextAtSize(line + char, size) > PAGE_W - MARGIN * 2) flush();
+      line += char;
     }
-    cur.page.drawText(text, { x: MARGIN, y: cur.y, size, font, color });
-    cur.y -= lineHeight;
+    flush();
   };
 
   const newPage = (): void => {
@@ -60,7 +73,8 @@ export async function buildDatabookPdf(
   drawLine(title, 22);
   drawLine(" ", 8);
   drawLine("47 都道府県の基礎統計をまとめたデータブックです。", 11);
-  drawLine(`収録指標: ${datasets.map((d) => `${d.indicator}（${d.year}）`).join(" / ")}`, 11);
+  drawLine(`収録指標: ${datasets.length} 指標。各指標の表・末尾の出典台帳を参照してください。`, 11);
+  drawLine("県名は対応する県コードの表示です。県庁所在市・特定世帯・観測地点の値を含み、県全体を表さない指標があります。", 11);
   drawLine("すべて実データ・基準年固定です（自動更新はありません）。", 11);
   drawLine("国・府省・自治体や e-Stat の公認・推奨を示すものではありません。", 10, rgb(0.4, 0.44, 0.5));
 
@@ -115,6 +129,7 @@ export async function buildDatabookPdf(
     drawLine(`表名: ${s.tableName}（statsDataId ${s.statsDataId}）`, 9);
     drawLine(`基準年: ${s.year} / 取得日: ${s.retrievedAt} / 単位: ${s.unit}`, 9);
     drawLine(`加工: ${s.transform}`, 9);
+    drawLine(`注意: ${s.notes}`, 9);
     drawLine(" ", 6);
   }
 
@@ -122,7 +137,7 @@ export async function buildDatabookPdf(
   const lic = LICENSE_REGISTRY[product.licenseId as LicenseId];
   drawLine("利用許諾・免責", 14);
   drawLine(`${lic.scope}。クライアント納品物への組み込み: ${lic.clientWork ? "可" : "不可"}。`, 9);
-  drawLine("テンプレート・図形・元データ単体の再販売 / 再配布は禁止です（詳細は LICENSE-ja.txt）。", 9);
+  drawLine("本商品の独自編集物単体の再販売 / 再配布は禁止です。原データの利用条件は提供元に従ってください（詳細は LICENSE-ja.txt）。", 9);
   drawLine("公的統計の概況整理であり、意思決定結果を保証しません。", 9);
 
   writeFileSync(outPath, await doc.save());

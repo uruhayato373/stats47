@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generated_by": "generate-note-catalog.ts",
-    "generated_at": "2026-09-05",
+    "generated_at": "2026-09-06",
     "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
     "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
   },
@@ -481,6 +481,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-convenience-store-sales": {
+      "vertical": "stats47-note",
+      "title": "【2025年版・年間販売額】コンビニエンスストア販売額が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n86ef06aa91dc",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-convenience-store-sales",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
     "a-current-liabilities-balance-multi-person-households-per-household": {
       "vertical": "stats47-note",
       "title": "【2019年版】負債現在高が最も多い県は？ 1位は神奈川県｜都道府県ランキング",
@@ -503,6 +514,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-electricity-demand": {
+      "vertical": "stats47-note",
+      "title": "【2023年版】電力需要量が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n71b4f712bea4",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-electricity-demand",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
     "a-electricity-generation-capacity": {
       "vertical": "stats47-note",
       "title": "【2023年版】発電電力量が最も多い県は？ 1位は千葉県｜都道府県ランキング",
@@ -514,6 +536,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-final-energy-consumption-per-capita": {
+      "vertical": "stats47-note",
+      "title": "【2022年版】1人当たり最終エネルギー消費量が最も多い県は？ 1位は大分県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n1374350f7172",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-final-energy-consumption-per-capita",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
     "a-general-households": {
       "vertical": "stats47-note",
       "title": "【2020年版】一般世帯数が最も多い県は？ 1位は東京都｜都道府県ランキング",
@@ -523,6 +556,50 @@
       "r2_path": "note/stats47-note/a-general-households",
       "r2_body": true,
       "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "a-kakei-aichi": {
+      "vertical": "stats47-note",
+      "title": "愛知県の家計は何にお金が偏っているか ── 住居費最少、たんすと婚礼に厚い名古屋市の暮らし",
+      "url": "https://note.com/stats47/n/nda72a0bed2c4",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-aichi",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
+    "a-kakei-aomori": {
+      "vertical": "stats47-note",
+      "title": "青森県の家計は何にお金が偏っているか ── 灯油とほたて貝が語る冬の家計",
+      "url": "https://note.com/stats47/n/n85831c0c47aa",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-aomori",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
+    "a-kakei-hiroshima": {
+      "vertical": "stats47-note",
+      "title": "広島県の家計は何にお金が偏っているか ── 教育費は控えめ、かきに厚みが出る広島市の暮らし",
+      "url": "https://note.com/stats47/n/n0be24c40b88d",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-hiroshima",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
+    "a-kakei-hokkaido": {
+      "vertical": "stats47-note",
+      "title": "北海道の家計は何にお金が偏っているか ── 住居費1.27倍に表れる雪国の暮らし",
+      "url": "https://note.com/stats47/n/n39016e5f0002",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-hokkaido",
+      "r2_body": true,
+      "r2_access": "none",
       "status": "r2_ready"
     },
     "a-late-elderly-medical-expense-per-insured": {
@@ -569,6 +646,39 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-private-rental-housing-rent-per-3-3m2": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】民営賃貸住宅の家賃が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n27d2efa9bcfb",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-private-rental-housing-rent-per-3-3m2",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
+    "a-railway-station-count": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】鉄道駅数が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/nadfe03f70c45",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-railway-station-count",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
+    "a-road-total-length": {
+      "vertical": "stats47-note",
+      "title": "【2023年版・合計（高速道路を除く）】道路実延長が最も長い県は？ 1位は北海道｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n2e5601e5d4e2",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-road-total-length",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
     "a-room-utilization-rate": {
       "vertical": "stats47-note",
       "title": "【2024年版】客室稼働率が最も高い県は？ 1位は東京都｜都道府県ランキング",
@@ -591,9 +701,31 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-total-overnight-guests": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】延べ宿泊者数が最も多い県は？ 1位は東京都｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n4727114e4db6",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-total-overnight-guests",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
+    "a-vacant-housing-rate": {
+      "vertical": "stats47-note",
+      "title": "【2023年版・総住宅数に占める空き家の割合】空き家率が最も高い県は？ 1位は徳島県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n002bee397931",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-vacant-housing-rate",
+      "r2_body": true,
+      "r2_access": "none",
+      "status": "r2_ready"
+    },
     "d-geo-flood-population-mesh": {
       "vertical": "stats47-note",
-      "title": "洪水浸水想定区域×2050年人口｜47都道府県・29,737メッシュを再現",
+      "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
       "url": "https://note.com/stats47/n/nfe50fb61efc0",
       "is_paid": true,
       "published_at": "2026-09-01",
@@ -617,7 +749,7 @@
     },
     "d-geo-land-price-future-population": {
       "vertical": "stats47-note",
-      "title": "地価上昇地点と周囲の人口減少を照合する｜47都道府県CSV・包含結合・検算",
+      "title": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",
       "url": "https://note.com/stats47/n/n23a2071a016f",
       "is_paid": true,
       "published_at": "2026-09-01",
@@ -642,7 +774,7 @@
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
-      "url": "https://note.com/stats47/n686dcc017bbe",
+      "url": "https://note.com/stats47/n/n686dcc017bbe",
       "is_paid": false,
       "published_at": "2026-06-06",
       "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical",
@@ -1249,6 +1381,17 @@
       "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
+    },
+    "pinned-intro": {
+      "vertical": "stats47-note",
+      "title": "【自己紹介】元県庁職員がつくった都道府県統計サイト「stats47」",
+      "url": "https://note.com/stats47/n/na69997771fe5",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/pinned-intro",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
     },
     "recovered-n023501038bd5": {
       "vertical": "stats47-note",
@@ -2065,7 +2208,7 @@
       "status": "r2_ready"
     },
     "recovered-na21015ac366d": {
-      "vertical": "koumuin-gis",
+      "vertical": "stats47-note",
       "title": "【2021年版】剣道をした人が多い県は？ 1位は山形県・長野県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/na21015ac366d",
       "is_paid": false,

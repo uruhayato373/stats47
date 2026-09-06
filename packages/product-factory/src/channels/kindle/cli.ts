@@ -14,7 +14,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS, BOOK_BY_ID } from "./book-catalog";
 import { validateKindleCatalog } from "./validator";
-import { buildBook } from "./build-book";
+import { buildBook, assertBookVersion } from "./build-book";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const STATUS_PATH = resolve(REPO_ROOT, ".claude/state/products/kindle-status.json");
@@ -24,6 +24,8 @@ const sub = argv[0] ?? "";
 const flags = new Set(argv.slice(1).filter((a) => a.startsWith("--")));
 const idIdx = argv.indexOf("--id");
 const idArg = idIdx >= 0 ? argv[idIdx + 1] : undefined;
+const versionIdx = argv.indexOf("--version");
+const versionArg = versionIdx >= 0 ? argv[versionIdx + 1] : undefined;
 
 function runPlan(): number {
   const v = validateKindleCatalog();
@@ -57,6 +59,11 @@ function runValidate(): number {
 }
 
 async function runGenerate(): Promise<number> {
+  if (!versionArg || versionArg.startsWith("--")) throw new Error("--version requires a value");
+  assertBookVersion(versionArg);
+  const supported = new Set(["--id", "--version", "--all-manuscript", "--no-cover"]);
+  for (const flag of flags) if (!supported.has(flag)) throw new Error(`Unknown generate flag: ${flag}`);
+  if (idIdx >= 0 && (!idArg || idArg.startsWith("--"))) throw new Error("--id requires a value");
   const v = validateKindleCatalog();
   if (!v.ok) {
     console.error("❌ カタログに error があるため生成しません。まず `validate` を通してください。");
@@ -78,29 +85,50 @@ async function runGenerate(): Promise<number> {
     console.log("生成対象 (status>=manuscript) がありません。");
     return 0;
   }
+  let failures = 0;
   for (const b of targets) {
     console.log(`\n▶ ${b.id} ${b.title} を生成中…`);
-    const r = await buildBook(b, { skipCover: flags.has("--no-cover") });
-    console.log(`  ✅ ${r.epubPath}`);
-    console.log(`     章 ${r.chapterCount} / 図版 ${r.imageCount}` + (r.missingSlugs.length ? ` / ⚠ 未取得 ${r.missingSlugs.join(",")}` : ""));
-    const pct = (r.freshRatio * 100).toFixed(2);
-    if (r.freshRatioOk) {
-      console.log(`     書き下ろし比率 ${pct}% (fresh ${r.freshChars} / blog ${r.blogChars}) ✅ 30% 以上`);
-    } else {
-      console.log(`     ⚠️ 書き下ろし比率 ${pct}% (< 30%) — KDP 出品前に書き下ろし章を増やしてください (fresh ${r.freshChars} / blog ${r.blogChars})`);
-    }
-    // ★比率とは別に絶対量を出す。比率は分母が小さいほど満たしやすいので、
-    //   「1 章 150 字 × 30 章」でも 30% を超えてしまう (2026-08-12 に 20 冊が該当)。
-    if (r.volumeOk) {
-      console.log(`     本文量 ${r.totalChars.toLocaleString()} 字 / 1章 ${r.charsPerChapter} 字 ✅`);
-    } else {
+    try {
+      const r = await buildBook(b, {
+        skipCover: flags.has("--no-cover"),
+        version: versionArg,
+      });
+      console.log(`  生成済み（販売準備完了ではありません）: ${r.epubPath}`);
       console.log(
-        `     ⛔ 本文量 ${r.totalChars.toLocaleString()} 字 / 1章 ${r.charsPerChapter} 字 — 書籍として薄すぎます` +
-          ` (床: 総 20,000 字・1章 800 字)。定型 1 文 + 図の羅列は KDP の品質規定に触れるため出品しないでください`,
+        `     章 ${r.chapterCount} / 図版 ${r.imageCount}` +
+          (r.missingSlugs.length ? ` / ⚠ 未取得 ${r.missingSlugs.join(",")}` : ""),
       );
+      const pct = (r.freshRatio * 100).toFixed(2);
+      if (r.freshRatioOk) {
+        console.log(`     書き下ろし比率 ${pct}% (fresh ${r.freshChars} / blog ${r.blogChars}) ✅ 30% 以上`);
+      } else {
+        console.log(
+          `     ⚠️ 書き下ろし比率 ${pct}% (< 30%) — KDP 出品前に書き下ろし章を増やしてください (fresh ${r.freshChars} / blog ${r.blogChars})`,
+        );
+      }
+      // ★比率とは別に絶対量を出す。比率は分母が小さいほど満たしやすいので、
+      //   「1 章 150 字 × 30 章」でも 30% を超えてしまう (2026-08-12 に 20 冊が該当)。
+      if (r.volumeOk) {
+        console.log(`     本文量 ${r.totalChars.toLocaleString()} 字 / 1章 ${r.charsPerChapter} 字 ✅`);
+      } else {
+        console.log(
+          `     ⛔ 本文量 ${r.totalChars.toLocaleString()} 字 / 1章 ${r.charsPerChapter} 字 — 書籍として薄すぎます` +
+            ` (床: 総 20,000 字・1章 800 字)。定型 1 文 + 図の羅列は KDP の品質規定に触れるため出品しないでください`,
+        );
+      }
+      if (!r.machineQualityOk) {
+        failures += 1;
+        console.error(`  機械品質未達: coverage=${r.coverage.complete}, missing=${JSON.stringify(r.coverage.missing)}`);
+      }
+    } catch (error) {
+      failures += 1;
+      console.error(`  ❌ ${b.id}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
-  return 0;
+  console.log(
+    `\n生成処理 ${targets.length}冊 / 機械品質未達または生成失敗 ${failures}冊。意味レビュー・実機・保全・公開は別工程です。`,
+  );
+  return failures > 0 ? 1 : 0;
 }
 
 function runReport(): number {
@@ -141,4 +169,9 @@ async function main(): Promise<number> {
   }
 }
 
-main().then((code) => process.exit(code));
+main()
+  .then((code) => process.exit(code))
+  .catch((error: unknown) => {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  });

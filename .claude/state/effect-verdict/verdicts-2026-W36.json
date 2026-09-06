@@ -1,0 +1,470 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-W36",
+  "decidedAt": "2026-09-06T13:54:43.883Z",
+  "thresholdsVersion": "1.0.0",
+  "thresholdsPath": ".claude/scripts/lib/effect-verdict/thresholds.mjs",
+  "note": "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",
+  "summary": {
+    "total": 7,
+    "byLabel": {
+      "effect/pending": 7
+    },
+    "byGuard": {
+      "insufficient-target": 7,
+      "insufficient-sample": 1
+    }
+  },
+  "verdicts": [
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-05-23-manual",
+      "label": "effect/pending",
+      "reason": "ガード insufficient-target により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        }
+      ],
+      "before": {
+        "value": 89,
+        "impressions": 7141
+      },
+      "after": {
+        "value": 76,
+        "impressions": 10556
+      },
+      "delta": -13,
+      "relativeDelta": -0.146067,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W20",
+        "afterWeek": "2026-W36",
+        "elapsedWeeks": 15,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W36/pages.csv",
+          "observedAt": "2026-09-06",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/child-height-regional-gap",
+        "/blog/consumer-price-regional-gap",
+        "/blog/fiscal-self-reliance-gap",
+        "/blog/fishery-species-prefecture-specialty",
+        "/blog/habitable-area-land-use",
+        "/blog/overnight-guests-inbound-recovery",
+        "/blog/park-green-space-gap",
+        "/blog/population-density-urbanization",
+        "/blog/price-index-high-low-prefecture",
+        "/blog/temperature-extremes-map"
+      ],
+      "logPath": ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-23-manual",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-05-25-auto",
+      "label": "effect/pending",
+      "reason": "ガード insufficient-target により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        }
+      ],
+      "before": {
+        "value": 127,
+        "impressions": 11300
+      },
+      "after": {
+        "value": 315,
+        "impressions": 32786
+      },
+      "delta": 188,
+      "relativeDelta": 1.480315,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W21",
+        "afterWeek": "2026-W36",
+        "elapsedWeeks": 14,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W36/pages.csv",
+          "observedAt": "2026-09-06",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/aging-rate-akita-vs-okinawa",
+        "/blog/alcohol-prefecture-map",
+        "/blog/barber-beauty-salon-regional-gap",
+        "/blog/birth-death-gap-decline",
+        "/blog/bonito-catch-prefecture",
+        "/blog/brazilian-resident-population-prefecture-gap",
+        "/blog/child-height-regional-gap",
+        "/blog/commercial-land-price-trend",
+        "/blog/commercial-sales-productivity-gap",
+        "/blog/communication-cost-burden",
+        "/blog/consumer-price-regional-gap",
+        "/blog/cpi-change-regional-pattern",
+        "/blog/expenditure-structure-comparison",
+        "/blog/fertility-fiscal-nexus",
+        "/blog/fertility-rate-prefecture-gap",
+        "/blog/fiscal-health-50years-trend",
+        "/blog/fishery-catch-aquaculture-shift",
+        "/blog/fishery-species-prefecture-specialty",
+        "/blog/food-trio-prefecture-map",
+        "/blog/foreign-overnight-guests-prefecture-gap",
+        "/blog/habitable-area-land-use",
+        "/blog/highschool-starting-salary-gap",
+        "/blog/household-income-tokyo-okinawa",
+        "/blog/household-spending-before-after-inflation",
+        "/blog/housing-cost-livability-trend",
+        "/blog/ict-digital-divide-composite-analysis",
+        "/blog/inflation-rate-prefecture-gap",
+        "/blog/konbu-consumption-prefecture-gap",
+        "/blog/local-tax-regional-gap",
+        "/blog/marriage-divorce-okinawa",
+        "/blog/marriage-unmarried-crisis",
+        "/blog/minimum-wage-1000yen-breakthrough",
+        "/blog/minimum-wage-gap-regional-economy",
+        "/blog/park-green-space-gap",
+        "/blog/pharmacy-count-prefecture-ranking",
+        "/blog/pollution-complaints-regional-map",
+        "/blog/population-density-urbanization",
+        "/blog/population-migration-tokyo-concentration",
+        "/blog/post-office-last-window",
+        "/blog/precipitation-snow-regional-gap",
+        "/blog/prefectural-height-male-female-gap",
+        "/blog/price-index-high-low-prefecture",
+        "/blog/recycling-rate-gap",
+        "/blog/savings-rate-gap",
+        "/blog/school-nonattendance-pattern",
+        "/blog/sugar-consumption-prefecture-gap",
+        "/blog/sunshine-pacific-vs-nihonkai",
+        "/blog/temperature-extremes-map",
+        "/blog/truck-driver-2024-crisis",
+        "/blog/unemployment-structure",
+        "/blog/unemployment-tertiary-industry-link",
+        "/blog/wage-vs-living-cost",
+        "/blog/water-sewage-crisis"
+      ],
+      "logPath": ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-25-auto",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-05-29-auto",
+      "label": "effect/pending",
+      "reason": "ガード insufficient-target により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        }
+      ],
+      "before": {
+        "value": 7,
+        "impressions": 1258
+      },
+      "after": {
+        "value": 26,
+        "impressions": 7811
+      },
+      "delta": 19,
+      "relativeDelta": 2.714286,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W21",
+        "afterWeek": "2026-W36",
+        "elapsedWeeks": 14,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W36/pages.csv",
+          "observedAt": "2026-09-06",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/agriculture-hokkaido-dominance",
+        "/blog/manufacturing-aichi-dominance",
+        "/blog/manufacturing-shipment-prefecture-ranking",
+        "/blog/sewerage-water-supply-gap"
+      ],
+      "logPath": ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-29-auto",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-06-07-manual",
+      "label": "effect/pending",
+      "reason": "ガード insufficient-target により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        }
+      ],
+      "before": {
+        "value": 0,
+        "impressions": 207
+      },
+      "after": {
+        "value": 6,
+        "impressions": 320
+      },
+      "delta": 6,
+      "relativeDelta": null,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W22",
+        "afterWeek": "2026-W36",
+        "elapsedWeeks": 13,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W36/pages.csv",
+          "observedAt": "2026-09-06",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/consumer-price-regional-gap",
+        "/blog/curry-roux-consumption-gap",
+        "/blog/doctor-income-prefecture-gap"
+      ],
+      "logPath": ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-06-07-manual-2",
+      "label": "effect/pending",
+      "reason": "ガード insufficient-target により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        }
+      ],
+      "before": {
+        "value": 69,
+        "impressions": 2614
+      },
+      "after": {
+        "value": 493,
+        "impressions": 14866
+      },
+      "delta": 424,
+      "relativeDelta": 6.144928,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W22",
+        "afterWeek": "2026-W36",
+        "elapsedWeeks": 13,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W36/pages.csv",
+          "observedAt": "2026-09-06",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/household-spending-prefecture-gap",
+        "/blog/local-government-debt-burden",
+        "/blog/price-index-high-low-prefecture"
+      ],
+      "logPath": ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-2",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-06-07-manual-3",
+      "label": "effect/pending",
+      "reason": "ガード insufficient-target により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        }
+      ],
+      "before": {
+        "value": 26,
+        "impressions": 889
+      },
+      "after": {
+        "value": 151,
+        "impressions": 6893
+      },
+      "delta": 125,
+      "relativeDelta": 4.807692,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W22",
+        "afterWeek": "2026-W36",
+        "elapsedWeeks": 13,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W36/pages.csv",
+          "observedAt": "2026-09-06",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/automotive-industry-transformation-map",
+        "/blog/marriage-unmarried-crisis",
+        "/blog/sports-urban-paradox"
+      ],
+      "logPath": ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-3",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-06-10-manual",
+      "label": "effect/pending",
+      "reason": "ガード insufficient-target, insufficient-sample により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        },
+        {
+          "code": "insufficient-sample",
+          "detail": "before imp 37 < sample.minImpressionsBefore 100"
+        }
+      ],
+      "before": {
+        "value": 0,
+        "impressions": 37
+      },
+      "after": {
+        "value": 19,
+        "impressions": 730
+      },
+      "delta": 19,
+      "relativeDelta": null,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W23",
+        "afterWeek": "2026-W36",
+        "elapsedWeeks": 12,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W36/pages.csv",
+          "observedAt": "2026-09-06",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/frozen-gyoza-spending-prefecture-gap",
+        "/blog/library-books-prefecture-gap",
+        "/blog/pachinko-participation-prefecture-gap",
+        "/blog/pharmacist-income-prefecture-gap",
+        "/blog/tofu-consumption-prefecture-gap",
+        "/blog/yogurt-spending-prefecture-gap"
+      ],
+      "logPath": ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-10-manual",
+      "skipped": false
+    }
+  ]
+}

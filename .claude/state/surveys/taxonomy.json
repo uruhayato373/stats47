@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-06T01:52:54.040Z",
+  "generatedAt": "2026-09-06T17:40:54.583Z",
   "masterSurveyCount": 105,
   "ranking": {
-    "metrics": 2302,
-    "activeMetrics": 2157,
-    "resolved": 2088,
+    "metrics": 2311,
+    "activeMetrics": 2166,
+    "resolved": 2097,
     "unresolved": 214,
-    "coveragePct": 90.7,
-    "activeResolved": 1953,
+    "coveragePct": 90.74,
+    "activeResolved": 1962,
     "activeUnresolved": 204,
-    "activeCoveragePct": 90.54,
+    "activeCoveragePct": 90.58,
     "activeUnresolvedKeys": [
       "academic-achievement-test-average-rate",
       "accident-death-30day",
@@ -255,7 +255,7 @@
       "insurance-rate-org-statistics": 8,
       "japan-post-statistics": 3,
       "job-placement-statistics": 8,
-      "kakei-chousa": 695,
+      "kakei-chousa": 704,
       "labor-market-annual": 9,
       "late-elderly-medical-annual-report": 1,
       "livestock-statistics": 1,
@@ -3385,7 +3385,7 @@
     },
     {
       "surveyId": "kakei-chousa",
-      "rankingCount": 695,
+      "rankingCount": 704,
       "themeKeys": [
         "real-income"
       ],

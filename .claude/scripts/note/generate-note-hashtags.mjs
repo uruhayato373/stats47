@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * note ドラフトのハッシュタグを90個生成して hashtags.txt に保存する。
+ * note ドラフトのハッシュタグを99個生成して hashtags.txt に保存する。
  *
  * Usage:
  *   node .claude/scripts/note/generate-note-hashtags.mjs [--slug <slug>] [--all]
@@ -32,7 +32,7 @@ const HASHTAGS_BY_VERTICAL = {
       '#社会統計', '#地域分析', '#エリア分析', '#格差', '#地方と都市',
       '#47都道府県', '#都道府県比較', '#日本地図', '#統計グラフ',
       '#数字で見る日本', '#地域データ', '#日本の課題', '#地域研究',
-      '#オープンデータ', '#e-Stat', '#政府統計', '#統計活用',
+      '#オープンデータ', '#eStat', '#政府統計', '#統計活用',
     ],
     series: {
       A: [
@@ -97,7 +97,7 @@ const HASHTAGS_BY_VERTICAL = {
   },
   'koumuin-estat-claude-code': {
     base: [
-      '#e-Stat', '#統計API', '#公務員', '#Claude', '#ClaudeCode',
+      '#eStat', '#統計API', '#公務員', '#Claude', '#ClaudeCode',
       '#AI', '#データ分析', '#政府統計', '#公的統計', '#統計データ活用',
       '#自治体', '#行政データ', '#オープンデータ', '#Python',
       '#API活用', '#データ取得', '#統計処理', '#業務改善',
@@ -166,7 +166,7 @@ function extractKeywordsFromTitle(title) {
   return title || '';
 }
 
-function generateHashtags(vertical, seriesHint, title) {
+export function generateHashtags(vertical, seriesHint, title) {
   const pool = HASHTAGS_BY_VERTICAL[vertical] || HASHTAGS_BY_VERTICAL['stats47-note'];
   const result = new Set();
 
@@ -186,7 +186,7 @@ function generateHashtags(vertical, seriesHint, title) {
     }
   }
 
-  // 4. 90個に調整（足りない場合は汎用タグ補充）
+  // 4. 99個に調整（足りない場合は汎用タグ補充）
   const FILL_TAGS = [
     '#note', '#noteクリエイター', '#毎日note', '#note記事',
     '#読んで欲しい', '#フォロー', '#スキしてみて', '#クリエイター',
@@ -211,15 +211,15 @@ function generateHashtags(vertical, seriesHint, title) {
     '#なるほど', '#深い', '#勉強になる', '#ためになる',
   ];
   let fillIdx = 0;
-  while (result.size < 90 && fillIdx < FILL_TAGS.length) {
+  while (result.size < 99 && fillIdx < FILL_TAGS.length) {
     result.add(FILL_TAGS[fillIdx++]);
   }
 
-  // 90個に切り詰め
-  return [...result].slice(0, 90);
+  // note の実機上限に合わせて99個に切り詰め
+  return [...result].slice(0, 99);
 }
 
-function detectSeries(slug) {
+export function detectSeries(slug) {
   const s = slug.toLowerCase();
   if (s.startsWith('a-') || s.startsWith('a_') || /^a-laborwage/.test(s)) return 'A';
   if (s.startsWith('b-') || s.startsWith('b_')) return 'B';
@@ -278,37 +278,43 @@ function processSlug(slug, info, draftRoot) {
 // エントリポイント
 // ============================================================
 
-const args = process.argv.slice(2);
-const targetSlug = args.includes('--slug') ? args[args.indexOf('--slug') + 1] : null;
-const allMode = args.includes('--all');
-const draftRoot = path.join(PROJECT_ROOT, 'docs/31_note記事原稿');
+async function main() {
+  const args = process.argv.slice(2);
+  const targetSlug = args.includes('--slug') ? args[args.indexOf('--slug') + 1] : null;
+  const allMode = args.includes('--all');
+  const draftRoot = path.join(PROJECT_ROOT, 'docs/31_note記事原稿');
 
-const indexPath = path.join(PROJECT_ROOT, '.claude/state/note-draft-index.json');
-const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
-const drafts = indexData.drafts || {};
+  const indexPath = path.join(PROJECT_ROOT, '.claude/state/note-draft-index.json');
+  const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+  const drafts = indexData.drafts || {};
 
-if (!allMode && !targetSlug) {
-  console.log('Usage: node generate-note-hashtags.mjs [--slug <slug>] [--all]');
-  process.exit(0);
-}
-
-const targets = targetSlug
-  ? { [targetSlug]: drafts[targetSlug] }
-  : drafts;
-
-console.log(`=== ハッシュタグ生成 (対象: ${Object.keys(targets).length}件) ===`);
-const results = [];
-for (const [slug, info] of Object.entries(targets)) {
-  if (!info) {
-    console.log(`  NOT FOUND: ${slug}`);
-    continue;
+  if (!allMode && !targetSlug) {
+    console.log('Usage: node generate-note-hashtags.mjs [--slug <slug>] [--all]');
+    return;
   }
-  results.push(processSlug(slug, info, draftRoot));
+
+  const targets = targetSlug
+    ? { [targetSlug]: drafts[targetSlug] }
+    : drafts;
+
+  console.log(`=== ハッシュタグ生成 (対象: ${Object.keys(targets).length}件) ===`);
+  const results = [];
+  for (const [slug, info] of Object.entries(targets)) {
+    if (!info) {
+      console.log(`  NOT FOUND: ${slug}`);
+      continue;
+    }
+    results.push(processSlug(slug, info, draftRoot));
+  }
+
+  const ok = results.filter(r => r.status === 'ok').length;
+  const skip = results.filter(r => r.status === 'skip').length;
+  console.log(`\n完了: OK=${ok}件, SKIP(未展開)=${skip}件`);
+  if (skip > 0) {
+    console.log('  未展開のドラフトは restore-from-r2.sh で展開後に再実行してください');
+  }
 }
 
-const ok = results.filter(r => r.status === 'ok').length;
-const skip = results.filter(r => r.status === 'skip').length;
-console.log(`\n完了: OK=${ok}件, SKIP(未展開)=${skip}件`);
-if (skip > 0) {
-  console.log('  未展開のドラフトは restore-from-r2.sh で展開後に再実行してください');
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await main();
 }

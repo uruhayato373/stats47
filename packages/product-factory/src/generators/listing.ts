@@ -59,8 +59,10 @@ export function renderListing(product: ProductDefinition, datasets: readonly Dat
     );
   }
   if (hasMap) {
-    canDoLines.push("- 47 都道府県のコロプレス地図・ランキング・チャートを、資料にそのまま使えます。");
-    canDoLines.push("- 地図は都道府県ごとに色を変更できる編集可能な図形として収録しています。");
+    canDoLines.push("- 47 都道府県のコロプレス地図を確認できます。利用範囲は同梱ライセンスに従ってください。");
+    canDoLines.push(product.formats.includes("pptx") || product.formats.includes("svg")
+      ? "- 地図は都道府県ごとに色を変更できる編集可能な図形として収録しています。"
+      : "- PNGは固定画像です。県別の再着色・数値編集による地図の自動更新機能はありません。");
   } else {
     canDoLines.push("- 47 都道府県の値・順位を、資料や分析にそのまま使えます（Excel は値編集で順位が再計算されます）。");
   }
@@ -76,6 +78,7 @@ export function renderListing(product: ProductDefinition, datasets: readonly Dat
     "",
     "## 納品物",
     ...deliverableLines(product.formats),
+    ...(product.formats.includes("pptx") && datasets.length > 30 ? ["- PowerPointは先頭30指標の抜粋版。全指標はCSV・PDF（Excel同梱商品ではExcelも）に収録。"] : []),
     "",
     "## 対応環境",
     ...product.compatibility.map((c) => `- ${c}`),
@@ -83,7 +86,7 @@ export function renderListing(product: ProductDefinition, datasets: readonly Dat
     "## 利用範囲",
     `- ${lic.scope}`,
     `- クライアント納品物への組み込み: ${lic.clientWork ? "可" : "不可"}`,
-    "- テンプレート・図形・元データ単体の再販売 / 再配布は禁止です。",
+    "- 本商品の独自編集物単体の再販売 / 再配布は禁止です。原データの利用条件は提供元に従ってください。",
     "",
     "## 注意事項",
     ...(allSample

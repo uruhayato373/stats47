@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-26T15:33:24.504Z",
+  "generatedAt": "2026-09-05T15:31:50.264Z",
   "base": ".local/r2/app/blog",
-  "articlesWithCharts": 432,
-  "totalSvgs": 2443,
-  "articlesWithErrors": 98,
+  "articlesWithCharts": 442,
+  "totalSvgs": 2469,
+  "articlesWithErrors": 85,
   "articlesDarkModeNonCompliant": 135,
   "articles": [
     {
@@ -17,7 +17,7 @@
     {
       "slug": "international-cooperation-volunteer-map",
       "svgCount": 6,
-      "errors": 16,
+      "errors": 15,
       "warnings": 8,
       "darkModeMissing": 3,
       "themeColorInline": 3
@@ -39,14 +39,6 @@
       "themeColorInline": 6
     },
     {
-      "slug": "temperature-extremes-map",
-      "svgCount": 9,
-      "errors": 12,
-      "warnings": 17,
-      "darkModeMissing": 8,
-      "themeColorInline": 8
-    },
-    {
       "slug": "precipitation-snow-regional-gap",
       "svgCount": 10,
       "errors": 12,
@@ -55,12 +47,12 @@
       "themeColorInline": 3
     },
     {
-      "slug": "welfare-expenses-squeeze",
-      "svgCount": 11,
-      "errors": 12,
-      "warnings": 8,
-      "darkModeMissing": 3,
-      "themeColorInline": 3
+      "slug": "temperature-extremes-map",
+      "svgCount": 10,
+      "errors": 11,
+      "warnings": 15,
+      "darkModeMissing": 7,
+      "themeColorInline": 7
     },
     {
       "slug": "unemployment-structure",
@@ -81,6 +73,14 @@
     {
       "slug": "foreign-population-growth-rate",
       "svgCount": 7,
+      "errors": 9,
+      "warnings": 8,
+      "darkModeMissing": 3,
+      "themeColorInline": 3
+    },
+    {
+      "slug": "welfare-expenses-squeeze",
+      "svgCount": 11,
       "errors": 9,
       "warnings": 8,
       "darkModeMissing": 3,
@@ -167,14 +167,6 @@
       "themeColorInline": 5
     },
     {
-      "slug": "purchasing-power-adjusted",
-      "svgCount": 8,
-      "errors": 8,
-      "warnings": 12,
-      "darkModeMissing": 5,
-      "themeColorInline": 5
-    },
-    {
       "slug": "ryokan-vs-hotel-overnight-shift",
       "svgCount": 10,
       "errors": 8,
@@ -247,14 +239,6 @@
       "themeColorInline": 4
     },
     {
-      "slug": "per-capita-income-gap",
-      "svgCount": 7,
-      "errors": 8,
-      "warnings": 10,
-      "darkModeMissing": 4,
-      "themeColorInline": 4
-    },
-    {
       "slug": "pharma-medical-device-production-map",
       "svgCount": 14,
       "errors": 8,
@@ -267,6 +251,14 @@
       "svgCount": 5,
       "errors": 8,
       "warnings": 9,
+      "darkModeMissing": 4,
+      "themeColorInline": 4
+    },
+    {
+      "slug": "purchasing-power-adjusted",
+      "svgCount": 10,
+      "errors": 8,
+      "warnings": 10,
       "darkModeMissing": 4,
       "themeColorInline": 4
     },
@@ -367,14 +359,6 @@
       "themeColorInline": 1
     },
     {
-      "slug": "road-infrastructure-density",
-      "svgCount": 12,
-      "errors": 7,
-      "warnings": 3,
-      "darkModeMissing": 1,
-      "themeColorInline": 1
-    },
-    {
       "slug": "barber-beauty-salon-regional-gap",
       "svgCount": 10,
       "errors": 6,
@@ -439,6 +423,14 @@
       "themeColorInline": 1
     },
     {
+      "slug": "road-infrastructure-density",
+      "svgCount": 12,
+      "errors": 6,
+      "warnings": 3,
+      "darkModeMissing": 1,
+      "themeColorInline": 1
+    },
+    {
       "slug": "sewerage-water-supply-gap",
       "svgCount": 11,
       "errors": 6,
@@ -473,6 +465,14 @@
     {
       "slug": "fiscal-self-reliance-gap",
       "svgCount": 12,
+      "errors": 5,
+      "warnings": 6,
+      "darkModeMissing": 3,
+      "themeColorInline": 3
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "svgCount": 8,
       "errors": 5,
       "warnings": 6,
       "darkModeMissing": 3,
@@ -623,24 +623,8 @@
       "themeColorInline": 0
     },
     {
-      "slug": "communication-cost-burden",
-      "svgCount": 10,
-      "errors": 1,
-      "warnings": 2,
-      "darkModeMissing": 1,
-      "themeColorInline": 1
-    },
-    {
       "slug": "engel-coefficient-prefecture-ranking",
       "svgCount": 4,
-      "errors": 1,
-      "warnings": 2,
-      "darkModeMissing": 1,
-      "themeColorInline": 1
-    },
-    {
-      "slug": "prefecture-salary-remote-gap",
-      "svgCount": 6,
       "errors": 1,
       "warnings": 2,
       "darkModeMissing": 1,
@@ -663,22 +647,6 @@
       "themeColorInline": 0
     },
     {
-      "slug": "cc-estat-17-edu-slope-graph",
-      "svgCount": 2,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "depopulation-area-medical-facilities",
-      "svgCount": 1,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
       "slug": "dual-income-household-ratio-vs-public-assistance-housing",
       "svgCount": 5,
       "errors": 1,
@@ -695,30 +663,6 @@
       "themeColorInline": 0
     },
     {
-      "slug": "extreme-heat-days-prefecture",
-      "svgCount": 3,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "ict-media-consumption-gender-gap",
-      "svgCount": 9,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "it-establishments-prefecture",
-      "svgCount": 6,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
       "slug": "manufacturing-labor-productivity-pref",
       "svgCount": 6,
       "errors": 1,
@@ -727,56 +671,8 @@
       "themeColorInline": 0
     },
     {
-      "slug": "nurse-income-prefecture-gap",
-      "svgCount": 3,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "physical-therapist-income-prefecture-gap",
-      "svgCount": 2,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "prefectural-debt-future-burden",
-      "svgCount": 7,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "public-phone-count",
-      "svgCount": 3,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "retail-establishments-by-prefecture",
-      "svgCount": 3,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
       "slug": "retail-store-count-vs-nurses-per-100k-population",
       "svgCount": 5,
-      "errors": 1,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "software-engineer-income-gap",
-      "svgCount": 8,
       "errors": 1,
       "warnings": 0,
       "darkModeMissing": 0,
@@ -1039,6 +935,14 @@
       "themeColorInline": 1
     },
     {
+      "slug": "communication-cost-burden",
+      "svgCount": 10,
+      "errors": 0,
+      "warnings": 2,
+      "darkModeMissing": 1,
+      "themeColorInline": 1
+    },
+    {
       "slug": "dual-income-reversal",
       "svgCount": 9,
       "errors": 0,
@@ -1144,6 +1048,14 @@
     },
     {
       "slug": "overseas-travel-gap",
+      "svgCount": 6,
+      "errors": 0,
+      "warnings": 2,
+      "darkModeMissing": 1,
+      "themeColorInline": 1
+    },
+    {
+      "slug": "prefecture-salary-remote-gap",
       "svgCount": 6,
       "errors": 0,
       "warnings": 2,
@@ -1296,6 +1208,14 @@
     },
     {
       "slug": "apple-expenditure-ranking",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "area-ratio-prefecture-gap",
       "svgCount": 2,
       "errors": 0,
       "warnings": 0,
@@ -1591,6 +1511,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "cc-estat-17-edu-slope-graph",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "cc-estat-20-publish",
       "svgCount": 2,
       "errors": 0,
@@ -1703,6 +1631,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "day-time-population-prefecture-gap",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "dental-hygienist-income-prefecture-gap",
       "svgCount": 3,
       "errors": 0,
@@ -1713,6 +1649,14 @@
     {
       "slug": "dentist-income-prefecture-gap",
       "svgCount": 6,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "depopulation-area-medical-facilities",
+      "svgCount": 1,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,
@@ -1847,6 +1791,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "extreme-heat-days-prefecture",
+      "svgCount": 3,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "farmland-crisis-abandoned-land",
       "svgCount": 13,
       "errors": 0,
@@ -1857,6 +1809,14 @@
     {
       "slug": "female-lecture-prefecture-gap",
       "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "flood-affected-rivers-prefecture-gap",
+      "svgCount": 3,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,
@@ -1992,6 +1952,14 @@
     },
     {
       "slug": "general-hospital-bed-occupancy-rate",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "general-households-prefecture-gap",
       "svgCount": 2,
       "errors": 0,
       "warnings": 0,
@@ -2135,6 +2103,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "household-liabilities-prefecture-gap",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "household-solo-vs-dualincome",
       "svgCount": 9,
       "errors": 0,
@@ -2161,6 +2137,14 @@
     {
       "slug": "icecream-consumption-expenditure",
       "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "ict-media-consumption-gender-gap",
+      "svgCount": 9,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,
@@ -2311,6 +2295,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "it-establishments-prefecture",
+      "svgCount": 6,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "it-industry-concentration",
       "svgCount": 5,
       "errors": 0,
@@ -2415,6 +2407,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "late-elderly-medical-expense-prefecture-gap",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "library-books-prefecture-gap",
       "svgCount": 2,
       "errors": 0,
@@ -2473,6 +2473,14 @@
     {
       "slug": "mandarin-expenditure-ranking",
       "svgCount": 3,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "manufacturing-establishments-prefecture-gap",
+      "svgCount": 2,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,
@@ -2591,6 +2599,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "municipality-count-prefecture-gap",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "municipality-population-decline-tiers",
       "svgCount": 4,
       "errors": 0,
@@ -2647,6 +2663,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "natural-increase-rate-prefecture-gap",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "niigata-food-culture",
       "svgCount": 6,
       "errors": 0,
@@ -2657,6 +2681,14 @@
     {
       "slug": "noodle-consumption-prefecture-character",
       "svgCount": 9,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "nurse-income-prefecture-gap",
+      "svgCount": 3,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,
@@ -2791,6 +2823,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "physical-therapist-income-prefecture-gap",
+      "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "piano-ownership-prefecture-gap",
       "svgCount": 2,
       "errors": 0,
@@ -2825,6 +2865,14 @@
     {
       "slug": "potato-consumption-quantity",
       "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "prefectural-debt-future-burden",
+      "svgCount": 7,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,
@@ -2887,6 +2935,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "public-phone-count",
+      "svgCount": 3,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "real-disposable-income-reversal",
       "svgCount": 15,
       "errors": 0,
@@ -2896,6 +2952,14 @@
     },
     {
       "slug": "refrigerator-expenditure-ranking",
+      "svgCount": 3,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "retail-establishments-by-prefecture",
       "svgCount": 3,
       "errors": 0,
       "warnings": 0,
@@ -2999,6 +3063,14 @@
       "themeColorInline": 0
     },
     {
+      "slug": "sex-ratio-total-prefecture-gap",
+      "svgCount": 3,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
       "slug": "shiga-food-culture",
       "svgCount": 8,
       "errors": 0,
@@ -3041,6 +3113,14 @@
     {
       "slug": "soba-udon-dining-consumption-expenditure",
       "svgCount": 2,
+      "errors": 0,
+      "warnings": 0,
+      "darkModeMissing": 0,
+      "themeColorInline": 0
+    },
+    {
+      "slug": "software-engineer-income-gap",
+      "svgCount": 8,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,

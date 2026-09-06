@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T05:07:19.929Z",
+  "source": "stats47-header-bg.png (built-in image generation) + deterministic SVG typography",
+  "safeArea": {
+    "width": 758,
+    "height": 324,
+    "centered": true
+  },
+  "outputs": [
+    {
+      "file": "profile-header-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1571055,
+      "sha256": "95536b4f720bcf5bf81dfb4460b36853940b712e1d07c76504aeebddb0b60670"
+    },
+    {
+      "file": "magazine-koumuin-gis-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1567092,
+      "sha256": "025ccb31b2bb289ae5c78bf161cffb8082d67cb869e83dc098be4b6089359c96"
+    },
+    {
+      "file": "magazine-s47-sports-culture-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1572423,
+      "sha256": "d9e8f969aa73a9ab6fb5be3811788e38212117e34126a246cd4db93ffb9f315d"
+    },
+    {
+      "file": "magazine-s47-fiscal-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1567972,
+      "sha256": "47ba4667cb7de933f67c191a3019ad6374c4e17087043d07205d99d36c2eec25"
+    },
+    {
+      "file": "magazine-s47-economy-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1570224,
+      "sha256": "d6abb9457305cc3642aeab6d7e6ae7676c1e8384c0b7397d68467b1a3bb23995"
+    },
+    {
+      "file": "magazine-s47-population-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1564961,
+      "sha256": "861b234e21945309526338773b463d2632ec32fa6c66a64fdd0a21850f31a5ea"
+    },
+    {
+      "file": "magazine-s47-education-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1568400,
+      "sha256": "4eddedfc524705b4fc2a835ec98a65d0768db9e1a42b5914305b95fcb442e73c"
+    },
+    {
+      "file": "magazine-s47-health-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1571897,
+      "sha256": "2475e40b0d7982839ee488154971ad5d563432e307eaf35627c8b1ff173ec9a0"
+    },
+    {
+      "file": "magazine-s47-climate-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1568162,
+      "sha256": "4e2b356df1d6af9fa01a898e83c73f4cbb8b4bb2e86e559aab28c3f6cdb7d8c1"
+    },
+    {
+      "file": "magazine-s47-agriculture-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1567703,
+      "sha256": "a059521f7ce8a364e90a483c0df32f6a5b0724674bd541fcbec4c18bfa1b6bda"
+    },
+    {
+      "file": "magazine-s47-safety-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1566965,
+      "sha256": "dc5d5d0d90c168e29e3063aecd38986930845fec3d9c0a8b23192a59b382d28b"
+    },
+    {
+      "file": "magazine-s47-labor-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1567869,
+      "sha256": "fbcad4ecb1355389b7b701e52af398157a30bba245a088e139325a3433cbf4ef"
+    },
+    {
+      "file": "magazine-s47-tourism-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1567600,
+      "sha256": "0b5c6584c116fb287fadaea1a035a13c17844ffddd836f644eda33ee064b47d1"
+    },
+    {
+      "file": "magazine-s47-industry-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1566571,
+      "sha256": "60e2190d7a533d49e7426e5e18f222a545e331b704e1ef8830c12a163e712748"
+    },
+    {
+      "file": "magazine-s47-housing-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1567701,
+      "sha256": "7adbcf1979ee172ae98839fb42a931418cab7cbbfe250f05167cb083281bed09"
+    },
+    {
+      "file": "magazine-s47-infrastructure-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1568002,
+      "sha256": "36c5cd6b25c5b1300b78900d856c99f6103845d53b67f0c7c39d0b1f8b7cc556"
+    },
+    {
+      "file": "magazine-s47-energy-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 1568154,
+      "sha256": "e0827cca1dcc7bb9de0586e71cc12accb8b9d2ebfdb03bf8185d58e0bea22fd7"
+    }
+  ]
+}

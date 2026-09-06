@@ -68,7 +68,27 @@
             }
           }
         },
-        "d56": null
+        "d56": {
+          "observedAt": "2026-09-06",
+          "window": [
+            "2026-W32",
+            "2026-W36"
+          ],
+          "values": {
+            "gsc.impressions": {
+              "value": 81,
+              "status": "measured-low"
+            },
+            "gsc.averagePosition": {
+              "value": null,
+              "status": "measured-low"
+            },
+            "gsc.ctr": {
+              "value": null,
+              "status": "measured-low"
+            }
+          }
+        }
       },
       "verdict": "pending",
       "notes": "baseline は GSC W27 snapshot (last-28d 窓 ≒ 2026-06-12〜2026-07-09)。impressions 23 (<100) のため CTR 効果は確定不可になり得る (insufficient-data を許容)。開示 query は 7 impressions 分のみで『国勢調査を使った都道府県人口』の一般探索が中心 (非開示分を推測補完しない)。d7 はインデックス/canonical/404/計測異常の検知のみ。判定時はサイト全体の imp 変動を併記する",

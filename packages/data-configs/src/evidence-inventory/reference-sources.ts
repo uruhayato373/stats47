@@ -48,6 +48,16 @@ export const REFERENCE_SOURCE_POLICIES = [
     fallbackReason: "公開統計の根拠には使わず、採択した内部運用原則だけを統合する",
     publicOriginalReuse: "forbidden",
   },
+  {
+    sourceKey: "kakei-marketing",
+    edition: "2015",
+    statePath:
+      ".claude/state/source-inventory/kakei-marketing/2015/inventory.json",
+    inputUnit: "page",
+    fallbackResolution: "not-applicable",
+    fallbackReason: "表紙・目次・Kindle操作画面等で、分析・論点に属さないページ",
+    publicOriginalReuse: "forbidden",
+  },
 ] as const satisfies readonly ReferenceSourcePolicy[];
 
 const ANTHROPIC_SKILLS_DOCS =

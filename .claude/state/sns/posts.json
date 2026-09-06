@@ -11397,9 +11397,9 @@
     },
     {
       "id": 592,
-      "status": "posted",
+      "status": "deleted",
       "created_at": "2026-07-11T09:42:27.465Z",
-      "updated_at": "2026-09-04T09:49:16.881Z",
+      "updated_at": "2026-09-06T04:41:33.844Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -11412,7 +11412,8 @@
       "template": "angle-experience",
       "metric_keys": "tourism-resource-count",
       "post_url": "https://x.com/stats47jp373/status/2077362549981331845",
-      "posted_at": "2026-07-15"
+      "posted_at": "2026-07-15",
+      "deleted_at": "2026-09-06T04:41:33.710Z"
     },
     {
       "id": 593,
@@ -12157,9 +12158,9 @@
     },
     {
       "id": 632,
-      "status": "posted",
+      "status": "deleted",
       "created_at": "2026-07-11T09:42:27.595Z",
-      "updated_at": "2026-09-04T09:49:17.024Z",
+      "updated_at": "2026-09-06T04:41:51.476Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -12172,7 +12173,8 @@
       "template": "paradox",
       "metric_keys": "wind-power-plant-count-facility",
       "post_url": "https://x.com/stats47jp373/status/2082284982047760819",
-      "posted_at": "2026-07-29"
+      "posted_at": "2026-07-29",
+      "deleted_at": "2026-09-06T04:41:51.404Z"
     },
     {
       "id": 633,
@@ -12233,9 +12235,9 @@
     },
     {
       "id": 636,
-      "status": "posted",
+      "status": "deleted",
       "created_at": "2026-07-11T09:42:27.607Z",
-      "updated_at": "2026-09-04T09:49:17.046Z",
+      "updated_at": "2026-09-06T04:42:22.361Z",
       "platform": "x",
       "post_type": "original",
       "domain": "ranking",
@@ -12248,7 +12250,8 @@
       "template": "angle-howto",
       "metric_keys": "nuclear-power-plant-count",
       "post_url": "https://x.com/stats47jp373/status/2082632267172638960",
-      "posted_at": "2026-07-30"
+      "posted_at": "2026-07-30",
+      "deleted_at": "2026-09-06T04:42:22.301Z"
     },
     {
       "id": 637,
@@ -14030,15 +14033,16 @@
     },
     {
       "id": 749,
-      "status": "posted",
+      "status": "deleted",
       "created_at": "2026-08-03T09:30:41.323Z",
-      "updated_at": "2026-08-03T09:30:41.323Z",
+      "updated_at": "2026-09-06T04:48:15.979Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
       "content_key": "tourism-resource-count",
       "post_url": "https://www.instagram.com/p/Da4fXEvFWYc/",
-      "posted_at": "2026-07-17T05:42:36Z"
+      "posted_at": "2026-07-17T05:42:36Z",
+      "deleted_at": "2026-09-06T04:48:15.873Z"
     },
     {
       "id": 750,
@@ -14594,15 +14598,16 @@
     },
     {
       "id": 796,
-      "status": "posted",
+      "status": "deleted",
       "created_at": "2026-08-03T09:30:41.957Z",
-      "updated_at": "2026-08-03T09:30:41.957Z",
+      "updated_at": "2026-09-06T04:48:42.880Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
       "content_key": "wind-power-plant-count-facility",
       "post_url": "https://www.instagram.com/p/DbhFlCdIJWI/",
-      "posted_at": "2026-08-02T00:06:12Z"
+      "posted_at": "2026-08-02T00:06:12Z",
+      "deleted_at": "2026-09-06T04:48:42.715Z"
     },
     {
       "id": 797,
@@ -14642,15 +14647,16 @@
     },
     {
       "id": 800,
-      "status": "posted",
+      "status": "deleted",
       "created_at": "2026-08-03T09:30:42.012Z",
-      "updated_at": "2026-08-03T09:30:42.012Z",
+      "updated_at": "2026-09-06T04:49:07.284Z",
       "platform": "instagram",
       "post_type": "original",
       "domain": "ranking",
       "content_key": "nuclear-power-plant-count",
       "post_url": "https://www.instagram.com/p/DbkVhEEm2Bn/",
-      "posted_at": "2026-08-03T06:23:09Z"
+      "posted_at": "2026-08-03T06:23:09Z",
+      "deleted_at": "2026-09-06T04:49:07.240Z"
     },
     {
       "id": 801,

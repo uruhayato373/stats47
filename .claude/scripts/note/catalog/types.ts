@@ -34,6 +34,21 @@ export type NoteSeries =
 
 export type NoteArticleStatus = "draft" | "published";
 
+export type PublishedLinkRepair =
+  | {
+      mode: "replace-url";
+      fromUrl: string;
+      toUrl: string;
+    }
+  | {
+      mode: "replace-card";
+      fromUrl: string;
+      toUrl: string;
+      linkText: string;
+      headingFrom?: string;
+      headingTo?: string;
+    };
+
 /**
  * 1 記事のカタログエントリ。key (= slug) が安定 ID。
  */
@@ -58,6 +73,12 @@ export interface NoteArticle {
   noteUrl?: string;
   /** 公開日 (YYYY-MM-DD) */
   publishedAt?: string;
+  /** クリエイターページ先頭への固定表示を監査する。 */
+  pinned?: boolean;
+  /** note のプロフィール記事としての設定を監査する。 */
+  profiled?: boolean;
+  /** 無料記事を有料マガジン内でも一般公開するために保持すべき既存境界ID。 */
+  publishedSeparator?: string;
   /** R2 上の格納パス (draft.md / images はこの下) */
   r2Path: string;
   /**
@@ -72,6 +93,16 @@ export interface NoteArticle {
    * ranking キーの実在を validate-note-catalog.ts が検証する。
    */
   stats47Targets?: string[];
+  /**
+   * 記事末の「次に読む」主 CTA。NOTE_ARTICLES.key を参照する。
+   * 全記事へ機械的な前後リンクを付けず、実測で選んだ記事だけに設定する。
+   */
+  nextBestArticle?: string;
+  /**
+   * 公開済み本文に残った旧URLの決定的な修復契約。
+   * updater は価格・有料境界・タグ・既存本文を照合してから、この差分だけを反映する。
+   */
+  publishedLinkRepairs?: PublishedLinkRepair[];
 }
 
 /**
@@ -92,6 +123,8 @@ export interface NoteMagazine {
    * マガジン作成前は null。作成後に inject-magazine-url 相当で書き戻す。
    */
   noteUrl: string | null;
+  /** 同テーマの販売導線。noteカード化のため query/hash なしの stats47 固定URLだけを許可する。 */
+  productTarget?: `/products/${string}`;
   /** フッター注入で使うプレースホルダ (既存 inject-magazine-url.cjs 互換) */
   placeholder?: string;
 }

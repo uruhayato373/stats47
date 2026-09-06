@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-05
+updated: 2026-09-06
 ---
 
 # バックログ (タスクマスタ)
@@ -21,16 +21,63 @@ updated: 2026-09-05
 
 ## 🔴 高 — 今月中に着手したい
 
-### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] [進行中] 非商用KSJの公開終了・新版への切替を本番確認する
+### [PRODUCT-SALES-READINESS-01] 横断カタログの全商品を販売準備ゲートまで仕上げる
 
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
+タグ: [収益化] [種類:制作] [実行:sweep] [起票:2026-09-06] [期日:2026-09-13]
 
-- **owner**: gis-curator（利用条件SSOT）/ r2-publisher（exact削除）/ ranking-publisher（公開）/ x-strategist（関連SNS）
-- **現在地**: 承認済み旧資産の撤去・公開404確認は完了。残件は共有一覧の巻き戻り再発防止と関連SNSの外部実測。
+- **status**: in-progress（期日は次回棚卸し期限）
+- **owner**: coconala-product-manager / kindle-publisher / note記事担当 / オーナー
+- **対象の正典**: `.claude/state/products/catalog-status.json` の `offers`。既存商品と未制作候補、同一商品の販売先variantを分け、個別statusを本文に複製しない。人間向け一覧は `products:report` が生成する `.local/product-portfolio/catalog.html`。
+- **再開点（2026-09-06）**: 現行候補は`CURRENT_SALES_REVISIONS`で固定。最終EPUB検査は`kindle-v3-20260906-r4-verification.json`で実本文全章SHAを保持。S2-01だけは当該版の独立review.jsonがあり、他巻へ流用しない。最初の公開前に、固定bytes送信・旧draft再投入・公開直前再照合を認証済み下書きで実測する（コード/モック検査のみでは実UI動作を合格にしない）。新規公開は実機・権利/申告・保全・オーナー承認がそろってから。
+- **次（実行順）**: ①Kindle改訂版を全章で独立意味レビューする。書き下ろしだけでなくブログ/ランキング由来の本文・図を含め、未根拠因果・対象年/地域/分母の違いを是正し、内部比率を再計測する。②確定版のEPUB検査・Previewer・全章SHAに結び付いたreview.json・入稿bundle照合後、明示版指定のarchiveで旧版を保持して暗号化保全する。③note14パックの準備原稿に固有の使い方・図例を追加し、独立レビュー・価格/添付/利用条件確認へ進める。無料P13を含めた固定入力はfree-sample-delivery.jsonと納品manifestで照合する。未制作Geo11企画は原典・再現テスト・読者成果を満たすものから制作する。④商品別の残ゲートが解消してから、承認された対象だけを専用公開フローへ渡す。入稿提案JSONを公開済み記録と扱わない。
+- **Kindle再接地の具体対象**: S1-01のブログ9章は全章の再編集が必要。`per-capita-income-gap`の本文と図の採用年・数値不一致、`heating-cost-vs-disposable-income`の名目支出/実質所得・世帯範囲の不一致、`communication-cost-burden`の交通通信費/通信費混同、`expenditure-structure-comparison`の性質別/目的別混在と因果主張、`black-tea-income-gap`の購入量/飲用量・相関/説明割合混同を残さない。S1-02も食品の支出・購入数量と調査対象都市を元記事の本文・図まで照合する。`editorial-corrections.ts`の部分校訂だけで当該章全体を合格にしない。他冊にも同種の旧断定があるため全章レビューを省略しない。
+- **関連の別owner工程**: Office・本人確認は `COCONALA-PROFILE-OWNER-01`、歴史2指標は `COCONALA-HISTORICAL-SOURCE-01`。公開済みGeo noteの本文・添付再確認は認証済み画面が必要。売上/需要の不明を0扱いしない。
+- **再利用本文の追加是正対象**: S1-03高齢単身の分母・通勤流入と移住、04介護必要数と不足数・化学工業と医薬品・相談窓口の時間、05大学収容力と入学定員・保育利用率と希望充足率、06財政指標の控除/平均期間・目的別と性質別、07宿泊施設範囲/人泊と人数・国籍から嗜好の断定、08供給契約と世帯普及率、09産業出荷/利益/用水効率、10火災地震合算/強度率の労働時間分母、11行動者率/稼働率、12有業者/雇用者を元ブログ・図まで直す。fresh訂正だけでは完了しない。
+- **ランキング再利用の境界**: S2-01旧版全章レビューでDID可住地分母、死亡率/件数、従属人口指数/就労者、都道府県率の合算、単純平均/全国値、相関からの因果・算術誤りを検出。商品版のランキング章は未レビューAI解説を外して同順位の全県表・決定的集計へ再構成した。公開サイト本文は未変更のため、原典再計算とサイトownerへの是正引渡しが必要。旧版レビューを新版PASSへ流用しない。
+- **停止条件**: 生成/形式検査だけで販売準備完了にしない。内部30%をAmazonの合法性・受理保証と説明しない。字数水増し・収録指標の黙った削減をしない。税務・銀行・本人認証・規約同意を代行せず、KDP Select独占を他チャネル展開と両立済みと扱わない。旧公開版・原稿を上書きしない。公開stateを機械品質の結果で書き換えない。
+- **完了条件**: 全offerが対象版の実検証・独立レビュー・必要な人間確認を満たすか、採用見送り理由と再開条件が明記される。販売を選んだofferは価格・納品物・権利・公開証跡が一致する。未完了が1件でもあれば「全商品販売可能」と報告しない。
+
+### [COCONALA-PROFILE-OWNER-01] 本人手続き・実経験年数と13パックのOffice実機確認
+
+タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-09-06] [期日:2026-09-13]
+
+- **status**: pending（期日は次回確認期限）
+- **owner**: オーナー
+- **次**: ココナラ本人確認を本人が実施し、NDAは内容を確認して本人が同意する。HTML・TypeScript・Next.js・Node.jsの実際の経験年数を確認できた場合のみ技術欄へ登録する。既存13パックの修正版はWindows/Mac Office 365で表示・県図形編集・チャート編集・Excel順位再計算を実機確認する。未確認の資格・職歴年月・稼働時間は増やさない。
+- **完了条件**: 本人確認・NDAの公開ステータスと、本人が申告した年数の一致を確認する。修正版13パックのOffice実機検証結果（OS・バージョン・表示・編集・再計算）を記録する。実施しない項目は本人の判断を記録し、未確認表示を維持する。
+- **停止条件**: 2FA・本人確認書類・規約同意はエージェントが代行しない。経験年数・資格は推測しない。Windows/MacのOffice環境が不足する場合は未検証表示を維持する。インボイス登録を売上改善のために自動実施しない。
+- **整備済み範囲の証跡**: `.claude/state/products/coconala-profile-2026-09-06.json`。プロフィール文面・画像・見本の公開更新を再実行しない。
+
+### [COCONALA-HISTORICAL-SOURCE-01] 納品パックの歴史2指標を原典と再照合する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-09-06] [期日:2026-09-13]
+
+- **status**: pending（期日は次回確認期限）
+- **owner**: estat-researcher（一次資料照合）／coconala-product-manager（採否判断への引渡し）
+- **対象・根拠**: `.claude/state/products/coconala-packs-2026-09-06.json` の未検証2指標。P-06/P-12に含まれるstatsDataId `0000010205` の `E0910101`（`kindergarten-education-diffusion-rate`）と `E0910102`（`nursery-education-diffusion-rate`）。
+- **次**: 納品版のSOURCES・CSVから対象年と47地域値を固定し、当該年の公式表・定義・分母・単位・地域粒度へ照合する。
+- **停止条件**: 原典未取得や不一致時は未検証注記を維持する。推測補完、値・公開内容の変更、再出品は行わず、除外／継続の判断材料を商品担当へ渡す。外部変更は別途承認を得る。
+- **完了条件**: 2指標それぞれに原典URL・参照箇所・年・分母・47地域の一致／差異／欠測を既存商品stateへ記録する。確認不能なら探索範囲・不足資料・再開条件・採否判断担当を明示して引き渡し、未確認を確認済みにしない。
+
+### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] 公開終了・新版切替の完了証跡を照合しカードを回収する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:機械] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
+
+- **owner**: backlog-loop（完了gateとカード回収のみ）
+- **対象**: 外部作業は完了済み。公開・削除を再実行せず、既存証跡を照合してledgerへ記録し、本カードを排他writer経由で削除する。
   公開・削除・退避・検証の証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
 - **次（実行順）**:
-  1. 特定済みの旧writer（blog-auto-publish run34002167867）へ、ローカル検証済みの共有索引guardをmain/develop両経路で届け、再生成・公開後検証する。guardを持たない旧checkoutまで保護済みとみなさない。
-  2. 外部実測で公開中の旧投稿6件（X3/Instagram3）の削除承認を得て、対象だけ撤去・再確認する。X予約一覧72件に対象なし、theme draft2は現行指標・画像へ同期済み。Geo15投稿の既存検証結果と混同しない。
+  1. `legacyLicense` の公開・削除証跡と `legacySnsVerification.deletionApproval.status=COMPLETED`、`deletionEvidence.pendingIds=[]`、投稿台帳IDs592/632/636/749/796/800の`status=deleted`・`deleted_at`を照合する。catalog gateを通し、ledger証拠付きで本カードを回収する。新しい外部操作・認証・コンテンツ生成は不要。
+- **★未解決 (2026-09-06 実測)**: guard は data-refresh / sync-snapshots の派生生成を**恒常的に止めている**。
+  `generate-ranking-items.ts` は「退役の瞬間に stale な isActive:true が R2 に残るのを防ぐため」
+  active/inactive を問わず item.json を書き続ける設計 (同ファイル 136-185 行のコメントが根拠)。
+  一方 guard は isActive を見ず license だけで判定するため、退役済み 9 キーの item.json で必ず throw する。
+  実測 run 34017315294: item.json 2,311 件を書いた直後に
+  `KSJ公開構造化データ禁止: app/ranking/biomass-power-station-count/item.json (P03, non-commercial)` で停止。
+  以後この経路を通る更新はすべて失敗する (月次 data-refresh / sync-snapshots)。
+  判断の分かれ目は「guard 側で isActive:false を対象外にする」か「生成側で退役キーを書かない」か。
+  前者が小さく、上記コメントの設計意図とも整合する。**owner の判断が要るため本カードに留める。**
+- **再発防止の確認**: main/develop両経路にguard反映済み。共有索引544件は全行保持、分類修正20件一致。従来から公開終了指定の未公開1行も除外・HTTP410確認。guardを持たない旧checkoutまで保護済みとは扱わない。
 - **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
 - **停止条件**: key集合/size/ETagが退避時と変わった対象は削除しない。削除済みraw435・派生59・旧ランキング126件を再実行しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。別作業のdevelopリリースと競合する変更は行わない。
 - **完了条件**: public R2の非商用11prefixが0件、catalog gate PASS、新版の出典・保存則・公開値が一致し、終了URL/ダウンロード・記事/SNSまで承認方針どおりの状態を本番実測する。
@@ -441,6 +488,13 @@ updated: 2026-09-05
 - **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
   2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
   運転設定を `run-claude-batch.sh` の既定に焼いた。正典 `ranking-content-standards.md` §2026-09-05
+- **2026-09-07 Codex batch checkpoint**: 2 セッションで選んだ 600 件を Codex Spark / Terra で処理し、
+  critic・決定的ゲート合格の **421 件を R2 公開**。active 2,154 件の全量再監査で done **870 → 1,291**、
+  needs-regen **1,284 → 863** (missing 76 / incomplete 752 / blocker 35) を確定した。公開 421 件は
+  R2 readback SHA-256 一致 421/421、実データ数値照合 421/421、blocker 0。
+  `complainant-rate-per-1000` の無意味な改行水増しと短文 17 件も除去・補筆し、単体 warn 0。
+  再処理中に対象集合を再抽出して slice すると未試行が生じる実測を受け、`run-claude-batch.sh` は
+  明示 key も開始時に immutable manifest へ固定し、不正・重複 key を生成前に拒否するよう是正した。
 - **2026-09-05 本番 3 バッチ**: 公開 54 件 (done 718 → 772・残 1,394)。batch1 は 26 件が原因不明の CLI 失敗 (stdout を
   捨てる欠陥 → 修正)、batch2 は定型化 REVISE が支配的 → prompt に県数・地方別順位表を機械計算で渡し、critic に author の
   制約を前提として明文化。batch3 (35 件・concurrency 2) は **OK 25 / REJECT 9 / FAIL 1・$0.81/公開件・50 分・レート制限なし**。
@@ -523,6 +577,36 @@ updated: 2026-09-05
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [COCONALA-MEASUREMENT-CONTRACT-01] 14商品の公開後計測を整え改善台帳へ引き渡す
+
+タグ: [インフラ・計測] [種類:改善] [実行:別環境] [起票:2026-09-06] [期日:2026-09-13]
+
+- **status**: pending（期日は計測契約整備の次回確認期限）
+- **owner**: coconala-operator（取得可否確認）／improvement-triage（効果観測の排他writer）
+- **次**: 既存13定型商品＋Geo1商品の閲覧・問い合わせ・購入について、本人アカウントを照合した管理画面で取得可否、商品別／全体別、期間・集計単位をread-onlyで確認する。公開日時・baseline・観測期間・母数・判定条件・観測期限後の次手を定義する。
+- **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・自動監視の開始は行わない。
+- **完了条件**: 取得根拠・日時付きbaseline/unknownと計測契約を既存商品stateへ保存し、improvement-triageが別IDのeffect/pendingへ引き継ぐ。引渡し証拠をbacklog-loopへ渡し、以後の観測待ちを本カードに重複保持しない。
+
+### [DOCS-WARNINGS-TRIAGE-01] 既存文書警告を棚卸しし各担当へ割り当てる
+
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-09-06] [期日:2026-09-13]
+
+- **status**: pending（期日は一回限りの棚卸しの次回確認期限）
+- **owner**: todo-curator（分類・割当）
+- **根拠**: 2026-09-06のdocs検査はerror 0／既存warning 39。件数は調査起点であり固定目標ではない。
+- **次**: 最新の`npm run docs:report`と既存台帳を突合し、各warningに検査コード・対象・既存ID・担当・次／再開条件を割り当てる。月次／週次の陳腐化はmonthly-plan／weekly-plan、改善台帳の期限超過はimprovement-triage、backlog分類不足はtodo-curatorへ渡す。
+- **停止条件**: 警告を消すためだけの日付更新・根拠のない期限延長・カード削除・進行中カードの変更をしない。既存施策を複製せず、権限外の台帳は各排他writerへ渡す。
+- **完了条件**: 調査対象warning全件に是正／根拠付き据置／担当への引渡しが対応し、未割当0。`npm run docs:check`で新規error・参照切れがなく、カードの意図しない欠落がない。定期監視タスクにはしない。
+
+### [GEO-SERVICE-PILOT-01] Geo納品見本の販売条件を確定し1商品だけ出品判断する
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-06]
+
+- **owner**: オーナー（販売条件・承認）/ coconala-product-manager（再生成）/ coconala-operator（承認後の出品）
+- **対象**: `packages/product-factory/src/channels/geo/service-offer.ts`。生成・見本・検証状態は `.claude/state/products/geo-service-readiness-2026-09-06.json` を参照する。
+- **次**: 外部公開と匿名閲覧の検証結果は上記stateのpublicationを参照。出品の再実行は不要。商品生成コード・本人照合修正・出品台帳・`.claude/state/products/coconala-packs-2026-09-06.json`を含むcommitのdevelop反映をGitで照合し、ledger gateでカードを閉じる。Office実機確認・本人手続きはCOCONALA-PROFILE-OWNER-01へ分離済み。
+- **停止条件**: 価格・公開未承認、公開manifestと不一致、空間結合・保存則FAILでは出品しない。需要未確認の公開はオーナーの明示指示を記録し、購入実績があるとは扱わない。note自動取得403を非公開・閲覧ゼロと誤判定しない。任意商圏・住所検索・鑑定・安全保証へ範囲を拡大しない。
+- **完了条件**: 承認記録、納品ZIPのSHA、サービスURL・販売条件・実際の納品物の一致を確認するか、オーナーが出品見送りを決定する。カード削除はbacklog-loopのledger gate経由。
 
 ### [CI-DEVELOP-GATE-COVERAGE-01] develop 向け PR で決定的ゲートを走らせ、main への PR で初めて落ちる状態を止める
 

@@ -122,7 +122,9 @@ jobs:
       - name: 🗒️ note Catalog Contract Gate
         # 読者表題への専門語再混入、catalog参照整合性、title重複を決定的に検査する。
         # ローカルR2がある環境では draft/H1/cover title のドリフトも同じvalidatorが検出する。
-        run: npm run note:catalog:validate
+        run: |
+          npm run check:product-storefront --workspace apps/web
+          npm run note:catalog:validate
         continue-on-error: false
 
       - name: 🧭 Business Plan SSOT Contract Gate

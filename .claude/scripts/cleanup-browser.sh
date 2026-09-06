@@ -20,27 +20,24 @@ fi
 
 echo "Found: Chrome=$CHROME_COUNT, Python daemon=$DAEMON_COUNT, browser-use CLI=$BROWSERUSE_COUNT"
 
-# 3. プロセスを終了（Python daemon + Chrome + browser-use CLI）
+# 3. プロセスを終了（Python daemon + browser-use専用Chromeだけ）
+# macOS の pkill -f は長いChromeコマンドを取りこぼすため、ps でPIDを確定する。
+# 広い "browser-use" match は通常Chromeや呼び出し元まで巻き込むので使わない。
 if [ "$1" = "--force" ]; then
-  pkill -9 -f "browser_use\.skill_cli\.daemon" 2>/dev/null
-  pkill -9 -f "browser_use" 2>/dev/null
-  pkill -9 -f "browser-use-user-data-dir" 2>/dev/null
-  pkill -9 -f "browser-use" 2>/dev/null
+  ps -Axo pid,command | grep '[G]oogle Chrome' | grep '[b]rowser-use-user-data-dir' | awk '{print $1}' | xargs -n1 kill -9 2>/dev/null
+  ps -Axo pid,command | grep '[P]ython' | grep '[b]rowser_use\.skill_cli\.daemon' | awk '{print $1}' | xargs -n1 kill -9 2>/dev/null
 else
-  pkill -f "browser_use\.skill_cli\.daemon" 2>/dev/null
-  pkill -f "browser_use" 2>/dev/null
-  pkill -f "browser-use-user-data-dir" 2>/dev/null
-  pkill -f "browser-use" 2>/dev/null
+  ps -Axo pid,command | grep '[G]oogle Chrome' | grep '[b]rowser-use-user-data-dir' | awk '{print $1}' | xargs -n1 kill -TERM 2>/dev/null
+  ps -Axo pid,command | grep '[P]ython' | grep '[b]rowser_use\.skill_cli\.daemon' | awk '{print $1}' | xargs -n1 kill -TERM 2>/dev/null
   sleep 2
   # SIGTERM で死ななかったら SIGKILL
-  REMAINING=$(ps aux | grep -E '[b]rowser.use' | grep -v grep | wc -l)
-  if [ "$REMAINING" -gt 0 ]; then
-    ps aux | grep -E '[b]rowser.use' | grep -v grep | awk '{print $2}' | xargs kill -9 2>/dev/null
-  fi
+  ps -Axo pid,command | grep '[G]oogle Chrome' | grep '[b]rowser-use-user-data-dir' | awk '{print $1}' | xargs -n1 kill -9 2>/dev/null
+  ps -Axo pid,command | grep '[P]ython' | grep '[b]rowser_use\.skill_cli\.daemon' | awk '{print $1}' | xargs -n1 kill -9 2>/dev/null
 fi
 
 # 4. 一時 user-data-dir を削除
-rm -rf "$TMPDIR"/browser-use-user-data-dir-* 2>/dev/null
+find "${TMPDIR:-/tmp}" -maxdepth 1 -type d -name 'browser-use-user-data-dir-*' -exec rm -rf -- {} + 2>/dev/null
+find "$HOME/.browser-use" -maxdepth 1 \( -name 'default.pid' -o -name 'default.sock' \) -delete 2>/dev/null
 
 sleep 1
 AFTER_CHROME=$(ps aux | grep -c '[b]rowser-use-user-data-dir')
