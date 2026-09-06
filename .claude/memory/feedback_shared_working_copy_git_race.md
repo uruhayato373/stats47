@@ -78,4 +78,9 @@ main の commit を replay して途中で停止する。その detached な中�
 現 develop を merge し直して push。追随は常に `git merge` / `git pull --no-rebase`。
 正典: `.claude/rules/branch-workflow.md`。
 
+**同期ゲートは差分の方向も検証する (2026-09-06)**:
+- **問題**: main を develop に merge 済みでも、`preflight:pr` が develop 独自の6ファイルを main 未同期と誤判定した。
+- **原因**: tip 同士の `git diff origin/develop origin/main` は develop 側だけの変更も数える。
+- **対策**: main 由来の未同期変更は `git diff origin/develop...origin/main`（共通祖先→main）で検査する。develop-only は PASS、main-only は検出する実 Git fixture を回帰テストに固定した。PASS は「両 branch 同一」ではなく「main 由来の未同期変更なし」と表示する。
+
 関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]] [[feedback_sync_snapshots_checks_out_main]]

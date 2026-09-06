@@ -143,3 +143,31 @@ test("--pr は main が develop 非経由で進んだ状態を検出する", () 
   );
 });
 
+test("main先行の差分はdevelopだけのcommitを数えず、mainだけの変更を検出する", (t) => {
+  const source = fs.readFileSync(PREFLIGHT, "utf8");
+  assert.match(source, /"origin\/develop\.\.\.origin\/main"/);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-main-ahead-"));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const git = (...args) => {
+    const result = spawnSync("git", args, { cwd: dir, encoding: "utf8" });
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout.trim();
+  };
+  git("init", "-q");
+  git("config", "user.name", "Fixture");
+  git("config", "user.email", "fixture@example.invalid");
+  git("-c", "core.hooksPath=/dev/null", "commit", "--allow-empty", "-qm", "base");
+  const base = git("rev-parse", "HEAD");
+  git("update-ref", "refs/remotes/origin/main", base);
+  fs.writeFileSync(path.join(dir, "develop.txt"), "develop-only");
+  git("add", "develop.txt");
+  git("-c", "core.hooksPath=/dev/null", "commit", "-qm", "develop");
+  git("update-ref", "refs/remotes/origin/develop", git("rev-parse", "HEAD"));
+  assert.equal(git("diff", "--name-only", "origin/develop...origin/main"), "");
+  git("checkout", "--detach", base);
+  fs.writeFileSync(path.join(dir, "main.txt"), "main-only");
+  git("add", "main.txt");
+  git("-c", "core.hooksPath=/dev/null", "commit", "-qm", "main");
+  git("update-ref", "refs/remotes/origin/main", git("rev-parse", "HEAD"));
+  assert.equal(git("diff", "--name-only", "origin/develop...origin/main"), "main.txt");
+});

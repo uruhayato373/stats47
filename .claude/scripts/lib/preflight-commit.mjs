@@ -198,14 +198,14 @@ const PR_GATES = [
       const { ok, output } = await tryRun("git", [
         "diff",
         "--name-only",
-        "origin/develop",
-        "origin/main",
+        // merge-base→main の片側だけを見る。tip同士ではdevelopだけの変更も未同期と誤認する。
+        "origin/develop...origin/main",
       ]);
       if (!ok) return { ok: true, output: "比較できないので見送る", skipped: true };
       const files = output.split(/\r?\n/).filter(Boolean);
       const substantive = files.filter((f) => !f.startsWith(".claude/state/"));
       if (substantive.length === 0) {
-        const note = files.length === 0 ? "main と develop の内容は同一" : `main 側は cron の state 書き戻し ${files.length} 件のみ`;
+        const note = files.length === 0 ? "main 由来の未同期変更なし" : `main 側は cron の state 書き戻し ${files.length} 件のみ`;
         return { ok: true, output: note };
       }
       return {
