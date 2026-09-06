@@ -3312,12 +3312,14 @@
       "targetScheduledMatches": 0,
       "themeDraftsUpdatedIds": [841, 855],
       "themeDraftGate": "2/2 caption lint, landing200/no redirect,1200x630 image/SHA PASS; old fishing-port-count removed; status=draft,scheduled_at=null; no new post inserted",
-      "externalMutation": "NONE; deletion approval pending for the exact six old-data posts",
+      "externalMutation": "NONE; exact six deletions approved by user on2026-09-06, blocked before mutation by unavailable delete-capable API credentials and browser-substitution rule",
+      "deletionApproval": { "date": "2026-09-06", "userInstruction": "削除して", "ids": [592, 632, 636, 749, 796, 800], "status": "APPROVED_EXECUTION_PATH_BLOCKED", "deleted": 0 },
+      "deletionAuthCheck": "Local known env files and process have no X user-context credentials or Meta Page deletion token. GitHub secret names include INSTAGRAM_ACCESS_TOKEN only, not Meta Page token or X user-context credentials; values were not read/exported. Existing profile rules prohibit browser substitution for API-supported operations. No browser or delete request started; need delete-capable API setup or exact-six UI exception. Meta reference availability could not be independently verified because official web fetch failed; no new Meta app permissions requested.",
       "evidenceDirectory": ".local/license-remediation/roadside-refresh-20260906/",
       "xEvidence": "legacy-x-confirmed.json",
       "instagramAndScheduleEvidence": "legacy-sns-live-audit.json"
     },
-    "next": "Site/Geo release, approved legacy R2 cleanup and guarded blog publication verified complete; preserve backups. Exact6 old SNS posts remain publicly visible pending deletion approval: X592/632/636 andInstagram749/796/800. Theme drafts841/855 remediated and unscheduled; target matches0 in72 X scheduled cards. Do not interfere with separate develop work."
+    "next": "Site/Geo release, approved legacy R2 cleanup and guarded blog publication verified complete; preserve backups. Exact6 SNS deletions approved: X592/632/636 andInstagram749/796/800. Obtain delete-capable API credentials or exact-six browser exception before execution; no deletion performed. Theme drafts841/855 remediated and unscheduled; target matches0 in72 X scheduled cards. Do not interfere with separate develop work."
   },
   "followupVerification": {
     "publishedOutboxCleanup": {
