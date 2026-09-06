@@ -511,3 +511,49 @@ describe("プロトタイプ汚染キーの扱い (★任意 JSON を扱う再�
     );
   });
 });
+
+/**
+ * parseOps の防御分岐 (2026-09-06 追加)。
+ *
+ * R2 の payload から読み戻す経路なので、壊れた ops を「部分的に採用」すると
+ * 実際とは違うレシピで configHash を計算し、監査が stale を見逃す。
+ * 各 op は必須要素が欠けたら**丸ごと捨てる**ことを固定する。
+ */
+describe("parseRecipe — 壊れた ops を部分採用しない", () => {
+  const base = { kind: "estat", configHash: "0123456789abcdef" };
+  const parseOpsOf = (ops: unknown) => parseRecipe({ ...base, ops })?.ops;
+
+  it("axisRatio は軸・分子・分母のどれかが欠けたら捨てる", () => {
+    expect(parseOpsOf({ axisRatio: { numeratorCodes: ["322"], denominatorCodes: ["321"] } })).toBeUndefined();
+    expect(parseOpsOf({ axisRatio: { axis: "cat01", numeratorCodes: [], denominatorCodes: ["321"] } })).toBeUndefined();
+    expect(parseOpsOf({ axisRatio: { axis: "cat01", numeratorCodes: ["322"], denominatorCodes: [] } })).toBeUndefined();
+    expect(
+      parseOpsOf({ axisRatio: { axis: "cat01", numeratorCodes: ["322"], denominatorCodes: ["321"] } })?.axisRatio,
+    ).toEqual({ axis: "cat01", numeratorCodes: ["322"], denominatorCodes: ["321"] });
+  });
+
+  it("areaAxis は未知の scheme を捨てる (地域軸の取り違えは全県の値がずれる)", () => {
+    expect(parseOpsOf({ areaAxis: { axis: "cat03", scheme: "unknown-scheme" } })).toBeUndefined();
+    expect(parseOpsOf({ areaAxis: { scheme: "seq-pref" } })).toBeUndefined();
+    expect(parseOpsOf({ areaAxis: { axis: "cat03", scheme: "seq-pref" } })?.areaAxis).toEqual({
+      axis: "cat03",
+      scheme: "seq-pref",
+    });
+  });
+
+  it("calc は type か分子キーが欠けたら捨てる", () => {
+    expect(parseOpsOf({ calc: { numeratorKey: "a" } })).toBeUndefined();
+    expect(parseOpsOf({ calc: { type: "ratio" } })).toBeUndefined();
+    expect(parseOpsOf({ calc: { type: "not-a-type", numeratorKey: "a" } })).toBeUndefined();
+    expect(parseOpsOf({ calc: { type: "ratio", numeratorKey: "a", denominatorKey: "b" } })?.calc).toEqual({
+      type: "ratio",
+      numeratorKey: "a",
+      denominatorKey: "b",
+    });
+  });
+
+  it("採用できる op が 1 つも無ければ ops 自体を持たない (空オブジェクトを作らない)", () => {
+    expect(parseOpsOf({})).toBeUndefined();
+    expect(parseOpsOf({ axisSum: { axis: "cat01" }, timeScope: "monthly", valueScale: 1 })).toBeUndefined();
+  });
+});
