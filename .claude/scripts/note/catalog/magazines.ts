@@ -81,6 +81,20 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     verticals: ["stats47-note"],
     noteUrl: "https://note.com/stats47/m/m30bb1cee28f7",
   },
+  // ── 家計調査の読み方 (2026-09-06 新設) ──
+  // s47-* は e-Stat 17 カテゴリに 1:1 対応する「分類マガジン」だが、これは軸が違う。
+  // 「支出額をどう読むか」という方法のマガジンで、県別プロファイル 47 本と
+  // 統計の読み違いを正す論点記事を束ねる。分類側 (s47-economy) は県別ランキング型の
+  // 記事を持ち続け、粒度を壊さない。
+  {
+    key: "s47-kakei-reading",
+    name: "家計調査の読み方｜47都道府県の家計を読み解く",
+    isPaid: false,
+    description:
+      "家計調査の支出額を読み解くための無料マガジン。十大費目で見る47都道府県の家計プロファイルと、支出額の読み違いを正す論点記事を束ねる。",
+    verticals: ["stats47-note"],
+    noteUrl: null,
+  },
   {
     key: "s47-economy",
     name: "都道府県ランキング｜家計・所得・物価",
