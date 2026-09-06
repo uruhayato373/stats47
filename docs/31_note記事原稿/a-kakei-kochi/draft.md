@@ -1,8 +1,10 @@
 ---
 title: "高知県の家計は何にお金が偏っているか ── 住居費とかつおに見える高知市の暮らし"
 description: "高知市の住居費は47市平均の1.39倍で十大費目のなかで最も突出。かつお4.24倍、出産入院料5.20倍など、家計調査の品目データから高知の暮らしの偏りを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n29417de32c83"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 高知県

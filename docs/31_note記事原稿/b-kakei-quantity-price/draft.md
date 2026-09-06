@@ -1,8 +1,10 @@
 ---
 title: "「たくさん買う県」と「高いものを買う県」── 家計調査の支出額を数量と価格に分解する"
 description: "支出額が多い県は、それだけたくさん食べている県なのでしょうか。家計調査の支出額を数量と単価に分けると、同じ「支出が多い」でも中身が正反対の県があることが見えてきます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n7ba6c516c1e9"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 統計データ

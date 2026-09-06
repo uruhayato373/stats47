@@ -1,8 +1,10 @@
 ---
 title: "「ぎょうざ消費日本一」は何を数えていて、何を数えていないのか"
 description: "餃子の街といえば宇都宮と浜松のはずでしょうか。家計調査のぎょうざ支出額で47都道府県を並べると1位は宮崎県でした。この統計が何を数えているのかを確かめます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n2f50bb479647"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 統計データ

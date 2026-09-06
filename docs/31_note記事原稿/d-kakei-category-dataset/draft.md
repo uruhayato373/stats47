@@ -1,8 +1,10 @@
 ---
 title: "教育費は8.7倍違う ── 47都道府県×十大費目の家計データセット（2007-2024・8,460行）"
 description: "家計の十大費目を47都道府県庁所在市で比べると、教育費はさいたま市と秋田市で8.7倍違います。47市平均比の一覧と18年分の時系列を、再現手順つきで配布します。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/na416c57e461c"
+published_at: "2026-09-06"
+published: true
 is_paid: true
 price_jpy: 2980
 tags:

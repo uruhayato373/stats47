@@ -1,8 +1,10 @@
 ---
 title: "食パンは値上がりすると売れる ── 家計調査で確かめるギッフェン財の条件"
 description: "値段が上がると買う量も増える。食パンはそんな例外的な動きを示す商品として知られてきました。この性質は今も成り立っているのでしょうか。家計調査と物価指数で確かめます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/nc3a7ebf40516"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 統計データ

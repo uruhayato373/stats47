@@ -1,8 +1,10 @@
 ---
 title: "ビールが最も売れる月は7月ではなくなった ── 家計調査20年の月次で見る"
 description: "ビールがいちばん売れる月はいつでしょうか。夏だと思っている方が多いはずですが、家計調査の月次データでは2024年の最多月は12月でした。季節性の変化を読み解く手順を解説します。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n5b11edb996f3"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 統計データ

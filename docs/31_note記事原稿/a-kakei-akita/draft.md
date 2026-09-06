@@ -1,8 +1,10 @@
 ---
 title: "秋田県の家計は何にお金が偏っているか ── 灯油とストーブに出る雪国の暮らし、教育費は平均の4分の1"
 description: "秋田市の家計は光熱・水道費が47市平均を上回る一方、教育費は0.24倍と十大費目で最も低い水準です。灯油4.31倍、ストーブ・温風ヒーター6.30倍の支出の高さと、教育費の低さの背景を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n5e9502c6507c"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 秋田県

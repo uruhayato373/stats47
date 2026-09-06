@@ -1,8 +1,10 @@
 ---
 title: "千葉県の家計は何にお金が偏っているか ── 教育費2倍と通学定期代に見る東京近郊の暮らし"
 description: "千葉県千葉市の家計は47市平均に比べ教育費が2.00倍、バス通学定期代は6.15倍。通学・通勤定期代と私立校費用に表れる東京近郊の暮らしを家計調査データから読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n1d5481680c03"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 千葉県

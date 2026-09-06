@@ -1,8 +1,10 @@
 ---
 title: "石川県の家計は何にお金が偏っているか ── 交通・通信費1.28倍に見る金沢市のクルマ社会"
 description: "石川県金沢市の家計は交通・通信費が47市平均比1.28倍、住居費は0.80倍です。十大費目と特徴品目の比率から、車社会と低い住居費が同居する暮らしを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ndf2afaef16c0"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 石川県

@@ -1,8 +1,10 @@
 ---
 title: "山形県の家計は何にお金が偏っているか ── 灯油とカーテンに表れる雪国の対策費"
 description: "山形市の家計は光熱・水道費が47市平均の1.30倍で十大費目の中で最も突出しています。灯油やカーテンへの支出の多さから、雪国ならではの家計構造を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/na3d645a7d50c"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 山形県

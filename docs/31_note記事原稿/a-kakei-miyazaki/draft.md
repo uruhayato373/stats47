@@ -1,8 +1,10 @@
 ---
 title: "宮崎県の家計は何にお金が偏っているか ── 焼酎と教育費に表れる宮崎市の家計事情"
 description: "宮崎市の家計調査を十大費目でみると、教育費は47市平均の0.61倍と際立って少なく、焼酎をはじめ地域色の強い品目には支出が大きく偏っていることがわかります。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n7f0be4fef37c"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 宮崎県

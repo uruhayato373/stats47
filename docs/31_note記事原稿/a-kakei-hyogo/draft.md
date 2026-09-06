@@ -1,8 +1,10 @@
 ---
 title: "兵庫県の家計は何にお金が偏っているか ── 交通・通信費は全国最下位水準なのに定期代が突出する神戸市の暮らし"
 description: "神戸市の家計を十大費目で見ると、交通・通信費は47市平均の0.73倍と最も低いのに、通学定期代は3.54倍と突出しています。その理由を探ります。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n6f5ab18ba6ff"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 兵庫県

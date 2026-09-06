@@ -1,8 +1,10 @@
 ---
 title: "岡山県の家計は何にお金が偏っているか ── 家具・家事用品が突出、暖房費は47市平均の4分の1"
 description: "岡山市の家計は家具・家事用品費が47市平均の1.27倍で十大費目の中で最も高く、暖房費は0.24倍と低水準です。桃3.28倍、食器戸棚2.96倍などの品目の背景を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ne788feae75bf"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 岡山県

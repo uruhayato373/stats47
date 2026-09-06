@@ -1,8 +1,10 @@
 ---
 title: "岩手県の家計は何にお金が偏っているか ── 住まいの修繕費に出る雪国の負担"
 description: "岩手県盛岡市の住居費は47市平均の1.44倍。灯油3.17倍、修繕材料4.67倍など、雪国特有の住まいへの支出構造を家計調査データから読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/na3020a08cef7"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 岩手県

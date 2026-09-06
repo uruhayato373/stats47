@@ -1,8 +1,10 @@
 ---
 title: "福岡県の家計は何にお金が偏っているか ── たらことバス通勤に見る福岡市の暮らし"
 description: "福岡県(福岡市)の家計を十大費目でみると、交通・通信費が47市平均の0.80倍ともっとも低い一方、バス通勤定期代は2.32倍、たらこは2.57倍と際立っています。その背景を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/nb7cfd81af156"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 福岡県

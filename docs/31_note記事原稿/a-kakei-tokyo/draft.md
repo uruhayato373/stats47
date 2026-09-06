@@ -1,8 +1,10 @@
 ---
 title: "東京都の家計は何にお金が偏っているか ── 教育費2.09倍と家賃地代8倍に表れる都心の暮らし"
 description: "東京都区部の家計調査データを分析すると、教育費は47市平均の2.09倍、家賃・地代は最大8.05倍に達し、都心特有の支出構造が浮かび上がります。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n9d384a674462"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 東京都

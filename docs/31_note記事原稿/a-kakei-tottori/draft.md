@@ -1,8 +1,10 @@
 ---
 title: "鳥取県の家計は何にお金が偏っているか ── 住居費がかさむ鳥取市と梨・カニの恵み"
 description: "鳥取市の住居費は47市平均の1.41倍で十大費目のなかで最も突出しています。梨やかにが並ぶ特徴品目とあわせ、鳥取市の家計構造を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n24d6b689079d"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 鳥取県

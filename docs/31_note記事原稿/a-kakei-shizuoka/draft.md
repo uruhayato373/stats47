@@ -1,8 +1,10 @@
 ---
 title: "静岡県の家計は何にお金が偏っているか ── 住居費1.36倍と室内装飾品にみる静岡市の暮らし"
 description: "静岡市の家計調査は住居費が47市平均の1.36倍で最大の乖離。室内装飾品や食器戸棚、工事費への支出も目立ち、住まいにお金をかける傾向がうかがえます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n35ce2a1b9248"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 静岡県

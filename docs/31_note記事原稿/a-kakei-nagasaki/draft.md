@@ -1,8 +1,10 @@
 ---
 title: "長崎県の家計は何にお金が偏っているか ── バス代がかさむ坂の街、長崎市"
 description: "長崎県は教育費が47市平均の半分に沈む一方、バス代やバス通勤定期代は47市平均の3〜4倍。坂の多い港町らしい支出の偏りを、家計調査の十大費目と特徴品目から読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/nd547ff50cbe6"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 長崎県

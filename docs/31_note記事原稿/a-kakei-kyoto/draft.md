@@ -1,8 +1,10 @@
 ---
 title: "京都府の家計は何にお金が偏っているか ── 教育費が47市平均の1.4倍に達する京都市の暮らし"
 description: "教育費が47市平均の1.40倍に達し、私立小学校や私立中学校への支出も際立つ一方、国公立中学校は少ない京都市の家計を、十大費目と特徴品目から読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n2a18f8e7098c"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 京都府

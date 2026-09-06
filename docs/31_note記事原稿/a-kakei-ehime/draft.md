@@ -1,8 +1,10 @@
 ---
 title: "愛媛県の家計は何にお金が偏っているか ── 教養娯楽費は少なく、被服賃借料が際立つ松山市の暮らし"
 description: "愛媛県松山市の家計は教養娯楽費が47市平均より2割以上少なく、被服賃借料や出産入院料は47市平均の3倍を超えます。十大費目と特徴品目から松山市の家計の偏りを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/nb627534c8b66"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 愛媛県

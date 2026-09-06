@@ -1,8 +1,10 @@
 ---
 title: "滋賀県の家計は何にお金が偏っているか ── 鉄道定期代と教育費に見る大津市のベッドタウン家計"
 description: "大津市の家計調査を見ると、教育費は47市平均の1.31倍に達し、鉄道通学定期代は3.84倍と際立って高くなっています。十大費目と特徴品目の比率から、この偏りの背景を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ne5569b417135"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 滋賀県

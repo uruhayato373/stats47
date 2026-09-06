@@ -1,8 +1,10 @@
 ---
 title: "奈良県の家計は何にお金が偏っているか ── 教育費1.74倍、私立小学校圏に透ける奈良市の暮らし"
 description: "奈良市の家計調査を十大費目で見ると、教育費が47市平均の1.74倍と際立ちます。私立小学校の支出は18倍超、鉄道通勤定期代も高水準で、大阪・京都のベッドタウンらしい教育・通勤支出の偏りが浮かび上がります。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n366d898d8107"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 奈良県

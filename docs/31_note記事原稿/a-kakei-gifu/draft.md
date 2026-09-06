@@ -1,8 +1,10 @@
 ---
 title: "岐阜県の家計は何にお金が偏っているか ── 住居費0.56倍という際立った低さ"
 description: "岐阜県の家計調査データを十大費目で見ると、住居費が47市平均の0.56倍と際立って低い一方、住居の内訳である地代は4.96倍に達します。岐阜市の家計の特徴を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n6136c0f13156"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 岐阜県

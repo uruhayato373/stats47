@@ -1,8 +1,10 @@
 ---
 title: "長野県の家計は何にお金が偏っているか ── 予備校より学習机に出る長野市の教育費"
 description: "長野市の教育費は47市平均の0.69倍と十大費目で最も低い一方、学習机・椅子への支出は4.11倍。桃や温泉入浴料の突出も含め、長野県ならではの家計構造を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/nb6061a164201"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 長野県

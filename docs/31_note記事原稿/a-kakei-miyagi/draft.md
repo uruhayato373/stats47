@@ -1,8 +1,10 @@
 ---
 title: "宮城県の家計は何にお金が偏っているか ── 住居費1.67倍に表れる仙台一極集中"
 description: "仙台市の家計調査を十大費目で分析。住居費は47都道府県庁所在市平均の1.67倍で最も突出し、民営家賃やバス通勤定期代も全国上位。都市集中が家計に表れる構造を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/nb479aff3cf05"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 宮城県

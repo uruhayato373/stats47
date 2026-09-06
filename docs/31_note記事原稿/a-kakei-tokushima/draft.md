@@ -1,8 +1,10 @@
 ---
 title: "徳島県の家計は何にお金が偏っているか ── 教育費1.47倍で際立つ徳島市の家計"
 description: "徳島市の家計調査を47都道府県庁所在市平均と比べると、教育費が1.47倍で全国トップ級。専修学校や国公立大学の学費が突出する一方、交通・通信費は0.73倍と低めです。十大費目の偏りから徳島の暮らしを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ne2abc0fc7530"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 徳島県

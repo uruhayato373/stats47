@@ -1,8 +1,10 @@
 ---
 title: "島根県の家計は何にお金が偏っているか ── しじみと祭具に表れる松江市の暮らし、教育費は平均の半分以下"
 description: "島根県庁所在地・松江市の家計調査を十大費目で見ると、教育費は47市平均の0.48倍と際立って低く、しじみや祭具・墓石への支出は5倍を超えます。数字の背景を地理や生活習慣から読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n75d68c2bb7e9"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 島根県

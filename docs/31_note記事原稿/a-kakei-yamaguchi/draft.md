@@ -1,8 +1,10 @@
 ---
 title: "山口県の家計は何にお金が偏っているか ── 教育費は全国最低水準、婚礼費は10倍超の山口市"
 description: "山口市の家計調査を分析すると、教育費は47県庁所在市平均の0.70倍で全国最低水準である一方、婚礼関係費は10.15倍。十大費目と特徴品目から山口市家計の構造的な偏りを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n88dde65e0774"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 山口県

@@ -1,8 +1,10 @@
 ---
 title: "鹿児島県の家計は何にお金が偏っているか ── 祭具・墓石に支出が集中する鹿児島市の暮らし"
 description: "鹿児島市の家計を十大費目で見ると家具・家事用品への支出は47市平均より17%少なく、祭具・墓石への支出は47市平均の4倍に達しています。鹿児島市の家計の偏りをデータで読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n555435ada7ed"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 鹿児島県

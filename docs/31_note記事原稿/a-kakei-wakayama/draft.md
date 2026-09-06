@@ -1,8 +1,10 @@
 ---
 title: "和歌山県の家計は何にお金が偏っているか ── 教育費は十大費目で最低、しらす干しに2倍超の支出"
 description: "和歌山市の家計は教育費が十大費目のなかで最も低い0.52倍にとどまる一方、輸送機器購入やしらす干しへの支出は47市平均の2倍を超えます。教育費の低さと特徴的な品目の背景を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ncc56ff8990d0"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 和歌山県

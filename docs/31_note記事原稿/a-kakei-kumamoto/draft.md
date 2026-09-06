@@ -1,8 +1,10 @@
 ---
 title: "熊本県の家計は何にお金が偏っているか ── 私立校と仕送りに表れる熊本市の教育熱"
 description: "熊本市の家計は47市平均に比べ教育費が1.44倍と突出し、私立中学校や私立高校、仕送り金の支出も目立ちます。家計調査データから熊本の暮らしの特徴を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n7e98a46bf791"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 熊本県

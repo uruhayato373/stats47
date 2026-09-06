@@ -1,8 +1,10 @@
 ---
 title: "群馬県の家計は何にお金が偏っているか ── 住居費の低さと車社会が映る前橋市の暮らし"
 description: "群馬県前橋市の家計は住居費が47市平均の0.60倍ととても少なく、自動車教習料など車関連の支出は際立って多いのが特徴です。十大費目と品目データから暮らしの偏りを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n1b9bf465327d"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 群馬県

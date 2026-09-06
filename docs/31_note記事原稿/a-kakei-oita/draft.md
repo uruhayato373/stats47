@@ -1,8 +1,10 @@
 ---
 title: "大分県の家計は何にお金が偏っているか ── クルマ社会が映る大分市の交通・通信費"
 description: "大分市の家計は交通・通信費が47市平均の1.27倍で際立ち、自動車購入や他の交通への支出も目立ちます。教育費は0.78倍にとどまる大分県の家計構造を家計調査データで読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n37ab621d01ad"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 大分県

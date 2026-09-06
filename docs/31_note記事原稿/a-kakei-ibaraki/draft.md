@@ -1,8 +1,10 @@
 ---
 title: "茨城県の家計は何にお金が偏っているか ── メロンと車社会が映す水戸市の暮らし"
 description: "茨城県水戸市の家計は交通・通信費が47市平均の1.28倍で最も突出し、住居費は0.77倍にとどまります。メロンやしじみといった特徴的な品目もあわせて十大費目の偏りを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n65d95575f7a5"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 茨城県

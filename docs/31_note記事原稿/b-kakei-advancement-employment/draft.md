@@ -1,8 +1,10 @@
 ---
 title: "進学率だけで教育水準は測れない ── 進学率と就職率を合算して見える県"
 description: "大学進学率が低い県は教育水準も低いのでしょうか。高校卒業者に占める就職者の割合まで合わせて見ると、進学率だけを見ていたときとは違う県の姿が現れます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n2d53f8a5fbb8"
+published_at: "2026-09-06"
+published: true
 tags:
   - 学校基本調査
   - 統計データ

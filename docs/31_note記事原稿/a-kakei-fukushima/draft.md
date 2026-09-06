@@ -1,8 +1,10 @@
 ---
 title: "福島県の家計は何にお金が偏っているか ── 住居費が47市平均の6割に届かない福島市の暮らし"
 description: "福島市の家計を十大費目でみると住居費は47市平均の0.58倍と際立って低く、桃や灯油、地代への支出は逆に突出しています。その理由をデータから読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n4c363c356b63"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 福島県

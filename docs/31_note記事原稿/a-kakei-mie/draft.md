@@ -1,8 +1,10 @@
 ---
 title: "三重県の家計は何にお金が偏っているか ── 住居費と学習机代に表れる津市の家計"
 description: "三重県津市の家計は47市平均に比べ住居費が1.28倍と際立つ一方、教育費は0.76倍で最も低い。学習机や通学かばんなど新生活関連品目の比率も高く、十大費目と特徴品目のデータからその実態を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n8113876eaeab"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 三重県

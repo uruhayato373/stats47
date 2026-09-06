@@ -1,8 +1,10 @@
 ---
 title: "山梨県の家計は何にお金が偏っているか ── 通勤定期より自動車教習に出る甲府市の交通費"
 description: "甲府市の家計は交通・通信費が47市平均の1.16倍で最も突出する一方、電車・バスの通勤定期代は全国最低水準です。自動車教習料やカーテンの支出も目立つ山梨県特有の家計構造を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n3416a225e0c6"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 山梨県

@@ -1,8 +1,10 @@
 ---
 title: "香川県の家計は何にお金が偏っているか ── 住居費1.53倍とうどんに表れる高松市の暮らし"
 description: "高松市の家計は住居費が47市平均の1.53倍で十大費目のなかで最も突出しています。外壁・塀等工事費5.19倍、うどんへの支出2.03倍など、うどん県ならではの家計の特徴を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ne69b740f702e"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 香川県

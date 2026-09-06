@@ -1,8 +1,10 @@
 ---
 title: "佐賀県の家計は何にお金が偏っているか ── 住居費は平均の半分、自動車購入は2.25倍の佐賀市の暮らし"
 description: "佐賀市の家計は住居費が47市平均の0.55倍と十大費目で最も低い水準です。自動車購入2.25倍、輸送機器保険料3.44倍などの支出の高さと、住居費の低さの背景を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n1972caf5203d"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 佐賀県

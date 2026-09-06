@@ -1,8 +1,10 @@
 ---
 title: "福井県の家計は何にお金が偏っているか ── 住居費とカーテンに見る福井市のマイホーム志向"
 description: "福井県福井市の家計は住居費が47市平均の1.35倍で際立って高く、カーテンや工事費など住まいに関わる支出も突出しています。十大費目と特徴品目から福井市の家計の偏りを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n18bb5a58060c"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 福井県

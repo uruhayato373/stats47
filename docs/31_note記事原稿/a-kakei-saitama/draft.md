@@ -1,8 +1,10 @@
 ---
 title: "埼玉県の家計は何にお金が偏っているか ── 教育費と通勤定期代に見るさいたま市の暮らし"
 description: "家計調査で埼玉県さいたま市の十大費目を見ると、教育費が47市平均の2.12倍で最も突出しています。鉄道通勤定期代や公営家賃など特徴的な品目もあわせて、家計の偏りを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ne760e2866251"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 埼玉県

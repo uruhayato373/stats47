@@ -1,8 +1,10 @@
 ---
 title: "沖縄県の家計は何にお金が偏っているか ── 住居費1.33倍とコートいらずの那覇市の暮らし"
 description: "沖縄県那覇市の家計を分析。住居費は47市平均の1.33倍と際立つ一方、コートやストーブへの支出はほぼ消えています。婚礼関係費やたんすが突出する背景を家計調査データから読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n757284230786"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 沖縄県

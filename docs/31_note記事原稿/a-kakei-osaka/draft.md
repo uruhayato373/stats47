@@ -1,8 +1,10 @@
 ---
 title: "大阪府の家計は何にお金が偏っているか ── 交通・通信費が47市平均の0.66倍にとどまる大阪市の家計"
 description: "大阪市の家計調査を十大費目でみると、交通・通信費は47市平均の0.66倍ともっとも低く、地代は3.38倍、都市ガスは2.16倍と対照的に高いことがわかります。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n7ac1079b6f20"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 大阪府

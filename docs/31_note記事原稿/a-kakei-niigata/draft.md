@@ -1,8 +1,10 @@
 ---
 title: "新潟県の家計は何にお金が偏っているか ── 保健医療費は全国最少、雪国の備えに出費"
 description: "新潟市の保健医療費は全国の県庁所在市で最も少なく、給排水関係工事費や毛布など雪への備えに支出が偏っています。十大費目と特徴品目から新潟の家計を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/ndd0bb1c14aa4"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 新潟県

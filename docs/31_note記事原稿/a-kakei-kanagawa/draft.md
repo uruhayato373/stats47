@@ -1,8 +1,10 @@
 ---
 title: "神奈川県の家計は何にお金が偏っているか ── 教育費と地代でみる横浜の暮らし"
 description: "神奈川県横浜市の家計は47市平均に比べ教育費が1.51倍、地代が3.46倍。私立志向や都心近接の地価が、十大費目データにどう表れているかを読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/nd0326279977a"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 神奈川県

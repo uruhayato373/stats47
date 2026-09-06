@@ -1,8 +1,10 @@
 ---
 title: "富山県の家計は何にお金が偏っているか ── 光熱費は全国屈指、教育費は控えめな富山市の懐事情"
 description: "総務省家計調査(2024年)をもとに富山市の家計を全国の県庁所在市と比較。教育費は0.76倍で十大費目のうち最も平均から離れ、光熱・水道費は1.22倍で逆方向に際立っています。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n13bca568c98a"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 富山県

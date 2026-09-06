@@ -1,8 +1,10 @@
 ---
 title: "栃木県の家計は何にお金が偏っているか ── 交通・通信費が際立つ宇都宮市の暮らし"
 description: "栃木県宇都宮市の家計は交通・通信費が47都道府県庁所在市平均の1.40倍で最大の偏りです。自動車購入や私立小学校など特徴的な品目から、その背景を読み解きます。"
-status: draft
-published: false
+status: published
+note_url: "https://note.com/stats47/n/n0fd0305a6b8c"
+published_at: "2026-09-06"
+published: true
 tags:
   - 家計調査
   - 栃木県
