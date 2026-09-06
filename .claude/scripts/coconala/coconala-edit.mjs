@@ -23,6 +23,7 @@ import {
   ROOT, launchContext, waitForLogin, assertAccount, sleep, readCatalog, readListings, writeBackCatalog, resolveImagePath,
 } from './lib/coconala-session.mjs';
 import { fillServiceForm, submitForm, uploadImage } from './lib/coconala-form.mjs';
+import { inspectPack } from './lib/pack-evidence.mjs';
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
@@ -51,6 +52,10 @@ const svc = catalog[SERVICE];
 const lst = listings[SERVICE];
 if (!svc) { console.error(`ABORT: カタログに "${SERVICE}" が無い`); process.exit(1); }
 if (!lst) { console.error(`ABORT: listings に "${SERVICE}" が無い`); process.exit(1); }
+if (COMMIT && SERVICE.startsWith('P-')) {
+  if (lst._delivery?.labelRevision !== '2026-09-06') throw new Error('納品物の分母・対象範囲修正版が未設定');
+  await inspectPack(ROOT, lst);
+}
 
 // 編集対象の数値 id を解決: --service-id 優先 → カタログ serviceUrl から
 let numericId = SERVICE_ID;
@@ -109,6 +114,9 @@ try {
     const { log, warnings } = await fillServiceForm(page, fields, { tag: '[edit]' });
     log.forEach((l) => console.log('   ', l));
     if (warnings.length) { console.log('[edit] ⚠ warnings:'); warnings.forEach((w) => console.log('    -', w)); }
+    if (COMMIT && (warnings.length || log.some(l => /selector 不在/.test(l)))) {
+      throw new Error('未充填・警告があるため公開しない（下書きを維持）');
+    }
   }
   await page.screenshot({ path: shot(`edit-filled-${SERVICE}.png`) }).catch(() => {});
 

@@ -14,7 +14,7 @@ export function renderLicenseText(licenseId: string): string {
   const lic = LICENSE_REGISTRY[licenseId];
   const clientLine = lic.clientWork
     ? "可 (クライアント納品物への組み込みを含む)"
-    : "購入者本人 / 1 法人内に限る";
+    : lic.scope;
   const lines = [
     `# 利用許諾 — ${lic.name}`,
     "",
@@ -26,7 +26,8 @@ export function renderLicenseText(licenseId: string): string {
     "- 色・数値・レイアウトの改変: 可",
     "",
     "## 禁止事項",
-    "- テンプレート・shape・SVG・元データ単体の再販売 / 再配布",
+    "- 本商品の独自編集によるテンプレート・shape・SVG・編集済みデータ集単体の再販売 / 再配布",
+    "- 公的統計の原データそのものの利用権を制限するものではありません。一次資料を別途取得して利用する場合は、その提供元の利用条件に従ってください。",
     "- 国・府省・自治体や e-Stat の公認・推奨と誤認させる表示",
     "- 本許諾は著作権の譲渡ではありません",
     "",

@@ -61,7 +61,7 @@ function buildMapPoints(geo: PrefectureGeometry): Map<string, PptxPoint[]> {
 }
 
 function addTitle(slide: PptxGenJS.Slide, title: string, subtitle?: string): void {
-  slide.addText(title, { x: 0.5, y: 0.3, w: 12.3, h: 0.6, fontSize: 24, bold: true, color: hex(BRAND.text), fontFace: JP_FONT });
+  slide.addText(title, { x: 0.5, y: 0.3, w: 12.3, h: 0.6, fontSize: 24, fit: "shrink", bold: true, color: hex(BRAND.text), fontFace: JP_FONT });
   if (subtitle) {
     slide.addText(subtitle, { x: 0.5, y: 0.92, w: 12.3, h: 0.4, fontSize: 13, color: hex(BRAND.subtext), fontFace: JP_FONT });
   }
@@ -271,7 +271,7 @@ export async function buildProductPptx(
   // 15. 利用許諾
   addTextSlide(pptx, "利用許諾（要約）", [
     "業務資料・提案書・記事・動画への組み込みは可能です（ライセンス条件による）。",
-    "テンプレート・図形・元データ単体の再販売 / 再配布は禁止です。",
+    "本商品の独自編集物単体の再販売 / 再配布は禁止です。原データの利用条件は提供元に従ってください。",
     "国・府省・自治体や e-Stat の公認・推奨と誤認させる表示はできません。",
     "詳細は同梱の LICENSE-ja.txt を参照してください。",
   ]);
@@ -298,7 +298,7 @@ export async function buildDatabookPptx(
   pptx.title = coverTitle;
 
   const mapPoints = buildMapPoints(geo);
-  const indicatorSummary = datasets.map((d) => `${d.indicator}（${d.year}）`).join(" / ");
+  const indicatorSummary = `${datasets.length} 指標。指標名・分母・対象範囲は各ページと SOURCES.csv を参照`;
 
   // 1. 表紙
   const cover = pptx.addSlide();
@@ -309,7 +309,7 @@ export async function buildDatabookPptx(
 
   // 2. 概要
   addTextSlide(pptx, "このデータブックについて", [
-    "47 都道府県を同じ定義で比較できる複数指標のデータブックです。",
+    "県コードで整理した複数指標のデータブックです。県庁所在市・特定世帯・観測地点の値を含み、県全体を表さない指標があります。",
     `収録指標：${indicatorSummary}。`,
     "地図は都道府県ごとに色を変更できる編集可能な図形（Office 図形）です。",
     "グラフの数値は埋め込み Excel を編集すると更新されます。",
@@ -343,7 +343,8 @@ export async function buildDatabookPptx(
     pptx,
     "出典・注記",
     [
-      ...datasets.map((d) => `${d.indicator}（${d.year}）：${d.source.surveyName}（statsDataId ${d.source.statsDataId}）`),
+      `収録 ${datasets.length} 指標の調査名・統計表ID・基準年・分母・対象範囲は同梱の SOURCES.csv に収録しています。`,
+      "人口当たりの数値と総数、県庁所在市と県全体の値を混同しないでください。",
       "詳細は同梱の SOURCES.csv。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。",
     ],
   );
@@ -351,7 +352,7 @@ export async function buildDatabookPptx(
   // 利用許諾
   addTextSlide(pptx, "利用許諾（要約）", [
     "業務資料・提案書・記事・動画への組み込みは可能です（ライセンス条件による）。",
-    "テンプレート・図形・元データ単体の再販売 / 再配布は禁止です。",
+    "本商品の独自編集物単体の再販売 / 再配布は禁止です。原データの利用条件は提供元に従ってください。",
     "国・府省・自治体や e-Stat の公認・推奨と誤認させる表示はできません。",
     "詳細は同梱の LICENSE-ja.txt を参照してください。",
   ]);

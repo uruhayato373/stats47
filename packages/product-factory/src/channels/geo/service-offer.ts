@@ -1,0 +1,26 @@
+/** Geo専用サービスの提案。P-*統計パック・外部出品台帳とは別の商品契約。 */
+export const GEO_SERVICE_OFFER = {
+  id: 'GEO-SERVICE-01',
+  status: 'draft',
+  analysisSlug: 'population-land-price',
+  title: '地価と将来人口の重なりを県別に資料化します',
+  audience: '自治体・地域メディア・調査担当者',
+  outcome: '住宅地の標準地点と1km人口メッシュの対応を、根拠と除外理由付きで説明できる',
+  scope: '1都道府県・地価2026年（前年比2025→2026）・人口2020→2050年・既存の包含結合条件固定',
+  priceYen: 5000,
+  termsApprovedAt: '2026-09-06',
+  approvalRecord: '.claude/state/products/geo-service-readiness-2026-09-06.json#ownerApproval',
+  priceBasis: '指定県の資料化・説明対応への対価。5,000円への変更はオーナー承認済み。需要・手数料控除後利益は未検証。',
+  deliveryBusinessDays: 5,
+  revisions: 1,
+  support: '納品後7日間、列定義・ファイル開封・集計条件に関する質問に対応。追加地域・新指標・独自条件は対象外。',
+  exclusions: [
+    '個別物件の鑑定・売買推奨・将来価格予測・安全性や収益の保証',
+    '住所検索、徒歩時間、道路距離、任意地点の商圏・市区町村別分析',
+    '顧客の個人情報や非公開データの取り込み、継続更新、Office編集機能',
+  ],
+  sourceVersions: { mesh1000r6: '24', L01: '26' },
+  rightsCheckedAt: '2026-09-06',
+  licenseUrl: 'https://creativecommons.org/licenses/by/4.0/deed.ja',
+  launchPolicy: '価格承認・見本生成を需要確認とみなさない。原則は既存noteの利用反応を確認するが、需要未確認のまま出品する場合はオーナーの明示的な公開指示を承認記録に残す。カテゴリ・入力内容・納品物の照合が未完了なら公開しない。',
+} as const;

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-06T06:33:33Z",
+  "productId": "GEO-SERVICE-01",
+  "status": "published",
+  "sampleGeneratedAt": "2026-09-06T06:09:18.598Z",
+  "offerSource": "packages/product-factory/src/channels/geo/service-offer.ts",
+  "sampleOutput": ".local/coconala-products/GEO-SERVICE-01/pref-14-draft-tHcZsk",
+  "samplePrefecture": "14",
+  "samplePointCount": 1309,
+  "sampleMeshCount": 1850,
+  "sampleComparablePointCount": 1275,
+  "sampleOverlapPointCount": 882,
+  "archiveSha256": "e9afe1e72c59e1b0bc321630debb9327d1ce1c1b3f29df2c31bce3f1cf20d751",
+  "automatedVerification": {
+    "workspaceTypeChecks": "25/25 PASS",
+    "scriptTypeChecks": "PASS",
+    "productTests": "202/202 PASS",
+    "docsErrors": 0,
+    "docsExistingWarnings": 39,
+    "coconalaRegressionTests": "3/3 PASS"
+  },
+  "nationalEvidence": {
+    "prefecturesVerified": 47,
+    "liveManifestSha256": "d84d08bb36048740d6559156e5e2bbba8adad4b1562336e1e49c68eabbe770ab",
+    "spatialJoinAndConservation": "PASS",
+    "rawSourcesReacquired": false
+  },
+  "browser": {
+    "reviewedSampleGeneratedAt": "2026-09-06T05:17:37.023Z",
+    "currentSampleVisualReview": "Not repeated; layout and data unchanged, draft status text updated",
+    "desktopWidth": 1180,
+    "mobileWidth": 390,
+    "horizontalOverflow": false,
+    "svgPoints": 1309,
+    "svgMeshes": 1850,
+    "visualReview": "PASS",
+    "canonicalStageHttpStatus": 200,
+    "canonicalStageUrl": "https://stats47.jp/geo/population-land-price/14/overlap"
+  },
+  "existingNoteProducts": {
+    "localPacksValidated": 4,
+    "zipAndManifestHashes": "PASS",
+    "priorPublicationEvidence": ".claude/state/metrics/geo-release-publication-2026-09-05.json#notePaid",
+    "currentAutomatedHttpStatus": 403,
+    "currentLiveCheck": "UNVERIFIED: automated fetch denied; do not infer unpublished",
+    "editsOrPublicationsPerformed": false,
+    "demand": "UNKNOWN: target four articles absent from available 2026-09-06 last-30-day metrics, not zero views",
+    "sales": null,
+    "demandCheck": {
+      "checkedAt": "2026-09-06T06:02:23Z",
+      "availableMetricsFetchedAt": "2026-09-06T03:13:16.942Z",
+      "availableMetricsArticleCount": 24,
+      "targetGeoArticlesFound": 0,
+      "dashboardResult": "LOGIN_REQUIRED in task-owned browser tab; no credentials entered",
+      "dashboardUrl": "https://note.com/sitesettings/stats",
+      "interpretation": "UNKNOWN, not zero demand. Purchases or concrete use questions remain unverified."
+    }
+  },
+  "externalPublished": true,
+  "priceApproved": true,
+  "ownerApproval": {
+    "recordedAt": "2026-09-06T06:09:09Z",
+    "evidence": "User replied 進めて to the explicit request to change 4,980 yen to 5,000 yen with all other terms unchanged. Earlier approval authorized one listing after demand confirmation.",
+    "approvedProposalPriceYen": 5000,
+    "deliveryBusinessDays": 5,
+    "revisions": 1,
+    "supportDays": 7,
+    "oneListingAuthorizedAfterDemandConfirmation": true,
+    "furtherScopeOrPriceExpansionAuthorized": false,
+    "directPublicationRequested": true,
+    "directPublicationEvidence": "User explicitly requested 全て出品して and then approved the authenticated stats47 (6198620) seller with 良い; publish the prepared Geo service without claiming demand is verified.",
+    "sellerUserId": "6198620"
+  },
+  "platformPriceCheck": {
+    "checkedAt": "2026-09-06T06:02:23Z",
+    "sourceUrl": "https://coconala.com/pages/about_option",
+    "approvedProposalSupported": false,
+    "reason": "Official standard-service price choices around this amount are 4,500 and 5,000 yen, not 4,980 yen.",
+    "recommendedReplacementYen": 5000,
+    "replacementApproved": true,
+    "categoryMinimumVerified": true,
+    "verifiedSelectedPriceYen": 5000
+  },
+  "coconalaAccountCheck": {
+    "checkedAt": "2026-09-06T06:33:33Z",
+    "result": "PASS",
+    "method": "/mypage/user own 表示を確認する link",
+    "expectedUserId": "6198620",
+    "observedUserId": "6198620",
+    "draftCreated": true,
+    "contextClosed": true
+  },
+  "remainingOwnerDecisions": [],
+  "verificationLimits": [
+    "No full web build or deployment; no web runtime changes",
+    "No QGIS/Office real-device compatibility claim",
+    "Historical sample was generated before commit; manifest records source file hashes. Generator is tracked in the commit containing this receipt.",
+    "No customer purchase or download transaction performed"
+  ],
+  "publication": {
+    "serviceId": "4387096",
+    "serviceUrl": "https://coconala.com/services/4387096",
+    "sellerUserId": "6198620",
+    "priceYen": 5000,
+    "revisionCount": 1,
+    "deliveryBusinessDays": 5,
+    "supportDays": 7,
+    "publicAt": "2026-09-06",
+    "anonymousCheckedAt": "2026-09-06T06:33:33Z",
+    "httpStatus": 200,
+    "titlePriceSellerScopeTermsMatch": true,
+    "purchaseControlPresent": true,
+    "sampleImageVisualReview": "PASS",
+    "draftReadback": "PASS",
+    "archiveSha256": "e9afe1e72c59e1b0bc321630debb9327d1ce1c1b3f29df2c31bce3f1cf20d751",
+    "customerTransactionsPerformed": false,
+    "existingListingsModified": false
+  },
+  "latestRegeneration": {
+    "generatedAt": "2026-09-06T06:29:39.487Z",
+    "output": ".local/coconala-products/GEO-SERVICE-01/pref-14-draft-rmls6e",
+    "zipSha256": "c4cf9f2d0e2429e8e0d1a244f39cd7369d57a7be966792632dbeb19aae749c8a",
+    "note": "Later local sample regeneration, not a customer delivery; published image and listing archive reference remain the earlier verified sample."
+  }
+}
