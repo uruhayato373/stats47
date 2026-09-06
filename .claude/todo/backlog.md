@@ -21,49 +21,22 @@ updated: 2026-08-30
 
 ## 🔴 高 — 今月中に着手したい
 
-### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] [進行中] 非商用KSJのpublic mirrorと公開構造化ランキングを是正する
+### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] [進行中] 非商用KSJの公開終了・新版への切替を本番確認する
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
 
-- **owner**: gis-curator（利用条件SSOT）/ r2-publisher（exact削除）/ ranking-publisher（代替・廃止）
-- **現状証拠**: 公式個別ページで`non-commercial`の11件
-  `C02,C09,C23,P03,P12,P13,P17,P18,P35,W01,W05`がpublic R2にあり、合計48,973,241 bytes。
-  `W01/P03/P12/P35/C09`由来の公開ランキングは11本（`dam-count`、発電施設6本、`tourism-resource-count`、
-  `roadside-station-count`、`fishing-port-count-ksj`、GIS側のmappingから漏れていた`fishing-port-count`）。
-  11ランキング・CSV11・JSON11はGooglebot UAで全200。元GIS435件だけの撤去では是正にならない。
-- **検証付き退避**: `.local/license-remediation/inventory-2026-09-05T13-21-55-281Z/`に元GIS435件、
-  `rankings-2026-09-05T13-47-55-827Z/`にランキング専有152件・共有参照7件をSHA/ETag付きで保存。
-  後者の`public-urls.json`がexact URL、`impact-assessment.json`が影響/復元条件。共有一覧は丸ごと削除・旧版復元しない。
-- **置換候補2本**: 道の駅は国交省2026-09-04一覧1234駅、漁港KSJは水産庁2026-04-01一覧2768港。
-  PDL一次資料のSHA・47県・全国保存則を確認しconfig/抽出器を実装。公開R2は旧版のまま。
-  `.local/license-remediation/official-replacements-20260905/handoff-manifest.json`に13候補と証拠56件を固定。
-  道の駅の解説は独立critic PASS、両系列の正規化・national-trendまで再生成済み（分母は既存規則で人口2024/面積2023年）。
-  公開時はitem/valuesだけでなく解説・人口/面積正規化・national-trend・全国派生・画像/相関を同時点検する。
-- **方針判断9本**: `dam-count`、`hydroelectric-power-plant-count`、`thermal-power-plant-count`、
-  `nuclear-power-plant-count`、`geothermal-power-plant-count`、`wind-power-plant-count-facility`、
-  `biomass-power-station-count`、`tourism-resource-count`、`fishing-port-count`。
-  発電所の代替統計は集計対象が異なり単純置換不可。ダム/観光資源も同一定義の商用可一次資料は未確定。
-- **実装済みの再発防止**: `license-policy.ts`で元データ公開と商用成果物を分離し、data-catalog check、
-  KSJ ranking生成、Geo bundle生成、汎用R2 publisher、KSJバズ地図入力をfail-closed化。
-  同一keyの一次資料置換後もrecipe/SHA/版/47県/合計で旧stagingを拒否。11 prefixと旧Geo運用JSONは`r2-retention.ts`のexact allowlist。
+- **owner**: gis-curator（利用条件SSOT）/ r2-publisher（exact削除）/ ranking-publisher（公開）/ x-strategist（関連SNS）
+- **現在地**: 元GIS435件は検証付き退避後に削除済み。新版の道の駅・漁港・港湾対象港、派生データ・画像・共有一覧194件と、道の駅3記事・Geo出典・分類辞書の追補69件はR2公開/SHA照合済み。
+  証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
+  出典監査はfresh stateで既存ratchet PASS、webテスト1,254件PASS。コードはPR #928で未デプロイ。
 - **次（実行順）**:
-  1. ユーザー「やって」により、元GIS435件撤去・新版2置換・残9終了/転送・一括deployを承認済み。
-  2. 置換候補2本は派生データ・画像・相関を含め一括更新する。旧`fishing-port-count`は新版へ301、代替のない8本は410にする。
-  3. config/一覧/ダウンロード/転送コードを検証して一括deploy後、旧ランキング資産をexact削除する。
-  4. 削除は保全済みkey/size/ETagを固定した`license-retention-20260905.json`のtargetをworkflow経由で実行する。raw435は完了済みのため再実行しない。残りは旧ランキング125・旧正規化2・ブログ53・港旧正規化1。旧KSJの再公開は引き続き禁止する。
-  5. 関連SNSは台帳posted6/draft2を検出。旧11ランキング系列の外部投稿は未検証のため、Geo15投稿の検証済み結果と混同せず、方針決定後に個別確認する。
-- **2026-09-06 checkpoint**: raw435件はworkflow `33974655560`でexact削除済み（48,973,241 bytes、エラー0、S3残0、公開HEAD435件404、backup保持）。remote catalog再監査PASS。
-  ユーザー「進めて」で追加の港再集計・旧値使用ブログ3本の終了も承認済み。`port-count`は旧699の甲乙種コード衝突/固定年2024を廃し、2025年施行の港湾調査規則から664港（甲163+乙501、47県）へ再生成。共同港は1回のみ計上、AI独立レビューPASS。
-  2026-09-06 08:12 JST: 新版3・画像・共有一覧・相関・カタログ194候補（17,452,138 bytes）を全backup/SHA/ETag一致・dry-run PASSで固定しexact PUT実行へ移行。相関1,985指標を正規producerで再計算し無関係39,802pair不変。耐久領域`stats47-geo-r2-finalize/.local/license-remediation/recovery-20260906/publish-plan.json`が対象正典。PR #928はdraft、未デプロイ。最終build 1,484 prerender PASS、型/lint/webテスト再実行中。
-  ブログ3本（`airport-count-vs-wind-power-plant-count-facility`、`dam-count-prefecture-gap`、`dam-count-vs-road-expressway-length`）は410コード・再公開防止・共有一覧の限定除去を実装済み。R2反映とデプロイ・最終実測は未完了。
-- **2026-09-06 08:23 JST checkpoint**: R2 exact194件（17,452,138 bytes）反映済み、S3全194・公開HTTP19のSHA一致。初回23件後に画像lockのwrapper過小許可で停止したが、固定plan由来のlockだけ追加し残171件を完了。ローカルURLはGeo正典の301/200区分・ダウンロード・終了URLを含む1,038件PASS。コードはまだ未デプロイ、旧125+正規化3+ブログ53=181件はHOLD。
-  fresh全ブログtaxonomy監査は529記事・1,371図、resolved965/unresolved136/missing190、coverage74.75%で既存ratchet未達。基準緩和や旧監査stateへの差し戻しで隠さない。
-  道の駅の旧値が残る追加3記事 `roadside-station-count-prefecture-gap`、`roadside-station-count-vs-forest-road-length`、`roadside-station-prefecture-gap` は、ユーザー「更新すべきものは更新して　古い資産は削除して」で2026版への本文/図/出典更新と不要な旧資産の削除を承認済み。3 prefix の47資産（2,379,446 bytes）をSHA/ETag付きで退避済み。独立レビューと公開後確認を経て不要と特定できたexact keyのみ削除する。
-  Geo図のsurveyScope不足、既存家計/CPI記事の辞書未登録、別作業の学力metric未統合を区別して対処する。監査診断は`stats47-geo-release/.local/license-remediation/`、公開receiptは`stats47-geo-r2-finalize/.local/license-remediation/recovery-20260906/publish-receipt-resume.json`に保全。
-- **停止条件**: 「加工済み」だけを根拠に公開JSON/CSVや元TopoJSONを商用可と扱わない。承認されたexact対象以外は削除しない。
-  削除前のkey/size/ETagが保全時から変化していれば停止する。共有一覧は無関係レコードを保持する。
-- **完了条件**: public R2の11 prefixが0件、data-catalog checkがgreen。11ランキングは商用可source/書面許諾IDを持つか、
-  config・R2・sitemap・内部リンク・記事/SNSを含めて廃止され、本番URLとGooglebot UAで方針どおりのstatusを確認する。
+  1. PR #928の最終CI通過後に一括deploy。旧`fishing-port-count`の新版への301、代替のない8ランキングと終了3記事の410、新版3ランキング・道の駅3記事・Geoページの200を実測する。
+  2. `license-retention-20260905.json` の旧ランキング125・旧正規化2・終了ブログ53・旧港正規化1・旧道の駅資産3、合計184件だけをworkflow経由で削除する。raw435は再実行しない。
+  3. CDNを更新し、公開69ファイルのSHA、廃止184キーの404、Googlebot UAによるGeo/ランキング/ダウンロードの全対象を確認する。
+  4. 関連SNSの台帳posted6/draft2を外部実測する。旧11ランキング系列の未検証投稿を、Geo15投稿の既存検証結果と混同しない。
+- **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
+- **停止条件**: key/size/ETagが退避時と変わった対象は削除しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。main→developは生成3ファイルの競合をpreviewで検出済みのため、指示なく解消しない。
+- **完了条件**: public R2の非商用11prefixが0件、catalog gate PASS、新版の出典・保存則・公開値が一致し、終了URL/ダウンロード・記事/SNSまで承認方針どおりの状態を本番実測する。
 
 
 ### [AFF-DEPLOY-RESOLUTION-01] 広告解決順の変更 (#912/#913) を本番反映し、代表ページで実測する

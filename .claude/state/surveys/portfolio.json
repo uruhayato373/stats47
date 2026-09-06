@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-05",
+  "generatedAt": "2026-09-06",
   "linkage": {
-    "auditedAt": "2026-09-05",
+    "auditedAt": "2026-09-06",
     "metrics": 2299,
-    "resolved": 2085,
-    "unresolved": 214,
-    "coveragePct": 90.7,
+    "resolved": 2087,
+    "unresolved": 212,
+    "coveragePct": 90.8,
     "unresolvedByReason": {
       "estat-uncovered": 78,
       "ssds-synthetic-only": 113,
-      "external": 23
+      "external": 21
     },
     "uncoveredStatsDataIds": 48,
     "orphanSurveys": 17,
@@ -897,7 +897,7 @@
     },
     {
       "surveyId": "cpi-annual",
-      "name": "消費者物価指数年報",
+      "name": "消費者物価指数",
       "organization": "総務省統計局",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
@@ -3524,15 +3524,15 @@
       "name": "日本の将来推計人口",
       "organization": "国立社会保障・人口問題研究所",
       "lifecycleStatus": "observe",
-      "linkageStatus": "inactive-only",
+      "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 7,
-      "activeItemCount": 0,
+      "itemCount": 9,
+      "activeItemCount": 2,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": true,
-      "readerQuestionCount": 0,
+      "readerQuestionCount": 2,
       "relatedArticleCount": null,
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
@@ -3571,7 +3571,7 @@
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": null
+      "liveItemCount": 2
     },
     {
       "surveyId": "port-statistics",
