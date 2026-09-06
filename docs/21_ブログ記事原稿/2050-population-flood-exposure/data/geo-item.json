@@ -1,0 +1,669 @@
+{
+  "schemaVersion": 1,
+  "slug": "population-flood-risk",
+  "generatedAt": "2026-09-05T09:04:49.856Z",
+  "dataVersion": "2020-2050",
+  "geography": "prefecture",
+  "title": "2050年、洪水浸水想定区域に暮らす人口はどれくらいか",
+  "question": "想定最大規模の洪水浸水想定区域と1km将来人口メッシュを重ねると、地域差はどう見えるか",
+  "primaryMetricKey": "floodExposureShare2050",
+  "metrics": [
+    {
+      "key": "floodExposureShare2050",
+      "label": "2050年浸水想定区域人口比率",
+      "unit": "%",
+      "format": "percent1",
+      "description": "中心点が想定最大規模の浸水想定区域内にある1kmメッシュ人口の比率"
+    },
+    {
+      "key": "floodExposureShare2020",
+      "label": "2020年浸水想定区域人口比率",
+      "unit": "%",
+      "format": "percent1",
+      "description": "同じ空間判定による2020年人口比率"
+    },
+    {
+      "key": "exposedPopulation2050",
+      "label": "2050年浸水想定区域人口",
+      "unit": "人",
+      "format": "integer",
+      "description": "浸水想定区域内と判定した1kmメッシュの2050年人口合計"
+    },
+    {
+      "key": "populationChangeRate",
+      "label": "2050年人口増減率",
+      "unit": "%",
+      "format": "signedPercent1",
+      "description": "都道府県内1kmメッシュ人口の2020年から2050年の増減率"
+    },
+    {
+      "key": "exposedMeshCount",
+      "label": "浸水想定区域メッシュ数",
+      "unit": "メッシュ",
+      "format": "integer",
+      "description": "中心点が想定最大規模の浸水想定区域内にある人口メッシュ数"
+    }
+  ],
+  "rows": [
+    {
+      "areaCode": "16000",
+      "areaName": "富山県",
+      "values": {
+        "floodExposureShare2050": 71.8,
+        "floodExposureShare2020": 69.2,
+        "exposedPopulation2050": 546918,
+        "populationChangeRate": -26.4,
+        "exposedMeshCount": 680
+      },
+      "rank": 1
+    },
+    {
+      "areaCode": "18000",
+      "areaName": "福井県",
+      "values": {
+        "floodExposureShare2050": 68.1,
+        "floodExposureShare2020": 64.4,
+        "exposedPopulation2050": 390250,
+        "populationChangeRate": -25.3,
+        "exposedMeshCount": 419
+      },
+      "rank": 2
+    },
+    {
+      "areaCode": "36000",
+      "areaName": "徳島県",
+      "values": {
+        "floodExposureShare2050": 67.5,
+        "floodExposureShare2020": 62.1,
+        "exposedPopulation2050": 324470,
+        "populationChangeRate": -33.2,
+        "exposedMeshCount": 327
+      },
+      "rank": 3
+    },
+    {
+      "areaCode": "33000",
+      "areaName": "岡山県",
+      "values": {
+        "floodExposureShare2050": 62.2,
+        "floodExposureShare2020": 56.3,
+        "exposedPopulation2050": 939952,
+        "populationChangeRate": -20,
+        "exposedMeshCount": 600
+      },
+      "rank": 4
+    },
+    {
+      "areaCode": "15000",
+      "areaName": "新潟県",
+      "values": {
+        "floodExposureShare2050": 62.1,
+        "floodExposureShare2020": 59.3,
+        "exposedPopulation2050": 947140,
+        "populationChangeRate": -30.7,
+        "exposedMeshCount": 1701
+      },
+      "rank": 5
+    },
+    {
+      "areaCode": "17000",
+      "areaName": "石川県",
+      "values": {
+        "floodExposureShare2050": 53.7,
+        "floodExposureShare2020": 50.7,
+        "exposedPopulation2050": 481347,
+        "populationChangeRate": -20.8,
+        "exposedMeshCount": 434
+      },
+      "rank": 6
+    },
+    {
+      "areaCode": "01000",
+      "areaName": "北海道",
+      "values": {
+        "floodExposureShare2050": 52.6,
+        "floodExposureShare2020": 49.2,
+        "exposedPopulation2050": 2010087,
+        "populationChangeRate": -26.9,
+        "exposedMeshCount": 5313
+      },
+      "rank": 7
+    },
+    {
+      "areaCode": "19000",
+      "areaName": "山梨県",
+      "values": {
+        "floodExposureShare2050": 52.4,
+        "floodExposureShare2020": 47.7,
+        "exposedPopulation2050": 320663,
+        "populationChangeRate": -24.5,
+        "exposedMeshCount": 222
+      },
+      "rank": 8
+    },
+    {
+      "areaCode": "41000",
+      "areaName": "佐賀県",
+      "values": {
+        "floodExposureShare2050": 52.2,
+        "floodExposureShare2020": 49.6,
+        "exposedPopulation2050": 323822,
+        "populationChangeRate": -23.5,
+        "exposedMeshCount": 450
+      },
+      "rank": 9
+    },
+    {
+      "areaCode": "11000",
+      "areaName": "埼玉県",
+      "values": {
+        "floodExposureShare2050": 47.8,
+        "floodExposureShare2020": 47.9,
+        "exposedPopulation2050": 3172731,
+        "populationChangeRate": -9.7,
+        "exposedMeshCount": 1280
+      },
+      "rank": 10
+    },
+    {
+      "areaCode": "21000",
+      "areaName": "岐阜県",
+      "values": {
+        "floodExposureShare2050": 47.6,
+        "floodExposureShare2020": 43.8,
+        "exposedPopulation2050": 699101,
+        "populationChangeRate": -25.8,
+        "exposedMeshCount": 509
+      },
+      "rank": 11
+    },
+    {
+      "areaCode": "38000",
+      "areaName": "愛媛県",
+      "values": {
+        "floodExposureShare2050": 46.8,
+        "floodExposureShare2020": 42.1,
+        "exposedPopulation2050": 441966,
+        "populationChangeRate": -29.2,
+        "exposedMeshCount": 243
+      },
+      "rank": 12
+    },
+    {
+      "areaCode": "31000",
+      "areaName": "鳥取県",
+      "values": {
+        "floodExposureShare2050": 46.3,
+        "floodExposureShare2020": 42.3,
+        "exposedPopulation2050": 187752,
+        "populationChangeRate": -26.7,
+        "exposedMeshCount": 176
+      },
+      "rank": 13
+    },
+    {
+      "areaCode": "27000",
+      "areaName": "大阪府",
+      "values": {
+        "floodExposureShare2050": 46.1,
+        "floodExposureShare2020": 45.8,
+        "exposedPopulation2050": 3350077,
+        "populationChangeRate": -17.8,
+        "exposedMeshCount": 392
+      },
+      "rank": 14
+    },
+    {
+      "areaCode": "13000",
+      "areaName": "東京都",
+      "values": {
+        "floodExposureShare2050": 45.9,
+        "floodExposureShare2020": 45.4,
+        "exposedPopulation2050": 6603525,
+        "populationChangeRate": 2.5,
+        "exposedMeshCount": 497
+      },
+      "rank": 15
+    },
+    {
+      "areaCode": "26000",
+      "areaName": "京都府",
+      "values": {
+        "floodExposureShare2050": 45.3,
+        "floodExposureShare2020": 43.8,
+        "exposedPopulation2050": 939635,
+        "populationChangeRate": -19.5,
+        "exposedMeshCount": 402
+      },
+      "rank": 16
+    },
+    {
+      "areaCode": "37000",
+      "areaName": "香川県",
+      "values": {
+        "floodExposureShare2050": 44.9,
+        "floodExposureShare2020": 43,
+        "exposedPopulation2050": 325319,
+        "populationChangeRate": -23.8,
+        "exposedMeshCount": 244
+      },
+      "rank": 17
+    },
+    {
+      "areaCode": "28000",
+      "areaName": "兵庫県",
+      "values": {
+        "floodExposureShare2050": 44.2,
+        "floodExposureShare2020": 42.4,
+        "exposedPopulation2050": 1925718,
+        "populationChangeRate": -20.3,
+        "exposedMeshCount": 859
+      },
+      "rank": 18
+    },
+    {
+      "areaCode": "22000",
+      "areaName": "静岡県",
+      "values": {
+        "floodExposureShare2050": 42.3,
+        "floodExposureShare2020": 40.9,
+        "exposedPopulation2050": 1196276,
+        "populationChangeRate": -22.1,
+        "exposedMeshCount": 627
+      },
+      "rank": 19
+    },
+    {
+      "areaCode": "20000",
+      "areaName": "長野県",
+      "values": {
+        "floodExposureShare2050": 41.5,
+        "floodExposureShare2020": 39.5,
+        "exposedPopulation2050": 655799,
+        "populationChangeRate": -22.8,
+        "exposedMeshCount": 663
+      },
+      "rank": 20
+    },
+    {
+      "areaCode": "30000",
+      "areaName": "和歌山県",
+      "values": {
+        "floodExposureShare2050": 41.2,
+        "floodExposureShare2020": 38.3,
+        "exposedPopulation2050": 260407,
+        "populationChangeRate": -31.5,
+        "exposedMeshCount": 179
+      },
+      "rank": 21
+    },
+    {
+      "areaCode": "23000",
+      "areaName": "愛知県",
+      "values": {
+        "floodExposureShare2050": 41,
+        "floodExposureShare2020": 41.6,
+        "exposedPopulation2050": 2740331,
+        "populationChangeRate": -11.5,
+        "exposedMeshCount": 931
+      },
+      "rank": 22
+    },
+    {
+      "areaCode": "25000",
+      "areaName": "滋賀県",
+      "values": {
+        "floodExposureShare2050": 39.9,
+        "floodExposureShare2020": 39.7,
+        "exposedPopulation2050": 487519,
+        "populationChangeRate": -13.5,
+        "exposedMeshCount": 494
+      },
+      "rank": 23
+    },
+    {
+      "areaCode": "34000",
+      "areaName": "広島県",
+      "values": {
+        "floodExposureShare2050": 39.6,
+        "floodExposureShare2020": 35.8,
+        "exposedPopulation2050": 881887,
+        "populationChangeRate": -20.4,
+        "exposedMeshCount": 285
+      },
+      "rank": 24
+    },
+    {
+      "areaCode": "39000",
+      "areaName": "高知県",
+      "values": {
+        "floodExposureShare2050": 38.9,
+        "floodExposureShare2020": 35.6,
+        "exposedPopulation2050": 175478,
+        "populationChangeRate": -34.8,
+        "exposedMeshCount": 193
+      },
+      "rank": 25
+    },
+    {
+      "areaCode": "05000",
+      "areaName": "秋田県",
+      "values": {
+        "floodExposureShare2050": 38.6,
+        "floodExposureShare2020": 35.4,
+        "exposedPopulation2050": 216358,
+        "populationChangeRate": -41.6,
+        "exposedMeshCount": 667
+      },
+      "rank": 26
+    },
+    {
+      "areaCode": "04000",
+      "areaName": "宮城県",
+      "values": {
+        "floodExposureShare2050": 38,
+        "floodExposureShare2020": 37.5,
+        "exposedPopulation2050": 694746,
+        "populationChangeRate": -20.5,
+        "exposedMeshCount": 1143
+      },
+      "rank": 27
+    },
+    {
+      "areaCode": "43000",
+      "areaName": "熊本県",
+      "values": {
+        "floodExposureShare2050": 37.9,
+        "floodExposureShare2020": 36.2,
+        "exposedPopulation2050": 513119,
+        "populationChangeRate": -22,
+        "exposedMeshCount": 628
+      },
+      "rank": 28
+    },
+    {
+      "areaCode": "06000",
+      "areaName": "山形県",
+      "values": {
+        "floodExposureShare2050": 37.7,
+        "floodExposureShare2020": 37.9,
+        "exposedPopulation2050": 267837,
+        "populationChangeRate": -33.4,
+        "exposedMeshCount": 764
+      },
+      "rank": 29
+    },
+    {
+      "areaCode": "10000",
+      "areaName": "群馬県",
+      "values": {
+        "floodExposureShare2050": 37.1,
+        "floodExposureShare2020": 36.2,
+        "exposedPopulation2050": 564176,
+        "populationChangeRate": -21.6,
+        "exposedMeshCount": 581
+      },
+      "rank": 30
+    },
+    {
+      "areaCode": "02000",
+      "areaName": "青森県",
+      "values": {
+        "floodExposureShare2050": 36.4,
+        "floodExposureShare2020": 35.6,
+        "exposedPopulation2050": 274851,
+        "populationChangeRate": -39,
+        "exposedMeshCount": 589
+      },
+      "rank": 31
+    },
+    {
+      "areaCode": "24000",
+      "areaName": "三重県",
+      "values": {
+        "floodExposureShare2050": 36,
+        "floodExposureShare2020": 35.1,
+        "exposedPopulation2050": 484638,
+        "populationChangeRate": -23.9,
+        "exposedMeshCount": 561
+      },
+      "rank": 32
+    },
+    {
+      "areaCode": "32000",
+      "areaName": "島根県",
+      "values": {
+        "floodExposureShare2050": 34.7,
+        "floodExposureShare2020": 29.5,
+        "exposedPopulation2050": 172323,
+        "populationChangeRate": -25.9,
+        "exposedMeshCount": 217
+      },
+      "rank": 33
+    },
+    {
+      "areaCode": "40000",
+      "areaName": "福岡県",
+      "values": {
+        "floodExposureShare2050": 34.6,
+        "floodExposureShare2020": 33.7,
+        "exposedPopulation2050": 1548107,
+        "populationChangeRate": -12.8,
+        "exposedMeshCount": 860
+      },
+      "rank": 34
+    },
+    {
+      "areaCode": "44000",
+      "areaName": "大分県",
+      "values": {
+        "floodExposureShare2050": 34.6,
+        "floodExposureShare2020": 31.6,
+        "exposedPopulation2050": 291119,
+        "populationChangeRate": -25.1,
+        "exposedMeshCount": 237
+      },
+      "rank": 34
+    },
+    {
+      "areaCode": "09000",
+      "areaName": "栃木県",
+      "values": {
+        "floodExposureShare2050": 28.9,
+        "floodExposureShare2020": 29.7,
+        "exposedPopulation2050": 433476,
+        "populationChangeRate": -22.3,
+        "exposedMeshCount": 888
+      },
+      "rank": 36
+    },
+    {
+      "areaCode": "45000",
+      "areaName": "宮崎県",
+      "values": {
+        "floodExposureShare2050": 28.8,
+        "floodExposureShare2020": 27.4,
+        "exposedPopulation2050": 229320,
+        "populationChangeRate": -25.5,
+        "exposedMeshCount": 279
+      },
+      "rank": 37
+    },
+    {
+      "areaCode": "14000",
+      "areaName": "神奈川県",
+      "values": {
+        "floodExposureShare2050": 27.8,
+        "floodExposureShare2020": 26,
+        "exposedPopulation2050": 2366277,
+        "populationChangeRate": -7.7,
+        "exposedMeshCount": 297
+      },
+      "rank": 38
+    },
+    {
+      "areaCode": "35000",
+      "areaName": "山口県",
+      "values": {
+        "floodExposureShare2050": 27.8,
+        "floodExposureShare2020": 24.9,
+        "exposedPopulation2050": 257373,
+        "populationChangeRate": -31,
+        "exposedMeshCount": 271
+      },
+      "rank": 38
+    },
+    {
+      "areaCode": "29000",
+      "areaName": "奈良県",
+      "values": {
+        "floodExposureShare2050": 27.7,
+        "floodExposureShare2020": 28.2,
+        "exposedPopulation2050": 263497,
+        "populationChangeRate": -28.2,
+        "exposedMeshCount": 188
+      },
+      "rank": 40
+    },
+    {
+      "areaCode": "12000",
+      "areaName": "千葉県",
+      "values": {
+        "floodExposureShare2050": 25.5,
+        "floodExposureShare2020": 25.4,
+        "exposedPopulation2050": 1452834,
+        "populationChangeRate": -9.5,
+        "exposedMeshCount": 908
+      },
+      "rank": 41
+    },
+    {
+      "areaCode": "08000",
+      "areaName": "茨城県",
+      "values": {
+        "floodExposureShare2050": 22.7,
+        "floodExposureShare2020": 24.2,
+        "exposedPopulation2050": 508870,
+        "populationChangeRate": -21.7,
+        "exposedMeshCount": 1232
+      },
+      "rank": 42
+    },
+    {
+      "areaCode": "03000",
+      "areaName": "岩手県",
+      "values": {
+        "floodExposureShare2050": 22.5,
+        "floodExposureShare2020": 20.8,
+        "exposedPopulation2050": 176183,
+        "populationChangeRate": -35.3,
+        "exposedMeshCount": 480
+      },
+      "rank": 43
+    },
+    {
+      "areaCode": "07000",
+      "areaName": "福島県",
+      "values": {
+        "floodExposureShare2050": 20,
+        "floodExposureShare2020": 19.8,
+        "exposedPopulation2050": 248840,
+        "populationChangeRate": -32,
+        "exposedMeshCount": 499
+      },
+      "rank": 44
+    },
+    {
+      "areaCode": "46000",
+      "areaName": "鹿児島県",
+      "values": {
+        "floodExposureShare2050": 18,
+        "floodExposureShare2020": 15.7,
+        "exposedPopulation2050": 210681,
+        "populationChangeRate": -26.3,
+        "exposedMeshCount": 161
+      },
+      "rank": 45
+    },
+    {
+      "areaCode": "42000",
+      "areaName": "長崎県",
+      "values": {
+        "floodExposureShare2050": 13.6,
+        "floodExposureShare2020": 12.5,
+        "exposedPopulation2050": 117918,
+        "populationChangeRate": -33.8,
+        "exposedMeshCount": 156
+      },
+      "rank": 46
+    },
+    {
+      "areaCode": "47000",
+      "areaName": "沖縄県",
+      "values": {
+        "floodExposureShare2050": 5,
+        "floodExposureShare2020": 5.1,
+        "exposedPopulation2050": 69177,
+        "populationChangeRate": -5.2,
+        "exposedMeshCount": 11
+      },
+      "rank": 47
+    }
+  ],
+  "summary": {
+    "observationCount": 47,
+    "medianValue": 39.6,
+    "topAreaCodes": [
+      "16000",
+      "18000",
+      "36000",
+      "33000",
+      "15000"
+    ],
+    "bottomAreaCodes": [
+      "47000",
+      "42000",
+      "46000",
+      "07000",
+      "03000"
+    ]
+  },
+  "method": [
+    "2025年度洪水浸水想定区域のうち想定最大規模レイヤだけを使用した",
+    "1km人口メッシュの中心点が浸水深ポリゴン内に含まれるかを一次メッシュ単位で空間判定した",
+    "区域内と判定したメッシュの2020年人口・2050年人口を都道府県別に合計した"
+  ],
+  "sources": [
+    {
+      "name": "国土交通省『1kmメッシュ別将来推計人口（R6国政局推計）』",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html",
+      "datasetId": "mesh1000r6",
+      "version": "24",
+      "license": "CC BY 4.0"
+    },
+    {
+      "name": "国土交通省『洪水浸水想定区域（1次メッシュ単位、2025年度）』",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html",
+      "datasetId": "A31b",
+      "version": "25",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "caveats": [
+    "本分析は避難判断や個別地点の安全確認に使えない。必ず自治体と国の最新ハザードマップを確認する",
+    "1kmメッシュ中心点による包含判定のため、区域と一部だけ重なるメッシュや内部の人口分布を精密には表さない",
+    "河川管理者から資料提供を受けた範囲が対象であり、浸水区域外で洪水が起きないことを意味しない"
+  ],
+  "dataQuality": {
+    "expectedAreas": 47,
+    "actualAreas": 47,
+    "missingAreaCodes": [],
+    "inputCounts": {
+      "floodZipFiles": 201,
+      "floodFeatures": 16513541,
+      "matchedFloodFeatures": 19383,
+      "populatedMeshes": 177791
+    },
+    "coverageNote": "洪水予報河川・水位周知河川とその他の河川の想定最大規模201ファイルを47都道府県の人口メッシュと照合。同じ地点で重なる区域の人口は二重加算しない"
+  }
+}
