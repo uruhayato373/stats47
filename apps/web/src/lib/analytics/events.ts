@@ -241,6 +241,7 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * - `category_sidebar`: category ページ左のカテゴリナビ（home と同じリストの別配置）
  * - `product_catalog`: 商品一覧から商品詳細への導線
  * - `blog_product`: ブログ本文末の商品詳細への文脈一致導線
+ * - `blog_sidebar` / `blog_discovery_mobile`: ブログ一覧の右レール / モバイル上部の探索導線
  *
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
  * (`.claude/rules/analytics-event-standards.md` §2)。
@@ -264,6 +265,8 @@ export type NavSurface =
   | 'category_sidebar'
   | 'product_catalog'
   | 'blog_product'
+  | 'blog_sidebar'
+  | 'blog_discovery_mobile'
   | 'ranking_survey'
   | 'category_survey'
   | 'theme_survey'

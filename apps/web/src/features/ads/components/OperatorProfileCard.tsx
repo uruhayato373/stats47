@@ -17,7 +17,7 @@ interface OperatorProfileCardProps {
  * OperatorPromoCard (プロフィール + アフィリエイトバナー一体型) からプロフィール部だけを
  * 切り出した静的カード。アフィリエイトを含まないため PR 表記・計測・ランダム軸は不要で、
  * Server Component としてそのまま SSG に焼き込める。
- * ブログ詳細 (PC) の右レール最上部で使用する (フッター上のグローバルカードは lg 以上で非表示)。
+ * ホームとブログの右レールで共用するサイト横断の運営者カード。
  */
 export function OperatorProfileCard({
   className,
@@ -25,7 +25,7 @@ export function OperatorProfileCard({
   return (
     <SurfaceCard className={cn('flex flex-col', className)}>
       <p className="mb-3 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
-        このブログを書いている人
+        運営者
       </p>
       <div className="flex items-center gap-3">
         <Image
