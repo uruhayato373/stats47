@@ -1,22 +1,20 @@
 {
-  "generatedAt": "2026-09-07T15:19:53.896Z",
+  "generatedAt": "2026-09-07T15:30:13.345Z",
   "gscSnapshot": "2026-W36",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2166,
-    "done": 2154,
-    "needsRegen": 12,
-    "needsByReason": {
-      "missing": 12
-    },
+    "done": 2166,
+    "needsRegen": 0,
+    "needsByReason": {},
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
     "doneImpressions": 73347,
     "needsImpressions": 0,
-    "manualEscalationTier": 12,
+    "manualEscalationTier": 0,
     "geminiDailyLimit": 3
   },
   "entries": [
@@ -18006,10 +18004,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T14:29:39.925Z"
     },
     {
       "rankingKey": "accident-death-30day",
@@ -19313,10 +19313,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.467Z"
     },
     {
       "rankingKey": "cold-medicine-consumption-expenditure",
@@ -19887,10 +19889,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.484Z"
     },
     {
       "rankingKey": "cupboard-consumption-expenditure",
@@ -20491,10 +20495,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.498Z"
     },
     {
       "rankingKey": "elderly-class-lecture-count-per-million",
@@ -21501,10 +21507,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.521Z"
     },
     {
       "rankingKey": "furniture-household-service-consumption-expenditure",
@@ -22062,10 +22070,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.534Z"
     },
     {
       "rankingKey": "healthcare-cost-all-households",
@@ -22386,10 +22396,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.553Z"
     },
     {
       "rankingKey": "housing-expenses-prefecture",
@@ -22504,20 +22516,24 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T14:29:39.928Z"
     },
     {
       "rankingKey": "information-communication-expenditure",
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T14:29:39.929Z"
     },
     {
       "rankingKey": "inland-aquaculture-harvest",
@@ -24775,10 +24791,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.571Z"
     },
     {
       "rankingKey": "other-meat-consumption-expenditure",
@@ -28042,10 +28060,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.596Z"
     },
     {
       "rankingKey": "travel-leisure-annual-participation-rate-15plus",
@@ -28340,10 +28360,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.609Z"
     },
     {
       "rankingKey": "vacant-housing-ratio",
