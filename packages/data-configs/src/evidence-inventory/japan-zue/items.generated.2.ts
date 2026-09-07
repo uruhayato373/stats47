@@ -16273,6 +16273,9 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_2: readonly JapanZueEvidenceItem[] = [
         "average-life-expectancy-female-20",
         "average-life-expectancy-female-65"
       ],
+      "surveyIds": [
+        "life-tables"
+      ],
       "categoryKey": "socialsecurity",
       "geoScopes": [
         "prefecture-set"
