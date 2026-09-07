@@ -173,6 +173,27 @@
       "reason": "輸送用機械器具に限定した出荷額指標がない"
     },
 
+    "/ranking/elderly-population-ratio": {
+      "to": "/ranking/ratio-65-plus",
+      "reason": "アンカー「都道府県別の高齢化率ランキング」。title「65歳以上人口割合」が完全一致し prefecture entity を持つ。同名 metric elderly-population-ratio は entities:[city] のみで /ranking/ に無い (live 410)"
+    },
+    "/ranking/foreign-population-per-100k": {
+      "to": "/ranking/foreign-resident-count-per-100k",
+      "reason": "アンカー「都道府県別の外国人比率ランキング」。title「外国人人口」+ subtitle「総数（人口10万人当たり）」で人口当たり比率が一致し prefecture entity を持つ。同名 metric は entities:[city] のみ (live 410)"
+    },
+    "/ranking/population-density-habitable": {
+      "to": "/ranking/population-density-per-km2-inhabitable-area",
+      "reason": "アンカー「人口密度（可住地面積1km²当たり）ランキング」。title「可住地面積１km2当たり人口密度」が一致。同名 metric は entities:[city] のみ (live 410)"
+    },
+    "/ranking/prefectural-income-per-capita": {
+      "to": "/ranking/per-capita-prefectural-income-h27",
+      "reason": "アンカー「1 人当たり県民所得のランキング」。title「1人当たり県民所得」が一致。元キーは isActive:false (live 410)。per-capita-kenmin-shotoku-h27 と同じ行き先"
+    },
+    "/ranking/tourism-resource-count": {
+      "to": null,
+      "reason": "アンカー「観光資源数ランキング」。元キーは isActive:false (live 410)。active な prefecture metric に観光資源系が無い (国内/海外観光旅行の行動者率は別指標のため飛ばさない)"
+    },
+
     "/blog/medical-access-regional-gap": { "to": null, "reason": "published:false (未公開)" },
     "/blog/food-culture-prefecture-map": { "to": null, "reason": "published:false (未公開)" },
     "/blog/gender-wage-gap-ranking": { "to": null, "reason": "published:false かつ R2 に本文なし" },
