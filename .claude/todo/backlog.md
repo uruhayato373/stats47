@@ -219,7 +219,7 @@ updated: 2026-09-07
 
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 
-タグ: [起票:2026-08-13]
+タグ: [種類:改善] [実行:対話] [起票:2026-08-13]
 
 - **owner**: Claude Code
 - **trigger**: `CROSS-PAGE-DATA-SSOT-01`のcore契約を壊さず、Claude CodeへこのIDを指定してQG0から順に実装する。
@@ -598,17 +598,6 @@ updated: 2026-09-07
 - **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・自動監視の開始は行わない。
 - **完了条件**: 取得根拠・日時付きbaseline/unknownと計測契約を既存商品stateへ保存し、improvement-triageが別IDのeffect/pendingへ引き継ぐ。引渡し証拠をbacklog-loopへ渡し、以後の観測待ちを本カードに重複保持しない。
 
-### [DOCS-WARNINGS-TRIAGE-01] 既存文書警告を棚卸しし各担当へ割り当てる
-
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-09-06] [期日:2026-09-13]
-
-- **status**: pending（期日は一回限りの棚卸しの次回確認期限）
-- **owner**: todo-curator（分類・割当）
-- **根拠**: 2026-09-06のdocs検査はerror 0／既存warning 39。件数は調査起点であり固定目標ではない。
-- **次**: 最新の`npm run docs:report`と既存台帳を突合し、各warningに検査コード・対象・既存ID・担当・次／再開条件を割り当てる。月次／週次の陳腐化はmonthly-plan／weekly-plan、改善台帳の期限超過はimprovement-triage、backlog分類不足はtodo-curatorへ渡す。
-- **停止条件**: 警告を消すためだけの日付更新・根拠のない期限延長・カード削除・進行中カードの変更をしない。既存施策を複製せず、権限外の台帳は各排他writerへ渡す。
-- **完了条件**: 調査対象warning全件に是正／根拠付き据置／担当への引渡しが対応し、未割当0。`npm run docs:check`で新規error・参照切れがなく、カードの意図しない欠落がない。定期監視タスクにはしない。
-
 ### [GEO-SERVICE-PILOT-01] Geo納品見本の販売条件を確定し1商品だけ出品判断する
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-06]
 
@@ -784,7 +773,7 @@ updated: 2026-09-07
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 
-タグ: [起票:2026-08-17]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-17]
 
 - **owner**: Claude Code
 - **症状 (2026-08-17 実測)**: `sync-snapshots --only ranking-items` 完走後も
@@ -832,7 +821,7 @@ updated: 2026-09-07
 
 ### [TILEMAP-LINEAGE-01] タイルマップの手動系譜残件
 
-タグ: [起票:2026-08-03]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-03]
 
 - **owner**: `chart-author`
 - **CROSS-PAGE-DATA-SSOT-01からの分離 (2026-08-27)**: staged全量棚卸しで、現行の自動復元器が
@@ -847,7 +836,7 @@ updated: 2026-09-07
 
 ### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログの残工程
 
-タグ: [起票:2026-07-04]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-04]
 
 - **owner**: Claude Code
 - **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / chart expansion。旧 guidance card 案は 2026-08-25 に指標ハブ契約へ置換済み。
@@ -859,7 +848,7 @@ updated: 2026-09-07
 
 ### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
 
-タグ: [起票:2026-07-18]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-18]
 
 - **owner**: Claude Code
 - **2026-08-27 監査**: 最新note metricsの上位24記事はcatalogのnote IDと一致0件で、対象アカウントの
@@ -869,7 +858,7 @@ updated: 2026-09-07
 
 ### [NOTE-MAGAZINE-REORG-01] note既存投稿のマガジン再編成 + 新規投稿の増産
 
-タグ: [実行:windows] [起票:2026-08-03]
+タグ: [種類:制作] [実行:windows] [起票:2026-08-03]
 
 - **owner**: Claude Code
 - **方針**: ココナラ商品カタログと同型 (git TS カタログ = SSOT)。ただし公開済み stats47-note 159 件は回収スタブ (key = note ID・不透明・`r2Body:false`) で、カテゴリはタイトルからしか導出できない点がココナラと異なる。
@@ -909,7 +898,7 @@ updated: 2026-09-07
 
 ### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
 
-タグ: [起票:2026-08-01]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-01]
 
 - **owner**: Claude Code
 - **次**: `migration-flow-monthly.yml` のPhase 3 (highlight抽出・render) と `migration-flow-annual.yml` のPhase 2 (e-Stat取得・47県render・caption・staging copy) を実装し、実装できたcronだけscheduleへ戻す。
@@ -918,7 +907,7 @@ updated: 2026-09-07
 
 ### [KAKEI-EXPANSION-02] 家計調査2025 refreshと残品目
 
-タグ: [実行:ユーザー] [起票:2026-07-10]
+タグ: [種類:制作] [実行:ユーザー] [起票:2026-07-10]
 
 - **owner**: Claude Code
 - **trigger**: e-Statで2025年年報の公表を確認できること。
@@ -928,7 +917,7 @@ updated: 2026-09-07
 
 ### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 13 件
 
-タグ: [実行:ユーザー] [起票:2026-07-30]
+タグ: [種類:不具合] [実行:ユーザー] [起票:2026-07-30]
 
 - **owner**: uruhayato373 (人間の PR でのみ着手できる)
 - **★backlog-loop では閉じられない** (2026-08-17): 対象が `.github/` だけで、ループの verify は
@@ -944,7 +933,7 @@ updated: 2026-09-07
 
 ### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失図表の手動系譜残件
 
-タグ: [起票:2026-08-12]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-12]
 
 - **owner**: Claude Code
 - **CROSS-PAGE-DATA-SSOT-01からの分離 (2026-08-27)**: staged全量棚卸しで、現行のranking自動復元器が
@@ -986,7 +975,7 @@ updated: 2026-09-07
 
 ### [SYNC-SNAPSHOTS-MANIFEST-CARRY-01] sync-snapshots の「差分 push」が CI では毎回フル push になる
 
-タグ: [起票:2026-08-17]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-17]
 
 - **owner**: `r2-publisher`
 - **問題**: `diff-push-r2` は manifest (`.local/r2-manifest/`) と突合して差分だけ送る設計だが、
@@ -1002,6 +991,8 @@ updated: 2026-09-07
 
 ### [MINIMUM-WAGE-2026-01] 2026年度地域別最低賃金
 
+タグ: [コンテンツ品質] [種類:制作] [実行:対話]
+
 - **owner**: open-data-curator
 - **source**: GitHub #652
 - **trigger**: 厚生労働省または各地方最低賃金審議会が2026年度の47都道府県別実額を正式公表したとき。
@@ -1011,6 +1002,8 @@ updated: 2026-09-07
 
 ### [PREF-OFFICIAL-STATS-01] 47都道府県の公式統計入口から需要を抽出
 
+タグ: [コンテンツ品質] [種類:制作] [実行:対話]
+
 - **owner**: open-data-curator
 - **正典**: `packages/data-configs/src/prefecture-statistics-catalog/README.md`
 - **次**: 各県ポータルを1巡し、複数県で反復する指標だけを、定義、単位、粒度、年次、一次出典付きで上の表へ追加する。
@@ -1018,7 +1011,7 @@ updated: 2026-09-07
 
 ### [INDICATOR-CANDIDATES-01] 指標候補キュー (P1/P2 検証済み)
 
-タグ: [実行:対話] [起票:2026-05-19]
+タグ: [種類:制作] [実行:対話] [起票:2026-05-19]
 
 一次統計の実在、都道府県粒度、既存 metric との非重複を確認した候補だけを残す。
 需要未確認の大量候補、取得失敗、重複は削除済みで、再調査は Git 履歴から行う。
@@ -1120,7 +1113,7 @@ updated: 2026-09-07
 
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 
-タグ: [起票:2026-07-12]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-12]
 
 - **owner**: Claude Code
 - **trigger**: 1本のPRで現行build jobの壁時間とcache sizeを測れるとき。
@@ -1128,14 +1121,14 @@ updated: 2026-09-07
 
 ### [AREA-DATABOOK-REMAINDER] 県データブックの小粒残件
 
-タグ: [起票:2026-07-19]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-19]
 
 - **owner**: Claude Code
 - **trigger**: 既存47県版の利用実測で、欠損セクションが回遊または検索の阻害要因と確認できたとき。
 
 ### [MULTICHANNEL-CONTENT-PRODUCT-01] 商品チャネル横断化
 
-タグ: [起票:2026-07-18]
+タグ: [種類:制作] [実行:対話] [起票:2026-07-18]
 
 - **owner**: Claude Code
 - **trigger**: ココナラまたはnoteの単一商品で実売、粗利、supportMinutesを測定できた後。
@@ -1143,19 +1136,21 @@ updated: 2026-09-07
 
 ### [GIS-CROSS-CONTENT-BACKLOG] 統計×GISコンテンツ
 
-タグ: [起票:2026-07-04]
+タグ: [種類:制作] [実行:対話] [起票:2026-07-04]
 
 - **owner**: Claude Code
 - **trigger**: 既存GIS素材と検索需要が一致する単一pilotを選べたとき。
 
 ### [CLOUDFLARE-INVOICE-01] 請求書PDFと予測値の突合
 
-タグ: [起票:2026-05-16]
+タグ: [種類:改善] [実行:対話] [起票:2026-05-16]
 
 - **owner**: Claude Code
 - **trigger**: 手動精算漏れが再発するか、請求額が継続して予測から10%以上ずれるとき。
 
 ### [SSDS-DEMAND-BATCH-01] SSDS未使用項目の需要ファースト展開
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話]
 
 - **owner**: ranking-expander
 - **trigger**: GSC、記事企画、テーマ欠測のいずれかで具体的な検索需要が確認できたとき。
@@ -1191,7 +1186,7 @@ updated: 2026-09-07
 
 ### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
 
-タグ: [実行:対話] [起票:2026-07-11]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-07-11]
 
 - **owner**: uruhayato373
 - **次**: 対象キーが失効・rotation済みかを確認し、秘密検査で現行treeに残存がないことを確定する。
@@ -1200,7 +1195,7 @@ updated: 2026-09-07
 
 ### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 6 本の削除可否
 
-タグ: [実行:対話] [起票:2026-08-17]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-08-17]
 
 - **owner**: uruhayato373 (削除可否はオーナー判断)
 - **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
@@ -1252,7 +1247,7 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 
 ### [T2-RANKING-NORM-SSG-01] ranking正規化派生のURL方針
 
-タグ: [実行:対話] [起票:2026-05-25]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-05-25]
 
 - **owner**: Claude Code
 - **次**: queryを別URLへ昇格する案、別rankingKey化、canonical吸収の3案を、検索需要とsnapshot容量で比較する。
@@ -1260,7 +1255,7 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 
 ### [MIGRATION-FLOW-IG-01] migration-flow の IG 投稿が 3 か月止まっている
 
-タグ: [実行:対話] [起票:2026-08-13]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-08-13]
 
 - **owner**: uruhayato373 (継続可否の判断)
 - **問題**: `migration-flow-weekly.yml` の Instagram 投稿ステップが **12 回連続失敗** (約 3 か月・1 本も投稿されていない)。
