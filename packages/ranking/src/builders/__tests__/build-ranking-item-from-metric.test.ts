@@ -49,6 +49,7 @@ describe("buildRankingItemFromMetric", () => {
   it.each([
     "clothing-footwear", "culture-recreation", "education", "furniture-household",
     "health-medical", "housing", "other-living", "transport-communication", "utilities",
+    "food", "consumption",
   ])("%s expenditure is already per household and must not be divided by prefecture population/area", (prefix) => {
     // Official table: https://www.stat.go.jp/data/kakei/rank/singleyear.html
     const config = getMetricConfig(`${prefix}-expenditure-total`)!;
