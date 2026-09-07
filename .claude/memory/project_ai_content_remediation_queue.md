@@ -46,13 +46,15 @@ ranking 詳細ページの AI コンテンツ (insights=考察 / regionalAnalysi
 (完全空) は低流入ニッチが大半。→ SEO 目的なら「missing を端から」でなく **GSC 流入のある incomplete を優先** (キューが自動でそう並べる)。
 効果 (CTR/順位) は GSC で数週間後に実測が要る (未実証、`evidence-based-judgment.md`)。
 
-**最新実測（2026-09-08 00:30 JST）**: TS active prefecture / KNOWN / R2 master / 全量queueは
+**最新実測（2026-09-08 05:56 JST）**: TS active prefecture / KNOWN / R2 master / 全量queueは
 すべて2,166キー、双方向差分0。done 2,166 / needs-regen 0 / notEligible 0 / doneButUnhealthy 0。
 AIとcanonical valuesを各2,166件HTTP 200・JSON取得し、values健全性の未確認も0だった。
 追加12件は独立critic・数値監査後、[run 34137832197](https://github.com/uruhayato373/stats47/actions/runs/34137832197)
 でR2公開し、本文SHA 12/12一致。公開outboxもCIが整理済み（git履歴から復元可能）。
 全件doneは既存の決定的ゲートでblockerが無いことを意味し、旧2,154件を今回すべて意味レビューしたわけではない。
-非阻害警告はAI 969キー（短文等）、values 41キー（thin-coverage）に残る。市区町村・全国専用ページは対象外。
+非阻害警告はAI 967キー（短文等）、values 41キー（thin-coverage）に残る。市区町村・全国専用ページは対象外。
+公開後の全量再確認は `.claude/state/metrics/content-release-2026-09-08.json`、現在の残数は
+`.claude/state/ai-content/{LATEST.md,remediation-queue.json}` を参照する。
 日次CIは対象0ならAPIを呼ばず正常終了し、対象ありならbilling preflight不通で停止する。
 無料枠の課金設定は未確認で、課金・Secretは変更していない。生成完了と費用実験の完了を混同しない。
 

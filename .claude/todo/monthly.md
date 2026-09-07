@@ -106,7 +106,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
   | `GSC-COVERAGE-DEPLOY-01`（カバレッジ是正と入力鮮度ガード） | 未デプロイ | 2026-09-14 |
   | `ADSENSE-PAUSE-01`（AdSense 全停止コード） | 実装済・未デプロイ | 2026-09-14 |
   | `AFF-IMPRESSION-ROUTING-01`（空き位置への文脈バナー配線） | 実装済・未デプロイ | 2026-09-21 |
-  | `BLOG-BACKGROUND-BATCH-01`（再照合した対象73記事） | 背景・R2公開・アプリ反映済み、最終実測中 | — |
+  | 対象73記事の公開（`BLOG-BACKGROUND-BATCH-01`） | 9/8にR2一致・全URL 200・公開差分0を確認し完了 | — |
 
   加えて、効果を測る側も止まっている。`.claude/state/ads/ga4-affiliate-*.json` の最新が
   2026-08-28 で 10 日更新されておらず、`AFF-BLOG-TEXTLINK-01` / `AFF-A8-REGISTER-01` /
@@ -124,7 +124,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 - **構成タスク**:
   - デプロイ前ゲート: 本番の確認済み回帰 2 件の切り分け結果を待って、出す/待つを決める [M]（→ W37）
   - `affiliate-ga4-weekly.yml` の実行状況を確認し、10 日 stale の原因を特定して再取得する [S]（→ W37）
-  - 対象73記事の背景画像はW37に完了。公開後の完了ゲートだけを回収する（週次計画参照）。
+  - 対象73記事はW37に背景・公開・本番全件実測まで完了（週次計画の証跡参照）。
   - `BLOG-PUBLISH-THUMBNAIL-GUARD-01`: per-slug skipはW37に実走確認済み（週次計画参照）。
   - デプロイ実行と代表ページ実測、before/after 境界の記録 [M]（→ W38）
   - 14 日 / 28 日の実測窓の中間確認 [S]（→ W39・W40）
@@ -140,8 +140,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 
 - **真実源リンク**: `improvements.md`（`ADSENSE-PAUSE-01` / `AFF-IMPRESSION-ROUTING-01` /
   `AFF-RESOLUTION-EFFECT-01` / `AFF-BLOG-TEXTLINK-01` / `AFF-A8-REGISTER-01` / `COVERAGE-LOOP-01`）/
-  `backlog.md`（`AFF-DEPLOY-RESOLUTION-01` / `GSC-COVERAGE-DEPLOY-01` / `BLOG-BACKGROUND-BATCH-01` /
-  `BLOG-PUBLISH-THUMBNAIL-GUARD-01` / `RSC-CACHE-BYPASS-01`）
+  `backlog.md`（`AFF-DEPLOY-RESOLUTION-01` / `GSC-COVERAGE-DEPLOY-01` / `RSC-CACHE-BYPASS-01`）
 
 ### 重点2: 公開しているものが正しいかを確定させる
 

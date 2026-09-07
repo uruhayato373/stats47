@@ -134,13 +134,14 @@ Must は私が単独で完了まで持てる粒度だけにする**。
 
 - [x] **今回の公開対象73記事の背景画像を揃える**（重点1 ゴール4・L・owner: Codex）
   - 記事固有背景73件をgitに保存し、派生画像292枚・73manifestのR2一致を確認済み。
-    記事はrun `34139507934` で公開、PR #945でアプリ反映。全ページの最終実測とカード回収は
-    `BLOG-BACKGROUND-BATCH-01` の公開ゲートに従う。未退避promptを含む既公開コピーは削除しない。
+    記事はrun `34139507934` で公開、PR #945でアプリ反映。9/8に全73URLの200・canonical・indexableを
+    実測し公開差分0。証跡は `.claude/state/metrics/content-release-2026-09-08.json`。
+    未退避promptを含む既公開コピーは削除しない。
 
 - [x] **`data-refresh.yml` の失敗 run を切り分ける**（重点2 の隣接・S）
   - run `34017315294` はe-Stat取得でなく非商用KSJのitem生成で停止。`602b885aa` で生成側を是正済み。
     家計9件は正典valuesが200・配信valuesが404だったため、限定派生生成で復旧した。
-    `DATA-ESTAT-FETCH-01` の取得失敗25件とは別の障害。11指標の公開完了証跡はIssue #931で管理する。
+    `DATA-ESTAT-FETCH-01` の取得失敗25件とは別の障害。11指標の本番66検査PASSでIssue #931を閉鎖。
 
 ## Could（2 件）
 
@@ -226,7 +227,7 @@ Must は私が単独で完了まで持てる粒度だけにする**。
   `ADSENSE-PAUSE-01` / `AFF-RESOLUTION-EFFECT-01` / `AFF-BLOG-TEXTLINK-01` / `AFF-A8-REGISTER-01` /
   `SEARCH-GROWTH-CYCLE-01` / `COVERAGE-LOOP-01`）
 - 機能: [バックログ](backlog.md)（`AFF-DEPLOY-RESOLUTION-01` / `GSC-COVERAGE-DEPLOY-01` /
-  `BLOG-BACKGROUND-BATCH-01` / `BLOG-PUBLISH-THUMBNAIL-GUARD-01` / `RSC-CACHE-BYPASS-01` /
+  `RSC-CACHE-BYPASS-01` /
   `PERF-RANKING-LCP-03`）
 - 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W36.md`（作成済み）
 - GSC cycle audit: `.claude/state/metrics/gsc/operations-cycle-LATEST.md`
