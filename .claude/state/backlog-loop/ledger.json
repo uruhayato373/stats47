@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07T11:18:52.097Z",
+  "updatedAt": "2026-09-07T15:34:48.339Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -1513,8 +1513,8 @@
       "completedAt": "2026-08-27T06:44:55.648Z"
     },
     "AICONTENT-DBLESS-REBUILD": {
-      "class": "impl-large",
-      "status": "open",
+      "class": "impl-small",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
@@ -1539,15 +1539,41 @@
             "次の3件を生成・criticへ回す",
             "R2反映は別承認"
           ]
+        },
+        {
+          "at": "2026-09-07T15:34:48.339Z",
+          "runId": "34137832197",
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run --project @stats47/ai-content packages/ai-content/src/scripts/__tests__/build-input.test.ts",
+              "node --test .claude/scripts/ai-content/__tests__/gemini-workflow-contract.test.mjs",
+              "node /tmp/stats47-ai-twelve-readback.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "全量2166キーのTS/KNOWN/R2/queue差分0、done2166・残0・未確認fetch0。追加12件R2 SHA一致。実reader入力回帰2件と日次契約3件PASS、対象0のCI34068094684はAPI skip。過去入力不一致は再現せず原因未確定、課金変更なし。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "残り1809件相当の制作と、別承認が必要なR2公開が未完了",
-        "since": "2026-08-26T09:04:05.921Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": null
+      "reclassifiedFrom": [
+        {
+          "from": "impl-large",
+          "to": "impl-small",
+          "at": "2026-09-07T15:34:48.339Z"
+        }
+      ],
+      "completedAt": "2026-09-07T15:34:48.339Z"
     },
     "AFF-INTENT-FRICTION-PORTFOLIO-01": {
       "class": "impl-large",
