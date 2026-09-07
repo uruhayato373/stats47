@@ -1,4 +1,4 @@
-import { buildRecipe, type MetricConfig } from "@stats47/data-configs";
+import { buildRecipe, getMetricConfig, type MetricConfig } from "@stats47/data-configs";
 import { describe, expect, it } from "vitest";
 
 import { buildRankingItemFromMetric, yearNameOf } from "../build-ranking-item-from-metric";
@@ -46,6 +46,22 @@ describe("yearNameOf", () => {
 });
 
 describe("buildRankingItemFromMetric", () => {
+  it.each([
+    "clothing-footwear", "culture-recreation", "education", "furniture-household",
+    "health-medical", "housing", "other-living", "transport-communication", "utilities",
+  ])("%s expenditure is already per household and must not be divided by prefecture population/area", (prefix) => {
+    // Official table: https://www.stat.go.jp/data/kakei/rank/singleyear.html
+    const config = getMetricConfig(`${prefix}-expenditure-total`)!;
+    expect(config.source.kind).toBe("kakei-chousa");
+    expect(config.unit).toBe("円");
+    expect(config.subtitle).toContain("1世帯当たり");
+    expect(config.calculation?.normalizationOptions).toBeUndefined();
+    expect(config.display?.normalizationOptions).toBeUndefined();
+    const item = buildRankingItemFromMetric(config, { values: { yearCodes: ["2024"] }, now: NOW });
+    expect(item.calculation?.normalizationOptions).toBeUndefined();
+    expect(item.latestYear?.yearCode).toBe("2024");
+  });
+
   it("live item.json (total-population) の主要フィールドを再現する", () => {
     const item = buildRankingItemFromMetric(baseConfig, {
       values: { yearCodes: ["2024", "2023", "2022"] },

@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const furnitureHouseholdExpenditureTotal: MetricConfig = {
   "key": "furniture-household-expenditure-total",
   "title": "家具・家事用品費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間家具・家事用品費（家庭用耐久財・寝具・家事雑貨などへの支出総額）",
+  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間家具・家事用品費（家庭用耐久財・寝具・家事雑貨などへの支出総額）",
   "description": "家計調査（二人以上世帯）における年間の家具・家事用品への支出総額。冷蔵庫等の家庭用耐久財、寝具、家事雑貨、家事サービスを含む。",
   "unit": "円",
   "category": "economy",
@@ -39,22 +39,7 @@ export const furnitureHouseholdExpenditureTotal: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    // 1世帯当たりの年間支出額。県人口・面積で再除算しない。
     "isCalculated": false,
   },
   "isActive": true,

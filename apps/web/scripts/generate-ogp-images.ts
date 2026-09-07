@@ -76,6 +76,7 @@ import {
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
 import { isSafeNoteSlug } from './lib/image-entity-policy';
 import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
+import { selectRankingImagePartition } from './lib/ranking-image-year';
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
@@ -348,16 +349,11 @@ async function buildRankingOgpData(key: string) {
   const title = it.seoTitle ?? it.title ?? it.rankingName ?? '';
   const unit = it.unit ?? '';
   const source = resolveRankingOgpSource(it);
-  const latestYear =
-    it.availableYears?.[it.availableYears.length - 1]?.yearCode ??
-    it.latestYear?.yearCode ??
-    '';
   const values = await fetchRequiredJson<ValuesRaw>(
     `${PUBLIC_URL}/app/ranking/${key}/values.json`
   );
-  const partition =
-    values?.partitions?.find((p) => p.yearCode === latestYear) ??
-    values?.partitions?.[values.partitions.length - 1];
+  const { partition, yearCode: latestYear, yearName: latestYearName } =
+    selectRankingImagePartition(it, values?.partitions ?? []);
   const rows = (partition?.values ?? [])
     .filter(
       (v) =>
@@ -388,10 +384,7 @@ async function buildRankingOgpData(key: string) {
           }
         : null,
     },
-    latestYearName:
-      it.availableYears?.[it.availableYears.length - 1]?.yearName ??
-      it.latestYear?.yearName ??
-      '',
+    latestYearName,
     latestYear,
     rows,
   };
