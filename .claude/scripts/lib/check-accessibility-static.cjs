@@ -87,7 +87,9 @@ function inspectFile(file) {
           findings.push(finding("CLICK_ONLY_NONINTERACTIVE", file, source, node, `<${tag}> onClick requires keyboard handler, role, and tabIndex`));
         }
       }
-      if (tag === lower && ["input", "select", "textarea"].includes(lower) && !hasSpread) {
+      // hidden input は支援技術にも表示されない送信値。動的 type は hidden と決めつけない。
+      const isHiddenInput = lower === "input" && literalValue(map.get("type")) === "hidden";
+      if (tag === lower && ["input", "select", "textarea"].includes(lower) && !hasSpread && !isHiddenInput) {
         const identified = map.has("id") || map.has("aria-label") || map.has("aria-labelledby") || map.has("title");
         if (!identified) findings.push(finding("FORM_NAME_MISSING", file, source, node, `<${tag}> has no id or accessible name`));
       }

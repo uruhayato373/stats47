@@ -115,7 +115,7 @@ updated: 2026-09-07
 - **切り分け済み**: (a) `RSC` / `Next-Router-State-Tree` / `Next-Router-Prefetch` / `x-nextjs-data` の 4 種すべてで bypass 分岐に入らない。(b) `RSC: 1` のときだけ `text/x-component` が返るのでヘッダー自体は Next.js 本体に届いている。(c) `apps/web/src/lib/cache-policy.ts` の設計は正しく (RSC は `private, no-store` + `RSC_VARY`)、`cache-policy.test.ts` と `middleware.test.ts` の 54 件は全通過。(d) 該当コードは 2026-08-15 `c46752ef2` で main に入っており未デプロイではない。→ **アプリのコードではなく `@opennextjs/cloudflare` 1.20.6 との統合層の問題**。
 - **未確認**: 実際にキャッシュ混入が起きたかは観測していない (RSC 応答に `CF-Cache-Status` が付かない)。本番でキャッシュ汚染を誘発する再現は実害が出るため行っていない。
 - **仮説 (未検証)**: `open-next.config.ts` の `withRegionalCache(r2IncrementalCache, { mode: "long-lived" })` が返すキャッシュ応答が HTML 用ヘッダーを引き継ぎ、middleware の判定結果を反映していない。
-- **次 (実行順)**: Worker gateway の RSC bypass は `3ce7e0edb` に実装済み。PR #940 の本番反映後、RSC 応答の `private, no-store`・`Vary`・HTML cache-tag 非付与を実測する。上記仮説は修正前の調査記録であり、未着手と解釈しない。
+- **次 (実行順)**: Worker gateway の RSC bypass は `3ce7e0edb` に実装済み。公開・実測の最新結果は [PR #940 の最終検証欄](https://github.com/uruhayato373/stats47/pull/940) を確認する。未検証の場合だけ RSC 応答の `private, no-store`・`Vary`・HTML cache-tag 非付与を実測する。上記仮説は修正前の調査記録であり、未着手と解釈しない。
 - **停止条件**: 本番でキャッシュ汚染を誘発する再現テストをしない。デプロイはオーナーの明示承認まで行わない。原因未特定のまま `withRegionalCache` を外さない (ISR キャッシュが効かなくなり別の劣化を生む)。
 - **完了条件**: RSC リクエストの応答が `Cache-Control: private, no-store` と RSC を含む `Vary` を返し、`cache-tag: stats47-html` が付かないことを本番で実測する。HTML 応答は従来どおり `CF-Cache-Status: HIT` を維持する。
 
@@ -230,14 +230,14 @@ updated: 2026-09-07
   (地域限定のイオン九州が上位 3 に入らない)。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
 
-### [BLOG-BACKGROUND-BATCH-01] 公開待ち 91 記事の背景画像を生成して公開・デプロイまで届ける
+### [BLOG-BACKGROUND-BATCH-01] 背景待ちの記事を準備できた分から公開する（9/7時点の公開差分73件）
 
-タグ: [コンテンツ品質] [種類:制作] [実行:ユーザー] [検証:blog-auto-publish の Summary が「公開: 91 件 / スキップ: なし」] [起票:2026-09-02]
+タグ: [コンテンツ品質] [種類:制作] [実行:ユーザー] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
 
 - **owner**: オーナー (画像生成) → Claude Code (公開起動・確認・デプロイ)
-- **現状**: `docs/21_ブログ記事原稿` の `published: true` は 91 本。すべて quality-gate blocker 0 +
-  blog-critic PASS を得ており、公開に足りないのは**記事固有の背景画像だけ**。
-- **止まっている実測**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
+- **現状（2026-09-07）**: reconcileの対象は77→73件（未公開72・改稿差分1）。今回、既存の記事固有背景を使える4件の本文をR2へ反映し、公開本文との一致を確認した。件数は実行時に再取得し、古い91件を固定の完了目標にしない。
+  未生成背景に加え、`natto-consumption-expenditure` は記事改稿で背景promptが古くなっており明示再生成が必要（run 34113017143）。全73件の背景以外の条件を再検証したわけではない。
+- **過去の停止実測（9/2）**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
   (`annual-sunshine-duration-prefecture-gap`) の `Fatal: 記事固有背景がありません` で exit 1 になり、
   公開 0 件。`generate-blog-thumbnails.ts` は共有背景へフォールバックしない (`ogp-image-standards.md` §5)
   ので、ゲートを緩めるのではなく画像を用意して通す。
@@ -259,41 +259,8 @@ updated: 2026-09-07
 - **公開の起動**: 画像だけの push では auto-publish は発火しない (paths フィルタが `article.md` と
   workflow 自身のみ)。`workflow-dispatch-proxy.yml` の allowlist に `blog-auto-publish.yml` を
   追加済 (PR #899) なので、クラウドからも slugs 空 = reconcile で代理起動できる。
-- **順序の注意**: 現行の workflow は背景の無い slug で run 全体が止まる (`BLOG-PUBLISH-THUMBNAIL-GUARD-01`)。
-  91 枚すべて揃えてから push するか、揃った分だけ `-f slugs="..."` で明示指定する。
-- **完了条件**: 91 本が R2 `app/blog/<slug>/` に載り、`docs/21` から commit-back で消え、
-  develop→main のデプロイ (`deploy-workers.yml` success) まで終わること。
-
-### [BLOG-PUBLISH-THUMBNAIL-GUARD-01] 背景1件の欠落で公開run全体が止まるのを per-slug skip にする
-
-タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:背景の無い slug を1件混ぜても他 slug が公開されること] [起票:2026-08-31]
-
-- **owner**: Claude Code
-- **症状**: `blog-auto-publish.yml` の「Gate + Stage + Publish each slug」は `set -e` の下で
-  `npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"` をガードなしに呼ぶ。
-  記事固有背景が無い slug で例外が出ると **ループごと停止し、後続 slug が 1 件も公開されない**。
-  run 33446804723 で実測: 20 件中 1 件目 (`airport-count-vs-general-project-investment-agriculture`)
-  の `記事固有背景がありません` で全体が exit 1 になり、公開 0 件。
-- **同じステップ内で非対称になっている**: ci-factual-gate と quality-gate は
-  `if ! ...; then SKIPPED=...; continue; fi` で該当 slug だけ飛ばす作りなのに、thumbnail 生成と
-  それ以降 (`push-generated-image-set` / `diff-push-r2`) にはこの扱いが無い。
-- **影響が滞留として現れている**: reconcile (`select-republish-slugs.mjs`) は現在 24 件を返すが、
-  そのうち少なくとも 24 件が背景未生成で、先頭で止まるため**どれも公開されない**。
-  背景待ちの記事が 1 件でもあると、背景が揃っている記事まで巻き添えで止まる構造。
-- **2026-09-02 に規模が拡大**: run 33587682293 では公開待ち **91 件**が 1 本目
-  (`annual-sunshine-duration-prefecture-gap`) の同じ Fatal で全滅した。滞留は 24 → 91 件。
-  per-slug skip になっていれば、背景が揃った分から順に公開できる (`BLOG-BACKGROUND-BATCH-01`)。
-- **完了条件**: 背景が無い slug は SKIPPED に積んで次へ進み、他 slug が公開されること。
-  **背景の無い slug を 1 件混ぜた状態で run を通し、他が公開されることを実測する**
-  (全 PASS は「何も見ていない」と区別がつかない)。
-- **注意**: skip にしても「公開されない」事実は変わらないので、Step Summary と
-  `SKIPPED` に理由 (背景未生成) が残ることまでを条件に含める。黙って飛ばすと滞留が見えなくなる。
-- **関連**: `QUALITY-GATE-COVERAGE-01` / `CHART-VALIDATE-GATE-01`
-
-- **次（2026-09-07 更新）**: PR #940 で専用 exit 20 の背景未生成だけを skip する修正を用意。
-  `workflow-commit-back.test.cjs` の混在fixtureは red→green（22/22）、実CLIも背景不足を exit 20 と識別済み。
-  本文staging前に画像生成するため、保留記事を末尾のR2同期へ混入させない。
-  次は実CIで背景不足と公開可能記事の混在を検証する。公開待ち再取得77件中、記事固有背景あり4件。
+- **順序の注意**: 背景未生成（専用exit 20）は理由付きskipに是正済み。SHA不一致・古いprompt・通信障害は引き続き停止する。準備済みslugを `-f slugs="..."` で指定して小分けに公開し、背景の安全ゲートを緩めない。
+- **完了条件**: 対象記事が R2 `app/blog/<slug>/` に載り、本文・画像・索引の読戻しと公開監査が通り、`docs/21` からcommit-backで消えること。アプリ変更を伴う公開はdevelop→mainのdeploy成功も確認する。
 
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 

@@ -16,6 +16,10 @@ metadata:
   `diff-push-r2 --prefix app/blog`がskipした本文まで公開するため、この順序が安全境界。
 - **証拠**: `.claude/scripts/lib/__tests__/workflow-commit-back.test.cjs`は実workflow shellに
   背景不足→公開可能のfixtureを渡し、後続公開・skip理由・保留本文のstaging非存在・未知エラー時停止を検証する。
+  [実run 34113401278](https://github.com/uruhayato373/stats47/actions/runs/34113401278)も成功。
+  airport-count-vs-general-project-investment-agricultureを背景不足で保留し、後続4記事を公開・索引更新・outbox整理した。
+  公開監査はrankings 2157 / blogs 534 / assets 1426でfindings 0、本文4件のR2一致を確認。
+  一方、run 34113017143はnatto-consumption-expenditureの古いpromptで停止しており、未知・不正背景の停止契約も維持している。
 - 現行reconcileは未公開と改稿差分の両方を拾う。件数上限は2026-08-31に撤廃済み。
   以下のMAX_PUBLISH=10 / 既live除外は**2026-06当時の経緯であり、現行仕様ではない**。
 

@@ -152,6 +152,14 @@ test("--pr は GATES ではなく PR_GATES を使う (commit 用の 3 ゲート�
   assert.ok(!/\$\{GATES\.length\}/.test(src), "件数表示が GATES 固定に戻っている");
 });
 
+test("--pr は共通レール変更の独立した3ガードをまとめて実行する", () => {
+  const src = fs.readFileSync(PREFLIGHT, "utf8");
+  const gates = src.slice(src.indexOf("const PR_GATES = ["), src.indexOf("const GATES = ["));
+  for (const checker of ["check-card-census.cjs", "check-ad-placement.cjs", "check-accessibility-static.cjs"]) {
+    assert.ok(gates.includes(checker), `${checker} がPRの事前検査から外れている`);
+  }
+});
+
 test("--pr は main が develop 非経由で進んだ状態を検出する", () => {
   const src = fs.readFileSync(
     path.join(ROOT, ".claude/scripts/lib/preflight-commit.mjs"),
