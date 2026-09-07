@@ -84,7 +84,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 
 | 項目 | 最新 | 月内評価 | 次アクション |
 |---|---|---|---|
-| 計測 → 週次 review | snapshot W36（coverage complete）/ review は W35 まで | **WARN** — W36 の週次レビューが未作成 | W37 の `/weekly-review` で W36 分を作る |
+| 計測 → 週次 review | snapshot W36（coverage complete）/ review W36 作成済み（`b0d6d01f8`） | レビュー作成済み。機械 audit の再計算は別途確認 | W37 は W36 レビューを入力に使う |
 | search-growth 判断 | freshness PASS（W37・age 0d）/ sources PASS | **WARN** — 採択は approved 1 / dismissed 1 で週 1〜2 件の運用が未開始 | `SEARCH-GROWTH-CYCLE-01`。上限は週 2 件のまま変えない |
 | effect 判定 | W36 verdict 7 件記録・backlog 突合 PASS | **WARN** — `effect-target-ratchet` が既知の過去欠落 7 件（新規 0） | 想定効果値を推測で補わない。終了か再計測かをオーナーが決める |
 | index coverage | URL Inspection latest 2026-09-07（age 0d）| **PASS** | 日次は稼働。`COVERAGE-LOOP-01` はデプロイ後に差分を追う |
@@ -149,14 +149,12 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 
   1. **値**: `DATA-ESTAT-FETCH-01`（25 metric・取得失敗）と `DATA-MANUAL-RESTORE-01`
      （12 metric・手動抽出の values 欠損）。合計 37 metric。**2 か月連続で着手 0**。
-  2. **文**: 2026-09-07 08:25 の commit `aec46436a` で `generate-deterministic-backfill.ts` が
-     追加され、ai-content の done が 861 → 2,154 に一度に増えた。この差分（約 1,293 件）は
-     LLM ではなく**決定的テンプレート**（`deterministic-ranking-content.ts` が順位帯・数値・
-     地方名から文を組む）で生成されている。決定的監査（auditRow blocker 0）は通っているが、
-     `.claude/state/ai-content/LATEST.md` 自身が「大規模な構造補完は `ai:backfill` + 全件監査 +
-     **境界サンプル意味レビュー**を使う」と書いており、**その意味レビューが実施されたかを
-     私は確認していない**。ranking-content-standards.md が求める構造解釈 300-500 字を
-     テンプレートが満たせるかも未確認である。
+  2. **文**: 2026-09-07 の `aec46436a` による決定的 backfill は **残863件**。
+     その前の Codex 421件公開とは別工程であり、done 861→2,154 の差分全体をテンプレート生成と
+     数えない。全863件の決定的監査・数値照合・R2 SHA照合、代表10件の意味レビュー PASS は
+     `.claude/memory/project_ai_content_remediation_queue.md` に記録済み。
+     個別レビュー成果物は削除済みworktree内のローカル保存で、現checkoutでは再確認できないため、
+     「レビュー未実施」と断定せず、必要時は証拠の復元または再サンプリングを行う。
 
 - **今月のゴール（月末に検証可能）**:
   1. 37 metric すべてに「config 修正 / 代替統計へ置換 / 一時非公開」の**処置区分が付いている**
@@ -169,7 +167,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 - **構成タスク**:
   - `DATA-ESTAT-FETCH-01`: 25 metric を statsDataId / cdCat / 失敗種別で分類し処置を決める [L]（→ W37）
   - `DATA-MANUAL-RESTORE-01`: 12 metric の provenance 9 点セットを確認し ready/blocked を判定する [L]（→ W38）
-  - 決定的 backfill の適用件数を確定し、境界サンプル 10 件を critic に通す [M]（→ W39）
+  - 決定的 backfill 863件の代表10件 PASS 記録に対する個別証拠の復元・必要時の再サンプリング [M]（→ W39）
 
 - **停止条件**: 2 週連続で 37 metric の処置決定が 0 件のままなら、Must から外して owner を変える。
   8 月の重点2 が同じ形で 2 か月流れているので、3 度目は同じ置き方をしない（下記「批判的レビュー」2）。
@@ -210,7 +208,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 
 | 週 | 期間 | 主に進める重点 | マイルストーン |
 |---|---|---|---|
-| W37 | 09-07〜09-13 | 重点1 + 重点2 | W36 の週次レビュー作成 / GA4 アフィリエイト cron の stale 解消 / 91 記事の背景生成着手 / 25 metric の分類 |
+| W37 | 09-07〜09-13 | 重点1 + 重点2 | 作成済み W36 レビューを計画へ反映 / GA4 アフィリエイト cron の stale 解消 / 背景生成着手 / 25 metric の分類 |
 | W38 | 09-14〜09-20 | 重点1 | デプロイ実行と代表ページ実測、before/after 境界の記録 / 12 metric の ready-blocked 判定 |
 | W39 | 09-21〜09-27 | 重点1 + 重点2 | 14 日窓の中間確認 / 決定的 backfill の境界サンプル 10 件を critic に通す |
 | W40 | 09-28〜10-04 | 集約 | 28 日窓の判定準備 / 10 月計画の入力づくり |
@@ -243,7 +241,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
    なるので、W39 の週次計画で実態に合わせて再配置する。
 
 6. **ai-content 100% を成果として数えてよいか** — 「決定的監査を通った」までは事実である。
-   ただし約 1,293 件がテンプレート生成であることを今日確認したので、**在庫消化の完了と
+   ただし決定的 backfill は863件であり、**在庫消化の完了と
    品質の担保を同じ 1 行で報告しない**。重点2 のゴール 2 でここを確定させる。
 
 ## 関連ドキュメント

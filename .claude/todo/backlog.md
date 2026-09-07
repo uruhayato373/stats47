@@ -102,7 +102,7 @@ updated: 2026-09-07
 - **症状 (実測)**: `.claude/state/metrics/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
 - **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
 - **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
-- **次**: ① 別セッションで走っている調査 (topology-fetch の交絡切り分け) の結果を待つ。② 原因が確定したら topology の取得経路を見直し、LCP 要素が Leaflet タイルのまま変わらないかを再計測する。③ 是正後は PSI 日次計測で 4 週の推移を見る。
+- **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
@@ -115,7 +115,7 @@ updated: 2026-09-07
 - **切り分け済み**: (a) `RSC` / `Next-Router-State-Tree` / `Next-Router-Prefetch` / `x-nextjs-data` の 4 種すべてで bypass 分岐に入らない。(b) `RSC: 1` のときだけ `text/x-component` が返るのでヘッダー自体は Next.js 本体に届いている。(c) `apps/web/src/lib/cache-policy.ts` の設計は正しく (RSC は `private, no-store` + `RSC_VARY`)、`cache-policy.test.ts` と `middleware.test.ts` の 54 件は全通過。(d) 該当コードは 2026-08-15 `c46752ef2` で main に入っており未デプロイではない。→ **アプリのコードではなく `@opennextjs/cloudflare` 1.20.6 との統合層の問題**。
 - **未確認**: 実際にキャッシュ混入が起きたかは観測していない (RSC 応答に `CF-Cache-Status` が付かない)。本番でキャッシュ汚染を誘発する再現は実害が出るため行っていない。
 - **仮説 (未検証)**: `open-next.config.ts` の `withRegionalCache(r2IncrementalCache, { mode: "long-lived" })` が返すキャッシュ応答が HTML 用ヘッダーを引き継ぎ、middleware の判定結果を反映していない。
-- **次 (実行順)**: ① `wrangler dev` でローカル再現し、middleware に RSC ヘッダーが届いているかを実測で確定する。② 届いていなければ OpenNext の middleware 統合、届いていれば incremental cache のヘッダー引き継ぎを疑う。③ 修正後は `Vary` に RSC 系が入り `cache-tag` が付かないことを本番で実測する。
+- **次 (実行順)**: Worker gateway の RSC bypass は `3ce7e0edb` に実装済み。PR #940 の本番反映後、RSC 応答の `private, no-store`・`Vary`・HTML cache-tag 非付与を実測する。上記仮説は修正前の調査記録であり、未着手と解釈しない。
 - **停止条件**: 本番でキャッシュ汚染を誘発する再現テストをしない。デプロイはオーナーの明示承認まで行わない。原因未特定のまま `withRegionalCache` を外さない (ISR キャッシュが効かなくなり別の劣化を生む)。
 - **完了条件**: RSC リクエストの応答が `Cache-Control: private, no-store` と RSC を含む `Vary` を返し、`cache-tag: stats47-html` が付かないことを本番で実測する。HTML 応答は従来どおり `CF-Cache-Status: HIT` を維持する。
 
@@ -289,6 +289,11 @@ updated: 2026-09-07
 - **注意**: skip にしても「公開されない」事実は変わらないので、Step Summary と
   `SKIPPED` に理由 (背景未生成) が残ることまでを条件に含める。黙って飛ばすと滞留が見えなくなる。
 - **関連**: `QUALITY-GATE-COVERAGE-01` / `CHART-VALIDATE-GATE-01`
+
+- **次（2026-09-07 更新）**: PR #940 で専用 exit 20 の背景未生成だけを skip する修正を用意。
+  `workflow-commit-back.test.cjs` の混在fixtureは red→green（22/22）、実CLIも背景不足を exit 20 と識別済み。
+  本文staging前に画像生成するため、保留記事を末尾のR2同期へ混入させない。
+  次は実CIで背景不足と公開可能記事の混在を検証する。公開待ち再取得77件中、記事固有背景あり4件。
 
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 
@@ -580,19 +585,22 @@ updated: 2026-09-07
   `CROSS-PAGE-DATA-SSOT-01` / `MONEY-UNIT-SCALE-01` / `RANKING-VALUES-PARTITION-INTEGRITY-01` /
   `PUBLIC-DATA-CONTRACT-AUDIT-01` / `MAINTENANCE-DEBT-PAYDOWN-01`
 
-### [AICONTENT-DBLESS-REBUILD] ranking ai-content生成の完走
+### [AICONTENT-DBLESS-REBUILD] ai-content全件生成後の入力一致・日次再開条件の確認
 
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: ranking-content-author
 - **次**:
-  1. develop で `bash .claude/scripts/ai-content/run-claude-batch.sh` (既定 35 件 / Sonnet / retries 1 / concurrency 2) を
-     1 push = 1 commit で回す。**最初の 35 件バッチで Pro/Max 枠のレート制限 (`claude-error_*` reason) が出るかを観測**し、
-     1 日の件数はそこから決める (推測で置かない)。公開後は `audit-ai-content.mjs <key>` で R2 の内容一致を見る
-  2. manual-escalation 30 件 + quarantine だけ Opus Agent tool (`ranking-content-author` を `model: opus` で起動)
-  3. (並走・別件) 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
-     `ai-content-gemini-daily.yml` を復旧する。既定 3 件/日・並列 1 を維持し、7 run 以上の
-     通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない
+  1. **全件生成は完了。残863件・manual-escalationを再生成しない**。最新の全量キューは active / done ともに
+     2,154、needs-regen 0。生成再開時だけ R2 からキューを再構築して対象の有無を確認する。
+  2. `build-input.ts` の `meta.input.allPrefectures` と canonical R2 values の不一致を調査し、入力側の
+     回帰テストを追加する（`road-national-route-length` の北海道 7,361.6 と正典 6,815.9）。
+     今回の backfill は canonical values を採用しており、公開済み本文を未検証入力で上書きしない。
+  3. 新しい未処理キーが発生した場合に備え、`ai-content-gemini-daily.yml` の billing preflight と
+     専用無料枠キーの再開条件を確認する。課金・Secret変更を自動実施せず、対象0件を生成失敗と混同しない。
+- **2026-09-07 最終状態**: `aec46436a` の残863件 backfill と R2 公開で全件完了。
+  全件監査・数値照合・R2 SHA照合 863/863、代表10件の意味レビュー PASS の記録は
+  `.claude/memory/project_ai_content_remediation_queue.md`。以下の途中 checkpoint は最新残数ではない。
 - **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
   2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
   運転設定を `run-claude-batch.sh` の既定に焼いた。正典 `ranking-content-standards.md` §2026-09-05
@@ -656,7 +664,7 @@ updated: 2026-09-07
   順位・値・年・単位の不一致0、機械監査blocker 0 / warn 0、AI監査48件、独立criticのfull→外科修正→
   delta PASS。CIの権威ゲートを再通過し、R2公開2件・CDN purge2 URL・outbox削除まで成功
   （run `33005947804`、skip 0 / upload error 0）。
-- **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
+- **完了条件**: 全件生成を再実行せず、入力不一致の回帰テストと日次生成の対象0件・再開条件が確認できること。R2本文の変更と課金設定変更は別工程。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
 ### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化

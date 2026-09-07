@@ -20,26 +20,29 @@ test.describe("ブログ一覧ページ", () => {
 
   test("記事カードが1つ以上表示される", async ({ page }) => {
     // 記事へのリンクカードが表示される
-    const articleLinks = page.locator("a[href^='/blog/']");
+    const articleLinks = page.locator("main a[href^='/blog/']").filter({
+      has: page.locator("h2"),
+    });
     await expect(articleLinks.first()).toBeVisible({ timeout: 10000 });
   });
 
   test("記事をクリックして詳細ページに遷移できる", async ({ page }) => {
-    const articleLinks = page.locator("a[href^='/blog/']").filter({
-      has: page.locator("[class*='card'], [class*='Card']"),
-    });
-
-    // カード形式のリンクが見つからない場合は通常のリンクにフォールバック
-    const target =
-      (await articleLinks.count()) > 0
-        ? articleLinks.first()
-        : page.locator("a[href^='/blog/']").first();
+    // レールのタグ/関連記事リンクではなく、一覧の見出し付き記事カードを選ぶ。
+    const target = page
+      .locator("main a[href^='/blog/']")
+      .filter({
+        has: page.locator("h2"),
+      })
+      .first();
 
     await expect(target).toBeVisible({ timeout: 10000 });
+    const href = await target.getAttribute("href");
+    expect(href).toMatch(/^\/blog\/[^/]+$/);
     await target.click();
 
     // 詳細ページに遷移したことを確認
-    await expect(page).toHaveURL(/\/blog\/.+/);
+    await expect(page).toHaveURL((url) => url.pathname === href);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
   test("年セレクトを変更できる", async ({ page }) => {
@@ -105,7 +108,7 @@ test.describe("ブログ一覧ページ", () => {
     await expect(thumbnail).toHaveAttribute("alt", "");
     await expect(thumbnail).toHaveAttribute(
       "src",
-      /https:\/\/storage\.stats47\.jp\/app\/blog\/[^/]+\/thumbnail-(light|dark)\.webp/,
+      /https:\/\/storage\.stats47\.jp\/app\/blog\/[^/]+\/thumbnail-(light|dark)\.webp/
     );
     await expect
       .poll(() =>
@@ -113,8 +116,8 @@ test.describe("ブログ一覧ページ", () => {
           (image) =>
             image instanceof HTMLImageElement &&
             image.complete &&
-            image.naturalWidth > 0,
-        ),
+            image.naturalWidth > 0
+        )
       )
       .toBe(true);
   });

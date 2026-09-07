@@ -33,7 +33,7 @@
 - [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ空/home featured空→wrangler.toml CLOUDFLARE_WORKERS="true"を疑う。shouldSkipRemoteR2Readが空ok([])返し黙って失敗。テーマはR2 values.jsonのみ読む+force-dynamic必須(2026-06-20根治)
 - [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — devは`npm run dev:web`(=turbo --filter=web)。root`npm run dev`は23pkgで遅い。常駐はrun_in_background+Ready polling。更新無い時はlisten確認(lsof -i :3000)先。正典local-environment.md
-- [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開:MAX_PUBLISH=10/reconcileはlive未掲載のみ/quality-gateはSVG見ない。★2026-06-15 R2ファースト化:docs/21=ephemeral outbox、docs/20全廃、/draft-from-trend。正典blog-data-schema.md §0
+- [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。docs/21=ephemeral outbox
 - [feedback_fetch_origin_before_implementing.md](feedback_fetch_origin_before_implementing.md) — 実装前にgit fetch+origin/main vs ローカルHEAD diff。並行セッション同日pushでstale→重複実装事故(2026-06-14 PR#479)。施策IDを既存検索
 - [feedback_home_pure_ssg_r2_empty.md](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず空焼き込み→修正はforce-dynamic(#478)。revalidateは本OpenNext構成で無効。build envにR2 URL足すとgenerateStaticParams爆発で不採用
 - [project_blog_remediation_loop.md](project_blog_remediation_loop.md) — ブログ品質を順次是正。次に直す記事=remediation-queue.json(統合スコア/must-fix)。週次Mustで消化、critic PASS必須。記事アーキタイプA-E+図あたり字数gate

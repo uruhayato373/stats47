@@ -129,11 +129,13 @@ jobs:
 
       - name: 🚪 Gate + Stage + Publish each slug
         if: ${{ steps.detect.outputs.slugs != '' }}
+        env:
+          TARGET_SLUGS: ${{ steps.detect.outputs.slugs }}
         run: |
           set -e
           PUBLISHED=""
           SKIPPED=""
-          for SLUG in ${{ steps.detect.outputs.slugs }}; do
+          for SLUG in $TARGET_SLUGS; do
             echo "::group::publish $SLUG"
             DRAFT="docs/21_ブログ記事原稿/$SLUG/article.md"
             # --- ゲート (公開前ブロック) ---
@@ -143,6 +145,20 @@ jobs:
             if ! node .claude/scripts/blog/quality-gate.mjs "$DRAFT"; then
               echo "❌ $SLUG: quality gate fail → skip"; SKIPPED="$SKIPPED $SLUG"; echo "::endgroup::"; continue
             fi
+            # --- thumbnail を outbox から先に検証・生成 (isolated staging + exact plan) ---
+            # 既知の背景未生成 (exit 20) だけを skip。通信/SHA/生成失敗は run を止める。
+            # 記事本体を先に staging すると、末尾の app/blog sync が未完成記事も公開してしまう。
+            if BLOG_DIR=docs/21_ブログ記事原稿 npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"; then
+              :
+            else
+              THUMBNAIL_STATUS=$?
+              if [ "$THUMBNAIL_STATUS" -ne 20 ]; then exit "$THUMBNAIL_STATUS"; fi
+              echo "::warning::$SLUG: 背景未生成 → skip (R2 未反映)"
+              echo "- ⏭️ $SLUG: 背景未生成 (R2 未反映)" >> "$GITHUB_STEP_SUMMARY"
+              SKIPPED="$SKIPPED $SLUG"
+              echo "::endgroup::"
+              continue
+            fi
             # --- ステージ (publishedAt 補完) ---
             mkdir -p ".local/r2/app/blog/$SLUG"
             cp -R "docs/21_ブログ記事原稿/$SLUG/." ".local/r2/app/blog/$SLUG/"
@@ -150,8 +166,6 @@ jobs:
             if grep -qE '^publishedAt:\s*\(未定\)' "$A" || ! grep -qE '^publishedAt:\s*[0-9]' "$A"; then
               perl -i -pe "s/^publishedAt:.*/publishedAt: $(date -u +%Y-%m-%d)/" "$A"
             fi
-            # --- thumbnail 差分生成 (isolated staging + exact plan) ---
-            npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"
             # --- 生成した画像だけを asset → manifest の順で反映 ---
             PLAN=".local/image-generation-publish-plan-blog.json"
             test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $SLUG"; exit 1; }
