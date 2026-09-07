@@ -14,6 +14,10 @@ export function splitChartSourceKeys(value) {
     .filter(Boolean);
 }
 
+function isConcreteReference(value) {
+  return typeof value === 'string' && !/[<>{}]/.test(value);
+}
+
 function splitStatsDataIds(value) {
   if (Array.isArray(value)) return value.flatMap(splitStatsDataIds);
   if (typeof value !== 'string') return [];
@@ -38,14 +42,58 @@ function rankingKeysFromR2Paths(source) {
   const matches = JSON.stringify(source).matchAll(
     /(?:r2:)?app\/ranking\/([^/"\s{}]+)\/values\.json/g
   );
-  return [...matches].map((match) => match[1]);
+  return [...matches].map((match) => match[1]).filter(isConcreteReference);
 }
 
 function metricKeysFromR2Paths(source) {
   const matches = JSON.stringify(source).matchAll(
     /(?:r2:)?app\/stats\/([^/"\s{}]+)\/values\.json/g
   );
-  return [...matches].map((match) => match[1]);
+  return [...matches].map((match) => match[1]).filter(isConcreteReference);
+}
+
+function expandBracePath(value) {
+  const match = value.match(/\{([^{}]+)\}/);
+  if (!match) return [value];
+  return match[1]
+    .split(',')
+    .flatMap((replacement) =>
+      expandBracePath(
+        `${value.slice(0, match.index)}${replacement.trim()}${value.slice((match.index ?? 0) + match[0].length)}`
+      )
+    );
+}
+
+function sourceYears(source) {
+  const text = [source.year, source.transform, source.restore]
+    .filter((value) => typeof value === 'string')
+    .join(' ');
+  const years = [
+    ...new Set(
+      [...text.matchAll(/\b(?:19|20)\d{2}\b/g)].map((match) => Number(match[0]))
+    ),
+  ].sort((a, b) => a - b);
+  if (years.length < 2) return years.map(String);
+  const first = years[0];
+  const last = years.at(-1);
+  if (last - first > 20) return years.map(String);
+  return Array.from({ length: last - first + 1 }, (_, index) =>
+    String(first + index)
+  );
+}
+
+function r2ObjectPaths(source) {
+  const matches = JSON.stringify(source).matchAll(/r2:(app\/[^"\s]+?\.json)/g);
+  const years = sourceYears(source);
+  return [...matches]
+    .flatMap((match) => {
+      const braceExpanded = expandBracePath(match[1]);
+      return braceExpanded.flatMap((objectPath) => {
+        if (!objectPath.includes('<year>')) return [objectPath];
+        return years.map((year) => objectPath.replaceAll('<year>', year));
+      });
+    })
+    .filter(isConcreteReference);
 }
 
 function referencedMetricKeys(source) {
@@ -59,7 +107,8 @@ function referencedMetricKeys(source) {
 
 function directRankingKeys(value) {
   return splitChartSourceKeys(value).filter(
-    (item) => !item.includes('/') && !item.includes(':')
+    (item) =>
+      !item.includes('/') && !item.includes(':') && isConcreteReference(item)
   );
 }
 
@@ -111,8 +160,17 @@ function hasNestedReference(source) {
 }
 
 export function extractChartSourceReferences(sourceData) {
-  if (!sourceData || typeof sourceData !== 'object' || Array.isArray(sourceData)) {
-    return { rankingKeys: [], metricKeys: [], statsDataIds: [] };
+  if (
+    !sourceData ||
+    typeof sourceData !== 'object' ||
+    Array.isArray(sourceData)
+  ) {
+    return {
+      rankingKeys: [],
+      metricKeys: [],
+      statsDataIds: [],
+      r2ObjectPaths: [],
+    };
   }
   const statsDataIds = [
     ...splitStatsDataIds(sourceData.statsDataId),
@@ -130,6 +188,7 @@ export function extractChartSourceReferences(sourceData) {
     rankingKeys: [...new Set(referencedRankingKeys(sourceData))],
     metricKeys: [...new Set(referencedMetricKeys(sourceData))],
     statsDataIds: [...new Set(statsDataIds)],
+    r2ObjectPaths: [...new Set(r2ObjectPaths(sourceData))],
   };
 }
 

@@ -165,10 +165,10 @@ describe("revenue server", () => {
 
   it("★計測できないチャネルを unmeasured として明示する (0 円にしない)", async () => {
     root = makeFixtureRoot({ stateFiles: {} });
-    const { revenueSummary, REVENUE_COVERAGE } = await load(root, "@/lib/server/revenue");
+    const { revenueSummary } = await load(root, "@/lib/server/revenue");
     const d = revenueSummary();
 
-    const unmeasured = REVENUE_COVERAGE.filter((c: any) => c.state === "unmeasured").map(
+    const unmeasured = d.coverage.filter((c: any) => c.state === "unmeasured").map(
       (c: any) => c.channel,
     );
     expect(unmeasured).toEqual(["アフィリエイト", "Kindle (KDP)", "ココナラ"]);

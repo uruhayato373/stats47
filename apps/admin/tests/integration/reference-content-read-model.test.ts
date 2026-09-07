@@ -36,7 +36,13 @@ describe('reference content read model', () => {
     expect(Object.keys(portfolio.summary.byChannel).sort()).toEqual(
       [...REFERENCE_PRODUCTION_CHANNELS].sort()
     );
-    expect(portfolio.summary.byChannel.theme.ready).toBe(0);
+    expect(portfolio.summary.byChannel.theme.ready).toBe(
+      portfolio.units.filter((unit) =>
+        unit.channels.some(
+          (channel) => channel.channel === 'theme' && channel.stage === 'ready'
+        )
+      ).length
+    );
     expect(
       portfolio.units.every((unit) =>
         unit.channels

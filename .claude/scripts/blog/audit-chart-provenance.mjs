@@ -110,9 +110,7 @@ async function exists(url) {
 }
 async function eStatTableExists(statsDataId) {
   if (!ESTAT_APP_ID) return true;
-  const url = new URL(
-    'https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo'
-  );
+  const url = new URL('https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo');
   url.searchParams.set('appId', ESTAT_APP_ID);
   url.searchParams.set('statsDataId', statsDataId);
   url.searchParams.set('lang', 'J');
@@ -188,6 +186,17 @@ async function metricKeyExists(key) {
   }
   return metricKeyCache.get(key);
 }
+const r2ObjectCache = new Map();
+async function r2ObjectExists(objectPath) {
+  if (!r2ObjectCache.has(objectPath)) {
+    const encodedPath = objectPath
+      .split('/')
+      .map((segment) => encodeURIComponent(segment))
+      .join('/');
+    r2ObjectCache.set(objectPath, await exists(`${R2}/${encodedPath}`));
+  }
+  return r2ObjectCache.get(objectPath);
+}
 const estatCache = new Map();
 async function eStatDataIdExists(statsDataId) {
   if (!estatCache.has(statsDataId)) {
@@ -248,8 +257,28 @@ const rows = await pool(targets, async (e) => {
       detail: `R2 に無い rankingKey: ${dead.join(', ')}`,
     };
   }
-  const { metricKeys, statsDataIds } = extractChartSourceReferences(src);
-  const metricPresent = await pool(metricKeys, metricKeyExists);
+  const { metricKeys, statsDataIds, r2ObjectPaths } =
+    extractChartSourceReferences(src);
+  const r2ObjectPresent = await pool(r2ObjectPaths, r2ObjectExists);
+  const deadR2Objects = r2ObjectPaths.filter((_, i) => !r2ObjectPresent[i]);
+  if (deadR2Objects.length > 0) {
+    return {
+      ...base,
+      kind,
+      verdict: 'dead-r2-reference',
+      detail: `R2 に無い object: ${deadR2Objects.join(', ')}`,
+    };
+  }
+  const metricPresent = await pool(metricKeys, async (metricKey) => {
+    const prefix = `app/stats/${metricKey}/`;
+    const exactIndexes = r2ObjectPaths.flatMap((objectPath, index) =>
+      objectPath.startsWith(prefix) ? [index] : []
+    );
+    if (exactIndexes.length > 0) {
+      return exactIndexes.some((index) => r2ObjectPresent[index]);
+    }
+    return metricKeyExists(metricKey);
+  });
   const deadMetrics = metricKeys.filter((_, i) => !metricPresent[i]);
   if (deadMetrics.length > 0) {
     return {
@@ -275,7 +304,7 @@ const rows = await pool(targets, async (e) => {
     verdict: 'restorable',
     detail:
       refs.length || metricKeys.length || statsDataIds.length
-        ? `参照 ${refs.length + metricKeys.length + statsDataIds.length} 件を実在確認`
+        ? `参照 ${refs.length + metricKeys.length + statsDataIds.length + r2ObjectPaths.length} 件を実在確認`
         : '参照あり',
   };
 });
@@ -288,6 +317,7 @@ const DEFECTS = new Set([
   'missing-reference',
   'dead-reference',
   'dead-metric-reference',
+  'dead-r2-reference',
   'dead-estat-reference',
 ]);
 const tally = {};
@@ -329,6 +359,7 @@ ${byVerdict.map(([v, n]) => `- \`${v}\`: **${n}**${DEFECTS.has(v) ? ' ← 欠陥
 - \`self-declared-incomplete\` — source.json 自身が \`incomplete: true\` で「出自不明」と申告している
 - \`missing-reference\` — kind が要求する参照フィールドが無い
 - \`dead-reference\` — 参照している rankingKey が R2 に存在しない (指標の廃止/改名)
+- \`dead-r2-reference\` — source が指す R2 object が存在しない
 - \`dead-estat-reference\` — 参照している statsDataId が e-Stat API で取得できない
 - \`unknown-kind\` — 語彙のドリフト。\`.claude/scripts/lib/chart-provenance.mjs\` の共有定義に追加する
 

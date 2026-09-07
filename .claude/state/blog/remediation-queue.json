@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-06T13:54:02.414Z",
+  "generatedAt": "2026-09-07T00:34:35.006Z",
   "gscWeek": "2026-W36",
-  "auditGeneratedAt": "2026-09-06T13:54:02.385Z",
+  "auditGeneratedAt": "2026-09-07T00:34:34.982Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
@@ -6555,12 +6555,12 @@
       "quality": {
         "blockers": 0,
         "warnings": 1,
-        "prose": 3109,
+        "prose": 3265,
         "chartCount": 5,
-        "prosePerChart": 622,
+        "prosePerChart": 653,
         "conformance": null,
         "flags": [
-          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 2 件 (konbu-consumption-expenditure(こんぶ消費支出額), mochi-consumption-expenditure(もち消費支出額)) — 本文で触れていないランキングへ誘導していないか確認する"
+          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 3 件 (konbu-consumption-expenditure(こんぶ消費支出額), mochi-consumption-expenditure(もち消費支出額), konbu-consumption-quantity(こんぶ消費量)) — 本文で触れていないランキングへ誘導していないか確認する"
         ]
       },
       "wave_id": null,
