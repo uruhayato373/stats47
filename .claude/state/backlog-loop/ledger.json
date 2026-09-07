@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07T20:13:49.284Z",
+  "updatedAt": "2026-09-07T21:04:09.867Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3884,6 +3884,42 @@
       },
       "reclassifiedFrom": [],
       "completedAt": null
+    },
+    "BLOG-BACKGROUND-BATCH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-07T21:04:09.867Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node /tmp/stats47-content-public-proof.mjs",
+              "node /tmp/stats47-content-page-proof.mjs",
+              "R2_PUBLIC_FETCH_URL=https://storage.stats47.jp node .claude/scripts/blog/select-republish-slugs.mjs --json",
+              "node .claude/scripts/lib/check-published-drafts.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "公開34139507934・PR945 deploy・master34158954086・purge34160900863成功。73記事/792本文図データ/292画像/73manifest R2一致、全73URL Googlebot200/canonical/indexable一致、公開差分0、outbox guard PASS。証跡 .claude/state/metrics/content-release-2026-09-08.json。未退避prompt19と対象外draft7は保護。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-07T21:04:09.867Z"
     }
   }
 }

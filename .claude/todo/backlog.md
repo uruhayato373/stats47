@@ -149,39 +149,6 @@ updated: 2026-09-08
   (地域限定のイオン九州が上位 3 に入らない)。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
 
-### [BLOG-BACKGROUND-BATCH-01] [進行中] 背景待ちの記事を固有画像・品質確認付きで公開する
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
-
-- **owner**: Codex (記事固有背景生成・公開確認)、blog-editor (必要な本文是正)
-- **再開点（2026-09-08・アプリ公開済み／最終実測中）**: PR #945 は全CI PASS（Web1320・packages2385）、main `d329955be` のdeploy `34153770527`・smoke `34154405449`・ISR GC `34154405618` はSUCCESS。記事公開 `34139507934` と発電2記事の出典分類4ファイル追補も完了し、73記事・792本文/図/元データファイル・292画像・73manifestをR2から再読して全一致。代表の新規URLは410→200。家計11指標のranking-items `34153774065` はSUCCESS、送信4,959→2,303件、画像は候補11/更新2/現行9件。master `34158954086` を同期中。残りは既存の食料費・消費支出AIの平均表記等を独立critic PASS後にdata-only公開→全パージ→73ブログ/14ランキングの本番全件実測→台帳回収/Git整理。AI全2,166件done・新規追加12件R2 SHA一致のカードは閉鎖済み。作業worktreeは `/tmp/stats47-finish-content-remaining-20260907`、元checkoutのdevelopは別タスクがREADYを返してから変更していない。
-- **現状（2026-09-07）**: reconcileの対象は77→73件（未公開72・改稿差分1）。今回、既存の記事固有背景を使える4件の本文をR2へ反映し、公開本文との一致を確認した。件数は実行時に再取得し、古い91件を固定の完了目標にしない。
-  当時の `natto-consumption-expenditure` の古い背景prompt（run 34113017143）も、今回の73件で明示再生成・再検証済み。
-- **過去の停止実測（9/2）**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
-  (`annual-sunshine-duration-prefecture-gap`) の `Fatal: 記事固有背景がありません` で exit 1 になり、
-  公開 0 件。`generate-blog-thumbnails.ts` は共有背景へフォールバックしない (`ogp-image-standards.md` §5)
-  ので、ゲートを緩めるのではなく画像を用意して通す。
-- **なぜユーザー実行か**: Codex MCP はクラウドセッションで `ENOENT` (codex 未インストール)。
-  背景生成はローカル Mac の Codex built-in imagegen で行う。
-- **手順** (`/generate-blog-images` Mode A): 公開前の記事なので `--article <article.md>` が必須
-  (省くと R2 404)。
-
-  ```bash
-  npm run blog-images:codex -- request-article --slug <slug> \
-    --article "docs/21_ブログ記事原稿/<slug>/article.md"
-  npm run blog-images:codex -- ingest-article --slug <slug> \
-    --article "docs/21_ブログ記事原稿/<slug>/article.md" \
-    --input <generated.png> --prompt-hash <sha256-...>
-  npm run check:blog-images
-  ```
-
-  生成物は `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` (git tracked)。
-- **公開の起動**: 画像だけの push では auto-publish は発火しない (paths フィルタが `article.md` と
-  workflow 自身のみ)。`workflow-dispatch-proxy.yml` の allowlist に `blog-auto-publish.yml` を
-  追加済 (PR #899) なので、クラウドからも slugs 空 = reconcile で代理起動できる。
-- **順序の注意**: 背景未生成（専用exit 20）は理由付きskipに是正済み。SHA不一致・古いprompt・通信障害は引き続き停止する。準備済みslugを `-f slugs="..."` で指定して小分けに公開し、背景の安全ゲートを緩めない。
-- **完了条件**: 対象記事が R2 `app/blog/<slug>/` に載り、本文・画像・索引の読戻しと公開監査が通り、`docs/21` からcommit-backで消えること。アプリ変更を伴う公開はdevelop→mainのdeploy成功も確認する。
-
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:.github/workflows/generate-article-charts.yml の run で検出 slug 数 > 0] [起票:2026-08-31]
