@@ -16,3 +16,12 @@
 #   デプロイしても古い資産が最大 1 年配信され続ける
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
+
+# .topojson は既知の拡張子ではないため Content-Type が付かず、Cloudflare の自動圧縮
+# (Content-Type 駆動) が効かない。2026-09-07 実測で /prefecture.topojson は
+# Content-Type なし・Content-Encoding なしの 1,015,004 bytes がそのまま流れていた
+# (同じ配信で 404 HTML は Content-Encoding: br が付く)。gzip 326,668 / brotli 294,300
+# まで縮むので、地図のポリゴンが出るまでの時間と帯域の取り合いに直接効く。
+# ランキングの地図と /themes の増減率コロプレスが同じ URL を読む。
+/prefecture.topojson
+  Content-Type: application/json; charset=utf-8
