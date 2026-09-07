@@ -69,8 +69,11 @@ export function resolveInvocation(
   if (platform !== "win32" || (command !== "npm" && command !== "npx")) {
     return { command, args };
   }
-  const npmCli = npmExecPath || path.join(path.dirname(nodeExecPath), "node_modules", "npm", "bin", "npm-cli.js");
-  const cli = command === "npx" ? path.join(path.dirname(npmCli), "npx-cli.js") : npmCli;
+  // テストを Linux 上で実行しても Windows のパス規則で解決する。
+  // ホスト OS の path.dirname を使うと `C:\\...` が単一ファイル名として扱われる。
+  const windowsPath = path.win32;
+  const npmCli = npmExecPath || windowsPath.join(windowsPath.dirname(nodeExecPath), "node_modules", "npm", "bin", "npm-cli.js");
+  const cli = command === "npx" ? windowsPath.join(windowsPath.dirname(npmCli), "npx-cli.js") : npmCli;
   return { command: nodeExecPath, args: [cli, ...args] };
 }
 
