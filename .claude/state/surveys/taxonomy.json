@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-07T12:46:09.897Z",
+  "generatedAt": "2026-09-07T18:26:32.506Z",
   "masterSurveyCount": 130,
   "ranking": {
     "metrics": 2311,
@@ -362,13 +362,13 @@
     }
   },
   "blog": {
-    "articles": 534,
-    "charts": 1426,
-    "applicableCharts": 1303,
+    "articles": 606,
+    "charts": 1587,
+    "applicableCharts": 1460,
     "byStatus": {
-      "resolved": 1303,
+      "resolved": 1460,
       "unresolved": 0,
-      "not-applicable": 123,
+      "not-applicable": 127,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -394,6 +394,8 @@
         "ryokan-vs-hotel-overnight-shift"
       ],
       "administrative-investment-report": [
+        "airport-count-vs-general-project-investment-agriculture",
+        "swimming-pool-public-vs-total-administrative-investment",
         "swimming-pool-public-vs-total-general-project-investment"
       ],
       "agricultural-income-statistics": [
@@ -425,12 +427,14 @@
         "garbage-total-output",
         "habitable-area-land-use",
         "local-allocation-tax-prefecture-vs-total-area-excluding",
+        "major-lake-area-prefecture-gap",
         "park-green-space-gap",
         "pasta-consumption-quantity",
         "population-density-urbanization",
         "post-office-last-window",
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
@@ -464,12 +468,15 @@
         "childcare-friendly-prefecture-ranking",
         "commercial-sales-productivity-gap",
         "communication-cost-burden",
+        "commute-by-bicycle-prefecture-gap",
         "commute-by-car-prefecture-gap",
+        "consumption-expenditure-multi-person-households-per-month",
         "convenience-store-count-commercial-vs-ratio-of-general",
         "convenience-store-density-map",
         "crime-rate-regional-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
         "day-time-population-prefecture-gap",
+        "densely-populated-area-prefecture-gap",
         "dental-checkup-persons-per-1000-prefecture-gap",
         "disaster-damage-per-person-prefecture-gap",
         "divorces-per-total-population",
@@ -513,6 +520,7 @@
         "local-allocation-tax-prefecture-vs-total-area-excluding",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "major-lake-area-prefecture-gap",
         "manufacturing-output-outlier-cities",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
@@ -523,6 +531,7 @@
         "park-green-space-gap",
         "passport-issuance-prefecture-gap",
         "pasta-consumption-quantity",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "pharmacy-count-prefecture-ranking",
         "police-officer-density-vs-crime-gap",
         "pollution-complaints-regional-map",
@@ -537,6 +546,7 @@
         "retail-establishments-by-prefecture",
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
@@ -569,7 +579,8 @@
       ],
       "commercial-dynamics-survey": [
         "convenience-store-count-commercial-prefecture-gap",
-        "convenience-store-count-commercial-vs-ratio-of-general"
+        "convenience-store-count-commercial-vs-ratio-of-general",
+        "convenience-store-sales-monthly-prefecture-gap"
       ],
       "cpi-annual": [
         "cpi-change-regional-pattern",
@@ -594,15 +605,18 @@
         "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
+        "manufacturing-industry-added-value-prefecture-gap",
         "manufacturing-labor-productivity-pref",
         "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
         "pharma-medical-device-production-map",
         "retail-establishments-by-prefecture",
+        "retail-sales-amount-by-prefecture-prefecture-gap",
         "retail-store-count-vs-nurses-per-100k-population",
         "semiconductor-electronics-regional-map",
-        "small-business-dominance-map"
+        "small-business-dominance-map",
+        "wholesale-annual-sales-amount-prefecture-gap"
       ],
       "economic-census-basic": [
         "it-establishments-prefecture",
@@ -619,12 +633,14 @@
         "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
+        "manufacturing-industry-added-value-prefecture-gap",
         "manufacturing-labor-productivity-pref",
         "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
         "pharma-medical-device-production-map",
-        "semiconductor-electronics-regional-map"
+        "semiconductor-electronics-regional-map",
+        "wholesale-annual-sales-amount-prefecture-gap"
       ],
       "electricity-business-statistics": [
         "cc-estat-14-energy-area-chart",
@@ -639,9 +655,13 @@
         "it-establishments-prefecture",
         "it-industry-concentration",
         "long-commute-telework-potential",
+        "non-regular-employment-rate-prefecture-gap",
         "prefecture-salary-remote-gap",
         "telework-gap-tokyo-6x",
         "telework-rate-tokyo-gap"
+      ],
+      "employment-trends-survey": [
+        "new-hire-count-prefecture-gap"
       ],
       "establishment-enterprise-census": [
         "commercial-sales-productivity-gap",
@@ -661,7 +681,8 @@
         "fishery-species-prefecture-specialty"
       ],
       "fishery-census": [
-        "fishery-catch-aquaculture-shift"
+        "fishery-catch-aquaculture-shift",
+        "fishery-workers-prefecture-gap"
       ],
       "flood-statistics": [
         "flood-affected-rivers-prefecture-gap"
@@ -696,6 +717,7 @@
       "household-survey": [
         "bank-deposit-balance-shikoku-anomaly",
         "communication-cost-burden",
+        "consumption-expenditure-multi-person-households-per-month",
         "cpi-change-regional-pattern",
         "dual-income-reversal",
         "electricity-bill-hike-impact",
@@ -742,6 +764,7 @@
         "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
         "cc-estat-12-housing-treemap",
         "home-ownership-rate-ranking",
+        "new-rental-starts-prefecture-gap",
         "road-length-per-km2-vs-residential-building-starts"
       ],
       "industrial-statistics": [
@@ -774,6 +797,7 @@
         "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
         "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
         "banana-consumption-quantity",
+        "bean-sprouts-consumption-quantity-prefecture-gap",
         "beef-consumption-prefecture-gap",
         "beef-consumption-quantity",
         "beef-consumption-quantity-vs-municipal-road-paving-rate",
@@ -789,6 +813,7 @@
         "bread-consumption-expenditure-vs-site-area-per-dwelling",
         "bread-vs-rice-expenditure",
         "butter-vs-margarine-expenditure",
+        "cake-consumption-expenditure-prefecture-gap",
         "candy-expenditure-ranking",
         "carbonated-drink-spending-prefecture-gap",
         "castella-expenditure-ranking",
@@ -796,22 +821,29 @@
         "chiba-food-culture",
         "chicken-consumption-prefecture-gap",
         "chicken-consumption-quantity",
+        "chinese-noodles-consumption-expenditure-prefecture-gap",
         "chinese-noodles-expenditure-ranking",
         "chocolate-expenditure-ranking",
+        "chocolate-snack-consumption-expenditure-prefecture-gap",
         "coffee-consumption-prefecture-gap",
+        "coffee-shop-consumption-expenditure-prefecture-gap",
         "crab-expenditure-ranking",
+        "croquette-consumption-expenditure-prefecture-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
         "cup-noodles-consumption-expenditure-vs-secondary-activity",
         "cup-noodles-consumption-expenditure-vs-sports-annual",
         "cup-noodles-expenditure-ranking",
         "curry-roux-consumption-gap",
+        "cut-flowers-consumption-expenditure-prefecture-gap",
         "delivery-fee-consumption-expenditure-prefecture-gap",
         "dining-out-expenditure-ranking",
         "earthquake-insurance-prefecture-gap",
         "ehime-food-culture",
         "engel-coefficient-prefecture-ranking",
         "engel-coefficient-vs-prefectural-income",
+        "fabric-softener-consumption-expenditure-prefecture-gap",
         "fish-catch-vs-consumption-prefecture",
+        "flavor-seasoning-consumption-expenditure-prefecture-gap",
         "food-consumption-prefecture-battle",
         "food-spending-pattern",
         "food-trio-prefecture-map",
@@ -833,6 +865,7 @@
         "green-tea-consumption-quantity",
         "grilled-eel-consumption-expenditure-prefecture-gap",
         "gunma-food-culture",
+        "hamburger-consumption-expenditure-prefecture-gap",
         "heating-cost-vs-disposable-income",
         "hiroshima-food-culture",
         "hokkaido-food-culture",
@@ -901,12 +934,16 @@
         "okinawa-food-culture",
         "osaka-food-culture",
         "other-bread-consumption-quantity",
+        "other-cosmetics-consumption-expenditure-prefecture-gap",
         "oyster-consumption-prefecture-gap",
         "pasta-consumption-quantity",
         "peach-consumption-quantity-vs-disaster-relief-expenses",
         "peach-expenditure-ranking",
+        "pear-consumption-expenditure-prefecture-gap",
         "personal-computer-expenditure-ranking",
         "pet-food-consumption-expenditure-prefecture-gap",
+        "pickled-plum-consumption-expenditure-prefecture-gap",
+        "pickled-plum-consumption-quantity-prefecture-gap",
         "pork-consumption-expenditure",
         "pork-consumption-quantity",
         "potato-consumption-quantity",
@@ -924,22 +961,29 @@
         "shizuoka-food-culture",
         "shochu-consumption-prefecture-gap",
         "shochu-expenditure-vs-sake-ranking",
+        "shrimp-consumption-quantity-prefecture-gap",
         "shumai-consumption-expenditure-vs-jr-freight-shipment",
         "shumai-consumption-expenditure-vs-main-household-ratio-main",
         "soba-udon-dining-consumption-expenditure",
         "soba-udon-dining-consumption-expenditure-prefecture-gap",
+        "soy-sauce-consumption-expenditure-prefecture-gap",
         "spinach-consumption-ranking",
+        "sports-spectating-consumption-expenditure-prefecture-gap",
         "squid-consumption-quantity",
         "strawberry-consumption-prefecture-gap",
         "sugar-consumption-prefecture-gap",
         "sushi-dining-consumption-expenditure",
         "sweet-potato-expenditure-ranking",
+        "table-salt-consumption-quantity-prefecture-gap",
+        "taro-consumption-quantity-prefecture-gap",
+        "tempura-fry-consumption-expenditure-prefecture-gap",
         "textbook-expenditure-ranking",
         "tissue-paper-consumption-expenditure-prefecture-gap",
         "tissue-paper-consumption-expenditure-vs-average-weight",
         "tobacco-expenditure-ranking",
         "tochigi-food-culture",
         "tofu-consumption-prefecture-gap",
+        "toilet-paper-consumption-expenditure-prefecture-gap",
         "tokushima-food-culture",
         "tokyo-food-culture",
         "tottori-food-culture",
@@ -960,7 +1004,9 @@
         "wheat-flour-consumption-prefecture",
         "wheat-flour-expenditure-vs-quantity",
         "whisky-consumption-prefecture-gap",
+        "white-bread-consumption-quantity-prefecture-gap",
         "white-bread-price-up-quantity-up",
+        "whitebait-consumption-quantity-prefecture-gap",
         "wine-expenditure-ranking",
         "winter-coat-bargain-purchase-price",
         "womens-clothing-expenditure-ranking",
@@ -1001,6 +1047,7 @@
       "local-finance": [
         "allocation-tax-area",
         "childcare-friendly-prefecture-ranking",
+        "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
@@ -1010,6 +1057,8 @@
         "fiscal-self-reliance-gap",
         "future-burden-ratio-extreme-gap",
         "future-population-disappearing-prefectures",
+        "ishikawa-municipal-finance",
+        "kanagawa-municipal-finance",
         "kochi-municipal-finance",
         "local-allocation-tax-prefecture-vs-agriculture-forestry",
         "local-allocation-tax-prefecture-vs-cultivated-area",
@@ -1021,13 +1070,17 @@
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
         "miyazaki-municipal-finance",
+        "nagano-municipal-finance",
+        "niigata-municipal-finance",
         "nursing-care-shortage-2040",
         "okinawa-municipal-finance",
         "peach-consumption-quantity-vs-disaster-relief-expenses",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "police-officer-density-vs-crime-gap",
         "prefectural-debt-future-burden",
         "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
         "real-disposable-income-vs-per-capita-social-welfare",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "school-nonattendance-pattern",
         "self-financing-ratio-prefecture-gap",
         "toyama-municipal-finance",
@@ -1038,6 +1091,7 @@
       ],
       "local-public-employee-salary": [
         "avg-salary-admin-prefecture-prefecture-gap",
+        "avg-salary-police-prefecture-prefecture-gap",
         "nurse-income-prefecture-gap",
         "prefecture-salary-remote-gap",
         "software-engineer-income-gap"
@@ -1072,6 +1126,8 @@
       ],
       "mlit-ksj": [
         "airport-count-prefecture-gap",
+        "airport-count-vs-general-project-investment-agriculture",
+        "airport-count-vs-physical-disability-rehabilitation",
         "car-ownership-household-prefecture-gap",
         "lake-count-prefecture-gap",
         "local-tax-prefecture-vs-railway-passengers",
@@ -1080,9 +1136,11 @@
       ],
       "municipal-settlement-survey": [
         "childcare-friendly-prefecture-ranking",
+        "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
         "firefighting-capacity-gap",
         "local-tax-regional-gap",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
         "real-disposable-income-vs-per-capita-social-welfare",
         "school-nonattendance-pattern"
@@ -1123,9 +1181,14 @@
         "hospital-bed-utilization-map",
         "inpatient-rate-aging-burden",
         "inpatient-rate-prefecture-gap",
-        "outpatient-rate-prefecture-gap"
+        "outpatient-rate-prefecture-gap",
+        "treatment-rate-hypertension-outpatient-prefecture-gap",
+        "treatment-rate-mental-disorder-inpatient-prefecture-gap",
+        "treatment-rate-mood-disorder-outpatient-prefecture-gap",
+        "treatment-rate-schizophrenia-inpatient-prefecture-gap"
       ],
       "pension-insurance-annual-report": [
+        "national-pension-full-exemption-rate-prefecture-gap",
         "national-pension-payment-rate-prefecture-gap"
       ],
       "petroleum-sales-statistics": [
@@ -1165,6 +1228,7 @@
         "childcare-friendly-prefecture-ranking",
         "commercial-sales-productivity-gap",
         "communication-cost-burden",
+        "consumption-expenditure-multi-person-households-per-month",
         "convenience-store-density-map",
         "crime-rate-regional-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
@@ -1204,6 +1268,7 @@
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "passport-issuance-prefecture-gap",
         "pasta-consumption-quantity",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "pharmacy-count-prefecture-ranking",
         "police-officer-density-vs-crime-gap",
         "pollution-complaints-regional-map",
@@ -1239,6 +1304,7 @@
       ],
       "population-projection": [
         "2050-population-map-reading",
+        "future-population-change-rate-2050-prefecture-gap",
         "future-population-disappearing-prefectures",
         "future-population-tokyo-paradox"
       ],
@@ -1270,6 +1336,7 @@
       "prefectural-settlement-survey": [
         "allocation-tax-area",
         "childcare-friendly-prefecture-ranking",
+        "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
@@ -1293,9 +1360,11 @@
         "nursing-care-shortage-2040",
         "okinawa-municipal-finance",
         "peach-consumption-quantity-vs-disaster-relief-expenses",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "police-officer-density-vs-crime-gap",
         "prefectural-debt-future-burden",
         "real-disposable-income-vs-per-capita-social-welfare",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "school-nonattendance-pattern",
         "self-financing-ratio-prefecture-gap",
         "toyama-municipal-finance",
@@ -1310,22 +1379,28 @@
       ],
       "resident-registry-migration-report": [
         "2050-population-map-reading",
+        "ehime-migration-flow",
         "fertility-fiscal-nexus",
         "future-population-tokyo-paradox",
         "ibaraki-migration-flow",
         "ishikawa-migration-flow",
         "kanagawa-migration-flow",
+        "kochi-migration-flow",
         "nagano-migration-flow",
         "niigata-migration-flow",
+        "oita-migration-flow",
+        "osaka-migration-flow",
         "population-migration-tokyo-concentration",
         "wakayama-migration-flow"
       ],
       "resident-registry-population-survey": [
         "international-cooperation-volunteer-map",
+        "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
         "sewerage-water-supply-gap",
         "water-sewage-crisis"
       ],
       "retail-price-survey": [
+        "consumer-price-difference-index-utilities-prefecture-gap",
         "consumer-price-regional-gap",
         "electricity-bill-hike-impact",
         "energy-consumption-structure-shift",
@@ -1350,10 +1425,12 @@
         "gasoline-car-society-map",
         "habitable-area-land-use",
         "highway-japan-58years",
+        "main-road-paving-rate-prefecture-gap",
         "main-road-paving-rate-vs-apple-consumption-quantity",
         "paved-road-total-length",
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "road-length-per-km2-vs-residential-building-starts",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk"
@@ -1365,6 +1442,7 @@
         "elementary-school-children-count",
         "garbage-total-output",
         "high-school-advancement-rate",
+        "miscellaneous-school-students-prefecture-gap",
         "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
@@ -1385,11 +1463,14 @@
         "tissue-paper-consumption-expenditure-vs-average-weight"
       ],
       "sewerage-statistics": [
+        "sewage-treatment-coverage-rate-vs-flush-toilet-population",
+        "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
         "sewerage-water-supply-gap",
         "water-infrastructure-crisis",
         "water-sewage-crisis"
       ],
       "social-education-survey": [
+        "campsite-public-prefecture-gap",
         "campsite-public-vs-paved-road-main-length",
         "campsite-public-vs-road-expressway-length",
         "female-lecture-prefecture-gap",
@@ -1400,6 +1481,7 @@
         "sports-urban-paradox",
         "swimming-pool-public-vs-post-office-count",
         "swimming-pool-public-vs-smoke-emission-facility-count",
+        "swimming-pool-public-vs-total-administrative-investment",
         "swimming-pool-public-vs-total-general-project-investment"
       ],
       "social-life-basic-survey": [
@@ -1413,11 +1495,14 @@
         "overseas-travel-gap",
         "pachinko-participation-prefecture-gap",
         "sports-facility-regional-divide",
+        "sports-participation-rate-hiking-prefecture-gap",
+        "sports-participation-rate-swimming-prefecture-gap",
         "sports-urban-paradox",
         "travel-behavior-gender-gap",
         "tutoring-cost-university-advancement-gap"
       ],
       "social-welfare-facility-survey": [
+        "airport-count-vs-physical-disability-rehabilitation",
         "childcare-friendly-prefecture-ranking",
         "elderly-population-care-capacity-gap",
         "nursing-care-shortage-2040",
@@ -1477,12 +1562,15 @@
         "nurse-income-prefecture-gap",
         "occupation-income-gap-pilot-vs-careworker",
         "pharmacist-income-prefecture-gap",
+        "physical-therapist-annual-income-prefecture-gap",
         "physical-therapist-income-prefecture-gap",
         "prefecture-salary-gap-career",
         "professor-income-prefecture-gap",
         "school-teacher-annual-income",
+        "school-teacher-annual-income-prefecture-gap",
         "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
+        "starting-salary-university-prefecture-gap",
         "system-consultant-income-prefecture-gap",
         "system-consultant-income-ranking",
         "taxi-driver-income-prefecture-gap",
@@ -1495,15 +1583,23 @@
         "recycling-rate-gap",
         "waste-management-recycling-gap"
       ],
+      "wastewater-treatment-coverage-report": [
+        "sewage-treatment-coverage-rate-prefecture-gap",
+        "sewage-treatment-coverage-rate-vs-flush-toilet-population",
+        "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
+        "sewerage-coverage-rate-prefecture-gap"
+      ],
       "water-pollution-control-law-status": [
         "pollution-complaints-regional-map"
       ],
       "waterworks-statistics": [
         "sewerage-water-supply-gap",
-        "water-infrastructure-crisis"
+        "water-infrastructure-crisis",
+        "water-supply-population-prefecture-gap"
       ],
       "weather-statistics": [
         "annual-precipitation-rainy-season-gap",
+        "annual-sunshine-duration-prefecture-gap",
         "annual-sunshine-duration-vs-auto-liability-insurance-amount",
         "extreme-heat-days-prefecture",
         "livable-prefecture-composite-ranking",
@@ -1562,6 +1658,8 @@
       "rankingCount": 13,
       "themeKeys": [],
       "blogSlugs": [
+        "airport-count-vs-general-project-investment-agriculture",
+        "swimming-pool-public-vs-total-administrative-investment",
         "swimming-pool-public-vs-total-general-project-investment"
       ]
     },
@@ -1629,12 +1727,14 @@
         "garbage-total-output",
         "habitable-area-land-use",
         "local-allocation-tax-prefecture-vs-total-area-excluding",
+        "major-lake-area-prefecture-gap",
         "park-green-space-gap",
         "pasta-consumption-quantity",
         "population-density-urbanization",
         "post-office-last-window",
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
@@ -1697,12 +1797,15 @@
         "childcare-friendly-prefecture-ranking",
         "commercial-sales-productivity-gap",
         "communication-cost-burden",
+        "commute-by-bicycle-prefecture-gap",
         "commute-by-car-prefecture-gap",
+        "consumption-expenditure-multi-person-households-per-month",
         "convenience-store-count-commercial-vs-ratio-of-general",
         "convenience-store-density-map",
         "crime-rate-regional-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
         "day-time-population-prefecture-gap",
+        "densely-populated-area-prefecture-gap",
         "dental-checkup-persons-per-1000-prefecture-gap",
         "disaster-damage-per-person-prefecture-gap",
         "divorces-per-total-population",
@@ -1746,6 +1849,7 @@
         "local-allocation-tax-prefecture-vs-total-area-excluding",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "major-lake-area-prefecture-gap",
         "manufacturing-output-outlier-cities",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
@@ -1756,6 +1860,7 @@
         "park-green-space-gap",
         "passport-issuance-prefecture-gap",
         "pasta-consumption-quantity",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "pharmacy-count-prefecture-ranking",
         "police-officer-density-vs-crime-gap",
         "pollution-complaints-regional-map",
@@ -1770,6 +1875,7 @@
         "retail-establishments-by-prefecture",
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "road-length-per-km2-vs-residential-building-starts",
         "roadside-station-count-vs-forest-road-length",
         "safe-driving-5-features",
@@ -1812,7 +1918,8 @@
       "themeKeys": [],
       "blogSlugs": [
         "convenience-store-count-commercial-prefecture-gap",
-        "convenience-store-count-commercial-vs-ratio-of-general"
+        "convenience-store-count-commercial-vs-ratio-of-general",
+        "convenience-store-sales-monthly-prefecture-gap"
       ]
     },
     {
@@ -1878,15 +1985,18 @@
         "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
+        "manufacturing-industry-added-value-prefecture-gap",
         "manufacturing-labor-productivity-pref",
         "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
         "pharma-medical-device-production-map",
         "retail-establishments-by-prefecture",
+        "retail-sales-amount-by-prefecture-prefecture-gap",
         "retail-store-count-vs-nurses-per-100k-population",
         "semiconductor-electronics-regional-map",
-        "small-business-dominance-map"
+        "small-business-dominance-map",
+        "wholesale-annual-sales-amount-prefecture-gap"
       ]
     },
     {
@@ -1917,12 +2027,14 @@
         "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
+        "manufacturing-industry-added-value-prefecture-gap",
         "manufacturing-labor-productivity-pref",
         "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
         "pharma-medical-device-production-map",
-        "semiconductor-electronics-regional-map"
+        "semiconductor-electronics-regional-map",
+        "wholesale-annual-sales-amount-prefecture-gap"
       ]
     },
     {
@@ -1956,6 +2068,7 @@
         "it-establishments-prefecture",
         "it-industry-concentration",
         "long-commute-telework-potential",
+        "non-regular-employment-rate-prefecture-gap",
         "prefecture-salary-remote-gap",
         "telework-gap-tokyo-6x",
         "telework-rate-tokyo-gap"
@@ -1965,7 +2078,9 @@
       "surveyId": "employment-trends-survey",
       "rankingCount": 1,
       "themeKeys": [],
-      "blogSlugs": []
+      "blogSlugs": [
+        "new-hire-count-prefecture-gap"
+      ]
     },
     {
       "surveyId": "establishment-enterprise-census",
@@ -2022,7 +2137,8 @@
         "fishery-marine"
       ],
       "blogSlugs": [
-        "fishery-catch-aquaculture-shift"
+        "fishery-catch-aquaculture-shift",
+        "fishery-workers-prefecture-gap"
       ]
     },
     {
@@ -2125,6 +2241,7 @@
       "blogSlugs": [
         "bank-deposit-balance-shikoku-anomaly",
         "communication-cost-burden",
+        "consumption-expenditure-multi-person-households-per-month",
         "cpi-change-regional-pattern",
         "dual-income-reversal",
         "electricity-bill-hike-impact",
@@ -2189,6 +2306,7 @@
         "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
         "cc-estat-12-housing-treemap",
         "home-ownership-rate-ranking",
+        "new-rental-starts-prefecture-gap",
         "road-length-per-km2-vs-residential-building-starts"
       ]
     },
@@ -2266,6 +2384,7 @@
         "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
         "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
         "banana-consumption-quantity",
+        "bean-sprouts-consumption-quantity-prefecture-gap",
         "beef-consumption-prefecture-gap",
         "beef-consumption-quantity",
         "beef-consumption-quantity-vs-municipal-road-paving-rate",
@@ -2281,6 +2400,7 @@
         "bread-consumption-expenditure-vs-site-area-per-dwelling",
         "bread-vs-rice-expenditure",
         "butter-vs-margarine-expenditure",
+        "cake-consumption-expenditure-prefecture-gap",
         "candy-expenditure-ranking",
         "carbonated-drink-spending-prefecture-gap",
         "castella-expenditure-ranking",
@@ -2288,22 +2408,29 @@
         "chiba-food-culture",
         "chicken-consumption-prefecture-gap",
         "chicken-consumption-quantity",
+        "chinese-noodles-consumption-expenditure-prefecture-gap",
         "chinese-noodles-expenditure-ranking",
         "chocolate-expenditure-ranking",
+        "chocolate-snack-consumption-expenditure-prefecture-gap",
         "coffee-consumption-prefecture-gap",
+        "coffee-shop-consumption-expenditure-prefecture-gap",
         "crab-expenditure-ranking",
+        "croquette-consumption-expenditure-prefecture-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
         "cup-noodles-consumption-expenditure-vs-secondary-activity",
         "cup-noodles-consumption-expenditure-vs-sports-annual",
         "cup-noodles-expenditure-ranking",
         "curry-roux-consumption-gap",
+        "cut-flowers-consumption-expenditure-prefecture-gap",
         "delivery-fee-consumption-expenditure-prefecture-gap",
         "dining-out-expenditure-ranking",
         "earthquake-insurance-prefecture-gap",
         "ehime-food-culture",
         "engel-coefficient-prefecture-ranking",
         "engel-coefficient-vs-prefectural-income",
+        "fabric-softener-consumption-expenditure-prefecture-gap",
         "fish-catch-vs-consumption-prefecture",
+        "flavor-seasoning-consumption-expenditure-prefecture-gap",
         "food-consumption-prefecture-battle",
         "food-spending-pattern",
         "food-trio-prefecture-map",
@@ -2325,6 +2452,7 @@
         "green-tea-consumption-quantity",
         "grilled-eel-consumption-expenditure-prefecture-gap",
         "gunma-food-culture",
+        "hamburger-consumption-expenditure-prefecture-gap",
         "heating-cost-vs-disposable-income",
         "hiroshima-food-culture",
         "hokkaido-food-culture",
@@ -2393,12 +2521,16 @@
         "okinawa-food-culture",
         "osaka-food-culture",
         "other-bread-consumption-quantity",
+        "other-cosmetics-consumption-expenditure-prefecture-gap",
         "oyster-consumption-prefecture-gap",
         "pasta-consumption-quantity",
         "peach-consumption-quantity-vs-disaster-relief-expenses",
         "peach-expenditure-ranking",
+        "pear-consumption-expenditure-prefecture-gap",
         "personal-computer-expenditure-ranking",
         "pet-food-consumption-expenditure-prefecture-gap",
+        "pickled-plum-consumption-expenditure-prefecture-gap",
+        "pickled-plum-consumption-quantity-prefecture-gap",
         "pork-consumption-expenditure",
         "pork-consumption-quantity",
         "potato-consumption-quantity",
@@ -2416,22 +2548,29 @@
         "shizuoka-food-culture",
         "shochu-consumption-prefecture-gap",
         "shochu-expenditure-vs-sake-ranking",
+        "shrimp-consumption-quantity-prefecture-gap",
         "shumai-consumption-expenditure-vs-jr-freight-shipment",
         "shumai-consumption-expenditure-vs-main-household-ratio-main",
         "soba-udon-dining-consumption-expenditure",
         "soba-udon-dining-consumption-expenditure-prefecture-gap",
+        "soy-sauce-consumption-expenditure-prefecture-gap",
         "spinach-consumption-ranking",
+        "sports-spectating-consumption-expenditure-prefecture-gap",
         "squid-consumption-quantity",
         "strawberry-consumption-prefecture-gap",
         "sugar-consumption-prefecture-gap",
         "sushi-dining-consumption-expenditure",
         "sweet-potato-expenditure-ranking",
+        "table-salt-consumption-quantity-prefecture-gap",
+        "taro-consumption-quantity-prefecture-gap",
+        "tempura-fry-consumption-expenditure-prefecture-gap",
         "textbook-expenditure-ranking",
         "tissue-paper-consumption-expenditure-prefecture-gap",
         "tissue-paper-consumption-expenditure-vs-average-weight",
         "tobacco-expenditure-ranking",
         "tochigi-food-culture",
         "tofu-consumption-prefecture-gap",
+        "toilet-paper-consumption-expenditure-prefecture-gap",
         "tokushima-food-culture",
         "tokyo-food-culture",
         "tottori-food-culture",
@@ -2452,7 +2591,9 @@
         "wheat-flour-consumption-prefecture",
         "wheat-flour-expenditure-vs-quantity",
         "whisky-consumption-prefecture-gap",
+        "white-bread-consumption-quantity-prefecture-gap",
         "white-bread-price-up-quantity-up",
+        "whitebait-consumption-quantity-prefecture-gap",
         "wine-expenditure-ranking",
         "winter-coat-bargain-purchase-price",
         "womens-clothing-expenditure-ranking",
@@ -2549,6 +2690,7 @@
       "blogSlugs": [
         "allocation-tax-area",
         "childcare-friendly-prefecture-ranking",
+        "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
@@ -2558,6 +2700,8 @@
         "fiscal-self-reliance-gap",
         "future-burden-ratio-extreme-gap",
         "future-population-disappearing-prefectures",
+        "ishikawa-municipal-finance",
+        "kanagawa-municipal-finance",
         "kochi-municipal-finance",
         "local-allocation-tax-prefecture-vs-agriculture-forestry",
         "local-allocation-tax-prefecture-vs-cultivated-area",
@@ -2569,13 +2713,17 @@
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
         "miyazaki-municipal-finance",
+        "nagano-municipal-finance",
+        "niigata-municipal-finance",
         "nursing-care-shortage-2040",
         "okinawa-municipal-finance",
         "peach-consumption-quantity-vs-disaster-relief-expenses",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "police-officer-density-vs-crime-gap",
         "prefectural-debt-future-burden",
         "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
         "real-disposable-income-vs-per-capita-social-welfare",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "school-nonattendance-pattern",
         "self-financing-ratio-prefecture-gap",
         "toyama-municipal-finance",
@@ -2600,6 +2748,7 @@
       ],
       "blogSlugs": [
         "avg-salary-admin-prefecture-prefecture-gap",
+        "avg-salary-police-prefecture-prefecture-gap",
         "nurse-income-prefecture-gap",
         "prefecture-salary-remote-gap",
         "software-engineer-income-gap"
@@ -2670,6 +2819,8 @@
       ],
       "blogSlugs": [
         "airport-count-prefecture-gap",
+        "airport-count-vs-general-project-investment-agriculture",
+        "airport-count-vs-physical-disability-rehabilitation",
         "car-ownership-household-prefecture-gap",
         "lake-count-prefecture-gap",
         "local-tax-prefecture-vs-railway-passengers",
@@ -2691,9 +2842,11 @@
       ],
       "blogSlugs": [
         "childcare-friendly-prefecture-ranking",
+        "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
         "firefighting-capacity-gap",
         "local-tax-regional-gap",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
         "real-disposable-income-vs-per-capita-social-welfare",
         "school-nonattendance-pattern"
@@ -2796,7 +2949,11 @@
         "hospital-bed-utilization-map",
         "inpatient-rate-aging-burden",
         "inpatient-rate-prefecture-gap",
-        "outpatient-rate-prefecture-gap"
+        "outpatient-rate-prefecture-gap",
+        "treatment-rate-hypertension-outpatient-prefecture-gap",
+        "treatment-rate-mental-disorder-inpatient-prefecture-gap",
+        "treatment-rate-mood-disorder-outpatient-prefecture-gap",
+        "treatment-rate-schizophrenia-inpatient-prefecture-gap"
       ]
     },
     {
@@ -2806,6 +2963,7 @@
         "aging-society"
       ],
       "blogSlugs": [
+        "national-pension-full-exemption-rate-prefecture-gap",
         "national-pension-payment-rate-prefecture-gap"
       ]
     },
@@ -2879,6 +3037,7 @@
         "childcare-friendly-prefecture-ranking",
         "commercial-sales-productivity-gap",
         "communication-cost-burden",
+        "consumption-expenditure-multi-person-households-per-month",
         "convenience-store-density-map",
         "crime-rate-regional-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
@@ -2918,6 +3077,7 @@
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "passport-issuance-prefecture-gap",
         "pasta-consumption-quantity",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "pharmacy-count-prefecture-ranking",
         "police-officer-density-vs-crime-gap",
         "pollution-complaints-regional-map",
@@ -2958,6 +3118,7 @@
       "themeKeys": [],
       "blogSlugs": [
         "2050-population-map-reading",
+        "future-population-change-rate-2050-prefecture-gap",
         "future-population-disappearing-prefectures",
         "future-population-tokyo-paradox"
       ]
@@ -3037,6 +3198,7 @@
       "blogSlugs": [
         "allocation-tax-area",
         "childcare-friendly-prefecture-ranking",
+        "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
@@ -3060,9 +3222,11 @@
         "nursing-care-shortage-2040",
         "okinawa-municipal-finance",
         "peach-consumption-quantity-vs-disaster-relief-expenses",
+        "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
         "police-officer-density-vs-crime-gap",
         "prefectural-debt-future-burden",
         "real-disposable-income-vs-per-capita-social-welfare",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "school-nonattendance-pattern",
         "self-financing-ratio-prefecture-gap",
         "toyama-municipal-finance",
@@ -3094,13 +3258,17 @@
       ],
       "blogSlugs": [
         "2050-population-map-reading",
+        "ehime-migration-flow",
         "fertility-fiscal-nexus",
         "future-population-tokyo-paradox",
         "ibaraki-migration-flow",
         "ishikawa-migration-flow",
         "kanagawa-migration-flow",
+        "kochi-migration-flow",
         "nagano-migration-flow",
         "niigata-migration-flow",
+        "oita-migration-flow",
+        "osaka-migration-flow",
         "population-migration-tokyo-concentration",
         "wakayama-migration-flow"
       ]
@@ -3111,6 +3279,7 @@
       "themeKeys": [],
       "blogSlugs": [
         "international-cooperation-volunteer-map",
+        "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
         "sewerage-water-supply-gap",
         "water-sewage-crisis"
       ]
@@ -3123,6 +3292,7 @@
         "real-income"
       ],
       "blogSlugs": [
+        "consumer-price-difference-index-utilities-prefecture-gap",
         "consumer-price-regional-gap",
         "electricity-bill-hike-impact",
         "energy-consumption-structure-shift",
@@ -3154,10 +3324,12 @@
         "gasoline-car-society-map",
         "habitable-area-land-use",
         "highway-japan-58years",
+        "main-road-paving-rate-prefecture-gap",
         "main-road-paving-rate-vs-apple-consumption-quantity",
         "paved-road-total-length",
         "road-infrastructure-density",
         "road-length-per-km2-vs-average-road-traffic-volume",
+        "road-length-per-km2-vs-local-special-grant-prefecture",
         "road-length-per-km2-vs-residential-building-starts",
         "safe-driving-5-features",
         "traffic-accident-deaths-regional-risk"
@@ -3176,6 +3348,7 @@
         "elementary-school-children-count",
         "garbage-total-output",
         "high-school-advancement-rate",
+        "miscellaneous-school-students-prefecture-gap",
         "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
@@ -3206,6 +3379,8 @@
       "rankingCount": 5,
       "themeKeys": [],
       "blogSlugs": [
+        "sewage-treatment-coverage-rate-vs-flush-toilet-population",
+        "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
         "sewerage-water-supply-gap",
         "water-infrastructure-crisis",
         "water-sewage-crisis"
@@ -3224,6 +3399,7 @@
         "education-culture"
       ],
       "blogSlugs": [
+        "campsite-public-prefecture-gap",
         "campsite-public-vs-paved-road-main-length",
         "campsite-public-vs-road-expressway-length",
         "female-lecture-prefecture-gap",
@@ -3234,6 +3410,7 @@
         "sports-urban-paradox",
         "swimming-pool-public-vs-post-office-count",
         "swimming-pool-public-vs-smoke-emission-facility-count",
+        "swimming-pool-public-vs-total-administrative-investment",
         "swimming-pool-public-vs-total-general-project-investment"
       ]
     },
@@ -3255,6 +3432,8 @@
         "overseas-travel-gap",
         "pachinko-participation-prefecture-gap",
         "sports-facility-regional-divide",
+        "sports-participation-rate-hiking-prefecture-gap",
+        "sports-participation-rate-swimming-prefecture-gap",
         "sports-urban-paradox",
         "travel-behavior-gender-gap",
         "tutoring-cost-university-advancement-gap"
@@ -3265,6 +3444,7 @@
       "rankingCount": 34,
       "themeKeys": [],
       "blogSlugs": [
+        "airport-count-vs-physical-disability-rehabilitation",
         "childcare-friendly-prefecture-ranking",
         "elderly-population-care-capacity-gap",
         "nursing-care-shortage-2040",
@@ -3396,12 +3576,15 @@
         "nurse-income-prefecture-gap",
         "occupation-income-gap-pilot-vs-careworker",
         "pharmacist-income-prefecture-gap",
+        "physical-therapist-annual-income-prefecture-gap",
         "physical-therapist-income-prefecture-gap",
         "prefecture-salary-gap-career",
         "professor-income-prefecture-gap",
         "school-teacher-annual-income",
+        "school-teacher-annual-income-prefecture-gap",
         "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
+        "starting-salary-university-prefecture-gap",
         "system-consultant-income-prefecture-gap",
         "system-consultant-income-ranking",
         "taxi-driver-income-prefecture-gap",
@@ -3424,7 +3607,12 @@
       "surveyId": "wastewater-treatment-coverage-report",
       "rankingCount": 2,
       "themeKeys": [],
-      "blogSlugs": []
+      "blogSlugs": [
+        "sewage-treatment-coverage-rate-prefecture-gap",
+        "sewage-treatment-coverage-rate-vs-flush-toilet-population",
+        "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
+        "sewerage-coverage-rate-prefecture-gap"
+      ]
     },
     {
       "surveyId": "water-pollution-control-law-status",
@@ -3446,7 +3634,8 @@
       "themeKeys": [],
       "blogSlugs": [
         "sewerage-water-supply-gap",
-        "water-infrastructure-crisis"
+        "water-infrastructure-crisis",
+        "water-supply-population-prefecture-gap"
       ]
     },
     {
@@ -3455,6 +3644,7 @@
       "themeKeys": [],
       "blogSlugs": [
         "annual-precipitation-rainy-season-gap",
+        "annual-sunshine-duration-prefecture-gap",
         "annual-sunshine-duration-vs-auto-liability-insurance-amount",
         "extreme-heat-days-prefecture",
         "livable-prefecture-composite-ranking",
