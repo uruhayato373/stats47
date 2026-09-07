@@ -25,7 +25,7 @@ status: active
 | DATA-ESTAT-FETCH-01 | `DATA_INF` 系で取得失敗している25 metricのconfigを一次統計メタと照合し、修正または一時非公開にする | pending | 2026-08-24 | claude | data-quality |
 | DATA-MANUAL-RESTORE-01 | 手動抽出12 metricをprovenance付きで再取得し、values欠損を解消する | pending | 2026-08-24 | claude | data-quality |
 | SEARCH-GROWTH-CYCLE-01 | finalized 7日でKPI判定、rolling 28日で候補発見、週1〜2件採択、14/28/56日判定を4週連続で運用する | pending | 2026-08-31 | claude | gsc |
-| COVERAGE-LOOP-01 | W36（2026-09-04）の最新UI exportを取込済み（入力週齢1）。W32比で404 8,110→12,367、soft404 407→450、5xx 49→18、crawled-not-indexed 3,352→2,697。全3,147 URLを実測し、789件は現在200、5件の市区町村カテゴリsoft404は未デプロイの301で解消予定。デプロイ後に市区町村5→0と全体差分を追跡する | effect/pending | 2026-09-14 | claude | gsc |
+| COVERAGE-LOOP-01 | 2026-09-07にPR #939でデプロイ済み。W36（2026-09-04）の最新UI exportは404 12,367 / soft404 450 / 5xx 18 / crawled-not-indexed 2,697。全3,147 URLを実測し、旧市区町村カテゴリsoft404 5件は本番で全件301、親プロフィール200、未知カテゴリ410、sitemap掲載0件を確認した。次回exportで市区町村5→0と全体差分を判定する | effect/pending | 2026-09-14 | claude | gsc |
 | ADSENSE-PAUSE-01 | 2026-08-16オーナー判断。AdSenseのscript・Auto ads・手動枠・fallback・空枠を全停止するコードは実装済、未デプロイ。デプロイ後28日で減収、CWV、engagement、affiliate CTR、商品導線を比較し、再開可否を人が判断する | in-progress | 2026-09-14 | claude | adsense |
 | AFF-IMPRESSION-ROUTING-01 | AdSense停止中のranking/area空き位置へ既存の文脈一致バナーを配線。baselineは4,299 imp / 6,055 PV = 0.710 imp/PV。コード実装済・未デプロイ。デプロイ後14日で重複しない期間のimp/PV、placement別CTR、engagementを比較する | in-progress | 2026-08-31 | claude | affiliate |
 
