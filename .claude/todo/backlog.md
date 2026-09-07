@@ -21,6 +21,19 @@ updated: 2026-09-07
 
 ## 🔴 高 — 今月中に着手したい
 
+### [RSC-CACHE-BYPASS-01] RSC 応答が HTML と同じ共有キャッシュ設定で返る
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:curl -sD - -o /dev/null -H "RSC: 1" https://stats47.jp/ranking/total-population | grep -iE 'cache-tag|vary'] [起票:2026-09-07] [期日:2026-09-21]
+
+- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
+- **症状 (2026-09-07 本番実測)**: `/ranking/total-population` へ `RSC: 1` を付けたリクエストの応答が `Content-Type: text/x-component` を返しながら、`cache-tag: stats47-html,stats47-path:%2Franking%2Ftotal-population` と `cloudflare-cdn-cache-control: public, max-age=86400, stale-while-revalidate=604800` を持つ。`Vary` は `Accept-Encoding` のみで RSC ヘッダーを区別しない。HTML と RSC が同一キャッシュキーを共有する条件が成立している。
+- **切り分け済み**: (a) `RSC` / `Next-Router-State-Tree` / `Next-Router-Prefetch` / `x-nextjs-data` の 4 種すべてで bypass 分岐に入らない。(b) `RSC: 1` のときだけ `text/x-component` が返るのでヘッダー自体は Next.js 本体に届いている。(c) `apps/web/src/lib/cache-policy.ts` の設計は正しく (RSC は `private, no-store` + `RSC_VARY`)、`cache-policy.test.ts` と `middleware.test.ts` の 54 件は全通過。(d) 該当コードは 2026-08-15 `c46752ef2` で main に入っており未デプロイではない。→ **アプリのコードではなく `@opennextjs/cloudflare` 1.20.6 との統合層の問題**。
+- **未確認**: 実際にキャッシュ混入が起きたかは観測していない (RSC 応答に `CF-Cache-Status` が付かない)。本番でキャッシュ汚染を誘発する再現は実害が出るため行っていない。
+- **仮説 (未検証)**: `open-next.config.ts` の `withRegionalCache(r2IncrementalCache, { mode: "long-lived" })` が返すキャッシュ応答が HTML 用ヘッダーを引き継ぎ、middleware の判定結果を反映していない。
+- **次 (実行順)**: ① `wrangler dev` でローカル再現し、middleware に RSC ヘッダーが届いているかを実測で確定する。② 届いていなければ OpenNext の middleware 統合、届いていれば incremental cache のヘッダー引き継ぎを疑う。③ 修正後は `Vary` に RSC 系が入り `cache-tag` が付かないことを本番で実測する。
+- **停止条件**: 本番でキャッシュ汚染を誘発する再現テストをしない。デプロイはオーナーの明示承認まで行わない。原因未特定のまま `withRegionalCache` を外さない (ISR キャッシュが効かなくなり別の劣化を生む)。
+- **完了条件**: RSC リクエストの応答が `Cache-Control: private, no-store` と RSC を含む `Vary` を返し、`cache-tag: stats47-html` が付かないことを本番で実測する。HTML 応答は従来どおり `CF-Cache-Status: HIT` を維持する。
+
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-14]
