@@ -96,11 +96,11 @@ jobs:
               const keys = process.env.RANKING_KEYS.split(",");
               if (keys.length > 50 || new Set(keys).size !== keys.length) throw new Error("Expected 1-50 unique ranking keys");
               for (const key of keys) {
-                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error(`Invalid ranking key: ${key}`);
+                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error("Invalid ranking key: " + key);
                 const config = getMetricConfig(key);
-                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error(`Unknown/inactive prefecture ranking: ${key}`);
+                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error("Unknown/inactive prefecture ranking: " + key);
               }
-              console.log(`Validated explicit ranking scope: ${keys.length}`);
+              console.log("Validated explicit ranking scope: " + keys.length);
             '
             FLAGS+=(--key "$RANKING_KEYS")
           fi

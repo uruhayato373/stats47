@@ -89,11 +89,11 @@ jobs:
               const keys = process.env.RANKING_KEYS.split(",");
               if (keys.length > 50 || new Set(keys).size !== keys.length) throw new Error("Expected 1-50 unique ranking keys");
               for (const key of keys) {
-                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error(`Invalid ranking key: ${key}`);
+                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error("Invalid ranking key: " + key);
                 const config = getMetricConfig(key);
-                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error(`Unknown/inactive prefecture ranking: ${key}`);
+                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error("Unknown/inactive prefecture ranking: " + key);
               }
-              console.log(`Validated explicit ranking scope: ${keys.length}`);
+              console.log("Validated explicit ranking scope: " + keys.length);
             '
           fi
 
@@ -112,11 +112,11 @@ jobs:
               const keys = process.env.RANKING_KEYS.split(",");
               if (keys.length > 50 || new Set(keys).size !== keys.length) throw new Error("Expected 1-50 unique ranking image keys");
               for (const key of keys) {
-                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error(`Invalid ranking image key: ${key}`);
+                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error("Invalid ranking image key: " + key);
                 const config = getMetricConfig(key);
-                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error(`Unknown/inactive prefecture ranking: ${key}`);
+                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error("Unknown/inactive prefecture ranking: " + key);
               }
-              console.log(`Validated explicit ranking image scope: ${keys.length}`);
+              console.log("Validated explicit ranking image scope: " + keys.length);
             '
           fi
 
@@ -166,11 +166,11 @@ jobs:
               node -e '
                 const fs = require("node:fs");
                 for (const key of process.env.RANKING_KEYS.split(",")) {
-                  const dir = `.local/r2/app/ranking/${key}`;
+                  const dir = ".local/r2/app/ranking/" + key;
                   const files = fs.readdirSync(dir);
-                  if (files.length !== 1 || files[0] !== "values.json") throw new Error(`Unexpected staging: ${dir}`);
-                  const data = JSON.parse(fs.readFileSync(`${dir}/values.json`, "utf8"));
-                  if (data.rankingKey !== key || !data.partitions?.length || data.partitions.some(p => !p.values?.length)) throw new Error(`Empty/wrong snapshot: ${key}`);
+                  if (files.length !== 1 || files[0] !== "values.json") throw new Error("Unexpected staging: " + dir);
+                  const data = JSON.parse(fs.readFileSync(dir + "/values.json", "utf8"));
+                  if (data.rankingKey !== key || !data.partitions?.length || data.partitions.some(p => !p.values?.length)) throw new Error("Empty/wrong snapshot: " + key);
                 }
               '
               IFS=',' read -r -a KEYS <<< "$RANKING_KEYS"
