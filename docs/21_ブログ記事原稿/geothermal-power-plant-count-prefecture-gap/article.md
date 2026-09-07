@@ -6,7 +6,7 @@ slug: geothermal-power-plant-count-prefecture-gap
 subtitle: 買取開始済み設備の県別分布と容量帯
 category: energy
 publishedAt: 2026-09-02
-published: false
+published: true
 tags: [エネルギー, 再生可能エネルギー]
 ---
 

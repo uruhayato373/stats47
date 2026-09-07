@@ -6,7 +6,7 @@ slug: nuclear-power-plant-count-prefecture-gap
 subtitle: 既設炉の区分・基数・発電所数を分けて読む
 category: energy
 publishedAt: 2026-09-01
-published: false
+published: true
 tags: [エネルギー]
 ---
 
