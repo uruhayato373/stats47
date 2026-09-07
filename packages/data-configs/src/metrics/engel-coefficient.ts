@@ -10,12 +10,9 @@ export const engelCoefficient: MetricConfig = {
   unit: '％',
   category: 'economy',
   source: {
-    kind: 'calculated',
-    formula: {
-      op: 'divide',
-      numerator: 'food-expenditure-total',
-      denominator: 'consumption-expenditure-total',
-    },
+    kind: 'external',
+    fetcherKey: 'calculated',
+    config: {},
   },
   entities: ['prefecture'],
   years: {

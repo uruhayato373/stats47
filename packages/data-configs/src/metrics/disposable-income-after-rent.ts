@@ -8,12 +8,9 @@ export const disposableIncomeAfterRent: MetricConfig = {
   unit: '円',
   category: 'economy',
   source: {
-    kind: 'calculated',
-    formula: {
-      op: 'subtract',
-      left: 'disposable-income-worker-households',
-      right: 'private-rent-consumption-expenditure',
-    },
+    kind: 'external',
+    fetcherKey: 'calculated',
+    config: {},
   },
   entities: ['prefecture'],
   // 分子 disposable-income-worker-households を 1975-2024 へ広げたのに合わせる。
