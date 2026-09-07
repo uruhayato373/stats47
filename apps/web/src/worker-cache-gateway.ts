@@ -1,6 +1,6 @@
 import { WorkerEntrypoint, type WorkerExecutionContext } from "cloudflare:workers";
 
-import { shouldBypassPageCache } from "./lib/cache-policy";
+import { enforcePageCacheBypass, shouldBypassPageCache } from "./lib/cache-policy";
 import openNextWorker, {
   BucketCachePurge,
   DOQueueHandler,
@@ -28,6 +28,10 @@ export class CachedApp extends WorkerEntrypoint<CloudflareEnv> {
 /**
  * 認証・preview・RSC を Worker 実行前キャッシュから除外する gateway。
  * default entrypoint 自体は wrangler.toml で cache.enabled=false に固定する。
+ *
+ * ここは **flight ヘッダーが残っている唯一の層**。Next.js の middleware adapter は
+ * NextRequest を作る前に rsc / next-router-* を削除するため、middleware は RSC を
+ * 判定できず HTML 用の共有キャッシュ指示を付けてしまう。出口で必ず是正する。
  */
 export default {
   async fetch(
@@ -35,11 +39,10 @@ export default {
     env: CloudflareEnv,
     ctx: WorkerExecutionContext,
   ): Promise<Response> {
-    if (shouldBypassPageCache(request)) {
-      return openNextWorker.fetch(request, env, ctx);
-    }
+    const response = shouldBypassPageCache(request)
+      ? await openNextWorker.fetch(request, env, ctx)
+      : await (ctx.exports.CachedApp as CachedAppBinding).fetch(request);
 
-    const cachedApp = ctx.exports.CachedApp as CachedAppBinding;
-    return cachedApp.fetch(request);
+    return enforcePageCacheBypass(request, response);
   },
 };

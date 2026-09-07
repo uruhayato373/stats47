@@ -526,10 +526,53 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
 #### デプロイ後の停止条件・判定手順
 
 1. ~~通常HTMLを同一coloで2回取得し、2回目がWorkers Cache HITかつwarm TTFBがbefore 924msより改善。~~ 完了。
-2. ~~同じURLへRSC header付きで取得し、`text/x-component` + `private, no-store`。HTMLと混ざらない。~~ 完了。
+2. ~~同じURLへRSC header付きで取得し、`text/x-component` + `private, no-store`。HTMLと混ざらない。~~
+   **2026-09-07 に取り消し。下記「RSC分離の欠落」を参照。**
 3. blog exact URL公開とsnapshot全更新を各1回実走し、purge直後に新内容が返る。
 4. 2026-08-23以降、日次PSI 7点でLCP/TTFB回帰が無いことを確認し、数値目標を先に固定してから
    `effect/full|partial|none`を判定する。
+
+#### 2026-09-07 RSC分離の欠落（middlewareはflightヘッダーを観測できない）
+
+- **実測**: `curl -H 'RSC: 1' https://stats47.jp/` は `text/x-component` を返しながら
+  `Cache-Control: public, max-age=0, must-revalidate` + `Cache-Tag: stats47-html,stats47-path:%2F`
+  + `Cloudflare-CDN-Cache-Control: public, max-age=86400,...` を付けていた。`/` と
+  `/ranking/total-population` の両方で再現。
+- **原因**: `next/dist/server/web/adapter.js` が `NextRequest` を組み立てる直前に `FLIGHT_HEADERS`
+  (`rsc` / `next-router-state-tree` / `next-router-prefetch` / `next-hmr-refresh` /
+  `next-router-segment-prefetch`) を `requestHeaders.delete()` する。よって **middleware の
+  `req.headers` に RSC ヘッダーは存在しない**。`shouldBypassPageCache` は同じ関数でも、
+  raw request を持つ `worker-cache-gateway.ts` では true、middleware では false になる。
+  header 別 probe で切り分け済み: `authorization` / `__prerender_bypass` / **`next-url`** は
+  `private, no-store` になり、`rsc` / `next-router-*` / `x-nextjs-data` だけが素通りする
+  (`next-url` は `FLIGHT_HEADERS` に含まれないため middleware でも読める)。
+  `x-nextjs-data` は別機構で、`dist/server/lib/server-ipc/utils.js` の `INTERNAL_HEADERS`
+  (外部 request から honor しないヘッダー) に入っているため落ちる。
+- **regression ではない**: `cache-policy.ts` と `worker-cache-gateway.ts` は 2026-08-16 の
+  `cc67d5264` から byte 一致で、middleware の cache ブロックも quote 差のみ。next は 15.5.23 →
+  15.5.24 に上がっているが、**15.5.23 の adapter も同一の削除を行う** (tarball を取得して確認)。
+  つまり header だけの RSC request では最初から通っていなかった。
+  2026-08-16 の判定 2 が通ったのは、実ブラウザの prefetch が常に `Next-Url` を送るためと考えられる
+  (`create-initial-router-state.js` の `nextUrl` は `location.pathname` に fallback するので必ず truthy)。
+  記録された curl 再現コマンドには `Next-Url` が無く、実行結果と一致しない。
+- **実被害の範囲**: 本番 probe では RSC 応答に `CF-Cache-Status` が付かず、RSC を 2 回叩いた直後の
+  通常 HTML も `MISS` のままだった。Cloudflare は現状 `text/x-component` を保存していない。
+  実ブラウザは `Next-Url` を送るので no-store 側に落ちる。したがって**現時点で誤配信は観測されず、
+  Cloudflare 側の挙動に依存した潜在的な契約違反**として扱う。なぜ Cloudflare が RSC 応答を
+  cache lookup すらしないのかは未特定 (zone の Cache Rule を確認できていない)。
+- **修正**: 判定の権威を gateway へ移した。`enforcePageCacheBypass(request, response)` を
+  `cache-policy.ts` に追加し、`worker-cache-gateway.ts` の出口で必ず通す。判定は
+  ①raw header に flight ヘッダーがある ②応答の Content-Type が `text/x-component` の OR で、
+  該当すれば `private, no-store` + `Vary: RSC,...` に置換し `Cloudflare-CDN-Cache-Control` と
+  `Cache-Tag` を削除する。通常 HTML は同一オブジェクトのまま素通しでコスト 0。
+  middleware 側は Next.js の仕様上これ以上判定できないため変更しない。
+- **なぜ既存テストで落ちなかったか**: `cache-policy.test.ts` は合成 `Request` に `RSC: 1` を
+  直接載せていた。Next.js の削除は実 middleware 実行時にしか起きないので、**本番で起こり得ない
+  入力を検証していた**。新テストは `NEXT_FLIGHT_REQUEST_HEADERS` を使って削除を再現し、
+  middleware 単体では public になることを明示したうえで、gateway 通過後に no-store になることを固定する。
+- **機械検証**: `cache-policy.test.ts` + `workers-cache-contract.test.ts` + `middleware.test.ts`
+  で 98 件 pass、`apps/web` type-check 0 error。ゲート自体の感度も実測した —
+  `enforcePageCacheBypass` を no-op 化すると 7 件、gateway の呼び出しを外すと契約テスト 1 件が落ちる。
 
 #### 今回有効化しないCloudflare設定
 

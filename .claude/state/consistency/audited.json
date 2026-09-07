@@ -1,9 +1,7 @@
 {
-  "hash": "2e6cbed9326e781bae2849f671a30942b018d554afb118b07525b9ced6319dcf",
-  "audited_at": "2026-09-07T06:58:29",
+  "hash": "3e74e09c4602d07ee3836732f134ee582d50e238b9900e69fa1cd028e179dd37",
+  "audited_at": "2026-09-07T07:32:23",
   "files": [
-    ".claude/scripts/psi/__tests__/extract-dom-size.test.mjs",
-    ".claude/scripts/psi/__tests__/fixtures/psi-audits-insights-v13.json",
-    ".claude/scripts/psi/fetch-psi-audit.mjs"
+    ".claude/skills/analytics/performance-improvement/reference/improvement-log.md"
   ]
 }
