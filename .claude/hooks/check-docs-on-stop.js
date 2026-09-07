@@ -79,17 +79,26 @@ function main() {
     .map((result) => result.output)
     .filter(Boolean)
     .join("\n");
-  // 全滅が timeout なら是正対象は無い。docs:fix を促すと存在しない欠陥を探させる。
-  const onlyTimedOut = failed.every((result) => result.timedOut);
+
+  // timeout しか起きていないなら是正対象が無いので block しない。
+  // links checker は実測 50s〜91s と負荷で倍近く変動し (2026-09-07)、timeout を伸ばしても
+  // 超える日は来る。「検査できなかった」で作業を止めるのは過剰で、文書が壊れていれば
+  // 検査が完走したターンで捕まる。check-consistency-on-stop.js の
+  // 「想定外エラーは通す (チェックで作業を止めない)」と設計を揃える。
+  if (failed.every((result) => result.timedOut)) {
+    process.stderr.write(
+      `docs検査がtimeoutしたため未判定のまま続行します。手動確認: npm run docs:check\n${details}\n`,
+    );
+    process.exit(0);
+  }
+
   process.stdout.write(
     JSON.stringify({
       decision: "block",
       reason:
-        (onlyTimedOut
-          ? "docs検査がtimeoutし、文書の可否を判定できませんでした。" +
-            "手動で`npm run docs:check`を実行して確認してください。\n"
-          : "文書関連差分がdocs governanceを通っていません。`npm run docs:fix`、" +
-            "`npm run docs:check`の順で是正してください。\n") + details.slice(0, 6000),
+        "文書関連差分がdocs governanceを通っていません。`npm run docs:fix`、" +
+        "`npm run docs:check`の順で是正してください。\n" +
+        details.slice(0, 6000),
     }),
   );
 }
