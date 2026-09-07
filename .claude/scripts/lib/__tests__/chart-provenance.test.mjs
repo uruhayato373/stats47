@@ -130,6 +130,61 @@ describe('chart provenance manifest', () => {
     );
   });
 
+  it('テンプレート表記を実在キーとして誤認しない', () => {
+    const source = {
+      kind: 'scatter',
+      xKey: 'metric-a',
+      yKey: 'metric-b',
+      source:
+        'r2:app/stats/<item>-quantity/values.json + r2:app/stats/<item>-expenditure/values.json',
+      transform: 'R2 app/ranking/<key>/values.json から結合',
+    };
+
+    assert.deepEqual(inspectChartSourceManifest(source).rankingKeys, [
+      'metric-a',
+      'metric-b',
+    ]);
+    assert.deepEqual(extractChartSourceReferences(source).metricKeys, []);
+    assert.deepEqual(extractChartSourceReferences(source).r2ObjectPaths, []);
+  });
+
+  it('partition付きstats objectを正確なR2参照として抽出する', () => {
+    const references = extractChartSourceReferences({
+      kind: 'derived',
+      metricKey: 'population-migration-inter-prefecture',
+      source:
+        'r2:app/stats/population-migration-inter-prefecture/migration-flow-2025.json',
+    });
+
+    assert.deepEqual(references.metricKeys, [
+      'population-migration-inter-prefecture',
+    ]);
+    assert.deepEqual(references.r2ObjectPaths, [
+      'app/stats/population-migration-inter-prefecture/migration-flow-2025.json',
+    ]);
+  });
+
+  it('braceと年範囲のR2テンプレートを検査可能なobjectへ展開する', () => {
+    assert.deepEqual(
+      extractChartSourceReferences({
+        source: 'r2:app/stats/{metric-a,metric-b}/values.json',
+      }).r2ObjectPaths,
+      ['app/stats/metric-a/values.json', 'app/stats/metric-b/values.json']
+    );
+    assert.deepEqual(
+      extractChartSourceReferences({
+        year: '2025',
+        transform: '2023〜2025 年',
+        source: 'r2:app/stats/metric-a/partition-<year>.json',
+      }).r2ObjectPaths,
+      [
+        'app/stats/metric-a/partition-2023.json',
+        'app/stats/metric-a/partition-2024.json',
+        'app/stats/metric-a/partition-2025.json',
+      ]
+    );
+  });
+
   it('incomplete宣言を公開可能と判定しない', () => {
     const result = inspectChartSourceManifest({
       kind: 'ranking',
