@@ -304,8 +304,8 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
       {
         "rankingKey": "natto-consumption-expenditure",
         "title": "納豆消費支出額",
-        "readerLabel": "納豆消費支出額",
-        "hook": "納豆消費支出額が最も多い県は？"
+        "readerLabel": "納豆への支出",
+        "hook": "納豆への支出が最も多い県は？"
       },
       {
         "rankingKey": "beef-consumption-quantity",
@@ -316,8 +316,8 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
       {
         "rankingKey": "grilled-eel-consumption-expenditure",
         "title": "うなぎのかば焼き消費支出額",
-        "readerLabel": "うなぎのかば焼き消費支出額",
-        "hook": "うなぎのかば焼き消費支出額が最も多い県は？"
+        "readerLabel": "うなぎのかば焼きへの支出",
+        "hook": "うなぎのかば焼きへの支出が最も多い県は？"
       },
       {
         "rankingKey": "pork-consumption-quantity",
@@ -752,8 +752,8 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
   {
     "rankingKey": "natto-consumption-expenditure",
     "title": "納豆消費支出額",
-    "readerLabel": "納豆消費支出額",
-    "hook": "納豆消費支出額が最も多い県は？",
+    "readerLabel": "納豆への支出",
+    "hook": "納豆への支出が最も多い県は？",
     "categoryKey": "economy",
     "order": 1
   },

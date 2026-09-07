@@ -15,6 +15,7 @@ import {
   auditDerivedHooks,
   resolveRankingHook,
   resolveRankingReaderLabel,
+  summarizeReaderLabelCoverage,
 } from "../resolve-ranking-hook";
 
 describe("normalizeTitleForHook", () => {
@@ -162,8 +163,46 @@ describe("deriveRankingReaderLabel", () => {
     ).toBe("スマホ等利用者のうち趣味・娯楽をした人の割合");
   });
 
+  it("消費支出額を「〜への支出」へ変換する", () => {
+    expect(deriveRankingReaderLabel("牛肉消費支出額")).toBe("牛肉への支出");
+    expect(deriveRankingReaderLabel("宿泊料消費支出額")).toBe("宿泊料への支出");
+    expect(deriveRankingReaderLabel("遊園地入場・乗物代消費支出額")).toBe(
+      "遊園地入場・乗物代への支出",
+    );
+  });
+
+  it("品目名を持たない消費支出の語形は変換しない", () => {
+    // 「〜への支出」の主語が空になる。末尾一致しないので規則に乗らないことを固定する
+    expect(deriveRankingReaderLabel("消費支出")).toBe("消費支出");
+    expect(deriveRankingReaderLabel("消費支出総額")).toBe("消費支出総額");
+    expect(deriveRankingReaderLabel("その他の消費支出割合")).toBe(
+      "その他の消費支出割合",
+    );
+  });
+
   it("平易化規則の対象外は正準名を維持する", () => {
     expect(deriveRankingReaderLabel("空き家率")).toBe("空き家率");
+  });
+});
+
+describe("summarizeReaderLabelCoverage", () => {
+  it("例外・規則で平易化・正準名のままを数え分ける", () => {
+    const coverage = summarizeReaderLabelCoverage([
+      // 人が書いた例外
+      { rankingKey: "total-population", title: "総人口" },
+      // 規則で平易化される 2 家族
+      { rankingKey: "beef-consumption-expenditure", title: "牛肉消費支出額" },
+      { rankingKey: "diy-participation", title: "日曜大工の行動者率" },
+      // もともと平易なので変わらない
+      { rankingKey: "vacancy-rate", title: "空き家率" },
+    ]);
+
+    expect(coverage).toEqual({
+      total: 4,
+      overridden: 1,
+      derived: 2,
+      unchanged: 1,
+    });
   });
 });
 
@@ -324,6 +363,28 @@ describe("auditDerivedHooks", () => {
     ]);
     expect(finding.reasons).toContain("jargon");
   });
+
+  it("消費支出額の語形が規則から外れたら jargon として検出する", () => {
+    // 「〜消費支出額」で終わらないので平易化規則に乗らず、専門語が hook に残る。
+    // 規則が効いている限り実データからは出ないので、これは「規則の穴」を検出できる
+    // ことを固定するテスト (発火しないゲートは何も見ていないのと区別がつかない)。
+    const [finding] = auditDerivedHooks([
+      {
+        rankingKey: "expenditure-with-unexpected-word-order",
+        title: "消費支出額の推移",
+        unit: "円",
+      },
+    ]);
+    expect(finding.reasons).toContain("jargon");
+  });
+
+  it("規則で平易化された消費支出額は監査に出ない", () => {
+    expect(
+      auditDerivedHooks([
+        { rankingKey: "beef-consumption-expenditure", title: "牛肉消費支出額", unit: "円" },
+      ]),
+    ).toEqual([]);
+  });
 });
 
 describe("実データの代表例（規則の回帰防止）", () => {
@@ -338,7 +399,22 @@ describe("実データの代表例（規則の回帰防止）", () => {
     ["年齢別死亡率", "人口千対", "年齢別死亡率が最も高い県は？"],
     ["人工妊娠中絶実施率", "‰", "人工妊娠中絶実施率が最も高い県は？"],
     ["一般病院常勤医師数", "人", "一般病院常勤医師数が最も多い県は？"],
-    ["宿泊料消費支出額", "円", "宿泊料消費支出額が最も多い県は？"],
+    ["宿泊料消費支出額", "円", "宿泊料への支出が最も多い県は？"],
+    ["牛肉消費支出額", "円", "牛肉への支出が最も多い県は？"],
+    // 品目名に括弧を含むもの (意味のある注記なので落とさない)
+    [
+      "自動車保険料(自賠責)消費支出額",
+      "円",
+      "自動車保険料(自賠責)への支出が最も多い県は？",
+    ],
+    // 実測の最長ケース。hook 上限 28 文字に収まることを固定する
+    [
+      "自動車保険料以外の輸送機器保険料消費支出額",
+      "円",
+      "自動車保険料以外の輸送機器保険料への支出が最も多い県は？",
+    ],
+    // 品目名を持たない語形は変換しない (「消費支出」「消費支出総額」)
+    ["消費支出総額", "円", "消費支出総額が最も多い県は？"],
     ["製造品出荷額等", "万円", "製造品出荷額等が最も多い県は？"],
     ["月間平均実労働時間数", "時間", "月間平均実労働時間数が最も長い県は？"],
     ["救急搬送 病院収容所要時間", "分", "救急搬送病院収容所要時間が最も長い県は？"],

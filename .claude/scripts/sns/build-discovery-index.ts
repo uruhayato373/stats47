@@ -13,6 +13,10 @@
 import * as path from "path";
 import * as fs from "fs";
 import { listAllMetrics } from "../../../packages/data-configs/src/registry";
+import {
+  resolveRankingHook,
+  resolveRankingReaderLabel,
+} from "../../../packages/data-configs/src/prominence/resolve-ranking-hook";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const OUTPUT_PATH = path.join(
@@ -23,6 +27,13 @@ const OUTPUT_PATH = path.join(
 interface DiscoveryEntry {
   key: string;
   title: string;
+  /**
+   * 読者向けの平易な呼び方と問いかけ。正典は metric config の導出規則
+   * (`packages/data-configs/src/prominence`) で、ここでは解決するだけ。
+   * キャプション・画像・候補選定が下流でこれを使う。
+   */
+  readerLabel: string;
+  hook: string;
   subtitle: string | null;
   description: string | null;
   seoTitle: string | null;
@@ -39,6 +50,8 @@ function buildIndex(): DiscoveryEntry[] {
   return metrics.map((m) => ({
     key: m.key,
     title: m.title,
+    readerLabel: resolveRankingReaderLabel({ rankingKey: m.key, title: m.title }),
+    hook: resolveRankingHook({ rankingKey: m.key, title: m.title, unit: m.unit }),
     subtitle: m.subtitle ?? null,
     description: m.description ?? null,
     seoTitle: m.seoTitle ?? null,

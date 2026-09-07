@@ -15,7 +15,7 @@ import {
   type HookAdjective,
   type RankingHookInput,
 } from "./derive-ranking-hook";
-import { stripParentheticals } from "./normalize-title";
+import { normalizeTitleForHook, stripParentheticals } from "./normalize-title";
 import {
   RANKING_HOOK_OVERRIDES,
   RANKING_READER_LABEL_OVERRIDES,
@@ -27,8 +27,13 @@ export const HOOK_MAX_LENGTH = 28;
 
 /** hook に混ざると読みにくくなる記号。中黒 `・` は複合語で普通に使うので含めない。 */
 const UNREADABLE_SYMBOLS = /[／/【】[\]＜＞<>|｜＝=]/;
-/** 読者向けコピーに残してはいけない統計固有の専門語。 */
-const UNFRIENDLY_TERMS = /行動者率/;
+/**
+ * 読者向けコピーに残してはいけない統計固有の専門語。
+ *
+ * ここに載せた語は導出規則が平易化する前提で、監査に残るなら**規則の穴**を意味する
+ * (語形が変わった・新しい語順が入った)。語を足すときは規則も同じ変更で足す。
+ */
+const UNFRIENDLY_TERMS = /行動者率|消費支出額/;
 
 /**
  * 記号判定は「括弧の外にある記号」に限る。
@@ -55,6 +60,46 @@ export function resolveRankingReaderLabel(
 /** override を優先して hook を確定する。 */
 export function resolveRankingHook(input: RankingHookResolveInput): string {
   return RANKING_HOOK_OVERRIDES[input.rankingKey] ?? deriveRankingHook(input);
+}
+
+/** 平易化がどこまで効いているかの集計。findings と違い「欠陥の列挙」ではない。 */
+export interface ReaderLabelCoverage {
+  readonly total: number;
+  /** 人が書いた例外で確定したもの */
+  readonly overridden: number;
+  /** 家族規則で正準名から平易化されたもの */
+  readonly derived: number;
+  /** 正準名のまま (もともと平易なものと、規則が無いものの両方が入る) */
+  readonly unchanged: number;
+}
+
+/**
+ * readerLabel の平易化カバレッジを数える。
+ *
+ * `unchanged` が多いこと自体は欠陥ではない — 「総人口」「年間快晴日数」のように
+ * 正準名がそのまま読める指標が大半を占める。家族規則を足したときに実際に効いたかを
+ * 測るための指標で、`derived` が増える方向だけを見る。
+ */
+export function summarizeReaderLabelCoverage(
+  inputs: readonly Pick<RankingHookResolveInput, "rankingKey" | "title">[],
+): ReaderLabelCoverage {
+  let overridden = 0;
+  let derived = 0;
+  let unchanged = 0;
+
+  for (const input of inputs) {
+    if (RANKING_READER_LABEL_OVERRIDES[input.rankingKey] !== undefined) {
+      overridden += 1;
+      continue;
+    }
+    if (deriveRankingReaderLabel(input.title) === normalizeTitleForHook(input.title)) {
+      unchanged += 1;
+    } else {
+      derived += 1;
+    }
+  }
+
+  return { total: inputs.length, overridden, derived, unchanged };
 }
 
 export type HookAuditReason =

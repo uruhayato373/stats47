@@ -84,6 +84,10 @@ interface RankingItemPayload {
   item?: {
     title?: string;
     rankingName?: string;
+    /** 読者向けの平易な呼び方 (builder が導出規則から焼き込む) */
+    readerLabel?: string;
+    /** 問いかけコピー。同上 */
+    hook?: string;
     unit?: string;
     categoryKey?: string;
     latestYear?: { yearCode: string; yearName?: string };
@@ -153,6 +157,10 @@ async function main() {
 
   const unit = item?.unit || sorted[0]?.unit || "";
   const title = item?.title || item?.rankingName || rankingKey;
+  // 読者向けコピー。正典は metric config の導出規則で、builder が item.json へ焼き込む。
+  // **画像の見出しは正準名のまま**にし (出典と照合できる形)、キャプション本文で使う。
+  const readerLabel = item?.readerLabel || title;
+  const hook = item?.hook || "";
   const year = partition.yearCode;
   const source =
     item?.sourceConfig?.source?.name || item?.source?.name || "e-Stat（政府統計の総合窓口）";
@@ -208,6 +216,7 @@ async function main() {
     year,
     unit,
     label: title,
+    readerLabel,
     transform: "all47 (quick-still が上位5+下位5を抽出)",
     source: `r2:app/ranking/${KEY}/values.json`,
     upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
@@ -227,7 +236,11 @@ async function main() {
     .map((v, i) => `${sorted.length - N + i + 1}位 ${v.areaName} ${fmt(v.value)}${unit}`)
     .join("\n");
 
-  const caption = `${title}（${year}年）
+  // 見出しは問いかけ (hook) を優先する。SNS は 1 行目で止まるか決まるので、
+  // 「牛肉消費支出額」より「牛肉への支出が最も多い県は？」の方が読まれる。
+  // 年はどちらの形でも必ず添える (いつのデータか分からない投稿にしない)。
+  const captionHeadline = hook ? `${hook}（${year}年）` : `${readerLabel}（${year}年）`;
+  const caption = `${captionHeadline}
 
 【上位】
 ${topLines}
@@ -270,6 +283,8 @@ ${bottomLines}
     year,
     unit,
     title,
+    readerLabel,
+    hook,
     palette,
     outDir: path.relative(PROJECT_ROOT, BASE_DIR),
     files: {

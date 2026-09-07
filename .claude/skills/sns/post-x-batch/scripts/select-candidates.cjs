@@ -209,7 +209,7 @@ function main() {
     if (SENSITIVE_EXCLUDE_KEYS.has(e.key)) continue; // センシティブ指標は選定しない
     const last = lastByKey.get(e.key) || 0;
     if (last && now - last < 30 * DAY) continue; // 同 key 30日以内は除外
-    const text = `${e.title || ""} ${e.subtitle || ""} ${e.category || ""}`;
+    const text = `${e.title || ""} ${e.readerLabel || ""} ${e.subtitle || ""} ${e.category || ""}`;
     let score = 0;
     // 季節性
     if (themeWords.some((w) => text.includes(w))) score += 3;
@@ -252,6 +252,10 @@ function main() {
       domain: "ranking",
       category: e.category,
       title: e.title,
+      // 読者向けコピー。caption を書くときは title ではなくこちらを主語に使う
+      // (正典は metric config の導出規則。索引 build-discovery-index.ts が解決済み)
+      readerLabel: e.readerLabel || e.title,
+      hook: e.hook || "",
       unit: e.unit,
       template: chosen,
       imageKind: tmpl.imageKind,

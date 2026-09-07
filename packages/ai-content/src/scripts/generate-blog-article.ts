@@ -333,12 +333,18 @@ async function main() {
     }
     const payload = JSON.parse(fs.readFileSync(primaryJson, "utf8")) as {
       title: string;
+      /** 読者向けの平易な呼び方 (接地スクリプトが item.json から運ぶ)。旧データには無い */
+      readerLabel?: string;
+      /** 問いかけコピー。同上 */
+      hook?: string;
       unit: string;
       year: string;
       source: string;
       rankingKey: string;
       data: GroundedRow[];
     };
+    // 図の alt と本文の呼び方は読者向け、SVG 内の見出しと出典照合は正準名のまま。
+    const readerLabel = payload.readerLabel ?? payload.title;
     const verdict = gateTopicData(payload.rankingKey, payload.data, new Date());
     if (!verdict.ok) {
       log(`[reject] データ健全性ゲート: ${verdict.reasons.join(" / ")}`);
@@ -386,6 +392,8 @@ async function main() {
       secondMetric = {
         rankingKey: second.rankingKey,
         label: second.title,
+        readerLabel: (second.readerLabel as string | undefined) ?? second.title,
+        hook: second.hook as string | undefined,
         unit: second.unit,
         year: second.year,
         source: second.source,
@@ -415,6 +423,8 @@ async function main() {
     const metric: GroundTruthMetric = {
       rankingKey: payload.rankingKey,
       label: payload.title,
+      readerLabel,
+      hook: payload.hook,
       unit: payload.unit,
       year: payload.year,
       source: payload.source,
@@ -424,12 +434,13 @@ async function main() {
         value: r.value as number,
       })),
     };
+    const secondReaderLabel = secondMetric?.readerLabel ?? secondMetric?.label ?? "";
     const allowedLinks = await buildAllowedLinks(payload.rankingKey, payload.data);
     if (secondMetric) {
       // カードは 1 枚だけ (dup-ranking-link を避ける) なので、第2指標へはテキストリンクで導線を作る。
       allowedLinks.unshift({
         href: `/ranking/${secondMetric.rankingKey}`,
-        label: `${secondMetric.label}ランキング`,
+        label: `${secondMetric.readerLabel ?? secondMetric.label}ランキング`,
       });
     }
     const promptInput = {
@@ -440,30 +451,30 @@ async function main() {
       figures: scatterBase
         ? [
             {
-              caption: `${metric.label}のランキング (上位5+下位5)`,
-              markdown: `![${metric.label}の上位と下位](data/${slug}-prefecture-rankings.svg)`,
+              caption: `${readerLabel}のランキング (上位5+下位5)`,
+              markdown: `![${readerLabel}の上位と下位](data/${slug}-prefecture-rankings.svg)`,
             },
             {
-              caption: `${secondMetric?.label}のランキング (上位5+下位5)`,
-              markdown: `![${secondMetric?.label}の上位と下位](data/${secondMetric?.rankingKey}-prefecture-rankings.svg)`,
+              caption: `${secondReaderLabel}のランキング (上位5+下位5)`,
+              markdown: `![${secondReaderLabel}の上位と下位](data/${secondMetric?.rankingKey}-prefecture-rankings.svg)`,
             },
             {
               caption: "2 指標の散布図 (相関の可視化)",
-              markdown: `![${metric.label}と${secondMetric?.label}の関係](data/${scatterBase}.svg)`,
+              markdown: `![${readerLabel}と${secondReaderLabel}の関係](data/${scatterBase}.svg)`,
             },
           ]
         : [
             {
               caption: "ランキング (上位5+下位5)",
-              markdown: `![${payload.title}の上位と下位](data/${slug}-prefecture-rankings.svg)`,
+              markdown: `![${readerLabel}の上位と下位](data/${slug}-prefecture-rankings.svg)`,
             },
             {
               caption: "地理分布のタイルマップ",
-              markdown: `![${payload.title}の地理分布](data/${slug}-map.svg)`,
+              markdown: `![${readerLabel}の地理分布](data/${slug}-map.svg)`,
             },
           ],
       sourceLinkHref: `/ranking/${payload.rankingKey}`,
-      sourceLinkLabel: `${payload.title}ランキングをもっと見る`,
+      sourceLinkLabel: `${readerLabel}ランキングをもっと見る`,
       allowedLinks,
     };
 

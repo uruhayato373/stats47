@@ -81,7 +81,13 @@ function renderData() {
   for (const f of files) {
     const j = JSON.parse(fs.readFileSync(path.join(dataDir, f), "utf8"));
     const unit = j.unit ?? "";
-    out.push(`## ${j.title ?? f}`);
+    // 見出しは読者向けの平易な呼び方 (接地スクリプトが item.json から運ぶ)。
+    // 正式名は下に併記して、出典・定義に触れる箇所で使えるようにする。
+    const canonical = j.title ?? f;
+    out.push(`## ${j.readerLabel ?? canonical}`);
+    if (j.readerLabel && j.readerLabel !== canonical) {
+      out.push(`- 正式な統計名: ${canonical}`);
+    }
     if (j.source) out.push(`- 出典: ${j.source}`);
     if (j.year) out.push(`- 年: ${j.year}`);
     out.push(`- 単位: ${unit || "(なし)"}`);
