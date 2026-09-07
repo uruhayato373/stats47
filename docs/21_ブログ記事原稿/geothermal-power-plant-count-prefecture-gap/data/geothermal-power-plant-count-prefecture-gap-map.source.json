@@ -1,5 +1,7 @@
 {
   "kind": "manual",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "FITポータルの事業計画認定情報から制度下の地熱設備導入件数を独自集計した行政記録であり、統計調査の集計表ではない。",
   "sourceName": "再生可能エネルギー 事業計画認定情報 A表 都道府県別認定・導入量",
   "source": "https://www.fit-portal.go.jp/servlet/servlet.FileDownload?file=015hA000000lPEH",
   "url": "https://www.fit-portal.go.jp/servlet/servlet.FileDownload?file=015hA000000lPEH",

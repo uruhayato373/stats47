@@ -1,5 +1,7 @@
 {
   "kind": "manual",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "静岡県公表資料の既設原子炉一覧から発電所単位に独自集計した施設一覧データであり、統計調査の集計表ではない。",
   "sourceName": "静岡県の原子力発電（令和7年度版）",
   "source": "https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/030/334/zentair7.pdf",
   "publicationIndexUrl": "https://www.pref.shizuoka.jp/bosaikinkyu/genshiryoku/1040804/1030334.html",
