@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "ranking-items" },
+  "ref": "develop",
+  "reason": "readerLabel/hook の家族規則拡張 (消費支出額 502 件) を item.json へ焼き直す",
+  "requestedAt": "2026-09-07T06:48:37Z"
+}
