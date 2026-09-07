@@ -235,7 +235,7 @@ updated: 2026-09-07
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
 
 - **owner**: Codex (記事固有背景生成・公開確認)、blog-editor (必要な本文是正)
-- **再開点（2026-09-07夜）**: `codex/finish-content-remaining` で73件の解消を実行中。固有背景73件とOGP/cardを生成し292画像・73manifestの寸法/SHAは全件一致。空港比較2本の数値・定義を是正し、発電2本は非商用P03を使わず公式資料の独自集計へ置換、独立レビューPASS。図の同順位表示を修正し対象記事の順位整合を最終検査中。build・全workspace/scripts型・Lint・Web1317テスト・workflow48テストPASS。別タスクのPR #943を混在させず、後続でdevelop→R2公開→main→本番URL照合を完遂する。画像の存在を公開完了と数えない。
+- **再開点（2026-09-07夜・公開直前）**: `codex/finish-content-remaining` の73件は作成・独立レビュー・品質/factualゲートすべてPASS。固有背景73件、292画像・73manifestの寸法/SHA、同順位図の修正も確認済み。空港比較2本を是正し、発電2本は非商用P03を使わず公式資料の独自集計へ置換。build・全workspace/scripts型・Lint・Web1317テスト・packages2373テスト・workflow契約65テストPASS。公開読戻し対象は本文/図/元データ792ファイルと292画像。PR #943の本番コードを統合済みで、同タスクのR2同期完了後にdevelop→R2公開→main→本番URL照合を続行する。未公開を完了扱いしない。
 - **現状（2026-09-07）**: reconcileの対象は77→73件（未公開72・改稿差分1）。今回、既存の記事固有背景を使える4件の本文をR2へ反映し、公開本文との一致を確認した。件数は実行時に再取得し、古い91件を固定の完了目標にしない。
   未生成背景に加え、`natto-consumption-expenditure` は記事改稿で背景promptが古くなっており明示再生成が必要（run 34113017143）。全73件の背景以外の条件を再検証したわけではない。
 - **過去の停止実測（9/2）**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
@@ -558,6 +558,7 @@ updated: 2026-09-07
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: ranking-content-author
+- **公開直前checkpoint（2026-09-07夜）**: 旧キュー2154件の外にactiveな3件と新規公開9件のAI未存在を確認し、12件を独立critic・実数値監査PASSでoutboxへ作成。公開後にR2/TS/KNOWN/全量queueの2166キーを集合突合し、全件done・取得未確認0で判定する。`road-national-route-length` は隔離環境・元checkoutとも2023年47行がcanonicalと一致し、指定年・欠測/0・正典不在時の回帰テスト2件PASS（過去の原因は未確定）。日次CIは対象0件ならAPIを呼ばず正常終了、対象ありならbilling preflight失敗で停止することを確認済み。課金・Secret変更は行わない。
 - **次**:
   1. **全件生成は完了。残863件・manual-escalationを再生成しない**。最新の全量キューは active / done ともに
      2,154、needs-regen 0。生成再開時だけ R2 からキューを再構築して対象の有無を確認する。
