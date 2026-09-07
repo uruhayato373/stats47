@@ -6,9 +6,15 @@ import {
   isValidNoteKey,
 } from "@/features/products";
 
+import type { Metadata } from "next";
+
 interface PageProps {
   readonly params: Promise<{ slug: string; noteKey: string }>;
 }
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+};
 
 /**
  * note の外部リンクカード用 clean URL。

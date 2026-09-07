@@ -130,6 +130,12 @@ test("editor-only card metadata drift does not masquerade as an authored draft",
   assert.equal(canonicalizeNoteEditorBody(published), canonicalizeNoteEditorBody(draft));
 });
 
+test("adjacent identical links from the public API equal the editor's merged link", () => {
+  const published = '<p><a href="https://stats47.jp/blog/aomori-food-culture">青森県の食</a><a href="https://stats47.jp/blog/aomori-food-culture">卓</a></p>';
+  const editor = '<p><a href="https://stats47.jp/blog/aomori-food-culture">青森県の食卓</a></p>';
+  assert.equal(canonicalizeNoteEditorBody(published), canonicalizeNoteEditorBody(editor));
+});
+
 test("published link repair replaces every exact legacy URL", () => {
   const result = applyPublishedLinkRepairs(
     '<p><a href="https://stats47.jp/ranking/population">人口</a></p>',

@@ -24,7 +24,8 @@
     "ai:verify": "tsx src/scripts/verify-inputs.ts",
     "ai:preflight": "tsx src/scripts/preflight-gemini.ts",
     "ai:gen": "tsx src/scripts/generate-parallel.ts",
-    "ai:gen:dry": "tsx src/scripts/generate-parallel.ts --dry-run"
+    "ai:gen:dry": "tsx src/scripts/generate-parallel.ts --dry-run",
+    "ai:backfill": "tsx src/scripts/generate-deterministic-backfill.ts"
   },
   "dependencies": {
     "@stats47/area": "*",

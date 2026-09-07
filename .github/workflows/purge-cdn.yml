@@ -1,6 +1,7 @@
 name: 🧹 Purge CDN Cache
 
-# R2 カスタムドメイン (storage.stats47.jp) の Cloudflare CDN キャッシュをパージする。
+# R2 カスタムドメイン (storage.stats47.jp) の Cloudflare CDN と
+# stats47.jp の Workers Cache を同時にパージする。
 # ローカル .env.local の CLOUDFLARE_ZONE_ID 依存を廃した代替 (cloud / 新規 checkout から実行可能)。
 #
 # 使い方:
@@ -33,6 +34,7 @@ env:
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   purge:
@@ -62,4 +64,14 @@ jobs:
           else
             echo "Purging everything (storage.stats47.jp)"
             npx tsx packages/r2-storage/src/scripts/purge-cache.ts
+          fi
+
+      - name: 🧹 Purge Workers Cache
+        run: |
+          if [ -n "${{ github.event.inputs.prefix }}" ]; then
+            echo "Purging data-backed pages (stats47.jp)"
+            npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --data
+          else
+            echo "Purging all cached pages (stats47.jp)"
+            npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
           fi

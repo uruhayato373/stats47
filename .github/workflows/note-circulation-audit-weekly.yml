@@ -49,11 +49,13 @@ jobs:
           npm run note:navigation:products:check 2>&1 | tee /tmp/note-product-navigation.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
 
-          REPORT=$(ls -t .claude/state/metrics/note-circulation-audit-*.json 2>/dev/null | head -1)
+          REPORT=$(find .claude/state/metrics -maxdepth 1 -type f \
+            -name 'note-circulation-audit-*.json' -printf '%T@ %p\n' \
+            | sort -nr | head -1 | cut -d' ' -f2-)
           if [ -z "$REPORT" ]; then
             STATUS=1
           else
-            node - "$REPORT" <<'NODE'
+            node - "$REPORT" <<'NODE' || STATUS=1
           const fs = require('node:fs');
           const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
           const summary = report.summary || {};
@@ -75,7 +77,6 @@ jobs:
           }
           console.log(`note circulation gate passed: ${summary.total} articles`);
           NODE
-            [ "$?" -eq 0 ] || STATUS=1
           fi
           echo "exit_code=$STATUS" >> "$GITHUB_OUTPUT"
           exit 0
@@ -99,7 +100,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TITLE="[note Circulation Alert] 公開記事・導線・マガジン監査の異常"
-          REPORT=$(ls -t .claude/state/metrics/note-circulation-audit-*.json 2>/dev/null | head -1)
+          REPORT=$(find .claude/state/metrics -maxdepth 1 -type f \
+            -name 'note-circulation-audit-*.json' -printf '%T@ %p\n' \
+            | sort -nr | head -1 | cut -d' ' -f2-)
           {
             echo "## note 回遊性 週次監査"
             echo ""

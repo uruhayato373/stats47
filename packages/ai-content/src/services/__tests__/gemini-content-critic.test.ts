@@ -30,4 +30,18 @@ describe("Gemini content critic", () => {
     expect(prompt).toContain("修正文は作らず");
     expect(prompt).toContain("sample-key");
   });
+
+  it("候補JSONの算術照合とサイト固有の地方区分を外部事実と混同しない", () => {
+    const prompt = buildGeminiCriticPrompt("sample-key", {
+      prefectureCommentary: {
+        items: [
+          { areaName: "北海道", rank: 1, value: 20, commentary: "北海道の説明です。" },
+          { areaName: "青森県", rank: 2, value: 10, commentary: "青森県の説明です。" },
+        ],
+      },
+    });
+    expect(prompt).toContain("北海道・東北: 北海道、青森県");
+    expect(prompt).toContain("候補JSON内の値から算出した全国平均=15");
+    expect(prompt).toContain("外部ソースに対する正確性を保証しない");
+  });
 });

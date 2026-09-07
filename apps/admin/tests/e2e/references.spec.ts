@@ -1,4 +1,19 @@
+import path from 'node:path';
+
 import { expect, test } from '@playwright/test';
+
+import { loadContentOperations } from '../../lib/content-operations/load';
+
+const projectRoot = path.resolve(process.cwd(), '../..');
+
+function channelRowPattern(channel: 'theme' | 'youtube', label: string) {
+  const counts = loadContentOperations(projectRoot).references.summary.byChannel[
+    channel
+  ];
+  return new RegExp(
+    `${label} ${counts.integrated} ${counts.draft} ${counts.ready} ${counts.blocked} ${counts['not-applicable']}`
+  );
+}
 
 test.describe('/content/references 参考文献の活用・展開管理', () => {
   test('日本語の資料名と12展開先、企画・補強の全量サマリを表示する', async ({
@@ -14,10 +29,14 @@ test.describe('/content/references 参考文献の活用・展開管理', () => 
       page.getByRole('heading', { name: /展開先別の状況/ })
     ).toBeVisible();
     await expect(
-      page.getByRole('row', { name: /テーマページ 12 18 0 3 28/ })
+      page.getByRole('row', {
+        name: channelRowPattern('theme', 'テーマページ'),
+      })
     ).toBeVisible();
     await expect(
-      page.getByRole('row', { name: /YouTube動画 0 1 15 0 45/ })
+      page.getByRole('row', {
+        name: channelRowPattern('youtube', 'YouTube動画'),
+      })
     ).toBeVisible();
     await expect(
       page.getByRole('heading', { name: /企画・下書き/ })

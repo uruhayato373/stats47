@@ -1,6 +1,6 @@
 # Memory Index
 
-- [project_ai_content_headless_claude_batch.md](project_ai_content_headless_claude_batch.md) — ai-content 量産は headless claude -p (Sonnet、Opus は quarantine 例外)。≈$0.55/key。枠枯渇・リセット直後スロットリング・先行公開→再選定→rebase 競合・未コミット変更で rebase 停止、の罠
+- [project_ai_content_headless_claude_batch.md](project_ai_content_headless_claude_batch.md) — 個別ai-content改善はheadless author+critic。大規模構造補完は決定的backfill + 境界サンプル意味レビューへ分離。枠枯渇・スロットリング・rebase競合の罠
 - [feedback_geo_mesh_evidence_integrity.md](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
 - [feedback_geo_publication_boundary.md](feedback_geo_publication_boundary.md) — Geoは空間演算・全入力集合・途中artifactを必須化。保存則だけでは洪水107入力の欠落を検出できず、生成・R2・外部公開を別ゲートで検証する
 - [project_business_plan_adaptation_contract.md](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
@@ -28,7 +28,7 @@
 - [feedback_x_post_url_integrity.md](feedback_x_post_url_integrity.md) — Xのposted判定は予約時刻/旧台帳日付で推定せず、自アカウントのstatus URLと本文一致を証拠にする。中央store gateでURLなしpostedを拒否
 - [project_react_to_news_pipeline.md](project_react_to_news_pipeline.md) — じじネタ→即SNS瞬発パイプライン(2026-07-02)。find-metrics(発見索引・同義語レイヤー必須)+quick-still(指標key→SVG+PNG+caption)+/react-to-news。未決=tags恒久バックフィル/quick-still→publish-x連結
 - [feedback_generatestaticparams_r2_notfound_stuck.md](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParams付けると●SSG化→build時R2不可でnotFound永久固着(2026-06-22 ranking/areas/cities)。修正=撤去しrevalidateのみ→ƒ。正典nextjs-ssg-preservation.md
-- [project_ai_content_remediation_queue.md](project_ai_content_remediation_queue.md) — ranking ai-content(考察/地域別/FAQ/県別)DBレス生成+状態付き是正キュー。doneはR2 auditRow通過で再導出=R2真実源。build-ai-content-queue.mjs→ranking-content-author並列。正典02_機能バックログ
+- [project_ai_content_remediation_queue.md](project_ai_content_remediation_queue.md) — ranking ai-contentのDBレス生成+状態付き是正キュー。R2真実源でdone再導出。2026-09-07にactive 2,154件すべてdone、残863件は決定的backfill + 全件audit/R2 SHA照合
 - [project_blog_svg_lineage_enforcement.md](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」徹底(2026-06-20)。612枚中56%が元データ消失。再発防止=source.jsonセット出力+quality-gate blocker。復元=svg-lineage-queue.json。正典blog-data-schema.md §1.7
 - [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ空/home featured空→wrangler.toml CLOUDFLARE_WORKERS="true"を疑う。shouldSkipRemoteR2Readが空ok([])返し黙って失敗。テーマはR2 values.jsonのみ読む+force-dynamic必須(2026-06-20根治)

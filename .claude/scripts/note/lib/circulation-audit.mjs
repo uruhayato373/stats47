@@ -61,6 +61,37 @@ export function hasTrackingParameters(value) {
   }
 }
 
+/** noteカード用のclean pathが、記事別UTMへ契約どおり転送されるか。 */
+export function isExpectedNoteProductRedirect(value, health) {
+  try {
+    const source = new URL(value);
+    const match = source.pathname.match(/^\/products\/([a-z0-9-]+)\/from\/note\/(n[0-9a-f]+)\/?$/i);
+    if (
+      source.hostname !== "stats47.jp"
+      || source.protocol !== "https:"
+      || source.search
+      || source.hash
+      || !match
+      || health?.status !== 307
+      || health?.finalStatus !== 200
+    ) return false;
+    const destination = new URL(health.finalUrl);
+    const expected = new URLSearchParams({
+      utm_source: "note",
+      utm_medium: "referral",
+      utm_campaign: "note_product",
+      utm_content: match[2],
+    });
+    return destination.protocol === "https:"
+      && destination.hostname === "stats47.jp"
+      && destination.pathname === `/products/${match[1]}`
+      && !destination.hash
+      && destination.searchParams.toString() === expected.toString();
+  } catch {
+    return false;
+  }
+}
+
 export function extractNavigationUrls(body, embeddedContents = []) {
   const urls = [];
   const source = String(body || "");
@@ -177,7 +208,7 @@ export function buildArticleAudit({
     if (!health) continue;
     if (health.status === 404 || health.status === 410 || health.status >= 500 || health.error) {
       brokenSiteLinks.push({ url, ...health });
-    } else if (health.redirected) {
+    } else if (health.redirected && !isExpectedNoteProductRedirect(url, health)) {
       redirectedSiteLinks.push({ url, ...health });
     }
   }

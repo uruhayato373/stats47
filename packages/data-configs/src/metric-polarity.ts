@@ -55,6 +55,16 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "building-fire-damage-amount-per-building-fire": { polarity: "higher-is-worse", evidence: "火災の発生・死傷・損害は多いほど悪い (争いのない事象)" },
   // COD汚濁負荷量 / 化学的酸素要求量（COD）の汚濁負荷量
   "cod-pollution-load": { polarity: "higher-is-worse", evidence: "水質汚濁負荷は多いほど悪い (争いのない事象)" },
+  // 家計調査の大分類別支出額（二人以上世帯）
+  "clothing-footwear-expenditure-total": { polarity: "neutral", evidence: "支出額は消費の厚みと家計負担の両方に読め、世帯構成にも左右されるため大小を良し悪しと解釈しない" },
+  "culture-recreation-expenditure-total": { polarity: "neutral", evidence: "支出額は消費の厚みと家計負担の両方に読め、世帯構成にも左右されるため大小を良し悪しと解釈しない" },
+  "education-expenditure-total": { polarity: "neutral", evidence: "教育費は子どもの人数と学齢に強く依存し、機会の厚みと家計負担の両方に読めるため大小を良し悪しと解釈しない" },
+  "furniture-household-expenditure-total": { polarity: "neutral", evidence: "支出額は消費の厚みと家計負担の両方に読め、世帯構成にも左右されるため大小を良し悪しと解釈しない" },
+  "health-medical-expenditure-total": { polarity: "neutral", evidence: "保健医療支出は健康負担と医療アクセスの両方に読め、世帯の年齢構成にも左右されるため大小を良し悪しと解釈しない" },
+  "housing-expenditure-total": { polarity: "neutral", evidence: "住居支出は住環境の厚みと家計負担の両方に読め、持家率にも左右されるため大小を良し悪しと解釈しない" },
+  "other-living-expenditure-total": { polarity: "neutral", evidence: "支出額は消費の厚みと家計負担の両方に読め、世帯構成にも左右されるため大小を良し悪しと解釈しない" },
+  "transport-communication-expenditure-total": { polarity: "neutral", evidence: "交通・通信支出は移動や利用の活発さと家計負担の両方に読めるため大小を良し悪しと解釈しない" },
+  "utilities-expenditure-total": { polarity: "neutral", evidence: "光熱・水道支出は気候や住宅性能、価格に左右され、大小だけで家計の良し悪しを解釈できない" },
   // 刑法犯認知件数（人口千人当たり） / 人口1000人当たり
   "crime-rate-per-1k": { polarity: "higher-is-worse", evidence: "犯罪の認知件数は多いほど悪い (争いのない事象)" },
   // 刑法犯認知件数 / 総数（旧統計）
@@ -208,7 +218,7 @@ export const EXCLUDED_FROM_SEED: ReadonlyArray<{ key: string; reason: string }> 
  * 極性が付いた metric を**減らさない**ための床。metric を消して分母が減るのは正常なので
  * 件数そのものではなく「収載件数」で見る。増やすときだけこの定数を上げる。
  */
-export const MIN_POLARITY_COVERAGE = 58;
+export const MIN_POLARITY_COVERAGE = 67;
 
 /** 極性を引く。未収載なら null (既定に化けない)。 */
 export function findMetricPolarity(key: string): PolarityEntry | null {

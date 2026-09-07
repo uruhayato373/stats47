@@ -5,6 +5,7 @@ import {
   buildProfileAudit,
   extractCardUrls,
   extractNavigationUrls,
+  isExpectedNoteProductRedirect,
   normalizedSitePath,
   summarizeArticleAudits,
 } from "../lib/circulation-audit.mjs";
@@ -129,6 +130,35 @@ test("tracked URL card is warned while plain card remains valid", () => {
     eligibleRelatedNoteKeys: new Set(),
   });
   assert.ok(audit.warnings.some((warning) => warning.code === "tracked_url_used_as_card"));
+});
+
+test("clean note product path accepts only the exact article-attributed redirect", () => {
+  const source = "https://stats47.jp/products/kindle-k-s1-09/from/note/n66a286b5211b";
+  const valid = {
+    status: 307,
+    finalStatus: 200,
+    redirected: true,
+    finalUrl: "https://stats47.jp/products/kindle-k-s1-09?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n66a286b5211b",
+  };
+  assert.equal(isExpectedNoteProductRedirect(source, valid), true);
+  assert.equal(isExpectedNoteProductRedirect(source, {
+    ...valid,
+    finalUrl: valid.finalUrl.replace("n66a286b5211b", "nwrong"),
+  }), false);
+  const audit = buildArticleAudit({
+    article,
+    live: live({
+      body: `${live().body}<a href="${source}">product</a>`,
+    }),
+    magazinesByKey,
+    catalogNoteKeys: new Set(["nabc123", "ndef456"]),
+    eligibleRelatedNoteKeys: new Set(["ndef456"]),
+    linkHealthByUrl: new Map([
+      ["https://stats47.jp/ranking/population", { status: 200, finalStatus: 200, redirected: false }],
+      [source, valid],
+    ]),
+  });
+  assert.equal(audit.warnings.some((warning) => warning.code === "redirected_site_link"), false);
 });
 
 test("profile and aggregate summaries expose growth gaps", () => {
