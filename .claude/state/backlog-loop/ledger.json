@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07T18:29:36.487Z",
+  "updatedAt": "2026-09-07T20:13:49.284Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3828,6 +3828,62 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-07T18:29:36.487Z"
+    },
+    "COCONALA-HISTORICAL-SOURCE-01": {
+      "class": "needs-owner",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-07T20:13:44.503Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "WebFetch/WebSearch不可、かつ.local/coconala-products(git管理外)不在のため原典照合不能。探索範囲・不足資料・引継ぎ先はbacklog本文どおりestat-researcher/coconala-product-managerへ。行削除・stateへの断定書込みはせず未確認を確認済みにしない。",
+          "failReason": "needs-owner",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "PRODUCT-SALES-READINESS-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-07T20:13:49.284Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "複数冊Kindle全章再校閲・KDP/ココナラ実口座操作・Office実機確認・税務等owner工程を含む大規模制作物。この run のscopeでは着手せずdraft PR経由の委譲へ回す。",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
