@@ -28,7 +28,7 @@
       "unit": "人"
     },
     {
-      "rank": 3,
+      "rank": 2,
       "areaName": "福井県",
       "pref": "福井県",
       "areaCode": "18000",
@@ -46,7 +46,7 @@
       "unit": "人"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "areaName": "石川県",
       "pref": "石川県",
       "areaCode": "17000",
@@ -235,7 +235,7 @@
       "unit": "人"
     },
     {
-      "rank": 26,
+      "rank": 25,
       "areaName": "徳島県",
       "pref": "徳島県",
       "areaCode": "36000",
@@ -271,7 +271,7 @@
       "unit": "人"
     },
     {
-      "rank": 30,
+      "rank": 29,
       "areaName": "静岡県",
       "pref": "静岡県",
       "areaCode": "22000",

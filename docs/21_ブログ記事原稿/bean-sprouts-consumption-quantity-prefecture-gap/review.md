@@ -3,7 +3,7 @@ slug: bean-sprouts-consumption-quantity-prefecture-gap
 reviewer: blog-critic
 mode: expert
 verdict: PASS
-date: 2026-09-01
+date: 2026-09-07
 ---
 
 ## 評価サマリ
@@ -20,3 +20,23 @@ date: 2026-09-01
 ## 判定理由
 
 BLOCK級の指摘は0件。本文の全数値クレーム（順位・値・倍率換算）をdata/*.json と突合し完全一致を確認したため、factualなBLOCKは発生しない。markdown表・チャート未描画・記事内関連見出し・括弧内数値挿入・である調混在といった機械フロア相当の違反も見当たらない。図あたりのprose量、内部リンク数、source-linkの配置（図直下1枚のみ）も基準を満たす。したがって公開可否の観点ではPASSとするが、型D2の必須分析視点である「関連品目との対比」の弱さと、callout 3個中2個が定型文である点は読者価値を明確に下げており、次のbrushupサイクルでMAJOR指摘として優先的に解消することを推奨する。
+
+## 2026-09-07 delta審査（同順位・限定定義是正）
+
+判定: **PASS（今回の差分に限定）**。比較基準は `0ee9ed359`、審査対象は `article.md` の変更hunkと対応入力です。本文・データは変更していません。上記の過去レビューは記録として保持し、今回明記した点以外の指摘が現在も該当するか・解消済みかは再判定していません。未変更の主張を新たに全面PASSとしたものではありません。
+
+### 差分の確認と判定理由
+
+広島県・愛媛県はともに4,674gで同率44位。愛媛県だけを45位とする旧表記を除き、上位・下位の消費量比較や対象世帯の定義には変更がないことを確認しました。
+
+順位は正典 `packages/ranking/src/scripts/generate-ranking-values.ts` の降順競争順位（1, 2, 2, 4）に従い、`1 + 自分より値が大きい行数` で独立再計算しました。値・単位・対象の不変性と変更文の意味を照合し、今回新しいBLOCK/MAJORは認めません。今回の順位記載と上記の旧記録に差がある場合、このdeltaの確認結果を優先します。
+
+機械フロアは対象記事で再実行しPASS、blocker 0件、warning 1件でした。機械warning 1件はprose 2,370字（推奨2,400字未満）です。今回の変更は同順位表記のみで、段落削除や解釈の短縮はありません。文字数だけで全体品質を再判定せず、旧レビューの全体判定を保持します。
+
+### 再検証用SHA256
+
+- `article.md`: `7d093e9140518d538ca3aecbeef8b724ff9c9298bf189c4c623be454f4caee01`
+- `data/bean-sprouts-consumption-quantity-prefecture-gap-map.json`: `45a52103ce2ea0c56799c53c4492b10c7c7726e421e78530f0e6f2813f16ddc3`
+- `data/bean-sprouts-consumption-quantity-prefecture-gap-prefecture-rankings.json`: `eaf01603ba348e8d7e5265abde2bcfab948a9ea872fab1dc0009e554852f977f`
+
+SHAはこの時点の入力を識別するための記録です。時系列・地図を含む未変更入力のSHA掲載は、それらを全件再監査したという意味ではありません。

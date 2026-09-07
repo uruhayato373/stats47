@@ -55,7 +55,7 @@
       "unit": "人"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "areaName": "沖縄県",
       "pref": "沖縄県",
       "areaCode": "47000",
@@ -73,7 +73,7 @@
       "unit": "人"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "areaName": "山口県",
       "pref": "山口県",
       "areaCode": "35000",
@@ -145,7 +145,7 @@
       "unit": "人"
     },
     {
-      "rank": 16,
+      "rank": 15,
       "areaName": "和歌山県",
       "pref": "和歌山県",
       "areaCode": "30000",
@@ -154,7 +154,7 @@
       "unit": "人"
     },
     {
-      "rank": 17,
+      "rank": 15,
       "areaName": "高知県",
       "pref": "高知県",
       "areaCode": "39000",
@@ -172,7 +172,7 @@
       "unit": "人"
     },
     {
-      "rank": 19,
+      "rank": 18,
       "areaName": "群馬県",
       "pref": "群馬県",
       "areaCode": "10000",
@@ -181,7 +181,7 @@
       "unit": "人"
     },
     {
-      "rank": 20,
+      "rank": 18,
       "areaName": "徳島県",
       "pref": "徳島県",
       "areaCode": "36000",
@@ -235,7 +235,7 @@
       "unit": "人"
     },
     {
-      "rank": 26,
+      "rank": 25,
       "areaName": "福井県",
       "pref": "福井県",
       "areaCode": "18000",
@@ -379,7 +379,7 @@
       "unit": "人"
     },
     {
-      "rank": 42,
+      "rank": 41,
       "areaName": "熊本県",
       "pref": "熊本県",
       "areaCode": "43000",

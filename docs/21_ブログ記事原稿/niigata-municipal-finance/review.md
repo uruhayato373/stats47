@@ -3,7 +3,7 @@ slug: niigata-municipal-finance
 reviewer: blog-critic
 mode: delta
 verdict: PASS
-date: 2026-09-02
+date: 2026-09-07
 ---
 ## 評価サマリ
 前回 full レビューで指摘した blocker（粟島浦村0.09と中央値0.43の倍率誤り）は解消を確認しました。本文20行目付近および「まとめ」節の該当箇所とも「中央値の5分の1をわずかに上回る水準」に修正されており、0.09/0.43≒0.209は1/5(0.2)をわずかに上回るため記述と実データが一致します。修正範囲は当該2箇所の文言差し替えのみで、他の数値主張・図表参照・出典表記に変更は無く、新たな破綻も確認されませんでした。
@@ -13,3 +13,24 @@ date: 2026-09-02
 
 ## 判定理由
 前回 blocker として指摘した計算逆転（0.09は0.43の1/5に届かない、という誤り）は、書き手が「1/5をわずかに上回る水準」への訂正で解消しています。data/niigata-municipal-finance-finance-index-ranking.json の rank30(粟島浦村0.09)・rank15/16(妙高市・五泉市0.43)から中央値0.43を再計算すると0.09/0.43=0.2093となり、「1/5をわずかに上回る」という新しい記述と整合します。本文とまとめの両箇所で表現が統一されており、片方だけ直し忘れて矛盾が残るような再発破綻もありません。実質公債費比率ランキング・推移データも前回審査時点から変更されておらず、data/*.json との突合でも一致を確認しました。blocker が解消され新規の blocker/major も発生していないため、verdict は PASS とします。
+
+## 2026-09-07 delta審査（同順位・限定定義是正）
+
+判定: **PASS（今回の差分に限定）**。比較基準は `0ee9ed359`、審査対象は `article.md` の変更hunkと対応入力です。本文・データは変更していません。上記の過去レビューは記録として保持し、今回明記した点以外の指摘が現在も該当するか・解消済みかは再判定していません。未変更の主張を新たに全面PASSとしたものではありません。
+
+### 差分の確認と判定理由
+
+財政力指数は妙高市・五泉市・阿賀野市0.43が同率15位、実質公債費比率は糸魚川市・胎内市・阿賀町13.0%が同率3位です。比率の大小順と意味を逆転させず、同じ値の自治体を異なる順位とする記述を除いています。
+
+順位は正典 `packages/ranking/src/scripts/generate-ranking-values.ts` の降順競争順位（1, 2, 2, 4）に従い、`1 + 自分より値が大きい行数` で独立再計算しました。値・単位・対象の不変性と変更文の意味を照合し、今回新しいBLOCK/MAJORは認めません。今回の順位記載と上記の旧記録に差がある場合、このdeltaの確認結果を優先します。
+
+機械フロアは対象記事で再実行しPASS、blocker 0件、warning 0件でした。warningはありません。
+
+### 再検証用SHA256
+
+- `article.md`: `3c81dfaa46f42e29a911246d4dab8211acb2e4318b07490e47f223305cdbe7ba`
+- `data/niigata-municipal-finance-finance-debt-ranking.json`: `e58a1b0f6d398eaff66f1620acfc4a01d0ff45a3ad7b9eeae5888bbc95321b6b`
+- `data/niigata-municipal-finance-finance-index-ranking.json`: `a15fb83da8b8b828216882dafd545ca140addb6989d13c5132d9c3361262102e`
+- `data/niigata-municipal-finance-finance-timeseries.json`: `be36dac40bf1f41685b13dd5dbc9f6570ba07cf6593bc7e6ec1b82872b45140f`
+
+SHAはこの時点の入力を識別するための記録です。時系列・地図を含む未変更入力のSHA掲載は、それらを全件再監査したという意味ではありません。

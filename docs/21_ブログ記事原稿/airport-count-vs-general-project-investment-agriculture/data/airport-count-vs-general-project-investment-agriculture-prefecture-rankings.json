@@ -65,84 +65,84 @@
       "areaCode": "02000"
     },
     {
-      "rank": 9,
+      "rank": 8,
       "areaName": "秋田県",
       "pref": "秋田県",
       "value": 2,
       "areaCode": "05000"
     },
     {
-      "rank": 10,
+      "rank": 8,
       "areaName": "山形県",
       "pref": "山形県",
       "value": 2,
       "areaCode": "06000"
     },
     {
-      "rank": 11,
+      "rank": 8,
       "areaName": "新潟県",
       "pref": "新潟県",
       "value": 2,
       "areaCode": "15000"
     },
     {
-      "rank": 12,
+      "rank": 8,
       "areaName": "石川県",
       "pref": "石川県",
       "value": 2,
       "areaCode": "17000"
     },
     {
-      "rank": 13,
+      "rank": 8,
       "areaName": "愛知県",
       "pref": "愛知県",
       "value": 2,
       "areaCode": "23000"
     },
     {
-      "rank": 14,
+      "rank": 8,
       "areaName": "大阪府",
       "pref": "大阪府",
       "value": 2,
       "areaCode": "27000"
     },
     {
-      "rank": 15,
+      "rank": 8,
       "areaName": "鳥取県",
       "pref": "鳥取県",
       "value": 2,
       "areaCode": "31000"
     },
     {
-      "rank": 16,
+      "rank": 8,
       "areaName": "岡山県",
       "pref": "岡山県",
       "value": 2,
       "areaCode": "33000"
     },
     {
-      "rank": 17,
+      "rank": 8,
       "areaName": "広島県",
       "pref": "広島県",
       "value": 2,
       "areaCode": "34000"
     },
     {
-      "rank": 18,
+      "rank": 8,
       "areaName": "福岡県",
       "pref": "福岡県",
       "value": 2,
       "areaCode": "40000"
     },
     {
-      "rank": 19,
+      "rank": 8,
       "areaName": "熊本県",
       "pref": "熊本県",
       "value": 2,
       "areaCode": "43000"
     },
     {
-      "rank": 20,
+      "rank": 8,
       "areaName": "大分県",
       "pref": "大分県",
       "value": 2,
@@ -156,112 +156,112 @@
       "areaCode": "03000"
     },
     {
-      "rank": 22,
+      "rank": 21,
       "areaName": "宮城県",
       "pref": "宮城県",
       "value": 1,
       "areaCode": "04000"
     },
     {
-      "rank": 23,
+      "rank": 21,
       "areaName": "福島県",
       "pref": "福島県",
       "value": 1,
       "areaCode": "07000"
     },
     {
-      "rank": 24,
+      "rank": 21,
       "areaName": "茨城県",
       "pref": "茨城県",
       "value": 1,
       "areaCode": "08000"
     },
     {
-      "rank": 25,
+      "rank": 21,
       "areaName": "千葉県",
       "pref": "千葉県",
       "value": 1,
       "areaCode": "12000"
     },
     {
-      "rank": 26,
+      "rank": 21,
       "areaName": "富山県",
       "pref": "富山県",
       "value": 1,
       "areaCode": "16000"
     },
     {
-      "rank": 27,
+      "rank": 21,
       "areaName": "福井県",
       "pref": "福井県",
       "value": 1,
       "areaCode": "18000"
     },
     {
-      "rank": 28,
+      "rank": 21,
       "areaName": "長野県",
       "pref": "長野県",
       "value": 1,
       "areaCode": "20000"
     },
     {
-      "rank": 29,
+      "rank": 21,
       "areaName": "静岡県",
       "pref": "静岡県",
       "value": 1,
       "areaCode": "22000"
     },
     {
-      "rank": 30,
+      "rank": 21,
       "areaName": "和歌山県",
       "pref": "和歌山県",
       "value": 1,
       "areaCode": "30000"
     },
     {
-      "rank": 31,
+      "rank": 21,
       "areaName": "山口県",
       "pref": "山口県",
       "value": 1,
       "areaCode": "35000"
     },
     {
-      "rank": 32,
+      "rank": 21,
       "areaName": "徳島県",
       "pref": "徳島県",
       "value": 1,
       "areaCode": "36000"
     },
     {
-      "rank": 33,
+      "rank": 21,
       "areaName": "香川県",
       "pref": "香川県",
       "value": 1,
       "areaCode": "37000"
     },
     {
-      "rank": 34,
+      "rank": 21,
       "areaName": "愛媛県",
       "pref": "愛媛県",
       "value": 1,
       "areaCode": "38000"
     },
     {
-      "rank": 35,
+      "rank": 21,
       "areaName": "高知県",
       "pref": "高知県",
       "value": 1,
       "areaCode": "39000"
     },
     {
-      "rank": 36,
+      "rank": 21,
       "areaName": "佐賀県",
       "pref": "佐賀県",
       "value": 1,
       "areaCode": "41000"
     },
     {
-      "rank": 37,
+      "rank": 21,
       "areaName": "宮崎県",
       "pref": "宮崎県",
       "value": 1,
@@ -275,63 +275,63 @@
       "areaCode": "09000"
     },
     {
-      "rank": 39,
+      "rank": 38,
       "areaName": "群馬県",
       "pref": "群馬県",
       "value": 0,
       "areaCode": "10000"
     },
     {
-      "rank": 40,
+      "rank": 38,
       "areaName": "埼玉県",
       "pref": "埼玉県",
       "value": 0,
       "areaCode": "11000"
     },
     {
-      "rank": 41,
+      "rank": 38,
       "areaName": "神奈川県",
       "pref": "神奈川県",
       "value": 0,
       "areaCode": "14000"
     },
     {
-      "rank": 42,
+      "rank": 38,
       "areaName": "山梨県",
       "pref": "山梨県",
       "value": 0,
       "areaCode": "19000"
     },
     {
-      "rank": 43,
+      "rank": 38,
       "areaName": "岐阜県",
       "pref": "岐阜県",
       "value": 0,
       "areaCode": "21000"
     },
     {
-      "rank": 44,
+      "rank": 38,
       "areaName": "三重県",
       "pref": "三重県",
       "value": 0,
       "areaCode": "24000"
     },
     {
-      "rank": 45,
+      "rank": 38,
       "areaName": "滋賀県",
       "pref": "滋賀県",
       "value": 0,
       "areaCode": "25000"
     },
     {
-      "rank": 46,
+      "rank": 38,
       "areaName": "京都府",
       "pref": "京都府",
       "value": 0,
       "areaCode": "26000"
     },
     {
-      "rank": 47,
+      "rank": 38,
       "areaName": "奈良県",
       "pref": "奈良県",
       "value": 0,

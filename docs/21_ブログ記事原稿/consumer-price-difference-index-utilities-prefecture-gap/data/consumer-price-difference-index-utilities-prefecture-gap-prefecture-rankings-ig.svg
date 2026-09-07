@@ -43,7 +43,7 @@
   <rect x="132" y="488" width="669.431" height="16" rx="4" fill="#ef4444" opacity="0.85"/>
   <rect x="48" y="530" width="984" height="82" rx="10" fill="#ffffff"/>
   <circle cx="90" cy="568" r="22" fill="#dc2626"/>
-  <text x="90" y="576" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="576" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">3</text>
   <text x="132" y="576" font-size="30" font-weight="bold" fill="#1f2937">島根県</text>
   <text x="1008" y="576" text-anchor="end" font-size="28" font-weight="700" fill="#dc2626">111.2 （全国=100）</text>
   <rect x="132" y="582" width="669.431" height="16" rx="4" fill="#ef4444" opacity="0.85"/>

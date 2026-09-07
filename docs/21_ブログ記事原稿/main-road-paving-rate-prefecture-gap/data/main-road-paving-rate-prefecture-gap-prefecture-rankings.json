@@ -16,21 +16,21 @@
       "areaCode": "39000"
     },
     {
-      "rank": 2,
+      "rank": 1,
       "areaName": "佐賀県",
       "pref": "佐賀県",
       "value": 100,
       "areaCode": "41000"
     },
     {
-      "rank": 3,
+      "rank": 1,
       "areaName": "宮崎県",
       "pref": "宮崎県",
       "value": 100,
       "areaCode": "45000"
     },
     {
-      "rank": 4,
+      "rank": 1,
       "areaName": "鹿児島県",
       "pref": "鹿児島県",
       "value": 100,
@@ -44,7 +44,7 @@
       "areaCode": "12000"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "areaName": "香川県",
       "pref": "香川県",
       "value": 99.9,
@@ -58,7 +58,7 @@
       "areaCode": "27000"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "areaName": "熊本県",
       "pref": "熊本県",
       "value": 99.6,
@@ -79,7 +79,7 @@
       "areaCode": "23000"
     },
     {
-      "rank": 11,
+      "rank": 10,
       "areaName": "広島県",
       "pref": "広島県",
       "value": 99.4,
@@ -100,14 +100,14 @@
       "areaCode": "04000"
     },
     {
-      "rank": 14,
+      "rank": 13,
       "areaName": "埼玉県",
       "pref": "埼玉県",
       "value": 99.2,
       "areaCode": "11000"
     },
     {
-      "rank": 15,
+      "rank": 13,
       "areaName": "大分県",
       "pref": "大分県",
       "value": 99.2,
@@ -135,7 +135,7 @@
       "areaCode": "17000"
     },
     {
-      "rank": 19,
+      "rank": 18,
       "areaName": "山口県",
       "pref": "山口県",
       "value": 98.9,
@@ -177,7 +177,7 @@
       "areaCode": "22000"
     },
     {
-      "rank": 25,
+      "rank": 24,
       "areaName": "京都府",
       "pref": "京都府",
       "value": 98.3,
@@ -191,7 +191,7 @@
       "areaCode": "20000"
     },
     {
-      "rank": 27,
+      "rank": 26,
       "areaName": "滋賀県",
       "pref": "滋賀県",
       "value": 98.2,
@@ -205,14 +205,14 @@
       "areaCode": "05000"
     },
     {
-      "rank": 29,
+      "rank": 28,
       "areaName": "新潟県",
       "pref": "新潟県",
       "value": 97.6,
       "areaCode": "15000"
     },
     {
-      "rank": 30,
+      "rank": 28,
       "areaName": "奈良県",
       "pref": "奈良県",
       "value": 97.6,
@@ -240,7 +240,7 @@
       "areaCode": "07000"
     },
     {
-      "rank": 34,
+      "rank": 33,
       "areaName": "岐阜県",
       "pref": "岐阜県",
       "value": 97.2,
@@ -296,7 +296,7 @@
       "areaCode": "28000"
     },
     {
-      "rank": 42,
+      "rank": 41,
       "areaName": "愛媛県",
       "pref": "愛媛県",
       "value": 96.1,

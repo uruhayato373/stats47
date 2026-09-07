@@ -37,7 +37,7 @@
       "areaCode": "39000"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "areaName": "沖縄県",
       "pref": "沖縄県",
       "value": 105,
@@ -100,7 +100,7 @@
       "areaCode": "07000"
     },
     {
-      "rank": 14,
+      "rank": 13,
       "areaName": "兵庫県",
       "pref": "兵庫県",
       "value": 81,
@@ -128,7 +128,7 @@
       "areaCode": "05000"
     },
     {
-      "rank": 18,
+      "rank": 17,
       "areaName": "大阪府",
       "pref": "大阪府",
       "value": 75,
@@ -205,14 +205,14 @@
       "areaCode": "30000"
     },
     {
-      "rank": 29,
+      "rank": 28,
       "areaName": "岡山県",
       "pref": "岡山県",
       "value": 57,
       "areaCode": "33000"
     },
     {
-      "rank": 30,
+      "rank": 28,
       "areaName": "鹿児島県",
       "pref": "鹿児島県",
       "value": 57,
@@ -233,7 +233,7 @@
       "areaCode": "04000"
     },
     {
-      "rank": 33,
+      "rank": 32,
       "areaName": "石川県",
       "pref": "石川県",
       "value": 52,
@@ -254,7 +254,7 @@
       "areaCode": "06000"
     },
     {
-      "rank": 36,
+      "rank": 35,
       "areaName": "千葉県",
       "pref": "千葉県",
       "value": 47,
@@ -268,7 +268,7 @@
       "areaCode": "44000"
     },
     {
-      "rank": 38,
+      "rank": 37,
       "areaName": "宮崎県",
       "pref": "宮崎県",
       "value": 46,

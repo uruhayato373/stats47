@@ -3,7 +3,7 @@ slug: national-pension-full-exemption-rate-prefecture-gap
 reviewer: blog-critic
 mode: expert
 verdict: PASS
-date: 2026-09-01
+date: 2026-09-07
 ---
 
 ## 評価サマリ
@@ -16,3 +16,23 @@ date: 2026-09-01
 
 ## 判定理由
 BLOCK級の指摘（数値の誤り、地域への偏見的表現、curiosity gapの釣り、内部リンク不足、表の使用、である調の混在など）は見つからなかった。本文中の全ての順位・数値をrankingデータおよびmapデータと突合した結果、完全一致を確認した。major指摘のWARNING callout定型化は読者価値を大きく損なうものではなく、また記事の主要な分析価値（第1号/第2号被保険者の区分による構造的説明、地理的分布の考察、免除率の誤読防止の注意喚起）は十分に成立しているため、REVISEではなくPASSと判定する。ただしmajor指摘は次回改稿で解消することが望ましい。
+
+## 2026-09-07 delta審査（同順位・限定定義是正）
+
+判定: **PASS（今回の差分に限定）**。比較基準は `0ee9ed359`、審査対象は `article.md` の変更hunkと対応入力です。本文・データは変更していません。上記の過去レビューは記録として保持し、今回明記した点以外の指摘が現在も該当するか・解消済みかは再判定していません。未変更の主張を新たに全面PASSとしたものではありません。
+
+### 差分の確認と判定理由
+
+高知県・福岡県35%が同率3位、神奈川県・埼玉県19%が同率46位、東京都・愛知県・静岡県・千葉県20%が同率42位です。下位5件の図に選ばれた県と同じ値の千葉県が図外にも存在すると明記し、表示件数と順位を混同していません。最低値のまとめも2県併記へ整合しています。
+
+順位は正典 `packages/ranking/src/scripts/generate-ranking-values.ts` の降順競争順位（1, 2, 2, 4）に従い、`1 + 自分より値が大きい行数` で独立再計算しました。値・単位・対象の不変性と変更文の意味を照合し、今回新しいBLOCK/MAJORは認めません。今回の順位記載と上記の旧記録に差がある場合、このdeltaの確認結果を優先します。
+
+機械フロアは対象記事で再実行しPASS、blocker 0件、warning 0件でした。warningはありません。
+
+### 再検証用SHA256
+
+- `article.md`: `fe64113e92a326ca8dd93cf1168311028b6a64594c0e6b93d517a2ecbc0c347a`
+- `data/national-pension-full-exemption-rate-prefecture-gap-map.json`: `05f48908ede609ca37fc69a06468d96dec70e1748cf2005a6132a59eeb17991a`
+- `data/national-pension-full-exemption-rate-prefecture-gap-prefecture-rankings.json`: `ed20c92e5ea9f1556bedf4a6b0848cd7c4cdcd6747af6043d9d8c1cb4a15a49f`
+
+SHAはこの時点の入力を識別するための記録です。時系列・地図を含む未変更入力のSHA掲載は、それらを全件再監査したという意味ではありません。

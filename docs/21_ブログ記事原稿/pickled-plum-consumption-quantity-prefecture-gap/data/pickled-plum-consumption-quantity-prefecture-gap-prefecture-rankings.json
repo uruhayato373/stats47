@@ -121,7 +121,7 @@
       "areaCode": "11000"
     },
     {
-      "rank": 17,
+      "rank": 16,
       "areaName": "静岡県",
       "pref": "静岡県",
       "value": 751,
@@ -170,7 +170,7 @@
       "areaCode": "32000"
     },
     {
-      "rank": 24,
+      "rank": 23,
       "areaName": "山口県",
       "pref": "山口県",
       "value": 650,
@@ -198,7 +198,7 @@
       "areaCode": "04000"
     },
     {
-      "rank": 28,
+      "rank": 27,
       "areaName": "栃木県",
       "pref": "栃木県",
       "value": 605,
@@ -282,7 +282,7 @@
       "areaCode": "19000"
     },
     {
-      "rank": 40,
+      "rank": 39,
       "areaName": "兵庫県",
       "pref": "兵庫県",
       "value": 489,

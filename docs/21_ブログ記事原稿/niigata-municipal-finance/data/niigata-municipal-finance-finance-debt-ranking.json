@@ -34,7 +34,7 @@
       "unit": "％"
     },
     {
-      "rank": 4,
+      "rank": 3,
       "areaName": "胎内市",
       "pref": "胎内市",
       "value": 13,
@@ -42,7 +42,7 @@
       "unit": "％"
     },
     {
-      "rank": 5,
+      "rank": 3,
       "areaName": "阿賀町",
       "pref": "阿賀町",
       "value": 13,
@@ -58,7 +58,7 @@
       "unit": "％"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "areaName": "弥彦村",
       "pref": "弥彦村",
       "value": 12.7,
@@ -130,7 +130,7 @@
       "unit": "％"
     },
     {
-      "rank": 16,
+      "rank": 15,
       "areaName": "聖籠町",
       "pref": "聖籠町",
       "value": 10.5,
@@ -162,7 +162,7 @@
       "unit": "％"
     },
     {
-      "rank": 20,
+      "rank": 19,
       "areaName": "魚沼市",
       "pref": "魚沼市",
       "value": 9.6,
@@ -218,7 +218,7 @@
       "unit": "％"
     },
     {
-      "rank": 27,
+      "rank": 26,
       "areaName": "田上町",
       "pref": "田上町",
       "value": 7.7,
