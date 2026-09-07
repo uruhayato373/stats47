@@ -1,3 +1,11 @@
+---
+paths:
+  - "apps/web/src/{app/geo,features/geo-analysis}/**"
+  - "apps/remotion/src/features/geo-x/**"
+  - "packages/gis/src/geo-analysis/**"
+  - ".claude/{skills/gis,state/geo-scope,skills/sns/operate-geo-content}/**"
+  - ".claude/agents/geo-analysis-curator.md"
+---
 # Geo分析コンテンツ標準
 
 `/geo/*`、GeoAI、GIS掛け合わせ、空間分析を名乗るサイト・X・noteコンテンツの共通契約。

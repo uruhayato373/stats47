@@ -1,3 +1,10 @@
+---
+paths:
+  - "docs/**"
+  - ".claude/config/docs-governance.json"
+  - ".claude/{skills/management,todo}/**"
+  - ".claude/agents/{improvement-triage,todo-curator,gsc-analyst,theme-portfolio-manager,open-data-curator}.md"
+---
 # ドキュメント作成・配置・整理ガバナンス
 
 stats47の文書を作成・更新・統合・削除するときの唯一の判断規則。Claude CodeとCodexは
@@ -196,6 +203,21 @@ updated: 2026-MM-DD
 
 機械契約の変更は`.claude/config/docs-governance.json`、checker、テスト、本規則を同じ差分で更新する。
 CIのwarningはPRを止めないが、週次検査では`--fail-on-warn`により通知対象とする。
+
+## rules の読み込み条件 (常時読み込み量の上限・2026-09-08)
+
+Claude Code は `CLAUDE.md` と、`.claude/rules/*.md` のうち frontmatter `paths:` を持たないものを
+起動時に無条件で context へ載せる (custom subagent にも継承)。2026-09-08 の実測では 41 rule 10,290 行が
+毎セッション読まれ、haiku subagent が「Prompt too long (347K > 200K)」で起動できなかった。
+
+- **常時 (paths 無し) は `agent-output-contract.md` と `evidence-based-judgment.md` の 2 本のみ**。合計 (CLAUDE.md 込み) の
+  上限は `docs-governance.json` の `alwaysLoadedInstructions.maxTotalLines` (600)。常時への追加はオーナー判断
+- **新規 rule は必ず `paths:` を付ける**。glob は「ドメインのコード + `.claude/scripts/<domain>` + `.claude/skills/<domain>/**` +
+  `.claude/agents/<owner>.md` + docs 原稿ディレクトリ」を覆う。skill 経由の作業は SKILL.md を Read するので skills を必ず含める
+- paths 付き rule は**一致ファイルを Read したときだけ**載る。Write / Bash 直打ち / MCP では発火しないため、
+  git push・R2 push・SNS 投稿は `.claude/hooks/pre-bash-safety.js` の advisory が要約を返して補償する
+- 機械契約: DG070 (合計・入口の行数上限) / DG071 (paths の glob 固定部分が実在) / DG072 (CLAUDE.md ⇄ rules の参照整合)。
+  `npm run docs:check` (pre-commit / PR / Stop hook) で検査する
 
 ## PR と docs/ の連携
 

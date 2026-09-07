@@ -1,3 +1,11 @@
+---
+paths:
+  - ".claude/scripts/backlog-loop/**"
+  - ".claude/{state/backlog-loop,skills/management/process-backlog}/**"
+  - ".claude/config/backlog-routing-policy.json"
+  - ".github/workflows/backlog-*.yml"
+  - ".claude/agents/{backlog-processor,backlog-solver-hard,todo-curator}.md"
+---
 # バックログ自動処理ループ (backlog-loop) 標準
 
 `.claude/todo/` のバックログを自動で消化し、完了エントリを削除し、失敗から学習して

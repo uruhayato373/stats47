@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/{scripts/sns,scripts/instagram,skills/sns,state/sns}/**"
+  - "apps/{remotion,admin}/**"
+  - "docs/10_SNS戦略/**"
+  - ".claude/agents/{x-strategist,instagram-strategist,sns-*,trend-scout}.md"
+---
 # SNS コンテンツ標準 (チャネル戦略 + 投稿雛形 + 頻度リミットの正典)
 
 stats47 の SNS 運用 (X / Instagram / YouTube pilot / note) における**実行規約の単一ソース (SSOT)**。

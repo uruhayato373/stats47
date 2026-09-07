@@ -1,3 +1,10 @@
+---
+paths:
+  - "docs/21_ブログ記事原稿/**"
+  - ".claude/{scripts/blog,skills/blog,state/blog,workflows}/**"
+  - "apps/web/src/features/blog/**"
+  - ".claude/agents/{article-writer,blog-critic,chart-author}.md"
+---
 # Blog data schema 規約 + wave 命名規則 + skill ↔ docs ↔ memory map
 
 Blog エコシステム (article 生成 / brushup / factual-check / 効果計測) の **対応関係の真実源**。

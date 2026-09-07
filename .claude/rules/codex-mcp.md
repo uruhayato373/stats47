@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/skills/blog/generate-blog-images/**"
+  - "apps/web/scripts/{lib/blog-codex-*,data/blog-codex-*}.ts"
+  - ".mcp.json"
+  - ".claude/agents/code-reviewer.md"
+---
 # codex MCP 利用規約 (Claude Code から Codex を呼ぶとき)
 
 Claude Code から **MCP 経由で OpenAI Codex を呼ぶ**ときの実行規約 (SSOT)。

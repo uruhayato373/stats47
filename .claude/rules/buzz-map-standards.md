@@ -1,3 +1,10 @@
+---
+paths:
+  - "apps/remotion/src/features/buzz-map/**"
+  - "apps/admin/app/buzz-map/**"
+  - ".claude/{scripts/sns,skills/sns/buzz-map}/**"
+  - ".claude/agents/{sns-renderer,x-strategist,instagram-strategist,gis-curator}.md"
+---
 # バズ地図カード標準 (buzz-map の型・トークン・テーマカタログの正典)
 
 まちの計量舎（@machi_measure）系「日本地図×統計」の SNS カード/動画を stats47 ブランドで量産するための

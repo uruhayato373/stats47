@@ -1,3 +1,11 @@
+---
+paths:
+  - ".claude/todo/**"
+  - ".claude/scripts/lib/backlog-lib.cjs"
+  - ".claude/scripts/backlog-loop/**"
+  - "apps/admin/app/todo/**"
+  - ".claude/agents/{todo-curator,backlog-processor,improvement-triage}.md"
+---
 # TODO 管理標準 (v3-unified — doboku-note と共通のカード構文・語彙の正典)
 
 `.claude/todo/` の層構成・カード構文・タグ語彙の**単一ソース (SSOT)**。

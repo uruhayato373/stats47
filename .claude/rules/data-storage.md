@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/{skills,state,todo,config}/**"
+  - "docs/**"
+  - "apps/web/scripts/export-*.ts"
+  - ".claude/agents/**"
+---
 # 記録先の統一原則 (git TS + R2 vs `.claude/` vs `docs/`)
 
 > **⚠️ 2026-05-29 更新: データ層は「完全DBレス」が正典 → [`docs/01_技術設計/02_データアーキテクチャ.md`](../../docs/01_技術設計/02_データアーキテクチャ.md)。**

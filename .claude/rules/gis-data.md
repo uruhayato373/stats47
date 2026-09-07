@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/gis/**"
+  - ".claude/skills/{db/fetch-mlit-ksj,gis}/**"
+  - "apps/web/src/features/{geo-analysis,map-visualization}/**"
+  - ".claude/agents/{gis-curator,gis-pipeline-runner,geo-analysis-curator,open-data-curator}.md"
+---
 # GIS データ規約 (国土数値情報 KSJ / 完全DBレス)
 
 国土交通省「国土数値情報 (KSJ)」GIS データの取り込み・管理・配信の**単一ソース (SSOT)**。

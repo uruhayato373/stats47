@@ -1,3 +1,10 @@
+---
+paths:
+  - "apps/web/src/lib/analytics/**"
+  - ".claude/scripts/metrics/**"
+  - ".claude/skills/analytics/{ga4-improvement,fetch-ga4-data}/**"
+  - ".claude/agents/{ga4-analyst,site-ux-manager,geo-analysis-curator}.md"
+---
 # GA4 計装イベント標準 (analytics-event-standards)
 
 サイトの GA4 カスタムイベントと、その「GA4 カスタムディメンション登録状況」を管理する**単一ソース (SSOT) 台帳**。

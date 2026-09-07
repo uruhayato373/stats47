@@ -1,3 +1,10 @@
+---
+paths:
+  - "apps/**/*.{ts,tsx}"
+  - "packages/**/*.{ts,tsx}"
+  - ".claude/scripts/**/*.{ts,mjs,cjs}"
+  - ".claude/agents/{tdd-guide,code-reviewer,backlog-solver-hard,ui-consistency-reviewer}.md"
+---
 # コーディング標準
 
 CLAUDE.md の既存規約（UI コンポーネント規約、e-Stat API データ取得規約、melta-ui デザインシステム）を補完するコーディング標準。

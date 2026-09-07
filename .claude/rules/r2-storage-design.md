@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/{r2-storage,stats-r2}/**"
+  - "apps/web/scripts/export-*.ts"
+  - ".claude/skills/db/{push-r2,pull-r2,sync-snapshots,page-data-batch,r2-du}/**"
+  - ".claude/agents/{r2-publisher,snapshot-exporter,data-ingester,ranking-publisher,gis-pipeline-runner}.md"
+---
 # R2 ストレージ設計ルール
 
 ## 設計原則

@@ -466,6 +466,15 @@ updated: 2026-09-08
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [RULES-DEMOTE-01] 常時読み込みから外した rule の移設と reference 化
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:npm run docs:check] [起票:2026-09-08]
+
+- **背景**: 2026-09-08 に 41 rule を `paths:` 条件付き読み込みへ切り替えた (常時 10,461 行 → 584 行、DG070-072 で固定)。本文は不変で、内容の置き場が rule として不適切なものが 3 つ残る。
+- **次**: `blog-remediation-loop.md` → `.claude/skills/blog/brushup-blog/reference/`、`data-sqlite-ssot.md` → `packages/database/README.md` (冒頭で doc 12 が優先と宣言済み)、`evidence-based-judgment.md` の「各種 API での最低検証コマンド」節 (~110 行) → 対応 skill の reference。参照元 (agents / skills / rules) を rg で全置換し、`check-agent-skill-consistency.cjs` を通す。
+- **併記判断**: paths rule は subagent 自身の Read でしか載らない。owner agent が担当 rule を明示 Read しているかを同 checker で検査するかを決める。
+- **完了条件**: 3 ファイルの移設先が実在し、CLAUDE.md の表と DG072 が更新後の集合で green。
+
 ### [COCONALA-MEASUREMENT-CONTRACT-01] 14商品の公開後計測を整え改善台帳へ引き渡す
 
 タグ: [インフラ・計測] [種類:改善] [実行:別環境] [起票:2026-09-06] [期日:2026-09-13]

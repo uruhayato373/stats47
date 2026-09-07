@@ -160,6 +160,143 @@ function escapeTable(value) {
   return String(value || "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ").trim();
 }
 
+/**
+ * 常時読み込みされる指示量の上限 (DG070-072)。
+ *
+ * Claude Code は CLAUDE.md と `.claude/rules/*.md` のうち frontmatter `paths:` を持たないものを
+ * 起動時に無条件で context へ載せる (custom subagent にも継承される)。2026-09-08 の実測で 41 rule
+ * 10,290 行が毎セッション読まれ、haiku subagent が「Prompt too long」で起動できなかった。
+ * paths 付き rule は一致ファイルを Read したときだけ載るので、常時分を上限で固定し、
+ * paths の glob が実在しないディレクトリを指す (= 永久に読まれない) 事故も同時に止める。
+ */
+function expandBraces(pattern) {
+  const match = pattern.match(/\{([^{}]*)\}/);
+  if (!match) return [pattern];
+  return match[1]
+    .split(",")
+    .flatMap((alternative) => expandBraces(pattern.replace(match[0], alternative)));
+}
+
+function fixedGlobPrefix(pattern) {
+  const segments = [];
+  for (const segment of pattern.split("/")) {
+    if (/[*?[]/.test(segment)) break;
+    segments.push(segment);
+  }
+  return segments.join("/");
+}
+
+function parsePathsFrontmatter(raw) {
+  // frontmatter 本文から `paths:` の YAML list (- "glob") だけを読む。値は文字列配列に限る
+  const lines = raw.split(/\r?\n/);
+  const start = lines.findIndex((line) => /^paths:\s*$/.test(line));
+  if (start < 0) {
+    const inline = lines.find((line) => /^paths:\s*\S/.test(line));
+    return inline ? { present: true, valid: false, globs: [] } : { present: false, valid: true, globs: [] };
+  }
+  const globs = [];
+  for (const line of lines.slice(start + 1)) {
+    if (/^[A-Za-z]/.test(line)) break;
+    const item = line.match(/^\s+-\s*"?([^"]+?)"?\s*$/);
+    if (!item) {
+      if (line.trim() === "") continue;
+      return { present: true, valid: false, globs };
+    }
+    globs.push(item[1]);
+  }
+  return { present: true, valid: globs.length > 0, globs };
+}
+
+function checkAlwaysLoadedInstructions(root, config, add) {
+  const policy = config.alwaysLoadedInstructions;
+  if (!policy) return;
+  const entryFile = policy.entryFile;
+  const entryText = readText(path.join(root, entryFile));
+  // `wc -l` と同じ数え方 (末尾改行の後ろを 1 行に数えない)。上限値を wc で確かめられるようにする
+  const countLines = (text) => {
+    if (!text) return 0;
+    const lines = text.split(/\r?\n/);
+    if (lines[lines.length - 1] === "") lines.pop();
+    return lines.length;
+  };
+  const entryLines = countLines(entryText);
+  if (entryLines > policy.maxEntryLines) {
+    add(
+      "error",
+      "DG070",
+      entryFile,
+      `常時読み込みの入口が ${entryLines} 行で上限 ${policy.maxEntryLines} 行を超えている。詳細は paths: 付き rule か skill へ分離する`,
+    );
+  }
+
+  const rulesDir = path.join(root, policy.rulesDir);
+  let ruleFiles = [];
+  try {
+    ruleFiles = walk(rulesDir)
+      .filter((file) => file.endsWith(".md"))
+      .sort((a, b) => a.localeCompare(b));
+  } catch {
+    ruleFiles = [];
+  }
+
+  let alwaysLines = entryLines;
+  const alwaysRules = [];
+  const ruleNames = new Set();
+  for (const file of ruleFiles) {
+    const rel = relative(root, file);
+    ruleNames.add(path.basename(file));
+    const text = readText(file);
+    const frontmatter = parseFrontmatter(text);
+    const paths = parsePathsFrontmatter(frontmatter.exists ? frontmatter.raw : "");
+    if (!paths.present) {
+      alwaysLines += countLines(text);
+      alwaysRules.push(rel);
+      continue;
+    }
+    if (!paths.valid) {
+      add("error", "DG071", rel, "frontmatter の paths: は `- \"glob\"` の文字列 list で書く (空・inline は不可)");
+      continue;
+    }
+    for (const glob of paths.globs) {
+      for (const expanded of expandBraces(glob)) {
+        const prefix = fixedGlobPrefix(expanded);
+        if (!fs.existsSync(path.join(root, prefix || "."))) {
+          add(
+            "error",
+            "DG071",
+            rel,
+            `paths: の glob \`${glob}\` の固定部分 \`${prefix}\` が存在しない (この rule は永久に読み込まれない)`,
+          );
+        }
+      }
+    }
+  }
+  if (alwaysLines > policy.maxTotalLines) {
+    add(
+      "error",
+      "DG070",
+      policy.rulesDir,
+      `常時読み込み合計が ${alwaysLines} 行 (${entryFile} ${entryLines} + paths 無し rule ${alwaysRules.length} 本) で上限 ${policy.maxTotalLines} 行を超えている: ${alwaysRules.join(", ")}`,
+    );
+  }
+
+  // 入口 ⇄ rules の参照整合。入口が案内板として全 rule への入口を持つことと、
+  // 入口が指す rule 名が実在することの両方向を見る
+  const referenced = new Set(
+    [...entryText.matchAll(/`([A-Za-z0-9._-]+\.md)`/g)].map((m) => m[1]),
+  );
+  for (const name of ruleNames) {
+    if (!referenced.has(name)) {
+      add("error", "DG072", `${policy.rulesDir}/${name}`, `${entryFile} から参照されていない rule (規約・ルール表に 1 行足す)`);
+    }
+  }
+  for (const name of referenced) {
+    if (!ruleNames.has(name) && name !== path.basename(entryFile) && /-(standards|workflow|loop|protocol|api|placement|cleanup|mcp|storage|ssot|judgment|contract|prompting|issues|data|components|environment|preservation|design|schema)\.md$/.test(name)) {
+      add("error", "DG072", entryFile, `参照している rule \`${name}\` が ${policy.rulesDir} に存在しない`);
+    }
+  }
+}
+
 function getImplementationPlans(root, config) {
   const directory = path.join(root, config.implementationPlans.directory);
   const indexName = path.basename(config.implementationPlans.index);
@@ -602,6 +739,8 @@ function inspectRepository({
       definitionOwners.set(definition.id, definition.file);
     }
   }
+
+  checkAlwaysLoadedInstructions(root, config, add);
 
   findings.sort((a, b) =>
     `${a.level}:${a.code}:${a.file}:${a.message}`.localeCompare(

@@ -1,3 +1,11 @@
+---
+paths:
+  - "packages/ranking/src/{data/surveys.json,survey/**}"
+  - "apps/web/src/features/survey/**"
+  - ".claude/skills/db/audit-survey-linkage/**"
+  - ".claude/config/survey-taxonomy-ratchet.json"
+  - ".claude/agents/{survey-curator,data-ingester}.md"
+---
 # ranking ↔ 統計調査 (survey) 紐付け標準 (SSOT)
 
 ranking / ThemeCatalog chart / blog chart と統計調査 (survey) の紐付けの**単一ソース (SSOT) 規約**。survey マスタの管理・紐付けの

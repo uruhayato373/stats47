@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/product-factory/**"
+  - ".claude/{scripts/coconala,scripts/kdp,skills/product,state/products}/**"
+  - ".claude/config/{coconala,kdp}-*.json"
+  - ".claude/agents/{coconala-*,kdp-operator,kindle-publisher}.md"
+---
 # ココナラ商品ファクトリー標準 (product-factory SSOT)
 
 ココナラで販売する stats47 の都道府県データ商品（PowerPoint / Excel / CSV / SVG / PNG / PDF）を、

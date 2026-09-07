@@ -1,3 +1,10 @@
+---
+paths:
+  - "apps/web/scripts/affiliate-*.ts"
+  - "apps/web/src/{features/ads,lib/a8net,lib/google-adsense}/**"
+  - ".claude/{scripts/ads,skills/ads,skills/analytics/affiliate-improvement,state/ads}/**"
+  - ".claude/agents/{affiliate-*,asp-scout,a8-*,adsense-analyst}.md"
+---
 # アフィリエイト広告 標準 (SSOT + 意図ハブ + 共通ルール)
 
 `apps/web/scripts/affiliate-ads-data.ts` (`AFFILIATE_ADS: AffiliateAd[]`) を SSOT とする、

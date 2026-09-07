@@ -1,3 +1,9 @@
+---
+paths:
+  - ".claude/agents/**"
+  - ".claude/skills/**/SKILL.md"
+  - ".claude/workflows/**"
+---
 # Claude モデル別プロンプト設計
 
 `CLAUDE.md`、`.claude/agents/*.md`、`.claude/skills/**/SKILL.md` に共通適用する

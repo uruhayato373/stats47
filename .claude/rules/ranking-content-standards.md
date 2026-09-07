@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/ai-content/**"
+  - ".claude/{scripts/ai-content,state/ai-content,skills/content}/**"
+  - ".github/workflows/{ai-content-gemini-daily,publish-ai-content}.yml"
+  - ".claude/agents/ranking-content-*.md"
+---
 # ランキングページ コンテンツ標準 (ranking-content-standards)
 
 `/ranking/<key>` ページの**コンテンツ構成・品質フロア・AI 解説文の生成パイプライン**の運用正典。

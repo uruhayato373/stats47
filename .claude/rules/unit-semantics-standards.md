@@ -1,3 +1,11 @@
+---
+paths:
+  - "packages/data-configs/src/{unit,metrics}/**"
+  - "packages/data-configs/src/money-unit.ts"
+  - ".claude/scripts/lib/{unit-semantics,article-factual-check}.mjs"
+  - ".claude/skills/db/audit-units/**"
+  - ".claude/agents/data-ingester.md"
+---
 # 単位セマンティクス標準 (単位の解釈・換算・検証の正典)
 
 数値に付く**単位** (円 / 千円 / ％ / 人 / 人口10万対 / 月額・年額…) をどう解釈し、どう突き合わせ、

@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/data-configs/src/{metrics,provenance}/**"
+  - ".claude/{scripts/provenance,state/provenance,skills/db/audit-provenance}/**"
+  - ".github/workflows/provenance-audit-weekly.yml"
+  - ".claude/agents/{data-ingester,open-data-curator,geo-analysis-curator,kindle-publisher}.md"
+---
 # データ出典・再現性 (provenance) 標準
 
 stats47 の全データ (metric / blog / theme / area / open-data) について、**出典と「いつでも一次資料から

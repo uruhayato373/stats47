@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/estat-api/**"
+  - "packages/data-configs/src/metrics/**"
+  - ".claude/{skills/estat,scripts/estat,state/estat}/**"
+  - ".claude/agents/{estat-researcher,data-ingester,ranking-expander,theme-researcher,gis-curator}.md"
+---
 # e-Stat API データ取得規約
 
 ## 規約

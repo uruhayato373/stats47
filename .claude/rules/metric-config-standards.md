@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/data-configs/{src/metrics/**,src/*.ts,scripts/**}"
+  - ".claude/skills/{db/publish-ranking,db/verify-value-distribution,management/expand-rankings,management/expand-indicators}/**"
+  - ".claude/state/ranking/**"
+  - ".claude/agents/{data-ingester,ranking-expander,ranking-publisher,open-data-curator,snapshot-exporter}.md"
+---
 # metric config 標準 (ランキングデータの正典)
 
 `packages/data-configs/src/metrics/<key>.ts` (`MetricConfig`) のフィールド役割と禁止事項の**単一ソース**。

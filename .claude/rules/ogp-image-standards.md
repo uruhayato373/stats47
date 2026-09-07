@@ -1,3 +1,10 @@
+---
+paths:
+  - "apps/web/src/features/ogp/**"
+  - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
+  - ".claude/{scripts/ogp,state/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
+  - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
+---
 # OGP・カバー・リンクカード画像標準 (画像資産カタログ SSOT)
 
 stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカード画像 (light/dark)** の

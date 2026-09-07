@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/svg-builder/**"
+  - "docs/21_ブログ記事原稿/**/data/**"
+  - ".claude/{scripts/blog,skills/blog/generate-article-charts,skills/ui/audit-blog-svg-charts}/**"
+  - ".claude/agents/chart-author.md"
+---
 # ブログ SVG チャート標準 (packages/svg-builder)
 
 ブログ記事・note 記事向け静的 SVG チャートの**単一ソース（SSoT）**。
