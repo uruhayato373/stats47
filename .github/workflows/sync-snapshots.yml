@@ -25,6 +25,10 @@ on:
         description: 'ranking-values のみ: 対象キーのカンマ区切り (最大50件、空なら従来の全件処理)'
         required: false
         default: ''
+      ranking_image_keys:
+        description: 'ranking-items / master / 全task の画像のみ: 対象キーのカンマ区切り (最大50件、空なら従来のKNOWN最大50件)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -90,6 +94,29 @@ jobs:
                 if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error(`Unknown/inactive prefecture ranking: ${key}`);
               }
               console.log(`Validated explicit ranking scope: ${keys.length}`);
+            '
+          fi
+
+      - name: 🔎 Validate explicit ranking image scope
+        env:
+          RANKING_KEYS: ${{ inputs.ranking_image_keys }}
+          SNAPSHOT_TASK: ${{ inputs.only }}
+        run: |
+          if [ -n "$RANKING_KEYS" ]; then
+            case "$SNAPSHOT_TASK" in
+              ''|ranking-items|master) ;;
+              *) echo 'ranking_image_keys requires only=ranking-items, master or empty'; exit 1 ;;
+            esac
+            npx tsx -e '
+              import { getMetricConfig } from "@stats47/data-configs";
+              const keys = process.env.RANKING_KEYS.split(",");
+              if (keys.length > 50 || new Set(keys).size !== keys.length) throw new Error("Expected 1-50 unique ranking image keys");
+              for (const key of keys) {
+                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error(`Invalid ranking image key: ${key}`);
+                const config = getMetricConfig(key);
+                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error(`Unknown/inactive prefecture ranking: ${key}`);
+              }
+              console.log(`Validated explicit ranking image scope: ${keys.length}`);
             '
           fi
 
@@ -227,9 +254,11 @@ jobs:
       # 未生成だと og:image が 404 になるため公開時に先回りする。欠落分のみ生成 (self-heal)。
       # 通常の新規key数に合わせて1回50件に制限する。初回manifest移行は
       # timeoutの長いgenerate-ogp-images.ymlを反復し、この短いPR jobへ持ち込まない。
+      # ranking_image_keys 指定時は検証済みキーだけを両画像typeへ渡す。snapshot自体の対象は変えない。
       # 生成・publish失敗はkeys PRも止め、画像なしrankingの公開を防ぐ。
       - name: 🖼 Generate changed ranking OGP/cards
         env:
+          RANKING_KEYS: ${{ inputs.ranking_image_keys }}
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
           SITE_ORIGIN: https://stats47.jp
           CLOUDFLARE_R2_BUCKET_NAME: stats47
@@ -239,8 +268,10 @@ jobs:
         run: |
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
+          ARGS=(--source known --limit 50 --max-generate 50)
+          [ -n "$RANKING_KEYS" ] && ARGS+=(--key "$RANKING_KEYS")
           for TYPE in ranking ranking-cards; do
-            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --source known --limit 50 --max-generate 50
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" "${ARGS[@]}"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
             test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
