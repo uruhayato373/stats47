@@ -901,6 +901,13 @@
       ]
     },
     {
+      "name": "RANKING_KEYS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "REPO_HYGIENE_BASELINE",
       "visibility": "server",
       "contexts": [

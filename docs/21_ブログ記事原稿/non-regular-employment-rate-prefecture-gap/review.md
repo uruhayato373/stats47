@@ -3,7 +3,7 @@ slug: non-regular-employment-rate-prefecture-gap
 reviewer: blog-critic
 mode: expert
 verdict: PASS
-date: 2026-09-02
+date: 2026-09-07
 ---
 
 ## 評価サマリ
@@ -20,3 +20,23 @@ date: 2026-09-02
 ## 判定理由
 
 BLOCK級の指摘は0件。数値照合ではランキング上位5（京都40.7/奈良40.6/滋賀40.2/北海道39.9/大阪39.8）、8位兵庫39.2、9位三重38.8、下位5（富山32.3/東京32.6/山形32.6/徳島33.1/福井33.5）のすべてがdata/*.jsonと厳密一致し、rank・value・都道府県名の取り違えは無い。タイルマップの記述（近畿の連続高値、北海道の孤立高値、北陸2県の隣接低値、東京都の首都圏内孤立）もmap.jsonの並びと矛盾しない。因果断定は「〜と考えられます」「[仮説]」で一貫して仮説明示されており、根拠のない断定は見られない。ですます調は全文で統一され、常体の混入もない。内部リンクは`/ranking/non-regular-employment-rate`（source-linkカード1枚、図直下に正しく配置）、`/category/laborwage`、`/areas/26000`、`/areas/29000`の4本で3本以上の基準を満たし、source-linkの重複・末尾集約・隣接クラスタ化もない。markdown表の使用もなく、callout数3（NOTE/WARNING/TIP）も基準を満たす。上記minor指摘は表現の精緻化提案であり公開を妨げるものではないため、verdictはPASSとする。
+
+## 2026-09-07 delta審査（同順位・限定定義是正）
+
+判定: **PASS（今回の差分に限定）**。比較基準は `0ee9ed359`、審査対象は `article.md` の変更hunkと対応入力です。本文・データは変更していません。上記の過去レビューは記録として保持し、今回明記した点以外の指摘が現在も該当するか・解消済みかは再判定していません。未変更の主張を新たに全面PASSとしたものではありません。
+
+### 差分の確認と判定理由
+
+東京都・山形県はともに32.6%で同率45位です。下位側の数値、非正規雇用率の分母・対象は変更されておらず、順位の同列化による新しい地域解釈は付加されていません。
+
+順位は正典 `packages/ranking/src/scripts/generate-ranking-values.ts` の降順競争順位（1, 2, 2, 4）に従い、`1 + 自分より値が大きい行数` で独立再計算しました。値・単位・対象の不変性と変更文の意味を照合し、今回新しいBLOCK/MAJORは認めません。今回の順位記載と上記の旧記録に差がある場合、このdeltaの確認結果を優先します。
+
+機械フロアは対象記事で再実行しPASS、blocker 0件、warning 0件でした。warningはありません。
+
+### 再検証用SHA256
+
+- `article.md`: `cc4372bf73174b78ba48f5f362b3ad53f939f92ab9cabe827b4311d337200d37`
+- `data/non-regular-employment-rate-prefecture-gap-map.json`: `625de75a59bf67d353b5abb7b0aa325b9384cd0d49632bac52730f5e60015433`
+- `data/non-regular-employment-rate-prefecture-gap-prefecture-rankings.json`: `a91eb2b138e8b9ef1ac0b670d76226d15c8cc499419a23dcb9c42f3eeef0b252`
+
+SHAはこの時点の入力を識別するための記録です。時系列・地図を含む未変更入力のSHA掲載は、それらを全件再監査したという意味ではありません。

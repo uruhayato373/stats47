@@ -3,7 +3,7 @@ slug: sports-participation-rate-swimming-prefecture-gap
 reviewer: blog-critic
 mode: expert
 verdict: PASS
-date: 2026-08-31
+date: 2026-09-07
 ---
 ## 評価サマリ
 前回指摘した「他のスポーツ指標との比較で見えるもの」節は「## 倍率で見るか、差で見るか」に差し替えられ、比率(2.7倍)と実数差(5.4ポイント)の乖離、および上位・下位の順位が0.1ポイント刻みで密集し標本調査の誤差範囲に収まりうるという、記事内の他節に無い新しい論点を導入している。タイトルの「なぜ東京と長野?」というcuriosity gapにも本文が具体的に答え続けており、水増しの温床だった箇所は解消された。ただし新設節と直後の「上位と下位の差をどう読むか」節がやや重複気味である点は残っている。
@@ -14,3 +14,23 @@ date: 2026-08-31
 
 ## 判定理由
 前回のBLOCK指摘(既出論点をほぼ同じ言葉で繰り返すだけの水増し節)は該当節が新規論点を持つ節に差し替えられ解消された。残る重複は新情報を伴う部分的な再掲でありMAJOR相当に留まるため、BLOCKは0件でPASSとする。
+
+## 2026-09-07 delta審査（同順位・限定定義是正）
+
+判定: **PASS（今回の差分に限定）**。比較基準は `0ee9ed359`、審査対象は `article.md` の変更hunkと対応入力です。本文・データは変更していません。上記の過去レビューは記録として保持し、今回明記した点以外の指摘が現在も該当するか・解消済みかは再判定していません。未変更の主張を新たに全面PASSとしたものではありません。
+
+### 差分の確認と判定理由
+
+三重県4.1%は同率37位、群馬県・大分県4.0%は同率40位です。同じ値の県に別の順位を付ける説明を除き、同値・同順位へ改めています。行動者率や図の選択件数の意味は変更していません。
+
+順位は正典 `packages/ranking/src/scripts/generate-ranking-values.ts` の降順競争順位（1, 2, 2, 4）に従い、`1 + 自分より値が大きい行数` で独立再計算しました。値・単位・対象の不変性と変更文の意味を照合し、今回新しいBLOCK/MAJORは認めません。今回の順位記載と上記の旧記録に差がある場合、このdeltaの確認結果を優先します。
+
+機械フロアは対象記事で再実行しPASS、blocker 0件、warning 0件でした。warningはありません。
+
+### 再検証用SHA256
+
+- `article.md`: `fbb58c7a2b9b92734acbcfae6cdf6c6b1c175a0c6510f0da80ab0e8fbd6ff07a`
+- `data/sports-participation-rate-swimming-prefecture-gap-map.json`: `13a9e3abaf33cb3dce40d97105cbc2282450811a62e4367c422b96e21bfd4f8c`
+- `data/sports-participation-rate-swimming-prefecture-gap-prefecture-rankings.json`: `bbcebb6889e4ed02b922a43e81bbecfb7e35f0980e84bd59ff6092e938aeca2e`
+
+SHAはこの時点の入力を識別するための記録です。時系列・地図を含む未変更入力のSHA掲載は、それらを全件再監査したという意味ではありません。

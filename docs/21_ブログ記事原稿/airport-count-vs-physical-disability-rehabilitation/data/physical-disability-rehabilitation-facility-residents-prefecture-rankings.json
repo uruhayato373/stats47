@@ -177,7 +177,7 @@
       "areaCode": "28000"
     },
     {
-      "rank": 25,
+      "rank": 24,
       "areaName": "大分県",
       "pref": "大分県",
       "value": 144,
@@ -219,7 +219,7 @@
       "areaCode": "31000"
     },
     {
-      "rank": 31,
+      "rank": 30,
       "areaName": "熊本県",
       "pref": "熊本県",
       "value": 106,
@@ -247,7 +247,7 @@
       "areaCode": "15000"
     },
     {
-      "rank": 35,
+      "rank": 34,
       "areaName": "香川県",
       "pref": "香川県",
       "value": 93,
@@ -261,7 +261,7 @@
       "areaCode": "07000"
     },
     {
-      "rank": 37,
+      "rank": 36,
       "areaName": "三重県",
       "pref": "三重県",
       "value": 87,
@@ -331,7 +331,7 @@
       "areaCode": "06000"
     },
     {
-      "rank": 47,
+      "rank": 46,
       "areaName": "茨城県",
       "pref": "茨城県",
       "value": 0,

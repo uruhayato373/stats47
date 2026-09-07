@@ -149,7 +149,7 @@
       "areaCode": "03000"
     },
     {
-      "rank": 21,
+      "rank": 20,
       "areaName": "岐阜県",
       "pref": "岐阜県",
       "value": 58,
@@ -170,14 +170,14 @@
       "areaCode": "06000"
     },
     {
-      "rank": 24,
+      "rank": 23,
       "areaName": "京都府",
       "pref": "京都府",
       "value": 52,
       "areaCode": "26000"
     },
     {
-      "rank": 25,
+      "rank": 23,
       "areaName": "大分県",
       "pref": "大分県",
       "value": 52,
@@ -212,7 +212,7 @@
       "areaCode": "05000"
     },
     {
-      "rank": 30,
+      "rank": 29,
       "areaName": "和歌山県",
       "pref": "和歌山県",
       "value": 45,
@@ -233,14 +233,14 @@
       "areaCode": "04000"
     },
     {
-      "rank": 33,
+      "rank": 32,
       "areaName": "石川県",
       "pref": "石川県",
       "value": 42,
       "areaCode": "17000"
     },
     {
-      "rank": 34,
+      "rank": 32,
       "areaName": "愛媛県",
       "pref": "愛媛県",
       "value": 42,
@@ -275,14 +275,14 @@
       "areaCode": "18000"
     },
     {
-      "rank": 39,
+      "rank": 38,
       "areaName": "滋賀県",
       "pref": "滋賀県",
       "value": 32,
       "areaCode": "25000"
     },
     {
-      "rank": 40,
+      "rank": 38,
       "areaName": "佐賀県",
       "pref": "佐賀県",
       "value": 32,
@@ -296,7 +296,7 @@
       "areaCode": "29000"
     },
     {
-      "rank": 42,
+      "rank": 41,
       "areaName": "沖縄県",
       "pref": "沖縄県",
       "value": 30,
@@ -310,7 +310,7 @@
       "areaCode": "31000"
     },
     {
-      "rank": 44,
+      "rank": 43,
       "areaName": "香川県",
       "pref": "香川県",
       "value": 29,

@@ -88,6 +88,23 @@ describe("③ 値は既定で表示する", () => {
 });
 
 describe("④ 上位3は県名と値を近づける", () => {
+  it.each([false, true])("同値は同順位で、reverse=%s でも値降順を維持する", (reverse) => {
+    const tied = items.map((item, i) => ({ ...item, value: i < 2 ? 4 : 0 }));
+    const svg = generateChoroplethSvg(tied, { title: "同値のある件数", unit: "件", reverse });
+    const labels = texts(svg);
+    expect(labels).toContain("1. 北海道");
+    expect(labels).toContain("1. 青森県");
+    expect(labels).toContain("3. 岩手県");
+    expect(labels).not.toContain("2. 青森県");
+  });
+
+  it("同値のない既存の上位3は1・2・3のまま", () => {
+    const labels = texts(render());
+    expect(labels).toContain("1. 北海道");
+    expect(labels).toContain("2. 青森県");
+    expect(labels).toContain("3. 岩手県");
+  });
+
   it("★値カラムは左カラムの右端ではなく県名の実幅で決まる", () => {
     const svg = render();
     const rows = [...svg.matchAll(

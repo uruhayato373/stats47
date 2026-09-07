@@ -648,7 +648,7 @@ export function generateChoroplethSvg(
   //
   // 下位は出さない (2026-07-31 オーナー判断)。左上の空きは有限で、6 行入れると
   // タイトルと合わせて地図の東北ブロックに掛かる。上位 3 件だけなら余裕に収まる。
-  // 見出し (「多い順」等) も出さない — 1. 2. 3. の並びで自明なので行を使う価値がない。
+  // 見出し (「多い順」等) も出さない。順位は値降順の競技順位で、同値は同順位。
   const rankLists: string[] = [];
   if (showRankList && items.length >= 3) {
     const top3 = [...items].sort((a, b) => b.value - a.value).slice(0, 3);
@@ -665,7 +665,8 @@ export function generateChoroplethSvg(
       14;
     const valW = Math.max(...top3.map((it) => textUnits(fmtValue(it.value)))) * VAL_F;
     let y = cursorY + 30;
-    for (const [i, it] of top3.entries()) {
+    for (const it of top3) {
+      const rank = top3.findIndex((other) => other.value === it.value) + 1;
       y += 30;
       const sw = colorOf(toT(it.value));
       const valStr = fmtValue(it.value);
@@ -673,7 +674,7 @@ export function generateChoroplethSvg(
       const valX = nameEnd + valW;
       rankLists.push(
         `  <rect x="${COL_X}" y="${y - 13}" width="15" height="15" rx="2" fill="${sw}" stroke="#ffffff" stroke-width="1"/>`,
-        `  <text x="${COL_X + 24}" y="${y}" font-family="${FONT_FAMILY}" font-size="${NAME_F}" font-weight="600" fill="${CHROME_COLOR}">${i + 1}. ${esc(fullNameOf(it))}</text>`,
+        `  <text x="${COL_X + 24}" y="${y}" font-family="${FONT_FAMILY}" font-size="${NAME_F}" font-weight="600" fill="${CHROME_COLOR}">${rank}. ${esc(fullNameOf(it))}</text>`,
         `  <text x="${valX.toFixed(1)}" y="${y}" font-family="${FONT_FAMILY}" font-size="${VAL_F}" font-weight="700" fill="${CHROME_COLOR}" text-anchor="end">${valStr}</text>`,
         `  <text x="${(valX + 5).toFixed(1)}" y="${y}" font-family="${FONT_FAMILY}" font-size="${UNIT_F}" fill="${CHROME_COLOR}">${esc(unit)}</text>`,
       );

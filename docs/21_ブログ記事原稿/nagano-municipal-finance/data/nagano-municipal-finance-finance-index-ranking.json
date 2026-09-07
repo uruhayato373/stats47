@@ -50,7 +50,7 @@
       "unit": ""
     },
     {
-      "rank": 6,
+      "rank": 5,
       "areaName": "坂城町",
       "pref": "坂城町",
       "value": 0.63,
@@ -66,7 +66,7 @@
       "unit": ""
     },
     {
-      "rank": 8,
+      "rank": 7,
       "areaName": "御代田町",
       "pref": "御代田町",
       "value": 0.6,
@@ -98,7 +98,7 @@
       "unit": ""
     },
     {
-      "rank": 12,
+      "rank": 11,
       "areaName": "中野市",
       "pref": "中野市",
       "value": 0.57,
@@ -114,7 +114,7 @@
       "unit": ""
     },
     {
-      "rank": 14,
+      "rank": 13,
       "areaName": "箕輪町",
       "pref": "箕輪町",
       "value": 0.56,
@@ -130,7 +130,7 @@
       "unit": ""
     },
     {
-      "rank": 16,
+      "rank": 15,
       "areaName": "茅野市",
       "pref": "茅野市",
       "value": 0.55,
@@ -146,7 +146,7 @@
       "unit": ""
     },
     {
-      "rank": 18,
+      "rank": 17,
       "areaName": "南箕輪村",
       "pref": "南箕輪村",
       "value": 0.54,
@@ -178,7 +178,7 @@
       "unit": ""
     },
     {
-      "rank": 22,
+      "rank": 21,
       "areaName": "安曇野市",
       "pref": "安曇野市",
       "value": 0.51,
@@ -202,7 +202,7 @@
       "unit": ""
     },
     {
-      "rank": 25,
+      "rank": 24,
       "areaName": "東御市",
       "pref": "東御市",
       "value": 0.48,
@@ -250,7 +250,7 @@
       "unit": ""
     },
     {
-      "rank": 31,
+      "rank": 30,
       "areaName": "山形村",
       "pref": "山形村",
       "value": 0.42,
@@ -266,7 +266,7 @@
       "unit": ""
     },
     {
-      "rank": 33,
+      "rank": 32,
       "areaName": "小布施町",
       "pref": "小布施町",
       "value": 0.4,
@@ -290,7 +290,7 @@
       "unit": ""
     },
     {
-      "rank": 36,
+      "rank": 35,
       "areaName": "飯島町",
       "pref": "飯島町",
       "value": 0.37,
@@ -298,7 +298,7 @@
       "unit": ""
     },
     {
-      "rank": 37,
+      "rank": 35,
       "areaName": "山ノ内町",
       "pref": "山ノ内町",
       "value": 0.37,
@@ -330,7 +330,7 @@
       "unit": ""
     },
     {
-      "rank": 41,
+      "rank": 40,
       "areaName": "池田町",
       "pref": "池田町",
       "value": 0.32,
@@ -386,7 +386,7 @@
       "unit": ""
     },
     {
-      "rank": 48,
+      "rank": 47,
       "areaName": "木祖村",
       "pref": "木祖村",
       "value": 0.26,
@@ -394,7 +394,7 @@
       "unit": ""
     },
     {
-      "rank": 49,
+      "rank": 47,
       "areaName": "木曽町",
       "pref": "木曽町",
       "value": 0.26,
@@ -410,7 +410,7 @@
       "unit": ""
     },
     {
-      "rank": 51,
+      "rank": 50,
       "areaName": "阿智村",
       "pref": "阿智村",
       "value": 0.25,
@@ -418,7 +418,7 @@
       "unit": ""
     },
     {
-      "rank": 52,
+      "rank": 50,
       "areaName": "喬木村",
       "pref": "喬木村",
       "value": 0.25,
@@ -426,7 +426,7 @@
       "unit": ""
     },
     {
-      "rank": 53,
+      "rank": 50,
       "areaName": "飯綱町",
       "pref": "飯綱町",
       "value": 0.25,
@@ -442,7 +442,7 @@
       "unit": ""
     },
     {
-      "rank": 55,
+      "rank": 54,
       "areaName": "上松町",
       "pref": "上松町",
       "value": 0.24,
@@ -450,7 +450,7 @@
       "unit": ""
     },
     {
-      "rank": 56,
+      "rank": 54,
       "areaName": "大桑村",
       "pref": "大桑村",
       "value": 0.24,
@@ -474,7 +474,7 @@
       "unit": ""
     },
     {
-      "rank": 59,
+      "rank": 58,
       "areaName": "下條村",
       "pref": "下條村",
       "value": 0.22,
@@ -482,7 +482,7 @@
       "unit": ""
     },
     {
-      "rank": 60,
+      "rank": 58,
       "areaName": "小谷村",
       "pref": "小谷村",
       "value": 0.22,
@@ -514,7 +514,7 @@
       "unit": ""
     },
     {
-      "rank": 64,
+      "rank": 63,
       "areaName": "王滝村",
       "pref": "王滝村",
       "value": 0.19,
@@ -554,7 +554,7 @@
       "unit": ""
     },
     {
-      "rank": 69,
+      "rank": 68,
       "areaName": "泰阜村",
       "pref": "泰阜村",
       "value": 0.15,
@@ -562,7 +562,7 @@
       "unit": ""
     },
     {
-      "rank": 70,
+      "rank": 68,
       "areaName": "大鹿村",
       "pref": "大鹿村",
       "value": 0.15,
@@ -578,7 +578,7 @@
       "unit": ""
     },
     {
-      "rank": 72,
+      "rank": 71,
       "areaName": "平谷村",
       "pref": "平谷村",
       "value": 0.14,
@@ -594,7 +594,7 @@
       "unit": ""
     },
     {
-      "rank": 74,
+      "rank": 73,
       "areaName": "小川村",
       "pref": "小川村",
       "value": 0.13,
@@ -602,7 +602,7 @@
       "unit": ""
     },
     {
-      "rank": 75,
+      "rank": 73,
       "areaName": "栄村",
       "pref": "栄村",
       "value": 0.13,
@@ -618,7 +618,7 @@
       "unit": ""
     },
     {
-      "rank": 77,
+      "rank": 76,
       "areaName": "売木村",
       "pref": "売木村",
       "value": 0.11,

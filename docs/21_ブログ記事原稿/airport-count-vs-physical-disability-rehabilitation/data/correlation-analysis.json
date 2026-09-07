@@ -1,0 +1,16 @@
+{
+  "analysis": "Pearson sensitivity analysis",
+  "input": "airport-count--physical-disability-rehabilitation-facility-residents-scatter.json",
+  "inputSha256": "eee7174fa5a230244b778a6c004d59802a5bc46bf8bcba98f29382c43113a1d1",
+  "formula": "sum((x-mean(x))*(y-mean(y))) / sqrt(sum((x-mean(x))^2)*sum((y-mean(y))^2))",
+  "weighting": "Each prefecture has equal weight; no population or area adjustment.",
+  "results": [
+    { "excludedLabels": [], "n": 47, "pearsonR": 0.6740058999775126 },
+    { "excludedLabels": ["北海道"], "n": 46, "pearsonR": 0.4902017356502989 },
+    { "excludedLabels": ["北海道", "鹿児島県"], "n": 45, "pearsonR": 0.3219070305641293 }
+  ],
+  "subset": { "filter": "x <= 2", "n": 40, "yMin": 0, "yMax": 625, "yUnit": "人" },
+  "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/J",
+  "definitionItem": "J2403",
+  "interpretationLimit": "Descriptive association between 2007 facilities and 2011 old-category residents; not current welfare adequacy or a causal estimate."
+}

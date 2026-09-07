@@ -30,7 +30,7 @@
       "areaCode": "06000"
     },
     {
-      "rank": 4,
+      "rank": 3,
       "areaName": "島根県",
       "pref": "島根県",
       "value": 111.2,
@@ -205,7 +205,7 @@
       "areaCode": "09000"
     },
     {
-      "rank": 29,
+      "rank": 28,
       "areaName": "新潟県",
       "pref": "新潟県",
       "value": 101,
@@ -226,7 +226,7 @@
       "areaCode": "19000"
     },
     {
-      "rank": 32,
+      "rank": 31,
       "areaName": "福岡県",
       "pref": "福岡県",
       "value": 100.5,

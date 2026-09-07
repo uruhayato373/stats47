@@ -54,4 +54,10 @@ ranking cardが404で、デプロイ後のroute smokeが失敗した。
 **証拠**: GitHub Actions `32906240999`（画像フックの選択内訳）、`32912691655`
 （3件のOGP 404）、`apps/web/scripts/lib/image-generation-manifest.ts`（優先順位実装）。
 
+## 2026-09-07 ranking-items 単独同期の重複送信を除去
+
+- **問題**: per-key item を中間 push した後、末尾の全体 push が同じ約2,300ファイルを再送していた。
+- **原因**: diff-push の manifest は prefix ごとに別ファイルであり、`app/ranking` の送信記録を `_all` は参照しない。
+- **対策**: `--only ranking-items` の生成・中間 push 成功時だけ、末尾を未送信の `app/ranking-items` inventory に限定。生成失敗時の部分成果救済、途中 push 失敗時の停止、全task実行の依存順は維持する。`sync-snapshots-run-contract.test.mjs` の正常・生成失敗・inventory送信失敗テストで固定。全task実行の重複送信はこの変更の対象外。
+
 [[project_dbless_migration_2026_05_29]] [[feedback_check_why_removed_before_reviving]]

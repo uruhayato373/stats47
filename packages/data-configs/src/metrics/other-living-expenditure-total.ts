@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const otherLivingExpenditureTotal: MetricConfig = {
   "key": "other-living-expenditure-total",
   "title": "その他の消費支出",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間その他の消費支出（理美容・たばこ・交際費・仕送りなどへの支出総額）",
+  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間その他の消費支出（理美容・たばこ・交際費・仕送りなどへの支出総額）",
   "description": "家計調査（二人以上世帯）における年間のその他の消費支出の総額。諸雑費（理美容・たばこ等）、こづかい、交際費、仕送り金を含む。十大費目のうち他の9費目に含まれない支出をまとめたものである。",
   "unit": "円",
   "category": "economy",
@@ -39,22 +39,7 @@ export const otherLivingExpenditureTotal: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    // 1世帯当たりの年間支出額。県人口・面積で再除算しない。
     "isCalculated": false,
   },
   "isActive": true,

@@ -93,7 +93,7 @@
       "areaCode": "28000"
     },
     {
-      "rank": 13,
+      "rank": 12,
       "areaName": "広島県",
       "pref": "広島県",
       "value": 74.2,
@@ -128,7 +128,7 @@
       "areaCode": "19000"
     },
     {
-      "rank": 18,
+      "rank": 17,
       "areaName": "岡山県",
       "pref": "岡山県",
       "value": 72.8,
@@ -184,7 +184,7 @@
       "areaCode": "20000"
     },
     {
-      "rank": 26,
+      "rank": 25,
       "areaName": "沖縄県",
       "pref": "沖縄県",
       "value": 68.7,
@@ -331,7 +331,7 @@
       "areaCode": "29000"
     },
     {
-      "rank": 47,
+      "rank": 46,
       "areaName": "長崎県",
       "pref": "長崎県",
       "value": 54,

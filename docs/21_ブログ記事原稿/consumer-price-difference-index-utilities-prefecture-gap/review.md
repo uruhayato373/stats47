@@ -3,7 +3,7 @@ slug: consumer-price-difference-index-utilities-prefecture-gap
 reviewer: blog-critic
 mode: delta
 verdict: PASS
-date: 2026-09-02
+date: 2026-09-07
 ---
 ## 評価サマリ
 前回 full レビューで指摘した地方区分の誤り（上位5県中「4県が東北」「下位5県中4県が近畿」という誤記）は、いずれも実データと一致する表現に修正済みであることを確認した。本文（L23, L25）と「わかったこと」要約（L56, L57）の計4箇所すべてが是正されており、地理的な主張の正確性が回復している。変更箇所以外の周辺記述（山陰・東北6県・奈良/京都の順位言及など）にも新たな数値矛盾は見当たらない。
@@ -13,3 +13,23 @@ date: 2026-09-02
 
 ## 判定理由
 data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.json を突合した結果、上位5県（北海道119.6・岩手112.1・山形111.2・島根111.2・青森111）のうち東北地方は岩手・山形・青森の3県、北海道と島根は東北外という実態と、本文L23「上位5県のうち3県が東北地方に位置し、北海道と島根県を加えると」の記述が完全に一致した。下位5県（京都95.8・滋賀94.6・和歌山94.2・兵庫92.8・大阪87、rank43-47）はすべて近畿地方であり、本文L25「下位5県はすべて近畿地方に位置しており」も正確。要約セクション（L56「上位5県のうち3県が東北地方に位置し」、L57「下位5県はすべて近畿地方に位置し」）も本文と整合している。前回blockerだった地方区分の誤記は解消され、新たなblocker/majorは検出しなかったためPASSとする。
+
+## 2026-09-07 delta審査（同順位・限定定義是正）
+
+判定: **PASS（今回の差分に限定）**。比較基準は `0ee9ed359`、審査対象は `article.md` の変更hunkと対応入力です。本文・データは変更していません。上記の過去レビューは記録として保持し、今回明記した点以外の指摘が現在も該当するか・解消済みかは再判定していません。未変更の主張を新たに全面PASSとしたものではありません。
+
+### 差分の確認と判定理由
+
+山形県・島根県はともに111.2で同率3位です。ランキングの説明と地図の説明の双方が同じ順位になり、指数値・全国基準の意味は変更されていません。
+
+順位は正典 `packages/ranking/src/scripts/generate-ranking-values.ts` の降順競争順位（1, 2, 2, 4）に従い、`1 + 自分より値が大きい行数` で独立再計算しました。値・単位・対象の不変性と変更文の意味を照合し、今回新しいBLOCK/MAJORは認めません。今回の順位記載と上記の旧記録に差がある場合、このdeltaの確認結果を優先します。
+
+機械フロアは対象記事で再実行しPASS、blocker 0件、warning 0件でした。warningはありません。
+
+### 再検証用SHA256
+
+- `article.md`: `0c5a07ead2e5f5ee9eb5144db59e9bb9a51e5c38788379404f41d7e38d438d97`
+- `data/consumer-price-difference-index-utilities-prefecture-gap-map.json`: `c8bcc5a3a8085c097216ac4ccac057083dbef072f6da7c404a4e153b48ba88e3`
+- `data/consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings.json`: `070e4fc72a86b88c1e2762f8777a9110f262499848713673fb354aa710634c5d`
+
+SHAはこの時点の入力を識別するための記録です。時系列・地図を含む未変更入力のSHA掲載は、それらを全件再監査したという意味ではありません。
