@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { metadata as noteReferralMetadata } from "../../../app/products/[slug]/from/note/[noteKey]/page";
 import {
   buildNoteProductDestination,
   isValidNoteKey,
@@ -57,5 +58,12 @@ describe("product storefront", () => {
     ).toBe(
       "/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n68f5e09c8d62",
     );
+  });
+
+  it("note向けclean URLを検索結果には載せず、転送先への巡回を許可する", () => {
+    expect(noteReferralMetadata.robots).toMatchObject({
+      index: false,
+      follow: true,
+    });
   });
 });
