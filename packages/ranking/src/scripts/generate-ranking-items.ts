@@ -28,6 +28,7 @@ import {
   type YearSpec,
 } from "@stats47/data-configs";
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
+import { isKsjPublicStructuredOutputBlocked } from "@stats47/r2-storage/tooling";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import {
@@ -156,9 +157,32 @@ async function main() {
   });
 
   // per-key item.json を書く (--only 指定時はその key のみ)
+  //
+  // 非商用 KSJ 由来は publisher の KSJ ガードが push を拒否する (gis-data.md の
+  // 「公開構造化データ禁止」)。生成してしまうと ranking-items の中間 push が 1 件で落ち、
+  // task 全体が止まる (2026-09-06 の KSJ 退役後、最初の ranking-items 実行がこれで失敗した)。
+  // 判定は publisher と同じ純関数を使い、生成と検査で食い違わないようにする。
+  //
+  // 「inactive でも item.json を書いて isActive:false を真実に保つ」(下のコメント) は
+  // **公開してよいデータ**の話。そもそも公開できない原典の構造化データは R2 に置かない。
+  // 既に R2 にある分の撤去は retention の license-remediation-* が承認フローで扱う。
+  const publishable = items.filter(
+    (it) => !isKsjPublicStructuredOutputBlocked(it.rankingKey),
+  );
+  const ksjBlocked = items.length - publishable.length;
+  if (ksjBlocked > 0) {
+    console.log(
+      `ℹ️  非商用 KSJ 由来のため item.json を書かない: ${ksjBlocked} 件 ` +
+        `(${items
+          .filter((it) => isKsjPublicStructuredOutputBlocked(it.rankingKey))
+          .map((it) => it.rankingKey)
+          .join(", ")})`,
+    );
+  }
+
   const targets = args.only
-    ? items.filter((it) => args.only!.has(it.rankingKey))
-    : items;
+    ? publishable.filter((it) => args.only!.has(it.rankingKey))
+    : publishable;
   let written = 0;
   await mapWithConcurrency(targets, CONCURRENCY, async (item) => {
     const body = JSON.stringify({ generatedAt: now, item });

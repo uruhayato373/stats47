@@ -4,7 +4,11 @@ import { GIS_DATASETS } from '../../../../../gis/src/mlit-ksj/datasets';
 import { getKsjLicensePolicy } from '../../../../../gis/src/mlit-ksj/license-policy';
 import { METRICS_REGISTRY } from '../../../../../data-configs/src/registry';
 import { buildRecipe } from '../../../../../data-configs/src/recipe';
-import { assertKsjPublicAssetsAllowed, assertKsjPublicKeysAllowed } from '../ksj-publication-guard';
+import {
+  assertKsjPublicAssetsAllowed,
+  assertKsjPublicKeysAllowed,
+  isKsjPublicStructuredOutputBlocked,
+} from '../ksj-publication-guard';
 
 describe('KSJ汎用publisherの公開境界', () => {
   it('登録された全データの現行licenseを正典から判定する', () => {
@@ -105,5 +109,44 @@ describe('商用一次資料への置換後も旧stagingを拒否する', () => 
     assertKsjPublicAssetsAllowed(['app/geo/example/item.json'], () => {
       throw new Error('不要なbody read');
     });
+  });
+});
+
+describe('生成側と検査側の判定が一致する', () => {
+  // 生成側 (generate-ranking-items) はこの述語で item.json を書かないと決める。
+  // 判定がずれると「生成はするが push で必ず落ちる」状態に戻り、1 件で task 全体が止まる
+  // (2026-09-06 の KSJ 退役後、最初の ranking-items 実行がこれで失敗した)。
+  const blockedKeys = GIS_DATASETS.flatMap((dataset) =>
+    getKsjLicensePolicy(dataset.license).publicStructuredOutputAllowed
+      ? []
+      : (dataset.rankingConfig ?? []).map((ranking) => ranking.rankingKey)
+  );
+
+  it('publisher が拒否する ranking はすべて述語も拒否する', () => {
+    expect(blockedKeys.length).toBeGreaterThan(0);
+    for (const rankingKey of blockedKeys) {
+      expect(isKsjPublicStructuredOutputBlocked(rankingKey)).toBe(true);
+      expect(() => assertKsjPublicKeysAllowed([`app/ranking/${rankingKey}/item.json`]))
+        .toThrow('KSJ公開構造化データ禁止');
+    }
+    // rankingConfig から漏れていても metric の実 source で拒否する
+    expect(isKsjPublicStructuredOutputBlocked('fishing-port-count')).toBe(true);
+  });
+
+  it('公開してよい ranking は述語も publisher も通す', () => {
+    // 非商用 KSJ と無関係な指標を止めてしまうと、生成側が正当な item.json まで落とす
+    for (const rankingKey of ['total-population', 'beef-consumption-expenditure']) {
+      expect(isKsjPublicStructuredOutputBlocked(rankingKey)).toBe(false);
+      expect(() => assertKsjPublicKeysAllowed([`app/ranking/${rankingKey}/item.json`]))
+        .not.toThrow();
+    }
+  });
+
+  it('拒否対象はすべて非公開 (isActive:false) である', () => {
+    // active な ranking を生成対象から外すと公開ページが壊れる。除外が安全なのは
+    // 拒否対象が全件退役済みだから、という前提そのものを固定する。
+    for (const rankingKey of blockedKeys) {
+      expect(METRICS_REGISTRY[rankingKey]?.isActive ?? false).toBe(false);
+    }
   });
 });
