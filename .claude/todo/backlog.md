@@ -21,6 +21,18 @@ updated: 2026-09-07
 
 ## 🔴 高 — 今月中に着手したい
 
+### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-09-21]
+
+- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
+- **症状 (実測)**: `.claude/state/metrics/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
+- **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
+- **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
+- **次**: ① 別セッションで走っている調査 (topology-fetch の交絡切り分け) の結果を待つ。② 原因が確定したら topology の取得経路を見直し、LCP 要素が Leaflet タイルのまま変わらないかを再計測する。③ 是正後は PSI 日次計測で 4 週の推移を見る。
+- **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
+- **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
+
 ### [RSC-CACHE-BYPASS-01] RSC 応答が HTML と同じ共有キャッシュ設定で返る
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:curl -sD - -o /dev/null -H "RSC: 1" https://stats47.jp/ranking/total-population | grep -iE 'cache-tag|vary'] [起票:2026-09-07] [期日:2026-09-21]
