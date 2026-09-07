@@ -228,6 +228,29 @@ Reference (metrics/articles)          : git TS / article.md ──再生成─�
 Derived (area_profiles/相関)          : R2 観測値をエフェメラル計算 (:memory:/DuckDB) ──▶ R2 snapshot
 ```
 
+### ★R2 反映は `main` のコードで動く — 生成ロジックを変えたら**デプロイが先** (2026-09-07 実測)
+
+`sync-snapshots.yml` の sync job は **`ref: main` を checkout する**。`workflow_dispatch` の
+`ref` にも proxy の `ref` にも従わない (`ref: develop` を指定しても main で動く)。
+
+したがって **git TS や生成スクリプトを変えた分を R2 へ反映するには、先に develop→main を
+マージする**。develop に置いたまま dispatch しても、main の古いコードが走って**成功したのに
+中身が変わらない**か、main に無い修正が効かず同じ失敗を繰り返す。
+
+```
+git TS / 生成スクリプトの変更
+  → develop→main の PR をマージ (デプロイ)     ← ここが先
+  → sync-snapshots を dispatch                 ← main のコードで動く
+  → 成果物 (R2 オブジェクト) を実測して確認
+```
+
+判別は簡単で、**成果物の中身が変わったか**を見る。件数や bytes が前回と 1 バイトも変わらない
+なら、その run は古いコードで動いている (2026-09-07 に `item.json: 2311 件` /
+`all.json bytes=5217501` が修正前と完全一致したことで気づいた)。
+
+データだけを更新する通常の反映 (e-Stat の新年度取り込み等) は、生成コードが main と同じなので
+この順序を気にしなくてよい。**コードを変えたときだけ**デプロイが先になる。
+
 - **クラウド/ローカルとも git TS 編集 + R2 直接反映で作業**（永続 D1 認証は不要 = クラウド完結）
 - 設定の R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（git TS `data/page-components/` → R2、Phase E 実装済）
 - R2 読みは公開 URL 経由で可能: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`
