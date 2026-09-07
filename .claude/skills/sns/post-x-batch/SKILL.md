@@ -41,8 +41,11 @@ node .claude/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [
 - 公開済み ranking キー ∩ metric 索引を母集団に、季節性 (当月テーマ語)・category ローテ・
   dedup (同 key 30日 / 同 key×template 90日) で決定的にスコア → 上位 N 件を選定。
 - 各候補に §2-8 相性表で `template` (§2-0) を割付、§1 quota (1 日上限) を守って `scheduledAt` を割付。
-- 出力の各要素: `{ key, domain, category, title, unit, template, imageKind, scheduledAt, structure, charMax }`。
+- 出力の各要素: `{ key, domain, category, title, readerLabel, hook, unit, template, imageKind, scheduledAt, structure, charMax }`。
   **キャプションは無い** (③で書く)。
+- `readerLabel` は読者向けの平易な呼び方、`hook` はサイトが同じ指標に使っている問いかけ
+  (正典は metric config の導出規則。`build-discovery-index.ts` が解決する)。
+  **指標の呼び方はこの 2 つを使い、`title` の調査名をそのまま本文に書かない**。
 
 ### ② 画像バッチ (決定的)
 
@@ -68,6 +71,10 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
 - **型は §2-0 の該当 `template` の `structure` に従う** (本スキルに型本文は無い。rules を読む)。
 - **数値は R2 の実データのみ** (quick-still の出力 `caption.txt` / `source.json` に上位5・下位5・倍率がある)。
   推測値を書かない (`evidence-based-judgment.md`)。
+- **指標の呼び方は `readerLabel` / `hook`**。「牛肉消費支出額」ではなく「牛肉への支出」と書く。
+  `hook` は 47 都道府県の並びを問う汎用文なので、そのまま 1 行目にせず語彙を揃える参考にする
+  (`quick-still` が出す `caption.txt` の見出しは `hook` を使った既定案)。
+  正式な統計名は出典に触れるときだけ使う。
 - **URL は書かず `{{url}}` トークンを 1 個だけ置く** (register が §4 の UTM URL に決定的置換する。URL を
   LLM が書くと捏造・UTM 不整合になる)。
 - **ハッシュタグ 3-5 個**。本文 (URL・改行除く) は `charMax` 以下。
