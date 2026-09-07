@@ -19,43 +19,49 @@
  *   npx tsx packages/data-configs/scripts/validate-metric-config.ts
  *   npx tsx packages/data-configs/scripts/validate-metric-config.ts --strict  # warn も exit 1
  */
-import { readdirSync, readFileSync } from "node:fs";
-import { dirname, resolve, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { readdirSync, readFileSync } from 'node:fs';
+import { dirname, resolve, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from "@stats47/types";
+import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from '@stats47/types';
 
-import { CATEGORY_KEYS } from "../src/types";
-import { moneyUnitExponent } from "../src/money-unit";
-import { METRICS_REGISTRY } from "../src/registry";
+import { CATEGORY_KEYS } from '../src/types';
+import { moneyUnitExponent } from '../src/money-unit';
+import { METRICS_REGISTRY } from '../src/registry';
 import {
   THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
   collectThemeMetricContentCoverage,
   listThemeCatalogs,
   validateThemeMetricContentCoverage,
-} from "../src/theme-catalog";
-import { parseUnit } from "../src/unit/unit-semantics";
+} from '../src/theme-catalog';
+import { parseUnit } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const METRICS_DIR = resolve(__dirname, "../src/metrics");
-const STRICT = process.argv.includes("--strict");
+const METRICS_DIR = resolve(__dirname, '../src/metrics');
+const STRICT = process.argv.includes('--strict');
 
 const VALID_CATEGORIES = new Set<string>(CATEGORY_KEYS);
 
 function strField(text: string, key: string): string | null {
-  // config は `"key": "..."` (JSON 風) と `key: "..."` (createMetric 等) の両形式がある。
-  // キーのクォートを optional にして両方拾う (片方しか拾わないと無効値を見逃す)。
-  const m = text.match(new RegExp(`(?:"${key}"|\\b${key})\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`));
-  return m ? m[1] : null;
+  // config は JSON 風 / TypeScript object の両形式があり、Prettier 後は single quote になる。
+  // key/value とも quote の有無・種類に依存せず拾う。
+  const m = text.match(
+    new RegExp(
+      `(?:"${key}"|'${key}'|\\b${key})\\s*:\\s*(?:"((?:[^"\\\\]|\\\\.)*)"|'((?:[^'\\\\]|\\\\.)*)')`
+    )
+  );
+  return m ? (m[1] ?? m[2]) : null;
 }
 
 function boolField(text: string, key: string): boolean | null {
   const m = text.match(new RegExp(`\\b${key}\\s*:\\s*(true|false)`));
-  return m ? m[1] === "true" : null;
+  return m ? m[1] === 'true' : null;
 }
 
 function numField(text: string, key: string): number | null {
-  const m = text.match(new RegExp(`(?:"${key}"|\\b${key})\\s*:\\s*(-?[0-9.eE+]+)`));
+  const m = text.match(
+    new RegExp(`(?:"${key}"|\\b${key})\\s*:\\s*(-?[0-9.eE+]+)`)
+  );
   if (!m) return null;
   const n = Number(m[1]);
   return Number.isFinite(n) ? n : null;
@@ -65,11 +71,11 @@ function numField(text: string, key: string): number | null {
 function looksLikeNote(s: string): boolean {
   const t = s.trim();
   return (
-    t.startsWith("※") ||
-    t.startsWith("注") ||
-    t.includes("調査対象外") ||
-    t.includes("value=0") ||
-    t.includes("対象外")
+    t.startsWith('※') ||
+    t.startsWith('注') ||
+    t.includes('調査対象外') ||
+    t.includes('value=0') ||
+    t.includes('対象外')
   );
 }
 
@@ -81,6 +87,8 @@ interface Row {
   unit: string | null;
   category: string | null;
   surveyId: string | null;
+  surveyScope: string | null;
+  surveyScopeReason: string | null;
   resourceId: string | null;
   statsDataId: string | null;
   isActive: boolean | null;
@@ -96,8 +104,8 @@ interface Row {
  */
 function loadSurveyMasterIds(): Set<string> | null {
   try {
-    const p = resolve(__dirname, "../../ranking/src/data/surveys.json");
-    const list = JSON.parse(readFileSync(p, "utf8")) as Array<{ id: string }>;
+    const p = resolve(__dirname, '../../ranking/src/data/surveys.json');
+    const list = JSON.parse(readFileSync(p, 'utf8')) as Array<{ id: string }>;
     return new Set(list.map((s) => s.id));
   } catch {
     return null; // マスタが読めない環境では本チェックをスキップ (他の lint は継続)
@@ -105,41 +113,46 @@ function loadSurveyMasterIds(): Set<string> | null {
 }
 
 function normalizeTitle(title: string): string {
-  return title.replace(/[（(][^）)]*[）)]/g, "").replace(/\s/g, "").trim();
+  return title
+    .replace(/[（(][^）)]*[）)]/g, '')
+    .replace(/\s/g, '')
+    .trim();
 }
 
 function tally(list: string[]): string {
   const counts = list.reduce<Record<string, number>>((acc, m) => {
-    const tag = m.match(/^\[([a-z-]+)\]/)?.[1] ?? "other";
+    const tag = m.match(/^\[([a-z-]+)\]/)?.[1] ?? 'other';
     acc[tag] = (acc[tag] ?? 0) + 1;
     return acc;
   }, {});
   return Object.entries(counts)
     .map(([k, v]) => `${k}=${v}`)
-    .join(" ");
+    .join(' ');
 }
 
 function main() {
   const files = readdirSync(METRICS_DIR).filter(
-    (f) => f.endsWith(".ts") && f !== "index.ts",
+    (f) => f.endsWith('.ts') && f !== 'index.ts'
   );
 
   const rows: Row[] = [];
   for (const f of files) {
-    const text = readFileSync(join(METRICS_DIR, f), "utf8");
+    const text = readFileSync(join(METRICS_DIR, f), 'utf8');
     rows.push({
-      file: f.replace(".ts", ""),
-      key: strField(text, "key"),
-      title: strField(text, "title") ?? "",
-      subtitle: strField(text, "subtitle"),
-      unit: strField(text, "unit"),
-      category: strField(text, "category"),
-      surveyId: strField(text, "surveyId"),
-      resourceId: strField(text, "resourceId"),
-      statsDataId: strField(text, "statsDataId"),
-      isActive: boolField(text, "isActive"),
-      colorScheme: strField(text, "colorScheme"),
-      valueScale: numField(text, "valueScale"),
+      file: f.replace('.ts', ''),
+      key: strField(text, 'key'),
+      title: strField(text, 'title') ?? '',
+      subtitle: strField(text, 'subtitle'),
+      unit: strField(text, 'unit'),
+      category: strField(text, 'category'),
+      surveyId: strField(text, 'surveyId'),
+      surveyScope: strField(text, 'surveyScope'),
+      surveyScopeReason: strField(text, 'surveyScopeReason'),
+      resourceId: strField(text, 'resourceId'),
+      statsDataId: strField(text, 'statsDataId'),
+      isActive: boolField(text, 'isActive'),
+      colorScheme: strField(text, 'colorScheme'),
+      valueScale: numField(text, 'valueScale'),
     });
   }
 
@@ -152,7 +165,7 @@ function main() {
       maxMissingDescriptions: THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
       errors,
       warns,
-    },
+    }
   );
 
   // error: 語彙外の colorScheme
@@ -164,7 +177,7 @@ function main() {
     if (r.colorScheme && !isKnownColorScheme(r.colorScheme)) {
       errors.push(
         `[color-scheme] ${r.file}: 語彙外の colorScheme "${r.colorScheme}" ` +
-          `(COLOR_SCHEME_CATALOG の ${COLOR_SCHEME_CATALOG.length} 件から選ぶ)`,
+          `(COLOR_SCHEME_CATALOG の ${COLOR_SCHEME_CATALOG.length} 件から選ぶ)`
       );
     }
   }
@@ -172,7 +185,9 @@ function main() {
   // error: 無効 category
   for (const r of rows) {
     if (r.category && !VALID_CATEGORIES.has(r.category)) {
-      errors.push(`[category] ${r.file}: 無効な category "${r.category}" (17 軸のいずれかにする)`);
+      errors.push(
+        `[category] ${r.file}: 無効な category "${r.category}" (17 軸のいずれかにする)`
+      );
     }
   }
 
@@ -182,19 +197,45 @@ function main() {
     for (const r of rows) {
       if (r.surveyId && !surveyMasterIds.has(r.surveyId)) {
         errors.push(
-          `[survey-id] ${r.file}: surveyId "${r.surveyId}" が surveys.json に実在しない (packages/ranking/src/data/surveys.json)`,
+          `[survey-id] ${r.file}: surveyId "${r.surveyId}" が surveys.json に実在しない (packages/ranking/src/data/surveys.json)`
         );
       }
+    }
+  }
+
+  // error: 統計調査 taxonomy の対象外は機械可読な scope と十分な理由を常に対で持つ。
+  for (const r of rows) {
+    if (r.surveyScope && r.surveyScope !== 'not-applicable') {
+      errors.push(
+        `[survey-scope] ${r.file}: 無効な surveyScope "${r.surveyScope}"`
+      );
+    }
+    if (
+      r.surveyScope === 'not-applicable' &&
+      (r.surveyScopeReason?.trim().length ?? 0) < 10
+    ) {
+      errors.push(
+        `[survey-scope] ${r.file}: surveyScopeReason は10文字以上で必須`
+      );
+    }
+    if (!r.surveyScope && r.surveyScopeReason) {
+      errors.push(
+        `[survey-scope] ${r.file}: surveyScopeReason には surveyScope が必要`
+      );
     }
   }
 
   // error: title への年混入 / 注釈(※)混入
   for (const r of rows) {
     if (/(19|20)\d{2}\s*年?度?/.test(r.title)) {
-      errors.push(`[title-year] ${r.file}: title に年が混入 「${r.title}」 (年は years/latestYear へ)`);
+      errors.push(
+        `[title-year] ${r.file}: title に年が混入 「${r.title}」 (年は years/latestYear へ)`
+      );
     }
     if (looksLikeNote(r.title)) {
-      errors.push(`[title-note] ${r.file}: title に注釈(※)が混入 「${r.title}」 (注釈は note へ)`);
+      errors.push(
+        `[title-note] ${r.file}: title に注釈(※)が混入 「${r.title}」 (注釈は note へ)`
+      );
     }
   }
 
@@ -203,18 +244,27 @@ function main() {
     if (!r.subtitle) continue;
     const s = r.subtitle.trim();
     if (looksLikeNote(s)) {
-      errors.push(`[subtitle-note] ${r.file}: 注釈は subtitle でなく note へ 「${s.slice(0, 40)}」`);
+      errors.push(
+        `[subtitle-note] ${r.file}: 注釈は subtitle でなく note へ 「${s.slice(0, 40)}」`
+      );
     } else if (r.title && (s === r.title || r.title.includes(s))) {
       // 真の冗長 = subtitle が title と同一/部分集合。
       // subtitle が title を包含する (s.includes(title)) ケースは「定義の追加情報」なので
       // 冗長ではない (例: title「乳用牛飼養頭数」/ subtitle「乳用牛(めす)の飼養頭数合計」)。
-      errors.push(`[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`);
+      errors.push(
+        `[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`
+      );
     }
   }
 
   // error: unit 空 / プレースホルダ
   for (const r of rows) {
-    if (r.unit === null || r.unit.trim() === "" || r.unit.trim() === "‐" || r.unit.trim() === "-") {
+    if (
+      r.unit === null ||
+      r.unit.trim() === '' ||
+      r.unit.trim() === '‐' ||
+      r.unit.trim() === '-'
+    ) {
       errors.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
     }
   }
@@ -229,13 +279,15 @@ function main() {
     if (r.valueScale === null) continue;
     if (moneyUnitExponent(r.unit) === null) {
       errors.push(
-        `[value-scale] ${r.file}: valueScale は金額単位族専用 (unit="${r.unit}" は族外)`,
+        `[value-scale] ${r.file}: valueScale は金額単位族専用 (unit="${r.unit}" は族外)`
       );
       continue;
     }
     const exp = Math.log10(r.valueScale);
     if (!(r.valueScale > 0) || Math.abs(exp - Math.round(exp)) > 1e-9) {
-      errors.push(`[value-scale] ${r.file}: valueScale は 10^k のみ (${r.valueScale})`);
+      errors.push(
+        `[value-scale] ${r.file}: valueScale は 10^k のみ (${r.valueScale})`
+      );
     }
   }
 
@@ -248,23 +300,27 @@ function main() {
   {
     const unknownByUnit = new Map<string, string[]>();
     for (const r of rows) {
-      if (!r.unit || r.unit.trim() === "") continue;
+      if (!r.unit || r.unit.trim() === '') continue;
       if (parseUnit(r.unit).dimension !== null) continue;
       const list = unknownByUnit.get(r.unit) ?? [];
       list.push(r.key ?? r.file);
       unknownByUnit.set(r.unit, list);
     }
-    const interpretable = rows.length - [...unknownByUnit.values()].reduce((n, v) => n + v.length, 0);
+    const interpretable =
+      rows.length -
+      [...unknownByUnit.values()].reduce((n, v) => n + v.length, 0);
     if (unknownByUnit.size > 0) {
-      const sorted = [...unknownByUnit.entries()].sort((a, b) => b[1].length - a[1].length);
+      const sorted = [...unknownByUnit.entries()].sort(
+        (a, b) => b[1].length - a[1].length
+      );
       warns.push(
         `[unit-vocab] 解釈できない unit ${sorted.length} 種 / ${rows.length - interpretable} 件 ` +
           `(解釈率 ${((interpretable / rows.length) * 100).toFixed(1)}%): ` +
           sorted
             .slice(0, 10)
             .map(([u, keys]) => `"${u}"×${keys.length}`)
-            .join(", ") +
-          (sorted.length > 10 ? ` …他 ${sorted.length - 10} 種` : ""),
+            .join(', ') +
+          (sorted.length > 10 ? ` …他 ${sorted.length - 10} 種` : '')
       );
     }
   }
@@ -273,10 +329,10 @@ function main() {
   // isActive:true (本番配信対象) なら error / false なら warn (DR-AUDIT-08)
   for (const r of rows) {
     for (const [k, v] of [
-      ["resourceId", r.resourceId],
-      ["statsDataId", r.statsDataId],
+      ['resourceId', r.resourceId],
+      ['statsDataId', r.statsDataId],
     ] as const) {
-      if (!v?.startsWith("TODO-")) continue;
+      if (!v?.startsWith('TODO-')) continue;
       const msg = `[placeholder-source] ${r.file}: ${k} "${v}" が TODO プレースホルダ`;
       if (r.isActive) {
         errors.push(`${msg} のまま isActive:true (本番配信対象)`);
@@ -301,23 +357,23 @@ function main() {
       | undefined;
     const isActive = cfg.isActive === true;
 
-    if (src?.kind === "external") {
+    if (src?.kind === 'external') {
       const fk = src.fetcherKey;
       const conf = (src.config ?? {}) as Record<string, unknown>;
       const prov = conf.provenance as Record<string, unknown> | undefined;
 
       // [provenance] 手動抽出 (manual) は復元に足る provenance が必須
-      if (fk === "manual") {
+      if (fk === 'manual') {
         const hasLocator = Boolean(prov?.pdfUrl || prov?.url);
         const missing = [
-          !hasLocator && "url/pdfUrl",
-          !prov?.accessedAt && "accessedAt",
-          !prov?.extraction && "extraction",
-          !prov?.verification && "verification",
-          !prov?.restore && "restore",
+          !hasLocator && 'url/pdfUrl',
+          !prov?.accessedAt && 'accessedAt',
+          !prov?.extraction && 'extraction',
+          !prov?.verification && 'verification',
+          !prov?.restore && 'restore',
         ].filter(Boolean);
         if (missing.length > 0) {
-          const msg = `[provenance] ${key}: 手動抽出(manual)だが provenance 不足 (欠落: ${missing.join(", ")})`;
+          const msg = `[provenance] ${key}: 手動抽出(manual)だが provenance 不足 (欠落: ${missing.join(', ')})`;
           if (isActive) errors.push(`${msg} ・isActive:true`);
           else warns.push(`${msg} (isActive:false のため warn)`);
         }
@@ -326,21 +382,21 @@ function main() {
         // calculated (親から再計算可能・calc-ref が resolvable) は除外
         const calcObj = cfg.calculation as Record<string, unknown> | undefined;
         const calcResolvable =
-          fk === "calculated" &&
+          fk === 'calculated' &&
           [calcObj?.numeratorKey, calcObj?.denominatorKey]
             .filter(Boolean)
             .every((r) => registryKeys.has(r as string)) &&
           Boolean(calcObj?.numeratorKey);
         const hasMachineId = Boolean(
           conf.ksjDataId ||
-            (conf.estat as Record<string, unknown> | undefined)?.statsDataId ||
-            conf.statsDataId ||
-            src.url ||
-            (conf.source as Record<string, unknown> | undefined)?.url,
+          (conf.estat as Record<string, unknown> | undefined)?.statsDataId ||
+          conf.statsDataId ||
+          src.url ||
+          (conf.source as Record<string, unknown> | undefined)?.url
         );
-        if (!calcResolvable && (fk === "unknown" || !hasMachineId)) {
+        if (!calcResolvable && (fk === 'unknown' || !hasMachineId)) {
           warns.push(
-            `[provenance-thin] ${key}: external(fetcherKey:${fk ?? "?"}) に再取得キー/出典URL が無い (要 provenance backfill)`,
+            `[provenance-thin] ${key}: external(fetcherKey:${fk ?? '?'}) に再取得キー/出典URL が無い (要 provenance backfill)`
           );
         }
       }
@@ -350,19 +406,27 @@ function main() {
     const refs: Array<string | undefined> = [];
     const calc = cfg.calculation as Record<string, unknown> | undefined;
     if (calc) {
-      for (const f of ["numeratorKey", "denominatorKey", "numeratorRankingKey", "denominatorRankingKey"]) {
+      for (const f of [
+        'numeratorKey',
+        'denominatorKey',
+        'numeratorRankingKey',
+        'denominatorRankingKey',
+      ]) {
         refs.push(calc[f] as string | undefined);
       }
     }
-    if (src?.kind === "calculated") {
-      const formula = (cfg.source as { formula?: Record<string, unknown> }).formula ?? {};
-      for (const f of ["numerator", "denominator", "left", "right"]) {
+    if (src?.kind === 'calculated') {
+      const formula =
+        (cfg.source as { formula?: Record<string, unknown> }).formula ?? {};
+      for (const f of ['numerator', 'denominator', 'left', 'right']) {
         refs.push(formula[f] as string | undefined);
       }
     }
     for (const ref of refs) {
       if (ref && !registryKeys.has(ref)) {
-        errors.push(`[calc-ref] ${key}: 参照先 metric "${ref}" が registry に実在しない`);
+        errors.push(
+          `[calc-ref] ${key}: 参照先 metric "${ref}" が registry に実在しない`
+        );
       }
     }
 
@@ -373,19 +437,21 @@ function main() {
     //   (disposable-income-after-rent の実害。2026-08-05)。比は期間が約分されるので不要。
     // ★丸め桁は配信値そのものを決める。既定に頼ると生成器の実装差で値が動く。
     const isCalculatedFetcher =
-      src?.kind === "external" && (src as { fetcherKey?: string }).fetcherKey === "calculated";
+      src?.kind === 'external' &&
+      (src as { fetcherKey?: string }).fetcherKey === 'calculated';
     if (isCalculatedFetcher) {
-      const calcType = (calc?.type ?? calc?.calculationType) as string | undefined;
-      if (calcType === "subtraction" && !calc?.periodAlign) {
+      const calcType = (calc?.type ?? calc?.calculationType) as
+        string | undefined;
+      if (calcType === 'subtraction' && !calc?.periodAlign) {
         errors.push(
           `[calc-period] ${key}: subtraction は calculation.periodAlign の宣言が必須` +
-            ` (月額と年額を引き算する事故を防ぐ)`,
+            ` (月額と年額を引き算する事故を防ぐ)`
         );
       }
       const display = cfg.display as { decimalPlaces?: unknown } | undefined;
-      if (typeof display?.decimalPlaces !== "number") {
+      if (typeof display?.decimalPlaces !== 'number') {
         errors.push(
-          `[calc-display] ${key}: 計算型は display.decimalPlaces が必須 (丸め桁が配信値を決めるため)`,
+          `[calc-display] ${key}: 計算型は display.decimalPlaces が必須 (丸め桁が配信値を決めるため)`
         );
       }
     }
@@ -401,26 +467,30 @@ function main() {
     if (group.length < 2) continue;
     for (const r of group) {
       if (!r.subtitle || looksLikeNote(r.subtitle)) {
-        errors.push(`[dup-title] ${r.file}: 同名 title が ${group.length} 件あるが区別子(subtitle)なし 「${r.title}」`);
+        errors.push(
+          `[dup-title] ${r.file}: 同名 title が ${group.length} 件あるが区別子(subtitle)なし 「${r.title}」`
+        );
       }
     }
   }
 
   // ── 出力 ──
-  console.log(`metric-config 検証: ${files.length} configs / error ${errors.length} / warn ${warns.length}`);
+  console.log(
+    `metric-config 検証: ${files.length} configs / error ${errors.length} / warn ${warns.length}`
+  );
 
   if (warns.length > 0) {
-    console.log("⚠️  warn 内訳:", tally(warns));
-    for (const w of warns.slice(0, 30)) console.log("   " + w);
+    console.log('⚠️  warn 内訳:', tally(warns));
+    for (const w of warns.slice(0, 30)) console.log('   ' + w);
     if (warns.length > 30) console.log(`   … 他 ${warns.length - 30} 件`);
   }
 
   if (errors.length > 0) {
     console.error(`\n❌ metric-config 検証: ${errors.length} 件の error`);
-    console.error("   内訳:", tally(errors));
-    for (const e of errors.slice(0, 50)) console.error("   " + e);
+    console.error('   内訳:', tally(errors));
+    for (const e of errors.slice(0, 50)) console.error('   ' + e);
     if (errors.length > 50) console.error(`   … 他 ${errors.length - 50} 件`);
-    console.error("   規約: .claude/rules/metric-config-standards.md");
+    console.error('   規約: .claude/rules/metric-config-standards.md');
     process.exit(1);
   }
 
@@ -429,7 +499,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log("✅ metric-config 検証: error なし");
+  console.log('✅ metric-config 検証: error なし');
   process.exit(0);
 }
 

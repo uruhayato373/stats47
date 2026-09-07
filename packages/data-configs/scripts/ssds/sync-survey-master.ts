@@ -7,17 +7,17 @@
  * 実行: cd packages/data-configs && npx tsx scripts/ssds/sync-survey-master.ts
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { PROPOSED_NEW_SURVEYS } from "../../src/ssds/source-name-to-survey";
+import {
+  PROPOSED_NEW_SURVEYS,
+  RETIRED_SURVEY_IDS,
+} from '../../src/ssds/source-name-to-survey';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SURVEYS_JSON = join(
-  __dirname,
-  "../../../ranking/src/data/surveys.json",
-);
+const SURVEYS_JSON = join(__dirname, '../../../ranking/src/data/surveys.json');
 
 type SurveyRow = {
   id: string;
@@ -40,13 +40,17 @@ type SurveyRow = {
 };
 
 function main(): void {
-  const rows: SurveyRow[] = JSON.parse(readFileSync(SURVEYS_JSON, "utf-8"));
+  const parsed: SurveyRow[] = JSON.parse(readFileSync(SURVEYS_JSON, 'utf-8'));
+  const retiredIds = new Set<string>(RETIRED_SURVEY_IDS);
+  const rows = parsed.filter((row) => !retiredIds.has(row.id));
   const existing = new Map(rows.map((r) => [r.id, r]));
-  const now = "2026-08-28 00:00:00";
+  const now = '2026-09-07 00:00:00';
 
   let added = 0;
   let enriched = 0;
-  for (const { id, name, organization, url } of Object.values(PROPOSED_NEW_SURVEYS)) {
+  for (const { id, name, organization, url } of Object.values(
+    PROPOSED_NEW_SURVEYS
+  )) {
     const current = existing.get(id);
     if (current) {
       let changed = false;
@@ -66,9 +70,9 @@ function main(): void {
     }
     rows.push({
       id,
-      sourceKind: "survey",
+      sourceKind: 'survey',
       externalId: null,
-      parentSourceId: "estat",
+      parentSourceId: 'estat',
       name,
       organization: organization ?? null,
       url: url ?? null,
@@ -87,8 +91,10 @@ function main(): void {
     added++;
   }
 
-  writeFileSync(SURVEYS_JSON, JSON.stringify(rows, null, 2) + "\n", "utf-8");
-  console.log(`survey master: +${added} 追加 / ${enriched} 補完 / 合計 ${rows.length} 件`);
+  writeFileSync(SURVEYS_JSON, JSON.stringify(rows, null, 2) + '\n', 'utf-8');
+  console.log(
+    `survey master: +${added} 追加 / ${enriched} 補完 / -${parsed.length - rows.length} orphan削除 / 合計 ${rows.length} 件`
+  );
 }
 
 main();

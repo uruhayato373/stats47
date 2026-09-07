@@ -12,14 +12,14 @@ import {
   resolveSurveyIdBySourceName,
   type MetricRegistry,
   type ProvenanceSurvey,
-} from "@stats47/data-configs";
+} from '@stats47/data-configs';
 import {
   collectChartDependencies,
   type ThemeCatalog,
-} from "@stats47/data-configs/theme-catalog";
+} from '@stats47/data-configs/theme-catalog';
 
-import surveysMaster from "../data/surveys.json";
-import { resolveSurveyLinkage } from "../builders/build-ranking-item-from-metric";
+import surveysMaster from '../data/surveys.json';
+import { resolveSurveyLinkage } from '../builders/build-ranking-item-from-metric';
 
 export interface SurveyEstatReference {
   statsDataId: string;
@@ -36,6 +36,7 @@ export interface SurveyTaxonomyResolution {
   surveys: ProvenanceSurvey[];
   resolvedMetricKeys: string[];
   unresolvedMetricKeys: string[];
+  notApplicableMetricKeys: string[];
   resolvedEstatReferences: SurveyEstatReference[];
   unresolvedEstatReferences: SurveyEstatReference[];
   resolvedSourceNames: string[];
@@ -43,10 +44,7 @@ export interface SurveyTaxonomyResolution {
 }
 
 export type SurveySurfaceStatus =
-  | "resolved"
-  | "unresolved"
-  | "not-applicable"
-  | "missing-lineage";
+  'resolved' | 'unresolved' | 'not-applicable' | 'missing-lineage';
 
 export interface ThemeChartSurveyTaxonomy {
   componentKey: string;
@@ -84,17 +82,22 @@ export interface BlogChartSurveyTaxonomy {
 }
 
 const MASTER_BY_ID = new Map(
-  (surveysMaster as Array<{ id: string; name: string }>).map((survey) => [survey.id, survey]),
+  (surveysMaster as Array<{ id: string; name: string }>).map((survey) => [
+    survey.id,
+    survey,
+  ])
 );
 const MASTER_IDS = new Set(MASTER_BY_ID.keys());
 
-const NON_SURVEY_BLOG_KINDS = new Set(["authored"]);
+const NON_SURVEY_BLOG_KINDS = new Set(['authored']);
 
 function unique(values: readonly string[]): string[] {
   return [...new Set(values.filter(Boolean))];
 }
 
-function dedupeSurveys(surveys: readonly ProvenanceSurvey[]): ProvenanceSurvey[] {
+function dedupeSurveys(
+  surveys: readonly ProvenanceSurvey[]
+): ProvenanceSurvey[] {
   const byId = new Map<string, ProvenanceSurvey>();
   for (const survey of surveys) {
     if (!MASTER_IDS.has(survey.id) || byId.has(survey.id)) continue;
@@ -105,7 +108,9 @@ function dedupeSurveys(surveys: readonly ProvenanceSurvey[]): ProvenanceSurvey[]
 }
 
 /** master に実在する survey id だけを名称付きで返す。snapshot の id 復元用。 */
-export function getSurveyTaxonomyEntries(ids: readonly string[]): ProvenanceSurvey[] {
+export function getSurveyTaxonomyEntries(
+  ids: readonly string[]
+): ProvenanceSurvey[] {
   return unique(ids).flatMap((id) => {
     const survey = MASTER_BY_ID.get(id);
     return survey ? [{ id: survey.id, name: survey.name }] : [];
@@ -118,11 +123,12 @@ export function getSurveyTaxonomyEntries(ids: readonly string[]): ProvenanceSurv
  */
 export function resolveSurveyTaxonomy(
   input: SurveyTaxonomyInput,
-  registry: MetricRegistry,
+  registry: MetricRegistry
 ): SurveyTaxonomyResolution {
   const surveys: ProvenanceSurvey[] = [];
   const resolvedMetricKeys: string[] = [];
   const unresolvedMetricKeys: string[] = [];
+  const notApplicableMetricKeys: string[] = [];
   const resolvedEstatReferences: SurveyEstatReference[] = [];
   const unresolvedEstatReferences: SurveyEstatReference[] = [];
   const resolvedSourceNames: string[] = [];
@@ -132,6 +138,10 @@ export function resolveSurveyTaxonomy(
     const metric = registry[key];
     if (!metric) {
       unresolvedMetricKeys.push(key);
+      continue;
+    }
+    if (metric.surveyScope === 'not-applicable') {
+      notApplicableMetricKeys.push(key);
       continue;
     }
     const resolved = resolveSurveyLinkage(metric, registry).originalSurveys;
@@ -146,11 +156,11 @@ export function resolveSurveyTaxonomy(
   const seenEstat = new Set<string>();
   for (const reference of input.estatReferences ?? []) {
     if (!reference.statsDataId) continue;
-    const identity = `${reference.statsDataId}::${reference.cdCat01 ?? ""}`;
+    const identity = `${reference.statsDataId}::${reference.cdCat01 ?? ''}`;
     if (seenEstat.has(identity)) continue;
     seenEstat.add(identity);
     const resolved = dedupeSurveys(
-      resolveProvenanceByParams(reference.statsDataId, reference.cdCat01),
+      resolveProvenanceByParams(reference.statsDataId, reference.cdCat01)
     );
     if (resolved.length === 0) unresolvedEstatReferences.push(reference);
     else {
@@ -173,6 +183,7 @@ export function resolveSurveyTaxonomy(
     surveys: dedupeSurveys(surveys),
     resolvedMetricKeys,
     unresolvedMetricKeys,
+    notApplicableMetricKeys,
     resolvedEstatReferences,
     unresolvedEstatReferences,
     resolvedSourceNames,
@@ -180,25 +191,25 @@ export function resolveSurveyTaxonomy(
   };
 }
 
-function chartMetricKeys(chart: ThemeCatalog["charts"][number]): string[] {
+function chartMetricKeys(chart: ThemeCatalog['charts'][number]): string[] {
   return unique(chart.relatedRankingKeys ?? []);
 }
 
 /** ThemeCatalog の metric と全 chart を survey taxonomy へ決定的に接続する。 */
 export function resolveThemeSurveyTaxonomy(
   catalog: ThemeCatalog,
-  registry: MetricRegistry,
+  registry: MetricRegistry
 ): ThemeSurveyTaxonomy {
   const metrics = resolveSurveyTaxonomy(
     { metricKeys: catalog.metrics.map((metric) => metric.rankingKey) },
-    registry,
+    registry
   );
   const charts = catalog.charts.map((chart): ThemeChartSurveyTaxonomy => {
-    if (chart.componentType === "markdown-section") {
+    if (chart.componentType === 'markdown-section') {
       return {
         componentKey: chart.componentKey,
         componentType: chart.componentType,
-        status: "not-applicable",
+        status: 'not-applicable',
         surveys: [],
         metricKeys: [],
         estatReferences: [],
@@ -208,22 +219,35 @@ export function resolveThemeSurveyTaxonomy(
     }
 
     const metricKeys = chartMetricKeys(chart);
-    const estatReferences = collectChartDependencies(chart).requests.map((request) => ({
-      statsDataId: request.statsDataId,
-      ...(request.filters.cdCat01 ? { cdCat01: request.filters.cdCat01 } : {}),
-    }));
-    const resolution = resolveSurveyTaxonomy({ metricKeys, estatReferences }, registry);
+    const estatReferences = collectChartDependencies(chart).requests.map(
+      (request) => ({
+        statsDataId: request.statsDataId,
+        ...(request.filters.cdCat01
+          ? { cdCat01: request.filters.cdCat01 }
+          : {}),
+      })
+    );
+    const resolution = resolveSurveyTaxonomy(
+      { metricKeys, estatReferences },
+      registry
+    );
     const hasReferences = metricKeys.length > 0 || estatReferences.length > 0;
+    const onlyNotApplicable =
+      resolution.notApplicableMetricKeys.length > 0 &&
+      resolution.notApplicableMetricKeys.length === metricKeys.length &&
+      estatReferences.length === 0;
 
     return {
       componentKey: chart.componentKey,
       componentType: chart.componentType,
       status:
         resolution.surveys.length > 0
-          ? "resolved"
-          : hasReferences
-            ? "unresolved"
-            : "missing-lineage",
+          ? 'resolved'
+          : onlyNotApplicable
+            ? 'not-applicable'
+            : hasReferences
+              ? 'unresolved'
+              : 'missing-lineage',
       surveys: resolution.surveys,
       metricKeys,
       estatReferences,
@@ -245,7 +269,7 @@ export function resolveThemeSurveyTaxonomy(
 
 function splitReferenceValues(value: unknown): string[] {
   if (Array.isArray(value)) return value.flatMap(splitReferenceValues);
-  if (typeof value !== "string") return [];
+  if (typeof value !== 'string') return [];
   return value
     .split(/[+|,]/)
     .map((item) => item.trim())
@@ -254,7 +278,7 @@ function splitReferenceValues(value: unknown): string[] {
 
 function splitStatsDataIds(value: unknown): string[] {
   if (Array.isArray(value)) return value.flatMap(splitStatsDataIds);
-  if (typeof value !== "string") return [];
+  if (typeof value !== 'string') return [];
   return value
     .split(/[/+|,]/)
     .map((item) => item.trim())
@@ -262,58 +286,89 @@ function splitStatsDataIds(value: unknown): string[] {
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-function nestedRecords(source: Record<string, unknown>): Record<string, unknown>[] {
-  return [
-    source,
-    ...(Array.isArray(source.inputs) ? source.inputs.filter(isRecord) : []),
-    ...(Array.isArray(source.sources) ? source.sources.filter(isRecord) : []),
-    ...(Array.isArray(source.derivedFrom) ? source.derivedFrom.filter(isRecord) : []),
-  ];
+function nestedRecords(
+  source: Record<string, unknown>
+): Record<string, unknown>[] {
+  const records: Record<string, unknown>[] = [];
+  const visit = (value: unknown): void => {
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item);
+      return;
+    }
+    if (!isRecord(value)) return;
+    records.push(value);
+    for (const child of Object.values(value)) visit(child);
+  };
+  visit(source);
+  return records;
 }
 
 /** blog chart source.json から taxonomy が読む参照だけを決定的に抽出する。 */
-export function extractBlogChartSourceReferences(sourceData: unknown): BlogChartSourceReferences {
+export function extractBlogChartSourceReferences(
+  sourceData: unknown
+): BlogChartSourceReferences {
   if (!isRecord(sourceData)) {
-    return { rankingKeys: [], statsDataIds: [], estatReferences: [], sourceNames: [] };
+    return {
+      rankingKeys: [],
+      statsDataIds: [],
+      estatReferences: [],
+      sourceNames: [],
+    };
   }
 
   const nested = nestedRecords(sourceData);
   const rankingKeys = unique([
-    ...splitReferenceValues(sourceData.metricKey),
-    ...splitReferenceValues(sourceData.metricKeys),
-    ...splitReferenceValues(sourceData.rankingKey),
-    ...splitReferenceValues(sourceData.rankingKeys),
-    ...splitReferenceValues(sourceData.xKey),
-    ...splitReferenceValues(sourceData.yKey),
-    ...splitReferenceValues(sourceData.xRankingKey),
-    ...splitReferenceValues(sourceData.yRankingKey),
-    ...nested.flatMap((item) => splitReferenceValues(item.rankingKey)),
     ...nested.flatMap((item) => splitReferenceValues(item.metricKey)),
-    ...(Array.isArray(sourceData.derivedFrom)
-      ? sourceData.derivedFrom.flatMap((item) =>
-          typeof item === "string" ? splitReferenceValues(item) : [],
-        )
-      : []),
-    ...[...JSON.stringify(sourceData).matchAll(/(?:r2:)?app\/ranking\/([^/"\s{}]+)\/values\.json/g)]
-      .map((match) => match[1]),
-    ...[...JSON.stringify(sourceData).matchAll(/(?:r2:)?app\/stats\/([^/"\s{}]+)\/values\.json/g)]
-      .map((match) => match[1]),
-  ]).filter((item) => !item.includes("/") && !item.includes(":"));
+    ...nested.flatMap((item) => splitReferenceValues(item.metricKeys)),
+    ...nested.flatMap((item) => splitReferenceValues(item.rankingKey)),
+    ...nested.flatMap((item) => splitReferenceValues(item.rankingKeys)),
+    ...nested.flatMap((item) => splitReferenceValues(item.xKey)),
+    ...nested.flatMap((item) => splitReferenceValues(item.yKey)),
+    ...nested.flatMap((item) => splitReferenceValues(item.xRankingKey)),
+    ...nested.flatMap((item) => splitReferenceValues(item.yRankingKey)),
+    ...nested.flatMap((item) => splitReferenceValues(item.secondaryRankingKey)),
+    ...nested.flatMap((item) => splitReferenceValues(item.base)),
+    ...nested.flatMap((item) => splitReferenceValues(item.pair)),
+    ...nested.flatMap((item) =>
+      isRecord(item.constituents)
+        ? Object.values(item.constituents).flatMap(splitReferenceValues)
+        : []
+    ),
+    ...nested.flatMap((item) => splitReferenceValues(item.derivedFrom)),
+    ...[
+      ...JSON.stringify(sourceData).matchAll(
+        /(?:r2:)?app\/ranking\/([^/"\s{}]+)\//g
+      ),
+    ].map((match) => match[1]),
+    ...[
+      ...JSON.stringify(sourceData).matchAll(
+        /(?:r2:)?app\/stats\/([^/"\s{}]+)\//g
+      ),
+    ].map((match) => match[1]),
+  ]).filter((item) => !item.includes('/') && !item.includes(':'));
 
   const estatReferences: SurveyEstatReference[] = [];
   for (const item of nested) {
     const ids = splitStatsDataIds(item.statsDataId);
-    const cdCat01 = typeof item.cdCat01 === "string" ? item.cdCat01 : undefined;
+    const params = isRecord(item.params) ? item.params : null;
+    const cdCat01 =
+      typeof item.cdCat01 === 'string'
+        ? item.cdCat01
+        : typeof params?.cdCat01 === 'string'
+          ? params.cdCat01
+          : undefined;
     for (const statsDataId of ids) {
       estatReferences.push({ statsDataId, ...(cdCat01 ? { cdCat01 } : {}) });
     }
   }
-  const statsDataIds = unique(estatReferences.map((reference) => reference.statsDataId));
+  const statsDataIds = unique(
+    estatReferences.map((reference) => reference.statsDataId)
+  );
   const sourceNames = unique(
-    nested.flatMap((item) => splitReferenceValues(item.sourceName)),
+    nested.flatMap((item) => splitReferenceValues(item.sourceName))
   );
 
   return { rankingKeys, statsDataIds, estatReferences, sourceNames };
@@ -322,29 +377,34 @@ export function extractBlogChartSourceReferences(sourceData: unknown): BlogChart
 /** blog chart source.json 1 件を survey taxonomy へ接続する。 */
 export function resolveBlogChartSurveyTaxonomy(
   sourceData: unknown,
-  registry: MetricRegistry,
+  registry: MetricRegistry
 ): BlogChartSurveyTaxonomy {
   if (!isRecord(sourceData)) {
     return {
       kind: null,
-      status: "missing-lineage",
+      status: 'missing-lineage',
       surveys: [],
-      references: { rankingKeys: [], statsDataIds: [], estatReferences: [], sourceNames: [] },
+      references: {
+        rankingKeys: [],
+        statsDataIds: [],
+        estatReferences: [],
+        sourceNames: [],
+      },
       unresolvedMetricKeys: [],
       unresolvedEstatReferences: [],
       unresolvedSourceNames: [],
     };
   }
-  const kind = typeof sourceData.kind === "string" ? sourceData.kind : null;
+  const kind = typeof sourceData.kind === 'string' ? sourceData.kind : null;
   const references = extractBlogChartSourceReferences(sourceData);
   if (
-    sourceData.surveyScope === "not-applicable" &&
-    typeof sourceData.surveyScopeReason === "string" &&
+    sourceData.surveyScope === 'not-applicable' &&
+    typeof sourceData.surveyScopeReason === 'string' &&
     sourceData.surveyScopeReason.trim().length >= 10
   ) {
     return {
       kind,
-      status: "not-applicable",
+      status: 'not-applicable',
       surveys: [],
       references,
       unresolvedMetricKeys: [],
@@ -355,7 +415,7 @@ export function resolveBlogChartSurveyTaxonomy(
   if (kind && NON_SURVEY_BLOG_KINDS.has(kind)) {
     return {
       kind,
-      status: "not-applicable",
+      status: 'not-applicable',
       surveys: [],
       references,
       unresolvedMetricKeys: [],
@@ -363,10 +423,10 @@ export function resolveBlogChartSurveyTaxonomy(
       unresolvedSourceNames: [],
     };
   }
-  if (kind === "manual" && references.sourceNames.length === 0) {
+  if (kind === 'manual' && references.sourceNames.length === 0) {
     return {
       kind,
-      status: "not-applicable",
+      status: 'not-applicable',
       surveys: [],
       references,
       unresolvedMetricKeys: [],
@@ -380,20 +440,28 @@ export function resolveBlogChartSurveyTaxonomy(
       estatReferences: references.estatReferences,
       sourceNames: references.sourceNames,
     },
-    registry,
+    registry
   );
   const hasReferences =
     references.rankingKeys.length > 0 ||
     references.estatReferences.length > 0 ||
     references.sourceNames.length > 0;
+  const onlyNotApplicable =
+    resolution.notApplicableMetricKeys.length > 0 &&
+    resolution.notApplicableMetricKeys.length ===
+      references.rankingKeys.length &&
+    references.estatReferences.length === 0 &&
+    references.sourceNames.length === 0;
   return {
     kind,
     status:
       resolution.surveys.length > 0
-        ? "resolved"
-        : hasReferences
-          ? "unresolved"
-          : "missing-lineage",
+        ? 'resolved'
+        : onlyNotApplicable
+          ? 'not-applicable'
+          : hasReferences
+            ? 'unresolved'
+            : 'missing-lineage',
     surveys: resolution.surveys,
     references,
     unresolvedMetricKeys: resolution.unresolvedMetricKeys,

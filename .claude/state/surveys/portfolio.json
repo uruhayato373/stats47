@@ -1,22 +1,55 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-06",
+  "generatedAt": "2026-09-07",
   "linkage": {
-    "auditedAt": "2026-09-06",
+    "auditedAt": "2026-09-07",
     "metrics": 2311,
-    "resolved": 2097,
-    "unresolved": 214,
-    "coveragePct": 90.7,
-    "unresolvedByReason": {
-      "external": 23,
-      "estat-uncovered": 78,
-      "ssds-synthetic-only": 113
-    },
-    "uncoveredStatsDataIds": 48,
-    "orphanSurveys": 17,
+    "resolved": 2303,
+    "unresolved": 0,
+    "coveragePct": 100,
+    "unresolvedByReason": {},
+    "uncoveredStatsDataIds": 0,
+    "orphanSurveys": 0,
     "badOverrides": 0
   },
   "surveys": [
+    {
+      "surveyId": "academic-achievement-survey",
+      "name": "全国学力・学習状況調査",
+      "organization": "文部科学省・国立教育政策研究所",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
     {
       "surveyId": "accommodation-survey",
       "name": "宿泊旅行統計調査",
@@ -120,6 +153,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 13
+    },
+    {
+      "surveyId": "age-adjusted-mortality-statistics",
+      "name": "都道府県別年齢調整死亡率",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "inactive-only",
+      "editorialStatus": "fallback",
+      "itemCount": 4,
+      "activeItemCount": 0,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "agricultural-income-statistics",
@@ -278,6 +348,43 @@
       "liveItemCount": 5
     },
     {
+      "surveyId": "air-pollution-control-law-status",
+      "name": "大気汚染防止法施行状況",
+      "organization": "環境省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "area-survey",
       "name": "全国都道府県市区町村別面積調",
       "organization": "国土地理院",
@@ -328,58 +435,6 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 30
-    },
-    {
-      "surveyId": "balance-of-payments",
-      "name": "国際収支統計",
-      "organization": "財務省・日本銀行",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "boj-statistics",
@@ -598,8 +653,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 4,
-      "activeItemCount": 4,
+      "itemCount": 5,
+      "activeItemCount": 5,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -694,58 +749,6 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 4
-    },
-    {
-      "surveyId": "comprehensive-energy-statistics",
-      "name": "総合エネルギー統計",
-      "organization": "資源エネルギー庁",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "comprehensive-living-conditions-survey",
@@ -904,66 +907,14 @@
       "liveItemCount": 4
     },
     {
-      "surveyId": "corporate-enterprise-statistics",
-      "name": "法人企業統計調査",
-      "organization": "財務省",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
-    },
-    {
       "surveyId": "cpi-annual",
       "name": "消費者物価指数",
       "organization": "総務省統計局",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 15,
-      "activeItemCount": 15,
+      "itemCount": 19,
+      "activeItemCount": 19,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1014,8 +965,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 3,
-      "activeItemCount": 3,
+      "itemCount": 8,
+      "activeItemCount": 8,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1060,66 +1011,14 @@
       "liveItemCount": 3
     },
     {
-      "surveyId": "current-production-statistics",
-      "name": "経済産業省生産動態統計",
-      "organization": "経済産業省",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
-    },
-    {
       "surveyId": "economic-census-activity",
       "name": "経済センサス-活動調査",
       "organization": "総務省・経済産業省",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 39,
-      "activeItemCount": 34,
+      "itemCount": 42,
+      "activeItemCount": 37,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1270,50 +1169,72 @@
       "nextReviewAt": "2026-10-01"
     },
     {
-      "surveyId": "electric-power-statistics",
-      "name": "電力調査統計",
+      "surveyId": "electricity-business-statistics",
+      "name": "電気事業便覧",
       "organization": "資源エネルギー庁",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "r2-drift",
       "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "itemCount": 2,
+      "activeItemCount": 2,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "internalNav": {
           "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "employment-insurance-annual-report",
+      "name": "雇用保険事業年報",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 4,
+      "activeItemCount": 4,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -1328,8 +1249,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 10,
-      "activeItemCount": 10,
+      "itemCount": 11,
+      "activeItemCount": 11,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1372,6 +1293,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 10
+    },
+    {
+      "surveyId": "employment-trends-survey",
+      "name": "雇用動向調査",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "establishment-enterprise-census",
@@ -1432,13 +1390,13 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 1,
-      "activeItemCount": 1,
+      "itemCount": 3,
+      "activeItemCount": 3,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": true,
-      "readerQuestionCount": 1,
+      "readerQuestionCount": 3,
       "relatedArticleCount": null,
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1478,14 +1436,51 @@
       "liveItemCount": 1
     },
     {
+      "surveyId": "farmland-transfer-conversion-report",
+      "name": "農地の移動と転用",
+      "organization": "農林水産省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "fire-annual-report",
       "name": "火災年報",
       "organization": "消防庁",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 10,
-      "activeItemCount": 8,
+      "itemCount": 15,
+      "activeItemCount": 13,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1582,6 +1577,80 @@
       "liveItemCount": 21
     },
     {
+      "surveyId": "fishery-census",
+      "name": "漁業センサス",
+      "organization": "農林水産省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 10,
+      "activeItemCount": 10,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "fixed-asset-tax-land-statistics",
+      "name": "固定資産の価格等の概要調書（土地）",
+      "organization": "総務省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 5,
+      "activeItemCount": 5,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "flood-statistics",
       "name": "水害統計調査",
       "organization": "国土交通省",
@@ -1634,66 +1703,14 @@
       "liveItemCount": 9
     },
     {
-      "surveyId": "food-balance-sheet",
-      "name": "食料需給表",
-      "organization": "農林水産省",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
-    },
-    {
       "surveyId": "foreign-residents-statistics",
       "name": "在留外国人統計",
       "organization": "法務省",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 7,
-      "activeItemCount": 7,
+      "itemCount": 10,
+      "activeItemCount": 10,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1842,14 +1859,51 @@
       "nextReviewAt": "2026-10-01"
     },
     {
+      "surveyId": "gas-business-statistics",
+      "name": "ガス事業年報",
+      "organization": "資源エネルギー庁",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 4,
+      "activeItemCount": 4,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "health-admin-report",
       "name": "衛生行政報告例",
       "organization": "厚生労働省",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 35,
-      "activeItemCount": 35,
+      "itemCount": 43,
+      "activeItemCount": 43,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1892,6 +1946,80 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 35
+    },
+    {
+      "surveyId": "health-insurance-annual-report",
+      "name": "健康保険事業年報",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "health-insurance-society-annual-report",
+      "name": "健康保険組合事業年報",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 4,
+      "activeItemCount": 4,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "hospital-report",
@@ -1952,8 +2080,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 23,
-      "activeItemCount": 23,
+      "itemCount": 25,
+      "activeItemCount": 25,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1998,14 +2126,51 @@
       "liveItemCount": 23
     },
     {
+      "surveyId": "housing-finance-user-survey",
+      "name": "公庫融資利用者調査報告",
+      "organization": "住宅金融支援機構",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "housing-land-survey",
       "name": "住宅・土地統計調査",
       "organization": "総務省統計局",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 32,
-      "activeItemCount": 32,
+      "itemCount": 35,
+      "activeItemCount": 35,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2056,8 +2221,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 10,
-      "activeItemCount": 10,
+      "itemCount": 14,
+      "activeItemCount": 14,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2212,8 +2377,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 3,
-      "activeItemCount": 3,
+      "itemCount": 6,
+      "activeItemCount": 6,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2316,8 +2481,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 8,
-      "activeItemCount": 8,
+      "itemCount": 11,
+      "activeItemCount": 11,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2362,14 +2527,51 @@
       "liveItemCount": 8
     },
     {
+      "surveyId": "junior-high-athletics-membership-survey",
+      "name": "加盟校・加盟生徒数調査",
+      "organization": "日本中学校体育連盟",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 10,
+      "activeItemCount": 10,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "kakei-chousa",
       "name": "家計調査（品目別）",
       "organization": "総務省統計局",
       "lifecycleStatus": "editorial-candidate",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 704,
-      "activeItemCount": 704,
+      "itemCount": 707,
+      "activeItemCount": 707,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2416,7 +2618,7 @@
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 694
+      "liveItemCount": 695
     },
     {
       "surveyId": "labor-market-annual",
@@ -2471,58 +2673,6 @@
       "liveItemCount": 9
     },
     {
-      "surveyId": "labour-force-survey",
-      "name": "労働力調査",
-      "organization": "総務省統計局",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
-    },
-    {
       "surveyId": "late-elderly-medical-annual-report",
       "name": "後期高齢者医療事業年報",
       "organization": "厚生労働省",
@@ -2567,6 +2717,80 @@
             "2026-W32",
             "2026-W36"
           ]
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "life-insurance-business-statistics",
+      "name": "生命保険事業概況",
+      "organization": "生命保険協会",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 4,
+      "activeItemCount": 4,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "life-tables",
+      "name": "生命表",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 6,
+      "activeItemCount": 6,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -2677,6 +2901,80 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 5
+    },
+    {
+      "surveyId": "local-election-results",
+      "name": "地方選挙結果調",
+      "organization": "総務省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 4,
+      "activeItemCount": 4,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "local-election-statistics",
+      "name": "地方公共団体の議会の議員及び長の所属党派別人員調等",
+      "organization": "総務省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "local-finance",
@@ -2891,6 +3189,43 @@
       "liveItemCount": 7
     },
     {
+      "surveyId": "long-term-care-insurance-annual-report",
+      "name": "介護保険事業状況報告年報",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "medical-facility-survey",
       "name": "医療施設調査",
       "organization": "厚生労働省",
@@ -3047,50 +3382,35 @@
       "nextReviewAt": "2026-10-01"
     },
     {
-      "surveyId": "monthly-labour-survey",
-      "name": "毎月勤労統計調査",
-      "organization": "厚生労働省",
+      "surveyId": "motor-vehicle-transport-statistics",
+      "name": "交通関連統計資料集",
+      "organization": "国土交通省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "r2-drift",
       "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "itemCount": 2,
+      "activeItemCount": 2,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "internalNav": {
           "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -3151,50 +3471,35 @@
       "liveItemCount": 29
     },
     {
-      "surveyId": "national-accounts",
-      "name": "国民経済計算年次推計",
-      "organization": "内閣府",
+      "surveyId": "national-election-results",
+      "name": "国政選挙結果調",
+      "organization": "総務省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "r2-drift",
       "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "itemCount": 4,
+      "activeItemCount": 4,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "internalNav": {
           "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -3203,50 +3508,35 @@
       "nextReviewAt": "2026-10-01"
     },
     {
-      "surveyId": "national-health-nutrition-survey",
-      "name": "国民健康・栄養調査",
+      "surveyId": "national-health-insurance-annual-report",
+      "name": "国民健康保険事業年報",
       "organization": "厚生労働省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "r2-drift",
       "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "itemCount": 4,
+      "activeItemCount": 4,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "internalNav": {
           "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -3359,6 +3649,43 @@
       "nextReviewAt": "2026-10-01"
     },
     {
+      "surveyId": "natural-conservation-area-data",
+      "name": "自然環境保全地域各種データ",
+      "organization": "環境省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "natural-park-area",
       "name": "自然公園の面積",
       "organization": "環境省",
@@ -3413,50 +3740,72 @@
       "liveItemCount": 6
     },
     {
-      "surveyId": "overseas-business-activities-survey",
-      "name": "海外事業活動基本調査",
-      "organization": "経済産業省",
+      "surveyId": "noise-control-law-status-survey",
+      "name": "騒音規制法施行状況調査",
+      "organization": "環境省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "inactive-only",
       "editorialStatus": "fallback",
-      "itemCount": 0,
+      "itemCount": 1,
       "activeItemCount": 0,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "internalNav": {
           "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "nta-annual-statistics",
+      "name": "国税庁統計年報書",
+      "organization": "国税庁",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -3523,13 +3872,13 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 3,
-      "activeItemCount": 2,
+      "itemCount": 31,
+      "activeItemCount": 28,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": true,
-      "readerQuestionCount": 2,
+      "readerQuestionCount": 3,
       "relatedArticleCount": null,
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -3575,8 +3924,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 4,
-      "activeItemCount": 4,
+      "itemCount": 6,
+      "activeItemCount": 6,
       "liveItemCount": 4,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -3613,6 +3962,43 @@
             "2026-W32",
             "2026-W36"
           ]
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "petroleum-sales-statistics",
+      "name": "都道府県別石油製品販売総括",
+      "organization": "経済産業省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -3833,14 +4219,51 @@
       "liveItemCount": 2
     },
     {
+      "surveyId": "population-research",
+      "name": "人口問題研究",
+      "organization": "国立社会保障・人口問題研究所",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "port-statistics",
       "name": "港湾調査（港湾統計年報）",
       "organization": "国土交通省",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 4,
-      "activeItemCount": 4,
+      "itemCount": 10,
+      "activeItemCount": 9,
       "liveItemCount": 4,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -3891,7 +4314,7 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 60,
+      "itemCount": 61,
       "activeItemCount": 16,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -3935,6 +4358,80 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 16
+    },
+    {
+      "surveyId": "prefectural-energy-consumption-statistics",
+      "name": "都道府県別エネルギー消費統計",
+      "organization": "資源エネルギー庁",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "prefectural-food-self-sufficiency",
+      "name": "都道府県別食料自給率",
+      "organization": "農林水産省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "prefectural-land-price-survey",
@@ -4093,50 +4590,35 @@
       "liveItemCount": 15
     },
     {
-      "surveyId": "railway-transport-survey",
-      "name": "鉄道輸送統計調査",
-      "organization": "国土交通省",
+      "surveyId": "regional-health-promotion-report",
+      "name": "地域保健・健康増進事業報告",
+      "organization": "厚生労働省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "r2-drift",
       "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "itemCount": 13,
+      "activeItemCount": 12,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "internalNav": {
           "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -4197,50 +4679,35 @@
       "nextReviewAt": "2026-10-01"
     },
     {
-      "surveyId": "retail-price-dynamics-survey",
-      "name": "小売物価統計調査（動向編）",
-      "organization": "総務省統計局",
+      "surveyId": "resident-registry-population-survey",
+      "name": "住民基本台帳に基づく人口、人口動態及び世帯数調査",
+      "organization": "総務省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "r2-drift",
       "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "itemCount": 4,
+      "activeItemCount": 4,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
+          "status": "insufficient-data",
+          "windowDays": 0
         },
         "internalNav": {
           "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
+          "windowDays": 0
         }
       },
       "currentHypothesis": null,
@@ -4255,8 +4722,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 12,
-      "activeItemCount": 12,
+      "itemCount": 15,
+      "activeItemCount": 15,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -4307,8 +4774,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 17,
-      "activeItemCount": 17,
+      "itemCount": 19,
+      "activeItemCount": 19,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -4457,58 +4924,6 @@
       "liveItemCount": 12
     },
     {
-      "surveyId": "science-technology-research-survey",
-      "name": "科学技術研究調査",
-      "organization": "総務省統計局",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
-    },
-    {
       "surveyId": "sewerage-statistics",
       "name": "下水道統計",
       "organization": "日本下水道協会",
@@ -4559,6 +4974,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 5
+    },
+    {
+      "surveyId": "sixth-industry-survey",
+      "name": "6次産業化総合調査",
+      "organization": "農林水産省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "social-education-survey",
@@ -4619,8 +5071,8 @@
       "lifecycleStatus": "editorial-candidate",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 108,
-      "activeItemCount": 107,
+      "itemCount": 113,
+      "activeItemCount": 112,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -4665,58 +5117,6 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 107
-    },
-    {
-      "surveyId": "social-security-cost-statistics",
-      "name": "社会保障費用統計",
-      "organization": "国立社会保障・人口問題研究所",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "social-welfare-facility-survey",
@@ -4823,18 +5223,55 @@
       "liveItemCount": 3
     },
     {
+      "surveyId": "special-forest-products-statistics",
+      "name": "特用林産基礎資料",
+      "organization": "林野庁",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "student-guidance-issues-survey",
       "name": "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査",
       "organization": "文部科学省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
+      "linkageStatus": "r2-drift",
       "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "itemCount": 7,
+      "activeItemCount": 7,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
+      "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
@@ -4927,66 +5364,14 @@
       "nextReviewAt": "2026-10-01"
     },
     {
-      "surveyId": "trade-statistics",
-      "name": "財務省貿易統計",
-      "organization": "財務省関税局",
-      "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
-      "liveItemCount": null,
-      "latestDataYear": null,
-      "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
-      "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "impressions": 0,
-          "clicks": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ],
-          "landingPageViews": 0
-        },
-        "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W32",
-            "2026-W36"
-          ]
-        }
-      },
-      "currentHypothesis": null,
-      "evidenceRefs": [],
-      "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
-    },
-    {
       "surveyId": "traffic-accident-statistics",
       "name": "交通事故統計",
       "organization": "警察庁",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 10,
-      "activeItemCount": 10,
+      "itemCount": 11,
+      "activeItemCount": 11,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -5031,14 +5416,51 @@
       "liveItemCount": 10
     },
     {
+      "surveyId": "truck-operator-statistics",
+      "name": "貨物自動車運送事業者数",
+      "organization": "国土交通省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "urban-park-survey",
       "name": "都市公園等整備現況調査",
       "organization": "国土交通省",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 10,
-      "activeItemCount": 10,
+      "itemCount": 12,
+      "activeItemCount": 12,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -5085,14 +5507,51 @@
       "liveItemCount": 10
     },
     {
+      "surveyId": "vehicle-registration-statistics",
+      "name": "自動車保有車両数",
+      "organization": "国土交通省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "vital-statistics",
       "name": "人口動態統計",
       "organization": "厚生労働省",
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 47,
-      "activeItemCount": 46,
+      "itemCount": 52,
+      "activeItemCount": 51,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -5135,6 +5594,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 46
+    },
+    {
+      "surveyId": "voter-registration-statistics",
+      "name": "選挙人名簿及び在外選挙人名簿登録者数",
+      "organization": "総務省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "wage-structure-survey",
@@ -5244,6 +5740,80 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 7
+    },
+    {
+      "surveyId": "wastewater-treatment-coverage-report",
+      "name": "汚水処理人口普及状況",
+      "organization": "環境省・農林水産省・国土交通省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "water-pollution-control-law-status",
+      "name": "水質汚濁防止法等の施行状況",
+      "organization": "環境省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "water-pollution-survey",
@@ -5356,8 +5926,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 9,
-      "activeItemCount": 9,
+      "itemCount": 12,
+      "activeItemCount": 12,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -5408,8 +5978,8 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 10,
-      "activeItemCount": 10,
+      "itemCount": 17,
+      "activeItemCount": 17,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -5452,6 +6022,117 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 10
+    },
+    {
+      "surveyId": "wind-power-deployment-statistics",
+      "name": "都道府県別風力発電導入量",
+      "organization": "国立研究開発法人新エネルギー・産業技術総合開発機構",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "wood-supply-demand-report",
+      "name": "木材需給報告書",
+      "organization": "農林水産省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "workers-compensation-annual-report",
+      "name": "労働者災害補償保険事業年報",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "workplace-accident-survey",

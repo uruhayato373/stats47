@@ -990,6 +990,10 @@ const SURVEY_EDITORIAL_CONTENT = {
         question: '外来の受療率が高い都道府県は？',
         rankingKey: 'outpatient-rate-per-100k',
       },
+      {
+        question: 'がんの入院受療率が高い都道府県は？',
+        rankingKey: 'treatment-rate-cancer-inpatient',
+      },
     ],
     caveats: [
       '抽出した医療施設の特定1日の患者記録から全国・地域の患者数を推計する標本調査です。小さな差には標本誤差が含まれます。',
@@ -2412,6 +2416,14 @@ const SURVEY_EDITORIAL_CONTENT = {
       {
         question: '新規の工場立地件数が多い都道府県は？',
         rankingKey: 'factory-establishment-count',
+      },
+      {
+        question: '工業団地内への立地割合が高い都道府県は？',
+        rankingKey: 'factory-industrial-park-rate',
+      },
+      {
+        question: '工場立地の敷地面積が大きい都道府県は？',
+        rankingKey: 'factory-location-area-annual',
       },
     ],
     caveats: [

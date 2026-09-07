@@ -34,37 +34,44 @@ import {
   resolveMetricProvenance,
   type MetricConfig,
   type MetricRegistry,
-} from "@stats47/data-configs";
+} from '@stats47/data-configs';
 
-import surveysMaster from "../data/surveys.json";
-import { resolveSurveyLinkage } from "../builders/build-ranking-item-from-metric";
+import surveysMaster from '../data/surveys.json';
+import { resolveSurveyLinkage } from '../builders/build-ranking-item-from-metric';
 
 type UnresolvedReason =
-  | "ssds-synthetic-only" // SSDS だが原典が合成 id (ssds-src:) のみ = 辞書の originalSurveys がマスタ未登録
-  | "estat-uncovered" // 非SSDS estat だが statsDataIdToSurvey 辞書に無い
-  | "external" // mlit/external (displayName ベース、マスタ調査ではない)
-  | "calculated-unresolved" // calculated で分子/分母からも辿れない
-  | "no-source"; // source なし
+  | 'ssds-synthetic-only' // SSDS だが原典が合成 id (ssds-src:) のみ = 辞書の originalSurveys がマスタ未登録
+  | 'estat-uncovered' // 非SSDS estat だが statsDataIdToSurvey 辞書に無い
+  | 'external' // mlit/external (displayName ベース、マスタ調査ではない)
+  | 'calculated-unresolved' // calculated で分子/分母からも辿れない
+  | 'no-source'; // source なし
 
-function unresolvedReason(config: MetricConfig, registry: MetricRegistry): UnresolvedReason {
+function unresolvedReason(
+  config: MetricConfig,
+  registry: MetricRegistry
+): UnresolvedReason {
   const s = config.source;
-  if (!s) return "no-source";
-  if (s.kind === "mlit" || s.kind === "external") return "external";
-  if (s.kind === "calculated") return "calculated-unresolved";
-  if (s.kind === "estat") {
-    if (isSsdsStatsDataId(s.statsDataId)) return "ssds-synthetic-only";
-    return "estat-uncovered";
+  if (!s) return 'no-source';
+  if (s.kind === 'mlit' || s.kind === 'external') return 'external';
+  if (s.kind === 'calculated') return 'calculated-unresolved';
+  if (s.kind === 'estat') {
+    if (isSsdsStatsDataId(s.statsDataId)) return 'ssds-synthetic-only';
+    return 'estat-uncovered';
   }
-  return "no-source";
+  return 'no-source';
 }
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
 
 function isActiveConfig(m: MetricConfig): boolean {
   return m.isActive !== false;
 }
 
-async function mapPool<T, R>(items: T[], limit: number, fn: (x: T) => Promise<R>): Promise<R[]> {
+async function mapPool<T, R>(
+  items: T[],
+  limit: number,
+  fn: (x: T) => Promise<R>
+): Promise<R[]> {
   const out: R[] = new Array(items.length);
   let i = 0;
   await Promise.all(
@@ -73,7 +80,7 @@ async function mapPool<T, R>(items: T[], limit: number, fn: (x: T) => Promise<R>
         const idx = i++;
         out[idx] = await fn(items[idx]);
       }
-    }),
+    })
   );
   return out;
 }
@@ -83,12 +90,15 @@ async function compareR2(
   activeMetrics: MetricConfig[],
   registry: MetricRegistry,
   perSurveyActive: Map<string, number>,
-  sample?: number,
+  sample?: number
 ) {
   let targets = [...activeMetrics].sort((a, b) => a.key.localeCompare(b.key));
   if (sample && sample < targets.length) {
     const step = targets.length / sample;
-    targets = Array.from({ length: sample }, (_, i) => targets[Math.floor(i * step)]);
+    targets = Array.from(
+      { length: sample },
+      (_, i) => targets[Math.floor(i * step)]
+    );
   }
   const missingItemJson: string[] = [];
   const mismatches: Array<{ key: string; git: string[]; live: string[] }> = [];
@@ -122,7 +132,9 @@ async function compareR2(
   } catch {
     /* all.json 取得不可は下で null 報告 */
   }
-  const expectedActive = [...perSurveyActive.entries()].filter(([, n]) => n > 0).map(([id]) => id);
+  const expectedActive = [...perSurveyActive.entries()]
+    .filter(([, n]) => n > 0)
+    .map(([id]) => id);
   const surveysMissingInR2 = liveSurveyIds
     ? expectedActive.filter((id) => !liveSurveyIds!.has(id)).sort()
     : null;
@@ -142,20 +154,31 @@ async function compareR2(
 
 async function main() {
   const args = process.argv.slice(2);
-  const asJson = args.includes("--json");
-  const listUnresolved = args.includes("--unresolved");
-  const doCompareR2 = args.includes("--compare-r2");
-  const sampleIdx = args.indexOf("--sample");
+  const asJson = args.includes('--json');
+  const listUnresolved = args.includes('--unresolved');
+  const doCompareR2 = args.includes('--compare-r2');
+  const sampleIdx = args.indexOf('--sample');
   const sample = sampleIdx >= 0 ? Number(args[sampleIdx + 1]) : undefined;
 
   const all = listAllMetrics();
-  const registry: MetricRegistry = Object.fromEntries(all.map((m) => [m.key, m]));
-  const metrics = all.filter((c) => c.entities?.includes("prefecture"));
-  const masterIds = new Set((surveysMaster as Array<{ id: string }>).map((s) => s.id));
+  const registry: MetricRegistry = Object.fromEntries(
+    all.map((m) => [m.key, m])
+  );
+  const metrics = all.filter((c) => c.entities?.includes('prefecture'));
+  const masterIds = new Set(
+    (surveysMaster as Array<{ id: string }>).map((s) => s.id)
+  );
 
   const perSurvey = new Map<string, number>();
   const perSurveyActive = new Map<string, number>();
-  const unresolved: Array<{ key: string; kind: string; reason: UnresolvedReason; statsDataId?: string }> = [];
+  const unresolved: Array<{
+    key: string;
+    kind: string;
+    reason: UnresolvedReason;
+    statsDataId?: string;
+  }> = [];
+  const notApplicable: Array<{ key: string; reason: string; active: boolean }> =
+    [];
   const badOverrides: Array<{ key: string; surveyId: string }> = [];
   let resolvedCount = 0;
 
@@ -163,58 +186,93 @@ async function main() {
     if (m.surveyId && !masterIds.has(m.surveyId)) {
       badOverrides.push({ key: m.key, surveyId: m.surveyId });
     }
+    if (m.surveyScope === 'not-applicable') {
+      notApplicable.push({
+        key: m.key,
+        reason: m.surveyScopeReason ?? '',
+        active: isActiveConfig(m),
+      });
+      continue;
+    }
     const { surveyIds } = resolveSurveyLinkage(m, registry);
     if (surveyIds.length > 0) {
       resolvedCount++;
       for (const id of surveyIds) {
         perSurvey.set(id, (perSurvey.get(id) ?? 0) + 1);
-        if (isActiveConfig(m)) perSurveyActive.set(id, (perSurveyActive.get(id) ?? 0) + 1);
+        if (isActiveConfig(m))
+          perSurveyActive.set(id, (perSurveyActive.get(id) ?? 0) + 1);
       }
     } else {
-      const statsDataId = m.source?.kind === "estat" ? m.source.statsDataId : undefined;
+      const statsDataId =
+        m.source?.kind === 'estat' ? m.source.statsDataId : undefined;
       unresolved.push({
         key: m.key,
-        kind: m.source?.kind ?? "?",
+        kind: m.source?.kind ?? '?',
         reason: unresolvedReason(m, registry),
         ...(statsDataId ? { statsDataId } : {}),
       });
     }
   }
 
-  const orphanSurveys = [...masterIds].filter((id) => !perSurvey.has(id)).sort();
+  const orphanSurveys = [...masterIds]
+    .filter((id) => !perSurvey.has(id))
+    .sort();
   const reasonCounts = unresolved.reduce<Record<string, number>>((acc, u) => {
     acc[u.reason] = (acc[u.reason] ?? 0) + 1;
     return acc;
   }, {});
   // 辞書未カバーの statsDataId (追記すれば回収できる対象)
   const uncoveredStatsDataIds = [
-    ...new Set(unresolved.filter((u) => u.reason === "estat-uncovered").map((u) => u.statsDataId!)),
+    ...new Set(
+      unresolved
+        .filter((u) => u.reason === 'estat-uncovered')
+        .map((u) => u.statsDataId!)
+    ),
   ].sort();
 
   const activeMetrics = metrics.filter(isActiveConfig);
+  const applicableMetrics = metrics.filter(
+    (m) => m.surveyScope !== 'not-applicable'
+  );
   const report = {
     generatedAt: new Date().toISOString(),
     totals: {
       metrics: metrics.length,
       activeMetrics: activeMetrics.length,
+      applicableMetrics: applicableMetrics.length,
+      notApplicable: notApplicable.length,
+      activeNotApplicable: notApplicable.filter((item) => item.active).length,
       resolved: resolvedCount,
       unresolved: unresolved.length,
-      coverage: Math.round((resolvedCount / metrics.length) * 1000) / 10,
+      coverage:
+        Math.round(
+          (resolvedCount / Math.max(applicableMetrics.length, 1)) * 1000
+        ) / 10,
     },
     unresolvedByReason: reasonCounts,
     uncoveredStatsDataIds,
     orphanSurveys,
     badOverrides,
+    notApplicable,
     surveysWithItems: perSurvey.size,
     surveyMasterCount: masterIds.size,
-    perSurvey: Object.fromEntries([...perSurvey.entries()].sort((a, b) => b[1] - a[1])),
+    perSurvey: Object.fromEntries(
+      [...perSurvey.entries()].sort((a, b) => b[1] - a[1])
+    ),
     // active のみの件数 (= 配信されるべき数。R2 all.json itemCount と対応)
-    perSurveyActive: Object.fromEntries([...perSurveyActive.entries()].sort((a, b) => b[1] - a[1])),
+    perSurveyActive: Object.fromEntries(
+      [...perSurveyActive.entries()].sort((a, b) => b[1] - a[1])
+    ),
     compareR2: undefined as Awaited<ReturnType<typeof compareR2>> | undefined,
   };
 
   if (doCompareR2) {
-    report.compareR2 = await compareR2(activeMetrics, registry, perSurveyActive, sample);
+    report.compareR2 = await compareR2(
+      activeMetrics,
+      registry,
+      perSurveyActive,
+      sample
+    );
   }
 
   if (asJson) {
@@ -224,24 +282,29 @@ async function main() {
 
   console.log(`# survey 紐付け監査 (${report.generatedAt})`);
   console.log(
-    `\n解決済 ${report.totals.resolved} / 未分類 ${report.totals.unresolved} (全 ${report.totals.metrics}、カバレッジ ${report.totals.coverage}%)`,
+    `\n解決済 ${report.totals.resolved} / 未分類 ${report.totals.unresolved} / 対象外 ${report.totals.notApplicable} (全 ${report.totals.metrics}、適用対象カバレッジ ${report.totals.coverage}%)`
   );
   console.log(`\n## 未分類の内訳`);
-  for (const [reason, n] of Object.entries(reasonCounts).sort((a, b) => b[1] - a[1])) {
+  for (const [reason, n] of Object.entries(reasonCounts).sort(
+    (a, b) => b[1] - a[1]
+  )) {
     console.log(`  ${reason}: ${n}`);
   }
   if (uncoveredStatsDataIds.length > 0) {
     console.log(
-      `\n## 辞書未カバー statsDataId (${uncoveredStatsDataIds.length} 件 — estat-provenance に追記すれば回収可)`,
+      `\n## 辞書未カバー statsDataId (${uncoveredStatsDataIds.length} 件 — estat-provenance に追記すれば回収可)`
     );
-    console.log(`  ${uncoveredStatsDataIds.join(", ")}`);
+    console.log(`  ${uncoveredStatsDataIds.join(', ')}`);
   }
   console.log(
-    `\n## survey マスタ: ${report.surveyMasterCount} 件中 ${report.surveysWithItems} 件に item あり / orphan ${orphanSurveys.length} 件`,
+    `\n## survey マスタ: ${report.surveyMasterCount} 件中 ${report.surveysWithItems} 件に item あり / orphan ${orphanSurveys.length} 件`
   );
-  if (orphanSurveys.length > 0) console.log(`  orphan (削除候補): ${orphanSurveys.join(", ")}`);
+  if (orphanSurveys.length > 0)
+    console.log(`  orphan (削除候補): ${orphanSurveys.join(', ')}`);
   if (badOverrides.length > 0) {
-    console.log(`\n## ⚠️ config.surveyId 不正 (${badOverrides.length} 件 — マスタ非実在)`);
+    console.log(
+      `\n## ⚠️ config.surveyId 不正 (${badOverrides.length} 件 — マスタ非実在)`
+    );
     for (const b of badOverrides) console.log(`  ${b.key}: "${b.surveyId}"`);
   }
   console.log(`\n## survey 別 item 件数 (上位 15)`);
@@ -250,26 +313,43 @@ async function main() {
   }
   if (listUnresolved) {
     console.log(`\n## 未分類キー全列挙`);
-    for (const u of unresolved) console.log(`  [${u.reason}] ${u.key}${u.statsDataId ? ` (${u.statsDataId})` : ""}`);
+    for (const u of unresolved)
+      console.log(
+        `  [${u.reason}] ${u.key}${u.statsDataId ? ` (${u.statsDataId})` : ''}`
+      );
   }
   if (report.compareR2) {
     const c = report.compareR2;
     console.log(`\n## R2 焼き込み突合 (--compare-r2: active ${c.checked} 件)`);
-    console.log(`  一致 ${c.matched} / 不一致 ${c.mismatches.length} / item.json 欠落 ${c.missingItemJson.length}`);
+    console.log(
+      `  一致 ${c.matched} / 不一致 ${c.mismatches.length} / item.json 欠落 ${c.missingItemJson.length}`
+    );
     for (const mm of c.mismatches.slice(0, 20)) {
-      console.log(`  ✗ ${mm.key}: git=[${mm.git.join(",")}] live=[${mm.live.join(",")}]`);
+      console.log(
+        `  ✗ ${mm.key}: git=[${mm.git.join(',')}] live=[${mm.live.join(',')}]`
+      );
     }
-    if (c.mismatches.length > 20) console.log(`  … 他 ${c.mismatches.length - 20} 件 (--json で全件)`);
+    if (c.mismatches.length > 20)
+      console.log(`  … 他 ${c.mismatches.length - 20} 件 (--json で全件)`);
     if (c.missingItemJson.length > 0)
-      console.log(`  item.json 欠落: ${c.missingItemJson.slice(0, 10).join(", ")}${c.missingItemJson.length > 10 ? " …" : ""}`);
+      console.log(
+        `  item.json 欠落: ${c.missingItemJson.slice(0, 10).join(', ')}${c.missingItemJson.length > 10 ? ' …' : ''}`
+      );
     if (c.surveysMissingInR2 === null) {
       console.log(`  ⚠ all.json 取得不可 (調査集合の突合 skip)`);
     } else {
       if (c.surveysMissingInR2.length > 0)
-        console.log(`  ⚠ active item があるのに R2 all.json に無い調査 (要 sync): ${c.surveysMissingInR2.join(", ")}`);
+        console.log(
+          `  ⚠ active item があるのに R2 all.json に無い調査 (要 sync): ${c.surveysMissingInR2.join(', ')}`
+        );
       if ((c.surveysExtraInR2 ?? []).length > 0)
-        console.log(`  ⚠ R2 にあるが git 導出 (active) に無い調査 (stale): ${c.surveysExtraInR2!.join(", ")}`);
-      if (c.surveysMissingInR2.length === 0 && (c.surveysExtraInR2 ?? []).length === 0)
+        console.log(
+          `  ⚠ R2 にあるが git 導出 (active) に無い調査 (stale): ${c.surveysExtraInR2!.join(', ')}`
+        );
+      if (
+        c.surveysMissingInR2.length === 0 &&
+        (c.surveysExtraInR2 ?? []).length === 0
+      )
         console.log(`  ✓ 調査集合は git 導出 (active) と一致`);
     }
   }

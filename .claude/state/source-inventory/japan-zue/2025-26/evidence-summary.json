@@ -25,7 +25,7 @@
   "pilotReadyCount": 10,
   "manualOverrideCount": 10,
   "metricMappedCount": 10,
-  "surveyMappedCount": 8,
+  "surveyMappedCount": 9,
   "themeMappedCount": 5,
   "blockers": {
     "primarySourceUnavailable": 1384,

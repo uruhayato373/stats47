@@ -101,7 +101,9 @@ function loadKeySets() {
     /export const CATEGORY_KEYS = \[([\s\S]*?)\]/,
   );
   if (!catBlock) throw new Error("internal-link-lint: CATEGORY_KEYS を抽出できません");
-  const categories = new Set([...catBlock[1].matchAll(/"([a-z]+)"/g)].map((m) => m[1]));
+  const categories = new Set(
+    [...catBlock[1].matchAll(/["']([a-z]+)["']/g)].map((m) => m[1]),
+  );
 
   const areaCodes = new Set(
     Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, "0")}000`),
