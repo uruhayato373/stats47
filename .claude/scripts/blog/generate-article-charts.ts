@@ -217,25 +217,33 @@ function genBarChartSvg(
   const lowLabel = (Array.isArray(data) ? null : data.lowLabel) ?? '下位';
   const showBars = (Array.isArray(data) ? null : data.showBars) ?? true;
 
-  const sorted = [...items].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
+  // 記事 JSON の rank は旧 fetcher が連番で作っている場合があるため、
+  // values snapshot の正典と同じ「値降順・同値は同順位」で導出する。
+  // 配色の reverse/isReversed は順位方向ではない。
+  const sorted = [...items]
+    .sort((a, b) => (b.value ?? 0) - (a.value ?? 0))
+    .map((it, _i, all) => ({
+      ...it,
+      rank: all.findIndex((other) => (other.value ?? 0) === (it.value ?? 0)) + 1,
+    }));
   const top = sorted.slice(0, N);
   // 下位 N 件: sorted は降順なので slice(-N) は「下位の中で値が大きい順」=
-  // 表示ランク 43→47 と昇順で一致する。reverse すると最下位が先頭に来て
-  // 連番ランク (43..47) と名前がズレる (rank fabrication) ため reverse しない。
+  // 順位の昇順と一致する。同数を含む場合は 43〜47 位とは限らない。
+  // 抽出後の並びで順位を付け直さず、全件から導出した順位を保持する。
   const bottom = sorted.slice(-N);
 
   const barItems = [
-    ...top.map((it, i) => ({
-      label: `${i + 1}位 ${rawName(it)}`,
+    ...top.map((it) => ({
+      label: `${it.rank}位 ${rawName(it)}`,
       name: rawName(it),
-      rank: i + 1,
+      rank: it.rank,
       value: it.value ?? 0,
     })),
     { label: '…', value: 0, isSeparator: true },
-    ...bottom.map((it, i) => ({
-      label: `${sorted.length - N + i + 1}位 ${rawName(it)}`,
+    ...bottom.map((it) => ({
+      label: `${it.rank}位 ${rawName(it)}`,
       name: rawName(it),
-      rank: sorted.length - N + i + 1,
+      rank: it.rank,
       value: it.value ?? 0,
     })),
   ];
