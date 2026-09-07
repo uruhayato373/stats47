@@ -41,6 +41,9 @@ describe("Cloudflare Workers Cache configuration", () => {
     expect(gateway).toContain("shouldBypassPageCache(request)");
     expect(gateway).toContain("openNextWorker.fetch(request, env, ctx)");
     expect(gateway).toContain("ctx.exports.CachedApp");
+    // middleware は Next.js に flight ヘッダーを剥がされるため、
+    // RSC 応答の共有キャッシュ指示は raw request を持つ gateway でしか取り消せない。
+    expect(gateway).toContain("enforcePageCacheBypass(request, response)");
     expect(gateway).toContain('from "./open-next-worker-proxy.js"');
     expect(openNextProxy).toContain('from "../.open-next/worker.js"');
   });
