@@ -59,12 +59,14 @@ ranking cardが404で、デプロイ後のroute smokeが失敗した。
 - **問題**: per-key item を中間 push した後、末尾の全体 push が同じ約2,300ファイルを再送していた。
 - **原因**: diff-push の manifest は prefix ごとに別ファイルであり、`app/ranking` の送信記録を `_all` は参照しない。
 - **対策**: `--only ranking-items` の生成・中間 push 成功時だけ、末尾を未送信の `app/ranking-items` inventory に限定。生成失敗時の部分成果救済、途中 push 失敗時の停止、全task実行の依存順は維持する。`sync-snapshots-run-contract.test.mjs` の正常・生成失敗・inventory送信失敗テストで固定。全task実行の重複送信はこの変更の対象外。
+- **本番実測**: [run 34153774065](https://github.com/uruhayato373/stats47/actions/runs/34153774065) は2,302 item＋inventory 1件の送信に成功。旧run 34132337368の4,959件から2,303件へ、2,656件（53.6%）削減した。生成失敗を無視して送信数を減らしたものではない。
 
 ## 2026-09-08 公開確認時の画像対象を限定する
 
 - **問題**: ranking-items / master の単独同期でも、後続画像フックが全KNOWNを候補に旧manifest移行を最大50件ずつ行い、少数指標の公開確認に無関係な画像処理が重複する。
 - **対策**: `sync-snapshots.yml` の任意入力 `ranking_image_keys` にCSVで明示する。1〜50個のactive prefectureキーと対応taskをR2書込み前に検証し、ranking / ranking-cardsの両方へ同じ範囲を渡す。snapshot本体の範囲は変えず、既存の `ranking_keys` は引き続きranking-values専用。空欄なら従来のKNOWN全体から最大50件のself-healを維持する。
 - **検証**: 不正/重複/未知/対象外task、50件境界、両画像typeの同一範囲、生成/plan欠落/送信失敗時の停止を `ranking-scoped-workflow.test.mjs` に固定。公開後は対象画像のR2 SHA・寸法と本番routeを実測する。
+- **本番実測**: 同runのranking / ranking-cardsとも候補11件、更新2件、現行9件をスキップ。更新は食料費・消費支出のOGP 2枚とカード4枚に限定し、旧2007年のmanifestを最新観測2024年へ更新した。
 
 ## 2026-09-08 正規化を廃止した指標の旧R2配信を遮断する
 
