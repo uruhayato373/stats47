@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "ranking-items" },
-  "ref": "develop",
-  "reason": "KSJ ガード修正後の再実行。readerLabel/hook の平易化を item.json へ焼き直す",
-  "requestedAt": "2026-09-07T07:04:00Z"
-}
