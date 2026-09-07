@@ -73,6 +73,34 @@ describe("ranking map base tile contract", () => {
     expect(existsSync(resolve(PROJECT_ROOT, PUBLIC_TOPOJSON))).toBe(true);
   });
 
+  /**
+   * ベースマップを TopoJSON 取得の後ろに直列で並べない契約。
+   *
+   * 経緯: 上の「RSC payload に載せない」対策で 1MB は HTML から消えた (FCP 3,462ms →
+   * 1,673ms) が、client fetch した TopoJSON が届くまで Skeleton を出していたため
+   * LeafletChoroplethMap が一度も render されず、next/dynamic の chunk 取得すら
+   * 始まらなかった。結果 TopoJSON 取得 → chunk 取得 → map 初期化 → タイル <img> の
+   * 直列鎖ができ、LCP 要素であるタイルが 1MB を待つ状態になった。
+   * 2026-09-06 PSI 実測でモバイル LCP 12,650ms、対策前 baseline 9,347ms より悪化。
+   *
+   * 描画側の不変量は
+   * packages/visualization/.../LeafletChoroplethMap.basemap-contract.test.tsx が
+   * 実際の render で固定する。ここは呼び出し側が再び gate を戻さないことを見る。
+   */
+  it("does not gate the base map on the prefecture topology", () => {
+    const loadingGate = /const isMapLoading\s*=([\s\S]*?);/.exec(source(RANKING_MAP))?.[1];
+    expect(loadingGate).toBeDefined();
+    expect(loadingGate).not.toContain("prefTopology");
+  });
+
+  it("renders the map while the topology is still null", () => {
+    const mapClient = source(RANKING_MAP);
+    // topology 未取得を fallback 扱いにすると、取得失敗と区別できないまま
+    // ベースマップごと消える
+    expect(mapClient).not.toContain("activeTopology === null ? (");
+    expect(mapClient).toContain("topology={activeTopology}");
+  });
+
   it("keeps the tile preload and the tile layer in sync", () => {
     const preloadsTiles = source(PAGE_MODEL).includes("getInitialMapTileUrls");
     const rendersTiles = source(RANKING_MAP).includes("tileUrl=");
