@@ -235,9 +235,9 @@ updated: 2026-09-07
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
 
 - **owner**: Codex (記事固有背景生成・公開確認)、blog-editor (必要な本文是正)
-- **再開点（2026-09-08未明・公開直前）**: `codex/finish-content-remaining` の73件は作成・独立レビュー・品質/factualゲートすべてPASS。固有背景73件、292画像・73manifestの寸法/SHA、同順位図の修正も確認済み。空港比較2本を是正し、発電2本は非商用P03を使わず公式資料の独自集計へ置換。build・全workspace/scripts型・Lint・Web1317テスト・packages2373テスト・workflow契約87テストPASS。公開読戻し対象は本文/図/元データ792ファイルと292画像。PR #943の本番コードを統合済みで、同タスクのR2同期完了後にdevelop→R2公開→main→本番URL照合を続行する。単独ranking同期の二重送信と対象外画像の再処理を削減済み。未公開を完了扱いしない。
+- **再開点（2026-09-08・R2公開済み／アプリ反映待ち）**: run `34139507934` SUCCESS、73記事・792本文/図/元データファイル・292画像・73manifestのR2読戻しPASS。公開索引606件、対象73件は新しいsitemapへ全収載済み。新規72URLはmainの旧公開一覧により410、改稿1URLは200のため、mainデプロイ後に全73ページを再検証する。発電2記事の出典分類4ファイルだけを別タスクが追補中（run `34150800541` は画像不変時のplan処理で停止、本文/品質PASS）。その修正公開・backlog pushと合流後にリリースする。根本のAIは2,166件done・追加12件R2 SHA一致で別カード閉鎖済み。家計11指標の正規化是正・旧R2配信遮断、画像対象限定、ranking-items二重送信削減を含む作業は `codex/finish-content-remaining`。最新build・全workspace/scripts型・Web1317・packages2383・workflow87テストPASS。main→ranking-items/master（画像11キー指定）→全パージ→73ブログ/14ランキングの本番実測まで完了扱いしない。
 - **現状（2026-09-07）**: reconcileの対象は77→73件（未公開72・改稿差分1）。今回、既存の記事固有背景を使える4件の本文をR2へ反映し、公開本文との一致を確認した。件数は実行時に再取得し、古い91件を固定の完了目標にしない。
-  未生成背景に加え、`natto-consumption-expenditure` は記事改稿で背景promptが古くなっており明示再生成が必要（run 34113017143）。全73件の背景以外の条件を再検証したわけではない。
+  当時の `natto-consumption-expenditure` の古い背景prompt（run 34113017143）も、今回の73件で明示再生成・再検証済み。
 - **過去の停止実測（9/2）**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
   (`annual-sunshine-duration-prefecture-gap`) の `Fatal: 記事固有背景がありません` で exit 1 になり、
   公開 0 件。`generate-blog-thumbnails.ts` は共有背景へフォールバックしない (`ogp-image-standards.md` §5)
