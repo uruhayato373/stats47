@@ -66,4 +66,10 @@ ranking cardが404で、デプロイ後のroute smokeが失敗した。
 - **対策**: `sync-snapshots.yml` の任意入力 `ranking_image_keys` にCSVで明示する。1〜50個のactive prefectureキーと対応taskをR2書込み前に検証し、ranking / ranking-cardsの両方へ同じ範囲を渡す。snapshot本体の範囲は変えず、既存の `ranking_keys` は引き続きranking-values専用。空欄なら従来のKNOWN全体から最大50件のself-healを維持する。
 - **検証**: 不正/重複/未知/対象外task、50件境界、両画像typeの同一範囲、生成/plan欠落/送信失敗時の停止を `ranking-scoped-workflow.test.mjs` に固定。公開後は対象画像のR2 SHA・寸法と本番routeを実測する。
 
+## 2026-09-08 正規化を廃止した指標の旧R2配信を遮断する
+
+- **問題**: 1世帯当たりの年額である食料費・消費支出にも人口/面積換算が宣言され、configから削除しても旧 `values-per-*.json` は残存する。
+- **原因**: 正規化readerは現行itemの宣言を確認せず、R2ファイルの存在だけで返していた。
+- **対策**: single-year/all-years共通readerで現行itemの `normalizationOptions` を確認し、未宣言なら旧snapshotを読まない。取得失敗もfail-closed。downloadのall-basesはoriginalだけになる。削除済み宣言の復活、対応する正規化の維持、実download呼出しを含む10テストで固定。TSだけでなくitem/masterの同期とキャッシュ消去も必要。`?norm=` ページHTMLの200/canonicalとAPI基準別の404は別契約として検証する。
+
 [[project_dbless_migration_2026_05_29]] [[feedback_check_why_removed_before_reviving]]
