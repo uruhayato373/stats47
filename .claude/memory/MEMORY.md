@@ -28,7 +28,7 @@
 - [feedback_x_post_url_integrity.md](feedback_x_post_url_integrity.md) — Xのposted判定は予約時刻/旧台帳日付で推定せず、自アカウントのstatus URLと本文一致を証拠にする。中央store gateでURLなしpostedを拒否
 - [project_react_to_news_pipeline.md](project_react_to_news_pipeline.md) — じじネタ→即SNS瞬発パイプライン(2026-07-02)。find-metrics(発見索引・同義語レイヤー必須)+quick-still(指標key→SVG+PNG+caption)+/react-to-news。未決=tags恒久バックフィル/quick-still→publish-x連結
 - [feedback_generatestaticparams_r2_notfound_stuck.md](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParams付けると●SSG化→build時R2不可でnotFound永久固着(2026-06-22 ranking/areas/cities)。修正=撤去しrevalidateのみ→ƒ。正典nextjs-ssg-preservation.md
-- [project_ai_content_remediation_queue.md](project_ai_content_remediation_queue.md) — ranking AIのDBレス生成とR2由来キュー。旧2,154件doneだけで完了とせずTS/KNOWN集合を突合。9/7に追加12件を作成、2,166件の公開後全量確認待ち。canonical入力の回帰テストを追加
+- [project_ai_content_remediation_queue.md](project_ai_content_remediation_queue.md) — ranking AIは9/8に2,166件done・残0を全量実測。追加12件R2 SHA一致、TS/KNOWN/R2/queue集合差分0。非阻害警告・意味レビュー範囲・課金条件は別記。canonical入力の回帰テストあり
 - [project_blog_svg_lineage_enforcement.md](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
 - [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ空/home featured空→wrangler.toml CLOUDFLARE_WORKERS="true"を疑う。shouldSkipRemoteR2Readが空ok([])返し黙って失敗。テーマはR2 values.jsonのみ読む+force-dynamic必須(2026-06-20根治)
