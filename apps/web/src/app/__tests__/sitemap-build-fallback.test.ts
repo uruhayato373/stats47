@@ -14,6 +14,8 @@ import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { ok } from "@stats47/types";
 import { describe, it, expect, vi } from "vitest";
 
+import { PHASE_1_SSG_CITIES } from "@/features/area-profile/constants/stage-1-cities";
+
 import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
 import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
 
@@ -45,6 +47,7 @@ const SEGMENT_ID = {
   categories: idOf("categories"),
   surveys: idOf("surveys"),
   tags: idOf("tags"),
+  cities: idOf("cities"),
 } as const;
 
 describe("sitemap ビルド時フォールバック (R2 が空でも空にしない)", () => {
@@ -93,6 +96,18 @@ describe("sitemap ビルド時フォールバック (R2 が空でも空にしな
     expect(entries.some((e) => e.url === expected)).toBe(true);
     // 生の日本語が loc に混ざっていないこと (ページの canonical は encode 形)
     expect(entries.every((e) => !/[^ -~]/.test(e.url))).toBe(true);
+  });
+
+  it('cities: 実コンテンツを持つprofileだけを提出し、空のカテゴリURLを含めない', async () => {
+    const entries = await sitemap({ id: SEGMENT_ID.cities });
+
+    expect(entries).toHaveLength(PHASE_1_SSG_CITIES.length);
+    expect(
+      entries.every((entry) =>
+        /^https:\/\/stats47\.jp\/areas\/\d{5}\/cities\/\d{5}$/.test(entry.url)
+      )
+    ).toBe(true);
+    expect(entries.every((entry) => entry.lastModified === undefined)).toBe(true);
   });
 
   it("reader が throw しても空にしない (getter 内フォールバックが効かない経路)", async () => {

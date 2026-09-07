@@ -6,8 +6,30 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import { resolveInvocation } from "../preflight-commit.mjs";
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 const PREFLIGHT = path.join(ROOT, ".claude/scripts/lib/preflight-commit.mjs");
+
+test("Windowsではnpm/npxのCLI本体をNodeから直接実行する", () => {
+  const options = {
+    platform: "win32",
+    npmExecPath: "C:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    nodeExecPath: "C:\\nodejs\\node.exe",
+  };
+  assert.deepEqual(resolveInvocation("npm", ["run", "x"], options), {
+    command: "C:\\nodejs\\node.exe",
+    args: ["C:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js", "run", "x"],
+  });
+  assert.deepEqual(resolveInvocation("npx", ["tsx", "x.ts"], options), {
+    command: "C:\\nodejs\\node.exe",
+    args: ["C:\\nodejs\\node_modules\\npm\\bin\\npx-cli.js", "tsx", "x.ts"],
+  });
+  assert.deepEqual(resolveInvocation("npm", ["run", "x"], { platform: "linux" }), {
+    command: "npm",
+    args: ["run", "x"],
+  });
+});
 
 /**
  * ★このテストが守る唯一の契約: **ゲートが落ちたら preflight も落ちる**。

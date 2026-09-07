@@ -37,7 +37,7 @@
 - [feedback_fetch_origin_before_implementing.md](feedback_fetch_origin_before_implementing.md) — 実装前にgit fetch+origin/main vs ローカルHEAD diff。並行セッション同日pushでstale→重複実装事故(2026-06-14 PR#479)。施策IDを既存検索
 - [feedback_home_pure_ssg_r2_empty.md](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず空焼き込み→修正はforce-dynamic(#478)。revalidateは本OpenNext構成で無効。build envにR2 URL足すとgenerateStaticParams爆発で不採用
 - [project_blog_remediation_loop.md](project_blog_remediation_loop.md) — ブログ品質を順次是正。次に直す記事=remediation-queue.json(統合スコア/must-fix)。週次Mustで消化、critic PASS必須。記事アーキタイプA-E+図あたり字数gate
-- [project_gsc_coverage_remediation_loop.md](project_gsc_coverage_remediation_loop.md) — GSCカバレッジ是正ループ(2026-06-16)。404大半は意図的、actionableは190件のみ。SSOT=coverage-remediation-queue.json→/gsc-coverage-remediation
+- [project_gsc_coverage_remediation_loop.md](project_gsc_coverage_remediation_loop.md) — GSCカバレッジ是正ループ。404大半は意図的。入力週の鮮度をfail-closedで検証し、生成日を観測日にしない
 - [project_consistency_audit_mechanism.md](project_consistency_audit_mechanism.md) — agent/skill/scriptドリフトとOpus 5 prompt契約(model/Output/owner/委譲上限)をStop/PR/週次で検査。解除は--mark-auditedかcommit
 - [project_blog_brushup_dbless_scaffold.md](project_blog_brushup_dbless_scaffold.md) — brushupのDBレス落とし穴。R2 values直fetch、rank=0で再計算、NG_PATTERNが旧title遡及blocker、publish-blogは直列dispatch、未参照費目json残す
 - [project_blog_mass_rewrite_lessons.md](project_blog_mass_rewrite_lessons.md) — ブログ大量リライト教訓。である調はcopula置換禁止→article-writer必須。一括はsession limit→1バッチ15-20本。進捗SSOT=remediation-queue、sync-rewrite-progress.mjs。--nextはpendingのみ

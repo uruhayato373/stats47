@@ -7,7 +7,6 @@ import type { Category } from "@stats47/category";
 interface Props {
     categories: Category[];
     areaCode: string;
-    basePath?: string;
 }
 
 /** カテゴリキー → テーマスラグのマッピング（Type A テーマのみ） */

@@ -344,6 +344,17 @@ describe('動的コンテンツの soft-404 防止', () => {
     ).toBe(410);
   });
 
+  test('旧市区町村カテゴリは空ページを返さず市区町村プロフィールへ301', () => {
+    const response = middleware(
+      request('/areas/05000/cities/05212/population')
+    );
+
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(
+      'https://stats47.jp/areas/05000/cities/05212'
+    );
+  });
+
   test('公開記事カタログに無い blog slug は 410、既知記事と tag ハブは通過', () => {
     expect(middleware(request('/blog/BarChartRace')).status).toBe(410);
     expect(

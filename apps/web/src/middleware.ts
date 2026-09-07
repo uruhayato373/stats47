@@ -359,8 +359,12 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     ) {
       return gone();
     }
-    if (seg.length === 5 && !UrlPolicy.cityCategory.isKnown(seg[4])) {
-      return gone();
+    if (seg.length === 5) {
+      if (!UrlPolicy.cityCategory.isKnown(seg[4])) return gone();
+      return NextResponse.redirect(
+        new URL(`/areas/${areaCode}/cities/${cityCode}`, req.url),
+        301
+      );
     }
     if (seg.length > 5) return gone();
   }

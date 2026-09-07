@@ -166,16 +166,12 @@ const AREA_PAGES: MetadataRoute.Sitemap = [
 ];
 
 /**
- * deploy 日を全 ranking ページの lastmod として使う。
+ * deploy 日を ranking ページの lastmod 下限として使う。
  * D-redesign deploy (2026-05-23) で全 ranking 詳細の本文構造が変わったため、
  * row.updatedAt (DB の updatedAt、データ更新時のみ進む) よりも実コンテンツ
  * 更新を反映できる SITEMAP_BASELINE を採用する。
  * 大幅な UI / 構造変更があったらこの定数を更新する。
  *
- * 2026-05-25 更新: cities pages (25,785 URL) の Google indexed 率が 0% (50 件
- * サンプル URL Inspection 結果: 50% が 4-5月の古い「Blocked by robots.txt」
- * キャッシュ、48% が「Unknown to Google」)。SITEMAP_BASELINE を進めて
- * 「全 cities 変更あり」シグナルを Google に送り、再クロールを促進する。
  */
 const SITEMAP_BASELINE = new Date('2026-05-25T00:00:00.000Z');
 
@@ -277,8 +273,8 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
 }
 
 function getCityPages(): MetadataRoute.Sitemap {
-  // 2026-05-31 改訂: sitemap は実コンテンツ (profile.json) + SSG を持つ PHASE_1_SSG_CITIES
-  // (≈360 市) のみ出力する。
+  // sitemap は実コンテンツ (profile.json) を持つ PHASE_1_SSG_CITIES (≈360 市) の
+  // profile URL だけを出力する。
   //
   // 旧実装は level="2" の全 1,719 市を出力していたが、実コンテンツがあるのは
   // PHASE_1_SSG_CITIES のみで、残り ~1,360 市は薄いプレースホルダーが Google にクロール
@@ -287,30 +283,14 @@ function getCityPages(): MetadataRoute.Sitemap {
   // 既に index されている少数ページは noindex 化していないため deindex は起きない (提出を止めるだけ)。
   // Stage 2/3 拡張時は PHASE_1_SSG_CITIES に追記する (stage-1-cities.ts)。
   //
-  // lastmod は SITEMAP_BASELINE (city profile 復活 deploy 日) を採用し、
-  // Googlebot に「city pages に更新あり、再クロール推奨」を伝える。
-  const entries: MetadataRoute.Sitemap = [];
-  for (const { areaCode, cityCode } of PHASE_1_SSG_CITIES) {
-    const cityUrl = `${BASE_URL}/areas/${areaCode}/cities/${cityCode}`;
-    entries.push({
-      url: cityUrl,
-      lastModified: SITEMAP_BASELINE,
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    });
-    // index 対象 (population/economy) の city-category のみ sitemap に出力し、
-    // ページ側の robots 判定 (UrlPolicy.cityCategory.isIndexableCategory) と完全一致させる。
-    // 旧 14 キーのハードコードはページの index 方針と乖離していた (drift 解消)。
-    for (const cat of UrlPolicy.cityCategory.indexableCategories) {
-      entries.push({
-        url: `${cityUrl}/${cat}`,
-        lastModified: SITEMAP_BASELINE,
-        changeFrequency: 'monthly',
-        priority: 0.4,
-      });
-    }
-  }
-  return entries;
+  // 旧 population/economy URL は全主要チャートが空のまま 200 を返し、GSC の
+  // soft 404 / crawled-not-indexed を生んだため提出しない。middleware が profile へ301する。
+  // profile の正確な更新日時はこのgit定数から決定できないため、虚偽の lastmod は出さない。
+  return PHASE_1_SSG_CITIES.map(({ areaCode, cityCode }) => ({
+    url: `${BASE_URL}/areas/${areaCode}/cities/${cityCode}`,
+    changeFrequency: 'monthly',
+    priority: 0.5,
+  }));
 }
 
 /**

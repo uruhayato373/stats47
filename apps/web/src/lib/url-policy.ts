@@ -73,14 +73,6 @@ const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
   INDEXABLE_AREA_CATEGORIES
 );
 
-/**
- * city-category (/areas/{pref}/cities/{city}/{cat}) のインデックス対象。
- * municipality × category は規模が大きいため population/economy に限定維持（2026-06-01 決定）。
- */
-const INDEXABLE_CITY_CATEGORIES = ['population', 'economy'] as const;
-const INDEXABLE_CITY_CATEGORIES_SET = new Set<string>(
-  INDEXABLE_CITY_CATEGORIES
-);
 const INDEXABLE_CITY_PATHS_SET = new Set(
   PHASE_1_SSG_CITIES.map(({ areaCode, cityCode }) => `${areaCode}:${cityCode}`)
 );
@@ -132,14 +124,12 @@ export const UrlPolicy = {
   },
   /**
    * city-category (/areas/{pref}/cities/{city}/{category})。
-   * municipality×category は規模が大きいため population/economy に限定（2026-06-01 決定）。
-   * sitemap も indexableCategories のみ出力し、ページの robots 判定と完全一致させる。
+   * 旧ページは主要チャートが空のまま 200 を返して soft 404 を発生させたため、
+   * middleware で city profile へ恒久転送する。新しい市区町村データは
+   * /municipalities/ranking/* を正規URLとする。
    */
   cityCategory: {
-    indexableCategories: INDEXABLE_CITY_CATEGORIES,
     isKnown: (cat: string): boolean => LEGACY_CATEGORY_KEYS_SET.has(cat),
-    isIndexableCategory: (cat: string): boolean =>
-      INDEXABLE_CITY_CATEGORIES_SET.has(cat),
   },
   ranking: {
     isKnown: (key: string): boolean => KNOWN_RANKING_KEYS.has(key),

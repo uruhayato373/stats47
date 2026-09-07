@@ -160,13 +160,13 @@ jobs:
       # GSC カバレッジ是正キューを本番 HTTP 実測で再構築する
       # (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
       #
-      # export (GSC UI) は Google ログイン済み Playwright profile が要りローカル限定だが、
-      # **commit 済み drilldown CSV への再実測は認証不要**なのでここで回せる。これにより
-      # 「直した URL が実際に 200/410 になったか」が毎週 verdict に反映される。
-      # 2026-06-16 のキューが 7 週間放置され、古い優先度で作業しかけた再発防止。
+      # export (GSC UI) は Google ログイン済み Playwright profile が要りローカル限定。
+      # commit 済み入力が1週以内なら認証不要で本番 HTTP を再実測する。2週以上古ければ
+      # fail-closed で止め、古い母集団を当週の verdict に見せない。
+      # 2026-09-06 に W32 入力を当日生成として扱っていた再発防止。
       #
       # 失敗は握り潰さない (continue-on-error だが outcome を拾って Issue を起票する)。
-      # ★step 単位で時間を区切る。probe は並列 12・1 件 12s timeout・上限 2,500 件なので、
+      # ★step 単位で時間を区切る。probe は並列 12・1 件 12s timeout・上限 5,000 件なので、
       #   全件がタイムアウトする最悪ケースで約 41 分かかり job の timeout-minutes: 30 を食い潰す
       #   (= GSC/GA4/AdSense の週次計測ごと道連れになる)。実測 2,456 件は正常時 2 分程度。
       #   超過したら step が失敗し、下の Raise coverage queue alert が Issue を起票する。
@@ -332,7 +332,7 @@ jobs:
             echo "node .claude/scripts/gsc/build-coverage-queue.mjs"
             echo '```'
             echo ""
-            echo "よくある原因: drilldown ディレクトリが無い (要 export + ingest) / 本番 HTTP 実測の失敗。"
+            echo "よくある原因: coverage 入力が2週以上古い / drilldown が無い (要 export + ingest) / 本番 HTTP 実測の失敗。"
             echo "正典: \`.claude/skills/analytics/gsc-coverage-remediation/SKILL.md\`"
           } > /tmp/coverage-issue.md
 

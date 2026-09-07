@@ -6,7 +6,13 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { normalizeAll } from "../normalize.mjs";
 import { collect } from "../collect.mjs";
-import { isoWeekEndDate, mapCoverageCategory, parseCsv, shouldEmitCoverageCategory } from "../lib/sources.mjs";
+import {
+  coverageSourceObservedAt,
+  isoWeekEndDate,
+  mapCoverageCategory,
+  parseCsv,
+  shouldEmitCoverageCategory,
+} from "../lib/sources.mjs";
 import { createObservation } from "../lib/contracts.mjs";
 import { extractLocs } from "../lib/live-sitemap.mjs";
 import { textLength } from "../lib/live-http.mjs";
@@ -65,6 +71,24 @@ test("stale snapshot は partial (success に見せない)", () => {
   assert.equal(r.sources.a.freshness, "stale");
 });
 
+test("同一sourceに fresh と stale が混在したら最悪値を採る", () => {
+  const mixed = {
+    name: "coverage",
+    normalize() {
+      return {
+        observedAt: "2026-06-01T00:00:00Z",
+        observations: [
+          createObservation({ source: "http", metric: "status", value: 200, dimensions: { page: "/fresh" }, freshness: "fresh", observedAt: now }),
+          createObservation({ source: "static", metric: "coverageCategory", value: "soft-404", dimensions: { page: "/stale" }, freshness: "stale", observedAt: "2026-06-01T00:00:00Z" }),
+        ],
+      };
+    },
+  };
+  const r = normalizeAll({ now, sources: [mixed] });
+  assert.equal(r.sources.coverage.status, "partial");
+  assert.equal(r.sources.coverage.freshness, "stale");
+});
+
 test("collect: live-only source は creds 無しで skipped (live 未検証を明示)", async () => {
   const liveOnly = { name: "sitemap", staleAfterDays: 8, secretName: "GOOGLE_SERVICE_ACCOUNT_KEY_JSON", liveOnly: true, normalize() { return { observedAt: null }; } };
   const m = await collect({ live: false, now, sources: [liveOnly], normalizeSources: [] });
@@ -99,6 +123,27 @@ test("coverage queue: 未処置だけを候補化し、作業中・非対象は�
   assert.equal(shouldEmitCoverageCategory({ status: "in-progress", action: "content-check" }), false);
   assert.equal(shouldEmitCoverageCategory({ status: "pending", action: "none" }), false);
   assert.equal(shouldEmitCoverageCategory({ status: "resolved", action: "observe-after-fix" }), false);
+});
+
+test("coverage queue: 再生成日ではなく GSC export の観測日を鮮度に使う", () => {
+  assert.equal(
+    coverageSourceObservedAt({
+      generated_at: "2026-09-07",
+      source_observed_at: "2026-08-06",
+    }),
+    "2026-08-06",
+  );
+  assert.equal(
+    coverageSourceObservedAt({
+      week: "2026-W32",
+      generated_at: "2026-09-07",
+    }),
+    "2026-08-09",
+  );
+  assert.equal(
+    coverageSourceObservedAt({ generated_at: "2026-09-07" }),
+    "2026-09-07",
+  );
 });
 
 test("parseCsv: quoted field / カンマ入りを正しく分割", () => {

@@ -745,6 +745,16 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
   - 監視誤差を是正: URL fragment を除去・重複排除、設定移設後0件になっていた KNOWN/GONE 読込先を修正、検索実績/是正キュー/既知/削除URLを日次ローテーション。sitemap・OGP・静的素材と正常noindexを設計どおりへ自動分類する。
   - queue は pending 419→170、in-progress 105、resolved-by-design 2,181。旧survey/内部資産404 14件は発生源修正済みとして resolved-by-design。**effect/pending** — deploy 後に74件の410/noindexと29件の固有本文を本番実測し、次週GSC export / URL Inspectionで減少を確認する。
 
+- **2026-09-07 入力鮮度・自治体URL再監査**:
+  - **GSCメッセージ根拠**: 2026-09-03のDataset警告は重大=`description`欠落、推奨=`license` / `distribution.contentUrl`欠落の3件で、今回の構造化データ補完と一致。2026-09-07のsitemap警告はrobots blockedで、sitemap絞り込み132件の例はすべて旧city URL、最終クロールは2026-04〜05。現行robotsは2026-05-23からcityを許可済みのため、過去シグナルの再クロール待ちと判定しrobotsを緩和しない。旧city-categoryは今回sitemapから除外・親profileへ301する。
+  - **原因の実証**: `.claude/state/gsc/coverage-remediation-queue.json` は `week=2026-W32`、元データの `category-totals.json` は `date=2026-08-06` なのに、2026-09-06の週次runで `generated_at=2026-09-06` へ更新されていた。検索成長側はこの生成日を鮮度として読んでいたため、5週古いUI母集団を利用可能と判定した。
+  - **実装**: 元観測日と週齢を`source_observed_at` / `source_age_weeks`として保存し、同週または1週前だけを通常buildで許容する。2週以上古い入力、未来週、保存週と観測日の不一致は停止し、週次workflowの`coverage-alert`へ接続した。移行前キューも`week`の週末を観測日として復元し、`generated_at`へ戻らない。HTTP再実測がfreshでもUI coverageがstaleならsource全体をpartial/staleにする。市区町村カテゴリ720 URLはsitemapから除外し、既知カテゴリは親プロフィールへ301、未知カテゴリは410。自治体ランキングのDataset JSON-LDはdescription・canonical・license・contentUrl等を補完した。
+  - **ローカル実測**: `node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe` はW32を「5週古い」としてexit 1、`--next 1`は既存キューの読み取りを継続。検索成長テスト75件、GSC/運用テスト32件、web対象テスト48件、web type-check・ESLint・production buildは合格（2026-09-07）。production build中のR2/font取得は社内proxy証明書で失敗したが既存fallbackで完走した。
+  - **baseline / 最新実測**: UI export W32（2026-08-06）= 404 8,110 / soft404 407 / 5xx 49 / crawled-not-indexed 3,352。W36（最終更新2026-09-04）= 404 12,367 / soft404 450 / 5xx 18 / crawled-not-indexed 2,697 / discovered-not-indexed 692 / 登録済み5,095 / 未登録23,609。履歴はW25/W32/W36の3点になった。W36の詳細3,147 URLを全件HTTP実測し、現在200のobserve-after-fix 789、現在404で設計どおりのsurvey 4、content-check 11（うち市区町村カテゴリ5）、既存enrich 23へ分類した。
+  - **現在**: 最新入力は`source_observed_at=2026-09-04` / `source_age_weeks=1`で検索成長パイプラインもfresh。codeはmain未反映のため **effect/pending**。実装残は`GSC-COVERAGE-DEPLOY-01`、観測残は`.claude/todo/improvements.md`の`COVERAGE-LOOP-01`を正典とする。
+  - **追加是正**: 通常上限2,500件では647件を未実測にしたため、actionable 5カテゴリ（各最大1,000件）を全件確認できる既定5,000件へ引き上げた。
+  - **検証期日 / 次**: 2026-09-14までに明示承認後のデプロイを行い、本番301/410/Dataset/sitemapを確認する。デプロイ後28日で市区町村カテゴリsoft404が5→0にならない場合は、代表URLの`coverageState` / `lastCrawlTime` / Google選択canonicalをURL Inspection APIで取得し、再クロール未到達とURL信号不一致を分ける。
+
 ### [PHASE-9-FOLLOWUP] Cloudflare token 集約 + Smoke Test cascade fix
 
 - **対応日**: 2026-04-26 / コミット: `e97b6db7`

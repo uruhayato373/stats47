@@ -98,9 +98,10 @@ python3 .claude/scripts/gsc/ingest-gsc-export.py        # ~/Downloads の GSC zi
 ### Phase 2 — キュー構築 (本番 HTTP 実測)
 ```bash
 node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実測 → 分類 → upsert
-# 高速 (実測せずキャッシュ): --no-probe   /  実測上限: --probe-limit 2500
+# 高速 (実測せずキャッシュ): --no-probe   /  実測上限: --probe-limit 5000
 ```
 - actionable カテゴリ (404 / soft404 / 5xx / crawled-not-indexed / discovered) のみ実測する。意図的カテゴリは放置。
+- 最新 export の入力週が実行週より 2 週以上古い場合は fail-closed で停止する。履歴診断だけで古い入力を使う場合に限り `--allow-stale-source` を明示する。
 - 状態 (pending / in-progress / done / resolved-by-design) を **upsert で保持**。done を毎回潰さない。
 
 ### Phase 3 — 報告
@@ -162,8 +163,8 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 **自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
 (`build-coverage-queue.mjs` → `.claude/state/gsc/` を develop へ commit-back)。
-本番 HTTP 実測は認証不要なので、新しい export が無くても **verdict は毎週最新化される**
-(直した URL が 200/410 になったかが自動で反映される)。失敗時は `[Coverage Alert]` Issue
+入力週が 1 週以内なら本番 HTTP を再実測する。新しい export がなく入力週が 2 週以上古い場合は、
+古い母集団を最新と誤認しないよう fail-closed で停止する。失敗時は `[Coverage Alert]` Issue
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
 step には `timeout-minutes: 12` を置き、probe が長引いても週次計測本体を道連れにしない。
 

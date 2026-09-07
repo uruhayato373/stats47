@@ -72,12 +72,9 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       `${baseUrl}/sitemap.xml`,
-      // sitemap-index に cities (sitemap/8) が含まれない Next.js / OpenNext quirk の
-      // workaround として、cities sitemap を robots.txt から直接配信。
-      // Phase 1 cities revival (PR #335-#337) で 25,785 city URLs を Google に
-      // 確実に discover させる目的。
+      // 過去の sitemap-index 欠落への防御として、city profile sitemap を直接列挙する。
+      // index route も同じ shard を含むため、どちらの発見経路でも同一URL集合になる。
       `${baseUrl}/sitemap/8.xml`,
     ],
   };
 }
-

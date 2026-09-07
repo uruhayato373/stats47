@@ -214,7 +214,8 @@ const COVERAGE = {
     const file = path.join(root, ".claude/state/gsc/coverage-remediation-queue.json");
     if (!fs.existsSync(file)) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
-    const observedAt = j.generated_at ?? fs.statSync(file).mtime.toISOString();
+    const generatedAt = j.generated_at ?? fs.statSync(file).mtime.toISOString();
+    const observedAt = coverageSourceObservedAt(j, generatedAt);
     const freshness = freshnessForSource({ status: "success", observedAt, now, staleAfterDays: this.staleAfterDays });
     const obs = [];
     for (const e of j.queue ?? []) {
@@ -222,9 +223,16 @@ const COVERAGE = {
       if (!page) continue;
       const httpStatus = numOrNull(e.current_http);
       if (httpStatus !== null) {
+        const httpObservedAt = e.last_checked ?? generatedAt;
         obs.push(createObservation({
           source: "http", metric: "status", dimensions: { page }, value: httpStatus,
-          observedAt: e.last_checked ?? observedAt, freshness,
+          observedAt: httpObservedAt,
+          freshness: freshnessForSource({
+            status: "success",
+            observedAt: httpObservedAt,
+            now,
+            staleAfterDays: this.staleAfterDays,
+          }),
           provenance: { file: rel(file), api: "coverage HTTP probe (Googlebot UA)", limitations: ["build-coverage-queue の本番 HTTP 実測値 (live probe ではない)"] },
         }));
       }
@@ -427,6 +435,16 @@ export function shouldEmitCoverageCategory(entry) {
   const status = entry?.status ?? "pending";
   const action = entry?.action;
   return status === "pending" && action !== "none";
+}
+
+/** queue の生成日ではなく、GSC UI export の観測日を coverage の鮮度に使う。 */
+export function coverageSourceObservedAt(queue, fallback = null) {
+  return (
+    queue?.source_observed_at ??
+    isoWeekEndDate(queue?.week) ??
+    queue?.generated_at ??
+    fallback
+  );
 }
 
 function weekStart(endIso) {

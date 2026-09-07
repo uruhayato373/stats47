@@ -78,8 +78,8 @@ jobs:
         continue-on-error: false
 
       - name: 🔄 GSC operations cycle contract
-        # snapshot→review→候補判断→plan→月次集約の接続と、JST週境界の退行を止める。
-        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs
+        # snapshot→review→候補判断→plan→月次集約の接続、JST週境界、coverage入力鮮度の退行を止める。
+        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs
         continue-on-error: false
 
       - name: 🔁 Workflow Commit-back Contract Gate

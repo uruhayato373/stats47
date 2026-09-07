@@ -10,6 +10,7 @@
  */
 import { NORMALIZE_SOURCES, ALL_SOURCES, PROJECT_ROOT } from "./lib/sources.mjs";
 import { validateObservation } from "./lib/contracts.mjs";
+import { worstFreshness } from "./lib/freshness.mjs";
 import { redactString } from "./lib/redaction.mjs";
 import { PATHS, writeJson, currentIsoWeek } from "./lib/state.mjs";
 import { pathToFileURL } from "node:url";
@@ -29,9 +30,9 @@ export function normalizeAll({ now = new Date().toISOString(), root = PROJECT_RO
         if (validateObservation(o).ok) valid.push(o);
       }
       observations.push(...valid);
-      const fresh = valid[0]?.freshness ?? "missing";
+      const fresh = worstFreshness(valid.map((observation) => observation.freshness));
       sources[def.name] = {
-        status: valid.length ? (fresh === "stale" ? "partial" : "success") : "missing",
+        status: valid.length ? (fresh === "fresh" ? "success" : "partial") : "missing",
         observedAt: res.observedAt,
         count: valid.length,
         freshness: fresh,

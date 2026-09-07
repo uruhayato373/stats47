@@ -34,6 +34,7 @@ import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import {
   MunicipalityRankingViewTracker,
   binMunicipalityValues,
+  buildMunicipalityDatasetStructuredData,
   filterMunicipalityRanking,
   municipalityLeafName,
 } from '@/features/municipalities';
@@ -166,22 +167,10 @@ export default async function MunicipalityRankingPage({
   const precision = distribution?.precision ?? 0;
   const formatValue = (value: number) =>
     formatValueWithPrecision(value, precision);
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Dataset',
-    name: `${municipalityRankingDisplayTitle(item)} 市区町村ランキング`,
-    temporalCoverage: snapshot.yearCode,
-    spatialCoverage: '日本の市区町村',
-    distribution: {
-      '@type': 'DataDownload',
-      encodingFormat: 'application/json',
-    },
-    creator: {
-      '@type': 'Organization',
-      name: item.source.name,
-      url: item.source.url,
-    },
-  };
+  const structuredData = buildMunicipalityDatasetStructuredData({
+    item,
+    snapshot,
+  });
 
   return (
     <PageShell>

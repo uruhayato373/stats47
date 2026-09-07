@@ -56,10 +56,29 @@ const YELLOW = "[1;33m";
 const DIM = "[2m";
 const NC = "[0m";
 
+/** Windows の npm/npx は .cmd をshell実行せず、NodeからCLI本体を直接呼ぶ。 */
+export function resolveInvocation(
+  command,
+  args,
+  {
+    platform = process.platform,
+    npmExecPath = process.env.npm_execpath,
+    nodeExecPath = process.execPath,
+  } = {},
+) {
+  if (platform !== "win32" || (command !== "npm" && command !== "npx")) {
+    return { command, args };
+  }
+  const npmCli = npmExecPath || path.join(path.dirname(nodeExecPath), "node_modules", "npm", "bin", "npm-cli.js");
+  const cli = command === "npx" ? path.join(path.dirname(npmCli), "npx-cli.js") : npmCli;
+  return { command: nodeExecPath, args: [cli, ...args] };
+}
+
 /** 実行して {ok, output} を返す。throw しない (1 つの失敗で他を止めないため)。 */
 async function tryRun(command, args, options = {}) {
   try {
-    const { stdout, stderr } = await execFileAsync(command, args, {
+    const invocation = resolveInvocation(command, args);
+    const { stdout, stderr } = await execFileAsync(invocation.command, invocation.args, {
       cwd: SCAN_ROOT,
       maxBuffer: 32 * 1024 * 1024,
       ...options,
