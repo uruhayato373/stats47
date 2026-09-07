@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-06T08:45:22.386Z",
+  "generatedAt": "2026-09-06T23:10:50.738Z",
   "account": "stats47",
   "source": {
     "catalog": ".claude/scripts/note/catalog/",
@@ -8,19 +8,19 @@
     "siteLinksChecked": true
   },
   "summary": {
-    "total": 234,
+    "total": 286,
     "errors": 0,
-    "warnings": 0,
-    "compliantHashtags": 234,
-    "withSiteLink": 196,
-    "withRelatedNoteLink": 194,
-    "withMagazineLink": 169,
-    "withNoNavigation": 3,
-    "assignedMagazineMembershipOk": 234,
+    "warnings": 4,
+    "compliantHashtags": 286,
+    "withSiteLink": 247,
+    "withRelatedNoteLink": 245,
+    "withMagazineLink": 171,
+    "withNoNavigation": 4,
+    "assignedMagazineMembershipOk": 286,
     "pinnedArticles": 1,
     "profiledArticles": 1,
     "liveMagazines": 19,
-    "exactMagazineMemberships": 19,
+    "exactMagazineMemberships": 18,
     "defaultMagazineCovers": 0,
     "thinMagazines": 0,
     "magazineMetadataWarnings": 0,
@@ -28,9 +28,9 @@
   },
   "profile": {
     "urlname": "stats47",
-    "noteCount": 234,
+    "noteCount": 286,
     "magazineCount": 19,
-    "followerCount": 261,
+    "followerCount": 259,
     "hasBio": true,
     "hasSiteLink": true,
     "hasHeaderImage": true,
@@ -115,6 +115,12 @@
       "finalUrl": "https://stats47.jp/",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-09/from/note/n66a286b5211b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-09?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n66a286b5211b",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/agricultural-output": {
       "status": 200,
       "finalStatus": 200,
@@ -145,6 +151,12 @@
       "finalUrl": "https://stats47.jp/blog/cc-estat-13-agri-sankey",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-09/from/note/ne6c7d221803a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-09?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne6c7d221803a",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/average-temperature": {
       "status": 200,
       "finalStatus": 200,
@@ -168,6 +180,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/annual-cloudy-days",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-07/from/note/n97ddfadff36a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n97ddfadff36a",
+      "redirected": true
     },
     "https://stats47.jp/ranking/avg-propensity-to-consume-worker-households": {
       "status": 200,
@@ -193,6 +211,12 @@
       "finalUrl": "https://stats47.jp/ranking/adult-sandals-consumption-expenditure",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/n76446d252957": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n76446d252957",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/consumption-expenditure-multi-person-households-per-month": {
       "status": 200,
       "finalStatus": 200,
@@ -205,11 +229,23 @@
       "finalUrl": "https://stats47.jp/blog/apple-expenditure-ranking",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/n89f8035eb53d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n89f8035eb53d",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/current-liabilities-balance-multi-person-households-per-household": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/current-liabilities-balance-multi-person-households-per-household",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/nbdbde1672cc0": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nbdbde1672cc0",
+      "redirected": true
     },
     "https://stats47.jp/ranking/day-time-population": {
       "status": 200,
@@ -222,6 +258,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/blog/population-migration-tokyo-concentration",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/n7a494830e01d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n7a494830e01d",
+      "redirected": true
     },
     "https://stats47.jp/ranking/electricity-generation-capacity": {
       "status": 200,
@@ -247,6 +289,12 @@
       "finalUrl": "https://stats47.jp/ranking/city-gas-sales-volume",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-08/from/note/n5b3dbb6c7cef": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-08?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5b3dbb6c7cef",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/general-households": {
       "status": 200,
       "finalStatus": 200,
@@ -258,6 +306,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/nd93084c0cb0c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nd93084c0cb0c",
+      "redirected": true
     },
     "https://stats47.jp/ranking/late-elderly-medical-expense-per-insured": {
       "status": 200,
@@ -283,6 +337,12 @@
       "finalUrl": "https://stats47.jp/ranking/acupuncturist-rate",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-04/from/note/ncd0aea7cd435": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-04?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ncd0aea7cd435",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/minimum-wage-by-region": {
       "status": 200,
       "finalStatus": 200,
@@ -306,6 +366,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/auto-mechanic-annual-income",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-02/from/note/n2a465fecbdec": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n2a465fecbdec",
+      "redirected": true
     },
     "https://stats47.jp/ranking/number-of-establishments-manufacturing": {
       "status": 200,
@@ -337,6 +403,12 @@
       "finalUrl": "https://stats47.jp/blog/it-establishments-prefecture",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-09/from/note/nf28da95897e0": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-09?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nf28da95897e0",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/room-utilization-rate": {
       "status": 200,
       "finalStatus": 200,
@@ -361,11 +433,23 @@
       "finalUrl": "https://stats47.jp/ranking/bus-operators",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-07/from/note/na895280512fc": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=na895280512fc",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/total-fertility-rate": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/total-fertility-rate",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/nf4b16d26f6e8": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nf4b16d26f6e8",
+      "redirected": true
     },
     "https://stats47.jp/ranking/maximum-temperature": {
       "status": 200,
@@ -390,6 +474,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/blog/temperature-extremes-map",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-07/from/note/n91e96edf3950": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n91e96edf3950",
+      "redirected": true
     },
     "https://stats47.jp/ranking/real-public-debt-service-ratio": {
       "status": 200,
@@ -463,6 +553,12 @@
       "finalUrl": "https://stats47.jp/ranking/annual-precipitation",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-07/from/note/n023501038bd5": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n023501038bd5",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/sports-participation-rate-volleyball": {
       "status": 200,
       "finalStatus": 200,
@@ -499,6 +595,12 @@
       "finalUrl": "https://stats47.jp/ranking/sports-annual-participation-rate-10plus",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n026bb22ad4eb": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n026bb22ad4eb",
+      "redirected": true
+    },
     "https://stats47.jp/blog/food-spending-pattern": {
       "status": 200,
       "finalStatus": 200,
@@ -516,6 +618,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/consumer-price-difference-index-overall",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/n03844512d58a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n03844512d58a",
+      "redirected": true
     },
     "https://stats47.jp/ranking/sports-participation-rate-yoga": {
       "status": 200,
@@ -553,6 +661,12 @@
       "finalUrl": "https://stats47.jp/ranking/sports-participation-rate-cycling",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n04c2737daf2c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n04c2737daf2c",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/fiscal-strength-index-prefecture": {
       "status": 200,
       "finalStatus": 200,
@@ -564,6 +678,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/local-debt-current-ratio",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-06/from/note/n04d95ae14bc1": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n04d95ae14bc1",
+      "redirected": true
     },
     "https://stats47.jp/ranking/hobby-participation-rate-karaoke": {
       "status": 200,
@@ -601,6 +721,12 @@
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-theater",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n0654ddf27920": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n0654ddf27920",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/hobby-participation-rate-japanese-music": {
       "status": 200,
       "finalStatus": 200,
@@ -613,11 +739,29 @@
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-classical-music",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n08eb33492a93": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n08eb33492a93",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/sports-participation-rate-table-tennis": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/sports-participation-rate-table-tennis",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n0b7373c9648a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n0b7373c9648a",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-04/from/note/n0e8fd0068d4e": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-04?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n0e8fd0068d4e",
+      "redirected": true
     },
     "https://stats47.jp/ranking/crude-birth-rate": {
       "status": 200,
@@ -661,17 +805,41 @@
       "finalUrl": "https://stats47.jp/blog/fertility-fiscal-nexus",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/n144d350fc14e": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n144d350fc14e",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/sports-participation-rate-tennis": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/sports-participation-rate-tennis",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n14f716fcd76d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n14f716fcd76d",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-04/from/note/n15ee88b5169d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-04?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n15ee88b5169d",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/hobby-participation-rate-music-listening": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-music-listening",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n1649910097fb": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n1649910097fb",
+      "redirected": true
     },
     "https://stats47.jp/ranking/standard-fiscal-revenue": {
       "status": 200,
@@ -684,6 +852,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/standard-fiscal-expenditure",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-06/from/note/n16950238dfd8": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n16950238dfd8",
+      "redirected": true
     },
     "https://stats47.jp/ranking/pharmacy-count-per-100k": {
       "status": 200,
@@ -715,6 +889,24 @@
       "finalUrl": "https://stats47.jp/blog/barber-beauty-salon-regional-gap",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-04/from/note/n1b943c7d414d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-04?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n1b943c7d414d",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n1e63abcfba72": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n1e63abcfba72",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-10/from/note/n218588ef2f67": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-10?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n218588ef2f67",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/apple-consumption-expenditure": {
       "status": 200,
       "finalStatus": 200,
@@ -726,6 +918,18 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/blog/consumer-price-regional-gap",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-09/from/note/n21cb13582fe6": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-09?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n21cb13582fe6",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n24b5000d587f": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n24b5000d587f",
+      "redirected": true
     },
     "https://stats47.jp/ranking/sports-participation-rate-skiing": {
       "status": 200,
@@ -744,6 +948,18 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/sports-participation-rate-fishing",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n250b7aab145f": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n250b7aab145f",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n279776fbbbb1": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n279776fbbbb1",
+      "redirected": true
     },
     "https://stats47.jp/ranking/hobby-participation-rate-shogi": {
       "status": 200,
@@ -781,6 +997,18 @@
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-pachinko",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n27cb4242cb67": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n27cb4242cb67",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n285e0ba282d0": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n285e0ba282d0",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/hobby-participation-rate-writing": {
       "status": 200,
       "finalStatus": 200,
@@ -799,11 +1027,29 @@
       "finalUrl": "https://stats47.jp/ranking/library-books",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n28943c36410a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n28943c36410a",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n2b4298e9ac07": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n2b4298e9ac07",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/hobby-participation-rate-tea-ceremony": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-tea-ceremony",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n361a963fb079": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n361a963fb079",
+      "redirected": true
     },
     "https://stats47.jp/ranking/hobby-participation-rate-art-appreciation": {
       "status": 200,
@@ -816,6 +1062,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-sports-spectating",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n36624f1c4134": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n36624f1c4134",
+      "redirected": true
     },
     "https://stats47.jp/blog/household-income-tokyo-okinawa": {
       "status": 200,
@@ -871,6 +1123,18 @@
       "finalUrl": "https://stats47.jp/ranking/current-savings-balance-multi-person-households",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/n3908e5981967": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n3908e5981967",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-10/from/note/n391d3ef70d29": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-10?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n391d3ef70d29",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/traffic-accident-count-per-population": {
       "status": 200,
       "finalStatus": 200,
@@ -901,6 +1165,12 @@
       "finalUrl": "https://stats47.jp/ranking/average-road-traffic-volume",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/n3a4efa70c02a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n3a4efa70c02a",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/sports-participation-rate-ground-golf": {
       "status": 200,
       "finalStatus": 200,
@@ -918,6 +1188,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/sports-participation-rate-bowling",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n3a94353f31aa": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n3a94353f31aa",
+      "redirected": true
     },
     "https://stats47.jp/ranking/hobby-participation-rate-gardening": {
       "status": 200,
@@ -955,6 +1231,24 @@
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-photography",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n3e67c2f80ec1": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n3e67c2f80ec1",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n3e69a23bb946": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n3e69a23bb946",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-09/from/note/n3f65c01be9a8": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-09?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n3f65c01be9a8",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/high-school-advancement-rate": {
       "status": 200,
       "finalStatus": 200,
@@ -978,6 +1272,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/blog/university-advancement-capacity",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-05/from/note/n46a8eb03072b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-05?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n46a8eb03072b",
+      "redirected": true
     },
     "https://stats47.jp/ranking/hobby-participation-rate-diy": {
       "status": 200,
@@ -1003,6 +1303,12 @@
       "finalUrl": "https://stats47.jp/blog/vacant-house-crisis",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n48dff1df249f": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n48dff1df249f",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/hobby-participation-rate-painting": {
       "status": 200,
       "finalStatus": 200,
@@ -1015,17 +1321,59 @@
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-pottery",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n4d38db115f82": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n4d38db115f82",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/n4dae901ea3e8": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n4dae901ea3e8",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n4e1e67f70686": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n4e1e67f70686",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-04/from/note/n5158c5766a07": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-04?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5158c5766a07",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/hobby-participation-rate-theme-parks": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-theme-parks",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n51f946877627": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n51f946877627",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n523b6fbeabdf": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n523b6fbeabdf",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/sports-participation-rate-badminton": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/sports-participation-rate-badminton",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n55cd6de6a733": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n55cd6de6a733",
+      "redirected": true
     },
     "https://stats47.jp/ranking/real-balance-ratio": {
       "status": 200,
@@ -1038,6 +1386,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/current-balance-ratio",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-06/from/note/n567416b632f6": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n567416b632f6",
+      "redirected": true
     },
     "https://stats47.jp/ranking/study-participation-rate-business": {
       "status": 200,
@@ -1075,6 +1429,12 @@
       "finalUrl": "https://stats47.jp/ranking/study-participation-rate-foreign-language",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n578b6e871067": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n578b6e871067",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/university-count-per-100k": {
       "status": 200,
       "finalStatus": 200,
@@ -1086,6 +1446,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/university-capacity-index",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-05/from/note/n581a1409b2c9": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-05?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n581a1409b2c9",
+      "redirected": true
     },
     "https://stats47.jp/ranking/hobby-participation-rate-flower-arrangement": {
       "status": 200,
@@ -1105,11 +1471,59 @@
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-japanese-dance",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n583a06d171e1": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n583a06d171e1",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n5867882dd7ab": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5867882dd7ab",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n598a096ecbff": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n598a096ecbff",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n5ced125edb74": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5ced125edb74",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n5ddcfb6bf233": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5ddcfb6bf233",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-06/from/note/n5f183fcf5b97": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5f183fcf5b97",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/hobby-participation-rate-western-dance": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/hobby-participation-rate-western-dance",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n6305d990f2d2": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n6305d990f2d2",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n67729e8be7c4": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n67729e8be7c4",
+      "redirected": true
     },
     "https://stats47.jp/category/economy": {
       "status": 200,
@@ -1128,6 +1542,30 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/category/tourism",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/n68f5e09c8d62": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n68f5e09c8d62",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-07/from/note/n6f8a367906d1": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n6f8a367906d1",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n724eab276711": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n724eab276711",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n765fc88c67ef": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n765fc88c67ef",
+      "redirected": true
     },
     "https://stats47.jp/ranking/travel-leisure-annual-participation-rate-15plus": {
       "status": 200,
@@ -1159,11 +1597,41 @@
       "finalUrl": "https://stats47.jp/ranking/volunteer-activity-annual-participation-rate-15plus",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/n7ea3a816d39b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n7ea3a816d39b",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n7ff099157abd": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n7ff099157abd",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/per-capita-prefectural-income-h27": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/per-capita-prefectural-income-h27",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/n80e58a01f660": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n80e58a01f660",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n827191af8c1c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n827191af8c1c",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-07/from/note/n863f429319ca": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n863f429319ca",
+      "redirected": true
     },
     "https://stats47.jp/ranking/sports-participation-rate-judo": {
       "status": 200,
@@ -1176,6 +1644,18 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/sports-participation-rate-kendo",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n88d2a55a9e36": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n88d2a55a9e36",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n8df3cf170cf4": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n8df3cf170cf4",
+      "redirected": true
     },
     "https://stats47.jp/ranking/number-of-hotel-rooms": {
       "status": 200,
@@ -1206,6 +1686,114 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/blog/ryokan-vs-hotel-overnight-shift",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-07/from/note/n91e82ac3b13c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n91e82ac3b13c",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/n93a6656b2096": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n93a6656b2096",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n97bd102186c6": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n97bd102186c6",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n991a75be91ce": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n991a75be91ce",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n99561600d4fe": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n99561600d4fe",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-04/from/note/n99f53e7a1f33": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-04?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n99f53e7a1f33",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/n9dcb0680cea6": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n9dcb0680cea6",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/na25ccb15a6cb": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=na25ccb15a6cb",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/na2720854b1d9": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=na2720854b1d9",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/naa474d085c7b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=naa474d085c7b",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nabd65a1c893d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nabd65a1c893d",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nafc693255794": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nafc693255794",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nb16c0b751d01": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nb16c0b751d01",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-07/from/note/nb2d65c42c28b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nb2d65c42c28b",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nb90f2342ebd8": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nb90f2342ebd8",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nbedecc99f3a3": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nbedecc99f3a3",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nbf1373427ca3": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nbf1373427ca3",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nc0e7474b34e1": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nc0e7474b34e1",
+      "redirected": true
     },
     "https://stats47.jp/ranking/travel-participation-rate-domestic": {
       "status": 200,
@@ -1243,6 +1831,30 @@
       "finalUrl": "https://stats47.jp/ranking/travel-participation-rate-overseas",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/nc60f702445f8": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nc60f702445f8",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/ncaddeaf3e2ff": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ncaddeaf3e2ff",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/ncbed56eb7c3d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ncbed56eb7c3d",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/ncf6086199c7d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ncf6086199c7d",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/population-density-per-km2-total-area": {
       "status": 200,
       "finalStatus": 200,
@@ -1267,11 +1879,107 @@
       "finalUrl": "https://stats47.jp/blog/population-density-urbanization",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-03/from/note/nd5f8b5072cdb": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-03?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nd5f8b5072cdb",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nda04ec118c93": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nda04ec118c93",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/ndc600ddb7c44": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ndc600ddb7c44",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-06/from/note/nded2d34fc978": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nded2d34fc978",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-07/from/note/ne0d53bfef7ed": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne0d53bfef7ed",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-06/from/note/ne31a2574e231": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne31a2574e231",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/ne3cdb7819c41": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne3cdb7819c41",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/ne4a6ec30706a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne4a6ec30706a",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/ne5b9d2b01255": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne5b9d2b01255",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/ne62fa955bcff": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne62fa955bcff",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/local-bonds-prefecture": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/local-bonds-prefecture",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-06/from/note/ne82a6c83ed45": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne82a6c83ed45",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/ne85980349fda": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne85980349fda",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nead586305cdb": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nead586305cdb",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-05/from/note/ned30a382334d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-05?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ned30a382334d",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nefd814b49c5d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nefd814b49c5d",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nf0c533293f5b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nf0c533293f5b",
+      "redirected": true
     },
     "https://stats47.jp/ranking/study-participation-rate-home-economics": {
       "status": 200,
@@ -1285,11 +1993,59 @@
       "finalUrl": "https://stats47.jp/ranking/study-participation-rate-nursing-care",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-06/from/note/nf0fc2a7eb326": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nf0fc2a7eb326",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nf1a5abab3d5e": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nf1a5abab3d5e",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nf5b4ced7a736": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nf5b4ced7a736",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/annual-snow-days": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/annual-snow-days",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-07/from/note/nf962c6702b93": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nf962c6702b93",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nfa4057b9b8de": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nfa4057b9b8de",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/nfbdfd99fee1b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nfbdfd99fee1b",
+      "redirected": true
+    },
+    "https://stats47.jp/products/kindle-k-s1-01/from/note/nfe69996fb5c9": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-01?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nfe69996fb5c9",
+      "redirected": true
+    },
+    "https://stats47.jp/products/data-p-06/from/note/na21015ac366d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-06?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=na21015ac366d",
+      "redirected": true
     },
     "https://stats47.jp/ranking/total-overnight-guests": {
       "status": 200,
@@ -1297,11 +2053,23 @@
       "finalUrl": "https://stats47.jp/ranking/total-overnight-guests",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-07/from/note/n4727114e4db6": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n4727114e4db6",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/convenience-store-sales": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/convenience-store-sales",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-09/from/note/n86ef06aa91dc": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-09?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n86ef06aa91dc",
+      "redirected": true
     },
     "https://stats47.jp/ranking/vacant-housing-rate": {
       "status": 200,
@@ -1333,11 +2101,23 @@
       "finalUrl": "https://stats47.jp/blog/homeownership-vacancy-four-types",
       "redirected": false
     },
+    "https://stats47.jp/products/data-p-07/from/note/n002bee397931": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n002bee397931",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
       "redirected": false
+    },
+    "https://stats47.jp/products/data-p-07/from/note/n27d2efa9bcfb": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/data-p-07?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n27d2efa9bcfb",
+      "redirected": true
     },
     "https://stats47.jp/ranking/railway-station-count": {
       "status": 200,
@@ -1369,11 +2149,23 @@
       "finalUrl": "https://stats47.jp/blog/railway-station-count-prefecture-gap",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-08/from/note/nadfe03f70c45": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-08?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nadfe03f70c45",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/road-total-length": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/road-total-length",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-08/from/note/n2e5601e5d4e2": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-08?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n2e5601e5d4e2",
+      "redirected": true
     },
     "https://stats47.jp/ranking/electricity-demand": {
       "status": 200,
@@ -1387,11 +2179,23 @@
       "finalUrl": "https://stats47.jp/ranking/city-gas-supply-area-households",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-08/from/note/n71b4f712bea4": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-08?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n71b4f712bea4",
+      "redirected": true
+    },
     "https://stats47.jp/ranking/final-energy-consumption-per-capita": {
       "status": 200,
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/ranking/final-energy-consumption-per-capita",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-08/from/note/n1374350f7172": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-08?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n1374350f7172",
+      "redirected": true
     },
     "https://stats47.jp/blog/aichi-food-culture": {
       "status": 200,
@@ -1405,6 +2209,12 @@
       "finalUrl": "https://stats47.jp/areas/23000",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nda72a0bed2c4": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nda72a0bed2c4",
+      "redirected": true
+    },
     "https://stats47.jp/blog/aomori-food-culture": {
       "status": 200,
       "finalStatus": 200,
@@ -1416,6 +2226,12 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/areas/02000",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n85831c0c47aa": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n85831c0c47aa",
+      "redirected": true
     },
     "https://stats47.jp/blog/hokkaido-food-culture": {
       "status": 200,
@@ -1429,6 +2245,12 @@
       "finalUrl": "https://stats47.jp/areas/01000",
       "redirected": false
     },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n39016e5f0002": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n39016e5f0002",
+      "redirected": true
+    },
     "https://stats47.jp/blog/hiroshima-food-culture": {
       "status": 200,
       "finalStatus": 200,
@@ -1440,6 +2262,966 @@
       "finalStatus": 200,
       "finalUrl": "https://stats47.jp/areas/34000",
       "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n0be24c40b88d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n0be24c40b88d",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/akita-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/akita-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/05000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/05000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n5e9502c6507c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5e9502c6507c",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/chiba-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/chiba-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/12000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/12000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n1d5481680c03": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n1d5481680c03",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/ehime-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/ehime-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/38000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/38000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nb627534c8b66": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nb627534c8b66",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/fukui-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/fukui-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/18000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/18000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n18bb5a58060c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n18bb5a58060c",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/fukuoka-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/fukuoka-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/40000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/40000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nb7cfd81af156": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nb7cfd81af156",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/fukushima-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/fukushima-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/07000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/07000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n4c363c356b63": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n4c363c356b63",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/gifu-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/gifu-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/21000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/21000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n6136c0f13156": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n6136c0f13156",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/gunma-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/gunma-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/10000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/10000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n1b9bf465327d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n1b9bf465327d",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/hyogo-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/hyogo-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/28000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/28000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n6f5ab18ba6ff": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n6f5ab18ba6ff",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/ibaraki-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/ibaraki-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/08000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/08000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n65d95575f7a5": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n65d95575f7a5",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/ishikawa-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/ishikawa-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/17000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/17000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ndf2afaef16c0": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ndf2afaef16c0",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/iwate-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/iwate-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/03000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/03000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/na3020a08cef7": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=na3020a08cef7",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/kagawa-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/kagawa-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/37000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/37000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ne69b740f702e": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne69b740f702e",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/kagoshima-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/kagoshima-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/46000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/46000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n555435ada7ed": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n555435ada7ed",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/kanagawa-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/kanagawa-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/14000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/14000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nd0326279977a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nd0326279977a",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/kochi-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/kochi-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/39000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/39000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n29417de32c83": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n29417de32c83",
+      "redirected": true
+    },
+    "https://stats47.jp/areas/43000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/43000",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/kumamoto-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/kumamoto-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n7e98a46bf791": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n7e98a46bf791",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/kyoto-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/kyoto-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/26000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/26000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n2a18f8e7098c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n2a18f8e7098c",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/mie-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/mie-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/24000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/24000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n8113876eaeab": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n8113876eaeab",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/miyagi-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/miyagi-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/04000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/04000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nb479aff3cf05": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nb479aff3cf05",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/miyazaki-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/miyazaki-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/45000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/45000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n7f0be4fef37c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n7f0be4fef37c",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/nagano-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/nagano-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/20000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/20000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nb6061a164201": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nb6061a164201",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/nagasaki-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/nagasaki-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/42000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/42000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nd547ff50cbe6": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nd547ff50cbe6",
+      "redirected": true
+    },
+    "https://stats47.jp/areas/29000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/29000",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/nara-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/nara-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n366d898d8107": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n366d898d8107",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/niigata-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/niigata-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/15000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/15000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ndd0bb1c14aa4": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ndd0bb1c14aa4",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/oita-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/oita-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/44000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/44000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n37ab621d01ad": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n37ab621d01ad",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/okayama-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/okayama-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/33000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/33000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ne788feae75bf": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne788feae75bf",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/okinawa-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/okinawa-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/47000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/47000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n757284230786": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n757284230786",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/osaka-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/osaka-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/27000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/27000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n7ac1079b6f20": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n7ac1079b6f20",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/saga-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/saga-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/41000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/41000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n1972caf5203d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n1972caf5203d",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/saitama-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/saitama-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/11000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/11000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ne760e2866251": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne760e2866251",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/shiga-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/shiga-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/25000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/25000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ne5569b417135": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne5569b417135",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/shimane-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/shimane-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/32000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/32000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n75d68c2bb7e9": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n75d68c2bb7e9",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/shizuoka-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/shizuoka-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/22000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/22000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n35ce2a1b9248": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n35ce2a1b9248",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/tochigi-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/tochigi-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/09000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/09000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n0fd0305a6b8c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n0fd0305a6b8c",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/tokushima-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/tokushima-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/36000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/36000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ne2abc0fc7530": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ne2abc0fc7530",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/tokyo-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/tokyo-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/13000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/13000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n9d384a674462": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n9d384a674462",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/tottori-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/tottori-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/31000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/31000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n24d6b689079d": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n24d6b689079d",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/toyama-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/toyama-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/16000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/16000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n13bca568c98a": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n13bca568c98a",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/wakayama-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/wakayama-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/30000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/30000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ncc56ff8990d0": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ncc56ff8990d0",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/yamagata-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/yamagata-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/06000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/06000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/na3d645a7d50c": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=na3d645a7d50c",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/yamaguchi-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/yamaguchi-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/35000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/35000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n88dde65e0774": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n88dde65e0774",
+      "redirected": true
+    },
+    "https://stats47.jp/blog/yamanashi-food-culture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/yamanashi-food-culture",
+      "redirected": false
+    },
+    "https://stats47.jp/areas/19000": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/areas/19000",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n3416a225e0c6": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n3416a225e0c6",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/academic-achievement-test-average-rate": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/academic-achievement-test-average-rate",
+      "redirected": false
+    },
+    "https://stats47.jp/ranking/spinach-consumption-quantity": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/spinach-consumption-quantity",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/spinach-consumption-ranking": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/spinach-consumption-ranking",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-05/from/note/n78ffa2c7da3b": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-05?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n78ffa2c7da3b",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/high-school-graduates-job-ratio": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/high-school-graduates-job-ratio",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/advancement-plus-employment-rate-prefecture": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/advancement-plus-employment-rate-prefecture",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-05/from/note/n2d53f8a5fbb8": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-05?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n2d53f8a5fbb8",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/beer-consumption-quantity": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/beer-consumption-quantity",
+      "redirected": false
+    },
+    "https://stats47.jp/ranking/happoshu-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/happoshu-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/ranking/beer-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/beer-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/beer-peak-month-july-to-december": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/beer-peak-month-july-to-december",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n5b11edb996f3": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n5b11edb996f3",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/white-bread-consumption-quantity": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/white-bread-consumption-quantity",
+      "redirected": false
+    },
+    "https://stats47.jp/ranking/rice-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/rice-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/white-bread-price-up-quantity-up": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/white-bread-price-up-quantity-up",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/nc3a7ebf40516": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=nc3a7ebf40516",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/gyoza-frozen-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/gyoza-frozen-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/frozen-gyoza-spending-prefecture-gap": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/frozen-gyoza-spending-prefecture-gap",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n2f50bb479647": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n2f50bb479647",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/necktie-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/necktie-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/ranking/womens-stockings-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/womens-stockings-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/ranking/hat-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/hat-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/necktie-stockings-market-shrink": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/necktie-stockings-market-shrink",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/ncbfe818867f4": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=ncbfe818867f4",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/scallop-consumption-quantity": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/scallop-consumption-quantity",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/n7ba6c516c1e9": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n7ba6c516c1e9",
+      "redirected": true
+    },
+    "https://stats47.jp/ranking/womens-coat-consumption-expenditure": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/womens-coat-consumption-expenditure",
+      "redirected": false
+    },
+    "https://stats47.jp/ranking/womens-coat-consumption-quantity": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/ranking/womens-coat-consumption-quantity",
+      "redirected": false
+    },
+    "https://stats47.jp/blog/winter-coat-bargain-purchase-price": {
+      "status": 200,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/blog/winter-coat-bargain-purchase-price",
+      "redirected": false
+    },
+    "https://stats47.jp/products/kindle-k-s1-02/from/note/neb44a932f9f2": {
+      "status": 307,
+      "finalStatus": 200,
+      "finalUrl": "https://stats47.jp/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=neb44a932f9f2",
+      "redirected": true
     },
     "https://stats47.jp/ranking/annual-income-per-household": {
       "status": 200,
@@ -1564,10 +3346,27 @@
       "catalogName": "都道府県ランキング｜家計・所得・物価",
       "liveDescription": "県民所得・貯蓄率・消費者物価・費目別支出など、家計と経済の都道府県ランキングを束ねる無料マガジン。",
       "noteUrl": "https://note.com/stats47/m/m2604e003aac4",
-      "expectedCount": 16,
+      "expectedCount": 12,
       "actualCount": 16,
       "missingMembers": [],
-      "unexpectedMembers": [],
+      "unexpectedMembers": [
+        {
+          "noteKey": "n0be24c40b88d",
+          "catalogKey": "a-kakei-hiroshima"
+        },
+        {
+          "noteKey": "n85831c0c47aa",
+          "catalogKey": "a-kakei-aomori"
+        },
+        {
+          "noteKey": "n39016e5f0002",
+          "catalogKey": "a-kakei-hokkaido"
+        },
+        {
+          "noteKey": "nda72a0bed2c4",
+          "catalogKey": "a-kakei-aichi"
+        }
+      ],
       "firstMemberNoteKey": "n0be24c40b88d",
       "defaultCover": false,
       "thin": false,
@@ -1598,11 +3397,11 @@
       "catalogName": "都道府県ランキング｜教育・学び",
       "liveDescription": "進学率・学力・体力・体格・教育費・図書館など、教育と学びの都道府県ランキングを束ねる無料マガジン。",
       "noteUrl": "https://note.com/stats47/m/m72e6b89b155e",
-      "expectedCount": 8,
-      "actualCount": 8,
+      "expectedCount": 10,
+      "actualCount": 10,
       "missingMembers": [],
       "unexpectedMembers": [],
-      "firstMemberNoteKey": "ned30a382334d",
+      "firstMemberNoteKey": "n2d53f8a5fbb8",
       "defaultCover": false,
       "thin": false,
       "nameMismatch": false,
@@ -1890,9 +3689,9 @@
       "noteUrl": "https://note.com/stats47/n/n66a286b5211b",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -1915,9 +3714,9 @@
       "noteUrl": "https://note.com/stats47/n/ne6c7d221803a",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -1941,9 +3740,9 @@
       "noteUrl": "https://note.com/stats47/n/n97ddfadff36a",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -1967,9 +3766,9 @@
       "noteUrl": "https://note.com/stats47/n/n76446d252957",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -1992,9 +3791,9 @@
       "noteUrl": "https://note.com/stats47/n/n89f8035eb53d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2017,9 +3816,9 @@
       "noteUrl": "https://note.com/stats47/n/nbdbde1672cc0",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2042,9 +3841,9 @@
       "noteUrl": "https://note.com/stats47/n/n7a494830e01d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2067,9 +3866,9 @@
       "noteUrl": "https://note.com/stats47/n/n5b3dbb6c7cef",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 4,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2092,9 +3891,9 @@
       "noteUrl": "https://note.com/stats47/n/nd93084c0cb0c",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 5,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2117,9 +3916,9 @@
       "noteUrl": "https://note.com/stats47/n/ncd0aea7cd435",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2142,9 +3941,9 @@
       "noteUrl": "https://note.com/stats47/n/n2a465fecbdec",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2167,9 +3966,9 @@
       "noteUrl": "https://note.com/stats47/n/nf28da95897e0",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2192,9 +3991,9 @@
       "noteUrl": "https://note.com/stats47/n/na895280512fc",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2217,9 +4016,9 @@
       "noteUrl": "https://note.com/stats47/n/nf4b16d26f6e8",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -2243,9 +4042,9 @@
       "noteUrl": "https://note.com/stats47/n/n91e96edf3950",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3468,9 +5267,9 @@
       "noteUrl": "https://note.com/stats47/n/n023501038bd5",
       "hashtagCount": 96,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3493,9 +5292,9 @@
       "noteUrl": "https://note.com/stats47/n/n026bb22ad4eb",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3518,9 +5317,9 @@
       "noteUrl": "https://note.com/stats47/n/n03844512d58a",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 11,
+        "total": 12,
         "cards": 6,
-        "site": 8,
+        "site": 9,
         "relatedNote": 2,
         "magazine": 1
       },
@@ -3568,9 +5367,9 @@
       "noteUrl": "https://note.com/stats47/n/n04c2737daf2c",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3593,9 +5392,9 @@
       "noteUrl": "https://note.com/stats47/n/n04d95ae14bc1",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 6,
+        "total": 7,
         "cards": 4,
-        "site": 4,
+        "site": 5,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3618,9 +5417,9 @@
       "noteUrl": "https://note.com/stats47/n/n0654ddf27920",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3643,9 +5442,9 @@
       "noteUrl": "https://note.com/stats47/n/n08eb33492a93",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3668,9 +5467,9 @@
       "noteUrl": "https://note.com/stats47/n/n0b7373c9648a",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3693,9 +5492,9 @@
       "noteUrl": "https://note.com/stats47/n/n0e8fd0068d4e",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3718,9 +5517,9 @@
       "noteUrl": "https://note.com/stats47/n/n144d350fc14e",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 11,
+        "total": 12,
         "cards": 9,
-        "site": 9,
+        "site": 10,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3743,9 +5542,9 @@
       "noteUrl": "https://note.com/stats47/n/n14f716fcd76d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3768,9 +5567,9 @@
       "noteUrl": "https://note.com/stats47/n/n15ee88b5169d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3793,9 +5592,9 @@
       "noteUrl": "https://note.com/stats47/n/n1649910097fb",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3818,9 +5617,9 @@
       "noteUrl": "https://note.com/stats47/n/n16950238dfd8",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 4,
-        "site": 4,
+        "site": 5,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3843,9 +5642,9 @@
       "noteUrl": "https://note.com/stats47/n/n1b943c7d414d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3868,9 +5667,9 @@
       "noteUrl": "https://note.com/stats47/n/n1e63abcfba72",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3893,9 +5692,9 @@
       "noteUrl": "https://note.com/stats47/n/n218588ef2f67",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3918,9 +5717,9 @@
       "noteUrl": "https://note.com/stats47/n/n21cb13582fe6",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3943,9 +5742,9 @@
       "noteUrl": "https://note.com/stats47/n/n24b5000d587f",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3968,9 +5767,9 @@
       "noteUrl": "https://note.com/stats47/n/n250b7aab145f",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -3993,9 +5792,9 @@
       "noteUrl": "https://note.com/stats47/n/n279776fbbbb1",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4018,9 +5817,9 @@
       "noteUrl": "https://note.com/stats47/n/n27cb4242cb67",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4043,9 +5842,9 @@
       "noteUrl": "https://note.com/stats47/n/n285e0ba282d0",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4068,9 +5867,9 @@
       "noteUrl": "https://note.com/stats47/n/n28943c36410a",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4093,9 +5892,9 @@
       "noteUrl": "https://note.com/stats47/n/n2b4298e9ac07",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4118,9 +5917,9 @@
       "noteUrl": "https://note.com/stats47/n/n361a963fb079",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4143,9 +5942,9 @@
       "noteUrl": "https://note.com/stats47/n/n36624f1c4134",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4168,9 +5967,9 @@
       "noteUrl": "https://note.com/stats47/n/n3908e5981967",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 17,
+        "total": 18,
         "cards": 7,
-        "site": 15,
+        "site": 16,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4193,9 +5992,9 @@
       "noteUrl": "https://note.com/stats47/n/n391d3ef70d29",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4218,9 +6017,9 @@
       "noteUrl": "https://note.com/stats47/n/n3a4efa70c02a",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4243,9 +6042,9 @@
       "noteUrl": "https://note.com/stats47/n/n3a94353f31aa",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4268,9 +6067,9 @@
       "noteUrl": "https://note.com/stats47/n/n3e67c2f80ec1",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4293,9 +6092,9 @@
       "noteUrl": "https://note.com/stats47/n/n3e69a23bb946",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4318,9 +6117,9 @@
       "noteUrl": "https://note.com/stats47/n/n3f65c01be9a8",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4343,9 +6142,9 @@
       "noteUrl": "https://note.com/stats47/n/n46a8eb03072b",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4368,9 +6167,9 @@
       "noteUrl": "https://note.com/stats47/n/n48dff1df249f",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 14,
+        "total": 15,
         "cards": 5,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4393,9 +6192,9 @@
       "noteUrl": "https://note.com/stats47/n/n4d38db115f82",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4418,9 +6217,9 @@
       "noteUrl": "https://note.com/stats47/n/n4dae901ea3e8",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4443,9 +6242,9 @@
       "noteUrl": "https://note.com/stats47/n/n4e1e67f70686",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4468,9 +6267,9 @@
       "noteUrl": "https://note.com/stats47/n/n5158c5766a07",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4493,9 +6292,9 @@
       "noteUrl": "https://note.com/stats47/n/n51f946877627",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 6,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4518,9 +6317,9 @@
       "noteUrl": "https://note.com/stats47/n/n523b6fbeabdf",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4543,9 +6342,9 @@
       "noteUrl": "https://note.com/stats47/n/n55cd6de6a733",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4568,9 +6367,9 @@
       "noteUrl": "https://note.com/stats47/n/n567416b632f6",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 6,
+        "total": 7,
         "cards": 4,
-        "site": 4,
+        "site": 5,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4593,9 +6392,9 @@
       "noteUrl": "https://note.com/stats47/n/n578b6e871067",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4618,9 +6417,9 @@
       "noteUrl": "https://note.com/stats47/n/n581a1409b2c9",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4643,9 +6442,9 @@
       "noteUrl": "https://note.com/stats47/n/n583a06d171e1",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4668,9 +6467,9 @@
       "noteUrl": "https://note.com/stats47/n/n5867882dd7ab",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4693,9 +6492,9 @@
       "noteUrl": "https://note.com/stats47/n/n598a096ecbff",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4718,9 +6517,9 @@
       "noteUrl": "https://note.com/stats47/n/n5ced125edb74",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 10,
+        "total": 11,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4743,9 +6542,9 @@
       "noteUrl": "https://note.com/stats47/n/n5ddcfb6bf233",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4768,9 +6567,9 @@
       "noteUrl": "https://note.com/stats47/n/n5f183fcf5b97",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 6,
+        "total": 7,
         "cards": 4,
-        "site": 4,
+        "site": 5,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4793,9 +6592,9 @@
       "noteUrl": "https://note.com/stats47/n/n6305d990f2d2",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4818,9 +6617,9 @@
       "noteUrl": "https://note.com/stats47/n/n67729e8be7c4",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4843,9 +6642,9 @@
       "noteUrl": "https://note.com/stats47/n/n68f5e09c8d62",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 6,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4868,9 +6667,9 @@
       "noteUrl": "https://note.com/stats47/n/n6f8a367906d1",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4893,9 +6692,9 @@
       "noteUrl": "https://note.com/stats47/n/n724eab276711",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4918,9 +6717,9 @@
       "noteUrl": "https://note.com/stats47/n/n765fc88c67ef",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4943,9 +6742,9 @@
       "noteUrl": "https://note.com/stats47/n/n7ea3a816d39b",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4968,9 +6767,9 @@
       "noteUrl": "https://note.com/stats47/n/n7ff099157abd",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -4993,9 +6792,9 @@
       "noteUrl": "https://note.com/stats47/n/n80e58a01f660",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 1,
-        "site": 2,
+        "site": 3,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5018,9 +6817,9 @@
       "noteUrl": "https://note.com/stats47/n/n827191af8c1c",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5043,9 +6842,9 @@
       "noteUrl": "https://note.com/stats47/n/n863f429319ca",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 5,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5068,9 +6867,9 @@
       "noteUrl": "https://note.com/stats47/n/n88d2a55a9e36",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5093,9 +6892,9 @@
       "noteUrl": "https://note.com/stats47/n/n8df3cf170cf4",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5118,9 +6917,9 @@
       "noteUrl": "https://note.com/stats47/n/n91e82ac3b13c",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 5,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5143,9 +6942,9 @@
       "noteUrl": "https://note.com/stats47/n/n93a6656b2096",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5168,9 +6967,9 @@
       "noteUrl": "https://note.com/stats47/n/n97bd102186c6",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5193,9 +6992,9 @@
       "noteUrl": "https://note.com/stats47/n/n991a75be91ce",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5218,9 +7017,9 @@
       "noteUrl": "https://note.com/stats47/n/n99561600d4fe",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5243,9 +7042,9 @@
       "noteUrl": "https://note.com/stats47/n/n99f53e7a1f33",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5268,9 +7067,9 @@
       "noteUrl": "https://note.com/stats47/n/n9dcb0680cea6",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5293,9 +7092,9 @@
       "noteUrl": "https://note.com/stats47/n/na25ccb15a6cb",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5318,9 +7117,9 @@
       "noteUrl": "https://note.com/stats47/n/na2720854b1d9",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5343,9 +7142,9 @@
       "noteUrl": "https://note.com/stats47/n/naa474d085c7b",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5368,9 +7167,9 @@
       "noteUrl": "https://note.com/stats47/n/nabd65a1c893d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5393,9 +7192,9 @@
       "noteUrl": "https://note.com/stats47/n/nafc693255794",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5418,9 +7217,9 @@
       "noteUrl": "https://note.com/stats47/n/nb16c0b751d01",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5443,9 +7242,9 @@
       "noteUrl": "https://note.com/stats47/n/nb2d65c42c28b",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5468,9 +7267,9 @@
       "noteUrl": "https://note.com/stats47/n/nb90f2342ebd8",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5493,9 +7292,9 @@
       "noteUrl": "https://note.com/stats47/n/nbedecc99f3a3",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5518,9 +7317,9 @@
       "noteUrl": "https://note.com/stats47/n/nbf1373427ca3",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5543,9 +7342,9 @@
       "noteUrl": "https://note.com/stats47/n/nc0e7474b34e1",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5568,9 +7367,9 @@
       "noteUrl": "https://note.com/stats47/n/nc60f702445f8",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5593,9 +7392,9 @@
       "noteUrl": "https://note.com/stats47/n/ncaddeaf3e2ff",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5618,9 +7417,9 @@
       "noteUrl": "https://note.com/stats47/n/ncbed56eb7c3d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 6,
+        "total": 7,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 2,
         "magazine": 1
       },
@@ -5643,9 +7442,9 @@
       "noteUrl": "https://note.com/stats47/n/ncf6086199c7d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5668,9 +7467,9 @@
       "noteUrl": "https://note.com/stats47/n/nd5f8b5072cdb",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 5,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5693,9 +7492,9 @@
       "noteUrl": "https://note.com/stats47/n/nda04ec118c93",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5718,9 +7517,9 @@
       "noteUrl": "https://note.com/stats47/n/ndc600ddb7c44",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5768,9 +7567,9 @@
       "noteUrl": "https://note.com/stats47/n/nded2d34fc978",
       "hashtagCount": 98,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5793,9 +7592,9 @@
       "noteUrl": "https://note.com/stats47/n/ne0d53bfef7ed",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 1,
-        "site": 2,
+        "site": 3,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5818,9 +7617,9 @@
       "noteUrl": "https://note.com/stats47/n/ne31a2574e231",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 6,
+        "total": 7,
         "cards": 4,
-        "site": 4,
+        "site": 5,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5843,9 +7642,9 @@
       "noteUrl": "https://note.com/stats47/n/ne3cdb7819c41",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5868,9 +7667,9 @@
       "noteUrl": "https://note.com/stats47/n/ne4a6ec30706a",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5893,9 +7692,9 @@
       "noteUrl": "https://note.com/stats47/n/ne5b9d2b01255",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5918,9 +7717,9 @@
       "noteUrl": "https://note.com/stats47/n/ne62fa955bcff",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5943,9 +7742,9 @@
       "noteUrl": "https://note.com/stats47/n/ne82a6c83ed45",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 2,
         "magazine": 1
       },
@@ -5968,9 +7767,9 @@
       "noteUrl": "https://note.com/stats47/n/ne85980349fda",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -5993,9 +7792,9 @@
       "noteUrl": "https://note.com/stats47/n/nead586305cdb",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6018,9 +7817,9 @@
       "noteUrl": "https://note.com/stats47/n/ned30a382334d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6043,9 +7842,9 @@
       "noteUrl": "https://note.com/stats47/n/nefd814b49c5d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6068,9 +7867,9 @@
       "noteUrl": "https://note.com/stats47/n/nf0c533293f5b",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6093,9 +7892,9 @@
       "noteUrl": "https://note.com/stats47/n/nf0fc2a7eb326",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6118,9 +7917,9 @@
       "noteUrl": "https://note.com/stats47/n/nf1a5abab3d5e",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6143,9 +7942,9 @@
       "noteUrl": "https://note.com/stats47/n/nf5b4ced7a736",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 5,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6168,9 +7967,9 @@
       "noteUrl": "https://note.com/stats47/n/nf962c6702b93",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6193,9 +7992,9 @@
       "noteUrl": "https://note.com/stats47/n/nfa4057b9b8de",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 6,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6218,9 +8017,9 @@
       "noteUrl": "https://note.com/stats47/n/nfbdfd99fee1b",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6243,9 +8042,9 @@
       "noteUrl": "https://note.com/stats47/n/nfe69996fb5c9",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 5,
         "cards": 0,
-        "site": 1,
+        "site": 2,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6268,9 +8067,9 @@
       "noteUrl": "https://note.com/stats47/n/na21015ac366d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 9,
+        "total": 10,
         "cards": 7,
-        "site": 7,
+        "site": 8,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6293,9 +8092,9 @@
       "noteUrl": "https://note.com/stats47/n/n4727114e4db6",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6319,9 +8118,9 @@
       "noteUrl": "https://note.com/stats47/n/n86ef06aa91dc",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6344,9 +8143,9 @@
       "noteUrl": "https://note.com/stats47/n/n002bee397931",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6369,9 +8168,9 @@
       "noteUrl": "https://note.com/stats47/n/n27d2efa9bcfb",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6394,9 +8193,9 @@
       "noteUrl": "https://note.com/stats47/n/nadfe03f70c45",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 8,
+        "total": 9,
         "cards": 6,
-        "site": 6,
+        "site": 7,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6419,9 +8218,9 @@
       "noteUrl": "https://note.com/stats47/n/n2e5601e5d4e2",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6444,9 +8243,9 @@
       "noteUrl": "https://note.com/stats47/n/n71b4f712bea4",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6469,9 +8268,9 @@
       "noteUrl": "https://note.com/stats47/n/n1374350f7172",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 7,
+        "total": 8,
         "cards": 5,
-        "site": 5,
+        "site": 6,
         "relatedNote": 1,
         "magazine": 1
       },
@@ -6490,24 +8289,31 @@
       "title": "愛知県の家計は何にお金が偏っているか ── 住居費最少、たんすと婚礼に厚い名古屋市の暮らし",
       "vertical": "stats47-note",
       "isPaid": false,
-      "r2Body": false,
+      "r2Body": true,
       "noteUrl": "https://note.com/stats47/n/nda72a0bed2c4",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 6,
         "cards": 0,
-        "site": 2,
-        "relatedNote": 1,
+        "site": 3,
+        "relatedNote": 2,
         "magazine": 1
       },
       "actualMagazineKeys": [
         "m2604e003aac4"
       ],
-      "expectedMagazineKey": "m2604e003aac4",
+      "expectedMagazineKey": null,
       "isPinned": false,
       "isProfiled": false,
       "errors": [],
-      "warnings": []
+      "warnings": [
+        {
+          "code": "unexpected_magazine_membership",
+          "detail": [
+            "m2604e003aac4"
+          ]
+        }
+      ]
     },
     {
       "key": "a-kakei-aomori",
@@ -6515,24 +8321,31 @@
       "title": "青森県の家計は何にお金が偏っているか ── 灯油とほたて貝が語る冬の家計",
       "vertical": "stats47-note",
       "isPaid": false,
-      "r2Body": false,
+      "r2Body": true,
       "noteUrl": "https://note.com/stats47/n/n85831c0c47aa",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 6,
         "cards": 0,
-        "site": 2,
-        "relatedNote": 1,
+        "site": 3,
+        "relatedNote": 2,
         "magazine": 1
       },
       "actualMagazineKeys": [
         "m2604e003aac4"
       ],
-      "expectedMagazineKey": "m2604e003aac4",
+      "expectedMagazineKey": null,
       "isPinned": false,
       "isProfiled": false,
       "errors": [],
-      "warnings": []
+      "warnings": [
+        {
+          "code": "unexpected_magazine_membership",
+          "detail": [
+            "m2604e003aac4"
+          ]
+        }
+      ]
     },
     {
       "key": "a-kakei-hokkaido",
@@ -6540,24 +8353,31 @@
       "title": "北海道の家計は何にお金が偏っているか ── 住居費1.27倍に表れる雪国の暮らし",
       "vertical": "stats47-note",
       "isPaid": false,
-      "r2Body": false,
+      "r2Body": true,
       "noteUrl": "https://note.com/stats47/n/n39016e5f0002",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 6,
         "cards": 0,
-        "site": 2,
-        "relatedNote": 1,
+        "site": 3,
+        "relatedNote": 2,
         "magazine": 1
       },
       "actualMagazineKeys": [
         "m2604e003aac4"
       ],
-      "expectedMagazineKey": "m2604e003aac4",
+      "expectedMagazineKey": null,
       "isPinned": false,
       "isProfiled": false,
       "errors": [],
-      "warnings": []
+      "warnings": [
+        {
+          "code": "unexpected_magazine_membership",
+          "detail": [
+            "m2604e003aac4"
+          ]
+        }
+      ]
     },
     {
       "key": "a-kakei-hiroshima",
@@ -6565,20 +8385,1227 @@
       "title": "広島県の家計は何にお金が偏っているか ── 教育費は控えめ、かきに厚みが出る広島市の暮らし",
       "vertical": "stats47-note",
       "isPaid": false,
-      "r2Body": false,
+      "r2Body": true,
       "noteUrl": "https://note.com/stats47/n/n0be24c40b88d",
       "hashtagCount": 99,
       "linkCounts": {
-        "total": 4,
+        "total": 6,
         "cards": 0,
-        "site": 2,
-        "relatedNote": 1,
+        "site": 3,
+        "relatedNote": 2,
         "magazine": 1
       },
       "actualMagazineKeys": [
         "m2604e003aac4"
       ],
-      "expectedMagazineKey": "m2604e003aac4",
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": [
+        {
+          "code": "unexpected_magazine_membership",
+          "detail": [
+            "m2604e003aac4"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "a-kakei-akita",
+      "noteKey": "n5e9502c6507c",
+      "title": "秋田県の家計は何にお金が偏っているか ── 灯油とストーブに出る雪国の暮らし、教育費は平均の4分の1",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n5e9502c6507c",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-chiba",
+      "noteKey": "n1d5481680c03",
+      "title": "千葉県の家計は何にお金が偏っているか ── 教育費2倍と通学定期代に見る東京近郊の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n1d5481680c03",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-ehime",
+      "noteKey": "nb627534c8b66",
+      "title": "愛媛県の家計は何にお金が偏っているか ── 教養娯楽費は少なく、被服賃借料が際立つ松山市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/nb627534c8b66",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-fukui",
+      "noteKey": "n18bb5a58060c",
+      "title": "福井県の家計は何にお金が偏っているか ── 住居費とカーテンに見る福井市のマイホーム志向",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n18bb5a58060c",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-fukuoka",
+      "noteKey": "nb7cfd81af156",
+      "title": "福岡県の家計は何にお金が偏っているか ── たらことバス通勤に見る福岡市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/nb7cfd81af156",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-fukushima",
+      "noteKey": "n4c363c356b63",
+      "title": "福島県の家計は何にお金が偏っているか ── 住居費が全国平均の6割に届かない福島市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n4c363c356b63",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-gifu",
+      "noteKey": "n6136c0f13156",
+      "title": "岐阜県の家計は何にお金が偏っているか ── 住居費0.56倍という際立った低さ",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n6136c0f13156",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-gunma",
+      "noteKey": "n1b9bf465327d",
+      "title": "群馬県の家計は何にお金が偏っているか ── 住居費の低さと車社会が映る前橋市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n1b9bf465327d",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-hyogo",
+      "noteKey": "n6f5ab18ba6ff",
+      "title": "兵庫県の家計は何にお金が偏っているか ── 交通・通信費は全国最下位水準なのに定期代が突出する神戸市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n6f5ab18ba6ff",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-ibaraki",
+      "noteKey": "n65d95575f7a5",
+      "title": "茨城県の家計は何にお金が偏っているか ── メロンと車社会が映す水戸市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n65d95575f7a5",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-ishikawa",
+      "noteKey": "ndf2afaef16c0",
+      "title": "石川県の家計は何にお金が偏っているか ── 交通・通信費1.28倍に見る金沢市のクルマ社会",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ndf2afaef16c0",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-iwate",
+      "noteKey": "na3020a08cef7",
+      "title": "岩手県の家計は何にお金が偏っているか ── 住まいの修繕費に出る雪国の負担",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/na3020a08cef7",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-kagawa",
+      "noteKey": "ne69b740f702e",
+      "title": "香川県の家計は何にお金が偏っているか ── 住居費1.53倍とうどんに表れる高松市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ne69b740f702e",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-kagoshima",
+      "noteKey": "n555435ada7ed",
+      "title": "鹿児島県の家計は何にお金が偏っているか ── 祭具・墓石に支出が集中する鹿児島市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n555435ada7ed",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-kanagawa",
+      "noteKey": "nd0326279977a",
+      "title": "神奈川県の家計は何にお金が偏っているか ── 教育費と地代でみる横浜の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/nd0326279977a",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-kochi",
+      "noteKey": "n29417de32c83",
+      "title": "高知県の家計は何にお金が偏っているか ── 住居費とかつおに見える高知市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n29417de32c83",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-kumamoto",
+      "noteKey": "n7e98a46bf791",
+      "title": "熊本県の家計は何にお金が偏っているか ── 私立校と仕送りに表れる熊本市の教育熱",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n7e98a46bf791",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-kyoto",
+      "noteKey": "n2a18f8e7098c",
+      "title": "京都府の家計は何にお金が偏っているか ── 教育費が全国平均の1.4倍に達する京都市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n2a18f8e7098c",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-mie",
+      "noteKey": "n8113876eaeab",
+      "title": "三重県の家計は何にお金が偏っているか ── 住居費と学習机代に表れる津市の家計",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n8113876eaeab",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-miyagi",
+      "noteKey": "nb479aff3cf05",
+      "title": "宮城県の家計は何にお金が偏っているか ── 住居費1.67倍に表れる仙台一極集中",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/nb479aff3cf05",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-miyazaki",
+      "noteKey": "n7f0be4fef37c",
+      "title": "宮崎県の家計は何にお金が偏っているか ── 焼酎と教育費に表れる宮崎市の家計事情",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n7f0be4fef37c",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-nagano",
+      "noteKey": "nb6061a164201",
+      "title": "長野県の家計は何にお金が偏っているか ── 予備校より学習机に出る長野市の教育費",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/nb6061a164201",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-nagasaki",
+      "noteKey": "nd547ff50cbe6",
+      "title": "長崎県の家計は何にお金が偏っているか ── バス代がかさむ坂の街、長崎市",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/nd547ff50cbe6",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-nara",
+      "noteKey": "n366d898d8107",
+      "title": "奈良県の家計は何にお金が偏っているか ── 教育費1.74倍、私立小学校圏に透ける奈良市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n366d898d8107",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-niigata",
+      "noteKey": "ndd0bb1c14aa4",
+      "title": "新潟県の家計は何にお金が偏っているか ── 保健医療費は全国最少、雪国の備えに出費",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ndd0bb1c14aa4",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-oita",
+      "noteKey": "n37ab621d01ad",
+      "title": "大分県の家計は何にお金が偏っているか ── クルマ社会が映る大分市の交通・通信費",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n37ab621d01ad",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-okayama",
+      "noteKey": "ne788feae75bf",
+      "title": "岡山県の家計は何にお金が偏っているか ── 家具・家事用品が突出、暖房費は全国平均の4分の1",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ne788feae75bf",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-okinawa",
+      "noteKey": "n757284230786",
+      "title": "沖縄県の家計は何にお金が偏っているか ── 住居費1.33倍とコートいらずの那覇市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n757284230786",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-osaka",
+      "noteKey": "n7ac1079b6f20",
+      "title": "大阪府の家計は何にお金が偏っているか ── 交通・通信費が全国平均の0.66倍にとどまる大阪市の家計",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n7ac1079b6f20",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-saga",
+      "noteKey": "n1972caf5203d",
+      "title": "佐賀県の家計は何にお金が偏っているか ── 住居費は平均の半分、自動車購入は2.25倍の佐賀市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n1972caf5203d",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-saitama",
+      "noteKey": "ne760e2866251",
+      "title": "埼玉県の家計は何にお金が偏っているか ── 教育費と通勤定期代に見るさいたま市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ne760e2866251",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-shiga",
+      "noteKey": "ne5569b417135",
+      "title": "滋賀県の家計は何にお金が偏っているか ── 鉄道定期代と教育費に見る大津市のベッドタウン家計",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ne5569b417135",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-shimane",
+      "noteKey": "n75d68c2bb7e9",
+      "title": "島根県の家計は何にお金が偏っているか ── しじみと祭具に表れる松江市の暮らし、教育費は平均の半分以下",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n75d68c2bb7e9",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-shizuoka",
+      "noteKey": "n35ce2a1b9248",
+      "title": "静岡県の家計は何にお金が偏っているか ── 住居費1.36倍と室内装飾品にみる静岡市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n35ce2a1b9248",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-tochigi",
+      "noteKey": "n0fd0305a6b8c",
+      "title": "栃木県の家計は何にお金が偏っているか ── 交通・通信費が際立つ宇都宮市の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n0fd0305a6b8c",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-tokushima",
+      "noteKey": "ne2abc0fc7530",
+      "title": "徳島県の家計は何にお金が偏っているか ── 教育費1.47倍で際立つ徳島市の家計",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ne2abc0fc7530",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-tokyo",
+      "noteKey": "n9d384a674462",
+      "title": "東京都の家計は何にお金が偏っているか ── 教育費2.09倍と家賃地代8倍に表れる都心の暮らし",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n9d384a674462",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-tottori",
+      "noteKey": "n24d6b689079d",
+      "title": "鳥取県の家計は何にお金が偏っているか ── 住居費がかさむ鳥取市と梨・カニの恵み",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n24d6b689079d",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-toyama",
+      "noteKey": "n13bca568c98a",
+      "title": "富山県の家計は何にお金が偏っているか ── 光熱費は全国屈指、教育費は控えめな富山市の懐事情",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n13bca568c98a",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-wakayama",
+      "noteKey": "ncc56ff8990d0",
+      "title": "和歌山県の家計は何にお金が偏っているか ── 教育費は十大費目で最低、しらす干しに2倍超の支出",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ncc56ff8990d0",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-yamagata",
+      "noteKey": "na3d645a7d50c",
+      "title": "山形県の家計は何にお金が偏っているか ── 灯油とカーテンに表れる雪国の対策費",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/na3d645a7d50c",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-yamaguchi",
+      "noteKey": "n88dde65e0774",
+      "title": "山口県の家計は何にお金が偏っているか ── 教育費は全国最低水準、婚礼費は10倍超の山口市",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n88dde65e0774",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "a-kakei-yamanashi",
+      "noteKey": "n3416a225e0c6",
+      "title": "山梨県の家計は何にお金が偏っているか ── 通勤定期より自動車教習に出る甲府市の交通費",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n3416a225e0c6",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-academic-food",
+      "noteKey": "n78ffa2c7da3b",
+      "title": "学力テスト上位の県は何を食べているのか ── 符合を相関で終わらせないために",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n78ffa2c7da3b",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 6,
+        "cards": 0,
+        "site": 4,
+        "relatedNote": 1,
+        "magazine": 1
+      },
+      "actualMagazineKeys": [
+        "m72e6b89b155e"
+      ],
+      "expectedMagazineKey": "m72e6b89b155e",
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-advancement-employment",
+      "noteKey": "n2d53f8a5fbb8",
+      "title": "進学率だけで教育水準は測れない ── 進学率と就職率を合算して見える県",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n2d53f8a5fbb8",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 6,
+        "cards": 0,
+        "site": 4,
+        "relatedNote": 1,
+        "magazine": 1
+      },
+      "actualMagazineKeys": [
+        "m72e6b89b155e"
+      ],
+      "expectedMagazineKey": "m72e6b89b155e",
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-beer-peak-month",
+      "noteKey": "n5b11edb996f3",
+      "title": "ビールが最も売れる月は7月ではなくなった ── 家計調査20年の月次で見る",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n5b11edb996f3",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 6,
+        "cards": 0,
+        "site": 5,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-bread-giffen",
+      "noteKey": "nc3a7ebf40516",
+      "title": "食パンは値上がりすると売れる ── 家計調査で確かめるギッフェン財の条件",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/nc3a7ebf40516",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 5,
+        "cards": 0,
+        "site": 4,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-gyoza-counting",
+      "noteKey": "n2f50bb479647",
+      "title": "「ぎょうざ消費日本一」は何を数えていて、何を数えていないのか",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n2f50bb479647",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 4,
+        "cards": 0,
+        "site": 3,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-necktie-decline",
+      "noteKey": "ncbfe818867f4",
+      "title": "ネクタイとストッキングはどれだけ売れなくなったか ── 家計調査で見る市場の縮小",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/ncbfe818867f4",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 6,
+        "cards": 0,
+        "site": 5,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-quantity-price",
+      "noteKey": "n7ba6c516c1e9",
+      "title": "「たくさん買う県」と「高いものを買う県」── 家計調査の支出額を数量と価格に分解する",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/n7ba6c516c1e9",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 5,
+        "cards": 0,
+        "site": 4,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "b-kakei-winter-bargain",
+      "noteKey": "neb44a932f9f2",
+      "title": "冬物バーゲンが成功したかは家計調査でわかる ── 数量と単価のどちらが動いたか",
+      "vertical": "stats47-note",
+      "isPaid": false,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/neb44a932f9f2",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 5,
+        "cards": 0,
+        "site": 4,
+        "relatedNote": 1,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
+      "isPinned": false,
+      "isProfiled": false,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "key": "d-kakei-category-dataset",
+      "noteKey": "na416c57e461c",
+      "title": "教育費は8.7倍違う ── 47都道府県×十大費目の家計データセット（2007-2024・8,460行）",
+      "vertical": "stats47-note",
+      "isPaid": true,
+      "r2Body": true,
+      "noteUrl": "https://note.com/stats47/n/na416c57e461c",
+      "hashtagCount": 99,
+      "linkCounts": {
+        "total": 0,
+        "cards": 0,
+        "site": 0,
+        "relatedNote": 0,
+        "magazine": 0
+      },
+      "actualMagazineKeys": [],
+      "expectedMagazineKey": null,
       "isPinned": false,
       "isProfiled": false,
       "errors": [],

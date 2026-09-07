@@ -24,3 +24,9 @@ metadata:
 **How to apply:** 再開手順は worktree `/Users/minamidaisuke/stats47-ai-content-lean` (branch develop) で
 `.local/ci/run100-v2.sh` (PREFIX/TARGET/MAX_BATCHES env) を python `os.setsid()` で detached 起動し、ログ `.local/ci/*.log` を Monitor する。
 正典は `.claude/rules/ranking-content-standards.md` §2026-09-05。関連 [[project_ai_content_remediation_queue]]。
+
+**2026-09-07 更新:** 残863件では Codex Spark author+critic の最初の20件だけで入力約105万token、採用13件
+(65%)。concurrency 6 は5分timeoutを誘発し、2まで落とす必要があった。残件をすべて同じ経路で処理するのは
+品質よりも再読・再計算コストが支配的になるため、大規模な構造補完は `ai:backfill` に切り替えた。
+数値・順位・地域集計は決定的コードに閉じ、モデルは単位・同率・方向性・少数地域などの代表境界10件を意味レビューする。
+個別ページの独自洞察を改善する場合は headless author+critic 経路を引き続き使い、両経路を混在させない。

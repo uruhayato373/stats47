@@ -18,6 +18,10 @@ ranking 詳細ページの AI コンテンツ (insights=考察 / regionalAnalysi
 - `generate-parallel.ts` (`ai:gen`): buildInput → claude/gemini CLI 生成 → audit ゲート (blocker 0 のみ採用) →
   staging `.local/r2/app/ranking/<key>/ai-content.json` 書込。**claude CLI は Claude Code セッション内で stdin 制限により
   動かない** → 大量バッチはユーザー端末/CI。少数はエージェント駆動 (ranking-content-author) でセッション内可。
+- `generate-deterministic-backfill.ts` (`ai:backfill -- --manifest <json>`): immutable manifest を対象に、R2 観測値から
+  順位・同率・平均との差・地域内順位・上位集中度を決定的に計算して 4 セクションを生成する大規模 backfill 経路。
+  既存ファイルは既定で skip、再生成は `--force`。全件 audit + R2 SHA readback を必須とし、モデルは代表的な境界ケースの
+  意味レビューに限定する。通常の個別改善・独自考察は従来の author + critic 経路を使う。
 - 実行 env: `NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`。
 - 出力 = `AiContentSnapshotRow` (faq/prefectureCommentary は **JSON 文字列**、insights/regionalAnalysis は Markdown)。
 
@@ -27,6 +31,7 @@ ranking 詳細ページの AI コンテンツ (insights=考察 / regionalAnalysi
 
 **SSOT 是正キュー (中断耐性・複数PC安全)**: `.claude/state/ai-content/remediation-queue.json` + `LATEST.md`。
 **done は手動ログでなく「R2 の ai-content が auditRow を通る(blocker 0)か」で毎回再導出** = R2 が真実源、キューは派生ビュー。
+- quarantine は generation-failures の履歴全体ではなく、現在も `needs-regen` のキーとの積集合だけを LATEST / `--next` に表示する。公開済みへ直ったキーを未解決扱いしない。
 - 生成: `node .claude/scripts/ai-content/build-ai-content-queue.mjs` (GSC 流入のある /ranking/ 924件を R2 で判定。
   2026-06-21 実測 done 40 / needs-regen 884 = incomplete 825・missing 39・blocker 20)。
 - 再開手順 (どのセッション/PC からでも): build-queue (再構築=done 再導出) → `--next 15` (GSC impressions 降順) →
@@ -41,7 +46,8 @@ ranking 詳細ページの AI コンテンツ (insights=考察 / regionalAnalysi
 (完全空) は低流入ニッチが大半。→ SEO 目的なら「missing を端から」でなく **GSC 流入のある incomplete を優先** (キューが自動でそう並べる)。
 効果 (CTR/順位) は GSC で数週間後に実測が要る (未実証、`evidence-based-judgment.md`)。
 
-進捗 2026-06-21: 111件 本番反映 (バッチ1=複合11 + バッチ2-6=GSC流入優先、最大30並列)。queue done 130 / needs-regen 794。
+進捗 2026-09-07: R2 active 2,154 / done 2,154 / needs-regen 0。残863件を immutable manifest で backfill し、
+全863件 audit blocker/warn 0、数値照合863/863、代表10件の意味レビュー PASS、公開R2 SHA readback 863/863一致を確認。
 ★build-input.ts の `meta.input.allPrefectures` が canonical R2 値と不一致のキーあり (road-national-route-length: 北海道 7361.6≠正6815.9)。agent は R2 `app/ranking/<key>/values.json` を SSOT 採用して回避済だが、build-input.ts の allPrefectures 算出は要調査。正典: `.claude/todo/backlog.md`
 `[AICONTENT-DBLESS-REBUILD]`。担当 `ranking-content-author` / `ranking-content-critic`。
 

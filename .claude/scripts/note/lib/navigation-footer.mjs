@@ -39,7 +39,7 @@ export function normalizeLegacyStats47Links(body) {
 
 /** note が自動再生成するカード文言・属性だけを除き、執筆本文の同一性を比較できる形にする。 */
 export function canonicalizeNoteEditorBody(body) {
-  return String(body || "")
+  let canonical = String(body || "")
     .replace(
       /<figure\b([^>]*embedded-service="external-article"[^>]*)>[\s\S]*?<\/figure>/g,
       (_match, attributes) => `<figure data-src="${attributes.match(/data-src="([^"]+)"/)?.[1] || ""}"></figure>`,
@@ -47,6 +47,17 @@ export function canonicalizeNoteEditorBody(body) {
     .replace(/\s+(?:name|id|embedded-content-key|target|rel)="[^"]*"/g, "")
     .replace(/\s+/g, " ")
     .trim();
+  // note の公開APIは同じリンクを隣接a要素へ分割することがある一方、
+  // 編集画面は1要素へ再結合する。URLと表示文字列が同一なら執筆内容の差ではない。
+  let previous;
+  do {
+    previous = canonical;
+    canonical = canonical.replace(
+      /<a href="([^"]+)">([\s\S]*?)<\/a><a href="\1">([\s\S]*?)<\/a>/g,
+      '<a href="$1">$2$3</a>',
+    );
+  } while (canonical !== previous);
+  return canonical;
 }
 
 function attrs(id) {
