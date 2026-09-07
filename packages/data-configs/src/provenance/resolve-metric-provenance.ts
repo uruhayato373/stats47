@@ -100,6 +100,30 @@ function resolveCalculated(
   return out;
 }
 
+function resolveLegacyCalculated(
+  metric: MetricConfig,
+  registry: MetricRegistry | undefined,
+  depth: number
+): ProvenanceSurvey[] {
+  if (!registry || depth > 4) return [];
+  const calculation = metric.calculation;
+  const operandKeys = [
+    calculation?.numeratorKey ??
+      calculation?.numeratorRankingKey ??
+      calculation?.numerator,
+    calculation?.denominatorKey ??
+      calculation?.denominatorRankingKey ??
+      calculation?.denominator,
+  ].filter((key): key is string => Boolean(key));
+  const out: ProvenanceSurvey[] = [];
+  for (const key of operandKeys) {
+    const operand = registry[key];
+    if (operand)
+      out.push(...resolveMetricProvenance(operand, registry, depth + 1));
+  }
+  return out;
+}
+
 /**
  * SourceConfig 単体から原典調査を解決する。metric 全体を持たない呼び出し元
  * (exporter が RankingItem.sourceConfig から解決する等) はこちらを使う。
@@ -147,6 +171,13 @@ export function resolveMetricProvenance(
   registry?: MetricRegistry,
   depth = 0
 ): ProvenanceSurvey[] {
+  if (
+    metric.source.kind === 'external' &&
+    metric.source.fetcherKey === 'calculated'
+  ) {
+    const resolved = dedupe(resolveLegacyCalculated(metric, registry, depth));
+    if (resolved.length > 0) return resolved;
+  }
   return resolveSourceProvenance(metric.source, registry, depth);
 }
 

@@ -11,12 +11,9 @@ export const informationCommunicationCoefficient: MetricConfig = {
   unit: '％',
   category: 'ict',
   source: {
-    kind: 'calculated',
-    formula: {
-      op: 'divide',
-      numerator: 'information-communication-expenditure',
-      denominator: 'consumption-expenditure-total',
-    },
+    kind: 'external',
+    fetcherKey: 'calculated',
+    config: {},
   },
   entities: ['prefecture'],
   years: {

@@ -118,4 +118,32 @@ describe('resolveMetricProvenance (param 単一ルール)', () => {
         .sort()
     ).toEqual(['kakei-chousa', 'wage-structure-survey']);
   });
+
+  it('legacy external calculated も calculation の分子・分母を辿る', () => {
+    const registry = {
+      numerator: metric({ kind: 'kakei-chousa' }),
+      denominator: metric({
+        kind: 'estat',
+        statsDataId: '0003445758',
+      }),
+    } as MetricRegistry;
+    const m = {
+      ...metric({
+        kind: 'external',
+        fetcherKey: 'calculated',
+        config: {},
+      }),
+      calculation: {
+        isCalculated: true,
+        type: 'ratio',
+        numeratorKey: 'numerator',
+        denominatorKey: 'denominator',
+      },
+    } satisfies MetricConfig;
+    expect(
+      resolveMetricProvenance(m, registry)
+        .map((survey) => survey.id)
+        .sort()
+    ).toEqual(['kakei-chousa', 'wage-structure-survey']);
+  });
 });

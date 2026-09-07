@@ -8,12 +8,9 @@ export const realDisposableIncome: MetricConfig = {
   unit: '円',
   category: 'economy',
   source: {
-    kind: 'calculated',
-    formula: {
-      op: 'divide',
-      numerator: 'disposable-income-worker-households',
-      denominator: 'consumer-price-difference-index-overall',
-    },
+    kind: 'external',
+    fetcherKey: 'calculated',
+    config: {},
   },
   entities: ['prefecture'],
   // 分子 disposable-income-worker-households を 1975-2024 へ広げたのに合わせる。
