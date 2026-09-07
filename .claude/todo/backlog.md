@@ -154,7 +154,7 @@ updated: 2026-09-08
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
 
 - **owner**: Codex (記事固有背景生成・公開確認)、blog-editor (必要な本文是正)
-- **再開点（2026-09-08・R2公開済み／アプリ反映待ち）**: run `34139507934` SUCCESS、73記事・792本文/図/元データファイル・292画像・73manifestのR2読戻しPASS。公開索引606件、対象73件は新しいsitemapへ全収載済み。新規72URLはmainの旧公開一覧により410、改稿1URLは200のため、mainデプロイ後に全73ページを再検証する。発電2記事の出典分類4ファイルだけを別タスクが追補中（run `34150800541` は画像不変時のplan処理で停止、本文/品質PASS）。その修正公開・backlog pushと合流後にリリースする。根本のAIは2,166件done・追加12件R2 SHA一致で別カード閉鎖済み。家計11指標の正規化是正・旧R2配信遮断、画像対象限定、ranking-items二重送信削減を含む作業は `codex/finish-content-remaining`。最新build・全workspace/scripts型・Web1317・packages2383・workflow87テストPASS。main→ranking-items/master（画像11キー指定）→全パージ→73ブログ/14ランキングの本番実測まで完了扱いしない。
+- **再開点（2026-09-08・アプリ公開済み／最終実測中）**: PR #945 は全CI PASS（Web1320・packages2385）、main `d329955be` のdeploy `34153770527`・smoke `34154405449`・ISR GC `34154405618` はSUCCESS。記事公開 `34139507934` と発電2記事の出典分類4ファイル追補も完了し、73記事・792本文/図/元データファイル・292画像・73manifestをR2から再読して全一致。代表の新規URLは410→200。家計11指標のranking-items `34153774065` はSUCCESS、送信4,959→2,303件、画像は候補11/更新2/現行9件。master `34158954086` を同期中。残りは既存の食料費・消費支出AIの平均表記等を独立critic PASS後にdata-only公開→全パージ→73ブログ/14ランキングの本番全件実測→台帳回収/Git整理。AI全2,166件done・新規追加12件R2 SHA一致のカードは閉鎖済み。作業worktreeは `/tmp/stats47-finish-content-remaining-20260907`、元checkoutのdevelopは別タスクがREADYを返してから変更していない。
 - **現状（2026-09-07）**: reconcileの対象は77→73件（未公開72・改稿差分1）。今回、既存の記事固有背景を使える4件の本文をR2へ反映し、公開本文との一致を確認した。件数は実行時に再取得し、古い91件を固定の完了目標にしない。
   当時の `natto-consumption-expenditure` の古い背景prompt（run 34113017143）も、今回の73件で明示再生成・再検証済み。
 - **過去の停止実測（9/2）**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
