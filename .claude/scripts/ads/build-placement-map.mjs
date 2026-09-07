@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * build-placement-map.mjs — 「需要 (GSC 実トラフィック) × 供給 (広告在庫/EPC)」を突合して
+ * build-placement-map.mjs — 「検索需要 (GSC検索表示/クリック) × 供給 (広告在庫/EPC)」を突合して
  * `.claude/state/ads/placement-map-latest.json` を生成する (決定的・ネットワーク任意)。
  *
  * ★ なぜ要るか: これまで「次にどの案件を仕入れ、どのページに当てるか」を決める propose は
@@ -9,21 +9,22 @@
  *
  * 判定ロジックは `lib/placement-map-core.mjs` (純関数・テスト付き)。本ファイルは入出力のみ。
  *
- * 入力 (すべてローカル。欠けたら理由を記録して続行する = 失敗を隠さない):
+ * 入力 (ローカル設定 + 配信snapshot。欠けたら理由を記録して続行する):
  *   - GSC pages.csv  .claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv
  *   - metric config   packages/data-configs/src/metrics/*.ts       (rankingKey → category)
- *   - 意図ハブ        apps/web/src/features/ads/constants/affiliate-category.ts (3 map)
+ *   - 意図ハブ        apps/web/src/features/ads/constants/affiliate-category.ts (共有resolver/maps)
  *   - 在庫            apps/web/scripts/affiliate-ads-data.ts        (vertical × adType)
  *   - A8 カタログ     .claude/state/ads/a8-catalog.json             (確定EPC)
- *   - 記事タグ (任意) --blog-json <path> か R2 公開 URL (取れなければ blog は economy 概算)
+ *   - ranking/blog/調査メタ R2 snapshots (取得不能は未解決として明示。広告表示回数は推定しない)
  *
  * usage:
- *   node .claude/scripts/ads/build-placement-map.mjs [--week 2026-W30] [--blog-json <path>] [--dry-run]
+ *   node .claude/scripts/ads/build-placement-map.mjs [--week 2026-W30] [--ranking-json <path>] [--blog-json <path>] [--r2-dir <dir>] [--dry-run]
  */
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { createRequire } from "node:module";
+import { require as tsxRequire } from "tsx/cjs/api";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
 
@@ -73,24 +74,47 @@ function loadMetricMaps() {
   return { keyToCategory, keyTitles };
 }
 
-/** affiliate-category.ts の 3 map を読む (TS を import せず正規表現で抜く = ビルド非依存)。 */
-function loadAffiliateMaps() {
-  const src = readFileSync(join(ROOT, "apps/web/src/features/ads/constants/affiliate-category.ts"), "utf8");
-  const between = (startMarker, endMarker) => {
-    const a = src.indexOf(startMarker);
-    const b = src.indexOf(endMarker, a);
-    return a < 0 ? "" : src.slice(a, b < 0 ? undefined : b);
-  };
-  const parse = (seg) => {
-    const m = {};
-    for (const x of seg.matchAll(/"([^"]+)":\s*"([a-z]+)"/g)) m[x[1]] = x[2];
-    return m;
-  };
+/** TSの純resolverを共有する。写像の正規表現抽出でnullや後続mapを取りこぼさない。 */
+export function loadAffiliateMaps() {
+  const runtime = tsxRequire(join(ROOT, "apps/web/src/features/ads/constants/affiliate-category.ts"), import.meta.url);
   return {
-    categoryMap: parse(between("CATEGORY_AFFILIATE_MAP", "THEME_AFFILIATE_MAP")),
-    themeMap: parse(between("THEME_AFFILIATE_MAP", "TAG_AFFILIATE_MAP")),
-    tagMap: parse(between("TAG_AFFILIATE_MAP", "export function adVertical")),
+    categoryMap: runtime.CATEGORY_AFFILIATE_MAP,
+    themeMap: runtime.THEME_AFFILIATE_MAP,
+    tagMap: runtime.TAG_AFFILIATE_MAP,
+    resolveContentVertical: runtime.resolveContentVertical,
   };
+}
+
+/** 配信snapshotから広告resolver入力だけを取り出す。観測値は読まない。 */
+export function rankingContentFromSnapshot(snapshot) {
+  const result = {};
+  for (const item of snapshot?.items ?? []) {
+    if (!item.rankingKey || item.isActive === false || (item.areaType && item.areaType !== "prefecture")) continue;
+    result[item.rankingKey] = {
+      surveyIds: item.surveyIds ?? (item.surveyId ? [item.surveyId] : (item.originalSurveys ?? []).map(survey => typeof survey === "string" ? survey : survey.id)),
+      tagKeys: (item.tags ?? []).map(tag => typeof tag === "string" ? tag : tag.tagKey),
+      categoryKey: item.categoryKey,
+    };
+  }
+  return result;
+}
+
+export function articleContentFromSnapshot(snapshot) {
+  const result = {};
+  const articles = Array.isArray(snapshot) ? snapshot : snapshot?.articles ?? [];
+  for (const article of articles) {
+    if (!article.slug || article.published === false) continue;
+    // blog runtimeはsurveyIds→tags。カテゴリを推測で補わない。
+    result[article.slug] = { surveyIds: article.surveyIds ?? [], tagKeys: (article.tags ?? []).map(tag => typeof tag === "string" ? tag : tag.tagKey) };
+  }
+  return result;
+}
+
+/** 調査一覧や不正なキーをsnapshot GET対象にしない。 */
+export function surveyKeysFromRows(rows) {
+  return [...new Set(rows.map(row => core.classifyPageUrl(row.url))
+    .filter(page => page.type === "survey" && typeof page.key === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(page.key))
+    .map(page => page.key))];
 }
 
 /** SSOT から vertical × adType の在庫数を数える。 */
@@ -120,18 +144,11 @@ function loadInventory() {
   return { total, banner, text };
 }
 
-/** 記事 slug → tagKey[]。R2 公開 URL は proxy 環境で失敗しうるので、取れなければ null で続行。 */
-async function loadArticleTags(path) {
-  const parse = (json) => {
-    const raw = JSON.parse(json);
-    const list = Array.isArray(raw) ? raw : (raw.articles ?? Object.values(raw).find(Array.isArray) ?? []);
-    const m = {};
-    for (const a of list) m[a.slug] = (a.tags ?? []).map((t) => t.tagKey ?? t);
-    return m;
-  };
-  if (path) return { map: parse(readFileSync(path, "utf8")), source: path };
+/** 明示ローカルsnapshot、無指定なら公開R2。取得不能はsource/errorに残す。 */
+async function loadSnapshot(path, key) {
   const base = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
   try {
+    if (path) return { data: JSON.parse(readFileSync(path, "utf8")), source: path };
     // 会社ネットワーク (透過型 TLS 傍受) では素の fetch が届かず、
     // 明示 CONNECT プロキシだけが唯一の外向き経路になる。
     // 設定が無い環境では何もしない (undici が無い場合も落とさない)。
@@ -142,11 +159,11 @@ async function loadArticleTags(path) {
         setGlobalDispatcher(new ProxyAgent(proxy));
       } catch { /* undici 不在なら素の fetch のまま試す */ }
     }
-    const res = await fetch(`${base}/app/blog/all.json`, { signal: AbortSignal.timeout(15000) });
+    const res = await fetch(`${base}/${key}`, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return { map: parse(await res.text()), source: "r2" };
+    return { data: await res.json(), source: "r2" };
   } catch (e) {
-    return { map: null, source: null, error: String(e?.message ?? e).slice(0, 120) };
+    return { data: null, source: null, error: String(e?.message ?? e).slice(0, 120) };
   }
 }
 
@@ -168,17 +185,25 @@ async function main() {
     }));
 
   const { keyToCategory, keyTitles } = loadMetricMaps();
-  const { categoryMap, themeMap, tagMap } = loadAffiliateMaps();
+  const affiliateMaps = loadAffiliateMaps();
   const inventory = loadInventory();
-  const blog = await loadArticleTags(argAfter("--blog-json"));
+  const r2Dir = argAfter("--r2-dir");
+  const localPath = key => r2Dir ? join(r2Dir, key) : null;
+  const surveyKeys = surveyKeysFromRows(rows);
+  const [ranking, blog, surveys] = await Promise.all([
+    loadSnapshot(argAfter("--ranking-json") ?? localPath("app/ranking-items/all.json"), "app/ranking-items/all.json"),
+    loadSnapshot(argAfter("--blog-json") ?? localPath("app/blog/all.json"), "app/blog/all.json"),
+    Promise.all(surveyKeys.map(async key => ({ key, ...await loadSnapshot(localPath(`app/survey/${key}/items.json`), `app/survey/${key}/items.json`) }))),
+  ]);
+  const rankingContent = rankingContentFromSnapshot(ranking.data);
+  const articleContent = articleContentFromSnapshot(blog.data);
 
   const maps = {
     rankingKeyToCategory: keyToCategory,
-    categoryMap,
-    tagMap,
-    themeMap,
-    // 記事タグが取れないときは空 = blog は article-unknown として未解決に積まれる (0 と偽らない)
-    articleTags: blog.map ?? {},
+    ...affiliateMaps,
+    rankingContent,
+    articleContent,
+    surveyItems: Object.fromEntries(surveys.filter(row => Array.isArray(row.data?.items)).map(row => [row.key, row.data.items])),
   };
 
   const demand = core.aggregateDemand(rows, maps);
@@ -212,12 +237,17 @@ async function main() {
   const out = {
     generatedAt: new Date().toISOString(),
     gscWeek: week,
+    measurement: { source: "GSC pages", impressions: "search-result impressions", clicks: "organic-search clicks", actualAdImpressions: false, attribution: "content intent before inventory fallback; not actual served ads or revenue" },
     inputs: {
       pages: rows.length,
       rankingKeys: Object.keys(keyToCategory).length,
-      articleTags: blog.map ? Object.keys(blog.map).length : null,
+      rankingMetadata: ranking.data ? Object.keys(rankingContent).length : null,
+      rankingMetadataSource: ranking.source,
+      ...(ranking.error ? { rankingMetadataError: ranking.error } : {}),
+      articleTags: blog.data ? Object.keys(articleContent).length : null,
       articleTagsSource: blog.source,
       ...(blog.error ? { articleTagsError: blog.error } : {}),
+      surveys: surveys.map(({ key, source, error, data }) => ({ key, source, items: data?.items?.length ?? null, ...(error ? { error } : {}) })),
     },
     demand: {
       byType: demand.byType,
@@ -238,9 +268,10 @@ async function main() {
   writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n", "utf8");
 
   console.log(`placement-map → ${OUT.replace(ROOT, ".")}  (GSC ${week} / ${rows.length} ページ)`);
-  if (!blog.map) console.log(`  ⚠️ 記事タグを取得できず blog は未解決に計上 (${blog.error})`);
-  console.log("\n需要 × 供給 (imp 降順):");
-  console.log("  vertical      imp  clicks  在庫(b/t)  指摘");
+  if (!blog.data) console.log(`  ⚠️ 記事メタを取得できず blog は未解決に計上 (${blog.error})`);
+  if (!ranking.data) console.log(`  ⚠️ 指標メタを取得できず ranking は未解決に計上 (${ranking.error})`);
+  console.log("\n検索需要 × 供給 (検索表示回数順・広告表示回数ではない):");
+  console.log("  vertical   GSC imp  GSC clicks  在庫(b/t)  指摘");
   for (const g of gap.gaps) {
     console.log(
       "  " + g.vertical.padEnd(11),
@@ -250,7 +281,7 @@ async function main() {
       "  " + (g.kinds.join(",") || "-"),
     );
   }
-  console.log(`\n広告が出ていない imp: ${gap.unmappedImp}`);
+  console.log(`\n意図未解決/no-intent ページの検索表示回数: ${gap.unmappedImp} (広告未表示の実測ではない)`);
   for (const r of gap.unmappedByReason.slice(0, 6)) {
     console.log("  " + String(r.reason).padEnd(34), String(r.imp).padStart(6), `(${r.pages} ページ) 例: ${r.examples.join(", ")}`);
   }
@@ -266,7 +297,7 @@ async function main() {
   }
 }
 
-main().catch((e) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch((e) => {
   console.error("Fatal:", e?.message ?? e);
   process.exit(1);
 });

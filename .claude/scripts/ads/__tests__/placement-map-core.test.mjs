@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { require as tsxRequire } from "tsx/cjs/api";
 
 import {
   classifyPageUrl,
@@ -9,14 +10,126 @@ import {
   buildReverseCandidates,
   suggestTargetRankingKeys,
 } from "../lib/placement-map-core.mjs";
+import { loadAffiliateMaps, rankingContentFromSnapshot, articleContentFromSnapshot, surveyKeysFromRows } from "../build-placement-map.mjs";
+
+const runtime = tsxRequire("../../../../apps/web/src/features/ads/constants/affiliate-category.ts", import.meta.url);
 
 const MAPS = {
   rankingKeyToCategory: { "natto-consumption-expenditure": "economy", "vacant-housing-rate": "construction", "retail-store-count": "commercial" },
   categoryMap: { economy: "economy", construction: "housing", laborwage: "labor" }, // commercial は意図的に未写像
   tagMap: { 家計調査: "economy", 住宅: "housing" },
   themeMap: { "living-housing": "housing" },
-  articleTags: { "natto-map": ["家計調査"], "orphan-article": ["未知タグ"] },
+  rankingContent: { "natto-consumption-expenditure": { categoryKey: "economy" }, "vacant-housing-rate": { categoryKey: "construction" }, "retail-store-count": { categoryKey: "unknown-category" } },
+  articleContent: { "natto-map": { tagKeys: ["家計調査"] }, "orphan-article": { tagKeys: ["未知タグ"] } },
+  resolveContentVertical: runtime.resolveContentVertical,
 };
+
+test("survey snapshot取得は一覧・不正slugを除き、重複を除く", () => {
+  const rows = ["/survey", "/survey/", "/survey/kakei-chousa", "/survey/kakei-chousa?x=1", "/survey/../", "/ranking/natto"]
+    .map(url => ({ url }));
+  assert.deepEqual(surveyKeysFromRows(rows), ["kakei-chousa"]);
+});
+
+test("実SSOT: 家計調査はrankingのタグ・economyよりfurusatoを優先する", () => {
+  const maps = { ...MAPS, rankingContent: { natto: { surveyIds: ["kakei-chousa"], tagKeys: ["家計調査"], categoryKey: "economy" } } };
+  assert.deepEqual(resolveVerticalsForPage({ type: "ranking", key: "natto" }, maps), { verticals: ["furusato"], reason: "survey" });
+});
+
+test("実SSOT: 学校保健調査のnullはrankingのタグ・カテゴリへ落ちずno-intent", () => {
+  const maps = { ...MAPS, rankingContent: { height: { surveyIds: ["school-health-survey"], tagKeys: ["教育"], categoryKey: "educationsports" } } };
+  assert.deepEqual(resolveVerticalsForPage({ type: "ranking", key: "height" }, maps), { verticals: [], reason: "no-intent" });
+});
+
+test("blogは調査優先、明示null停止、未知調査はタグへ落ちる", () => {
+  const cases = [
+    [["kakei-chousa"], ["家計調査"], ["furusato"], "survey"],
+    [["school-health-survey"], ["教育"], [], "no-intent"],
+    [["unmapped-survey"], ["住宅", "人口", "住宅"], ["housing", "population"], "tags"],
+  ];
+  for (const [surveyIds, tagKeys, verticals, reason] of cases) {
+    const maps = { ...MAPS, articleContent: { article: { surveyIds, tagKeys } } };
+    assert.deepEqual(resolveVerticalsForPage({ type: "blog", key: "article" }, maps), { verticals, reason });
+  }
+});
+
+test("最初の写像済み調査で決まり、後ろのnullは先頭の意図を上書きしない", () => {
+  const content = { surveyIds: ["unknown", "kakei-chousa", "school-health-survey"], categoryKey: "economy" };
+  assert.deepEqual(resolveVerticalsForPage({ type: "ranking", key: "multi" }, { ...MAPS, rankingContent: { multi: content } }).verticals, ["furusato"]);
+});
+
+test("surveyは実調査写像を使い、nullをカテゴリで打ち消さない", () => {
+  assert.deepEqual(resolveVerticalsForPage({ type: "survey", key: "kakei-chousa" }, MAPS), { verticals: ["furusato"], reason: "survey" });
+  assert.deepEqual(resolveVerticalsForPage({ type: "survey", key: "school-health-survey" }, MAPS), { verticals: [], reason: "no-intent" });
+});
+
+test("未写像surveyは実snapshotカテゴリの最多vertical、同数は出現順", () => {
+  const surveyItems = { x: [{ categoryKey: "construction" }, { categoryKey: "laborwage" }, { categoryKey: "laborwage" }], tie: [{ categoryKey: "construction" }, { categoryKey: "laborwage" }], noMappedCategory: [{ categoryKey: "unknown" }] };
+  const maps = { ...MAPS, surveyItems };
+  assert.deepEqual(resolveVerticalsForPage({ type: "survey", key: "x" }, maps), { verticals: ["labor"], reason: "survey-category" });
+  assert.deepEqual(resolveVerticalsForPage({ type: "survey", key: "tie" }, maps).verticals, ["housing"]);
+  assert.deepEqual(resolveVerticalsForPage({ type: "survey", key: "noMappedCategory" }, maps).verticals, ["economy"]);
+  assert.equal(resolveVerticalsForPage({ type: "survey", key: "missing" }, maps).reason, "survey-items-unavailable");
+});
+
+test("theme・category・tag・area・otherの既存経路は維持する", () => {
+  for (const [type, key, verticals] of [["themes", "living-housing", ["housing"]], ["category", "economy", ["economy"]], ["tag", "住宅", ["housing"]], ["areas", "01000", ["furusato"]], ["other", null, []]]) {
+    assert.deepEqual(resolveVerticalsForPage({ type, key }, MAPS).verticals, verticals);
+  }
+});
+
+test("builderは実resolver/mapsを共有し、survey nullを正規表現で取り落とさない", () => {
+  const maps = loadAffiliateMaps();
+  assert.deepEqual(maps.categoryMap, runtime.CATEGORY_AFFILIATE_MAP);
+  assert.deepEqual(maps.tagMap, runtime.TAG_AFFILIATE_MAP);
+  assert.deepEqual(maps.themeMap, runtime.THEME_AFFILIATE_MAP);
+  assert.deepEqual(maps.resolveContentVertical({ surveyIds: ["school-health-survey"], tagKeys: ["教育"] }), runtime.resolveContentVertical({ surveyIds: ["school-health-survey"], tagKeys: ["教育"] }));
+});
+
+test("R2 originalSurveysのobject/string双方とsurveyIdsの明示空配列を保持する", () => {
+  const rankingContent = rankingContentFromSnapshot({ items: [
+    { rankingKey: "food", areaType: "prefecture", categoryKey: "economy", originalSurveys: [{ id: "kakei-chousa" }], tags: [{ tagKey: "家計調査" }] },
+    { rankingKey: "height", originalSurveys: ["school-health-survey"], tags: ["教育"] },
+    { rankingKey: "empty", surveyIds: [], originalSurveys: ["kakei-chousa"], categoryKey: "economy" },
+    { rankingKey: "legacy", surveyId: "kakei-chousa" },
+    { rankingKey: "inactive", isActive: false },
+    { rankingKey: "city", areaType: "city" },
+  ] });
+  const maps = { ...loadAffiliateMaps(), rankingContent };
+  assert.deepEqual(resolveVerticalsForPage({ type: "ranking", key: "food" }, maps).verticals, ["furusato"]);
+  assert.equal(resolveVerticalsForPage({ type: "ranking", key: "height" }, maps).reason, "no-intent");
+  assert.deepEqual(rankingContent.empty.surveyIds, []);
+  assert.deepEqual(resolveVerticalsForPage({ type: "ranking", key: "empty" }, maps).verticals, ["economy"]);
+  assert.deepEqual(rankingContent.legacy.surveyIds, ["kakei-chousa"]);
+  assert.equal(rankingContent.inactive, undefined);
+  assert.equal(rankingContent.city, undefined);
+});
+
+test("blog snapshotはsurveyIdsを運び、runtimeにないcategory fallbackを足さない", () => {
+  const articleContent = articleContentFromSnapshot({ articles: [
+    { slug: "food", surveyIds: ["kakei-chousa"], tags: [{ tagKey: "家計調査" }] },
+    { slug: "empty", tags: [], categoryKey: "economy" },
+    { slug: "draft", published: false, tags: ["住宅"] },
+  ] });
+  const maps = { ...loadAffiliateMaps(), articleContent };
+  assert.deepEqual(resolveVerticalsForPage({ type: "blog", key: "food" }, maps).verticals, ["furusato"]);
+  assert.deepEqual(resolveVerticalsForPage({ type: "blog", key: "empty" }, maps).verticals, []);
+  assert.equal(articleContent.draft, undefined);
+});
+
+test("取得できないrankingメタをcategoryだけで推測しない", () => {
+  const r = resolveVerticalsForPage({ type: "ranking", key: "known" }, { ...MAPS, rankingKeyToCategory: { known: "economy" } });
+  assert.deepEqual(r, { verticals: [], reason: "ranking-metadata-unavailable" });
+});
+
+test("複数意図のGSC需要は複製されるが、no-intentを需要へ混入しない", () => {
+  const maps = { ...loadAffiliateMaps(), articleContent: { both: { tagKeys: ["人口", "住宅"] }, stopped: { surveyIds: ["school-health-survey"], tagKeys: ["教育"] } } };
+  const result = aggregateDemand([{ url: "/blog/both", imp: 100, clicks: 3 }, { url: "/blog/stopped", imp: 50, clicks: 2 }], maps);
+  assert.equal(result.byType.blog.imp, 150);
+  assert.equal(result.byVertical.population.imp, 100);
+  assert.equal(result.byVertical.housing.imp, 100);
+  assert.equal(result.byVertical.education, undefined);
+  assert.equal(result.unmapped[0].reason, "no-intent");
+});
 
 // ── URL 分類 ────────────────────────────────────────────────────────────────
 
@@ -47,7 +160,7 @@ test("ranking は categoryKey 経由で vertical を解決する", () => {
 test("★写像なし category は verticals 空 = 広告が出ない (AdSense 落ち) と分かる", () => {
   const r = resolveVerticalsForPage({ type: "ranking", key: "retail-store-count" }, MAPS);
   assert.deepEqual(r.verticals, []);
-  assert.equal(r.reason, "category-unmapped:commercial");
+  assert.equal(r.reason, "category-unmapped:unknown-category");
 });
 
 test("blog はタグ解決し、未写像タグを economy と推測しない", () => {

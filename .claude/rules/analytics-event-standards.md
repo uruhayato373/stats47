@@ -112,6 +112,17 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`を許可�
 | `share` | `trackShare` | `method` / `content_type` / `item_id` は GA4 標準（要否×） | 要否× | 共有 |
 | `page_not_found` | `trackNotFound` | `page_path` / `page_referrer`（登録不要・レポート可） | 要否× | 監視 |
 
+> **affiliate の配置値・クリック定義変更 (2026-09-08・実装準備、未デプロイ)**:
+> `RakutenItemsCard` の商品クリックはカード impression と同じ `link_position` を送り、
+> `FurusatoNozeiCard` の商品クリックも `sidebar-item` から `sidebar` へ揃える。
+> 家計調査の ranking で広告意図が `null` でない場合、関連ランキング直後へ移す既存商品カードは
+> `rakuten-sidebar` を使う。その他の ranking 商品カードは `ranking-sidebar` を維持する。
+> 登録済み `link_position` / `ad_id` / `affiliate_vertical` を再利用し、新しい custom dimension は無い。
+> 楽天市場の通常検索リンクは `affiliate_click` の対象から外し、商品リンクのクリックだけを数える。
+> impression は引き続きカード単位・50%表示×1秒。旧 `*-item` と親配置の分離および検索クリック除外で
+> CTR の定義が変わるため、デプロイ境界をまたぐ配置別CTRを単純比較しない。
+> 公開後は日付を固定した非重複期間で `pagePath × deviceCategory × ad_id × link_position` とPVを取得する。
+
 > **nav_surface の値追加 (2026-09-06・商品導線)**: 商品一覧→商品詳細を
 > `product_catalog`、ブログ本文末→文脈一致したKindle詳細を `blog_product` として追加した。
 > どちらも登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。

@@ -53,17 +53,17 @@ export async function RakutenItemsCard({
     <div className="rounded-none border border-green-100 bg-green-50/50 p-4">
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground/70">PR</span>
-        <TrackedAffiliateLink
+        {/* 検索URLは未発行の通常リンク。商品affiliateUrlと混ぜて成果クリックを数えない。 */}
+        <a
           href={searchUrl}
-          category="economy"
-          adId={adId}
-          label={`${keyword.term}を楽天市場で探す`}
-          position={position}
+          aria-label={`${keyword.term}を楽天市場で探す`}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center gap-0.5 text-[10px] text-green-600 hover:underline"
         >
-          もっと見る
+          楽天市場で探す
           <ExternalLink size={10} />
-        </TrackedAffiliateLink>
+        </a>
       </div>
 
       <p className="mb-3 text-sm font-bold text-foreground">
@@ -78,7 +78,7 @@ export async function RakutenItemsCard({
             category="economy"
             adId={adId}
             label={item.name}
-            position={`${position}-item`}
+            position={position}
             className={getSurfaceCardClassName({
               interactive: true,
               className: "flex flex-col overflow-hidden p-0",

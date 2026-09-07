@@ -74,7 +74,7 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
                 category="furusato"
                 adId={furusatoAdId}
                 label={item.name}
-                position="sidebar-item"
+                position="sidebar"
                 className={getSurfaceCardClassName({
                   interactive: true,
                   className: "flex flex-col overflow-hidden p-0",
