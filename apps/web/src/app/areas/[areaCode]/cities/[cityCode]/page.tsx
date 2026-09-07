@@ -1,20 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { isOk } from "@stats47/types";
-
 import { PageHeader, PageShell } from "@/components/layout";
-import { readCityCategoryKeysFromR2 } from "@/components/stat-charts/server";
 import { SurfaceSection } from "@/components/surface";
 
 import {
-  CategoryNavGrid,
   CityBreadcrumbs,
   CityPageFooter,
   getCityRouteContext,
 } from "@/features/area-profile";
 import { readCityProfile } from "@/features/area-profile/server";
-import { listCategories } from "@/features/category/server";
 
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 import { UrlPolicy } from "@/lib/url-policy";
@@ -85,19 +80,8 @@ export default async function CityPage({ params }: PageProps) {
     notFound();
   }
 
-  const [categoriesResult, profile] = await Promise.all([
-    listCategories(),
-    readCityProfile(areaCode, cityCode),
-  ]);
-  const allCategories = isOk(categoriesResult) ? categoriesResult.data : [];
+  const profile = await readCityProfile(areaCode, cityCode);
   const validStrengths = profile?.strengths.filter((s) => s.rank >= 1 && s.rank <= 5) ?? [];
-
-  let filteredCategories = allCategories;
-  const cityCategoryKeys = await readCityCategoryKeysFromR2();
-  if (cityCategoryKeys.length > 0) {
-    const categoriesWithData = new Set(cityCategoryKeys);
-    filteredCategories = allCategories.filter((c) => categoriesWithData.has(c.categoryKey));
-  }
 
   return (
     <PageShell>
@@ -148,12 +132,6 @@ export default async function CityPage({ params }: PageProps) {
             </ul>
           </SurfaceSection>
         ) : null}
-
-        <CategoryNavGrid
-          categories={filteredCategories}
-          areaCode={cityCode}
-          basePath={context.cityBasePath}
-        />
 
         <CityPageFooter
           areaCode={areaCode}

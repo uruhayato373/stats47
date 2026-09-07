@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-06
+updated: 2026-09-07
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,16 @@ updated: 2026-09-06
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
+
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-14]
+
+- **owner**: オーナー（デプロイ承認・GSC UI export）／Claude Code（リリース・本番検証・取込）
+- **現状**: コード実装とローカル検証は完了、main未反映。W32（2026-08-06）のUI exportを2026-09-06に再構築した結果、`generated_at`だけが更新され、5週古い母集団を検索成長パイプラインが新鮮と判定していた。今回の差分は入力観測日を別保持し、2週以上古い入力をfail-closedにする。W36（2026-09-04）の最新exportも取込済みで`source_age_weeks=1`、全3,147 URLを実測済み。併せて市区町村カテゴリ720 URLをsitemapから外して市区町村プロフィールへ301、未知カテゴリを410、自治体ランキングのDataset構造化データを補完する。
+- **次（実行順）**: ①developへ同期する。②オーナー承認後に`/deploy`でmainへ1回だけ反映する。③代表URLをGooglebot UAで実測し、旧市区町村カテゴリ=301、親プロフィール=200、未知カテゴリ=410、自治体Datasetの必須項目とsitemap除外を確認する。④次回週次runの成功、または入力が2週以上古くなった際の`coverage-alert`起票を確認する。⑤デプロイ後の最新exportで市区町村カテゴリsoft404 5→0と全体件数差を測定し、`COVERAGE-LOOP-01`へ効果観測を引き渡す。
+- **停止条件**: 本番デプロイはオーナーの明示承認まで実行しない。古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。PR CI、代表URL、Dataset、sitemapのいずれかが失敗したらmainへマージしない。
+- **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
 
 ### [PRODUCT-SALES-READINESS-01] 横断カタログの全商品を販売準備ゲートまで仕上げる
 

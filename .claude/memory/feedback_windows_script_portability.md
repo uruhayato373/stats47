@@ -22,5 +22,10 @@ Windows で初めて実行したときに毎回デバッグからやり直しに
 - `process.cwd()` をフォールバックにしない。実行ディレクトリ次第でパスが分裂する。
 - 既存の一括修正済み: `.claude/scripts/{ads,blog,data,lib,remotion,surveys}/` と
   `.claude/skills/sns/{post-x-batch,publish-x}/`、`apps/web/scripts/sync-known-keys-from-remote.ts`。
+- 2026-09-07 に `.claude/scripts/lib/preflight-commit.mjs` でも同じ問題を再現した。
+  `npm` / `npx` は Windows だけ `process.execPath` と npm CLI (`process.env.npm_execpath`) / npx CLI を
+  組み合わせて起動する。`.cmd` への置換は Node 22 で `EINVAL` になるため採用しない。
+  回帰テストは `.claude/scripts/lib/__tests__/preflight-commit.test.mjs` の
+  `resolveInvocation` ケースで、Windows の npm / npx が shell を介さず Node CLI に解決されることを固定する。
 - 会社 Windows PC の web dev は Windows の proxy credentials・証明書ストアを使う R2 gateway を自動起動する
   (`apps/web/scripts/dev-server.ts`、正典 `.claude/rules/local-environment.md`)。

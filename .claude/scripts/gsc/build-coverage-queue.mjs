@@ -24,6 +24,7 @@
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --week 2026-W25
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe      # 実測せずキャッシュ再利用 (高速)
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --probe-limit 2000
+ *   node .claude/scripts/gsc/build-coverage-queue.mjs --allow-stale-source # 過去入力の診断用 (通常運用では禁止)
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --next 20       # 次にやる actionable を JSONL
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url>
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> [--wave-id 2026-06-16-coverage]
@@ -38,6 +39,10 @@ import {
   isIntentionallyNonIndexableResource,
   readHtmlIndexSignals,
 } from "./coverage-policy.mjs";
+import {
+  assertFreshCoverageSource,
+  getCoverageSourceFreshness,
+} from "./lib/coverage-source-freshness.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -180,6 +185,24 @@ if (markIP || markDone || markDesign) {
   process.exit(0);
 }
 
+// ── --next モード ──────────────────────────────────────────────
+// 既存キューの読み取りは、元 export の鮮度に関係なく利用できる。
+const nextN = getArg("--next", null);
+if (nextN) {
+  const q = loadQueue();
+  if (!q) {
+    console.error("[err] queue が無い。先に build を実行");
+    process.exit(1);
+  }
+  const actionable = q.queue
+    .filter((e) => e.status === "pending" && e.action !== "none")
+    .sort((a, b) => (ACTION_PRIORITY[a.action] ?? 50) - (ACTION_PRIORITY[b.action] ?? 50));
+  for (const e of actionable.slice(0, parseInt(nextN, 10))) {
+    console.log(JSON.stringify(e));
+  }
+  process.exit(0);
+}
+
 // ── 週の決定 ───────────────────────────────────────────────────
 function latestWeekDir() {
   if (!fs.existsSync(DRILLDOWN_DIR)) return null;
@@ -196,6 +219,27 @@ if (!week) {
   process.exit(1);
 }
 const weekDir = path.join(DRILLDOWN_DIR, week);
+const totalsPath = path.join(weekDir, "category-totals.json");
+const sourceMetadata = fs.existsSync(totalsPath)
+  ? JSON.parse(fs.readFileSync(totalsPath, "utf8"))
+  : null;
+const freshnessInput = {
+  sourceWeek: week,
+  today: TODAY,
+  sourceObservedAt: sourceMetadata?.date ?? null,
+};
+let sourceFreshness;
+try {
+  sourceFreshness = hasFlag("--allow-stale-source")
+    ? getCoverageSourceFreshness(freshnessInput)
+    : assertFreshCoverageSource(freshnessInput);
+} catch (error) {
+  console.error(`[err] ${error instanceof Error ? error.message : String(error)}`);
+  console.error(
+    "      先に最新 export を ingest するか、履歴診断だけなら --date と --week を同じ週に合わせてください。"
+  );
+  process.exit(1);
+}
 
 // ── drilldown CSV 読み込み (URL,前回のクロール) ────────────────
 function readDrilldowns() {
@@ -387,23 +431,6 @@ function classify(category, http) {
   return { verdict: `http-${http}`, action: "verify-intent", design: false };
 }
 
-// ── --next モード ──────────────────────────────────────────────
-const nextN = getArg("--next", null);
-if (nextN) {
-  const q = loadQueue();
-  if (!q) {
-    console.error("[err] queue が無い。先に build を実行");
-    process.exit(1);
-  }
-  const actionable = q.queue
-    .filter((e) => e.status === "pending" && e.action !== "none")
-    .sort((a, b) => (ACTION_PRIORITY[a.action] ?? 50) - (ACTION_PRIORITY[b.action] ?? 50));
-  for (const e of actionable.slice(0, parseInt(nextN, 10))) {
-    console.log(JSON.stringify(e));
-  }
-  process.exit(0);
-}
-
 // ── build 本体 ─────────────────────────────────────────────────
 async function build() {
   const drilldowns = readDrilldowns();
@@ -416,7 +443,8 @@ async function build() {
   const prevByUrl = new Map((prev?.queue ?? []).map((e) => [e.url, e]));
 
   // 実測対象 = actionable カテゴリの URL (intentional は実測不要)
-  const probeLimit = parseInt(getArg("--probe-limit", "2500"), 10);
+  // GSC drilldown はカテゴリごとに最大1,000件。actionable 5カテゴリを全件確認できる上限にする。
+  const probeLimit = parseInt(getArg("--probe-limit", "5000"), 10);
   const noProbe = hasFlag("--no-probe");
   const actionableUrls = drilldowns
     .filter(
@@ -571,11 +599,7 @@ async function build() {
   }
 
   // カテゴリ別総件数 (ingest が保存した aggregate)
-  let gscTotals = null;
-  const totalsPath = path.join(weekDir, "category-totals.json");
-  if (fs.existsSync(totalsPath)) {
-    gscTotals = JSON.parse(fs.readFileSync(totalsPath, "utf8"));
-  }
+  const gscTotals = sourceMetadata;
 
   // サマリ集計
   const byAction = {};
@@ -593,6 +617,8 @@ async function build() {
   const out = {
     generated_at: TODAY,
     week,
+    source_observed_at: sourceFreshness.sourceObservedAt,
+    source_age_weeks: sourceFreshness.ageWeeks,
     source: "GSC UI ページ export (ingest-gsc-export.py) + 本番 HTTP 実測",
     gsc_category_totals: gscTotals?.totals ?? null,
     summary: {
@@ -676,6 +702,7 @@ function writeLatest(out, observeCount) {
   L.push(`# GSC カバレッジ是正 — ${out.week} (${out.generated_at})`);
   L.push("");
   L.push("> SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`");
+  L.push(`> 入力観測日: ${out.source_observed_at} / 入力週齢: ${out.source_age_weeks} 週`);
   L.push("");
   if (t) {
     L.push("## GSC カテゴリ別総件数 (UI export)");
