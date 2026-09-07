@@ -8,10 +8,10 @@
  * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= active・prefecture対応・R2実在。
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
- * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35
- *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293
- * 和集合: 2157 キー (INDEXABLE +0 / KNOWN +659 / INDEXABLE 総数 336 / KNOWN 総数 2157)
- * 生成日: 2026-09-05
+ * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35, 2026-W36
+ *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293 / 2026-W36: 1288
+ * 和集合: 2166 キー (INDEXABLE +0 / KNOWN +662 / INDEXABLE 総数 335 / KNOWN 総数 2166)
+ * 生成日: 2026-09-07
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -268,6 +268,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "cleaning-shop-count-per-100k",
   "cleaning-worker-annual-income",
   "clothing-footwear-expenditure-ratio-multi-person-households",
+  "clothing-footwear-expenditure-total",
   "clothing-rental-consumption-expenditure",
   "cocoa-consumption-expenditure",
   "cod-pollution-load",
@@ -367,6 +368,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "cultural-facility-admission-consumption-expenditure",
   "culture-recreation-cost-all-households",
   "culture-recreation-expenditure-ratio-multi-person-households",
+  "culture-recreation-expenditure-total",
   "cup-noodles-consumption-expenditure",
   "cup-noodles-consumption-quantity",
   "cupboard-consumption-expenditure",
@@ -484,6 +486,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "education-department-staff",
   "education-expenditure-ratio-multi-person-households",
   "education-expenditure-ratio-pref-finance",
+  "education-expenditure-total",
   "education-expense-municipal",
   "education-expenses-prefecture",
   "eggplant-consumption-expenditure",
@@ -674,6 +677,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "fulltime-physicians-general-hospital-per-100beds",
   "funeral-expense-consumption-expenditure",
   "furikake-consumption-expenditure",
+  "furniture-household-expenditure-total",
   "furniture-household-goods-expenditure-ratio-multi-person-households",
   "furniture-household-service-consumption-expenditure",
   "futon-consumption-expenditure",
@@ -779,6 +783,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "health-checkup-recipients",
   "health-consumables-consumption-expenditure",
   "health-insurance-premium-consumption-expenditure",
+  "health-medical-expenditure-total",
   "health-physical-education-expenses-prefecture",
   "healthcare-cost-all-households",
   "healthcare-expenditure-ratio-multi-person-households",
@@ -868,6 +873,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "housing-charges-consumption-expenditure",
   "housing-cost-all-households",
   "housing-expenditure-ratio-multi-person-households",
+  "housing-expenditure-total",
   "housing-expenses-prefecture",
   "housing-land-liabilities-ratio-multi-person-households",
   "housing-site-value-per-3-3m2",
@@ -1327,6 +1333,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "other-leafy-vegetables-consumption-quantity",
   "other-lesson-fees-consumption-expenditure",
   "other-liquor-consumption-expenditure",
+  "other-living-expenditure-total",
   "other-meat-consumption-expenditure",
   "other-meat-consumption-quantity",
   "other-medicine-consumption-expenditure",
@@ -1991,6 +1998,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "train-student-pass-consumption-expenditure",
   "training-gym-public",
   "transport-communication-expenditure-ratio-multi-person-households",
+  "transport-communication-expenditure-total",
   "travel-bag-consumption-expenditure",
   "travel-bag-consumption-quantity",
   "travel-leisure-annual-participation-rate-10plus",
@@ -2063,6 +2071,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "urbanization-control-area-ratio",
   "usage-fees-prefecture",
   "utilities-expenditure-ratio-multi-person-households",
+  "utilities-expenditure-total",
   "vacant-housing-rate",
   "vacant-housing-ratio",
   "vaccination-recipients-disease",

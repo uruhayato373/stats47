@@ -67,7 +67,7 @@
     "psi-audit:digest": "node .claude/scripts/psi/psi-update-digest.mjs",
     "state:snapshots:prune": "node .claude/scripts/lib/prune-state-snapshots.mjs",
     "test:alert-lifecycle": "node --test .claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs .claude/scripts/lib/__tests__/prune-state-snapshots.test.mjs",
-    "test:workflow-commit-back": "node --test .claude/scripts/lib/__tests__/workflow-commit-back.test.cjs .claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs",
+    "test:workflow-commit-back": "node --test .claude/scripts/lib/__tests__/workflow-commit-back.test.cjs .claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs .claude/scripts/lib/__tests__/ranking-scoped-workflow.test.mjs",
     "test:backlog-loop": "node --test .claude/scripts/backlog-loop/__tests__/*.test.cjs .claude/scripts/lib/__tests__/backlog-lib.test.cjs",
     "test:audit-scripts": "node --test .claude/scripts/audit/__tests__/*.test.mjs",
     "audit:public-data-contract": "tsx apps/web/scripts/audit-public-data-contract.ts",
