@@ -18,8 +18,9 @@
  *      insufficient-data・not-instrumented = windowDays のみ
  *   S6 orphanStatus と linkageStatus / itemCount の整合
  *   S7 portfolio / linkage 監査日の freshness (既定35日、SURVEY_STATE_MAX_AGE_DAYSで変更可)
- *   S8 survey-editorial.ts の移行 ratchet。--require-all-editorial では master 全件、
- *      必須項目件数、readerQuestions の所属・重複、過度な本文類似も検査
+ *   S8 survey-editorial.ts の実装数 ratchet。通常CIでは実装済み全件、
+ *      --require-all-editorial では master 全件を要求し、必須項目件数、
+ *      readerQuestions の所属・重複、過度な本文類似も検査
  *   E1 experimentId 一意 / surveyId がマスタに実在
  *   E2 同一 surveyId × changeType の pending 実験は 1 件まで (重複実験防止)
  *   E3 baseline 必須 / verdict enum / effect-* 確定には observations の d28|d56 + evidenceRefs 必須
@@ -146,26 +147,15 @@ function validateEditorial() {
   if (implemented.length < EDITORIAL_COUNT_RATCHET) {
     v("S8", `editorial 実装数 ${implemented.length} が ratchet ${EDITORIAL_COUNT_RATCHET} を下回る`);
   }
-  // 全件移行前は通常CIを件数ratchetだけに留め、完了後は通常CIでも完全ゲートを維持する。
-  if (!requireAllEditorial && EDITORIAL_COUNT_RATCHET < MIN_REQUIRED_MASTER_COUNT) return;
-
   if (masterSurveys.length < MIN_REQUIRED_MASTER_COUNT)
     v("S8", `survey master が ${masterSurveys.length} 件 (最低 ${MIN_REQUIRED_MASTER_COUNT} 件)`);
 
   const membership = activeRankingKeysBySurvey();
 
-  // editorial は「同じ調査に属する問いを束ねて ranking へ送る」ためのハブ本文なので、
-  // 都道府県 ranking を 1 本も持たない調査には書きようがない。readerQuestions は
-  // 当該調査の active ranking に所属する rankingKey を要求するため、埋めれば必ず落ちる。
-  //
-  // 実測 (2026-08-31): 日本全体系列 (geo-scope) 用に sync-survey-master が追加した 19 件が
-  // itemCount 0 のまま全件要求に引っかかり、CI を止めていた。これらは都道府県 ranking を
-  // 持たないのが正常な状態で、editorial の欠落ではない。
-  // --require-all-editorial は「master 全件の実装を要求する」ための明示フラグなので、
-  // このときだけは除外せず全件を対象にする (移行完了の確認に使う)。
-  const editorialTargets = requireAllEditorial
-    ? masterSurveys
-    : masterSurveys.filter((survey) => (membership.get(survey.id)?.size ?? 0) > 0);
+  // 通常CIは実装済み editorial の後退と品質を ratchet で防ぐ。taxonomy 拡張で master に
+  // 新しい調査が加わっても、一括生成を要求せず、個別に編集・レビューして実装数を上げる。
+  // --require-all-editorial は master 全件の移行状況を明示的に監査するときだけ使う。
+  const editorialTargets = requireAllEditorial ? masterSurveys : [];
   const missing = editorialTargets.map((survey) => survey.id)
     .filter((surveyId) => !getSurveyEditorialContent(surveyId));
   if (missing.length > 0)

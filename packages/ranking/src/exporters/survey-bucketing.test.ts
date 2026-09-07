@@ -97,12 +97,12 @@ describe("survey-bucketing (param 統一)", () => {
     expect(surveyBucketsForItem(it1)).toEqual(["ssds"]);
   });
 
-  it("原典が合成 id (ssds-src:, master 不在) のみ → baked にフォールバック (孤児バケット防止)", () => {
-    // K5112 災害被害額 → ssds-src:消防白書 (auto-slug、surveys.json に無い)
+  it("旧合成 id の原典が master survey に正規化された場合は正式バケットへ入る", () => {
+    // K5112 災害被害額 → 消防白書を fire-annual-report へ正規化
     const it1 = item({
       surveyId: "ssds",
       sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "K5112" } as never,
     });
-    expect(surveyBucketsForItem(it1)).toEqual(["ssds"]);
+    expect(surveyBucketsForItem(it1)).toEqual(["fire-annual-report"]);
   });
 });
