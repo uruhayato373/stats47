@@ -38,17 +38,34 @@ ranking 詳細ページの AI コンテンツ (insights=考察 / regionalAnalysi
   `ai:verify --stdin` (再生成不能を除外) → 検証済 10件で ranking-content-author 並列起動 → 独立 audit →
   `diff-push-r2 --prefix app/ranking` → build-queue 再実行で done 反映。中断しても 1 からやり直せる。
 
-**R2 push (本番反映)**: ローカルから可能。`.env.local` に R2_ACCESS_KEY_ID/SECRET/S3_ENDPOINT あり。
-`npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking` が `.local/r2/app/ranking/` を読んで push
-(manifest 差分で変更分のみ)。outward-facing なので明示確認してから。ページは SSG/ISR で即時反映には `/purge-cdn`。
+**R2 push (本番反映)**: 書き込みはCI専用。`data/ai-content-staging/<key>.json` をdevelopへ送り、
+`publish-ai-content.yml` の監査→R2反映→cache purge→outbox整理を使う。ローカルS3書き込みで代用しない。
+公開は明示承認の範囲に限定し、成功ログだけでなくR2本文のSHAを読み戻して確認する。
 
 **SEO の勘所**: 高流入ページの大半は **incomplete** (faq/考察/地域別はあるが prefectureCommentary 欠落)。真の missing
 (完全空) は低流入ニッチが大半。→ SEO 目的なら「missing を端から」でなく **GSC 流入のある incomplete を優先** (キューが自動でそう並べる)。
 効果 (CTR/順位) は GSC で数週間後に実測が要る (未実証、`evidence-based-judgment.md`)。
 
-進捗 2026-09-07: R2 active 2,154 / done 2,154 / needs-regen 0。残863件を immutable manifest で backfill し、
+**最新実測（2026-09-08 00:30 JST）**: TS active prefecture / KNOWN / R2 master / 全量queueは
+すべて2,166キー、双方向差分0。done 2,166 / needs-regen 0 / notEligible 0 / doneButUnhealthy 0。
+AIとcanonical valuesを各2,166件HTTP 200・JSON取得し、values健全性の未確認も0だった。
+追加12件は独立critic・数値監査後、[run 34137832197](https://github.com/uruhayato373/stats47/actions/runs/34137832197)
+でR2公開し、本文SHA 12/12一致。公開outboxもCIが整理済み（git履歴から復元可能）。
+全件doneは既存の決定的ゲートでblockerが無いことを意味し、旧2,154件を今回すべて意味レビューしたわけではない。
+非阻害警告はAI 969キー（短文等）、values 41キー（thin-coverage）に残る。市区町村・全国専用ページは対象外。
+日次CIは対象0ならAPIを呼ばず正常終了し、対象ありならbilling preflight不通で停止する。
+無料枠の課金設定は未確認で、課金・Secretは変更していない。生成完了と費用実験の完了を混同しない。
+
+前回実測 2026-09-07: R2 active 2,154 / done 2,154 / needs-regen 0。残863件を immutable manifest で backfill し、
 全863件 audit blocker/warn 0、数値照合863/863、代表10件の意味レビュー PASS、公開R2 SHA readback 863/863一致を確認。
-★build-input.ts の `meta.input.allPrefectures` が canonical R2 値と不一致のキーあり (road-national-route-length: 北海道 7361.6≠正6815.9)。agent は R2 `app/ranking/<key>/values.json` を SSOT 採用して回避済だが、build-input.ts の allPrefectures 算出は要調査。正典: `.claude/todo/backlog.md`
-`[AICONTENT-DBLESS-REBUILD]`。担当 `ranking-content-author` / `ranking-content-critic`。
+**入力一致の再確認（2026-09-07夜）**: 過去の北海道7361.6≠6815.9という記録は、最新mainを含む隔離環境と
+元checkoutの両方で再現せず、`road-national-route-length` の2023年47行がcanonical `app/stats`と完全一致した。
+現行経路は `build-input.ts` → `listRankingValues` → `readStatsValues` で、配信用snapshotを正典へ格上げしない。
+過去の不一致原因は未確定で、修正したとは扱わない。`packages/ai-content/src/scripts/__tests__/build-input.test.ts` は
+実観測readerを通し、指定年の値・欠測除外・実在0の維持・正典不在時の生成停止を固定する。
+
+**全件完了の母集団**: 古いキューのdone件数だけでは追加指標を取りこぼす。新規公開後はR2 masterから全量キューを
+再構築し、active prefectureのTS/KNOWN集合とも突合する。2026-09-07に旧2154件のキューから3指標が欠落し、
+その3件はactive・最新47観測あり・AIは404だった。件数の足し算で全件完了とせず、集合差分と最新R2監査で判定する。
 
 関連: [[feedback_evidence_based_judgment]] [[project_ranking_publish_pipeline_gap]] [[feedback_shared_working_copy_git_race]]

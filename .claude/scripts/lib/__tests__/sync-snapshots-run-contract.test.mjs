@@ -151,6 +151,35 @@ test("ranking-items の中間 push 失敗時は stale item を読む master を�
   assert.equal(finalPushIndex(calls), -1, "依存境界の失敗後に末尾の全体 push まで進んでいる");
 });
 
+test("ranking-items 単独成功時は per-key を再送せず inventory だけを最後に push する", () => {
+  const { status, calls } = runRunSh({ args: ["--only", "ranking-items"] });
+  assert.equal(status, 0);
+  assert.deepEqual(calls.filter((c) => c.includes("diff-push-r2.ts")), [
+    "tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking",
+    "tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking-items",
+  ]);
+});
+
+test("ranking-items 生成失敗時は部分生成済み per-key を末尾 push で救済してから赤にする", () => {
+  const { status, calls } = runRunSh({
+    args: ["--only", "ranking-items"],
+    failPattern: "generate-ranking-items.ts",
+  });
+  assert.equal(status, 1);
+  assert.deepEqual(calls.filter((c) => c.includes("diff-push-r2.ts")), [
+    "tsx packages/r2-storage/src/scripts/diff-push-r2.ts",
+  ]);
+});
+
+test("ranking-items 単独実行は inventory の push 失敗を成功扱いしない", () => {
+  const { status, calls } = runRunSh({
+    args: ["--only", "ranking-items"],
+    failPattern: "--prefix app/ranking-items",
+  });
+  assert.equal(status, 1);
+  assert.equal(calls.filter((c) => c.includes("diff-push-r2.ts")).length, 2);
+});
+
 test("1 task が失敗しても、末尾の push を実行してから exit 1 する", () => {
   const { status, stdout, calls } = runRunSh({
     failPattern: "generate-ranking-values.ts",

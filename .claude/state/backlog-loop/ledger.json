@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07T11:18:52.097Z",
+  "updatedAt": "2026-09-07T18:29:36.487Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -1513,8 +1513,8 @@
       "completedAt": "2026-08-27T06:44:55.648Z"
     },
     "AICONTENT-DBLESS-REBUILD": {
-      "class": "impl-large",
-      "status": "open",
+      "class": "impl-small",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
@@ -1539,15 +1539,41 @@
             "次の3件を生成・criticへ回す",
             "R2反映は別承認"
           ]
+        },
+        {
+          "at": "2026-09-07T15:34:48.339Z",
+          "runId": "34137832197",
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run --project @stats47/ai-content packages/ai-content/src/scripts/__tests__/build-input.test.ts",
+              "node --test .claude/scripts/ai-content/__tests__/gemini-workflow-contract.test.mjs",
+              "node /tmp/stats47-ai-twelve-readback.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "全量2166キーのTS/KNOWN/R2/queue差分0、done2166・残0・未確認fetch0。追加12件R2 SHA一致。実reader入力回帰2件と日次契約3件PASS、対象0のCI34068094684はAPI skip。過去入力不一致は再現せず原因未確定、課金変更なし。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "残り1809件相当の制作と、別承認が必要なR2公開が未完了",
-        "since": "2026-08-26T09:04:05.921Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": null
+      "reclassifiedFrom": [
+        {
+          "from": "impl-large",
+          "to": "impl-small",
+          "at": "2026-09-07T15:34:48.339Z"
+        }
+      ],
+      "completedAt": "2026-09-07T15:34:48.339Z"
     },
     "AFF-INTENT-FRICTION-PORTFOLIO-01": {
       "class": "impl-large",
@@ -3761,6 +3787,47 @@
       },
       "reclassifiedFrom": [],
       "completedAt": null
+    },
+    "SURVEY-TAXONOMY-COVERAGE-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-07T18:29:36.487Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check",
+              "npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2",
+              "npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts",
+              "npm run audit:public-data-contract",
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "npm run test:packages",
+              "npm run test:run --workspace apps/web",
+              "npm run type-check",
+              "npm run build --workspace apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "PR #943全18 checksと本番deploy成功。公開R2: ranking 2166/2166一致、不一致/欠落0。taxonomy: ranking2159/2159、theme82/82、blog1460/1460、未解決/missing0、master130・orphan0、portfolio drift0、public contract findings0。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-07T18:29:36.487Z"
     }
   }
 }

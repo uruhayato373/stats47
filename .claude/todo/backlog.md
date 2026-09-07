@@ -21,79 +21,6 @@ updated: 2026-09-07
 
 ## 🔴 高 — 今月中に着手したい
 
-### [SURVEY-TAXONOMY-COVERAGE-01] 公開コンテンツの調査タクソノミーを適用対象100%へ完全化する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:別環境] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-07]
-
-- **owner**: `survey-curator` が横断監査と ranking 系譜を統括し、`theme-component-builder` と
-  `chart-author` / `blog-editor` が各面の lineage を是正する。R2 反映は `r2-publisher` / CI、
-  本番変更の承認はオーナーが担当する。
-- **目的**: 公開 ranking、ThemeCatalog chart、公開 blog chart を、公式に確認できる原典調査または
-  明示的な `not-applicable` のどちらかへ全件分類し、適用対象の未解決・系譜欠落を 0 にする。
-- **現状実測 (2026-09-06 state)**:
-  - ranking は公開 2,166 指標中 1,962 件解決、204 件未分類で、active coverage は 90.58%。
-    未分類の理由は `ssds-synthetic-only` 109 件、`estat-uncovered` 74 件、`external` 21 件で、
-    未カバーの `statsDataId` は 48 種類ある。
-  - theme は 106 chart 中、適用対象 82 件がすべて解決済みで、対象外 24 件、未解決・系譜欠落は 0 件。
-  - blog は公開 534 記事・1,425 chart 中、適用対象 1,332 件、解決 1,087 件、
-    未解決 61 件、lineage 欠落 184 件、対象外 93 件で、問題を含む記事は 152 件。
-  - survey master は 105 件で、全在庫から接続される調査は 88 件、orphan は 17 件。
-    live の active survey 集合 86 件と git 導出の期待集合 86 件は一致している。
-- **別 PC 再開前提**: 本カードを含む最新コミットを clean な作業ツリーへ取得し、依存関係を導入後、
-  Node.js の `fetch` が公開 R2 URL へ到達できることを少数サンプルで確認する。この PC の
-  `--compare-r2` はプロキシ / TLS により全 fetch 失敗したため、その結果を本番 `item.json` 欠落と判定しない。
-- **変更可能な SSOT**: 調査マスタ `packages/ranking/src/data/surveys.json`、SSDS / e-Stat 出典辞書、
-  例外に限る `MetricConfig.surveyId`、ThemeCatalog の既存 lineage、blog chart `source.json` の生成元 lineage と
-  明示的な `surveyScope`、共通 resolver / builder / audit の最小実装・型・テスト、最終値確定後の ratchet だけを変更対象とする。
-- **実行順**:
-  1. `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --unresolved` と横断監査を実行し、
-     現状値と未解決キーを取得日付つきで再現する。
-  2. `estat-uncovered` 74 件 / 48 `statsDataId` を e-Stat 公式メタデータで調査名まで確認し、
-     実在する survey だけを e-Stat 出典辞書と、必要な場合のみ surveys master へ追記する。
-  3. `ssds-synthetic-only` 109 件は `cdCat01` から原典調査への導出を公式情報で確認し、
-     合成 ID を公開用 survey として登録せず、実在調査のマスタと辞書の名称を一致させる。
-  4. `external` 21 件を「公式な統計調査あり」と「調査タクソノミー対象外」に一次出典で分ける。
-     ranking 側に明示的な `not-applicable` 契約が無ければ、実装者が既存 `MetricConfig` と resolver の型を調べ、
-     最小の SSOT / 型変更で対象外理由を明示し、共通監査がそれを別 status で集計する。
-  5. theme は現在の適用対象 82 / 82 と対象外 24 件を回帰テストで保持し、
-     `relatedRankingKeys` / `rankingLink` / `estatParams` からの導出を崩さない。
-  6. blog の未解決 61 件は `rankingKey` / `statsDataId` / 共通辞書に実在する `sourceName` を一次出典に基づき是正し、
-     lineage 欠落 184 件は原データを追跡できるものだけ復元する。非統計 / GIS 派生の対象外は
-     `surveyScope: "not-applicable"` と 10 文字以上の `surveyScopeReason` を source に明記する。
-  7. orphan 17 件は active / total を分けて再監査し、実在する対応在庫へ正しく接続するか、
-     全在庫で 0 件と機械確定できたものだけを surveys master から削除する。
-  8. 全面のローカル監査、config 検証、対象テストが green になった後だけ、オーナー承認の上で
-     R2 snapshot を下記の順番で再生成・反映する。
-  9. 反映後に `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2` を `--sample` なしで実行し、
-     live 公開 2,166 `item.json` 全件の git 導出との一致、欠落 0、active survey 集合の差分 0 を証拠として残す。
-  10. 適用対象の coverage 100%、未解決 0、missing-lineage 0、全 live 照合一致が同時に成立した後だけ、
-      `.claude/config/survey-taxonomy-ratchet.json` を最終母数に合わせ、ranking / theme / blog の適用対象 coverage を
-      100% へ締め、未解決・lineage 欠落の許容値を 0 にする。
-- **R2 反映順**: 1) `generate-ranking-items.ts` で `item.json` の `surveyIds` を先に再生成し、2)
-  `export-master-snapshots.ts` で `app/survey/<id>/items.json` と `all.json` を再グループ化し、3)
-  `export-blog-snapshot.ts` で blog の `surveyIds` と `surveyArticleIndex` を source lineage から再生成する。
-  CI を使う場合も `ranking-items` → `master` → blog publish の依存順を崩さない。
-- **禁止**: R2 JSON と taxonomy state を手編集しない。未分類の受け皿、`ssds-src:*` / `src:*`、
-  実在しない surveyId を作らない。external、GIS、非統計 chart に偽の surveyId を付けず、
-  根拠のない `not-applicable` への振り替えや allowlist の拡大で coverage を上げない。
-  theme / blog に独自の手書き surveyId を追加せず、共通 resolver と既存 lineage から導出する。
-- **停止条件**: 公式メタデータで原典調査を特定できない、詳細出典が失われている、
-  `not-applicable` の理由を一次情報で説明できない、または公開母数が理由なく減る場合は、対象キー、
-  証拠、不足情報を報告して停止する。Node の fetch 全失敗時はネットワーク障害と本番欠落を分離できるまで
-  live 不一致を断定しない。R2 write、workflow dispatch、本番反映、デプロイは明示承認が無ければ実行しない。
-- **完了条件**:
-  - ranking は適用対象が実在 survey へ 100% 解決し、未解決 0 となる。対象外指標がある場合は、
-    各指標に機械可読な明示契約と十分な理由があり、coverage 分母からの除外をテストが検証する。
-  - theme は適用対象が 100% 解決し、`unresolved` と `missing-lineage` が 0、明示的な `not-applicable` だけが対象外となる。
-  - blog は適用対象が 100% 解決し、`unresolved` と `missing-lineage` が 0、全対象外 chart に
-    `surveyScope: "not-applicable"` と根拠ある `surveyScopeReason` が存在し、問題あり公開記事が 0 件となる。
-  - survey master の orphan が 0 件となり、active / inactive-only の判定を保持したまま、
-    `app/survey/all.json` と git-active の survey 集合差分が 0 となる。
-  - `--compare-r2` が公開 2,166 `item.json` を全件取得し、一致 2,166、不一致 0、欠落 0、fetch 失敗 0 を報告する。
-  - ratchet は ranking / theme / blog の適用対象 100% と未解決・lineage 欠落 0 を新しい回帰防止ラインにし、
-    `npm run validate:config --workspace=@stats47/data-configs`、対象テスト、横断監査の full 再生成と
-    `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check` がすべて green となる。
-
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-09-21]
@@ -230,13 +157,14 @@ updated: 2026-09-07
   (地域限定のイオン九州が上位 3 に入らない)。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
 
-### [BLOG-BACKGROUND-BATCH-01] 背景待ちの記事を準備できた分から公開する（9/7時点の公開差分73件）
+### [BLOG-BACKGROUND-BATCH-01] [進行中] 背景待ちの記事を固有画像・品質確認付きで公開する
 
-タグ: [コンテンツ品質] [種類:制作] [実行:ユーザー] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
 
-- **owner**: オーナー (画像生成) → Claude Code (公開起動・確認・デプロイ)
+- **owner**: Codex (記事固有背景生成・公開確認)、blog-editor (必要な本文是正)
+- **再開点（2026-09-08・R2公開済み／アプリ反映待ち）**: run `34139507934` SUCCESS、73記事・792本文/図/元データファイル・292画像・73manifestのR2読戻しPASS。公開索引606件、対象73件は新しいsitemapへ全収載済み。新規72URLはmainの旧公開一覧により410、改稿1URLは200のため、mainデプロイ後に全73ページを再検証する。発電2記事の出典分類4ファイルだけを別タスクが追補中（run `34150800541` は画像不変時のplan処理で停止、本文/品質PASS）。その修正公開・backlog pushと合流後にリリースする。根本のAIは2,166件done・追加12件R2 SHA一致で別カード閉鎖済み。家計11指標の正規化是正・旧R2配信遮断、画像対象限定、ranking-items二重送信削減を含む作業は `codex/finish-content-remaining`。最新build・全workspace/scripts型・Web1317・packages2383・workflow87テストPASS。main→ranking-items/master（画像11キー指定）→全パージ→73ブログ/14ランキングの本番実測まで完了扱いしない。
 - **現状（2026-09-07）**: reconcileの対象は77→73件（未公開72・改稿差分1）。今回、既存の記事固有背景を使える4件の本文をR2へ反映し、公開本文との一致を確認した。件数は実行時に再取得し、古い91件を固定の完了目標にしない。
-  未生成背景に加え、`natto-consumption-expenditure` は記事改稿で背景promptが古くなっており明示再生成が必要（run 34113017143）。全73件の背景以外の条件を再検証したわけではない。
+  当時の `natto-consumption-expenditure` の古い背景prompt（run 34113017143）も、今回の73件で明示再生成・再検証済み。
 - **過去の停止実測（9/2）**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
   (`annual-sunshine-duration-prefecture-gap`) の `Fatal: 記事固有背景がありません` で exit 1 になり、
   公開 0 件。`generate-blog-thumbnails.ts` は共有背景へフォールバックしない (`ogp-image-standards.md` §5)
@@ -551,88 +479,6 @@ updated: 2026-09-07
   `packages/r2-storage/src/lib/operations/` / `packages/stats-r2/` /
   `CROSS-PAGE-DATA-SSOT-01` / `MONEY-UNIT-SCALE-01` / `RANKING-VALUES-PARTITION-INTEGRITY-01` /
   `PUBLIC-DATA-CONTRACT-AUDIT-01` / `MAINTENANCE-DEBT-PAYDOWN-01`
-
-### [AICONTENT-DBLESS-REBUILD] ai-content全件生成後の入力一致・日次再開条件の確認
-
-タグ: [進行中] [起票:2026-06-01]
-
-- **owner**: ranking-content-author
-- **次**:
-  1. **全件生成は完了。残863件・manual-escalationを再生成しない**。最新の全量キューは active / done ともに
-     2,154、needs-regen 0。生成再開時だけ R2 からキューを再構築して対象の有無を確認する。
-  2. `build-input.ts` の `meta.input.allPrefectures` と canonical R2 values の不一致を調査し、入力側の
-     回帰テストを追加する（`road-national-route-length` の北海道 7,361.6 と正典 6,815.9）。
-     今回の backfill は canonical values を採用しており、公開済み本文を未検証入力で上書きしない。
-  3. 新しい未処理キーが発生した場合に備え、`ai-content-gemini-daily.yml` の billing preflight と
-     専用無料枠キーの再開条件を確認する。課金・Secret変更を自動実施せず、対象0件を生成失敗と混同しない。
-- **2026-09-07 最終状態**: `aec46436a` の残863件 backfill と R2 公開で全件完了。
-  全件監査・数値照合・R2 SHA照合 863/863、代表10件の意味レビュー PASS の記録は
-  `.claude/memory/project_ai_content_remediation_queue.md`。以下の途中 checkpoint は最新残数ではない。
-- **2026-09-05 pilot 完了**: CLI 再ログイン後、pilot 0 (1 件 PASS・$0.35) → pilot 1 (Haiku 0/10 で不適・Sonnet 4/9 全て
-  2-3 回目) → 原因 2 つ (stdout の文字化けバグ・県別解説の定型化) を修正 → verify1 **6/6・$0.51/件・43K トークン/件**。
-  運転設定を `run-claude-batch.sh` の既定に焼いた。正典 `ranking-content-standards.md` §2026-09-05
-- **2026-09-07 Codex batch checkpoint**: 2 セッションで選んだ 600 件を Codex Spark / Terra で処理し、
-  critic・決定的ゲート合格の **421 件を R2 公開**。active 2,154 件の全量再監査で done **870 → 1,291**、
-  needs-regen **1,284 → 863** (missing 76 / incomplete 752 / blocker 35) を確定した。公開 421 件は
-  R2 readback SHA-256 一致 421/421、実データ数値照合 421/421、blocker 0。
-  `complainant-rate-per-1000` の無意味な改行水増しと短文 17 件も除去・補筆し、単体 warn 0。
-  再処理中に対象集合を再抽出して slice すると未試行が生じる実測を受け、`run-claude-batch.sh` は
-  明示 key も開始時に immutable manifest へ固定し、不正・重複 key を生成前に拒否するよう是正した。
-- **2026-09-05 本番 3 バッチ**: 公開 54 件 (done 718 → 772・残 1,394)。batch1 は 26 件が原因不明の CLI 失敗 (stdout を
-  捨てる欠陥 → 修正)、batch2 は定型化 REVISE が支配的 → prompt に県数・地方別順位表を機械計算で渡し、critic に author の
-  制約を前提として明文化。batch3 (35 件・concurrency 2) は **OK 25 / REJECT 9 / FAIL 1・$0.81/公開件・50 分・レート制限なし**。
-  `public-kindergarten-ratio` が 3 連続不合格で quarantine 入り (Opus 例外是正の初例)。次は 1 日 1〜2 バッチで回し、
-  `claude-error_*` が出たら止める
-- **2026-09-05 checkpoint**: Gemini 日次 CI は 08-30 から `preflight_status=billing` で 8 run 連続 PASS 0 (鍵の
-  前払いクレジット枯渇。モデル品質ではない)。残 1,445 件 (done 718 / active 2,163) を Claude で消化するため、
-  Agent tool 経路 (1 件 $16-18) ではなく **headless `claude -p` 経路**を整備した:
-  `generate-parallel.ts` の `--model claude-*` を lean 化 (repo 外 cwd・`--tools ""`・`--setting-sources local`・独自
-  system prompt・`--output-format json` で usage/cost 取得・alias allowlist)、`--critic claude-*` 新設、
-  `run-claude-batch.sh` (preflight → キュー → 生成 → 監査 → critic → history.csv/quarantine → 1 commit → push →
-  publish run 待ち)、`history.csv` に `cost_usd` 列。dry-run・型・vitest 50・node test 54 は green。
-  **実 LLM 呼び出しは未実施** (CLI 未ログインのため)。正典 `ranking-content-standards.md` §2026-09-05。
-- **2026-08-30 checkpoint**: 高コストだった Claude Code/OAuth の自動量産を復活させず、
-  `gemini-2.5-flash-lite` の structured author → 決定的監査 → 別リクエスト critic → 最大1回再生成 →
-  PASS分だけ outbox/publish という日次 CI を実装した。対象あり生成0件、Secret欠損、preflight、
-  develop push、publisher dispatch/run未確認を hard fail にし、本文を含まない集計を
-  `.claude/state/metrics/ai-content/`、キー別失敗を quarantine state に残す。旧対話3件並列は
-  quarantine / 高流入キーの手動例外是正だけに縮退した。
-- **2026-08-26 checkpoint**: R2公開後にactive 2,167件を全量再構築し、done 362 / needs 1,805
-  （missing 198 / incomplete 1,548 / blocker 59）を確定。当日公開9件はすべて公開R2の決定的監査が
-  blocker 0 / warn 0で、Googlebotの対象routeも200。上位5件
-  `gpp-public-service` / `voter-turnout-governor` / `high-school-teacher-annual-income` /
-  `junior-high-club-per100-soft-tennis` / `junior-high-club-per100-swimming`は公開済み。意味criticで、公務分の指標名、暦年/年度、派生指標の
-  分子・分母時点を是正した。疎なpartitionは実観測件数とcommentary件数を照合し、未観測県を
-  47件へ水増ししない監査契約を追加（AI監査48 test green）。当日の月次上限内で生成を停止し、次回は
-  `other-fresh-fish-consumption-expenditure`から再開する。
-- **2026-08-26 next 1**: `other-fresh-fish-consumption-expenditure`を2024年・円・47県の公開R2へ接地して生成。
-  長崎9,910円（1位）/ 高知3,652円（47位）を含む順位・県名・値・areaCode不一致0、機械監査
-  blocker 0 / warn 0。独立criticの初回REVISE（数値過多・反復・神奈川の誤認）を是正し、delta最終PASS。
-  R2公開は全データrefreshとの競合を避け、親工程で直列実行する。
-- **2026-08-27 next 2**: `game-console-consumption-expenditure`を2024年・円・47県の公開R2へ接地して生成。
-  静岡3,033円（1位）、8県0円（同率40位）を欠測へ変換せず全47県の解説へ保持し、構造不一致0、
-  機械監査blocker 0 / warn 0、AI監査48件、独立criticのdelta判定までgreen。R2公開は全データrefresh後に直列実行する。
-- **2026-08-27 next 3**: `manufacturing-establishments`を2024年度・事業所・47県の公開R2へ接地して生成。
-  大阪18,481（最大）/ 鳥取854（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の不一致0。
-  機械監査blocker 0 / warn 0、AI監査48件、独立criticのREVISE 4点をdelta是正して最終PASS。
-- **2026-08-27 next 4**: `cod-roe-consumption-expenditure`を2024年・円・47県の公開R2へ接地して生成。
-  福岡4,870円（最大）/ 沖縄589円（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の不一致0。
-  機械監査blocker 0 / warn 0、AI監査48件、独立criticのREVISEを全件delta是正して最終PASS。
-- **2026-08-27 next 5**: `library-lending-books`を2020年度・冊・47県の公開R2へ接地して生成。
-  東京85,113,851冊（最大）/ 秋田2,463,802冊（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の
-  不一致0。機械監査blocker 0 / warn 0、AI監査48件、独立criticのfull / delta 2回を是正して最終PASS。
-- **2026-08-27 next 6–7**: `sole-proprietor-sales`（2025年・万円）と
-  `coffee-drink-consumption-expenditure`（2024年・円）を公開R2の47県へ接地して生成。欠測・0値なし、
-  同率順位と全areaCode・県名・順位・値を保持し、各機械監査blocker 0 / warn 0、AI監査48件、
-  独立critic full→外科修正→delta PASS。3件ともCIの権威ゲートを再通過し、R2公開・CDN purge・
-  outbox削除まで成功（runs `32989601036` / `32991476893` / `32991854174`、skip 0 / upload error 0）。
-- **2026-08-27 next 8–9**: `deaths-lifestyle-diseases`（2023年度・人）と
-  `junior-high-club-per100-basketball`（2025年度・人）を公開R2の47県へ接地して生成。全areaCode・県名・
-  順位・値・年・単位の不一致0、機械監査blocker 0 / warn 0、AI監査48件、独立criticのfull→外科修正→
-  delta PASS。CIの権威ゲートを再通過し、R2公開2件・CDN purge2 URL・outbox削除まで成功
-  （run `33005947804`、skip 0 / upload error 0）。
-- **完了条件**: 全件生成を再実行せず、入力不一致の回帰テストと日次生成の対象0件・再開条件が確認できること。R2本文の変更と課金設定変更は別工程。
-- **正典**: `.claude/rules/ranking-content-standards.md`
 
 ### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化
 

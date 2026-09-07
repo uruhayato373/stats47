@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const cultureRecreationExpenditureTotal: MetricConfig = {
   "key": "culture-recreation-expenditure-total",
   "title": "教養娯楽費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間教養娯楽費（教養娯楽用耐久財・書籍・月謝・旅行などへの支出総額）",
+  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間教養娯楽費（教養娯楽用耐久財・書籍・月謝・旅行などへの支出総額）",
   "description": "家計調査（二人以上世帯）における年間の教養娯楽への支出総額。教養娯楽用耐久財、教養娯楽用品、書籍・他の印刷物、教養娯楽サービス（旅行・月謝等）を含む。",
   "unit": "円",
   "category": "economy",
@@ -39,22 +39,7 @@ export const cultureRecreationExpenditureTotal: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    // 1世帯当たりの年間支出額。県人口・面積で再除算しない。
     "isCalculated": false,
   },
   "isActive": true,

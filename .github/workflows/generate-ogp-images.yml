@@ -31,6 +31,10 @@ on:
         description: 'blogのみ: 対象slugのカンマ区切り (空なら全公開記事)'
         required: false
         default: ''
+      ranking_keys:
+        description: 'ranking / ranking-cards のみ: 対象キーのカンマ区切り (最大50件)'
+        required: false
+        default: ''
       apply:
         description: 'R2 へ push する (false=生成のみ)'
         required: false
@@ -74,14 +78,35 @@ jobs:
         run: npm ci
 
       - name: 🖼 Generate images
+        env:
+          IMAGE_TYPE: ${{ inputs.type }}
+          IMAGE_LIMIT: ${{ inputs.limit }}
+          BLOG_SLUGS: ${{ inputs.slugs }}
+          RANKING_KEYS: ${{ inputs.ranking_keys }}
         run: |
           # FLAGS は配列で組む ("$FLAGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
-          TYPE="${{ github.event.inputs.type }}"
+          TYPE="$IMAGE_TYPE"
           FLAGS=(--max-generate 500)
-          if [ -n "${{ github.event.inputs.limit }}" ]; then FLAGS+=(--limit "${{ github.event.inputs.limit }}"); fi
+          if [ -n "$IMAGE_LIMIT" ]; then FLAGS+=(--limit "$IMAGE_LIMIT"); fi
+          if [ -n "$RANKING_KEYS" ]; then
+            [[ "$TYPE" = "ranking" || "$TYPE" = "ranking-cards" ]] || { echo 'ranking_keys requires ranking or ranking-cards'; exit 1; }
+            test -z "$BLOG_SLUGS" || { echo 'ranking_keys and slugs cannot be combined'; exit 1; }
+            npx tsx -e '
+              import { getMetricConfig } from "@stats47/data-configs";
+              const keys = process.env.RANKING_KEYS.split(",");
+              if (keys.length > 50 || new Set(keys).size !== keys.length) throw new Error("Expected 1-50 unique ranking keys");
+              for (const key of keys) {
+                if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error("Invalid ranking key: " + key);
+                const config = getMetricConfig(key);
+                if (!config?.isActive || !config.entities.includes("prefecture")) throw new Error("Unknown/inactive prefecture ranking: " + key);
+              }
+              console.log("Validated explicit ranking scope: " + keys.length);
+            '
+            FLAGS+=(--key "$RANKING_KEYS")
+          fi
           if [ "$TYPE" = "blog" ]; then
-            if [ -n "${{ github.event.inputs.slugs }}" ]; then
-              FLAGS+=(--slug "${{ github.event.inputs.slugs }}")
+            if [ -n "$BLOG_SLUGS" ]; then
+              FLAGS+=(--slug "$BLOG_SLUGS")
             fi
             echo "Running: generate-blog-thumbnails-cloud.ts ${FLAGS[*]}"
             npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${FLAGS[@]}"

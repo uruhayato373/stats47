@@ -12,12 +12,13 @@
 
 import {
   existsSync,
+  mkdirSync,
   readFileSync,
   readdirSync,
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 
 import { createS3ImageObjectStoreFromEnv } from '@stats47/r2-storage/image-pipeline';
 import { config as loadEnv } from 'dotenv';
@@ -499,6 +500,8 @@ async function main(): Promise<void> {
       stageRoot: BLOG_IMAGE_STAGE_ROOT,
       items: [],
     });
+    // Fresh CI has no .local directory when no renderer has produced a bundle.
+    mkdirSync(dirname(planPath), { recursive: true });
     writeFileSync(planPath, `${JSON.stringify(emptyPlan, null, 2)}\n`);
     console.log(
       `blog画像: fingerprint変更なし / plan=${BLOG_IMAGE_PUBLISH_PLAN}`

@@ -54,4 +54,22 @@ ranking cardが404で、デプロイ後のroute smokeが失敗した。
 **証拠**: GitHub Actions `32906240999`（画像フックの選択内訳）、`32912691655`
 （3件のOGP 404）、`apps/web/scripts/lib/image-generation-manifest.ts`（優先順位実装）。
 
+## 2026-09-07 ranking-items 単独同期の重複送信を除去
+
+- **問題**: per-key item を中間 push した後、末尾の全体 push が同じ約2,300ファイルを再送していた。
+- **原因**: diff-push の manifest は prefix ごとに別ファイルであり、`app/ranking` の送信記録を `_all` は参照しない。
+- **対策**: `--only ranking-items` の生成・中間 push 成功時だけ、末尾を未送信の `app/ranking-items` inventory に限定。生成失敗時の部分成果救済、途中 push 失敗時の停止、全task実行の依存順は維持する。`sync-snapshots-run-contract.test.mjs` の正常・生成失敗・inventory送信失敗テストで固定。全task実行の重複送信はこの変更の対象外。
+
+## 2026-09-08 公開確認時の画像対象を限定する
+
+- **問題**: ranking-items / master の単独同期でも、後続画像フックが全KNOWNを候補に旧manifest移行を最大50件ずつ行い、少数指標の公開確認に無関係な画像処理が重複する。
+- **対策**: `sync-snapshots.yml` の任意入力 `ranking_image_keys` にCSVで明示する。1〜50個のactive prefectureキーと対応taskをR2書込み前に検証し、ranking / ranking-cardsの両方へ同じ範囲を渡す。snapshot本体の範囲は変えず、既存の `ranking_keys` は引き続きranking-values専用。空欄なら従来のKNOWN全体から最大50件のself-healを維持する。
+- **検証**: 不正/重複/未知/対象外task、50件境界、両画像typeの同一範囲、生成/plan欠落/送信失敗時の停止を `ranking-scoped-workflow.test.mjs` に固定。公開後は対象画像のR2 SHA・寸法と本番routeを実測する。
+
+## 2026-09-08 正規化を廃止した指標の旧R2配信を遮断する
+
+- **問題**: 1世帯当たりの年額である食料費・消費支出にも人口/面積換算が宣言され、configから削除しても旧 `values-per-*.json` は残存する。
+- **原因**: 正規化readerは現行itemの宣言を確認せず、R2ファイルの存在だけで返していた。
+- **対策**: single-year/all-years共通readerで現行itemの `normalizationOptions` を確認し、未宣言なら旧snapshotを読まない。取得失敗もfail-closed。downloadのall-basesはoriginalだけになる。削除済み宣言の復活、対応する正規化の維持、実download呼出しを含む10テストで固定。TSだけでなくitem/masterの同期とキャッシュ消去も必要。`?norm=` ページHTMLの200/canonicalとAPI基準別の404は別契約として検証する。
+
 [[project_dbless_migration_2026_05_29]] [[feedback_check_why_removed_before_reviving]]

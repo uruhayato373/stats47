@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-06T23:55:57.795Z",
+  "generatedAt": "2026-09-07T15:30:13.345Z",
   "gscSnapshot": "2026-W36",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2154,
-    "done": 2154,
+    "total": 2166,
+    "done": 2166,
     "needsRegen": 0,
     "needsByReason": {},
     "notEligible": 0,
@@ -18000,6 +18000,18 @@
       "updatedAt": "2026-09-06T23:09:25.389Z"
     },
     {
+      "rankingKey": "academic-achievement-test-average-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T14:29:39.925Z"
+    },
+    {
       "rankingKey": "accident-death-30day",
       "impressions": 0,
       "clicks": 0,
@@ -19297,6 +19309,18 @@
       "updatedAt": "2026-09-06T14:21:36.207Z"
     },
     {
+      "rankingKey": "clothing-footwear-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.467Z"
+    },
+    {
       "rankingKey": "cold-medicine-consumption-expenditure",
       "impressions": 0,
       "clicks": 0,
@@ -19859,6 +19883,18 @@
       ],
       "lastModified": "Sun, 06 Sep 2026 21:23:16 GMT",
       "updatedAt": "2026-09-06T13:26:38.619Z"
+    },
+    {
+      "rankingKey": "culture-recreation-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.484Z"
     },
     {
       "rankingKey": "cupboard-consumption-expenditure",
@@ -20453,6 +20489,18 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:03 GMT",
       "updatedAt": "2026-09-06T23:09:26.444Z"
+    },
+    {
+      "rankingKey": "education-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.498Z"
     },
     {
       "rankingKey": "elderly-class-lecture-count-per-million",
@@ -21455,6 +21503,18 @@
       "updatedAt": "2026-09-06T23:09:27.562Z"
     },
     {
+      "rankingKey": "furniture-household-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.521Z"
+    },
+    {
       "rankingKey": "furniture-household-service-consumption-expenditure",
       "impressions": 0,
       "clicks": 0,
@@ -22006,6 +22066,18 @@
       "updatedAt": "2026-09-06T23:09:28.195Z"
     },
     {
+      "rankingKey": "health-medical-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.534Z"
+    },
+    {
       "rankingKey": "healthcare-cost-all-households",
       "impressions": 0,
       "clicks": 0,
@@ -22320,6 +22392,18 @@
       "updatedAt": "2026-09-06T23:09:28.473Z"
     },
     {
+      "rankingKey": "housing-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.553Z"
+    },
+    {
       "rankingKey": "housing-expenses-prefecture",
       "impressions": 0,
       "clicks": 0,
@@ -22426,6 +22510,30 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:11 GMT",
       "updatedAt": "2026-09-06T23:09:28.556Z"
+    },
+    {
+      "rankingKey": "information-communication-coefficient",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T14:29:39.928Z"
+    },
+    {
+      "rankingKey": "information-communication-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T14:29:39.929Z"
     },
     {
       "rankingKey": "inland-aquaculture-harvest",
@@ -24677,6 +24785,18 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:19 GMT",
       "updatedAt": "2026-09-06T23:09:30.821Z"
+    },
+    {
+      "rankingKey": "other-living-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.571Z"
     },
     {
       "rankingKey": "other-meat-consumption-expenditure",
@@ -27936,6 +28056,18 @@
       "updatedAt": "2026-09-06T23:09:34.390Z"
     },
     {
+      "rankingKey": "transport-communication-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.596Z"
+    },
+    {
       "rankingKey": "travel-leisure-annual-participation-rate-15plus",
       "impressions": 0,
       "clicks": 0,
@@ -28222,6 +28354,18 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:35 GMT",
       "updatedAt": "2026-09-06T23:09:34.704Z"
+    },
+    {
+      "rankingKey": "utilities-expenditure-total",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Mon, 07 Sep 2026 15:23:25 GMT",
+      "updatedAt": "2026-09-07T13:00:21.609Z"
     },
     {
       "rankingKey": "vacant-housing-ratio",

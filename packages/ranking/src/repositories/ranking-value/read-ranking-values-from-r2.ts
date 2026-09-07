@@ -17,6 +17,7 @@ import {
   parseNationalTrendSnapshot,
   parseRankingValuesKeySnapshot,
 } from "../schemas/ranking-values.schemas";
+import { readRankingItemFromR2 } from "../ranking-item";
 
 const STALE_AFTER_DAYS = 90;
 
@@ -133,20 +134,32 @@ export async function readAllYearsRankingValuesFromR2(
  * normType: "per_population" → app/ranking/{key}/values-per-population.json
  * normType: "per_area"       → app/ranking/{key}/values-per-area.json
  *
+ * 現行itemに宣言がない基準は、古いR2ファイルが残っていても読まない。
  * ファイルが存在しない場合は ok([]) を返す（computeNormalization フォールバック用）。
  */
+async function loadNormalizedRankingValuesForKey(
+  rankingKey: string,
+  areaType: AreaType,
+  normType: string,
+): Promise<RankingValuesKeySnapshot | null> {
+  const itemResult = await readRankingItemFromR2(rankingKey, areaType);
+  if (!itemResult.success) throw itemResult.error;
+  if (!itemResult.data?.calculation?.normalizationOptions?.some((option) => option.type === normType)) {
+    return null;
+  }
+  const data = await fetchFromR2AsJson<unknown>(rankingNormalizedValuesKeyPath(rankingKey, normType));
+  return data ? parseRankingValuesKeySnapshot(data) : null;
+}
+
 export async function readNormalizedRankingValuesFromR2(
   rankingKey: string,
-  _areaType: AreaType,
+  areaType: AreaType,
   yearCode: string,
   normType: string,
 ): Promise<Result<RankingValue[], Error>> {
   try {
-    const path = rankingNormalizedValuesKeyPath(rankingKey, normType);
-    const data = await fetchFromR2AsJson<unknown>(path);
-    if (!data) return ok([]);
-
-    const snapshot = parseRankingValuesKeySnapshot(data);
+    const snapshot = await loadNormalizedRankingValuesForKey(rankingKey, areaType, normType);
+    if (!snapshot) return ok([]);
 
     const normalizedYear = yearCode.slice(0, 4);
     const partition = snapshot.partitions.find((p) => p.yearCode.slice(0, 4) === normalizedYear);
@@ -165,19 +178,16 @@ export async function readNormalizedRankingValuesFromR2(
 /**
  * 正規化済み R2 snapshot から全年度の ranking_values を取得 (ダウンロード用)。
  *
- * ファイルが存在しない場合は ok([]) を返す。
+ * 現行itemの宣言がない場合、またはファイルが存在しない場合は ok([]) を返す。
  */
 export async function readAllYearsNormalizedRankingValuesFromR2(
   rankingKey: string,
-  _areaType: AreaType,
+  areaType: AreaType,
   normType: string,
 ): Promise<Result<RankingValue[], Error>> {
   try {
-    const path = rankingNormalizedValuesKeyPath(rankingKey, normType);
-    const data = await fetchFromR2AsJson<unknown>(path);
-    if (!data) return ok([]);
-
-    const snapshot = parseRankingValuesKeySnapshot(data);
+    const snapshot = await loadNormalizedRankingValuesForKey(rankingKey, areaType, normType);
+    if (!snapshot) return ok([]);
 
     const all: RankingValue[] = [];
     for (const partition of snapshot.partitions) {

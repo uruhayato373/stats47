@@ -34,3 +34,9 @@ metadata:
 副産物バグ: **marriages/divorces の SSOT値が誤り**(divorcesキーに婚姻率の値・marriagesキーは~0.5異常、cdCat01取違え疑い、live /ranking/ に誤データ)。証拠+検証cmd+再取込手順=`.claude/todo/backlog.md §D`。
 
 正典: `.claude/rules/blog-data-schema.md §1.5/1.6/1.7`。担当 = `chart-author` agent(データ系譜の整備・復元責務)。並行別件: 米/パン metric config(`rice-/bread-consumption-expenditure`、develop、次デプロイ後 data-refresh で取り込み→地図化、未取り込み指標は `.claude/todo/backlog.md`)。
+
+## 同値の順位と本文の一致（2026-09-07）
+
+- **問題**: 値・出典が正しくても、同値の県に異なる順位が付き、図と本文が食い違った。
+- **原因**: 古い入力JSONの連番 `rank` と、表示位置由来の順位をそのまま使っていた。上下5県の図だけでは中間順位の本文誤りも見逃す。
+- **対策**: ランキング図・タイル地図の順位は値の降順・同値同順位（1,2,2,4）で導出する。`isReversed` は色方向だけに使う。既存記事の是正は原値・年・出典を先に照合し、JSON・SVG・本文を一緒に検査する。回帰は `generate-article-charts-ranks.test.mjs` と `choropleth.tile-label.test.ts`。leadを直した場合は記事背景promptも変わるため、古い画像のhashだけ付け替えず再生成する。

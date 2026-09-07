@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-31T20:25:05.647Z",
-  "stage": "review",
+  "generatedAt": "2026-09-07T16:36:17.487Z",
+  "stage": "monitor",
   "status": "warn",
-  "measurementWeek": "2026-W35",
-  "expectedCompletedWeek": "2026-W35",
-  "expectedPlanWeek": "2026-W36",
+  "measurementWeek": "2026-W36",
+  "expectedCompletedWeek": "2026-W36",
+  "expectedPlanWeek": "2026-W37",
   "currentMonth": "2026-09",
   "summary": {
-    "pass": 9,
+    "pass": 12,
     "warn": 1,
     "fail": 0
   },
@@ -16,19 +16,19 @@
     {
       "code": "snapshot-period",
       "level": "pass",
-      "detail": "2026-W35 finalized7d coverage complete",
+      "detail": "2026-W36 finalized7d coverage complete",
       "action": null
     },
     {
       "code": "snapshot-freshness",
       "level": "pass",
-      "detail": "latest=2026-W35, expected>=2026-W35",
+      "detail": "latest=2026-W36, expected>=2026-W36",
       "action": null
     },
     {
       "code": "effect-verdict",
       "level": "pass",
-      "detail": "2026-W35 verdict 7件を記録済み",
+      "detail": "2026-W36 verdict 7件を記録済み",
       "action": null
     },
     {
@@ -46,7 +46,7 @@
     {
       "code": "search-growth-freshness",
       "level": "pass",
-      "detail": "week=2026-W36, age=1d",
+      "detail": "week=2026-W37, age=1d",
       "action": null
     },
     {
@@ -58,19 +58,37 @@
     {
       "code": "search-growth-decision",
       "level": "pass",
-      "detail": "2026-W35 の承認/却下 2件（必要 1件以上）",
+      "detail": "2026-W36 の承認/却下 1件（必要 1件以上）",
       "action": null
     },
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-08-31, age=1d",
+      "detail": "latest=2026-09-07, age=1d",
       "action": null
     },
     {
       "code": "weekly-review",
       "level": "pass",
-      "detail": "2026-W35 review の search-growth 節=あり",
+      "detail": "2026-W36 review の search-growth 節=あり",
+      "action": null
+    },
+    {
+      "code": "weekly-plan",
+      "level": "pass",
+      "detail": "plan=2026-W37, expected=2026-W37",
+      "action": null
+    },
+    {
+      "code": "monthly-plan",
+      "level": "pass",
+      "detail": "month=2026-09, GSC運用サイクル節=あり",
+      "action": null
+    },
+    {
+      "code": "monthly-review-coverage",
+      "level": "pass",
+      "detail": "直近4週レビュー 4/4（必要 3以上）",
       "action": null
     }
   ]

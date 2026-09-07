@@ -127,7 +127,7 @@ for task in "${TASKS[@]}"; do
   # 初回はこれが無く、app/stats は 18 年に更新されたのに app/ranking は 1 年のまま
   # 旧値 (山形 545,206) を配信していた。
   # page-data-batch → 即 push → run.sh という data-refresh の構造と同じ理由。
-  # diff-push は差分のみなので、末尾の全体 push と二重になっても無害。
+  # manifest は prefix ごとに別なので、末尾の全体 push では再送され得る。
   if [ "$label" = "calculated-stats" ] && [ "$DRY_RUN" = "0" ] && push_allowed; then
     echo "── calculated-stats の出力を先に push (後続 ranking-values が remote から読むため) ──"
     if ! npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats; then
@@ -180,6 +180,10 @@ if [ "$DRY_RUN" = "0" ]; then
       PUSH_ARGS+=(--prefix app/municipalities)
     elif [ "$ONLY" = "blog" ]; then
       PUSH_ARGS+=(--prefix app/blog)
+    elif [ "$ONLY" = "ranking-items" ] && [ ${#FAILED[@]} -eq 0 ]; then
+      # per-key は中間 push 済み。prefix ごとに manifest が別なので全体 push は再送になる。
+      # 単独成功時は残る inventory のみ。生成失敗時は部分生成済み item の救済を維持する。
+      PUSH_ARGS+=(--prefix app/ranking-items)
     fi
     if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts "${PUSH_ARGS[@]}"; then
       echo "✅ snapshot を R2 に push 完了"
