@@ -1,0 +1,76 @@
+{
+  "_provenance": {
+    "why": "PSI が Lighthouse を insights モードで動かすようになり、DOM 規模の audit id が dom-size から dom-size-insight へ変わった。旧 id 固定の extractDomSize は 2026-08-05 の導入から 2026-09-06 まで 37 batch すべてで dom_size:null を書いていた。この fixture は『dom-size が無く dom-size-insight がある』実データ形状を固定し、同じ取り落としを再発させない。",
+    "insights_mode_evidence": "本番 batch .claude/state/metrics/psi/psi-batch-2026-09-06T19-06-05.json の https://stats47.jp/areas/13000 mobile は lcp_element が埋まっていて dom_size だけ null。extractLcpElement が見るのは lcp-breakdown-insight と largest-contentful-paint-element の 2 つだが、後者は upstream から削除済み (core/audits/largest-contentful-paint-element.js は 2026-09-07 時点で 404)。つまり lcp_element を埋めたのは insight 版しかありえず、PSI が insights モードで動いていることが自前のデータから確定する。旧 dom-size も同様に削除済みなので、旧 id 固定では原理的に取れない。",
+    "lcp_breakdown_insight": "下の lcp-breakdown-insight は上記 batch に実際に記録された値 (selector / nodeLabel / snippet / subpart duration) から復元した。insights モードであるという前提そのものを fixture に固定するために同梱する。",
+    "dom_size_insight_shape": "audit id・statistic ラベル・value オブジェクト ({type:'numeric', granularity:1, value}) ・numericValue=totalElements は GoogleChrome/lighthouse main の core/audits/insights/dom-size-insight.js に一致させた。ラベル文字列は trace_engine の DOMSize UIStrings (ChromeDevTools/devtools-frontend main / @paulirish/trace_engine で一致)。いずれも 2026-09-07 アクセス。旧 core/audits/dom-size.js は同日 404 (upstream から削除済み)。",
+    "dom_size_insight_numbers": "★実測値ではない。PSI API の日次 quota (匿名 project) を使い切っており、pagespeed.web.dev と stats47.jp はいずれも当環境のネットワークポリシーで開けず、live capture ができなかった。数値は代表値で、この fixture が固定しているのは値ではなく形状 (id・キー・ラベル・入れ子) である。値の裏取りは quota 回復後の実 batch で行う。",
+    "accessed_at": "2026-09-07"
+  },
+  "audits": {
+    "dom-size-insight": {
+      "id": "dom-size-insight",
+      "title": "Optimize DOM size",
+      "score": 0.5,
+      "scoreDisplayMode": "numeric",
+      "numericValue": 3120,
+      "numericUnit": "element",
+      "details": {
+        "type": "table",
+        "headings": [
+          { "key": "statistic", "valueType": "text", "label": "Statistic" },
+          { "key": "node", "valueType": "node", "label": "Element" },
+          { "key": "value", "valueType": "numeric", "label": "Value" }
+        ],
+        "items": [
+          {
+            "statistic": "Total elements",
+            "value": { "type": "numeric", "granularity": 1, "value": 3120 }
+          },
+          {
+            "statistic": "DOM depth",
+            "node": {
+              "type": "node",
+              "selector": "div.min-w-0 > section > div.grid > article",
+              "nodeLabel": "article"
+            },
+            "value": { "type": "numeric", "granularity": 1, "value": 21 }
+          },
+          {
+            "statistic": "Most children",
+            "node": {
+              "type": "node",
+              "selector": "main > div.mx-auto > nav.flex",
+              "nodeLabel": "nav"
+            },
+            "value": { "type": "numeric", "granularity": 1, "value": 178 }
+          }
+        ]
+      }
+    },
+    "lcp-breakdown-insight": {
+      "id": "lcp-breakdown-insight",
+      "title": "LCP breakdown",
+      "score": 0,
+      "scoreDisplayMode": "numeric",
+      "details": {
+        "type": "list",
+        "items": [
+          {
+            "type": "node",
+            "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > p.mt-2",
+            "nodeLabel": "東京都の人口・経済・教育・医療など 17 カテゴリのデータを、47 都道府県で順位比較できます。",
+            "snippet": "<p class=\"mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground\">"
+          },
+          {
+            "type": "table",
+            "items": [
+              { "subpart": "timeToFirstByte", "duration": 69 },
+              { "subpart": "elementRenderDelay", "duration": 2268 }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
