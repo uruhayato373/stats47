@@ -31,7 +31,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { checkArticleFactual } from '../lib/article-factual-check.mjs';
-import { lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
+import { lintConsecutiveCallouts, lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
 import { lintParenNumbers } from '../lib/paren-number-lint.mjs';
 import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
@@ -263,11 +263,6 @@ for (const { pattern, name } of NG_PATTERNS) {
   }
 }
 
-if (checks.callouts < 2) {
-  blockers.push(
-    `callouts < 2 (actual: ${checks.callouts}) — 信頼性シグナル不足`
-  );
-}
 if (checks.internalLinks < 3) {
   blockers.push(
     `internalLinks < 3 (actual: ${checks.internalLinks}) — PageRank 還流不足`
@@ -313,9 +308,13 @@ if (checks.dearuEndings > 0) {
 if (checks.charts === 0) {
   warnings.push('チャート (SVG) 0 個 — visual 弱い');
 }
-if (checks.callouts < 3) {
-  warnings.push(`callouts < 3 (actual: ${checks.callouts}) — 推奨は 3-4 個`);
-}
+// callout 連続配置チェック (2026-09-07 追加、article-structure-lint.mjs に集約)。
+// 数を満たすために NOTE/WARNING/TIP を固めると本文より注記が目立つため、公開前に止める。
+const calloutLayoutLint = lintConsecutiveCallouts(content);
+checks.adjacentCalloutClusters = calloutLayoutLint.stats.adjacentCalloutClusters;
+checks.adjacentCalloutPairs = calloutLayoutLint.stats.adjacentCalloutPairs;
+checks.maxConsecutiveCallouts = calloutLayoutLint.stats.maxConsecutiveCallouts;
+blockers.push(...calloutLayoutLint.blockers);
 
 // 図あたり prose 字数 (厚みの担保 ★2026-06-06)。「SVG はあるが文章が薄い」を決定的に弾く。
 // 実測: 良記事 ~600字/図 (各図の後に 3-4 段落の解釈) vs 薄い記事 ~280字/図 (図の後 1-2 文で次の図)。

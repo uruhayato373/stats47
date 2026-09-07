@@ -40,6 +40,8 @@ interface AffiliateAdSlotProps {
   bannerLimit?: number;
   /** テキスト広告の最大数 (既定 2)。bannerOnly のときは使わない。 */
   textLimit?: number;
+  /** GA4 link_position。未指定時は既存の ranking/sidebar ラベルを維持する。 */
+  trackingPosition?: string;
 }
 
 function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocationCode {
@@ -67,6 +69,7 @@ export async function AffiliateAdSlot({
   bannerOnly = false,
   bannerLimit = 1,
   textLimit = 2,
+  trackingPosition,
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
   const affiliateCategory =
@@ -85,7 +88,7 @@ export async function AffiliateAdSlot({
         <VariantAdSlot
           variants={eligibleVariants}
           category={affiliateCategory ?? "other"}
-          position="ranking-sidebar"
+          position={trackingPosition ?? "ranking-sidebar"}
         />
       );
     }
@@ -113,7 +116,7 @@ export async function AffiliateAdSlot({
               // vertical を優先 (categoryKey 由来の affiliateCategory は fallback)
               category={banner.vertical ?? affiliateCategory ?? "other"}
               label={banner.title}
-              position="ranking-sidebar"
+              position={trackingPosition ?? "ranking-sidebar"}
               adId={banner.id}
               creativeSize={`${banner.width}x${banner.height}`}
             />
@@ -140,7 +143,7 @@ export async function AffiliateAdSlot({
         <AffiliateTextAdList
           ads={ads}
           affiliateCategory={affiliateCategory}
-          position={position}
+          position={trackingPosition ?? position}
         />
       );
     }

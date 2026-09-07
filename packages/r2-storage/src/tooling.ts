@@ -13,3 +13,9 @@ export {
   type ExactAssetCandidate,
 } from "./scripts/push-exact-r2-assets-core";
 export { assertR2WriteAllowed } from "./scripts/_assert-ci-write";
+// 生成側が「この ranking は公開構造化データにできない」を publisher と同じ判定で知るため。
+// 生成してから push で落とすと 1 件で task 全体が止まる (gis-data.md の公開構造化データ禁止)。
+export {
+  findKsjPublicStructuredOutputBlock,
+  isKsjPublicStructuredOutputBlocked,
+} from "./scripts/lib/ksj-publication-guard";

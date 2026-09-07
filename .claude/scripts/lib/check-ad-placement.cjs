@@ -278,7 +278,8 @@ if (blogRailStart < 0 || blogRailEnd <= blogRailStart) {
   );
 } else {
   const blogRail = stripComments(blogPage.slice(blogRailStart, blogRailEnd));
-  if (!/<SidebarPromoBanner\b/.test(blogRail)) {
+  // blog は記事 vertical の BannerAd を直接描画する。固定ハウスバナーを必須にしない。
+  if (!/<(?:SidebarPromoBanner|BannerAd)\b/.test(blogRail)) {
     errors.push(`${RIGHT_RAIL_FILES.blog}\n   blog 右レールに画像バナーがない。`);
   }
   checkAllowedPromotionalTags(

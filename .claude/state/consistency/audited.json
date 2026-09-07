@@ -1,17 +1,7 @@
 {
-  "hash": "4190194988ebe1e8e56415bf741c89d4ed562ddd496e4ce0a57a026dc766276b",
-  "audited_at": "2026-09-07T04:38:27",
+  "hash": "3e74e09c4602d07ee3836732f134ee582d50e238b9900e69fa1cd028e179dd37",
+  "audited_at": "2026-09-07T07:32:23",
   "files": [
-    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs",
-    ".claude/scripts/gsc/build-coverage-queue.mjs",
-    ".claude/scripts/gsc/lib/coverage-source-freshness.mjs",
-    ".claude/scripts/lib/__tests__/preflight-commit.test.mjs",
-    ".claude/scripts/lib/preflight-commit.mjs",
-    ".claude/scripts/search-growth/__tests__/pipeline.test.mjs",
-    ".claude/scripts/search-growth/lib/sources.mjs",
-    ".claude/scripts/search-growth/normalize.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md"
+    ".claude/skills/analytics/performance-improvement/reference/improvement-log.md"
   ]
 }

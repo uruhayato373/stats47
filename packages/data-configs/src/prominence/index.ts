@@ -44,11 +44,13 @@ export {
   auditDerivedHooks,
   resolveRankingReaderLabel,
   resolveRankingHook,
+  summarizeReaderLabelCoverage,
   HOOK_MAX_LENGTH,
   HOOK_MIN_LENGTH,
   type HookAuditFinding,
   type HookAuditReason,
   type RankingHookResolveInput,
+  type ReaderLabelCoverage,
 } from "./resolve-ranking-hook";
 
 export {

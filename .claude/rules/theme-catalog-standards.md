@@ -118,6 +118,20 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
 > **枚数は下のチャートとの重複を避けて絞る** — 同じ事実をカードとチャートで二度見せない
 > (2026-08-04 に population-dynamics を 10 → 4 に削減した際の判断基準)。
 
+### 指標名の 3 系統 (`shortLabel` / `readerLabel` / 正準 `title`) — 統合しない
+
+同じ指標に 3 つの呼び名が並ぶが、**役割が違うので一本化しない**。
+
+| 名前 | 持ち主 | 使う場所 | 何のために |
+|---|---|---|---|
+| `shortLabel` | ThemeCatalog の `CatalogMetric` (テーマごとに人が書く) | 指標カードのタイル・凡例・比較表 | **そのテーマの文脈で最短に識別する**。「所定内給与(男)」のように、同じテーマに並ぶ他の指標と区別できる最小の語 |
+| `readerLabel` | metric config の導出規則 (`packages/data-configs/src/prominence`) | チャート見出し・散布図の軸・ページ横断の索引 | **文脈なしで読める平易な名詞句**。テーマを跨いで同じ指標が同じ呼び方になる |
+| `title` | metric config (正準) | 指標ハブ `/ranking/<key>` の h1・出典表記 | 統計表と照合できる正式名 |
+
+`shortLabel` をテーマ横断で共有させない (同じ指標でもテーマが違えば最短の区別語は変わる)。
+逆に `readerLabel` をテーマごとに上書きしない (面ごとに呼び方が割れると読者が同定できない)。
+狭い場所には `shortLabel`、広い場所には `readerLabel` と覚える。
+
 ### selection (選定根拠 — provenance)
 
 新規に追加する `primary`/`secondary` 指標は `selection` を記入する (validator warn で促す)。

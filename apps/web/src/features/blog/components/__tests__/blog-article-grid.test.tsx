@@ -24,7 +24,8 @@ describe('BlogArticleGrid', () => {
       screen.getByRole('link', { name: /人口が増えている都道府県/ })
     ).toHaveAttribute('href', '/blog/population-change');
     expect(screen.getByText(ARTICLE.description!)).toBeInTheDocument();
-    expect(screen.getByText('グラフあり')).toBeInTheDocument();
+    expect(screen.queryByText('都道府県データ')).not.toBeInTheDocument();
+    expect(screen.queryByText('グラフあり')).not.toBeInTheDocument();
     expect(screen.getByText('更新 2026.07.25')).toBeInTheDocument();
     expect(container.querySelector('img')).toHaveAttribute(
       'src',

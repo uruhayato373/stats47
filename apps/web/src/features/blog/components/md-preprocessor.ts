@@ -11,6 +11,64 @@ const CALLOUT_TYPES: Record<string, { className: string; titleClassName: string 
     CAUTION:   { className: "border-red-400 bg-red-50 dark:bg-red-950/30",     titleClassName: "text-red-700 dark:text-red-300"     },
 };
 
+const CALLOUT_PRIORITY: Record<string, number> = {
+    TIP: 1,
+    NOTE: 2,
+    IMPORTANT: 3,
+    WARNING: 4,
+    CAUTION: 5,
+};
+
+const CALLOUT_INLINE_LABELS: Record<string, string> = {
+    NOTE: "補足",
+    TIP: "読み解きのポイント",
+    WARNING: "注意",
+    IMPORTANT: "重要",
+    CAUTION: "要注意",
+};
+
+type CalloutMarker = { index: number; type: string };
+
+/**
+ * 旧記事に残る連続 callout では、最も重要な注意だけをカード表示し、他を通常本文へ戻す。
+ * raw source は quality-gate で別途ブロックするため、これは公開済み記事の表示互換レイヤー。
+ */
+function findDemotedCalloutLines(lines: string[]): Set<number> {
+    const markers: CalloutMarker[] = [];
+    for (let index = 0; index < lines.length; index++) {
+        const match = lines[index].match(/^\s*>\s*\[!(NOTE|TIP|WARNING|IMPORTANT|CAUTION)\]\s*$/i);
+        if (match) markers.push({ index, type: match[1].toUpperCase() });
+    }
+
+    const demoted = new Set<number>();
+    let cluster: CalloutMarker[] = markers.length > 0 ? [markers[0]] : [];
+    const flush = () => {
+        if (cluster.length < 2) return;
+        const keeper = cluster.reduce((best, marker) =>
+            CALLOUT_PRIORITY[marker.type] > CALLOUT_PRIORITY[best.type] ? marker : best,
+        );
+        for (const marker of cluster) {
+            if (marker !== keeper) demoted.add(marker.index);
+        }
+    };
+
+    for (let i = 1; i < markers.length; i++) {
+        const previous = markers[i - 1];
+        const current = markers[i];
+        const hasSeparatingContent = lines
+            .slice(previous.index + 1, current.index)
+            .some((line) => line.trim() !== "" && !/^\s*>/.test(line));
+        if (hasSeparatingContent) {
+            flush();
+            cluster = [current];
+        } else {
+            cluster.push(current);
+        }
+    }
+    flush();
+    return demoted;
+}
+
 /**
  * Markdown ソースの callout 記法（> [!NOTE] ...）を HTML div に変換する。
  * remark が [!NOTE] をリンク参照としてパースしてしまう問題を回避する。
@@ -18,6 +76,7 @@ const CALLOUT_TYPES: Record<string, { className: string; titleClassName: string 
 export function preprocessCallouts(source: string, relatedArticleTitles?: Record<string, string>): string {
     const lines = source.split("\n");
     const result: string[] = [];
+    const demotedCalloutLines = findDemotedCalloutLines(lines);
     let i = 0;
 
     while (i < lines.length) {
@@ -35,6 +94,12 @@ export function preprocessCallouts(source: string, relatedArticleTitles?: Record
                     i++;
                 }
                 const body = bodyLines.join("\n");
+
+                if (demotedCalloutLines.has(i - bodyLines.length - 1)) {
+                    const label = CALLOUT_INLINE_LABELS[type] ?? "補足";
+                    result.push(`**${label}:** ${body}`, "");
+                    continue;
+                }
 
                 result.push(
                     `<div class="-mt-1 mb-4 border-l-4 px-4 py-2 ${config.className}">`,

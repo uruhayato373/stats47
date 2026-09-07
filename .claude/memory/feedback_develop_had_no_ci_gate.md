@@ -34,3 +34,11 @@ maintenance debt 1 件が origin/develop に入ったまま残り、マージ担
 **ゲートは原因に依らず着地点で捕まえる**設計なので特定は不要。
 
 関連: [[feedback-shared-working-copy-git-race]] / [[feedback-mutation-test-passes-wrongly]]
+
+## 2026-09-07: PR前の共有UI契約を並列検査
+
+- **問題**: 共通レール変更のcard census・広告配置・hidden入力の誤検知が、pre-commitとPR CIで順に発覚した。
+- **原因**: `preflight:pr`は生成物鮮度が中心で、独立した安価なUI契約を先回りしていなかった。
+- **対策**: `preflight-commit.mjs --pr`へCard Census / Ad Placement / Static Accessibilityを追加。
+  14ゲートをfail-fastせず並列実行し、実測6.1秒で全件PASS。通常commit用の軽量3ゲートは維持する。
+  hidden入力は支援技術に露出しないため名前検査から除外し、可視・動的typeの検査は回帰テストで維持する。

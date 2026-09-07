@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-06T18:37:23.991Z",
+  "updatedAt": "2026-09-07T11:18:52.097Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3497,9 +3497,9 @@
       "completedAt": "2026-08-31T08:20:51.628Z"
     },
     "BLOG-PUBLISH-THUMBNAIL-GUARD-01": {
-      "class": "needs-owner",
-      "status": "open",
-      "sourceFile": null,
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
       "title": "背景1件の欠落で公開run全体が止まるのを per-slug skip にする",
       "attempts": [
         {
@@ -3559,21 +3559,46 @@
           "evidence": "既存3回の記録どおり、修正はblog-auto-publish.ymlの編集を要しbacklog-loop.mdのFORBIDDEN_PATH_PATTERNSに該当する。原因と修正案(ci-factual-gate/quality-gateと同じif!/continueでper-slug skip化)は前回runで特定済み。route.classは既にneeds-owner(escalatedFrom=fable, attempts=3)。人間PRでの適用待ちのため今回も触らず次へ。",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-09-07T11:18:52.097Z",
+          "runId": "34113401278",
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/workflow-commit-back.test.cjs",
+              "gh run view 34113401278 --log",
+              "node .claude/scripts/blog/select-republish-slugs.mjs --json"
+            ],
+            "pass": true
+          },
+          "evidence": "実run success: 背景不足airport 1件を理由付きskip、後続4記事公開・index更新・public-data-contract findings 0・outbox cleanup d749fcb0b。R2本文4件in-sync。実workflow shell回帰22/22で未知エラー停止と保留本文の非stagingも検証。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "sandbox が set-e/for/if/bash<script>/npm の実行を全て拒否し、workflow の多slugループを再現するテストが実行不能",
-        "since": "2026-09-01T19:43:27.734Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [
         {
           "from": "impl-small",
           "to": "needs-owner",
           "at": "2026-09-01T19:44:56.930Z"
+        },
+        {
+          "from": "needs-owner",
+          "to": "test-fix",
+          "at": "2026-09-07T11:18:52.097Z"
         }
       ],
-      "completedAt": null
+      "completedAt": "2026-09-07T11:18:52.097Z"
     },
     "CHART-VALIDATE-GATE-01": {
       "class": "needs-owner",

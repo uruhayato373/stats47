@@ -3,6 +3,42 @@ import { getKsjLicensePolicy } from '../../../../gis/src/mlit-ksj/license-policy
 import { METRICS_REGISTRY } from '../../../../data-configs/src/registry';
 import { buildRecipe } from '../../../../data-configs/src/recipe';
 
+/**
+ * この ranking を公開構造化データ (app/stats・app/ranking・app/japan・app/correlation) として
+ * 出せないか。出せないなら R2 へ書こうとした時点で publisher が throw する。
+ *
+ * **生成側もこの述語で除外する**。判定を publisher 側だけに置くと「生成はするが push で必ず落ちる」
+ * 状態になり、1 件の非商用 KSJ が ranking-items task 全体を止める (2026-09-06 の KSJ 退役後、
+ * 最初の ranking-items 実行がこれで失敗した)。同じ純関数を両端で使い、生成と検査の判定を揃える。
+ *
+ * 判定は 2 経路。metric の source が KSJ を直に指す場合と、datasets.ts の rankingConfig が
+ * その rankingKey を持つ場合 (metric 側が一次資料へ移行済みでも、原典が非商用なら出せない)。
+ */
+export function findKsjPublicStructuredOutputBlock(
+  rankingKey: string
+): { dataId: string; license: string } | null {
+  const source = METRICS_REGISTRY[rankingKey]?.source;
+  if (source?.kind === 'external' && source.fetcherKey === 'mlit_ksj') {
+    const dataId = source.config?.ksjDataId;
+    const input = GIS_DATASETS.find((item) => item.dataId === dataId);
+    if (!input || !getKsjLicensePolicy(input.license).publicStructuredOutputAllowed) {
+      return { dataId: String(dataId), license: input?.license ?? 'unassessed' };
+    }
+  }
+  const dataset = GIS_DATASETS.find((item) =>
+    item.rankingConfig?.some((ranking) => ranking.rankingKey === rankingKey)
+  );
+  if (dataset && !getKsjLicensePolicy(dataset.license).publicStructuredOutputAllowed) {
+    return { dataId: dataset.dataId, license: dataset.license };
+  }
+  return null;
+}
+
+/** 述語版。生成側が「この key は書かない」を判断するのに使う。 */
+export function isKsjPublicStructuredOutputBlocked(rankingKey: string): boolean {
+  return findKsjPublicStructuredOutputBlock(rankingKey) !== null;
+}
+
 /** 生成済みの古いstagingも、汎用publisherから無審査で再公開させない。 */
 export function assertKsjPublicKeysAllowed(keys: readonly string[]): void {
   for (const key of keys) {
@@ -24,19 +60,9 @@ export function assertKsjPublicKeysAllowed(keys: readonly string[]): void {
       const rankingKey = key.startsWith('app/correlation/by-ranking-key/')
         ? key.slice('app/correlation/by-ranking-key/'.length).replace(/\.json$/, '')
         : key.split('/')[2];
-      const source = METRICS_REGISTRY[rankingKey]?.source;
-      if (source?.kind === 'external' && source.fetcherKey === 'mlit_ksj') {
-        const dataId = source.config?.ksjDataId;
-        const input = GIS_DATASETS.find((item) => item.dataId === dataId);
-        if (!input || !getKsjLicensePolicy(input.license).publicStructuredOutputAllowed) {
-          throw new Error(`KSJ公開構造化データ禁止: ${key} (${String(dataId)}, ${input?.license ?? 'unassessed'})`);
-        }
-      }
-      const dataset = GIS_DATASETS.find((item) =>
-        item.rankingConfig?.some((ranking) => ranking.rankingKey === rankingKey)
-      );
-      if (dataset && !getKsjLicensePolicy(dataset.license).publicStructuredOutputAllowed) {
-        throw new Error(`KSJ公開構造化データ禁止: ${key} (${dataset.dataId}, ${dataset.license})`);
+      const blocked = findKsjPublicStructuredOutputBlock(rankingKey);
+      if (blocked) {
+        throw new Error(`KSJ公開構造化データ禁止: ${key} (${blocked.dataId}, ${blocked.license})`);
       }
     }
   }

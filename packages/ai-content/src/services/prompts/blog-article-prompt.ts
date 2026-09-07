@@ -29,7 +29,19 @@ export interface GroundTruthRow {
 
 export interface GroundTruthMetric {
   rankingKey: string;
+  /** 正準な統計名。出典と照合できる形 */
   label: string;
+  /**
+   * 読者向けの平易な呼び方 (例: 牛肉消費支出額 → 牛肉への支出)。
+   * 正典は metric config の導出規則 (`packages/data-configs/src/prominence`) で、
+   * 呼び出し側は R2 item.json の `readerLabel` を渡すだけ。省略時は label と同じ扱い。
+   */
+  readerLabel?: string;
+  /**
+   * 問いかけコピー (例: 牛肉への支出が最も多い県は？)。記事タイトルの種として渡す。
+   * これも導出規則が SSOT で、prompt 側では言い換えを作らない。
+   */
+  hook?: string;
   unit: string;
   year: string;
   source: string;
@@ -65,6 +77,11 @@ const ARCHETYPE_GUIDE: Record<BlogArchetype, string> = {
   F: "同じ県の中の市町村差に踏み込み、財政・人口構造から真因を説明します。",
   G: "どこから来てどこへ去るかの方向性と、年齢構造・都市圏と地方の非対称性を説明します。",
 };
+
+/** 読者向けの呼び方。未指定なら正準名にフォールバックする。 */
+function readerLabelOf(m: GroundTruthMetric): string {
+  return m.readerLabel && m.readerLabel.length > 0 ? m.readerLabel : m.label;
+}
 
 function formatRows(m: GroundTruthMetric): string {
   return m.rows
@@ -127,7 +144,8 @@ ${ARCHETYPE_GUIDE[archetype]}
 
 ${metrics
   .map(
-    (m) => `## ${m.label}
+    (m) => `## ${readerLabelOf(m)}
+- 正式な統計名: ${m.label}
 - 出典: ${m.source}
 - 年: ${m.year}年
 - 単位: ${m.unit}
@@ -135,6 +153,9 @@ ${metrics
 ${formatRows(m)}`,
   )
   .join("\n\n")}
+
+本文では見出しの平易な呼び方を使ってください。正式な統計名は、定義や出典に触れる箇所
+(callout・データ出典の節) でだけ使います。両方を毎回併記する必要はありません。
 
 # 本文に必ず含めるもの
 
@@ -171,7 +192,7 @@ article.md の中身をそのまま出力してください。前置き・後書
 
 ---
 title: <17〜28文字。疑問形・逆説・倍率のいずれか 1 つだけを含めます。煽り語は使いません>
-seoTitle: "<検索向けの題。指標名を含めます>"
+seoTitle: "<検索向けの題。正式な統計名を含めます>"
 description: <50文字以上。緊張感のある一文から始め、記事が何を明らかにするかを書きます>
 slug: ${slug}
 publishedAt: 未定
@@ -179,7 +200,36 @@ published: false
 tags: []
 ---
 
-参考の題 (そのまま使わず、より良い題を考えてかまいません): ${suggestedTitle}`;
+title は読者向けの平易な呼び方で書きます。正式な統計名は seoTitle が担うので、
+title に硬い調査用語を入れる必要はありません。
+${titleSeedSection(metrics, suggestedTitle)}`;
+}
+
+/**
+ * 記事タイトルの種。
+ *
+ * サイト側が同じ指標に対して既に使っている問いかけ (hook) を渡す。同じ指標が
+ * ランキングページ・note・記事でばらばらの呼ばれ方をすると読者が同定できないので、
+ * 出発点を揃える。そのまま使わせないのは、hook は 47 都道府県の並びを問う汎用文で、
+ * 記事はその記事固有の発見を題にすべきだから。
+ */
+function titleSeedSection(
+  metrics: GroundTruthMetric[],
+  suggestedTitle: string,
+): string {
+  const hooks = metrics
+    .map((m) => m.hook)
+    .filter((hook): hook is string => typeof hook === "string" && hook.length > 0);
+
+  const lines = [
+    `\n参考の題 (そのまま使わず、より良い題を考えてかまいません): ${suggestedTitle}`,
+  ];
+  if (hooks.length > 0) {
+    lines.push(
+      `サイトがこの指標に使っている問いかけ (語彙を揃える参考にします): ${hooks.join(" / ")}`,
+    );
+  }
+  return lines.join("\n");
 }
 
 /**

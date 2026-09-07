@@ -10,15 +10,15 @@ test.describe("ブログ記事詳細ページ", () => {
     // 一覧ページから最初の記事へ遷移
     await page.goto("/blog", { waitUntil: "domcontentloaded" });
 
-    const firstArticle = page.locator(
-      "main a[href^='/blog/']:not([href='/blog/tags'])"
-    ).first();
+    const firstArticle = page
+      .locator("main a[href^='/blog/']")
+      .filter({ has: page.locator("h2") })
+      .first();
     await expect(firstArticle).toBeVisible({ timeout: 10000 });
 
     const href = await firstArticle.getAttribute("href");
-    if (href) {
-      await page.goto(href, { waitUntil: "domcontentloaded" });
-    }
+    expect(href).toMatch(/^\/blog\/[^/]+$/);
+    await page.goto(href!, { waitUntil: "domcontentloaded" });
   });
 
   test("記事タイトルが表示される", async ({ page }) => {
@@ -28,9 +28,11 @@ test.describe("ブログ記事詳細ページ", () => {
 
   test("記事本文エリアが存在する", async ({ page }) => {
     // ArticleRenderer が出力する article 要素またはメインコンテンツ領域
-    const articleBody = page.locator(
-      "article, [class*='prose'], [class*='article'], [class*='Article']"
-    ).first();
+    const articleBody = page
+      .locator(
+        "article, [class*='prose'], [class*='article'], [class*='Article']"
+      )
+      .first();
 
     await expect(articleBody).toBeVisible({ timeout: 10000 });
   });

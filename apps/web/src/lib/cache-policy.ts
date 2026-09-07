@@ -41,8 +41,11 @@ export const DOWNLOAD_DATA_CACHE_HEADERS = {
   "Cache-Tag": DATA_CACHE_TAG,
 } as const;
 
+/** RSC 応答の Content-Type (`next/dist/client/components/app-router-headers` の RSC_CONTENT_TYPE_HEADER)。 */
+export const RSC_CONTENT_TYPE = "text/x-component";
+
 const HTML_VARY = "Accept-Encoding";
-const RSC_VARY = [
+export const RSC_VARY = [
   "RSC",
   "Next-Router-State-Tree",
   "Next-Router-Prefetch",
@@ -51,11 +54,30 @@ const RSC_VARY = [
   "Accept-Encoding",
 ].join(", ");
 
-const RSC_REQUEST_HEADERS = [
+/**
+ * Next.js が **middleware 実行前に request から削除する** flight ヘッダー。
+ *
+ * `next/dist/server/web/adapter.js` が `NextRequest` を組み立てる直前に
+ * `FLIGHT_HEADERS` を `requestHeaders.delete()` する (`if (!isEdgeRendering)`)。
+ * そのため middleware の `req.headers` に rsc / next-router-* は **存在しない**。
+ * `next-url` は `FLIGHT_HEADERS` に含まれないので middleware でも読める。
+ *
+ * → RSC 判定の権威は **Worker gateway (raw request)** に置く。middleware 側の
+ *   判定は `next-url` / authorization / cookie / method しか当てにできない。
+ *   最終的な応答契約は `enforcePageCacheBypass` が gateway で保証する。
+ *
+ * 正典: Next.js 15.5.24 `dist/client/components/app-router-headers.js` の FLIGHT_HEADERS。
+ */
+export const NEXT_FLIGHT_REQUEST_HEADERS = [
   "rsc",
   "next-router-state-tree",
   "next-router-prefetch",
+  "next-hmr-refresh",
   "next-router-segment-prefetch",
+] as const;
+
+const RSC_REQUEST_HEADERS = [
+  ...NEXT_FLIGHT_REQUEST_HEADERS,
   "next-url",
   "x-nextjs-data",
 ] as const;
@@ -127,4 +149,45 @@ export function resolvePageCacheHeaders(
     vary: HTML_VARY,
     cacheTag: pathTag ? `${PAGE_CACHE_TAG},${pathTag}` : PAGE_CACHE_TAG,
   };
+}
+
+/** 応答本体が RSC (flight) payload か。Content-Type だけで決まる。 */
+export function isFlightResponse(response: Pick<Response, "headers">): boolean {
+  const contentType = response.headers.get("content-type");
+  return contentType !== null && contentType.toLowerCase().startsWith(RSC_CONTENT_TYPE);
+}
+
+/**
+ * 共有キャッシュ指示の最終ゲート。**Worker gateway (raw request) だけが呼ぶ。**
+ *
+ * middleware は Next.js に flight ヘッダーを剥がされた request しか見られないため
+ * (`NEXT_FLIGHT_REQUEST_HEADERS`)、RSC 応答へ HTML 用の
+ * `Cloudflare-CDN-Cache-Control` / `Cache-Tag` を付けてしまう。Cloudflare の
+ * edge cache key は RSC ヘッダーで分岐しないので、その指示が効くと
+ * 1 人分の RSC payload が別の利用者・別 route state へ配られ得る。
+ *
+ * 判定は 2 系統の OR で、どちらか片方が壊れても共有されない:
+ * - request 側: raw header に flight ヘッダーがある (gateway でのみ観測可能)
+ * - response 側: Content-Type が `text/x-component` (要求経路に依存しない)
+ */
+export function enforcePageCacheBypass(
+  request: CachePolicyRequest,
+  response: Response,
+): Response {
+  // 1xx は Response コンストラクタが受け付けない (複製できない)。
+  if (response.status < 200) return response;
+  if (!isRscRequest(request.headers) && !isFlightResponse(response)) return response;
+
+  const alreadyPrivate =
+    response.headers.get("cache-control") === PRIVATE_PAGE_CACHE_CONTROL &&
+    !response.headers.has("cloudflare-cdn-cache-control") &&
+    !response.headers.has("cache-tag");
+  if (alreadyPrivate) return response;
+
+  const corrected = new Response(response.body, response);
+  corrected.headers.set("Cache-Control", PRIVATE_PAGE_CACHE_CONTROL);
+  corrected.headers.set("Vary", RSC_VARY);
+  corrected.headers.delete("Cloudflare-CDN-Cache-Control");
+  corrected.headers.delete("Cache-Tag");
+  return corrected;
 }

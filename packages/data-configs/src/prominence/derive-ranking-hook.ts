@@ -63,14 +63,37 @@ function deriveParticipationReaderCopy(title: string): ParticipationReaderCopy |
 }
 
 /**
+ * 家計調査の「〜消費支出額」を「〜への支出」へ置き換える。
+ *
+ * 家計調査が観測しているのは**支出した金額**であって、買った回数でも好みでもない。
+ * 「よく買う」「好きな」のような行動・嗜好への言い換えは観測範囲を超えるので使わない。
+ *
+ * 品目名を持たない「消費支出」「消費支出総額」は末尾一致しないので、この規則には乗らない
+ * (実測 2026-09-07: 末尾一致 502 件はすべて `<品目>消費支出額` の形)。
+ */
+const EXPENDITURE_SUFFIX = "消費支出額";
+
+function deriveExpenditureReaderLabel(normalizedTitle: string): string | null {
+  if (!normalizedTitle.endsWith(EXPENDITURE_SUFFIX)) return null;
+  const item = normalizedTitle.slice(0, -EXPENDITURE_SUFFIX.length);
+  // 「消費支出額」だけの title を「への支出」にしない (現状 0 件だが規則としては塞ぐ)
+  if (item.length === 0) return null;
+  return `${item}への支出`;
+}
+
+/**
  * 正準な統計名から、カード・記事・チャートで使える平易な名詞句を導出する。
  * 専用規則がない指標は正準名を維持し、意味を推測して言い換えない。
+ *
+ * 家族規則を足す場所はここ 1 箇所。hook (`deriveRankingHook`) はこの結果を主語に使うので、
+ * 平易化を 1 回書けば表示名と問いかけの両方に効く。
  */
 export function deriveRankingReaderLabel(title: string): string {
-  return (
-    deriveParticipationReaderCopy(title)?.readerLabel ??
-    normalizeTitleForHook(title)
-  );
+  const participation = deriveParticipationReaderCopy(title);
+  if (participation) return participation.readerLabel;
+
+  const normalized = normalizeTitleForHook(title);
+  return deriveExpenditureReaderLabel(normalized) ?? normalized;
 }
 
 /**
@@ -183,6 +206,11 @@ export function resolveHookAdjective({ title, unit }: RankingHookInput): HookAdj
 /**
  * 問いかけコピーを導出する。override は適用しない (それは `resolveRankingHook` の役目)。
  *
+ * 主語は正準名ではなく `deriveRankingReaderLabel` の結果を使う。表示名と問いかけで
+ * 別々に平易化規則を持つと必ずドリフトするので、平易化は readerLabel 側に一本化する。
+ * 述語は正準名と unit から決める (`TITLE_SUFFIX_ADJECTIVES` の 23 パターンは正準名の
+ * 末尾語に合わせて調整済みで、平易化後の語形で引き直すと判定が変わってしまう)。
+ *
  * 語尾は既存の手書き hook に合わせて「県は？」とする (「都道府県は？」ではない)。
  * 8〜28 文字という既存の hook 長制約に収めるためでもある。
  */
@@ -190,7 +218,7 @@ export function deriveRankingHook(input: RankingHookInput): string {
   const participationCopy = deriveParticipationReaderCopy(input.title);
   if (participationCopy) return participationCopy.hook;
 
-  const title = normalizeTitleForHook(input.title);
+  const subject = deriveRankingReaderLabel(input.title);
   const adjective = resolveHookAdjective(input);
-  return `${title}が最も${adjective}県は？`;
+  return `${subject}が最も${adjective}県は？`;
 }

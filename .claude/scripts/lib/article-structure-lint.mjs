@@ -5,7 +5,9 @@
  * audit-published-blog.mjs (公開済み棚卸し) で共有する。実装をここ 1 箇所に集約し、
  * 各スクリプトに同種チェックのコピーを持たせない (ドリフト防止)。
  *
- * 検査対象: /ranking/ への <source-link> カードの配置。
+ * 検査対象:
+ *   - callout の連続配置
+ *   - /ranking/ への <source-link> カードの配置
  * カードは「そのセクションの主題データへ深掘りする 1 枚」であってリンク集ではない。
  * 束ねて並べるとどのカードがどの図に対応するか文脈が失われ、読者には無関係なリンクの
  * 羅列に見える (2026-07-24 に /blog/black-tea-income-gap で実際に報告された)。
@@ -40,6 +42,146 @@ const METRICS_DIR = path.resolve(
 function stripFrontmatter(md) {
   const m = md.match(/^---\n[\s\S]*?\n---\n?/);
   return m ? md.slice(m[0].length) : md;
+}
+
+const CALLOUT_MARKER_RE = /^\s*>\s*\[!(NOTE|TIP|WARNING|IMPORTANT|CAUTION)\](?:\s+.*)?\s*$/i;
+const FENCE_RE = /^\s*(?:>\s*)?(`{3,}|~{3,})/;
+const CALLOUT_PRIORITY = { TIP: 1, NOTE: 2, IMPORTANT: 3, WARNING: 4, CAUTION: 5 };
+const CALLOUT_INLINE_LABELS = {
+  NOTE: "補足",
+  TIP: "読み解きのポイント",
+  WARNING: "注意",
+  IMPORTANT: "重要",
+  CAUTION: "要注意",
+};
+
+function findCalloutMarkers(lines) {
+  const markers = [];
+  let fenceChar = null;
+  for (let i = 0; i < lines.length; i++) {
+    const fence = lines[i].match(FENCE_RE);
+    if (fence) {
+      const char = fence[1][0];
+      if (fenceChar === null) fenceChar = char;
+      else if (fenceChar === char) fenceChar = null;
+      continue;
+    }
+    if (fenceChar !== null) continue;
+
+    const marker = lines[i].match(CALLOUT_MARKER_RE);
+    if (marker) markers.push({ index: i, line: i + 1, type: marker[1].toUpperCase() });
+  }
+  return markers;
+}
+
+function findConsecutiveCalloutClusters(lines, markers) {
+  const clusters = [];
+  let run = markers.length > 0 ? [markers[0]] : [];
+  for (let i = 1; i < markers.length; i++) {
+    const previous = markers[i - 1];
+    const current = markers[i];
+    const between = lines.slice(previous.index + 1, current.index);
+    const hasSeparatingContent = between.some(
+      (line) => line.trim() !== "" && !/^\s*>/.test(line),
+    );
+
+    if (hasSeparatingContent) {
+      if (run.length >= 2) clusters.push(run);
+      run = [current];
+    } else {
+      run.push(current);
+    }
+  }
+  if (run.length >= 2) clusters.push(run);
+  return clusters;
+}
+
+/**
+ * 通常本文・見出し・図表を挟まずに callout が続く箇所を lint する。
+ * callout 本文の引用行と空行だけは「間に本文がある」と数えない。
+ * fenced code 内の記法例は検査対象外。
+ *
+ * @param {string} md - article.md 全文 (frontmatter 含む)
+ * @returns {{ blockers: string[], warnings: string[], stats: object }}
+ */
+export function lintConsecutiveCallouts(md) {
+  const body = stripFrontmatter(md).replace(/\r\n/g, "\n");
+  const lines = body.split("\n");
+  const markers = findCalloutMarkers(lines);
+  const clusters = findConsecutiveCalloutClusters(lines, markers);
+
+  const pairCount = clusters.reduce((sum, cluster) => sum + cluster.length - 1, 0);
+  const maxConsecutive = clusters.reduce((max, cluster) => Math.max(max, cluster.length), 1);
+  const blockers = [];
+  if (clusters.length > 0) {
+    const samples = clusters
+      .slice(0, 3)
+      .map((cluster) => `L${cluster[0].line} ${cluster.map((item) => item.type).join("→")}`)
+      .join(", ");
+    blockers.push(
+      `[adjacent-callouts] callout が通常本文・見出し・図表を挟まず連続している ` +
+        `(${clusters.length} 箇所・${pairCount} 組・最大 ${maxConsecutive} 個連続: ${samples})` +
+        ` — 最も重要な注意だけ callout に残し、分析・読み方・補足は通常本文へ戻すか、対応する節へ分散する`,
+    );
+  }
+
+  return {
+    blockers,
+    warnings: [],
+    stats: {
+      calloutCount: markers.length,
+      adjacentCalloutClusters: clusters.length,
+      adjacentCalloutPairs: pairCount,
+      maxConsecutiveCallouts: markers.length === 0 ? 0 : maxConsecutive,
+      adjacentCalloutLocations: clusters.map((cluster) => ({
+        line: cluster[0].line,
+        types: cluster.map((item) => item.type),
+      })),
+    },
+  };
+}
+
+/**
+ * 連続 callout のうち最も重要な1つだけを残し、他をラベル付き通常本文へ戻す。
+ * 文言・リンク・数値は変更しない。
+ *
+ * @param {string} md - article.md 全文
+ * @returns {string}
+ */
+export function normalizeConsecutiveCallouts(md) {
+  const newline = md.includes("\r\n") ? "\r\n" : "\n";
+  const lines = md.replace(/\r\n/g, "\n").split("\n");
+  const markers = findCalloutMarkers(lines);
+  const clusters = findConsecutiveCalloutClusters(lines, markers);
+  if (clusters.length === 0) return md;
+
+  const demoted = new Map();
+  for (const cluster of clusters) {
+    const keeper = cluster.reduce((best, marker) =>
+      CALLOUT_PRIORITY[marker.type] > CALLOUT_PRIORITY[best.type] ? marker : best,
+    );
+    for (const marker of cluster) {
+      if (marker !== keeper) demoted.set(marker.index, marker.type);
+    }
+  }
+
+  const output = [];
+  for (let i = 0; i < lines.length; i++) {
+    const type = demoted.get(i);
+    if (!type) {
+      output.push(lines[i]);
+      continue;
+    }
+
+    const bodyLines = [];
+    for (i = i + 1; i < lines.length && /^\s*>/.test(lines[i]); i++) {
+      bodyLines.push(lines[i].replace(/^\s*>\s?/, ""));
+    }
+    i--;
+    const label = CALLOUT_INLINE_LABELS[type] ?? "補足";
+    output.push(`**${label}:** ${bodyLines.join("\n")}`);
+  }
+  return output.join(newline);
 }
 
 /**

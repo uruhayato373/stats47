@@ -14,58 +14,47 @@ status: active
 
 | ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
-| PERF-RANKING-LCP-02 | デプロイ済 2026-08-05。先頭tileが本番で`fetchpriority=high`かつmedia無しを確認。日次PSIのafterで before LCP 9,347ms (mobile) からの改善を判定する | effect/pending | 2026-08-12 | claude | performance |
-| PERF-RANKING-PAYLOAD-01 | sidebarはデプロイ済(4%減)。TopoJSON簡略化は**maxZoom14と両立せず棄却**(150KB案はz14で県境が300px超ずれる)。代わりにtopologyをRSC payloadから外し`/prefecture.topojson`のclient fetchへ変更(精度劣化なし・理論82%減)。デプロイ後にHTML実測で50%達成を判定する | effect/pending | 2026-08-19 | claude | performance |
-| PERF-AREA-DOM-01 | デプロイ済 2026-08-05。rail上限12/navを本番で確認。PSI collectorに`dom_size`を追加済(2026-08-06のcronが初回実データ)。**残: 実データでDOM 9,101比70%削減を判定**。beforeはChrome DevTools計測なので収集経路差を明示して読む | effect/pending | 2026-08-12 | claude | performance |
-| PERF-WORKERS-CACHE-01 | 2026-08-16デプロイ済。HTMLのMISS→HIT、RSC/認証のno-store分離、home warm TTFB 924ms→15ms、LCP 1,290ms→901msを本番labで確認。**★purge実走で問題を実測 (2026-08-17)**: KSJ是正の公開で`/ranking/nuclear-power-plant-count`のHTMLを更新したが、`purge-cache.ts --urls`(zone purge・API success)を2回、`--files`(R2キー)、CIの`purge-worker-cache.ts --all`(sync-snapshots run 31996468008・成功)をすべて通しても**同一エントリがHITのまま残りageが2090→2740と伸び続けた**。originは`?cb=`で正しい内容を返すのでレンダリングは正常。**purgeが成功を返しながらHTML edgeエントリを落とせていない**。**★実害の再測 (2026-08-17 06:50)**: 同エントリはage 7,395 (約2時間) でHITのままだが、cache-bustした応答とHTMLをbyte比較すると**差分は`?cb=`のecho分のみで内容は同一** (京都府=0・福井県=4の是正後データ)。entryがR2是正**後**に作られたため、このページで「古いHTMLが出た」事実は無い。前段の「最大24h古いHTMLが出る」はeviction不能から導いた推論で、実害としては未実証。**切り分けが1つ進んだ**: 応答headerは`cache-control: public, max-age=0, must-revalidate`なのにedgeが2時間HITで保持している = edge TTLは応答headerではなく**Cloudflare側のCache Rule**が決めている (storage.stats47.jpのmax-age=14400と同構造)。残る切り分けはWorkers CacheとCDN edgeのどちらが保持しているか。**残: 上記の切り分けと、2026-08-23以降に日次PSI 7点で回帰なしを判定**（guard: insufficient-sample / insufficient-target） | effect/pending | 2026-08-24 | claude | performance |
-| PERF-WORKER-P99-01 | Workers traces / GraphQLでCPU p99 1.48〜2.02秒・wall p99 3.80〜4.61秒の支配route / R2 bindingを特定してから対象routeだけを修正する | pending | 2026-08-19 | claude | performance |
-| AFF-BRAND-FIT-01 | health 軸のブランド不適合広告を停止し、`精力`・`マカ`を blocklist に追加するか判断する。公的統計サイトの信頼を優先する。**2026-09-03: 暫定で精力サプリ 3 件 (banner 2 + text 1) を priority 1 に下げ上位 3 枠から外した (R2 反映済)。停止・blocklist 化は未判断** | pending | 2026-08-05 | uruhayato373 | affiliate |
+| PERF-WORKER-P99-01 | Workers traces / GraphQLでCPU p99 1.48〜2.02秒・wall p99 3.80〜4.61秒の支配route / R2 bindingを特定してから対象routeだけを修正する。**2026-09-07: cloudflare-graphql/observability MCPが未認証で調査継続不能 (システムから利用不可と明示された)**。オーナーが `claude mcp` または `/mcp` で認証後に再開する | pending | 2026-09-21 | uruhayato373 | performance |
+| AFF-BRAND-FIT-01 | health 軸のブランド不適合広告を停止し、`精力`・`マカ`を blocklist に追加するか判断する。公的統計サイトの信頼を優先する。2026-09-03に精力サプリ3件を priority 1 に暫定降格済み。**2026-09-07: 停止・blocklist化の最終判断が未了のままDue超過。オーナー判断待ち** | pending | 2026-09-21 | uruhayato373 | affiliate |
 | AFF-RESOLUTION-EFFECT-01 | 広告の意図軸を「出典調査 → タグ → カテゴリ」に統一 (#913)。**baseline (GA4 28 日 〜2026-08-28)**: 23,771 imp / 11 click / CTR 0.046%、furusato 1,307 imp 0 click、economy 8,329 imp 3 click。試算の行き先: ranking economy 35,613→6,746・furusato 2,904→31,465 imp/週。[target: furusato imp +20,000/28日、全体 CTR ≥ 0.10%]。デプロイ (backlog `AFF-DEPLOY-RESOLUTION-01`) 後 4 週で `fetch-affiliate-ga4.cjs 28` を vertical 別に before/after。同時デプロイの `AFF-IMPRESSION-ROUTING-01` と窓が重なるので position 別に分けて読む (guard: confounded) | pending | 2026-10-08 | claude | affiliate |
-| R2-STORAGE-01 | stats47診断とsiteScope別alertは完了。残るaccount 22.20GB超過はdoboku-note-archive 8.98GBの保持方針を決め、許容または削減を選ぶ。stats47の削除候補22.7MBだけでは解消しない | pending | 2026-08-31 | uruhayato373 | cloudflare-cost |
-| DATA-ESTAT-FETCH-01 | `DATA_INF` 系で取得失敗している25 metricのconfigを一次統計メタと照合し、修正または一時非公開にする | pending | 2026-08-24 | claude | data-quality |
-| DATA-MANUAL-RESTORE-01 | 手動抽出12 metricをprovenance付きで再取得し、values欠損を解消する | pending | 2026-08-24 | claude | data-quality |
-| SEARCH-GROWTH-CYCLE-01 | finalized 7日でKPI判定、rolling 28日で候補発見、週1〜2件採択、14/28/56日判定を4週連続で運用する | pending | 2026-08-31 | claude | gsc |
-| COVERAGE-LOOP-01 | W36（2026-09-04）の最新UI exportを取込済み（入力週齢1）。W32比で404 8,110→12,367、soft404 407→450、5xx 49→18、crawled-not-indexed 3,352→2,697。全3,147 URLを実測し、789件は現在200、5件の市区町村カテゴリsoft404は未デプロイの301で解消予定。デプロイ後に市区町村5→0と全体差分を追跡する | effect/pending | 2026-09-14 | claude | gsc |
+| R2-STORAGE-01 | **2026-09-07実測**: `.claude/state/metrics/cloudflare/history.csv` の r2_storage_gb は 08-22 22.2GB → 09-04 31.8GB (スパイク) → 09-05 23.1GB と乱高下しながら無料枠 (10GB) を超過継続。doboku-note-archive 8.98GBの保持方針 (許容 or 削減) がオーナー判断待ちで未決のまま | pending | 2026-09-21 | uruhayato373 | cloudflare-cost |
+| DATA-ESTAT-FETCH-01 | `DATA_INF` 系で取得失敗している25 metricのconfigを一次統計メタと照合し、修正または一時非公開にする。**2026-09-07: weekly-review 2026-W35 で「25件の処置決定なし」と確認 (未着手のまま2週目)**。W37 Mustへ再掲し実行する | pending | 2026-09-21 | claude | data-quality |
+| DATA-MANUAL-RESTORE-01 | 手動抽出12 metricをprovenance付きで再取得し、values欠損を解消する。**2026-09-07: weekly-review 2026-W34/W35 で2週連続「未着手・ready/blocked判定0件」と確認**。W37 Mustへ再掲し実行する | pending | 2026-09-21 | claude | data-quality |
+| SEARCH-GROWTH-CYCLE-01 | finalized 7日でKPI判定、rolling 28日で候補発見、週1〜2件採択、14/28/56日判定を4週連続で運用する。**2026-09-07実測**: 基盤は稼働 (manifests W30-W37・candidates 1,060件・sources全fresh) だが採択が `approved 1件 / dismissed 1件` のみで週1〜2件の採択サイクルが開始できていない (monthly.md 09-06記載の「候補3件が承認待ち」から進捗なし)。オーナー承認 → 週次採択の運用開始が次アクション | pending | 2026-09-21 | claude | gsc |
+| COVERAGE-LOOP-01 | 2026-09-07にPR #939でデプロイ済み。W36（2026-09-04）の最新UI exportは404 12,367 / soft404 450 / 5xx 18 / crawled-not-indexed 2,697。全3,147 URLを実測し、旧市区町村カテゴリsoft404 5件は本番で全件301、親プロフィール200、未知カテゴリ410、sitemap掲載0件を確認した。次回exportで市区町村5→0と全体差分を判定する | effect/pending | 2026-09-14 | claude | gsc |
 | ADSENSE-PAUSE-01 | 2026-08-16オーナー判断。AdSenseのscript・Auto ads・手動枠・fallback・空枠を全停止するコードは実装済、未デプロイ。デプロイ後28日で減収、CWV、engagement、affiliate CTR、商品導線を比較し、再開可否を人が判断する | in-progress | 2026-09-14 | claude | adsense |
-| AFF-IMPRESSION-ROUTING-01 | AdSense停止中のranking/area空き位置へ既存の文脈一致バナーを配線。baselineは4,299 imp / 6,055 PV = 0.710 imp/PV。コード実装済・未デプロイ。デプロイ後14日で重複しない期間のimp/PV、placement別CTR、engagementを比較する | in-progress | 2026-08-31 | claude | affiliate |
+| AFF-IMPRESSION-ROUTING-01 | AdSense停止中のranking/area空き位置へ既存の文脈一致バナーを配線。baselineは4,299 imp / 6,055 PV = 0.710 imp/PV。**2026-09-07確認: 依然未デプロイ** (`.claude/state/ads/ga4-affiliate-*.json` の最新は08-28のまま10日間更新なし = ADSENSE-PAUSE-01同様デプロイ承認待ち)。デプロイ後14日で重複しない期間のimp/PV、placement別CTR、engagementを比較する | in-progress | 2026-09-21 | claude | affiliate |
 
 ## Tier 2 (P2)
 
 | ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
-| A11Y-AREA-CONTRAST-01 | デプロイ済 2026-08-05。本番HTMLで生hex消滅・`text-blue-700`/`dark:text-blue-400`・男女ラベルを確認、contrast実測6.70/6.04/5.83/5.60。**残: 日次PSIのaccessibilityスコア** (before 97) でcontrast違反0を確認する | effect/pending | 2026-08-19 | claude | accessibility |
-| RANKING-REINDEX-01 | 復帰56 rankingが5週連続 GSC imp 0 (RANKING-GONE-RESTORE-01 を effect/none で確定・2026-08-05)。URL Inspection で coverageState を確定し、未収録なら sitemap 再送信で再収録を促す | pending | 2026-08-19 | claude | gsc |
-| BLOG-WAVE-2026-07-09-MANUAL | `farmland-crisis-abandoned-land` の4週後GSC効果を判定する | effect/pending | 2026-08-06 | claude | gsc |
-| RANKING-CTR-01 | 高表示・低CTR 13件の公開状態と baseline を確定し、2〜4週後に対象群だけを比較する | effect/pending | 2026-08-08 | claude | gsc |
-| BLOG-SEO-TYPES-01 | D2/F/Gを含む記事型ポートフォリオの4週効果を既存A型と比較する。**F/G型は公開0件で比較不成立**。07-10コホートは約21日で4週未到達 (A型n=5 median clicks 2 / D2型n=30 median 0.5) | effect/pending | 2026-08-16 | claude | gsc |
-| BLOG-SEO-QUEUE-01 | topic queue起点の記事が需要候補を正しく選び、公開後に検索表示を得たか確認する。**queue done は1件のみ (imp 9/clicks 0) で標本過小**。前提として下記 BLOG-QUEUE-TRACK-01 の状態ずれを直す | effect/pending | 2026-08-31 | claude | gsc |
-| BLOG-QUEUE-TRACK-01 | topic-queue の status が実態とずれる。2件が in-progress のまま2026-07-06公開済。公開時に done へ遷移させ、BLOG-SEO-QUEUE-01 の判定母集団を正しくする | pending | 2026-08-19 | claude | content |
-| BLOG-SEO-PACE-01 | 月15〜20本の上限内で、需要確認済み候補だけを小バッチ公開する | pending | 2026-08-31 | claude | gsc |
-| RANKING-KEYS-SYNC-01 | 2026-08-17 の実走で検証機会が到来し、欠陥を2つ検出した。(1) 生成スクリプトの一時障害で生きたキー `bath-soap-consumption-expenditure` を KNOWN/SITEMAP から落とす差分を commit していた → `d938d04cf` で是正済 (2) PR 作成ガードが `gh pr view` を使い CLOSED の #544 を拾い続けて PR が二度と作られず、同期が本番へ一度も届いていなかった → open 限定に是正 + 機械ガード追加。**残件**: 次回実走が是正後スクリプトで正しい差分を出し、PR が実際に作られることを確認する | pending | 2026-08-25 | claude | indexing |
-| SURVEY-LINKAGE-02 | 未分類241件から、provenance辞書で確実に回収できる50 statsDataIdを追加する | pending | 2026-08-31 | claude | content |
-| TOKEN-CONTENT-01 | コンテンツ制作の品質を落とさずトークン量が減ったか実測する。実測は2026-08-03開始で blog 2 run のみ (cost $12.07 / $25.01)。**標本不足で判定不能** — 日次1runで2週=約14run揃う時点まで延期 | effect/pending | 2026-08-19 | claude | cost |
+| RANKING-REINDEX-01 | 復帰56 rankingが5週連続 GSC imp 0 (RANKING-GONE-RESTORE-01 を effect/none で確定・2026-08-05)。URL Inspection で coverageState を確定し、未収録なら sitemap 再送信で再収録を促す。**2026-09-07実測**: 日次URL Inspection履歴 (2026-08-05〜09-07の全CSV、251件のユニークrankingキーを検査済) を突合したが、復帰56キーは**1件もこれまでの日次サンプルに含まれていない** (ランダム抽出500件/日ローテーションが偶然当たっていない)。次: 56キーを明示指定した一回限りのURL Inspection実行が必要 | pending | 2026-09-21 | claude | gsc |
+| BLOG-SEO-TYPES-01 | D2/F/Gを含む記事型ポートフォリオの4週効果を既存A型と比較する。**2026-09-07実測**: topic-queue done は81件 (A:29/B:12/D2:23/F:7/G:10) に増加し、当初の「F/G公開0件で比較不成立」は解消。まだ4週齢に満たない記事が大半のため比較は次回に延期 | effect/pending | 2026-09-28 | claude | gsc |
+| BLOG-SEO-QUEUE-01 | topic queue起点の記事が需要候補を正しく選び、公開後に検索表示を得たか確認する。**2026-09-07実測**: 前提だった BLOG-QUEUE-TRACK-01 の状態ずれは解消 (in-progress 0件)。queue doneが1件→81件に増え標本は確保できたので、次回は81件のうち公開4週以上経過した分でGSC実測を行う | effect/pending | 2026-09-28 | claude | gsc |
+| BLOG-SEO-PACE-01 | 月15〜20本の上限内で、需要確認済み候補だけを小バッチ公開する。**2026-09-07: weekly-review 2026-W35 で「超過達成 (規律違反): 公開85本」を確認** (8/28に6本・8/29に29本・8/30に50本、計画本文は「3本目は作らない」と明記)。上限運用が守られていない状態が継続しているため、strategy-advisor による月次配分の再設計と実行統制が必要 | pending | 2026-09-21 | claude | gsc |
+| SURVEY-LINKAGE-02 | 未分類241件から、provenance辞書で確実に回収できる50 statsDataIdを追加する。**2026-09-07実測**: `.claude/state/surveys/portfolio.json` (audit 2026-09-06) で unresolved 214件 (external 23 / estat-uncovered 78 / ssds-synthetic-only 113) = 241から-27件回収済 (目標50の54%)。残り23件を継続する | pending | 2026-09-21 | claude | content |
 | TOKEN-AICONTENT-01 | Claude自動生成の実測（5件run $79〜$90、生成0件run $87.31）をbaselineに、課金無効projectのGemini日次へ移行する。[target: API課金 -100%（$0）]。main反映後7 runでPASS率・preflight/quota停止・request/tokenと課金設定を照合し、品質ゲートを弱めず費用0か判定する | pending | 2026-09-07 | ranking-content-author | cost |
 | FUNNEL-CTA-01 | ranking末尾CTAのclickと遷移後行動を判定する。**判定不能 (ブロッカー: オーナー作業)** — `cta_id`/`content_id`/`target_type` のGA4カスタムディメンションが未登録 (2026-07-31 API監査で確定)。登録なしでは「遷移後行動」の内訳が取れない。Dueは登録+48h+4週で再設定する | effect/pending | 2026-09-09 | uruhayato373 | ga4 |
-| AFF-BLOG-TEXTLINK-01 | 本文内text linkとsidebarのCTRを比較し、furusato在庫欠損を別扱いで確認する | effect/pending | 2026-08-25 | claude | affiliate |
-| AFF-A8-REGISTER-01 | 追加18件のうち配信された案件をA8確定成果とCTRで4週判定する | effect/pending | 2026-08-25 | claude | affiliate |
-| AFF-SCOUT-PIPE-01 | A8 scoutの週次運用で未解決vertical、重複、cron失敗が再発しないか判定する | effect/pending | 2026-08-24 | claude | affiliate |
-| BLOG-SRCLINK-01 | source-link配置是正後のブログ→ranking回遊を判定する | effect/pending | 2026-08-24 | claude | ga4 |
-| BLOG-LINKROT-01 | 内部リンク是正後のcoverageとブログ→ranking回遊を判定する | effect/pending | 2026-08-24 | claude | gsc |
-| SITE-LINKROT-01 | 横断リンク監査の壊れ0継続と、タグ・410由来coverageの変化を判定する | effect/pending | 2026-08-24 | claude | gsc |
-| STP-MESSAGE-ROLLOUT-01 | ポジショニング文言をSNSプロフィール・OGP・サイト説明・note導線へ展開し、例外を明示する | pending | 2026-08-31 | claude | brand |
-| THEME-INTERNALNAV-01 | theme→ranking/blog遷移を既存GA4契約で計測できるようにする | pending | 2026-08-31 | claude | ga4 |
+| AFF-BLOG-TEXTLINK-01 | 本文内text linkとsidebarのCTRを比較し、furusato在庫欠損を別扱いで確認する。**2026-09-07: `.claude/state/ads/ga4-affiliate-*.json` の最新が08-28のまま10日間更新なし**で position別実測が取れない。週次cron (`affiliate-ga4-weekly.yml`) の実行状況を確認し再取得する | effect/pending | 2026-09-21 | claude | affiliate |
+| AFF-A8-REGISTER-01 | 追加18件のうち配信された案件をA8確定成果とCTRで4週判定する。**2026-09-07: affiliate-improvement log に本件の実測記録なし、GA4 snapshotも10日stale**。A8確定成果レポート (`/a8-report`) と最新GA4取得後に判定する | effect/pending | 2026-09-21 | claude | affiliate |
+| AFF-SCOUT-PIPE-01 | A8 scoutの週次運用で未解決vertical、重複、cron失敗が再発しないか判定する。**2026-09-07: `a8-catalog.json` の走査・監査記録が確認できず**、週次cronの稼働状況の裏取りが必要 | effect/pending | 2026-09-21 | claude | affiliate |
+| BLOG-SRCLINK-01 | source-link配置是正後のブログ→ranking回遊を判定する。**2026-09-07: GA4 nav_click (rail_widget/rail_slot) の該当ページ別内訳を取得できるMCP/ローカル手段が今回無く未実測**。GA4 creds保有環境で再試行する | effect/pending | 2026-09-21 | claude | ga4 |
+| BLOG-LINKROT-01 | 内部リンク是正後のcoverageとブログ→ranking回遊を判定する。**2026-09-07実測**: `.claude/state/site/link-audit.json` (2026-09-05生成) で壊れリンク6件 (410、旧key `academic-achievement-test-average-rate`等) が現存し「壊れ0」未達。`broken-link-remap.json` へ置換先を追記して是正後に再判定する | effect/pending | 2026-09-21 | claude | gsc |
+| SITE-LINKROT-01 | 横断リンク監査の壊れ0継続と、タグ・410由来coverageの変化を判定する。**2026-09-07実測**: 同上 site-wide audit で壊れ6件 (blog→ranking 410参照) を検出、「壊れ0の継続」未達。是正後に再判定する | effect/pending | 2026-09-21 | claude | gsc |
+| STP-MESSAGE-ROLLOUT-01 | ポジショニング文言をSNSプロフィール・OGP・サイト説明・note導線へ展開し、例外を明示する。**2026-09-07: 実行記録なし (backlog/weekly/monthlyのいずれにも着手痕跡なし)**。§実行手順の4ステップを次サイクルで実施する | pending | 2026-09-21 | claude | brand |
+| THEME-INTERNALNAV-01 | theme→ranking/blog遷移を既存GA4契約で計測できるようにする。**2026-09-07: analytics-event-standards.md にtheme→ranking/blog専用のnav_surface登録が未確認**。既存nav_click基盤の上に必要なsurface値を明示登録できているか確認する | pending | 2026-09-21 | claude | ga4 |
 | NOTE-CIRCULATION-PILOT-01 | 2026-09-06に高view 3記事へ次記事+マガジンの素URLカードを反映し、続けて公開222記事を全量是正（95タグ以上222/222、サイト184、関連記事180、マガジン157、live監査error/warning 0）。Japan 28日 baselineは対象着地80/86/4 sessions、遷移先note viewは取得対象の2件だけ保存（1件欠測）。2026-10-04以降に同条件で着地session・次記事view増分を比較する（guard: note内clickは直接取得不可、同一landingの複数記事混在） | effect/pending | 2026-10-04 | claude | ga4/note |
-| THEME-LOCALFINANCE-01 | local-financeの流入増とengagement低下をsource/mediumで切り分ける。**GSC 56日 clicks0/imp32 で organic起因ではない**と確定 (pv 92→183 / engagementRate 0.615→0.165、同週 site-wide は Direct sessions +55%・bounce 0.81)。ページ別 source/medium は GA4 creds 保有環境での実行が必要 | pending | 2026-08-19 | claude | ga4 |
+| THEME-LOCALFINANCE-01 | local-financeの流入増とengagement低下をsource/mediumで切り分ける。**GSC 56日 clicks0/imp32 で organic起因ではない**と確定 (pv 92→183 / engagementRate 0.615→0.165、同週 site-wide は Direct sessions +55%・bounce 0.81)。**2026-09-07: ページ別source/medium crosstabを取得できる読み取り専用手段 (seo-observability MCP の `ga4_organic_quality` はlanding engagementのみでsource/medium breakdown非対応) が今回無く未実測**。GA4 creds保有環境での実行が必要 | pending | 2026-09-21 | claude | ga4 |
 
 ## Tier 3 (P3)
 
 | ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
-| ASSET-POLICY-BURNDOWN-01 | baseline 27件は、既存画像の圧縮・重複削除・再エンコードをユーザーが承認した範囲だけ削減する | pending | 2026-08-15 | uruhayato373 | performance |
-| RANK-THIN-01 | URL Inspectionの実測が揃った時点で、観測年1年などthin metricのnoindex基準を決める | pending | 2026-08-31 | claude | indexing |
+| ASSET-POLICY-BURNDOWN-01 | baseline 27件は、既存画像の圧縮・重複削除・再エンコードをユーザーが承認した範囲だけ削減する。**2026-09-07: ユーザー承認の記録なし**。承認待ちのまま進捗0件 | pending | 2026-09-21 | uruhayato373 | performance |
+| RANK-THIN-01 | URL Inspectionの実測が揃った時点で、観測年1年などthin metricのnoindex基準を決める。**2026-09-07: 日次URL Inspection (500件/日ローテーション) は継続稼働中だが、thin metric抽出とnoindex基準の検討は未着手** | pending | 2026-09-21 | claude | indexing |
 | STP-AI-WATCH-01 | AI Overviewsによる雑学系流入の侵食を四半期で定点観測する | pending | 2026-10-07 | claude | gsc |
-| DEPS-RENOVATE-01 | Renovate App が未稼働 (renovate.json はあるが PR/ブランチが 0 件)。npm の version updates が止まり major が滞留、結果として security fix が全て破壊的変更になっている。GitHub App のインストールはオーナー操作 | pending | 2026-08-31 | uruhayato373 | security |
-| DEPS-MAJOR-SECURITY-01 | Dependabot 残 76 件は全て major 更新が必要 (critical 19 = vitest 系・全て development スコープ)。会社 PC は proxy が tarball を 407 で拒否し install/検証不能なため、ネットワーク制約のない環境で実施する | pending | 2026-08-31 | claude | security |
+| DEPS-RENOVATE-01 | Renovate App が未稼働 (renovate.json はあるが PR/ブランチが 0 件)。GitHub App のインストールはオーナー操作。**2026-09-07実測**: `gh pr list --search "author:app/renovate"` = 0件で未稼働のまま継続。ただし DEPS-MAJOR-SECURITY-01 は別経路 (Dependabot security alerts) で解消済のため緊急度は当初より低い | pending | 2026-09-21 | uruhayato373 | security |
 
 ## 実行手順（レビュー文書から移行）
 

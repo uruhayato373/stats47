@@ -141,12 +141,20 @@ async function buildForKey(key, outBaseName, fullName) {
 
   const unit = item.unit || sorted[0]?.unit || "";
   const title = item.title || item.rankingName || key;
+  // 読者向けコピー。正典は metric config → 導出規則 (packages/data-configs/src/prominence)
+  // → builder が item.json へ焼き込む。ここでは読むだけで、独自の言い換えはしない。
+  // 本文・記事タイトル・alt に使う。**label と SVG title は正準名のまま**にする
+  // (factual-check の指標同定と、図に出す出典との照合が正準名を前提にしている)。
+  const readerLabel = item.readerLabel || title;
+  const hook = item.hook || "";
   const year = partition.yearCode;
   const payload = {
     // カード見出しは簡潔に（指標名）。年はサブタイトルへ分離し、横長/縦長とも見切れにくくする。
     title,
     subtitle: `${year}年`,
     label: title,
+    readerLabel,
+    ...(hook ? { hook } : {}),
     unit,
     year,
     rankingKey: key,
@@ -173,6 +181,7 @@ async function buildForKey(key, outBaseName, fullName) {
     year,
     unit,
     label: title,
+    readerLabel,
     transform: "all47 (svg-builder が上位5+下位5を抽出)",
     source: `r2:app/ranking/${key}/values.json`,
     upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
@@ -197,6 +206,8 @@ async function buildForKey(key, outBaseName, fullName) {
       title,
       subtitle: `${year}年`,
       label: title,
+      readerLabel,
+      ...(hook ? { hook } : {}),
       unit,
       year,
       rankingKey: key,
@@ -220,7 +231,7 @@ async function buildForKey(key, outBaseName, fullName) {
   }
 
   const ratio = (data[0].value / data[data.length - 1].value).toFixed(1);
-  return { key, year, unit, title, count: data.length, file: path.relative(PROJECT_ROOT, outPath), mapFile, data, ratio };
+  return { key, year, unit, title, readerLabel, hook, count: data.length, file: path.relative(PROJECT_ROOT, outPath), mapFile, data, ratio };
 }
 
 // ---------- digest (リライト agent のグラウンドトゥルース) ----------
@@ -239,6 +250,9 @@ function writeDigest(results) {
     const lines = d.map((x) => `${x.rank}. ${x.areaName}(${x.areaCode}) ${x.value.toLocaleString()}${r.unit} [${REGION[x.areaName] || "?"}]`);
     return [
       `RANKING KEY: ${r.key}  (${r.title})`,
+      ...(r.readerLabel && r.readerLabel !== r.title
+        ? [`読者向けの呼び方: ${r.readerLabel}${r.hook ? `  問い: ${r.hook}` : ""}`]
+        : []),
       `年: ${r.year}  単位: ${r.unit}`,
       `1位: ${max.areaName} ${max.value.toLocaleString()}${r.unit} / ${d.length}位: ${min.areaName} ${min.value.toLocaleString()}${r.unit} / 比 ${r.ratio}倍`,
       `TOP10 地域分布: ${reg(d.slice(0, 10))}`,

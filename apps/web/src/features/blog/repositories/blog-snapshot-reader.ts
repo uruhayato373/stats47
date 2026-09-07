@@ -2,6 +2,7 @@ import 'server-only';
 
 import { createSnapshotReader } from '@stats47/r2-storage/server';
 
+import { POPULAR_BLOG_ARTICLE_SLUGS } from '../config/popular-articles';
 import {
   BLOG_SNAPSHOT_KEY,
   parseBlogSnapshot,
@@ -211,6 +212,8 @@ export async function readBlogSnapshotMetaFromR2(): Promise<{
 
 export interface BlogIndexPageResult {
   articles: Article[];
+  /** 計測済み slug 順の人気記事。欠落時は新着記事で 3 件まで補完する。 */
+  popularArticles: Article[];
   meta: { tagMeta: SnapshotTagMeta[]; generatedAt: string };
   /** 次ページが存在するか (総件数は数えない) */
   hasNextPage: boolean;
@@ -235,9 +238,26 @@ export async function readBlogIndexPageFromR2(
     .filter((a) => a.published === true)
     .sort(compareByPublishedAtDesc);
   const window = published.slice(offset, offset + pageSize + 1);
+  const bySlug = new Map(published.map((article) => [article.slug, article]));
+  const popularRows: SnapshotArticle[] = [];
+  const selectedSlugs = new Set<string>();
+
+  for (const slug of POPULAR_BLOG_ARTICLE_SLUGS) {
+    const article = bySlug.get(slug);
+    if (!article) continue;
+    popularRows.push(article);
+    selectedSlugs.add(slug);
+  }
+  for (const article of published) {
+    if (popularRows.length >= 3) break;
+    if (selectedSlugs.has(article.slug)) continue;
+    popularRows.push(article);
+    selectedSlugs.add(article.slug);
+  }
 
   return {
     articles: window.slice(0, pageSize).map(toArticle),
+    popularArticles: popularRows.slice(0, 3).map(toArticle),
     meta: { tagMeta: snapshot.tagMeta, generatedAt: snapshot.generatedAt },
     hasNextPage: window.length > pageSize,
   };

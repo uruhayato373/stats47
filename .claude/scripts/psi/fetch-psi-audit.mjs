@@ -102,21 +102,41 @@ function extractLayoutShiftContributors(audits) {
 }
 
 /**
- * Lighthouse の `dom-size` から DOM 規模を取り出す。
+ * Lighthouse の DOM 規模 audit から DOM 規模を取り出す。
  *
  * 2026-08-05 の性能改修 (PERF-AREA-DOM-01) で、完了条件が「DOM 9,101 から 70% 削減」
  * だったにもかかわらず **どの自動パイプラインもこの値を保存していなかった**。
- * PSI は毎回 dom-size を計算しているので、保存するだけで以後は cron で裏取りできる。
+ * PSI は毎回 DOM 規模を計算しているので、保存するだけで以後は cron で裏取りできる。
  *
  * `max_child_elements` も取る。単一 nav に子要素が 873 個ある、といった
  * 「一箇所に集中した肥大」は total だけでは見えないため。
  *
- * 総数は locale 非依存の `numericValue` を第一候補にする。depth / child は
- * `statistic` の英語表記に依存するので、将来 PSI に locale を渡すようになったら
- * null へ縮退する (誤った数値を返すよりよい)。現在 fetchPsi は locale を渡していない。
+ * ★2026-09-07 の是正: audit id を `dom-size` 固定にしていたため、実データでは
+ * **2026-08-05 の導入時から一度も値が入っていなかった** (37 batch すべてで dom_size:null)。
+ * PSI は Lighthouse を insights モードで動かしており、そこでは監査 id が
+ * `dom-size-insight` に変わっている。旧 `dom-size` は upstream から削除済み
+ * (`core/audits/dom-size.js` は 404 / `core/audits/insights/dom-size-insight.js` が現行。
+ * GoogleChrome/lighthouse main、2026-09-07 アクセス)。同じファイルの
+ * extractLcpElement / extractLayoutShiftContributors は insight 版への
+ * fallback を持っていたが、この関数だけ持っていなかった。
+ *
+ * 統計ラベルも世代で変わる。insight 版は "Total elements" / "DOM depth" /
+ * "Most children" で、旧版の "Total DOM Elements" / "Maximum DOM Depth" /
+ * "Maximum Child Elements" とは別表記 (trace_engine の DOMSize UIStrings。
+ * ChromeDevTools/devtools-frontend main と @paulirish/trace_engine で一致。同日アクセス)。
+ * よって旧表記だけに一致させると、id を直しても total が取れなくなる。
+ *
+ * 総数は locale 非依存の `numericValue` を第一候補にする (insight 版も
+ * `numericValue: totalElements` を返す)。depth / child は `statistic` の英語表記に
+ * 依存するので、将来 PSI に locale を渡すようになったら null へ縮退する
+ * (誤った数値を返すよりよい)。現在 fetchPsi は locale を渡していない。
  */
+
+/** 新しい順。PSI の Lighthouse 世代が変わっても取り落とさないため両方見る。 */
+const DOM_SIZE_AUDIT_IDS = ["dom-size-insight", "dom-size"];
+
 export function extractDomSize(audits) {
-  const audit = audits?.["dom-size"];
+  const audit = DOM_SIZE_AUDIT_IDS.map((id) => audits?.[id]).find(Boolean);
   if (!audit) return null;
 
   // value は Lighthouse のバージョンで数値と {type:"numeric", value} の両方がありうる
@@ -126,18 +146,29 @@ export function extractDomSize(audits) {
     return null;
   };
   const items = audit.details?.items || [];
-  const byStatistic = (keyword) => {
-    const item = items.find((i) =>
-      String(i?.statistic || "").toLowerCase().includes(keyword),
-    );
+  const byStatistic = (...keywords) => {
+    const item = items.find((i) => {
+      const statistic = String(i?.statistic || "").toLowerCase();
+      return keywords.some((keyword) => statistic.includes(keyword));
+    });
     return item ? toNumber(item.value) : null;
   };
 
-  return {
-    total_elements: toNumber(audit.numericValue) ?? byStatistic("total dom"),
+  const domSize = {
+    // "Total DOM Elements" (旧) / "Total elements" (insight)
+    total_elements:
+      toNumber(audit.numericValue) ?? byStatistic("total dom", "total element"),
+    // "Maximum DOM Depth" (旧) / "DOM depth" (insight)
     max_depth: byStatistic("depth"),
+    // "Maximum Child Elements" (旧) / "Most children" (insight)
     max_child_elements: byStatistic("child"),
   };
+
+  // insight audit は maxDepth / maxChildren が取れないとき details も numericValue も
+  // 返さない。そのとき null 3 つのオブジェクトを返すと「計測できている」ように見えるので、
+  // 欠測は audit ごと無かった場合と同じ null に倒す。
+  const hasAnyValue = Object.values(domSize).some((v) => v !== null);
+  return hasAnyValue ? domSize : null;
 }
 
 function extractSummary(data, url, strategy) {

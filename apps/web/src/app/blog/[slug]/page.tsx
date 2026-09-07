@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { fetchPrefectures } from "@stats47/area";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -9,21 +10,20 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import { Newspaper } from "lucide-react";
+import { CATEGORIES } from "@stats47/data-configs";
 
 import { ArticleShell } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
-import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } from "@/components/surface";
+import { RailDataDiscoveryCards, RailLinksCard, RailSearchCard } from "@/components/rail";
+import { ArticleCard } from "@/components/surface";
 
 import {
     BannerAd,
-    RailAdSlot,
-    SidebarPromoBanner,
-    selectPromoBannerIndexForRanking,
+    OperatorProfileCard,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
-import { BLOG_IN_BODY_BANNER_COUNT, BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
+import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
     listLatestArticles,
@@ -31,15 +31,15 @@ import {
     findArticleBySlug,
     findArticleTitlesBySlugs,
     getTagKeysForArticle,
-    getTagsForArticles,
     articleService,
     resolveArticleSurveyTaxonomy,
 } from "@/features/blog/server";
 import { BlogProductCta } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
+import { ALL_THEMES } from "@/features/theme-dashboard/listing.server";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
+import { blogThumbnailUrl } from "@/lib/metadata/ogp-image";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -52,6 +52,16 @@ import type { Metadata } from "next";
 interface PageProps {
     params: Promise<{ slug: string }>;
 }
+
+const BLOG_RAIL_CATEGORIES = CATEGORIES.slice(0, 6).map((category) => ({
+    categoryKey: category.categoryKey,
+    categoryName: category.categoryName,
+}));
+const BLOG_RAIL_THEMES = ALL_THEMES.slice(0, 6).map((theme) => ({
+    themeKey: theme.themeKey,
+    title: theme.title,
+}));
+const BLOG_RAIL_PREFECTURES = fetchPrefectures();
 
 export async function generateStaticParams() {
     const articles = await listLatestArticles(1000).catch(() => []);
@@ -156,9 +166,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
     const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const affiliateVertical = resolveContentVertical(affiliateInput).vertical;
-    // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
+    // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
-    const articleTagsMap = await getTagsForArticles(relatedArticles.map((a) => a.slug));
 
     const baseUrl = getRequiredBaseUrl();
     const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
@@ -192,7 +201,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher: buildPublisherOrganization(baseUrl),
     };
 
-    // レール通常領域: 関連コンテンツ → 運営者 → 広告の順で、記事理解と回遊を優先する。
+    // レール通常領域: 関連コンテンツ → 文脈一致広告 → 探索導線 → 運営者の順。
     const rail = (
         <>
             <RelatedRankingsSection tagKeys={tagKeys} compact />
@@ -203,16 +212,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 surface="blog_survey"
             />
 
-            <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
-
-            <BlogAuthorProfileCard compact />
-
-            <hr className="my-1 border-t border-border" />
-
-            <SidebarPromoBanner
-                index={selectPromoBannerIndexForRanking()}
-                position="sidebar"
-            />
+            <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} />
 
             {/* ★ 2026-08-04: 右レールに記事 vertical で解決した 300x250 を追加。
                 右レールは**バナーのみ**とし、テキストリンクは本文 inline に寄せる方針は不変。
@@ -233,12 +233,45 @@ export default async function BlogPostPage({ params }: PageProps) {
                 />
             ))}
 
-            {/* 右レールの広告枠。RightRailWidgets と同じ slot 部品に寄せた (2026-07-29) */}
-            <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />
-
             {/* 記事の主題が品目のとき楽天市場の商品を出す (公開 430 記事中 131 件が該当)。
                 品目を検出できない記事では何も描画しない。 */}
             <RakutenItemsCard sourceText={article.title} position="blog-sidebar" />
+
+            {/* 個別記事では本文後へ積まれるモバイルを長くしないため、追加探索カードは右レールだけに置く。 */}
+            <div className="hidden lg:contents">
+                <RailSearchCard
+                    title="記事検索"
+                    action="/search"
+                    placeholder="キーワードで検索"
+                    ariaLabel="ブログ記事を検索"
+                    hiddenFields={{ type: "blog" }}
+                />
+
+                <RailLinksCard
+                    title="この記事のタグ"
+                    items={articleTagData.map((tag) => ({
+                        id: tag.tagKey,
+                        label: tag.tagKey,
+                        href: `/tag/${tag.tagKey}`,
+                        trackingLabel: `tag:${tag.tagKey}`,
+                    }))}
+                    moreLink={{
+                        href: "/blog/tags",
+                        label: "タグ一覧を見る →",
+                        trackingLabel: "tag:all",
+                    }}
+                    trackingSurface="blog_sidebar"
+                />
+
+                <RailDataDiscoveryCards
+                    categories={BLOG_RAIL_CATEGORIES}
+                    themes={BLOG_RAIL_THEMES}
+                    prefectures={BLOG_RAIL_PREFECTURES}
+                    trackingSurface="blog_sidebar"
+                />
+            </div>
+
+            <OperatorProfileCard />
         </>
     );
 
@@ -344,59 +377,29 @@ export default async function BlogPostPage({ params }: PageProps) {
 function BlogRelatedArticlesSection({
     articles,
     currentSlug,
-    articleTagsMap,
-    compact = false,
 }: {
     articles: Article[];
     currentSlug: string;
-    articleTagsMap: Map<string, Array<{ tagKey: string }>>;
-    compact?: boolean;
 }) {
     const filtered = articles.filter((a) => a.slug !== currentSlug);
     if (filtered.length === 0) return null;
 
     return (
-        <RailCard
+        <RailLinksCard
             title="関連記事"
-            icon={<Newspaper className="h-4 w-4 text-muted-foreground" />}
-            titleClassName="text-base font-semibold text-foreground"
-            bodyClassName="p-4 pt-3"
-        >
-            {compact ? (
-                <RailLinkList>
-                    {filtered.map((article) => (
-                        <RailLinkItem key={article.slug} href={`/blog/${article.slug}`}>
-                            <span className="line-clamp-2 leading-snug">{article.title}</span>
-                        </RailLinkItem>
-                    ))}
-                </RailLinkList>
-            ) : (
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {filtered.map((article) => (
-                        <SurfaceLinkCard
-                            key={article.slug}
-                            href={`/blog/${article.slug}`}
-                            className="block p-3"
-                        >
-                            <p className="text-sm font-medium line-clamp-2">{article.title}</p>
-                            {article.publishedAt && (
-                                <p className="mt-1 text-xs text-muted-foreground">{article.publishedAt.slice(0, 10)}</p>
-                            )}
-                            {(() => {
-                                const tagData = articleTagsMap.get(article.slug);
-                                if (!tagData || tagData.length === 0) return null;
-                                return (
-                                    <div className="mt-1.5 flex flex-wrap gap-1">
-                                        {tagData.slice(0, 2).map((t) => (
-                                            <TagBadge key={t.tagKey} tag={t.tagKey} static />
-                                        ))}
-                                    </div>
-                                );
-                            })()}
-                        </SurfaceLinkCard>
-                    ))}
-                </div>
-            )}
-        </RailCard>
+            items={filtered.map((article) => ({
+                id: article.slug,
+                label: article.title,
+                href: `/blog/${article.slug}`,
+                trackingLabel: `related:${article.slug}`,
+                thumbnail: {
+                    lightSrc: blogThumbnailUrl(article.slug, "light"),
+                    darkSrc: blogThumbnailUrl(article.slug, "dark"),
+                    alt: "",
+                },
+            }))}
+            layout="ranked"
+            trackingSurface="blog_sidebar"
+        />
     );
 }

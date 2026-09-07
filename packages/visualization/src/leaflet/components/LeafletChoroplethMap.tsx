@@ -152,14 +152,15 @@ export function LeafletChoroplethMap({
     ? (municipalityColorConfig ?? colorConfig)
     : colorConfig;
 
-  if (!prefGeojson || !prefStyle) {
-    return (
-      <div className={`flex items-center justify-center min-h-[400px] rounded-md bg-muted/50 text-muted-foreground text-sm ${className ?? ""}`}>
-        地図を読み込み中...
-      </div>
-    );
-  }
-
+  // ベースマップ (MapContainer + TileLayer) は topology の到着を待たずに描画する。
+  //
+  // 経緯: ここで早期 return していた頃、ランキングページのモバイル LCP 要素である
+  // Leaflet のタイル <img> は、1,015,004 bytes の /prefecture.topojson を取得・parse し
+  // 終えるまで DOM に存在しなかった。タイルの実体は <link rel="preload" fetchpriority="high">
+  // で document 解析時に取得済み (2026-09-06 PSI 実測 resourceLoadDuration 49ms) なのに、
+  // 要素が生まれないので paint できず、LCP は 12,650ms と payload 縮小前の baseline
+  // 9,347ms より悪化していた。コロプレスは境界ポリゴンの塗りにしか要らないので、
+  // topology は届いた時点で重ねる。
   return (
     <div className={className}>
       <MapContainer
@@ -172,24 +173,26 @@ export function LeafletChoroplethMap({
       >
         <TileLayer url={tileUrl} attribution={attribution} />
 
-        {/* 都道府県レイヤー */}
-        <ChoroplethGeoJsonLayer
-          geojson={prefGeojson}
-          styleFactory={
-            municipalityGeojson
-              ? (feature?: Feature<Geometry>) => ({
-                  ...prefStyle(feature),
-                  fillOpacity: 0.3,
-                  weight: 0.3,
-                })
-              : prefStyle
-          }
-          codeExtractor={extractPrefCode}
-          nameExtractor={extractPrefName}
-          onFeatureClick={onPrefectureClick}
-          selectedCode={selectedPrefectureCode}
-          valueFormatter={prefValueFormatter}
-        />
+        {/* 都道府県レイヤー（topology 到着後に重ねる） */}
+        {prefGeojson && prefStyle && (
+          <ChoroplethGeoJsonLayer
+            geojson={prefGeojson}
+            styleFactory={
+              municipalityGeojson
+                ? (feature?: Feature<Geometry>) => ({
+                    ...prefStyle(feature),
+                    fillOpacity: 0.3,
+                    weight: 0.3,
+                  })
+                : prefStyle
+            }
+            codeExtractor={extractPrefCode}
+            nameExtractor={extractPrefName}
+            onFeatureClick={onPrefectureClick}
+            selectedCode={selectedPrefectureCode}
+            valueFormatter={prefValueFormatter}
+          />
+        )}
 
         {/* 市区町村レイヤー（ドリルダウン時） */}
         {municipalityGeojson && muniStyle && (
@@ -203,13 +206,16 @@ export function LeafletChoroplethMap({
           />
         )}
 
-        <MapColorLegend
-          colorConfig={legendConfig}
-          data={legendData}
-          unit={unit}
-          valueDisplay={valueDisplay}
-          showNoDataLabel={showNoDataLabel}
-        />
+        {/* 凡例は色スケール (prefStyle) が決まってから。data 空では従来どおり出さない */}
+        {prefStyle && (
+          <MapColorLegend
+            colorConfig={legendConfig}
+            data={legendData}
+            unit={unit}
+            valueDisplay={valueDisplay}
+            showNoDataLabel={showNoDataLabel}
+          />
+        )}
       </MapContainer>
     </div>
   );

@@ -148,9 +148,17 @@ export function RankingMapChartClient({
   // 現在の areaType に応じた TopoJSON を選択
   const activeTopology = areaType === "city" ? cityTopology : prefTopology;
   // 取得中に「読み込めませんでした」を出さない。失敗が確定して初めて fallback へ落とす
+  const topologyError = areaType === "city" ? cityTopologyError : prefTopologyError;
+
+  // 市区町村は利用者の操作による切替なので、従来どおり取得完了まで Skeleton を出す。
+  // 都道府県は初期表示そのもの。ここで Skeleton を挟むと LeafletChoroplethMap が
+  // render されず next/dynamic の chunk 取得すら始まらないため、TopoJSON 取得 →
+  // chunk 取得 → map 初期化 → タイル <img> という直列鎖ができ、LCP 要素である
+  // タイルが 1MB の TopoJSON を待つことになる (2026-09-06 PSI 実測 LCP 12,650ms)。
+  // topology=null のまま先に render し、ベースマップと chunk 取得を並行させる。
   const isMapLoading =
-    (areaType === "city" && isCityTopologyLoading) ||
-    (areaType !== "city" && !prefTopology && !prefTopologyError);
+    areaType === "city" && isCityTopologyLoading && cityTopology === null;
+  const showFallback = topologyError && activeTopology === null;
 
   // 都道府県クリック時のトグル動作
   const handlePrefectureClick = useCallback((code: string) => {
@@ -167,7 +175,7 @@ export function RankingMapChartClient({
       <div className="relative w-full overflow-hidden rounded-md">
         {isMapLoading ? (
           <Skeleton className="h-[500px] w-full rounded-md" />
-        ) : activeTopology === null ? (
+        ) : showFallback ? (
           <MapFallback
             message={
               areaType === "city" && cityTopologyError

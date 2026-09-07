@@ -22,7 +22,7 @@
  *   1 個しか報告しないため往復が 8 回 (1 回あたり検査 6 分 + 事前 commit 5 分) 発生した。
  *   6 個は互いに独立で、まとめて分かれば 1 回で済んだ。
  *
- *   --pr は「指標や記事の母集団が変わると連鎖して古くなる生成物」の鮮度ゲートだけを
+ *   --pr は「指標や記事の母集団が変わると連鎖して古くなる生成物」の鮮度ゲートと共有UI契約を
  *   並列で回し、落ちたもの全部を 1 回で出す。CI と同じコマンドを呼ぶので判定は一致する。
  *   ネットワーク (R2 公開 URL) を使うゲートを含むので commit ごとではなく push 前に使う。
  *
@@ -125,6 +125,26 @@ async function eslintGate(all) {
  * 重い vitest・playwright・coverage は含めない (push 前に 1 分で終わることを優先する)。
  */
 const PR_GATES = [
+  // 2026-09-07: 共通レール追加時に3つの独立した不整合を直列CIで発見したため、
+  // 安価な共有UI契約も同時に検査する。1つが落ちても残りを必ず実行する。
+  {
+    name: "Card Census",
+    why: "共有カード追加・廃止時の登録漏れ",
+    run: () => tryRun("node", [checker("check-card-census.cjs")]),
+    hint: "共通surfaceの再利用を確認し、必要なcompositeだけ理由付きで登録する",
+  },
+  {
+    name: "Ad Placement",
+    why: "レール構成変更時の画像広告・配置契約",
+    run: () => tryRun("node", [checker("check-ad-placement.cjs")]),
+    hint: "実描画とguardを突合し、画像広告の配置契約を維持する",
+  },
+  {
+    name: "Static Accessibility",
+    why: "新しいフォーム・画像・操作要素のアクセシビリティ",
+    run: () => tryRun("node", [checker("check-accessibility-static.cjs"), "--baseline"]),
+    hint: "指摘要素の意味と操作性を是正する。baselineは増やさない",
+  },
   {
     name: "Metric Registry",
     why: "metric を足す/消すと registry.ts が古くなる",

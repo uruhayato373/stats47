@@ -59,6 +59,39 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 - 「好き」「盛ん」など、観測していない嗜好・因果へ言い換えない
 - CI/週次の`generate-ranking-prominence --audit`で長さ・記号・専門語残存を監査する
 
+#### 平易化は「家族」単位で足す (1 件ずつ override しない)
+
+同じ語形が 10 件以上あるなら override ではなく導出規則を足す。規則は
+`deriveRankingReaderLabel` に 1 箇所だけ書き、**hook はその結果を主語に組む**ので
+両方に効く (hook 側に別の言い換えを書かない)。現在の家族:
+
+| 家族 | 変換 | 件数 (2026-09-07 実測) |
+|---|---|---|
+| `〜の行動者率` | `〜をした人の割合` | 80 |
+| `〜消費支出額` | `〜への支出` | 502 |
+
+平易化の効き具合は `--audit` の 1 行目 (規則で平易化 / 例外 / 正準名のまま) で測る。
+**`正準名のまま` が多いこと自体は欠陥ではない** — 「総人口」「年間快晴日数」のように
+正準名がそのまま読める指標が大半を占める。家族を足したときに `規則で平易化` が
+増えることだけを見る。
+
+専門語を `UNFRIENDLY_TERMS` (`resolve-ranking-hook.ts`) に足すときは、**同じ変更で
+導出規則も足す**。語だけ足すと、規則が無い分がそのまま jargon として毎回報告される。
+
+#### どの面がどれを使うか (SSOT は 1 つ、消費は各面)
+
+| 面 | 表示・本文 | 正準名を使う場所 |
+|---|---|---|
+| `/ranking/<key>` | 索引・サイドバー・関連は `readerLabel`、ホーム注目カードは `hook` | 詳細ページの h1 (指標ハブの責務) |
+| ブログ | 記事タイトルの種に `hook`、本文・図の alt・source-link に `readerLabel` | data JSON の `label`・SVG 内の見出し・出典の節 |
+| テーマ | チャート見出しは `readerLabel`、カード/凡例は `shortLabel` (`theme-catalog-standards.md`) | — |
+| note | タイトルに `hook`、本文・alt に `readerLabel` | description に「正式指標名は〜」と併記 |
+| SNS (X/IG) | キャプション見出しに `hook` | 画像内の見出し (出典と照合できる形にする) |
+
+**data JSON の `label` と画像内の見出しは正準名のまま**にする。前者はブログの
+値照合 (`article-factual-check`) が指標の同定に使い、後者は図に出す出典との照合に使う。
+ここを平易化すると、照合が静かに外れる。
+
 暫定: 専用 `note` フィールド移行が完了するまで、UI は `classifyRankingSubtitle` /
 `isCaveatNote` (`apps/web/src/features/ranking/utils/classify-subtitle.ts`) で subtitle 文面から
 注釈を判定して振り分ける。**データ側に `note` を分離したらこのヒューリスティックは不要になる。**

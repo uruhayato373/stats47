@@ -36,6 +36,7 @@ import {
   resolveRankingHook,
   selectHomeFeatured,
   selectRepresentatives,
+  summarizeReaderLabelCoverage,
   type ProminenceInput,
   type ProminenceResult,
 } from "@stats47/data-configs/prominence";
@@ -306,6 +307,13 @@ function runAudit(): void {
       title: metric.title,
       unit: units.get(metric.key) ?? "",
     }));
+
+  const coverage = summarizeReaderLabelCoverage(inputs);
+  const derivedRate = ((coverage.derived / coverage.total) * 100).toFixed(1);
+  console.log(
+    `[ranking-prominence] readerLabel: ${coverage.total} 件中 ` +
+      `規則で平易化 ${coverage.derived} (${derivedRate}%) / 例外 ${coverage.overridden} / 正準名のまま ${coverage.unchanged}`,
+  );
 
   const findings = auditDerivedHooks(inputs);
   const rate = ((findings.length / inputs.length) * 100).toFixed(1);

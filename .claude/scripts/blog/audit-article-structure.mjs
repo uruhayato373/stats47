@@ -25,7 +25,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
 import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -57,12 +57,14 @@ function auditArticle(slug) {
   if (!fs.existsSync(articleMd)) return null;
   const md = fs.readFileSync(articleMd, "utf8");
   const { blockers, warnings, stats } = lintSourceLinkPlacement(md);
+  const callout = lintConsecutiveCallouts(md);
   const link = lintInternalLinks(md);
   return {
     slug,
-    blockers: blockers.length + link.blockers.length,
-    warnings: warnings.length + link.warnings.length,
+    blockers: blockers.length + callout.blockers.length + link.blockers.length,
+    warnings: warnings.length + callout.warnings.length + link.warnings.length,
     ...stats,
+    ...callout.stats,
     ...link.stats,
   };
 }
@@ -74,10 +76,11 @@ const slugs = fs
   .sort();
 
 const results = slugs.map(auditArticle).filter(Boolean);
-// source-link カードを持つ記事 + 内部リンク切れを持つ記事 (カード無しでもリンク切れは拾う)
-const withLinks = results.filter((r) => r.rankingSourceLinks > 0 || r.internalLinksBroken > 0);
-// 違反 = source-link 配置の blocker (重複 / 連続配置 / 図なし節 / 末尾集約) が 1 件以上
-const violations = withLinks
+// source-link カード / 内部リンク切れ / callout 連続配置のいずれかを持つ記事。
+const withStructureSignals = results.filter(
+  (r) => r.rankingSourceLinks > 0 || r.internalLinksBroken > 0 || r.adjacentCalloutClusters > 0,
+);
+const violations = withStructureSignals
   .filter((r) => r.blockers > 0)
   .sort((a, b) => b.blockers - a.blockers || b.tailRankingLinks - a.tailRankingLinks);
 
@@ -85,13 +88,17 @@ const summary = {
   generatedAt: new Date().toISOString(),
   base: path.relative(PROJECT_ROOT, BASE),
   articlesScanned: results.length,
-  articlesWithRankingLinks: withLinks.length,
+  articlesWithRankingLinks: results.filter((r) => r.rankingSourceLinks > 0).length,
+  articlesWithStructureSignals: withStructureSignals.length,
   articlesViolating: violations.length,
   articles: violations.map((r) => ({
     slug: r.slug,
     blockers: r.blockers,
     dupRankingLinks: r.dupRankingLinks,
     adjacentClusters: r.adjacentClusters,
+    adjacentCalloutClusters: r.adjacentCalloutClusters,
+    adjacentCalloutPairs: r.adjacentCalloutPairs,
+    maxConsecutiveCallouts: r.maxConsecutiveCallouts,
     noFigureSectionLinks: r.noFigureSectionLinks,
     tailRankingLinks: r.tailRankingLinks,
     inlineRankingLinks: r.inlineRankingLinks,
@@ -108,7 +115,7 @@ if (JSON_OUT) {
 }
 
 log(`\n=== 記事構造監査: source-link 配置 (${summary.base}) ===`);
-log(`走査記事: ${summary.articlesScanned} / ランキングリンク保有: ${summary.articlesWithRankingLinks}`);
+log(`走査記事: ${summary.articlesScanned} / 構造検査対象: ${summary.articlesWithStructureSignals}`);
 log(`配置違反: ${summary.articlesViolating} 記事`);
 log(`保存先: ${path.relative(PROJECT_ROOT, OUT_PATH)}\n`);
 
