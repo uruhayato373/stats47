@@ -33,6 +33,15 @@ metadata:
 - **原因**: 画像の変更0件ではrenderを通らず、fresh checkoutの `.local` が存在しないまま空planを `writeFileSync` していた。既存 `.local` があるローカルでは再現しない。読み取りや一過性のR2障害ではない。
 - **対策**: 空planを書き込む直前に親ディレクトリを作成する。ネットワーク・画像生成なしの実CLIをfresh fixtureで実行する3回帰テスト（親不在、旧plan置換と無関係ファイル保持、audit時の新規出力なし）を `test:image-pipeline` に組み込む。背景をforce再生成したり、exact plan検証を省略したりしない。
 
+## 2026-09-08 背景待ち73記事の公開完了
+
+- 対象は未公開72記事と改稿1記事。[公開run 34139507934](https://github.com/uruhayato373/stats47/actions/runs/34139507934)
+  と[PR #945](https://github.com/uruhayato373/stats47/pull/945)のデプロイ後、全73URLをGooglebotで実測し、
+  HTTP 200・H1・self canonical・indexable・当該記事OGPを確認した。本文/図/元データ792ファイル、
+  画像292枚、manifest 73件もR2から読み戻して一致。公開差分0・outbox guard PASSでカードを回収した。
+- slug単位の実測証跡は `.claude/state/metrics/content-release-2026-09-08.json`。
+  対象外の既公開19コピーの未退避promptと未公開draft 7件は保持し、今回の公開残数へ混ぜない。
+
 ## 2026-06 当時の制約
 
 `blog-auto-publish.yml`（develop への docs/21 article.md push で発火、完全DBレス公開ブリッジ）の旧2制約。

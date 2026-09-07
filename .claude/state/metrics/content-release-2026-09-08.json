@@ -1,0 +1,1746 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "checkedAt": "2026-09-07T20:56:06.307Z",
+  "owner": "content release (Codex)",
+  "reviewCondition": "Historical observation; regenerate against current R2 and application before a later completion claim.",
+  "application": {
+    "commit": "d329955be4aa3d3838f5598e4b93203d1d084295",
+    "pullRequest": "https://github.com/uruhayato373/stats47/pull/945"
+  },
+  "runs": [
+    {
+      "conclusion": "success",
+      "head_sha": "d329955be4aa3d3838f5598e4b93203d1d084295",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34160900863",
+      "id": 34160900863,
+      "name": "🧹 Purge CDN Cache",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "0e69ec1352849dae49875acff749c4d65e0bcef7",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34159536085",
+      "id": 34159536085,
+      "name": "📤 AI Content Publish (develop → R2)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "d329955be4aa3d3838f5598e4b93203d1d084295",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34158954086",
+      "id": 34158954086,
+      "name": "🗂️ Sync Snapshots → R2",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "d329955be4aa3d3838f5598e4b93203d1d084295",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34154405618",
+      "id": 34154405618,
+      "name": "🧽 R2 ISR cache GC (post-deploy)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "d329955be4aa3d3838f5598e4b93203d1d084295",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34154405449",
+      "id": 34154405449,
+      "name": "Post-Deploy Smoke Test",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "d329955be4aa3d3838f5598e4b93203d1d084295",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34153774065",
+      "id": 34153774065,
+      "name": "🗂️ Sync Snapshots → R2",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "d329955be4aa3d3838f5598e4b93203d1d084295",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34153770527",
+      "id": 34153770527,
+      "name": "Deploy to Cloudflare Workers",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "ea073d063ff4f5c961dfa81e6027f91b54e069c5",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34153088343",
+      "id": 34153088343,
+      "name": "🔍 Pull Request Quality Check",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "3f710e1c2dc007501140169a8cff89f8a93d563f",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34139507934",
+      "id": 34139507934,
+      "name": "📤 Blog Auto-Publish (develop → R2)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "3ee748f27fe12ccd0664550ad467e67c7fb4e939",
+      "html_url": "https://github.com/uruhayato373/stats47/actions/runs/34137832197",
+      "id": 34137832197,
+      "name": "📤 AI Content Publish (develop → R2)",
+      "status": "completed"
+    }
+  ],
+  "ai": {
+    "scope": "active prefecture rankings",
+    "queueGeneratedAt": "2026-09-07T20:55:47.435Z",
+    "queueSha256": "eb8f98f2e5366f8c8fd893ca46073c3a541677d2dd5117124ca15dcd6e70ef6b",
+    "tsActive": 2166,
+    "known": 2166,
+    "summary": {
+      "total": 2166,
+      "done": 2166,
+      "needsRegen": 0,
+      "needsByReason": {},
+      "notEligible": 0,
+      "notEligibleByCode": {},
+      "doneButUnhealthy": 0,
+      "doneImpressions": 73347,
+      "needsImpressions": 0,
+      "manualEscalationTier": 0,
+      "geminiDailyLimit": 3
+    },
+    "readback": {
+      "ai": 2166,
+      "values": 2166,
+      "valueHealthVerified": 2166
+    },
+    "warnings": {
+      "aiKeys": 967,
+      "valueKeys": 41
+    },
+    "setDifferences": 0,
+    "unverifiedFetches": 0,
+    "initialPublishedReadbacks": [
+      {
+        "key": "app/ranking/academic-achievement-test-average-rate/ai-content.json",
+        "sha256": "bc5b0af0ad163f897fe4b3728ce6c4258b30c0394760493589ccca9c3484e54a",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/education-expenditure-total/ai-content.json",
+        "sha256": "88e26b3a0b552c85fd4652c4db7b255f998d880af817fe325bedc4f5ea30d860",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/health-medical-expenditure-total/ai-content.json",
+        "sha256": "c5ee3e234f410cad34c0264547f912327b9ea610ea0599a39b7f63f8c4488fc1",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/culture-recreation-expenditure-total/ai-content.json",
+        "sha256": "09ba3550246c5eed4e039ccad91c965183f4a25f5b34e5b66bbeca3a572667d1",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/furniture-household-expenditure-total/ai-content.json",
+        "sha256": "d27707dcf06e981084eb80fd77acffc3b1bc8d6dd0c0a8270387c879e6fa2bcf",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/clothing-footwear-expenditure-total/ai-content.json",
+        "sha256": "ed681f9584f238d8ab4cf36887c2f315dd21a370f9d6de3a3898e3c8410746f3",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/housing-expenditure-total/ai-content.json",
+        "sha256": "1cd5519a588cb61d978d7bdc9f0276ddb698ec9e4a839c0b46d9a1c6cfae558a",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/information-communication-coefficient/ai-content.json",
+        "sha256": "7241949e3dc192c61c6b30c11c93b7fd572dfc847d4ac9696af27be0629152ec",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/other-living-expenditure-total/ai-content.json",
+        "sha256": "52633c70ef9a9d0f4ae8b69d18cbc11f23925a4a6b5f0b7c2977decfd6a95bd0",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/utilities-expenditure-total/ai-content.json",
+        "sha256": "f167b2185a45db8c1ce2621b90134f374898d2ab5847357d417c5244b5ac0865",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/transport-communication-expenditure-total/ai-content.json",
+        "sha256": "5d32ea3f2c5744762396372554187a5ea029000e8c2df2614f2545cd82c45754",
+        "pass": true
+      },
+      {
+        "key": "app/ranking/information-communication-expenditure/ai-content.json",
+        "sha256": "1cba45f54828250eaaa14b3ff8d74024e07904ce27b477c7862c62e0399cc564",
+        "pass": true
+      }
+    ],
+    "correctedReadbacks": [
+      {
+        "key": "food-expenditure-total",
+        "status": 200,
+        "sha256": "bb3a6ae967648a9237369eac96507aa883928c6cf2f6af69977be3898709a571"
+      },
+      {
+        "key": "consumption-expenditure-total",
+        "status": 200,
+        "sha256": "2eaf46e3a8dfaaee219b9150d8ae445985aa3f9be85c74c270d0f8f6adb393a4"
+      }
+    ]
+  },
+  "blog": {
+    "readbackAt": "2026-09-07T19:01:34.291Z",
+    "pageCheckedAt": "2026-09-07T20:54:16.182Z",
+    "articles": 73,
+    "sourceFiles": 792,
+    "images": 292,
+    "manifests": 73,
+    "pages": [
+      {
+        "slug": "airport-count-vs-general-project-investment-agriculture",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/airport-count-vs-general-project-investment-agriculture",
+        "h1": "空港数と農林水産投資に関係はある?",
+        "ogImage": "https://storage.stats47.jp/app/blog/airport-count-vs-general-project-investment-agriculture/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "avg-salary-police-prefecture-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/avg-salary-police-prefecture-prefecture-gap",
+        "h1": "警察職の給与、東京と長野で14万円差",
+        "ogImage": "https://storage.stats47.jp/app/blog/avg-salary-police-prefecture-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "airport-count-vs-physical-disability-rehabilitation",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/airport-count-vs-physical-disability-rehabilitation",
+        "h1": "空港数と福祉施設在所者数は連動する?",
+        "ogImage": "https://storage.stats47.jp/app/blog/airport-count-vs-physical-disability-rehabilitation/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "annual-sunshine-duration-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/annual-sunshine-duration-prefecture-gap",
+        "h1": "日照時間1位はなぜ高知?日本海側との差",
+        "ogImage": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "bean-sprouts-consumption-quantity-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/bean-sprouts-consumption-quantity-prefecture-gap",
+        "h1": "もやし消費量1位山形、沖縄の3倍差",
+        "ogImage": "https://storage.stats47.jp/app/blog/bean-sprouts-consumption-quantity-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "chocolate-snack-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/chocolate-snack-consumption-expenditure-prefecture-gap",
+        "h1": "チョコレート菓子支出、山形はなぜ全国トップなのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/chocolate-snack-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "coffee-shop-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/coffee-shop-consumption-expenditure-prefecture-gap",
+        "h1": "喫茶代3.5倍差はなぜ?東京と青森",
+        "ogImage": "https://storage.stats47.jp/app/blog/coffee-shop-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "consumer-price-difference-index-utilities-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/consumer-price-difference-index-utilities-prefecture-gap",
+        "h1": "光熱・水道費はなぜ北海道が突出して高いのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/consumer-price-difference-index-utilities-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "campsite-public-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/campsite-public-prefecture-gap",
+        "h1": "公共キャンプ場、なぜ北海道が突出して多いのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/campsite-public-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "commute-by-bicycle-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/commute-by-bicycle-prefecture-gap",
+        "h1": "自転車通勤は52倍の差｜大阪75.8万人・長崎1.4万人",
+        "ogImage": "https://storage.stats47.jp/app/blog/commute-by-bicycle-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "consumption-expenditure-multi-person-households-per-month",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/consumption-expenditure-multi-person-households-per-month",
+        "h1": "消費支出が多い県ほど社会福祉費が少ないのはなぜ",
+        "ogImage": "https://storage.stats47.jp/app/blog/consumption-expenditure-multi-person-households-per-month/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "chinese-noodles-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/chinese-noodles-consumption-expenditure-prefecture-gap",
+        "h1": "中華麺、なぜ東北勢が上位を独占するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/chinese-noodles-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "convenience-store-sales-monthly-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/convenience-store-sales-monthly-prefecture-gap",
+        "h1": "コンビニ販売額、東京はなぜ鳥取の39倍なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/convenience-store-sales-monthly-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "cake-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/cake-consumption-expenditure-prefecture-gap",
+        "h1": "ケーキ支出額、埼玉と福井で4千円差",
+        "ogImage": "https://storage.stats47.jp/app/blog/cake-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "ehime-migration-flow",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/ehime-migration-flow",
+        "h1": "愛媛県、なぜ隣の香川より遠い岐阜から人が来る",
+        "ogImage": "https://storage.stats47.jp/app/blog/ehime-migration-flow/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "croquette-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/croquette-consumption-expenditure-prefecture-gap",
+        "h1": "コロッケ支出額、なぜ北陸勢が上位独占なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/croquette-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "densely-populated-area-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/densely-populated-area-prefecture-gap",
+        "h1": "人口集中地区面積、北海道はなぜ5位なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/densely-populated-area-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "fishery-workers-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/fishery-workers-prefecture-gap",
+        "h1": "漁業就業者はなぜ北海道に集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/fishery-workers-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "flavor-seasoning-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/flavor-seasoning-consumption-expenditure-prefecture-gap",
+        "h1": "風味調味料消費額はなぜ九州に集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/flavor-seasoning-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "cut-flowers-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/cut-flowers-consumption-expenditure-prefecture-gap",
+        "h1": "切り花支出、福島が2位の1.4倍で独走",
+        "ogImage": "https://storage.stats47.jp/app/blog/cut-flowers-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "fabric-softener-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/fabric-softener-consumption-expenditure-prefecture-gap",
+        "h1": "柔軟仕上剤消費支出、栃木が1位で奈良の1.9倍",
+        "ogImage": "https://storage.stats47.jp/app/blog/fabric-softener-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "future-population-change-rate-2050-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/future-population-change-rate-2050-prefecture-gap",
+        "h1": "2050年、人口が増える県は東京だけ?",
+        "ogImage": "https://storage.stats47.jp/app/blog/future-population-change-rate-2050-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "geothermal-power-plant-count-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/geothermal-power-plant-count-prefecture-gap",
+        "h1": "地熱発電「33都府県で0件」の意味、FIT導入94件を読む",
+        "ogImage": "https://storage.stats47.jp/app/blog/geothermal-power-plant-count-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "ishikawa-municipal-finance",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/ishikawa-municipal-finance",
+        "h1": "財政力指数はなぜ県内で4倍も違うのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/ishikawa-municipal-finance/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "kochi-migration-flow",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/kochi-migration-flow",
+        "h1": "高知県の転出超過、なぜ4年で最大に",
+        "ogImage": "https://storage.stats47.jp/app/blog/kochi-migration-flow/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "main-road-paving-rate-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/main-road-paving-rate-prefecture-gap",
+        "h1": "主要道路舗装率100％の県が4つもあるのはなぜか",
+        "ogImage": "https://storage.stats47.jp/app/blog/main-road-paving-rate-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "kanagawa-municipal-finance",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/kanagawa-municipal-finance",
+        "h1": "財政力1位の箱根町はなぜ借金比率も上位なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/kanagawa-municipal-finance/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "hamburger-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/hamburger-consumption-expenditure-prefecture-gap",
+        "h1": "ハンバーガー消費、大分が3.4倍差で1位",
+        "ogImage": "https://storage.stats47.jp/app/blog/hamburger-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "nagano-municipal-finance",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/nagano-municipal-finance",
+        "h1": "財政力指数に14倍の差、長野県77市町村の内実",
+        "ogImage": "https://storage.stats47.jp/app/blog/nagano-municipal-finance/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "major-lake-area-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/major-lake-area-prefecture-gap",
+        "h1": "湖の面積差はなぜ北海道と滋賀に集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/major-lake-area-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "national-pension-full-exemption-rate-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/national-pension-full-exemption-rate-prefecture-gap",
+        "h1": "年金保険料の免除率、沖縄はなぜ突出?",
+        "ogImage": "https://storage.stats47.jp/app/blog/national-pension-full-exemption-rate-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "miscellaneous-school-students-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/miscellaneous-school-students-prefecture-gap",
+        "h1": "各種学校の生徒数、東京都が716倍の格差",
+        "ogImage": "https://storage.stats47.jp/app/blog/miscellaneous-school-students-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "new-rental-starts-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/new-rental-starts-prefecture-gap",
+        "h1": "貸家着工戸数、東京都と高知県で137倍の差",
+        "ogImage": "https://storage.stats47.jp/app/blog/new-rental-starts-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "natto-consumption-expenditure",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/natto-consumption-expenditure",
+        "h1": "納豆をいちばん買うのは茨城ではない｜家計調査2024",
+        "ogImage": "https://storage.stats47.jp/app/blog/natto-consumption-expenditure/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "new-hire-count-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/new-hire-count-prefecture-gap",
+        "h1": "入職者数はなぜ都道府県で大きく違うのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/new-hire-count-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "non-regular-employment-rate-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/non-regular-employment-rate-prefecture-gap",
+        "h1": "非正規雇用率はなぜ近畿と北海道で高いのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/non-regular-employment-rate-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "niigata-municipal-finance",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/niigata-municipal-finance",
+        "h1": "新潟の市町村、財政力はなぜここまで違うか",
+        "ogImage": "https://storage.stats47.jp/app/blog/niigata-municipal-finance/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "osaka-migration-flow",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/osaka-migration-flow",
+        "h1": "大阪府から人はどこへ移っていくのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/osaka-migration-flow/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "manufacturing-industry-added-value-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/manufacturing-industry-added-value-prefecture-gap",
+        "h1": "製造業付加価値額は愛知が沖縄の94倍",
+        "ogImage": "https://storage.stats47.jp/app/blog/manufacturing-industry-added-value-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "other-cosmetics-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/other-cosmetics-consumption-expenditure-prefecture-gap",
+        "h1": "他の化粧品、なぜ岡山が1位で香川が最下位か",
+        "ogImage": "https://storage.stats47.jp/app/blog/other-cosmetics-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
+        "h1": "固定資産税、東京都はなぜ突出して高いのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/per-capita-fixed-asset-tax-pref-municipal-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "pear-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/pear-consumption-expenditure-prefecture-gap",
+        "h1": "梨消費支出額、鳥取県はなぜ首位なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/pear-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "physical-therapist-annual-income-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/physical-therapist-annual-income-prefecture-gap",
+        "h1": "理学療法士の年収はなぜ近畿4県に集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/physical-therapist-annual-income-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "nuclear-power-plant-count-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/nuclear-power-plant-count-prefecture-gap",
+        "h1": "原発の「0か所」は施設なし？33基と15発電所の違い",
+        "ogImage": "https://storage.stats47.jp/app/blog/nuclear-power-plant-count-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "retail-sales-amount-by-prefecture-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/retail-sales-amount-by-prefecture-prefecture-gap",
+        "h1": "小売販売額は東京と鳥取で33倍の差",
+        "ogImage": "https://storage.stats47.jp/app/blog/retail-sales-amount-by-prefecture-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "pickled-plum-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/pickled-plum-consumption-expenditure-prefecture-gap",
+        "h1": "梅干し消費額、なぜ紀州より青森が僅差なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/pickled-plum-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "school-teacher-annual-income-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/school-teacher-annual-income-prefecture-gap",
+        "h1": "小中学校教員の年収はなぜ千葉が最高か",
+        "ogImage": "https://storage.stats47.jp/app/blog/school-teacher-annual-income-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "sewage-treatment-coverage-rate-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/sewage-treatment-coverage-rate-prefecture-gap",
+        "h1": "汚水処理人口普及率はなぜ徳島が最下位か",
+        "ogImage": "https://storage.stats47.jp/app/blog/sewage-treatment-coverage-rate-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "sewage-treatment-coverage-rate-vs-flush-toilet-population",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/sewage-treatment-coverage-rate-vs-flush-toilet-population",
+        "h1": "汚水処理人口普及率はなぜ水洗化率と一致しないのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/sewage-treatment-coverage-rate-vs-flush-toilet-population/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "oita-migration-flow",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/oita-migration-flow",
+        "h1": "大分県はなぜ福岡県へ人が流出するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/oita-migration-flow/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
+        "h1": "汚水処理と下水道、なぜ差が開く県が?",
+        "ogImage": "https://storage.stats47.jp/app/blog/sewage-treatment-coverage-rate-vs-sewerage-penetration-rate/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "sewerage-coverage-rate-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/sewerage-coverage-rate-prefecture-gap",
+        "h1": "下水道普及率、なぜ東京と徳島で差が開くのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/sewerage-coverage-rate-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "shrimp-consumption-quantity-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/shrimp-consumption-quantity-prefecture-gap",
+        "h1": "えび消費量、なぜ熊本県が全国一なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/shrimp-consumption-quantity-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "sports-participation-rate-hiking-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/sports-participation-rate-hiking-prefecture-gap",
+        "h1": "登山・ハイキング率、山より都会が上位という謎",
+        "ogImage": "https://storage.stats47.jp/app/blog/sports-participation-rate-hiking-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "pickled-plum-consumption-quantity-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/pickled-plum-consumption-quantity-prefecture-gap",
+        "h1": "梅干し消費量はなぜ和歌山県が圧倒的か",
+        "ogImage": "https://storage.stats47.jp/app/blog/pickled-plum-consumption-quantity-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "road-length-per-km2-vs-local-special-grant-prefecture",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/road-length-per-km2-vs-local-special-grant-prefecture",
+        "h1": "道路密度と地方特例交付金は連動するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/road-length-per-km2-vs-local-special-grant-prefecture/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "sports-participation-rate-swimming-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/sports-participation-rate-swimming-prefecture-gap",
+        "h1": "水泳をする人が多い県、なぜ東京と長野?",
+        "ogImage": "https://storage.stats47.jp/app/blog/sports-participation-rate-swimming-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "starting-salary-university-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/starting-salary-university-prefecture-gap",
+        "h1": "大卒初任給1位は秋田｜なぜ東京より高い？",
+        "ogImage": "https://storage.stats47.jp/app/blog/starting-salary-university-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "sports-spectating-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/sports-spectating-consumption-expenditure-prefecture-gap",
+        "h1": "スポーツ観覧支出、なぜ広島県が1位なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/sports-spectating-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "taro-consumption-quantity-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/taro-consumption-quantity-prefecture-gap",
+        "h1": "さといも消費量、山形はなぜ沖縄の9.6倍も食べるのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/taro-consumption-quantity-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "table-salt-consumption-quantity-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/table-salt-consumption-quantity-prefecture-gap",
+        "h1": "食塩消費量は県で3.3倍差｜日本海側になぜ集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/table-salt-consumption-quantity-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "toilet-paper-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/toilet-paper-consumption-expenditure-prefecture-gap",
+        "h1": "トイレットペーパー、青森と沖縄が突出",
+        "ogImage": "https://storage.stats47.jp/app/blog/toilet-paper-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "soy-sauce-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/soy-sauce-consumption-expenditure-prefecture-gap",
+        "h1": "しょう油消費額1位はなぜ山形なのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/soy-sauce-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "treatment-rate-mental-disorder-inpatient-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap",
+        "h1": "精神疾患の入院受療率、なぜ九州に集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/treatment-rate-mental-disorder-inpatient-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "swimming-pool-public-vs-total-administrative-investment",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/swimming-pool-public-vs-total-administrative-investment",
+        "h1": "公共プールが多い県は行政投資も多い?",
+        "ogImage": "https://storage.stats47.jp/app/blog/swimming-pool-public-vs-total-administrative-investment/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "treatment-rate-schizophrenia-inpatient-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/treatment-rate-schizophrenia-inpatient-prefecture-gap",
+        "h1": "統合失調症の入院受療率はなぜ西日本に集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/treatment-rate-schizophrenia-inpatient-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "tempura-fry-consumption-expenditure-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/tempura-fry-consumption-expenditure-prefecture-gap",
+        "h1": "天ぷら・フライ支出、新潟がトップ｜内陸奈良はなぜ少ない?",
+        "ogImage": "https://storage.stats47.jp/app/blog/tempura-fry-consumption-expenditure-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "treatment-rate-mood-disorder-outpatient-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/treatment-rate-mood-disorder-outpatient-prefecture-gap",
+        "h1": "気分障害受療率、なぜ北海道が突出？",
+        "ogImage": "https://storage.stats47.jp/app/blog/treatment-rate-mood-disorder-outpatient-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "water-supply-population-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/water-supply-population-prefecture-gap",
+        "h1": "上水道給水人口、なぜ都市部に偏るのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/water-supply-population-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "whitebait-consumption-quantity-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/whitebait-consumption-quantity-prefecture-gap",
+        "h1": "しらす干し消費量、なぜ和歌山が全国1位?",
+        "ogImage": "https://storage.stats47.jp/app/blog/whitebait-consumption-quantity-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "wholesale-annual-sales-amount-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/wholesale-annual-sales-amount-prefecture-gap",
+        "h1": "卸売業の販売額はなぜ東京都に集中するのか",
+        "ogImage": "https://storage.stats47.jp/app/blog/wholesale-annual-sales-amount-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "treatment-rate-hypertension-outpatient-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/treatment-rate-hypertension-outpatient-prefecture-gap",
+        "h1": "高血圧の通院率、なぜ長崎と石川で差?",
+        "ogImage": "https://storage.stats47.jp/app/blog/treatment-rate-hypertension-outpatient-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      },
+      {
+        "slug": "white-bread-consumption-quantity-prefecture-gap",
+        "status": 200,
+        "canonical": "https://stats47.jp/blog/white-bread-consumption-quantity-prefecture-gap",
+        "h1": "食パン消費量、なぜ関西が上位独占?",
+        "ogImage": "https://storage.stats47.jp/app/blog/white-bread-consumption-quantity-prefecture-gap/ogp/ogp.png",
+        "indexable": true
+      }
+    ],
+    "outboxTargets": [],
+    "retainedOutboxStates": {
+      "draft": 7,
+      "in-sync": 19
+    }
+  },
+  "ranking": {
+    "checkedAt": "2026-09-07T20:54:50.659Z",
+    "groups": {
+      "nine": {
+        "checkedAt": "2026-09-07T20:54:36.995Z",
+        "status": "PASS",
+        "results": [
+          {
+            "key": "clothing-footwear-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "culture-recreation-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "education-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "furniture-household-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "health-medical-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "housing-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "other-living-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "transport-communication-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "utilities-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "git-and-master-membership",
+                "ok": true
+              },
+              {
+                "name": "item-normalization",
+                "ok": true
+              },
+              {
+                "name": "values-2024",
+                "ok": true
+              },
+              {
+                "name": "ai-sha-and-audit",
+                "ok": true
+              },
+              {
+                "name": "live-sitemap",
+                "ok": true
+              },
+              {
+                "name": "googlebot-page",
+                "ok": true
+              }
+            ]
+          }
+        ]
+      },
+      "three": {
+        "checkedAt": "2026-09-07T20:54:31.080Z",
+        "status": "PASS",
+        "results": [
+          {
+            "key": "academic-achievement-test-average-rate",
+            "ok": true
+          },
+          {
+            "key": "information-communication-coefficient",
+            "ok": true
+          },
+          {
+            "key": "information-communication-expenditure",
+            "ok": true
+          }
+        ]
+      },
+      "two": {
+        "checkedAt": "2026-09-07T20:54:34.123Z",
+        "status": "PASS",
+        "results": [
+          {
+            "key": "food-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "inventory-category-item",
+                "ok": true
+              },
+              {
+                "name": "original-values-unchanged",
+                "ok": true
+              },
+              {
+                "name": "ai-reviewed-revision-and-canonical-structure",
+                "ok": true
+              },
+              {
+                "name": "googlebot",
+                "ok": true
+              },
+              {
+                "name": "images:ranking-ogp",
+                "ok": true
+              },
+              {
+                "name": "images:ranking-card",
+                "ok": true
+              }
+            ]
+          },
+          {
+            "key": "consumption-expenditure-total",
+            "ok": true,
+            "checks": [
+              {
+                "name": "inventory-category-item",
+                "ok": true
+              },
+              {
+                "name": "original-values-unchanged",
+                "ok": true
+              },
+              {
+                "name": "ai-reviewed-revision-and-canonical-structure",
+                "ok": true
+              },
+              {
+                "name": "googlebot",
+                "ok": true
+              },
+              {
+                "name": "images:ranking-ogp",
+                "ok": true
+              },
+              {
+                "name": "images:ranking-card",
+                "ok": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "normalization": [
+      {
+        "key": "clothing-footwear-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "db41b9a5e1f0efbb9df293cccd566ceb39dd568b3b1414272d8039702f2864be"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "ab1fe15b0ed81519aa2b9df41cc5142cf1e568a0f83b1aaad5e3b6d272916161"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "被服及び履物費",
+            "canonical": "https://stats47.jp/ranking/clothing-footwear-expenditure-total",
+            "sha256": "d0e8f669d0c02fe2d278572e4c1b7b664bcf171231896a9e7fdbaf141018e18a"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "被服及び履物費",
+            "canonical": "https://stats47.jp/ranking/clothing-footwear-expenditure-total",
+            "sha256": "1ea45702f9c2fd18a8ebab17dc3fb2828562e9ae3dde64f1d531bce460af552f"
+          }
+        ]
+      },
+      {
+        "key": "culture-recreation-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "0ee7cc625294318d2b6a11bc876bba05de4f0dbc8bd3db43c69c6cefc5bea1bd"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "fd7a766d6e9ff958d6736cb5684c3525e2f0debd6b05f1823595adf2be3d37b9"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "教養娯楽費",
+            "canonical": "https://stats47.jp/ranking/culture-recreation-expenditure-total",
+            "sha256": "7d3992792f447e0ef22142c063fae96b1bcf0408973703d721d375e7a4700988"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "教養娯楽費",
+            "canonical": "https://stats47.jp/ranking/culture-recreation-expenditure-total",
+            "sha256": "7fc40e046c00d71c0bb913bc9fe6face703648e8cc8bafff71bde2eb2643c7c1"
+          }
+        ]
+      },
+      {
+        "key": "education-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "cd3827c55da12dceb78ffea8430d555eb1293e61d0d5f0dfc240ba258bbcd896"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "52162a36abed01fd67642305fc16bb8ea87eb8e59e462c7f5a71920426af0d9a"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "教育費",
+            "canonical": "https://stats47.jp/ranking/education-expenditure-total",
+            "sha256": "e1a1babd1c2c0afa631577f9975b4cdf3b47df7f1aba2a08212de0275558859e"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "教育費",
+            "canonical": "https://stats47.jp/ranking/education-expenditure-total",
+            "sha256": "0d219104e77de129d3c7f27ee466d02a66c0b098308f8ebcbec68553674c75d9"
+          }
+        ]
+      },
+      {
+        "key": "furniture-household-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "91736cf66f2a18d9a1f801f0cf7f267dd99b1a6e70d0196b75d69ead7291073b"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "8f7d014d4bfe2df62460d5c5838d8ecdca3ec548c2e318cb026cd48ceba9a07e"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "家具・家事用品費",
+            "canonical": "https://stats47.jp/ranking/furniture-household-expenditure-total",
+            "sha256": "677cf05a166a5e47804d30288c09d67a9559838128a544144fbf942befe0c85d"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "家具・家事用品費",
+            "canonical": "https://stats47.jp/ranking/furniture-household-expenditure-total",
+            "sha256": "92934e1d53dd1e02d3128fdb1a4e6ed33926f9d97870f869d3b545ee3413e3a3"
+          }
+        ]
+      },
+      {
+        "key": "health-medical-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "772ac84fdc9c70cf283692d8db8808aae1fcfb8f5d0570fcdcfabf09c77338cb"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "8b62718320bd68b5be79485fa18d69537d8977479163e30c47cd4631785c3846"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "保健医療費",
+            "canonical": "https://stats47.jp/ranking/health-medical-expenditure-total",
+            "sha256": "c4b1f47ab80438d168021c43e5855c61a68fd036e37e1696247eb30fdb6e95f7"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "保健医療費",
+            "canonical": "https://stats47.jp/ranking/health-medical-expenditure-total",
+            "sha256": "a8f2149846f6b794bb10be800b4e6d6801352bcf794eb19baedb8ca0e53c40e5"
+          }
+        ]
+      },
+      {
+        "key": "housing-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "721251b4ffcc65e8d745d6fb5724cdfc9c872a1b4d366536b63cdce9492b2f40"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "c6b7bc6eaacd57b65fcaba1c2e01817d9e688bed44b04822f097ad5beff86009"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "住居費",
+            "canonical": "https://stats47.jp/ranking/housing-expenditure-total",
+            "sha256": "684815b1b8dc9c89e1d75425083be79fc315f6fdb39a5bfa6cb9732dd813eb93"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "住居費",
+            "canonical": "https://stats47.jp/ranking/housing-expenditure-total",
+            "sha256": "22473d8917cbec04707670262e6b035d0ec3c3c6f8ffeca42fb85c8b33792f47"
+          }
+        ]
+      },
+      {
+        "key": "other-living-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "efcc40e8a0a18c643befe970bca71684adc98a49413f2102844b23c20fdb975d"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "23b83e274907467bcbd6d59d6a519dd990515bc7ec7616e24acaf3aeded39fd6"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "その他の消費支出",
+            "canonical": "https://stats47.jp/ranking/other-living-expenditure-total",
+            "sha256": "b49c9acb33a0db5518b1fc2af64a9d86bd753543cff9f4e2228daa9473c2ecb2"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "その他の消費支出",
+            "canonical": "https://stats47.jp/ranking/other-living-expenditure-total",
+            "sha256": "fa8acd1344b8f84a1dc32c58eb0bbfe5cb90e52a9da6a054242d271a18f61192"
+          }
+        ]
+      },
+      {
+        "key": "transport-communication-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "5ba705805f4e9ca901abdd02045e7466e8a7c34415023995f8bdfe0ef1e093f7"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "834adee621621d753bb75440896b0784e7906a32de88a4c2c377f4cabd15db01"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "交通・通信費",
+            "canonical": "https://stats47.jp/ranking/transport-communication-expenditure-total",
+            "sha256": "db9892a5405829a50ccb9a2f565a919103927f2293d55df93f6b5e654c77bb2c"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "交通・通信費",
+            "canonical": "https://stats47.jp/ranking/transport-communication-expenditure-total",
+            "sha256": "15ea1f59b20d1df5df5644084731c4d623be2f5b920ec41d8bf6b42deedbfd8d"
+          }
+        ]
+      },
+      {
+        "key": "utilities-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "1f8c5968ac55d5bf8e38214028e7a9da81e0f4014c30caec19390012c0380de9"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "bcc1bae916e0df9d0d49d4d4e629629e17fb84248c342ae72db62a1e7b7c0406"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "光熱・水道費",
+            "canonical": "https://stats47.jp/ranking/utilities-expenditure-total",
+            "sha256": "07dd1619b1f77c6668d3cdae0200a2e1a059cae31fc251e6086d4b1bbe3abeff"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "光熱・水道費",
+            "canonical": "https://stats47.jp/ranking/utilities-expenditure-total",
+            "sha256": "beca930bd04d2ff8878b66bf9662da74467e124840a7a56e6fcaef473d551d72"
+          }
+        ]
+      },
+      {
+        "key": "food-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "c7a8922a5582534f60c72083cb0f97b9d11ee0dffc2c1b4d5b005c7edc25a1c6"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "9a79244030983ce2a7c2a4349ec1ab916d6acd17e72c227bfae73f199a68a150"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "食料費",
+            "canonical": "https://stats47.jp/ranking/food-expenditure-total",
+            "sha256": "e10dab4055a779e4939900354b47732ff6ca4fb25297160d1f2c7039cb002238"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "食料費",
+            "canonical": "https://stats47.jp/ranking/food-expenditure-total",
+            "sha256": "664505d22b1dd402c87c474fdfde1bf21bff877846406512024cb5883712e867"
+          }
+        ]
+      },
+      {
+        "key": "consumption-expenditure-total",
+        "ok": true,
+        "checks": [
+          {
+            "name": "basis-original",
+            "ok": true,
+            "status": 200,
+            "rows": 846,
+            "years": 18,
+            "sha256": "7fbab88a0d759756870019427a7006bb2bd29af4f1fce26528c8514002949f99"
+          },
+          {
+            "name": "basis-all-bases",
+            "ok": true,
+            "status": 200,
+            "bases": [
+              "original"
+            ],
+            "sha256": "ea4070b7efe52680bdc93342c3884ccb3c8647d83ec8a21cae05224d0f7921cd"
+          },
+          {
+            "name": "basis-per_population",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_population",
+            "ok": true,
+            "status": 200,
+            "h1": "消費支出総額",
+            "canonical": "https://stats47.jp/ranking/consumption-expenditure-total",
+            "sha256": "ca5ba6bc8f3fdc3f2cef14079a94749bb127b313f32961b1b8c421d4b15208c0"
+          },
+          {
+            "name": "basis-per_area",
+            "ok": true,
+            "status": 404,
+            "sha256": "1a9298e09a81840b1d7f6ba0b39646321bf5ca8cc1a03044cbe26eb47943a0d2"
+          },
+          {
+            "name": "norm-query-per_area",
+            "ok": true,
+            "status": 200,
+            "h1": "消費支出総額",
+            "canonical": "https://stats47.jp/ranking/consumption-expenditure-total",
+            "sha256": "073a2e1b1396d7215768a7ff62e5a285757439ae06235f2a7eea837c9cfef59c"
+          }
+        ]
+      }
+    ],
+    "normalizationChecks": 66,
+    "invalidNormHydratedUi": "Covered by 10 actual reader/consumer regression tests; production HTML 200/canonical is not proof of hydrated UI state."
+  },
+  "efficiency": {
+    "rankingItemsPreviousUploads": 4959,
+    "rankingItemsFinalUploads": 2303,
+    "avoidedUploads": 2656,
+    "uploadReductionPercent": 53.6,
+    "scopedImageCandidates": 11,
+    "rankingItemsImageUpdates": 2,
+    "masterImageUpdates": 0,
+    "reclaimedIsrObjects": 810,
+    "reclaimedIsrMegabytes": 139.87,
+    "retainedIsrGenerations": 3
+  },
+  "limitations": [
+    "All-key done means deterministic blockers 0; legacy 2154 items did not receive a new full-text semantic review.",
+    "AI 967 keys and values 41 keys retain non-blocking warnings.",
+    "Billing/free-tier settings were not verified or changed; TOKEN-AICONTENT-01 is a separate experiment.",
+    "Standard docs:check passed; docs:check:all retains three pre-existing warnings (DG054/DG058/DG059).",
+    "Seven unrelated unpublished drafts and nineteen in-sync copies with unbacked-up prompts are intentionally retained."
+  ]
+}

@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-09-07T15:30:13.345Z
+- 生成: 2026-09-07T20:55:47.435Z
 - GSC snapshot: 2026-W36 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 171 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
@@ -21,6 +21,8 @@
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Mon, 07 Sep 2026 20:30:52 GMT | consumption-expenditure-total | 14 |
+| Mon, 07 Sep 2026 20:30:52 GMT | food-expenditure-total | 7 |
 | Mon, 07 Sep 2026 15:23:25 GMT | academic-achievement-test-average-rate | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | clothing-footwear-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | culture-recreation-expenditure-total | 0 |
@@ -34,8 +36,6 @@
 | Mon, 07 Sep 2026 15:23:25 GMT | transport-communication-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | utilities-expenditure-total | 0 |
 | Sun, 06 Sep 2026 23:12:37 GMT | woodland-area | 11 |
-| Sun, 06 Sep 2026 23:12:37 GMT | young-population-ratio | 2 |
-| Sun, 06 Sep 2026 23:12:37 GMT | yellowtail-consumption-expenditure | 1 |
 
 ## 次にやるべき上位20 (impressions 降順)
 

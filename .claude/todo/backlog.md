@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-07
+updated: 2026-09-08
 ---
 
 # バックログ (タスクマスタ)
@@ -103,15 +103,7 @@ updated: 2026-09-07
   公開・削除・退避・検証の証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
 - **次（実行順）**:
   1. `legacyLicense` の公開・削除証跡と `legacySnsVerification.deletionApproval.status=COMPLETED`、`deletionEvidence.pendingIds=[]`、投稿台帳IDs592/632/636/749/796/800の`status=deleted`・`deleted_at`を照合する。catalog gateを通し、ledger証拠付きで本カードを回収する。新しい外部操作・認証・コンテンツ生成は不要。
-- **★未解決 (2026-09-06 実測)**: guard は data-refresh / sync-snapshots の派生生成を**恒常的に止めている**。
-  `generate-ranking-items.ts` は「退役の瞬間に stale な isActive:true が R2 に残るのを防ぐため」
-  active/inactive を問わず item.json を書き続ける設計 (同ファイル 136-185 行のコメントが根拠)。
-  一方 guard は isActive を見ず license だけで判定するため、退役済み 9 キーの item.json で必ず throw する。
-  実測 run 34017315294: item.json 2,311 件を書いた直後に
-  `KSJ公開構造化データ禁止: app/ranking/biomass-power-station-count/item.json (P03, non-commercial)` で停止。
-  以後この経路を通る更新はすべて失敗する (月次 data-refresh / sync-snapshots)。
-  判断の分かれ目は「guard 側で isActive:false を対象外にする」か「生成側で退役キーを書かない」か。
-  前者が小さく、上記コメントの設計意図とも整合する。**owner の判断が要るため本カードに留める。**
+- **派生生成の停止は解消済み（2026-09-08照合）**: `602b885aa` は生成側でpublisherと同じ判定を使い、非商用KSJ由来9キーのitem出力を除外する。guardを緩める必要はない。ranking-items同期run `34132337368` は全job SUCCESS、公開可能な2,302 itemを反映済み。本カードの残りは上記の公開終了・SNS削除証跡の照合であり、派生生成の再修正ではない。
 - **再発防止の確認**: main/develop両経路にguard反映済み。共有索引544件は全行保持、分類修正20件一致。従来から公開終了指定の未公開1行も除外・HTTP410確認。guardを持たない旧checkoutまで保護済みとは扱わない。
 - **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
 - **停止条件**: key集合/size/ETagが退避時と変わった対象は削除しない。削除済みraw435・派生59・旧ランキング126件を再実行しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。別作業のdevelopリリースと競合する変更は行わない。
@@ -156,39 +148,6 @@ updated: 2026-09-07
 - **完了条件**: furusato の横長 300x250 が 7 本以上、かつ priority 上位 3 が全国対応ポータル
   (地域限定のイオン九州が上位 3 に入らない)。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
-
-### [BLOG-BACKGROUND-BATCH-01] [進行中] 背景待ちの記事を固有画像・品質確認付きで公開する
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:select-republish-slugs.mjs の対象差分0件と公開runの成功・R2読戻し] [起票:2026-09-02]
-
-- **owner**: Codex (記事固有背景生成・公開確認)、blog-editor (必要な本文是正)
-- **再開点（2026-09-08・R2公開済み／アプリ反映待ち）**: run `34139507934` SUCCESS、73記事・792本文/図/元データファイル・292画像・73manifestのR2読戻しPASS。公開索引606件、対象73件は新しいsitemapへ全収載済み。新規72URLはmainの旧公開一覧により410、改稿1URLは200のため、mainデプロイ後に全73ページを再検証する。発電2記事の出典分類4ファイルだけを別タスクが追補中（run `34150800541` は画像不変時のplan処理で停止、本文/品質PASS）。その修正公開・backlog pushと合流後にリリースする。根本のAIは2,166件done・追加12件R2 SHA一致で別カード閉鎖済み。家計11指標の正規化是正・旧R2配信遮断、画像対象限定、ranking-items二重送信削減を含む作業は `codex/finish-content-remaining`。最新build・全workspace/scripts型・Web1317・packages2383・workflow87テストPASS。main→ranking-items/master（画像11キー指定）→全パージ→73ブログ/14ランキングの本番実測まで完了扱いしない。
-- **現状（2026-09-07）**: reconcileの対象は77→73件（未公開72・改稿差分1）。今回、既存の記事固有背景を使える4件の本文をR2へ反映し、公開本文との一致を確認した。件数は実行時に再取得し、古い91件を固定の完了目標にしない。
-  当時の `natto-consumption-expenditure` の古い背景prompt（run 34113017143）も、今回の73件で明示再生成・再検証済み。
-- **過去の停止実測（9/2）**: PR #895 merge 直後の `blog-auto-publish.yml` run 33587682293 は 1 本目
-  (`annual-sunshine-duration-prefecture-gap`) の `Fatal: 記事固有背景がありません` で exit 1 になり、
-  公開 0 件。`generate-blog-thumbnails.ts` は共有背景へフォールバックしない (`ogp-image-standards.md` §5)
-  ので、ゲートを緩めるのではなく画像を用意して通す。
-- **なぜユーザー実行か**: Codex MCP はクラウドセッションで `ENOENT` (codex 未インストール)。
-  背景生成はローカル Mac の Codex built-in imagegen で行う。
-- **手順** (`/generate-blog-images` Mode A): 公開前の記事なので `--article <article.md>` が必須
-  (省くと R2 404)。
-
-  ```bash
-  npm run blog-images:codex -- request-article --slug <slug> \
-    --article "docs/21_ブログ記事原稿/<slug>/article.md"
-  npm run blog-images:codex -- ingest-article --slug <slug> \
-    --article "docs/21_ブログ記事原稿/<slug>/article.md" \
-    --input <generated.png> --prompt-hash <sha256-...>
-  npm run check:blog-images
-  ```
-
-  生成物は `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` (git tracked)。
-- **公開の起動**: 画像だけの push では auto-publish は発火しない (paths フィルタが `article.md` と
-  workflow 自身のみ)。`workflow-dispatch-proxy.yml` の allowlist に `blog-auto-publish.yml` を
-  追加済 (PR #899) なので、クラウドからも slugs 空 = reconcile で代理起動できる。
-- **順序の注意**: 背景未生成（専用exit 20）は理由付きskipに是正済み。SHA不一致・古いprompt・通信障害は引き続き停止する。準備済みslugを `-f slugs="..."` で指定して小分けに公開し、背景の安全ゲートを緩めない。
-- **完了条件**: 対象記事が R2 `app/blog/<slug>/` に載り、本文・画像・索引の読戻しと公開監査が通り、`docs/21` からcommit-backで消えること。アプリ変更を伴う公開はdevelop→mainのdeploy成功も確認する。
 
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 

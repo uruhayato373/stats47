@@ -2,7 +2,7 @@
 title: 今月の重点
 type: monthly-plan
 month: 2026-09
-updated: 2026-09-07
+updated: 2026-09-08
 status: active
 focus_themes:
   - 溜まった未デプロイを本番へ届けて止まっている実測を再開する
@@ -63,7 +63,7 @@ weekly-review W35 はこの原因を「並行セッションが `weekly.md` を�
 | GSC impressions（ローリング28日） | 180,347 | 100,812 | +78.9% |
 | GSC 平均順位 | 7.52 | 8.13 | 0.61 改善 |
 | GA4 engagedSessions（Japan 確定7日） | 2,817 | 2,257（直前7日） | +24.8%（WoW） |
-| ranking ai-content done | **2,154 / 2,154（100%）** | 718 / 2,163（09-03） | 在庫消化完了 |
+| ranking ai-content done | **2,166 / 2,166（100%）** | 718 / 2,163（09-03） | 最新の対象集合で未作成0。意味品質の全件確定とは区別する |
 | ブログ是正キュー | pending 270 / must-fix 32 / done 21 | pending 227 / must-fix 29 / done 25（W35） | **母数 +43・done -4** |
 | AdSense | 停止中（2026-08-16〜） | — | LATEST は W34 のまま stale |
 | R2 storage | 23.11 GB（09-05） | 22.2 GB（08-22） | 無料枠 10GB 超過が継続 |
@@ -106,7 +106,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
   | `GSC-COVERAGE-DEPLOY-01`（カバレッジ是正と入力鮮度ガード） | 未デプロイ | 2026-09-14 |
   | `ADSENSE-PAUSE-01`（AdSense 全停止コード） | 実装済・未デプロイ | 2026-09-14 |
   | `AFF-IMPRESSION-ROUTING-01`（空き位置への文脈バナー配線） | 実装済・未デプロイ | 2026-09-21 |
-  | `BLOG-BACKGROUND-BATCH-01`（公開待ち 91 記事） | 背景画像待ち | — |
+  | 対象73記事の公開（`BLOG-BACKGROUND-BATCH-01`） | 9/8にR2一致・全URL 200・公開差分0を確認し完了 | — |
 
   加えて、効果を測る側も止まっている。`.claude/state/ads/ga4-affiliate-*.json` の最新が
   2026-08-28 で 10 日更新されておらず、`AFF-BLOG-TEXTLINK-01` / `AFF-A8-REGISTER-01` /
@@ -118,13 +118,14 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
   2. 週次 cron `affiliate-ga4-weekly.yml` が再稼働し、`ga4-affiliate-*.json` の最新が 7 日以内である
   3. デプロイ日を before/after の境界として記録し、`ADSENSE-PAUSE-01`（28 日）と
      `AFF-IMPRESSION-ROUTING-01`（14 日）の実測窓が開始している
-  4. 公開待ち 91 記事が公開され、`docs/21_ブログ記事原稿` の `published: true` 残数が 0 になっている
+  4. 実行時に再照合した対象73記事の公開差分が0となり、R2本文・画像が一致し、全URLが200を返す。
+     `published: true` のoutbox残数は完了指標にしない。既公開19記事の未退避promptは保護する。
 
 - **構成タスク**:
   - デプロイ前ゲート: 本番の確認済み回帰 2 件の切り分け結果を待って、出す/待つを決める [M]（→ W37）
   - `affiliate-ga4-weekly.yml` の実行状況を確認し、10 日 stale の原因を特定して再取得する [S]（→ W37）
-  - 91 記事の背景画像生成（`/generate-blog-images` Mode A・ローカル Mac の Codex 必須）[L]（→ W37-W38）
-  - `BLOG-PUBLISH-THUMBNAIL-GUARD-01`: 背景 1 件の欠落で run 全体が止まるのを per-slug skip にする [S]（→ W37）
+  - 対象73記事はW37に背景・公開・本番全件実測まで完了（週次計画の証跡参照）。
+  - `BLOG-PUBLISH-THUMBNAIL-GUARD-01`: per-slug skipはW37に実走確認済み（週次計画参照）。
   - デプロイ実行と代表ページ実測、before/after 境界の記録 [M]（→ W38）
   - 14 日 / 28 日の実測窓の中間確認 [S]（→ W39・W40）
 
@@ -135,12 +136,11 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
     削除済みで、**現在どのバックログにもカードが無い**）。どちらも別セッションで調査中なので
     今月の構成タスクには積まない。調査が戻った時点で LCP 側はカード化が要る。
   - デプロイと R2 write はオーナーの明示承認が要る（`branch-workflow.md`）。
-  - 背景画像生成は Codex がクラウドセッションで `ENOENT` になるためローカル Mac 実行が必須。
+  - 今回の背景画像はローカルMacのCodexで完了済み。背景生成を残ブロッカーとして扱わない。
 
 - **真実源リンク**: `improvements.md`（`ADSENSE-PAUSE-01` / `AFF-IMPRESSION-ROUTING-01` /
   `AFF-RESOLUTION-EFFECT-01` / `AFF-BLOG-TEXTLINK-01` / `AFF-A8-REGISTER-01` / `COVERAGE-LOOP-01`）/
-  `backlog.md`（`AFF-DEPLOY-RESOLUTION-01` / `GSC-COVERAGE-DEPLOY-01` / `BLOG-BACKGROUND-BATCH-01` /
-  `BLOG-PUBLISH-THUMBNAIL-GUARD-01` / `RSC-CACHE-BYPASS-01`）
+  `backlog.md`（`AFF-DEPLOY-RESOLUTION-01` / `GSC-COVERAGE-DEPLOY-01` / `RSC-CACHE-BYPASS-01`）
 
 ### 重点2: 公開しているものが正しいかを確定させる
 
@@ -180,7 +180,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 
 ## 今月やらないこと（予算のため意図的に見送る）
 
-- **ブログの新規大量公開** — 公開待ち 91 記事を出したら、今月はそれ以上作らない。
+- **ブログの新規大量公開** — 今回の公開対象73記事を出したら、今月はそれ以上作らない。
   8 月は上限運用が守られず W35 だけで 85 本が公開され（`BLOG-SEO-PACE-01`）、是正キューの
   母数が 227 → 270 に増えた。**分母を止めないと是正は永久に終わらない。**
 - **ブログ品質是正キューの大量消化** — must-fix 32 件あるが、今月やるのは
@@ -208,7 +208,7 @@ GSC は重点テーマ数に含めない健康管理の床とし、検索施策�
 
 | 週 | 期間 | 主に進める重点 | マイルストーン |
 |---|---|---|---|
-| W37 | 09-07〜09-13 | 重点1 + 重点2 | 作成済み W36 レビューを計画へ反映 / GA4 アフィリエイト cron の stale 解消 / 背景生成着手 / 25 metric の分類 |
+| W37 | 09-07〜09-13 | 重点1 + 重点2 | 作成済み W36 レビューを計画へ反映 / GA4 アフィリエイト cron の stale 解消 / 背景生成済み記事の公開確認 / 25 metric の分類 |
 | W38 | 09-14〜09-20 | 重点1 | デプロイ実行と代表ページ実測、before/after 境界の記録 / 12 metric の ready-blocked 判定 |
 | W39 | 09-21〜09-27 | 重点1 + 重点2 | 14 日窓の中間確認 / 決定的 backfill の境界サンプル 10 件を critic に通す |
 | W40 | 09-28〜10-04 | 集約 | 28 日窓の判定準備 / 10 月計画の入力づくり |
