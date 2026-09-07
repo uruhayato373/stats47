@@ -13,6 +13,7 @@
  *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json .claude/state/surveys/taxonomy.json
  *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json .claude/state/surveys/taxonomy.json --tighten-ratchet
  *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check
+ *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --local-r2
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -90,6 +91,7 @@ const R2 = (
 ).replace(/\/+$/, '');
 const args = process.argv.slice(2);
 const offline = args.includes('--offline');
+const localR2 = args.includes('--local-r2');
 const check = args.includes('--check');
 const tightenRatchet = args.includes('--tighten-ratchet');
 const jsonIndex = args.indexOf('--json');
@@ -131,14 +133,21 @@ function auditRanking() {
   const allRows = metrics.map((metric) => ({
     key: metric.key,
     active: metric.isActive === true,
+    notApplicable: metric.surveyScope === 'not-applicable',
     resolution: resolveSurveyTaxonomy(
       { metricKeys: [metric.key] },
       METRICS_REGISTRY
     ),
   }));
-  const resolved = allRows.filter((row) => row.resolution.surveys.length > 0);
+  const applicable = allRows.filter((row) => !row.notApplicable);
+  const activeApplicable = applicable.filter((row) => row.active);
+  const notApplicable = allRows.filter((row) => row.notApplicable);
+  const activeNotApplicable = notApplicable.filter((row) => row.active);
+  const resolved = applicable.filter(
+    (row) => row.resolution.surveys.length > 0
+  );
   const activeResolved = resolved.filter((row) => row.active);
-  const unresolved = allRows.filter(
+  const unresolved = applicable.filter(
     (row) => row.resolution.surveys.length === 0
   );
   const activeUnresolved = unresolved.filter((row) => row.active);
@@ -151,14 +160,21 @@ function auditRanking() {
   return {
     metrics: metrics.length,
     activeMetrics: active.length,
+    applicableMetrics: applicable.length,
+    activeApplicableMetrics: activeApplicable.length,
+    notApplicable: notApplicable.length,
+    activeNotApplicable: activeNotApplicable.length,
     resolved: resolved.length,
     unresolved: unresolved.length,
-    coveragePct: round((resolved.length / Math.max(metrics.length, 1)) * 100),
+    coveragePct: round(
+      (resolved.length / Math.max(applicable.length, 1)) * 100
+    ),
     activeResolved: activeResolved.length,
     activeUnresolved: activeUnresolved.length,
     activeCoveragePct: round(
-      (activeResolved.length / Math.max(active.length, 1)) * 100
+      (activeResolved.length / Math.max(activeApplicable.length, 1)) * 100
     ),
+    activeNotApplicableKeys: activeNotApplicable.map((row) => row.key).sort(),
     activeUnresolvedKeys: activeUnresolved.map((row) => row.key).sort(),
     perSurveyActive: Object.fromEntries(
       [...surveyCounts.entries()].sort(([a], [b]) => a.localeCompare(b))
@@ -212,6 +228,10 @@ function noCache(url: string): string {
 }
 
 async function fetchText(key: string): Promise<string | null> {
+  if (localR2) {
+    const target = path.join(ROOT, '.local/r2', key);
+    return fs.existsSync(target) ? fs.readFileSync(target, 'utf8') : null;
+  }
   try {
     const response = await fetch(noCache(`${R2}/${key}`), {
       signal: AbortSignal.timeout(20_000),
@@ -601,7 +621,7 @@ async function main() {
   } else {
     console.log(`survey taxonomy: master ${state.masterSurveyCount}`);
     console.log(
-      `ranking active ${ranking.activeMetrics}: resolved ${ranking.activeResolved} / unresolved ${ranking.activeUnresolved} / coverage ${ranking.activeCoveragePct}%`
+      `ranking active ${ranking.activeMetrics}: resolved ${ranking.activeResolved} / unresolved ${ranking.activeUnresolved} / n/a ${ranking.activeNotApplicable} / coverage ${ranking.activeCoveragePct}%`
     );
     console.log(
       `theme charts ${theme.charts}: resolved ${theme.byStatus.resolved} / unresolved ${theme.byStatus.unresolved} / missing ${theme.byStatus['missing-lineage']} / n/a ${theme.byStatus['not-applicable']} / coverage ${theme.coveragePct}%`

@@ -6,13 +6,13 @@
  * D1 metrics テーブル: 上記から build-time export される cache (編集禁止)
  */
 
-export type EntityKind = "prefecture" | "city" | "port" | "migration-flow";
+export type EntityKind = 'prefecture' | 'city' | 'port' | 'migration-flow';
 
 export const ENTITY_KINDS = [
-  "prefecture",
-  "city",
-  "port",
-  "migration-flow",
+  'prefecture',
+  'city',
+  'port',
+  'migration-flow',
 ] as const;
 
 /** データの取得元 */
@@ -24,7 +24,7 @@ export type SourceConfig =
   | CalculatedSource;
 
 export interface EstatSource {
-  kind: "estat";
+  kind: 'estat';
   /** e-Stat statsDataId (10桁) */
   statsDataId: string;
   /** 大分類カテゴリ (例 "#C04505") */
@@ -80,7 +80,7 @@ export interface EstatSource {
    * ただし**全メンバーが欠測なら合算せず欠測**にする (0 を捏造しない)。
    */
   axisSum?: {
-    axis: "cat01" | "cat02" | "cat03" | "cat04" | "cat05";
+    axis: 'cat01' | 'cat02' | 'cat03' | 'cat04' | 'cat05';
     codes: readonly string[];
   };
   /**
@@ -101,7 +101,7 @@ export interface EstatSource {
    * 値域は shape-gate の percent 検査が自動で見る (分子分母を取り違えると 100 を超えて落ちる)。
    */
   axisRatio?: {
-    axis: "cat01" | "cat02" | "cat03" | "cat04" | "cat05";
+    axis: 'cat01' | 'cat02' | 'cat03' | 'cat04' | 'cat05';
     numeratorCodes: readonly string[];
     denominatorCodes: readonly string[];
   };
@@ -119,8 +119,8 @@ export interface EstatSource {
    *   `1002=全国農業地域_北海道`)。全国・地域ブロックは落とす。
    */
   areaAxis?: {
-    axis: "cat01" | "cat02" | "cat03" | "cat04" | "cat05";
-    scheme: "seq-pref" | "name";
+    axis: 'cat01' | 'cat02' | 'cat03' | 'cat04' | 'cat05';
+    scheme: 'seq-pref' | 'name';
   };
   /**
    * 時間軸の粒度を年計に限定する。
@@ -128,7 +128,7 @@ export interface EstatSource {
    * `extractYearCode` が 4 桁年へ正規化すると同じ年に潰れて重複するため、年計 (`YYYY000000`) だけを採る。
    * cdTime で絞らないのは R2 キャッシュの分断を避けるため (`.claude/rules/estat-api.md`)。
    */
-  timeScope?: "annual";
+  timeScope?: 'annual';
   /**
    * **金額単位族の換算専用**。e-Stat の原単位 (`@unit`) から `config.unit` へ直すための倍率。
    * `10^k` 以外を書かない。
@@ -155,7 +155,7 @@ export interface EstatSource {
 }
 
 export interface KakeiChousaSource {
-  kind: "kakei-chousa";
+  kind: 'kakei-chousa';
   /** 家計調査の cat01 等のフィルタ (実データは入れ子の {name,url} も含む) */
   filter?: Record<string, unknown>;
   displayName?: string;
@@ -163,7 +163,7 @@ export interface KakeiChousaSource {
 }
 
 export interface MlitSource {
-  kind: "mlit";
+  kind: 'mlit';
   /** 国交省 resource ID */
   resourceId: string;
   displayName?: string;
@@ -171,7 +171,7 @@ export interface MlitSource {
 }
 
 export interface ExternalSource {
-  kind: "external";
+  kind: 'external';
   /**
    * 一般化された外部 source (custom fetcher 必要)。既知の値は KNOWN_FETCHER_KEYS。
    * "manual" (手動抽出・PDF/xlsx/HTML 由来) は config.provenance (SourceProvenance) 必須。
@@ -193,14 +193,14 @@ export interface ExternalSource {
  * lint (validate-metric-config.ts) が provenance 必須クラスの判定に使う。
  */
 export const KNOWN_FETCHER_KEYS = [
-  "manual",
-  "mlit_ksj",
-  "mlit_dpf",
-  "estat",
-  "ssds",
-  "local-public-employee-salary",
-  "calculated",
-  "unknown",
+  'manual',
+  'mlit_ksj',
+  'mlit_dpf',
+  'estat',
+  'ssds',
+  'local-public-employee-salary',
+  'calculated',
+  'unknown',
 ] as const;
 export type KnownFetcherKey = (typeof KNOWN_FETCHER_KEYS)[number];
 
@@ -236,28 +236,27 @@ export interface SourceProvenance {
 }
 
 export interface CalculatedSource {
-  kind: "calculated";
+  kind: 'calculated';
   /** 計算式 (numerator / denominator 等の組合せ) */
   formula: CalculationFormula;
 }
 
 export type CalculationFormula =
-  | { op: "divide"; numerator: string; denominator: string }
-  | { op: "multiply"; left: string; right: string }
-  | { op: "per_population"; numerator: string };
+  | { op: 'divide'; numerator: string; denominator: string }
+  | { op: 'multiply'; left: string; right: string }
+  | { op: 'subtract'; left: string; right: string }
+  | { op: 'per_population'; numerator: string };
 
 /** 取得対象年 */
 export type YearSpec =
-  | "all"
-  | { from: number; to: number }
-  | { years: number[] };
+  'all' | { from: number; to: number } | { years: number[] };
 
 /** 可視化 */
 export interface VisualizationConfig {
   /** D3 color interpolator name */
   colorScheme?: string;
-  colorSchemeType?: "sequential" | "diverging";
-  minValueType?: "zero" | "data-min";
+  colorSchemeType?: 'sequential' | 'diverging';
+  minValueType?: 'zero' | 'data-min';
   /** 動画演出用プリセット */
   preset?: string;
   /** diverging のときの中央値定義 ("zero" | "median" | "custom" 等) */
@@ -283,7 +282,7 @@ export interface DisplayConfig {
 
 /** 計算オプション (per_population, per_area などの派生 metric 生成定義) */
 export interface NormalizationOption {
-  type: "per_population" | "per_area";
+  type: 'per_population' | 'per_area';
   label: string;
   unit: string;
   scaleFactor: number;
@@ -303,9 +302,9 @@ export interface NormalizationOption {
  * 金額スケール (千円→万円 = 10^k) は別軸で、そちらは `MONEY-UNIT-SCALE-01` が扱う。
  */
 export interface PeriodAlignment {
-  numerator: "monthly" | "annual";
-  denominator: "monthly" | "annual";
-  result: "monthly" | "annual";
+  numerator: 'monthly' | 'annual';
+  denominator: 'monthly' | 'annual';
+  result: 'monthly' | 'annual';
 }
 
 export interface CalculationOptions {
@@ -345,23 +344,23 @@ export interface CalculationOptions {
  *   再発を防ぐ (lint: validate-metric-config.ts でも runtime 検証)。
  */
 export const CATEGORY_KEYS = [
-  "landweather",
-  "population",
-  "laborwage",
-  "agriculture",
-  "miningindustry",
-  "commercial",
-  "economy",
-  "construction",
-  "energy",
-  "tourism",
-  "educationsports",
-  "administrativefinancial",
-  "safetyenvironment",
-  "socialsecurity",
-  "international",
-  "infrastructure",
-  "ict",
+  'landweather',
+  'population',
+  'laborwage',
+  'agriculture',
+  'miningindustry',
+  'commercial',
+  'economy',
+  'construction',
+  'energy',
+  'tourism',
+  'educationsports',
+  'administrativefinancial',
+  'safetyenvironment',
+  'socialsecurity',
+  'international',
+  'infrastructure',
+  'ict',
 ] as const;
 
 export type CategoryKey = (typeof CATEGORY_KEYS)[number];
@@ -398,7 +397,7 @@ export interface MetricConfig {
   entities: EntityKind[];
   /** 取得年範囲 */
   years: YearSpec;
-  yearFormat?: "fiscal" | "calendar" | "plain";
+  yearFormat?: 'fiscal' | 'calendar' | 'plain';
   visualization?: VisualizationConfig;
   display?: DisplayConfig;
   calculation?: CalculationOptions;
@@ -411,6 +410,13 @@ export interface MetricConfig {
    * statsDataId から決定的に導出できない editorial データのため config が保持する。
    */
   surveyId?: string;
+  /**
+   * 統計調査 taxonomy の明示的な対象外契約。
+   * 行政台帳・施設レジストリ・GIS 集計など、調査へ誤接続してはいけない指標だけに付ける。
+   */
+  surveyScope?: 'not-applicable';
+  /** surveyScope を付けた根拠。監査可能な説明として10文字以上を必須にする。 */
+  surveyScopeReason?: string;
   /**
    * 関連タグの tagKey 配列 (例: ["population", "aging"])。RankingItem.tags の SSOT。
    * 手動付与の editorial データ。builder で { tagKey } 形に写像する。

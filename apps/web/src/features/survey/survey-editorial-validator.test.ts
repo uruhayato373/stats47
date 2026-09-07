@@ -72,7 +72,7 @@ describe('validate-survey-portfolio editorial gates', () => {
     );
   }, CLI_TEST_TIMEOUT_MS);
 
-  it('移行完了後は通常CI経路でも88件の完全ゲートを通す', () => {
+  it('通常CI経路で実装済み88件の件数・品質ratchetを通す', () => {
     const result = runValidator([]);
     const output = JSON.parse(result.stdout);
 
