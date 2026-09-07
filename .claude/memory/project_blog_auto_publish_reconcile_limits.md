@@ -27,6 +27,12 @@ metadata:
   prunerはこの未退避ファイルを検出して保持する。公開差分0と削除可能は別判定であり、
   残ったコピーを未公開と数えたり、クリーン化のために一括削除したりしない。
 
+## 2026-09-08 画像不変の再公開がfresh CIで停止する問題
+
+- **問題**: source lineageだけを変更した発電2記事の再公開は `34150800541` の2試行とも画像planのENOENTで停止した。
+- **原因**: 画像の変更0件ではrenderを通らず、fresh checkoutの `.local` が存在しないまま空planを `writeFileSync` していた。既存 `.local` があるローカルでは再現しない。読み取りや一過性のR2障害ではない。
+- **対策**: 空planを書き込む直前に親ディレクトリを作成する。ネットワーク・画像生成なしの実CLIをfresh fixtureで実行する3回帰テスト（親不在、旧plan置換と無関係ファイル保持、audit時の新規出力なし）を `test:image-pipeline` に組み込む。背景をforce再生成したり、exact plan検証を省略したりしない。
+
 ## 2026-06 当時の制約
 
 `blog-auto-publish.yml`（develop への docs/21 article.md push で発火、完全DBレス公開ブリッジ）の旧2制約。
