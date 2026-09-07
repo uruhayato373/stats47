@@ -60,4 +60,10 @@ ranking cardが404で、デプロイ後のroute smokeが失敗した。
 - **原因**: diff-push の manifest は prefix ごとに別ファイルであり、`app/ranking` の送信記録を `_all` は参照しない。
 - **対策**: `--only ranking-items` の生成・中間 push 成功時だけ、末尾を未送信の `app/ranking-items` inventory に限定。生成失敗時の部分成果救済、途中 push 失敗時の停止、全task実行の依存順は維持する。`sync-snapshots-run-contract.test.mjs` の正常・生成失敗・inventory送信失敗テストで固定。全task実行の重複送信はこの変更の対象外。
 
+## 2026-09-08 公開確認時の画像対象を限定する
+
+- **問題**: ranking-items / master の単独同期でも、後続画像フックが全KNOWNを候補に旧manifest移行を最大50件ずつ行い、少数指標の公開確認に無関係な画像処理が重複する。
+- **対策**: `sync-snapshots.yml` の任意入力 `ranking_image_keys` にCSVで明示する。1〜50個のactive prefectureキーと対応taskをR2書込み前に検証し、ranking / ranking-cardsの両方へ同じ範囲を渡す。snapshot本体の範囲は変えず、既存の `ranking_keys` は引き続きranking-values専用。空欄なら従来のKNOWN全体から最大50件のself-healを維持する。
+- **検証**: 不正/重複/未知/対象外task、50件境界、両画像typeの同一範囲、生成/plan欠落/送信失敗時の停止を `ranking-scoped-workflow.test.mjs` に固定。公開後は対象画像のR2 SHA・寸法と本番routeを実測する。
+
 [[project_dbless_migration_2026_05_29]] [[feedback_check_why_removed_before_reviving]]
