@@ -138,6 +138,11 @@ updated: 2026-09-08
 タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node .claude/scripts/ads/audit-affiliate-inventory.ts の furusato 横長 banner ≥ 7] [起票:2026-09-03] [期日:2026-09-30]
 
 - **owner**: uruhayato373 (ASP 提携) / affiliate-manager (登録)
+- **再開条件**: A8・もしもへ再ログインしてstats47帰属をassertする。2026-09-08は両ASPで
+  ログイン未検知のため照合・申請0件。台帳上appliedのチョイス `s00000019332001` と
+  さとふる `s00000014771001` は承認照合を先に行い、重複申請しない。
+  もしもポケマル3830も台帳approvedなので既存提携を確認する。料率だけでなく成果・否認条件と
+  素材を確認し、申請対象または公開対象を指定して承認を得る。
 - **なぜ**: #913 で家計調査 (ランキング 28,867 + ブログ 12,366 imp/週) と農業・地方財政が furusato に
   集まる。一方 furusato の横長バナーは **4 本** (イオン九州 ×2・ふるさと本舗・au PAY) で、3 枠を
   埋めると毎ページ同じ並びになる。需要と在庫が最も逆転している軸。
@@ -516,6 +521,8 @@ updated: 2026-09-08
   `placement-map-latest.json` の `unmapped.byReason.tags-unmapped` と `demand.byVertical` が
   実態と食い違う (家計調査ページが economy に計上され続ける)。`survey-hardcoded-tags` の理由コードも
   2026-07-28 に survey ページが categoryKey 最頻値へ変わった時点で stale。
+- **現在地**: `codex/affiliate-optimization` で実際のTS resolverを共有し、R2の調査メタを入力化。
+  ローカル回帰テストと公開R2を読むdry-runを検証し、取り込み後の週次出力確認を残す。
 - **次**: builder の入力に surveyIds (R2 `app/ranking/<key>/item.json` / `app/blog/all.json`) を足し、
   `resolveContentVertical` と同じ順で判定する。判定は純関数のまま (`placement-map-core.test.mjs` に
   「調査 null → 広告なし」「調査あり → カテゴリより優先」のケースを追加)。
@@ -556,6 +563,14 @@ updated: 2026-09-08
 タグ: [UI・UX] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- src/features/ads] [起票:2026-09-03] [期日:2026-10-31]
 
 - **owner**: ranking-ui-manager / affiliate-manager
+- **現在地**: `codex/affiliate-optimization` に配置移動と商品click/impressionの配置名統一を実装中。
+  元のdevelopは変更せず、公開承認待ち。固定28日baselineは
+  `.claude/state/metrics/affiliate-placement-baseline-2026-09-08.json`。
+- **公開後の次**: 48時間後に `rakuten-sidebar` のpage/device別計測を確認し、未取得なら
+  商品在庫・DOM表示・GA4送信を切り分ける。14日以上の非重複窓で表示/PV・商品クリックを比較し、
+  楽天成果レポート未取得の間は収益増と判定しない。直前のPR945の影響と混在するため因果効果は断定しない。
+- **未完了**: 「楽天市場で探す」は通常検索URLのまま、affiliate_clickから除外済み。
+  収益化するには楽天公式リンク作成で発行した検索リンクを取得し、生成URLを改変せず採用する。
 - **なぜ**: 「納豆消費量ランキング」の読者に最も合うのは品目一致の楽天商品カードだが、現在は
   右レールの末尾 (`RakutenItemsCard`) にあり、GA4 では `blog-sidebar` / `ranking-sidebar` に
   混ざって計測されるため効果を分離できない。

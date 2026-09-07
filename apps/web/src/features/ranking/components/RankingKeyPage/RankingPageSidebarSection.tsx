@@ -56,6 +56,16 @@ export function RankingPageSidebarSection({
   surveyRelatedItems,
   rankingName,
 }: RankingPageSidebarSectionProps) {
+  // 品目が一致する家計調査だけを優先する。null（広告なし）の解決結果は覆さない。
+  // 品目・R2在庫がない場合、カード自身が何も描画しない。
+  const prioritizeRakutenItems = affiliateVertical !== null
+    && surveys.some((survey) => survey.id === "kakei-chousa");
+  const rakutenItems = (
+    <RakutenItemsCard
+      sourceText={rankingName}
+      position={prioritizeRakutenItems ? "rakuten-sidebar" : "ranking-sidebar"}
+    />
+  );
   const contextualAffiliateBanners = (
     <AffiliateAdSlot
       categoryKey={rankingItem.categoryKey ?? ""}
@@ -75,6 +85,7 @@ export function RankingPageSidebarSection({
         areaType={areaType}
         categoryKey={rankingItem.categoryKey}
       />
+      {prioritizeRakutenItems && rakutenItems}
       {/* AdSense停止中は、空いた上段へ既存の文脈一致バナーを移す。
           枠数は最大2のまま、表示位置だけを上げてviewable impressionを増やす。 */}
       {!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
@@ -88,7 +99,7 @@ export function RankingPageSidebarSection({
       )}
       <SidebarPromoBanner index={selectPromoBannerIndexForRanking(rankingKey)} />
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
-      <RakutenItemsCard sourceText={rankingName} position="ranking-sidebar" />
+      {!prioritizeRakutenItems && rakutenItems}
       <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
       {/* AdSense再開時は従来位置へ戻し、同一バナーを二重描画しない。 */}
       {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
