@@ -29,6 +29,14 @@ test("適切な画像・リンク・操作要素を受理する", (t) => {
   const result = run(item); assert.equal(result.status, 0, result.stderr);
 });
 
+test("hidden inputは名前を要求せず、可視・動的typeのinputは引き続き検査する", (t) => {
+  const item = fixture(`export const C=()=> <><input type="hidden" name="type" value="blog"/><input type={'hidden'} name="kind"/><input type="text"/><input type={fieldType}/><select/><textarea/></>`);
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.equal(result.status, 1);
+  assert.equal(result.output.findings.filter((v) => v.code === "FORM_NAME_MISSING").length, 4);
+});
+
 test("alt欠落と危険なblank linkを検出する", (t) => {
   const item = fixture(`export const C=()=> <><img/><a target="_blank">x</a></>`);
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
