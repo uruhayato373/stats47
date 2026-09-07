@@ -2,7 +2,7 @@
 title: 今週の計画
 type: weekly-plan
 week: 2026-W37
-updated: 2026-09-07
+updated: 2026-09-08
 status: active
 ---
 
@@ -17,7 +17,7 @@ status と期限は各バックログを正典とし、ここには週内に検�
 - **重点2**: 公開しているものが正しいかを確定させる
 
 月次の週配分では、W37 は「W36 の週次レビュー作成 / GA4 アフィリエイト cron の stale 解消 /
-91 記事の背景生成着手 / 25 metric の分類」を担当する。今週の Must 3 件はこの 4 つのうち
+公開待ち記事の背景生成 / 25 metric の分類」を担当する。今週の Must 3 件はこの 4 つのうち
 私が完了まで持てる 3 つで、背景生成はオーナー作業のため Should に置いた。
 
 ## 前週の振り返り（W36 レビュー作成済み）
@@ -51,9 +51,9 @@ Must は私が単独で完了まで持てる粒度だけにする**。
 | GSC impressions（確定7日 W36） | 61,829 | 42,756 | +44.6% |
 | GSC 平均順位（確定7日 W36） | 7.45 | 7.64 | 改善 |
 | GSC clicks（ローリング28日 W36） | 6,053 | 4,921 | 機会発見用。WoW 判定には使わない |
-| ranking ai-content done | 2,154 / 2,154（100%） | — | 在庫消化は完了。品質確定は重点2 のゴール2 |
+| ranking ai-content done | 2,166 / 2,166（100%） | — | 最新集合で未作成0。全件の意味レビューとは区別する（LATEST参照） |
 | ブログ是正キュー | pending 270 / must-fix 33 / done 21 | pending 270 | 母数が 8 月の 85 本公開で増えたまま |
-| 公開待ちブログ | **96 本**（背景あり 23 / なし 73） | 91 本 | 背景あり 23 本は今週公開できる |
+| 今回のブログ公開対象 | **73本R2公開済み・公開差分0** | 旧見積91本 | 9/8に再照合。19本の既公開コピーは未退避prompt保護のため残す |
 | GA4 アフィリエイト snapshot | 2026-08-28（10 日 stale） | 同左 | Must 2 で解消する |
 | 改善バックログ active | 31 行（Tier1 11 / Tier2 16 / Tier3 4） | 42 行 | 09-07 の整理で Due 超過 0 件 |
 | search-growth | 候補 1,060 / approved 1 / dismissed 1 | 同左 | 週 1〜2 件の採択が未開始 |
@@ -128,32 +128,19 @@ Must は私が単独で完了まで持てる粒度だけにする**。
   - **成功基準**: 判断とその根拠が本ファイルまたは `backlog.md` の該当カードに残っている。
   - **停止条件**: デプロイの実行はオーナーの明示承認まで行わない（`branch-workflow.md`）。
 
-- [ ] **`BLOG-PUBLISH-THUMBNAIL-GUARD-01`（per-slug skip）を直す**（重点1 ゴール4・S）
-  - 背景の無い 1 件で run 全体が止まる構造を、該当 slug だけ SKIPPED に積んで次へ進む形にする。
-    ci-factual-gate と quality-gate は既にこの形なので、thumbnail 生成以降を揃えるだけである。
-  - **成功基準**: 背景の無い slug を 1 件混ぜた run で、他の slug が公開されることを実測する
-    （全 PASS は「何も見ていない」と区別が付かないので、混ぜずに緑になっただけでは完了としない）。
-    Step Summary に skip 理由が残ることまでを条件に含める。
-  - これが通れば背景済み 23 本が 73 本を待たずに公開できる。**公開の実行は別途承認を得る。**
+- [x] **`BLOG-PUBLISH-THUMBNAIL-GUARD-01`（per-slug skip）を直す**（重点1 ゴール4・S）
+  - run `34113401278` で背景不足1件の理由付き保留と後続4記事の公開を実測済み。
+    正典: `.claude/memory/project_blog_auto_publish_reconcile_limits.md`。未知エラーの停止契約は維持。
 
-- [ ] **公開待ち 73 記事の背景画像を生成する**（重点1 ゴール4・L・**owner: uruhayato373**）
-  - Codex MCP はクラウドセッションで `ENOENT` になるため、ローカル Mac の
-    Codex built-in imagegen が必須。私が代行できない。
-  - 公開前の記事なので `--article <article.md>` を必ず付ける（省くと R2 404）。
-    ```bash
-    npm run blog-images:codex -- request-article --slug <slug> \
-      --article "docs/21_ブログ記事原稿/<slug>/article.md"
-    ```
-  - **成功基準**: 今週中に 73 件のうち一定数が git tracked の
-    `blog-article-backgrounds/<slug>.jpg` として存在する。月次の判断点は W38 時点で
-    残り 30 件を切っているかで、切っていなければ 96 本を分割公開へ切り替える。
+- [x] **今回の公開対象73記事の背景画像を揃える**（重点1 ゴール4・L・owner: Codex）
+  - 記事固有背景73件をgitに保存し、派生画像292枚・73manifestのR2一致を確認済み。
+    記事はrun `34139507934` で公開、PR #945でアプリ反映。全ページの最終実測とカード回収は
+    `BLOG-BACKGROUND-BATCH-01` の公開ゲートに従う。未退避promptを含む既公開コピーは削除しない。
 
-- [ ] **`data-refresh.yml` の失敗 run を切り分ける**（重点2 の隣接・S）
-  - run 34017315294（2026-09-06・「十大費目11指標の R2 反映を data-refresh へ依頼」）が
-    3m35s で failure。11 指標の R2 反映が止まっている。
-  - **成功基準**: 失敗が入力（request の指標指定）側か e-Stat 取得側かが判明し、
-    `DATA-ESTAT-FETCH-01` の 25 件と同じ原因かどうかが言える。**再実行を先に試さない**
-    （同じ入力の無意味な再実行を止めるのが `DATA-ESTAT-FETCH-01` の手順1 でもある）。
+- [x] **`data-refresh.yml` の失敗 run を切り分ける**（重点2 の隣接・S）
+  - run `34017315294` はe-Stat取得でなく非商用KSJのitem生成で停止。`602b885aa` で生成側を是正済み。
+    家計9件は正典valuesが200・配信valuesが404だったため、限定派生生成で復旧した。
+    `DATA-ESTAT-FETCH-01` の取得失敗25件とは別の障害。11指標の公開完了証跡はIssue #931で管理する。
 
 ## Could（2 件）
 
@@ -245,4 +232,4 @@ Must は私が単独で完了まで持てる粒度だけにする**。
 - GSC cycle audit: `.claude/state/metrics/gsc/operations-cycle-LATEST.md`
 - search-growth: `.claude/state/search-growth/{health,candidates}.json`
 - ブログ是正キュー: `.claude/state/blog/remediation-queue.json`（2026-09-06 生成）
-- ai-content の現況: `.claude/state/ai-content/LATEST.md`（2026-09-06 生成）
+- ai-content の現況: `.claude/state/ai-content/LATEST.md`（R2から再導出する最新値）
