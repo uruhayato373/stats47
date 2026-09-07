@@ -1,13 +1,13 @@
 {
-  "total": 1420,
+  "total": 1427,
   "staged": false,
   "byStatus": {
-    "both": 1325,
+    "both": 1332,
     "jsonOnly": 0,
     "neither": 95
   },
   "byMethod": {
-    "done": 1325,
+    "done": 1332,
     "manual": 40,
     "ssot-restore": 22,
     "ssot-restore-new": 33
@@ -7550,6 +7550,17 @@
       "residualCard": null
     },
     {
+      "slug": "kagoshima-food-culture",
+      "base": "kagoshima-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "kanagawa-food-culture",
       "base": "ham-ranking",
       "chartType": "ranking",
@@ -7828,6 +7839,17 @@
       "slug": "kumamoto-food-culture",
       "base": "watermelon-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "kumamoto-food-culture",
+      "base": "kumamoto-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -9013,6 +9035,17 @@
       "residualCard": null
     },
     {
+      "slug": "miyazaki-food-culture",
+      "base": "miyazaki-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "miyazaki-municipal-finance",
       "base": "miyazaki-municipal-finance-finance-index-ranking",
       "chartType": "ranking",
@@ -9335,6 +9368,28 @@
       "slug": "nagasaki-food-culture",
       "base": "freshfish-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "nagasaki-food-culture",
+      "base": "ramen-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "nagasaki-food-culture",
+      "base": "nagasaki-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -9893,6 +9948,17 @@
       "residualCard": null
     },
     {
+      "slug": "okayama-food-culture",
+      "base": "okayama-quantity-price-findings",
+      "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "okinawa-food-culture",
       "base": "katsuobushi-ranking",
       "chartType": "ranking",
@@ -9918,6 +9984,17 @@
       "slug": "okinawa-food-culture",
       "base": "squid-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "okinawa-food-culture",
+      "base": "okinawa-quantity-price-findings",
+      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
