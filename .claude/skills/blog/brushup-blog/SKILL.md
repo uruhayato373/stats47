@@ -59,7 +59,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
    - `である調 文末` (dearuEndings>0) → **本文を ですます調 に変換** (である。→です。/だった。→でした。/ではない。→ではありません。/動詞終止形→ます形)。callout・引用・データ出典の体言止めは対象外 (正典 `.claude/rules/blog-quality-standards.md`「文体」)。**★copula だけの正規表現一括置換は禁止** (2026-06-13 実証): 動詞終止形・形容詞終止 (〜もたらす。/〜多い。) が常体で残り「です。」と混在して崩壊し、`quality-gate.mjs` は copula しか見ないため**通ってしまう**。必ず article-writer エンジンが**文単位で ですます完全化**する
    - `rank 主張あるが data 無し` (検証不能 blocker) → R2 `app/ranking/<key>/values.json` から `data/<name>-prefecture-rankings.json` を生成 (value 降順で rank 再計算) し本文数値を data に一致させる
    - `prose/図 <350` → **各図直下に「なぜ上位/下位か」の解釈段落**を追加 (記事アーキタイプの必須分析視点。図あたり ~600字)
-   - `callouts<2` → **記事固有の「読み違い防止の知識」** callout を追加 (全記事共通の定型は不可)
+   - `adjacent-callouts` → 最重要の注意だけを callout に残し、分析・読み方・補足は通常本文へ戻すか対応する節へ分散する (連続配置のまま余白だけ足さない)。全記事の機械是正は `node .claude/scripts/blog/fix-consecutive-callouts.mjs --base docs/21_ブログ記事原稿 --apply` を使う
    - `internalLinks<3` / source-link 末尾集約 → source-link を各図直下にインライン配置
    - `リンク切れ (soft 404 / 410 Gone)` → **勝手に近そうな別ページへ張り替えない**。`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (アンカーテキストが指す指標が実在 metric の title と一致する場合のみ。無ければ `to: null` = リンク解除) と `reason` を追記し、`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply` で決定的に是正する (置換先を live 実測し到達不能なら中断する)。正典 `.claude/rules/blog-quality-standards.md` §内部リンクの実在
    - opportunity レーン (blocker 無し・CTR 改善余地) → `CTR-reframe`
@@ -241,7 +241,7 @@ best 案で seoTitle / description / 本文を再構成する。構成テンプ�
 7. データの位置づけ (古いデータは基準年フレーミング) / 8. 出典 + ライセンス
 9. 関連ランキング・記事 (内部リンク 6+ 個)
 
-必須要素: callout 3-4 個 (`[!NOTE]`/`[!WARNING]`/`[!TIP]` ミックス) / chart 1-2 個 (SVG、TOP10 + 対比) / 内部リンク 6+ 個。`<source-link href="/ranking/...">` は対応する図の直下にインライン配置 (末尾集約禁止)。
+必須要素: chart 1-2 個 (SVG、TOP10 + 対比) / 内部リンク 6+ 個。callout は必要な注意・定義だけに0-3個を目安として使い、数合わせや連続配置をしない。`<source-link href="/ranking/...">` は対応する図の直下にインライン配置 (末尾集約禁止)。
 
 ### focus=エキスパート視点追加 のフロー (対話実行限定・1-2 節のみ)
 
@@ -316,7 +316,7 @@ node .claude/scripts/blog/quality-gate.mjs <slug>
 # exit 0 → 確定 / exit 1 → blocker を修正して再実行 (batch では revert + skip)
 ```
 
-quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の data 突合・callout/内部リンク/H2・**prose 文字数の床 (1600)**・NG ワード・**truncated 表**を一括検証する。
+quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の data 突合・callout連続配置/内部リンク/H2・**prose 文字数の床 (1600)**・NG ワード・**truncated 表**を一括検証する。
 
 > **★公開記事は blog-critic レビュー (review.md verdict: PASS) が必須**: `published:true` の記事は
 > `docs/21_ブログ記事原稿/<slug>/review.md` (別 agent `blog-critic` が `/blog-review --mode expert` で生成、

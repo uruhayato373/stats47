@@ -181,6 +181,8 @@ test('正常なドラフトでは新 gate が 1 つも発火しない', (dirs) =
     'svgLineageMissing',
     'svgSizeViolations',
     'svgPairViolations',
+    'adjacentCalloutClusters',
+    'adjacentCalloutPairs',
   ]) {
     assert.strictEqual(
       c[key],
@@ -188,6 +190,19 @@ test('正常なドラフトでは新 gate が 1 つも発火しない', (dirs) =
       `${key} が ${c[key]} (0 のはず): ${r.blockers.join(' / ')}`
     );
   }
+});
+
+test('callout 連続配置 → adjacent-callouts blocker', (dirs) => {
+  const b = newBlockers((f) => {
+    f.article = f.article.replace(
+      '> [!WARNING]\n> 2018年に産業分類が変更されており、それ以前の年との単純比較はできません。',
+      '> [!WARNING]\n> 2018年に産業分類が変更されており、それ以前の年との単純比較はできません。\n\n> [!TIP]\n> 人口あたりでも確認してください。'
+    );
+  }, dirs);
+  assert.ok(
+    b.some((x) => x.includes('adjacent-callouts')),
+    `検出されず: ${b.join(' / ')}`
+  );
 });
 
 // --- 違反を 1 つ注入すると発火すること ---

@@ -15,7 +15,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 
 | 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
 |---|---|---|---|
-| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout数/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**。**不可: 読者価値の有無** |
+| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout連続配置/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**。**不可: 読者価値の有無** |
 | ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」 |
 | ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
 
@@ -178,7 +178,8 @@ date: YYYY-MM-DD
 
 ### コール アウトの活用
 
-`[!NOTE]`, `[!TIP]`, `[!WARNING]` callout を 2-4 個配置:
+`[!NOTE]`, `[!TIP]`, `[!WARNING]` callout は、通常本文と明確に役割が違う情報だけに使います。
+個数の最低条件は設けません。数合わせで追加せず、目安は記事全体で0-3個です。
 
 ```markdown
 > [!NOTE]
@@ -190,6 +191,12 @@ date: YYYY-MM-DD
 > [!TIP]
 > 読み解くコツ・関連指標
 ```
+
+**callout を連続配置しない。** 通常本文・見出し・図表を挟まずに複数の callout を並べると、
+本文より注記の面積と色が勝ち、重要度の差も読者に伝わりません。最も重要な注意だけを callout に残し、
+分析・読み方・補足は通常本文へ戻すか、対応する節へ分散します。公開済みの旧記事は表示時に
+`CAUTION > WARNING > IMPORTANT > NOTE > TIP` の順で1つだけカード表示し、残りをラベル付き通常本文へ
+自動的に戻します。新規・再公開記事は `lintConsecutiveCallouts` が blocker として止めます。
 
 ### 構造テンプレート
 
@@ -439,7 +446,7 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 ### 各型の章構成テンプレ
 
 すべての型に共通の制約を内包する: 表禁止 (データは SVG 図) / 上位5+下位5 の SVG が標準 / 各図直下に
-`<source-link href="/ranking/{key}">` をインライン / curiosity gap タイトル (1 要素・~17字) / 図あたり ≥350字 / H2≥4 / callout≥3 /
+`<source-link href="/ranking/{key}">` をインライン / curiosity gap タイトル (1 要素・~17字) / 図あたり ≥350字 / H2≥4 / callout連続禁止 /
 内部リンク≥3。**核心の insight は冒頭〜前半に先出しする** (後置すると離脱する)。
 チャートは **tile-grid 地図と散布図を優先**し 3 図構成を標準とする (winning-patterns robust: hasMap +15.4% /
 hasScatter +15.4% / chartCount winner 中央値 3)。図あたり prose は **~550 字を目標** (床 350 字は gate。
@@ -620,7 +627,8 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | **数値: 県名直後の括弧に値・順位を書かない** | 機械 | blocker | `lintParenNumbers` |
 | 数値: 本文の値が data/*.json と一致 | 機械 | warn/blocker | `checkArticleFactual` |
 | 数値: rank 主張があるのに ground truth 無し | 機械 | blocker | `rankClaimCount` gate |
-| callout 2 個以上 / 3 個推奨 | 機械 | blocker/warn | `countCallouts` |
+| callout の個数 | **critic** | — | 最低数を強制しない。必要性と情報量を意味判断する |
+| callout の連続配置禁止 (通常本文・見出し・図表を挟む) | 機械 | blocker | `lintConsecutiveCallouts` |
 | callout の中身が定型でない | **critic** | — | 数は数えられるが情報量は測れない |
 | H2 4 個以上 | 機械 | blocker | `getH2Count` |
 | prose 1600字 (床) / 2400字 (推奨) | 機械 | blocker/warn | `getCharCount` |
@@ -657,7 +665,7 @@ blocker にし、境界は非検出テストで固定する。
 **実装済の決定的チェック**:
 
 ```bash
-# 単一記事の総合ゲート (callout≥2 / 内部リンク≥3 / H2≥4 / charCount / source-link 配置 / factual)
+# 単一記事の総合ゲート (callout連続禁止 / 内部リンク≥3 / H2≥4 / charCount / source-link 配置 / factual)
 # 引数は <slug> (=.local/r2/app/blog/<slug>/article.md を解決) または article.md への直接パス
 node .claude/scripts/blog/quality-gate.mjs <slug | path/to/article.md>
 
