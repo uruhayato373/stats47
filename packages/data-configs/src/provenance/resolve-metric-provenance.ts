@@ -13,10 +13,10 @@
  * ビルド/exporter で使う。最終的に snapshot に originalSurveys を焼き込み、アプリは snapshot を読む。
  */
 
-import type { MetricConfig, MetricRegistry, SourceConfig } from "../types";
-import { DISPLAYNAME_TO_SURVEY } from "../ssds/displayname-to-survey";
-import estatProvenanceJson from "../ssds/estat-provenance.generated.json";
-import ssdsProvenanceJson from "../ssds/ssds-provenance.generated.json";
+import type { MetricConfig, MetricRegistry, SourceConfig } from '../types';
+import { DISPLAYNAME_TO_SURVEY } from '../ssds/displayname-to-survey';
+import estatProvenanceJson from '../ssds/estat-provenance.generated.json';
+import ssdsProvenanceJson from '../ssds/ssds-provenance.generated.json';
 
 export type ProvenanceSurvey = { id: string; name: string };
 
@@ -33,8 +33,8 @@ export type SourceAttribution = {
 
 /** SSDS の編成統計メタ (社会・人口統計体系)。 */
 const SSDS_COMPILATION = {
-  name: "社会・人口統計体系",
-  url: "https://www.stat.go.jp/data/ssds/index.htm",
+  name: '社会・人口統計体系',
+  url: 'https://www.stat.go.jp/data/ssds/index.htm',
 } as const;
 
 type SsdsEntry = { kind: string; originalSurveys: ProvenanceSurvey[] };
@@ -47,7 +47,10 @@ const ESTAT_PROVENANCE = estatProvenanceJson as {
 const SSDS_TABLE_IDS = new Set(ESTAT_PROVENANCE.ssdsTableIds);
 
 // kind:"kakei-chousa" は家計調査（品目別）= survey マスタの "kakei-chousa" バケット
-const KAKEI_SURVEY: ProvenanceSurvey = { id: "kakei-chousa", name: "家計調査（品目別）" };
+const KAKEI_SURVEY: ProvenanceSurvey = {
+  id: 'kakei-chousa',
+  name: '家計調査（品目別）',
+};
 
 function dedupe(surveys: ProvenanceSurvey[]): ProvenanceSurvey[] {
   const seen = new Map<string, ProvenanceSurvey>();
@@ -67,7 +70,7 @@ export function isSsdsStatsDataId(statsDataId: string | undefined): boolean {
  */
 export function resolveProvenanceByParams(
   statsDataId: string | undefined,
-  cdCat01: string | undefined,
+  cdCat01: string | undefined
 ): ProvenanceSurvey[] {
   if (!statsDataId) return [];
   if (SSDS_TABLE_IDS.has(statsDataId)) {
@@ -78,20 +81,45 @@ export function resolveProvenanceByParams(
 }
 
 function resolveCalculated(
-  source: Extract<SourceConfig, { kind: "calculated" }>,
+  source: Extract<SourceConfig, { kind: 'calculated' }>,
   registry: MetricRegistry | undefined,
-  depth: number,
+  depth: number
 ): ProvenanceSurvey[] {
   if (!registry || depth > 4) return [];
   const f = source.formula;
   const operandKeys: string[] = [];
-  if (f.op === "divide") operandKeys.push(f.numerator, f.denominator);
-  else if (f.op === "multiply") operandKeys.push(f.left, f.right);
-  else if (f.op === "per_population") operandKeys.push(f.numerator);
+  if (f.op === 'divide') operandKeys.push(f.numerator, f.denominator);
+  else if (f.op === 'multiply' || f.op === 'subtract')
+    operandKeys.push(f.left, f.right);
+  else if (f.op === 'per_population') operandKeys.push(f.numerator);
   const out: ProvenanceSurvey[] = [];
   for (const key of operandKeys) {
     const m = registry[key];
     if (m) out.push(...resolveMetricProvenance(m, registry, depth + 1));
+  }
+  return out;
+}
+
+function resolveLegacyCalculated(
+  metric: MetricConfig,
+  registry: MetricRegistry | undefined,
+  depth: number
+): ProvenanceSurvey[] {
+  if (!registry || depth > 4) return [];
+  const calculation = metric.calculation;
+  const operandKeys = [
+    calculation?.numeratorKey ??
+      calculation?.numeratorRankingKey ??
+      calculation?.numerator,
+    calculation?.denominatorKey ??
+      calculation?.denominatorRankingKey ??
+      calculation?.denominator,
+  ].filter((key): key is string => Boolean(key));
+  const out: ProvenanceSurvey[] = [];
+  for (const key of operandKeys) {
+    const operand = registry[key];
+    if (operand)
+      out.push(...resolveMetricProvenance(operand, registry, depth + 1));
   }
   return out;
 }
@@ -105,20 +133,27 @@ function resolveCalculated(
 export function resolveSourceProvenance(
   source: SourceConfig,
   registry?: MetricRegistry,
-  depth = 0,
+  depth = 0
 ): ProvenanceSurvey[] {
   switch (source.kind) {
-    case "kakei-chousa":
+    case 'kakei-chousa':
       return [KAKEI_SURVEY];
-    case "estat":
-      return dedupe(resolveProvenanceByParams(source.statsDataId, source.cdCat01));
-    case "calculated":
+    case 'estat':
+      return dedupe(
+        resolveProvenanceByParams(source.statsDataId, source.cdCat01)
+      );
+    case 'calculated':
       return dedupe(resolveCalculated(source, registry, depth));
-    case "mlit":
-    case "external":
+    case 'mlit':
+    case 'external':
       if (!source.displayName) return [];
       return DISPLAYNAME_TO_SURVEY[source.displayName]
-        ? [{ id: DISPLAYNAME_TO_SURVEY[source.displayName], name: source.displayName }]
+        ? [
+            {
+              id: DISPLAYNAME_TO_SURVEY[source.displayName],
+              name: source.displayName,
+            },
+          ]
         : [{ id: `src:${source.displayName}`, name: source.displayName }];
     default:
       return [];
@@ -134,8 +169,15 @@ export function resolveSourceProvenance(
 export function resolveMetricProvenance(
   metric: MetricConfig,
   registry?: MetricRegistry,
-  depth = 0,
+  depth = 0
 ): ProvenanceSurvey[] {
+  if (
+    metric.source.kind === 'external' &&
+    metric.source.fetcherKey === 'calculated'
+  ) {
+    const resolved = dedupe(resolveLegacyCalculated(metric, registry, depth));
+    if (resolved.length > 0) return resolved;
+  }
   return resolveSourceProvenance(metric.source, registry, depth);
 }
 
@@ -146,10 +188,12 @@ export function resolveMetricProvenance(
  */
 export function resolveAttribution(
   statsDataId: string | undefined,
-  cdCat01: string | undefined,
+  cdCat01: string | undefined
 ): SourceAttribution {
   return {
-    compilation: isSsdsStatsDataId(statsDataId) ? { ...SSDS_COMPILATION } : null,
+    compilation: isSsdsStatsDataId(statsDataId)
+      ? { ...SSDS_COMPILATION }
+      : null,
     originalSurveys: resolveProvenanceByParams(statsDataId, cdCat01),
   };
 }

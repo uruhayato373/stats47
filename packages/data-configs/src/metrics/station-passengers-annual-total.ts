@@ -1,4 +1,4 @@
-import type { MetricConfig } from "../types";
+import type { MetricConfig } from '../types';
 
 /**
  * 47 都道府県 年間総乗降客数 (鉄道駅集計)。
@@ -14,26 +14,26 @@ import type { MetricConfig } from "../types";
  *   - 現状: `apps/remotion/public/station-passengers/{NN,lines-NN}.json` の 2026-05-25 snapshot を継続使用
  */
 export const stationPassengersAnnualTotal: MetricConfig = {
-  key: "station-passengers-annual-total",
-  title: "都道府県別 年間総乗降客数",
-  subtitle: "国土数値情報 駅別乗降客数調査 (S12)",
+  key: 'station-passengers-annual-total',
+  title: '都道府県別 年間総乗降客数',
+  subtitle: '国土数値情報 駅別乗降客数調査 (S12)',
   description:
-    "都道府県内の鉄道駅における年間乗降客数の合計。Remotion StationPassengersReel で使用。",
-  unit: "人",
-  category: "tourism",
+    '都道府県内の鉄道駅における年間乗降客数の合計。Remotion StationPassengersReel で使用。',
+  unit: '人',
+  category: 'tourism',
   source: {
-    kind: "mlit",
-    resourceId: "S12",
-    displayName: "国土数値情報 駅別乗降客数 (S12)",
-    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12.html",
+    kind: 'mlit',
+    resourceId: 'S12',
+    displayName: '国土数値情報 駅別乗降客数 (S12)',
+    url: 'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12.html',
   },
-  entities: ["prefecture"],
-  years: "all",
-  yearFormat: "fiscal",
+  entities: ['prefecture'],
+  years: 'all',
+  yearFormat: 'fiscal',
   visualization: {
-    colorScheme: "interpolateBlues",
-    colorSchemeType: "sequential",
-    minValueType: "zero",
+    colorScheme: 'interpolateBlues',
+    colorSchemeType: 'sequential',
+    minValueType: 'zero',
   },
   display: {
     conversionFactor: 1,
@@ -42,5 +42,8 @@ export const stationPassengersAnnualTotal: MetricConfig = {
   calculation: {
     isCalculated: false,
   },
+  surveyScope: 'not-applicable',
+  surveyScopeReason:
+    '国土数値情報の駅別GISデータを都道府県別に集計する指標で、統計調査を原典としないため',
   isActive: false,
 };

@@ -1,308 +1,156 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-06T17:40:54.583Z",
-  "masterSurveyCount": 105,
+  "generatedAt": "2026-09-07T12:46:09.897Z",
+  "masterSurveyCount": 130,
   "ranking": {
     "metrics": 2311,
     "activeMetrics": 2166,
-    "resolved": 2097,
-    "unresolved": 214,
-    "coveragePct": 90.74,
-    "activeResolved": 1962,
-    "activeUnresolved": 204,
-    "activeCoveragePct": 90.58,
-    "activeUnresolvedKeys": [
-      "academic-achievement-test-average-rate",
-      "accident-death-30day",
-      "agricultural-land-conversion-area",
+    "applicableMetrics": 2303,
+    "activeApplicableMetrics": 2159,
+    "notApplicable": 8,
+    "activeNotApplicable": 7,
+    "resolved": 2303,
+    "unresolved": 0,
+    "coveragePct": 100,
+    "activeResolved": 2159,
+    "activeUnresolved": 0,
+    "activeCoveragePct": 100,
+    "activeNotApplicableKeys": [
       "ambulance-hospital-arrival-time",
-      "annual-cloudy-days",
-      "annual-minimum-relative-humidity",
-      "average-life-expectancy-female-20",
-      "average-life-expectancy-female-65",
-      "average-life-expectancy-male",
-      "average-payment-amount-of-workers-compensation-insurance-benefits",
-      "average-road-traffic-volume",
-      "bamboo-production",
-      "bus-operators",
-      "charcoal-production",
-      "city-gas-meter-count",
-      "city-gas-sales-volume",
-      "city-gas-supply-area-households",
-      "city-ward-assembly-members",
-      "comprehensive-park-count",
-      "convenience-store-sales-yoy",
-      "cook-licensees-by-prefecture",
-      "cpi-regional-difference-index-food-51cities100",
-      "cpi-regional-difference-index-food-tokyo100",
-      "cpi-regional-difference-index-total-51cities100",
-      "cpi-regional-difference-index-total-tokyo100",
-      "cultivated-area",
-      "dental-checkup-guidance-persons",
-      "dental-checkup-persons",
-      "dental-checkup-recipients",
-      "dental-guidance-persons",
-      "designated-difficult-disease",
-      "disabled-employment-rate",
-      "disaster-damage-amount",
-      "disposable-income-after-rent",
-      "elderly-household-detail",
-      "electricity-demand",
-      "electricity-generation-capacity",
-      "elementary-long-term-absent-students",
-      "employment-insurance-basic-benefit-average",
-      "employment-insurance-daily-basic-benefit-average",
-      "employment-insurance-daily-receipt-rate",
-      "employment-insurance-receipt-rate",
-      "engel-coefficient",
-      "factory-industrial-park-rate",
-      "factory-location-area-annual",
-      "final-energy-consumption",
-      "final-energy-consumption-per-capita",
-      "fishery-household-sex-age",
-      "fishery-management-orgs",
-      "fishery-workers",
-      "fishery-workers-coastal-offshore",
-      "fishing-port-count-by-type",
       "fishing-port-count-ksj",
-      "fishing-vessel-crew",
-      "fishing-vessel-tonnage-class",
-      "food-business-establishments",
-      "food-sanitation-inspection",
-      "food-self-sufficiency-rate-calorie",
-      "foreign-resident-population",
-      "gasoline-sales-volume",
-      "general-dust-emission-facility-count",
-      "govt-health-insurance-visit-expense-dependents-per-person",
-      "govt-health-insurance-visit-expense-insured-per-person",
-      "health-checkup-recipients",
       "healthy-life-expectancy-female",
       "healthy-life-expectancy-male",
-      "high-school-new-graduates-employment-rate",
-      "high-school-new-graduates-job-opening-ratio",
-      "hire-taxi-operators",
-      "hobby-activity-by-couple",
-      "hobby-activity-singleperson",
-      "hospital-staff-by-occupation",
-      "household-income-by-type",
-      "household-types-by-area",
-      "housing-site-value-per-3-3m2",
-      "information-communication-coefficient",
-      "japan-health-insurance-society-medical-expense-dependents-per-person",
-      "japan-health-insurance-society-medical-expense-insured-per-person",
-      "japan-health-insurance-society-visit-rate-dependents-per-1000",
-      "japan-health-insurance-society-visit-rate-insured-per-1000",
-      "junior-high-club-per100-badminton",
-      "junior-high-club-per100-baseball-soft",
-      "junior-high-club-per100-basketball",
-      "junior-high-club-per100-kendo",
-      "junior-high-club-per100-soccer",
-      "junior-high-club-per100-soft-tennis",
-      "junior-high-club-per100-swimming",
-      "junior-high-club-per100-table-tennis",
-      "junior-high-club-per100-track-and-field",
-      "junior-high-club-per100-volleyball",
-      "kidney-failure-death-count",
-      "large-scale-park-count",
-      "life-expectancy-0-female",
-      "life-expectancy-0-male",
-      "life-expectancy-65-male",
-      "liver-disease-death-count",
-      "maritime-import-export-cargo",
-      "material-production",
-      "maternal-child-health-guidance",
-      "maximum-snow-depth",
-      "mental-health-application",
-      "midwife-by-prefecture",
-      "municipal-intellectual-disability-consultations",
       "municipality-count",
-      "national-health-insurance-benefits",
-      "national-health-insurance-medical-expense-per-person",
-      "national-health-insurance-visit-rate-per-1000",
-      "national-pension-full-exemption-rate",
-      "national-pension-partial-exemption-rate",
-      "national-tax-collected",
-      "natural-environment-conservation-area",
-      "new-hire-count",
-      "non-regular-employment-rate",
-      "number-of-constructed-buildings",
-      "number-of-freight-cars",
-      "number-of-individual-fishery-management",
-      "nursing-care-insurance-benefit",
       "pachinko-shop-density-per-10k",
-      "pharmacy-count-by-prefecture",
-      "physical-disability-rehabilitation-cases",
-      "planned-construction-cost-per-m2",
-      "pneumonia-death-count",
-      "port-container-count",
-      "port-entry-vessel-count",
-      "port-inbound-ships",
-      "port-ships-tonnage",
-      "port-vehicle-ferry",
-      "prefectural-assembly-members",
-      "private-life-insurance-amount-per-contract",
-      "private-life-insurance-contracts",
-      "private-rental-housing-rent-per-3-3m2",
-      "public-rental-housing-rent-per-3-3m2",
-      "rabies-vaccination-dogs",
-      "real-disposable-income",
-      "recreational-fishing-count",
-      "registered-foreigner-population",
-      "residential-building-construction-cost",
-      "residential-building-starts",
-      "retail-establishments-by-prefecture",
-      "retail-sales-amount-by-prefecture",
-      "retail-sales-area-by-class",
-      "roadside-station-count",
-      "senility-death-count",
-      "sewage-treatment-coverage-rate",
-      "sewerage-coverage-rate",
-      "simple-life-insurance-contract-amount-per-contract",
-      "simple-life-insurance-contract-count",
-      "sixth-industry-agriculture-entities",
-      "sixth-industry-agriculture-sales",
-      "smartphone-usage-rate-by-sex",
-      "smartphone-usage-students",
-      "smartphone-usage-time-by-age",
-      "smoke-emission-facility-count",
-      "standardized-mortality-japanese",
-      "standardized-mortality-rate-per-1000",
-      "total-assessed-land-area",
-      "total-assessed-land-area-ratio-field",
-      "total-assessed-land-area-ratio-paddy",
-      "total-assessed-land-area-ratio-residential",
-      "traffic-accident-death-by-age",
-      "treatment-rate-arthrosis-inpatient",
-      "treatment-rate-arthrosis-outpatient",
-      "treatment-rate-asthma-inpatient",
-      "treatment-rate-asthma-outpatient",
-      "treatment-rate-cancer-inpatient",
-      "treatment-rate-cancer-outpatient",
-      "treatment-rate-cerebrovascular-inpatient",
-      "treatment-rate-cerebrovascular-outpatient",
-      "treatment-rate-circulatory-inpatient",
-      "treatment-rate-circulatory-outpatient",
-      "treatment-rate-diabetes-inpatient",
-      "treatment-rate-diabetes-outpatient",
-      "treatment-rate-hypertension-inpatient",
-      "treatment-rate-hypertension-outpatient",
-      "treatment-rate-mental-disorder-inpatient",
-      "treatment-rate-mental-disorder-outpatient",
-      "treatment-rate-mood-disorder-inpatient",
-      "treatment-rate-mood-disorder-outpatient",
-      "treatment-rate-musculoskeletal-inpatient",
-      "treatment-rate-musculoskeletal-outpatient",
-      "treatment-rate-neurosis-inpatient",
-      "treatment-rate-neurosis-outpatient",
-      "treatment-rate-osteoporosis-inpatient",
-      "treatment-rate-osteoporosis-outpatient",
-      "treatment-rate-schizophrenia-inpatient",
-      "treatment-rate-schizophrenia-outpatient",
-      "truck-operators",
-      "vaccination-recipients-disease",
-      "vegetable-cultivation-area",
-      "vehicle-kilometers-traveled",
-      "voter-list-registrants",
-      "voter-turnout-city-assembly",
-      "voter-turnout-council-district",
-      "voter-turnout-council-proportional",
-      "voter-turnout-governor",
-      "voter-turnout-house-proportional",
-      "voter-turnout-house-single",
-      "voter-turnout-mayor",
-      "voter-turnout-pref-assembly",
-      "water-pollution-control-law-facility-count",
-      "welfare-office-intellectual-disability-consultations",
-      "wind-power-capacity",
-      "wind-power-turbine-count",
-      "workers-compensation-insurance-benefits-rate"
+      "roadside-station-count"
     ],
+    "activeUnresolvedKeys": [],
     "perSurveyActive": {
+      "academic-achievement-survey": 1,
       "accommodation-survey": 3,
       "administrative-investment-report": 13,
       "agricultural-income-statistics": 3,
       "agriculture-forestry-census": 11,
       "agriculture-management-survey": 5,
+      "air-pollution-control-law-status": 2,
       "area-survey": 30,
       "boj-statistics": 5,
       "care-service-facility-survey": 7,
       "census": 296,
       "city-planning-survey": 8,
-      "commercial-dynamics-survey": 4,
+      "commercial-dynamics-survey": 5,
       "commercial-statistics": 4,
       "comprehensive-living-conditions-survey": 4,
       "construction-work-statistics": 4,
-      "cpi-annual": 15,
-      "crop-statistics": 3,
-      "economic-census-activity": 34,
+      "cpi-annual": 19,
+      "crop-statistics": 8,
+      "economic-census-activity": 37,
       "economic-census-basic": 19,
       "economic-structure-survey": 11,
-      "employment-structure-survey": 10,
+      "electricity-business-statistics": 2,
+      "employment-insurance-annual-report": 4,
+      "employment-structure-survey": 11,
+      "employment-trends-survey": 1,
       "establishment-enterprise-census": 11,
-      "factory-location-survey": 1,
-      "fire-annual-report": 8,
+      "factory-location-survey": 3,
+      "farmland-transfer-conversion-report": 1,
+      "fire-annual-report": 13,
       "fishery-aquaculture-production": 21,
+      "fishery-census": 10,
+      "fixed-asset-tax-land-statistics": 5,
       "flood-statistics": 9,
-      "foreign-residents-statistics": 7,
+      "foreign-residents-statistics": 10,
       "forestry-statistics-handbook": 2,
       "freight-regional-flow-survey": 2,
-      "health-admin-report": 35,
+      "gas-business-statistics": 4,
+      "health-admin-report": 43,
+      "health-insurance-annual-report": 2,
+      "health-insurance-society-annual-report": 4,
       "hospital-report": 3,
-      "household-survey": 23,
-      "housing-land-survey": 32,
-      "housing-starts-statistics": 10,
+      "household-survey": 25,
+      "housing-finance-user-survey": 1,
+      "housing-land-survey": 35,
+      "housing-starts-statistics": 14,
       "industrial-statistics": 1,
       "insurance-rate-org-statistics": 8,
-      "japan-post-statistics": 3,
-      "job-placement-statistics": 8,
-      "kakei-chousa": 704,
+      "japan-post-statistics": 6,
+      "job-placement-statistics": 11,
+      "junior-high-athletics-membership-survey": 10,
+      "kakei-chousa": 707,
       "labor-market-annual": 9,
       "late-elderly-medical-annual-report": 1,
+      "life-insurance-business-statistics": 4,
+      "life-tables": 6,
       "livestock-statistics": 1,
       "local-education-expense-survey": 5,
+      "local-election-results": 4,
+      "local-election-statistics": 2,
       "local-finance": 132,
       "local-gov-staffing-survey": 8,
       "local-public-employee-salary": 10,
       "local-tax": 7,
+      "long-term-care-insurance-annual-report": 1,
       "medical-facility-survey": 40,
       "minimum-wage": 1,
       "mlit-ksj": 4,
+      "motor-vehicle-transport-statistics": 2,
       "municipal-settlement-survey": 29,
+      "national-election-results": 4,
+      "national-health-insurance-annual-report": 4,
       "national-household-survey": 20,
       "national-medical-expenditure": 3,
+      "natural-conservation-area-data": 1,
       "natural-park-area": 6,
+      "nta-annual-statistics": 2,
       "passenger-regional-flow-survey": 4,
-      "patient-survey": 2,
-      "pension-insurance-annual-report": 4,
+      "patient-survey": 28,
+      "pension-insurance-annual-report": 6,
+      "petroleum-sales-statistics": 1,
       "physician-survey": 5,
       "police-statistics": 21,
       "population-estimates": 209,
       "population-projection": 2,
-      "port-statistics": 4,
+      "population-research": 2,
+      "port-statistics": 9,
       "prefectural-accounts": 16,
+      "prefectural-energy-consumption-statistics": 2,
+      "prefectural-food-self-sufficiency": 1,
       "prefectural-land-price-survey": 5,
       "prefectural-settlement-survey": 121,
       "public-assistance-survey": 15,
+      "regional-health-promotion-report": 12,
       "resident-registry-migration-report": 10,
-      "retail-price-survey": 12,
-      "road-statistics": 17,
+      "resident-registry-population-survey": 4,
+      "retail-price-survey": 15,
+      "road-statistics": 19,
       "school-basic-survey": 73,
       "school-health-survey": 12,
       "sewerage-statistics": 5,
+      "sixth-industry-survey": 2,
       "social-education-survey": 35,
-      "social-life-basic-survey": 107,
+      "social-life-basic-survey": 112,
       "social-welfare-facility-survey": 34,
       "sole-proprietor-survey": 3,
+      "special-forest-products-statistics": 2,
+      "student-guidance-issues-survey": 7,
       "telecommunications-service-contract-report": 5,
-      "traffic-accident-statistics": 10,
-      "urban-park-survey": 10,
-      "vital-statistics": 46,
+      "traffic-accident-statistics": 11,
+      "truck-operator-statistics": 1,
+      "urban-park-survey": 12,
+      "vehicle-registration-statistics": 1,
+      "vital-statistics": 51,
+      "voter-registration-statistics": 1,
       "wage-structure-survey": 76,
       "waste-management-survey": 7,
+      "wastewater-treatment-coverage-report": 2,
+      "water-pollution-control-law-status": 1,
       "water-pollution-survey": 3,
       "waterworks-statistics": 5,
-      "weather-statistics": 9,
-      "welfare-admin-report": 10,
+      "weather-statistics": 12,
+      "welfare-admin-report": 17,
+      "wind-power-deployment-statistics": 2,
+      "wood-supply-demand-report": 1,
+      "workers-compensation-annual-report": 2,
       "workplace-accident-survey": 3
     }
   },
@@ -360,6 +208,9 @@
         "safety"
       ],
       "fishery-aquaculture-production": [
+        "fishery-marine"
+      ],
+      "fishery-census": [
         "fishery-marine"
       ],
       "foreign-residents-statistics": [
@@ -436,6 +287,9 @@
         "railway",
         "tourism"
       ],
+      "patient-survey": [
+        "healthcare"
+      ],
       "pension-insurance-annual-report": [
         "aging-society"
       ],
@@ -509,1249 +363,30 @@
   },
   "blog": {
     "articles": 534,
-    "charts": 1425,
-    "applicableCharts": 1332,
+    "charts": 1426,
+    "applicableCharts": 1303,
     "byStatus": {
-      "resolved": 1087,
-      "unresolved": 61,
-      "not-applicable": 93,
-      "missing-lineage": 184
+      "resolved": 1303,
+      "unresolved": 0,
+      "not-applicable": 123,
+      "missing-lineage": 0
     },
-    "coveragePct": 81.61,
-    "unresolvedCharts": [
-      {
-        "slug": "abortion-rate-prefecture-gap",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "academic-achievement-test-prefecture-ranking",
-        "base": "academic-achievement-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "academic-achievement-test-prefecture-ranking",
-        "base": "academic-achievement-test-prefecture-ranking-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "alcohol-prefecture-map",
-        "base": "alcohol-consumption-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "alcohol-prefecture-map",
-        "base": "alcohol-consumption-map",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "alcohol-prefecture-map",
-        "base": "liquor-type-breakdown",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "alcohol-prefecture-map",
-        "base": "beer-tax-reform-comparison",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "allocation-tax-area",
-        "base": "allocation-tax-area-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
-        "base": "annual-sunshine-duration--auto-liability-insurance-amount-received-per-payment-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
-        "base": "avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
-        "base": "avg-height-high-school-2nd-male--floor-area-new-owner-dwelling-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
-        "base": "avg-height-high-school-2nd-male--rice-cracker-consumption-expenditure-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "barber-beauty-salon-regional-gap",
-        "base": "service-comparison",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "barber-beauty-salon-regional-gap",
-        "base": "barber-timeseries",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "beef-consumption-quantity-vs-municipal-road-paving-rate",
-        "base": "beef-consumption-quantity--municipal-road-paving-rate-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
-        "base": "beef-consumption-quantity--unmarried-ratio-male-45-49-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "beef-unmarried-ratio",
-        "base": "beef-unmarried-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "birth-death-gap-decline",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "bonito-catch-prefecture",
-        "base": "bonito-two-poles",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "bread-consumption-expenditure-vs-final-education-university",
-        "base": "bread-consumption-expenditure--final-education-university-graduate-school-ratio-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "bread-consumption-expenditure-vs-high-school-advancement",
-        "base": "bread-consumption-expenditure--high-school-advancement-rate-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "bread-consumption-expenditure-vs-site-area-per-dwelling",
-        "base": "bread-consumption-expenditure--site-area-per-dwelling-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "campsite-public-vs-paved-road-main-length",
-        "base": "campsite-public--paved-road-main-length-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "campsite-public-vs-road-expressway-length",
-        "base": "campsite-public--road-expressway-length-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cc-estat-06-income-scatter",
-        "base": "income-education-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cc-estat-13-agri-sankey",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cc-estat-14-energy-area-chart",
-        "base": "electricity-demand-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "child-height-regional-gap",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "child-height-regional-gap",
-        "base": "inline-chart-2",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "childcare-friendly-prefecture-ranking",
-        "base": "indicator-comparison",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "childcare-friendly-prefecture-ranking",
-        "base": "tile-grid-score",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "consumer-price-regional-gap",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "convenience-store-count-commercial-vs-ratio-of-general",
-        "base": "convenience-store-count-commercial--ratio-of-general-households-to-national-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cpi-change-regional-pattern",
-        "base": "cpi-change-food",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cpi-change-regional-pattern",
-        "base": "cpi-change-utilities",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cup-noodles-consumption-expenditure-vs-fire-damage",
-        "base": "cup-noodles-consumption-expenditure--fire-damage-casualties-per-population-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cup-noodles-consumption-expenditure-vs-secondary-activity",
-        "base": "cup-noodles-consumption-expenditure--secondary-activity-avg-time-unemployed-female-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "cup-noodles-consumption-expenditure-vs-sports-annual",
-        "base": "cup-noodles-consumption-expenditure--sports-annual-participation-rate-10plus-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "depopulation-area-medical-facilities",
-        "base": "depopulation-medical-prefecture-rankings",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "deposit-securities-prefecture-personality",
-        "base": "securities-income-scatter-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "designated-difficult-disease-prefecture-gap",
-        "base": "designated-difficult-disease-prefecture-gap-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "designated-difficult-disease-prefecture-gap",
-        "base": "designated-difficult-disease-prefecture-gap-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "development-history-place-name-map",
-        "base": "development-history-place-name-map-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "development-history-place-name-map",
-        "base": "development-history-place-name-map-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "dining-out-expenditure-ranking",
-        "base": "engel-coefficient-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "distinctive-place-name-kanji-by-prefecture",
-        "base": "distinctive-place-name-kanji-by-prefecture-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "distinctive-place-name-kanji-by-prefecture",
-        "base": "distinctive-place-name-kanji-by-prefecture-total-vs-score-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "distinctive-place-name-kanji-by-prefecture",
-        "base": "distinctive-place-name-kanji-by-prefecture-summary-findings",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "dual-income-house-size",
-        "base": "dual-income-floor-area-scatter-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
-        "base": "dual-income-household-ratio--floor-area-per-dwelling-owner-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "dual-income-household-ratio-vs-public-assistance-housing",
-        "base": "dual-income-household-ratio--public-assistance-housing-beneficiaries-per-1000-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "dual-income-household-ratio-vs-rooms-per-dwelling",
-        "base": "dual-income-household-ratio--rooms-per-dwelling-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "dual-income-household-ratio-vs-tatami-per-dwelling-owner",
-        "base": "dual-income-household-ratio--tatami-per-dwelling-owner-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "earthquake-insurance-prefecture-gap",
-        "base": "insurance-timeseries",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "electricity-demand-gap",
-        "base": "electricity-demand-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "electricity-demand-gap",
-        "base": "energy-per-capita-tile-grid",
-        "status": "unresolved"
-      },
-      {
-        "slug": "electricity-demand-gap",
-        "base": "demand-vs-generation-scatter",
-        "status": "unresolved"
-      },
-      {
-        "slug": "energy-consumption-structure-shift",
-        "base": "energy-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "energy-consumption-structure-shift",
-        "base": "energy-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "energy-consumption-structure-shift",
-        "base": "energy-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "energy-infrastructure-gas-electricity",
-        "base": "gasoline-trend",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-vs-prefectural-income",
-        "base": "engel-coefficient-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "fiscal-health-50years-trend",
-        "base": "fiscal-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "fiscal-health-50years-trend",
-        "base": "current-balance-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "fishery-catch-aquaculture-shift",
-        "base": "fishery-workers-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "foreign-resident-five-percent-municipalities",
-        "base": "foreign-resident-five-percent-municipalities-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "foreign-resident-five-percent-municipalities",
-        "base": "foreign-resident-five-percent-municipalities-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "foreign-residents-diversity-map",
-        "base": "foreign-nationality-stacked",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "foreign-residents-diversity-map",
-        "base": "manufacturing-vs-foreign-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "forest-coverage-woodland-economy",
-        "base": "chart3-forest-vs-gdp-scatter",
-        "status": "unresolved"
-      },
-      {
-        "slug": "future-population-tokyo-paradox",
-        "base": "population-timeseries",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "future-population-tokyo-paradox",
-        "base": "fertility-vs-change-rate",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "future-population-tokyo-paradox",
-        "base": "migration-vs-change-rate",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "future-population-tokyo-paradox",
-        "base": "summary-findings",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "gasoline-car-society-map",
-        "base": "gasoline-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "gasoline-car-society-map",
-        "base": "gasoline-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "gasoline-car-society-map",
-        "base": "gasoline-vs-citygas-scatter",
-        "status": "unresolved"
-      },
-      {
-        "slug": "gasoline-consumption-quantity-vs-densely-inhabited-district",
-        "base": "gasoline-consumption-quantity--densely-inhabited-district-population-density-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "governor-election-turnout-prefecture-gap",
-        "base": "governor-election-turnout-prefecture-gap-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "habitable-area-land-use",
-        "base": "land-productivity",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "half-population-elderly-municipalities",
-        "base": "half-population-elderly-municipalities-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "half-population-elderly-municipalities",
-        "base": "half-population-elderly-municipalities-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "hama-ura-tsu-coastal-place-names",
-        "base": "hama-ura-tsu-coastal-place-names-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "hama-ura-tsu-coastal-place-names",
-        "base": "hama-ura-tsu-coastal-place-names-hama-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "hama-ura-tsu-coastal-place-names",
-        "base": "hama-ura-tsu-coastal-place-names-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "hama-ura-tsu-coastal-place-names",
-        "base": "hama-ura-tsu-coastal-place-names-summary-findings",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "health-life-expectancy-structure",
-        "base": "health-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "health-life-expectancy-structure",
-        "base": "health-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "health-life-expectancy-structure",
-        "base": "health-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "health-life-expectancy-structure",
-        "base": "doctors-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "healthy-life-expectancy-male-female-gap",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "healthy-life-expectancy-male-female-gap",
-        "base": "inline-chart-2",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "healthy-life-expectancy-male-female-gap",
-        "base": "healthy-life-expectancy-female-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "highschool-starting-salary-gap",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "hospital-bed-utilization-map",
-        "base": "bed-util-vs-inpatient-rate",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "hospital-bed-utilization-map",
-        "base": "bed-util-vs-physicians",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "household-spending-before-after-inflation",
-        "base": "spending-change-bars",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "household-spending-before-after-inflation",
-        "base": "change-rate-waterfall",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "household-spending-before-after-inflation",
-        "base": "engel-trend-context",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "housing-cost-livability-trend",
-        "base": "rent-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "ict-media-consumption-gender-gap",
-        "base": "media-gender-gap-map",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "inbound-by-nationality-regional-preference",
-        "base": "resident-vs-guest-china-scatter",
-        "status": "unresolved"
-      },
-      {
-        "slug": "information-communication-coefficient-ranking",
-        "base": "info-comm-coefficient-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "information-communication-coefficient-ranking",
-        "base": "information-communication-coefficient-ranking-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "information-communication-coefficient-ranking",
-        "base": "info-comm-coefficient-national-trend",
-        "status": "unresolved"
-      },
-      {
-        "slug": "international-cooperation-volunteer-map",
-        "base": "volunteer-rate-map",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "international-cooperation-volunteer-map",
-        "base": "travel-vs-volunteer-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "international-cooperation-volunteer-map",
-        "base": "foreign-pop-vs-volunteer-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "kawa-gawa-river-place-name-map",
-        "base": "kawa-gawa-river-place-name-map-kawa-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "kawa-gawa-river-place-name-map",
-        "base": "kawa-gawa-river-place-name-map-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "kawa-gawa-river-place-name-map",
-        "base": "kawa-gawa-river-place-name-map-summary-findings",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "konbu-consumption-prefecture-gap",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "konbu-consumption-prefecture-gap",
-        "base": "inline-chart-2",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "livable-prefecture-composite-ranking",
-        "base": "radar-comparison",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "local-allocation-tax-prefecture-vs-agriculture-forestry",
-        "base": "local-allocation-tax-prefecture--agriculture-forestry-fisheries-expenses-prefecture-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "local-allocation-tax-prefecture-vs-cultivated-area",
-        "base": "cultivated-area-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "local-allocation-tax-prefecture-vs-cultivated-area",
-        "base": "local-allocation-tax-prefecture--cultivated-area-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "local-allocation-tax-prefecture-vs-total-area-excluding",
-        "base": "local-allocation-tax-prefecture--total-area-excluding-northern-territories-and-takeshima-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "local-tax-prefecture-vs-railway-passengers",
-        "base": "local-tax-prefecture--railway-passengers-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "main-road-paving-rate-vs-apple-consumption-quantity",
-        "base": "main-road-paving-rate--apple-consumption-quantity-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-aichi-dominance",
-        "base": "manufacturing-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-aichi-dominance",
-        "base": "manufacturing-heatmap",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-aichi-dominance",
-        "base": "industrial-zone-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-aichi-dominance",
-        "base": "industry-composition-stacked",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-output-outlier-cities",
-        "base": "manufacturing-output-outlier-cities-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-output-outlier-cities",
-        "base": "manufacturing-output-outlier-cities-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-productivity",
-        "base": "chart1-bar-shipment-employees",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-productivity",
-        "base": "chart2-ranking-per-employee",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "manufacturing-productivity",
-        "base": "chart5-ranking-per-establishment",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "marriage-unmarried-crisis",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "minimum-wage-1000yen-prefecture",
-        "base": "minimum-wage-trend",
-        "status": "unresolved"
-      },
-      {
-        "slug": "minimum-wage-gap-regional-economy",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "municipalities-without-general-hospitals",
-        "base": "municipalities-without-general-hospitals-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "municipalities-without-general-hospitals",
-        "base": "municipalities-without-general-hospitals-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "municipalities-without-schools",
-        "base": "municipalities-without-schools-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "municipalities-without-schools",
-        "base": "municipalities-without-schools-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "municipality-count-prefecture-gap",
-        "base": "municipality-count-prefecture-gap-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "municipality-population-decline-tiers",
-        "base": "municipality-population-decline-tiers-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "municipality-population-decline-tiers",
-        "base": "municipality-population-decline-tiers-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "natto-child-weight-correlation",
-        "base": "natto-consumption-expenditure--average-weight-primary-school-fifth-grade-male-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "natto-consumption-east-west-divide",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "natto-consumption-east-west-divide",
-        "base": "inline-chart-2",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "overnight-guests-inbound-recovery",
-        "base": "overnight-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "overnight-guests-inbound-recovery",
-        "base": "foreign-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "overnight-guests-inbound-recovery",
-        "base": "accommodation-type-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "overseas-travel-gap",
-        "base": "income-vs-travel-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "pachinko-education-cost",
-        "base": "pachinko-education-cost-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pachinko-education-cost",
-        "base": "pachinko-education-cost-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pachinko-education-cost",
-        "base": "pachinko-education-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "pachinko-shop-density-per-10k-vs-dependent-population-index",
-        "base": "pachinko-shop-density-per-10k-vs-dependent-population-index-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pachinko-shop-density-per-10k-vs-dependent-population-index",
-        "base": "pachinko-shop-density-per-10k--dependent-population-index-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "pachinko-shop-density-per-10k-vs-high-school-education-cost",
-        "base": "pachinko-shop-density-per-10k-vs-high-school-education-cost-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pachinko-shop-density-per-10k-vs-high-school-education-cost",
-        "base": "pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "peach-consumption-quantity-vs-disaster-relief-expenses",
-        "base": "peach-consumption-quantity--disaster-relief-expenses-prefecture-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "per-capita-income-gap",
-        "base": "income-timeseries",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "per-capita-income-gap",
-        "base": "income-vs-industry-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "per-capita-income-gap",
-        "base": "income-growth-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "pharma-medical-device-production-map",
-        "base": "chemical-shipment-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pharma-medical-device-production-map",
-        "base": "chemical-ratio-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pharma-medical-device-production-map",
-        "base": "chemical-ratio-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pharma-medical-device-production-map",
-        "base": "chemical-vs-transport-scatter",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pharma-medical-device-production-map",
-        "base": "manufacturing-shipment-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "pharmacy-count-prefecture-ranking",
-        "base": "pharmacy-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "pollution-complaints-regional-map",
-        "base": "facility-comparison",
-        "status": "unresolved"
-      },
-      {
-        "slug": "population-density-urbanization",
-        "base": "daytime-population-ratio",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "population-migration-tokyo-concentration",
-        "base": "migration-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "post-office-last-window",
-        "base": "post-vs-mobile",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "precipitation-snow-regional-gap",
-        "base": "snowfall-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "prefectural-debt-future-burden",
-        "base": "burden-score-tilemap",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "prefecture-population-city-concentration",
-        "base": "prefecture-population-city-concentration-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "prefecture-population-city-concentration",
-        "base": "prefecture-population-city-concentration-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "prefecture-salary-remote-gap",
-        "base": "prefecture-salary-remote-gap-rent-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "price-index-high-low-prefecture",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "psychiatric-bed-count-vs-elementary-school-count",
-        "base": "psychiatric-bed-count--elementary-school-count-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "psychiatric-bed-count-vs-neighborhood-park-count",
-        "base": "psychiatric-bed-count--neighborhood-park-count-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
-        "base": "psychiatric-bed-count--standard-fiscal-demand-municipality-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "public-phone-count-gap",
-        "base": "public-phone-density-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "public-phone-count-gap",
-        "base": "public-phone-rank-inversion",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "purchasing-power-adjusted",
-        "base": "real-income-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "purchasing-power-adjusted",
-        "base": "income-map",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "purchasing-power-adjusted",
-        "base": "income-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "purchasing-power-adjusted",
-        "base": "income-vs-price-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "real-disposable-income-reversal",
-        "base": "disposable-income-after-rent-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "real-disposable-income-reversal",
-        "base": "real-disposable-income-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "real-disposable-income-vs-per-capita-social-welfare",
-        "base": "real-disposable-income-vs-per-capita-social-welfare-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "real-disposable-income-vs-per-capita-social-welfare",
-        "base": "real-disposable-income--per-capita-social-welfare-expenditure-pref-municipal-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
-        "base": "real-disposable-income-vs-taxpayer-ratio-per-pref-resident-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
-        "base": "real-disposable-income--taxpayer-ratio-per-pref-resident-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "real-income-taxpayer",
-        "base": "real-income-taxpayer-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "real-income-taxpayer",
-        "base": "real-income-taxpayer-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "real-income-taxpayer",
-        "base": "real-income-taxpayer-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "retail-establishments-by-prefecture",
-        "base": "retail-establishments-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "retail-store-count-vs-nurses-per-100k-population",
-        "base": "retail-store-count--nurses-per-100k-population-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "road-length-per-km2-vs-average-road-traffic-volume",
-        "base": "average-road-traffic-volume-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "road-length-per-km2-vs-average-road-traffic-volume",
-        "base": "road-length-per-km2--average-road-traffic-volume-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "road-length-per-km2-vs-residential-building-starts",
-        "base": "residential-building-starts-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "road-length-per-km2-vs-residential-building-starts",
-        "base": "road-length-per-km2--residential-building-starts-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "semiconductor-electronics-regional-map",
-        "base": "electronic-components-bar",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
-        "base": "shumai-consumption-expenditure--jr-freight-shipment-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "shumai-consumption-expenditure-vs-main-household-ratio-main",
-        "base": "shumai-consumption-expenditure--main-household-ratio-main-earner-employee-commute-90min-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "small-business-dominance-map",
-        "base": "industry-composition",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "software-engineer-salary-prefecture-gap",
-        "base": "establishment-vs-salary",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "software-engineer-salary-prefecture-gap",
-        "base": "se-salary-bottom-rankings",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "solar-panel-housing-prefecture-gap",
-        "base": "solar-low-detached-contrast",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "suicide-rate-aging-nexus",
-        "base": "suicide-timeseries",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "swimming-pool-public-vs-post-office-count",
-        "base": "swimming-pool-public--post-office-count-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "swimming-pool-public-vs-smoke-emission-facility-count",
-        "base": "smoke-emission-facility-count-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "swimming-pool-public-vs-smoke-emission-facility-count",
-        "base": "swimming-pool-public--smoke-emission-facility-count-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "swimming-pool-public-vs-total-general-project-investment",
-        "base": "swimming-pool-public--total-general-project-investment-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "tissue-paper-consumption-expenditure-vs-average-weight",
-        "base": "tissue-paper-consumption-expenditure--average-weight-primary-school-fifth-grade-male-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "towns-villages-larger-than-cities",
-        "base": "towns-villages-larger-than-cities-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "towns-villages-larger-than-cities",
-        "base": "towns-villages-larger-than-cities-tile-grid",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "traffic-accident-deaths-regional-risk",
-        "base": "insurance-penetration-rate",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "truck-driver-2024-crisis",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "truck-driver-2024-crisis",
-        "base": "inline-chart-2",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "tuna-consumption-medical-expense-correlation",
-        "base": "national-health-insurance-medical-expense-per-person-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "tuna-consumption-medical-expense-correlation",
-        "base": "tuna-medexp-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
-        "base": "tuna-consumption-quantity--annual-new-inpatients-general-hospital-per-100k-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "tuna-consumption-quantity-vs-national-medical-expense-per",
-        "base": "tuna-consumption-quantity--national-medical-expense-per-person-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "tuna-consumption-quantity-vs-sex-ratio-total",
-        "base": "tuna-consumption-quantity--sex-ratio-total-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "tuna-medical-expense",
-        "base": "tuna-medical-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "unhealthy-period-gender-prefecture-gap",
-        "base": "unhealthy-period-gender-diff-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "unhealthy-period-gender-prefecture-gap",
-        "base": "unhealthy-period-male-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "unhealthy-period-gender-prefecture-gap",
-        "base": "unhealthy-period-gender-scatter",
-        "status": "unresolved"
-      },
-      {
-        "slug": "unmarried-rate-40years-crisis",
-        "base": "unmarried-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "unmarried-rate-40years-crisis",
-        "base": "marriage-rate-trend",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "vacant-house-crisis",
-        "base": "vacant-housing-ratio-bars",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "vacant-house-crisis",
-        "base": "aging-ratio-bars",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "vacant-housing-aging-correlation",
-        "base": "vacant-housing-rate--old-population-index-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "vacant-housing-rate-vs-dependent-population-index",
-        "base": "vacant-housing-rate--dependent-population-index-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "vacant-housing-rate-vs-standard-price-change-rate-commercial",
-        "base": "vacant-housing-rate--standard-price-change-rate-commercial-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "vacant-housing-vs-aging",
-        "base": "vacant-housing-rate--ratio-65-plus-scatter",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "voter-turnout-house-single-prefecture-gap",
-        "base": "voter-turnout-house-single-prefecture-gap-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "voter-turnout-house-single-prefecture-gap",
-        "base": "voter-turnout-house-single-prefecture-gap-map",
-        "status": "unresolved"
-      },
-      {
-        "slug": "wage-vs-living-cost",
-        "base": "inline-chart-1",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "waiting-children-progress",
-        "base": "waiting-children-timeseries",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "waiting-children-progress",
-        "base": "waiting-children-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "waiting-children-progress",
-        "base": "waiting-children-map",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "water-sewage-crisis",
-        "base": "water-sewerage-timeseries",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "wind-power-capacity-prefecture-gap",
-        "base": "wind-power-capacity-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "wind-power-capacity-prefecture-gap",
-        "base": "wind-power-turbine-count-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "workplace-accident-regional-map",
-        "base": "avg-payment-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "workplace-accident-regional-map",
-        "base": "workers-compensation-insurance-benefits-rate-prefecture-rankings",
-        "status": "unresolved"
-      },
-      {
-        "slug": "yato-yatsu-place-name-boundary",
-        "base": "yato-yatsu-place-name-boundary-ranking",
-        "status": "missing-lineage"
-      },
-      {
-        "slug": "yato-yatsu-place-name-boundary",
-        "base": "yato-yatsu-place-name-boundary-tile-grid",
-        "status": "missing-lineage"
-      }
-    ],
+    "coveragePct": 100,
+    "unresolvedCharts": [],
     "snapshotSchemaVersion": 2,
     "snapshotLineageMissingArticles": [],
     "snapshotIndexMissingArticles": [],
     "perSurveyBlogs": {
+      "academic-achievement-survey": [
+        "academic-achievement-test-prefecture-ranking",
+        "advancement-plus-employment-rate-prefecture",
+        "income-quintile-education",
+        "spinach-consumption-ranking"
+      ],
       "accommodation-survey": [
         "cc-estat-11-tourism-stacked",
         "foreign-overnight-guests-prefecture-gap",
+        "inbound-by-nationality-regional-preference",
         "inbound-overnight-guests-prefecture",
         "inbound-overnight-regional-gap",
         "inbound-overnight-stay-concentration",
@@ -1765,6 +400,7 @@
         "agriculture-hokkaido-dominance",
         "cc-estat-13-agri-sankey",
         "fresh-udon-soba-consumption-quantity",
+        "habitable-area-land-use",
         "sixth-industry-direct-sales"
       ],
       "agriculture-forestry-census": [
@@ -1774,6 +410,10 @@
       ],
       "agriculture-management-survey": [
         "sixth-industry-direct-sales"
+      ],
+      "air-pollution-control-law-status": [
+        "pollution-complaints-regional-map",
+        "swimming-pool-public-vs-smoke-emission-facility-count"
       ],
       "area-survey": [
         "allocation-tax-area",
@@ -1849,6 +489,7 @@
         "firefighting-capacity-gap",
         "fiscal-health-50years-trend",
         "foreign-population-growth-rate",
+        "foreign-resident-five-percent-municipalities",
         "foreign-residents-diversity-map",
         "forest-coverage-woodland-economy",
         "future-population-tokyo-paradox",
@@ -1857,6 +498,7 @@
         "gasoline-consumption-quantity-vs-densely-inhabited-district",
         "general-households-prefecture-gap",
         "habitable-area-land-use",
+        "half-population-elderly-municipalities",
         "health-life-expectancy-structure",
         "hospital-bed-utilization-map",
         "household-income-tokyo-okinawa",
@@ -1864,15 +506,18 @@
         "household-structure-transformation",
         "households-on-public-assistance-per-1000-prefecture-gap",
         "ict-digital-divide-composite-analysis",
+        "inbound-by-nationality-regional-preference",
         "inflow-population-ratio-prefecture-gap",
         "library-museum-cultural-capital",
         "livable-prefecture-composite-ranking",
         "local-allocation-tax-prefecture-vs-total-area-excluding",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "manufacturing-output-outlier-cities",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
+        "municipality-population-decline-tiers",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "park-green-space-gap",
@@ -1885,6 +530,7 @@
         "population-migration-tokyo-concentration",
         "post-office-last-window",
         "prefectural-debt-future-burden",
+        "prefecture-population-city-concentration",
         "real-disposable-income-vs-per-capita-social-welfare",
         "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
         "real-income-taxpayer",
@@ -1899,6 +545,7 @@
         "sports-facility-regional-divide",
         "sports-urban-paradox",
         "suicide-rate-aging-nexus",
+        "towns-villages-larger-than-cities",
         "traffic-accident-deaths-regional-risk",
         "train-commuters-prefecture-gap",
         "travel-behavior-gender-gap",
@@ -1927,11 +574,16 @@
       "cpi-annual": [
         "cpi-change-regional-pattern",
         "electricity-bill-hike-impact",
+        "household-spending-before-after-inflation",
         "inflation-rate-prefecture-gap",
         "white-bread-price-up-quantity-up",
         "winter-coat-bargain-purchase-price"
       ],
       "crop-statistics": [
+        "agriculture-hokkaido-dominance",
+        "farmland-crisis-abandoned-land",
+        "habitable-area-land-use",
+        "local-allocation-tax-prefecture-vs-cultivated-area",
         "rice-harvest-volume-prefecture-gap"
       ],
       "economic-census-activity": [
@@ -1939,11 +591,15 @@
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
         "convenience-store-density-map",
+        "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
         "manufacturing-labor-productivity-pref",
+        "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
+        "pharma-medical-device-production-map",
+        "retail-establishments-by-prefecture",
         "retail-store-count-vs-nurses-per-100k-population",
         "semiconductor-electronics-regional-map",
         "small-business-dominance-map"
@@ -1951,19 +607,30 @@
       "economic-census-basic": [
         "it-establishments-prefecture",
         "manufacturing-establishments-prefecture-gap",
+        "per-capita-income-gap",
         "small-business-dominance-map",
+        "software-engineer-salary-prefecture-gap",
         "telework-rate-tokyo-gap"
       ],
       "economic-structure-survey": [
         "cc-estat-08-bar-chart-race",
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
+        "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
         "manufacturing-labor-productivity-pref",
+        "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
+        "pharma-medical-device-production-map",
         "semiconductor-electronics-regional-map"
+      ],
+      "electricity-business-statistics": [
+        "cc-estat-14-energy-area-chart",
+        "electricity-demand-gap",
+        "energy-infrastructure-gas-electricity",
+        "renewable-energy-regional-gap"
       ],
       "employment-structure-survey": [
         "childcare-friendly-prefecture-ranking",
@@ -1982,6 +649,8 @@
       ],
       "fire-annual-report": [
         "cup-noodles-consumption-expenditure-vs-fire-damage",
+        "disaster-damage-per-person-prefecture-gap",
+        "earthquake-insurance-prefecture-gap",
         "firefighting-capacity-gap"
       ],
       "fishery-aquaculture-production": [
@@ -1990,6 +659,9 @@
         "fish-catch-vs-consumption-prefecture",
         "fishery-catch-aquaculture-shift",
         "fishery-species-prefecture-specialty"
+      ],
+      "fishery-census": [
+        "fishery-catch-aquaculture-shift"
       ],
       "flood-statistics": [
         "flood-affected-rivers-prefecture-gap"
@@ -2005,9 +677,15 @@
       "freight-regional-flow-survey": [
         "shumai-consumption-expenditure-vs-jr-freight-shipment"
       ],
+      "gas-business-statistics": [
+        "energy-infrastructure-gas-electricity",
+        "gas-expenditure-ranking",
+        "gasoline-car-society-map"
+      ],
       "health-admin-report": [
         "abortion-rate-prefecture-gap",
         "barber-beauty-salon-regional-gap",
+        "designated-difficult-disease-prefecture-gap",
         "dog-registration-prefecture-gap",
         "pharmacy-count-prefecture-ranking",
         "retail-store-count-vs-nurses-per-100k-population"
@@ -2027,7 +705,12 @@
         "household-spending-before-after-inflation",
         "household-spending-prefecture-gap",
         "ict-digital-divide-composite-analysis",
+        "low-cost-low-income-prefectures",
         "post-office-last-window",
+        "real-disposable-income-reversal",
+        "real-disposable-income-vs-per-capita-social-welfare",
+        "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+        "real-income-taxpayer",
         "savings-balance-gap",
         "savings-rate-gap"
       ],
@@ -2058,10 +741,13 @@
       "housing-starts-statistics": [
         "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
         "cc-estat-12-housing-treemap",
-        "home-ownership-rate-ranking"
+        "home-ownership-rate-ranking",
+        "road-length-per-km2-vs-residential-building-starts"
       ],
       "industrial-statistics": [
-        "industrial-water-manufacturing-nexus"
+        "industrial-water-manufacturing-nexus",
+        "pharma-medical-device-production-map",
+        "semiconductor-electronics-regional-map"
       ],
       "insurance-rate-org-statistics": [
         "annual-sunshine-duration-vs-auto-liability-insurance-amount",
@@ -2123,6 +809,8 @@
         "dining-out-expenditure-ranking",
         "earthquake-insurance-prefecture-gap",
         "ehime-food-culture",
+        "engel-coefficient-prefecture-ranking",
+        "engel-coefficient-vs-prefectural-income",
         "fish-catch-vs-consumption-prefecture",
         "food-consumption-prefecture-battle",
         "food-spending-pattern",
@@ -2151,6 +839,7 @@
         "home-ownership-rate-ranking",
         "horse-mackerel-expenditure-ranking",
         "household-consumption-expenditure-ranking",
+        "household-spending-before-after-inflation",
         "hyogo-food-culture",
         "ibaraki-food-culture",
         "icecream-consumption-expenditure",
@@ -2178,6 +867,7 @@
         "kanagawa-food-culture",
         "katsuobushi-expenditure-ranking",
         "kochi-food-culture",
+        "konbu-consumption-prefecture-gap",
         "konbu-consumption-quantity",
         "konnyaku-expenditure-ranking",
         "kumamoto-food-culture",
@@ -2200,6 +890,7 @@
         "nagasaki-food-culture",
         "nara-food-culture",
         "natto-child-weight-correlation",
+        "natto-consumption-east-west-divide",
         "natto-consumption-expenditure",
         "natto-production-vs-consumption",
         "necktie-stockings-market-shrink",
@@ -2219,6 +910,7 @@
         "pork-consumption-expenditure",
         "pork-consumption-quantity",
         "potato-consumption-quantity",
+        "real-disposable-income-reversal",
         "refrigerator-expenditure-ranking",
         "rice-consumption-quantity-ranking",
         "saga-food-culture",
@@ -2288,15 +980,23 @@
       "late-elderly-medical-annual-report": [
         "late-elderly-medical-expense-prefecture-gap"
       ],
+      "life-tables": [
+        "cc-estat-04-aging-heatmap",
+        "unhealthy-period-gender-prefecture-gap"
+      ],
       "livestock-statistics": [
         "agriculture-hokkaido-dominance",
         "dairy-cattle-count",
         "dairy-cattle-hokkaido-monopoly"
       ],
       "local-education-expense-survey": [
+        "cc-estat-06-income-scatter",
         "education-expenses-gap",
         "pachinko-education-cost",
         "pachinko-shop-density-per-10k-vs-high-school-education-cost"
+      ],
+      "local-election-results": [
+        "governor-election-turnout-prefecture-gap"
       ],
       "local-finance": [
         "allocation-tax-area",
@@ -2343,11 +1043,13 @@
         "software-engineer-income-gap"
       ],
       "local-tax": [
+        "deposit-securities-prefecture-personality",
         "gasoline-expenditure-ranking",
         "household-income-tokyo-okinawa",
         "kei-car-density-prefecture-gap",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "overseas-travel-gap",
         "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
         "real-income-taxpayer"
       ],
@@ -2355,6 +1057,7 @@
         "general-hospital-bed-occupancy-rate",
         "hospital-bed-utilization-map",
         "livable-prefecture-composite-ranking",
+        "municipalities-without-general-hospitals",
         "psychiatric-bed-count-vs-elementary-school-count",
         "psychiatric-bed-count-vs-neighborhood-park-count",
         "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
@@ -2384,6 +1087,12 @@
         "real-disposable-income-vs-per-capita-social-welfare",
         "school-nonattendance-pattern"
       ],
+      "national-election-results": [
+        "voter-turnout-house-single-prefecture-gap"
+      ],
+      "national-health-insurance-annual-report": [
+        "tuna-consumption-medical-expense-correlation"
+      ],
       "national-household-survey": [
         "black-tea-income-gap",
         "car-ownership-household-prefecture-gap",
@@ -2403,11 +1112,15 @@
       "natural-park-area": [
         "park-green-space-gap"
       ],
+      "nta-annual-statistics": [
+        "alcohol-prefecture-map"
+      ],
       "passenger-regional-flow-survey": [
         "railway-theme-overview"
       ],
       "patient-survey": [
         "health-life-expectancy-structure",
+        "hospital-bed-utilization-map",
         "inpatient-rate-aging-burden",
         "inpatient-rate-prefecture-gap",
         "outpatient-rate-prefecture-gap"
@@ -2415,9 +1128,15 @@
       "pension-insurance-annual-report": [
         "national-pension-payment-rate-prefecture-gap"
       ],
+      "petroleum-sales-statistics": [
+        "car-ownership-household-prefecture-gap",
+        "energy-infrastructure-gas-electricity",
+        "gasoline-car-society-map"
+      ],
       "physician-survey": [
         "childcare-friendly-prefecture-ranking",
-        "health-life-expectancy-structure"
+        "health-life-expectancy-structure",
+        "hospital-bed-utilization-map"
       ],
       "police-statistics": [
         "cc-estat-09-radar-prefecture",
@@ -2462,6 +1181,7 @@
         "firefighting-capacity-gap",
         "fiscal-health-50years-trend",
         "foreign-population-growth-rate",
+        "foreign-resident-five-percent-municipalities",
         "foreign-residents-diversity-map",
         "future-population-tokyo-paradox",
         "garbage-total-output",
@@ -2474,9 +1194,11 @@
         "livable-prefecture-composite-ranking",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "manufacturing-output-outlier-cities",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
+        "municipality-population-decline-tiers",
         "natural-increase-rate-prefecture-gap",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
@@ -2487,7 +1209,9 @@
         "pollution-complaints-regional-map",
         "population-density-urbanization",
         "population-migration-tokyo-concentration",
+        "post-office-last-window",
         "prefectural-debt-future-burden",
+        "prefecture-population-city-concentration",
         "real-disposable-income-vs-per-capita-social-welfare",
         "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
         "real-income-taxpayer",
@@ -2498,6 +1222,7 @@
         "sports-facility-regional-divide",
         "sports-urban-paradox",
         "suicide-rate-aging-nexus",
+        "towns-villages-larger-than-cities",
         "traffic-accident-deaths-regional-risk",
         "travel-behavior-gender-gap",
         "tuna-consumption-quantity-vs-annual-new-inpatients-general",
@@ -2520,15 +1245,22 @@
       "prefectural-accounts": [
         "ai-claude-code-pref-analysis",
         "bank-deposit-balance-shikoku-anomaly",
+        "cc-estat-06-income-scatter",
         "cc-estat-09-radar-prefecture",
         "engel-coefficient-vs-prefectural-income",
+        "forest-coverage-woodland-economy",
         "it-industry-concentration",
         "livable-prefecture-composite-ranking",
+        "manufacturing-aichi-dominance",
         "per-capita-income-gap",
         "prefectural-income-gdp-ranking",
         "price-index-high-low-prefecture",
         "purchasing-power-adjusted",
         "real-disposable-income-reversal"
+      ],
+      "prefectural-energy-consumption-statistics": [
+        "electricity-demand-gap",
+        "energy-consumption-structure-shift"
       ],
       "prefectural-land-price-survey": [
         "commercial-land-price-trend",
@@ -2573,6 +1305,9 @@
         "dual-income-household-ratio-vs-public-assistance-housing",
         "households-on-public-assistance-per-1000-prefecture-gap"
       ],
+      "regional-health-promotion-report": [
+        "dental-checkup-persons-per-1000-prefecture-gap"
+      ],
       "resident-registry-migration-report": [
         "2050-population-map-reading",
         "fertility-fiscal-nexus",
@@ -2585,15 +1320,28 @@
         "population-migration-tokyo-concentration",
         "wakayama-migration-flow"
       ],
+      "resident-registry-population-survey": [
+        "international-cooperation-volunteer-map",
+        "sewerage-water-supply-gap",
+        "water-sewage-crisis"
+      ],
       "retail-price-survey": [
         "consumer-price-regional-gap",
         "electricity-bill-hike-impact",
         "energy-consumption-structure-shift",
         "food-price-regional-2026",
+        "home-ownership-rate-ranking",
+        "housing-cost-livability-trend",
+        "livable-prefecture-composite-ranking",
         "low-cost-low-income-prefectures",
         "mineral-water-spending-prefecture-gap",
+        "prefecture-salary-remote-gap",
         "price-index-high-low-prefecture",
-        "purchasing-power-adjusted"
+        "purchasing-power-adjusted",
+        "real-disposable-income-reversal",
+        "real-disposable-income-vs-per-capita-social-welfare",
+        "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+        "real-income-taxpayer"
       ],
       "road-statistics": [
         "beef-consumption-quantity-vs-municipal-road-paving-rate",
@@ -2617,6 +1365,7 @@
         "elementary-school-children-count",
         "garbage-total-output",
         "high-school-advancement-rate",
+        "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
         "students-per-teacher-class-size-gap",
@@ -2629,6 +1378,7 @@
         "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
         "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
         "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+        "child-height-regional-gap",
         "middle-school-height-east-west-puzzle",
         "natto-child-weight-correlation",
         "prefectural-height-male-female-gap",
@@ -2672,6 +1422,10 @@
         "elderly-population-care-capacity-gap",
         "nursing-care-shortage-2040",
         "waiting-children-progress"
+      ],
+      "student-guidance-issues-survey": [
+        "school-nonattendance-pattern",
+        "students-per-teacher-class-size-gap"
       ],
       "telecommunications-service-contract-report": [
         "public-phone-count",
@@ -2741,6 +1495,9 @@
         "recycling-rate-gap",
         "waste-management-recycling-gap"
       ],
+      "water-pollution-control-law-status": [
+        "pollution-complaints-regional-map"
+      ],
       "waterworks-statistics": [
         "sewerage-water-supply-gap",
         "water-infrastructure-crisis"
@@ -2758,12 +1515,30 @@
       "welfare-admin-report": [
         "vacant-housing-vs-welfare-commissioner"
       ],
+      "wind-power-deployment-statistics": [
+        "renewable-energy-regional-gap",
+        "wind-power-capacity-prefecture-gap"
+      ],
+      "workers-compensation-annual-report": [
+        "workplace-accident-regional-map"
+      ],
       "workplace-accident-survey": [
         "workplace-accident-regional-map"
       ]
     }
   },
   "surveys": [
+    {
+      "surveyId": "academic-achievement-survey",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": [
+        "academic-achievement-test-prefecture-ranking",
+        "advancement-plus-employment-rate-prefecture",
+        "income-quintile-education",
+        "spinach-consumption-ranking"
+      ]
+    },
     {
       "surveyId": "accommodation-survey",
       "rankingCount": 3,
@@ -2774,6 +1549,7 @@
       "blogSlugs": [
         "cc-estat-11-tourism-stacked",
         "foreign-overnight-guests-prefecture-gap",
+        "inbound-by-nationality-regional-preference",
         "inbound-overnight-guests-prefecture",
         "inbound-overnight-regional-gap",
         "inbound-overnight-stay-concentration",
@@ -2790,6 +1566,12 @@
       ]
     },
     {
+      "surveyId": "age-adjusted-mortality-statistics",
+      "rankingCount": 0,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "agricultural-income-statistics",
       "rankingCount": 3,
       "themeKeys": [],
@@ -2797,6 +1579,7 @@
         "agriculture-hokkaido-dominance",
         "cc-estat-13-agri-sankey",
         "fresh-udon-soba-consumption-quantity",
+        "habitable-area-land-use",
         "sixth-industry-direct-sales"
       ]
     },
@@ -2816,6 +1599,15 @@
       "themeKeys": [],
       "blogSlugs": [
         "sixth-industry-direct-sales"
+      ]
+    },
+    {
+      "surveyId": "air-pollution-control-law-status",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": [
+        "pollution-complaints-regional-map",
+        "swimming-pool-public-vs-smoke-emission-facility-count"
       ]
     },
     {
@@ -2850,12 +1642,6 @@
         "urban-parks-green-infrastructure",
         "water-sewer-expenditure-ranking"
       ]
-    },
-    {
-      "surveyId": "balance-of-payments",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
     },
     {
       "surveyId": "boj-statistics",
@@ -2936,6 +1722,7 @@
         "firefighting-capacity-gap",
         "fiscal-health-50years-trend",
         "foreign-population-growth-rate",
+        "foreign-resident-five-percent-municipalities",
         "foreign-residents-diversity-map",
         "forest-coverage-woodland-economy",
         "future-population-tokyo-paradox",
@@ -2944,6 +1731,7 @@
         "gasoline-consumption-quantity-vs-densely-inhabited-district",
         "general-households-prefecture-gap",
         "habitable-area-land-use",
+        "half-population-elderly-municipalities",
         "health-life-expectancy-structure",
         "hospital-bed-utilization-map",
         "household-income-tokyo-okinawa",
@@ -2951,15 +1739,18 @@
         "household-structure-transformation",
         "households-on-public-assistance-per-1000-prefecture-gap",
         "ict-digital-divide-composite-analysis",
+        "inbound-by-nationality-regional-preference",
         "inflow-population-ratio-prefecture-gap",
         "library-museum-cultural-capital",
         "livable-prefecture-composite-ranking",
         "local-allocation-tax-prefecture-vs-total-area-excluding",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "manufacturing-output-outlier-cities",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
+        "municipality-population-decline-tiers",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "park-green-space-gap",
@@ -2972,6 +1763,7 @@
         "population-migration-tokyo-concentration",
         "post-office-last-window",
         "prefectural-debt-future-burden",
+        "prefecture-population-city-concentration",
         "real-disposable-income-vs-per-capita-social-welfare",
         "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
         "real-income-taxpayer",
@@ -2986,6 +1778,7 @@
         "sports-facility-regional-divide",
         "sports-urban-paradox",
         "suicide-rate-aging-nexus",
+        "towns-villages-larger-than-cities",
         "traffic-accident-deaths-regional-risk",
         "train-commuters-prefecture-gap",
         "travel-behavior-gender-gap",
@@ -3015,7 +1808,7 @@
     },
     {
       "surveyId": "commercial-dynamics-survey",
-      "rankingCount": 4,
+      "rankingCount": 5,
       "themeKeys": [],
       "blogSlugs": [
         "convenience-store-count-commercial-prefecture-gap",
@@ -3025,12 +1818,6 @@
     {
       "surveyId": "commercial-statistics",
       "rankingCount": 4,
-      "themeKeys": [],
-      "blogSlugs": []
-    },
-    {
-      "surveyId": "comprehensive-energy-statistics",
-      "rankingCount": 0,
       "themeKeys": [],
       "blogSlugs": []
     },
@@ -3053,18 +1840,13 @@
       "blogSlugs": []
     },
     {
-      "surveyId": "corporate-enterprise-statistics",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
-    },
-    {
       "surveyId": "cpi-annual",
-      "rankingCount": 15,
+      "rankingCount": 19,
       "themeKeys": [],
       "blogSlugs": [
         "cpi-change-regional-pattern",
         "electricity-bill-hike-impact",
+        "household-spending-before-after-inflation",
         "inflation-rate-prefecture-gap",
         "white-bread-price-up-quantity-up",
         "winter-coat-bargain-purchase-price"
@@ -3072,21 +1854,19 @@
     },
     {
       "surveyId": "crop-statistics",
-      "rankingCount": 3,
+      "rankingCount": 8,
       "themeKeys": [],
       "blogSlugs": [
+        "agriculture-hokkaido-dominance",
+        "farmland-crisis-abandoned-land",
+        "habitable-area-land-use",
+        "local-allocation-tax-prefecture-vs-cultivated-area",
         "rice-harvest-volume-prefecture-gap"
       ]
     },
     {
-      "surveyId": "current-production-statistics",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
-    },
-    {
       "surveyId": "economic-census-activity",
-      "rankingCount": 34,
+      "rankingCount": 37,
       "themeKeys": [
         "manufacturing"
       ],
@@ -3095,11 +1875,15 @@
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
         "convenience-store-density-map",
+        "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
         "manufacturing-labor-productivity-pref",
+        "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
+        "pharma-medical-device-production-map",
+        "retail-establishments-by-prefecture",
         "retail-store-count-vs-nurses-per-100k-population",
         "semiconductor-electronics-regional-map",
         "small-business-dominance-map"
@@ -3114,7 +1898,9 @@
       "blogSlugs": [
         "it-establishments-prefecture",
         "manufacturing-establishments-prefecture-gap",
+        "per-capita-income-gap",
         "small-business-dominance-map",
+        "software-engineer-salary-prefecture-gap",
         "telework-rate-tokyo-gap"
       ]
     },
@@ -3128,23 +1914,37 @@
         "cc-estat-08-bar-chart-race",
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
+        "foreign-residents-diversity-map",
         "industrial-water-manufacturing-nexus",
         "manufacturing-aichi-dominance",
         "manufacturing-labor-productivity-pref",
+        "manufacturing-output-outlier-cities",
         "manufacturing-productivity",
         "manufacturing-shipment-prefecture-ranking",
+        "pharma-medical-device-production-map",
         "semiconductor-electronics-regional-map"
       ]
     },
     {
-      "surveyId": "electric-power-statistics",
-      "rankingCount": 0,
+      "surveyId": "electricity-business-statistics",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": [
+        "cc-estat-14-energy-area-chart",
+        "electricity-demand-gap",
+        "energy-infrastructure-gas-electricity",
+        "renewable-energy-regional-gap"
+      ]
+    },
+    {
+      "surveyId": "employment-insurance-annual-report",
+      "rankingCount": 4,
       "themeKeys": [],
       "blogSlugs": []
     },
     {
       "surveyId": "employment-structure-survey",
-      "rankingCount": 10,
+      "rankingCount": 11,
       "themeKeys": [
         "labor-mobility",
         "labor-wages"
@@ -3162,6 +1962,12 @@
       ]
     },
     {
+      "surveyId": "employment-trends-survey",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "establishment-enterprise-census",
       "rankingCount": 11,
       "themeKeys": [],
@@ -3172,18 +1978,26 @@
     },
     {
       "surveyId": "factory-location-survey",
+      "rankingCount": 3,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
+      "surveyId": "farmland-transfer-conversion-report",
       "rankingCount": 1,
       "themeKeys": [],
       "blogSlugs": []
     },
     {
       "surveyId": "fire-annual-report",
-      "rankingCount": 8,
+      "rankingCount": 13,
       "themeKeys": [
         "safety"
       ],
       "blogSlugs": [
         "cup-noodles-consumption-expenditure-vs-fire-damage",
+        "disaster-damage-per-person-prefecture-gap",
+        "earthquake-insurance-prefecture-gap",
         "firefighting-capacity-gap"
       ]
     },
@@ -3202,6 +2016,22 @@
       ]
     },
     {
+      "surveyId": "fishery-census",
+      "rankingCount": 10,
+      "themeKeys": [
+        "fishery-marine"
+      ],
+      "blogSlugs": [
+        "fishery-catch-aquaculture-shift"
+      ]
+    },
+    {
+      "surveyId": "fixed-asset-tax-land-statistics",
+      "rankingCount": 5,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "flood-statistics",
       "rankingCount": 9,
       "themeKeys": [],
@@ -3210,14 +2040,8 @@
       ]
     },
     {
-      "surveyId": "food-balance-sheet",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
-    },
-    {
       "surveyId": "foreign-residents-statistics",
-      "rankingCount": 7,
+      "rankingCount": 10,
       "themeKeys": [
         "foreign-residents"
       ],
@@ -3246,8 +2070,18 @@
       ]
     },
     {
+      "surveyId": "gas-business-statistics",
+      "rankingCount": 4,
+      "themeKeys": [],
+      "blogSlugs": [
+        "energy-infrastructure-gas-electricity",
+        "gas-expenditure-ranking",
+        "gasoline-car-society-map"
+      ]
+    },
+    {
       "surveyId": "health-admin-report",
-      "rankingCount": 35,
+      "rankingCount": 43,
       "themeKeys": [
         "healthcare",
         "tourism"
@@ -3255,10 +2089,23 @@
       "blogSlugs": [
         "abortion-rate-prefecture-gap",
         "barber-beauty-salon-regional-gap",
+        "designated-difficult-disease-prefecture-gap",
         "dog-registration-prefecture-gap",
         "pharmacy-count-prefecture-ranking",
         "retail-store-count-vs-nurses-per-100k-population"
       ]
+    },
+    {
+      "surveyId": "health-insurance-annual-report",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
+      "surveyId": "health-insurance-society-annual-report",
+      "rankingCount": 4,
+      "themeKeys": [],
+      "blogSlugs": []
     },
     {
       "surveyId": "hospital-report",
@@ -3270,7 +2117,7 @@
     },
     {
       "surveyId": "household-survey",
-      "rankingCount": 23,
+      "rankingCount": 25,
       "themeKeys": [
         "local-economy",
         "real-income"
@@ -3287,14 +2134,25 @@
         "household-spending-before-after-inflation",
         "household-spending-prefecture-gap",
         "ict-digital-divide-composite-analysis",
+        "low-cost-low-income-prefectures",
         "post-office-last-window",
+        "real-disposable-income-reversal",
+        "real-disposable-income-vs-per-capita-social-welfare",
+        "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+        "real-income-taxpayer",
         "savings-balance-gap",
         "savings-rate-gap"
       ]
     },
     {
+      "surveyId": "housing-finance-user-survey",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "housing-land-survey",
-      "rankingCount": 32,
+      "rankingCount": 35,
       "themeKeys": [
         "living-housing"
       ],
@@ -3325,12 +2183,13 @@
     },
     {
       "surveyId": "housing-starts-statistics",
-      "rankingCount": 10,
+      "rankingCount": 14,
       "themeKeys": [],
       "blogSlugs": [
         "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
         "cc-estat-12-housing-treemap",
-        "home-ownership-rate-ranking"
+        "home-ownership-rate-ranking",
+        "road-length-per-km2-vs-residential-building-starts"
       ]
     },
     {
@@ -3340,7 +2199,9 @@
         "manufacturing"
       ],
       "blogSlugs": [
-        "industrial-water-manufacturing-nexus"
+        "industrial-water-manufacturing-nexus",
+        "pharma-medical-device-production-map",
+        "semiconductor-electronics-regional-map"
       ]
     },
     {
@@ -3356,7 +2217,7 @@
     },
     {
       "surveyId": "japan-post-statistics",
-      "rankingCount": 3,
+      "rankingCount": 6,
       "themeKeys": [],
       "blogSlugs": [
         "swimming-pool-public-vs-post-office-count"
@@ -3370,7 +2231,7 @@
     },
     {
       "surveyId": "job-placement-statistics",
-      "rankingCount": 8,
+      "rankingCount": 11,
       "themeKeys": [
         "labor-mobility",
         "labor-wages",
@@ -3384,8 +2245,14 @@
       ]
     },
     {
+      "surveyId": "junior-high-athletics-membership-survey",
+      "rankingCount": 10,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "kakei-chousa",
-      "rankingCount": 704,
+      "rankingCount": 707,
       "themeKeys": [
         "real-income"
       ],
@@ -3434,6 +2301,8 @@
         "dining-out-expenditure-ranking",
         "earthquake-insurance-prefecture-gap",
         "ehime-food-culture",
+        "engel-coefficient-prefecture-ranking",
+        "engel-coefficient-vs-prefectural-income",
         "fish-catch-vs-consumption-prefecture",
         "food-consumption-prefecture-battle",
         "food-spending-pattern",
@@ -3462,6 +2331,7 @@
         "home-ownership-rate-ranking",
         "horse-mackerel-expenditure-ranking",
         "household-consumption-expenditure-ranking",
+        "household-spending-before-after-inflation",
         "hyogo-food-culture",
         "ibaraki-food-culture",
         "icecream-consumption-expenditure",
@@ -3489,6 +2359,7 @@
         "kanagawa-food-culture",
         "katsuobushi-expenditure-ranking",
         "kochi-food-culture",
+        "konbu-consumption-prefecture-gap",
         "konbu-consumption-quantity",
         "konnyaku-expenditure-ranking",
         "kumamoto-food-culture",
@@ -3511,6 +2382,7 @@
         "nagasaki-food-culture",
         "nara-food-culture",
         "natto-child-weight-correlation",
+        "natto-consumption-east-west-divide",
         "natto-consumption-expenditure",
         "natto-production-vs-consumption",
         "necktie-stockings-market-shrink",
@@ -3530,6 +2402,7 @@
         "pork-consumption-expenditure",
         "pork-consumption-quantity",
         "potato-consumption-quantity",
+        "real-disposable-income-reversal",
         "refrigerator-expenditure-ranking",
         "rice-consumption-quantity-ranking",
         "saga-food-culture",
@@ -3607,12 +2480,6 @@
       ]
     },
     {
-      "surveyId": "labour-force-survey",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
-    },
-    {
       "surveyId": "late-elderly-medical-annual-report",
       "rankingCount": 1,
       "themeKeys": [
@@ -3620,6 +2487,21 @@
       ],
       "blogSlugs": [
         "late-elderly-medical-expense-prefecture-gap"
+      ]
+    },
+    {
+      "surveyId": "life-insurance-business-statistics",
+      "rankingCount": 4,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
+      "surveyId": "life-tables",
+      "rankingCount": 6,
+      "themeKeys": [],
+      "blogSlugs": [
+        "cc-estat-04-aging-heatmap",
+        "unhealthy-period-gender-prefecture-gap"
       ]
     },
     {
@@ -3637,10 +2519,25 @@
       "rankingCount": 5,
       "themeKeys": [],
       "blogSlugs": [
+        "cc-estat-06-income-scatter",
         "education-expenses-gap",
         "pachinko-education-cost",
         "pachinko-shop-density-per-10k-vs-high-school-education-cost"
       ]
+    },
+    {
+      "surveyId": "local-election-results",
+      "rankingCount": 4,
+      "themeKeys": [],
+      "blogSlugs": [
+        "governor-election-turnout-prefecture-gap"
+      ]
+    },
+    {
+      "surveyId": "local-election-statistics",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": []
     },
     {
       "surveyId": "local-finance",
@@ -3716,14 +2613,22 @@
         "local-finance"
       ],
       "blogSlugs": [
+        "deposit-securities-prefecture-personality",
         "gasoline-expenditure-ranking",
         "household-income-tokyo-okinawa",
         "kei-car-density-prefecture-gap",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "overseas-travel-gap",
         "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
         "real-income-taxpayer"
       ]
+    },
+    {
+      "surveyId": "long-term-care-insurance-annual-report",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
     },
     {
       "surveyId": "medical-facility-survey",
@@ -3735,6 +2640,7 @@
         "general-hospital-bed-occupancy-rate",
         "hospital-bed-utilization-map",
         "livable-prefecture-composite-ranking",
+        "municipalities-without-general-hospitals",
         "psychiatric-bed-count-vs-elementary-school-count",
         "psychiatric-bed-count-vs-neighborhood-park-count",
         "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
@@ -3772,8 +2678,8 @@
       ]
     },
     {
-      "surveyId": "monthly-labour-survey",
-      "rankingCount": 0,
+      "surveyId": "motor-vehicle-transport-statistics",
+      "rankingCount": 2,
       "themeKeys": [],
       "blogSlugs": []
     },
@@ -3794,16 +2700,20 @@
       ]
     },
     {
-      "surveyId": "national-accounts",
-      "rankingCount": 0,
+      "surveyId": "national-election-results",
+      "rankingCount": 4,
       "themeKeys": [],
-      "blogSlugs": []
+      "blogSlugs": [
+        "voter-turnout-house-single-prefecture-gap"
+      ]
     },
     {
-      "surveyId": "national-health-nutrition-survey",
-      "rankingCount": 0,
+      "surveyId": "national-health-insurance-annual-report",
+      "rankingCount": 4,
       "themeKeys": [],
-      "blogSlugs": []
+      "blogSlugs": [
+        "tuna-consumption-medical-expense-correlation"
+      ]
     },
     {
       "surveyId": "national-household-survey",
@@ -3836,6 +2746,12 @@
       ]
     },
     {
+      "surveyId": "natural-conservation-area-data",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "natural-park-area",
       "rankingCount": 6,
       "themeKeys": [],
@@ -3844,10 +2760,18 @@
       ]
     },
     {
-      "surveyId": "overseas-business-activities-survey",
+      "surveyId": "noise-control-law-status-survey",
       "rankingCount": 0,
       "themeKeys": [],
       "blogSlugs": []
+    },
+    {
+      "surveyId": "nta-annual-statistics",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": [
+        "alcohol-prefecture-map"
+      ]
     },
     {
       "surveyId": "passenger-regional-flow-survey",
@@ -3863,10 +2787,13 @@
     },
     {
       "surveyId": "patient-survey",
-      "rankingCount": 2,
-      "themeKeys": [],
+      "rankingCount": 28,
+      "themeKeys": [
+        "healthcare"
+      ],
       "blogSlugs": [
         "health-life-expectancy-structure",
+        "hospital-bed-utilization-map",
         "inpatient-rate-aging-burden",
         "inpatient-rate-prefecture-gap",
         "outpatient-rate-prefecture-gap"
@@ -3874,12 +2801,22 @@
     },
     {
       "surveyId": "pension-insurance-annual-report",
-      "rankingCount": 4,
+      "rankingCount": 6,
       "themeKeys": [
         "aging-society"
       ],
       "blogSlugs": [
         "national-pension-payment-rate-prefecture-gap"
+      ]
+    },
+    {
+      "surveyId": "petroleum-sales-statistics",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": [
+        "car-ownership-household-prefecture-gap",
+        "energy-infrastructure-gas-electricity",
+        "gasoline-car-society-map"
       ]
     },
     {
@@ -3890,7 +2827,8 @@
       ],
       "blogSlugs": [
         "childcare-friendly-prefecture-ranking",
-        "health-life-expectancy-structure"
+        "health-life-expectancy-structure",
+        "hospital-bed-utilization-map"
       ]
     },
     {
@@ -3957,6 +2895,7 @@
         "firefighting-capacity-gap",
         "fiscal-health-50years-trend",
         "foreign-population-growth-rate",
+        "foreign-resident-five-percent-municipalities",
         "foreign-residents-diversity-map",
         "future-population-tokyo-paradox",
         "garbage-total-output",
@@ -3969,9 +2908,11 @@
         "livable-prefecture-composite-ranking",
         "local-tax-regional-gap",
         "local-tax-revenue-gap",
+        "manufacturing-output-outlier-cities",
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
+        "municipality-population-decline-tiers",
         "natural-increase-rate-prefecture-gap",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
@@ -3982,7 +2923,9 @@
         "pollution-complaints-regional-map",
         "population-density-urbanization",
         "population-migration-tokyo-concentration",
+        "post-office-last-window",
         "prefectural-debt-future-burden",
+        "prefecture-population-city-concentration",
         "real-disposable-income-vs-per-capita-social-welfare",
         "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
         "real-income-taxpayer",
@@ -3993,6 +2936,7 @@
         "sports-facility-regional-divide",
         "sports-urban-paradox",
         "suicide-rate-aging-nexus",
+        "towns-villages-larger-than-cities",
         "traffic-accident-deaths-regional-risk",
         "travel-behavior-gender-gap",
         "tuna-consumption-quantity-vs-annual-new-inpatients-general",
@@ -4019,8 +2963,14 @@
       ]
     },
     {
+      "surveyId": "population-research",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "port-statistics",
-      "rankingCount": 4,
+      "rankingCount": 9,
       "themeKeys": [
         "ports"
       ],
@@ -4036,16 +2986,34 @@
       "blogSlugs": [
         "ai-claude-code-pref-analysis",
         "bank-deposit-balance-shikoku-anomaly",
+        "cc-estat-06-income-scatter",
         "cc-estat-09-radar-prefecture",
         "engel-coefficient-vs-prefectural-income",
+        "forest-coverage-woodland-economy",
         "it-industry-concentration",
         "livable-prefecture-composite-ranking",
+        "manufacturing-aichi-dominance",
         "per-capita-income-gap",
         "prefectural-income-gdp-ranking",
         "price-index-high-low-prefecture",
         "purchasing-power-adjusted",
         "real-disposable-income-reversal"
       ]
+    },
+    {
+      "surveyId": "prefectural-energy-consumption-statistics",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": [
+        "electricity-demand-gap",
+        "energy-consumption-structure-shift"
+      ]
+    },
+    {
+      "surveyId": "prefectural-food-self-sufficiency",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
     },
     {
       "surveyId": "prefectural-land-price-survey",
@@ -4111,10 +3079,12 @@
       ]
     },
     {
-      "surveyId": "railway-transport-survey",
-      "rankingCount": 0,
+      "surveyId": "regional-health-promotion-report",
+      "rankingCount": 12,
       "themeKeys": [],
-      "blogSlugs": []
+      "blogSlugs": [
+        "dental-checkup-persons-per-1000-prefecture-gap"
+      ]
     },
     {
       "surveyId": "resident-registry-migration-report",
@@ -4136,14 +3106,18 @@
       ]
     },
     {
-      "surveyId": "retail-price-dynamics-survey",
-      "rankingCount": 0,
+      "surveyId": "resident-registry-population-survey",
+      "rankingCount": 4,
       "themeKeys": [],
-      "blogSlugs": []
+      "blogSlugs": [
+        "international-cooperation-volunteer-map",
+        "sewerage-water-supply-gap",
+        "water-sewage-crisis"
+      ]
     },
     {
       "surveyId": "retail-price-survey",
-      "rankingCount": 12,
+      "rankingCount": 15,
       "themeKeys": [
         "consumer-prices",
         "real-income"
@@ -4153,15 +3127,23 @@
         "electricity-bill-hike-impact",
         "energy-consumption-structure-shift",
         "food-price-regional-2026",
+        "home-ownership-rate-ranking",
+        "housing-cost-livability-trend",
+        "livable-prefecture-composite-ranking",
         "low-cost-low-income-prefectures",
         "mineral-water-spending-prefecture-gap",
+        "prefecture-salary-remote-gap",
         "price-index-high-low-prefecture",
-        "purchasing-power-adjusted"
+        "purchasing-power-adjusted",
+        "real-disposable-income-reversal",
+        "real-disposable-income-vs-per-capita-social-welfare",
+        "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+        "real-income-taxpayer"
       ]
     },
     {
       "surveyId": "road-statistics",
-      "rankingCount": 17,
+      "rankingCount": 19,
       "themeKeys": [
         "roads"
       ],
@@ -4194,6 +3176,7 @@
         "elementary-school-children-count",
         "garbage-total-output",
         "high-school-advancement-rate",
+        "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
         "students-per-teacher-class-size-gap",
@@ -4211,17 +3194,12 @@
         "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
         "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
         "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+        "child-height-regional-gap",
         "middle-school-height-east-west-puzzle",
         "natto-child-weight-correlation",
         "prefectural-height-male-female-gap",
         "tissue-paper-consumption-expenditure-vs-average-weight"
       ]
-    },
-    {
-      "surveyId": "science-technology-research-survey",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
     },
     {
       "surveyId": "sewerage-statistics",
@@ -4232,6 +3210,12 @@
         "water-infrastructure-crisis",
         "water-sewage-crisis"
       ]
+    },
+    {
+      "surveyId": "sixth-industry-survey",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": []
     },
     {
       "surveyId": "social-education-survey",
@@ -4255,7 +3239,7 @@
     },
     {
       "surveyId": "social-life-basic-survey",
-      "rankingCount": 107,
+      "rankingCount": 112,
       "themeKeys": [
         "aging-society",
         "tourism"
@@ -4277,12 +3261,6 @@
       ]
     },
     {
-      "surveyId": "social-security-cost-statistics",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
-    },
-    {
       "surveyId": "social-welfare-facility-survey",
       "rankingCount": 34,
       "themeKeys": [],
@@ -4300,10 +3278,19 @@
       "blogSlugs": []
     },
     {
-      "surveyId": "student-guidance-issues-survey",
-      "rankingCount": 0,
+      "surveyId": "special-forest-products-statistics",
+      "rankingCount": 2,
       "themeKeys": [],
       "blogSlugs": []
+    },
+    {
+      "surveyId": "student-guidance-issues-survey",
+      "rankingCount": 7,
+      "themeKeys": [],
+      "blogSlugs": [
+        "school-nonattendance-pattern",
+        "students-per-teacher-class-size-gap"
+      ]
     },
     {
       "surveyId": "telecommunications-service-contract-report",
@@ -4316,14 +3303,8 @@
       ]
     },
     {
-      "surveyId": "trade-statistics",
-      "rankingCount": 0,
-      "themeKeys": [],
-      "blogSlugs": []
-    },
-    {
       "surveyId": "traffic-accident-statistics",
-      "rankingCount": 10,
+      "rankingCount": 11,
       "themeKeys": [
         "safety"
       ],
@@ -4333,8 +3314,14 @@
       ]
     },
     {
+      "surveyId": "truck-operator-statistics",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "urban-park-survey",
-      "rankingCount": 10,
+      "rankingCount": 12,
       "themeKeys": [],
       "blogSlugs": [
         "childcare-friendly-prefecture-ranking",
@@ -4344,8 +3331,14 @@
       ]
     },
     {
+      "surveyId": "vehicle-registration-statistics",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "vital-statistics",
-      "rankingCount": 46,
+      "rankingCount": 51,
       "themeKeys": [
         "aging-society",
         "healthcare",
@@ -4374,6 +3367,12 @@
         "total-fertility-rate",
         "unmarried-rate-40years-crisis"
       ]
+    },
+    {
+      "surveyId": "voter-registration-statistics",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
     },
     {
       "surveyId": "wage-structure-survey",
@@ -4422,6 +3421,20 @@
       ]
     },
     {
+      "surveyId": "wastewater-treatment-coverage-report",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
+      "surveyId": "water-pollution-control-law-status",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": [
+        "pollution-complaints-regional-map"
+      ]
+    },
+    {
       "surveyId": "water-pollution-survey",
       "rankingCount": 3,
       "themeKeys": [],
@@ -4438,7 +3451,7 @@
     },
     {
       "surveyId": "weather-statistics",
-      "rankingCount": 9,
+      "rankingCount": 12,
       "themeKeys": [],
       "blogSlugs": [
         "annual-precipitation-rainy-season-gap",
@@ -4453,10 +3466,33 @@
     },
     {
       "surveyId": "welfare-admin-report",
-      "rankingCount": 10,
+      "rankingCount": 17,
       "themeKeys": [],
       "blogSlugs": [
         "vacant-housing-vs-welfare-commissioner"
+      ]
+    },
+    {
+      "surveyId": "wind-power-deployment-statistics",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": [
+        "renewable-energy-regional-gap",
+        "wind-power-capacity-prefecture-gap"
+      ]
+    },
+    {
+      "surveyId": "wood-supply-demand-report",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
+      "surveyId": "workers-compensation-annual-report",
+      "rankingCount": 2,
+      "themeKeys": [],
+      "blogSlugs": [
+        "workplace-accident-regional-map"
       ]
     },
     {
