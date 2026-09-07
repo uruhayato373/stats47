@@ -21,7 +21,105 @@ updated: 2026-09-07
 
 ## 🔴 高 — 今月中に着手したい
 
-### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正の効果と入力鮮度アラートを確認する
+### [SURVEY-TAXONOMY-COVERAGE-01] 公開コンテンツの調査タクソノミーを適用対象100%へ完全化する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:別環境] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-07]
+
+- **owner**: `survey-curator` が横断監査と ranking 系譜を統括し、`theme-component-builder` と
+  `chart-author` / `blog-editor` が各面の lineage を是正する。R2 反映は `r2-publisher` / CI、
+  本番変更の承認はオーナーが担当する。
+- **目的**: 公開 ranking、ThemeCatalog chart、公開 blog chart を、公式に確認できる原典調査または
+  明示的な `not-applicable` のどちらかへ全件分類し、適用対象の未解決・系譜欠落を 0 にする。
+- **現状実測 (2026-09-06 state)**:
+  - ranking は公開 2,166 指標中 1,962 件解決、204 件未分類で、active coverage は 90.58%。
+    未分類の理由は `ssds-synthetic-only` 109 件、`estat-uncovered` 74 件、`external` 21 件で、
+    未カバーの `statsDataId` は 48 種類ある。
+  - theme は 106 chart 中、適用対象 82 件がすべて解決済みで、対象外 24 件、未解決・系譜欠落は 0 件。
+  - blog は公開 534 記事・1,425 chart 中、適用対象 1,332 件、解決 1,087 件、
+    未解決 61 件、lineage 欠落 184 件、対象外 93 件で、問題を含む記事は 152 件。
+  - survey master は 105 件で、全在庫から接続される調査は 88 件、orphan は 17 件。
+    live の active survey 集合 86 件と git 導出の期待集合 86 件は一致している。
+- **別 PC 再開前提**: 本カードを含む最新コミットを clean な作業ツリーへ取得し、依存関係を導入後、
+  Node.js の `fetch` が公開 R2 URL へ到達できることを少数サンプルで確認する。この PC の
+  `--compare-r2` はプロキシ / TLS により全 fetch 失敗したため、その結果を本番 `item.json` 欠落と判定しない。
+- **変更可能な SSOT**: 調査マスタ `packages/ranking/src/data/surveys.json`、SSDS / e-Stat 出典辞書、
+  例外に限る `MetricConfig.surveyId`、ThemeCatalog の既存 lineage、blog chart `source.json` の生成元 lineage と
+  明示的な `surveyScope`、共通 resolver / builder / audit の最小実装・型・テスト、最終値確定後の ratchet だけを変更対象とする。
+- **実行順**:
+  1. `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --unresolved` と横断監査を実行し、
+     現状値と未解決キーを取得日付つきで再現する。
+  2. `estat-uncovered` 74 件 / 48 `statsDataId` を e-Stat 公式メタデータで調査名まで確認し、
+     実在する survey だけを e-Stat 出典辞書と、必要な場合のみ surveys master へ追記する。
+  3. `ssds-synthetic-only` 109 件は `cdCat01` から原典調査への導出を公式情報で確認し、
+     合成 ID を公開用 survey として登録せず、実在調査のマスタと辞書の名称を一致させる。
+  4. `external` 21 件を「公式な統計調査あり」と「調査タクソノミー対象外」に一次出典で分ける。
+     ranking 側に明示的な `not-applicable` 契約が無ければ、実装者が既存 `MetricConfig` と resolver の型を調べ、
+     最小の SSOT / 型変更で対象外理由を明示し、共通監査がそれを別 status で集計する。
+  5. theme は現在の適用対象 82 / 82 と対象外 24 件を回帰テストで保持し、
+     `relatedRankingKeys` / `rankingLink` / `estatParams` からの導出を崩さない。
+  6. blog の未解決 61 件は `rankingKey` / `statsDataId` / 共通辞書に実在する `sourceName` を一次出典に基づき是正し、
+     lineage 欠落 184 件は原データを追跡できるものだけ復元する。非統計 / GIS 派生の対象外は
+     `surveyScope: "not-applicable"` と 10 文字以上の `surveyScopeReason` を source に明記する。
+  7. orphan 17 件は active / total を分けて再監査し、実在する対応在庫へ正しく接続するか、
+     全在庫で 0 件と機械確定できたものだけを surveys master から削除する。
+  8. 全面のローカル監査、config 検証、対象テストが green になった後だけ、オーナー承認の上で
+     R2 snapshot を下記の順番で再生成・反映する。
+  9. 反映後に `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2` を `--sample` なしで実行し、
+     live 公開 2,166 `item.json` 全件の git 導出との一致、欠落 0、active survey 集合の差分 0 を証拠として残す。
+  10. 適用対象の coverage 100%、未解決 0、missing-lineage 0、全 live 照合一致が同時に成立した後だけ、
+      `.claude/config/survey-taxonomy-ratchet.json` を最終母数に合わせ、ranking / theme / blog の適用対象 coverage を
+      100% へ締め、未解決・lineage 欠落の許容値を 0 にする。
+- **R2 反映順**: 1) `generate-ranking-items.ts` で `item.json` の `surveyIds` を先に再生成し、2)
+  `export-master-snapshots.ts` で `app/survey/<id>/items.json` と `all.json` を再グループ化し、3)
+  `export-blog-snapshot.ts` で blog の `surveyIds` と `surveyArticleIndex` を source lineage から再生成する。
+  CI を使う場合も `ranking-items` → `master` → blog publish の依存順を崩さない。
+- **禁止**: R2 JSON と taxonomy state を手編集しない。未分類の受け皿、`ssds-src:*` / `src:*`、
+  実在しない surveyId を作らない。external、GIS、非統計 chart に偽の surveyId を付けず、
+  根拠のない `not-applicable` への振り替えや allowlist の拡大で coverage を上げない。
+  theme / blog に独自の手書き surveyId を追加せず、共通 resolver と既存 lineage から導出する。
+- **停止条件**: 公式メタデータで原典調査を特定できない、詳細出典が失われている、
+  `not-applicable` の理由を一次情報で説明できない、または公開母数が理由なく減る場合は、対象キー、
+  証拠、不足情報を報告して停止する。Node の fetch 全失敗時はネットワーク障害と本番欠落を分離できるまで
+  live 不一致を断定しない。R2 write、workflow dispatch、本番反映、デプロイは明示承認が無ければ実行しない。
+- **完了条件**:
+  - ranking は適用対象が実在 survey へ 100% 解決し、未解決 0 となる。対象外指標がある場合は、
+    各指標に機械可読な明示契約と十分な理由があり、coverage 分母からの除外をテストが検証する。
+  - theme は適用対象が 100% 解決し、`unresolved` と `missing-lineage` が 0、明示的な `not-applicable` だけが対象外となる。
+  - blog は適用対象が 100% 解決し、`unresolved` と `missing-lineage` が 0、全対象外 chart に
+    `surveyScope: "not-applicable"` と根拠ある `surveyScopeReason` が存在し、問題あり公開記事が 0 件となる。
+  - survey master の orphan が 0 件となり、active / inactive-only の判定を保持したまま、
+    `app/survey/all.json` と git-active の survey 集合差分が 0 となる。
+  - `--compare-r2` が公開 2,166 `item.json` を全件取得し、一致 2,166、不一致 0、欠落 0、fetch 失敗 0 を報告する。
+  - ratchet は ranking / theme / blog の適用対象 100% と未解決・lineage 欠落 0 を新しい回帰防止ラインにし、
+    `npm run validate:config --workspace=@stats47/data-configs`、対象テスト、横断監査の full 再生成と
+    `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check` がすべて green となる。
+
+### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-09-21]
+
+- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
+- **症状 (実測)**: `.claude/state/metrics/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
+- **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
+- **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
+- **次**: ① 別セッションで走っている調査 (topology-fetch の交絡切り分け) の結果を待つ。② 原因が確定したら topology の取得経路を見直し、LCP 要素が Leaflet タイルのまま変わらないかを再計測する。③ 是正後は PSI 日次計測で 4 週の推移を見る。
+- **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
+- **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
+
+### [RSC-CACHE-BYPASS-01] RSC 応答が HTML と同じ共有キャッシュ設定で返る
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:curl -sD - -o /dev/null -H "RSC: 1" https://stats47.jp/ranking/total-population | grep -iE 'cache-tag|vary'] [起票:2026-09-07] [期日:2026-09-21]
+
+- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
+- **症状 (2026-09-07 本番実測)**: `/ranking/total-population` へ `RSC: 1` を付けたリクエストの応答が `Content-Type: text/x-component` を返しながら、`cache-tag: stats47-html,stats47-path:%2Franking%2Ftotal-population` と `cloudflare-cdn-cache-control: public, max-age=86400, stale-while-revalidate=604800` を持つ。`Vary` は `Accept-Encoding` のみで RSC ヘッダーを区別しない。HTML と RSC が同一キャッシュキーを共有する条件が成立している。
+- **切り分け済み**: (a) `RSC` / `Next-Router-State-Tree` / `Next-Router-Prefetch` / `x-nextjs-data` の 4 種すべてで bypass 分岐に入らない。(b) `RSC: 1` のときだけ `text/x-component` が返るのでヘッダー自体は Next.js 本体に届いている。(c) `apps/web/src/lib/cache-policy.ts` の設計は正しく (RSC は `private, no-store` + `RSC_VARY`)、`cache-policy.test.ts` と `middleware.test.ts` の 54 件は全通過。(d) 該当コードは 2026-08-15 `c46752ef2` で main に入っており未デプロイではない。→ **アプリのコードではなく `@opennextjs/cloudflare` 1.20.6 との統合層の問題**。
+- **未確認**: 実際にキャッシュ混入が起きたかは観測していない (RSC 応答に `CF-Cache-Status` が付かない)。本番でキャッシュ汚染を誘発する再現は実害が出るため行っていない。
+- **仮説 (未検証)**: `open-next.config.ts` の `withRegionalCache(r2IncrementalCache, { mode: "long-lived" })` が返すキャッシュ応答が HTML 用ヘッダーを引き継ぎ、middleware の判定結果を反映していない。
+- **次 (実行順)**: ① `wrangler dev` でローカル再現し、middleware に RSC ヘッダーが届いているかを実測で確定する。② 届いていなければ OpenNext の middleware 統合、届いていれば incremental cache のヘッダー引き継ぎを疑う。③ 修正後は `Vary` に RSC 系が入り `cache-tag` が付かないことを本番で実測する。
+- **停止条件**: 本番でキャッシュ汚染を誘発する再現テストをしない。デプロイはオーナーの明示承認まで行わない。原因未特定のまま `withRegionalCache` を外さない (ISR キャッシュが効かなくなり別の劣化を生む)。
+- **完了条件**: RSC リクエストの応答が `Cache-Control: private, no-store` と RSC を含む `Vary` を返し、`cache-tag: stats47-html` が付かないことを本番で実測する。HTML 応答は従来どおり `CF-Cache-Status: HIT` を維持する。
+
+### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-14] [進行中]
 
@@ -219,7 +317,7 @@ updated: 2026-09-07
 
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 
-タグ: [起票:2026-08-13]
+タグ: [種類:改善] [実行:対話] [起票:2026-08-13]
 
 - **owner**: Claude Code
 - **trigger**: `CROSS-PAGE-DATA-SSOT-01`のcore契約を壊さず、Claude CodeへこのIDを指定してQG0から順に実装する。
@@ -598,17 +696,6 @@ updated: 2026-09-07
 - **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・自動監視の開始は行わない。
 - **完了条件**: 取得根拠・日時付きbaseline/unknownと計測契約を既存商品stateへ保存し、improvement-triageが別IDのeffect/pendingへ引き継ぐ。引渡し証拠をbacklog-loopへ渡し、以後の観測待ちを本カードに重複保持しない。
 
-### [DOCS-WARNINGS-TRIAGE-01] 既存文書警告を棚卸しし各担当へ割り当てる
-
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-09-06] [期日:2026-09-13]
-
-- **status**: pending（期日は一回限りの棚卸しの次回確認期限）
-- **owner**: todo-curator（分類・割当）
-- **根拠**: 2026-09-06のdocs検査はerror 0／既存warning 39。件数は調査起点であり固定目標ではない。
-- **次**: 最新の`npm run docs:report`と既存台帳を突合し、各warningに検査コード・対象・既存ID・担当・次／再開条件を割り当てる。月次／週次の陳腐化はmonthly-plan／weekly-plan、改善台帳の期限超過はimprovement-triage、backlog分類不足はtodo-curatorへ渡す。
-- **停止条件**: 警告を消すためだけの日付更新・根拠のない期限延長・カード削除・進行中カードの変更をしない。既存施策を複製せず、権限外の台帳は各排他writerへ渡す。
-- **完了条件**: 調査対象warning全件に是正／根拠付き据置／担当への引渡しが対応し、未割当0。`npm run docs:check`で新規error・参照切れがなく、カードの意図しない欠落がない。定期監視タスクにはしない。
-
 ### [GEO-SERVICE-PILOT-01] Geo納品見本の販売条件を確定し1商品だけ出品判断する
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-06]
 
@@ -784,7 +871,7 @@ updated: 2026-09-07
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 
-タグ: [起票:2026-08-17]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-17]
 
 - **owner**: Claude Code
 - **症状 (2026-08-17 実測)**: `sync-snapshots --only ranking-items` 完走後も
@@ -832,7 +919,7 @@ updated: 2026-09-07
 
 ### [TILEMAP-LINEAGE-01] タイルマップの手動系譜残件
 
-タグ: [起票:2026-08-03]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-03]
 
 - **owner**: `chart-author`
 - **CROSS-PAGE-DATA-SSOT-01からの分離 (2026-08-27)**: staged全量棚卸しで、現行の自動復元器が
@@ -847,7 +934,7 @@ updated: 2026-09-07
 
 ### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログの残工程
 
-タグ: [起票:2026-07-04]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-04]
 
 - **owner**: Claude Code
 - **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / chart expansion。旧 guidance card 案は 2026-08-25 に指標ハブ契約へ置換済み。
@@ -859,7 +946,7 @@ updated: 2026-09-07
 
 ### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
 
-タグ: [起票:2026-07-18]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-18]
 
 - **owner**: Claude Code
 - **2026-08-27 監査**: 最新note metricsの上位24記事はcatalogのnote IDと一致0件で、対象アカウントの
@@ -869,7 +956,7 @@ updated: 2026-09-07
 
 ### [NOTE-MAGAZINE-REORG-01] note既存投稿のマガジン再編成 + 新規投稿の増産
 
-タグ: [実行:windows] [起票:2026-08-03]
+タグ: [種類:制作] [実行:windows] [起票:2026-08-03]
 
 - **owner**: Claude Code
 - **方針**: ココナラ商品カタログと同型 (git TS カタログ = SSOT)。ただし公開済み stats47-note 159 件は回収スタブ (key = note ID・不透明・`r2Body:false`) で、カテゴリはタイトルからしか導出できない点がココナラと異なる。
@@ -909,7 +996,7 @@ updated: 2026-09-07
 
 ### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
 
-タグ: [起票:2026-08-01]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-01]
 
 - **owner**: Claude Code
 - **次**: `migration-flow-monthly.yml` のPhase 3 (highlight抽出・render) と `migration-flow-annual.yml` のPhase 2 (e-Stat取得・47県render・caption・staging copy) を実装し、実装できたcronだけscheduleへ戻す。
@@ -918,7 +1005,7 @@ updated: 2026-09-07
 
 ### [KAKEI-EXPANSION-02] 家計調査2025 refreshと残品目
 
-タグ: [実行:ユーザー] [起票:2026-07-10]
+タグ: [種類:制作] [実行:ユーザー] [起票:2026-07-10]
 
 - **owner**: Claude Code
 - **trigger**: e-Statで2025年年報の公表を確認できること。
@@ -928,7 +1015,7 @@ updated: 2026-09-07
 
 ### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 13 件
 
-タグ: [実行:ユーザー] [起票:2026-07-30]
+タグ: [種類:不具合] [実行:ユーザー] [起票:2026-07-30]
 
 - **owner**: uruhayato373 (人間の PR でのみ着手できる)
 - **★backlog-loop では閉じられない** (2026-08-17): 対象が `.github/` だけで、ループの verify は
@@ -944,7 +1031,7 @@ updated: 2026-09-07
 
 ### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失図表の手動系譜残件
 
-タグ: [起票:2026-08-12]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-12]
 
 - **owner**: Claude Code
 - **CROSS-PAGE-DATA-SSOT-01からの分離 (2026-08-27)**: staged全量棚卸しで、現行のranking自動復元器が
@@ -986,7 +1073,7 @@ updated: 2026-09-07
 
 ### [SYNC-SNAPSHOTS-MANIFEST-CARRY-01] sync-snapshots の「差分 push」が CI では毎回フル push になる
 
-タグ: [起票:2026-08-17]
+タグ: [種類:不具合] [実行:対話] [起票:2026-08-17]
 
 - **owner**: `r2-publisher`
 - **問題**: `diff-push-r2` は manifest (`.local/r2-manifest/`) と突合して差分だけ送る設計だが、
@@ -1002,6 +1089,8 @@ updated: 2026-09-07
 
 ### [MINIMUM-WAGE-2026-01] 2026年度地域別最低賃金
 
+タグ: [コンテンツ品質] [種類:制作] [実行:対話]
+
 - **owner**: open-data-curator
 - **source**: GitHub #652
 - **trigger**: 厚生労働省または各地方最低賃金審議会が2026年度の47都道府県別実額を正式公表したとき。
@@ -1011,6 +1100,8 @@ updated: 2026-09-07
 
 ### [PREF-OFFICIAL-STATS-01] 47都道府県の公式統計入口から需要を抽出
 
+タグ: [コンテンツ品質] [種類:制作] [実行:対話]
+
 - **owner**: open-data-curator
 - **正典**: `packages/data-configs/src/prefecture-statistics-catalog/README.md`
 - **次**: 各県ポータルを1巡し、複数県で反復する指標だけを、定義、単位、粒度、年次、一次出典付きで上の表へ追加する。
@@ -1018,7 +1109,7 @@ updated: 2026-09-07
 
 ### [INDICATOR-CANDIDATES-01] 指標候補キュー (P1/P2 検証済み)
 
-タグ: [実行:対話] [起票:2026-05-19]
+タグ: [種類:制作] [実行:対話] [起票:2026-05-19]
 
 一次統計の実在、都道府県粒度、既存 metric との非重複を確認した候補だけを残す。
 需要未確認の大量候補、取得失敗、重複は削除済みで、再調査は Git 履歴から行う。
@@ -1120,7 +1211,7 @@ updated: 2026-09-07
 
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 
-タグ: [起票:2026-07-12]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-12]
 
 - **owner**: Claude Code
 - **trigger**: 1本のPRで現行build jobの壁時間とcache sizeを測れるとき。
@@ -1128,14 +1219,14 @@ updated: 2026-09-07
 
 ### [AREA-DATABOOK-REMAINDER] 県データブックの小粒残件
 
-タグ: [起票:2026-07-19]
+タグ: [種類:改善] [実行:対話] [起票:2026-07-19]
 
 - **owner**: Claude Code
 - **trigger**: 既存47県版の利用実測で、欠損セクションが回遊または検索の阻害要因と確認できたとき。
 
 ### [MULTICHANNEL-CONTENT-PRODUCT-01] 商品チャネル横断化
 
-タグ: [起票:2026-07-18]
+タグ: [種類:制作] [実行:対話] [起票:2026-07-18]
 
 - **owner**: Claude Code
 - **trigger**: ココナラまたはnoteの単一商品で実売、粗利、supportMinutesを測定できた後。
@@ -1143,19 +1234,21 @@ updated: 2026-09-07
 
 ### [GIS-CROSS-CONTENT-BACKLOG] 統計×GISコンテンツ
 
-タグ: [起票:2026-07-04]
+タグ: [種類:制作] [実行:対話] [起票:2026-07-04]
 
 - **owner**: Claude Code
 - **trigger**: 既存GIS素材と検索需要が一致する単一pilotを選べたとき。
 
 ### [CLOUDFLARE-INVOICE-01] 請求書PDFと予測値の突合
 
-タグ: [起票:2026-05-16]
+タグ: [種類:改善] [実行:対話] [起票:2026-05-16]
 
 - **owner**: Claude Code
 - **trigger**: 手動精算漏れが再発するか、請求額が継続して予測から10%以上ずれるとき。
 
 ### [SSDS-DEMAND-BATCH-01] SSDS未使用項目の需要ファースト展開
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話]
 
 - **owner**: ranking-expander
 - **trigger**: GSC、記事企画、テーマ欠測のいずれかで具体的な検索需要が確認できたとき。
@@ -1191,7 +1284,7 @@ updated: 2026-09-07
 
 ### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
 
-タグ: [実行:対話] [起票:2026-07-11]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-07-11]
 
 - **owner**: uruhayato373
 - **次**: 対象キーが失効・rotation済みかを確認し、秘密検査で現行treeに残存がないことを確定する。
@@ -1200,7 +1293,7 @@ updated: 2026-09-07
 
 ### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 6 本の削除可否
 
-タグ: [実行:対話] [起票:2026-08-17]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-08-17]
 
 - **owner**: uruhayato373 (削除可否はオーナー判断)
 - **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
@@ -1252,7 +1345,7 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 
 ### [T2-RANKING-NORM-SSG-01] ranking正規化派生のURL方針
 
-タグ: [実行:対話] [起票:2026-05-25]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-05-25]
 
 - **owner**: Claude Code
 - **次**: queryを別URLへ昇格する案、別rankingKey化、canonical吸収の3案を、検索需要とsnapshot容量で比較する。
@@ -1260,7 +1353,7 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 
 ### [MIGRATION-FLOW-IG-01] migration-flow の IG 投稿が 3 か月止まっている
 
-タグ: [実行:対話] [起票:2026-08-13]
+タグ: [種類:意思決定] [実行:対話] [起票:2026-08-13]
 
 - **owner**: uruhayato373 (継続可否の判断)
 - **問題**: `migration-flow-weekly.yml` の Instagram 投稿ステップが **12 回連続失敗** (約 3 か月・1 本も投稿されていない)。

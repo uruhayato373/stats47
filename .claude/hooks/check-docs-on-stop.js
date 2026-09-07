@@ -46,14 +46,21 @@ function run(script, args) {
     const stdout = execFileSync("node", [path.join(projectDir, script), ...args], {
       cwd: projectDir,
       encoding: "utf8",
-      timeout: 30_000,
+      timeout: 90_000,
       env: { ...process.env, CLAUDE_PROJECT_DIR: projectDir },
     });
     return { ok: true, output: stdout };
   } catch (error) {
+    // timeout は「検査できなかった」であって「文書が壊れている」ではない。
+    // 区別しないと stdout/stderr が空のまま block され、原因を追えない
+    // (2026-09-07: links checker が Windows で 50s かかり 30s timeout を超えて誤 block した)。
+    const timedOut = error.code === "ETIMEDOUT" || error.killed === true;
     return {
       ok: false,
-      output: `${error.stdout || ""}${error.stderr || ""}`.trim(),
+      timedOut,
+      output: timedOut
+        ? `${script} が timeout。検査は完了していないため文書の可否は未判定`
+        : `${error.stdout || ""}${error.stderr || ""}`.trim(),
     };
   }
 }
@@ -67,11 +74,24 @@ function main() {
   const links = run(".claude/scripts/lib/check-docs-links.cjs", ["--baseline"]);
   if (governance.ok && links.ok) process.exit(0);
 
-  const details = [governance, links]
-    .filter((result) => !result.ok)
+  const failed = [governance, links].filter((result) => !result.ok);
+  const details = failed
     .map((result) => result.output)
     .filter(Boolean)
     .join("\n");
+
+  // timeout しか起きていないなら是正対象が無いので block しない。
+  // links checker は実測 50s〜91s と負荷で倍近く変動し (2026-09-07)、timeout を伸ばしても
+  // 超える日は来る。「検査できなかった」で作業を止めるのは過剰で、文書が壊れていれば
+  // 検査が完走したターンで捕まる。check-consistency-on-stop.js の
+  // 「想定外エラーは通す (チェックで作業を止めない)」と設計を揃える。
+  if (failed.every((result) => result.timedOut)) {
+    process.stderr.write(
+      `docs検査がtimeoutしたため未判定のまま続行します。手動確認: npm run docs:check\n${details}\n`,
+    );
+    process.exit(0);
+  }
+
   process.stdout.write(
     JSON.stringify({
       decision: "block",

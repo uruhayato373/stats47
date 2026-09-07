@@ -17,13 +17,16 @@
  * 出力: 違反の多い順にソートした markdown 表 (stdout) + 詳細 JSON (--json で指定 or /tmp)
  */
 import fs from "node:fs";
+import { execFile as execFileCallback } from "node:child_process";
+import { promisify } from "node:util";
 
-import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
 import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
 import { lintParenNumbers } from "../lib/paren-number-lint.mjs";
 
 const BASE_URL = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const CONCURRENCY = 8;
+const execFile = promisify(execFileCallback);
 
 function getArg(name, def) {
   const i = process.argv.indexOf(name);
@@ -33,9 +36,34 @@ const LIMIT = Number(getArg("--limit", "0")) || 0;
 const JSON_OUT = getArg("--json", "/tmp/published-blog-audit.json");
 
 async function fetchText(url) {
-  const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.text();
+  let fetchError = null;
+  const needsSystemProxy = process.platform === "win32" && Boolean(process.env.HTTPS_PROXY || process.env.HTTP_PROXY);
+  if (!needsSystemProxy) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.text();
+    } catch (error) {
+      fetchError = error;
+    }
+  }
+
+  // Windows の企業ネットワークでは Node fetch が OS のプロキシ認証・証明書を使えないことがある。
+  // curl は OS の設定を利用できるため、read-only 監査に限って利用する。
+  const command = process.platform === "win32" ? "curl.exe" : "curl";
+  try {
+    const { stdout } = await execFile(
+      command,
+      ["--fail", "--silent", "--show-error", "--max-time", "20", url],
+      { encoding: "utf8", maxBuffer: 2 * 1024 * 1024 },
+    );
+    return stdout;
+  } catch (curlError) {
+    throw new Error(
+      `${fetchError ? `fetch failed (${fetchError.message || fetchError}); ` : ""}` +
+        `curl fallback failed (${curlError.message || curlError})`,
+    );
+  }
 }
 
 // ── quality-gate と同じ決定的チェック (純テキスト部分のみ移植) ──────────────
@@ -153,7 +181,12 @@ function auditArticle(meta, body) {
     flags.push(["blocker", "truncated 表 (…省略の部分複製) — 全件 or SVG にすべき"]);
   }
   const callouts = countCallouts(body);
-  if (callouts < 2) flags.push(["blocker", `callouts ${callouts}<2`]);
+  const calloutLayoutLint = lintConsecutiveCallouts(body);
+  // 公開済み記事は Web 側で重要度の低い callout を通常本文へ自動的に戻す。
+  // raw source の移行対象は warning として可視化し、新規・再公開時は quality-gate の blocker で止める。
+  for (const b of calloutLayoutLint.blockers) {
+    flags.push(["warning", `[legacy-auto-normalized] ${b}`]);
+  }
   const links = countInternalLinks(body);
   if (links < 3) flags.push(["blocker", `internalLinks ${links}<3`]);
   const h2 = countH2(body);
@@ -240,6 +273,9 @@ function auditArticle(meta, body) {
     hasCharts: meta.hasCharts,
     prose,
     callouts,
+    adjacentCalloutClusters: calloutLayoutLint.stats.adjacentCalloutClusters,
+    adjacentCalloutPairs: calloutLayoutLint.stats.adjacentCalloutPairs,
+    maxConsecutiveCallouts: calloutLayoutLint.stats.maxConsecutiveCallouts,
     links,
     h2,
     svg,

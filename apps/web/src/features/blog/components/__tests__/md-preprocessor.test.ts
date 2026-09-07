@@ -102,4 +102,50 @@ describe("preprocessCallouts", () => {
     expect(result).toContain("NOTE");
     expect(result).toContain("後のテキスト");
   });
+
+  it("WARNING と TIP が連続すると WARNING だけをカードに残す", () => {
+    const source = `> [!WARNING]
+> 注意です。
+
+> [!TIP]
+> 読み方です。`;
+
+    const result = preprocessCallouts(source);
+
+    expect(result.match(/border-l-4/g)).toHaveLength(1);
+    expect(result).toContain(">WARNING</p>");
+    expect(result).toContain("**読み解きのポイント:** 読み方です。");
+  });
+
+  it("NOTE・WARNING・TIP の連続では最重要の WARNING だけをカードに残す", () => {
+    const source = `> [!NOTE]
+> 定義です。
+
+> [!WARNING]
+> 注意です。
+
+> [!TIP]
+> 読み方です。`;
+
+    const result = preprocessCallouts(source);
+
+    expect(result.match(/border-l-4/g)).toHaveLength(1);
+    expect(result).toContain("**補足:** 定義です。");
+    expect(result).toContain(">WARNING</p>");
+    expect(result).toContain("**読み解きのポイント:** 読み方です。");
+  });
+
+  it("通常本文を挟む callout はどちらもカードとして表示する", () => {
+    const source = `> [!WARNING]
+> 注意です。
+
+本文です。
+
+> [!TIP]
+> 読み方です。`;
+
+    const result = preprocessCallouts(source);
+
+    expect(result.match(/border-l-4/g)).toHaveLength(2);
+  });
 });

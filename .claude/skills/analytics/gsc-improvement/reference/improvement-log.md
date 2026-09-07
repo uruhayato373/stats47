@@ -765,3 +765,38 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
   - Phase 9 デプロイで smoke-test の `/areas/01000/landweather` 200 期待が 410 仕様と矛盾し失敗 → smoke-test を 410 期待に修正 + `population` ケース新設
 
 - **教訓**: middleware 仕様変更時は **post-deploy smoke test を事前更新** すること（→ knowledge 記録: 「Phase 9 deploy が smoke-test を破壊した cascade」）
+
+## [TRIAGE-2026-09-07] Due 超過施策の実測確定 (improvement-triage)
+
+- **RANKING-KEYS-SYNC-01 → 解消済み確定**: `d938d04cf` (KNOWN キー生成の一時障害是正) と
+  `cb117c110` (2026-08-18・PR 作成ガードの `gh pr view` CLOSED 誤判定是正) の両修正後、
+  2026-08-31 に実走した sync が `ea50d06f6` (「新規 ranking キーと 4 調査を KNOWN/SITEMAP へ同期」)
+  として実際に commit・PR 化・merge されたことを `git log` で確認 (PR #866/#821 系列)。
+  是正後スクリプトが正しい差分を出し PR が実際に作られる、という残件の完了条件を満たした。
+
+- **BLOG-QUEUE-TRACK-01 → 解消済み確定**: `.claude/state/blog/topic-queue.json`
+  (2026-09-06 生成) を実測すると `summary.inProgress: 0` で、報告されていた「2 件が
+  in-progress のまま公開済」という状態ずれは現状存在しない (`done: 81` / `pending: 94`)。
+  topic-queue は実行のたびに公開状態から再構築される設計のため、今回の drift は解消済みと確定する。
+
+- **BLOG-WAVE-2026-07-09-MANUAL → effect/none 確定**: `farmland-crisis-abandoned-land` の
+  wave_id が `auto-brushup-history.json` に未登録のため `measure-gsc-impact.mjs --wave
+  2026-07-09-manual` は `wave が履歴に無い` で自動判定不能。remediation コミット (`36c60f8db`、
+  2026-07-09) を挟む GSC snapshot を手動突合すると、直前 2 週 (W27: 53 clicks/751 imp/CTR 10.06%/
+  pos 6.43、W28: 61 clicks/664 imp/CTR 9.19%/pos 6.28) に対し直近 4 週 (W33: 19/421/4.51%/7.24、
+  W34: 19/498/3.82%/7.08、W35: 27/573/4.71%/7.09、W36: 33/729/4.53%/6.72) は
+  clicks で約 -46%〜-69%、CTR で約半減という一貫した下落を示す。同期間サイト全体の clicks は
+  `.claude/state/metrics/gsc/history.csv` で W27 2,244 → W36 6,053 (+170%) と大幅成長しており、
+  対象記事のみが成長トレンドに反して劣化している。他の brushup wave (05-25-auto/05-29-auto) を
+  effect/none と確定した際と同じ「サイト全体成長下での対象記事のみの減少」パターンに一致するため、
+  この行は effect/none として確定する。**副次課題**: wave_id 登録漏れ (是正コミットが
+  remediation-queue.json だけを更新し auto-brushup-history.json に書かなかった) が再発しており、
+  今後の brushup では両方の更新を確認すること。
+
+- **RANKING-CTR-01 → 判定確定 (2026-08-21 分析の追認とクローズ)**: 上記 §RANKING-CTR-01
+  (2026-08-21) の実測で「4 週スパンでは CTR は落ちていない (W29 3.02% → W33 3.26%、+0.24pp)」
+  ことが既に確定しており、当該行が前提としていた「露出は伸びたのにクリックが伸びない」は
+  4 週スパンでは成立しないことを確認済み。CTR 改修を全面展開する根拠は無いとの結論のまま
+  2026-09-07 まで進捗が動いていないため、この投資判断としては effect/none 相当でクローズする。
+  同エントリが特定した狭い問題 (最新週増分の質・areas市区町村/category/themesのクリック希薄化) は
+  独立した継続監視事項として残し、必要なら新規エントリで追跡する。

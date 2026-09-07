@@ -64,16 +64,6 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
               </div>
 
               <div className="flex flex-1 flex-col p-4">
-                <div className="mb-3 flex items-center gap-2 text-xs text-muted-foreground">
-                  <span>都道府県データ</span>
-                  {article.hasCharts && (
-                    <>
-                      <span aria-hidden="true">·</span>
-                      <span>グラフあり</span>
-                    </>
-                  )}
-                </div>
-
                 <h2 className="line-clamp-3 text-base font-semibold leading-snug text-foreground group-hover:text-primary">
                   {article.title}
                 </h2>

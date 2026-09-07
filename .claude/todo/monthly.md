@@ -1,193 +1,257 @@
 ---
 title: 今月の重点
 type: monthly-plan
-month: 2026-08
-updated: 2026-08-30
+month: 2026-09
+updated: 2026-09-07
 status: active
 focus_themes:
-  - 課金無効Gemini APIの少量日次生成を品質ゲート付きで検証する
-  - 公開中の誤値・欠測を解消する
+  - 溜まった未デプロイを本番へ届けて止まっている実測を再開する
+  - 公開しているものが正しいかを確定させる
 ---
 
-# 2026年8月の重点
+# 2026年9月の重点
 
-7月に検索流入は 4 週で +52% 伸びたが、収益は横ばいだった。伸びているのは露出であって収益密度ではない。
-8月は新しい収益施策を足さず、**止まっているコンテンツ産出を機械で回復させる**ことと、
-**その機械が読む値の誤りを消す**ことに絞る。この 2 つは独立ではなく、後者は前者の前提である。
+検索流入は 8 月に一段上がり、そのまま伸び続けている。ローリング28日のクリックは
+2026-W32 の 3,493 から W36 の **6,053（+73.3%）**、表示は 100,812 → **180,347（+78.9%）**、
+平均順位は 8.13 → **7.52** になった（`.claude/state/metrics/gsc/history.csv`）。
+
+一方で、その流入を受け取る側の変更が**実装済みのまま本番に出ていない**。AdSense は
+2026-08-16 のオーナー判断で停止したまま、その穴を埋めるアフィリエイト配線
+（`AFF-IMPRESSION-ROUTING-01` / `AFF-DEPLOY-RESOLUTION-01`）も未デプロイで、
+効果を測るはずの GA4 スナップショットは 08-28 から更新が止まっている。
+つまり**過去最大の流入に対して、収益への変換経路と計測経路の両方が閉じている**。
+
+9 月は新しい施策を足さず、この 2 つに絞る。すなわち **溜まった変更を出すこと**と、
+**出しているものが正しいかを確定させること**である。
+
+## 月
+
+- **対象月**: 2026-09（2026-09-01 〜 2026-09-30）
+- **含む ISO 週**: 2026-W36 〜 2026-W40（本計画が実質カバーするのは W37 以降）
+- **作成時点**: 2026-09-07（W37 初日）
 
 ## 予算前提（Pro 使用量）
 
-- **新しい制約**: 8月から日次生成ループ（ai-content / blog）が対話セッションと**同じ Pro/Max 利用枠**を消費する。
-  対話に使える枠は 7月より確実に少ない。
-- 1 件あたりの実消費は**まだ 1 度も測っていない**。`.claude/state/metrics/claude-usage/history.csv` は
-  2026-08-03 時点で空で、最初の実測は 8/4 の cron が最初。件数の追加引き上げは実測を見てから決める。
-- 方針: 重点 2 テーマに集中する。下記「今月やらないこと」は 9 月以降へ送る。
+- 8 月に無人の日次生成ループ（ai-content / blog）を廃止したため、対話セッションが使える枠は
+  8 月前半より広い。ただし ranking ai-content の在庫消化が完了した（下記）ので、
+  枠を新しい生成へ回す理由も無くなった。
+- 今月の実作業は**デプロイ・実測・判定**が中心で、大きな新規実装を前提にしない。
+  L タスクは重点2 の 2 件（37 metric の処置決定）に限る。
+- 方針: 重点 2 テーマに集中する。下記「今月やらないこと」は 10 月以降へ送る。
+- **並行セッションとの競合に注意**: 2026-09-07 時点で調査タスク 4 件（PSI dom_size collector /
+  ランキング LCP 回帰 / 壊れた内部リンク 6 件 / RSC キャッシュ）が別セッションで走っている。
+  同日 13:42 に `backlog.md` の編集が並行セッションのコミットで上書きされる事故が実際に起きた。
+  同じファイルを長時間開いたままにしない。
 
 ## 前月の振り返り
 
 | 前月の重点テーマ | ゴール | 結果 | 原因 / 申し送り |
 |---|---|---|---|
-| データ・計測・コストの正しさ | 誤値・欠測の処置確定 / R2 再増加の機械検知 / localhost 遷移の比較可能化 | **一部** | R2 は 25.53→15.75GB の削減が 6 日定着し GC を機械化できた。一方 `IND-DATA-CORRUPTION-01` と `PERF-LOCAL-NAV-01` は **2 週連続で commit 0 件**。どちらも「計測してから判断する」型で着手されにくい傾向が続いている |
-| 収益・検索改善の計測ループ | affiliate impression の実測 / ASP の positive-only 追跡 / 検索週次出力 | **一部** | `AFF-IMPRESSION-RENAME-01` は達成（impressions 3,400・vertical 内訳あり・`unsetVerticalRatio 0`）。`ASP-CONTINUITY-01` は Phase 0/1 まで。`SEARCH-GROWTH-CYCLE-01` は候補 3 件が承認待ちで運用開始に至らず |
+| 課金無効 Gemini API の少量日次生成を品質ゲート付きで検証する | Gemini 日次が稼働し、通過分が R2 まで届き、outbox 滞留 0 | **手段は未達・目的は達成** | Gemini 鍵は 08-30 に前払いクレジット枯渇で停止したまま。代わりに headless Claude CLI バッチと決定的 backfill で在庫を消化し、ai-content は 2,154 / 2,154（100%）に到達した（`.claude/state/ai-content/LATEST.md`・2026-09-06 生成）。**手段が変わったので、当初ゴールの 5 項目で判定しない** |
+| 公開中の誤値・欠測を解消する | `DATA-ESTAT-FETCH-01` 25 metric と `DATA-MANUAL-RESTORE-01` 12 metric に処置が決まっている | **未達** | weekly-review 2026-W34 / W35 の両方で「未着手・ready/blocked 判定 0 件」と記録。7 月から数えて 2 か月連続。原因は粒度ではなく**着手されなかった**こと |
 
-7月の最大の副作用は**コンテンツ産出の停止**だった。W31 のブログ新規公開 0 本・品質是正 0 本・
-ai-content は 08-01 以降増加 0 件。PR 34 件の大半が品質ゲートと CI に向いた。
+8 月の最大の副作用は**計画と実行が接続しなかった**ことである。W35 は Must「ブログを 2 本だけ」に対して
+**85 本**が公開され（8/28 に 6 本・8/29 に 29 本・8/30 に 50 本）、他の Must 1 件と Should 3 件は
+着手されなかった。W34 も「手動割当 ai-content 0/3、blog 0/2」で同じ形になっている。
+weekly-review W35 はこの原因を「並行セッションが `weekly.md` を参照せずに走れる構造」と特定した。
 
 ## 現状サマリー
 
-| 指標 | 現在値 (2026-W31) | 4週前 (W27) | 変化 |
+| 指標 | 現在値 | 4 週前 | 変化 |
 |---|---|---|---|
-| GSC clicks (rolling 28d) | 3,424 | 2,244 | **+52.6%** |
-| GSC impressions (rolling 28d) | 101,093 | 80,868 | +25.0% |
-| GSC 平均順位 | 8.06 | 8.96 | 0.90 改善 |
-| NSM engagedSessions (finalized 7d) | 1,700 | — | +0.5% (WoW) |
-| AdSense earnings (7d) | ¥146 | ¥128 | +14.1%（W24 は ¥163・**実質横ばい**） |
-| AdSense page views | 4,054 | 2,862 | +41.6% |
-| **AdSense page RPM** | **¥36** | **¥45** | **-20.0%** |
-| AdSense viewability | 54.3% | 60.9%（W24: 69.4%） | **-6.6pp（月頭比 -15.1pp）** |
-| 公開ブログ記事 | 431 本 | — | W31 の新規は **0 本** |
-| ranking ai-content done | 208 / 2,176 (9.6%) | — | 消化 3.0 件/日・残 1,968 |
-| R2 storage | 15.75GB | 25.53GB (07-26) | -38%（無料枠 10GB 超過は継続） |
-| 改善バックログ effect/pending | 20 件 | — | due が 8/24 に集中（8/2 の AdSense 5 件は 9/14 へ再配置） |
+| GSC clicks（ローリング28日） | 6,053（W36） | 3,493（W32） | **+73.3%** |
+| GSC impressions（ローリング28日） | 180,347 | 100,812 | +78.9% |
+| GSC 平均順位 | 7.52 | 8.13 | 0.61 改善 |
+| GA4 engagedSessions（Japan 確定7日） | 2,817 | 2,257（直前7日） | +24.8%（WoW） |
+| ranking ai-content done | **2,154 / 2,154（100%）** | 718 / 2,163（09-03） | 在庫消化完了 |
+| ブログ是正キュー | pending 270 / must-fix 32 / done 21 | pending 227 / must-fix 29 / done 25（W35） | **母数 +43・done -4** |
+| AdSense | 停止中（2026-08-16〜） | — | LATEST は W34 のまま stale |
+| R2 storage | 23.11 GB（09-05） | 22.2 GB（08-22） | 無料枠 10GB 超過が継続 |
+| 改善バックログ active | 31 行（pending 18 / in-progress 2 / effect-pending 11） | 42 行 | 09-07 の実測整理で Due 超過 0 件 |
 
-**今月最も重要な 1 行**: PV は 4 週で +41.6% 伸びたのに earnings は横ばいで、page RPM が -20%、
-viewability が -15pp 落ちている。つまり**露出を増やしても収益に変換できていない**。
-ただし原因の切り分けは 8月には行わない（理由は「今月やらないこと」）。
+**今月最も重要な 1 行**: 流入は 4 週で +73% 伸びたが、AdSense は停止中、アフィリエイト配線は
+未デプロイ、GA4 アフィリエイトスナップショットは 10 日 stale。**収益がいくらかを言える状態にない。**
+
+なお AdSense の -93% 系の数値（W34）は 8/16 の意図的な停止の結果であり、後退ではない。
+停止期間中の AdSense KPI を WoW 比較に使わない。
 
 ## GSC運用サイクル
 
-GSCは重点テーマ数に含めない健康管理の床とし、検索施策を採用しない月でも計測→review→判断→effectを止めない。
+GSC は重点テーマ数に含めない健康管理の床とし、検索施策を重点に選ばない月でも
+計測 → review → 判断 → effect を止めない。
 
-| 項目 | 最新（2026-08-24監査） | 月内評価 | 次アクション |
+`node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input`（2026-09-07 実行）
+
+| 項目 | 最新 | 月内評価 | 次アクション |
 |---|---|---|---|
-| 計測→週次review | snapshot W34 / review W34 / plan W35 | **PASS** | 次回も finalized snapshot → review → plan の順で接続 |
-| search-growth判断 | W35候補880件、approved 1件、WIP 1/5 | **PASS** | soft-404候補を9/7・9/21・10/19に再計測。週2件上限を維持 |
-| effect判定 | W34 7件すべてpending | **WARN**（既知target欠落7件、新規0件） | 推測で補わず、終了または再計測を週次で判断 |
-| index coverage | URL Inspection日次は稼働 / 週次coverage表示は旧世代 | **WARN** | URL Inspectionとremediation queueを週次レビューの正典にする |
+| 計測 → 週次 review | snapshot W36（coverage complete）/ review は W35 まで | **WARN** — W36 の週次レビューが未作成 | W37 の `/weekly-review` で W36 分を作る |
+| search-growth 判断 | freshness PASS（W37・age 0d）/ sources PASS | **WARN** — 採択は approved 1 / dismissed 1 で週 1〜2 件の運用が未開始 | `SEARCH-GROWTH-CYCLE-01`。上限は週 2 件のまま変えない |
+| effect 判定 | W36 verdict 7 件記録・backlog 突合 PASS | **WARN** — `effect-target-ratchet` が既知の過去欠落 7 件（新規 0） | 想定効果値を推測で補わない。終了か再計測かをオーナーが決める |
+| index coverage | URL Inspection latest 2026-09-07（age 0d）| **PASS** | 日次は稼働。`COVERAGE-LOOP-01` はデプロイ後に差分を追う |
 
-機械監査は`.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}`、閾値は
-`.claude/config/gsc-operations-cycle.json`をSSOTとする。月曜20:30のworkflowがFAIL時だけ固定Issueを更新する。
+機械監査は `.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}`、閾値は
+`.claude/config/gsc-operations-cycle.json` を SSOT とする。
 
 ## 今月の重点テーマ
 
-### 重点1: Claude 無人生成を廃止し、Gemini 無料枠の少量日次へ移行する
+### 重点1: 溜まった未デプロイを本番へ届けて、止まっている実測を再開する
 
-- **なぜ変えたか (2026-08-21)**: 無人の日次ループは対話セッションと同じ Pro/Max 利用枠を食う。
-  月初は「定着させる」方針だったが、歩留まりが崩れて**枠だけ削って成果が出ない**構図になった
-  (`.claude/state/metrics/claude-usage/history.csv`):
+- **なぜ今月これか**: 収益直結であり、かつ due が今月に集中している。実装が終わっているのに
+  本番へ出ていないものが少なくとも 4 束あり、そのすべてが「出るまで効果を測れない」形で
+  改善バックログの `effect/pending` を塞いでいる。
 
-  | 日 | limit | items | cost |
-  |---|---:|---:|---:|
-  | 08-15〜08-18 | 5 | 5 / 5 / 5 / 5 | $79〜$90 |
-  | **08-19** | 5 | **0** | $87.31 |
-  | **08-20** | 5 | **1** | $21.33 |
+  | 対象 | 状態 | Due |
+  |---|---|---|
+  | `AFF-DEPLOY-RESOLUTION-01`（広告解決順 #912/#913） | 未デプロイ | 2026-09-10 |
+  | `GSC-COVERAGE-DEPLOY-01`（カバレッジ是正と入力鮮度ガード） | 未デプロイ | 2026-09-14 |
+  | `ADSENSE-PAUSE-01`（AdSense 全停止コード） | 実装済・未デプロイ | 2026-09-14 |
+  | `AFF-IMPRESSION-ROUTING-01`（空き位置への文脈バナー配線） | 実装済・未デプロイ | 2026-09-21 |
+  | `BLOG-BACKGROUND-BATCH-01`（公開待ち 91 記事） | 背景画像待ち | — |
 
-  2 日で $108 を使って成果 1 件。`ai-content-generate-daily.yml` と `blog-generate-daily.yml` を
-  削除し、**量と時期を人が決める**運用へ移した。公開経路 (`publish-ai-content.yml` /
-  `blog-auto-publish.yml`) と機械ゲートはそのまま残る。
-
-- **方針改定 (2026-08-30)**: Claude Code/OAuth の定期生成は復活させない。
-  課金無効の専用 Google AI Studio project の `GEMINI_API_KEY` で、`gemini-2.5-flash-lite`
-  を既定 3 件/日・並列 1 で回す。author と critic は別 API リクエスト、公開は
-  決定的監査と critic PASS の両方を必須にする。無料 quota 実測前は件数を上げない。
-
-- **今月の本数目標**:
-  - **blog: 月 17-19 本**。既存の `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`
-    (B5 / D2 4 / A 3-4 / F3 / G 1-2 / C_E 1-2) をそのまま SSOT として使う。**新しい数値を作らない。**
-    月初からの実績を差し引いた残りを、残り週で割って weekly の Must に置く。
-  - **ai-content**: Gemini 日次 3 件/日は 08-30 から鍵の課金枯渇で停止中 (是正はオーナー)。在庫 1,445 件は
-    **ローカル headless Claude CLI バッチ** (`run-claude-batch.sh`・35 件/push・人が量と時期を決める) で消化する。
-    実測 (09-05 batch3・35 件・concurrency 2): 通過率 71%、公開 1 件 ≈47K トークン・$0.81 API 換算、35 件 ≈50 分、
-    レート制限なし。「Gemini 3 件/日、在庫は目標にしない」の前提だった 1 件 $17 (Agent tool 経路) は崩れた。
-    **今月は 1 日 1〜2 バッチ (35〜70 件) から始め、`claude-error_*` が出た日はそこで止める**。09-05 に 54 件公開
-    (done 718 → 772・残 1,394)。正典 `ranking-content-standards.md` §2026-09-05。
+  加えて、効果を測る側も止まっている。`.claude/state/ads/ga4-affiliate-*.json` の最新が
+  2026-08-28 で 10 日更新されておらず、`AFF-BLOG-TEXTLINK-01` / `AFF-A8-REGISTER-01` /
+  `AFF-RESOLUTION-EFFECT-01` の 3 件が「実測が取れない」を理由に判定できずにいる。
 
 - **今月のゴール（月末に検証可能）**:
-  1. Claude Code/OAuth の ai-content 日次 workflow は廃止のまま
-  2. `ai-content-gemini-daily.yml` が日次実行し、対象ありで生成 0 件なら必ず失敗する
-  3. 通過分が publish workflow の明示 dispatch で R2 まで届き、後続 run の成功を親 workflow が待つ
-  4. outbox 滞留が 0 件
-  5. 通過率・リクエスト数・トークンが metrics に残る
-
-- **未達のときの扱い**: **翌週へ積み増さない。** Must が形骸化するため、足りなければ
-  月次の目標側を下げてその根拠を書く。
+  1. 上記 4 束が 1 回のデプロイで本番に反映され、代表ページで実測できている
+     （検証: `curl -sA Googlebot https://stats47.jp/ranking/natto-consumption-expenditure | grep -c ふるさと`）
+  2. 週次 cron `affiliate-ga4-weekly.yml` が再稼働し、`ga4-affiliate-*.json` の最新が 7 日以内である
+  3. デプロイ日を before/after の境界として記録し、`ADSENSE-PAUSE-01`（28 日）と
+     `AFF-IMPRESSION-ROUTING-01`（14 日）の実測窓が開始している
+  4. 公開待ち 91 記事が公開され、`docs/21_ブログ記事原稿` の `published: true` 残数が 0 になっている
 
 - **構成タスク**:
-  - 週次レビューで Gemini の通過率・quota 失敗・outbox 滞留を確認する [S]（毎週）
-  - `AICONTENT-DBLESS-REBUILD`: needs-regen の内訳で優先度を切り、全件量産を前提にしない
-    件数設計へ改める [M]
-  - ブログ品質是正キュー（`/brushup-blog --target queue`）を週次の枠に載せるか判断する [M]
+  - デプロイ前ゲート: 本番の確認済み回帰 2 件の切り分け結果を待って、出す/待つを決める [M]（→ W37）
+  - `affiliate-ga4-weekly.yml` の実行状況を確認し、10 日 stale の原因を特定して再取得する [S]（→ W37）
+  - 91 記事の背景画像生成（`/generate-blog-images` Mode A・ローカル Mac の Codex 必須）[L]（→ W37-W38）
+  - `BLOG-PUBLISH-THUMBNAIL-GUARD-01`: 背景 1 件の欠落で run 全体が止まるのを per-slug skip にする [S]（→ W37）
+  - デプロイ実行と代表ページ実測、before/after 境界の記録 [M]（→ W38）
+  - 14 日 / 28 日の実測窓の中間確認 [S]（→ W39・W40）
 
-- **依存・ブロッカー**: 課金無効の専用 Gemini API key。無料 quota の実測が出るまで日次件数を増やさない。
+- **依存・ブロッカー**:
+  - **本番で稼働中の回帰が 2 件あり、これを抱えたまま出すか判断が要る。** `RSC-CACHE-BYPASS-01`
+    （RSC 応答が HTML と同じ共有キャッシュ設定で返る・backlog 🔴）と、ランキング詳細の LCP 回帰
+    （12,650ms・ベースライン 9,347ms より悪化。`PERF-RANKING-LCP-02` は 09-07 に改善バックログから
+    削除済みで、**現在どのバックログにもカードが無い**）。どちらも別セッションで調査中なので
+    今月の構成タスクには積まない。調査が戻った時点で LCP 側はカード化が要る。
+  - デプロイと R2 write はオーナーの明示承認が要る（`branch-workflow.md`）。
+  - 背景画像生成は Codex がクラウドセッションで `ENOENT` になるためローカル Mac 実行が必須。
 
-- **真実源リンク**: `backlog.md#AICONTENT-DBLESS-REBUILD` / `.claude/state/blog/seo-strategy.json` /
-  `.claude/state/metrics/ai-content/`
+- **真実源リンク**: `improvements.md`（`ADSENSE-PAUSE-01` / `AFF-IMPRESSION-ROUTING-01` /
+  `AFF-RESOLUTION-EFFECT-01` / `AFF-BLOG-TEXTLINK-01` / `AFF-A8-REGISTER-01` / `COVERAGE-LOOP-01`）/
+  `backlog.md`（`AFF-DEPLOY-RESOLUTION-01` / `GSC-COVERAGE-DEPLOY-01` / `BLOG-BACKGROUND-BATCH-01` /
+  `BLOG-PUBLISH-THUMBNAIL-GUARD-01` / `RSC-CACHE-BYPASS-01`）
 
-### 重点2: 公開中の誤値・欠測を解消する
+### 重点2: 公開しているものが正しいかを確定させる
 
-- **なぜ今月これか**: `DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` の
-  2件が未完了のまま due 8/24 を迎えた。さらに重点1 と結合している — コンテンツ生成は R2 の値を読むため、
-  値が誤っていれば生成物は誤った値を忠実に記述し、**数値照合ゲートは「一致」として通してしまう**
-  （`ranking-content-standards.md` が明記する既知の型）。産出を増やす前に値を直す必要がある。
+- **なぜ今月これか**: 表示が 180,347 まで伸びた今、公開中の誤りは 8 月の 2 倍の読者に届いている。
+  対象は 2 種類あり、どちらも「公開済みの内容の正しさ」という同じ問いである。
+
+  1. **値**: `DATA-ESTAT-FETCH-01`（25 metric・取得失敗）と `DATA-MANUAL-RESTORE-01`
+     （12 metric・手動抽出の values 欠損）。合計 37 metric。**2 か月連続で着手 0**。
+  2. **文**: 2026-09-07 08:25 の commit `aec46436a` で `generate-deterministic-backfill.ts` が
+     追加され、ai-content の done が 861 → 2,154 に一度に増えた。この差分（約 1,293 件）は
+     LLM ではなく**決定的テンプレート**（`deterministic-ranking-content.ts` が順位帯・数値・
+     地方名から文を組む）で生成されている。決定的監査（auditRow blocker 0）は通っているが、
+     `.claude/state/ai-content/LATEST.md` 自身が「大規模な構造補完は `ai:backfill` + 全件監査 +
+     **境界サンプル意味レビュー**を使う」と書いており、**その意味レビューが実施されたかを
+     私は確認していない**。ranking-content-standards.md が求める構造解釈 300-500 字を
+     テンプレートが満たせるかも未確認である。
 
 - **今月のゴール（月末に検証可能）**:
-  1. `DATA-ESTAT-FETCH-01` の 25 metric すべてに「config 修正 / 代替統計 / 一時非公開」の処置が決まっている
-  2. `DATA-MANUAL-RESTORE-01` の 12 metric に provenance 付きの処置結果が付いている
+  1. 37 metric すべてに「config 修正 / 代替統計へ置換 / 一時非公開」の**処置区分が付いている**
+     （修正の実行と R2 反映は 10 月へ送る。今月は判定まで）
+  2. 決定的 backfill の境界サンプル意味レビューが実施済みか確認でき、未実施なら
+     10 件以上のサンプルで `ranking-content-critic` を通した結果が残っている
+  3. 2 の結果が「テンプレートでは品質基準を満たさない」であれば、その事実と対象件数が
+     バックログにカード化されている（推測で「問題なし」と結論しない）
 
 - **構成タスク**:
-  - `DATA-ESTAT-FETCH-01`: 25 metric を statsDataId / cdCat / 失敗種別で分類し処置を決める [L]（→ W35）
-  - `DATA-MANUAL-RESTORE-01`: 12 metric の一次ファイル再取得と照合 [L]（→ W35）
+  - `DATA-ESTAT-FETCH-01`: 25 metric を statsDataId / cdCat / 失敗種別で分類し処置を決める [L]（→ W37）
+  - `DATA-MANUAL-RESTORE-01`: 12 metric の provenance 9 点セットを確認し ready/blocked を判定する [L]（→ W38）
+  - 決定的 backfill の適用件数を確定し、境界サンプル 10 件を critic に通す [M]（→ W39）
 
-- **依存・ブロッカー**: R2 write と本番反映はユーザー承認が要る。誤値の推測補正は禁止（計算補正だけで直さない）。
+- **停止条件**: 2 週連続で 37 metric の処置決定が 0 件のままなら、Must から外して owner を変える。
+  8 月の重点2 が同じ形で 2 か月流れているので、3 度目は同じ置き方をしない（下記「批判的レビュー」2）。
 
-- **真実源リンク**: `improvements.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01`）
+- **依存・ブロッカー**: 誤値の推測補正は禁止（計算補正だけで直さない）。R2 write と公開は
+  別途オーナー承認。
+
+- **真実源リンク**: `improvements.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01`）/
+  `.claude/state/ai-content/LATEST.md` / `ranking-content-standards.md`
 
 ## 今月やらないこと（予算のため意図的に見送る）
 
-- **AdSense の枠追加・配置変更・lazy-load 閾値の調整** — RPM -20% / viewability -15pp は観測できているが、
-  7/3 に 4 施策を同時デプロイしたため 6 件の effect 判定がすべて交絡しており、**今 1 つ動かすと次も判定不能になる**。
-  `ADSENSE-CYCLE-02`（due 9/14）の「公式 CPC・format・placement・bid type を 2 週取得」だけを回し、
-  変更は 9 月以降。8 月に許すのは**計測だけ**。
-- **`PERF-LOCAL-NAV-01`（localhost 遷移の高速化）** — 2 週連続未着手。ただし本番 PSI の詳細ページ LCP 遅延
-  （/ranking/agricultural-output 32・LCP 6,956ms）とはスコープが別で、収益に効くのは本番側。
-  localhost 側は 9 月へ送り、本番 LCP は重点1 の産出が安定してから起票する。
-- **SNS の新規展開と滞留解消** — X 92 件 / YouTube 30 件が scheduled で滞留し、`posts.json` の
-  メトリクスは 3 か月古い。ただし Organic Social は GA4 で 8 users（-60%）で、投入工数に対する
-  リターンが最も小さい。**投稿台帳の SSOT drift 是正（IG 21 件が `posts.json` に無い）だけ**を小タスクで行う。
-- **商品チャネル（ココナラ / Kindle）の新規展開** — 収益優先順位 4。無料需要の確認が先。
-- **search-growth 候補の大量承認** — 上限 2 件/週。3 候補のうち `server-risk::/opengraph-image` は
-  証拠が stale なので承認前に再実測が要る。
-- **UI の見た目を伴う新規リデザイン**、**未検証 e-Stat 候補の一括投入**、**明示承認のない本番デプロイ・R2 write**。
+- **ブログの新規大量公開** — 公開待ち 91 記事を出したら、今月はそれ以上作らない。
+  8 月は上限運用が守られず W35 だけで 85 本が公開され（`BLOG-SEO-PACE-01`）、是正キューの
+  母数が 227 → 270 に増えた。**分母を止めないと是正は永久に終わらない。**
+- **ブログ品質是正キューの大量消化** — must-fix 32 件あるが、今月やるのは
+  `/brushup-blog --target queue --next 1` の**1 本だけ**。W35 の Should が 3 週連続で未達なので、
+  まず 1 本がゲートを通ることを実証する。数を積むのはその後。
+- **AdSense の再開判断・枠追加・配置変更** — 停止から 28 日の before/after が揃うまで動かさない。
+  ここで触ると重点1 の実測窓が交絡して 10 月も判定不能になる。
+- **SNS の新規展開と X 計測の復旧工事** — 事業計画の X ソースは 2026-06-07 で 3 か月古いが、
+  「未計測」と明示するだけに留める。W35 の投稿実績は 0 件で、投入工数に対するリターンが最も小さい。
+- **商品チャネルの新規展開** — `PRODUCT-SALES-READINESS-01` / `COCONALA-PROFILE-OWNER-01` は
+  オーナー本人手続きと Office 実機確認が前提で、収益優先順位も下位。
+- **search-growth 候補の大量承認** — pending は 900 件超あるが上限は週 1〜2 件のまま。
+  `SEARCH-GROWTH-CYCLE-01` は「採択サイクルを開始する」ことがゴールで、消化速度ではない。
+- **R2 容量削減の実作業** — `R2-STORAGE-01` は doboku-note-archive 8.98GB の保持方針が
+  オーナー判断待ち。判断が出るまで削除に着手しない。
+- **並行実行中の 4 調査を重複して積まない** — PSI dom_size collector / LCP 回帰 /
+  壊れた内部リンク 6 件 / RSC キャッシュ。すでに人手が動いているので、月次では
+  重点1 の前提条件として扱うに留める。
+- **`AFF-BRAND-FIT-01` の最終判断** — health 軸のブランド不適合広告は 09-03 に priority 1 へ
+  暫定降格済みで、実害は止まっている。停止・blocklist 化の判断はオーナー待ちのまま置く。
+- **未検証 e-Stat 候補の一括投入**、**UI の見た目を伴う新規リデザイン**、
+  **明示承認のない本番デプロイ・R2 write**。
 
 ## 週への配分（ガイド・週次計画が詳細化）
 
 | 週 | 期間 | 主に進める重点 | マイルストーン |
 |---|---|---|---|
-| W35 | 08-24〜08-30 | 重点2 + 重点1 | 手動12 metricの再取得 / blog 2本 |
-| W36 | 08-31 | 集約 | 月末判定と 9 月計画の入力づくり |
+| W37 | 09-07〜09-13 | 重点1 + 重点2 | W36 の週次レビュー作成 / GA4 アフィリエイト cron の stale 解消 / 91 記事の背景生成着手 / 25 metric の分類 |
+| W38 | 09-14〜09-20 | 重点1 | デプロイ実行と代表ページ実測、before/after 境界の記録 / 12 metric の ready-blocked 判定 |
+| W39 | 09-21〜09-27 | 重点1 + 重点2 | 14 日窓の中間確認 / 決定的 backfill の境界サンプル 10 件を critic に通す |
+| W40 | 09-28〜10-04 | 集約 | 28 日窓の判定準備 / 10 月計画の入力づくり |
 
 ## 批判的レビュー
 
-1. **重点は 2 つに収まっているか** — はい。3 つ目の候補（AdSense 収益密度）は「今月やらないこと」へ明示的に送った。
-   交絡した状態で触ると 9 月も判定不能になるため、8 月は計測のみに限る判断。
-2. **先月と同じテーマを置いて、また未達では** — 重点2 は 7 月重点1 の残りで、そのとおり再掲になる。
-   ただし 7 月に倒せなかった原因は「粒度が大きすぎた」ではなく**着手されなかった**ことなので、
-   今月は W32 の Must に**照合作業だけ**を置き（修正・反映は W33 に分ける）、
-   2 週連続で commit 0 なら Must から外して owner を変えるという停止条件を付ける。
-3. **予算内で終わるか** — L タスクが 2 つ（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01`）あり、
-   これだけで 1 テーマ分の重さがある。加えて日次ループが利用枠を未知量だけ食う。
-   **重点1 の実作業の大半は「観測と判断」で実装が軽い**ため実装枠は重点2 に寄せられる想定だが、
-   W33 のトークン実測で枠が想定より厳しいと分かった場合は、`DATA-MANUAL-RESTORE-01`（12 件）を
-   9 月へ送って重点2 を 25 metric の分類までに縮める。
-4. **産出量を増やすこと自体が目的化していないか** — なりやすいので、重点1 のゴールに「本数」だけでなく
-   「型配分との整合」と「1 件あたりトークンの実測」を入れた。月 84 本を無検証で出すのは、
-   7 月に起きた「ゲート整備がコンテンツを押し出す」の逆側の失敗になる。
+1. **重点は 2 つに収まっているか** — はい。3 つ目の候補（ブログ品質是正キューの消化）は
+   「今月やらないこと」へ 1 本の実証だけを残して送った。母数が増え続ける構造を先に止めないと、
+   何本消化しても pending は減らないため。
+
+2. **先月と同じテーマを置いて、また未達では** — 重点2 の 37 metric は 3 度目の掲載である。
+   これは Phase 4 が警告する形そのものなので、2 点変えた。①**ゴールを「処置区分の決定」まで
+   縮めた**（修正と R2 反映は 10 月へ分割）。②**停止条件を付けた** — 2 週連続で 0 件なら Must から
+   外して owner を変える。倒せなかった原因は粒度ではなく着手されなかったことなので、
+   同じ粒度で 3 度置くのは避ける。
+
+3. **予算内で終わるか** — L タスクは 3 つ（37 metric の分類 2 件 + 91 記事の背景生成）。
+   背景生成はローカル Mac 依存で私が代行できないため、実質オーナーの手が律速になる。
+   重点1 の残りはデプロイと実測で実装が軽いので、私の枠は重点2 に寄せられる。
+   W38 時点で背景生成が 91 件中 30 件を切っている場合は、91 記事を分割公開に切り替える。
+
+4. **デプロイを重点に置いたが、出せない前提が残っていないか** — 残っている。本番には確認済みの
+   回帰が 2 件あり、うち LCP 回帰は現在どのバックログにもカードが無い。**「重点1 のゴールに
+   デプロイ完了を置いたのに、その可否が別セッションの調査結果に依存している」**のは弱い。
+   W37 の早い段階で調査結果を取り込み、出せないと分かった時点で重点1 のゴールを
+   「デプロイ可否の判断と前提の解消」へ書き換える。
+
+5. **Due 9/21 に 22 件が集中している** — これは 09-07 の改善バックログ整理で一括更新した
+   副作用であり、その日に 22 件を判定できるという意味ではない。9/21 に一斉に超過する形に
+   なるので、W39 の週次計画で実態に合わせて再配置する。
+
+6. **ai-content 100% を成果として数えてよいか** — 「決定的監査を通った」までは事実である。
+   ただし約 1,293 件がテンプレート生成であることを今日確認したので、**在庫消化の完了と
+   品質の担保を同じ 1 行で報告しない**。重点2 のゴール 2 でここを確定させる。
 
 ## 関連ドキュメント
 
-- 収益化戦略: [../00_プロジェクト管理/02_収益化戦略.md](../00_プロジェクト管理/02_収益化戦略.md)
+- 収益化戦略: [../../docs/00_プロジェクト管理/02_収益化戦略.md](../../docs/00_プロジェクト管理/02_収益化戦略.md)
 - 今週: [週間計画](weekly.md)
 - 改善: [改善バックログ](improvements.md)
-- 機能: [バックログ](backlog.md)
-- 指標: [指標カード (バックログ内)](backlog.md)
-- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W31.md`
+- 機能・自動化・指標: [バックログ](backlog.md)
+- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W35.md`
+- ai-content の現況: `.claude/state/ai-content/LATEST.md`
+- GSC 運用サイクル: `.claude/state/metrics/gsc/operations-cycle-LATEST.md`

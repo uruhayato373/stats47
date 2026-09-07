@@ -59,7 +59,8 @@ describe("right rail banner contract", () => {
 
     expect(railStart).toBeGreaterThan(-1);
     expect(railEnd).toBeGreaterThan(railStart);
-    expect(railSource).toContain("<SidebarPromoBanner");
+    expect(railSource).toContain("sidebarBanners.map");
+    expect(railSource).toContain("<BannerAd");
     expect(railSource).not.toContain("BlogSidebarTextAds");
     expect(railSource).not.toContain("FurusatoNozeiCard");
   });

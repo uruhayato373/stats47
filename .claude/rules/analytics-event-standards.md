@@ -117,6 +117,12 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`を許可�
 > どちらも登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
 > 商品詳細→Amazon/ココナラは `cta_click` の登録済み `link_position`
 > (`product_kindle` / `product_coconala`) と当該ページ path の組み合わせで商品別に集計する。
+
+> **nav_surface の値追加 (2026-09-07・ブログ回遊導線)**: `/blog` の右レールを
+> `blog_sidebar`、モバイルの記事一覧前を `blog_discovery_mobile` として追加した。
+> `nav_label` は `popular:<slug>` / `category:<key>` / `theme:<key>` / `area:<name>` で、
+> 人気記事・カテゴリ・テーマ・都道府県のどの導線が回遊へ寄与したかを比較する。
+> 登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
 > note のリンクカードは query 付き UTM を使わず、記事別 clean path
 > `/products/<slug>/from/note/<noteId>` を経由する。サイト側で
 > `utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=<noteId>`
