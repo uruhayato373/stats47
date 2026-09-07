@@ -3,6 +3,7 @@
   "subtitle": "2006年",
   "label": "一般事業投資額",
   "unit": "千円",
+  "showBars": false,
   "year": "2006",
   "rankingKey": "general-project-investment-agriculture-forestry-fisheries",
   "source": "社会・人口統計体系",
