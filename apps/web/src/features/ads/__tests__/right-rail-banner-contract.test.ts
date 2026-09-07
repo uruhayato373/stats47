@@ -1,5 +1,7 @@
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { resolve } from "node:path";
+import { runInNewContext } from "node:vm";
 
 import { describe, expect, it } from "vitest";
 
@@ -8,7 +10,37 @@ const PROJECT_ROOT = resolve(import.meta.dirname, "../../../../../..");
 const source = (relativePath: string) =>
   readFileSync(resolve(PROJECT_ROOT, relativePath), "utf8");
 
+function runPlacementGuard(blogPage: string) {
+  const require = createRequire(import.meta.url);
+  const messages: string[] = [];
+  const exit = {};
+  let status = 0;
+  try {
+    runInNewContext(source(".claude/scripts/lib/check-ad-placement.cjs"), {
+      require: (id: string) => id === "fs" ? {
+        ...require("node:fs"),
+        readFileSync: (path: string, encoding: BufferEncoding) =>
+          path === resolve(PROJECT_ROOT, "apps/web/src/app/blog/[slug]/page.tsx")
+            ? blogPage : readFileSync(path, encoding),
+      } : require(id),
+      process: { env: { CLAUDE_PROJECT_DIR: PROJECT_ROOT }, exit: (code: number) => { status = code; throw exit; } },
+      console: { log: (message: string) => messages.push(message), error: (message: string) => messages.push(message) },
+    });
+  } catch (error) {
+    if (error !== exit) throw error;
+  }
+  return { status, messages: messages.join("\n") };
+}
+
 describe("right rail banner contract", () => {
+  it("placement guard accepts contextual image banners and detects their removal", () => {
+    const blogPage = source("apps/web/src/app/blog/[slug]/page.tsx");
+    expect(runPlacementGuard(blogPage).status).toBe(0);
+    const missing = runPlacementGuard(blogPage.replace(/<BannerAd\b/g, "<UnregisteredImage"));
+    expect(missing.status).toBe(1);
+    expect(missing.messages).toContain("blog 右レールに画像バナーがない");
+  });
+
   it("shared right rails render registered image banners instead of text promo cards", () => {
     const rightRail = source(
       "apps/web/src/components/rail/RightRailWidgets.tsx",

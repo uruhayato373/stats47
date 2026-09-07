@@ -1,13 +1,27 @@
 ---
 name: project_blog_auto_publish_reconcile_limits
-description: blog-auto-publish.yml の MAX_PUBLISH=10 上限と reconcile が既 live 記事を再 push しない仕様。複数記事公開・改稿反映時の手順
+description: blog-auto-publish の背景未生成skip境界とoutbox staging順序。旧MAX_PUBLISHやreconcile制約は歴史情報
 metadata: 
   node_type: memory
   type: project
   originSessionId: 6d9cb673-7acd-45e0-ae4f-01829bc3c580
 ---
 
-`blog-auto-publish.yml`（develop への docs/21 article.md push で発火、完全DBレス公開ブリッジ）の非自明な2制約。2026-06-15 に docs/21 残り14記事一括公開で実証。
+## 現行契約（2026-09-07）
+
+- **問題**: 背景未生成1件で後続の公開可能記事も止まる。
+- **原因**: factual/qualityはper-slug skipだが、thumbnail生成は無条件に`set -e`でrun全体を終了する。
+- **対策**: `generate-blog-thumbnails.ts`の背景未生成専用exit 20のみskipし、通信・SHA不一致・生成失敗は停止する。
+  画像生成は`BLOG_DIR=docs/21_ブログ記事原稿`を入力に**本文staging前**に行う。先に本文を置くと末尾の
+  `diff-push-r2 --prefix app/blog`がskipした本文まで公開するため、この順序が安全境界。
+- **証拠**: `.claude/scripts/lib/__tests__/workflow-commit-back.test.cjs`は実workflow shellに
+  背景不足→公開可能のfixtureを渡し、後続公開・skip理由・保留本文のstaging非存在・未知エラー時停止を検証する。
+- 現行reconcileは未公開と改稿差分の両方を拾う。件数上限は2026-08-31に撤廃済み。
+  以下のMAX_PUBLISH=10 / 既live除外は**2026-06当時の経緯であり、現行仕様ではない**。
+
+## 2026-06 当時の制約
+
+`blog-auto-publish.yml`（develop への docs/21 article.md push で発火、完全DBレス公開ブリッジ）の旧2制約。
 
 - **MAX_PUBLISH=10**: 1 回の run で公開するのは最大10件（爆発半径限定）。14件を1コミットで push すると detect が14件検出→先頭10件のみ公開、残り4件は繰り越される。残りは別 run で公開する。
 - **reconcile（空 slugs dispatch / 変更検出0）は「live all.json に未掲載の published:true」だけを backfill する**。つまり **既に live にある記事の改稿版は reconcile では再 push されない**（`!live.has(slug)` 条件のため）。docs/21 ドラフトは公開後も残り live とドリフトしうる（「published 表記が false/なし だが all.json には居る」状態が多発）。

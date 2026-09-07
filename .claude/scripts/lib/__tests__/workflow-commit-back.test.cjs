@@ -5,6 +5,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
 const yaml = require('js-yaml');
+const { spawnSync } = require('node:child_process');
+const { tmpdir } = require('node:os');
 
 const {
   findPushWithoutPull,
@@ -18,6 +20,60 @@ const {
 
 const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
 const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
+
+// 実 workflow の shell を fixture 上で実行する。R2 書込・生成・本文ゲートだけを stub 化し、
+// 既知の背景不足は次の slug へ進み、未知の失敗は公開を止めることを検証する。
+for (const thumbnailExit of [20, 1]) {
+  test(`blog publish: thumbnail exit ${thumbnailExit} の公開境界`, () => {
+    const dir = fs.mkdtempSync(path.join(tmpdir(), 'stats47-blog-publish-test-'));
+    try {
+      const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, 'blog-auto-publish.yml'), 'utf8'));
+      const step = doc.jobs['auto-publish'].steps.find((s) => s.name.includes('Gate + Stage'));
+      for (const slug of ['missing', 'ready']) {
+        const draft = path.join(dir, 'docs/21_ブログ記事原稿', slug);
+        fs.mkdirSync(draft, { recursive: true });
+        fs.writeFileSync(path.join(draft, 'article.md'), '---\npublished: true\npublishedAt: 2026-09-07\n---\n本文\n');
+      }
+      fs.writeFileSync(path.join(dir, 'env'), '');
+      fs.writeFileSync(path.join(dir, 'summary'), '');
+      const stubs = `
+node() { return 0; }
+npx() {
+  case "$2" in
+    *generate-blog-thumbnails.ts)
+      if [ "$4" = missing ]; then return ${thumbnailExit}; fi
+      test -f "$BLOG_DIR/ready/article.md" || return 99
+      mkdir -p .local
+      printf '{}' > .local/image-generation-publish-plan-blog.json
+      ;;
+    *push-generated-image-set.ts|*diff-push-r2.ts)
+      printf '%s\\n' "$*" >> "$PUBLISH_LOG"
+      ;;
+    *) return 98 ;;
+  esac
+}
+`;
+      const result = spawnSync('bash', ['-e', '-c', stubs + step.run.replaceAll('${{ steps.detect.outputs.slugs }}', 'missing ready')], {
+        cwd: dir,
+        encoding: 'utf8',
+        env: { ...process.env, TARGET_SLUGS: 'missing ready', GITHUB_ENV: path.join(dir, 'env'), GITHUB_STEP_SUMMARY: path.join(dir, 'summary'), PUBLISH_LOG: path.join(dir, 'published') },
+      });
+      assert.equal(result.status, thumbnailExit === 20 ? 0 : 1, result.stdout + result.stderr);
+      // 末尾の app/blog 一括 sync にも未完成記事を混入させない。
+      assert.equal(fs.existsSync(path.join(dir, '.local/r2/app/blog/missing')), false);
+      if (thumbnailExit === 20) {
+        assert.match(fs.readFileSync(path.join(dir, 'published'), 'utf8'), /--prefix app\/blog\/ready/);
+        assert.match(fs.readFileSync(path.join(dir, 'env'), 'utf8'), /PUBLISHED= ready/);
+        assert.match(fs.readFileSync(path.join(dir, 'env'), 'utf8'), /SKIPPED= missing/);
+        assert.match(fs.readFileSync(path.join(dir, 'summary'), 'utf8'), /missing.*背景未生成/);
+      } else {
+        assert.equal(fs.existsSync(path.join(dir, 'published')), false);
+      }
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+}
 
 function loadWorkflows() {
   return fs

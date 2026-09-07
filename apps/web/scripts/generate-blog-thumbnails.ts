@@ -71,6 +71,10 @@ const CONCURRENCY = 6;
 loadEnv({ path: join(PROJECT_ROOT, '.env.local') });
 const R2_STORE = createS3ImageObjectStoreFromEnv();
 
+// Auto-publish で既知の入力不足だけを skip できるよう、通信/SHA/生成失敗と分離する。
+// CLI exit 20 は「記事固有背景未生成」専用。その他のエラーは従来どおり exit 1。
+class MissingArticleBackgroundError extends Error {}
+
 interface CliOptions {
   slugs: string[] | null;
   force: boolean;
@@ -433,7 +437,7 @@ async function main(): Promise<void> {
         })
       : null;
     if (!background) {
-      throw new Error(
+      throw new MissingArticleBackgroundError(
         `${slug}: 記事固有背景がありません。` +
           'blog-images:codex request-article で生成してください'
       );
@@ -583,5 +587,5 @@ main().catch((error) => {
   console.error(
     `Fatal: ${error instanceof Error ? error.message : String(error)}`
   );
-  process.exit(1);
+  process.exit(error instanceof MissingArticleBackgroundError ? 20 : 1);
 });

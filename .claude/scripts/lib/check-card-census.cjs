@@ -33,9 +33,6 @@ const BASELINE = new Set([
   // 記事系ページ (reading zone) の本文カード。角丸なし + shadow-sm +
   // モバイルフルブリード。ArticleShell と対で使う (2026-07-11 Soft Editorial 移植)。
   "ArticleCard",
-  // blog 一覧/詳細の右レール専用プロフィール。SurfaceCard を外枠に使い、
-  // 経歴・note CTA・アイコンSNSを一体で提供する feature composite。
-  "BlogAuthorProfileCard",
   "ChartCard",
   "ChartLoadingCard",
   "CitiesNavCard",
@@ -54,6 +51,13 @@ const BASELINE = new Set([
   "PortalNavCard",
   "PortStatisticsMapCard",
   "RailCard",
+  // 以下は独自の枠ではなく RailCard / SurfaceSection ベースの共有 composite。
+  // RailCard だけでは持たないリンク配列・レイアウト・導線計測を一元化する。
+  "RailLinksCard",
+  // 都道府県 Select の遷移・計測・狭幅開閉を複数ページで共有する。
+  "RailPrefectureCard",
+  // GET 検索フォーム・hidden query・検索ラベルを複数ページで共有する。
+  "RailSearchCard",
   "RankingDefinitionCard",
   "RankingSourceCard",
   "SurfaceCard",

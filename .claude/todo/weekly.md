@@ -20,12 +20,12 @@ status と期限は各バックログを正典とし、ここには週内に検�
 91 記事の背景生成着手 / 25 metric の分類」を担当する。今週の Must 3 件はこの 4 つのうち
 私が完了まで持てる 3 つで、背景生成はオーナー作業のため Should に置いた。
 
-## 前週の振り返り（W36 は記録が無い）
+## 前週の振り返り（W36 レビュー作成済み）
 
-**2026-W36 の週次計画も週次レビューも存在しない。** `.claude/todo/weekly.md` は
-2026-08-24 更新の W35 のまま今日まで残り、`reference/reviews/` の最新も W35 である。
-したがって以下の「持ち越し」は **W35 の計画と W35 レビューから推定したもので、W36 の 1 週間に
-何が起きたかは計画側に記録が無い**。W36 の実績確定は Must 1 で行う。
+W36 固有の週次計画は無かったが、**2026-W36 の週次レビューは `b0d6d01f8` で作成済み**。
+実績の正典は `.claude/skills/management/weekly-review/reference/reviews/2026-W36.md`。
+以下の持ち越し表は W35 起点であり、W36 実績（ai-content done 371→861、新規ブログ18本）と
+9月7日・W37 の全件生成完了を混同しない。
 
 W35 レビューが確定させた事実（達成率 1/6）:
 
@@ -82,12 +82,11 @@ Must は私が単独で完了まで持てる粒度だけにする**。
 
 ## Must（3 件）
 
-- [ ] **2026-W36 の週次レビューを作成する**（重点1・重点2 の入力・S）
+- [x] **2026-W36 の週次レビューを作成する**（重点1・重点2 の入力・S）
   - 対象期間 2026-08-31〜2026-09-06。**W36 は計画が存在しなかった**ので、計画 vs 実績の表は
     作らず「計画なしの週に何が実行されたか」を git log と state から再構成する。
-  - 少なくとも次を確定させる: ai-content が 861 → 2,154 になった経緯（commit `aec46436a` の
-    決定的 backfill）、ブログ公開待ちが 91 → 96 に増えた経緯、improvements の 09-07 整理で
-    何が削除され何が残ったか。
+  - `b0d6d01f8` で作成済み。9月7日の生成は W37 の実績で、決定的 backfill は残863件。
+    全量差分をすべてテンプレート生成と扱わない。詳細は月次計画と ai-content memory を参照する。
   - **成功基準**: `reference/reviews/2026-W36.md` が存在し、W37（今週）の実績を来週判定できる
     baseline が書かれている。GSC 運用サイクルの「計測 → 週次 review」WARN が解消する。
   - 使用スキル: `/weekly-review 2026-W36`
@@ -212,10 +211,9 @@ Must は私が単独で完了まで持てる粒度だけにする**。
    09-06 の run 34044001551 は **10 月上旬に消える**。Must 2 を先送りすると
    デプロイ前 baseline を失い、`AFF-RESOLUTION-EFFECT-01` の before/after が組めなくなる。
 
-4. **W36 の空白をどう扱うか** — 計画も レビューも無い週が 1 つできた。Must 1 で事後的に
-   再構成するが、**「計画が無かったので実績も無い」ではなく「計画が無い週に 5 本の記事が
-   増え ai-content が 1,293 件増えた」**という事実の方を記録する。計画の外で仕事が進む構造は
-   W35 レビューが特定した課題そのもので、今週も解けていない。
+4. **W36 の計画欠落をどう扱うか** — レビューは事後作成済み。W36 は新規ブログ18本、
+   ai-content done +490。9月7日の全件生成完了は W37 の実績へ分離する。
+   計画外で仕事が進む構造は W35 レビューが特定した課題であり、計画作成済みとは扱わない。
 
 5. **Must 3 件・Should 4 件は多すぎないか** — Should のうち 1 件はオーナー作業（背景生成）、
    1 件は判断のみ（デプロイ可否）なので、私の実作業は Must 3 + Should 2 である。
@@ -243,8 +241,7 @@ Must は私が単独で完了まで持てる粒度だけにする**。
 - 機能: [バックログ](backlog.md)（`AFF-DEPLOY-RESOLUTION-01` / `GSC-COVERAGE-DEPLOY-01` /
   `BLOG-BACKGROUND-BATCH-01` / `BLOG-PUBLISH-THUMBNAIL-GUARD-01` / `RSC-CACHE-BYPASS-01` /
   `PERF-RANKING-LCP-03`）
-- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W35.md`
-  （**W36 は未作成。Must 1 で作る**）
+- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W36.md`（作成済み）
 - GSC cycle audit: `.claude/state/metrics/gsc/operations-cycle-LATEST.md`
 - search-growth: `.claude/state/search-growth/{health,candidates}.json`
 - ブログ是正キュー: `.claude/state/blog/remediation-queue.json`（2026-09-06 生成）
