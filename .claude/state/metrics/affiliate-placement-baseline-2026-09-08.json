@@ -1,0 +1,831 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-07T21:35:19.475Z",
+  "purpose": "Affiliate placement baseline; no after measurement or effect verdict",
+  "site": "https://stats47.jp",
+  "ga4PropertyId": "463218070",
+  "period": {
+    "start": "2026-08-10",
+    "end": "2026-09-06",
+    "days": 28,
+    "timeZone": "Asia/Tokyo"
+  },
+  "queries": {
+    "affiliate": {
+      "dimensions": [
+        "date",
+        "eventName",
+        "pagePath",
+        "deviceCategory",
+        "customEvent:ad_id",
+        "customEvent:affiliate_vertical",
+        "customEvent:link_position"
+      ],
+      "metrics": [
+        "eventCount"
+      ],
+      "events": [
+        "affiliate_impression",
+        "affiliate_click"
+      ]
+    },
+    "pageviews": {
+      "dimensions": [
+        "date",
+        "pagePath",
+        "deviceCategory"
+      ],
+      "metrics": [
+        "screenPageViews"
+      ]
+    },
+    "countryFilters": {
+      "raw": null,
+      "japan": {
+        "fieldName": "country",
+        "matchType": "EXACT",
+        "value": "Japan"
+      }
+    },
+    "pagination": {
+      "limit": 10000,
+      "allRowCountsMatched": true
+    }
+  },
+  "cohorts": {
+    "raw": {
+      "totals": {
+        "impressions": 26674,
+        "clicks": 13,
+        "pageviews": 34993,
+        "ctr": 0.0004873659743570518,
+        "impressionsPerPageview": 0.7622667390620982
+      },
+      "byDevice": [
+        {
+          "deviceCategory": "desktop",
+          "impressions": 20325,
+          "clicks": 4,
+          "pageviews": 24089,
+          "ctr": 0.0001968019680196802,
+          "impressionsPerPageview": 0.8437461081821578
+        },
+        {
+          "deviceCategory": "mobile",
+          "impressions": 5834,
+          "clicks": 8,
+          "pageviews": 10331,
+          "ctr": 0.0013712718546451835,
+          "impressionsPerPageview": 0.5647081599070758
+        },
+        {
+          "deviceCategory": "tablet",
+          "impressions": 515,
+          "clicks": 1,
+          "pageviews": 572,
+          "ctr": 0.001941747572815534,
+          "impressionsPerPageview": 0.9003496503496503
+        },
+        {
+          "deviceCategory": "smart tv",
+          "impressions": 0,
+          "clicks": 0,
+          "pageviews": 1,
+          "ctr": null,
+          "impressionsPerPageview": 0
+        }
+      ],
+      "byPageType": [
+        {
+          "page_type": "ranking",
+          "impressions": 13006,
+          "clicks": 6,
+          "pageviews": 17408,
+          "ctr": 0.0004613255420575119,
+          "impressionsPerPageview": 0.7471277573529411
+        },
+        {
+          "page_type": "blog",
+          "impressions": 10226,
+          "clicks": 5,
+          "pageviews": 8270,
+          "ctr": 0.0004889497359671426,
+          "impressionsPerPageview": 1.2365175332527207
+        },
+        {
+          "page_type": "home",
+          "impressions": 1222,
+          "clicks": 2,
+          "pageviews": 1258,
+          "ctr": 0.0016366612111292963,
+          "impressionsPerPageview": 0.9713831478537361
+        },
+        {
+          "page_type": "areas",
+          "impressions": 934,
+          "clicks": 0,
+          "pageviews": 3074,
+          "ctr": 0,
+          "impressionsPerPageview": 0.30383864671437866
+        },
+        {
+          "page_type": "category",
+          "impressions": 878,
+          "clicks": 0,
+          "pageviews": 2283,
+          "ctr": 0,
+          "impressionsPerPageview": 0.3845816907577749
+        },
+        {
+          "page_type": "survey",
+          "impressions": 158,
+          "clicks": 0,
+          "pageviews": 278,
+          "ctr": 0,
+          "impressionsPerPageview": 0.5683453237410072
+        },
+        {
+          "page_type": "themes",
+          "impressions": 134,
+          "clicks": 0,
+          "pageviews": 1111,
+          "ctr": 0,
+          "impressionsPerPageview": 0.12061206120612061
+        },
+        {
+          "page_type": "municipalities",
+          "impressions": 83,
+          "clicks": 0,
+          "pageviews": 487,
+          "ctr": 0,
+          "impressionsPerPageview": 0.1704312114989733
+        },
+        {
+          "page_type": "tag",
+          "impressions": 28,
+          "clicks": 0,
+          "pageviews": 64,
+          "ctr": 0,
+          "impressionsPerPageview": 0.4375
+        },
+        {
+          "page_type": "japan",
+          "impressions": 5,
+          "clicks": 0,
+          "pageviews": 31,
+          "ctr": 0,
+          "impressionsPerPageview": 0.16129032258064516
+        },
+        {
+          "page_type": "other",
+          "impressions": 0,
+          "clicks": 0,
+          "pageviews": 729,
+          "ctr": null,
+          "impressionsPerPageview": 0
+        }
+      ],
+      "byPlacement": [
+        {
+          "link_position": "sidebar",
+          "impressions": 5386,
+          "clicks": 3,
+          "ctr": 0.0005569996286669142
+        },
+        {
+          "link_position": "ranking-sidebar",
+          "impressions": 4677,
+          "clicks": 2,
+          "ctr": 0.00042762454564892024
+        },
+        {
+          "link_position": "article-inline",
+          "impressions": 4400,
+          "clicks": 2,
+          "ctr": 0.00045454545454545455
+        },
+        {
+          "link_position": "ranking-native",
+          "impressions": 3289,
+          "clicks": 1,
+          "ctr": 0.0003040437823046519
+        },
+        {
+          "link_position": "ranking-incontent",
+          "impressions": 2941,
+          "clicks": 1,
+          "ctr": 0.00034002040122407346
+        },
+        {
+          "link_position": "blog-sidebar",
+          "impressions": 2618,
+          "clicks": 1,
+          "ctr": 0.0003819709702062643
+        },
+        {
+          "link_position": "home-native",
+          "impressions": 778,
+          "clicks": 1,
+          "ctr": 0.0012853470437017994
+        },
+        {
+          "link_position": "article-end",
+          "impressions": 512,
+          "clicks": 1,
+          "ctr": 0.001953125
+        },
+        {
+          "link_position": "category-native",
+          "impressions": 504,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "theme-native",
+          "impressions": 466,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "ranking-end",
+          "impressions": 278,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "area-sidebar",
+          "impressions": 251,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "survey-native",
+          "impressions": 158,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "home-left-rail",
+          "impressions": 153,
+          "clicks": 1,
+          "ctr": 0.006535947712418301
+        },
+        {
+          "link_position": "area-content",
+          "impressions": 106,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "municipality-native",
+          "impressions": 77,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "theme-end",
+          "impressions": 32,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "tag-native",
+          "impressions": 16,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "compare-native",
+          "impressions": 12,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "city-native",
+          "impressions": 11,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "japan-native",
+          "impressions": 5,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "municipality-theme-native",
+          "impressions": 4,
+          "clicks": 0,
+          "ctr": 0
+        }
+      ],
+      "rakuten": {
+        "items": {
+          "ads": 140,
+          "impressions": 740,
+          "clicks": 0
+        },
+        "furusato": {
+          "ads": 17,
+          "impressions": 31,
+          "clicks": 0
+        },
+        "travel": {
+          "ads": 1,
+          "impressions": 46,
+          "clicks": 0
+        }
+      },
+      "rakutenItemsByPlacementDevice": {
+        "blog-sidebar/desktop": {
+          "impressions": 287,
+          "clicks": 0
+        },
+        "ranking-sidebar/desktop": {
+          "impressions": 365,
+          "clicks": 0
+        },
+        "ranking-sidebar/mobile": {
+          "impressions": 69,
+          "clicks": 0
+        },
+        "blog-sidebar/mobile": {
+          "impressions": 12,
+          "clicks": 0
+        },
+        "blog-sidebar/tablet": {
+          "impressions": 2,
+          "clicks": 0
+        },
+        "ranking-sidebar/tablet": {
+          "impressions": 5,
+          "clicks": 0
+        }
+      },
+      "unsetAdId": [
+        {
+          "ad_id": "(not set)",
+          "impressions": 4,
+          "clicks": 0,
+          "ctr": 0
+        }
+      ]
+    },
+    "japan": {
+      "totals": {
+        "impressions": 25637,
+        "clicks": 13,
+        "pageviews": 31462,
+        "ctr": 0.0005070796114990053,
+        "impressionsPerPageview": 0.8148560167821499
+      },
+      "byDevice": [
+        {
+          "deviceCategory": "desktop",
+          "impressions": 19339,
+          "clicks": 4,
+          "pageviews": 20752,
+          "ctr": 0.00020683592740058948,
+          "impressionsPerPageview": 0.9319101773323053
+        },
+        {
+          "deviceCategory": "mobile",
+          "impressions": 5785,
+          "clicks": 8,
+          "pageviews": 10142,
+          "ctr": 0.001382886776145203,
+          "impressionsPerPageview": 0.5704003155196213
+        },
+        {
+          "deviceCategory": "tablet",
+          "impressions": 513,
+          "clicks": 1,
+          "pageviews": 567,
+          "ctr": 0.001949317738791423,
+          "impressionsPerPageview": 0.9047619047619048
+        },
+        {
+          "deviceCategory": "smart tv",
+          "impressions": 0,
+          "clicks": 0,
+          "pageviews": 1,
+          "ctr": null,
+          "impressionsPerPageview": 0
+        }
+      ],
+      "byPageType": [
+        {
+          "page_type": "ranking",
+          "impressions": 12624,
+          "clicks": 6,
+          "pageviews": 16256,
+          "ctr": 0.0004752851711026616,
+          "impressionsPerPageview": 0.7765748031496063
+        },
+        {
+          "page_type": "blog",
+          "impressions": 10065,
+          "clicks": 5,
+          "pageviews": 7315,
+          "ctr": 0.0004967709885742673,
+          "impressionsPerPageview": 1.3759398496240602
+        },
+        {
+          "page_type": "home",
+          "impressions": 918,
+          "clicks": 2,
+          "pageviews": 914,
+          "ctr": 0.002178649237472767,
+          "impressionsPerPageview": 1.0043763676148796
+        },
+        {
+          "page_type": "category",
+          "impressions": 855,
+          "clicks": 0,
+          "pageviews": 2051,
+          "ctr": 0,
+          "impressionsPerPageview": 0.41686981960019504
+        },
+        {
+          "page_type": "areas",
+          "impressions": 811,
+          "clicks": 0,
+          "pageviews": 2485,
+          "ctr": 0,
+          "impressionsPerPageview": 0.3263581488933602
+        },
+        {
+          "page_type": "survey",
+          "impressions": 146,
+          "clicks": 0,
+          "pageviews": 269,
+          "ctr": 0,
+          "impressionsPerPageview": 0.5427509293680297
+        },
+        {
+          "page_type": "themes",
+          "impressions": 118,
+          "clicks": 0,
+          "pageviews": 928,
+          "ctr": 0,
+          "impressionsPerPageview": 0.1271551724137931
+        },
+        {
+          "page_type": "municipalities",
+          "impressions": 77,
+          "clicks": 0,
+          "pageviews": 481,
+          "ctr": 0,
+          "impressionsPerPageview": 0.1600831600831601
+        },
+        {
+          "page_type": "tag",
+          "impressions": 18,
+          "clicks": 0,
+          "pageviews": 45,
+          "ctr": 0,
+          "impressionsPerPageview": 0.4
+        },
+        {
+          "page_type": "japan",
+          "impressions": 5,
+          "clicks": 0,
+          "pageviews": 30,
+          "ctr": 0,
+          "impressionsPerPageview": 0.16666666666666666
+        },
+        {
+          "page_type": "other",
+          "impressions": 0,
+          "clicks": 0,
+          "pageviews": 688,
+          "ctr": null,
+          "impressionsPerPageview": 0
+        }
+      ],
+      "byPlacement": [
+        {
+          "link_position": "sidebar",
+          "impressions": 5187,
+          "clicks": 3,
+          "ctr": 0.000578368999421631
+        },
+        {
+          "link_position": "ranking-sidebar",
+          "impressions": 4537,
+          "clicks": 2,
+          "ctr": 0.00044081992506061276
+        },
+        {
+          "link_position": "article-inline",
+          "impressions": 4342,
+          "clicks": 2,
+          "ctr": 0.00046061722708429296
+        },
+        {
+          "link_position": "ranking-native",
+          "impressions": 3163,
+          "clicks": 1,
+          "ctr": 0.0003161555485298767
+        },
+        {
+          "link_position": "ranking-incontent",
+          "impressions": 2885,
+          "clicks": 1,
+          "ctr": 0.0003466204506065858
+        },
+        {
+          "link_position": "blog-sidebar",
+          "impressions": 2574,
+          "clicks": 1,
+          "ctr": 0.0003885003885003885
+        },
+        {
+          "link_position": "home-native",
+          "impressions": 580,
+          "clicks": 1,
+          "ctr": 0.0017241379310344827
+        },
+        {
+          "link_position": "article-end",
+          "impressions": 503,
+          "clicks": 1,
+          "ctr": 0.0019880715705765406
+        },
+        {
+          "link_position": "category-native",
+          "impressions": 492,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "theme-native",
+          "impressions": 393,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "ranking-end",
+          "impressions": 269,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "area-sidebar",
+          "impressions": 221,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "survey-native",
+          "impressions": 146,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "home-left-rail",
+          "impressions": 114,
+          "clicks": 1,
+          "ctr": 0.008771929824561403
+        },
+        {
+          "link_position": "area-content",
+          "impressions": 100,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "municipality-native",
+          "impressions": 71,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "theme-end",
+          "impressions": 27,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "tag-native",
+          "impressions": 8,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "compare-native",
+          "impressions": 8,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "city-native",
+          "impressions": 8,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "japan-native",
+          "impressions": 5,
+          "clicks": 0,
+          "ctr": 0
+        },
+        {
+          "link_position": "municipality-theme-native",
+          "impressions": 4,
+          "clicks": 0,
+          "ctr": 0
+        }
+      ],
+      "rakuten": {
+        "items": {
+          "ads": 138,
+          "impressions": 729,
+          "clicks": 0
+        },
+        "furusato": {
+          "ads": 12,
+          "impressions": 18,
+          "clicks": 0
+        },
+        "travel": {
+          "ads": 1,
+          "impressions": 44,
+          "clicks": 0
+        }
+      },
+      "rakutenItemsByPlacementDevice": {
+        "blog-sidebar/desktop": {
+          "impressions": 282,
+          "clicks": 0
+        },
+        "ranking-sidebar/desktop": {
+          "impressions": 359,
+          "clicks": 0
+        },
+        "ranking-sidebar/mobile": {
+          "impressions": 69,
+          "clicks": 0
+        },
+        "blog-sidebar/mobile": {
+          "impressions": 12,
+          "clicks": 0
+        },
+        "blog-sidebar/tablet": {
+          "impressions": 2,
+          "clicks": 0
+        },
+        "ranking-sidebar/tablet": {
+          "impressions": 5,
+          "clicks": 0
+        }
+      },
+      "unsetAdId": [
+        {
+          "ad_id": "(not set)",
+          "impressions": 4,
+          "clicks": 0,
+          "ctr": 0
+        }
+      ]
+    }
+  },
+  "after": null,
+  "effect": {
+    "status": "not-assessable",
+    "reasons": [
+      "new-placement-change-not-deployed",
+      "after-window-missing",
+      "a8-outcomes-not-period-matched"
+    ]
+  },
+  "deployment": {
+    "previous": {
+      "pr": 945,
+      "mergeCommit": "d329955be4aa3d3838f5598e4b93203d1d084295",
+      "mergedAt": "2026-09-07T18:58:33Z",
+      "deployedAt": "2026-09-07T19:08:08Z",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34153770527",
+      "conclusion": "success"
+    },
+    "planned": {
+      "deployedAt": null,
+      "status": "not-deployed",
+      "changes": [
+        "same-position card impression and item click",
+        "ordinary Rakuten search link excluded from affiliate_click",
+        "existing kakei-chousa ranking product card moved after related rankings with rakuten-sidebar; card count unchanged"
+      ]
+    }
+  },
+  "ci": {
+    "latest": {
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34163125058",
+      "generatedAt": "2026-09-07T21:28:16.991Z",
+      "totals": {
+        "impressions": 27177,
+        "clicks": 13,
+        "ctr": 0.0004783456599330316
+      },
+      "startDate": "28daysAgo",
+      "endDate": "today",
+      "includesPartialCurrentDay": true,
+      "calendarDateCount": 29,
+      "warning": "Rolling inclusive window; not the fixed 28-day baseline and not a before/after comparison"
+    },
+    "previousRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/34044001551",
+    "dispatchCommand": "gh workflow run affiliate-ga4-weekly.yml --ref develop -f days=28"
+  },
+  "a8": {
+    "gate": "ready-under-existing-35-day-rule",
+    "observedAt": "2026-08-28T03:35:52.936Z",
+    "updatedAt": "2026-08-28T06:38:11.482Z",
+    "nominalPeriod": "2026-08",
+    "periodComplete": false,
+    "siteSummary": {
+      "impressions": 103363,
+      "clicks": 294,
+      "approved": 0,
+      "confirmedRevenueYen": 0
+    },
+    "currentPeriodRevenueYen": null,
+    "adMatchedRevenuePer1000Impressions": null,
+    "limitations": [
+      "August snapshot was collected on August 28 and is not the completed August month",
+      "Does not cover the fixed GA4 August 10 through September 6 window",
+      "Program detail is account-wide; 3 shared programs are not attributable to stats47",
+      "83 of 131 offer revenues are unavailable in the September 8 portfolio; missing is not zero"
+    ]
+  },
+  "constraints": [
+    "Viewable impression means card/banner 50% visible for 1 second; threshold unchanged",
+    "Day/page/device/ad/vertical/placement data retrieved for this ad hoc baseline; the weekly CI still has only independent overview/pages/experiments reports and no PV or device breakdown",
+    "Existing CI does not preserve explicit dates, timezone, rowCount, or threshold/sampling metadata; fixed reports preserve response metadata and all row counts match",
+    "Four fixed reports returned Asia/Tokyo metadata with no sampling or thresholding flags; this does not prove bot-free traffic",
+    "Japan is a country filter, not a verified-human filter",
+    "Fixed baseline may contain earlier deployments; it is not evidence that PR945 or the planned change caused any outcome",
+    "Old item click position suffixes and ordinary search clicks alter CTR semantics at deployment; do not directly compare old/new placement CTR",
+    "Pageview denominators apply to the whole selected cohort/page/device; placement-only PV and ad-matched revenue remain unavailable",
+    "A higher mobile CTR has only 8 clicks; it does not establish a revenue winner"
+  ],
+  "evidence": [
+    {
+      "name": "affiliate-raw",
+      "path": "/tmp/stats47-affiliate-measurement-CefQEZ/fixed-20260810-20260906/affiliate-raw.json",
+      "sha256": "10b6dd381e8a9232b59b61982e4eedeb9d768ffa8085adc1e91170b8247a685e",
+      "generatedAt": "2026-09-07T21:31:11.152Z",
+      "rowCount": 17751,
+      "returnedRows": 17751,
+      "complete": true
+    },
+    {
+      "name": "affiliate-japan",
+      "path": "/tmp/stats47-affiliate-measurement-CefQEZ/fixed-20260810-20260906/affiliate-japan.json",
+      "sha256": "99ba0f4e0cc65b4ccf11e2d4f4907046eae38c966f38374d4c8974b6c4eccb66",
+      "generatedAt": "2026-09-07T21:31:11.363Z",
+      "rowCount": 17156,
+      "returnedRows": 17156,
+      "complete": true
+    },
+    {
+      "name": "pageviews-raw",
+      "path": "/tmp/stats47-affiliate-measurement-CefQEZ/fixed-20260810-20260906/pageviews-raw.json",
+      "sha256": "1349f42530fdc4a92f4cde91523fdfcad881ba47509b9be5cd5d5d75d99990d7",
+      "generatedAt": "2026-09-07T21:31:10.862Z",
+      "rowCount": 10792,
+      "returnedRows": 10792,
+      "complete": true
+    },
+    {
+      "name": "pageviews-japan",
+      "path": "/tmp/stats47-affiliate-measurement-CefQEZ/fixed-20260810-20260906/pageviews-japan.json",
+      "sha256": "3c2a254d791fcca7853bcf1ea2dd9fcdceaa645d21fd4e6ce5b6e8dfb14abcbe",
+      "generatedAt": "2026-09-07T21:31:11.026Z",
+      "rowCount": 10022,
+      "returnedRows": 10022,
+      "complete": true
+    },
+    {
+      "name": "fixed-summary",
+      "path": "/tmp/stats47-affiliate-measurement-CefQEZ/fixed-20260810-20260906/measurement-summary.json",
+      "sha256": "f466a0d5d3a9f1d483fd7bec2dc74a03bab4168b8d36c697604862d45ee36251"
+    },
+    {
+      "name": "latest-ci-snapshot",
+      "path": "/tmp/stats47-affiliate-measurement-CefQEZ/run-34163125058/ga4-affiliate-2026-09-07.json",
+      "sha256": "8dc7058dbbd7b097a12c5ae320ad5e2f1da9a897a8923fa22ef76e67f8f839ea"
+    }
+  ],
+  "reproduce": {
+    "fetch": "node /tmp/stats47-affiliate-measurement-CefQEZ/fetch-fixed.cjs",
+    "summarize": "node /tmp/stats47-affiliate-measurement-CefQEZ/summarize-fixed.cjs"
+  },
+  "verification": {
+    "impressionContract": {
+      "command": "npx vitest run --root apps/web src/features/ads/__tests__/impression-tracking-contract.test.ts",
+      "passed": 17
+    },
+    "liveAfterDelivery": "not-verified",
+    "fullBuild": "not-run-by-measurement-agent"
+  }
+}
