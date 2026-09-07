@@ -21,6 +21,79 @@ updated: 2026-09-07
 
 ## 🔴 高 — 今月中に着手したい
 
+### [SURVEY-TAXONOMY-COVERAGE-01] 公開コンテンツの調査タクソノミーを適用対象100%へ完全化する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:別環境] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-07]
+
+- **owner**: `survey-curator` が横断監査と ranking 系譜を統括し、`theme-component-builder` と
+  `chart-author` / `blog-editor` が各面の lineage を是正する。R2 反映は `r2-publisher` / CI、
+  本番変更の承認はオーナーが担当する。
+- **目的**: 公開 ranking、ThemeCatalog chart、公開 blog chart を、公式に確認できる原典調査または
+  明示的な `not-applicable` のどちらかへ全件分類し、適用対象の未解決・系譜欠落を 0 にする。
+- **現状実測 (2026-09-06 state)**:
+  - ranking は公開 2,166 指標中 1,962 件解決、204 件未分類で、active coverage は 90.58%。
+    未分類の理由は `ssds-synthetic-only` 109 件、`estat-uncovered` 74 件、`external` 21 件で、
+    未カバーの `statsDataId` は 48 種類ある。
+  - theme は 106 chart 中、適用対象 82 件がすべて解決済みで、対象外 24 件、未解決・系譜欠落は 0 件。
+  - blog は公開 534 記事・1,425 chart 中、適用対象 1,332 件、解決 1,087 件、
+    未解決 61 件、lineage 欠落 184 件、対象外 93 件で、問題を含む記事は 152 件。
+  - survey master は 105 件で、全在庫から接続される調査は 88 件、orphan は 17 件。
+    live の active survey 集合 86 件と git 導出の期待集合 86 件は一致している。
+- **別 PC 再開前提**: 本カードを含む最新コミットを clean な作業ツリーへ取得し、依存関係を導入後、
+  Node.js の `fetch` が公開 R2 URL へ到達できることを少数サンプルで確認する。この PC の
+  `--compare-r2` はプロキシ / TLS により全 fetch 失敗したため、その結果を本番 `item.json` 欠落と判定しない。
+- **変更可能な SSOT**: 調査マスタ `packages/ranking/src/data/surveys.json`、SSDS / e-Stat 出典辞書、
+  例外に限る `MetricConfig.surveyId`、ThemeCatalog の既存 lineage、blog chart `source.json` の生成元 lineage と
+  明示的な `surveyScope`、共通 resolver / builder / audit の最小実装・型・テスト、最終値確定後の ratchet だけを変更対象とする。
+- **実行順**:
+  1. `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --unresolved` と横断監査を実行し、
+     現状値と未解決キーを取得日付つきで再現する。
+  2. `estat-uncovered` 74 件 / 48 `statsDataId` を e-Stat 公式メタデータで調査名まで確認し、
+     実在する survey だけを e-Stat 出典辞書と、必要な場合のみ surveys master へ追記する。
+  3. `ssds-synthetic-only` 109 件は `cdCat01` から原典調査への導出を公式情報で確認し、
+     合成 ID を公開用 survey として登録せず、実在調査のマスタと辞書の名称を一致させる。
+  4. `external` 21 件を「公式な統計調査あり」と「調査タクソノミー対象外」に一次出典で分ける。
+     ranking 側に明示的な `not-applicable` 契約が無ければ、実装者が既存 `MetricConfig` と resolver の型を調べ、
+     最小の SSOT / 型変更で対象外理由を明示し、共通監査がそれを別 status で集計する。
+  5. theme は現在の適用対象 82 / 82 と対象外 24 件を回帰テストで保持し、
+     `relatedRankingKeys` / `rankingLink` / `estatParams` からの導出を崩さない。
+  6. blog の未解決 61 件は `rankingKey` / `statsDataId` / 共通辞書に実在する `sourceName` を一次出典に基づき是正し、
+     lineage 欠落 184 件は原データを追跡できるものだけ復元する。非統計 / GIS 派生の対象外は
+     `surveyScope: "not-applicable"` と 10 文字以上の `surveyScopeReason` を source に明記する。
+  7. orphan 17 件は active / total を分けて再監査し、実在する対応在庫へ正しく接続するか、
+     全在庫で 0 件と機械確定できたものだけを surveys master から削除する。
+  8. 全面のローカル監査、config 検証、対象テストが green になった後だけ、オーナー承認の上で
+     R2 snapshot を下記の順番で再生成・反映する。
+  9. 反映後に `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2` を `--sample` なしで実行し、
+     live 公開 2,166 `item.json` 全件の git 導出との一致、欠落 0、active survey 集合の差分 0 を証拠として残す。
+  10. 適用対象の coverage 100%、未解決 0、missing-lineage 0、全 live 照合一致が同時に成立した後だけ、
+      `.claude/config/survey-taxonomy-ratchet.json` を最終母数に合わせ、ranking / theme / blog の適用対象 coverage を
+      100% へ締め、未解決・lineage 欠落の許容値を 0 にする。
+- **R2 反映順**: 1) `generate-ranking-items.ts` で `item.json` の `surveyIds` を先に再生成し、2)
+  `export-master-snapshots.ts` で `app/survey/<id>/items.json` と `all.json` を再グループ化し、3)
+  `export-blog-snapshot.ts` で blog の `surveyIds` と `surveyArticleIndex` を source lineage から再生成する。
+  CI を使う場合も `ranking-items` → `master` → blog publish の依存順を崩さない。
+- **禁止**: R2 JSON と taxonomy state を手編集しない。未分類の受け皿、`ssds-src:*` / `src:*`、
+  実在しない surveyId を作らない。external、GIS、非統計 chart に偽の surveyId を付けず、
+  根拠のない `not-applicable` への振り替えや allowlist の拡大で coverage を上げない。
+  theme / blog に独自の手書き surveyId を追加せず、共通 resolver と既存 lineage から導出する。
+- **停止条件**: 公式メタデータで原典調査を特定できない、詳細出典が失われている、
+  `not-applicable` の理由を一次情報で説明できない、または公開母数が理由なく減る場合は、対象キー、
+  証拠、不足情報を報告して停止する。Node の fetch 全失敗時はネットワーク障害と本番欠落を分離できるまで
+  live 不一致を断定しない。R2 write、workflow dispatch、本番反映、デプロイは明示承認が無ければ実行しない。
+- **完了条件**:
+  - ranking は適用対象が実在 survey へ 100% 解決し、未解決 0 となる。対象外指標がある場合は、
+    各指標に機械可読な明示契約と十分な理由があり、coverage 分母からの除外をテストが検証する。
+  - theme は適用対象が 100% 解決し、`unresolved` と `missing-lineage` が 0、明示的な `not-applicable` だけが対象外となる。
+  - blog は適用対象が 100% 解決し、`unresolved` と `missing-lineage` が 0、全対象外 chart に
+    `surveyScope: "not-applicable"` と根拠ある `surveyScopeReason` が存在し、問題あり公開記事が 0 件となる。
+  - survey master の orphan が 0 件となり、active / inactive-only の判定を保持したまま、
+    `app/survey/all.json` と git-active の survey 集合差分が 0 となる。
+  - `--compare-r2` が公開 2,166 `item.json` を全件取得し、一致 2,166、不一致 0、欠落 0、fetch 失敗 0 を報告する。
+  - ratchet は ranking / theme / blog の適用対象 100% と未解決・lineage 欠落 0 を新しい回帰防止ラインにし、
+    `npm run validate:config --workspace=@stats47/data-configs`、対象テスト、横断監査の full 再生成と
+    `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check` がすべて green となる。
+
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-09-21]
