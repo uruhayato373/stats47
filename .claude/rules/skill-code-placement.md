@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/scripts/**"
+  - ".claude/skills/**/scripts/**"
+  - "scripts/**"
+  - ".claude/skills/dev/create-skill/**"
+---
 # スキル利用コードの配置原則
 
 **スキル（SKILL.md）から呼ばれるユーティリティ・ヘルパースクリプトは `.claude/` 配下に置く**。`scripts/` 直下には置かない。

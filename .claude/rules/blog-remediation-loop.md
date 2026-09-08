@@ -1,3 +1,9 @@
+---
+paths:
+  - ".claude/{scripts/blog,skills/blog,state/blog}/**"
+  - ".github/workflows/blog-remediation-daily.yml"
+  - ".claude/agents/{article-writer,blog-editor}.md"
+---
 # ブログ品質 是正ループ (運用正典)
 
 公開済みブログ記事の品質を**週次で少しずつ底上げ**するための閉ループの**運用正典**。「SVG はあるが文章が薄い」

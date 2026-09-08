@@ -1,3 +1,9 @@
+---
+paths:
+  - "apps/web/src/{features/survey,app/survey}/**"
+  - ".claude/{scripts/surveys,skills/survey,state/surveys}/**"
+  - ".claude/agents/survey-curator.md"
+---
 # survey コンテンツクラスター標準 (survey-content-standards)
 
 `/survey/<surveyKey>` を「関連ランキング一覧」から**調査ごとに異なる検索意図を受ける編集ハブ**へ育てる運用正典。

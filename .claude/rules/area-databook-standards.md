@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/data-configs/src/area-databook/**"
+  - "apps/web/src/features/{area-databook,area,area-profile}/**"
+  - ".claude/skills/area/**"
+  - ".claude/agents/{area-curator,area-databook-designer,chart-component-builder}.md"
+---
 # area 県データブック標準 (AreaDatabook SSOT)
 
 `/areas/[areaCode]` ページを「県データブック」(高密度・全国順位付き県プロフィール) として管理する

@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/visualization/**"
+  - "apps/web/src/components/{charts,stat-charts}/**"
+  - ".claude/skills/ui/audit-chart-components/**"
+  - ".claude/agents/{chart-component-builder,ui-consistency-reviewer,ranking-ui-manager,theme-component-builder}.md"
+---
 # チャートコンポーネント標準 (shadcn UI + D3.js)
 
 チャート・カードコンポーネントの**単一ソース（SSoT）**。

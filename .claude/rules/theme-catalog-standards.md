@@ -1,3 +1,10 @@
+---
+paths:
+  - "packages/data-configs/src/theme-catalog/**"
+  - "apps/web/src/{features/theme-dashboard,app/themes}/**"
+  - ".claude/{skills/theme,scripts/themes,state/themes}/**"
+  - ".claude/agents/theme-*.md"
+---
 # テーマ指標×チャート統合カタログ標準 (ThemeCatalog SSOT)
 
 テーマページ (`/themes/<key>`) が「どの統計指標を、どのチャートで、なぜ表示するか」を管理する

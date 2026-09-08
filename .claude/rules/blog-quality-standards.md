@@ -1,3 +1,10 @@
+---
+paths:
+  - "docs/21_ブログ記事原稿/**"
+  - ".claude/{scripts/blog,skills/blog,workflows}/**"
+  - "apps/web/src/{features/blog,app/blog}/**"
+  - ".claude/agents/{article-writer,blog-*,chart-author,trend-scout,kindle-publisher}.md"
+---
 # ブログ品質基準 (curiosity gap パターン)
 
 stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際の必須基準。BLOG-CTR-03/04 (2026-05-23) の実測ベースで確立。

@@ -1,3 +1,9 @@
+---
+paths:
+  - ".claude/scripts/{note,coconala,kdp,google-admin}/**"
+  - ".claude/skills/{note,product,sns/x-viral-research,sns/update-x-profile}/**"
+  - ".claude/agents/note-manager.md"
+---
 # browser-use クリーンアップ規約
 
 browser-use を使うスキル / スクリプトは終了時に必ず daemon 停止 + Chrome タブクローズすること。

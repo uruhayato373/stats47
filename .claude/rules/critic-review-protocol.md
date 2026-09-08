@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/agents/*-critic.md"
+  - "docs/{21_ブログ記事原稿,31_note記事原稿}/**/review.md"
+  - ".claude/workflows/**"
+  - ".claude/skills/blog/{blog-review,panel-review}/**"
+---
 # Critic レビュープロトコル (全 critic agent 共通の型)
 
 blog-critic / note-critic / ranking-content-critic (および今後の critic 系 agent) が共有する

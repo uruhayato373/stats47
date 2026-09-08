@@ -1,7 +1,7 @@
 /**
- * placement-map-core.mjs — 「需要 (ページ/トラフィック) × 供給 (広告在庫/EPC)」突合の純ロジック。
+ * placement-map-core.mjs — 「検索需要 (GSC) × 供給 (広告在庫/EPC)」突合の純ロジック。
  *
- * ★ なぜ要るか: これまで propose (次にどの案件を仕入れるか) は手順書レベルで、GSC の実トラフィックと
+ * ★ なぜ要るか: これまで propose (次にどの案件を仕入れるか) は手順書レベルで、GSC の検索需要と
  *   在庫・EPC を突き合わせる決定的スクリプトが存在しなかった (2026-07-28 の調査で確定)。
  *   モデルが毎回目視で JOIN していたため再現性が無く、見落としも起きる。ここを機械化する。
  *
@@ -58,28 +58,34 @@ export function classifyPageUrl(url) {
 
 /**
  * ページ 1 件が解決する vertical を返す。**広告解決の実装と同じ経路**でなければ意味が無いので、
- * ranking/category は categoryKey→vertical、blog/tag は tagKey→vertical、themes は themeKey→vertical に揃える。
+ * ranking/blog は共有 resolveContentVertical (調査→タグ→カテゴリ、null停止) を注入する。
+ * survey は調査写像を優先し、未写像時だけ実snapshotの最多カテゴリverticalを使う。
  *
- * @returns {{verticals: string[], reason: string}} verticals が空 = **広告が出ない** (AdSense に落ちる)
+ * @returns {{verticals: string[], reason: string}} 配置意図の需要。広告の実表示回数ではない。
  */
 export function resolveVerticalsForPage(page, maps) {
-  const { rankingKeyToCategory = {}, categoryMap = {}, tagMap = {}, themeMap = {}, articleTags = {} } = maps;
+  const { rankingKeyToCategory = {}, categoryMap = {}, tagMap = {}, themeMap = {}, rankingContent = {}, articleContent = {}, surveyItems = {}, resolveContentVertical } = maps;
+  const resolveIntent = (input, unresolvedReason) => {
+    const result = resolveContentVertical(input);
+    const reason = result.source === "survey-none" ? "no-intent"
+      : result.source === "none" ? unresolvedReason
+      : result.source === "category" ? `category:${input.categoryKey}` : result.source;
+    return { verticals: result.verticals, reason };
+  };
   switch (page.type) {
     case "ranking": {
-      const cat = rankingKeyToCategory[page.key];
-      if (!cat) return { verticals: [], reason: "ranking-key-unknown" };
-      const v = categoryMap[cat];
-      return v ? { verticals: [v], reason: `category:${cat}` } : { verticals: [], reason: `category-unmapped:${cat}` };
+      const input = rankingContent[page.key];
+      if (!input) return { verticals: [], reason: rankingKeyToCategory[page.key] ? "ranking-metadata-unavailable" : "ranking-key-unknown" };
+      return resolveIntent(input, `category-unmapped:${input.categoryKey ?? "unknown"}`);
     }
     case "category": {
       const v = categoryMap[page.key];
       return v ? { verticals: [v], reason: `category:${page.key}` } : { verticals: [], reason: `category-unmapped:${page.key}` };
     }
     case "blog": {
-      const tags = articleTags[page.key];
-      if (!tags) return { verticals: [], reason: "article-unknown" };
-      const vs = [...new Set(tags.map((t) => tagMap[t]).filter(Boolean))];
-      return vs.length ? { verticals: vs, reason: "tags" } : { verticals: [], reason: "tags-unmapped" };
+      const input = articleContent[page.key];
+      if (!input) return { verticals: [], reason: "article-unknown" };
+      return resolveIntent(input, "tags-unmapped");
     }
     case "tag": {
       const v = tagMap[page.key];
@@ -92,11 +98,25 @@ export function resolveVerticalsForPage(page, maps) {
     case "areas":
       // area は locationCode="area-sidebar" + 楽天ふるさと納税で、vertical 解決を経由しない
       return { verticals: ["furusato"], reason: "area-furusato" };
-    case "survey":
-      // ★ survey の native 枠は tag が `['economy','population','labor']` の**ハードコード**で
-      //   surveyKey と連動していない (2026-07-28 棚卸しで確認)。枠はあるので no-slot ではないが、
-      //   調査主題とズレる。reason に残して是正対象と分かるようにする。
-      return { verticals: ["economy", "population", "labor"], reason: "survey-hardcoded-tags" };
+    case "survey": {
+      const resolved = resolveIntent({ surveyIds: [page.key] }, "none");
+      if (resolved.reason !== "none") return resolved;
+      const items = surveyItems[page.key];
+      if (!items) return { verticals: [], reason: "survey-items-unavailable" };
+      if (!items.length) return { verticals: [], reason: "survey-items-empty" };
+      // survey page dominantVertical: count mapped verticals; first occurrence wins ties.
+      const counts = new Map();
+      for (const item of items) {
+        const vertical = categoryMap[item.categoryKey];
+        if (vertical) counts.set(vertical, (counts.get(vertical) ?? 0) + 1);
+      }
+      let best = "economy";
+      let bestCount = 0;
+      for (const [vertical, count] of counts) {
+        if (count > bestCount) { best = vertical; bestCount = count; }
+      }
+      return { verticals: [best], reason: "survey-category" };
+    }
     default:
       return { verticals: [], reason: `no-slot:${page.type}` };
   }
@@ -105,7 +125,7 @@ export function resolveVerticalsForPage(page, maps) {
 /**
  * GSC の行を「ページ種別 × vertical」に集計する。
  * 複数 vertical に解決するページ (blog の複数タグ) は **imp を分割せず全 vertical に計上**する
- * (どの軸の在庫がその imp に接触しうるかを見るため。合計は imp 総和と一致しない)。
+ * (検索需要の意図別集計であり広告表示回数ではない。合計は検索imp総和と一致しない)。
  */
 export function aggregateDemand(rows, maps) {
   const byType = {};
@@ -144,8 +164,8 @@ export function aggregateDemand(rows, maps) {
 /**
  * 需要 (imp) と供給 (在庫件数) を突き合わせ、**手当てすべき順**に並べる。
  *
- * - `no-inventory`: imp があるのに banner/text いずれかがゼロ → 埋めれば即効く
- * - `unmapped`: vertical に解決できず AdSense に落ちている imp → 写像追加の候補
+ * - `no-inventory`: 検索需要があるが banner/text いずれかがゼロ → 適合案件を検討する候補
+ * - `unmapped`: 意図未解決/no-intent の検索需要 (AdSense表示や広告未表示の実測ではない)
  * - `oversupply`: 在庫が厚いのに imp が小さい → 新規仕入れの優先度を下げる根拠
  */
 export function buildGapReport({ byVertical, unmapped, inventoryByVertical, textByVertical, bannerByVertical }) {

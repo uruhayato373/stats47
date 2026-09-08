@@ -311,3 +311,98 @@ test("mirror pointing somewhere other than canonical is rejected", (t) => {
     "canonical 以外を指すパスは通さない",
   );
 });
+
+// ---- DG070-072: 常時読み込み量と paths: 条件付き rule (2026-09-08) ----
+
+function alwaysLoadedFixture(t) {
+  const { root, config } = fixture(t);
+  config.alwaysLoadedInstructions = {
+    entryFile: "CLAUDE.md",
+    rulesDir: ".claude/rules",
+    maxEntryLines: 200,
+    maxTotalLines: 600,
+  };
+  write(root, "CLAUDE.md", [
+    "# project",
+    "",
+    "| ルール | 適用場面 |",
+    "|---|---|",
+    "| `core-judgment.md` | 常時 |",
+    "| `blog-standards.md` | docs/21 を読んだとき |",
+    "",
+  ].join("\n"));
+  fs.unlinkSync(path.join(root, "AGENTS.md"));
+  fs.symlinkSync("CLAUDE.md", path.join(root, "AGENTS.md"));
+  write(root, ".claude/rules/core-judgment.md", "# core\n\nalways loaded\n");
+  fs.mkdirSync(path.join(root, "docs/21"), { recursive: true });
+  fs.mkdirSync(path.join(root, ".claude/skills/blog"), { recursive: true });
+  write(root, ".claude/rules/blog-standards.md", [
+    "---",
+    "paths:",
+    '  - "docs/21/**"',
+    '  - ".claude/{skills/blog,scripts/blog}/**"',
+    "---",
+    "# blog",
+    "",
+    "scoped",
+    "",
+  ].join("\n"));
+  fs.mkdirSync(path.join(root, ".claude/scripts/blog"), { recursive: true });
+  return { root, config };
+}
+
+test("paths-scoped rules and a small always-loaded set pass DG070-072", (t) => {
+  const { root, config } = alwaysLoadedFixture(t);
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  const codes = report.errors.map((item) => item.code).filter((code) => /^DG07/.test(code));
+  assert.deepEqual(codes, []);
+});
+
+test("DG070 fires when always-loaded lines exceed the budget by one line", (t) => {
+  const { root, config } = alwaysLoadedFixture(t);
+  // CLAUDE.md 6 行 + core 3 行 = 9 行が現状 (wc -l と同じ数え方)。上限を 8 にすると 1 行超過で発火する
+  config.alwaysLoadedInstructions.maxTotalLines = 8;
+  const over = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(over.errors.some((item) => item.code === "DG070" && /合計が 9 行/.test(item.message)));
+  // 上限ちょうど (9) では発火しない = 境界の固定
+  config.alwaysLoadedInstructions.maxTotalLines = 9;
+  const exact = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(!exact.errors.some((item) => item.code === "DG070"));
+  // 入口単体の上限も同じ code (入口は 6 行なので 5 で発火)
+  config.alwaysLoadedInstructions.maxTotalLines = 600;
+  config.alwaysLoadedInstructions.maxEntryLines = 5;
+  const entry = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(entry.errors.some((item) => item.code === "DG070" && item.file === "CLAUDE.md"));
+});
+
+test("DG071 fires when a paths: glob points at a directory that does not exist", (t) => {
+  const { root, config } = alwaysLoadedFixture(t);
+  write(root, ".claude/rules/blog-standards.md", [
+    "---",
+    "paths:",
+    '  - "docs/21/**"',
+    '  - "docs/99_nonexistent/**"',
+    "---",
+    "# blog",
+    "",
+  ].join("\n"));
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  const hit = report.errors.find((item) => item.code === "DG071");
+  assert.ok(hit, "DG071 expected");
+  assert.match(hit.message, /docs\/99_nonexistent/);
+  // 空の paths: (inline) も不正
+  write(root, ".claude/rules/blog-standards.md", "---\npaths: docs/21/**\n---\n# blog\n");
+  const inline = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(inline.errors.some((item) => item.code === "DG071" && /文字列 list/.test(item.message)));
+});
+
+test("DG072 fires when a rule is missing from CLAUDE.md or CLAUDE.md names a missing rule", (t) => {
+  const { root, config } = alwaysLoadedFixture(t);
+  write(root, ".claude/rules/orphan-standards.md", "---\npaths:\n  - \"docs/21/**\"\n---\n# orphan\n");
+  const orphan = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(orphan.errors.some((item) => item.code === "DG072" && /orphan-standards\.md/.test(item.file)));
+  fs.unlinkSync(path.join(root, ".claude/rules/orphan-standards.md"));
+  write(root, "CLAUDE.md", "# project\n\n| `core-judgment.md` | `blog-standards.md` | `ghost-standards.md` |\n");
+  const ghost = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(ghost.errors.some((item) => item.code === "DG072" && /ghost-standards\.md/.test(item.message)));
+});

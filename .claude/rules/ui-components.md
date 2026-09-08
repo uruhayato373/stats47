@@ -1,3 +1,10 @@
+---
+paths:
+  - "apps/web/src/{components,features,app}/**/*.tsx"
+  - "docs/01_技術設計/04_デザインシステム.md"
+  - ".claude/skills/ui/**"
+  - ".claude/agents/{site-ux-manager,ui-*,ranking-ui-manager,theme-ui-manager}.md"
+---
 # UI コンポーネント規約
 
 > デザインシステム全体の正典は `docs/01_技術設計/04_デザインシステム.md`。

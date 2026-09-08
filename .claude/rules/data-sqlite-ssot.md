@@ -1,3 +1,8 @@
+---
+paths:
+  - "packages/database/**"
+  - ".claude/agents/{db-schema-manager,data-ingester,snapshot-exporter}.md"
+---
 # データ管理アーキテクチャ (完全DBレス)
 
 > **⚠️ 2026-05-29 更新: 正典は [`docs/01_技術設計/02_データアーキテクチャ.md`](../../docs/01_技術設計/02_データアーキテクチャ.md)。**

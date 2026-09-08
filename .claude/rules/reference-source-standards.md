@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/{scripts/source-vault,skills/db/process-reference-source,state/source-inventory}/**"
+  - ".claude/config/source-vault.json"
+  - "docs/02_実装計画/**"
+  - ".claude/agents/{area-curator,area-databook-designer,open-data-curator}.md"
+---
 # 参考文献の保存・利用実装規約
 
 stats47 で調査・企画・実装に使う書籍、PDF、白書、報告書その他の参考文献は、原本を private Google Drive に保存し、

@@ -8,6 +8,12 @@
       "AGENTS.md"
     ]
   },
+  "alwaysLoadedInstructions": {
+    "entryFile": "CLAUDE.md",
+    "rulesDir": ".claude/rules",
+    "maxEntryLines": 200,
+    "maxTotalLines": 600
+  },
   "requiredReferences": [
     {
       "file": "CLAUDE.md",

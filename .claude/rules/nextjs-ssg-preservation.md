@@ -1,3 +1,10 @@
+---
+paths:
+  - "apps/web/src/app/**"
+  - "apps/web/src/middleware.ts"
+  - "apps/web/src/features/**/*.tsx"
+  - ".claude/agents/{site-ux-manager,ranking-ui-manager,performance-auditor,snapshot-exporter}.md"
+---
 # Next.js App Router SSG 保全ルール
 
 `apps/web` の Next.js App Router で **Server Components から `cookies()` / `headers()` / `draftMode()` を呼ぶ位置を誤ると、SSG が崩れて Cloudflare Workers 上で 500 を返す**。本ルールはその防止策。

@@ -1,3 +1,11 @@
+---
+paths:
+  - "package.json"
+  - "turbo.json"
+  - "apps/*/package.json"
+  - "apps/web/scripts/{dev-server.ts,r2-dev-gateway.ps1}"
+  - ".claude/agents/{db-schema-manager,data-ingester,r2-publisher,devops-runner}.md"
+---
 # ローカル開発環境
 
 ## モノレポ構成
