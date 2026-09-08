@@ -258,3 +258,24 @@ describe("fetchDbChartDataAction — 地域コードごとの取得経路", () =
     expect(result?.contract.scopeLabel).toBe("47都道府県平均");
   });
 });
+
+describe('構成・単位の誤読防止', () => {
+  beforeEach(() => readStatsValues.mockReset());
+  const refs = [{ metricKey: 'doctor-annual-income', label: 'A' }, { metricKey: 'nurse-annual-income', label: 'B' }];
+  it('異なる年度の最新値を足してドーナツの構成比にしない', async () => {
+    readStatsValues.mockResolvedValueOnce({ rows: [row('13000', '2020', 10)] }).mockResolvedValueOnce({ rows: [row('13000', '2022', 20)] });
+    expect(await fetchDbChartDataAction('donut-chart', { seriesRefs: refs }, '13000')).toBeNull();
+  });
+  it('全内訳が観測された共通年の構成比だけを描く', async () => {
+    readStatsValues.mockResolvedValueOnce({ rows: [row('13000', '2020', 10), row('13000', '2022', 99)] }).mockResolvedValueOnce({ rows: [row('13000', '2020', 20)] });
+    const result = await fetchDbChartDataAction('donut-chart', { seriesRefs: refs }, '13000');
+    expect(result?.contract.year).toBe('2020年度');
+    expect(result?.type === 'donut' && result.data.map((item) => item.value)).toEqual([20, 10]);
+  });
+  it('異なる単位の線は左右の軸を分ける', async () => {
+    readStatsValues.mockResolvedValueOnce(payload('a', 10, '円')).mockResolvedValueOnce(payload('b', 20, '%'));
+    const result = await fetchDbChartDataAction('line-chart', { seriesRefs: refs }, '13000');
+    expect(result?.type === 'line' && result.data.lines.map((line) => line.yAxis)).toEqual(['left', 'right']);
+    expect(result?.type === 'line' && result.data.rightUnit).toBe('%');
+  });
+});

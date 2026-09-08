@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const FISHERY_MARINE_SET: IndicatorSet = {
   "key": "fishery-marine",
   "title": "漁業（水産業）",
-  "description": "都道府県別の漁獲量・養殖収獲量・漁業就業者数・漁業産出額・漁港数をランキングとチャートで比較。北海道が全国漁獲量の約2割を占める一方、半世紀で就業者は7割減・漁獲量はほぼ半減。「捕る漁業」から「育てる漁業」へのシフトを47都道府県のデータで確認できます。",
+  "description": "漁獲・養殖の供給、産出額、担い手の規模を地域別に把握する。",
   "category": "industry",
   "usage": "theme",
   "metrics": [
@@ -18,7 +18,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "marine-fishery-catch",
       "shortLabel": "海面漁獲量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "inland-fishery-catch",
@@ -38,12 +38,12 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "marine-aquaculture-harvest",
       "shortLabel": "海面養殖",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "inland-aquaculture-harvest",
       "shortLabel": "内水面養殖",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "marine-fishery-aquaculture-output-value",
@@ -63,7 +63,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "fishery-workers",
       "shortLabel": "漁業就業者",
-      "role": "primary"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishery-species-catch-scallop",

@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const PORTS_SET: IndicatorSet = {
   "key": "ports",
   "title": "港湾",
-  "description": "都道府県別の港湾取扱貨物量・コンテナ個数・入港船舶・港湾旅客数をランキングとチャートで比較。貿易立国日本の玄関口がどの地域に集中するのか、輸出入貨物の偏在やフェリー・旅客船の地域交通機能を47都道府県のデータで可視化します。",
+  "description": "港湾の貨物・コンテナ・船舶の取扱規模を地域間で比較する。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
@@ -18,12 +18,12 @@ export const PORTS_SET: IndicatorSet = {
     {
       "rankingKey": "port-cargo-export",
       "shortLabel": "輸出貨物量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "port-cargo-import",
       "shortLabel": "輸入貨物量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "port-container-count",

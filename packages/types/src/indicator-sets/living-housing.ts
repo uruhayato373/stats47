@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const LIVING_HOUSING_SET: IndicatorSet = {
   "key": "living-housing",
   "title": "暮らし・住まい",
-  "description": "都道府県別の空き家比率・持ち家比率・世帯構造・人口密度をランキングとチャートで比較。暮らしの地域差を47都道府県のデータで確認できます。",
+  "description": "住宅ストックの余り方・所有形態・住戸の広さと、住む世帯の形を比較する。",
   "category": "lifestyle",
   "usage": "theme",
   "metrics": [
@@ -22,12 +22,12 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     },
     {
       "rankingKey": "floor-area-per-dwelling-owner",
-      "shortLabel": "持ち家延べ面積",
+      "shortLabel": "持ち家延べ面積（1住宅当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "floor-area-per-dwelling-rented",
-      "shortLabel": "借家延べ面積",
+      "shortLabel": "借家延べ面積（1住宅当たり）",
       "role": "secondary"
     },
     {
@@ -38,22 +38,22 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "nuclear-family-households-ratio",
       "shortLabel": "核家族世帯率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "elderly-couple-only-household-ratio",
       "shortLabel": "高齢夫婦世帯",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "single-person-household-old-population-ratio",
-      "shortLabel": "高齢単身世帯率",
+      "shortLabel": "高齢単独世帯（一般世帯に対して）",
       "role": "context"
     },
     {
       "rankingKey": "population-density-per-km2-inhabitable-area",
-      "shortLabel": "人口密度",
-      "role": "secondary"
+      "shortLabel": "人口密度（可住地1km²当たり）",
+      "role": "context"
     },
     {
       "rankingKey": "habitable-area-ratio",
@@ -62,13 +62,13 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     },
     {
       "rankingKey": "densely-inhabited-district-population-density",
-      "shortLabel": "DID人口密度",
+      "shortLabel": "DID人口密度（DID面積1km²当たり）",
       "role": "context"
     },
     {
       "rankingKey": "ratio-never-married-15-plus",
       "shortLabel": "未婚率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "marriages",
@@ -83,7 +83,12 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "single-person-household-ratio",
       "shortLabel": "単独世帯割合",
-      "role": "context"
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "household-ratio-above-minimum-housing-area",
+      "shortLabel": "最低居住面積水準以上の世帯割合",
+      "role": "secondary"
     }
   ],
   "keywords": [

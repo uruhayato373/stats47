@@ -12,6 +12,8 @@ import {
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
 
+import { trackNavClick } from '@/lib/analytics/events';
+
 import { ALL_THEMES } from '../config/all-themes';
 import { isAreaTheme } from '../config/area-theme-slugs';
 import { themeHref } from '../config/theme-urls';
@@ -123,7 +125,14 @@ export function ThemeSwitcher({
         onValueChange={(key) => {
           if (key === currentThemeKey) return;
           const next = options.find((o) => o.themeKey === key);
-          if (next) router.push(next.href);
+          if (next) {
+            trackNavClick({
+              surface: 'theme_switcher',
+              label: key,
+              href: next.href,
+            });
+            router.push(next.href);
+          }
         }}
       >
         <SelectTrigger

@@ -66,31 +66,23 @@ describe("toThemeConfig", () => {
   });
 });
 
-/**
- * population-dynamics の指標カード枚数。
- *
- * ★2026-08-25 のストーリー再編で「結果→自然増減」を担う2指標へ削減した。
- * 下の要因チャートと同じ事実を二度見せず、人口増減率を入口にするため、カタログの role を
- * context に落として実現している。role は生成物 (IndicatorSet) 経由でここに効くため、
- * カタログ編集や再生成の巻き戻しで黙って枚数が戻りうる。ここで枚数と
- * 顔ぶれを固定する。増減させたいときはこのテストを意図的に更新すること。
- */
+/** 人口規模と増減の章を入口にし、要因図と詳細指標はcontextで重複を避ける。 */
 describe("population-dynamics の指標カード", () => {
-  it("role≠context は 2 指標 (人口増減率 / 自然増減率)", () => {
+  it("規模・増減の入口は総人口 / 人口増減率 / 自然増減率", () => {
     const config = toThemeConfig(POPULATION_DYNAMICS_SET);
 
     expect(config.tabIndicators.map((t) => t.rankingKey)).toEqual([
+      "total-population",
       "population-growth-rate",
       "natural-increase-rate",
     ]);
   });
 
-  it("要因チャート・人口構造と重複する 8 指標は context に落ちている", () => {
+  it("要因チャート・人口構造と重複する 7 指標は context に落ちている", () => {
     const config = toThemeConfig(POPULATION_DYNAMICS_SET);
     const shown = new Set(config.tabIndicators.map((t) => t.rankingKey));
 
     for (const key of [
-      "total-population",
       "total-fertility-rate",
       "moving-in-excess-rate",
       "ratio-65-plus",

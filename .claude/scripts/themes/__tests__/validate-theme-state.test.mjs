@@ -118,7 +118,7 @@ test("retire-candidate は measured-low 両輪 (GSC+GA4 56d) + 根拠 2 で成�
         evidenceRefs: [".claude/todo/improvements.md", "56d 実測: imp 23 / pv 12 (measured-low)"],
         metrics: {
           gsc: { status: "measured-low", windowDays: 56, clicks: 0, impressions: 23 },
-          ga4: { status: "measured-low", windowDays: 56, pageViews: 12 },
+          ga4: { status: "measured-low", windowDays: 56, scope: "Japan", pageViews: 12 },
         },
       }),
       theme({ themeKey: "tourism" }),
@@ -180,4 +180,18 @@ test("baseline なし実験と根拠なし verdict 確定を弾く (E3)", (t) =>
   const out = JSON.parse(r.stdout).violations.join("\n");
   assert.match(out, /THEME-EXP-003: baseline 欠落/);
   assert.match(out, /THEME-EXP-004: verdict=effect-full なのに result が無い/);
+});
+
+
+test("国条件が不明な GA4 を統廃合の測定根拠にしない", (t) => {
+  const f = fixture({ portfolio: { schemaVersion: 1, themes: [
+    theme({ lifecycleStatus: "retire-candidate", evidenceRefs: ["evidence-a", "evidence-b"], metrics: {
+      gsc: { status: "measured", windowDays: 56, impressions: 4000, clicks: 100 },
+      ga4: { status: "measured", windowDays: 56, scope: "raw", pageViews: 1000 },
+    } }), theme({ themeKey: "tourism" }),
+  ] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const result = run(f);
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(JSON.parse(result.stdout).violations.join("\n"), /\[P4\]/);
 });

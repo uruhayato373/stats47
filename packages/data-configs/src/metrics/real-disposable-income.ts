@@ -4,7 +4,7 @@ export const realDisposableIncome: MetricConfig = {
   key: 'real-disposable-income',
   title: '実質可処分所得（物価補正後）',
   description:
-    '可処分所得を消費者物価地域差指数で除し100を乗じた実質値。物価の地域差を考慮した実質的な購買力を示す。',
+    '県庁所在市等の勤労者世帯の月間可処分所得を消費者物価地域差指数で除し100を乗じた参考値です。所得と物価指数の地理範囲は同一ではなく、個々の世帯の購買力や時系列の実質成長率を直接示すものではありません。',
   unit: '円',
   category: 'economy',
   source: {

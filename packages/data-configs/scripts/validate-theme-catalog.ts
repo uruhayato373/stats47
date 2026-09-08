@@ -35,6 +35,7 @@ import {
   CATALOG_COMPONENT_TYPES,
   collectThemeMetricContentCoverage,
   validateThemeMetricContentCoverage,
+  validateCatalogSections,
   THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
   type ThemeCatalog,
 } from '../src/theme-catalog';
@@ -562,6 +563,7 @@ function main() {
   const globalComponentKeys = new Map<string, string>(); // componentKey → theme
 
   for (const c of catalogs) {
+    errors.push(...validateCatalogSections(c));
     const metricKeys = new Set(c.metrics.map((m) => m.rankingKey));
     const metricLabels = new Map(
       c.metrics.map((m) => [m.rankingKey, m.shortLabel] as const)
@@ -688,13 +690,13 @@ function main() {
       }
     }
 
-    // primary 指標のカバレッジ (warn: primary は metrics[] 由来の stat-card として
-    //   チャートと独立に描画されるため、チャート未使用でも正常。設計確認用に warn)
+    // 指標カードで読める primary に同じ追加図を要求しない。
+    const keysInGroups = new Set((c.metricGroups ?? []).flatMap((group) => group.rankingKeys));
     for (const m of c.metrics) {
       if (m.role !== 'primary') continue;
-      if (!keysInCharts.has(m.rankingKey)) {
+      if (!keysInCharts.has(m.rankingKey) && !keysInGroups.has(m.rankingKey)) {
         warns.push(
-          `[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" がチャート未使用 (card 描画)`
+          `[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" が指標カード・追加図のいずれにも未配置`
         );
       }
     }

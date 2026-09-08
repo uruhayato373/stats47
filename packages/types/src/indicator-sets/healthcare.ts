@@ -6,89 +6,104 @@ import type { IndicatorSet } from "../indicator-set";
 export const HEALTHCARE_SET: IndicatorSet = {
   "key": "healthcare",
   "title": "医療・健康",
-  "description": "都道府県別の医師数・病院数・病床数・国民医療費をランキングとチャートで比較。医療体制の地域差を47都道府県のデータで確認できます。",
+  "description": "医療資源の供給、入院利用と費用、健康アウトカムの違いを順に把握する。",
   "category": "welfare",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "physicians-in-medical-facilities-per-100k",
-      "shortLabel": "医師数",
+      "shortLabel": "医師数（人口10万人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "nurses-in-medical-facilities-per-100k",
-      "shortLabel": "看護師数",
+      "shortLabel": "看護師・准看護師数（人口10万人当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "general-hospital-count-per-100k",
-      "shortLabel": "病院数",
+      "shortLabel": "一般病院数（人口10万人当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "general-hospital-bed-count-per-100k",
-      "shortLabel": "病床数",
-      "role": "context"
+      "shortLabel": "一般病院病床数（人口10万人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "pharmacy-count-per-100k",
-      "shortLabel": "薬局数",
+      "shortLabel": "薬局数（人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "national-medical-expense-per-person",
-      "shortLabel": "医療費",
+      "shortLabel": "1人当たり国民医療費",
       "role": "secondary"
     },
     {
       "rankingKey": "general-hospital-avg-length-of-stay",
-      "shortLabel": "平均在院日数",
-      "role": "context"
+      "shortLabel": "一般病院の平均在院日数",
+      "role": "secondary"
     },
     {
       "rankingKey": "general-hospital-bed-occupancy-rate",
       "shortLabel": "病床利用率",
-      "role": "context"
-    },
-    {
-      "rankingKey": "deaths-lifestyle-diseases-per-100k",
-      "shortLabel": "生活習慣病死亡",
       "role": "secondary"
     },
     {
+      "rankingKey": "deaths-lifestyle-diseases-per-100k",
+      "shortLabel": "生活習慣病死亡（日本人人口10万人当たり）",
+      "role": "context"
+    },
+    {
       "rankingKey": "deaths-diabetes-per-100k",
-      "shortLabel": "糖尿病死亡",
+      "shortLabel": "糖尿病死亡（日本人人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "deaths-malignant-neoplasms-per-100k",
-      "shortLabel": "悪性新生物死亡",
+      "shortLabel": "悪性新生物死亡（日本人人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "deaths-heart-disease-excl-hypertensive-per-100k",
-      "shortLabel": "心疾患死亡",
+      "shortLabel": "心疾患（高血圧性を除く）死亡（日本人人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "deaths-cerebrovascular-disease-per-100k",
-      "shortLabel": "脳血管疾患死亡",
+      "shortLabel": "脳血管疾患死亡（日本人人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "deaths-hypertensive-diseases-per-100k",
-      "shortLabel": "高血圧性疾患死亡",
+      "shortLabel": "高血圧性疾患死亡（日本人人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "psychiatric-hospital-count-per-100k",
-      "shortLabel": "精神科病院数",
+      "shortLabel": "精神科病院数（人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "treatment-rate-mood-disorder-outpatient",
-      "shortLabel": "気分障害受療率",
+      "shortLabel": "気分障害の外来受療率（人口10万人当たり）",
       "role": "context"
+    },
+    {
+      "rankingKey": "healthy-life-expectancy-male",
+      "shortLabel": "健康寿命（男性）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "healthy-life-expectancy-female",
+      "shortLabel": "健康寿命（女性）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "ambulance-hospital-arrival-time",
+      "shortLabel": "救急搬送の病院収容所要時間",
+      "role": "secondary"
     }
   ],
   "keywords": [

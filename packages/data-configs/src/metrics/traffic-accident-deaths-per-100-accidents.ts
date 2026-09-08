@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const trafficAccidentDeathsPer100Accidents: MetricConfig = {
   "key": "traffic-accident-deaths-per-100-accidents",
   "title": "交通事故死者数",
-  "subtitle": "事故100件当たり",
+  "subtitle": "交通事故100件当たり",
   "unit": "人",
   "category": "safetyenvironment",
+  "description": "交通事故死者数を交通事故発生件数で除し、交通事故100件当たりに換算した値。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -66,25 +67,9 @@ export const trafficAccidentDeathsPer100Accidents: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "traffic-accident-deaths-per-100-accidents",
-  "seoTitle": "交通事故死者数ランキング都道府県【2024年】｜1位秋田県（3.16人）",
-  "seoDescription": "2024年の交通事故死者数の都道府県別ランキング。1位秋田県（3.16人）、最下位福岡県（0.49人）で6.4倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "交通事故死者数（交通事故100件当たり）ランキング都道府県",
+  "seoDescription": "交通事故100件当たりの交通事故死者数を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };

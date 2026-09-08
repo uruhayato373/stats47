@@ -6,6 +6,7 @@ export const trafficAccidentInjuriesPer100k: MetricConfig = {
   "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "safetyenvironment",
+  "description": "交通事故統計の交通事故負傷者数を総人口で除し、人口10万人当たりに換算した値。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -66,25 +67,9 @@ export const trafficAccidentInjuriesPer100k: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "traffic-accident-injuries",
-  "seoTitle": "交通事故負傷者数ランキング都道府県【2024年】｜1位静岡県（620.4人）",
-  "seoDescription": "2024年の交通事故負傷者数の都道府県別ランキング。1位静岡県（620.4人）、最下位島根県（121.7人）で5.1倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "交通事故負傷者数（人口10万人当たり）ランキング都道府県",
+  "seoDescription": "人口10万人当たりの交通事故負傷者数を都道府県別に比較。総数とは区別し、人口規模を揃えて地域差と経年変化を地図やグラフで確認できます。",
   "isActive": true,
 };

@@ -8,6 +8,7 @@
 import type { ThemeCatalog } from "./types";
 import { AGING_SOCIETY_CATALOG } from "./aging-society";
 import { CONSUMER_PRICES_CATALOG } from "./consumer-prices";
+import { CLIMATE_CATALOG } from "./climate";
 import { EDUCATION_CULTURE_CATALOG } from "./education-culture";
 import { FISHERY_MARINE_CATALOG } from "./fishery-marine";
 import { FOREIGN_RESIDENTS_CATALOG } from "./foreign-residents";
@@ -35,11 +36,13 @@ export * from "./stat-series-ref";
 export * from "./chart-dependencies";
 export * from "./faq-markdown";
 export * from "./theme-metric-content";
+export * from "./catalog-sections";
 
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */
 export const THEME_CATALOGS: Record<string, ThemeCatalog> = {
   "aging-society": AGING_SOCIETY_CATALOG,
   "consumer-prices": CONSUMER_PRICES_CATALOG,
+  "climate": CLIMATE_CATALOG,
   "education-culture": EDUCATION_CULTURE_CATALOG,
   "fishery-marine": FISHERY_MARINE_CATALOG,
   "foreign-residents": FOREIGN_RESIDENTS_CATALOG,

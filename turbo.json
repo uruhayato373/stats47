@@ -14,7 +14,8 @@
     "R2_DEV_GATEWAY",
     "R2_DEV_GATEWAY_CACHE_SECONDS",
     "R2_DEV_GATEWAY_PORT",
-    "R2_DEV_GATEWAY_UPSTREAM"
+    "R2_DEV_GATEWAY_UPSTREAM",
+    "WEB_DEV_HOST"
   ],
   "tasks": {
     "build": {

@@ -2,7 +2,8 @@ import type { MetricConfig } from "../types";
 
 export const privateRentalHousingRentPer33m2: MetricConfig = {
   "key": "private-rental-housing-rent-per-3-3m2",
-  "title": "民営賃貸住宅の家賃",
+  "title": "民営家賃（3.3m²当たり月額）",
+  "description": "県庁所在市等で調査した民営借家の3.3m²当たり1か月の家賃です。都道府県全域の平均家賃や世帯が実際に支払った住居費とは対象が異なります。",
   "unit": "円",
   "category": "construction",
   "source": {
@@ -74,25 +75,9 @@ export const privateRentalHousingRentPer33m2: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
-  "seoTitle": "民営賃貸住宅の家賃ランキング都道府県【2024年】｜1位東京都（9,736円）",
-  "seoDescription": "2024年の民営賃貸住宅の家賃の都道府県別ランキング。1位東京都（9,736円）、最下位和歌山県（3,442円）で2.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "民営家賃（3.3m²当たり月額）｜都道府県比較",
+  "seoDescription": "民営家賃（3.3m²当たり月額）を都道府県別に比較。指標の対象地域・分母・単位・年次を確認し、表とグラフで地域差を把握できます。",
   "isActive": true,
 };

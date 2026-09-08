@@ -121,9 +121,9 @@ function validatePortfolio(pf) {
     // P4: merge/retire は GSC/GA4 両方が「集計済み」(measured | measured-low) かつ 56 日以上が必須
     if (HARD_CANDIDATES.has(t.lifecycleStatus)) {
       const aggregated = (m) => m && (m.status === "measured" || m.status === "measured-low") && m.windowDays >= 56;
-      if (!aggregated(t.metrics?.gsc) || !aggregated(t.metrics?.ga4)) {
+      if (!aggregated(t.metrics?.gsc) || !aggregated(t.metrics?.ga4) || t.metrics?.ga4?.scope !== "Japan") {
         v("P4", `${k}: ${t.lifecycleStatus} には GSC/GA4 両方の集計済み (measured|measured-low) かつ windowDays>=56 が必須` +
-          ` (未集計=データ不足を需要不足と混同した廃止判定の禁止)`);
+          `。GA4はscope=Japan必須 (未集計=データ不足を需要不足と混同した廃止判定の禁止)`);
       }
     }
 

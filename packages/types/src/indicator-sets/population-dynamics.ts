@@ -6,14 +6,14 @@ import type { IndicatorSet } from "../indicator-set";
 export const POPULATION_DYNAMICS_SET: IndicatorSet = {
   "key": "population-dynamics",
   "title": "人口動態",
-  "description": "都道府県の人口増減を、増減率、出生・死亡、転入・転出、年齢構成の順に整理。結果と要因を分けて47都道府県で比較できます。",
+  "description": "人口はどれだけ変わり、その変化は出生・死亡と転入・転出のどちらで生じているかを把握する。",
   "category": "demographics",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "total-population",
       "shortLabel": "総人口",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "total-fertility-rate",
@@ -62,7 +62,7 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "population-density-per-km2-inhabitable-area",
-      "shortLabel": "人口密度",
+      "shortLabel": "人口密度（可住地1km²当たり）",
       "role": "context"
     },
     {

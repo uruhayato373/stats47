@@ -3,15 +3,14 @@ import { describe, expect, it } from 'vitest';
 import { POPULATION_DYNAMICS_CATALOG } from '../population-dynamics';
 
 describe('人口動態テーマの可視化構成', () => {
-  it('結果と自然増減を同じ単位の主要カードで比較する', () => {
-    expect(POPULATION_DYNAMICS_CATALOG.metricGroups).toEqual([
-      {
-        key: 'population-change',
-        title: '人口増減の結果と自然増減',
-        rankingKeys: ['population-growth-rate', 'natural-increase-rate'],
-        defaultCheckedKeys: ['population-growth-rate', 'natural-increase-rate'],
-      },
-    ]);
+  it('人口の規模と増減を見せ、古い社会増減を最新の主要指標に混ぜない', () => {
+    const grouped = POPULATION_DYNAMICS_CATALOG.metricGroups!.flatMap(
+      (group) => group.rankingKeys
+    );
+    expect(grouped).toContain('population-growth-rate');
+    expect(grouped).toContain('natural-increase-rate');
+    expect(grouped).toContain('total-population');
+    expect(grouped).not.toContain('social-increase-rate');
 
     const roles = new Map(
       POPULATION_DYNAMICS_CATALOG.metrics.map((metric) => [
@@ -21,10 +20,10 @@ describe('人口動態テーマの可視化構成', () => {
     );
     expect(roles.get('population-growth-rate')).toBe('primary');
     expect(roles.get('natural-increase-rate')).toBe('secondary');
-    expect(roles.get('total-population')).toBe('context');
+    expect(roles.get('total-population')).toBe('secondary');
   });
 
-  it('自然増減、社会増減、人口構造の順で重複なく表示する', () => {
+  it('人口変化の実数を同じ章へまとめ、年齢構造の重複図を外す', () => {
     const visualCharts = POPULATION_DYNAMICS_CATALOG.charts.filter(
       (chart) => chart.componentType !== 'markdown-section'
     );
@@ -32,11 +31,9 @@ describe('人口動態テーマの可視化構成', () => {
     expect(visualCharts.map((chart) => chart.componentKey)).toEqual([
       'birth-death-count-trend',
       'theme-pop-migration-trend',
-      'theme-age-composition',
-      'theme-population-pyramid',
     ]);
     expect(visualCharts.map((chart) => chart.sortOrder)).toEqual([
-      10, 20, 30, 40,
+      10, 20,
     ]);
     expect(
       visualCharts.find(
@@ -46,6 +43,9 @@ describe('人口動態テーマの可視化構成', () => {
     expect(
       visualCharts.every((chart) => chart.sourceLink?.startsWith('https://'))
     ).toBe(true);
+    expect(POPULATION_DYNAMICS_CATALOG.sections?.find(
+      (section) => section.key === 'natural-social-change'
+    )?.chartKeys).toEqual(['birth-death-count-trend', 'theme-pop-migration-trend']);
   });
 
   it('出生数・死亡数を率として誤表示しない', () => {

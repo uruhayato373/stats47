@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const LABOR_WAGES_SET: IndicatorSet = {
   "key": "labor-wages",
   "title": "労働・賃金",
-  "description": "都道府県別の最低賃金・初任給・有効求人倍率・失業率・男女賃金格差をランキングとチャートで比較。労働市場の地域差を47都道府県のデータで確認できます。",
+  "description": "都道府県別の最低賃金、初任給、給与月額、男女の給与水準差、パート時給を、対象者と時間単位を分けて比較します。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
@@ -23,7 +23,7 @@ export const LABOR_WAGES_SET: IndicatorSet = {
     {
       "rankingKey": "starting-salary-highschool",
       "shortLabel": "高卒初任給",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "scheduled-salary-male",
@@ -32,8 +32,8 @@ export const LABOR_WAGES_SET: IndicatorSet = {
     },
     {
       "rankingKey": "nurse-salary",
-      "shortLabel": "看護師年収",
-      "role": "secondary"
+      "shortLabel": "看護師の所定内給与月額",
+      "role": "context"
     },
     {
       "rankingKey": "gender-wage-gap",
@@ -42,27 +42,27 @@ export const LABOR_WAGES_SET: IndicatorSet = {
     },
     {
       "rankingKey": "male-part-time-hourly-wage",
-      "shortLabel": "パート時給(男)",
-      "role": "context"
+      "shortLabel": "パート時給（男性）",
+      "role": "secondary"
     },
     {
       "rankingKey": "female-part-time-hourly-wage",
       "shortLabel": "パート時給(女)",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "unemployment-rate",
       "shortLabel": "失業率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "employment-rate",
-      "shortLabel": "就業率",
+      "shortLabel": "就職率（公共職業安定所）",
       "role": "context"
     },
     {
@@ -73,7 +73,7 @@ export const LABOR_WAGES_SET: IndicatorSet = {
     {
       "rankingKey": "telework-rate",
       "shortLabel": "テレワーク率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "side-job-rate",
@@ -82,13 +82,23 @@ export const LABOR_WAGES_SET: IndicatorSet = {
     },
     {
       "rankingKey": "monthly-average-actual-working-hours-male",
-      "shortLabel": "月間労働時間(男)",
+      "shortLabel": "月間平均実労働時間（男性）",
       "role": "context"
     },
     {
       "rankingKey": "turnover-rate",
       "shortLabel": "離職率",
       "role": "context"
+    },
+    {
+      "rankingKey": "regular-cash-salary-male",
+      "shortLabel": "現金給与月額（男）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "regular-cash-salary-female",
+      "shortLabel": "現金給与月額（女）",
+      "role": "secondary"
     }
   ],
   "keywords": [

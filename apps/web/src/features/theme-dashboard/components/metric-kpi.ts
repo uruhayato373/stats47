@@ -14,6 +14,8 @@ export interface MetricKpi {
   metricKey: string;
   title: string;
   unit: string;
+  /** 実際に表示する観測値の年次。 */
+  yearName?: string;
   /** 都道府県選択時のみ、その県の実値。未選択時は null (47県平均や全国値を代入しない)。 */
   value: number | null;
   /** 都道府県選択時のみ、その県の全国順位。未選択時は null。 */

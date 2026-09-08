@@ -4,6 +4,8 @@ import path from "node:path";
 import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 import { describe, expect, it } from "vitest";
 
+import { validateLocalFinanceSections } from '@/features/local-finance-dashboard/lib/finance-sections';
+
 /**
  * `metricGroups` を定義したテーマが、それを実際に描くページ経路に乗っているかの検査。
  *
@@ -46,5 +48,22 @@ describe("metricGroups の到達性", () => {
 
   it("local-finance が bespoke ページとして検出できている (検査の前提の固定)", () => {
     expect(bespokeThemeSlugs()).toContain("local-finance");
+  });
+
+  it('地方財政に未使用の図を数えず、実際の専用ブロックと章が一致する', () => {
+    const catalog = THEME_CATALOGS['local-finance'];
+    expect(catalog.charts).toEqual([]);
+    expect(validateLocalFinanceSections(catalog.sections ?? [])).toEqual([]);
+  });
+
+  it('専用ブロックの配置漏れ・未知キー・未使用の汎用図を検出する', () => {
+    const sections = structuredClone(THEME_CATALOGS['local-finance'].sections!);
+    sections[0].embeddedSectionKeys = ['unknown'];
+    sections[0].chartKeys = ['unused-chart'];
+    expect(validateLocalFinanceSections(sections)).toEqual(expect.arrayContaining([
+      expect.stringContaining('finance-overview'),
+      expect.stringContaining('unknown'),
+      expect.stringContaining('chartKeys'),
+    ]));
   });
 });

@@ -4,6 +4,7 @@ export const maximumTemperature: MetricConfig = {
   "key": "maximum-temperature",
   "title": "最高気温",
   "subtitle": "日最高気温の月平均の最高値",
+  "description": "各都道府県の代表観測地点における、日最高気温の月平均値のうち年間で最も高い値です。観測史上の最高気温や県全域の平均気温ではありません。",
   "unit": "℃",
   "category": "landweather",
   "source": {
@@ -69,7 +70,7 @@ export const maximumTemperature: MetricConfig = {
       2024,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateOranges",
     "colorSchemeType": "sequential",
@@ -80,23 +81,7 @@ export const maximumTemperature: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "℃/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "℃/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "最高気温ランキング都道府県【2024年】｜1位熊本県（36.2℃）",
   "seoDescription": "2024年の最高気温の都道府県別ランキング。1位熊本県（36.2℃）、最下位北海道（28.4℃）で1.3倍の格差。地図やグラフで47都道府県を比較。",

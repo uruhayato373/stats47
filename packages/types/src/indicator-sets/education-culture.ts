@@ -6,44 +6,44 @@ import type { IndicatorSet } from "../indicator-set";
 export const EDUCATION_CULTURE_SET: IndicatorSet = {
   "key": "education-culture",
   "title": "教育・文化",
-  "description": "都道府県別の小学校数・中学校数・高等学校数・図書館数・公民館数をランキングとチャートで比較。教育・文化施設の地域差を47都道府県のデータで確認できます。",
+  "description": "学校・高等教育への進路・文化施設を分け、地域の学ぶ基盤を比較する。",
   "category": "education",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "library-count-per-million",
-      "shortLabel": "図書館",
+      "shortLabel": "図書館数（人口100万人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "elementary-school-count-per-100km2-habitable",
-      "shortLabel": "小学校",
-      "role": "secondary"
+      "shortLabel": "小学校数（可住地100km²当たり）",
+      "role": "primary"
     },
     {
       "rankingKey": "junior-high-school-count-per-100km2-habitable",
-      "shortLabel": "中学校",
+      "shortLabel": "中学校数（可住地100km²当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "high-school-count-per-100km2-habitable",
-      "shortLabel": "高等学校",
+      "shortLabel": "高等学校数（可住地100km²当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "public-hall-count-per-million",
-      "shortLabel": "公民館",
+      "shortLabel": "公民館数（人口100万人当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "final-education-university-graduate-school-ratio",
-      "shortLabel": "大学・大学院卒",
+      "shortLabel": "大学・大学院卒割合（卒業者総数中）",
       "role": "context"
     },
     {
       "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
-      "shortLabel": "県内大学進学率",
-      "role": "context"
+      "shortLabel": "県内大学入学割合（同県出身入学者中）",
+      "role": "primary"
     },
     {
       "rankingKey": "university-count",
@@ -69,6 +69,16 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "junior-college-count",
       "shortLabel": "短期大学数",
       "role": "context"
+    },
+    {
+      "rankingKey": "elementary-school-students-per-teacher",
+      "shortLabel": "教員1人当たり小学校児童数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-theater",
+      "shortLabel": "演芸・演劇・舞踊鑑賞の行動者率（10歳以上）",
+      "role": "secondary"
     }
   ],
   "keywords": [

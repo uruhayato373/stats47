@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const intellectualCrimePer100k: MetricConfig = {
   "key": "intellectual-crime-per-100k",
   "title": "知能犯認知件数",
-  "description": "詐欺・横領・偽造・汚職・背任の認知件数。人口10万人当たり。",
+  "description": "犯罪統計で知能犯に分類される事件を警察が認知した年間総件数。",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

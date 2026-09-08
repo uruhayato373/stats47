@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-05",
+  "generatedAt": "2026-09-08",
   "themes": [
     {
       "themeKey": "aging-society",
@@ -10,39 +10,50 @@
       "reviewGate": "proposal-ready",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md",
       "latestDataYear": "2024",
-      "primaryMetricCount": 1,
-      "secondaryMetricCount": 6,
-      "contextMetricCount": 3,
-      "selectionMissingCount": 7,
-      "chartCount": 15,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "primaryMetricCount": 2,
+      "secondaryMetricCount": 4,
+      "contextMetricCount": 18,
+      "selectionMissingCount": 0,
+      "chartCount": 6,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 1,
-          "impressions": 107
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 16,
+          "impressions": 1100,
+          "ctr": 0.0145,
+          "avgPosition": 8.56
         },
         "ga4": {
           "status": "measured",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 100,
-          "activeUsersLast28d": 22,
-          "engagementRatePvWeighted": 0.5809,
-          "avgSessionDurationSecPvWeighted": 158.1
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 138,
+          "activeUsersLast28d": 39,
+          "engagementRatePvWeighted": 0.6696,
+          "avgSessionDurationSecPvWeighted": 142
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -55,7 +66,17 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md"
       ],
       "dataQuality": {
-        "keysChecked": 10,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 24,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
+          "social-increase-rate",
+          "household-ratio-with-65plus",
+          "single-person-household-old-population-ratio",
+          "elderly-couple-only-household-ratio",
+          "volunteer-activity-annual-participation-rate-15plus"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -63,45 +84,54 @@
     },
     {
       "themeKey": "climate",
-      "catalogStatus": "legacy",
+      "catalogStatus": "catalog",
       "lifecycleStatus": "improve",
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-station-normal-and-observation-method-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-climate.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 2,
-      "secondaryMetricCount": 3,
-      "contextMetricCount": 3,
-      "selectionMissingCount": null,
-      "chartCount": null,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 2,
+      "contextMetricCount": 4,
+      "selectionMissingCount": 0,
+      "chartCount": 1,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 0,
-          "impressions": 22
+          "impressions": 14
         },
         "ga4": {
           "status": "measured",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 126,
-          "activeUsersLast28d": 42,
-          "engagementRatePvWeighted": 0.6897,
-          "avgSessionDurationSecPvWeighted": 127.1
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 124,
+          "activeUsersLast28d": 15,
+          "engagementRatePvWeighted": 0.6426,
+          "avgSessionDurationSecPvWeighted": 121.2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -114,7 +144,14 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-climate.md"
       ],
       "dataQuality": {
+        "observedAt": "2026-09-08T11:59:13.559Z",
         "keysChecked": 8,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "annual-clear-days",
+          "annual-snow-days"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 11
@@ -131,33 +168,51 @@
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 7,
-      "selectionMissingCount": 5,
-      "chartCount": 6,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "selectionMissingCount": 0,
+      "chartCount": 4,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 0,
-          "impressions": 43
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 1,
+          "impressions": 91
         },
         "ga4": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 69
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 113,
+          "activeUsersLast28d": 24,
+          "engagementRatePvWeighted": 0.6966,
+          "avgSessionDurationSecPvWeighted": 71.1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "measured",
+          "windowDays": 56,
+          "scope": "Japan",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ],
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "eventCount": 6
         }
       },
       "contentCoverage": {
@@ -170,7 +225,11 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-consumer-prices.md"
       ],
       "dataQuality": {
+        "observedAt": "2026-09-08T11:59:13.559Z",
         "keysChecked": 12,
+        "oldestLatestDataYear": "2024",
+        "ageReviewKeys": [],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -184,36 +243,45 @@
       "reviewGate": "ready-after-source-and-denominator-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-education-culture.md",
       "latestDataYear": "2024",
-      "primaryMetricCount": 1,
-      "secondaryMetricCount": 4,
-      "contextMetricCount": 0,
-      "selectionMissingCount": 5,
-      "chartCount": 5,
-      "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "primaryMetricCount": 3,
+      "secondaryMetricCount": 5,
+      "contextMetricCount": 6,
+      "selectionMissingCount": 0,
+      "chartCount": 2,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 0,
-          "impressions": 8
+          "impressions": 26
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 47
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 41
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -227,7 +295,16 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#education-culture-split--parent-hub候補"
       ],
       "dataQuality": {
-        "keysChecked": 5,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 14,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "library-count-per-million",
+          "public-hall-count-per-million",
+          "final-education-university-graduate-school-ratio",
+          "hobby-participation-rate-theater"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -240,40 +317,46 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-scope-series-and-coverage-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-fishery-marine.md",
-      "latestDataYear": "2023",
-      "primaryMetricCount": 3,
-      "secondaryMetricCount": 10,
-      "contextMetricCount": 11,
-      "selectionMissingCount": 13,
-      "chartCount": 6,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "latestDataYear": "2026",
+      "primaryMetricCount": 2,
+      "secondaryMetricCount": 5,
+      "contextMetricCount": 16,
+      "selectionMissingCount": 0,
+      "chartCount": 5,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 2,
-          "impressions": 147
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 3,
+          "impressions": 123
         },
         "ga4": {
-          "status": "measured",
+          "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 134,
-          "activeUsersLast28d": 44,
-          "engagementRatePvWeighted": 0.6306,
-          "avgSessionDurationSecPvWeighted": 343
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 99
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -286,7 +369,25 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-fishery-marine.md"
       ],
       "dataQuality": {
-        "keysChecked": 24,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 23,
+        "oldestLatestDataYear": "2015",
+        "ageReviewKeys": [
+          "fishery-output-value",
+          "fishery-species-catch-scallop",
+          "fishery-species-catch-japanese-squid",
+          "fishery-species-catch-tuna",
+          "fishery-species-catch-bonito",
+          "fishery-species-catch-mackerel",
+          "fishery-species-catch-pacific-saury",
+          "fishery-species-catch-yellowtail",
+          "fishery-species-catch-sardine",
+          "fishery-species-catch-pollock",
+          "fishery-species-catch-kelp",
+          "fishery-species-catch-snow-crab",
+          "fishery-species-catch-sea-bream"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 3
@@ -301,35 +402,31 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 4,
-      "contextMetricCount": 5,
-      "selectionMissingCount": 5,
-      "chartCount": 3,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 2,
+      "contextMetricCount": 7,
+      "selectionMissingCount": 0,
+      "chartCount": 2,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W27",
-            "2026-W31"
-          ],
-          "clicks": 0,
-          "impressions": 2
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "search-console",
+          "reason": "non-overlapping reports or page rows missing"
         },
         "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W27",
-            "2026-W31"
-          ],
-          "pageViews": 24
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "non-overlapping reports or page rows missing"
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -342,7 +439,20 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md"
       ],
       "dataQuality": {
+        "observedAt": "2026-09-08T11:59:13.559Z",
         "keysChecked": 10,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "foreign-resident-count-per-100k",
+          "foreign-resident-count",
+          "foreign-resident-count-china-per-100k",
+          "foreign-resident-count-china",
+          "foreign-resident-count-korea-per-100k",
+          "foreign-resident-count-korea",
+          "foreign-resident-count-usa-per-100k",
+          "foreign-resident-count-usa"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -355,40 +465,52 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md",
-      "latestDataYear": "2023",
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 5,
-      "contextMetricCount": 7,
-      "selectionMissingCount": 6,
-      "chartCount": 8,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 9,
+      "contextMetricCount": 9,
+      "selectionMissingCount": 0,
+      "chartCount": 6,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 0,
-          "impressions": 14
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 1,
+          "impressions": 88
         },
         "ga4": {
-          "status": "measured",
+          "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 100,
-          "activeUsersLast28d": 10,
-          "engagementRatePvWeighted": 0.7455,
-          "avgSessionDurationSecPvWeighted": 183.2
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 61
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "measured",
+          "windowDays": 56,
+          "scope": "Japan",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ],
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "eventCount": 8
         }
       },
       "contentCoverage": {
@@ -401,10 +523,17 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md"
       ],
       "dataQuality": {
-        "keysChecked": 13,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 19,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
+          "healthy-life-expectancy-male",
+          "healthy-life-expectancy-female"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
-        "latestYearPrefCoverageMin": 44
+        "latestYearPrefCoverageMin": 47
       }
     },
     {
@@ -415,36 +544,45 @@
       "reviewGate": "ready-after-definition-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md",
       "latestDataYear": "2024",
-      "primaryMetricCount": 1,
-      "secondaryMetricCount": 4,
-      "contextMetricCount": 3,
-      "selectionMissingCount": 5,
-      "chartCount": 6,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "primaryMetricCount": 2,
+      "secondaryMetricCount": 6,
+      "contextMetricCount": 2,
+      "selectionMissingCount": 0,
+      "chartCount": 4,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 1,
-          "impressions": 13
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 0,
+          "impressions": 20
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 27
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 15
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -457,7 +595,15 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md"
       ],
       "dataQuality": {
-        "keysChecked": 8,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 10,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "unemployment-rate",
+          "employment-rate",
+          "day-time-population-ratio"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -472,35 +618,44 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 6,
-      "contextMetricCount": 9,
-      "selectionMissingCount": 7,
-      "chartCount": 7,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 7,
+      "contextMetricCount": 10,
+      "selectionMissingCount": 0,
+      "chartCount": 3,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 0,
-          "impressions": 15
+          "impressions": 22
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 41
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 63
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -513,7 +668,15 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md"
       ],
       "dataQuality": {
-        "keysChecked": 16,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 18,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "unemployment-rate",
+          "employment-rate",
+          "employed-people-ratio"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -528,52 +691,71 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 5,
-      "contextMetricCount": 7,
-      "selectionMissingCount": 6,
-      "chartCount": 9,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 6,
+      "contextMetricCount": 9,
+      "selectionMissingCount": 0,
+      "chartCount": 6,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 2,
-          "impressions": 15
+          "impressions": 11
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 87
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 60
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "gaps",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md"
       ],
       "dataQuality": {
-        "keysChecked": 13,
-        "missingKeys": 1,
-        "missingKeyList": [
-          "housing-floor-area"
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 16,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "households",
+          "nuclear-family-households-ratio",
+          "elderly-couple-only-household-ratio",
+          "single-person-household-old-population-ratio",
+          "densely-inhabited-district-population-density",
+          "ratio-never-married-15-plus",
+          "single-person-household-ratio"
         ],
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
       }
     },
@@ -587,34 +769,43 @@
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
-      "contextMetricCount": 0,
-      "selectionMissingCount": 6,
-      "chartCount": 7,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "contextMetricCount": 6,
+      "selectionMissingCount": 0,
+      "chartCount": 4,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 0,
-          "impressions": 12
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 3,
+          "impressions": 112
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 47
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 41
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -627,7 +818,18 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-local-economy.md"
       ],
       "dataQuality": {
-        "keysChecked": 6,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 12,
+        "oldestLatestDataYear": "2014",
+        "ageReviewKeys": [
+          "per-capita-prefectural-income-h27",
+          "unemployment-rate",
+          "employed-people-ratio-primary",
+          "employed-people-ratio-secondary",
+          "employed-people-ratio-tertiary",
+          "number-of-establishments-economic-census-basic-survey"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -641,39 +843,48 @@
       "reviewGate": "ready-after-scope-composition-and-threshold-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-local-finance.md",
       "latestDataYear": "2025",
-      "primaryMetricCount": 1,
-      "secondaryMetricCount": 17,
-      "contextMetricCount": 0,
-      "selectionMissingCount": 18,
-      "chartCount": 13,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "primaryMetricCount": 2,
+      "secondaryMetricCount": 6,
+      "contextMetricCount": 12,
+      "selectionMissingCount": 0,
+      "chartCount": 5,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 0,
-          "impressions": 32
+          "impressions": 43
         },
         "ga4": {
           "status": "measured",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 298,
-          "activeUsersLast28d": 117,
-          "engagementRatePvWeighted": 0.3844,
-          "avgSessionDurationSecPvWeighted": 58.7
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 425,
+          "activeUsersLast28d": 40,
+          "engagementRatePvWeighted": 0.7824,
+          "avgSessionDurationSecPvWeighted": 190.6
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -689,63 +900,11 @@
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv"
       ],
       "dataQuality": {
-        "keysChecked": 18,
-        "missingKeys": 0,
-        "missingKeyList": [],
-        "latestYearPrefCoverageMin": 47
-      }
-    },
-    {
-      "themeKey": "local-finance-city",
-      "catalogStatus": "legacy",
-      "lifecycleStatus": "improve",
-      "reviewStatus": "reviewed",
-      "reviewGate": "blocked-until-fiscal-entity-scope-and-latest-year-audit",
-      "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-local-finance-city.md",
-      "latestDataYear": "2024",
-      "primaryMetricCount": 1,
-      "secondaryMetricCount": 5,
-      "contextMetricCount": 0,
-      "selectionMissingCount": null,
-      "chartCount": null,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
-      "metrics": {
-        "gsc": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W27",
-            "2026-W31"
-          ],
-          "clicks": 0,
-          "impressions": 0
-        },
-        "ga4": {
-          "status": "measured-low",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W27",
-            "2026-W31"
-          ],
-          "pageViews": 2
-        },
-        "internalNav": {
-          "status": "not-instrumented"
-        }
-      },
-      "contentCoverage": {
-        "relatedArticles": null
-      },
-      "dataQualityStatus": "ok",
-      "currentHypothesis": null,
-      "nextReviewAt": "2026-10-01",
-      "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-local-finance-city.md"
-      ],
-      "dataQuality": {
-        "keysChecked": 6,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 20,
+        "oldestLatestDataYear": "2022",
+        "ageReviewKeys": [],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -760,35 +919,44 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-manufacturing.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 5,
-      "contextMetricCount": 3,
-      "selectionMissingCount": 6,
-      "chartCount": 3,
-      "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 4,
+      "contextMetricCount": 4,
+      "selectionMissingCount": 0,
+      "chartCount": 5,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 2,
-          "impressions": 18
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 1,
+          "impressions": 38
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 44
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 43
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -801,7 +969,13 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-manufacturing.md"
       ],
       "dataQuality": {
+        "observedAt": "2026-09-08T11:59:13.559Z",
         "keysChecked": 9,
+        "oldestLatestDataYear": "2015",
+        "ageReviewKeys": [
+          "industrial-water-usage"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -816,35 +990,44 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md",
       "latestDataYear": "2022",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 10,
-      "contextMetricCount": 28,
-      "selectionMissingCount": 11,
+      "secondaryMetricCount": 7,
+      "contextMetricCount": 31,
+      "selectionMissingCount": 0,
       "chartCount": 5,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 0,
-          "impressions": 2
+          "impressions": 3
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 25
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 18
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -857,7 +1040,11 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md"
       ],
       "dataQuality": {
+        "observedAt": "2026-09-08T11:59:13.559Z",
         "keysChecked": 39,
+        "oldestLatestDataYear": "2022",
+        "ageReviewKeys": [],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 18
@@ -872,40 +1059,49 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 3,
-      "contextMetricCount": 8,
-      "selectionMissingCount": 3,
-      "chartCount": 10,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 2,
+      "contextMetricCount": 13,
+      "selectionMissingCount": 0,
+      "chartCount": 4,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 5,
-          "impressions": 306,
-          "ctr": 0.0163,
-          "avgPosition": 19.82
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 10,
+          "impressions": 895,
+          "ctr": 0.0112,
+          "avgPosition": 14.83
         },
         "ga4": {
           "status": "measured",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 160,
-          "activeUsersLast28d": 14,
-          "engagementRatePvWeighted": 0.6032,
-          "avgSessionDurationSecPvWeighted": 83.3
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 112,
+          "activeUsersLast28d": 39,
+          "engagementRatePvWeighted": 0.6868,
+          "avgSessionDurationSecPvWeighted": 24.2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -918,7 +1114,14 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md"
       ],
       "dataQuality": {
-        "keysChecked": 12,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 16,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
+          "social-increase-rate",
+          "day-time-population-ratio"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -932,36 +1135,45 @@
       "reviewGate": "ready-after-table-dimension-scope-and-unit-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-ports.md",
       "latestDataYear": "2023",
-      "primaryMetricCount": 3,
-      "secondaryMetricCount": 5,
-      "contextMetricCount": 1,
-      "selectionMissingCount": 8,
-      "chartCount": 3,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "primaryMetricCount": 2,
+      "secondaryMetricCount": 3,
+      "contextMetricCount": 3,
+      "selectionMissingCount": 0,
+      "chartCount": 1,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 0,
-          "impressions": 1
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 1,
+          "impressions": 16
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 22
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 3
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -974,10 +1186,14 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-ports.md"
       ],
       "dataQuality": {
-        "keysChecked": 9,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 8,
+        "oldestLatestDataYear": "2023",
+        "ageReviewKeys": [],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
-        "latestYearPrefCoverageMin": 26
+        "latestYearPrefCoverageMin": 39
       }
     },
     {
@@ -988,36 +1204,45 @@
       "reviewGate": "ready-after-geography-coverage-and-series-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-railway.md",
       "latestDataYear": "2024",
-      "primaryMetricCount": 2,
-      "secondaryMetricCount": 2,
+      "primaryMetricCount": 1,
+      "secondaryMetricCount": 3,
       "contextMetricCount": 1,
-      "selectionMissingCount": 4,
-      "chartCount": 2,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "selectionMissingCount": 0,
+      "chartCount": 3,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 1,
-          "impressions": 22
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 2,
+          "impressions": 37
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 55
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 47
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -1030,7 +1255,11 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-railway.md"
       ],
       "dataQuality": {
+        "observedAt": "2026-09-08T11:59:13.559Z",
         "keysChecked": 5,
+        "oldestLatestDataYear": "2023",
+        "ageReviewKeys": [],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -1045,35 +1274,44 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 2,
-      "secondaryMetricCount": 3,
-      "contextMetricCount": 6,
-      "selectionMissingCount": 5,
-      "chartCount": 4,
-      "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 2,
+      "contextMetricCount": 8,
+      "selectionMissingCount": 0,
+      "chartCount": 3,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 0,
-          "impressions": 6
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 6,
+          "impressions": 64
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 29
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 43
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -1086,7 +1324,14 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md"
       ],
       "dataQuality": {
-        "keysChecked": 11,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 12,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
+          "per-capita-prefectural-income-h27",
+          "annual-income-per-household"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -1099,37 +1344,46 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-additivity-and-survey-year-audit",
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-roads.md",
-      "latestDataYear": "2023",
-      "primaryMetricCount": 2,
-      "secondaryMetricCount": 6,
-      "contextMetricCount": 2,
-      "selectionMissingCount": 8,
-      "chartCount": 3,
-      "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "latestDataYear": "2026",
+      "primaryMetricCount": 1,
+      "secondaryMetricCount": 4,
+      "contextMetricCount": 5,
+      "selectionMissingCount": 0,
+      "chartCount": 1,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 3,
-          "impressions": 39
+          "impressions": 52
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 34
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 19
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -1142,7 +1396,13 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-roads.md"
       ],
       "dataQuality": {
+        "observedAt": "2026-09-08T11:59:13.559Z",
         "keysChecked": 10,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "average-road-traffic-volume"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -1157,35 +1417,44 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-safety.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 3,
-      "secondaryMetricCount": 11,
-      "contextMetricCount": 11,
-      "selectionMissingCount": 14,
+      "secondaryMetricCount": 5,
+      "contextMetricCount": 18,
+      "selectionMissingCount": 0,
       "chartCount": 6,
-      "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "clicks": 0,
-          "impressions": 18
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "clicks": 1,
+          "impressions": 49
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 27
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 36
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -1199,7 +1468,11 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#safety-split--parent-hub候補"
       ],
       "dataQuality": {
-        "keysChecked": 25,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 26,
+        "oldestLatestDataYear": "2023",
+        "ageReviewKeys": [],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47
@@ -1214,35 +1487,44 @@
       "reviewDocRef": ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-tourism.md",
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
-      "secondaryMetricCount": 4,
-      "contextMetricCount": 5,
-      "selectionMissingCount": 5,
-      "chartCount": 4,
-      "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W31/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W31/pages.csv",
+      "secondaryMetricCount": 2,
+      "contextMetricCount": 9,
+      "selectionMissingCount": 0,
+      "chartCount": 3,
+      "officialSourceReviewedAt": "2026-09-08",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "search-console",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
           "clicks": 0,
-          "impressions": 49
+          "impressions": 44
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
+          "scope": "Japan",
           "weeks": [
-            "2026-W27",
-            "2026-W31"
+            "2026-W32",
+            "2026-W36"
           ],
-          "pageViews": 55
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "pageViews": 20
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 0,
+          "scope": "Japan",
+          "reason": "navigation reports or page rows missing"
         }
       },
       "contentCoverage": {
@@ -1255,7 +1537,18 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-tourism.md"
       ],
       "dataQuality": {
-        "keysChecked": 10,
+        "observedAt": "2026-09-08T11:59:13.559Z",
+        "keysChecked": 12,
+        "oldestLatestDataYear": "2017",
+        "ageReviewKeys": [
+          "travel-participation-rate-domestic-tourism",
+          "travel-participation-rate-overseas",
+          "travel-participation-rate-overnight",
+          "travel-participation-rate-day-trip",
+          "number-of-hotel-facilities",
+          "number-of-hotel-rooms"
+        ],
+        "freshnessStatus": "requires-official-release-check",
         "missingKeys": 0,
         "missingKeyList": [],
         "latestYearPrefCoverageMin": 47

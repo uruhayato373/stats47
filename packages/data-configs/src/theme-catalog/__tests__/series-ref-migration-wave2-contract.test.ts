@@ -22,8 +22,8 @@ function metricRequestKey(metricKey: string): string {
 }
 
 describe("CROSS-PAGE-DATA-SSOT-01 exact migration wave 2", () => {
-  it("10 chart の旧 request・unit は参照先MetricConfigと完全一致する", () => {
-    expect(migrationContract).toHaveLength(10);
+  it("7 chart の旧 request・unit は参照先MetricConfigと完全一致する", () => {
+    expect(migrationContract).toHaveLength(7);
     for (const row of migrationContract) {
       expect(row.rawRequestKeys, row.componentKey).toEqual(row.metricKeys.map(metricRequestKey));
       expect(row.units, row.componentKey).toEqual(
@@ -32,7 +32,7 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration wave 2", () => {
     }
   });
 
-  it("10 chart は表示情報を内包したtyped refsだけを持つ", () => {
+  it("7 chart は表示情報を内包したtyped refsだけを持つ", () => {
     for (const row of migrationContract) {
       const chart = THEME_CATALOGS[row.themeKey]?.charts.find(
         (candidate) => candidate.componentKey === row.componentKey,

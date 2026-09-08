@@ -17,3 +17,5 @@ export {
   THEME_PREFECTURE_COOKIE_NAME,
   resolveInitialThemePrefecture,
 } from "./lib/theme-prefecture-preference";
+
+export { ThemeAreaHeader } from "./components/ThemeAreaHeader";

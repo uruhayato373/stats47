@@ -9,19 +9,23 @@
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 
-echo "── 1/5 build (機械項目の再導出) ──"
-npx tsx .claude/scripts/themes/build-theme-portfolio.ts
+audit_status=0
+echo "── 1/6 quality (構成・公開値・前回からの退行) ──"
+node --import tsx .claude/scripts/themes/audit-theme-quality.ts "$@" || audit_status=$?
 
-echo "── 2/5 aggregate (56d 実測: GSC/GA4 + R2 データ品質) ──"
-npx tsx .claude/scripts/themes/aggregate-theme-metrics.ts
+echo "── 2/6 build (機械項目の再導出) ──"
+node --import tsx .claude/scripts/themes/build-theme-portfolio.ts
 
-echo "── 3/5 validate (判定規律) ──"
+echo "── 3/6 aggregate (56d 実測: GSC / Japan-only GA4 / 品質観測) ──"
+node --import tsx .claude/scripts/themes/aggregate-theme-metrics.ts
+
+echo "── 4/6 validate (判定規律) ──"
 node .claude/scripts/themes/validate-theme-state.mjs
 
-echo "── 4/5 実験期日チェック ──"
+echo "── 5/6 実験期日チェック ──"
 node .claude/scripts/themes/evaluate-theme-experiments.mjs --check
 
-echo "── 5/5 drift (git HEAD との差分) ──"
+echo "── 6/6 drift (git HEAD との差分) ──"
 node --input-type=module <<'EOF'
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -54,3 +58,4 @@ EOF
 echo ""
 echo "✓ 監査完了。lifecycle 変更・triage 引き渡しは theme-portfolio-manager agent が判断する"
 echo "  (skill: /manage-theme-portfolio。判定変更は build-theme-portfolio.ts --set 経由)"
+exit "$audit_status"

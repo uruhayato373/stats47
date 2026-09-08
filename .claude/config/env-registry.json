@@ -245,6 +245,13 @@
       ]
     },
     {
+      "name": "ESTAT_APP_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "EXPECTED_EMBEDS",
       "visibility": "server",
       "contexts": [
@@ -760,6 +767,13 @@
       ]
     },
     {
+      "name": "OFFICIAL_THEME_PYTHON",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "OGP_DEBUG",
       "visibility": "server",
       "contexts": [
@@ -1016,6 +1030,13 @@
     },
     {
       "name": "VITEST",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "WEB_DEV_HOST",
       "visibility": "server",
       "contexts": [
         "process"

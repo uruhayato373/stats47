@@ -4,6 +4,7 @@ export const lowestTemperature: MetricConfig = {
   "key": "lowest-temperature",
   "title": "最低気温",
   "subtitle": "日最低気温の月平均の最低値",
+  "description": "各都道府県の代表観測地点における、日最低気温の月平均値のうち年間で最も低い値です。観測史上の最低気温や県全域の平均気温ではありません。",
   "unit": "℃",
   "category": "landweather",
   "source": {
@@ -54,7 +55,7 @@ export const lowestTemperature: MetricConfig = {
       2024,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateRdBu",
     "colorSchemeType": "diverging",
@@ -68,23 +69,7 @@ export const lowestTemperature: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "℃/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "℃/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "最低気温ランキング都道府県【2024年】｜1位沖縄県（15.3℃）",
   "seoDescription": "2024年の最低気温の都道府県別ランキング。1位沖縄県（15.3℃）、最下位北海道（-5.1℃）で-3.0倍の格差。地図やグラフで47都道府県を比較。",

@@ -62,7 +62,7 @@
                  "activeUsersLast28d": 500,            // ユーザー数は週横断加算不能 → 最新窓のみ (measured のみ)
                  "engagementRatePvWeighted": 0.61,     // pageViews 加重平均 (近似・名前で明示・measured のみ)
                  "avgSessionDurationSecPvWeighted": 74 },
-        "internalNav": { "status": "not-instrumented" }  // theme→ranking/blog 遷移・指標クリック。GA4 未計装 (25_テーマポートフォリオ運用 §1.3)
+        "internalNav": { "status": "insufficient-data" }  // 国内の theme_* nav_click を実日付付きで集計。未取得を0件にしない
       },
       "contentCoverage": { "relatedArticles": 4 },   // 関連記事数 (未集計は null)
       "dataQuality": {                    // R2 app/ranking/<key>/values.json の実測 (aggregate-theme-metrics.ts)
@@ -70,7 +70,7 @@
         "missingKeyList": [],             // 404/空だった rankingKey (先頭 10 件)
         "latestYearPrefCoverageMin": 47   // 最新年の都道府県カバレッジ最小値 (prefecture 行が無い指標は対象外)
       },
-      "dataQualityStatus": "ok",         // "ok" | "stale-data" (latestDataYear が 5 年超前) | "gaps" (values.json 欠測あり) | "unknown"
+      "dataQualityStatus": "ok",         // "ok" | "gaps" (値の欠測・品質errorあり) | "unknown"。経過年数だけで更新遅延を確定しない
       "currentHypothesis": "支え手比率の主問化で滞在が伸びる", // 無ければ null
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [                   // レビュー文書・実測・実験 ID への参照
@@ -149,3 +149,83 @@
 | 推測値・代替値を measured として保存 | 取れない値は insufficient-data / not-instrumented |
 | 根拠 (evidenceRefs/56日測定) なしの merge/retire | validator が error で弾く |
 | `.claude/todo/improvements.md` へ直接書く | improvement-triage へ引き渡す |
+
+
+## 2026-09-08以降の品質・計測契約
+
+- 母集団は現行ThemeCatalog（21）。気候はcatalog、旧財政市区町村URLはredirectで対象外。
+- `quality.json` は章/登録/期間/単位/有限値coverage/重複/履歴退行の観測。前回正常値を
+  `lastGoodObservations` に保持し、異常継続中の基準すり替えを防ぐ。全操作・全国系列・GISは別途表示確認。
+- GA4はJapan-only `pages-clean.csv` と `.meta.json` のstatus=ok/source/countryFilter/実期間を必須にする。
+  2窓の実日付が連続する56日だけを集計。raw pages.csvは効果・統廃合判断に使わない。
+- `metrics.ga4.scope=Japan`。`internalNav` はtheme_* nav_clickのJapan-only eventCount。
+  未取得窓や欠落行はinsufficient-data、0で補完しない。低標本ではカウントだけを保存する。
+- `dataQuality.oldestLatestDataYear/ageReviewKeys` は古い系列を隠さないための補助。
+  古さは更新漏れの断定ではなく一次資料確認の入口。海の無い県や秘匿の欠測を0に変えない。
+- 週次は同じ異常を再通知せず、新規/変化/復旧を報告。月次は全テーマの公式公表予定と新年を確認する。
+
+### 評価履歴の互換性
+
+保存済みの `result.d7/d28/d56` は維持し、再観測を `result.rechecks.dNN[]` へ追記する。同じ観測内容は日時だけ変わっても重複させない。新しい評価は status / reasons / constraints と KPI ごとの scope / windowDays / periodStart / periodEnd / weeks を保存する。旧 baseline の scope・status が不明な場合は数値を保持したまま効果確定を拒否する。d28 は暫定観測であり、公開後だけを含む 56 日窓・測定可能な主 KPI と baseline が揃った d56 のみ効果を確定できる。
+
+`dataQuality.ageReviewKeys` は最新観測が5年以上前の一次資料確認候補であり、未更新の確定ではない。5年周期の調査を自動で stale-data にしない。`freshnessStatus` は公表済み新年との照合が別工程であることを示す。
+
+定期フォロー: Codex heartbeat `automation`「全テーマの品質確認と継続改善」を2026-09-08に登録済み。毎週月曜09:00 JSTに確認し、月初は公式資料・構成も見直す。変化のない既知警告は通知しない。GitHub週次監査はworkflowの公開後に稼働する。
+
+
+## 別PCで未公開のテーマ改善を再開する
+
+進捗・既知の未解決問題・公開対象は `../metrics/themes/2026-09-09-implementation.json`、
+次の作業は `.claude/todo/backlog.md` の `THEME-PORTFOLIO-REMAINDER-01` を正典とする。
+`.local` のステージデータ、元資料、ブラウザHTML、詳細ログはgit対象外。秘密情報も移行されない。
+新しいPCでは依存関係を `npm ci` で復元し、そのPCの正規の環境設定を使用する。
+Codex heartbeatは元PCのタスクに設定されておりgitでは移行されない。追加登録の前に既存設定を確認する。
+
+### データの復元
+
+1. `release.manifest.metricKeys` の100指標は、既存の
+   `packages/ranking/src/scripts/generate-ranking-items.ts --only <カンマ区切りのキー>` で
+   `.local/r2` に再生成する。このCLIは `all.json` も生成するが、今回の公開対象には含めない。
+2. `apps/web/scripts/data/page-components/theme/*.json` の21ファイルを
+   `.local/r2/app/page-components/theme/` へ同名でコピーする（ThemeCatalogからの生成物）。
+3. 公式資料からの3指標は下記CLIで再生成する。e-Stat APP IDは既存の環境設定を使う。
+   元資料のhash変更、旧年との不一致は停止して一次資料を確認する。
+
+```bash
+python3 -m venv /tmp/stats47-theme-python
+/tmp/stats47-theme-python/bin/pip install -r packages/data-configs/scripts/lib/requirements-official-theme-data.txt
+OFFICIAL_THEME_PYTHON=/tmp/stats47-theme-python/bin/python node --conditions=react-server --import tsx packages/data-configs/scripts/refresh-official-theme-data.ts --stage-dir .local/r2 --artifact-dir /tmp/stats47-official-theme-data
+```
+
+4. ラスパイレス指数の単位是正は、公開R2の `app/stats/laspeyres-index-prefecture/values.json` と
+   `app/ranking/laspeyres-index-prefecture/values.json` を読み、statsの行単位とrecipe、rankingの
+   partition/行単位をconfigの「指数」に合わせる。数値・県・年・rankは不変、658行を突合する。
+   この2ファイル専用の再生成CLIは未整備なので、既存のrecipe/partition生成関数でローカル是正する。
+5. 129ファイルのmanifestとrecipe・観測値・47県・期間を再検査する。生成日時によりSHAは変わるため、
+   旧manifestのSHAをそのまま再利用せず、新しい検証済みmanifestを作る。公開R2の変更も別途検出する。
+   未公開の値を用いた監査結果を、公開品質baseline `quality.json` に上書きしない。
+
+全129ファイルを一度に復元する永続CLIは未整備。特にラスパイレス2件の再生成を補う必要がある。
+汎用ranking生成の入力は公開R2を読むため、更新済みstageからranking値を派生するときはgatewayまたは
+純粋builder経由を使い、ローカルstageが自動的に読まれると仮定しない。
+
+### 表示エラーの再現
+
+検証済みのローカルデータを使ったproduction build/startで調べる。既存のpreview gatewayのソースは
+`../metrics/themes/2026-09-09-hydration.json` の `previewGatewaySource` に保存している。
+作業ルートで起動し、gatewayと同じディレクトリに `release.manifest` を `release-manifest.json` として置く。
+gatewayは127.0.0.1:4778でmanifest内だけローカル値を読み、他のappキーは公開R2をGETする。
+Nextの起動には `R2_PUBLIC_FETCH_URL=http://127.0.0.1:4778` と空の
+`R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を明示する。
+Turboを経由する場合は `--env-mode=loose` が必要（strictではこのURL overrideが渡らない）。
+
+```bash
+node .claude/scripts/themes/probe-theme-hydration.mjs --mobile --scenarios after-real-income
+```
+
+Chromeを使い、390×844、ja-JP、pref=28000、同意拒否で実収入を開いた後、同じcontextの新しいページで道路を開く。
+出力は `.local/verification/themes/hydration/`。最終検証は42画面中41 PASSで、道路mobileの#418が未解決。
+診断JSONの `diagnosticSource` は当時のReact chunk専用の応答計装であり、次のbuildで一致を確認してから
+一時mjsへ復元し `--diagnostic <path>` で使う。元の例外を抑止しない。
+本文divに対しcursorが内部JSON-LD scriptを指すことまで確認済み。非同期埋め込みsectionの
+Suspense境界は次の調査候補であり、原因の確定・修正は未実施。

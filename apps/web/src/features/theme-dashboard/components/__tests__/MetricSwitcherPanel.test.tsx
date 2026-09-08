@@ -675,3 +675,27 @@ describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
     expect(trackNavClickMock).not.toHaveBeenCalled();
   });
 });
+
+describe('監査後の表示契約', () => {
+  it('第三の単位を左軸に押し込まない', async () => {
+    renderPanel({ metrics: [kpi('wage', { unit: '円' }), kpi('unemployment', { unit: '%' }), kpi('job-ratio', { unit: '倍' })], defaultCheckedKeys: ['wage', 'unemployment'] });
+    await waitFor(() => expect(chartedKeys()).toEqual(['wage', 'unemployment']));
+    toggleTile(/有効求人倍率/);
+    expect(tile(/有効求人倍率/)).toHaveAttribute('aria-disabled', 'true');
+    expect(chartedKeys()).toEqual(['wage', 'unemployment']);
+  });
+  it('単年は自然高の案内と実年を示す', async () => {
+    fetchMock.mockResolvedValue({ points: points([1]), source: 'area' });
+    renderPanel({ metrics: [kpi('wage', { yearName: '2020年' })] });
+    const message = await screen.findByText(/2020年の単年データ/);
+    expect(message.tagName).toBe('P');
+    expect(message).not.toHaveStyle({ height: '250px' });
+    expect(tile(/賃金/)).toHaveTextContent('2020年');
+  });
+  it('章の詳細図が同じ系列を示す場合、タイルから二重fetchしない', async () => {
+    renderPanel({ summaryOnly: true });
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('line-chart')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('賃金')).toHaveTextContent('100');
+  });
+});

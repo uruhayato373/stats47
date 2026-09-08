@@ -316,3 +316,5 @@ npm run admin
 
 > 旧 `npm run backup:d1 --env production`（リモート D1 → R2 バックアップ）は **リモート D1 廃止により不要**。
 > 完全DBレスでは観測値・配信は R2 が SSOT、設定/運用は git TS が SSOT で履歴は git に残る。
+
+未公開データのローカル確認では `WEB_DEV_HOST=127.0.0.1 npm run dev:web` を使い、Next.jsの待受をループバックに限定する。WEB_DEV_HOSTはdev-serverが--hostnameへ渡す（未指定時は既存のNext.js既定値）。

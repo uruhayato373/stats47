@@ -39,7 +39,7 @@ ThemeCatalog (SSOT, git TS)
         └─▶ R2 app/page-components/theme/<key>.json → 本番テーマページが読む (完全DBレス)
 ```
 
-- `THEME_CATALOGS` には現在 20 テーマを登録済み。登録テーマの生成物を直接編集しない。
+- `THEME_CATALOGS` には現在 21 テーマを登録済み。登録テーマの生成物を直接編集しない。
 - bespoke / 未登録 route をカタログ化する場合は catalog TS 作成と registry 登録を同じ変更で行い、golden diff を確認する。
 
 ---
@@ -341,3 +341,15 @@ evidenceTopics: [
 - チャートコンポーネント: `.claude/rules/chart-component-standards.md`
 - 情報設計 (テーマの責務): `docs/01_技術設計/03_情報設計.md`
 - 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md`
+
+
+## 9. 問い別の章と継続監査
+
+現行21テーマは `ThemeCatalog.sections` を持つ。`metricGroupKeys` / `chartKeys` /
+`embeddedSectionKeys` が章内配置の正典で、ThemeDashboardTabbedが描画する。
+未配置・未知参照・二重配置はvalidatorで停止。page-componentのsection文字列とは別の契約。
+単年は比較表または数値で示し、複数年だけ推移にする。同じ指標のカードと詳細図は重複させない。
+
+週次 `npm run theme:portfolio:audit` と既存live auditで実データ/構造を確認する。
+月次は公式新年・定義・章の問いを見直し、採否根拠をselectionへ反映する。
+年・分母・単位・地理範囲が異なる系列は、同一尺度として合算や比較をしない。

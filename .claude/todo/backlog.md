@@ -736,17 +736,16 @@ updated: 2026-09-08
 - **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
 - **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
 
-### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログの残工程
+### [THEME-PORTFOLIO-REMAINDER-01] 道路モバイル描画の是正・全テーマ改善の公開と計測開始
 
 タグ: [種類:改善] [実行:対話] [起票:2026-07-04]
 
-- **owner**: Claude Code
-- **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / chart expansion。旧 guidance card 案は 2026-08-25 に指標ハブ契約へ置換済み。
-- **2026-08-27 監査**: 22テーマのreviewは全件存在。catalog validatorは20テーマ・error 0・warn 169
-  （selection未記入120 / sortOrder重複36 / primary未使用11 / global key重複2）。意味確認なしの一括補完は行わない。
-- **次**: 22テーマreviewの結果から、欠測・重複・定義誤認だけを修正する。分類再編は重複matrixと移行影響が確定するまで実装しない。
-- **完了条件**: catalog validator、選定provenance、分類契約が一致し、UI変更はテーマ単位の小さな差分で検証する。
-- **正典**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md` / `theme-taxonomy-reorganization.md` / `.claude/rules/theme-catalog-standards.md`
+- **残工程**: 道路テーマのモバイル React hydration #418 を解決する。最終表示検証は42画面中41 PASS（操作3/3 PASS）、Suspense 修正は未着手。再現・別PCでの復元は `.claude/state/themes/README.md`、診断は `.claude/state/metrics/themes/2026-09-09-hydration.json`。その後、全テーマのローカル実装・公式年次更新・週次フォロー設定を本番反映する。デプロイと公開R2への書き込みは未実行。実装範囲・検証・公開対象は `.claude/state/metrics/themes/2026-09-09-implementation.json` を参照する。
+- **owner**: `devops-runner`（デプロイ）/ `r2-publisher`（検証済み対象の公開）/ `theme-ui-manager`（配信確認）/ `theme-portfolio-manager`（計測開始）
+- **実行順**: (0) 別PCでステージデータを再生成し、実収入→道路の同一browser context・モバイルで #418 を再現する。埋め込み非同期sectionのSuspense境界を調査し、遅延ストリーム回帰テスト・型検査・build・全42画面を通す。(1) ローカル検証結果と公開差分を提示して本番反映の承認を得る。(2) feature→develop→mainを規約どおり統合し、CIとデプロイを確認する。(3) mainの生成コードと公開manifestを照合し、検証済みR2対象だけを反映する。(4) 全21テーマと旧財政redirect、健康寿命2022年・農業産出額2024年、財政の県・年、分母表示を本番実測する。(5) 実際の公開日で20件の構成実験を `evaluate-theme-experiments.mjs --schedule` し、週次CIのstate書き戻しと月曜フォローを接続する。
+- **停止条件**: hydration #418 の残存、CI/生成物/manifestの不一致、公式source hash・recipeの差異、本番表示不一致があれば公開完了にしない。公開前に実験開始日を設定しない。staged監査を公開品質baselineへ上書きしない。正常時や既知coverage警告だけで新たなTODOを起票しない。
+- **完了条件**: コードと検証済みR2が本番で一致し、全テーマ・主要導線と週次workflowが成功する。公開日に対応したd7/d28/d56期日をstateに記録し、公開後の効果観測は `improvement-triage` へ別IDで引き渡す。外国人テーマは必要なbaseline取得後に実験登録する。
+- **正典**: `.claude/rules/branch-workflow.md` / `.claude/skills/theme/optimize-themes/SKILL.md` / `.claude/state/themes/README.md`
 
 ### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
 

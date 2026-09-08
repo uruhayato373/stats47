@@ -22,6 +22,7 @@ export const DISPLAYNAME_TO_SURVEY: Record<string, string> = {
   個人企業経済調査: 'sole-proprietor-survey',
   商業動態統計調査: 'commercial-dynamics-survey',
   作物統計調査: 'crop-statistics',
+  生産農業所得統計: 'agricultural-income-statistics',
   水質汚濁物質排出量総合調査: 'water-pollution-survey',
   患者調査: 'patient-survey',
   病院報告: 'hospital-report',

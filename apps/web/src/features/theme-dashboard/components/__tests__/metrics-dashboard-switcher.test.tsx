@@ -317,3 +317,20 @@ describe('ThemeMetricsDashboard — chart編集情報', () => {
     expect(screen.getByRole('menuitem', { name: '第4指標の定義・ランキング' })).toBeVisible();
   });
 });
+
+describe('問いごとの章', () => {
+  it('指標と埋込を指定した章に置き、残余も脱落させず一度だけ描画する', () => {
+    renderDashboard('population-dynamics', {
+      sections: [
+        { key: 'change', title: '人口はどう変わったか', description: '自然増減と社会増減を確認します。', metricGroupKeys: ['default'], embeddedSectionKeys: ['migration'] },
+        { key: 'age', title: '年齢構成はどう変わったか', metricGroupKeys: ['default'], embeddedSectionKeys: ['migration'] },
+      ],
+      embeddedSections: { migration: <div>人口移動の地図</div>, extra: <div>補足の地図</div> },
+    });
+    const chapter = screen.getByRole('region', { name: '人口はどう変わったか' });
+    expect(chapter).toContainElement(screen.getByTestId('switcher-panel'));
+    expect(chapter).toContainElement(screen.getByText('人口移動の地図'));
+    expect(screen.getAllByText('人口移動の地図')).toHaveLength(1);
+    expect(screen.getByText('補足の地図')).toBeInTheDocument();
+  });
+});

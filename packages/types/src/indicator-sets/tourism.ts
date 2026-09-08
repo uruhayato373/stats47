@@ -6,18 +6,18 @@ import type { IndicatorSet } from "../indicator-set";
 export const TOURISM_SET: IndicatorSet = {
   "key": "tourism",
   "title": "観光",
-  "description": "都道府県別の宿泊者数・外国人宿泊者数・客室稼働率をランキングとチャートで比較。観光需要の地域差を47都道府県のデータで確認できます。",
+  "description": "来訪者の宿泊需要、受入供給と利用率、交通アクセスの違いを把握する。",
   "category": "tourism",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "total-overnight-guests",
-      "shortLabel": "宿泊者数",
+      "shortLabel": "延べ宿泊者数（総数）",
       "role": "primary"
     },
     {
       "rankingKey": "total-overnight-guests-foreign",
-      "shortLabel": "外国人宿泊",
+      "shortLabel": "外国人延べ宿泊者数",
       "role": "secondary"
     },
     {
@@ -28,7 +28,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "travel-participation-rate-domestic-tourism",
       "shortLabel": "国内旅行率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "travel-participation-rate-overseas",
@@ -48,7 +48,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "air-passenger-transport",
       "shortLabel": "航空旅客",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "jr-passenger-transport",

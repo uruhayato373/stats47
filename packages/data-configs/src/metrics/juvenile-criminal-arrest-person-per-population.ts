@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const juvenileCriminalArrestPersonPerPopulation: MetricConfig = {
   "key": "juvenile-criminal-arrest-person-per-population",
   "title": "少年刑法犯検挙人員",
-  "subtitle": "人口当たり",
+  "subtitle": "14～19歳人口千人当たり",
   "unit": "人",
   "category": "safetyenvironment",
+  "description": "少年刑法犯検挙人員を14～19歳の人口で除し、14～19歳人口千人当たりに換算した値。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -56,25 +57,9 @@ export const juvenileCriminalArrestPersonPerPopulation: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "juvenile-criminal-arrest-person",
-  "seoTitle": "少年刑法犯検挙人員ランキング都道府県【2023年】｜1位和歌山県（4.7人）",
-  "seoDescription": "2023年の少年刑法犯検挙人員の都道府県別ランキング。1位和歌山県（4.7人）、最下位福島県（1.25人）で3.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "少年刑法犯検挙人員（14～19歳人口千人当たり）ランキング都道府県",
+  "seoDescription": "14～19歳人口千人当たりの少年刑法犯検挙人員を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };

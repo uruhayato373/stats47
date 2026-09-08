@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const perCapitaInhabitantTaxPrefMunicipal: MetricConfig = {
   "key": "per-capita-inhabitant-tax-pref-municipal",
   "title": "住民税",
-  "subtitle": "都道府県・市町村財政合計",
+  "subtitle": "都道府県・市町村財政合計（人口1人当たり）",
   "description": "都道府県民税と市町村民税の収入額を合計し、総人口で割った人口1人当たりの住民税額。",
   "note": "住民税には個人住民税と法人住民税を含むため、個人が実際に負担する平均税額ではない。都道府県・市町村財政の合計を総人口で均した値。",
   "unit": "千円",
@@ -13,10 +13,10 @@ export const perCapitaInhabitantTaxPrefMunicipal: MetricConfig = {
     "statsDataId": "0000010204",
     "cdCat01": "#D0220103",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "years": [
@@ -54,39 +54,23 @@ export const perCapitaInhabitantTaxPrefMunicipal: MetricConfig = {
       2015,
       2016,
       2017,
-      2022,
-    ],
+      2022
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "千円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "千円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "住民税ランキング都道府県【2022年】｜1位東京都（237.6千円）",
   "seoDescription": "2022年の住民税の都道府県別ランキング。1位東京都（237.6千円）、最下位青森県（81.3千円）で2.9倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": true
 };

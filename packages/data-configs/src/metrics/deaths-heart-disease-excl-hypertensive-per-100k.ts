@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const deathsHeartDiseaseExclHypertensivePer100k: MetricConfig = {
   "key": "deaths-heart-disease-excl-hypertensive-per-100k",
   "title": "心疾患による死亡者数",
-  "description": "高血圧性疾患を除く心疾患による死亡者数を、人口10万人当たりで比較するための指標。",
+  "description": "人口動態調査の心疾患（高血圧性を除く）による死亡者数を日本人人口で除し、10万倍した値です。年齢調整死亡率ではありません。",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
@@ -11,10 +11,10 @@ export const deathsHeartDiseaseExclHypertensivePer100k: MetricConfig = {
     "statsDataId": "0000010209",
     "cdCat01": "#I06105",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "years": [
@@ -51,39 +51,24 @@ export const deathsHeartDiseaseExclHypertensivePer100k: MetricConfig = {
       2009,
       2010,
       2011,
-      2023,
-    ],
+      2023
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateReds",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "心疾患による死亡者数ランキング都道府県【2023年】｜1位山口県（284.2人）",
   "seoDescription": "2023年の心疾患による死亡者数の都道府県別ランキング。1位山口県（284.2人）、最下位愛知県（130.8人）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
+  "subtitle": "日本人人口10万人当たり"
 };

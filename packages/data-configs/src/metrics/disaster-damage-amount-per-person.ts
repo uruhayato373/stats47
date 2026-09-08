@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const disasterDamageAmountPerPerson: MetricConfig = {
   "key": "disaster-damage-amount-per-person",
   "title": "災害被害額",
-  "subtitle": "人口当たり",
+  "subtitle": "人口1人当たり",
   "unit": "円",
   "category": "safetyenvironment",
+  "description": "災害被害額を総人口で除した、人口1人当たりの被害額。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -55,25 +56,9 @@ export const disasterDamageAmountPerPerson: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "disaster-damage-amount",
-  "seoTitle": "災害被害額ランキング都道府県【2023年】｜1位鳥取県（53,734円）",
-  "seoDescription": "2023年の災害被害額の都道府県別ランキング。1位鳥取県（53,734円）、最下位東京都（2円）で26867.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "災害被害額（人口1人当たり）ランキング都道府県",
+  "seoDescription": "人口1人当たりの災害被害額を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };

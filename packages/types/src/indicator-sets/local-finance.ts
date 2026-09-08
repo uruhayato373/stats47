@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const LOCAL_FINANCE_SET: IndicatorSet = {
   "key": "local-finance",
   "title": "地方財政",
-  "description": "都道府県別の財政力指数・経常収支比率・実質公債費比率・歳出構造をランキングとチャートで比較。地方税割合、交付税依存度、将来負担比率など主要財政指標の推移を47都道府県のデータで確認できます。",
+  "description": "都道府県の歳入歳出、財政の弾力性、現在と将来の負担を決算年度付きで把握する。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
@@ -23,7 +23,7 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
     {
       "rankingKey": "real-public-debt-service-ratio",
       "shortLabel": "実質公債費比率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "future-burden-ratio",
@@ -33,37 +33,37 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
     {
       "rankingKey": "real-balance-ratio",
       "shortLabel": "実質収支比率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "local-tax-ratio-pref-finance",
       "shortLabel": "地方税割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "local-allocation-tax-ratio-pref-finance",
       "shortLabel": "交付税割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "national-treasury-disbursement-ratio-pref-finance",
       "shortLabel": "国庫支出金割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "self-financing-ratio",
       "shortLabel": "自主財源割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-capita-total-expenditure-pref-municipal",
-      "shortLabel": "1人当たり歳出",
-      "role": "secondary"
+      "shortLabel": "歳出決算総額（人口1人当たり）",
+      "role": "context"
     },
     {
       "rankingKey": "personnel-expenditure-ratio-pref-finance",
       "shortLabel": "人件費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "assistance-expenditure-ratio-pref-finance",
@@ -78,37 +78,37 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
     {
       "rankingKey": "welfare-expenditure-ratio-pref-finance",
       "shortLabel": "民生費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "education-expenditure-ratio-pref-finance",
       "shortLabel": "教育費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "public-works-expenditure-ratio-pref-finance",
       "shortLabel": "土木費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-capita-inhabitant-tax-pref-municipal",
-      "shortLabel": "住民税",
-      "role": "secondary"
+      "shortLabel": "住民税（人口1人当たり）",
+      "role": "context"
     },
     {
       "rankingKey": "per-taxpayer-taxable-income",
-      "shortLabel": "課税所得",
-      "role": "secondary"
+      "shortLabel": "課税対象所得（納税義務者1人当たり）",
+      "role": "context"
     },
     {
       "rankingKey": "taxpayer-ratio-per-pref-resident",
       "shortLabel": "納税義務者割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "laspeyres-index-prefecture",
       "shortLabel": "ラスパイレス指数",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "keywords": [

@@ -44,7 +44,7 @@ describe('ThemeDbChartRenderer', () => {
     render(<ThemeDbChartRenderer chart={CHART} prefCode="00000" prefName="全国" />);
 
     expect(
-      await screen.findByText('表示値は全国値ではなく、47都道府県の単純平均です。'),
+      await screen.findByText('表示値は全国値ではなく、値が公表されている都道府県の単純平均です。'),
     ).toBeInTheDocument();
   });
 

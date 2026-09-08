@@ -3,8 +3,8 @@ import type { MetricConfig } from "../types";
 export const deathsDiabetesPer100k: MetricConfig = {
   "key": "deaths-diabetes-per-100k",
   "title": "糖尿病による死亡者数",
-  "subtitle": "人口10万人当たり",
-  "description": "人口動態調査で原死因が糖尿病だった死亡者数を日本人人口で割り、10万倍した値。",
+  "subtitle": "日本人人口10万人当たり",
+  "description": "人口動態調査の糖尿病による死亡者数を日本人人口で除し、10万倍した値です。年齢調整死亡率ではありません。",
   "unit": "人",
   "category": "population",
   "source": {
@@ -12,10 +12,10 @@ export const deathsDiabetesPer100k: MetricConfig = {
     "statsDataId": "0000010209",
     "cdCat01": "#I06103",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "years": [
@@ -41,40 +41,24 @@ export const deathsDiabetesPer100k: MetricConfig = {
       2004,
       2005,
       2006,
-      2023,
-    ],
+      2023
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "groupKey": "deaths-diabetes",
   "seoTitle": "糖尿病による死亡者数ランキング都道府県【2023年】｜1位青森県（20.6人）",
   "seoDescription": "2023年の糖尿病による死亡者数の都道府県別ランキング。1位青森県（20.6人）、最下位愛知県（8.1人）で2.5倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": true
 };

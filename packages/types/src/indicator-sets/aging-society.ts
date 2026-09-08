@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const AGING_SOCIETY_SET: IndicatorSet = {
   "key": "aging-society",
   "title": "少子高齢化",
-  "description": "都道府県別の合計特殊出生率・高齢化率・人口増減率をランキングとチャートで比較。少子高齢化の実態を47都道府県のデータで確認できます。",
+  "description": "出生の状況と年齢構造、高齢者の暮らす世帯が地域ごとにどう異なるかを把握する。",
   "category": "demographics",
   "usage": "theme",
   "metrics": [
@@ -17,13 +17,13 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "aging-index",
-      "shortLabel": "老年化指数",
-      "role": "secondary"
+      "shortLabel": "老年化指数（15歳未満人口100人当たり）",
+      "role": "context"
     },
     {
       "rankingKey": "total-fertility-rate",
       "shortLabel": "合計特殊出生率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "crude-birth-rate",
@@ -43,12 +43,12 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     {
       "rankingKey": "population-growth-rate",
       "shortLabel": "人口増減率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "natural-increase-rate",
       "shortLabel": "自然増減率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "social-increase-rate",
@@ -57,22 +57,22 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "dependent-population-index",
-      "shortLabel": "従属人口指数",
+      "shortLabel": "従属人口指数（15～64歳人口100人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "household-ratio-with-65plus",
       "shortLabel": "65歳以上世帯割合",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "marriages-per-total-population",
-      "shortLabel": "婚姻率",
+      "shortLabel": "婚姻率（人口千人）",
       "role": "context"
     },
     {
       "rankingKey": "divorces-per-total-population",
-      "shortLabel": "離婚率",
+      "shortLabel": "離婚率（人口千人）",
       "role": "context"
     },
     {
@@ -87,7 +87,7 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "late-elderly-medical-expense-per-insured",
-      "shortLabel": "後期高齢者医療費",
+      "shortLabel": "後期高齢者医療費（被保険者1人当たり）",
       "role": "context"
     },
     {
@@ -97,13 +97,13 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "single-person-household-old-population-ratio",
-      "shortLabel": "65歳以上世帯員の単独世帯の割合",
-      "role": "context"
+      "shortLabel": "高齢単独世帯（一般世帯に対して）",
+      "role": "secondary"
     },
     {
       "rankingKey": "elderly-couple-only-household-ratio",
       "shortLabel": "高齢夫婦のみの世帯の割合",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "pension-benefit-total",
@@ -117,13 +117,18 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "young-population-index",
-      "shortLabel": "年少人口指数",
+      "shortLabel": "年少人口指数（15～64歳人口100人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "old-population-index",
-      "shortLabel": "老年人口指数",
+      "shortLabel": "老年人口指数（15～64歳人口100人当たり）",
       "role": "context"
+    },
+    {
+      "rankingKey": "nursing-home-capacity-per-1000-65plus",
+      "shortLabel": "老人ホーム定員（65歳以上千人当たり）",
+      "role": "secondary"
     }
   ],
   "keywords": [

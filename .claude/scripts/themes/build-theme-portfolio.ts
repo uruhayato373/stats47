@@ -23,7 +23,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
-import { CLIMATE_SET } from "../../../packages/types/src/index";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -32,9 +31,7 @@ const REVIEW_DIR = path.join(PROJECT_ROOT, ".claude/skills/theme/manage-theme-po
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 
-const LEGACY_SETS: Record<string, unknown> = {
-  climate: CLIMATE_SET,
-};
+const LEGACY_SETS: Record<string, unknown> = {};
 
 type MetricEntry = { role?: string; selection?: { surveyedAt?: string } };
 
@@ -135,7 +132,7 @@ function defaults(themeKey: string, mech: Partial<ThemeEntry>): ThemeEntry {
     contentCoverage: { relatedArticles: null },
     dataQualityStatus: "unknown",
     currentHypothesis: null,
-    nextReviewAt: "2026-10-01",
+    nextReviewAt: new Date(Date.now() + 30 * 86_400_000).toISOString().slice(0, 10),
     evidenceRefs: mech.reviewDocRef ? [mech.reviewDocRef] : [],
     ...mech,
   } as ThemeEntry;
@@ -191,7 +188,7 @@ function main() {
         byKey.set(key, defaults(key, mech));
       }
     }
-    pf.themes = [...byKey.values()].sort((a, b) => a.themeKey.localeCompare(b.themeKey));
+    pf.themes = [...byKey.values()].filter((t) => allKeys.includes(t.themeKey)).sort((a, b) => a.themeKey.localeCompare(b.themeKey));
     console.log(`build: ${pf.themes.length} themes (catalog ${catalogKeys.length} / legacy ${Object.keys(LEGACY_SETS).length})`);
   }
 

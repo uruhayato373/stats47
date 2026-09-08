@@ -3,25 +3,9 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 265,
-  "distinctMetricRefs": 190,
+  "totalMetricRefs": 143,
+  "distinctMetricRefs": 139,
   "metrics": [
-    {
-      "metricKey": "accidental-deaths-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "1401568ea390e06d",
-      "themeKey": "safety",
-      "componentKey": "suicide-accident-death-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "active-job-opening-ratio",
-      "expectedUnit": "倍",
-      "expectedConfigHash": "86f5d2d6a20d7021",
-      "themeKey": "labor-wages",
-      "componentKey": "labor-wages-job-ratio-vs-unemployment",
-      "componentType": "line-chart"
-    },
     {
       "metricKey": "actual-income-worker-households-per-month",
       "expectedUnit": "千円",
@@ -47,14 +31,6 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "assistance-expenditure-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "6d1450fdff42ce42",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-nature-trend",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "barber-beautician-annual-income",
       "expectedUnit": "万円",
       "expectedConfigHash": "3f9ea064e0c2e297",
@@ -66,8 +42,8 @@
       "metricKey": "births",
       "expectedUnit": "人",
       "expectedConfigHash": "131aed39051698ea",
-      "themeKey": "aging-society",
-      "componentKey": "natural-social-increase-trend",
+      "themeKey": "population-dynamics",
+      "componentKey": "birth-death-count-trend",
       "componentType": "line-chart"
     },
     {
@@ -75,7 +51,7 @@
       "expectedUnit": "件",
       "expectedConfigHash": "629e4dc4be80a657",
       "themeKey": "safety",
-      "componentKey": "fire-emergency-trend",
+      "componentKey": "fire-emergency-trend-fire",
       "componentType": "line-chart"
     },
     {
@@ -207,35 +183,11 @@
       "componentType": "mixed-chart"
     },
     {
-      "metricKey": "crude-birth-rate",
-      "expectedUnit": "人口千対",
-      "expectedConfigHash": "ce1f56ca4a870f15",
-      "themeKey": "aging-society",
-      "componentKey": "birth-rate-aging-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "crude-death-rate",
-      "expectedUnit": "人口千対",
-      "expectedConfigHash": "2898b3382668f603",
-      "themeKey": "aging-society",
-      "componentKey": "birth-death-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "current-balance-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "e35d1cc3e74b691c",
-      "themeKey": "local-finance",
-      "componentKey": "kpi-lf-current-balance",
-      "componentType": "kpi-card"
-    },
-    {
       "metricKey": "death-count",
       "expectedUnit": "人",
       "expectedConfigHash": "d8fb20bbf1b59cc0",
-      "themeKey": "aging-society",
-      "componentKey": "natural-social-increase-trend",
+      "themeKey": "population-dynamics",
+      "componentKey": "birth-death-count-trend",
       "componentType": "line-chart"
     },
     {
@@ -279,30 +231,6 @@
       "componentType": "donut-chart"
     },
     {
-      "metricKey": "disposable-income-worker-households",
-      "expectedUnit": "円",
-      "expectedConfigHash": "acac9e51ce43e00a",
-      "themeKey": "local-economy",
-      "componentKey": "theme-economy-income-wage",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "divorces",
-      "expectedUnit": "組",
-      "expectedConfigHash": "7d0a11a95c09004e",
-      "themeKey": "living-housing",
-      "componentKey": "lh-marriage-divorce-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "divorces-per-total-population",
-      "expectedUnit": "人口千対",
-      "expectedConfigHash": "f5f0aceb39378428",
-      "themeKey": "aging-society",
-      "componentKey": "marriage-divorce-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "doctor-annual-income",
       "expectedUnit": "万円",
       "expectedConfigHash": "d11dc074a749be07",
@@ -311,28 +239,12 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "education-expenditure-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "ccdc5c96af4ffee5",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
-    },
-    {
       "metricKey": "elderly-couple-only-household-ratio",
       "expectedUnit": "％",
       "expectedConfigHash": "2262a0deb852b045",
       "themeKey": "aging-society",
       "componentKey": "cmp-pop-elderly-household",
       "componentType": "line-chart"
-    },
-    {
-      "metricKey": "elementary-school-count",
-      "expectedUnit": "校",
-      "expectedConfigHash": "5a71c837f0c90098",
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
     },
     {
       "metricKey": "employed-people-ratio-primary",
@@ -367,19 +279,11 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "employment-rate",
-      "expectedUnit": "％",
-      "expectedConfigHash": "792ee83cafb87d77",
-      "themeKey": "labor-wages",
-      "componentKey": "theme-lw-employment-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "final-education-university-graduate-school-ratio",
       "expectedUnit": "％",
       "expectedConfigHash": "fc83c0f732281c98",
       "themeKey": "education-culture",
-      "componentKey": "theme-edu-higher-education-trend",
+      "componentKey": "theme-edu-higher-education-trend-attainment",
       "componentType": "line-chart"
     },
     {
@@ -391,116 +295,12 @@
       "componentType": "donut-chart"
     },
     {
-      "metricKey": "fiscal-strength-index-prefecture",
-      "expectedUnit": "指数",
-      "expectedConfigHash": "be531e55822d12c6",
-      "themeKey": "local-finance",
-      "componentKey": "kpi-lf-fiscal-strength",
-      "componentType": "kpi-card"
-    },
-    {
       "metricKey": "fish-catch",
       "expectedUnit": "トン",
       "expectedConfigHash": "9ec0eeb2651a7c5d",
       "themeKey": "fishery-marine",
       "componentKey": "theme-fishery-catch-trend",
       "componentType": "line-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-bonito",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "ec40e9fc27b66557",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-japanese-squid",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "f441d82251e44ad1",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-kelp",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "a330a532d78a4575",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-mackerel",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "0133bff2e09ac829",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-pacific-saury",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "ec7a51cf95895622",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-pollock",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "5ac1e57a917a4241",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-sardine",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "549003e3c6a00396",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-scallop",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "24d2bcc499452307",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-sea-bream",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "29ff110912ed7cec",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-snow-crab",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "919926f58f177eec",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-tuna",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "3ab386bebc3622d1",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fishery-species-catch-yellowtail",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "ddc60a68a9d7c03b",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
     },
     {
       "metricKey": "fishery-workers",
@@ -524,14 +324,6 @@
       "expectedConfigHash": "29857bfbff177858",
       "themeKey": "living-housing",
       "componentKey": "lh-dwelling-floor-area-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "foreign-resident-count",
-      "expectedUnit": "人",
-      "expectedConfigHash": "d7c911cd7ad4fdc2",
-      "themeKey": "foreign-residents",
-      "componentKey": "theme-foreign-total-trend",
       "componentType": "line-chart"
     },
     {
@@ -559,14 +351,6 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "future-burden-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "b59c94e524cd52ba",
-      "themeKey": "local-finance",
-      "componentKey": "kpi-lf-future-burden",
-      "componentType": "kpi-card"
-    },
-    {
       "metricKey": "gender-wage-gap",
       "expectedUnit": "%",
       "expectedConfigHash": "bedadbaa823d86cd",
@@ -579,16 +363,8 @@
       "expectedUnit": "施設",
       "expectedConfigHash": "d7f892596eeb8a82",
       "themeKey": "healthcare",
-      "componentKey": "theme-health-supply-trend",
+      "componentKey": "theme-health-supply-trend-hospitals",
       "componentType": "line-chart"
-    },
-    {
-      "metricKey": "high-school-count",
-      "expectedUnit": "校",
-      "expectedConfigHash": "876bdf113fe19ffa",
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
     },
     {
       "metricKey": "household-ratio-with-65plus",
@@ -623,14 +399,6 @@
       "componentType": "donut-chart"
     },
     {
-      "metricKey": "investment-expenditure-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "4d112c5dfefb30de",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-nature-trend",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "job-change-rate",
       "expectedUnit": "％",
       "expectedConfigHash": "09c62e2143299426",
@@ -651,24 +419,8 @@
       "expectedUnit": "千人",
       "expectedConfigHash": "f5db56c7cae2e704",
       "themeKey": "railway",
-      "componentKey": "railway-passenger-trend",
+      "componentKey": "railway-passenger-trend-jr",
       "componentType": "line-chart"
-    },
-    {
-      "metricKey": "junior-college-count",
-      "expectedUnit": "校",
-      "expectedConfigHash": "18b5065b91f72584",
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "junior-high-school-count",
-      "expectedUnit": "校",
-      "expectedConfigHash": "bd2fec9c6cab8e47",
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
     },
     {
       "metricKey": "late-elderly-medical-expense-per-insured",
@@ -679,27 +431,19 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "local-allocation-tax-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "3fbcbe096869374a",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "metricKey": "local-tax-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "fbb409e693023eb5",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "componentType": "composition-chart"
+      "metricKey": "lowest-temperature",
+      "expectedUnit": "℃",
+      "expectedConfigHash": "1b623cbdde770f3e",
+      "themeKey": "climate",
+      "componentKey": "theme-climate-temperature-extremes",
+      "componentType": "line-chart"
     },
     {
       "metricKey": "manufacturing-employees",
       "expectedUnit": "人",
       "expectedConfigHash": "ddd03e98dfef2353",
       "themeKey": "manufacturing",
-      "componentKey": "manufacturing-establishments-employees-trend",
+      "componentKey": "manufacturing-establishments-employees-trend-employees",
       "componentType": "line-chart"
     },
     {
@@ -739,7 +483,7 @@
       "expectedUnit": "百万円",
       "expectedConfigHash": "8d6d6e1903f8b88e",
       "themeKey": "manufacturing",
-      "componentKey": "theme-manufacturing-labor-productivity",
+      "componentKey": "theme-manufacturing-labor-productivity-establishment",
       "componentType": "line-chart"
     },
     {
@@ -771,31 +515,15 @@
       "expectedUnit": "百万円",
       "expectedConfigHash": "ad6585da6dd634e5",
       "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-output-trend",
+      "componentKey": "theme-fishery-output-trend-marine",
       "componentType": "line-chart"
     },
     {
-      "metricKey": "marriages",
-      "expectedUnit": "組",
-      "expectedConfigHash": "1c5df2a2b519424d",
-      "themeKey": "living-housing",
-      "componentKey": "lh-marriage-divorce-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "marriages-per-total-population",
-      "expectedUnit": "人口千対",
-      "expectedConfigHash": "3a18a53c45e276df",
-      "themeKey": "aging-society",
-      "componentKey": "marriage-divorce-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "minimum-wage-by-region",
-      "expectedUnit": "円",
-      "expectedConfigHash": "90fb8b2d58b1f1a2",
-      "themeKey": "local-economy",
-      "componentKey": "theme-economy-income-wage",
+      "metricKey": "maximum-temperature",
+      "expectedUnit": "℃",
+      "expectedConfigHash": "7192e85c2d860d07",
+      "themeKey": "climate",
+      "componentKey": "theme-climate-temperature-extremes",
       "componentType": "line-chart"
     },
     {
@@ -821,14 +549,6 @@
       "themeKey": "healthcare",
       "componentKey": "theme-health-expense-trend",
       "componentType": "line-chart"
-    },
-    {
-      "metricKey": "national-treasury-disbursement-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "687bdc2ce05e71ef",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "componentType": "composition-chart"
     },
     {
       "metricKey": "nuclear-family-households-ratio",
@@ -871,11 +591,11 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "old-population-index",
-      "expectedUnit": "指数",
-      "expectedConfigHash": "e987909a336a1945",
-      "themeKey": "aging-society",
-      "componentKey": "theme-as-youth-old-dep-index",
+      "metricKey": "nursery-teacher-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "43928f1e45d9f55d",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart"
     },
     {
@@ -893,46 +613,6 @@
       "themeKey": "safety",
       "componentKey": "crime-count-arrest-rate-trend",
       "componentType": "mixed-chart"
-    },
-    {
-      "metricKey": "pension-benefit-total",
-      "expectedUnit": "千円",
-      "expectedConfigHash": "0a1d2fbae26e3ae1",
-      "themeKey": "aging-society",
-      "componentKey": "theme-pension-benefit-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "per-capita-inhabitant-tax-pref-municipal",
-      "expectedUnit": "千円",
-      "expectedConfigHash": "0aa4553b93ac4b18",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-income-tax-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "per-capita-total-expenditure-pref-municipal",
-      "expectedUnit": "千円",
-      "expectedConfigHash": "c78b07d58e33293a",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-per-capita-expense-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "per-taxpayer-taxable-income",
-      "expectedUnit": "千円",
-      "expectedConfigHash": "b0f9863727bc51e4",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-income-tax-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "personnel-expenditure-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "9b16556a71ed53bd",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
     },
     {
       "metricKey": "physicians-in-medical-facilities-per-100k",
@@ -965,38 +645,6 @@
       "themeKey": "railway",
       "componentKey": "railway-passenger-trend",
       "componentType": "line-chart"
-    },
-    {
-      "metricKey": "public-works-expenditure-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "17aca9e52cda991e",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "metricKey": "ratio-65-plus",
-      "expectedUnit": "％",
-      "expectedConfigHash": "0f3b0d52ccc9a80d",
-      "themeKey": "aging-society",
-      "componentKey": "birth-rate-aging-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "ratio-never-married-15-plus",
-      "expectedUnit": "％",
-      "expectedConfigHash": "1a882bf62c1c8a19",
-      "themeKey": "living-housing",
-      "componentKey": "unmarried-elderly-couple-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "real-public-debt-service-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "7c823776a326f6a5",
-      "themeKey": "local-finance",
-      "componentKey": "kpi-lf-debt-service",
-      "componentType": "kpi-card"
     },
     {
       "metricKey": "road-expressway-length",
@@ -1051,7 +699,7 @@
       "expectedUnit": "％",
       "expectedConfigHash": "77e44f7cb409af9f",
       "themeKey": "living-housing",
-      "componentKey": "lh-household-structure-trend",
+      "componentKey": "lh-household-structure-trend-single",
       "componentType": "line-chart"
     },
     {
@@ -1060,14 +708,6 @@
       "expectedConfigHash": "d3c9773954978432",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-it-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "suicides-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "321ab6e07456a2db",
-      "themeKey": "safety",
-      "componentKey": "suicide-accident-death-trend",
       "componentType": "line-chart"
     },
     {
@@ -1084,14 +724,6 @@
       "expectedConfigHash": "ed675903b65e10dc",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "taxpayer-ratio-per-pref-resident",
-      "expectedUnit": "％",
-      "expectedConfigHash": "97284392c8501609",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-taxpayer-ratio-trend",
       "componentType": "line-chart"
     },
     {
@@ -1463,22 +1095,6 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "unemployment-rate",
-      "expectedUnit": "％",
-      "expectedConfigHash": "5497b6b82fc01813",
-      "themeKey": "labor-wages",
-      "componentKey": "labor-wages-job-ratio-vs-unemployment",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "university-count",
-      "expectedUnit": "校",
-      "expectedConfigHash": "53c273986232d343",
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
-    },
-    {
       "metricKey": "university-professor-annual-income",
       "expectedUnit": "万円",
       "expectedConfigHash": "182b6366df799319",
@@ -1501,30 +1117,6 @@
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
       "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "volunteer-activity-annual-participation-rate-15plus",
-      "expectedUnit": "％",
-      "expectedConfigHash": "e1fa28d14a59d6ae",
-      "themeKey": "aging-society",
-      "componentKey": "theme-volunteer-participation-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "welfare-expenditure-ratio-pref-finance",
-      "expectedUnit": "％",
-      "expectedConfigHash": "1b9bf11fec98e7ac",
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "metricKey": "young-population-index",
-      "expectedUnit": "指数",
-      "expectedConfigHash": "17f9d8d5270c241a",
-      "themeKey": "aging-society",
-      "componentKey": "theme-as-youth-old-dep-index",
-      "componentType": "line-chart"
     }
   ]
 }
