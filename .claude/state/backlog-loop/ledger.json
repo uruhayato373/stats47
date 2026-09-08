@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07T21:04:09.867Z",
+  "updatedAt": "2026-09-08T19:34:41.622Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3778,6 +3778,19 @@
           "evidence": "完了条件未達を確認。state legacySnsVerification.externalMutation=NONE、deletion approval pending for the exact six old posts（COMPLETEDでない）。deletionEvidence自体が state に存在しない。加えてguardがisActive無視でdata-refresh/sync-snapshotsを恒常throwする設計判断がカード自身の記述どおり owner 判断待ち。geo:check-data-catalogはremote=NOT_",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-09-08T19:34:41.622Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "npm run geo:check-data-catalog 実行=remote=NOT_CHECKED(この環境にR2認証なし、実測フィールドはlocal-r2のみ)。カード完了条件が指す legacySnsVerification.deletionApproval.status と deletionEvidence.pendingIds は .claude/state/metrics/geo-release-publication-2026-09-05.json に存在せず(grep 0件)、同ファイルのexternalMutationは依然NONE",
+          "failReason": "needs-owner",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -3845,6 +3858,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "WebFetch/WebSearch不可、かつ.local/coconala-products(git管理外)不在のため原典照合不能。探索範囲・不足資料・引継ぎ先はbacklog本文どおりestat-researcher/coconala-product-managerへ。行削除・stateへの断定書込みはせず未確認を確認済みにしない。",
+          "failReason": "needs-owner",
+          "followUps": []
+        },
+        {
+          "at": "2026-09-08T19:34:34.205Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "この環境にWebFetch/WebSearchツールが無く、.local/coconala-products(git管理外)も不在のため原典(政府統計表)への照合が不能。2026-09-06の前回runと同一の環境制約を再確認。行削除・state断定書込みはせず未確認を維持。",
           "failReason": "needs-owner",
           "followUps": []
         }
