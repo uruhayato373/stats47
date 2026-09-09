@@ -96,7 +96,7 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
 2. bundle全体のSHA256を取り、`geo-thumbnail-transfer-<SHA先頭12桁>` の一時draft releaseへ
    `geo-thumbnails.json` として添付する。画像bundleをGitへcommitしない。
 3. `generate-ogp-images.yml` を対象作業ブランチで手動実行する。
-   `type=geo-thumbnails`、`staged_release=<tag>`、`staged_sha256=<SHA全体>`、
+   `type=geo-thumbnails`、`staged_asset_id=<添付ファイルのasset ID>`、`staged_sha256=<SHA全体>`、
    `apply=true` を指定する。CIは対象・SHA検証→S3照合→共通publisher dry-run→反映→
    全画像・manifestのS3/public GETによるSHA照合を行う。サイト本体はデプロイしない。
 4. artifact `geo-thumbnail-publication` のJSONを
@@ -104,7 +104,7 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
    反映失敗時は未完了として残し、再実行時はremote照合からやり直す。
 
 受け渡しでは生成したPCのrendererHashをGitの生成記録で固定し、別OSで再描画しない。
-CIが参照する設定とfingerprintが変わったbundleは拒否する。R2画像の照合成功と、
+CIのGitHub権限はcontents:readのまま、release一覧を使わず添付asset IDを直接指定する。CIが参照する設定とfingerprintが変わったbundleは拒否する。R2画像の照合成功と、
 GIS索引・原データ・ページ本体の本番公開確認は別の状態として管理する。
 
 
