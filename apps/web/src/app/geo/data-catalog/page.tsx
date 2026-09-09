@@ -25,6 +25,7 @@ export default async function GeoDataCatalogPage() {
   return <PageShell>
     <Breadcrumbs items={[{ label: 'ホーム', href: '/' }, { label: '地域分析', href: '/geo' }, { label: 'データ・出典' }]} />
     <PageHeader eyebrow="一次資料と利用条件" title="この空間分析は、何を重ねているか" description="各分析で実際に使うデータと対象年度を掲載しています。原典の地図と、stats47が判定・集計した結果は区別して確認してください。" />
+    <Link href="/geo/layers" className="mb-5 inline-flex min-h-11 items-center text-sm text-primary underline">GISを探す・単体の地図で確認する →</Link>
     <div className="space-y-6">{analyses.map(({ spec, snapshot }) => <SurfaceSection key={spec.slug}>
       <SectionHeader title={spec.title} description={spec.question} hideRule />
       <dl className="mt-4 grid gap-4 sm:grid-cols-2">{spec.sourceLayers.map(layer => <div key={layer.id}>

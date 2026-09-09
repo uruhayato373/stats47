@@ -14,6 +14,7 @@ import {
   rakutenFurusatoKey,
   rakutenItemsKey,
   toSnapshotItems,
+  parseRakutenSnapshot,
 } from "../rakuten-snapshot";
 
 describe("rakutenItemsKey", () => {
@@ -89,5 +90,16 @@ describe("toSnapshotItems", () => {
 
   it("空配列でも落ちない", () => {
     expect(toSnapshotItems([])).toEqual([]);
+  });
+
+  it("新snapshotはショップとジャンルを保存しreaderも落とさない", () => {
+    const items = toSnapshotItems([{ ...base, shopName: "北海道登別市", genreId: "201018" }]);
+    const parsed = parseRakutenSnapshot({ generatedAt: "2026-09-08T00:00:00Z", items });
+    expect(parsed.items[0]).toMatchObject({ shopName: "北海道登別市", genreId: "201018" });
+  });
+
+  it("旧snapshotに存在しないショップ証拠を捏造しない", () => {
+    const parsed = parseRakutenSnapshot({ generatedAt: "2026-09-08T00:00:00Z", items: toSnapshotItems([base]) });
+    expect(parsed.items[0].shopName).toBeUndefined();
   });
 });

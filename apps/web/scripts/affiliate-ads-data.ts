@@ -1,8 +1,11 @@
-import type { AffiliateAd } from "../src/features/ads/types";
+import { isAffiliateDeliveryHeld } from "../src/features/ads/constants/affiliate-delivery-policy";
+
 import {
   AFFILIATE_OFFER_PROFILES,
   AFFILIATE_PROGRAM_REF_BY_AD_ID,
 } from "./affiliate-offer-profiles-data";
+
+import type { AffiliateAd } from "../src/features/ads/types";
 
 /**
  * affiliate_ads SSOT (完全DBレス → docs/01_技術設計/02_データアーキテクチャ.md)。
@@ -5562,6 +5565,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = AFFILIATE_ADS_BASE.map((ad) => {
   const profile = programRef ? OFFER_PROFILE_BY_PROGRAM_REF.get(programRef) : undefined;
   return {
     ...ad,
+    isActive: ad.isActive && !isAffiliateDeliveryHeld({ ...ad, programRef, offerProfile: profile }),
     ...(programRef ? { programRef } : {}),
     ...(profile
       ? {

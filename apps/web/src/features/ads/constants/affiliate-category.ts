@@ -66,6 +66,30 @@ export const CATEGORY_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
 };
 
 /**
+ * カテゴリ一覧は回遊が主目的。17軸を明示し、分類の写像だけで広告枠を増やさない。
+ * null は掲載漏れではない。人口/医療/気候や既存枠のないカテゴリは適合導線を確認するまで空。
+ */
+export const CATEGORY_PAGE_AFFILIATE_POLICY: Readonly<Record<string, AffiliateVertical | null>> = {
+  laborwage: "labor",
+  construction: "housing",
+  landweather: null,
+  population: null,
+  economy: "economy",
+  socialsecurity: null,
+  energy: "energy",
+  tourism: "travel",
+  administrativefinancial: "furusato",
+  educationsports: null,
+  safetyenvironment: null,
+  commercial: null,
+  agriculture: null,
+  infrastructure: null,
+  ict: null,
+  miningindustry: null,
+  international: null,
+};
+
+/**
  * theme スラッグ (20) → vertical。テーマページ (`/themes/*`) の広告解決に使う。
  * theme の SSOT は `packages/data-configs/src/theme-catalog/`。theme 追加時はここも更新。
  */

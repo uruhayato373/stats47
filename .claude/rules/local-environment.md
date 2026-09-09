@@ -186,31 +186,20 @@ fileURLToPath(join(import.meta.url, "../noto-sans-v27-latin-regular.ttf"))
 - **`npm run build | tail` の終了コードを成功判定に使わない**。`tail` の exit code が返るため
   build の失敗が隠れる (2026-08-05 に実際に「exit 0」と誤報した)。判定は出力本文を読む。
 
-### ★`npm run type-check` は Windows で「走らずに落ちる」(2026-08-06)
+### ★Windows の型検査と古い生成型 (2026-09-08)
 
-ルートと `packages/estat-api` の `type-check` スクリプトは
-`NODE_OPTIONS="--max-old-space-size=4096" tsc --noEmit` という **POSIX の env 前置**を使う。
-npm は Windows でスクリプトを `cmd.exe /d /s /c` 経由で実行するため、これは
-
-```
-'NODE_OPTIONS' は、内部コマンドまたは外部コマンド、
-操作可能なプログラムまたはバッチ ファイルとして認識されていません。
-```
-
-で即座に失敗する。**型エラーが 0 でも exit 1 になり、逆に「走った」と誤認しやすい**
-(2026-08-06 に実際に「turbo type-check exit 0」と誤報告した。見ていたのは背景タスクの
-ラッパーの終了コードで、turbo は一度も起動していなかった)。
-
-Windows での代替:
-
-```bash
-NODE_OPTIONS="--max-old-space-size=4096" npx turbo run type-check --continue
-cd packages/estat-api && NODE_OPTIONS="--max-old-space-size=4096" npx tsc --noEmit
-```
-
-Git Bash から `npx turbo` / `npx tsc` を直接呼べば env 前置が効く (npm を挟まないため)。
-`--continue` を付けないと最初の失敗で残りが検査されない。
-**判定は必ず出力本文の `error TS` 件数で行う** (`| tail` や `| grep` の終了コードを見ない)。
+- **問題**: npm は Windows で `cmd.exe` を使うため、`NODE_OPTIONS=... tsc` という
+  POSIX の環境変数前置は型検査を起動できない。
+- **対策**: root と `packages/estat-api` は `cross-env` 経由へ修正済み。
+  通常の `npm run type-check` を使う。workspace の前置構文への回帰は
+  `.claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs` が拒否する。
+- **別原因**: admin の `.local/next-e2e/types/validator.ts` は、API route を削除した後も
+  古い import を保持することがある。生成型を手編集したり、型検査から除外したりしない。
+  apps/admin で `npx cross-env NEXT_DIST_DIR=.local/next-e2e next typegen`、続いて
+  `npx cross-env NEXT_DIST_DIR=.local/next-admin-dev next typegen` で現在の route から再生成する。
+  chunk を消さずに型だけ更新できるので、常設 dev の再起動・出力ディレクトリ削除は不要。
+- **判定**: コマンド本体の exit code と全 workspace / scripts の完走を確認する。
+  パイプ末尾や背景ラッパーの exit 0 を成功の根拠にしない。
 
 ### ★ファイルを書くときは Write/Edit を使う。heredoc で内容を流し込まない (2026-08-21)
 

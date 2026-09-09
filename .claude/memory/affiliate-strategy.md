@@ -2,6 +2,28 @@
 
 現行の運用正典は `.claude/rules/affiliate-ads-standards.md`、収益戦略は `docs/00_プロジェクト管理/02_収益化戦略.md`。
 
+## 楽天返礼品の検索分類 (2026-09-08)
+
+- **問題**: 日次同期が成功していても北海道・兵庫・沖縄等の返礼品が食事券に偏っていた。
+- **原因**: `553283` をふるさと納税共通ジャンルと誤認して固定。実際は楽天のギフト券分類。
+- **対策**: ギフト券genreの固定を食品genre `100227` へ変更し、返礼品キーワードと自治体ショップの県名一致で採用する。
+  旧データは共有品質関数で再検証し、ショップ根拠と商品名だけの地域根拠を区別する。
+  フォールバック検索も呼び出し間隔を守る。`rakuten-api.test.ts` で分類・地域除外・待機を固定する。
+- **証拠**: [楽天の分類](https://www.rakuten.co.jp/category/553283/)、
+  `apps/web/src/features/ads/lib/rakuten-api.ts`、正典ルール §12。
+
+## 表示と配信のガード (2026-09-08)
+
+- **問題**: 同一案件が本文・レールで繰り返され、画面の10%にしか入っていない広告も表示回数に入った。
+- **原因**: IDだけではサイズ違い・配置違いの同一案件を識別できず、IntersectionObserverのthresholdを表示条件そのものと誤認していた。
+- **対策**: `affiliate-delivery-policy.ts` で停止・対象key・programRef/URL重複を共通判定する。
+  `AdImpressionTracker` は交差率とタブ可視性を確認し、退出時に待機と再試行を破棄する。
+  旧snapshotの停止広告、人口/医療の文脈漏れ、連続1秒未満を回帰テストで検出する。
+- **証拠**: adsの `affiliate-ad-snapshot.test.ts` / `affiliate-placement-safety.test.tsx` /
+  `ad-impression-tracker.test.tsx`。計測境界は `analytics-event-standards.md` を参照し、前後CTRを単純比較しない。
+
+以下は過去の戦略メモ。現行の軸・提携状態・採用条件は上記SSOTと運用台帳を優先する。
+
 ## 要点
 
 - 2方式: インライン（frontmatter `affiliate` + `:::affiliate`）/ 自動配置（タグベース、記事末尾）

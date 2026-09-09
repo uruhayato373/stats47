@@ -1,4 +1,5 @@
 import { BUSINESS_PLAN_M1_GEO_ANALYSES, BUSINESS_PLAN_M1_X_POSTS } from './m1';
+import { GEO_LAYERS } from './geo-layers';
 
 /** Geoの公開・索引・リダイレクトを同じ集合から決定する。 */
 export const GEO_STAGES = ['population', 'overlap', 'audit'] as const;
@@ -20,6 +21,8 @@ export const GEO_INDEXABLE_ROUTES = [
   '/geo/compare',
   '/geo/method',
   '/geo/data-catalog',
+  '/geo/layers',
+  ...GEO_LAYERS.map((layer) => `/geo/layers/${layer.slug}`),
   ...GEO_ANALYSIS_SLUGS.map((slug) => `/geo/${slug}`),
   ...GEO_STAGE_LANDINGS,
 ];

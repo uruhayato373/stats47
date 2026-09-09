@@ -11,7 +11,10 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import {
+  BUSINESS_PLAN_M1_GEO_ANALYSES,
+  GEO_LAYERS,
+} from '@stats47/data-configs/business-plan';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -98,6 +101,23 @@ export async function GeoCrossAnalysisArticle({
         meta={`データ生成 ${generatedDate} ・ coverage ${snapshot.dataQuality.actualAreas}/${snapshot.dataQuality.expectedAreas}`}
       />
 
+      <nav
+        aria-label="入力データを単体で見る"
+        className="mb-5 flex flex-wrap items-center gap-x-4 text-sm"
+      >
+        <span className="font-semibold">まず単体で見る：</span>
+        {GEO_LAYERS.filter((layer) =>
+          layer.related.some((related) => related === slug)
+        ).map((layer) => (
+          <Link
+            key={layer.slug}
+            href={`/geo/layers/${layer.slug}?pref=${initialPrefCode}`}
+            className="inline-flex min-h-11 items-center text-primary underline"
+          >
+            {layer.name}
+          </Link>
+        ))}
+      </nav>
       {config.hazardMapUrl ? (
         <div
           role="note"

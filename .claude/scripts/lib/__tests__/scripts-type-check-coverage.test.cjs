@@ -1,5 +1,6 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
+const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
@@ -30,7 +31,12 @@ const readJsonc = (rel) => {
 const IGNORED_SEGMENTS = new Set(["node_modules", "dist", ".next", ".local", ".git", "out"]);
 
 /** .ts / .mts / .tsx を含む "scripts" ディレクトリを列挙する */
-function findScriptDirs(dir = ROOT, found = []) {
+function findScriptDirs(dir = ROOT, found = [], checkoutRoot = ROOT) {
+  // 別 checkout の scripts はその checkout の CI 契約で検査する。
+  // worktree 残骸は .git が既に消えている場合もある。
+  const relativeDir = path.relative(checkoutRoot, dir).split(path.sep).join("/");
+  if ([".claude/worktrees", ".codex/worktrees"].includes(relativeDir) ||
+      (dir !== checkoutRoot && fs.existsSync(path.join(dir, ".git")))) return found;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (!entry.isDirectory() || IGNORED_SEGMENTS.has(entry.name)) continue;
     const abs = path.join(dir, entry.name);
@@ -42,10 +48,30 @@ function findScriptDirs(dir = ROOT, found = []) {
       // scripts 配下に更に scripts を掘らない (実例が無く、掘ると遅い)
       continue;
     }
-    findScriptDirs(abs, found);
+    findScriptDirs(abs, found, checkoutRoot);
   }
   return found;
 }
+
+test("scripts 走査は通常の入れ子を拾い、別 Git worktree には入らない", () => {
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-script-coverage-"));
+  try {
+    const nested = path.join(fixture, "feature", "scripts");
+    const checkout = path.join(fixture, "worktrees", "other");
+    const foreign = path.join(checkout, "packages", "sample", "scripts");
+    fs.mkdirSync(nested, { recursive: true });
+    fs.mkdirSync(foreign, { recursive: true });
+    fs.writeFileSync(path.join(nested, "run.ts"), "export {};");
+    fs.writeFileSync(path.join(foreign, "run.ts"), "export {};");
+    fs.writeFileSync(path.join(checkout, ".git"), "gitdir: /unused-fixture");
+    const remnant = path.join(fixture, ".claude", "worktrees", "partial", "scripts");
+    fs.mkdirSync(remnant, { recursive: true });
+    fs.writeFileSync(path.join(remnant, "run.ts"), "export {};");
+    assert.deepEqual(findScriptDirs(fixture, [], fixture), [path.relative(ROOT, nested)]);
+  } finally {
+    fs.rmSync(fixture, { recursive: true, force: true });
+  }
+});
 
 /**
  * 型検査に載っていないと分かっているディレクトリ。**理由と実測を必ず書く。**
@@ -156,6 +182,20 @@ test("root の type-check が scripts の型検査を呼ぶ", () => {
     /type-check:scripts/,
     "root の type-check から呼ばれていない = CI の type-check job が素通りする",
   );
+});
+
+test("workspace の type-check は Windows でも起動できる", () => {
+  for (const group of ["apps", "packages"]) {
+    for (const entry of fs.readdirSync(path.join(ROOT, group), { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const manifest = path.join(group, entry.name, "package.json");
+      if (!fs.existsSync(path.join(ROOT, manifest))) continue;
+      const command = JSON.parse(read(manifest)).scripts?.["type-check"];
+      if (!command) continue;
+      assert.doesNotMatch(command, /^\s*[A-Za-z_][A-Za-z0-9_]*=/,
+        `${manifest}: POSIX の環境変数前置は cmd.exe で起動しない。cross-env を使う`);
+    }
+  }
 });
 
 // pre-commit は apps/web の type-check を呼ぶだけで、そこは scripts を見ない。

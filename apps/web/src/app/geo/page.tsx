@@ -1,214 +1,180 @@
 import Link from 'next/link';
 
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { ArrowRight, MapPin } from 'lucide-react';
 
+import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
-import { SectionHeader } from '@/components/section';
+import { RailLinksCard } from '@/components/rail';
 import { SurfaceCard, SurfaceLinkCard } from '@/components/surface';
 
-import { GEO_CROSS_ANALYSIS_CONFIGS, isGeoCrossAnalysisSlug } from '@/features/geo-analysis';
+import { GeoAnalysisCards } from '@/features/geo-analysis';
 
 import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
 import type { Metadata } from 'next';
 
-const title = '地域データ分析 | stats47';
-const description =
-  '複数のGISレイヤーを空間演算で重ね、将来人口、地価、洪水浸水想定、駅アクセスを地域の判断材料へ変えるGeoAI分析です。';
-
-const analysisLabels: Record<string, string> = {
-  'population-land-price': '人口 × 地価',
-  'population-flood-risk': '人口 × 洪水',
-  'population-station-access': '人口 × 駅',
-};
-
-const CALCULATION_INPUT_LAYER_COUNT = new Set(
-  BUSINESS_PLAN_M1_GEO_ANALYSES.flatMap((analysis) =>
-    analysis.sourceLayers
-      .filter((layer) => layer.role === 'calculation-input')
-      .map((layer) => layer.id)
-  )
-).size;
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title,
-  description,
+  title: '地域データ分析 | stats47',
+  description:
+    '人口の変化を住宅地・洪水浸水想定・駅と地図で重ねて読む地域分析。47都道府県を切り替え、1kmメッシュや地点から地域の違いを調べられます。',
   alternates: { canonical: '/geo' },
 };
 
+function CompareLink() {
+  return (
+    <SurfaceLinkCard
+      href="/geo/compare"
+      className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-semibold">あなたの県から調べる</p>
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+          人口・地価・洪水・駅を県別に比較
+        </p>
+      </div>
+      <ArrowRight
+        className="h-4 w-4 shrink-0 text-primary"
+        aria-hidden="true"
+      />
+    </SurfaceLinkCard>
+  );
+}
+
 export default function GeoPage() {
   return (
-    <PageShell>
+    <PageShell
+      rightRail={
+        <aside aria-label="地域分析の関連情報" className="space-y-5">
+          <div className="hidden xl:block">
+            <CompareLink />
+          </div>
+          <RailLinksCard
+            title="地域の背景を知る"
+            items={[
+              {
+                id: 'population',
+                label: '2050年の人口増減率ランキング',
+                href: POPULATION_BASELINE_RANKING_PATH,
+              },
+              { id: 'areas', label: '都道府県データブック', href: '/areas' },
+              { id: 'blog', label: '統計を読み解くブログ', href: '/blog' },
+            ]}
+          />
+          <RailLinksCard
+            title="分析方法・出典"
+            items={[
+              {
+                id: 'method',
+                label: '地図の読み方と分析の限界',
+                href: '/geo/method',
+              },
+              {
+                id: 'sources',
+                label: '使用データ・年度・利用条件',
+                href: '/geo/data-catalog',
+              },
+            ]}
+          />
+          <SurfaceCard>
+            <h2 className="text-sm font-semibold">地域を詳しく調べるために</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              地図で気になる場所を見つけたら、県別の集計や一次資料も確認できます。推計や距離条件を踏まえて読み進めてください。
+            </p>
+            <Link
+              href="/about"
+              className="mt-3 inline-flex min-h-11 items-center text-sm text-primary underline"
+            >
+              stats47について
+            </Link>
+          </SurfaceCard>
+        </aside>
+      }
+    >
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: '地域分析' }]}
       />
       <PageHeader
-        eyebrow="地域の空間分析"
-        title="人口が変わる場所を、住宅地・洪水・駅と重ねる"
-        description="県を選んで1kmメッシュを拡大し、住宅地点、浸水の想定範囲、駅との距離を確かめます。地域を詳しく調べるための問いから、分析を選んでください。"
-        stats={`${BUSINESS_PLAN_M1_GEO_ANALYSES.length}分析 ・ ${CALCULATION_INPUT_LAYER_COUNT}計算入力レイヤー ・ すべて47都道府県 ・ 1kmメッシュ/GISから集計`}
+        title="地図で見る地域の変化"
+        description="一つのGISで分布を知り、データを重ねて地域の変化を読む。"
       />
-
-      <div className="mb-8 grid gap-4 md:grid-cols-3">
-        <SurfaceCard className="p-5">
-          <p className="text-xs font-semibold text-primary">1. レイヤー</p>
-          <h3 className="mt-2 text-base font-bold">場所を持つデータを選ぶ</h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            人口メッシュ、地点、駅、浸水ポリゴンなど、分析の問いに必要な地理データを組み合わせます。
-          </p>
-        </SurfaceCard>
-        <SurfaceCard className="p-5">
-          <p className="text-xs font-semibold text-primary">2. 空間演算</p>
-          <h3 className="mt-2 text-base font-bold">
-            包含・距離・集約を計算する
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            住宅地点が入る人口メッシュ、浸水区域に入る中心点、駅から800m以内の中心点をそれぞれ判定します。
-          </p>
-        </SurfaceCard>
-        <SurfaceCard className="p-5">
-          <p className="text-xs font-semibold text-primary">3. 判断</p>
-          <h3 className="mt-2 text-base font-bold">地域差と限界を同時に読む</h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            地図だけで結論にせず、47県比較、入力件数、出典、近似条件まで同じ記事で確かめられます。
-          </p>
-        </SurfaceCard>
-      </div>
-
-      <SurfaceLinkCard
-        href={POPULATION_BASELINE_RANKING_PATH}
-        className="mb-8 block border-primary/40 p-5"
+      <nav
+        aria-label="地域データの調べ方"
+        className="mb-6 grid gap-4 sm:grid-cols-2"
       >
-        <p className="text-xs font-semibold text-primary">
-          空間分析の基準データ（ランキング）
-        </p>
-        <h3 className="mt-2 text-lg font-bold">
-          2050年の人口増減率を47都道府県で確認する
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          地点やメッシュへ進む前に、各県の人口変化を大づかみに確認したいときに使えます。人口推計の定義と出典も掲載しています。
-        </p>
-        <span className="mt-4 inline-block text-sm font-medium text-primary">
-          2050年人口増減率ランキングを見る →
-        </span>
-      </SurfaceLinkCard>
-
-      <div className="mb-8 grid gap-4 md:grid-cols-2">
-        <SurfaceLinkCard
-          href="/geo/compare"
-          className="block border-primary/40 p-5"
-        >
-          <p className="text-xs font-semibold text-primary">都道府県を選ぶ</p>
-          <h3 className="mt-2 text-lg font-bold">
-            1つの県を基準値と3つの空間分析で読む
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            住宅地点と人口変化の重なり、浸水想定区域内人口、駅800m圏人口を確認し、選んだ県の詳しい地図へ進めます。
+        <SurfaceLinkCard href="/geo/layers">
+          <h2 className="font-semibold">1. GISを探す</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            人口・住宅地価・駅を単体の地図で確認する →
           </p>
-          <span className="mt-4 inline-block text-sm font-medium text-primary">
-            あなたの県を比較する →
-          </span>
         </SurfaceLinkCard>
-        <SurfaceLinkCard href="/geo/method" className="block p-5">
-          <p className="text-xs font-semibold text-primary">方法・説明責任</p>
-          <h3 className="mt-2 text-lg font-bold">
-            地図が答えられないことも読む
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            地点とメッシュの接続、洪水区域の包含、駅800mの距離判定について、計算条件と読み取れる範囲を確認します。
+        <SurfaceLinkCard href="#geo-analyses-heading">
+          <h2 className="font-semibold">2. データを重ねて読む</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            人口と地価・洪水・駅の関係を調べる →
           </p>
-          <span className="mt-4 inline-block text-sm font-medium text-primary">
-            空間処理と限界を見る →
-          </span>
         </SurfaceLinkCard>
+      </nav>
+      <div className="mb-5 xl:hidden">
+        <CompareLink />
       </div>
-
-      <SectionHeader
-        title="調べたい問いから選ぶ"
-        description="各分析で県内の地図を動かし、地点・メッシュの判定と集計を確かめられます。"
-      />
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(16rem,1fr)]">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => (
-            <SurfaceLinkCard
-              key={analysis.slug}
-              href={`/geo/${analysis.slug}`}
-              className="block p-5"
-            >
-              <p className="text-xs font-semibold text-primary">
-                {analysisLabels[analysis.slug]} ・ 実データ47件
-              </p>
-              <h3 className="mt-2 text-lg font-bold">{analysis.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {isGeoCrossAnalysisSlug(analysis.slug) ? GEO_CROSS_ANALYSIS_CONFIGS[analysis.slug].description : analysis.question}
-              </p>
-              <span className="mt-4 inline-block text-sm font-medium text-primary">
-                分析を見る →
-              </span>
-            </SurfaceLinkCard>
-          ))}
+      <section aria-labelledby="geo-analyses-heading">
+        <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 id="geo-analyses-heading" className="text-base font-semibold">
+            調べたい問いから選ぶ
+          </h2>
+          <p className="text-xs text-muted-foreground">3つの分析・47都道府県</p>
         </div>
-        <SurfaceCard className="p-5">
-          <h3 className="text-base font-bold">公開品質の約束</h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li>・一次資料、年度、単位、粒度を明記</li>
-            <li>・推計を将来の保証として表現しない</li>
-            <li>・細かい地域粒度を未検証のまま出さない</li>
-          </ul>
-        </SurfaceCard>
-      </div>
-
-      <SectionHeader
-        title="ランキング・テーマとの違い"
-        description="同じ統計サイト内でも、答える問いと必要なデータ契約を分けています。"
-      />
-      <div className="grid gap-4 md:grid-cols-3">
-        <SurfaceCard className="p-5">
-          <h3 className="font-bold">ランキング</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            1指標を47都道府県で比較し、「何位か」に答えます。
-          </p>
-        </SurfaceCard>
-        <SurfaceCard className="p-5">
-          <h3 className="font-bold">テーマ</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            人口・医療・交通など、複数指標を同じ主題で横断します。
-          </p>
-        </SurfaceCard>
-        <SurfaceCard className="border-primary/40 p-5">
-          <h3 className="font-bold">空間分析</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            複数のGISレイヤーを重ね、「どこで重なるか」「距離条件を満たすか」から判断します。
-          </p>
-        </SurfaceCard>
-      </div>
-
-      <SurfaceCard className="mt-8 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-xs font-semibold text-primary">
-            GISデータカタログ
-          </p>
-          <h3 className="mt-1 text-lg font-bold">
-            分析に使った一次資料と利用条件
-          </h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            人口・住宅地点・洪水・駅の対象年度、地理的な粒度、計算での役割を確認できます。
-          </p>
-        </div>
+        <GeoAnalysisCards />
+        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+          地図は東京都本土（島しょを除く）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です。空白は人口・危険性・利便性の判定を示しません。
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          境界：国土交通省「国土数値情報（行政区域データ）」をもとに{' '}
+          <a href="https://geoshape.ex.nii.ac.jp/" className="underline">
+            NIIが加工
+          </a>
+          （2023年）。表示用に加工。{' '}
+          <a
+            href="https://creativecommons.org/licenses/by-sa/4.0/"
+            className="underline"
+          >
+            CC BY-SA 4.0
+          </a>
+          。 駅名・位置は
+          <Link href="/geo/data-catalog" className="underline">
+            分析の駅データ
+          </Link>
+          を使用。
+        </p>
+      </section>
+      <ContentDisclosure
+        title="はじめての地域分析：地図の読み進め方"
+        className="mt-8"
+      >
+        <ol className="list-decimal space-y-3 pl-5 text-sm leading-relaxed">
+          <li>
+            <strong>問いと県を選ぶ。</strong>
+            住宅地点、洪水、駅のうち、気になる分析の地図を開きます。
+          </li>
+          <li>
+            <strong>人口と重ね合わせを比べる。</strong>
+            同じ県でも、場所によって違う組み合わせを確認します。
+          </li>
+          <li>
+            <strong>集計・条件・出典を読む。</strong>
+            1kmメッシュによる近似や推計の限界を、地図と合わせて確かめます。
+          </li>
+        </ol>
         <Link
-          className="shrink-0 text-sm font-medium text-primary underline"
-          href="/geo/data-catalog"
+          href="/geo/method"
+          className="mt-4 inline-flex min-h-11 items-center text-sm text-primary underline"
         >
-          データカタログを見る →
+          詳しい分析方法を見る
         </Link>
-      </SurfaceCard>
-
-      <p className="mt-6 text-xs text-muted-foreground">
-        各分析では47都道府県の結果だけでなく、入力、空間処理、検算、限界まで確認できます。{' '}
-        <Link className="underline" href="/about">
-          stats47について
-        </Link>
-      </p>
+      </ContentDisclosure>
     </PageShell>
   );
 }

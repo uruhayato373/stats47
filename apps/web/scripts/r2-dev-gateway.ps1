@@ -123,7 +123,20 @@ function Write-TextResponse {
 function Resolve-LocalOverrideFile {
   param([string]$Key)
 
-  if ($localR2Base -and $Key.StartsWith("app/municipalities/", [StringComparison]::Ordinal)) {
+  if ($localR2Base -and (
+      $Key.StartsWith("app/municipalities/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("app/geo/layers/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("app/geo/datasets/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A31b/25/display/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A03/03/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A30a5/11/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A38/20/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A42/18/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A43/18/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A44/18/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/W09/05/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/L01/26/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/L02/25/", [StringComparison]::Ordinal))) {
     $r2RelativePath = $Key.Replace(
       [IO.Path]::AltDirectorySeparatorChar,
       [IO.Path]::DirectorySeparatorChar
@@ -307,10 +320,17 @@ try {
       }
     }
     catch {
-      if ($response.OutputStream.CanWrite) {
-        Write-TextResponse -Response $response -StatusCode 502 -Text "R2 gateway error"
+      $requestFailure = $_.Exception.Message
+      try {
+        if ($response.OutputStream.CanWrite) {
+          Write-TextResponse -Response $response -StatusCode 502 -Text "R2 gateway error"
+        }
       }
-      Write-Warning "[r2-dev-gateway] $($_.Exception.Message)"
+      catch {
+        # A disconnected client may have received headers already. Keep serving other requests.
+        $response.Abort()
+      }
+      Write-Warning "[r2-dev-gateway] $requestFailure"
     }
     finally {
       if ($null -ne $remoteResponse) {
@@ -319,7 +339,7 @@ try {
       if ($null -ne $remoteRequest) {
         $remoteRequest.Dispose()
       }
-      $response.OutputStream.Close()
+      try { $response.OutputStream.Close() } catch { $response.Abort() }
     }
   }
 }

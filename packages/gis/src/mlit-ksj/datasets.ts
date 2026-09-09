@@ -88,8 +88,8 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "A13", name: "森林地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "15" },
   { dataId: "C23", name: "海岸線", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false, latestVersion: "06" },
   { dataId: "G04-a", name: "標高・傾斜度3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: null, isRankingTarget: false, latestVersion: "11", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html" },
-  { dataId: "L01", name: "地価公示", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "26" },
-  { dataId: "L02", name: "都道府県地価調査", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "25" },
+  { dataId: "L01", name: "地価公示", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "26", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2026.html" },
+  { dataId: "L02", name: "都道府県地価調査", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "25", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L02-2025.html" },
   { dataId: "L03-a", name: "土地利用3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-a-2022.html" },
   {
     dataId: "W01", name: "ダム", category: "land", geometryType: "point", coverage: "national", license: "non-commercial",
@@ -99,7 +99,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "W05", name: "河川", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false, latestVersion: "09" },
   {
     dataId: "W09", name: "湖沼", category: "land", geometryType: "polygon", coverage: "national", license: "commercial-ok",
-    stats47Category: "landweather", isRankingTarget: true, latestVersion: "05",
+    stats47Category: "landweather", isRankingTarget: true, latestVersion: "05", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W09-2005.html",
     rankingConfig: [{ rankingKey: "lake-count", rankingName: "湖沼数", unit: "か所", categoryKey: "landweather", yearCode: "2005", description: "国土数値情報に登録されている湖沼の都道府県別数" }],
   },
 
@@ -205,7 +205,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "A52", name: "砂防指定地", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "23", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A52-2023.html" },
   { dataId: "A53", name: "多段階浸水想定", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A53-2024.html" },
   { dataId: "A54", name: "大規模盛土造成地", category: "land", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "23", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A54-2023.html" },
-  { dataId: "A55", name: "都市計画決定情報", category: "policy", geometryType: "mixed", coverage: "prefecture", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A55-2022.html" },
+  { dataId: "A55", name: "都市計画決定情報", category: "policy", geometryType: "mixed", coverage: "prefecture", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A55-2024.html" },
   { dataId: "G04-c", name: "標高・傾斜度4次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "landweather", isRankingTarget: false, latestVersion: "11", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-c.html" },
   { dataId: "G04-d", name: "標高・傾斜度5次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "landweather", isRankingTarget: false, latestVersion: "11", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-d.html" },
   { dataId: "G08", name: "低位地帯", category: "land", geometryType: "polygon", coverage: "prefecture", license: "commercial-ok", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "15", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G08-2015.html" },

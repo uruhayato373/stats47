@@ -52,7 +52,7 @@
 - [reference_publish_youtube_47_summary.md](reference_publish_youtube_47_summary.md) — 47県カウントアップまとめ動画(~22分)スキル /publish-youtube-47-summary
 - [reference_voicevox_setup.md](reference_voicevox_setup.md) — VOICEVOX engine(CPU版)ローカル起動。CLIのみで127.0.0.1:50021
 - [project_redesign_bundle.md](project_redesign_bundle.md) — Claude Designリデザイン11ページ×4案取込済。/apply-redesign、ranking=D案Phase1完了
-- [affiliate-strategy.md](affiliate-strategy.md) — アフィリエイト戦略(A8.netバナー登録・記事内配置ルール)
+- [affiliate-strategy.md](affiliate-strategy.md) — 広告の停止・文脈・同一案件重複・連続可視1秒の検証、楽天返礼品分類
 - [project_city_choropleth_design.md](project_city_choropleth_design.md) — 市区町村コロプレス切替の設計結論(既存スキーマ・ドリルダウン方式)
 - [project_ga4_setup.md](project_ga4_setup.md) — GA4設定状況(カスタムイベント・Consent Mode・管理画面)
 - [reference_estat_wage_survey.md](reference_estat_wage_survey.md) — 賃金構造基本統計調査(0003445758)の職種別年収データ構造・登録済みキー

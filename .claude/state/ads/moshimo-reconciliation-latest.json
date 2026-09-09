@@ -1,569 +1,194 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-27T10:11:25.680Z",
+  "generatedAt": "2026-09-08T04:20:11.037Z",
   "asp": "moshimo",
   "siteId": "638943",
   "live": {
-    "partnered": 40,
-    "applying": 36,
+    "partnered": 44,
+    "applying": 29,
+    "denied": 37,
     "parity": {
       "partnered": {
         "ok": true,
-        "rowCount": 40,
-        "idCount": 40,
+        "rowCount": 44,
+        "idCount": 44,
         "diff": 0
       },
       "applying": {
         "ok": true,
-        "rowCount": 36,
-        "idCount": 36,
+        "rowCount": 29,
+        "idCount": 29,
+        "diff": 0
+      },
+      "denied": {
+        "ok": true,
+        "rowCount": 37,
+        "idCount": 37,
         "diff": 0
       }
     }
   },
   "transitions": [
     {
-      "program": "moshimo-2626",
+      "program": "moshimo-7333",
       "asp": "moshimo",
+      "id": "7333",
+      "name": "マネカフェ｜カフェタイムで気軽にFP診断",
+      "catalog": "applying",
+      "actual": "approved",
+      "rawStatus": "提携中",
+      "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=2&limit=100&shop_site_id=638943",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+    },
+    {
+      "program": "moshimo-7059",
+      "asp": "moshimo",
+      "id": "7059",
+      "name": "みんなの生命保険アドバイザーの無料保険相談",
+      "catalog": "applying",
+      "actual": "approved",
+      "rawStatus": "提携中",
+      "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=2&limit=100&shop_site_id=638943",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+    },
+    {
+      "program": "moshimo-6548",
+      "asp": "moshimo",
+      "id": "6548",
+      "name": "テックゲートエキスパート｜20代・30代のITコンサル転職の相談",
       "catalog": "applying",
       "actual": "none",
-      "id": "2626",
-      "evidence": "単一申請フォーム promotion_id=2626 / 再申請ボタン1件"
+      "rawStatus": "否認中",
+      "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
     },
     {
-      "program": "moshimo-7404",
+      "program": "moshimo-6171",
       "asp": "moshimo",
-      "catalog": "approved",
-      "actual": "none",
-      "id": "7404",
-      "evidence": "単一申請フォーム promotion_id=7404 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7614",
-      "asp": "moshimo",
-      "catalog": "approved",
-      "actual": "none",
-      "id": "7614",
-      "evidence": "単一申請フォーム promotion_id=7614 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7430",
-      "asp": "moshimo",
+      "id": "6171",
+      "name": "One Month Program｜ビジネスパーソン向けの1ヶ月短期集中英語パーソナルトレーニングプログラムの無料カウンセリング申込",
       "catalog": "applying",
       "actual": "none",
-      "id": "7430",
-      "evidence": "単一申請フォーム promotion_id=7430 / 再申請ボタン1件"
+      "rawStatus": "否認中",
+      "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
     },
     {
-      "program": "moshimo-7422",
+      "program": "moshimo-6128",
       "asp": "moshimo",
+      "id": "6128",
+      "name": "お仕事ラボ｜大手調剤チェーンの経営で安心♪薬剤師の派遣・転職の新規申込",
       "catalog": "applying",
       "actual": "none",
-      "id": "7422",
-      "evidence": "単一申請フォーム promotion_id=7422 / 再申請ボタン1件"
+      "rawStatus": "否認中",
+      "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
     },
     {
-      "program": "moshimo-7259",
+      "program": "moshimo-5816",
       "asp": "moshimo",
+      "id": "5816",
+      "name": "忍者CODE｜未経験からプロを目指せるオンラインプログラミングスクールの新規各種申込",
       "catalog": "applying",
       "actual": "none",
-      "id": "7259",
-      "evidence": "単一申請フォーム promotion_id=7259 / 再申請ボタン1件"
+      "rawStatus": "否認中",
+      "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
     },
     {
-      "program": "moshimo-7260",
+      "program": "moshimo-6214",
       "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "7260",
-      "evidence": "単一申請フォーム promotion_id=7260 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7048",
-      "asp": "moshimo",
+      "id": "6214",
+      "name": "住空間本舗｜キッチンリフォームの無料現地調査申込み",
       "catalog": "applying",
       "actual": "unavailable",
-      "id": "7048",
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+      "rawStatus": "このプロモーションは終了しました。",
+      "url": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=6214&shop_site_id=638943",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6214.txt"
     },
     {
-      "program": "moshimo-7042",
+      "program": "moshimo-5685",
       "asp": "moshimo",
+      "id": "5685",
+      "name": "保険相談アイパートナーズ｜FPへの無料相談",
       "catalog": "applying",
       "actual": "unavailable",
-      "id": "7042",
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
-    },
-    {
-      "program": "moshimo-6910",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6910",
-      "evidence": "単一申請フォーム promotion_id=6910 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6662",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6662",
-      "evidence": "単一申請フォーム promotion_id=6662 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6650",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6650",
-      "evidence": "単一申請フォーム promotion_id=6650 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-3639",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "3639",
-      "evidence": "単一申請フォーム promotion_id=3639 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6928",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6928",
-      "evidence": "単一申請フォーム promotion_id=6928 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-3209",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "3209",
-      "evidence": "単一申請フォーム promotion_id=3209 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6955",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6955",
-      "evidence": "単一申請フォーム promotion_id=6955 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7562",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "7562",
-      "evidence": "単一申請フォーム promotion_id=7562 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7627",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "7627",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-6663",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6663",
-      "evidence": "単一申請フォーム promotion_id=6663 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-3833",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "3833",
-      "evidence": "単一申請フォーム promotion_id=3833 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6129",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "6129",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-6813",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6813",
-      "evidence": "単一申請フォーム promotion_id=6813 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6599",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6599",
-      "evidence": "単一申請フォーム promotion_id=6599 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6398",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6398",
-      "evidence": "単一申請フォーム promotion_id=6398 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-5906",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "5906",
-      "evidence": "単一申請フォーム promotion_id=5906 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6623",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "unavailable",
-      "id": "6623",
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
-    },
-    {
-      "program": "moshimo-6697",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "6697",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-6614",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "6614",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-7392",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "unavailable",
-      "id": "7392",
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
-    },
-    {
-      "program": "moshimo-6775",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6775",
-      "evidence": "単一申請フォーム promotion_id=6775 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-5905",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "5905",
-      "evidence": "単一申請フォーム promotion_id=5905 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-2228",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "2228",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-7628",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "7628",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-7180",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "7180",
-      "evidence": "単一申請フォーム promotion_id=7180 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-5389",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "5389",
-      "evidence": "単一申請フォーム promotion_id=5389 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-6970",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "6970",
-      "evidence": "単一申請フォーム promotion_id=6970 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7173",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "7173",
-      "evidence": "単一申請フォーム promotion_id=7173 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7045",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "7045",
-      "evidence": "単一申請フォーム promotion_id=7045 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-5471",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "none",
-      "id": "5471",
-      "evidence": "単一申請フォーム promotion_id=5471 / 再申請ボタン1件"
-    },
-    {
-      "program": "moshimo-7348",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "7348",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-3830",
-      "asp": "moshimo",
-      "catalog": "applying",
-      "actual": "approved",
-      "id": "3830",
-      "evidence": "実機一覧の正一致"
-    },
-    {
-      "program": "moshimo-7558",
-      "asp": "moshimo",
-      "catalog": "approved",
-      "actual": "none",
-      "id": "7558",
-      "evidence": "単一申請フォーム promotion_id=7558 / 再申請ボタン1件"
+      "rawStatus": "このプロモーションは終了しました。",
+      "url": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=5685&shop_site_id=638943",
+      "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/detail-5685.txt"
     }
   ],
   "unresolved": [],
   "detailEvidence": {
-    "2626": {
+    "5685": {
       "siteId": "638943",
-      "state": "none",
-      "name": "日本最大級のオンラインフィットネスサービス『LEAN BODY（リーンボディ）』の2週間無料会員登録",
-      "evidence": "単一申請フォーム promotion_id=2626 / 再申請ボタン1件"
+      "state": "unavailable",
+      "name": "保険相談アイパートナーズ｜FPへの無料相談",
+      "evidence": "このプロモーションは終了しました。",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-5685.txt"
     },
-    "3209": {
+    "6214": {
       "siteId": "638943",
-      "state": "none",
-      "name": "CLOUD GYM｜パーソナルジムの入会完了",
-      "evidence": "単一申請フォーム promotion_id=3209 / 再申請ボタン1件"
-    },
-    "3639": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "Webデザイン・Webマーケティング・プログラミングスクール｜インターネット・アカデミーの無料カウンセリング申込及び実施",
-      "evidence": "単一申請フォーム promotion_id=3639 / 再申請ボタン1件"
-    },
-    "3833": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ウズウズIT【UZUZ IT】｜未経験からITエンジニアを目指したい方の特化型就職サポートの無料会員登録",
-      "evidence": "単一申請フォーム promotion_id=3833 / 再申請ボタン1件"
-    },
-    "5389": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "UZUZ（ウズウズ）｜転職相談のためのキャリア面談への参加",
-      "evidence": "単一申請フォーム promotion_id=5389 / 再申請ボタン1件"
-    },
-    "5471": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ターキッシュエア&トラベル｜海外旅行『トルコ5つの世界遺産周遊ツアー』の予約",
-      "evidence": "単一申請フォーム promotion_id=5471 / 再申請ボタン1件"
-    },
-    "5905": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "CORPO（コーポ）｜人事・HR業界特化の転職エージェントの新規転職相談の申込",
-      "evidence": "単一申請フォーム promotion_id=5905 / 再申請ボタン1件"
-    },
-    "5906": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ウェブスキ｜WEBデザイン×SNS広告運用のオンラインスクールの無料レクチャー・講座申込",
-      "evidence": "単一申請フォーム promotion_id=5906 / 再申請ボタン1件"
+      "state": "unavailable",
+      "name": "住空間本舗｜キッチンリフォームの無料現地調査申込み",
+      "evidence": "このプロモーションは終了しました。",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6214.txt"
     },
     "6398": {
       "siteId": "638943",
       "state": "none",
-      "name": "【クローズド】WEBCOACH｜インフルエンサー向け！オンラインWebデザインスクールの無料カウンセリング参加",
-      "evidence": "単一申請フォーム promotion_id=6398 / 再申請ボタン1件"
-    },
-    "6599": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ウズカレIT｜わずか1ヶ月のオンライン研修で未経験からITエンジニア就職◆無料カウンセリング実施◆",
-      "evidence": "単一申請フォーム promotion_id=6599 / 再申請ボタン1件"
+      "name": "WEBCOACH｜インフルエンサー向け！オンラインWebデザインスクールの無料カウンセリング参加",
+      "evidence": "否認中",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6398.txt"
     },
     "6623": {
       "siteId": "638943",
       "state": "unavailable",
-      "name": null,
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
-    },
-    "6650": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "RareTECH｜無料カウンセリング申し込み",
-      "evidence": "単一申請フォーム promotion_id=6650 / 再申請ボタン1件"
-    },
-    "6662": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ヤマトヒューマンキャピタル｜経営×ファイナンス領域に特化した転職エージェントの面談完了",
-      "evidence": "単一申請フォーム promotion_id=6662 / 再申請ボタン1件"
-    },
-    "6663": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ユニゾンキャリア｜IT・Web業界専門のIT未経験向け転職エージェントの新規無料相談実施",
-      "evidence": "単一申請フォーム promotion_id=6663 / 再申請ボタン1件"
-    },
-    "6775": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "保育のせかい｜保育士・幼稚園教諭のための就職・転職エージェントの新規会員登録",
-      "evidence": "単一申請フォーム promotion_id=6775 / 再申請ボタン1件"
-    },
-    "6813": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ウズウズカレッジ＜有料コース＞｜未経験からITエンジニアへ！就職支援型ITスクールの無料カウンセリング参加",
-      "evidence": "単一申請フォーム promotion_id=6813 / 再申請ボタン1件"
-    },
-    "6910": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "転職ボックス｜IT/ゲーム業界の正社員求職者の集客の無料会員登録",
-      "evidence": "単一申請フォーム promotion_id=6910 / 再申請ボタン1件"
-    },
-    "6928": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "マーズキャリア｜若手ハイクラス向け転職エージェントへの転職相談申し込み",
-      "evidence": "単一申請フォーム promotion_id=6928 / 再申請ボタン1件"
-    },
-    "6955": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "PRESENCE（プレゼンス）｜英語コーチングスクールの無料カウンセリング申し込み",
-      "evidence": "単一申請フォーム promotion_id=6955 / 再申請ボタン1件"
-    },
-    "6970": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "女性のためのキャリアコーチング｜ステージアップアップProgram【無料体験セミナー】への参加",
-      "evidence": "単一申請フォーム promotion_id=6970 / 再申請ボタン1件"
+      "name": "キャリフト｜40代・50代向けキャリアコーチングの無料相談の面談実施",
+      "evidence": "このプロモーションは終了しました。",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6623.txt"
     },
     "7042": {
       "siteId": "638943",
       "state": "unavailable",
-      "name": null,
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
-    },
-    "7045": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "転職ボックス｜転職エージェントサイト求人掲載希望の企業用（IT/ゲーム職種のみ）",
-      "evidence": "単一申請フォーム promotion_id=7045 / 再申請ボタン1件"
+      "name": "Global Marketing Academy（グローバルマーケティングアカデミー）｜未経験・",
+      "evidence": "このプロモーションは終了しました。",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7042.txt"
     },
     "7048": {
       "siteId": "638943",
       "state": "unavailable",
-      "name": null,
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
-    },
-    "7173": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "向き合い転職｜オンライン転職サービスの初回面談実施",
-      "evidence": "単一申請フォーム promotion_id=7173 / 再申請ボタン1件"
-    },
-    "7180": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "techmeets｜プログラミングスクールの無料カウンセリング着座",
-      "evidence": "単一申請フォーム promotion_id=7180 / 再申請ボタン1件"
-    },
-    "7259": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ジョブサポ薬剤師｜在宅医療・地方転職に強い薬剤師の求人・転職の新規面談完了",
-      "evidence": "単一申請フォーム promotion_id=7259 / 再申請ボタン1件"
-    },
-    "7260": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ジョブサポ看護師｜訪問看護に強い看護師の求人・転職の新規面談完了",
-      "evidence": "単一申請フォーム promotion_id=7260 / 再申請ボタン1件"
+      "name": "Tamesy｜転職エージェントの初回面談参加",
+      "evidence": "このプロモーションは終了しました。",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7048.txt"
     },
     "7392": {
       "siteId": "638943",
       "state": "unavailable",
-      "name": null,
-      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+      "name": "キャリビー｜キャリアコーチング型転職支援サービスの無料カウンセリング参加",
+      "evidence": "このプロモーションは終了しました。",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7392.txt"
     },
     "7404": {
       "siteId": "638943",
       "state": "none",
-      "name": "サロンドタピア｜MINTERAの購入",
-      "evidence": "単一申請フォーム promotion_id=7404 / 再申請ボタン1件"
-    },
-    "7422": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "キャリパト｜キャリアコーチング（キャリア戦略プログラム）の無料相談への申込み",
-      "evidence": "単一申請フォーム promotion_id=7422 / 再申請ボタン1件"
-    },
-    "7430": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ジョブサポ医師｜在宅診療・地方転職に強い医師の求人・転職の新規面談完了",
-      "evidence": "単一申請フォーム promotion_id=7430 / 再申請ボタン1件"
+      "name": null,
+      "evidence": "未申請",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7404.txt"
     },
     "7558": {
       "siteId": "638943",
       "state": "none",
-      "name": "借金問題解決ナビLINEの友達追加",
-      "evidence": "単一申請フォーム promotion_id=7558 / 再申請ボタン1件"
-    },
-    "7562": {
-      "siteId": "638943",
-      "state": "none",
-      "name": "ウズカレエージェント｜未経験からの戦略的ITエンジニア転職の新規無料面談参加",
-      "evidence": "単一申請フォーム promotion_id=7562 / 再申請ボタン1件"
+      "name": null,
+      "evidence": "未申請",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7558.txt"
     },
     "7614": {
       "siteId": "638943",
       "state": "none",
-      "name": "SellBridge Academy｜越境ECを未経験から始めるための在宅オンラインスクールの受講申込",
-      "evidence": "単一申請フォーム promotion_id=7614 / 再申請ボタン1件"
+      "name": null,
+      "evidence": "未申請",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7614.txt"
     }
   }
 }

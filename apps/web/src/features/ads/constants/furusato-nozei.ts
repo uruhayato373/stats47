@@ -108,7 +108,7 @@ const FURUSATO_SIGNATURE: Record<string, string> = {
  * 該当なしの場合は null を返す。
  */
 export function getFurusatoNozeiLink(areaCode: string): FurusatoNozeiLink | null {
-  if (areaCode === "00000") return null;
+  if (!/^\d{5}$/.test(areaCode) || areaCode === "00000") return null;
   const prefCode = `${areaCode.substring(0, 2)}000`;
   const link = FURUSATO_NOZEI_LINKS.find((l) => l.prefCode === prefCode);
   if (!link) return null;
@@ -144,6 +144,17 @@ export function detectPrefCodeFromText(text: string | null | undefined): string 
     }
   }
   return best?.prefCode ?? null;
+}
+
+/** 単一県が主題の記事だけに返礼品を置く。比較記事から一方の県を恣意的に選ばない。 */
+export function detectSinglePrefCodeFromText(text: string): string | null {
+  const names = FURUSATO_NOZEI_LINKS.flatMap((link) => [
+    link.prefName, link.prefName.replace(/[都府県]$/, ""),
+  ]).sort((a, b) => b.length - a.length);
+  // 長い県名を先に消費し、「東京都」内の「京都」を再検出しない。
+  const matches = text.match(new RegExp([...new Set(names)].join("|"), "g")) ?? [];
+  const codes = new Set(matches.map((name) => detectPrefCodeFromText(name)));
+  return codes.size === 1 ? [...codes][0] : null;
 }
 
 /**

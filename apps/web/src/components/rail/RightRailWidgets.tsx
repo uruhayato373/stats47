@@ -23,7 +23,7 @@ interface RightRailWidgetsProps {
   showBottomAd?: boolean;
   /** AdSense Rectangle (上部) を表示するか (default: true) */
   showTopAd?: boolean;
-  /** 高単価アフィリエイトバナーを表示するか (default: true) */
+  /** 固定アフィリエイトバナーを表示するか (default: false。文脈未指定の共通レールでは非掲載) */
   showPromoBanner?: boolean;
   /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 汎用画像バナー) */
   promoBannerIndex?: number;
@@ -49,7 +49,7 @@ export async function RightRailWidgets({
   bottomWidgets,
   showBottomAd = true,
   showTopAd = true,
-  showPromoBanner = true,
+  showPromoBanner = false,
   promoBannerIndex = selectPromoBannerIndexForRanking(),
 }: RightRailWidgetsProps) {
   const hasContent = !!topWidgets || !!midWidgets || !!bottomWidgets;

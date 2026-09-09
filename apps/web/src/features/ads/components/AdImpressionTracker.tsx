@@ -22,7 +22,7 @@ interface AdImpressionTrackerProps {
 
 /**
  * Intersection Observer で広告のインプレッション（ビューポート表示）を GA4 に送信する。
- * 50% 以上が 1 秒以上表示された場合に 1 回だけ発火する。
+ * 表示中のタブで 50% 以上が連続 1 秒表示された場合に、mount ごとに 1 回だけ発火する。
  *
  * ★ イベント名は `affiliate_impression`（2026-07-28 に `ad_impression` から改名）。
  *   旧名は **GA4 の AdSense 連携が自動生成するイベント名と同じ**で、直近 7 日の 3,346 件が
@@ -40,6 +40,8 @@ interface AdImpressionTrackerProps {
 /** gtag 未準備時のリトライ間隔と上限（合計 ~5 秒待つ。それでも来なければ諦める）。 */
 const GTAG_RETRY_INTERVAL_MS = 500;
 const GTAG_MAX_RETRIES = 10;
+const VIEWABLE_RATIO = 0.5;
+const VIEWABLE_DURATION_MS = 1000;
 export function AdImpressionTracker({
   category,
   label,
@@ -60,6 +62,18 @@ export function AdImpressionTracker({
 
     let timer: ReturnType<typeof setTimeout> | null = null;
     let retryTimer: ReturnType<typeof setTimeout> | null = null;
+    let isHalfVisible = false;
+    let isTracking = false;
+    let isDisposed = false;
+
+    const isViewable = () => isHalfVisible && document.visibilityState === "visible";
+    const clearTimers = () => {
+      if (timer !== null) clearTimeout(timer);
+      if (retryTimer !== null) clearTimeout(retryTimer);
+      timer = null;
+      retryTimer = null;
+      isTracking = false;
+    };
 
     /**
      * gtag が使えれば送信して true。未準備なら **firedRef を立てずに** false を返す。
@@ -84,30 +98,41 @@ export function AdImpressionTracker({
     };
 
     const trySend = (attempt: number) => {
-      if (firedRef.current) return;
+      if (isDisposed || firedRef.current || !isViewable()) return;
       if (send()) return;
       if (attempt >= GTAG_MAX_RETRIES) return; // 諦める (欠測は残るが無限リトライはしない)
       retryTimer = setTimeout(() => trySend(attempt + 1), GTAG_RETRY_INTERVAL_MS);
     };
 
+    const updateVisibility = () => {
+      if (!isViewable()) {
+        clearTimers(); // 退出・50%未満・タブ非表示では、gtag 待機中でも継続時間を捨てる。
+        return;
+      }
+      if (isDisposed || firedRef.current || isTracking) return;
+      isTracking = true; // 同じ表示区間の再通知で timer/retry を多重起動しない。
+      timer = setTimeout(() => trySend(0), VIEWABLE_DURATION_MS);
+    };
+
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !firedRef.current) {
-          timer = setTimeout(() => trySend(0), 1000);
-        } else if (timer) {
-          clearTimeout(timer);
-          timer = null;
+      (entries) => {
+        for (const entry of entries) {
+          // threshold は通知の境界であり、isIntersecting 自体は 50% を保証しない。
+          isHalfVisible = entry.isIntersecting && entry.intersectionRatio >= VIEWABLE_RATIO;
+          updateVisibility();
         }
       },
-      { threshold: 0.5 }
+      { threshold: VIEWABLE_RATIO }
     );
 
     observer.observe(el);
+    document.addEventListener("visibilitychange", updateVisibility);
 
     return () => {
+      isDisposed = true;
       observer.disconnect();
-      if (timer) clearTimeout(timer);
-      if (retryTimer) clearTimeout(retryTimer);
+      document.removeEventListener("visibilitychange", updateVisibility);
+      clearTimers();
     };
   }, [category, label, position, adId, experimentId, variantId, creativeSize]);
 

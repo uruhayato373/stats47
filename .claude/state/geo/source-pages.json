@@ -1,0 +1,1349 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-08T08:34:36.650Z",
+  "scope": "local representative file; production not checked",
+  "backlogId": "GEO-SOURCE-PAGES-01",
+  "summary": {
+    "total": 50,
+    "localReady": 34,
+    "contentImplemented": 35,
+    "mapVerified": 34,
+    "needsFix": 0,
+    "productionVerified": 0
+  },
+  "entries": [
+    {
+      "order": 1,
+      "dataId": "G04-a",
+      "name": "標高・傾斜度3次メッシュ",
+      "url": "/geo/datasets/G04-a",
+      "version": "11",
+      "fingerprint": "e9021ecac2948f1420d5ded466f058a2a57b9ec00bf642524ba205ec7ef9dfd1",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:31:16.681Z",
+        "assetKey": "gis/mlit-ksj/G04-a/11/5339.topojson",
+        "assetSha256": "a335146eda578637fde6626b2788ae19cb713155cc16dd6fbb1a3297a1014b38",
+        "featureCount": 6300,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/G04-a-320.png",
+          ".local/geo-source-pages/G04-a-1440.png"
+        ],
+        "mapStatus": "区画内 6,300地物／表示対象候補 6,300地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "G04a_001",
+          "G04a_002",
+          "G04a_003",
+          "G04a_004",
+          "G04a_010"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 2,
+      "dataId": "L01",
+      "name": "地価公示",
+      "url": "/geo/datasets/L01",
+      "version": "26",
+      "fingerprint": "91fbda6b36fdb7902ea75f483247aab684068f73a1216240cc71ab2c114c2233",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:31:28.955Z",
+        "assetKey": "gis/mlit-ksj/L01/26/national.topojson",
+        "assetSha256": "344089ba764f792b0cb5e375291d57c33b74f8759ba26b400f5c657351cc2516",
+        "featureCount": 25565,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/L01-320.png",
+          ".local/geo-source-pages/L01-1440.png"
+        ],
+        "mapStatus": "区画内 25,565地物／表示対象候補 25,565地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "L01_002",
+          "L01_007",
+          "L01_008",
+          "L01_009",
+          "L01_025"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 3,
+      "dataId": "L02",
+      "name": "都道府県地価調査",
+      "url": "/geo/datasets/L02",
+      "version": "25",
+      "fingerprint": "560053a90081d99312c65304f5e3b23a82f9ba51cabc7995a9b7c4b40553aecb",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:31:40.576Z",
+        "assetKey": "gis/mlit-ksj/L02/25/national.topojson",
+        "assetSha256": "1788d2d97750a60d7133712b79e8c1031817128f1211fb49b280b008b5fefe93",
+        "featureCount": 21431,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/L02-320.png",
+          ".local/geo-source-pages/L02-1440.png"
+        ],
+        "mapStatus": "区画内 21,431地物／表示対象候補 21,431地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "L02_001",
+          "L02_005",
+          "L02_006",
+          "L02_007"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 4,
+      "dataId": "L03-a",
+      "name": "土地利用3次メッシュ",
+      "url": "/geo/datasets/L03-a",
+      "version": "21",
+      "fingerprint": "b3a622d7a0360274b022d46c2c06fae89cf672a85e519f03835bd4e040d0cd65",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:31:46.599Z",
+        "assetKey": "gis/mlit-ksj/L03-a/21/5339.topojson",
+        "assetSha256": "1eb8a1fadd189de88c87922f98f8d96901f7351bdeab75fce4ce8bff42d9e7a9",
+        "featureCount": 6300,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/L03-a-320.png",
+          ".local/geo-source-pages/L03-a-1440.png"
+        ],
+        "mapStatus": "区画内 6,300地物／表示対象候補 6,300地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "田",
+          "その他の農用地",
+          "森林",
+          "建物用地",
+          "河川地及び湖沼"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 5,
+      "dataId": "W09",
+      "name": "湖沼",
+      "url": "/geo/datasets/W09",
+      "version": "05",
+      "fingerprint": "9f1a3a144a5663da4a66e1c2cd0b52bf0456a28d7657ddd60fa211b25b42e2e0",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:31:52.459Z",
+        "assetKey": "gis/mlit-ksj/W09/05/national.topojson",
+        "assetSha256": "d6a0b6d0c9ff8379d271c45de2a65ca808f55b6ccced69d7212ab35aa67e3b84",
+        "featureCount": 556,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/W09-320.png",
+          ".local/geo-source-pages/W09-1440.png"
+        ],
+        "mapStatus": "区画内 556地物／表示対象候補 556地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "W09_001",
+          "W09_002",
+          "W09_003",
+          "W09_004"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 6,
+      "dataId": "A45",
+      "name": "国有林野",
+      "url": "/geo/datasets/A45",
+      "version": "19",
+      "fingerprint": "658c46f3c52411fb37661dcc9819edeb15c148d0443a205965c071159129e6a8",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:31:56.957Z",
+        "assetKey": "gis/mlit-ksj/A45/19/13/data.topojson",
+        "assetSha256": "a930047e4b1800cfd00b417eb14cb8443d04ac1df90dca9eb1c35c9556e2c5d2",
+        "featureCount": 1847,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A45-320.png",
+          ".local/geo-source-pages/A45-1440.png"
+        ],
+        "mapStatus": "区画内 1,847地物／表示対象候補 1,847地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A45_008",
+          "A45_009",
+          "A45_011",
+          "A45_013",
+          "A45_027"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 7,
+      "dataId": "A54",
+      "name": "大規模盛土造成地",
+      "url": "/geo/datasets/A54",
+      "version": "23",
+      "fingerprint": "94d399de21d23fabfd660a60db7ac609574e52ebb6ee9cfa5329289f9a9b8000",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:01.444Z",
+        "assetKey": "gis/mlit-ksj/A54/23/national/data-001.topojson",
+        "assetSha256": "08045b8c41cc5b1dc1cef5f9a90ae3b481c463bf963d8b5796a2a0b4640e3646",
+        "featureCount": 8578,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A54-320.png",
+          ".local/geo-source-pages/A54-1440.png"
+        ],
+        "mapStatus": "区画内 8,578地物／表示対象候補 8,578地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "A54_001",
+          "A54_003",
+          "A54_005"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 8,
+      "dataId": "G04-c",
+      "name": "標高・傾斜度4次メッシュ",
+      "url": "/geo/datasets/G04-c",
+      "version": "11",
+      "fingerprint": "12b35b81ee15e9b70c5037a9f5c26ef27c08e88523cc369a2967fe36d2f06768",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:08.636Z",
+        "assetKey": "gis/mlit-ksj/G04-c/11/5339-jgd/data.topojson",
+        "assetSha256": "da6126d157d085ee14c65f747969e9f56d3268b49a02e441d3cafee08b1dde2a",
+        "featureCount": 23376,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/G04-c-320.png",
+          ".local/geo-source-pages/G04-c-1440.png"
+        ],
+        "mapStatus": "区画内 23,376地物／表示対象候補 23,376地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "G04c_001",
+          "G04c_002",
+          "G04c_003",
+          "G04c_004",
+          "G04c_010"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 9,
+      "dataId": "G04-d",
+      "name": "標高・傾斜度5次メッシュ",
+      "url": "/geo/datasets/G04-d",
+      "version": "11",
+      "fingerprint": "b9887c975a1c796ccc79cb7805164546a5acc78adcaf63944140a5d0ab8abfa8",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:24.122Z",
+        "assetKey": "gis/mlit-ksj/G04-d/11/5339-jgd/data.topojson",
+        "assetSha256": "516e17cde35a58826250f405decce2fd1e2fa1e5f12df91877621147e244626b",
+        "featureCount": 93504,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/G04-d-320.png",
+          ".local/geo-source-pages/G04-d-1440.png"
+        ],
+        "mapStatus": "区画内 93,504地物／表示対象候補 93,504地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "G04d_001",
+          "G04d_002",
+          "G04d_003",
+          "G04d_004",
+          "G04d_010"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 10,
+      "dataId": "G08",
+      "name": "低位地帯",
+      "url": "/geo/datasets/G08",
+      "version": "15",
+      "fingerprint": "f7daa8d01028cdcd6fec2241a8e1f7f0cd01213e908f600b4dc2d608d32566fe",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:29.901Z",
+        "assetKey": "gis/mlit-ksj/G08/15/13/data.topojson",
+        "assetSha256": "7aa3e3ebb9e6b737ebae022de886972fabe16f66f0236543b9390312f7f976d5",
+        "featureCount": 1483,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/G08-320.png",
+          ".local/geo-source-pages/G08-1440.png"
+        ],
+        "mapStatus": "区画内 1,483地物／表示対象候補 1,483地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "G08_001",
+          "G08_002",
+          "G08_003"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 11,
+      "dataId": "L03-b",
+      "name": "土地利用細分メッシュ",
+      "url": "/geo/datasets/L03-b",
+      "version": "21",
+      "fingerprint": "6f0c2060e3422cb9c39a201aec22d1bc6e7757862d57e68b79f2fe32550df8f6",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:35.671Z",
+        "assetKey": "gis/mlit-ksj/L03-b/21/5339-jgd2011/data-001.topojson",
+        "assetSha256": "2cf788e3091d4c00a572e6914a0aa0528561f85764cd4ce83975ff4b1f1087e6",
+        "featureCount": 20000,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/L03-b-320.png",
+          ".local/geo-source-pages/L03-b-1440.png"
+        ],
+        "mapStatus": "区画内 20,000地物／表示対象候補 20,000地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "細分メッシュコード",
+          "土地利用種別",
+          "衛星写真撮影年月日"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 12,
+      "dataId": "L03-b-c",
+      "name": "土地利用詳細メッシュ",
+      "url": "/geo/datasets/L03-b-c",
+      "version": "21",
+      "fingerprint": "0d13b60d449b9dccd3ea714a7d69e02adc87b47a438774a2a40ee899e8050953",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:40.587Z",
+        "assetKey": "gis/mlit-ksj/L03-b-c/21/5339-jgd2011/data-001.topojson",
+        "assetSha256": "a05d9fd29f9a16f596367a4964b4e9e8fb4a95b45e101c415dc23f0ac0be98f8",
+        "featureCount": 20000,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/L03-b-c-320.png",
+          ".local/geo-source-pages/L03-b-c-1440.png"
+        ],
+        "mapStatus": "区画内 20,000地物／表示対象候補 20,000地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "詳細メッシュコード",
+          "土地利用種別",
+          "衛星写真撮影年月日"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 13,
+      "dataId": "L03-b-u",
+      "name": "都市地域土地利用細分メッシュ",
+      "url": "/geo/datasets/L03-b-u",
+      "version": "21",
+      "fingerprint": "d36942edf1eee0f74c2b9ea6fb3a884917f49778a8879077d11fcbacfba97a49",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:45.648Z",
+        "assetKey": "gis/mlit-ksj/L03-b-u/21/5339-jgd2011/data-001.topojson",
+        "assetSha256": "054cbbe1c24fede6bd2c0cc6d428c49946e61abb0648efe8c9c0f424f21ed8a4",
+        "featureCount": 20000,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/L03-b-u-320.png",
+          ".local/geo-source-pages/L03-b-u-1440.png"
+        ],
+        "mapStatus": "区画内 20,000地物／表示対象候補 20,000地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "細分メッシュコード",
+          "土地利用種別",
+          "衛星写真撮影年月日"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 14,
+      "dataId": "A16",
+      "name": "DID人口集中地区",
+      "url": "/geo/datasets/A16",
+      "version": "20",
+      "fingerprint": "dde0142ed2b51685061761aa05b0940fde4a29d43c02570725aa114017c9e75e",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:50.528Z",
+        "assetKey": "gis/mlit-ksj/A16/20/national.topojson",
+        "assetSha256": "a3e0bd3d4731c425f3e754e148c66af7395c2a3a1c2c531f8d226fdc435398b4",
+        "featureCount": 1463,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A16-320.png",
+          ".local/geo-source-pages/A16-1440.png"
+        ],
+        "mapStatus": "区画内 1,463地物／表示対象候補 1,463地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A16_003",
+          "A16_005",
+          "A16_006",
+          "A16_009",
+          "A16_014"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 15,
+      "dataId": "A17",
+      "name": "過疎地域",
+      "url": "/geo/datasets/A17",
+      "version": "17",
+      "fingerprint": "2f90e7a127b5518235e11dfe84a3eaf952eb6729eaab674c1322886677f5ee12",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:54.084Z",
+        "assetKey": "gis/mlit-ksj/A17/17/13.topojson",
+        "assetSha256": "7b2f074d62a1ed476cfa500e2f2caaa2a0a07d181a45e75d5b041f9db9d6a7c5",
+        "featureCount": 1129,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A17-320.png",
+          ".local/geo-source-pages/A17-1440.png"
+        ],
+        "mapStatus": "区画内 1,129地物／表示対象候補 1,129地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A17_003",
+          "A17_006",
+          "A17_007",
+          "A17_008",
+          "A17_009"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 16,
+      "dataId": "A22",
+      "name": "豪雪地帯",
+      "url": "/geo/datasets/A22",
+      "version": "16",
+      "fingerprint": "70df50a197158e9424571c35305494513169eff32b98131d0b3a9c2b7a914a29",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:32:58.234Z",
+        "assetKey": "gis/mlit-ksj/A22/16/03.topojson",
+        "assetSha256": "f295398af3eeadf3765197daac81a67fb1ac2e5d3df71723d2535113c95dd46d",
+        "featureCount": 7860,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A22-320.png",
+          ".local/geo-source-pages/A22-1440.png"
+        ],
+        "mapStatus": "区画内 7,860地物／表示対象候補 7,860地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "A22_003",
+          "A22_006",
+          "A22_008",
+          "A22_009"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 17,
+      "dataId": "A31b",
+      "name": "洪水浸水想定区域",
+      "url": "/geo/datasets/A31b",
+      "version": "25",
+      "fingerprint": "e00d69fa3b3e85a3fa9f1a8374f403bb70efa07a301f691cd9695b8ee389cab4",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:02.254Z",
+        "assetKey": "gis/mlit-ksj/A31b/25/display/10/5339/0001.geojson",
+        "assetSha256": "c5d4ce0205ecb69274c5a2b521213a1953971f7e90e3178b6d2c30a1a1a6648f",
+        "featureCount": 1000,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A31b-320.png",
+          ".local/geo-source-pages/A31b-1440.png"
+        ],
+        "mapStatus": "区画内 1,000地物／表示対象候補 1,000地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A31b_201"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 18,
+      "dataId": "A38",
+      "name": "医療圏",
+      "url": "/geo/datasets/A38",
+      "version": "20",
+      "fingerprint": "222cadebe5793cebdbcb5351837f54b70dc7cdd36049acfbdfb0d0a14b7eeb6a",
+      "content": "implemented",
+      "map": null,
+      "error": null,
+      "localStatus": "verification-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 19,
+      "dataId": "N03",
+      "name": "行政区域",
+      "url": "/geo/datasets/N03",
+      "version": "20250101",
+      "fingerprint": "f3ae7e8c5ddb236603342589117ef4d4fd24f3528298c1e40c7624fe3f488847",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:06.700Z",
+        "assetKey": "gis/mlit-ksj/N03/20250101/N03-20250101_prefecture.01.topojson",
+        "assetSha256": "193fdf99eedc729b2ed6102b2f2467e59fde1a03be31f67dbabb9b3a46698bdf",
+        "featureCount": 9361,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/N03-320.png",
+          ".local/geo-source-pages/N03-1440.png"
+        ],
+        "mapStatus": "区画内 9,361地物／表示対象候補 9,361地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "N03_001",
+          "N03_003",
+          "N03_004",
+          "N03_007"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 20,
+      "dataId": "A03",
+      "name": "三大都市圏計画区域",
+      "url": "/geo/datasets/A03",
+      "version": "03",
+      "fingerprint": "dc8efbbbf86a7f96bfbf6d89f536bb1eaa38fc2ed4616769fb76b5ae3f69da2a",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:10.623Z",
+        "assetKey": "gis/mlit-ksj/A03/03/CHUBU-tky/A03-03_CHUBU-g_ThreeMajorMetroPlanArea.topojson",
+        "assetSha256": "cebe71dbf1c4a032cbe6193d7729a2aaaafdcaa7214d186ffc58bcd342254716",
+        "featureCount": 1762,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A03-320.png",
+          ".local/geo-source-pages/A03-1440.png"
+        ],
+        "mapStatus": "区画内 1,762地物／表示対象候補 1,762地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A03_002",
+          "A03_003",
+          "A03_004",
+          "A03_006",
+          "A03_007"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 21,
+      "dataId": "A09",
+      "name": "都市地域",
+      "url": "/geo/datasets/A09",
+      "version": "18",
+      "fingerprint": "5344c287779736296b0825e3912f3b321dc7ae79a266cc6bc69f3dd505141bec",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:15.204Z",
+        "assetKey": "gis/mlit-ksj/A09/18/13/data.topojson",
+        "assetSha256": "71248a4cc8e2cc573abd2d290b89606faa830f8206b7f0900d31af41012f82eb",
+        "featureCount": 173,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A09-320.png",
+          ".local/geo-source-pages/A09-1440.png"
+        ],
+        "mapStatus": "区画内 173地物／表示対象候補 173地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "prefec_cd",
+          "area_cd",
+          "layer_no"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 22,
+      "dataId": "A18",
+      "name": "半島振興対策実施地域",
+      "url": "/geo/datasets/A18",
+      "version": "16",
+      "fingerprint": "33735b3cfef31c7e8be31cf1ddc5d34c73be1ff503995aebd503599ae39e4957",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:18.917Z",
+        "assetKey": "gis/mlit-ksj/A18/16/24/data.topojson",
+        "assetSha256": "1f19a2a101603833254d2e5cf1b7ed47b0f75cdc5d192f1a7e494892c64f5191",
+        "featureCount": 7443,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A18-320.png",
+          ".local/geo-source-pages/A18-1440.png"
+        ],
+        "mapStatus": "区画内 7,443地物／表示対象候補 7,443地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "A18_003",
+          "A18_006",
+          "A18_008",
+          "A18_009",
+          "A18_010"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 23,
+      "dataId": "A19",
+      "name": "離島振興対策実施地域",
+      "url": "/geo/datasets/A19",
+      "version": "17",
+      "fingerprint": "56e245746c3fa1b9140ed4470bd0b08b3f00c90f144e751daf44abd05838447d",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:23.211Z",
+        "assetKey": "gis/mlit-ksj/A19/17/13/data.topojson",
+        "assetSha256": "3d8aa2a5be700ab4998c32e66241a236f302e7a7241958d9f729d247589edde0",
+        "featureCount": 9,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A19-320.png",
+          ".local/geo-source-pages/A19-1440.png"
+        ],
+        "mapStatus": "区画内 9地物／表示対象候補 9地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A19_003",
+          "A19_006",
+          "A19_008",
+          "A19_009"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 24,
+      "dataId": "A23",
+      "name": "特殊土壌地帯",
+      "url": "/geo/datasets/A23",
+      "version": "16",
+      "fingerprint": "efec42394b66be3caa92b61462e9bc49951e84b4063f0ce93363fb999058fdcb",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:28.939Z",
+        "assetKey": "gis/mlit-ksj/A23/16/38/data.topojson",
+        "assetSha256": "47d21cd8709cd069082b88ee9d1456fba8ed3fad850fadeae0c86ba36936609b",
+        "featureCount": 4966,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A23-320.png",
+          ".local/geo-source-pages/A23-1440.png"
+        ],
+        "mapStatus": "区画内 4,966地物／表示対象候補 4,966地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "A23_003",
+          "A23_006",
+          "A23_007",
+          "A23_008",
+          "A23_009"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 25,
+      "dataId": "A24",
+      "name": "振興山村",
+      "url": "/geo/datasets/A24",
+      "version": "16",
+      "fingerprint": "a9230ef3ab284612f42f04c2c6beb41cd82bf8791145a54adc5ff069f4ef6ca8",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:32.901Z",
+        "assetKey": "gis/mlit-ksj/A24/16/13/data.topojson",
+        "assetSha256": "a4cb8bb0435596693d06244275e9ed60ff4b10c25c6c787f64d768d2cffafc64",
+        "featureCount": 3,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A24-320.png",
+          ".local/geo-source-pages/A24-1440.png"
+        ],
+        "mapStatus": "区画内 3地物／表示対象候補 3地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A24_003",
+          "A24_006",
+          "A24_008",
+          "A24_009",
+          "A24_010"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 26,
+      "dataId": "A25",
+      "name": "特定農山村地域",
+      "url": "/geo/datasets/A25",
+      "version": "16",
+      "fingerprint": "c8958342d63ca97d22a2e45f1af6c085c0156d670dd3af4fc61b2b2e5f2eedfb",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:36.829Z",
+        "assetKey": "gis/mlit-ksj/A25/16/13/data.topojson",
+        "assetSha256": "584e3b8a6dc0dca75a423490c948a85d2fe6d9b24042b90d1aa5f6a8b05d5385",
+        "featureCount": 135,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A25-320.png",
+          ".local/geo-source-pages/A25-1440.png"
+        ],
+        "mapStatus": "区画内 135地物／表示対象候補 135地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A25_003",
+          "A25_006",
+          "A25_007",
+          "A25_008"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 27,
+      "dataId": "A30a5",
+      "name": "土砂災害・雪崩メッシュ",
+      "url": "/geo/datasets/A30a5",
+      "version": "11",
+      "fingerprint": "5da80cf06d18f98b780ee2c1717a6b817a9b7d87e9a5e91706f08e29af5be45f",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:40.041Z",
+        "assetKey": "gis/mlit-ksj/A30a5/11/5339-jgd/data.topojson",
+        "assetSha256": "04084a9ee9565afb5f00736d7e8883dc8cf8f80cb72537e4895324a12a0cdce9",
+        "featureCount": 132,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A30a5-320.png",
+          ".local/geo-source-pages/A30a5-1440.png"
+        ],
+        "mapStatus": "区画内 132地物／表示対象候補 132地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A30a5_002",
+          "A30a5_003",
+          "A30a5_004",
+          "A30a5_005",
+          "A30a5_010"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 28,
+      "dataId": "A31a",
+      "name": "洪水浸水想定区域（河川単位）",
+      "url": "/geo/datasets/A31a",
+      "version": "24",
+      "fingerprint": "3ea2883952a93b9a1e3db3743a5c3994251b96a4756e6f1b4a5cb74b31b49455",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:45.307Z",
+        "assetKey": "gis/mlit-ksj/A31a/24/01_10/data-001.topojson",
+        "assetSha256": "8d89f90cb7b15879e8c9d275fa218c19aa959596202c017548319117a56b50ee",
+        "featureCount": 16242,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A31a-320.png",
+          ".local/geo-source-pages/A31a-1440.png"
+        ],
+        "mapStatus": "区画内 16,242地物／表示対象候補 16,242地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "A31a_102",
+          "A31a_105"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 29,
+      "dataId": "A42",
+      "name": "歴史的風土保存区域",
+      "url": "/geo/datasets/A42",
+      "version": "18",
+      "fingerprint": "27c0bc65894dd7081a88ab4d8bab2ea5ac649040bc911d5b83b3b03acd3a4085",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:50.487Z",
+        "assetKey": "gis/mlit-ksj/A42/18/national/A42-18_Preservation_Area_of_Historic_Landscape.topojson",
+        "assetSha256": "966ac341782ac58a2400717f2b1d4e1beca646fbb62be69ebac3b97aa5054a79",
+        "featureCount": 45,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A42-320.png",
+          ".local/geo-source-pages/A42-1440.png"
+        ],
+        "mapStatus": "区画内 45地物／表示対象候補 45地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A42_001",
+          "A42_002",
+          "A42_004"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 30,
+      "dataId": "A43",
+      "name": "伝統的建造物群保存地区",
+      "url": "/geo/datasets/A43",
+      "version": "18",
+      "fingerprint": "9774ac2bbed1d64404bcf0e5de44ce40360598b8671282c247adc242e60c4dff",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:33:55.678Z",
+        "assetKey": "gis/mlit-ksj/A43/18/national/data.topojson",
+        "assetSha256": "7a7896eb62597bb79d65b7976947d27548e4fbed73d2d583100b22d3b631bca0",
+        "featureCount": 126,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A43-320.png",
+          ".local/geo-source-pages/A43-1440.png"
+        ],
+        "mapStatus": "区画内 126地物／表示対象候補 126地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A43_002",
+          "A43_004",
+          "A43_007",
+          "A43_008",
+          "A43_009"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 31,
+      "dataId": "A44",
+      "name": "歴史的風致維持向上計画の重点地区",
+      "url": "/geo/datasets/A44",
+      "version": "18",
+      "fingerprint": "1f4084a463066f16d40513402678b9c5727b5d44a9b157964915bec876bbd889",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:34:00.362Z",
+        "assetKey": "gis/mlit-ksj/A44/18/national/data.topojson",
+        "assetSha256": "0a920ccfe71b64c858c8dc73ddbae227ca5a5578873fa6505847a0c406c7fb63",
+        "featureCount": 104,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A44-320.png",
+          ".local/geo-source-pages/A44-1440.png"
+        ],
+        "mapStatus": "区画内 104地物／表示対象候補 104地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A44_002",
+          "A44_004",
+          "A44_006",
+          "A44_007",
+          "A44_008"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 32,
+      "dataId": "A51",
+      "name": "雨水出水（内水）浸水想定区域",
+      "url": "/geo/datasets/A51",
+      "version": "24",
+      "fingerprint": "5b502e9dc957d6b584be358baed6c5eb006d1ae9ad06557d1970a994da7f2353",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:34:06.539Z",
+        "assetKey": "gis/mlit-ksj/A51/24/13/data.topojson",
+        "assetSha256": "500aebea48070cb6bbb534e8220ceeb33dca408bd0ddd8d3fbb19d03bcc67a09",
+        "featureCount": 194,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A51-320.png",
+          ".local/geo-source-pages/A51-1440.png"
+        ],
+        "mapStatus": "区画内 194地物／表示対象候補 194地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A51_001",
+          "A51_003",
+          "A51_005"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 33,
+      "dataId": "A52",
+      "name": "砂防指定地",
+      "url": "/geo/datasets/A52",
+      "version": "23",
+      "fingerprint": "1fd1b3089e2fa61817a8661f49fdc66da145e63d6eeb9b764cd4f7b587a9b859",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:34:12.877Z",
+        "assetKey": "gis/mlit-ksj/A52/23/13/data.topojson",
+        "assetSha256": "eca0dc523ade1a20096b89f28080dd64efeeddc32cca8e191e360f2497d33bb9",
+        "featureCount": 650,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A52-320.png",
+          ".local/geo-source-pages/A52-1440.png"
+        ],
+        "mapStatus": "区画内 650地物／表示対象候補 650地物。青い地物をタップして属性を確認。",
+        "fields": [
+          "A52_003",
+          "A52_004",
+          "A52_006",
+          "A52_007",
+          "A52_010"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 34,
+      "dataId": "A53",
+      "name": "多段階浸水想定",
+      "url": "/geo/datasets/A53",
+      "version": "24",
+      "fingerprint": "e8f98000fad242c9c3f1be015074f27e1dd0b557cb980b0420a76f367d9b3213",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:34:21.776Z",
+        "assetKey": "gis/mlit-ksj/A53/24/82/data-001.topojson",
+        "assetSha256": "e6acf0ab47c1e5f5761341aa8342578cf1e517fa707d389df01e21393f9c3773",
+        "featureCount": 13700,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A53-320.png",
+          ".local/geo-source-pages/A53-1440.png"
+        ],
+        "mapStatus": "区画内 13,700地物／表示対象候補 13,700地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "A53_002",
+          "A53_003",
+          "A53_004",
+          "A53_005"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 35,
+      "dataId": "A55",
+      "name": "都市計画決定情報",
+      "url": "/geo/datasets/A55",
+      "version": "24",
+      "fingerprint": "efd83d365f1df63776227ae5aa551cdf29f62d5b79284a22ab26c3422e850015",
+      "content": "implemented",
+      "map": {
+        "verifiedAt": "2026-09-08T08:34:31.757Z",
+        "assetKey": "gis/mlit-ksj/A55/24/13/data-001.topojson",
+        "assetSha256": "65dcb58238645ce80c41a0f62b42a884a627a7c6166e6d9401c4587b55aa5cfb",
+        "featureCount": 5337,
+        "viewports": [
+          320,
+          1440
+        ],
+        "screenshots": [
+          ".local/geo-source-pages/A55-320.png",
+          ".local/geo-source-pages/A55-1440.png"
+        ],
+        "mapStatus": "区画内 5,337地物／表示対象候補 5,337地物。うち3000地物を表示中。拡大すると表示対象を絞れます。",
+        "fields": [
+          "AreaType",
+          "Cityname",
+          "INDate",
+          "FNDate"
+        ]
+      },
+      "error": null,
+      "localStatus": "ready",
+      "production": "unverified"
+    },
+    {
+      "order": 36,
+      "dataId": "P04",
+      "name": "医療機関",
+      "url": "/geo/datasets/P04",
+      "version": "20",
+      "fingerprint": "1fb4a38367e82dfb6d4563bd8611e3b280ca5e080c543471860ae9f5b1a6b917",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 37,
+      "dataId": "P05",
+      "name": "市町村役場等・公的集会施設",
+      "url": "/geo/datasets/P05",
+      "version": "22",
+      "fingerprint": "ef777a102653c71ff8b83bf6d42776dd8702ac30de26fa82af1b8c09b241461b",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 38,
+      "dataId": "P11",
+      "name": "バス停留所",
+      "url": "/geo/datasets/P11",
+      "version": "22",
+      "fingerprint": "6e06ef2ad2a75bf7bf3e882afb0094665d71a7b37bb56e1e0a75b16480b829ee",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 39,
+      "dataId": "P29",
+      "name": "学校",
+      "url": "/geo/datasets/P29",
+      "version": "23",
+      "fingerprint": "e24c3b21f27257b9531af6c8d23177339fb5c745e9c8bfd7305171db242ba047",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 40,
+      "dataId": "P36",
+      "name": "高速バス停留所",
+      "url": "/geo/datasets/P36",
+      "version": "23",
+      "fingerprint": "5ab852581a4a606f0e2e90806ba2f8bd2665752094afd64f3f777d2af154983e",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 41,
+      "dataId": "C28",
+      "name": "空港",
+      "url": "/geo/datasets/C28",
+      "version": "07",
+      "fingerprint": "2e3277f99cb9d62884c119dc17e6d72a1eadd8d346a131de4ce4f16b21abdcde",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 42,
+      "dataId": "N02",
+      "name": "鉄道",
+      "url": "/geo/datasets/N02",
+      "version": "25",
+      "fingerprint": "629e6f16f134a0f9aa4f2c253172cbd8c5fdb9380086ea566ac188c953fd18a9",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 43,
+      "dataId": "N07",
+      "name": "バスルート",
+      "url": "/geo/datasets/N07",
+      "version": "22",
+      "fingerprint": "8d8c0966a9a3da9d0ecb0f9faff771e0ad9e933f0978779ea26d44e2eb3fd080",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 44,
+      "dataId": "S12",
+      "name": "駅別乗降客数",
+      "url": "/geo/datasets/S12",
+      "version": "25",
+      "fingerprint": "178b276fddef24796cf0b29b068f8addaec4f9e728b3ee33818e90fb1f0a7d41",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 45,
+      "dataId": "N08",
+      "name": "空港時系列",
+      "url": "/geo/datasets/N08",
+      "version": "21",
+      "fingerprint": "749d675ebd41efbee223e4e7ada4005f968bde4a2cc966ffe792d6070eed8c25",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 46,
+      "dataId": "S05-d",
+      "name": "貨物旅客地域流動量",
+      "url": "/geo/datasets/S05-d",
+      "version": "18",
+      "fingerprint": "0e8decc0a95842e2340522fe88f53f677722bc15bce00f6e665d870b49327ea3",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 47,
+      "dataId": "S10a",
+      "name": "港湾間流通量・海上経路",
+      "url": "/geo/datasets/S10a",
+      "version": "16",
+      "fingerprint": "1209ea4f95a691c50b3e8efde0f14edac19f5fb9e6afd6a337db42cef4e33750",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 48,
+      "dataId": "mesh1000r6",
+      "name": "1kmメッシュ将来推計人口(R6)",
+      "url": "/geo/datasets/mesh1000r6",
+      "version": "24",
+      "fingerprint": "4d4710452ee02ceee4cc3feedaa6d40a4dca36bcef0857ac32f7d58cf58568d4",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 49,
+      "dataId": "m250r6",
+      "name": "250mメッシュ別将来推計人口（R6国政局推計）",
+      "url": "/geo/datasets/m250r6",
+      "version": "24",
+      "fingerprint": "cf9cc8dd33d4b24f57f3f95a8ea238f06509aaef7c2bb438f41baae4652fc66b",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    },
+    {
+      "order": 50,
+      "dataId": "m500r6",
+      "name": "500mメッシュ別将来推計人口（R6国政局推計）",
+      "url": "/geo/datasets/m500r6",
+      "version": "24",
+      "fingerprint": "6aa8db9e497b5f5378dada7a7557df4e2a5013e9bd38d162650a00ee89119837",
+      "content": "pending",
+      "map": null,
+      "error": null,
+      "localStatus": "content-pending",
+      "production": "unverified"
+    }
+  ]
+}

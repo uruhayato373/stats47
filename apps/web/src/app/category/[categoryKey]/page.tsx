@@ -29,7 +29,8 @@ import {
   RailAdSlot,
   SidebarPromoBanner,
 } from '@/features/ads';
-import { resolveAffiliateBanners } from '@/features/ads/server';
+import { CATEGORY_PAGE_AFFILIATE_POLICY } from '@/features/ads/constants/affiliate-category';
+import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { PrefectureNavigator } from '@/features/area-profile';
 import { listArticlesByTagKey } from '@/features/blog/server';
 import { findCategoryByKey } from '@/features/category/server';
@@ -61,19 +62,6 @@ import type { Metadata } from 'next';
 
 /** 24時間 ISR */
 export const revalidate = 86400;
-
-/** カテゴリ Key → アフィリエイト用 fallback タグ */
-const CATEGORY_FALLBACK_TAGS: Record<string, string[]> = {
-  population: ['population', 'household-structure'],
-  economy: ['economy', 'household-finance', 'income'],
-  laborwage: ['wages', 'labor', 'employment'],
-  socialsecurity: ['medical-care', 'health', 'welfare'],
-  energy: ['energy', 'environment'],
-  tourism: ['tourism', 'transportation'],
-  construction: ['housing', 'real-estate'],
-  administrativefinancial: ['public-finance', 'furusato-nozei'],
-  landweather: ['land-use', 'environment'],
-};
 
 interface PageProps {
   params: Promise<{ categoryKey: string }>;
@@ -153,7 +141,7 @@ export default async function CategoryPage({ params }: PageProps) {
     notFound();
   }
 
-  const fallbackTags = CATEGORY_FALLBACK_TAGS[categoryKey] ?? [];
+  const affiliateVertical = CATEGORY_PAGE_AFFILIATE_POLICY[categoryKey];
   const blogTagKey = CATEGORY_BLOG_TAG_KEYS[categoryKey];
 
   const [
@@ -177,9 +165,9 @@ export default async function CategoryPage({ params }: PageProps) {
     readCategoryTopicsFromR2(categoryKey)
       .then((r) => (isOk(r) ? r.data : []))
       .catch(() => []),
-    fallbackTags.length > 0
+    affiliateVertical
       ? // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
-        resolveAffiliateBanners(fallbackTags, 8).catch(() => [])
+        resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => [])
       : Promise.resolve([]),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
