@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 
 import { getMetricConfig } from "../../registry";
 import { OCCUPATION_SALARY_CATALOG } from "../occupation-salary";
-import { parseStatSeriesRefs } from "../stat-series-ref";
 
 import contract from "./fixtures/series-ref-normalized-salary-contract.json";
 
@@ -26,17 +25,20 @@ describe("CROSS-PAGE-DATA-SSOT-01 normalized salary migration", () => {
     }
   });
 
-  it("4 chart はraw e-Statでなく正規化済みR2 metricだけを参照する", () => {
+  it("単年の4推移図を再表示せず、正規化済み指標を比較表と全指標に残す", () => {
+    expect(OCCUPATION_SALARY_CATALOG.charts.filter(
+      (chart) => chart.componentType !== "markdown-section",
+    )).toEqual([]);
+    const catalogMetricKeys = OCCUPATION_SALARY_CATALOG.metrics.map((metric) => metric.rankingKey);
     for (const row of contract) {
-      const chart = OCCUPATION_SALARY_CATALOG.charts.find(
-        (candidate) => candidate.componentKey === row.componentKey,
-      );
-      expect(chart, row.componentKey).toBeDefined();
-      const props = chart?.componentProps ?? {};
-      const refs = parseStatSeriesRefs(props.seriesRefs) ?? [];
-      expect(refs.map((ref) => ref.metricKey)).toEqual(row.metricKeys);
-      expect(refs.every((ref) => ref.label && ref.colorRole)).toBe(true);
-      expect(JSON.stringify(props)).not.toContain("estatParams");
+      for (const metricKey of row.metricKeys) expect(catalogMetricKeys).toContain(metricKey);
+    }
+    for (const metricKey of [
+      "software-engineer-annual-income",
+      "truck-driver-annual-income",
+      "school-teacher-annual-income",
+    ]) {
+      expect(OCCUPATION_SALARY_CATALOG.overview?.comparisonRankingKeys).toContain(metricKey);
     }
   });
 });

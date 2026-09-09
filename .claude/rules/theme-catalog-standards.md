@@ -58,6 +58,8 @@ ThemeCatalog (SSOT, git TS)
   pre-commit + CI (`pr-quality-check.yml` の Theme Catalog Gate) が `--check` diff で手編集・生成忘れを両方向検知する。
 - R2 反映は既存フロー (`/sync-snapshots --only page-components` 相当 → `export-page-components-snapshot.ts`) のまま。
   カタログ由来で実データ (JSON byte) が変わったときだけ R2 push が要る。
+- チャートの採否・参照系列・キーを変えたら、`npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts`
+  で監査用の依存ミラーも再生成し、同コマンドの `--check` で一致を確認する。
 
 ---
 

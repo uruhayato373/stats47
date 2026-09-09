@@ -21,6 +21,43 @@ const NATIONAL_SCOPE_COMPONENTS = new Set([
   "theme-fishery-species-trend",
 ]);
 
+// 移行時の54件は取得条件の歴史記録。概況展開後に残す19件は別に固定し、
+// 意図しない図の欠落を「存在するものだけ検査」で見逃さない。
+const RETAINED_COMPONENT_KEYS = [
+  "cmp-pop-elderly-household",
+  "theme-fishery-catch-trend",
+  "theme-fishery-aquaculture-mix",
+  "theme-foreign-nationality-trend",
+  "theme-health-supply-trend",
+  "theme-lm-employment-mobility-trend",
+  "theme-lw-employment-rate-trend",
+  "vacancy-ownership-rate-trend",
+  "lh-dwelling-floor-area-trend",
+  "theme-industry-structure",
+  "theme-le-establishments-trend",
+  "theme-lf-fiscal-ratios-trend",
+  "manufacturing-establishments-employees-trend",
+  "manufacturing-shipment-value-trend",
+  "railway-freight-trend",
+  "real-income-cpi-breakdown",
+  "crime-count-arrest-rate-trend",
+  "traffic-accident-deaths-trend",
+  "theme-tourism-stay-trend",
+];
+
+// 同軸で比較できない系列は別図へ、単年・長期欠測の系列は比較表へ移した。
+const RESELECTED_METRIC_KEYS: Record<string, string[]> = {
+  "vacancy-ownership-rate-trend": ["vacant-housing-ratio"],
+  "lh-dwelling-floor-area-trend": ["floor-area-per-dwelling-rented"],
+  "theme-lf-fiscal-ratios-trend": ["fiscal-strength-index-prefecture"],
+  "real-income-cpi-breakdown": ["consumer-price-difference-index-overall"],
+};
+
+const RESELECTED_COMPONENT_TYPES: Record<string, string> = {
+  "theme-fishery-aquaculture-mix": "line-chart",
+  "theme-industry-structure": "line-chart",
+};
+
 function metricRequestKey(metricKey: string): string {
   const config = getMetricConfig(metricKey);
   expect(config, metricKey).toBeDefined();
@@ -66,14 +103,22 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
     }
   });
 
-  it("54 chart は明示した全国チャート以外area overrideなしのtyped refsだけを持つ", () => {
-    for (const row of migrationContract) {
+  it("存続する19 chartは選定済み系列をtyped refsで持ち、area overrideを追加しない", () => {
+    const retained = migrationContract.filter((row) =>
+      THEME_CATALOGS[row.themeKey]?.charts.some((chart) => chart.componentKey === row.componentKey),
+    );
+    expect(retained.map((row) => row.componentKey)).toEqual(RETAINED_COMPONENT_KEYS);
+    for (const row of retained) {
       const catalog = THEME_CATALOGS[row.themeKey as keyof typeof THEME_CATALOGS];
       const chart = catalog.charts.find((candidate) => candidate.componentKey === row.componentKey);
       expect(chart, `${row.themeKey}:${row.componentKey}`).toBeDefined();
       const props = chart?.componentProps ?? {};
-      expect(chartRefs(row.componentType, props).map((ref) => ref.metricKey)).toEqual(row.metricKeys);
-      const refs = chartRefs(row.componentType, props);
+      const componentType = RESELECTED_COMPONENT_TYPES[row.componentKey] ?? row.componentType;
+      expect(chart?.componentType, row.componentKey).toBe(componentType);
+      const refs = chartRefs(componentType, props);
+      const expectedMetricKeys = RESELECTED_METRIC_KEYS[row.componentKey] ?? row.metricKeys;
+      expect(refs.map((ref) => ref.metricKey), row.componentKey).toEqual(expectedMetricKeys);
+      for (const key of expectedMetricKeys) expect(row.metricKeys).toContain(key);
       expect(refs.every((ref) => ref.year === undefined)).toBe(true);
       expect(refs.map((ref) => ref.area)).toEqual(
         NATIONAL_SCOPE_COMPONENTS.has(row.componentKey)
@@ -81,8 +126,8 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
           : refs.map(() => undefined),
       );
       expect(JSON.stringify(props)).not.toMatch(/(?:estatParams|statsDataId|columnParams|lineParams)/);
-      if (row.componentType === "composition-chart") expect(props.segments).toBeUndefined();
-      if (row.componentType === "donut-chart") expect(props.categories).toBeUndefined();
+      expect(props.segments).toBeUndefined();
+      expect(props.categories).toBeUndefined();
     }
   });
 });
