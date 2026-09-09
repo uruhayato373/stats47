@@ -87,6 +87,27 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
 `packages/r2-storage/src/scripts/push-generated-image-set.ts --plan .local/image-generation-publish-plan-geo-thumbnails.json`
 へ渡す（2時間有効の共通plan）。既定のローカル生成はアップロード可能なplanを作らない。
 
+別PCの表示では、開発用preview APIがローカルstagingを優先し、ファイルが無ければR2へ転送する。
+画像を使うだけなら原典GISの取得や再生成は不要。画像本体とmanifestはR2、生成設定・検証記録はGitで管理する。
+
+ローカルにS3認証が無い場合は、生成・目視確認済みの画像を次の手順で既存CIへ渡す。
+1. `node --import tsx apps/web/scripts/sync-geo-source-thumbnails.ts --export /tmp/geo-thumbnails.json`。
+   Git上の生成fingerprint・版・入力キーと画像SHAを照合した150objectだけを出力する。
+2. bundle全体のSHA256を取り、`geo-thumbnail-transfer-<SHA先頭12桁>` の一時draft releaseへ
+   `geo-thumbnails.json` として添付する。画像bundleをGitへcommitしない。
+3. `generate-ogp-images.yml` を対象作業ブランチで手動実行する。
+   `type=geo-thumbnails`、`staged_release=<tag>`、`staged_sha256=<SHA全体>`、
+   `apply=true` を指定する。CIは対象・SHA検証→S3照合→共通publisher dry-run→反映→
+   全画像・manifestのS3/public GETによるSHA照合を行う。サイト本体はデプロイしない。
+4. artifact `geo-thumbnail-publication` のJSONを
+   `.claude/state/geo/source-thumbnails-publication.json` へ取り込み、一時draft releaseを削除する。
+   反映失敗時は未完了として残し、再実行時はremote照合からやり直す。
+
+受け渡しでは生成したPCのrendererHashをGitの生成記録で固定し、別OSで再描画しない。
+CIが参照する設定とfingerprintが変わったbundleは拒否する。R2画像の照合成功と、
+GIS索引・原データ・ページ本体の本番公開確認は別の状態として管理する。
+
+
 ```
 MLIT zip ダウンロード → /tmp/ に保存
   → GeoJSON 抽出（UTF-8/ ディレクトリ優先）

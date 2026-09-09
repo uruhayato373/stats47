@@ -5,14 +5,12 @@ import {
   geoThumbnailKey,
 } from '@/features/geo-analysis';
 
-/** Local image staging preview, following the blog-data development reader. */
+import { ogpImageUrl } from '@/lib/metadata/ogp-image';
+
+/** Preview local work first; a fresh checkout reads the published R2 image. */
 export async function GET(
   _request: Request,
-  {
-    params,
-  }: {
-    params: Promise<{ dataId: string; variant: string }>;
-  }
+  { params }: { params: Promise<{ dataId: string; variant: string }> }
 ) {
   if (process.env.NODE_ENV !== 'development')
     return new Response('Not found', { status: 404 });
@@ -28,18 +26,21 @@ export async function GET(
     return new Response('Not found', { status: 404 });
   const { readFile } = await import('node:fs/promises');
   const { resolve } = await import('node:path');
+  const key = geoThumbnailKey(dataId, config.version, variant);
   try {
     const bytes = await readFile(
-      resolve(
-        process.cwd(),
-        '../../.local/image-staging/geo-thumbnails',
-        geoThumbnailKey(dataId, config.version, variant)
-      )
+      resolve(process.cwd(), '../../.local/image-staging/geo-thumbnails', key)
     );
     return new Response(new Uint8Array(bytes), {
       headers: { 'Content-Type': 'image/webp', 'Cache-Control': 'no-store' },
     });
-  } catch {
+  } catch (error) {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+      return new Response(null, {
+        status: 307,
+        headers: { Location: ogpImageUrl(key), 'Cache-Control': 'no-store' },
+      });
+    }
     return new Response('Preview unavailable', {
       status: 404,
       headers: { 'Cache-Control': 'no-store' },
