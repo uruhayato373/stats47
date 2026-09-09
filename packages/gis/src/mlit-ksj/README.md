@@ -104,7 +104,10 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
    反映失敗時は未完了として残し、再実行時はremote照合からやり直す。
 
 受け渡しでは生成したPCのrendererHashをGitの生成記録で固定し、別OSで再描画しない。
-CIのGitHub権限はcontents:readのまま、release一覧を使わず添付asset IDを直接指定する。CIが参照する設定とfingerprintが変わったbundleは拒否する。R2画像の照合成功と、
+CIは既定でcontents:read。private draftの添付取得はread権限では403になるため、
+オーナーの明示承認を得た同期1回だけ画像同期jobにcontents:writeを設定し、終了後に必ずreadへ戻す。
+checkoutはpersist-credentials:falseのままにする。添付asset IDを直接指定し、draft自体は公開しない。
+CIが参照する設定とfingerprintが変わったbundleは拒否する。R2画像の照合成功と、
 GIS索引・原データ・ページ本体の本番公開確認は別の状態として管理する。
 
 
