@@ -156,6 +156,24 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 
 ## 関連
 
+### 128候補の判断・検証を再利用する
+
+採否・統合先・保留の再開条件と初回実装仕様は `reference/theme-feasibility-catalog.json` の
+`decision` / `firstBatch` / `implementationWaves` を参照する。A/B/Cは調査時点の実現性評価で、
+採否や公開状況ではない。後続の作業入口は `.claude/todo/backlog.md` の `THEME-EXPANSION-IMPLEMENT-01`。
+
+- 全件の判断、統合先、実装順と初回指標の比較年を検査: `npm run theme:expansion:check`
+- 欠測・地理混入・重複・不正な引き渡しを拒否するテスト: `npm run theme:expansion:test`
+- コード明記のSSDS系列を再取得: 既存の `NEXT_PUBLIC_ESTAT_APP_ID` を環境に設定して `npm run theme:expansion:verify`
+
+実装は `.claude/scripts/themes/verify-theme-expansion.mjs`、取得証拠は
+`.claude/state/estat/theme-expansion-verification.json`。生のAPI応答は既定で
+`/tmp/stats47-theme-expansion-api/` に保存し、gitには取得条件・hash・年別県数・欠測を残す。
+再取得は候補の採否を変更しない。原典の年度・母集団・系列改定の判断は担当が確認し、
+`check` を再実行する。公式ファイル・GIS・コード未解決指標まで検証済みとは扱わない。
+
+### 関連資料
+
 - 規約: `.claude/rules/theme-catalog-standards.md`
 - agent: `.claude/agents/theme-researcher.md`
 - 白書台帳: `reference/notebooks.md`

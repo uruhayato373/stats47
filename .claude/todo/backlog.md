@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-08
+updated: 2026-09-09
 ---
 
 # バックログ (タスクマスタ)
@@ -735,6 +735,17 @@ updated: 2026-09-08
 - **(a) の手順**: `.claude/rules/blog-data-schema.md` §1.7 の restoreMethod に従い SSOT から復元する。SVG の絵から値を逆復元しない。SSOT に該当年が無ければ e-Stat から取り込んで SSOT を伸ばす (`data-ingester`)。届かない図は記事から外すか SSOT にある図に差し替える。
 - **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
 - **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
+
+### [THEME-EXPANSION-IMPLEMENT-01] 採択したテーマ拡充を検証済み仕様から実装する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-09]
+
+- **owner**: theme-designer（全体）／data-ingester（値・設定）／theme-component-builder・theme-ui-manager（画面）
+- **正典**: [採否・範囲・初回仕様・実装順](../skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json) の `decision` / `firstBatch` / `implementationWaves`。取得証拠は [全県・年別の検証](../state/estat/theme-expansion-verification.json)。このカードが実装の入口であり、JSON内へ独立したTODO台帳を作らない。
+- **実行順**: ① `npm run theme:expansion:check` で仕様を検査し、初回の建設業→廃棄物→情報通信産業を実装する。既存metricのyears不足と未登録指標はdata-ingesterが実値確認後に取り込む。②既存テーマは同じ問いの章を拡充し、重複章を追加しない。③API中心→公式ファイル補完→GISの順で、採択範囲だけを小分けに実装する。統合候補は統合先で扱い、保留は再開条件を満たすまで着手しない。
+- **検証**: firstBatchの47県・比較年・原典定義を再現し、ThemeCatalog／生成snapshot／表示値を突合する。`validate:catalog`、対象テスト・型検査、PC・モバイルの表示を通す。廃棄物2024年度の原典更新を先に確認し、2023年度を最新と表現しない。情報通信の2020年経理事項は初回から除外する。
+- **停止条件**: 年・母集団・地域区分・単位が合わない場合は該当指標を採用しない。欠測を0へ変換しない。inactiveや未登録キーを配信定義に入れない。業者所在県と施工県、事業所と企業、契約数とカバー率を混同しない。公開R2と本番への反映は検証済み差分をまとめて承認後に行う。
+- **完了条件**: 採択範囲の実装・データ・表示検証が完了し、各候補から採用先の実在するThemeCatalog／章へ辿れる。対象を縮小した場合は根拠をdecisionへ記録する。公開工程は `THEME-PORTFOLIO-REMAINDER-01` と対象manifestを突合し、完了・未完了を取り違えない。
 
 ### [THEME-PORTFOLIO-REMAINDER-01] 道路モバイル描画の是正・全テーマ改善の公開と計測開始
 

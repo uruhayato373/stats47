@@ -1,0 +1,1149 @@
+{
+  "schemaVersion": 1,
+  "owner": "estat-researcher",
+  "catalogRef": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
+  "apiDocumentation": "https://www.e-stat.go.jp/api/api-info/e-stat-manual3-0",
+  "reproduction": {
+    "metadata": {
+      "endpoint": "getMetaInfo",
+      "parameters": "statsDataId=metadataTables[].statsDataId, lang=J"
+    },
+    "values": {
+      "endpoint": "getStatsData",
+      "parameters": "statsDataId=valueSeries[].statsDataId, cdCat01=valueSeries[].indicatorCode, metaGetFlg=N, limit=10000, lang=J（地域・時点の絞り込みなし）"
+    },
+    "authentication": "各PCのe-StatアプリケーションIDを使う。認証値は本記録に含めない。",
+    "comparison": "最新収録年は再取得時に変わり得るためasOf時点の結果と区別する。"
+  },
+  "asOf": "2026-09-09",
+  "scope": "代表系列の実値検証。128テーマ全指標の値検証ではない。",
+  "metadataTables": [
+    {
+      "statsDataId": "0000010101",
+      "title": "Ａ　人口・世帯",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ａ　人口・世帯",
+          "items": 594
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 51
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010102",
+      "title": "Ｂ　自然環境",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｂ　自然環境",
+          "items": 44
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010103",
+      "title": "Ｃ　経済基盤",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｃ　経済基盤",
+          "items": 548
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 51
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010104",
+      "title": "Ｄ　行政基盤",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｄ　行政基盤",
+          "items": 196
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010105",
+      "title": "Ｅ　教育",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｅ　教育",
+          "items": 494
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010106",
+      "title": "Ｆ　労働",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｆ　労働",
+          "items": 532
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010107",
+      "title": "Ｇ　文化・スポーツ",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｇ　文化・スポーツ",
+          "items": 248
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010108",
+      "title": "Ｈ　居住",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｈ　居住",
+          "items": 507
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 51
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010109",
+      "title": "Ｉ　健康・医療",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｉ　健康・医療",
+          "items": 405
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010110",
+      "title": "Ｊ　福祉・社会保障",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｊ　福祉・社会保障",
+          "items": 366
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010111",
+      "title": "Ｋ　安全",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｋ　安全",
+          "items": 170
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 50
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010112",
+      "title": "Ｌ　家計",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｌ　家計",
+          "items": 265
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 51
+        }
+      ]
+    },
+    {
+      "statsDataId": "0000010113",
+      "title": "Ｍ　生活時間",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "観測値",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "Ｍ　生活時間",
+          "items": 214
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "調査年",
+          "items": 10
+        }
+      ]
+    },
+    {
+      "statsDataId": "0004008436",
+      "title": "男女、産業、テレワーク実施の有無・頻度、テレワーク実施の場所、経営組織・従業上の地位・雇用形態別人口（有業者）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "表章項目",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "男女",
+          "items": 3
+        },
+        {
+          "id": "cat02",
+          "name": "産業",
+          "items": 21
+        },
+        {
+          "id": "cat03",
+          "name": "テレ実施有無･頻度",
+          "items": 2
+        },
+        {
+          "id": "cat04",
+          "name": "テレ実施場所",
+          "items": 2
+        },
+        {
+          "id": "cat05",
+          "name": "経営組織･従地位･雇形",
+          "items": 8
+        },
+        {
+          "id": "area",
+          "name": "地域区分",
+          "items": 134
+        },
+        {
+          "id": "time",
+          "name": "時間軸",
+          "items": 1
+        }
+      ]
+    },
+    {
+      "statsDataId": "0004008606",
+      "title": "世帯所得別世帯数（母子世帯）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "表章項目",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "世帯所得",
+          "items": 7
+        },
+        {
+          "id": "area",
+          "name": "地域区分",
+          "items": 134
+        },
+        {
+          "id": "time",
+          "name": "時間軸",
+          "items": 1
+        }
+      ]
+    },
+    {
+      "statsDataId": "0004016774",
+      "title": "（遡及集計）調査結果表（時系列、第1表～第13表） 第13表　発注者別、施工都道府県別－元請完成工事高",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "表章項目",
+          "items": 3
+        },
+        {
+          "id": "cat01",
+          "name": "元・下請別完成工事高",
+          "items": 3
+        },
+        {
+          "id": "area",
+          "name": "業者所在都道府県・ブロック",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "年度次",
+          "items": 5
+        }
+      ]
+    },
+    {
+      "statsDataId": "0004025522",
+      "title": "持ち家の増改築・改修工事､高齢者等のための設備工事､耐震改修工事､耐震診断の有無､リフォーム工事の状況 住宅の建築の時期(9区分)、2019年以降の住宅の増改築・改修工事等(8区分)別持ち家数－全国、都道府県、市区",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "表章項目",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "住宅の建築の時期",
+          "items": 10
+        },
+        {
+          "id": "cat02",
+          "name": "2019年以降の住宅の増改築・改修工事等",
+          "items": 10
+        },
+        {
+          "id": "area",
+          "name": "全国、都道府県、市区",
+          "items": 1039
+        },
+        {
+          "id": "time",
+          "name": "時間軸",
+          "items": 1
+        }
+      ]
+    },
+    {
+      "statsDataId": "0004005665",
+      "title": "産業(中分類)、単独・本所・支所及び本所の所在地別民営事業所数及び男女別従業者数（外国の会社及び法人でない団体を除く）－全国、都道府県、大都市、県庁所在市、人口30万以上市",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "表章項目",
+          "items": 4
+        },
+        {
+          "id": "cat01",
+          "name": "産業中分類",
+          "items": 130
+        },
+        {
+          "id": "cat02",
+          "name": "単独・本所・支所及び本所の所在地",
+          "items": 55
+        },
+        {
+          "id": "area",
+          "name": "地域",
+          "items": 134
+        },
+        {
+          "id": "time",
+          "name": "時間軸",
+          "items": 1
+        }
+      ]
+    },
+    {
+      "statsDataId": "0003456573",
+      "title": "男女,趣味・娯楽の種類別行動者率(10歳以上)－全国，都道府県",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "表章項目",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "男女",
+          "items": 3
+        },
+        {
+          "id": "cat02",
+          "name": "人口集中地区・人口集中地区以外",
+          "items": 3
+        },
+        {
+          "id": "cat03",
+          "name": "趣味・娯楽の種類",
+          "items": 36
+        },
+        {
+          "id": "area",
+          "name": "地域区分",
+          "items": 48
+        },
+        {
+          "id": "time",
+          "name": "時間軸",
+          "items": 1
+        }
+      ]
+    },
+    {
+      "statsDataId": "0002041068",
+      "title": "07 都道府県別（第115表～第141表） 世帯人員（12歳以上），こころの状態（点数階級）・性・年齢（10歳階級）・都道府県－21大都市（再掲）別",
+      "dimensions": [
+        {
+          "id": "tab",
+          "name": "表章項目",
+          "items": 1
+        },
+        {
+          "id": "cat01",
+          "name": "こころの状態（点数階級）_2015",
+          "items": 5
+        },
+        {
+          "id": "cat02",
+          "name": "年齢(10歳階級12歳から)_2015",
+          "items": 14
+        },
+        {
+          "id": "cat03",
+          "name": "性_002",
+          "items": 3
+        },
+        {
+          "id": "area",
+          "name": "都道府県21大都市",
+          "items": 69
+        },
+        {
+          "id": "time",
+          "name": "調査年度",
+          "items": 1
+        }
+      ]
+    }
+  ],
+  "valueSeries": [
+    {
+      "statsDataId": "0000010104",
+      "indicatorCode": "D1201",
+      "name": "D1201_一般行政部門職員数（都道府県）",
+      "yearCodes": [
+        "1998100000",
+        "1999100000",
+        "2000100000",
+        "2001100000",
+        "2002100000",
+        "2003100000",
+        "2004100000",
+        "2005100000",
+        "2006100000",
+        "2007100000",
+        "2008100000",
+        "2009100000",
+        "2010100000",
+        "2011100000",
+        "2012100000",
+        "2013100000",
+        "2014100000",
+        "2015100000",
+        "2016100000",
+        "2017100000",
+        "2018100000",
+        "2019100000",
+        "2020100000",
+        "2021100000",
+        "2022100000",
+        "2023100000",
+        "2024100000"
+      ],
+      "latestYear": "2024",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 1296,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010104",
+      "observedAt": "2026-09-09T08:20:05.8396225Z"
+    },
+    {
+      "statsDataId": "0000010104",
+      "indicatorCode": "D2101",
+      "name": "D2101_財政力指数（都道府県財政）",
+      "yearCodes": [
+        "1975100000",
+        "1976100000",
+        "1977100000",
+        "1978100000",
+        "1979100000",
+        "1980100000",
+        "1981100000",
+        "1982100000",
+        "1983100000",
+        "1984100000",
+        "1985100000",
+        "1986100000",
+        "1987100000",
+        "1988100000",
+        "1989100000",
+        "1990100000",
+        "1991100000",
+        "1992100000",
+        "1993100000",
+        "1994100000",
+        "1995100000",
+        "1996100000",
+        "1997100000",
+        "1998100000",
+        "1999100000",
+        "2000100000",
+        "2001100000",
+        "2002100000",
+        "2003100000",
+        "2004100000",
+        "2005100000",
+        "2006100000",
+        "2007100000",
+        "2008100000",
+        "2009100000",
+        "2010100000",
+        "2011100000",
+        "2012100000",
+        "2013100000",
+        "2014100000",
+        "2015100000",
+        "2016100000",
+        "2017100000",
+        "2018100000",
+        "2019100000",
+        "2020100000",
+        "2021100000",
+        "2022100000"
+      ],
+      "latestYear": "2022",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 2304,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010104",
+      "observedAt": "2026-09-09T08:20:03.6231052Z"
+    },
+    {
+      "statsDataId": "0000010104",
+      "indicatorCode": "D2103",
+      "name": "D2103_経常収支比率（都道府県財政）",
+      "yearCodes": [
+        "1975100000",
+        "1976100000",
+        "1977100000",
+        "1978100000",
+        "1979100000",
+        "1980100000",
+        "1981100000",
+        "1982100000",
+        "1983100000",
+        "1984100000",
+        "1985100000",
+        "1986100000",
+        "1987100000",
+        "1988100000",
+        "1989100000",
+        "1990100000",
+        "1991100000",
+        "1992100000",
+        "1993100000",
+        "1994100000",
+        "1995100000",
+        "1996100000",
+        "1997100000",
+        "1998100000",
+        "1999100000",
+        "2000100000",
+        "2001100000",
+        "2002100000",
+        "2003100000",
+        "2004100000",
+        "2005100000",
+        "2006100000",
+        "2007100000",
+        "2008100000",
+        "2009100000",
+        "2010100000",
+        "2011100000",
+        "2012100000",
+        "2013100000",
+        "2014100000",
+        "2015100000",
+        "2016100000",
+        "2017100000",
+        "2018100000",
+        "2019100000",
+        "2020100000",
+        "2021100000",
+        "2022100000"
+      ],
+      "latestYear": "2022",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 2304,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010104",
+      "observedAt": "2026-09-09T08:20:08.1414672Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G6417",
+      "name": "G6417_ボランティア活動行動者率（10歳以上）",
+      "yearCodes": [
+        "2001100000",
+        "2006100000",
+        "2011100000",
+        "2016100000",
+        "2021100000"
+      ],
+      "latestYear": "2021",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 240,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:32:17.4073517Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G6800",
+      "name": "G6800_趣味・娯楽行動者率（10歳以上）",
+      "yearCodes": [
+        "2001100000",
+        "2006100000",
+        "2011100000",
+        "2016100000",
+        "2021100000"
+      ],
+      "latestYear": "2021",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 240,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:32:18.9759628Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G1401",
+      "name": "G1401_図書館数",
+      "yearCodes": [
+        "1975100000",
+        "1976100000",
+        "1977100000",
+        "1978100000",
+        "1979100000",
+        "1980100000",
+        "1981100000",
+        "1982100000",
+        "1983100000",
+        "1984100000",
+        "1985100000",
+        "1986100000",
+        "1987100000",
+        "1988100000",
+        "1989100000",
+        "1990100000",
+        "1991100000",
+        "1992100000",
+        "1993100000",
+        "1994100000",
+        "1995100000",
+        "1996100000",
+        "1997100000",
+        "1999100000",
+        "2002100000",
+        "2005100000",
+        "2008100000",
+        "2011100000",
+        "2015100000",
+        "2018100000",
+        "2021100000"
+      ],
+      "latestYear": "2021",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 1488,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:19:51.3526238Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G1403",
+      "name": "G1403_図書館蔵書数",
+      "yearCodes": [
+        "2005100000",
+        "2008100000",
+        "2011100000",
+        "2015100000",
+        "2018100000",
+        "2021100000"
+      ],
+      "latestYear": "2021",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 288,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:19:52.9742551Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G1406",
+      "name": "G1406_図書館館外貸出冊数",
+      "yearCodes": [
+        "2007100000",
+        "2010100000",
+        "2014100000",
+        "2017100000",
+        "2020100000"
+      ],
+      "latestYear": "2020",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 240,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:19:54.7753930Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G1501",
+      "name": "G1501_博物館数",
+      "yearCodes": [
+        "1975100000",
+        "1978100000",
+        "1979100000",
+        "1981100000",
+        "1984100000",
+        "1987100000",
+        "1990100000",
+        "1993100000",
+        "1996100000",
+        "1999100000",
+        "2002100000",
+        "2005100000",
+        "2008100000",
+        "2011100000",
+        "2015100000",
+        "2018100000",
+        "2021100000"
+      ],
+      "latestYear": "2021",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 816,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:19:56.5047639Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G3102",
+      "name": "G3102_社会体育施設数",
+      "yearCodes": [
+        "1978100000",
+        "1979100000",
+        "1980100000",
+        "1981100000",
+        "1982100000",
+        "1983100000",
+        "1984100000",
+        "1985100000",
+        "1986100000",
+        "1987100000",
+        "1988100000",
+        "1989100000",
+        "1990100000",
+        "1991100000",
+        "1992100000",
+        "1993100000",
+        "1994100000",
+        "1995100000",
+        "1996100000",
+        "1997100000",
+        "1999100000",
+        "2002100000",
+        "2005100000",
+        "2008100000",
+        "2011100000",
+        "2015100000",
+        "2018100000",
+        "2021100000"
+      ],
+      "latestYear": "2021",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 1344,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:19:58.4614784Z"
+    },
+    {
+      "statsDataId": "0000010107",
+      "indicatorCode": "G6500",
+      "name": "G6500_スポーツ行動者率（10歳以上）",
+      "yearCodes": [
+        "1996100000",
+        "2001100000",
+        "2006100000",
+        "2011100000",
+        "2016100000",
+        "2021100000"
+      ],
+      "latestYear": "2021",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 288,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+      "observedAt": "2026-09-09T08:20:00.0692419Z"
+    },
+    {
+      "statsDataId": "0000010111",
+      "indicatorCode": "K1102",
+      "name": "K1102_消防職員数",
+      "yearCodes": [
+        "1975100000",
+        "1976100000",
+        "1977100000",
+        "1978100000",
+        "1979100000",
+        "1980100000",
+        "1981100000",
+        "1982100000",
+        "1983100000",
+        "1984100000",
+        "1985100000",
+        "1986100000",
+        "1987100000",
+        "1988100000",
+        "1989100000",
+        "1990100000",
+        "1991100000",
+        "1992100000",
+        "1993100000",
+        "1994100000",
+        "1995100000",
+        "1996100000",
+        "1997100000",
+        "1998100000",
+        "1999100000",
+        "2000100000",
+        "2001100000",
+        "2002100000",
+        "2003100000",
+        "2004100000",
+        "2005100000",
+        "2006100000",
+        "2007100000",
+        "2008100000",
+        "2009100000",
+        "2010100000",
+        "2011100000",
+        "2012100000",
+        "2013100000",
+        "2014100000",
+        "2015100000",
+        "2016100000",
+        "2017100000",
+        "2018100000",
+        "2019100000",
+        "2020100000",
+        "2021100000",
+        "2022100000",
+        "2023100000",
+        "2024100000"
+      ],
+      "latestYear": "2024",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 2400,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010111",
+      "observedAt": "2026-09-09T08:20:10.6776346Z"
+    },
+    {
+      "statsDataId": "0000010111",
+      "indicatorCode": "K5115",
+      "name": "K5115_自然災害によるり災世帯数",
+      "yearCodes": [
+        "2015100000",
+        "2016100000",
+        "2017100000",
+        "2018100000",
+        "2019100000",
+        "2020100000",
+        "2021100000",
+        "2022100000",
+        "2023100000"
+      ],
+      "latestYear": "2023",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 39,
+      "missingSymbols": [
+        "-"
+      ],
+      "rows": 432,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010111",
+      "observedAt": "2026-09-09T08:20:13.8871090Z"
+    },
+    {
+      "statsDataId": "0000010111",
+      "indicatorCode": "K5116",
+      "name": "K5116_自然災害によるり災者数",
+      "yearCodes": [
+        "2015100000",
+        "2016100000",
+        "2017100000",
+        "2018100000",
+        "2019100000",
+        "2020100000",
+        "2021100000",
+        "2022100000",
+        "2023100000"
+      ],
+      "latestYear": "2023",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 39,
+      "missingSymbols": [
+        "-"
+      ],
+      "rows": 432,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010111",
+      "observedAt": "2026-09-09T08:20:17.0459215Z"
+    },
+    {
+      "statsDataId": "0000010112",
+      "indicatorCode": "L7130",
+      "name": "L7130_可処分所得（二人以上の世帯のうち勤労者世帯）",
+      "yearCodes": [
+        "2019100000",
+        "2024100000"
+      ],
+      "latestYear": "2024",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 96,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010112",
+      "observedAt": "2026-09-09T08:19:43.5813255Z"
+    },
+    {
+      "statsDataId": "0000010112",
+      "indicatorCode": "L730101",
+      "name": "L730101_金融資産残高（貯蓄現在高）（二人以上の世帯）",
+      "yearCodes": [
+        "2019100000"
+      ],
+      "latestYear": "2019",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 48,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010112",
+      "observedAt": "2026-09-09T08:19:45.9494734Z"
+    },
+    {
+      "statsDataId": "0000010112",
+      "indicatorCode": "L740101",
+      "name": "L740101_金融負債残高（二人以上の世帯）",
+      "yearCodes": [
+        "2019100000"
+      ],
+      "latestYear": "2019",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 48,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010112",
+      "observedAt": "2026-09-09T08:19:47.9392330Z"
+    },
+    {
+      "statsDataId": "0000010112",
+      "indicatorCode": "L7501",
+      "name": "L7501_等価可処分所得のジニ係数",
+      "yearCodes": [
+        "2019100000"
+      ],
+      "latestYear": "2019",
+      "latestPrefRecords": 47,
+      "latestPrefNumeric": 47,
+      "missingSymbols": [],
+      "rows": 48,
+      "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010112",
+      "observedAt": "2026-09-09T08:19:49.5021962Z"
+    }
+  ]
+}
