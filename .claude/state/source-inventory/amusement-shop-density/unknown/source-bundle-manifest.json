@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "profile": "amusement-shop-density",
+  "sourceKey": "amusement-shop-density",
+  "edition": "unknown",
+  "revision": 1,
+  "sourceRootName": "全国都道府県遊技営業店密度ランキング",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/全国都道府県遊技営業店密度ランキング/版不明"
+  },
+  "contentSha256": "064079607684615f5c0aa8a2c73130aaa04ca14ffe12220e64ce6076a2ef3c93",
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-09-09T21:46:58.794Z",
+  "files": [
+    {
+      "path": "全国都道府県遊技営業店密度ランキング.pdf",
+      "bytes": 3703480,
+      "sha256": "06f63637ff8587ccaf1032aef0f676de98a43c950e90c4cbc49139d1f00a8e4c"
+    }
+  ]
+}

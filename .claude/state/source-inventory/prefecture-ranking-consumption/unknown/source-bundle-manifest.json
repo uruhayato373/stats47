@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "profile": "prefecture-ranking-consumption",
+  "sourceKey": "prefecture-ranking-consumption",
+  "edition": "unknown",
+  "revision": 1,
+  "sourceRootName": "統計から読み解く47都道府県ランキング 消費・子供・スポーツ編",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/統計から読み解く47都道府県ランキング 消費・子供・スポーツ編/版不明"
+  },
+  "contentSha256": "136f44d595e2f2b4fe4979ef5617e29cfb8945e2b396b7c43b4619ed32f36d73",
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-09-09T21:46:59.047Z",
+  "files": [
+    {
+      "path": "統計から読み解く47都道府県ランキング 消費・子供・スポーツ編.pdf",
+      "bytes": 101360808,
+      "sha256": "2ce611ccb106aa2aacc854742c2cd3301fd14f228007455a469643a819338cca"
+    }
+  ]
+}

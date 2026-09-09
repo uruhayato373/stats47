@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "profile": "gis-business-guide",
+  "sourceKey": "gis-business-guide",
+  "edition": "unknown",
+  "revision": 1,
+  "sourceRootName": "最新GISのビジネス活用がよ〜くわかる本",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/最新GISのビジネス活用がよ〜くわかる本/版不明"
+  },
+  "contentSha256": "e8e4dca7070f03e799f880860efd440aaec01cf70b413a3becf3f8374b7dcf8a",
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-09-09T21:46:58.872Z",
+  "files": [
+    {
+      "path": "最新GIS［地理情報システム］のビジネス活用がよ〜くわかる本.pdf",
+      "bytes": 29291463,
+      "sha256": "0181399ad6f3a8e99f5ad9edd9ff098788525a75f04068690dc31767a246cd8e"
+    }
+  ]
+}

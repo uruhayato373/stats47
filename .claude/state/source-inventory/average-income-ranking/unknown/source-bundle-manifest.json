@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "profile": "average-income-ranking",
+  "sourceKey": "average-income-ranking",
+  "edition": "unknown",
+  "revision": 1,
+  "sourceRootName": "都道府県別平均年収ランキング",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/都道府県別平均年収ランキング/版不明"
+  },
+  "contentSha256": "5a4273b0ca01047760fea662df535bc069e55977b5eec5f02829a07d96a4d82b",
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-09-09T21:46:59.109Z",
+  "files": [
+    {
+      "path": "都道府県別平均年収ランキング.pdf",
+      "bytes": 18550258,
+      "sha256": "b2907d76d20458839e23a5778ea69764fd58a1a7fdd71e45a0e4dc20dd8c6ad0"
+    }
+  ]
+}

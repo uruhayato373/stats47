@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "profile": "money-health-ranking",
+  "sourceKey": "money-health-ranking",
+  "edition": "unknown",
+  "revision": 1,
+  "sourceRootName": "おカネと健康 都道府県ランキング",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/おカネと健康 都道府県ランキング/版不明"
+  },
+  "contentSha256": "8d1421190989d25a8643f3541295d4455a254c2c0d5fdf82dc849204b932692b",
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-09-09T21:46:58.697Z",
+  "files": [
+    {
+      "path": "おカネと健康 都道府県ランキング.pdf",
+      "bytes": 16994567,
+      "sha256": "fe6d3f745a00d43463e17b6856938008c7dc58f63a1057cea67c5c7dc70140ac"
+    }
+  ]
+}

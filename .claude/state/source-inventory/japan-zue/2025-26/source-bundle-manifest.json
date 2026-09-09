@@ -1,5 +1,6 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "profile": "japan-zue",
   "sourceKey": "japan-zue",
   "edition": "2025-26",
   "revision": 1,
@@ -7,52 +8,10 @@
   "storage": {
     "provider": "google-drive",
     "visibility": "private",
+    "layout": "expanded",
     "folderPath": "参考文献/日本国勢図会/2025・2026年版"
   },
-  "bundle": {
-    "fileName": "stats47-japan-zue-2025-26-r1.tar.gz",
-    "format": "tar.gz",
-    "bytes": 480666655,
-    "sha256": "a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f",
-    "parts": [
-      {
-        "index": 1,
-        "fileName": "stats47-japan-zue-2025-26-r1.tar.gz.part-001",
-        "bytes": 94371840,
-        "sha256": "af34393a54bc0da953bddc12c9187e0bd53380268f3a1031e58553c16d64fc95"
-      },
-      {
-        "index": 2,
-        "fileName": "stats47-japan-zue-2025-26-r1.tar.gz.part-002",
-        "bytes": 94371840,
-        "sha256": "881c6c4bd29efd5f57e7871419025b427be15d56d1acb68bd2f3eb87118d89fc"
-      },
-      {
-        "index": 3,
-        "fileName": "stats47-japan-zue-2025-26-r1.tar.gz.part-003",
-        "bytes": 94371840,
-        "sha256": "a58407646a8f04a4a8388b2f215917de18f4025392a06ea23b1a1ab1ecc7831c"
-      },
-      {
-        "index": 4,
-        "fileName": "stats47-japan-zue-2025-26-r1.tar.gz.part-004",
-        "bytes": 94371840,
-        "sha256": "71f0e021dc4b35e2bbe541d25067edd7df31d237acfd7e8b0a3283267b2abe2c"
-      },
-      {
-        "index": 5,
-        "fileName": "stats47-japan-zue-2025-26-r1.tar.gz.part-005",
-        "bytes": 94371840,
-        "sha256": "93f183ec0f256c397aa6070b471d79d7aa48747fd00cc6bcdcd810ef8145900f"
-      },
-      {
-        "index": 6,
-        "fileName": "stats47-japan-zue-2025-26-r1.tar.gz.part-006",
-        "bytes": 8807455,
-        "sha256": "8390b24373b82dc9dbfc9918a6aa0ba85414485cc5bf5db011487ab126dac65e"
-      }
-    ]
-  },
+  "contentSha256": "9534f02519bf2294ddc3f6d8b187f725c13cc6c543367dac723690f1dfa2bca5",
   "fileCount": 1746,
   "componentCounts": {
     "markdown": 504,
@@ -63,7 +22,7 @@
     "pdfs": 13,
     "auxiliary": 1
   },
-  "createdAt": "2026-08-26T22:17:38.317Z",
+  "createdAt": "2026-09-09T21:46:52.816Z",
   "files": [
     {
       "path": "figures/p026-fig01.jpg",

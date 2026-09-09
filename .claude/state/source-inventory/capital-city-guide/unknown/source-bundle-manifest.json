@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "profile": "capital-city-guide",
+  "sourceKey": "capital-city-guide",
+  "edition": "unknown",
+  "revision": 1,
+  "sourceRootName": "47都道府県県庁所在地ガイド",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/47都道府県県庁所在地ガイド/版不明"
+  },
+  "contentSha256": "2c2c6325fd96620649b1d13c97cd704e04ba5925d8715b4e302b9dd1c717fc74",
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-09-09T21:46:58.617Z",
+  "files": [
+    {
+      "path": "47都道府県県庁所在地ガイド.pdf",
+      "bytes": 32660718,
+      "sha256": "2f059f2c757ce9b5a9c694a0389b79b33630af25f0ccb7dcdc3f7cf2a4633083"
+    }
+  ]
+}

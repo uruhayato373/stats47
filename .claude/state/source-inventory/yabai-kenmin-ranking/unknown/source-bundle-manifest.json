@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "profile": "yabai-kenmin-ranking",
+  "sourceKey": "yabai-kenmin-ranking",
+  "edition": "unknown",
+  "revision": 1,
+  "sourceRootName": "全国47都道府県やばい県民ランキング",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/全国47都道府県やばい県民ランキング/版不明"
+  },
+  "contentSha256": "71b297383814d8d7b9cfc9ebf78851c5ea8aae3fd2a614be112cd5f646ca88bc",
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-09-09T21:46:58.752Z",
+  "files": [
+    {
+      "path": "全国47都道府県やばい県民ランキング.pdf",
+      "bytes": 12272260,
+      "sha256": "2fe14ccf36bc0c050d011de20fc750f10cbff98eea77266e9afb36a994b04558"
+    }
+  ]
+}

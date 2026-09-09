@@ -15,7 +15,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write, WebSearch, WebFetch
 
 ## 引数
 
-分冊エリア名 (例: `四国` / `関東` / `九州・沖縄`)。private Google Drive source bundleを一時復元した
+分冊エリア名 (例: `四国` / `関東` / `九州・沖縄`)。private Google Drive の版 folder を一時復元した
 `$TMPDIR/stats47-source-vault/work/prefecture-databook/2021/2021都道府県DataBook/2021都道府県DataBook 分冊版 <エリア>エリア.pdf`
 を対象にする。
 省略時は未登録県 (validator の `editorial-coverage` warn) が残る分冊を確認して 1 冊選ぶ。
@@ -23,15 +23,14 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write, WebSearch, WebFetch
 ## 前提の確認 (実行前に必ず)
 
 `.claude/rules/reference-source-standards.md`の共通手順で、Drive論理パス
-`参考文献/2021都道府県DataBook/2021年版`からmanifestと2partをOS一時領域へ取得する。repo内へPDFを置かない。
+`参考文献/2021都道府県DataBook/2021年版`(ローカルマウント)からOS一時領域へ複製する。repo内へPDFを置かない。
 
 ```bash
 SOURCE_MANIFEST=".claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json"
-SOURCE_DOWNLOAD_DIR="${TMPDIR%/}/stats47-source-vault/download/prefecture-databook/2021/r1"
 SOURCE_WORK_DIR="${TMPDIR%/}/stats47-source-vault/work/prefecture-databook/2021/2021都道府県DataBook"
 SOURCE_DERIVED_DIR="${TMPDIR%/}/stats47-source-vault/derived/prefecture-databook/2021/r1"
-npm run source-vault -- verify --manifest "$SOURCE_MANIFEST" --parts-dir "$SOURCE_DOWNLOAD_DIR"
-npm run source-vault -- restore --manifest "$SOURCE_MANIFEST" --parts-dir "$SOURCE_DOWNLOAD_DIR"
+npm run source-vault -- verify --profile prefecture-databook-2021 --manifest "$SOURCE_MANIFEST" --vault
+npm run source-vault -- restore --profile prefecture-databook-2021 --manifest "$SOURCE_MANIFEST"
 npm run source-vault:process -- prepare --profile prefecture-databook-2021
 # processing-manifest.jsonで対象PDFの安定ID・ページ数・text layerを確認
 jq '.documents[] | {id,path,pages,firstPageTextCharacters}' "$SOURCE_DERIVED_DIR/processing-manifest.json"

@@ -102,4 +102,5 @@
 - [feedback_playwright_profile_dual_os.md](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂
 - [feedback_windows_script_portability.md](feedback_windows_script_portability.md) — Windowsで落ちる3パターン: URL().pathnameの先頭スラッシュ(C:\C:\)/npxのspawn(ENOENT・Node22は.cmdをEINVAL)/Macパス直書き。node直起動とfileURLToPathで書く
 - [project_affiliate_banner_text_asymmetry.md](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する
+- [project_source_vault_expanded_layout.md](project_source_vault_expanded_layout.md) — 参考文献vaultは2026-09-10にtar bundle廃止→Drive版folderへ展開配置(PDF+pages/+md/+figures/)。マウントは`マイドライブ`を自動解決、upload差分+readback、S4未到達はpending、_移行前は削除可、不完全スキャン2冊
 - [project_kakei_marketing_book_pipeline.md](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』(2015)をsource-vault profile kakei-marketing-2015で保全(r2=ページ画像同梱)・全307ページ解決済(analyses.json 80件)。展開はbacklog KAKEI-MARKETING-CONTENT-01。Kindle縦書きスキャンはjpn_vert+UI枠crop、Driveはローカルマウントをそのまま--parts-dirに渡せる
