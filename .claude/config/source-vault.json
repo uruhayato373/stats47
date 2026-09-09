@@ -198,7 +198,7 @@
     "capital-city-guide": {
       "sourceKey": "capital-city-guide",
       "edition": "unknown",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "47都道府県県庁所在地ガイド",
       "driveSourceFolderName": "47都道府県県庁所在地ガイド",
       "driveEditionFolderName": "版不明",
@@ -234,7 +234,7 @@
     "money-health-ranking": {
       "sourceKey": "money-health-ranking",
       "edition": "unknown",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "おカネと健康 都道府県ランキング",
       "driveSourceFolderName": "おカネと健康 都道府県ランキング",
       "driveEditionFolderName": "版不明",
@@ -274,7 +274,7 @@
     "yabai-kenmin-ranking": {
       "sourceKey": "yabai-kenmin-ranking",
       "edition": "unknown",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "全国47都道府県やばい県民ランキング",
       "driveSourceFolderName": "全国47都道府県やばい県民ランキング",
       "driveEditionFolderName": "版不明",
@@ -310,7 +310,7 @@
     "amusement-shop-density": {
       "sourceKey": "amusement-shop-density",
       "edition": "unknown",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "全国都道府県遊技営業店密度ランキング",
       "driveSourceFolderName": "全国都道府県遊技営業店密度ランキング",
       "driveEditionFolderName": "版不明",
@@ -346,7 +346,7 @@
     "gis-business-guide": {
       "sourceKey": "gis-business-guide",
       "edition": "unknown",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "最新GISのビジネス活用がよ〜くわかる本",
       "driveSourceFolderName": "最新GISのビジネス活用がよ〜くわかる本",
       "driveEditionFolderName": "版不明",
@@ -381,7 +381,7 @@
     "prefecture-ranking-consumption": {
       "sourceKey": "prefecture-ranking-consumption",
       "edition": "unknown",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "統計から読み解く47都道府県ランキング 消費・子供・スポーツ編",
       "driveSourceFolderName": "統計から読み解く47都道府県ランキング 消費・子供・スポーツ編",
       "driveEditionFolderName": "版不明",
@@ -421,7 +421,7 @@
     "average-income-ranking": {
       "sourceKey": "average-income-ranking",
       "edition": "unknown",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "都道府県別平均年収ランキング",
       "driveSourceFolderName": "都道府県別平均年収ランキング",
       "driveEditionFolderName": "版不明",
