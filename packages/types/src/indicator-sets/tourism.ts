@@ -69,6 +69,16 @@ export const TOURISM_SET: IndicatorSet = {
       "rankingKey": "number-of-hotel-rooms",
       "shortLabel": "ホテル客室数",
       "role": "context"
+    },
+    {
+      "rankingKey": "accommodation-consumption-expenditure",
+      "shortLabel": "宿泊料消費支出額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "airport-count",
+      "shortLabel": "空港数",
+      "role": "secondary"
     }
   ],
   "keywords": [

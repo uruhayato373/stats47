@@ -139,6 +139,26 @@ export const SAFETY_SET: IndicatorSet = {
       "rankingKey": "traffic-accident-injuries",
       "shortLabel": "交通事故負傷者数",
       "role": "context"
+    },
+    {
+      "rankingKey": "flood-damage-general-assets",
+      "shortLabel": "水害一般資産等被害額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "flood-affected-municipalities",
+      "shortLabel": "水害被災市区町村数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "fire-department-water-count-per-100-thousand-people",
+      "shortLabel": "消防水利数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "disaster-relief-expenses-prefecture",
+      "shortLabel": "災害救助費",
+      "role": "secondary"
     }
   ],
   "keywords": [

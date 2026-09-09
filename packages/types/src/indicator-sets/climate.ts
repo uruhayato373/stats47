@@ -49,6 +49,11 @@ export const CLIMATE_SET: IndicatorSet = {
       "rankingKey": "annual-snow-days",
       "shortLabel": "年間雪日数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "maximum-snow-depth",
+      "shortLabel": "最深積雪",
+      "role": "secondary"
     }
   ],
   "keywords": [

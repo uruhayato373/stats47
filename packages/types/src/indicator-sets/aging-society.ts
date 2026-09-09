@@ -129,6 +129,11 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "rankingKey": "nursing-home-capacity-per-1000-65plus",
       "shortLabel": "老人ホーム定員（65歳以上千人当たり）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "employment-rate",
+      "shortLabel": "就業率（全体・参考）",
+      "role": "secondary"
     }
   ],
   "keywords": [

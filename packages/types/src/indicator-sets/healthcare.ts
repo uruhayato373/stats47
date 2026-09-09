@@ -104,6 +104,21 @@ export const HEALTHCARE_SET: IndicatorSet = {
       "rankingKey": "ambulance-hospital-arrival-time",
       "shortLabel": "救急搬送の病院収容所要時間",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "annual-emergency-dispatches-per-1000",
+      "shortLabel": "救急出動件数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "maternal-health-guidance-per-100-births",
+      "shortLabel": "妊産婦保健指導数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "home-care-worker-annual-income",
+      "shortLabel": "訪問介護従事者平均年収",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -59,6 +59,11 @@ export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
       "rankingKey": "total-overnight-guests-foreign",
       "shortLabel": "外国人宿泊",
       "role": "context"
+    },
+    {
+      "rankingKey": "foreign-resident-population",
+      "shortLabel": "外国人住民人口",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -69,6 +69,16 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "rankingKey": "agricultural-output",
       "shortLabel": "農業産出額",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "annual-sales-amount",
+      "shortLabel": "商業年間商品販売額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "annual-sales-amount-per-employee",
+      "shortLabel": "従業者1人当たり商業販売額",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -59,6 +59,11 @@ export const ROADS_SET: IndicatorSet = {
       "rankingKey": "roadside-station-count",
       "shortLabel": "道の駅数",
       "role": "context"
+    },
+    {
+      "rankingKey": "road-bridge-expenses-prefecture",
+      "shortLabel": "道路橋りょう費",
+      "role": "secondary"
     }
   ],
   "keywords": [

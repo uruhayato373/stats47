@@ -79,6 +79,41 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "hobby-participation-rate-theater",
       "shortLabel": "演芸・演劇・舞踊鑑賞の行動者率（10歳以上）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "university-count-per-100k",
+      "shortLabel": "大学数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "elementary-school-education-cost-per-student",
+      "shortLabel": "小学校教育費",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "study-participation-rate-business",
+      "shortLabel": "学習・自己啓発行動者率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "library-books",
+      "shortLabel": "図書館蔵書数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "library-lending-books",
+      "shortLabel": "図書館貸出冊数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "total-museum-count",
+      "shortLabel": "博物館総数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "art-museum-count",
+      "shortLabel": "美術博物館数",
+      "role": "secondary"
     }
   ],
   "keywords": [

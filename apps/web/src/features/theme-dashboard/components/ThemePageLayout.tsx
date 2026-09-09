@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 
 import Link from 'next/link';
 
@@ -136,7 +136,9 @@ export async function ThemePageLayout({
   const embeddedSections = Object.fromEntries(
     (theme.embeddedSections ?? []).flatMap((key) => {
       const Section = THEME_SECTION_REGISTRY[key];
-      return Section ? [[key, <Section key={key} />]] : [];
+      return Section
+        ? [[key, <Suspense key={key} fallback={null}><Section /></Suspense>]]
+        : [];
     })
   );
 
@@ -417,13 +419,17 @@ export async function ThemePageLayout({
           {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
           <InContentAdSlot slot={HUB_INCONTENT} />
 
-          <ThemeGeoInsightsSection
-            themeKey={theme.themeKey}
-            areaCode={areaContext?.areaCode}
-            areaName={areaContext?.areaName}
-          />
+          <Suspense fallback={null}>
+            <ThemeGeoInsightsSection
+              themeKey={theme.themeKey}
+              areaCode={areaContext?.areaCode}
+              areaName={areaContext?.areaName}
+            />
+          </Suspense>
 
-          <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
+          <Suspense fallback={null}>
+            <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
+          </Suspense>
 
           {/*
         広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、
@@ -446,7 +452,9 @@ export async function ThemePageLayout({
 
           {theme.relatedArticleTagKeys &&
             theme.relatedArticleTagKeys.length > 0 && (
-              <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
+              <Suspense fallback={null}>
+                <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
+              </Suspense>
             )}
         </div>
       </PageShell>

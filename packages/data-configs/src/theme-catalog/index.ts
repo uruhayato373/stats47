@@ -31,6 +31,11 @@ import { TOURISM_CATALOG } from "./tourism";
 import { CONSTRUCTION_INDUSTRY_CATALOG } from "./construction-industry";
 import { WASTE_RECYCLING_CATALOG } from "./waste-recycling";
 import { INFORMATION_INDUSTRY_CATALOG } from "./information-industry";
+import {
+  EXISTING_THEME_SECTION_EXTENSIONS,
+  EXPANDED_THEME_CATALOGS,
+  extensionMetric,
+} from "./expanded";
 
 export * from "./types";
 export * from "./evidence-lenses";
@@ -43,7 +48,7 @@ export * from "./theme-metric-content";
 export * from "./catalog-sections";
 
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */
-export const THEME_CATALOGS: Record<string, ThemeCatalog> = {
+const BASE_THEME_CATALOGS: Record<string, ThemeCatalog> = {
   "aging-society": AGING_SOCIETY_CATALOG,
   "consumer-prices": CONSUMER_PRICES_CATALOG,
   "climate": CLIMATE_CATALOG,
@@ -68,8 +73,47 @@ export const THEME_CATALOGS: Record<string, ThemeCatalog> = {
   "construction-industry": CONSTRUCTION_INDUSTRY_CATALOG,
   "waste-recycling": WASTE_RECYCLING_CATALOG,
   "information-industry": INFORMATION_INDUSTRY_CATALOG,
-
+  ...EXPANDED_THEME_CATALOGS,
 };
+
+function withExistingExtensions(catalog: ThemeCatalog): ThemeCatalog {
+  const extensions = EXISTING_THEME_SECTION_EXTENSIONS[catalog.key];
+  if (!extensions) return catalog;
+  // 財政専用ページは独自レイアウトが metricGroup を受け取らない。
+  // 指標の登録だけ行い、専用ブロックの契約を壊さない。
+  if (catalog.key === 'local-finance') {
+    const metrics = [...catalog.metrics];
+    for (const extension of extensions) {
+      for (const metric of extension.metrics) {
+        const entry = extensionMetric(metric);
+        if (!metrics.some((existing) => existing.rankingKey === entry.rankingKey)) metrics.push(entry);
+      }
+    }
+    return { ...catalog, metrics };
+  }
+  const metricGroups = [...(catalog.metricGroups ?? [])];
+  const sections = [...(catalog.sections ?? [])];
+  const metrics = [...catalog.metrics];
+  for (const extension of extensions) {
+    const groupKeys: string[] = [];
+    extension.metrics.forEach((metric, index) => {
+      const entry = extensionMetric(metric);
+      if (!metrics.some((existing) => existing.rankingKey === entry.rankingKey)) {
+        metrics.push(entry);
+      }
+      const groupKey = `candidate-${extension.candidateId}-${index + 1}`;
+      groupKeys.push(groupKey);
+      metricGroups.push({ key: groupKey, title: `${extension.title}｜${entry.shortLabel}`, rankingKeys: [entry.rankingKey], defaultCheckedKeys: [entry.rankingKey] });
+    });
+    sections.push({ key: `candidate-${extension.candidateId}`, title: extension.title, description: '128テーマ実現性調査で採択した既存テーマ内の追加章。元の指標定義と対象年を維持して表示します。', metricGroupKeys: groupKeys });
+  }
+  return { ...catalog, metrics, metricGroups, sections };
+}
+
+/** カタログ駆動テーマの登録簿 (key → catalog)。 */
+export const THEME_CATALOGS: Record<string, ThemeCatalog> = Object.fromEntries(
+  Object.entries(BASE_THEME_CATALOGS).map(([key, catalog]) => [key, withExistingExtensions(catalog)]),
+);
 
 /** 登録済みカタログ配列。 */
 export function listThemeCatalogs(): ThemeCatalog[] {

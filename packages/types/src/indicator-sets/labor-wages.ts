@@ -99,6 +99,16 @@ export const LABOR_WAGES_SET: IndicatorSet = {
       "rankingKey": "regular-cash-salary-female",
       "shortLabel": "現金給与月額（女）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "labor-force-population-ratio-woman",
+      "shortLabel": "女性労働力人口比率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "female-scheduled-earnings",
+      "shortLabel": "女性所定内給与額",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -131,3 +131,5 @@ export {
   WASTE_RECYCLING_SET,
   INFORMATION_INDUSTRY_SET,
 } from './indicator-sets/registry';
+
+export { EXPANDED_THEME_SETS } from './indicator-sets/expanded';

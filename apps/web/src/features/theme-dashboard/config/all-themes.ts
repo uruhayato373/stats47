@@ -23,7 +23,7 @@ import {
   CONSTRUCTION_INDUSTRY_SET,
   WASTE_RECYCLING_SET,
   INFORMATION_INDUSTRY_SET,
-
+  EXPANDED_THEME_SETS,
 } from '@stats47/types';
 
 import { toThemeConfig } from '../lib/to-theme-config';
@@ -56,7 +56,7 @@ const THEME_SETS = [
   CONSTRUCTION_INDUSTRY_SET,
   WASTE_RECYCLING_SET,
   INFORMATION_INDUSTRY_SET,
-
+  ...EXPANDED_THEME_SETS,
 ];
 
 /**

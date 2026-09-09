@@ -59,6 +59,16 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
       "rankingKey": "day-time-population-ratio",
       "shortLabel": "昼夜間人口比率",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "monthly-average-actual-working-hours-female",
+      "shortLabel": "女性月間平均実労働時間",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "commuter-ratio-to-other-municipalities",
+      "shortLabel": "他市区町村への通勤者比率",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -54,6 +54,16 @@ export const MANUFACTURING_SET: IndicatorSet = {
       "rankingKey": "industrial-water-usage",
       "shortLabel": "工業用水量",
       "role": "context"
+    },
+    {
+      "rankingKey": "food-business-establishments",
+      "shortLabel": "食品関係営業施設数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "factory-location-area-annual",
+      "shortLabel": "工場立地敷地面積（年次）",
+      "role": "secondary"
     }
   ],
   "keywords": [

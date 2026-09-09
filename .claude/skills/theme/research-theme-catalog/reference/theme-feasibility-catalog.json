@@ -74,7 +74,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "construction-industry",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C112207",
@@ -92,7 +92,12 @@
           "semanticBasis": "道路ストックを扱うroads、製造業を扱うmanufacturingとは産業と問いが異なる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
         },
-        "implementedThemeKey": "construction-industry"
+        "implementedThemeKey": "construction-industry",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/construction-industry.ts",
+          "apps/web/scripts/data/page-components/theme/construction-industry.json"
+        ]
       }
     },
     {
@@ -151,7 +156,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 1,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [
             "F2337",
@@ -165,7 +170,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "建設業の産業基盤に含める。熟練度や技能継承の成否は年齢構成から断定しない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:1"
+        ]
       }
     },
     {
@@ -280,7 +289,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 1,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [
             "C330420",
@@ -295,7 +304,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "建設業ページの仕事量の章へまとめ、契約時点と完成時点を分ける。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:1"
+        ]
       }
     },
     {
@@ -348,7 +361,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "H1800",
@@ -382,7 +395,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -442,7 +459,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "H227006"
@@ -474,7 +491,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -524,7 +545,7 @@
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt002/"
         ],
         "targetThemeKey": "land-property-market",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -535,8 +556,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "住宅の広さや空き家率とは異なる市場価格の問いを独立させる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/land-property-market.ts",
+          "apps/web/scripts/data/page-components/theme/land-property-market.json"
+        ]
+      },
+      "implementedThemeKey": "land-property-market"
     },
     {
       "id": 8,
@@ -588,7 +615,7 @@
           "https://www.stat.go.jp/data/jyutaku/2023/tyousake.html"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -618,7 +645,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -683,7 +714,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "agriculture-production",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C3101"
@@ -696,8 +727,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "local-economyの農業産出額1指標を補う独立した産業分析とする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/agriculture-production.ts",
+          "apps/web/scripts/data/page-components/theme/agriculture-production.json"
+        ]
+      },
+      "implementedThemeKey": "agriculture-production"
     },
     {
       "id": 10,
@@ -753,7 +790,7 @@
           "https://www.maff.go.jp/j/tokei/kekka_gaiyou/seisan_shotoku/r6_betsu/index.html"
         ],
         "targetCandidateId": 9,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -764,7 +801,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "農業の品目別章へ置き、頭数と生乳量、畜産産出額を別尺度で示す。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:9"
+        ]
       }
     },
     {
@@ -827,7 +868,7 @@
           "https://www.maff.go.jp/kyusyu/toukei/database/72nenpou/11th.html"
         ],
         "targetThemeKey": "forestry-timber",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -838,8 +879,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "森林面積の自然環境評価と、素材生産・雇用の産業評価を分離する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/forestry-timber.ts",
+          "apps/web/scripts/data/page-components/theme/forestry-timber.json"
+        ]
+      },
+      "implementedThemeKey": "forestry-timber"
     },
     {
       "id": 12,
@@ -896,7 +943,7 @@
           "https://www.meti.go.jp/statistics/tyo/kkj/gaiyo.html"
         ],
         "targetThemeKey": "manufacturing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -926,7 +973,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/manufacturing.ts"
+        ]
       }
     },
     {
@@ -991,7 +1042,7 @@
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0003395254"
         ],
         "targetThemeKey": "retail-commerce",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1002,8 +1053,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "local-economyの産業構成だけでは小売市場の販売・店舗配置を説明できない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/retail-commerce.ts",
+          "apps/web/scripts/data/page-components/theme/retail-commerce.json"
+        ]
+      },
+      "implementedThemeKey": "retail-commerce"
     },
     {
       "id": 14,
@@ -1060,7 +1117,7 @@
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0004006333"
         ],
         "targetThemeKey": "local-services",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1071,8 +1128,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "商業販売と異なるサービス業の雇用・売上を業種別に比較する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-services.ts",
+          "apps/web/scripts/data/page-components/theme/local-services.json"
+        ]
+      },
+      "implementedThemeKey": "local-services"
     },
     {
       "id": 15,
@@ -1124,7 +1187,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "information-industry",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C1122122",
@@ -1142,7 +1205,12 @@
           "semanticBasis": "職業別IT給与や住民の通信契約では説明できない産業の問いである。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
         },
-        "implementedThemeKey": "information-industry"
+        "implementedThemeKey": "information-industry",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/information-industry.ts",
+          "apps/web/scripts/data/page-components/theme/information-industry.json"
+        ]
       }
     },
     {
@@ -1201,7 +1269,7 @@
           "https://www.stat.go.jp/data/e-census/2021/kekka/index.html"
         ],
         "targetThemeKey": "local-economy",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1231,7 +1299,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-economy.ts"
+        ]
       }
     },
     {
@@ -1280,7 +1352,7 @@
           "https://www.chusho.meti.go.jp/pamflet/hakusyo/2025/chusho/index.html"
         ],
         "targetThemeKey": "business-demography",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1291,8 +1363,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "既存の事業所ストックからは見えない新設・廃止のフローを独立させる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/business-demography.ts",
+          "apps/web/scripts/data/page-components/theme/business-demography.json"
+        ]
+      },
+      "implementedThemeKey": "business-demography"
     },
     {
       "id": 18,
@@ -1345,7 +1423,7 @@
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010103"
         ],
         "targetThemeKey": "local-economy",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1375,7 +1453,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-economy.ts"
+        ]
       }
     },
     {
@@ -1425,7 +1507,7 @@
           "https://www.chusho.meti.go.jp/pamflet/hakusyo/2025/chusho/index.html"
         ],
         "targetCandidateId": 17,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1436,7 +1518,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "規模の定義を固定した事業基盤の章へ統合し、128件分のURLを作る理由にしない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:17"
+        ]
       }
     },
     {
@@ -1604,7 +1690,7 @@
           "https://www.meti.go.jp/statistics/tii/ritti/result-2/r07-1.html"
         ],
         "targetThemeKey": "manufacturing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1634,7 +1720,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/manufacturing.ts"
+        ]
       }
     },
     {
@@ -1748,7 +1838,7 @@
           "https://www.mext.go.jp/content/20240424-mxt_sanchi02-000035655_1-1.pdf"
         ],
         "targetThemeKey": "innovation-patents",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1759,8 +1849,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "特許・共同研究の機能は製造出荷や職種別給与から独立した問いである。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/innovation-patents.ts",
+          "apps/web/scripts/data/page-components/theme/innovation-patents.json"
+        ]
+      },
+      "implementedThemeKey": "innovation-patents"
     },
     {
       "id": 25,
@@ -1811,7 +1907,7 @@
           "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html"
         ],
         "targetThemeKey": "tourism",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1837,7 +1933,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/tourism.ts"
+        ]
       }
     },
     {
@@ -1895,7 +1995,7 @@
           "https://www.mlit.go.jp/kankocho/content/001992606.xlsx"
         ],
         "targetThemeKey": "tourism",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1921,7 +2021,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/tourism.ts"
+        ]
       }
     },
     {
@@ -1985,7 +2089,7 @@
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010103"
         ],
         "targetThemeKey": "tourism",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2011,7 +2115,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/tourism.ts"
+        ]
       }
     },
     {
@@ -2056,7 +2164,7 @@
           "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html"
         ],
         "targetThemeKey": "tourism",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2082,7 +2190,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/tourism.ts"
+        ]
       }
     },
     {
@@ -2207,7 +2319,7 @@
           "https://www.bunka.go.jp/seisaku/bunkazai/shokai/chiho_shitei/kensu_suii.html"
         ],
         "targetCandidateId": 116,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2218,7 +2330,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "文化財の同一在庫を二重管理せず、文化財保存の対象から観光へ導線を出す。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:116"
+        ]
       }
     },
     {
@@ -2269,7 +2385,7 @@
           "https://www.env.go.jp/park/doc/data.html"
         ],
         "targetCandidateId": 103,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2280,7 +2396,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "自然環境の公園面積に利用情報を足す。県境を跨ぐ利用者を各県へ重複配分しない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:103"
+        ]
       }
     },
     {
@@ -2401,7 +2521,7 @@
           "https://www.mhlw.go.jp/stf/newpage_62187.html"
         ],
         "targetThemeKey": "labor-mobility",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2435,7 +2555,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/labor-mobility.ts"
+        ]
       }
     },
     {
@@ -2499,7 +2623,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010106"
         ],
         "targetThemeKey": "population-dynamics",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2529,7 +2653,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/population-dynamics.ts"
+        ]
       }
     },
     {
@@ -2581,7 +2709,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010106"
         ],
         "targetThemeKey": "labor-wages",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2611,7 +2739,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/labor-wages.ts"
+        ]
       }
     },
     {
@@ -2670,7 +2802,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010106"
         ],
         "targetThemeKey": "aging-society",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2704,7 +2836,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/aging-society.ts"
+        ]
       }
     },
     {
@@ -2757,7 +2893,7 @@
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0004008431"
         ],
         "targetThemeKey": "labor-mobility",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2791,7 +2927,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/labor-mobility.ts"
+        ]
       }
     },
     {
@@ -2855,7 +2995,7 @@
           "https://www.e-stat.go.jp/stat-search/files?stat_infid=000040242201"
         ],
         "targetThemeKey": "labor-mobility",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2889,7 +3029,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/labor-mobility.ts"
+        ]
       }
     },
     {
@@ -2955,7 +3099,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010113"
         ],
         "targetThemeKey": "labor-mobility",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2989,7 +3133,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/labor-mobility.ts"
+        ]
       }
     },
     {
@@ -3040,7 +3188,7 @@
           "https://www.mhlw.go.jp/content/11655000/001646131.pdf"
         ],
         "targetThemeKey": "foreign-residents",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3062,7 +3210,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/foreign-residents.ts"
+        ]
       }
     },
     {
@@ -3115,7 +3267,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010101"
         ],
         "targetThemeKey": "population-dynamics",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3145,7 +3297,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/population-dynamics.ts"
+        ]
       }
     },
     {
@@ -3204,7 +3360,7 @@
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
         ],
         "targetThemeKey": "aging-society",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3238,7 +3394,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/aging-society.ts"
+        ]
       }
     },
     {
@@ -3283,7 +3443,7 @@
           "https://www.stat.go.jp/data/idou/2025np/jissu/youyaku/index.htm"
         ],
         "targetThemeKey": "population-dynamics",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3313,7 +3473,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/population-dynamics.ts"
+        ]
       }
     },
     {
@@ -3365,7 +3529,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010101"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3395,7 +3559,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -3448,7 +3616,7 @@
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3478,7 +3646,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -3528,7 +3700,7 @@
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
         ],
         "targetCandidateId": 43,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3539,7 +3711,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "移住目的・定着率を測る企画は取り下げ、観測可能な人口移動へ範囲を縮める。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:43"
+        ]
       }
     },
     {
@@ -3591,7 +3767,7 @@
           "https://www.ipss.go.jp/syoushika/tohkei/Mainmenu.asp"
         ],
         "targetThemeKey": "population-dynamics",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3621,7 +3797,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/population-dynamics.ts"
+        ]
       }
     },
     {
@@ -3679,7 +3859,7 @@
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
         ],
         "targetThemeKey": "aging-society",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3713,7 +3893,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/aging-society.ts"
+        ]
       }
     },
     {
@@ -3771,7 +3955,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010101"
         ],
         "targetThemeKey": "childcare-services",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3782,8 +3966,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "学校教育や出生数では捉えられない保育サービス需給を独立させる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/childcare-services.ts",
+          "apps/web/scripts/data/page-components/theme/childcare-services.json"
+        ]
+      },
+      "implementedThemeKey": "childcare-services"
     },
     {
       "id": 50,
@@ -3840,7 +4030,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010110"
         ],
         "targetThemeKey": "local-finance",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3866,7 +4056,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-finance.ts"
+        ]
       }
     },
     {
@@ -3924,7 +4118,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010110"
         ],
         "targetThemeKey": "single-parent-households",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3935,8 +4129,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "世帯類型の数だけでは生活条件を説明できず、母子・父子別の問いを分ける。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/single-parent-households.ts",
+          "apps/web/scripts/data/page-components/theme/single-parent-households.json"
+        ]
+      },
+      "implementedThemeKey": "single-parent-households"
     },
     {
       "id": 52,
@@ -4000,7 +4200,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010105"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4026,7 +4226,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -4079,7 +4283,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010105"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4105,7 +4309,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -4164,7 +4372,7 @@
           "https://www.mext.go.jp/content/20250324-mxt_chousa01-000040750_16.pdf"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4190,7 +4398,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -4254,7 +4466,7 @@
           "https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/kekka/k_detail/mext_00002.html"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4280,7 +4492,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -4338,7 +4554,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010113"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4364,7 +4580,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -4423,7 +4643,7 @@
           "https://www.mhlw.go.jp/toukei/list/79-1a.html"
         ],
         "targetThemeKey": "healthcare",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4465,7 +4685,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/healthcare.ts"
+        ]
       }
     },
     {
@@ -4517,7 +4741,7 @@
           "https://www.mhlw.go.jp/toukei/list/79-1a.html"
         ],
         "targetThemeKey": "healthcare",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4559,7 +4783,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/healthcare.ts"
+        ]
       }
     },
     {
@@ -4623,7 +4851,7 @@
           "https://www.mhlw.go.jp/stf/shingi2/0000161127_00099.html"
         ],
         "targetThemeKey": "healthcare",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4665,7 +4893,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/healthcare.ts"
+        ]
       }
     },
     {
@@ -4730,7 +4962,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010110"
         ],
         "targetThemeKey": "long-term-care",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4741,8 +4973,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "高齢化率と施設定員だけでは捉えられない保険・サービス需給を分離する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/long-term-care.ts",
+          "apps/web/scripts/data/page-components/theme/long-term-care.json"
+        ]
+      },
+      "implementedThemeKey": "long-term-care"
     },
     {
       "id": 61,
@@ -4812,7 +5050,7 @@
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000061944.html"
         ],
         "targetThemeKey": "healthcare",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4854,7 +5092,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/healthcare.ts"
+        ]
       }
     },
     {
@@ -4911,7 +5153,7 @@
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000079194_00005.html"
         ],
         "targetThemeKey": "disability-support",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4922,8 +5164,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "医療供給や一般雇用統計と対象人口・制度が異なる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/disability-support.ts",
+          "apps/web/scripts/data/page-components/theme/disability-support.json"
+        ]
+      },
+      "implementedThemeKey": "disability-support"
     },
     {
       "id": 63,
@@ -4980,7 +5228,7 @@
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000092189.html"
         ],
         "targetThemeKey": "public-assistance",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -4991,8 +5239,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "保護率を貧困率とは呼ばず、給付・相談の制度利用を対象にする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/public-assistance.ts",
+          "apps/web/scripts/data/page-components/theme/public-assistance.json"
+        ]
+      },
+      "implementedThemeKey": "public-assistance"
     },
     {
       "id": 64,
@@ -5119,7 +5373,7 @@
           "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/"
         ],
         "targetThemeKey": "healthcare",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5161,7 +5415,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/healthcare.ts"
+        ]
       }
     },
     {
@@ -5224,7 +5482,7 @@
           "https://www.mhlw.go.jp/toukei/saikin/hw/k-tyosa/k-tyosa22/index.html"
         ],
         "targetThemeKey": "health-checkups",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5235,8 +5493,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "県民全体の疾病率とは異なる健診対象・受診者を核として独立させる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/health-checkups.ts",
+          "apps/web/scripts/data/page-components/theme/health-checkups.json"
+        ]
+      },
+      "implementedThemeKey": "health-checkups"
     },
     {
       "id": 67,
@@ -5293,7 +5557,7 @@
           "https://www.mhlw.go.jp/toukei/saikin/hw/kanja/23/"
         ],
         "targetThemeKey": "healthcare",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5335,7 +5599,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/healthcare.ts"
+        ]
       }
     },
     {
@@ -5400,7 +5668,7 @@
           "https://www.mhlw.go.jp/toukei/saikin/hw/kanja/23/"
         ],
         "targetThemeKey": "healthcare",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5442,7 +5710,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/healthcare.ts"
+        ]
       }
     },
     {
@@ -5498,7 +5770,7 @@
           "https://www.mhlw.go.jp/content/12400000/001258154.pdf"
         ],
         "targetCandidateId": 66,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5509,7 +5781,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "健診受診者と国民健康栄養調査を別母集団の図として置く。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:66"
+        ]
       }
     },
     {
@@ -5566,7 +5842,7 @@
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html"
         ],
         "targetCandidateId": 117,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5577,7 +5853,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "施設の供給と住民の利用・参加を同じテーマで読む。行動者率と定期運動率は別図にする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:117"
+        ]
       }
     },
     {
@@ -5629,7 +5909,7 @@
           "https://www.stat.go.jp/data/shakai/2021/kekka.html"
         ],
         "targetThemeKey": "daily-time-use",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5640,8 +5920,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "実給与・就業状態とは異なる24時間の配分を主問とする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/daily-time-use.ts",
+          "apps/web/scripts/data/page-components/theme/daily-time-use.json"
+        ]
+      },
+      "implementedThemeKey": "daily-time-use"
     },
     {
       "id": 72,
@@ -5697,7 +5983,7 @@
           "https://www.cao.go.jp/kodoku_koritsu/torikumi/zenkokuchousa/r7.html"
         ],
         "targetCandidateId": 127,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5708,7 +5994,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "市民参加と同じ行動者率・活動時間を使用するため一本化する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:127"
+        ]
       }
     },
     {
@@ -5775,7 +6065,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "real-income",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C5701",
@@ -5811,7 +6101,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/real-income.ts"
+        ]
       }
     },
     {
@@ -5871,7 +6165,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C5704",
@@ -5905,7 +6199,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -5972,7 +6270,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "consumer-prices",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "B4107",
@@ -6015,7 +6313,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/consumer-prices.ts"
+        ]
       }
     },
     {
@@ -6074,7 +6376,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "consumer-prices",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C5703",
@@ -6108,7 +6410,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/consumer-prices.ts"
+        ]
       }
     },
     {
@@ -6162,7 +6468,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "real-income",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "L7201",
@@ -6200,7 +6506,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/real-income.ts"
+        ]
       }
     },
     {
@@ -6260,7 +6570,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "household-assets-debt",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "L730101",
@@ -6278,8 +6588,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "real-incomeの月次フローと異なるストックの比較として扱う。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/household-assets-debt.ts",
+          "apps/web/scripts/data/page-components/theme/household-assets-debt.json"
+        ]
+      },
+      "implementedThemeKey": "household-assets-debt"
     },
     {
       "id": 79,
@@ -6337,7 +6653,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 83,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [
             "H7207",
@@ -6352,7 +6668,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "自動車依存の背景指標へ統合し、交通通信費を車維持費に置き換えない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:83"
+        ]
       }
     },
     {
@@ -6419,7 +6739,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "real-income",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "J1105",
@@ -6454,7 +6774,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/real-income.ts"
+        ]
       }
     },
     {
@@ -6512,7 +6836,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "freight-logistics",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C3702",
@@ -6539,8 +6863,14 @@
           ],
           "semanticBasis": "portsとrailwayを横断する発着地ベースの主問に限定する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/freight-logistics.ts",
+          "apps/web/scripts/data/page-components/theme/freight-logistics.json"
+        ]
+      },
+      "implementedThemeKey": "freight-logistics"
     },
     {
       "id": 82,
@@ -6605,7 +6935,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 83,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [
             "C3708",
@@ -6620,7 +6950,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "交通手段構成と地域公共交通を一つのテーマにまとめる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:83"
+        ]
       }
     },
     {
@@ -6673,7 +7007,7 @@
           "https://www.e-stat.go.jp/stat-search/database?cycle=0&layout=datalist&page=1&statdisp_id=0003454515&tclass1=000001136469&toukei=00200521&tstat=000001136464"
         ],
         "targetThemeKey": "regional-transport",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -6684,8 +7018,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "鉄道だけ・道路長だけの既存テーマを跨ぐ住民の移動手段を核にする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/regional-transport.ts",
+          "apps/web/scripts/data/page-components/theme/regional-transport.json"
+        ]
+      },
+      "implementedThemeKey": "regional-transport"
     },
     {
       "id": 84,
@@ -6737,7 +7077,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "labor-mobility",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "A6103",
@@ -6788,7 +7128,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/labor-mobility.ts"
+        ]
       }
     },
     {
@@ -6840,7 +7184,7 @@
           "https://www.mlit.go.jp/koku/15_bf_000185.html"
         ],
         "targetThemeKey": "tourism",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -6866,7 +7210,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/tourism.ts"
+        ]
       }
     },
     {
@@ -6925,7 +7273,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0003130773"
         ],
         "targetThemeKey": "ports",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -6951,7 +7299,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/ports.ts"
+        ]
       }
     },
     {
@@ -7000,7 +7352,7 @@
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
         ],
         "targetThemeKey": "geographic-access",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -7011,8 +7363,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "運行頻度を含む交通空白認定ではなく、Geo分析契約に従う幾何学的アクセスに絞る。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/geographic-access.ts",
+          "apps/web/scripts/data/page-components/theme/geographic-access.json"
+        ]
+      },
+      "implementedThemeKey": "geographic-access"
     },
     {
       "id": 88,
@@ -7056,7 +7414,7 @@
           "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/index_opendata.html"
         ],
         "targetThemeKey": "safety",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -7082,7 +7440,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/safety.ts"
+        ]
       }
     },
     {
@@ -7127,7 +7489,7 @@
           "https://www.mlit.go.jp/road/sisaku/yobohozen/yobohozen_maint_r06.html"
         ],
         "targetThemeKey": "roads",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -7153,7 +7515,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/roads.ts"
+        ]
       }
     },
     {
@@ -7211,7 +7577,7 @@
           "https://www.mlit.go.jp/mizukokudo/sewerage/mizukokudo_sewerage_tk_000919.html"
         ],
         "targetThemeKey": "water-services",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -7222,8 +7588,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "生活インフラの供給と更新の独立した制度単位を扱う。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/water-services.ts",
+          "apps/web/scripts/data/page-components/theme/water-services.json"
+        ]
+      },
+      "implementedThemeKey": "water-services"
     },
     {
       "id": 91,
@@ -7274,7 +7646,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 90,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [
             "H540302",
@@ -7290,7 +7662,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "水道とは別の分母・会計を持つ章に置き、水インフラの利用条件として接続する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:90"
+        ]
       }
     },
     {
@@ -7343,7 +7719,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "local-finance",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "D310403",
@@ -7374,7 +7750,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-finance.ts"
+        ]
       }
     },
     {
@@ -7433,7 +7813,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "B1103"
@@ -7465,7 +7845,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -7517,7 +7901,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "H9101",
@@ -7550,7 +7934,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/living-housing.ts"
+        ]
       }
     },
     {
@@ -7601,7 +7989,7 @@
           "https://www.e-stat.go.jp/stat-search/files?collect_area=000&cycle=0&layout=dataset&page=1&tclass1=000001228813&tclass2val=0&toukei=00200356&tstat=000001228811",
           ".claude/state/estat/theme-expansion-verification.json"
         ],
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "targetThemeKey": "communication-access",
         "dataVerification": {
           "explicitCodes": [
@@ -7616,8 +8004,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "通信利用の問いは情報通信業の生産・雇用と異なるため独立させる。契約数を回線のカバー率・速度に読み替えない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/communication-access.ts",
+          "apps/web/scripts/data/page-components/theme/communication-access.json"
+        ]
+      },
+      "implementedThemeKey": "communication-access"
     },
     {
       "id": 96,
@@ -7675,7 +8069,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "climate",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "B4107",
@@ -7716,7 +8110,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/climate.ts"
+        ]
       }
     },
     {
@@ -7767,7 +8165,7 @@
           "https://www.e-stat.go.jp/stat-search/files?kikan=00551&layout=dataset&toukei=00551006"
         ],
         "targetThemeKey": "regional-energy",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -7778,8 +8176,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "気候・製造業から独立したエネルギー需給の問いとする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/regional-energy.ts",
+          "apps/web/scripts/data/page-components/theme/regional-energy.json"
+        ]
+      },
+      "implementedThemeKey": "regional-energy"
     },
     {
       "id": 98,
@@ -7823,7 +8227,7 @@
           "https://www.fit-portal.go.jp/publicinfosummary"
         ],
         "targetCandidateId": 97,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -7834,7 +8238,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "エネルギーの供給設備章に集約し、kW容量とkWh発電量は別尺度にする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:97"
+        ]
       }
     },
     {
@@ -7885,7 +8293,7 @@
           "https://www.e-stat.go.jp/statistics/00551006"
         ],
         "targetCandidateId": 97,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -7896,7 +8304,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "消費と排出の定義差を保持した別章に統合し、非CO2を含む全GHGとは呼ばない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:97"
+        ]
       }
     },
     {
@@ -7949,7 +8361,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "waste-recycling",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "H5609",
@@ -7968,7 +8380,12 @@
           "semanticBasis": "既存safetyの犯罪・事故・火災と異なる環境サービスの問いである。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
         },
-        "implementedThemeKey": "waste-recycling"
+        "implementedThemeKey": "waste-recycling",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/waste-recycling.ts",
+          "apps/web/scripts/data/page-components/theme/waste-recycling.json"
+        ]
       }
     },
     {
@@ -8074,7 +8491,7 @@
           "https://www.env.go.jp/water/suiiki/"
         ],
         "targetThemeKey": "environmental-quality",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8085,8 +8502,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "気象そのものと異なる環境観測を対象とし、測定局と住民曝露を区別する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/environmental-quality.ts",
+          "apps/web/scripts/data/page-components/theme/environmental-quality.json"
+        ]
+      },
+      "implementedThemeKey": "environmental-quality"
     },
     {
       "id": 103,
@@ -8137,7 +8560,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "natural-environment",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "B1106",
@@ -8152,8 +8575,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "林業生産と異なる土地・保全の問いを持ち、自然公園の利用は同じ対象へ統合する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/natural-environment.ts",
+          "apps/web/scripts/data/page-components/theme/natural-environment.json"
+        ]
+      },
+      "implementedThemeKey": "natural-environment"
     },
     {
       "id": 104,
@@ -8203,7 +8632,7 @@
           "https://www.fdma.go.jp/disaster/heatstroke/"
         ],
         "targetThemeKey": "climate",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8233,7 +8662,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/climate.ts"
+        ]
       }
     },
     {
@@ -8289,7 +8722,7 @@
           "https://www.fdma.go.jp/publication/hakusho/r7/"
         ],
         "targetThemeKey": "earthquake-exposure",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8300,8 +8733,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "県平均の安全順位を作らず、メッシュと対象人口のGeo分析として独立させる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/earthquake-exposure.ts",
+          "apps/web/scripts/data/page-components/theme/earthquake-exposure.json"
+        ]
+      },
+      "implementedThemeKey": "earthquake-exposure"
     },
     {
       "id": 106,
@@ -8350,7 +8789,7 @@
           "https://www.mlit.go.jp/river/bousai/main/saigai/tisiki/syozaiti/index.html"
         ],
         "targetThemeKey": "safety",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8376,7 +8815,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/safety.ts"
+        ]
       }
     },
     {
@@ -8419,7 +8862,7 @@
           "https://nlftp.mlit.go.jp/ksj/index.html"
         ],
         "targetThemeKey": "landslide-exposure",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8430,8 +8873,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "指定進捗と曝露を分けるGeo分析として、洪水とは別の災害範囲を扱う。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/landslide-exposure.ts",
+          "apps/web/scripts/data/page-components/theme/landslide-exposure.json"
+        ]
+      },
+      "implementedThemeKey": "landslide-exposure"
     },
     {
       "id": 108,
@@ -8479,7 +8928,7 @@
           "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P20.html"
         ],
         "targetThemeKey": "tsunami-exposure",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8490,8 +8939,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "対象は沿岸に限定し、内陸県を含む47県一律ランキングを作らない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/tsunami-exposure.ts",
+          "apps/web/scripts/data/page-components/theme/tsunami-exposure.json"
+        ]
+      },
+      "implementedThemeKey": "tsunami-exposure"
     },
     {
       "id": 109,
@@ -8548,7 +9003,7 @@
           "https://www.fdma.go.jp/publication/hakusho/r7/"
         ],
         "targetThemeKey": "safety",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8574,7 +9029,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/safety.ts"
+        ]
       }
     },
     {
@@ -8626,7 +9085,7 @@
           "https://www.fdma.go.jp/publication/hakusho/r7/"
         ],
         "targetThemeKey": "safety",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8652,7 +9111,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/safety.ts"
+        ]
       }
     },
     {
@@ -8702,7 +9165,7 @@
           "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P20.html"
         ],
         "targetThemeKey": "safety",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8728,7 +9191,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/safety.ts"
+        ]
       }
     },
     {
@@ -8780,7 +9247,7 @@
           "https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/status_investigation/2025"
         ],
         "targetThemeKey": "safety",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8806,7 +9273,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/safety.ts"
+        ]
       }
     },
     {
@@ -8858,7 +9329,7 @@
           "https://www.e-stat.go.jp/index.php/stat-search/files?tclass1=000001242203&toukei=00400004&tstat=000001017254"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8884,7 +9355,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -8935,7 +9410,7 @@
           "https://www.e-stat.go.jp/index.php/stat-search/files?tclass1=000001242203&toukei=00400004&tstat=000001017254"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8961,7 +9436,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -9012,7 +9491,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0003456573"
         ],
         "targetThemeKey": "cultural-participation",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9023,8 +9502,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "施設量を扱うeducation-cultureと異なる人の行動を主問とする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/cultural-participation.ts",
+          "apps/web/scripts/data/page-components/theme/cultural-participation.json"
+        ]
+      },
+      "implementedThemeKey": "cultural-participation"
     },
     {
       "id": 116,
@@ -9079,7 +9564,7 @@
           "https://www.bunka.go.jp/seisaku/bunkazai/shokai/pdf/94212501_01.pdf"
         ],
         "targetThemeKey": "education-culture",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9105,7 +9590,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/education-culture.ts"
+        ]
       }
     },
     {
@@ -9156,7 +9645,7 @@
           "https://www.e-stat.go.jp/index.php/stat-search/files?tclass1=000001242203&toukei=00400004&tstat=000001017254"
         ],
         "targetThemeKey": "sports-participation",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9167,8 +9656,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "施設供給と住民の行動・利用を別尺度で比較する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/sports-participation.ts",
+          "apps/web/scripts/data/page-components/theme/sports-participation.json"
+        ]
+      },
+      "implementedThemeKey": "sports-participation"
     },
     {
       "id": 118,
@@ -9222,7 +9717,7 @@
           "https://www.mext.go.jp/sports/content/20260113-spt_sseisaku02-000046317_0000001.pdf"
         ],
         "targetCandidateId": 117,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9233,7 +9728,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "成人と子どもの対象年齢を分けたスポーツの章に統合する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:117"
+        ]
       }
     },
     {
@@ -9291,7 +9790,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0003456573"
         ],
         "targetCandidateId": 115,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9302,7 +9801,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "同じ社会生活基本調査の文化・趣味行動を一本化し、daily-time-useとは参照で接続する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:115"
+        ]
       }
     },
     {
@@ -9360,7 +9863,7 @@
           "https://www.e-stat.go.jp/index.php/dbview?sid=0004006330"
         ],
         "targetCandidateId": 14,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9371,7 +9874,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "参加する住民と産業を分け、売上・付加価値はサービス産業側に統合する。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:14"
+        ]
       }
     },
     {
@@ -9423,7 +9930,7 @@
           "https://www.soumu.go.jp/iken/zaisei/card.html"
         ],
         "targetThemeKey": "local-finance",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9449,7 +9956,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-finance.ts"
+        ]
       }
     },
     {
@@ -9508,7 +10019,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010110"
         ],
         "targetThemeKey": "local-finance",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9534,7 +10045,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-finance.ts"
+        ]
       }
     },
     {
@@ -9586,7 +10101,7 @@
           "https://www.e-stat.go.jp/stat-search/files?bunya_l=13&toukei=00200212"
         ],
         "targetThemeKey": "local-finance",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9612,7 +10127,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-finance.ts"
+        ]
       }
     },
     {
@@ -9655,7 +10174,7 @@
           "https://www.digital.go.jp/resources/govdashboard/local-government-dx"
         ],
         "targetThemeKey": "local-government-digital",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9666,8 +10185,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "ICT産業や通信契約と異なる行政サービスの提供・利用を核とする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-government-digital.ts",
+          "apps/web/scripts/data/page-components/theme/local-government-digital.json"
+        ]
+      },
+      "implementedThemeKey": "local-government-digital"
     },
     {
       "id": 125,
@@ -9716,7 +10241,7 @@
           "https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/a217313.htm"
         ],
         "targetThemeKey": "local-finance",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9742,7 +10267,11 @@
             }
           ]
         },
-        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。"
+        "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/local-finance.ts"
+        ]
       }
     },
     {
@@ -9800,7 +10329,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010113"
         ],
         "targetThemeKey": "gender-participation",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9811,8 +10340,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "賃金差だけでは捉えられない意思決定・家庭分担の問いを扱う。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/gender-participation.ts",
+          "apps/web/scripts/data/page-components/theme/gender-participation.json"
+        ]
+      },
+      "implementedThemeKey": "gender-participation"
     },
     {
       "id": 127,
@@ -9862,7 +10397,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010113"
         ],
         "targetThemeKey": "community-participation",
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9873,8 +10408,14 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "学校・文化施設や有業率と異なる活動目的・参加・時間を核にする。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
-      }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "packages/types/src/indicator-sets/community-participation.ts",
+          "apps/web/scripts/data/page-components/theme/community-participation.json"
+        ]
+      },
+      "implementedThemeKey": "community-participation"
     },
     {
       "id": 128,
@@ -9929,7 +10470,7 @@
           "https://www.e-stat.go.jp/gis"
         ],
         "targetCandidateId": 87,
-        "implementationStatus": "scope-adopted-data-validation-pending",
+        "implementationStatus": "merged-into-target-catalog",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9940,7 +10481,11 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "交通施設と公共サービスの同じ距離解析基盤へ統合し、直線距離を所要時間と呼ばない。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementationEvidence": [
+          "packages/data-configs/src/theme-catalog/index.ts",
+          "candidate:87"
+        ]
       }
     }
   ],
@@ -10613,7 +11158,17 @@
     "dataOwner": "data-ingester",
     "uiOwner": "theme-component-builder / theme-ui-manager",
     "scope": "採用された問いと範囲だけを実装する。統合候補は統合先の章に含める。保留8件はresumeWhenを満たすまで実装キューに入れない。",
-    "releasePolicy": "本番反映は検証済み差分をまとめて承認・公開する。"
+    "releasePolicy": "本番反映は検証済み差分をまとめて承認・公開する。",
+    "lastImplementationCheckpoint": "2026-09-09 catalog wiring",
+    "catalogWiringStatus": "local-verified",
+    "catalogWiringCounts": {
+      "newThemeCatalogWired": 34,
+      "existingSectionWired": 67,
+      "mergeWired": 19,
+      "hold": 8,
+      "dataValidationPending": 101
+    },
+    "dataValidationGate": "pending-per-metric-and-source"
   },
   "origin": {
     "researchCommit": "43cde14ac",

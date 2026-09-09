@@ -109,6 +109,16 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
       "rankingKey": "laspeyres-index-prefecture",
       "shortLabel": "ラスパイレス指数",
       "role": "context"
+    },
+    {
+      "rankingKey": "child-welfare-expenditure-ratio-pref-finance",
+      "shortLabel": "児童福祉費割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "prefectural-general-administration-staff",
+      "shortLabel": "一般行政部門職員数",
+      "role": "secondary"
     }
   ],
   "keywords": [

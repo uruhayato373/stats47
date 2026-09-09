@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-09T14:20:20.642Z",
+  "status": "local-catalog-wired-data-validation-pending",
+  "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
+  "themeCount": 55,
+  "adoptedCandidates": 120,
+  "counts": {
+    "newThemeCatalogWired": 34,
+    "existingSectionWired": 67,
+    "mergeWired": 19,
+    "hold": 8,
+    "dataValidationPending": 101
+  },
+  "holdCandidateIds": [
+    3,
+    20,
+    21,
+    23,
+    29,
+    32,
+    64,
+    101
+  ],
+  "verification": [
+    "npm run validate:catalog --workspace=@stats47/data-configs",
+    "npm run type-check --workspace packages/types",
+    "npm run type-check --workspace apps/web",
+    "npm run docs:check",
+    "npm run build --workspace apps/web"
+  ],
+  "runtimeVerification": {
+    "build": {
+      "status": "passed",
+      "staticPages": 1637
+    },
+    "themeHttp": {
+      "status": "passed",
+      "count": 55,
+      "ok": 55,
+      "artifact": ".local/verification/themes/2026-09-09-all-theme-http.json"
+    },
+    "hydration": {
+      "status": "passed",
+      "scenarios": [
+        "fresh-context",
+        "after-real-income",
+        "same-prefecture-cookie",
+        "different-prefecture-cookie"
+      ],
+      "pageErrors": 0,
+      "consoleErrors": 0,
+      "artifact": ".local/verification/themes/2026-09-09-hydration-final.json"
+    }
+  },
+  "limitation": "R2 observations, source-specific official adapters, and production publication remain gated until the consolidated data gate passes."
+}

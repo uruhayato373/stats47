@@ -89,6 +89,11 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
       "rankingKey": "movers-out",
       "shortLabel": "転出者数",
       "role": "context"
+    },
+    {
+      "rankingKey": "outflow-commuter-student-population",
+      "shortLabel": "県外従業・通学流出人口",
+      "role": "secondary"
     }
   ],
   "keywords": [

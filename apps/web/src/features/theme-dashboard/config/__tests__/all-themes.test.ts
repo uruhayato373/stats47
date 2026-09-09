@@ -9,9 +9,11 @@ import {
 } from '../theme-section-registry';
 
 describe('ALL_THEMES', () => {
-  it('カタログに採用した初回3テーマを含め、全テーマの画面登録が一致する', () => {
+  it('55テーマのカタログと画面登録が一致する', () => {
     const keys = ALL_THEMES.map((theme) => theme.themeKey);
     expect(keys).toEqual(expect.arrayContaining(['construction-industry', 'waste-recycling', 'information-industry']));
+    expect(ALL_THEMES).toHaveLength(55);
+    expect(Object.keys(THEME_CATALOGS)).toHaveLength(55);
     expect([...keys].sort()).toEqual(Object.keys(THEME_CATALOGS).sort());
   });
   it('テーマが1つ以上定義されている', () => {

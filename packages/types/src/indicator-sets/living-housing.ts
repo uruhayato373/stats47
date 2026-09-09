@@ -89,6 +89,51 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       "rankingKey": "household-ratio-above-minimum-housing-area",
       "shortLabel": "最低居住面積水準以上の世帯割合",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "new-housing-starts",
+      "shortLabel": "着工新設住宅戸数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "renovation-rate",
+      "shortLabel": "リフォーム工事実施率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "earthquake-renovation-rate",
+      "shortLabel": "耐震改修工事実施率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "vacant-housing-rate",
+      "shortLabel": "空き家率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "average-persons-per-general-household",
+      "shortLabel": "一般世帯の平均人員",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "private-rent-consumption-expenditure",
+      "shortLabel": "家賃支出",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
+      "shortLabel": "負債現在高",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "urban-parks",
+      "shortLabel": "都市公園数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "urban-parks-area",
+      "shortLabel": "都市公園面積",
+      "role": "secondary"
     }
   ],
   "keywords": [
