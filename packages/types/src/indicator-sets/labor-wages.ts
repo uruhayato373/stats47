@@ -33,12 +33,12 @@ export const LABOR_WAGES_SET: IndicatorSet = {
     {
       "rankingKey": "nurse-salary",
       "shortLabel": "看護師年収",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "gender-wage-gap",
-      "shortLabel": "男女賃金格差",
-      "role": "secondary"
+      "shortLabel": "女性賃金(男性=100)",
+      "role": "primary"
     },
     {
       "rankingKey": "male-part-time-hourly-wage",
@@ -53,17 +53,17 @@ export const LABOR_WAGES_SET: IndicatorSet = {
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "unemployment-rate",
       "shortLabel": "失業率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "employment-rate",
-      "shortLabel": "就業率",
-      "role": "context"
+      "shortLabel": "職安就職率",
+      "role": "secondary"
     },
     {
       "rankingKey": "employed-people-ratio",

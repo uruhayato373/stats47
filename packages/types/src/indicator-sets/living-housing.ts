@@ -18,17 +18,17 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "owner-occupied-housing-ratio",
       "shortLabel": "持ち家率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "floor-area-per-dwelling-owner",
-      "shortLabel": "持ち家延べ面積",
-      "role": "secondary"
+      "shortLabel": "持ち家の広さ",
+      "role": "primary"
     },
     {
       "rankingKey": "floor-area-per-dwelling-rented",
-      "shortLabel": "借家延べ面積",
-      "role": "secondary"
+      "shortLabel": "借家の広さ",
+      "role": "primary"
     },
     {
       "rankingKey": "households",
@@ -38,22 +38,22 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "nuclear-family-households-ratio",
       "shortLabel": "核家族世帯率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "elderly-couple-only-household-ratio",
-      "shortLabel": "高齢夫婦世帯",
+      "shortLabel": "高齢夫婦のみ世帯率",
       "role": "secondary"
     },
     {
       "rankingKey": "single-person-household-old-population-ratio",
-      "shortLabel": "高齢単身世帯率",
-      "role": "context"
+      "shortLabel": "高齢単独世帯率",
+      "role": "secondary"
     },
     {
       "rankingKey": "population-density-per-km2-inhabitable-area",
       "shortLabel": "人口密度",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "habitable-area-ratio",
@@ -68,7 +68,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "ratio-never-married-15-plus",
       "shortLabel": "未婚率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "marriages",
@@ -83,7 +83,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "single-person-household-ratio",
       "shortLabel": "単独世帯割合",
-      "role": "context"
+      "role": "secondary"
     }
   ],
   "keywords": [

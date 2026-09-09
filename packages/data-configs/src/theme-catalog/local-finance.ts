@@ -1,6 +1,35 @@
 import type { ThemeCatalog } from "./types";
 
 export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "財源の余力・経常経費・返済・将来負担を比較。都道府県の普通会計を中心に示します。",
+    "headlineRankingKeys": [
+      "fiscal-strength-index-prefecture",
+      "current-balance-ratio",
+      "real-public-debt-service-ratio",
+      "future-burden-ratio"
+    ],
+    "comparisonRankingKeys": [
+      "fiscal-strength-index-prefecture",
+      "current-balance-ratio",
+      "real-public-debt-service-ratio",
+      "future-burden-ratio",
+      "real-balance-ratio",
+      "local-tax-ratio-pref-finance",
+      "local-allocation-tax-ratio-pref-finance",
+      "national-treasury-disbursement-ratio-pref-finance"
+    ],
+    "mapNotes": {
+      "fiscal-strength-index-prefecture": "基準財政収入額÷基準財政需要額の3年平均。",
+      "current-balance-ratio": "経常収入の使途が固定される割合。高いほど財政の弾力性が小さくなります。",
+      "real-public-debt-service-ratio": "実質的な公債費負担の3年平均。金額や借金残高ではありません。",
+      "future-burden-ratio": "充当可能財源等を控除した将来負担の比率。借金総額ではありません。",
+      "real-balance-ratio": "実質収支÷標準財政規模。黒字幅の大きさだけで健全性は判断できません。",
+      "local-tax-ratio-pref-finance": "都道府県の歳入総額に占める地方税。市町村財政との合計ではありません。",
+      "local-allocation-tax-ratio-pref-finance": "都道府県の歳入総額に占める地方交付税。",
+      "national-treasury-disbursement-ratio-pref-finance": "都道府県の歳入総額に占める国庫支出金。"
+    }
+  },
   "key": "local-finance",
   "title": "地方財政",
   "description": "都道府県別の財政力指数・経常収支比率・実質公債費比率・歳出構造をランキングとチャートで比較。地方税割合、交付税依存度、将来負担比率など主要財政指標の推移を47都道府県のデータで確認できます。",
@@ -10,57 +39,105 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "fiscal-strength-index-prefecture",
       "shortLabel": "財政力指数",
-      "role": "primary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "財源の充実度を上部に置き、経常経費と負担の指標と読み分ける。"
+      }
     },
     {
       "rankingKey": "current-balance-ratio",
       "shortLabel": "経常収支比率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "財政構造の弾力性を上部に置く。高い順位を良い順位と着色しない。"
+      }
     },
     {
       "rankingKey": "real-public-debt-service-ratio",
       "shortLabel": "実質公債費比率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "毎年の返済が財政を圧迫する度合いを上部で示す。"
+      }
     },
     {
       "rankingKey": "future-burden-ratio",
       "shortLabel": "将来負担比率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "将来負担の蓄積を毎年の返済負担とは別軸として上部に置く。"
+      }
     },
     {
       "rankingKey": "real-balance-ratio",
       "shortLabel": "実質収支比率",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "当年度の実質収支を比較表で補足する。"
+      }
     },
     {
       "rankingKey": "local-tax-ratio-pref-finance",
       "shortLabel": "地方税割合",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "地方財政白書に基づくデジタル庁の歳入構成の比較にならい、歳入総額に対する割合で財源を読み分ける。"
+      }
     },
     {
       "rankingKey": "local-allocation-tax-ratio-pref-finance",
       "shortLabel": "交付税割合",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "地方財政白書に基づくデジタル庁の歳入構成の比較にならい、歳入総額に対する割合で財源を読み分ける。"
+      }
     },
     {
       "rankingKey": "national-treasury-disbursement-ratio-pref-finance",
       "shortLabel": "国庫支出金割合",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "デジタル庁・総務省「地方財政の財政項目の説明（令和8年版地方財政白書等）」",
+        "sourceUrl": "https://www.digital.go.jp/resources/japandashboard/local-finance-introduction",
+        "surveyedAt": "2026-09-09",
+        "rationale": "地方財政白書に基づくデジタル庁の歳入構成の比較にならい、歳入総額に対する割合で財源を読み分ける。"
+      }
     },
     {
       "rankingKey": "self-financing-ratio",
       "shortLabel": "自主財源割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-capita-total-expenditure-pref-municipal",
       "shortLabel": "1人当たり歳出",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "personnel-expenditure-ratio-pref-finance",
       "shortLabel": "人件費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "assistance-expenditure-ratio-pref-finance",
@@ -75,49 +152,55 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "welfare-expenditure-ratio-pref-finance",
       "shortLabel": "民生費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "education-expenditure-ratio-pref-finance",
       "shortLabel": "教育費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "public-works-expenditure-ratio-pref-finance",
       "shortLabel": "土木費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-capita-inhabitant-tax-pref-municipal",
       "shortLabel": "住民税",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-taxpayer-taxable-income",
       "shortLabel": "課税所得",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "taxpayer-ratio-per-pref-resident",
       "shortLabel": "納税義務者割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "laspeyres-index-prefecture",
       "shortLabel": "ラスパイレス指数",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "charts": [
     {
-      "componentKey": "kpi-lf-fiscal-strength",
-      "componentType": "kpi-card",
-      "title": "財政力指数",
+      "componentKey": "theme-lf-fiscal-ratios-trend",
+      "componentType": "line-chart",
+      "title": "財政力指数の推移",
       "componentProps": {
         "seriesRefs": [
           {
             "metricKey": "fiscal-strength-index-prefecture"
           }
+        ],
+        "labels": [
+          "財政力指数"
+        ],
+        "seriesColors": [
+          "population"
         ]
       },
       "relatedRankingKeys": [
@@ -130,256 +213,19 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "財政健全度",
-      "sortOrder": 1
+      "sortOrder": 10,
+      "annotation": "各年度の財政力指数は3年平均です。"
     },
     {
-      "componentKey": "kpi-lf-current-balance",
-      "componentType": "kpi-card",
-      "title": "経常収支比率",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "current-balance-ratio"
-          }
-        ],
-        "unit": "％"
-      },
-      "relatedRankingKeys": [
-        "current-balance-ratio"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "財政健全度",
-      "sortOrder": 2
-    },
-    {
-      "componentKey": "kpi-lf-debt-service",
-      "componentType": "kpi-card",
-      "title": "実質公債費比率",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "real-public-debt-service-ratio"
-          }
-        ],
-        "unit": "％"
-      },
-      "relatedRankingKeys": [
-        "real-public-debt-service-ratio"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "財政健全度",
-      "sortOrder": 3
-    },
-    {
-      "componentKey": "kpi-lf-future-burden",
-      "componentType": "kpi-card",
-      "title": "将来負担比率",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "future-burden-ratio"
-          }
-        ],
-        "unit": "％"
-      },
-      "relatedRankingKeys": [
-        "future-burden-ratio"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "財政健全度",
-      "sortOrder": 4
-    },
-    {
-      "componentKey": "theme-lf-fiscal-ratios-trend",
+      "componentKey": "theme-lf-current-balance-trend",
       "componentType": "line-chart",
-      "title": "財政力指数・経常収支比率の推移",
+      "title": "経常収支比率の推移",
       "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "fiscal-strength-index-prefecture"
-          },
-          {
-            "metricKey": "current-balance-ratio"
-          }
-        ],
-        "labels": [
-          "財政力指数",
-          "経常収支比率"
-        ],
-        "seriesColors": [
-          "population",
-          "series-6"
-        ]
+        "seriesRefs": [{ "metricKey": "current-balance-ratio" }],
+        "labels": ["経常収支比率"],
+        "seriesColors": ["series-6"]
       },
-      "relatedRankingKeys": [
-        "fiscal-strength-index-prefecture",
-        "current-balance-ratio"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "財政健全度",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "theme-lf-revenue-composition",
-      "componentType": "composition-chart",
-      "title": "歳入構成（地方税・交付税・国庫支出金）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "local-tax-ratio-pref-finance",
-            "label": "地方税割合",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "local-allocation-tax-ratio-pref-finance",
-            "label": "交付税割合",
-            "colorRole": "series-6"
-          },
-          {
-            "metricKey": "national-treasury-disbursement-ratio-pref-finance",
-            "label": "国庫支出金割合",
-            "colorRole": "special"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "local-tax-ratio-pref-finance",
-        "local-allocation-tax-ratio-pref-finance",
-        "national-treasury-disbursement-ratio-pref-finance"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "歳入構造",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart",
-      "title": "歳出構成（目的別）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "personnel-expenditure-ratio-pref-finance",
-            "label": "人件費割合",
-            "colorRole": "danger"
-          },
-          {
-            "metricKey": "welfare-expenditure-ratio-pref-finance",
-            "label": "民生費割合",
-            "colorRole": "female"
-          },
-          {
-            "metricKey": "education-expenditure-ratio-pref-finance",
-            "label": "教育費割合",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "public-works-expenditure-ratio-pref-finance",
-            "label": "土木費割合",
-            "colorRole": "series-12"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "personnel-expenditure-ratio-pref-finance",
-        "welfare-expenditure-ratio-pref-finance",
-        "education-expenditure-ratio-pref-finance",
-        "public-works-expenditure-ratio-pref-finance"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "歳出構造",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "theme-lf-income-tax-trend",
-      "componentType": "line-chart",
-      "title": "1人当たり住民税・課税対象所得の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "per-capita-inhabitant-tax-pref-municipal"
-          },
-          {
-            "metricKey": "per-taxpayer-taxable-income"
-          }
-        ],
-        "labels": [
-          "1人当たり住民税",
-          "納税義務者1人当たり課税所得"
-        ],
-        "seriesColors": [
-          "series-6",
-          "special"
-        ]
-      },
-      "relatedRankingKeys": [
-        "per-capita-inhabitant-tax-pref-municipal",
-        "per-taxpayer-taxable-income"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "税収・所得",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "theme-lf-debt-trend",
-      "componentType": "line-chart",
-      "title": "実質公債費比率・将来負担比率の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "real-public-debt-service-ratio"
-          },
-          {
-            "metricKey": "future-burden-ratio"
-          }
-        ],
-        "labels": [
-          "実質公債費比率",
-          "将来負担比率"
-        ],
-        "seriesColors": [
-          "danger",
-          "count"
-        ]
-      },
-      "relatedRankingKeys": [
-        "real-public-debt-service-ratio",
-        "future-burden-ratio"
-      ],
+      "relatedRankingKeys": ["current-balance-ratio"],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
       "gridColumnSpan": 12,
@@ -388,142 +234,6 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "dataSource": "ranking",
       "section": "財政健全度",
       "sortOrder": 20
-    },
-    {
-      "componentKey": "theme-lf-revenue-trend",
-      "componentType": "line-chart",
-      "title": "歳入構造比率の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "local-tax-ratio-pref-finance"
-          },
-          {
-            "metricKey": "local-allocation-tax-ratio-pref-finance"
-          },
-          {
-            "metricKey": "national-treasury-disbursement-ratio-pref-finance"
-          }
-        ],
-        "labels": [
-          "地方税割合",
-          "地方交付税割合",
-          "国庫支出金割合"
-        ],
-        "seriesColors": [
-          "population",
-          "series-6",
-          "special"
-        ]
-      },
-      "relatedRankingKeys": [
-        "local-tax-ratio-pref-finance",
-        "local-allocation-tax-ratio-pref-finance",
-        "national-treasury-disbursement-ratio-pref-finance"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "歳入構造",
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "theme-lf-per-capita-expense-trend",
-      "componentType": "line-chart",
-      "title": "1人当たり歳出決算総額の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "per-capita-total-expenditure-pref-municipal"
-          }
-        ],
-        "labels": [
-          "1人当たり歳出"
-        ],
-        "seriesColors": [
-          "population"
-        ]
-      },
-      "relatedRankingKeys": [
-        "per-capita-total-expenditure-pref-municipal"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "歳出構造",
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "theme-lf-taxpayer-ratio-trend",
-      "componentType": "line-chart",
-      "title": "納税義務者割合の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "taxpayer-ratio-per-pref-resident"
-          }
-        ],
-        "labels": [
-          "納税義務者割合"
-        ],
-        "seriesColors": [
-          "improve"
-        ]
-      },
-      "relatedRankingKeys": [
-        "taxpayer-ratio-per-pref-resident"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "税収・所得",
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "theme-lf-expense-nature-trend",
-      "componentType": "line-chart",
-      "title": "性質別歳出割合の推移（人件費・扶助費・投資的経費）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "personnel-expenditure-ratio-pref-finance",
-            "label": "人件費割合",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "assistance-expenditure-ratio-pref-finance",
-            "label": "扶助費割合",
-            "colorRole": "danger"
-          },
-          {
-            "metricKey": "investment-expenditure-ratio-pref-finance",
-            "label": "投資的経費割合",
-            "colorRole": "improve"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "personnel-expenditure-ratio-pref-finance",
-        "assistance-expenditure-ratio-pref-finance",
-        "investment-expenditure-ratio-pref-finance"
-      ],
-      "sourceName": "総務省「地方財政状況調査」",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 30
     }
   ],
   "evidenceTopics": [
@@ -542,8 +252,7 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
         "local-allocation-tax-ratio-pref-finance"
       ],
       "relatedChartKeys": [
-        "theme-lf-fiscal-ratios-trend",
-        "theme-lf-revenue-composition"
+        "theme-lf-fiscal-ratios-trend"
       ],
       "relatedThemeKeys": [
         "local-economy"
@@ -562,9 +271,7 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
         "real-public-debt-service-ratio",
         "future-burden-ratio"
       ],
-      "relatedChartKeys": [
-        "theme-lf-debt-trend"
-      ],
+      "relatedChartKeys": [],
       "relatedThemeKeys": [
         "local-economy"
       ]

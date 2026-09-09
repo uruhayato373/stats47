@@ -7,6 +7,7 @@
  */
 import type { ThemeCatalog } from "./types";
 import { AGING_SOCIETY_CATALOG } from "./aging-society";
+import { CLIMATE_CATALOG } from "./climate";
 import { CONSUMER_PRICES_CATALOG } from "./consumer-prices";
 import { EDUCATION_CULTURE_CATALOG } from "./education-culture";
 import { FISHERY_MARINE_CATALOG } from "./fishery-marine";
@@ -39,6 +40,7 @@ export * from "./theme-metric-content";
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */
 export const THEME_CATALOGS: Record<string, ThemeCatalog> = {
   "aging-society": AGING_SOCIETY_CATALOG,
+  "climate": CLIMATE_CATALOG,
   "consumer-prices": CONSUMER_PRICES_CATALOG,
   "education-culture": EDUCATION_CULTURE_CATALOG,
   "fishery-marine": FISHERY_MARINE_CATALOG,

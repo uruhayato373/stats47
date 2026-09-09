@@ -1,6 +1,31 @@
 import type { ThemeCatalog } from "./types";
 
 export const SAFETY_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "犯罪・交通・火災の発生と対応を比較。",
+    "headlineRankingKeys": [
+      "penal-code-offenses-recognized-per-1000",
+      "traffic-accident-deaths-per-100k",
+      "building-fire-count-per-100-thousand-people",
+      "criminal-arrest-rate"
+    ],
+    "comparisonRankingKeys": [
+      "penal-code-offenses-recognized-per-1000",
+      "traffic-accident-deaths-per-100k",
+      "building-fire-count-per-100-thousand-people",
+      "criminal-arrest-rate",
+      "traffic-accident-injuries-per-100k",
+      "annual-emergency-dispatches-per-1000"
+    ],
+    "mapNotes": {
+      "penal-code-offenses-recognized-per-1000": "人口千人当たりの刑法犯認知件数。警察が把握していない事件は含みません。",
+      "traffic-accident-deaths-per-100k": "人口10万人当たりの交通事故死者。警察統計の24時間死者が対象。",
+      "building-fire-count-per-100-thousand-people": "人口10万人当たりの全出火件数。建物火災だけの件数ではありません。",
+      "criminal-arrest-rate": "認知件数に対する検挙件数。検挙人数の割合ではありません。",
+      "traffic-accident-injuries-per-100k": "人口10万人当たりの負傷者。事故件数とは単位が異なります。",
+      "annual-emergency-dispatches-per-1000": "人口千人当たりの救急出動。急病や転院搬送なども含みます。"
+    }
+  },
   "key": "safety",
   "title": "安全",
   "description": "都道府県別の犯罪率・検挙率・交通事故・火災件数・自殺率をランキングとチャートで比較。治安・交通・火災・災害・事故の25指標を47都道府県で確認できます。",
@@ -9,13 +34,19 @@ export const SAFETY_CATALOG: ThemeCatalog = {
   "metrics": [
     {
       "rankingKey": "penal-code-offenses-recognized-per-1000",
-      "shortLabel": "犯罪率",
-      "role": "primary"
+      "shortLabel": "刑法犯認知（千人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "警察庁 犯罪統計",
+        "sourceUrl": "https://www.npa.go.jp/publications/statistics/sousa/statistics.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "認知された犯罪の地域差を人口規模で標準化する。短い見出しも「刑法犯認知」とし犯罪全体の発生確率とはしない。"
+      }
     },
     {
       "rankingKey": "serious-crime-per-100k",
       "shortLabel": "凶悪犯",
-      "role": "primary"
+      "role": "context"
     },
     {
       "rankingKey": "criminal-recognition-count",
@@ -29,8 +60,14 @@ export const SAFETY_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "criminal-arrest-rate",
-      "shortLabel": "検挙率",
-      "role": "secondary"
+      "shortLabel": "刑法犯検挙率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "警察庁 犯罪統計",
+        "sourceUrl": "https://www.npa.go.jp/publications/statistics/sousa/statistics.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "認知状況と対応状況を区別するための主要指標。犯罪率の裏返しとして扱わない。"
+      }
     },
     {
       "rankingKey": "intellectual-crime-per-100k",
@@ -59,13 +96,19 @@ export const SAFETY_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "traffic-accident-deaths-per-100k",
-      "shortLabel": "交通死者",
-      "role": "primary"
+      "shortLabel": "交通事故死者（10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "警察庁 交通事故発生状況・交通安全白書",
+        "sourceUrl": "https://www.npa.go.jp/publications/statistics/koutsuu/index_jiko.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "件数だけでは伝わらない人的被害の大きさを主要カードと地図で示す。"
+      }
     },
     {
       "rankingKey": "traffic-accident-count-per-population",
       "shortLabel": "交通事故率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "traffic-accident-count",
@@ -79,8 +122,14 @@ export const SAFETY_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "traffic-accident-injuries-per-100k",
-      "shortLabel": "負傷者率",
-      "role": "context"
+      "shortLabel": "交通事故負傷者（10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "警察庁 交通事故発生状況",
+        "sourceUrl": "https://www.npa.go.jp/publications/statistics/koutsuu/index_jiko.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "死者と負傷者を区別して人的被害を比較表で補う。"
+      }
     },
     {
       "rankingKey": "traffic-accident-casualties-elderly-65plus",
@@ -89,8 +138,14 @@ export const SAFETY_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "building-fire-count-per-100-thousand-people",
-      "shortLabel": "火災",
-      "role": "secondary"
+      "shortLabel": "出火件数（10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和7年版消防白書・社会人口統計体系",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/",
+        "surveyedAt": "2026-09-09",
+        "rationale": "犯罪・交通に加える身近な災害の主指標。既存キー名はbuildingだがSSDS定義は全出火なので表示は火災出火件数とする。"
+      }
     },
     {
       "rankingKey": "fire-deaths-per-100k",
@@ -104,8 +159,14 @@ export const SAFETY_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "annual-emergency-dispatches-per-1000",
-      "shortLabel": "救急出動",
-      "role": "context"
+      "shortLabel": "救急出動（千人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版消防白書",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/",
+        "surveyedAt": "2026-09-09",
+        "rationale": "火災の発生と消防・救急の活動量を分けて表で比較する。"
+      }
     },
     {
       "rankingKey": "disaster-damage-amount-per-person",
@@ -115,7 +176,7 @@ export const SAFETY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "suicide-rate-per-100k",
       "shortLabel": "自殺率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "suicides-per-100k",
@@ -125,7 +186,7 @@ export const SAFETY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "accidental-deaths-per-100k",
       "shortLabel": "事故死",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "police-officer-count-per-population",
@@ -136,22 +197,24 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "rankingKey": "traffic-accident-injuries",
       "shortLabel": "交通事故負傷者数",
       "role": "context"
-    },
+    }
   ],
   "charts": [
     {
       "componentKey": "crime-count-arrest-rate-trend",
       "componentType": "mixed-chart",
-      "title": "刑法犯認知件数と検挙率の推移",
+      "title": "刑法犯認知と検挙率",
       "componentProps": {
         "columnSeriesRefs": [
           {
-            "metricKey": "penal-code-offenses-recognized-per-1000"
+            "metricKey": "penal-code-offenses-recognized-per-1000",
+            "label": "刑法犯認知（千人当たり）"
           }
         ],
         "lineSeriesRefs": [
           {
-            "metricKey": "criminal-arrest-rate"
+            "metricKey": "criminal-arrest-rate",
+            "label": "刑法犯検挙率"
           }
         ],
         "columnLabels": [
@@ -180,12 +243,13 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "治安",
-      "sortOrder": 0
+      "sortOrder": 0,
+      "annotation": "認知件数は人口千人当たり、検挙率は％。分母の異なる指標を別軸で表示します。"
     },
     {
       "componentKey": "traffic-accident-deaths-trend",
       "componentType": "line-chart",
-      "title": "交通事故 発生件数と負傷者数の推移",
+      "title": "交通事故件数と負傷者数",
       "componentProps": {
         "seriesRefs": [
           {
@@ -215,187 +279,45 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "交通",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "fire-emergency-trend",
-      "componentType": "line-chart",
-      "title": "火災出火件数と救急出動件数の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "building-fire-count-per-100-thousand-people"
-          },
-          {
-            "metricKey": "annual-emergency-dispatches-per-1000"
-          }
-        ],
-        "labels": [
-          "出火件数(10万人当たり)",
-          "救急出動(千人当たり)"
-        ],
-        "seriesColors": [
-          "count",
-          "improve"
-        ]
-      },
-      "relatedRankingKeys": [
-        "building-fire-count-per-100-thousand-people",
-        "annual-emergency-dispatches-per-1000"
-      ],
-      "sourceName": "消防統計",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "火災・救急",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "suicide-accident-death-trend",
-      "componentType": "line-chart",
-      "title": "自殺率と不慮の事故死亡率の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "suicides-per-100k"
-          },
-          {
-            "metricKey": "accidental-deaths-per-100k"
-          }
-        ],
-        "labels": [
-          "自殺率",
-          "不慮の事故死亡率"
-        ],
-        "seriesColors": [
-          "special",
-          "neutral"
-        ]
-      },
-      "relatedRankingKeys": [
-        "suicides-per-100k",
-        "accidental-deaths-per-100k"
-      ],
-      "sourceName": "人口動態統計",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "自殺・事故",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart",
-      "title": "罪種別 刑法犯認知件数の内訳（2023年）",
-      "componentProps": {
-        "topN": 5,
-        "seriesRefs": [
-          {
-            "metricKey": "theft-offenses-recognized",
-            "label": "窃盗犯",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "violent-crime-per-100k",
-            "label": "粗暴犯",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "intellectual-crime-per-100k",
-            "label": "知能犯",
-            "colorRole": "special"
-          },
-          {
-            "metricKey": "theme-prostitution-crime-recognition-count",
-            "label": "風俗犯",
-            "colorRole": "series-6"
-          },
-          {
-            "metricKey": "serious-crime-per-100k",
-            "label": "凶悪犯",
-            "colorRole": "danger"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "criminal-recognition-count"
-      ],
-      "sourceName": "総務省統計局 社会・人口統計体系（警察庁 犯罪統計）",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "safety-fire-casualties-donut",
-      "componentType": "donut-chart",
-      "title": "火災による死傷者の内訳（2023年）",
-      "componentProps": {
-        "topN": 2,
-        "seriesRefs": [
-          {
-            "metricKey": "theme-fire-injured-count",
-            "label": "火災負傷者",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "fire-deaths-per-100k",
-            "label": "火災死亡者",
-            "colorRole": "danger"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "fire-deaths-per-100k"
-      ],
-      "sourceName": "総務省統計局 社会・人口統計体系（消防庁 火災年報）",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 20
+      "sortOrder": 10,
+      "annotation": "人身事故が対象。件数と人数は別軸で表示し、合計しません。"
     }
   ],
   evidenceTopics: [
     {
-      key: "recognized-crime-and-clearance",
-      lensKey: "outcomes",
-      title: "犯罪の認知状況と検挙状況",
-      question:
-        "刑法犯の認知件数と検挙率には、地域ごとにどのような差があるか",
-      summary:
-        "認知件数は警察が犯罪の発生を認知した事件数で、未認知の事件は含みません。検挙率は検挙した事件件数を認知件数で割った割合であり、検挙人員の割合ではありません。",
-      sourceKeys: ["npa-crime-statistics"],
-      relatedRankingKeys: [
-        "penal-code-offenses-recognized-per-1000",
-        "criminal-arrest-rate",
+      "key": "recognized-crime-and-clearance",
+      "lensKey": "outcomes",
+      "title": "犯罪の認知状況と検挙状況",
+      "question": "刑法犯の認知件数と検挙率には、地域ごとにどのような差があるか",
+      "summary": "認知件数は警察が犯罪の発生を認知した事件数で、未認知の事件は含みません。検挙率は検挙した事件件数を認知件数で割った割合であり、検挙人員の割合ではありません。",
+      "sourceKeys": [
+        "npa-crime-statistics"
       ],
-      relatedChartKeys: ["crime-count-arrest-rate-trend"],
+      "relatedRankingKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "criminal-arrest-rate"
+      ],
+      "relatedChartKeys": [
+        "crime-count-arrest-rate-trend"
+      ]
     },
     {
-      key: "traffic-accidents-and-injuries",
-      lensKey: "outcomes",
-      title: "交通事故の発生と人的被害",
-      question:
-        "交通事故の発生件数と負傷者数には、地域ごとにどのような差があるか",
-      summary:
-        "現在の交通事故統計は、人の死亡または負傷を伴う事故を対象とし、物損事故は含みません。発生件数は事故の数、負傷者数は重傷者と軽傷者の人数なので、同じ単位として足し合わせません。",
-      sourceKeys: ["npa-traffic-accident-statistics"],
-      relatedRankingKeys: [
-        "traffic-accident-count",
-        "traffic-accident-injuries",
+      "key": "traffic-accidents-and-injuries",
+      "lensKey": "outcomes",
+      "title": "交通事故の発生と人的被害",
+      "question": "交通事故の発生件数と負傷者数には、地域ごとにどのような差があるか",
+      "summary": "現在の交通事故統計は、人の死亡または負傷を伴う事故を対象とし、物損事故は含みません。発生件数は事故の数、負傷者数は重傷者と軽傷者の人数なので、同じ単位として足し合わせません。",
+      "sourceKeys": [
+        "npa-traffic-accident-statistics"
       ],
-      relatedChartKeys: ["traffic-accident-deaths-trend"],
-    },
+      "relatedRankingKeys": [
+        "traffic-accident-count",
+        "traffic-accident-injuries"
+      ],
+      "relatedChartKeys": [
+        "traffic-accident-deaths-trend"
+      ]
+    }
   ],
   "keywords": [
     "犯罪",

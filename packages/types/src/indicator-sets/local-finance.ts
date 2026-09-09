@@ -18,17 +18,17 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
     {
       "rankingKey": "current-balance-ratio",
       "shortLabel": "経常収支比率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "real-public-debt-service-ratio",
       "shortLabel": "実質公債費比率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "future-burden-ratio",
       "shortLabel": "将来負担比率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "real-balance-ratio",
@@ -53,17 +53,17 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
     {
       "rankingKey": "self-financing-ratio",
       "shortLabel": "自主財源割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-capita-total-expenditure-pref-municipal",
       "shortLabel": "1人当たり歳出",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "personnel-expenditure-ratio-pref-finance",
       "shortLabel": "人件費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "assistance-expenditure-ratio-pref-finance",
@@ -78,37 +78,37 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
     {
       "rankingKey": "welfare-expenditure-ratio-pref-finance",
       "shortLabel": "民生費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "education-expenditure-ratio-pref-finance",
       "shortLabel": "教育費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "public-works-expenditure-ratio-pref-finance",
       "shortLabel": "土木費割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-capita-inhabitant-tax-pref-municipal",
       "shortLabel": "住民税",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "per-taxpayer-taxable-income",
       "shortLabel": "課税所得",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "taxpayer-ratio-per-pref-resident",
       "shortLabel": "納税義務者割合",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "laspeyres-index-prefecture",
       "shortLabel": "ラスパイレス指数",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "keywords": [

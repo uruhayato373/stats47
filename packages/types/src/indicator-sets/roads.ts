@@ -12,7 +12,7 @@ export const ROADS_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "road-total-length-with-expressway",
-      "shortLabel": "道路実延長(高速含む)",
+      "shortLabel": "道路実延長（高速含む）",
       "role": "primary"
     },
     {
@@ -28,7 +28,7 @@ export const ROADS_SET: IndicatorSet = {
     {
       "rankingKey": "road-national-route-length",
       "shortLabel": "一般国道延長",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "road-prefectural-route-length",
@@ -38,12 +38,12 @@ export const ROADS_SET: IndicatorSet = {
     {
       "rankingKey": "road-municipal-length",
       "shortLabel": "市町村道延長",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "road-length-per-km2",
       "shortLabel": "道路密度",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "main-road-paving-rate",
@@ -52,8 +52,8 @@ export const ROADS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "average-road-traffic-volume",
-      "shortLabel": "道路平均交通量",
-      "role": "secondary"
+      "shortLabel": "昼間12時間の交通量",
+      "role": "primary"
     },
     {
       "rankingKey": "roadside-station-count",

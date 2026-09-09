@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import Link from 'next/link';
 
 import {
@@ -30,6 +32,7 @@ export interface ChartFooterLink {
 }
 
 export interface ChartFooterProps {
+  id?: string;
   source?: string;
   sourceLink?: string | null;
   /** taxonomy が解決した調査ハブ。手書きせず既存 lineage から渡す。 */
@@ -117,19 +120,29 @@ function FooterActionLink({
 }
 
 function FooterActionMenu({
+  id,
   kind,
   links,
   tooltip,
 }: {
+  id?: string;
   kind: FooterActionKind;
   links: ChartFooterLink[];
   tooltip: string;
 }) {
   const visibleLabel = kind === 'source' ? '出典' : 'ランキング';
+  const [open, setOpen] = useState(false);
+  const triggerId = id ? `${id}-trigger` : undefined;
+  const contentId = id ? `${id}-content` : undefined;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger
+        asChild
+        {...(id
+          ? { id: triggerId, 'aria-controls': open ? contentId : undefined }
+          : {})}
+      >
         <Button
           type="button"
           variant="ghost"
@@ -145,7 +158,11 @@ function FooterActionMenu({
           <ChevronDown className="size-3" aria-hidden />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="max-w-80">
+      <DropdownMenuContent
+        align="end"
+        className="max-w-80"
+        {...(id ? { id: contentId, 'aria-labelledby': triggerId } : {})}
+      >
         {links.map((link) => {
           const content = (
             <>
@@ -193,6 +210,7 @@ function FooterActionMenu({
  * tooltip は完全名称の補助であり、主要操作を hover のみに依存させない。
  */
 export function ChartFooter({
+  id,
   source,
   sourceLink,
   sourceLinks,
@@ -262,6 +280,7 @@ export function ChartFooter({
               />
             ) : sourceTargets.length > 1 ? (
               <FooterActionMenu
+                id={id ? `${id}-source` : undefined}
                 kind="source"
                 links={sourceTargets}
                 tooltip={`出典: ${sourceLabel ?? sourceTargets.map((link) => link.label).join('・')}`}
@@ -285,6 +304,7 @@ export function ChartFooter({
               />
             ) : indicatorTargets.length > 1 ? (
               <FooterActionMenu
+                id={id ? `${id}-ranking` : undefined}
                 kind="ranking"
                 links={indicatorTargets}
                 tooltip={`${indicatorTargets.length}件の指標・ランキング`}

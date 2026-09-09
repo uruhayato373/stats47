@@ -2,8 +2,9 @@
 
 import "leaflet/dist/leaflet.css";
 
-import { useCallback, useMemo } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { useCallback, useEffect, useMemo } from "react";
+import { geoJSON } from "leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 import type { TopoJSONTopology } from "@stats47/types";
 
@@ -62,6 +63,21 @@ export interface LeafletChoroplethMapProps {
   };
   /** データなし（非公表）の凡例エントリを表示するか */
   showNoDataLabel?: boolean;
+  /** 初期表示とリサイズ時に全都道府県を収める。選択県だけにズームしない。 */
+  fitToPrefectures?: boolean;
+}
+
+function FitPrefectureBounds({ geojson }: { geojson: FeatureCollection<Geometry> }) {
+  const map = useMap();
+  useEffect(() => {
+    const bounds = geoJSON(geojson).getBounds();
+    if (!bounds.isValid()) return;
+    const fit = () => map.fitBounds(bounds, { padding: [16, 24], animate: false });
+    fit();
+    map.on('resize', fit);
+    return () => { map.off('resize', fit); };
+  }, [map, geojson]);
+  return null;
 }
 
 /** Feature から都道府県コード（XX000 形式）を抽出 */
@@ -113,6 +129,7 @@ export function LeafletChoroplethMap({
   className,
   valueDisplay,
   showNoDataLabel = false,
+  fitToPrefectures = false,
 }: LeafletChoroplethMapProps) {
   const prefGeojson = useTopoJsonToGeoJson(topology);
 
@@ -166,12 +183,13 @@ export function LeafletChoroplethMap({
       <MapContainer
         center={JAPAN_CENTER}
         zoom={JAPAN_ZOOM}
-        minZoom={JAPAN_MIN_ZOOM}
+        minZoom={fitToPrefectures ? JAPAN_MIN_ZOOM - 1 : JAPAN_MIN_ZOOM}
         maxZoom={JAPAN_MAX_ZOOM}
         scrollWheelZoom
         style={{ height: "100%", width: "100%", minHeight: 400, borderRadius: "0.375rem" }}
       >
         <TileLayer url={tileUrl} attribution={attribution} />
+        {fitToPrefectures && prefGeojson && <FitPrefectureBounds geojson={prefGeojson} />}
 
         {/* 都道府県レイヤー（topology 到着後に重ねる） */}
         {prefGeojson && prefStyle && (

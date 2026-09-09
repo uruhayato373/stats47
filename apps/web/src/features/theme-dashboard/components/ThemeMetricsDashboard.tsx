@@ -44,6 +44,8 @@ interface Props {
    * (markdown-section) を出さない。hideMap のカードのみビュー用。
    */
   cardsOnly?: boolean;
+  /** 概況を別セクションに表示するテーマでは、旧カードと選択グラフを重複させない。 */
+  chartsOnly?: boolean;
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -102,6 +104,7 @@ export function ThemeMetricsDashboard({
   chartSourceLinks,
   selectedPrefectureCode,
   cardsOnly,
+  chartsOnly,
 }: Props) {
   const areaName = selectedPrefectureCode
     ? (lookupArea(selectedPrefectureCode)?.areaName ?? '選択地域')
@@ -261,11 +264,11 @@ export function ThemeMetricsDashboard({
 
   return (
     <section
-      id="theme-indicators"
+      id={chartsOnly ? undefined : 'theme-indicators'}
       className="@container space-y-4 scroll-mt-24"
     >
       {/* KPI カード（areas スタイル） */}
-      {kpis.length > 0 && (
+      {!chartsOnly && kpis.length > 0 && (
         <div>
           <h2 className="sr-only">{areaName}の主要指標</h2>
           {selectedPrefectureCode && (
@@ -302,14 +305,25 @@ export function ThemeMetricsDashboard({
       {chartComponents.length > 0 && (
         <div
           id="theme-charts"
-          className="grid scroll-mt-24 grid-cols-1 gap-4 @md:grid-cols-2"
+          className={`grid scroll-mt-24 grid-cols-1 @md:grid-cols-2 ${chartsOnly ? 'gap-3' : 'gap-4'}`}
         >
           {chartComponents.map((chart) => (
             <ChartPanel
               key={chart.componentKey}
+              id={`theme-${themeConfig.themeKey}-${chart.componentKey}`}
+              className={
+                chartComponents.length === 1 ||
+                chart.componentType === 'pyramid-chart'
+                  ? '@md:col-span-2'
+                  : undefined
+              }
               title={chart.title}
+              headerClassName={chartsOnly ? 'px-3 py-2' : undefined}
+              contentClassName={chartsOnly ? 'p-3' : undefined}
+              footerClassName={chartsOnly ? 'px-3 py-2' : undefined}
               footer={
                 <ChartFooter
+                  id={`theme-${themeConfig.themeKey}-${chart.componentKey}-footer`}
                   source={chart.sourceName ?? undefined}
                   sourceLink={chart.sourceLink}
                   sourceLinks={chartSourceLinks?.[chart.componentKey]}
@@ -337,6 +351,7 @@ export function ThemeMetricsDashboard({
           chart={chart}
           prefCode={pageComponentsAreaCode}
           prefName={areaName}
+          collapseText={chartsOnly}
         />
       ))}
     </section>

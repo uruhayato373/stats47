@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { findGeoSourcePage } from '@stats47/data-configs/business-plan';
 import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 
+import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 
@@ -43,11 +44,13 @@ export default async function GeoDatasetPage({ params }: Props) {
   const content = findGeoSourcePage(dataId, meta.latestVersion);
   return (
     <PageShell
+      className="py-4 sm:py-5"
       rightRail={
         <GeoSourceNavigation catalog={catalog} currentDataId={dataId} />
       }
     >
       <Breadcrumbs
+        className="mb-2"
         items={[
           { label: 'ホーム', href: '/' },
           { label: '地域分析', href: '/geo' },
@@ -56,6 +59,7 @@ export default async function GeoDatasetPage({ params }: Props) {
         ]}
       />
       <PageHeader
+        className="mb-3"
         title={meta.name}
         description={
           content?.summary ??
@@ -64,24 +68,12 @@ export default async function GeoDatasetPage({ params }: Props) {
         meta={`${dataId}・原典版 ${meta.latestVersion}${item ? `・${item.assets.length}配布ファイル` : ''}`}
       />
       <GeoSourceNavigation catalog={catalog} currentDataId={dataId} mobile />
-      {content && (
-        <dl className="mb-6 space-y-3 text-sm">
-          <div>
-            <dt className="font-semibold">データの時点</dt>
-            <dd className="mt-1 leading-relaxed text-muted-foreground">
-              {content.period}
-            </dd>
-          </div>
-          <div>
-            <dt className="font-semibold">対象範囲</dt>
-            <dd className="mt-1 leading-relaxed text-muted-foreground">
-              {content.coverage}
-            </dd>
-          </div>
-        </dl>
-      )}
       {item ? (
-        <GeoSourceExplorer item={item} fields={content?.fields} />
+        <GeoSourceExplorer
+          key={`${item.dataId}/${item.version}`}
+          item={item}
+          fields={content?.fields}
+        />
       ) : catalog &&
         !catalog.items.some((source) => source.dataId === dataId) ? (
         <SurfaceCard className="space-y-3">
@@ -105,8 +97,12 @@ export default async function GeoDatasetPage({ params }: Props) {
         </SurfaceCard>
       )}
       {content && <GeoSourceReading content={content} />}
-      <SurfaceCard className="mt-6 space-y-3">
-        <h2 className="font-semibold">出典と表示範囲</h2>
+      <ContentDisclosure
+        title="出典・利用条件"
+        description={`国土交通省「国土数値情報」・${meta.license === 'cc-by-4.0' ? 'CC BY 4.0' : '商用利用可能（個別条件あり）'}`}
+        className="mt-3"
+        contentClassName="space-y-2"
+      >
         <p className="text-sm">
           国土交通省「国土数値情報」{meta.name}
           。stats47が表示用に座標・形状・属性を変換しています。変換・簡略化後の地物を表示し、原典の全精度を保証するものではありません。
@@ -143,7 +139,7 @@ export default async function GeoDatasetPage({ params }: Props) {
         >
           ほかのGISを探す
         </Link>
-      </SurfaceCard>
+      </ContentDisclosure>
     </PageShell>
   );
 }

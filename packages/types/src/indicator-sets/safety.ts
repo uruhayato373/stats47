@@ -12,13 +12,13 @@ export const SAFETY_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "penal-code-offenses-recognized-per-1000",
-      "shortLabel": "犯罪率",
+      "shortLabel": "刑法犯認知（千人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "serious-crime-per-100k",
       "shortLabel": "凶悪犯",
-      "role": "primary"
+      "role": "context"
     },
     {
       "rankingKey": "criminal-recognition-count",
@@ -32,8 +32,8 @@ export const SAFETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "criminal-arrest-rate",
-      "shortLabel": "検挙率",
-      "role": "secondary"
+      "shortLabel": "刑法犯検挙率",
+      "role": "primary"
     },
     {
       "rankingKey": "intellectual-crime-per-100k",
@@ -62,13 +62,13 @@ export const SAFETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "traffic-accident-deaths-per-100k",
-      "shortLabel": "交通死者",
+      "shortLabel": "交通事故死者（10万人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "traffic-accident-count-per-population",
       "shortLabel": "交通事故率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "traffic-accident-count",
@@ -82,8 +82,8 @@ export const SAFETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "traffic-accident-injuries-per-100k",
-      "shortLabel": "負傷者率",
-      "role": "context"
+      "shortLabel": "交通事故負傷者（10万人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "traffic-accident-casualties-elderly-65plus",
@@ -92,8 +92,8 @@ export const SAFETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "building-fire-count-per-100-thousand-people",
-      "shortLabel": "火災",
-      "role": "secondary"
+      "shortLabel": "出火件数（10万人当たり）",
+      "role": "primary"
     },
     {
       "rankingKey": "fire-deaths-per-100k",
@@ -107,8 +107,8 @@ export const SAFETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "annual-emergency-dispatches-per-1000",
-      "shortLabel": "救急出動",
-      "role": "context"
+      "shortLabel": "救急出動（千人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "disaster-damage-amount-per-person",
@@ -118,7 +118,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "suicide-rate-per-100k",
       "shortLabel": "自殺率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "suicides-per-100k",
@@ -128,7 +128,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "accidental-deaths-per-100k",
       "shortLabel": "事故死",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "police-officer-count-per-population",

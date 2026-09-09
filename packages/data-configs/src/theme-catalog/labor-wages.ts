@@ -1,6 +1,33 @@
 import type { ThemeCatalog } from "./types";
 
 export const LABOR_WAGES_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "賃金水準・求人・失業・男女差を比較。指標ごとの調査年を確認。",
+    "headlineRankingKeys": [
+      "minimum-wage-by-region",
+      "active-job-opening-ratio",
+      "unemployment-rate",
+      "gender-wage-gap"
+    ],
+    "comparisonRankingKeys": [
+      "minimum-wage-by-region",
+      "starting-salary-university",
+      "active-job-opening-ratio",
+      "unemployment-rate",
+      "gender-wage-gap",
+      "employment-rate",
+      "telework-rate"
+    ],
+    "mapNotes": {
+      "minimum-wage-by-region": "地域別の時間額。表示年の改定額で、現在の適用額とは限りません。",
+      "starting-salary-university": "大学新卒者の給与。平均賃金や手取り額ではありません。",
+      "active-job-opening-ratio": "年度の延べ求人÷延べ求職者。新卒・パートを除きます。",
+      "unemployment-rate": "国勢調査の調査週間の値。月次の労働力調査とは異なります。",
+      "gender-wage-gap": "男性の所定内給与=100。100に近いほど男女差が小さくなります。",
+      "employment-rate": "職安の就職件数÷延べ有効求職者。人口に対する就業率ではありません。",
+      "telework-rate": "就業構造基本調査の対象・期間による実施割合。企業の導入率ではありません。"
+    }
+  },
   "key": "labor-wages",
   "title": "労働・賃金",
   "description": "都道府県別の最低賃金・初任給・有効求人倍率・失業率・男女賃金格差をランキングとチャートで比較。労働市場の地域差を47都道府県のデータで確認できます。",
@@ -10,12 +37,24 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "minimum-wage-by-region",
       "shortLabel": "最低賃金",
-      "role": "primary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「地域別最低賃金の全国一覧」",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/minimumichiran/index.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "労働者に適用される時給の下限を上部に置き、職種別年収と区別する。"
+      }
     },
     {
       "rankingKey": "starting-salary-university",
       "shortLabel": "大卒初任給",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "入口の賃金条件を比較表で補い、初任給と在職者全体の平均を混同しない。"
+      }
     },
     {
       "rankingKey": "starting-salary-highschool",
@@ -30,12 +69,18 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "nurse-salary",
       "shortLabel": "看護師年収",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "gender-wage-gap",
-      "shortLabel": "男女賃金格差",
-      "role": "secondary"
+      "shortLabel": "女性賃金(男性=100)",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "賃金水準だけで見えない男女間の所定内給与比を上部で可視化する。年齢・職種構成調整済みの差とは表現しない。"
+      }
     },
     {
       "rankingKey": "male-part-time-hourly-wage",
@@ -50,17 +95,35 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「令和7年版 労働経済の分析」",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/wp/hakusyo/roudou/25/index.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "白書の雇用情勢の構成に合わせ求人側の需給を示す。登録指標は新卒・パート除外の年度値である。"
+      }
     },
     {
       "rankingKey": "unemployment-rate",
       "shortLabel": "失業率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省「令和2年国勢調査」",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "求人倍率の求人側に対し、国勢調査の労働力人口に占める完全失業者割合を補完する。月次推計とは別定義として扱う。"
+      }
     },
     {
       "rankingKey": "employment-rate",
-      "shortLabel": "就業率",
-      "role": "context"
+      "shortLabel": "職安就職率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「社会・人口統計体系」",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "就職件数と求職者の関係を補足する。登録定義は職安の延べ求職者を分母とするため『就業率』表示を是正する。"
+      }
     },
     {
       "rankingKey": "employed-people-ratio",
@@ -70,7 +133,13 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "telework-rate",
       "shortLabel": "テレワーク率",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「社会・人口統計体系」",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "賃金・需給以外の働き方の選択肢を比較表で補完する。"
+      }
     },
     {
       "rankingKey": "side-job-rate",
@@ -89,66 +158,6 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
     }
   ],
   "charts": [
-    {
-      "componentKey": "labor-wages-gender-gap",
-      "componentType": "line-chart",
-      "title": "男女賃金格差の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "gender-wage-gap",
-            "label": "男女賃金格差",
-            "colorRole": "female"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "gender-wage-gap"
-      ],
-      "sourceName": "賃金構造基本統計調査",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "男女格差",
-      "sortOrder": 0
-    },
-{
-      "componentKey": "labor-wages-job-ratio-vs-unemployment",
-      "componentType": "line-chart",
-      "title": "有効求人倍率と完全失業率の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "active-job-opening-ratio"
-          },
-          {
-            "metricKey": "unemployment-rate"
-          }
-        ],
-        "labels": [
-          "有効求人倍率",
-          "完全失業率"
-        ],
-        "seriesColors": [
-          "population",
-          "danger"
-        ]
-      },
-      "relatedRankingKeys": [
-        "active-job-opening-ratio",
-        "unemployment-rate"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "雇用",
-      "sortOrder": 0
-    },
     {
       "componentKey": "md-labor-wages-discussion",
       "componentType": "markdown-section",
@@ -266,11 +275,12 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-lw-employment-rate-trend",
       "componentType": "line-chart",
-      "title": "就業率の推移",
+      "title": "職安の就職率の推移",
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "employment-rate"
+            "metricKey": "employment-rate",
+            "label": "職安就職率"
           }
         ],
         "labels": [
@@ -290,7 +300,8 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": null,
-      "sortOrder": 40
+      "sortOrder": 40,
+      "annotation": "就職件数÷延べ有効求職者数。新卒・パートを除き、人口に対する就業率とは異なります。"
     }
   ],
   // 指標カードの編成 (1 カード = 1 つの問い)。単位が 2 種のカードは左右 Y 軸に分かれる
@@ -322,31 +333,40 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
   ],
   evidenceTopics: [
     {
-      key: "labor-market-tightness",
-      lensKey: "service-capacity",
-      title: "求人と失業から見る労働需給",
-      question:
-        "有効求人倍率と完全失業率は、地域の仕事の需給をそれぞれどう映しているか。",
-      summary:
-        "有効求人倍率は公共職業安定所の求人・求職、完全失業率は国勢調査の労働力人口を基礎にします。調査対象と時点が異なるため、数値を直接差し引いて比較はできません。",
-      sourceKeys: ["mhlw-labor-economy-whitepaper-2025"],
-      relatedRankingKeys: ["active-job-opening-ratio", "unemployment-rate"],
-      relatedChartKeys: ["labor-wages-job-ratio-vs-unemployment"],
-      relatedThemeKeys: ["labor-mobility"],
+      "key": "labor-market-tightness",
+      "lensKey": "service-capacity",
+      "title": "求人と失業から見る労働需給",
+      "question": "有効求人倍率と完全失業率は、地域の仕事の需給をそれぞれどう映しているか。",
+      "summary": "有効求人倍率は公共職業安定所の求人・求職、完全失業率は国勢調査の労働力人口を基礎にします。調査対象と時点が異なるため、数値を直接差し引いて比較はできません。",
+      "sourceKeys": [
+        "mhlw-labor-economy-whitepaper-2025"
+      ],
+      "relatedRankingKeys": [
+        "active-job-opening-ratio",
+        "unemployment-rate"
+      ],
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "labor-mobility"
+      ]
     },
     {
-      key: "gender-wage-equity",
-      lensKey: "equity",
-      title: "男女の所定内給与水準",
-      question:
-        "男性を100とした女性の所定内給与水準には、どのような地域差があるか。",
-      summary:
-        "一般労働者の所定内給与額を男女で比べた未調整の比率です。短時間労働者を含まず、年齢、勤続年数、職種などの構成差を調整した格差ではありません。",
-      sourceKeys: ["mhlw-wage-structure-survey"],
-      relatedRankingKeys: ["gender-wage-gap"],
-      relatedChartKeys: ["labor-wages-gender-gap"],
-      relatedThemeKeys: ["occupation-salary"],
-    },
+      "key": "gender-wage-equity",
+      "lensKey": "equity",
+      "title": "男女の所定内給与水準",
+      "question": "男性を100とした女性の所定内給与水準には、どのような地域差があるか。",
+      "summary": "一般労働者の所定内給与額を男女で比べた未調整の比率です。短時間労働者を含まず、年齢、勤続年数、職種などの構成差を調整した格差ではありません。",
+      "sourceKeys": [
+        "mhlw-wage-structure-survey"
+      ],
+      "relatedRankingKeys": [
+        "gender-wage-gap"
+      ],
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "occupation-salary"
+      ]
+    }
   ],
   "keywords": [
     "最低賃金",

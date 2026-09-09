@@ -18,12 +18,12 @@ export const PORTS_SET: IndicatorSet = {
     {
       "rankingKey": "port-cargo-export",
       "shortLabel": "輸出貨物量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "port-cargo-import",
       "shortLabel": "輸入貨物量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "port-container-count",
@@ -38,7 +38,7 @@ export const PORTS_SET: IndicatorSet = {
     {
       "rankingKey": "port-inbound-ships",
       "shortLabel": "入港船舶隻数",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "port-ships-tonnage",
@@ -47,8 +47,8 @@ export const PORTS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "passenger-ship-transport",
-      "shortLabel": "旅客船輸送人員",
-      "role": "context"
+      "shortLabel": "国内旅客船の輸送人員",
+      "role": "primary"
     }
   ],
   "keywords": [

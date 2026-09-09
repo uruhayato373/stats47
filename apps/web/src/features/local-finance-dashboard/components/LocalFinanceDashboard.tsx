@@ -1,64 +1,70 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { PREFECTURE_LIST_2DIGIT as PREFECTURES } from "@stats47/area";
+import { PREFECTURE_LIST_2DIGIT as PREFECTURES } from '@stats47/area';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@stats47/components/atoms/ui/select";
+} from '@stats47/components/atoms/ui/select';
 
-import { ChartCard } from "@/components/charts/ChartCard";
-import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartLegend } from "@/components/charts/ChartLegend";
-import { FINANCE_CHART_COLORS, getChartColors } from "@/components/charts/ChartPalette";
-import { ChartPanel } from "@/components/charts/ChartPanel";
-import { HubSankey } from "@/components/charts/HubSankey";
-import { KeyMetricsTableCard } from "@/components/charts/KeyMetricsTableCard";
+import { ChartCard } from '@/components/charts/ChartCard';
+import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ChartLegend } from '@/components/charts/ChartLegend';
+import {
+  FINANCE_CHART_COLORS,
+  getChartColors,
+} from '@/components/charts/ChartPalette';
+import { ChartPanel } from '@/components/charts/ChartPanel';
+import { HubSankey } from '@/components/charts/HubSankey';
+import { KeyMetricsTableCard } from '@/components/charts/KeyMetricsTableCard';
 import {
   MiniBarChart,
   MiniLineChart,
   MiniStackedBarChart,
   type ChartPoint,
   type StackPoint,
-} from "@/components/charts/MiniCharts";
-import { SankeyFallback } from "@/components/charts/SankeyFallback";
+} from '@/components/charts/MiniCharts';
+import { SankeyFallback } from '@/components/charts/SankeyFallback';
 
 import {
   FinanceSankey,
   LOCAL_FINANCE_SOURCE_LINKS,
   type FinanceFlowData,
-} from "@/features/finance-flow/client";
+} from '@/features/finance-flow/client';
 
 import {
   parseCityFinanceCards,
   type CityData,
   type FinanceCardsData,
   type YearRecord,
-} from "../lib/load-finance-cards";
+} from '../lib/load-finance-cards';
 
 interface Props {
   cards: FinanceCardsData;
   initialFinanceFlow?: FinanceFlowData;
+  embedded?: boolean;
+  selectedPrefectureCode?: string;
+  onPrefectureChange?: (code: string) => void;
 }
 
 const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
 const OKU = 1 / 100000; // 千円 → 億円
 const FUND_COLORS = getChartColors(3);
 const FUND_LEGEND_ITEMS = [
-  { label: "財政調整基金", color: FUND_COLORS[0] },
-  { label: "減債基金", color: FUND_COLORS[1] },
-  { label: "その他特定目的", color: FUND_COLORS[2] },
+  { label: '財政調整基金', color: FUND_COLORS[0] },
+  { label: '減債基金', color: FUND_COLORS[1] },
+  { label: 'その他特定目的', color: FUND_COLORS[2] },
 ];
-const PREF_ALL = "__pref__"; // 「県全体」を表すセンチネル
+const PREF_ALL = '__pref__'; // 「県全体」を表すセンチネル
 
 function oku(thousandYen: number): string {
   const v = thousandYen * OKU;
   if (Math.abs(v) >= 10000) return `${(v / 10000).toFixed(1)} 兆円`;
-  return `${Math.round(v).toLocaleString("ja-JP")} 億円`;
+  return `${Math.round(v).toLocaleString('ja-JP')} 億円`;
 }
 
 interface RatioMeta {
@@ -69,25 +75,59 @@ interface RatioMeta {
   decimals: number;
 }
 const RATIO_METRICS: RatioMeta[] = [
-  { key: "fiscalIndex", componentKey: "kpi-lf-fiscal-strength", label: "財政力指数", unit: "", decimals: 2 },
-  { key: "currentBalanceRatio", componentKey: "kpi-lf-current-balance", label: "経常収支比率", unit: "%", decimals: 1 },
-  { key: "debtServiceRatio", componentKey: "kpi-lf-debt-service", label: "実質公債費比率", unit: "%", decimals: 1 },
-  { key: "futureBurdenRatio", componentKey: "kpi-lf-future-burden", label: "将来負担比率", unit: "%", decimals: 1 },
+  {
+    key: 'fiscalIndex',
+    componentKey: 'kpi-lf-fiscal-strength',
+    label: '財政力指数',
+    unit: '',
+    decimals: 2,
+  },
+  {
+    key: 'currentBalanceRatio',
+    componentKey: 'kpi-lf-current-balance',
+    label: '経常収支比率',
+    unit: '%',
+    decimals: 1,
+  },
+  {
+    key: 'debtServiceRatio',
+    componentKey: 'kpi-lf-debt-service',
+    label: '実質公債費比率',
+    unit: '%',
+    decimals: 1,
+  },
+  {
+    key: 'futureBurdenRatio',
+    componentKey: 'kpi-lf-future-burden',
+    label: '将来負担比率',
+    unit: '%',
+    decimals: 1,
+  },
 ];
 
-
-export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
-  const [prefCode, setPrefCode] = useState(initialFinanceFlow?.focusCode ?? "13");
+export function LocalFinanceDashboard({
+  cards,
+  initialFinanceFlow,
+  embedded,
+  selectedPrefectureCode,
+  onPrefectureChange,
+}: Props) {
+  const [localPrefCode, setPrefCode] = useState(
+    initialFinanceFlow?.focusCode ?? '13'
+  );
+  const prefCode = selectedPrefectureCode ?? localPrefCode;
   const [cityName, setCityName] = useState<string>(PREF_ALL);
   const [cityData, setCityData] = useState<CityData | null>(null);
 
   useEffect(() => {
-    const param = new URLSearchParams(window.location.search).get("pref");
+    if (selectedPrefectureCode !== undefined) return;
+    const value = new URLSearchParams(window.location.search).get('pref');
+    const param = value && /^\d{2}000$/.test(value) ? value.slice(0, 2) : value;
     if (param && VALID_CODES.has(param)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPrefCode(param);
     }
-  }, []);
+  }, [selectedPrefectureCode]);
 
   // 都道府県変更時に市区町村データを取得
   useEffect(() => {
@@ -110,15 +150,20 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
   }, [prefCode]);
 
   const handlePrefChange = (code: string) => {
+    if (onPrefectureChange) {
+      onPrefectureChange(code);
+      return;
+    }
     setPrefCode(code);
     const url = new URL(window.location.href);
-    url.searchParams.set("pref", code);
-    window.history.replaceState(null, "", url);
+    url.searchParams.set('pref', `${code}000`);
+    window.history.replaceState(null, '', url);
   };
 
   const { years, latestYear } = cards;
   const prefCard = cards.cards[prefCode];
-  const prefName = prefCard?.name ?? PREFECTURES.find((p) => p.code === prefCode)?.name ?? "";
+  const prefName =
+    prefCard?.name ?? PREFECTURES.find((p) => p.code === prefCode)?.name ?? '';
 
   const isCity = cityName !== PREF_ALL && !!cityData?.[cityName];
   const activeName = isCity ? cityName : `${prefName}（県全体）`;
@@ -126,7 +171,9 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
   const cityFlow = isCity ? cityData?.[cityName]?.flow : undefined;
 
   const recordFor = (year: number): YearRecord | undefined =>
-    isCity ? cityData?.[cityName]?.years[String(year)] : prefCard?.years[String(year)];
+    isCity
+      ? cityData?.[cityName]?.years[String(year)]
+      : prefCard?.years[String(year)];
 
   const latest = recordFor(latestYear);
 
@@ -137,30 +184,52 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
     });
   const fundStacks: StackPoint[] = years.flatMap((y) => {
     const r = recordFor(y);
-    return r ? [{ year: y, segments: [r.fundAdjust * OKU, r.fundRedemption * OKU, r.fundOther * OKU] }] : [];
+    return r
+      ? [
+          {
+            year: y,
+            segments: [
+              r.fundAdjust * OKU,
+              r.fundRedemption * OKU,
+              r.fundOther * OKU,
+            ],
+          },
+        ]
+      : [];
   });
-  const fundTotalLatest = latest ? latest.fundAdjust + latest.fundRedemption + latest.fundOther : 0;
+  const fundTotalLatest = latest
+    ? latest.fundAdjust + latest.fundRedemption + latest.fundOther
+    : 0;
 
   const cityOptions = cityData ? Object.keys(cityData) : [];
+  const Heading = embedded ? 'h3' : 'h1';
 
   return (
     <div className="py-2">
       {/* ヘッダー */}
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">
-            地方財政｜財政状況
-            <span className="ml-2 text-base font-normal text-muted-foreground">{latestYear}年度</span>
-          </h1>
+          <Heading
+            className={
+              embedded
+                ? 'text-base font-semibold text-foreground'
+                : 'text-2xl font-bold text-foreground'
+            }
+          >
+            {embedded ? '決算カード' : '地方財政｜財政状況'}
+            <span className="ml-2 text-base font-normal text-muted-foreground">
+              {latestYear}年度
+            </span>
+          </Heading>
           <ChartFooter
             source="地方財政状況調査（決算カード）"
             sourceLinks={LOCAL_FINANCE_SOURCE_LINKS}
             sourceDetail={`2020〜${latestYear}年度`}
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Select value={prefCode} onValueChange={handlePrefChange}>
-            <SelectTrigger className="w-36">
+            <SelectTrigger aria-label="決算カードの都道府県" className="w-36">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -171,8 +240,12 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
               ))}
             </SelectContent>
           </Select>
-          <Select value={cityName} onValueChange={setCityName} disabled={!cityData}>
-            <SelectTrigger className="w-40">
+          <Select
+            value={cityName}
+            onValueChange={setCityName}
+            disabled={!cityData}
+          >
+            <SelectTrigger aria-label="決算カードの市区町村" className="w-40">
               <SelectValue placeholder="市区町村" />
             </SelectTrigger>
             <SelectContent>
@@ -194,17 +267,28 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
             title={activeName}
             subtitle="主要指標"
             rows={[
-              { label: "歳入総額", value: latest ? oku(latest.revenue) : "—" },
-              { label: "歳出総額", value: latest ? oku(latest.expenditure) : "—" },
-              { label: "標準財政規模", value: latest ? oku(latest.standardScale) : "—" },
+              { label: '歳入総額', value: latest ? oku(latest.revenue) : '—' },
+              {
+                label: '歳出総額',
+                value: latest ? oku(latest.expenditure) : '—',
+              },
+              {
+                label: '標準財政規模',
+                value: latest ? oku(latest.standardScale) : '—',
+              },
             ]}
             footer={`${latestYear}年度`}
           />
 
           <ChartCard
             label="実質収支"
-            value={latest ? oku(latest.realBalance) : "—"}
-            chart={<MiniLineChart points={lineSeries("realBalance", OKU)} unit="億円" />}
+            value={latest ? oku(latest.realBalance) : '—'}
+            chart={
+              <MiniLineChart
+                points={lineSeries('realBalance', OKU)}
+                unit="億円"
+              />
+            }
           />
 
           <ChartCard
@@ -220,8 +304,8 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
 
           <ChartCard
             label="地方債現在高"
-            value={latest ? oku(latest.localDebt) : "—"}
-            chart={<MiniBarChart points={lineSeries("localDebt", OKU)} />}
+            value={latest ? oku(latest.localDebt) : '—'}
+            chart={<MiniBarChart points={lineSeries('localDebt', OKU)} />}
           />
         </div>
       </section>
@@ -238,14 +322,18 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
                 data-theme-chart="true"
                 data-theme-component-key={meta.componentKey}
                 data-theme-component-type="kpi-card"
-                data-data-state={points.length > 0 ? "ready" : "no-data"}
-                data-unit={meta.unit || "指数"}
+                data-data-state={points.length > 0 ? 'ready' : 'no-data'}
+                data-unit={meta.unit || '指数'}
                 data-year={`${latestYear}年度`}
                 data-series-count={points.length}
               >
                 <ChartCard
                   label={meta.label}
-                  value={latestVal == null ? "—" : `${latestVal.toFixed(meta.decimals)}${meta.unit}`}
+                  value={
+                    latestVal == null
+                      ? '—'
+                      : `${latestVal.toFixed(meta.decimals)}${meta.unit}`
+                  }
                   chart={<MiniLineChart points={points} unit={meta.unit} />}
                 />
               </div>
@@ -256,7 +344,9 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
 
       {/* Page 2: 歳入歳出の構成比 (市区町村は団体別 Sankey、県全体は都道府県 Sankey) */}
       <section>
-        <h2 className="mb-3 text-lg font-bold text-foreground">歳入歳出の構成比</h2>
+        <h2 className="mb-3 text-lg font-bold text-foreground">
+          歳入歳出の構成比
+        </h2>
         <p className="mb-3 text-sm text-muted-foreground">
           歳入の財源（地方税・地方交付税・国庫支出金・地方債など）が一般会計を通じて
           目的別歳出（民生費・教育費・土木費など）へ流れる様子をフロー図で表します。

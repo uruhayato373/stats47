@@ -26,12 +26,14 @@ const S12_PROPERTY_MAP: Record<string, string> = {
 };
 
 const P04_PROPERTY_MAP: Record<string, string> = {
-  P04_001: "facilityName",
-  P04_002: "facilityType",
+  P04_001: "facilityType",
+  P04_002: "facilityName",
   P04_003: "address",
-  P04_004: "prefectureCode",
-  P04_005: "administratorType",
-  P04_006: "beds",
+  P04_004: "departments1",
+  P04_005: "departments2",
+  P04_006: "departments3",
+  P04_007: "administratorType",
+  P04_008: "beds",
 };
 
 const PROPERTY_MAPS: Record<string, Record<string, string>> = {

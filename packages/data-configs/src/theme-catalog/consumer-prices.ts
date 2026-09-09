@@ -1,6 +1,35 @@
 import type { ThemeCatalog } from "./types";
 
 export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "全国=100の物価水準を比較。総合と生活費目を読み分けます。",
+    "headlineRankingKeys": [
+      "consumer-price-difference-index-overall",
+      "consumer-price-difference-index-food",
+      "consumer-price-difference-index-housing",
+      "consumer-price-difference-index-utilities"
+    ],
+    "comparisonRankingKeys": [
+      "consumer-price-difference-index-overall",
+      "consumer-price-difference-index-food",
+      "consumer-price-difference-index-housing",
+      "consumer-price-difference-index-utilities",
+      "consumer-price-difference-index-overall-excl-rent",
+      "consumer-price-difference-index-transport-communication",
+      "consumer-price-difference-index-healthcare",
+      "consumer-price-difference-index-education"
+    ],
+    "mapNotes": {
+      "consumer-price-difference-index-overall": "当該年の全国平均=100。物価上昇率や費目の支出割合ではありません。",
+      "consumer-price-difference-index-food": "当該年の全国平均=100。物価上昇率や費目の支出割合ではありません。",
+      "consumer-price-difference-index-housing": "住居価格の地域差。持家の帰属家賃を含まず、支出額や負担率ではありません。",
+      "consumer-price-difference-index-utilities": "当該年の全国平均=100。物価上昇率や費目の支出割合ではありません。",
+      "consumer-price-difference-index-overall-excl-rent": "当該年の全国平均=100。物価上昇率や費目の支出割合ではありません。",
+      "consumer-price-difference-index-transport-communication": "当該年の全国平均=100。物価上昇率や費目の支出割合ではありません。",
+      "consumer-price-difference-index-healthcare": "当該年の全国平均=100。物価上昇率や費目の支出割合ではありません。",
+      "consumer-price-difference-index-education": "当該年の全国平均=100。物価上昇率や費目の支出割合ではありません。"
+    }
+  },
   "key": "consumer-prices",
   "title": "物価・消費",
   "description": "都道府県別の消費者物価地域差指数を食料・住居・光熱水道など品目別にチャートとランキングで比較。物価プロファイル・ヒートマップで生活コストの地域差を47都道府県で確認できます。",
@@ -10,32 +39,68 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "consumer-price-difference-index-overall",
       "shortLabel": "総合",
-      "role": "primary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "生活コストの地域間の相対水準を総合指数で最初に把握する。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-overall-excl-rent",
       "shortLabel": "家賃除く総合",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "総合指数では分からない費目別の価格水準を比較表で補足する。各費目の全国平均を100とし、家計支出の構成比とは区別する。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-food",
       "shortLabel": "食料",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "日常生活の基礎的支出である食料価格の地域差を総合指数と並べる。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-housing",
       "shortLabel": "住居",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住居価格の大きな地域差を独立した上部指標として示す。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-utilities",
       "shortLabel": "光熱・水道",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "日常的な固定費に近い光熱・水道の価格差を上部指標として示す。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-education",
       "shortLabel": "教育",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "総合指数では分からない費目別の価格水準を比較表で補足する。各費目の全国平均を100とし、家計支出の構成比とは区別する。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-culture-recreation",
@@ -45,12 +110,24 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "consumer-price-difference-index-transport-communication",
       "shortLabel": "交通・通信",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "総合指数では分からない費目別の価格水準を比較表で補足する。各費目の全国平均を100とし、家計支出の構成比とは区別する。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-healthcare",
       "shortLabel": "保健医療",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「小売物価統計調査（構造編）」",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "総合指数では分からない費目別の価格水準を比較表で補足する。各費目の全国平均を100とし、家計支出の構成比とは区別する。"
+      }
     },
     {
       "rankingKey": "consumer-price-difference-index-clothing-footwear",
@@ -72,105 +149,69 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile",
-      "title": "物価プロファイル",
-      "componentProps": {
-        "seriesRefs": [
-          { "metricKey": "consumer-price-difference-index-overall", "label": "総合", "colorRole": "series-1" },
-          { "metricKey": "consumer-price-difference-index-overall-excl-rent", "label": "家賃除く総合", "colorRole": "series-2" },
-          { "metricKey": "consumer-price-difference-index-food", "label": "食料", "colorRole": "series-3" },
-          { "metricKey": "consumer-price-difference-index-housing", "label": "住居", "colorRole": "series-4" },
-          { "metricKey": "consumer-price-difference-index-utilities", "label": "光熱・水道", "colorRole": "series-5" },
-          { "metricKey": "consumer-price-difference-index-education", "label": "教育", "colorRole": "series-6" },
-          { "metricKey": "consumer-price-difference-index-culture-recreation", "label": "教養娯楽", "colorRole": "series-7" },
-          { "metricKey": "consumer-price-difference-index-transport-communication", "label": "交通・通信", "colorRole": "series-8" },
-          { "metricKey": "consumer-price-difference-index-healthcare", "label": "保健医療", "colorRole": "series-9" },
-          { "metricKey": "consumer-price-difference-index-clothing-footwear", "label": "被服", "colorRole": "series-10" },
-          { "metricKey": "consumer-price-difference-index-furniture-household", "label": "家具", "colorRole": "series-11" },
-          { "metricKey": "consumer-price-difference-index-miscellaneous", "label": "諸雑費", "colorRole": "series-12" }
-        ]
-      },
-      "relatedRankingKeys": [
-        "consumer-price-difference-index-overall",
-        "consumer-price-difference-index-overall-excl-rent",
-        "consumer-price-difference-index-food",
-        "consumer-price-difference-index-housing",
-        "consumer-price-difference-index-utilities",
-        "consumer-price-difference-index-education",
-        "consumer-price-difference-index-culture-recreation",
-        "consumer-price-difference-index-transport-communication",
-        "consumer-price-difference-index-healthcare",
-        "consumer-price-difference-index-clothing-footwear",
-        "consumer-price-difference-index-furniture-household",
-        "consumer-price-difference-index-miscellaneous"
-      ],
-      "sourceName": "小売物価統計調査（構造編）",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "総合",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-cpi-living-cost",
-      "componentType": "line-chart",
-      "title": "生活費の地域差指数の推移（食料・住居・光熱水道）",
+      "title": "費目別の物価水準",
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "consumer-price-difference-index-food"
+            "metricKey": "consumer-price-difference-index-overall",
+            "label": "総合",
+            "colorRole": "series-1"
           },
           {
-            "metricKey": "consumer-price-difference-index-housing"
+            "metricKey": "consumer-price-difference-index-overall-excl-rent",
+            "label": "家賃除く総合",
+            "colorRole": "series-2"
           },
           {
-            "metricKey": "consumer-price-difference-index-utilities"
+            "metricKey": "consumer-price-difference-index-food",
+            "label": "食料",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-housing",
+            "label": "住居",
+            "colorRole": "series-4"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-utilities",
+            "label": "光熱・水道",
+            "colorRole": "series-5"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-education",
+            "label": "教育",
+            "colorRole": "series-6"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-culture-recreation",
+            "label": "教養娯楽",
+            "colorRole": "series-7"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-transport-communication",
+            "label": "交通・通信",
+            "colorRole": "series-8"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-healthcare",
+            "label": "保健医療",
+            "colorRole": "series-9"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-clothing-footwear",
+            "label": "被服",
+            "colorRole": "series-10"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-furniture-household",
+            "label": "家具",
+            "colorRole": "series-11"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-miscellaneous",
+            "label": "諸雑費",
+            "colorRole": "series-12"
           }
-        ],
-        "labels": [
-          "食料",
-          "住居",
-          "光熱・水道"
-        ],
-        "seriesColors": [
-          "count",
-          "danger",
-          "population"
-        ]
-      },
-      "relatedRankingKeys": [
-        "consumer-price-difference-index-food",
-        "consumer-price-difference-index-housing",
-        "consumer-price-difference-index-utilities"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "生活費",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-cpi-heatmap",
-      "componentType": "cpi-heatmap",
-      "title": "物価推移ヒートマップ",
-      "componentProps": {
-        "seriesRefs": [
-          { "metricKey": "consumer-price-difference-index-overall", "label": "総合", "colorRole": "series-1" },
-          { "metricKey": "consumer-price-difference-index-overall-excl-rent", "label": "家賃除く総合", "colorRole": "series-2" },
-          { "metricKey": "consumer-price-difference-index-food", "label": "食料", "colorRole": "series-3" },
-          { "metricKey": "consumer-price-difference-index-housing", "label": "住居", "colorRole": "series-4" },
-          { "metricKey": "consumer-price-difference-index-utilities", "label": "光熱・水道", "colorRole": "series-5" },
-          { "metricKey": "consumer-price-difference-index-education", "label": "教育", "colorRole": "series-6" },
-          { "metricKey": "consumer-price-difference-index-culture-recreation", "label": "教養娯楽", "colorRole": "series-7" },
-          { "metricKey": "consumer-price-difference-index-transport-communication", "label": "交通・通信", "colorRole": "series-8" },
-          { "metricKey": "consumer-price-difference-index-healthcare", "label": "保健医療", "colorRole": "series-9" },
-          { "metricKey": "consumer-price-difference-index-clothing-footwear", "label": "被服", "colorRole": "series-10" },
-          { "metricKey": "consumer-price-difference-index-furniture-household", "label": "家具", "colorRole": "series-11" },
-          { "metricKey": "consumer-price-difference-index-miscellaneous", "label": "諸雑費", "colorRole": "series-12" }
         ]
       },
       "relatedRankingKeys": [
@@ -194,7 +235,8 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "総合",
-      "sortOrder": 10
+      "sortOrder": 0,
+      "annotation": "各費目の全国平均=100。家計の支出構成比ではありません。"
     },
     {
       "componentKey": "md-cpi-discussion",
@@ -297,36 +339,38 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
   ],
   evidenceTopics: [
     {
-      key: "overall-price-level-and-rent",
-      lensKey: "composition",
-      title: "総合物価水準と家賃の影響",
-      question:
-        "総合と家賃を除く総合の地域差指数には、どのような違いが表れるか",
-      summary:
-        "地域差指数は全国平均の価格水準を100とする相対指数で、前年からの物価上昇率ではありません。総合にも持家の帰属家賃は含まれず、家賃を除く総合では実際の家賃も除かれます。",
-      sourceKeys: ["stat-retail-price-survey-structural"],
-      relatedRankingKeys: [
-        "consumer-price-difference-index-overall",
-        "consumer-price-difference-index-overall-excl-rent",
+      "key": "overall-price-level-and-rent",
+      "lensKey": "composition",
+      "title": "総合物価水準と家賃の影響",
+      "question": "総合と家賃を除く総合の地域差指数には、どのような違いが表れるか",
+      "summary": "地域差指数は全国平均の価格水準を100とする相対指数で、前年からの物価上昇率ではありません。総合にも持家の帰属家賃は含まれず、家賃を除く総合では実際の家賃も除かれます。",
+      "sourceKeys": [
+        "stat-retail-price-survey-structural"
       ],
-      relatedChartKeys: ["theme-cpi-profile"],
+      "relatedRankingKeys": [
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-overall-excl-rent"
+      ],
+      "relatedChartKeys": [
+        "theme-cpi-profile"
+      ]
     },
     {
-      key: "essential-cost-profile",
-      lensKey: "composition",
-      title: "食料・住居・光熱水道の価格構造",
-      question:
-        "食料、住居、光熱・水道の価格水準には、地域ごとにどのような違いがあるか",
-      summary:
-        "費目別指数は、それぞれの全国平均を100とする価格水準です。家計が実際に支払った金額や支出割合ではなく、費目間の指数を足したり単純平均したりして総合指数を作ることはできません。",
-      sourceKeys: ["stat-retail-price-survey-structural"],
-      relatedRankingKeys: [
+      "key": "essential-cost-profile",
+      "lensKey": "composition",
+      "title": "食料・住居・光熱水道の価格構造",
+      "question": "食料、住居、光熱・水道の価格水準には、地域ごとにどのような違いがあるか",
+      "summary": "費目別指数は、それぞれの全国平均を100とする価格水準です。家計が実際に支払った金額や支出割合ではなく、費目間の指数を足したり単純平均したりして総合指数を作ることはできません。",
+      "sourceKeys": [
+        "stat-retail-price-survey-structural"
+      ],
+      "relatedRankingKeys": [
         "consumer-price-difference-index-food",
         "consumer-price-difference-index-housing",
-        "consumer-price-difference-index-utilities",
+        "consumer-price-difference-index-utilities"
       ],
-      relatedChartKeys: ["theme-cpi-living-cost"],
-    },
+      "relatedChartKeys": []
+    }
   ],
   "keywords": [
     "消費者物価指数",

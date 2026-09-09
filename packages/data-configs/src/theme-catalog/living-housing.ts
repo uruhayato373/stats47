@@ -10,22 +10,46 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "vacant-housing-ratio",
       "shortLabel": "空き家率",
-      "role": "primary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "国土交通白書2024・令和5年住宅・土地統計調査",
+        "sourceUrl": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "賃貸用・売却用・二次的住宅を含む空き家全体の割合です。管理不全の空き家だけの割合ではありません。 概況カード・地域分布・比較表で利用状況と広さを読む。"
+      }
     },
     {
       "rankingKey": "owner-occupied-housing-ratio",
       "shortLabel": "持ち家率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "国土交通白書2024・令和5年住宅・土地統計調査",
+        "sourceUrl": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "高齢者世帯に限定しない持ち家率です。高いことがそのまま住宅取得のしやすさを意味するわけではありません。 概況カード・地域分布・比較表で利用状況と広さを読む。"
+      }
     },
     {
       "rankingKey": "floor-area-per-dwelling-owner",
-      "shortLabel": "持ち家延べ面積",
-      "role": "secondary"
+      "shortLabel": "持ち家の広さ",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "国土交通白書2024・令和5年住宅・土地統計調査",
+        "sourceUrl": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "持ち家1住宅当たりの延べ面積です。1人当たりの広さや住宅価格ではありません。 概況カード・地域分布・比較表で利用状況と広さを読む。"
+      }
     },
     {
       "rankingKey": "floor-area-per-dwelling-rented",
-      "shortLabel": "借家延べ面積",
-      "role": "secondary"
+      "shortLabel": "借家の広さ",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "国土交通白書2024・令和5年住宅・土地統計調査",
+        "sourceUrl": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "借家1住宅当たりの延べ面積です。家賃や住居費の負担、建物の品質は示しません。 概況カード・地域分布・比較表で利用状況と広さを読む。"
+      }
     },
     {
       "rankingKey": "households",
@@ -35,22 +59,40 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "nuclear-family-households-ratio",
       "shortLabel": "核家族世帯率",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版高齢社会白書・令和2年国勢調査",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "夫婦のみ・夫婦と子・ひとり親と子の世帯を含みます。単独世帯との2区分だけで全世帯にはなりません。 世帯構成の背景を比較表で確認する。"
+      }
     },
     {
       "rankingKey": "elderly-couple-only-household-ratio",
-      "shortLabel": "高齢夫婦世帯",
-      "role": "secondary"
+      "shortLabel": "高齢夫婦のみ世帯率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版高齢社会白書・令和2年国勢調査",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "夫65歳以上・妻60歳以上の夫婦のみの世帯が、一般世帯に占める割合です。白書の「65歳以上の世帯員がいる世帯」と対象が異なります。 世帯構成の背景を比較表で確認する。"
+      }
     },
     {
       "rankingKey": "single-person-household-old-population-ratio",
-      "shortLabel": "高齢単身世帯率",
-      "role": "context"
+      "shortLabel": "高齢単独世帯率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版高齢社会白書・令和2年国勢調査",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "一般世帯に占める65歳以上の1人世帯の割合です。65歳以上の人口を分母にした割合ではありません。 世帯構成の背景を比較表で確認する。"
+      }
     },
     {
       "rankingKey": "population-density-per-km2-inhabitable-area",
       "shortLabel": "人口密度",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "habitable-area-ratio",
@@ -65,7 +107,7 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "ratio-never-married-15-plus",
       "shortLabel": "未婚率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "marriages",
@@ -80,332 +122,219 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "single-person-household-ratio",
       "shortLabel": "単独世帯割合",
-      "role": "context"
-    },
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版高齢社会白書・令和2年国勢調査",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "一般世帯に占める1人世帯の割合です。人口に占める1人暮らしの割合ではありません。 世帯構成の背景を比較表で確認する。"
+      }
+    }
   ],
   "charts": [
     {
       "componentKey": "vacancy-ownership-rate-trend",
       "componentType": "line-chart",
-      "title": "空き家率と持ち家率の推移",
+      "title": "空き家率はどう変わったか",
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "vacant-housing-ratio"
-          },
-          {
-            "metricKey": "owner-occupied-housing-ratio"
+            "metricKey": "vacant-housing-ratio",
+            "label": "空き家率",
+            "colorRole": "series-1"
           }
-        ],
-        "labels": [
-          "空き家率",
-          "持ち家率"
-        ],
-        "seriesColors": [
-          "danger",
-          "population"
         ]
       },
       "relatedRankingKeys": [
-        "vacant-housing-ratio",
-        "owner-occupied-housing-ratio"
+        "vacant-housing-ratio"
       ],
       "sourceName": "住宅・土地統計調査",
-      "sourceLink": null,
+      "sourceLink": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "住宅",
-      "sortOrder": 0
+      "sortOrder": 0,
+      "annotation": "空き家全体の割合。賃貸・売却用や二次的住宅を含み、管理不全の空き家率ではありません。"
     },
     {
-      "componentKey": "unmarried-elderly-couple-trend",
+      "componentKey": "lh-ownership-rate-trend",
       "componentType": "line-chart",
-      "title": "未婚率と高齢夫婦世帯率の推移",
+      "title": "持ち家率はどう変わったか",
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "ratio-never-married-15-plus"
-          },
-          {
-            "metricKey": "elderly-couple-only-household-ratio"
+            "metricKey": "owner-occupied-housing-ratio",
+            "label": "持ち家率",
+            "colorRole": "series-2"
           }
-        ],
-        "labels": [
-          "未婚率",
-          "高齢夫婦世帯率"
-        ],
-        "seriesColors": [
-          "special",
-          "count"
         ]
       },
       "relatedRankingKeys": [
-        "ratio-never-married-15-plus",
-        "elderly-couple-only-household-ratio"
+        "owner-occupied-housing-ratio"
       ],
-      "sourceName": "国勢調査 / 国民生活基礎調査",
-      "sourceLink": null,
+      "sourceName": "住宅・土地統計調査",
+      "sourceLink": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "人口・婚姻",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "md-living-housing-discussion",
-      "componentType": "markdown-section",
-      "title": "データの読み解き — 空き家・持ち家率の都道府県差",
-      "componentProps": {
-        "subtitle": "白書から見る、なぜ地方で空き家率が高く都市部で持ち家率が低いのか",
-        "markdown": "日本の住宅事情は2023年住宅・土地統計調査で、空き家数が約900万戸（空き家率13.8%、過去最高）、住宅総数は約6,500万戸と、世帯数を大きく上回る住宅供給過剰の構造にある。一方で東京都・神奈川県等の都市部では持ち家率が4〜5割と低く、地方では持ち家率8割超の県が複数ある。本稿では各種白書のデータを基に住宅・暮らしの地域格差の構造を整理する。\n\n### 現状 — 空き家900万戸と人口減少の進行\n\n空き家数は1998年の576万戸から2023年に約900万戸へ増加し、空き家率13.8%は過去最高を更新。うち賃貸・売却用以外の「居住目的のない空き家」は約385万戸（5.9%）と、放置されるリスクが高い空き家が増加している。要因は人口減少・少子高齢化・相続未登記・建物の老朽化等が複合している。\n\n2050年には全市区町村の約2割で人口が2020年比で半数未満になると推計され、地方では限界集落化が進む。これに対し政府は2014年制定の「空家等対策の推進に関する特別措置法」を2023年改正し、特定空家（倒壊リスク等）に加え「**管理不全空家**」を新設、固定資産税の住宅用地特例解除等の措置強化を進める。2024年4月からは**相続登記の義務化**が施行され、所有者不明土地問題の解消が並行して進められている。\n\n### 都道府県差の構造 — 「都市低持ち家率」「地方高空き家率」を生む3要因\n\n**(1) 人口流出と相続問題の連鎖**\n\n地方の高空き家率の主因は、若年層の都市部流出による「**分母（世帯数）の縮小**」と相続物件の放置。22歳前後をピークとする10代後半〜20代の地方から東京圏への一極集中で、地方では世帯数自体が減少。親世代から相続した実家を居住・売却・賃貸いずれにも活用しない「居住目的のない空き家」が急増する。山梨・和歌山・長野・徳島・高知等の地方県で空き家率20%超が常態化。2024年4月施行の相続登記義務化により、所有者不明土地・空き家問題への取組みが強化されている。\n\n**(2) 都市部の住宅市況と賃貸偏重**\n\n東京都・神奈川県・大阪府等の都市部で持ち家率が4〜5割と低い背景には、地価・住宅価格の高騰がある。東京都心では新築マンション価格が1億円超、共働き世帯のパワーカップル需要で価格上昇が続く。若年層は賃貸を選択する傾向が強く、住居費負担率が高くなる。一方、地方では土地・住宅価格が相対的に安く、持ち家取得が容易（持ち家率上位は秋田・富山・福井等で約80%）。住宅取得は世帯形成・出生率にも影響し、都市部の少子化加速の一因とも指摘される。\n\n**(3) 世帯構造の変化と高齢単身世帯の急増**\n\n核家族化と高齢化の進展により、世帯当たり人員は減少を続け、2020年に2.27人。一人暮らし世帯は約2,000万世帯と全世帯の38%を超える。特に**高齢単身世帯**は急増しており、2050年には全世帯の20%を超える見通し。地方では高齢夫婦のみ・高齢単身世帯比率が高く、本人死亡後の住宅処分が困難な「空き家予備軍」が増大。都市部でも高齢単身世帯の孤独死・住宅セーフティネットの課題が顕在化。これらに対応するため、サービス付き高齢者向け住宅（サ高住）の整備、住宅セーフティネット法の改正（2017年）等が進められている。\n\n### 政策的含意 — コンパクトシティと立地適正化\n\n国土交通省は人口減少・高齢化に対応する「**コンパクト・プラス・ネットワーク**」を都市政策の柱とし、各市町村が**立地適正化計画**を策定（2024年時点で約700市町村）。居住誘導区域・都市機能誘導区域を設定し、行政サービスを効率化する仕組み。地方都市の郊外スプロール化（拡散）を抑制し、中心部に居住・サービスを集約することで、空き家・空き店舗・インフラ維持コストの三重課題に対処する。\n\n二地域居住の促進や、デジタル田園都市国家構想の下での魅力ある地方づくりも並行。地方創生2.0の柱として、地域未来基金（令和8年度4,000億円）による産業クラスター形成、若者・女性から選ばれる地方の魅力創出が進められている。\n\n### 読み解きのコツ\n\n空き家率ランキングを読むときは、**「居住目的のない空き家率」**に注目することが重要。賃貸用空き家は需給の循環の中にあるが、放置された相続物件は社会問題化しやすい。持ち家率も「高いほど良い」とは限らず、地価・住宅市況・世帯所得の地域差を反映した結果。同じ「都市部の低持ち家率」でも、東京圏のような賃貸高需要由来と、商業集積による地価高騰由来では政策意味合いが異なる。47都道府県の順位そのものよりも、**「なぜその水準なのか」を人口動態・住宅市況・世帯構造と組み合わせて構造で説明できるか**が、データの読み解きとして本質的である。",
-        "sources": [
-          {
-            "label": "国土交通白書 2025",
-            "url": "https://www.mlit.go.jp/hakusyo/mlit/index.html"
-          },
-          {
-            "label": "住宅・土地統計調査 (総務省統計局)",
-            "url": "https://www.stat.go.jp/data/jyutaku/index.html"
-          },
-          {
-            "label": "厚生労働白書 (令和7年版)",
-            "url": "https://www.mhlw.go.jp/stf/wp/hakusyo/kousei/index.html"
-          },
-          {
-            "label": "空家等対策の推進に関する特別措置法 (国土交通省)",
-            "url": "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000035.html"
-          },
-          {
-            "label": "立地適正化計画 (国土交通省)",
-            "url": "https://www.mlit.go.jp/toshi/city_plan/toshi_city_plan_tk_000054.html"
-          }
-        ]
-      },
-      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 空家等対策の推進に関する特別措置法 (国土交通省) / 立地適正化計画 (国土交通省)",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "考察",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "md-living-housing-related-topics",
-      "componentType": "markdown-section",
-      "title": "関連トピック・中長期課題",
-      "componentProps": {
-        "subtitle": "空き家900万戸からサービス付き高齢者向け住宅まで",
-        "markdown": "住宅・暮らし分野は人口減少・少子高齢化と直結し、空き家対策・コンパクトシティ・住宅セーフティネット・所有者不明土地対策が連動して進行する。各種白書から、特に重要度の高い5つの論点を整理する。\n\n### 1. 空き家900万戸問題と特措法改正\n\n2023年住宅・土地統計調査で空き家数は約900万戸、空き家率13.8%（過去最高）。うち「居住目的のない空き家」は約385万戸（5.9%）と、放置リスクが高い空き家が急増している。\n\n政府は2023年に「**空家等対策の推進に関する特別措置法**」を改正し、従来の「特定空家」（倒壊リスク等）に加え「**管理不全空家**」を新設。固定資産税の住宅用地特例解除（最大6倍課税）等の措置強化を進める。市町村は空家等活用促進区域を設定でき、用途変更等の柔軟な活用が可能に。空き家バンク・リフォーム助成等の活用促進策も並行。\n\n### 2. コンパクトシティと立地適正化計画\n\n国土交通省は人口減少・高齢化に対応する都市政策の柱として「**コンパクト・プラス・ネットワーク**」を掲げる。各市町村が**立地適正化計画**を策定し（2024年時点で約700市町村）、居住誘導区域・都市機能誘導区域を設定。中心部に居住・サービスを集約することで、空き家・空き店舗・インフラ維持コストの三重課題に対処。\n\n防災・減災の観点からも、土砂災害特別警戒区域等を居住誘導区域から除外する見直しが進む。富山市・宇都宮市・青森市等の先行事例で、LRT・BRT等の公共交通網と一体的な都市再生が進められている。\n\n### 3. 住宅セーフティネットとサービス付き高齢者向け住宅\n\n2017年改正の「**住宅セーフティネット法**」により、住宅確保要配慮者（高齢者・障害者・子育て世帯・低額所得者等）に対する民間賃貸住宅活用が促進されている。登録住宅は約88万戸（2024年時点）に達するが、需要に対し依然として不足。\n\n**サービス付き高齢者向け住宅（サ高住）**の整備も並行。2024年時点で約28万戸が登録され、高齢者の見守り・生活相談サービスを備えた住まいとして拡大。一方、医療・介護との連携不足、運営の質のばらつきが課題で、第9期介護保険事業計画（2024年度〜）では「地域包括ケアシステム」との統合運用が強化されている。\n\n### 4. 所有者不明土地と相続登記の義務化\n\n所有者不明土地は国土の約2割（九州本島面積を超える規模）に達するとされ、公共事業・防災対策・空き家対策の障害となっている。2021年改正の民法・不動産登記法等により、2024年4月から**相続登記の義務化**が施行（3年以内の登記義務、違反は10万円以下の過料）。\n\n相続人申告登記制度の創設、所有不動産記録証明制度（2026年4月施行予定）、相続土地国庫帰属制度（2023年4月施行）等で、所有者不明土地の発生抑制と既存案件の解消を並行して進める。所有者不明土地法（2018年制定、2022年改正）による地域福利増進事業の活用も拡大。\n\n### 5. 二地域居住と地方創生2.0\n\n若年層の都市集中を緩和する政策として、**二地域居住**の促進が「**地方創生2.0**」の柱に位置付けられている。2024年改正の「広域的地域活性化基盤整備法」により、二地域居住等支援拠点施設の整備が支援対象に。デジタル田園都市国家構想の下でテレワーク環境整備、サテライトオフィス開設支援、空き家活用型のお試し移住住宅整備等が進む。\n\n地域未来基金（令和8年度4,000億円）による産業クラスター形成、地域社会DXによる行政サービス効率化（マイナンバーカード活用、自治体DX）も並行。若者・女性から選ばれる地方の魅力創出が、人口流出抑制と空き家問題対策の両面に効く構造になっている。",
-        "sources": [
-          {
-            "label": "国土交通白書 2025",
-            "url": "https://www.mlit.go.jp/hakusyo/mlit/index.html"
-          },
-          {
-            "label": "空家等対策の推進に関する特別措置法 (国土交通省)",
-            "url": "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000035.html"
-          },
-          {
-            "label": "立地適正化計画 (国土交通省)",
-            "url": "https://www.mlit.go.jp/toshi/city_plan/toshi_city_plan_tk_000054.html"
-          },
-          {
-            "label": "住宅セーフティネット制度 (国土交通省)",
-            "url": "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000055.html"
-          },
-          {
-            "label": "相続登記の申請義務化 (法務省)",
-            "url": "https://www.moj.go.jp/MINJI/minji05_00343.html"
-          }
-        ]
-      },
-      "sourceName": "国土交通白書 2025 / 空家等対策の推進に関する特別措置法 (国土交通省) / 立地適正化計画 (国土交通省) / 住宅セーフティネット制度 (国土交通省) / 相続登記の申請義務化 (法務省)",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "考察",
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "md-living-housing-faq",
-      "componentType": "markdown-section",
-      "title": "よくある質問",
-      "componentProps": {
-        "displayMode": "faq",
-        "subtitle": "住宅・暮らしについて読者が気になる 7 問",
-        "markdown": "### Q1: 空き家率の地域差はなぜ?\n\n2023年住宅・土地統計調査で全国空き家率は13.8%（過去最高）。山梨・和歌山・長野・徳島・高知等の地方県で20%超が常態化。最大の要因は**若年層の都市部流出による世帯数縮小**と**相続物件の放置**。親世代から相続した実家を居住・売却・賃貸いずれにも活用しない「居住目的のない空き家」が急増している。2024年4月施行の相続登記義務化により所有者不明土地・空き家問題への取組みが強化される。(出典: 住宅・土地統計調査 / 国土交通白書 2025)\n\n### Q2: 持ち家率の高低が意味するものは?\n\n持ち家率上位は秋田・富山・福井等で約80%、下位は東京都・沖縄県等で5割前後。都市部の低持ち家率は地価・住宅価格高騰により若年層が賃貸を選択する傾向の反映。地方の高持ち家率は土地・住宅価格が相対的に安く取得が容易なため。「高いほど良い」とは限らず、世帯所得・地価・住宅市況の地域差を反映した結果。住宅取得は世帯形成・出生率にも影響し、都市部の少子化加速の一因とも指摘される。(出典: 住宅・土地統計調査)\n\n### Q3: 東京の住宅事情はなぜ特殊?\n\n東京都心では新築マンション価格が1億円超、共働き世帯のパワーカップル需要で価格上昇が続く。持ち家率は約45%と全国最低水準で、若年層は賃貸を選択する傾向が強く住居費負担率が高い。延べ床面積も狭く、47都道府県中最小水準。一方で空き家率は約11%と全国平均を下回り、賃貸需給は逼迫している。住宅取得の高ハードルが世帯形成・出生率低下の構造要因の一つになっている。(出典: 住宅・土地統計調査)\n\n### Q4: 高齢単身世帯はなぜ増えているのか?\n\n核家族化と高齢化の進展により、高齢単身世帯は急増。2050年には全世帯の20%を超える見通し。要因は配偶者との死別、未婚化、子世代との別居等の複合。地方では高齢夫婦のみ・高齢単身世帯比率が高く、本人死亡後の住宅処分が困難な「空き家予備軍」が増大。都市部でも孤独死・住宅セーフティネットの課題が顕在化。サービス付き高齢者向け住宅（サ高住、約28万戸）の整備、地域包括ケアシステムとの統合運用が進められている。(出典: 厚生労働白書 令和7年版)\n\n### Q5: 人口密度の地域差は何を意味する?\n\n可住地面積当たり人口密度は東京都が突出して高く（約9,500人/km²）、北海道・岩手・秋田等が低い。DID（人口集中地区）人口密度は都市の集約度を示し、コンパクトシティ政策の指標として重要。人口密度が高いほどインフラ効率は良いが、住宅事情は厳しくなる。一方、低密度地域では行政サービスコストが嵩み、立地適正化計画による中心部集約が進められている。(出典: 国土交通白書 2025)\n\n### Q6: 未婚率と婚姻件数の地域差は?\n\n生涯未婚率（50歳時点で結婚経験なしの割合）は男性で30%超、女性で20%弱に達し、都市部・地方ともに上昇傾向。婚姻件数は2024年に約47万組と過去最少を更新。背景は経済的不安・価値観の多様化・出会いの機会減少等。地方では未婚者の人口性比（女性100人に対する男性数）が30代前半で140を超える地域もあり、固定的な性別役割分担意識が若い女性の流出を加速させる構造的問題がある。(出典: 男女共同参画白書 令和7年版)\n\n### Q7: コンパクトシティとは何?\n\n人口減少・高齢化に対応する都市政策の柱で、「**コンパクト・プラス・ネットワーク**」と呼ばれる。各市町村が**立地適正化計画**を策定し（2024年時点で約700市町村）、居住誘導区域・都市機能誘導区域を設定。中心部に居住・サービスを集約することで、空き家・空き店舗・インフラ維持コストの三重課題に対処する。富山市・宇都宮市・青森市等の先行事例ではLRT・BRT等の公共交通網と一体的な都市再生が進む。(出典: 国土交通白書 2025)",
-        "sources": [
-          {
-            "label": "国土交通白書 2025",
-            "url": "https://www.mlit.go.jp/hakusyo/mlit/index.html"
-          },
-          {
-            "label": "住宅・土地統計調査 (総務省統計局)",
-            "url": "https://www.stat.go.jp/data/jyutaku/index.html"
-          },
-          {
-            "label": "厚生労働白書 (令和7年版)",
-            "url": "https://www.mhlw.go.jp/stf/wp/hakusyo/kousei/index.html"
-          },
-          {
-            "label": "男女共同参画白書 (令和7年版)",
-            "url": "https://www.gender.go.jp/about_danjo/whitepaper/index.html"
-          },
-          {
-            "label": "立地適正化計画 (国土交通省)",
-            "url": "https://www.mlit.go.jp/toshi/city_plan/toshi_city_plan_tk_000054.html"
-          }
-        ]
-      },
-      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 立地適正化計画 (国土交通省)",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "考察",
-      "sortOrder": 30
+      "section": "住宅",
+      "sortOrder": 10,
+      "annotation": "空き家率とは分母が異なり、2つの割合を足しても住宅の構成比にはなりません。"
     },
     {
       "componentKey": "lh-dwelling-floor-area-trend",
       "componentType": "line-chart",
-      "title": "持ち家・借家の延べ床面積の推移",
+      "title": "借家の延べ面積の推移",
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "floor-area-per-dwelling-owner"
-          },
-          {
             "metricKey": "floor-area-per-dwelling-rented"
           }
-        ],
-        "labels": [
-          "持ち家",
-          "借家"
-        ],
-        "seriesColors": [
-          "series-6",
-          "count"
         ]
       },
+      "relatedRankingKeys": [
+        "floor-area-per-dwelling-rented"
+      ],
+      "sourceName": "住宅・土地統計調査",
+      "sourceLink": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": null,
+      "sortOrder": 20,
+      "annotation": "住宅・土地統計調査の収録年を表示。持ち家の広さは2時点のみのため比較表で確認できます。"
+    },
+    {
+      "componentKey": "lh-older-households-trend",
+      "componentType": "line-chart",
+      "title": "高齢の単独・夫婦世帯は増えているか",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "single-person-household-old-population-ratio",
+            "label": "高齢単独世帯率",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "elderly-couple-only-household-ratio",
+            "label": "高齢夫婦のみ世帯率",
+            "colorRole": "series-4"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "single-person-household-old-population-ratio",
+        "elderly-couple-only-household-ratio"
+      ],
+      "sourceName": "国勢調査（社会・人口統計体系）",
+      "sourceLink": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "住宅",
+      "sortOrder": 30,
+      "annotation": "いずれも分母は一般世帯。単独は65歳以上、夫婦のみは夫65歳以上・妻60歳以上で、年齢条件が異なります。"
+    },
+    {
+      "componentKey": "md-living-housing-discussion",
+      "componentType": "markdown-section",
+      "title": "住宅と世帯を読み合わせる",
+      "componentProps": {
+        "markdown": "### 空き家の多さと住宅の使われ方\n国土交通白書2024は、人口減少に伴う地域の住宅需要と空き家の増加を論点にしています。まず地図で地域差を、推移で時間的な変化を確認します。空き家全体には賃貸・売却用や二次的住宅も含まれるため、その割合だけで管理状態を判断しません。\n\n### 持ち家・借家の広さ\n住宅・土地統計調査は所有の関係と住宅の規模を別々に集計しています。持ち家率と延べ面積を読み合わせると、住まいの形の違いを比較できます。ただし、面積の差から住宅価格や住居費の負担は判断できません。\n\n### 住まいを支える世帯の構成\n高齢社会白書は高齢期の住まいを取り上げています。このページでは国勢調査に基づく単独・高齢世帯の指標を併せて比較します。単独世帯と核家族世帯の割合は比較表で、複数年のデータがある高齢世帯は折れ線で確認できます。住宅統計とは調査年や世帯の対象が異なるため、因果関係を直接示すものではありません。",
+        "sources": [
+          {
+            "label": "国土交通白書2024：高齢社会と地域活力の維持",
+            "url": "https://www.mlit.go.jp/hakusyo/mlit/r05/hakusho/r06/html/n1113000.html"
+          },
+          {
+            "label": "令和5年住宅・土地統計調査：調査の結果",
+            "url": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm"
+          },
+          {
+            "label": "令和7年版高齢社会白書：生活環境",
+            "url": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html"
+          },
+          {
+            "label": "令和2年国勢調査：調査の結果",
+            "url": "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
+          }
+        ]
+      },
+      "sourceName": "住宅・土地統計調査・国勢調査・白書",
+      "sourceLink": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "考察",
+      "sortOrder": 100
+    },
+    {
+      "componentKey": "md-living-housing-faq",
+      "componentType": "markdown-section",
+      "title": "比較するときのよくある疑問",
+      "componentProps": {
+        "displayMode": "faq",
+        "markdown": "### Q1: 都道府県の中央値は全国平均ですか？\n違います。各都道府県の値を小さい順に並べた中央の値です。住宅数や世帯数で重み付けした日本全体の割合・平均ではありません。\n\n### Q2: 空き家率と持ち家率を足すと100％になりますか？\nなりません。空き家率と持ち家率は分母が異なる指標です。構成比として積み上げず、それぞれの分布と推移を確認してください。\n\n### Q3: 表の指標はすべて同じ年のデータですか？\n指標ごとの収録最新年を表示しているため、年が異なる場合があります。同じ指標の都道府県比較では年をそろえています。横断比較では各行の年次を確認してください。"
+      },
+      "sourceName": "住宅・土地統計調査・国勢調査・白書",
+      "sourceLink": "https://www.stat.go.jp/data/jyutaku/2023/tyousake.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "考察",
+      "sortOrder": 110
+    }
+  ],
+  "evidenceTopics": [
+    {
+      "key": "housing-stock-and-aging",
+      "lensKey": "sustainability",
+      "title": "高齢期の住まいと空き家ストック",
+      "question": "持ち家率と空き家率には、高齢化に伴う住まいの継承・利用の地域差がどう表れるか",
+      "summary": "白書は65歳以上の持ち家と使用目的のない空き家を扱います。ランキングは全世帯の持ち家率と、賃貸・売却用や二次的住宅も含む空き家率であり、対象を同一視しません。",
+      "sourceKeys": [
+        "cao-aging-whitepaper-2025-housing",
+        "stat-housing-land-survey-2023"
+      ],
+      "relatedRankingKeys": [
+        "owner-occupied-housing-ratio",
+        "vacant-housing-ratio"
+      ],
+      "relatedChartKeys": [
+        "vacancy-ownership-rate-trend",
+        "lh-ownership-rate-trend"
+      ],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    },
+    {
+      "key": "tenure-space-gap",
+      "lensKey": "equity",
+      "title": "持ち家・借家の居住空間",
+      "question": "持ち家と借家の1住宅当たり延べ面積には、どのような地域差があるか",
+      "summary": "延べ面積は住宅内の広さを示す平均値です。住宅価格や家賃、世帯人員、建物の品質は示さないため、取得・居住の負担とは分けて読みます。",
+      "sourceKeys": [
+        "stat-housing-land-survey-2023"
+      ],
       "relatedRankingKeys": [
         "floor-area-per-dwelling-owner",
         "floor-area-per-dwelling-rented"
       ],
-      "sourceName": "住宅・土地統計調査",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 110
-    },
-    {
-      "componentKey": "lh-marriage-divorce-trend",
-      "componentType": "line-chart",
-      "title": "婚姻件数・離婚件数の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "marriages",
-            "label": "婚姻件数",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "divorces",
-            "label": "離婚件数",
-            "colorRole": "danger"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "marriages",
-        "divorces"
+      "relatedChartKeys": [
+        "lh-dwelling-floor-area-trend"
       ],
-      "sourceName": "人口動態調査",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 120
-    },
-{
-      "componentKey": "lh-household-structure-trend",
-      "componentType": "line-chart",
-      "title": "単独世帯・核家族世帯割合の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "single-person-household-ratio",
-            "label": "単独世帯割合",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "nuclear-family-households-ratio",
-            "label": "核家族世帯率",
-            "colorRole": "danger"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "single-person-household-ratio",
-        "nuclear-family-households-ratio"
-      ],
-      "sourceName": "総務省「国勢調査」",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 140
+      "relatedThemeKeys": [
+        "real-income"
+      ]
     }
-  ],
-  evidenceTopics: [
-    {
-      key: "housing-stock-and-aging",
-      lensKey: "sustainability",
-      title: "高齢期の住まいと空き家ストック",
-      question:
-        "持ち家率と空き家率には、高齢化に伴う住まいの継承・利用の地域差がどう表れるか",
-      summary:
-        "白書は65歳以上の持ち家と使用目的のない空き家を扱います。ランキングは全世帯の持ち家率と、賃貸・売却用や二次的住宅も含む空き家率であり、対象を同一視しません。",
-      sourceKeys: [
-        "cao-aging-whitepaper-2025-housing",
-        "stat-housing-land-survey-2023",
-      ],
-      relatedRankingKeys: [
-        "owner-occupied-housing-ratio",
-        "vacant-housing-ratio",
-      ],
-      relatedChartKeys: ["vacancy-ownership-rate-trend"],
-      relatedThemeKeys: ["aging-society"],
-    },
-    {
-      key: "tenure-space-gap",
-      lensKey: "equity",
-      title: "持ち家・借家の居住空間",
-      question:
-        "持ち家と借家の1住宅当たり延べ面積には、どのような地域差があるか",
-      summary:
-        "延べ面積は住宅内の広さを示す平均値です。住宅価格や家賃、世帯人員、建物の品質は示さないため、取得・居住の負担とは分けて読みます。",
-      sourceKeys: ["stat-housing-land-survey-2023"],
-      relatedRankingKeys: [
-        "floor-area-per-dwelling-owner",
-        "floor-area-per-dwelling-rented",
-      ],
-      relatedChartKeys: ["lh-dwelling-floor-area-trend"],
-      relatedThemeKeys: ["real-income"],
-    },
   ],
   "keywords": [
     "空き家",
@@ -415,5 +344,34 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
     "未婚率",
     "都道府県",
     "ランキング"
-  ]
+  ],
+  "overview": {
+    "introduction": "住宅の利用状況・広さと、世帯構成を比較。",
+    "headlineRankingKeys": [
+      "vacant-housing-ratio",
+      "owner-occupied-housing-ratio",
+      "floor-area-per-dwelling-owner",
+      "floor-area-per-dwelling-rented"
+    ],
+    "comparisonRankingKeys": [
+      "vacant-housing-ratio",
+      "owner-occupied-housing-ratio",
+      "floor-area-per-dwelling-owner",
+      "floor-area-per-dwelling-rented",
+      "single-person-household-ratio",
+      "nuclear-family-households-ratio",
+      "elderly-couple-only-household-ratio",
+      "single-person-household-old-population-ratio"
+    ],
+    "mapNotes": {
+      "vacant-housing-ratio": "賃貸用・売却用・二次的住宅を含む空き家全体の割合です。管理不全の空き家だけの割合ではありません。",
+      "owner-occupied-housing-ratio": "高齢者世帯に限定しない持ち家率です。高いことがそのまま住宅取得のしやすさを意味するわけではありません。",
+      "floor-area-per-dwelling-owner": "持ち家1住宅当たりの延べ面積です。1人当たりの広さや住宅価格ではありません。",
+      "floor-area-per-dwelling-rented": "借家1住宅当たりの延べ面積です。家賃や住居費の負担、建物の品質は示しません。",
+      "single-person-household-ratio": "一般世帯に占める1人世帯の割合です。人口に占める1人暮らしの割合ではありません。",
+      "nuclear-family-households-ratio": "夫婦のみ・夫婦と子・ひとり親と子の世帯を含みます。単独世帯との2区分だけで全世帯にはなりません。",
+      "elderly-couple-only-household-ratio": "夫65歳以上・妻60歳以上の夫婦のみの世帯が、一般世帯に占める割合です。白書の「65歳以上の世帯員がいる世帯」と対象が異なります。",
+      "single-person-household-old-population-ratio": "一般世帯に占める65歳以上の1人世帯の割合です。65歳以上の人口を分母にした割合ではありません。"
+    }
+  }
 };

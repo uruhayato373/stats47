@@ -8,6 +8,30 @@ import {
 } from '../geo-source-properties';
 
 describe('GIS reading guides and property units', () => {
+  it('never presents unpublished or other-route station counts as zero passengers', () => {
+    const field = GEO_SOURCE_PAGES.find((p) => p.dataId === 'S12')!.fields.find(
+      (candidate) => candidate.key === 'S12_061'
+    )!;
+    expect(
+      formatGeoSourceProperty(field, { S12_061: 0, S12_059: 3, S12_058: 1 })
+    ).toContain('非公開');
+    expect(
+      formatGeoSourceProperty(field, { S12_061: 0, S12_059: 1, S12_058: 2 })
+    ).toContain('この路線駅に記載なし');
+    expect(
+      formatGeoSourceProperty(field, { S12_061: 0, S12_059: 1, S12_058: 1 })
+    ).toBe('0 人/日');
+    expect(
+      formatGeoSourceProperty(field, {
+        S12_061: 726,
+        S12_059: '1',
+        S12_058: '1',
+      })
+    ).toBe('726 人/日');
+    expect(formatGeoSourceProperty(field, { S12_061: 0 })).not.toContain(
+      '0 人'
+    );
+  });
   it('shows the schema of the selected medical area without inventing absent fields', () => {
     const fields = GEO_SOURCE_PAGES.find((p) => p.dataId === 'A38')!.fields;
     const properties = { A38c_001: '北海道', A38c_002: null };

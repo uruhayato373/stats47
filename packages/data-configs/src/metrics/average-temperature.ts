@@ -19,7 +19,7 @@ export const averageTemperature: MetricConfig = {
     "from": 2024,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateOranges",
     "colorSchemeType": "sequential",

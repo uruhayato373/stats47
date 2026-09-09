@@ -1,6 +1,35 @@
 import type { ThemeCatalog } from "./types";
 
 export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "転職・離職は就業構造基本調査、求人倍率はハローワークの一般求人が対象。",
+    "headlineRankingKeys": [
+      "job-change-rate",
+      "turnover-rate",
+      "active-job-opening-ratio",
+      "telework-rate"
+    ],
+    "comparisonRankingKeys": [
+      "job-change-rate",
+      "turnover-rate",
+      "active-job-opening-ratio",
+      "telework-rate",
+      "employment-mobility-rate",
+      "unemployment-rate",
+      "employment-rate",
+      "side-job-rate"
+    ],
+    "mapNotes": {
+      "job-change-rate": "1年前と勤め先が異なる有業者の割合。離職率とは分母が異なります。",
+      "turnover-rate": "1年前は働き現在は無業の人の割合。雇用動向調査の離職率とは別です。",
+      "active-job-opening-ratio": "ハローワークの一般求人・求職が対象。新規学卒とパートを除きます。",
+      "telework-rate": "有業者に占める実施者の割合。企業の導入率ではありません。",
+      "employment-mobility-rate": "転職・離職・新規就業の合計を15歳以上人口で割った割合。",
+      "unemployment-rate": "国勢調査の労働力人口が分母。年次の労働力調査とは別です。",
+      "employment-rate": "就業者の割合。転職率・離職率とは対象と分母が異なります。",
+      "side-job-rate": "有業者の副業実施割合。副業希望者の割合ではありません。"
+    }
+  },
   "key": "labor-mobility",
   "title": "人材流動性・雇用環境",
   "description": "都道府県別の離職率・転職率・有効求人倍率・テレワーク率から雇用の流動性を比較。47都道府県の労働市場タイプを可視化します。",
@@ -10,37 +39,79 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "turnover-rate",
       "shortLabel": "離職率",
-      "role": "primary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和4年就業構造基本調査",
+        "sourceUrl": "https://www.stat.go.jp/data/shugyou/2022/index2.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "転職と就業から無業への移行を区別するため採用。雇用動向調査の率との同一視を防ぐ。"
+      }
     },
     {
       "rankingKey": "job-change-rate",
       "shortLabel": "転職率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和4年就業構造基本調査",
+        "sourceUrl": "https://www.stat.go.jp/data/shugyou/2022/index2.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "人材の移動を直接示すため先頭KPIに採用。現在の有業者を分母とする。"
+      }
     },
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "社会人口統計体系の指標計算式",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/F",
+        "surveyedAt": "2026-09-09",
+        "rationale": "流動性の背景となる求人・求職の需給を補う。一般求人の範囲を明示する。"
+      }
     },
     {
       "rankingKey": "unemployment-rate",
       "shortLabel": "失業率",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会人口統計体系の指標計算式",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/F",
+        "surveyedAt": "2026-09-09",
+        "rationale": "流動性が高いことを雇用改善と短絡しないため、失業状態を比較表で補う。"
+      }
     },
     {
       "rankingKey": "employment-rate",
       "shortLabel": "就業率",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版労働経済白書",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/web_magazine/closeup/36.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "労働参加の広がりを比較表に残し、求人や移動だけでは分からない供給基盤を示す。"
+      }
     },
     {
       "rankingKey": "telework-rate",
       "shortLabel": "テレワーク率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和4年就業構造基本調査",
+        "sourceUrl": "https://www.stat.go.jp/data/shugyou/2022/index2.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "働く場所の柔軟性を補う。実施可能な職種の構成にも左右される。"
+      }
     },
     {
       "rankingKey": "side-job-rate",
       "shortLabel": "副業率",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和4年就業構造基本調査",
+        "sourceUrl": "https://www.stat.go.jp/data/shugyou/2022/index2.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "テレワークと異なる働き方の選択肢として比較表に残す。"
+      }
     },
     {
       "rankingKey": "monthly-average-actual-working-hours-male",
@@ -50,45 +121,16 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "employment-mobility-rate",
       "shortLabel": "就業異動率",
-      "role": "context"
-    },
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会人口統計体系の指標計算式",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/F",
+        "surveyedAt": "2026-09-09",
+        "rationale": "就業への出入り全体を長期推移で確認する。離職・転職率とは別の分母。"
+      }
+    }
   ],
   "charts": [
-    {
-      "componentKey": "labor-mobility-turnover-vs-jobchange",
-      "componentType": "line-chart",
-      "title": "離職率と転職率の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "turnover-rate"
-          },
-          {
-            "metricKey": "job-change-rate"
-          }
-        ],
-        "labels": [
-          "離職率",
-          "転職率"
-        ],
-        "seriesColors": [
-          "danger",
-          "improve"
-        ]
-      },
-      "relatedRankingKeys": [
-        "turnover-rate",
-        "job-change-rate"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "流動性",
-      "sortOrder": 0
-    },
     {
       "componentKey": "md-labor-mobility-discussion",
       "componentType": "markdown-section",
@@ -227,39 +269,48 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "dataSource": "ranking",
       "section": null,
       "sortOrder": 40
-    },
-],
+    }
+  ],
   evidenceTopics: [
     {
-      key: "job-separation-and-change",
-      lensKey: "mobility",
-      title: "離職・転職・就業異動の違い",
-      question: "離職、転職、新規就業を分けると、地域の就業異動はどう見えるか。",
-      summary:
-        "2022年就業構造基本調査の1年前との状態変化を読む。離職率は継続就業者・転職者・離職者の合計、転職率は現在の有業者、就業異動率は15歳以上人口が分母で互いに異なるため、率の大小をそのまま差し引かない。",
-      sourceKeys: ["stat-employment-status-survey-2022"],
-      relatedRankingKeys: [
+      "key": "job-separation-and-change",
+      "lensKey": "mobility",
+      "title": "離職・転職・就業異動の違い",
+      "question": "離職、転職、新規就業を分けると、地域の就業異動はどう見えるか。",
+      "summary": "2022年就業構造基本調査の1年前との状態変化を読む。離職率は継続就業者・転職者・離職者の合計、転職率は現在の有業者、就業異動率は15歳以上人口が分母で互いに異なるため、率の大小をそのまま差し引かない。",
+      "sourceKeys": [
+        "stat-employment-status-survey-2022"
+      ],
+      "relatedRankingKeys": [
         "turnover-rate",
         "job-change-rate",
-        "employment-mobility-rate",
+        "employment-mobility-rate"
       ],
-      relatedChartKeys: [
-        "labor-mobility-turnover-vs-jobchange",
-        "theme-lm-employment-mobility-trend",
+      "relatedChartKeys": [
+        "theme-lm-employment-mobility-trend"
       ],
-      relatedThemeKeys: ["labor-wages", "local-economy"],
+      "relatedThemeKeys": [
+        "labor-wages",
+        "local-economy"
+      ]
     },
     {
-      key: "telework-participation",
-      lensKey: "participation",
-      title: "テレワーク実施の地域差",
-      question: "有業者のうちテレワークを実施した人の割合には、どのような地域差があるか。",
-      summary:
-        "2022年の有業者を分母に、テレワークを実施した人の割合を比べる単年の構造調査である。産業・職業構成の違いを含むため、地域差を通信環境や制度の効果だけで説明せず、時系列変化とも解釈しない。",
-      sourceKeys: ["stat-employment-status-survey-2022"],
-      relatedRankingKeys: ["telework-rate"],
-      relatedThemeKeys: ["labor-wages", "local-economy"],
-    },
+      "key": "telework-participation",
+      "lensKey": "participation",
+      "title": "テレワーク実施の地域差",
+      "question": "有業者のうちテレワークを実施した人の割合には、どのような地域差があるか。",
+      "summary": "2022年の有業者を分母に、テレワークを実施した人の割合を比べる単年の構造調査である。産業・職業構成の違いを含むため、地域差を通信環境や制度の効果だけで説明せず、時系列変化とも解釈しない。",
+      "sourceKeys": [
+        "stat-employment-status-survey-2022"
+      ],
+      "relatedRankingKeys": [
+        "telework-rate"
+      ],
+      "relatedThemeKeys": [
+        "labor-wages",
+        "local-economy"
+      ]
+    }
   ],
   "keywords": [
     "離職率",

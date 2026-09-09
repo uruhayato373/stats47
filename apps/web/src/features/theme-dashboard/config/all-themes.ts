@@ -68,8 +68,7 @@ const EMBEDDED_SECTIONS: Record<string, string[]> = {
   healthcare: ['depopulation-medical'],
   'aging-society': ['depopulation-medical'],
   climate: ['sunshine-map'],
-  // ※ local-finance は専用 bespoke ページ (LocalFinanceDashboard) が財政フロー Sankey を
-  //   自前で持つため、汎用 embeddedSections には登録しない。
+  // local-finance の財政フローは共通レイアウトの詳細欄で表示する。
 };
 
 /**

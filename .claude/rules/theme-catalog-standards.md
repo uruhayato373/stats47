@@ -39,7 +39,7 @@ ThemeCatalog (SSOT, git TS)
         └─▶ R2 app/page-components/theme/<key>.json → 本番テーマページが読む (完全DBレス)
 ```
 
-- `THEME_CATALOGS` には現在 20 テーマを登録済み。登録テーマの生成物を直接編集しない。
+- 公開テーマはすべて `THEME_CATALOGS` に登録し、`overview` に主要指標・比較指標・地図の注意を定義する。登録漏れは `validate:catalog` が検知する。生成物を直接編集しない。
 - bespoke / 未登録 route をカタログ化する場合は catalog TS 作成と registry 登録を同じ変更で行い、golden diff を確認する。
 
 ---
@@ -120,10 +120,9 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
 | `secondary` | primary を補完する関連データ                                               | 3〜8     | 別の切り口・相関がある                 |
 | `context`   | 背景情報。指標カードには出さず「全指標」セクションとランキングページで閲覧 | 制限なし | マニアックだが調べたい人に価値         |
 
-> **role≠context = ページ上部の指標カード (ChartCard) 1 枚**。旧「指標タブ (1 指標 1 タブ)」の
-> UI は廃止済みで、`tabIndicators` という名前だけが変換関数 (`to-theme-config.ts`) に残っている。
-> **枚数は下のチャートとの重複を避けて絞る** — 同じ事実をカードとチャートで二度見せない
-> (2026-08-04 に population-dynamics を 10 → 4 に削減した際の判断基準)。
+> 公開テーマの上部は `overview.headlineRankingKeys`（最大4件）、地図と比較表は
+> `overview.comparisonRankingKeys` が配置を決める。role は指標の優先度を表し、カード数とは別。
+> `overview` のない旧UIだけが `metricGroups` と `tabIndicators` を使う。
 
 ### 指標名の 3 系統 (`shortLabel` / `readerLabel` / 正準 `title`) — 統合しない
 
@@ -160,7 +159,7 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
 
 ## 4.5 指標カードの編成 (`metricGroups`) — 2026-08-06 新設
 
-テーマページ上部の「主要指標」は **1 グループ = 1 カード**で描く。カード内は値付きタイルの
+`overview` がない旧UIの「主要指標」は **1 グループ = 1 カード**で描く。カード内は値付きタイルの
 横スクロール列で、**タイルのチェックで折れ線に系列が重なる** (GA4 のスコアカードと GSC の
 チェックボックス折れ線の良いとこ取り)。1 ページに複数カードが縦に並ぶ。
 
@@ -185,7 +184,8 @@ metricGroups: [
   逆相関は 2 軸で重ねて初めて関係が読める。
 - **`defaultCheckedKeys` は 3 件以内**が目安 (4 件以上は warn)。mount 時にその数だけ
   時系列を取りに行くので、初期表示のコストに直結する。**そのカードで最初に見せたい対比**を選ぶ。
-- **全ての非 context 指標をどれかのグループに入れる** (未所属は `[group-orphan]` warn)。
+- **非 context 指標はグループまたは概況の比較表で読めるようにする**。両方に未所属なら
+  `[group-orphan]` warn。概況があっても、定義済みグループのキー・単位・初期選択は検査する。
 
 ### 実行時の振る舞い (UI 側の約束)
 
@@ -322,9 +322,9 @@ evidenceTopics: [
 > `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/年度セレクタ) を隠すだけ。
 > **page-components チャート・考察 (markdown)・埋め込み section は hideMap に関係なく描画する**
 > (2026-07-04 に `cardsOnly` の付与をやめ完全ダッシュボード化。prop 自体は残存するので付けない)。
-> カタログ無しテーマ (climate / local-finance) は
-> IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
-> (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
+> 概況の地図は `hideMap` と独立し、クライアント側で軽量な県境を読む。
+> climate もカタログから生成する。local-finance は共通 `ThemePageLayout` の詳細欄に
+> 決算カードを置き、`ThemePrefectureContext` と地域選択を共有する。
 
 ---
 

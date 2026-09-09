@@ -12,43 +12,43 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "library-count-per-million",
-      "shortLabel": "図書館",
+      "shortLabel": "図書館（100万人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "elementary-school-count-per-100km2-habitable",
-      "shortLabel": "小学校",
-      "role": "secondary"
+      "shortLabel": "小学校（可住地100km²当たり）",
+      "role": "primary"
     },
     {
       "rankingKey": "junior-high-school-count-per-100km2-habitable",
-      "shortLabel": "中学校",
+      "shortLabel": "中学校（可住地100km²当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "high-school-count-per-100km2-habitable",
-      "shortLabel": "高等学校",
+      "shortLabel": "高校（可住地100km²当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "public-hall-count-per-million",
-      "shortLabel": "公民館",
-      "role": "secondary"
+      "shortLabel": "公民館（100万人当たり）",
+      "role": "primary"
     },
     {
       "rankingKey": "final-education-university-graduate-school-ratio",
-      "shortLabel": "大学・大学院卒",
-      "role": "context"
+      "shortLabel": "大学・大学院卒割合",
+      "role": "secondary"
     },
     {
       "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
-      "shortLabel": "県内大学進学率",
-      "role": "context"
+      "shortLabel": "県内大学入学者割合",
+      "role": "primary"
     },
     {
       "rankingKey": "university-count",
       "shortLabel": "大学数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "elementary-school-count",

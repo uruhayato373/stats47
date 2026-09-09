@@ -4,6 +4,22 @@ import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
 import { LIVING_HOUSING_CATALOG } from "../theme-catalog/living-housing";
 
 describe("living-housing evidence topics", () => {
+  it("住宅の概況4指標と同年の地域比較を定義し、単年の世帯割合を折れ線にしない", () => {
+    const overview = LIVING_HOUSING_CATALOG.overview;
+    expect(overview?.headlineRankingKeys).toHaveLength(4);
+    const metricKeys = new Set(LIVING_HOUSING_CATALOG.metrics.map((metric) => metric.rankingKey));
+    for (const key of overview?.comparisonRankingKeys ?? []) {
+      expect(metricKeys.has(key)).toBe(true);
+      expect(overview?.mapNotes[key]).toBeTruthy();
+    }
+    for (const key of overview?.headlineRankingKeys ?? []) {
+      expect(overview?.comparisonRankingKeys).toContain(key);
+    }
+    const lines = LIVING_HOUSING_CATALOG.charts.filter((chart) => chart.componentType === 'line-chart');
+    expect(lines).toHaveLength(4);
+    expect(lines.flatMap((chart) => chart.relatedRankingKeys)).not.toContain('single-person-household-ratio');
+    expect(overview?.comparisonRankingKeys).toContain('single-person-household-ratio');
+  });
   it("住宅ストックと居住空間を別の論点として扱う", () => {
     expect(
       LIVING_HOUSING_CATALOG.evidenceTopics?.map(({ key, lensKey }) => ({

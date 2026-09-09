@@ -13,22 +13,22 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     {
       "rankingKey": "total-population",
       "shortLabel": "総人口",
-      "role": "context"
+      "role": "primary"
     },
     {
       "rankingKey": "total-fertility-rate",
       "shortLabel": "合計特殊出生率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "moving-in-excess-rate",
       "shortLabel": "転入超過率",
-      "role": "context"
+      "role": "primary"
     },
     {
       "rankingKey": "ratio-65-plus",
-      "shortLabel": "高齢化率",
-      "role": "context"
+      "shortLabel": "65歳以上割合",
+      "role": "secondary"
     },
     {
       "rankingKey": "population-growth-rate",
@@ -38,7 +38,7 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     {
       "rankingKey": "natural-increase-rate",
       "shortLabel": "自然増減率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "crude-birth-rate",
@@ -57,8 +57,8 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "young-population-ratio",
-      "shortLabel": "年少人口割合",
-      "role": "context"
+      "shortLabel": "15歳未満割合",
+      "role": "secondary"
     },
     {
       "rankingKey": "population-density-per-km2-inhabitable-area",

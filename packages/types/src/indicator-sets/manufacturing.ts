@@ -18,7 +18,7 @@ export const MANUFACTURING_SET: IndicatorSet = {
     {
       "rankingKey": "manufacturing-industry-added-value",
       "shortLabel": "付加価値額",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "manufacturing-establishments",
@@ -28,7 +28,7 @@ export const MANUFACTURING_SET: IndicatorSet = {
     {
       "rankingKey": "manufacturing-employees",
       "shortLabel": "従業者数",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "manufacturing-establishment-site-area",
@@ -38,12 +38,12 @@ export const MANUFACTURING_SET: IndicatorSet = {
     {
       "rankingKey": "manufacturing-shipment-amount-per-employee",
       "shortLabel": "出荷額/人",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "manufacturing-shipment-amount-per-establishment",
       "shortLabel": "出荷額/所",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "industrial-land-price-change-rate",

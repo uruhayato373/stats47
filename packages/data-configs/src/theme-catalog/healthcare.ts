@@ -1,6 +1,33 @@
 import type { ThemeCatalog } from "./types";
 
 export const HEALTHCARE_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "医療を支える人・病床と、利用・費用を比較。",
+    "headlineRankingKeys": [
+      "physicians-in-medical-facilities-per-100k",
+      "nurses-in-medical-facilities-per-100k",
+      "general-hospital-bed-count-per-100k",
+      "national-medical-expense-per-person"
+    ],
+    "comparisonRankingKeys": [
+      "physicians-in-medical-facilities-per-100k",
+      "nurses-in-medical-facilities-per-100k",
+      "general-hospital-bed-count-per-100k",
+      "national-medical-expense-per-person",
+      "general-hospital-count-per-100k",
+      "general-hospital-avg-length-of-stay",
+      "general-hospital-bed-occupancy-rate"
+    ],
+    "mapNotes": {
+      "physicians-in-medical-facilities-per-100k": "人口10万人当たりの施設従事医師。診療科や受診距離は示しません。",
+      "nurses-in-medical-facilities-per-100k": "人口10万人当たりの看護師・准看護師。医療施設の従事者が対象。",
+      "general-hospital-bed-count-per-100k": "一般病院の病床数（人口10万人当たり）。一般病床だけの数ではありません。",
+      "national-medical-expense-per-person": "住民1人当たりの国民医療費。自己負担額ではありません。",
+      "general-hospital-count-per-100k": "人口10万人当たりの一般病院数。病床規模や通院のしやすさは別です。",
+      "general-hospital-avg-length-of-stay": "一般病院の平均在院日数。患者や病床機能の構成で変わります。",
+      "general-hospital-bed-occupancy-rate": "一般病院の病床利用率。地域全体の救急受入余力とは別です。"
+    }
+  },
   "key": "healthcare",
   "title": "医療・健康",
   "description": "都道府県別の医師数・病院数・病床数・国民医療費をランキングとチャートで比較。医療体制の地域差を47都道府県のデータで確認できます。",
@@ -9,23 +36,47 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
   "metrics": [
     {
       "rankingKey": "physicians-in-medical-facilities-per-100k",
-      "shortLabel": "医師数",
-      "role": "primary"
+      "shortLabel": "医師（10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省 医師確保対策",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kinkyu/index.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "医師確保の地域差を人口規模で標準化して概況・地図に示す。医師偏在指標や医療の質そのものと同一視しない。"
+      }
     },
     {
       "rankingKey": "nurses-in-medical-facilities-per-100k",
-      "shortLabel": "看護師数",
-      "role": "secondary"
+      "shortLabel": "看護師・准看護師（10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "医療施設調査・社会人口統計体系",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/79-1.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "医師以外の主要な医療人員を表示する。准看護師を含むため見出しも看護師・准看護師とする。"
+      }
     },
     {
       "rankingKey": "general-hospital-count-per-100k",
-      "shortLabel": "病院数",
-      "role": "secondary"
+      "shortLabel": "一般病院（10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年医療施設調査・病院報告",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/",
+        "surveyedAt": "2026-09-09",
+        "rationale": "医師・病床とともに供給の配置を補助比較する。実数の施設規模は主指標と分けて読む。"
+      }
     },
     {
       "rankingKey": "general-hospital-bed-count-per-100k",
-      "shortLabel": "病床数",
-      "role": "context"
+      "shortLabel": "一般病院病床（10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和6年医療施設調査・病院報告",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/",
+        "surveyedAt": "2026-09-09",
+        "rationale": "施設件数より受入規模が伝わる病床数を主要カードに採用。一般病院と病床種類の一般病床を区別する。"
+      }
     },
     {
       "rankingKey": "pharmacy-count-per-100k",
@@ -34,23 +85,41 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "national-medical-expense-per-person",
-      "shortLabel": "医療費",
-      "role": "secondary"
+      "shortLabel": "1人当たり国民医療費",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省 国民医療費",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/37-21.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "資源量と対比する費用指標。年齢構成や入院・外来の違いも影響するため高額を質の悪さと評価しない。"
+      }
     },
     {
       "rankingKey": "general-hospital-avg-length-of-stay",
-      "shortLabel": "平均在院日数",
-      "role": "context"
+      "shortLabel": "一般病院の平均在院日数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年医療施設調査・病院報告",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/",
+        "surveyedAt": "2026-09-09",
+        "rationale": "費用だけでなく利用形態を比較表で補う。短いことだけを治療成果と判定しない。"
+      }
     },
     {
       "rankingKey": "general-hospital-bed-occupancy-rate",
-      "shortLabel": "病床利用率",
-      "role": "context"
+      "shortLabel": "一般病院の病床利用率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年医療施設調査・病院報告",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/",
+        "surveyedAt": "2026-09-09",
+        "rationale": "供給された病床がどう使われているかを在院日数とともに表で読む。"
+      }
     },
     {
       "rankingKey": "deaths-lifestyle-diseases-per-100k",
       "shortLabel": "生活習慣病死亡",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "deaths-diabetes-per-100k",
@@ -92,14 +161,16 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-health-supply-trend",
       "componentType": "line-chart",
-      "title": "医師数と病院数の推移（人口10万人当たり）",
+      "title": "医師と一般病院の推移",
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "physicians-in-medical-facilities-per-100k"
+            "metricKey": "physicians-in-medical-facilities-per-100k",
+            "label": "医師（10万人当たり）"
           },
           {
-            "metricKey": "general-hospital-count-per-100k"
+            "metricKey": "general-hospital-count-per-100k",
+            "label": "一般病院（10万人当たり）"
           }
         ],
         "labels": [
@@ -122,36 +193,8 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "医療供給",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-health-expense-trend",
-      "componentType": "line-chart",
-      "title": "1人当たり医療費の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "national-medical-expense-per-person"
-          }
-        ],
-        "labels": [
-          "1人当たり医療費"
-        ],
-        "seriesColors": [
-          "danger"
-        ]
-      },
-      "relatedRankingKeys": [
-        "national-medical-expense-per-person"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "医療利用",
-      "sortOrder": 0
+      "sortOrder": 0,
+      "annotation": "どちらも人口10万人当たり。人数と施設数は異なる軸で表示し、高さを直接比較しません。"
     },
     {
       "componentKey": "md-healthcare-discussion",
@@ -266,122 +309,43 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "dataSource": "ranking",
       "section": "考察",
       "sortOrder": 30
-    },
-    {
-      "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart",
-      "title": "主要死因別の死亡率内訳（人口10万人当たり・2023年）",
-      "componentProps": {
-        "topN": 5,
-        "seriesRefs": [
-          {
-            "metricKey": "deaths-malignant-neoplasms-per-100k",
-            "label": "悪性新生物死亡",
-            "colorRole": "danger"
-          },
-          {
-            "metricKey": "deaths-heart-disease-excl-hypertensive-per-100k",
-            "label": "心疾患死亡",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "deaths-cerebrovascular-disease-per-100k",
-            "label": "脳血管疾患死亡",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "deaths-diabetes-per-100k",
-            "label": "糖尿病死亡",
-            "colorRole": "improve"
-          },
-          {
-            "metricKey": "deaths-hypertensive-diseases-per-100k",
-            "label": "高血圧性疾患死亡",
-            "colorRole": "special"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "deaths-malignant-neoplasms-per-100k",
-        "deaths-heart-disease-excl-hypertensive-per-100k",
-        "deaths-cerebrovascular-disease-per-100k",
-        "deaths-diabetes-per-100k",
-        "deaths-hypertensive-diseases-per-100k"
-      ],
-      "sourceName": "総務省統計局 社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 40
-    },
-    {
-      "componentKey": "theme-health-diabetes-trend",
-      "componentType": "line-chart",
-      "title": "糖尿病死亡率の全国推移（人口10万人当たり）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "deaths-diabetes-per-100k"
-          }
-        ],
-        "labels": [
-          "糖尿病死亡率"
-        ],
-        "seriesColors": [
-          "improve"
-        ]
-      },
-      "relatedRankingKeys": [
-        "deaths-diabetes-per-100k"
-      ],
-      "sourceName": "総務省統計局 社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 50
     }
   ],
   evidenceTopics: [
     {
-      key: "physician-distribution",
-      lensKey: "service-capacity",
-      title: "医師の地域偏在と医療供給",
-      question:
-        "人口10万人当たり医師数は、都道府県間の医療人材供給にどのような差を示すか",
-      summary:
-        "医師数を看護師数・病院数と分けて確認し、単一の人員指標だけで医療体制全体を判断しません。",
-      sourceKeys: ["mhlw-physician-workforce-plan"],
-      relatedRankingKeys: [
+      "key": "physician-distribution",
+      "lensKey": "service-capacity",
+      "title": "医師の地域偏在と医療供給",
+      "question": "人口10万人当たり医師数は、都道府県間の医療人材供給にどのような差を示すか",
+      "summary": "医師数を看護師数・病院数と分けて確認し、単一の人員指標だけで医療体制全体を判断しません。",
+      "sourceKeys": [
+        "mhlw-physician-workforce-plan"
+      ],
+      "relatedRankingKeys": [
         "physicians-in-medical-facilities-per-100k",
         "nurses-in-medical-facilities-per-100k",
-        "general-hospital-count-per-100k",
+        "general-hospital-count-per-100k"
       ],
-      relatedChartKeys: ["theme-health-supply-trend"],
+      "relatedChartKeys": [
+        "theme-health-supply-trend"
+      ]
     },
     {
-      key: "inpatient-capacity-and-use",
-      lensKey: "participation",
-      title: "病床の供給と利用",
-      question:
-        "病床数・病床利用率・平均在院日数は、入院医療の供給と利用をどう分けて示すか",
-      summary:
-        "病床数は供給規模、利用率は稼働状況、平均在院日数は利用期間として別々に読みます。",
-      sourceKeys: [
+      "key": "inpatient-capacity-and-use",
+      "lensKey": "participation",
+      "title": "病床の供給と利用",
+      "question": "病床数・病床利用率・平均在院日数は、入院医療の供給と利用をどう分けて示すか",
+      "summary": "病床数は供給規模、利用率は稼働状況、平均在院日数は利用期間として別々に読みます。",
+      "sourceKeys": [
         "mhlw-regional-healthcare-vision",
-        "mhlw-hospital-function-report-2025",
+        "mhlw-hospital-function-report-2025"
       ],
-      relatedRankingKeys: [
+      "relatedRankingKeys": [
         "general-hospital-bed-count-per-100k",
         "general-hospital-bed-occupancy-rate",
-        "general-hospital-avg-length-of-stay",
-      ],
-    },
+        "general-hospital-avg-length-of-stay"
+      ]
+    }
   ],
   "keywords": [
     "医師数",

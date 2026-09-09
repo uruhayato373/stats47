@@ -299,6 +299,7 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
   }],
   ["C28", {
     dataId: "C28",
+    shapefileEncoding: "shift-jis",
     downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/C28/C28-{VERSION}/C28-{VERSION}_GML.zip",
     geojsonDirInZip: "",
     propertyMap: {},

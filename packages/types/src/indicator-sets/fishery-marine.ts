@@ -18,12 +18,12 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "marine-fishery-catch",
       "shortLabel": "海面漁獲量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "inland-fishery-catch",
       "shortLabel": "内水面漁獲量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishing-port-count-ksj",
@@ -33,21 +33,21 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "aquaculture-harvest",
       "shortLabel": "養殖収獲量",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "marine-aquaculture-harvest",
       "shortLabel": "海面養殖",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "inland-aquaculture-harvest",
       "shortLabel": "内水面養殖",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "marine-fishery-aquaculture-output-value",
-      "shortLabel": "産出額（新）",
+      "shortLabel": "海面漁業・養殖産出額",
       "role": "primary"
     },
     {
@@ -62,7 +62,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     },
     {
       "rankingKey": "fishery-workers",
-      "shortLabel": "漁業就業者",
+      "shortLabel": "海面漁業の就業者数",
       "role": "primary"
     },
     {

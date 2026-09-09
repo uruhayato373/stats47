@@ -12,23 +12,23 @@ export const HEALTHCARE_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "physicians-in-medical-facilities-per-100k",
-      "shortLabel": "医師数",
+      "shortLabel": "医師（10万人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "nurses-in-medical-facilities-per-100k",
-      "shortLabel": "看護師数",
-      "role": "secondary"
+      "shortLabel": "看護師・准看護師（10万人当たり）",
+      "role": "primary"
     },
     {
       "rankingKey": "general-hospital-count-per-100k",
-      "shortLabel": "病院数",
+      "shortLabel": "一般病院（10万人当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "general-hospital-bed-count-per-100k",
-      "shortLabel": "病床数",
-      "role": "context"
+      "shortLabel": "一般病院病床（10万人当たり）",
+      "role": "primary"
     },
     {
       "rankingKey": "pharmacy-count-per-100k",
@@ -37,23 +37,23 @@ export const HEALTHCARE_SET: IndicatorSet = {
     },
     {
       "rankingKey": "national-medical-expense-per-person",
-      "shortLabel": "医療費",
-      "role": "secondary"
+      "shortLabel": "1人当たり国民医療費",
+      "role": "primary"
     },
     {
       "rankingKey": "general-hospital-avg-length-of-stay",
-      "shortLabel": "平均在院日数",
-      "role": "context"
+      "shortLabel": "一般病院の平均在院日数",
+      "role": "secondary"
     },
     {
       "rankingKey": "general-hospital-bed-occupancy-rate",
-      "shortLabel": "病床利用率",
-      "role": "context"
+      "shortLabel": "一般病院の病床利用率",
+      "role": "secondary"
     },
     {
       "rankingKey": "deaths-lifestyle-diseases-per-100k",
       "shortLabel": "生活習慣病死亡",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "deaths-diabetes-per-100k",

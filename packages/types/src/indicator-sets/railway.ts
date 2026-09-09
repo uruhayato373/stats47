@@ -12,8 +12,8 @@ export const RAILWAY_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "railway-passengers",
-      "shortLabel": "鉄道駅乗降客数",
-      "role": "secondary"
+      "shortLabel": "駅の1日乗降客数",
+      "role": "primary"
     },
     {
       "rankingKey": "jr-passenger-transport",
@@ -23,17 +23,17 @@ export const RAILWAY_SET: IndicatorSet = {
     {
       "rankingKey": "private-railway-passenger-transport",
       "shortLabel": "民鉄輸送人員",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "railway-station-count",
       "shortLabel": "鉄道駅数",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "jr-freight-shipment",
       "shortLabel": "JR貨物発送量",
-      "role": "context"
+      "role": "secondary"
     }
   ],
   "keywords": [

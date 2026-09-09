@@ -1,6 +1,30 @@
 import type { ThemeCatalog } from "./types";
 
 export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "外国人人口の規模・分布と、国籍別の違いを比較。",
+    "headlineRankingKeys": [
+      "foreign-resident-count-per-100k",
+      "foreign-resident-count",
+      "resident-foreigner-population"
+    ],
+    "comparisonRankingKeys": [
+      "foreign-resident-count-per-100k",
+      "foreign-resident-count",
+      "resident-foreigner-population",
+      "foreign-resident-count-china-per-100k",
+      "foreign-resident-count-korea-per-100k",
+      "foreign-resident-count-usa-per-100k"
+    ],
+    "mapNotes": {
+      "foreign-resident-count-per-100k": "国勢調査の外国人人口（人口10万人当たり）。％ではありません。",
+      "foreign-resident-count": "国勢調査で日本国籍以外に分類された常住者。在留外国人統計とは対象・基準日が異なります。",
+      "resident-foreigner-population": "在留外国人統計の人数。国勢調査とは対象・基準日が異なります。",
+      "foreign-resident-count-china-per-100k": "総人口10万人当たりの中国籍人口。外国人の中での構成比ではありません。",
+      "foreign-resident-count-korea-per-100k": "総人口10万人当たりの韓国・朝鮮籍人口。全外国人人口内の比率ではありません。",
+      "foreign-resident-count-usa-per-100k": "総人口10万人当たりの米国籍人口。3国籍で全体にはなりません。"
+    }
+  },
   "key": "foreign-residents",
   "title": "外国人",
   "description": "都道府県別の在留外国人数・外国人比率・国籍別人口をランキングとチャートで比較。47都道府県の外国人統計を一覧で確認できます。",
@@ -9,23 +33,47 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
   "metrics": [
     {
       "rankingKey": "foreign-resident-count-per-100k",
-      "shortLabel": "外国人比率",
-      "role": "primary"
+      "shortLabel": "外国人人口（10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 人口等基本集計",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "人口規模をそろえた地域分布を最初に示す。比率という短い表示でも実単位は人/10万人を保持する。"
+      }
     },
     {
       "rankingKey": "foreign-resident-count",
-      "shortLabel": "外国人数",
-      "role": "secondary"
+      "shortLabel": "外国人人口（国勢調査）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 人口等基本集計",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住んでいる外国人人口の規模を人口当たり指標と並べ、大小と濃淡を読み分ける。"
+      }
     },
     {
       "rankingKey": "resident-foreigner-population",
-      "shortLabel": "在留外国人",
-      "role": "context"
+      "shortLabel": "在留外国人数",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "社会・人口統計体系（在留外国人統計）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "国勢調査より新しい収録年の行政統計を別指標として示す。国勢調査の人数と足し合わせたり同一時系列として接続しない。"
+      }
     },
     {
       "rankingKey": "foreign-resident-count-china-per-100k",
-      "shortLabel": "中国(比率)",
-      "role": "secondary"
+      "shortLabel": "中国籍（10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 人口等基本集計",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "国勢調査で比較可能な国籍別の地域分布を表で補う。国籍の全体構成を代表するとは扱わない。"
+      }
     },
     {
       "rankingKey": "foreign-resident-count-china",
@@ -34,8 +82,14 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "foreign-resident-count-korea-per-100k",
-      "shortLabel": "韓国(比率)",
-      "role": "secondary"
+      "shortLabel": "韓国・朝鮮籍（10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 人口等基本集計",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "中国籍と同じ分母で国籍別の違いを比較する。ラベルは韓国だけでなく韓国・朝鮮とする。"
+      }
     },
     {
       "rankingKey": "foreign-resident-count-korea",
@@ -44,8 +98,14 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "foreign-resident-count-usa-per-100k",
-      "shortLabel": "米国(比率)",
-      "role": "context"
+      "shortLabel": "米国籍（10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 人口等基本集計",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "既存収録の国籍別人口を比較表に補い、特定2国籍だけを全体構成と誤読しないようにする。"
+      }
     },
     {
       "rankingKey": "foreign-resident-count-usa",
@@ -55,56 +115,23 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "total-overnight-guests-foreign",
       "shortLabel": "外国人宿泊",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "charts": [
     {
-      "componentKey": "theme-foreign-total-trend",
-      "componentType": "line-chart",
-      "title": "外国人比率と外国人数の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "foreign-resident-count-per-100k"
-          },
-          {
-            "metricKey": "foreign-resident-count"
-          }
-        ],
-        "labels": [
-          "外国人比率(10万人当たり)",
-          "外国人数"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
-        ]
-      },
-      "relatedRankingKeys": [
-        "foreign-resident-count-per-100k",
-        "foreign-resident-count"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "総数",
-      "sortOrder": 0
-    },
-    {
       "componentKey": "theme-foreign-nationality-trend",
       "componentType": "line-chart",
-      "title": "国籍別外国人比率の推移（10万人当たり）",
+      "title": "中国籍・韓国朝鮮籍の人口推移",
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "foreign-resident-count-china-per-100k"
+            "metricKey": "foreign-resident-count-china-per-100k",
+            "label": "中国籍（10万人当たり）"
           },
           {
-            "metricKey": "foreign-resident-count-korea-per-100k"
+            "metricKey": "foreign-resident-count-korea-per-100k",
+            "label": "韓国・朝鮮籍（10万人当たり）"
           }
         ],
         "labels": [
@@ -127,9 +154,10 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "国籍別",
-      "sortOrder": 0
-    },
-],
+      "sortOrder": 0,
+      "annotation": "各県の総人口10万人当たり。2国籍は外国人人口全体の内訳を網羅していません。"
+    }
+  ],
   "evidenceTopics": [
     {
       "key": "foreign-population-scale-and-share",
@@ -144,9 +172,7 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
         "foreign-resident-count",
         "foreign-resident-count-per-100k"
       ],
-      "relatedChartKeys": [
-        "theme-foreign-total-trend"
-      ],
+      "relatedChartKeys": [],
       "relatedThemeKeys": [
         "population-dynamics"
       ]

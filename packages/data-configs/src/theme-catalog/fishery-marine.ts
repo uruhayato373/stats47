@@ -1,6 +1,35 @@
 import type { ThemeCatalog } from "./types";
 
 export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "生産量は海面・内水面、産出額と就業者は海面漁業が対象。",
+    "headlineRankingKeys": [
+      "fish-catch",
+      "aquaculture-harvest",
+      "marine-fishery-aquaculture-output-value",
+      "fishery-workers"
+    ],
+    "comparisonRankingKeys": [
+      "fish-catch",
+      "aquaculture-harvest",
+      "marine-fishery-aquaculture-output-value",
+      "fishery-workers",
+      "marine-fishery-catch",
+      "inland-fishery-catch",
+      "marine-aquaculture-harvest",
+      "inland-aquaculture-harvest"
+    ],
+    "mapNotes": {
+      "fish-catch": "海面・内水面の漁獲合計。養殖を含まず、内水面は調査対象範囲に注意。",
+      "aquaculture-harvest": "海面・内水面の養殖収獲量。天然の漁獲量とは分けて集計します。",
+      "marine-fishery-aquaculture-output-value": "海面漁業・養殖業の産出額。沿岸39都道府県が対象で内陸県は0ではありません。",
+      "fishery-workers": "15歳以上で海上作業に年30日以上従事した人。内水面の全就業者ではありません。",
+      "marine-fishery-catch": "海面漁業の漁獲量。海面養殖の収獲量は含みません。",
+      "inland-fishery-catch": "調査対象の河川・湖沼の漁獲量。対象範囲が時期により異なります。",
+      "marine-aquaculture-harvest": "海水で育成した水産物の収獲量。値がない県を0として扱いません。",
+      "inland-aquaculture-harvest": "淡水で育成した食用水産物の収獲量。種苗の販売量は含みません。"
+    }
+  },
   "key": "fishery-marine",
   "title": "漁業（水産業）",
   "description": "都道府県別の漁獲量・養殖収獲量・漁業就業者数・漁業産出額・漁港数をランキングとチャートで比較。北海道が全国漁獲量の約2割を占める一方、半世紀で就業者は7割減・漁獲量はほぼ半減。「捕る漁業」から「育てる漁業」へのシフトを47都道府県のデータで確認できます。",
@@ -10,17 +39,35 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "fish-catch",
       "shortLabel": "漁獲量",
-      "role": "primary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和7年度水産白書・漁業養殖業生産統計",
+        "sourceUrl": "https://www.jfa.maff.go.jp/j/kikaku/wpaper/R7/260605_1.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "供給構造を天然漁獲と養殖に分け、産出額や担い手の量と合わせて読む。"
+      }
     },
     {
       "rankingKey": "marine-fishery-catch",
       "shortLabel": "海面漁獲量",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会人口統計体系・漁業養殖業生産統計",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-09",
+        "rationale": "海面と内水面の生産構造を比較表で分ける。総漁獲量との重複加算を避ける。"
+      }
     },
     {
       "rankingKey": "inland-fishery-catch",
       "shortLabel": "内水面漁獲量",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会人口統計体系・漁業養殖業生産統計",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-09",
+        "rationale": "内陸県も含めた漁獲の地域差を補う。調査対象河川・湖沼の変化を注記する。"
+      }
     },
     {
       "rankingKey": "fishing-port-count-ksj",
@@ -30,22 +77,46 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "aquaculture-harvest",
       "shortLabel": "養殖収獲量",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和7年度水産白書 養殖業特集",
+        "sourceUrl": "https://www.jfa.maff.go.jp/j/kikaku/wpaper/R7/260605_1.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "白書が扱う養殖の供給基盤を概況KPIで確認する。魚種ごとの古い全国構成図より地域比較を優先。"
+      }
     },
     {
       "rankingKey": "marine-aquaculture-harvest",
       "shortLabel": "海面養殖",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会人口統計体系・漁業養殖業生産統計",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-09",
+        "rationale": "海水を使う養殖の規模を内水面と区別し、同単位で比較する。"
+      }
     },
     {
       "rankingKey": "inland-aquaculture-harvest",
       "shortLabel": "内水面養殖",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会人口統計体系・漁業養殖業生産統計",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-09",
+        "rationale": "内陸県の養殖の供給量を把握する。海面産出額の対象外を漁業活動ゼロと誤読させない。"
+      }
     },
     {
       "rankingKey": "marine-fishery-aquaculture-output-value",
-      "shortLabel": "産出額（新）",
-      "role": "primary"
+      "shortLabel": "海面漁業・養殖産出額",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "社会人口統計体系・漁業産出額",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-09",
+        "rationale": "重量だけで把握できない経済規模を補う。2017年以降の現行系列を使い、旧系列を接続しない。"
+      }
     },
     {
       "rankingKey": "marine-fishery-output-value",
@@ -59,8 +130,14 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "fishery-workers",
-      "shortLabel": "漁業就業者",
-      "role": "primary"
+      "shortLabel": "海面漁業の就業者数",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和7年度水産白書・漁業センサス",
+        "sourceUrl": "https://www.jfa.maff.go.jp/j/kikaku/wpaper/R7/260605_1.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "生産を支える担い手の規模を独立したKPIで示す。海上作業の従事条件を維持。"
+      }
     },
     {
       "rankingKey": "fishery-species-catch-scallop",
@@ -127,7 +204,7 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-fishery-catch-trend",
       "componentType": "line-chart",
-      "title": "漁獲量と海面漁業漁獲量の推移",
+      "title": "漁獲量の推移（合計・海面）",
       "componentProps": {
         "seriesRefs": [
           {
@@ -150,282 +227,46 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
         "fish-catch",
         "marine-fishery-catch"
       ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
+      "sourceName": "農林水産省 漁業・養殖業生産統計",
+      "sourceLink": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "漁獲",
-      "sortOrder": 0
+      "sortOrder": 0,
+      "annotation": "海面は合計の内数。内水面の調査対象範囲は時期により異なります。"
     },
     {
       "componentKey": "theme-fishery-aquaculture-mix",
-      "componentType": "mixed-chart",
-      "title": "海面・内水面養殖収獲量の推移",
+      "componentType": "line-chart",
+      "title": "養殖収獲量の推移（海面・内水面）",
       "componentProps": {
-        "columnSeriesRefs": [
+        "seriesRefs": [
           {
-            "metricKey": "marine-aquaculture-harvest"
-          }
-        ],
-        "lineSeriesRefs": [
+            "metricKey": "marine-aquaculture-harvest",
+            "label": "海面養殖",
+            "colorRole": "population"
+          },
           {
-            "metricKey": "inland-aquaculture-harvest"
+            "metricKey": "inland-aquaculture-harvest",
+            "label": "内水面養殖",
+            "colorRole": "count"
           }
-        ],
-        "columnLabels": [
-          "海面養殖収獲量"
-        ],
-        "lineLabels": [
-          "内水面養殖収獲量"
-        ],
-        "leftUnit": "トン",
-        "rightUnit": "トン",
-        "columnColors": [
-          "series-6"
-        ],
-        "lineColors": [
-          "improve"
         ]
       },
       "relatedRankingKeys": [
         "marine-aquaculture-harvest",
         "inland-aquaculture-harvest"
       ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
+      "sourceName": "農林水産省 漁業・養殖業生産統計",
+      "sourceLink": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "養殖",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-fishery-output-trend",
-      "componentType": "line-chart",
-      "title": "漁業産出額の推移（新シリーズと長期）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "marine-fishery-aquaculture-output-value"
-          },
-          {
-            "metricKey": "marine-fishery-output-value"
-          }
-        ],
-        "labels": [
-          "海面漁業・養殖業産出額（新）",
-          "海面漁業産出額（長期）"
-        ],
-        "seriesColors": [
-          "count",
-          "neutral"
-        ]
-      },
-      "relatedRankingKeys": [
-        "marine-fishery-aquaculture-output-value",
-        "marine-fishery-output-value"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "経済",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-fishery-half-century",
-      "componentType": "line-chart",
-      "title": "漁獲量と漁業就業者数の半世紀（1975-2023）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "fish-catch"
-          },
-          {
-            "metricKey": "fishery-workers"
-          }
-        ],
-        "labels": [
-          "漁獲量",
-          "漁業就業者数"
-        ],
-        "seriesColors": [
-          "population",
-          "special"
-        ]
-      },
-      "relatedRankingKeys": [
-        "fish-catch",
-        "fishery-workers"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "推移",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart",
-      "title": "魚種別漁獲量構成比（2015年・全国）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "fishery-species-catch-scallop",
-            "area": "national",
-            "label": "ホタテガイ",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "fishery-species-catch-japanese-squid",
-            "area": "national",
-            "label": "スルメイカ",
-            "colorRole": "series-6"
-          },
-          {
-            "metricKey": "fishery-species-catch-tuna",
-            "area": "national",
-            "label": "マグロ類",
-            "colorRole": "special"
-          },
-          {
-            "metricKey": "fishery-species-catch-bonito",
-            "area": "national",
-            "label": "カツオ",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "fishery-species-catch-mackerel",
-            "area": "national",
-            "label": "サバ類",
-            "colorRole": "danger"
-          },
-          {
-            "metricKey": "fishery-species-catch-pacific-saury",
-            "area": "national",
-            "label": "サンマ",
-            "colorRole": "improve"
-          },
-          {
-            "metricKey": "fishery-species-catch-yellowtail",
-            "area": "national",
-            "label": "ブリ類",
-            "colorRole": "series-11"
-          },
-          {
-            "metricKey": "fishery-species-catch-sardine",
-            "area": "national",
-            "label": "イワシ類",
-            "colorRole": "series-8"
-          },
-          {
-            "metricKey": "fishery-species-catch-pollock",
-            "area": "national",
-            "label": "スケトウダラ",
-            "colorRole": "series-10"
-          },
-          {
-            "metricKey": "fishery-species-catch-kelp",
-            "area": "national",
-            "label": "コンブ類",
-            "colorRole": "series-9"
-          },
-          {
-            "metricKey": "fishery-species-catch-snow-crab",
-            "area": "national",
-            "label": "ズワイガニ",
-            "colorRole": "series-12"
-          },
-          {
-            "metricKey": "fishery-species-catch-sea-bream",
-            "area": "national",
-            "label": "タイ類",
-            "colorRole": "female"
-          }
-        ],
-        "topN": 9
-      },
-      "relatedRankingKeys": [
-        "fishery-species-catch-scallop",
-        "fishery-species-catch-japanese-squid",
-        "fishery-species-catch-tuna",
-        "fishery-species-catch-bonito",
-        "fishery-species-catch-mackerel",
-        "fishery-species-catch-pacific-saury",
-        "fishery-species-catch-yellowtail",
-        "fishery-species-catch-sardine",
-        "fishery-species-catch-pollock",
-        "fishery-species-catch-kelp",
-        "fishery-species-catch-snow-crab",
-        "fishery-species-catch-sea-bream"
-      ],
-      "sourceName": "海面漁業生産統計調査",
-      "sourceLink": null,
-      "gridColumnSpan": 6,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "魚種別",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-fishery-species-trend",
-      "componentType": "line-chart",
-      "title": "主要魚種の長期推移（1956-2015年・全国）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "fishery-species-catch-sardine",
-            "area": "national"
-          },
-          {
-            "metricKey": "fishery-species-catch-pacific-saury",
-            "area": "national"
-          },
-          {
-            "metricKey": "fishery-species-catch-scallop",
-            "area": "national"
-          },
-          {
-            "metricKey": "fishery-species-catch-japanese-squid",
-            "area": "national"
-          }
-        ],
-        "labels": [
-          "イワシ類",
-          "サンマ",
-          "ホタテガイ",
-          "スルメイカ"
-        ],
-        "seriesColors": [
-          "series-8",
-          "improve",
-          "population",
-          "series-6"
-        ]
-      },
-      "relatedRankingKeys": [
-        "fishery-species-catch-sardine",
-        "fishery-species-catch-pacific-saury",
-        "fishery-species-catch-scallop",
-        "fishery-species-catch-japanese-squid"
-      ],
-      "sourceName": "海面漁業生産統計調査",
-      "sourceLink": null,
-      "gridColumnSpan": 6,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "魚種別",
-      "sortOrder": 1
+      "sortOrder": 10
     }
   ],
   "evidenceTopics": [
@@ -462,23 +303,21 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "relatedRankingKeys": [
         "fishery-workers"
       ],
-      "relatedChartKeys": [
-        "theme-fishery-half-century"
-      ],
+      "relatedChartKeys": [],
       "relatedThemeKeys": [
         "aging-society"
       ]
     },
     {
-      key: "fish-consumption-east-west",
-      lensKey: "composition",
-      title: "生鮮魚介の好みは産地ではなく消費地で分かれる",
-      question:
-        "家庭で買う生鮮魚介の支出額を品目別に並べると、県庁所在市はどのような地域のまとまりに分かれるか",
-      summary:
-        "漁獲量が多い産地と、家庭でよく買う消費地は一致しない。太平洋側・東日本はまぐろ・さけ・さんま、日本海側・西日本はぶり・さば・かれい・たい・あじの支出が相対的に大きい。値は県庁所在市の二人以上世帯で、外食は含まない。",
-      sourceKeys: ["stat-family-income-expenditure-survey-2024"],
-      relatedRankingKeys: [
+      "key": "fish-consumption-east-west",
+      "lensKey": "composition",
+      "title": "生鮮魚介の好みは産地ではなく消費地で分かれる",
+      "question": "家庭で買う生鮮魚介の支出額を品目別に並べると、県庁所在市はどのような地域のまとまりに分かれるか",
+      "summary": "漁獲量が多い産地と、家庭でよく買う消費地は一致しない。太平洋側・東日本はまぐろ・さけ・さんま、日本海側・西日本はぶり・さば・かれい・たい・あじの支出が相対的に大きい。値は県庁所在市の二人以上世帯で、外食は含まない。",
+      "sourceKeys": [
+        "stat-family-income-expenditure-survey-2024"
+      ],
+      "relatedRankingKeys": [
         "tuna-consumption-expenditure",
         "yellowtail-consumption-expenditure",
         "saury-consumption-expenditure",
@@ -486,11 +325,14 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
         "oyster-consumption-expenditure",
         "mackerel-consumption-expenditure",
         "fishery-species-catch-tuna",
-        "fishery-species-catch-yellowtail",
+        "fishery-species-catch-yellowtail"
       ],
-      relatedChartKeys: ["theme-fishery-species-share"],
-      relatedThemeKeys: ["tourism", "local-economy"],
-    },
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "tourism",
+        "local-economy"
+      ]
+    }
   ],
   "keywords": [
     "漁業",

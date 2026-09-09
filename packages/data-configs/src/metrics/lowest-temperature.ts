@@ -4,6 +4,8 @@ export const lowestTemperature: MetricConfig = {
   "key": "lowest-temperature",
   "title": "最低気温",
   "subtitle": "日最低気温の月平均の最低値",
+  "description": "気象観測地点における日最低気温の月平均値のうち、その年に最も低かった値。主に県庁所在地を対象とし、埼玉県は熊谷、滋賀県は彦根の観測値です。",
+  "note": "年間の絶対最低気温や県全域の平均気温ではありません。定義は社会・人口統計体系B4103（https://www.e-stat.go.jp/koumoku/koumoku_teigi/B）に基づきます。",
   "unit": "℃",
   "category": "landweather",
   "source": {
@@ -54,7 +56,7 @@ export const lowestTemperature: MetricConfig = {
       2024,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateRdBu",
     "colorSchemeType": "diverging",

@@ -18,12 +18,12 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
     {
       "rankingKey": "job-change-rate",
       "shortLabel": "転職率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "unemployment-rate",
@@ -33,17 +33,17 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
     {
       "rankingKey": "employment-rate",
       "shortLabel": "就業率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "telework-rate",
       "shortLabel": "テレワーク率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "side-job-rate",
       "shortLabel": "副業率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "monthly-average-actual-working-hours-male",
@@ -53,7 +53,7 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
     {
       "rankingKey": "employment-mobility-rate",
       "shortLabel": "就業異動率",
-      "role": "context"
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -1,17 +1,23 @@
-import "server-only";
+import 'server-only';
 
-import { fetchPrefectureTopology, fetchAllCitiesTopology } from "@stats47/gis/geoshape";
+import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
+import {
+  fetchPrefectureTopology,
+  fetchAllCitiesTopology,
+} from '@stats47/gis/geoshape';
 import {
   readAllYearsRankingValuesFromR2,
   readRankingItemFromR2,
   readRankingValuesFromR2,
-} from "@stats47/ranking/server";
-import { isOk, type AreaType, type TopoJSONTopology } from "@stats47/types";
+} from '@stats47/ranking/server';
+import { isOk, type AreaType, type TopoJSONTopology } from '@stats47/types';
 
-import { logger } from "@/lib/logger";
+import { logger } from '@/lib/logger';
 
-import type { ThemeConfig, ThemeIndicatorData } from "../types";
-import type { RankingItem, RankingValue } from "@stats47/ranking";
+import { themeYearLabel } from './theme-year-label';
+
+import type { ThemeConfig, ThemeIndicatorData } from '../types';
+import type { RankingItem, RankingValue } from '@stats47/ranking';
 
 export interface ThemePageData {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
@@ -26,11 +32,11 @@ export interface ThemePageData {
  * ThemeMetricsDashboard も都道府県未選択時は県平均を KPI 値に使うため整合する。
  */
 function buildNationalSeries(
-  allYears: RankingValue[],
+  allYears: RankingValue[]
 ): { year: number; value: number }[] {
   const byYear = new Map<number, number[]>();
   for (const v of allYears) {
-    if (typeof v.value !== "number" || !Number.isFinite(v.value)) continue;
+    if (typeof v.value !== 'number' || !Number.isFinite(v.value)) continue;
     const y = Number(String(v.yearCode).slice(0, 4));
     if (!Number.isFinite(y)) continue;
     const arr = byYear.get(y);
@@ -61,9 +67,9 @@ function buildNationalSeries(
  */
 export async function loadThemeData(
   theme: ThemeConfig,
-  options?: { areaType?: AreaType },
+  options?: { areaType?: AreaType }
 ): Promise<ThemePageData | null> {
-  const areaType: AreaType = options?.areaType ?? "prefecture";
+  const areaType: AreaType = options?.areaType ?? 'prefecture';
 
   // tabIndicators のキーと rankingKeys をマージ（重複排除）
   const tabKeys = theme.tabIndicators?.map((t) => t.rankingKey) ?? [];
@@ -73,7 +79,10 @@ export async function loadThemeData(
   const rankingItemResults = await Promise.all(
     allKeys.map((key) =>
       readRankingItemFromR2(key, areaType).catch((error) => {
-        logger.error({ error, key, areaType }, "テーマダッシュボード: RankingItem取得失敗");
+        logger.error(
+          { error, key, areaType },
+          'テーマダッシュボード: RankingItem取得失敗'
+        );
         return null;
       })
     )
@@ -83,7 +92,24 @@ export async function loadThemeData(
   for (let i = 0; i < allKeys.length; i++) {
     const result = rankingItemResults[i];
     if (result && isOk(result) && result.data) {
-      validItems.push({ key: allKeys[i], item: result.data });
+      const item = result.data;
+      const latestYear = item.latestYear;
+      validItems.push({
+        key: allKeys[i],
+        item: latestYear
+          ? {
+              ...item,
+              latestYear: {
+                ...latestYear,
+                yearName: themeYearLabel(
+                  latestYear.yearCode,
+                  latestYear.yearName,
+                  METRICS_REGISTRY[allKeys[i]]?.yearFormat
+                ),
+              },
+            }
+          : item,
+      });
     }
   }
 
@@ -94,13 +120,16 @@ export async function loadThemeData(
   //    (無駄なメモリ消費で dev/本番ともに負荷増・OOM の原因になる。2026-06-20)。
   const topologyPromise = theme.hideMap
     ? Promise.resolve(null)
-    : areaType === "city"
+    : areaType === 'city'
       ? fetchAllCitiesTopology().catch((error) => {
-          logger.error({ error }, "テーマダッシュボード: city topology取得失敗");
+          logger.error(
+            { error },
+            'テーマダッシュボード: city topology取得失敗'
+          );
           return null;
         })
       : fetchPrefectureTopology().catch((error) => {
-          logger.error({ error }, "テーマダッシュボード: topology取得失敗");
+          logger.error({ error }, 'テーマダッシュボード: topology取得失敗');
           return null;
         });
 
@@ -111,26 +140,42 @@ export async function loadThemeData(
         key,
         values: [] as RankingValue[],
         nationalValue: undefined as number | undefined,
-        nationalSeries: undefined as { year: number; value: number }[] | undefined,
+        nationalSeries: undefined as
+          { year: number; value: number }[] | undefined,
       });
 
     // city: R2 から直接読む (e-Stat 経由しない。全国行は無いため平均にフォールバック)
-    if (areaType === "city") {
-      return readRankingValuesFromR2(key, "city", yearCode)
+    if (areaType === 'city') {
+      return readRankingValuesFromR2(key, 'city', yearCode)
         .then((result) => {
           const values = isOk(result) ? result.data : [];
-          return { key, values, nationalValue: undefined as number | undefined, nationalSeries: undefined as { year: number; value: number }[] | undefined };
+          return {
+            key,
+            values,
+            nationalValue: undefined as number | undefined,
+            nationalSeries: undefined as
+              { year: number; value: number }[] | undefined,
+          };
         })
         .catch((error) => {
-          logger.error({ error, key, yearCode }, "テーマダッシュボード: city values 取得失敗");
-          return { key, values: [] as RankingValue[], nationalValue: undefined as number | undefined, nationalSeries: undefined as { year: number; value: number }[] | undefined };
+          logger.error(
+            { error, key, yearCode },
+            'テーマダッシュボード: city values 取得失敗'
+          );
+          return {
+            key,
+            values: [] as RankingValue[],
+            nationalValue: undefined as number | undefined,
+            nationalSeries: undefined as
+              { year: number; value: number }[] | undefined,
+          };
         });
     }
 
     // prefecture: R2 から全年度を 1 read (e-Stat ライブ取得しない。/ranking/* と同一 source)。
     // current 年の values + 全国(県平均)トレンドを構築。全国行は無いため nationalValue は undefined
     // (ThemeMetricsDashboard が未選択時に県平均へフォールバックする)。
-    return readAllYearsRankingValuesFromR2(key, "prefecture")
+    return readAllYearsRankingValuesFromR2(key, 'prefecture')
       .then((result) => {
         const all = isOk(result) ? result.data : [];
         const ny = yearCode.slice(0, 4);
@@ -145,8 +190,17 @@ export async function loadThemeData(
         };
       })
       .catch((error) => {
-        logger.error({ error, key }, "テーマダッシュボード: ranking values 取得失敗 (R2)");
-        return { key, values: [] as RankingValue[], nationalValue: undefined as number | undefined, nationalSeries: undefined as { year: number; value: number }[] | undefined };
+        logger.error(
+          { error, key },
+          'テーマダッシュボード: ranking values 取得失敗 (R2)'
+        );
+        return {
+          key,
+          values: [] as RankingValue[],
+          nationalValue: undefined as number | undefined,
+          nationalSeries: undefined as
+            { year: number; value: number }[] | undefined,
+        };
       });
   });
 

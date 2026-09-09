@@ -12,22 +12,22 @@ export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "foreign-resident-count-per-100k",
-      "shortLabel": "外国人比率",
+      "shortLabel": "外国人人口（10万人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "foreign-resident-count",
-      "shortLabel": "外国人数",
-      "role": "secondary"
+      "shortLabel": "外国人人口（国勢調査）",
+      "role": "primary"
     },
     {
       "rankingKey": "resident-foreigner-population",
-      "shortLabel": "在留外国人",
-      "role": "context"
+      "shortLabel": "在留外国人数",
+      "role": "primary"
     },
     {
       "rankingKey": "foreign-resident-count-china-per-100k",
-      "shortLabel": "中国(比率)",
+      "shortLabel": "中国籍（10万人当たり）",
       "role": "secondary"
     },
     {
@@ -37,7 +37,7 @@ export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "foreign-resident-count-korea-per-100k",
-      "shortLabel": "韓国(比率)",
+      "shortLabel": "韓国・朝鮮籍（10万人当たり）",
       "role": "secondary"
     },
     {
@@ -47,8 +47,8 @@ export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "foreign-resident-count-usa-per-100k",
-      "shortLabel": "米国(比率)",
-      "role": "context"
+      "shortLabel": "米国籍（10万人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "foreign-resident-count-usa",
@@ -58,7 +58,7 @@ export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
     {
       "rankingKey": "total-overnight-guests-foreign",
       "shortLabel": "外国人宿泊",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "keywords": [

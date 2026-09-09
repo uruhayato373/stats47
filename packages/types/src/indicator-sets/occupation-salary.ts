@@ -13,12 +13,12 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "doctor-annual-income",
       "shortLabel": "医師",
-      "role": "primary"
+      "role": "secondary"
     },
     {
       "rankingKey": "nurse-annual-income",
       "shortLabel": "看護師",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "pharmacist-annual-income",
@@ -28,7 +28,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "care-worker-annual-income",
       "shortLabel": "介護職員",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "nursery-teacher-annual-income",
@@ -83,12 +83,12 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "system-consultant-annual-income",
       "shortLabel": "SIer/コンサル",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "software-engineer-annual-income",
       "shortLabel": "SE",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "accountant-annual-income",
@@ -133,12 +133,12 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "truck-driver-annual-income",
       "shortLabel": "トラック運転手",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "taxi-driver-annual-income",
       "shortLabel": "タクシー運転手",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "bus-driver-annual-income",
@@ -163,7 +163,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "manager-annual-income",
       "shortLabel": "管理職",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "cook-annual-income",

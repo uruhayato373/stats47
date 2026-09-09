@@ -18,12 +18,12 @@ export const REAL_INCOME_SET: IndicatorSet = {
     {
       "rankingKey": "actual-income-worker-households-per-month",
       "shortLabel": "実収入",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "per-capita-prefectural-income-h27",
       "shortLabel": "県民所得/人",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "annual-income-per-household",
@@ -38,22 +38,22 @@ export const REAL_INCOME_SET: IndicatorSet = {
     {
       "rankingKey": "disposable-income-after-rent",
       "shortLabel": "家賃控除後手残り",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "consumer-price-difference-index-overall",
       "shortLabel": "CPI総合",
-      "role": "context"
+      "role": "primary"
     },
     {
       "rankingKey": "consumer-price-difference-index-overall-excl-rent",
       "shortLabel": "CPI(家賃除く)",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "consumer-price-difference-index-housing",
       "shortLabel": "CPI(住居)",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "private-rental-housing-rent-per-3-3m2",
@@ -68,7 +68,7 @@ export const REAL_INCOME_SET: IndicatorSet = {
     {
       "rankingKey": "consumer-price-difference-index-food",
       "shortLabel": "消費者物価地域差指数",
-      "role": "context"
+      "role": "secondary"
     }
   ],
   "keywords": [

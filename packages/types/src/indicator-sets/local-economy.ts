@@ -18,17 +18,17 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
     {
       "rankingKey": "per-capita-prefectural-income-h27",
       "shortLabel": "1人当たり県民所得",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "minimum-wage-by-region",
       "shortLabel": "最低賃金",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "unemployment-rate",
@@ -38,22 +38,22 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
     {
       "rankingKey": "fiscal-strength-index-prefecture",
       "shortLabel": "財政力指数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "employed-people-ratio-primary",
       "shortLabel": "第1次産業就業者比率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "employed-people-ratio-secondary",
       "shortLabel": "第2次産業就業者比率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "employed-people-ratio-tertiary",
       "shortLabel": "第3次産業就業者比率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "disposable-income-worker-households",
@@ -63,7 +63,7 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
     {
       "rankingKey": "number-of-establishments-economic-census-basic-survey",
       "shortLabel": "事業所数",
-      "role": "context"
+      "role": "primary"
     }
   ],
   "keywords": [

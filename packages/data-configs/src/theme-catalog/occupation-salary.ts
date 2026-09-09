@@ -1,6 +1,35 @@
 import type { ThemeCatalog } from "./types";
 
 export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "職種ごとの推計年収を比較。年齢・勤続年数などの構成差を含みます。",
+    "headlineRankingKeys": [
+      "nurse-annual-income",
+      "care-worker-annual-income",
+      "software-engineer-annual-income",
+      "truck-driver-annual-income"
+    ],
+    "comparisonRankingKeys": [
+      "nurse-annual-income",
+      "care-worker-annual-income",
+      "software-engineer-annual-income",
+      "truck-driver-annual-income",
+      "doctor-annual-income",
+      "pharmacist-annual-income",
+      "nursery-teacher-annual-income",
+      "school-teacher-annual-income"
+    ],
+    "mapNotes": {
+      "nurse-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。",
+      "care-worker-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。",
+      "software-engineer-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。",
+      "truck-driver-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。",
+      "doctor-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。",
+      "pharmacist-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。",
+      "nursery-teacher-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。",
+      "school-teacher-annual-income": "一般労働者・男女計。6月給与×12＋前年賞与の推計額で、手取りではありません。"
+    }
+  },
   "key": "occupation-salary",
   "title": "職業別年収",
   "description": "都道府県別の職業別平均年収をランキングとチャートで比較。医師・看護師・保育士・SE・トラック運転手など47職種の年収データを47都道府県で確認できます。賃金構造基本統計調査（厚生労働省）に基づく2010年〜2023年の推移データ。",
@@ -10,27 +39,57 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "doctor-annual-income",
       "shortLabel": "医師",
-      "role": "primary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "医療職内の賃金構造を比較表と推移で補足する。"
+      }
     },
     {
       "rankingKey": "nurse-annual-income",
       "shortLabel": "看護師",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "生活を支える医療職の賃金水準として選ぶ。医師とは別の職種区分で比べる。"
+      }
     },
     {
       "rankingKey": "pharmacist-annual-income",
       "shortLabel": "薬剤師",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "資格職の職種差を比較表で補足する。"
+      }
     },
     {
       "rankingKey": "care-worker-annual-income",
       "shortLabel": "介護職員",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "介護の担い手の賃金水準を、看護師や他分野の職種と並べて示す。"
+      }
     },
     {
       "rankingKey": "nursery-teacher-annual-income",
       "shortLabel": "保育士",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "保育の担い手の処遇を比較表で補足する。"
+      }
     },
     {
       "rankingKey": "midwife-annual-income",
@@ -80,12 +139,24 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "system-consultant-annual-income",
       "shortLabel": "SIer/コンサル",
-      "role": "secondary"
+      "role": "context",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "既存の職種区分内の年収推移を示す。一般労働者・男女計の推計年収を使用し、個人の実年収とは区別する。"
+      }
     },
     {
       "rankingKey": "software-engineer-annual-income",
       "shortLabel": "SE",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "医療・運輸に偏らない専門技術職の比較軸として選ぶ。"
+      }
     },
     {
       "rankingKey": "accountant-annual-income",
@@ -105,12 +176,24 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "school-teacher-annual-income",
       "shortLabel": "小中学校教員",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "教育分野の処遇を比較表と職種内推移で補足する。"
+      }
     },
     {
       "rankingKey": "university-professor-annual-income",
       "shortLabel": "大学教授",
-      "role": "context"
+      "role": "context",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "既存の職種区分内の年収推移を示す。一般労働者・男女計の推計年収を使用し、個人の実年収とは区別する。"
+      }
     },
     {
       "rankingKey": "associate-professor-annual-income",
@@ -130,12 +213,24 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "truck-driver-annual-income",
       "shortLabel": "トラック運転手",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "生活物流を支える営業用大型貨物運転者を代表として選ぶ。運転職全体の平均とはしない。"
+      }
     },
     {
       "rankingKey": "taxi-driver-annual-income",
       "shortLabel": "タクシー運転手",
-      "role": "secondary"
+      "role": "context",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "既存の職種区分内の年収推移を示す。一般労働者・男女計の推計年収を使用し、個人の実年収とは区別する。"
+      }
     },
     {
       "rankingKey": "bus-driver-annual-income",
@@ -145,7 +240,13 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "carpenter-annual-income",
       "shortLabel": "大工",
-      "role": "context"
+      "role": "context",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "既存の職種区分内の年収推移を示す。一般労働者・男女計の推計年収を使用し、個人の実年収とは区別する。"
+      }
     },
     {
       "rankingKey": "electrician-annual-income",
@@ -160,7 +261,7 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "manager-annual-income",
       "shortLabel": "管理職",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "cook-annual-income",
@@ -203,181 +304,7 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "role": "context"
     }
   ],
-  "charts": [
-    {
-      "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart",
-      "title": "医療・福祉職の年収推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "doctor-annual-income",
-            "label": "医師",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "nurse-annual-income",
-            "label": "看護師",
-            "colorRole": "improve"
-          },
-          {
-            "metricKey": "care-worker-annual-income",
-            "label": "介護職員",
-            "colorRole": "count"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "doctor-annual-income",
-        "nurse-annual-income",
-        "care-worker-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "医療・福祉",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-occ-it-trend",
-      "componentType": "line-chart",
-      "title": "IT・専門職の年収推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "system-consultant-annual-income",
-            "label": "SIer/コンサル",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "software-engineer-annual-income",
-            "label": "SE",
-            "colorRole": "special"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "system-consultant-annual-income",
-        "software-engineer-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "IT・専門",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart",
-      "title": "教育職の年収推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "school-teacher-annual-income",
-            "label": "小中学校教員",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "university-professor-annual-income",
-            "label": "大学教授",
-            "colorRole": "danger"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "school-teacher-annual-income",
-        "university-professor-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "教育",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart",
-      "title": "運輸・建設職の年収推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "truck-driver-annual-income",
-            "label": "トラック運転手",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "taxi-driver-annual-income",
-            "label": "タクシー運転手",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "carpenter-annual-income",
-            "label": "大工",
-            "colorRole": "neutral"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "truck-driver-annual-income",
-        "taxi-driver-annual-income",
-        "carpenter-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "運輸・建設",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart",
-      "title": "サービス職の年収推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "cook-annual-income",
-            "label": "調理従事者",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "barber-beautician-annual-income",
-            "label": "理容・美容師",
-            "colorRole": "special"
-          },
-          {
-            "metricKey": "security-guard-annual-income",
-            "label": "警備員",
-            "colorRole": "neutral"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "cook-annual-income",
-        "barber-beautician-annual-income",
-        "security-guard-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "サービス",
-      "sortOrder": 0
-    }
-  ],
+  "charts": [],
   // 職種別年収は全て万円なので単軸。職種の系統ごとにカードを分けて比較しやすくする
   metricGroups: [
     {
@@ -436,36 +363,43 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
   ],
   evidenceTopics: [
     {
-      key: "medical-care-pay-structure",
-      lensKey: "equity",
-      title: "医療・介護職の賃金構造",
-      question: "医師・看護師・介護職員の推計年収には、どのような地域差があるか。",
-      summary:
-        "一般労働者・男女計の6月のきまって支給する現金給与額を12倍し、前年の賞与等を加えた税・社会保険料控除前の標本平均で比べる。年齢、勤続年数、事業所規模などの構成差は調整していないため、地域そのものの賃金効果とは限らない。",
-      sourceKeys: ["mhlw-wage-structure-survey"],
-      relatedRankingKeys: [
+      "key": "medical-care-pay-structure",
+      "lensKey": "equity",
+      "title": "医療・介護職の賃金構造",
+      "question": "医師・看護師・介護職員の推計年収には、どのような地域差があるか。",
+      "summary": "一般労働者・男女計の6月のきまって支給する現金給与額を12倍し、前年の賞与等を加えた税・社会保険料控除前の標本平均で比べる。年齢、勤続年数、事業所規模などの構成差は調整していないため、地域そのものの賃金効果とは限らない。",
+      "sourceKeys": [
+        "mhlw-wage-structure-survey"
+      ],
+      "relatedRankingKeys": [
         "doctor-annual-income",
         "nurse-annual-income",
-        "care-worker-annual-income",
+        "care-worker-annual-income"
       ],
-      relatedChartKeys: ["theme-occ-medical-trend"],
-      relatedThemeKeys: ["labor-wages", "healthcare"],
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "labor-wages",
+        "healthcare"
+      ]
     },
     {
-      key: "it-occupation-pay-comparison",
-      lensKey: "composition",
-      title: "IT職種区分ごとの推計年収",
-      question: "システムコンサルタント等とソフトウェア作成者の推計年収は、地域ごとにどう異なるか。",
-      summary:
-        "別々の職種区分について、一般労働者・男女計の6月のきまって支給する現金給与額を年換算し前年賞与等を加えた標本平均を比較する。個人の実年収ではなく、年齢、勤続年数、事業所規模などの構成差も調整していない。",
-      sourceKeys: ["mhlw-wage-structure-survey"],
-      relatedRankingKeys: [
-        "system-consultant-annual-income",
-        "software-engineer-annual-income",
+      "key": "it-occupation-pay-comparison",
+      "lensKey": "composition",
+      "title": "IT職種区分ごとの推計年収",
+      "question": "システムコンサルタント等とソフトウェア作成者の推計年収は、地域ごとにどう異なるか。",
+      "summary": "別々の職種区分について、一般労働者・男女計の6月のきまって支給する現金給与額を年換算し前年賞与等を加えた標本平均を比較する。個人の実年収ではなく、年齢、勤続年数、事業所規模などの構成差も調整していない。",
+      "sourceKeys": [
+        "mhlw-wage-structure-survey"
       ],
-      relatedChartKeys: ["theme-occ-it-trend"],
-      relatedThemeKeys: ["labor-wages"],
-    },
+      "relatedRankingKeys": [
+        "system-consultant-annual-income",
+        "software-engineer-annual-income"
+      ],
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "labor-wages"
+      ]
+    }
   ],
   "keywords": [
     "職業別年収",

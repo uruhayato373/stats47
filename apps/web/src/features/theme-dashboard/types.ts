@@ -141,6 +141,9 @@ export interface ThemeIndicatorData {
 /** Server → Client に渡す props */
 export interface ThemeDashboardClientProps {
   themeConfig: ThemeConfig;
+  overview?: import("@stats47/data-configs/theme-catalog").CatalogOverview;
+  overviewLabels?: Record<string, string>;
+  hasEvidence?: boolean;
   /**
    * 指標カードの編成 (ThemeCatalog.metricGroups)。server component が
    * THEME_CATALOGS から直読みして渡す。未定義テーマは 1 グループにフォールバック。

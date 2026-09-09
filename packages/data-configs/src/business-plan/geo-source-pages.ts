@@ -1,4 +1,5 @@
 import { GEO_SOURCE_POLICY_PAGES } from './geo-source-policy-pages';
+import { GEO_SOURCE_SERVICE_PAGES } from './geo-source-service-pages';
 
 /** Authored reading guides. Versions refer to the GIS registry, not the current year. */
 export type GeoSourceField = {
@@ -10,6 +11,8 @@ export type GeoSourceField = {
   values?: Record<string, string>;
   /** Some source files have distinct schemas (e.g. primary/secondary medical areas). */
   onlyWhenPresent?: true;
+  /** A source may store zero for unpublished values or for a value recorded on another feature. */
+  requiredCodes?: { key: string; values: string[]; fallback: string }[];
 };
 export type GeoSourcePageContent = {
   dataId: string;
@@ -426,6 +429,7 @@ export const GEO_SOURCE_PAGES: GeoSourcePageContent[] = [
     relatedIds: ['L03-b', 'L03-b-c', 'L03-a'],
   },
   ...GEO_SOURCE_POLICY_PAGES,
+  ...GEO_SOURCE_SERVICE_PAGES,
 ];
 
 export function findGeoSourcePage(dataId: string, version?: string) {

@@ -10,7 +10,7 @@ const source = readFileSync(
 
 describe('ThemePageLayout — 狭幅の読む順序', () => {
   it('ページ見出しをスコープ・切替・全指標ナビより先に描画する', () => {
-    const headerIndex = source.indexOf('{THEME_HEROES[theme.themeKey] ?');
+    const headerIndex = source.indexOf('THEME_HEROES[theme.themeKey] ?');
     const scopeIndex = source.indexOf('<StatisticsScopeNav');
     const controlsIndex = source.indexOf('aria-label="テーマと地域"');
     const pageNavIndex = source.indexOf('aria-label="このページの内容"');

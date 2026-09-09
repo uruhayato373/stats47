@@ -4,6 +4,8 @@ export const maximumTemperature: MetricConfig = {
   "key": "maximum-temperature",
   "title": "最高気温",
   "subtitle": "日最高気温の月平均の最高値",
+  "description": "気象観測地点における日最高気温の月平均値のうち、その年に最も高かった値。主に県庁所在地を対象とし、埼玉県は熊谷、滋賀県は彦根の観測値です。",
+  "note": "年間の絶対最高気温や県全域の平均気温ではありません。定義は社会・人口統計体系B4102（https://www.e-stat.go.jp/koumoku/koumoku_teigi/B）に基づきます。",
   "unit": "℃",
   "category": "landweather",
   "source": {
@@ -69,7 +71,7 @@ export const maximumTemperature: MetricConfig = {
       2024,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateOranges",
     "colorSchemeType": "sequential",

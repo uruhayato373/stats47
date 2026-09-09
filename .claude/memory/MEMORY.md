@@ -1,5 +1,6 @@
 # Memory Index
 
+- [feedback_geo_source_initial_display.md](feedback_geo_source_initial_display.md) — GISは操作前の地図表示・区画切替・一覧リンクによる移動を検証。代表区画を選んだ後のPASSだけで初期表示を完了扱いしない
 - [project_ai_content_headless_claude_batch.md](project_ai_content_headless_claude_batch.md) — 個別ai-content改善はheadless author+critic。大規模構造補完は決定的backfill + 境界サンプル意味レビューへ分離。枠枯渇・スロットリング・rebase競合の罠
 - [feedback_geo_mesh_evidence_integrity.md](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
 - [feedback_geo_publication_boundary.md](feedback_geo_publication_boundary.md) — Geoは空間演算・全入力集合・途中artifactを必須化。保存則だけでは洪水107入力の欠落を検出できず、生成・R2・外部公開を別ゲートで検証する

@@ -13,6 +13,9 @@ export function formatGeoSourceProperty(
   field: GeoSourceField,
   properties: Record<string, unknown>
 ): string {
+  for (const requirement of field.requiredCodes ?? [])
+    if (!requirement.values.includes(String(properties[requirement.key])))
+      return requirement.fallback;
   const value = properties[field.key];
   if (value == null || value === '' || value === 'unknown') return 'データなし';
   const text = String(value);

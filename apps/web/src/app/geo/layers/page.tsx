@@ -11,6 +11,7 @@ import {
   GeoSourceDirectory,
   GeoSourceNavigation,
   loadGeoSourceCatalog,
+  findGeoSourceThumbnail,
 } from '@/features/geo-analysis';
 
 import type { Metadata } from 'next';
@@ -38,13 +39,19 @@ export default async function GeoLayersPage() {
               sourcePageUrl: item.sourceUrl,
               href: `/geo/datasets/${item.dataId}`,
               assetCount: item.assetCount,
+              thumbnailLabel: findGeoSourceThumbnail(item.dataId, item.version)
+                ?.label,
             },
           ]
         : [];
     }) ?? [];
   return (
-    <PageShell rightRail={<GeoSourceNavigation catalog={catalog} />}>
+    <PageShell
+      className="py-4 sm:py-5"
+      rightRail={<GeoSourceNavigation catalog={catalog} />}
+    >
       <Breadcrumbs
+        className="mb-2"
         items={[
           { label: 'ホーム', href: '/' },
           { label: '地域分析', href: '/geo' },
@@ -53,17 +60,33 @@ export default async function GeoLayersPage() {
       />
       <PageHeader
         title="GISを探す"
-        description="まず一つのデータを地図で見る。分布や属性を確かめてから、ほかのデータと重ねて読み進められます。"
+        description="地図からGISを探し、位置・形状・属性を確認できます。"
+        className="mb-4"
       />
       <GeoSourceNavigation catalog={catalog} mobile />
-      <h2 className="mb-4 text-base font-semibold">
-        単体の地図で見られるデータ
-      </h2>
       <section className="mb-8" aria-label="公開GIS一覧">
-        <p className="mb-4 text-sm">
-          {sources.length}
-          種類のGISを、点・線・区域・メッシュの単体地図で確認できます。配布区画を選んで読み込み、原典の形状と属性を調べられます。
-        </p>
+        <ContentDisclosure title="画像の読み方・出典" className="mb-4">
+          <p className="text-sm leading-relaxed">
+            画像はカードに記した範囲の表示例です。全国図・都道府県・地域の拡大図では縮尺が異なり、点の数や面積をカード間で比較できません。配布区画の一部だけを使う場合もあります。空白はデータの不存在や安全を意味しません。
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            青は位置・形状の表示です。標高メッシュは緑から茶へ高くなる5段階（50m未満・50〜200m・200〜500m・500〜1,000m・1,000m以上）。土地利用は森林＝緑、農地＝黄緑、建物用地＝赤茶、水域＝青など、原典の区分で色分けしています。1km土地利用は区画内で面積が最大の区分を表示します。詳しい値・属性はリンク先の単体地図で確認できます。
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+            出典：各GISの国土交通省「国土数値情報」（原典・利用条件はリンク先に掲載）。stats47が表示範囲・配色を加工。背景の境界：
+            <a className="underline" href="https://geoshape.ex.nii.ac.jp/">
+              NII 日本の行政区画（2023年）
+            </a>
+            を加工（
+            <a
+              className="underline"
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+            >
+              CC BY-SA 4.0
+            </a>
+            ）。
+          </p>
+        </ContentDisclosure>
         {catalog ? (
           <GeoSourceDirectory entries={sources} />
         ) : (

@@ -9,6 +9,20 @@ export const SATORI_RENDERER_SOURCES = [
   'node_modules/sharp/package.json',
 ] as const;
 
+/** GIS uses deterministic vector geometry and Sharp, without fonts or AI backgrounds. */
+export const GEO_THUMBNAIL_GENERATOR_SPEC = {
+  generator: 'geo-source-thumbnail',
+  rendererSources: [
+    'apps/web/scripts/lib/geo-source-thumbnail-render.ts',
+    'apps/web/scripts/generate-geo-source-thumbnails.ts',
+    'packages/visualization/src/server/generate-mini-prefecture-svg.ts',
+    'packages/visualization/src/server/prefecture-topology.generated.json',
+    'node_modules/d3-geo/package.json',
+    'node_modules/topojson-client/package.json',
+    'node_modules/sharp/package.json',
+  ],
+} as const;
+
 export const BLOG_IMAGE_GENERATOR_SPEC = {
   generator: 'blog-ogp',
   rendererSources: [

@@ -12,22 +12,22 @@ export const TOURISM_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "total-overnight-guests",
-      "shortLabel": "宿泊者数",
+      "shortLabel": "延べ宿泊者数",
       "role": "primary"
     },
     {
       "rankingKey": "total-overnight-guests-foreign",
-      "shortLabel": "外国人宿泊",
-      "role": "secondary"
+      "shortLabel": "外国人延べ宿泊者数",
+      "role": "primary"
     },
     {
       "rankingKey": "room-utilization-rate",
       "shortLabel": "客室稼働率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "travel-participation-rate-domestic-tourism",
-      "shortLabel": "国内旅行率",
+      "shortLabel": "県民の国内観光旅行率",
       "role": "secondary"
     },
     {
@@ -37,18 +37,18 @@ export const TOURISM_SET: IndicatorSet = {
     },
     {
       "rankingKey": "travel-participation-rate-overnight",
-      "shortLabel": "宿泊旅行率",
-      "role": "context"
+      "shortLabel": "県民の宿泊旅行率",
+      "role": "secondary"
     },
     {
       "rankingKey": "travel-participation-rate-day-trip",
-      "shortLabel": "日帰り旅行率",
-      "role": "context"
+      "shortLabel": "県民の日帰り行楽率",
+      "role": "secondary"
     },
     {
       "rankingKey": "air-passenger-transport",
       "shortLabel": "航空旅客",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "jr-passenger-transport",

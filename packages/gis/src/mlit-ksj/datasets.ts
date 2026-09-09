@@ -167,13 +167,13 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
     stats47Category: "agriculture", isRankingTarget: false, latestVersion: "06",
   },
   {
-    dataId: "C28", name: "空港", category: "transport", geometryType: "point", coverage: "national", license: "commercial-ok",
-    stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "07",
+    dataId: "C28", name: "空港", category: "transport", geometryType: "mixed", coverage: "national", license: "commercial-ok",
+    stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "07", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C28-2012.html",
     rankingConfig: [{ rankingKey: "airport-count", rankingName: "空港数", unit: "か所", categoryKey: "infrastructure", filenamePattern: "AirportReferencePoint", yearCode: "2007", description: "国土数値情報に登録されている空港の都道府県別数" }],
   },
   {
     dataId: "N02", name: "鉄道", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0",
-    stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "25",
+    stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "25", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2025.html",
     rankingConfig: [{ rankingKey: "railway-station-count", rankingName: "鉄道駅数", unit: "駅", categoryKey: "infrastructure", filenamePattern: "Station", yearCode: "2025", description: "国土数値情報に登録されている鉄道駅の都道府県別数" }],
   },
   // ranking 定義を外した (2026-08-17)。`expressway-junction-count` は metric config も
@@ -182,7 +182,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   // 状態なので、実態に合わせて落とす。作るなら metric config の新設から始める。
   { dataId: "N06", name: "高速道路時系列", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "20" },
   { dataId: "N07", name: "バスルート", category: "transport", geometryType: "line", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "22" },
-  { dataId: "S12", name: "駅別乗降客数", category: "transport", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "25" },
+  { dataId: "S12", name: "駅別乗降客数", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "25", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html" },
 
   // ── 統計 ───────────────────────────────────────────────────
   { dataId: "mesh1000r6", name: "1kmメッシュ将来推計人口(R6)", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html", candidateAliases: ["m1kr6"] },

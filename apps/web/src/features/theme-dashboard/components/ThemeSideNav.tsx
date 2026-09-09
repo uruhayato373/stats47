@@ -34,6 +34,8 @@ interface Props {
   showRegion?: boolean;
   /** エリア文脈など、地理スコープを切り替えないページでは false。 */
   showScope?: boolean;
+  /** 概要ダッシュボード用の省スペース表示。 */
+  compact?: boolean;
   metrics?: ThemeNavMetric[];
   surveys?: ThemeNavSurvey[];
 }
@@ -49,26 +51,39 @@ export function ThemeSideNav({
   areaContext,
   showRegion = true,
   showScope = true,
+  compact = false,
   metrics = [],
   surveys = [],
 }: Props) {
   return (
-    <div className="space-y-6 pr-1">
+    <div className={cn('pr-1', compact ? 'space-y-3' : 'space-y-6')}>
       <ThemeGroupNavigation
         currentThemeKey={currentThemeKey}
         areaContext={areaContext}
+        compact={compact}
       />
 
       {(showScope || showRegion) && (
         <RegionBlock
           showScope={showScope}
           showPrefectureSelect={showRegion}
+          compact={compact}
         />
       )}
 
       {metrics.length > 0 && (
-        <details className="group border-y border-border py-2">
-          <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+        <details
+          className={cn(
+            'group border-y border-border',
+            compact ? 'py-1' : 'py-2'
+          )}
+        >
+          <summary
+            className={cn(
+              'flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+              compact ? 'min-h-8' : 'min-h-10'
+            )}
+          >
             <ListTree className="size-4 text-muted-foreground" aria-hidden />
             全指標（{metrics.length}）
           </summary>
@@ -93,15 +108,13 @@ export function ThemeSideNav({
         <SectionHeader
           title={
             <span className="inline-flex items-center gap-2">
-              <FileText
-                className="size-4 text-muted-foreground"
-                aria-hidden
-              />
+              <FileText className="size-4 text-muted-foreground" aria-hidden />
               出典調査
             </span>
           }
           as="h2"
           action={<SectionIndexLink href="/survey" label="調査一覧へ" />}
+          className={compact ? 'mb-2 pb-1' : undefined}
         />
         {surveys.length > 0 && (
           <ul className="space-y-1 border-y border-border py-2">
@@ -125,13 +138,16 @@ export function ThemeSideNav({
 function ThemeGroupNavigation({
   currentThemeKey,
   areaContext,
-}: Pick<Props, 'currentThemeKey' | 'areaContext'>) {
+  compact,
+}: Pick<Props, 'currentThemeKey' | 'areaContext' | 'compact'>) {
   const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
   const options = buildThemeSwitcherOptions(
     areaContext,
     hasProvider ? selectedPrefectureCode : undefined
   );
-  const optionByKey = new Map(options.map((option) => [option.themeKey, option]));
+  const optionByKey = new Map(
+    options.map((option) => [option.themeKey, option])
+  );
 
   return (
     <nav aria-label="テーマを切り替える">
@@ -139,6 +155,7 @@ function ThemeGroupNavigation({
         title="テーマ"
         as="h2"
         action={<SectionIndexLink href="/themes" label="テーマ一覧へ" />}
+        className={compact ? 'mb-2 pb-1' : undefined}
       />
       <div className="border-y border-border">
         {THEME_NAV_GROUPS.map((group) => {
@@ -158,14 +175,19 @@ function ThemeGroupNavigation({
               open={isCurrentGroup}
               className="group border-b border-border last:border-b-0"
             >
-              <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 px-2 text-sm font-semibold text-foreground hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+              <summary
+                className={cn(
+                  'flex cursor-pointer list-none items-center gap-2 px-2 text-sm font-semibold text-foreground hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                  compact ? 'min-h-8' : 'min-h-10'
+                )}
+              >
                 {group.label}
                 <ChevronDown
                   className="ml-auto size-4 text-muted-foreground transition-transform group-open:rotate-180"
                   aria-hidden
                 />
               </summary>
-              <ul className="pb-2">
+              <ul className={compact ? 'pb-1' : 'pb-2'}>
                 {groupOptions.map((option) => {
                   const isCurrent = option.themeKey === currentThemeKey;
                   return (
@@ -174,7 +196,8 @@ function ThemeGroupNavigation({
                         href={option.href}
                         aria-current={isCurrent ? 'page' : undefined}
                         className={cn(
-                          'flex min-h-10 items-center px-4 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                          'flex items-center px-4 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                          compact ? 'min-h-8' : 'min-h-10',
                           isCurrent
                             ? 'bg-accent font-semibold text-primary'
                             : 'text-foreground hover:bg-accent/50 hover:text-primary'
@@ -197,16 +220,20 @@ function ThemeGroupNavigation({
 function RegionBlock({
   showScope,
   showPrefectureSelect,
+  compact,
 }: {
   showScope: boolean;
   showPrefectureSelect: boolean;
+  compact?: boolean;
 }) {
   return (
     <div>
-      <SectionHeader title="地域" as="h2" />
-      {showScope && (
-        <StatisticsScopeNav current="prefectures" variant="rail" />
-      )}
+      <SectionHeader
+        title="地域"
+        as="h2"
+        className={compact ? 'mb-2 pb-1' : undefined}
+      />
+      {showScope && <StatisticsScopeNav current="prefectures" variant="rail" />}
       {showPrefectureSelect && <PrefectureControl hasScope={showScope} />}
     </div>
   );

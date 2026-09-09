@@ -1,6 +1,35 @@
 import type { ThemeCatalog } from "./types";
 
 export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
+  overview: {
+    "introduction": "所得・雇用・事業所から地域経済を比較。家計の収入とは区別します。",
+    "headlineRankingKeys": [
+      "per-capita-prefectural-income-h27",
+      "per-taxpayer-taxable-income",
+      "active-job-opening-ratio",
+      "number-of-establishments-economic-census-basic-survey"
+    ],
+    "comparisonRankingKeys": [
+      "per-capita-prefectural-income-h27",
+      "per-taxpayer-taxable-income",
+      "active-job-opening-ratio",
+      "unemployment-rate",
+      "number-of-establishments-economic-census-basic-survey",
+      "employed-people-ratio-primary",
+      "employed-people-ratio-secondary",
+      "employed-people-ratio-tertiary"
+    ],
+    "mapNotes": {
+      "per-capita-prefectural-income-h27": "企業所得等を含む県民所得÷人口。住民個人の平均年収ではありません。",
+      "per-taxpayer-taxable-income": "所得割の納税義務者1人当たり。非課税者を含む全住民平均ではありません。",
+      "active-job-opening-ratio": "年度の延べ求人÷延べ求職者。新卒・パートを除きます。",
+      "unemployment-rate": "国勢調査の調査週間の値。月次の労働力調査とは異なります。",
+      "number-of-establishments-economic-census-basic-survey": "全産業の事業所総数。規模を示し、人口当たりの集積度ではありません。",
+      "employed-people-ratio-primary": "国勢調査の就業者に占める農林漁業等の割合。",
+      "employed-people-ratio-secondary": "国勢調査の就業者に占める製造業・建設業等の割合。",
+      "employed-people-ratio-tertiary": "国勢調査の就業者に占めるサービス業・公務等の割合。分類不能を含みません。"
+    }
+  },
   "key": "local-economy",
   "title": "地域経済",
   "description": "都道府県別のGDP・県民所得・産業構造・雇用・財政をランキングとチャートで比較。県内総生産、有効求人倍率、製造品出荷額、財政力指数など主要経済指標の推移を47都道府県のデータで確認できます。",
@@ -10,47 +39,89 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "per-taxpayer-taxable-income",
       "shortLabel": "課税所得",
-      "role": "primary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省「社会・人口統計体系」",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "県民所得と異なる税統計側の所得水準を示す。納税義務者分母を明記する。"
+      }
     },
     {
       "rankingKey": "per-capita-prefectural-income-h27",
       "shortLabel": "1人当たり県民所得",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "内閣府「県民経済計算」",
+        "sourceUrl": "https://www.esri.cao.go.jp/jp/sna/sonota/kenmin/kenmin_top.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "地域に帰属する所得の規模を人口で調整して比べる。家計平均ではなく地域経済の代表指標として置く。"
+      }
     },
     {
       "rankingKey": "minimum-wage-by-region",
       "shortLabel": "最低賃金",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「令和7年版 労働経済の分析」",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/wp/hakusyo/roudou/25/index.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "所得だけでなく雇用側の需給を上部指標で補足する。"
+      }
     },
     {
       "rankingKey": "unemployment-rate",
       "shortLabel": "失業率",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「令和2年国勢調査」",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "就職を探す人の割合を国勢調査年の比較表で補足する。"
+      }
     },
     {
       "rankingKey": "fiscal-strength-index-prefecture",
       "shortLabel": "財政力指数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "employed-people-ratio-primary",
       "shortLabel": "第1次産業就業者比率",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「令和2年国勢調査」",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "産業別の就業構成を3部門で比較し、所得水準の背景を読む。"
+      }
     },
     {
       "rankingKey": "employed-people-ratio-secondary",
       "shortLabel": "第2次産業就業者比率",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「令和2年国勢調査」",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "製造業・建設業等の雇用構成を他部門と同じ分母で比較する。"
+      }
     },
     {
       "rankingKey": "employed-people-ratio-tertiary",
       "shortLabel": "第3次産業就業者比率",
-      "role": "context"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「令和2年国勢調査」",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "surveyedAt": "2026-09-09",
+        "rationale": "サービス業等の雇用構成を他部門と同じ分母で比較する。"
+      }
     },
     {
       "rankingKey": "disposable-income-worker-households",
@@ -60,14 +131,20 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "number-of-establishments-economic-census-basic-survey",
       "shortLabel": "事業所数",
-      "role": "context"
-    },
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省「社会・人口統計体系」",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-09",
+        "rationale": "産業の基盤となる事業所の規模を上部と推移に示す。総数に基づく地図であることを注記する。"
+      }
+    }
   ],
   "charts": [
     {
       "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart",
-      "title": "産業別就業者構成比",
+      "componentType": "line-chart",
+      "title": "産業別の就業者割合の推移",
       "componentProps": {
         "seriesRefs": [
           {
@@ -85,8 +162,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
             "label": "第3次産業就業者比率",
             "colorRole": "series-12"
           }
-        ],
-        "topN": 3
+        ]
       },
       "relatedRankingKeys": [
         "employed-people-ratio-primary",
@@ -100,81 +176,8 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "雇用",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-economy-income-wage",
-      "componentType": "line-chart",
-      "title": "可処分所得と最低賃金の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "disposable-income-worker-households",
-            "label": "可処分所得（二人以上の世帯のうち勤労者世帯）",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "minimum-wage-by-region",
-            "label": "最低賃金",
-            "colorRole": "count"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "disposable-income-worker-households",
-        "minimum-wage-by-region"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "所得",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-economy-job-market",
-      "componentType": "mixed-chart",
-      "title": "有効求人倍率と完全失業率の推移",
-      "componentProps": {
-        "columnSeriesRefs": [
-          {
-            "metricKey": "active-job-opening-ratio"
-          }
-        ],
-        "lineSeriesRefs": [
-          {
-            "metricKey": "unemployment-rate"
-          }
-        ],
-        "columnLabels": [
-          "有効求人倍率"
-        ],
-        "lineLabels": [
-          "完全失業率"
-        ],
-        "leftUnit": "倍",
-        "rightUnit": "%",
-        "columnColors": [
-          "population"
-        ],
-        "lineColors": [
-          "danger"
-        ]
-      },
-      "relatedRankingKeys": [
-        "active-job-opening-ratio",
-        "unemployment-rate"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "雇用",
-      "sortOrder": 10
+      "sortOrder": 0,
+      "annotation": "分類不能があるため3部門の合計は100%とは限りません。各割合の実値を表示します。"
     },
     {
       "componentKey": "md-local-economy-discussion",
@@ -182,7 +185,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "title": "データの読み解き — 地域経済の構造的格差",
       "componentProps": {
         "subtitle": "白書から見る、なぜ東京と地方で経済力にこれほど差があるのか",
-        "markdown": "日本の名目GDPは2024年度に初めて600兆円を突破（617.0兆円）し、緩やかな回復基調にある。一方、47都道府県の経済力には極めて大きな偏在性が残る。地方政府は国内総生産の10.8%（69.7兆円）を占める巨大な経済主体だが、その内部では東京一極集中と地方経済の縮小という構造的な二極化が進行している。本稿では各種白書のデータを基に、その構造を読み解く。\n\n### 現状 — 税収格差は最大5.8倍\n\n令和6年度の人口1人当たり税収額指数（全国平均=100）では、地方税計で東京都（167.3）と長崎県（70.3）の間に約2.4倍の格差がある。企業の本社集積を反映する法人関係二税では、東京都（245.8）と奈良県（42.6）の間で約5.8倍の極端な偏在が生じている。所定内給与額も東京都（女性33.8万円・男性44.1万円）が全国最高で、青森県（女性22.4万円）や沖縄県（男性28.7万円）との差は大きい。一方、消費者物価地域差指数も東京都が104.5と最も高く、特に「住居」費が物価全体を押し上げている点には注意が必要である。\n\n### 都道府県差の構造 — 「人・カネ・産業」の3要因\n\n地域経済の格差は、3つの構造的要因が連動して生じている。\n\n**(1) 若年層・女性の社会減**\n\n令和6年（2024年）の人口増減で男女ともに増加したのは東京都のみ。残り40近い道府県は社会減少が続いている。東京圏への転入超過は平成21年（2009年）以降、女性が男性を上回って推移しており、地方の若年女性の流出が出生数減少と人口縮小を同時に引き起こす悪循環となっている。背景には大学進学率の差（東京都女性77.6% vs 宮崎県女性38.7%）や、「やりたい仕事・就職先の少なさ」という雇用機会の限定がある。\n\n**(2) 産業構造の偏在**\n\n正規雇用者に占める「医療・福祉」の割合は長崎県で42.5%に達し、女性雇用が同分野に偏る傾向が強い。一方「製造業」は北関東・甲信、東海、北陸などの特定地域に集中する。全国的にはサービス業が雇用シェアの約75%を占めるまで拡大しているが、サービス業は製造業に比べ労働生産性が低く、地域経済の成長余地を制約している。\n\n**(3) 寡占化と市場縮小**\n\n地方では人口減少により市場規模が縮小し、特に運輸・金融などで企業統廃合（寡占化）が進む。2020年施行のいわゆる地域特例法により、バス会社や地方銀行の合併・路線調整・運賃協定が独占禁止法の適用除外となっている。社会機能の維持と競争環境のバランスが課題である。\n\n### 政策的含意 — 「地方こそ成長の主役」への転換\n\n政府は2024年10月、「デジタル田園都市国家構想実現会議」を発展させ「新しい地方経済・生活環境創生本部」を設置。2025年6月閣議決定の地方創生2.0基本構想では、人口が減っても経済成長を維持する「適応策」を重視している。令和8年度（2026年度）には地場産業の付加価値向上と販路開拓を支援する「地域未来基金費」4,000億円を新たに地方財政計画に計上、その全額を道府県分の基準財政需要額に算入する。AI・自動運転等の新技術を活用する「地域社会DX」と、医療・福祉・商業施設を集約し公共交通で結ぶ「コンパクト・プラス・ネットワーク」型都市構造への再編が並行して進められている。\n\n### 読み解きのコツ\n\n地域経済を評価する際は、「県内総生産（GDP）」と「県民所得」を混同しないことが重要である。GDPは「県内で生み出された付加価値」、県民所得は「県の居住者が受け取った所得（県外勤務分も含む）」を指す。ベッドタウン県ではGDPは小さくても県民所得は高く、逆に大都市近郊の工業県ではGDPが大きくても本社が東京にあるため法人税収は流出する。47都道府県を横並びで比較するときは、「人口1人当たり」で揃え、税収・所得・産業構造の3つを必ずセットで見ることが、データの読み解きとして本質的である。",
+        "markdown": "日本の名目GDPは2024年度に初めて600兆円を突破（617.0兆円）し、緩やかな回復基調にある。一方、47都道府県の経済力には極めて大きな偏在性が残る。地方政府は国内総生産の10.8%（69.7兆円）を占める巨大な経済主体だが、その内部では東京一極集中と地方経済の縮小という構造的な二極化が進行している。本稿では各種白書のデータを基に、その構造を読み解く。\n\n### 現状 — 税収格差は最大5.8倍\n\n令和6年度の人口1人当たり税収額指数（全国平均=100）では、地方税計で東京都（167.3）と長崎県（70.3）の間に約2.4倍の格差がある。企業の本社集積を反映する法人関係二税では、東京都（245.8）と奈良県（42.6）の間で約5.8倍の極端な偏在が生じている。所定内給与額も東京都（女性33.8万円・男性44.1万円）が全国最高で、青森県（女性22.4万円）や沖縄県（男性28.7万円）との差は大きい。一方、消費者物価地域差指数も東京都が104.5と最も高く、特に「住居」費が物価全体を押し上げている点には注意が必要である。\n\n### 都道府県差の構造 — 「人・カネ・産業」の3要因\n\n地域経済の格差は、3つの構造的要因が連動して生じている。\n\n**(1) 若年層・女性の社会減**\n\n2024年の人口推計では、人口増加は東京都と埼玉県の2都県、社会増加は24都道府県だった。人口全体の増減と社会増減は区別する必要がある。ここでの社会増減には国外との移動も含まれ、国内の転入超過とは対象が異なる。([出典：人口推計2024](https://www.stat.go.jp/data/jinsui/2024np/index.html))東京圏への転入超過は平成21年（2009年）以降、女性が男性を上回って推移しており、地方の若年女性の流出が出生数減少と人口縮小を同時に引き起こす悪循環となっている。背景には大学進学率の差（東京都女性77.6% vs 宮崎県女性38.7%）や、「やりたい仕事・就職先の少なさ」という雇用機会の限定がある。\n\n**(2) 産業構造の偏在**\n\n正規雇用者に占める「医療・福祉」の割合は長崎県で42.5%に達し、女性雇用が同分野に偏る傾向が強い。一方「製造業」は北関東・甲信、東海、北陸などの特定地域に集中する。全国的にはサービス業が雇用シェアの約75%を占めるまで拡大しているが、サービス業は製造業に比べ労働生産性が低く、地域経済の成長余地を制約している。\n\n**(3) 寡占化と市場縮小**\n\n地方では人口減少により市場規模が縮小し、特に運輸・金融などで企業統廃合（寡占化）が進む。2020年施行のいわゆる地域特例法により、バス会社や地方銀行の合併・路線調整・運賃協定が独占禁止法の適用除外となっている。社会機能の維持と競争環境のバランスが課題である。\n\n### 政策的含意 — 「地方こそ成長の主役」への転換\n\n政府は2024年10月、「デジタル田園都市国家構想実現会議」を発展させ「新しい地方経済・生活環境創生本部」を設置。2025年6月閣議決定の地方創生2.0基本構想では、人口が減っても経済成長を維持する「適応策」を重視している。令和8年度（2026年度）には地場産業の付加価値向上と販路開拓を支援する「地域未来基金費」4,000億円を新たに地方財政計画に計上、その全額を道府県分の基準財政需要額に算入する。AI・自動運転等の新技術を活用する「地域社会DX」と、医療・福祉・商業施設を集約し公共交通で結ぶ「コンパクト・プラス・ネットワーク」型都市構造への再編が並行して進められている。\n\n### 読み解きのコツ\n\n地域経済を評価する際は、「県内総生産（GDP）」と「県民所得」を混同しないことが重要である。GDPは「県内で生み出された付加価値」、県民所得は「県の居住者が受け取った所得（県外勤務分も含む）」を指す。ベッドタウン県ではGDPは小さくても県民所得は高く、逆に大都市近郊の工業県ではGDPが大きくても本社が東京にあるため法人税収は流出する。47都道府県を横並びで比較するときは、「人口1人当たり」で揃え、税収・所得・産業構造の3つを必ずセットで見ることが、データの読み解きとして本質的である。",
         "sources": [
           {
             "label": "経済財政白書 (令和7年版)",
@@ -305,7 +308,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-le-establishments-trend",
       "componentType": "line-chart",
-      "title": "全産業事業所数の推移",
+      "title": "全産業事業所数（2009・2014年）",
       "componentProps": {
         "seriesRefs": [
           {
@@ -329,38 +332,53 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": null,
-      "sortOrder": 20
+      "sortOrder": 5,
+      "annotation": "経済センサス基礎調査の調査時点の事業所数。調査範囲の変更をまたぐ増減に注意。"
     }
   ],
   evidenceTopics: [
     {
-      key: "employment-industry-composition",
-      lensKey: "composition",
-      title: "就業者の産業構成",
-      question: "第1次・第2次・第3次産業で働く就業者の構成は、地域ごとにどう異なるか。",
-      summary:
-        "2020年国勢調査の調査週間に実際に働いた主な事業所の産業で就業者を分類する。産業分類不能の就業者は各区分の分子に含まれないため、3区分の比率の合計が必ずしも100％にはならない。",
-      sourceKeys: ["stat-census-2020-employment-status"],
-      relatedRankingKeys: [
+      "key": "employment-industry-composition",
+      "lensKey": "composition",
+      "title": "就業者の産業構成",
+      "question": "第1次・第2次・第3次産業で働く就業者の構成は、地域ごとにどう異なるか。",
+      "summary": "2020年国勢調査の調査週間に実際に働いた主な事業所の産業で就業者を分類する。産業分類不能の就業者は各区分の分子に含まれないため、3区分の比率の合計が必ずしも100％にはならない。",
+      "sourceKeys": [
+        "stat-census-2020-employment-status"
+      ],
+      "relatedRankingKeys": [
         "employed-people-ratio-primary",
         "employed-people-ratio-secondary",
-        "employed-people-ratio-tertiary",
+        "employed-people-ratio-tertiary"
       ],
-      relatedChartKeys: ["theme-industry-structure"],
-      relatedThemeKeys: ["manufacturing", "labor-mobility"],
+      "relatedChartKeys": [
+        "theme-industry-structure"
+      ],
+      "relatedThemeKeys": [
+        "manufacturing",
+        "labor-mobility"
+      ]
     },
     {
-      key: "business-base-density",
-      lensKey: "service-capacity",
-      title: "地域の事業所基盤",
-      question: "事業活動を継続して行う場所は、人口規模や面積を踏まえると地域ごとにどれほどあるか。",
-      summary:
-        "事業所総数だけでは人口・面積の大きい地域ほど多くなるため、人口10万人当たり・面積100平方キロメートル当たりも併読する。農林漁家の個人経営などは対象外で、2009年と2014年は産業分類が異なり、2014年は福島県の一部調査区を除く。",
-      sourceKeys: ["stat-economic-census-basic-2014"],
-      relatedRankingKeys: ["number-of-establishments-economic-census-basic-survey"],
-      relatedChartKeys: ["theme-le-establishments-trend"],
-      relatedThemeKeys: ["manufacturing", "labor-mobility"],
-    },
+      "key": "business-base-density",
+      "lensKey": "service-capacity",
+      "title": "地域の事業所基盤",
+      "question": "事業活動を継続して行う場所は、人口規模や面積を踏まえると地域ごとにどれほどあるか。",
+      "summary": "事業所総数だけでは人口・面積の大きい地域ほど多くなるため、人口10万人当たり・面積100平方キロメートル当たりも併読する。農林漁家の個人経営などは対象外で、2009年と2014年は産業分類が異なり、2014年は福島県の一部調査区を除く。",
+      "sourceKeys": [
+        "stat-economic-census-basic-2014"
+      ],
+      "relatedRankingKeys": [
+        "number-of-establishments-economic-census-basic-survey"
+      ],
+      "relatedChartKeys": [
+        "theme-le-establishments-trend"
+      ],
+      "relatedThemeKeys": [
+        "manufacturing",
+        "labor-mobility"
+      ]
+    }
   ],
   "keywords": [
     "地域経済",

@@ -43,7 +43,7 @@ the page content is useless when stacked after the content it controls. The cont
 owns equivalent controls directly below the breadcrumb: `ThemeSwitcher`, `PrefectureSelect`, page anchors,
 all metric links, and source surveys. The desktop rail has the same roles and does not expand the full theme list.
 
-`app/themes/local-finance` is bespoke (it has no provider) and passes `showRegion={false}`.
+`app/themes/local-finance` uses the same provider; its detailed settlement cards follow the shared prefecture selection.
 
 ## Geography Scope Contract
 
@@ -78,6 +78,22 @@ The migration is specified in
 | Heavy national structure         | theme page, not area page                                       |
 
 ## Chart Editorial Contract
+
+全テーマの `ThemeCatalog.overview` に従い、主要指標（最大4件）→ 指標切替付きの
+県別地図・一覧 → 複数指標の比較表 → curated chart の順に表示する。`headlineRankingKeys` /
+`comparisonRankingKeys` / `mapNotes` はカタログが所有する。気候もカタログから生成し、
+地方財政の決算カード・市区町村の内訳は共通UIの詳細欄に置いて県選択を同期する。
+指標の選定根拠・調査日は同じカタログの `selection` に置く。
+
+- 概況は見出しに県選択を置き、主要指標・地図と順位表・比較表・推移の順でコンパクトに表示する。左ナビの寸法は `PageShell.leftRailDensity="compact"` 経由で共有 `LeftRailLayout` が所有する。
+- カード全体から指標の地図へ移動できる。解説と白書の論点は共有 `ContentDisclosure` で開閉し、調査年・単位・中央値の定義・指標固有の注意は常時表示する。
+- 地図の境界はクライアントで `/prefecture.topojson` を取得し、RSC payload に含めない。
+- 県選択は既存 `ThemePrefectureContext` と URL を共有する。概況の地図では市区町村へドリルダウンしない。
+- 比較表は同年・有限値の都道府県だけを対象に中央値と差を計算し、年次・県数を併記する。
+  中央値は日本全体の集計値と区別し、割合の差はポイントで示す。欠測はゼロに置換しない。
+- 単年しかない指標は表で確認する。空き家率と持ち家率は分母が違うため別の推移図とする。
+- 折れ線の採否は設定上の年範囲だけで判断せず、R2の実収録年を確認する。単位・対象が異なる系列の合計、内数を含む円グラフ、旧系列の接続を避ける。全指標へのリンクは残す。
+- 回帰検証: `theme-overview.test.ts`、`theme-overview-coverage.test.ts`、`living-housing-evidence-topics.test.ts`。`validate:catalog` は公開テーマの概況未定義も検知する。
 
 Theme chart は複数指標の関係を読むための可視化であり、指標定義の保存場所ではない。
 

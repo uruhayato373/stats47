@@ -1,21 +1,25 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from 'react';
 
-import { ChartErrorState } from "@/components/charts/ChartState";
-import type { PageComponent } from "@/components/stat-charts";
+import { ChartErrorState } from '@/components/charts/ChartState';
+import type { PageComponent } from '@/components/stat-charts';
 
-import { ChartEmptyState, ChartLoading } from "./ChartState";
-import { MarkdownSectionRenderer } from "./MarkdownSectionRenderer";
-import { loadThemeChartResult, type ThemeChartLoadResult } from "./theme-chart-result";
-import { ThemeChartResultRenderer } from "./ThemeChartResultRenderer";
+import { ChartEmptyState, ChartLoading } from './ChartState';
+import { MarkdownSectionRenderer } from './MarkdownSectionRenderer';
+import {
+  loadThemeChartResult,
+  type ThemeChartLoadResult,
+} from './theme-chart-result';
+import { ThemeChartResultRenderer } from './ThemeChartResultRenderer';
 
-import type { MarkdownSectionComponentProps } from "../types";
+import type { MarkdownSectionComponentProps } from '../types';
 
 interface Props {
   chart: PageComponent;
   prefCode: string;
   prefName: string;
+  collapseText?: boolean;
 }
 
 /**
@@ -24,12 +28,14 @@ interface Props {
  * page_components の componentType に応じてデータを取得し、
  * 実際のチャート描画は ThemeChartResultRenderer に委譲する。
  */
-export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
-  const [loadResult, setLoadResult] = useState<ThemeChartLoadResult | undefined>(undefined);
+export function ThemeDbChartRenderer({ chart, prefCode, collapseText }: Props) {
+  const [loadResult, setLoadResult] = useState<
+    ThemeChartLoadResult | undefined
+  >(undefined);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    if (chart.componentType === "markdown-section") return;
+    if (chart.componentType === 'markdown-section') return;
 
     let cancelled = false;
     setLoadResult(undefined);
@@ -47,7 +53,7 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chart object reference changes on every render; key/type/area identify the fetch
   }, [chart.componentKey, chart.componentType, prefCode]);
 
-  if (chart.componentType === "markdown-section") {
+  if (chart.componentType === 'markdown-section') {
     const props = parseMarkdownSectionComponentProps(chart.componentProps);
     if (!props) {
       return <ChartEmptyState message="markdown が未設定です" />;
@@ -59,7 +65,12 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
         data-theme-component-type="markdown-section"
         data-data-state="ready"
       >
-        <MarkdownSectionRenderer title={chart.title} props={props} fallbackSourceName={chart.sourceName} />
+        <MarkdownSectionRenderer
+          title={chart.title}
+          props={props}
+          fallbackSourceName={chart.sourceName}
+          collapsible={collapseText}
+        />
       </div>
     );
   }
@@ -77,7 +88,7 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
     );
   }
 
-  if (loadResult.state === "source-unavailable") {
+  if (loadResult.state === 'source-unavailable') {
     return (
       <div
         data-theme-chart="true"
@@ -85,12 +96,15 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
         data-theme-component-type={chart.componentType}
         data-data-state="source-unavailable"
       >
-        <ChartErrorState message="データソースからチャートを取得できません" height={200} />
+        <ChartErrorState
+          message="データソースからチャートを取得できません"
+          height={200}
+        />
       </div>
     );
   }
 
-  if (loadResult.state === "no-data") {
+  if (loadResult.state === 'no-data') {
     return (
       <div
         data-theme-chart="true"
@@ -98,7 +112,9 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
         data-theme-component-type={chart.componentType}
         data-data-state="no-data"
       >
-        <ChartEmptyState message={loadResult.message ?? "チャートデータがありません"} />
+        <ChartEmptyState
+          message={loadResult.message ?? 'チャートデータがありません'}
+        />
       </div>
     );
   }
@@ -115,9 +131,12 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
       data-series-count={result.contract.seriesCount}
     >
       <ThemeChartResultRenderer chartResult={result} />
-      {"scopeLabel" in result.contract &&
-      result.contract.scopeLabel === "47都道府県平均" ? (
-        <p className="mt-2 text-xs text-muted-foreground" data-national-average-label>
+      {'scopeLabel' in result.contract &&
+      result.contract.scopeLabel === '47都道府県平均' ? (
+        <p
+          className="mt-2 text-xs text-muted-foreground"
+          data-national-average-label
+        >
           表示値は全国値ではなく、47都道府県の単純平均です。
         </p>
       ) : null}
@@ -125,57 +144,71 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
   );
 }
 
-function parseMarkdownSectionComponentProps(value: Record<string, unknown>): MarkdownSectionComponentProps | null {
-  const subtitle = typeof value.subtitle === "string" ? value.subtitle : undefined;
+function parseMarkdownSectionComponentProps(
+  value: Record<string, unknown>
+): MarkdownSectionComponentProps | null {
+  const subtitle =
+    typeof value.subtitle === 'string' ? value.subtitle : undefined;
   const sources = parseMarkdownSources(value.sources);
 
-  if (value.displayMode === "faq") {
+  if (value.displayMode === 'faq') {
     const items = parseFaqItems(value.items);
     if (!items) return null;
-    return { displayMode: "faq", items, subtitle, sources };
+    return { displayMode: 'faq', items, subtitle, sources };
   }
 
-  if (value.displayMode !== undefined && value.displayMode !== "prose") return null;
-  if (typeof value.markdown !== "string") return null;
+  if (value.displayMode !== undefined && value.displayMode !== 'prose')
+    return null;
+  if (typeof value.markdown !== 'string') return null;
 
   return {
-    displayMode: "prose",
+    displayMode: 'prose',
     markdown: value.markdown,
     subtitle,
     sources,
   };
 }
 
-function parseFaqItems(value: unknown): Array<{ question: string; answer: string }> | null {
+function parseFaqItems(
+  value: unknown
+): Array<{ question: string; answer: string }> | null {
   if (!Array.isArray(value) || value.length === 0) return null;
   const items = value.map((item) => {
-    if (typeof item !== "object" || item === null || Array.isArray(item)) return null;
+    if (typeof item !== 'object' || item === null || Array.isArray(item))
+      return null;
     const candidate = item as Record<string, unknown>;
     if (
-      typeof candidate.question !== "string" ||
+      typeof candidate.question !== 'string' ||
       candidate.question.trim().length === 0 ||
-      typeof candidate.answer !== "string" ||
+      typeof candidate.answer !== 'string' ||
       candidate.answer.trim().length === 0
     ) {
       return null;
     }
     return { question: candidate.question, answer: candidate.answer };
   });
-  return items.every((item) => item !== null) ? (items as Array<{ question: string; answer: string }>) : null;
+  return items.every((item) => item !== null)
+    ? (items as Array<{ question: string; answer: string }>)
+    : null;
 }
 
-function parseMarkdownSources(value: unknown): MarkdownSectionComponentProps["sources"] {
+function parseMarkdownSources(
+  value: unknown
+): MarkdownSectionComponentProps['sources'] {
   if (!Array.isArray(value)) return undefined;
 
   const sources = value.map((item) => {
-    if (typeof item !== "object" || item === null || Array.isArray(item)) return null;
+    if (typeof item !== 'object' || item === null || Array.isArray(item))
+      return null;
     const source = item as Record<string, unknown>;
-    if (typeof source.label !== "string") return null;
+    if (typeof source.label !== 'string') return null;
     return {
       label: source.label,
-      url: typeof source.url === "string" ? source.url : undefined,
+      url: typeof source.url === 'string' ? source.url : undefined,
     };
   });
 
-  return sources.every((source) => source !== null) ? (sources as MarkdownSectionComponentProps["sources"]) : undefined;
+  return sources.every((source) => source !== null)
+    ? (sources as MarkdownSectionComponentProps['sources'])
+    : undefined;
 }

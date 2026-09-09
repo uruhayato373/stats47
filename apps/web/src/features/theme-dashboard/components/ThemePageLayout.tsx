@@ -72,6 +72,8 @@ interface Props {
    * （テーマ固有の補助ナビゲーションなど）。
    */
   toolbar?: ReactNode;
+  /** 共通の主要指標・比較・推移に続く、テーマ固有の詳細分析。 */
+  supplement?: ReactNode;
 }
 
 /**
@@ -90,6 +92,7 @@ export async function ThemePageLayout({
   areaContext,
   initialPrefecture,
   toolbar,
+  supplement,
 }: Props) {
   const pageCharts = await loadPageComponents('theme', theme.themeKey);
   const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
@@ -126,6 +129,12 @@ export async function ThemePageLayout({
   }));
   const pageLinks = [
     { href: '#theme-indicators', label: '主要指標' },
+    ...(catalog?.overview
+      ? [
+          { href: '#theme-comparison', label: '地域差と一覧' },
+          { href: '#theme-comparison-table', label: '指標比較表' },
+        ]
+      : []),
     ...(pageCharts.some(
       (chart) =>
         chart.componentType !== 'kpi-card' &&
@@ -177,11 +186,15 @@ export async function ThemePageLayout({
               areaContext ? { areaCode: areaContext.areaCode } : undefined
             }
             showScope={!areaContext}
+            showRegion={!catalog?.overview}
+            compact={!!catalog?.overview}
             metrics={themeMetrics}
             surveys={themeSurveys}
           />
         }
         leftRailNarrowBehavior="hide"
+        leftRailDensity={catalog?.overview ? 'compact' : undefined}
+        className={catalog?.overview ? 'py-4' : undefined}
       >
         <div className="text-foreground">
           <script
@@ -192,7 +205,7 @@ export async function ThemePageLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(pageData) }}
           />
-          <Breadcrumb className="mb-4">
+          <Breadcrumb className={catalog?.overview ? 'mb-2' : 'mb-4'}>
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
@@ -230,16 +243,19 @@ export async function ThemePageLayout({
 
           {/* h1 は狭幅ナビより先に置き、画面を開いた時点でページの主語を示す。
           hero 画像を持つテーマ (THEME_HEROES) は画像付きの ThemeHero に差し替える。 */}
-          {THEME_HEROES[theme.themeKey] ? (
+          {!catalog?.overview && THEME_HEROES[theme.themeKey] ? (
             <ThemeHero
               themeTitle={theme.title}
               hero={THEME_HEROES[theme.themeKey]}
             />
           ) : (
-            <ThemeAreaHeader themeTitle={theme.title} />
+            <ThemeAreaHeader
+              themeTitle={theme.title}
+              compact={!!catalog?.overview}
+            />
           )}
 
-          {!areaContext && (
+          {!areaContext && !catalog?.overview && (
             <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
               <StatisticsScopeNav current="prefectures" />
             </div>
@@ -251,56 +267,90 @@ export async function ThemePageLayout({
           ★境界は左レールの共有クラスと必ず一致させること。
           ずれると両方出る幅ができるため LEFT_RAIL_NARROW_ONLY_CLASS を使う。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
-          <div
-            role="group"
-            aria-label="テーマと地域"
-            className={`mb-3 grid grid-cols-1 gap-3 border-y border-border py-3 sm:grid-cols-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
-          >
-            <div className="min-w-0">
-              <ThemeSwitcher
-                currentThemeKey={theme.themeKey}
-                areaContext={
-                  areaContext ? { areaCode: areaContext.areaCode } : undefined
-                }
-                compact
-              />
+          {!catalog?.overview && (
+            <div
+              role="group"
+              aria-label="テーマと地域"
+              className={`mb-3 grid grid-cols-1 gap-3 border-y border-border py-3 sm:grid-cols-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
+            >
+              <div className="min-w-0">
+                <ThemeSwitcher
+                  currentThemeKey={theme.themeKey}
+                  areaContext={
+                    areaContext ? { areaCode: areaContext.areaCode } : undefined
+                  }
+                  compact
+                />
+              </div>
+              <div className="min-w-0">
+                <span className="block text-xs font-medium text-muted-foreground">
+                  地域
+                </span>
+                <PrefectureSelect className="mt-1 w-full" />
+              </div>
             </div>
-            <div className="min-w-0">
-              <span className="block text-xs font-medium text-muted-foreground">
-                地域
-              </span>
-              <PrefectureSelect className="mt-1 w-full" />
-            </div>
-          </div>
+          )}
 
           <nav
             aria-label="このページの内容"
-            className={`mb-4 border-b border-border pb-3 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
+            className={`${catalog?.overview ? 'mb-2' : 'mb-4 border-b border-border pb-3'} ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
           >
-            <div className="flex items-center gap-x-5 gap-y-2 overflow-x-auto">
-              <span className="shrink-0 text-xs font-medium text-muted-foreground">
-                ページ内
-              </span>
-              {pageLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
-              <details className="group mt-1 border-t border-border pt-1">
-                <summary className="min-h-10 cursor-pointer py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                  <span className="group-open:hidden">
-                    全指標・出典調査を見る
-                  </span>
-                  <span className="hidden group-open:inline">
-                    全指標・出典調査を閉じる
-                  </span>
+            {!catalog?.overview && (
+              <div className="flex items-center gap-x-5 gap-y-2 overflow-x-auto">
+                <span className="shrink-0 text-xs font-medium text-muted-foreground">
+                  ページ内
+                </span>
+                {pageLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+            {(catalog?.overview ||
+              themeMetrics.length > 0 ||
+              themeSurveys.length > 0) && (
+              <details
+                className={
+                  catalog?.overview
+                    ? 'group'
+                    : 'group mt-1 border-t border-border pt-1'
+                }
+              >
+                <summary className="min-h-10 cursor-pointer py-2 text-sm font-medium text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                  {catalog?.overview ? (
+                    'テーマ・全指標・出典'
+                  ) : (
+                    <>
+                      <span className="group-open:hidden">
+                        全指標・出典調査を見る
+                      </span>
+                      <span className="hidden group-open:inline">
+                        全指標・出典調査を閉じる
+                      </span>
+                    </>
+                  )}
                 </summary>
+                {catalog?.overview && (
+                  <div className="mb-3 grid gap-3 sm:grid-cols-2">
+                    <ThemeSwitcher
+                      currentThemeKey={theme.themeKey}
+                      areaContext={
+                        areaContext
+                          ? { areaCode: areaContext.areaCode }
+                          : undefined
+                      }
+                      compact
+                    />
+                    {!areaContext && (
+                      <StatisticsScopeNav current="prefectures" />
+                    )}
+                  </div>
+                )}
                 <div className="grid gap-5 pb-2 sm:grid-cols-2">
                   {themeMetrics.length > 0 && (
                     <div>
@@ -370,7 +420,7 @@ export async function ThemePageLayout({
             </div>
           )}
 
-          {areaContext && areaHighlights.length > 0 && (
+          {areaContext && !catalog?.overview && areaHighlights.length > 0 && (
             <section
               aria-labelledby="area-theme-highlights"
               className="mb-6 border-y border-border bg-muted/30 px-4 py-4"
@@ -404,6 +454,18 @@ export async function ThemePageLayout({
 
           <ThemeDashboardClient
             themeConfig={theme}
+            overview={catalog?.overview}
+            hasEvidence={(catalog?.evidenceTopics?.length ?? 0) > 0}
+            overviewLabels={
+              catalog?.overview
+                ? Object.fromEntries(
+                    catalog.metrics.map((metric) => [
+                      metric.rankingKey,
+                      metric.shortLabel,
+                    ])
+                  )
+                : undefined
+            }
             metricGroups={THEME_CATALOGS[theme.themeKey]?.metricGroups}
             indicatorDataMap={data.indicatorDataMap}
             topology={data.topology}
@@ -415,6 +477,8 @@ export async function ThemePageLayout({
 
           {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
           <InContentAdSlot slot={HUB_INCONTENT} />
+
+          {supplement}
 
           {/*
         埋め込み section。定義は all-themes.ts の EMBEDDED_SECTIONS、実体は
@@ -439,7 +503,7 @@ export async function ThemePageLayout({
             return (
               <>
                 {half.length > 0 && (
-                  <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
+                  <div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-2">
                     {half.map((key) => {
                       const Section = THEME_SECTION_REGISTRY[key];
                       return <Section key={key} />;
@@ -449,7 +513,7 @@ export async function ThemePageLayout({
                 {full.map((key) => {
                   const Section = THEME_SECTION_REGISTRY[key];
                   return (
-                    <div key={key} className="mt-8">
+                    <div key={key} className="mt-5">
                       <Section />
                     </div>
                   );

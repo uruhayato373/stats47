@@ -23,22 +23,22 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
     {
       "rankingKey": "consumer-price-difference-index-food",
       "shortLabel": "食料",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "consumer-price-difference-index-housing",
       "shortLabel": "住居",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "consumer-price-difference-index-utilities",
       "shortLabel": "光熱・水道",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "consumer-price-difference-index-education",
       "shortLabel": "教育",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "consumer-price-difference-index-culture-recreation",
@@ -48,12 +48,12 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
     {
       "rankingKey": "consumer-price-difference-index-transport-communication",
       "shortLabel": "交通・通信",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "consumer-price-difference-index-healthcare",
       "shortLabel": "保健医療",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "consumer-price-difference-index-clothing-footwear",

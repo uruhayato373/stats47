@@ -16,7 +16,7 @@
  *   - primary/secondary の selection 未記入 / componentKey の横断共有 / sortOrder 重複
  *   - primary 指標がチャート未使用 / metricGroups の未所属・過大
  *
- * ★旧 panelTabs (廃止済み概念) の検査は存在しない。指標カードの編成は metricGroups が担う。
+ * ★旧 panelTabs (廃止済み概念) の検査は存在しない。概況は overview、旧カードの編成は metricGroups が担う。
  *
  * 使い方:
  *   npx tsx packages/data-configs/scripts/validate-theme-catalog.ts
@@ -411,12 +411,15 @@ export function validateMetricGroups(
     }
   }
 
-  // 非 context 指標の未所属 (グループを定義したなら主要指標は必ずどれかのカードに出す)
+  // 比較表に出ている指標は概況で閲覧できる。旧カードも比較表も未所属の指標だけを警告する。
   for (const m of c.metrics) {
     if (m.role === 'context') continue;
-    if (!assigned.has(m.rankingKey)) {
+    if (
+      !assigned.has(m.rankingKey) &&
+      !c.overview?.comparisonRankingKeys.includes(m.rankingKey)
+    ) {
       warns.push(
-        `[group-orphan] ${c.key}: ${m.role} 指標 "${m.rankingKey}" がどの metricGroup にも未所属`
+        `[group-orphan] ${c.key}: ${m.role} 指標 "${m.rankingKey}" が metricGroup・概況の比較表のどちらにも未所属`
       );
     }
   }
@@ -551,6 +554,21 @@ export function validateEvidenceTopics(
   }
 }
 
+/** 公開テーマの登録漏れや概況未定義を検知する。 */
+export function validateThemeOverviewCoverage(
+  catalogs: ThemeCatalog[],
+  themeKeys: Iterable<string>,
+  errors: string[]
+): void {
+  for (const key of themeKeys) {
+    if (!catalogs.some((catalog) => catalog.key === key && catalog.overview)) {
+      errors.push(
+        `[overview-missing] ${key}: 公開テーマにはカタログと概況が必要`
+      );
+    }
+  }
+}
+
 function main() {
   const catalogs = listThemeCatalogs();
   const errors: string[] = [];
@@ -558,11 +576,43 @@ function main() {
 
   validateEvidenceSources(errors);
   const themeKeys = new Set(THEME_INDICATOR_SETS.map((set) => set.key));
+  validateThemeOverviewCoverage(catalogs, themeKeys, errors);
 
   const globalComponentKeys = new Map<string, string>(); // componentKey → theme
 
   for (const c of catalogs) {
     const metricKeys = new Set(c.metrics.map((m) => m.rankingKey));
+    if (c.overview) {
+      const { headlineRankingKeys, comparisonRankingKeys, mapNotes } =
+        c.overview;
+      if (
+        !c.overview.introduction.trim() ||
+        headlineRankingKeys.length < 1 ||
+        headlineRankingKeys.length > 4
+      ) {
+        errors.push(
+          `[overview-headlines] ${c.key}: introduction と 1〜4 件の主要指標が必要`
+        );
+      }
+      if (
+        new Set(comparisonRankingKeys).size !== comparisonRankingKeys.length ||
+        new Set(headlineRankingKeys).size !== headlineRankingKeys.length
+      ) {
+        errors.push(`[overview-duplicate] ${c.key}: 概況の指標が重複`);
+      }
+      for (const key of headlineRankingKeys) {
+        if (!comparisonRankingKeys.includes(key))
+          errors.push(
+            `[overview-headline-missing] ${c.key}: ${key} が比較指標に不在`
+          );
+      }
+      for (const key of comparisonRankingKeys) {
+        if (!metricKeys.has(key) || !mapNotes[key]?.trim())
+          errors.push(
+            `[overview-metric] ${c.key}: ${key} の登録または注釈が不足`
+          );
+      }
+    }
     const metricLabels = new Map(
       c.metrics.map((m) => [m.rankingKey, m.shortLabel] as const)
     );
@@ -615,14 +665,18 @@ function main() {
         ch.componentKey,
         (ch.componentProps ?? {}) as Record<string, unknown>
       )) {
-        errors.push(`[series-ref-migration] ${c.key}/${ch.componentKey}: ${msg}`);
+        errors.push(
+          `[series-ref-migration] ${c.key}/${ch.componentKey}: ${msg}`
+        );
       }
       for (const msg of validateStatSeriesRefAlignment(
         (ch.componentProps ?? {}) as Record<string, unknown>,
         ch.relatedRankingKeys ?? [],
         metricLabels
       )) {
-        errors.push(`[series-ref-alignment] ${c.key}/${ch.componentKey}: ${msg}`);
+        errors.push(
+          `[series-ref-alignment] ${c.key}/${ch.componentKey}: ${msg}`
+        );
       }
       // 色は role で持ち生成器が hex へ解決する (WP5)。色キー文脈に role でない値
       // (生 hex/hsl/rgb = raw-color / typo 等の未知 role = unknown-role) が残っていたら error。
@@ -669,7 +723,7 @@ function main() {
         );
       }
       globalComponentKeys.set(ch.componentKey, c.key);
-      // sortOrder 重複 (warn: 既存データに正当な重複あり=local-economy。描画は配列順で安定)
+      // sortOrder 重複 (描画は配列順で安定するが、著者の表示順を明確にするため warn)
       if (seenSortOrders.has(ch.sortOrder)) {
         warns.push(
           `[dup-sortorder] ${c.key}/${ch.componentKey}: sortOrder ${ch.sortOrder} が重複`
@@ -692,7 +746,10 @@ function main() {
     //   チャートと独立に描画されるため、チャート未使用でも正常。設計確認用に warn)
     for (const m of c.metrics) {
       if (m.role !== 'primary') continue;
-      if (!keysInCharts.has(m.rankingKey)) {
+      if (
+        !keysInCharts.has(m.rankingKey) &&
+        !c.overview?.headlineRankingKeys.includes(m.rankingKey)
+      ) {
         warns.push(
           `[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" がチャート未使用 (card 描画)`
         );

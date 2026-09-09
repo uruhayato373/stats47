@@ -71,6 +71,17 @@ export interface CatalogMetric {
   selection?: MetricSelection;
 }
 
+/** 概況 → 地域比較 → 推移の表示構成。指標のラベル・値は既存定義から解決する。 */
+export interface CatalogOverview {
+  introduction: string;
+  /** 最初に見せる 1〜4 指標。横スクロールさせない。 */
+  headlineRankingKeys: string[];
+  /** 地図の切替候補と比較表の行。同じ最新年の県別値で比較する。 */
+  comparisonRankingKeys: string[];
+  /** 地図の指標ごとの誤読防止注釈。 */
+  mapNotes: Record<string, string>;
+}
+
 /** カタログ内の 1 チャート。page-components の PageComponent 1 行に対応。 */
 export interface CatalogChart {
   /** 一意キー (テーマ内 + 全テーマ横断で重複禁止) */
@@ -184,6 +195,8 @@ export interface ThemeCatalog {
   usage: IndicatorSetUsage;
   /** 含まれる指標 (表示順) */
   metrics: CatalogMetric[];
+  /** 指標を吟味して採用したテーマのみ、概況・地図・表を先に表示する。 */
+  overview?: CatalogOverview;
   /** チャート定義 (page-components に生成) */
   charts: CatalogChart[];
   /**

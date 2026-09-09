@@ -130,6 +130,9 @@ function Resolve-LocalOverrideFile {
       $Key.StartsWith("gis/mlit-ksj/A31b/25/display/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A03/03/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A30a5/11/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/P04/20/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/C28/07/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/N08/21/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A38/20/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A42/18/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A43/18/", [StringComparison]::Ordinal) -or

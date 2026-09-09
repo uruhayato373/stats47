@@ -169,6 +169,53 @@ CI (Linux) は `HTTPS_PROXY` が無いので、**env があるときだけ dispa
 **e-Stat の app ID は `apps/web/.env.development` にある** (公開 ID・git tracked・秘密ではない)。
 `NEXT_PUBLIC_ESTAT_APP_ID` が未設定でも、スクリプトがこのファイルを読めば e-Stat を叩ける。
 
+### Windows の NotebookLM 連携
+
+既存の `notebooklm-cross-query.mjs` / `notebooklm-notebook-builder.mjs` は
+`%USERPROFILE%\.notebooklm-venv\Scripts\notebooklm.exe` を自動検出する。PATH の変更は不要。
+2026-09-09 に専用環境で `notebooklm-py[browser,mcp]==0.8.2` を確認した。
+これは Google 公式 SDK ではなく、既存スキルが採用する
+[notebooklm-py](https://github.com/teng-lin/notebooklm-py) の CLI / MCP。
+
+初回導入は `uv venv --python python "$env:USERPROFILE/.notebooklm-venv"`、続いて
+`uv pip install --python "$env:USERPROFILE/.notebooklm-venv/Scripts/python.exe" 'notebooklm-py[browser,mcp]==0.8.2' 'truststore==0.10.4'`。
+既存環境がある場合は再作成しない。
+
+```powershell
+$env:PYTHONIOENCODING = 'utf-8'
+$notebookCli = Join-Path $env:USERPROFILE '.notebooklm-venv/Scripts/notebooklm.exe'
+& $notebookCli login --browser chrome
+```
+
+Google ログインは本人が専用ブラウザーで行う。ログイン完了は CLI が自動検出する。
+認証状態はユーザーフォルダーの `.notebooklm` 配下に置き、リポジトリへコピーしたり内容を出力しない。
+利用可能の判定はインストール成功ではなく、認証検査・ノートブック一覧・引用付き質問応答の成功で行う。
+
+**Codex はローカル stdio MCP を使う。** 登録先は `%USERPROFILE%\.codex\config.toml` の
+`[mcp_servers.notebooklm]`。既存の MCP を残して、次のコマンドで追加する。
+
+```powershell
+codex mcp add notebooklm --env 'PYTHONIOENCODING=utf-8' --env 'NO_PROXY=localhost,127.0.0.1,::1,.local' -- "$env:USERPROFILE/.notebooklm-venv/Scripts/python.exe" -c 'import truststore; truststore.inject_into_ssl(); from notebooklm.mcp.__main__ import main; main()' --profile default --log-level WARNING
+```
+
+- `truststore` は MCP プロセス内で Windows の信頼済み証明書ストアを使用する。
+  TLS 検証は有効のまま。専用環境以外やパッケージ本体を書き換えない。
+- この端末では `NO_PROXY` の Google 除外により直接通信が HTTP 503 の社内ブロック応答となった。
+  MCP のみ除外先をローカル宛てに限定し、既定の `HTTP_PROXY` / `HTTPS_PROXY` 経由にすると接続成功。
+  コマンド中のカンマを含む `--env` 引数は PowerShell で必ず引用する。
+- 同じ MCP テーブルに `startup_timeout_sec = 60`、`tool_timeout_sec = 180`、
+  `env_vars = ["HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"]` を設定する。
+  プロキシ認証値は設定ファイルに複製せず、環境から引き継ぐ。
+- 初期化・`notebook_list`・`source_list`・`chat_ask` の実通信まで検証する。
+  このタスクでツールが出ていなければ、アプリの「設定 → MCP servers」から再起動する。
+  認証期限切れだけは専用ブラウザーで再ログインする。
+- CLI を直接検査する場合も同じプロキシ除外設定を用い、上の Python 起動コードの import 先を
+  `notebooklm.notebooklm_cli` に替えて `auth check --test --json` / `list --json` を渡す。
+
+仕様: [NotebookLM 実装](https://github.com/teng-lin/notebooklm-py) /
+[Windows 証明書ストア](https://truststore.readthedocs.io/en/latest/) /
+[Codex MCP 設定](https://developers.openai.com/codex/mcp/)。
+
 ### ★Windows では `next build` が完走しない (2026-08-05)
 
 `npm run build --workspace apps/web` は `/themes/[themeSlug]/opengraph-image` の prerender で

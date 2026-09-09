@@ -3,7 +3,16 @@ import { describe, expect, it } from 'vitest';
 import { POPULATION_DYNAMICS_CATALOG } from '../population-dynamics';
 
 describe('人口動態テーマの可視化構成', () => {
-  it('結果と自然増減を同じ単位の主要カードで比較する', () => {
+  it('人口規模と増減を概況で比較し、率同士のグループも保持する', () => {
+    const headlineKeys = [
+      'total-population',
+      'population-growth-rate',
+      'natural-increase-rate',
+      'moving-in-excess-rate',
+    ];
+    expect(POPULATION_DYNAMICS_CATALOG.overview?.headlineRankingKeys).toEqual(
+      headlineKeys
+    );
     expect(POPULATION_DYNAMICS_CATALOG.metricGroups).toEqual([
       {
         key: 'population-change',
@@ -19,9 +28,7 @@ describe('人口動態テーマの可視化構成', () => {
         metric.role,
       ])
     );
-    expect(roles.get('population-growth-rate')).toBe('primary');
-    expect(roles.get('natural-increase-rate')).toBe('secondary');
-    expect(roles.get('total-population')).toBe('context');
+    for (const key of headlineKeys) expect(roles.get(key)).toBe('primary');
   });
 
   it('自然増減、社会増減、人口構造の順で重複なく表示する', () => {
@@ -42,7 +49,7 @@ describe('人口動態テーマの可視化構成', () => {
       visualCharts.find(
         (chart) => chart.componentKey === 'theme-pop-migration-trend'
       )?.annotation
-    ).toBeUndefined();
+    ).toContain('国内の都道府県間移動');
     expect(
       visualCharts.every((chart) => chart.sourceLink?.startsWith('https://'))
     ).toBe(true);
@@ -53,11 +60,13 @@ describe('人口動態テーマの可視化構成', () => {
       (chart) => chart.componentKey === 'birth-death-count-trend'
     );
     const refs = birthDeath?.componentProps.seriesRefs as
-      | Array<{ metricKey?: string }>
-      | undefined;
+      Array<{ metricKey?: string }> | undefined;
 
     expect(birthDeath?.title).toContain('出生数と死亡数');
-    expect(refs?.map((ref) => ref.metricKey)).toEqual(['births', 'death-count']);
+    expect(refs?.map((ref) => ref.metricKey)).toEqual([
+      'births',
+      'death-count',
+    ]);
     expect(
       POPULATION_DYNAMICS_CATALOG.charts.map((chart) => chart.componentKey)
     ).not.toContain('birth-death-rate-trend');

@@ -12,7 +12,7 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "ratio-65-plus",
-      "shortLabel": "高齢化率",
+      "shortLabel": "65歳以上割合",
       "role": "primary"
     },
     {
@@ -23,7 +23,7 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     {
       "rankingKey": "total-fertility-rate",
       "shortLabel": "合計特殊出生率",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "crude-birth-rate",
@@ -43,12 +43,12 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     {
       "rankingKey": "population-growth-rate",
       "shortLabel": "人口増減率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "natural-increase-rate",
       "shortLabel": "自然増減率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "social-increase-rate",
@@ -62,8 +62,8 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "household-ratio-with-65plus",
-      "shortLabel": "65歳以上世帯割合",
-      "role": "context"
+      "shortLabel": "65歳以上を含む世帯率",
+      "role": "secondary"
     },
     {
       "rankingKey": "marriages-per-total-population",
@@ -87,8 +87,8 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "late-elderly-medical-expense-per-insured",
-      "shortLabel": "後期高齢者医療費",
-      "role": "context"
+      "shortLabel": "後期高齢者1人当たり医療費",
+      "role": "secondary"
     },
     {
       "rankingKey": "total-population",
@@ -97,13 +97,13 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "single-person-household-old-population-ratio",
-      "shortLabel": "65歳以上世帯員の単独世帯の割合",
-      "role": "context"
+      "shortLabel": "高齢単独世帯率",
+      "role": "primary"
     },
     {
       "rankingKey": "elderly-couple-only-household-ratio",
-      "shortLabel": "高齢夫婦のみの世帯の割合",
-      "role": "context"
+      "shortLabel": "高齢夫婦のみ世帯率",
+      "role": "primary"
     },
     {
       "rankingKey": "pension-benefit-total",

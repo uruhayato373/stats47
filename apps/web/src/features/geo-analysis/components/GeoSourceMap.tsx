@@ -2,6 +2,7 @@
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef, useState } from 'react';
 
+import { Button } from '@stats47/components/atoms/ui/button';
 import L from 'leaflet';
 import {
   GeoJSON,
@@ -20,12 +21,26 @@ import {
 import type { GeoSourceField } from '@stats47/data-configs/business-plan';
 import type { FeatureCollection } from 'geojson';
 
+type MapStatus =
+  | {
+      total: number;
+      matched: number;
+      displayed: number;
+    }
+  | { error: string }
+  | null;
+const FIT_OPTIONS = { padding: L.point(18, 18), maxZoom: 13, animate: false };
+
 function SourceContent({
   url,
   fields,
+  onBounds,
+  onStatus,
 }: {
   url: string;
   fields: GeoSourceField[];
+  onBounds: (bounds: L.LatLngBoundsExpression) => void;
+  onStatus: (status: MapStatus) => void;
 }) {
   const map = useMap();
   const worker = useRef<Worker | null>(null);
@@ -35,7 +50,6 @@ function SourceContent({
     total: number;
     revision: number;
   } | null>(null);
-  const [error, setError] = useState('');
   const sendView = () => {
     const b = map.getBounds();
     worker.current?.postMessage({
@@ -49,30 +63,53 @@ function SourceContent({
       new URL('../lib/geo-source-worker.ts', import.meta.url)
     );
     worker.current = instance;
+    const container = map.getContainer();
+    let initialBounds: L.LatLngBoundsExpression | null = null;
+    let hasFitted = false;
+    const syncSize = () => {
+      // Hidden tabs/panels have no usable viewport; fit only after they appear.
+      if (!container.clientWidth || !container.clientHeight) return;
+      map.invalidateSize({ animate: false, debounceMoveend: true });
+      if (!initialBounds) return;
+      if (!hasFitted) {
+        hasFitted = true;
+        map.fitBounds(initialBounds, FIT_OPTIONS);
+      }
+      sendView();
+    };
+    const resizeObserver = new ResizeObserver(syncSize);
+    resizeObserver.observe(container);
     instance.onmessage = ({ data }) => {
       if (data.type === 'ready') {
-        map.fitBounds(
-          [
-            [data.bounds[1], data.bounds[0]],
-            [data.bounds[3], data.bounds[2]],
-          ],
-          { padding: [18, 18], maxZoom: 13, animate: false }
-        );
-        sendView();
+        const bounds: L.LatLngBoundsExpression = [
+          [data.bounds[1], data.bounds[0]],
+          [data.bounds[3], data.bounds[2]],
+        ];
+        initialBounds = bounds;
+        onBounds(bounds);
+        syncSize();
       }
-      if (data.type === 'view')
+      if (data.type === 'view') {
         setResult((previous) => ({
           ...data,
           revision: (previous?.revision ?? 0) + 1,
         }));
-      if (data.type === 'error') setError(data.message);
+        onStatus({
+          total: data.total,
+          matched: data.matched,
+          displayed: data.collection.features.length,
+        });
+      }
+      if (data.type === 'error') onStatus({ error: data.message });
     };
     instance.onerror = () =>
-      setError(
-        '地図を処理できませんでした。ページを再読み込みし、別の配布区画でもお試しください。'
-      );
+      onStatus({
+        error:
+          '地図を処理できませんでした。ページを再読み込みし、別の配布区画でもお試しください。',
+      });
     instance.postMessage({ type: 'load', url });
     return () => {
+      resizeObserver.disconnect();
       instance.terminate();
       worker.current = null;
     };
@@ -134,42 +171,73 @@ function SourceContent({
           }}
         />
       )}
-      <div
-        className="absolute bottom-7 left-2 right-2 z-[1000] border bg-background/95 p-2 text-xs"
-        role={error ? 'alert' : 'status'}
-      >
-        {error ||
-          (!result
-            ? '地図データを読み込んでいます…'
-            : `区画内 ${result.total.toLocaleString('ja-JP')}地物／表示対象候補 ${result.matched.toLocaleString('ja-JP')}地物${result.matched > result.collection.features.length ? `。うち${result.collection.features.length}地物を表示中。拡大すると表示対象を絞れます。` : '。青い地物をタップして属性を確認。'}`)}
-      </div>
     </>
   );
 }
 export function GeoSourceMap({
   url,
+  label,
   fields = [],
 }: {
   url: string;
+  label: string;
   fields?: GeoSourceField[];
 }) {
+  const map = useRef<L.Map | null>(null);
+  const [bounds, setBounds] = useState<L.LatLngBoundsExpression | null>(null);
+  const [status, setStatus] = useState<MapStatus>(null);
+  const error = status && 'error' in status ? status.error : '';
   return (
-    <div className="relative z-0 overflow-hidden">
-      <MapContainer
-        center={[36, 138]}
-        zoom={5}
-        minZoom={3}
-        scrollWheelZoom={false}
-        preferCanvas
-        className="h-[420px] w-full sm:h-[560px]"
+    <div className="space-y-2">
+      <div className="flex items-center justify-between gap-2">
+        <p className="min-w-0 text-sm font-medium [overflow-wrap:anywhere]">
+          表示中：{label}
+        </p>
+        <Button
+          variant="outline"
+          className="min-h-11 shrink-0"
+          disabled={!bounds || !!error}
+          onClick={() => {
+            map.current?.closePopup();
+            if (bounds) map.current?.fitBounds(bounds, FIT_OPTIONS);
+          }}
+        >
+          区画全体に戻す
+        </Button>
+      </div>
+      <div className="relative z-0 overflow-hidden">
+        <MapContainer
+          ref={map}
+          center={[36, 138]}
+          zoom={5}
+          minZoom={3}
+          scrollWheelZoom={false}
+          preferCanvas
+          className="h-[420px] w-full sm:h-[560px] [&_.leaflet-control-zoom_a]:!h-11 [&_.leaflet-control-zoom_a]:!w-11 [&_.leaflet-control-zoom_a]:!leading-[44px]"
+        >
+          <TileLayer
+            url={GEO_BASEMAP.url}
+            attribution={GEO_BASEMAP.attribution}
+            maxZoom={17}
+          />
+          <SourceContent
+            url={url}
+            fields={fields}
+            onBounds={setBounds}
+            onStatus={setStatus}
+          />
+        </MapContainer>
+      </div>
+      <p
+        className="text-xs leading-relaxed text-muted-foreground"
+        role={error ? 'alert' : 'status'}
       >
-        <TileLayer
-          url={GEO_BASEMAP.url}
-          attribution={GEO_BASEMAP.attribution}
-          maxZoom={17}
-        />
-        <SourceContent url={url} fields={fields} />
-      </MapContainer>
+        {error ||
+          (!status
+            ? '地図データを読み込んでいます…'
+            : 'total' in status &&
+              `区画内 ${status.total.toLocaleString('ja-JP')}地物／表示対象候補 ${status.matched.toLocaleString('ja-JP')}地物${status.matched > status.displayed ? `。うち${status.displayed}地物を表示中。拡大すると表示対象を絞れます。` : '。青い地物をタップして属性を確認。'}`)}
+      </p>
     </div>
   );
 }
