@@ -27,9 +27,12 @@
     ]
   },
   "theme": {
-    "minResolvedCharts": 82,
+    "minResolvedCharts": 58,
     "minCoveragePct": 100,
-    "maxMissingLineageCharts": 0
+    "maxMissingLineageCharts": 0,
+    "minResolvedMetricGroups": 88,
+    "minMetricGroupCoveragePct": 100,
+    "maxMissingLineageMetricGroups": 0
   },
   "blog": {
     "minCharts": 1587,
@@ -37,5 +40,59 @@
     "minCoveragePct": 100,
     "maxUnresolvedCharts": 0,
     "maxMissingLineageCharts": 0
+  },
+  "themeBaselineAdjustment": {
+    "date": "2026-09-09",
+    "implementationCommit": "7d40c95489e0e8afc010ad99f158f765a7297aa3",
+    "reason": "The existing portfolio redesign removed 34 resolved chart definitions and added 10. Record that exact population change and audit metric-group panels separately; retain 100% coverage and zero missing lineage on both surfaces.",
+    "previousResolvedCharts": 82,
+    "removedResolvedChartKeys": [
+      "aging-society/birth-rate-aging-rate-trend",
+      "aging-society/marriage-divorce-rate-trend",
+      "aging-society/natural-social-increase-trend",
+      "aging-society/birth-death-rate-trend",
+      "aging-society/theme-pension-benefit-trend",
+      "aging-society/theme-volunteer-participation-trend",
+      "aging-society/theme-as-youth-old-dep-index",
+      "consumer-prices/theme-cpi-living-cost",
+      "education-culture/theme-edu-school-type-breakdown",
+      "fishery-marine/theme-fishery-species-share",
+      "fishery-marine/theme-fishery-species-trend",
+      "healthcare/theme-health-diabetes-trend",
+      "labor-wages/labor-wages-job-ratio-vs-unemployment",
+      "labor-wages/theme-lw-employment-rate-trend",
+      "living-housing/unmarried-elderly-couple-trend",
+      "living-housing/lh-marriage-divorce-trend",
+      "local-economy/theme-economy-income-wage",
+      "local-economy/theme-economy-job-market",
+      "local-finance/kpi-lf-fiscal-strength",
+      "local-finance/kpi-lf-current-balance",
+      "local-finance/kpi-lf-debt-service",
+      "local-finance/kpi-lf-future-burden",
+      "local-finance/theme-lf-fiscal-ratios-trend",
+      "local-finance/theme-lf-revenue-composition",
+      "local-finance/theme-lf-expense-composition",
+      "local-finance/theme-lf-income-tax-trend",
+      "local-finance/theme-lf-debt-trend",
+      "local-finance/theme-lf-revenue-trend",
+      "local-finance/theme-lf-per-capita-expense-trend",
+      "local-finance/theme-lf-taxpayer-ratio-trend",
+      "local-finance/theme-lf-expense-nature-trend",
+      "population-dynamics/theme-age-composition",
+      "population-dynamics/theme-population-pyramid",
+      "safety/suicide-accident-death-trend"
+    ],
+    "addedResolvedChartKeys": [
+      "climate/theme-climate-temperature-extremes",
+      "education-culture/theme-edu-higher-education-trend-attainment",
+      "fishery-marine/theme-fishery-output-trend-marine",
+      "healthcare/theme-health-supply-trend-hospitals",
+      "living-housing/lh-household-structure-trend-single",
+      "manufacturing/manufacturing-establishments-employees-trend-employees",
+      "manufacturing/theme-manufacturing-labor-productivity-establishment",
+      "railway/railway-passenger-trend-jr",
+      "real-income/real-income-cpi-breakdown-expenses",
+      "safety/fire-emergency-trend-fire"
+    ]
   }
 }

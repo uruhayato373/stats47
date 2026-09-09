@@ -1,6 +1,6 @@
 ---
 name: manage-theme-portfolio
-description: 現行ThemeCatalogのテーマ群 (21 テーマ) のポートフォリオを評価・更新する。ThemeCatalog と GSC/GA4 snapshot とレビュー文書を突合して .claude/state/themes/portfolio.json を再構築し、keep/improve/merge/split/rename/retire 候補を実測根拠つきで判定、実験の baseline/効果測定を管理する。theme-portfolio-manager が実行。Use when user says "テーマポートフォリオ", "テーマ棚卸し", "テーマ評価", "manage-theme-portfolio".
+description: 現行ThemeCatalogのテーマ群のポートフォリオを評価・更新する。ThemeCatalog と GSC/GA4 snapshot とレビュー文書を突合して .claude/state/themes/portfolio.json を再構築し、keep/improve/merge/split/rename/retire 候補を実測根拠つきで判定、実験の baseline/効果測定を管理する。theme-portfolio-manager が実行。Use when user says "テーマポートフォリオ", "テーマ棚卸し", "テーマ評価", "manage-theme-portfolio".
 allowed-tools: Read, Grep, Glob, Bash
 primary_agent: theme-portfolio-manager
 ---
@@ -28,7 +28,7 @@ schema・判定規律の正典: `.claude/state/themes/README.md`。
 | `audit` (既定) | portfolio.json を ThemeCatalog + 最新 snapshot + レビュー文書と突合して再構築 → validator → 差分レポート |
 | `deep-dive <themeKey>` | **単一テーマの改善監査** (下記 §deep-dive。実装はしない・提案まで) |
 | `evaluate` | ライフサイクル判定の見直し (56d 実測ベース)。判定変更は根拠つきで提示 |
-| `experiment` | 実験の登録 (baseline 必須) / 期日到達分の d7/d28/d56 判定 |
+| `experiment` | 改善実験は baseline 必須、新規公開は launch として不在を明記 / d7/d28/d56 の記録 |
 | `handoff` | 改善候補を improvement-triage へ引き渡し (agent 定義 §引き渡し形式) |
 
 ## deep-dive (単一テーマの改善監査)

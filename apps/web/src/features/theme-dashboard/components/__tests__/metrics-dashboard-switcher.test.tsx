@@ -334,3 +334,25 @@ describe('問いごとの章', () => {
     expect(screen.getByText('補足の地図')).toBeInTheDocument();
   });
 });
+
+
+describe('固定年の比較グループ', () => {
+  it('context指標も比較切替から到達でき、単年を時系列パネルへ送らない', async () => {
+    const user = userEvent.setup();
+    const first = indicatorData('元請', '百万円');
+    const second = indicatorData('下請', '百万円');
+    for (const data of [first, second]) {
+      data.rankingValues = data.rankingValues.map((row, index) => ({
+        ...row, areaCode: `${String(index + 1).padStart(2, '0')}000`, yearCode: '2023', yearName: '2023年度',
+      }));
+    }
+    renderDashboard('fixed', {
+      themeConfig: themeConfig('fixed', ['primary']),
+      metricGroups: [{ key: 'fixed', title: '完成工事高', rankingKeys: ['primary', 'context'], defaultCheckedKeys: ['primary'], comparisonYear: '2023' }],
+      indicatorDataMap: { primary: first, context: second },
+    });
+    expect(screen.queryByTestId('switcher-panel')).toBeNull();
+    await user.click(screen.getByRole('button', { name: '下請' }));
+    expect(screen.getByRole('table', { name: '2023年の都道府県比較' })).toBeVisible();
+  });
+});

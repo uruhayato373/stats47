@@ -1,8 +1,22 @@
 import { addDays } from "../metrics/lib/periods.mjs";
 
+function validReport(report) {
+  try {
+    return report?.windowDays === 28 && /^\d{4}-W\d{2}$/.test(report.week ?? "")
+      && /^\d{4}-\d{2}-\d{2}$/.test(report.periodStart ?? "")
+      && addDays(report.periodStart, 0) === report.periodStart && report.periodEnd === addDays(report.periodStart, 27);
+  } catch { return false; }
+}
+
+/** One actual 28-day report, usable even when the preceding report does not exist yet. */
+export function selectLatestThemeWindow(reports, requestedWeeks) {
+  return [...reports].filter((r) => validReport(r) && (!requestedWeeks || requestedWeeks.includes(r.week)))
+    .sort((a, b) => b.periodEnd.localeCompare(a.periodEnd))[0] ?? null;
+}
+
 /** Select adjacent, non-overlapping 28-day reports by their actual dates, including ISO week 53. */
 export function selectThemeWindows(reports, requestedWeeks) {
-  const valid = reports.filter((r) => r.windowDays === 28 && /^\d{4}-\d{2}-\d{2}$/.test(r.periodStart ?? "") && r.periodEnd === addDays(r.periodStart, 27));
+  const valid = reports.filter(validReport);
   const selected = requestedWeeks ? valid.filter((r) => requestedWeeks.includes(r.week)) : valid;
   const latest = [...selected].sort((a, b) => b.periodEnd.localeCompare(a.periodEnd))[0];
   if (!latest) return null;
@@ -25,30 +39,36 @@ export function normalizeThemePath(raw) {
   return raw.match(/^(?:https:\/\/stats47\.jp)?(\/themes\/[a-z0-9-]+)\/?(?:[?#].*)?$/)?.[1] ?? null;
 }
 
-/** Preserve the same dated 56-day evidence contract for navigation KPIs. */
+function validWindows(rowsByWindow, windows) {
+  if (!Array.isArray(windows) || ![1, 2].includes(windows.length) || !windows.every(validReport)
+      || rowsByWindow.length !== windows.length || new Set(windows.map((w) => w.week)).size !== windows.length) return false;
+  return windows.length === 1 || (windows[1].periodEnd === addDays(windows[0].periodStart, -1));
+}
+
+function windowMetadata(windows) {
+  return { windowDays: windows.length * 28, weeks: windows.map((w) => w.week).sort(),
+    periodStart: windows.at(-1).periodStart, periodEnd: windows[0].periodEnd };
+}
+
+/** Preserve distinct, dated 28/56-day evidence contracts for navigation KPIs. */
 export function summarizeThemeNavigation(rowsByWindow, windows) {
   const insufficient = { status: "insufficient-data", windowDays: 0, scope: "Japan", reason: "navigation reports or page rows missing" };
-  if (!windows || windows.length !== 2 || rowsByWindow.length !== 2) return insufficient;
-  const selected = selectThemeWindows(windows);
-  if (!selected || selected.some((window, index) => window !== windows[index])
-      || new Set(windows.map((window) => window.week)).size !== 2
+  if (!validWindows(rowsByWindow, windows)
       || rowsByWindow.some((rows) => !rows.length || rows.some((row) => finiteCount(row.eventCount) === null))) return insufficient;
   const eventCount = rowsByWindow.flat().reduce((sum, row) => sum + Number(row.eventCount), 0);
   if (!Number.isFinite(eventCount)) return insufficient;
   return {
-    status: "measured", windowDays: 56, scope: "Japan",
-    weeks: windows.map((window) => window.week).sort(),
-    periodStart: windows[1].periodStart, periodEnd: windows[0].periodEnd, eventCount,
+    status: "measured", ...windowMetadata(windows), scope: "Japan", eventCount,
   };
 }
 
 /** Missing report rows are unknown, not zero demand. Ratio estimates require sufficient samples. */
 export function summarizeThemeTraffic(rowsByWindow, source, windows) {
   const scope = source === "ga4" ? "Japan" : "search-console";
-  if (!windows || rowsByWindow.some((rows) => !rows.length)) {
+  if (!validWindows(rowsByWindow, windows) || rowsByWindow.some((rows) => !rows.length)) {
     return { status: "insufficient-data", windowDays: 0, scope, reason: "non-overlapping reports or page rows missing" };
   }
-  const metadata = { windowDays: 56, scope, weeks: windows.map((w) => w.week).sort(), periodStart: windows[1].periodStart, periodEnd: windows[0].periodEnd };
+  const metadata = { ...windowMetadata(windows), scope };
   const rows = rowsByWindow.flat();
   const round = (n, d) => Number(n.toFixed(d));
   const required = source === "gsc" ? ["clicks", "impressions"] : ["screenPageViews"];

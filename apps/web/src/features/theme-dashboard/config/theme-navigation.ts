@@ -7,7 +7,7 @@ export interface ThemeNavGroup {
 /**
  * デスクトップ左レール専用の表示グループ。
  *
- * ranking category や ThemeCatalog の分類 taxonomy ではなく、21 テーマを探しやすくする
+ * ranking category や ThemeCatalog の分類 taxonomy ではなく、テーマを探しやすくする
  * navigation-only の SSOT。全テーマが重複なく 1 回だけ現れることはテストで固定する。
  */
 export const THEME_NAV_GROUPS = [
@@ -29,6 +29,8 @@ export const THEME_NAV_GROUPS = [
       'local-economy',
       'labor-wages',
       'manufacturing',
+      'construction-industry',
+      'information-industry',
       'occupation-salary',
       'real-income',
       'labor-mobility',
@@ -50,6 +52,7 @@ export const THEME_NAV_GROUPS = [
       'railway',
       'roads',
       'climate',
+      'waste-recycling',
     ],
   },
 ] as const satisfies readonly ThemeNavGroup[];

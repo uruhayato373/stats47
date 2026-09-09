@@ -91,7 +91,8 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "道路ストックを扱うroads、製造業を扱うmanufacturingとは産業と問いが異なる。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementedThemeKey": "construction-industry"
       }
     },
     {
@@ -1140,7 +1141,8 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "職業別IT給与や住民の通信契約では説明できない産業の問いである。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementedThemeKey": "information-industry"
       }
     },
     {
@@ -7965,7 +7967,8 @@
           "exactRegisteredCodeMatches": [],
           "semanticBasis": "既存safetyの犯罪・事故・火災と異なる環境サービスの問いである。",
           "policy": "完全一致がないことは非重複の証明ではない。問いの重複はscopeと既存章構成で判断する。"
-        }
+        },
+        "implementedThemeKey": "waste-recycling"
       }
     },
     {
@@ -10035,7 +10038,8 @@
           "evidenceCode": "C220836",
           "owner": "data-ingester",
           "numericPrefectures": 47,
-          "missingPolicy": "対象年の47県は欠測なし。再取得時の欠測記号を0変換せず、47県未満なら比較図生成を停止する。"
+          "missingPolicy": "対象年の47県は欠測なし。再取得時の欠測記号を0変換せず、47県未満なら比較図生成を停止する。",
+          "metricKey": "construction-private-employees"
         }
       ],
       "excludedMetrics": [
@@ -10160,7 +10164,28 @@
         "url": "https://www.env.go.jp/recycle/waste_tech/ippan/",
         "publishedAt": "2026-03-27",
         "year": "2024",
-        "status": "公表確認。2024年度47県値は本検証の対象外。"
+        "status": "2024年度公式Excelの47県・対象列・単位を確認。初回はSSDSで全県値を照合した2023年度比較として実装する。2024年度を継続取込するadapterと前年度接続検査は後続の更新工程で扱う。",
+        "inspectedAt": "2026-09-09",
+        "fileUrl": "https://www.env.go.jp/recycle/waste_tech/ippan/r6/data/shori/total/02.xlsx",
+        "sha256": "84d88aa9f4f606660636e022c09b95df9769e98216e071d71336ebefd411eb20",
+        "sheet": "ごみ処理概要",
+        "prefectureRows": 47,
+        "columns": {
+          "prefectureCode": "B",
+          "garbage-total-output": {
+            "column": "K",
+            "unit": "t"
+          },
+          "waste-recycling-rate": {
+            "column": "AL",
+            "unit": "％",
+            "definition": "リサイクル率R。R′（AM列）ではない。"
+          },
+          "garbage-final-disposal": {
+            "column": "AQ",
+            "unit": "t"
+          }
+        }
       },
       "steps": [
         {
@@ -10230,7 +10255,8 @@
           "evidenceCode": "C210839",
           "owner": "data-ingester",
           "numericPrefectures": 47,
-          "missingPolicy": "対象年の47県は欠測なし。再取得時の欠測記号を0変換せず、47県未満なら比較図生成を停止する。"
+          "missingPolicy": "対象年の47県は欠測なし。再取得時の欠測記号を0変換せず、47県未満なら比較図生成を停止する。",
+          "metricKey": "information-private-establishments"
         },
         {
           "indicatorCode": "C220839",
@@ -10248,7 +10274,8 @@
           "evidenceCode": "C220839",
           "owner": "data-ingester",
           "numericPrefectures": 47,
-          "missingPolicy": "対象年の47県は欠測なし。再取得時の欠測記号を0変換せず、47県未満なら比較図生成を停止する。"
+          "missingPolicy": "対象年の47県は欠測なし。再取得時の欠測記号を0変換せず、47県未満なら比較図生成を停止する。",
+          "metricKey": "information-private-employees"
         }
       ],
       "excludedMetrics": [

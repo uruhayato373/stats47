@@ -342,7 +342,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "construction",
     "categoryName": "住宅・土地・建設",
-    "count": 68,
+    "count": 69,
     "representatives": [
       {
         "rankingKey": "ordinary-construction-expenses-prefecture",
@@ -705,7 +705,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "ict",
     "categoryName": "情報通信・科学技術",
-    "count": 18,
+    "count": 20,
     "representatives": [
       {
         "rankingKey": "public-phone-count",

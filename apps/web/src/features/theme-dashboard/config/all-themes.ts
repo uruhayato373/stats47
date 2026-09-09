@@ -20,6 +20,10 @@ import {
   RAILWAY_SET,
   ROADS_SET,
   CLIMATE_SET,
+  CONSTRUCTION_INDUSTRY_SET,
+  WASTE_RECYCLING_SET,
+  INFORMATION_INDUSTRY_SET,
+
 } from '@stats47/types';
 
 import { toThemeConfig } from '../lib/to-theme-config';
@@ -49,6 +53,10 @@ const THEME_SETS = [
   RAILWAY_SET,
   ROADS_SET,
   CLIMATE_SET,
+  CONSTRUCTION_INDUSTRY_SET,
+  WASTE_RECYCLING_SET,
+  INFORMATION_INDUSTRY_SET,
+
 ];
 
 /**

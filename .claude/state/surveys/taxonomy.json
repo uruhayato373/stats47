@@ -3,16 +3,16 @@
   "generatedAt": "2026-09-07T18:26:32.506Z",
   "masterSurveyCount": 130,
   "ranking": {
-    "metrics": 2311,
-    "activeMetrics": 2166,
-    "applicableMetrics": 2303,
-    "activeApplicableMetrics": 2159,
+    "metrics": 2314,
+    "activeMetrics": 2169,
+    "applicableMetrics": 2306,
+    "activeApplicableMetrics": 2162,
     "notApplicable": 8,
     "activeNotApplicable": 7,
-    "resolved": 2303,
+    "resolved": 2306,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2159,
+    "activeResolved": 2162,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -44,7 +44,7 @@
       "construction-work-statistics": 4,
       "cpi-annual": 19,
       "crop-statistics": 8,
-      "economic-census-activity": 37,
+      "economic-census-activity": 40,
       "economic-census-basic": 19,
       "economic-structure-survey": 11,
       "electricity-business-statistics": 2,
@@ -155,13 +155,24 @@
     }
   },
   "theme": {
-    "themes": 20,
-    "charts": 106,
-    "applicableCharts": 82,
+    "themes": 24,
+    "metricGroups": {
+      "total": 90,
+      "byStatus": {
+        "resolved": 88,
+        "unresolved": 0,
+        "not-applicable": 2,
+        "missing-lineage": 0
+      },
+      "coveragePct": 100,
+      "unresolved": []
+    },
+    "charts": 74,
+    "applicableCharts": 58,
     "byStatus": {
-      "resolved": 82,
+      "resolved": 58,
       "unresolved": 0,
-      "not-applicable": 24,
+      "not-applicable": 16,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -171,11 +182,17 @@
         "foreign-residents",
         "tourism"
       ],
+      "agricultural-income-statistics": [
+        "local-economy"
+      ],
       "area-survey": [
         "education-culture",
         "living-housing",
         "population-dynamics",
         "roads"
+      ],
+      "care-service-facility-survey": [
+        "aging-society"
       ],
       "census": [
         "aging-society",
@@ -191,7 +208,12 @@
         "roads",
         "safety"
       ],
+      "construction-work-statistics": [
+        "construction-industry"
+      ],
       "economic-census-activity": [
+        "construction-industry",
+        "information-industry",
         "manufacturing"
       ],
       "economic-census-basic": [
@@ -342,7 +364,11 @@
       ],
       "social-life-basic-survey": [
         "aging-society",
+        "education-culture",
         "tourism"
+      ],
+      "social-welfare-facility-survey": [
+        "aging-society"
       ],
       "traffic-accident-statistics": [
         "safety"
@@ -358,6 +384,12 @@
         "labor-mobility",
         "labor-wages",
         "occupation-salary"
+      ],
+      "waste-management-survey": [
+        "waste-recycling"
+      ],
+      "weather-statistics": [
+        "climate"
       ]
     }
   },
@@ -1672,7 +1704,9 @@
     {
       "surveyId": "agricultural-income-statistics",
       "rankingCount": 3,
-      "themeKeys": [],
+      "themeKeys": [
+        "local-economy"
+      ],
       "blogSlugs": [
         "agriculture-hokkaido-dominance",
         "cc-estat-13-agri-sankey",
@@ -1752,7 +1786,9 @@
     {
       "surveyId": "care-service-facility-survey",
       "rankingCount": 7,
-      "themeKeys": [],
+      "themeKeys": [
+        "aging-society"
+      ],
       "blogSlugs": [
         "aging-solo-living-crisis",
         "elderly-population-care-capacity-gap",
@@ -1943,7 +1979,9 @@
     {
       "surveyId": "construction-work-statistics",
       "rankingCount": 4,
-      "themeKeys": [],
+      "themeKeys": [
+        "construction-industry"
+      ],
       "blogSlugs": []
     },
     {
@@ -1973,8 +2011,10 @@
     },
     {
       "surveyId": "economic-census-activity",
-      "rankingCount": 37,
+      "rankingCount": 40,
       "themeKeys": [
+        "construction-industry",
+        "information-industry",
         "manufacturing"
       ],
       "blogSlugs": [
@@ -3419,6 +3459,7 @@
       "rankingCount": 112,
       "themeKeys": [
         "aging-society",
+        "education-culture",
         "tourism"
       ],
       "blogSlugs": [
@@ -3442,7 +3483,9 @@
     {
       "surveyId": "social-welfare-facility-survey",
       "rankingCount": 34,
-      "themeKeys": [],
+      "themeKeys": [
+        "aging-society"
+      ],
       "blogSlugs": [
         "airport-count-vs-physical-disability-rehabilitation",
         "childcare-friendly-prefecture-ranking",
@@ -3596,7 +3639,9 @@
     {
       "surveyId": "waste-management-survey",
       "rankingCount": 7,
-      "themeKeys": [],
+      "themeKeys": [
+        "waste-recycling"
+      ],
       "blogSlugs": [
         "garbage-total-output",
         "recycling-rate-gap",
@@ -3641,7 +3686,9 @@
     {
       "surveyId": "weather-statistics",
       "rankingCount": 12,
-      "themeKeys": [],
+      "themeKeys": [
+        "climate"
+      ],
       "blogSlugs": [
         "annual-precipitation-rainy-season-gap",
         "annual-sunshine-duration-prefecture-gap",

@@ -42,17 +42,21 @@ export function SingleYearSeriesTable({
   rows,
   series,
   yearKey,
+  nameColumnLabel = '指標',
+  ariaLabel = '単年の指標比較',
 }: {
   rows: LineChartData['data'];
   series: ObservedSeries[];
   yearKey: string;
+  nameColumnLabel?: string;
+  ariaLabel?: string;
 }) {
   if (series.length === 0) return null;
   return (
-    <Table aria-label="単年の指標比較">
+    <Table aria-label={ariaLabel}>
       <TableHeader>
         <TableRow>
-          <TableHead>指標</TableHead>
+          <TableHead>{nameColumnLabel}</TableHead>
           <TableHead>年次</TableHead>
           <TableHead className="text-right">値</TableHead>
         </TableRow>

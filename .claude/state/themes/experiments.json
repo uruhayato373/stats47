@@ -1025,6 +1025,72 @@
         "ga4.engagementRatePvWeighted": "measured-low"
       },
       "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": null,
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-09-first-batch.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260909-construction-industry",
+      "themeKey": "construction-industry",
+      "changeType": "launch",
+      "hypothesis": "初回公開後の国内閲覧・検索露出・内部導線利用を観測し、データ品質と利用状況から継続・改善を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": null,
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-09-first-batch.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260909-waste-recycling",
+      "themeKey": "waste-recycling",
+      "changeType": "launch",
+      "hypothesis": "初回公開後の国内閲覧・検索露出・内部導線利用を観測し、データ品質と利用状況から継続・改善を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": null,
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-09-first-batch.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260909-information-industry",
+      "themeKey": "information-industry",
+      "changeType": "launch",
+      "hypothesis": "初回公開後の国内閲覧・検索露出・内部導線利用を観測し、データ品質と利用状況から継続・改善を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
     }
   ]
 }

@@ -26,13 +26,14 @@ import { fileURLToPath } from "node:url";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
 import { parse } from "csv-parse/sync";
-import { selectThemeWindows, isJapanPageReport, normalizeThemePath, summarizeThemeTraffic, summarizeThemeNavigation } from "./theme-metrics-core.mjs";
+import { selectThemeWindows, selectLatestThemeWindow, isJapanPageReport, normalizeThemePath, summarizeThemeTraffic, summarizeThemeNavigation } from "./theme-metrics-core.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PORTFOLIO = path.join(PROJECT_ROOT, ".claude/state/themes/portfolio.json");
-const GSC_SNAP = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
-const GA4_SNAP = path.join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/themes");
+const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
+const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
 
 const AGE_REVIEW_YEARS = 5; // 公表周期を確認する候補。年齢だけでは未更新と断定しない
 
@@ -42,7 +43,7 @@ function readCsv(file: string): Record<string, string>[] {
 }
 function reportWindows(source: string, stem: string) {
   const dir = source === "gsc" ? GSC_SNAP : GA4_SNAP;
-  const reports = fs.readdirSync(dir).filter((w) => /^\d{4}-W\d{2}$/.test(w)).flatMap((week) => {
+  const reports = (fs.existsSync(dir) ? fs.readdirSync(dir) : []).filter((w) => /^\d{4}-W\d{2}$/.test(w)).flatMap((week) => {
     const file = path.join(dir, week, source === "gsc" ? "summary.json" : `${stem}.meta.json`);
     if (!fs.existsSync(file) || !fs.existsSync(path.join(dir, week, `${stem}.csv`))) return [];
     const meta = JSON.parse(fs.readFileSync(file, "utf8"));
@@ -50,13 +51,15 @@ function reportWindows(source: string, stem: string) {
     return period ? [{ week, periodStart: period.periodStart, periodEnd: period.periodEnd, windowDays: period.windowDays }] : [];
   });
   const idx = process.argv.indexOf("--weeks");
-  return selectThemeWindows(reports, idx >= 0 ? process.argv[idx + 1]?.split(",") : undefined);
+  const requested = idx >= 0 ? process.argv[idx + 1]?.split(",") : undefined;
+  const latest = selectLatestThemeWindow(reports, requested);
+  return { pair: selectThemeWindows(reports, requested), single: latest ? [latest] : null };
 }
 
 // ---------- R2 データ品質 ----------
 interface KeyQuality { key: string; ok: boolean; latestYear: string | null; latestYearPrefCoverage: number | null }
 
-const qualityFile = path.join(PROJECT_ROOT, ".claude/state/themes/quality.json");
+const qualityFile = path.join(STATE_DIR, "quality.json");
 const audit = fs.existsSync(qualityFile) ? JSON.parse(fs.readFileSync(qualityFile, "utf8")) : null;
 const recentQuality = audit?.summary?.mode === "structure-and-public-data" && Date.now() - Date.parse(audit.observedAt) < 7 * 86_400_000;
 async function fetchKeyQuality(key: string): Promise<KeyQuality> {
@@ -85,13 +88,19 @@ function themeKeys(themeKey: string): string[] {
 
 // ---------- main ----------
 async function main() {
-  const gscWindows = reportWindows("gsc", "pages");
-  const ga4Windows = reportWindows("ga4", "pages-clean");
-  const navWindows = reportWindows("ga4", "theme-navigation");
+  const gscReports = reportWindows("gsc", "pages");
+  const ga4Reports = reportWindows("ga4", "pages-clean");
+  const navReports = reportWindows("ga4", "theme-navigation");
+  const { pair: gscWindows, single: gscWindow28d } = gscReports;
+  const { pair: ga4Windows, single: ga4Window28d } = ga4Reports;
+  const { pair: navWindows, single: navWindow28d } = navReports;
   const load = (dir: string, stem: string, windows: { week: string }[] | null) => windows?.map((w) => readCsv(path.join(dir, w.week, `${stem}.csv`))) ?? [[], []];
   const gsc = load(GSC_SNAP, "pages", gscWindows);
   const ga4 = load(GA4_SNAP, "pages-clean", ga4Windows);
   const nav = load(GA4_SNAP, "theme-navigation", navWindows);
+  const gsc28d = load(GSC_SNAP, "pages", gscWindow28d);
+  const ga428d = load(GA4_SNAP, "pages-clean", ga4Window28d);
+  const nav28d = load(GA4_SNAP, "theme-navigation", navWindow28d);
   const pf = JSON.parse(fs.readFileSync(PORTFOLIO, "utf8"));
   const rows: string[] = [];
   for (const t of pf.themes) {
@@ -101,6 +110,11 @@ async function main() {
     t.metrics.ga4 = summarizeThemeTraffic(select(ga4, "pagePath"), "ga4", ga4Windows);
     const navRows = select(nav, "pagePath");
     t.metrics.internalNav = summarizeThemeNavigation(navRows, navWindows);
+    t.metrics28d = {
+      gsc: summarizeThemeTraffic(select(gsc28d, "page"), "gsc", gscWindow28d),
+      ga4: summarizeThemeTraffic(select(ga428d, "pagePath"), "ga4", ga4Window28d),
+      internalNav: summarizeThemeNavigation(select(nav28d, "pagePath"), navWindow28d),
+    };
     t.gscSnapshotRef = gscWindows ? `.claude/skills/analytics/gsc-improvement/reference/snapshots/${gscWindows[0].week}/pages.csv` : null;
     t.ga4SnapshotRef = ga4Windows ? `.claude/skills/analytics/ga4-improvement/reference/snapshots/${ga4Windows[0].week}/pages-clean.csv` : null;
 

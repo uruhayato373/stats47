@@ -288,6 +288,13 @@
       ]
     },
     {
+      "name": "GA4_SNAPSHOT_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "GEMINI_API_KEY",
       "visibility": "server",
       "contexts": [
@@ -423,6 +430,13 @@
       "contexts": [
         "process",
         "secret"
+      ]
+    },
+    {
+      "name": "GSC_SNAPSHOT_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
       ]
     },
     {

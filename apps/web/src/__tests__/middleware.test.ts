@@ -231,6 +231,10 @@ describe('/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)',
     expect(response.status).not.toBe(410);
   });
 
+  test.each(['construction-industry', 'information-industry', 'waste-recycling'])('新規テーマの県別導線 /areas/28000/%s を受理する', (theme) => {
+    expect(middleware(request(`/areas/28000/${theme}`)).status).toBe(200);
+  });
+
   test('未登録スラッグ /japan/not-a-real-theme は 410 を返す (/themes と同型)', () => {
     const response = middleware(request('/japan/not-a-real-theme'));
     expect(response.status).toBe(410);

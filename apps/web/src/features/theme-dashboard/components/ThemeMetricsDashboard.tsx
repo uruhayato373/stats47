@@ -17,6 +17,7 @@ import {
   type ThemeIndicatorData,
 } from '../types';
 
+import { FixedYearComparisonPanel } from './FixedYearComparisonPanel';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
@@ -116,14 +117,15 @@ export function ThemeMetricsDashboard({
 
   const kpiKeys = useMemo(
     () =>
-      themeConfig.tabIndicators
-        .map((t) => t.rankingKey)
-        .filter(
+      [...new Set([
+        ...themeConfig.tabIndicators.map((t) => t.rankingKey),
+        ...(metricGroups ?? []).filter((group) => group.comparisonYear).flatMap((group) => group.rankingKeys),
+      ])].filter(
           (k) =>
             indicatorDataMap[k] &&
             indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI
         ),
-    [themeConfig.tabIndicators, indicatorDataMap]
+    [themeConfig.tabIndicators, metricGroups, indicatorDataMap]
   );
 
   const kpis = useMemo<MetricKpi[]>(() => {
@@ -219,6 +221,8 @@ export function ThemeMetricsDashboard({
         ? [
             {
               key: 'default',
+              comparisonYear: undefined as string | undefined,
+              comparisonMap: undefined as boolean | undefined,
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
               title: undefined as string | undefined,
@@ -237,6 +241,8 @@ export function ThemeMetricsDashboard({
         const alive = new Set(groupMetrics.map((m) => m.metricKey));
         return {
           key: group.key,
+          comparisonYear: group.comparisonYear,
+          comparisonMap: group.comparisonMap,
           title: group.title as string | undefined,
           metrics: groupMetrics,
           defaultCheckedKeys: group.defaultCheckedKeys.filter((k) =>
@@ -269,7 +275,19 @@ export function ThemeMetricsDashboard({
     return null;
   }
 
-  const renderPanel = (panel: (typeof panels)[number], summaryOnly = false) => (
+  const renderPanel = (panel: (typeof panels)[number], summaryOnly = false) => panel.comparisonYear ? (
+    <FixedYearComparisonPanel
+      key={panel.key}
+      title={panel.title}
+      metrics={panel.metrics}
+      comparisonYear={panel.comparisonYear}
+      indicatorDataMap={indicatorDataMap}
+      selectedPrefectureCode={selectedPrefectureCode}
+      defaultMetricKey={panel.defaultCheckedKeys[0]}
+      tabLabels={tabLabels}
+      showMap={panel.comparisonMap}
+    />
+  ) : (
     <MetricSwitcherPanel
       key={panel.key}
       summaryOnly={summaryOnly}

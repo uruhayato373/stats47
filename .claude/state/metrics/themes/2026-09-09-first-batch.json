@@ -1,0 +1,585 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-09T12:48:29.672Z",
+  "status": "local-verified-awaiting-consolidated-publication",
+  "baseCommit": "27e1d6c0e3c9094071774860cbecb3d4f964d184",
+  "release": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-09-09T12:16:18.330Z",
+    "status": "staged-unpublished",
+    "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
+    "evidence": ".claude/state/estat/theme-expansion-verification.json",
+    "themes": [
+      "construction-industry",
+      "waste-recycling",
+      "information-industry"
+    ],
+    "metrics": [
+      {
+        "themeKey": "construction-industry",
+        "metricKey": "prime-contractor-completed-construction",
+        "indicatorCode": "C3304",
+        "comparisonYear": "2023",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "百万円",
+        "preservedYears": [
+          "1975",
+          "1976",
+          "1977",
+          "1988",
+          "1989",
+          "1990",
+          "1991",
+          "1992",
+          "1993",
+          "1994",
+          "1995",
+          "1996",
+          "1997",
+          "1998",
+          "1999",
+          "2000",
+          "2001",
+          "2002",
+          "2003",
+          "2004",
+          "2005",
+          "2006",
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2023"
+        ],
+        "sourceSha256": "d61e01106b2548a1f468e7bf1249ef548fe7f5b3429a103478e99d3a30795393"
+      },
+      {
+        "themeKey": "construction-industry",
+        "metricKey": "construction-industry-count",
+        "indicatorCode": "C3306",
+        "comparisonYear": "2023",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "業者",
+        "preservedYears": [
+          "2023"
+        ],
+        "sourceSha256": "2e55573636570dff9de507773766f90ef006ae6406905e418a4aee8452e52334"
+      },
+      {
+        "themeKey": "construction-industry",
+        "metricKey": "subcontractor-completed-construction",
+        "indicatorCode": "C3305",
+        "comparisonYear": "2023",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "百万円",
+        "preservedYears": [
+          "1979",
+          "1980",
+          "1981",
+          "1982",
+          "1983",
+          "1984",
+          "1985",
+          "1986",
+          "1987",
+          "1988",
+          "1989",
+          "2000",
+          "2001",
+          "2002",
+          "2003",
+          "2004",
+          "2005",
+          "2006",
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2023"
+        ],
+        "sourceSha256": "6fb68a0f7aaeed8770362dd3e3b3daf3194f0ec1d9207501576cf06267465d59"
+      },
+      {
+        "themeKey": "construction-industry",
+        "metricKey": "construction-private-employees",
+        "indicatorCode": "C220836",
+        "comparisonYear": "2021",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "人",
+        "preservedYears": [
+          "2021"
+        ],
+        "sourceSha256": "acd8d25567bdff7f02c1923d4f3cdd83cfcb05c47c38fbfc385e61c583a054fe"
+      },
+      {
+        "themeKey": "waste-recycling",
+        "metricKey": "garbage-total-output",
+        "indicatorCode": "H5609",
+        "comparisonYear": "2023",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "t",
+        "preservedYears": [
+          "2022",
+          "2023"
+        ],
+        "sourceSha256": "ed5b4c135b5b3811b7cb19e53a0f1793d32cdfa1720461e0f95ebebf0820fdb8"
+      },
+      {
+        "themeKey": "waste-recycling",
+        "metricKey": "waste-recycling-rate",
+        "indicatorCode": "H5614",
+        "comparisonYear": "2023",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "％",
+        "preservedYears": [
+          "2023"
+        ],
+        "sourceSha256": "2136085ca998530be61827e0b788d5a099324feeb86128a9736e96e31fefc2c2"
+      },
+      {
+        "themeKey": "waste-recycling",
+        "metricKey": "garbage-final-disposal",
+        "indicatorCode": "H5615",
+        "comparisonYear": "2023",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "t",
+        "preservedYears": [
+          "2022",
+          "2023"
+        ],
+        "sourceSha256": "30c4e15475facd2c4def1873b72c83466f2cc40ea367b0cb40ad652f529b7024"
+      },
+      {
+        "themeKey": "information-industry",
+        "metricKey": "information-private-establishments",
+        "indicatorCode": "C210839",
+        "comparisonYear": "2021",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "事業所",
+        "preservedYears": [
+          "2021"
+        ],
+        "sourceSha256": "fa7946995d777a443c2849c20f9d9c3fecbd48852c81406f9d8003f318ef6da9"
+      },
+      {
+        "themeKey": "information-industry",
+        "metricKey": "information-private-employees",
+        "indicatorCode": "C220839",
+        "comparisonYear": "2021",
+        "comparisonPrefectures": 47,
+        "sourceMatchedPrefectures": 47,
+        "unit": "人",
+        "preservedYears": [
+          "2021"
+        ],
+        "sourceSha256": "02ef36c0bb901b5f6768fe0091d8f2d4bdeb07b98afa521227d6415dbf12b1d0"
+      }
+    ],
+    "files": [
+      {
+        "key": "app/stats/prime-contractor-completed-construction/values.json",
+        "bytes": 226837,
+        "sha256": "b1e18d8c1255ac809bf25ae7f58ff0c974defeae8379683a840c758df3ed66f5"
+      },
+      {
+        "key": "app/ranking/prime-contractor-completed-construction/values.json",
+        "bytes": 363835,
+        "sha256": "5be0ba9d39231f6ac2560e68c6c0bfa3c0d1ed3622228b7c21aafb95a2e55f04"
+      },
+      {
+        "key": "app/ranking/prime-contractor-completed-construction/item.json",
+        "bytes": 3882,
+        "sha256": "8bf8c03516cc9ddd277528808ed5e6a2b0dc1bcfba4544b3f4c6f5782759b1c1"
+      },
+      {
+        "key": "app/stats/construction-industry-count/values.json",
+        "bytes": 6207,
+        "sha256": "522fff359fd249f046ae3ab04a0da2780e6efa65abc2376798d0add9d2ba1058"
+      },
+      {
+        "key": "app/ranking/construction-industry-count/values.json",
+        "bytes": 9155,
+        "sha256": "9d24acd782dcc67d521ac966b080432f81bdc0f66309b954cb3f8c6fd80d2acf"
+      },
+      {
+        "key": "app/ranking/construction-industry-count/item.json",
+        "bytes": 2197,
+        "sha256": "80dbbcac563828370253ecd2a210252d7c5495418e767e1fdb24e5ec04d6bd35"
+      },
+      {
+        "key": "app/stats/subcontractor-completed-construction/values.json",
+        "bytes": 208242,
+        "sha256": "4809d3b3af261f6cd27ab1049db7a66ad4d786822a6559aad1d091cebe9802ef"
+      },
+      {
+        "key": "app/ranking/subcontractor-completed-construction/values.json",
+        "bytes": 329322,
+        "sha256": "49fe3c87595547dbb1a0fb0a138c7da9a7dc20365d560a9ada3e66c529920a4d"
+      },
+      {
+        "key": "app/ranking/subcontractor-completed-construction/item.json",
+        "bytes": 3726,
+        "sha256": "41873f421d529ac2c17bfc609a6de011ddacf493bb53011a605f70bbf1d212d8"
+      },
+      {
+        "key": "app/stats/construction-private-employees/values.json",
+        "bytes": 5975,
+        "sha256": "22ca33877fb30612ef080ac1a047aa6e46e7e73f9cca168f35b5687f5c348220"
+      },
+      {
+        "key": "app/ranking/construction-private-employees/values.json",
+        "bytes": 9062,
+        "sha256": "0e811b25baeb2fe0c3a98b0ec3b690bc1ffab5ea90d1b2dca34a279207d3eec3"
+      },
+      {
+        "key": "app/ranking/construction-private-employees/item.json",
+        "bytes": 2136,
+        "sha256": "b643be9fbe1a05bf4f4e79d1ce832c760161fcbe46b6e47906e5051920d957c4"
+      },
+      {
+        "key": "app/page-components/theme/construction-industry.json",
+        "bytes": 2,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "key": "app/stats/garbage-total-output/values.json",
+        "bytes": 11801,
+        "sha256": "e3c3651ec57faf1ddd0ecbf55b53ca2b63ec0de9ae8224f35fcd791fe778735f"
+      },
+      {
+        "key": "app/ranking/garbage-total-output/values.json",
+        "bytes": 17235,
+        "sha256": "590b6d00628c30d62a7d1bf0de691e16cf375c4348b107c933a23a2f7c2d9a21"
+      },
+      {
+        "key": "app/ranking/garbage-total-output/item.json",
+        "bytes": 2245,
+        "sha256": "14d5e37cf08a08d9c2d42ab4dd996c28c54deb28b7fcc1a99e324a990281c394"
+      },
+      {
+        "key": "app/stats/waste-recycling-rate/values.json",
+        "bytes": 6038,
+        "sha256": "4059a7a0693a863c8a071e23cd0576df7c57fb218cd0cc2393648f7bb3be70ed"
+      },
+      {
+        "key": "app/ranking/waste-recycling-rate/values.json",
+        "bytes": 8654,
+        "sha256": "f9e9302449d5bc566c9c388c9c7446ed02669ed3047f03c0392df2748d77e666"
+      },
+      {
+        "key": "app/ranking/waste-recycling-rate/item.json",
+        "bytes": 1977,
+        "sha256": "be04f9b248b169231a1a7a69688137d2cdad0d4b19ecce35c3a5d08919501243"
+      },
+      {
+        "key": "app/stats/garbage-final-disposal/values.json",
+        "bytes": 11702,
+        "sha256": "837a1160af9a03f6eb86e5e7dbcac41b5c827fe2d159463bb0e1914b2fbe1844"
+      },
+      {
+        "key": "app/ranking/garbage-final-disposal/values.json",
+        "bytes": 17324,
+        "sha256": "d2f252682a36da603a00813548c960a9efbc5700accfb1a21251b4f90f533fda"
+      },
+      {
+        "key": "app/ranking/garbage-final-disposal/item.json",
+        "bytes": 2257,
+        "sha256": "51d0cc7b14dd1d52a1a17228920f5d32890d98e8e7eb4adcb37ae38fdb97d717"
+      },
+      {
+        "key": "app/page-components/theme/waste-recycling.json",
+        "bytes": 2,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "key": "app/stats/information-private-establishments/values.json",
+        "bytes": 6171,
+        "sha256": "3f548fc67dff1c0faabebc37598ab2bfb209ec98a956bf5d017dd5ab037daf59"
+      },
+      {
+        "key": "app/ranking/information-private-establishments/values.json",
+        "bytes": 9446,
+        "sha256": "55955fb11fef8314781d3259532712f6af92b24b79cd95aad19b88f7ff72e820"
+      },
+      {
+        "key": "app/ranking/information-private-establishments/item.json",
+        "bytes": 2157,
+        "sha256": "2bc60c96f2ff71f8f25428a34f10ae0043369ce0fa4e6c26c6777f10f89db641"
+      },
+      {
+        "key": "app/stats/information-private-employees/values.json",
+        "bytes": 5940,
+        "sha256": "31dd5e60c610099363e50c66ac9f80d42b8fc4126591fc09f6feebf8be2dba28"
+      },
+      {
+        "key": "app/ranking/information-private-employees/values.json",
+        "bytes": 8980,
+        "sha256": "c5bc27696cff0b67b51a5c70eefd5a5f8b278b48ec5979e961bbdaeed04d82b3"
+      },
+      {
+        "key": "app/ranking/information-private-employees/item.json",
+        "bytes": 2158,
+        "sha256": "3b003d92e148ab69df569e66439830a9a0b54db8ff13b7bd757a7dd64cf0d553"
+      },
+      {
+        "key": "app/page-components/theme/information-industry.json",
+        "bytes": 2,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "key": "app/ranking-items/all.json",
+        "bytes": 6210565,
+        "sha256": "35c6acf378239c26df95192fe126c030486dfc36ee69c538880a5d9b8a20be0f"
+      }
+    ]
+  },
+  "verification": {
+    "sourceComparison": {
+      "status": "PASS",
+      "metrics": 9,
+      "prefectureValues": 423,
+      "evidenceRef": ".claude/state/estat/theme-expansion-verification.json"
+    },
+    "build": {
+      "status": "PASS",
+      "command": "npm run build --workspace apps/web",
+      "staticPages": 1606,
+      "log": ".local/verification/themes/first-batch/logs/build.log",
+      "sha256": "0aa5c51fec5ebcec49ad6ffa24854195b78e703fee64a58a26881137560e2885"
+    },
+    "typeCheck": {
+      "status": "PASS",
+      "command": "npm run type-check",
+      "packages": 25,
+      "scripts": "PASS",
+      "log": ".local/verification/themes/first-batch/logs/types.log",
+      "sha256": "28ff3bfc0a7f2b467eb5646d7889822fff8e41b3b81c066a900f6c025f4947e2"
+    },
+    "webTests": {
+      "status": "PASS",
+      "files": 34,
+      "tests": 256,
+      "log": ".local/verification/themes/first-batch/logs/webTests.log",
+      "sha256": "aa38e0a5c90e71ea8281db1c130fd363f9ae92e451ceed3aad2ca85c8cdc6976"
+    },
+    "dataTests": {
+      "status": "PASS",
+      "files": 19,
+      "tests": 250,
+      "log": ".local/verification/themes/first-batch/logs/dataTests.log",
+      "sha256": "3dc1f9910869af87ed679be421cc42d72e1ab0b6155b6deda7950580910e1a58"
+    },
+    "taxonomyTests": {
+      "status": "PASS",
+      "files": 4,
+      "tests": 41,
+      "log": ".local/verification/themes/first-batch/logs/taxonomyTests.log",
+      "sha256": "6cc86e04d18d3931648b12f63c670b0016eccb4d8b7494c4e38ef73a365c3feb"
+    },
+    "opsTests": {
+      "status": "PASS",
+      "tests": 76,
+      "log": ".local/verification/themes/first-batch/logs/opsTests.log",
+      "sha256": "5842a2839e2d603150662151e5ba733d977e7387ddfa4168af6991ae43c22fac"
+    },
+    "testScope": "Related theme, middleware, catalog, survey and measurement tests (623); full repository test suite not run.",
+    "eslint": {
+      "status": "PASS",
+      "scope": "changed apps/web TS/TSX files",
+      "log": ".local/verification/themes/first-batch/logs/eslint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight": {
+      "status": "PASS",
+      "gates": 14,
+      "command": "node .claude/scripts/lib/preflight-commit.mjs --pr",
+      "log": ".local/verification/themes/first-batch/logs/preflight.log",
+      "sha256": "cb371a4d0f1c5e220a1b030de31e1572f4143b0bcaa024d98604a3b3102f98bc"
+    },
+    "catalog": {
+      "status": "PASS",
+      "themes": 24,
+      "errors": 0,
+      "warnings": 2,
+      "warningReason": "Existing local-finance dedicated panels are outside generic chart coverage.",
+      "log": ".local/verification/themes/first-batch/logs/catalog.log",
+      "sha256": "de5eaabaa2bbd0dc7c158125d9411beb2afa2a282e2b76c861953296cfa0502a"
+    },
+    "taxonomy": {
+      "status": "PASS",
+      "resolvedCharts": 58,
+      "metricGroups": 90,
+      "resolvedMetricGroups": 88,
+      "notApplicableMetricGroups": 2,
+      "coveragePct": 100,
+      "missingLineage": 0,
+      "stateRef": ".claude/state/surveys/taxonomy.json",
+      "baselineCorrectionRef": ".claude/config/survey-taxonomy-ratchet.json#themeBaselineAdjustment"
+    },
+    "plan": {
+      "status": "PASS",
+      "candidates": 128,
+      "verifiedCodes": 82,
+      "log": ".local/verification/themes/first-batch/logs/plan.log",
+      "sha256": "e2dde5db280ade868ae7aae899c7c4aa0c1ae3f8dc5075a5c4684d4be0344de3"
+    },
+    "portfolio": {
+      "status": "PASS",
+      "themes": 24,
+      "experiments": 24,
+      "violations": 0,
+      "warnings": 0,
+      "log": ".local/verification/themes/first-batch/logs/state.json",
+      "sha256": "8ea3240d0693612d3e0c39f233b1df008f010809c5259a5789d72862c6e4e25a"
+    },
+    "docs": {
+      "status": "PASS",
+      "errors": 0,
+      "preExistingWarnings": 3,
+      "log": ".local/verification/themes/first-batch/logs/docs.log",
+      "sha256": "596c9d48ccef50cdcd379c7a756319b9007770c61de55eea5f552369a36a09fd"
+    },
+    "security": {
+      "status": "PASS",
+      "scope": "Changed source/config credential literals and client secret references; no dependency changes",
+      "findings": 0,
+      "log": ".local/verification/themes/first-batch/logs/security.json",
+      "sha256": "7091a6f6e37c6778e77668e5a550f470228bb1254da7290bc7ebbd9f66382531"
+    },
+    "browser": {
+      "status": "PASS",
+      "observedAt": "2026-09-09T12:46:24.370Z",
+      "finishedAt": "2026-09-09T12:47:03.679Z",
+      "pages": 6,
+      "matchedRows": 1052,
+      "pageErrors": 0,
+      "consoleErrors": 0,
+      "rankingPages": [
+        {
+          "metricKey": "construction-private-employees",
+          "http": 200,
+          "pass": true
+        },
+        {
+          "metricKey": "information-private-establishments",
+          "http": 200,
+          "pass": true
+        },
+        {
+          "metricKey": "information-private-employees",
+          "http": 200,
+          "pass": true
+        }
+      ],
+      "areaPages": [
+        {
+          "themeKey": "construction-industry",
+          "http": 200,
+          "pass": true
+        },
+        {
+          "themeKey": "waste-recycling",
+          "http": 200,
+          "pass": true
+        },
+        {
+          "themeKey": "information-industry",
+          "http": 200,
+          "pass": true
+        }
+      ],
+      "result": ".local/verification/themes/first-batch/browser/result.json",
+      "sha256": "c3a3456761ee834b8c0d7ac08930cc82c443d7675b25f51c206eb4469f259cb0",
+      "screenshots": 16
+    },
+    "environmentRegistry": {
+      "status": "PASS",
+      "discovered": 144,
+      "registered": 150,
+      "command": "node .claude/scripts/lib/check-env-registry.cjs",
+      "added": [
+        "GA4_SNAPSHOT_DIR",
+        "GSC_SNAPSHOT_DIR"
+      ]
+    }
+  },
+  "publication": {
+    "status": "not-published",
+    "publishedAt": null,
+    "backlogId": "THEME-PORTFOLIO-REMAINDER-01",
+    "remaining": [
+      "Fix the pre-existing roads mobile hydration #418 recorded in 2026-09-09-hydration.json.",
+      "Merge the 31-file release with the existing 21-theme release, rebuild shared inventories and verify all 24 themes.",
+      "Complete authorized release workflow and verify production HTTP, units, years and values before recording publication."
+    ]
+  },
+  "measurement": {
+    "status": "awaiting-publication",
+    "experimentIds": [
+      "THEME-LAUNCH-20260909-construction-industry",
+      "THEME-LAUNCH-20260909-waste-recycling",
+      "THEME-LAUNCH-20260909-information-industry"
+    ],
+    "baselineStatus": "not-applicable-new-url",
+    "checkpointDays": [
+      7,
+      28,
+      56
+    ],
+    "scheduleAfter": "Actual publication with production verification, not local build or commit date",
+    "automation": {
+      "id": "automation",
+      "name": "テーマ拡充の検証と継続改善",
+      "kind": "heartbeat",
+      "status": "ACTIVE",
+      "cadence": "Monday 09:00 Asia/Tokyo",
+      "registeredAt": "2026-09-09",
+      "threadId": "01a085a5-1d70-74f2-ae5e-c6a097d392d8",
+      "notifyOn": "meaningful change, completion, failure or required user action",
+      "monthlyReview": "Official source releases and comparison definitions"
+    }
+  },
+  "branch": "codex/theme-expansion-128",
+  "scope": {
+    "candidates": 128,
+    "adoptedCandidates": 101,
+    "implementedNewThemes": 3,
+    "remainingAdoptedCandidates": 98,
+    "totalThemeCatalogs": 24
+  },
+  "limitations": [
+    "Post-publication traffic and effects are not measured yet.",
+    "The 2024 waste source is inspected, but its recurring adapter and historical connection are not implemented; displayed comparison year is 2023.",
+    "New ranking correlation/page-card snapshots are absent and use the existing empty fallback; not part of the first theme comparison.",
+    "The catalog reviews are implementer self-reviews, not independent reviews."
+  ]
+}

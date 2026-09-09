@@ -13,6 +13,7 @@ const EXPECTED_TYPE_A = [
   "labor-wages", "manufacturing", "healthcare", "safety", "education-culture",
   "tourism", "consumer-prices", "foreign-residents", "occupation-salary",
   "real-income", "labor-mobility", "local-finance", "fishery-marine", "climate",
+  "construction-industry", "information-industry", "waste-recycling",
 ];
 
 const EXPECTED_TYPE_B = ["ports", "railway", "roads"];

@@ -741,6 +741,8 @@ updated: 2026-09-09
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-09]
 
 - **owner**: theme-designer（全体）／data-ingester（値・設定）／theme-component-builder・theme-ui-manager（画面）
+- **現在地（2026-09-09）**: 初回の建設業・ごみ／リサイクル・情報通信業を実装し、ThemeCatalogは24件。9指標×47県の423値を一次API応答と照合し、PC・モバイル6画面の表／地図1,052箇所と新規ランキング・県別導線を検証した。詳細と未公開31ファイルは [初回実装記録](../state/metrics/themes/2026-09-09-first-batch.json)。新規公開3実験は未開始で、毎週月曜09:00のフォローを設定済み。採択101候補の残り98候補は未実装のため本カードを継続する。
+- **次**: 公開工程の既存21テーマとmanifestを統合して道路モバイル残件を解消し、公開後の実測を開始する。拡充は `implementationWaves` の次候補から継続する。廃棄物2024年度は公式Excelの47県とK／AL／AQ列・hashを確認済み。初回比較は2023年度に固定しており、2024年度の継続取込と前年度接続検査は残工程。
 - **正典**: [採否・範囲・初回仕様・実装順](../skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json) の `decision` / `firstBatch` / `implementationWaves`。取得証拠は [全県・年別の検証](../state/estat/theme-expansion-verification.json)。このカードが実装の入口であり、JSON内へ独立したTODO台帳を作らない。
 - **実行順**: ① `npm run theme:expansion:check` で仕様を検査し、初回の建設業→廃棄物→情報通信産業を実装する。既存metricのyears不足と未登録指標はdata-ingesterが実値確認後に取り込む。②既存テーマは同じ問いの章を拡充し、重複章を追加しない。③API中心→公式ファイル補完→GISの順で、採択範囲だけを小分けに実装する。統合候補は統合先で扱い、保留は再開条件を満たすまで着手しない。
 - **検証**: firstBatchの47県・比較年・原典定義を再現し、ThemeCatalog／生成snapshot／表示値を突合する。`validate:catalog`、対象テスト・型検査、PC・モバイルの表示を通す。廃棄物2024年度の原典更新を先に確認し、2023年度を最新と表現しない。情報通信の2020年経理事項は初回から除外する。
@@ -752,6 +754,7 @@ updated: 2026-09-09
 タグ: [種類:改善] [実行:対話] [起票:2026-07-04]
 
 - **残工程**: 道路テーマのモバイル React hydration #418 を解決する。最終表示検証は42画面中41 PASS（操作3/3 PASS）、Suspense 修正は未着手。再現・別PCでの復元は `.claude/state/themes/README.md`、診断は `.claude/state/metrics/themes/2026-09-09-hydration.json`。その後、全テーマのローカル実装・公式年次更新・週次フォロー設定を本番反映する。デプロイと公開R2への書き込みは未実行。実装範囲・検証・公開対象は `.claude/state/metrics/themes/2026-09-09-implementation.json` を参照する。
+- **初回拡充との統合**: `2026-09-09-first-batch.json` の3テーマ・31ファイルを上記129ファイルと突合する。同じ `app/ranking-items/all.json` を片側の旧内容で上書きせず、全24テーマの現行定義から最終manifestを再生成・検証する。新規3テーマは公開前baselineなしのlaunch実験として、実際の公開日から7／28／56日を観測する。
 - **owner**: `devops-runner`（デプロイ）/ `r2-publisher`（検証済み対象の公開）/ `theme-ui-manager`（配信確認）/ `theme-portfolio-manager`（計測開始）
 - **実行順**: (0) 別PCでステージデータを再生成し、実収入→道路の同一browser context・モバイルで #418 を再現する。埋め込み非同期sectionのSuspense境界を調査し、遅延ストリーム回帰テスト・型検査・build・全42画面を通す。(1) ローカル検証結果と公開差分を提示して本番反映の承認を得る。(2) feature→develop→mainを規約どおり統合し、CIとデプロイを確認する。(3) mainの生成コードと公開manifestを照合し、検証済みR2対象だけを反映する。(4) 全21テーマと旧財政redirect、健康寿命2022年・農業産出額2024年、財政の県・年、分母表示を本番実測する。(5) 実際の公開日で20件の構成実験を `evaluate-theme-experiments.mjs --schedule` し、週次CIのstate書き戻しと月曜フォローを接続する。
 - **停止条件**: hydration #418 の残存、CI/生成物/manifestの不一致、公式source hash・recipeの差異、本番表示不一致があれば公開完了にしない。公開前に実験開始日を設定しない。staged監査を公開品質baselineへ上書きしない。正常時や既知coverage警告だけで新たなTODOを起票しない。

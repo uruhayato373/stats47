@@ -114,7 +114,7 @@
       "experimentId": "THEME-EXP-001",   // 必須・一意
       "themeKey": "aging-society",
       "hypothesis": "primary を老年化指数に変更すると CTR が改善する",
-      "changeType": "catalog-metrics",   // "catalog-metrics" | "catalog-charts" | "copy" | "structure" | "merge" | "split" | "rename" | "retire"
+      "changeType": "catalog-metrics",   // "catalog-metrics" | "catalog-charts" | "copy" | "structure" | "merge" | "split" | "rename" | "retire" | "launch"
       "baselinePeriod": { "from": "2026-05-18", "to": "2026-07-12" },
       "startedAt": "2026-07-13",
       "evaluateAt": { "d7": "2026-07-20", "d28": "2026-08-10", "d56": "2026-09-07" },
@@ -122,7 +122,7 @@
       "guardrailKpis": ["gsc.avgPosition", "ga4.engagementRate"],
       "baseline": { "gsc.clicks": 120, "gsc.avgPosition": 12.4, "ga4.engagementRate": 0.61 },
       "result": null,                     // 判定時に {d7:{...}, d28:{...}, d56:{...}} を記録
-      "verdict": "pending",               // "pending" | "effect-full" | "effect-partial" | "effect-none" | "effect-adverse" | "insufficient-data" | "aborted"
+      "verdict": "pending",               // "pending" | "effect-full" | "effect-partial" | "effect-none" | "effect-adverse" | "insufficient-data" | "aborted" | "launch-reviewed"
       "notes": null,                      // 季節性・順位変動・サイト全体変動の注記
       "evidenceRefs": []
     }
@@ -135,10 +135,46 @@
 1. `experimentId` は一意。
 2. **同一 `themeKey` × `changeType` で verdict が `pending` の実験は 1 件まで** (重複実験の防止)。
 3. `verdict` の確定は d7 では不可 (d7 は異常検知のみ)。d28 = 暫定 / d56 = 基本判定。
-4. `baseline` の無い実験は登録不可 (効果測定不能な実験を作らない)。
+4. 改善実験は `baseline` 必須。新規URLの `changeType=launch` は下記の初回公開観測契約を使い、公開前baselineを0で代用しない。
 5. verdict 確定時は `result` と `evidenceRefs` (実測 snapshot への参照) が必須。
 6. effect/* の**バックログ status への反映は improvement-triage に依頼する** (本 state は判定材料と
    実験履歴の台帳であり、`.claude/todo/improvements.md` へは書かない)。
+
+### 新規URLの初回公開観測（launch）
+
+新規URLは公開前トラフィックが存在しないため、`baseline=null` と
+`baselineStatus=not-applicable-new-url` を明記する。`baselinePeriod` はnull、
+`baselineScopes` / `baselineStatuses` は未設定または空にする。
+`--register` は書込み前にschema・重複を検査し、`startedAt/evaluateAt/result=null`、
+`verdict=pending` だけを受け付ける。既存テーマ改善のbaseline要件は維持する。
+
+```bash
+node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '{"experimentId":"THEME-LAUNCH-20260909-construction-industry","themeKey":"construction-industry","changeType":"launch","hypothesis":"公開後の国内閲覧と検索露出を観測し、構成の継続・改善を判断する","primaryKpi":"ga4.pageViews","guardrailKpis":["gsc.impressions","internalNav.eventCount"],"baseline":null,"baselineStatus":"not-applicable-new-url","evidenceRefs":[".claude/state/estat/theme-expansion-verification.json"]}'
+# 実際の公開と本番HTTP/表示確認が済んだ日だけ指定する（下記は日付書式の例）。
+node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUNCH-20260909-construction-industry YYYY-MM-DD
+```
+
+未来日のscheduleと設定済み公開日の変更は拒否する。同日scheduleは何も変えない。
+ローカル検証やPR作成日は公開日ではない。公開のやり直しは既存観測を動かさず別実験にする。
+
+- d7は品質の実測のみ。品質が未取得ならunknownとして記録し、正常と補完しない。
+- `portfolio.metrics` は従来の非重複56日窓、`metrics28d` は成功メタ付き最新の単独28日窓。
+  d28は後者を読み、公開後だけの完全窓で `launch-provisional` を記録する。未取得・行欠落は
+  `insufficient-data`。両フィールドとも同じ国条件・低標本・欠測規律を適用する。
+- d56の完全窓は `launch-observed`。低標本の実カウントは保持し、比率や効果を推定しない。
+  欠測・低標本・guardrail不足は `reasons/constraints` に残す。
+- launchは `effect-*` を確定しない。d56後に
+  `--launch-review <id> continue|improve|hold --evidence <ref> --note '<判断理由と次の検証>'`
+  で継続・改善・保留の材料と判断を `result.launchReview` へ保存し、`verdict=launch-reviewed`
+  とする。continueには適合する56日窓が必要。窓不足なら計測修復のimproveまたはholdを記録する。
+- 初回公開の有効な56日窓は、主KPIがmeasuredなら `result.baselineCandidate` として保存する。
+  同じ期間・国条件で適合するKPIだけを含め、元実験・観測日を参照する。これは**次の改善**の
+  baseline候補であり、launch自身のbaselineを置換しない。次の改善は別IDで登録し、変更公開前の
+  56日窓・scope・statusと照合する。期間不明または変更日以降を含むbaselineではeffectを確定しない。
+
+週次監査の既存 `aggregate-theme-metrics.ts` と `--check` が両窓・期日観測を更新する。
+期日は取得開始の目安であり、実際に公開後の窓が揃うまでは再観測を追記する。
+改善作業はownerと検証条件付きで既存台帳へ渡し、変更後も新しい実験IDで同じ確認を繰り返す。
 
 ## 禁止事項
 
@@ -153,7 +189,7 @@
 
 ## 2026-09-08以降の品質・計測契約
 
-- 母集団は現行ThemeCatalog（21）。気候はcatalog、旧財政市区町村URLはredirectで対象外。
+- 母集団は現行ThemeCatalog。気候はcatalog、旧財政市区町村URLはredirectで対象外。
 - `quality.json` は章/登録/期間/単位/有限値coverage/重複/履歴退行の観測。前回正常値を
   `lastGoodObservations` に保持し、異常継続中の基準すり替えを防ぐ。全操作・全国系列・GISは別途表示確認。
 - GA4はJapan-only `pages-clean.csv` と `.meta.json` のstatus=ok/source/countryFilter/実期間を必須にする。
@@ -170,7 +206,7 @@
 
 `dataQuality.ageReviewKeys` は最新観測が5年以上前の一次資料確認候補であり、未更新の確定ではない。5年周期の調査を自動で stale-data にしない。`freshnessStatus` は公表済み新年との照合が別工程であることを示す。
 
-定期フォロー: Codex heartbeat `automation`「全テーマの品質確認と継続改善」を2026-09-08に登録済み。毎週月曜09:00 JSTに確認し、月初は公式資料・構成も見直す。変化のない既知警告は通知しない。GitHub週次監査はworkflowの公開後に稼働する。
+定期フォロー: 元PCには2026-09-08登録の「全テーマの品質確認と継続改善」の記録がある。このPCではテーマ監査の設定が見つからなかったため、2026-09-09にCodex heartbeat `automation`「テーマ拡充の検証と継続改善」をこのタスクへ登録した。毎週月曜09:00 JSTに確認し、月初は公式資料・構成も見直す。変化のない既知警告は通知しない。元PCの稼働が確認できた場合は重複を照合する。GitHub週次監査はworkflowの公開後に稼働する。
 
 
 ## 別PCで未公開のテーマ改善を再開する
@@ -180,6 +216,26 @@
 `.local` のステージデータ、元資料、ブラウザHTML、詳細ログはgit対象外。秘密情報も移行されない。
 新しいPCでは依存関係を `npm ci` で復元し、そのPCの正規の環境設定を使用する。
 Codex heartbeatは元PCのタスクに設定されておりgitでは移行されない。追加登録の前に既存設定を確認する。
+
+### 128候補の初回3テーマ
+
+対象と実装検証は [first-batch記録](../metrics/themes/2026-09-09-first-batch.json)、残工程は
+`THEME-EXPANSION-IMPLEMENT-01` を参照する。新規公開の3実験は未公開の間 `startedAt=null` を保つ。
+公開後にHTTP、全県値、公開日を記録してから `--schedule` を実行する。
+
+```bash
+# 新規3指標の取込は page-data-batch.ts --metric <key> --kind prefecture
+# 検証API応答を保持したディレクトリを指定。既存6指標は公開R2から歴史系列も維持する。
+node --conditions=react-server --import tsx .claude/scripts/themes/stage-theme-expansion.mjs --api-artifact-dir /tmp/stats47-theme-expansion-api
+# 31ファイルのsha256を照合するlocalhostゲートウェイ（GET/HEADのみ、書込み不可）
+node .claude/scripts/themes/preview-theme-release.mjs --manifest .local/verification/themes/first-batch/release-manifest.json
+# R2_PUBLIC_FETCH_URL=http://127.0.0.1:4778 で本番用buildとlocalhost起動後、PC/mobileを確認
+node --import tsx .claude/scripts/themes/probe-theme-expansion.mjs --url http://127.0.0.1:3011
+```
+
+ステージを更新したらプレビューゲートウェイも再起動する。既存21テーマの未公開manifestと
+併合する際は同じキーの上書きに注意し、特に `app/ranking-items/all.json` を現行定義から再生成する。
+観測値・スクリーンショットは `.local/`、件数・hash・検証結果は上記stateへ保存する。
 
 ### データの復元
 

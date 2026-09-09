@@ -306,6 +306,7 @@ import { constructionContractRoad } from "./metrics/construction-contract-road";
 import { constructionContractSewerage } from "./metrics/construction-contract-sewerage";
 import { constructionContractTotal } from "./metrics/construction-contract-total";
 import { constructionIndustryCount } from "./metrics/construction-industry-count";
+import { constructionPrivateEmployees } from "./metrics/construction-private-employees";
 import { constructionProjectsTotal } from "./metrics/construction-projects-total";
 import { consumerPriceDifferenceIndexClothingFootwear } from "./metrics/consumer-price-difference-index-clothing-footwear";
 import { consumerPriceDifferenceIndexCultureRecreation } from "./metrics/consumer-price-difference-index-culture-recreation";
@@ -957,6 +958,8 @@ import { infantMortalityRatePer1000Births } from "./metrics/infant-mortality-rat
 import { inflowPopulationRatio } from "./metrics/inflow-population-ratio";
 import { informationCommunicationCoefficient } from "./metrics/information-communication-coefficient";
 import { informationCommunicationExpenditure } from "./metrics/information-communication-expenditure";
+import { informationPrivateEmployees } from "./metrics/information-private-employees";
+import { informationPrivateEstablishments } from "./metrics/information-private-establishments";
 import { inlandAquacultureHarvest } from "./metrics/inland-aquaculture-harvest";
 import { inlandFisheryCatch } from "./metrics/inland-fishery-catch";
 import { inpatientRateByBedtype } from "./metrics/inpatient-rate-by-bedtype";
@@ -2661,6 +2664,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "construction-contract-sewerage": constructionContractSewerage,
   "construction-contract-total": constructionContractTotal,
   "construction-industry-count": constructionIndustryCount,
+  "construction-private-employees": constructionPrivateEmployees,
   "construction-projects-total": constructionProjectsTotal,
   "consumer-price-difference-index-clothing-footwear": consumerPriceDifferenceIndexClothingFootwear,
   "consumer-price-difference-index-culture-recreation": consumerPriceDifferenceIndexCultureRecreation,
@@ -3312,6 +3316,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "inflow-population-ratio": inflowPopulationRatio,
   "information-communication-coefficient": informationCommunicationCoefficient,
   "information-communication-expenditure": informationCommunicationExpenditure,
+  "information-private-employees": informationPrivateEmployees,
+  "information-private-establishments": informationPrivateEstablishments,
   "inland-aquaculture-harvest": inlandAquacultureHarvest,
   "inland-fishery-catch": inlandFisheryCatch,
   "inpatient-rate-by-bedtype": inpatientRateByBedtype,

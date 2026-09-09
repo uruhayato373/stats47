@@ -28,6 +28,10 @@ import { ROADS_CATALOG } from "./roads";
 import { SAFETY_CATALOG } from "./safety";
 import { TOURISM_CATALOG } from "./tourism";
 
+import { CONSTRUCTION_INDUSTRY_CATALOG } from "./construction-industry";
+import { WASTE_RECYCLING_CATALOG } from "./waste-recycling";
+import { INFORMATION_INDUSTRY_CATALOG } from "./information-industry";
+
 export * from "./types";
 export * from "./evidence-lenses";
 export * from "./population-pyramid-deps";
@@ -61,6 +65,10 @@ export const THEME_CATALOGS: Record<string, ThemeCatalog> = {
   "roads": ROADS_CATALOG,
   "safety": SAFETY_CATALOG,
   "tourism": TOURISM_CATALOG,
+  "construction-industry": CONSTRUCTION_INDUSTRY_CATALOG,
+  "waste-recycling": WASTE_RECYCLING_CATALOG,
+  "information-industry": INFORMATION_INDUSTRY_CATALOG,
+
 };
 
 /** 登録済みカタログ配列。 */

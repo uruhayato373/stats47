@@ -151,3 +151,18 @@ describe("normalizeUnitForAxis", () => {
     expect(normalizeUnitForAxis("円")).not.toBe(normalizeUnitForAxis("千円"));
   });
 });
+
+
+describe("固定年の比較条件", () => {
+  it("比較年を4桁年へ限定する", () => {
+    const { errors } = run(catalog([{ key: "fixed", title: "Fixed", rankingKeys: [YEN], defaultCheckedKeys: [YEN], comparisonYear: "latest" }], [YEN]));
+    expect(errors.some((error) => error.startsWith("[group-comparison-year]"))).toBe(true);
+  });
+  it("同じ指標へ異なる比較年を設定させない", () => {
+    const { errors } = run(catalog([
+      { key: "before", title: "Before", rankingKeys: [YEN], defaultCheckedKeys: [YEN], comparisonYear: "2021" },
+      { key: "after", title: "After", rankingKeys: [YEN], defaultCheckedKeys: [YEN], comparisonYear: "2023" },
+    ], [YEN]));
+    expect(errors.some((error) => error.startsWith("[group-comparison-year]"))).toBe(true);
+  });
+});

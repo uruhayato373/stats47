@@ -61,6 +61,17 @@ export function summarizeSeries(rows) {
   };
 }
 
+/** Compare the displayed cohort with its verified source; absence never means zero. */
+export function validateStagedComparison(rows, raw, unit) {
+  if (rows.length !== 47 || raw.length !== 47 || [rows.map((row) => row.areaCode), raw.map((row) => row['@area'])].some((codes) => new Set(codes).size !== 47 || !PREFECTURES.every((code) => codes.includes(code)))) return ['Expected exactly 47 distinct prefectures in both cohorts'];
+  return rows.flatMap((row) => {
+    const original = raw.find((entry) => entry['@area'] === row.areaCode);
+    const rank = 1 + rows.filter((entry) => Number.isFinite(entry.value) && entry.value > row.value).length;
+    return !Number.isFinite(row.value) || row.value !== numericValue(original.$) || row.unit !== unit || row.rank !== rank
+      ? [`Source/value/unit/rank mismatch: ${row.areaCode}`] : [];
+  });
+}
+
 export function validateDecisions(catalog, existingThemes) {
   const errors = [];
   const ids = new Set(catalog.themes.map((theme) => theme.id));
@@ -75,7 +86,9 @@ export function validateDecisions(catalog, existingThemes) {
     if (!d.rationale || !d.scope || !d.owner || !d.evidenceRefs?.length) errors.push(`${theme.id}: incomplete decision`);
     if (d.disposition === 'existing-section' && !existingThemes[d.targetThemeKey]) errors.push(`${theme.id}: unknown existing theme`);
     if (d.disposition === 'new-theme') {
-      if (!/^[a-z]+(?:-[a-z]+)*$/.test(d.targetThemeKey ?? '') || existingThemes[d.targetThemeKey] || newKeys.has(d.targetThemeKey)) errors.push(`${theme.id}: invalid new theme key`);
+      const registered = Boolean(existingThemes[d.targetThemeKey]);
+      const mapped = d.implementedThemeKey === d.targetThemeKey;
+      if (!/^[a-z]+(?:-[a-z]+)*$/.test(d.targetThemeKey ?? '') || registered !== mapped || newKeys.has(d.targetThemeKey)) errors.push(`${theme.id}: invalid new theme key or implementation mapping`);
       newKeys.add(d.targetThemeKey);
     }
     if (d.disposition === 'merge-candidate') {

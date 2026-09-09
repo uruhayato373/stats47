@@ -1,8 +1,20 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { PREFECTURES, numericValue, summarizeSeries, validateDecisions, validateImplementationPlan } from '../theme-expansion-core.mjs';
+import { PREFECTURES, numericValue, summarizeSeries, validateDecisions, validateImplementationPlan, validateStagedComparison } from '../theme-expansion-core.mjs';
 
 const rows = () => PREFECTURES.map((area) => ({ '@area': area, '@time': '2023000000', '@unit': '人', $: '0' }));
+
+test('release cohort preserves real zeros and ties, rejects wrong units, ranks, source suppression and geography', () => {
+  const raw = rows();
+  const staged = PREFECTURES.map((areaCode) => ({ areaCode, value: 0, unit: '人', rank: 1 }));
+  assert.deepEqual(validateStagedComparison(staged, raw, '人'), []);
+  for (const replacement of [{ unit: '千人' }, { rank: 2 }, { value: null }, { areaCode: '00000' }]) {
+    assert.ok(validateStagedComparison([{ ...staged[0], ...replacement }, ...staged.slice(1)], raw, '人').length);
+  }
+  raw[0].$ = '-';
+  assert.ok(validateStagedComparison(staged, raw, '人').length);
+  assert.ok(validateStagedComparison(staged, [...raw.slice(1), raw[1]], '人').length);
+});
 
 test('missing and suppressed values never become zero', () => {
   for (const value of [null, undefined, '', ' ', '-', 'X', '…', 'NaN', 'Infinity']) assert.equal(numericValue(value), null);
@@ -54,6 +66,19 @@ test('merge chains and cycles cannot hide undecided destinations', () => {
   assert.equal(validateDecisions(catalog, {}).filter((error) => error.includes('directly')).length, 2);
   Object.assign(catalog.themes[1].decision, { disposition: 'existing-section', targetThemeKey: 'missing' });
   assert.match(validateDecisions(catalog, {}).join(), /unknown existing theme/);
+});
+
+test('a planned new theme can become registered only through its explicit destination mapping', () => {
+  const catalog = catalogFixture();
+  const decision = catalog.themes[0].decision;
+  Object.assign(decision, { disposition: 'new-theme', targetThemeKey: 'construction' });
+  assert.deepEqual(validateDecisions(catalog, {}), []);
+  assert.ok(validateDecisions(catalog, { construction: {} }).length);
+  decision.implementedThemeKey = 'construction';
+  assert.deepEqual(validateDecisions(catalog, { construction: {} }), []);
+  assert.ok(validateDecisions(catalog, {}).length, 'a removed implementation cannot stay marked as mapped');
+  decision.implementedThemeKey = 'other-theme';
+  assert.ok(validateDecisions(catalog, { construction: {} }).length);
 });
 
 function planFixture() {

@@ -121,6 +121,10 @@ export interface CatalogChart {
  *   フォールバックするので、全テーマに書く必要はない。
  */
 export interface CatalogMetricGroup {
+  /** 固定年の県別比較。指定時は時系列を描かず、この年が欠けても最新年へ代替しない。 */
+  comparisonYear?: string;
+  /** 固定年の県別比較にタイル地図を追加する（率など地域差の比較用）。 */
+  comparisonMap?: boolean;
   /** kebab-case。テーマ内で一意 (React key・計測ラベルに使う) */
   key: string;
   /** カード見出し (例 "賃金水準と格差") */

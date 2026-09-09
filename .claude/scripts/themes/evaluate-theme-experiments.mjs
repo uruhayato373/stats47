@@ -36,16 +36,17 @@ const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/stat
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 
-const VERDICTS = new Set(["effect-full", "effect-partial", "effect-none", "effect-adverse", "insufficient-data", "aborted"]);
+export const CHANGE_TYPES = new Set(["catalog-metrics", "catalog-charts", "copy", "structure", "merge", "split", "rename", "retire", "launch"]);
+export const VERDICTS = new Set(["pending", "launch-reviewed", "effect-full", "effect-partial", "effect-none", "effect-adverse", "insufficient-data", "aborted"]);
 
 function load(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
 /** "gsc.clicks" のような KPI パスを portfolio の metrics から解決する (無ければ null) */
-function resolveKpi(theme, kpiPath) {
+function resolveKpi(theme, kpiPath, checkpoint) {
   const [group, field] = String(kpiPath).split(".");
-  const m = theme?.metrics?.[group];
+  const m = (checkpoint === "d28" ? theme?.metrics28d ?? theme?.metrics : theme?.metrics)?.[group];
   return {
     value: Number.isFinite(m?.[field]) ? m[field] : null,
     status: m?.status ?? "missing",
@@ -67,9 +68,11 @@ function expectedScope(kpi) {
 }
 
 /** Portfolio の日付付き集計契約を確認する。期日や週番号を観測期間の代用にしない。 */
-function measurementLimits(value, kpi, experiment, days, observedAt) {
+function measurementLimits(value, kpi, experiment, days, observedAt, allowLowCounts = false) {
   const reasons = [];
-  if (value?.status !== "measured" || !Number.isFinite(value?.value)) reasons.push("missing-or-low-sample");
+  const lowCount = allowLowCounts && value?.status === "measured-low"
+    && ["gsc.clicks", "gsc.impressions", "ga4.pageViews"].includes(kpi);
+  if ((value?.status !== "measured" && !lowCount) || !Number.isFinite(value?.value)) reasons.push("missing-or-low-sample");
   if (value?.scope !== expectedScope(kpi)) reasons.push("scope-unknown-or-incompatible");
   if (value?.windowDays !== days || !validDate(value?.periodStart) || !validDate(value?.periodEnd)
       || addDays(value.periodStart, days - 1) !== value.periodEnd) reasons.push("complete-window-unavailable");
@@ -83,11 +86,18 @@ function measurementLimits(value, kpi, experiment, days, observedAt) {
   return reasons;
 }
 
-function baselineLimits(experiment, kpi) {
+function baselineLimits(experiment, kpi, days) {
   const group = String(kpi).split(".")[0];
   const reasons = [];
   if (!Number.isFinite(experiment.baseline?.[kpi]) || experiment.baselineStatuses?.[kpi] !== "measured") reasons.push("baseline-missing-or-low-sample");
   if (experiment.baselineScopes?.[group] !== expectedScope(kpi)) reasons.push("baseline-scope-unknown-or-incompatible");
+  if (days === 56) {
+    const period = experiment.baselinePeriod;
+    if (!validDate(period?.from) || !validDate(period?.to) || addDays(period.from, 55) !== period.to)
+      reasons.push("baseline-complete-window-unavailable");
+    if (!validDate(period?.to) || !validDate(experiment.startedAt) || period.to >= experiment.startedAt)
+      reasons.push("baseline-overlaps-publication");
+  }
   return reasons;
 }
 
@@ -96,15 +106,21 @@ export function assessCheckpoint(experiment, checkpoint, observation) {
   if (checkpoint === "d7") return { status: "quality-only", reasons: ["d7-is-quality-observation"], constraints: [] };
   const days = checkpoint === "d28" ? 28 : 56;
   const primary = experiment.primaryKpi;
+  const launch = experiment.changeType === "launch";
   const reasons = [
-    ...measurementLimits(observation?.values?.[primary], primary, experiment, days, observation?.observedAt),
-    ...baselineLimits(experiment, primary),
+    ...measurementLimits(observation?.values?.[primary], primary, experiment, days, observation?.observedAt, launch),
+    ...(launch ? [] : baselineLimits(experiment, primary, days)),
   ];
   const constraints = (experiment.guardrailKpis ?? []).flatMap((kpi) => [
-    ...measurementLimits(observation?.values?.[kpi], kpi, experiment, days, observation?.observedAt),
-    ...baselineLimits(experiment, kpi),
+    ...measurementLimits(observation?.values?.[kpi], kpi, experiment, days, observation?.observedAt, launch),
+    ...(launch ? [] : baselineLimits(experiment, kpi, days)),
   ].map((reason) => `${kpi}: ${reason}`));
-  return { status: reasons.length ? "insufficient-data" : checkpoint === "d28" ? "provisional" : "eligible", reasons, constraints };
+  const status = reasons.length ? "insufficient-data" : launch
+    ? checkpoint === "d28" ? "launch-provisional" : "launch-observed"
+    : checkpoint === "d28" ? "provisional" : "eligible";
+  if (launch) constraints.push("new-url-has-no-pre-publication-baseline");
+  if (launch && observation?.values?.[primary]?.status === "measured-low") constraints.push("primary-low-sample-count-only");
+  return { status, reasons, constraints };
 }
 
 export function observeCheckpoint(experiment, checkpoint, theme, observedAt) {
@@ -114,12 +130,12 @@ export function observeCheckpoint(experiment, checkpoint, theme, observedAt) {
   };
   const observation = { observedAt, values: {} };
   for (const kpi of [experiment.primaryKpi, ...(experiment.guardrailKpis ?? [])].filter(Boolean)) {
-    observation.values[kpi] = resolveKpi(theme, kpi);
+    observation.values[kpi] = resolveKpi(theme, kpi, checkpoint);
   }
   return { ...observation, ...assessCheckpoint(experiment, checkpoint, observation) };
 }
 
-function latestObservation(experiment, checkpoint) {
+export function latestObservation(experiment, checkpoint) {
   return experiment.result?.rechecks?.[checkpoint]?.at(-1) ?? experiment.result?.[checkpoint];
 }
 
@@ -137,8 +153,63 @@ export function recordCheckpoint(experiment, checkpoint, observation) {
   return true;
 }
 
+/** Registration and state lint share one contract; launch never uses an invented zero baseline. */
+export function experimentIssues(e, { registration = false } = {}) {
+  if (!e || typeof e !== "object" || Array.isArray(e)) return ["実験はobject必須"];
+  const issues = [];
+  for (const key of ["experimentId", "themeKey", "hypothesis", "primaryKpi"])
+    if (typeof e[key] !== "string" || !e[key].trim()) issues.push(`${key} 欠落`);
+  if (!CHANGE_TYPES.has(e.changeType)) issues.push(`changeType 不正 (${e.changeType})`);
+  if (!VERDICTS.has(e.verdict)) issues.push(`verdict 不正 (${e.verdict})`);
+  if (!Array.isArray(e.guardrailKpis ?? []) || !(e.guardrailKpis ?? []).every((k) => typeof k === "string" && /^(gsc|ga4|internalNav)\.[A-Za-z][A-Za-z0-9]*$/.test(k))) issues.push("guardrailKpis 不正");
+  if (typeof e.primaryKpi === "string" && !/^(gsc|ga4|internalNav)\.[A-Za-z][A-Za-z0-9]*$/.test(e.primaryKpi)) issues.push("primaryKpi 不正");
+  if (!Array.isArray(e.evidenceRefs ?? []) || !(e.evidenceRefs ?? []).every((r) => typeof r === "string" && r.trim())) issues.push("evidenceRefs 不正");
+  if (e.changeType === "launch") {
+    if (e.baseline !== null || e.baselinePeriod != null || e.baselineStatus !== "not-applicable-new-url"
+        || Object.keys(e.baselineScopes ?? {}).length || Object.keys(e.baselineStatuses ?? {}).length)
+      issues.push("launch は baseline=null / baselineStatus=not-applicable-new-url が必須（公開前を0にしない）");
+    if (e.verdict?.startsWith("effect-")) issues.push("launch は effect/* を確定できない");
+  } else {
+    if (!e.baseline || typeof e.baseline !== "object" || Array.isArray(e.baseline) || !Object.keys(e.baseline).length)
+      issues.push("baseline 欠落 — 改善実験はbaseline必須");
+    if (e.verdict === "launch-reviewed") issues.push("launch-reviewed は launch 専用");
+  }
+  if (e.evaluateAt != null) {
+    if (!validDate(e.startedAt) || [7, 28, 56].some((n) => e.evaluateAt[`d${n}`] !== addDays(e.startedAt, n))) issues.push("evaluateAt は startedAt +7/+28/+56日が必須");
+  } else if (e.startedAt != null && !validDate(e.startedAt)) issues.push("startedAt 不正");
+  if (registration && (e.startedAt != null || e.evaluateAt != null || e.result != null || e.verdict !== "pending"))
+    issues.push("登録時は pending / startedAt,evaluateAt,result=null。公開後に --schedule する");
+  return issues;
+}
+
+/** A first valid launch window can seed a later improvement, never the launch's own baseline. */
+export function launchBaselineCandidate(experiment, observation) {
+  if (experiment.changeType !== "launch" || assessCheckpoint(experiment, "d56", observation).status !== "launch-observed") return null;
+  const primary = observation.values[experiment.primaryKpi];
+  if (primary.status !== "measured") return null;
+  const candidate = {
+    sourceExperimentId: experiment.experimentId, sourceObservedAt: observation.observedAt,
+    baselinePeriod: { from: primary.periodStart, to: primary.periodEnd }, baseline: {}, baselineScopes: {}, baselineStatuses: {},
+    evidenceRefs: [`.claude/state/themes/experiments.json#${experiment.experimentId}/d56/${observation.observedAt}`],
+  };
+  for (const [kpi, value] of Object.entries(observation.values)) {
+    if (measurementLimits(value, kpi, experiment, 56, observation.observedAt, true).length
+        || value.periodStart !== primary.periodStart || value.periodEnd !== primary.periodEnd) continue;
+    candidate.baseline[kpi] = value.value;
+    candidate.baselineStatuses[kpi] = value.status;
+    candidate.baselineScopes[kpi.split(".")[0]] = value.scope;
+  }
+  return candidate;
+}
+
+function reject(message) { console.error(`✗ ${message}`); process.exit(1); }
+
 function main() {
   const args = process.argv.slice(2);
+  const modes = ["--register", "--schedule", "--check", "--verdict", "--launch-review"];
+  const known = new Set([...modes, "--evidence", "--note"]);
+  if (args.filter((a) => modes.includes(a)).length > 1 || args.some((a) => a.startsWith("--") && !known.has(a)))
+    reject("操作は1件ずつ、既知のオプションだけ指定する");
   const ex = load(EXPERIMENTS);
   const pf = load(PORTFOLIO);
   const byTheme = new Map(pf.themes.map((t) => [t.themeKey, t]));
@@ -152,19 +223,16 @@ function main() {
       console.error(`✗ --register の JSON が不正: ${String(e.message).split("\n")[0]}`);
       process.exit(1);
     }
-    for (const req of ["experimentId", "themeKey", "changeType", "hypothesis", "primaryKpi", "baseline"]) {
-      if (!spec[req]) { console.error(`✗ 必須フィールド欠落: ${req}`); process.exit(1); }
-    }
-    if (!byTheme.has(spec.themeKey)) { console.error(`✗ themeKey 不明: ${spec.themeKey}`); process.exit(1); }
-    if (ex.experiments.some((x) => x.experimentId === spec.experimentId)) {
-      console.error(`✗ experimentId 重複: ${spec.experimentId}`); process.exit(1);
-    }
+    if (!spec || typeof spec !== "object" || Array.isArray(spec)) reject("登録JSONはobject必須");
     const entry = {
       guardrailKpis: [], baselinePeriod: null, startedAt: null, evaluateAt: null,
-      result: null, notes: null, evidenceRefs: [],
-      ...spec,
-      verdict: "pending",
+      result: null, notes: null, evidenceRefs: [], verdict: "pending", ...spec,
     };
+    const issues = experimentIssues(entry, { registration: true });
+    if (issues.length) reject(issues.join("; "));
+    if (!byTheme.has(entry.themeKey)) reject(`themeKey 不明: ${entry.themeKey}`);
+    if (ex.experiments.some((x) => x.experimentId === entry.experimentId)) reject(`experimentId 重複: ${entry.experimentId}`);
+    if (ex.experiments.some((x) => x.themeKey === entry.themeKey && x.changeType === entry.changeType && x.verdict === "pending")) reject("同一themeKey × changeTypeのpending実験は1件まで");
     ex.experiments.push(entry);
     fs.writeFileSync(EXPERIMENTS, JSON.stringify(ex, null, 2) + "\n");
     console.log(`登録: ${entry.experimentId} (${entry.themeKey} / ${entry.changeType})` +
@@ -181,6 +249,9 @@ function main() {
     if (!validDate(start)) { console.error("✗ 日付は実在する YYYY-MM-DD"); process.exit(1); }
     const e = ex.experiments.find((x) => x.experimentId === id);
     if (!e) { console.error(`✗ ${id} が experiments.json に無い`); process.exit(1); }
+    if (start > today) reject("公開前の未来日はschedule不可。実際の公開後に記録する");
+    if (e.startedAt === start && e.evaluateAt) { console.log(`schedule: ${id} は同日で設定済み`); return; }
+    if (e.verdict !== "pending" || e.result != null || e.startedAt != null || e.evaluateAt != null) reject("設定済みの公開日・観測履歴は変更不可。別実験で記録する");
     const plus = (days) => {
       const d = new Date(start + "T00:00:00Z");
       d.setUTCDate(d.getUTCDate() + days);
@@ -193,6 +264,26 @@ function main() {
     return;
   }
 
+  const reviewIdx = args.indexOf("--launch-review");
+  if (reviewIdx >= 0) {
+    const e = ex.experiments.find((x) => x.experimentId === args[reviewIdx + 1]);
+    const decision = args[reviewIdx + 2];
+    const evidence = args[args.indexOf("--evidence") >= 0 ? args.indexOf("--evidence") + 1 : -1];
+    const note = args[args.indexOf("--note") >= 0 ? args.indexOf("--note") + 1 : -1];
+    if (!e || e.changeType !== "launch" || e.verdict !== "pending") reject("未判定のlaunch実験が必要");
+    if (!["continue", "improve", "hold"].includes(decision) || !evidence?.trim() || !note?.trim()) reject("continue|improve|hold と --evidence / --note が必要");
+    const observation = latestObservation(e, "d56");
+    if (!validDate(e.evaluateAt?.d56) || e.evaluateAt.d56 > today || !observation) reject("d56期日と観測が必要");
+    const assessment = assessCheckpoint(e, "d56", observation);
+    if (decision === "continue" && assessment.status !== "launch-observed") reject("continueには適合する公開後56日窓が必要");
+    e.result.launchReview = { reviewedAt: today, decision, observedAt: observation.observedAt, assessment, evidenceRefs: [evidence], note };
+    e.result.baselineCandidate = launchBaselineCandidate(e, observation);
+    e.verdict = "launch-reviewed";
+    fs.writeFileSync(EXPERIMENTS, JSON.stringify(ex, null, 2) + "\n");
+    console.log(`launch review: ${e.experimentId} → ${decision}（因果効果の確定ではない）`);
+    return;
+  }
+
   const vIdx = args.indexOf("--verdict");
   if (vIdx >= 0) {
     // ── verdict 確定モード ──
@@ -200,12 +291,13 @@ function main() {
     const verdict = args[vIdx + 2];
     const e = ex.experiments.find((x) => x.experimentId === id);
     if (!e) { console.error(`✗ ${id} が experiments.json に無い`); process.exit(1); }
-    if (!VERDICTS.has(verdict)) { console.error(`✗ verdict 不正: ${verdict} (${[...VERDICTS].join("|")})`); process.exit(1); }
+    if (!VERDICTS.has(verdict) || ["pending", "launch-reviewed"].includes(verdict)) { console.error(`✗ verdict 不正: ${verdict} (${[...VERDICTS].join("|")})`); process.exit(1); }
     if (!e.result?.d7 && !e.result?.d28 && !e.result?.d56) {
       console.error(`✗ ${id}: result が空 — 先に --check で期日到達分の実測を記録すること`);
       process.exit(1);
     }
     if (verdict.startsWith("effect-")) {
+      if (e.changeType === "launch") reject("launch は公開前baselineが無いため effect/* を確定できない。--launch-review を使う");
       const assessment = assessCheckpoint(e, "d56", latestObservation(e, "d56"));
       if (!validDate(e.evaluateAt?.d56) || e.evaluateAt.d56 > today || assessment.status !== "eligible") {
         console.error(`✗ ${id}: effect/* は公開後の適合する d56 実測と比較可能な baseline が必要。d7=品質 / d28=暫定。insufficient-data: ${assessment.reasons.join(", ")}`);

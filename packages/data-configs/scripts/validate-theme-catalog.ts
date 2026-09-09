@@ -340,6 +340,7 @@ export function validateMetricGroups(
   const seenGroupKeys = new Set<string>();
   const seenTitles = new Set<string>();
   const assigned = new Set<string>();
+  const comparisonYears = new Map<string, string>();
 
   for (const g of groups) {
     if (seenGroupKeys.has(g.key)) {
@@ -359,8 +360,19 @@ export function validateMetricGroups(
       errors.push(`[group-empty] ${c.key}/${g.key}: rankingKeys が空`);
     }
 
+    if (g.comparisonYear !== undefined && !/^\d{4}$/.test(g.comparisonYear)) {
+      errors.push(`[group-comparison-year] ${c.key}/${g.key}: comparisonYear は4桁年にする`);
+    }
+
     // rankingKeys ⊆ metrics
     for (const k of g.rankingKeys) {
+      if (g.comparisonYear) {
+        const previous = comparisonYears.get(k);
+        if (previous && previous !== g.comparisonYear) {
+          errors.push(`[group-comparison-year] ${c.key}/${g.key}: "${k}" に異なる比較年を指定できない`);
+        }
+        comparisonYears.set(k, g.comparisonYear);
+      }
       if (!metricKeys.has(k)) {
         errors.push(
           `[group-key] ${c.key}/${g.key}: rankingKey "${k}" が metrics に不在`

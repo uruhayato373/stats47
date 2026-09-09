@@ -33,7 +33,8 @@ import type { CatalogChart, ThemeCatalog } from '../types';
 
 /** 実測で確定したベースライン。移行で動いたらここを更新する (shrink/grow の向きを守る)。 */
 const BASELINE = {
-  themes: 21,
+  // 初回拡充の3テーマはmetricGroupsで比較し、追加図の母数は変えない。
+  themes: 24,
   charts: 74,
   chartsWithRawEstatParams: 0,
   rawEstatRequests: 0,

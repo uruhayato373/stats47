@@ -195,3 +195,39 @@ test("国条件が不明な GA4 を統廃合の測定根拠にしない", (t) =>
   assert.equal(result.status, 1, result.stdout);
   assert.match(JSON.parse(result.stdout).violations.join("\n"), /\[P4\]/);
 });
+
+const launchExperiment = (over = {}) => ({ experimentId: "LAUNCH-TEST", themeKey: "tourism", changeType: "launch",
+  hypothesis: "初回公開の閲覧数を観測する", primaryKpi: "ga4.pageViews", guardrailKpis: ["gsc.impressions"],
+  baseline: null, baselineStatus: "not-applicable-new-url", startedAt: null, evaluateAt: null,
+  result: null, verdict: "pending", ...over });
+
+test("new launch with explicit absent baseline is valid, without a publication clock", (t) => {
+  const f = fixture({ portfolio: { themes: [theme(), theme({ themeKey: "tourism" })] },
+    experiments: { experiments: [launchExperiment()] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  assert.equal(run(f).status, 0);
+});
+
+test("launch fake baseline, effect verdict, review without evidence, and inconsistent schedule are invalid", (t) => {
+  for (const patch of [ { baseline: { "ga4.pageViews": 0 } }, { baselineStatus: undefined },
+    { verdict: "effect-full", result: {}, evidenceRefs: ["source.csv"] }, { verdict: "launch-reviewed" },
+    { startedAt: "2026-09-09", evaluateAt: { d7: "2026-09-17", d28: "2026-10-07", d56: "2026-11-04" } },
+    { themeKey: "unregistered" },
+  ]) {
+    const f = fixture({ portfolio: { themes: [theme(), theme({ themeKey: "tourism" })] },
+      experiments: { experiments: [launchExperiment(patch)] } });
+    t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+    const result = run(f);
+    assert.equal(result.status, 1, JSON.stringify(patch));
+  }
+});
+
+test("new 28-day metrics obey the same unknown/low-sample numeric rules", (t) => {
+  const f = fixture({ portfolio: { themes: [theme(), theme({ themeKey: "tourism", metrics28d: {
+    ga4: { status: "measured-low", pageViews: 2, engagementRatePvWeighted: 0.8, windowDays: 28 },
+  } })] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const result = run(f);
+  assert.equal(result.status, 1);
+  assert.match(JSON.parse(result.stdout).violations.join("\n"), /metrics28d.ga4/);
+});

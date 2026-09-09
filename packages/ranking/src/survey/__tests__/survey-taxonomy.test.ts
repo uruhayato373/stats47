@@ -185,6 +185,23 @@ describe('resolveThemeSurveyTaxonomy', () => {
       resolveThemeSurveyTaxonomy(broken, METRICS_REGISTRY).charts[0].status
     ).toBe('missing-lineage');
   });
+
+  it('固定年比較を含む指標カードを図とは別に監査し、一部だけの解決を成功にしない', () => {
+    const withGroups: ThemeCatalog = {
+      ...catalog,
+      charts: [],
+      metricGroups: [
+        { key: 'comparison', title: '比較', rankingKeys: ['grilled-eel-consumption-expenditure'], defaultCheckedKeys: ['grilled-eel-consumption-expenditure'], comparisonYear: '2023' },
+        { key: 'partial', title: '一部未解決', rankingKeys: ['grilled-eel-consumption-expenditure', 'unknown-metric'], defaultCheckedKeys: ['grilled-eel-consumption-expenditure'] },
+        { key: 'empty', title: '空', rankingKeys: [], defaultCheckedKeys: [] },
+      ],
+    };
+    const result = resolveThemeSurveyTaxonomy(withGroups, METRICS_REGISTRY);
+    expect(result.charts).toEqual([]);
+    expect(result.metricGroups.map((group) => group.status)).toEqual(['resolved', 'unresolved', 'missing-lineage']);
+    expect(result.metricGroups[0].surveys.map((survey) => survey.id)).toContain('kakei-chousa');
+    expect(result.metricGroups[1].unresolvedMetricKeys).toEqual(['unknown-metric']);
+  });
 });
 
 describe('blog chart taxonomy', () => {
