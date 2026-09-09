@@ -9,15 +9,16 @@ import type { CatalogChart, ThemeCatalog } from '../types';
  *
  * ★狙い (2 方向を固定する):
  *   ① 実測ベースラインを lock する。生の estatParams / 生色 / 不正 e-Stat コードは
- *      **shrink-only (増やせない)**、型付き参照 (relatedRankingKeys) は **grow-only (減らせない)**。
- *      移行 (WP1-WP6) で数字が動いたら定数を更新する = 進捗を機械的に追える。
+ *      **shrink-only (増やせない)**、型付き参照 (relatedRankingKeys) は全データ図で必須。
+ *      採用チャートが意図して変わったら定数を更新し、全件の紐付け検査を維持する。
  *   ② collector が defect の注入で発火する (陰性対照)。生色を足す・生 estatParam を足す・
  *      `#` 付きコードを足す・型付き参照を外すと、対応する計測が動くことを固定する。
  *      ②が無いと ① の lock は「何も見ていない緑」と区別がつかない。
  *
- * 実測 (2026-08-24, THEME_CATALOGS 実行時オブジェクト):
- *   themes 20 / charts 106 / rawEstatParams chart 22 / raw request 39 /
- *   relatedRankingKeys chart 82 /
+ * 実測 (2026-09-09, THEME_CATALOGS 実行時オブジェクト):
+ *   themes 21 / charts 54 / rawEstatParams chart 0 / raw request 0 /
+ *   relatedRankingKeys chart 31 / markdown-section 23。
+ *   全テーマへの概況・比較表展開に伴い、重複図や単年の推移図を整理した。
  *
  * 2026-08-31 更新: `22619988d feat(geo-scope)` が healthcare の
  * `theme-health-lifestyle-trend` (line-chart) を意図的に削除した。対になる指標
@@ -31,14 +32,14 @@ import type { CatalogChart, ThemeCatalog } from '../types';
  *   hex と誤検出しないことだけをテストで守る (下の陰性対照)。
  */
 
-/** 実測で確定したベースライン。移行で動いたらここを更新する (shrink/grow の向きを守る)。 */
+/** 実測で確定したベースライン。生パラメータと生色の再導入を許さない。 */
 const BASELINE = {
-  themes: 20,
-  charts: 106,
-  chartsWithRawEstatParams: 22,
-  rawEstatRequests: 39,
-  // markdown-section 24 件を除く全 data-bound component が指標ハブを持つ。
-  chartsWithRelatedRankingKeys: 82,
+  themes: 21,
+  charts: 54,
+  chartsWithRawEstatParams: 0,
+  rawEstatRequests: 0,
+  // markdown-section 23 件を除く全 data-bound component が指標ハブを持つ。
+  chartsWithRelatedRankingKeys: 31,
   // WP5 完了: 生色を color role へ全移行 (179 → 0)。以後 ratchet は「生色 0」を強制する。
   rawColorPlaces: 0,
   distinctColors: 0,
@@ -54,15 +55,15 @@ describe('baseline lock (ratchet)', () => {
 
   it('componentType ごとの chart 数を固定する (chart 種別内訳の baseline)', () => {
     expect(live.chartsByType).toEqual({
-      'line-chart': 61,
-      'mixed-chart': 3,
-      'composition-chart': 4,
-      'donut-chart': 6,
+      'line-chart': 26,
+      'mixed-chart': 1,
+      'composition-chart': 2,
+      'donut-chart': 0,
       'cpi-profile': 1,
-      'cpi-heatmap': 1,
-      'kpi-card': 4,
-      'markdown-section': 24,
-      'pyramid-chart': 2,
+      'cpi-heatmap': 0,
+      'kpi-card': 0,
+      'markdown-section': 23,
+      'pyramid-chart': 1,
     });
   });
 
@@ -80,9 +81,12 @@ describe('baseline lock (ratchet)', () => {
     );
   });
 
-  it('markdown以外の全82 componentが relatedRankingKeys を持つ', () => {
+  it('markdown以外の全31 componentが relatedRankingKeys を持つ', () => {
     expect(live.chartsWithRelatedRankingKeys).toBe(
       BASELINE.chartsWithRelatedRankingKeys
+    );
+    expect(live.chartsWithRelatedRankingKeys).toBe(
+      live.charts - live.chartsByType['markdown-section']
     );
   });
 });

@@ -19,7 +19,7 @@ describe("CROSS-PAGE-DATA-SSOT-01 final typed-reference contract", () => {
       ({ componentType }) => componentType === "pyramid-chart",
     );
 
-    expect(pyramids).toHaveLength(2);
+    expect(pyramids.map(({ componentKey }) => componentKey)).toEqual(['theme-population-pyramid']);
     for (const pyramid of pyramids) {
       expect(pyramid.requests).toEqual([]);
       expect(pyramid.metricRefs).toHaveLength(expectedCodes.size);
