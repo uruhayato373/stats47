@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-08T19:34:41.622Z",
+  "updatedAt": "2026-09-09T19:24:44.941Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3873,6 +3873,19 @@
           "evidence": "この環境にWebFetch/WebSearchツールが無く、.local/coconala-products(git管理外)も不在のため原典(政府統計表)への照合が不能。2026-09-06の前回runと同一の環境制約を再確認。行削除・state断定書込みはせず未確認を維持。",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-09-09T19:24:44.941Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "一次資料照合と採否判断はオーナー/estat-researcher の意味判断が要る。削除もタグ変更も不可のため未処理のまま次へ。",
+          "failReason": "needs-owner",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -3899,6 +3912,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "複数冊Kindle全章再校閲・KDP/ココナラ実口座操作・Office実機確認・税務等owner工程を含む大規模制作物。この run のscopeでは着手せずdraft PR経由の委譲へ回す。",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        },
+        {
+          "at": "2026-09-09T19:24:41.862Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "impl-large は draft PR 経路が必要で CI run では着手しない (backlog-loop.md の規約通り)。",
           "failReason": "class-needs-pr",
           "followUps": []
         }
