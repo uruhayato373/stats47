@@ -53,5 +53,19 @@
       "artifact": ".local/verification/themes/2026-09-09-hydration-final.json"
     }
   },
+  "publicItemContract": {
+    "status": "measured-data-gate-pending",
+    "count": 420,
+    "valid": 416,
+    "missing": 3,
+    "schemaInvalid": 1,
+    "artifact": ".local/verification/themes/2026-09-09-public-item-contract.json",
+    "schemaInvalidKeys": ["industrial-land-price"],
+    "missingKeys": [
+      "construction-private-employees",
+      "information-private-employees",
+      "information-private-establishments"
+    ]
+  },
   "limitation": "R2 observations, source-specific official adapters, and production publication remain gated until the consolidated data gate passes."
 }
