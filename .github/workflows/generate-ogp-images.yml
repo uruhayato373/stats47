@@ -152,6 +152,9 @@ jobs:
 
   publish-geo-thumbnails:
     if: inputs.type == 'geo-thumbnails'
+    # One-time owner approval: read the private transfer draft; restore after sync.
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
