@@ -289,9 +289,15 @@ async function main() {
   console.log(`${GREEN}🚀 ${label} — ${gates.length} ゲートを並列実行${NC}${all ? " (--all)" : ""}\n`);
 
   // ★並列。1 つ落ちても他を止めない (まとめて出すのが本スクリプトの目的)。
-  const results = await Promise.all(
-    gates.map(async (gate) => ({ gate, result: await gate.run(all) })),
-  );
+  const results = [];
+  // Collect every failure while bounding local peak memory, including PR gates.
+  const concurrency = process.env.CI ? gates.length : 2;
+  for (let offset = 0; offset < gates.length; offset += concurrency) {
+    results.push(...await Promise.all(
+      gates.slice(offset, offset + concurrency)
+        .map(async (gate) => ({ gate, result: await gate.run(all) })),
+    ));
+  }
 
   const failed = [];
   for (const { gate, result } of results) {

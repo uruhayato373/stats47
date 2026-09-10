@@ -61,10 +61,7 @@ $client.Timeout = [TimeSpan]::FromSeconds(60)
 #
 # 安全側の制約: 200 応答だけ / Range・条件付きリクエストは対象外 / サイズと件数に上限。
 # ---------------------------------------------------------------------------
-$cacheStore = [System.Collections.Generic.Dictionary[string, object]]::new()
-$cacheOrder = [System.Collections.Generic.Queue[string]]::new()
-$maxCacheBytes = 8MB
-$maxCacheEntries = 2000
+. (Join-Path $PSScriptRoot 'r2-dev-cache.ps1')
 
 function Test-Cacheable {
   param([System.Net.HttpListenerRequest]$Request)
@@ -79,31 +76,6 @@ function Test-Cacheable {
   $cc = $Request.Headers["Cache-Control"]
   if ($cc -and $cc -match "no-cache|no-store") { return $false }
   return $true
-}
-
-function Add-CacheEntry {
-  param([string]$Key, [object]$Entry)
-
-  if ($cacheStore.ContainsKey($Key)) { return }
-  $cacheStore[$Key] = $Entry
-  $cacheOrder.Enqueue($Key)
-  # 件数上限を超えたら古いものから落とす (dev 用なので厳密な LRU にはしない)。
-  while ($cacheOrder.Count -gt $maxCacheEntries) {
-    $evict = $cacheOrder.Dequeue()
-    [void]$cacheStore.Remove($evict)
-  }
-}
-
-function Get-CacheEntry {
-  param([string]$Key)
-
-  $entry = $null
-  if (-not $cacheStore.TryGetValue($Key, [ref]$entry)) { return $null }
-  if ([DateTime]::UtcNow -ge $entry.ExpiresAt) {
-    [void]$cacheStore.Remove($Key)
-    return $null
-  }
-  return $entry
 }
 
 function Write-TextResponse {
@@ -176,15 +148,17 @@ function Write-LocalFileResponse {
     [string]$FilePath
   )
 
-  $bytes = [IO.File]::ReadAllBytes($FilePath)
+  $file = [IO.File]::OpenRead($FilePath)
+  try {
   $Response.StatusCode = 200
   $Response.ContentType = "application/json; charset=utf-8"
   $Response.Headers["Cache-Control"] = "no-store"
   $Response.Headers["X-R2-Dev-Source"] = "local-override"
-  $Response.ContentLength64 = $bytes.Length
+  $Response.ContentLength64 = $file.Length
   if ($Request.HttpMethod -eq "GET") {
-    $Response.OutputStream.Write($bytes, 0, $bytes.Length)
+    $file.CopyTo($Response.OutputStream)
   }
+  } finally { $file.Dispose() }
 }
 
 function Copy-ResponseHeader {
@@ -204,14 +178,16 @@ function Copy-ResponseHeader {
 $listener.Start()
 Write-Host "[r2-dev-gateway] listening on http://127.0.0.1:$Port"
 if ($CacheSeconds -gt 0) {
-  Write-Host "[r2-dev-gateway] GET cache: ${CacheSeconds}s TTL / max $($maxCacheEntries) entries / max $($maxCacheBytes) bytes each"
+  Write-Host "[r2-dev-gateway] GET cache: ${CacheSeconds}s TTL / max $($maxCacheEntries) entries / max $($maxCacheBytes) bytes each / total $($maxTotalCacheBytes) bytes"
 } else {
   Write-Host "[r2-dev-gateway] GET cache: disabled"
 }
 
 try {
   while ($listener.IsListening) {
-    $context = $listener.GetContext()
+    $pendingContext = $listener.GetContextAsync()
+    while (-not $pendingContext.Wait(1000)) { Remove-ExpiredCacheEntries }
+    $context = $pendingContext.GetAwaiter().GetResult()
     $request = $context.Request
     $response = $context.Response
     $remoteRequest = $null
@@ -296,7 +272,7 @@ try {
       $storeBytes = $null
       if ($cacheable -and [int]$remoteResponse.StatusCode -eq 200) {
         $declaredLength = $remoteResponse.Content.Headers.ContentLength
-        if ($null -eq $declaredLength -or $declaredLength -le $maxCacheBytes) {
+        if ($null -ne $declaredLength -and $declaredLength -le $maxCacheBytes) {
           $storeBytes = $remoteResponse.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult()
           if ($storeBytes.Length -gt $maxCacheBytes) { $storeBytes = $null }
         }

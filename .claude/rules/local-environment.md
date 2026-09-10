@@ -3,7 +3,10 @@ paths:
   - "package.json"
   - "turbo.json"
   - "apps/*/package.json"
-  - "apps/web/scripts/{dev-server.ts,r2-dev-gateway.ps1}"
+  - "apps/web/scripts/{dev-server.ts,r2-dev-gateway.ps1,r2-dev-cache.ps1}"
+  - ".claude/config/local-resources.json"
+  - ".claude/scripts/lib/local-resource*"
+  - "scripts/scheduled/local-resources.ps1"
   - ".claude/agents/{db-schema-manager,data-ingester,r2-publisher,devops-runner}.md"
 ---
 # ローカル開発環境
@@ -118,7 +121,7 @@ listen は `127.0.0.1`、method は `GET` / `HEAD`、R2 key は path traversal �
 **TLS 検証を無効化しない。** `npm run dev:web` または `npm run dev --workspace=apps/web` で自動的に有効になる。
 一時的に従来経路へ戻す場合だけ `R2_DEV_GATEWAY=0` を指定する。Windows 以外では gateway を起動しない。
 
-**gateway は GET を 300 秒メモリキャッシュする (2026-08-21)**。`GetContext()` の逐次ループなので、
+**gateway は GET を 300 秒メモリキャッシュする (2026-08-21)**。リクエスト処理は逐次なので、
 アプリが並列に投げた R2 fetch も 1 本ずつ社内プロキシへ出ていく。同じオブジェクトを読み直さない
 だけで、R2 依存の重いページが実測で速くなった (同一端末・warm・中央値):
 
@@ -321,6 +324,48 @@ npm run dev --workspace=apps/web   # turbo を介さず最速 (✓ Ready in 2s)
 - ルート `npm run dev`（`turbo run dev`）は **23 パッケージすべての dev を起動**し、出力が混ざって "Ready" を検出しづらく、port 3000 を listen する前に体感で固まる。web 単体なら数秒で起動する（2026-06-20 に同じ取り違えで時間を浪費した）。
 - dev サーバーは**常駐プロセス**。エージェントが起動するときは `run_in_background: true` で起動し、**出力ファイルを polling して `✓ Ready` を確認**する。前面 `sleep` での固定待ちは禁止（タイムアウト・取りこぼしの元）。
 - 表示が更新されないときは「キャッシュ」を疑う前に **dev サーバーが listen しているか**を先に確認する（`lsof -i :3000` / `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/`）。
+
+## ローカル資源の予算と保持
+
+端末の予算・掃除対象・保持日数の機械契約は `.claude/config/local-resources.json`。
+計測は非常駐、`.local/resource-health/` に最新値と日別30件、容量監査2世代だけを保存する。全体走査は月次とし、
+通常の開発前チェックではディレクトリを再帰走査しない。容量はファイル長合計で、junctionは辿らず、
+hardlinkの重複は除かない。回収量はドライブ空き容量の前後も合わせて判断する。
+
+- Turboは `turbo.json` のキャッシュ上限 `2GB`、同時実行2件。実行時にTurbo自身が回収する。
+- ローカルVitestは最大2 worker、preflightも最大2件。フルbuildは節目だけ、必要な対象を絞って検証する。
+- Windows R2 gatewayのキャッシュ本文は合計64MiB、1件8MiB、最大2000件。期限切れは待受中も回収する。
+  これはプロセス全体のメモリ上限ではない。大きい本文・長さ不明の本文・ローカルファイルはストリーム転送する。
+- dev supervisorは終了時に自分で起動した子プロセスだけを終了する。Nodeやブラウザ全体を一括停止しない。
+- `.codex/config.toml` はstandalone Codex用に再帰Codex・filesystem・GitHub・shadcn MCPを無効化する。
+  ファイル操作とGitHub操作は標準ツールと`gh`で行う。変更は次回Codex起動から反映し、既存セッションを強制終了しない。
+- editorの監視・検索から `.local`、`.turbo`、生成動画、追加worktreeを除外する。
+
+Windowsの登録入口は `scripts/scheduled/local-resources.ps1 -Action Install`。毎日09:00とログオン時に
+日次計測、7日ごとの限定掃除、30日ごとの容量監査を実行する。同日重複・同時実行を避け、上限15分で終了する。
+ログイン中かつ端末が稼働できるときの処理であり、電源OFF中は実行されない。通知はCodexの
+「stats47 ローカル資源の点検結果を確認」が結果を読み、新しい異常・意味のある変化・復旧時だけ行う。
+
+```bash
+npm run local:health                 # 軽い計測。dev:web起動前にも実行
+npm run local:audit                  # 容量走査（通常は月次だけ）
+npm run local:cleanup                # 削除候補だけ表示
+npm run local:cleanup -- --apply     # 条件を満たした生成cacheだけ削除
+npm run local:resources:test         # 削除境界・保持・メモリ予算のテスト
+```
+
+自動掃除は登録済みworktree内の指定されたNext cacheだけを対象とし、最終変更から7日以上、
+リンクなし、対象が計画後に変化していない、開発プロセスが停止中、の全条件を要求する。
+初回の `--include-recent` は明示的な掃除依頼時だけ使う。削除先は必ずルート配下の絶対パスで再検証する。
+容量不足は空き25GiB未満で警告・15GiB未満で重大、RAMは利用可能3GiB未満で警告・1.5GiB未満で重大。
+メモリは瞬間値なので継続状況と実行中作業も見て判断し、不明な計測値を正常と扱わない。
+
+WIPのあるworktree、認証profile、`.local/r2`、参考文献、成果物や運用台帳は年齢だけで消さない。
+GISの一時領域は処理ごとにOS一時フォルダーへ作り、入力URL・hash・成果の保存先・復元手順を残す。
+展開ファイルは残すZIPのentryとSHA-256を照合してから回収する。原本ZIPや固有スクリプトは別途保全確認が必要。
+参考文献は既存source-vault契約に従いprivate Driveからの復元検証とcoverage 100%を満たしてから回収する。
+共有npm cacheは必要時に `npm cache verify` で整合性確認・不要blob回収を行う。uv・ブラウザの共有cacheは
+利用元と再取得コストを調べてから扱い、定期的な全消去はしない。worktreeは必要時だけ作り、未完了変更を統合してから閉じる。
 
 ## 頻用コマンド
 
