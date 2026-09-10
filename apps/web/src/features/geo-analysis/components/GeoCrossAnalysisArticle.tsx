@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -27,9 +27,13 @@ import { loadGeoAnalysisBundle } from '../lib/load-geo-analysis-snapshot';
 import { GeoAnalysisTracker } from './GeoAnalysisTracker';
 import { GeoContentPublicationSection } from './GeoContentPublicationSection';
 import { GeoCrossAnalysisExplorer } from './GeoCrossAnalysisExplorer';
+import { GeoLandslideSummary } from './GeoLandslideSummary';
+import { GeoPublicFacilitySummary } from './GeoPublicFacilitySummary';
+import { GeoSnowDesignationSummary } from './GeoSnowDesignationSummary';
 import { GeoSpatialEvidenceExplorer } from './GeoSpatialEvidenceExplorer';
 
-import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
+import type { PublicFacilityGroup } from '../lib/geo-public-facility-evidence';
+import type { SpatialView } from '../lib/geo-spatial-evidence';
 
 const inputCountLabels: Record<string, string> = {
   residentialLandPricePoints: '住宅地標準地点',
@@ -43,7 +47,8 @@ const inputCountLabels: Record<string, string> = {
 interface Props {
   slug: GeoCrossAnalysisSlug;
   initialPrefCode?: string;
-  initialStage?: GeoStationAccessView;
+  initialStage?: SpatialView;
+  initialFacilityGroup?: PublicFacilityGroup;
   contextLayer?: ReactNode;
 }
 
@@ -51,10 +56,11 @@ export async function GeoCrossAnalysisArticle({
   slug,
   initialPrefCode = '13',
   initialStage = 'population',
+  initialFacilityGroup = 'administrative',
   contextLayer,
 }: Props) {
   const config = GEO_CROSS_ANALYSIS_CONFIGS[slug];
-  const spec = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
+  const spec = GEO_ANALYSES.find(
     (analysis) => analysis.slug === slug
   );
   const bundle = await loadGeoAnalysisBundle(slug);
@@ -133,6 +139,7 @@ export async function GeoCrossAnalysisArticle({
         dataVersion={snapshot.dataVersion}
         initialPrefCode={initialPrefCode}
         initialView={initialStage}
+        initialFacilityGroup={initialFacilityGroup}
         manifest={evidenceManifest}
       />
       <div id="prefecture-comparison" className="scroll-mt-24">
@@ -141,59 +148,68 @@ export async function GeoCrossAnalysisArticle({
           description="県内の地点・メッシュの判定を集計した結果です。値の大小は地域の優劣を表しません。"
         />
       </div>
-      <GeoCrossAnalysisExplorer
-        analysisId={spec.id}
-        comparisonLimit={spec.comparisonLimit}
-        mapTitle={config.mapTitle}
-        mapSubtitle={config.mapSubtitle}
-        snapshot={snapshot}
-      />
+      {slug === 'population-landslide-exposure' ? (
+        <GeoLandslideSummary snapshot={snapshot} />
+      ) : slug === 'population-snow-designation' ? (
+        <GeoSnowDesignationSummary snapshot={snapshot} />
+      ) : slug === 'population-public-facility-access' ? (
+        <GeoPublicFacilitySummary snapshot={snapshot} />
+      ) : (
+        <>
+          <GeoCrossAnalysisExplorer
+            analysisId={spec.id}
+            comparisonLimit={spec.comparisonLimit}
+            mapTitle={config.mapTitle}
+            mapSubtitle={config.mapSubtitle}
+            snapshot={snapshot}
+          />
 
-      <SurfaceSection className="mt-6">
-        <SectionHeader title="47都道府県の全データ" hideRule />
-        <p className="mt-2 text-sm text-muted-foreground">
-          空間判定の主指標が高い順です。横にスクロールすると、人口変化や標本数などの補助指標も確認できます。
-        </p>
-        <div className="mt-4 overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>表示順</TableHead>
-                <TableHead>都道府県</TableHead>
-                {snapshot.metrics.map((metric) => (
-                  <TableHead key={metric.key} className="text-right">
-                    {metric.label}
-                  </TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {snapshot.rows.map((row) => (
-                <TableRow key={row.areaCode}>
-                  <TableCell className="tabular-nums">{row.rank}</TableCell>
-                  <TableCell className="font-medium">
-                    <Link
-                      className="text-primary underline"
-                      href={`/geo/${slug}/${row.areaCode.slice(0, 2)}/overlap`}
-                    >
-                      {row.areaName}の地図
-                    </Link>
-                  </TableCell>
-                  {snapshot.metrics.map((metric) => (
-                    <TableCell
-                      key={metric.key}
-                      className="text-right tabular-nums"
-                    >
-                      {formatGeoValue(metric, row.values[metric.key])}
-                    </TableCell>
+          <SurfaceSection className="mt-6">
+            <SectionHeader title="47都道府県の全データ" hideRule />
+            <p className="mt-2 text-sm text-muted-foreground">
+              空間判定の主指標が高い順です。横にスクロールすると、人口変化や標本数などの補助指標も確認できます。
+            </p>
+            <div className="mt-4 overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>表示順</TableHead>
+                    <TableHead>都道府県</TableHead>
+                    {snapshot.metrics.map((metric) => (
+                      <TableHead key={metric.key} className="text-right">
+                        {metric.label}
+                      </TableHead>
+                    ))}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {snapshot.rows.map((row) => (
+                    <TableRow key={row.areaCode}>
+                      <TableCell className="tabular-nums">{row.rank}</TableCell>
+                      <TableCell className="font-medium">
+                        <Link
+                          className="text-primary underline"
+                          href={`/geo/${slug}/${row.areaCode.slice(0, 2)}/overlap`}
+                        >
+                          {row.areaName}の地図
+                        </Link>
+                      </TableCell>
+                      {snapshot.metrics.map((metric) => (
+                        <TableCell
+                          key={metric.key}
+                          className="text-right tabular-nums"
+                        >
+                          {formatGeoValue(metric, row.values[metric.key])}
+                        </TableCell>
+                      ))}
+                    </TableRow>
                   ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </SurfaceSection>
-
+                </TableBody>
+              </Table>
+            </div>
+          </SurfaceSection>
+        </>
+      )}
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         <SurfaceSection>
           <SectionHeader title="この記事で読み取れること" hideRule />
@@ -280,7 +296,11 @@ export async function GeoCrossAnalysisArticle({
           国土交通省または原典提供者が本分析の内容を保証・推奨するものではありません。
         </p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          原典の初回取得日時は旧パイプラインで未記録です。上記の生成日は取得日ではありません。
+          {slug === 'population-snow-designation' || slug === 'population-landslide-exposure'
+            ? '指定区域と人口の原典・検証記録は各県の検算データで確認できます。上記の生成日は取得日ではありません。'
+            : slug === 'population-public-facility-access'
+            ? '施設原典の取得日・人口原典の検証記録は各県の検算データで確認できます。上記の生成日は取得日ではありません。'
+            : '原典の初回取得日時は旧パイプラインで未記録です。上記の生成日は取得日ではありません。'}
           対象版・入力ファイルのSHA-256・途中データは「検算」とデータ導線で確認できます。
         </p>
       </SurfaceSection>
@@ -305,7 +325,7 @@ export async function GeoCrossAnalysisArticle({
       <SurfaceSection className="mt-6">
         <SectionHeader title="関連する地域分析" hideRule />
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          {BUSINESS_PLAN_M1_GEO_ANALYSES.filter(
+          {GEO_ANALYSES.filter(
             (analysis) => analysis.slug !== slug
           ).map((analysis) => (
             <Link

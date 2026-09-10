@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const inPrefUniversityEntranceRatioByHighschoolOrigin: MetricConfig = {
   "key": "in-pref-university-entrance-ratio-by-highschool-origin",
   "title": "県内大学入学者割合",
-  "subtitle": "出身高校所在地県基準",
+  "subtitle": "当該県出身大学入学者に占める割合",
   "description": "当該県の高校出身である大学入学者のうち、同じ県内の大学へ入学した者の割合です。",
   "unit": "％",
   "category": "educationsports",
@@ -12,10 +12,10 @@ export const inPrefUniversityEntranceRatioByHighschoolOrigin: MetricConfig = {
     "statsDataId": "0000010205",
     "cdCat01": "#E0940302",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "years": [
@@ -41,23 +41,23 @@ export const inPrefUniversityEntranceRatioByHighschoolOrigin: MetricConfig = {
       2013,
       2014,
       2015,
-      2024,
-    ],
+      2024
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
+    "isCalculated": false
   },
   "seoTitle": "県内大学入学者割合ランキング都道府県【2024年】｜1位愛知県（71.4％）",
   "seoDescription": "2024年の県内大学入学者割合の都道府県別ランキング。1位愛知県（71.4％）、最下位鳥取県（15.1％）で4.7倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": true
 };

@@ -14,7 +14,8 @@
     "R2_DEV_GATEWAY",
     "R2_DEV_GATEWAY_CACHE_SECONDS",
     "R2_DEV_GATEWAY_PORT",
-    "R2_DEV_GATEWAY_UPSTREAM"
+    "R2_DEV_GATEWAY_UPSTREAM",
+    "WEB_DEV_HOST"
   ],
   "tasks": {
     "build": {
@@ -28,7 +29,14 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "passThroughEnv": [
+        "R2_PUBLIC_FETCH_URL",
+        "NEXT_PUBLIC_R2_PUBLIC_URL",
+        "R2_ACCESS_KEY_ID",
+        "R2_SECRET_ACCESS_KEY",
+        "R2_S3_ENDPOINT"
+      ]
     },
     "pipeline:images": {
       "dependsOn": ["^build"],

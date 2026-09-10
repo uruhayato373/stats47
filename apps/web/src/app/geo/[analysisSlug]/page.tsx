@@ -6,7 +6,7 @@ import {
   GeoCrossAnalysisArticle,
   GEO_CROSS_ANALYSIS_CONFIGS,
   isGeoCrossAnalysisSlug,
-  isGeoStationAccessView,
+  isGeoSpatialView,
 } from '@/features/geo-analysis';
 import { ThemeStationPassengersSection } from '@/features/station-passengers';
 
@@ -14,7 +14,7 @@ import type { Metadata } from 'next';
 
 interface PageProps {
   params: Promise<{ analysisSlug: string }>;
-  searchParams: Promise<{ pref?: string; stage?: string }>;
+  searchParams: Promise<{ pref?: string; stage?: string; group?: string }>;
 }
 
 export const revalidate = 86400;
@@ -42,9 +42,9 @@ export default async function GeoCrossAnalysisPage({
   const prefCode = PREFECTURE_LIST_2DIGIT.some(
     (prefecture) => prefecture.code === query.pref
   )
-    ? query.pref ?? '13'
+    ? (query.pref ?? '13')
     : '13';
-  const stage = isGeoStationAccessView(query.stage)
+  const stage = isGeoSpatialView(query.stage, analysisSlug)
     ? query.stage
     : 'population';
 
@@ -53,6 +53,9 @@ export default async function GeoCrossAnalysisPage({
       slug={analysisSlug}
       initialPrefCode={prefCode}
       initialStage={stage}
+      initialFacilityGroup={
+        query.group === 'meeting' ? 'meeting' : 'administrative'
+      }
       contextLayer={
         analysisSlug === 'population-station-access' ? (
           <ThemeStationPassengersSection initialPrefCode={prefCode} />

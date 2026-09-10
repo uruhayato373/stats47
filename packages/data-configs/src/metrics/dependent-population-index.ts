@@ -10,10 +10,10 @@ export const dependentPopulationIndex: MetricConfig = {
     "statsDataId": "0000010201",
     "cdCat01": "#A03403",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "years": [
@@ -55,39 +55,24 @@ export const dependentPopulationIndex: MetricConfig = {
       2019,
       2020,
       2021,
-      2022,
-    ],
+      2022
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "‐/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "‐/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "従属人口指数ランキング都道府県【2022年】｜1位秋田県（91.9‐）",
   "seoDescription": "2022年の従属人口指数の都道府県別ランキング。1位秋田県（91.9‐）、最下位東京都（50.9‐）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
+  "subtitle": "15～64歳人口100人当たり"
 };

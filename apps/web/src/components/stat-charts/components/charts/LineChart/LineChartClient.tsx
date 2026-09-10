@@ -16,12 +16,14 @@ const D3LineChart = dynamic(
 
 interface LineChartClientProps {
   chartData: LineChartData;
+  xTickValues?: string[];
   yDomain?: [number, number];
   showLatestValues?: boolean;
 }
 
 export const LineChartClient: React.FC<LineChartClientProps> = ({
   chartData,
+  xTickValues,
   yDomain,
   showLatestValues,
 }) => {
@@ -44,6 +46,7 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
       <D3LineChart
         data={data as TimeSeriesDataNode[]}
         categoryKey={categoryKey}
+        xTickValues={xTickValues}
         valueKey={valueKey}
         series={series}
         showLegend={showLegend}

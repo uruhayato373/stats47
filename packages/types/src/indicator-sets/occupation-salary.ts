@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const OCCUPATION_SALARY_SET: IndicatorSet = {
   "key": "occupation-salary",
   "title": "職業別年収",
-  "description": "都道府県別の職業別平均年収をランキングとチャートで比較。医師・看護師・保育士・SE・トラック運転手など47職種の年収データを47都道府県で確認できます。賃金構造基本統計調査（厚生労働省）に基づく2010年〜2023年の推移データ。",
+  "description": "都道府県別の職業平均年収を、医療・介護、教育・保育、IT・専門職、運輸・建設、サービスに分けて比較します。職種ごとの対象年と非公表の有無を確認できます。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
@@ -23,7 +23,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "pharmacist-annual-income",
       "shortLabel": "薬剤師",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "care-worker-annual-income",
@@ -83,11 +83,11 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "system-consultant-annual-income",
       "shortLabel": "SIer/コンサル",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "software-engineer-annual-income",
-      "shortLabel": "SE",
+      "shortLabel": "ソフトウェア作成者",
       "role": "secondary"
     },
     {
@@ -132,7 +132,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "truck-driver-annual-income",
-      "shortLabel": "トラック運転手",
+      "shortLabel": "営業用大型貨物自動車運転者",
       "role": "secondary"
     },
     {
@@ -163,7 +163,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "manager-annual-income",
       "shortLabel": "管理職",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "cook-annual-income",

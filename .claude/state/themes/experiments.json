@@ -16,10 +16,203 @@
         "d28": "2026-08-11",
         "d56": "2026-09-08"
       },
-      "result": null,
-      "notes": "本番反映 (デプロイ) 後に startedAt/evaluateAt(d7/d28/d56) を設定する。d28: pv 合算 baseline比 +15% 未満なら暫定 no-effect / d56: +20% 以上かつ GSC imp>=200 到達で effect-partial 以上を検討。W25 一過性流入ピーク (166pv/週) との混同に注意 (deep-dive 2026-07-13)",
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-08",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data"
+            },
+            "gsc.impressions": {
+              "value": 895,
+              "status": "measured"
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "insufficient-data"
+            }
+          }
+        },
+        "d28": {
+          "observedAt": "2026-09-08",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data"
+            },
+            "gsc.impressions": {
+              "value": 895,
+              "status": "measured"
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "insufficient-data"
+            }
+          }
+        },
+        "d56": {
+          "observedAt": "2026-09-08",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data"
+            },
+            "gsc.impressions": {
+              "value": 895,
+              "status": "measured"
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "insufficient-data"
+            }
+          }
+        },
+        "rechecks": {
+          "d7": [
+            {
+              "observedAt": "2026-09-08",
+              "status": "quality-only",
+              "values": {},
+              "quality": {
+                "status": "ok",
+                "observedAt": "2026-09-08T11:59:13.559Z",
+                "keysChecked": 16,
+                "oldestLatestDataYear": "2019",
+                "ageReviewKeys": [
+                  "social-increase-rate",
+                  "day-time-population-ratio"
+                ],
+                "freshnessStatus": "requires-official-release-check",
+                "missingKeys": 0,
+                "missingKeyList": [],
+                "latestYearPrefCoverageMin": 47
+              }
+            }
+          ],
+          "d28": [
+            {
+              "observedAt": "2026-09-08",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 112,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-07-12",
+                  "periodEnd": "2026-09-05",
+                  "weeks": [
+                    "2026-W32",
+                    "2026-W36"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 895,
+                  "status": "measured",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-07-10",
+                  "periodEnd": "2026-09-03",
+                  "weeks": [
+                    "2026-W32",
+                    "2026-W36"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": 0.6868,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-07-12",
+                  "periodEnd": "2026-09-05",
+                  "weeks": [
+                    "2026-W32",
+                    "2026-W36"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample",
+                "baseline-scope-unknown-or-incompatible"
+              ],
+              "constraints": [
+                "gsc.impressions: complete-window-unavailable",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "gsc.impressions: baseline-scope-unknown-or-incompatible",
+                "ga4.engagementRatePvWeighted: complete-window-unavailable",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-scope-unknown-or-incompatible"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-09-08",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 112,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-07-12",
+                  "periodEnd": "2026-09-05",
+                  "weeks": [
+                    "2026-W32",
+                    "2026-W36"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 895,
+                  "status": "measured",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-07-10",
+                  "periodEnd": "2026-09-03",
+                  "weeks": [
+                    "2026-W32",
+                    "2026-W36"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": 0.6868,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-07-12",
+                  "periodEnd": "2026-09-05",
+                  "weeks": [
+                    "2026-W32",
+                    "2026-W36"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample",
+                "baseline-scope-unknown-or-incompatible"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "gsc.impressions: baseline-scope-unknown-or-incompatible",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-scope-unknown-or-incompatible"
+              ]
+            }
+          ]
+        }
+      },
+      "notes": "旧baselineは国内条件と取得期間の適合を証明できないため効果確定しない。元の観測を維持して終了し、今回の構成改善はTHEME-STRUCTURE-20260908-population-dynamicsで公開後に計測する。",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-07-13-theme-deepdive-population-dynamics.md"
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-07-13-theme-deepdive-population-dynamics.md",
+        ".claude/state/themes/portfolio.json"
       ],
       "experimentId": "THEME-EXP-001",
       "themeKey": "population-dynamics",
@@ -31,7 +224,1642 @@
         "gsc.impressions": 100,
         "ga4.engagementRatePvWeighted": 0.578
       },
+      "verdict": "insufficient-data"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-aging-society",
+      "themeKey": "aging-society",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 138,
+        "gsc.impressions": 1176,
+        "ga4.engagementRatePvWeighted": 0.6696
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured",
+        "ga4.engagementRatePvWeighted": "measured"
+      },
       "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-climate",
+      "themeKey": "climate",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 124,
+        "gsc.impressions": 13,
+        "ga4.engagementRatePvWeighted": 0.6426
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-consumer-prices",
+      "themeKey": "consumer-prices",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 113,
+        "gsc.impressions": 104,
+        "ga4.engagementRatePvWeighted": 0.6966
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-education-culture",
+      "themeKey": "education-culture",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 41,
+        "gsc.impressions": 29,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-fishery-marine",
+      "themeKey": "fishery-marine",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 99,
+        "gsc.impressions": 124,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-healthcare",
+      "themeKey": "healthcare",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 61,
+        "gsc.impressions": 98,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-labor-mobility",
+      "themeKey": "labor-mobility",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 15,
+        "gsc.impressions": 20,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-labor-wages",
+      "themeKey": "labor-wages",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 63,
+        "gsc.impressions": 21,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-living-housing",
+      "themeKey": "living-housing",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 60,
+        "gsc.impressions": 15,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-local-economy",
+      "themeKey": "local-economy",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 41,
+        "gsc.impressions": 136,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-local-finance",
+      "themeKey": "local-finance",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 425,
+        "gsc.impressions": 46,
+        "ga4.engagementRatePvWeighted": 0.7824
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-manufacturing",
+      "themeKey": "manufacturing",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 43,
+        "gsc.impressions": 44,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-occupation-salary",
+      "themeKey": "occupation-salary",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 18,
+        "gsc.impressions": 3,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-population-dynamics",
+      "themeKey": "population-dynamics",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 112,
+        "gsc.impressions": 847,
+        "ga4.engagementRatePvWeighted": 0.6868
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured",
+        "ga4.engagementRatePvWeighted": "measured"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-ports",
+      "themeKey": "ports",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 3,
+        "gsc.impressions": 15,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-railway",
+      "themeKey": "railway",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 47,
+        "gsc.impressions": 37,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-real-income",
+      "themeKey": "real-income",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 43,
+        "gsc.impressions": 67,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-roads",
+      "themeKey": "roads",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 19,
+        "gsc.impressions": 50,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-safety",
+      "themeKey": "safety",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 36,
+        "gsc.impressions": 53,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "evidenceRefs": [
+        ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
+        ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
+      ],
+      "experimentId": "THEME-STRUCTURE-20260908-tourism",
+      "themeKey": "tourism",
+      "changeType": "structure",
+      "hypothesis": "問い別の章と適切な期間・単位の表示によりテーマ閲覧と指標への回遊を改善できるか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 20,
+        "gsc.impressions": 42,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      },
+      "verdict": "pending"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": null,
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-09-first-batch.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260909-construction-industry",
+      "themeKey": "construction-industry",
+      "changeType": "launch",
+      "hypothesis": "初回公開後の国内閲覧・検索露出・内部導線利用を観測し、データ品質と利用状況から継続・改善を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": null,
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-09-first-batch.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260909-waste-recycling",
+      "themeKey": "waste-recycling",
+      "changeType": "launch",
+      "hypothesis": "初回公開後の国内閲覧・検索露出・内部導線利用を観測し、データ品質と利用状況から継続・改善を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": null,
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-09-first-batch.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260909-information-industry",
+      "themeKey": "information-industry",
+      "changeType": "launch",
+      "hypothesis": "初回公開後の国内閲覧・検索露出・内部導線利用を観測し、データ品質と利用状況から継続・改善を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-agriculture-production",
+      "themeKey": "agriculture-production",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-business-demography",
+      "themeKey": "business-demography",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-childcare-services",
+      "themeKey": "childcare-services",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-communication-access",
+      "themeKey": "communication-access",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-community-participation",
+      "themeKey": "community-participation",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-cultural-participation",
+      "themeKey": "cultural-participation",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-daily-time-use",
+      "themeKey": "daily-time-use",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-disability-support",
+      "themeKey": "disability-support",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-earthquake-exposure",
+      "themeKey": "earthquake-exposure",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-environmental-quality",
+      "themeKey": "environmental-quality",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-forestry-timber",
+      "themeKey": "forestry-timber",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-freight-logistics",
+      "themeKey": "freight-logistics",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-gender-participation",
+      "themeKey": "gender-participation",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-geographic-access",
+      "themeKey": "geographic-access",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-health-checkups",
+      "themeKey": "health-checkups",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-household-assets-debt",
+      "themeKey": "household-assets-debt",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-innovation-patents",
+      "themeKey": "innovation-patents",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-land-property-market",
+      "themeKey": "land-property-market",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-landslide-exposure",
+      "themeKey": "landslide-exposure",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-local-government-digital",
+      "themeKey": "local-government-digital",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-local-services",
+      "themeKey": "local-services",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-long-term-care",
+      "themeKey": "long-term-care",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-natural-environment",
+      "themeKey": "natural-environment",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-public-assistance",
+      "themeKey": "public-assistance",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-regional-energy",
+      "themeKey": "regional-energy",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-regional-transport",
+      "themeKey": "regional-transport",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-retail-commerce",
+      "themeKey": "retail-commerce",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-single-parent-households",
+      "themeKey": "single-parent-households",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-sports-participation",
+      "themeKey": "sports-participation",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-tsunami-exposure",
+      "themeKey": "tsunami-exposure",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "internalNav.eventCount"
+      ],
+      "baselinePeriod": null,
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+        ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-LAUNCH-20260911-water-services",
+      "themeKey": "water-services",
+      "changeType": "launch",
+      "hypothesis": "公開後の国内閲覧と検索露出・テーマ内回遊を観測し、構成の継続・改善・保留を判断する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": null,
+      "baselineStatus": "not-applicable-new-url"
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions"
+      ],
+      "baselinePeriod": {
+        "from": "2026-07-12",
+        "to": "2026-09-05"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "未公開。2026-07-12〜2026-09-05の56日を公式APIへ直接指定して取得した実カウントをbaselineとして保存する。欠落した前28日を0補完していない。PV11・impressions15は最低標本未満のため比率・効果を確定しない。実公開後にscheduleし、D7品質・D28暫定・D56観測と低標本の制約を記録する。",
+      "evidenceRefs": [
+        ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json",
+        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md",
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20260911-foreign-residents",
+      "themeKey": "foreign-residents",
+      "changeType": "structure",
+      "hypothesis": "外国人住民の人口・雇用・暮らしを章で整理し、公開後の国内閲覧と検索露出を確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 11,
+        "gsc.impressions": 15
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low"
+      }
     }
   ]
 }

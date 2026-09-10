@@ -17,6 +17,7 @@ import {
 } from "@stats47/data-configs/topics";
 
 import surveysMaster from "../data/surveys.json";
+import { buildSurveyItemsSnapshot } from "./survey-items-snapshot";
 
 /** categoryKey は string なので、レジストリ側の Partial<Record<CategoryKey, …>> を安全に引く */
 function lookupTopicCatalog(categoryKey: string) {
@@ -39,7 +40,6 @@ import {
 } from "../types/snapshot";
 import {
   resolveItemAttribution,
-  resolveItemOriginalSurveys,
   surveyBucketsForItem,
 } from "./survey-bucketing";
 
@@ -352,39 +352,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
 
   // ── survey/{surveyId}/items.json ─────────────────────────────────────────────
   for (const surveyId of surveyIdSet) {
-    const matched = (itemsBySurvey.get(surveyId) ?? [])
-      .slice()
-      .sort(compareByRepresentativeThenRecency);
-
-    const surveyItems: CategoryRankingItemWithAreaType[] = matched.map((r) => ({
-      rankingKey: r.rankingKey,
-      areaType: r.areaType,
-      title: r.title,
-      readerLabel: r.readerLabel ?? r.title,
-      subtitle: r.subtitle ?? null,
-      unit: r.unit,
-      latestYear: r.latestYear ?? null,
-      availableYears: r.availableYears ?? null,
-      description: r.description ?? null,
-      demographicAttr: r.demographicAttr ?? null,
-      normalizationBasis: r.normalizationBasis ?? null,
-      groupKey: r.groupKey ?? null,
-      hook: r.hook ?? null,
-      top1: r.latestTop ?? null,
-      // survey ページの広告 vertical 導出に使う (調査主題と広告を連動させる)。
-      categoryKey: r.categoryKey ?? null,
-      // 出典 (原典調査)。UI が「出典: ◯◯調査」表示に使う。SSDS は複数原典あり。
-      // builder 焼き込み済み surveyIds を優先し、stale item は従来解決 (SSDS のみ) にフォールバック。
-      originalSurveys:
-        r.surveyIds ?? resolveItemOriginalSurveys(r).map((s) => s.id),
-    }));
-
-    const body = JSON.stringify({
-      generatedAt,
-      surveyId,
-      count: surveyItems.length,
-      items: surveyItems,
-    });
+    const body = JSON.stringify(buildSurveyItemsSnapshot(surveyId, itemsBySurvey.get(surveyId) ?? [], generatedAt));
     uploads.push(
       saveToR2(surveyItemsKeyPath(surveyId), body, {
         contentType: "application/json; charset=utf-8",

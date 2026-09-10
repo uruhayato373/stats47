@@ -1,57 +1,6 @@
 [
   {
     "themeKey": "aging-society",
-    "componentKey": "birth-rate-aging-rate-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010201?cdCat01=#A05202",
-      "0000010201?cdCat01=#A03503"
-    ],
-    "metricKeys": [
-      "crude-birth-rate",
-      "ratio-65-plus"
-    ],
-    "units": [
-      "人口千対",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "aging-society",
-    "componentKey": "marriage-divorce-rate-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010201?cdCat01=#A06601",
-      "0000010201?cdCat01=#A06602"
-    ],
-    "metricKeys": [
-      "marriages-per-total-population",
-      "divorces-per-total-population"
-    ],
-    "units": [
-      "人口千対",
-      "人口千対"
-    ]
-  },
-  {
-    "themeKey": "aging-society",
-    "componentKey": "natural-social-increase-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010101?cdCat01=A4101",
-      "0000010101?cdCat01=A4200"
-    ],
-    "metricKeys": [
-      "births",
-      "death-count"
-    ],
-    "units": [
-      "人",
-      "人"
-    ]
-  },
-  {
-    "themeKey": "aging-society",
     "componentKey": "theme-late-elderly-medical-expense-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
@@ -85,84 +34,16 @@
     ]
   },
   {
-    "themeKey": "aging-society",
-    "componentKey": "theme-pension-benefit-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010110?cdCat01=J5104"
-    ],
-    "metricKeys": [
-      "pension-benefit-total"
-    ],
-    "units": [
-      "千円"
-    ]
-  },
-  {
-    "themeKey": "aging-society",
-    "componentKey": "theme-volunteer-participation-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010207?cdCat01=#G04101"
-    ],
-    "metricKeys": [
-      "volunteer-activity-annual-participation-rate-15plus"
-    ],
-    "units": [
-      "％"
-    ]
-  },
-  {
-    "themeKey": "aging-society",
-    "componentKey": "theme-as-youth-old-dep-index",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010201?cdCat01=#A03401",
-      "0000010201?cdCat01=#A03402"
-    ],
-    "metricKeys": [
-      "young-population-index",
-      "old-population-index"
-    ],
-    "units": [
-      "指数",
-      "指数"
-    ]
-  },
-  {
-    "themeKey": "consumer-prices",
-    "componentKey": "theme-cpi-living-cost",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010212?cdCat01=#L04416",
-      "0000010212?cdCat01=#L04417",
-      "0000010212?cdCat01=#L04418"
-    ],
-    "metricKeys": [
-      "consumer-price-difference-index-food",
-      "consumer-price-difference-index-housing",
-      "consumer-price-difference-index-utilities"
-    ],
-    "units": [
-      "（全国=100）",
-      "（全国=100）",
-      "（全国=100）"
-    ]
-  },
-  {
     "themeKey": "education-culture",
     "componentKey": "theme-edu-higher-education-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010205?cdCat01=#E09504",
       "0000010205?cdCat01=#E0940302"
     ],
     "metricKeys": [
-      "final-education-university-graduate-school-ratio",
       "in-pref-university-entrance-ratio-by-highschool-origin"
     ],
     "units": [
-      "％",
       "％"
     ]
   },
@@ -205,15 +86,12 @@
     "componentKey": "theme-fishery-output-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010103?cdCat01=C31201",
-      "0000010103?cdCat01=C312001"
+      "0000010103?cdCat01=C31201"
     ],
     "metricKeys": [
-      "marine-fishery-aquaculture-output-value",
-      "marine-fishery-output-value"
+      "marine-fishery-aquaculture-output-value"
     ],
     "units": [
-      "百万円",
       "百万円"
     ]
   },
@@ -222,86 +100,13 @@
     "componentKey": "theme-fishery-half-century",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010103?cdCat01=C3121",
       "0000010103?cdCat01=C3125"
     ],
     "metricKeys": [
-      "fish-catch",
       "fishery-workers"
     ],
     "units": [
-      "トン",
       "人"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-species-share",
-    "componentType": "donut-chart",
-    "rawRequestKeys": [
-      "0003238633?cdCat01=0980",
-      "0003238633?cdCat01=1040",
-      "0003238633?cdCat01=0120",
-      "0003238633?cdCat01=0250",
-      "0003238633?cdCat01=0410",
-      "0003238633?cdCat01=0420",
-      "0003238633?cdCat01=0430",
-      "0003238633?cdCat01=0330",
-      "0003238633?cdCat01=0490",
-      "0003238633?cdCat01=1130",
-      "0003238633?cdCat01=0880",
-      "0003238633?cdCat01=0660"
-    ],
-    "metricKeys": [
-      "fishery-species-catch-scallop",
-      "fishery-species-catch-japanese-squid",
-      "fishery-species-catch-tuna",
-      "fishery-species-catch-bonito",
-      "fishery-species-catch-mackerel",
-      "fishery-species-catch-pacific-saury",
-      "fishery-species-catch-yellowtail",
-      "fishery-species-catch-sardine",
-      "fishery-species-catch-pollock",
-      "fishery-species-catch-kelp",
-      "fishery-species-catch-snow-crab",
-      "fishery-species-catch-sea-bream"
-    ],
-    "units": [
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン",
-      "トン"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-species-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0003238633?cdCat01=0330",
-      "0003238633?cdCat01=0420",
-      "0003238633?cdCat01=0980",
-      "0003238633?cdCat01=1040"
-    ],
-    "metricKeys": [
-      "fishery-species-catch-sardine",
-      "fishery-species-catch-pacific-saury",
-      "fishery-species-catch-scallop",
-      "fishery-species-catch-japanese-squid"
-    ],
-    "units": [
-      "トン",
-      "トン",
-      "トン",
-      "トン"
     ]
   },
   {
@@ -309,15 +114,12 @@
     "componentKey": "theme-foreign-total-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010201?cdCat01=#A01601",
-      "0000010101?cdCat01=A1700"
+      "0000010201?cdCat01=#A01601"
     ],
     "metricKeys": [
-      "foreign-resident-count-per-100k",
-      "foreign-resident-count"
+      "foreign-resident-count-per-100k"
     ],
     "units": [
-      "人",
       "人"
     ]
   },
@@ -343,16 +145,13 @@
     "componentKey": "theme-health-supply-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010209?cdCat01=#I0920101",
-      "0000010209?cdCat01=#I0910103"
+      "0000010209?cdCat01=#I0920101"
     ],
     "metricKeys": [
-      "physicians-in-medical-facilities-per-100k",
-      "general-hospital-count-per-100k"
+      "physicians-in-medical-facilities-per-100k"
     ],
     "units": [
-      "人",
-      "施設"
+      "人"
     ]
   },
   {
@@ -367,20 +166,6 @@
     ],
     "units": [
       "千円"
-    ]
-  },
-  {
-    "themeKey": "healthcare",
-    "componentKey": "theme-health-diabetes-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010209?cdCat01=#I06103"
-    ],
-    "metricKeys": [
-      "deaths-diabetes-per-100k"
-    ],
-    "units": [
-      "人"
     ]
   },
   {
@@ -415,37 +200,6 @@
     ]
   },
   {
-    "themeKey": "labor-wages",
-    "componentKey": "labor-wages-job-ratio-vs-unemployment",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010206?cdCat01=#F03103",
-      "0000010206?cdCat01=#F01301"
-    ],
-    "metricKeys": [
-      "active-job-opening-ratio",
-      "unemployment-rate"
-    ],
-    "units": [
-      "倍",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "labor-wages",
-    "componentKey": "theme-lw-employment-rate-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010206?cdCat01=#F03101"
-    ],
-    "metricKeys": [
-      "employment-rate"
-    ],
-    "units": [
-      "％"
-    ]
-  },
-  {
     "themeKey": "living-housing",
     "componentKey": "vacancy-ownership-rate-trend",
     "componentType": "line-chart",
@@ -456,23 +210,6 @@
     "metricKeys": [
       "vacant-housing-ratio",
       "owner-occupied-housing-ratio"
-    ],
-    "units": [
-      "％",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "living-housing",
-    "componentKey": "unmarried-elderly-couple-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010201?cdCat01=#A0411001",
-      "0000010201?cdCat01=#A06302"
-    ],
-    "metricKeys": [
-      "ratio-never-married-15-plus",
-      "elderly-couple-only-household-ratio"
     ],
     "units": [
       "％",
@@ -518,23 +255,6 @@
   },
   {
     "themeKey": "local-economy",
-    "componentKey": "theme-economy-job-market",
-    "componentType": "mixed-chart",
-    "rawRequestKeys": [
-      "0000010206?cdCat01=#F03103",
-      "0000010206?cdCat01=#F01301"
-    ],
-    "metricKeys": [
-      "active-job-opening-ratio",
-      "unemployment-rate"
-    ],
-    "units": [
-      "倍",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-economy",
     "componentKey": "theme-le-establishments-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
@@ -548,204 +268,17 @@
     ]
   },
   {
-    "themeKey": "local-finance",
-    "componentKey": "kpi-lf-fiscal-strength",
-    "componentType": "kpi-card",
-    "rawRequestKeys": [
-      "0000010104?cdCat01=D2101"
-    ],
-    "metricKeys": [
-      "fiscal-strength-index-prefecture"
-    ],
-    "units": [
-      "指数"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "kpi-lf-debt-service",
-    "componentType": "kpi-card",
-    "rawRequestKeys": [
-      "0000010104?cdCat01=D2111"
-    ],
-    "metricKeys": [
-      "real-public-debt-service-ratio"
-    ],
-    "units": [
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "kpi-lf-future-burden",
-    "componentType": "kpi-card",
-    "rawRequestKeys": [
-      "0000010104?cdCat01=D2112"
-    ],
-    "metricKeys": [
-      "future-burden-ratio"
-    ],
-    "units": [
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-fiscal-ratios-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010104?cdCat01=D2101",
-      "0000010104?cdCat01=D2103"
-    ],
-    "metricKeys": [
-      "fiscal-strength-index-prefecture",
-      "current-balance-ratio"
-    ],
-    "units": [
-      "指数",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-revenue-composition",
-    "componentType": "composition-chart",
-    "rawRequestKeys": [
-      "0000010204?cdCat01=#D0210101",
-      "0000010204?cdCat01=#D0210201",
-      "0000010204?cdCat01=#D0210301"
-    ],
-    "metricKeys": [
-      "local-tax-ratio-pref-finance",
-      "local-allocation-tax-ratio-pref-finance",
-      "national-treasury-disbursement-ratio-pref-finance"
-    ],
-    "units": [
-      "％",
-      "％",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-expense-composition",
-    "componentType": "composition-chart",
-    "rawRequestKeys": [
-      "0000010204?cdCat01=#D0320101",
-      "0000010204?cdCat01=#D0310301",
-      "0000010204?cdCat01=#D0311501",
-      "0000010204?cdCat01=#D0311201"
-    ],
-    "metricKeys": [
-      "personnel-expenditure-ratio-pref-finance",
-      "welfare-expenditure-ratio-pref-finance",
-      "education-expenditure-ratio-pref-finance",
-      "public-works-expenditure-ratio-pref-finance"
-    ],
-    "units": [
-      "％",
-      "％",
-      "％",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-income-tax-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010204?cdCat01=#D0220103",
-      "0000010204?cdCat01=#D02206"
-    ],
-    "metricKeys": [
-      "per-capita-inhabitant-tax-pref-municipal",
-      "per-taxpayer-taxable-income"
-    ],
-    "units": [
-      "千円",
-      "千円"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-debt-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010104?cdCat01=D2111",
-      "0000010104?cdCat01=D2112"
-    ],
-    "metricKeys": [
-      "real-public-debt-service-ratio",
-      "future-burden-ratio"
-    ],
-    "units": [
-      "％",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-revenue-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010204?cdCat01=#D0210101",
-      "0000010204?cdCat01=#D0210201",
-      "0000010204?cdCat01=#D0210301"
-    ],
-    "metricKeys": [
-      "local-tax-ratio-pref-finance",
-      "local-allocation-tax-ratio-pref-finance",
-      "national-treasury-disbursement-ratio-pref-finance"
-    ],
-    "units": [
-      "％",
-      "％",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-per-capita-expense-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010204?cdCat01=#D0330103"
-    ],
-    "metricKeys": [
-      "per-capita-total-expenditure-pref-municipal"
-    ],
-    "units": [
-      "千円"
-    ]
-  },
-  {
-    "themeKey": "local-finance",
-    "componentKey": "theme-lf-taxpayer-ratio-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010204?cdCat01=#D02207"
-    ],
-    "metricKeys": [
-      "taxpayer-ratio-per-pref-resident"
-    ],
-    "units": [
-      "％"
-    ]
-  },
-  {
     "themeKey": "manufacturing",
     "componentKey": "manufacturing-establishments-employees-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010103?cdCat01=C3403",
-      "0000010103?cdCat01=C3404"
+      "0000010103?cdCat01=C3403"
     ],
     "metricKeys": [
-      "manufacturing-establishments",
-      "manufacturing-employees"
+      "manufacturing-establishments"
     ],
     "units": [
-      "事業所",
-      "人"
+      "事業所"
     ]
   },
   {
@@ -770,16 +303,13 @@
     "componentKey": "theme-manufacturing-labor-productivity",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010203?cdCat01=#C04401",
-      "0000010203?cdCat01=#C04404"
+      "0000010203?cdCat01=#C04401"
     ],
     "metricKeys": [
-      "manufacturing-shipment-amount-per-employee",
-      "manufacturing-shipment-amount-per-establishment"
+      "manufacturing-shipment-amount-per-employee"
     ],
     "units": [
-      "万円",
-      "百万円"
+      "万円"
     ]
   },
   {
@@ -801,18 +331,12 @@
     "componentKey": "real-income-cpi-breakdown",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010212?cdCat01=#L04414",
-      "0000010212?cdCat01=#L04417",
-      "0000010212?cdCat01=#L04416"
+      "0000010212?cdCat01=#L04414"
     ],
     "metricKeys": [
-      "consumer-price-difference-index-overall",
-      "consumer-price-difference-index-housing",
-      "consumer-price-difference-index-food"
+      "consumer-price-difference-index-overall"
     ],
     "units": [
-      "（全国=100）",
-      "（全国=100）",
       "（全国=100）"
     ]
   },
@@ -869,33 +393,13 @@
     "componentKey": "fire-emergency-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010211?cdCat01=#K02101",
       "0000010209?cdCat01=#I11201"
     ],
     "metricKeys": [
-      "building-fire-count-per-100-thousand-people",
       "annual-emergency-dispatches-per-1000"
     ],
     "units": [
-      "件",
       "件"
-    ]
-  },
-  {
-    "themeKey": "safety",
-    "componentKey": "suicide-accident-death-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010209?cdCat01=#I06201",
-      "0000010211?cdCat01=#K08101"
-    ],
-    "metricKeys": [
-      "suicides-per-100k",
-      "accidental-deaths-per-100k"
-    ],
-    "units": [
-      "人",
-      "人"
     ]
   },
   {

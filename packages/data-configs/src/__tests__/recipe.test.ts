@@ -180,6 +180,29 @@ describe("buildRecipe — external / mlit", () => {
     expect(r.refetch?.sourceUrl).toBe("https://example.invalid/a.pdf");
   });
 
+  it("抽出仕様なしの手動 source は従来の recipe/hash を変えない", () => {
+    const legacy = { kind: "external", derived: false, fetcherKey: "manual",
+      refetch: { sourceUrl: "https://example.invalid/a.pdf" } } as const;
+    const r = buildRecipe(metric({ kind: "external", fetcherKey: "manual",
+      config: { provenance: { pdfUrl: "https://example.invalid/a.pdf", accessedAt: "2026-09-08" } } }));
+    expect(r).toEqual({ ...legacy, configHash: hash64(canonicalRecipeJson(legacy)) });
+  });
+
+  it("同じ資料でも抽出ページ・列・倍率・履歴が違えば別レシピになり、読み側も保持する", () => {
+    const make = (extraction: Record<string, unknown>) => buildRecipe(metric({
+      kind: "external", fetcherKey: "manual",
+      config: { provenance: { pdfUrl: "https://example.invalid/a.pdf" }, extraction },
+    }));
+    const specification = { page: 4, column: "C", scale: 100, history: { code: "A" } };
+    const original = make(specification);
+    for (const change of [{ page: 5 }, { column: "D" }, { scale: 1 }, { history: { code: "B" } }]) {
+      expect(make({ ...specification, ...change }).configHash).not.toBe(original.configHash);
+    }
+    expect(make({ history: { code: "A" }, scale: 100, column: "C", page: 4 })).toEqual(original);
+    expect(parseRecipe(original)).toEqual(original);
+    expect(original.refetch?.extractionHash).toMatch(/^[a-f0-9]{16}$/);
+  });
+
   it("config が空でも fetcherKey は残る (出典薄を後で追える)", () => {
     const r = buildRecipe(metric({ kind: "external", fetcherKey: "calculated", config: {} }));
     expect(r.fetcherKey).toBe("calculated");

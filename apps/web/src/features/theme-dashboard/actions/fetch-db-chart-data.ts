@@ -1,21 +1,26 @@
-"use server";
+'use server';
 
+import { lookupArea } from '@stats47/area';
 import {
   resolveChartColorHex,
   type StatSeriesRef,
-} from "@stats47/data-configs/theme-catalog";
-import { readStatsValues } from "@stats47/stats-r2/readers";
+} from '@stats47/data-configs/theme-catalog';
+import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
+import { readStatsValues } from '@stats47/stats-r2/readers';
 
 import {
   toCompositionChartData,
   type CompositionChartData,
-} from "@/components/stat-charts/adapters/toCompositionChartData";
-import { toLineChartData } from "@/components/stat-charts/adapters/toLineChartData";
-import { toMixedChartData } from "@/components/stat-charts/adapters/toMixedChartData";
-import type { LineChartData, MixedChartData } from "@/components/stat-charts/types/visualization";
+} from '@/components/stat-charts/adapters/toCompositionChartData';
+import { toLineChartData } from '@/components/stat-charts/adapters/toLineChartData';
+import { toMixedChartData } from '@/components/stat-charts/adapters/toMixedChartData';
+import type {
+  LineChartData,
+  MixedChartData,
+} from '@/components/stat-charts/types/visualization';
 
-import { aggregateMetricTimeseries } from "../lib/aggregate-metric-timeseries";
-import { NATIONAL_AREA_CODE } from "../lib/select-national-series";
+import { aggregateMetricTimeseries } from '../lib/aggregate-metric-timeseries';
+import { NATIONAL_AREA_CODE } from '../lib/select-national-series';
 
 import {
   parseThemeDbChartComponentProps,
@@ -24,9 +29,9 @@ import {
   type DonutChartComponentProps,
   type LineChartComponentProps,
   type MixedChartComponentProps,
-} from "./theme-chart-props";
+} from './theme-chart-props';
 
-import type { StatsSchema } from "@stats47/types";
+import type { StatsSchema } from '@stats47/types';
 
 /** ドーナツチャート用データ */
 export interface DonutChartItem {
@@ -51,26 +56,26 @@ export interface CpiHeatmapItem {
 
 type ChartResult =
   | {
-      type: "line";
+      type: 'line';
       data: LineChartData;
       contract: ThemeChartDataContract;
       showLatestValues?: boolean;
     }
-  | { type: "mixed"; data: MixedChartData; contract: ThemeChartDataContract }
+  | { type: 'mixed'; data: MixedChartData; contract: ThemeChartDataContract }
   | {
-      type: "composition";
+      type: 'composition';
       data: CompositionChartData;
       contract: ThemeChartDataContract;
-      defaultTab?: "composition" | "trend";
+      defaultTab?: 'composition' | 'trend';
     }
-  | { type: "donut"; data: DonutChartItem[]; contract: ThemeChartDataContract }
+  | { type: 'donut'; data: DonutChartItem[]; contract: ThemeChartDataContract }
   | {
-      type: "cpi-profile";
+      type: 'cpi-profile';
       data: CpiProfileItem[];
       contract: ThemeChartDataContract;
     }
   | {
-      type: "cpi-heatmap";
+      type: 'cpi-heatmap';
       data: CpiHeatmapItem[];
       contract: ThemeChartDataContract;
     }
@@ -81,29 +86,30 @@ export interface ThemeChartDataContract {
   year: string;
   seriesCount: number;
   /** 全国行が無い場合に、全国値と誤認させないための表示ラベル。 */
-  scopeLabel?: "47都道府県平均";
+  scopeLabel?: '47都道府県平均';
+  geography?: string;
 }
 
 export type ThemeDbChartResult = ChartResult;
 
 function resolveScopeLabel(
-  rows: ReadonlyArray<readonly StatsSchema[] | null | undefined>,
-): ThemeChartDataContract["scopeLabel"] {
+  rows: ReadonlyArray<readonly StatsSchema[] | null | undefined>
+): ThemeChartDataContract['scopeLabel'] {
   return rows.some((series) =>
-    series?.some((row) => row.areaName === "全国平均"),
+    series?.some((row) => row.areaName === '全国平均')
   )
-    ? "47都道府県平均"
+    ? '47都道府県平均'
     : undefined;
 }
 
 function lineContract(
   data: LineChartData,
-  rows: ReadonlyArray<readonly StatsSchema[]>,
+  rows: ReadonlyArray<readonly StatsSchema[]>
 ): ThemeChartDataContract {
   const last = data.data.at(-1);
   return {
-    unit: data.unit ?? "",
-    year: String(last?.yearCode ?? last?.year ?? ""),
+    unit: [data.unit, data.rightUnit].filter(Boolean).join(' / '),
+    year: String(last?.yearCode ?? last?.year ?? ''),
     seriesCount: data.lines.length,
     scopeLabel: resolveScopeLabel(rows),
   };
@@ -125,31 +131,55 @@ export async function fetchDbChartDataAction(
   const parsed = parseThemeDbChartComponentProps(componentType, componentProps);
   if (!parsed) return null;
 
-  if (parsed.componentType === "line-chart") {
-    return fetchLineData(parsed.props, prefCode);
+  let result: ChartResult = null;
+  switch (parsed.componentType) {
+    case 'line-chart':
+      result = await fetchLineData(parsed.props, prefCode);
+      break;
+    case 'mixed-chart':
+      result = await fetchMixedData(parsed.props, prefCode);
+      break;
+    case 'donut-chart':
+      result = await fetchDonutData(parsed.props, prefCode);
+      break;
+    case 'composition-chart':
+      result = await fetchCompositionData(parsed.props, prefCode);
+      break;
+    case 'cpi-profile':
+      result = await fetchCpiProfileData(parsed.props, prefCode);
+      break;
+    case 'cpi-heatmap':
+      result = await fetchCpiHeatmapData(parsed.props, prefCode);
+      break;
   }
-  if (parsed.componentType === "mixed-chart") {
-    return fetchMixedData(parsed.props, prefCode);
-  }
-  if (parsed.componentType === "donut-chart") {
-    return fetchDonutData(parsed.props, prefCode);
-  }
-  if (parsed.componentType === "composition-chart") {
-    return fetchCompositionData(parsed.props, prefCode);
-  }
-  if (parsed.componentType === "cpi-profile") {
-    return fetchCpiProfileData(parsed.props, prefCode);
-  }
-  if (parsed.componentType === "cpi-heatmap") {
-    return fetchCpiHeatmapData(parsed.props, prefCode);
-  }
-  return null;
+  if (!result) return null;
+  const refs = ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
+    (field) => {
+      const value = componentProps[field];
+      return Array.isArray(value) ? (value as StatSeriesRef[]) : [];
+    }
+  );
+  const scopes = new Set(
+    refs.map((ref) => (ref.area === 'national' ? 'national' : 'selected'))
+  );
+  const areaName = lookupArea(prefCode)?.areaName ?? '選択した都道府県';
+  result.contract.geography = result.contract.scopeLabel
+    ? prefCode !== NATIONAL_AREA_CODE && scopes.size > 1
+      ? `${areaName}と都道府県平均（凡例を参照）`
+      : "都道府県平均"
+    : prefCode === NATIONAL_AREA_CODE ||
+        (scopes.size === 1 && scopes.has('national'))
+      ? '全国'
+      : scopes.has('national')
+        ? `${areaName}と全国（凡例を参照）`
+        : areaName;
+  return result;
 }
 
 async function fetchLineData(
   props: LineChartComponentProps,
-  prefCode: string,
-): Promise<Extract<NonNullable<ChartResult>, { type: "line" }> | null> {
+  prefCode: string
+): Promise<Extract<NonNullable<ChartResult>, { type: 'line' }> | null> {
   return props.seriesRefs ? fetchR2LineData(props, prefCode) : null;
 }
 
@@ -160,23 +190,53 @@ async function fetchLineData(
 async function fetchR2LineData(
   props: LineChartComponentProps,
   prefCode: string
-): Promise<Extract<NonNullable<ChartResult>, { type: "line" }> | null> {
+): Promise<Extract<NonNullable<ChartResult>, { type: 'line' }> | null> {
   const refs = props.seriesRefs;
   if (!refs) return null;
 
   try {
     const rawDataList = await Promise.all(
-      refs.map((ref) => readR2Series(ref, prefCode)),
+      refs.map((ref) => readR2Series(ref, prefCode))
     );
     if (rawDataList.some((series) => series === null)) return null;
 
-    const labels = refs.map((ref, index) => ref.label ?? props.labels?.[index] ?? ref.metricKey);
+    const labels = refs.map(
+      (ref, index) => ref.label ?? props.labels?.[index] ?? ref.metricKey
+    );
     const colors = refs.every((ref) => ref.colorRole !== undefined)
       ? refs.map((ref) => resolveChartColorHex(ref.colorRole!))
       : props.seriesColors;
-    const chartData = toLineChartData(rawDataList as StatsSchema[][], labels, colors);
+    const chartData = toLineChartData(
+      rawDataList as StatsSchema[][],
+      labels,
+      colors
+    );
+    const units = [
+      ...new Set(
+        rawDataList.map((rows) => normalizeUnitForAxis(rows?.[0]?.unit ?? ''))
+      ),
+    ];
+    if (units.length > 2)
+      throw new Error('同じ図で比較できる単位は2種類までです');
+    const unitOf = rawDataList.map((rows) => rows?.[0]?.unit ?? '');
+    chartData.unit = unitOf[0];
+    chartData.rightUnit = unitOf.find(
+      (unit) => normalizeUnitForAxis(unit) === units[1]
+    );
+    chartData.lines = chartData.lines.map((line, index) => ({
+      ...line,
+      name:
+        refs[index].area === 'national' ||
+        rawDataList[index]?.[0]?.areaName === '全国平均'
+          ? `${line.name}（${rawDataList[index]?.[0]?.areaName === '全国平均' ? '都道府県平均' : '全国'}）`
+          : line.name,
+      yAxis:
+        units[1] && normalizeUnitForAxis(unitOf[index]) === units[1]
+          ? 'right'
+          : 'left',
+    }));
     return {
-      type: "line",
+      type: 'line',
       data: chartData,
       contract: lineContract(chartData, rawDataList as StatsSchema[][]),
       showLatestValues: props.showLatestValues,
@@ -188,11 +248,11 @@ async function fetchR2LineData(
 
 async function readR2Series(
   ref: StatSeriesRef,
-  prefCode: string,
+  prefCode: string
 ): Promise<StatsSchema[] | null> {
-  const payload = await readStatsValues(ref.metricKey, "prefecture");
+  const payload = await readStatsValues(ref.metricKey, 'prefecture');
   if (!payload) return null;
-  const areaCode = ref.area === "national" ? NATIONAL_AREA_CODE : prefCode;
+  const areaCode = ref.area === 'national' ? NATIONAL_AREA_CODE : prefCode;
   const rows = ref.year
     ? payload.rows.filter((row) => row.yearCode === ref.year)
     : payload.rows;
@@ -203,10 +263,10 @@ async function readR2Series(
   return series.points.map((point): StatsSchema => ({
     areaCode,
     areaName:
-      series.source === "average"
-        ? "全国平均"
+      series.source === 'average'
+        ? '全国平均'
         : areaCode === NATIONAL_AREA_CODE
-          ? "全国"
+          ? '全国'
           : areaCode,
     yearCode: point.year,
     yearName: point.yearName,
@@ -218,8 +278,8 @@ async function readR2Series(
 
 async function fetchMixedData(
   props: MixedChartComponentProps,
-  prefCode: string,
-): Promise<Extract<NonNullable<ChartResult>, { type: "mixed" }> | null> {
+  prefCode: string
+): Promise<Extract<NonNullable<ChartResult>, { type: 'mixed' }> | null> {
   return props.columnSeriesRefs && props.lineSeriesRefs
     ? fetchR2MixedData(props, prefCode)
     : null;
@@ -227,8 +287,8 @@ async function fetchMixedData(
 
 async function fetchR2MixedData(
   props: MixedChartComponentProps,
-  prefCode: string,
-): Promise<Extract<NonNullable<ChartResult>, { type: "mixed" }> | null> {
+  prefCode: string
+): Promise<Extract<NonNullable<ChartResult>, { type: 'mixed' }> | null> {
   const columnRefs = props.columnSeriesRefs;
   const lineRefs = props.lineSeriesRefs;
   if (!columnRefs || !lineRefs) return null;
@@ -243,8 +303,12 @@ async function fetchR2MixedData(
   const chartData = toMixedChartData(
     columns,
     lines,
-    columnRefs.map((ref, index) => ref.label ?? props.columnLabels?.[index] ?? ref.metricKey),
-    lineRefs.map((ref, index) => ref.label ?? props.lineLabels?.[index] ?? ref.metricKey),
+    columnRefs.map(
+      (ref, index) => ref.label ?? props.columnLabels?.[index] ?? ref.metricKey
+    ),
+    lineRefs.map(
+      (ref, index) => ref.label ?? props.lineLabels?.[index] ?? ref.metricKey
+    ),
     props.leftUnit,
     props.rightUnit,
     columnRefs.every((ref) => ref.colorRole !== undefined)
@@ -252,15 +316,17 @@ async function fetchR2MixedData(
       : props.columnColors,
     lineRefs.every((ref) => ref.colorRole !== undefined)
       ? lineRefs.map((ref) => resolveChartColorHex(ref.colorRole!))
-      : props.lineColors,
+      : props.lineColors
   );
   const last = chartData.data.at(-1);
   return {
-    type: "mixed",
+    type: 'mixed',
     data: chartData,
     contract: {
-      unit: [chartData.leftUnit, chartData.rightUnit].filter(Boolean).join(" / "),
-      year: String(last?.yearCode ?? last?.year ?? ""),
+      unit: [chartData.leftUnit, chartData.rightUnit]
+        .filter(Boolean)
+        .join(' / '),
+      year: String(last?.yearCode ?? last?.year ?? ''),
       seriesCount: chartData.columns.length + chartData.lines.length,
       scopeLabel: resolveScopeLabel([...columns, ...lines]),
     },
@@ -269,26 +335,37 @@ async function fetchR2MixedData(
 
 async function fetchCompositionData(
   props: CompositionChartComponentProps,
-  prefCode: string,
-): Promise<Extract<NonNullable<ChartResult>, { type: "composition" }> | null> {
+  prefCode: string
+): Promise<Extract<NonNullable<ChartResult>, { type: 'composition' }> | null> {
   if (props.seriesRefs) {
+    if (new Set(props.seriesRefs.map((ref) => ref.area ?? 'selected')).size > 1) return null;
     const segmentData = await Promise.all(
-      props.seriesRefs.map((ref) => readR2Series(ref, prefCode)),
+      props.seriesRefs.map((ref) => readR2Series(ref, prefCode))
     );
     if (segmentData.some((series) => series === null)) return null;
-    const rows = segmentData as StatsSchema[][];
+    const completeYears = commonObservationYears(segmentData);
+    if (completeYears.length === 0) return null;
+    const rows = (segmentData as StatsSchema[][]).map((series) =>
+      series.filter((row) => completeYears.includes(row.yearCode))
+    );
+    if (
+      new Set(rows.map((series) => normalizeUnitForAxis(series[0].unit)))
+        .size !== 1
+    )
+      return null;
     const labels = props.seriesRefs.map(
-      (ref, index) => ref.label ?? props.segments?.[index]?.label ?? ref.metricKey,
+      (ref, index) =>
+        ref.label ?? props.segments?.[index]?.label ?? ref.metricKey
     );
     const colors = props.seriesRefs.map((ref, index) =>
       ref.colorRole
         ? resolveChartColorHex(ref.colorRole)
-        : (props.segments?.[index]?.color ?? resolveChartColorHex("series-1")),
+        : (props.segments?.[index]?.color ?? resolveChartColorHex('series-1'))
     );
     const chartData = toCompositionChartData(rows, labels, colors);
     return chartData.trendData.length > 0
       ? {
-          type: "composition",
+          type: 'composition',
           data: chartData,
           contract: {
             unit: chartData.unit,
@@ -314,31 +391,49 @@ async function fetchCompositionData(
  */
 async function fetchDonutData(
   props: DonutChartComponentProps,
-  prefCode: string,
-): Promise<Extract<NonNullable<ChartResult>, { type: "donut" }> | null> {
+  prefCode: string
+): Promise<Extract<NonNullable<ChartResult>, { type: 'donut' }> | null> {
   const topN = props.topN ?? 9;
 
   if (props.seriesRefs) {
+    if (new Set(props.seriesRefs.map((ref) => ref.area ?? 'selected')).size > 1) return null;
     const series = await Promise.all(
-      props.seriesRefs.map((ref) => readR2Series(ref, prefCode)),
+      props.seriesRefs.map((ref) => readR2Series(ref, prefCode))
     );
+    const commonYear = commonObservationYears(series).at(-1);
+    if (!commonYear) return null;
+    const observedUnits = new Set(
+      series.map((rows) =>
+        normalizeUnitForAxis(
+          rows?.find((row) => row.yearCode === commonYear)?.unit ?? ''
+        )
+      )
+    );
+    if (observedUnits.size !== 1) return null;
     const validResults = series.flatMap((rows, index) => {
       if (!rows || rows.length === 0) return [];
-      const latest = [...rows].sort((a, b) => b.yearCode.localeCompare(a.yearCode))[0];
-      if (typeof latest.value !== "number" || latest.value <= 0) return [];
+      const latest = rows.find((row) => row.yearCode === commonYear)!;
+      if (typeof latest.value !== 'number' || latest.value <= 0) return [];
       const ref = props.seriesRefs![index];
-      return [{
-        item: {
-          name: ref.label ?? props.categories?.[index]?.label ?? ref.metricKey,
-          value: latest.value,
-          color: ref.colorRole
-            ? resolveChartColorHex(ref.colorRole)
-            : (props.categories?.[index]?.color ?? resolveChartColorHex("series-1")),
+      return [
+        {
+          item: {
+            name:
+              ref.label ?? props.categories?.[index]?.label ?? ref.metricKey,
+            value: latest.value,
+            color: ref.colorRole
+              ? resolveChartColorHex(ref.colorRole)
+              : (props.categories?.[index]?.color ??
+                resolveChartColorHex('series-1')),
+          },
+          year: latest.yearName || latest.yearCode,
+          unit: latest.unit ?? '',
+          scopeLabel:
+            latest.areaName === '全国平均'
+              ? ('47都道府県平均' as const)
+              : undefined,
         },
-        year: latest.yearName || latest.yearCode,
-        unit: latest.unit ?? "",
-        scopeLabel: latest.areaName === "全国平均" ? ("47都道府県平均" as const) : undefined,
-      }];
+      ];
     });
     return buildDonutResult(validResults, topN);
   }
@@ -350,10 +445,10 @@ function buildDonutResult(
     item: DonutChartItem;
     year: string;
     unit: string;
-    scopeLabel?: "47都道府県平均";
+    scopeLabel?: '47都道府県平均';
   }>,
-  topN: number,
-): Extract<NonNullable<ChartResult>, { type: "donut" }> | null {
+  topN: number
+): Extract<NonNullable<ChartResult>, { type: 'donut' }> | null {
   const valid = validResults.map((result) => result.item);
   if (valid.length === 0) return null;
 
@@ -362,25 +457,25 @@ function buildDonutResult(
     year: validResults[0].year,
     seriesCount: valid.length,
     scopeLabel: validResults.some((result) => result.scopeLabel)
-      ? "47都道府県平均"
+      ? '47都道府県平均'
       : undefined,
   };
 
   // 降順ソート → 上位N + その他
   valid.sort((a, b) => b.value - a.value);
   if (valid.length <= topN + 1) {
-    return { type: "donut", data: valid, contract };
+    return { type: 'donut', data: valid, contract };
   }
 
   const top = valid.slice(0, topN);
   const otherValue = valid.slice(topN).reduce((sum, i) => sum + i.value, 0);
   top.push({
-    name: "その他",
+    name: 'その他',
     value: otherValue,
-    color: "hsl(var(--muted-foreground))",
+    color: 'hsl(var(--muted-foreground))',
   });
   return {
-    type: "donut",
+    type: 'donut',
     data: top,
     contract: { ...contract, seriesCount: top.length },
   };
@@ -397,7 +492,7 @@ function buildDonutResult(
 async function fetchCpiProfileData(
   props: CpiChartComponentProps,
   prefCode: string
-): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-profile" }> | null> {
+): Promise<Extract<NonNullable<ChartResult>, { type: 'cpi-profile' }> | null> {
   return props.seriesRefs ? fetchR2CpiProfileData(props, prefCode) : null;
 }
 
@@ -411,7 +506,7 @@ async function fetchCpiProfileData(
 async function fetchCpiHeatmapData(
   props: CpiChartComponentProps,
   prefCode: string
-): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-heatmap" }> | null> {
+): Promise<Extract<NonNullable<ChartResult>, { type: 'cpi-heatmap' }> | null> {
   return props.seriesRefs ? fetchR2CpiHeatmapData(props, prefCode) : null;
 }
 
@@ -427,36 +522,40 @@ function commonCpiYears(series: readonly StatsSchema[][]): string[] {
 
 async function readR2CpiSeries(
   props: CpiChartComponentProps,
-  prefCode: string,
+  prefCode: string
 ): Promise<{ refs: StatSeriesRef[]; series: StatsSchema[][] } | null> {
   const refs = props.seriesRefs;
   if (!refs) return null;
-  const rows = await Promise.all(refs.map((ref) => readR2Series(ref, prefCode)));
+  const rows = await Promise.all(
+    refs.map((ref) => readR2Series(ref, prefCode))
+  );
   if (rows.some((value) => value === null)) return null;
   return { refs, series: rows as StatsSchema[][] };
 }
 
 async function fetchR2CpiProfileData(
   props: CpiChartComponentProps,
-  prefCode: string,
-): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-profile" }> | null> {
+  prefCode: string
+): Promise<Extract<NonNullable<ChartResult>, { type: 'cpi-profile' }> | null> {
   const loaded = await readR2CpiSeries(props, prefCode);
   if (!loaded) return null;
   const commonYears = commonCpiYears(loaded.series);
   const year = props.year ?? commonYears.at(-1);
   if (!year || !commonYears.includes(year)) return null;
-  const selected = loaded.series.map((rows) => rows.find((row) => row.yearCode === year));
+  const selected = loaded.series.map((rows) =>
+    rows.find((row) => row.yearCode === year)
+  );
   if (selected.some((row) => !row || row.value === null)) return null;
   const rows = selected as StatsSchema[];
   return {
-    type: "cpi-profile",
+    type: 'cpi-profile',
     data: rows.map((row, index) => ({
       label: loaded.refs[index].label ?? loaded.refs[index].metricKey,
       value: row.value as number,
       code: loaded.refs[index].metricKey,
     })),
     contract: {
-      unit: rows[0].unit?.trim() || "指数",
+      unit: rows[0].unit?.trim() || '指数',
       year: rows[0].yearName || rows[0].yearCode,
       seriesCount: rows.length,
       scopeLabel: resolveScopeLabel(loaded.series),
@@ -466,8 +565,8 @@ async function fetchR2CpiProfileData(
 
 async function fetchR2CpiHeatmapData(
   props: CpiChartComponentProps,
-  prefCode: string,
-): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-heatmap" }> | null> {
+  prefCode: string
+): Promise<Extract<NonNullable<ChartResult>, { type: 'cpi-heatmap' }> | null> {
   const loaded = await readR2CpiSeries(props, prefCode);
   if (!loaded) return null;
   const years = props.year
@@ -475,24 +574,44 @@ async function fetchR2CpiHeatmapData(
     : commonCpiYears(loaded.series);
   if (years.length === 0) return null;
   const yearSet = new Set(years);
-  const data = loaded.series.flatMap((rows, index) =>
-    rows
-      .filter((row) => yearSet.has(row.yearCode) && row.value !== null)
-      .map((row) => ({
-        x: row.yearName || row.yearCode,
-        y: loaded.refs[index].label ?? loaded.refs[index].metricKey,
-        value: row.value as number,
-      })),
-  ).sort((a, b) => a.x.localeCompare(b.x) || a.y.localeCompare(b.y));
+  const data = loaded.series
+    .flatMap((rows, index) =>
+      rows
+        .filter((row) => yearSet.has(row.yearCode) && row.value !== null)
+        .map((row) => ({
+          x: row.yearName || row.yearCode,
+          y: loaded.refs[index].label ?? loaded.refs[index].metricKey,
+          value: row.value as number,
+        }))
+    )
+    .sort((a, b) => a.x.localeCompare(b.x) || a.y.localeCompare(b.y));
   if (data.length !== years.length * loaded.refs.length) return null;
   return {
-    type: "cpi-heatmap",
+    type: 'cpi-heatmap',
     data,
     contract: {
-      unit: loaded.series[0][0]?.unit?.trim() || "指数",
-      year: years.at(-1) ?? "",
+      unit: loaded.series[0][0]?.unit?.trim() || '指数',
+      year: years.at(-1) ?? '',
       seriesCount: loaded.refs.length,
       scopeLabel: resolveScopeLabel(loaded.series),
     },
   };
+}
+
+/** Composition needs every segment observed in the same year; missing is never zero. */
+function commonObservationYears(series: Array<StatsSchema[] | null>): string[] {
+  if (series.length === 0 || series.some((rows) => !rows?.length)) return [];
+  const years = series.map(
+    (rows) =>
+      new Set(
+        rows!
+          .filter(
+            (row) => typeof row.value === 'number' && Number.isFinite(row.value)
+          )
+          .map((row) => row.yearCode)
+      )
+  );
+  return [...years[0]]
+    .filter((year) => years.every((set) => set.has(year)))
+    .sort();
 }

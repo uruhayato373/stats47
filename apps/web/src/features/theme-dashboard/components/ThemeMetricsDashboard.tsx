@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, type ReactNode } from 'react';
 
 import Link from 'next/link';
 
@@ -17,11 +17,15 @@ import {
   type ThemeIndicatorData,
 } from '../types';
 
+import { FixedYearComparisonPanel } from './FixedYearComparisonPanel';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
 import type { MetricKpi } from './metric-kpi';
-import type { CatalogMetricGroup } from '@stats47/data-configs/theme-catalog';
+import type {
+  CatalogMetricGroup,
+  CatalogSection,
+} from '@stats47/data-configs/theme-catalog';
 
 interface Props {
   /** テーマ設定 */
@@ -31,6 +35,8 @@ interface Props {
    * 「非 context 指標を 1 グループ」にフォールバックする。
    */
   metricGroups?: CatalogMetricGroup[];
+  sections?: CatalogSection[];
+  embeddedSections?: Record<string, ReactNode>;
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** ThemeCatalog から生成し R2 配信するチャート（page_components） */
@@ -97,6 +103,8 @@ function resolveChartRankingLinks(
 export function ThemeMetricsDashboard({
   themeConfig,
   metricGroups,
+  sections,
+  embeddedSections = {},
   indicatorDataMap,
   pageCharts,
   chartSourceLinks,
@@ -109,14 +117,15 @@ export function ThemeMetricsDashboard({
 
   const kpiKeys = useMemo(
     () =>
-      themeConfig.tabIndicators
-        .map((t) => t.rankingKey)
-        .filter(
+      [...new Set([
+        ...themeConfig.tabIndicators.map((t) => t.rankingKey),
+        ...(metricGroups ?? []).filter((group) => group.comparisonYear).flatMap((group) => group.rankingKeys),
+      ])].filter(
           (k) =>
             indicatorDataMap[k] &&
             indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI
         ),
-    [themeConfig.tabIndicators, indicatorDataMap]
+    [themeConfig.tabIndicators, metricGroups, indicatorDataMap]
   );
 
   const kpis = useMemo<MetricKpi[]>(() => {
@@ -146,7 +155,8 @@ export function ThemeMetricsDashboard({
         return {
           metricKey: key,
           title: d.rankingItem.readerLabel ?? d.rankingItem.title,
-          unit: d.rankingItem.unit ?? '',
+          unit: target?.unit || d.rankingItem.unit || '',
+          yearName: target?.yearName ?? d.rankingItem.latestYear?.yearName,
           value: typeof target?.value === 'number' ? target.value : null,
           rank: target?.rank ?? null,
           total,
@@ -174,7 +184,8 @@ export function ThemeMetricsDashboard({
       return {
         metricKey: key,
         title: d.rankingItem.readerLabel ?? d.rankingItem.title,
-        unit: d.rankingItem.unit ?? '',
+        unit: top1?.unit || d.rankingItem.unit || '',
+        yearName: top1?.yearName ?? d.rankingItem.latestYear?.yearName,
         value: null,
         rank: null,
         total,
@@ -210,6 +221,8 @@ export function ThemeMetricsDashboard({
         ? [
             {
               key: 'default',
+              comparisonYear: undefined as string | undefined,
+              comparisonMap: undefined as boolean | undefined,
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
               title: undefined as string | undefined,
@@ -228,6 +241,8 @@ export function ThemeMetricsDashboard({
         const alive = new Set(groupMetrics.map((m) => m.metricKey));
         return {
           key: group.key,
+          comparisonYear: group.comparisonYear,
+          comparisonMap: group.comparisonMap,
           title: group.title as string | undefined,
           metrics: groupMetrics,
           defaultCheckedKeys: group.defaultCheckedKeys.filter((k) =>
@@ -254,91 +269,190 @@ export function ThemeMetricsDashboard({
   if (
     panels.length === 0 &&
     chartComponents.length === 0 &&
-    markdownComponents.length === 0
+    markdownComponents.length === 0 &&
+    Object.keys(embeddedSections).length === 0
   ) {
     return null;
   }
 
+  const renderPanel = (panel: (typeof panels)[number], summaryOnly = false) => panel.comparisonYear ? (
+    <FixedYearComparisonPanel
+      key={panel.key}
+      title={panel.title}
+      metrics={panel.metrics}
+      comparisonYear={panel.comparisonYear}
+      indicatorDataMap={indicatorDataMap}
+      selectedPrefectureCode={selectedPrefectureCode}
+      defaultMetricKey={panel.defaultCheckedKeys[0]}
+      tabLabels={tabLabels}
+      showMap={panel.comparisonMap}
+    />
+  ) : (
+    <MetricSwitcherPanel
+      key={panel.key}
+      summaryOnly={summaryOnly}
+      title={panel.title}
+      metrics={panel.metrics}
+      tabLabels={tabLabels}
+      selectedPrefectureCode={selectedPrefectureCode}
+      areaName={areaName}
+      defaultCheckedKeys={panel.defaultCheckedKeys}
+    />
+  );
+  const renderChart = (chart: PageComponent) => (
+    <ChartPanel
+      key={chart.componentKey}
+      title={chart.title}
+      footer={
+        <ChartFooter
+          source={chart.sourceName ?? undefined}
+          sourceLink={chart.sourceLink}
+          sourceLinks={chartSourceLinks?.[chart.componentKey]}
+          annotation={resolveChartAnnotation(chart)}
+          rankingLink={chart.rankingLink}
+          rankingLabel="指標の定義・ランキング"
+          rankingLinks={resolveChartRankingLinks(chart)}
+        />
+      }
+    >
+      <ThemeDbChartRenderer
+        chart={chart}
+        prefCode={pageComponentsAreaCode}
+        prefName={areaName}
+      />
+    </ChartPanel>
+  );
+  // Every block has one owner. Unassigned blocks remain reachable while snapshots roll forward.
+  const usedPanels = new Set<string>();
+  const usedCharts = new Set<string>();
+  const usedEmbedded = new Set<string>();
+  const chapters = (sections ?? []).map((section) => {
+    const chapterPanels = panels.filter(
+      (panel) =>
+        section.metricGroupKeys.includes(panel.key) &&
+        !usedPanels.has(panel.key)
+    );
+    const chapterCharts = chartComponents.filter(
+      (chart) =>
+        section.chartKeys?.includes(chart.componentKey) &&
+        !usedCharts.has(chart.componentKey)
+    );
+    const chapterEmbedded = (section.embeddedSectionKeys ?? []).filter(
+      (key) => embeddedSections[key] && !usedEmbedded.has(key)
+    );
+    chapterPanels.forEach((panel) => usedPanels.add(panel.key));
+    chapterCharts.forEach((chart) => usedCharts.add(chart.componentKey));
+    chapterEmbedded.forEach((key) => usedEmbedded.add(key));
+    return {
+      ...section,
+      panels: chapterPanels,
+      charts: chapterCharts,
+      embedded: chapterEmbedded,
+    };
+  });
+  const remainingPanels = panels.filter((panel) => !usedPanels.has(panel.key));
+  const remainingCharts = chartComponents.filter(
+    (chart) => !usedCharts.has(chart.componentKey)
+  );
+  const remainingEmbedded = Object.keys(embeddedSections).filter(
+    (key) => !usedEmbedded.has(key)
+  );
+
   return (
     <section
       id="theme-indicators"
-      className="@container space-y-4 scroll-mt-24"
+      className="@container space-y-6 scroll-mt-24"
     >
-      {/* KPI カード（areas スタイル） */}
-      {kpis.length > 0 && (
-        <div>
-          <h2 className="sr-only">{areaName}の主要指標</h2>
-          {selectedPrefectureCode && (
-            <div className="mb-2 flex justify-end">
-              <Link
-                href={`/areas/${selectedPrefectureCode}`}
-                className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
-              >
-                {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-          )}
-          {/* 指標カード。タイルのチェックで系列を重ね、下の 1 枚に描く。
-              カードとチャートで同じ事実を二度描かない構成 (2026-08-05 に全テーマ展開。
-              旧 ChartCard グリッドはミニチャートと下段チャートが重複していたので廃止)。
-              グループ定義があれば 1 グループ = 1 枚で並べる (2026-08-06)。 */}
-          <div className="space-y-4">
-            {panels.map((panel) => (
-              <MetricSwitcherPanel
-                key={panel.key}
-                title={panel.title}
-                metrics={panel.metrics}
-                tabLabels={tabLabels}
-                selectedPrefectureCode={selectedPrefectureCode}
-                areaName={areaName}
-                defaultCheckedKeys={panel.defaultCheckedKeys}
-              />
-            ))}
-          </div>
+      <h2 className="sr-only">{areaName}の主要指標</h2>
+      {selectedPrefectureCode && (
+        <div className="flex justify-end">
+          <Link
+            href={`/areas/${selectedPrefectureCode}`}
+            className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
+          >
+            {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
+          </Link>
         </div>
       )}
-
-      {/* 時系列チャート */}
-      {chartComponents.length > 0 && (
+      {chapters.map((chapter) => (
+        <section
+          key={chapter.key}
+          id={`theme-section-${chapter.key}`}
+          aria-labelledby={`theme-heading-${chapter.key}`}
+          className="space-y-4 scroll-mt-24"
+        >
+          <div className="border-b border-border pb-3">
+            <h2
+              id={`theme-heading-${chapter.key}`}
+              className="text-lg font-semibold"
+            >
+              {chapter.title}
+            </h2>
+            {chapter.description && (
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {chapter.description}
+              </p>
+            )}
+          </div>
+          {chapter.panels.map((panel) => {
+            const coveredKeys = new Set(
+              chapter.charts.flatMap((chart) =>
+                ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
+                  (field) => {
+                    const refs = chart.componentProps[field];
+                    return Array.isArray(refs)
+                      ? refs.flatMap((ref) =>
+                          ref &&
+                          typeof ref === 'object' &&
+                          typeof ref.metricKey === 'string' &&
+                          ref.area !== 'national'
+                            ? [ref.metricKey as string]
+                            : []
+                        )
+                      : [];
+                  }
+                )
+              )
+            );
+            return renderPanel(
+              panel,
+              panel.metrics.every((metric) => coveredKeys.has(metric.metricKey))
+            );
+          })}
+          {chapter.charts.length > 0 && (
+            <div className={`grid grid-cols-1 gap-4 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
+              {chapter.charts.map(renderChart)}
+            </div>
+          )}
+          {chapter.embedded.map((key) => (
+            <div key={key}>{embeddedSections[key]}</div>
+          ))}
+        </section>
+      ))}
+      {remainingPanels.map((panel) => renderPanel(panel))}
+      {remainingCharts.length > 0 && (
         <div
           id="theme-charts"
           className="grid scroll-mt-24 grid-cols-1 gap-4 @md:grid-cols-2"
         >
-          {chartComponents.map((chart) => (
-            <ChartPanel
+          {remainingCharts.map(renderChart)}
+        </div>
+      )}
+      {remainingEmbedded.map((key) => (
+        <div key={key}>{embeddedSections[key]}</div>
+      ))}
+      {markdownComponents.length > 0 && (
+        <div className="space-y-4">
+          {markdownComponents.map((chart) => (
+            <ThemeDbChartRenderer
               key={chart.componentKey}
-              title={chart.title}
-              footer={
-                <ChartFooter
-                  source={chart.sourceName ?? undefined}
-                  sourceLink={chart.sourceLink}
-                  sourceLinks={chartSourceLinks?.[chart.componentKey]}
-                  annotation={resolveChartAnnotation(chart)}
-                  rankingLink={chart.rankingLink}
-                  rankingLabel="指標の定義・ランキング"
-                  rankingLinks={resolveChartRankingLinks(chart)}
-                />
-              }
-            >
-              <ThemeDbChartRenderer
-                chart={chart}
-                prefCode={pageComponentsAreaCode}
-                prefName={areaName}
-              />
-            </ChartPanel>
+              chart={chart}
+              prefCode={pageComponentsAreaCode}
+              prefName={areaName}
+            />
           ))}
         </div>
       )}
-
-      {/* 考察（markdown-section） */}
-      {markdownComponents.map((chart) => (
-        <ThemeDbChartRenderer
-          key={chart.componentKey}
-          chart={chart}
-          prefCode={pageComponentsAreaCode}
-          prefName={areaName}
-        />
-      ))}
     </section>
   );
 }

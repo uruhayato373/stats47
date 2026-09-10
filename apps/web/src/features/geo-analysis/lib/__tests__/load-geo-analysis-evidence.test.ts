@@ -1,15 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { GEO_CROSS_ANALYSIS_SLUGS } from '../geo-cross-analysis';
 import {
   parseGeoAnalysisManifest,
   parseGeoAnalysisPrefDetail,
 } from '../load-geo-analysis-evidence';
 
-import { manifestFixture } from './geo-manifest-fixture';
+import { GEO_BASE_FIXTURE_SLUGS, manifestFixture } from './geo-manifest-fixture';
 
 describe('Geo分析lineage parser', () => {
-  for (const slug of GEO_CROSS_ANALYSIS_SLUGS) {
+  for (const slug of GEO_BASE_FIXTURE_SLUGS) {
     it(`${slug}: 正常契約だけを受理しSHA・bytes・role・参照・coverage異常を拒否`, () => {
       const manifest = manifestFixture(slug);
       expect(parseGeoAnalysisManifest(manifest, slug)).not.toBeNull();

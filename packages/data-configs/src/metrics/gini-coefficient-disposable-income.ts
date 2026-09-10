@@ -1,55 +1,35 @@
-import type { MetricConfig } from "../types";
+import type { MetricConfig } from '../types';
 
 export const giniCoefficientDisposableIncome: MetricConfig = {
   "key": "gini-coefficient-disposable-income",
   "title": "等価可処分所得ジニ係数",
-  "unit": "指数",
-  "category": "economy",
+  "subtitle": "総世帯・OECD新基準準拠",
+  "description": "全国家計構造調査の所得資産集計体系による、県内の等価可処分所得の分布の不均等度です。世帯の所得を世帯人員の平方根で調整し、世帯員ベースで計算しています。",
+  "note": "2018年11月〜2019年10月の年間可処分所得。資産の系列とは有効集計世帯が異なるため、同一回答世帯における差ではありません。県の係数の平均を全国値とはしません。",
   "source": {
     "kind": "estat",
-    "statsDataId": "0000010112",
-    "cdCat01": "L7501",
-    "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "statsDataId": "0003440743",
+    "cdTab": "25-2019",
+    "cdCat01": "1",
+    "displayName": "2019年全国家計構造調査（年間収入・資産分布等、第7-6表）",
+    "url": "https://www.e-stat.go.jp/dbview?sid=0003440743"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "from": 2019,
-    "to": 2019,
+    "to": 2019
   },
-  "yearFormat": "fiscal",
-  "visualization": {
-    "colorScheme": "interpolateReds",
-    "colorSchemeType": "sequential",
-    "minValueType": "data-min",
-  },
+  "yearFormat": "calendar",
+  "unit": "指数",
+  "category": "economy",
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 4,
+    "decimalPlaces": 3
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "件/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "件/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
-  "groupKey": "income-inequality",
-  "seoTitle": "等価可処分所得ジニ係数ランキング都道府県【2019年】｜1位沖縄県（0）",
-  "seoDescription": "2019年の等価可処分所得ジニ係数の都道府県別ランキング。1位沖縄県（0）、最下位沖縄県（0）で地図やグラフで47都道府県を比較。",
-  "isActive": false,
+  "isActive": true
 };

@@ -1,5 +1,11 @@
 ---
 paths:
+  - "apps/web/src/features/tsunami-exposure/**"
+  - "packages/data-configs/src/theme-catalog/tsunami-exposure-*.ts"
+  - ".claude/scripts/themes/{ingest-tsunami-exposure.mjs,lib/tsunami-*.mjs,__tests__/tsunami-*.test.mjs}"
+  - "apps/web/src/features/earthquake-exposure/**"
+  - "packages/data-configs/src/theme-catalog/earthquake-exposure-*.ts"
+  - ".claude/scripts/themes/{ingest-earthquake-exposure.mjs,lib/earthquake-dbf.mjs,__tests__/earthquake-exposure.test.mjs}"
   - "apps/web/src/{app/geo,features/geo-analysis}/**"
   - "apps/remotion/src/features/geo-x/**"
   - "packages/gis/src/geo-analysis/**"
@@ -36,6 +42,70 @@ AI/LLMは問い、説明、限界、導線だけを作り、距離・交差・�
 `non-commercial`の非データベース空間演算結果には利用余地があるが、Geo bundleは県別JSONとlineageを
 公開するため自動許可しない。画面だけを公開する設計へ縮退する場合も、事務局の書面回答を証跡化してから行う。
 
+### J-SHIS県別加工集計の限定契約
+
+`earthquake-population-exposure`は、NIED J-SHIS Y2024 / AVR / TTL_MTTLの
+30年超過確率3%計測震度とKSJ m250r6-24の人口総数を直接結合する。
+承認済み原典URL・版・SHA・bytesは`theme-catalog/earthquake-exposure-source.ts`で固定する。
+J-SHIS利用規約§5により、原典そのまま・形式変換だけの再配布を行わず、原典ZIP/CSV・
+メッシュ別地震動・結合行をpublic R2外に保つ。公開lineageは原典URL、版、SHA、実取得日時、
+決定的処理、47県の震度帯人口と保存則を示す。既存KSJのpublic mirror Gateを緩和しない。
+
+この分析の公開契約は`restricted-source-prefecture-aggregate`に限定する。
+`app/geo/earthquake-population-exposure/{item,manifest,verification,pref/NN}.json`は
+専用のstrict parserで47県、版、地域同一性、6震度帯、未接続人口、全国合計、source集合、
+中間・最終SHAを検証する。未知のfield・raw mesh/geometry・原典public keyを拒否する。
+県境では`県+SHICODE+MESH_ID`を人口行の同一性とし、格子番号のみの重複排除をしない。
+
+読者の着地は既存テーマ`/themes/earthquake-exposure#earthquake-population`とし、
+共通県選択に連動する順位なしの県別震度帯人口表と検算・再現情報を示す。
+J-SHIS原図のブラウザ再現、県平均ハザード、安全順位、住宅曝露の完了扱いはしない。
+この限定契約を既存のrank必須Geo snapshotへ偽の順位で押し込まない。
+地図主体の汎用Geo契約への追加は、別途原典利用条件と再現可能な表示範囲を審査する。
+正準取込は`node --import tsx .claude/scripts/themes/ingest-earthquake-exposure.mjs`。
+`--write-local`は50個の検証済み公開集計artifactだけをlocal R2へ書き、外部書込みを行わない。
+
+### 津波想定のファイル単位・部分地域契約
+
+`tsunami-scenario-exposure`は`licensed-subset-scenario-exposure`契約に限定する。
+`theme-catalog/tsunami-exposure-source.ts`の明示的な入力allowlistのURL・版・SHA・bytes・公開keyだけを許可し、
+hazard入力は`redistributionAllowed: true`と`licenseEvidence[{url,sha256}]`を必須とし、`source.evidence`の原典receiptへ完全一致で接続する。
+A40全体の`cc-by-4.0-partial`判定は変更しない。静岡のA40-16は当該版の公式ページとZIP内条件、
+徳島2025-09-12は県公式個別datasetのCC BY表示に基づく。条件の異なる県・版の追加は再審査する。
+各県の固定版・沿岸ごとの想定を別シナリオとして保持する。全国の共通地震・県安全順位へ集約しない。
+原典内の最大包絡だけを使い、新旧版の重複は単純な最大深度で混合しない。
+
+公開は`app/geo/tsunami-scenario-exposure/{item,manifest,verification,pref/<approved-pref>}.json`、
+source.scenariosに登録し原典検証した県途中artifactと承認済み入力key、既存テーマ`/themes/tsunami-exposure#tsunami-scenario-exposure`をcanonical着地とする。
+途中artifactは県+SHICODE+MESH_IDの人口行とP05原典順施設ID、代表点、深度帯判定を保持し、
+県ごとの原表深度帯、原典非該当、明示的な未対象・未判定を原典総数へ保存する。人口は原典小数4桁を整数化して集計する。
+全国選択は利用可能範囲の入口とし、未集計県の理由を0へ変換しない。
+人口250m格子中心の近似、原典の秘匿合算、施設2022年、徳島の10m格子復元・時点間地殻変動補正なしを明記する。
+津波避難施設数の既存カードとP05施設曝露を別母集団として扱う。PDF地図は複製せず公式リンクで参照する。
+浸水深は県の原表区分を保持し、1〜3mを1〜2mと2〜3mへ推測配分しない。兵庫の南北沿岸は原典範囲の非重複を検査して結合し、2023年度以降のKSJ統合版は旧版との最大値合成をしない。東京都は島しょ11島の限定想定で、本土等の未対象と対象9町村内の非該当・未判定を別区分で保存する。9町村全域がモデル化されているとは扱わない。
+未提供・参照対象外・事前連絡・許諾/版表示の不一致を県別coverageに保持し、未計算県や未対象域を0や安全判定へ置換しない。
+この契約を既存rank必須Geoへ偽の順位で入れず、汎用Geo explorerの全県完了と判定しない。
+
+### 土砂災害指定区域の県別許可契約
+
+`population-landslide-exposure`はA33-25の許可済み46県に限定する。
+`theme-catalog/landslide-exposure-source.ts`で県別原典SHA、版、許可一覧XLSXのSHAを固定し、
+`assertLandslideSourcePublication`で一致する原典だけを採用する。京都府は商用利用不可のため
+元データの取得・公開を行わず、県別行と詳細は対象外・nullを保持する。A33全体の
+`cc-by-4.0-partial`規則は変更しない。全国表示の分母は「対象46県計（京都府除外）」とする。
+
+2025年度版の指定面（県別更新日は原典に従う）、2020年調整済み人口、2022年P05施設を結合する。
+原典人口の県・SHICODE・MESH_IDを保持し、県境を越える区域も探索する。人口中心包含、
+格子全体包含・一部交差、行政施設・公的集会施設の包含を別々に計算する。現象間は和集合で
+二重計上を避け、特別警戒面が警戒面の内側とは仮定しない。指定前区域と線だけの指定は
+面演算から除外し件数を記録する。3箇所の形状修復と重複原典行の保持も証跡に残す。
+
+正準取込は`.claude/scripts/themes/ingest-landslide-exposure.mjs`。`--write-local`時は
+全原典の再計算、独立地点照合、47詳細（46観測・1対象外）、保存則とSHAの検証を必須とする。
+表示用の簡略化・分割は演算後に行い、原典境界表示は対象viewportの全パートを取得する。
+12パート・12MB上限を超えたら拡大を促し、先頭だけ表示して完全な境界と誤認させない。
+施設地図段階は本分析にも許可する。配信736ファイル（596派生・140原典）は専用release gateで固定する。
+
 ## 公開ページの責務
 
 ### 住宅地点×人口の契約
@@ -59,6 +129,12 @@ ZIP名の河川区分（10=洪水予報河川・水位周知河川、20=その�
 重複区域は包含の和集合と最大深度区分で処理し、人口を二重加算しない。
 巨大GeoJSONは`flood-source-reader.ts`で地物ごとに処理し、全体のbuffer化・JSON.parseをしない。
 正準再生成は`npm run geo:build-flood-analysis`。原典取得・逐次解析の失敗時は配信bundleを書かない。
+
+### 公共施設への距離
+
+`population-public-facility-access`は2022年4月のP05-22全47県施設を対象に、行政施設（1〜3）と公的集会施設（4〜5）の最近傍を別々に求める。県境の外も探索し、同距離は原典ID順で固定する。人口は1kmメッシュ番号から復元した小数6桁格子中心を使用し、簡略化TopoJSONの退化形状から中心を求めない。
+距離帯は500m以下、1km以下、3km以下、5km以下、5km超。各群内の人口合計を2020年・2050年ごとに保存する。500m帯は1kmメッシュによる粗い近似で、徒歩時間・利用資格・2050年の施設存続は推定しない。施設数は県内原典の件数、距離判定では県外の最寄りも含む。
+施設の原典段階は`source/<NN>.json`、距離判定は`pref/<NN>.json`。Web共通explorerの`facilities`段階はこの分析だけに許可する。配信JSONのSHAは既存canonical形式（itemは2スペース、他はcompact、どちらも末尾改行）と一致させる。
 
 ### 読者の操作と導線
 
@@ -97,7 +173,7 @@ Xは必ず該当stageを示す`/geo/<slug>/<NN>/<stage>`へ着地させる。ペ
 
 ## SSOTとR2
 
-- authored分析定義: `packages/data-configs/src/business-plan/m1.ts`等のgit TS
+- authored分析定義: `packages/data-configs/src/business-plan/geo-analyses.ts`の`GEO_ANALYSES`。サイトの分析追加と、`m1.ts`のSNS・有料商品キャンペーン対象は独立して管理する。
 - 原典GIS: `gis/<provider>/<dataset>/<version>/...`
 - 最終集計: `app/geo/<slug>/item.json`
 - lineage: `app/geo/<slug>/manifest.json`
@@ -123,6 +199,8 @@ manifestは入力key・版・SHA・bytes、stage、出力SHA・件数、coverage
 npm run geo:build-station-access
 npm run geo:audit-analysis
 ```
+
+公共施設の正準生成・監査は`npm run geo:build-public-facility-access`と`npm run geo:audit-public-facility-access`。後者は原典94入力SHA、79,532施設の変換、全177,791メッシュ×2群の全国最近傍、県・全国保存則を再検算する。Web配信は`GEO_ARTIFACT_ROOT=../../.local/r2/app/geo npm run test:run --workspace apps/web -- src/features/geo-analysis/lib/__tests__/geo-public-facility.integration.test.ts`で確認する。
 
 ## 管理画面とagent境界
 

@@ -2,8 +2,9 @@ import type { MetricConfig } from "../types";
 
 export const nurseSalary: MetricConfig = {
   "key": "nurse-salary",
-  "title": "看護師の給与",
+  "title": "看護師の所定内給与（月額）",
   "subtitle": "看護師の所定内給与額",
+  "description": "賃金構造基本統計調査における看護師の所定内給与額（月額）です。時間外等の超過労働給与額や年間賞与は含まず、年収や手取り額ではありません。",
   "unit": "千円",
   "category": "laborwage",
   "source": {
@@ -33,25 +34,9 @@ export const nurseSalary: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "千円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "千円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
-  "seoTitle": "看護師の給与ランキング都道府県【2022年】｜1位東京都（359.8千円）",
-  "seoDescription": "2022年の看護師の給与の都道府県別ランキング。1位東京都（359.8千円）、最下位鹿児島県（253.4千円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "看護師の所定内給与（月額）｜都道府県比較",
+  "seoDescription": "看護師の所定内給与（月額）を都道府県別に比較。指標の対象地域・分母・単位・年次を確認し、表とグラフで地域差を把握できます。",
   "isActive": true,
 };

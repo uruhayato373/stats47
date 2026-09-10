@@ -2,9 +2,9 @@ import type { MetricConfig } from '../types';
 
 export const disposableIncomeAfterRent: MetricConfig = {
   key: 'disposable-income-after-rent',
-  title: '家賃控除後可処分所得',
+  title: '家賃差引の参考額（月額）',
   description:
-    '可処分所得から民営家賃消費支出額を差し引いた手残り額。住居費を考慮した実質的な生活余力を示す。',
+    '県庁所在市等の勤労者世帯の月間可処分所得から、二人以上の世帯の年間民営家賃消費支出額を12で除した額を差し引いた参考計算です。両系列の世帯範囲が異なるため、同一世帯の実際の手残りや都道府県全体の生活余力を示すものではありません。',
   unit: '円',
   category: 'economy',
   source: {

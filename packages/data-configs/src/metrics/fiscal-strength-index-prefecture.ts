@@ -13,10 +13,10 @@ export const fiscalStrengthIndexPrefecture: MetricConfig = {
     "statsDataId": "0000010104",
     "cdCat01": "D2101",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "years": [
@@ -44,39 +44,23 @@ export const fiscalStrengthIndexPrefecture: MetricConfig = {
       2011,
       2012,
       2013,
-      2022,
-    ],
+      2022
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 5,
+    "decimalPlaces": 5
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "‐/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "‐/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "財政力指数ランキング都道府県【2022年】｜1位東京都（1.06‐）",
   "seoDescription": "2022年の財政力指数の都道府県別ランキング。1位東京都（1.06‐）、最下位島根県（0.25‐）で4.2倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": true
 };

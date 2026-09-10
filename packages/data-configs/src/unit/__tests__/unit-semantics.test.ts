@@ -40,6 +40,7 @@ describe("parseUnit — その他の次元", () => {
     expect(parseUnit("千人")).toMatchObject({ dimension: "people", scaleExponent: 3 });
     expect(parseUnit("世帯").dimension).toBe("household");
     expect(parseUnit("件").dimension).toBe("count");
+    expect(parseUnit("企業等").dimension).toBe("count");
   });
 
   it("割合は次元を分ける (‰ と ％ を換算しない)", () => {

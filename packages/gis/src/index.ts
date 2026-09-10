@@ -47,6 +47,11 @@ export type {
   GeoStationAccessMeshCell,
   GeoStationAccessPrefDetail,
   GeoStationAccessStation,
+  GeoPublicFacilityPoint,
+  GeoPublicFacilityMesh,
+  GeoPublicFacilityPrefDetail,
+  GeoPublicFacilityBandSummary,
+  GeoPublicFacilitySourceSnapshot,
   GeoAnalysisValueFormat,
 } from "./geo-analysis/snapshot";
 
@@ -64,3 +69,11 @@ export {
   buildLandPricePrefDetail,
   type LandPriceDetailPointInput,
 } from "./geo-analysis/content-details";
+
+export { mesh1000BoundsFromCode } from "./geo-analysis/geo-analysis-core";
+export { validatePublicFacilityDetail, validatePublicFacilityPoints, assertPublicFacilityConservation, publicFacilityDistanceBand } from "./geo-analysis/public-facility-access";
+
+export { SNOW_DESIGNATION_DEFINITION, SNOW_DESIGNATION_DEFINITION_SHA256 } from './geo-analysis/snow-designation-definition';
+export { LANDSLIDE_EXPOSURE_DEFINITION, LANDSLIDE_EXPOSURE_DEFINITION_SHA256 } from './geo-analysis/landslide-exposure-definition';
+export { parseGeoLandslideSnapshot, parseGeoLandslidePrefDetail, parseGeoLandslideManifest, assertGeoLandslideConservation, assertLandslideSourcePublication, landslideMeshBounds, landslideCounts, landslideValues, landslideNationalValues, expectedLandslideInputs, LANDSLIDE_STAGES, type GeoLandslidePrefDetail, type GeoLandslideMesh, type GeoLandslideFacility, type GeoLandslideSummary, type GeoLandslideCounts } from './geo-analysis/landslide-exposure';
+export { parseGeoSnowPrefDetail, parseGeoSnowManifest, assertGeoSnowConservation, snowMeshBounds, type GeoSnowPrefDetail, type GeoSnowMesh, type GeoSnowSummary } from './geo-analysis/snow-designation';

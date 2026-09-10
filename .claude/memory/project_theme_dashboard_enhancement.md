@@ -26,3 +26,12 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 **Why:** テーマページのチャートが safety 以外ほぼ空だった。ranking-chart/kpi-card がテーマページ非対応だった。
 
 **How to apply:** 定期的に `/optimize-themes --all` でデータ駆動の改善サイクルを回す。新テーマ追加時は theme-designer → theme-enhancer の連携で。
+
+
+## 2026-09-11 テーマ追加時の導線ゲート
+
+- **問題**: 55テーマを展開した後、テーマ画面110ケースは成功したが、新規の `/areas/<県>/<テーマ>` が410だった。全Webテストで検知し、旧ビルドの農業・土砂災害・保育の3URLでも再現した。
+- **原因**: 県別ページとsitemapは全テーマから導出し、middlewareだけ旧21テーマの固定リストを持っていた。リンクlintも定数名からslugを推定し、spread名をテーマと誤認した。
+- **対策**: `AREA_THEME_SLUGS` をページ・middleware・sitemapで共有し、全許可テーマのmiddleware応答を検証する。リンクlintはThemeCatalog生成のIndicatorSet JSONから実キーを読む。テーマ追加時は全Webテストと県別URLの応答を確認し、冒頭3指標の検査は全章のカード配列へ拡張しない。
+
+- **プレビュー障害**: 公開R2のヘッダー取得後に本文が途切れると、中継サーバーが200送信後に502を再送して `ERR_HTTP_HEADERS_SENT` で停止した。本文を読み終えてからヘッダーを送る順序に修正し、本文が途中で失敗しても502応答後にstagedデータを返し続けるCLI回帰テストを追加した。失敗した110画面監査は別名で保存して再実行する。

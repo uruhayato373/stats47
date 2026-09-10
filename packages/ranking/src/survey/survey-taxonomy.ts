@@ -62,6 +62,7 @@ export interface ThemeSurveyTaxonomy {
   surveys: ProvenanceSurvey[];
   metrics: SurveyTaxonomyResolution;
   charts: ThemeChartSurveyTaxonomy[];
+  metricGroups: ThemeChartSurveyTaxonomy[];
 }
 
 export interface BlogChartSourceReferences {
@@ -256,14 +257,35 @@ export function resolveThemeSurveyTaxonomy(
     };
   });
 
+  const metricGroups = (catalog.metricGroups ?? []).map((group): ThemeChartSurveyTaxonomy => {
+    const metricKeys = unique(group.rankingKeys);
+    const resolution = resolveSurveyTaxonomy({ metricKeys }, registry);
+    return {
+      componentKey: group.key,
+      componentType: 'metric-group',
+      status: metricKeys.length === 0
+        ? 'missing-lineage'
+        : resolution.unresolvedMetricKeys.length > 0
+          ? 'unresolved'
+          : resolution.surveys.length > 0 ? 'resolved' : 'not-applicable',
+      surveys: resolution.surveys,
+      metricKeys,
+      estatReferences: [],
+      unresolvedMetricKeys: resolution.unresolvedMetricKeys,
+      unresolvedEstatReferences: [],
+    };
+  });
+
   return {
     themeKey: catalog.key,
     surveys: dedupeSurveys([
       ...metrics.surveys,
       ...charts.flatMap((chart) => chart.surveys),
+      ...metricGroups.flatMap((group) => group.surveys),
     ]),
     metrics,
     charts,
+    metricGroups,
   };
 }
 

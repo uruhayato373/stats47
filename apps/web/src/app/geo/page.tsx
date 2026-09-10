@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -14,16 +14,18 @@ import type { Metadata } from 'next';
 
 const title = '地域データ分析 | stats47';
 const description =
-  '複数のGISレイヤーを空間演算で重ね、将来人口、地価、洪水浸水想定、駅アクセスを地域の判断材料へ変えるGeoAI分析です。';
+  '人口と土地・災害・施設の地理データを重ね、地域の分布を調べます。分析ごとの対象年、地域、原典と計算の根拠を確認できます。';
 
 const analysisLabels: Record<string, string> = {
   'population-land-price': '人口 × 地価',
   'population-flood-risk': '人口 × 洪水',
   'population-station-access': '人口 × 駅',
+  'population-public-facility-access': '人口 × 公共施設',
+  'population-snow-designation': '人口 × 豪雪指定区域',
 };
 
 const CALCULATION_INPUT_LAYER_COUNT = new Set(
-  BUSINESS_PLAN_M1_GEO_ANALYSES.flatMap((analysis) =>
+  GEO_ANALYSES.flatMap((analysis) =>
     analysis.sourceLayers
       .filter((layer) => layer.role === 'calculation-input')
       .map((layer) => layer.id)
@@ -44,9 +46,9 @@ export default function GeoPage() {
       />
       <PageHeader
         eyebrow="地域の空間分析"
-        title="人口が変わる場所を、住宅地・洪水・駅と重ねる"
-        description="県を選んで1kmメッシュを拡大し、住宅地点、浸水の想定範囲、駅との距離を確かめます。地域を詳しく調べるための問いから、分析を選んでください。"
-        stats={`${BUSINESS_PLAN_M1_GEO_ANALYSES.length}分析 ・ ${CALCULATION_INPUT_LAYER_COUNT}計算入力レイヤー ・ すべて47都道府県 ・ 1kmメッシュ/GISから集計`}
+        title="人口と暮らしを、土地・災害・施設と重ねる"
+        description="県を選んで地図を拡大し、人口メッシュ、浸水や指定区域、施設との距離を確かめます。各分析の対象年と地域を確認しながら、調べたい問いを選んでください。"
+        stats={`${GEO_ANALYSES.length}分析 ・ ${CALCULATION_INPUT_LAYER_COUNT}種類の入力データ ・ 県別に分布と集計を確認`}
       />
 
       <div className="mb-8 grid gap-4 md:grid-cols-3">
@@ -70,7 +72,7 @@ export default function GeoPage() {
           <p className="text-xs font-semibold text-primary">3. 判断</p>
           <h3 className="mt-2 text-base font-bold">地域差と限界を同時に読む</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            地図だけで結論にせず、47県比較、入力件数、出典、近似条件まで同じ記事で確かめられます。
+            地図とともに、対象地域、入力件数、出典、近似条件まで同じ記事で確かめられます。
           </p>
         </SurfaceCard>
       </div>
@@ -129,14 +131,14 @@ export default function GeoPage() {
       />
       <div className="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(16rem,1fr)]">
         <div className="grid gap-4 sm:grid-cols-2">
-          {BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => (
+          {GEO_ANALYSES.map((analysis) => (
             <SurfaceLinkCard
               key={analysis.slug}
               href={`/geo/${analysis.slug}`}
               className="block p-5"
             >
               <p className="text-xs font-semibold text-primary">
-                {analysisLabels[analysis.slug]} ・ 実データ47件
+                {analysisLabels[analysis.slug] ?? '地域の空間分析'} ・ 県別分析
               </p>
               <h3 className="mt-2 text-lg font-bold">{analysis.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

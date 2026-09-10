@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const materialProduction: MetricConfig = {
   "key": "material-production",
   "title": "素材生産量",
+  "subtitle": "社会・人口統計体系の収録系列",
   "unit": "千ｍ3",
   "category": "agriculture",
   "source": {

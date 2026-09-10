@@ -2,7 +2,8 @@ import type { MetricConfig } from "../types";
 
 export const nursingHomeCapacityPer100065plus: MetricConfig = {
   "key": "nursing-home-capacity-per-1000-65plus",
-  "title": "老人ホーム定員数",
+  "title": "老人ホーム定員数（65歳以上人口千人当たり）",
+  "description": "65歳以上人口千人当たりの老人ホーム定員数です。定員の絶対数や入所希望者の充足率ではありません。すでに人口で除した指標のため、追加の人口・面積正規化は行いません。",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
@@ -42,25 +43,9 @@ export const nursingHomeCapacityPer100065plus: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
-  "seoTitle": "老人ホーム定員数ランキング都道府県【2023年】｜1位宮崎県（60.4人）",
-  "seoDescription": "2023年の老人ホーム定員数の都道府県別ランキング。1位宮崎県（60.4人）、最下位山梨県（24.4人）で2.5倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "老人ホーム定員数（65歳以上人口千人当たり）｜都道府県比較",
+  "seoDescription": "老人ホーム定員数（65歳以上人口千人当たり）を都道府県別に比較。指標の対象地域・分母・単位・年次を確認し、表とグラフで地域差を把握できます。",
   "isActive": true,
 };

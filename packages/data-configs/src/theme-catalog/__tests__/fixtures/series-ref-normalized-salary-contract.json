@@ -1,22 +1,52 @@
 [
   {
     "componentKey": "theme-occ-it-trend",
-    "metricKeys": ["system-consultant-annual-income", "software-engineer-annual-income"],
-    "rawCategoryCodes": ["1101", "1104"]
+    "metricKeys": [
+      "system-consultant-annual-income",
+      "software-engineer-annual-income"
+    ],
+    "rawCategoryCodes": [
+      "1101",
+      "1104"
+    ]
   },
   {
     "componentKey": "theme-occ-edu-trend",
-    "metricKeys": ["school-teacher-annual-income", "university-professor-annual-income"],
-    "rawCategoryCodes": ["1192", "1196"]
+    "metricKeys": [
+      "school-teacher-annual-income",
+      "university-professor-annual-income",
+      "nursery-teacher-annual-income"
+    ],
+    "rawCategoryCodes": [
+      "1192",
+      "1196",
+      "1163"
+    ]
   },
   {
     "componentKey": "theme-occ-transport-trend",
-    "metricKeys": ["truck-driver-annual-income", "taxi-driver-annual-income", "carpenter-annual-income"],
-    "rawCategoryCodes": ["1614", "1612", "1661"]
+    "metricKeys": [
+      "truck-driver-annual-income",
+      "taxi-driver-annual-income",
+      "carpenter-annual-income"
+    ],
+    "rawCategoryCodes": [
+      "1614",
+      "1612",
+      "1661"
+    ]
   },
   {
     "componentKey": "theme-occ-service-trend",
-    "metricKeys": ["cook-annual-income", "barber-beautician-annual-income", "security-guard-annual-income"],
-    "rawCategoryCodes": ["1391", "1381", "1453"]
+    "metricKeys": [
+      "cook-annual-income",
+      "barber-beautician-annual-income",
+      "security-guard-annual-income"
+    ],
+    "rawCategoryCodes": [
+      "1391",
+      "1381",
+      "1453"
+    ]
   }
 ]

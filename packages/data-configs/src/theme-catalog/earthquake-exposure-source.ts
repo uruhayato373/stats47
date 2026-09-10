@@ -1,0 +1,566 @@
+/** Verified original source pins. J-SHIS bodies stay private; only county-band population is distributable. */
+export const EARTHQUAKE_EXPOSURE_SOURCE = {
+  slug: 'earthquake-population-exposure',
+  definitionVersion:
+    'JSHIS-Y2024_AVR_TTL-MTTL_T30-P03-SI_KSJ-m250r6-24_PTN2020-2050_v1',
+  hazardVersion: 'Y2024',
+  hazardCase: 'AVR',
+  earthquakeGroup: 'TTL_MTTL',
+  hazardField: 'T30_P03_SI',
+  populationEdition: 'm250r6-24',
+  populationYears: [2020, 2050],
+  r2Root: 'app/geo/earthquake-population-exposure',
+  canonicalPath: '/themes/earthquake-exposure#earthquake-population',
+  sectionKey: 'earthquake-population',
+  publicBaseUrl: 'https://storage.stats47.jp',
+  algorithm: 'exact-quarter-mesh-join-and-intensity-band-population-v1',
+  hazard: {
+    id: 'jshis-Y2024-all',
+    version: 'Y2024',
+    url: 'https://www.j-shis.bosai.go.jp/map/JSHIS2/data/P/Y2024/MAP/AVR/P-Y2024-MAP-AVR-TTL_MTTL.zip',
+    sha256: 'f58c176135de5f847e86f4b8b5790460087f4964c13e544ee0065eb7ed2ebcb9',
+    bytes: 188942245,
+    pageUrl: 'https://www.j-shis.bosai.go.jp/news-20240719',
+    licenseUrl: 'https://www.j-shis.bosai.go.jp/agreement',
+    bodyVisibility: 'private-original',
+    referenceDate: '2024-01-01',
+    case: 'AVR',
+    eqcode: 'TTL_MTTL',
+    field: 'T30_P03_SI',
+    probability: 0.03,
+    horizonYears: 30,
+  },
+  population: {
+    pageUrl:
+      'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html',
+    methodUrl:
+      'https://nlftp.mlit.go.jp/ksj/gml/datalist/r6_about_future_population.pdf',
+    version: '24',
+    license: 'CC BY 4.0',
+    bodyVisibility: 'public-license-original',
+  },
+  expectedCounts: {
+    hazardRecords: 5989018,
+    populationRecords: 1163495,
+    uniquePopulationGridCells: 1162630,
+    crossPrefectureGridCells: 865,
+    unmatchedRecords: 5,
+  },
+  bands: [
+    {
+      key: 'under-5-lower',
+      label: '震度5弱未満',
+      minimum: 0,
+      maximum: 4.5,
+    },
+    {
+      key: '5-lower',
+      label: '震度5弱',
+      minimum: 4.5,
+      maximum: 5,
+    },
+    {
+      key: '5-upper',
+      label: '震度5強',
+      minimum: 5,
+      maximum: 5.5,
+    },
+    {
+      key: '6-lower',
+      label: '震度6弱',
+      minimum: 5.5,
+      maximum: 6,
+    },
+    {
+      key: '6-upper',
+      label: '震度6強',
+      minimum: 6,
+      maximum: 6.5,
+    },
+    {
+      key: '7',
+      label: '震度7',
+      minimum: 6.5,
+      maximum: null,
+    },
+  ],
+  populationSources: [
+    {
+      id: 'population-01',
+      areaCode: '01000',
+      areaName: '北海道',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_01_SHP.zip',
+      sha256:
+        '9b54d8a4821bb91f642908af1143ac2b626e84bd937af9a3992be5c3d2e946ee',
+      bytes: 39461665,
+    },
+    {
+      id: 'population-02',
+      areaCode: '02000',
+      areaName: '青森県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_02_SHP.zip',
+      sha256:
+        '1ca9f933aa31c014148c792ff36f2a9dc7d05671ab9833e40c772744b50eb6c0',
+      bytes: 13201718,
+    },
+    {
+      id: 'population-03',
+      areaCode: '03000',
+      areaName: '岩手県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_03_SHP.zip',
+      sha256:
+        '6d897540dfe0c341d1bf7db422fd1965be065265429a35a5d3510545f6f61af0',
+      bytes: 20285723,
+    },
+    {
+      id: 'population-04',
+      areaCode: '04000',
+      areaName: '宮城県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_04_SHP.zip',
+      sha256:
+        'c752ad70f643d8fa16bc8bcc2b5f54fef7028d2d3e69ca3ece37501594e7d285',
+      bytes: 19915373,
+    },
+    {
+      id: 'population-05',
+      areaCode: '05000',
+      areaName: '秋田県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_05_SHP.zip',
+      sha256:
+        '24858b16e383ae988c98c08dd68bae8c4648e7352437c2325dce7e7d2f10ba91',
+      bytes: 13148078,
+    },
+    {
+      id: 'population-06',
+      areaCode: '06000',
+      areaName: '山形県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_06_SHP.zip',
+      sha256:
+        '2b7a751cc3901292b65cea7f678d4ca61339a09bbf5c20f817b0bdc5f0ee4eca',
+      bytes: 12383953,
+    },
+    {
+      id: 'population-07',
+      areaCode: '07000',
+      areaName: '福島県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_07_SHP.zip',
+      sha256:
+        'd2c6ea67a7ef1eeb411fae338f32731e6908405fa87f5b942fcef9c393c1090e',
+      bytes: 24186647,
+    },
+    {
+      id: 'population-08',
+      areaCode: '08000',
+      areaName: '茨城県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_08_SHP.zip',
+      sha256:
+        '4bf8103cfa4a2feed99ce69aa69959bc23440abf162fd369b2673830beeae57d',
+      bytes: 33353372,
+    },
+    {
+      id: 'population-09',
+      areaCode: '09000',
+      areaName: '栃木県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_09_SHP.zip',
+      sha256:
+        '7b550ae4818f96154eefc07d8d9244e185583b6e881a6fb277a0941ec8b0a9fd',
+      bytes: 23031993,
+    },
+    {
+      id: 'population-10',
+      areaCode: '10000',
+      areaName: '群馬県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_10_SHP.zip',
+      sha256:
+        '2dd92074db459650654aba37fbe0e6fc75710c1ae4e4b59f3924d0416e1e585b',
+      bytes: 18706592,
+    },
+    {
+      id: 'population-11',
+      areaCode: '11000',
+      areaName: '埼玉県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_11_SHP.zip',
+      sha256:
+        '3952b5c62c9a6534676c09a29cb88e2dbdea48a2d5dfcf2c5f84e66bd497d614',
+      bytes: 29602194,
+    },
+    {
+      id: 'population-12',
+      areaCode: '12000',
+      areaName: '千葉県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_12_SHP.zip',
+      sha256:
+        'd6ab429091435c8d98a2f74d8f3c5bafad06c10c5fcff04497e7e4dc4e4570ed',
+      bytes: 33058979,
+    },
+    {
+      id: 'population-13',
+      areaCode: '13000',
+      areaName: '東京都',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_13_SHP.zip',
+      sha256:
+        'ce5f07f1e1164a1ef7e3803a527f78712a9f63f0a61e31bb87e2ff6185711d3d',
+      bytes: 19638063,
+    },
+    {
+      id: 'population-14',
+      areaCode: '14000',
+      areaName: '神奈川県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_14_SHP.zip',
+      sha256:
+        'a74b68266a6d48c1bb83f08bd8affd2d77125d552af31c3dd62073d0964bb413',
+      bytes: 20804106,
+    },
+    {
+      id: 'population-15',
+      areaCode: '15000',
+      areaName: '新潟県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_15_SHP.zip',
+      sha256:
+        '1ba30f77602ef9de82d0eb969f9a44caf539db89b0bfb8c0c909f67b446ddcb6',
+      bytes: 21796659,
+    },
+    {
+      id: 'population-16',
+      areaCode: '16000',
+      areaName: '富山県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_16_SHP.zip',
+      sha256:
+        '91f07b687d56602472496d235e21decf7289b27ca0a0881807a77fa9d5936daa',
+      bytes: 11434478,
+    },
+    {
+      id: 'population-17',
+      areaCode: '17000',
+      areaName: '石川県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_17_SHP.zip',
+      sha256:
+        'ccf6535a2f764674121fc6548b422cb11eef4ef6a83008060a94b446e1bdd2db',
+      bytes: 9056406,
+    },
+    {
+      id: 'population-18',
+      areaCode: '18000',
+      areaName: '福井県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_18_SHP.zip',
+      sha256:
+        '7d82301fe42963b5494dc259aa05e057a0f3814bda23448f5f204c686b6678a5',
+      bytes: 7870472,
+    },
+    {
+      id: 'population-19',
+      areaCode: '19000',
+      areaName: '山梨県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_19_SHP.zip',
+      sha256:
+        'af07498c3f9febddae04e835436c33f2eba95fe9eb2d32bf908d6f79d18268bd',
+      bytes: 8476343,
+    },
+    {
+      id: 'population-20',
+      areaCode: '20000',
+      areaName: '長野県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_20_SHP.zip',
+      sha256:
+        'faaab380a807e27321396f9b38b9389d389d1772088b68c8013cca94213ea576',
+      bytes: 24248206,
+    },
+    {
+      id: 'population-21',
+      areaCode: '21000',
+      areaName: '岐阜県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_21_SHP.zip',
+      sha256:
+        'e1bd81ecbd59a2c238624bdd01730adbfcfed17f377eaafc2b294719534beab1',
+      bytes: 19561392,
+    },
+    {
+      id: 'population-22',
+      areaCode: '22000',
+      areaName: '静岡県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_22_SHP.zip',
+      sha256:
+        'e8d67e2e8bfd7f8c82b13f9d0af4a412794a6f74c085a03fdedd2e373910c9c5',
+      bytes: 25130569,
+    },
+    {
+      id: 'population-23',
+      areaCode: '23000',
+      areaName: '愛知県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_23_SHP.zip',
+      sha256:
+        'cea13fb8d05398ee3c145ad92ab910432124cbc87c919e328d3d0832fb8c9d3c',
+      bytes: 32830460,
+    },
+    {
+      id: 'population-24',
+      areaCode: '24000',
+      areaName: '三重県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_24_SHP.zip',
+      sha256:
+        'cc31560a4f145aaf1095ea70c0c0cd8f0962b6fedb45d57b8f2f7361723758c1',
+      bytes: 15721960,
+    },
+    {
+      id: 'population-25',
+      areaCode: '25000',
+      areaName: '滋賀県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_25_SHP.zip',
+      sha256:
+        '8e008c12351cf03303fc2c851ad0e5056cce0501e0a7705860e24d16f5609315',
+      bytes: 10194307,
+    },
+    {
+      id: 'population-26',
+      areaCode: '26000',
+      areaName: '京都府',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_26_SHP.zip',
+      sha256:
+        '12060fa6517042c5de07813f9752f6421b7fdc6933f9642859f6d31ec79fe6bc',
+      bytes: 10985353,
+    },
+    {
+      id: 'population-27',
+      areaCode: '27000',
+      areaName: '大阪府',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_27_SHP.zip',
+      sha256:
+        '1b4848f83c4cd55bd6043d4c9cd234f063a1d77d3589fc8072b0612bde81bb68',
+      bytes: 17229764,
+    },
+    {
+      id: 'population-28',
+      areaCode: '28000',
+      areaName: '兵庫県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_28_SHP.zip',
+      sha256:
+        '9c5fdc20bc7fa9a5c7c1b0742f3ac2db303a6e8a53d247a5848808aa440dc794',
+      bytes: 26992139,
+    },
+    {
+      id: 'population-29',
+      areaCode: '29000',
+      areaName: '奈良県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_29_SHP.zip',
+      sha256:
+        '23b4413347cb8758e8502e1f19de651e51a408c8834b212edacc678d275d498d',
+      bytes: 8080326,
+    },
+    {
+      id: 'population-30',
+      areaCode: '30000',
+      areaName: '和歌山県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_30_SHP.zip',
+      sha256:
+        '054fa17db739bc5429f30915707f7116be6e788ff09630fb47104b9f893d741b',
+      bytes: 8680323,
+    },
+    {
+      id: 'population-31',
+      areaCode: '31000',
+      areaName: '鳥取県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_31_SHP.zip',
+      sha256:
+        'da080013f0dc68cff03d3dfee0278ece74f09e76525ea47fb7f5dfc8152695f5',
+      bytes: 6032967,
+    },
+    {
+      id: 'population-32',
+      areaCode: '32000',
+      areaName: '島根県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_32_SHP.zip',
+      sha256:
+        'aa3bda245a1a2fe27090f291acef3d8c6dade5fd94b6de34e5b2e46531df2f13',
+      bytes: 10873784,
+    },
+    {
+      id: 'population-33',
+      areaCode: '33000',
+      areaName: '岡山県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_33_SHP.zip',
+      sha256:
+        'fe7e0954eb9ddd3e20031aebab7bae1ab2b2ca144183c6b56dd32ec4432a4c1a',
+      bytes: 19179028,
+    },
+    {
+      id: 'population-34',
+      areaCode: '34000',
+      areaName: '広島県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_34_SHP.zip',
+      sha256:
+        '3f0c1b623f1f97a323e507ed92329657c71ae9d12c03a6cfe78ac05afe6dfdde',
+      bytes: 20129429,
+    },
+    {
+      id: 'population-35',
+      areaCode: '35000',
+      areaName: '山口県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_35_SHP.zip',
+      sha256:
+        '49f072ea4733b76b16e90ebda3da5bc5d6f844548e95e9eedb68b839959c51e6',
+      bytes: 13270760,
+    },
+    {
+      id: 'population-36',
+      areaCode: '36000',
+      areaName: '徳島県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_36_SHP.zip',
+      sha256:
+        '72133a2f368fd236ff19cefa1710fd13df6095dceddcc0bd857112e7f5b8c2ac',
+      bytes: 8151120,
+    },
+    {
+      id: 'population-37',
+      areaCode: '37000',
+      areaName: '香川県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_37_SHP.zip',
+      sha256:
+        'c91331bf500b8041c1addb5ab16d30e3e8f8dc3daeb95655449c1b4ebcadd428',
+      bytes: 9800058,
+    },
+    {
+      id: 'population-38',
+      areaCode: '38000',
+      areaName: '愛媛県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_38_SHP.zip',
+      sha256:
+        'b811da7523fc7fef5ca8fbd00991fac33f56b3e018cd59ac3932f22aa13a40f8',
+      bytes: 11637179,
+    },
+    {
+      id: 'population-39',
+      areaCode: '39000',
+      areaName: '高知県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_39_SHP.zip',
+      sha256:
+        '1e6c9e5ad406be34d50d4c49de3573d29094554229dbd43bc7dfa2d69578dba0',
+      bytes: 7854939,
+    },
+    {
+      id: 'population-40',
+      areaCode: '40000',
+      areaName: '福岡県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_40_SHP.zip',
+      sha256:
+        '1e1e977e8a9f3ee68f056c6adaaa30a6540437940577f43b696bb64e74c2d57c',
+      bytes: 26326160,
+    },
+    {
+      id: 'population-41',
+      areaCode: '41000',
+      areaName: '佐賀県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_41_SHP.zip',
+      sha256:
+        '5aa179db546d03b14981625061c19f73fc93955b3c6bb4185f73f7e7ee2a9f1c',
+      bytes: 9447566,
+    },
+    {
+      id: 'population-42',
+      areaCode: '42000',
+      areaName: '長崎県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_42_SHP.zip',
+      sha256:
+        '0ec683e3f76af2c79338e97cb7a2b93f643bd32b9d4a319bf117e2fab30c8636',
+      bytes: 13294019,
+    },
+    {
+      id: 'population-43',
+      areaCode: '43000',
+      areaName: '熊本県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_43_SHP.zip',
+      sha256:
+        '323bc078b08668df294923b0970b597779b1f6b75d4b69b098696b026281b8e6',
+      bytes: 17779463,
+    },
+    {
+      id: 'population-44',
+      areaCode: '44000',
+      areaName: '大分県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_44_SHP.zip',
+      sha256:
+        'a7fb298834cf5e6b40faa1a8e5bf8244d15e96c2e155420df416313b37a65397',
+      bytes: 12283578,
+    },
+    {
+      id: 'population-45',
+      areaCode: '45000',
+      areaName: '宮崎県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_45_SHP.zip',
+      sha256:
+        '328c42a2c6614263ad1446f72234436a383e317af397b318bf831240f33cc7a1',
+      bytes: 12016853,
+    },
+    {
+      id: 'population-46',
+      areaCode: '46000',
+      areaName: '鹿児島県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_46_SHP.zip',
+      sha256:
+        '129c521691f18efbed5da557f45213ca242d3ca2c610d060e954c4284d7a495b',
+      bytes: 19112070,
+    },
+    {
+      id: 'population-47',
+      areaCode: '47000',
+      areaName: '沖縄県',
+      version: '24',
+      url: 'https://nlftp.mlit.go.jp/ksj/gml/data/m250r6/m250r6-24/250m_mesh_2024_47_SHP.zip',
+      sha256:
+        '1defa5f22289368d53488c6d236a6b01f0bf6447ed5b100ac30e36d9e81c866c',
+      bytes: 6954183,
+    },
+  ],
+  notes: [
+    '各地点で30年間に3%の確率で超える地震動の水準に、地域人口を当てはめた分布です。単一の地震による被害人数ではありません。',
+    '2020年人口と2050年推計人口を、共通の2024年基準の地震動に重ねています。2050年の地震を予測した値ではありません。',
+    '人口は国土数値情報の250mメッシュ総人口。県境では原表の自治体別人口を保ち、同じ格子番号だけでは重複排除しません。',
+    '地震動の原典と対応しない人口は「地震動データなし」に含めます。安全と判定した人口ではありません。',
+    '住宅棟数や建築時期の空間分布は、この人口集計に含まれません。',
+  ],
+} as const;

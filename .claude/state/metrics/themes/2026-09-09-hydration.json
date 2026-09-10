@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-08T22:14:10.824Z",
+  "status": "FAIL_UNRESOLVED",
+  "scenario": "real-income then close page and open roads in same browser context; pref=28000",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "locale": "ja-JP",
+  "reducedMotion": "reduce",
+  "pageErrors": [
+    {
+      "message": "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "stack": "Error: Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at rD (http://127.0.0.1:3000/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js:22:11)\n    at oq (http://127.0.0.1:3000/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js:22:49515)\n    at iw (http://127.0.0.1:3000/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js:22:79910)\n    at http://127.0.0.1:3000/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js:22:75271\n    at iu (http://127.0.0.1:3000/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js:22:75780)\n    at iX (http://127.0.0.1:3000/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js:22:97883)\n    at MessagePort.w (http://127.0.0.1:3000/_next/static/chunks/18-8ea786c4ae7e01aa.js:1:44722)"
+    }
+  ],
+  "diagnostics": [
+    {
+      "url": "http://127.0.0.1:3000/themes/roads?pref=28000",
+      "width": 390,
+      "chain": [
+        {
+          "tag": 5,
+          "type": "div",
+          "key": null,
+          "pending": {
+            "className": "text-foreground",
+            "childTypes": [
+              "script",
+              "script",
+              "nav",
+              "[object Object]",
+              "div",
+              null,
+              "undefined",
+              "undefined",
+              null,
+              null,
+              "undefined",
+              "undefined",
+              "undefined",
+              "undefined",
+              "undefined"
+            ]
+          },
+          "memoized": null
+        },
+        {
+          "tag": 5,
+          "type": "div",
+          "key": null,
+          "pending": {
+            "className": "min-w-0",
+            "childType": "div"
+          },
+          "memoized": {
+            "className": "min-w-0",
+            "childType": "div"
+          }
+        },
+        {
+          "tag": 5,
+          "type": "div",
+          "key": null,
+          "pending": {
+            "className": "min-[992px]:grid min-[992px]:grid-cols-[264px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10",
+            "childTypes": [
+              "aside",
+              "div"
+            ]
+          },
+          "memoized": {
+            "className": "min-[992px]:grid min-[992px]:grid-cols-[264px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10",
+            "childTypes": [
+              "aside",
+              "div"
+            ]
+          }
+        },
+        {
+          "tag": 5,
+          "type": "div",
+          "key": null,
+          "pending": {
+            "className": "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10 py-8",
+            "childTypes": [
+              "div",
+              "undefined"
+            ]
+          },
+          "memoized": {
+            "className": "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10 py-8",
+            "childTypes": [
+              "div",
+              "undefined"
+            ]
+          }
+        },
+        {
+          "tag": 10,
+          "type": "[object Object]",
+          "key": null,
+          "pending": {
+            "childType": "div"
+          },
+          "memoized": {
+            "childType": "div"
+          }
+        },
+        {
+          "tag": 0,
+          "type": "c",
+          "key": null,
+          "pending": {
+            "childType": "div"
+          },
+          "memoized": {
+            "childType": "div"
+          }
+        },
+        {
+          "tag": 7,
+          "type": "null",
+          "key": "c",
+          "pending": {},
+          "memoized": {}
+        },
+        {
+          "tag": 10,
+          "type": "[object Object]",
+          "key": null,
+          "pending": {
+            "childType": "undefined"
+          },
+          "memoized": {
+            "childType": "undefined"
+          }
+        },
+        {
+          "tag": 0,
+          "type": "T",
+          "key": null,
+          "pending": {},
+          "memoized": {}
+        },
+        {
+          "tag": 1,
+          "type": "s",
+          "key": null,
+          "pending": {
+            "childTypes": [
+              "T",
+              "object"
+            ]
+          },
+          "memoized": {
+            "childTypes": [
+              "T",
+              "object"
+            ]
+          }
+        },
+        {
+          "tag": 0,
+          "type": "f",
+          "key": null,
+          "pending": {
+            "childTypes": [
+              "T",
+              "object"
+            ]
+          },
+          "memoized": {
+            "childTypes": [
+              "T",
+              "object"
+            ]
+          }
+        },
+        {
+          "tag": 0,
+          "type": "s",
+          "key": null,
+          "pending": {
+            "childType": "f"
+          },
+          "memoized": {
+            "childType": "f"
+          }
+        },
+        {
+          "tag": 0,
+          "type": "S",
+          "key": null,
+          "pending": {
+            "childType": "s"
+          },
+          "memoized": {
+            "childType": "s"
+          }
+        },
+        {
+          "tag": 0,
+          "type": "f",
+          "key": null,
+          "pending": {
+            "childType": "S"
+          },
+          "memoized": {
+            "childType": "S"
+          }
+        },
+        {
+          "tag": 1,
+          "type": "P",
+          "key": null,
+          "pending": {
+            "childTypes": [
+              "f",
+              "object"
+            ]
+          },
+          "memoized": {
+            "childTypes": [
+              "f",
+              "object"
+            ]
+          }
+        },
+        {
+          "tag": 0,
+          "type": "j",
+          "key": null,
+          "pending": {
+            "childTypes": [
+              "f",
+              "object"
+            ]
+          },
+          "memoized": {
+            "childTypes": [
+              "f",
+              "object"
+            ]
+          }
+        },
+        {
+          "tag": 0,
+          "type": "a",
+          "key": null,
+          "pending": {},
+          "memoized": {}
+        },
+        {
+          "tag": 10,
+          "type": "[object Object]",
+          "key": "__PAGE__",
+          "pending": {
+            "childTypes": [
+              "undefined",
+              "undefined",
+              "[object Object]"
+            ]
+          },
+          "memoized": {
+            "childTypes": [
+              "undefined",
+              "undefined",
+              "[object Object]"
+            ]
+          }
+        }
+      ],
+      "cursor": {
+        "nodeType": 1,
+        "nodeName": "SCRIPT",
+        "html": "<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"ホーム\",\"item\":\"http://localhost:3000\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"テーマ一覧\",\"item\":\"http://localhost:3000/themes\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"道路\"}]}</script>"
+      },
+      "cursorParent": {
+        "nodeType": 1,
+        "nodeName": "DIV",
+        "html": "<div class=\"text-foreground\"><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"ホーム\",\"item\":\"http://localhost:3000\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"テーマ一覧\",\"item\":\"http://localhost:3000/themes\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"道路\"}]}</script><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"CollectionPage\",\"name\":\"道路\",\"description\":\"道路ストックの延長と密度、利用交通量、整備状況を分けて比較する。\",\"url\":\"http://localhost:3000/themes/roads\",\"keywords\":\"道路, 高速道路, 国道, 県道, 舗装率, 交通量, 道の駅, インフラ\",\"creator\":{\"@type\":\"Organization\",\"name\":\"統計で見る都道府県\",\"url\":\"http://localhost:3000\"},\"about\":{\"@type\":\"Thing\",\"name\":\"道路\",\"description\":\"道路ストックの延長と密度、利用交通量、整備状況を分けて比較する。\"}}</script><nav aria-label=\"breadcrumb\" class=\"mb-4\"><ol class=\"flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5\"><li class=\"inline-flex items-center gap-1.5\"><a class=\"transition-colors hover:text-foreground\" href=\"/\">ホーム</a></li><li role=\"presentation\" aria-hidden=\"true\" class=\"[&amp;&gt;svg]:h-3.5 [&amp;&gt;svg]:w-3.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-chevron-right\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"></path></svg></li><li class=\"inline-flex items-center gap-1.5\"><span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground\">道路</span></li></ol></nav><header class=\"mb-6\"><div class=\"mt-1 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between\"><div class=\"min-w-0\"><h1 class=\"text-2xl font-bold leading-tight text-foreground\">兵庫県の道路</h1></div></div></header><div class=\"min-[992px]:hidden\"><nav aria-label=\"統計の地域単位\" class=\"mb-5 border-b border-border\"><div class=\"flex gap-6 overflow-x-auto\"><a aria-current=\"page\" class=\"text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 shrink-0 border-b-2 px-1 py-3 font-medium border-primary text-primary\" href=\"/themes\">47都道府県</a><a class=\"text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 shrink-0 border-b-2 px-1 py-3 font-medium border-transparent text-muted-foreground hover:text-foreground\" href=\"/municipalities\">市区町村</a><a class=\"text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 shrink-0 border-b-2 px-1 py-3 font-medium border-transparent text-muted-foreground hover:text-foreground\" href=\"/japan\">日本</a><span class=\"text-sm text-muted-foreground/60 shrink-0 border-b-2 border-transparent px-1 py-3\">世界（準備中）</span></div></nav></div><div role=\"group\" aria-label=\"テーマと地域\" class=\"mb-3 grid grid-cols-1 gap-3 border-y border-border py-3 sm:grid-cols-2 min-[992px]:hidden\"><div class=\"min-w-0\"><div class=\"min-w-0\"><div class=\"flex min-h-6 items-cente"
+      },
+      "parentFiber": {
+        "tag": 5,
+        "type": "div",
+        "props": {
+          "className": "text-foreground",
+          "childTypes": [
+            "script",
+            "script",
+            "nav",
+            "[object Object]",
+            "div",
+            null,
+            "undefined",
+            "undefined",
+            null,
+            null,
+            "undefined",
+            "undefined",
+            "undefined",
+            "undefined",
+            "undefined"
+          ]
+        }
+      }
+    }
+  ],
+  "diagnosticScope": "Response-only React instrumentation, original mismatch exception retained. Source below matches only the inspected build; inspect the next build before reusing.",
+  "diagnosticSource": "// Diagnostic response override only. Does not modify the built app or suppress errors.\nexport default async function instrumentThemeHydration(context) {\n  await context.route('**/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js', async (route) => {\n    const response = await route.fetch();\n    const source = await response.text();\n    const needle = 'function rD(e){';\n    if (!source.includes(needle)) throw new Error('Hydration diagnostic hook no longer matches the inspected React build');\n    const diagnostic = `function rD(e){\n      try {\n        var __themeType = function(t) { return typeof t === 'string' ? t : typeof t === 'function' ? (t.displayName || t.name || 'function') : String(t); };\n        var __themeProps = function(p) {\n          if (!p || typeof p !== 'object') return p;\n          var o = {};\n          ['id','className','role','value','aria-label','data-state'].forEach(function(k) { if (p[k] === null || ['string','number','boolean'].includes(typeof p[k])) o[k] = p[k]; });\n          if (['string','number'].includes(typeof p.children)) o.children = String(p.children).slice(0, 300);\n          else if (Array.isArray(p.children)) o.childTypes = p.children.map(function(c) { return c && typeof c === 'object' ? __themeType(c.type) : typeof c; }).slice(0, 15);\n          else if (p.children && typeof p.children === 'object') o.childType = __themeType(p.children.type);\n          return o;\n        };\n        var __themeNode = function(n) { return n ? { nodeType:n.nodeType, nodeName:n.nodeName, html:(n.outerHTML || n.textContent || '').slice(0, 3000) } : null; };\n        var __themeChain = [], __themeCur = e;\n        for (var __themeDepth = 0; __themeCur && __themeDepth < 18; __themeDepth++, __themeCur = __themeCur.return) {\n          __themeChain.push({ tag:__themeCur.tag, type:__themeType(__themeCur.type), key:__themeCur.key, pending:__themeProps(__themeCur.pendingProps), memoized:__themeProps(__themeCur.memoizedProps) });\n        }\n        var __themeReport = { url:location.href, width:innerWidth, chain:__themeChain, cursor:__themeNode(rN), cursorParent:__themeNode(rN && rN.parentNode), parentFiber:rP && {tag:rP.tag,type:__themeType(rP.type),props:__themeProps(rP.pendingProps)} };\n        (window.__themeHydrationDiagnostics || (window.__themeHydrationDiagnostics=[])).push(__themeReport);\n        console.error('THEME_HYDRATION_DIAGNOSTIC', JSON.stringify(__themeReport));\n      } catch (__themeDiagnosticError) { console.error('THEME_HYDRATION_DIAGNOSTIC_FAILED', String(__themeDiagnosticError)); }\n    `;\n    await route.fulfill({ status: response.status(), contentType: 'application/javascript', body: source.replace(needle, diagnostic) });\n  });\n}\n",
+  "previewGatewaySource": "import http from 'node:http';\nimport fs from 'node:fs';\nimport path from 'node:path';\nimport {fileURLToPath} from 'node:url';\nconst dir=path.dirname(fileURLToPath(import.meta.url));\nconst root=process.cwd();\nconst manifest=JSON.parse(fs.readFileSync(path.join(dir,'release-manifest.json'),'utf8'));\nconst allowed=new Set(manifest.files.map(f=>f.key));\nconst server=http.createServer(async(req,res)=>{\n try{\n  const key=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname).slice(1);\n  if(req.method!=='GET'||key.includes('..')||!key.startsWith('app/')){res.writeHead(404).end();return;}\n  res.setHeader('Access-Control-Allow-Origin','*');\n  if(allowed.has(key)){\n   const local=path.join(root,'.local/r2',key);\n   res.writeHead(200,{'Content-Type':'application/json','X-Theme-Preview-Source':'staged'});\n   res.end(fs.readFileSync(local));return;\n  }\n  const upstream=await fetch('https://storage.stats47.jp/'+key,{signal:AbortSignal.timeout(20000)});\n  res.writeHead(upstream.status,{'Content-Type':upstream.headers.get('content-type')??'application/json','X-Theme-Preview-Source':'public'});\n  res.end(Buffer.from(await upstream.arrayBuffer()));\n }catch(e){res.writeHead(502).end(JSON.stringify({error:'preview data unavailable'}));}\n});\nserver.listen(4778,'127.0.0.1',()=>console.log('Theme preview gateway on 127.0.0.1:4778; staged files '+allowed.size));\n",
+  "reproduceCommand": "node .claude/scripts/themes/probe-theme-hydration.mjs --mobile --scenarios after-real-income",
+  "observedMismatch": "expected div.text-foreground; actual cursor was first BreadcrumbList JSON-LD script within that same div",
+  "hypothesis": "Hydration retry after async embedded server section may resume with cursor already inside the body wrapper. Not established.",
+  "nextInvestigation": "Inspect embedded slot Suspense boundaries and add a delayed-stream regression before implementing a fix.",
+  "suspensePatchStarted": false
+}

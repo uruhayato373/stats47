@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const theftOffensesRecognizedPer1000: MetricConfig = {
   "key": "theft-offenses-recognized-per-1000",
   "title": "窃盗犯認知件数",
-  "subtitle": "人口1000人当たり",
+  "subtitle": "人口千人当たり",
   "unit": "件",
   "category": "safetyenvironment",
+  "description": "犯罪統計の窃盗犯認知件数を総人口で除し、人口千人当たりに換算した値。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -66,25 +67,9 @@ export const theftOffensesRecognizedPer1000: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "件/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "件/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "theft-offenses-recognized",
-  "seoTitle": "窃盗犯認知件数ランキング都道府県【2023年】｜1位大阪府（6.65件）",
-  "seoDescription": "2023年の窃盗犯認知件数の都道府県別ランキング。1位大阪府（6.65件）、最下位長崎県（1.68件）で4.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "窃盗犯認知件数（人口千人当たり）ランキング都道府県",
+  "seoDescription": "人口千人当たりの窃盗犯認知件数を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };

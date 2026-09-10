@@ -4,6 +4,7 @@ export const elementarySchoolStudentsPerTeacher: MetricConfig = {
   "key": "elementary-school-students-per-teacher",
   "title": "小学校児童数",
   "subtitle": "教員1人当たり",
+  "description": "小学校児童数を小学校教員数で除した、教員1人当たりの児童数です。1学級の人数や教員の配置不足を直接示す指標ではありません。",
   "unit": "人",
   "category": "educationsports",
   "source": {
@@ -75,26 +76,10 @@ export const elementarySchoolStudentsPerTeacher: MetricConfig = {
     "decimalPlaces": 2,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "groupKey": "elementary-school-children-count",
-  "seoTitle": "小学校児童数ランキング都道府県【2024年】｜1位東京都（16.79人）",
-  "seoDescription": "2024年の小学校児童数の都道府県別ランキング。1位東京都（16.79人）、最下位和歌山県（10.34人）で1.6倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "教員1人当たり小学校児童数｜都道府県比較",
+  "seoDescription": "教員1人当たり小学校児童数を都道府県別に比較。指標の対象地域・分母・単位・年次を確認し、表とグラフで地域差を把握できます。",
   "isActive": true,
 };

@@ -1,3 +1,5 @@
+import type { GeoSnowPrefDetail } from './snow-designation';
+import type { GeoLandslidePrefDetail } from './landslide-exposure';
 export type GeoAnalysisValueFormat =
   | "integer"
   | "decimal1"
@@ -207,7 +209,10 @@ export interface GeoFloodPrefDetail {
 export type GeoAnalysisPrefDetail =
   | GeoLandPricePrefDetail
   | GeoFloodPrefDetail
-  | GeoStationAccessPrefDetail;
+  | GeoStationAccessPrefDetail
+  | GeoPublicFacilityPrefDetail
+  | GeoSnowPrefDetail
+  | GeoLandslidePrefDetail;
 
 export function geoAnalysisManifestKey(slug: string): string {
   return `app/geo/${slug}/manifest.json`;
@@ -268,4 +273,30 @@ export const GEO_STATION_ACCESS_MANIFEST_KEY =
 
 export function geoStationAccessPrefKey(prefCode2: string): string {
   return geoAnalysisPrefKey("population-station-access", prefCode2);
+}
+
+/** [index, sourceId, municipalityCode, typeCode, name, longitude, latitude] */
+export type GeoPublicFacilityPoint = readonly [number, string, string, string, string, number, number];
+/** [meshId, lon, lat, population2020, population2050, adminIndex, adminMeters, adminBand, meetingIndex, meetingMeters, meetingBand] */
+export type GeoPublicFacilityMesh = readonly [string, number, number, number, number, number, number, number, number, number, number];
+export interface GeoPublicFacilityBandSummary {
+  band: string; meshCount: number; population2020: number; population2050: number; crossPrefNearest: number;
+}
+export interface GeoPublicFacilityPrefDetail {
+  readonly schemaVersion: 1;
+  readonly slug: 'population-public-facility-access';
+  readonly generatedAt: string;
+  readonly areaCode: string;
+  readonly areaName: string;
+  readonly bands: readonly { readonly id: string; readonly maxMeters: number | null }[];
+  readonly meshes: readonly GeoPublicFacilityMesh[];
+  readonly facilities: readonly GeoPublicFacilityPoint[];
+  readonly summary: Readonly<Record<'administrative' | 'meeting', readonly GeoPublicFacilityBandSummary[]>>;
+}
+export interface GeoPublicFacilitySourceSnapshot {
+  readonly schemaVersion: 1;
+  readonly slug: 'population-public-facility-access';
+  readonly generatedAt: string;
+  readonly areaCode: string;
+  readonly facilities: readonly GeoPublicFacilityPoint[];
 }

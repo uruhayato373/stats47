@@ -17,6 +17,48 @@ export function requiredSurveyReaderQuestionCount(
 }
 
 const SURVEY_EDITORIAL_CONTENT = {
+  'patent-administration-annual-report': {
+    summary:
+      '特許行政年次報告書は、特許庁の行政記録から出願・登録などの動向を集計した資料です。都道府県別の特許・意匠・商標を、件数と発明者数の違いに注意して比較できます。',
+    whatYouCanLearn: ['特許出願件数の地域差', '特許の登録件数と発明者数の違い', '意匠・商標の出願と登録の分布'],
+    readerQuestions: [
+      { question: '特許出願件数が多い都道府県は？', rankingKey: 'patent-application-count' },
+      { question: '特許登録件数が多い都道府県は？', rankingKey: 'patent-registration-count' },
+      { question: '特許出願の発明者数が多い都道府県は？', rankingKey: 'patent-inventor-count' },
+    ],
+    caveats: ['出願・登録は原表の住所帰属に基づきます。研究拠点や製造拠点の所在地を示すものではありません。', '同じ年の出願件数と登録件数は同じ案件の集団ではありません。割り算して登録成功率とすることはできません。'],
+  },
+  'telecommunications-contract-share-quarterly': {
+    summary:
+      '電気通信サービスの契約数及びシェアに関する四半期データは、総務省が公表する通信契約の集計資料です。このページでは、社会・人口統計体系に収録された都道府県別のブロードバンド契約数を比較できます。',
+    whatYouCanLearn: ['ブロードバンド契約数の都道府県差', '携帯電話アクセスの包含範囲が異なる系列の区別', '契約数の収録年と対象サービスの確認'],
+    readerQuestions: [
+      { question: 'ブロードバンドサービスの契約数が多い都道府県は？', rankingKey: 'broadband-service-contract-count' },
+      { question: '3.9〜4世代携帯電話アクセスを除く契約数は県によってどう違う？', rankingKey: 'broadband-contract-count-excluding-39-4g' },
+    ],
+    caveats: ['契約数は利用者数や世帯数と一致せず、通信可能な面積の割合でもありません。', '二つの系列は対象サービスと収録年が異なります。定義を揃えずに増減率を計算しないでください。'],
+  },
+  'buried-cultural-property-statistics': {
+    summary:
+      '埋蔵文化財関係統計資料は、文化庁が埋蔵文化財保護の行政体制などをまとめた資料です。都道府県別の専門職員数から、保護を担う人的体制の規模を確認できます。',
+    whatYouCanLearn: ['埋蔵文化財専門職員の県別人数', '原表の合計列が含む職員の範囲', '文化財の指定件数とは異なる人的体制の地域差'],
+    readerQuestions: [{ question: '埋蔵文化財専門職員が多い都道府県は？', rankingKey: 'buried-cultural-property-specialist-count' }],
+    caveats: ['人数は原表の合計列であり、県庁に在籍する職員だけの人数とは区別します。', '調査時点の体制を表す値です。遺跡数、発掘の成果や保護の十分さを人数だけで判断できません。'],
+  },
+  'local-cultural-administration-survey': {
+    summary:
+      '地方における文化行政及び文化関係経費の状況は、文化庁が地方公共団体の体制と経費を集計した資料です。このページでは、都道府県の文化財保護経費を会計年度ごとに比較できます。',
+    whatYouCanLearn: ['都道府県が支出する文化財保護経費の規模', '県の支出と市町村の支出の対象区分', '保護経費の対象年度と文化財件数との定義の違い'],
+    readerQuestions: [{ question: '都道府県の文化財保護経費が多いのはどこ？', rankingKey: 'prefectural-cultural-property-protection-expenditure' }],
+    caveats: ['都道府県分の経費であり、同じ県内の市町村や民間の支出を合算した額ではありません。', '経費の多寡は対象事業や年度によって変わります。文化財の数や保存状態の良さを直接示す値ではありません。'],
+  },
+  'travel-tourism-consumption-survey': {
+    summary:
+      '旅行・観光消費動向調査は、観光庁が日本人の旅行と支出を調べる標本調査です。訪問先の都道府県別に集計された旅行消費額から、地域ごとの旅行需要の規模を確認できます。',
+    whatYouCanLearn: ['訪問都道府県別の日本人旅行消費額', '訪日外国人旅行消費額との対象の違い', '都道府県集計と全国総額で異なる費目の範囲'],
+    readerQuestions: [{ question: '日本人の旅行消費額が多い訪問先の都道府県は？', rankingKey: 'domestic-travel-consumption-by-destination' }],
+    caveats: ['訪問地別の表では県間交通費などが除かれるため、県別値の合計は全国の旅行消費総額と一致しません。', '原典の推計値を用いており、県内総生産や観光事業者の利益を表すものではありません。'],
+  },
   census: {
     summary:
       '国勢調査は、日本に住むすべての人と世帯を対象に5年ごとに行われる基幹統計です。人口だけでなく、年齢、配偶関係、世帯構成、就業状態などから地域の姿を比較できます。',
@@ -2135,7 +2177,10 @@ const SURVEY_EDITORIAL_CONTENT = {
       '道路、河川、下水道など公共工事の種類別規模',
       '住宅・宿舎、港湾・空港、災害復旧工事の地域差',
     ],
-    readerQuestions: [],
+    readerQuestions: [
+      { question: '公共工事の請負契約額が多い施工先の都道府県は？', rankingKey: 'public-construction-contract-amount' },
+      { question: '公共工事の請負契約件数が多い施工先の都道府県は？', rankingKey: 'public-construction-contract-count' },
+    ],
     caveats: [
       '公共機関から受注した1件500万円以上の国内建設工事を扱う表を基にしており、小規模工事や民間発注工事を含む建設市場全体ではありません。',
       '請負契約額は受注時点の契約額で、完成工事高、工事出来高、建設投資額、事業者の売上・利益とは異なります。',
@@ -2434,9 +2479,9 @@ const SURVEY_EDITORIAL_CONTENT = {
   },
   'livestock-statistics': {
     summary:
-      '畜産統計調査は、農林水産省が家畜の飼養戸数・頭羽数などを畜種別に把握する統計です。このハブでは、調査期日現在の乳用牛の飼養頭数を都道府県別に比較できます。',
+      '畜産統計調査は、農林水産省が家畜の飼養戸数・頭羽数などを畜種別に把握する統計です。このハブでは、乳用牛・肉用牛・豚・採卵鶏の飼養規模と乳用牛の飼養戸数を都道府県別に比較できます。',
     whatYouCanLearn: [
-      '乳用牛の飼養頭数の都道府県差',
+      '乳用牛・肉用牛・豚・採卵鶏それぞれの飼養規模の都道府県差',
       '酪農生産基盤が特定地域へ集中する度合い',
       '同じ畜種・調査期日で見た飼養規模の違い',
     ],
@@ -2445,9 +2490,11 @@ const SURVEY_EDITORIAL_CONTENT = {
         question: '乳用牛の飼養頭数が多い都道府県は？',
         rankingKey: 'dairy-cattle-count',
       },
+      { question: '肉用牛の飼養頭数が多い都道府県は？', rankingKey: 'beef-cattle-count' },
+      { question: '豚の飼養頭数が多い都道府県は？', rankingKey: 'pig-count' },
     ],
     caveats: [
-      '掲載値は乳用牛のうち雌の飼養頭数で、肉用牛、豚、採卵鶏、ブロイラーを含む家畜全体の規模ではありません。',
+      '乳用牛は雌の飼養頭数、採卵鶏は成鶏めすの羽数など、畜種ごとの対象を保持しています。異なる畜種の頭羽数を合算して生産規模とすることはできません。',
       '飼養頭数は調査期日現在の時点値です。年間の生乳生産量、出荷頭数、農家所得とは一致しません。',
       '畜種によって調査・集計の方法や対象が異なります。旧表には北海道を含まない都府県表もあるため、掲載中の47都道府県系列と別表を混在させないでください。',
     ],

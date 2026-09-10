@@ -3998,6 +3998,65 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-07T21:04:09.867Z"
+    },
+    "THEME-EXPANSION-128-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "テーマ候補の採否・範囲を決め、初回対象の指標を検証する",
+      "attempts": [
+        {
+          "at": "2026-09-09T11:45:14.423Z",
+          "runId": null,
+          "model": "gpt-6-astra",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run theme:expansion:test",
+              "npm run theme:expansion:check"
+            ],
+            "pass": true
+          },
+          "evidence": "User-authorized interactive decision task, imported from 43cde14ac. All 128 decisions: 34 new / 67 existing sections / 19 merged / 8 held with resumption conditions. Verified 82 explicit SSDS series via official API, 17 hashed responses; recycling alias matches 47 prefectures for",
+          "failReason": null,
+          "followUps": [
+            "THEME-EXPANSION-IMPLEMENT-01"
+          ]
+        },
+        {
+          "at": "2026-09-09T11:47:43.363Z",
+          "runId": null,
+          "model": "gpt-6-astra",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run theme:expansion:test",
+              "npm run theme:expansion:check",
+              "npm run docs:fix",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "128判断・初回3件の仕様完了。SSDS82系列・17応答hash。証拠: .claude/state/estat/theme-expansion-verification.json / .claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json。全件実装と公開は後続カード。",
+          "failReason": null,
+          "followUps": [
+            "THEME-EXPANSION-IMPLEMENT-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-09T11:47:43.363Z"
     }
   }
 }

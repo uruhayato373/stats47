@@ -8,6 +8,8 @@ import { ChevronDown, FileText, ListTree } from 'lucide-react';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 
+import { trackNavClick } from '@/lib/analytics/events';
+
 import { THEME_NAV_GROUPS } from '../config/theme-navigation';
 import { PREFECTURE_SET_LABEL } from '../types';
 
@@ -34,6 +36,7 @@ interface Props {
   showRegion?: boolean;
   /** エリア文脈など、地理スコープを切り替えないページでは false。 */
   showScope?: boolean;
+  pageLinks?: Array<{ href: string; label: string }>;
   metrics?: ThemeNavMetric[];
   surveys?: ThemeNavSurvey[];
 }
@@ -49,6 +52,7 @@ export function ThemeSideNav({
   areaContext,
   showRegion = true,
   showScope = true,
+  pageLinks = [],
   metrics = [],
   surveys = [],
 }: Props) {
@@ -60,10 +64,32 @@ export function ThemeSideNav({
       />
 
       {(showScope || showRegion) && (
-        <RegionBlock
-          showScope={showScope}
-          showPrefectureSelect={showRegion}
-        />
+        <RegionBlock showScope={showScope} showPrefectureSelect={showRegion} />
+      )}
+
+      {pageLinks.length > 0 && (
+        <nav aria-label="このページの内容">
+          <SectionHeader title="このページ" as="h2" />
+          <ul className="space-y-1 border-y border-border py-2">
+            {pageLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() =>
+                    trackNavClick({
+                      surface: 'theme_section',
+                      label: `${currentThemeKey}:${link.href.slice(1)}`,
+                      href: link.href,
+                    })
+                  }
+                  className="block py-2 text-sm leading-relaxed hover:text-primary hover:underline"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       )}
 
       {metrics.length > 0 && (
@@ -93,10 +119,7 @@ export function ThemeSideNav({
         <SectionHeader
           title={
             <span className="inline-flex items-center gap-2">
-              <FileText
-                className="size-4 text-muted-foreground"
-                aria-hidden
-              />
+              <FileText className="size-4 text-muted-foreground" aria-hidden />
               出典調査
             </span>
           }
@@ -131,7 +154,9 @@ function ThemeGroupNavigation({
     areaContext,
     hasProvider ? selectedPrefectureCode : undefined
   );
-  const optionByKey = new Map(options.map((option) => [option.themeKey, option]));
+  const optionByKey = new Map(
+    options.map((option) => [option.themeKey, option])
+  );
 
   return (
     <nav aria-label="テーマを切り替える">
@@ -172,6 +197,13 @@ function ThemeGroupNavigation({
                     <li key={option.themeKey}>
                       <Link
                         href={option.href}
+                        onClick={() =>
+                          trackNavClick({
+                            surface: 'theme_switcher',
+                            label: option.themeKey,
+                            href: option.href,
+                          })
+                        }
                         aria-current={isCurrent ? 'page' : undefined}
                         className={cn(
                           'flex min-h-10 items-center px-4 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
@@ -204,9 +236,7 @@ function RegionBlock({
   return (
     <div>
       <SectionHeader title="地域" as="h2" />
-      {showScope && (
-        <StatisticsScopeNav current="prefectures" variant="rail" />
-      )}
+      {showScope && <StatisticsScopeNav current="prefectures" variant="rail" />}
       {showPrefectureSelect && <PrefectureControl hasScope={showScope} />}
     </div>
   );

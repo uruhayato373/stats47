@@ -72,12 +72,12 @@ describe('validate-survey-portfolio editorial gates', () => {
     );
   }, CLI_TEST_TIMEOUT_MS);
 
-  it('通常CI経路で実装済み88件の件数・品質ratchetを通す', () => {
+  it('通常CI経路で編集情報の下限と追加資料の品質を検証する', () => {
     const result = runValidator([]);
     const output = JSON.parse(result.stdout);
 
     expect(result.status, result.stdout || result.stderr).toBe(0);
-    expect(output.editorialImplemented).toBe(88);
+    expect(output.editorialImplemented).toBeGreaterThanOrEqual(88);
     expect(output.editorialRequired).toBe(88);
     expect(output.violations).toEqual([]);
   }, CLI_TEST_TIMEOUT_MS);

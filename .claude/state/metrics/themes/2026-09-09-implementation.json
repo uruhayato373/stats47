@@ -1,0 +1,874 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-08T22:21:33.400543+00:00",
+  "status": "checkpoint-awaiting-roads-mobile-hydration-fix",
+  "branch": "codex/theme-portfolio-implementation",
+  "baseCommit": "32ff9ba9196988f8cc5257c03c2f0eea24f897bf",
+  "scope": {
+    "themes": 21,
+    "chapters": 80,
+    "primarySecondaryMetricReferences": 121,
+    "allMetricReferences": 323,
+    "newMetricPlacements": 11,
+    "promotions": 2,
+    "changedMetricDefinitions": 100,
+    "legacyRedirectExcluded": [
+      "local-finance-city"
+    ]
+  },
+  "selectionEvidence": "packages/data-configs/src/theme-catalog/",
+  "definitionEvidence": [
+    "packages/data-configs/src/theme-catalog/__tests__/fixtures/ssds-denominator-contract.json",
+    "packages/data-configs/src/provenance/official-theme-releases.ts"
+  ],
+  "officialUpdates": [
+    {
+      "metricKeys": [
+        "healthy-life-expectancy-male",
+        "healthy-life-expectancy-female"
+      ],
+      "latestYear": 2022,
+      "years": [
+        2019,
+        2022
+      ],
+      "rowsPerMetric": 94,
+      "sourceUrl": "https://www.mhlw.go.jp/content/10904750/001363069.pdf",
+      "sourceSha256": "16447afe7041fc0ed1c0750c84623c334dd0d21d377f15178593cf3f9ebff5c6"
+    },
+    {
+      "metricKeys": [
+        "agricultural-output"
+      ],
+      "latestYear": 2024,
+      "firstYear": 1975,
+      "rows": 2350,
+      "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040426672",
+      "sourceSha256": "5bc5818caa3a44249c7b71b7ca0c9c96cf9644686d770dd2deb961ec5e31a2dc",
+      "municipalitySourcePreserved": true
+    },
+    {
+      "metricKeys": [
+        "laspeyres-index-prefecture"
+      ],
+      "change": "Match blank stored unit to config 指数; all 658 numeric observations unchanged",
+      "rows": 658
+    }
+  ],
+  "verification": {
+    "build": {
+      "status": "PASS",
+      "staticPages": 1603,
+      "command": "npm run build --workspace apps/web",
+      "log": ".local/verification/themes/2026-09-09/build-final.log",
+      "includesRegionalSelectorFix": true
+    },
+    "typeCheck": {
+      "status": "PASS",
+      "command": "turbo run type-check --concurrency=2 && npm run type-check:scripts",
+      "log": ".local/verification/themes/2026-09-09/type-check.log",
+      "packages": 25,
+      "scripts": "PASS",
+      "finalUiRecheck": {
+        "status": "PASS",
+        "log": ".local/verification/themes/2026-09-09/ui-prefecture-typecheck.log"
+      }
+    },
+    "dataTests": {
+      "status": "PASS",
+      "files": 22,
+      "tests": 309,
+      "log": ".local/verification/themes/2026-09-09/data-vitest-final.log",
+      "lastTestTypeCorrection": {
+        "status": "PASS",
+        "tests": 18,
+        "log": ".local/verification/themes/2026-09-09/data-type-fix-test.log"
+      }
+    },
+    "webTests": {
+      "status": "PASS",
+      "files": 33,
+      "tests": 220,
+      "log": ".local/verification/themes/2026-09-09/web-tests-final.log"
+    },
+    "opsTests": {
+      "status": "PASS",
+      "log": ".local/verification/themes/2026-09-09/ops-tests-final.log",
+      "tests": 56
+    },
+    "eslint": {
+      "status": "PASS",
+      "changedWebFiles": 29,
+      "log": ".local/verification/themes/2026-09-09/eslint.log"
+    },
+    "metricConfig": {
+      "count": 2351,
+      "errors": 0,
+      "warningGroups": 2
+    },
+    "metricYears": {
+      "count": 2351,
+      "errors": 0
+    },
+    "catalog": {
+      "themes": 21,
+      "errors": 0,
+      "warnings": 2,
+      "warningReason": "Primary metrics rendered by dedicated local-finance UI are not recognized by static generic-chart coverage audit."
+    },
+    "codegen": {
+      "status": "PASS",
+      "files": 42,
+      "dependencyMirror": "PASS"
+    },
+    "stagedQuality": {
+      "themes": 21,
+      "metricReferences": 323,
+      "expectedRequests": 484,
+      "observedRequests": 484,
+      "mode": "structure-and-staged-data",
+      "errors": 0,
+      "warnings": 52
+    },
+    "stagedChartRequests": {
+      "auditedAt": "2026-09-08T21:22:50.686Z",
+      "distinctExpected": 139,
+      "audited": 139,
+      "r2MetricExpected": 139,
+      "legacyEstatExpected": 0,
+      "staged": true,
+      "partial": false,
+      "status": "complete",
+      "coverageOk": true,
+      "errorCount": 0,
+      "warnCount": 5,
+      "areaCoverageWarningCount": 5,
+      "noNationalCount": 0,
+      "nationalRowEmptyCount": 0
+    },
+    "releasePayloads": {
+      "status": "PASS",
+      "files": 129,
+      "rankingItemReaders": 100,
+      "generatedPageComponents": 21,
+      "statsAndRankingValues": 8,
+      "summary": ".local/verification/themes/2026-09-09/data-payload-summary.json"
+    },
+    "browser": {
+      "status": "FAIL_UNRESOLVED",
+      "initialPages": 42,
+      "initialPassed": 41,
+      "initialFinding": "roads desktop React hydration #418 once; no missing primary/secondary KPI or horizontal overflow on any page",
+      "roadsDesktopMobileRecheck": "PASS",
+      "regionalAndChapterInteractions": {
+        "status": "PASS",
+        "count": 3
+      },
+      "initialEvidence": ".local/verification/themes/2026-09-09/ui-summary.json",
+      "yearSelector": "Population hideMap intentionally omits global year selector; no year operation claimed.",
+      "reproduction": "Warm browser context: real-income first, then new roads page; initial fresh and same-prefecture cookie probes passed.",
+      "probeEvidence": ".local/verification/themes/2026-09-09/ui-hydration-probe.json",
+      "fix": "SSR prefecture label corrected and regression tested; remaining mobile roads React #418 is being diagnosed without suppressing the error.",
+      "devDiagnostics": "Not comparable: initial dev environment omitted staged overrides; loose-env retry failed HTTP500 before hydration. Temporary source diagnostics removed.",
+      "finalSweepEvidence": ".local/verification/themes/2026-09-09/ui-final-summary.json",
+      "finalSweepPassed": 41,
+      "finalSweepTotal": 42,
+      "desktopControlledProbe": {
+        "status": "PASS",
+        "cases": 4,
+        "evidence": ".local/verification/themes/2026-09-09/ui-hydration-fixed-probe.json"
+      },
+      "portableEvidence": ".claude/state/metrics/themes/2026-09-09-hydration.json",
+      "suspensePatchStarted": false
+    },
+    "secretPatternScan": {
+      "checkedFiles": 278,
+      "findings": [],
+      "scope": "Changed and new source, config, documentation and snapshots; secret values are never included in this report."
+    },
+    "docs": {
+      "status": "PASS",
+      "errors": 0,
+      "existingWarnings": 3,
+      "log": ".local/verification/themes/2026-09-09/docs.log"
+    },
+    "regionalSelectorSsr": {
+      "status": "PASS",
+      "regressions": 3,
+      "relatedTests": 21,
+      "redBeforeFix": true,
+      "sameHydratedTriggerDom": true,
+      "log": ".local/verification/themes/2026-09-09/ui-prefecture-ssr-green.log"
+    },
+    "designSystem": {
+      "status": "PASS",
+      "log": ".local/verification/themes/2026-09-09/design-system.log"
+    }
+  },
+  "release": {
+    "published": false,
+    "remoteR2Writes": false,
+    "ciWorkflowPublished": false,
+    "manifest": {
+      "metricKeys": [
+        "accidental-deaths-per-100k",
+        "actual-income-worker-households-per-month",
+        "aging-index",
+        "agricultural-output",
+        "annual-emergency-dispatches-per-1000",
+        "annual-income-per-household",
+        "annual-precipitation",
+        "annual-snow-days",
+        "annual-sunshine-duration",
+        "average-road-traffic-volume",
+        "average-temperature",
+        "building-fire-count-per-100-thousand-people",
+        "care-worker-annual-income",
+        "consumer-price-difference-index-overall-excl-rent",
+        "consumer-price-difference-index-overall",
+        "deaths-cerebrovascular-disease-per-100k",
+        "deaths-diabetes-per-100k",
+        "deaths-heart-disease-excl-hypertensive-per-100k",
+        "deaths-hypertensive-diseases-per-100k",
+        "deaths-lifestyle-diseases-per-100k",
+        "deaths-malignant-neoplasms-per-100k",
+        "densely-inhabited-district-population-density",
+        "dependent-population-index",
+        "disaster-damage-amount-per-person",
+        "disposable-income-after-rent",
+        "disposable-income-worker-households",
+        "divorces-per-total-population",
+        "doctor-annual-income",
+        "drug-enforcement-arrest-count-per-population",
+        "elementary-school-count-per-100km2-habitable",
+        "elementary-school-students-per-teacher",
+        "final-education-university-graduate-school-ratio",
+        "fire-damage-casualties-per-population",
+        "fire-deaths-per-100k",
+        "fiscal-strength-index-prefecture",
+        "floor-area-per-dwelling-owner",
+        "floor-area-per-dwelling-rented",
+        "foreign-resident-count-china-per-100k",
+        "foreign-resident-count-korea-per-100k",
+        "foreign-resident-count-per-100k",
+        "foreign-resident-count-usa-per-100k",
+        "future-burden-ratio",
+        "general-hospital-avg-length-of-stay",
+        "general-hospital-bed-count-per-100k",
+        "general-hospital-count-per-100k",
+        "healthy-life-expectancy-female",
+        "healthy-life-expectancy-male",
+        "high-school-count-per-100km2-habitable",
+        "in-pref-university-entrance-ratio-by-highschool-origin",
+        "intellectual-crime-per-100k",
+        "junior-high-school-count-per-100km2-habitable",
+        "juvenile-criminal-arrest-person-per-population",
+        "laspeyres-index-prefecture",
+        "late-elderly-medical-expense-per-insured",
+        "library-count-per-million",
+        "lowest-temperature",
+        "male-part-time-hourly-wage",
+        "manufacturing-shipment-amount-per-employee",
+        "manufacturing-shipment-amount-per-establishment",
+        "marriages-per-total-population",
+        "maximum-temperature",
+        "minimum-wage-by-region",
+        "monthly-average-actual-working-hours-male",
+        "national-medical-expense-per-person",
+        "nurse-annual-income",
+        "nurse-salary",
+        "nursery-teacher-annual-income",
+        "nurses-in-medical-facilities-per-100k",
+        "nursing-home-capacity-per-1000-65plus",
+        "old-population-index",
+        "penal-code-offenses-recognized-per-1000",
+        "per-capita-inhabitant-tax-pref-municipal",
+        "per-capita-total-expenditure-pref-municipal",
+        "per-taxpayer-taxable-income",
+        "pharmacy-count-per-100k",
+        "physicians-in-medical-facilities-per-100k",
+        "police-officer-count-per-population",
+        "population-density-per-km2-inhabitable-area",
+        "private-rental-housing-rent-per-3-3m2",
+        "psychiatric-hospital-count-per-100k",
+        "public-hall-count-per-million",
+        "real-disposable-income",
+        "real-public-debt-service-ratio",
+        "road-length-per-km2",
+        "school-teacher-annual-income",
+        "serious-crime-per-100k",
+        "software-engineer-annual-income",
+        "starting-salary-highschool",
+        "starting-salary-university",
+        "suicides-per-100k",
+        "taxi-driver-annual-income",
+        "theft-offenses-recognized-per-1000",
+        "traffic-accident-count-per-population",
+        "traffic-accident-deaths-per-100-accidents",
+        "traffic-accident-deaths-per-100k",
+        "traffic-accident-injuries-per-100k",
+        "treatment-rate-mood-disorder-outpatient",
+        "truck-driver-annual-income",
+        "violent-crime-per-100k",
+        "young-population-index"
+      ],
+      "files": [
+        {
+          "key": "app/ranking/accidental-deaths-per-100k/item.json",
+          "sha256": "8e2bc931fb87dc4f456610268e3d9c300ec4179a6efb1fc9a08be36d535e3089"
+        },
+        {
+          "key": "app/ranking/actual-income-worker-households-per-month/item.json",
+          "sha256": "dc1fd953219563e208b99c3518550dc265fad6ac8b38235ca9133c3ec015619d"
+        },
+        {
+          "key": "app/ranking/aging-index/item.json",
+          "sha256": "89b545d8c9f1fad86db4536edcc6fa502679d03e819d09f30f034e33c96a48dc"
+        },
+        {
+          "key": "app/ranking/agricultural-output/item.json",
+          "sha256": "aed56d3bf8564950f663ba7aa9bc990de45a6ca83bb5e45937db8e907f2d18f7"
+        },
+        {
+          "key": "app/stats/agricultural-output/values.json",
+          "sha256": "f1405c7b117c668853dddcab72b7b3ffe0eda3048058571307cb811cd79334b0"
+        },
+        {
+          "key": "app/ranking/agricultural-output/values.json",
+          "sha256": "af4f948f3f359c95fcd4a18dabb8e43d0362da4d248d382cfd31fb79b48c3783"
+        },
+        {
+          "key": "app/ranking/annual-emergency-dispatches-per-1000/item.json",
+          "sha256": "9912152c0983f99d7d1391a42db57f5a269ca781f89f6c689675ec33514dad52"
+        },
+        {
+          "key": "app/ranking/annual-income-per-household/item.json",
+          "sha256": "a8f9e8b4b2622be405a707f6f81a959ebe015b6a3d58aeb3f223f1d5665f8322"
+        },
+        {
+          "key": "app/ranking/annual-precipitation/item.json",
+          "sha256": "d493f590cc58bcab9d6958e2517cc0a11153b5d11606aba8be055954a9c39929"
+        },
+        {
+          "key": "app/ranking/annual-snow-days/item.json",
+          "sha256": "ed63b29bdc904a2dbae49fb338e3a6797aa5ae36f312530a6890d1c3040e1e87"
+        },
+        {
+          "key": "app/ranking/annual-sunshine-duration/item.json",
+          "sha256": "50a2da7a11d9a3b5e7286bc75fccba67d210077df970d46adf9ae592be9d5a78"
+        },
+        {
+          "key": "app/ranking/average-road-traffic-volume/item.json",
+          "sha256": "9859471583f4be6931451b472251d72d21afdc518f132ad53fe6d029fa02b600"
+        },
+        {
+          "key": "app/ranking/average-temperature/item.json",
+          "sha256": "7830565c0ca1fd39ef772534d72129bc6c404d5b2a014927b34097119e16f0ac"
+        },
+        {
+          "key": "app/ranking/building-fire-count-per-100-thousand-people/item.json",
+          "sha256": "77bd7f44facb17d4066e05beedb765f43622453d57848ac6269ed9f41b9d15c3"
+        },
+        {
+          "key": "app/ranking/care-worker-annual-income/item.json",
+          "sha256": "8f7e3048ef750cbedd379675987ed6829e40d9b75b8abb0c62cb10b5af236244"
+        },
+        {
+          "key": "app/ranking/consumer-price-difference-index-overall-excl-rent/item.json",
+          "sha256": "05ccba1cc3ce0b1831a3d17f8faebda10a04b499662da37d1c43b985935a02fb"
+        },
+        {
+          "key": "app/ranking/consumer-price-difference-index-overall/item.json",
+          "sha256": "999c54c08df5c86e9e97ebab6cef9cdad7e6848377a38d59a445865a8bffb9e3"
+        },
+        {
+          "key": "app/ranking/deaths-cerebrovascular-disease-per-100k/item.json",
+          "sha256": "e88b0d1445e2c2631a2f3d9a410a1dcde8021f952ae3b60ffeced9026f6d04a5"
+        },
+        {
+          "key": "app/ranking/deaths-diabetes-per-100k/item.json",
+          "sha256": "abfb7d03ca4635aa83a02c029bdde577510508c9297e42611bddff399d8a7ec5"
+        },
+        {
+          "key": "app/ranking/deaths-heart-disease-excl-hypertensive-per-100k/item.json",
+          "sha256": "36dc036b2b0cc181f01bca79bd24892d054f94f2b1f92e30f5f8a9a9019047a6"
+        },
+        {
+          "key": "app/ranking/deaths-hypertensive-diseases-per-100k/item.json",
+          "sha256": "95acb484d3f9ef8a35e5490f15d767831cc2073063535843784cba208dce4c32"
+        },
+        {
+          "key": "app/ranking/deaths-lifestyle-diseases-per-100k/item.json",
+          "sha256": "298cc9da79163a80633ae8d9fd0db8a08cf13a61575e6be468a6e6586ef12e6a"
+        },
+        {
+          "key": "app/ranking/deaths-malignant-neoplasms-per-100k/item.json",
+          "sha256": "1d4815a72e6886bdc587abee1b66a177b35669fe21145c888b983b598ce91f8e"
+        },
+        {
+          "key": "app/ranking/densely-inhabited-district-population-density/item.json",
+          "sha256": "f00ba28b3d7c6b22c12ef8fc89df45cb1df9667225f0334d1109dabc900493d1"
+        },
+        {
+          "key": "app/ranking/dependent-population-index/item.json",
+          "sha256": "3122889bea7e44e33b973d70377eab1502cff3ca8b6da70ab63c8b6dcff8b6be"
+        },
+        {
+          "key": "app/ranking/disaster-damage-amount-per-person/item.json",
+          "sha256": "20659947ad3eb59cf5723abc92f7d4ec3fedcc6c4c4ecc0a814d61920a447804"
+        },
+        {
+          "key": "app/ranking/disposable-income-after-rent/item.json",
+          "sha256": "5cd18778fce2588885e04fe73db931ec1d32d353e9f35d3009f6c3296220eb8c"
+        },
+        {
+          "key": "app/ranking/disposable-income-worker-households/item.json",
+          "sha256": "adf119e7ed6247e0b0cb50cd4b5f1943b02a7aae94202e12b3d73d79d461ce7a"
+        },
+        {
+          "key": "app/ranking/divorces-per-total-population/item.json",
+          "sha256": "0e3d004ce50f0bc50745730f78721221f29514b2e3b3a2f32394c7838123b1a1"
+        },
+        {
+          "key": "app/ranking/doctor-annual-income/item.json",
+          "sha256": "437fddd5fc9942f020c4a4427f336df8f61ebfb1e39bb54bfa8b2133b7c70399"
+        },
+        {
+          "key": "app/ranking/drug-enforcement-arrest-count-per-population/item.json",
+          "sha256": "d8dc929be644cb3a65ccc2a3bb5592054f354c16a02c75793d40c0e33b42a496"
+        },
+        {
+          "key": "app/ranking/elementary-school-count-per-100km2-habitable/item.json",
+          "sha256": "aca633c9f8152679765183d24ea47e42daef28a29e4b08674505029fb3f6f302"
+        },
+        {
+          "key": "app/ranking/elementary-school-students-per-teacher/item.json",
+          "sha256": "0e30c3d0c27b0632f1c34da7a14d8d0e762bb76c3dc101526a650ccb7141005a"
+        },
+        {
+          "key": "app/ranking/final-education-university-graduate-school-ratio/item.json",
+          "sha256": "a7b422d19434b667b3ea72da3fbf41b92c32fb42ae3f154a34ef97e68d67c646"
+        },
+        {
+          "key": "app/ranking/fire-damage-casualties-per-population/item.json",
+          "sha256": "e23927dcd3247580bdb7bc9d824175d7dea73dfc066a5ed57ca6f720b381b876"
+        },
+        {
+          "key": "app/ranking/fire-deaths-per-100k/item.json",
+          "sha256": "0b963489ad718fdd61ed90c80ecaab562005911b195d059e8cca1af694cc4567"
+        },
+        {
+          "key": "app/ranking/fiscal-strength-index-prefecture/item.json",
+          "sha256": "e681e1ce70e47216ba42cb7651bec929065fe353635c1e023528aa3cac301e7a"
+        },
+        {
+          "key": "app/ranking/floor-area-per-dwelling-owner/item.json",
+          "sha256": "dada665e40e51487fcdfb3da2582c6842909ae2f91265d9a28e191322bff221d"
+        },
+        {
+          "key": "app/ranking/floor-area-per-dwelling-rented/item.json",
+          "sha256": "3fa15615d623a6d974d61e94fc3119621f7bd56b2563ca837f3b7532f8232b4b"
+        },
+        {
+          "key": "app/ranking/foreign-resident-count-china-per-100k/item.json",
+          "sha256": "9911ff0890451d7f6c2b356b751745946c2e18c861cb667b94d09a66c215d461"
+        },
+        {
+          "key": "app/ranking/foreign-resident-count-korea-per-100k/item.json",
+          "sha256": "21d2ddd5bead920f642b964e3c5838b59d7b1597632a0c90a2058ec053decbb0"
+        },
+        {
+          "key": "app/ranking/foreign-resident-count-per-100k/item.json",
+          "sha256": "d47ca416b5895964931f818ba3efb4db0dbaad07c470aa873d4fa21c2a04563a"
+        },
+        {
+          "key": "app/ranking/foreign-resident-count-usa-per-100k/item.json",
+          "sha256": "87ae82058fe99a2a90d6e0b0a52cb561e4b470ef9f740116ac2bea9c3dcd31e3"
+        },
+        {
+          "key": "app/ranking/future-burden-ratio/item.json",
+          "sha256": "8ca96d85cc9141239a076e2e772116a732b79371cedc80d18262022298f25843"
+        },
+        {
+          "key": "app/ranking/general-hospital-avg-length-of-stay/item.json",
+          "sha256": "0ce8db80912f09b9cdac6476339a20b973208f5bd7e398681ffb6cec5e7804e8"
+        },
+        {
+          "key": "app/ranking/general-hospital-bed-count-per-100k/item.json",
+          "sha256": "a405566352d82b6a6cd16cbfa8146ddff794878fd579058be62a6ee582b8cc2c"
+        },
+        {
+          "key": "app/ranking/general-hospital-count-per-100k/item.json",
+          "sha256": "8803f457db31e9f8b31dffd08dcd98ff0fbe7ed72eace65be3e29ccec443439c"
+        },
+        {
+          "key": "app/ranking/healthy-life-expectancy-female/item.json",
+          "sha256": "545bb4a80859239996231d0b9b52ee5ad3520a58b4d0f26e2d2c037bb4073248"
+        },
+        {
+          "key": "app/stats/healthy-life-expectancy-female/values.json",
+          "sha256": "ff77132ffaa05fbc1dad9cc3a548343d2703810e2454c43afa2704ebcb11ec3f"
+        },
+        {
+          "key": "app/ranking/healthy-life-expectancy-female/values.json",
+          "sha256": "f1822a57927fac4998269faec952b7359ac4eb66db84257aae117b64374680b0"
+        },
+        {
+          "key": "app/ranking/healthy-life-expectancy-male/item.json",
+          "sha256": "09a47debb4e859033c0e31ebe5f7532a02a08f31a118f3671b448f784a7bfa56"
+        },
+        {
+          "key": "app/stats/healthy-life-expectancy-male/values.json",
+          "sha256": "3a97787b02f9e8b0c6f9160a196ce596d90a8c65a5d801042b7e7252afb29488"
+        },
+        {
+          "key": "app/ranking/healthy-life-expectancy-male/values.json",
+          "sha256": "a20a66aad2653a6a1f3795c40abd577029b0f5cb031d718faca623cc64fcb20c"
+        },
+        {
+          "key": "app/ranking/high-school-count-per-100km2-habitable/item.json",
+          "sha256": "43c8ab250aefff2b08699249665661d2624b7146936840c85c5a7a358e42b1ed"
+        },
+        {
+          "key": "app/ranking/in-pref-university-entrance-ratio-by-highschool-origin/item.json",
+          "sha256": "62772c96d9f062c75ae29365d0f0d4dae24f13cfa9388f73f5aa52a48fdb2311"
+        },
+        {
+          "key": "app/ranking/intellectual-crime-per-100k/item.json",
+          "sha256": "b18a6ce952a0c5c63e59b3dc1f28a1aedc469bc22258dad9b25f2a410f6361fc"
+        },
+        {
+          "key": "app/ranking/junior-high-school-count-per-100km2-habitable/item.json",
+          "sha256": "84f1609f241f44c12a66295100fe0155b20b9c97adf8318212b32c7acaf31750"
+        },
+        {
+          "key": "app/ranking/juvenile-criminal-arrest-person-per-population/item.json",
+          "sha256": "9d8ae66b8967c78edf5c45694736643534ae27eabd8ae09ad7551224f67a5126"
+        },
+        {
+          "key": "app/ranking/laspeyres-index-prefecture/item.json",
+          "sha256": "8e5715fc24d0510a51c9563e1cb1d06eb113133b4a7377e559da7870b9504b08"
+        },
+        {
+          "key": "app/stats/laspeyres-index-prefecture/values.json",
+          "sha256": "9d396f4705ed3033430195977e50e63aafd441bfb19c57d800435ec5b29bcbc7"
+        },
+        {
+          "key": "app/ranking/laspeyres-index-prefecture/values.json",
+          "sha256": "7ca8d335dead109277e515ec24540f873fb923b31975a952a2a191b3c10500b4"
+        },
+        {
+          "key": "app/ranking/late-elderly-medical-expense-per-insured/item.json",
+          "sha256": "36fcd5248ae48e7c43c60e705388ea40c60343b482597a95a8bba3bfc0973bdb"
+        },
+        {
+          "key": "app/ranking/library-count-per-million/item.json",
+          "sha256": "f4849264b7058b70836b902c10c9f614b908d78c9533d0cd8901224118c1550c"
+        },
+        {
+          "key": "app/ranking/lowest-temperature/item.json",
+          "sha256": "ad1e033ac644c910dc0cb6f1b818236c74d6dda862a1a35941b546b1e51819af"
+        },
+        {
+          "key": "app/ranking/male-part-time-hourly-wage/item.json",
+          "sha256": "b2c2643ce591237deca87dbdce01f4fdab380a12a8808419106e0cf7d7ad72cb"
+        },
+        {
+          "key": "app/ranking/manufacturing-shipment-amount-per-employee/item.json",
+          "sha256": "a95ffafbf7faabb299c67c6971accbb29ca6d86ac3c03a85c7a3742290c09ec6"
+        },
+        {
+          "key": "app/ranking/manufacturing-shipment-amount-per-establishment/item.json",
+          "sha256": "03ef7776973c420470db28aa4290ac3d720ae594144e219493ebec8cc5c2dcd5"
+        },
+        {
+          "key": "app/ranking/marriages-per-total-population/item.json",
+          "sha256": "44ecc112eda5994b365e6ff479fee3be22295780691fe6cadc2e118ba23ae20a"
+        },
+        {
+          "key": "app/ranking/maximum-temperature/item.json",
+          "sha256": "ed4392a825b0f96226ea26dd799277dae91a18ab2c9671a74b2151ac020e0b62"
+        },
+        {
+          "key": "app/ranking/minimum-wage-by-region/item.json",
+          "sha256": "3bb868b49259de59b795a2d2a315e7126133b36b39c65fc08aada0c860ec23a4"
+        },
+        {
+          "key": "app/ranking/monthly-average-actual-working-hours-male/item.json",
+          "sha256": "810ff757d461a441b652b556365fc6b754541ebbc01b09b0489c24e872e46d47"
+        },
+        {
+          "key": "app/ranking/national-medical-expense-per-person/item.json",
+          "sha256": "65efa330b06ad19b635677c0898f1b4fffa16e52c6c8d659c47b7541129c9069"
+        },
+        {
+          "key": "app/ranking/nurse-annual-income/item.json",
+          "sha256": "1544ec5d2545cdb001bdad325d7217b4a1fd3806cbdf5abb40c373e0d63b77ac"
+        },
+        {
+          "key": "app/ranking/nurse-salary/item.json",
+          "sha256": "68239dc00c3f0ab5c78332b01d264cff8d402bf21fe2423f7dc281a99b6e70cc"
+        },
+        {
+          "key": "app/ranking/nursery-teacher-annual-income/item.json",
+          "sha256": "934fa36014fe40f3452c8c3d9f823e749f7da265fd434a84e2659b674c1322c2"
+        },
+        {
+          "key": "app/ranking/nurses-in-medical-facilities-per-100k/item.json",
+          "sha256": "245870c275ef638835b859d06a83aa3bac50ff394eef794789a6fb7bddeee768"
+        },
+        {
+          "key": "app/ranking/nursing-home-capacity-per-1000-65plus/item.json",
+          "sha256": "2d2fe258f714dde8226f272fefbdfe99f04e257a801d4abce8aa4db5abea9ddb"
+        },
+        {
+          "key": "app/ranking/old-population-index/item.json",
+          "sha256": "21b061fe4c75d9e3e015d031be96ffabaf0289e9362b58ae00411c590a719f40"
+        },
+        {
+          "key": "app/ranking/penal-code-offenses-recognized-per-1000/item.json",
+          "sha256": "331787953695c45e73046ba5de00fc783a68cac729b60cbcbf2bbaf54ed17696"
+        },
+        {
+          "key": "app/ranking/per-capita-inhabitant-tax-pref-municipal/item.json",
+          "sha256": "8a844745ffdd892950c851a7c2fee6566594fb0f6fbe2e9c35107320f9d0fc09"
+        },
+        {
+          "key": "app/ranking/per-capita-total-expenditure-pref-municipal/item.json",
+          "sha256": "0bcebe6ba28eeb01e341d2468abd88a827dc1b4083082fd21dbf353029a36ecc"
+        },
+        {
+          "key": "app/ranking/per-taxpayer-taxable-income/item.json",
+          "sha256": "60447148355468580dbc695eca6249e3f621fc80956e5dea24bf41b4cf42acf6"
+        },
+        {
+          "key": "app/ranking/pharmacy-count-per-100k/item.json",
+          "sha256": "b3e03d5ffd9455ad5d10f06beaa1285da03b99b9d4ff435cc0c6096fb959532b"
+        },
+        {
+          "key": "app/ranking/physicians-in-medical-facilities-per-100k/item.json",
+          "sha256": "fd85c2f38f54c17f73dc60018b754ad064798088eed340208a777f83d2feebd2"
+        },
+        {
+          "key": "app/ranking/police-officer-count-per-population/item.json",
+          "sha256": "e8fc9772d79938e5027eacf235cf44d3b950a36fd94a5ff1b7d2c6ee543b3315"
+        },
+        {
+          "key": "app/ranking/population-density-per-km2-inhabitable-area/item.json",
+          "sha256": "f6778aad27d68b27906bdf13cbbfb6d5131c251cf79c32e52a00b2de6ce461d3"
+        },
+        {
+          "key": "app/ranking/private-rental-housing-rent-per-3-3m2/item.json",
+          "sha256": "37cadf726b2bb05555f60f84fd00d7a45b8692af57828569a0c430d4cb8dea4b"
+        },
+        {
+          "key": "app/ranking/psychiatric-hospital-count-per-100k/item.json",
+          "sha256": "044931d8e26bb9c627031e3b44b8c982ebfbeaa0439c8a3e16dfd0f50d02c6e1"
+        },
+        {
+          "key": "app/ranking/public-hall-count-per-million/item.json",
+          "sha256": "b4a21986b079efe2362c92e87ee0e2b1d04a664fb15611bea3a66ff35eabac1f"
+        },
+        {
+          "key": "app/ranking/real-disposable-income/item.json",
+          "sha256": "8143a4c618a3c57cebdaed72a2c2eff54b0aac74b794b1b32e897e98bc4306b7"
+        },
+        {
+          "key": "app/ranking/real-public-debt-service-ratio/item.json",
+          "sha256": "ef61ac33f059ed1e26fb1978320039c9429d7ae25758ffda80b6f1139f568de1"
+        },
+        {
+          "key": "app/ranking/road-length-per-km2/item.json",
+          "sha256": "0ac892c993239d75455981fc76b98b0af8e2503fdac4c096b7dc093abefcf679"
+        },
+        {
+          "key": "app/ranking/school-teacher-annual-income/item.json",
+          "sha256": "4addec955baf4278dbbce6fc2a49b00789b52fd9994f3b48fdc9b70c3de99bff"
+        },
+        {
+          "key": "app/ranking/serious-crime-per-100k/item.json",
+          "sha256": "5e6da8ae0af383a23921038b889c842e6e826bf1253140355a56c9c2be5b06fc"
+        },
+        {
+          "key": "app/ranking/software-engineer-annual-income/item.json",
+          "sha256": "2c29184f0612549b92549d55c755d6b07fdc2a331438037fd2c23c29233f5469"
+        },
+        {
+          "key": "app/ranking/starting-salary-highschool/item.json",
+          "sha256": "66438cee251b9bfbc306ea451ba0334bac6ee07d3c792adc739f44f9fd0cfdb8"
+        },
+        {
+          "key": "app/ranking/starting-salary-university/item.json",
+          "sha256": "a9453d78a9f4c54f550f6fca5417643a08b69d6d698f9690ce3221eac6760850"
+        },
+        {
+          "key": "app/ranking/suicides-per-100k/item.json",
+          "sha256": "1e69d751534e698d60dce1827d9b95731dae5fffb79fb447824255a2c172ea92"
+        },
+        {
+          "key": "app/ranking/taxi-driver-annual-income/item.json",
+          "sha256": "a038a61f8547ef1029fad1ed8e4e3b5c83e76c7212050ddf6022b512138442e6"
+        },
+        {
+          "key": "app/ranking/theft-offenses-recognized-per-1000/item.json",
+          "sha256": "d69a6ae5efe5427e0c8b0bdce54092181fc9a7ed8e1826fb7e307cf19cf89997"
+        },
+        {
+          "key": "app/ranking/traffic-accident-count-per-population/item.json",
+          "sha256": "9a245caa4fdf9675b6a0908a3128cd2377a40cf2ccf0ed08ae7c5a8aa7f2fdac"
+        },
+        {
+          "key": "app/ranking/traffic-accident-deaths-per-100-accidents/item.json",
+          "sha256": "56fc74ef196ffea2e78cc4399476071fa8d873cdaf935a49b969c308f4cb47ec"
+        },
+        {
+          "key": "app/ranking/traffic-accident-deaths-per-100k/item.json",
+          "sha256": "cca65f1c5e429b592f0198d7b08208a5f2b4c7ad0e833e2c8856e7b5b0d07428"
+        },
+        {
+          "key": "app/ranking/traffic-accident-injuries-per-100k/item.json",
+          "sha256": "03f47af76d9ef9e3b68a51a0a78ca00923254bd4b159c0576b71fe98d7e1b980"
+        },
+        {
+          "key": "app/ranking/treatment-rate-mood-disorder-outpatient/item.json",
+          "sha256": "0d6668f519045ddbba242a13ebe2579975d543914288000af7c4a3c13db1c9a6"
+        },
+        {
+          "key": "app/ranking/truck-driver-annual-income/item.json",
+          "sha256": "9fcb4ddd884aa5481658e70a6b1b947307d15a98414564232c12f008a82e5a7c"
+        },
+        {
+          "key": "app/ranking/violent-crime-per-100k/item.json",
+          "sha256": "778976998385114b48f299aa2e5bacec38e6355148ee72c3e95ba013f50b87cf"
+        },
+        {
+          "key": "app/ranking/young-population-index/item.json",
+          "sha256": "b63f6b2535c194ba18e2c096f00e044d6493304f58b1918ab28596624214ef28"
+        },
+        {
+          "key": "app/page-components/theme/aging-society.json",
+          "sha256": "88c77d612a0903c8148442ef883ad9ef7896b7fa1786cc276a8327ad6169bf97"
+        },
+        {
+          "key": "app/page-components/theme/climate.json",
+          "sha256": "fa3bfc8f8568fa1e795d43e5b76ceb9e1ec49855a8af8edd6cb80e7698bff1a0"
+        },
+        {
+          "key": "app/page-components/theme/consumer-prices.json",
+          "sha256": "3ebed2121825cac062109e1837150284c04d650dec862b747b98275ad69a3235"
+        },
+        {
+          "key": "app/page-components/theme/education-culture.json",
+          "sha256": "8072574ccbc417fdf7e4f8ff7793e65b5ca5355d823b6e55d6e17586b3e21cdc"
+        },
+        {
+          "key": "app/page-components/theme/fishery-marine.json",
+          "sha256": "9a06903ab5d4daba330de6278b2163ad782625eee95759091d63ec13569554c2"
+        },
+        {
+          "key": "app/page-components/theme/foreign-residents.json",
+          "sha256": "7fecc9f3949326582d59c56fc708c6500178775eafb0f302c628042366995f49"
+        },
+        {
+          "key": "app/page-components/theme/healthcare.json",
+          "sha256": "c99f5cba0158e2ac7021360595b98a45798a9e61e5bb1f8693a7d7cfc00925ce"
+        },
+        {
+          "key": "app/page-components/theme/labor-mobility.json",
+          "sha256": "10b4436bd1b0fd33b22cdc1fa4f6b51b2740592de5e95580d54f9c1428d33158"
+        },
+        {
+          "key": "app/page-components/theme/labor-wages.json",
+          "sha256": "e6e7505a38b7dd2c85dbc017358a6bbfa9e267cfcec57455570c7f9cdc298656"
+        },
+        {
+          "key": "app/page-components/theme/living-housing.json",
+          "sha256": "06f6e4c29c1512197912c6f76ce108a36657b56cf9349a005bc64bb14acf6961"
+        },
+        {
+          "key": "app/page-components/theme/local-economy.json",
+          "sha256": "2dec196b8852b16bf0c3ede01f63f93f22206bc3e9f77e2b8516b10e3c19e321"
+        },
+        {
+          "key": "app/page-components/theme/local-finance.json",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "key": "app/page-components/theme/manufacturing.json",
+          "sha256": "2eb906c805943c45c99ddf35fcdfa17b9fc00d7e459a870efec5963ce02898a7"
+        },
+        {
+          "key": "app/page-components/theme/occupation-salary.json",
+          "sha256": "6a0d59096743b1c68a221382d9b7ef2568f0eef280e0100f35ef8f20553da661"
+        },
+        {
+          "key": "app/page-components/theme/population-dynamics.json",
+          "sha256": "f56a1bddf387921d7e5954d0c28009cd064f9cded4c4f14a9c67eee83071f532"
+        },
+        {
+          "key": "app/page-components/theme/ports.json",
+          "sha256": "3999a2a0a628a265b4aac5462cf566095ef8a9b2a7c8e9f1b4ea036ddd2bdc86"
+        },
+        {
+          "key": "app/page-components/theme/railway.json",
+          "sha256": "e5bba92b7042214df8aaeb060ef0f20b4b2df5bb5c89f469fac223dd79c1b0c8"
+        },
+        {
+          "key": "app/page-components/theme/real-income.json",
+          "sha256": "eaa06cae7170c83ff6320397406d8cb2b223ca2fd213dee37bb268e271e2fb1f"
+        },
+        {
+          "key": "app/page-components/theme/roads.json",
+          "sha256": "da72267ee5274fb6df5ac12dc7fa0baabf081e3eb7ab9ca723adbf8f970b65cc"
+        },
+        {
+          "key": "app/page-components/theme/safety.json",
+          "sha256": "67608dddb49e47a06feaf45a7084745834f1c2e71eac97f93dbe2a6be1a26fcb"
+        },
+        {
+          "key": "app/page-components/theme/tourism.json",
+          "sha256": "b0cc73d6ed595fa83a600a5dea91effc3e55b58135dc70ab4266c4487a89c383"
+        }
+      ]
+    },
+    "localRoot": ".local/r2",
+    "publicBaseline": ".claude/state/themes/quality.json",
+    "doNotReplacePublicBaselineWithStaged": true,
+    "next": "Approve deployment, publish code and validated payloads, verify production, then schedule experiments with actual publication date."
+  },
+  "continuousImprovement": {
+    "heartbeat": {
+      "id": "automation",
+      "status": "ACTIVE",
+      "name": "全テーマの品質確認と継続改善",
+      "schedule": "Monday 09:00 Asia/Tokyo",
+      "monthly": "First run of month checks official releases for every theme",
+      "notification": "Meaningful new issue, repair, recovery or required decision only"
+    },
+    "weeklyWorkflow": ".github/workflows/theme-chart-audit-weekly.yml",
+    "weeklyWorkflowStatus": "Implemented locally; new logic requires main publication",
+    "experiments": {
+      "pendingPublication": 20,
+      "notScheduledBeforePublication": true,
+      "checkpointsDays": [
+        7,
+        28,
+        56
+      ],
+      "missingBaselineThemes": [
+        "foreign-residents"
+      ]
+    },
+    "state": ".claude/state/themes/",
+    "releaseBacklogId": "THEME-PORTFOLIO-REMAINDER-01"
+  },
+  "handoff": {
+    "reason": "User requested commit and feature branch push to continue on another PC.",
+    "nextTask": "THEME-PORTFOLIO-REMAINDER-01",
+    "instructions": ".claude/state/themes/README.md",
+    "gitIgnoredArtifacts": ".local contains source downloads, staged R2 payloads, browser HTML and logs; regenerate locally. No remote R2 writes were made.",
+    "firstAction": "Reproduce roads mobile hydration #418; inspect explicit Suspense boundaries around async embedded sections. No Suspense fix has been started.",
+    "automation": "Codex heartbeat automation remains configured on the original host/thread; Git does not migrate app automations. Inspect before creating a duplicate.",
+    "releaseGate": "Do not publish until the browser regression is fixed, all 42 views pass, regenerated data is validated, and production publication is authorized."
+  }
+}

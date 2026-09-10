@@ -6,54 +6,54 @@ import type { IndicatorSet } from "../indicator-set";
 export const LOCAL_ECONOMY_SET: IndicatorSet = {
   "key": "local-economy",
   "title": "地域経済",
-  "description": "都道府県別のGDP・県民所得・産業構造・雇用・財政をランキングとチャートで比較。県内総生産、有効求人倍率、製造品出荷額、財政力指数など主要経済指標の推移を47都道府県のデータで確認できます。",
+  "description": "県民所得、納税者の所得、産業別就業者構成、農業産出額から、地域の所得形成と生産基盤を比較します。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "per-taxpayer-taxable-income",
-      "shortLabel": "課税所得",
-      "role": "primary"
+      "shortLabel": "課税対象所得（納税義務者1人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "per-capita-prefectural-income-h27",
       "shortLabel": "1人当たり県民所得",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "minimum-wage-by-region",
       "shortLabel": "最低賃金",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "active-job-opening-ratio",
       "shortLabel": "有効求人倍率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "unemployment-rate",
       "shortLabel": "失業率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fiscal-strength-index-prefecture",
       "shortLabel": "財政力指数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "employed-people-ratio-primary",
       "shortLabel": "第1次産業就業者比率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "employed-people-ratio-secondary",
       "shortLabel": "第2次産業就業者比率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "employed-people-ratio-tertiary",
       "shortLabel": "第3次産業就業者比率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "disposable-income-worker-households",
@@ -64,6 +64,36 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "rankingKey": "number-of-establishments-economic-census-basic-survey",
       "shortLabel": "事業所数",
       "role": "context"
+    },
+    {
+      "rankingKey": "agricultural-output",
+      "shortLabel": "農業産出額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employment-location-quotient-manufacturing",
+      "shortLabel": "製造業の従業者特化係数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employment-location-quotient-information-communication",
+      "shortLabel": "情報通信業の従業者特化係数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employment-location-quotient-health-welfare",
+      "shortLabel": "医療・福祉の従業者特化係数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "enterprise-net-value-added-all-industries",
+      "shortLabel": "全産業の企業純付加価値（本所県）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "private-establishment-net-value-added",
+      "shortLabel": "民営事業所の純付加価値（所在地へ按分）",
+      "role": "secondary"
     }
   ],
   "keywords": [

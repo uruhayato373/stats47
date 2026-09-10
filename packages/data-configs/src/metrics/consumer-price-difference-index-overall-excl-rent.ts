@@ -12,14 +12,14 @@ export const consumerPriceDifferenceIndexOverallExclRent: MetricConfig = {
     "statsDataId": "0000010212",
     "cdCat01": "#L04415",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "from": 2024,
-    "to": 2024,
+    "to": 2024
   },
   "yearFormat": "fiscal",
   "visualization": {
@@ -28,32 +28,16 @@ export const consumerPriceDifferenceIndexOverallExclRent: MetricConfig = {
     "divergingMidpoint": "custom",
     "divergingMidpointValue": 100,
     "isReversed": false,
-    "isSymmetrized": false,
+    "isSymmetrized": false
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "‐/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "‐/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "消費者物価地域差指数ランキング都道府県【2024年】｜1位北海道（103‐）",
   "seoDescription": "2024年の消費者物価地域差指数の都道府県別ランキング。1位北海道（103‐）、最下位群馬県（96.8‐）で1.1倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": true
 };

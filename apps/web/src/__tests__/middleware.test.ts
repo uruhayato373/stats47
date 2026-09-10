@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
+import { KNOWN_THEME_SLUGS } from '../config/known-theme-slugs';
 import middleware, { isValidPrefCode } from '../middleware';
 
 describe('isValidPrefCode', () => {
@@ -229,6 +230,10 @@ describe('/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)',
   test('known な /japan/education-culture は 410 を返さない', () => {
     const response = middleware(request('/japan/education-culture'));
     expect(response.status).not.toBe(410);
+  });
+
+  test.each([...KNOWN_THEME_SLUGS].filter((key) => !['ports', 'railway', 'roads'].includes(key)))('新規テーマの県別導線 /areas/28000/%s を受理する', (theme) => {
+    expect(middleware(request(`/areas/28000/${theme}`)).status).toBe(200);
   });
 
   test('未登録スラッグ /japan/not-a-real-theme は 410 を返す (/themes と同型)', () => {

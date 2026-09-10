@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const CONSUMER_PRICES_SET: IndicatorSet = {
   "key": "consumer-prices",
   "title": "物価・消費",
-  "description": "都道府県別の消費者物価地域差指数を食料・住居・光熱水道など品目別にチャートとランキングで比較。物価プロファイル・ヒートマップで生活コストの地域差を47都道府県で確認できます。",
+  "description": "全国を100とする消費者物価地域差指数から、同じ年の総合水準と費目別の価格差を比較します。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
@@ -69,6 +69,21 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
       "rankingKey": "consumer-price-difference-index-miscellaneous",
       "shortLabel": "諸雑費",
       "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-utilities-expenditure",
+      "shortLabel": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "average-temperature",
+      "shortLabel": "年平均気温（代表観測地点）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "household-survey-food-expenditure",
+      "shortLabel": "食料支出（二人以上世帯・10〜11月の月平均）",
+      "role": "secondary"
     }
   ],
   "keywords": [

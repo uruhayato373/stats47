@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import { buildFloodPrefDetail, type GeoAnalysisPrefDetail } from '@stats47/gis';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/lib/analytics/events', () => ({
@@ -81,6 +81,26 @@ function props(generatedAt = versionA) {
 }
 
 describe('Geo表示境界の県・段階・証跡版', () => {
+  it('応答が止まったときは再読み込みへ戻り、遅着した旧応答を表示しない', async () => {
+    vi.useFakeTimers();
+    let resolveOld!: (value: GeoAnalysisPrefDetail) => void;
+    vi.mocked(fetchGeoDetailAction)
+      .mockImplementationOnce(() => new Promise((resolve) => { resolveOld = resolve; }))
+      .mockImplementationOnce(async () => detail('13', versionB));
+    const view = render(<GeoSpatialEvidenceExplorer {...props()} />);
+    try {
+      await act(() => vi.advanceTimersByTimeAsync(30_000));
+      expect(screen.getByRole('alert')).toHaveTextContent('読み込めませんでした');
+      await act(async () => fireEvent.click(screen.getByRole('button', { name: '再読み込み' })));
+      expect(screen.getByTestId('map')).toHaveTextContent(versionB);
+      await act(async () => resolveOld(detail('13', versionA)));
+      expect(screen.getByTestId('map')).toHaveTextContent(versionB);
+    } finally {
+      view.unmount();
+      vi.useRealTimers();
+    }
+  });
+
   it('同一ページへのNext query遷移のprops更新で、県と段階を同期する', async () => {
     vi.mocked(fetchGeoDetailAction).mockImplementation(
       async (_slug, pref, expected) => detail(pref, expected.generatedAt)
@@ -144,5 +164,76 @@ describe('Geo表示境界の県・段階・証跡版', () => {
       generatedAt: versionB,
       sha256: props(versionB).manifest.stages[0]!.outputs[12]!.sha256,
     });
+  });
+  it('既定では県と表示段階をGeo canonical URLへ同期する', async () => {
+    window.history.replaceState({}, '', '/geo/population-flood-risk');
+    vi.mocked(fetchGeoDetailAction).mockImplementation(
+      async (_slug, pref, expected) => detail(pref, expected.generatedAt)
+    );
+    render(<GeoSpatialEvidenceExplorer {...props()} />);
+    await screen.findByTestId('map');
+    fireEvent.change(screen.getByRole('combobox', { name: '県' }), {
+      target: { value: '28' },
+    });
+    fireEvent.mouseDown(
+      screen.getByRole('tab', { name: '3. 数値の確かめ方' }),
+      {
+        button: 0,
+        ctrlKey: false,
+      }
+    );
+    expect(window.location.pathname).toBe('/geo/population-flood-risk');
+    expect(new URLSearchParams(window.location.search).get('pref')).toBe('28');
+    expect(new URLSearchParams(window.location.search).get('stage')).toBe(
+      'audit'
+    );
+    expect(window.location.hash).toBe('#spatial-evidence');
+    expect(screen.getByRole('link', { name: 'この県・この表示を共有' }))
+      .toHaveAttribute('href', '/geo/population-flood-risk?pref=28&stage=audit');
+  });
+  it('テーマ内では段階切替と外部県選択後もテーマURLを維持する', async () => {
+    const themeUrl = '/themes/geographic-access?pref=13000#station-access';
+    window.history.replaceState({}, '', themeUrl);
+    vi.mocked(fetchGeoDetailAction).mockImplementation(
+      async (_slug, pref, expected) => detail(pref, expected.generatedAt)
+    );
+    const view = render(
+      <GeoSpatialEvidenceExplorer
+        {...props()}
+        fixedPrefecture
+        syncUrl={false}
+      />
+    );
+    await screen.findByTestId('map');
+    fireEvent.mouseDown(
+      screen.getByRole('tab', { name: '3. 数値の確かめ方' }),
+      {
+        button: 0,
+        ctrlKey: false,
+      }
+    );
+    expect(
+      screen.getByRole('tab', { name: '3. 数値の確かめ方' })
+    ).toHaveAttribute('aria-selected', 'true');
+    expect(
+      `${window.location.pathname}${window.location.search}${window.location.hash}`
+    ).toBe(themeUrl);
+    view.rerender(
+      <GeoSpatialEvidenceExplorer
+        {...props()}
+        initialPrefCode="28"
+        fixedPrefecture
+        syncUrl={false}
+      />
+    );
+    await waitFor(() =>
+      expect(screen.getByTestId('map')).toHaveTextContent('28000')
+    );
+    expect(
+      `${window.location.pathname}${window.location.search}${window.location.hash}`
+    ).toBe(themeUrl);
+    expect(
+      screen.getByRole('link', { name: 'この県の地点・検算データを見る' })
+    ).toHaveAttribute('href', '/geo/data/population-flood-risk/28');
   });
 });

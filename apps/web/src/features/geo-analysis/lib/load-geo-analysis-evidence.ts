@@ -1,15 +1,22 @@
 import 'server-only';
 
 import {
+  assertPublicFacilityConservation,
+  assertGeoSnowConservation,
+  parseGeoSnowPrefDetail,
+  parseGeoLandslidePrefDetail,
+  assertGeoLandslideConservation,
   buildFloodPrefDetail,
   buildLandPricePrefDetail,
   geoAnalysisManifestKey,
   geoAnalysisPrefKey,
   type GeoAnalysisEvidenceManifest,
   type GeoAnalysisPrefDetail,
+  type GeoAnalysisSnapshotRow,
 } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
+import { parseGeoPublicFacilityPrefDetail } from './geo-public-facility-evidence';
 import {
   isTimestamp,
   matchesGeoArtifact,
@@ -39,6 +46,10 @@ export function parseGeoAnalysisPrefDetail(
   if (!isRecord(value) || !isTimestamp(value.generatedAt)) return null;
   if (typeof value.areaName !== 'string' || value.areaName.trim().length === 0)
     return null;
+  if (expectedSlug === 'population-snow-designation') return parseGeoSnowPrefDetail(value, expectedAreaCode);
+  if (expectedSlug === 'population-landslide-exposure') return parseGeoLandslidePrefDetail(value, expectedAreaCode);
+  if (expectedSlug === 'population-public-facility-access')
+    return parseGeoPublicFacilityPrefDetail(value, expectedAreaCode);
   if (expectedSlug === 'population-station-access') {
     const detail = parseGeoStationAccessPrefDetail(
       value,
@@ -149,7 +160,7 @@ export function parseGeoAnalysisPrefDetail(
     return null;
   const detail = value as unknown as Exclude<
     GeoAnalysisPrefDetail,
-    { slug: 'population-station-access' }
+    { slug: 'population-station-access' | 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' }
   >;
   const summary = value.summary;
   const input = {
@@ -246,6 +257,67 @@ export async function loadGeoAnalysisPrefBundle(
       !(await matchesGeoArtifact(value, artifact))
     )
       return null;
+    if (detail.slug === 'population-snow-designation' || detail.slug === 'population-landslide-exposure') {
+      const aggregate = await fetchFromR2AsJson<unknown>(manifest.aggregate.key);
+      if (!isRecord(aggregate) || aggregate.slug !== slug || aggregate.generatedAt !== detail.generatedAt || !Array.isArray(aggregate.rows) || !(await matchesGeoArtifact(aggregate, manifest.aggregate, true))) return null;
+      const row = aggregate.rows.find((row) => isRecord(row) && row.areaCode === areaCode);
+      if (!row) return null;
+      if (detail.slug === 'population-landslide-exposure') assertGeoLandslideConservation(detail, row as GeoAnalysisSnapshotRow);
+      else assertGeoSnowConservation(detail, row as GeoAnalysisSnapshotRow);
+    }
+    if (detail.slug === 'population-public-facility-access') {
+      const sourceArtifact = manifest.stages
+        .find((stage) => stage.id === 'public-facility-points')
+        ?.outputs.find((output) => output.areaCode === areaCode);
+      if (!sourceArtifact) return null;
+      const source = await fetchFromR2AsJson<unknown>(sourceArtifact.key);
+      if (
+        !isRecord(source) ||
+        source.schemaVersion !== 1 ||
+        source.slug !== slug ||
+        source.areaCode !== areaCode ||
+        source.generatedAt !== detail.generatedAt ||
+        !Array.isArray(source.facilities) ||
+        source.facilities.length !== sourceArtifact.recordCount ||
+        !(await matchesGeoArtifact(source, sourceArtifact))
+      )
+        return null;
+      const expectedFacilities = new Map(
+        detail.facilities
+          .filter((point) => point[2].slice(0, 2) === prefCode2)
+          .map((point) => [point[0], JSON.stringify(point)])
+      );
+      if (
+        source.facilities.length !== expectedFacilities.size ||
+        new Set(
+          source.facilities.map((point) =>
+            Array.isArray(point) ? point[0] : null
+          )
+        ).size !== expectedFacilities.size ||
+        source.facilities.some(
+          (point) =>
+            !Array.isArray(point) ||
+            expectedFacilities.get(point[0]) !== JSON.stringify(point)
+        )
+      )
+        return null;
+      const aggregate = await fetchFromR2AsJson<unknown>(
+        manifest.aggregate.key
+      );
+      if (
+        !isRecord(aggregate) ||
+        aggregate.slug !== slug ||
+        aggregate.generatedAt !== detail.generatedAt ||
+        !Array.isArray(aggregate.rows) ||
+        !(await matchesGeoArtifact(aggregate, manifest.aggregate, true))
+      )
+        return null;
+      const row = aggregate.rows.find(
+        (row) => isRecord(row) && row.areaCode === areaCode
+      );
+      if (!row) return null;
+      assertPublicFacilityConservation(detail, row as GeoAnalysisSnapshotRow);
+    }
     return { detail, manifest };
   } catch {
     return null;

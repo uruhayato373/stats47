@@ -1,45 +1,52 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
 // 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
 // client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
-import { normalizeUnitForAxis } from "@stats47/data-configs/theme-catalog/types";
-import { classifyUnitComparability } from "@stats47/data-configs/unit";
-import { Check } from "lucide-react";
+import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
+import { classifyUnitComparability } from '@stats47/data-configs/unit';
+import { Check } from 'lucide-react';
 
-import { ChartFooter } from "@/components/charts/ChartFooter";
-import { getChartColor } from "@/components/charts/ChartPalette";
-import { ChartPanel } from "@/components/charts/ChartPanel";
-import type { LineChartData } from "@/components/stat-charts/types/visualization";
+import { ChartFooter } from '@/components/charts/ChartFooter';
+import { getChartColor } from '@/components/charts/ChartPalette';
+import { ChartPanel } from '@/components/charts/ChartPanel';
+import type { LineChartData } from '@/components/stat-charts/types/visualization';
 
-import { trackNavClick } from "@/lib/analytics/events";
+import { trackNavClick } from '@/lib/analytics/events';
 
-import { fetchMetricTimeseriesAction, type MetricTimeseriesResult } from "../actions";
+import {
+  fetchMetricTimeseriesAction,
+  type MetricTimeseriesResult,
+} from '../actions';
 
-import { ChartEmptyState, ChartLoading } from "./ChartState";
-import { ScrollableRow } from "./ScrollableRow";
+import { ChartEmptyState, ChartLoading } from './ChartState';
+import { ScrollableRow } from './ScrollableRow';
 
-import type { MetricKpi } from "./metric-kpi";
+import type { MetricKpi } from './metric-kpi';
 
 const CHART_HEIGHT = 250;
 const PREFECTURE_PROMPT_HEIGHT = 80;
 
 const LineChartClient = dynamic(
   () =>
-    import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
+    import('@/components/stat-charts/components/charts/LineChart/LineChartClient').then(
+      (mod) => mod.LineChartClient
+    ),
   { ssr: false, loading: () => <ChartLoading height={CHART_HEIGHT} /> }
 );
 
-const NATIONAL_CODE = "00000";
+const NATIONAL_CODE = '00000';
 /** 比較系列 (全国) の線種。主系列と色だけで区別しないための破線 */
-const COMPARISON_DASH = "6,4";
+const COMPARISON_DASH = '6,4';
 
 interface MetricSwitcherPanelProps {
   /** カード見出し (複数指標を束ねるグループ名。未指定なら見出しを表示しない) */
   title?: string;
+  /** 同じ章に系列の詳細図がある場合は、値を重複描画しない。 */
+  summaryOnly?: boolean;
   /** このカードに並べる KPI 群 (タイルの中身・表示順) */
   metrics: MetricKpi[];
   /** rankingKey → 短ラベル (tabIndicators の tabLabel)。無ければ title を使う */
@@ -53,7 +60,8 @@ interface MetricSwitcherPanelProps {
 }
 
 /** 系列キャッシュのキー。指標×地域で一意にする */
-const cacheKey = (metricKey: string, areaCode: string) => `${metricKey}:${areaCode}`;
+const cacheKey = (metricKey: string, areaCode: string) =>
+  `${metricKey}:${areaCode}`;
 
 /**
  * チャート領域に何を出すか。
@@ -65,10 +73,10 @@ const cacheKey = (metricKey: string, areaCode: string) => `${metricKey}:${areaCo
  * (GEO-SCOPE-SEPARATION-01 WP2)。
  */
 type ChartState =
-  | { kind: "chart"; data: LineChartData; hasComparison: boolean }
-  | { kind: "single-year"; yearName: string }
-  | { kind: "none" }
-  | { kind: "select-prefecture" };
+  | { kind: 'chart'; data: LineChartData; hasComparison: boolean }
+  | { kind: 'single-year'; yearName: string }
+  | { kind: 'none' }
+  | { kind: 'select-prefecture' };
 
 /**
  * 比較系列の凡例名。
@@ -78,8 +86,10 @@ type ChartState =
  * 平均のときは「都道府県平均」と呼び、「全国」の字を含めない
  * (docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md §3.1)。
  */
-function nationalSeriesName(result: MetricTimeseriesResult | undefined): string {
-  return result?.source === "national" ? "全国" : "都道府県平均";
+function nationalSeriesName(
+  result: MetricTimeseriesResult | undefined
+): string {
+  return result?.source === 'national' ? '全国' : '都道府県平均';
 }
 
 /**
@@ -90,7 +100,7 @@ function nationalSeriesName(result: MetricTimeseriesResult | undefined): string 
  * 該当: consumer-prices の全指標 / laspeyres-index-prefecture など。
  */
 function isNationalBaselineIndex(unit: string): boolean {
-  return unit.includes("全国=100") || unit.includes("全国＝100");
+  return unit.includes('全国=100') || unit.includes('全国＝100');
 }
 
 /**
@@ -104,26 +114,48 @@ function isNationalBaselineIndex(unit: string): boolean {
  * その系列は左軸 = 単軸表示に戻すのが読者にとって自然。
  */
 function assignAxes(checked: MetricKpi[]): {
-  axisOf: Map<string, "left" | "right">;
+  axisOf: Map<string, 'left' | 'right'>;
   leftUnit: string;
   rightUnit?: string;
 } {
   /** 倍率1の同一単位だけを同じ軸へ載せる。換算可能でも値を変換していない系列は分ける。 */
   const sharesAxis = (a: string, b: string) =>
-    normalizeUnitForAxis(a) === normalizeUnitForAxis(b) || classifyUnitComparability(a, b).verdict === "same";
+    normalizeUnitForAxis(a) === normalizeUnitForAxis(b) ||
+    classifyUnitComparability(a, b).verdict === 'same';
   const units: string[] = [];
   for (const m of checked) {
     if (!units.some((unit) => sharesAxis(unit, m.unit))) units.push(m.unit);
   }
-  const axisOf = new Map<string, "left" | "right">();
+  const axisOf = new Map<string, 'left' | 'right'>();
   for (const m of checked) {
-    axisOf.set(m.metricKey, units[1] && sharesAxis(units[1], m.unit) ? "right" : "left");
+    axisOf.set(
+      m.metricKey,
+      units[1] && sharesAxis(units[1], m.unit) ? 'right' : 'left'
+    );
   }
   return {
     axisOf,
-    leftUnit: units[0] ?? "",
+    leftUnit: units[0] ?? '',
     rightUnit: units[1],
   };
+}
+
+/** Same-scale units only; never force a third unit onto the left axis. */
+function withinTwoAxes(metrics: MetricKpi[]): MetricKpi[] {
+  const units: string[] = [];
+  return metrics.filter((metric) => {
+    if (
+      units.some(
+        (unit) =>
+          normalizeUnitForAxis(unit) === normalizeUnitForAxis(metric.unit) ||
+          classifyUnitComparability(unit, metric.unit).verdict === 'same'
+      )
+    )
+      return true;
+    if (units.length >= 2) return false;
+    units.push(metric.unit);
+    return true;
+  });
 }
 
 /**
@@ -135,13 +167,13 @@ function assignAxes(checked: MetricKpi[]): {
  * 選択を促す案内にする (GEO-SCOPE-SEPARATION-01 WP2)。
  */
 function emptyMessage(state: ChartState): string {
-  if (state.kind === "single-year") {
+  if (state.kind === 'single-year') {
     return `${state.yearName}の単年データのため、推移グラフはありません`;
   }
-  if (state.kind === "select-prefecture") {
-    return "都道府県を選択すると、その県の推移が表示されます";
+  if (state.kind === 'select-prefecture') {
+    return '都道府県を選択すると、その県の推移が表示されます';
   }
-  return "推移データがありません";
+  return '推移データがありません';
 }
 
 /**
@@ -161,6 +193,7 @@ function emptyMessage(state: ChartState): string {
  */
 export function MetricSwitcherPanel({
   title,
+  summaryOnly = false,
   metrics,
   tabLabels,
   selectedPrefectureCode,
@@ -168,11 +201,16 @@ export function MetricSwitcherPanel({
   defaultCheckedKeys,
 }: MetricSwitcherPanelProps) {
   const areaCode = selectedPrefectureCode ?? NATIONAL_CODE;
+  const Tile = summaryOnly ? "div" : "button";
 
   const [checkedKeys, setCheckedKeys] = useState<string[]>(() => {
     const known = new Set(metrics.map((m) => m.metricKey));
     const initial = (defaultCheckedKeys ?? []).filter((k) => known.has(k));
-    return initial.length > 0 ? initial : metrics[0] ? [metrics[0].metricKey] : [];
+    return initial.length > 0
+      ? initial
+      : metrics[0]
+        ? [metrics[0].metricKey]
+        : [];
   });
 
   /**
@@ -186,7 +224,7 @@ export function MetricSwitcherPanel({
   const checkedMetrics = useMemo(() => {
     const set = new Set(checkedKeys);
     const kept = metrics.filter((m) => set.has(m.metricKey));
-    return kept.length > 0 ? kept : metrics.slice(0, 1);
+    return withinTwoAxes(kept.length > 0 ? kept : metrics.slice(0, 1));
   }, [checkedKeys, metrics]);
 
   /** 系列色。グループ内の定義順で固定 = 他をチェックしても自分の色は変わらない */
@@ -202,9 +240,11 @@ export function MetricSwitcherPanel({
    * キー付きなので県切替やチェック往復での競合を requestId 照合なしに扱える
    * (古い応答が届いても自分のキーに書き込むだけで、描画は現在のキーを引く)。
    */
-  const [seriesCache, setSeriesCache] = useState<Record<string, MetricTimeseriesResult>>({});
+  const [seriesCache, setSeriesCache] = useState<
+    Record<string, MetricTimeseriesResult>
+  >({});
 
-  const checkedKeysKey = checkedMetrics.map((m) => m.metricKey).join(",");
+  const checkedKeysKey = checkedMetrics.map((m) => m.metricKey).join(',');
 
   // チェック中の指標について、必要な系列 (自地域 + 全国) のうち未取得のものだけ取る。
   // 県選択時に全国も取るのは比較破線のためだけではない: 県系列を持たない指標
@@ -215,8 +255,8 @@ export function MetricSwitcherPanel({
   //   時系列は「都道府県を選択すると表示されます」という案内に置き換わるため、
   //   ネットワーク往復も「全国」「都道府県平均」の値も一切必要ない。
   useEffect(() => {
-    if (!selectedPrefectureCode) return;
-    const keys = checkedKeysKey ? checkedKeysKey.split(",") : [];
+    if (!selectedPrefectureCode || summaryOnly) return;
+    const keys = checkedKeysKey ? checkedKeysKey.split(',') : [];
     if (keys.length === 0) return;
     const wanted = [areaCode, NATIONAL_CODE];
     const missing: Array<[string, string]> = [];
@@ -230,7 +270,9 @@ export function MetricSwitcherPanel({
     let cancelled = false;
     void Promise.all(
       missing.map(async ([key, code]) => {
-        const result = await fetchMetricTimeseriesAction(key, code).catch(() => null);
+        const result = await fetchMetricTimeseriesAction(key, code).catch(
+          () => null
+        );
         return [cacheKey(key, code), result] as const;
       })
     ).then((entries) => {
@@ -238,7 +280,7 @@ export function MetricSwitcherPanel({
       setSeriesCache((prev) => {
         const next = { ...prev };
         for (const [key, result] of entries) {
-          if (result) next[key] = result;
+          next[key] = result ?? { points: [], source: 'none' };
         }
         return next;
       });
@@ -246,16 +288,23 @@ export function MetricSwitcherPanel({
     return () => {
       cancelled = true;
     };
-  }, [checkedKeysKey, areaCode, selectedPrefectureCode, seriesCache]);
+  }, [
+    checkedKeysKey,
+    areaCode,
+    selectedPrefectureCode,
+    seriesCache,
+    summaryOnly,
+  ]);
 
   // 1 本でも描ければ描く。全滅のときだけローディング (取得は指標ごとに独立)。
   // 47都道府県 (未選択) では何も fetch しないので、ローディングにはならない。
   const isLoadingSeries =
-    !!selectedPrefectureCode && checkedMetrics.every((m) => !seriesCache[cacheKey(m.metricKey, areaCode)]);
+    !!selectedPrefectureCode &&
+    checkedMetrics.every((m) => !seriesCache[cacheKey(m.metricKey, areaCode)]);
 
   const chartState: ChartState = useMemo(() => {
-    if (!selectedPrefectureCode) return { kind: "select-prefecture" };
-    if (checkedMetrics.length === 0) return { kind: "none" };
+    if (!selectedPrefectureCode) return { kind: 'select-prefecture' };
+    if (checkedMetrics.length === 0) return { kind: 'none' };
 
     const { axisOf, leftUnit, rightUnit } = assignAxes(checkedMetrics);
 
@@ -274,7 +323,12 @@ export function MetricSwitcherPanel({
      */
     const rows = new Map<string, Record<string, string | number>>();
     const labelOfYear = new Map<string, string>();
-    const put = (year: string, yearName: string, key: string, value: number) => {
+    const put = (
+      year: string,
+      yearName: string,
+      key: string,
+      value: number
+    ) => {
       const yk = year.slice(0, 4);
       if (!labelOfYear.has(yk)) labelOfYear.set(yk, yearName);
       const row = rows.get(yk) ?? {};
@@ -282,10 +336,10 @@ export function MetricSwitcherPanel({
       rows.set(yk, row);
     };
 
-    const lines: LineChartData["lines"] = [];
+    const lines: LineChartData['lines'] = [];
     const single = checkedMetrics.length === 1 ? checkedMetrics[0] : null;
     let maxPoints = 0;
-    let loneYear = "";
+    const singleYears = new Set<string>();
 
     for (const metric of checkedMetrics) {
       const key = metric.metricKey;
@@ -311,7 +365,9 @@ export function MetricSwitcherPanel({
         const nationalPoints = nationalResult?.points ?? [];
         if (nationalPoints.length > 0) {
           points = nationalPoints;
-          name = single ? nationalSeriesName(nationalResult) : label;
+          name = single
+            ? nationalSeriesName(nationalResult)
+            : `${label}（${nationalSeriesName(nationalResult)}）`;
         } else if (metric.series.length > 0) {
           points = metric.series.map((p) => ({
             year: String(p.year),
@@ -319,24 +375,24 @@ export function MetricSwitcherPanel({
             value: p.value,
           }));
           // 47 県平均を「全国」と称さない (実数系は全国値の 1/47 になる)
-          name = single ? "都道府県平均" : `${label}（平均）`;
+          name = single ? '都道府県平均' : `${label}（平均）`;
         }
       }
 
       if (points.length === 0) continue;
       for (const p of points) put(p.year, p.yearName, key, p.value);
       if (points.length > maxPoints) maxPoints = points.length;
-      if (points.length === 1) loneYear = points[0].yearName;
+      if (points.length === 1) singleYears.add(points[0].yearName);
 
       lines.push({
         dataKey: key,
         name,
         color: colorOf.get(key) ?? getChartColor(0),
-        yAxis: axisOf.get(key) ?? "left",
+        yAxis: axisOf.get(key) ?? 'left',
       });
     }
 
-    if (lines.length === 0) return { kind: "none" };
+    if (lines.length === 0) return { kind: 'none' };
 
     // 全国比較の破線。チェック 1 本 + 県選択のときだけ出す。
     // 2 本以上に足すと系列が倍になって読めない (GSC も比較線は出さない)。
@@ -344,21 +400,23 @@ export function MetricSwitcherPanel({
     let hasComparison = false;
     if (single && selectedPrefectureCode) {
       const areaResult = seriesCache[cacheKey(single.metricKey, areaCode)];
-      const nationalResult = seriesCache[cacheKey(single.metricKey, NATIONAL_CODE)];
+      const nationalResult =
+        seriesCache[cacheKey(single.metricKey, NATIONAL_CODE)];
       if (
         (areaResult?.points.length ?? 0) > 0 &&
         nationalResult &&
         nationalResult.points.length > 0 &&
         !isNationalBaselineIndex(single.unit)
       ) {
-        for (const p of nationalResult.points) put(p.year, p.yearName, "national", p.value);
+        for (const p of nationalResult.points)
+          put(p.year, p.yearName, 'national', p.value);
         lines.push({
-          dataKey: "national",
+          dataKey: 'national',
           name: nationalSeriesName(nationalResult),
-          color: "hsl(var(--muted-foreground))",
+          color: 'hsl(var(--muted-foreground))',
           strokeDasharray: COMPARISON_DASH,
           hidePoints: true,
-          yAxis: "left",
+          yAxis: 'left',
         });
         hasComparison = true;
         if (nationalResult.points.length > maxPoints) {
@@ -372,29 +430,47 @@ export function MetricSwitcherPanel({
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([yk, row]) => ({ ...row, year: labelOfYear.get(yk) ?? yk }));
     // 1 点では折れ線にならない。ただし「無い」ではなく「単年だけ」と言い分ける
-    if (maxPoints === 1) return { kind: "single-year", yearName: loneYear };
-    if (data.length === 0) return { kind: "none" };
+    if (maxPoints === 1) return { kind: 'single-year', yearName: [...singleYears].join("・") };
+    if (data.length === 0) return { kind: 'none' };
     return {
-      kind: "chart",
+      kind: 'chart',
       hasComparison,
       data: {
-        xAxisKey: "year",
+        xAxisKey: 'year',
         data,
         lines,
         unit: leftUnit,
         rightUnit,
       },
     };
-  }, [checkedMetrics, selectedPrefectureCode, seriesCache, areaCode, areaName, tabLabels, colorOf]);
+  }, [
+    checkedMetrics,
+    selectedPrefectureCode,
+    seriesCache,
+    areaCode,
+    areaName,
+    tabLabels,
+    colorOf,
+  ]);
 
   if (metrics.length === 0) return null;
 
   const toggle = (key: string, next: boolean) => {
     // 最後の 1 本は外せない。0 本になるとチャートが消え、
     // 「壊れた」のか「自分で消した」のか読者に判別できなくなる。
-    if (!next && checkedMetrics.length <= 1) return;
+    if (summaryOnly || (!next && checkedMetrics.length <= 1)) return;
+    if (
+      next &&
+      withinTwoAxes([
+        ...checkedMetrics,
+        ...metrics.filter((m) => m.metricKey === key),
+      ]).length <= checkedMetrics.length
+    )
+      return;
     setCheckedKeys((prev) => {
-      const set = new Set(prev.length > 0 ? prev : checkedMetrics.map((m) => m.metricKey));
+      const set = new Set(
+        prev.length > 0 ? prev : checkedMetrics.map((m) => m.metricKey)
+      );
       if (next) set.add(key);
       else set.delete(key);
       return metrics.map((m) => m.metricKey).filter((k) => set.has(k));
@@ -404,7 +480,7 @@ export function MetricSwitcherPanel({
       trackNavClick({
         label: key,
         href: `/ranking/${key}`,
-        surface: "theme_kpi_switcher",
+        surface: 'theme_kpi_switcher',
       });
     }
   };
@@ -415,18 +491,27 @@ export function MetricSwitcherPanel({
   const representative = checkedMetrics[0] ?? metrics[0];
   const contractYear =
     metrics
-      .flatMap((metric) => metric.series.map((point) => String(point.year)))
+      .flatMap((metric) =>
+        metric.yearName
+          ? [metric.yearName]
+          : metric.series.map((point) => String(point.year))
+      )
       .sort()
-      .at(-1) ?? "";
-  const contractUnits = [...new Set(metrics.map((metric) => metric.unit).filter(Boolean))].join(" / ");
+      .at(-1) ?? '';
+  const contractUnits = [
+    ...new Set(metrics.map((metric) => metric.unit).filter(Boolean)),
+  ].join(' / ');
   const readyMetricCount = metrics.filter(
-    (metric) => metric.topRanked !== null || metric.value !== null || metric.series.length > 0
+    (metric) =>
+      metric.topRanked !== null ||
+      metric.value !== null ||
+      metric.series.length > 0
   ).length;
 
   return (
     <div
       data-theme-component-type="kpi-card"
-      data-data-state={readyMetricCount > 0 ? "ready" : "no-data"}
+      data-data-state={readyMetricCount > 0 ? 'ready' : 'no-data'}
       data-unit={contractUnits}
       data-year={contractYear}
       data-series-count={readyMetricCount}
@@ -447,60 +532,92 @@ export function MetricSwitcherPanel({
           ) : undefined
         }
       >
-        {!title && representative ? <h3 className="sr-only">{representative.title}</h3> : null}
+        {!title && representative ? (
+          <h3 className="sr-only">{representative.title}</h3>
+        ) : null}
         <div className="border-b border-border">
-          <ScrollableRow className="snap-x snap-mandatory" controlsMode="overlay">
+          <ScrollableRow
+            className="snap-x snap-mandatory"
+            controlsMode="overlay"
+          >
             <div className="inline-flex w-max min-w-full divide-x divide-border">
               {metrics.map((m) => {
                 const label = tabLabels[m.metricKey] ?? m.title;
                 const checked = checkedSet.has(m.metricKey);
                 const lockedOn = checked && isLastChecked;
+                const axisLimit =
+                  !checked &&
+                  withinTwoAxes([...checkedMetrics, m]).length <=
+                    checkedMetrics.length;
                 const color = colorOf.get(m.metricKey) ?? getChartColor(0);
                 return (
                   /* タイル全体で 1 つのチェックボックス。
                      Radix の Checkbox (button) を <label> で包むと、ラベル経由の
                      activation と直接クリックが二重に発火しうる。入れ子にせず
                      button 自体を role="checkbox" にして 1 コントロールに保つ。 */
-                  <button
+                  <Tile
                     key={m.metricKey}
-                    type="button"
-                    role="checkbox"
-                    aria-checked={checked}
-                    aria-label={`${label}をグラフに表示`}
-                    aria-disabled={lockedOn || undefined}
-                    onClick={() => toggle(m.metricKey, !checked)}
+                    type={summaryOnly ? undefined : "button"}
+                    role={summaryOnly ? undefined : 'checkbox'}
+                    aria-checked={summaryOnly ? undefined : checked}
+                    aria-label={summaryOnly ? label : `${label}をグラフに表示`}
+                    aria-disabled={
+                      summaryOnly ? undefined : lockedOn || axisLimit || undefined
+                    }
+                    onClick={summaryOnly ? undefined : () => toggle(m.metricKey, !checked)}
                     title={
-                      lockedOn
-                        ? "最後の 1 指標は外せません（別の指標を選ぶと外せます）"
-                        : // タイル幅に収まらないラベルを hover で読めるようにする
-                          label
+                      axisLimit
+                        ? '同時に表示できる単位は2種類までです。他の指標を外すと選択できます'
+                        : lockedOn
+                          ? '最後の 1 指標は外せません（別の指標を選ぶと外せます）'
+                          : // タイル幅に収まらないラベルを hover で読めるようにする
+                            label
                     }
                     className={`snap-start flex w-36 min-w-36 shrink-0 grow flex-col items-start gap-1 rounded-none border-0 border-b-2 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 ${
-                      checked ? "bg-accent/40" : "border-b-border hover:bg-accent/30"
-                    } ${lockedOn ? "cursor-default" : "cursor-pointer"}`}
+                      checked
+                        ? 'bg-accent/40'
+                        : 'border-b-border hover:bg-accent/30'
+                    } ${lockedOn ? 'cursor-default' : 'cursor-pointer'}`}
                     style={checked ? { borderBottomColor: color } : undefined}
                   >
                     <span className="flex w-full items-center gap-1.5">
                       {/* チェック状態と系列色を 1 つの箱で示す (色ドットを別に置かない) */}
-                      <span
-                        aria-hidden
-                        className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-sm border"
-                        style={checked ? { backgroundColor: color, borderColor: color } : undefined}
-                      >
-                        {checked ? <Check className="h-3 w-3 text-primary-foreground" /> : null}
+                      {!summaryOnly && (
+                        <span
+                          aria-hidden
+                          className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-sm border"
+                          style={
+                            checked
+                              ? { backgroundColor: color, borderColor: color }
+                              : undefined
+                          }
+                        >
+                          {checked ? (
+                            <Check className="h-3 w-3 text-primary-foreground" />
+                          ) : null}
+                        </span>
+                      )}
+                      <span className="min-h-8 whitespace-normal break-words text-[11px] leading-4 text-muted-foreground">
+                        {label}
                       </span>
-                      <span className="truncate text-[11px] text-muted-foreground">{label}</span>
                     </span>
+                    {m.yearName && (
+                      <span className="text-[10px] text-muted-foreground">
+                        {m.yearName}
+                      </span>
+                    )}
                     {selectedPrefectureCode ? (
                       <>
                         <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
                           {m.value !== null
-                            ? m.value.toLocaleString("ja-JP", {
+                            ? m.value.toLocaleString('ja-JP', {
                                 maximumFractionDigits: 2,
                               })
-                            : "—"}
+                            : '—'}
                           {m.unit ? (
-                            <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">{m.unit}</span>
+                            <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
+                              {m.unit}
+                            </span>
                           ) : null}
                         </span>
                         {m.rank !== null ? (
@@ -515,12 +632,14 @@ export function MetricSwitcherPanel({
                       <>
                         <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
                           {m.topRanked !== null
-                            ? m.topRanked.value.toLocaleString("ja-JP", {
+                            ? m.topRanked.value.toLocaleString('ja-JP', {
                                 maximumFractionDigits: 2,
                               })
-                            : "—"}
+                            : '—'}
                           {m.unit ? (
-                            <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">{m.unit}</span>
+                            <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
+                              {m.unit}
+                            </span>
                           ) : null}
                         </span>
                         {m.topRanked !== null ? (
@@ -530,24 +649,30 @@ export function MetricSwitcherPanel({
                         ) : null}
                       </>
                     )}
-                  </button>
+                  </Tile>
                 );
               })}
             </div>
           </ScrollableRow>
         </div>
-        <div className="p-4">
-          {isLoadingSeries ? (
-            <ChartLoading height={CHART_HEIGHT} />
-          ) : chartState.kind === "chart" ? (
-            <LineChartClient chartData={chartState.data} />
-          ) : (
-            <ChartEmptyState
-              message={emptyMessage(chartState)}
-              height={chartState.kind === "select-prefecture" ? PREFECTURE_PROMPT_HEIGHT : CHART_HEIGHT}
-            />
-          )}
-        </div>
+        {!summaryOnly && (
+          <div className="p-4">
+            {isLoadingSeries ? (
+              <ChartLoading height={CHART_HEIGHT} />
+            ) : chartState.kind === 'chart' ? (
+              <LineChartClient chartData={chartState.data} />
+            ) : chartState.kind === 'select-prefecture' ? (
+              <ChartEmptyState
+                message={emptyMessage(chartState)}
+                height={PREFECTURE_PROMPT_HEIGHT}
+              />
+            ) : (
+              <p className="text-xs text-muted-foreground">
+                {emptyMessage(chartState)}
+              </p>
+            )}
+          </div>
+        )}
       </ChartPanel>
     </div>
   );

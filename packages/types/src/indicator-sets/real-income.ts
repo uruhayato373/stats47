@@ -6,10 +6,60 @@ import type { IndicatorSet } from "../indicator-set";
 export const REAL_INCOME_SET: IndicatorSet = {
   "key": "real-income",
   "title": "実質収入・購買力",
-  "description": "都道府県別の名目収入を消費者物価地域差指数で補正し、実質的な購買力を比較。可処分所得・県民所得・家賃控除後手残りで「本当に豊かな県」を47都道府県のデータで確認できます。",
+  "description": "勤労者世帯の実収入から控除後・物価補正後の購買力を、対象世帯を揃えて比較する。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
+    {
+      "rankingKey": "household-survey-food-expenditure",
+      "shortLabel": "食料",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-housing-expenditure",
+      "shortLabel": "住居",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-utilities-expenditure",
+      "shortLabel": "光熱・水道",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-furniture-household-goods-expenditure",
+      "shortLabel": "家具・家事用品",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-clothing-footwear-expenditure",
+      "shortLabel": "被服及び履物",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-healthcare-expenditure",
+      "shortLabel": "保健医療",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-transport-communication-expenditure",
+      "shortLabel": "交通・通信",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-education-expenditure",
+      "shortLabel": "教育",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-culture-recreation-expenditure",
+      "shortLabel": "教養娯楽",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-other-expenditure",
+      "shortLabel": "その他の消費支出",
+      "role": "context"
+    },
     {
       "rankingKey": "disposable-income-worker-households",
       "shortLabel": "可処分所得",
@@ -17,17 +67,17 @@ export const REAL_INCOME_SET: IndicatorSet = {
     },
     {
       "rankingKey": "actual-income-worker-households-per-month",
-      "shortLabel": "実収入",
+      "shortLabel": "実収入（勤労者世帯・1世帯当たり月額）",
       "role": "secondary"
     },
     {
       "rankingKey": "per-capita-prefectural-income-h27",
       "shortLabel": "県民所得/人",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "annual-income-per-household",
-      "shortLabel": "世帯年収",
+      "shortLabel": "年間収入（1世帯当たり）",
       "role": "context"
     },
     {
@@ -37,7 +87,7 @@ export const REAL_INCOME_SET: IndicatorSet = {
     },
     {
       "rankingKey": "disposable-income-after-rent",
-      "shortLabel": "家賃控除後手残り",
+      "shortLabel": "家賃差引後の参考月額",
       "role": "secondary"
     },
     {
@@ -69,6 +119,21 @@ export const REAL_INCOME_SET: IndicatorSet = {
       "rankingKey": "consumer-price-difference-index-food",
       "shortLabel": "消費者物価地域差指数",
       "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-consumption-expenditure",
+      "shortLabel": "消費支出（全費目）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "gini-coefficient-disposable-income",
+      "shortLabel": "等価可処分所得ジニ係数（総世帯）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "gini-coefficient-financial-assets",
+      "shortLabel": "等価金融資産残高ジニ係数（総世帯）",
+      "role": "secondary"
     }
   ],
   "keywords": [

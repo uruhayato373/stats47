@@ -146,6 +146,9 @@ export interface ThemeDashboardClientProps {
    * THEME_CATALOGS から直読みして渡す。未定義テーマは 1 グループにフォールバック。
    */
   metricGroups?: import("@stats47/data-configs/theme-catalog").CatalogMetricGroup[];
+  sections?: import("@stats47/data-configs/theme-catalog").CatalogSection[];
+  /** Server-rendered visualizations, inserted into their editorial chapter. */
+  embeddedSections?: Record<string, import("react").ReactNode>;
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** TopoJSON */

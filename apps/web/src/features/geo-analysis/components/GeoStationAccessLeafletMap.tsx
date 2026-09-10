@@ -2,7 +2,7 @@
 
 import 'leaflet/dist/leaflet.css';
 
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   CircleMarker,
@@ -15,6 +15,7 @@ import {
 } from 'react-leaflet';
 
 import { buildGeoStationAccessMapModel } from '../lib/build-geo-station-access-map-model';
+import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
 
 import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
@@ -59,6 +60,7 @@ function escapeHtml(value: string): string {
 
 /** 県内1kmメッシュを人口変化または駅800m圏で切り替えて表示する。 */
 export function GeoStationAccessLeafletMap({ detail, view }: Props) {
+  const renderer = useState(() => createGeoCanvasRenderer())[0];
   const model = useMemo(
     () =>
       buildGeoStationAccessMapModel(
@@ -93,6 +95,7 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
   return (
     <MapContainer
       key={detail.areaCode}
+      renderer={renderer}
       preferCanvas
       center={[36.5, 137.5]}
       zoom={6}
@@ -101,7 +104,7 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
       minZoom={GEO_BASEMAP.minZoom}
       maxZoom={14}
       scrollWheelZoom={false}
-      className="h-[480px] overflow-hidden rounded-none lg:h-[620px]"
+      className="isolate h-[480px] overflow-hidden rounded-none lg:h-[620px]"
       aria-label={`${detail.areaName}の1kmメッシュ分析地図`}
     >
       <TileLayer url={GEO_BASEMAP.url} attribution={GEO_BASEMAP.attribution} />

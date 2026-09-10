@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const fireDamageCasualtiesPerPopulation: MetricConfig = {
   "key": "fire-damage-casualties-per-population",
   "title": "火災死傷者数",
-  "subtitle": "人口当たり",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "safetyenvironment",
+  "description": "火災死傷者数を総人口で除し、人口10万人当たりに換算した値。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -66,25 +67,9 @@ export const fireDamageCasualtiesPerPopulation: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "fire-damage-casualties-per-accident",
-  "seoTitle": "火災死傷者数ランキング都道府県【2023年】｜1位青森県（10.64人）",
-  "seoDescription": "2023年の火災死傷者数の都道府県別ランキング。1位青森県（10.64人）、最下位京都府（3.63人）で2.9倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "火災死傷者数（人口10万人当たり）ランキング都道府県",
+  "seoDescription": "人口10万人当たりの火災死傷者数を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };
