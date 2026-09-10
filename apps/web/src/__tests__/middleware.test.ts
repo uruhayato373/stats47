@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
+import { KNOWN_THEME_SLUGS } from '../config/known-theme-slugs';
 import middleware, { isValidPrefCode } from '../middleware';
 
 describe('isValidPrefCode', () => {
@@ -231,7 +232,7 @@ describe('/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)',
     expect(response.status).not.toBe(410);
   });
 
-  test.each(['construction-industry', 'information-industry', 'waste-recycling'])('新規テーマの県別導線 /areas/28000/%s を受理する', (theme) => {
+  test.each([...KNOWN_THEME_SLUGS].filter((key) => !['ports', 'railway', 'roads'].includes(key)))('新規テーマの県別導線 /areas/28000/%s を受理する', (theme) => {
     expect(middleware(request(`/areas/28000/${theme}`)).status).toBe(200);
   });
 

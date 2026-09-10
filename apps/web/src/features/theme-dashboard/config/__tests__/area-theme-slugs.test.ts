@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 
+import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
+
 import { ALL_THEMES } from "../all-themes";
 import { AREA_THEMES, isAreaTheme } from "../area-theme-slugs";
 
@@ -8,17 +10,14 @@ import { AREA_THEMES, isAreaTheme } from "../area-theme-slugs";
  * middleware.ts の `TYPE_A_THEME_SLUGS` / sitemap.ts の `TYPE_B_THEMES` と一致すること。
  * ここがドリフト検知の基準（存在しない / 410 URL を切替リンクに出さないための保証）。
  */
-const EXPECTED_TYPE_A = [
-  "population-dynamics", "aging-society", "living-housing", "local-economy",
-  "labor-wages", "manufacturing", "healthcare", "safety", "education-culture",
-  "tourism", "consumer-prices", "foreign-residents", "occupation-salary",
-  "real-income", "labor-mobility", "local-finance", "fishery-marine", "climate",
-  "construction-industry", "information-industry", "waste-recycling",
-];
+const EXPECTED_TYPE_A = [...KNOWN_THEME_SLUGS].filter((key) => !["ports", "railway", "roads"].includes(key));
 
 const EXPECTED_TYPE_B = ["ports", "railway", "roads"];
 
 describe("area-theme-slugs", () => {
+  it("未登録テーマは県別導線へ出さない", () => {
+    expect(isAreaTheme("not-a-theme")).toBe(false);
+  });
   it("Type B テーマ (都道府県ページ非対応) は isAreaTheme=false", () => {
     for (const key of EXPECTED_TYPE_B) {
       expect(isAreaTheme(key)).toBe(false);

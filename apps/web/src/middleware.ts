@@ -2,6 +2,8 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
 
+import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
+
 import { resolvePageCacheHeaders } from '@/lib/cache-policy';
 import { UrlPolicy } from '@/lib/url-policy';
 
@@ -43,29 +45,7 @@ const OLD_CATEGORY_KEYS = LEGACY_CATEGORY_KEYS_SET;
  * `/areas/{prefCode}/{themeSlug}` を Next.js に委譲してよいか判定する。
  * リクエストごとに new Set を作らないよう module スコープに hoist (2026-06)。
  */
-const TYPE_A_THEME_SLUGS = new Set([
-  'population-dynamics',
-  'aging-society',
-  'living-housing',
-  'local-economy',
-  'labor-wages',
-  'manufacturing',
-  'healthcare',
-  'safety',
-  'education-culture',
-  'tourism',
-  'consumer-prices',
-  'construction-industry',
-  'information-industry',
-  'waste-recycling',
-  'foreign-residents',
-  'occupation-salary',
-  'real-income',
-  'labor-mobility',
-  'local-finance',
-  'fishery-marine',
-  'climate',
-]);
+const TYPE_A_THEME_SLUGS = AREA_THEME_SLUGS;
 
 /**
  * `isValidPrefCode` は UrlPolicy から再 export（既存テスト互換のため）。

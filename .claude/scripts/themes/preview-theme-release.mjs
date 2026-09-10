@@ -37,8 +37,13 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     const upstream = await fetch(`https://storage.stats47.jp/${key}`, { method: req.method, signal: AbortSignal.timeout(20000) });
+    const body = req.method === 'HEAD' ? undefined : Buffer.from(await upstream.arrayBuffer());
     res.writeHead(upstream.status, { 'Content-Type': upstream.headers.get('content-type') ?? 'application/json', 'X-Theme-Preview-Source': 'public' });
-    res.end(req.method === 'HEAD' ? undefined : Buffer.from(await upstream.arrayBuffer()));
-  } catch { res.writeHead(502).end('Preview data unavailable'); }
+    res.end(body);
+  } catch {
+    if (res.destroyed || res.writableEnded) return;
+    if (res.headersSent) res.destroy();
+    else res.writeHead(502).end('Preview data unavailable');
+  }
 });
-server.listen(Number(options.port), '127.0.0.1', () => console.log(`Theme release preview http://127.0.0.1:${options.port}; ${staged.size} verified files`));
+server.listen(Number(options.port), '127.0.0.1', () => console.log(`Theme release preview http://127.0.0.1:${server.address().port}; ${staged.size} verified files`));

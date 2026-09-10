@@ -1,3 +1,4 @@
+import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 import { POPULATION_DYNAMICS_SET, type IndicatorSet } from "@stats47/types";
 import { describe, it, expect } from "vitest";
 
@@ -66,24 +67,36 @@ describe("toThemeConfig", () => {
   });
 });
 
-/** 人口規模と増減の章を入口にし、要因図と詳細指標はcontextで重複を避ける。 */
+/** 人口規模と増減の入口と、拡充した出生・移動の章を分ける。 */
 describe("population-dynamics の指標カード", () => {
+  it("出生年齢・順位の追加指標は専用章に接続する", () => {
+    const catalog = THEME_CATALOGS["population-dynamics"];
+    const section = catalog.sections!.find((entry) => entry.key === "candidate-41")!;
+    const keys = section.metricGroupKeys.flatMap((key) => catalog.metricGroups!.find((group) => group.key === key)!.rankingKeys);
+    expect(keys).toEqual(expect.arrayContaining(["births", "total-fertility-rate", "births-mother-under25", "births-third-child-plus"]));
+    const config = toThemeConfig(POPULATION_DYNAMICS_SET);
+    for (const key of keys) expect(config.tabIndicators.some((tab) => tab.rankingKey === key)).toBe(true);
+  });
   it("規模・増減の入口は総人口 / 人口増減率 / 自然増減率", () => {
     const config = toThemeConfig(POPULATION_DYNAMICS_SET);
 
-    expect(config.tabIndicators.map((t) => t.rankingKey)).toEqual([
-      "total-population",
-      "population-growth-rate",
-      "natural-increase-rate",
-    ]);
+    const catalog = THEME_CATALOGS["population-dynamics"];
+    const entryKeys = catalog.sections!
+      .filter((section) => ["population-change", "natural-social-change"].includes(section.key))
+      .flatMap((section) => section.metricGroupKeys)
+      .flatMap((key) => catalog.metricGroups!.find((group) => group.key === key)!.rankingKeys);
+    expect(new Set(entryKeys)).toEqual(new Set([
+      "total-population", "population-growth-rate", "natural-increase-rate",
+    ]));
+    for (const key of entryKeys) expect(config.tabIndicators.some((tab) => tab.rankingKey === key)).toBe(true);
+
   });
 
-  it("要因チャート・人口構造と重複する 7 指標は context に落ちている", () => {
+  it("人口構造などの補足6指標はカードへ重複表示しない", () => {
     const config = toThemeConfig(POPULATION_DYNAMICS_SET);
     const shown = new Set(config.tabIndicators.map((t) => t.rankingKey));
 
     for (const key of [
-      "total-fertility-rate",
       "moving-in-excess-rate",
       "ratio-65-plus",
       "crude-birth-rate",

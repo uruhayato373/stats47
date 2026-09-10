@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "recordedAt": "2026-09-10T21:35:46.584730+00:00",
-  "status": "adopted-local-implementation-verified-production-approval-pending",
+  "status": "authorized-release-local-verified-r2-publishing",
   "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
   "themeCount": 55,
   "adoptedCandidates": 120,
@@ -1491,7 +1491,7 @@
   },
   "limitation": "Wiring is structural evidence only. Candidate scope, source definitions, data, rendered values and publication require separate verification. No test pass is inferred by this recorder.",
   "release": {
-    "status": "verified-unpublished",
+    "status": "publishing",
     "metricCount": 253,
     "fileCount": 2155,
     "componentThemes": 55,
@@ -6467,7 +6467,7 @@
       }
     },
     "next253Surveys": {
-      "status": "PASS-local-release-candidate-unpublished",
+      "status": "PASS-final-local-release-verification-production-pending",
       "manifest": {
         "path": ".local/verification/themes/2026-09-11-release-253-surveys.json",
         "sha256": "b3693bf6fef41cbed43e36b44dfab0057aabc1ce074ef39d62a1263b6cf94a8d",
@@ -6521,7 +6521,15 @@
         "uploadedFiles": 0,
         "dependencyReferences": 2925,
         "backwardsReferences": 0,
-        "sourcePermissionPins": 76
+        "sourcePermissionPins": 76,
+        "authorization": {
+          "message": "続けて",
+          "scope": "Publish the reviewed 2155 files and 55 themes, deploy through develop/main, verify production, and start measurement",
+          "acceptedAt": "2026-09-10T22:28:53.283372+00:00"
+        },
+        "status": "publishing",
+        "progressEvidence": ".local/verification/themes/2026-09-11-publication/progress.json",
+        "startedAt": "2026-09-10T22:29:57.937Z"
       },
       "build": {
         "status": "PASS",
@@ -6571,7 +6579,7 @@
         "clientSecretEnvReferences": 0,
         "scope": "pattern scan only"
       },
-      "checkedAt": "2026-09-10T22:02:03.896516+00:00",
+      "checkedAt": "2026-09-10T22:45:07.104727+00:00",
       "browser": {
         "status": "PASS",
         "buildId": "RTwt5z7Inrjq8CU-8iPtA",
@@ -6642,6 +6650,59 @@
         "packages": 25,
         "scriptProjects": 8,
         "log": ".local/verification/themes/2026-09-11-validation-253-surveys/stats47-themes-post-merge-types.log"
+      },
+      "releaseRegression": {
+        "fullWebBefore": {
+          "passed": 1781,
+          "failed": 4
+        },
+        "fix": "Share 52 area-theme slugs across page/middleware/sitemap; read generated theme keys in link lint; test population entry and expanded chapters separately",
+        "targetedTestsPassed": 105,
+        "dataManifestChanged": false,
+        "browserBefore": ".local/verification/themes/2026-09-11-validation-253-surveys/area-route-red.json",
+        "build": {
+          "status": "PASS",
+          "buildId": "SQo8-bnRd4DbuM1i9ld0U",
+          "log": ".local/verification/themes/2026-09-11-build-area-route-fix.log"
+        },
+        "fullWebAfter": {
+          "passed": 1836,
+          "failed": 0,
+          "skipped": 6,
+          "log": ".local/verification/themes/2026-09-11-validation-253-surveys/stats47-theme-release-full-vitest-green.log"
+        },
+        "themeTests": {
+          "passed": 411,
+          "failed": 0
+        },
+        "browser": {
+          "status": "PASS",
+          "buildId": "SQo8-bnRd4DbuM1i9ld0U",
+          "summary": {
+            "cases": 110,
+            "pass": 110,
+            "fail": 0,
+            "http200": 110,
+            "singleH1": 110,
+            "noPageErrors": 110,
+            "noHorizontalOverflow": 110,
+            "oneVisiblePrefectureSelector": 110,
+            "buildMatched": 110
+          },
+          "areaRoutes": {
+            "http200": 52,
+            "unknownAndExcluded410": 4,
+            "mobilePassed": 3
+          },
+          "path": ".local/verification/themes/2026-09-11-browser-area-route-fix"
+        },
+        "previewGatewayIncident": {
+          "cause": "Upstream response body failed after writeHead(200); catch attempted writeHead(502) and crashed with ERR_HTTP_HEADERS_SENT",
+          "failurePreserved": ".local/verification/themes/2026-09-11-browser-area-route-fix/all-result-preview-gateway-failure.json",
+          "fix": "Read upstream body before committing response headers; guard already closed responses",
+          "regression": "PASS: 502 then staged response 200 in same process",
+          "applicationRebuildRequired": false
+        }
       }
     },
     "release252Historical": {
