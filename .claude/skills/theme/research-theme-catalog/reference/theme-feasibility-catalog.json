@@ -11,7 +11,7 @@
     "初回3件の採用指標のみ、下記firstBatchで対象年・母集団・地理・単位・図・残工程を固定した。",
     "既存ランキングのR2現物と公開ページは今回の検証対象外。初回実装時に取得値・R2・表示値を照合する。"
   ],
-  "asOf": "2026-09-09",
+  "asOf": "2026-09-10",
   "counts": {
     "A": 53,
     "B": 67,
@@ -95,8 +95,7 @@
         "implementedThemeKey": "construction-industry",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/construction-industry.ts",
-          "apps/web/scripts/data/page-components/theme/construction-industry.json"
+          "packages/types/src/indicator-sets/construction-industry.ts"
         ]
       }
     },
@@ -156,7 +155,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 1,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "F2337",
@@ -173,7 +172,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:1"
+          "packages/types/src/indicator-sets/construction-industry.ts"
         ]
       }
     },
@@ -289,7 +288,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 1,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C330420",
@@ -307,7 +306,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:1"
+          "packages/types/src/indicator-sets/construction-industry.ts"
         ]
       }
     },
@@ -398,7 +397,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-5"
         ]
       }
     },
@@ -494,7 +494,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-6"
         ]
       }
     },
@@ -559,11 +560,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/land-property-market.ts",
-          "apps/web/scripts/data/page-components/theme/land-property-market.json"
-        ]
-      },
-      "implementedThemeKey": "land-property-market"
+          "packages/types/src/indicator-sets/land-property-market.ts"
+        ],
+        "implementedThemeKey": "land-property-market"
+      }
     },
     {
       "id": 8,
@@ -648,7 +648,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-8"
         ]
       }
     },
@@ -730,11 +731,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/agriculture-production.ts",
-          "apps/web/scripts/data/page-components/theme/agriculture-production.json"
-        ]
-      },
-      "implementedThemeKey": "agriculture-production"
+          "packages/types/src/indicator-sets/agriculture-production.ts"
+        ],
+        "implementedThemeKey": "agriculture-production"
+      }
     },
     {
       "id": 10,
@@ -790,7 +790,7 @@
           "https://www.maff.go.jp/j/tokei/kekka_gaiyou/seisan_shotoku/r6_betsu/index.html"
         ],
         "targetCandidateId": 9,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -804,7 +804,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:9"
+          "packages/types/src/indicator-sets/agriculture-production.ts"
         ]
       }
     },
@@ -882,11 +882,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/forestry-timber.ts",
-          "apps/web/scripts/data/page-components/theme/forestry-timber.json"
-        ]
-      },
-      "implementedThemeKey": "forestry-timber"
+          "packages/types/src/indicator-sets/forestry-timber.ts"
+        ],
+        "implementedThemeKey": "forestry-timber"
+      }
     },
     {
       "id": 12,
@@ -976,7 +975,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/manufacturing.ts"
+          "packages/types/src/indicator-sets/manufacturing.ts",
+          "theme:manufacturing#candidate-12"
         ]
       }
     },
@@ -1056,11 +1056,18 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/retail-commerce.ts",
-          "apps/web/scripts/data/page-components/theme/retail-commerce.json"
-        ]
-      },
-      "implementedThemeKey": "retail-commerce"
+          "packages/types/src/indicator-sets/retail-commerce.ts"
+        ],
+        "implementedThemeKey": "retail-commerce",
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-and-display-verified-unpublished",
+          "originalScope": "小売販売と店舗・雇用の地域差",
+          "adoptedScope": "店舗数・売場面積・年間商品販売額に、小売業のみの従業者数C350302の47県・2021年度を接続。",
+          "reason": "卸売を含む雇用との対象差を解消。調査時点の人数を年度平均とせず、今回未取得の月次業態別系列は含めない。",
+          "evidence": ".local/verification/themes/retail-employment-source/ingest-proof.json"
+        }
+      }
     },
     {
       "id": 14,
@@ -1131,11 +1138,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-services.ts",
-          "apps/web/scripts/data/page-components/theme/local-services.json"
-        ]
-      },
-      "implementedThemeKey": "local-services"
+          "packages/types/src/indicator-sets/local-services.ts"
+        ],
+        "implementedThemeKey": "local-services"
+      }
     },
     {
       "id": 15,
@@ -1208,8 +1214,7 @@
         "implementedThemeKey": "information-industry",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/information-industry.ts",
-          "apps/web/scripts/data/page-components/theme/information-industry.json"
+          "packages/types/src/indicator-sets/information-industry.ts"
         ]
       }
     },
@@ -1302,7 +1307,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-economy.ts"
+          "packages/types/src/indicator-sets/local-economy.ts",
+          "theme:local-economy#candidate-16"
         ]
       }
     },
@@ -1366,11 +1372,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/business-demography.ts",
-          "apps/web/scripts/data/page-components/theme/business-demography.json"
-        ]
-      },
-      "implementedThemeKey": "business-demography"
+          "packages/types/src/indicator-sets/business-demography.ts"
+        ],
+        "implementedThemeKey": "business-demography"
+      }
     },
     {
       "id": 18,
@@ -1456,7 +1461,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-economy.ts"
+          "packages/types/src/indicator-sets/local-economy.ts",
+          "theme:local-economy#candidate-18"
         ]
       }
     },
@@ -1507,7 +1513,7 @@
           "https://www.chusho.meti.go.jp/pamflet/hakusyo/2025/chusho/index.html"
         ],
         "targetCandidateId": 17,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1521,7 +1527,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:17"
+          "packages/types/src/indicator-sets/business-demography.ts"
         ]
       }
     },
@@ -1690,7 +1696,7 @@
           "https://www.meti.go.jp/statistics/tii/ritti/result-2/r07-1.html"
         ],
         "targetThemeKey": "manufacturing",
-        "implementationStatus": "catalog-section-wired-data-validation-pending",
+        "implementationStatus": "source-verified-profile-build-browser-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -1723,8 +1729,18 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/manufacturing.ts"
-        ]
+          "packages/types/src/indicator-sets/manufacturing.ts",
+          "theme:manufacturing#candidate-22"
+        ],
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-verified-display-gates-pending",
+          "originalScope": "工場立地と投資予定",
+          "reason": "2024年の取得済み確報を使用。44県数値＋3県秘匿の47県公表状態と公式全国値を保持。2025年一覧は確認したが本環境で原表取得が403となったため、最新版とは表示しない。",
+          "source": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040281965&fileKind=0",
+          "sourceSha256": "8efee5987545c812125415122dc1471547e5089f8ccc33cf5b331f68b407c572",
+          "evidence": ".local/verification/themes/factory-investment-source.json"
+        }
       }
     },
     {
@@ -1852,11 +1868,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/innovation-patents.ts",
-          "apps/web/scripts/data/page-components/theme/innovation-patents.json"
-        ]
-      },
-      "implementedThemeKey": "innovation-patents"
+          "packages/types/src/indicator-sets/innovation-patents.ts"
+        ],
+        "implementedThemeKey": "innovation-patents"
+      }
     },
     {
       "id": 25,
@@ -1936,7 +1951,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/tourism.ts"
+          "packages/types/src/indicator-sets/tourism.ts",
+          "theme:tourism#candidate-25"
         ]
       }
     },
@@ -2024,7 +2040,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/tourism.ts"
+          "packages/types/src/indicator-sets/tourism.ts",
+          "theme:tourism#candidate-26"
         ]
       }
     },
@@ -2118,7 +2135,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/tourism.ts"
+          "packages/types/src/indicator-sets/tourism.ts",
+          "theme:tourism#candidate-27"
         ]
       }
     },
@@ -2193,7 +2211,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/tourism.ts"
+          "packages/types/src/indicator-sets/tourism.ts",
+          "theme:tourism#candidate-28"
         ]
       }
     },
@@ -2319,7 +2338,7 @@
           "https://www.bunka.go.jp/seisaku/bunkazai/shokai/chiho_shitei/kensu_suii.html"
         ],
         "targetCandidateId": 116,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2333,8 +2352,18 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:116"
-        ]
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-116"
+        ],
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-verified-display-gates-pending",
+          "originalScope": "文化財の種類・所在地と観光導線",
+          "adoptedScope": "特別史跡・特別名勝・特別天然記念物の167件と県別所在地。保存費・既存文化財件数と対象を分ける。",
+          "reason": "公式DBの3種類の全検索結果を固定。県別検索の広域文化財漏れを県・市等の一次資料で補い、地域を定めない14件を県へ配分しない。",
+          "originalAllCultureInventoryFulfilled": false,
+          "evidence": ".local/verification/themes/cultural-heritage-source/reproduced/verification.json"
+        }
       }
     },
     {
@@ -2385,7 +2414,7 @@
           "https://www.env.go.jp/park/doc/data.html"
         ],
         "targetCandidateId": 103,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -2399,7 +2428,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:103"
+          "packages/types/src/indicator-sets/natural-environment.ts"
         ]
       }
     },
@@ -2558,7 +2587,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/labor-mobility.ts"
+          "packages/types/src/indicator-sets/labor-mobility.ts",
+          "theme:labor-mobility#candidate-33"
         ]
       }
     },
@@ -2656,7 +2686,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/population-dynamics.ts"
+          "packages/types/src/indicator-sets/population-dynamics.ts",
+          "theme:population-dynamics#candidate-34"
         ]
       }
     },
@@ -2742,7 +2773,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/labor-wages.ts"
+          "packages/types/src/indicator-sets/labor-wages.ts",
+          "theme:labor-wages#candidate-35"
         ]
       }
     },
@@ -2839,7 +2871,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/aging-society.ts"
+          "packages/types/src/indicator-sets/aging-society.ts",
+          "theme:aging-society#candidate-36"
         ]
       }
     },
@@ -2930,7 +2963,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/labor-mobility.ts"
+          "packages/types/src/indicator-sets/labor-mobility.ts",
+          "theme:labor-mobility#candidate-37"
         ]
       }
     },
@@ -3032,7 +3066,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/labor-mobility.ts"
+          "packages/types/src/indicator-sets/labor-mobility.ts",
+          "theme:labor-mobility#candidate-38"
         ]
       }
     },
@@ -3136,7 +3171,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/labor-mobility.ts"
+          "packages/types/src/indicator-sets/labor-mobility.ts",
+          "theme:labor-mobility#candidate-39"
         ]
       }
     },
@@ -3213,7 +3249,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/foreign-residents.ts"
+          "packages/types/src/indicator-sets/foreign-residents.ts",
+          "theme:foreign-residents#candidate-40"
         ]
       }
     },
@@ -3300,7 +3337,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/population-dynamics.ts"
+          "packages/types/src/indicator-sets/population-dynamics.ts",
+          "theme:population-dynamics#candidate-41"
         ]
       }
     },
@@ -3397,7 +3435,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/aging-society.ts"
+          "packages/types/src/indicator-sets/aging-society.ts",
+          "theme:aging-society#candidate-42"
         ]
       }
     },
@@ -3476,7 +3515,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/population-dynamics.ts"
+          "packages/types/src/indicator-sets/population-dynamics.ts",
+          "theme:population-dynamics#candidate-43"
         ]
       }
     },
@@ -3562,7 +3602,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-44"
         ]
       }
     },
@@ -3649,7 +3690,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-45"
         ]
       }
     },
@@ -3700,7 +3742,7 @@
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
         ],
         "targetCandidateId": 43,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3714,7 +3756,8 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:43"
+          "packages/types/src/indicator-sets/population-dynamics.ts",
+          "theme:population-dynamics#candidate-43"
         ]
       }
     },
@@ -3800,7 +3843,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/population-dynamics.ts"
+          "packages/types/src/indicator-sets/population-dynamics.ts",
+          "theme:population-dynamics#candidate-47"
         ]
       }
     },
@@ -3847,7 +3891,7 @@
       "recommendedScope": "上記の地域・対象・年を守って構成。",
       "decision": {
         "disposition": "existing-section",
-        "scope": "条件不利地域の集落と高齢化",
+        "scope": "条件不利地域の集落と高齢化（全国・公式10地方ブロック）",
         "rationale": "全居住地の網羅値ではなく対象集落の構造として年齢章を補う。",
         "owner": "theme-designer",
         "decidedAt": "2026-09-09",
@@ -3859,7 +3903,7 @@
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html"
         ],
         "targetThemeKey": "aging-society",
-        "implementationStatus": "catalog-section-wired-data-validation-pending",
+        "implementationStatus": "source-verified-profile-build-browser-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -3896,8 +3940,19 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/aging-society.ts"
-        ]
+          "packages/types/src/indicator-sets/aging-society.ts",
+          "theme:aging-society#candidate-48"
+        ],
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-and-display-verified-unpublished",
+          "originalScope": "条件不利地域の集落と高齢化",
+          "reason": "原典図表2-93は全国＋10ブロックであり、45県の個別内訳は未公表。県の値を推定せず、県選択を公式ブロック参照へ接続する。北海道・沖縄は1道県ブロック。",
+          "source": "https://www.mlit.go.jp/kokudoseisaku/content/001903318.pdf",
+          "sourceSha256": "577a570f6bca52f6458a59e3929e91269ae0ffa78bf88434851d1d87ae6b2e5c",
+          "original47PrefectureCoreFulfilled": false,
+          "evidence": ".local/verification/themes/depopulated-settlements-source/adoption-summary.json"
+        }
       }
     },
     {
@@ -3969,11 +4024,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/childcare-services.ts",
-          "apps/web/scripts/data/page-components/theme/childcare-services.json"
-        ]
-      },
-      "implementedThemeKey": "childcare-services"
+          "packages/types/src/indicator-sets/childcare-services.ts"
+        ],
+        "implementedThemeKey": "childcare-services"
+      }
     },
     {
       "id": 50,
@@ -4059,7 +4113,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-finance.ts"
+          "packages/types/src/indicator-sets/local-finance.ts",
+          "theme:local-finance#candidate-50"
         ]
       }
     },
@@ -4132,11 +4187,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/single-parent-households.ts",
-          "apps/web/scripts/data/page-components/theme/single-parent-households.json"
-        ]
-      },
-      "implementedThemeKey": "single-parent-households"
+          "packages/types/src/indicator-sets/single-parent-households.ts"
+        ],
+        "implementedThemeKey": "single-parent-households"
+      }
     },
     {
       "id": 52,
@@ -4229,7 +4283,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-52"
         ]
       }
     },
@@ -4312,7 +4367,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-53"
         ]
       }
     },
@@ -4401,7 +4457,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-54"
         ]
       }
     },
@@ -4495,7 +4552,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-55"
         ]
       }
     },
@@ -4583,7 +4641,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-56"
         ]
       }
     },
@@ -4688,7 +4747,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/healthcare.ts"
+          "packages/types/src/indicator-sets/healthcare.ts",
+          "theme:healthcare#candidate-57"
         ]
       }
     },
@@ -4786,7 +4846,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/healthcare.ts"
+          "packages/types/src/indicator-sets/healthcare.ts",
+          "theme:healthcare#candidate-58"
         ]
       }
     },
@@ -4896,7 +4957,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/healthcare.ts"
+          "packages/types/src/indicator-sets/healthcare.ts",
+          "theme:healthcare#candidate-59"
         ]
       }
     },
@@ -4976,11 +5038,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/long-term-care.ts",
-          "apps/web/scripts/data/page-components/theme/long-term-care.json"
-        ]
-      },
-      "implementedThemeKey": "long-term-care"
+          "packages/types/src/indicator-sets/long-term-care.ts"
+        ],
+        "implementedThemeKey": "long-term-care"
+      }
     },
     {
       "id": 61,
@@ -5095,7 +5156,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/healthcare.ts"
+          "packages/types/src/indicator-sets/healthcare.ts",
+          "theme:healthcare#candidate-61"
         ]
       }
     },
@@ -5167,11 +5229,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/disability-support.ts",
-          "apps/web/scripts/data/page-components/theme/disability-support.json"
-        ]
-      },
-      "implementedThemeKey": "disability-support"
+          "packages/types/src/indicator-sets/disability-support.ts"
+        ],
+        "implementedThemeKey": "disability-support"
+      }
     },
     {
       "id": 63,
@@ -5242,11 +5303,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/public-assistance.ts",
-          "apps/web/scripts/data/page-components/theme/public-assistance.json"
-        ]
-      },
-      "implementedThemeKey": "public-assistance"
+          "packages/types/src/indicator-sets/public-assistance.ts"
+        ],
+        "implementedThemeKey": "public-assistance"
+      }
     },
     {
       "id": 64,
@@ -5418,7 +5478,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/healthcare.ts"
+          "packages/types/src/indicator-sets/healthcare.ts",
+          "theme:healthcare#candidate-65"
         ]
       }
     },
@@ -5496,11 +5557,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/health-checkups.ts",
-          "apps/web/scripts/data/page-components/theme/health-checkups.json"
-        ]
-      },
-      "implementedThemeKey": "health-checkups"
+          "packages/types/src/indicator-sets/health-checkups.ts"
+        ],
+        "implementedThemeKey": "health-checkups"
+      }
     },
     {
       "id": 67,
@@ -5602,7 +5662,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/healthcare.ts"
+          "packages/types/src/indicator-sets/healthcare.ts",
+          "theme:healthcare#candidate-67"
         ]
       }
     },
@@ -5713,7 +5774,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/healthcare.ts"
+          "packages/types/src/indicator-sets/healthcare.ts",
+          "theme:healthcare#candidate-68"
         ]
       }
     },
@@ -5770,7 +5832,7 @@
           "https://www.mhlw.go.jp/content/12400000/001258154.pdf"
         ],
         "targetCandidateId": 66,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5784,7 +5846,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:66"
+          "packages/types/src/indicator-sets/health-checkups.ts"
         ]
       }
     },
@@ -5842,7 +5904,7 @@
           "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177182.html"
         ],
         "targetCandidateId": 117,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5856,7 +5918,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:117"
+          "packages/types/src/indicator-sets/sports-participation.ts"
         ]
       }
     },
@@ -5923,11 +5985,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/daily-time-use.ts",
-          "apps/web/scripts/data/page-components/theme/daily-time-use.json"
-        ]
-      },
-      "implementedThemeKey": "daily-time-use"
+          "packages/types/src/indicator-sets/daily-time-use.ts"
+        ],
+        "implementedThemeKey": "daily-time-use"
+      }
     },
     {
       "id": 72,
@@ -5983,7 +6044,7 @@
           "https://www.cao.go.jp/kodoku_koritsu/torikumi/zenkokuchousa/r7.html"
         ],
         "targetCandidateId": 127,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -5997,7 +6058,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:127"
+          "packages/types/src/indicator-sets/community-participation.ts"
         ]
       }
     },
@@ -6104,7 +6165,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/real-income.ts"
+          "packages/types/src/indicator-sets/real-income.ts",
+          "theme:real-income#candidate-73"
         ]
       }
     },
@@ -6202,7 +6264,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-74"
         ]
       }
     },
@@ -6316,7 +6379,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/consumer-prices.ts"
+          "packages/types/src/indicator-sets/consumer-prices.ts",
+          "theme:consumer-prices#candidate-75"
         ]
       }
     },
@@ -6413,7 +6477,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/consumer-prices.ts"
+          "packages/types/src/indicator-sets/consumer-prices.ts",
+          "theme:consumer-prices#candidate-76"
         ]
       }
     },
@@ -6509,7 +6574,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/real-income.ts"
+          "packages/types/src/indicator-sets/real-income.ts",
+          "theme:real-income#candidate-77"
         ]
       }
     },
@@ -6591,11 +6657,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/household-assets-debt.ts",
-          "apps/web/scripts/data/page-components/theme/household-assets-debt.json"
-        ]
-      },
-      "implementedThemeKey": "household-assets-debt"
+          "packages/types/src/indicator-sets/household-assets-debt.ts"
+        ],
+        "implementedThemeKey": "household-assets-debt"
+      }
     },
     {
       "id": 79,
@@ -6653,7 +6718,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 83,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "H7207",
@@ -6671,7 +6736,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:83"
+          "packages/types/src/indicator-sets/regional-transport.ts"
         ]
       }
     },
@@ -6777,7 +6842,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/real-income.ts"
+          "packages/types/src/indicator-sets/real-income.ts",
+          "theme:real-income#candidate-80"
         ]
       }
     },
@@ -6866,11 +6932,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/freight-logistics.ts",
-          "apps/web/scripts/data/page-components/theme/freight-logistics.json"
-        ]
-      },
-      "implementedThemeKey": "freight-logistics"
+          "packages/types/src/indicator-sets/freight-logistics.ts"
+        ],
+        "implementedThemeKey": "freight-logistics"
+      }
     },
     {
       "id": 82,
@@ -6935,7 +7000,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 83,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "C3708",
@@ -6953,7 +7018,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:83"
+          "packages/types/src/indicator-sets/regional-transport.ts"
         ]
       }
     },
@@ -7021,11 +7086,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/regional-transport.ts",
-          "apps/web/scripts/data/page-components/theme/regional-transport.json"
-        ]
-      },
-      "implementedThemeKey": "regional-transport"
+          "packages/types/src/indicator-sets/regional-transport.ts"
+        ],
+        "implementedThemeKey": "regional-transport"
+      }
     },
     {
       "id": 84,
@@ -7131,7 +7195,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/labor-mobility.ts"
+          "packages/types/src/indicator-sets/labor-mobility.ts",
+          "theme:labor-mobility#candidate-84"
         ]
       }
     },
@@ -7213,7 +7278,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/tourism.ts"
+          "packages/types/src/indicator-sets/tourism.ts",
+          "theme:tourism#candidate-85"
         ]
       }
     },
@@ -7302,7 +7368,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/ports.ts"
+          "packages/types/src/indicator-sets/ports.ts",
+          "theme:ports#candidate-86"
         ]
       }
     },
@@ -7366,11 +7433,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/geographic-access.ts",
-          "apps/web/scripts/data/page-components/theme/geographic-access.json"
-        ]
-      },
-      "implementedThemeKey": "geographic-access"
+          "packages/types/src/indicator-sets/geographic-access.ts"
+        ],
+        "implementedThemeKey": "geographic-access"
+      }
     },
     {
       "id": 88,
@@ -7443,7 +7509,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/safety.ts"
+          "packages/types/src/indicator-sets/safety.ts",
+          "theme:safety#candidate-88"
         ]
       }
     },
@@ -7518,8 +7585,18 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/roads.ts"
-        ]
+          "packages/types/src/indicator-sets/roads.ts",
+          "theme:roads#candidate-89"
+        ],
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-verified-display-gates-pending",
+          "originalScope": "道路橋・トンネルの老朽化と点検",
+          "adoptedScope": "全道路管理者の橋梁・トンネル診断集計に、2025年度点検実施施設名一覧の153326橋の架設年度分布を併記。",
+          "reason": "掲載橋の39158件は架設年度不明のまま分母に残す。年度差を実年齢にせず、全管理730788橋の年齢構成へ一般化しない。",
+          "originalAllManagedBridgeAgeInventoryFulfilled": false,
+          "evidence": ".local/verification/themes/bridge-inspection-age-source/reproduced/bridge-source-proof.json"
+        }
       }
     },
     {
@@ -7591,11 +7668,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/water-services.ts",
-          "apps/web/scripts/data/page-components/theme/water-services.json"
-        ]
-      },
-      "implementedThemeKey": "water-services"
+          "packages/types/src/indicator-sets/water-services.ts"
+        ],
+        "implementedThemeKey": "water-services"
+      }
     },
     {
       "id": 91,
@@ -7646,7 +7722,7 @@
           ".claude/state/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 90,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
             "H540302",
@@ -7665,7 +7741,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:90"
+          "packages/types/src/indicator-sets/water-services.ts"
         ]
       }
     },
@@ -7753,7 +7829,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-finance.ts"
+          "packages/types/src/indicator-sets/local-finance.ts",
+          "theme:local-finance#candidate-92"
         ]
       }
     },
@@ -7848,7 +7925,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-93"
         ]
       }
     },
@@ -7937,7 +8015,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/living-housing.ts"
+          "packages/types/src/indicator-sets/living-housing.ts",
+          "theme:living-housing#candidate-94"
         ]
       }
     },
@@ -8007,11 +8086,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/communication-access.ts",
-          "apps/web/scripts/data/page-components/theme/communication-access.json"
-        ]
-      },
-      "implementedThemeKey": "communication-access"
+          "packages/types/src/indicator-sets/communication-access.ts"
+        ],
+        "implementedThemeKey": "communication-access"
+      }
     },
     {
       "id": 96,
@@ -8113,8 +8191,17 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/climate.ts"
-        ]
+          "packages/types/src/indicator-sets/climate.ts",
+          "theme:climate#candidate-96"
+        ],
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-verified-display-gates-pending",
+          "originalScope": "積雪と雪にさらされる地域・人口",
+          "adoptedScope": "既存の雪日数と積雪量に、2016年度豪雪指定区域×2020年基準人口の47県Geo分析を接続。",
+          "reason": "250m格子の中心包含を使用し、境界を横切る格子の感度範囲・原典境界・整数人口保存則を表示。指定なし23県と取得失敗を区別する。現在の指定人口への読替えはしない。",
+          "evidence": ".local/verification/themes/snow-designation-source/ingester-proof.json"
+        }
       }
     },
     {
@@ -8179,11 +8266,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/regional-energy.ts",
-          "apps/web/scripts/data/page-components/theme/regional-energy.json"
-        ]
-      },
-      "implementedThemeKey": "regional-energy"
+          "packages/types/src/indicator-sets/regional-energy.ts"
+        ],
+        "implementedThemeKey": "regional-energy"
+      }
     },
     {
       "id": 98,
@@ -8227,7 +8313,7 @@
           "https://www.fit-portal.go.jp/publicinfosummary"
         ],
         "targetCandidateId": 97,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8241,7 +8327,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:97"
+          "packages/types/src/indicator-sets/regional-energy.ts"
         ]
       }
     },
@@ -8293,7 +8379,7 @@
           "https://www.e-stat.go.jp/statistics/00551006"
         ],
         "targetCandidateId": 97,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -8307,7 +8393,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:97"
+          "packages/types/src/indicator-sets/regional-energy.ts"
         ]
       }
     },
@@ -8383,8 +8469,7 @@
         "implementedThemeKey": "waste-recycling",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/waste-recycling.ts",
-          "apps/web/scripts/data/page-components/theme/waste-recycling.json"
+          "packages/types/src/indicator-sets/waste-recycling.ts"
         ]
       }
     },
@@ -8505,11 +8590,18 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/environmental-quality.ts",
-          "apps/web/scripts/data/page-components/theme/environmental-quality.json"
-        ]
-      },
-      "implementedThemeKey": "environmental-quality"
+          "packages/types/src/indicator-sets/environmental-quality.ts"
+        ],
+        "implementedThemeKey": "environmental-quality",
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-verified-display-gates-pending",
+          "originalScope": "測定局・水域別の環境基準達成",
+          "adoptedScope": "PM2.5測定局の県別集計と、2023年度河川BOD・湖沼/海域CODの原表3427掲載行。",
+          "reason": "全国は公式本編、県別は各県欄の掲載行を母集団として保持する。香川西汐入川の類型相違は原典表記と補足を併記。2024年度資料の原表/全国不一致は未解決で、2023年度を最新と表現しない。",
+          "evidence": ".local/verification/themes/water-quality-source.json"
+        }
+      }
     },
     {
       "id": 103,
@@ -8578,11 +8670,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/natural-environment.ts",
-          "apps/web/scripts/data/page-components/theme/natural-environment.json"
-        ]
-      },
-      "implementedThemeKey": "natural-environment"
+          "packages/types/src/indicator-sets/natural-environment.ts"
+        ],
+        "implementedThemeKey": "natural-environment"
+      }
     },
     {
       "id": 104,
@@ -8665,7 +8756,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/climate.ts"
+          "packages/types/src/indicator-sets/climate.ts",
+          "theme:climate#candidate-104"
         ]
       }
     },
@@ -8736,11 +8828,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/earthquake-exposure.ts",
-          "apps/web/scripts/data/page-components/theme/earthquake-exposure.json"
-        ]
-      },
-      "implementedThemeKey": "earthquake-exposure"
+          "packages/types/src/indicator-sets/earthquake-exposure.ts"
+        ],
+        "implementedThemeKey": "earthquake-exposure"
+      }
     },
     {
       "id": 106,
@@ -8818,7 +8909,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/safety.ts"
+          "packages/types/src/indicator-sets/safety.ts",
+          "theme:safety#candidate-106"
         ]
       }
     },
@@ -8876,11 +8968,19 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/landslide-exposure.ts",
-          "apps/web/scripts/data/page-components/theme/landslide-exposure.json"
-        ]
-      },
-      "implementedThemeKey": "landslide-exposure"
+          "packages/types/src/indicator-sets/landslide-exposure.ts"
+        ],
+        "implementedThemeKey": "landslide-exposure",
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-verified-display-gates-pending",
+          "originalScope": "土砂災害区域と人口・施設",
+          "adoptedScope": "A33-25の利用条件を確認した46県で、2020年基準250m人口とP05行政・公的集会施設を警戒区域／特別警戒区域に重ねる。",
+          "reason": "京都は原典の商用制限により対象外とし、未取得を0へ変換しない。指定前区域と線形データを面積分析から除外し、特別警戒区域が警戒区域の部分集合とならない原典差も保持する。",
+          "originalAllPrefectureCoverageFulfilled": false,
+          "evidence": ".local/verification/themes/landslide-exposure-source/reproduced/ingester-proof.json"
+        }
+      }
     },
     {
       "id": 108,
@@ -8942,11 +9042,31 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/tsunami-exposure.ts",
-          "apps/web/scripts/data/page-components/theme/tsunami-exposure.json"
-        ]
-      },
-      "implementedThemeKey": "tsunami-exposure"
+          "packages/types/src/indicator-sets/tsunami-exposure.ts"
+        ],
+        "implementedThemeKey": "tsunami-exposure",
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "29-prefectures-local-data-verified-display-gates-pending",
+          "originalScope": "沿岸地域の津波想定と避難施設",
+          "adoptedScope": "許諾と原典範囲を確認した29県の固定版津波想定を個別に使い、原表の浸水深区分ごとに2020/2050人口・P05行政/公的集会施設を集計。東京は島しょ部の想定範囲のみ。",
+          "reason": "88入力（津波想定30入力）と29県別途中artifactの保存則を確認。全国合算を作らず、未集計18県を0にしない。東京の想定対象外と区分不能を分離し、安全性を意味させない。固定版のため最新想定とは表示しない。",
+          "originalAllPrefectureCoreFulfilled": false,
+          "evidence": ".local/verification/themes/tsunami-exposure-source/batch-29/handoff.json",
+          "coverage": {
+            "computedPrefectures": 29,
+            "uncomputedPrefectures": 18,
+            "reasons": {
+              "outsideReference": 7,
+              "licenseVersionConflict": 2,
+              "licenseConflict": 6,
+              "priorContactRequired": 2,
+              "notProvided": 1
+            },
+            "tokyoScope": "island-scenarios-only"
+          }
+        }
+      }
     },
     {
       "id": 109,
@@ -9032,7 +9152,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/safety.ts"
+          "packages/types/src/indicator-sets/safety.ts",
+          "theme:safety#candidate-109"
         ]
       }
     },
@@ -9114,7 +9235,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/safety.ts"
+          "packages/types/src/indicator-sets/safety.ts",
+          "theme:safety#candidate-110"
         ]
       }
     },
@@ -9194,8 +9316,17 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/safety.ts"
-        ]
+          "packages/types/src/indicator-sets/safety.ts",
+          "theme:safety#candidate-111"
+        ],
+        "scopeAdoption": {
+          "adoptedAt": "2026-09-11",
+          "status": "local-data-verified-display-gates-pending",
+          "originalScope": "災害別避難施設と支援計画",
+          "adoptedScope": "個別避難計画と津波避難施設に、GSI掲載の緊急避難場所115878件の8災害対応、指定避難所83294件の一般/福祉別を併記。",
+          "reason": "2026-09-04更新の公表CSVを105原典SHAで固定。原典の1/空欄の意味を保持し、未公表自治体21件や施設定義差を表示する。実際の避難可能性や避難成功率へ読替えない。",
+          "evidence": ".local/verification/themes/shelter-applicability-source/reproduced/ingester-proof.json"
+        }
       }
     },
     {
@@ -9276,7 +9407,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/safety.ts"
+          "packages/types/src/indicator-sets/safety.ts",
+          "theme:safety#candidate-112"
         ]
       }
     },
@@ -9358,7 +9490,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-113"
         ]
       }
     },
@@ -9439,7 +9572,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-114"
         ]
       }
     },
@@ -9505,11 +9639,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/cultural-participation.ts",
-          "apps/web/scripts/data/page-components/theme/cultural-participation.json"
-        ]
-      },
-      "implementedThemeKey": "cultural-participation"
+          "packages/types/src/indicator-sets/cultural-participation.ts"
+        ],
+        "implementedThemeKey": "cultural-participation"
+      }
     },
     {
       "id": 116,
@@ -9593,7 +9726,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/education-culture.ts"
+          "packages/types/src/indicator-sets/education-culture.ts",
+          "theme:education-culture#candidate-116"
         ]
       }
     },
@@ -9659,11 +9793,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/sports-participation.ts",
-          "apps/web/scripts/data/page-components/theme/sports-participation.json"
-        ]
-      },
-      "implementedThemeKey": "sports-participation"
+          "packages/types/src/indicator-sets/sports-participation.ts"
+        ],
+        "implementedThemeKey": "sports-participation"
+      }
     },
     {
       "id": 118,
@@ -9717,7 +9850,7 @@
           "https://www.mext.go.jp/sports/content/20260113-spt_sseisaku02-000046317_0000001.pdf"
         ],
         "targetCandidateId": 117,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9731,7 +9864,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:117"
+          "packages/types/src/indicator-sets/sports-participation.ts"
         ]
       }
     },
@@ -9790,7 +9923,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0003456573"
         ],
         "targetCandidateId": 115,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9804,7 +9937,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:115"
+          "packages/types/src/indicator-sets/cultural-participation.ts"
         ]
       }
     },
@@ -9863,7 +9996,7 @@
           "https://www.e-stat.go.jp/index.php/dbview?sid=0004006330"
         ],
         "targetCandidateId": 14,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -9877,7 +10010,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:14"
+          "packages/types/src/indicator-sets/local-services.ts"
         ]
       }
     },
@@ -9959,7 +10092,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-finance.ts"
+          "packages/types/src/indicator-sets/local-finance.ts",
+          "theme:local-finance#fiscal-capacity"
         ]
       }
     },
@@ -10048,7 +10182,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-finance.ts"
+          "packages/types/src/indicator-sets/local-finance.ts",
+          "theme:local-finance#candidate-122"
         ]
       }
     },
@@ -10130,7 +10265,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-finance.ts"
+          "packages/types/src/indicator-sets/local-finance.ts",
+          "theme:local-finance#candidate-123"
         ]
       }
     },
@@ -10188,11 +10324,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-government-digital.ts",
-          "apps/web/scripts/data/page-components/theme/local-government-digital.json"
-        ]
-      },
-      "implementedThemeKey": "local-government-digital"
+          "packages/types/src/indicator-sets/local-government-digital.ts"
+        ],
+        "implementedThemeKey": "local-government-digital"
+      }
     },
     {
       "id": 125,
@@ -10270,7 +10405,8 @@
         "integrationPolicy": "既存章の置換・拡充を先に検討し、同じ問い・系列の章を重複追加しない。",
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/local-finance.ts"
+          "packages/types/src/indicator-sets/local-finance.ts",
+          "theme:local-finance#candidate-125"
         ]
       }
     },
@@ -10343,11 +10479,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/gender-participation.ts",
-          "apps/web/scripts/data/page-components/theme/gender-participation.json"
-        ]
-      },
-      "implementedThemeKey": "gender-participation"
+          "packages/types/src/indicator-sets/gender-participation.ts"
+        ],
+        "implementedThemeKey": "gender-participation"
+      }
     },
     {
       "id": 127,
@@ -10411,11 +10546,10 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "packages/types/src/indicator-sets/community-participation.ts",
-          "apps/web/scripts/data/page-components/theme/community-participation.json"
-        ]
-      },
-      "implementedThemeKey": "community-participation"
+          "packages/types/src/indicator-sets/community-participation.ts"
+        ],
+        "implementedThemeKey": "community-participation"
+      }
     },
     {
       "id": 128,
@@ -10470,7 +10604,7 @@
           "https://www.e-stat.go.jp/gis"
         ],
         "targetCandidateId": 87,
-        "implementationStatus": "merged-into-target-catalog",
+        "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
           "reportRef": ".claude/state/estat/theme-expansion-verification.json",
@@ -10484,7 +10618,7 @@
         },
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
-          "candidate:87"
+          "packages/types/src/indicator-sets/geographic-access.ts"
         ]
       }
     }
@@ -11159,12 +11293,14 @@
     "uiOwner": "theme-component-builder / theme-ui-manager",
     "scope": "採用された問いと範囲だけを実装する。統合候補は統合先の章に含める。保留8件はresumeWhenを満たすまで実装キューに入れない。",
     "releasePolicy": "本番反映は検証済み差分をまとめて承認・公開する。",
-    "lastImplementationCheckpoint": "2026-09-09 catalog wiring",
-    "catalogWiringStatus": "local-verified",
+    "lastImplementationCheckpoint": "2026-09-10 observed catalog wiring",
+    "catalogWiringStatus": "structural-only-data-and-scope-pending",
     "catalogWiringCounts": {
       "newThemeCatalogWired": 34,
       "existingSectionWired": 67,
-      "mergeWired": 19,
+      "existingSectionPending": 0,
+      "mergeLinked": 19,
+      "mergePending": 0,
       "hold": 8,
       "dataValidationPending": 101
     },

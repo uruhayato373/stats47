@@ -4,6 +4,13 @@ description: Geo公開集合はbaselineを含めず、2計算入力層・細粒�
 type: feedback
 ---
 
+**地図の待機とヘッダー（2026-09-11）**: モバイル県切替で一度だけ120秒の待機残留が発生し、
+同版の94回再試行は最長4.8秒で成功した。停止の原因は未特定だが、クライアント側に待機期限が
+無いことを確認した。30秒で既存の再読み込みUIへ戻し、遅着した旧応答を無視する回帰を追加した。
+共有リンクはGeo canonicalへ直接接続し、旧URLの先読みredirectを避ける。Leafletのpaneが
+ヘッダーのクリックを遮る問題はMapContainerの`isolate`で修正し、PC/mobileのクリックとzoom/panを確認する。
+証拠は全テーマ実装stateの`validation.next253Tsunami29`以降を参照する。
+
 **洪水入力の追加教訓（2026-09-05）**: 保存則47/47でも入力完全性は保証しない。
 ZIP名の河川区分20とZIP内部の想定最大規模20を混同し、区分10の全107入力を落としていた。
 `flood-inputs.ts`で公式一覧の承認済み集合を固定し、生成・監査・Web parserで欠落と同件数差替を拒否する。
@@ -25,6 +32,12 @@ note商品添付は無料説明文中の同名言及へ誤着地し得るため�
 一時保存で有料境界が保持されると推定せず、再読込で確かめる。保持されない場合は、公開する同じセッションで
 境界を再設定し、スクリーンショットを目視してから確定する。担当者は`publish-note/references/scheduling.md`
 の更新済み運用規則に従い、agentによる目視確認後の確定も可能。旧human-only記述だけで未完了に戻さない。
+
+**テーマへの到達性（2026-09-11）**: 土砂災害の原典・部品・catalog章が揃っていても、
+`theme-dashboard/config/all-themes.ts`の`embeddedSections`への登録漏れで画面には出なかった。
+個別部品テストだけで完了にせず、既存`metric-groups-reachability.test.ts`でcatalogの全埋め込みが
+実際のサーバー生成対象へ届くことを検査してから全テーマのブラウザ確認へ進む。
+同テストが登録漏れで失敗し、接続1行の修正後に通ることを確認した。
 
 **ライセンス再公開の教訓（2026-09-05）**: 生成時gateだけでは、旧ローカルstagingを汎用publisherで再公開できた。
 diff/exact/wranglerで全候補をPUT前に`ksj-publication-guard.ts`へ通す。元GISと派生JSONの可否は既存license SSOTから

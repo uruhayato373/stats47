@@ -68,14 +68,29 @@ const THEME_SETS = [
  * (depopulation-medical を healthcare / aging-society の両方で使用)。
  */
 const EMBEDDED_SECTIONS: Record<string, string[]> = {
+  safety: ['shelter-applicability'],
   // 居住地の移動は人口動態、通勤は就業地との関係なので雇用・人材移動へ分離する。
-  'population-dynamics': ['migration-flow'],
+  'population-dynamics': ['migration-flow', 'young-migration-link', 'migration-demographics', 'five-year-residence'],
+  'living-housing': ['single-households-demographics'],
   'labor-mobility': ['commute-flow'],
-  roads: ['highway'],
+  roads: ['highway', 'bridge-inspection-age'],
   railway: ['station-passengers'],
-  healthcare: ['depopulation-medical'],
-  'aging-society': ['depopulation-medical'],
-  climate: ['sunshine-map'],
+  healthcare: ['depopulation-medical', 'medical-workforce'],
+  'aging-society': ['depopulation-medical', 'depopulated-settlements'],
+  climate: ['sunshine-map', 'snow-designation-population'],
+  tourism: ['tourism-seasonality', 'airport-traffic'],
+  'freight-logistics': ['freight-od'],
+  'health-checkups': ['nutrition'],
+  'sports-participation': ['physical-activity'],
+  'land-property-market': ['property-prices'],
+  manufacturing: ['factory-investment'],
+  'environmental-quality': ['water-quality'],
+  'education-culture': ['graduation-paths', 'cultural-heritage-locations'],
+  'earthquake-exposure': ['earthquake-population'],
+  'landslide-exposure': ['landslide-population-facilities'],
+  'tsunami-exposure': ['tsunami-scenario-exposure'],
+  'local-economy': ['industry-specialization'],
+  'geographic-access': ['geo-station-access', 'geo-public-facility-access'],
   // ※ local-finance は専用 bespoke ページ (LocalFinanceDashboard) が財政フロー Sankey を
   //   自前で持つため、汎用 embeddedSections には登録しない。
 };

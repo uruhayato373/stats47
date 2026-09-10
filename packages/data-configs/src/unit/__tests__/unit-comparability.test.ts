@@ -72,6 +72,8 @@ describe("★比較不能を理由付きで拒否する (1 倍にしない)", ()
   it.each([
     ["件", "校"],
     ["校", "件"],
+    ["企業等", "事業所"],
+    ["事業所", "企業等"],
   ])("★異なる計数単位 %s → %s は base-unit-mismatch", (from, to) => {
     expect(classifyUnitComparability(from, to)).toEqual({
       verdict: "incomparable",

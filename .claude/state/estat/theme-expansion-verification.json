@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-09T11:39:23.799Z",
+  "observedAt": "2026-09-10T08:48:04.370Z",
   "requestedCodes": [
     "A6103",
     "A6104",
@@ -4717,7 +4717,18 @@
       "metadataUnit": "事業所",
       "description": null,
       "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010103",
-      "registeredMetrics": [],
+      "registeredMetrics": [
+        {
+          "key": "information-private-establishments",
+          "isActive": true,
+          "unit": "事業所",
+          "years": {
+            "from": 2021,
+            "to": 2021
+          },
+          "sourceValueScale": 1
+        }
+      ],
       "sourceRows": 192,
       "prefectureRows": 188,
       "excludedOtherGeographies": 4,
@@ -4800,7 +4811,18 @@
       "metadataUnit": "人",
       "description": null,
       "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010103",
-      "registeredMetrics": [],
+      "registeredMetrics": [
+        {
+          "key": "construction-private-employees",
+          "isActive": true,
+          "unit": "人",
+          "years": {
+            "from": 2021,
+            "to": 2021
+          },
+          "sourceValueScale": 1
+        }
+      ],
       "sourceRows": 192,
       "prefectureRows": 188,
       "excludedOtherGeographies": 4,
@@ -4883,7 +4905,18 @@
       "metadataUnit": "人",
       "description": null,
       "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010103",
-      "registeredMetrics": [],
+      "registeredMetrics": [
+        {
+          "key": "information-private-employees",
+          "isActive": true,
+          "unit": "人",
+          "years": {
+            "from": 2021,
+            "to": 2021
+          },
+          "sourceValueScale": 1
+        }
+      ],
       "sourceRows": 192,
       "prefectureRows": 188,
       "excludedOtherGeographies": 4,
@@ -19437,7 +19470,18 @@
       "metadataUnit": "契約",
       "description": null,
       "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010108",
-      "registeredMetrics": [],
+      "registeredMetrics": [
+        {
+          "key": "broadband-service-contract-count",
+          "isActive": true,
+          "unit": "契約",
+          "years": {
+            "from": 2010,
+            "to": 2017
+          },
+          "sourceValueScale": 1
+        }
+      ],
       "sourceRows": 384,
       "prefectureRows": 376,
       "excludedOtherGeographies": 8,
@@ -19572,7 +19616,15 @@
       "metadataUnit": "契約",
       "description": null,
       "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010108",
-      "registeredMetrics": [],
+      "registeredMetrics": [
+        {
+          "key": "broadband-contract-count-excluding-39-4g",
+          "isActive": true,
+          "unit": "契約",
+          "years": "all",
+          "sourceValueScale": 1
+        }
+      ],
       "sourceRows": 624,
       "prefectureRows": 611,
       "excludedOtherGeographies": 13,
@@ -23165,7 +23217,7 @@
       "parameters": {
         "statsDataId": "0000010101"
       },
-      "sha256": "a0b45c93799ba16cb26e32bcb06d30740aefa28c68483bdc7c60e5c9b849d087",
+      "sha256": "26d85c718dd036b0cb2072cce4789f0b47009e805634ccc5a7651fb34734ec2e",
       "bytes": 84002,
       "artifactName": "0000010101-meta.json"
     },
@@ -23178,7 +23230,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "30b33acc6239b8657c5dde3a6327630cd3ff1931a31309570e0b3fad52c14e60",
+      "sha256": "ef14b30017404b495c0245c59b057978bd105b4b10d732526f445c5c461cdcbe",
       "bytes": 209199,
       "artifactName": "0000010101-data-1.json"
     },
@@ -23187,7 +23239,7 @@
       "parameters": {
         "statsDataId": "0000010102"
       },
-      "sha256": "bdb4d1c8d8679e98b3500b040616dfaefdf3ed2d96da8dce31ad496c0ae751a1",
+      "sha256": "9b46e6cd2318e6ab8d48e6f3b50913660c88406f9eb9076fbb596c20a8689122",
       "bytes": 17862,
       "artifactName": "0000010102-meta.json"
     },
@@ -23200,7 +23252,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "d33f6d074a08ee1809ea726952f7cb784754fb0b655e4dbd569d72a3f5a350b3",
+      "sha256": "f6f665e052bec147151c31d313f1f19a59d05b319043355dfdb9fd4a414f2a6e",
       "bytes": 1183233,
       "artifactName": "0000010102-data-1.json"
     },
@@ -23209,7 +23261,7 @@
       "parameters": {
         "statsDataId": "0000010103"
       },
-      "sha256": "397a1825b9a6134cd773ccdc3bfdf2d872f719bc9246d4faa7e71698df688caa",
+      "sha256": "80e690c355b20889ebf93c0fb620dccbc5983b48e1a10becef621427716d6140",
       "bytes": 103813,
       "artifactName": "0000010103-meta.json"
     },
@@ -23222,7 +23274,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "9678fbbb59a93ffdecacfb8f6c95cf56beb1aace40269aa81edcecd3cf266a79",
+      "sha256": "ad0d162aa9d4130cf22bf7af2726336a1a1d399198d7713854f4950d98281644",
       "bytes": 2088930,
       "artifactName": "0000010103-data-1.json"
     },
@@ -23231,7 +23283,7 @@
       "parameters": {
         "statsDataId": "0000010104"
       },
-      "sha256": "6a37445acfbec62404938c2fb139ae8b1e4af2440167af5e592841f2507d2f6e",
+      "sha256": "3e795c49a3d1456f987c57a359338b4a58f33aed63bcd49842b4d510b90f023d",
       "bytes": 36218,
       "artifactName": "0000010104-meta.json"
     },
@@ -23244,7 +23296,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "475f3c59066b7bb616bfde822c429aa7c7308fff998932de09722293b5d87f8c",
+      "sha256": "c3b413f85d660fc665c225a36dacebc382177232c99ee7ad7f20cbe97d6bd142",
       "bytes": 792530,
       "artifactName": "0000010104-data-1.json"
     },
@@ -23253,7 +23305,7 @@
       "parameters": {
         "statsDataId": "0000010106"
       },
-      "sha256": "53f08ab3cdc9aa7a15355369e2bd6f1effccd94fd461b6977eb0beacb11e9b14",
+      "sha256": "5ba3e1b8d6c2d95a591064057ae3e54ab5092105cee2ee5669c28291edc9ce9d",
       "bytes": 86372,
       "artifactName": "0000010106-meta.json"
     },
@@ -23266,7 +23318,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "a541ee2f2b4557fc7a2fb84e7f126e867a01df83d23e8f39c1f7679cbb6770f6",
+      "sha256": "8c763fcf9a92463b94063c3755ebfcb21b935184ffc43baef3b5ef069552dd39",
       "bytes": 30674,
       "artifactName": "0000010106-data-1.json"
     },
@@ -23275,7 +23327,7 @@
       "parameters": {
         "statsDataId": "0000010108"
       },
-      "sha256": "9ba76e2d583444922ca31279b0c2c991212e4e990ff994f47b203c820e9824cf",
+      "sha256": "9ad5c2529ac10a9f666736cd30f0b5d02d9973dde734d29ea7376b866e490358",
       "bytes": 90924,
       "artifactName": "0000010108-meta.json"
     },
@@ -23288,7 +23340,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "0f3b6aed7d592053f019323fd0410e01d731263d30c336607de6e8e7e7bb34c6",
+      "sha256": "9a8ed5dab35fd6266ab0b16225c62d298f8e6f5b62c69bcf8fbe209db9f9bb91",
       "bytes": 2828360,
       "artifactName": "0000010108-data-1.json"
     },
@@ -23297,7 +23349,7 @@
       "parameters": {
         "statsDataId": "0000010110"
       },
-      "sha256": "0ac2616932f80410522219060f3b21ff87010ee8864181c9d17d31ba079c5d8d",
+      "sha256": "330a3c27d9a4125392a5e3a646b7982f1bb277c4fad2f51e20754cf63576f375",
       "bytes": 65624,
       "artifactName": "0000010110-meta.json"
     },
@@ -23310,7 +23362,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "18892967aa9deb8615ac3a91ce4e84c97e47da66aabc428fc1af3a1d4bb3e97f",
+      "sha256": "a436b80390e4decdc49af719b0b99ed9e22a698e26a7cb4ad9d01aa45e72c935",
       "bytes": 236698,
       "artifactName": "0000010110-data-1.json"
     },
@@ -23319,7 +23371,7 @@
       "parameters": {
         "statsDataId": "0000010112"
       },
-      "sha256": "2f7b37db3bada0b0c941201ffc4746edae259079736a5ea231a5fad497625c70",
+      "sha256": "d43f81394b04b664f55fa88f6e4c26f4d664ad46fd1de4585bbbb2f535ec5a2a",
       "bytes": 69942,
       "artifactName": "0000010112-meta.json"
     },
@@ -23332,7 +23384,7 @@
         "limit": 100000,
         "startPosition": 1
       },
-      "sha256": "3cccfa87678091ff3c2cec89f4b733ea9595d0a17527639a063762deec234d6c",
+      "sha256": "2cd12cb7499eb0669463068e327c0161e83065470a4bf981db8d2379ee30846e",
       "bytes": 154124,
       "artifactName": "0000010112-data-1.json"
     },
@@ -23344,7 +23396,7 @@
         "metaGetFlg": "N",
         "limit": 100000
       },
-      "sha256": "1315738e1ed9f4ab1562b590e33d99d3da157aa869615c37f9eca838a8aed25c",
+      "sha256": "7ff02e67c8316206e2adef20b7b7b2fcc3f914ff6d03182d49b02ecd79524eca",
       "bytes": 124208,
       "artifactName": "0000010208-recycling.json"
     }

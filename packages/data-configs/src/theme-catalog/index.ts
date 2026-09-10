@@ -38,6 +38,8 @@ import {
 } from "./expanded";
 
 export * from "./types";
+export * from "./tourism-seasonality-source";
+export * from "./nutrition-source";
 export * from "./evidence-lenses";
 export * from "./population-pyramid-deps";
 export * from "./chart-color-role";
@@ -79,33 +81,27 @@ const BASE_THEME_CATALOGS: Record<string, ThemeCatalog> = {
 function withExistingExtensions(catalog: ThemeCatalog): ThemeCatalog {
   const extensions = EXISTING_THEME_SECTION_EXTENSIONS[catalog.key];
   if (!extensions) return catalog;
-  // 財政専用ページは独自レイアウトが metricGroup を受け取らない。
-  // 指標の登録だけ行い、専用ブロックの契約を壊さない。
-  if (catalog.key === 'local-finance') {
-    const metrics = [...catalog.metrics];
-    for (const extension of extensions) {
-      for (const metric of extension.metrics) {
-        const entry = extensionMetric(metric);
-        if (!metrics.some((existing) => existing.rankingKey === entry.rankingKey)) metrics.push(entry);
-      }
-    }
-    return { ...catalog, metrics };
-  }
   const metricGroups = [...(catalog.metricGroups ?? [])];
   const sections = [...(catalog.sections ?? [])];
   const metrics = [...catalog.metrics];
   for (const extension of extensions) {
+    if (extension.existingSectionKey || !extension.metrics.length) continue;
     const groupKeys: string[] = [];
     extension.metrics.forEach((metric, index) => {
       const entry = extensionMetric(metric);
-      if (!metrics.some((existing) => existing.rankingKey === entry.rankingKey)) {
+      const existingIndex = metrics.findIndex((existing) => existing.rankingKey === entry.rankingKey);
+      if (existingIndex === -1) {
         metrics.push(entry);
+      } else if (metrics[existingIndex].role === 'context' && entry.role !== 'context') {
+        // An explicit chapter card needs a visible indicator, not an index-only entry.
+        metrics[existingIndex] = { ...metrics[existingIndex], role: 'secondary' };
       }
+      if (entry.role === 'context') return;
       const groupKey = `candidate-${extension.candidateId}-${index + 1}`;
       groupKeys.push(groupKey);
       metricGroups.push({ key: groupKey, title: `${extension.title}｜${entry.shortLabel}`, rankingKeys: [entry.rankingKey], defaultCheckedKeys: [entry.rankingKey] });
     });
-    sections.push({ key: `candidate-${extension.candidateId}`, title: extension.title, description: '128テーマ実現性調査で採択した既存テーマ内の追加章。元の指標定義と対象年を維持して表示します。', metricGroupKeys: groupKeys });
+    sections.push({ key: `candidate-${extension.candidateId}`, title: extension.title, description: extension.description, metricGroupKeys: groupKeys, ...(extension.chartKeys ? { chartKeys: extension.chartKeys } : {}), ...(extension.embeddedSectionKeys ? { embeddedSectionKeys: extension.embeddedSectionKeys } : {}) });
   }
   return { ...catalog, metrics, metricGroups, sections };
 }
@@ -119,3 +115,34 @@ export const THEME_CATALOGS: Record<string, ThemeCatalog> = Object.fromEntries(
 export function listThemeCatalogs(): ThemeCatalog[] {
   return Object.values(THEME_CATALOGS);
 }
+
+export { INDUSTRY_SPECIALIZATION_SOURCE } from './industry-specialization-source';
+
+export { MEDICAL_WORKFORCE_SOURCE } from './medical-workforce-source';
+export * from './earthquake-exposure-source';
+export * from './earthquake-exposure-schema';
+export * from './population-core-profile';
+
+export { GRADUATION_PATHS_SOURCE } from './graduation-paths-source';
+
+export { PHYSICAL_ACTIVITY_SOURCE } from './physical-activity-source';
+
+export { PROPERTY_PRICE_DISTRIBUTION_SOURCE } from './property-price-distribution-source';
+export { FACTORY_INVESTMENT_SOURCE } from './factory-investment-source';
+export { DEPOPULATED_SETTLEMENTS_SOURCE } from './depopulated-settlements-source';
+export { FREIGHT_OD_SOURCE } from './freight-od-source';
+export { AIRPORT_TRAFFIC_SOURCE } from './airport-traffic-source';
+
+export { BRIDGE_INSPECTION_AGE_SOURCE } from './bridge-inspection-age-source';
+
+export { WATER_QUALITY_SOURCE } from './water-quality-source';
+
+export { CULTURAL_HERITAGE_SOURCE } from './cultural-heritage-source';
+
+export { SNOW_DESIGNATION_SOURCE } from './snow-designation-source';
+export { LANDSLIDE_EXPOSURE_SOURCE } from './landslide-exposure-source';
+
+export * from './shelter-applicability-source';
+
+export * from './tsunami-exposure-source';
+export * from './tsunami-exposure-schema';

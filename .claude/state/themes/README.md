@@ -211,77 +211,61 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUN
 
 ## 別PCで未公開のテーマ改善を再開する
 
-進捗・既知の未解決問題・公開対象は `../metrics/themes/2026-09-09-implementation.json`、
-次の作業は `.claude/todo/backlog.md` の `THEME-PORTFOLIO-REMAINDER-01` を正典とする。
-`.local` のステージデータ、元資料、ブラウザHTML、詳細ログはgit対象外。秘密情報も移行されない。
-新しいPCでは依存関係を `npm ci` で復元し、そのPCの正規の環境設定を使用する。
-Codex heartbeatは元PCのタスクに設定されておりgitでは移行されない。追加登録の前に既存設定を確認する。
+対象は128候補のうち採択120候補（新規34、既存章67、統合19）、実際のページは既存21を含む55テーマ。
+保留8候補を公開済みに数えない。進捗と再現コマンドは
+[全体記録](../metrics/themes/2026-09-10-all-expansion.json)、残工程は
+`.claude/todo/backlog.md` の `THEME-EXPANSION-IMPLEMENT-01` / `THEME-PORTFOLIO-REMAINDER-01` を正典とする。
+構造の接続、原典・データの確認、主問の充足、実画面の検証、公開は別々に記録する。
 
-### 128候補の初回3テーマ
+### データと配信manifestの復元
 
-対象と実装検証は [first-batch記録](../metrics/themes/2026-09-09-first-batch.json)、残工程は
-`THEME-EXPANSION-IMPLEMENT-01` を参照する。新規公開の3実験は未公開の間 `startedAt=null` を保つ。
-公開後にHTTP、全県値、公開日を記録してから `--schedule` を実行する。
+`.local` のステージ、原典、ブラウザ画面、詳細ログはgit対象外。新PCでは `npm ci` と正規の環境設定が必要。
+秘密情報は移行しない。主な復元順序は次のとおり。
 
-```bash
-# 新規3指標の取込は page-data-batch.ts --metric <key> --kind prefecture
-# 検証API応答を保持したディレクトリを指定。既存6指標は公開R2から歴史系列も維持する。
-node --conditions=react-server --import tsx .claude/scripts/themes/stage-theme-expansion.mjs --api-artifact-dir /tmp/stats47-theme-expansion-api
-# 31ファイルのsha256を照合するlocalhostゲートウェイ（GET/HEADのみ、書込み不可）
-node .claude/scripts/themes/preview-theme-release.mjs --manifest .local/verification/themes/first-batch/release-manifest.json
-# R2_PUBLIC_FETCH_URL=http://127.0.0.1:4778 で本番用buildとlocalhost起動後、PC/mobileを確認
-node --import tsx .claude/scripts/themes/probe-theme-expansion.mjs --url http://127.0.0.1:3011
-```
+1. `node --import tsx packages/data-configs/scripts/build-registry.ts` と
+   `generate-theme-catalog.ts` / `generate-theme-dependency-mirror.ts` を同じscriptsディレクトリで実行する。
+2. `node --env-file=apps/web/.env.development --import tsx .claude/scripts/themes/verify-theme-expansion.mjs --artifacts /tmp/stats47-theme-expansion-api`
+   で明記82系列のAPI応答とhashを復元する。原典が変わった場合は再評価し、旧証拠を流用しない。
+3. e-Statの新規指標は `page-data-batch.ts --metric <keys> --kind prefecture`、公式ファイルの指標は
+   全体記録の `reproduction.sourceCommands` でローカルに取り込む。すべて `--write-local` までとし、
+   原典SHA・県・期間・単位・欠測集合を検査する。PDF抽出には `pdftotext` が必要。
+   所得・金融資産のジニ係数は2019年の原表を使い、整数に丸められたSSDS値で代用しない。
+4. 健康寿命2022年・農業産出額2024年の既存更新は
+   `packages/data-configs/scripts/refresh-official-theme-data.ts` で復元する。Python依存は
+   同scriptsの `lib/requirements-official-theme-data.txt` に従う。
+5. 全体記録の `reproduction.stageArguments` を用いて `stage-theme-expansion.mjs` を実行する。
+   `--local-metrics` は検証済みのcanonical値、`--refresh-items` は公開観測値を変えないメタデータ更新。
+   `--all-components` は55テーマ、`--repair-laspeyres-unit` は観測値・順位を保持した単位是正を含める。
+   `--tourism-seasonality` は月次専用schemaと照合記録を検査する。月次をrankingの年コードへ格納しない。
+   `app/ranking-items/all.json` は公開在庫に検証済み差分を重ねて作る。
 
-ステージを更新したらプレビューゲートウェイも再起動する。既存21テーマの未公開manifestと
-併合する際は同じキーの上書きに注意し、特に `app/ranking-items/all.json` を現行定義から再生成する。
-観測値・スクリーンショットは `.local/`、件数・hash・検証結果は上記stateへ保存する。
+公開対象は生成後のmanifestにあるkey・bytes・SHAだけ。旧manifestのSHAは生成日時が変わるため流用しない。
+manifestだけをコピーした検証用stageを用意し、古いローカルミラーを監査に混ぜない。
 
-### データの復元
-
-1. `release.manifest.metricKeys` の100指標は、既存の
-   `packages/ranking/src/scripts/generate-ranking-items.ts --only <カンマ区切りのキー>` で
-   `.local/r2` に再生成する。このCLIは `all.json` も生成するが、今回の公開対象には含めない。
-2. `apps/web/scripts/data/page-components/theme/*.json` の21ファイルを
-   `.local/r2/app/page-components/theme/` へ同名でコピーする（ThemeCatalogからの生成物）。
-3. 公式資料からの3指標は下記CLIで再生成する。e-Stat APP IDは既存の環境設定を使う。
-   元資料のhash変更、旧年との不一致は停止して一次資料を確認する。
+### localhostでの表示検証
 
 ```bash
-python3 -m venv /tmp/stats47-theme-python
-/tmp/stats47-theme-python/bin/pip install -r packages/data-configs/scripts/lib/requirements-official-theme-data.txt
-OFFICIAL_THEME_PYTHON=/tmp/stats47-theme-python/bin/python node --conditions=react-server --import tsx packages/data-configs/scripts/refresh-official-theme-data.ts --stage-dir .local/r2 --artifact-dir /tmp/stats47-official-theme-data
+node .claude/scripts/themes/preview-theme-release.mjs --manifest .local/verification/themes/2026-09-10-release-manifest.json --port 4778
 ```
 
-4. ラスパイレス指数の単位是正は、公開R2の `app/stats/laspeyres-index-prefecture/values.json` と
-   `app/ranking/laspeyres-index-prefecture/values.json` を読み、statsの行単位とrecipe、rankingの
-   partition/行単位をconfigの「指数」に合わせる。数値・県・年・rankは不変、658行を突合する。
-   この2ファイル専用の再生成CLIは未整備なので、既存のrecipe/partition生成関数でローカル是正する。
-5. 129ファイルのmanifestとrecipe・観測値・47県・期間を再検査する。生成日時によりSHAは変わるため、
-   旧manifestのSHAをそのまま再利用せず、新しい検証済みmanifestを作る。公開R2の変更も別途検出する。
-   未公開の値を用いた監査結果を、公開品質baseline `quality.json` に上書きしない。
+ゲートウェイは起動時と配信時にmanifest内のSHAを検査し、必要なファイルだけを読み込む。巨大GIS原典を常駐メモリへ複製しない。未収録のappキーは公開R2をGETする。
+**stageを更新したらゲートウェイを再起動する。** Nextのbuild/startに
+`R2_PUBLIC_FETCH_URL=http://127.0.0.1:4778` と `NEXT_PUBLIC_R2_PUBLIC_URL=http://127.0.0.1:4778`、
+空の `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を指定する。
+Turbo経由では `--env-mode=loose` が必要。公開品質baselineへstaged監査を書き込まない。
 
-全129ファイルを一度に復元する永続CLIは未整備。特にラスパイレス2件の再生成を補う必要がある。
-汎用ranking生成の入力は公開R2を読むため、更新済みstageからranking値を派生するときはgatewayまたは
-純粋builder経由を使い、ローカルstageが自動的に読まれると仮定しない。
+全55テーマをPC・mobileで確認し、章のカード数、値・年・単位、県切替、横はみ出し、JS例外を検査する。
+財政の専用章、駅800m人口のGIS、津波対象外県のnull、観光の公式全国月次と10費目支出構成も別途照合する。
+旧42画面の道路mobile #418 は後続buildでは再現していないが、過去の原因は未確定。
+2026-09-10の全110画面では14テーマ21章のカード欠落を検出し、生成元のcontextロール処理を修正した。
+修正後の全量結果は全体記録の最新buildと結び付け、古いPASSで置換しない。
 
-### 表示エラーの再現
+### 公開と計測
 
-検証済みのローカルデータを使ったproduction build/startで調べる。既存のpreview gatewayのソースは
-`../metrics/themes/2026-09-09-hydration.json` の `previewGatewaySource` に保存している。
-作業ルートで起動し、gatewayと同じディレクトリに `release.manifest` を `release-manifest.json` として置く。
-gatewayは127.0.0.1:4778でmanifest内だけローカル値を読み、他のappキーは公開R2をGETする。
-Nextの起動には `R2_PUBLIC_FETCH_URL=http://127.0.0.1:4778` と空の
-`R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を明示する。
-Turboを経由する場合は `--env-mode=loose` が必要（strictではこのURL overrideが渡らない）。
-
-```bash
-node .claude/scripts/themes/probe-theme-hydration.mjs --mobile --scenarios after-real-income
-```
-
-Chromeを使い、390×844、ja-JP、pref=28000、同意拒否で実収入を開いた後、同じcontextの新しいページで道路を開く。
-出力は `.local/verification/themes/hydration/`。最終検証は42画面中41 PASSで、道路mobileの#418が未解決。
-診断JSONの `diagnosticSource` は当時のReact chunk専用の応答計装であり、次のbuildで一致を確認してから
-一時mjsへ復元し `--diagnostic <path>` で使う。元の例外を抑止しない。
-本文divに対しcursorが内部JSON-LD scriptを指すことまで確認済み。非同期埋め込みsectionの
-Suspense境界は次の調査候補であり、原因の確定・修正は未実施。
+本番コード・R2の公開は検証済み差分をまとめて行う。新規テーマは公開前baselineを0で補完せず、
+実際の本番表示確認日からlaunch実験のd7/d28/d56を設定する。既存テーマ改善は事前窓と条件を照合する。
+未開始pendingの改善baselineを修正する場合は `evaluate-theme-experiments.mjs --update-baseline <id> '<json>'` を使う。
+baseline・期間・scope・status・evidenceRefsのみ変更でき、launchや公開日・観測・判定がある実験は拒否する。
+修正前後の値と公式APIの期間・条件・SHAは `.claude/state/metrics/themes/` に保存する。欠測を0で補完しない。
+ローカルbuild日を公開日としない。Codex heartbeatはタスク側の設定でgit移行されないため、重複登録前に
+既存設定を確認する。週次CIの計測と既知警告の抑制はこのREADME前半の契約に従う。

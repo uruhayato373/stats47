@@ -32,7 +32,7 @@
 - [project_blog_svg_lineage_enforcement.md](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
 - [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ空/home featured空→wrangler.toml CLOUDFLARE_WORKERS="true"を疑う。shouldSkipRemoteR2Readが空ok([])返し黙って失敗。テーマはR2 values.jsonのみ読む+force-dynamic必須(2026-06-20根治)
-- [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — devは`npm run dev:web`(=turbo --filter=web)。root`npm run dev`は23pkgで遅い。常駐はrun_in_background+Ready polling。更新無い時はlisten確認(lsof -i :3000)先。正典local-environment.md
+- [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — devは`npm run dev:web`(=turbo --filter=web)。root`npm run dev`は23pkgで遅い。常駐はbackground+Ready polling。Turbo devのR2 URL/空S3変数継承と公開前指標の実HTMLを確認してから画面監査。正典local-environment.md
 - [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。docs/21=ephemeral outbox
 - [feedback_fetch_origin_before_implementing.md](feedback_fetch_origin_before_implementing.md) — 実装前にgit fetch+origin/main vs ローカルHEAD diff。並行セッション同日pushでstale→重複実装事故(2026-06-14 PR#479)。施策IDを既存検索
 - [feedback_home_pure_ssg_r2_empty.md](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず空焼き込み→修正はforce-dynamic(#478)。revalidateは本OpenNext構成で無効。build envにR2 URL足すとgenerateStaticParams爆発で不採用

@@ -21,6 +21,7 @@
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '<json>'
  *     # 実験を登録する (手編集禁止の書き込み口)。json は README schema のエントリ 1 件。
  *     # verdict は "pending" 固定で付与。evaluateAt 未設定 (デプロイ待ち) も許容 (--check は発火しない)。
+ *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --update-baseline <id> '<json>'
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule <id> <YYYY-MM-DD>
  *     # デプロイ日を startedAt に設定し evaluateAt (d7/d28/d56 = +7/+28/+56 日) を機械算出する。
  */
@@ -206,7 +207,7 @@ function reject(message) { console.error(`✗ ${message}`); process.exit(1); }
 
 function main() {
   const args = process.argv.slice(2);
-  const modes = ["--register", "--schedule", "--check", "--verdict", "--launch-review"];
+  const modes = ["--register", "--update-baseline", "--schedule", "--check", "--verdict", "--launch-review"];
   const known = new Set([...modes, "--evidence", "--note"]);
   if (args.filter((a) => modes.includes(a)).length > 1 || args.some((a) => a.startsWith("--") && !known.has(a)))
     reject("操作は1件ずつ、既知のオプションだけ指定する");
@@ -238,6 +239,31 @@ function main() {
     console.log(`登録: ${entry.experimentId} (${entry.themeKey} / ${entry.changeType})` +
       (entry.evaluateAt ? "" : " — evaluateAt 未設定 (デプロイ後に設定するまで --check は発火しない)"));
     console.log("→ validate-theme-state.mjs で E 規律 (重複/baseline) を確認すること");
+    return;
+  }
+
+  const baselineIdx = args.indexOf("--update-baseline");
+  if (baselineIdx >= 0) {
+    const id = args[baselineIdx + 1];
+    const entry = ex.experiments.find((e) => e.experimentId === id);
+    if (!entry) reject(`${id} が experiments.json に無い`);
+    if (entry.changeType === "launch") reject("launch にbaselineは設定できない");
+    if (entry.verdict !== "pending" || entry.startedAt != null || entry.evaluateAt != null || entry.result != null)
+      reject("baseline修正は未開始pendingだけ。公開日・観測・判定済みの履歴は変更不可");
+    let patch;
+    try { patch = JSON.parse(args[baselineIdx + 2]); }
+    catch { reject("--update-baseline のJSONが不正"); }
+    const allowed = new Set(["baseline", "baselinePeriod", "baselineScopes", "baselineStatuses", "evidenceRefs"]);
+    if (!patch || typeof patch !== "object" || Array.isArray(patch) || !Object.keys(patch).length
+        || Object.keys(patch).some((key) => !allowed.has(key)))
+      reject("変更可能なのはbaseline・期間・scope・status・evidenceRefsだけ");
+    const next = { ...entry, ...patch };
+    const issues = experimentIssues(next, { registration: true });
+    if (issues.length) reject(issues.join("; "));
+    if (!next.evidenceRefs?.length) reject("baseline修正には実測evidenceRefsが必要");
+    Object.assign(entry, patch);
+    fs.writeFileSync(EXPERIMENTS, JSON.stringify(ex, null, 2) + "\n");
+    console.log(`baseline更新: ${id} (未開始・公開日未設定のまま)`);
     return;
   }
 

@@ -23,7 +23,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "criminal-recognition-count",
       "shortLabel": "認知件数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "violent-crime-per-100k",
@@ -73,7 +73,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "traffic-accident-count",
       "shortLabel": "事故件数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "traffic-accident-deaths-per-100-accidents",
@@ -88,7 +88,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "traffic-accident-casualties-elderly-65plus",
       "shortLabel": "高齢者事故",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "building-fire-count-per-100-thousand-people",
@@ -113,7 +113,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "disaster-damage-amount-per-person",
       "shortLabel": "災害被害額（人口1人当たり）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "suicide-rate-per-100k",
@@ -133,7 +133,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "police-officer-count-per-population",
       "shortLabel": "警察官数（人口千人当たり）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "traffic-accident-injuries",
@@ -151,13 +151,93 @@ export const SAFETY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "natural-disaster-deaths",
+      "shortLabel": "自然災害による死者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-missing-persons",
+      "shortLabel": "自然災害による行方不明者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-injured-persons",
+      "shortLabel": "自然災害による負傷者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-destroyed-houses",
+      "shortLabel": "自然災害による全壊住家棟数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-half-destroyed-houses",
+      "shortLabel": "自然災害による半壊住家棟数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-partially-damaged-houses",
+      "shortLabel": "自然災害による一部破損住家棟数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "disaster-recovery-expenses-prefecture",
+      "shortLabel": "災害復旧費（都道府県財政）",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "fire-department-water-count-per-100-thousand-people",
       "shortLabel": "消防水利数",
       "role": "secondary"
     },
     {
+      "rankingKey": "fire-department-member-count-per-100-thousand-people",
+      "shortLabel": "消防吏員数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "fire-department-pump-car-count-per-100-thousand-people",
+      "shortLabel": "消防ポンプ自動車等現有数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "fire-department-emergency-car-count-per-100k",
+      "shortLabel": "救急自動車数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "shortLabel": "個別避難計画の作成率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-listed-persons",
+      "shortLabel": "避難行動要支援者名簿の掲載人数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-covered-persons",
+      "shortLabel": "個別避難計画が作成された人数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "tsunami-evacuation-building-count",
+      "shortLabel": "津波避難ビル数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "tsunami-evacuation-tower-count",
+      "shortLabel": "津波避難タワー等数",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "disaster-relief-expenses-prefecture",
       "shortLabel": "災害救助費",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "consumer-consultation-accepted-cases",
+      "shortLabel": "消費生活相談受付件数（年度）",
       "role": "secondary"
     }
   ],

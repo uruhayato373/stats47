@@ -22,6 +22,7 @@ Geo分析を最終順位だけにせず、入力、途中地図、空間演算�
 | slug | 入力 | operation | context-only |
 |---|---|---|---|
 | `population-station-access` | 1km将来人口 + S12駅形状 | 駅代表点とメッシュ中心点の800m距離判定 | 駅別乗降客数 |
+| `population-public-facility-access` | 1km将来人口 + P05-22全県施設 | 行政・集会施設を別々に全国最近傍探索し5距離帯へ分類 | なし |
 
 ## 手順
 
@@ -34,6 +35,8 @@ Geo分析を最終順位だけにせず、入力、途中地図、空間演算�
    npm run geo:build-station-access
    ```
 
+   公共施設は`npm run geo:build-public-facility-access`。原典取得が必要な初回は`-- --download`を付ける。固定版・SHAを確認できない原典では配信ファイルを書かない。
+
 5. 生成コマンド内でSHA、bytes、47県coverage、重複ID、stage件数、保存則まで監査する。既存artifactだけを再監査する場合は次を使う。
 
    ```bash
@@ -41,6 +44,8 @@ Geo分析を最終順位だけにせず、入力、途中地図、空間演算�
    npm run type-check --workspace packages/gis
    npm run test:run --workspace packages/gis -- src/geo-analysis/__tests__/station-access.test.ts
    ```
+
+   公共施設は`npm run geo:audit-public-facility-access`とWebの`geo-public-facility.integration.test.ts`を使用する。`GEO_ARTIFACT_ROOT`を指定した検査は原典が欠けても合成fixtureへ代替しない。
 
 6. Web parser/type-check/testを通し、`/geo/<slug>?pref=13&stage=population`、`overlap`、`audit`をlocalhostで確認する。
 7. 管理画面`/strategy`で計算入力、補助レイヤー、47県artifact、保存則を確認する。

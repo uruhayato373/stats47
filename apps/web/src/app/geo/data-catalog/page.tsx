@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GeoDataCatalogPage() {
-  const analyses = await Promise.all(BUSINESS_PLAN_M1_GEO_ANALYSES.map(async spec => ({
+  const analyses = await Promise.all(GEO_ANALYSES.map(async spec => ({
     spec, snapshot: isGeoCrossAnalysisSlug(spec.slug) ? await loadGeoAnalysisSnapshot(spec.slug) : null,
   })));
   return <PageShell>

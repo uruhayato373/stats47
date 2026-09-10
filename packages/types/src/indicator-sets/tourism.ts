@@ -48,7 +48,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "air-passenger-transport",
       "shortLabel": "航空旅客",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "jr-passenger-transport",
@@ -71,8 +71,23 @@ export const TOURISM_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "accommodation-consumption-expenditure",
-      "shortLabel": "宿泊料消費支出額",
+      "rankingKey": "inbound-visitors-by-destination",
+      "shortLabel": "訪日外国人の訪問者数（推計）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "inbound-visit-sample-by-destination",
+      "shortLabel": "訪問者数推計の県別回答数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "domestic-travel-consumption-by-destination",
+      "shortLabel": "日本人旅行者の県内消費額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "inbound-travel-consumption-by-destination",
+      "shortLabel": "訪日外国人旅行者の県内消費額",
       "role": "secondary"
     },
     {

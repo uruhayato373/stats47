@@ -48,17 +48,17 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
     {
       "rankingKey": "university-count",
       "shortLabel": "大学数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "elementary-school-count",
       "shortLabel": "小学校数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "junior-high-school-count",
       "shortLabel": "中学校数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "high-school-count",
@@ -81,6 +81,16 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "public-school-closures-cumulative",
+      "shortLabel": "公立学校廃校発生数（2004〜2023年度累計）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "high-school-advancement-rate",
+      "shortLabel": "高等学校卒業者の進学率",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "university-count-per-100k",
       "shortLabel": "大学数（人口10万人当たり）",
       "role": "secondary"
@@ -92,7 +102,7 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
     },
     {
       "rankingKey": "study-participation-rate-business",
-      "shortLabel": "学習・自己啓発行動者率",
+      "shortLabel": "商業実務・ビジネス関係の学習行動者率",
       "role": "secondary"
     },
     {
@@ -106,6 +116,21 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "registered-museum-visitors",
+      "shortLabel": "登録博物館の入館者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "designated-museum-visitors",
+      "shortLabel": "指定施設の入館者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "museum-like-facility-visitors",
+      "shortLabel": "博物館類似施設の入館者数",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "total-museum-count",
       "shortLabel": "博物館総数",
       "role": "secondary"
@@ -113,6 +138,21 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
     {
       "rankingKey": "art-museum-count",
       "shortLabel": "美術博物館数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "prefecture-designated-cultural-property-count",
+      "shortLabel": "県指定等文化財件数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "prefectural-cultural-property-protection-expenditure",
+      "shortLabel": "県政府の文化財保護経費",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "buried-cultural-property-specialist-count",
+      "shortLabel": "埋蔵文化財専門職員数",
       "role": "secondary"
     }
   ],

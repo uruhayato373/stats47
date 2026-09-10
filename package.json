@@ -129,8 +129,10 @@
     "evidence:pilot:data:write-local": "node .claude/scripts/data/fetch-japanese-instruction-students.mjs --write-local",
     "evidence:test": "vitest run packages/data-configs/src/evidence-inventory/japan-zue/__tests__/*.test.ts && node --test .claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs",
     "theme:quality:check": "node --import tsx .claude/scripts/themes/audit-theme-quality.ts",
-    "theme:quality:test": "node --test .claude/scripts/themes/__tests__/",
-    "theme:portfolio:audit": "bash .claude/scripts/themes/run-theme-portfolio-audit.sh"
+    "theme:quality:test": "node --import tsx --test .claude/scripts/themes/__tests__/",
+    "theme:portfolio:audit": "bash .claude/scripts/themes/run-theme-portfolio-audit.sh",
+    "geo:build-public-facility-access": "node --import tsx packages/gis/src/mlit-ksj/scripts/build-public-facility-access.ts",
+    "geo:audit-public-facility-access": "tsx packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts --public-facility-only"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",

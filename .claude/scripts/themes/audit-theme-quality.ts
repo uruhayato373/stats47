@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseArgs } from "node:util";
 
 import { THEME_CATALOGS, collectChartDependencies } from "../../../packages/data-configs/src/theme-catalog/index";
 import { getMetricConfig } from "../../../packages/data-configs/src/registry";
@@ -12,11 +13,13 @@ import { inspectThemePayload, compareThemeObservation, selectLastGoodObservation
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const DEFAULT_OUTPUT = path.join(ROOT, ".claude/state/themes/quality.json");
 const argv = process.argv.slice(2);
+const { values: cli } = parseArgs({ args: argv, options: {
+  json: { type: "string" }, previous: { type: "string" },
+  "staged-dir": { type: "string" }, offline: { type: "boolean" },
+} });
 function option(name: string, fallback: string): string {
-  const index = argv.indexOf(name);
-  if (index < 0) return fallback;
-  if (!argv[index + 1] || argv[index + 1].startsWith("--")) throw new Error(`${name} requires a value`);
-  return argv[index + 1];
+  const value = cli[name.slice(2) as keyof typeof cli];
+  return typeof value === "string" ? value : fallback;
 }
 type Finding = { code: string; severity: string; detail?: string; themeKey?: string; componentKey?: string; metricKey?: string; namespace?: string; [key: string]: unknown };
 type Observation = ReturnType<typeof inspectThemePayload> & { namespace: string; key: string; url?: string; observedAt?: string; sha256?: string; httpStatus?: number; error?: string };
@@ -56,7 +59,8 @@ async function fetchObservation(key: string, namespace: string): Promise<Observa
 async function main() {
   const output = path.resolve(option("--json", DEFAULT_OUTPUT));
   const offline = argv.includes("--offline");
-  const staged = argv.includes("--staged-dir");
+  const preview = ["localhost", "127.0.0.1", "[::1]"].includes(new URL(process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp").hostname);
+  const staged = argv.includes("--staged-dir") || preview;
   if ((offline || staged) && (!argv.includes("--json") || output === DEFAULT_OUTPUT)) {
     throw new Error("Offline/staged audits require a separate --json output; the live baseline must be preserved");
   }
@@ -71,6 +75,7 @@ async function main() {
       requests.set(`ranking/${metric.rankingKey}`, { key: metric.rankingKey, namespace: "ranking" });
       const config = getMetricConfig(metric.rankingKey);
       if (!config || config.isActive === false) findings.push({ themeKey: catalog.key, metricKey: metric.rankingKey, severity: "error", code: "unavailable-metric", detail: config ? "inactive" : "unregistered" });
+      if (config && !config.entities.includes("prefecture")) findings.push({ themeKey: catalog.key, metricKey: metric.rankingKey, severity: "error", code: "non-prefecture-metric", detail: config.entities.join(",") });
       if (metric.role !== "context" && !metric.selection) findings.push({ themeKey: catalog.key, metricKey: metric.rankingKey, severity: "warn", code: "missing-selection", detail: "主表示の選定根拠がない" });
       if (metric.rankingKey === "employment-rate" && /就業率/.test(metric.shortLabel)) findings.push({ themeKey: catalog.key, metricKey: metric.rankingKey, severity: "error", code: "incorrect-definition-label", detail: "就職率を就業率と表示" });
       if (config && /所定内給与/.test(config.subtitle ?? "") && /年収/.test(metric.shortLabel)) findings.push({ themeKey: catalog.key, metricKey: metric.rankingKey, severity: "error", code: "incorrect-period-label", detail: "所定内給与月額を年収と表示" });

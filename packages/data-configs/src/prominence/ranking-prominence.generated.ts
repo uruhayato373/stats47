@@ -84,7 +84,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 138,
+    "count": 152,
     "representatives": [
       {
         "rankingKey": "crude-birth-rate",
@@ -127,7 +127,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "laborwage",
     "categoryName": "労働・賃金",
-    "count": 110,
+    "count": 117,
     "representatives": [
       {
         "rankingKey": "designer-annual-income",
@@ -170,7 +170,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "agriculture",
     "categoryName": "農林水産業",
-    "count": 59,
+    "count": 75,
     "representatives": [
       {
         "rankingKey": "fishery-workers",
@@ -213,7 +213,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "miningindustry",
     "categoryName": "鉱工業",
-    "count": 10,
+    "count": 13,
     "representatives": [
       {
         "rankingKey": "manufacturing-industry-added-value",
@@ -246,17 +246,17 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "標準価格変動率（工業地）が最も高い県は？"
       },
       {
-        "rankingKey": "manufacturing-sales-private",
-        "title": "売上金額（製造業）",
-        "readerLabel": "売上金額（製造業）",
-        "hook": "売上金額（製造業）が最も多い県は？"
+        "rankingKey": "food-manufacturing-employees",
+        "title": "食料品製造業の従業者数",
+        "readerLabel": "食料品製造業の従業者数",
+        "hook": "食料品製造業の従業者数が最も多い県は？"
       }
     ]
   },
   {
     "categoryKey": "commercial",
     "categoryName": "商業・サービス業",
-    "count": 73,
+    "count": 78,
     "representatives": [
       {
         "rankingKey": "convenience-store-count-commercial",
@@ -299,7 +299,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 825,
+    "count": 869,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
@@ -342,7 +342,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "construction",
     "categoryName": "住宅・土地・建設",
-    "count": 69,
+    "count": 84,
     "representatives": [
       {
         "rankingKey": "ordinary-construction-expenses-prefecture",
@@ -385,7 +385,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "energy",
     "categoryName": "エネルギー・水",
-    "count": 15,
+    "count": 22,
     "representatives": [
       {
         "rankingKey": "final-disposal-site-remaining-capacity",
@@ -428,7 +428,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "tourism",
     "categoryName": "運輸・観光",
-    "count": 48,
+    "count": 53,
     "representatives": [
       {
         "rankingKey": "total-overnight-guests",
@@ -471,7 +471,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 256,
+    "count": 270,
     "representatives": [
       {
         "rankingKey": "school-teacher-annual-income",
@@ -514,7 +514,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "administrativefinancial",
     "categoryName": "行財政",
-    "count": 129,
+    "count": 147,
     "representatives": [
       {
         "rankingKey": "local-allocation-tax-prefecture",
@@ -557,7 +557,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 106,
+    "count": 143,
     "representatives": [
       {
         "rankingKey": "theft-offenses-recognized",
@@ -600,7 +600,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 245,
+    "count": 286,
     "representatives": [
       {
         "rankingKey": "psychiatric-bed-count",
@@ -662,7 +662,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "infrastructure",
     "categoryName": "社会基盤施設",
-    "count": 46,
+    "count": 57,
     "representatives": [
       {
         "rankingKey": "main-road-paving-rate",
@@ -705,7 +705,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "ict",
     "categoryName": "情報通信・科学技術",
-    "count": 20,
+    "count": 22,
     "representatives": [
       {
         "rankingKey": "public-phone-count",
@@ -853,7 +853,7 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "manufacturing-employees",
   "manufacturing-net-value-added-private",
   "industrial-land-price-change-rate",
-  "manufacturing-sales-private",
+  "food-manufacturing-employees",
   "convenience-store-count-commercial",
   "retail-store-count",
   "barber-beauty-salon-count",

@@ -29,6 +29,46 @@ export const CONSTRUCTION_INDUSTRY_SET: IndicatorSet = {
       "rankingKey": "construction-private-employees",
       "shortLabel": "従業者数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "construction-employed-residents",
+      "shortLabel": "建設業就業者総数（常住地別）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "construction-employed-under30",
+      "shortLabel": "30歳未満の建設業就業者",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "construction-employed-age30to54",
+      "shortLabel": "30〜54歳の建設業就業者",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "construction-employed-age55plus",
+      "shortLabel": "55歳以上の建設業就業者",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "construction-employed-female",
+      "shortLabel": "女性の建設業就業者",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "architect-annual-income",
+      "shortLabel": "建築技術者の推計年収（2022年）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "public-construction-contract-count",
+      "shortLabel": "公共工事の請負契約件数（施工地別）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "public-construction-contract-amount",
+      "shortLabel": "公共工事の請負契約額（施工地別）",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/geo/method' },
 };
 
-const crossAnalyses = BUSINESS_PLAN_M1_GEO_ANALYSES.filter(
+const crossAnalyses = GEO_ANALYSES.filter(
   (analysis) => analysis.analysisKind === 'spatial-cross',
 );
 

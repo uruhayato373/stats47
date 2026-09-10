@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-09T21:28:24.114Z",
+  "source": "https://storage.stats47.jp",
+  "reproduction": "npm run theme:quality:check -- --json /tmp/stats47-theme-public-quality.json",
+  "summary": {
+    "themes": 55,
+    "observedRequests": 772,
+    "errors": 6,
+    "warnings": 59
+  },
+  "findings": [
+    {
+      "metricKey": "accountant-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "35/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "annual-clear-days",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "11/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "annual-snow-days",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "20/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "annual-snow-days",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "20/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "aquaculture-harvest",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "42/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "aquaculture-harvest",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "42/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "barber-beautician-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "38/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "barber-beautician-annual-income",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "38/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "carpenter-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "36/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "carpenter-annual-income",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "36/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "construction-private-employees",
+      "namespace": "ranking",
+      "severity": "error",
+      "code": "payload-unavailable",
+      "detail": "HTTP 404"
+    },
+    {
+      "metricKey": "construction-private-employees",
+      "namespace": "stats",
+      "severity": "error",
+      "code": "payload-unavailable",
+      "detail": "HTTP 404"
+    },
+    {
+      "metricKey": "dental-hygienist-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "42/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "dentist-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "32/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "factory-location-area-annual",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "42/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "factory-location-area-annual",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "42/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fish-catch",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "45/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fish-catch",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "45/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-bonito",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "30/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-japanese-squid",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "36/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-kelp",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "4/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-mackerel",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "36/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-pacific-saury",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "19/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-pollock",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "12/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-sardine",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "38/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-scallop",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "3/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-sea-bream",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-snow-crab",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "14/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-tuna",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "34/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "fishery-species-catch-yellowtail",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "high-school-teacher-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "42/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "home-care-worker-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "46/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "home-care-worker-annual-income",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "46/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "information-private-employees",
+      "namespace": "ranking",
+      "severity": "error",
+      "code": "payload-unavailable",
+      "detail": "HTTP 404"
+    },
+    {
+      "metricKey": "information-private-employees",
+      "namespace": "stats",
+      "severity": "error",
+      "code": "payload-unavailable",
+      "detail": "HTTP 404"
+    },
+    {
+      "metricKey": "information-private-establishments",
+      "namespace": "ranking",
+      "severity": "error",
+      "code": "payload-unavailable",
+      "detail": "HTTP 404"
+    },
+    {
+      "metricKey": "information-private-establishments",
+      "namespace": "stats",
+      "severity": "error",
+      "code": "payload-unavailable",
+      "detail": "HTTP 404"
+    },
+    {
+      "metricKey": "inland-aquaculture-harvest",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "45/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "inland-aquaculture-harvest",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "45/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "inland-fishery-catch",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "45/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "laspeyres-index-prefecture",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "unit-metadata-drift",
+      "detail": "指数 / "
+    },
+    {
+      "metricKey": "marine-aquaculture-harvest",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "44/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "marine-aquaculture-harvest",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "44/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "marine-fishery-output-value",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "44/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "marine-fishery-output-value",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "44/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "maritime-import-export-cargo",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "maritime-import-export-cargo",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "midwife-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "43/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "pilot-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "18/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-cargo-export",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-cargo-export",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-cargo-import",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-cargo-import",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-cargo-total",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-cargo-total",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-container-count",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-container-count",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "39/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-inbound-ships",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "40/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-inbound-ships",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "40/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "port-ships-tonnage",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "40/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "public-health-nurse-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "46/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "school-teacher-annual-income",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "44/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "school-teacher-annual-income",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "44/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "voter-turnout-governor",
+      "namespace": "ranking",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "11/47。対象外・秘匿・欠測を一次資料で区別"
+    },
+    {
+      "metricKey": "voter-turnout-governor",
+      "namespace": "stats",
+      "severity": "warn",
+      "code": "partial-coverage",
+      "detail": "11/47。対象外・秘匿・欠測を一次資料で区別"
+    }
+  ],
+  "observationCount": 772,
+  "limitation": "Observed before the subsequent finance and broadband additions. Public reads only; not a release approval."
+}

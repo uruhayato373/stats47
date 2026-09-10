@@ -9,6 +9,20 @@ export const LOCAL_FINANCE_EMBEDDED_KEYS = [
 
 export type LocalFinanceEmbeddedKey = (typeof LOCAL_FINANCE_EMBEDDED_KEYS)[number];
 
+/** The page sends dedicated blocks and generic metric chapters to their actual renderers. */
+export function splitLocalFinanceSections(sections: readonly CatalogSection[]) {
+  const dedicated = sections.filter((section) => section.embeddedSectionKeys?.length);
+  const supplementary = sections.filter((section) => !section.embeddedSectionKeys?.length);
+  const errors = validateLocalFinanceSections(dedicated);
+  for (const section of supplementary) {
+    if (!section.metricGroupKeys.length || section.chartKeys?.length) {
+      errors.push(`${section.key}: 補足章には指標グループが必要で、汎用図は使用しない`);
+    }
+  }
+  if (errors.length) throw new Error(errors.join('; '));
+  return { dedicated, supplementary };
+}
+
 /** 専用画面が消費できない設定と、専用ブロックの配置漏れを止める。 */
 export function validateLocalFinanceSections(sections: readonly CatalogSection[]): string[] {
   const errors: string[] = [];

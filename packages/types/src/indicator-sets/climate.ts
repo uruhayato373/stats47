@@ -28,7 +28,7 @@ export const CLIMATE_SET: IndicatorSet = {
     {
       "rankingKey": "maximum-temperature",
       "shortLabel": "最高気温",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "lowest-temperature",
@@ -53,6 +53,11 @@ export const CLIMATE_SET: IndicatorSet = {
     {
       "rankingKey": "maximum-snow-depth",
       "shortLabel": "最深積雪",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "heatstroke-emergency-transports",
+      "shortLabel": "熱中症救急搬送人員",
       "role": "secondary"
     }
   ],

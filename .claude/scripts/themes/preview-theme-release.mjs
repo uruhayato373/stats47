@@ -13,20 +13,27 @@ const { values: options } = parseArgs({ options: {
 if (!options.manifest) throw new Error('--manifest is required');
 const manifest = JSON.parse(await readFile(resolve(options.manifest), 'utf8'));
 const staged = new Map();
+const stagedTsunamiKeys = new Set(manifest.files.map(file => file.key).filter(key => /^gis\/mlit-ksj\/A40\/\d{2}\/\d{2}\.zip$/.test(key)));
+const validKey = (key) => (key.startsWith('app/') || stagedTsunamiKeys.has(key) || /^gis\/mlit-ksj\/(?:P05\/22\/\d{2}\.geojson|mesh1000r6\/24\/\d{2}\.topojson|(?:m250r6\/24|A22\/16|A33\/25)\/\d{2}\.zip)$/.test(key) || key === 'gis/tokushima/tsunami-inundation/2025/36.zip') && !key.split('/').some(part => ['..', '.', ''].includes(part));
 for (const file of manifest.files) {
-  if (!file.key.startsWith('app/') || file.key.split('/').some((part) => ['..', '.', ''].includes(part))) throw new Error('Invalid staged key');
-  const bytes = await readFile(resolve(options['stage-dir'], file.key));
+  if (!validKey(file.key)) throw new Error('Invalid staged key');
+  const path = resolve(options['stage-dir'], file.key);
+  const bytes = await readFile(path);
   if (createHash('sha256').update(bytes).digest('hex') !== file.sha256 || bytes.length !== file.bytes) throw new Error(`Staged file changed: ${file.key}`);
-  staged.set(file.key, bytes);
+  // Original GIS ZIPs are large. Pin their identity, not an in-memory duplicate.
+  staged.set(file.key, { ...file, path });
 }
 const server = http.createServer(async (req, res) => {
   try {
     const key = decodeURIComponent(new URL(req.url, 'http://127.0.0.1').pathname).slice(1);
-    if (!['GET', 'HEAD'].includes(req.method) || !key.startsWith('app/') || key.includes('..')) { res.writeHead(404).end(); return; }
+    if (!['GET', 'HEAD'].includes(req.method) || !validKey(key)) { res.writeHead(404).end(); return; }
     res.setHeader('Access-Control-Allow-Origin', '*');
     if (staged.has(key)) {
-      res.writeHead(200, { 'Content-Type': 'application/json', 'X-Theme-Preview-Source': 'staged' });
-      res.end(req.method === 'HEAD' ? undefined : staged.get(key));
+      const file = staged.get(key);
+      const bytes = await readFile(file.path);
+      if (bytes.length !== file.bytes || createHash('sha256').update(bytes).digest('hex') !== file.sha256) throw new Error('Staged file changed');
+      res.writeHead(200, { 'Content-Type': key.endsWith('.zip') ? 'application/zip' : 'application/json', 'X-Theme-Preview-Source': 'staged' });
+      res.end(req.method === 'HEAD' ? undefined : bytes);
       return;
     }
     const upstream = await fetch(`https://storage.stats47.jp/${key}`, { method: req.method, signal: AbortSignal.timeout(20000) });

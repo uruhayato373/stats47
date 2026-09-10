@@ -7,16 +7,16 @@ import {
 } from '@stats47/gis';
 
 import {
+  type GeoBaseFixtureSlug,
   bindFixtureArtifact,
   GENERATED_AT,
   manifestFixture,
 } from './geo-manifest-fixture';
 
-import type { GeoCrossAnalysisSlug } from '../geo-cross-analysis';
 
 // 合成座標を県コード別に複製した配信契約fixture。実際の県分布の検証には使わない。
 function detailFixture(
-  slug: GeoCrossAnalysisSlug,
+  slug: GeoBaseFixtureSlug,
   pref: string
 ): GeoAnalysisPrefDetail {
   const areaCode = `${pref}000`;
@@ -86,7 +86,7 @@ function detailFixture(
 }
 
 export function geoArtifactBundleFixture(
-  slug: GeoCrossAnalysisSlug
+  slug: GeoBaseFixtureSlug
 ): Map<string, unknown> {
   const objects = new Map<string, unknown>();
   let manifest = manifestFixture(slug);

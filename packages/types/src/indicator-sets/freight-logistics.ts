@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const FREIGHT_LOGISTICS_SET: IndicatorSet = {
   "key": "freight-logistics",
   "title": "物流と貨物輸送",
-  "description": "JR貨物、航空貨物、貨物車両、トラック事業者の規模を輸送手段別に比較します。輸送量を単純合算して物流量とはしません。",
+  "description": "発送県と到着県の組合せを鉄道・自動車・海運・航空別に確認します。2024年度の貨物流動が基本ですが、海運は2024暦年のフレートトンです。単位と期間を分け、輸送機関横断の合計は作りません。",
   "category": "tourism",
   "usage": "theme",
   "metrics": [

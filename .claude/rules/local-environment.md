@@ -79,6 +79,8 @@ packages/database/.data/stats47.sqlite
 NO_PROXY の大小文字) を列挙して解決済み。**passThrough は cache key に入らない**ので、
 値がマシンごとに違っても turbo cache は効く (別の proxy/CA 値で task hash が不変であることを実測)。
 
+ローカルsnapshotプレビューでは`dev.passThroughEnv`が`R2_PUBLIC_FETCH_URL`、`NEXT_PUBLIC_R2_PUBLIC_URL`、S3認証3変数も引き継ぐ。gatewayを使う場合は`R2_ACCESS_KEY_ID= R2_SECRET_ACCESS_KEY= R2_S3_ENDPOINT=`を明示し、S3優先を解除する。これはcache無効のdevだけの設定。gateway単体のHTTP200では足りず、公開前の指標キーとgateway URLがWebのHTML/通信に出ることを確認する。
+
 切り分け方 (同種の症状が出たとき):
 
 ```bash

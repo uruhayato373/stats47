@@ -5,6 +5,28 @@ const { extractYearCode } = require('../../../packages/estat-api/src/stats-data/
 export const PREFECTURES = Array.from({ length: 47 }, (_, index) => String(index + 1).padStart(2, '0') + '000');
 const PREFECTURE_SET = new Set(PREFECTURES);
 
+/** A declared non-applicable prefecture is null, not a zero or an omitted source row. */
+export function inspectLocalMetricCoverage(rows, declaration) {
+  const errors = [];
+  const codes = declaration?.codes ?? [];
+  if (!Array.isArray(codes) || new Set(codes).size !== codes.length || codes.some((code) => !PREFECTURE_SET.has(code))
+    || (codes.length && (typeof declaration?.reason !== 'string' || !declaration.reason.trim())) || codes.length === 47) {
+    return { errors: ['Invalid non-applicable prefecture declaration'], numericCodes: [] };
+  }
+  const excluded = new Set(codes);
+  const byYear = new Map();
+  for (const row of rows) {
+    if (!PREFECTURE_SET.has(row.areaCode)) errors.push(`Invalid area: ${row.areaCode}`);
+    if (!byYear.has(row.yearCode)) byYear.set(row.yearCode, new Set());
+    const cohort = byYear.get(row.yearCode);
+    if (cohort.has(row.areaCode)) errors.push(`Duplicate area-year: ${row.areaCode}/${row.yearCode}`);
+    cohort.add(row.areaCode);
+    if (excluded.has(row.areaCode) ? row.value !== null : !Number.isFinite(row.value)) errors.push(`Unexpected missing/value: ${row.areaCode}/${row.yearCode}`);
+  }
+  if (!byYear.size || [...byYear.values()].some((cohort) => cohort.size !== 47)) errors.push('Every source year must contain all 47 prefectures including explicit non-applicable rows');
+  return { errors, numericCodes: PREFECTURES.filter((code) => !excluded.has(code)) };
+}
+
 export function explicitIndicatorCodes(theme) {
   return [...new Set(theme.indicators.flatMap((text) => text.match(/\b[A-L]\d{4,}\b/g) ?? []))].sort();
 }
@@ -98,6 +120,57 @@ export function validateDecisions(catalog, existingThemes) {
     if (d.disposition === 'hold' && (!d.resumeWhen || !d.blockers?.length)) errors.push(`${theme.id}: hold needs a blocker and resumption condition`);
   }
   return errors;
+}
+
+/** Observe actual destinations; registered metrics alone do not establish a rendered chapter. */
+export function inspectExpansionWiring(plan, catalogs, extensions = {}) {
+  const rows = plan.themes.map((candidate) => {
+    const decision = candidate.decision;
+    const catalog = catalogs[decision.targetThemeKey];
+    const extension = extensions[decision.targetThemeKey]?.find((entry) => entry.candidateId === candidate.id);
+    const chapterKey = extension?.existingSectionKey ?? `candidate-${candidate.id}`;
+    const chapter = catalog?.sections?.find((section) => section.key === chapterKey);
+    const groups = new Map((catalog?.metricGroups ?? []).map((group) => [group.key, group]));
+    const chapterMetrics = (chapter?.metricGroupKeys ?? []).flatMap((key) => groups.get(key)?.rankingKeys ?? []);
+    const embedded = Boolean(extension?.existingSectionKey && chapter?.embeddedSectionKeys?.length
+      && extension.metrics.every(([key]) => catalog.metrics.some((metric) => metric.rankingKey === key)));
+    const placed = embedded || chapterMetrics.length > 0
+      && chapter.metricGroupKeys.every((key) => groups.get(key)?.rankingKeys.length)
+      && chapterMetrics.every((key) => catalog.metrics.some((metric) => metric.rankingKey === key));
+    const status = decision.disposition === 'new-theme'
+      ? catalog ? 'catalog-wired-data-validation-pending' : 'catalog-missing'
+      : decision.disposition === 'existing-section'
+        ? placed ? 'catalog-section-wired-data-validation-pending' : 'section-not-wired'
+        : decision.disposition === 'hold' ? 'hold' : 'merge-target-pending';
+    return {
+      candidateId: candidate.id, disposition: decision.disposition, themeKey: catalog?.key ?? null,
+      sectionKey: placed ? chapterKey : null, status,
+      metricKeys: decision.disposition === 'new-theme' ? catalog?.metrics.map((metric) => metric.rankingKey) ?? [] : embedded ? extension.metrics.map(([key]) => key) : chapterMetrics,
+    };
+  });
+  for (const row of rows.filter((entry) => entry.disposition === 'merge-candidate')) {
+    const candidate = plan.themes.find((entry) => entry.id === row.candidateId);
+    const target = rows.find((entry) => entry.candidateId === candidate.decision.targetCandidateId);
+    row.targetCandidateId = candidate.decision.targetCandidateId;
+    if (target?.themeKey && ['catalog-wired-data-validation-pending', 'catalog-section-wired-data-validation-pending'].includes(target.status)) {
+      row.themeKey = target.themeKey;
+      row.sectionKey = target.sectionKey;
+      row.status = 'merged-into-target-data-validation-pending';
+    }
+  }
+  const count = (status) => rows.filter((row) => row.status === status).length;
+  return {
+    candidates: rows,
+    counts: {
+      newThemeCatalogWired: count('catalog-wired-data-validation-pending'),
+      existingSectionWired: count('catalog-section-wired-data-validation-pending'),
+      existingSectionPending: count('section-not-wired'),
+      mergeLinked: count('merged-into-target-data-validation-pending'),
+      mergePending: count('merge-target-pending'),
+      hold: count('hold'),
+      dataValidationPending: rows.filter((row) => ['new-theme', 'existing-section'].includes(row.disposition)).length,
+    },
+  };
 }
 
 // Verify the handoff, not just that a decision field exists on every row.

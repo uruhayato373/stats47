@@ -4,3 +4,4 @@ export * from './m1';
 export * from './geo-routes';
 export * from './geo-content-lifecycle';
 export * from './catalog';
+export * from './geo-analyses';

@@ -5,13 +5,22 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { fetchPrefectures } from '@stats47/area';
-import { FLOOD_ARCHIVES, assertFloodArchiveKeys } from '../../geo-analysis/flood-inputs';
+import {
+  FLOOD_ARCHIVES,
+  assertFloodArchiveKeys,
+} from '../../geo-analysis/flood-inputs';
 
 import {
   assertFloodConservation,
   assertLandPriceConservation,
 } from '../../geo-analysis/content-details';
 import { assertStationAccessConservation } from '../../geo-analysis/station-access';
+import {
+  assertPublicFacilityConservation,
+  createPublicFacilitySearch,
+  validatePublicFacilityDetail,
+} from '../../geo-analysis/public-facility-access';
+import { PUBLIC_FACILITY_INPUTS } from '../../geo-analysis/public-facility-inputs';
 import {
   GEO_STATION_ACCESS_MANIFEST_KEY,
   geoAnalysisManifestKey,
@@ -26,6 +35,9 @@ import type {
   GeoFloodPrefDetail,
   GeoLandPricePrefDetail,
   GeoStationAccessPrefDetail,
+  GeoPublicFacilityPrefDetail,
+  GeoPublicFacilitySourceSnapshot,
+  GeoPublicFacilityPoint,
 } from '../../geo-analysis/snapshot';
 
 const LOCAL_R2_ROOT = path.resolve('.local/r2');
@@ -121,7 +133,9 @@ function auditLandPrice(): void {
     readArtifact<GeoAnalysisSnapshot>(manifest.aggregate.key);
   assertArtifactEvidence(manifest.aggregate, aggregateBody);
   if (aggregate.rows.length !== 47) {
-    throw new Error(`population-land-price: aggregate coverage ${aggregate.rows.length}/47`);
+    throw new Error(
+      `population-land-price: aggregate coverage ${aggregate.rows.length}/47`
+    );
   }
   let maxDetailBytes = 0;
   let populatedMeshes = 0;
@@ -139,13 +153,18 @@ function auditLandPrice(): void {
       detail.areaCode !== prefecture.prefCode ||
       detail.meshes.length === 0 ||
       detail.landPricePoints.length === 0 ||
-      new Set(detail.meshes.map((mesh) => mesh[0])).size !== detail.meshes.length ||
+      new Set(detail.meshes.map((mesh) => mesh[0])).size !==
+        detail.meshes.length ||
       new Set(detail.landPricePoints.map((point) => point[0])).size !==
         detail.landPricePoints.length
     ) {
       throw new Error(`${key}: detail schema不良`);
     }
-    for (const stageId of ['population-mesh', 'residential-land-price-points', 'land-price-mesh-join']) {
+    for (const stageId of [
+      'population-mesh',
+      'residential-land-price-points',
+      'land-price-mesh-join',
+    ]) {
       assertArtifactEvidence(stageOutput(manifest, stageId, key), body);
     }
     const aggregateRow = aggregate.rows.find(
@@ -176,12 +195,18 @@ function auditFlood(): void {
     geoAnalysisManifestKey('population-flood-risk')
   );
   assertManifestBase(manifest, 'population-flood-risk');
-  assertFloodArchiveKeys(manifest.inputs.filter(input => input.datasetId === 'A31b').map(input => input.key));
+  assertFloodArchiveKeys(
+    manifest.inputs
+      .filter((input) => input.datasetId === 'A31b')
+      .map((input) => input.key)
+  );
   const { value: aggregate, body: aggregateBody } =
     readArtifact<GeoAnalysisSnapshot>(manifest.aggregate.key);
   assertArtifactEvidence(manifest.aggregate, aggregateBody);
   if (aggregate.rows.length !== 47) {
-    throw new Error(`population-flood-risk: aggregate coverage ${aggregate.rows.length}/47`);
+    throw new Error(
+      `population-flood-risk: aggregate coverage ${aggregate.rows.length}/47`
+    );
   }
   const floodSourceStage = manifest.stages.find(
     (stage) => stage.id === 'flood-maximum-polygons'
@@ -189,14 +214,21 @@ function auditFlood(): void {
   if (!floodSourceStage) {
     throw new Error('population-flood-risk: 洪水入力のlineageがありません');
   }
-  assertFloodArchiveKeys(floodSourceStage.outputs.map(output => output.key));
+  assertFloodArchiveKeys(floodSourceStage.outputs.map((output) => output.key));
   for (const evidence of floodSourceStage.outputs) {
-    const input = manifest.inputs.find(input => input.key === evidence.key);
-    if (!input || input.sha256 !== evidence.sha256 || input.bytes !== evidence.bytes || input.role !== 'calculation-input' || !input.usedInCalculation) {
+    const input = manifest.inputs.find((input) => input.key === evidence.key);
+    if (
+      !input ||
+      input.sha256 !== evidence.sha256 ||
+      input.bytes !== evidence.bytes ||
+      input.role !== 'calculation-input' ||
+      !input.usedInCalculation
+    ) {
       throw new Error(`洪水入力とsource段階の証跡不一致: ${evidence.key}`);
     }
     const filePath = path.join(LOCAL_R2_ROOT, evidence.key);
-    if (!fs.existsSync(filePath)) throw new Error(`artifact欠落: ${evidence.key}`);
+    if (!fs.existsSync(filePath))
+      throw new Error(`artifact欠落: ${evidence.key}`);
     const body = fs.readFileSync(filePath);
     assertArtifactEvidence(evidence, body);
   }
@@ -215,11 +247,15 @@ function auditFlood(): void {
       detail.areaCode !== prefecture.prefCode ||
       detail.meshMethod !== 'center-point' ||
       detail.meshes.length === 0 ||
-      new Set(detail.meshes.map((mesh) => mesh[0])).size !== detail.meshes.length
+      new Set(detail.meshes.map((mesh) => mesh[0])).size !==
+        detail.meshes.length
     ) {
       throw new Error(`${key}: detail schema不良`);
     }
-    for (const stageId of ['population-mesh', 'flood-center-point-containment']) {
+    for (const stageId of [
+      'population-mesh',
+      'flood-center-point-containment',
+    ]) {
       assertArtifactEvidence(stageOutput(manifest, stageId, key), body);
     }
     const aggregateRow = aggregate.rows.find(
@@ -233,10 +269,16 @@ function auditFlood(): void {
   }
   const sourceRecords =
     populatedMeshes +
-    floodSourceStage.outputs.reduce((sum, output) => sum + output.recordCount, 0);
-  if (aggregate.dataQuality.inputCounts.floodZipFiles !== FLOOD_ARCHIVES.length ||
-      aggregate.dataQuality.inputCounts.floodFeatures !== sourceRecords - populatedMeshes ||
-      aggregate.dataQuality.inputCounts.populatedMeshes !== populatedMeshes) {
+    floodSourceStage.outputs.reduce(
+      (sum, output) => sum + output.recordCount,
+      0
+    );
+  if (
+    aggregate.dataQuality.inputCounts.floodZipFiles !== FLOOD_ARCHIVES.length ||
+    aggregate.dataQuality.inputCounts.floodFeatures !==
+      sourceRecords - populatedMeshes ||
+    aggregate.dataQuality.inputCounts.populatedMeshes !== populatedMeshes
+  ) {
     throw new Error('population-flood-risk: aggregate入力件数不一致');
   }
   if (
@@ -253,7 +295,151 @@ function auditFlood(): void {
   );
 }
 
+function auditPublicFacility(): void {
+  const slug = 'population-public-facility-access';
+  const prefix = `app/geo/${slug}`;
+  const { value: manifest } = readArtifact<GeoAnalysisEvidenceManifest>(
+    `${prefix}/manifest.json`
+  );
+  assertManifestBase(manifest, slug);
+  const { value: aggregate, body } = readArtifact<GeoAnalysisSnapshot>(
+    `${prefix}/item.json`
+  );
+  assertArtifactEvidence(manifest.aggregate, body);
+  if (
+    aggregate.rows.length !== 47 ||
+    new Set(aggregate.rows.map((row) => row.areaCode)).size !== 47 ||
+    manifest.inputs.length !== 94
+  )
+    throw new Error('公共施設: 47県/94入力の契約違反');
+  const points: GeoPublicFacilityPoint[] = [];
+  const inputKeys = new Set(manifest.inputs.map((input) => input.key));
+  for (const pin of PUBLIC_FACILITY_INPUTS) {
+    for (const [key, expected] of [
+      [`gis/mlit-ksj/P05/22/${pin.pref}.geojson`, pin.facilities],
+      [`gis/mlit-ksj/mesh1000r6/24/${pin.pref}.topojson`, pin.population],
+    ] as const) {
+      if (!inputKeys.delete(key))
+        throw new Error(`公共施設: 入力の重複/欠落 ${key}`);
+      const input = manifest.inputs.find((input) => input.key === key)!;
+      if (
+        input.sha256 !== expected.sha256 ||
+        input.bytes !== expected.bytes ||
+        !input.usedInCalculation ||
+        input.role !== 'calculation-input'
+      )
+        throw new Error(`公共施設: 原典pin不一致 ${key}`);
+      // Population originals may remain in the verified private local cache; do not fetch during audit.
+      const localPath = path.join(LOCAL_R2_ROOT, key);
+      const sourcePath = fs.existsSync(localPath)
+        ? localPath
+        : path.resolve(
+            '.local/verification/themes/public-facility-inputs',
+            `${pin.pref}.topojson`
+          );
+      assertArtifactEvidence(
+        { ...input, recordCount: 0 },
+        fs.readFileSync(sourcePath)
+      );
+    }
+    const key = `${prefix}/source/${pin.pref}.json`;
+    const { value: source, body: sourceBody } =
+      readArtifact<GeoPublicFacilitySourceSnapshot>(key);
+    const evidence = stageOutput(manifest, 'public-facility-points', key);
+    assertArtifactEvidence(evidence, sourceBody);
+    if (
+      source.slug !== slug ||
+      source.areaCode !== `${pin.pref}000` ||
+      source.facilities.length !== evidence.recordCount ||
+      source.facilities.some((point) => !point[2].startsWith(pin.pref))
+    )
+      throw new Error(`公共施設: 原典施設の県帰属/件数 ${pin.pref}`);
+    const { value: raw } = readArtifact<{
+      features: Array<{
+        properties: Record<string, string>;
+        geometry: { coordinates: [number, number] };
+      }>;
+    }>(`gis/mlit-ksj/P05/22/${pin.pref}.geojson`);
+    if (raw.features.length !== source.facilities.length)
+      throw new Error(`公共施設: 原典施設の欠落 ${pin.pref}`);
+    raw.features.forEach((feature, index) => {
+      const props = feature.properties;
+      const expected = [
+        points.length + index,
+        `P05-22:${pin.pref}:${index}`,
+        props.P05_001,
+        props.P05_002,
+        props.P05_003,
+        ...feature.geometry.coordinates,
+      ];
+      if (JSON.stringify(expected) !== JSON.stringify(source.facilities[index]))
+        throw new Error(
+          `公共施設: 原典施設から途中artifactへの変換不一致 ${pin.pref}/${index}`
+        );
+    });
+    points.push(...source.facilities);
+  }
+  if (inputKeys.size || points.length !== 79532)
+    throw new Error('公共施設: 原典入力集合の不一致');
+  const search = createPublicFacilitySearch(points);
+  let meshes = 0,
+    maxDetailBytes = 0;
+  for (const pref of fetchPrefectures()) {
+    const key = `${prefix}/pref/${pref.prefCode.slice(0, 2)}.json`;
+    const { value: detail, body: detailBody } =
+      readArtifact<GeoPublicFacilityPrefDetail>(key);
+    if (detail.areaCode !== pref.prefCode)
+      throw new Error(`公共施設: 県詳細の取り違え ${key}`);
+    validatePublicFacilityDetail(detail);
+    assertPublicFacilityConservation(
+      detail,
+      aggregate.rows.find((row) => row.areaCode === detail.areaCode)
+    );
+    for (const id of ['population-mesh', 'nearest-facility-distance']) {
+      const evidence = stageOutput(manifest, id, key);
+      assertArtifactEvidence(evidence, detailBody);
+      if (evidence.recordCount !== detail.meshes.length)
+        throw new Error(`${key}: 段階のメッシュ件数不一致`);
+    }
+    const byIndex = new Map(
+      detail.facilities.map((point) => [point[0], point])
+    );
+    for (const point of detail.facilities) {
+      if (JSON.stringify(points[point[0]]) !== JSON.stringify(point))
+        throw new Error(`${key}: 原典と施設座標/識別子の不一致`);
+    }
+    for (const mesh of detail.meshes)
+      for (const [group, offset] of [
+        ['administrative', 5],
+        ['meeting', 8],
+      ] as const) {
+        const nearest = search(mesh[1], mesh[2], group);
+        const storedDistance = offset === 5 ? mesh[6] : mesh[9];
+        if (
+          nearest.point[1] !== byIndex.get(mesh[offset])?.[1] ||
+          Math.abs(nearest.distanceMeters - storedDistance) > 1e-5
+        )
+          throw new Error(`${key}: 全国最近傍と県詳細の不一致`);
+      }
+    meshes += detail.meshes.length;
+    maxDetailBytes = Math.max(maxDetailBytes, detailBody.length);
+  }
+  if (
+    meshes !== 177791 ||
+    manifest.quality.derivedRecords !== meshes ||
+    manifest.quality.maxDetailBytes !== maxDetailBytes
+  )
+    throw new Error('公共施設: 全県品質集計不一致');
+  console.log(
+    `✅ ${slug}: 47/47 areas / 94 source hashes / ${meshes * 2} national nearest checks / conservation 47/47`
+  );
+}
+
 function main(): void {
+  if (process.argv.includes('--public-facility-only')) {
+    auditPublicFacility();
+    return;
+  }
   auditLandPrice();
   auditFlood();
   const { value: manifest } = readArtifact<GeoAnalysisEvidenceManifest>(

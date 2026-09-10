@@ -11,6 +11,56 @@ export const REAL_INCOME_SET: IndicatorSet = {
   "usage": "theme",
   "metrics": [
     {
+      "rankingKey": "household-survey-food-expenditure",
+      "shortLabel": "食料",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-housing-expenditure",
+      "shortLabel": "住居",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-utilities-expenditure",
+      "shortLabel": "光熱・水道",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-furniture-household-goods-expenditure",
+      "shortLabel": "家具・家事用品",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-clothing-footwear-expenditure",
+      "shortLabel": "被服及び履物",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-healthcare-expenditure",
+      "shortLabel": "保健医療",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-transport-communication-expenditure",
+      "shortLabel": "交通・通信",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-education-expenditure",
+      "shortLabel": "教育",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-culture-recreation-expenditure",
+      "shortLabel": "教養娯楽",
+      "role": "context"
+    },
+    {
+      "rankingKey": "household-survey-other-expenditure",
+      "shortLabel": "その他の消費支出",
+      "role": "context"
+    },
+    {
       "rankingKey": "disposable-income-worker-households",
       "shortLabel": "可処分所得",
       "role": "primary"
@@ -71,8 +121,18 @@ export const REAL_INCOME_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "consumption-expenditure-multi-person-households-per-month",
-      "shortLabel": "消費支出",
+      "rankingKey": "household-survey-consumption-expenditure",
+      "shortLabel": "消費支出（全費目）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "gini-coefficient-disposable-income",
+      "shortLabel": "等価可処分所得ジニ係数（総世帯）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "gini-coefficient-financial-assets",
+      "shortLabel": "等価金融資産残高ジニ係数（総世帯）",
       "role": "secondary"
     }
   ],

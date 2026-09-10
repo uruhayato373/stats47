@@ -84,7 +84,7 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule <id> <デ�
 
 ```bash
 node .claude/scripts/themes/validate-theme-state.mjs          # schema + 判定規律
-node --test .claude/scripts/themes/__tests__/                 # validator 自体の回帰
+npm run theme:quality:test                                  # TS原典定義を含む回帰
 ```
 
 ## 禁止

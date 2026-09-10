@@ -33,7 +33,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "households",
       "shortLabel": "世帯数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "nuclear-family-households-ratio",
@@ -63,7 +63,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "densely-inhabited-district-population-density",
       "shortLabel": "DID人口密度（DID面積1km²当たり）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "ratio-never-married-15-plus",
@@ -96,6 +96,21 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "new-owner-occupied-starts",
+      "shortLabel": "持家の新設着工戸数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "new-rental-starts",
+      "shortLabel": "貸家の新設着工戸数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "new-condo-starts",
+      "shortLabel": "分譲住宅の新設着工戸数",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "renovation-rate",
       "shortLabel": "リフォーム工事実施率",
       "role": "secondary"
@@ -111,8 +126,43 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "vacant-housing-excluding-rental-sale-secondary",
+      "shortLabel": "賃貸・売却用及び二次的住宅を除く空き家",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "vacant-housing-for-rent",
+      "shortLabel": "賃貸用の空き家",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "vacant-housing-for-sale",
+      "shortLabel": "売却用の空き家",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "vacant-housing-secondary-residences",
+      "shortLabel": "二次的住宅",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "single-households-age65plus-male",
+      "shortLabel": "65歳以上の男性単独世帯数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "single-households-age65plus-female",
+      "shortLabel": "65歳以上の女性単独世帯数",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "average-persons-per-general-household",
       "shortLabel": "一般世帯の平均人員",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "housing-land-debt-per-household",
+      "shortLabel": "住宅・土地のための負債（総世帯平均）",
       "role": "secondary"
     },
     {
@@ -123,6 +173,16 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
       "shortLabel": "負債現在高",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "urban-planning-area",
+      "shortLabel": "都市計画区域の指定面積",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "urbanization-control-area-ratio",
+      "shortLabel": "都市計画区域に占める市街化調整区域の割合",
       "role": "secondary"
     },
     {

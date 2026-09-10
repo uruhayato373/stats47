@@ -278,3 +278,43 @@ test("CLI refuses mixed operations instead of silently choosing one", (t) => {
   assert.equal(f.run("--unknown").status, 1);
   assert.deepEqual(f.read(), before);
 });
+
+
+test("CLI corrects only an unpublished improvement baseline and preserves identity", (t) => {
+  const e = { ...experiment(), startedAt: null, evaluateAt: null, result: null };
+  const f = cliFixture(t, [e]);
+  const patch = { baseline: { "ga4.pageViews": 310 }, baselinePeriod: e.baselinePeriod,
+    baselineScopes: { ga4: "Japan" }, baselineStatuses: { "ga4.pageViews": "measured" }, evidenceRefs: ["corrected-official-window.json"] };
+  assert.equal(f.run("--update-baseline", e.experimentId, JSON.stringify(patch)).status, 0);
+  const saved = f.read().experiments[0];
+  assert.deepEqual(saved, { ...e, ...patch });
+  assert.equal(saved.startedAt, null);
+  assert.equal(saved.result, null);
+});
+
+test("baseline correction cannot alter scheduled, observed or decided history", (t) => {
+  for (const state of [{ startedAt: "2026-07-14" }, { evaluateAt: { d7: "2026-07-21" } },
+    { result: { d7: {} } }, { verdict: "insufficient-data" }, { verdict: "aborted" }]) {
+    const e = { ...experiment(), startedAt: null, evaluateAt: null, result: null, ...state };
+    const f = cliFixture(t, [e]); const before = f.read();
+    assert.equal(f.run("--update-baseline", e.experimentId, JSON.stringify({ baseline: { "ga4.pageViews": 310 } })).status, 1, JSON.stringify(state));
+    assert.deepEqual(f.read(), before);
+  }
+});
+
+test("launch baseline and fields outside the correction whitelist are rejected atomically", (t) => {
+  const e = { ...experiment(), startedAt: null, evaluateAt: null, result: null };
+  const f = cliFixture(t, [e, { ...launch(), experimentId: "THEME-LAUNCH-TEST", startedAt: null, evaluateAt: null }]);
+  const before = f.read();
+  for (const patch of [null, [], {}, { baseline: null }, { baseline: {} }, { startedAt: "2026-07-14" },
+    { evaluateAt: null }, { result: null }, { verdict: "pending" }, { themeKey: "tourism" }, { hypothesis: "changed" },
+    { baseline: { "ga4.pageViews": 310 }, evidenceRefs: [] }]) {
+    assert.equal(f.run("--update-baseline", e.experimentId, JSON.stringify(patch)).status, 1, JSON.stringify(patch));
+    assert.deepEqual(f.read(), before);
+  }
+  assert.equal(f.run("--update-baseline", "THEME-LAUNCH-TEST", JSON.stringify({ baseline: { "ga4.pageViews": 310 } })).status, 1);
+  assert.deepEqual(f.read(), before);
+  assert.equal(f.run("--update-baseline", e.experimentId, "{broken").status, 1);
+  assert.equal(f.run("--update-baseline", "MISSING", "{}").status, 1);
+  assert.deepEqual(f.read(), before);
+});

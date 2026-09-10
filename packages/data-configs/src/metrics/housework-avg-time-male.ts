@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const houseworkAvgTimeMale: MetricConfig = {
   "key": "housework-avg-time-male",
   "title": "家事の平均時間",
-  "subtitle": "男性",
+  "subtitle": "男性・15歳以上の1日平均",
+  "description": "社会生活基本調査による、15歳以上の男性の家事の総平均時間です。家事を行わなかった人も含む一週全体の1日当たり平均で、夫婦に限定した値ではありません。",
   "unit": "分",
   "category": "laborwage",
   "source": {

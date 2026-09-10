@@ -8,6 +8,14 @@ import {
 
 import type { GeoCrossAnalysisSlug } from '../geo-cross-analysis';
 
+// This fixture models only these three stage graphs; new analyses need their own inputs.
+export const GEO_BASE_FIXTURE_SLUGS = [
+  'population-land-price',
+  'population-flood-risk',
+  'population-station-access',
+] as const satisfies readonly GeoCrossAnalysisSlug[];
+export type GeoBaseFixtureSlug = (typeof GEO_BASE_FIXTURE_SLUGS)[number];
+
 export const GENERATED_AT = '2026-09-05T00:00:00.000Z';
 const codes = Array.from({ length: 47 }, (_, i) =>
   String(i + 1).padStart(2, '0')
@@ -22,7 +30,7 @@ export function artifact(key: string, value?: unknown, pretty = false) {
   };
 }
 export function manifestFixture(
-  slug: GeoCrossAnalysisSlug
+  slug: GeoBaseFixtureSlug
 ): GeoAnalysisEvidenceManifest {
   const makeInput = (
     layerId: string,

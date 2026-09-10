@@ -103,6 +103,37 @@ export const PROPOSED_NEW_SURVEYS: Record<
   string,
   { id: string; name: string; organization?: string; url?: string }
 > = {
+  // 2026-09-11: 128テーマの取得済み一次原表を正式な資料として登録。
+  '特許行政年次報告書': {
+    id: 'patent-administration-annual-report',
+    name: '特許行政年次報告書',
+    organization: '特許庁',
+    url: 'https://www.e-stat.go.jp/dbview?sid=0003398336',
+  },
+  '電気通信サービスの契約数及びシェアに関する四半期データの公表': {
+    id: 'telecommunications-contract-share-quarterly',
+    name: '電気通信サービスの契約数及びシェアに関する四半期データの公表',
+    organization: '総務省',
+    url: 'https://www.e-stat.go.jp/koumoku/koumoku_teigi/H',
+  },
+  '埋蔵文化財関係統計資料': {
+    id: 'buried-cultural-property-statistics',
+    name: '埋蔵文化財関係統計資料',
+    organization: '文化庁',
+    url: 'https://www.bunka.go.jp/seisaku/bunkazai/shokai/maizo.html',
+  },
+  '地方における文化行政及び文化関係経費の状況': {
+    id: 'local-cultural-administration-survey',
+    name: '地方における文化行政及び文化関係経費の状況',
+    organization: '文化庁',
+    url: 'https://www.bunka.go.jp/tokei_hakusho_shuppan/tokeichosa/chiho_bunkagyosei/',
+  },
+  '旅行・観光消費動向調査': {
+    id: 'travel-tourism-consumption-survey',
+    name: '旅行・観光消費動向調査',
+    organization: '観光庁',
+    url: 'https://www.mlit.go.jp/kankocho/tokei_hakusyo/shohidoko.html',
+  },
   // --- Phase 1 で宣言済 ---
   社会福祉施設等調査: {
     id: 'social-welfare-facility-survey',
@@ -456,6 +487,11 @@ export const PROPOSED_NEW_SURVEYS: Record<
     id: 'petroleum-sales-statistics',
     name: '都道府県別石油製品販売総括',
     organization: '経済産業省',
+  },
+  '地方公共団体における男女共同参画社会の形成又は女性に関する施策の推進状況': {
+    id: 'local-government-gender-equality-policy-status',
+    name: '地方公共団体における男女共同参画社会の形成又は女性に関する施策の推進状況',
+    organization: '内閣府男女共同参画局',
   },
   都道府県別エネルギー消費統計: {
     id: 'prefectural-energy-consumption-statistics',

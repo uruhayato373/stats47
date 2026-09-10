@@ -1,0 +1,58 @@
+/** Reproducible source definition; monthly observations live only in R2. */
+export const TOURISM_SEASONALITY_SOURCE = {
+  seriesKey: 'tourism-seasonality',
+  year: '2024',
+  unit: '人泊',
+  releaseStatus: 'final',
+  r2Key: 'app/themes/tourism/seasonality.json',
+  source: {
+    title: '観光庁 宿泊旅行統計調査 2024年1～12月（年の確定値）集計結果',
+    url: 'https://www.mlit.go.jp/kankocho/content/001905499.xlsx',
+    sha256: '2e1adf538381144c4c7428a8ec8dd76c8460d2067a85a043d234ea69eece10fe',
+  },
+  publicationIndexUrl: 'https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html',
+  accessedAt: '2026-09-10',
+  release: {
+    url: 'https://www.mlit.go.jp/kankocho/content/001905493.pdf',
+    sha256: 'f1dda8330a296990688818f60a69edfdbb763bd96623b89c2f66fd179a32faae',
+    nationalMonthlyPdfPage: 10,
+  },
+  report: {
+    url: 'https://www.mlit.go.jp/kankocho/content/001905509.pdf',
+    sha256: 'cffb2fcf290524d4586386588fd4754988200519e1bbfa84269b827d1ba65168',
+    definitionPdfPage: 11,
+    roundingPdfPage: 31,
+  },
+  errata: {
+    url: 'https://www.mlit.go.jp/kankocho/content/001906037.pdf',
+    sha256: '1883442c78835dc798cd2fa4e6713a97c592d96984f179813e09ced2c59ce51a',
+    publishedAt: '2025-08-26',
+    scope: '2024年1月福島県の日本人・外国人内訳等の訂正。全体の延べ宿泊者総数は不変。',
+  },
+  table: {
+    monthlySheetPattern: '第2表({month}月)',
+    annualSheet: '第2表(年計)',
+    crossCheckSheetPattern: '第4表({month}月)',
+    areaColumn: 'A', valueColumn: 'B',
+    nationalRow: 7, firstPrefectureRow: 8, lastPrefectureRow: 54,
+    unitCell: 'S2',
+  },
+  rounding: { quantum: 10, method: '一の位を四捨五入して十の位まで表章' },
+  definition: {
+    measure: '各月に寝具を使用して宿泊施設を利用した宿泊者の延べ人数。子供や乳幼児を含む。',
+    geography: '宿泊施設の所在地。宿泊者の居住地ではない。',
+    population: '全国のホテル、旅館、簡易宿所、会社・団体の宿泊所等の全従業者規模を対象とした推計値。',
+    estimateBasis: '2025年1月1日現在で把握した2024年中の開業・廃業を各月の施設数へ遡及反映した確定値。',
+    purpose: '観光・レクリエーション、出張・業務、宿泊目的割合不詳を含む総数。観光客だけの数ではない。',
+    time: '2024年1月～12月の暦月。季節調整・月日数調整なし。',
+  },
+  notes: [
+    '延べ宿泊者数は、全従業者規模の宿泊施設を対象とした推計値です。観光だけでなく出張・業務等を含みます。',
+    '2024年1～12月は能登半島地震の影響により、石川県の七尾市、輪島市、珠洲市、羽咋市、志賀町、宝達志水町、中能登町、穴水町、能登町を調査対象から除いています。',
+    '石川県・富山県・福井県の値には、能登半島地震の二次避難者が含まれている可能性があります。',
+    '値は10人泊単位に丸められているため、都道府県の合計や各月の合計が公式全国値・年計と一致しない場合があります。',
+  ],
+  extraction: '第2表(1月)～(12月)のB7とB8:B54を無変換で抽出。A列の県名をJISコードと照合し、運輸局等の再掲行は除外。',
+  verification: '47県×12月・重複欠測なし・人泊単位を検査。第4表の同総数列および報道発表PDF10頁の全国12月と完全一致。全国/年計との差は独立した10人泊丸めの誤差上限以内で検査。',
+  restore: 'node --import tsx .claude/scripts/themes/ingest-tourism-seasonality.mjs --source-dir /tmp/stats47-tourism-monthly-source',
+} as const;

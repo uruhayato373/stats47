@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const GEOGRAPHIC_ACCESS_SET: IndicatorSet = {
   "key": "geographic-access",
   "title": "交通空白と生活アクセス",
-  "description": "交通手段と鉄道・バスの供給を基礎指標として掲載します。距離圏外人口や医療施設までの距離は公式GIS計算が整った時点で追加し、既存の交通量を交通空白へ置き換えません。",
+  "description": "駅から直線800m以内に中心点がある1km人口メッシュの人口割合を、2020年と2050年推計で比較します。徒歩経路・運行頻度を考慮した交通空白認定ではありません。駅数・バス事業者数は供給の基礎情報として別に掲載します。",
   "category": "safety",
   "usage": "theme",
   "metrics": [

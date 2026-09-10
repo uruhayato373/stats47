@@ -1,7 +1,21 @@
+import { publicFacilityAuditRows } from './geo-public-facility-evidence';
+
 import type { GeoAnalysisPrefDetail } from '@stats47/gis';
 import type { FeatureCollection, Polygon } from 'geojson';
 
-export type SpatialView = 'population' | 'overlap' | 'audit';
+
+export type SpatialView = 'population' | 'facilities' | 'overlap' | 'audit';
+export function isGeoSpatialView(
+  value: string | undefined,
+  slug: string
+): value is SpatialView {
+  return (
+    value === 'population' ||
+    value === 'overlap' ||
+    value === 'audit' ||
+    ((slug === 'population-public-facility-access' || slug === 'population-landslide-exposure') && value === 'facilities')
+  );
+}
 
 export const POPULATION_LEGEND =
   '人口変化：青緑＝維持・増加、青＝15%未満減少、橙＝15〜30%減少、赤＝30%以上減少、灰＝基準人口0。';
@@ -11,7 +25,7 @@ export function landPointCategory(
   index: number,
   meshes: ReadonlyMap<
     string,
-    GeoAnalysisPrefDetail['meshes'][number]
+    Exclude<GeoAnalysisPrefDetail, { slug: 'population-snow-designation' | 'population-landslide-exposure' }>['meshes'][number]
   > = new Map(detail.meshes.map((mesh) => [mesh[0], mesh]))
 ) {
   const point = detail.landPricePoints[index];
@@ -31,7 +45,10 @@ export function landPointCategory(
 }
 
 export function buildSpatialMeshMap(
-  detail: GeoAnalysisPrefDetail
+  detail: Exclude<
+    GeoAnalysisPrefDetail,
+    { slug: 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' }
+  >
 ): FeatureCollection<Polygon> {
   return {
     type: 'FeatureCollection',
@@ -67,6 +84,26 @@ export function buildSpatialMeshMap(
 export function spatialAuditRows(
   detail: GeoAnalysisPrefDetail
 ): { label: string; value: string }[] {
+  if (detail.slug === 'population-landslide-exposure') {
+    if (detail.status !== 'available') return [{ label: '対象外', value: detail.reason }];
+    const s=detail.summary, people=(v:number)=>(v/10000).toLocaleString('ja-JP',{maximumFractionDigits:4});
+    return [
+      { label: '入力面外 + 警戒のみ + 特別 = 基準人口', value: `${s.exclusiveScaled.map(people).join(' + ')} = ${people(s.totalScaled)}人` },
+      { label: '市町村役場等：入力面外 + 警戒のみ + 特別 = 全施設', value: `${s.facilities.administrative.exclusiveScaled.join(' + ')} = ${s.facilities.administrative.totalScaled}施設` },
+      { label: '公的集会施設：入力面外 + 警戒のみ + 特別 = 全施設', value: `${s.facilities.meeting.exclusiveScaled.join(' + ')} = ${s.facilities.meeting.totalScaled}施設` },
+    ];
+  }
+  if (detail.slug === 'population-public-facility-access')
+    return publicFacilityAuditRows(detail);
+  if (detail.slug === 'population-snow-designation') {
+    const s=detail.summary, people=(v:number)=>`${(v/10000).toLocaleString('ja-JP',{maximumFractionDigits:4})}人`;
+    return [
+      {label:'区域外 + 通常豪雪 + 特別豪雪 = 基準人口',value:`${s.populationScaled.map(people).join(' + ')} = ${people(s.populationTotalScaled)}`},
+      {label:'全格子包含 / 中心包含 / 一部交差',value:`${people(s.lowerScaled[0])} / ${people(s.populationScaled[1]+s.populationScaled[2])} / ${people(s.upperScaled[0])}`},
+      {label:'境界を横切る格子人口',value:people(s.boundaryScaled[0])},
+      {label:'通常区域 + 特別区域 = 指定区域面積',value:`${s.regularOnlyAreaKm2.toFixed(3)} + ${s.specialAreaKm2.toFixed(3)} = ${s.designatedAreaKm2.toFixed(3)} km²`},
+    ];
+  }
   const people = (v: number) => `${Math.round(v).toLocaleString('ja-JP')}人`;
   if (detail.slug === 'population-land-price') {
     const s = detail.summary;

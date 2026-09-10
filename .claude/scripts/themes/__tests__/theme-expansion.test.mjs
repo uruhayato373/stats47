@@ -1,8 +1,22 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { PREFECTURES, numericValue, summarizeSeries, validateDecisions, validateImplementationPlan, validateStagedComparison } from '../theme-expansion-core.mjs';
+import { PREFECTURES, numericValue, summarizeSeries, validateDecisions, validateImplementationPlan, validateStagedComparison, inspectExpansionWiring, inspectLocalMetricCoverage } from '../theme-expansion-core.mjs';
 
 const rows = () => PREFECTURES.map((area) => ({ '@area': area, '@time': '2023000000', '@unit': '人', $: '0' }));
+
+test('official non-applicability stays null while a surveyed zero stays numeric', () => {
+  const excluded = ['09000', '10000', '11000', '19000', '20000', '25000', '29000'];
+  const source = PREFECTURES.map((areaCode) => ({ areaCode, yearCode: '2023', value: excluded.includes(areaCode) ? null : 0 }));
+  const declaration = { codes: excluded, reason: 'Official survey marks these prefectures outside its scope' };
+  const result = inspectLocalMetricCoverage(source, declaration);
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.numericCodes.length, 40);
+  assert.ok(result.numericCodes.includes('21000'));
+  assert.ok(inspectLocalMetricCoverage(source).errors.length);
+  assert.ok(inspectLocalMetricCoverage(source.filter((row) => row.areaCode !== '09000'), declaration).errors.length);
+  assert.ok(inspectLocalMetricCoverage(source.map((row) => ({ ...row, value: 0 })), declaration).errors.length);
+  assert.ok(inspectLocalMetricCoverage(source.map((row) => row.areaCode === '21000' ? { ...row, value: null } : row), declaration).errors.length);
+});
 
 test('release cohort preserves real zeros and ties, rejects wrong units, ranks, source suppression and geography', () => {
   const raw = rows();
@@ -90,6 +104,35 @@ function planFixture() {
   const registry = { construction: { isActive: true, source: { statsDataId: '0000010103', cdCat01: 'C3304' } } };
   return { catalog, report, registry };
 }
+
+test('registered metrics and merge links cannot masquerade as rendered sections', () => {
+  const plan = { themes: [
+    { id: 1, decision: { disposition: 'existing-section', targetThemeKey: 'finance' } },
+    { id: 2, decision: { disposition: 'merge-candidate', targetCandidateId: 1 } },
+  ] };
+  const catalogs = { finance: { key: 'finance', metrics: [{ rankingKey: 'money' }], sections: [], metricGroups: [] } };
+  let result = inspectExpansionWiring(plan, catalogs);
+  assert.equal(result.counts.existingSectionWired, 0);
+  assert.equal(result.counts.existingSectionPending, 1);
+  assert.equal(result.counts.mergeLinked, 0);
+  catalogs.finance.metricGroups.push({ key: 'amount', rankingKeys: ['money'] });
+  catalogs.finance.sections.push({ key: 'candidate-1', metricGroupKeys: ['amount'] });
+  result = inspectExpansionWiring(plan, catalogs);
+  assert.equal(result.counts.existingSectionWired, 1);
+  assert.equal(result.counts.mergeLinked, 1);
+  catalogs.finance.sections[0].metricGroupKeys.push('missing');
+  assert.equal(inspectExpansionWiring(plan, catalogs).counts.existingSectionWired, 0);
+});
+
+test('existing dedicated chapter can satisfy an explicit reuse without adding a duplicate', () => {
+  const plan = { themes: [{ id: 1, decision: { disposition: 'existing-section', targetThemeKey: 'finance' } }] };
+  const catalogs = { finance: { key: 'finance', metrics: [{ rankingKey: 'ratio' }], sections: [{ key: 'sustainability', metricGroupKeys: [], embeddedSectionKeys: ['finance-sustainability'] }] } };
+  const extensions = { finance: [{ candidateId: 1, existingSectionKey: 'sustainability', metrics: [['ratio', '比率']] }] };
+  assert.equal(inspectExpansionWiring(plan, catalogs).counts.existingSectionWired, 0);
+  assert.equal(inspectExpansionWiring(plan, catalogs, extensions).counts.existingSectionWired, 1);
+  catalogs.finance.sections = [];
+  assert.equal(inspectExpansionWiring(plan, catalogs, extensions).counts.existingSectionWired, 0);
+});
 
 test('missing handoff, duplicate scheduling and held candidates fail', () => {
   const { catalog, report, registry } = planFixture();

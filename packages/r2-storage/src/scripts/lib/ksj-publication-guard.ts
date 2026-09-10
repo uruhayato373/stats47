@@ -1,3 +1,6 @@
+import { TSUNAMI_EXPOSURE_SOURCE } from '../../../../data-configs/src/theme-catalog/tsunami-exposure-source';
+import { assertTsunamiManifest, assertTsunamiSnapshot } from '../../../../data-configs/src/theme-catalog/tsunami-exposure-schema';
+import { assertScopedGeoSourcePublication, isScopedGeoSourceKey } from './scoped-geo-source-publication';
 import { GIS_DATASETS } from '../../../../gis/src/mlit-ksj/datasets';
 import { getKsjLicensePolicy } from '../../../../gis/src/mlit-ksj/license-policy';
 import { METRICS_REGISTRY } from '../../../../data-configs/src/registry';
@@ -73,8 +76,20 @@ export function assertKsjPublicAssetsAllowed(
   keys: readonly string[],
   readBody: (key: string) => Buffer,
 ): void {
-  assertKsjPublicKeysAllowed(keys);
+  // Partial-license datasets stay blocked by the key-only guard. Only reviewed
+  // exact source bytes can enter through this body-aware publication boundary.
+  const genericKeys = keys.filter((key) => {
+    if (!isScopedGeoSourceKey(key)) return true;
+    assertScopedGeoSourcePublication(key, readBody(key));
+    return false;
+  });
+  assertKsjPublicKeysAllowed(genericKeys);
   for (const key of keys) {
+    // Do not restore a stale subset after the reviewed source scope advances.
+    if (key === `${TSUNAMI_EXPOSURE_SOURCE.r2Root}/manifest.json`)
+      assertTsunamiManifest(JSON.parse(readBody(key).toString('utf8')));
+    if (key === `${TSUNAMI_EXPOSURE_SOURCE.r2Root}/item.json`)
+      assertTsunamiSnapshot(JSON.parse(readBody(key).toString('utf8')));
     if (!key.startsWith('app/stats/')) continue;
     const metric = METRICS_REGISTRY[key.split('/')[2]];
     const source = metric?.source;

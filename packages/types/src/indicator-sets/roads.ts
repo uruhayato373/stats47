@@ -61,8 +61,33 @@ export const ROADS_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "road-bridge-expenses-prefecture",
-      "shortLabel": "道路橋りょう費",
+      "rankingKey": "road-bridge-diagnosed-count",
+      "shortLabel": "道路橋の診断済総数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-bridge-condition-iii-count",
+      "shortLabel": "道路橋の早期措置段階（Ⅲ）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-bridge-condition-iv-count",
+      "shortLabel": "道路橋の緊急措置段階（Ⅳ）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-tunnel-diagnosed-count",
+      "shortLabel": "トンネルの診断済総数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-tunnel-condition-iii-count",
+      "shortLabel": "トンネルの早期措置段階（Ⅲ）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-tunnel-condition-iv-count",
+      "shortLabel": "トンネルの緊急措置段階（Ⅳ）",
       "role": "secondary"
     }
   ],

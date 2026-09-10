@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import type { FinanceFlowData } from '@/features/finance-flow';
 
+import { splitLocalFinanceSections } from '../../lib/finance-sections';
 import { LocalFinanceDashboard } from '../LocalFinanceDashboard';
 
 import type { FinanceCardsData, YearRecord } from '../../lib/load-finance-cards';
@@ -15,7 +16,7 @@ vi.mock('@/features/finance-flow/client', () => ({
 vi.mock('@/components/charts/MiniCharts', () => ({ MiniBarChart: () => null, MiniLineChart: () => null, MiniStackedBarChart: () => null }));
 const record = { revenue: 100, expenditure: 90, standardScale: 80, realBalance: 10, fundAdjust: 1, fundRedemption: 2, fundOther: 3, localDebt: 20, fiscalIndex: 0.5, currentBalanceRatio: 95, debtServiceRatio: 8, futureBurdenRatio: 10 } satisfies YearRecord;
 const cards = { averages: {}, years: [2024], latestYear: 2024, cards: { '13': { name: '東京都', years: { '2024': record } }, '28': { name: '兵庫県', years: { '2024': record } } } } as FinanceCardsData;
-const sections = THEME_CATALOGS['local-finance'].sections!;
+const sections = splitLocalFinanceSections(THEME_CATALOGS['local-finance'].sections!).dedicated;
 
 describe('地方財政の地域・年次整合', () => {
   it('選択県の変更に追従し、異なる県のSSRフローを流用しない', () => {

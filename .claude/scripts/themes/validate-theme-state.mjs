@@ -30,6 +30,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { experimentIssues, assessCheckpoint, latestObservation } from "./evaluate-theme-experiments.mjs";
 
@@ -57,13 +58,34 @@ const CANDIDATE_STATUSES = new Set([
 ]);
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 
-/** THEME_CATALOGS 登録キーを index.ts のオブジェクトリテラルから決定的に抽出する */
+/** Load the actual catalog, including spreads/extensions, while retaining the plain-node CLI. */
 function catalogKeys() {
-  if (!fs.existsSync(CATALOG_INDEX)) return null; // fixture 等で無い場合は照合 skip
-  const src = fs.readFileSync(CATALOG_INDEX, "utf8");
-  const block = src.match(/THEME_CATALOGS[^=]*=\s*{([\s\S]*?)}\s*;/);
-  if (!block) return null;
-  return new Set([...block[1].matchAll(/"([a-z0-9-]+)"\s*:/g)].map((m) => m[1]));
+  if (!fs.existsSync(CATALOG_INDEX)) return null; // Missing fixture catalog remains optional.
+  const result = spawnSync(
+    process.execPath,
+    [
+      '--import',
+      'tsx',
+      '-e',
+      'const { THEME_CATALOGS } = require(process.argv[1]); process.stdout.write(JSON.stringify(Object.keys(THEME_CATALOGS)));',
+      CATALOG_INDEX,
+    ],
+    { cwd: PROJECT_ROOT, encoding: 'utf8' }
+  );
+  try {
+    if (result.error || result.status !== 0)
+      throw new Error('catalog module failed to load');
+    const keys = JSON.parse(result.stdout);
+    if (
+      !Array.isArray(keys) ||
+      !keys.every((key) => typeof key === 'string' && /^[a-z0-9-]+$/.test(key))
+    )
+      throw new Error('catalog keys must be strings');
+    return new Set(keys);
+  } catch (error) {
+    v('P2', `THEME_CATALOGS 読込失敗: ${error.message}`);
+    return null;
+  }
 }
 
 function loadJson(file) {

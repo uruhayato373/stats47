@@ -61,8 +61,13 @@ export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "foreign-resident-population",
-      "shortLabel": "外国人住民人口",
+      "rankingKey": "foreign-worker-count",
+      "shortLabel": "外国人労働者数（雇用届出）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "foreign-employing-establishment-count",
+      "shortLabel": "外国人を雇用する事業所数",
       "role": "secondary"
     }
   ],

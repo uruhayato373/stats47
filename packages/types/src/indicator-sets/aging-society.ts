@@ -68,12 +68,12 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     {
       "rankingKey": "marriages-per-total-population",
       "shortLabel": "婚姻率（人口千人）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "divorces-per-total-population",
       "shortLabel": "離婚率（人口千人）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "births",
@@ -131,8 +131,8 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "employment-rate",
-      "shortLabel": "就業率（全体・参考）",
+      "rankingKey": "elderly-workers-ratio",
+      "shortLabel": "高齢就業者割合",
       "role": "secondary"
     }
   ],

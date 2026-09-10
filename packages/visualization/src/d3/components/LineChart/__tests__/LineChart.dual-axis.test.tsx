@@ -33,6 +33,27 @@ function tickTexts(container: HTMLElement) {
 }
 
 describe("D3 LineChart — 2 軸", () => {
+  it('5年刻みから外れる調査年も少数系列では目盛りを表示する', () => {
+    const { container } = render(<LineChart data={[
+      { category: '2019', value: 100 }, { category: '2024', value: 120 },
+    ]} />);
+    expect(tickTexts(container)).toEqual(expect.arrayContaining(['2019', '2024']));
+  });
+
+  it("月次の明示した目盛りを描き、選択変更にも追随する", () => {
+    const monthly = Array.from({ length: 12 }, (_, index) => ({
+      period: `2024-${String(index + 1).padStart(2, '0')}`, value: index * 10,
+    }));
+    const { container, rerender } = render(
+      <LineChart data={monthly} categoryKey="period" xTickValues={['2024-01', '2024-07', '2024-12']} />,
+    );
+    expect(tickTexts(container).filter((text) => text.startsWith('2024-')))
+      .toEqual(['2024-01', '2024-07', '2024-12']);
+    rerender(<LineChart data={monthly} categoryKey="period" xTickValues={['2024-04', '2024-10']} />);
+    expect(tickTexts(container).filter((text) => text.startsWith('2024-')))
+      .toEqual(['2024-04', '2024-10']);
+  });
+
   it("right 系列があるとき右軸の目盛りが出る", () => {
     const { container } = render(
       <LineChart data={data} series={SERIES} unit="円" rightUnit="倍" />,

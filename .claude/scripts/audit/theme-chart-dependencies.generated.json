@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 143,
-  "distinctMetricRefs": 139,
+  "totalMetricRefs": 159,
+  "distinctMetricRefs": 155,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -375,6 +375,86 @@
       "componentType": "line-chart"
     },
     {
+      "metricKey": "household-survey-clothing-footwear-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "568bd437254d1824",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-culture-recreation-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "bdad36832158f488",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-education-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "c5967602f4b832f1",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-food-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "d5a5b2abd2c762a0",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-furniture-household-goods-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "7f6a4df6ae3ec0bd",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-healthcare-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "06d464705edb2a6b",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-housing-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "ba759e94ab81eec7",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-other-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "d594e86139b6f556",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-transport-communication-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "c390e349cde93482",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "household-survey-utilities-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "0632e01d098405fe",
+      "themeKey": "real-income",
+      "componentKey": "real-income-household-composition",
+      "componentType": "composition-chart"
+    },
+    {
       "metricKey": "in-pref-university-entrance-ratio-by-highschool-origin",
       "expectedUnit": "％",
       "expectedConfigHash": "ac7bdadbb9ae9a84",
@@ -685,6 +765,54 @@
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
       "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "single-mother-households-income-100to199",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "2064f9ef598a4c32",
+      "themeKey": "single-parent-households",
+      "componentKey": "single-parent-income-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "single-mother-households-income-200to299",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "f3b306f0289673c3",
+      "themeKey": "single-parent-households",
+      "componentKey": "single-parent-income-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "single-mother-households-income-300to399",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "9c1709618094a064",
+      "themeKey": "single-parent-households",
+      "componentKey": "single-parent-income-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "single-mother-households-income-400to499",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "5c4c081a3f2babb5",
+      "themeKey": "single-parent-households",
+      "componentKey": "single-parent-income-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "single-mother-households-income-500plus",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "a3364e5b812691de",
+      "themeKey": "single-parent-households",
+      "componentKey": "single-parent-income-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "single-mother-households-income-under100",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "5cc577ae8f12da39",
+      "themeKey": "single-parent-households",
+      "componentKey": "single-parent-income-composition",
+      "componentType": "composition-chart"
     },
     {
       "metricKey": "single-person-household-old-population-ratio",

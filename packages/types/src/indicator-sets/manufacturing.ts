@@ -56,8 +56,18 @@ export const MANUFACTURING_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "food-business-establishments",
-      "shortLabel": "食品関係営業施設数",
+      "rankingKey": "food-manufacturing-establishments",
+      "shortLabel": "食料品製造業の事業所数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "food-manufacturing-employees",
+      "shortLabel": "食料品製造業の従業者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "food-manufacturing-shipment-amount",
+      "shortLabel": "食料品製造業の出荷額等",
       "role": "secondary"
     },
     {

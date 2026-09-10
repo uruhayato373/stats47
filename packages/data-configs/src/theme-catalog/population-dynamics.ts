@@ -163,7 +163,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "movers-in",
-      "shortLabel": "転入者数",
+      "shortLabel": "外国人転入者数",
       "role": "context",
       "selection": {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
@@ -174,7 +174,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
     },
     {
       "rankingKey": "movers-out",
-      "shortLabel": "転出者数",
+      "shortLabel": "外国人転出者数",
       "role": "context",
       "selection": {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
@@ -251,17 +251,17 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-pop-migration-trend",
       "componentType": "line-chart",
-      "title": "社会増減：転入者数と転出者数",
+      "title": "外国人の人口移動：転入者数と転出者数",
       "componentProps": {
         "seriesRefs": [
           {
             "metricKey": "movers-in",
-            "label": "転入者数",
+            "label": "外国人転入者数",
             "colorRole": "population"
           },
           {
             "metricKey": "movers-out",
-            "label": "転出者数",
+            "label": "外国人転出者数",
             "colorRole": "count"
           }
         ]

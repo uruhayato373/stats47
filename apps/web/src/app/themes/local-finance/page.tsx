@@ -9,7 +9,7 @@ import { StatisticsScopeNav } from '@/components/navigation';
 
 import { InContentAdSlot } from '@/features/ads';
 import type { FinanceFlowData } from '@/features/finance-flow';
-import { loadFinanceCards } from '@/features/local-finance-dashboard';
+import { loadFinanceCards, splitLocalFinanceSections } from '@/features/local-finance-dashboard';
 import {
   PrefectureSelect,
   ThemePrefectureProvider,
@@ -23,6 +23,8 @@ import {
   ThemeIndicatorCatalogSection,
   ThemeSideNav,
   ThemeSwitcher,
+  ThemeDashboardClient,
+  loadThemeData,
 } from '@/features/theme-dashboard/server';
 
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
@@ -35,6 +37,9 @@ import type { Metadata } from 'next';
 /** サイドバー用に ALL_THEMES のエントリ (テーマ一覧 + 指標) を使う */
 const theme = ALL_THEMES.find((t) => t.themeKey === 'local-finance');
 const sections = THEME_CATALOGS['local-finance'].sections ?? [];
+const { dedicated, supplementary } = splitLocalFinanceSections(sections);
+const supplementaryGroups = THEME_CATALOGS['local-finance'].metricGroups ?? [];
+const supplementaryKeys = new Set(supplementaryGroups.flatMap((group) => group.rankingKeys));
 
 const R2_BASE = 'https://storage.stats47.jp';
 
@@ -82,6 +87,14 @@ export default async function LocalFinanceThemePage({
   if (!theme) notFound();
 
   const cards = loadFinanceCards();
+  const supplementaryConfig = {
+    ...theme,
+    rankingKeys: [...supplementaryKeys],
+    tabIndicators: theme.tabIndicators?.filter((indicator) => supplementaryKeys.has(indicator.rankingKey)),
+    defaultRankingKey: [...supplementaryKeys][0],
+    hideMap: true,
+  };
+  const supplementaryData = await loadThemeData(supplementaryConfig);
   const [query, cookieStore] = await Promise.all([searchParams, cookies()]);
   const rawPref = Array.isArray(query.pref) ? query.pref[0] : query.pref;
   // Existing shared links used two-digit codes before all theme routes adopted five digits.
@@ -152,8 +165,15 @@ export default async function LocalFinanceThemePage({
         </nav>
         <LocalFinanceThemeClient
           cards={cards}
-          sections={sections}
+          sections={dedicated}
           initialFinanceFlow={initialFinanceFlow}
+        />
+        <ThemeDashboardClient
+          themeConfig={supplementaryConfig}
+          metricGroups={supplementaryGroups}
+          sections={supplementary}
+          indicatorDataMap={supplementaryData?.indicatorDataMap ?? {}}
+          topology={null}
         />
 
         {/*

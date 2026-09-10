@@ -30,6 +30,7 @@ function defaultFormat(value: number): string {
 export function LineChart({
   data,
   categoryKey = "category",
+  xTickValues,
   valueKey = "value",
   series: seriesConfig,
   showLegend = false,
@@ -179,15 +180,18 @@ export function LineChart({
         .attr("d", pathLine);
     });
 
-    // 5年ごとに間引き
+    // 少数の観測年は全て表示し、長期系列だけ5年ごとに間引く。
     const tickInterval = 5;
     const allCats = data.map((d) => String(d[categoryKey] ?? ""));
-    const filteredTicks = allCats.filter((val) => {
+    const annualTicks = allCats.length <= 5 ? allCats : allCats.filter((val) => {
       const row = data.find((d) => String(d[categoryKey]) === val);
       const code = String((row as Record<string, unknown>)?.yearCode ?? val);
       const num = parseInt(code, 10);
       return !isNaN(num) && num % tickInterval === 0;
     });
+    const filteredTicks = xTickValues
+      ? allCats.filter((value) => xTickValues.includes(value))
+      : annualTicks.length > 0 ? annualTicks : allCats.filter((_, index) => index === 0 || index === allCats.length - 1);
 
     const xAxis = axisBottom(x)
       .tickValues(filteredTicks)
@@ -378,6 +382,7 @@ export function LineChart({
   }, [
     data,
     categoryKey,
+    xTickValues,
     valueKey,
     seriesConfig,
     showLegend,

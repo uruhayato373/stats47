@@ -21,6 +21,16 @@ export const CULTURAL_PARTICIPATION_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "hobby-participation-rate-classical-music",
+      "shortLabel": "クラシック音楽鑑賞の行動者率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-painting",
+      "shortLabel": "絵画・彫刻の制作の行動者率",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "library-lending-books",
       "shortLabel": "図書館館外貸出冊数",
       "role": "secondary"
@@ -28,6 +38,26 @@ export const CULTURAL_PARTICIPATION_SET: IndicatorSet = {
     {
       "rankingKey": "total-museum-count",
       "shortLabel": "博物館総数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "relaxation-avg-time-male",
+      "shortLabel": "男性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "relaxation-avg-time-female",
+      "shortLabel": "女性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "hobby-leisure-avg-time-employed-male",
+      "shortLabel": "有業男性の趣味・娯楽時間（週全体総平均・分/日）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "hobby-leisure-avg-time-employed-female",
+      "shortLabel": "有業女性の趣味・娯楽時間（週全体総平均・分/日）",
       "role": "secondary"
     }
   ],

@@ -169,6 +169,14 @@ export const CLIMATE_CATALOG: ThemeCatalog = {
       "chartKeys": []
     },
     {
+      "key": "snow-designation-population",
+      "title": "豪雪指定区域と人口",
+      "description": "2016年度の指定区域と2020年基準人口の250mメッシュを重ね、区域内人口・面積と境界格子の感度を確認します。",
+      "metricGroupKeys": [],
+      "chartKeys": [],
+      "embeddedSectionKeys": ["snow-designation-population"]
+    },
+    {
       "key": "sunshine-map",
       "title": "県内の日照分布",
       "description": "地図は県内の日照分布を示します。代表観測地点の統計とは解像度・対象期間が異なります。",

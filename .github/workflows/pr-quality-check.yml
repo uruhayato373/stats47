@@ -297,7 +297,7 @@ jobs:
         # 読み取り専用で破壊的変更なし。正典: .claude/state/themes/README.md
         run: |
           node .claude/scripts/themes/validate-theme-state.mjs
-          node --test .claude/scripts/themes/__tests__/
+          npm run theme:quality:test
         continue-on-error: false
 
       - name: 📊 Affiliate Compliance / Operations Guard

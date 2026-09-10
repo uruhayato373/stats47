@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const RETAIL_COMMERCE_SET: IndicatorSet = {
   "key": "retail-commerce",
   "title": "商業と小売",
-  "description": "小売業の事業所数、売場面積、年間商品販売額、商業従業者数を比較します。センサスの対象年を揃え、販売額と店舗数を足し合わせません。",
+  "description": "小売業の事業所数、売場面積、年間商品販売額、従業者数を比較します。従業者数は社会・人口統計体系の2021年度行に掲載された調査日現在の人数です。販売額の年間フローと調査日のストックを分けて読みます。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
@@ -26,8 +26,8 @@ export const RETAIL_COMMERCE_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "number-of-commercial-employees-wholesale-retail",
-      "shortLabel": "商業従業者数",
+      "rankingKey": "retail-employees",
+      "shortLabel": "小売業従業者数",
       "role": "secondary"
     }
   ],

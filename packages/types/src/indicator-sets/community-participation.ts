@@ -6,13 +6,13 @@ import type { IndicatorSet } from "../indicator-set";
 export const COMMUNITY_PARTICIPATION_SET: IndicatorSet = {
   "key": "community-participation",
   "title": "市民参加と地域活動",
-  "description": "ボランティア活動の年間行動者率と選挙投票率、図書館登録者数を市民参加の異なる側面として比較します。異なる母数の率を合算しません。",
+  "description": "ボランティア活動の年間行動者率・まちづくり活動の参加率と、選挙投票率・図書館登録者数を比較します。まちづくり活動は2021年社会生活基本調査の10歳以上が対象で、過去1年間の清掃や地域おこしなどの活動を捉えます。活動種類は重複し、自治会加入率や孤独感とは異なります。",
   "category": "demographics",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "volunteer-activity-annual-participation-rate-10plus",
-      "shortLabel": "ボランティア年間行動者率",
+      "shortLabel": "ボランティア年間行動者率（10歳以上）",
       "role": "primary"
     },
     {
@@ -23,6 +23,11 @@ export const COMMUNITY_PARTICIPATION_SET: IndicatorSet = {
     {
       "rankingKey": "library-registered-users",
       "shortLabel": "図書館登録者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "community-building-volunteer-participation-rate-10plus",
+      "shortLabel": "まちづくり活動の年間行動者率（10歳以上）",
       "role": "secondary"
     }
   ],

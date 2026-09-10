@@ -48,7 +48,7 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
     {
       "rankingKey": "monthly-average-actual-working-hours-male",
       "shortLabel": "月間平均実労働時間（男性）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "employment-mobility-rate",
@@ -61,8 +61,38 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "non-regular-employment-rate",
+      "shortLabel": "非正規雇用率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "nonregular-employees-count",
+      "shortLabel": "非正規の職員・従業員数（15歳以上）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "nonregular-continuation-wish-rate",
+      "shortLabel": "非正規の継続就業希望割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "nonregular-job-change-wish-rate",
+      "shortLabel": "非正規の転職希望割合",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "monthly-average-actual-working-hours-female",
       "shortLabel": "女性月間平均実労働時間",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-count",
+      "shortLabel": "週60時間以上の雇用者数（年間200日以上）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-rate",
+      "shortLabel": "週60時間以上の雇用者割合（年間200日以上）",
       "role": "secondary"
     },
     {

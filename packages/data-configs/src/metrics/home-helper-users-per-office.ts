@@ -3,6 +3,9 @@ import type { MetricConfig } from "../types";
 export const homeHelperUsersPerOffice: MetricConfig = {
   "key": "home-helper-users-per-office",
   "title": "訪問介護利用者数",
+  "subtitle": "訪問介護1事業所当たり",
+  "description": "介護サービス施設・事業所調査に基づく、訪問介護1事業所当たりの利用者数です。地域全体の利用者総数ではなく、事業所規模を比べる値です。",
+  "note": "訪問診療や訪問看護の利用者数とは異なります。人口や面積で再度割らず、原典の事業所当たりの値で比較します。",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
@@ -31,24 +34,8 @@ export const homeHelperUsersPerOffice: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
-  "seoTitle": "訪問介護利用者数ランキング都道府県【2023年】｜1位富山県（43.68人）",
-  "seoDescription": "2023年の訪問介護利用者数の都道府県別ランキング。1位富山県（43.68人）、最下位沖縄県（24.04人）で1.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "訪問介護1事業所当たり利用者数の都道府県ランキング",
+  "seoDescription": "訪問介護1事業所当たりの利用者数を都道府県別に比較。原典の年・単位を確認しながら、事業所規模の地域差を地図とグラフで見ることができます。",
   "isActive": true,
 };

@@ -231,3 +231,45 @@ test("new 28-day metrics obey the same unknown/low-sample numeric rules", (t) =>
   assert.equal(result.status, 1);
   assert.match(JSON.parse(result.stdout).violations.join("\n"), /metrics28d.ga4/);
 });
+
+test('expanded catalog spread requires every runtime theme in portfolio', (t) => {
+  const f = fixture({
+    portfolio: { schemaVersion: 1, themes: [theme()] },
+    catalogKeys: ['aging-society'],
+  });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  fs.writeFileSync(
+    path.join(f.root, 'expanded.ts'),
+    'export const EXPANDED = { "retail-commerce": {} };\n'
+  );
+  fs.writeFileSync(
+    f.idx,
+    'import { EXPANDED } from "./expanded";\nconst BASE = { "aging-society": {}, ...EXPANDED };\nexport const THEME_CATALOGS = Object.fromEntries(Object.entries(BASE));\n'
+  );
+  const missing = run(f);
+  assert.equal(missing.status, 1);
+  assert.ok(
+    JSON.parse(missing.stdout).violations.some(
+      (v) => v.includes('retail-commerce') && v.includes('portfolio に無い')
+    )
+  );
+  const pf = JSON.parse(
+    fs.readFileSync(path.join(f.stateDir, 'portfolio.json'), 'utf8')
+  );
+  pf.themes.push(theme({ themeKey: 'retail-commerce' }));
+  fs.writeFileSync(path.join(f.stateDir, 'portfolio.json'), JSON.stringify(pf));
+  assert.equal(run(f).status, 0);
+});
+
+test('an existing catalog that fails to load cannot silently skip coverage', (t) => {
+  const f = fixture({ portfolio: { schemaVersion: 1, themes: [theme()] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  fs.writeFileSync(f.idx, 'import "./missing-catalog-module";\n');
+  const result = run(f);
+  assert.equal(result.status, 1);
+  assert.ok(
+    JSON.parse(result.stdout).violations.some((v) =>
+      v.includes('THEME_CATALOGS 読込失敗')
+    )
+  );
+});

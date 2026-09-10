@@ -71,13 +71,28 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "annual-sales-amount",
-      "shortLabel": "商業年間商品販売額",
+      "rankingKey": "employment-location-quotient-manufacturing",
+      "shortLabel": "製造業の従業者特化係数",
       "role": "secondary"
     },
     {
-      "rankingKey": "annual-sales-amount-per-employee",
-      "shortLabel": "従業者1人当たり商業販売額",
+      "rankingKey": "employment-location-quotient-information-communication",
+      "shortLabel": "情報通信業の従業者特化係数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employment-location-quotient-health-welfare",
+      "shortLabel": "医療・福祉の従業者特化係数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "enterprise-net-value-added-all-industries",
+      "shortLabel": "全産業の企業純付加価値（本所県）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "private-establishment-net-value-added",
+      "shortLabel": "民営事業所の純付加価値（所在地へ按分）",
       "role": "secondary"
     }
   ],

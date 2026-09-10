@@ -12,17 +12,37 @@ export const HOUSEHOLD_ASSETS_DEBT_SET: IndicatorSet = {
   "metrics": [
     {
       "rankingKey": "financial-assets-balance-multi-person-households",
-      "shortLabel": "貯蓄現在高",
+      "shortLabel": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "financial-debt-balance",
-      "shortLabel": "金融負債残高",
+      "shortLabel": "金融負債残高（二人以上世帯）",
       "role": "secondary"
     },
     {
       "rankingKey": "avg-savings-rate-worker-households",
-      "shortLabel": "平均貯蓄率",
+      "shortLabel": "平均貯蓄率（勤労者世帯）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "current-deposit-balance-ratio-multi-person-households",
+      "shortLabel": "預貯金が金融資産に占める割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "current-life-insurance-balance-ratio-multi-person-households",
+      "shortLabel": "生命保険などが金融資産に占める割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "current-securities-balance-ratio-multi-person-households",
+      "shortLabel": "有価証券が金融資産に占める割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "housing-land-liabilities-ratio-multi-person-households",
+      "shortLabel": "住宅・土地負債が金融負債に占める割合",
       "role": "secondary"
     }
   ],

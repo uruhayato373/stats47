@@ -1,5 +1,7 @@
 import {
   assertFloodArchiveKeys,
+  parseGeoSnowManifest,
+  parseGeoLandslideManifest,
   type GeoAnalysisArtifactEvidence,
   type GeoAnalysisEvidenceManifest,
 } from '@stats47/gis';
@@ -47,6 +49,17 @@ function isArtifact(value: unknown): value is GeoAnalysisArtifactEvidence {
 
 // The approved stage graph is also a runtime publication contract, not just a label check.
 const STAGES = {
+  'population-public-facility-access': [
+    ['population-mesh', 'source', 'ipss-population-mesh-1km'],
+    ['public-facility-points', 'source', 'ksj-p05-public-facility-point'],
+    [
+      'nearest-facility-distance',
+      'spatial-operation',
+      'population-mesh',
+      'public-facility-points',
+    ],
+    ['distance-band-population', 'aggregate', 'nearest-facility-distance'],
+  ],
   'population-land-price': [
     ['population-mesh', 'source', 'ipss-population-mesh-1km'],
     [
@@ -95,6 +108,8 @@ export function validateGeoManifest(
   value: unknown,
   slug: GeoCrossAnalysisSlug
 ): GeoAnalysisEvidenceManifest | null {
+  if (slug === 'population-snow-designation') return parseGeoSnowManifest(value);
+  if (slug === 'population-landslide-exposure') return parseGeoLandslideManifest(value);
   if (
     !isRecord(value) ||
     value.schemaVersion !== 1 ||
@@ -153,6 +168,14 @@ export function validateGeoManifest(
       'ipss-population-mesh-1km',
       ['mesh1000r6', '24', 'mesh', 'calculation-input'],
     ],
+    ...(slug === 'population-public-facility-access'
+      ? ([
+          [
+            'ksj-p05-public-facility-point',
+            ['P05', '22', 'point', 'calculation-input'],
+          ],
+        ] as const)
+      : []),
     ...(slug === 'population-land-price'
       ? ([
           [
@@ -205,6 +228,10 @@ export function validateGeoManifest(
     if (layer === 'ipss-population-mesh-1km')
       expectedKeys = GEO_AREA_CODES.map(
         (code) => `gis/mlit-ksj/mesh1000r6/24/${code.slice(0, 2)}.topojson`
+      );
+    else if (layer === 'ksj-p05-public-facility-point')
+      expectedKeys = GEO_AREA_CODES.map(
+        (code) => `gis/mlit-ksj/P05/22/${code.slice(0, 2)}.geojson`
       );
     else if (layer === 'ksj-s12-passenger-context')
       expectedKeys = GEO_AREA_CODES.map(
@@ -278,9 +305,11 @@ export function validateGeoManifest(
         return null;
       for (const output of outputs) {
         const key =
-          kind === 'context'
-            ? `app/station-passengers/${output.areaCode?.slice(0, 2)}/stations.json`
-            : `app/geo/${slug}/pref/${output.areaCode?.slice(0, 2)}.json`;
+          id === 'public-facility-points'
+            ? `app/geo/${slug}/source/${output.areaCode?.slice(0, 2)}.json`
+            : kind === 'context'
+              ? `app/station-passengers/${output.areaCode?.slice(0, 2)}/stations.json`
+              : `app/geo/${slug}/pref/${output.areaCode?.slice(0, 2)}.json`;
         if (
           output.key !== key ||
           (kind !== 'context' && output.bytes > GEO_DETAIL_MAX_BYTES)

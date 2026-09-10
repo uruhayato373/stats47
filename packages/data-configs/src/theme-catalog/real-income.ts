@@ -1,4 +1,19 @@
 import type { ThemeCatalog } from "./types";
+import type { ChartColorRole } from "./chart-color-role";
+
+const HOUSEHOLD_EXPENDITURES = [
+  ["household-survey-food-expenditure", "食料"],
+  ["household-survey-housing-expenditure", "住居"],
+  ["household-survey-utilities-expenditure", "光熱・水道"],
+  ["household-survey-furniture-household-goods-expenditure", "家具・家事用品"],
+  ["household-survey-clothing-footwear-expenditure", "被服及び履物"],
+  ["household-survey-healthcare-expenditure", "保健医療"],
+  ["household-survey-transport-communication-expenditure", "交通・通信"],
+  ["household-survey-education-expenditure", "教育"],
+  ["household-survey-culture-recreation-expenditure", "教養娯楽"],
+  ["household-survey-other-expenditure", "その他の消費支出"],
+] as const;
+
 
 export const REAL_INCOME_CATALOG: ThemeCatalog = {
   "key": "real-income",
@@ -7,6 +22,14 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
   "category": "economy",
   "usage": "theme",
   "metrics": [
+    ...HOUSEHOLD_EXPENDITURES.map(([rankingKey, shortLabel]) => ({
+      rankingKey, shortLabel, role: 'context' as const,
+      selection: {
+        proposedBy: '128テーマ全体展開', surveyedAt: '2026-09-10',
+        sourceUrl: 'https://www.e-stat.go.jp/koumoku/koumoku_teigi/L',
+        rationale: '同じ調査・地域・世帯・期間の10費目を使い、消費配分を比較する。',
+      },
+    })),
     {
       "rankingKey": "disposable-income-worker-households",
       "shortLabel": "可処分所得",
@@ -141,6 +164,21 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
     }
   ],
   "charts": [
+    {
+      componentKey: 'real-income-household-composition',
+      componentType: 'composition-chart',
+      title: '消費支出10費目の構成',
+      annotation: '都道府県全域の二人以上世帯。2019・2024年の10〜11月の1世帯当たり月平均です。構成比は10費目の合算を分母とします。円単位の丸めにより総消費支出との差があります。',
+      componentProps: {
+        seriesRefs: HOUSEHOLD_EXPENDITURES.map(([metricKey, label], index) => ({
+          metricKey, label, colorRole: `series-${index + 1}` as ChartColorRole,
+        })),
+      },
+      relatedRankingKeys: HOUSEHOLD_EXPENDITURES.map(([key]) => key),
+      sourceName: '社会・人口統計体系（原典：全国家計構造調査）',
+      sourceLink: 'https://www.e-stat.go.jp/koumoku/koumoku_teigi/L',
+      dataSource: 'ranking', gridColumnSpan: 12, section: 'candidate-77', sortOrder: 40,
+    },
     {
       "componentKey": "real-income-cpi-breakdown",
       "componentType": "line-chart",

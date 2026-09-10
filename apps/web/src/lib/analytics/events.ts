@@ -40,7 +40,8 @@ export function trackGeoMapInteraction(
       | 'clear-prefecture'
       | 'stage-population'
       | 'stage-overlap'
-      | 'stage-audit';
+      | 'stage-audit'
+      | 'stage-facilities';
     areaCode?: string;
   }
 ): void {

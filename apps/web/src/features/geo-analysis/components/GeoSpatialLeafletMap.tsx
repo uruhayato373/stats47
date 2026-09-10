@@ -14,6 +14,7 @@ import {
   useMap,
 } from 'react-leaflet';
 
+import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
 import {
   buildSpatialMeshMap,
@@ -45,9 +46,13 @@ export function GeoSpatialLeafletMap({
   detail,
   view,
 }: {
-  detail: GeoAnalysisPrefDetail;
+  detail: Exclude<
+    GeoAnalysisPrefDetail,
+    { slug: 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' }
+  >;
   view: Exclude<SpatialView, 'audit'>;
 }) {
+  const renderer = useState(() => createGeoCanvasRenderer())[0];
   const [extent, setExtent] = useState(false);
   const features = useMemo(() => buildSpatialMeshMap(detail), [detail]);
   const byId = useMemo(
@@ -98,6 +103,7 @@ export function GeoSpatialLeafletMap({
         </span>
       </div>
       <MapContainer
+        renderer={renderer}
         preferCanvas
         center={[36, 138]}
         zoom={6}
@@ -106,7 +112,7 @@ export function GeoSpatialLeafletMap({
         minZoom={GEO_BASEMAP.minZoom}
         maxZoom={GEO_BASEMAP.maxZoom}
         scrollWheelZoom={false}
-        className="h-[480px] rounded-none lg:h-[620px]"
+        className="isolate h-[480px] rounded-none lg:h-[620px]"
         aria-label={`${detail.areaName}の地点・1kmメッシュ地図`}
       >
         <TileLayer

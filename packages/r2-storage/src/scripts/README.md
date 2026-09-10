@@ -85,6 +85,41 @@ npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
 対象は`.local/r2`配下だけ。空・広域prefix・候補0件・staging外参照を拒否し、
 mtimeやローカルcacheを使わずR2 HEAD metadataとlocal bytesを比較する。PUT後もHEADを再検証する。
 
+### 検証済み配信manifest（固定key/bytes/SHA → R2）
+
+`schemaVersion: 1`、`status: staged-unpublished`、`files: [{key, bytes, sha256}]` の
+検証済みreleaseを、そのmanifestファイル自体のSHAで固定する。対象はJSON/GeoJSON/ZIP。
+生成画像bundleは引き続き画像専用publisherを使う。
+
+```bash
+# ローカル全件のbyte/SHA・公開条件を検査。認証情報を読まず、通信・PUTしない
+npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+  --manifest .local/verification/themes/<release>.json \
+  --manifest-sha256 <確認済み64桁SHA> --verify-only
+
+# 同じ検査に加えS3 HEADで変更/skipを確認。S3認証必須、PUTはしない
+npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+  --manifest .local/verification/themes/<release>.json \
+  --manifest-sha256 <同じSHA> --dry-run
+
+# 公開対象の最終承認後だけ、同じmanifest/SHAで一括反映
+npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+  --manifest .local/verification/themes/<release>.json \
+  --manifest-sha256 <同じSHA>
+```
+
+全件を最初のHEAD/PUT前に検査し、実際のPUT直前にも読み直してSHAを確認する。原典 → 観測値・
+県別artifact → 集計 → Geo manifest → 一覧 → テーマ参照の順に、1ファイルずつ既存の条件付き
+PUTとHEAD検証を使う。無関係なkeyを追加・削除しない。A33/A40の全体partial-licenseは禁止を維持し、
+Geo原典SSOTの版・県・原典SHA・許諾証拠に一致する審査済みファイルだけを認める。
+津波はさらに`redistributionAllowed: true`と`licenseEvidence`のURL/SHA完全一致が必須。
+
+複数objectの更新は**非atomic**。既存の`r2-write`ジョブと同時に実行しない。途中失敗時は停止し、
+同じmanifest/SHAで再検査・再開する。既に完全一致するobjectはskipする。承認対象のbyteや許諾が
+変わった場合はmanifestを作り直して検証し、元の承認SHAを自動置換しない。新profileは通常の
+`sync-snapshots`全taskでは再生成されない。旧mainの`page-components`同期は旧章を書き戻すため、
+固定release公開から同じコード版のデプロイ完了までは重ねない。
+
 ### ダウンロード（R2 → .local/r2）
 
 ```bash

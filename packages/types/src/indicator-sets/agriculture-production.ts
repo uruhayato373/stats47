@@ -17,7 +17,7 @@ export const AGRICULTURE_PRODUCTION_SET: IndicatorSet = {
     },
     {
       "rankingKey": "agricultural-output-per-employed-person",
-      "shortLabel": "就業者1人当たり農業産出額",
+      "shortLabel": "農業就業者1人当たり農業産出額",
       "role": "secondary"
     },
     {
@@ -27,7 +27,42 @@ export const AGRICULTURE_PRODUCTION_SET: IndicatorSet = {
     },
     {
       "rankingKey": "core-agricultural-workers",
-      "shortLabel": "基幹的農業従事者数",
+      "shortLabel": "基幹的農業従事者数（販売農家）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "cultivated-area",
+      "shortLabel": "耕地面積",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "raw-milk-production",
+      "shortLabel": "年間生乳生産量（t）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "dairy-cattle-count",
+      "shortLabel": "乳用牛飼養頭数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "dairy-cattle-holdings",
+      "shortLabel": "乳用牛の飼養戸数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "beef-cattle-count",
+      "shortLabel": "肉用牛飼養頭数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "pig-count",
+      "shortLabel": "豚飼養頭数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "layer-hen-count",
+      "shortLabel": "採卵鶏の成鶏めす（千羽）",
       "role": "secondary"
     }
   ],

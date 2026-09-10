@@ -44,6 +44,8 @@ try {
             const chapter = page.locator(`#theme-section-${section.key}`);
             for (const groupKey of section.metricGroupKeys) {
               const group = catalog.metricGroups.find((item) => item.key === groupKey);
+              // This probe compares the fixed-year first batch; later normal cards have a separate all-theme probe.
+              if (!group.comparisonYear) continue;
               for (const key of group.rankingKeys) {
                 if (group.rankingKeys.length > 1) await chapter.getByRole('button', { name: catalog.metrics.find((metric) => metric.rankingKey === key).shortLabel, exact: true }).click();
                 const data = JSON.parse(await readFile(resolve(options['stage-dir'], `app/ranking/${key}/values.json`), 'utf8'));

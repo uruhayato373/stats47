@@ -14,6 +14,7 @@ const CONTENT_ENCODING_METADATA_KEY = 'stats47-content-encoding';
 const CACHE_CONTROL = 'public, max-age=0, must-revalidate';
 
 const CONTENT_TYPES: Readonly<Record<string, string>> = {
+  '.geojson': 'application/geo+json',
   '.gif': 'image/gif',
   '.jpeg': 'image/jpeg',
   '.jpg': 'image/jpeg',
