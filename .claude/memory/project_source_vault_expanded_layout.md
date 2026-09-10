@@ -27,8 +27,8 @@ doboku-note の `原資料PDF/書籍/{id}__{書名}/{source,pages,ocr,crops}/` �
   processing workspace の `sourceBundleSha256` には `contentSha256` が入る (field 名は互換のため据え置き)。
 - `source-inventory check-all` は S4 未到達 profile (inventory.json 無し) を `pending` として列挙する (失敗にしない)。
 - `extract --mode image` はページ画像だけを書く (S1 専用。transcripts/ を作らないので stage-status の S2 判定を汚さない)。
-- 旧 bundle 37 file と直下に散らばっていた生 PDF 16 本は `参考文献/_移行前/` に退避 (README あり)。全 profile の `verify --vault` 通過を
-  確認済みなので削除してよいが、削除はオーナー判断。
+- 旧 bundle 37 file と直下に散らばっていた生 PDF 16 本は `参考文献/_移行前/` に一旦退避し、全 profile の `verify --vault` 再確認後に
+  2026-09-10 オーナー指示で削除済み (Drive のゴミ箱経由)。
 - 新規 7 冊 (Kindle 画面スキャン) は版が奥付で確認できず `edition: unknown` / `版不明`。うち『やばい県民ランキング』は表紙が 20 ページ重複し
   本文 62% で終わる (一意ページ 28/50)、『都道府県別平均年収ランキング』は 84% で終わる不完全スキャン。統計根拠にしない。
 - 関連: [[project_kakei_marketing_book_pipeline]]
