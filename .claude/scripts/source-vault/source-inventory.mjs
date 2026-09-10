@@ -883,8 +883,18 @@ async function main() {
     if (!options.profile) throw new Error('coverage requires --profile');
     result = await coverage(options.profile, options.check);
   } else if (command === 'check-all') {
+    // S4 台帳に未到達の profile (inventory.json 無し) は失敗ではなく pending として列挙する。
+    // stage 契約 (reference-source-standards.md §3) では S0〜S3 の状態が正当で、check-all は到達済み台帳だけを検証する。
     result = [];
-    for (const profileName of profileNames) result.push(await validate(profileName));
+    for (const profileName of profileNames) {
+      const context = await loadContext(profileName);
+      if (!(await exists(path.join(context.outputDir, 'inventory.json')))) {
+        process.stderr.write(`check-all: ${profileName} は S4 台帳未到達 (inventory.json 無し) — pending\n`);
+        result.push({ profile: profileName, inventory: 'pending', reason: 'S4 inventory not built yet' });
+        continue;
+      }
+      result.push(await validate(profileName));
+    }
   } else {
     throw new Error(`Unknown command: ${command}`);
   }

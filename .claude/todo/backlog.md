@@ -634,6 +634,24 @@ updated: 2026-09-09
   新規記事wave A の全記事が quality-gate + critic PASS、県別シリーズ47本が公開済みで、inventoryの`combined-analysis`各項目が
   記事・theme・areaのいずれかへ実在証跡で接続されている（管理画面`/content/references`で確認）。
 
+### [REFERENCE-SOURCE-KINDLE-BATCH-01] Drive直下にあったKindleスキャン7冊の書誌確定とS2以降
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:check] [起票:2026-09-10]
+
+- **owner**: `open-data-curator` (県庁所在地ガイドは `area-curator`、GIS本は `geo-analysis-curator`)。
+- **現状証拠**: 2026-09-10 に vault を展開配置へ移行した際、`参考文献/` 直下に未整理だった 7 冊
+  (`capital-city-guide` / `money-health-ranking` / `yabai-kenmin-ranking` / `amusement-shop-density` / `gis-business-guide` /
+  `prefecture-ranking-consumption` / `average-income-ranking`) を profile 化し S0 保全 + S1 ページ画像 (contentCrop 無し) まで完了。
+  奥付が Kindle レビュー画面で終わるため版・ISBN 未確認 (`edition: unknown` / `版不明`)。`やばい県民` は一意ページ 28/50 で本文 62% まで、
+  `平均年収` は 84% までの不完全スキャン。`source-inventory check-all` は 7 profile を `pending` として列挙している。doc 46 §1 に表あり。
+- **次**: ①国立国会図書館サーチ等で書誌を確定し profile `bibliography` と Drive folder 名 (`版不明` → 年版) を更新する。
+  ②Kindle UI 枠の `contentCrop` を profile ごとに決めて S1 を再生成する (kakei と同じ手順)。③不完全スキャン 2 冊は再スキャンするか
+  `rights-hold` のまま除外するか判断する。④S2 (OCR + Markdown) → S4 台帳。`source-inventory.mjs` の `loadExtractionPages` は
+  transcript 必須なので `--mode image` だけの workspace では build できない (S2 を先に通す)。
+- **停止条件**: 権利判断が終わるまで全項目 `rights-hold`。書籍値・図表・本文を公開物へ流さない。
+- **完了条件**: 7 profile が `check-all` で `valid: true` / coverage 100% になり、`stage-status` で S4 到達。
+- **付帯**: `参考文献/_移行前/` (旧 tar bundle 37 file + 生 PDF 16 本) は全 profile の `verify --vault` 通過を確認済み。削除はオーナー判断。
+
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run test --workspace=apps/admin -- reference-expansion-plans] [起票:2026-08-30]
@@ -743,7 +761,7 @@ updated: 2026-09-09
 - **2026-09-10 checkpoint**: 55テーマの構造接続後、候補の主問を全128件再監査した。追加原典の取込と章修正を継続中。構造PASSを主問充足や公開完了とは扱わない。最新の採用指標・source hash・検証状態は `.claude/state/metrics/themes/2026-09-10-all-expansion.json`。未充足の核心は同記録の `validation.candidateScope` から、直接統計→公式ファイル→GISの順に処理する。
 - **owner**: theme-designer（全体）／data-ingester（値・設定）／theme-component-builder・theme-ui-manager（画面）
 - **現在地**: [全体実装記録](../state/metrics/themes/2026-09-10-all-expansion.json) を正典とする。55テーマの構造接続と、各候補の採択範囲・原典・表示検証を分離して扱う。原典不一致・GISの未実装範囲を構造の完了へ埋め込まない。
-- **次**: 全候補の原典・採用範囲監査を踏まえ、残る地震住宅の全国空間原典を取得・検証する。採用済み部分は出典調査の接続修正とモバイル豪雪地図の読み込み停止を最終検証し、対象manifestを確定する。範囲限定と未充足を全体実装記録の `scopeCounts` / `validation.next253Tsunami29` から引き継ぎ、原典未確保を代替指標で完了扱いにしない。
+- **次**: 全候補の原典・採用範囲監査を踏まえ、残る地震住宅の全国空間原典を取得・検証する。採用済み部分は55テーマ110画面・県別672ケースと出典導線を検証済み。公開工程は固定manifestとともに下記カードへ接続する。範囲限定と未充足を全体実装記録の `scopeCounts` / `validation.next253Tsunami29` から引き継ぎ、原典未確保を代替指標で完了扱いにしない。
 - **正典**: [採否・範囲・初回仕様・実装順](../skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json) の `decision` / `firstBatch` / `implementationWaves`。取得証拠は [全県・年別の検証](../state/estat/theme-expansion-verification.json)。このカードが実装の入口であり、JSON内へ独立したTODO台帳を作らない。
 - **実行順**: ① `npm run theme:expansion:check` で仕様を検査し、採択候補の核心となる問いと実在する指標を照合する。既存metricのyears不足と未登録指標はdata-ingesterが実値確認後に取り込む。②既存テーマは同じ問いの章を拡充し、重複章を追加しない。③API中心→公式ファイル補完→GISの順で、採択範囲だけを小分けに実装する。統合候補は統合先で扱い、保留は再開条件を満たすまで着手しない。
 - **検証**: firstBatchの47県・比較年・原典定義を再現し、ThemeCatalog／生成snapshot／表示値を突合する。`validate:catalog`、対象テスト・型検査、PC・モバイルの表示を通す。廃棄物2024年度の原典更新を先に確認し、2023年度を最新と表現しない。情報通信の2020年経理事項は初回から除外する。
@@ -754,7 +772,7 @@ updated: 2026-09-09
 
 タグ: [種類:改善] [実行:対話] [起票:2026-07-04]
 
-- **残工程**: 最終のsurvey導線・生成物・豪雪地図を検証し、固定manifestとコード差分を提示する。公開R2、本番デプロイ、公開日からの計測開始を実施する。採用範囲・許諾・未充足の詳細は `.claude/state/metrics/themes/2026-09-10-all-expansion.json` と各候補のdecisionを参照する。
+- **残工程**: ローカルの全表示・出典導線・生成物・豪雪地図の障害復帰は検証済み。固定manifest（253指標・2155ファイル）とコード差分の承認後、公開R2、本番デプロイ、公開日からの計測開始を実施する。採用範囲・許諾・未充足の詳細は `.claude/state/metrics/themes/2026-09-10-all-expansion.json` と各候補のdecisionを参照する。
 - **全体拡充との統合**: 初回3テーマ、追加31テーマ、既存21テーマの未公開差分を、全55テーマの現行定義から再生成したmanifestで突合する。特に100指標のmetadata、健康寿命・農業産出額・ラスパイレス指数の値/単位修正を落とさない。`app/ranking-items/all.json` は公開在庫を基に検証済み全差分を重ねる。新規テーマは公開前baselineなしのlaunch実験として、実際の公開日から7／28／56日を観測する。
 - **owner**: `devops-runner`（デプロイ）/ `r2-publisher`（検証済み対象の公開）/ `theme-ui-manager`（配信確認）/ `theme-portfolio-manager`（計測開始）
 - **実行順**: (0) 全型・対象テスト・生成物・buildと全テーマの表示および変更導線を検証し、manifestのbyte/SHAを固定する。(1) 承認済みのfeatureブランチへGit同期し、ローカル検証結果と本番差分を提示して本番反映の承認を得る。(2) 既存のR2 writerと同時実行しないことを確認し、固定manifestの全件事前検査・remote dry-run後、exact publisherで原典から依存順にデータを反映する。未更新mainのsync-snapshotsは起動しない。(3) feature→develop→mainを規約どおり統合し、同じデータを読むCIと1回のデプロイを確認する。(4) 全55テーマ・旧財政redirect・追加survey導線と修正した年/母集団/分母表示を本番実測する。(5) 実際の公開日で全55テーマの実験（新規34・既存構成21）を `evaluate-theme-experiments.mjs --schedule` し、既存の週次CIと月曜フォローのstate書き戻しを確認する。

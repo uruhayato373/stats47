@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "recordedAt": "2026-09-10T21:35:46.584730+00:00",
-  "status": "local-data-verified-display-and-publication-pending",
+  "status": "adopted-local-implementation-verified-production-approval-pending",
   "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
   "themeCount": 55,
   "adoptedCandidates": 120,
@@ -1491,7 +1491,7 @@
   },
   "limitation": "Wiring is structural evidence only. Candidate scope, source definitions, data, rendered values and publication require separate verification. No test pass is inferred by this recorder.",
   "release": {
-    "status": "staged-unpublished-display-verification-running",
+    "status": "verified-unpublished",
     "metricCount": 253,
     "fileCount": 2155,
     "componentThemes": 55,
@@ -6467,7 +6467,7 @@
       }
     },
     "next253Surveys": {
-      "status": "data-build-and-targeted-browser-pass-full-browser-running",
+      "status": "PASS-local-release-candidate-unpublished",
       "manifest": {
         "path": ".local/verification/themes/2026-09-11-release-253-surveys.json",
         "sha256": "b3693bf6fef41cbed43e36b44dfab0057aabc1ce074ef39d62a1263b6cf94a8d",
@@ -6505,7 +6505,12 @@
         "originalStallReproduced": false,
         "sameBuildRetryCasesPassed": 94,
         "retryMaxMs": 4798,
-        "newBuildBrowser": "pending"
+        "newBuildBrowser": "PASS",
+        "syntheticDeadlineBrowser": {
+          "deadlineObservedMs": 30332,
+          "lateResponseIgnored": true,
+          "retryRecovered": true
+        }
       },
       "publication": {
         "offlineVerify": "PASS",
@@ -6526,9 +6531,10 @@
       "scopeAuditBasis": "validation.next253Tsunami29.scopeAudit; source values unchanged",
       "measurementBasis": "validation.next253Profiles.measurementAudit; unstarted55",
       "git": {
-        "stagedExplicitPaths": 693,
-        "commit": "pending",
-        "pushTargetAuthorized": "origin/codex/theme-expansion-128"
+        "commit": "240800291",
+        "pushTargetAuthorized": "origin/codex/theme-expansion-128",
+        "integrationTarget": "91261643f65c6089cb9c1ea2cef30d7323c2ea8b",
+        "pushProof": ".local/verification/themes/2026-09-11-validation-253-surveys/git-sync.json"
       },
       "quality": {
         "status": "PASS",
@@ -6565,7 +6571,78 @@
         "clientSecretEnvReferences": 0,
         "scope": "pattern scan only"
       },
-      "checkedAt": "2026-09-10T21:50:53.225924+00:00"
+      "checkedAt": "2026-09-10T22:02:03.896516+00:00",
+      "browser": {
+        "status": "PASS",
+        "buildId": "RTwt5z7Inrjq8CU-8iPtA",
+        "manifestSha256": "b3693bf6fef41cbed43e36b44dfab0057aabc1ce074ef39d62a1263b6cf94a8d",
+        "all": {
+          "cases": 110,
+          "pass": 110,
+          "fail": 0,
+          "http200": 110,
+          "singleH1": 110,
+          "noPageErrors": 110,
+          "noHorizontalOverflow": 110,
+          "oneVisiblePrefectureSelector": 110,
+          "buildMatched": 110
+        },
+        "profiles": {
+          "cases": 14,
+          "pass": 14,
+          "fail": 0,
+          "states": 672,
+          "passedStates": 672,
+          "valuesCompared": 45990
+        },
+        "geo": {
+          "hydrationCases": 18,
+          "hydrationPassed": 18,
+          "mapCases": 8,
+          "mapPassed": 8,
+          "stages": 28,
+          "syntheticFailures": 2,
+          "syntheticFailurePassed": 2
+        },
+        "retail": {
+          "cases": 2,
+          "pass": 2,
+          "states": 6,
+          "rawToStats": 47,
+          "statsToRanking": 47
+        },
+        "header": {
+          "cases": 2,
+          "executed": 2,
+          "productIssues": 0,
+          "probeResolved": 0
+        },
+        "interaction": {
+          "cases": 2,
+          "pass": 2
+        },
+        "surveys": {
+          "rankingChecks": 28,
+          "hubChecks": 12
+        },
+        "deadline": {
+          "deadlineObservedMs": 30332,
+          "lateResponseIgnored": true,
+          "retryRecovered": true
+        },
+        "limits": [
+          "Local immutable preview; no production publication or measured post-launch effect claimed.",
+          "Original single snow stall cause remains unproven; the new build passes all states and synthetic delayed-response recovery.",
+          "Initial synthetic probe selected data and methods links as share links; the preserved failed probe was corrected without product changes."
+        ],
+        "path": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+      },
+      "postMergeTypeCheck": {
+        "status": "PASS",
+        "packages": 25,
+        "scriptProjects": 8,
+        "log": ".local/verification/themes/2026-09-11-validation-253-surveys/stats47-themes-post-merge-types.log"
+      }
     },
     "release252Historical": {
       "status": "staged-unpublished",

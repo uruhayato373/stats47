@@ -2,7 +2,7 @@
 title: その他参考文献OCR・クロップ・stats47展開実装仕様
 type: implementation-spec
 date: 2026-08-29
-updated: 2026-09-05
+updated: 2026-09-10
 status: active
 related_backlog: KAKEI-MARKETING-CONTENT-01
 owner: open-data-curator
@@ -13,13 +13,13 @@ tags: [evidence, provenance, ocr, crop, source-vault, content-pipeline]
 
 ## 0. 位置づけ
 
-本書は、日本国勢図会以外でprivate Google Driveへ保全済みの4資料を、検証付きで一時復元し、文字抽出、
+本書は、日本国勢図会以外でprivate Google Driveへ保全済みの資料 (2026-09-10 時点で 11 資料) を、検証付きで一時復元し、文字抽出、
 OCR、ページ画像化、内部照合用クロップを行った後、既存のstats47 SSOTへ安全に展開するための資料別契約である。
 保存、復元、権利、一次資料への昇格条件は`.claude/rules/reference-source-standards.md`を正典とし、進捗は
 `.claude/todo/backlog.md`の`REFERENCE-SOURCE-EXPANSION-01`（3資料）と`KAKEI-MARKETING-CONTENT-01`（家計調査書籍）で管理する。
 
 この契約は原本画像やOCRを公開してよいという許可ではない。クロップは内部照合専用で、公開物は一次資料から
-再取得した事実・数値とstats47独自の文章・図表だけで構成する。Drive bundleの差し替え、remote R2 write、
+再取得した事実・数値とstats47独自の文章・図表だけで構成する。Drive 版 folder の file 差し替え、remote R2 write、
 git push、PR、deploy、SNS・note公開は別途オーナー承認を要する。
 
 ## 1. 資料別の入力・owner・用途
@@ -29,7 +29,20 @@ git push、PR、deploy、SNS・note公開は別途オーナー承認を要する
 | `prefecture-deviation` / `prefecture-deviation` | 久保哲朗『47都道府県の偏差値』小学館、2018年2月、ISBN 978-4-09-825317-3。スキャンPDF 6件 | `参考文献/47都道府県の偏差値/2018年版` / `.claude/state/source-inventory/prefecture-deviation/2018/source-bundle-manifest.json` | `open-data-curator`。ランキング・survey・theme・記事の候補発見。書誌は国立国会図書館で確認済み。図表の権利と一次資料の照合までは`rights-hold` |
 | `prefecture-databook-2021` / `prefecture-databook` | 『2021都道府県DataBook』2021年版。地域別PDF 8件、補助PNG 7件 | `参考文献/2021都道府県DataBook/2021年版` / `.claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json` | `area-curator`。県シンボル・特産品候補、area・ranking・theme・記事。数値は公的統計から再取得 |
 | `claude-skills-guide-2026` / `claude-skills-guide` | 『Claudeスキル構築ガイド』2026年版、`guide.pdf` 1件 | `参考文献/Claudeスキル構築ガイド/2026年版` / `.claude/state/source-inventory/claude-skills-guide/2026/source-bundle-manifest.json` | `knowledge-curator`。stats47のagent・skill・内部文書改善だけに使い、統計ページや公開記事の根拠にはしない |
-| `kakei-marketing-2015` / `kakei-marketing` | 吉本佳生『マーケティングに使える「家計調査」 世界最大の消費者ビッグデータは「宝の山」だ』講談社、2015年7月、ISBN 978-4-06-219375-7。Kindle画面のスキャンPDF 1件・307ページ（縦書き・text layerなし） | `参考文献/マーケティングに使える家計調査/2015年版` / `.claude/state/source-inventory/kakei-marketing/2015/source-bundle-manifest.json` | `open-data-curator`（分析・論点の台帳）、展開は`data-ingester`（new-metric）・`theme-designer`（evidenceTopics）・`article-writer`（記事）。書誌は講談社公式ページで確認済み。数値はすべて総務省家計調査から再取得し、書籍値・図表・本文を公開物へ流さない |
+| `kakei-marketing-2015` / `kakei-marketing` | 吉本佳生『マーケティングに使える「家計調査」 世界最大の消費者ビッグデータは「宝の山」だ』講談社、2015年7月、ISBN 978-4-06-219375-7。Kindle画面のスキャンPDF 1件・307ページ（縦書き・text layerなし） | `参考文献/マーケティングに使える家計調査/2015年版` / `.claude/state/source-inventory/kakei-marketing/2015/source-bundle-manifest.json` | `open-data-curator`（分析・論点の台帳）、展開は`data-ingester`（new-metric）・`theme-designer`（evidenceTopics）・`article-writer`（記事）。書誌は講談社公式ページで確認済み。\1
+2026-09-10 に Drive 直下へ未整理のまま置かれていた Kindle 画面スキャン 7 冊を profile 化し、S0 保全と S1 ページ画像 (`pages/pNNNN.jpg`、contentCrop 無し) まで進めた。
+奥付ページが Kindle のレビュー画面で終わるため刊行年・ISBN を確認できず、版は `unknown` / Drive folder `版不明` とする。
+書誌の確定 (国立国会図書館サーチ等) と権利判断が終わるまで全項目 `rights-hold`。S2 以降と inventory は未着手。
+
+| profile / sourceKey | 書誌・入力 (2026-09-10 表紙・末尾ページで確認) | Drive論理パス / Git manifest | owner / stats47での用途 |
+| --- | --- | --- | --- |
+| `capital-city-guide` / `capital-city-guide` | 南部泰則『47都道府県 県庁所在地ガイド: 地理・文化・観光・産業を一冊でわかりやすく紹介』Kindle 個人出版。スキャン 150p (1600×1836px) | `参考文献/47都道府県県庁所在地ガイド/版不明` / `.claude/state/source-inventory/capital-city-guide/unknown/source-bundle-manifest.json` | `area-curator`。area 編集の候補発見のみ。解説文・写真を複製しない |
+| `money-health-ranking` / `money-health-ranking` | 荒木宏香・宮本勝浩・村上和巳・花谷美枝・種市房子・週刊エコノミスト編集部『おカネと健康 都道府県ランキング』週刊エコノミスト ebooks (毎日新聞出版)。スキャン 60p (1600×1812px) | `参考文献/おカネと健康 都道府県ランキング/版不明` / `.claude/state/source-inventory/money-health-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。ranking / survey / theme の候補発見。数値は一次資料で再取得 |
+| `yabai-kenmin-ranking` / `yabai-kenmin-ranking` | 『全国47都道府県 やばい県民ランキング』著者未確認。スキャン 50p (1600×1812px) だが表紙が 20 ページ重複し本文は 62% で途切れる (一意ページ 28) | `参考文献/全国47都道府県やばい県民ランキング/版不明` / `.claude/state/source-inventory/yabai-kenmin-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。俗説ランキングで統計根拠にならない。企画の切り口参照のみ。再スキャンするまで不完全 |
+| `amusement-shop-density` / `amusement-shop-density` | 雨堤孝一『全国都道府県遊技営業店密度ランキング: 風俗営業許可件数 風営法ランキング』(風営法ランキングシリーズ②) Kindle 個人出版。スキャン 15p (1600×1812px) | `参考文献/全国都道府県遊技営業店密度ランキング/版不明` / `.claude/state/source-inventory/amusement-shop-density/unknown/source-bundle-manifest.json` | `open-data-curator`。警察庁「風俗営業等の状況」等の一次資料で再取得する候補発見 |
+| `gis-business-guide` / `gis-business-guide` | ESRIジャパン株式会社『図解入門ビジネス 最新GIS[地理情報システム]のビジネス活用がよ〜くわかる本』秀和システム。スキャン 230p (800×1030px) | `参考文献/最新GISのビジネス活用がよ〜くわかる本/版不明` / `.claude/state/source-inventory/gis-business-guide/unknown/source-bundle-manifest.json` | `geo-analysis-curator`。Geo 分析の手法・用語の内部参照のみ。公開物の根拠にしない |
+| `prefecture-ranking-consumption` / `prefecture-ranking-consumption` | 久保哲朗『統計から読み解く 47都道府県ランキング 消費・子供・スポーツ編』日東書院。スキャン 310p (1600×1836px) | `参考文献/統計から読み解く47都道府県ランキング 消費・子供・スポーツ編/版不明` / `.claude/state/source-inventory/prefecture-ranking-consumption/unknown/source-bundle-manifest.json` | `open-data-curator`。`prefecture-deviation` と同著者。ranking / survey / theme / 記事の候補発見。数値は一次資料で再取得 |
+| `average-income-ranking` / `average-income-ranking` | 『都道府県別平均年収ランキング: 47都道府県の収入と生活コストから見える"実質手取り"と楽学の旅』著者未確認、Kindle 個人出版。スキャン 110p (1600×1836px) だが本文は 84% で途切れる | `参考文献/都道府県別平均年収ランキング/版不明` / `.claude/state/source-inventory/average-income-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。既存 Kindle 企画『実質手取りの地図』の競合参照。統計根拠にしない。再スキャンするまで不完全 |
 
 2026-08-29の全ページ処理・台帳生成結果は次のとおり。全資料で内部照合用cropを1件ずつ実見し、原本、OCR本文、
 ページ画像、crop画像をGit・R2・公開assetへ保存していない。
@@ -42,16 +55,21 @@ git push、PR、deploy、SNS・note公開は別途オーナー承認を要する
 | `kakei-marketing-2015`（2026-09-05） | 1 / 307 | `combined-analysis` 259 / `new-metric` 13 / `reuse-existing-metric` 3 / `context-only` 27 / `not-applicable` 5 | 100%。分析・論点33件＋県庁所在市47件をauthored inventory（§4.4）で解決。内部cropは未実施（Kindle画面のスキャンで図表はページ画像で照合） |
 
 Kindle画面のスキャン（`kakei-marketing`）は縦書きのためprofileの`ocrLanguages`を`jpn_vert`・psm 5にし、
-読解時はKindleのUI枠を除いた領域だけをOCRする（枠を含めると縦書きの読み始めが欠ける）。ローカルにGoogle Driveを
-マウントしているPCでは、`--parts-dir`にマウント上の版フォルダを直接渡してよい（一時downloadは不要）。
+読解時はKindleのUI枠を除いた領域だけをOCRする（枠を含めると縦書きの読み始めが欠ける）。Drive の版 folder は
+ローカルマウント (`resolveVaultRoot()` が解決、`STATS47_SOURCE_VAULT_ROOT` で上書き) から直接 `restore` する。
 
-`kakei-marketing-2015` は **r2** で1ページ1枚のページ画像を同梱した（`pages/pNNNN.jpg`＝UI枠を除いた本文領域・220dpi・307枚、
-`transcripts/pNNNN.txt`＝同画像の縦書きOCR・307本、`page-dims.json`＝crop枠と解像度の記録、PDF 1件。計616ファイル・約75MB・1 part）。
-OCRや図クロップの品質確認、図表ページの目視照合はこの`pages/`を使い、PDFの再レンダーを繰り返さない。r1（PDFのみ）はDriveに不変のまま残す。
+`kakei-marketing-2015` は revision 2 で1ページ1枚のページ画像を同梱した（`pages/pNNNN.jpg`＝UI枠を除いた本文領域・220dpi・307枚、
+`transcripts/pNNNN.txt`＝同画像の縦書きOCR・307本、`page-dims.json`＝crop枠と解像度の記録、PDF 1件）。
+OCRや図クロップの品質確認、図表ページの目視照合はこの`pages/`を使い、PDFの再レンダーを繰り返さない。
 `transcripts/`は照合用で、数値の確定には使わない。
-**r3**（2026-09-05）は r2 に `md/pNNNN.md`（Markdown文字起こし307本・frontmatter page/kind/figures）と `figures/`（図表crop 113枚）・`crop-manifest.json` を加えた
-完全bundle（2 part・約133MB）で、`stage-status` は S0〜S4 すべて到達。文字起こしは Workflow で本文ページを sonnet、図表ページと crop 座標を opus に分業して作成した。
-書籍の本文・図表を読む作業は今後 r3 の `md/` と `figures/` を restore して行い、PDF や OCR を再処理しない。
+revision 3（2026-09-05）は `md/pNNNN.md`（Markdown文字起こし307本・frontmatter page/kind/figures）と `figures/`（図表crop113枚）・`crop-manifest.json` を加えた
+1,037 file・約133MB で、`stage-status` は S0〜S4 すべて到達。文字起こしは Workflow で本文ページを sonnet、図表ページと crop 座標を opus に分業して作成した。
+書籍の本文・図表を読む作業は今後 `md/` と `figures/` を restore して行い、PDF や OCR を再処理しない。
+
+**保存レイアウトは 2026-09-10 に tar bundle から展開配置へ移行した**（`.claude/rules/reference-source-standards.md` §2）。
+Drive の版 folder には PDF・`pages/`・`transcripts/`・`md/`・`figures/`・補助 file がそのまま置かれ、Git manifest (schemaVersion 2) の
+`files[]` と sha256 で照合する。旧 bundle (part / `r<N>` manifest) と直下に散らばっていた生 PDF 16 本は `参考文献/_移行前/` へ退避済みで、
+全 profile の `verify --vault` 通過を確認したら削除してよい。
 
 ローカル復元先は全資料とも
 `$TMPDIR/stats47-source-vault/work/<sourceKey>/<edition>/<sourceRootName>/`、派生物は
@@ -82,14 +100,14 @@ box、出力SHAを記録する。これらは一時派生物でGit SSOTにしな
 共通CLIは`.claude/scripts/source-vault/source-processing.mjs`である。
 
 ```bash
-# Driveからmanifest/partを一時取得後、hash検証して復元
-npm run source-vault -- verify --profile <profile> --manifest <manifest> --parts-dir <download-dir>
-npm run source-vault -- restore --profile <profile> --manifest <manifest> --parts-dir <download-dir>
+# Drive のローカルマウント上の版 folder を manifest と照合し、OS 一時領域へ複製
+npm run source-vault -- verify --profile <profile> --manifest <manifest> --vault
+npm run source-vault -- restore --profile <profile> --manifest <manifest>
 
 # 全PDFを検査し、処理workspaceを生成
 npm run source-vault:process -- prepare --profile <profile>
 
-# 明示したページだけを画像化し、text layerが乏しければ日本語OCRへfallback
+# 明示したページだけを画像化し、text layerが乏しければ日本語OCRへfallback (--mode image はページ画像のみ = S1)
 npm run source-vault:process -- extract --workspace <derived-dir> --document <pdf-id-or-path> --pages 1,3-5 --mode auto
 
 # crop-spec.jsonに指定したpixel boxだけを内部照合用に切り出す
@@ -98,8 +116,11 @@ npm run source-vault:process -- crop --workspace <derived-dir> --spec <derived-d
 # agentが書いた md/pNNNN.md (Markdown文字起こし) の全ページ有無・frontmatter・figure参照を検査
 npm run source-vault:process -- md-check --workspace <derived-dir> --check
 
-# derivedの pages / transcripts / md / figures / page-dims を次revisionのsource rootへ配置 (bundle化はsource-vault create)
+# derivedの pages / transcripts / md / figures / page-dims を次revisionのsource rootへ配置
 npm run source-vault:process -- stage --workspace <derived-dir> --revision <N+1>
+# manifest を作り直し、Drive の版 folder へ差分複製 + readback
+npm run source-vault -- create --profile <profile> --manifest <manifest> --force
+npm run source-vault -- upload --profile <profile> --manifest <manifest>
 
 # manifestのcomponentCountsから S0保全〜S4台帳 の到達段階を読む
 npm run source-vault:process -- stage-status --profile <profile>
@@ -108,7 +129,7 @@ npm run source-vault:process -- stage-status --profile <profile>
 npm run source-vault:inventory -- build --profile <profile>
 npm run source-vault:inventory -- coverage --profile <profile> --check
 
-# download / work / derivedをprofile単位で削除
+# work / derivedをprofile単位で削除
 npm run source-vault:process -- cleanup --profile <profile>
 ```
 
@@ -120,7 +141,7 @@ npm run source-vault:process -- cleanup --profile <profile>
 - 座標がページ画像外へ出るcrop、PDF SHA不一致、既存出力への暗黙上書き、repo内の入出力は拒否する。
 - ページ画像はprofileの`processing.pageImage` (dpi / format / quality / `contentCrop`) を適用して1ページ1枚で出し、render条件と
   本文領域の座標を`page-dims.json`へ記録する。Kindle画面のようにUI枠を含むスキャンは`contentCrop`を必須とする。
-- 処理段階 (S0保全 → S1ページ画像 → S2文字起こし → S3図クロップ → S4台帳 → S5展開) と bundle 内 directory
+- 処理段階 (S0保全 → S1ページ画像 → S2文字起こし → S3図クロップ → S4台帳 → S5展開) と版 folder 内 directory
   (`pages/` `transcripts/` `md/` `figures/`) の契約は `.claude/rules/reference-source-standards.md` §3、運用手順は
   skill `/process-reference-source` (owner `open-data-curator`) を正典とする。段階が進むたびに revision を上げる。
 
