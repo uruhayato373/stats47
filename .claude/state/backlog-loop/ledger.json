@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T19:24:44.941Z",
+  "updatedAt": "2026-09-10T19:14:11.536Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3791,6 +3791,19 @@
           "evidence": "npm run geo:check-data-catalog 実行=remote=NOT_CHECKED(この環境にR2認証なし、実測フィールドはlocal-r2のみ)。カード完了条件が指す legacySnsVerification.deletionApproval.status と deletionEvidence.pendingIds は .claude/state/metrics/geo-release-publication-2026-09-05.json に存在せず(grep 0件)、同ファイルのexternalMutationは依然NONE",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-09-10T19:14:09.100Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "route.class=needs-owner (delete可否等オーナー判断待ち)。CIループの対象外、行削除もしない。",
+          "failReason": "needs-owner",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -3925,6 +3938,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "impl-large は draft PR 経路が必要で CI run では着手しない (backlog-loop.md の規約通り)。",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        },
+        {
+          "at": "2026-09-10T19:14:11.536Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "route.class=impl-large (delegate=agent:backlog-solver-hard, apply=draft-pr)。CI run では着手対象外、行削除もしない。",
           "failReason": "class-needs-pr",
           "followUps": []
         }
