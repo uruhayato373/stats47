@@ -634,6 +634,24 @@ updated: 2026-09-08
   新規記事wave A の全記事が quality-gate + critic PASS、県別シリーズ47本が公開済みで、inventoryの`combined-analysis`各項目が
   記事・theme・areaのいずれかへ実在証跡で接続されている（管理画面`/content/references`で確認）。
 
+### [REFERENCE-SOURCE-KINDLE-BATCH-01] Drive直下にあったKindleスキャン7冊の書誌確定とS2以降
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:check] [起票:2026-09-10]
+
+- **owner**: `open-data-curator` (県庁所在地ガイドは `area-curator`、GIS本は `geo-analysis-curator`)。
+- **現状証拠**: 2026-09-10 に vault を展開配置へ移行した際、`参考文献/` 直下に未整理だった 7 冊
+  (`capital-city-guide` / `money-health-ranking` / `yabai-kenmin-ranking` / `amusement-shop-density` / `gis-business-guide` /
+  `prefecture-ranking-consumption` / `average-income-ranking`) を profile 化し S0 保全 + S1 ページ画像 (contentCrop 無し) まで完了。
+  奥付が Kindle レビュー画面で終わるため版・ISBN 未確認 (`edition: unknown` / `版不明`)。`やばい県民` は一意ページ 28/50 で本文 62% まで、
+  `平均年収` は 84% までの不完全スキャン。`source-inventory check-all` は 7 profile を `pending` として列挙している。doc 46 §1 に表あり。
+- **次**: ①国立国会図書館サーチ等で書誌を確定し profile `bibliography` と Drive folder 名 (`版不明` → 年版) を更新する。
+  ②Kindle UI 枠の `contentCrop` を profile ごとに決めて S1 を再生成する (kakei と同じ手順)。③不完全スキャン 2 冊は再スキャンするか
+  `rights-hold` のまま除外するか判断する。④S2 (OCR + Markdown) → S4 台帳。`source-inventory.mjs` の `loadExtractionPages` は
+  transcript 必須なので `--mode image` だけの workspace では build できない (S2 を先に通す)。
+- **停止条件**: 権利判断が終わるまで全項目 `rights-hold`。書籍値・図表・本文を公開物へ流さない。
+- **完了条件**: 7 profile が `check-all` で `valid: true` / coverage 100% になり、`stage-status` で S4 到達。
+- **付帯**: `参考文献/_移行前/` (旧 tar bundle 37 file + 生 PDF 16 本) は全 profile の `verify --vault` 通過を確認済み。削除はオーナー判断。
+
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run test --workspace=apps/admin -- reference-expansion-plans] [起票:2026-08-30]

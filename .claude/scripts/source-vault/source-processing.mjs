@@ -30,7 +30,7 @@ function usage() {
   return `Usage:
   node .claude/scripts/source-vault/source-processing.mjs readiness [--profile <name>] [--contract-only]
   node .claude/scripts/source-vault/source-processing.mjs prepare --profile <name> [--manifest <file>] [--source <dir>] [--output-dir <dir>]
-  node .claude/scripts/source-vault/source-processing.mjs extract --workspace <dir> --document <id-or-path> --pages <selector> [--mode auto|text|ocr] [--dpi <n>] [--rotate 0|90|180|270] [--psm <0-13>] [--force]
+  node .claude/scripts/source-vault/source-processing.mjs extract --workspace <dir> --document <id-or-path> --pages <selector> [--mode auto|text|ocr|image] [--dpi <n>] [--rotate 0|90|180|270] [--psm <0-13>] [--force]
   node .claude/scripts/source-vault/source-processing.mjs crop --workspace <dir> --spec <json> [--force]
   node .claude/scripts/source-vault/source-processing.mjs md-check --workspace <dir> [--md-dir <dir>] [--check]
   node .claude/scripts/source-vault/source-processing.mjs stage --workspace <dir> --revision <n> [--md-dir <dir>] [--force]
@@ -434,7 +434,7 @@ async function checkProfileContract(config, profileName, profile) {
   const frontmatter = parseFrontmatter(usageSpec);
   const errors = [];
   const expectedPath = expectedDrivePath(config, profile);
-  if (manifest.schemaVersion !== 1) errors.push('manifest schemaVersion');
+  if (manifest.schemaVersion !== 2) errors.push('manifest schemaVersion');
   if (manifest.profile != null && manifest.profile !== profileName)
     errors.push('manifest profile');
   if (manifest.sourceKey !== profile.sourceKey)
@@ -449,11 +449,10 @@ async function checkProfileContract(config, profileName, profile) {
     errors.push('manifest storage visibility');
   if (manifest.storage?.folderPath !== expectedPath)
     errors.push('manifest Drive path');
-  if (
-    !Array.isArray(manifest.bundle?.parts) ||
-    manifest.bundle.parts.length === 0
-  )
-    errors.push('bundle parts');
+  if (manifest.storage?.layout !== 'expanded')
+    errors.push('manifest storage layout');
+  if (typeof manifest.contentSha256 !== 'string')
+    errors.push('manifest contentSha256');
   if (
     !Array.isArray(manifest.files) ||
     !manifest.files.some((file) => /\.pdf$/i.test(file.path))
@@ -643,7 +642,7 @@ async function prepare(options) {
     edition: profile.edition,
     revision: profile.revision,
     sourceRoot,
-    sourceBundleSha256: manifest.bundle.sha256,
+    sourceBundleSha256: manifest.contentSha256,
     usageSpecPath: profile.processing.usageSpecPath,
     publicOriginalReuse: 'forbidden',
     ocrLanguages: profile.processing.ocrLanguages,
@@ -666,7 +665,7 @@ async function prepare(options) {
     sourceKey: profile.sourceKey,
     edition: profile.edition,
     revision: profile.revision,
-    sourceBundleSha256: manifest.bundle.sha256,
+    sourceBundleSha256: manifest.contentSha256,
     internalUseOnly: true,
     publicOriginalReuse: 'forbidden',
     crops: [],
@@ -779,7 +778,7 @@ async function extract(options) {
   const { workspaceDir, workspace } = await loadWorkspace(options.workspace);
   const document = findDocument(workspace, options.document);
   const mode = options.mode ?? 'auto';
-  if (!new Set(['auto', 'text', 'ocr']).has(mode))
+  if (!new Set(['auto', 'text', 'ocr', 'image']).has(mode))
     throw new Error(`Invalid extraction mode: ${mode}`);
   const pageImageContract = workspace.pageImage ?? null;
   const dpi = Number(options.dpi ?? pageImageContract?.dpi ?? 180);
@@ -822,7 +821,7 @@ async function extract(options) {
     );
   }
   await mkdir(pageDir, { recursive: true });
-  await mkdir(transcriptDir, { recursive: true });
+  if (mode !== 'image') await mkdir(transcriptDir, { recursive: true });
   const results = [];
   let fullPagePixels = null;
   for (const page of pages) {
@@ -871,6 +870,21 @@ async function extract(options) {
       await rm(renderedPng, { force: true });
     }
     let engine = mode;
+    if (mode === 'image') {
+      // S1 だけを進める: ページ画像のみ書き、transcripts/ を作らない (stage-status の S2 判定を汚さない)
+      results.push({
+        page,
+        engine: 'none',
+        dpi,
+        rotationDegrees,
+        pageImage: path
+          .relative(workspaceDir, pageImage)
+          .split(path.sep)
+          .join('/'),
+        pageImageSha256: await sha256File(pageImage),
+      });
+      continue;
+    }
     if (mode === 'text' || mode === 'auto') {
       await run('pdftotext', [
         '-f',
@@ -1265,7 +1279,7 @@ async function stage(options) {
     copies,
     figures,
     auxiliary,
-    next: `node .claude/scripts/source-vault/source-vault.mjs create --profile ${workspace.profile}`,
+    next: `node .claude/scripts/source-vault/source-vault.mjs create --profile ${workspace.profile} --manifest ${profile.manifestPath} --force && node .claude/scripts/source-vault/source-vault.mjs upload --profile ${workspace.profile} --manifest ${profile.manifestPath}`,
   };
 }
 

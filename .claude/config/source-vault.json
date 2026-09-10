@@ -194,6 +194,265 @@
           "contentCrop": "1970x2550+236+268"
         }
       }
+    },
+    "capital-city-guide": {
+      "sourceKey": "capital-city-guide",
+      "edition": "unknown",
+      "revision": 2,
+      "sourceRootName": "47都道府県県庁所在地ガイド",
+      "driveSourceFolderName": "47都道府県県庁所在地ガイド",
+      "driveEditionFolderName": "版不明",
+      "manifestPath": ".claude/state/source-inventory/capital-city-guide/unknown/source-bundle-manifest.json",
+      "note": "南部泰則『47都道府県 県庁所在地ガイド: 地理・文化・観光・産業を一冊でわかりやすく紹介』Kindle個人出版。Kindle画面スキャン150p (1600x1836px)。奥付未確認のため版不明",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "area-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "area",
+          "blog",
+          "note"
+        ],
+        "pageImage": {
+          "dpi": 108,
+          "format": "jpg",
+          "quality": 85
+        }
+      }
+    },
+    "money-health-ranking": {
+      "sourceKey": "money-health-ranking",
+      "edition": "unknown",
+      "revision": 2,
+      "sourceRootName": "おカネと健康 都道府県ランキング",
+      "driveSourceFolderName": "おカネと健康 都道府県ランキング",
+      "driveEditionFolderName": "版不明",
+      "manifestPath": ".claude/state/source-inventory/money-health-ranking/unknown/source-bundle-manifest.json",
+      "note": "荒木宏香・宮本勝浩・村上和巳・花谷美枝・種市房子・週刊エコノミスト編集部『おカネと健康 都道府県ランキング』週刊エコノミストebooks (毎日新聞出版)。Kindle画面スキャン60p (1600x1812px)。刊行年未確認",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "survey",
+          "theme",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ],
+        "pageImage": {
+          "dpi": 108,
+          "format": "jpg",
+          "quality": 85
+        }
+      }
+    },
+    "yabai-kenmin-ranking": {
+      "sourceKey": "yabai-kenmin-ranking",
+      "edition": "unknown",
+      "revision": 2,
+      "sourceRootName": "全国47都道府県やばい県民ランキング",
+      "driveSourceFolderName": "全国47都道府県やばい県民ランキング",
+      "driveEditionFolderName": "版不明",
+      "manifestPath": ".claude/state/source-inventory/yabai-kenmin-ranking/unknown/source-bundle-manifest.json",
+      "note": "『全国47都道府県 やばい県民ランキング』著者未確認。Kindle画面スキャン50p (1600x1812px) だが表紙が20ページ重複し本文は62%で途切れる不完全スキャン (2026-09-10 実測: 一意ページ28)。数値根拠には使わない",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "blog",
+          "note",
+          "x"
+        ],
+        "pageImage": {
+          "dpi": 108,
+          "format": "jpg",
+          "quality": 85
+        }
+      }
+    },
+    "amusement-shop-density": {
+      "sourceKey": "amusement-shop-density",
+      "edition": "unknown",
+      "revision": 2,
+      "sourceRootName": "全国都道府県遊技営業店密度ランキング",
+      "driveSourceFolderName": "全国都道府県遊技営業店密度ランキング",
+      "driveEditionFolderName": "版不明",
+      "manifestPath": ".claude/state/source-inventory/amusement-shop-density/unknown/source-bundle-manifest.json",
+      "note": "雨堤孝一『全国都道府県遊技営業店密度ランキング: 風俗営業許可件数 風営法ランキング』(風営法ランキングシリーズ②) Kindle個人出版。Kindle画面スキャン15p (1600x1812px)。刊行年未確認",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "survey",
+          "blog"
+        ],
+        "pageImage": {
+          "dpi": 108,
+          "format": "jpg",
+          "quality": 85
+        }
+      }
+    },
+    "gis-business-guide": {
+      "sourceKey": "gis-business-guide",
+      "edition": "unknown",
+      "revision": 2,
+      "sourceRootName": "最新GISのビジネス活用がよ〜くわかる本",
+      "driveSourceFolderName": "最新GISのビジネス活用がよ〜くわかる本",
+      "driveEditionFolderName": "版不明",
+      "manifestPath": ".claude/state/source-inventory/gis-business-guide/unknown/source-bundle-manifest.json",
+      "note": "ESRIジャパン株式会社『図解入門ビジネス 最新GIS[地理情報システム]のビジネス活用がよ〜くわかる本』秀和システム。Kindle画面スキャン230p (800x1030px)。刊行年未確認。Geo分析の手法参照のみで公開物の根拠にしない",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "geo-analysis-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "geo",
+          "internal-documentation"
+        ],
+        "pageImage": {
+          "dpi": 216,
+          "format": "jpg",
+          "quality": 85
+        }
+      }
+    },
+    "prefecture-ranking-consumption": {
+      "sourceKey": "prefecture-ranking-consumption",
+      "edition": "unknown",
+      "revision": 2,
+      "sourceRootName": "統計から読み解く47都道府県ランキング 消費・子供・スポーツ編",
+      "driveSourceFolderName": "統計から読み解く47都道府県ランキング 消費・子供・スポーツ編",
+      "driveEditionFolderName": "版不明",
+      "manifestPath": ".claude/state/source-inventory/prefecture-ranking-consumption/unknown/source-bundle-manifest.json",
+      "note": "久保哲朗『統計から読み解く 47都道府県ランキング 消費・子供・スポーツ編』日東書院。Kindle画面スキャン310p (1600x1836px)。刊行年未確認",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "survey",
+          "theme",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ],
+        "pageImage": {
+          "dpi": 108,
+          "format": "jpg",
+          "quality": 85
+        }
+      }
+    },
+    "average-income-ranking": {
+      "sourceKey": "average-income-ranking",
+      "edition": "unknown",
+      "revision": 2,
+      "sourceRootName": "都道府県別平均年収ランキング",
+      "driveSourceFolderName": "都道府県別平均年収ランキング",
+      "driveEditionFolderName": "版不明",
+      "manifestPath": ".claude/state/source-inventory/average-income-ranking/unknown/source-bundle-manifest.json",
+      "note": "『都道府県別平均年収ランキング: 47都道府県の収入と生活コストから見える“実質手取り”と楽学の旅』著者未確認、Kindle個人出版。Kindle画面スキャン110p (1600x1836px) だが本文は84%で途切れる不完全スキャン (2026-09-10 実測)",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "blog",
+          "note"
+        ],
+        "pageImage": {
+          "dpi": 108,
+          "format": "jpg",
+          "quality": 85
+        }
+      }
     }
   }
 }

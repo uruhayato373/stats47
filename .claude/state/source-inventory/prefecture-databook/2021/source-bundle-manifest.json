@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "profile": "prefecture-databook-2021",
   "sourceKey": "prefecture-databook",
   "edition": "2021",
@@ -8,28 +8,10 @@
   "storage": {
     "provider": "google-drive",
     "visibility": "private",
+    "layout": "expanded",
     "folderPath": "参考文献/2021都道府県DataBook/2021年版"
   },
-  "bundle": {
-    "fileName": "stats47-prefecture-databook-2021-r1.tar.gz",
-    "format": "tar.gz",
-    "bytes": 101902557,
-    "sha256": "3bf339b3fdcbdcecb83ef6db9d7ee1892b67d459e5193dafb8452b9708053d59",
-    "parts": [
-      {
-        "index": 1,
-        "fileName": "stats47-prefecture-databook-2021-r1.tar.gz.part-001",
-        "bytes": 94371840,
-        "sha256": "6f24140add8fa5400f69cb6d8fde50db41635d02634acca08ff426583177174d"
-      },
-      {
-        "index": 2,
-        "fileName": "stats47-prefecture-databook-2021-r1.tar.gz.part-002",
-        "bytes": 7530717,
-        "sha256": "b9bce29f3285331f666bdbea6fe6de9a49d12eb587a6ad7bb11dcedf02f6ef09"
-      }
-    ]
-  },
+  "contentSha256": "9866109301badbad0ba944d68b483c427008ea80ab8bc63d32c4de70121236a1",
   "fileCount": 15,
   "componentCounts": {
     "markdown": 0,
@@ -40,7 +22,7 @@
     "pdfs": 8,
     "auxiliary": 7
   },
-  "createdAt": "2026-08-29T00:41:52.082Z",
+  "createdAt": "2026-09-09T21:46:51.085Z",
   "files": [
     {
       "path": "--48.png",

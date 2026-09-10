@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "profile": "kakei-marketing-2015",
   "sourceKey": "kakei-marketing",
   "edition": "2015",
@@ -8,28 +8,10 @@
   "storage": {
     "provider": "google-drive",
     "visibility": "private",
+    "layout": "expanded",
     "folderPath": "参考文献/マーケティングに使える家計調査/2015年版"
   },
-  "bundle": {
-    "fileName": "stats47-kakei-marketing-2015-r3.tar.gz",
-    "format": "tar.gz",
-    "bytes": 133042428,
-    "sha256": "5d5dbb33a780e7aae220109b8b93eccf7424670b4f24e33fa3ec4474cec38f26",
-    "parts": [
-      {
-        "index": 1,
-        "fileName": "stats47-kakei-marketing-2015-r3.tar.gz.part-001",
-        "bytes": 94371840,
-        "sha256": "fb339e7eb24464c7fd487273163dcee95e7ee565aec7870ab223b5634e28dce6"
-      },
-      {
-        "index": 2,
-        "fileName": "stats47-kakei-marketing-2015-r3.tar.gz.part-002",
-        "bytes": 38670588,
-        "sha256": "bd27bda17cb2cd65b5d8e3fd8c99c3cbe1401142a0ceaa0162ce6509626cf2ce"
-      }
-    ]
-  },
+  "contentSha256": "af3b6ebd8c67a6c8aa1f889a57c0790b92fd982d81a863b7d5f4061b86883fdd",
   "fileCount": 1037,
   "componentCounts": {
     "markdown": 307,
@@ -40,7 +22,7 @@
     "pdfs": 1,
     "auxiliary": 2
   },
-  "createdAt": "2026-09-05T02:04:44.456Z",
+  "createdAt": "2026-09-09T21:46:51.618Z",
   "files": [
     {
       "path": "crop-manifest.json",

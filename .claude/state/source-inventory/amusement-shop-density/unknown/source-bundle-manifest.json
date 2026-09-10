@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 2,
+  "profile": "amusement-shop-density",
+  "sourceKey": "amusement-shop-density",
+  "edition": "unknown",
+  "revision": 2,
+  "sourceRootName": "全国都道府県遊技営業店密度ランキング",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/全国都道府県遊技営業店密度ランキング/版不明"
+  },
+  "contentSha256": "9caca84143025feeddaee2e02a92a2628de092ec13278d01d1659f1b013eee9b",
+  "fileCount": 17,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 15,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 1
+  },
+  "createdAt": "2026-09-09T22:34:48.022Z",
+  "files": [
+    {
+      "path": "page-dims.json",
+      "bytes": 591,
+      "sha256": "8efe6939e75c57cfc87c6972671a5dbe116aa5d88766402f8019deea703f7baf"
+    },
+    {
+      "path": "pages/p0001.jpg",
+      "bytes": 150400,
+      "sha256": "11ddc3674691b74a84864d1041595333f27725487cc4debbbd8c6df00bf59bc8"
+    },
+    {
+      "path": "pages/p0002.jpg",
+      "bytes": 379987,
+      "sha256": "047b6b377a80ffe20c9580373c738e34530df08875d519c956be0880216c1ca1"
+    },
+    {
+      "path": "pages/p0003.jpg",
+      "bytes": 379757,
+      "sha256": "ea71cc2356be92f603a4a37856bc35cd93b3245b738ab252d869d2e6e27ef549"
+    },
+    {
+      "path": "pages/p0004.jpg",
+      "bytes": 364162,
+      "sha256": "04f49b0e948e40bd5400251d8fdc7fbd10e6e9e18da45dd3e5951af50012bd0f"
+    },
+    {
+      "path": "pages/p0005.jpg",
+      "bytes": 347702,
+      "sha256": "399dba74769c0c0b2734568810aa3666585b19aa4c6b8c2679c474d3e1cd99ed"
+    },
+    {
+      "path": "pages/p0006.jpg",
+      "bytes": 584154,
+      "sha256": "9619aa4c85d9775100cc5f1a01642ada6b1740f42ecf7ca0370ce8d0684e4bb6"
+    },
+    {
+      "path": "pages/p0007.jpg",
+      "bytes": 283086,
+      "sha256": "622b05f5642119247a0c84a0a857da82c4169ab0f14649872cb184fc81401fa4"
+    },
+    {
+      "path": "pages/p0008.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "pages/p0009.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "pages/p0010.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "pages/p0011.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "pages/p0012.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "pages/p0013.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "pages/p0014.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "pages/p0015.jpg",
+      "bytes": 260492,
+      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+    },
+    {
+      "path": "全国都道府県遊技営業店密度ランキング.pdf",
+      "bytes": 3703480,
+      "sha256": "06f63637ff8587ccaf1032aef0f676de98a43c950e90c4cbc49139d1f00a8e4c"
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 2,
+  "profile": "yabai-kenmin-ranking",
+  "sourceKey": "yabai-kenmin-ranking",
+  "edition": "unknown",
+  "revision": 2,
+  "sourceRootName": "全国47都道府県やばい県民ランキング",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/全国47都道府県やばい県民ランキング/版不明"
+  },
+  "contentSha256": "3020ed127ab65a963c1bf2c12359e1e81be59d8fcc77e2333525122cacfd77e4",
+  "fileCount": 52,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 50,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 1
+  },
+  "createdAt": "2026-09-09T22:34:48.461Z",
+  "files": [
+    {
+      "path": "page-dims.json",
+      "bytes": 585,
+      "sha256": "a2007ce85d8d0064794d4a99543f95fd5f1ba4b521887e90689b8cc495ae73be"
+    },
+    {
+      "path": "pages/p0001.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0002.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0003.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0004.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0005.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0006.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0007.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0008.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0009.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0010.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0011.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0012.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0013.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0014.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0015.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0016.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0017.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0018.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0019.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0020.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0021.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0022.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0023.jpg",
+      "bytes": 311662,
+      "sha256": "98779886fed70aed7a922aa31006db4a4a20b5abdd70f31a8859b8ebea2dbe29"
+    },
+    {
+      "path": "pages/p0024.jpg",
+      "bytes": 243775,
+      "sha256": "02fe291048d0b0a846c7c539b65cc39d0b1afdd5e4137a8ad22099d1a0757938"
+    },
+    {
+      "path": "pages/p0025.jpg",
+      "bytes": 241988,
+      "sha256": "8fd449c0a5478d4869ddb7af2bbcbbe2631150a3a8c0b2cd4dcf196c4083f9ea"
+    },
+    {
+      "path": "pages/p0026.jpg",
+      "bytes": 204238,
+      "sha256": "ea0be9d1e3e6614e5f6153fd84b9d9fed38bbae3b17b1b379c41c5e2f4bd9330"
+    },
+    {
+      "path": "pages/p0027.jpg",
+      "bytes": 292914,
+      "sha256": "6f136e77066b79957a2e800cef751e738125e6d551d36e20b5d1914a49639aa3"
+    },
+    {
+      "path": "pages/p0028.jpg",
+      "bytes": 195728,
+      "sha256": "e4864dd6f10e8913f279a7bb374a119a003ed8b8d3ee39265fdd0a5cb1799949"
+    },
+    {
+      "path": "pages/p0029.jpg",
+      "bytes": 203955,
+      "sha256": "61a63370622b386c278ccb02afe989af4ee71c5cf02a591288d991c3c170a5ae"
+    },
+    {
+      "path": "pages/p0030.jpg",
+      "bytes": 324256,
+      "sha256": "a9241f91b1946dfeae7d1e5645c6f73aff28c5cd3d4543783cce0ab2f867a031"
+    },
+    {
+      "path": "pages/p0031.jpg",
+      "bytes": 212903,
+      "sha256": "9c52e47345e8da994f04fe3c0872814d91b4e92015ed0ae998e1d2313f505d98"
+    },
+    {
+      "path": "pages/p0032.jpg",
+      "bytes": 388921,
+      "sha256": "b2c01b71901891f03ad876f5e1f802e1b55ba7e676945716a1e3e26dab0cf5b8"
+    },
+    {
+      "path": "pages/p0033.jpg",
+      "bytes": 315739,
+      "sha256": "8a36e7a9ebf578679e194d4093c7293fcc5720b4c9b6d9daea0ba7b7fd3f46ce"
+    },
+    {
+      "path": "pages/p0034.jpg",
+      "bytes": 253830,
+      "sha256": "9238c3b05c29920978e33ebd8bb57ebe232d9800bdfaf55951874ea6871279b1"
+    },
+    {
+      "path": "pages/p0035.jpg",
+      "bytes": 412389,
+      "sha256": "260f37dc0a63eaca435608ce503ea0387080835bffc2703fbb6168c2b3f8a6f0"
+    },
+    {
+      "path": "pages/p0036.jpg",
+      "bytes": 284096,
+      "sha256": "98cb3c6a338451d2fb1e47519377e6c3b09425a0bdaf5dd364a80cf2243efa00"
+    },
+    {
+      "path": "pages/p0037.jpg",
+      "bytes": 287500,
+      "sha256": "3e964534d289ac0324f1a71944233a0c2055c185d9221344ad9614c4b2835489"
+    },
+    {
+      "path": "pages/p0038.jpg",
+      "bytes": 425049,
+      "sha256": "36fe55c17d11032c71602de71c751f4c73446f4e4862885217578a960d5ddfdf"
+    },
+    {
+      "path": "pages/p0039.jpg",
+      "bytes": 276685,
+      "sha256": "823c200bb4b046cd39b60e1aac6f8a57daed92b12c63e7196de5ef68c5de50db"
+    },
+    {
+      "path": "pages/p0040.jpg",
+      "bytes": 257560,
+      "sha256": "827b5188bac109089b9584d5338df10708921662913eec40cd275d826939b75d"
+    },
+    {
+      "path": "pages/p0041.jpg",
+      "bytes": 366663,
+      "sha256": "e005f0f95bfed50edf461e7ee0c4c953b21fc5f07b4a3990650e99a8cf45353c"
+    },
+    {
+      "path": "pages/p0042.jpg",
+      "bytes": 321087,
+      "sha256": "d670c5d28692c2fbf67a9fe15dc251ab1e1aedcffe60f7d87f4f0cfe6cce6151"
+    },
+    {
+      "path": "pages/p0043.jpg",
+      "bytes": 253856,
+      "sha256": "d41d6d188fb2d91c4075bd5e9a7ca1d219228cf3e1b3c21264fb98386bd7a2bb"
+    },
+    {
+      "path": "pages/p0044.jpg",
+      "bytes": 358195,
+      "sha256": "2fccc5f768c63476aaa0f722e7a64c1c2723e92c6eee0de1083203721b029007"
+    },
+    {
+      "path": "pages/p0045.jpg",
+      "bytes": 268407,
+      "sha256": "494df8f1280f1fc28bede92c8c3b4f1e4a59cc97a4d83e7f6ac8db79c87be503"
+    },
+    {
+      "path": "pages/p0046.jpg",
+      "bytes": 235927,
+      "sha256": "db58c6da423ebe436f78a35b2ba2300b7fa8fec434dbcfa253c01071f76cdd99"
+    },
+    {
+      "path": "pages/p0047.jpg",
+      "bytes": 393238,
+      "sha256": "1dfd73e1ecfdf45e9a8eab08f556205d949249b36f6fa50fb06da457d01b215b"
+    },
+    {
+      "path": "pages/p0048.jpg",
+      "bytes": 297818,
+      "sha256": "28368431a009d2058acb505cba884f80eb953320d053409eb6d9830bd1676272"
+    },
+    {
+      "path": "pages/p0049.jpg",
+      "bytes": 257159,
+      "sha256": "2b607331be80b1c8b3b6f0f8205571c9fb9c72949500ac790292265a71106038"
+    },
+    {
+      "path": "pages/p0050.jpg",
+      "bytes": 341037,
+      "sha256": "85733a8bf543023c3bbbe6e202d966753ab441a758e36417440c68cbc1b89c66"
+    },
+    {
+      "path": "全国47都道府県やばい県民ランキング.pdf",
+      "bytes": 12272260,
+      "sha256": "2fe14ccf36bc0c050d011de20fc750f10cbff98eea77266e9afb36a994b04558"
+    }
+  ]
+}
