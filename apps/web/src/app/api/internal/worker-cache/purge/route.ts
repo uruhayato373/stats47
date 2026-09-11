@@ -16,11 +16,13 @@ interface PurgeRequestBody {
 }
 
 interface WorkerCachePurgeContext {
-  cache?: {
-    purge(options: { tags: string[] } | { purgeEverything: true }): Promise<{
-      success: boolean;
-      errors: Array<{ code: number; message: string }>;
-    }>;
+  exports?: {
+    CachedApp?: {
+      purgeCache(options: { tags: string[] } | { purgeEverything: true }): Promise<{
+        success: boolean;
+        errors: Array<{ code: number; message: string }>;
+      }>;
+    };
   };
 }
 
@@ -124,11 +126,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     const { ctx } = await getCloudflareContext<Record<string, unknown>, WorkerCachePurgeContext>({
       async: true,
     });
-    if (!ctx.cache) {
+    const cachedApp = ctx.exports?.CachedApp;
+    if (!cachedApp) {
       return jsonResponse({ error: "Workers Cache runtime is unavailable" }, 503);
     }
 
-    const result = await ctx.cache.purge(purgeAll ? { purgeEverything: true } : { tags });
+    const result = await cachedApp.purgeCache(purgeAll ? { purgeEverything: true } : { tags });
     if (!result.success) {
       return jsonResponse({ error: "Worker cache purge failed", details: result.errors }, 502);
     }

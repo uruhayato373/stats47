@@ -23,6 +23,13 @@ export class CachedApp extends WorkerEntrypoint<CloudflareEnv> {
   override fetch(request: Request): Promise<Response> {
     return openNextWorker.fetch(request, this.env, this.ctx);
   }
+
+  // Purges are scoped to the calling entrypoint. The authenticated API invokes
+  // this RPC so it invalidates CachedApp's HTML, not the uncached gateway.
+  purgeCache(options: { tags: string[] } | { purgeEverything: true }) {
+    if (!this.ctx.cache) throw new Error("Workers Cache runtime is unavailable");
+    return this.ctx.cache.purge(options);
+  }
 }
 
 /**

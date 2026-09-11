@@ -42,3 +42,5 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 
 - **共有画像は別の公開対象**: テーマのexact data manifestだけを公開すると、新規rankingのOGP/card生成hookは走らない。`sync-snapshots.yml`を通らない公開では、対象キーの画像生成→exact image publisher→SHA/寸法readbackを別レイヤーで行い、データmanifestの証拠を上書きしない。PR950の本番コード配信は成功したが、後続smokeは画像404で失敗した。run全体とdeploy stepの成否を分けて記録する。
 - **画像の配色も公開itemを使う**: generatorがraw metric configを読むと、極性で決まる赤を既定青で描画した。`resolveRankingImageVisualization`で公開itemの配色を検証し、描画とfingerprintの双方へ同じ値を渡す。配色未指定の実在configからcanonical赤を保つ回帰試験を追加した。
+
+- **Workers Cacheの削除先**: `CachedApp`がHTMLを保存し、default gatewayで`ctx.cache.purge`を呼ぶと、API成功でも保存側のキャッシュは残る。2026-09-11に2rankingのエラー画面が全purge後もHIT/旧Ageのまま、query付きは正常、当該buildのISRエントリは404と実測した。認証済みAPIから`CachedApp.purgeCache` RPCへ渡し、所有entrypointで削除する。別入口へのpurgeを呼ばない陰性対照と、同じbuild内のキャッシュ更新を検証する。初回503の原因とは区別する。根拠: [Cloudflare purge scope](https://developers.cloudflare.com/workers/cache/purge/)（2026-09-11確認）。

@@ -58,6 +58,15 @@ describe("Cloudflare Workers Cache configuration", () => {
 });
 
 describe("Workers Cache invalidation wiring", () => {
+  it("purgeはHTMLを保存したCachedApp内のRPCで実行する", () => {
+    const gateway = readProjectFile("apps/web/src/worker-cache-gateway.ts");
+    const route = readProjectFile("apps/web/src/app/api/internal/worker-cache/purge/route.ts");
+    expect(gateway).toMatch(/class CachedApp[\s\S]*?purgeCache\([\s\S]*?this\.ctx\.cache\.purge\(options\)/);
+    expect(route).toContain("ctx.exports?.CachedApp");
+    expect(route).toContain("cachedApp.purgeCache(");
+    expect(route).not.toContain("ctx.cache.purge(");
+  });
+
   const publisherWorkflows = [
     ".github/workflows/blog-auto-publish.yml",
     ".github/workflows/commute-flow-ingest.yml",

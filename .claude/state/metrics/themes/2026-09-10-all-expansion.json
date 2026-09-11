@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-09-11T14:29:09.550938+00:00",
-  "status": "production-deployed-image-repair-verification-in-progress",
+  "recordedAt": "2026-09-11T14:37:14.066652+00:00",
+  "status": "production-deployed-cache-invalidation-fix-pending",
   "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
   "themeCount": 55,
   "adoptedCandidates": 120,
@@ -1491,7 +1491,7 @@
   },
   "limitation": "Wiring is structural evidence only. Candidate scope, source definitions, data, rendered values and publication require separate verification. No test pass is inferred by this recorder.",
   "release": {
-    "status": "production-deployed-final-verification-in-progress",
+    "status": "production-deployed-cache-invalidation-fix-pending",
     "metricCount": 253,
     "fileCount": 2155,
     "componentThemes": 55,
@@ -6954,19 +6954,37 @@
           "newSurveyIdsSincePriorMain": 20,
           "shards": 11
         },
-        "sourceBrowserStatus": "cached error boundary remains in delivery-clinic-count and buried-cultural-property-specialist-count; repeat after final purge",
+        "sourceBrowserStatus": "39/43 PASS after purge; delivery-clinic-count and buried-cultural-property-specialist-count error boundary at both widths",
         "runtimeLogs": "Local Cloudflare API token unavailable; worker tail not collected",
-        "temporaryEvidenceLoss": "Prior /tmp production evidence unavailable after continuation; rebuilt from durable frozen catalog and reran current production. Historical summary is not substituted for new proof."
+        "temporaryEvidenceLoss": "Prior /tmp production evidence unavailable after continuation; rebuilt from durable frozen catalog and reran current production. Historical summary is not substituted for new proof.",
+        "cacheInvalidationRepair": {
+          "status": "PASS-local-74-tests-and-web-types-awaiting-pr-deploy",
+          "cause": "The authenticated purge route executes in the uncached default entrypoint, so ctx.cache.purge succeeds for that entrypoint but does not invalidate CachedApp HTML.",
+          "officialSource": "https://developers.cloudflare.com/workers/cache/purge/",
+          "observedAt": "2026-09-11",
+          "proof": [
+            "source-link-diagnostic.json",
+            "survey-browser-final.json",
+            "isr-before-index.json",
+            "purge-detail.log",
+            "cache-owner-red.log"
+          ],
+          "evidenceDirectory": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g",
+          "first503Cause": "unconfirmed; this repair addresses persisted cached error pages, not an asserted cause of the initial upstream error",
+          "change": "Authenticated route invokes CachedApp.purgeCache RPC; purge executes in the owning entrypoint.",
+          "next": "Tests/types, PR+CI, deploy and verify same-build cache invalidation plus all55 themes/source links."
+        }
       },
       "imagePublication": {
-        "status": "uploaded-awaiting-public-readback",
+        "status": "published-canonical-public-verified",
         "index": ".local/verification/themes/2026-09-11-ranking-images/published-image-index.json",
         "sha256": "4d4cb447629cb835a52a0055a3905247a5a85a279e3c87b8ef6d7e652f7625d8",
         "objects": 1265,
         "images": 759,
         "manifests": 506,
         "bytes": 26638882,
-        "scope": "253 rankings; image layer separate from frozen data publication manifests"
+        "scope": "253 rankings; image layer separate from frozen data publication manifests",
+        "evidence": ".local/verification/themes/2026-09-11-ranking-images/result.json"
       }
     },
     "release252Historical": {
