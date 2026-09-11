@@ -11,6 +11,7 @@ import {
   parseExactAssetArgs,
   publishExactR2Assets,
   resolveExactAssetCandidates,
+  validateR2Key,
 } from '../push-exact-r2-assets-core';
 
 interface FakeObject {
@@ -95,6 +96,16 @@ afterEach(() => {
 });
 
 describe('exact R2 asset publisher', () => {
+  it('長い不正なスラッシュ列を低CPUコストで拒否し、末尾区切りだけを除く', () => {
+    expect(validateR2Key('app/chart.json///')).toBe('app/chart.json');
+    const malformed = 'app/' + '/'.repeat(100000) + 'x';
+    const started = process.cpuUsage();
+    expect(() => validateR2Key(malformed)).toThrow();
+    const used = process.cpuUsage(started);
+    // 起動・ホストの休止時間を含めず、以前の二次時間正規表現を検出する。
+    expect(used.user + used.system).toBeLessThan(500000);
+  });
+
   it('gzip済みの旧観測値も展開して検査し、混在バッチをPUT前に拒否する', async () => {
     const root = makeRoot();
     const allowedKey = 'app/blog/article-a/chart.svg';

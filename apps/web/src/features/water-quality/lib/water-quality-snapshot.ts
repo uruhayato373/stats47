@@ -49,7 +49,7 @@ const point = z
       r.relatedAreaCodes[0] !== r.listingAreaCode ||
       new Set(r.relatedAreaCodes).size !== r.relatedAreaCodes.length ||
       (thresholds[r.kind]?.[r.class] !== r.limit && !exception) ||
-      Number(r.value75.replace('<', '')) <= r.limit !== r.compliant
+      Number(r.value75.startsWith('<') ? r.value75.slice(1) : r.value75) <= r.limit !== r.compliant
     ) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

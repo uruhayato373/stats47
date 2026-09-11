@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-09-10T21:35:46.584730+00:00",
-  "status": "authorized-release-local-verified-r2-publishing",
+  "recordedAt": "2026-09-10T23:27:34.627601+00:00",
+  "status": "authorized-release-r2-verified-ci-remediation",
   "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
   "themeCount": 55,
   "adoptedCandidates": 120,
@@ -1491,7 +1491,7 @@
   },
   "limitation": "Wiring is structural evidence only. Candidate scope, source definitions, data, rendered values and publication require separate verification. No test pass is inferred by this recorder.",
   "release": {
-    "status": "publishing",
+    "status": "r2-published-public-readback-verified-code-release-pending",
     "metricCount": 253,
     "fileCount": 2155,
     "componentThemes": 55,
@@ -1499,7 +1499,7 @@
     "sha256": "b3693bf6fef41cbed43e36b44dfab0057aabc1ce074ef39d62a1263b6cf94a8d",
     "exactStage": ".local/verification/themes/2026-09-11-exact-stage-253-surveys",
     "previewBaseUrl": "http://127.0.0.1:4786",
-    "uploaded": false
+    "uploaded": true
   },
   "validation": {
     "sourceBatches": {
@@ -6514,11 +6514,11 @@
       },
       "publication": {
         "offlineVerify": "PASS",
-        "uploaded": false,
+        "uploaded": true,
         "remoteDryRun": "PASS",
         "candidateFiles": 2155,
         "changedFiles": 2155,
-        "uploadedFiles": 0,
+        "uploadedFiles": 2155,
         "dependencyReferences": 2925,
         "backwardsReferences": 0,
         "sourcePermissionPins": 76,
@@ -6527,9 +6527,22 @@
           "scope": "Publish the reviewed 2155 files and 55 themes, deploy through develop/main, verify production, and start measurement",
           "acceptedAt": "2026-09-10T22:28:53.283372+00:00"
         },
-        "status": "publishing",
+        "status": "PASS",
         "progressEvidence": ".local/verification/themes/2026-09-11-publication/progress.json",
-        "startedAt": "2026-09-10T22:29:57.937Z"
+        "startedAt": "2026-09-10T22:29:57.937Z",
+        "finishedAt": "2026-09-10T23:04:25.953Z",
+        "resultEvidence": ".local/verification/themes/2026-09-11-publication/result.json",
+        "publicReadback": {
+          "status": "PASS",
+          "files": 2155,
+          "bytes": 3734266126,
+          "manifestSha256": "b3693bf6fef41cbed43e36b44dfab0057aabc1ce074ef39d62a1263b6cf94a8d",
+          "evidence": ".local/verification/themes/2026-09-11-publication/public-readback.json"
+        },
+        "preReleaseCachePurge": {
+          "status": "PASS",
+          "workflowRun": 34540501990
+        }
       },
       "build": {
         "status": "PASS",
@@ -6703,6 +6716,86 @@
           "regression": "PASS: 502 then staged response 200 in same process",
           "applicationRebuildRequired": false
         }
+      },
+      "ciRemediation": {
+        "pullRequest": "https://github.com/uruhayato373/stats47/pull/950",
+        "initialRun": 34540727631,
+        "status": "local-pass-awaiting-remote-ci",
+        "findings": [
+          "Package tests retained pre-expansion chart/count assertions; preserve source links, zero raw e-Stat/color checks and mutation controls while updating measured baseline.",
+          "Full E2E detected an inaccessible menu footer after expansion to 55 themes; constrain dropdown height and verify navigation at 1280x600.",
+          "CodeQL reported public URL construction, first-only numeric prefix replacement and quadratic trailing slash regex; fix and require fresh CodeQL.",
+          "Weekly audit workflow ShellCheck SC2129: group output writes."
+        ],
+        "productionCodeDeployed": false,
+        "packageTests": {
+          "status": "PASS",
+          "files": 293,
+          "tests": 2597,
+          "command": "npm run test:packages -- --maxWorkers=4",
+          "evidence": "/tmp/stats47-theme-pr950-package-verified.log"
+        },
+        "securityRegression": {
+          "status": "PASS",
+          "checks": [
+            "malformed censored numeric values rejected",
+            "encoded R2 key retains fixed origin and literal object path; redirects disabled",
+            "long slash input rejected using synchronous CPU-cost regression; process startup and host waiting excluded"
+          ],
+          "cpuRegression": {
+            "inputSlashes": 100000,
+            "thresholdMicroseconds": 500000,
+            "oldCpuMicroseconds": 3960400,
+            "fixedCpuMicroseconds": 1207,
+            "testsPassed": 12,
+            "evidence": ".local/verification/themes/2026-09-11-ci-remediation/cpu-comparison.json"
+          }
+        },
+        "build": {
+          "status": "PASS",
+          "buildId": "5yFoJJZ_SK7hcIDmsVLI9",
+          "staticPages": 1637,
+          "evidence": ".local/verification/themes/2026-09-11-build-ci-fixes-pinned.log",
+          "previewEnv": "Empty S3 credential variables; server and client public URLs both point to the verified local gateway."
+        },
+        "typeCheck": {
+          "status": "PASS",
+          "packages": 25,
+          "scriptProjects": 8,
+          "evidence": "/tmp/stats47-theme-pr950-final-types.log"
+        },
+        "previewRegression": {
+          "status": "PASS",
+          "knownCategoryKey": "categories/all.json",
+          "before": "local gateway 404 while public storage and production category both returned 200",
+          "after": "gateway and category page return 200; staged hash validation, denied keys, and upstream body failure covered",
+          "evidence": "/tmp/stats47-theme-pr950-preview-green.log"
+        },
+        "failedBuildEvidence": [
+          ".local/verification/themes/2026-09-11-build-ci-fixes-serial.log",
+          ".local/verification/themes/2026-09-11-build-ci-fixes-final.log"
+        ],
+        "checkedAt": "2026-09-10T23:49:45.942118+00:00",
+        "e2e": {
+          "status": "PASS",
+          "cases": 20,
+          "skipped": 0,
+          "buildId": "5yFoJJZ_SK7hcIDmsVLI9",
+          "evidence": ".local/verification/themes/2026-09-11-ci-remediation/e2e-result.json"
+        },
+        "preflight": {
+          "status": "PASS",
+          "gates": 14,
+          "evidence": ".local/verification/themes/2026-09-11-ci-remediation/preflight-verified.log"
+        },
+        "sitemap": {
+          "surveysBefore": 126,
+          "surveysAfter": 147,
+          "added": 21,
+          "generator": "apps/web/scripts/generate-sitemap-blog-entries.ts",
+          "localBuildNote": "Generated survey ID list refreshed after the local build; exact release build remains gated by PR CI and production sitemap checks."
+        },
+        "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation"
       }
     },
     "release252Historical": {
@@ -6723,7 +6816,7 @@
     "Culture uses three special-designation types; bridge ages cover FY2025 inspected bridges; depopulated settlement detail covers ten blocks rather than all prefecture microdata.",
     "Landslide exposure covers 46 licensed prefectures; Kyoto is excluded, not zero. Tsunami exposure covers 29 verified historical prefecture scenarios; 18 prefectures are unavailable or excluded for distinct recorded reasons. Tokyo is island-scenario-only and unmodelled areas are not safe/zero.",
     "Earthquake population exposure is implemented. A nationwide housing-only spatial input was not acquired through the reviewed official routes.",
-    "Public R2, production deployment and experiment start have not occurred."
+    "Public R2 publication and all 2,155 object readbacks passed; production code deployment and experiment start remain pending."
   ],
   "countsScope": "Initial structural wiring only. dataValidationPending=101 means this structural recorder did not assess data; current source, display and publication states are under validation and release.",
   "candidateStatusScope": "Structural snapshot only; current semantic/source assessment is validation.next253Tsunami29.scopeAudit. These structural rows do not override source/display verification.",

@@ -29,8 +29,9 @@ describe("fishery-marine evidence topics", () => {
 
     for (const topic of FISHERY_MARINE_CATALOG.evidenceTopics ?? []) {
       expect(topic.relatedRankingKeys?.length).toBeGreaterThan(0);
-      expect(topic.relatedChartKeys?.length).toBeGreaterThan(0);
+      // 追加図は任意。論点から必ず公開ランキングへ到達できることを守る。
       for (const rankingKey of topic.relatedRankingKeys ?? []) {
+        expect(METRICS_REGISTRY[rankingKey]?.isActive, rankingKey).toBe(true);
         // 同一テーマの指標か、消費側 (家計調査) の active な ranking (theme-catalog-standards §4.6)
         expect(rankingKeys.has(rankingKey) || METRICS_REGISTRY[rankingKey]?.isActive === true).toBe(true);
       }

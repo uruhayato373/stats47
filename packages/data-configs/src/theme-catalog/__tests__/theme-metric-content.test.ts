@@ -8,15 +8,15 @@ import {
 } from "../theme-metric-content";
 
 describe("theme metric content coverage", () => {
-  it("テーマ参照指標だけの定義充足率を決定的に収集する", () => {
+  it("追加図の関連リンク先指標だけの定義充足率を決定的に収集する", () => {
     const coverage = collectThemeMetricContentCoverage(
       Object.values(THEME_CATALOGS),
       METRICS_REGISTRY,
     );
 
-    expect(coverage.themeReferencedKeys).toHaveLength(99);
+    expect(coverage.themeReferencedKeys).toHaveLength(115);
     expect(coverage.missingDescriptionKeys).toHaveLength(0);
-    expect(coverage.populatedNoteKeys).toHaveLength(51);
+    expect(coverage.populatedNoteKeys).toHaveLength(67);
     expect(coverage.duplicateDescriptionGroups).toEqual([]);
   });
 

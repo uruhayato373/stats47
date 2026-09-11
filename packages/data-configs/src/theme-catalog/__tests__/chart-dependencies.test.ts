@@ -43,8 +43,8 @@ describe("① 期待依存集合が完全に列挙できる (baseline lock)", ()
   it("総 request / distinct request を固定 (移行で動いたら更新)", () => {
     expect(live.totalRequests).toBe(0);
     expect(live.distinctRequests).toEqual([]);
-    expect(live.totalMetricRefs).toBe(143);
-    expect(live.distinctMetricKeys).toHaveLength(139);
+    expect(live.totalMetricRefs).toBe(159);
+    expect(live.distinctMetricKeys).toHaveLength(155);
   });
 
   it("R2へ移行済みの系列も metricKey 依存として列挙する", () => {
@@ -59,7 +59,7 @@ describe("① 期待依存集合が完全に列挙できる (baseline lock)", ()
     const expected = [
       ...new Set([...preexisting, ...migrationContract.flatMap((row) => row.metricKeys)]),
     ].sort();
-    expect(live.totalMetricRefs).toBe(143);
+    expect(live.totalMetricRefs).toBe(159);
     for (const key of expected) expect(live.distinctMetricKeys).toContain(key);
     expect(
       live.perChart.find((chart) => chart.componentKey === "theme-occ-medical-trend")
@@ -244,9 +244,9 @@ describe("⑤ 依存ミラー — 決定的・正典と byte 一致する形 (au
     expect(mirror.totalRequests).toBe(0);
     expect(mirror.distinctRequests).toBe(0);
     expect(mirror.requests).toEqual([]);
-    expect(mirror.totalMetricRefs).toBe(143);
-    expect(mirror.distinctMetricRefs).toBe(139);
-    expect(mirror.metrics).toHaveLength(139);
+    expect(mirror.totalMetricRefs).toBe(159);
+    expect(mirror.distinctMetricRefs).toBe(155);
+    expect(mirror.metrics).toHaveLength(155);
     const keys = mirror.requests.map((r) => r.key);
     expect(keys).toEqual([...keys].sort());
     // 各 request は audit が e-Stat に送れる形 (statsDataId + filters)

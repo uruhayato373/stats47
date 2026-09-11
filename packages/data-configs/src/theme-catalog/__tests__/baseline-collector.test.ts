@@ -33,14 +33,14 @@ import type { CatalogChart, ThemeCatalog } from '../types';
 
 /** 実測で確定したベースライン。移行で動いたらここを更新する (shrink/grow の向きを守る)。 */
 const BASELINE = {
-  // 初回拡充の3テーマはmetricGroupsで比較し、追加図の母数は変えない。
-  themes: 24,
-  charts: 74,
+  // 2026-09-11: 全55テーマの実測。追加図は76件、うち構成図3件。
+  themes: 55,
+  charts: 76,
   chartsWithRawEstatParams: 0,
   rawEstatRequests: 0,
   // markdown-section 16 件を除く全 data-bound component が指標ハブを持つ。
   // 地方財政は専用 3 章で描画するため、未使用だった KPI 4 件と追加図 1 件を除いた。
-  chartsWithRelatedRankingKeys: 58,
+  chartsWithRelatedRankingKeys: 60,
   // WP5 完了: 生色を color role へ全移行 (179 → 0)。以後 ratchet は「生色 0」を強制する。
   rawColorPlaces: 0,
   distinctColors: 0,
@@ -58,7 +58,7 @@ describe('baseline lock (ratchet)', () => {
     expect(live.chartsByType).toEqual({
       'line-chart': 49,
       'mixed-chart': 2,
-      'composition-chart': 1,
+      'composition-chart': 3,
       'donut-chart': 4,
       'cpi-profile': 1,
       'cpi-heatmap': 0,
@@ -82,7 +82,7 @@ describe('baseline lock (ratchet)', () => {
     );
   });
 
-  it('markdown以外の全58 componentが relatedRankingKeys を持つ', () => {
+  it('markdown以外の全60 componentが relatedRankingKeys を持つ', () => {
     expect(live.chartsWithRelatedRankingKeys).toBe(
       BASELINE.chartsWithRelatedRankingKeys
     );

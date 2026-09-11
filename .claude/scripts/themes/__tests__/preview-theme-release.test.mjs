@@ -20,7 +20,9 @@ test('an upstream body failure returns 502 and keeps staged data available', { t
       key, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'),
     }] }));
     const mock = join(dir, 'mock-upstream.mjs');
-    await writeFile(mock, `globalThis.fetch = async () => new Response(new ReadableStream({
+    await writeFile(mock, `globalThis.fetch = async (url) => url === 'https://storage.stats47.jp/categories/all.json'
+      ? new Response(JSON.stringify({ categories: [{ categoryKey: 'population' }] }))
+      : new Response(new ReadableStream({
       start(controller) {
         controller.enqueue(new TextEncoder().encode('partial'));
         setTimeout(() => controller.error(new Error('upstream body failed')), 10);
@@ -48,6 +50,12 @@ test('an upstream body failure returns 502 and keeps staged data available', { t
     const staged = await fetch(`${url}/${key}`);
     assert.equal(staged.status, 200);
     assert.deepEqual(await staged.json(), { ok: true });
+    const categories = await fetch(`${url}/categories/all.json`);
+    assert.equal(categories.status, 200);
+    assert.equal(categories.headers.get('x-theme-preview-source'), 'public');
+    assert.deepEqual(await categories.json(), { categories: [{ categoryKey: 'population' }] });
+    assert.equal((await fetch(`${url}/categories/unlisted.json`)).status, 404);
+    assert.equal((await fetch(`${url}/private/credentials.json`)).status, 404);
     assert.equal(stderr, '');
   } finally {
     if (child && child.exitCode === null && child.signalCode === null) {

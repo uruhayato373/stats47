@@ -10,7 +10,7 @@ import {
 } from '../geo-routes';
 
 describe('Geo canonical route projection', () => {
-  it('全423途中URLを投稿着地またはquery付き分析への転送に一意分類する', () => {
+  it('全846途中URLを投稿着地またはquery付き分析への転送に一意分類する', () => {
     let count = 0;
     for (const slug of GEO_ANALYSIS_SLUGS)
       for (const pref of GEO_PREF_CODES)
@@ -25,7 +25,7 @@ describe('Geo canonical route projection', () => {
           );
           count++;
         }
-    expect(count).toBe(423);
+    expect(count).toBe(846);
   });
   it('空間分析9投稿は県・途中段階まで特定した索引可能URLに着地する', () => {
     const posts = BUSINESS_PLAN_M1_X_POSTS.filter(
