@@ -6,6 +6,7 @@ import {
   summarizeFollowup,
   needsEvidenceReview,
   expectedSectionPanels,
+  withinDeadline,
 } from '../theme-followup-core.mjs';
 
 const experiment = {
@@ -221,4 +222,15 @@ test('fixed-year comparison tables count separately from switcher cards and must
         sections: [{ ...section, fixedTables }],
       }).includes('fixed-year-tables:overview')
     );
+});
+
+test('an unfinished response body cannot hold the entire browser audit open', async () => {
+  assert.equal(
+    await withinDeadline(Promise.resolve('body'), 50, 'timeout'),
+    'body'
+  );
+  await assert.rejects(
+    withinDeadline(new Promise(() => {}), 5, 'response-body-timeout'),
+    /response-body-timeout/
+  );
 });

@@ -173,3 +173,17 @@ export function needsEvidenceReview(result, priorReview) {
     (priorReview?.unreviewedThemes?.length ?? 0) > 0
   );
 }
+
+export async function withinDeadline(promise, milliseconds, message) {
+  let timer;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error(message)), milliseconds);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}

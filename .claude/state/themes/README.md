@@ -209,9 +209,9 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUN
 
 定期フォロー: `.github/workflows/theme-chart-audit-weekly.yml` に集約する。毎日09:00 JSTの期日判定は依存インストール前に実行し、月曜・月初・未観測d7/d28/d56・手動実行だけ重い監査を行う。日曜のGSC/GA4週次取得を月曜に読み、期間不足・未計測・取得失敗は別々に保存する。期日に観測済みでも標本が不足していれば、次の週次監査で再観測する。
 
-- 機械観測: `ci-followup.json`。全55テーマ×PC/mobileのHTML終端・見出し・章・カード・グラフ・JS例外・同一originのHTTPエラーを確認する。最初の503を再試行成功で上書きしない。
-- raw HTML/応答/cf-ray/スクリーンショット: 実行runの`theme-followup-evidence` artifact（30日）。gitには要約とrun URLを残す。
-- 改善判断: `.claude/prompts/ci/theme-followup.md`、`ci-review.json`。新しい異常・checkpoint状態・月替わりで既存Claude OAuthを使い、公式資料の月次調査と証拠付き修正を最大1件行う。未確認テーマを明示し、残りは次回の週次監査で再開する。全国住宅の空間原典がない候補105を代替データで完了にしない。
+- 機械観測: `ci-followup.json`。全55テーマ×PC/mobileのHTML終端・見出し・章・カード・年固定比較表・グラフ・JS例外・同一originのHTTPエラーを確認する。最初の503を再試行成功で上書きしない。2並列、HTML本文30秒・エラー本文5秒・全量15分の上限を設け、応答待ちで他のテーマを止めない。
+- raw HTML/応答/cf-ray/スクリーンショット: レビュー開始前に実行runの`theme-followup-evidence` artifact（30日）へ保存する。レビュー結果と権限拒否の診断は`theme-review-evidence` artifactへ保存する。gitには要約とrun URLを残す。
+- 改善判断: `.claude/prompts/ci/theme-followup.md`。モデルの最終JSONを`record-theme-review.mjs`で取り出し、検証後の`ci-review.json`だけをCIが保存する。新しい異常・checkpoint状態・月替わりで既存Claude OAuthを使い、公式資料の月次調査と証拠付き修正を最大1件行う。未確認テーマを明示し、残りは次回の週次監査で再開する。全国住宅の空間原典がない候補105を代替データで完了にしない。
 - `check-theme-review.mjs` が変更範囲・実験日付/baseline/観測の不変性を確認し、状態検査とテストを必須化する。コード変更は全型検査・対象テスト・web build後にdraft PRへ出す。CIはmerge/deployを実行しない。確認待ちの`theme-improvement` PRがある場合は重複作成をしない。
 - 固定`theme-alert`は異常内容が変わったときだけ更新、復旧でClose。認証・レビュー・検査の失敗はworkflowを失敗させる。ローカルheartbeat `automation`はこのCIの稼働確認後に停止する。
 

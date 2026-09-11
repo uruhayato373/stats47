@@ -47,7 +47,7 @@ export function validateReview(report, input, files, before, after) {
       ].some((p) => f.startsWith(p));
     assert.ok(
       allowed &&
-        !/theme-followup|audit-theme-runtime|check-theme-review|theme-weekly-workflow|build-theme-alert|validate-theme-state/.test(
+        !/theme-followup|audit-theme-runtime|check-theme-review|record-theme-review|theme-weekly-workflow|build-theme-alert|validate-theme-state/.test(
           f
         ),
       `Disallowed review change: ${f}`

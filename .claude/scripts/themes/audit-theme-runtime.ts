@@ -8,6 +8,7 @@ import { THEME_CATALOGS } from '../../../packages/data-configs/src/theme-catalog
 import {
   runtimeFindings,
   expectedSectionPanels,
+  withinDeadline,
 } from './theme-followup-core.mjs';
 
 async function main() {
@@ -162,9 +163,13 @@ async function main() {
                   'cf-cache-status': headers['cf-cache-status'] ?? '',
                 },
               });
-              const body = await response
-                .body()
-                .catch(() => Buffer.from('Response body unavailable'));
+              const body = await withinDeadline(
+                response.body(),
+                5000,
+                'response-body-timeout'
+              ).catch((error) =>
+                Buffer.from(`Response body unavailable: ${String(error)}`)
+              );
               await fs.writeFile(
                 path.join(out, `${catalog.key}-${width}-http-${n}.txt`),
                 body.subarray(0, 1024 * 1024)
@@ -189,7 +194,11 @@ async function main() {
               'x-html-integrity',
             ].map((k) => [k, headers[k] ?? ''])
           );
-          html = await response.text();
+          html = await withinDeadline(
+            response.text(),
+            30000,
+            'document-body-timeout'
+          );
           r.htmlClosed = /<\/html>/i.test(html.slice(-2048));
           r.htmlIntegrity = headers['x-html-integrity'] ?? null;
           r.buildId =
@@ -285,6 +294,7 @@ async function main() {
             .screenshot({
               path: path.join(out, `${catalog.key}-${width}.png`),
               fullPage: false,
+              timeout: 5000,
             })
             .catch(() => {});
         }

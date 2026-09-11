@@ -54,7 +54,7 @@ jobs:
           live_code=${PIPESTATUS[0]}
           timeout --kill-after=20s 480s npm run theme:portfolio:audit 2>&1 | tee /tmp/theme-quality.log
           quality_code=${PIPESTATUS[0]}
-          timeout --kill-after=20s 1200s node --import tsx .claude/scripts/themes/audit-theme-runtime.ts 2>&1 | tee .local/ci/theme-followup/runtime.log
+          timeout --kill-after=20s 900s node --import tsx .claude/scripts/themes/audit-theme-runtime.ts 2>&1 | tee .local/ci/theme-followup/runtime.log
           runtime_code=${PIPESTATUS[0]}
           node .claude/scripts/themes/theme-followup.mjs --live-code "$live_code" --quality-code "$quality_code" --runtime-code "$runtime_code" >> "$GITHUB_OUTPUT"
           summary_code=$?
@@ -148,6 +148,13 @@ jobs:
             --disallowedTools "Bash(git *),Bash(gh *),Bash(npm run deploy*),Bash(npm run push*),Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
             --strict-mcp-config
             --mcp-config '{"mcpServers":{}}'
+      - name: Summarize review execution
+        if: always() && steps.review_plan.outputs.run == 'true'
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: |
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$CLAUDE_EXECUTION_FILE" > .local/ci/theme-followup/review-diagnosis.txt
+          cat .local/ci/theme-followup/review-diagnosis.txt >> "$GITHUB_STEP_SUMMARY"
       - name: Verify review and changed files
         id: review_check
         if: always() && steps.review.outcome == 'success'
@@ -156,6 +163,8 @@ jobs:
         run: |
           test -s "$CLAUDE_EXECUTION_FILE"
           git diff --exit-code HEAD -- .claude/scripts/themes/check-theme-review.mjs .claude/scripts/themes/validate-theme-state.mjs
+          git diff --exit-code HEAD -- .claude/scripts/themes/record-theme-review.mjs
+          node .claude/scripts/themes/record-theme-review.mjs "$CLAUDE_EXECUTION_FILE"
           node .claude/scripts/themes/check-theme-review.mjs
           node .claude/scripts/themes/validate-theme-state.mjs
           npm run theme:quality:test
