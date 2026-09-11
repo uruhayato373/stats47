@@ -138,6 +138,7 @@ jobs:
           settings: '{"disableAllHooks":true}'
           claude_args: |
             --model sonnet
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["proposed","no-change","blocked"]},"summary":{"type":"string"},"findings":{"type":"array","items":{"type":"object","properties":{"themeKey":{"type":"string"},"detail":{"type":"string"},"evidenceRefs":{"type":"array","items":{"type":"string"}}},"required":["themeKey","detail","evidenceRefs"],"additionalProperties":false}},"unreviewedThemes":{"type":"array","items":{"type":"string"}},"tests":{"type":"array","items":{"type":"string"}}},"required":["status","summary","findings","unreviewedThemes","tests"],"additionalProperties":false}'
             --effort high
             --max-turns 80
             --no-session-persistence

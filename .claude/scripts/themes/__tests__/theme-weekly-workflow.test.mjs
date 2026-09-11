@@ -108,3 +108,11 @@ test('weekly observation commit preserves experiment checkpoints without staging
     ['commit', 'pull', 'push']
   );
 });
+
+test('model results use typed structured output instead of prose JSON parsing', () => {
+  const args = workflow.jobs.audit.steps.find(s => s.id === 'review').with.claude_args;
+  const schema = JSON.parse(args.match(/--json-schema '([^']+)'/)[1]);
+  assert.equal(schema.type, 'object');
+  assert.deepEqual(schema.required, ['status', 'summary', 'findings', 'unreviewedThemes', 'tests']);
+  assert.equal(schema.additionalProperties, false);
+});
