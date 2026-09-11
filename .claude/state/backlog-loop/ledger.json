@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-10T19:14:11.536Z",
+  "updatedAt": "2026-09-11T16:19:24.119Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4057,6 +4057,45 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-09T11:47:43.363Z"
+    },
+    "THEME-PORTFOLIO-REMAINDER-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "全テーマの表示検証・改善公開と計測開始",
+      "attempts": [
+        {
+          "at": "2026-09-11T16:19:24.119Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node /tmp/stats47-finalize-integrity-release.mjs",
+              "node .claude/scripts/themes/validate-theme-state.mjs",
+              "npm run theme:expansion:check",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "PR954 CI34617848023 18success; deploy34618916530 and smoke34620122727 success at main9a10dc0ef2b698ffe80b9ddd822373ac98aeace4; exact build DPaW5i_gnBuIKcU6veJqI initial109/110 and real-income recovery6/6, fullHTML110/110 JSerror0, source43/43 HTTP147/147 sitemapPASS, canonical10/",
+          "failReason": null,
+          "followUps": [
+            "THEME-EXPANSION-EFFECT-01",
+            "THEME-EXPANSION-IMPLEMENT-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-11T16:19:24.119Z"
     }
   }
 }
