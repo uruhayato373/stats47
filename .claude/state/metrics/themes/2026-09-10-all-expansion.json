@@ -2144,7 +2144,7 @@
               "missing": 0,
               "duplicates": 0,
               "comparedFeeCells": 329,
-              "maxSubtotalError": 1.0000803740695119e-08,
+              "maxSubtotalError": 1.0000803740695119e-8,
               "visitorTimesPriceWithinRounding": true,
               "maxMultiplicationError": 0.06714821000059601,
               "officialPdfMatchedRows": 47
@@ -5863,8 +5863,8 @@
         111
       ],
       "scopeAdoptions": {
-        "48": "全国・10ブロックの公開範囲へ採用。45県の個別観測は作らず、元の47県内訳を充足したとは扱わない。decision.scopeAdoptionに記録。",
-        "22": "2024確報、44数値＋3秘匿県を保持。2025を最新取得済みとは表示しない。"
+        "22": "2024確報、44数値＋3秘匿県を保持。2025を最新取得済みとは表示しない。",
+        "48": "全国・10ブロックの公開範囲へ採用。45県の個別観測は作らず、元の47県内訳を充足したとは扱わない。decision.scopeAdoptionに記録。"
       },
       "quality": {
         "themes": 55,
@@ -6863,6 +6863,28 @@
           "evidenceDirectory": ".local/verification/themes/2026-09-11-color-publication",
           "uploaded": 32,
           "publicReadback": "PASS 32/32"
+        },
+        "round3": {
+          "previousHead": "948fd4825ce79531c40a9de8895db60d1468d2e1",
+          "previousRun": 34590734327,
+          "previousFailure": "Only web water-quality UI test timed out: 47 sequential prefecture changes in a single 10000 ms test; all other 1845 web tests passed.",
+          "fix": "Parameterize all 47 prefectures; each independently verifies national 47 rows, selected prefecture and source row count, then return to national. No timeout or assertion relaxation; production code unchanged.",
+          "targetTests": {
+            "before": 6,
+            "after": 52,
+            "status": "PASS"
+          },
+          "status": "local-pass-awaiting-remote-ci",
+          "webCoverage": {
+            "status": "PASS",
+            "files": 257,
+            "tests": 1892,
+            "statements": 48.05,
+            "branches": 44.55,
+            "functions": 47.14,
+            "lines": 49.86
+          },
+          "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation/round3"
         }
       },
       "effectivePublication": {

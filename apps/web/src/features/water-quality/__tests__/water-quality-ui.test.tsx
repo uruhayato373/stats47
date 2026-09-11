@@ -38,7 +38,7 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 describe('水質原表の共通県選択と状態表示', () => {
-  it('全国47行から各県欄だけへ切り替え、関係県の再掲を追加しない', () => {
+  it.each(snapshot.prefectures)('全国47行から$areaName欄だけへ切り替え、全国表示へ戻る', (p) => {
     const { container } = render(
       <ThemePrefectureProvider initialAreaCode={null}>
         <Controls />
@@ -48,22 +48,20 @@ describe('水質原表の共通県選択と状態表示', () => {
     expect(container.querySelectorAll('[data-prefecture-code]')).toHaveLength(
       47
     );
-    for (const p of snapshot.prefectures) {
-      fireEvent.click(screen.getByRole('button', { name: p.areaName }));
-      expect(
-        container
-          .querySelector('[data-area-code]')
-          ?.getAttribute('data-area-code')
-      ).toBe(p.areaCode);
-      expect(container.querySelectorAll('[data-prefecture-code]')).toHaveLength(
-        1
-      );
-      expect(container.querySelectorAll('[data-water-row]')).toHaveLength(
-        snapshot.rows.filter(
-          (r) => r.kind === 'river' && r.listingAreaCode === p.areaCode
-        ).length
-      );
-    }
+    fireEvent.click(screen.getByRole('button', { name: p.areaName }));
+    expect(
+      container
+        .querySelector('[data-area-code]')
+        ?.getAttribute('data-area-code')
+    ).toBe(p.areaCode);
+    expect(container.querySelectorAll('[data-prefecture-code]')).toHaveLength(
+      1
+    );
+    expect(container.querySelectorAll('[data-water-row]')).toHaveLength(
+      snapshot.rows.filter(
+        (r) => r.kind === 'river' && r.listingAreaCode === p.areaCode
+      ).length
+    );
     fireEvent.click(screen.getByRole('button', { name: '全国' }));
     expect(container.querySelectorAll('[data-water-row]')).toHaveLength(0);
     expect(container.querySelectorAll('[data-prefecture-code]')).toHaveLength(
