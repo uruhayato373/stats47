@@ -80,6 +80,17 @@ export function validateReview(report, input, files, before, after) {
     protectedFields(before),
     'Experiment dates, baselines and observations are immutable in review'
   );
+  after.experiments.forEach((entry, index) => {
+    const original = before.experiments[index];
+    if (entry.verdict !== original.verdict) {
+      assert.ok(
+        original.verdict === 'pending' &&
+          original.evaluateAt?.d56 &&
+          original.evaluateAt.d56 <= input.observedAt,
+        'Only due d56 experiments can receive a final verdict'
+      );
+    }
+  });
   const codeChanged = files.some(
     (f) => f !== reportPath && f !== experimentsPath
   );

@@ -13,7 +13,7 @@ const before = {
       themeKey: 'test-theme',
       startedAt: '2026-09-11',
       baseline: { period: 'original' },
-      evaluateAt: { d7: '2026-09-18' },
+      evaluateAt: { d7: '2026-09-18', d56: '2026-11-06' },
       verdict: 'pending',
       result: { d7: { status: 'insufficient-data' } },
     },
@@ -52,8 +52,8 @@ test('code and experiment decisions are reviewable proposals', () => {
   after.experiments[0].verdict = 'insufficient-data';
   assert.deepEqual(
     validateReview(
-      report,
-      input,
+      { ...report, reviewedAt: '2026-11-06', month: '2026-11' },
+      { ...input, observedAt: '2026-11-06' },
       [record, '.claude/state/themes/experiments.json'],
       before,
       after
@@ -110,5 +110,21 @@ test('old evidence and invented theme keys are rejected', () => {
         before
       ),
     /Unknown theme/
+  );
+});
+
+test('d7 low sample cannot close an experiment before d28 and d56 measurement', () => {
+  const after = structuredClone(before);
+  after.experiments[0].verdict = 'insufficient-data';
+  assert.throws(
+    () =>
+      validateReview(
+        report,
+        input,
+        [record, '.claude/state/themes/experiments.json'],
+        before,
+        after
+      ),
+    /Only due d56/
   );
 });
