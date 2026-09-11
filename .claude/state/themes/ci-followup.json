@@ -6,14 +6,11 @@
   "runtime": {
     "expected": 110,
     "checked": 110,
-    "failed": 2
+    "failed": 1
   },
   "problems": [
-    "fishery-marine/1440:chart:theme-fishery-aquaculture-mix:source-unavailable",
-    "fishery-marine/1440:chart:theme-fishery-output-trend:source-unavailable",
-    "fishery-marine/1440:network:503",
-    "real-income/1440:chart:real-income-cpi-breakdown:source-unavailable",
-    "real-income/1440:network:503",
+    "aging-society/1440:chart:theme-population-pyramid:source-unavailable",
+    "aging-society/1440:network:503",
     "runtime-process:1"
   ],
   "checkpoints": [
@@ -131,8 +128,8 @@
       "verdict": "insufficient-data"
     }
   ],
-  "alertBody": "# テーマ継続確認\n- fishery-marine/1440:chart:theme-fishery-aquaculture-mix:source-unavailable\n- fishery-marine/1440:chart:theme-fishery-output-trend:source-unavailable\n- fishery-marine/1440:network:503\n- real-income/1440:chart:real-income-cpi-breakdown:source-unavailable\n- real-income/1440:network:503\n- runtime-process:1\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "c1a503b8b99bb0b3d1c5b26e3b4a49e4a4799ef98084d9c65770de52158ef433",
+  "alertBody": "# テーマ継続確認\n- aging-society/1440:chart:theme-population-pyramid:source-unavailable\n- aging-society/1440:network:503\n- runtime-process:1\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "3dd4ee6314364ea4a1ff36d5be77167cfc1d443498134df3d4a5cc073c3be25a",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34657295841"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34658514515"
 }
