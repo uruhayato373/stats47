@@ -9,6 +9,7 @@ import { THEME_CATALOGS, collectChartDependencies } from "../../../packages/data
 import { getMetricConfig } from "../../../packages/data-configs/src/registry";
 import { buildRecipe } from "../../../packages/data-configs/src/recipe";
 import { inspectThemePayload, compareThemeObservation, selectLastGoodObservations, inspectThemeStructure, inspectChartYears, summarizeThemeFindings } from "./theme-quality-core.mjs";
+import { readThemeQualityState, writeThemeQualityState } from "./theme-quality-state.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const DEFAULT_OUTPUT = path.join(ROOT, ".claude/state/themes/quality.json");
@@ -65,7 +66,7 @@ async function main() {
     throw new Error("Offline/staged audits require a separate --json output; the live baseline must be preserved");
   }
   const previousPath = option("--previous", output);
-  const previous: Previous = fs.existsSync(previousPath) ? JSON.parse(fs.readFileSync(previousPath, "utf8")) : {};
+  const previous: Previous = fs.existsSync(previousPath) ? readThemeQualityState(previousPath) : {};
   const catalogs = Object.values(THEME_CATALOGS);
   const findings: Finding[] = [];
   const requests = new Map<string, { key: string; namespace: string }>();
@@ -137,8 +138,8 @@ async function main() {
     limitations: ["全国専用系列・GIS専用payloadと実画面の全操作は別の表示監査で確認する", "公式統計に未取得の新年があるかは月次の一次資料確認で判定する", "地方財政のCatalog定義は専用UIの表示成否を意味しない", "coverage不足や単年そのものは不具合と断定しない", "GSC/GA4の効果・統廃合はこの品質検査だけでは判断しない"],
   };
   fs.mkdirSync(path.dirname(output), { recursive: true });
-  // Keep the complete observation state below the repository's 1 MiB file limit.
-  fs.writeFileSync(output, `${JSON.stringify(result)}\n`);
+  if (output === DEFAULT_OUTPUT) writeThemeQualityState(output, result);
+  else fs.writeFileSync(output, `${JSON.stringify(result)}\n`);
   console.log(`Theme quality: ${summary.themes} themes, ${summary.observedRequests}/${summary.expectedRequests} payloads, errors ${summary.errors}, warnings ${summary.warnings}, new ${summary.added.length}, resolved ${summary.resolved.length}`);
   console.log(`Result: ${path.relative(ROOT, output)}`);
   for (const finding of summary.added.filter((f) => f.severity === "error").slice(0, 20)) console.log(`${finding.themeKey ?? finding.metricKey}: ${finding.code} ${finding.detail ?? ""}`);

@@ -192,6 +192,7 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUN
 - 母集団は現行ThemeCatalog。気候はcatalog、旧財政市区町村URLはredirectで対象外。
 - `quality.json` は章/登録/期間/単位/有限値coverage/重複/履歴退行の観測。前回正常値を
   `lastGoodObservations` に保持し、異常継続中の基準すり替えを防ぐ。全操作・全国系列・GISは別途表示確認。
+  保存形式v2は要約と件数・SHA256を`quality.json`、詳細を`quality.{definitions,observations,lastGoodObservations}.json`へ分け、各ファイル1 MiB以内に保つ。読み書きは`theme-quality-state.mjs`を通し、旧v1も読める。欠落・SHA不一致は停止し、比較基準を空で補完しない。週次commitは4ファイルを一括で保存する。任意の`--json`検証出力は従来の単一ファイル形式を維持する。
 - GA4はJapan-only `pages-clean.csv` と `.meta.json` のstatus=ok/source/countryFilter/実期間を必須にする。
   2窓の実日付が連続する56日だけを集計。raw pages.csvは効果・統廃合判断に使わない。
 - `metrics.ga4.scope=Japan`。`internalNav` はtheme_* nav_clickのJapan-only eventCount。

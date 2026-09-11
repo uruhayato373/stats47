@@ -14,6 +14,8 @@ test("weekly observation commit preserves experiment checkpoints without staging
   t.after(() => fs.rmSync(cwd, { recursive: true, force: true }));
   const observations = [
     ".claude/state/theme-charts/live-audit.json", ".claude/state/themes/quality.json",
+    ".claude/state/themes/quality.definitions.json", ".claude/state/themes/quality.observations.json",
+    ".claude/state/themes/quality.lastGoodObservations.json",
     ".claude/state/themes/portfolio.json", ".claude/state/themes/experiments.json",
   ];
   for (const file of [...observations, ".claude/state/themes/unrelated.json"]) {
