@@ -27,6 +27,7 @@ import { fileURLToPath } from "node:url";
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
 import { parse } from "csv-parse/sync";
 import { selectThemeWindows, selectLatestThemeWindow, isJapanPageReport, normalizeThemePath, summarizeThemeTraffic, summarizeThemeNavigation } from "./theme-metrics-core.mjs";
+import { readThemeQualityState } from "./theme-quality-state.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -60,7 +61,7 @@ function reportWindows(source: string, stem: string) {
 interface KeyQuality { key: string; ok: boolean; latestYear: string | null; latestYearPrefCoverage: number | null }
 
 const qualityFile = path.join(STATE_DIR, "quality.json");
-const audit = fs.existsSync(qualityFile) ? JSON.parse(fs.readFileSync(qualityFile, "utf8")) : null;
+const audit = fs.existsSync(qualityFile) ? readThemeQualityState(qualityFile) : null;
 const recentQuality = audit?.summary?.mode === "structure-and-public-data" && Date.now() - Date.parse(audit.observedAt) < 7 * 86_400_000;
 async function fetchKeyQuality(key: string): Promise<KeyQuality> {
   const o = recentQuality ? audit.observations.find((x: { namespace: string; key: string }) => x.namespace === "ranking" && x.key === key) : null;
