@@ -3,6 +3,12 @@ declare module "cloudflare:workers" {
     waitUntil(promise: Promise<unknown>): void;
     passThroughOnException(): void;
     readonly exports: Record<string, unknown>;
+    readonly cache?: {
+      purge(options: { tags: string[] } | { purgeEverything: true }): Promise<{
+        success: boolean;
+        errors: Array<{ code: number; message: string }>;
+      }>;
+    };
   }
 
   export abstract class WorkerEntrypoint<Env = unknown> {
