@@ -105,7 +105,7 @@ planSummary: "2指標の関係を検証する"
     expect(themePlans.map((plan) => plan.metricKeys[0]).sort()).toEqual(
       expectedMissing.sort()
     );
-    expect(themePlans).toHaveLength(21);
+    expect(themePlans).toHaveLength(18);
     expect(themePlans.filter((plan) => plan.status === 'blocked')).toHaveLength(
       3
     );

@@ -14,11 +14,8 @@ import { cached, readJson, TTL } from "./state-io";
 const CATALOG_PATH =
   ".claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json";
 const STALE_DAYS = 180;
-// ThemeCatalog から生成される軽量な一覧を利用する。climate は旧来の
-// IndicatorSet のみで、ThemeCatalog の管理対象ではない。
-const CURRENT_THEME_METADATA = THEME_INDICATOR_SETS.filter(
-  (theme) => theme.key !== "climate"
-);
+// ThemeCatalog から生成される軽量な一覧を全件利用する。
+const CURRENT_THEME_METADATA = THEME_INDICATOR_SETS;
 const CURRENT_THEME_BY_KEY = new Map(
   CURRENT_THEME_METADATA.map((theme) => [theme.key, theme])
 );

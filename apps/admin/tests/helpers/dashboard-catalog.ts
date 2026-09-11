@@ -8,7 +8,7 @@ export function makeDashboardCatalogFixture(options?: {
   omitTheme?: string;
 }): string {
   const themes = THEME_INDICATOR_SETS.filter(
-    (theme) => theme.key !== "climate" && theme.key !== options?.omitTheme
+    (theme) => theme.key !== options?.omitTheme
   ).map((theme) => theme.key);
   const stories = Array.from({ length: 40 }, (_, index) => ({
     id:
