@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-12",
+  "status": "fail",
+  "themeCount": 55,
+  "runtime": {
+    "expected": 110,
+    "checked": 65,
+    "failed": 4
+  },
+  "problems": [
+    "construction-industry/1440:section-cards:construction-businesses:0/1",
+    "construction-industry/1440:section-cards:construction-output:0/1",
+    "construction-industry/1440:section-cards:construction-workers:0/1",
+    "information-industry/1440:section-cards:industry-locations:0/1",
+    "information-industry/1440:section-cards:industry-workers:0/1",
+    "living-housing/390:chart:lh-dwelling-floor-area-trend:source-unavailable",
+    "living-housing/390:network:503",
+    "runtime-incomplete",
+    "runtime-process:124",
+    "waste-recycling/1440:section-cards:resource-recovery:0/1",
+    "waste-recycling/1440:section-cards:waste-disposal:0/1"
+  ],
+  "checkpoints": [
+    {
+      "experimentId": "THEME-EXP-001",
+      "themeKey": "population-dynamics",
+      "checkpoint": "d7",
+      "due": "2026-07-21",
+      "status": "quality-only",
+      "reasons": [],
+      "verdict": "insufficient-data"
+    },
+    {
+      "experimentId": "THEME-EXP-001",
+      "themeKey": "population-dynamics",
+      "checkpoint": "d28",
+      "due": "2026-08-11",
+      "status": "insufficient-data",
+      "reasons": [
+        "complete-window-unavailable",
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample",
+        "baseline-scope-unknown-or-incompatible"
+      ],
+      "verdict": "insufficient-data"
+    },
+    {
+      "experimentId": "THEME-EXP-001",
+      "themeKey": "population-dynamics",
+      "checkpoint": "d56",
+      "due": "2026-09-08",
+      "status": "insufficient-data",
+      "reasons": [
+        "window-includes-pre-publication",
+        "baseline-missing-or-low-sample",
+        "baseline-scope-unknown-or-incompatible"
+      ],
+      "verdict": "insufficient-data"
+    }
+  ],
+  "alertBody": "# テーマ継続確認\n- construction-industry/1440:section-cards:construction-businesses:0/1\n- construction-industry/1440:section-cards:construction-output:0/1\n- construction-industry/1440:section-cards:construction-workers:0/1\n- information-industry/1440:section-cards:industry-locations:0/1\n- information-industry/1440:section-cards:industry-workers:0/1\n- living-housing/390:chart:lh-dwelling-floor-area-trend:source-unavailable\n- living-housing/390:network:503\n- runtime-incomplete\n- runtime-process:124\n- waste-recycling/1440:section-cards:resource-recovery:0/1\n- waste-recycling/1440:section-cards:waste-disposal:0/1\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "42519ecd8896830059f483574c275a5a26c1aec6021b6a5af130fca9ec7ebab7",
+  "reviewRequired": true,
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34654495422"
+}
