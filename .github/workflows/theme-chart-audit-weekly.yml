@@ -50,7 +50,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for observation in .claude/state/theme-charts/live-audit.json .claude/state/themes/quality.json .claude/state/themes/portfolio.json .claude/state/themes/experiments.json; do
+          for observation in .claude/state/theme-charts/live-audit.json .claude/state/themes/quality.json .claude/state/themes/quality.definitions.json .claude/state/themes/quality.observations.json .claude/state/themes/quality.lastGoodObservations.json .claude/state/themes/portfolio.json .claude/state/themes/experiments.json; do
             if [ -f "$observation" ]; then git add -- "$observation"; fi
           done
           if git diff --cached --quiet; then exit 0; fi

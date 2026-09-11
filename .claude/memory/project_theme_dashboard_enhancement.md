@@ -39,3 +39,8 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 - **全体テストの範囲**: Web単体テストだけでは `packages/data-configs` のカタログ件数・移行契約の検査を含まない。テーマの大規模追加では `npm run test:packages` も実行する。実測baselineは更新しても、生e-Stat参照・生色ゼロと陰性対照を維持し、異なる分母を1図へ戻して旧テストを通さない。
 - **メニュー末尾の到達性**: 55テーマのヘッダーメニューは低い画面で一覧リンクが領域外へ出た。Radixの利用可能高を上限に縦スクロールを設け、`header-navigation.spec.ts` で1280×600の一覧遷移を検証する。テーマ追加時のE2E代表図も現在の型と件数へ合わせ、削除されたドーナツ図の検査は現存する地域経済の図へ移す。
 - **公開用認証とプレビューの分離**: 2155件公開後のローカルbuildはS3資格情報があると `R2_PUBLIC_FETCH_URL` よりS3を優先し、ブログ索引のタイムアウトで失敗した。プレビューbuild/startでは `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を空にし、build/startの両方へ検証済みgatewayを `R2_PUBLIC_FETCH_URL` で明示する。`NEXT_PUBLIC_R2_PUBLIC_URL` だけを残すと検索index生成は取得必須なのにserver readerが無効になるため混在させない。productionのS3優先規則は変更しない。
+
+- **共有画像は別の公開対象**: テーマのexact data manifestだけを公開すると、新規rankingのOGP/card生成hookは走らない。`sync-snapshots.yml`を通らない公開では、対象キーの画像生成→exact image publisher→SHA/寸法readbackを別レイヤーで行い、データmanifestの証拠を上書きしない。PR950の本番コード配信は成功したが、後続smokeは画像404で失敗した。run全体とdeploy stepの成否を分けて記録する。
+- **画像の配色も公開itemを使う**: generatorがraw metric configを読むと、極性で決まる赤を既定青で描画した。`resolveRankingImageVisualization`で公開itemの配色を検証し、描画とfingerprintの双方へ同じ値を渡す。配色未指定の実在configからcanonical赤を保つ回帰試験を追加した。
+
+- **Workers Cacheの削除先**: `CachedApp`がHTMLを保存し、default gatewayで`ctx.cache.purge`を呼ぶと、API成功でも保存側のキャッシュは残る。2026-09-11に2rankingのエラー画面が全purge後もHIT/旧Ageのまま、query付きは正常、当該buildのISRエントリは404と実測した。認証済みAPIから`CachedApp.purgeCache` RPCへ渡し、所有entrypointで削除する。別入口へのpurgeを呼ばない陰性対照と、同じbuild内のキャッシュ更新を検証する。初回503の原因とは区別する。根拠: [Cloudflare purge scope](https://developers.cloudflare.com/workers/cache/purge/)（2026-09-11確認）。

@@ -9,6 +9,7 @@ vi.mock("@opennextjs/cloudflare", () => ({
 
 const mockGetCloudflareContext = vi.mocked(getCloudflareContext);
 const purge = vi.fn().mockResolvedValue({ success: true, errors: [] });
+const gatewayPurge = vi.fn().mockResolvedValue({ success: true, errors: [] });
 
 function purgeRequest(body: unknown, token = "test-secret"): Request {
   return new Request("https://stats47.jp/api/internal/worker-cache/purge", {
@@ -26,14 +27,19 @@ describe("POST /api/internal/worker-cache/purge", () => {
     process.env.WORKER_CACHE_PURGE_SECRET = "test-secret";
     process.env.NEXT_PUBLIC_BASE_URL = "https://stats47.jp";
     purge.mockClear();
+    gatewayPurge.mockClear();
     mockGetCloudflareContext.mockResolvedValue({
       env: {} as CloudflareEnv,
       cf: undefined,
-      ctx: { cache: { purge } },
+      ctx: {
+        cache: { purge: gatewayPurge },
+        exports: { CachedApp: { purgeCache: purge } },
+      },
     });
   });
 
   afterEach(() => {
+    expect(gatewayPurge).not.toHaveBeenCalled();
     delete process.env.WORKER_CACHE_PURGE_SECRET;
     delete process.env.NEXT_PUBLIC_BASE_URL;
   });
@@ -98,7 +104,8 @@ describe("POST /api/internal/worker-cache/purge", () => {
     mockGetCloudflareContext.mockResolvedValue({
       env: {} as CloudflareEnv,
       cf: undefined,
-      ctx: {},
+      // The gateway can expose a purge API even though it owns no HTML entries.
+      ctx: { cache: { purge: gatewayPurge } },
     });
 
     const response = await POST(purgeRequest({ purgeAll: true }));
@@ -109,6 +116,15 @@ describe("POST /api/internal/worker-cache/purge", () => {
 
   it("purge APIの例外を成功扱いしない", async () => {
     purge.mockRejectedValueOnce(new Error("runtime failure"));
+
+    const response = await POST(purgeRequest({ purgeAll: true }));
+
+    expect(response.status).toBe(502);
+    expect(response.headers.get("Cache-Control")).toBe("private, no-store");
+  });
+
+  it("CachedAppのpurge拒否を成功扱いしない", async () => {
+    purge.mockResolvedValueOnce({ success: false, errors: [{ code: 1000, message: "rejected" }] });
 
     const response = await POST(purgeRequest({ purgeAll: true }));
 

@@ -192,6 +192,7 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUN
 - 母集団は現行ThemeCatalog。気候はcatalog、旧財政市区町村URLはredirectで対象外。
 - `quality.json` は章/登録/期間/単位/有限値coverage/重複/履歴退行の観測。前回正常値を
   `lastGoodObservations` に保持し、異常継続中の基準すり替えを防ぐ。全操作・全国系列・GISは別途表示確認。
+  保存形式v2は要約と件数・SHA256を`quality.json`、詳細を`quality.{definitions,observations,lastGoodObservations}.json`へ分け、各ファイル1 MiB以内に保つ。読み書きは`theme-quality-state.mjs`を通し、旧v1も読める。欠落・SHA不一致は停止し、比較基準を空で補完しない。週次commitは4ファイルを一括で保存する。任意の`--json`検証出力は従来の単一ファイル形式を維持する。
 - GA4はJapan-only `pages-clean.csv` と `.meta.json` のstatus=ok/source/countryFilter/実期間を必須にする。
   2窓の実日付が連続する56日だけを集計。raw pages.csvは効果・統廃合判断に使わない。
 - `metrics.ga4.scope=Japan`。`internalNav` はtheme_* nav_clickのJapan-only eventCount。
@@ -209,7 +210,7 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUN
 定期フォロー: 元PCには2026-09-08登録の「全テーマの品質確認と継続改善」の記録がある。このPCではテーマ監査の設定が見つからなかったため、2026-09-09にCodex heartbeat `automation`「テーマ拡充の検証と継続改善」をこのタスクへ登録した。毎週月曜09:00 JSTに確認し、月初は公式資料・構成も見直す。変化のない既知警告は通知しない。元PCの稼働が確認できた場合は重複を照合する。GitHub週次監査はworkflowの公開後に稼働する。
 
 
-## 別PCで未公開のテーマ改善を再開する
+## 別PCでテーマ改善の検証を再開する
 
 対象は128候補のうち採択120候補（新規34、既存章67、統合19）、実際のページは既存21を含む55テーマ。
 保留8候補を公開済みに数えない。進捗と再現コマンドは
@@ -239,7 +240,7 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUN
    `--tourism-seasonality` は月次専用schemaと照合記録を検査する。月次をrankingの年コードへ格納しない。
    `app/ranking-items/all.json` は公開在庫に検証済み差分を重ねて作る。
 
-公開対象は生成後のmanifestにあるkey・bytes・SHAだけ。旧manifestのSHAは生成日時が変わるため流用しない。
+公開対象は生成後のmanifestにあるkey・bytes・SHAだけ。ranking追加時のOGPとlight/darkカードは別の画像生成manifestとして検証・公開し、canonical itemの配色を使う。旧manifestのSHAは生成日時が変わるため流用しない。
 manifestだけをコピーした検証用stageを用意し、古いローカルミラーを監査に混ぜない。
 
 ### localhostでの表示検証
@@ -263,7 +264,7 @@ Turbo経由では `--env-mode=loose` が必要。公開品質baselineへstaged�
 ### 公開と計測
 
 本番コード・R2の公開は検証済み差分をまとめて行う。新規テーマは公開前baselineを0で補完せず、
-実際の本番表示確認日からlaunch実験のd7/d28/d56を設定する。既存テーマ改善は事前窓と条件を照合する。
+実際に公開した日からlaunch実験のd7/d28/d56を設定する。2026-09-11公開分の55件は、9月18日・10月9日・11月6日を観測開始日として登録済み。既存テーマ改善は事前窓と条件を照合する。
 未開始pendingの改善baselineを修正する場合は `evaluate-theme-experiments.mjs --update-baseline <id> '<json>'` を使う。
 baseline・期間・scope・status・evidenceRefsのみ変更でき、launchや公開日・観測・判定がある実験は拒否する。
 修正前後の値と公式APIの期間・条件・SHAは `.claude/state/metrics/themes/` に保存する。欠測を0で補完しない。

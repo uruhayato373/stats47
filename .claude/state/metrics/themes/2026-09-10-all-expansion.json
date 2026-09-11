@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-09-10T23:27:34.627601+00:00",
-  "status": "authorized-release-r2-verified-ci-remediation",
+  "recordedAt": "2026-09-11T14:37:14.066652+00:00",
+  "status": "production-deployed-cache-invalidation-fix-pending",
   "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
   "themeCount": 55,
   "adoptedCandidates": 120,
@@ -1491,7 +1491,7 @@
   },
   "limitation": "Wiring is structural evidence only. Candidate scope, source definitions, data, rendered values and publication require separate verification. No test pass is inferred by this recorder.",
   "release": {
-    "status": "r2-published-public-readback-verified-code-release-pending",
+    "status": "production-deployed-cache-invalidation-fix-pending",
     "metricCount": 253,
     "fileCount": 2155,
     "componentThemes": 55,
@@ -2144,7 +2144,7 @@
               "missing": 0,
               "duplicates": 0,
               "comparedFeeCells": 329,
-              "maxSubtotalError": 1.0000803740695119e-8,
+              "maxSubtotalError": 1.0000803740695119e-08,
               "visitorTimesPriceWithinRounding": true,
               "maxMultiplicationError": 0.06714821000059601,
               "officialPdfMatchedRows": 47
@@ -6550,7 +6550,21 @@
         "buildId": "RTwt5z7Inrjq8CU-8iPtA"
       },
       "scopeAuditBasis": "validation.next253Tsunami29.scopeAudit; source values unchanged",
-      "measurementBasis": "validation.next253Profiles.measurementAudit; unstarted55",
+      "measurementBasis": {
+        "priorBaseline": "validation.next253Profiles.measurementAudit",
+        "startedAt": "2026-09-11",
+        "launchCount": 34,
+        "structureCount": 21,
+        "scheduledCount": 55,
+        "evaluateAt": {
+          "d7": "2026-09-18",
+          "d28": "2026-10-09",
+          "d56": "2026-11-06"
+        },
+        "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/measurement-scheduled.json",
+        "improvementId": "THEME-EXPANSION-EFFECT-01",
+        "effect": "pending"
+      },
       "git": {
         "commit": "240800291",
         "pushTargetAuthorized": "origin/codex/theme-expansion-128",
@@ -6720,14 +6734,14 @@
       "ciRemediation": {
         "pullRequest": "https://github.com/uruhayato373/stats47/pull/950",
         "initialRun": 34540727631,
-        "status": "local-pass-awaiting-remote-ci",
+        "status": "PASS-18-checks-on-6568b80cd",
         "findings": [
           "Package tests retained pre-expansion chart/count assertions; preserve source links, zero raw e-Stat/color checks and mutation controls while updating measured baseline.",
           "Full E2E detected an inaccessible menu footer after expansion to 55 themes; constrain dropdown height and verify navigation at 1280x600.",
           "CodeQL reported public URL construction, first-only numeric prefix replacement and quadratic trailing slash regex; fix and require fresh CodeQL.",
           "Weekly audit workflow ShellCheck SC2129: group output writes."
         ],
-        "productionCodeDeployed": false,
+        "productionCodeDeployed": true,
         "packageTests": {
           "status": "PASS",
           "files": 293,
@@ -6898,7 +6912,7 @@
             "adminFiles": 23,
             "status": "PASS"
           },
-          "status": "local-pass-awaiting-remote-ci",
+          "status": "PASS-final-ci",
           "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation/round4"
         }
       },
@@ -6907,6 +6921,70 @@
         "sha256": "7e0aba65dac95ecfe172c2999784b7fc58e21e87ba4c15804379f09721f79473",
         "files": 2155,
         "bytes": 3734266096
+      },
+      "production": {
+        "status": "final-verification-in-progress",
+        "head": "3d58789468d1ca617b14305f22e74affb93627b9",
+        "buildId": "hmblfV4d70wVfxe34ii9g",
+        "deployedAt": "2026-09-11T11:40:17Z",
+        "pullRequest": 950,
+        "deployRun": 34594710663,
+        "deployStep": "success",
+        "deployRunConclusion": "failure",
+        "deployRunFailure": "Post-deploy smoke found 10 new ranking OGP URLs missing; repair separate image layer",
+        "ciRun": 34593858550,
+        "checks": 18,
+        "evidenceDirectory": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g",
+        "browser": {
+          "status": "PASS-after-recheck",
+          "cases": 110,
+          "firstPass": 109,
+          "recheckPass": 1,
+          "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/browser-summary.json",
+          "limitation": "foreign-residents chart first-load 503 recovered without code/data change; cause unconfirmed"
+        },
+        "http": {
+          "cases": 147,
+          "pass": 147,
+          "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/http-corrected-result.json"
+        },
+        "sitemap": {
+          "themes": 55,
+          "tokyoAreas": 52,
+          "newSurveyIdsSincePriorMain": 20,
+          "shards": 11
+        },
+        "sourceBrowserStatus": "39/43 PASS after purge; delivery-clinic-count and buried-cultural-property-specialist-count error boundary at both widths",
+        "runtimeLogs": "Local Cloudflare API token unavailable; worker tail not collected",
+        "temporaryEvidenceLoss": "Prior /tmp production evidence unavailable after continuation; rebuilt from durable frozen catalog and reran current production. Historical summary is not substituted for new proof.",
+        "cacheInvalidationRepair": {
+          "status": "PASS-local-74-tests-and-web-types-awaiting-pr-deploy",
+          "cause": "The authenticated purge route executes in the uncached default entrypoint, so ctx.cache.purge succeeds for that entrypoint but does not invalidate CachedApp HTML.",
+          "officialSource": "https://developers.cloudflare.com/workers/cache/purge/",
+          "observedAt": "2026-09-11",
+          "proof": [
+            "source-link-diagnostic.json",
+            "survey-browser-final.json",
+            "isr-before-index.json",
+            "purge-detail.log",
+            "cache-owner-red.log"
+          ],
+          "evidenceDirectory": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g",
+          "first503Cause": "unconfirmed; this repair addresses persisted cached error pages, not an asserted cause of the initial upstream error",
+          "change": "Authenticated route invokes CachedApp.purgeCache RPC; purge executes in the owning entrypoint.",
+          "next": "Tests/types, PR+CI, deploy and verify same-build cache invalidation plus all55 themes/source links."
+        }
+      },
+      "imagePublication": {
+        "status": "published-canonical-public-verified",
+        "index": ".local/verification/themes/2026-09-11-ranking-images/published-image-index.json",
+        "sha256": "4d4cb447629cb835a52a0055a3905247a5a85a279e3c87b8ef6d7e652f7625d8",
+        "objects": 1265,
+        "images": 759,
+        "manifests": 506,
+        "bytes": 26638882,
+        "scope": "253 rankings; image layer separate from frozen data publication manifests",
+        "evidence": ".local/verification/themes/2026-09-11-ranking-images/result.json"
       }
     },
     "release252Historical": {
