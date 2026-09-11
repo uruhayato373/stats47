@@ -146,3 +146,5 @@ export * from './shelter-applicability-source';
 
 export * from './tsunami-exposure-source';
 export * from './tsunami-exposure-schema';
+
+export { LOCAL_FINANCE_RATIO_METRICS } from "./local-finance-ratios";

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { validateMetricGroups } from "../../scripts/validate-theme-catalog";
 import { METRICS_REGISTRY } from "../registry";
+import { THEME_CATALOGS } from "../theme-catalog";
 import { normalizeUnitForAxis, type ThemeCatalog } from "../theme-catalog/types";
 
 /**
@@ -50,6 +51,12 @@ function run(c: ThemeCatalog) {
 }
 
 describe("validateMetricGroups — error", () => {
+  it("専用財政カードは実配置時だけ所属として認め、削除すれば未配置を検出する", () => {
+    const c = structuredClone(THEME_CATALOGS['local-finance']);
+    expect(run(c).warns).toEqual([]);
+    c.sections = [];
+    expect(run(c).warns.filter((warning) => warning.startsWith('[group-orphan]'))).toHaveLength(4);
+  });
   it("単位 3 種のグループを弾く (Y 軸は左右 2 本しかない)", () => {
     const { errors } = run(
       catalog(

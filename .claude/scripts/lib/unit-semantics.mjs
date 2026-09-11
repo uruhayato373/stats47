@@ -45,6 +45,15 @@ const SCALED_BASE_UNITS = [
   ["km2", "area", "m2", 6],
   ["kWh", "energy", "Wh", 3],
   ["MWh", "energy", "Wh", 6],
+  // 再エネ特措法 A表の設備容量 (fit-fip-installed-capacity)。発電量 Wh と区別する。
+  // https://www.fit-portal.go.jp/publicinfosummary （原表・取得日は metric の provenance）
+  ["W", "power", "W", 0],
+  ["kW", "power", "W", 3],
+  ["MW", "power", "W", 6],
+  // 環境省「部門別CO₂排出量の現況推計」の千t-CO₂。NFKC後は CO2。
+  // https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html
+  // 炭素質量 t-C・温室効果ガス CO2eq・一般の質量と同一視しない。
+  ["t-CO2", "co2-mass", "g-CO2", 6],
 ];
 
 /**
@@ -92,6 +101,33 @@ const BASE_UNITS = [
   ["加入", "count"],
   ["延数", "count"],
   ["人泊", "count"],
+  // 2026-09-11 config と各 source/provenance の計数対象を確認した語彙。
+  // 土砂災害指定区域、SSDS契約・事業者、農林業/港湾/運輸、行政DX・橋梁等。
+  // 件へまとめず baseUnit に各表記を残す（例: 橋 ≠ 基、経営体 ≠ 事業体）。
+  ["区域", "count"],
+  ["契約", "count"],
+  ["業者", "count"],
+  ["住宅", "dwelling"],
+  ["団", "count"],
+  ["署", "count"],
+  ["組織", "count"],
+  ["経営体", "count"],
+  ["羽", "count"],
+  ["通", "count"],
+  ["市町村", "count"],
+  ["例", "count"],
+  ["両", "count"],
+  ["軒", "count"],
+  ["手続", "count"],
+  ["駅", "count"],
+  ["地点", "count"],
+  ["橋", "count"],
+  ["工場", "count"],
+  ["事業体", "count"],
+  ["丁", "count"],
+  ["者", "count"],
+  ["基", "count"],
+  ["束", "count"],
   ["g", "mass"],
   ["kg", "mass"],
   ["t", "mass"],
@@ -240,7 +276,11 @@ function matchBaseUnit(s) {
   const t = s.trim();
   if (t === "") return null;
   for (const [token, dimension, baseUnit, scaleExponent] of SCALED_BASE_UNITS) {
-    if (token.toLowerCase() === t.toLowerCase()) {
+    // 電力は mW と MW が別倍率。CO2 の物質表記も大小文字を勝手に畳まない。
+    const matches = dimension === "power" || dimension === "co2-mass"
+      ? token === t
+      : token.toLowerCase() === t.toLowerCase();
+    if (matches) {
       return { dimension, baseUnit, scaleExponent };
     }
   }

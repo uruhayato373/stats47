@@ -6795,7 +6795,81 @@
           "generator": "apps/web/scripts/generate-sitemap-blog-entries.ts",
           "localBuildNote": "Generated survey ID list refreshed after the local build; exact release build remains gated by PR CI and production sitemap checks."
         },
-        "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation"
+        "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation",
+        "round2": {
+          "previousHead": "fcd9448f7295b24153bf174ce0c2b2357f9c89b4",
+          "previousRun": 34586133372,
+          "status": "local-gates-pass-final-remote-ci-required",
+          "previousCiPassed": [
+            "CodeQL all languages and combined check",
+            "Full E2E",
+            "Build Check",
+            "Type Check",
+            "Admin Build & E2E"
+          ],
+          "fixes": [
+            "weekly audit contract tests cover live/quality/alert status propagation",
+            "landslide source tests use synthetic artifacts and actual parser/hash with no local-data skips",
+            "shared finance ratio definitions connect actual embedded cards to catalog placement audit",
+            "new link/source contract tests satisfy unchanged critical-module coverage thresholds",
+            "unit definitions and official meta reduce unknown counts; 240 evidence-backed polarity assignments",
+            "reference evidence inventory regenerated for newly mapped themes"
+          ],
+          "checks": {
+            "catalog": {
+              "errors": 0,
+              "warnings": 0
+            },
+            "unitUnknown": {
+              "before": 92,
+              "after": 46
+            },
+            "polarityUnassigned": {
+              "before": 2524,
+              "after": 2284
+            },
+            "moneyMetaMissing": {
+              "before": 8,
+              "after": 7
+            },
+            "criticalCoverageTests": 227,
+            "landslideTests": 7,
+            "financeTests": 19,
+            "typeCheck": "all packages and scripts PASS",
+            "staticSteps": {
+              "checked": 55,
+              "initialPass": 53,
+              "correctedAndRetested": [
+                "ESLint",
+                "Japan Zue evidence inventory"
+              ]
+            },
+            "packageTests": {
+              "files": 293,
+              "tests": 2608,
+              "status": "PASS"
+            }
+          },
+          "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation/round2"
+        },
+        "colorSupplement": {
+          "manifest": ".local/verification/themes/2026-09-11-color-supplement.json",
+          "sha256": "e57bbf8508c9d5e85dfb0181c0c4455079dabe555cb030538edcffab8d80ff6c",
+          "files": 32,
+          "colorChanges": 31,
+          "dryRun": "PASS",
+          "status": "published-public-readback-verified",
+          "invariant": "Only visualization.colorScheme changes; observations and all other item fields match parent release; original manifest unchanged",
+          "evidenceDirectory": ".local/verification/themes/2026-09-11-color-publication",
+          "uploaded": 32,
+          "publicReadback": "PASS 32/32"
+        }
+      },
+      "effectivePublication": {
+        "manifest": ".local/verification/themes/2026-09-11-effective-release.json",
+        "sha256": "7e0aba65dac95ecfe172c2999784b7fc58e21e87ba4c15804379f09721f79473",
+        "files": 2155,
+        "bytes": 3734266096
       }
     },
     "release252Historical": {
@@ -6816,7 +6890,8 @@
     "Culture uses three special-designation types; bridge ages cover FY2025 inspected bridges; depopulated settlement detail covers ten blocks rather than all prefecture microdata.",
     "Landslide exposure covers 46 licensed prefectures; Kyoto is excluded, not zero. Tsunami exposure covers 29 verified historical prefecture scenarios; 18 prefectures are unavailable or excluded for distinct recorded reasons. Tokyo is island-scenario-only and unmodelled areas are not safe/zero.",
     "Earthquake population exposure is implemented. A nationwide housing-only spatial input was not acquired through the reviewed official routes.",
-    "Public R2 publication and all 2,155 object readbacks passed; production code deployment and experiment start remain pending."
+    "Public R2 publication and all 2,155 object readbacks passed; production code deployment and experiment start remain pending.",
+    "The initial 2,155-file publication is supplemented by 32 metadata objects: 31 evidence-backed color changes and their aggregate index. The effective verification manifest composes both immutable publication layers."
   ],
   "countsScope": "Initial structural wiring only. dataValidationPending=101 means this structural recorder did not assess data; current source, display and publication states are under validation and release.",
   "candidateStatusScope": "Structural snapshot only; current semantic/source assessment is validation.next253Tsunami29.scopeAudit. These structural rows do not override source/display verification.",

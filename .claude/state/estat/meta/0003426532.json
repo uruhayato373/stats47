@@ -1,0 +1,705 @@
+{
+  "statsDataId": "0003426532",
+  "title": "1世帯当たり資産現在高・負債現在高 全国・都市階級・地方・４大都市圏・都道府県，世帯の種類(3区分)，世帯区分(4区分)，世帯主の性別(3区分)，資産・負債の種類(42区分)別１世帯当たり資産現在高・負債現在高－全国・都市階級・地方・４大都市圏・都道府県",
+  "source": {
+    "url": "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?lang=J&statsDataId=0003426532",
+    "fetchedAt": "2026-09-10T22:22:16.968+09:00",
+    "rawSha256": "96650bd6b62f884d845501706865c0eec8ac81b78c6103075ae0c778cac28984"
+  },
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 9,
+      "sampleValues": [
+        {
+          "code": "06-2019",
+          "name": "集計世帯数（概数）",
+          "unit": null
+        },
+        {
+          "code": "07-2019",
+          "name": "世帯数分布",
+          "unit": null
+        },
+        {
+          "code": "08-2019",
+          "name": "世帯人員",
+          "unit": "人"
+        },
+        {
+          "code": "09-2019",
+          "name": "18歳未満人員",
+          "unit": "人"
+        },
+        {
+          "code": "10-2019",
+          "name": "65歳以上人員",
+          "unit": "人"
+        },
+        {
+          "code": "11-2019",
+          "name": "有業人員",
+          "unit": "人"
+        },
+        {
+          "code": "12-2019",
+          "name": "世帯主の年齢",
+          "unit": "歳"
+        },
+        {
+          "code": "04-2019",
+          "name": "1世帯当たり資産現在高・負債現在高",
+          "unit": "千円"
+        },
+        {
+          "code": "05-2019",
+          "name": "資産保有率・負債保有率",
+          "unit": "％"
+        }
+      ]
+    },
+    {
+      "id": "cat01",
+      "name": "世帯の種類３区分",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総世帯",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "二人以上の世帯",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "単身世帯",
+          "unit": null
+        }
+      ]
+    },
+    {
+      "id": "cat02",
+      "name": "世帯区分４区分",
+      "valueCount": 4,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "全世帯",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "勤労者世帯",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "無職世帯",
+          "unit": null
+        },
+        {
+          "code": "3",
+          "name": "その他の世帯",
+          "unit": null
+        }
+      ]
+    },
+    {
+      "id": "cat03",
+      "name": "世帯主の性別３区分",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "平均",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "男",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "女",
+          "unit": null
+        }
+      ]
+    },
+    {
+      "id": "cat04",
+      "name": "資産・負債の種類42区分",
+      "valueCount": 42,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "平均",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "純金融資産（貯蓄－負債）",
+          "unit": null
+        },
+        {
+          "code": "21",
+          "name": "金融資産残高（貯蓄現在高）",
+          "unit": null
+        },
+        {
+          "code": "211",
+          "name": "預貯金",
+          "unit": null
+        },
+        {
+          "code": "2111",
+          "name": "通貨性預貯金",
+          "unit": null
+        },
+        {
+          "code": "2112",
+          "name": "定期性預貯金",
+          "unit": null
+        },
+        {
+          "code": "212",
+          "name": "生命保険など",
+          "unit": null
+        },
+        {
+          "code": "213",
+          "name": "有価証券",
+          "unit": null
+        },
+        {
+          "code": "2131",
+          "name": "貸付信託・金銭信託",
+          "unit": null
+        },
+        {
+          "code": "2132",
+          "name": "株式",
+          "unit": null
+        },
+        {
+          "code": "2133",
+          "name": "債券",
+          "unit": null
+        },
+        {
+          "code": "2134",
+          "name": "投資信託",
+          "unit": null
+        },
+        {
+          "code": "214",
+          "name": "その他",
+          "unit": null
+        },
+        {
+          "code": "21R",
+          "name": "（再掲）年金型貯蓄",
+          "unit": null
+        },
+        {
+          "code": "22",
+          "name": "金融負債残高",
+          "unit": null
+        },
+        {
+          "code": "221",
+          "name": "住宅・土地のための負債",
+          "unit": null
+        },
+        {
+          "code": "222",
+          "name": "住宅・土地以外の負債",
+          "unit": null
+        },
+        {
+          "code": "223",
+          "name": "月賦・年賦",
+          "unit": null
+        },
+        {
+          "code": "3",
+          "name": "住宅・宅地",
+          "unit": null
+        },
+        {
+          "code": "31",
+          "name": "現住居・居住地",
+          "unit": null
+        },
+        {
+          "code": "311",
+          "name": "宅地",
+          "unit": null
+        },
+        {
+          "code": "3111",
+          "name": "所有地",
+          "unit": null
+        },
+        {
+          "code": "3112",
+          "name": "借地",
+          "unit": null
+        },
+        {
+          "code": "312",
+          "name": "住宅",
+          "unit": null
+        },
+        {
+          "code": "32",
+          "name": "現住居・居住地以外",
+          "unit": null
+        },
+        {
+          "code": "321",
+          "name": "宅地",
+          "unit": null
+        },
+        {
+          "code": "322",
+          "name": "住宅",
+          "unit": null
+        },
+        {
+          "code": "4",
+          "name": "純資産総額（純金融資産＋住宅・宅地）",
+          "unit": null
+        },
+        {
+          "code": "5",
+          "name": "貯蓄保有率（％）",
+          "unit": null
+        },
+        {
+          "code": "51",
+          "name": "通貨性預貯金",
+          "unit": null
+        },
+        {
+          "code": "52",
+          "name": "定期性預貯金",
+          "unit": null
+        },
+        {
+          "code": "53",
+          "name": "生命保険など",
+          "unit": null
+        },
+        {
+          "code": "54",
+          "name": "有価証券",
+          "unit": null
+        },
+        {
+          "code": "541",
+          "name": "貸付信託・金銭信託",
+          "unit": null
+        },
+        {
+          "code": "542",
+          "name": "株式",
+          "unit": null
+        },
+        {
+          "code": "543",
+          "name": "債券",
+          "unit": null
+        },
+        {
+          "code": "544",
+          "name": "投資信託",
+          "unit": null
+        },
+        {
+          "code": "55",
+          "name": "その他",
+          "unit": null
+        },
+        {
+          "code": "6",
+          "name": "負債保有率（％）",
+          "unit": null
+        },
+        {
+          "code": "61",
+          "name": "うち住宅･土地のための負債",
+          "unit": null
+        },
+        {
+          "code": "6R",
+          "name": "(再掲)20万円以上の負債",
+          "unit": null
+        }
+      ]
+    },
+    {
+      "id": "area",
+      "name": "地域（全国・都市階級・地方・４大都市圏・都道府県）",
+      "valueCount": 67,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "00101",
+          "name": "大都市",
+          "unit": null
+        },
+        {
+          "code": "00102",
+          "name": "中都市",
+          "unit": null
+        },
+        {
+          "code": "00103",
+          "name": "小都市Ａ",
+          "unit": null
+        },
+        {
+          "code": "00104",
+          "name": "小都市Ｂ",
+          "unit": null
+        },
+        {
+          "code": "00105",
+          "name": "町村",
+          "unit": null
+        },
+        {
+          "code": "00201",
+          "name": "北海道地方",
+          "unit": null
+        },
+        {
+          "code": "00202",
+          "name": "東北地方",
+          "unit": null
+        },
+        {
+          "code": "00203",
+          "name": "関東地方",
+          "unit": null
+        },
+        {
+          "code": "00204",
+          "name": "北陸地方",
+          "unit": null
+        },
+        {
+          "code": "00205",
+          "name": "東海地方",
+          "unit": null
+        },
+        {
+          "code": "00206",
+          "name": "近畿地方",
+          "unit": null
+        },
+        {
+          "code": "00207",
+          "name": "中国地方",
+          "unit": null
+        },
+        {
+          "code": "00208",
+          "name": "四国地方",
+          "unit": null
+        },
+        {
+          "code": "00209",
+          "name": "九州地方",
+          "unit": null
+        },
+        {
+          "code": "00210",
+          "name": "沖縄地方",
+          "unit": null
+        },
+        {
+          "code": "00303",
+          "name": "関東大都市圏",
+          "unit": null
+        },
+        {
+          "code": "00306",
+          "name": "中京大都市圏",
+          "unit": null
+        },
+        {
+          "code": "00307",
+          "name": "近畿大都市圏",
+          "unit": null
+        },
+        {
+          "code": "00310",
+          "name": "北九州・福岡大都市圏",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "name": "時間軸(年次)",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "2019000000",
+          "name": "2019年",
+          "unit": null
+        }
+      ]
+    }
+  ]
+}
