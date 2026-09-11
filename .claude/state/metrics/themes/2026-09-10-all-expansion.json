@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "recordedAt": "2026-09-11T14:37:14.066652+00:00",
-  "status": "production-deployed-cache-invalidation-fix-pending",
+  "status": "production-html-integrity-repair-pending",
   "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
   "themeCount": 55,
   "adoptedCandidates": 120,
@@ -1491,7 +1491,7 @@
   },
   "limitation": "Wiring is structural evidence only. Candidate scope, source definitions, data, rendered values and publication require separate verification. No test pass is inferred by this recorder.",
   "release": {
-    "status": "production-deployed-cache-invalidation-fix-pending",
+    "status": "production-html-integrity-repair-pending",
     "metricCount": 253,
     "fileCount": 2155,
     "componentThemes": 55,
@@ -2144,7 +2144,7 @@
               "missing": 0,
               "duplicates": 0,
               "comparedFeeCells": 329,
-              "maxSubtotalError": 1.0000803740695119e-08,
+              "maxSubtotalError": 1.0000803740695119e-8,
               "visitorTimesPriceWithinRounding": true,
               "maxMultiplicationError": 0.06714821000059601,
               "officialPdfMatchedRows": 47
@@ -6985,6 +6985,45 @@
         "bytes": 26638882,
         "scope": "253 rankings; image layer separate from frozen data publication manifests",
         "evidence": ".local/verification/themes/2026-09-11-ranking-images/result.json"
+      },
+      "productionHtmlIntegrityRepair": {
+        "status": "html-integrity-local-repair-pending-release",
+        "pr": 953,
+        "buildId": "iXmDExxT9Awfz7bXSyc_Q",
+        "head": "658c3fa64aba0e047fd59278eb437a60dea8554e",
+        "ciRun": 34613284723,
+        "deployRun": 34614448966,
+        "deployConclusion": "success",
+        "postDeploySmokeRun": 34615558207,
+        "postDeploySmokeConclusion": "failure",
+        "smoke": {
+          "passed": 43,
+          "flaky": 4,
+          "failed": 1,
+          "failedCase": "population-dynamics chart-overlap",
+          "actualPage": "ページを表示できませんでした"
+        },
+        "evidence": {
+          "source": "CI Playwright retry trace",
+          "html": ".local/verification/themes/2026-09-11-production-iXmDExxT9Awfz7bXSyc_Q/population-ci-document.html",
+          "bytes": 782007,
+          "sha256": "8b34d197c5eab16dbb2ea090274261b4924176d2286aacdc5d4c716b90e94300",
+          "closed": false,
+          "response": {
+            "status": 200,
+            "cache": "HIT",
+            "age": "25",
+            "cfRay": "a397ae8d5d7ed623-DFW"
+          },
+          "console": "Connection closed"
+        },
+        "repair": {
+          "action": "Validate bounded GET HTML before CachedApp can cache it; retry incomplete/read-error once; repeated failure returns no-store 503",
+          "bufferLimitBytes": 8388608,
+          "replay": ".local/verification/themes/2026-09-11-production-iXmDExxT9Awfz7bXSyc_Q/html-integrity-ci-replay.json",
+          "tests": 84
+        },
+        "uncertainty": "Which upstream component ended the initial stream remains unconfirmed; this change rejects the directly observed incomplete document at the caching boundary."
       }
     },
     "release252Historical": {
