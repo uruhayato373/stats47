@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-09
+updated: 2026-09-12
 ---
 
 # バックログ (タスクマスタ)
@@ -751,31 +751,15 @@ updated: 2026-09-09
 - **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
 - **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
 
-### [THEME-EXPANSION-IMPLEMENT-01] 採択したテーマ拡充を検証済み仕様から実装する
+### [THEME-EXPANSION-IMPLEMENT-01] 地震曝露の住宅部分に使える全国空間原典を確保する
 
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-09] [進行中]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-09]
 
-- **2026-09-10 checkpoint**: 55テーマの構造接続後、候補の主問を全128件再監査した。追加原典の取込と章修正を継続中。構造PASSを主問充足や公開完了とは扱わない。最新の採用指標・source hash・検証状態は `.claude/state/metrics/themes/2026-09-10-all-expansion.json`。未充足の核心は同記録の `validation.candidateScope` から、直接統計→公式ファイル→GISの順に処理する。
-- **owner**: theme-designer（全体）／data-ingester（値・設定）／theme-component-builder・theme-ui-manager（画面）
-- **現在地**: [全体実装記録](../state/metrics/themes/2026-09-10-all-expansion.json) を正典とする。55テーマの構造接続と、各候補の採択範囲・原典・表示検証を分離して扱う。原典不一致・GISの未実装範囲を構造の完了へ埋め込まない。
-- **次**: 全候補の原典・採用範囲監査を踏まえ、残る地震住宅の全国空間原典を取得・検証する。採用済み部分は55テーマ110画面・県別672ケースと出典導線を検証済み。公開工程は固定manifestとともに下記カードへ接続する。範囲限定と未充足を全体実装記録の `scopeCounts` / `validation.next253Tsunami29` から引き継ぎ、原典未確保を代替指標で完了扱いにしない。
-- **正典**: [採否・範囲・初回仕様・実装順](../skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json) の `decision` / `firstBatch` / `implementationWaves`。取得証拠は [全県・年別の検証](../state/estat/theme-expansion-verification.json)。このカードが実装の入口であり、JSON内へ独立したTODO台帳を作らない。
-- **実行順**: ① `npm run theme:expansion:check` で仕様を検査し、採択候補の核心となる問いと実在する指標を照合する。既存metricのyears不足と未登録指標はdata-ingesterが実値確認後に取り込む。②既存テーマは同じ問いの章を拡充し、重複章を追加しない。③API中心→公式ファイル補完→GISの順で、採択範囲だけを小分けに実装する。統合候補は統合先で扱い、保留は再開条件を満たすまで着手しない。
-- **検証**: firstBatchの47県・比較年・原典定義を再現し、ThemeCatalog／生成snapshot／表示値を突合する。`validate:catalog`、対象テスト・型検査、PC・モバイルの表示を通す。廃棄物2024年度の原典更新を先に確認し、2023年度を最新と表現しない。情報通信の2020年経理事項は初回から除外する。
-- **停止条件**: 年・母集団・地域区分・単位が合わない場合は該当指標を採用しない。欠測を0へ変換しない。inactiveや未登録キーを配信定義に入れない。業者所在県と施工県、事業所と企業、契約数とカバー率を混同しない。公開R2と本番への反映は検証済み差分をまとめて承認後に行う。
-- **完了条件**: 採択範囲の実装・データ・表示検証が完了し、各候補から採用先の実在するThemeCatalog／章へ辿れる。対象を縮小した場合は根拠をdecisionへ記録する。公開工程は `THEME-PORTFOLIO-REMAINDER-01` と対象manifestを突合し、完了・未完了を取り違えない。
-
-### [THEME-PORTFOLIO-REMAINDER-01] 全テーマの表示検証・改善公開と計測開始
-
-タグ: [種類:改善] [実行:対話] [起票:2026-07-04]
-
-- **残工程**: ローカルの全表示・出典導線・生成物・豪雪地図の障害復帰は検証済み。固定manifest（253指標・2155ファイル）とコード差分の承認後、公開R2、本番デプロイ、公開日からの計測開始を実施する。採用範囲・許諾・未充足の詳細は `.claude/state/metrics/themes/2026-09-10-all-expansion.json` と各候補のdecisionを参照する。
-- **全体拡充との統合**: 初回3テーマ、追加31テーマ、既存21テーマの未公開差分を、全55テーマの現行定義から再生成したmanifestで突合する。特に100指標のmetadata、健康寿命・農業産出額・ラスパイレス指数の値/単位修正を落とさない。`app/ranking-items/all.json` は公開在庫を基に検証済み全差分を重ねる。新規テーマは公開前baselineなしのlaunch実験として、実際の公開日から7／28／56日を観測する。
-- **owner**: `devops-runner`（デプロイ）/ `r2-publisher`（検証済み対象の公開）/ `theme-ui-manager`（配信確認）/ `theme-portfolio-manager`（計測開始）
-- **実行順**: (0) 全型・対象テスト・生成物・buildと全テーマの表示および変更導線を検証し、manifestのbyte/SHAを固定する。(1) 承認済みのfeatureブランチへGit同期し、ローカル検証結果と本番差分を提示して本番反映の承認を得る。(2) 既存のR2 writerと同時実行しないことを確認し、固定manifestの全件事前検査・remote dry-run後、exact publisherで原典から依存順にデータを反映する。未更新mainのsync-snapshotsは起動しない。(3) feature→develop→mainを規約どおり統合し、同じデータを読むCIと1回のデプロイを確認する。(4) 全55テーマ・旧財政redirect・追加survey導線と修正した年/母集団/分母表示を本番実測する。(5) 実際の公開日で全55テーマの実験（新規34・既存構成21）を `evaluate-theme-experiments.mjs --schedule` し、既存の週次CIと月曜フォローのstate書き戻しを確認する。
-- **停止条件**: hydration #418 の残存、CI/生成物/manifestの不一致、公式source hash・recipeの差異、本番表示不一致があれば公開完了にしない。公開前に実験開始日を設定しない。staged監査を公開品質baselineへ上書きしない。正常時や既知coverage警告だけで新たなTODOを起票しない。
-- **完了条件**: コードと検証済みR2が本番で一致し、全テーマ・主要導線と週次workflowが成功する。公開日に対応したd7/d28/d56期日をstateに記録し、公開後の効果観測は `improvement-triage` へ別IDで引き渡す。外国人テーマを含む既存21テーマは、取得済みの同一56日窓baselineを用いる。少数観測は measured-low として効果判定を保留する。
-- **正典**: `.claude/rules/branch-workflow.md` / `.claude/skills/theme/optimize-themes/SKILL.md` / `.claude/state/themes/README.md`
+- **対象**: 候補105の住宅部分。現在の採用範囲と未充足は [全体実装記録](../state/metrics/themes/2026-09-10-all-expansion.json) の `scopeCounts` / `validation.next253Tsunami29.scopeAudit`、採否は [候補カタログ](../skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json) のdecisionを正典とする。
+- **owner**: theme-designer（採用判断）／open-data-curator（原典探索）／data-ingester・gis-pipeline-runner（取得・空間集計）。
+- **次・実行順**: ①住宅を直接数える全国空間原典を公式提供元で確認し、版・単位・住宅の定義・地域カバレッジ・利用条件を記録する。②利用可能ならJ-SHISとの空間対応、県別途中artifact、保存則を実装・検証する。③採用指標と章へ接続し、生成物・実表示・本番反映を同じ対象で確認する。
+- **停止条件**: 全国住宅の原典が確保できない間は未充足を維持する。人口・一般世帯・建物棟数を住宅戸数の代用にしない。PLATEAU等の部分カバレッジを全国値にしない。原典未発見を全国に存在しないという断定にしない。
+- **完了条件**: 住宅部分を原典から再現でき、定義・時点・空間集計・配信値の整合を検証し、候補105のdecisionと全体実装記録へ証拠を反映する。公開後の計測と品質観測は `THEME-EXPANSION-EFFECT-01` へ接続する。
 
 ### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
 
