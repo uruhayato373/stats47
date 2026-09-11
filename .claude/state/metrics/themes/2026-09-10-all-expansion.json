@@ -6874,7 +6874,7 @@
             "after": 52,
             "status": "PASS"
           },
-          "status": "local-pass-awaiting-remote-ci",
+          "status": "remote-web-packages-critical-coverage-pass-admin-contract-failed",
           "webCoverage": {
             "status": "PASS",
             "files": 257,
@@ -6885,6 +6885,21 @@
             "lines": 49.86
           },
           "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation/round3"
+        },
+        "round4": {
+          "previousHead": "e668c21bbf84144d32a2f84d79eb373bffa1b43c",
+          "previousRun": 34592734813,
+          "fixes": [
+            "Admin dashboard audit now includes climate in all 55 current themes; fixture count and missing-theme negative control cover it.",
+            "Remove 3 now-integrated metrics from reference draft table; 18 pending entries remain and exact missing-key coverage assertion is preserved."
+          ],
+          "checks": {
+            "adminTests": 112,
+            "adminFiles": 23,
+            "status": "PASS"
+          },
+          "status": "local-pass-awaiting-remote-ci",
+          "evidenceDirectory": ".local/verification/themes/2026-09-11-ci-remediation/round4"
         }
       },
       "effectivePublication": {

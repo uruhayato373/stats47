@@ -36,8 +36,8 @@ describe("dashboard catalog mirror", () => {
       localDashboards: 1,
       stories: 40,
       resasStories: 40,
-      coveredThemes: 20,
-      declaredThemes: 20,
+      coveredThemes: 55,
+      declaredThemes: 55,
       partialDashboards: 1,
       staleStories: 0,
     });
@@ -50,18 +50,18 @@ describe("dashboard catalog mirror", () => {
     });
   });
 
-  it("重複IDと現行テーマ欠落をFAILにする", async () => {
+  it.each(["ports", "climate"])("重複IDと現行テーマ%s欠落をFAILにする", async (themeKey) => {
     const result = await collect(
       makeDashboardCatalogFixture({
         duplicateStoryId: true,
-        omitTheme: "ports",
+        omitTheme: themeKey,
       })
     );
 
     expect(result.audit.status).toBe("fail");
     expect(result.audit.errors).toContain("ストーリーIDが重複: resas-story-0");
     expect(result.audit.errors).toContain(
-      "現行テーマがカタログ宣言にない: ports"
+      `現行テーマがカタログ宣言にない: ${themeKey}`
     );
   });
 });
