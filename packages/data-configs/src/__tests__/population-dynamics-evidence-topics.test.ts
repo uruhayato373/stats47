@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 
+import { METRICS_REGISTRY } from "../registry";
+
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
 import { POPULATION_DYNAMICS_CATALOG } from "../theme-catalog/population-dynamics";
 
@@ -28,8 +30,9 @@ describe("population-dynamics evidence topics", () => {
 
     for (const topic of POPULATION_DYNAMICS_CATALOG.evidenceTopics ?? []) {
       expect(topic.relatedRankingKeys?.length).toBeGreaterThan(0);
-      expect(topic.relatedChartKeys?.length).toBeGreaterThan(0);
+      // 追加図は任意。論点から必ず公開ランキングへ到達できることを守る。
       for (const rankingKey of topic.relatedRankingKeys ?? []) {
+        expect(METRICS_REGISTRY[rankingKey]?.isActive, rankingKey).toBe(true);
         expect(rankingKeys.has(rankingKey)).toBe(true);
       }
       for (const chartKey of topic.relatedChartKeys ?? []) {

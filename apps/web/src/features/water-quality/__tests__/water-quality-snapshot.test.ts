@@ -14,6 +14,11 @@ describe('原表の水域・県帰属・判定を保持する', () => {
     expect(p.rows).toHaveLength(3427);
     expect(p.rows[0]!.value75).toBe('<0.5');
   });
+  it.each(['<<0.5', '0<.5', '<script>0.5'])('不正な未満記号 %s は数値へ変換しない', (value) => {
+    const s = waterQualityFixture();
+    s.rows[0]!.value75 = value;
+    expect(parseWaterQualitySnapshot(s)).toBeNull();
+  });
   const mutations: [
     string,
     (s: ReturnType<typeof waterQualityFixture>) => void,

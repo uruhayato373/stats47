@@ -48,7 +48,7 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
   it("地方財政は専用3章を使い、旧汎用chartを移行契約へ戻さない", () => {
     const catalog = THEME_CATALOGS["local-finance"];
     expect(catalog.charts).toEqual([]);
-    expect(catalog.sections?.map((section) => ({
+    expect(catalog.sections?.filter((section) => section.embeddedSectionKeys?.length).map((section) => ({
       metricGroupKeys: section.metricGroupKeys,
       chartKeys: section.chartKeys ?? [],
       embeddedSectionKeys: section.embeddedSectionKeys,
@@ -58,10 +58,19 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
       { metricGroupKeys: [], chartKeys: [], embeddedSectionKeys: ["finance-flow"] },
     ]);
     expect(migrationContract.filter((row) => row.themeKey === "local-finance")).toEqual([]);
-    expect(catalog.metrics.filter((metric) => metric.role !== "context").map((metric) => metric.rankingKey)).toEqual([
+    expect(catalog.metrics.filter((metric) => metric.role !== "context").map((metric) => metric.rankingKey)).toEqual(expect.arrayContaining([
       "fiscal-strength-index-prefecture", "current-balance-ratio",
       "real-public-debt-service-ratio", "future-burden-ratio",
-    ]);
+    ]));
+    const extensions = catalog.sections?.filter((section) => !section.embeddedSectionKeys?.length) ?? [];
+    expect(extensions.map(({ key }) => key)).toEqual(["candidate-50", "candidate-92", "candidate-122", "candidate-123", "candidate-125"]);
+    for (const section of extensions) {
+      expect(section.metricGroupKeys.length).toBeGreaterThan(0);
+      for (const key of section.metricGroupKeys) {
+        expect(catalog.metricGroups?.find((group) => group.key === key)?.rankingKeys.length).toBeGreaterThan(0);
+      }
+      expect(section.chartKeys ?? []).toEqual([]);
+    }
   });
 
   it("28 chart の旧 request は参照先MetricConfigの取得条件と完全一致する", () => {

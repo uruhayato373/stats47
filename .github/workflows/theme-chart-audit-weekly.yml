@@ -37,11 +37,13 @@ jobs:
           live_code=${PIPESTATUS[0]}
           timeout --kill-after=20s 480s npm run theme:portfolio:audit 2>&1 | tee /tmp/theme-quality.log
           quality_code=${PIPESTATUS[0]}
-          echo "live_code=$live_code" >> "$GITHUB_OUTPUT"
-          echo "quality_code=$quality_code" >> "$GITHUB_OUTPUT"
-          node .claude/scripts/themes/build-theme-alert.mjs --output /tmp/theme-alert.md --live-code "$live_code" --quality-code "$quality_code" >> "$GITHUB_OUTPUT"
-          alert_code=$?
-          echo "alert_code=$alert_code" >> "$GITHUB_OUTPUT"
+          {
+            echo "live_code=$live_code"
+            echo "quality_code=$quality_code"
+            node .claude/scripts/themes/build-theme-alert.mjs --output /tmp/theme-alert.md --live-code "$live_code" --quality-code "$quality_code"
+            alert_code=$?
+            echo "alert_code=$alert_code"
+          } >> "$GITHUB_OUTPUT"
           cat /tmp/theme-alert.md >> "$GITHUB_STEP_SUMMARY"
       - name: 📤 Commit observations to develop
         if: steps.check.outputs.alert_code == '0'

@@ -35,6 +35,7 @@ test.describe("ヘッダーナビゲーション", () => {
   });
 
   test("テーマメガメニューから一覧へ遷移する", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 600 });
     // テーマは直リンクではなく dropdown。トリガーを開いてから一覧リンクを踏む。
     await page.getByRole("button", { name: "テーマ一覧" }).click();
 
@@ -42,6 +43,8 @@ test.describe("ヘッダーナビゲーション", () => {
       name: /すべてのテーマを見る/,
     });
     await expect(allThemesLink).toHaveAttribute("href", "/themes");
+    await allThemesLink.scrollIntoViewIfNeeded();
+    await expect(allThemesLink).toBeInViewport();
     await allThemesLink.click();
 
     await expect(page).toHaveURL(/\/themes/);

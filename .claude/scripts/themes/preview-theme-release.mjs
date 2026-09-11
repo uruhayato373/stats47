@@ -26,7 +26,9 @@ for (const file of manifest.files) {
 const server = http.createServer(async (req, res) => {
   try {
     const key = decodeURIComponent(new URL(req.url, 'http://127.0.0.1').pathname).slice(1);
-    if (!['GET', 'HEAD'].includes(req.method) || !validKey(key)) { res.writeHead(404).end(); return; }
+    // Shared navigation reads this canonical category index from the public bucket.
+    const readableKey = validKey(key) || key === 'categories/all.json';
+    if (!['GET', 'HEAD'].includes(req.method) || !readableKey) { res.writeHead(404).end(); return; }
     res.setHeader('Access-Control-Allow-Origin', '*');
     if (staged.has(key)) {
       const file = staged.get(key);

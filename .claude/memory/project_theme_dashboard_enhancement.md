@@ -35,3 +35,7 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 - **対策**: `AREA_THEME_SLUGS` をページ・middleware・sitemapで共有し、全許可テーマのmiddleware応答を検証する。リンクlintはThemeCatalog生成のIndicatorSet JSONから実キーを読む。テーマ追加時は全Webテストと県別URLの応答を確認し、冒頭3指標の検査は全章のカード配列へ拡張しない。
 
 - **プレビュー障害**: 公開R2のヘッダー取得後に本文が途切れると、中継サーバーが200送信後に502を再送して `ERR_HTTP_HEADERS_SENT` で停止した。本文を読み終えてからヘッダーを送る順序に修正し、本文が途中で失敗しても502応答後にstagedデータを返し続けるCLI回帰テストを追加した。失敗した110画面監査は別名で保存して再実行する。
+
+- **全体テストの範囲**: Web単体テストだけでは `packages/data-configs` のカタログ件数・移行契約の検査を含まない。テーマの大規模追加では `npm run test:packages` も実行する。実測baselineは更新しても、生e-Stat参照・生色ゼロと陰性対照を維持し、異なる分母を1図へ戻して旧テストを通さない。
+- **メニュー末尾の到達性**: 55テーマのヘッダーメニューは低い画面で一覧リンクが領域外へ出た。Radixの利用可能高を上限に縦スクロールを設け、`header-navigation.spec.ts` で1280×600の一覧遷移を検証する。テーマ追加時のE2E代表図も現在の型と件数へ合わせ、削除されたドーナツ図の検査は現存する地域経済の図へ移す。
+- **公開用認証とプレビューの分離**: 2155件公開後のローカルbuildはS3資格情報があると `R2_PUBLIC_FETCH_URL` よりS3を優先し、ブログ索引のタイムアウトで失敗した。プレビューbuild/startでは `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を空にし、build/startの両方へ検証済みgatewayを `R2_PUBLIC_FETCH_URL` で明示する。`NEXT_PUBLIC_R2_PUBLIC_URL` だけを残すと検索index生成は取得必須なのにserver readerが無効になるため混在させない。productionのS3優先規則は変更しない。
