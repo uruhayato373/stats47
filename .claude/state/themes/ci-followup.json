@@ -5,21 +5,16 @@
   "themeCount": 55,
   "runtime": {
     "expected": 110,
-    "checked": 65,
-    "failed": 4
+    "checked": 110,
+    "failed": 2
   },
   "problems": [
-    "construction-industry/1440:section-cards:construction-businesses:0/1",
-    "construction-industry/1440:section-cards:construction-output:0/1",
-    "construction-industry/1440:section-cards:construction-workers:0/1",
-    "information-industry/1440:section-cards:industry-locations:0/1",
-    "information-industry/1440:section-cards:industry-workers:0/1",
-    "living-housing/390:chart:lh-dwelling-floor-area-trend:source-unavailable",
-    "living-housing/390:network:503",
-    "runtime-incomplete",
-    "runtime-process:124",
-    "waste-recycling/1440:section-cards:resource-recovery:0/1",
-    "waste-recycling/1440:section-cards:waste-disposal:0/1"
+    "fishery-marine/1440:chart:theme-fishery-aquaculture-mix:source-unavailable",
+    "fishery-marine/1440:chart:theme-fishery-output-trend:source-unavailable",
+    "fishery-marine/1440:network:503",
+    "real-income/1440:chart:real-income-cpi-breakdown:source-unavailable",
+    "real-income/1440:network:503",
+    "runtime-process:1"
   ],
   "checkpoints": [
     {
@@ -29,6 +24,7 @@
       "due": "2026-07-21",
       "status": "quality-only",
       "reasons": [],
+      "values": {},
       "verdict": "insufficient-data"
     },
     {
@@ -43,6 +39,44 @@
         "baseline-missing-or-low-sample",
         "baseline-scope-unknown-or-incompatible"
       ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 112,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 895,
+          "status": "measured",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": 0.6868,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ]
+        }
+      },
       "verdict": "insufficient-data"
     },
     {
@@ -56,11 +90,49 @@
         "baseline-missing-or-low-sample",
         "baseline-scope-unknown-or-incompatible"
       ],
+      "values": {
+        "ga4.pageViews": {
+          "value": 112,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ]
+        },
+        "gsc.impressions": {
+          "value": 895,
+          "status": "measured",
+          "scope": "search-console",
+          "windowDays": 56,
+          "periodStart": "2026-07-10",
+          "periodEnd": "2026-09-03",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ]
+        },
+        "ga4.engagementRatePvWeighted": {
+          "value": 0.6868,
+          "status": "measured",
+          "scope": "Japan",
+          "windowDays": 56,
+          "periodStart": "2026-07-12",
+          "periodEnd": "2026-09-05",
+          "weeks": [
+            "2026-W32",
+            "2026-W36"
+          ]
+        }
+      },
       "verdict": "insufficient-data"
     }
   ],
-  "alertBody": "# テーマ継続確認\n- construction-industry/1440:section-cards:construction-businesses:0/1\n- construction-industry/1440:section-cards:construction-output:0/1\n- construction-industry/1440:section-cards:construction-workers:0/1\n- information-industry/1440:section-cards:industry-locations:0/1\n- information-industry/1440:section-cards:industry-workers:0/1\n- living-housing/390:chart:lh-dwelling-floor-area-trend:source-unavailable\n- living-housing/390:network:503\n- runtime-incomplete\n- runtime-process:124\n- waste-recycling/1440:section-cards:resource-recovery:0/1\n- waste-recycling/1440:section-cards:waste-disposal:0/1\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "42519ecd8896830059f483574c275a5a26c1aec6021b6a5af130fca9ec7ebab7",
+  "alertBody": "# テーマ継続確認\n- fishery-marine/1440:chart:theme-fishery-aquaculture-mix:source-unavailable\n- fishery-marine/1440:chart:theme-fishery-output-trend:source-unavailable\n- fishery-marine/1440:network:503\n- real-income/1440:chart:real-income-cpi-breakdown:source-unavailable\n- real-income/1440:network:503\n- runtime-process:1\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "c1a503b8b99bb0b3d1c5b26e3b4a49e4a4799ef98084d9c65770de52158ef433",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34654495422"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34657295841"
 }
