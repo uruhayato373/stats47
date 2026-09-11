@@ -5,6 +5,7 @@ import {
   runtimeFindings,
   summarizeFollowup,
   needsEvidenceReview,
+  expectedSectionPanels,
 } from '../theme-followup-core.mjs';
 
 const experiment = {
@@ -185,4 +186,39 @@ test('unchanged reviewed evidence stays quiet but unfinished source checks resum
     needsEvidenceReview(result, { inputSha256: 'old', unreviewedThemes: [] }),
     true
   );
+});
+
+test('fixed-year comparison tables count separately from switcher cards and must contain rows', () => {
+  const expected = expectedSectionPanels(
+    {
+      metricGroups: [
+        { key: 'fixed', comparisonYear: '2023' },
+        { key: 'latest' },
+      ],
+    },
+    { metricGroupKeys: ['fixed', 'latest'] }
+  );
+  assert.deepEqual(expected, {
+    expectedCards: 1,
+    expectedFixedYears: ['2023'],
+  });
+  const section = {
+    key: 'overview',
+    count: 1,
+    cards: 1,
+    ...expected,
+    fixedTables: [{ year: '2023', rows: 47 }],
+  };
+  assert.deepEqual(runtimeFindings({ ...good(), sections: [section] }), []);
+  for (const fixedTables of [
+    [],
+    [{ year: '2022', rows: 47 }],
+    [{ year: '2023', rows: 0 }],
+  ])
+    assert.ok(
+      runtimeFindings({
+        ...good(),
+        sections: [{ ...section, fixedTables }],
+      }).includes('fixed-year-tables:overview')
+    );
 });

@@ -3,7 +3,7 @@
 <scope>テーマUI、ThemeCatalog、テーマ用スクリプト。観測の記録先は .claude/state/themes/ci-review.json。実験判定は既存CLI経由のみ。現在の原典・期間・欠測・範囲限定を守る。実測の取得とルーティングは前段の決定的CIが完了している。</scope>
 <sources>AGENTS.md、.claude/state/themes/{ci-followup,quality,portfolio,experiments}.json、.local/ci/theme-followup/ の今回の証拠、.claude/todo/improvements.md の THEME-EXPANSION-EFFECT-01、backlog.md の THEME-EXPANSION-IMPLEMENT-01、.claude/state/metrics/themes/2026-09-10-all-expansion.json。前回の ci-review.json があれば重複作業を避ける。</sources>
 <done_when>ci-review.json を書き、変更があるときは対象テストを実行する。根本原因を証明できない503を推測で修正しない。取得不能や期間不足は blocked または no-change として具体的な次の条件を記録する。</done_when>
-<authorization>ファイル編集と公開一次資料のreadのみ。git操作・PR作成は後段CIが行う。R2書込・本番デプロイ・自動マージは行わない。workflow、権限、検査スクリプト自身、package依存、他領域を変更しない。</authorization>
+<authorization>ファイル編集と公開一次資料のreadのみ。git操作・PR作成は後段CIが行う。R2書込・本番デプロイ・自動マージは行わない。workflow、権限、theme-followup系・audit-theme-runtime.ts・check-theme-review.mjs・validate-theme-state.mjs、package依存、他領域を変更しない。検査側の不具合は証拠付きでblockedとして記録し、自分の検証基準を変更しない。</authorization>
 </task>
 <output_format>最終メッセージは日本語3項目以内。ci-review.jsonは下記schemaのみ、summaryは1000字以内、findingsは最大10件。</output_format>
 

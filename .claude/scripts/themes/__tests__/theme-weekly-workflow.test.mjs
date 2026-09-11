@@ -38,6 +38,10 @@ test('daily planner gates heavy work, while failure artifacts and exit codes sur
   );
   assert.match(artifact.if, /always\(\)/);
   assert.equal(artifact.with['include-hidden-files'], true);
+  assert.ok(
+    steps.indexOf(artifact) < steps.findIndex((s) => s.id === 'review'),
+    'Failure evidence must be available before model review'
+  );
   const verdict = steps.find((s) => s.name === 'Propagate audit failures');
   assert.match(verdict.run, /test "\$RUNTIME_CODE" = 0/);
   assert.match(verdict.if, /plan.outputs.run/);

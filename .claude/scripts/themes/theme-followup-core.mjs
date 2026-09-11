@@ -28,6 +28,18 @@ export function planFollowup(experiments, today, force = false) {
   };
 }
 
+export function expectedSectionPanels(catalog, section) {
+  const groups = section.metricGroupKeys.map((key) =>
+    catalog.metricGroups?.find((group) => group.key === key)
+  );
+  return {
+    expectedCards: groups.filter((group) => !group?.comparisonYear).length,
+    expectedFixedYears: groups
+      .filter((group) => group?.comparisonYear)
+      .map((group) => group.comparisonYear),
+  };
+}
+
 export function runtimeFindings(r) {
   const findings = [];
   if (r.http !== 200) findings.push(`http:${r.http ?? 'missing'}`);
@@ -43,6 +55,17 @@ export function runtimeFindings(r) {
   for (const s of r.sections ?? [])
     if (s.expectedCards !== undefined && s.cards !== s.expectedCards)
       findings.push(`section-cards:${s.key}:${s.cards}/${s.expectedCards}`);
+  for (const section of r.sections ?? []) {
+    if (
+      section.expectedFixedYears &&
+      (JSON.stringify([...section.expectedFixedYears].sort()) !==
+        JSON.stringify(
+          (section.fixedTables ?? []).map((table) => table.year).sort()
+        ) ||
+        section.fixedTables?.some((table) => table.rows < 1))
+    )
+      findings.push(`fixed-year-tables:${section.key}`);
+  }
   for (const key of r.expectedChartKeys ?? [])
     if (!(r.charts ?? []).some((c) => c.key === key))
       findings.push(`missing-chart:${key}`);
