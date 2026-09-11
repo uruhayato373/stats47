@@ -1,0 +1,19 @@
+{
+  "status": "no-change",
+  "summary": "test",
+  "findings": [
+    {
+      "themeKey": "aging-society",
+      "detail": "test",
+      "evidenceRefs": [
+        "a"
+      ]
+    }
+  ],
+  "unreviewedThemes": [],
+  "tests": [],
+  "schemaVersion": 1,
+  "inputSha256": "3dd4ee6314364ea4a1ff36d5be77167cfc1d443498134df3d4a5cc073c3be25a",
+  "reviewedAt": "2026-09-12",
+  "month": "2026-09"
+}
