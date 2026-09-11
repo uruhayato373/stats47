@@ -20,9 +20,12 @@
 | Visualization Render Golden (`visualization-render-weekly.yml`) | 毎週日曜6時30分JST、手動 | 共有チャート9種をgolden PNGと比較。失敗差分をartifact保存し、PR必須render gateの実行経路も静的契約で監査 |
 | KSJ aggregate ingest (`ksj-aggregate-ingest.yml`) | 手動 | KSJの元データをCI内で再取得し、都道府県帰属の未解決0・47県ゲート後に集計`app/stats`だけをR2へ公開。元GIS / TopoJSONは公開しない |
 
-テーマは `theme-chart-audit-weekly.yml`（日曜05:00 JST）で公開R2と構成を監査する。
+テーマは `theme-chart-audit-weekly.yml` が毎日09:00 JSTに期日を確認する。
+月曜・月初・未観測d7/d28/d56・手動実行時に公開R2と構成、全テーマのPC/mobile画面を監査する。
 品質の前回正常値を保持し、履歴や県数の退行を検出する。固定theme-alertは内容変更時だけ更新し、
-復旧時に閉じる。GA4週次取得はJapan-only pages-clean/theme-navigationと成功・期間メタを保存する。
+復旧時に閉じる。画面の初回失敗は30日保持artifact、観測はdevelopの`ci-followup.json`に保存する。
+新しい判断材料・月替わりのみ証拠をレビューし、変更は検証済みdraft PR、無変更は`ci-review.json`へ記録する。
+GA4週次取得はJapan-only pages-clean/theme-navigationと成功・期間メタを保存する。
 
 ### ブランチ戦略
 

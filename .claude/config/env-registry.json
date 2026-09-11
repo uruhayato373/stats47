@@ -345,6 +345,13 @@
       ]
     },
     {
+      "name": "GITHUB_SERVER_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "GITHUB_STEP_SUMMARY",
       "visibility": "server",
       "contexts": [
