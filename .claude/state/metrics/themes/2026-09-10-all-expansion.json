@@ -7625,7 +7625,7 @@
     "Culture uses three special-designation types; bridge ages cover FY2025 inspected bridges; depopulated settlement detail covers ten blocks rather than all prefecture microdata.",
     "Landslide exposure covers 46 licensed prefectures; Kyoto is excluded, not zero. Tsunami exposure covers 29 verified historical prefecture scenarios; 18 prefectures are unavailable or excluded for distinct recorded reasons. Tokyo is island-scenario-only and unmodelled areas are not safe/zero.",
     "Earthquake population exposure is implemented. A nationwide housing-only spatial input was not acquired through the reviewed official routes.",
-    "Public R2 publication and all 2,155 object readbacks passed; production code deployment and experiment start remain pending.",
+    "Public R2 publication, 2,155 object readbacks and production code deployment passed; 55 experiments started on 2026-09-11. Subsequent observations and unresolved runtime errors are recorded in ciFollowupMigration and theme state.",
     "The initial 2,155-file publication is supplemented by 32 metadata objects: 31 evidence-backed color changes and their aggregate index. The effective verification manifest composes both immutable publication layers."
   ],
   "countsScope": "Initial structural wiring only. dataValidationPending=101 means this structural recorder did not assess data; current source, display and publication states are under validation and release.",
@@ -7636,5 +7636,123 @@
     "coreUnfulfilled": 1,
     "hold": 8,
     "assessment": "validation.next253Tsunami29.scopeAudit"
+  },
+  "ciFollowupMigration": {
+    "status": "ci-reverification-in-progress",
+    "workflow": ".github/workflows/theme-chart-audit-weekly.yml",
+    "implementationCommit": "9752ac65e",
+    "firstRun": "https://github.com/uruhayato373/stats47/actions/runs/34654495422",
+    "schedule": "daily 09:00 JST planner; full audit on Monday, first day of month, unobserved d7/d28/d56, or manual dispatch",
+    "measurementDatesPreserved": [
+      "2026-09-18",
+      "2026-10-09",
+      "2026-11-06"
+    ],
+    "localVerification": {
+      "allWorkspaceTypeCheck": "pass",
+      "themeTests": {
+        "passed": 421,
+        "skipped": 1,
+        "skipReason": "local landslide canonical artifacts unavailable"
+      },
+      "regressionScreens": {
+        "checked": 8,
+        "passed": 8
+      },
+      "workflowCommitTests": {
+        "passed": 22
+      },
+      "docs": "pass",
+      "preflight": "pass"
+    },
+    "remaining": [
+      "Verify structured AI review persistence in CI",
+      "Merge to main with PR quality checks",
+      "Retire local heartbeat automation after CI activation"
+    ],
+    "firstRunObservation": {
+      "expected": 110,
+      "checked": 65,
+      "failed": 4,
+      "runtimeExitCode": 124,
+      "issue": "https://github.com/uruhayato373/stats47/issues/956",
+      "falsePositives": "fixed-year comparison tables were counted as absent kpi cards in construction-industry, information-industry and waste-recycling",
+      "actualFailure": "living-housing mobile / lh-dwelling-floor-area-trend / HTTP 503, cause unconfirmed",
+      "gitObservationCommit": "0aa4c9e70"
+    },
+    "runtimeRepair": {
+      "fixedYearTables": "verify year and nonempty rows separately from kpi cards",
+      "workers": 2,
+      "timeoutSeconds": 900,
+      "localFixedPanelScreens": {
+        "checked": 6,
+        "passed": 6
+      },
+      "artifactTiming": "before model review",
+      "bodyDeadlineSeconds": {
+        "document": 30,
+        "errorResponse": 5
+      }
+    },
+    "firstRunReview": {
+      "sdkOutcome": "success",
+      "turns": 76,
+      "permissionDenials": 16,
+      "failure": "ci-review.json was not created; verifier rejected missing report",
+      "denialTargets": "not captured in first run; diagnosis enabled for subsequent runs"
+    },
+    "reviewPersistence": "SDK structured_output under --json-schema; CI supplies observation date and input hash before guard and commit",
+    "reruns": [
+      {
+        "run": "https://github.com/uruhayato373/stats47/actions/runs/34656507056",
+        "status": "cancelled",
+        "reason": "Known unbounded response wait and missing review output required correction before repeating"
+      },
+      {
+        "run": "https://github.com/uruhayato373/stats47/actions/runs/34657295841",
+        "status": "failed",
+        "reviewFailure": "Free-form result included prose and fenced JSON, plus UTC date instead of observedAt; strict parser rejected it"
+      },
+      {
+        "run": "https://github.com/uruhayato373/stats47/actions/runs/34658514515",
+        "status": "failure",
+        "reviewPersistence": "pass: c0b17678d",
+        "reviewSemantic": "manually rejected placeholder content; saved review invalidated and all source reviews reopened"
+      }
+    ],
+    "runtimeVerifications": [
+      {
+        "run": "https://github.com/uruhayato373/stats47/actions/runs/34657295841",
+        "expected": 110,
+        "checked": 110,
+        "passed": 108,
+        "failed": 2,
+        "durationSeconds": 258.456,
+        "findings": [
+          "fishery-marine/1440: two charts source-unavailable and HTTP 503",
+          "real-income/1440: CPI chart source-unavailable and HTTP 503"
+        ],
+        "rootCause": "unconfirmed",
+        "observationCommit": "f3dabeb2c",
+        "issue": "https://github.com/uruhayato373/stats47/issues/957",
+        "initialFailuresPreserved": true
+      },
+      {
+        "run": "https://github.com/uruhayato373/stats47/actions/runs/34658514515",
+        "expected": 110,
+        "checked": 110,
+        "passed": 109,
+        "failed": 1,
+        "durationSeconds": 152.94,
+        "findings": [
+          "aging-society/1440: population pyramid source-unavailable and HTTP 503"
+        ],
+        "rootCause": "unconfirmed",
+        "observationCommit": "464d4ab3c",
+        "issue": "https://github.com/uruhayato373/stats47/issues/957",
+        "initialFailuresPreserved": true
+      }
+    ],
+    "reviewContentRepair": "Reject placeholder summaries/details and nonexistent evidence; accumulate official URL sourceReviews per month and derive unreviewed themes in CI"
   }
 }

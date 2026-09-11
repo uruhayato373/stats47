@@ -27,7 +27,8 @@ const report = {
   status: 'no-change',
   summary: '期間不足のため次の判定日まで観測する',
   findings: [],
-  unreviewedThemes: [],
+  sourceReviews: [],
+  unreviewedThemes: ['test-theme'],
   tests: [],
 };
 const record = '.claude/state/themes/ci-review.json';
@@ -127,4 +128,14 @@ test('d7 low sample cannot close an experiment before d28 and d56 measurement', 
       ),
     /Only due d56/
   );
+});
+
+test('placeholder evidence and unsupported complete source coverage are rejected', () => {
+  for (const bad of [
+    { ...report, summary: 'test' },
+    { ...report, findings: [{ themeKey: 'test-theme', detail: 'test', evidenceRefs: ['a'] }] },
+    { ...report, findings: [{ themeKey: 'test-theme', detail: '実際の検査結果', evidenceRefs: ['a'] }] },
+    { ...report, unreviewedThemes: [] },
+    { ...report, sourceReviews: [{ themeKey: 'test-theme', detail: '公式資料確認済み', evidenceRefs: ['.local/runtime.json'] }] },
+  ]) assert.throws(() => validateReview(bad, input, [record], before, before));
 });

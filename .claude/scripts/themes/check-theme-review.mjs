@@ -12,6 +12,8 @@ const git = (...args) =>
   execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
 const reportPath = '.claude/state/themes/ci-review.json';
 const experimentsPath = '.claude/state/themes/experiments.json';
+const meaningful = text => typeof text === 'string' && text.trim() && !/^(test|todo|tbd|placeholder|sample|テスト|仮|未記入)[.!。]*$/i.test(text.trim());
+const evidenceRef = ref => typeof ref === 'string' && (/^https:\/\/[^/\s]+\/[^\s]+$/.test(ref) || /^(\.claude|\.local|apps|packages)\/[^\s]+$/.test(ref)) && !ref.split('/').includes('..');
 export function validateReview(report, input, files, before, after) {
   assert.equal(report.schemaVersion, 1);
   assert.equal(report.inputSha256, input.reviewInputSha256);
@@ -19,8 +21,7 @@ export function validateReview(report, input, files, before, after) {
   assert.equal(report.month, input.observedAt.slice(0, 7));
   assert.ok(['proposed', 'no-change', 'blocked'].includes(report.status));
   assert.ok(
-    typeof report.summary === 'string' &&
-      report.summary.trim() &&
+    meaningful(report.summary) &&
       report.summary.length <= 1000
   );
   assert.ok(Array.isArray(report.findings) && report.findings.length <= 10);
@@ -28,9 +29,9 @@ export function validateReview(report, input, files, before, after) {
     report.findings.every(
       (f) =>
         typeof f.themeKey === 'string' &&
-        typeof f.detail === 'string' &&
+        meaningful(f.detail) &&
         Array.isArray(f.evidenceRefs) &&
-        f.evidenceRefs.length > 0
+        f.evidenceRefs.length > 0 && f.evidenceRefs.every(evidenceRef)
     )
   );
   assert.ok(
@@ -61,6 +62,13 @@ export function validateReview(report, input, files, before, after) {
     ].every((k) => keys.has(k)),
     'Unknown theme'
   );
+  assert.ok(Array.isArray(report.sourceReviews), 'Missing source review coverage');
+  for (const row of report.sourceReviews) {
+    assert.ok(keys.has(row.themeKey), 'Unknown theme');
+    assert.ok(meaningful(row.detail) && Array.isArray(row.evidenceRefs) && row.evidenceRefs.length > 0 && row.evidenceRefs.every(ref => evidenceRef(ref) && ref.startsWith('https://')), 'Source review needs official URL evidence');
+  }
+  const reviewed = new Set(report.sourceReviews.map(row => row.themeKey));
+  assert.deepEqual([...new Set(report.unreviewedThemes)].sort(), [...keys].filter(key => !reviewed.has(key)).sort(), 'Unreviewed themes must match recorded source coverage');
   const protectedFields = (ex) => ({
     ...ex,
     experiments: ex.experiments.map((e) => {
@@ -110,6 +118,12 @@ if (
       ].filter(Boolean)
     ),
   ];
+  const report = read(reportPath);
+  for (const row of [...report.findings, ...(report.sourceReviews ?? [])]) {
+    for (const ref of row.evidenceRefs) {
+      if (!ref.startsWith('https://')) assert.ok(fs.existsSync(path.join(ROOT, ref.split('#')[0])), `Missing evidence: ${ref}`);
+    }
+  }
   const { codeChanged, proposalChanges } = validateReview(
     read(reportPath),
     read('.claude/state/themes/ci-followup.json'),

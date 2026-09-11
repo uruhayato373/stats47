@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 
 /** The workflow writes the report; the model only returns a structured result. */
-export function extractReview(entries, input) {
+export function extractReview(entries, input, themeKeys, priorReview = null) {
   assert.ok(Array.isArray(entries), 'Missing execution entries');
   const result = entries.findLast((entry) => entry.type === 'result');
   assert.ok(
@@ -18,8 +18,16 @@ export function extractReview(entries, input) {
   );
   assert.match(input.reviewInputSha256, /^[a-f0-9]{64}$/);
   assert.match(input.observedAt, /^\d{4}-\d{2}-\d{2}$/);
+  assert.ok(Array.isArray(report.sourceReviews), 'Missing source reviews');
+  const sourceReviews = new Map();
+  if (priorReview?.month === input.observedAt.slice(0, 7)) {
+    for (const row of priorReview.sourceReviews ?? []) sourceReviews.set(row.themeKey, row);
+  }
+  for (const row of report.sourceReviews) sourceReviews.set(row.themeKey, row);
   return {
     ...report,
+    sourceReviews: [...sourceReviews.values()],
+    unreviewedThemes: [...new Set(themeKeys)].filter(key => !sourceReviews.has(key)).sort(),
     schemaVersion: 1,
     inputSha256: input.reviewInputSha256,
     reviewedAt: input.observedAt,
@@ -35,9 +43,13 @@ if (
     path.dirname(fileURLToPath(import.meta.url)),
     '../../..'
   );
+  const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
+  const previousPath = '.claude/state/themes/ci-review.json';
   const report = extractReview(
     JSON.parse(fs.readFileSync(process.argv[2], 'utf8')),
-    JSON.parse(fs.readFileSync(path.join(root, '.claude/state/themes/ci-followup.json'), 'utf8'))
+    read('.claude/state/themes/ci-followup.json'),
+    read('.claude/state/themes/experiments.json').experiments.map(e => e.themeKey),
+    fs.existsSync(path.join(root, previousPath)) ? read(previousPath) : null
   );
   // The following check-theme-review step enforces schema, evidence, changed paths and immutable observations.
   fs.writeFileSync(

@@ -7,11 +7,11 @@ test('typed output survives explanatory prose and gets the exact observation ide
   const report = extractReview([{
     type: 'result', subtype: 'success', is_error: false,
     result: 'sha256を確認した。最終結果を返す。',
-    structured_output: { status: 'blocked', reviewedAt: '2026-09-11' },
-  }], input);
+    structured_output: { status: 'blocked', reviewedAt: '2026-09-11', sourceReviews: [] },
+  }], input, ['aging-society']);
   assert.deepEqual(report, {
     status: 'blocked', schemaVersion: 1, inputSha256: input.reviewInputSha256,
-    reviewedAt: '2026-09-12', month: '2026-09',
+    reviewedAt: '2026-09-12', month: '2026-09', sourceReviews: [], unreviewedThemes: ['aging-society'],
   });
 });
 test('success prose, missing typed output and failed execution do not manufacture a report', () => {
@@ -22,4 +22,11 @@ test('success prose, missing typed output and failed execution do not manufactur
     { type: 'result', subtype: 'success', is_error: true, structured_output: {} },
     { type: 'result', subtype: 'success', structured_output: [] },
   ]) assert.throws(() => extractReview([entry], input));
+});
+
+test('monthly source coverage accumulates evidence and resets with the month', () => {
+  const previous = { month: '2026-09', sourceReviews: [{themeKey: 'a'}] };
+  const entries = [{ type: 'result', subtype: 'success', structured_output: {sourceReviews: [{themeKey: 'b'}], unreviewedThemes: []} }];
+  assert.deepEqual(extractReview(entries, input, ['a','b','c'], previous).unreviewedThemes, ['c']);
+  assert.deepEqual(extractReview(entries, {...input, observedAt:'2026-10-01'}, ['a','b','c'], previous).unreviewedThemes, ['a','c']);
 });
