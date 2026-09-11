@@ -235,8 +235,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -276,8 +280,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -317,8 +325,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -358,8 +370,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -399,8 +415,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -440,8 +460,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -481,8 +505,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -522,8 +550,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -563,8 +595,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -604,8 +640,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -645,8 +685,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -686,8 +730,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -727,8 +775,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -768,8 +820,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -809,8 +865,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -850,8 +910,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -891,8 +955,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -932,8 +1000,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -973,8 +1045,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -1014,8 +1090,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
@@ -1052,8 +1132,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": null,
       "evidenceRefs": [
@@ -1074,8 +1158,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": null,
       "evidenceRefs": [
@@ -1096,8 +1184,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": null,
       "evidenceRefs": [
@@ -1118,8 +1210,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1141,8 +1237,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1164,8 +1264,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1187,8 +1291,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1210,8 +1318,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1233,8 +1345,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1256,8 +1372,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1279,8 +1399,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1302,8 +1426,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1325,8 +1453,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1348,8 +1480,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1371,8 +1507,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1394,8 +1534,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1417,8 +1561,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1440,8 +1588,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1463,8 +1615,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1486,8 +1642,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1509,8 +1669,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1532,8 +1696,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1555,8 +1723,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1578,8 +1750,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1601,8 +1777,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1624,8 +1804,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1647,8 +1831,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1670,8 +1858,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1693,8 +1885,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1716,8 +1912,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1739,8 +1939,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1762,8 +1966,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1785,8 +1993,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1808,8 +2020,12 @@
         "internalNav.eventCount"
       ],
       "baselinePeriod": null,
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
@@ -1833,8 +2049,12 @@
         "from": "2026-07-12",
         "to": "2026-09-05"
       },
-      "startedAt": null,
-      "evaluateAt": null,
+      "startedAt": "2026-09-11",
+      "evaluateAt": {
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06"
+      },
       "result": null,
       "notes": "未公開。2026-07-12〜2026-09-05の56日を公式APIへ直接指定して取得した実カウントをbaselineとして保存する。欠落した前28日を0補完していない。PV11・impressions15は最低標本未満のため比率・効果を確定しない。実公開後にscheduleし、D7品質・D28暫定・D56観測と低標本の制約を記録する。",
       "evidenceRefs": [
