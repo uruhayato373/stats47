@@ -1,6 +1,7 @@
 import { WorkerEntrypoint, type WorkerExecutionContext } from "cloudflare:workers";
 
 import { enforcePageCacheBypass, shouldBypassPageCache } from "./lib/cache-policy";
+import { fetchCompletePageResponse } from "./lib/complete-page-response";
 import openNextWorker, {
   BucketCachePurge,
   DOQueueHandler,
@@ -21,7 +22,7 @@ type CachedAppBinding = {
  */
 export class CachedApp extends WorkerEntrypoint<CloudflareEnv> {
   override fetch(request: Request): Promise<Response> {
-    return openNextWorker.fetch(request, this.env, this.ctx);
+    return fetchCompletePageResponse(request, () => openNextWorker.fetch(request, this.env, this.ctx));
   }
 
   // Purges are scoped to the calling entrypoint. The authenticated API invokes
