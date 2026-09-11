@@ -14,6 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { LOCAL_FINANCE_RATIO_METRICS } from '@stats47/data-configs/theme-catalog';
 
 import { ChartCard } from '@/components/charts/ChartCard';
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -75,40 +76,7 @@ interface RatioMeta {
   unit: string;
   decimals: number;
 }
-const RATIO_METRICS: RatioMeta[] = [
-  {
-    key: 'fiscalIndex',
-    componentKey: 'kpi-lf-fiscal-strength',
-    rankingKey: 'fiscal-strength-index-prefecture',
-    label: '財政力指数',
-    unit: '',
-    decimals: 2,
-  },
-  {
-    key: 'currentBalanceRatio',
-    componentKey: 'kpi-lf-current-balance',
-    rankingKey: 'current-balance-ratio',
-    label: '経常収支比率',
-    unit: '%',
-    decimals: 1,
-  },
-  {
-    key: 'debtServiceRatio',
-    componentKey: 'kpi-lf-debt-service',
-    rankingKey: 'real-public-debt-service-ratio',
-    label: '実質公債費比率',
-    unit: '%',
-    decimals: 1,
-  },
-  {
-    key: 'futureBurdenRatio',
-    componentKey: 'kpi-lf-future-burden',
-    rankingKey: 'future-burden-ratio',
-    label: '将来負担比率',
-    unit: '%',
-    decimals: 1,
-  },
-];
+const RATIO_METRICS = LOCAL_FINANCE_RATIO_METRICS satisfies readonly RatioMeta[];
 
 export function LocalFinanceDashboard({
   cards,

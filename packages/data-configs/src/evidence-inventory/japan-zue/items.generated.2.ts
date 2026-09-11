@@ -14577,6 +14577,9 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_2: readonly JapanZueEvidenceItem[] = [
         "census"
       ],
       "categoryKey": "socialsecurity",
+      "themeSlugs": [
+        "public-assistance"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],

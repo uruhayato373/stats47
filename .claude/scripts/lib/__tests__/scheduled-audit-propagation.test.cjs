@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
+const { spawnSync } = require('node:child_process');
 const YAML = require('yaml');
 
 const ROOT = path.resolve(__dirname, '../../../..');
@@ -61,17 +62,33 @@ function auditProvenance(source) {
 function auditTheme(source) {
   const steps = stepsOf(parse(source));
   const check = steps.find((step) => step.id === 'check');
-  const final = steps.find((step) => step.name?.includes('Propagate live audit status'));
+  const final = steps.find((step) => step.name === 'Propagate audit failures');
   const errors = [];
-  if (!check?.run?.includes('exit_code=${PIPESTATUS[0]}')) {
-    errors.push('live audit exit code is not captured');
+  for (const kind of ['live', 'quality']) {
+    if (!check?.run?.includes(`${kind}_code=\${PIPESTATUS[0]}`)) {
+      errors.push(`${kind} audit exit code is not captured`);
+    }
+  }
+  if (!check?.run?.includes('alert_code=$?')) {
+    errors.push('alert exit code is not captured');
   }
   if (!final || final.if !== 'always()' || typeof final.run !== 'string') {
     errors.push('always live audit propagation step is missing');
   } else {
-    if (!final.run.includes('steps.check.outcome')) errors.push('live collector outcome is not propagated');
-    if (!final.run.includes('steps.check.outputs.exit_code')) {
-      errors.push('live audit exit code is not propagated');
+    const bindings = {
+      CHECK_OUTCOME: 'steps.check.outcome',
+      LIVE_CODE: 'steps.check.outputs.live_code',
+      QUALITY_CODE: 'steps.check.outputs.quality_code',
+      ALERT_CODE: 'steps.check.outputs.alert_code',
+    };
+    for (const [key, expression] of Object.entries(bindings)) {
+      if (final.env?.[key] !== '${{ ' + expression + ' }}') errors.push(`${key} is not propagated`);
+    }
+    const success = { CHECK_OUTCOME: 'success', LIVE_CODE: '0', QUALITY_CODE: '0', ALERT_CODE: '0' };
+    const cases = [success, ...Object.keys(success).map((key) => ({ ...success, [key]: key === 'CHECK_OUTCOME' ? 'failure' : '1' }))];
+    for (const [index, env] of cases.entries()) {
+      const result = spawnSync('bash', ['-c', final.run], { env: { ...process.env, ...env }, timeout: 2000 });
+      if (result.error || (result.status === 0) !== (index === 0)) errors.push(`audit status propagation failed: ${JSON.stringify(env)}`);
     }
   }
   return errors;
@@ -106,15 +123,24 @@ test('[mutation] provenance最終status stepの削除を検出する', () => {
   assert.ok(auditProvenance(YAML.stringify(workflow)).includes('always final propagation step is missing'));
 });
 
-test('[mutation] theme監査exit codeの固定0化を検出する', () => {
-  const mutated = themeSource.replace('exit_code=${PIPESTATUS[0]}', 'exit_code=0');
-  assert.ok(auditTheme(mutated).includes('live audit exit code is not captured'));
+for (const kind of ['live', 'quality']) {
+  test(`[mutation] theme ${kind}監査exit codeの固定0化を検出する`, () => {
+    const mutated = themeSource.replace(`${kind}_code=\${PIPESTATUS[0]}`, `${kind}_code=0`);
+    assert.notEqual(mutated, themeSource);
+    assert.ok(auditTheme(mutated).includes(`${kind} audit exit code is not captured`));
+  });
+}
+
+test('[mutation] theme最終statusの無条件成功を検出する', () => {
+  const workflow = parse(themeSource);
+  workflow.jobs.audit.steps.find((step) => step.name === 'Propagate audit failures').run = 'exit 0';
+  assert.ok(auditTheme(YAML.stringify(workflow)).some((error) => error.startsWith('audit status propagation failed')));
 });
 
 test('[mutation] theme最終status stepの削除を検出する', () => {
   const workflow = parse(themeSource);
   workflow.jobs.audit.steps = workflow.jobs.audit.steps.filter(
-    (step) => !step.name?.includes('Propagate live audit status'),
+    (step) => step.name !== 'Propagate audit failures',
   );
   assert.ok(auditTheme(YAML.stringify(workflow)).includes('always live audit propagation step is missing'));
 });

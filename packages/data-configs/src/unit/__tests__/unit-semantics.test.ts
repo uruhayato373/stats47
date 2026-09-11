@@ -141,6 +141,35 @@ describe("語彙カバレッジ", () => {
     const unresolved = KNOWN_UNIT_SAMPLES.filter((u) => parseUnit(u).dimension === null);
     expect(unresolved).toEqual([]);
   });
+
+  it("公表表の計数単位は対象を保ち、異なる対象同士を換算しない", () => {
+    const units = ["区域", "契約", "業者", "住宅", "団", "署", "組織", "経営体", "羽", "通", "市町村", "例", "両", "軒", "手続", "駅", "地点", "橋", "工場", "事業体", "丁", "者", "基", "束"];
+    for (const unit of units) {
+      expect(parseUnit(unit).baseUnit).toBe(unit);
+      expect(conversionFactor(`千${unit}`, unit)).toBe(1000);
+      expect(conversionFactor(unit, "件")).toBeNull();
+    }
+    expect(conversionFactor("橋", "基")).toBeNull();
+    expect(conversionFactor("住宅", "戸")).toBeNull();
+    // 体力合計点と食品検査の検体点数で意味が違うため、点は推測で加えない。
+    expect(parseUnit("点").dimension).toBeNull();
+  });
+
+  it("設備容量 kW と発電量 kWh を分け、SI 接頭辞の大小文字を保つ", () => {
+    expect(parseUnit("kW")).toMatchObject({ dimension: "power", baseUnit: "W", scaleExponent: 3 });
+    expect(conversionFactor("kW", "MW")).toBe(0.001);
+    expect(conversionFactor("kW", "W")).toBe(1000);
+    expect(conversionFactor("kW", "kWh")).toBeNull();
+    expect(conversionFactor("mW", "MW")).toBeNull();
+  });
+
+  it("CO₂ 排出量の質量を保持し、一般の質量や炭素換算量とは換算しない", () => {
+    expect(parseUnit("千t-CO₂")).toMatchObject({ dimension: "co2-mass", baseUnit: "g-CO2", scaleExponent: 9 });
+    expect(conversionFactor("千t-CO₂", "t-CO2")).toBe(1000);
+    expect(conversionFactor("千t-CO₂", "千t")).toBeNull();
+    expect(conversionFactor("千t-CO₂", "千t-C")).toBeNull();
+    expect(conversionFactor("千t-CO₂", "千t-CO2eq")).toBeNull();
+  });
 });
 
 describe("scalePrefixMultiplier — 本文表記の接頭辞", () => {
