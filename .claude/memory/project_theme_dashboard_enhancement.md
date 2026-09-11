@@ -44,3 +44,7 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 - **画像の配色も公開itemを使う**: generatorがraw metric configを読むと、極性で決まる赤を既定青で描画した。`resolveRankingImageVisualization`で公開itemの配色を検証し、描画とfingerprintの双方へ同じ値を渡す。配色未指定の実在configからcanonical赤を保つ回帰試験を追加した。
 
 - **Workers Cacheの削除先**: `CachedApp`がHTMLを保存し、default gatewayで`ctx.cache.purge`を呼ぶと、API成功でも保存側のキャッシュは残る。2026-09-11に2rankingのエラー画面が全purge後もHIT/旧Ageのまま、query付きは正常、当該buildのISRエントリは404と実測した。認証済みAPIから`CachedApp.purgeCache` RPCへ渡し、所有entrypointで削除する。別入口へのpurgeを呼ばない陰性対照と、同じbuild内のキャッシュ更新を検証する。初回503の原因とは区別する。根拠: [Cloudflare purge scope](https://developers.cloudflare.com/workers/cache/purge/)（2026-09-11確認）。
+
+- **修正の本番実証**: PR953の18チェックとdeploy `34614448966`が成功。2026-09-12 JST、同じbuild `iXmDExxT9Awfz7bXSyc_Q`の2URLでpurge `34615132746`前のHITから後のMISSを確認し、通常URLでエラーだった2rankingも復旧した。証拠は `.local/verification/themes/2026-09-11-production-iXmDExxT9Awfz7bXSyc_Q/`。
+- **監査台帳の容量**: 55テーマの週次qualityが2.17 MBへ増え、CIの1 MiB制限で停止した。定義・今回観測・正常時基準を分割する`theme-quality-state.mjs`を生成側と集計側で共有し、SHA/件数を検証して復元する。v1からの移行は完全一致、413テストPASS。週次run `34614529587`でも55テーマ・1282件・error 0を確認し、全56実験の開始日・baseline・判定は不変だった。閾値緩和や正常時基準の削除で容量を減らさない。
+- **途中終了HTMLをキャッシュしない**: PR953後のsmoke `34615558207`で人口動態が再試行してもエラー画面になった。CI traceの通常URLは200/HIT、HTML 782007 bytesに終端タグがなく、ブラウザは`Connection closed`を記録した。ローカルの別queryで再確認が通っても、別拠点の通常URLの成功とは扱わない。`CachedApp`からキャッシュ可能な200を返す前にHTML終端を検査し、1回再取得しても失敗ならno-storeの503にする。バッファは8 MiB上限、RSC・assets・HEADは対象外。途中終了を起こした上流要因は未確定で、今回直接実証できた不完全HTMLの保存を防ぐ。

@@ -45,6 +45,7 @@ describe("Cloudflare Workers Cache configuration", () => {
     // RSC 応答の共有キャッシュ指示は raw request を持つ gateway でしか取り消せない。
     expect(gateway).toContain("enforcePageCacheBypass(request, response)");
     expect(gateway).toContain('from "./open-next-worker-proxy.js"');
+    expect(gateway).toContain("fetchCompletePageResponse(request, () => openNextWorker.fetch(request, this.env, this.ctx))");
     expect(openNextProxy).toContain('from "../.open-next/worker.js"');
   });
 
