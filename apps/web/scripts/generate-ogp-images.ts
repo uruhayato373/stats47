@@ -38,10 +38,8 @@ import {
 } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 
-import { config as loadEnv } from 'dotenv';
 import { createElement as h } from 'react';
 
-import { getMetricConfig } from '@stats47/data-configs';
 import {
   RANKING_THUMBNAIL_SIZE,
   RANKING_THUMBNAIL_VERSION,
@@ -51,18 +49,20 @@ import {
   generateRankingThumbnailMapSvg,
   MINI_PREFECTURE_THUMBNAIL_LAYOUT,
 } from '@stats47/visualization/server';
+import { config as loadEnv } from 'dotenv';
 
+import {
+  IMAGE_GENERATOR_SPECS,
+  IMAGE_GENERATOR_TYPES,
+  type ImageGeneratorType,
+} from './data/image-generator-registry';
 import {
   PREF_CARD_OGP_THEME,
   PREF_CARD_PUSH_THEMES,
   PREF_CARD_RATIOS,
   PREF_CARD_RATIO_KEYS,
 } from './data/pref-silhouette-tokens';
-import {
-  IMAGE_GENERATOR_SPECS,
-  IMAGE_GENERATOR_TYPES,
-  type ImageGeneratorType,
-} from './data/image-generator-registry';
+import { isSafeNoteSlug } from './lib/image-entity-policy';
 import {
   buildImageGenerationManifest,
   calculateRendererHash,
@@ -74,9 +74,9 @@ import {
   type ImageGenerationPlan,
 } from './lib/image-generation-manifest';
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
-import { isSafeNoteSlug } from './lib/image-entity-policy';
-import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
+import { resolveRankingImageVisualization } from './lib/ranking-image-visualization';
 import { selectRankingImagePartition } from './lib/ranking-image-year';
+import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
@@ -324,6 +324,7 @@ interface RankingItemRaw {
     sourceConfig?: { source?: { name?: string } };
     availableYears?: { yearCode?: string; yearName?: string }[];
     latestYear?: { yearCode?: string; yearName?: string };
+    visualization?: { colorScheme?: string; isReversed?: boolean };
   };
 }
 interface ValuesRaw {
@@ -387,6 +388,7 @@ async function buildRankingOgpData(key: string) {
     latestYearName,
     latestYear,
     rows,
+    visualization: it.visualization,
   };
 }
 
@@ -398,7 +400,7 @@ interface PreparedImage {
   id: string;
   plan: ImageGenerationPlan;
   rankingData?: BuiltRankingData;
-  metricConfig?: ReturnType<typeof getMetricConfig>;
+  rankingVisualization?: ReturnType<typeof resolveRankingImageVisualization>;
   note?: NoteEntry & { title: string };
 }
 
@@ -571,13 +573,18 @@ async function main() {
   const prepare = async (id: string): Promise<PreparedImage | null> => {
     let input: unknown;
     let rankingData: BuiltRankingData | undefined;
-    let metricConfig: ReturnType<typeof getMetricConfig>;
+    let rankingVisualization: PreparedImage['rankingVisualization'];
     let note: PreparedImage['note'];
 
     if (opts.type === 'ranking' || opts.type === 'ranking-cards') {
       const built = await buildRankingOgpData(id);
       rankingData = built;
-      metricConfig = getMetricConfig(id);
+      if (opts.type === 'ranking-cards') {
+        rankingVisualization = resolveRankingImageVisualization(
+          built.visualization,
+          id
+        );
+      }
       input =
         opts.type === 'ranking'
           ? {
@@ -596,8 +603,8 @@ async function main() {
                 rank: row.rank,
               })),
               visualization: {
-                colorScheme: metricConfig?.visualization?.colorScheme ?? null,
-                isReversed: metricConfig?.visualization?.isReversed ?? null,
+                colorScheme: rankingVisualization!.colorScheme,
+                isReversed: rankingVisualization!.isReversed ?? null,
               },
               geographicLayout: MINI_PREFECTURE_THUMBNAIL_LAYOUT,
               size: RANKING_THUMBNAIL_SIZE,
@@ -647,7 +654,7 @@ async function main() {
       rendererHash,
       assets: assetContractsFor(id),
     });
-    return { id, plan, rankingData, metricConfig, note };
+    return { id, plan, rankingData, rankingVisualization, note };
   };
 
   console.log(`入力指紋を計算中 (renderer=${rendererHash.slice(0, 12)})...`);
@@ -848,7 +855,6 @@ async function main() {
         };
       } else if (opts.type === 'ranking-cards') {
         const built = preparedImage.rankingData!;
-        const config = preparedImage.metricConfig;
         const keys = rankingThumbnailKeys(id);
         const lightAsset = plan.assets.find(
           (asset) => asset.key === keys.light
@@ -870,8 +876,7 @@ async function main() {
           return;
         }
         const mapSvg = generateRankingThumbnailMapSvg(rows, {
-          colorScheme: config?.visualization?.colorScheme,
-          isReversed: config?.visualization?.isReversed,
+          ...preparedImage.rankingVisualization!,
           idSuffix: id,
         });
         const { buildRankingThumbnailElement, formatRankingThumbnailValue } =
