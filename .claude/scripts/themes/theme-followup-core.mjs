@@ -82,7 +82,24 @@ export function summarizeFollowup({
       problems.push(
         `quality:${finding.themeKey ?? finding.metricKey ?? 'catalog'}:${finding.code}:${finding.detail ?? ''}`
       );
-  if (!runtime?.summary || runtime.summary.checked !== runtime.summary.expected)
+  const cases = runtime?.cases ?? [];
+  const themeKeys = new Set(cases.map((c) => c.themeKey));
+  const completeCases =
+    cases.length === runtime?.summary?.checked &&
+    themeKeys.size === quality?.summary?.themes &&
+    [...themeKeys].every((key) =>
+      [1440, 390].every(
+        (width) =>
+          cases.filter((c) => c.themeKey === key && c.width === width)
+            .length === 1
+      )
+    );
+  if (
+    !runtime?.summary ||
+    runtime.summary.checked !== runtime.summary.expected ||
+    runtime.summary.expected !== quality?.summary?.themes * 2 ||
+    !completeCases
+  )
     problems.push('runtime-incomplete');
   for (const c of runtime?.cases ?? [])
     for (const f of c.findings ?? [])
@@ -101,6 +118,7 @@ export function summarizeFollowup({
           due: e.evaluateAt[cp],
           status: o?.status ?? 'not-observed',
           reasons: o?.reasons ?? [],
+          values: o?.values ?? null,
           verdict: e.verdict,
         };
       })
@@ -124,4 +142,11 @@ export function summarizeFollowup({
     checkpoints,
     alertBody,
   };
+}
+
+export function needsEvidenceReview(result, priorReview) {
+  return (
+    priorReview?.inputSha256 !== result.reviewInputSha256 ||
+    (priorReview?.unreviewedThemes?.length ?? 0) > 0
+  );
 }

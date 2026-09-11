@@ -4,7 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { createHash } from 'node:crypto';
 import { jstDateOf } from '../metrics/lib/periods.mjs';
-import { planFollowup, summarizeFollowup } from './theme-followup-core.mjs';
+import {
+  planFollowup,
+  summarizeFollowup,
+  needsEvidenceReview,
+} from './theme-followup-core.mjs';
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -69,7 +73,7 @@ if (cli.plan) {
     )
     .digest('hex');
   const priorReview = optional('.claude/state/themes/ci-review.json');
-  result.reviewRequired = priorReview?.inputSha256 !== result.reviewInputSha256;
+  result.reviewRequired = needsEvidenceReview(result, priorReview);
   result.runUrl = process.env.GITHUB_RUN_ID
     ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
     : null;

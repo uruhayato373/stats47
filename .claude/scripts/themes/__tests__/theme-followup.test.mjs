@@ -4,6 +4,7 @@ import {
   planFollowup,
   runtimeFindings,
   summarizeFollowup,
+  needsEvidenceReview,
 } from '../theme-followup-core.mjs';
 
 const experiment = {
@@ -117,7 +118,15 @@ test('insufficient measurement stays pending and unchanged recurring findings pr
       },
     ],
     quality: { summary: { themes: 1, errors: 0 } },
-    runtime: { summary: { expected: 2, checked: 2, failed: 0 }, cases: [] },
+    runtime: {
+      summary: { expected: 2, checked: 2, failed: 0 },
+      cases: [1440, 390].map((width) => ({
+        themeKey: 'one',
+        width,
+        findings: [],
+        pass: true,
+      })),
+    },
     codes: { quality: 0, runtime: 0, live: 0 },
     today: '2026-10-10',
   };
@@ -137,4 +146,43 @@ test('missing rendered cards or charts cannot pass as an empty list', () => {
   });
   assert.ok(findings.includes('section-cards:overview:1/2'));
   assert.ok(findings.includes('missing-chart:trend'));
+});
+
+test('a passing canary cannot be recorded as a complete all-theme audit', () => {
+  const result = summarizeFollowup({
+    experiments: [],
+    quality: { summary: { themes: 55, errors: 0 } },
+    runtime: {
+      summary: { expected: 2, checked: 2, failed: 0 },
+      cases: [1440, 390].map((width) => ({
+        themeKey: 'one',
+        width,
+        findings: [],
+        pass: true,
+      })),
+    },
+    codes: { runtime: 0, quality: 0, live: 0 },
+    today: '2026-09-12',
+  });
+  assert.equal(result.status, 'fail');
+  assert.ok(result.problems.includes('runtime-incomplete'));
+});
+
+test('unchanged reviewed evidence stays quiet but unfinished source checks resume', () => {
+  const result = { reviewInputSha256: 'same' };
+  assert.equal(
+    needsEvidenceReview(result, { inputSha256: 'same', unreviewedThemes: [] }),
+    false
+  );
+  assert.equal(
+    needsEvidenceReview(result, {
+      inputSha256: 'same',
+      unreviewedThemes: ['one'],
+    }),
+    true
+  );
+  assert.equal(
+    needsEvidenceReview(result, { inputSha256: 'old', unreviewedThemes: [] }),
+    true
+  );
 });
