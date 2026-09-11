@@ -1,6 +1,6 @@
 ---
-name: テーマダッシュボード強化完了
-description: 全15テーマの panelTabs + チャート + SEO 最適化の実施状況と optimize-themes スキル
+name: テーマダッシュボードの拡充と公開検証
+description: テーマの拡充・公開検証と、配信・データ品質で再発させないための記録
 type: project
 ---
 
@@ -48,3 +48,6 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 - **修正の本番実証**: PR953の18チェックとdeploy `34614448966`が成功。2026-09-12 JST、同じbuild `iXmDExxT9Awfz7bXSyc_Q`の2URLでpurge `34615132746`前のHITから後のMISSを確認し、通常URLでエラーだった2rankingも復旧した。証拠は `.local/verification/themes/2026-09-11-production-iXmDExxT9Awfz7bXSyc_Q/`。
 - **監査台帳の容量**: 55テーマの週次qualityが2.17 MBへ増え、CIの1 MiB制限で停止した。定義・今回観測・正常時基準を分割する`theme-quality-state.mjs`を生成側と集計側で共有し、SHA/件数を検証して復元する。v1からの移行は完全一致、413テストPASS。週次run `34614529587`でも55テーマ・1282件・error 0を確認し、全56実験の開始日・baseline・判定は不変だった。閾値緩和や正常時基準の削除で容量を減らさない。
 - **途中終了HTMLをキャッシュしない**: PR953後のsmoke `34615558207`で人口動態が再試行してもエラー画面になった。CI traceの通常URLは200/HIT、HTML 782007 bytesに終端タグがなく、ブラウザは`Connection closed`を記録した。ローカルの別queryで再確認が通っても、別拠点の通常URLの成功とは扱わない。`CachedApp`からキャッシュ可能な200を返す前にHTML終端を検査し、1回再取得しても失敗ならno-storeの503にする。バッファは8 MiB上限、RSC・assets・HEADは対象外。途中終了を起こした上流要因は未確定で、今回直接実証できた不完全HTMLの保存を防ぐ。
+
+- **55テーマの公開検証（2026-09-12）**: PR954の18チェック、deploy `34618916530`、post-deploy smoke `34620122727`が成功した。build `DPaW5i_gnBuIKcU6veJqI`で全110画面のHTML終端・JSエラー0、通常URL10回、出典43ケース、HTTP147ケース、sitemapを確認。画面の初回は109/110成功で、実質収入PCの1図が503となり、PC・mobile各3回の再確認は6/6成功した。初回の503原因は未確定。smokeも47成功・ブログ一覧のnetworkidle待機1件は再試行成功であり、初回から全成功とは書かない。失敗原本を保持し、公開記録の `production` と `productionHtmlIntegrityRepair` へ両方を接続する。
+- **計画と公開の範囲**: 最新の正典は `.claude/state/metrics/themes/2026-09-10-all-expansion.json`。128企画は55テーマへ統合し、最小の主問充足114・範囲限定5・未充足1・保留8を区別する。未充足の地震住宅を人口や建物で代替しない。55実験の初回公開日9/11とd7=9/18・d28=10/9・d56=11/6を修正デプロイで再設定しない。公開後は `THEME-EXPANSION-EFFECT-01` と既存の週次CI・月曜フォローで継続観測する。

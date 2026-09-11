@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-09-11T14:37:14.066652+00:00",
-  "status": "production-html-integrity-repair-pending",
+  "recordedAt": "2026-09-11T16:16:44.850Z",
+  "status": "production-verified-with-recheck-measurement-active-and-declared-scope-limits",
   "plan": ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json",
   "themeCount": 55,
   "adoptedCandidates": 120,
@@ -1491,7 +1491,7 @@
   },
   "limitation": "Wiring is structural evidence only. Candidate scope, source definitions, data, rendered values and publication require separate verification. No test pass is inferred by this recorder.",
   "release": {
-    "status": "production-html-integrity-repair-pending",
+    "status": "production-verified",
     "metricCount": 253,
     "fileCount": 2155,
     "componentThemes": 55,
@@ -1499,7 +1499,11 @@
     "sha256": "b3693bf6fef41cbed43e36b44dfab0057aabc1ce074ef39d62a1263b6cf94a8d",
     "exactStage": ".local/verification/themes/2026-09-11-exact-stage-253-surveys",
     "previewBaseUrl": "http://127.0.0.1:4786",
-    "uploaded": true
+    "uploaded": true,
+    "head": "9a10dc0ef2b698ffe80b9ddd822373ac98aeace4",
+    "buildId": "DPaW5i_gnBuIKcU6veJqI",
+    "initialPublishedAt": "2026-09-11T11:40:17Z",
+    "verifiedAt": "2026-09-11T16:16:44.850Z"
   },
   "validation": {
     "sourceBatches": {
@@ -2144,7 +2148,7 @@
               "missing": 0,
               "duplicates": 0,
               "comparedFeeCells": 329,
-              "maxSubtotalError": 1.0000803740695119e-8,
+              "maxSubtotalError": 1.0000803740695119e-08,
               "visitorTimesPriceWithinRounding": true,
               "maxMultiplicationError": 0.06714821000059601,
               "officialPdfMatchedRows": 47
@@ -6467,7 +6471,7 @@
       }
     },
     "next253Surveys": {
-      "status": "PASS-final-local-release-verification-production-pending",
+      "status": "production-verified-measurement-active",
       "manifest": {
         "path": ".local/verification/themes/2026-09-11-release-253-surveys.json",
         "sha256": "b3693bf6fef41cbed43e36b44dfab0057aabc1ce074ef39d62a1263b6cf94a8d",
@@ -6563,7 +6567,21 @@
         },
         "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/measurement-scheduled.json",
         "improvementId": "THEME-EXPANSION-EFFECT-01",
-        "effect": "pending"
+        "effect": "pending",
+        "status": "55-scheduled-weekly-verified-effect-pending",
+        "publicationDate": "2026-09-11",
+        "d7": "2026-09-18",
+        "d28": "2026-10-09",
+        "d56": "2026-11-06",
+        "weeklyRun": 34614529587,
+        "weeklyConclusion": "success",
+        "quality": {
+          "themes": 55,
+          "payloads": 1282,
+          "errors": 0,
+          "warnings": 62,
+          "schemaVersion": 2
+        }
       },
       "git": {
         "commit": "240800291",
@@ -6606,7 +6624,7 @@
         "clientSecretEnvReferences": 0,
         "scope": "pattern scan only"
       },
-      "checkedAt": "2026-09-10T22:45:07.104727+00:00",
+      "checkedAt": "2026-09-11T16:16:44.850Z",
       "browser": {
         "status": "PASS",
         "buildId": "RTwt5z7Inrjq8CU-8iPtA",
@@ -6923,56 +6941,559 @@
         "bytes": 3734266096
       },
       "production": {
-        "status": "final-verification-in-progress",
-        "head": "3d58789468d1ca617b14305f22e74affb93627b9",
-        "buildId": "hmblfV4d70wVfxe34ii9g",
-        "deployedAt": "2026-09-11T11:40:17Z",
-        "pullRequest": 950,
-        "deployRun": 34594710663,
-        "deployStep": "success",
-        "deployRunConclusion": "failure",
-        "deployRunFailure": "Post-deploy smoke found 10 new ranking OGP URLs missing; repair separate image layer",
-        "ciRun": 34593858550,
-        "checks": 18,
-        "evidenceDirectory": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g",
+        "status": "PASS-after-recheck-503-monitored",
+        "head": "9a10dc0ef2b698ffe80b9ddd822373ac98aeace4",
+        "buildId": "DPaW5i_gnBuIKcU6veJqI",
+        "pullRequest": 954,
+        "deployedAt": "2026-09-11T15:59:35Z",
+        "deployRun": 34618916530,
+        "deployRunConclusion": "success",
+        "ciRun": 34617848023,
+        "ciHead": "4aa2f9c354868d50c8da9d529d93d49d77082a5e",
         "browser": {
           "status": "PASS-after-recheck",
-          "cases": 110,
-          "firstPass": 109,
-          "recheckPass": 1,
-          "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/browser-summary.json",
-          "limitation": "foreign-residents chart first-load 503 recovered without code/data change; cause unconfirmed"
+          "buildId": "DPaW5i_gnBuIKcU6veJqI",
+          "manifestSha256": "7e0aba65dac95ecfe172c2999784b7fc58e21e87ba4c15804379f09721f79473",
+          "firstPass": {
+            "cases": 110,
+            "pass": 109,
+            "fail": 1,
+            "http200": 110,
+            "singleH1": 110,
+            "noPageErrors": 110,
+            "noHorizontalOverflow": 110,
+            "oneVisiblePrefectureSelector": 110,
+            "buildMatched": 110
+          },
+          "recheck": {
+            "cases": 6,
+            "pass": 6,
+            "fail": 0,
+            "http200": 6,
+            "singleH1": 6,
+            "noPageErrors": 6,
+            "noHorizontalOverflow": 6,
+            "oneVisiblePrefectureSelector": 6,
+            "buildMatched": 6
+          },
+          "aggregateCases": 110,
+          "aggregatePass": 110,
+          "htmlIntegrityComplete": 110,
+          "noPageErrors": 110,
+          "initialFailures": [
+            {
+              "themeKey": "real-income",
+              "width": 1440,
+              "findings": [
+                "chart real-income-cpi-breakdown-expenses: source-unavailable"
+              ],
+              "consoleErrors": [
+                "Failed to load resource: the server responded with a status of 503 ()",
+                "Failed to load resource: the server responded with a status of 503 ()",
+                "Failed to load resource: the server responded with a status of 503 ()",
+                "Failed to load resource: the server responded with a status of 503 ()",
+                "Failed to load resource: the server responded with a status of 503 ()",
+                "Failed to load resource: the server responded with a status of 503 ()"
+              ],
+              "responseHeaders": {
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "cache-control": "public, max-age=0, must-revalidate",
+                "cf-cache-status": "MISS",
+                "cf-ray": "a397e5fa7eeafcba-KIX",
+                "content-encoding": "zstd",
+                "content-type": "text/html; charset=utf-8",
+                "date": "Fri, 11 Sep 2026 16:02:45 GMT",
+                "link": "</_next/static/css/2d7721f08ef770ca.css>; rel=preload; as=\"style\"",
+                "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                "priority": "u=0,i",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=o3GDZiL9eE8nN9gpDAQDMiGZClcMAe2gExhi%2FomJnRZ8kv9rKsqNbU2V3f7GN%2FPScn2OA5Apg5AGplchR6i59y5aB4RqpQeG6zi1E7Fs4PReZrCtEjCCKQHehgnbtZhipGKuXcAGYQCo\"}]}",
+                "server": "cloudflare",
+                "server-timing": "cfCacheStatus;desc=\"MISS\", cfEdge;dur=10,cfOrigin;dur=0,cfWorker;dur=2570, cfExtPri",
+                "vary": "Accept-Encoding",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "DENY",
+                "x-html-integrity": "complete",
+                "x-opennext": "1",
+                "x-powered-by": "Next.js"
+              }
+            }
+          ],
+          "initial503Cause": "unconfirmed; full HTML was delivered, one chart data request failed, both widths recovered in three repetitions without code/data change",
+          "followUp": "THEME-EXPANSION-EFFECT-01",
+          "evidence": [
+            ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/all-result.json",
+            ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/real-income-recovery/all-result.json"
+          ]
+        },
+        "sourceBrowser": {
+          "cases": 43,
+          "pass": 43,
+          "fail": 0
         },
         "http": {
           "cases": 147,
           "pass": 147,
-          "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/http-corrected-result.json"
+          "fail": 0,
+          "sitemapPass": true
         },
-        "sitemap": {
-          "themes": 55,
-          "tokyoAreas": 52,
-          "newSurveyIdsSincePriorMain": 20,
-          "shards": 11
+        "sitemap": [
+          {
+            "path": "/sitemap/1.xml",
+            "expected": 55,
+            "pass": true
+          },
+          {
+            "path": "/sitemap/2.xml",
+            "expected": 52,
+            "pass": true
+          },
+          {
+            "path": "/sitemap/6.xml",
+            "expected": 20,
+            "pass": true
+          }
+        ],
+        "cacheInvalidation": {
+          "status": "PASS-same-build-HIT-to-MISS",
+          "pullRequest": 953,
+          "purgeRun": 34615132746,
+          "buildId": "iXmDExxT9Awfz7bXSyc_Q",
+          "paths": 2,
+          "evidence": [
+            ".local/verification/themes/2026-09-11-production-iXmDExxT9Awfz7bXSyc_Q/cache-purge-before.json",
+            ".local/verification/themes/2026-09-11-production-iXmDExxT9Awfz7bXSyc_Q/cache-purge-after.json"
+          ]
         },
-        "sourceBrowserStatus": "39/43 PASS after purge; delivery-clinic-count and buried-cultural-property-specialist-count error boundary at both widths",
-        "runtimeLogs": "Local Cloudflare API token unavailable; worker tail not collected",
-        "temporaryEvidenceLoss": "Prior /tmp production evidence unavailable after continuation; rebuilt from durable frozen catalog and reran current production. Historical summary is not substituted for new proof.",
-        "cacheInvalidationRepair": {
-          "status": "PASS-local-74-tests-and-web-types-awaiting-pr-deploy",
-          "cause": "The authenticated purge route executes in the uncached default entrypoint, so ctx.cache.purge succeeds for that entrypoint but does not invalidate CachedApp HTML.",
-          "officialSource": "https://developers.cloudflare.com/workers/cache/purge/",
-          "observedAt": "2026-09-11",
-          "proof": [
-            "source-link-diagnostic.json",
-            "survey-browser-final.json",
-            "isr-before-index.json",
-            "purge-detail.log",
-            "cache-owner-red.log"
-          ],
-          "evidenceDirectory": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g",
-          "first503Cause": "unconfirmed; this repair addresses persisted cached error pages, not an asserted cause of the initial upstream error",
-          "change": "Authenticated route invokes CachedApp.purgeCache RPC; purge executes in the owning entrypoint.",
-          "next": "Tests/types, PR+CI, deploy and verify same-build cache invalidation plus all55 themes/source links."
+        "smokeRun": 34620122727,
+        "evidenceDirectory": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI",
+        "checkedAt": "2026-09-11T16:16:44.850Z",
+        "evidence": [
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/all-result.json",
+            "sha256": "e743ab98cb23a619717a184d2da1640f5e80a8cc4ab47623adc285220918beae"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/real-income-recovery/all-result.json",
+            "sha256": "2d56a5b189259fd2dc19bd7cca658835d79f7329ab01e383ecb51bb0c780ff02"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/browser-summary.json",
+            "sha256": "fc7f8fbaa8fd17a0aa1afb77ad484c088ba0eb193f9f551666a8878f0d5cf401"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/survey-browser-final.json",
+            "sha256": "e9fe93782c932fa23dc79c8f647bae9fa3372846e3391e90b53781668a46f410"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/http-result.json",
+            "sha256": "73118fb27c6560f90cd545704b0846eff5b68903b22572ec521ae5d6436d43da"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/canonical-html-integrity.json",
+            "sha256": "46191aede3038b9b68c33814b5b711f9f008f2fed05118e00f7bde3957bb4fb2"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/ci-run.json",
+            "sha256": "694cc557baec50ab759bfbc79f303c845567daded83ecad3d7e962254ea42aad"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/deploy-run.json",
+            "sha256": "80f8db84d593dbe06666f43aac81bcb8f84f39ff38ca5fab695cc13c173ce4a3"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/smoke-run.json",
+            "sha256": "04f31a7a175c00cbcb99e998b3aa11002a48775920a1400e70346e3e2b1fa989"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/pr954.json",
+            "sha256": "4af3342e645838c6f9ac6f614a8b425dad7d476ec06e7597da7768a16abb9ac8"
+          },
+          {
+            "file": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/smoke-run.log",
+            "sha256": "2224472856c273134c884879b157b753bcb9fab583f3b42ca010c3e21ebba7bd"
+          }
+        ],
+        "htmlIntegrity": {
+          "status": "PASS",
+          "canonical": {
+            "at": "2026-09-11T16:00:15.483Z",
+            "status": "PASS",
+            "buildId": "DPaW5i_gnBuIKcU6veJqI",
+            "head": "9a10dc0ef2b698ffe80b9ddd822373ac98aeace4",
+            "pages": [
+              {
+                "path": "/themes/population-dynamics",
+                "round": 1,
+                "http": 200,
+                "headers": {
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "MISS",
+                  "cf-ray": "a397e261b95bd3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:23 GMT",
+                  "link": "</_next/static/css/2d7721f08ef770ca.css>; rel=preload; as=\"style\"",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=XzSRGfOtvonOIuNKn6hp0m%2FdgIGUNYlraiLObAOUydcUraE3QJWPh%2BOveJZDRWp5oaq2mqs2KQxk3O5ts78YYVal6fMkCkZLe6dVD0vKTlL6YJe4Et5mL%2FQ%2FtMOTGCVTr83qjo1C%2F%2FxJ\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 1306243,
+                "sha256": "040f08c90cf5eb79585f3e4aa4d21e7016139c7c5bd6aa2a6bb4f24e4c8be5d2",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 7822,
+                "pass": true
+              },
+              {
+                "path": "/themes/population-dynamics",
+                "round": 2,
+                "http": 200,
+                "headers": {
+                  "age": "0",
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "HIT",
+                  "cf-ray": "a397e2925d6dd3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:23 GMT",
+                  "link": "</_next/static/css/2d7721f08ef770ca.css>; rel=preload; as=\"style\"",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=0ME7%2Bc3%2B1RS%2FpkT01%2BjUgEEICz7ETOjRIeKRICIDjgjRGbwz8nyS57spIt05Xj75evhIxzVqYXLxZVlxgmx0MUFoU0uiEOQ%2BixObu8Uzq6v110bLVRoRhwpd8k%2BLzrUZ%2BNtagP3ZqBh3\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 1306243,
+                "sha256": "608930f2efe26b13507fbfbdded8ed48112a68a56851fdb3df7fd931c132b9c3",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 85,
+                "pass": true
+              },
+              {
+                "path": "/themes/regional-energy",
+                "round": 1,
+                "http": 200,
+                "headers": {
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "MISS",
+                  "cf-ray": "a397e292df42d3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:24 GMT",
+                  "link": "</_next/static/css/2d7721f08ef770ca.css>; rel=preload; as=\"style\"",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=WsYJvCLO4vDR%2ByxabCV2d%2BIH6lJhBWaERL2vuS8wmQYXGn1lw%2BEJHSWVlTQwEk1jdpGITeQdiuf0h8F2RCoUS%2Br%2Bc%2BVr%2FUBYkprQg0Crw5%2BPMQjk7hHebFQ5n6P5m%2B1OR4KhhXd4iSNB\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 479525,
+                "sha256": "ae3c78662b9daa18b11f09268ad71c1829616f46a227abfe1bb200555fc516a2",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 1389,
+                "pass": true
+              },
+              {
+                "path": "/themes/regional-energy",
+                "round": 2,
+                "http": 200,
+                "headers": {
+                  "age": "0",
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "HIT",
+                  "cf-ray": "a397e29b8907d3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:24 GMT",
+                  "link": "</_next/static/css/2d7721f08ef770ca.css>; rel=preload; as=\"style\"",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=voN8WRFcZKJGEtMDLnSNsQVzzq7WUrZ8yBvRIbv1NK0I4EM9NY3C04%2B5%2Fqz3gWjPyZZauFeCmX8hE7UvMua5jH%2FKHplsZbkguEVnBnlIYFxptfSiyyK0pbaDseDFqcMa2Fuk8wqL0MA%2F\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 479525,
+                "sha256": "4394e2a13966d9ead8574bbfd9ae303ec9fde9b2b7393e8e3de43681b24ee67e",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 28,
+                "pass": true
+              },
+              {
+                "path": "/themes/railway",
+                "round": 1,
+                "http": 200,
+                "headers": {
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "MISS",
+                  "cf-ray": "a397e29bb964d3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:29 GMT",
+                  "link": "</_next/static/css/2d7721f08ef770ca.css>; rel=preload; as=\"style\"",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=lsOlWOnc1vOwC8hCXzO9LKMza7lemeP7oW5KOeFuXwKDMAa70onTUF%2FhkxCNkQ6l6g8pypIZdXpjuCyfHdh1lOnjMgGLKxNoeKP%2BkeRdSVmm3dyNMS8T7xU5BGC1YQw3NZvbjM52xr0x\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 245935,
+                "sha256": "22e19cd0a5e975ac7aa9b4f6434ce398801575228740e0efe463070893c6f3ec",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 4729,
+                "pass": true
+              },
+              {
+                "path": "/themes/railway",
+                "round": 2,
+                "http": 200,
+                "headers": {
+                  "age": "0",
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "HIT",
+                  "cf-ray": "a397e2b94b4cd3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:29 GMT",
+                  "link": "</_next/static/css/2d7721f08ef770ca.css>; rel=preload; as=\"style\"",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=bGsIX%2B%2F5PG%2B48cN%2B0%2FJV9AREPelOekxP3T65h9XRls%2FuORGr%2FPHuFcPKilK8vV9LU87Q65oX2%2ByPbHtS5COFm1JPMS0kqWBOQ7Xea%2FEnAyUu5MNpXhduLVKizehWcSqnRdDMw41DBRJ7\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 245935,
+                "sha256": "7b39d945953cc56ba2f48ee0ee380350bf18faf1aa7579b179820213062e56d6",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 29,
+                "pass": true
+              },
+              {
+                "path": "/ranking/total-population",
+                "round": 1,
+                "http": 200,
+                "headers": {
+                  "age": "37",
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "HIT",
+                  "cf-ray": "a397e2b97bdad3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:29 GMT",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=jYWLzQt6WFe1X3NZek8FczkBR4fes953LvjeP2ORkJWhEMznKj6tPJ71Fcq6nhJOY6nOSWbnhUe2ZAf606d6lGRkqVB3MFHWBTDz%2FE1TaRr3lPT1uOQvNuDO42yPB9R8ES2Pk8u1Q48Z\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 237124,
+                "sha256": "27c0a22e3edc5a54a2b8aea6e7674709f4dc40ee78e0c741ec81056f2484ca8d",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 30,
+                "pass": true
+              },
+              {
+                "path": "/ranking/total-population",
+                "round": 2,
+                "http": 200,
+                "headers": {
+                  "age": "37",
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "HIT",
+                  "cf-ray": "a397e2b9ac66d3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:29 GMT",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2FZM4RPxlP35kLG%2BJxpzFSWmCv83xFhm5yM8R1oUVO6gSUIaERoqjug520aDwpeWrRGFT4fTtATiHSihPoprO4WWASNEW0Ws9dHF5uya42HP4DZxscZChc%2FAWMbU60jx9OW2wgFBZeTOS\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 237124,
+                "sha256": "2b712b3d287cc0f7bff2d8c192f732c7aa95e2f8ecbc51452676b84a642cfdb7",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 23,
+                "pass": true
+              },
+              {
+                "path": "/blog/noodle-consumption-prefecture-character",
+                "round": 1,
+                "http": 200,
+                "headers": {
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "MISS",
+                  "cf-ray": "a397e2b9ccbcd3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:34 GMT",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=lph6LpsPXHwrUi1py%2BrECx2Sp%2F%2F6HT7DyCb3LCkNT5yXfrG0NtWntjm0o0wIPl6v12JbYvbPaoiJ7pkxbI%2Fk2%2FRT6MG78PDKzz4WCXvpEOZnlPzeX74yvm9D9BzqbFyWY4fQVb4%2F9ojL\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-nextjs-cache": "MISS",
+                  "x-nextjs-prerender": "1",
+                  "x-nextjs-stale-time": "300",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 221332,
+                "sha256": "fcc9905db1d2ee6e03e260558898bc6be606e8566d26735c6af97a9bad5045c6",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 4756,
+                "pass": true
+              },
+              {
+                "path": "/blog/noodle-consumption-prefecture-character",
+                "round": 2,
+                "http": 200,
+                "headers": {
+                  "age": "0",
+                  "alt-svc": "h3=\":443\"; ma=86400",
+                  "cache-control": "public, max-age=0, must-revalidate",
+                  "cf-cache-status": "HIT",
+                  "cf-ray": "a397e2d78d0cd3da-KIX",
+                  "connection": "keep-alive",
+                  "content-encoding": "br",
+                  "content-type": "text/html; charset=utf-8",
+                  "date": "Fri, 11 Sep 2026 16:00:34 GMT",
+                  "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+                  "permissions-policy": "camera=(), microphone=(), geolocation=()",
+                  "referrer-policy": "strict-origin-when-cross-origin",
+                  "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=jeb4jF1W5oo%2BW45sEE0ef2721uQbt1%2BGdc%2B8Y8hfjCzwadGKrDjSZwC7nwWvQf8aCmfkNtSY12IkhMRSEntQv2hbxKGllWERFsrZ0TvdnFeP%2BqgHl3JdZHj9NTcVIfkhzaiyipGZqYtI\"}]}",
+                  "server": "cloudflare",
+                  "transfer-encoding": "chunked",
+                  "vary": "Accept-Encoding",
+                  "x-content-type-options": "nosniff",
+                  "x-frame-options": "DENY",
+                  "x-html-integrity": "complete",
+                  "x-nextjs-cache": "MISS",
+                  "x-nextjs-prerender": "1",
+                  "x-nextjs-stale-time": "300",
+                  "x-opennext": "1",
+                  "x-powered-by": "Next.js"
+                },
+                "bytes": 221332,
+                "sha256": "e4f471412209344a40554001b872000059708f5d3421426959bf8f69af48b18d",
+                "closed": true,
+                "buildMatched": true,
+                "elapsedMs": 26,
+                "pass": true
+              }
+            ]
+          },
+          "allThemeCases": 110,
+          "bufferLimitBytes": 8388608,
+          "maxRetry": 1
+        },
+        "smokeSummary": {
+          "health": {
+            "passed": 11,
+            "total": 11
+          },
+          "playwright": {
+            "passed": 47,
+            "flaky": 1,
+            "failed": 0,
+            "flakyCase": "blog listing: page.goto /blog networkidle exceeded 30 seconds on first attempt; retry passed",
+            "cause": "unconfirmed; no source response or browser trace was uploaded because the workflow succeeded"
+          },
+          "warmCache": {
+            "passed": 28,
+            "failed": 0
+          },
+          "evidence": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI/smoke-run.log"
         }
       },
       "imagePublication": {
@@ -6987,7 +7508,7 @@
         "evidence": ".local/verification/themes/2026-09-11-ranking-images/result.json"
       },
       "productionHtmlIntegrityRepair": {
-        "status": "html-integrity-local-repair-pending-release",
+        "status": "repaired-and-production-verified",
         "pr": 953,
         "buildId": "iXmDExxT9Awfz7bXSyc_Q",
         "head": "658c3fa64aba0e047fd59278eb437a60dea8554e",
@@ -7021,10 +7542,70 @@
           "action": "Validate bounded GET HTML before CachedApp can cache it; retry incomplete/read-error once; repeated failure returns no-store 503",
           "bufferLimitBytes": 8388608,
           "replay": ".local/verification/themes/2026-09-11-production-iXmDExxT9Awfz7bXSyc_Q/html-integrity-ci-replay.json",
-          "tests": 84
+          "tests": 84,
+          "pullRequest": 954,
+          "head": "9a10dc0ef2b698ffe80b9ddd822373ac98aeace4",
+          "buildId": "DPaW5i_gnBuIKcU6veJqI",
+          "productionEvidence": ".local/verification/themes/2026-09-11-production-DPaW5i_gnBuIKcU6veJqI"
         },
-        "uncertainty": "Which upstream component ended the initial stream remains unconfirmed; this change rejects the directly observed incomplete document at the caching boundary."
-      }
+        "uncertainty": "Which upstream component ended the initial stream remains unconfirmed; this change rejects the directly observed incomplete document at the caching boundary.",
+        "historicalFailurePreserved": true
+      },
+      "productionHistory": [
+        {
+          "status": "superseded-after-observed-cache-invalidation-failure",
+          "head": "3d58789468d1ca617b14305f22e74affb93627b9",
+          "buildId": "hmblfV4d70wVfxe34ii9g",
+          "deployedAt": "2026-09-11T11:40:17Z",
+          "pullRequest": 950,
+          "deployRun": 34594710663,
+          "deployStep": "success",
+          "deployRunConclusion": "failure",
+          "deployRunFailure": "Post-deploy smoke found 10 new ranking OGP URLs missing; repair separate image layer",
+          "ciRun": 34593858550,
+          "checks": 18,
+          "evidenceDirectory": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g",
+          "browser": {
+            "status": "PASS-after-recheck",
+            "cases": 110,
+            "firstPass": 109,
+            "recheckPass": 1,
+            "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/browser-summary.json",
+            "limitation": "foreign-residents chart first-load 503 recovered without code/data change; cause unconfirmed"
+          },
+          "http": {
+            "cases": 147,
+            "pass": 147,
+            "evidence": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g/http-corrected-result.json"
+          },
+          "sitemap": {
+            "themes": 55,
+            "tokyoAreas": 52,
+            "newSurveyIdsSincePriorMain": 20,
+            "shards": 11
+          },
+          "sourceBrowserStatus": "39/43 PASS after purge; delivery-clinic-count and buried-cultural-property-specialist-count error boundary at both widths",
+          "runtimeLogs": "Local Cloudflare API token unavailable; worker tail not collected",
+          "temporaryEvidenceLoss": "Prior /tmp production evidence unavailable after continuation; rebuilt from durable frozen catalog and reran current production. Historical summary is not substituted for new proof.",
+          "cacheInvalidationRepair": {
+            "status": "PASS-local-74-tests-and-web-types-awaiting-pr-deploy",
+            "cause": "The authenticated purge route executes in the uncached default entrypoint, so ctx.cache.purge succeeds for that entrypoint but does not invalidate CachedApp HTML.",
+            "officialSource": "https://developers.cloudflare.com/workers/cache/purge/",
+            "observedAt": "2026-09-11",
+            "proof": [
+              "source-link-diagnostic.json",
+              "survey-browser-final.json",
+              "isr-before-index.json",
+              "purge-detail.log",
+              "cache-owner-red.log"
+            ],
+            "evidenceDirectory": ".local/verification/themes/2026-09-11-production-hmblfV4d70wVfxe34ii9g",
+            "first503Cause": "unconfirmed; this repair addresses persisted cached error pages, not an asserted cause of the initial upstream error",
+            "change": "Authenticated route invokes CachedApp.purgeCache RPC; purge executes in the owning entrypoint.",
+            "next": "Tests/types, PR+CI, deploy and verify same-build cache invalidation plus all55 themes/source links."
+          }
+        }
+      ]
     },
     "release252Historical": {
       "status": "staged-unpublished",
