@@ -5,7 +5,6 @@ import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@stats47/r2-storage/server', () => ({ fetchFromR2AsJson: vi.fn() }));
-import { GEO_CROSS_ANALYSIS_SLUGS } from '../geo-cross-analysis';
 import { matchesGeoArtifact } from '../geo-runtime-contract';
 import {
   parseGeoAnalysisManifest,
@@ -22,12 +21,13 @@ import {
 } from '../load-geo-station-access-evidence';
 
 import { geoArtifactBundleFixture } from './geo-artifact-bundle-fixture';
+import { GEO_BASE_FIXTURE_SLUGS } from './geo-manifest-fixture';
 
 // CIは合成fixtureで全契約を実行する。実artifact監査はnpm run audit:geo-runtime。
 // 明示されたrootの欠落・破損は必ず失敗し、fixtureへフォールバックしない。
 const root = process.env.GEO_ARTIFACT_ROOT;
 describe(`Geo配信契約 (${root ? '実artifact・141県詳細' : '合成fixture・141県詳細'})`, () => {
-  for (const slug of GEO_CROSS_ANALYSIS_SLUGS) {
+  for (const slug of GEO_BASE_FIXTURE_SLUGS) {
     const fixtures = geoArtifactBundleFixture(slug);
     const read = (key: string) => {
       if (root !== undefined)

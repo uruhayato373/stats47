@@ -31,7 +31,7 @@ test.describe("公開route matrix", () => {
   }
 });
 
-test.describe("ThemeCatalog 9 component types", () => {
+test.describe("ThemeCatalog published component types", () => {
   for (const contract of THEME_ROUTE_MATRIX) {
     test(`${contract.id}: chart count/state/unit/year/series`, async ({ page }) => {
       await assertRouteShell(page, contract);

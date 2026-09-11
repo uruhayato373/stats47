@@ -33,9 +33,9 @@ function isSafeR2Key(key: string): boolean {
   if (key.startsWith("/")) return false;
   // スキーム付き URL (`http://`, `file:`, `data:` 等)
   if (/^[a-z][a-z0-9+.-]*:/i.test(key)) return false;
-  // `..` をパスセグメントとして含む（先頭/中間/末尾いずれも）
+  // `.` / `..` をパスセグメントとして含む（先頭/中間/末尾いずれも）
   const segments = key.split("/");
-  if (segments.some((s) => s === "..")) return false;
+  if (segments.some((s) => s === "." || s === "..")) return false;
   return true;
 }
 
@@ -74,8 +74,14 @@ function getPublicR2Base(): string | null {
 }
 
 async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | null> {
-  const url = `${base}/${key.replace(/^\/+/, "")}`;
-  const res = await fetch(url);
+  // Keep authority under deployment configuration; the object key only supplies path segments.
+  const url = new URL(base);
+  if (url.protocol !== "https:" && url.protocol !== "http:") {
+    throw new Error("公開 R2 URL は HTTP(S) が必要です");
+  }
+  const prefix = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
+  url.pathname = prefix + key.split("/").map(encodeURIComponent).join("/");
+  const res = await fetch(url, { redirect: "error" });
   if (res.status === 404) return null;
   if (!res.ok) {
     throw new Error(`公開 R2 URL 取得に失敗 (HTTP ${res.status}): ${url}`);

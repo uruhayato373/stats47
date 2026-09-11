@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { validateMetricGroups } from "../../scripts/validate-theme-catalog";
 import { METRICS_REGISTRY } from "../registry";
+import { THEME_CATALOGS } from "../theme-catalog";
 import { normalizeUnitForAxis, type ThemeCatalog } from "../theme-catalog/types";
 
 /**
@@ -50,6 +51,12 @@ function run(c: ThemeCatalog) {
 }
 
 describe("validateMetricGroups — error", () => {
+  it("専用財政カードは実配置時だけ所属として認め、削除すれば未配置を検出する", () => {
+    const c = structuredClone(THEME_CATALOGS['local-finance']);
+    expect(run(c).warns).toEqual([]);
+    c.sections = [];
+    expect(run(c).warns.filter((warning) => warning.startsWith('[group-orphan]'))).toHaveLength(4);
+  });
   it("単位 3 種のグループを弾く (Y 軸は左右 2 本しかない)", () => {
     const { errors } = run(
       catalog(
@@ -149,5 +156,20 @@ describe("normalizeUnitForAxis", () => {
 
   it("★円と千円は別物のまま (桁が 1000 倍違うので同じ軸に載せない)", () => {
     expect(normalizeUnitForAxis("円")).not.toBe(normalizeUnitForAxis("千円"));
+  });
+});
+
+
+describe("固定年の比較条件", () => {
+  it("比較年を4桁年へ限定する", () => {
+    const { errors } = run(catalog([{ key: "fixed", title: "Fixed", rankingKeys: [YEN], defaultCheckedKeys: [YEN], comparisonYear: "latest" }], [YEN]));
+    expect(errors.some((error) => error.startsWith("[group-comparison-year]"))).toBe(true);
+  });
+  it("同じ指標へ異なる比較年を設定させない", () => {
+    const { errors } = run(catalog([
+      { key: "before", title: "Before", rankingKeys: [YEN], defaultCheckedKeys: [YEN], comparisonYear: "2021" },
+      { key: "after", title: "After", rankingKeys: [YEN], defaultCheckedKeys: [YEN], comparisonYear: "2023" },
+    ], [YEN]));
+    expect(errors.some((error) => error.startsWith("[group-comparison-year]"))).toBe(true);
   });
 });

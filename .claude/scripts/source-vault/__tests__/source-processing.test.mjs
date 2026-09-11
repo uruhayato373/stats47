@@ -30,15 +30,22 @@ test('all source profiles have a restorable processing contract', async () => {
   const readiness = JSON.parse(stdout);
   assert.equal(readiness.ready, true);
   assert.equal(readiness.contractOnly, true);
-  assert.equal(readiness.profiles.length, 5);
+  assert.equal(readiness.profiles.length, 12);
   assert.deepEqual(
     readiness.profiles.map((profile) => profile.profile).sort(),
     [
+      'amusement-shop-density',
+      'average-income-ranking',
+      'capital-city-guide',
       'claude-skills-guide-2026',
+      'gis-business-guide',
       'japan-zue',
       'kakei-marketing-2015',
+      'money-health-ranking',
       'prefecture-databook-2021',
       'prefecture-deviation',
+      'prefecture-ranking-consumption',
+      'yabai-kenmin-ranking',
     ]
   );
   for (const profile of readiness.profiles) {

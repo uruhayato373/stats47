@@ -1,13 +1,41 @@
-import type { ComponentType } from "react";
+import type { ComponentType } from 'react';
 
-import { ThemeCommuteFlowSection } from "@/features/commute-flow";
-import { ThemeDepopulationMedicalSection } from "@/features/depopulation-medical";
-import { ThemeFinanceFlowSection } from "@/features/finance-flow";
-import { ThemeHighwayTimelineSection } from "@/features/highway-history";
-import { ThemeMigrationFlowSection } from "@/features/migration-flow";
-import { ThemeStationPassengersSection } from "@/features/station-passengers";
-import { ThemeSunshineMapSection } from "@/features/sunshine-map";
-
+import { ThemeAirportTrafficSection } from '@/features/airport-traffic';
+import { ThemeBridgeInspectionAgeSection } from '@/features/bridge-inspection-age';
+import { ThemeCommuteFlowSection } from '@/features/commute-flow';
+import { ThemeCulturalHeritageSection } from '@/features/cultural-heritage';
+import { ThemeDepopulatedSettlementsSection } from '@/features/depopulated-settlements';
+import { ThemeDepopulationMedicalSection } from '@/features/depopulation-medical';
+import { ThemeEarthquakeExposureSection } from '@/features/earthquake-exposure';
+import { ThemeFactoryInvestmentSection } from '@/features/factory-investment';
+import { ThemeFinanceFlowSection } from '@/features/finance-flow';
+import { ThemeFreightOdSection } from '@/features/freight-od';
+import {
+  ThemeGeoSnowDesignationSection,
+  ThemeGeoLandslideExposureSection,
+  ThemeGeoStationAccessSection,
+  ThemeGeoPublicFacilityAccessSection,
+} from '@/features/geo-analysis';
+import { ThemeGraduationPathsSection } from '@/features/graduation-paths';
+import { ThemeHighwayTimelineSection } from '@/features/highway-history';
+import { ThemeIndustrySpecializationSection } from '@/features/industry-specialization';
+import { ThemeMedicalWorkforceSection } from '@/features/medical-workforce';
+import { ThemeMigrationFlowSection } from '@/features/migration-flow';
+import { ThemeNutritionSection } from '@/features/nutrition';
+import { ThemePhysicalActivitySection } from '@/features/physical-activity';
+import {
+  ThemeMigrationDemographicsSection,
+  ThemeSingleHouseholdsSection,
+  ThemeFiveYearResidenceSection,
+  ThemeYoungMigrationLink,
+} from '@/features/population-demographics';
+import { ThemePropertyPriceDistributionSection } from '@/features/property-price-distribution';
+import { ThemeShelterApplicabilitySection } from '@/features/shelter-applicability';
+import { ThemeStationPassengersSection } from '@/features/station-passengers';
+import { ThemeSunshineMapSection } from '@/features/sunshine-map';
+import { ThemeTourismSeasonalitySection } from '@/features/tourism-seasonality';
+import { ThemeTsunamiExposureSection } from '@/features/tsunami-exposure';
+import { ThemeWaterQualitySection } from '@/features/water-quality';
 
 /**
  * テーマダッシュボードに埋め込む GIS マップ section の registry。
@@ -20,13 +48,38 @@ import { ThemeSunshineMapSection } from "@/features/sunshine-map";
  * async server component (highway) が混在するが、いずれも引数なしで描画できる。
  */
 export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
-  "migration-flow": ThemeMigrationFlowSection,
-  "commute-flow": ThemeCommuteFlowSection,
-  "finance-flow": ThemeFinanceFlowSection,
+  'tsunami-scenario-exposure': ThemeTsunamiExposureSection,
+  'shelter-applicability': ThemeShelterApplicabilitySection,
+  'snow-designation-population': ThemeGeoSnowDesignationSection,
+  'landslide-population-facilities': ThemeGeoLandslideExposureSection,
+  'water-quality': ThemeWaterQualitySection,
+  'bridge-inspection-age': ThemeBridgeInspectionAgeSection,
+  'tourism-seasonality': ThemeTourismSeasonalitySection,
+  nutrition: ThemeNutritionSection,
+  'physical-activity': ThemePhysicalActivitySection,
+  'property-prices': ThemePropertyPriceDistributionSection,
+  'factory-investment': ThemeFactoryInvestmentSection,
+  'freight-od': ThemeFreightOdSection,
+  'airport-traffic': ThemeAirportTrafficSection,
+  'industry-specialization': ThemeIndustrySpecializationSection,
+  'medical-workforce': ThemeMedicalWorkforceSection,
+  'graduation-paths': ThemeGraduationPathsSection,
+  'cultural-heritage-locations': ThemeCulturalHeritageSection,
+  'earthquake-population': ThemeEarthquakeExposureSection,
+  'migration-flow': ThemeMigrationFlowSection,
+  'migration-demographics': ThemeMigrationDemographicsSection,
+  'single-households-demographics': ThemeSingleHouseholdsSection,
+  'five-year-residence': ThemeFiveYearResidenceSection,
+  'young-migration-link': ThemeYoungMigrationLink,
+  'commute-flow': ThemeCommuteFlowSection,
+  'finance-flow': ThemeFinanceFlowSection,
+  'geo-station-access': ThemeGeoStationAccessSection,
+  'geo-public-facility-access': ThemeGeoPublicFacilityAccessSection,
   highway: ThemeHighwayTimelineSection,
-  "station-passengers": ThemeStationPassengersSection,
-  "depopulation-medical": ThemeDepopulationMedicalSection,
-  "sunshine-map": ThemeSunshineMapSection,
+  'station-passengers': ThemeStationPassengersSection,
+  'depopulation-medical': ThemeDepopulationMedicalSection,
+  'depopulated-settlements': ThemeDepopulatedSettlementsSection,
+  'sunshine-map': ThemeSunshineMapSection,
 };
 
 /**
@@ -37,6 +90,6 @@ export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
  * depopulation-medical / sunshine-map) は全国地図が主役で半幅にすると読めないため全幅のまま。
  */
 export const HALF_WIDTH_SECTIONS = new Set<string>([
-  "migration-flow",
-  "commute-flow",
+  'migration-flow',
+  'commute-flow',
 ]);

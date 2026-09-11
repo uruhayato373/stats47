@@ -4,33 +4,33 @@
     {
       "source": "theme-catalog",
       "code": "no-selection",
-      "count": 120,
+      "count": 0,
       "owner": "theme-designer",
-      "reason": "selection provenance is being backfilled by theme portfolio",
+      "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
       "expiresAt": "2026-10-31"
     },
     {
       "source": "theme-catalog",
       "code": "dup-sortorder",
-      "count": 36,
+      "count": 0,
       "owner": "theme-component-builder",
-      "reason": "existing stable array ordering needs staged explicit sort orders",
+      "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
       "expiresAt": "2026-10-31"
     },
     {
       "source": "theme-catalog",
       "code": "primary-orphan",
-      "count": 11,
+      "count": 0,
       "owner": "theme-designer",
-      "reason": "primary cards may intentionally remain outside chart components",
+      "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
       "expiresAt": "2026-10-31"
     },
     {
       "source": "theme-catalog",
       "code": "dup-key-global",
-      "count": 2,
+      "count": 0,
       "owner": "theme-component-builder",
-      "reason": "shared component keys remain stable while ownership is clarified",
+      "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
       "expiresAt": "2026-10-31"
     },
     {

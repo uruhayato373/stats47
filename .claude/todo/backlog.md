@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-08
+updated: 2026-09-09
 ---
 
 # バックログ (タスクマスタ)
@@ -634,6 +634,24 @@ updated: 2026-09-08
   新規記事wave A の全記事が quality-gate + critic PASS、県別シリーズ47本が公開済みで、inventoryの`combined-analysis`各項目が
   記事・theme・areaのいずれかへ実在証跡で接続されている（管理画面`/content/references`で確認）。
 
+### [REFERENCE-SOURCE-KINDLE-BATCH-01] Drive直下にあったKindleスキャン7冊の書誌確定とS2以降
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:check] [起票:2026-09-10]
+
+- **owner**: `open-data-curator` (県庁所在地ガイドは `area-curator`、GIS本は `geo-analysis-curator`)。
+- **現状証拠**: 2026-09-10 に vault を展開配置へ移行した際、`参考文献/` 直下に未整理だった 7 冊
+  (`capital-city-guide` / `money-health-ranking` / `yabai-kenmin-ranking` / `amusement-shop-density` / `gis-business-guide` /
+  `prefecture-ranking-consumption` / `average-income-ranking`) を profile 化し S0 保全 + S1 ページ画像 (contentCrop 無し) まで完了。
+  奥付が Kindle レビュー画面で終わるため版・ISBN 未確認 (`edition: unknown` / `版不明`)。`やばい県民` は一意ページ 28/50 で本文 62% まで、
+  `平均年収` は 84% までの不完全スキャン。`source-inventory check-all` は 7 profile を `pending` として列挙している。doc 46 §1 に表あり。
+- **次**: ①国立国会図書館サーチ等で書誌を確定し profile `bibliography` と Drive folder 名 (`版不明` → 年版) を更新する。
+  ②Kindle UI 枠の `contentCrop` を profile ごとに決めて S1 を再生成する (kakei と同じ手順)。③不完全スキャン 2 冊は再スキャンするか
+  `rights-hold` のまま除外するか判断する。④S2 (OCR + Markdown) → S4 台帳。`source-inventory.mjs` の `loadExtractionPages` は
+  transcript 必須なので `--mode image` だけの workspace では build できない (S2 を先に通す)。
+- **停止条件**: 権利判断が終わるまで全項目 `rights-hold`。書籍値・図表・本文を公開物へ流さない。
+- **完了条件**: 7 profile が `check-all` で `valid: true` / coverage 100% になり、`stage-status` で S4 到達。
+- **付帯**: `参考文献/_移行前/` (旧 tar bundle 37 file + 生 PDF 16 本) は全 profile の `verify --vault` 通過を確認済み。削除はオーナー判断。
+
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run test --workspace=apps/admin -- reference-expansion-plans] [起票:2026-08-30]
@@ -652,14 +670,11 @@ updated: 2026-09-08
 | day-time-population | 昼間人口 | labor-mobility | draft | 就業地への流入規模を通勤移動の絶対数コンテキストとして示す |
 | gross-prefectural-product-expenditure-nominal-h27 | 県内総生産 | local-economy | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する |
 | electricity-generation-capacity | 発電電力量 | local-economy | draft | 電力供給規模と地域の産業基盤を並べて読む |
-| agricultural-output | 農業産出額 | local-economy | draft | 農業の生産規模を地域経済の産業構成へ接続する |
-| current-liabilities-balance-multi-person-households-per-household | 負債現在高 | real-income | draft | 所得・消費だけでなく家計の負債側を購買力の文脈に加える |
 | avg-propensity-to-consume-worker-households | 平均消費性向 | real-income | draft | 所得のうち消費へ回る割合を地域別の家計行動として比較する |
 | municipality-count | 市町村数 | local-finance | draft | 自治体数を行政サービス・財政構造の基礎条件として示す |
 | agricultural-employment-population | 農業就業人口 | local-economy | draft | 農業産出額と担い手規模を組み合わせて産業構造を読む |
 | number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | 製造品出荷額だけでは見えない生産拠点の厚みを示す |
 | households-on-public-assistance | 生活保護被保護実世帯数 | local-finance | draft | 実数を制度利用者の優劣にせず、人口規模と自治体財政の基礎条件として読む |
-| households-on-public-assistance-per-1000 | 生活保護被保護実世帯数 | local-finance | draft | 実数と世帯千対を分け、地域規模を調整した制度利用状況として読む |
 | infant-deaths | 乳児死亡数 | healthcare | draft | 小標本の年次変動を明示し、実数と出生千対を分けて医療・人口動態を読む |
 | infant-mortality-rate-per-1000-births | 乳児死亡率 | healthcare | draft | 出生千対の率を単年順位へ短絡せず、複数年推移と出生数を合わせて読む |
 | average-life-expectancy-female-20 | 20歳女性の平均余命 | healthcare | draft | 出生時平均余命と年齢別平均余命を分離し、女性20歳時点の地域差を読む |
@@ -669,7 +684,7 @@ updated: 2026-09-08
 <!-- reference-theme-plans:end -->
 
 - **ブログ下書き**: `docs/21_ブログ記事原稿/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。
-- **次**: テーマはactiveな19指標を既存カタログへ採択する順序を需要と重複で決める。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
+- **次**: テーマは残るdraftの15指標を既存カタログへ採択する順序を需要と重複で決める。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
 - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
 - **完了条件**: activeなテーマ企画19件が採択または理由付き不採用となり、blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 
@@ -736,17 +751,31 @@ updated: 2026-09-08
 - **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
 - **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
 
-### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログの残工程
+### [THEME-EXPANSION-IMPLEMENT-01] 採択したテーマ拡充を検証済み仕様から実装する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-09] [進行中]
+
+- **2026-09-10 checkpoint**: 55テーマの構造接続後、候補の主問を全128件再監査した。追加原典の取込と章修正を継続中。構造PASSを主問充足や公開完了とは扱わない。最新の採用指標・source hash・検証状態は `.claude/state/metrics/themes/2026-09-10-all-expansion.json`。未充足の核心は同記録の `validation.candidateScope` から、直接統計→公式ファイル→GISの順に処理する。
+- **owner**: theme-designer（全体）／data-ingester（値・設定）／theme-component-builder・theme-ui-manager（画面）
+- **現在地**: [全体実装記録](../state/metrics/themes/2026-09-10-all-expansion.json) を正典とする。55テーマの構造接続と、各候補の採択範囲・原典・表示検証を分離して扱う。原典不一致・GISの未実装範囲を構造の完了へ埋め込まない。
+- **次**: 全候補の原典・採用範囲監査を踏まえ、残る地震住宅の全国空間原典を取得・検証する。採用済み部分は55テーマ110画面・県別672ケースと出典導線を検証済み。公開工程は固定manifestとともに下記カードへ接続する。範囲限定と未充足を全体実装記録の `scopeCounts` / `validation.next253Tsunami29` から引き継ぎ、原典未確保を代替指標で完了扱いにしない。
+- **正典**: [採否・範囲・初回仕様・実装順](../skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json) の `decision` / `firstBatch` / `implementationWaves`。取得証拠は [全県・年別の検証](../state/estat/theme-expansion-verification.json)。このカードが実装の入口であり、JSON内へ独立したTODO台帳を作らない。
+- **実行順**: ① `npm run theme:expansion:check` で仕様を検査し、採択候補の核心となる問いと実在する指標を照合する。既存metricのyears不足と未登録指標はdata-ingesterが実値確認後に取り込む。②既存テーマは同じ問いの章を拡充し、重複章を追加しない。③API中心→公式ファイル補完→GISの順で、採択範囲だけを小分けに実装する。統合候補は統合先で扱い、保留は再開条件を満たすまで着手しない。
+- **検証**: firstBatchの47県・比較年・原典定義を再現し、ThemeCatalog／生成snapshot／表示値を突合する。`validate:catalog`、対象テスト・型検査、PC・モバイルの表示を通す。廃棄物2024年度の原典更新を先に確認し、2023年度を最新と表現しない。情報通信の2020年経理事項は初回から除外する。
+- **停止条件**: 年・母集団・地域区分・単位が合わない場合は該当指標を採用しない。欠測を0へ変換しない。inactiveや未登録キーを配信定義に入れない。業者所在県と施工県、事業所と企業、契約数とカバー率を混同しない。公開R2と本番への反映は検証済み差分をまとめて承認後に行う。
+- **完了条件**: 採択範囲の実装・データ・表示検証が完了し、各候補から採用先の実在するThemeCatalog／章へ辿れる。対象を縮小した場合は根拠をdecisionへ記録する。公開工程は `THEME-PORTFOLIO-REMAINDER-01` と対象manifestを突合し、完了・未完了を取り違えない。
+
+### [THEME-PORTFOLIO-REMAINDER-01] 全テーマの表示検証・改善公開と計測開始
 
 タグ: [種類:改善] [実行:対話] [起票:2026-07-04]
 
-- **owner**: Claude Code
-- **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / chart expansion。旧 guidance card 案は 2026-08-25 に指標ハブ契約へ置換済み。
-- **2026-08-27 監査**: 22テーマのreviewは全件存在。catalog validatorは20テーマ・error 0・warn 169
-  （selection未記入120 / sortOrder重複36 / primary未使用11 / global key重複2）。意味確認なしの一括補完は行わない。
-- **次**: 22テーマreviewの結果から、欠測・重複・定義誤認だけを修正する。分類再編は重複matrixと移行影響が確定するまで実装しない。
-- **完了条件**: catalog validator、選定provenance、分類契約が一致し、UI変更はテーマ単位の小さな差分で検証する。
-- **正典**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md` / `theme-taxonomy-reorganization.md` / `.claude/rules/theme-catalog-standards.md`
+- **残工程**: ローカルの全表示・出典導線・生成物・豪雪地図の障害復帰は検証済み。固定manifest（253指標・2155ファイル）とコード差分の承認後、公開R2、本番デプロイ、公開日からの計測開始を実施する。採用範囲・許諾・未充足の詳細は `.claude/state/metrics/themes/2026-09-10-all-expansion.json` と各候補のdecisionを参照する。
+- **全体拡充との統合**: 初回3テーマ、追加31テーマ、既存21テーマの未公開差分を、全55テーマの現行定義から再生成したmanifestで突合する。特に100指標のmetadata、健康寿命・農業産出額・ラスパイレス指数の値/単位修正を落とさない。`app/ranking-items/all.json` は公開在庫を基に検証済み全差分を重ねる。新規テーマは公開前baselineなしのlaunch実験として、実際の公開日から7／28／56日を観測する。
+- **owner**: `devops-runner`（デプロイ）/ `r2-publisher`（検証済み対象の公開）/ `theme-ui-manager`（配信確認）/ `theme-portfolio-manager`（計測開始）
+- **実行順**: (0) 全型・対象テスト・生成物・buildと全テーマの表示および変更導線を検証し、manifestのbyte/SHAを固定する。(1) 承認済みのfeatureブランチへGit同期し、ローカル検証結果と本番差分を提示して本番反映の承認を得る。(2) 既存のR2 writerと同時実行しないことを確認し、固定manifestの全件事前検査・remote dry-run後、exact publisherで原典から依存順にデータを反映する。未更新mainのsync-snapshotsは起動しない。(3) feature→develop→mainを規約どおり統合し、同じデータを読むCIと1回のデプロイを確認する。(4) 全55テーマ・旧財政redirect・追加survey導線と修正した年/母集団/分母表示を本番実測する。(5) 実際の公開日で全55テーマの実験（新規34・既存構成21）を `evaluate-theme-experiments.mjs --schedule` し、既存の週次CIと月曜フォローのstate書き戻しを確認する。
+- **停止条件**: hydration #418 の残存、CI/生成物/manifestの不一致、公式source hash・recipeの差異、本番表示不一致があれば公開完了にしない。公開前に実験開始日を設定しない。staged監査を公開品質baselineへ上書きしない。正常時や既知coverage警告だけで新たなTODOを起票しない。
+- **完了条件**: コードと検証済みR2が本番で一致し、全テーマ・主要導線と週次workflowが成功する。公開日に対応したd7/d28/d56期日をstateに記録し、公開後の効果観測は `improvement-triage` へ別IDで引き渡す。外国人テーマを含む既存21テーマは、取得済みの同一56日窓baselineを用いる。少数観測は measured-low として効果判定を保留する。
+- **正典**: `.claude/rules/branch-workflow.md` / `.claude/skills/theme/optimize-themes/SKILL.md` / `.claude/state/themes/README.md`
 
 ### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
 

@@ -16,11 +16,55 @@ import {
   resolveExactAssetCandidates,
 } from './push-exact-r2-assets-core';
 
+import {
+  parseExactManifestArgs,
+  publishExactR2Manifest,
+  preflightExactR2Manifest,
+  readExactR2Manifest,
+} from './push-exact-r2-manifest-core';
+
 const PROJECT_ROOT = resolve(__dirname, '..', '..', '..', '..');
-config({ path: resolve(PROJECT_ROOT, '.env.local') });
 
 async function main(): Promise<void> {
+  const args = process.argv.slice(2);
+  if (
+    args.some((arg) => arg === '--manifest' || arg.startsWith('--manifest='))
+  ) {
+    const { manifestPath, manifestSha256, dryRun, verifyOnly } =
+      parseExactManifestArgs(args);
+    const manifest = readExactR2Manifest(
+      PROJECT_ROOT,
+      manifestPath,
+      manifestSha256
+    );
+    if (verifyOnly) {
+      preflightExactR2Manifest(PROJECT_ROOT, manifest);
+      console.log(
+        JSON.stringify({
+          status: 'PASS',
+          manifestSha256,
+          files: manifest.files.length,
+          bytes: manifest.files.reduce((sum, file) => sum + file.bytes, 0),
+          verifyOnly: true,
+        })
+      );
+      return;
+    }
+    config({ path: resolve(PROJECT_ROOT, '.env.local') });
+    assertR2WriteAllowed({ op: 'push-exact-r2-manifest', dryRun });
+    const store = createS3ImageObjectStoreFromEnv();
+    if (!store) throw new Error('R2 S3 authentication is required');
+    const result = await publishExactR2Manifest({
+      projectRoot: PROJECT_ROOT,
+      manifest,
+      store,
+      dryRun,
+    });
+    console.log(JSON.stringify(result));
+    return;
+  }
   const { selection, dryRun } = parseExactAssetArgs(process.argv.slice(2));
+  config({ path: resolve(PROJECT_ROOT, '.env.local') });
   assertR2WriteAllowed({ op: 'push-exact-r2-assets', dryRun });
   const candidates = resolveExactAssetCandidates(PROJECT_ROOT, selection);
   const store = createS3ImageObjectStoreFromEnv();

@@ -13,13 +13,11 @@ const { __loadKeySetsForTest } = await import(
  * 正規表現で読んで key 集合を作っている (ネットワーク不要・pre-commit で一瞬で終わるため)。
  * そのため **正典がリネームされても lint 側は黙って別物を見続ける**リスクがある。
  *
- * 特にテーマ slug は `THEME_SETS` の定数名 (POPULATION_DYNAMICS_SET) から機械導出しており、
- * 定数名と slug の対応は「たまたま一致している」だけで宣言されていない。
- * ここで正典と突合し、silent drift を CI で検出する
- * (`legacy-category-keys.test.ts` と同じ流儀)。
+ * テーマは ThemeCatalog が生成した IndicatorSet の JSON key を使う。
+ * 実行時の KNOWN_THEME_SLUGS と突合し、追加漏れ・古い生成物を検出する。
  */
 describe("internal-link-lint の key 集合", () => {
-  it("themes: THEME_SETS 由来の導出 slug が KNOWN_THEME_SLUGS と完全一致する", () => {
+  it("themes: 生成 IndicatorSet の theme key が KNOWN_THEME_SLUGS と完全一致する", () => {
     const { themes } = __loadKeySetsForTest();
     expect(themes).toEqual(new Set(KNOWN_THEME_SLUGS));
   });

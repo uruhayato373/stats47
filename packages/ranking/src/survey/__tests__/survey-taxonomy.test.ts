@@ -11,6 +11,27 @@ import {
 } from '../survey-taxonomy';
 
 describe('resolveSurveyTaxonomy', () => {
+  it.each([
+    ['patent-application-count', 'patent-administration-annual-report'],
+    ['patent-registration-count', 'patent-administration-annual-report'],
+    ['patent-inventor-count', 'patent-administration-annual-report'],
+    ['design-application-count', 'patent-administration-annual-report'],
+    ['design-registration-count', 'patent-administration-annual-report'],
+    ['trademark-application-count', 'patent-administration-annual-report'],
+    ['trademark-registration-count', 'patent-administration-annual-report'],
+    ['broadband-contract-count-excluding-39-4g', 'telecommunications-contract-share-quarterly'],
+    ['broadband-service-contract-count', 'telecommunications-contract-share-quarterly'],
+    ['delivery-hospital-count', 'medical-facility-survey'],
+    ['delivery-clinic-count', 'medical-facility-survey'],
+    ['buried-cultural-property-specialist-count', 'buried-cultural-property-statistics'],
+    ['prefectural-cultural-property-protection-expenditure', 'local-cultural-administration-survey'],
+    ['domestic-travel-consumption-by-destination', 'travel-tourism-consumption-survey'],
+  ])('公式原表から追加した %s を元の資料 %s へ接続する', (metricKey, surveyId) => {
+    const result = resolveSurveyTaxonomy({ metricKeys: [metricKey] }, METRICS_REGISTRY);
+    expect(result.surveys.map((survey) => survey.id)).toEqual([surveyId]);
+    expect(result.unresolvedMetricKeys).toEqual([]);
+  });
+
   it('metricKey は既存 resolveSurveyLinkage と同じ master survey へ解決する', () => {
     const result = resolveSurveyTaxonomy(
       { metricKeys: ['grilled-eel-consumption-expenditure'] },
@@ -184,6 +205,23 @@ describe('resolveThemeSurveyTaxonomy', () => {
     expect(
       resolveThemeSurveyTaxonomy(broken, METRICS_REGISTRY).charts[0].status
     ).toBe('missing-lineage');
+  });
+
+  it('固定年比較を含む指標カードを図とは別に監査し、一部だけの解決を成功にしない', () => {
+    const withGroups: ThemeCatalog = {
+      ...catalog,
+      charts: [],
+      metricGroups: [
+        { key: 'comparison', title: '比較', rankingKeys: ['grilled-eel-consumption-expenditure'], defaultCheckedKeys: ['grilled-eel-consumption-expenditure'], comparisonYear: '2023' },
+        { key: 'partial', title: '一部未解決', rankingKeys: ['grilled-eel-consumption-expenditure', 'unknown-metric'], defaultCheckedKeys: ['grilled-eel-consumption-expenditure'] },
+        { key: 'empty', title: '空', rankingKeys: [], defaultCheckedKeys: [] },
+      ],
+    };
+    const result = resolveThemeSurveyTaxonomy(withGroups, METRICS_REGISTRY);
+    expect(result.charts).toEqual([]);
+    expect(result.metricGroups.map((group) => group.status)).toEqual(['resolved', 'unresolved', 'missing-lineage']);
+    expect(result.metricGroups[0].surveys.map((survey) => survey.id)).toContain('kakei-chousa');
+    expect(result.metricGroups[1].unresolvedMetricKeys).toEqual(['unknown-metric']);
   });
 });
 

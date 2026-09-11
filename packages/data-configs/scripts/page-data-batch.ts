@@ -958,13 +958,19 @@ async function readPublishedCoverage(
   }
 }
 
-async function processOne(
+export async function processOne(
   config: MetricConfig,
   appId: string,
   dryRun: boolean,
   allowEmpty: ReadonlySet<string> = new Set(),
   allowShape: ReadonlySet<string> = new Set(),
 ): Promise<ProcessResult> {
+  // 県が手動公表表でも、市区町村の独立したe-Stat系列は更新できる。
+  // entitiesをcityだけにして再入するため、県values.jsonへ市の値を書かない。
+  if ((config.source.kind === "external" || config.source.kind === "mlit")
+      && config.entities.includes("city") && config.citySource) {
+    return processOne({ ...config, source: config.citySource, entities: ["city"] }, appId, dryRun, allowEmpty, allowShape);
+  }
   if (config.source.kind === "calculated") {
     return { key: config.key, ok: false, status: "skip", message: "calculated metric skipped (deps required)" };
   }
@@ -1153,15 +1159,16 @@ async function processOne(
     }
 
     if (wantCity) {
-      const cityStatsDataId = prefToCityStatsDataId(src.statsDataId);
+      const cityStatsDataId = config.citySource?.statsDataId ?? prefToCityStatsDataId(src.statsDataId);
       if (!cityStatsDataId) {
         notes.push("city=skip(no-city-table)");
       } else {
-        let fetched = await fetchEstatData(appId, { ...src, statsDataId: cityStatsDataId });
+        const citySource = config.citySource ?? { ...src, statsDataId: cityStatsDataId };
+        let fetched = await fetchEstatData(appId, citySource);
         // ★city 表はコードを振り直していることがある (2026-07-31 実測)。
         //   コードで 0 行だったときだけ、指標名の完全一致で cdCat01 を引き直す。
         //   取得できている metric の経路は通らないので、既存の挙動は変わらない。
-        if (fetched.values.length === 0 && src.cdCat01) {
+        if (!config.citySource && fetched.values.length === 0 && src.cdCat01) {
           const alt = await resolveCityCat01(appId, src.statsDataId, cityStatsDataId, src.cdCat01);
           if (alt) {
             notes.push(`city-cat01=${src.cdCat01}->${alt}`);
@@ -1173,7 +1180,7 @@ async function processOne(
           }
         }
         const values = fetched.values;
-        const payload = shapeForCity(config, values);
+        const payload = shapeForCity(config.citySource ? { ...config, source: config.citySource } : config, values);
         const notEmpty = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
         const shapeOk = notEmpty
           ? await gateShape("city", payload, fetched.raw, "cities.json")
@@ -1235,7 +1242,10 @@ async function main() {
     }
     targets = targets.filter((c) => wanted.has(c.key));
   }
-  if (args.kind) targets = targets.filter((c) => c.entities.includes(args.kind as MetricConfig["entities"][number]));
+  if (args.kind) {
+    const entity = args.kind as MetricConfig["entities"][number];
+    targets = targets.filter((c) => c.entities.includes(entity)).map((c) => ({ ...c, entities: [entity] }));
+  }
   if (args.since) {
     const sinceMs = new Date(args.since).getTime();
     targets = targets.filter((c) => {

@@ -45,6 +45,15 @@ const SCALED_BASE_UNITS = [
   ["km2", "area", "m2", 6],
   ["kWh", "energy", "Wh", 3],
   ["MWh", "energy", "Wh", 6],
+  // 再エネ特措法 A表の設備容量 (fit-fip-installed-capacity)。発電量 Wh と区別する。
+  // https://www.fit-portal.go.jp/publicinfosummary （原表・取得日は metric の provenance）
+  ["W", "power", "W", 0],
+  ["kW", "power", "W", 3],
+  ["MW", "power", "W", 6],
+  // 環境省「部門別CO₂排出量の現況推計」の千t-CO₂。NFKC後は CO2。
+  // https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html
+  // 炭素質量 t-C・温室効果ガス CO2eq・一般の質量と同一視しない。
+  ["t-CO2", "co2-mass", "g-CO2", 6],
 ];
 
 /**
@@ -74,6 +83,7 @@ const BASE_UNITS = [
   ["箇所", "count"],
   ["施設", "count"],
   ["事業所", "count"],
+  ["企業等", "count"],
   ["組", "count"],
   ["回", "count"],
   ["着", "count"],
@@ -91,6 +101,33 @@ const BASE_UNITS = [
   ["加入", "count"],
   ["延数", "count"],
   ["人泊", "count"],
+  // 2026-09-11 config と各 source/provenance の計数対象を確認した語彙。
+  // 土砂災害指定区域、SSDS契約・事業者、農林業/港湾/運輸、行政DX・橋梁等。
+  // 件へまとめず baseUnit に各表記を残す（例: 橋 ≠ 基、経営体 ≠ 事業体）。
+  ["区域", "count"],
+  ["契約", "count"],
+  ["業者", "count"],
+  ["住宅", "dwelling"],
+  ["団", "count"],
+  ["署", "count"],
+  ["組織", "count"],
+  ["経営体", "count"],
+  ["羽", "count"],
+  ["通", "count"],
+  ["市町村", "count"],
+  ["例", "count"],
+  ["両", "count"],
+  ["軒", "count"],
+  ["手続", "count"],
+  ["駅", "count"],
+  ["地点", "count"],
+  ["橋", "count"],
+  ["工場", "count"],
+  ["事業体", "count"],
+  ["丁", "count"],
+  ["者", "count"],
+  ["基", "count"],
+  ["束", "count"],
   ["g", "mass"],
   ["kg", "mass"],
   ["t", "mass"],
@@ -239,7 +276,11 @@ function matchBaseUnit(s) {
   const t = s.trim();
   if (t === "") return null;
   for (const [token, dimension, baseUnit, scaleExponent] of SCALED_BASE_UNITS) {
-    if (token.toLowerCase() === t.toLowerCase()) {
+    // 電力は mW と MW が別倍率。CO2 の物質表記も大小文字を勝手に畳まない。
+    const matches = dimension === "power" || dimension === "co2-mass"
+      ? token === t
+      : token.toLowerCase() === t.toLowerCase();
+    if (matches) {
       return { dimension, baseUnit, scaleExponent };
     }
   }
@@ -332,4 +373,4 @@ export function unitScaleMultiplier(unit) {
 }
 
 /** 実測で確認した語彙 (metric config 2,295 件の走査結果)。カバレッジ計測に使う。 */
-export const KNOWN_UNIT_SAMPLES = ["円", "千円", "万円", "百万円", "億円", "兆円", "％", "%", "‰", "人", "千人", "万人", "人（人口10万対）", "人口千対", "人口10万対", "世帯", "件", "戸", "台", "店", "校", "館", "所", "か所", "箇所", "施設", "事業所", "g", "kg", "t", "トン", "ml", "l", "kl", "m3", "mm", "cm", "m", "km", "m2", "ha", "km2", "kWh", "MWh", "時間", "分", "日", "年", "歳", "℃", "指数", "（全国=100）"];
+export const KNOWN_UNIT_SAMPLES = ["円", "千円", "万円", "百万円", "億円", "兆円", "％", "%", "‰", "人", "千人", "万人", "人（人口10万対）", "人口千対", "人口10万対", "世帯", "件", "戸", "台", "店", "校", "館", "所", "か所", "箇所", "施設", "事業所", "企業等", "g", "kg", "t", "トン", "ml", "l", "kl", "m3", "mm", "cm", "m", "km", "m2", "ha", "km2", "kWh", "MWh", "時間", "分", "日", "年", "歳", "℃", "指数", "（全国=100）"];

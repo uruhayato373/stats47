@@ -17,7 +17,7 @@
  *   /blog/<slug>   … GONE_BLOG_SLUGS にあれば 410
  *   /category/<key>… CATEGORY_KEYS (17 軸) 外なら 404
  *   /areas/<code>  … 01000-47000 以外なら 410
- *   /themes/<slug> … THEME_SETS (all-themes.ts) 由来の 22 slug 外なら 410 (22/22 live 一致で検証済)
+ *   /themes/<slug> … ThemeCatalog から生成した IndicatorSet の theme key 外なら 410
  * **blog 記事の実在** と tag / survey は ② に委ねる (公開 slug 集合が repo に無く R2 参照が要るため)。
  */
 import fs from "node:fs";
@@ -58,7 +58,7 @@ const SOURCES = {
   blogRedirects: "apps/web/src/config/blog-redirects.ts",
   categoryKeys: "packages/data-configs/src/types.ts",
   metricsDir: "packages/data-configs/src/metrics",
-  themeSets: "apps/web/src/features/theme-dashboard/config/all-themes.ts",
+  themeSets: "packages/types/src/indicator-sets",
   geoAnalyses: "packages/data-configs/src/business-plan/m1.ts",
 };
 
@@ -109,16 +109,18 @@ function loadKeySets() {
     Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, "0")}000`),
   );
 
-  // THEME_SETS の定数名 (POPULATION_DYNAMICS_SET) が slug (population-dynamics) に対応する。
-  // この対応は宣言されていない「たまたまの一致」なので、正典 (KNOWN_THEME_SLUGS) との突合を
-  // apps/web/src/config/__tests__/internal-link-lint-keysets.test.ts が CI で行う。
-  const themeBlock = readRequired(SOURCES.themeSets).match(/const THEME_SETS = \[([\s\S]*?)\]/);
-  if (!themeBlock) throw new Error("internal-link-lint: THEME_SETS を抽出できません");
-  const themes = new Set(
-    [...themeBlock[1].matchAll(/([A-Z0-9_]+)_SET/g)].map((m) =>
-      m[1].toLowerCase().replace(/_/g, "-"),
-    ),
-  );
+  // ThemeCatalog が生成した JSON リテラルを読む。定数名や spread の名前から slug を推定しない。
+  const themes = new Set();
+  for (const filename of fs.readdirSync(path.join(ROOT, SOURCES.themeSets))) {
+    if (!filename.endsWith(".ts")) continue;
+    const source = readRequired(path.join(SOURCES.themeSets, filename));
+    if (!source.startsWith("// AUTO-GENERATED") || !source.includes("Source of truth: packages/data-configs/src/theme-catalog/")) continue;
+    const literal = source.match(/export const \w+: IndicatorSet = (\{[\s\S]*?\});/);
+    if (!literal) continue;
+    const set = JSON.parse(literal[1]);
+    if (set.usage === "theme" && typeof set.key === "string") themes.add(set.key);
+  }
+  if (!themes.size) throw new Error("internal-link-lint: theme IndicatorSet 集合が空です");
 
   const geoBlock = readRequired(SOURCES.geoAnalyses).match(
     /export const BUSINESS_PLAN_M1_GEO_ANALYSES = \[([\s\S]*?)\] as const/,

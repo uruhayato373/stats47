@@ -1,18 +1,20 @@
-"use client";
+'use client';
 
 import {
   createContext,
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
+  useSyncExternalStore,
   type ReactNode,
-} from "react";
+} from 'react';
 
 import {
   resolveThemePrefectureCode,
   writeThemePrefecturePreference,
-} from "../lib/theme-prefecture-preference";
+} from '../lib/theme-prefecture-preference';
 
 // ============================================================================
 // Context — テーマダッシュボードの選択エリア (47都道府県 / 都道府県) の単一ソース。
@@ -33,7 +35,15 @@ interface ThemePrefectureContextValue {
   setSelected: (code: string | null, name?: string | null) => void;
 }
 
-const ThemePrefectureContext = createContext<ThemePrefectureContextValue>({
+type ThemeServerSelection = Pick<
+  ThemePrefectureContextValue,
+  'selectedPrefectureCode' | 'selectedAreaName'
+>;
+
+const ThemePrefectureContext = createContext<
+  ThemePrefectureContextValue & { serverSelection: ThemeServerSelection }
+>({
+  serverSelection: { selectedPrefectureCode: null, selectedAreaName: null },
   hasProvider: false,
   selectedPrefectureCode: null,
   selectedAreaName: null,
@@ -54,20 +64,25 @@ export function ThemePrefectureProvider({
   initialAreaName?: string | null;
   children: ReactNode;
 }) {
-  const [selectedPrefectureCode, setCode] = useState<string | null>(initialAreaCode);
+  const [selectedPrefectureCode, setCode] = useState<string | null>(
+    initialAreaCode
+  );
   const [selectedAreaName, setName] = useState<string | null>(initialAreaName);
 
-  const setSelected = useCallback((code: string | null, name?: string | null) => {
-    const selection = code ? resolveThemePrefectureCode(code) : null;
-    const resolvedCode = selection?.areaCode ?? null;
-    setCode(resolvedCode);
-    setName(resolvedCode ? (name ?? selection?.areaName ?? null) : null);
-    writeThemePrefecturePreference(resolvedCode);
-    const url = new URL(window.location.href);
-    if (resolvedCode) url.searchParams.set("pref", resolvedCode);
-    else url.searchParams.delete("pref");
-    window.history.replaceState(null, "", url);
-  }, []);
+  const setSelected = useCallback(
+    (code: string | null, name?: string | null) => {
+      const selection = code ? resolveThemePrefectureCode(code) : null;
+      const resolvedCode = selection?.areaCode ?? null;
+      setCode(resolvedCode);
+      setName(resolvedCode ? (name ?? selection?.areaName ?? null) : null);
+      writeThemePrefecturePreference(resolvedCode);
+      const url = new URL(window.location.href);
+      if (resolvedCode) url.searchParams.set('pref', resolvedCode);
+      else url.searchParams.delete('pref');
+      window.history.replaceState(null, '', url);
+    },
+    []
+  );
 
   // URL / Cookie / 初回既定値からサーバーが解決した選択を、次回アクセス用に保存する。
   useEffect(() => {
@@ -77,7 +92,7 @@ export function ThemePrefectureProvider({
   // Provider をサーバー初期値なしで使う既存画面向けの後方互換。
   useEffect(() => {
     if (initialAreaCode) return;
-    const p = new URLSearchParams(window.location.search).get("pref");
+    const p = new URLSearchParams(window.location.search).get('pref');
     const selection = resolveThemePrefectureCode(p ?? undefined);
     if (selection) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -90,6 +105,10 @@ export function ThemePrefectureProvider({
   return (
     <ThemePrefectureContext.Provider
       value={{
+        serverSelection: {
+          selectedPrefectureCode: initialAreaCode,
+          selectedAreaName: initialAreaName,
+        },
         hasProvider: true,
         selectedPrefectureCode,
         selectedAreaName,
@@ -105,6 +124,19 @@ export function ThemePrefectureProvider({
 // Hook
 // ============================================================================
 
-export function useThemePrefecture() {
-  return useContext(ThemePrefectureContext);
+const subscribeToSelection = () => () => {};
+
+export function useThemePrefecture(): ThemePrefectureContextValue {
+  const context = useContext(ThemePrefectureContext);
+  const serverSnapshot = useMemo(
+    () => ({ ...context, ...context.serverSelection }),
+    [context]
+  );
+  // Context continues to notify consumers. The server snapshot only preserves
+  // the initial HTML selection while a streamed section is being hydrated.
+  return useSyncExternalStore(
+    subscribeToSelection,
+    () => context,
+    () => serverSnapshot
+  );
 }

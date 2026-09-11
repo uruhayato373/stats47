@@ -32,7 +32,7 @@
 - [project_blog_svg_lineage_enforcement.md](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
 - [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ空/home featured空→wrangler.toml CLOUDFLARE_WORKERS="true"を疑う。shouldSkipRemoteR2Readが空ok([])返し黙って失敗。テーマはR2 values.jsonのみ読む+force-dynamic必須(2026-06-20根治)
-- [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — devは`npm run dev:web`(=turbo --filter=web)。root`npm run dev`は23pkgで遅い。常駐はrun_in_background+Ready polling。更新無い時はlisten確認(lsof -i :3000)先。正典local-environment.md
+- [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — devは`npm run dev:web`(=turbo --filter=web)。root`npm run dev`は23pkgで遅い。常駐はbackground+Ready polling。Turbo devのR2 URL/空S3変数継承と公開前指標の実HTMLを確認してから画面監査。正典local-environment.md
 - [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。docs/21=ephemeral outbox
 - [feedback_fetch_origin_before_implementing.md](feedback_fetch_origin_before_implementing.md) — 実装前にgit fetch+origin/main vs ローカルHEAD diff。並行セッション同日pushでstale→重複実装事故(2026-06-14 PR#479)。施策IDを既存検索
 - [feedback_home_pure_ssg_r2_empty.md](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず空焼き込み→修正はforce-dynamic(#478)。revalidateは本OpenNext構成で無効。build envにR2 URL足すとgenerateStaticParams爆発で不採用
@@ -102,4 +102,7 @@
 - [feedback_playwright_profile_dual_os.md](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂
 - [feedback_windows_script_portability.md](feedback_windows_script_portability.md) — Windowsで落ちる3パターン: URL().pathnameの先頭スラッシュ(C:\C:\)/npxのspawn(ENOENT・Node22は.cmdをEINVAL)/Macパス直書き。node直起動とfileURLToPathで書く
 - [project_affiliate_banner_text_asymmetry.md](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する
+- [project_source_vault_expanded_layout.md](project_source_vault_expanded_layout.md) — 参考文献vaultは2026-09-10にtar bundle廃止→Drive版folderへ展開配置(PDF+pages/+md/+figures/)。マウントは`マイドライブ`を自動解決、upload差分+readback、S4未到達はpending、_移行前は削除済み、不完全スキャン2冊
 - [project_kakei_marketing_book_pipeline.md](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』(2015)をsource-vault profile kakei-marketing-2015で保全(r2=ページ画像同梱)・全307ページ解決済(analyses.json 80件)。展開はbacklog KAKEI-MARKETING-CONTENT-01。Kindle縦書きスキャンはjpn_vert+UI枠crop、Driveはローカルマウントをそのまま--parts-dirに渡せる
+
+- [feedback_ssds_denominator_evidence.md](feedback_ssds_denominator_evidence.md) — SSDSの素unitは実数の証拠ではない。公式算式で分母を確定しsubtitle/labelへ保持、二重正規化禁止。

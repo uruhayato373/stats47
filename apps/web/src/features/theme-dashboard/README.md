@@ -38,12 +38,12 @@ ThemePrefectureProvider          ← prefecture state (URL + Cookie sync)
 ```
 
 The provider must stay outside `PageShell` because `ThemeSideNav` holds the prefecture select and
-would otherwise read the default (no-op) context. Below `lg` the rail is hidden — a nav that switches
+would otherwise read the default (no-op) context. Below the shared 992px boundary the rail is hidden — a nav that switches
 the page content is useless when stacked after the content it controls. The content column therefore
 owns equivalent controls directly below the breadcrumb: `ThemeSwitcher`, `PrefectureSelect`, page anchors,
 all metric links, and source surveys. The desktop rail has the same roles and does not expand the full theme list.
 
-`app/themes/local-finance` is bespoke (it has no provider) and passes `showRegion={false}`.
+`app/themes/local-finance` keeps its bespoke finance renderer, but uses the same Provider, 5-digit URL preference and Cookie. Its page composes `PageShell` directly; do not add a second shell.
 
 ## Geography Scope Contract
 
@@ -54,6 +54,7 @@ The explicit `prefecture-set` choice is stored as the `all` sentinel so a later 
 to Hyogo. React context remains the runtime SSOT; a second client-state library is not introduced.
 
 - First-visit UI selection: `兵庫県`. Explicit collection-view label: `47都道府県`.
+- `PrefectureSelect` renders the resolved region label inside `SelectValue` in the initial server HTML. Do not rely on Radix's post-mount item-text portal to fill an empty trigger; SSR/hydration tests preserve the label and the same trigger DOM.
 - A selected prefecture uses `?pref=<5桁都道府県コード>` and exposes that prefecture's value, rank, and trend.
 - Theme-switch links carry the current `pref` value as well as the Cookie to prevent stale prefetched state.
 - `00000` is an e-Stat national area code. It must not also represent the theme UI's no-selection state.
@@ -76,6 +77,16 @@ The migration is specified in
 | Composition / breakdown          | pie or stacked bar only when categories are semantically stable |
 | Cross-metric relation            | scatter plot                                                    |
 | Heavy national structure         | theme page, not area page                                       |
+
+## Editorial Chapters
+
+`ThemeCatalog.sections` owns the reading order: title, short description, metric-group keys, chart keys and embedded-section keys. `ThemePageLayout` passes server-rendered embedded slots through the client dashboard, preserving async maps without importing server components into the browser. Rail and narrow navigation use the same chapter anchors. Each group/chart/embedded slot renders once; unassigned blocks remain visible as a fallback during snapshot updates.
+
+A group whose metrics are all covered by its chapter's selected-area charts renders values only; it does not fetch or repeat the same trend. Every value tile carries the observation year and raw unit. At most two distinct units may share the switcher's axes. A single-year result uses natural-height text or a dated comparison table; it never reserves an empty chart canvas. A multi-year companion keeps its history. Composition charts require common observed years and a common unit; missing segments do not become zero.
+
+Regional scope and observed period appear next to each additional chart. Explicit national series are labeled in the legend even when a prefecture is selected. Arithmetic means describe the available prefectures rather than asserting that all 47 were observed.
+
+Navigation uses existing `nav_click` dimensions: `theme_section` (`theme-key:anchor`), `theme_region` (5-digit code or `all`), `theme_switcher` (destination theme key), alongside `theme_kpi_switcher` and `theme_evidence`. The weekly GA4 collector writes Japan-only rolling-28-day `pages-clean.csv` and `theme-navigation.csv`, each with `.meta.json` recording its period, country filter and fetch status. Failed metadata must block use of an older CSV. Recurring review and tasks remain in the theme portfolio state/backlog, not in this README.
 
 ## Chart Editorial Contract
 

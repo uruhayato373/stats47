@@ -52,6 +52,9 @@ interface RatchetConfig {
     minResolvedCharts: number;
     minCoveragePct: number;
     maxMissingLineageCharts: number;
+    minResolvedMetricGroups: number;
+    minMetricGroupCoveragePct: number;
+    maxMissingLineageMetricGroups: number;
   };
   blog: {
     minCharts: number;
@@ -183,6 +186,13 @@ function auditRanking() {
 }
 
 function auditThemes() {
+  const groups = Object.values(THEME_CATALOGS).flatMap((catalog) =>
+    resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY).metricGroups.map(
+      (group) => ({ themeKey: catalog.key, ...group })
+    )
+  );
+  const groupStatus = tallyStatus(groups);
+  const applicableGroups = groups.length - groupStatus['not-applicable'];
   const rows = Object.values(THEME_CATALOGS).flatMap((catalog) => {
     const result = resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY);
     return result.charts.map((chart) => ({ themeKey: catalog.key, ...chart }));
@@ -200,6 +210,16 @@ function auditThemes() {
   }
   return {
     themes: Object.keys(THEME_CATALOGS).length,
+    metricGroups: {
+      total: groups.length,
+      byStatus: groupStatus,
+      coveragePct: round((groupStatus.resolved / Math.max(applicableGroups, 1)) * 100),
+      unresolved: groups.filter((group) =>
+        group.status === 'unresolved' || group.status === 'missing-lineage'
+      ).map(({ themeKey, componentKey, status, unresolvedMetricKeys }) => ({
+        themeKey, groupKey: componentKey, status, unresolvedMetricKeys,
+      })),
+    },
     charts: rows.length,
     applicableCharts: applicable,
     byStatus,
@@ -437,6 +457,9 @@ function tightenRatchetConfig(state: TaxonomyState): void {
       ),
     },
     theme: {
+      minResolvedMetricGroups: Math.max(current.theme.minResolvedMetricGroups, state.theme.metricGroups.byStatus.resolved),
+      minMetricGroupCoveragePct: Math.max(current.theme.minMetricGroupCoveragePct, state.theme.metricGroups.coveragePct),
+      maxMissingLineageMetricGroups: Math.min(current.theme.maxMissingLineageMetricGroups, state.theme.metricGroups.byStatus['missing-lineage']),
       minResolvedCharts: Math.max(
         current.theme.minResolvedCharts,
         state.theme.byStatus.resolved
@@ -532,6 +555,15 @@ function validateState(
       `theme coverage ${currentTheme.coveragePct}% < ${ratchet.theme.minCoveragePct}%`
     );
   }
+  if (currentTheme.metricGroups.byStatus.resolved < ratchet.theme.minResolvedMetricGroups) {
+    errors.push(`theme resolved metric groups ${currentTheme.metricGroups.byStatus.resolved} < ${ratchet.theme.minResolvedMetricGroups}`);
+  }
+  if (currentTheme.metricGroups.coveragePct < ratchet.theme.minMetricGroupCoveragePct) {
+    errors.push(`theme metric group coverage ${currentTheme.metricGroups.coveragePct}% < ${ratchet.theme.minMetricGroupCoveragePct}%`);
+  }
+  if (currentTheme.metricGroups.byStatus['missing-lineage'] > ratchet.theme.maxMissingLineageMetricGroups) {
+    errors.push(`theme metric groups missing lineage ${currentTheme.metricGroups.byStatus['missing-lineage']} > ${ratchet.theme.maxMissingLineageMetricGroups}`);
+  }
   if (
     currentTheme.byStatus['missing-lineage'] >
     ratchet.theme.maxMissingLineageCharts
@@ -626,6 +658,7 @@ async function main() {
     console.log(
       `theme charts ${theme.charts}: resolved ${theme.byStatus.resolved} / unresolved ${theme.byStatus.unresolved} / missing ${theme.byStatus['missing-lineage']} / n/a ${theme.byStatus['not-applicable']} / coverage ${theme.coveragePct}%`
     );
+    console.log(`theme metric groups ${theme.metricGroups.total}: resolved ${theme.metricGroups.byStatus.resolved} / coverage ${theme.metricGroups.coveragePct}%`);
     console.log(
       `blog charts ${blog.charts}: resolved ${blog.byStatus.resolved} / unresolved ${blog.byStatus.unresolved} / missing ${blog.byStatus['missing-lineage']} / n/a ${blog.byStatus['not-applicable']} / coverage ${blog.coveragePct}%`
     );

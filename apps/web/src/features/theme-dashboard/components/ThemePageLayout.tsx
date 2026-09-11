@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 
 import Link from 'next/link';
 
@@ -36,10 +36,7 @@ import {
 
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 
-import {
-  HALF_WIDTH_SECTIONS,
-  THEME_SECTION_REGISTRY,
-} from '../config/theme-section-registry';
+import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { getAreaThemeHighlights } from '../lib/area-theme-highlights';
 import {
   generateThemeBreadcrumbStructuredData,
@@ -48,6 +45,7 @@ import {
 
 import { PrefectureSelect } from './PrefectureSelect';
 import { ThemeAreaHeader } from './ThemeAreaHeader';
+import { ThemeChapterLinks } from './ThemeChapterLinks';
 import { ThemeDashboardClient } from './ThemeDashboardClient';
 import { ThemeEvidenceTopicsSection } from './ThemeEvidenceTopicsSection';
 import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
@@ -125,18 +123,24 @@ export async function ThemePageLayout({
     label: metric.shortLabel,
   }));
   const pageLinks = [
-    { href: '#theme-indicators', label: '主要指標' },
-    ...(pageCharts.some(
-      (chart) =>
-        chart.componentType !== 'kpi-card' &&
-        chart.componentType !== 'markdown-section'
-    )
-      ? [{ href: '#theme-charts', label: 'チャート' }]
-      : []),
+    ...(catalog?.sections?.length
+      ? catalog.sections.map((section) => ({
+          href: `#theme-section-${section.key}`,
+          label: section.title,
+        }))
+      : [{ href: '#theme-indicators', label: '主要指標' }]),
     ...((catalog?.evidenceTopics?.length ?? 0) > 0
       ? [{ href: '#theme-evidence', label: '白書・統計の論点' }]
       : []),
   ];
+  const embeddedSections = Object.fromEntries(
+    (theme.embeddedSections ?? []).flatMap((key) => {
+      const Section = THEME_SECTION_REGISTRY[key];
+      return Section
+        ? [[key, <Suspense key={key} fallback={null}><Section /></Suspense>]]
+        : [];
+    })
+  );
 
   // D Phase 3: ネイティブアフィリエイト枠 (テーマの関連サービス)
   // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
@@ -177,6 +181,7 @@ export async function ThemePageLayout({
               areaContext ? { areaCode: areaContext.areaCode } : undefined
             }
             showScope={!areaContext}
+            pageLinks={pageLinks}
             metrics={themeMetrics}
             surveys={themeSurveys}
           />
@@ -281,15 +286,11 @@ export async function ThemePageLayout({
               <span className="shrink-0 text-xs font-medium text-muted-foreground">
                 ページ内
               </span>
-              {pageLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <ThemeChapterLinks
+                links={pageLinks}
+                themeKey={theme.themeKey}
+                className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              />
             </div>
             {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
               <details className="group mt-1 border-t border-border pt-1">
@@ -404,7 +405,9 @@ export async function ThemePageLayout({
 
           <ThemeDashboardClient
             themeConfig={theme}
-            metricGroups={THEME_CATALOGS[theme.themeKey]?.metricGroups}
+            metricGroups={catalog?.metricGroups}
+            sections={catalog?.sections}
+            embeddedSections={embeddedSections}
             indicatorDataMap={data.indicatorDataMap}
             topology={data.topology}
             pageCharts={pageCharts}
@@ -416,55 +419,17 @@ export async function ThemePageLayout({
           {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
           <InContentAdSlot slot={HUB_INCONTENT} />
 
-          {/*
-        埋め込み section。定義は all-themes.ts の EMBEDDED_SECTIONS、実体は
-        THEME_SECTION_REGISTRY。半幅 (フロー 2 種 = 人口移動 / 通勤) は 2 カラム grid、
-        全幅 (高速道路タイムライン / 駅乗降 / 過疎×医療 / 日照地図) は 1 段ずつ。
-        hideMap (地図タブ非表示) とは独立に描画する — カード主役レイアウトのまま
-        主題深掘りの可視化を出す (2026-07-04)。
-        registry に無いキーは描画できないので落とすが、typo が無言で消えないよう
-        all-themes.test.ts が「embeddedSections ⊆ registry」を固定している。
-      */}
-          {(() => {
-            const keys = (theme.embeddedSections ?? []).filter(
-              (k) => THEME_SECTION_REGISTRY[k]
-            );
-            if (keys.length === 0) return null;
-            const halfCandidates = keys.filter((k) =>
-              HALF_WIDTH_SECTIONS.has(k)
-            );
-            // 半幅が 1 件だけだと 2 カラムの右半分が空くので全幅に戻す
-            const half = halfCandidates.length >= 2 ? halfCandidates : [];
-            const full = keys.filter((k) => !half.includes(k));
-            return (
-              <>
-                {half.length > 0 && (
-                  <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
-                    {half.map((key) => {
-                      const Section = THEME_SECTION_REGISTRY[key];
-                      return <Section key={key} />;
-                    })}
-                  </div>
-                )}
-                {full.map((key) => {
-                  const Section = THEME_SECTION_REGISTRY[key];
-                  return (
-                    <div key={key} className="mt-8">
-                      <Section />
-                    </div>
-                  );
-                })}
-              </>
-            );
-          })()}
+          <Suspense fallback={null}>
+            <ThemeGeoInsightsSection
+              themeKey={theme.themeKey}
+              areaCode={areaContext?.areaCode}
+              areaName={areaContext?.areaName}
+            />
+          </Suspense>
 
-          <ThemeGeoInsightsSection
-            themeKey={theme.themeKey}
-            areaCode={areaContext?.areaCode}
-            areaName={areaContext?.areaName}
-          />
-
-          <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
+          <Suspense fallback={null}>
+            <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
+          </Suspense>
 
           {/*
         広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、
@@ -487,7 +452,9 @@ export async function ThemePageLayout({
 
           {theme.relatedArticleTagKeys &&
             theme.relatedArticleTagKeys.length > 0 && (
-              <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
+              <Suspense fallback={null}>
+                <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
+              </Suspense>
             )}
         </div>
       </PageShell>

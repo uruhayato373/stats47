@@ -40,7 +40,8 @@ export function trackGeoMapInteraction(
       | 'clear-prefecture'
       | 'stage-population'
       | 'stage-overlap'
-      | 'stage-audit';
+      | 'stage-audit'
+      | 'stage-facilities';
     areaCode?: string;
   }
 ): void {
@@ -260,6 +261,9 @@ export type NavSurface =
   | 'category_blog'
   | 'category_area_map'
   | 'category_area_list'
+  | 'theme_section'
+  | 'theme_region'
+  | 'theme_switcher'
   | 'theme_kpi_switcher'
   | 'theme_evidence'
   | 'category_sidebar'

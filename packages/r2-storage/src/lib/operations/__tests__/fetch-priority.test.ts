@@ -59,7 +59,8 @@ describe("fetchFromR2 read tier priority", () => {
 
     expect(body?.toString("utf8")).toBe("from-public-url");
     expect(globalThis.fetch).toHaveBeenCalledWith(
-      "https://storage.example.test/app/stats/example/values.json",
+      new URL("https://storage.example.test/app/stats/example/values.json"),
+      { redirect: "error" },
     );
     expect(mocks.s3Send).not.toHaveBeenCalled();
     expect(mocks.bindingGet).not.toHaveBeenCalled();

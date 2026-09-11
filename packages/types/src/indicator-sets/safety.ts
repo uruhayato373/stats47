@@ -6,24 +6,24 @@ import type { IndicatorSet } from "../indicator-set";
 export const SAFETY_SET: IndicatorSet = {
   "key": "safety",
   "title": "安全",
-  "description": "都道府県別の犯罪率・検挙率・交通事故・火災件数・自殺率をランキングとチャートで比較。治安・交通・火災・災害・事故の25指標を47都道府県で確認できます。",
+  "description": "犯罪、交通事故、火災の発生と被害を別の軸として確認する。",
   "category": "safety",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "penal-code-offenses-recognized-per-1000",
-      "shortLabel": "犯罪率",
+      "shortLabel": "刑法犯認知件数（人口千人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "serious-crime-per-100k",
       "shortLabel": "凶悪犯",
-      "role": "primary"
+      "role": "context"
     },
     {
       "rankingKey": "criminal-recognition-count",
       "shortLabel": "認知件数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "violent-crime-per-100k",
@@ -42,7 +42,7 @@ export const SAFETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "theft-offenses-recognized-per-1000",
-      "shortLabel": "窃盗率",
+      "shortLabel": "窃盗犯認知件数（人口千人当たり）",
       "role": "context"
     },
     {
@@ -52,93 +52,193 @@ export const SAFETY_SET: IndicatorSet = {
     },
     {
       "rankingKey": "juvenile-criminal-arrest-person-per-population",
-      "shortLabel": "少年犯罪率",
+      "shortLabel": "少年刑法犯検挙人員（14～19歳人口千人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "drug-enforcement-arrest-count-per-population",
-      "shortLabel": "薬物検挙",
+      "shortLabel": "覚醒剤取締検挙件数（人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "traffic-accident-deaths-per-100k",
-      "shortLabel": "交通死者",
+      "shortLabel": "交通事故死者数（人口10万人当たり）",
       "role": "primary"
     },
     {
       "rankingKey": "traffic-accident-count-per-population",
-      "shortLabel": "交通事故率",
+      "shortLabel": "交通事故発生件数（人口10万人当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "traffic-accident-count",
       "shortLabel": "事故件数",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "traffic-accident-deaths-per-100-accidents",
-      "shortLabel": "致死率",
+      "shortLabel": "交通事故死者数（交通事故100件当たり）",
       "role": "context"
     },
     {
       "rankingKey": "traffic-accident-injuries-per-100k",
-      "shortLabel": "負傷者率",
-      "role": "context"
+      "shortLabel": "交通事故負傷者数（人口10万人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "traffic-accident-casualties-elderly-65plus",
       "shortLabel": "高齢者事故",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "building-fire-count-per-100-thousand-people",
-      "shortLabel": "火災",
-      "role": "secondary"
+      "shortLabel": "火災出火件数（人口10万人当たり）",
+      "role": "primary"
     },
     {
       "rankingKey": "fire-deaths-per-100k",
       "shortLabel": "火災死者",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fire-damage-casualties-per-population",
-      "shortLabel": "火災被害",
+      "shortLabel": "火災死傷者数（人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "annual-emergency-dispatches-per-1000",
-      "shortLabel": "救急出動",
-      "role": "context"
+      "shortLabel": "救急出動件数（人口千人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "disaster-damage-amount-per-person",
-      "shortLabel": "災害被害額",
-      "role": "context"
+      "shortLabel": "災害被害額（人口1人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "suicide-rate-per-100k",
       "shortLabel": "自殺率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "suicides-per-100k",
-      "shortLabel": "自殺者数",
+      "shortLabel": "自殺者数（日本人人口10万人当たり）",
       "role": "context"
     },
     {
       "rankingKey": "accidental-deaths-per-100k",
-      "shortLabel": "事故死",
-      "role": "secondary"
+      "shortLabel": "不慮の事故による死亡者数（人口10万人当たり）",
+      "role": "context"
     },
     {
       "rankingKey": "police-officer-count-per-population",
-      "shortLabel": "警察官数",
-      "role": "context"
+      "shortLabel": "警察官数（人口千人当たり）",
+      "role": "secondary"
     },
     {
       "rankingKey": "traffic-accident-injuries",
       "shortLabel": "交通事故負傷者数",
       "role": "context"
+    },
+    {
+      "rankingKey": "flood-damage-general-assets",
+      "shortLabel": "水害一般資産等被害額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "flood-affected-municipalities",
+      "shortLabel": "水害被災市区町村数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-deaths",
+      "shortLabel": "自然災害による死者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-missing-persons",
+      "shortLabel": "自然災害による行方不明者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-injured-persons",
+      "shortLabel": "自然災害による負傷者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-destroyed-houses",
+      "shortLabel": "自然災害による全壊住家棟数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-half-destroyed-houses",
+      "shortLabel": "自然災害による半壊住家棟数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "natural-disaster-partially-damaged-houses",
+      "shortLabel": "自然災害による一部破損住家棟数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "disaster-recovery-expenses-prefecture",
+      "shortLabel": "災害復旧費（都道府県財政）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "fire-department-water-count-per-100-thousand-people",
+      "shortLabel": "消防水利数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "fire-department-member-count-per-100-thousand-people",
+      "shortLabel": "消防吏員数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "fire-department-pump-car-count-per-100-thousand-people",
+      "shortLabel": "消防ポンプ自動車等現有数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "fire-department-emergency-car-count-per-100k",
+      "shortLabel": "救急自動車数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "shortLabel": "個別避難計画の作成率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-listed-persons",
+      "shortLabel": "避難行動要支援者名簿の掲載人数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-covered-persons",
+      "shortLabel": "個別避難計画が作成された人数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "tsunami-evacuation-building-count",
+      "shortLabel": "津波避難ビル数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "tsunami-evacuation-tower-count",
+      "shortLabel": "津波避難タワー等数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "disaster-relief-expenses-prefecture",
+      "shortLabel": "災害救助費",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "consumer-consultation-accepted-cases",
+      "shortLabel": "消費生活相談受付件数（年度）",
+      "role": "secondary"
     }
   ],
   "keywords": [

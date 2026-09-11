@@ -31,7 +31,7 @@ No prose before/after. No section headers.
 - 既存metric、ThemeCatalog、KSJ登録済みデータとの重複確認
 - URL到達性、必須項目、列挙値、重複ID、確認日のvalidator維持
 - **参考文献の段階処理オーナー** (2026-09-05〜): 書籍・PDF を S0 保全 → S1 ページ画像 → S2 文字起こし (生 OCR + Markdown) →
-  S3 図クロップ → S4 台帳 の段階で private Drive bundle へ積む (`/process-reference-source`)。決定的処理は
+  S3 図クロップ → S4 台帳 の段階で private Drive の版 folder (展開配置) へ足す (`/process-reference-source`)。決定的処理は
   `source-processing.mjs` の `extract` / `md-check` / `crop` / `stage` / `stage-status`、Markdown 文字起こし・図の意味付け・
   crop spec は本 agent。正典 `.claude/rules/reference-source-standards.md` §3。書籍本文・画像を Git / 公開 R2 へ出さない。
 - **provenance 監査オーナー** (2026-07-19〜): データ出典・再現性の全量棚卸し (`/audit-provenance`) の実行と、
@@ -63,7 +63,7 @@ npm run check:open-data-links --workspace packages/data-configs        # URL 到
 npm run validate:prefecture-statistics --workspace packages/data-configs
 npm run check:prefecture-statistics-links --workspace packages/data-configs
 npm run type-check --workspace @stats47/data-configs
-npm run source-vault:process -- stage-status            # 参考文献 bundle の到達段階 (S0-S4)
+npm run source-vault:process -- stage-status            # 参考文献の到達段階 (S0-S4)
 npm run source-vault:test                               # source-vault CLI 3 本のテスト
 npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KSJ 参照を触った場合
 ```

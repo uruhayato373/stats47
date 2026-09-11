@@ -96,6 +96,8 @@ export interface RefetchKeys {
   resourceId?: string;
   /** 手動抽出 (fetcherKey:"manual") の一次資料 URL */
   sourceUrl?: string;
+  /** 同じ資料内のページ・列・単位・履歴ソースを識別する抽出仕様の指紋 */
+  extractionHash?: string;
 }
 
 export interface MetricRecipe {
@@ -331,6 +333,9 @@ function buildRefetch(config: MetricConfig): RefetchKeys | undefined {
     ksjDataId: pickString(cfg, "ksjDataId"),
     ksjVersion: pickString(cfg, "ksjVersion"),
     sourceUrl: pickString(provenance, "pdfUrl") ?? pickString(provenance, "url"),
+    extractionHash: s.fetcherKey === "manual" && isRecord(cfg.extraction)
+      ? hash64(JSON.stringify(canonicalize(cfg.extraction)))
+      : undefined,
   });
 
   return Object.keys(refetch).length > 0 ? refetch : undefined;
@@ -499,6 +504,7 @@ export function parseRecipe(value: unknown): MetricRecipe | null {
         ksjVersion: optString(refetchSrc.ksjVersion),
         resourceId: optString(refetchSrc.resourceId),
         sourceUrl: optString(refetchSrc.sourceUrl),
+        extractionHash: optString(refetchSrc.extractionHash),
       })
     : undefined;
 

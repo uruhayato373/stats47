@@ -23,3 +23,7 @@ export type {
   FlowFocusPrefecture,
   ManualFocus,
 } from "./lib/useFlowFocusPrefecture";
+
+export { PrefectureSelect } from "./components/PrefectureSelect";
+
+export { ThemeChapterLinks } from "./components/ThemeChapterLinks";

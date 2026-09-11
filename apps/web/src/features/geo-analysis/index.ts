@@ -6,6 +6,17 @@ export { GeoPopulationExplorer } from './components/GeoPopulationExplorer';
 export { GeoCrossAnalysisExplorer } from './components/GeoCrossAnalysisExplorer';
 export { GeoContentPublicationSection } from './components/GeoContentPublicationSection';
 export { AreaGeoInsightsSection } from './components/AreaGeoInsightsSection';
+export { ThemeGeoPublicFacilityAccessSection } from './components/ThemeGeoPublicFacilityAccessSection';
+export {
+  isGeoSpatialView,
+  spatialAuditRows,
+  type SpatialView,
+} from './lib/geo-spatial-evidence';
+export {
+  PUBLIC_FACILITY_GROUPS,
+  PUBLIC_FACILITY_BAND_LABELS,
+} from './lib/geo-public-facility-evidence';
+export { ThemeGeoStationAccessSection } from './components/ThemeGeoStationAccessSection';
 export {
   buildPopulationAnalysis,
   type PopulationAnalysisRow,
@@ -37,3 +48,7 @@ export {
   type GeoCrossAnalysisConfig,
   type GeoCrossAnalysisSlug,
 } from './lib/geo-cross-analysis';
+
+export { ThemeGeoLandslideExposureSection } from './components/ThemeGeoLandslideExposureSection';
+
+export { ThemeGeoSnowDesignationSection } from './components/ThemeGeoSnowDesignationSection';

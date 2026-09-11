@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "source": "ga4",
+  "countryFilter": "Japan",
+  "periodStart": "2026-08-09",
+  "periodEnd": "2026-09-05",
+  "windowDays": 28,
+  "generatedAt": "2026-09-08T11:31:48.130Z",
+  "status": "ok",
+  "rowCount": 2074
+}

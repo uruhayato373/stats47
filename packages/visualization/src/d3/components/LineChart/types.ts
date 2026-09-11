@@ -52,6 +52,8 @@ export interface D3LineChartProps extends BaseD3ChartProps, MarginProps {
   data: TimeSeriesDataNode[];
   /** X軸に使うキー @default "category" */
   categoryKey?: string;
+  /** Explicit category ticks, e.g. YYYY-MM. Omit to keep annual defaults. */
+  xTickValues?: string[];
   /** Y軸に使うキー（単一系列） @default "value" */
   valueKey?: string;
   /** 複数系列の設定 */

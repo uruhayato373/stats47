@@ -25,6 +25,8 @@ import {
   geoAnalysisPublicDataUrl,
   isGeoCrossAnalysisSlug,
   GeoSpatialEvidenceExplorer,
+  spatialAuditRows,
+  PUBLIC_FACILITY_BAND_LABELS,
   loadGeoAnalysisPrefBundle,
 } from '@/features/geo-analysis';
 
@@ -36,11 +38,14 @@ interface PageProps {
 
 export const revalidate = 86400;
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { analysisSlug } = await params;
   return {
     title: '地域分析の県別地図・検算データ | stats47',
-    description: '選択県の人口メッシュ、地点の空間判定、集計の分母と出典を確認できます。',
+    description:
+      '選択県の人口メッシュ、地点の空間判定、集計の分母と出典を確認できます。',
     alternates: {
       canonical: isGeoCrossAnalysisSlug(analysisSlug)
         ? `/geo/${analysisSlug}`
@@ -88,6 +93,18 @@ function previewRows(detail: GeoAnalysisPrefDetail): Array<{
   kind: string;
   value: string;
 }> {
+  if (detail.slug === 'population-landslide-exposure') return detail.meshes.slice(0,20).map(m=>({id:`${m[1]}:${m[0]}`,kind:'250m人口メッシュ・土砂災害指定区域の中心包含',value:`2020年基準人口 ${(m[2]/10000).toLocaleString('ja-JP')}人 / ${m[3]&56?'特別警戒':m[3]?'警戒のみ':'今回の入力面外'}`}));
+  if (detail.slug === 'population-snow-designation') return detail.meshes.slice(0,20).map(m=>({id:`${m[1]}:${m[0]}`,kind:'250m人口メッシュ・豪雪中心包含',value:`2020年基準人口 ${(m[2]/10000).toLocaleString('ja-JP')}人 / ${['入力区域外','通常豪雪','特別豪雪'][m[3]]}${m[4]&16?' / 指定境界を横切る格子':''}`}));
+  if (detail.slug === 'population-public-facility-access') {
+    const facilities = new Map(
+      detail.facilities.map((point) => [point[0], point])
+    );
+    return detail.meshes.slice(0, 20).map((mesh) => ({
+      id: mesh[0],
+      kind: '人口メッシュ・最寄り公共施設',
+      value: `2020年 ${mesh[3].toLocaleString('ja-JP')}人 / 2050年 ${mesh[4].toLocaleString('ja-JP')}人。行政施設 ${facilities.get(mesh[5])?.[4] ?? '—'} ${mesh[6].toFixed(1)}m（${PUBLIC_FACILITY_BAND_LABELS[mesh[7]]}）、集会施設 ${facilities.get(mesh[8])?.[4] ?? '—'} ${mesh[9].toFixed(1)}m（${PUBLIC_FACILITY_BAND_LABELS[mesh[10]]}）`,
+    }));
+  }
   if (detail.slug === 'population-land-price') {
     return detail.landPricePoints.slice(0, 20).map((point, index) => ({
       id: point[0],
@@ -144,22 +161,41 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
         stats={`coverage ${manifest.quality.detailAreas}/47 ・ 保存則 ${manifest.quality.conservationChecks}/47`}
       />
 
-      <GeoSpatialEvidenceExplorer slug={analysisSlug} analysisId={`geo-data-${analysisSlug}`} dataVersion={manifest.generatedAt} initialPrefCode={prefCode} initialView="overlap" manifest={manifest} fixedPrefecture />
+      <GeoSpatialEvidenceExplorer
+        slug={analysisSlug}
+        analysisId={`geo-data-${analysisSlug}`}
+        dataVersion={manifest.generatedAt}
+        initialPrefCode={prefCode}
+        initialView="overlap"
+        manifest={manifest}
+        fixedPrefecture
+      />
 
       <SurfaceSection>
         <SectionHeader title="この県の検算済み集計" hideRule />
         <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {Object.entries(detail.summary).map(([key, value]) => (
-            <div key={key} className="border p-3">
-              <dt className="text-xs text-muted-foreground">
-                {summaryLabels[key] ?? key}
-              </dt>
-              <dd className="mt-1 font-semibold tabular-nums">
-                {typeof value === 'number' ? value.toLocaleString('ja-JP') : '—'}
-                {valueUnit(key)}
-              </dd>
-            </div>
-          ))}
+          {detail.slug === 'population-public-facility-access' || detail.slug === 'population-snow-designation' || detail.slug === 'population-landslide-exposure'
+            ? spatialAuditRows(detail).map((row) => (
+                <div key={row.label} className="border p-3">
+                  <dt className="text-xs text-muted-foreground">{row.label}</dt>
+                  <dd className="mt-1 font-semibold tabular-nums">
+                    {row.value}
+                  </dd>
+                </div>
+              ))
+            : Object.entries(detail.summary).map(([key, value]) => (
+                <div key={key} className="border p-3">
+                  <dt className="text-xs text-muted-foreground">
+                    {summaryLabels[key] ?? key}
+                  </dt>
+                  <dd className="mt-1 font-semibold tabular-nums">
+                    {typeof value === 'number'
+                      ? value.toLocaleString('ja-JP')
+                      : '—'}
+                    {valueUnit(key)}
+                  </dd>
+                </div>
+              ))}
         </dl>
       </SurfaceSection>
 
@@ -204,14 +240,19 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
         <SectionHeader title="全件データと出典の取得" hideRule />
         <ul className="mt-3 space-y-2 text-sm">
           <li>
-            <a className="font-medium text-primary underline" href={geoAnalysisPublicDataUrl(detailKey)}>
+            <a
+              className="font-medium text-primary underline"
+              href={geoAnalysisPublicDataUrl(detailKey)}
+            >
               {detail.areaName}の途中artifact JSON
             </a>
           </li>
           <li>
             <a
               className="font-medium text-primary underline"
-              href={geoAnalysisPublicDataUrl(`app/geo/${analysisSlug}/item.json`)}
+              href={geoAnalysisPublicDataUrl(
+                `app/geo/${analysisSlug}/item.json`
+              )}
             >
               47都道府県aggregate JSON
             </a>
@@ -219,18 +260,39 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
           <li>
             <a
               className="font-medium text-primary underline"
-              href={geoAnalysisPublicDataUrl(geoAnalysisManifestKey(analysisSlug))}
+              href={geoAnalysisPublicDataUrl(
+                geoAnalysisManifestKey(analysisSlug)
+              )}
             >
               入力SHA・空間演算・保存則manifest
             </a>
           </li>
+          {manifest.stages
+            .find((stage) => stage.id === 'public-facility-points')
+            ?.outputs.filter((output) => output.areaCode === detail.areaCode)
+            .map((output) => (
+              <li key={output.key}>
+                <a
+                  className="font-medium text-primary underline"
+                  href={geoAnalysisPublicDataUrl(output.key)}
+                >
+                  この県の全原典施設・検証済みJSON
+                </a>
+              </li>
+            ))}
           <li>
-            <Link className="font-medium text-primary underline" href={`/geo/${analysisSlug}?pref=${prefCode}#article-data`}>
+            <Link
+              className="font-medium text-primary underline"
+              href={`/geo/${analysisSlug}?pref=${prefCode}#article-data`}
+            >
               公開Geo分析へ戻る
             </Link>
           </li>
           <li>
-            <Link className="font-medium text-primary underline" href={`/areas/${detail.areaCode}`}>
+            <Link
+              className="font-medium text-primary underline"
+              href={`/areas/${detail.areaCode}`}
+            >
               {detail.areaName}の統計ページ
             </Link>
           </li>

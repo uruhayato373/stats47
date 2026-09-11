@@ -94,4 +94,12 @@ describe("loadThemeChartResult state contract", () => {
     await expect(loadThemeChartResult(invalid, "28000")).resolves.toEqual({ state: "no-data" });
     expect(fetchPopulationPyramidAction).not.toHaveBeenCalled();
   });
+
+  it("全国の人口系列がない場合は県選択を案内する", async () => {
+    vi.mocked(fetchPopulationPyramidAction).mockResolvedValue(null);
+    await expect(loadThemeChartResult(PYRAMID_CHART, "00000")).resolves.toEqual({
+      state: "no-data",
+      message: "都道府県を選択すると、その県の人口ピラミッドを表示します。",
+    });
+  });
 });

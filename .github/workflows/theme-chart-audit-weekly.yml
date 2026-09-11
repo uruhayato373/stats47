@@ -1,142 +1,89 @@
-name: 📈 Theme Chart Live Audit (weekly)
+name: 📈 Theme Quality Audit (weekly)
 
-# テーマページ (/themes/*) のチャートが叩く e-Stat リクエストを live 実測で週次検知する。
-# read-only (R2 write なし・e-Stat GET のみ)。
-#
-# 背景 (2026-08-04): /themes/population-dynamics で 2 つの不具合が同時に見つかった。
-#   (A) 固定高 div で aspect-ratio SVG を包み、チャートが出典・リンクに 154px 重なっていた
-#   (B) 全国表示で e-Stat の全国行を捨て 47 県平均を「全国」として描画 (総人口が実値の 1/47)
-# (A) は check-design-system の構造検査、(B) は純粋関数のユニットテストで再発を止めた。
-# だが「statsDataId が廃止された」「cdCat01 の絞りが実データと合わない」類は
-# **本番でチャートが空になって初めて分かる** ため、静的検査では届かない。ここを週次で先回りする。
-#
-# 監査母集団 (CROSS-PAGE-DATA-SSOT-01 WP4): 依存ミラー
-#   .claude/scripts/audit/theme-chart-dependencies.generated.json (正典
-#   collectThemeDataDependenciesWithProvenance の機械生成物・pyramid 34/composition/donut 展開を含む
-#   192 distinct request) の全件。旧実装は page-components から独自抽出し 130 request しか見て
-#   いなかった。ミラーの鮮度は PR の Theme Dependency Mirror Gate (--check) が保証する。
-# 検査項目 (依存ミラーの全 request について):
-#   - e-Stat が統計表を返すか (not-found)
-#   - 0 件でないか (no-rows: 絞りが実データと不整合)
-#   - 全国行 (areaCode 00000) を持つか (warn: 無ければ全国表示は 47 県平均になる)
-#   - 全国行の値が実データか (warn national-row-empty: e-Stat は該当なしを '-' 等の
-#     プレースホルダで返すため、行の存在だけでは全国値の有無を判定できない)
-#   - 期待集合と実集合が一致するか (coverageOk: ミラー破損/slice の陰性対照)
-#
-# 正典: .claude/scripts/audit/theme-chart-live-audit.mjs / .claude/rules/theme-catalog-standards.md
-
+# 日曜05:00 JST。公開R2をread-only検査し、構成・履歴・coverage・recipeの退行を検知。
+# 新規/変化した異常だけissueを更新し、同じ警告は再通知しない。
 on:
   schedule:
-    - cron: "0 20 * * 6" # 土 20:00 UTC = 日 05:00 JST (ranking-integrity 04:30 の後)
+    - cron: "0 20 * * 6"
   workflow_dispatch:
-
 permissions:
   contents: write
   issues: write
-
 concurrency:
   group: theme-chart-audit
   cancel-in-progress: false
-
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
           fetch-depth: 1
-
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "20"
-
-      - name: 🔎 Audit theme chart e-Stat requests
+          cache: npm
+      - name: Install audit dependencies
+        run: npm ci --ignore-scripts
+      - name: 🔎 Audit catalog and public data
         id: check
         run: |
           set +e
-          mkdir -p .claude/state/theme-charts
-          node .claude/scripts/audit/theme-chart-live-audit.mjs \
-            --json .claude/state/theme-charts/live-audit.json \
-            2>&1 | tee /tmp/theme-chart-audit.log
-          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          timeout --kill-after=20s 300s node .claude/scripts/audit/theme-chart-live-audit.mjs --json .claude/state/theme-charts/live-audit.json 2>&1 | tee /tmp/theme-live.log
+          live_code=${PIPESTATUS[0]}
+          timeout --kill-after=20s 480s npm run theme:portfolio:audit 2>&1 | tee /tmp/theme-quality.log
+          quality_code=${PIPESTATUS[0]}
           {
-            echo "### テーマチャート live 監査"
-            echo '```'
-            tail -40 /tmp/theme-chart-audit.log
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 📤 Commit audit result to develop
+            echo "live_code=$live_code"
+            echo "quality_code=$quality_code"
+            node .claude/scripts/themes/build-theme-alert.mjs --output /tmp/theme-alert.md --live-code "$live_code" --quality-code "$quality_code"
+            alert_code=$?
+            echo "alert_code=$alert_code"
+          } >> "$GITHUB_OUTPUT"
+          cat /tmp/theme-alert.md >> "$GITHUB_STEP_SUMMARY"
+      - name: 📤 Commit observations to develop
+        if: steps.check.outputs.alert_code == '0'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/theme-charts
-          if git diff --cached --quiet; then
-            echo "No audit changes"
-            exit 0
-          fi
-          git commit -m "chore(theme): weekly theme chart live audit $(date -u +%Y-%m-%d) [skip ci]"
-          # pull せずに push すると develop が進んだ瞬間に (fetch first) で落ちる (2026-08-16 是正)
+          for observation in .claude/state/theme-charts/live-audit.json .claude/state/themes/quality.json .claude/state/themes/portfolio.json .claude/state/themes/experiments.json; do
+            if [ -f "$observation" ]; then git add -- "$observation"; fi
+          done
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "chore(theme): weekly quality observations [skip ci]"
           git pull --rebase origin develop
           git push origin develop
-
-      - name: 🚨 Open issue on chart data failures
-        if: steps.check.outputs.exit_code != '0'
+      - name: Update actionable alert
+        if: always() && steps.check.outputs.alert_code == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ALERT_OPEN: ${{ steps.check.outputs.alert_open }}
         run: |
-          DATE=$(date -u +%Y-%m-%d)
-          TITLE="[Theme Alert] テーマチャートが実データを取れていません"
-          {
-            echo "## テーマチャート live 監査 ($DATE)"
-            echo ""
-            echo "テーマチャートの依存 (依存ミラー = catalog の期待 e-Stat request 全件) を"
-            echo "e-Stat に実照会したところ、データを取れないリクエストがありました"
-            echo "(該当チャートは本番で空になります)。"
-            echo ""
-            echo '```'
-            tail -60 /tmp/theme-chart-audit.log
-            echo '```'
-            echo ""
-            echo "是正手順 (ThemeCatalog SSOT を直し generate:catalog で再生成する):"
-            echo "- not-found → 統計表が廃止・ID 誤り。e-Stat で後継表を探して catalog の statsDataId を差し替える"
-            echo "- no-rows → cdCat01/segments 等の絞りが実データと不整合。getMetaInfo で現行コードを確認する"
-            echo "- http-error → 3 回再試行しても失敗。e-Stat 側の障害なら翌週に自然復旧する"
-            echo ""
-            echo "詳細 (全件 JSON): \`.claude/state/theme-charts/live-audit.json\` (このコミットで develop に反映済み)"
-            echo ""
-            echo "規約: \`.claude/rules/theme-catalog-standards.md\`"
-          } > /tmp/theme-chart-issue.md
-
-          # ラベルが無いと gh issue create が "could not add label" で落ち、**アラート自体が飛ばない**
-          # (2026-08-12 に rakuten-alert 未登録で実際に発生し、9 日間の同期停止を誰も知らなかった)。
-          gh label create theme-alert --description "テーマチャートの e-Stat 取得失敗" --color "b60205" --force 2>/dev/null || true
-          EXISTING=$(gh issue list --label theme-alert --state open --json number --jq '.[0].number')
-          if [ -n "$EXISTING" ]; then
-            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/theme-chart-issue.md
-          else
-            gh issue create --title "$TITLE" \
-              --label theme-alert --label auto-generated \
-              --body-file /tmp/theme-chart-issue.md
+          gh label create theme-alert --description "テーマのデータ・構成監査" --color b60205 --force
+          gh label create auto-generated --description "機械監査アラート" --color ededed --force
+          existing=$(gh issue list --label theme-alert --state open --json number --jq '.[0].number')
+          if [ "$ALERT_OPEN" = true ]; then
+            if [ -n "$existing" ]; then
+              gh issue view "$existing" --json body --jq '.body' > /tmp/theme-existing.md
+              if ! diff -q /tmp/theme-existing.md /tmp/theme-alert.md > /dev/null; then
+                gh issue edit "$existing" --title "[Theme Alert] テーマ品質の確認が必要です" --body-file /tmp/theme-alert.md
+              fi
+            else
+              gh issue create --title "[Theme Alert] テーマ品質の確認が必要です" --label theme-alert --label auto-generated --body-file /tmp/theme-alert.md
+            fi
+          elif [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "テーマ品質監査の異常が解消しました。"
           fi
-
-      - name: ✅ Close issue when recovered
-        if: steps.check.outputs.exit_code == '0'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          EXISTING=$(gh issue list --label theme-alert --state open --json number --jq '.[0].number')
-          if [ -n "$EXISTING" ]; then
-            gh issue close "$EXISTING" --comment "テーマチャートの e-Stat 取得が全件復旧したため自動クローズします。"
-          fi
-
-      - name: ❌ Propagate live audit status
+      - name: Propagate audit failures
         if: always()
+        env:
+          CHECK_OUTCOME: ${{ steps.check.outcome }}
+          LIVE_CODE: ${{ steps.check.outputs.live_code }}
+          QUALITY_CODE: ${{ steps.check.outputs.quality_code }}
+          ALERT_CODE: ${{ steps.check.outputs.alert_code }}
         run: |
-          if [ "${{ steps.check.outcome }}" != "success" ] || [ "${{ steps.check.outputs.exit_code }}" != "0" ]; then
-            exit 1
-          fi
+          test "$CHECK_OUTCOME" = success && test "$LIVE_CODE" = 0 && test "$QUALITY_CODE" = 0 && test "$ALERT_CODE" = 0

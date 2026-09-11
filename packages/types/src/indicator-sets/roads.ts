@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const ROADS_SET: IndicatorSet = {
   "key": "roads",
   "title": "道路",
-  "description": "都道府県別の道路実延長（高速道路・国道・地方道・市町村道）・道路密度・舗装率・交通量をランキングとチャートで比較。高速道路網の地域差や面積あたり道路密度の都市部集中、道の駅の整備状況を47都道府県のデータで読み解きます。",
+  "description": "道路ストックの延長と密度、利用交通量、整備状況を分けて比較する。",
   "category": "economy",
   "usage": "theme",
   "metrics": [
@@ -18,7 +18,7 @@ export const ROADS_SET: IndicatorSet = {
     {
       "rankingKey": "road-expressway-length",
       "shortLabel": "高速道路延長",
-      "role": "primary"
+      "role": "secondary"
     },
     {
       "rankingKey": "road-total-length",
@@ -42,7 +42,7 @@ export const ROADS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "road-length-per-km2",
-      "shortLabel": "道路密度",
+      "shortLabel": "道路実延長（総面積1km²当たり）",
       "role": "secondary"
     },
     {
@@ -52,13 +52,43 @@ export const ROADS_SET: IndicatorSet = {
     },
     {
       "rankingKey": "average-road-traffic-volume",
-      "shortLabel": "道路平均交通量",
+      "shortLabel": "道路平均交通量（昼間12時間）",
       "role": "secondary"
     },
     {
       "rankingKey": "roadside-station-count",
       "shortLabel": "道の駅数",
       "role": "context"
+    },
+    {
+      "rankingKey": "road-bridge-diagnosed-count",
+      "shortLabel": "道路橋の診断済総数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-bridge-condition-iii-count",
+      "shortLabel": "道路橋の早期措置段階（Ⅲ）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-bridge-condition-iv-count",
+      "shortLabel": "道路橋の緊急措置段階（Ⅳ）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-tunnel-diagnosed-count",
+      "shortLabel": "トンネルの診断済総数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-tunnel-condition-iii-count",
+      "shortLabel": "トンネルの早期措置段階（Ⅲ）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "road-tunnel-condition-iv-count",
+      "shortLabel": "トンネルの緊急措置段階（Ⅳ）",
+      "role": "secondary"
     }
   ],
   "keywords": [

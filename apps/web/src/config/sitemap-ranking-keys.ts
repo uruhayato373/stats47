@@ -10,8 +10,8 @@
  *
  * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35, 2026-W36
  *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293 / 2026-W36: 1288
- * 和集合: 2166 キー (INDEXABLE +0 / KNOWN +662 / INDEXABLE 総数 335 / KNOWN 総数 2166)
- * 生成日: 2026-09-07
+ * 和集合: 2169 キー (INDEXABLE +0 / KNOWN +665 / INDEXABLE 総数 335 / KNOWN 総数 2169)
+ * 生成日: 2026-09-09
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -300,6 +300,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "comprehensive-park-count",
   "compulsory-education-school-count-per-100k-6-14",
   "construction-industry-count",
+  "construction-private-employees",
   "consumer-price-difference-index-clothing-footwear",
   "consumer-price-difference-index-culture-recreation",
   "consumer-price-difference-index-education",
@@ -893,6 +894,8 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "inflow-population-ratio",
   "information-communication-coefficient",
   "information-communication-expenditure",
+  "information-private-employees",
+  "information-private-establishments",
   "inland-aquaculture-harvest",
   "inland-fishery-catch",
   "inpatient-rate-per-100k",

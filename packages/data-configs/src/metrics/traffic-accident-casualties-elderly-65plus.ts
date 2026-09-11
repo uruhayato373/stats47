@@ -5,6 +5,7 @@ export const trafficAccidentCasualtiesElderly65plus: MetricConfig = {
   "title": "交通事故死傷者数（高齢者）",
   "subtitle": "65歳以上",
   "description": "65歳以上の高齢者の交通事故による死傷者数。",
+  "note": "道路の交通に関する統計の死者数と負傷者数を合計した暦年値。65歳以上の被害の状況を表し、高齢運転者が起こした事故件数ではない。SSDSの時間軸には年度と記載されるが、項目定義K310203の期間は暦年計である。",
   "unit": "人",
   "category": "safetyenvironment",
   "source": {
@@ -21,7 +22,7 @@ export const trafficAccidentCasualtiesElderly65plus: MetricConfig = {
     "from": 1986,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateReds",
     "colorSchemeType": "sequential",

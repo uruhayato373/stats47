@@ -88,6 +88,7 @@ describe('municipality geo scope and catalog', () => {
       'number-of-establishments-manufacturing',
       'vacant-housing-ratio',
       'moving-in-excess-rate-japanese',
+      'agricultural-output',
     ]) {
       expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)).toBe(true);
     }

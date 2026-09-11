@@ -14,6 +14,7 @@ const CONTENT_ENCODING_METADATA_KEY = 'stats47-content-encoding';
 const CACHE_CONTROL = 'public, max-age=0, must-revalidate';
 
 const CONTENT_TYPES: Readonly<Record<string, string>> = {
+  '.geojson': 'application/geo+json',
   '.gif': 'image/gif',
   '.jpeg': 'image/jpeg',
   '.jpg': 'image/jpeg',
@@ -60,7 +61,10 @@ function isWithinDirectory(parent: string, child: string): boolean {
 }
 
 export function validateR2Key(rawKey: string): string {
-  const key = rawKey.trim().replace(/\/+$/, '');
+  const trimmed = rawKey.trim();
+  let end = trimmed.length;
+  while (end > 0 && trimmed[end - 1] === '/') end -= 1;
+  const key = trimmed.slice(0, end);
   const segments = key.split('/');
   if (
     key.length === 0 ||

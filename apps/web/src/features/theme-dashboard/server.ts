@@ -10,6 +10,7 @@ export { ThemeIndicatorCatalogSection } from "./components/ThemeIndicatorCatalog
 // （app 層からの feature/components 直 import は no-restricted-imports で禁止）。
 export { ThemeSwitcher } from "./components/ThemeSwitcher";
 export { ThemeSideNav } from "./components/ThemeSideNav";
+export { ThemeDashboardClient } from "./components/ThemeDashboardClient";
 
 // Server-only loader
 export { loadThemeData } from "./lib/load-theme-data";
@@ -17,3 +18,5 @@ export {
   THEME_PREFECTURE_COOKIE_NAME,
   resolveInitialThemePrefecture,
 } from "./lib/theme-prefecture-preference";
+
+export { ThemeAreaHeader } from "./components/ThemeAreaHeader";

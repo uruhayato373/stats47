@@ -18,7 +18,7 @@
  *      insufficient-data・not-instrumented = windowDays のみ
  *   E1 experimentId 一意
  *   E2 同一 themeKey × changeType の pending 実験は 1 件まで (重複実験防止)
- *   E3 baseline 必須 / verdict enum / verdict 確定時は result + evidenceRefs 必須
+ *   E3 改善baseline必須 / launchはbaseline不在を明記 / verdict enum・根拠必須
  *
  * Usage:
  *   node .claude/scripts/themes/validate-theme-state.mjs            # 人間向け (violation で exit 1)
@@ -30,7 +30,9 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { experimentIssues, assessCheckpoint, latestObservation } from "./evaluate-theme-experiments.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -51,25 +53,39 @@ const MEASURED_LOW_COUNT_FIELDS = {
   gsc: new Set(["clicks", "impressions"]),
   ga4: new Set(["pageViews"]),
 };
-const VERDICT = new Set([
-  "pending", "effect-full", "effect-partial", "effect-none",
-  "effect-adverse", "insufficient-data", "aborted",
-]);
-const CHANGE_TYPE = new Set([
-  "catalog-metrics", "catalog-charts", "copy", "structure", "merge", "split", "rename", "retire",
-]);
 const CANDIDATE_STATUSES = new Set([
   "merge-candidate", "split-candidate", "rename-candidate", "retire-candidate",
 ]);
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 
-/** THEME_CATALOGS 登録キーを index.ts のオブジェクトリテラルから決定的に抽出する */
+/** Load the actual catalog, including spreads/extensions, while retaining the plain-node CLI. */
 function catalogKeys() {
-  if (!fs.existsSync(CATALOG_INDEX)) return null; // fixture 等で無い場合は照合 skip
-  const src = fs.readFileSync(CATALOG_INDEX, "utf8");
-  const block = src.match(/THEME_CATALOGS[^=]*=\s*{([\s\S]*?)}\s*;/);
-  if (!block) return null;
-  return new Set([...block[1].matchAll(/"([a-z0-9-]+)"\s*:/g)].map((m) => m[1]));
+  if (!fs.existsSync(CATALOG_INDEX)) return null; // Missing fixture catalog remains optional.
+  const result = spawnSync(
+    process.execPath,
+    [
+      '--import',
+      'tsx',
+      '-e',
+      'const { THEME_CATALOGS } = require(process.argv[1]); process.stdout.write(JSON.stringify(Object.keys(THEME_CATALOGS)));',
+      CATALOG_INDEX,
+    ],
+    { cwd: PROJECT_ROOT, encoding: 'utf8' }
+  );
+  try {
+    if (result.error || result.status !== 0)
+      throw new Error('catalog module failed to load');
+    const keys = JSON.parse(result.stdout);
+    if (
+      !Array.isArray(keys) ||
+      !keys.every((key) => typeof key === 'string' && /^[a-z0-9-]+$/.test(key))
+    )
+      throw new Error('catalog keys must be strings');
+    return new Set(keys);
+  } catch (error) {
+    v('P2', `THEME_CATALOGS 読込失敗: ${error.message}`);
+    return null;
+  }
 }
 
 function loadJson(file) {
@@ -121,25 +137,29 @@ function validatePortfolio(pf) {
     // P4: merge/retire は GSC/GA4 両方が「集計済み」(measured | measured-low) かつ 56 日以上が必須
     if (HARD_CANDIDATES.has(t.lifecycleStatus)) {
       const aggregated = (m) => m && (m.status === "measured" || m.status === "measured-low") && m.windowDays >= 56;
-      if (!aggregated(t.metrics?.gsc) || !aggregated(t.metrics?.ga4)) {
+      if (!aggregated(t.metrics?.gsc) || !aggregated(t.metrics?.ga4) || t.metrics?.ga4?.scope !== "Japan") {
         v("P4", `${k}: ${t.lifecycleStatus} には GSC/GA4 両方の集計済み (measured|measured-low) かつ windowDays>=56 が必須` +
-          ` (未集計=データ不足を需要不足と混同した廃止判定の禁止)`);
+          `。GA4はscope=Japan必須 (未集計=データ不足を需要不足と混同した廃止判定の禁止)`);
       }
     }
 
     // P5: status ごとの許可数値フィールド (推測値・標本不足比率の混入防止)
-    for (const [name, m] of Object.entries(t.metrics ?? {})) {
-      if (!m || typeof m !== "object") continue;
-      if (!METRIC_STATUS.has(m.status)) { v("P5", `${k}: metrics.${name}.status 不正 (${m.status})`); continue; }
-      if (m.status === "measured") continue; // 制限なし
-      const numeric = Object.entries(m).filter(([kk, vv]) => kk !== "windowDays" && typeof vv === "number");
-      if (m.status === "measured-low") {
-        const allowed = MEASURED_LOW_COUNT_FIELDS[name] ?? new Set();
-        const banned = numeric.filter(([kk]) => !allowed.has(kk));
-        if (banned.length > 0)
-          v("P5", `${k}: metrics.${name} は measured-low なのに比率/非カウント値 (${banned.map(([kk]) => kk).join(",")}) を持つ — 標本不足の比率値は保存禁止`);
-      } else if (numeric.length > 0) {
-        v("P5", `${k}: metrics.${name} は ${m.status} なのに数値 (${numeric.map(([kk]) => kk).join(",")}) を持つ — 推測値を保存しない`);
+    for (const [collection, metrics] of [["metrics", t.metrics], ["metrics28d", t.metrics28d]]) {
+      for (const [name, m] of Object.entries(metrics ?? {})) {
+        if (!m || typeof m !== "object") continue;
+        if (!METRIC_STATUS.has(m.status)) { v("P5", `${k}: ${collection}.${name}.status 不正 (${m.status})`); continue; }
+        if (collection === "metrics28d" && ["measured", "measured-low"].includes(m.status) && m.windowDays !== 28)
+          v("P5", `${k}: metrics28d.${name} は実測28日窓が必須`);
+        if (m.status === "measured") continue; // 制限なし
+        const numeric = Object.entries(m).filter(([kk, vv]) => kk !== "windowDays" && typeof vv === "number");
+        if (m.status === "measured-low") {
+          const allowed = MEASURED_LOW_COUNT_FIELDS[name] ?? new Set();
+          const banned = numeric.filter(([kk]) => !allowed.has(kk));
+          if (banned.length > 0)
+            v("P5", `${k}: ${collection}.${name} は measured-low なのに比率/非カウント値 (${banned.map(([kk]) => kk).join(",")}) を持つ — 標本不足の比率値は保存禁止`);
+        } else if (numeric.length > 0) {
+          v("P5", `${k}: ${collection}.${name} は ${m.status} なのに数値 (${numeric.map(([kk]) => kk).join(",")}) を持つ — 推測値を保存しない`);
+        }
       }
     }
 
@@ -161,13 +181,16 @@ function validateExperiments(ex) {
     if (!id) { v("E1", "experimentId 欠落エントリあり"); continue; }
     if (ids.has(id)) v("E1", `experimentId 重複: ${id}`);
     ids.add(id);
-    if (!e.themeKey) v("E1", `${id}: themeKey 欠落`);
-    if (!CHANGE_TYPE.has(e.changeType)) v("E1", `${id}: changeType 不正 (${e.changeType})`);
-    if (!VERDICT.has(e.verdict)) v("E3", `${id}: verdict 不正 (${e.verdict})`);
-
-    // E3: baseline 必須
-    if (!e.baseline || typeof e.baseline !== "object" || Object.keys(e.baseline).length === 0)
-      v("E3", `${id}: baseline 欠落 — 効果測定不能な実験は登録不可`);
+    for (const issue of experimentIssues(e)) v("E3", `${id}: ${issue}`);
+    if (pf.data?.themes && !pf.data.themes.some((t) => t.themeKey === e.themeKey)) v("E1", `${id}: themeKey が portfolio に無い (${e.themeKey})`);
+    if (e.verdict === "launch-reviewed") {
+      const review = e.result?.launchReview;
+      if (!review || !["continue", "improve", "hold"].includes(review.decision) || !review.note?.trim()
+          || !Array.isArray(review.evidenceRefs) || !review.evidenceRefs.some((r) => typeof r === "string" && r.trim())
+          || !latestObservation(e, "d56")) v("E3", `${id}: launch-reviewed には d56実測・判断・理由・証拠が必須`);
+      if (review?.decision === "continue" && assessCheckpoint(e, "d56", latestObservation(e, "d56")).status !== "launch-observed")
+        v("E3", `${id}: continue には適合する公開後56日窓が必須`);
+    }
 
     // E3: 確定 verdict は result + evidenceRefs 必須
     if (e.verdict?.startsWith("effect-")) {

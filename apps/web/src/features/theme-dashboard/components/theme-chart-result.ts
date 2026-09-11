@@ -65,7 +65,12 @@ export async function loadThemeChartResult(chart: PageComponent, prefCode: strin
               },
             },
           }
-        : { state: "no-data" };
+        : {
+            state: "no-data",
+            ...(prefCode === NATIONAL_AREA_CODE
+              ? { message: "都道府県を選択すると、その県の人口ピラミッドを表示します。" }
+              : {}),
+          };
     }
 
     return { state: "no-data" };

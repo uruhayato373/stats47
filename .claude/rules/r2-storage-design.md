@@ -54,6 +54,16 @@ paths:
 | `/category/[categoryKey]`                 | `app/category/[key]/items.json`                                                 | カテゴリ内 RankingItem 一覧                                                                                                                                                                                     |
 | `/compare/[categoryKey]`                  | `app/category/[key]/items.json`                                                 | 同上（compare と共用）                                                                                                                                                                                          |
 | `/areas/[areaCode]`                       | `app/areas/[code]/profile.json`                                                 | 都道府県プロフィール                                                                                                                                                                                            |
+| `/themes/tourism` | `app/themes/tourism/seasonality.json` | 確定版の月別延べ宿泊者数。年月を独立に保持し、47県と公式全国を分離。 |
+| `/themes/health-checkups` | `app/themes/health-checkups/nutrition.json` | 国民健康・栄養調査の平均・95%信頼区間・人数。47県と公式全国を分離し、年齢調整条件・原典SHAを保持。 |
+| `/themes/local-economy` | `app/themes/local-economy/specialization.json` | 2021年経済センサスの18業種。47県と全国の従業者・割合・特化係数。分類残差も公式分母に保持。 |
+| `/themes/healthcare` | `app/themes/healthcare/medical-workforce.json` | 2024年末の医療施設従事医師。14年齢階級と45診療科は47県・全国それぞれ同じ医師総数に一致。原典CSVのSHAを固定。 |
+| `/themes/population-dynamics` / `/themes/living-housing` | `app/themes/population-dynamics/{migration-demographics,five-year-residence}.json` / `app/themes/living-housing/single-households-demographics.json` | 2025年県間移動の男女・年齢・相手県、2020年単独世帯構成と5年前の居住地。47県・全国・不詳を分離し、原典固定・保存則と6指標282値の一致を配信前に検証。 |
+| `/themes/education-culture` | `app/themes/education-culture/graduation-paths.json` | 2025年3月の全日制・定時制高校卒業者。47県と公式全国、8排他進路・不詳死亡・進学中就職の内数を保持。学校所在地の帰属と原典SHAを固定。 |
+| `/themes/sports-participation` | `app/themes/sports-participation/physical-activity.json` | 2024年20〜64歳の男女別歩数。46歳調整の平均・95%信頼区間・標本人数を47県と公式全国で分離し、栄養の20歳以上・59歳調整と混ぜない。 |
+| `/themes/land-property-market` | `app/themes/land-property-market/property-prices.json` | 公表面積100〜300㎡未満の2025年住宅地。取引・地価公示の全国poolと47県別四分位・標本数・除外数を保持。取引原典は公開Web取得条件と47 ZIP SHAで再現し、恒久CSV URLがないことを明記。 |
+| `/themes/earthquake-exposure#earthquake-population` | `app/geo/earthquake-population-exposure/{item,manifest,verification,pref/NN}.json` | J-SHISと人口メッシュを結合した県別の震度帯別人口。50集計ファイルのみ配信し、原典メッシュ・結合途中の個票は公開R2へ置かない。 |
+| `/geo/population-public-facility-access` | `app/geo/population-public-facility-access/{item,manifest,sources}.json` + `{pref,source}/<NN>.json` | P05-22全県施設と人口原典の94入力。県別施設・最寄り距離帯・保存則。itemはpretty2、他生成JSONはcompact、末尾改行をSHAに含む。 |
 | `/survey`                                 | `app/survey/all.json`                                                           | 調査一覧                                                                                                                                                                                                        |
 | `/survey/[surveyKey]`                     | `app/survey/[key]/items.json`                                                   | 調査別 RankingItem 一覧                                                                                                                                                                                         |
 | `/blog/[slug]`                            | `app/blog/[slug]/thumbnail-{light,dark}.webp` + `ogp/{ogp.png,generation.json}` | ブログ画像bundle + 共通生成manifest                                                                                                                                                                             |
@@ -103,6 +113,13 @@ stable画像keyはmutableなので長期immutable cacheを禁止し、再検証�
 `push-exact-r2-assets.ts`を使う。`.local/r2`配下の明示key、またはidea等の十分狭い
 prefix + extensionだけを許可し、local SHA-256/size/MIMEとR2 HEAD metadataが完全一致する
 objectはPUTしない。mtime・ローカルcache・`app/blog`等の広域prefixは使わない。
+
+検証済みテーマ配信releaseは同じpublisherの`--manifest`と`--manifest-sha256`で、
+列挙済みJSON/GeoJSON/ZIPのkey・byte・SHAを固定して反映できる。`--verify-only`はローカル全件検査、
+`--dry-run`はS3 HEADまで。全件をPUT前に検査し、原典・県別artifactを先に、manifest・一覧・章参照を後にする。
+更新はobject単位の条件付きPUTで非atomic。同じ承認SHAだけで再開し、既存`r2-write`と並行しない。
+A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHAと個別許諾を検証する。
+
 
 禁止:
 

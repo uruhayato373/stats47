@@ -31,6 +31,7 @@ chart source.json) を共通 resolver が surveys.json へ解決する。
 | **配信 (item→survey)** | R2 `app/ranking/<key>/item.json` の `surveyIds[]` + `originalSurveys[]` | 焼き込み | `generate-ranking-items.ts` (builder) が生成 |
 | **配信 (survey→items)** | R2 `app/survey/<id>/items.json` + `app/survey/all.json` (itemCount 付き) | 焼き込み | master exporter (`export-master-snapshots.ts`) が生成 |
 | **テーマ chart lineage** | `packages/data-configs/src/theme-catalog/*.ts` の `relatedRankingKeys` / `rankingLink` / `estatParams` | git TS | `resolveThemeSurveyTaxonomy` が直接解決。surveyId を重複記録しない |
+| **テーマ指標カード lineage** | ThemeCatalog の `metricGroups[].rankingKeys` | git TS | 固定年比較・時系列カードも監査する。追加図とは別の母数・coverageを保持し、一部未解決を成功にしない |
 | **ブログ chart lineage** | R2 `app/blog/<slug>/data/<base>.source.json` | R2 JSON | rankingKey / statsDataId、または手動取得統計の `sourceName` を共通原典辞書で解決。記事単位の派生 `surveyIds[]` は `app/blog/all.json` へ焼く |
 | **横断監査 state** | `.claude/state/surveys/taxonomy.json` | 派生 JSON | ranking/theme/blog 全量 + survey→各面の逆引き。手編集禁止 |
 | **悪化防止 ratchet** | `.claude/config/survey-taxonomy-ratchet.json` | git JSON | 週次監査が改善方向だけに tighten。PR は offline check |
@@ -102,6 +103,9 @@ config.surveyId (手動オーバーライド・先頭固定)
   承認済みの公開終了や原典訂正で母集団が変わる場合は、旧件数を満たすために指標を再公開したり
   偽の調査へ紐付けたりしない。基準の訂正は旧母数・exact対象キー・理由をratchet設定へ記録し、
   減少幅がその対象だけに限られる回帰テストを同時に追加する。無関係な未解決の増加は引き続き拒否する。
+  2026-09-09のテーマ再編はcommit `7d40c9548` の34図削除・10図追加を
+  `themeBaselineAdjustment` に記録した。追加図の下限は82→58、指標カードは別枠で
+  resolved 88を下限とする。両枠ともcoverage 100%・missing-lineage 0を維持する。
 
 ### 新しい調査を追加する
 1. `packages/ranking/src/data/surveys.json` にエントリ追加 (id は kebab-case)

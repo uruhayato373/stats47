@@ -34,25 +34,9 @@ export const accidentalDeathsPer100k: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "death-accident",
-  "seoTitle": "不慮の事故による死亡者数ランキング都道府県【2023年】｜1位青森県（60.7人）",
-  "seoDescription": "2023年の不慮の事故による死亡者数の都道府県別ランキング。1位青森県（60.7人）、最下位沖縄県（20.2人）で3.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "不慮の事故による死亡者数（人口10万人当たり）ランキング都道府県",
+  "seoDescription": "人口10万人当たりの不慮の事故による死亡者数を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };

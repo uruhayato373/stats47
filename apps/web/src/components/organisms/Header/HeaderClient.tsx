@@ -334,7 +334,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               <DropdownMenuContent
                 align="start"
                 sideOffset={8}
-                className="w-[min(92vw,560px)] p-3"
+                className="max-h-[var(--radix-dropdown-menu-content-available-height)] w-[min(92vw,560px)] overflow-y-auto p-3"
               >
                 <div className="grid grid-cols-2 gap-1">
                   {themes.map((theme) => {

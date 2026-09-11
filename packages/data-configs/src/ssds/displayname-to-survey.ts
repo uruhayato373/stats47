@@ -11,9 +11,47 @@
 
 /** 非SSDS estat の displayName → survey id */
 export const DISPLAYNAME_TO_SURVEY: Record<string, string> = {
+  // 2026-09-11: 取得済み公式原表の名称・URLを照合。版付き名称は完全一致で接続。
+  '特許庁「特許行政年次報告書」': 'patent-administration-annual-report',
+  '厚生労働省 令和5年医療施設（静態）調査': 'medical-facility-survey',
+  '文化庁 埋蔵文化財関係統計資料 令和7年度': 'buried-cultural-property-statistics',
+  '文化庁 令和7年度地方における文化行政及び令和6年度文化関係経費の状況': 'local-cultural-administration-survey',
+  '観光庁「旅行・観光消費動向調査」都道府県別集計': 'travel-tourism-consumption-survey',
+  '総務省「地方公営企業決算状況調査」・デジタル庁公開データ': 'local-public-enterprise-accounts-survey',
+  "地方消費者行政の現況調査": 'local-consumer-administration-status-survey',
+  "生活困窮者自立支援制度支援状況調査": 'poverty-self-reliance-support-status-survey',
+  "国民生活基礎調査": 'comprehensive-living-conditions-survey',
+  全国家計構造調査: 'national-household-survey',
+  "環境省「自然公園等利用者数調」": 'nature-park-visitor-survey',
+  "こども家庭庁「保育所等関連状況取りまとめ」": 'childcare-related-status-report',
+  全国がん登録: 'national-cancer-registry',
+  介護保険事業状況報告: 'long-term-care-insurance-annual-report',
+  医療施設調査: 'medical-facility-survey',
+  '国民健康・栄養調査': 'national-health-nutrition-survey',
+  '観光庁「インバウンド消費動向調査」都道府県別集計':
+    'inbound-consumption-survey',
+  '文部科学省「廃校施設活用状況実態調査」': 'closed-school-facility-survey',
+  '体育・スポーツ施設現況調査': 'sports-facilities-survey',
+
+  // 128テーマ展開で年次原表と公式調査名を確認（2026-09-10）。
+  '農林水産省「令和6年木材需給報告書」': 'wood-supply-demand-report',
+  '経済センサス‐活動調査から算出': 'economic-census-activity',
+  '経済センサス‐活動調査': 'economic-census-activity',
+  '社会・人口統計体系（経済センサス‐活動調査）': 'economic-census-activity',
+  '農林水産省「2025年農林業センサス」': 'agriculture-forestry-census',
+  '農林水産省「令和6年林業産出額」': 'forestry-output-statistics',
+  '農林水産省「令和7年牛乳乳製品統計」': 'milk-dairy-statistics',
+  '厚生労働省「令和6年医師・歯科医師・薬剤師統計」': 'physician-survey',
+  '厚生労働省「令和6年国民健康・栄養調査報告」第4部':
+    'national-health-nutrition-survey',
+  'スポーツ庁 令和7年度全国体力・運動能力、運動習慣等調査':
+    'national-child-fitness-survey',
   社会生活基本調査: 'social-life-basic-survey',
   賃金構造基本統計調査: 'wage-structure-survey',
   人口動態統計: 'vital-statistics',
+  公共施設状況調査: 'public-facilities-status-survey',
+  '地方公共団体における男女共同参画社会の形成又は女性に関する施策の推進状況': 'local-government-gender-equality-policy-status',
+  都道府県別エネルギー消費統計: 'prefectural-energy-consumption-statistics',
   人口動態調査: 'vital-statistics',
   社会教育調査: 'social-education-survey',
   衛生行政報告例: 'health-admin-report',
@@ -22,6 +60,7 @@ export const DISPLAYNAME_TO_SURVEY: Record<string, string> = {
   個人企業経済調査: 'sole-proprietor-survey',
   商業動態統計調査: 'commercial-dynamics-survey',
   作物統計調査: 'crop-statistics',
+  生産農業所得統計: 'agricultural-income-statistics',
   水質汚濁物質排出量総合調査: 'water-pollution-survey',
   患者調査: 'patient-survey',
   病院報告: 'hospital-report',
@@ -56,6 +95,27 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
   string,
   { id: string; name: string }
 > = {
+  '0004008606': { id: 'employment-structure-survey', name: '就業構造基本調査' },
+  '0004008518': { id: 'employment-structure-survey', name: '就業構造基本調査' },
+  '0004008493': { id: 'employment-structure-survey', name: '就業構造基本調査' },
+  '0003450603': { id: 'census', name: '国勢調査' },
+  '0003450643': { id: 'census', name: '国勢調査' },
+  // 128テーマ展開で原表を検証した一次統計。表URLは各metricのsource.urlに保持。
+  '0004005665': {
+    id: 'economic-census-activity',
+    name: '経済センサス‐活動調査',
+  },
+  '0004006330': {
+    id: 'economic-census-activity',
+    name: '経済センサス‐活動調査',
+  },
+  '0003440743': { id: 'national-household-survey', name: '全国家計構造調査' },
+  '0003440696': { id: 'national-household-survey', name: '全国家計構造調査' },
+  '0003450610': { id: 'census', name: '国勢調査' },
+  '0004006264': {
+    id: 'economic-census-activity',
+    name: '経済センサス‐活動調査',
+  },
   // 2026-09-07 に e-Stat 公式 getMetaInfo で統計名を照合。
   // 直接表: https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=<ID>
   '0003130688': { id: 'port-statistics', name: '港湾調査（港湾統計年報）' },
@@ -85,6 +145,9 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
   '0003412078': { id: 'vital-statistics', name: '人口動態調査' },
   '0003423836': { id: 'crop-statistics', name: '作物統計調査' },
   '0003455918': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
+  '0003455935': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
+  '0003455936': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
+  '0003455937': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
   '0003455926': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
   '0003457306': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
   '0003457311': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
@@ -165,6 +228,21 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
   // 既存生成辞書の手動追記を正典へ回収し、再生成で失わない。metric は displayName を持たない。
   // https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003423613
   // 確認: 2026-09-06。住民基本台帳人口移動報告・月報の都道府県間移動表。
+  // 人口詳細profileの原表4件。公式API TABLE_INFと原典SHAを2026-09-10に照合。
+  // https://www.e-stat.go.jp/dbview?sid=0003419944 （年齢別移動）
+  '0003419944': {
+    id: 'resident-registry-migration-report',
+    name: '住民基本台帳人口移動報告',
+  },
+  // https://www.e-stat.go.jp/dbview?sid=0003419946 （年齢・男女・相手県）
+  '0003419946': {
+    id: 'resident-registry-migration-report',
+    name: '住民基本台帳人口移動報告',
+  },
+  // https://www.e-stat.go.jp/dbview?sid=0003445081 （2020年単独世帯）
+  '0003445081': { id: 'census', name: '国勢調査' },
+  // https://www.e-stat.go.jp/dbview?sid=0003447398 （2020年5年前の常住地）
+  '0003447398': { id: 'census', name: '国勢調査' },
   '0003423613': {
     id: 'resident-registry-migration-report',
     name: '住民基本台帳人口移動報告',

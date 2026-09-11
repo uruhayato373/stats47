@@ -14,7 +14,7 @@ stats47 で調査・企画・実装に使う書籍、PDF、白書、報告書そ
 ## 1. 適用範囲と SSOT
 
 - stats47 で利用候補として取得した書籍、PDF、白書、報告書、スキャン、OCR、付属データを対象とする。
-- 原本、スキャン、OCR原文、整形Markdown、ページ画像、抽出図、文字起こし、付属データを一つの復元用 bundle に含め、
+- 原本、スキャン、OCR原文、整形Markdown、ページ画像、抽出図、文字起こし、付属データを資料の版 folder に揃えて置き、
   オーナーだけがアクセスできる private Google Drive を保存先とする。
 - 公開 URL、dataset ID、取得日、利用条件は Git 上の provenance / catalog / 利用実装仕様書にも記録する。Drive は出典 URL の代替ではない。
 - 人手で確定した分類・採否・mapping は git TS、一次資料から取得した観測値は R2 を SSOT とする。参考文献の原本・OCRは
@@ -24,34 +24,43 @@ stats47 で調査・企画・実装に使う書籍、PDF、白書、報告書そ
 ## 2. Google Drive の固定階層
 
 ```text
-My Drive/
+マイドライブ/                             # 日本語ロケールの Drive アプリ (英語ロケールは My Drive)
 └── stats47/                              # ブランド名のため英数字を維持
     └── 参考文献/                         # private source vault
         └── <資料名>/                     # 正式名称を日本語優先で表記
-            └── <版>/                     # 例: 2025・2026年版、版不明
-                ├── stats47-<sourceKey>-<edition>-r<N>.manifest.json
-                ├── stats47-<sourceKey>-<edition>-r<N>.tar.gz.part-001
-                └── ...
+            └── <版>/                     # 例: 2025・2026年版、版不明。1 資料 1 版 = 1 directory
+                ├── <原本>.pdf            # 原本。分冊は複数置く
+                ├── pages/pNNNN.jpg       # 1 ページ 1 画像 (S1)
+                ├── transcripts/ md/ figures/ ocr-raw/   # S2・S3 の成果物 (§3 の規約 directory)
+                ├── page-dims.json / crop-manifest.json  # 補助 file
+                └── stats47-<sourceKey>-<edition>.manifest.json   # Git manifest の複製 (人が見る用)
 ```
 
 - `stats47` と全子孫は `shared:false` を維持し、公開リンク、組織共有、公開 R2 への複製を禁止する。
 - `.claude/config/source-vault.json` の `driveRootFolder` は `stats47`、`driveCollectionFolder` は `参考文献` に固定する。
   各 profile の `driveSourceFolderName` と `driveEditionFolderName` から、人が読むDrive論理パスを決定する。
-- Driveのfolder名は正式な日本語名称を優先する。`stats47`、`sourceKey`、`edition`、bundle / manifestのfile名は、
+- Driveのfolder名は正式な日本語名称を優先する。`stats47`、`sourceKey`、`edition`、manifestのfile名は、
   ブランド名または決定的な機械処理識別子なので英数字を維持する。
 - `<sourceKey>` と `<edition>` は英小文字・数字・ハイフンだけを使う。Drive上の版folderは上書きせず、新版を別folderとして追加する。
-- 同じ版の訂正、再OCR、再梱包は既存ファイルを差し替えず、`r<N>` を増やして不変 bundle を作る。
-- Driveでは完全bundleとmanifestを保存の正典とし、1,000件単位の個別展開コピーを重複保存しない。manifestの
-  `componentCounts` と全fileのpath / byte size / SHA-256により、OCRや図を含む全構成物を検証・復元可能にする。
-- Drive の folder / file ID、URL、connector file reference は公開 Git に保存しない。Git には人が読める論理パスだけを置く。
-- upload / move 後は名前、親 folder、件数、byte size、manifest / part の SHA-256、`shared:false` を readback する。
+- **展開配置が保存の正典**。tar bundle と `r<N>` ごとの不変 archive は 2026-09-10 に廃止した。分割の唯一の根拠だった
+  Drive MCP の 1 file 100MB 上限はローカルマウント経由では無関係で、ストリーミングマウントでは巨大 blob より個別 file の
+  方が堅牢 (doboku-note と同じ判断)、訂正のたびに全量を複製する必要も無いため。同じ版の訂正・再OCR・段階の追加は
+  同じ版 folder の file を差し替え / 追加し、Git manifest を `create --force` で作り直す。履歴は Git の manifest 差分で追う。
+- Git manifest は `.claude/state/source-inventory/<sourceKey>/<edition>/source-bundle-manifest.json` (schemaVersion 2、
+  `storage.layout: expanded`、`contentSha256`、全 file の path / bytes / sha256、`componentCounts`)。`revision` は manifest の
+  世代番号で、Drive 上のコピーを増やさない。検証の正典は Git 版で、Drive 上の複製は人が見る用。
+- ローカルマウントの解決は `source-vault.mjs` の `resolveVaultRoot()` が行う。`STATS47_SOURCE_VAULT_ROOT` (マウント上の
+  `stats47/` folder) が最優先、無ければ macOS `~/Library/CloudStorage/GoogleDrive-<account>/{マイドライブ,My Drive}/stats47`、
+  Windows `G:\{マイドライブ,My Drive}\stats47` の順に探す。マウント先は端末ごとに違うので Git には論理パスだけを書く。
+- Drive の folder / file ID、URL、connector file reference は公開 Git に保存しない。
+- `upload` は manifest の全 file を複製した後に vault 側を読み戻して sha256 を照合する。マウントへの書き込みとクラウド同期の
+  完了は別なので、ローカルコピーを消す前に Drive 側で件数を確認する。`shared:false` は Drive 側で維持する。
 
 ## 3. ローカル作業領域
 
 ```text
 $TMPDIR/stats47-source-vault/
-├── download/<sourceKey>/<edition>/r<N>/
-├── work/<sourceKey>/<edition>/<sourceRootName>/
+├── work/<sourceKey>/<edition>/<sourceRootName>/   # vault の版 folder の複製 (restore)
 └── derived/<sourceKey>/<edition>/r<N>/
     ├── processing-manifest.json
     ├── transcripts/
@@ -60,42 +69,42 @@ $TMPDIR/stats47-source-vault/
 ```
 
 - リポジトリ内の `/books/`、`/docs/books/`、`/.claude/pdfs/` は禁止する。`npm run source-vault:check` を
-  pre-commit / PRで実行し、いずれかが存在すれば失敗させる。復元・OCR照合・bundle生成はOSの一時領域だけで行う。
+  pre-commit / PRで実行し、いずれかが存在すれば失敗させる。復元・OCR照合・manifest生成はOSの一時領域だけで行う。
 - `derived/`は文字抽出、OCR、ページ画像、内部照合cropだけを置く一時領域とし、復元したsource rootを変更しない。
-- 作業領域はSSOT、配信物、バックアップではない。作業終了後に削除でき、同じDrive bundleから再現できなければならない。
+- 作業領域はSSOT、配信物、バックアップではない。作業終了後に削除でき、同じDriveの版folderから再現できなければならない。
 - 原本、スキャン、OCR、抽出画像を Git、公開 R2、Web bundle、SNS 素材へ含めない。
 - 復元時に同名 directory があれば上書きせず停止する。
 
 ### 利用時の共通手順
 
-1. `.claude/config/source-vault.json` のprofileとGit manifestから、Drive論理パス、版、revision、part名を確定する。
-2. Google Drive connectorで `stats47/参考文献/<資料名>/<版>/` を順にreadbackし、owner-only、manifest、全partを確認する。
-3. manifestとpartを `download/` 配下へ一時取得する。Driveのfolder / file IDやconnector file referenceはGitへ保存しない。
-4. 次の共通CLIでpart、bundle、全構成fileを検証して `work/` 配下へ復元する。
+1. `.claude/config/source-vault.json` のprofileとGit manifestから、Drive論理パス、版、revisionを確定する。
+2. `npm run source-vault -- vault-root --profile <profile>` でローカルマウントを解決し、版 folder を manifest と照合する。
+3. 次の共通CLIで vault の全構成fileを検証して `work/` 配下へ複製する (複製後にも sha256 で照合する)。
 
    ```bash
-   npm run source-vault -- verify --manifest <git-manifest> --parts-dir <download-dir>
-   npm run source-vault -- restore --manifest <git-manifest> --parts-dir <download-dir>
+   npm run source-vault -- verify --profile <profile> --manifest <git-manifest> --vault
+   npm run source-vault -- restore --profile <profile> --manifest <git-manifest>
    ```
 
-5. stats47への調査・抽出は `work/` の復元物だけを読む。原本をrepoへコピーせず、成果は利用実装仕様書が指定する既存SSOTへ書く。
-6. `npm run source-vault:process -- prepare --profile <profile>`でPDF inventoryを作り、明示ページだけを`extract`、
+4. stats47への調査・抽出は `work/` の復元物だけを読む。原本をrepoへコピーせず、成果は利用実装仕様書が指定する既存SSOTへ書く。
+5. `npm run source-vault:process -- prepare --profile <profile>`でPDF inventoryを作り、明示ページだけを`extract`、
    利用目的と一次資料再確認を宣言したspecだけを`crop`する。`npm run source-vault:ready`で全profileとPDF toolchainを検査する。
-7. 全ページ処理後に`npm run source-vault:inventory -- build --profile <profile>`を実行し、全候補に公開可能な接続先、
+6. 全ページ処理後に`npm run source-vault:inventory -- build --profile <profile>`を実行し、全候補に公開可能な接続先、
    `primary-source-unavailable`、`rights-hold`、`not-applicable`のいずれかを付ける。`inventory.json`へOCR本文、
    書籍値、画像、ローカルpathを保存してはならず、`npm run source-vault:inventory:check`でcoverage 100%を検証する。
-8. 作業後は`npm run source-vault:process -- cleanup --profile <profile>`で`download/`、`work/`、`derived/`を削除し、
+7. 作業後は`npm run source-vault:process -- cleanup --profile <profile>`で`work/`、`derived/`を削除し、
    `npm run source-vault:check`でrepo内に資料が残っていないことを確認する。
 
-### 処理段階 (stage) と bundle 構成の契約
+### 処理段階 (stage) と版 folder 構成の契約
 
 PDF → ページ画像 → 文字起こし → 図クロップ → 台帳 → 展開は、次の段階に固定する。段階ごとの成果物は
-bundle 内の規約 directory に置き、段階が進むたびに新しい不変 revision `r<N>` を作る (既存 revision の差し替え禁止)。
+版 folder 内の規約 directory に置き、段階が進むたびに manifest の `revision` を上げて `create --force` → `upload` で
+同じ版 folder に足す (Drive 上のコピーは増やさない)。
 
-| stage | 成果物 (bundle 内) | 作り手 | gate |
+| stage | 成果物 (版 folder 内) | 作り手 | gate |
 |---|---|---|---|
-| S0 保全 | 原本 PDF | 人 (Drive へ配置) + `source-vault create` | manifest hash・`shared:false` |
-| S1 ページ画像 | `pages/pNNNN.{png\|jpg}` (1ページ1枚) + `page-dims.json` | CLI `extract` (profile の `processing.pageImage` を適用) | ページ数 = PDF ページ数。UI 枠などの本文領域外は `contentCrop` で除き、座標は `page-dims.json` に記録する |
+| S0 保全 | 原本 PDF | 人 (PDF を work root へ) + `source-vault create` + `upload` | manifest hash・`shared:false` |
+| S1 ページ画像 | `pages/pNNNN.{png\|jpg}` (1ページ1枚) + `page-dims.json` | CLI `extract --mode image` (profile の `processing.pageImage` を適用) | ページ数 = PDF ページ数。UI 枠などの本文領域外は `contentCrop` で除き、座標は `page-dims.json` に記録する |
 | S2 文字起こし | `transcripts/pNNNN.txt` (生 OCR / text layer) + `md/pNNNN.md` (Markdown 文字起こし) | txt = CLI `extract`、md = agent が `pages/` 画像と txt を読んで書く | `md-check --check`: 全ページに md があり frontmatter (`page` / `kind` / `figures`) が規約どおり |
 | S3 図クロップ | `figures/<crop-id>.png` + `crop-manifest.json` | CLI `crop` (spec は agent が書く) | crop spec の internal-only 宣言。md の `figures[]` は実在 crop id だけ |
 | S4 台帳 | `.claude/state/source-inventory/<sourceKey>/<edition>/inventory.json` | CLI `source-inventory build` (authored mapping は git TS) | coverage 100%・本文/書籍値/ローカル path を含まない |
@@ -107,10 +116,10 @@ bundle 内の規約 directory に置き、段階が進むたびに新しい不�
   本文は縦書き・段組を読み順に直した Markdown で、図表ページは本文の代わりに図表の要点と `figures[]` を書く。
   `blank` 以外は本文必須、`figure` / `table` は `figures[]` 必須。
 - 段階の到達状況は `npm run source-vault:process -- stage-status` で manifest の `componentCounts` から読む。
-  bundle にどの段階まで入っているかを人の記憶や Drive の目視で判断しない。
-- `stage --revision <N>` は derived workspace の成果物を規約名で source root へ配置するだけで、bundle 化は
-  `source-vault create` が行う。revision を上げずに既存 bundle へ足すことはできない。
-- ページ画像・文字起こし・図クロップは bundle の内部構成物であり、Git・公開 R2・記事・SNS へは出さない。
+  版 folder にどの段階まで入っているかを人の記憶や Drive の目視で判断しない。
+- `stage --revision <N>` は derived workspace の成果物を規約名で source root へ配置するだけで、manifest の更新は
+  `source-vault create --force`、Drive への反映は `source-vault upload` が行う。revision は profile と manifest で一致させる。
+- ページ画像・文字起こし・図クロップは版 folder の内部構成物であり、Git・公開 R2・記事・SNS へは出さない。
 
 ## 4. 利用実装仕様書の必須条件
 

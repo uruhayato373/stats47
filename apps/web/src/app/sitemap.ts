@@ -30,6 +30,7 @@ import {
 } from '@/features/blog/server';
 import { STOREFRONT_PRODUCTS } from '@/features/products';
 import { ALL_THEMES } from '@/features/theme-dashboard/config/all-themes';
+import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
 import { themeHref } from '@/features/theme-dashboard/config/theme-urls';
 
 import { MIN_INDEXABLE_TAG_ARTICLES, UrlPolicy } from '@/lib/url-policy';
@@ -58,10 +59,7 @@ const PREFECTURE_CODES = Array.from(
 );
 
 /** Type A テーマ（都道府県単位で集計できるもの）— ports/railway/roads は除外 */
-const TYPE_B_THEMES = new Set(['ports', 'railway', 'roads']);
-const TYPE_A_THEME_SLUGS = ALL_THEMES.filter(
-  (t) => !TYPE_B_THEMES.has(t.themeKey)
-).map((t) => t.themeKey);
+const TYPE_A_THEME_SLUGS = [...AREA_THEME_SLUGS];
 
 const GEO_PAGES: MetadataRoute.Sitemap = GEO_INDEXABLE_ROUTES.map((path) => ({
   url: BASE_URL + path,

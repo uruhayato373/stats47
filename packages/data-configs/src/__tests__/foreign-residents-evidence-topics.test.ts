@@ -47,7 +47,9 @@ describe("foreign-residents evidence topics", () => {
     const [scale, nationality] =
       FOREIGN_RESIDENTS_CATALOG.evidenceTopics ?? [];
 
-    expect(scale?.summary).toContain("在留外国人統計とは対象と時点が異なります");
-    expect(nationality?.summary).toContain("すべての国籍や在留資格別");
+    expect(scale?.summary).toContain("在留外国人統計とは対象と基準日が異なります");
+    expect(nationality?.summary).toContain("総人口10万人当たり");
+    expect(nationality?.summary).toContain("外国人人口全体を分母にした国籍構成比ではなく");
+    expect(nationality?.summary).toContain("すべての国籍を網羅するものでもありません");
   });
 });

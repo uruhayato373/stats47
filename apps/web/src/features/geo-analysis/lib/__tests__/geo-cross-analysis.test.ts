@@ -9,10 +9,8 @@ vi.mock('@stats47/r2-storage/server', () => ({
 
 import {
   buildGeoMapModel,
-  GEO_CROSS_ANALYSIS_SLUGS,
   formatGeoValue,
   type GeoAnalysisSnapshot,
-  type GeoCrossAnalysisSlug,
 } from '../geo-cross-analysis';
 import { loadGeoAnalysisPrefDetail } from '../load-geo-analysis-evidence';
 import {
@@ -21,10 +19,15 @@ import {
   loadGeoAnalysisBundle,
 } from '../load-geo-analysis-snapshot';
 
-import { bindFixtureArtifact, manifestFixture } from './geo-manifest-fixture';
+import {
+  GEO_BASE_FIXTURE_SLUGS,
+  type GeoBaseFixtureSlug,
+  bindFixtureArtifact,
+  manifestFixture,
+} from './geo-manifest-fixture';
 
 function snapshot(
-  slug: GeoCrossAnalysisSlug = 'population-land-price'
+  slug: GeoBaseFixtureSlug = 'population-land-price'
 ): GeoAnalysisSnapshot {
   const primaryMetricKey = {
     'population-land-price': 'risingDecliningPointShare',
@@ -84,7 +87,7 @@ function snapshot(
 }
 
 describe('Geo cross analysis', () => {
-  for (const slug of GEO_CROSS_ANALYSIS_SLUGS) {
+  for (const slug of GEO_BASE_FIXTURE_SLUGS) {
     it(`${slug}: 表示するmanifestはsnapshotを検証した一組だけ（A/B切替で二重読込しない）`, async () => {
       const base = snapshot(slug);
       const value = {
@@ -115,12 +118,10 @@ describe('Geo cross analysis', () => {
       });
       expect(fetchMock).toHaveBeenCalledTimes(2);
       fetchMock.mockReset();
-      fetchMock
-        .mockResolvedValueOnce(value)
-        .mockResolvedValueOnce({
-          ...manifest,
-          generatedAt: '2026-09-06T00:00:00Z',
-        });
+      fetchMock.mockResolvedValueOnce(value).mockResolvedValueOnce({
+        ...manifest,
+        generatedAt: '2026-09-06T00:00:00Z',
+      });
       expect(await loadGeoAnalysisBundle(slug)).toBeNull();
       fetchMock.mockReset();
     });

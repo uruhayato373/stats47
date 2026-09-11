@@ -6,6 +6,7 @@
  *
  * 出力先: .claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/
  *   - overview/pages/channels/devices/daily.csv … raw ローリング28日 (機会発見 + pollution 監視用)
+ *   - pages-clean.csv / theme-navigation.csv + *.meta.json … Japan-only ローリング28日
  *   - survey-navigation.csv … Japan-only の survey→ranking nav_click (ローリング28日)
  *   - overview-clean.csv … Japan-only カレンダー週 (GA4-PIPELINE-02 後方互換系列・history.csv 用)
  *   - daily-clean.csv … Japan-only 日別 14 日 (確定7日 KPI の coverage 判定用)
@@ -32,6 +33,11 @@ import {
 } from "./lib/auth.mjs";
 import { resolvePeriods } from "./lib/periods.mjs";
 import { buildGa4Summary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
+
+import {
+  buildCleanPagesRequest, buildThemeNavigationRequest, buildThemeReportMetadata,
+  CLEAN_PAGE_COLUMNS, THEME_NAV_API_DIMENSIONS, THEME_NAV_COLUMNS,
+} from "./lib/theme-ga4-reports.mjs";
 
 const DEFAULT_PROPERTY_ID = "463218070";
 const SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"];
@@ -171,6 +177,33 @@ async function main() {
   } catch (e) {
     errors.push(`pages: ${e.message}`);
     console.error("[ga4-snapshot] pages failed:", e.message);
+  }
+
+  // Japan-only page and navigation slices share the raw report's explicit rolling period.
+  // A failed rerun overwrites metadata as failed so an older CSV cannot masquerade as fresh data.
+  for (const report of [
+    { name: "pages-clean", request: buildCleanPagesRequest(periods.rolling28d),
+      columns: CLEAN_PAGE_COLUMNS, map: (row) => toRow(row, ["pagePath"], CLEAN_PAGE_COLUMNS.slice(1)) },
+    { name: "theme-navigation", request: buildThemeNavigationRequest(periods.rolling28d),
+      columns: THEME_NAV_COLUMNS, map: (row) => {
+        const value = toRow(row, THEME_NAV_API_DIMENSIONS, ["eventCount"]);
+        return { pagePath: value.pagePath, nav_surface: value["customEvent:nav_surface"], nav_label: value["customEvent:nav_label"], eventCount: value.eventCount };
+      } },
+  ]) {
+    let metadata;
+    try {
+      const raw = await runReportPaged(analyticsdata, property, report.request);
+      const rows = raw.map(report.map);
+      writeFileSync(join(outDir, `${report.name}.csv`), toCsv(rows, report.columns));
+      metadata = buildThemeReportMetadata({ period: periods.rolling28d, rowCount: rows.length });
+      summaryLines.push(`${report.name}.csv: ${rows.length} rows (Japan-only・rolling28d)`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      metadata = buildThemeReportMetadata({ period: periods.rolling28d, error: message });
+      errors.push(`${report.name}: ${message}`);
+      console.error(`[ga4-snapshot] ${report.name} failed:`, message);
+    }
+    writeFileSync(join(outDir, `${report.name}.meta.json`), JSON.stringify(metadata, null, 2) + "\n");
   }
 
   // survey-navigation: 調査ハブ → ranking の内部遷移 (Japan-only)

@@ -29,12 +29,14 @@ import { pathToFileURL } from 'node:url';
 import { THEME_INDICATOR_SETS } from '@stats47/types';
 
 import { METRICS_REGISTRY } from '../src/registry';
+import { LOCAL_FINANCE_RATIO_METRICS } from '../src/theme-catalog/local-finance-ratios';
 import { normalizeUnitForAxis } from '../src/theme-catalog/types';
 import {
   listThemeCatalogs,
   CATALOG_COMPONENT_TYPES,
   collectThemeMetricContentCoverage,
   validateThemeMetricContentCoverage,
+  validateCatalogSections,
   THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
   type ThemeCatalog,
 } from '../src/theme-catalog';
@@ -327,6 +329,13 @@ function validatePageComponentEstatParams(errors: string[]): number {
  *   どれかの系列が桁違いのスケールに潰れる。単位文字列の正規化 (「円」と「千円」を
  *   同一視する等) は**しない** — 誤って結合する方が、定義時に弾かれるより危険。
  */
+function embeddedMetricKeys(c: ThemeCatalog): Set<string> {
+  const hasFinanceRatios = c.key === 'local-finance' && c.sections?.some(
+    (section) => section.embeddedSectionKeys?.includes('finance-sustainability')
+  );
+  return new Set(hasFinanceRatios ? LOCAL_FINANCE_RATIO_METRICS.map((metric) => metric.rankingKey) : []);
+}
+
 export function validateMetricGroups(
   c: ThemeCatalog,
   metricKeys: Set<string>,
@@ -339,6 +348,7 @@ export function validateMetricGroups(
   const seenGroupKeys = new Set<string>();
   const seenTitles = new Set<string>();
   const assigned = new Set<string>();
+  const comparisonYears = new Map<string, string>();
 
   for (const g of groups) {
     if (seenGroupKeys.has(g.key)) {
@@ -358,8 +368,19 @@ export function validateMetricGroups(
       errors.push(`[group-empty] ${c.key}/${g.key}: rankingKeys が空`);
     }
 
+    if (g.comparisonYear !== undefined && !/^\d{4}$/.test(g.comparisonYear)) {
+      errors.push(`[group-comparison-year] ${c.key}/${g.key}: comparisonYear は4桁年にする`);
+    }
+
     // rankingKeys ⊆ metrics
     for (const k of g.rankingKeys) {
+      if (g.comparisonYear) {
+        const previous = comparisonYears.get(k);
+        if (previous && previous !== g.comparisonYear) {
+          errors.push(`[group-comparison-year] ${c.key}/${g.key}: "${k}" に異なる比較年を指定できない`);
+        }
+        comparisonYears.set(k, g.comparisonYear);
+      }
       if (!metricKeys.has(k)) {
         errors.push(
           `[group-key] ${c.key}/${g.key}: rankingKey "${k}" が metrics に不在`
@@ -414,7 +435,7 @@ export function validateMetricGroups(
   // 非 context 指標の未所属 (グループを定義したなら主要指標は必ずどれかのカードに出す)
   for (const m of c.metrics) {
     if (m.role === 'context') continue;
-    if (!assigned.has(m.rankingKey)) {
+    if (!assigned.has(m.rankingKey) && !embeddedMetricKeys(c).has(m.rankingKey)) {
       warns.push(
         `[group-orphan] ${c.key}: ${m.role} 指標 "${m.rankingKey}" がどの metricGroup にも未所属`
       );
@@ -562,6 +583,7 @@ function main() {
   const globalComponentKeys = new Map<string, string>(); // componentKey → theme
 
   for (const c of catalogs) {
+    errors.push(...validateCatalogSections(c));
     const metricKeys = new Set(c.metrics.map((m) => m.rankingKey));
     const metricLabels = new Map(
       c.metrics.map((m) => [m.rankingKey, m.shortLabel] as const)
@@ -688,13 +710,13 @@ function main() {
       }
     }
 
-    // primary 指標のカバレッジ (warn: primary は metrics[] 由来の stat-card として
-    //   チャートと独立に描画されるため、チャート未使用でも正常。設計確認用に warn)
+    // 指標カードで読める primary に同じ追加図を要求しない。
+    const keysInGroups = new Set((c.metricGroups ?? []).flatMap((group) => group.rankingKeys));
     for (const m of c.metrics) {
       if (m.role !== 'primary') continue;
-      if (!keysInCharts.has(m.rankingKey)) {
+      if (!keysInCharts.has(m.rankingKey) && !keysInGroups.has(m.rankingKey) && !embeddedMetricKeys(c).has(m.rankingKey)) {
         warns.push(
-          `[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" がチャート未使用 (card 描画)`
+          `[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" が指標カード・追加図のいずれにも未配置`
         );
       }
     }

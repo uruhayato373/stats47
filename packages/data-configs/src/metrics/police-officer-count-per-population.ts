@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const policeOfficerCountPerPopulation: MetricConfig = {
   "key": "police-officer-count-per-population",
   "title": "警察官数",
-  "subtitle": "人口当たり",
+  "subtitle": "人口千人当たり",
   "unit": "人",
   "category": "safetyenvironment",
+  "description": "警察官数を総人口で除し、人口千人当たりに換算した値。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -44,25 +45,9 @@ export const policeOfficerCountPerPopulation: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "police-officer-count",
-  "seoTitle": "警察官数ランキング都道府県【2024年】｜1位東京都（3.08人）",
-  "seoDescription": "2024年の警察官数の都道府県別ランキング。1位東京都（3.08人）、最下位埼玉県（1.6人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "警察官数（人口千人当たり）ランキング都道府県",
+  "seoDescription": "人口千人当たりの警察官数を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };

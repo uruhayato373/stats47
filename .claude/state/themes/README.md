@@ -62,7 +62,7 @@
                  "activeUsersLast28d": 500,            // ユーザー数は週横断加算不能 → 最新窓のみ (measured のみ)
                  "engagementRatePvWeighted": 0.61,     // pageViews 加重平均 (近似・名前で明示・measured のみ)
                  "avgSessionDurationSecPvWeighted": 74 },
-        "internalNav": { "status": "not-instrumented" }  // theme→ranking/blog 遷移・指標クリック。GA4 未計装 (25_テーマポートフォリオ運用 §1.3)
+        "internalNav": { "status": "insufficient-data" }  // 国内の theme_* nav_click を実日付付きで集計。未取得を0件にしない
       },
       "contentCoverage": { "relatedArticles": 4 },   // 関連記事数 (未集計は null)
       "dataQuality": {                    // R2 app/ranking/<key>/values.json の実測 (aggregate-theme-metrics.ts)
@@ -70,7 +70,7 @@
         "missingKeyList": [],             // 404/空だった rankingKey (先頭 10 件)
         "latestYearPrefCoverageMin": 47   // 最新年の都道府県カバレッジ最小値 (prefecture 行が無い指標は対象外)
       },
-      "dataQualityStatus": "ok",         // "ok" | "stale-data" (latestDataYear が 5 年超前) | "gaps" (values.json 欠測あり) | "unknown"
+      "dataQualityStatus": "ok",         // "ok" | "gaps" (値の欠測・品質errorあり) | "unknown"。経過年数だけで更新遅延を確定しない
       "currentHypothesis": "支え手比率の主問化で滞在が伸びる", // 無ければ null
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [                   // レビュー文書・実測・実験 ID への参照
@@ -114,7 +114,7 @@
       "experimentId": "THEME-EXP-001",   // 必須・一意
       "themeKey": "aging-society",
       "hypothesis": "primary を老年化指数に変更すると CTR が改善する",
-      "changeType": "catalog-metrics",   // "catalog-metrics" | "catalog-charts" | "copy" | "structure" | "merge" | "split" | "rename" | "retire"
+      "changeType": "catalog-metrics",   // "catalog-metrics" | "catalog-charts" | "copy" | "structure" | "merge" | "split" | "rename" | "retire" | "launch"
       "baselinePeriod": { "from": "2026-05-18", "to": "2026-07-12" },
       "startedAt": "2026-07-13",
       "evaluateAt": { "d7": "2026-07-20", "d28": "2026-08-10", "d56": "2026-09-07" },
@@ -122,7 +122,7 @@
       "guardrailKpis": ["gsc.avgPosition", "ga4.engagementRate"],
       "baseline": { "gsc.clicks": 120, "gsc.avgPosition": 12.4, "ga4.engagementRate": 0.61 },
       "result": null,                     // 判定時に {d7:{...}, d28:{...}, d56:{...}} を記録
-      "verdict": "pending",               // "pending" | "effect-full" | "effect-partial" | "effect-none" | "effect-adverse" | "insufficient-data" | "aborted"
+      "verdict": "pending",               // "pending" | "effect-full" | "effect-partial" | "effect-none" | "effect-adverse" | "insufficient-data" | "aborted" | "launch-reviewed"
       "notes": null,                      // 季節性・順位変動・サイト全体変動の注記
       "evidenceRefs": []
     }
@@ -135,10 +135,46 @@
 1. `experimentId` は一意。
 2. **同一 `themeKey` × `changeType` で verdict が `pending` の実験は 1 件まで** (重複実験の防止)。
 3. `verdict` の確定は d7 では不可 (d7 は異常検知のみ)。d28 = 暫定 / d56 = 基本判定。
-4. `baseline` の無い実験は登録不可 (効果測定不能な実験を作らない)。
+4. 改善実験は `baseline` 必須。新規URLの `changeType=launch` は下記の初回公開観測契約を使い、公開前baselineを0で代用しない。
 5. verdict 確定時は `result` と `evidenceRefs` (実測 snapshot への参照) が必須。
 6. effect/* の**バックログ status への反映は improvement-triage に依頼する** (本 state は判定材料と
    実験履歴の台帳であり、`.claude/todo/improvements.md` へは書かない)。
+
+### 新規URLの初回公開観測（launch）
+
+新規URLは公開前トラフィックが存在しないため、`baseline=null` と
+`baselineStatus=not-applicable-new-url` を明記する。`baselinePeriod` はnull、
+`baselineScopes` / `baselineStatuses` は未設定または空にする。
+`--register` は書込み前にschema・重複を検査し、`startedAt/evaluateAt/result=null`、
+`verdict=pending` だけを受け付ける。既存テーマ改善のbaseline要件は維持する。
+
+```bash
+node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '{"experimentId":"THEME-LAUNCH-20260909-construction-industry","themeKey":"construction-industry","changeType":"launch","hypothesis":"公開後の国内閲覧と検索露出を観測し、構成の継続・改善を判断する","primaryKpi":"ga4.pageViews","guardrailKpis":["gsc.impressions","internalNav.eventCount"],"baseline":null,"baselineStatus":"not-applicable-new-url","evidenceRefs":[".claude/state/estat/theme-expansion-verification.json"]}'
+# 実際の公開と本番HTTP/表示確認が済んだ日だけ指定する（下記は日付書式の例）。
+node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUNCH-20260909-construction-industry YYYY-MM-DD
+```
+
+未来日のscheduleと設定済み公開日の変更は拒否する。同日scheduleは何も変えない。
+ローカル検証やPR作成日は公開日ではない。公開のやり直しは既存観測を動かさず別実験にする。
+
+- d7は品質の実測のみ。品質が未取得ならunknownとして記録し、正常と補完しない。
+- `portfolio.metrics` は従来の非重複56日窓、`metrics28d` は成功メタ付き最新の単独28日窓。
+  d28は後者を読み、公開後だけの完全窓で `launch-provisional` を記録する。未取得・行欠落は
+  `insufficient-data`。両フィールドとも同じ国条件・低標本・欠測規律を適用する。
+- d56の完全窓は `launch-observed`。低標本の実カウントは保持し、比率や効果を推定しない。
+  欠測・低標本・guardrail不足は `reasons/constraints` に残す。
+- launchは `effect-*` を確定しない。d56後に
+  `--launch-review <id> continue|improve|hold --evidence <ref> --note '<判断理由と次の検証>'`
+  で継続・改善・保留の材料と判断を `result.launchReview` へ保存し、`verdict=launch-reviewed`
+  とする。continueには適合する56日窓が必要。窓不足なら計測修復のimproveまたはholdを記録する。
+- 初回公開の有効な56日窓は、主KPIがmeasuredなら `result.baselineCandidate` として保存する。
+  同じ期間・国条件で適合するKPIだけを含め、元実験・観測日を参照する。これは**次の改善**の
+  baseline候補であり、launch自身のbaselineを置換しない。次の改善は別IDで登録し、変更公開前の
+  56日窓・scope・statusと照合する。期間不明または変更日以降を含むbaselineではeffectを確定しない。
+
+週次監査の既存 `aggregate-theme-metrics.ts` と `--check` が両窓・期日観測を更新する。
+期日は取得開始の目安であり、実際に公開後の窓が揃うまでは再観測を追記する。
+改善作業はownerと検証条件付きで既存台帳へ渡し、変更後も新しい実験IDで同じ確認を繰り返す。
 
 ## 禁止事項
 
@@ -149,3 +185,87 @@
 | 推測値・代替値を measured として保存 | 取れない値は insufficient-data / not-instrumented |
 | 根拠 (evidenceRefs/56日測定) なしの merge/retire | validator が error で弾く |
 | `.claude/todo/improvements.md` へ直接書く | improvement-triage へ引き渡す |
+
+
+## 2026-09-08以降の品質・計測契約
+
+- 母集団は現行ThemeCatalog。気候はcatalog、旧財政市区町村URLはredirectで対象外。
+- `quality.json` は章/登録/期間/単位/有限値coverage/重複/履歴退行の観測。前回正常値を
+  `lastGoodObservations` に保持し、異常継続中の基準すり替えを防ぐ。全操作・全国系列・GISは別途表示確認。
+- GA4はJapan-only `pages-clean.csv` と `.meta.json` のstatus=ok/source/countryFilter/実期間を必須にする。
+  2窓の実日付が連続する56日だけを集計。raw pages.csvは効果・統廃合判断に使わない。
+- `metrics.ga4.scope=Japan`。`internalNav` はtheme_* nav_clickのJapan-only eventCount。
+  未取得窓や欠落行はinsufficient-data、0で補完しない。低標本ではカウントだけを保存する。
+- `dataQuality.oldestLatestDataYear/ageReviewKeys` は古い系列を隠さないための補助。
+  古さは更新漏れの断定ではなく一次資料確認の入口。海の無い県や秘匿の欠測を0に変えない。
+- 週次は同じ異常を再通知せず、新規/変化/復旧を報告。月次は全テーマの公式公表予定と新年を確認する。
+
+### 評価履歴の互換性
+
+保存済みの `result.d7/d28/d56` は維持し、再観測を `result.rechecks.dNN[]` へ追記する。同じ観測内容は日時だけ変わっても重複させない。新しい評価は status / reasons / constraints と KPI ごとの scope / windowDays / periodStart / periodEnd / weeks を保存する。旧 baseline の scope・status が不明な場合は数値を保持したまま効果確定を拒否する。d28 は暫定観測であり、公開後だけを含む 56 日窓・測定可能な主 KPI と baseline が揃った d56 のみ効果を確定できる。
+
+`dataQuality.ageReviewKeys` は最新観測が5年以上前の一次資料確認候補であり、未更新の確定ではない。5年周期の調査を自動で stale-data にしない。`freshnessStatus` は公表済み新年との照合が別工程であることを示す。
+
+定期フォロー: 元PCには2026-09-08登録の「全テーマの品質確認と継続改善」の記録がある。このPCではテーマ監査の設定が見つからなかったため、2026-09-09にCodex heartbeat `automation`「テーマ拡充の検証と継続改善」をこのタスクへ登録した。毎週月曜09:00 JSTに確認し、月初は公式資料・構成も見直す。変化のない既知警告は通知しない。元PCの稼働が確認できた場合は重複を照合する。GitHub週次監査はworkflowの公開後に稼働する。
+
+
+## 別PCで未公開のテーマ改善を再開する
+
+対象は128候補のうち採択120候補（新規34、既存章67、統合19）、実際のページは既存21を含む55テーマ。
+保留8候補を公開済みに数えない。進捗と再現コマンドは
+[全体記録](../metrics/themes/2026-09-10-all-expansion.json)、残工程は
+`.claude/todo/backlog.md` の `THEME-EXPANSION-IMPLEMENT-01` / `THEME-PORTFOLIO-REMAINDER-01` を正典とする。
+構造の接続、原典・データの確認、主問の充足、実画面の検証、公開は別々に記録する。
+
+### データと配信manifestの復元
+
+`.local` のステージ、原典、ブラウザ画面、詳細ログはgit対象外。新PCでは `npm ci` と正規の環境設定が必要。
+秘密情報は移行しない。主な復元順序は次のとおり。
+
+1. `node --import tsx packages/data-configs/scripts/build-registry.ts` と
+   `generate-theme-catalog.ts` / `generate-theme-dependency-mirror.ts` を同じscriptsディレクトリで実行する。
+2. `node --env-file=apps/web/.env.development --import tsx .claude/scripts/themes/verify-theme-expansion.mjs --artifacts /tmp/stats47-theme-expansion-api`
+   で明記82系列のAPI応答とhashを復元する。原典が変わった場合は再評価し、旧証拠を流用しない。
+3. e-Statの新規指標は `page-data-batch.ts --metric <keys> --kind prefecture`、公式ファイルの指標は
+   全体記録の `reproduction.sourceCommands` でローカルに取り込む。すべて `--write-local` までとし、
+   原典SHA・県・期間・単位・欠測集合を検査する。PDF抽出には `pdftotext` が必要。
+   所得・金融資産のジニ係数は2019年の原表を使い、整数に丸められたSSDS値で代用しない。
+4. 健康寿命2022年・農業産出額2024年の既存更新は
+   `packages/data-configs/scripts/refresh-official-theme-data.ts` で復元する。Python依存は
+   同scriptsの `lib/requirements-official-theme-data.txt` に従う。
+5. 全体記録の `reproduction.stageArguments` を用いて `stage-theme-expansion.mjs` を実行する。
+   `--local-metrics` は検証済みのcanonical値、`--refresh-items` は公開観測値を変えないメタデータ更新。
+   `--all-components` は55テーマ、`--repair-laspeyres-unit` は観測値・順位を保持した単位是正を含める。
+   `--tourism-seasonality` は月次専用schemaと照合記録を検査する。月次をrankingの年コードへ格納しない。
+   `app/ranking-items/all.json` は公開在庫に検証済み差分を重ねて作る。
+
+公開対象は生成後のmanifestにあるkey・bytes・SHAだけ。旧manifestのSHAは生成日時が変わるため流用しない。
+manifestだけをコピーした検証用stageを用意し、古いローカルミラーを監査に混ぜない。
+
+### localhostでの表示検証
+
+```bash
+node .claude/scripts/themes/preview-theme-release.mjs --manifest .local/verification/themes/2026-09-10-release-manifest.json --port 4778
+```
+
+ゲートウェイは起動時と配信時にmanifest内のSHAを検査し、必要なファイルだけを読み込む。巨大GIS原典を常駐メモリへ複製しない。未収録のappキーは公開R2をGETする。
+**stageを更新したらゲートウェイを再起動する。** Nextのbuild/startに
+`R2_PUBLIC_FETCH_URL=http://127.0.0.1:4778` と `NEXT_PUBLIC_R2_PUBLIC_URL=http://127.0.0.1:4778`、
+空の `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を指定する。
+Turbo経由では `--env-mode=loose` が必要。公開品質baselineへstaged監査を書き込まない。
+
+全55テーマをPC・mobileで確認し、章のカード数、値・年・単位、県切替、横はみ出し、JS例外を検査する。
+財政の専用章、駅800m人口のGIS、津波対象外県のnull、観光の公式全国月次と10費目支出構成も別途照合する。
+旧42画面の道路mobile #418 は後続buildでは再現していないが、過去の原因は未確定。
+2026-09-10の全110画面では14テーマ21章のカード欠落を検出し、生成元のcontextロール処理を修正した。
+修正後の全量結果は全体記録の最新buildと結び付け、古いPASSで置換しない。
+
+### 公開と計測
+
+本番コード・R2の公開は検証済み差分をまとめて行う。新規テーマは公開前baselineを0で補完せず、
+実際の本番表示確認日からlaunch実験のd7/d28/d56を設定する。既存テーマ改善は事前窓と条件を照合する。
+未開始pendingの改善baselineを修正する場合は `evaluate-theme-experiments.mjs --update-baseline <id> '<json>'` を使う。
+baseline・期間・scope・status・evidenceRefsのみ変更でき、launchや公開日・観測・判定がある実験は拒否する。
+修正前後の値と公式APIの期間・条件・SHAは `.claude/state/metrics/themes/` に保存する。欠測を0で補完しない。
+ローカルbuild日を公開日としない。Codex heartbeatはタスク側の設定でgit移行されないため、重複登録前に
+既存設定を確認する。週次CIの計測と既知警告の抑制はこのREADME前半の契約に従う。

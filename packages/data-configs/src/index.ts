@@ -1,4 +1,5 @@
 export * from "./types";
+export { resolveMetricSource } from "./source-for-entity";
 export { createMetric, type CreateMetricInput } from "./create-metric";
 export { METRICS_REGISTRY, getMetricConfig, listAllMetrics } from "./registry";
 export {

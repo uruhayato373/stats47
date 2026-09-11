@@ -1,6 +1,7 @@
 import 'server-only';
 
-import { FLOOD_ARCHIVES, type GeoAnalysisEvidenceManifest } from '@stats47/gis';
+import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
+import { FLOOD_ARCHIVES, parseGeoLandslideSnapshot, type GeoAnalysisEvidenceManifest } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
 import {
@@ -8,6 +9,7 @@ import {
   type GeoAnalysisSnapshot,
   type GeoCrossAnalysisSlug,
 } from './geo-cross-analysis';
+import { validPublicFacilityRows } from './geo-public-facility-evidence';
 import {
   GEO_AREA_CODES,
   isTimestamp,
@@ -29,6 +31,7 @@ export function parseGeoAnalysisSnapshot(
   value: unknown,
   expectedSlug: GeoCrossAnalysisSlug
 ): GeoAnalysisSnapshot | null {
+  if (expectedSlug === 'population-landslide-exposure') return parseGeoLandslideSnapshot(value);
   if (!isRecord(value)) return null;
   if (
     value.schemaVersion !== 1 ||
@@ -149,9 +152,11 @@ export function parseGeoAnalysisSnapshot(
 
   // 別分析や旧県別併置snapshotを新しい空間分析の説明と混ぜない。
   const primaryMetricKeys = {
+    'population-snow-designation': 'designatedCenterPopulationShare',
     'population-land-price': 'risingDecliningPointShare',
     'population-flood-risk': 'floodExposureShare2050',
     'population-station-access': 'stationAccessShare2050',
+    'population-public-facility-access': 'administrativeWithin1000mShare2020',
   };
   if (value.primaryMetricKey !== primaryMetricKeys[expectedSlug]) return null;
   // 旧94件は河川区分10が欠落。manifestを使わない比較・area/themeにも配信しない。
@@ -162,7 +167,14 @@ export function parseGeoAnalysisSnapshot(
   )
     return null;
 
-  return value as unknown as GeoAnalysisSnapshot;
+  if (expectedSlug === 'population-snow-designation' && value.dataVersion !== SNOW_DESIGNATION_SOURCE.dataVersion) return null;
+  const snapshot = value as unknown as GeoAnalysisSnapshot;
+  if (
+    expectedSlug === 'population-public-facility-access' &&
+    !validPublicFacilityRows(snapshot.rows)
+  )
+    return null;
+  return snapshot;
 }
 
 export async function loadGeoAnalysisBundle(

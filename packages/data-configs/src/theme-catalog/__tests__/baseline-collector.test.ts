@@ -9,7 +9,7 @@ import type { CatalogChart, ThemeCatalog } from '../types';
  *
  * ★狙い (2 方向を固定する):
  *   ① 実測ベースラインを lock する。生の estatParams / 生色 / 不正 e-Stat コードは
- *      **shrink-only (増やせない)**、型付き参照 (relatedRankingKeys) は **grow-only (減らせない)**。
+ *      **shrink-only (増やせない)**、型付き参照 (relatedRankingKeys) は **全実在 data-bound component で必須**。
  *      移行 (WP1-WP6) で数字が動いたら定数を更新する = 進捗を機械的に追える。
  *   ② collector が defect の注入で発火する (陰性対照)。生色を足す・生 estatParam を足す・
  *      `#` 付きコードを足す・型付き参照を外すと、対応する計測が動くことを固定する。
@@ -33,12 +33,14 @@ import type { CatalogChart, ThemeCatalog } from '../types';
 
 /** 実測で確定したベースライン。移行で動いたらここを更新する (shrink/grow の向きを守る)。 */
 const BASELINE = {
-  themes: 20,
-  charts: 106,
-  chartsWithRawEstatParams: 22,
-  rawEstatRequests: 39,
-  // markdown-section 24 件を除く全 data-bound component が指標ハブを持つ。
-  chartsWithRelatedRankingKeys: 82,
+  // 2026-09-11: 全55テーマの実測。追加図は76件、うち構成図3件。
+  themes: 55,
+  charts: 76,
+  chartsWithRawEstatParams: 0,
+  rawEstatRequests: 0,
+  // markdown-section 16 件を除く全 data-bound component が指標ハブを持つ。
+  // 地方財政は専用 3 章で描画するため、未使用だった KPI 4 件と追加図 1 件を除いた。
+  chartsWithRelatedRankingKeys: 60,
   // WP5 完了: 生色を color role へ全移行 (179 → 0)。以後 ratchet は「生色 0」を強制する。
   rawColorPlaces: 0,
   distinctColors: 0,
@@ -54,15 +56,15 @@ describe('baseline lock (ratchet)', () => {
 
   it('componentType ごとの chart 数を固定する (chart 種別内訳の baseline)', () => {
     expect(live.chartsByType).toEqual({
-      'line-chart': 61,
-      'mixed-chart': 3,
-      'composition-chart': 4,
-      'donut-chart': 6,
+      'line-chart': 49,
+      'mixed-chart': 2,
+      'composition-chart': 3,
+      'donut-chart': 4,
       'cpi-profile': 1,
-      'cpi-heatmap': 1,
-      'kpi-card': 4,
-      'markdown-section': 24,
-      'pyramid-chart': 2,
+      'cpi-heatmap': 0,
+      'kpi-card': 0,
+      'markdown-section': 16,
+      'pyramid-chart': 1,
     });
   });
 
@@ -80,9 +82,13 @@ describe('baseline lock (ratchet)', () => {
     );
   });
 
-  it('markdown以外の全82 componentが relatedRankingKeys を持つ', () => {
+  it('markdown以外の全60 componentが relatedRankingKeys を持つ', () => {
     expect(live.chartsWithRelatedRankingKeys).toBe(
       BASELINE.chartsWithRelatedRankingKeys
+    );
+    expect(live.chartsWithRelatedRankingKeys).toBe(
+      Object.values(THEME_CATALOGS).flatMap((catalog) => catalog.charts)
+        .filter((item) => item.componentType !== 'markdown-section').length
     );
   });
 });

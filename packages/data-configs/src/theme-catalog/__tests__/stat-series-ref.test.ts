@@ -92,6 +92,13 @@ describe("② 必須フィールドを壊すと error (陰性対照)", () => {
 });
 
 describe("② 正常系は error を出さない", () => {
+  it("生成されたランキングリンクと公式出典を保持し、不正な項目を拒否する", () => {
+    const props = { markdown: "出典を確かめる", rankingLinks: [{ label: "ランキング", url: "/ranking/total-population" }], sources: [{ label: "統計局", url: "https://www.stat.go.jp/" }, { label: "原典表番号" }] };
+    expect(validateChartProps("markdown-section", props)).toEqual([]);
+    expect(validateChartProps("markdown-section", { ...props, rankingLinks: [{ label: "", url: "/ranking/total-population" }] })).toContain("rankingLinks は {label,url} の非空配列にする");
+    expect(validateChartProps("markdown-section", { ...props, sources: [{ label: "統計局", url: "" }] })).toContain("markdown-section: sources は {label,url?} 配列");
+    expect(validateChartProps("markdown-section", { ...props, sources: [{ label: "統計局", unexpected: true }] })).toContain("markdown-section: sources は {label,url?} 配列");
+  });
   const ok: Array<{ type: string; props: Record<string, unknown> }> = [
     { type: "line-chart", props: { estatParams: [{ statsDataId: "X", cdCat01: "#A0160102" }] } },
     { type: "mixed-chart", props: { columnParams: [{ statsDataId: "X" }], lineParams: [{ statsDataId: "Y" }] } },

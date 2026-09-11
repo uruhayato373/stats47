@@ -14853,10 +14853,9 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_0: readonly JapanZueEvidenceItem[] = [
     "resolution": "combined-analysis",
     "resolutionReason": "生産農業所得統計の農業産出額を地域構成の分析材料として一次資料へ接続",
     "primarySource": {
-      "organization": "社会・人口統計体系",
-      "publicationOrDataset": "社会・人口統計体系",
-      "datasetId": "0000010103",
-      "url": "https://www.stat.go.jp/data/ssds/index.htm",
+      "organization": "生産農業所得統計",
+      "publicationOrDataset": "生産農業所得統計",
+      "url": "https://www.e-stat.go.jp/stat-search/files?layout=datalist&lid=000001478969&page=1",
       "dataYears": [
         "1975",
         "1976",
@@ -14906,7 +14905,8 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_0: readonly JapanZueEvidenceItem[] = [
         "2020",
         "2021",
         "2022",
-        "2023"
+        "2023",
+        "2024"
       ],
       "checkedAt": "2026-08-29",
       "rights": "allowed"
@@ -14943,6 +14943,10 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_0: readonly JapanZueEvidenceItem[] = [
         "agricultural-income-statistics"
       ],
       "categoryKey": "agriculture",
+      "themeSlugs": [
+        "local-economy",
+        "agriculture-production"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],

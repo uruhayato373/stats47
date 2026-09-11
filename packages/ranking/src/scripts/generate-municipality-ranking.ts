@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { buildMunicipalityEntityPolicy } from '@stats47/area';
-import { getMetricConfig } from '@stats47/data-configs';
+import { getMetricConfig, resolveMetricSource } from '@stats47/data-configs';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   getMunicipalityMetricAvailability,
@@ -87,13 +87,14 @@ async function generateForKey(
   if (availability.status !== 'published') {
     throw new Error(`municipality ranking is not published: ${rankingKey}`);
   }
+  const source = resolveMetricSource(metric, 'city');
   if (
-    !('displayName' in metric.source) ||
-    !('url' in metric.source) ||
-    typeof metric.source.displayName !== 'string' ||
-    typeof metric.source.url !== 'string' ||
-    !metric.source.displayName ||
-    !metric.source.url
+    !('displayName' in source) ||
+    !('url' in source) ||
+    typeof source.displayName !== 'string' ||
+    typeof source.url !== 'string' ||
+    !source.displayName ||
+    !source.url
   ) {
     throw new Error(
       `municipality ranking source metadata is incomplete: ${rankingKey}`
@@ -121,8 +122,8 @@ async function generateForKey(
       description: metric.description,
       unit: metric.unit,
       source: {
-        displayName: metric.source.displayName,
-        url: metric.source.url,
+        displayName: source.displayName,
+        url: source.url,
       },
       valuePolicy: availability.valuePolicy,
     },

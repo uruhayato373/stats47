@@ -10,11 +10,11 @@ export const populationDensityPerKm2InhabitableArea: MetricConfig = {
     "statsDataId": "0000010201",
     "cdCat01": "#A01202",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
     "prefecture",
-    "city",
+    "city"
   ],
   "years": {
     "years": [
@@ -26,21 +26,22 @@ export const populationDensityPerKm2InhabitableArea: MetricConfig = {
       2010,
       2015,
       2020,
-      2023,
-    ],
+      2023
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
+    "isCalculated": false
   },
   "isActive": true,
+  "subtitle": "可住地1km²当たり"
 };

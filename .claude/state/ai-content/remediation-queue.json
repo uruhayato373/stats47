@@ -1,20 +1,23 @@
 {
-  "generatedAt": "2026-09-08T00:28:08.606Z",
+  "generatedAt": "2026-09-11T00:13:50.689Z",
   "gscSnapshot": "2026-W36",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2166,
+    "total": 2408,
     "done": 2166,
-    "needsRegen": 0,
-    "needsByReason": {},
+    "needsRegen": 242,
+    "needsByReason": {
+      "incomplete": 1,
+      "missing": 241
+    },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
     "doneImpressions": 73347,
-    "needsImpressions": 0,
-    "manualEscalationTier": 0,
+    "needsImpressions": 6,
+    "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
   "entries": [
@@ -10420,6 +10423,18 @@
       ],
       "lastModified": "Wed, 02 Sep 2026 11:26:57 GMT",
       "updatedAt": "2026-09-02T11:18:20.469Z"
+    },
+    {
+      "rankingKey": "gini-coefficient-disposable-income",
+      "impressions": 6,
+      "clicks": 0,
+      "position": 5.5,
+      "status": "needs-regen",
+      "reason": "incomplete",
+      "blockers": [
+        "missing-pref-commentary"
+      ],
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "annual-income-per-household",
@@ -28899,6 +28914,2416 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:37 GMT",
       "updatedAt": "2026-09-06T23:09:35.270Z"
+    },
+    {
+      "rankingKey": "construction-private-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "information-private-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "information-private-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "broadband-service-contract-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "broadband-contract-count-excluding-39-4g",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "patent-application-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "design-application-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "trademark-application-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "patent-registration-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "design-registration-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "trademark-registration-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "patent-inventor-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "furusato-donation-amount-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "furusato-donation-count-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "furusato-fundraising-cost-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "furusato-return-gift-procurement-cost-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "furusato-return-gift-shipping-cost-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "furusato-tax-deduction-municipal-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "furusato-tax-deduction-prefectural-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-eltax-online-application-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-recruitment-online-application-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-dx-online-procedure-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-dx-applicable-procedure-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-dx-online-procedure-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-auto-environment-tax-application-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-auto-environment-tax-online-application-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "prefectural-auto-environment-tax-online-application-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "landslide-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "landslide-special-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "manual-escalation"
+    },
+    {
+      "rankingKey": "debris-flow-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "debris-flow-special-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "steep-slope-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "steep-slope-special-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "landslip-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "landslip-special-warning-zone-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "business-opening-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "business-closure-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "business-opening-base-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "business-opening-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "business-closure-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "pm25-general-station-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "pm25-valid-general-station-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "pm25-compliant-general-station-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "pm25-general-station-compliance-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "tsunami-evacuation-building-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "tsunami-evacuation-tower-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "gini-coefficient-financial-assets",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-construction-contract-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-construction-contract-amount",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "foreign-worker-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "foreign-employing-establishment-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "domestic-travel-consumption-by-destination",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "inbound-travel-consumption-by-destination",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-consumption-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-food-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-housing-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-utilities-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-furniture-household-goods-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-clothing-footwear-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-healthcare-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-transport-communication-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-education-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-culture-recreation-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "household-survey-other-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-bridge-diagnosed-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-bridge-condition-iii-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-bridge-condition-iv-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-tunnel-diagnosed-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-tunnel-condition-iii-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-tunnel-condition-iv-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "general-perinatal-center-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-perinatal-center-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "delivery-hospital-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "delivery-clinic-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "prefecture-designated-cultural-property-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "prefectural-cultural-property-protection-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "buried-cultural-property-specialist-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "pig-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "food-manufacturing-shipment-amount",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "beef-cattle-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "layer-hen-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "dairy-cattle-holdings",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "food-manufacturing-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "food-manufacturing-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "construction-employed-residents",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "construction-employed-under30",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "construction-employed-age30to54",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "construction-employed-age55plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "construction-employed-female",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-under5-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-under5-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "specific-health-checkup-participation-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "specific-health-guidance-completion-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "metabolic-syndrome-prevalence-among-checkup-recipients",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "elementary5-fitness-score-male",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "elementary5-fitness-score-female",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "elementary5-weekly-exercise-420min-rate-male",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "elementary5-weekly-exercise-420min-rate-female",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "fit-fip-installed-capacity",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "fit-fip-new-approved-installed-capacity",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "fit-transition-installed-capacity",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-co2-emissions-estimate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-industry-co2-emissions-estimate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-business-co2-emissions-estimate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-household-co2-emissions-estimate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-transport-co2-emissions-estimate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-waste-co2-emissions-estimate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "media-production-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "media-production-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "media-production-revenue",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "media-production-net-value-added",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "amusement-industry-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "amusement-industry-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "amusement-industry-revenue",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "amusement-industry-net-value-added",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-households-income-under100",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-households-income-100to199",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-households-income-200to299",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-households-income-300to399",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-households-income-400to499",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-households-income-500plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-employment-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-father-employment-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-mother-public-assistance-households",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "child-rearing-allowance-recipients",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "vegetable-intake-male-age-adjusted",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "vegetable-intake-female-age-adjusted",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "salt-intake-male-age-adjusted",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "salt-intake-female-age-adjusted",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-late-dinner-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-breakfast-skipping-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "roundwood-production-volume",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "roundwood-sugi-production-volume",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "roundwood-hinoki-production-volume",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "sawmill-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "sawnwood-shipment-volume",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-establishments",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-revenue",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-net-value-added",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "gross-prefectural-product-information-communication-h27",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "enterprise-net-value-added-all-industries",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "private-establishment-net-value-added",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "employment-location-quotient-manufacturing",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "employment-location-quotient-information-communication",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "employment-location-quotient-health-welfare",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "forestry-management-entities",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "forestry-hired-workers",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "forestry-internal-workers",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "forestry-output-value",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "forestry-timber-output-value",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "forestry-mushroom-output-value",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "medical-physicians-under-40",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "medical-physicians-age-40-59",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "medical-physicians-age-60-plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "medical-physicians-pediatrics",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "medical-physicians-obstetrics-gynecology",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "medical-physicians-emergency-medicine",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "raw-milk-production",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "interprefecture-net-migration-age15to24",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "interprefecture-net-migration-age25to34",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-households-age65plus-male",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "single-households-age65plus-female",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "five-year-residence-same-address",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "five-year-residence-other-prefecture",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "heatstroke-emergency-transports",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "natural-disaster-deaths",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "natural-disaster-missing-persons",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "natural-disaster-injured-persons",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "natural-disaster-destroyed-houses",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "natural-disaster-half-destroyed-houses",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "natural-disaster-partially-damaged-houses",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-listed-persons",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-covered-persons",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "ambulance-transported-persons",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "ambulance-transported-deaths",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "ambulance-transported-severe",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "ambulance-transported-moderate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "ambulance-transported-mild",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "ambulance-transported-other",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-school-closures-cumulative",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "registered-museum-visitors",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "designated-museum-visitors",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "museum-like-facility-visitors",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "elementary-school-gymnasium-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "junior-high-school-gymnasium-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "inbound-visitors-by-destination",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "inbound-visit-sample-by-destination",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "vacant-housing-excluding-rental-sale-secondary",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "vacant-housing-for-rent",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "vacant-housing-for-sale",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "vacant-housing-secondary-residences",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "long-term-care-certified-persons",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "home-medical-visit-cases",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "home-nursing-visit-cases",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "new-cancer-incidence-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "daily-steps-male-20to64-age-adjusted",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "daily-steps-female-20to64-age-adjusted",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-quasi-national-park-visits",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "childcare-applicants",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "housing-land-debt-per-household",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "residential-land-transaction-median-price",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "residential-land-transaction-sample-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "residential-official-land-median-price",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "residential-official-land-point-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "poverty-support-new-consultation-cases",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "k6-score10plus-rate-12plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "k6-score10plus-estimated-persons-12plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "k6-known-score-estimated-persons-12plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "municipal-mental-health-consultation-extended-persons",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "consumer-consultation-accepted-cases",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "nonregular-employees-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "nonregular-continuation-wish-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "nonregular-job-change-wish-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "community-building-volunteer-participation-rate-10plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-industry-final-energy-consumption",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-business-final-energy-consumption",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-household-final-energy-consumption",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "regional-household-car-final-energy-consumption",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "prefectural-manager-female-share",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "prefectural-assembly-female-share",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-mother-under25",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-mother-age25to29",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-mother-age30to34",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-mother-age35to39",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-mother-age40plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-first-child",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-second-child",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "births-third-child-plus",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "prefectural-public-building-floor-area",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-water-pipe-aging-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-water-pipe-renewal-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-water-pipe-length",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-water-aged-pipe-length",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "public-water-renewed-pipe-length",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "retail-employees",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
     }
   ]
 }

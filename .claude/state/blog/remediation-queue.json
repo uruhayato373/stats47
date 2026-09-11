@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-08T00:52:26.049Z",
+  "generatedAt": "2026-09-11T00:45:21.103Z",
   "gscWeek": "2026-W36",
-  "auditGeneratedAt": "2026-09-08T00:52:26.018Z",
+  "auditGeneratedAt": "2026-09-11T00:45:21.075Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
@@ -1941,7 +1941,7 @@
         "flags": [
           "warning: [legacy-auto-normalized] [adjacent-callouts] callout が通常本文・見出し・図表を挟まず連続している (1 箇所・1 組・最大 2 個連続: L39 WARNING→TIP) — 最も重要な注意だけ callout に残し、分析・読み方・補足は通常本文へ戻すか、対応する節へ分散する",
           "warning: prose 1908<2400 (やや薄い)",
-          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 1 件 (nursing-home-capacity-per-1000-65plus(老人ホーム定員数)) — 本文で触れていないランキングへ誘導していないか確認する"
+          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 1 件 (nursing-home-capacity-per-1000-65plus(老人ホーム定員数（65歳以上人口千人当たり）)) — 本文で触れていないランキングへ誘導していないか確認する"
         ]
       },
       "wave_id": null,
@@ -2375,7 +2375,7 @@
         "prosePerChart": 2210,
         "conformance": 0.21,
         "flags": [
-          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 1 件 (private-rental-housing-rent-per-3-3m2(民営賃貸住宅の家賃)) — 本文で触れていないランキングへ誘導していないか確認する",
+          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 1 件 (private-rental-housing-rent-per-3-3m2(民営家賃（3.3m²当たり月額）)) — 本文で触れていないランキングへ誘導していないか確認する",
           "warning: paren-number: 都道府県名の直後に値・順位を括弧で併記 15 件 — 括弧内の数値は factual-check の照合対象外になり検証不能になる。「愛知県は746.0万人で4位」のように散文へ開くこと (blog-quality-standards.md「数値の書き方」)。例: L17神奈川県（6,670円） / L17大阪府（6,182円） / L17京都府（5,962円）"
         ]
       },
@@ -3921,7 +3921,7 @@
         "prosePerChart": 1003,
         "conformance": null,
         "flags": [
-          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 2 件 (avg-salary-all-prefecture(全職種 平均給与月額), private-rental-housing-rent-per-3-3m2(民営賃貸住宅の家賃)) — 本文で触れていないランキングへ誘導していないか確認する",
+          "warning: [offtopic-link] 指標名がそのセクションの本文に出てこない source-link が 2 件 (avg-salary-all-prefecture(全職種 平均給与月額), private-rental-housing-rent-per-3-3m2(民営家賃（3.3m²当たり月額）)) — 本文で触れていないランキングへ誘導していないか確認する",
           "warning: paren-number: 都道府県名の直後に値・順位を括弧で併記 14 件 — 括弧内の数値は factual-check の照合対象外になり検証不能になる。「愛知県は746.0万人で4位」のように散文へ開くこと (blog-quality-standards.md「数値の書き方」)。例: L2佐賀県               （39.5万円） / L11東京都（47.1万円） / L11大阪府（44.7万円）"
         ]
       },

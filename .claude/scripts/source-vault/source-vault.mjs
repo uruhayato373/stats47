@@ -1,12 +1,28 @@
 #!/usr/bin/env node
 
+/**
+ * 参考文献 private vault CLI (expanded layout)
+ *
+ * Google Drive のローカルマウント上 `stats47/参考文献/<資料名>/<版>/` に、原本 PDF・ページ画像・
+ * 文字起こし・図クロップを展開したまま置く。tar bundle と `r<N>` の不変 archive は 2026-09-10 に廃止した
+ * (分割の唯一の根拠だった Drive MCP の 100MB 上限がマウント経由では無関係になったため)。
+ *
+ *   create   source root (OS 一時領域) を歩いて Git manifest を書く
+ *   upload   manifest に載る file を vault directory へ複製し、readback で sha256 を照合する
+ *   verify   manifest と source root / vault directory の全 file を sha256 で照合する
+ *   restore  vault directory を OS 一時領域の work directory へ複製し、複製後に照合する
+ *   vault-root  マウントの解決結果を表示する
+ *   check-local repo 内に原本が残っていないことを確認する
+ *
+ * 正典: .claude/rules/reference-source-standards.md §2 / §3
+ */
+
 import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
+import { createReadStream, existsSync, readdirSync } from 'node:fs';
 import {
   access,
+  copyFile,
   mkdir,
-  mkdtemp,
-  open,
   readFile,
   readdir,
   rename,
@@ -14,12 +30,12 @@ import {
   stat,
   writeFile,
 } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { homedir, tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { spawn } from 'node:child_process';
 
-const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const SCRIPT_PATH = fileURLToPath(import.meta.url);
+const SCRIPT_DIR = path.dirname(SCRIPT_PATH);
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
 const PROFILE_CONFIG_PATH = path.join(
   PROJECT_ROOT,
@@ -27,7 +43,12 @@ const PROFILE_CONFIG_PATH = path.join(
   'config',
   'source-vault.json'
 );
-const DEFAULT_PART_SIZE_MIB = 90;
+export const VAULT_ROOT_ENV = 'STATS47_SOURCE_VAULT_ROOT';
+const MANIFEST_SCHEMA_VERSION = 2;
+// vault directory に置くが manifest の files[] には含めない補助 file
+const VAULT_IGNORED_NAMES = new Set(['.DS_Store', 'desktop.ini', 'Icon\r']);
+const VAULT_MANIFEST_PATTERN = /^stats47-[a-z0-9-]+\.manifest\.json$/;
+
 let DRIVE_ROOT_FOLDER;
 let DRIVE_COLLECTION_FOLDER;
 let PROFILE_NAME;
@@ -35,7 +56,6 @@ let SOURCE_KEY;
 let EDITION;
 let REVISION;
 let SOURCE_ROOT_NAME;
-let BUNDLE_FILE_NAME;
 let MANIFEST_FILE_NAME;
 let DEFAULT_SOURCE;
 let DEFAULT_OUTPUT_DIR;
@@ -50,6 +70,68 @@ function sourceWorkPath(sourceKey, edition, sourceRootName) {
     edition,
     sourceRootName
   );
+}
+
+/**
+ * Google Drive のローカルマウント上の `stats47` folder を解決する。
+ * env が最優先で、無ければ OS ごとの既知のマウント先を順に試す。
+ * 日本語ロケールの Drive アプリは `My Drive` ではなく `マイドライブ` を作る (2026-09-10 実測)。
+ */
+export function resolveVaultRoot({
+  env = process.env,
+  platform = process.platform,
+  homeDir = homedir(),
+  exists = existsSync,
+  listDir = (dir) => readdirSync(dir),
+  rootFolder = DRIVE_ROOT_FOLDER ?? 'stats47',
+  collectionFolder = DRIVE_COLLECTION_FOLDER ?? '参考文献',
+} = {}) {
+  const marker = collectionFolder;
+  const tried = [];
+  const isVault = (root) => exists(path.join(root, marker));
+
+  if (env[VAULT_ROOT_ENV]) {
+    const root = env[VAULT_ROOT_ENV].replace(/[\\/]+$/, '');
+    if (isVault(root)) return { root, source: `env:${VAULT_ROOT_ENV}` };
+    throw new Error(
+      `${VAULT_ROOT_ENV}=${root} does not contain ${marker}/ (env is authoritative; candidates are not tried)`
+    );
+  }
+
+  const candidates = [];
+  const driveFolderNames = ['マイドライブ', 'My Drive'];
+  if (platform === 'darwin') {
+    const cloud = path.join(homeDir, 'Library', 'CloudStorage');
+    let mounts = [];
+    try {
+      mounts = listDir(cloud).filter((name) => name.startsWith('GoogleDrive-'));
+    } catch {
+      mounts = [];
+    }
+    for (const mount of mounts)
+      for (const driveFolder of driveFolderNames)
+        candidates.push(path.join(cloud, mount, driveFolder, rootFolder));
+  }
+  if (platform === 'win32') {
+    for (const letter of ['G', 'H', 'I'])
+      for (const driveFolder of driveFolderNames)
+        candidates.push(path.join(`${letter}:\\`, driveFolder, rootFolder));
+  }
+  for (const driveFolder of driveFolderNames)
+    candidates.push(path.join(homeDir, 'Google Drive', driveFolder, rootFolder));
+
+  for (const candidate of candidates) {
+    tried.push(candidate);
+    if (isVault(candidate)) return { root: candidate, source: 'candidate' };
+  }
+  throw new Error(
+    `Google Drive vault root not found. Set ${VAULT_ROOT_ENV} to the mounted ${rootFolder}/ folder. Tried:\n- ${tried.join('\n- ')}`
+  );
+}
+
+function vaultDirectory() {
+  const { root } = resolveVaultRoot();
+  return path.join(root, DRIVE_COLLECTION_FOLDER, ...DRIVE_FOLDER_PATH.split('/').slice(1));
 }
 
 async function activateProfile(profileName) {
@@ -122,8 +204,7 @@ async function activateProfile(profileName) {
     profile.driveSourceFolderName,
     profile.driveEditionFolderName,
   ].join('/');
-  BUNDLE_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.tar.gz`;
-  MANIFEST_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.manifest.json`;
+  MANIFEST_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}.manifest.json`;
   DEFAULT_SOURCE = sourceWorkPath(SOURCE_KEY, EDITION, SOURCE_ROOT_NAME);
   DEFAULT_OUTPUT_DIR = path.join(
     tmpdir(),
@@ -137,33 +218,34 @@ async function activateProfile(profileName) {
 function usage() {
   return `Usage:
   node .claude/scripts/source-vault/source-vault.mjs create [options]
+  node .claude/scripts/source-vault/source-vault.mjs upload [options]
   node .claude/scripts/source-vault/source-vault.mjs verify [options]
   node .claude/scripts/source-vault/source-vault.mjs restore [options]
+  node .claude/scripts/source-vault/source-vault.mjs vault-root
   node .claude/scripts/source-vault/source-vault.mjs check-local
 
 create options:
   --profile <name>     Source profile from .claude/config/source-vault.json (default: ${PROFILE_NAME})
   --source <dir>       Source directory (default: ${DEFAULT_SOURCE})
-  --bundle <file>      Archive output (default: ${DEFAULT_OUTPUT_DIR}/${BUNDLE_FILE_NAME})
   --manifest <file>    Manifest output (default: ${DEFAULT_OUTPUT_DIR}/${MANIFEST_FILE_NAME})
-  --parts-dir <dir>    Part output directory (default: bundle directory)
-  --part-size-mib <n>  Part size below the Drive MCP 100 MB limit (default: ${DEFAULT_PART_SIZE_MIB})
-  --force              Replace existing generated outputs
+  --force              Replace an existing manifest
+
+upload options:
+  --manifest <file>    Required manifest
+  --source <dir>       Source directory to copy from (default: ${DEFAULT_SOURCE})
+  --force              Overwrite vault files whose sha256 differs from the manifest
 
 verify options:
   --manifest <file>    Required manifest
-  --bundle <file>      Verify archive bytes and SHA-256
-  --parts-dir <dir>    Verify every archive part
-  --source <dir>       Verify extracted source files and per-file SHA-256
+  --source <dir>       Verify a local source directory against the manifest
+  --vault              Verify the Drive vault directory against the manifest
 
 restore options:
   --manifest <file>    Required manifest
-  --bundle <file>      Required archive
-  --parts-dir <dir>    Use verified parts instead of --bundle
   --target <dir>       Restore target (default: OS temp source work directory)
 
-Drive destination: ${DRIVE_ROOT_FOLDER}/${DRIVE_FOLDER_PATH}
-The bundle is private source material. Do not place it inside the Git repository.`;
+Drive destination: ${DRIVE_ROOT_FOLDER}/${DRIVE_FOLDER_PATH}  (mount: ${VAULT_ROOT_ENV} or auto-detected)
+Files are private source material. Do not place them inside the Git repository.`;
 }
 
 async function checkLocalResidue() {
@@ -193,8 +275,8 @@ function parseArgs(argv) {
   const options = {};
   for (let index = 0; index < rest.length; index += 1) {
     const arg = rest[index];
-    if (arg === '--force') {
-      options.force = true;
+    if (arg === '--force' || arg === '--vault') {
+      options[arg.slice(2)] = true;
       continue;
     }
     if (!arg.startsWith('--')) throw new Error(`Unknown argument: ${arg}`);
@@ -229,8 +311,8 @@ function assertOutsideRepository(target, label) {
 }
 
 function normalizeRelative(filePath) {
-  // macOS の bsdtar は展開時に NFD で書き出すため、manifest(NFC) と実ファイル一覧の照合が同名で食い違う。
-  // 双方をここで NFC に揃える (2026-09-05 に日本語ファイル名の restore が「missing / unexpected」で失敗した)。
+  // macOS (APFS / Drive マウント) は日本語ファイル名を NFD で返すことがあるため、manifest(NFC) と
+  // 実ファイル一覧の照合を NFC に揃える (2026-09-05 に restore が「missing / unexpected」で失敗した)。
   const normalized = filePath.split(path.sep).join('/').normalize('NFC');
   if (
     normalized === '' ||
@@ -286,13 +368,24 @@ async function sha256File(filePath) {
   });
 }
 
-async function collectFiles(root) {
+function isVaultAuxiliary(name) {
+  return VAULT_IGNORED_NAMES.has(name) || VAULT_MANIFEST_PATTERN.test(name);
+}
+
+/**
+ * root 配下の全 file を manifest 形式 ({path,bytes,sha256}) で集める。
+ * `absolute` は復元・複製で実体を開くために保持し、manifest には書かない。
+ */
+async function collectFiles(root, { ignoreAuxiliary = false, hash = true } = {}) {
   const files = [];
   async function walk(current) {
     const entries = await readdir(current, { withFileTypes: true });
     entries.sort((left, right) => left.name.localeCompare(right.name, 'ja'));
     for (const entry of entries) {
       const absolute = path.join(current, entry.name);
+      if (VAULT_IGNORED_NAMES.has(entry.name)) continue;
+      if (ignoreAuxiliary && current === root && isVaultAuxiliary(entry.name))
+        continue;
       if (entry.isSymbolicLink())
         throw new Error(`Symlink is not allowed in source vault: ${absolute}`);
       if (entry.isDirectory()) {
@@ -303,7 +396,8 @@ async function collectFiles(root) {
         files.push({
           path: relative,
           bytes: fileStat.size,
-          sha256: await sha256File(absolute),
+          sha256: hash ? await sha256File(absolute) : null,
+          absolute,
         });
       } else {
         throw new Error(`Unsupported filesystem entry: ${absolute}`);
@@ -312,6 +406,14 @@ async function collectFiles(root) {
   }
   await walk(root);
   return files.sort((left, right) => left.path.localeCompare(right.path, 'ja'));
+}
+
+function stripAbsolute(files) {
+  return files.map(({ path: filePath, bytes, sha256 }) => ({
+    path: filePath,
+    bytes,
+    sha256,
+  }));
 }
 
 function componentCounts(files) {
@@ -341,94 +443,33 @@ function componentCounts(files) {
   return counts;
 }
 
-async function runTar(args, cwd) {
-  await new Promise((resolve, reject) => {
-    const child = spawn('tar', args, {
-      cwd,
-      env: { ...process.env, COPYFILE_DISABLE: '1', LANG: 'C', LC_ALL: 'C' },
-      stdio: ['ignore', 'inherit', 'inherit'],
-    });
-    child.on('error', reject);
-    child.on('exit', (code) => {
-      if (code === 0) resolve();
-      else reject(new Error(`tar exited with code ${code}`));
-    });
-  });
-}
-
-function partFileName(index) {
-  return `${BUNDLE_FILE_NAME}.part-${String(index).padStart(3, '0')}`;
-}
-
-async function splitBundle(bundlePath, partsDir, partSizeBytes, force) {
-  await mkdir(partsDir, { recursive: true });
-  const bundleStat = await stat(bundlePath);
-  const input = await open(bundlePath, 'r');
-  const parts = [];
-  const buffer = Buffer.allocUnsafe(1024 * 1024);
-  let sourceOffset = 0;
-  let partIndex = 1;
-  try {
-    while (sourceOffset < bundleStat.size) {
-      const fileName = partFileName(partIndex);
-      const partPath = path.join(partsDir, fileName);
-      if ((await pathExists(partPath)) && !force) {
-        throw new Error(
-          `Part already exists (use --force to replace generated output): ${partPath}`
-        );
-      }
-      if (force) await rm(partPath, { force: true });
-      const output = await open(partPath, 'w');
-      let partBytes = 0;
-      try {
-        while (partBytes < partSizeBytes && sourceOffset < bundleStat.size) {
-          const requested = Math.min(
-            buffer.length,
-            partSizeBytes - partBytes,
-            bundleStat.size - sourceOffset
-          );
-          const { bytesRead } = await input.read(
-            buffer,
-            0,
-            requested,
-            sourceOffset
-          );
-          if (bytesRead === 0)
-            throw new Error(`Unexpected EOF while splitting ${bundlePath}`);
-          await output.write(buffer, 0, bytesRead, partBytes);
-          sourceOffset += bytesRead;
-          partBytes += bytesRead;
-        }
-      } finally {
-        await output.close();
-      }
-      parts.push({
-        index: partIndex,
-        fileName,
-        bytes: partBytes,
-        sha256: await sha256File(partPath),
-      });
-      partIndex += 1;
-    }
-  } finally {
-    await input.close();
+/** 全 file の path と sha256 から決定的に導く内容 hash。processing workspace が同一性の照合に使う。 */
+export function contentSha256(files) {
+  const hash = createHash('sha256');
+  for (const file of [...files].sort((left, right) =>
+    left.path < right.path ? -1 : left.path > right.path ? 1 : 0
+  )) {
+    hash.update(`${file.path}\n${file.sha256}\n`);
   }
-  return parts;
+  return hash.digest('hex');
 }
 
 async function readManifest(manifestPath) {
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   if (
-    manifest.schemaVersion !== 1 ||
+    manifest.schemaVersion !== MANIFEST_SCHEMA_VERSION ||
     typeof manifest.sourceKey !== 'string' ||
     typeof manifest.edition !== 'string' ||
     !Number.isInteger(manifest.revision) ||
     typeof manifest.sourceRootName !== 'string' ||
-    !manifest.bundle ||
-    typeof manifest.bundle.fileName !== 'string' ||
+    manifest.storage?.layout !== 'expanded' ||
+    typeof manifest.storage?.folderPath !== 'string' ||
+    typeof manifest.contentSha256 !== 'string' ||
     !Array.isArray(manifest.files)
   ) {
-    throw new Error(`Unsupported or invalid manifest: ${manifestPath}`);
+    throw new Error(
+      `Unsupported or invalid manifest (schemaVersion ${MANIFEST_SCHEMA_VERSION}, storage.layout expanded required): ${manifestPath}`
+    );
   }
   if (
     !/^[a-z0-9][a-z0-9-]*$/.test(manifest.sourceKey) ||
@@ -437,20 +478,6 @@ async function readManifest(manifestPath) {
     throw new Error(`Unsafe sourceKey or edition in manifest: ${manifestPath}`);
   }
   assertSafeFileName(manifest.sourceRootName, 'manifest sourceRootName');
-  assertSafeFileName(manifest.bundle.fileName, 'manifest bundle fileName');
-  if (
-    !Array.isArray(manifest.bundle.parts) ||
-    manifest.bundle.parts.length === 0
-  ) {
-    throw new Error(`Manifest does not contain bundle parts: ${manifestPath}`);
-  }
-  const partNames = new Set();
-  for (const part of manifest.bundle.parts) {
-    assertSafeFileName(part.fileName, 'manifest part fileName');
-    if (partNames.has(part.fileName))
-      throw new Error(`Duplicate manifest part fileName: ${part.fileName}`);
-    partNames.add(part.fileName);
-  }
   const filePaths = new Set();
   for (const file of manifest.files) {
     assertSafeManifestPath(file.path, 'manifest file path');
@@ -458,119 +485,17 @@ async function readManifest(manifestPath) {
       throw new Error(`Duplicate manifest file path: ${file.path}`);
     filePaths.add(file.path);
   }
+  if (contentSha256(manifest.files) !== manifest.contentSha256)
+    throw new Error(`Manifest contentSha256 does not match files[]: ${manifestPath}`);
   return manifest;
 }
 
-async function verifyBundle(bundlePath, manifest) {
-  const bundleStat = await stat(bundlePath);
-  const actualSha256 = await sha256File(bundlePath);
-  const errors = [];
-  if (path.basename(bundlePath) !== manifest.bundle.fileName) {
-    errors.push(
-      `bundle file name: expected=${manifest.bundle.fileName} actual=${path.basename(bundlePath)}`
-    );
-  }
-  if (bundleStat.size !== manifest.bundle.bytes) {
-    errors.push(
-      `bundle bytes: expected=${manifest.bundle.bytes} actual=${bundleStat.size}`
-    );
-  }
-  if (actualSha256 !== manifest.bundle.sha256) {
-    errors.push(
-      `bundle sha256: expected=${manifest.bundle.sha256} actual=${actualSha256}`
-    );
-  }
-  if (errors.length > 0)
-    throw new Error(`Bundle verification failed:\n- ${errors.join('\n- ')}`);
-  return { bytes: bundleStat.size, sha256: actualSha256 };
-}
-
-async function verifyParts(partsDir, manifest) {
-  if (
-    !Array.isArray(manifest.bundle.parts) ||
-    manifest.bundle.parts.length === 0
-  ) {
-    throw new Error('Manifest does not contain bundle parts');
-  }
-  const errors = [];
-  let totalBytes = 0;
-  for (const expected of manifest.bundle.parts) {
-    const partPath = path.join(partsDir, expected.fileName);
-    if (!(await pathExists(partPath))) {
-      errors.push(`missing part: ${expected.fileName}`);
-      continue;
-    }
-    const partStat = await stat(partPath);
-    const actualSha256 = await sha256File(partPath);
-    totalBytes += partStat.size;
-    if (partStat.size !== expected.bytes) {
-      errors.push(
-        `part bytes ${expected.fileName}: expected=${expected.bytes} actual=${partStat.size}`
-      );
-    }
-    if (actualSha256 !== expected.sha256) {
-      errors.push(
-        `part sha256 ${expected.fileName}: expected=${expected.sha256} actual=${actualSha256}`
-      );
-    }
-  }
-  if (totalBytes !== manifest.bundle.bytes) {
-    errors.push(
-      `part total bytes: expected=${manifest.bundle.bytes} actual=${totalBytes}`
-    );
-  }
-  if (errors.length > 0)
-    throw new Error(`Part verification failed:\n- ${errors.join('\n- ')}`);
-  return { partCount: manifest.bundle.parts.length, bytes: totalBytes };
-}
-
-async function assembleParts(partsDir, outputPath, manifest) {
-  assertOutsideRepository(outputPath, 'Assembled bundle');
-  await verifyParts(partsDir, manifest);
-  await mkdir(path.dirname(outputPath), { recursive: true });
-  if (await pathExists(outputPath))
-    throw new Error(`Assembled bundle already exists: ${outputPath}`);
-  const output = await open(outputPath, 'w');
-  let outputOffset = 0;
-  const buffer = Buffer.allocUnsafe(1024 * 1024);
-  try {
-    for (const part of manifest.bundle.parts) {
-      const input = await open(path.join(partsDir, part.fileName), 'r');
-      let inputOffset = 0;
-      try {
-        while (inputOffset < part.bytes) {
-          const requested = Math.min(buffer.length, part.bytes - inputOffset);
-          const { bytesRead } = await input.read(
-            buffer,
-            0,
-            requested,
-            inputOffset
-          );
-          if (bytesRead === 0)
-            throw new Error(`Unexpected EOF while assembling ${part.fileName}`);
-          await output.write(buffer, 0, bytesRead, outputOffset);
-          inputOffset += bytesRead;
-          outputOffset += bytesRead;
-        }
-      } finally {
-        await input.close();
-      }
-    }
-  } finally {
-    await output.close();
-  }
-  await verifyBundle(outputPath, manifest);
-  return outputPath;
-}
-
-async function verifySource(sourcePath, manifest) {
-  const actualFiles = await collectFiles(sourcePath);
+function compareFiles(actualFiles, manifest, label) {
   const expectedByPath = new Map(
     manifest.files.map((file) => [file.path, file])
   );
   const actualByPath = new Map(actualFiles.map((file) => [file.path, file]));
   const errors = [];
-
   for (const expected of manifest.files) {
     const actual = actualByPath.get(expected.path);
     if (!actual) errors.push(`missing file: ${expected.path}`);
@@ -597,7 +522,7 @@ async function verifySource(sourcePath, manifest) {
         ? `\n- ... ${errors.length - visible.length} more`
         : '';
     throw new Error(
-      `Source verification failed:\n- ${visible.join('\n- ')}${suffix}`
+      `${label} verification failed:\n- ${visible.join('\n- ')}${suffix}`
     );
   }
   return {
@@ -606,64 +531,47 @@ async function verifySource(sourcePath, manifest) {
   };
 }
 
-async function createBundle(options) {
+async function verifySource(sourcePath, manifest) {
+  return compareFiles(await collectFiles(sourcePath), manifest, 'Source');
+}
+
+async function verifyVault(manifest) {
+  const vaultDir = vaultDirectory();
+  if (!(await pathExists(vaultDir)))
+    throw new Error(`Vault directory does not exist: ${vaultDir}`);
+  const result = compareFiles(
+    await collectFiles(vaultDir, { ignoreAuxiliary: true }),
+    manifest,
+    'Vault'
+  );
+  return { vaultDir, ...result };
+}
+
+async function createManifest(options) {
   const sourcePath = path.resolve(options.source ?? DEFAULT_SOURCE);
   assertOutsideRepository(sourcePath, 'Source directory');
-  const bundlePath = path.resolve(
-    options.bundle ?? path.join(DEFAULT_OUTPUT_DIR, BUNDLE_FILE_NAME)
-  );
   const manifestPath = path.resolve(
     options.manifest ?? path.join(DEFAULT_OUTPUT_DIR, MANIFEST_FILE_NAME)
   );
-  const partsDir = path.resolve(
-    options['parts-dir'] ?? path.dirname(bundlePath)
-  );
-  const partSizeMib = Number(options['part-size-mib'] ?? DEFAULT_PART_SIZE_MIB);
-  if (!Number.isInteger(partSizeMib) || partSizeMib < 1 || partSizeMib >= 100) {
-    throw new Error('--part-size-mib must be an integer from 1 to 99');
-  }
-  assertOutsideRepository(bundlePath, 'Bundle');
-  assertOutsideRepository(partsDir, 'Parts directory');
-
   const sourceStat = await stat(sourcePath);
   if (!sourceStat.isDirectory())
     throw new Error(`Source is not a directory: ${sourcePath}`);
-  if (path.basename(sourcePath) !== SOURCE_ROOT_NAME) {
+  if (path.basename(sourcePath).normalize('NFC') !== SOURCE_ROOT_NAME) {
     throw new Error(
       `Source root must be named ${SOURCE_ROOT_NAME}: ${sourcePath}`
     );
   }
-  for (const output of [bundlePath, manifestPath]) {
-    if ((await pathExists(output)) && !options.force) {
-      throw new Error(
-        `Output already exists (use --force to replace generated output): ${output}`
-      );
-    }
+  if ((await pathExists(manifestPath)) && !options.force) {
+    throw new Error(
+      `Manifest already exists (use --force to replace generated output): ${manifestPath}`
+    );
   }
-
-  await mkdir(path.dirname(bundlePath), { recursive: true });
   await mkdir(path.dirname(manifestPath), { recursive: true });
-  if (options.force) {
-    await rm(bundlePath, { force: true });
-    await rm(manifestPath, { force: true });
-  }
-
-  const files = await collectFiles(sourcePath);
+  const files = stripAbsolute(await collectFiles(sourcePath));
   if (files.length === 0)
     throw new Error(`Source directory is empty: ${sourcePath}`);
-  await runTar(
-    ['-czf', bundlePath, '-C', path.dirname(sourcePath), SOURCE_ROOT_NAME],
-    PROJECT_ROOT
-  );
-  const bundleStat = await stat(bundlePath);
-  const parts = await splitBundle(
-    bundlePath,
-    partsDir,
-    partSizeMib * 1024 * 1024,
-    options.force
-  );
   const manifest = {
-    schemaVersion: 1,
+    schemaVersion: MANIFEST_SCHEMA_VERSION,
     profile: PROFILE_NAME,
     sourceKey: SOURCE_KEY,
     edition: EDITION,
@@ -672,15 +580,10 @@ async function createBundle(options) {
     storage: {
       provider: 'google-drive',
       visibility: 'private',
+      layout: 'expanded',
       folderPath: DRIVE_FOLDER_PATH,
     },
-    bundle: {
-      fileName: BUNDLE_FILE_NAME,
-      format: 'tar.gz',
-      bytes: bundleStat.size,
-      sha256: await sha256File(bundlePath),
-      parts,
-    },
+    contentSha256: contentSha256(files),
     fileCount: files.length,
     componentCounts: componentCounts(files),
     createdAt: new Date().toISOString(),
@@ -691,13 +594,82 @@ async function createBundle(options) {
     `${JSON.stringify(manifest, null, 2)}\n`,
     'utf8'
   );
-  return { sourcePath, bundlePath, manifestPath, partsDir, manifest };
+  return { sourcePath, manifestPath, manifest };
+}
+
+function progress(done, total, label) {
+  if (done === total || done % 100 === 0)
+    process.stderr.write(`${label}: ${done}/${total}\n`);
+}
+
+/**
+ * source root の file を vault directory へ複製する。sha256 が一致する file は触らない。
+ * 複製後に vault 側を読み戻して manifest と照合する (マウントへの書き込みとクラウド同期の完了は別なので、
+ * ここで保証できるのはローカルマウント上の実体まで)。
+ */
+async function upload(options) {
+  if (!options.manifest) throw new Error('--manifest is required');
+  const manifest = await readManifest(path.resolve(options.manifest));
+  const sourcePath = path.resolve(options.source ?? DEFAULT_SOURCE);
+  assertOutsideRepository(sourcePath, 'Source directory');
+  await verifySource(sourcePath, manifest);
+  const vaultDir = vaultDirectory();
+  await mkdir(vaultDir, { recursive: true });
+  const existing = new Map(
+    (await collectFiles(vaultDir, { ignoreAuxiliary: true, hash: false })).map(
+      (file) => [file.path, file]
+    )
+  );
+  const summary = { copied: 0, unchanged: 0, replaced: 0 };
+  let done = 0;
+  for (const file of manifest.files) {
+    const target = path.join(vaultDir, ...file.path.split('/'));
+    const current = existing.get(file.path);
+    if (current) {
+      const currentSha = await sha256File(current.absolute);
+      if (currentSha === file.sha256 && current.bytes === file.bytes) {
+        summary.unchanged += 1;
+        done += 1;
+        progress(done, manifest.files.length, 'upload');
+        continue;
+      }
+      if (!options.force) {
+        throw new Error(
+          `Vault file differs from manifest; use --force to overwrite: ${file.path}`
+        );
+      }
+      summary.replaced += 1;
+    } else {
+      summary.copied += 1;
+    }
+    await mkdir(path.dirname(target), { recursive: true });
+    await copyFile(path.join(sourcePath, ...file.path.split('/')), target);
+    done += 1;
+    progress(done, manifest.files.length, 'upload');
+  }
+  const extra = [...existing.keys()].filter(
+    (filePath) => !manifest.files.some((file) => file.path === filePath)
+  );
+  await writeFile(
+    path.join(vaultDir, MANIFEST_FILE_NAME),
+    `${JSON.stringify(manifest, null, 2)}\n`,
+    'utf8'
+  );
+  const readback = await verifyVault(manifest);
+  return {
+    uploaded: true,
+    vaultDir,
+    ...summary,
+    unexpectedInVault: extra,
+    readback,
+    note: 'Local mount verified. Cloud sync completes asynchronously; confirm in Drive before deleting local copies.',
+  };
 }
 
 async function verify(options) {
   if (!options.manifest) throw new Error('--manifest is required');
-  if (!options.bundle && !options['parts-dir'] && !options.source) {
-    throw new Error('Provide --bundle, --parts-dir, and/or --source');
+  if (!options.vault && !options.source) {
+    throw new Error('Provide --source and/or --vault');
   }
   const manifestPath = path.resolve(options.manifest);
   const manifest = await readManifest(manifestPath);
@@ -706,45 +678,16 @@ async function verify(options) {
     sourceKey: manifest.sourceKey,
     edition: manifest.edition,
     revision: manifest.revision,
+    contentSha256: manifest.contentSha256,
   };
-  if (options.bundle)
-    result.bundle = await verifyBundle(path.resolve(options.bundle), manifest);
-  if (options['parts-dir'])
-    result.parts = await verifyParts(
-      path.resolve(options['parts-dir']),
-      manifest
-    );
   if (options.source)
     result.source = await verifySource(path.resolve(options.source), manifest);
+  if (options.vault) result.vault = await verifyVault(manifest);
   return result;
 }
 
-/**
- * 展開直後のファイル名を manifest と同じ NFC へ揃える。
- *
- * tar は作成時のバイト列をそのまま復元するため、macOS で NFD のまま固めた bundle を
- * Linux (byte-exact な ext4) で展開すると、manifest が NFC で宣言した path のファイルが
- * 開けない (verifySource は normalizeRelative で NFC に畳んでから比較するので気付けない)。
- * manifest の path が復元後の実体と一致することを restore の契約とし、ここで揃える。
- * 深い側から rename するので親の改名で子の path が無効にならない。
- */
-async function normalizeTreeToNfc(root) {
-  const entries = await readdir(root, { withFileTypes: true });
-  for (const entry of entries) {
-    const current = path.join(root, entry.name);
-    if (entry.isDirectory()) await normalizeTreeToNfc(current);
-    const nfc = entry.name.normalize('NFC');
-    if (nfc === entry.name) continue;
-    await rename(current, path.join(root, nfc));
-  }
-}
-
 async function restore(options) {
-  if (!options.manifest || (!options.bundle && !options['parts-dir'])) {
-    throw new Error(
-      'restore requires --manifest and either --bundle or --parts-dir'
-    );
-  }
+  if (!options.manifest) throw new Error('restore requires --manifest');
   const manifestPath = path.resolve(options.manifest);
   const manifest = await readManifest(manifestPath);
   const targetPath = path.resolve(
@@ -760,25 +703,20 @@ async function restore(options) {
     throw new Error(
       `Restore target already exists; refusing to overwrite: ${targetPath}`
     );
-  let bundlePath;
-  let removeAssembledBundle = false;
-  let assembledDir;
-  if (options.bundle) {
-    bundlePath = path.resolve(options.bundle);
-    await verifyBundle(bundlePath, manifest);
-  } else {
-    assembledDir = await mkdtemp(
-      path.join(tmpdir(), 'stats47-source-vault-restore-')
+  const vaultDir = vaultDirectory();
+  const vaultFiles = await collectFiles(vaultDir, {
+    ignoreAuxiliary: true,
+    hash: false,
+  });
+  const byPath = new Map(vaultFiles.map((file) => [file.path, file]));
+  const missing = manifest.files
+    .filter((file) => !byPath.has(file.path))
+    .map((file) => file.path);
+  if (missing.length > 0) {
+    throw new Error(
+      `Vault is missing ${missing.length} manifest file(s):\n- ${missing.slice(0, 20).join('\n- ')}`
     );
-    bundlePath = path.join(assembledDir, manifest.bundle.fileName);
-    await assembleParts(
-      path.resolve(options['parts-dir']),
-      bundlePath,
-      manifest
-    );
-    removeAssembledBundle = true;
   }
-
   const parent = path.dirname(targetPath);
   await mkdir(parent, { recursive: true });
   const staging = path.join(
@@ -787,20 +725,24 @@ async function restore(options) {
   );
   await mkdir(staging, { recursive: false });
   try {
-    await runTar(['-xzf', bundlePath, '-C', staging], PROJECT_ROOT);
-    await normalizeTreeToNfc(staging);
-    const extractedRoot = path.join(staging, manifest.sourceRootName.normalize('NFC'));
-    await verifySource(extractedRoot, manifest);
-    await rename(extractedRoot, targetPath);
+    let done = 0;
+    for (const file of manifest.files) {
+      const target = path.join(staging, ...file.path.split('/'));
+      await mkdir(path.dirname(target), { recursive: true });
+      await copyFile(byPath.get(file.path).absolute, target);
+      done += 1;
+      progress(done, manifest.files.length, 'restore');
+    }
+    await verifySource(staging, manifest);
+    await rename(staging, targetPath);
   } finally {
     await rm(staging, { recursive: true, force: true });
-    if (removeAssembledBundle && assembledDir)
-      await rm(assembledDir, { recursive: true, force: true });
   }
   return {
     targetPath,
+    vaultDir,
     fileCount: manifest.fileCount,
-    bundleSha256: manifest.bundle.sha256,
+    contentSha256: manifest.contentSha256,
   };
 }
 
@@ -812,19 +754,20 @@ async function main() {
     return;
   }
   let result;
-  if (command === 'create') result = await createBundle(options);
+  if (command === 'create') result = await createManifest(options);
+  else if (command === 'upload') result = await upload(options);
   else if (command === 'verify') result = await verify(options);
   else if (command === 'restore') result = await restore(options);
+  else if (command === 'vault-root')
+    result = { ...resolveVaultRoot(), profileVaultDir: vaultDirectory() };
   else if (command === 'check-local') result = await checkLocalResidue();
   else throw new Error(`Unknown command: ${command}\n${usage()}`);
 
   const printable = result.manifest
     ? {
         sourcePath: result.sourcePath,
-        bundlePath: result.bundlePath,
         manifestPath: result.manifestPath,
-        partsDir: result.partsDir,
-        bundle: result.manifest.bundle,
+        contentSha256: result.manifest.contentSha256,
         fileCount: result.manifest.fileCount,
         componentCounts: result.manifest.componentCounts,
       }
@@ -832,7 +775,9 @@ async function main() {
   console.log(JSON.stringify(printable, null, 2));
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : String(error));
-  process.exitCode = 1;
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === SCRIPT_PATH) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  });
+}

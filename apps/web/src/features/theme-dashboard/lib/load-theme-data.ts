@@ -1,5 +1,6 @@
 import "server-only";
 
+import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 import { fetchPrefectureTopology, fetchAllCitiesTopology } from "@stats47/gis/geoshape";
 import {
   readAllYearsRankingValuesFromR2,
@@ -64,6 +65,13 @@ export async function loadThemeData(
   options?: { areaType?: AreaType },
 ): Promise<ThemePageData | null> {
   const areaType: AreaType = options?.areaType ?? "prefecture";
+  const comparisonYears = new Map(
+    (THEME_CATALOGS[theme.themeKey]?.metricGroups ?? []).flatMap((group) =>
+      group.comparisonYear
+        ? group.rankingKeys.map((key) => [key, group.comparisonYear] as const)
+        : []
+    )
+  );
 
   // tabIndicators のキーと rankingKeys をマージ（重複排除）
   const tabKeys = theme.tabIndicators?.map((t) => t.rankingKey) ?? [];
@@ -105,7 +113,7 @@ export async function loadThemeData(
         });
 
   const valuesPromises = validItems.map(({ key, item }) => {
-    const yearCode = item.latestYear?.yearCode;
+    const yearCode = comparisonYears.get(key) ?? item.latestYear?.yearCode;
     if (!yearCode)
       return Promise.resolve({
         key,

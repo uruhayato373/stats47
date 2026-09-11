@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const drugEnforcementArrestCountPerPopulation: MetricConfig = {
   "key": "drug-enforcement-arrest-count-per-population",
   "title": "覚醒剤取締検挙件数",
-  "subtitle": "人口当たり",
+  "subtitle": "人口10万人当たり",
   "unit": "件",
   "category": "safetyenvironment",
+  "description": "覚醒剤取締検挙件数を総人口で除し、人口10万人当たりに換算した値。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
@@ -74,25 +75,9 @@ export const drugEnforcementArrestCountPerPopulation: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "件/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "件/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "drug-enforcement-arrest-count",
-  "seoTitle": "覚醒剤取締検挙件数ランキング都道府県【2023年】｜1位大阪府（13.3件）",
-  "seoDescription": "2023年の覚醒剤取締検挙件数の都道府県別ランキング。1位大阪府（13.3件）、最下位山形県（0.8件）で16.6倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "覚醒剤取締検挙件数（人口10万人当たり）ランキング都道府県",
+  "seoDescription": "人口10万人当たりの覚醒剤取締検挙件数を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
   "isActive": true,
 };

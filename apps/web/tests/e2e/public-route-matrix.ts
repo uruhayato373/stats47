@@ -70,7 +70,8 @@ export const PUBLIC_ROUTE_MATRIX: readonly PublicRouteContract[] = [
   },
 ] as const;
 
-/** ThemeCatalog 9 component typesを、実在routeと期待chart数へ固定する。 */
+/** 公開中のThemeCatalog component typesを、実在routeと期待chart数へ固定する。
+ * cpi-heatmapはline-chartへ移行済み。KPIは地方財政の専用章で検証する。 */
 export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   {
     id: "theme-aging",
@@ -78,7 +79,7 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     canonicalPath: "/themes/aging-society",
     heading: "少子高齢化",
     dataSelector: '[data-theme-chart="true"]',
-    expectedChartCount: 11,
+    expectedChartCount: 4,
     representativeTypes: ["line-chart", "composition-chart", "pyramid-chart", "markdown-section"],
   },
   {
@@ -87,8 +88,8 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     canonicalPath: "/themes/consumer-prices",
     heading: "物価・消費",
     dataSelector: '[data-theme-chart="true"]',
-    expectedChartCount: 3,
-    representativeTypes: ["cpi-profile", "cpi-heatmap"],
+    expectedChartCount: 2,
+    representativeTypes: ["cpi-profile", "line-chart"],
   },
   {
     id: "theme-education",
@@ -97,7 +98,7 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     heading: "教育・文化",
     dataSelector: '[data-theme-chart="true"]',
     expectedChartCount: 2,
-    representativeTypes: ["donut-chart"],
+    representativeTypes: ["line-chart"],
   },
   {
     id: "theme-fishery",
@@ -108,8 +109,17 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     canonicalPath: "/themes/fishery-marine",
     heading: "漁業（水産業）",
     dataSelector: '[data-theme-chart="true"]',
-    expectedChartCount: 6,
+    expectedChartCount: 5,
     representativeTypes: ["mixed-chart"],
+  },
+  {
+    id: "theme-local-economy",
+    path: "/themes/local-economy?pref=all",
+    canonicalPath: "/themes/local-economy",
+    heading: "地域経済",
+    dataSelector: '[data-theme-chart="true"]',
+    expectedChartCount: 2,
+    representativeTypes: ["donut-chart"],
   },
   {
     id: "theme-local-finance",

@@ -97,9 +97,8 @@ export interface CatalogChart {
   gridColumnSpanSm?: number | null;
   dataSource?: string | null;
   /**
-   * 視覚グループ見出し (null 許容)。
-   * 注: テーマ renderer (ThemeDbChartRenderer) は section を参照しない (flat grid 描画)。
-   * area ページの AreaChartSection はグループ見出しに使う。theme では現状メタデータ。
+   * 所属する CatalogSection.key (生成物の section にも保持)。
+   * テーマの章順・図順は ThemeCatalog.sections の参照配列が決める。
    */
   section?: string | null;
   sortOrder: number;
@@ -122,6 +121,10 @@ export interface CatalogChart {
  *   フォールバックするので、全テーマに書く必要はない。
  */
 export interface CatalogMetricGroup {
+  /** 固定年の県別比較。指定時は時系列を描かず、この年が欠けても最新年へ代替しない。 */
+  comparisonYear?: string;
+  /** 固定年の県別比較にタイル地図を追加する（率など地域差の比較用）。 */
+  comparisonMap?: boolean;
   /** kebab-case。テーマ内で一意 (React key・計測ラベルに使う) */
   key: string;
   /** カード見出し (例 "賃金水準と格差") */
@@ -133,6 +136,18 @@ export interface CatalogMetricGroup {
    * ここに入れた分だけ mount 時に時系列を取りに行くので 3 件以内が目安 (validator warn)。
    */
   defaultCheckedKeys: string[];
+}
+
+/** 指標・追加図・地図を、同じ読者の問いでまとめるページ内の章。 */
+export interface CatalogSection {
+  /** テーマ内で一意な kebab-case。ページ内リンクにも使う。 */
+  key: string;
+  title: string;
+  /** 図を読むための短い説明。内部の選定理由は selection に置く。 */
+  description?: string;
+  metricGroupKeys: string[];
+  chartKeys?: string[];
+  embeddedSectionKeys?: string[];
 }
 
 export interface CatalogEvidenceTopic {
@@ -191,6 +206,8 @@ export interface ThemeCatalog {
    * 1 グループ内の相異なる単位は 2 種まで (チャートの Y 軸が左右 2 本のため。validator error)。
    */
   metricGroups?: CatalogMetricGroup[];
+  /** 読者の問いに沿う章順。参照先は同じテーマ内に限る。 */
+  sections?: CatalogSection[];
   /** 白書等の論点を指標・チャート・周遊導線へ接続する Theme 従属メタデータ。 */
   evidenceTopics?: CatalogEvidenceTopic[];
   /** SEO キーワード */

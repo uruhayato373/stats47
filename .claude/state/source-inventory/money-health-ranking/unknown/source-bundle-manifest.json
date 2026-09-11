@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 2,
+  "profile": "money-health-ranking",
+  "sourceKey": "money-health-ranking",
+  "edition": "unknown",
+  "revision": 2,
+  "sourceRootName": "おカネと健康 都道府県ランキング",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "layout": "expanded",
+    "folderPath": "参考文献/おカネと健康 都道府県ランキング/版不明"
+  },
+  "contentSha256": "d7441447d4c228bbbe5912fe3e24676ff8f69959935b682834738e1daa5c3e56",
+  "fileCount": 62,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 60,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 1
+  },
+  "createdAt": "2026-09-09T22:34:48.871Z",
+  "files": [
+    {
+      "path": "page-dims.json",
+      "bytes": 581,
+      "sha256": "7b4725bade9bdd3fe06e843e44f06bcfb092933b3e9122d6be68efc3b6766b2e"
+    },
+    {
+      "path": "pages/p0001.jpg",
+      "bytes": 405654,
+      "sha256": "37bdc5ecd5661bf7db545bc09f9e17668a88fddb56657beb93bf5b5a803b7af6"
+    },
+    {
+      "path": "pages/p0002.jpg",
+      "bytes": 115339,
+      "sha256": "151d793ea4289ed5270074a7bb25fd237b72758892d3f29d530eb6eaa1e11014"
+    },
+    {
+      "path": "pages/p0003.jpg",
+      "bytes": 321085,
+      "sha256": "47bf9ea473cfa547ca55cc8df80bbbc579936ba18d704b594fe5d21b5c340850"
+    },
+    {
+      "path": "pages/p0004.jpg",
+      "bytes": 272197,
+      "sha256": "694db96d86ed74126f94382c1906d039f107dddf707e773ad0e73c2347fe054a"
+    },
+    {
+      "path": "pages/p0005.jpg",
+      "bytes": 432697,
+      "sha256": "9959b25c525ec502195b09b9e4d2fb91242f96250be0cac9b9a0bd6e54cc675f"
+    },
+    {
+      "path": "pages/p0006.jpg",
+      "bytes": 220924,
+      "sha256": "874d13dd97dadf68e440c4026b2707c55af92ff7d6b19a8075a4a21b879e6d13"
+    },
+    {
+      "path": "pages/p0007.jpg",
+      "bytes": 230517,
+      "sha256": "7bd179c3bc529a6d71331640b03dd84b7164fc8e80194cf8f657ce95ca346f72"
+    },
+    {
+      "path": "pages/p0008.jpg",
+      "bytes": 533566,
+      "sha256": "ea7c41417230d7fe9fdd9105a5b5c52e8f976f78ca0d92760484b1e353a10241"
+    },
+    {
+      "path": "pages/p0009.jpg",
+      "bytes": 402495,
+      "sha256": "80b85419dd0899dd4d28b72610968cfcc3964b1304dfb7861d2039cdb33ac7a5"
+    },
+    {
+      "path": "pages/p0010.jpg",
+      "bytes": 357825,
+      "sha256": "3255d8f3f680d43b85b7c7740989ce7f937dedf81536866d394f3438de9a1734"
+    },
+    {
+      "path": "pages/p0011.jpg",
+      "bytes": 475130,
+      "sha256": "7804adae5fb7ba5a3575df43f7292fa1e3db696ea8c1121bdb7f693312f6e53e"
+    },
+    {
+      "path": "pages/p0012.jpg",
+      "bytes": 348965,
+      "sha256": "17fac7156150188584f7ca8bd8cf6ea7405f370348f331cb2c2de3c439636ab6"
+    },
+    {
+      "path": "pages/p0013.jpg",
+      "bytes": 221680,
+      "sha256": "51d4d1b6791835ef1bb2460908d5bf2a61807d01f97b009c2e6de06cb7f3d3b0"
+    },
+    {
+      "path": "pages/p0014.jpg",
+      "bytes": 546898,
+      "sha256": "56b4b8b66094b104171be6e2dcb2b947b9819aacb3f96ea7ec141be8d50100d9"
+    },
+    {
+      "path": "pages/p0015.jpg",
+      "bytes": 391336,
+      "sha256": "d36ca5cbeb12027d2fc45e56f6080f3df2b09ca8244617be5475438e324f34f5"
+    },
+    {
+      "path": "pages/p0016.jpg",
+      "bytes": 300948,
+      "sha256": "44c8b44ca2369ff70516bd1429574079e99dceaafa7c4102728f65776a61020e"
+    },
+    {
+      "path": "pages/p0017.jpg",
+      "bytes": 345591,
+      "sha256": "be3504a69f06bb7a109caa430cf7e0771417857ec9ce7b03b2c0e4ad13457aad"
+    },
+    {
+      "path": "pages/p0018.jpg",
+      "bytes": 419379,
+      "sha256": "f320704a940397735b1e924e98b41c2abf8d26dc4c23541ec19aa17a04c53736"
+    },
+    {
+      "path": "pages/p0019.jpg",
+      "bytes": 530539,
+      "sha256": "a06f59badc911d7fab3e373cc36f769b651a0b296e828206aa6f86fbd17ef5f1"
+    },
+    {
+      "path": "pages/p0020.jpg",
+      "bytes": 385190,
+      "sha256": "4a4e76df3b77681870e54f0092e150ccb14b672f2962b64282214ed5c1076cce"
+    },
+    {
+      "path": "pages/p0021.jpg",
+      "bytes": 188260,
+      "sha256": "ffdbe35fcb2e6149ca9e38b54673300ba2836f4768560d1183e42d6af47965b3"
+    },
+    {
+      "path": "pages/p0022.jpg",
+      "bytes": 418387,
+      "sha256": "b0fb8d72b7c45797c11bd2ab9c586390e405473f7789576ab85fc0adab4a8246"
+    },
+    {
+      "path": "pages/p0023.jpg",
+      "bytes": 399033,
+      "sha256": "02141d337de77cadcdc009f693beae32605921fe51d7e6e180ac4b4f0f899d29"
+    },
+    {
+      "path": "pages/p0024.jpg",
+      "bytes": 180122,
+      "sha256": "f848edae4d5df9338f3a9ffc0fcfa40c650e9e705e67452bcd7fe7fbceceb366"
+    },
+    {
+      "path": "pages/p0025.jpg",
+      "bytes": 353956,
+      "sha256": "596835ed4497a684231982e6ca8c674e991a19dd45c0a322f08e882174c8a4dc"
+    },
+    {
+      "path": "pages/p0026.jpg",
+      "bytes": 422994,
+      "sha256": "59f6c58756f0041f866e3cba00db75db7831569a52c43794d07d95e402ce5baa"
+    },
+    {
+      "path": "pages/p0027.jpg",
+      "bytes": 293296,
+      "sha256": "76f05253d433d0d62a535a5fbda108075f0eae9bd2e4426f756ff36d88cb0f98"
+    },
+    {
+      "path": "pages/p0028.jpg",
+      "bytes": 417194,
+      "sha256": "deaeed0156b7698ccd321be96efd7638af1d3d1875a6c9171b610256821a6dd9"
+    },
+    {
+      "path": "pages/p0029.jpg",
+      "bytes": 428530,
+      "sha256": "6f01b877895aae68cf013e8a073568a9ce039c7f327d492d7746e28a97d2f60c"
+    },
+    {
+      "path": "pages/p0030.jpg",
+      "bytes": 473386,
+      "sha256": "7266d87b0f2de5931c096670fe62b61e886249033e16f1c17a5f2184c37f1cba"
+    },
+    {
+      "path": "pages/p0031.jpg",
+      "bytes": 312469,
+      "sha256": "e0bcec724cc4fee4505bb87775a1c5f1667f71ed84eb227316e6f42c535be993"
+    },
+    {
+      "path": "pages/p0032.jpg",
+      "bytes": 278619,
+      "sha256": "ac63610568a4475cb5fd35ab3ef73f5a91e2f9faa0f3cd19b621134ef858f5df"
+    },
+    {
+      "path": "pages/p0033.jpg",
+      "bytes": 251530,
+      "sha256": "172123dd10b4633e60c454d9b19960f11e7df7c7cc2784ecb6fbce244cfcb4e7"
+    },
+    {
+      "path": "pages/p0034.jpg",
+      "bytes": 605232,
+      "sha256": "8db5047058522c3bc766612c50c305aa5c765ba2d86658fc91925bc41e370f33"
+    },
+    {
+      "path": "pages/p0035.jpg",
+      "bytes": 397492,
+      "sha256": "e8bc10a5859705fc90e6780eb0ccf1855cc7b84840fd11d994dfd6fd82334c80"
+    },
+    {
+      "path": "pages/p0036.jpg",
+      "bytes": 505240,
+      "sha256": "d6794e9c3852eb7735e23e274e5f5a6aa8aea2740d779208cf7ea1cd2c9a2b9a"
+    },
+    {
+      "path": "pages/p0037.jpg",
+      "bytes": 215648,
+      "sha256": "03b3386212d4c1dd9ddda95bc46d88877f283818f53f2daba3e5c020a4754946"
+    },
+    {
+      "path": "pages/p0038.jpg",
+      "bytes": 368616,
+      "sha256": "00815c7109da9b9bc22850fccf14c6a47b24c734a0b8c82fd6501ee568a1baa0"
+    },
+    {
+      "path": "pages/p0039.jpg",
+      "bytes": 412923,
+      "sha256": "c46f7093c614676119a54e6525cbc98c5cc6bc19683fd9e82fe85ca7fa270a03"
+    },
+    {
+      "path": "pages/p0040.jpg",
+      "bytes": 310789,
+      "sha256": "272d0e124f7de4616b9d3891f2eeb18e3fbac09acef664d91eef75c49b04ff77"
+    },
+    {
+      "path": "pages/p0041.jpg",
+      "bytes": 384046,
+      "sha256": "ab4c7994b5fe3d5ec01555447eacfa4dad9a659ef942768e9e517f8e0533dff9"
+    },
+    {
+      "path": "pages/p0042.jpg",
+      "bytes": 467889,
+      "sha256": "d81a5209aca035d8b738a2095e5db6338d2ba2ed0dcdcc947023a4fc447f4ce3"
+    },
+    {
+      "path": "pages/p0043.jpg",
+      "bytes": 407834,
+      "sha256": "3d523f61299a1c302659ee934089b7702b70032c9f33744b61a86f58d7740ac7"
+    },
+    {
+      "path": "pages/p0044.jpg",
+      "bytes": 396294,
+      "sha256": "af0097367baeeeb1d36878a937114265740743241220a3da77d2f7890745b90e"
+    },
+    {
+      "path": "pages/p0045.jpg",
+      "bytes": 530083,
+      "sha256": "a621fdc4288fbb8fc20f5890e474b8af87a2cbe5898805c2fa4ff9c17e440cd7"
+    },
+    {
+      "path": "pages/p0046.jpg",
+      "bytes": 465343,
+      "sha256": "c29d496e89aef1e8cae903a254ac26d248d1c362c369c19e6b877c55f40000a1"
+    },
+    {
+      "path": "pages/p0047.jpg",
+      "bytes": 117986,
+      "sha256": "8bb83f6aa1a6454e8c5adb9187768d66b2bd74874d735913a259b9ae63cd63bc"
+    },
+    {
+      "path": "pages/p0048.jpg",
+      "bytes": 354321,
+      "sha256": "bab502126976be32393287faddafb7c6a2b34734eb16a5d363bbb840d8d0668d"
+    },
+    {
+      "path": "pages/p0049.jpg",
+      "bytes": 509505,
+      "sha256": "11e6026b456c11f68b05454fc5cd5c1f7e533456f875e27ceb56c84c0c28a751"
+    },
+    {
+      "path": "pages/p0050.jpg",
+      "bytes": 163837,
+      "sha256": "62ebd839e1bed517fbd3f5acc828889216452e7ecc799a52c7111c900366a327"
+    },
+    {
+      "path": "pages/p0051.jpg",
+      "bytes": 344365,
+      "sha256": "f46746a8c93f07929043b5ac620eb22b2ce807427d631a1c0a1759c34b8f52ba"
+    },
+    {
+      "path": "pages/p0052.jpg",
+      "bytes": 367206,
+      "sha256": "e8b5ea53fedc17fc58e4ad9bcc0b7cf515058dc632adfd18cc08473f22288478"
+    },
+    {
+      "path": "pages/p0053.jpg",
+      "bytes": 433534,
+      "sha256": "38dfabf044c6936e1c83a1e5ee8d883bd27c5fcdf741fda831a63a9b6d8e2e05"
+    },
+    {
+      "path": "pages/p0054.jpg",
+      "bytes": 228813,
+      "sha256": "ec6f9cf3e540a0feebb34a4f3812710de96d650e20dc565e2ace6342391cc18a"
+    },
+    {
+      "path": "pages/p0055.jpg",
+      "bytes": 84281,
+      "sha256": "fd4934dac76af1b4b1b859c87829e35d3b55cbc4591878a0ec20363a28707f94"
+    },
+    {
+      "path": "pages/p0056.jpg",
+      "bytes": 299620,
+      "sha256": "6ead45b2508c2e79cf2fdb010d9481d87efa16a527bd9f69a03535db1e5b327d"
+    },
+    {
+      "path": "pages/p0057.jpg",
+      "bytes": 300741,
+      "sha256": "5f94a78c1af4564cf01376e01ec696b522b4ab18e028fb1ed098600d1f86435f"
+    },
+    {
+      "path": "pages/p0058.jpg",
+      "bytes": 300741,
+      "sha256": "5f94a78c1af4564cf01376e01ec696b522b4ab18e028fb1ed098600d1f86435f"
+    },
+    {
+      "path": "pages/p0059.jpg",
+      "bytes": 300741,
+      "sha256": "5f94a78c1af4564cf01376e01ec696b522b4ab18e028fb1ed098600d1f86435f"
+    },
+    {
+      "path": "pages/p0060.jpg",
+      "bytes": 300741,
+      "sha256": "5f94a78c1af4564cf01376e01ec696b522b4ab18e028fb1ed098600d1f86435f"
+    },
+    {
+      "path": "おカネと健康 都道府県ランキング.pdf",
+      "bytes": 16994567,
+      "sha256": "fe6d3f745a00d43463e17b6856938008c7dc58f63a1057cea67c5c7dc70140ac"
+    }
+  ]
+}

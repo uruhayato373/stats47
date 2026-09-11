@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const nurseryTeacherAnnualIncome: MetricConfig = {
   "key": "nursery-teacher-annual-income",
   "title": "保育士の平均年収",
+  "description": "賃金構造基本統計調査の保育士について、きまって支給する現金給与額を12倍し年間賞与その他特別給与額を加えた年収換算額です。税・社会保険料を差し引く前の金額で、賞与の対象期間は月額給与の調査時点と異なります。",
   "unit": "万円",
   "category": "laborwage",
   "source": {
@@ -38,23 +39,7 @@ export const nurseryTeacherAnnualIncome: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "万円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "万円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "seoTitle": "保育士の平均年収 都道府県ランキング【2022年】｜1位東京都（450.8万円）",
   "seoDescription": "2022年の保育士の平均年収を都道府県別に比較。1位は東京都（450.8万円）、最下位は山形県（284.2万円）、最大と最小の差は1.6倍です。地図やグラフで47都道府県の違いを確認できます。",

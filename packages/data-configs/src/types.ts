@@ -393,6 +393,8 @@ export interface MetricConfig {
   category: CategoryKey;
   /** 観測値の取得元 */
   source: SourceConfig;
+  /** 県と取得元が異なる場合の市区町村専用e-Stat表。statsDataIdは市表そのものを指定する。 */
+  citySource?: EstatSource;
   /** 保持するエンティティ種別 (どの stats_* に相当するか) */
   entities: EntityKind[];
   /** 取得年範囲 */

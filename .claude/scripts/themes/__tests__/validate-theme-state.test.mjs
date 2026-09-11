@@ -118,7 +118,7 @@ test("retire-candidate は measured-low 両輪 (GSC+GA4 56d) + 根拠 2 で成�
         evidenceRefs: [".claude/todo/improvements.md", "56d 実測: imp 23 / pv 12 (measured-low)"],
         metrics: {
           gsc: { status: "measured-low", windowDays: 56, clicks: 0, impressions: 23 },
-          ga4: { status: "measured-low", windowDays: 56, pageViews: 12 },
+          ga4: { status: "measured-low", windowDays: 56, scope: "Japan", pageViews: 12 },
         },
       }),
       theme({ themeKey: "tourism" }),
@@ -180,4 +180,96 @@ test("baseline なし実験と根拠なし verdict 確定を弾く (E3)", (t) =>
   const out = JSON.parse(r.stdout).violations.join("\n");
   assert.match(out, /THEME-EXP-003: baseline 欠落/);
   assert.match(out, /THEME-EXP-004: verdict=effect-full なのに result が無い/);
+});
+
+
+test("国条件が不明な GA4 を統廃合の測定根拠にしない", (t) => {
+  const f = fixture({ portfolio: { schemaVersion: 1, themes: [
+    theme({ lifecycleStatus: "retire-candidate", evidenceRefs: ["evidence-a", "evidence-b"], metrics: {
+      gsc: { status: "measured", windowDays: 56, impressions: 4000, clicks: 100 },
+      ga4: { status: "measured", windowDays: 56, scope: "raw", pageViews: 1000 },
+    } }), theme({ themeKey: "tourism" }),
+  ] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const result = run(f);
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(JSON.parse(result.stdout).violations.join("\n"), /\[P4\]/);
+});
+
+const launchExperiment = (over = {}) => ({ experimentId: "LAUNCH-TEST", themeKey: "tourism", changeType: "launch",
+  hypothesis: "初回公開の閲覧数を観測する", primaryKpi: "ga4.pageViews", guardrailKpis: ["gsc.impressions"],
+  baseline: null, baselineStatus: "not-applicable-new-url", startedAt: null, evaluateAt: null,
+  result: null, verdict: "pending", ...over });
+
+test("new launch with explicit absent baseline is valid, without a publication clock", (t) => {
+  const f = fixture({ portfolio: { themes: [theme(), theme({ themeKey: "tourism" })] },
+    experiments: { experiments: [launchExperiment()] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  assert.equal(run(f).status, 0);
+});
+
+test("launch fake baseline, effect verdict, review without evidence, and inconsistent schedule are invalid", (t) => {
+  for (const patch of [ { baseline: { "ga4.pageViews": 0 } }, { baselineStatus: undefined },
+    { verdict: "effect-full", result: {}, evidenceRefs: ["source.csv"] }, { verdict: "launch-reviewed" },
+    { startedAt: "2026-09-09", evaluateAt: { d7: "2026-09-17", d28: "2026-10-07", d56: "2026-11-04" } },
+    { themeKey: "unregistered" },
+  ]) {
+    const f = fixture({ portfolio: { themes: [theme(), theme({ themeKey: "tourism" })] },
+      experiments: { experiments: [launchExperiment(patch)] } });
+    t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+    const result = run(f);
+    assert.equal(result.status, 1, JSON.stringify(patch));
+  }
+});
+
+test("new 28-day metrics obey the same unknown/low-sample numeric rules", (t) => {
+  const f = fixture({ portfolio: { themes: [theme(), theme({ themeKey: "tourism", metrics28d: {
+    ga4: { status: "measured-low", pageViews: 2, engagementRatePvWeighted: 0.8, windowDays: 28 },
+  } })] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const result = run(f);
+  assert.equal(result.status, 1);
+  assert.match(JSON.parse(result.stdout).violations.join("\n"), /metrics28d.ga4/);
+});
+
+test('expanded catalog spread requires every runtime theme in portfolio', (t) => {
+  const f = fixture({
+    portfolio: { schemaVersion: 1, themes: [theme()] },
+    catalogKeys: ['aging-society'],
+  });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  fs.writeFileSync(
+    path.join(f.root, 'expanded.ts'),
+    'export const EXPANDED = { "retail-commerce": {} };\n'
+  );
+  fs.writeFileSync(
+    f.idx,
+    'import { EXPANDED } from "./expanded";\nconst BASE = { "aging-society": {}, ...EXPANDED };\nexport const THEME_CATALOGS = Object.fromEntries(Object.entries(BASE));\n'
+  );
+  const missing = run(f);
+  assert.equal(missing.status, 1);
+  assert.ok(
+    JSON.parse(missing.stdout).violations.some(
+      (v) => v.includes('retail-commerce') && v.includes('portfolio に無い')
+    )
+  );
+  const pf = JSON.parse(
+    fs.readFileSync(path.join(f.stateDir, 'portfolio.json'), 'utf8')
+  );
+  pf.themes.push(theme({ themeKey: 'retail-commerce' }));
+  fs.writeFileSync(path.join(f.stateDir, 'portfolio.json'), JSON.stringify(pf));
+  assert.equal(run(f).status, 0);
+});
+
+test('an existing catalog that fails to load cannot silently skip coverage', (t) => {
+  const f = fixture({ portfolio: { schemaVersion: 1, themes: [theme()] } });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  fs.writeFileSync(f.idx, 'import "./missing-catalog-module";\n');
+  const result = run(f);
+  assert.equal(result.status, 1);
+  assert.ok(
+    JSON.parse(result.stdout).violations.some((v) =>
+      v.includes('THEME_CATALOGS 読込失敗')
+    )
+  );
 });

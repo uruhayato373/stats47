@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const violentCrimePer100k: MetricConfig = {
   "key": "violent-crime-per-100k",
   "title": "粗暴犯認知件数",
-  "description": "暴行・傷害・脅迫・恐喝の認知件数。人口10万人当たり。",
+  "description": "犯罪統計で粗暴犯に分類される事件を警察が認知した年間総件数。",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

@@ -3,9 +3,10 @@ import type { MetricConfig } from "../types";
 export const annualEmergencyDispatchesPer1000: MetricConfig = {
   "key": "annual-emergency-dispatches-per-1000",
   "title": "年間救急出動件数",
+  "subtitle": "人口千人当たり",
   "unit": "件",
   "category": "safetyenvironment",
-  "description": "救急自動車による年間の救急出動件数を総人口で除し、人口1,000人当たりに換算した値。",
+  "description": "救急自動車による年間の救急出動件数を総人口で除し、人口千人当たりに換算した値。",
   "note": "出動件数には急病、一般負傷、交通、転院搬送のほか、火災、自然災害、水難など消防庁が定める事故種別を含む。",
   "source": {
     "kind": "estat",
@@ -33,24 +34,8 @@ export const annualEmergencyDispatchesPer1000: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "件/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "件/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
-  "seoTitle": "年間救急出動件数ランキング都道府県【2023年】｜1位大阪府（78.7件）",
-  "seoDescription": "2023年の年間救急出動件数の都道府県別ランキング。1位大阪府（78.7件）、最下位福井県（46.2件）で1.7倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "救急出動件数（人口千人当たり）ランキング都道府県",
+  "seoDescription": "人口千人当たりの救急出動件数を都道府県別に比較。総数とは区別し、人口規模を揃えて地域差と経年変化を地図やグラフで確認できます。",
   "isActive": true,
 };

@@ -27,6 +27,12 @@ import { PORTS_SET } from "./ports";
 import { RAILWAY_SET } from "./railway";
 import { ROADS_SET } from "./roads";
 import { CLIMATE_SET } from "./climate";
+import { CONSTRUCTION_INDUSTRY_SET } from "./construction-industry";
+import { WASTE_RECYCLING_SET } from "./waste-recycling";
+import { INFORMATION_INDUSTRY_SET } from "./information-industry";
+import { EXPANDED_THEME_SETS } from "./expanded";
+
+export { EXPANDED_THEME_SETS };
 
 // ============================================================================
 // 個別 export（直接参照用）
@@ -54,6 +60,10 @@ export {
   RAILWAY_SET,
   ROADS_SET,
   CLIMATE_SET,
+  CONSTRUCTION_INDUSTRY_SET,
+  WASTE_RECYCLING_SET,
+  INFORMATION_INDUSTRY_SET,
+
   COMPARE_FISCAL_SET,
   COMPARE_SALARY_SET,
   COMPARE_SPENDING_SET,
@@ -88,6 +98,10 @@ export const THEME_INDICATOR_SETS: IndicatorSet[] = [
   RAILWAY_SET,
   ROADS_SET,
   CLIMATE_SET,
+  CONSTRUCTION_INDUSTRY_SET,
+  WASTE_RECYCLING_SET,
+  INFORMATION_INDUSTRY_SET,
+  ...EXPANDED_THEME_SETS,
 ];
 
 // ============================================================================

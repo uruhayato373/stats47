@@ -64,7 +64,10 @@ function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {
       }
     : process.env;
 
-  return spawn(process.execPath, [nextBin, 'dev', '--port', String(nextPort)], {
+  const hostArgs = process.env.WEB_DEV_HOST
+    ? ['--hostname', process.env.WEB_DEV_HOST]
+    : [];
+  return spawn(process.execPath, [nextBin, 'dev', '--port', String(nextPort), ...hostArgs], {
     cwd: APP_ROOT,
     env,
     stdio: 'inherit',

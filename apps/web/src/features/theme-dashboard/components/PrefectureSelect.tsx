@@ -1,19 +1,24 @@
-"use client";
+'use client';
 
-import { PREFECTURE_LIST_2DIGIT, to5DigitPrefCode } from "@stats47/area";
-import { cn } from "@stats47/components";
+import { PREFECTURE_LIST_2DIGIT, to5DigitPrefCode } from '@stats47/area';
+import { cn } from '@stats47/components';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@stats47/components/atoms/ui/select";
+} from '@stats47/components/atoms/ui/select';
 
-import { THEME_PREFECTURE_SET_VALUE } from "../lib/theme-prefecture-preference";
-import { PREFECTURE_SET_LABEL } from "../types";
+import { trackNavClick } from '@/lib/analytics/events';
 
-import { useThemePrefecture } from "./ThemePrefectureContext";
+import {
+  resolveThemePrefectureCode,
+  THEME_PREFECTURE_SET_VALUE,
+} from '../lib/theme-prefecture-preference';
+import { PREFECTURE_SET_LABEL } from '../types';
+
+import { useThemePrefecture } from './ThemePrefectureContext';
 
 /**
  * 未選択 (47都道府県一覧) を表す Select 用センチネル値。
@@ -25,17 +30,32 @@ import { useThemePrefecture } from "./ThemePrefectureContext";
  * URL `?pref=` も同期される (同期は ThemePrefectureContext 側)。value は 5桁コードに統一。
  */
 export function PrefectureSelect({ className }: { className?: string } = {}) {
-  const { selectedPrefectureCode, setSelected } = useThemePrefecture();
+  const { selectedPrefectureCode, selectedAreaName, setSelected } = useThemePrefecture();
+  const selectedLabel = selectedPrefectureCode
+    ? (selectedAreaName ?? resolveThemePrefectureCode(selectedPrefectureCode)?.areaName)
+    : PREFECTURE_SET_LABEL;
   return (
     <Select
       value={selectedPrefectureCode ?? THEME_PREFECTURE_SET_VALUE}
-      onValueChange={(v) => setSelected(v === THEME_PREFECTURE_SET_VALUE ? null : v)}
+      onValueChange={(v) => {
+        setSelected(v === THEME_PREFECTURE_SET_VALUE ? null : v);
+        trackNavClick({
+          surface: 'theme_region',
+          label: v,
+          href: `?pref=${v}`,
+        });
+      }}
     >
-      <SelectTrigger className={cn("w-36", className)} aria-label="都道府県を選択">
-        <SelectValue />
+      <SelectTrigger
+        className={cn('w-36', className)}
+        aria-label="都道府県を選択"
+      >
+        <SelectValue>{selectedLabel}</SelectValue>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value={THEME_PREFECTURE_SET_VALUE}>{PREFECTURE_SET_LABEL}</SelectItem>
+        <SelectItem value={THEME_PREFECTURE_SET_VALUE}>
+          {PREFECTURE_SET_LABEL}
+        </SelectItem>
         {PREFECTURE_LIST_2DIGIT.map((p) => (
           <SelectItem key={p.code} value={to5DigitPrefCode(p.code)}>
             {p.name}

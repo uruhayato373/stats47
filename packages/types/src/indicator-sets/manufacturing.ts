@@ -6,7 +6,7 @@ import type { IndicatorSet } from "../indicator-set";
 export const MANUFACTURING_SET: IndicatorSet = {
   "key": "manufacturing",
   "title": "製造業",
-  "description": "都道府県別の製造品出荷額・付加価値額・事業所数・従業者数をランキングとチャートで比較。製造業の地域差を47都道府県のデータで確認できます。",
+  "description": "製造業の生産規模、拠点と雇用、人員当たりの出荷規模を比較する。",
   "category": "industry",
   "usage": "theme",
   "metrics": [
@@ -37,12 +37,12 @@ export const MANUFACTURING_SET: IndicatorSet = {
     },
     {
       "rankingKey": "manufacturing-shipment-amount-per-employee",
-      "shortLabel": "出荷額/人",
+      "shortLabel": "出荷額等（従業者1人当たり）",
       "role": "secondary"
     },
     {
       "rankingKey": "manufacturing-shipment-amount-per-establishment",
-      "shortLabel": "出荷額/所",
+      "shortLabel": "出荷額等（1事業所当たり）",
       "role": "context"
     },
     {
@@ -54,6 +54,26 @@ export const MANUFACTURING_SET: IndicatorSet = {
       "rankingKey": "industrial-water-usage",
       "shortLabel": "工業用水量",
       "role": "context"
+    },
+    {
+      "rankingKey": "food-manufacturing-establishments",
+      "shortLabel": "食料品製造業の事業所数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "food-manufacturing-employees",
+      "shortLabel": "食料品製造業の従業者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "food-manufacturing-shipment-amount",
+      "shortLabel": "食料品製造業の出荷額等",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "factory-location-area-annual",
+      "shortLabel": "工場立地敷地面積（年次）",
+      "role": "secondary"
     }
   ],
   "keywords": [

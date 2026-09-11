@@ -6,18 +6,18 @@ import type { IndicatorSet } from "../indicator-set";
 export const TOURISM_SET: IndicatorSet = {
   "key": "tourism",
   "title": "観光",
-  "description": "都道府県別の宿泊者数・外国人宿泊者数・客室稼働率をランキングとチャートで比較。観光需要の地域差を47都道府県のデータで確認できます。",
+  "description": "来訪者の宿泊需要、受入供給と利用率、交通アクセスの違いを把握する。",
   "category": "tourism",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "total-overnight-guests",
-      "shortLabel": "宿泊者数",
+      "shortLabel": "延べ宿泊者数（総数）",
       "role": "primary"
     },
     {
       "rankingKey": "total-overnight-guests-foreign",
-      "shortLabel": "外国人宿泊",
+      "shortLabel": "外国人延べ宿泊者数",
       "role": "secondary"
     },
     {
@@ -28,7 +28,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "travel-participation-rate-domestic-tourism",
       "shortLabel": "国内旅行率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "travel-participation-rate-overseas",
@@ -69,6 +69,31 @@ export const TOURISM_SET: IndicatorSet = {
       "rankingKey": "number-of-hotel-rooms",
       "shortLabel": "ホテル客室数",
       "role": "context"
+    },
+    {
+      "rankingKey": "inbound-visitors-by-destination",
+      "shortLabel": "訪日外国人の訪問者数（推計）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "inbound-visit-sample-by-destination",
+      "shortLabel": "訪問者数推計の県別回答数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "domestic-travel-consumption-by-destination",
+      "shortLabel": "日本人旅行者の県内消費額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "inbound-travel-consumption-by-destination",
+      "shortLabel": "訪日外国人旅行者の県内消費額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "airport-count",
+      "shortLabel": "空港数",
+      "role": "secondary"
     }
   ],
   "keywords": [

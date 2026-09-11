@@ -30,6 +30,8 @@
  *   bowling-alley-public = 公共ボウリング場が最良年 (2015) でも値 1 の県が 2 つだけ
  *   unemployment-measures-project-expenses-prefecture = 失業対策事業は 1996 年廃止で 2007 年以降全年 0
  *   config isActive:false + KNOWN 再生成 (2176→2173) とセットで実施）
+ * 更新日: 2026-09-10（gini-coefficient-disposable-income を元の全国家計構造調査
+ *   0003440743へ切替。47県の小数値と公式全国値を照合したためactiveへ復帰）
  * 更新日: 2026-08-06（COVERAGE-SOFT404-01。GSC が soft404 判定した空 ranking 39 件を退役。
  *   いずれも (a) metric config が存在しない (b) KNOWN_RANKING_KEYS 未登録 (c) R2 values.json も無い、の
  *   3 条件をすべて満たす死にキーで、本番は HTTP 200 + 「ランキングが見つかりません」の soft404 を返していた。
@@ -231,7 +233,6 @@ export const GONE_RANKING_KEYS = new Set([
   "gdp-growth-rate-pref-h27",
   "general-funds-municipality",
   "general-household-members",
-  "gini-coefficient-disposable-income",
   "goods-services-net-exports-imports-nominal-h27",
   "green-corridor-area",
   "gross-capital-formation-nominal-h27",
@@ -251,7 +252,6 @@ export const GONE_RANKING_KEYS = new Set([
   "gross-prefectural-product-fisheries-h27",
   "gross-prefectural-product-forestry-h27",
   "gross-prefectural-product-health-social-h27",
-  "gross-prefectural-product-information-communication-h27",
   "gross-prefectural-product-manufacturing-h27",
   "gross-prefectural-product-mining-h27",
   "gross-prefectural-product-primary-industry-h27",

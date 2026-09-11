@@ -3,8 +3,8 @@ import type { MetricConfig } from "../types";
 export const deathsCerebrovascularDiseasePer100k: MetricConfig = {
   "key": "deaths-cerebrovascular-disease-per-100k",
   "title": "脳血管疾患による死亡者数",
-  "subtitle": "人口10万人当たり",
-  "description": "脳梗塞や脳内出血など脳血管疾患による死亡者数を、人口10万人当たりで示した値。",
+  "subtitle": "日本人人口10万人当たり",
+  "description": "人口動態調査の脳血管疾患による死亡者数を日本人人口で除し、10万倍した値です。年齢調整死亡率ではありません。",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
@@ -12,10 +12,10 @@ export const deathsCerebrovascularDiseasePer100k: MetricConfig = {
     "statsDataId": "0000010209",
     "cdCat01": "#I06106",
     "displayName": "社会・人口統計体系",
-    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
+    "prefecture"
   ],
   "years": {
     "years": [
@@ -52,40 +52,24 @@ export const deathsCerebrovascularDiseasePer100k: MetricConfig = {
       2009,
       2010,
       2011,
-      2023,
-    ],
+      2023
+    ]
   },
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateReds",
     "colorSchemeType": "sequential",
-    "minValueType": "data-min",
+    "minValueType": "data-min"
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 1
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "groupKey": "deaths-cerebrovascular-disease",
   "seoTitle": "脳血管疾患による死亡者数ランキング都道府県【2023年】｜1位秋田県（173.4人）",
   "seoDescription": "2023年の脳血管疾患による死亡者数の都道府県別ランキング。1位秋田県（173.4人）、最下位滋賀県（62.7人）で2.8倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": true
 };

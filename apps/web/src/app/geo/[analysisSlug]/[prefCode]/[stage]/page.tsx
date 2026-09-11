@@ -7,13 +7,14 @@ import {
   GeoCrossAnalysisArticle,
   GEO_CROSS_ANALYSIS_CONFIGS,
   isGeoCrossAnalysisSlug,
-  isGeoStationAccessView,
+  isGeoSpatialView,
 } from '@/features/geo-analysis';
 
 import type { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ analysisSlug: string; prefCode: string; stage: string }>;
+  searchParams: Promise<{ group?: string }>;
 };
 export const revalidate = 86400;
 
@@ -39,19 +40,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function GeoSpatialStagePage({ params }: Props) {
+export default async function GeoSpatialStagePage({
+  params,
+  searchParams,
+}: Props) {
   const { analysisSlug, prefCode, stage } = await params;
   if (
     !isGeoCrossAnalysisSlug(analysisSlug) ||
     !PREFECTURE_LIST_2DIGIT.some((p) => p.code === prefCode) ||
-    !isGeoStationAccessView(stage)
+    !isGeoSpatialView(stage, analysisSlug)
   )
     notFound();
+  const query = await searchParams;
   return (
     <GeoCrossAnalysisArticle
       slug={analysisSlug}
       initialPrefCode={prefCode}
       initialStage={stage}
+      initialFacilityGroup={
+        query.group === 'meeting' ? 'meeting' : 'administrative'
+      }
     />
   );
 }
