@@ -6,12 +6,14 @@
   "runtime": {
     "expected": 110,
     "checked": 110,
-    "failed": 1
+    "failed": 2
   },
   "problems": [
-    "aging-society/1440:chart:theme-population-pyramid:source-unavailable",
-    "aging-society/1440:network:503",
-    "runtime-process:1"
+    "occupation-salary/390:chart:theme-occ-edu-trend:source-unavailable",
+    "occupation-salary/390:network:503",
+    "runtime-process:1",
+    "safety/390:chart:traffic-accident-deaths-trend:source-unavailable",
+    "safety/390:network:503"
   ],
   "checkpoints": [
     {
@@ -128,8 +130,8 @@
       "verdict": "insufficient-data"
     }
   ],
-  "alertBody": "# テーマ継続確認\n- aging-society/1440:chart:theme-population-pyramid:source-unavailable\n- aging-society/1440:network:503\n- runtime-process:1\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "3dd4ee6314364ea4a1ff36d5be77167cfc1d443498134df3d4a5cc073c3be25a",
+  "alertBody": "# テーマ継続確認\n- occupation-salary/390:chart:theme-occ-edu-trend:source-unavailable\n- occupation-salary/390:network:503\n- runtime-process:1\n- safety/390:chart:traffic-accident-deaths-trend:source-unavailable\n- safety/390:network:503\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "1c3a9d95387e377e8d374287797669f0ca8920d1e1a7c92506de572ac5cf5d7b",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34658514515"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34659520106"
 }
