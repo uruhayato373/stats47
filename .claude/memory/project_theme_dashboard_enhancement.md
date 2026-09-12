@@ -56,3 +56,5 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 - **監査の本文待ちにも期限を置く**: エラーHTTP応答の本文取得にはナビゲーションtimeoutが効かず、初回CIは65/110で全体timeoutになった。`response.body()`等の証拠取得にも期限を付け、取得不能自体を保存して後続画面を検査する。固定年比較表はKPIカードとは別に年と行数を検証する。画面仕様の誤認や監査停止を、本番503の原因と混同しない。
 
 - **CI化の配線台帳**: 新しい監査をworkflowへ追加したら`.claude/config/quality-gates.json`にもcommand・owner・scheduleを登録する。既存validatorを定期実行へ広げた場合もtriggerを更新する。期日判定を入れた最終statusテストにはruntime/summaryを含む全exit codeを渡し、各失敗を成功扱いできない負例を確認する。baseline拡大で未配線を隠さない。
+
+- **未実行は解消ではない**: 保存済みレビューだけの再検証run `34660696995`で、監査step未実行なのに出力コード比較の条件を通り、空のalert状態をhealthy扱いしてIssue957が閉じた。Issueを再開し、観測commitとIssue更新は期日判定trueかつcollector成功を必須とした。shell側もtrue/false以外を拒否し、明示falseだけでcloseする。再検証・期日未到来・空出力を監査成功に数えない。

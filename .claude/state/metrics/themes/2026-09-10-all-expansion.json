@@ -7638,7 +7638,7 @@
     "assessment": "validation.next253Tsunami29.scopeAudit"
   },
   "ciFollowupMigration": {
-    "status": "ci-active-deployment-verification-pending",
+    "status": "ci-active-alert-replay-correction-pending",
     "workflow": ".github/workflows/theme-chart-audit-weekly.yml",
     "implementationCommit": "cc8e98087",
     "firstRun": "https://github.com/uruhayato373/stats47/actions/runs/34654495422",
@@ -7674,7 +7674,7 @@
       }
     },
     "remaining": [
-      "Verify automatic code deployment"
+      "Verify original deployment and publish the replay alert guard correction"
     ],
     "firstRunObservation": {
       "expected": 110,
@@ -7819,6 +7819,23 @@
     "deployment": {
       "run": "https://github.com/uruhayato373/stats47/actions/runs/34662603951",
       "status": "in-progress"
+    },
+    "alertReplayRepair": {
+      "sourceRun": "https://github.com/uruhayato373/stats47/actions/runs/34660696995",
+      "observedFailure": "Replay-only execution ran Update actionable alert with absent audit outputs and closed Issue 957 without fresh runtime evidence",
+      "issue": "https://github.com/uruhayato373/stats47/issues/957",
+      "issueRestored": "reopened",
+      "repair": "Require a due full audit and successful collector before committing observations or updating alerts; reject missing alert state and close only explicit false",
+      "regressionTests": {
+        "passed": 20,
+        "includes": [
+          "replay and skipped collector gates",
+          "empty or unknown alert state cannot close",
+          "explicit unhealthy state remains open",
+          "explicit healthy state can close",
+          "all audit exit codes propagate"
+        ]
+      }
     }
   }
 }

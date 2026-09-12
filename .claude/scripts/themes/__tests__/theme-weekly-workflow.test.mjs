@@ -137,3 +137,35 @@ test('a fresh review cannot silently reuse an old report when execution output i
   assert.equal(run(''), 1, 'missing fresh execution file must fail before existing report validation');
   assert.equal(run('true'), 0, 'explicit replay already restored and bound its report');
 });
+
+test('skipped or replay-only observations cannot publish observations or resolve an alert', () => {
+  const alert = workflow.jobs.audit.steps.find(s => s.name === 'Update actionable alert');
+  for (const step of [commitStep, alert]) {
+    assert.match(step.if, /steps\.plan\.outputs\.run == 'true'/);
+    assert.match(step.if, /steps\.check\.outcome == 'success'/);
+  }
+});
+
+test('only an explicit healthy alert result can close an existing issue', (t) => {
+  const alert = workflow.jobs.audit.steps.find(s => s.name === 'Update actionable alert');
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'theme-alert-state-'));
+  t.after(() => fs.rmSync(cwd, { recursive: true, force: true }));
+  // Exercise the workflow shell without contacting GitHub or altering files.
+  const stub = `gh() {
+    case "$1 $2" in
+      'issue list') printf '957' ;;
+      'issue view') return 0 ;;
+      *) printf '%s\\n' "$1 $2" >&2 ;;
+    esac
+  }
+  diff() { return 0; }
+  `;
+  for (const state of ['', 'unknown', 'true', 'false']) {
+    const result = spawnSync('bash', ['-e', '-c', stub + alert.run.replaceAll('/tmp/theme-', './theme-')], {
+      cwd, encoding: 'utf8', env: { ...process.env, ALERT_OPEN: state },
+    });
+    assert.equal(result.status, ['', 'unknown'].includes(state) ? 1 : 0);
+    assert.equal(result.stderr.includes('issue close'), state === 'false');
+    if (!['true', 'false'].includes(state)) assert.equal(result.stderr, '');
+  }
+});
