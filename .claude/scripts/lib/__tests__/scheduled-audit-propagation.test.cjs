@@ -64,7 +64,7 @@ function auditTheme(source) {
   const check = steps.find((step) => step.id === 'check');
   const final = steps.find((step) => step.name === 'Propagate audit failures');
   const errors = [];
-  for (const kind of ['live', 'quality']) {
+  for (const kind of ['live', 'quality', 'runtime']) {
     if (!check?.run?.includes(`${kind}_code=\${PIPESTATUS[0]}`)) {
       errors.push(`${kind} audit exit code is not captured`);
     }
@@ -72,7 +72,9 @@ function auditTheme(source) {
   if (!check?.run?.includes('alert_code=$?')) {
     errors.push('alert exit code is not captured');
   }
-  if (!final || final.if !== 'always()' || typeof final.run !== 'string') {
+  if (check?.if !== "steps.plan.outputs.run == 'true'") errors.push('heavy audit planner gate is missing');
+  if (!check?.run?.includes('summary_code=$?')) errors.push('summary exit code is not captured');
+  if (!final || final.if !== "always() && steps.plan.outputs.run == 'true'" || typeof final.run !== 'string') {
     errors.push('always live audit propagation step is missing');
   } else {
     const bindings = {
@@ -80,11 +82,13 @@ function auditTheme(source) {
       LIVE_CODE: 'steps.check.outputs.live_code',
       QUALITY_CODE: 'steps.check.outputs.quality_code',
       ALERT_CODE: 'steps.check.outputs.alert_code',
+      SUMMARY_CODE: 'steps.check.outputs.summary_code',
+      RUNTIME_CODE: 'steps.check.outputs.runtime_code',
     };
     for (const [key, expression] of Object.entries(bindings)) {
       if (final.env?.[key] !== '${{ ' + expression + ' }}') errors.push(`${key} is not propagated`);
     }
-    const success = { CHECK_OUTCOME: 'success', LIVE_CODE: '0', QUALITY_CODE: '0', ALERT_CODE: '0' };
+    const success = { CHECK_OUTCOME: 'success', LIVE_CODE: '0', QUALITY_CODE: '0', ALERT_CODE: '0', SUMMARY_CODE: '0', RUNTIME_CODE: '0' };
     const cases = [success, ...Object.keys(success).map((key) => ({ ...success, [key]: key === 'CHECK_OUTCOME' ? 'failure' : '1' }))];
     for (const [index, env] of cases.entries()) {
       const result = spawnSync('bash', ['-c', final.run], { env: { ...process.env, ...env }, timeout: 2000 });
@@ -123,7 +127,7 @@ test('[mutation] provenance最終status stepの削除を検出する', () => {
   assert.ok(auditProvenance(YAML.stringify(workflow)).includes('always final propagation step is missing'));
 });
 
-for (const kind of ['live', 'quality']) {
+for (const kind of ['live', 'quality', 'runtime']) {
   test(`[mutation] theme ${kind}監査exit codeの固定0化を検出する`, () => {
     const mutated = themeSource.replace(`${kind}_code=\${PIPESTATUS[0]}`, `${kind}_code=0`);
     assert.notEqual(mutated, themeSource);
@@ -144,3 +148,17 @@ test('[mutation] theme最終status stepの削除を検出する', () => {
   );
   assert.ok(auditTheme(YAML.stringify(workflow)).includes('always live audit propagation step is missing'));
 });
+
+test('[mutation] active audit failure propagation cannot be skipped after an earlier failure', () => {
+  const workflow = parse(themeSource);
+  workflow.jobs.audit.steps.find(step => step.name === 'Propagate audit failures').if = "success() && steps.plan.outputs.run == 'true'";
+  assert.ok(auditTheme(YAML.stringify(workflow)).includes('always live audit propagation step is missing'));
+});
+for (const kind of ['summary', 'runtime']) {
+  test(`[mutation] ${kind} failure cannot be removed from final status`, () => {
+    const workflow = parse(themeSource);
+    const final = workflow.jobs.audit.steps.find(step => step.name === 'Propagate audit failures');
+    final.run = final.run.replace(` && test "$${kind.toUpperCase()}_CODE" = 0`, '');
+    assert.ok(auditTheme(YAML.stringify(workflow)).some(error => error.startsWith('audit status propagation failed')));
+  });
+}
