@@ -59,6 +59,13 @@
       ]
     },
     {
+      "name": "BROWSER_USE_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CATALOG_INDEX",
       "visibility": "server",
       "contexts": [
@@ -224,14 +231,14 @@
       ]
     },
     {
-      "name": "DRY_RUN",
+      "name": "DRAFT_DELETE_PATHS",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "DRAFT_DELETE_PATHS",
+      "name": "DRY_RUN",
       "visibility": "server",
       "contexts": [
         "process"
@@ -246,6 +253,13 @@
     },
     {
       "name": "ESTAT_APP_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPANSION_QUEUE_NOW",
       "visibility": "server",
       "contexts": [
         "process"
@@ -267,13 +281,6 @@
     },
     {
       "name": "EXPECTED_TITLE",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "EXPANSION_QUEUE_NOW",
       "visibility": "server",
       "contexts": [
         "process"
@@ -515,7 +522,7 @@
       "contexts": [
         "process"
       ],
-      "note": "overdue 判定の「今日」を固定する (fixture 検証用)。未指定なら実時刻。秘匿値ではない"
+      "note": "overdue \u5224\u5b9a\u306e\u300c\u4eca\u65e5\u300d\u3092\u56fa\u5b9a\u3059\u308b (fixture \u691c\u8a3c\u7528)\u3002\u672a\u6307\u5b9a\u306a\u3089\u5b9f\u6642\u523b\u3002\u79d8\u533f\u5024\u3067\u306f\u306a\u3044"
     },
     {
       "name": "INSTAGRAM_ACCESS_TOKEN",
@@ -774,14 +781,14 @@
       ]
     },
     {
-      "name": "NO_PROXY",
+      "name": "NOTE_KEY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "NOTE_KEY",
+      "name": "NO_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -803,13 +810,6 @@
     },
     {
       "name": "PATH",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "PUBLISHED_DELETE_PATHS",
       "visibility": "server",
       "contexts": [
         "process"
@@ -842,6 +842,13 @@
       "contexts": [
         "process",
         "secret"
+      ]
+    },
+    {
+      "name": "PUBLISHED_DELETE_PATHS",
+      "visibility": "server",
+      "contexts": [
+        "process"
       ]
     },
     {
@@ -1004,7 +1011,7 @@
       "contexts": [
         "process"
       ],
-      "note": "regenerate-blog-svgs source-repair の一時入力。値はGitHub Actions input由来で永続保存しない"
+      "note": "regenerate-blog-svgs source-repair \u306e\u4e00\u6642\u5165\u529b\u3002\u5024\u306fGitHub Actions input\u7531\u6765\u3067\u6c38\u7d9a\u4fdd\u5b58\u3057\u306a\u3044"
     },
     {
       "name": "STATE_DIR",
@@ -1033,7 +1040,7 @@
       "contexts": [
         "process"
       ],
-      "note": "survey portfolio / linkage 監査 state の鮮度上限日数 (既定 35)。validate-survey-portfolio.ts が読む"
+      "note": "survey portfolio / linkage \u76e3\u67fb state \u306e\u9bae\u5ea6\u4e0a\u9650\u65e5\u6570 (\u65e2\u5b9a 35)\u3002validate-survey-portfolio.ts \u304c\u8aad\u3080"
     },
     {
       "name": "USER",

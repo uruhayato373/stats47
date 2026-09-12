@@ -40,6 +40,40 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts [--apply]
 
 ## マガジン運用 (「類似記事を無料マガジンに束ねる」)
 
+公開記事のカバー状態は`npm run note:covers:audit`で測定する。カタログと公開一覧の和集合を
+v3記事詳細APIで確認し、一覧サムネイルに代用された本文画像を設定済みと誤認しない。
+`.claude/state/metrics/note-cover-audit-latest.json`が最新の観測結果（時刻・完全性付き）であり、
+カバー状態をカタログに手入力して同期しない。終了コードは0=合格、1=未設定/集合差分、2=不完全。
+
+カバーと新しいインプレッション/PVの突合は`npm run note:metrics:fetch`を使う。
+`.claude/state/metrics/note/dashboard/cover-metrics-latest.{json,csv}`へ公開記事の棚卸しを出力する。
+期間内に一覧行がない記事は指標nullで残し、全体をincompleteとする。旧viewsへ変換しない。
+収集契約・期間指定は[fetch-note-metrics](../../../skills/analytics/fetch-note-metrics/SKILL.md)を参照する。
+
+### 公開カバーの制作と差し替え
+
+`cover-designs.ts`が既存維持リスト・短い見出し・補足の編集判断を持つ。画像は派生物。
+`../generate-cover-refresh.ts`は共有`note-cover-render.ts`のeditorial rendererを使い、
+既存GISの県輪郭/日本地図を配置する。家計調査は2024年の47都市観測値から単純平均と増減率を再計算し、
+記事のchart-dataと一致する場合だけ描く。県名と調査対象都市名を併記する。
+
+改修versionごとの`.local/note-cover-refresh/<日付>/`に公開前の`before/`、`inventory.json`、
+検算入力`sources/`、制作物`after/`、`production-manifest.json`を保持する。
+manifestは記事ID・旧画像hash・新画像hash・コピー・データ根拠・1280×670・文字境界・重なり・目視判定を持つ。
+Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格させず、`onNodeDetected`の実レイアウトで検査する。
+再生成すると目視判定はpendingへ戻る。PNGを手修正してもhashが変わり反映ゲートで止まる。
+
+`../update-note-covers.mjs --manifest <path>`はローカル検査のみ。`--commit`で実際に変更し、
+`--keys`/`--limit`で範囲を絞れる。stats47アカウント・git TSの記事URL・公開前の内容を照合した後、
+実際のエディタで観測した`POST /api/v1/image_upload/note_eyecatch`へ画像だけを送る。
+`note_id`はv3詳細の数値`id`であり、`n...`形式のkeyではない。FormDataはnote_id/file/width/heightの4項目、
+`X-Requested-With: XMLHttpRequest`が必要。note側のPNG減色を許容し、取得した配信画像も1280×670へ正規化して画素差を照合する。
+
+履歴は`.claude/state/metrics/note-cover-refresh-<version>.json`。本文自体を保存せず、前後の保全項目hash・
+旧新URL・制作画像SHA・変更時刻・配信検証結果を記録する。確定済みは再送しない。応答不明は停止して照合する。
+仕上げに`../verify-cover-refresh.mjs --manifest <path>`で全件カバー監査と前後照合を実行する。
+改修は`cover-remediation`として記録し、KPI改善の実験成功とは区別する。
+
 1. `magazines.ts` にマガジンを定義 (無料キュレーション or 有料メンバーシップ)。
 2. 束ねたい記事の `data/<vertical>.ts` の `magazine` を該当キーに設定する。
    stats47-note の一括割当は `assign-magazines-by-title.mjs`(タイトル分類・決定的)を使う

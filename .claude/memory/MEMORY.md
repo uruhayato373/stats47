@@ -97,7 +97,7 @@
 - [project_sankey_landing_views.md](project_sankey_landing_views.md) — Sankey着地ビュー。migration(#393)/finance(#396)本番稼働、共通HubSankey。通勤はPhase 2(statsDataId 0003454526)
 - [feedback_sticky_aside_max_h.md](feedback_sticky_aside_max_h.md) — CSS Grid(items-start)内sticky asideにmax-h-[calc(100vh-5.5rem)]+overflow必須。削除でフッター非表示(2度踏んだ)
 - [feedback_workers_self_fetch_unbundle.md](feedback_workers_self_fetch_unbundle.md) — OpenNext Workersで静的アセット外す時、自ドメインfetchはdegrade(self-fetch)。ASSETS binding使う。デプロイ+スモークで検証
-- [project_note_update_mode_learnings.md](project_note_update_mode_learnings.md) — note --update実機(2026-07-10・36本)。do_updateはShadow-DOM eval-click必須/paid_setlineはDOM境界必須。browser-useはtemp profileコピー。カバーSSOT=frontmatter+背景+generator
+- [project_note_update_mode_learnings.md](project_note_update_mode_learnings.md) — カバーはv3詳細eyecatchで監査、画像専用CLIで更新（本文再公開不要）。制作TS/GIS/Satori・保全hash・変更journal。本文updateのeval-click・有料境界・temp profileの注意点
 - [project_asp_site_attribution.md](project_asp_site_attribution.md) — A8/もしも/afb は stats47 と doboku-note が同一口座に同居。サイト帰属assertを通さないと他サイトの数値を誤認(afbで実害)。A8成果でstats47単独と言えるのはsite-rowsのみ
 - [feedback_playwright_profile_dual_os.md](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂
 - [feedback_windows_script_portability.md](feedback_windows_script_portability.md) — Windowsで落ちる3パターン: URL().pathnameの先頭スラッシュ(C:\C:\)/npxのspawn(ENOENT・Node22は.cmdをEINVAL)/Macパス直書き。node直起動とfileURLToPathで書く

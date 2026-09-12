@@ -19,6 +19,7 @@ function live(overrides = {}) {
     key: "nabc123",
     status: "published",
     user: { urlname: "stats47" },
+    eyecatch: "https://assets.st-note.com/cover.png",
     price: 0,
     hashtag_notes: Array.from({ length: 99 }, (_, index) => ({ name: `tag${index}` })),
     belonging_magazine_keys: ["mabc123"],
@@ -75,6 +76,21 @@ test("healthy article satisfies hard gates", () => {
   assert.equal(audit.linkCounts.relatedNote, 1);
 });
 
+test("circulation audit counts an absent cover independently of body images", () => {
+  const audit = buildArticleAudit({
+    article,
+    live: live({ eyecatch: null, body: `${live().body}<img src="https://assets.st-note.com/body.png">` }),
+    magazinesByKey,
+    catalogNoteKeys: new Set(["nabc123", "ndef456"]),
+  });
+  assert.deepEqual(audit.errors, [{ code: "cover_missing" }]);
+  assert.equal(audit.cover.status, "missing");
+  const summary = summarizeArticleAudits([audit]);
+  assert.equal(summary.coversConfigured, 0);
+  assert.equal(summary.coversMissing, 1);
+  assert.equal(summary.coversUnknown, 0);
+});
+
 test("catalog-declared pinned and profile article states are hard-gated", () => {
   const audit = buildArticleAudit({
     article: { ...article, pinned: true, profiled: true },
@@ -114,7 +130,7 @@ test("hard failures surface account, hashtags, target, membership and broken URL
   });
   assert.deepEqual(
     audit.errors.map((error) => error.code),
-    ["account_mismatch", "hashtags_below_95", "missing_magazine_membership", "missing_catalog_site_target", "broken_site_link"],
+    ["account_mismatch", "cover_unknown", "hashtags_below_95", "missing_magazine_membership", "missing_catalog_site_target", "broken_site_link"],
   );
   assert.ok(audit.warnings.some((warning) => warning.code === "missing_related_note_link"));
 });

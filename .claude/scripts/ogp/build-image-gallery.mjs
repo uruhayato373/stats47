@@ -144,11 +144,15 @@ function buildHtml(tabData, checkMap) {
   const panels = tabIds
     .map((t, i) => {
       const d = tabData[t];
+      const noteScope = t === "note-cover"
+        ? '<p class="panelmeta">この一覧はR2保存画像です。note公開記事のカバー設定は npm run note:covers:audit で確認します。</p>'
+        : "";
       const cards = d.entries
         .map((e) => cardBlock(e, checkMap))
         .join("");
       return `<section class="panel${i === 0 ? " active" : ""}" data-tab="${esc(t)}">
       <div class="panelmeta">source: <b>${esc(d.source)}</b> · aspect: ${esc(d.aspect)} · <code>${esc(d.r2KeyPattern)}</code></div>
+      ${noteScope}
       <div class="grid">${cards || '<p class="empty">エントリなし</p>'}</div>
     </section>`;
     })

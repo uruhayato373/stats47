@@ -1,3 +1,5 @@
+import { inspectNoteCover } from "./cover-audit.mjs";
+
 const TRACKING_PARAMETER = /^(?:utm_.+|link)$/i;
 
 function decodeHtmlAttribute(value) {
@@ -148,6 +150,10 @@ export function buildArticleAudit({
   if (live.user?.urlname !== "stats47") errors.push({ code: "account_mismatch", detail: live.user?.urlname || null });
   if (live.status !== "published") errors.push({ code: "not_published", detail: live.status || null });
 
+  const cover = inspectNoteCover(live, noteKeyFromUrl(article.noteUrl));
+  if (cover.status === "missing") errors.push({ code: "cover_missing" });
+  if (cover.status === "unknown") errors.push({ code: "cover_unknown", detail: cover.reason });
+
   const hashtagCount = Array.isArray(live.hashtag_notes) ? live.hashtag_notes.length : 0;
   if (hashtagCount < 95) errors.push({ code: "hashtags_below_95", detail: hashtagCount });
 
@@ -224,6 +230,7 @@ export function buildArticleAudit({
     r2Body: article.r2Body,
     noteUrl: article.noteUrl,
     hashtagCount,
+    cover,
     linkCounts: {
       total: links.length,
       cards: cardUrls.length,
@@ -247,6 +254,9 @@ export function summarizeArticleAudits(articles) {
     errors: articles.reduce((sum, article) => sum + article.errors.length, 0),
     warnings: articles.reduce((sum, article) => sum + article.warnings.length, 0),
     compliantHashtags: countWith((article) => article.hashtagCount >= 95),
+    coversConfigured: countWith((article) => article.cover.status === "configured"),
+    coversMissing: countWith((article) => article.cover.status === "missing"),
+    coversUnknown: countWith((article) => article.cover.status === "unknown"),
     withSiteLink: countWith((article) => article.linkCounts.site > 0),
     withRelatedNoteLink: countWith((article) => article.linkCounts.relatedNote > 0),
     withMagazineLink: countWith((article) => article.linkCounts.magazine > 0),

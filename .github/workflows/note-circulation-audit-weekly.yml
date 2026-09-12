@@ -44,6 +44,10 @@ jobs:
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:circulation:test 2>&1 | tee /tmp/note-tests.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          npm run note:covers:test 2>&1 | tee /tmp/note-cover-tests.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          npm run note:covers:audit 2>&1 | tee /tmp/note-covers.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:circulation:audit 2>&1 | tee /tmp/note-circulation.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:navigation:products:check 2>&1 | tee /tmp/note-product-navigation.log
@@ -88,8 +92,11 @@ jobs:
           name: note-circulation-audit
           path: |
             .claude/state/metrics/note-circulation-audit-*.json
+            .claude/state/metrics/note-cover-audit-latest.json
             /tmp/note-catalog.log
             /tmp/note-tests.log
+            /tmp/note-cover-tests.log
+            /tmp/note-covers.log
             /tmp/note-circulation.log
             /tmp/note-product-navigation.log
           if-no-files-found: warn
@@ -110,6 +117,9 @@ jobs:
             echo ""
             echo "- Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             echo "- Report artifact: note-circulation-audit"
+            if [ -f .claude/state/metrics/note-cover-audit-latest.json ]; then
+              node -e 'const r = require("./.claude/state/metrics/note-cover-audit-latest.json"); console.log(`- Cover audit: ${r.status} / ${JSON.stringify(r.summary)} / coverage=${r.coverage.complete}`);'
+            fi
             if [ -n "$REPORT" ]; then
               node - "$REPORT" <<'NODE'
           const fs = require('node:fs');
