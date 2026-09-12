@@ -124,6 +124,7 @@ CI初回実走やcredential依存sourceの確認状況はTODOへ記録し、本�
 - 改善前に検索ニーズを1〜2文で定義し、WebSearchと上位1〜3ページ・対象ページのWebFetch記録を必須とする。SERPを独自取得しない。不足がない場合はno-change。文字数増加自体を目的にしない。
 - 自動適用はranking/themeのページ別TSとsurveyの対象オブジェクト内の既存文言。ASTで文字列だけを置換し、構造・noindex・他ページを変更しない。新規データや内部リンク等の追加実装が必要なら、担当owner/既存CLI/必要な資料/完了条件を持つdraft PRとして引き継ぎ、文字列置換で無理に代用しない。noindex・大きな構造変更はユーザー承認を要する。
 - 未解決のキーワードPRがある間は次の改善PRを作らない。draft PRやGitへの保存時点では観察を始めず、成功した本番deployのSHA・変更ファイルhash・公開HTML内の変更文言の3点を確認してからobservingへ進める。R2反映が必要な変更や確認不能は公開待ちを維持する。過去deployの再確認には当日の保存済みGSCを使い、存在しなければ基準値を捏造しない。
+- 調査前に`keyword-page.mjs`が選択ページをHTTP 200・完全HTMLで取得し、公開本文とリンクを抽出する。調査はその本文を読み、採用時にHTML/本文hashと選択入力hashを照合する。WebFetchの403等は成功応答の形で返っても閲覧実績にしない。ワークフロー定義がmain未反映のときは計測までとし、GitHub Appによるworkflow新規作成の権限制約を回避してmain反映後に調査を始める。
 - 日次reportには大きな順位変動（3順位以上、表示回数併記）、効果判定、対象と理由、観察期限を表示する。検索意図・比較・実施内容は`latest-review.json`とPRへ残す。予測順位や未公開の改善効果は記録しない。
 
 Google APIの定義: [Search Analytics query](https://developers.google.com/webmaster-tools/v1/searchanalytics/query)（2026-09-12確認）。`dataState=final`、`rows[].position`は平均掲載順位。非表示のクエリ・上位行制約があるため、未報告を検索需要の不存在と扱わない。

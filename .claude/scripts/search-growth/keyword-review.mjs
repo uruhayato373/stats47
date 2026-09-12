@@ -7,6 +7,7 @@ import ts from 'typescript';
 import { fileURLToPath } from 'node:url';
 import { hash, METHODS } from './lib/keyword-cycle.mjs';
 import { editableFile, readJson, writeJson } from './keyword-cycle.mjs';
+import { validatePageEvidence } from './keyword-page.mjs';
 
 const COPY_PROPERTIES = new Set(['seoTitle', 'seoDescription', 'title', 'description', 'intro', 'summary', 'question', 'answer']);
 const PROPERTY_METHOD = { seoTitle: 'title', title: 'title', seoDescription: 'description', description: 'description', intro: 'intro', summary: 'content', question: 'faq', answer: 'faq' };
@@ -14,10 +15,11 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.
 const meaningful = text => typeof text === 'string' && text.trim().length >= 20 && !/^(test|todo|placeholder|テスト|仮データ)\b/i.test(text.trim());
 function successfulUses(entries) {
   const parts = entries.flatMap(e => Array.isArray(e.message?.content) ? e.message.content : []);
-  const returned = new Set(parts.filter(p => p.type === 'tool_result' && !p.is_error).map(p => p.tool_use_id));
+  const failedFetch = /request failed|fetch failed|unable to fetch|status(?: code)?:? [45]\d\d|HTTP [45]\d\d|403 Forbidden|Access Denied/i;
+  const returned = new Set(parts.filter(p => p.type === 'tool_result' && !p.is_error && !failedFetch.test(JSON.stringify(p.content ?? ''))).map(p => p.tool_use_id));
   return parts.filter(p => p.type === 'tool_use' && returned.has(p.id));
 }
-export function validateReview(entries, selection) {
+export function validateReview(entries, selection, targetEvidence = null) {
   const result = entries.findLast(e => e.type === 'result');
   assert.ok(result?.subtype === 'success' && !result.is_error, 'review did not finish');
   const report = result.structured_output;
@@ -32,7 +34,8 @@ export function validateReview(entries, selection) {
     const url = new URL(competitor.url); assert.equal(url.protocol, 'https:');
     assert.ok(uses.some(u => u.name === 'WebFetch' && u.input?.url === competitor.url), 'competitor not read');
   }
-  assert.ok(uses.some(u => u.name === 'WebFetch' && u.input?.url === `https://stats47.jp${selection.targetPath}`), 'target page not read');
+  if (targetEvidence) assert.ok(uses.some(u => u.name === 'Read' && (u.input?.file_path === targetEvidence.textFile || u.input?.file_path?.endsWith('/' + targetEvidence.textFile))), 'verified public page capture not read');
+  else assert.ok(uses.some(u => u.name === 'WebFetch' && u.input?.url === `https://stats47.jp${selection.targetPath}`), 'target page not read');
   assert.ok(Array.isArray(report.patches) && report.patches.length <= 3);
   if (report.status === 'proposed') {
     assert.ok(METHODS.includes(report.method));
@@ -76,8 +79,11 @@ export function applyTextPatches(source, patches, targetPath) {
 export function prepareProposal(repo, entries, input, id) {
   assert.match(id, /^[0-9]+-[0-9]+$/);
   const selected = input.selected; assert.ok(selected, 'no candidate');
-  const report = validateReview(entries, selected);
-  const proposal = { schemaVersion: 1, id, ...report, selectedAt: input.date, inputHash: input.inputHash, methods: [...new Set(report.patches.map(p => PROPERTY_METHOD[p.property]))], files: [] };
+  const targetPage = validatePageEvidence(repo, input);
+  const report = validateReview(entries, selected, targetPage);
+  const research = { targetPage, toolCalls: successfulUses(entries).filter(u => ['WebSearch', 'WebFetch'].includes(u.name)).map(u => ({ name: u.name, target: u.input?.url ?? u.input?.query })) };
+  writeJson(repo, '.local/seo-rank-watch/research-evidence.json', research);
+  const proposal = { schemaVersion: 1, id, ...report, research, selectedAt: input.date, inputHash: input.inputHash, methods: [...new Set(report.patches.map(p => PROPERTY_METHOD[p.property]))], files: [] };
   if (report.status === 'proposed') {
     const file = editableFile(repo, selected.targetPath); assert.ok(file && file === selected.editableFile, 'target requires owner implementation');
     const before = fs.readFileSync(path.join(repo, file), 'utf8');

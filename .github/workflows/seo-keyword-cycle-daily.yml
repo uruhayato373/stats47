@@ -78,9 +78,16 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          if ! git diff --quiet origin/main HEAD -- .github/workflows/seo-keyword-cycle-daily.yml; then
+            echo '計測済み。ワークフローのmain反映後に改善案を作成します。' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           gh label create seo-keyword-cycle --description '1キーワードの検索意図に基づく改善' --color 0e8a16 --force
           pending=$(gh pr list --base develop --state open --label seo-keyword-cycle --json number --jq length)
           if [ "$pending" = 0 ]; then echo 'review=true' >> "$GITHUB_OUTPUT"; fi
+      - name: Capture selected public page with HTTP evidence
+        if: steps.plan.outputs.review == 'true'
+        run: node .claude/scripts/search-growth/keyword-page.mjs
       - name: Research intent and propose one bounded improvement
         id: review
         if: steps.plan.outputs.review == 'true'

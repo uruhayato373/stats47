@@ -8,6 +8,7 @@ import { reviewDue, selectKeyword, recordDeployment, validateSnapshot } from '..
 import { appendHistory, runCycle, pageFragment } from '../keyword-cycle.mjs';
 import { applyTextPatches, validateReview } from '../keyword-review.mjs';
 import { fetchSnapshot } from '../fetch-keyword-ranks.mjs';
+import { capturePage, validatePageEvidence } from '../keyword-page.mjs';
 import yaml from 'js-yaml';
 
 const today = jstDateOf(), periods = resolvePeriods({source:'gsc'});
@@ -111,6 +112,26 @@ test('review requires real successful search/read records and cannot rename a fa
   report.method='content'; assert.throws(()=>validateReview(entries,row('x')),/actual changed property/);
   report.method='title'; entries[1].message.content[0].is_error=true;
   assert.throws(()=>validateReview(entries,row('x')),/WebSearch/);
+  entries[1].message.content[0].is_error=false;
+  entries[1].message.content[2].content='Request failed with status code 403';
+  assert.throws(()=>validateReview(entries,row('x')),/target page not read/);
+  entries[0].message.content.push({type:'tool_use',id:'read',name:'Read',input:{file_path:'/workspace/.local/seo-rank-watch/target-page.txt'}});
+  entries[1].message.content.push({type:'tool_result',tool_use_id:'read',content:'Verified public body'});
+  assert.equal(validateReview(entries,row('x'),{textFile:'.local/seo-rank-watch/target-page.txt'}).status,'proposed');
+});
+
+test('public page evidence rejects HTTP errors, stale selection and tampered body', async t => {
+  const repo=fs.mkdtempSync(path.join(os.tmpdir(),'keyword-page-')); t.after(()=>fs.rmSync(repo,{recursive:true,force:true}));
+  const input={selected:row('x'),inputHash:'current-selection'};
+  await assert.rejects(capturePage(repo,input,async()=>new Response('Forbidden',{status:403})),/unavailable/);
+  const html='<html><head><title>公開ページ</title></head><body><main><h1>見出し</h1><p>公開された本文</p><script>not visible</script><a href="/ranking/x">詳細</a></main></body></html>';
+  const result=await capturePage(repo,input,async()=>new Response(html,{headers:{'content-type':'text/html'}}));
+  assert.ok(fs.readFileSync(path.join(repo,result.textFile),'utf8').includes('詳細: /ranking/x'));
+  assert.ok(!fs.readFileSync(path.join(repo,result.textFile),'utf8').includes('not visible'));
+  validatePageEvidence(repo,input);
+  assert.throws(()=>validatePageEvidence(repo,{...input,inputHash:'other'}));
+  fs.writeFileSync(path.join(repo,result.textFile),'made-up content');
+  assert.throws(()=>validatePageEvidence(repo,input));
 });
 
 test('CI commits measurements before read-only research and creates only tested draft PRs', () => {
@@ -120,6 +141,7 @@ test('CI commits measurements before read-only research and creates only tested 
   assert.match(workflow.jobs.cycle.if,/workflow_run.conclusion == 'success'/);
   const model=steps.findIndex(s=>s.id==='review');
   assert.ok(steps.findIndex(s=>s.name==='Commit measurements before review')<model);
+  assert.ok(steps.findIndex(s=>s.name==='Capture selected public page with HTTP evidence')<model);
   assert.match(steps[model].with.claude_args,/--tools "Read,Glob,Grep,WebFetch,WebSearch"/);
   assert.doesNotMatch(steps[model].with.claude_args,/--tools "[^"]*(?:Bash|Edit|Write)/);
   assert.match(steps.find(s=>s.name==='Fetch finalized seven-day GSC ranks').run,/--days 7/);
