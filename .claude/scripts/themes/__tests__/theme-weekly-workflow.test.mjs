@@ -116,3 +116,15 @@ test('model results use typed structured output instead of prose JSON parsing', 
   assert.deepEqual(schema.required, ['status', 'summary', 'findings', 'sourceReviews', 'tests']);
   assert.equal(schema.additionalProperties, false);
 });
+
+test('saved review retry is explicit, restores only evidence and uses the same publication guards', () => {
+  const steps = workflow.jobs.audit.steps;
+  assert.equal(workflow.on.workflow_dispatch.inputs.review_run.required, false);
+  assert.match(steps.find(s => s.id === 'plan').run, /echo "run=false"/);
+  const replay = steps.find(s => s.id === 'replay');
+  assert.match(replay.run, /--jq \.path/);
+  assert.match(replay.run, /record-theme-review.mjs --replay/);
+  assert.match(steps.find(s => s.id === 'review_check').if, /steps.replay.outcome == 'success'/);
+  assert.match(steps.find(s => s.id === 'review_check').run, /check-theme-review.mjs/);
+  assert.doesNotMatch(steps.find(s => s.name === 'Install browser').if, /replay/);
+});

@@ -35,6 +35,13 @@ export function extractReview(entries, input, themeKeys, priorReview = null) {
   };
 }
 
+export function validateReplay(report, input, runId) {
+  assert.match(runId, /^[0-9]+$/);
+  assert.ok(input.runUrl?.endsWith(`/runs/${runId}`), 'Replay must match the current observation run');
+  assert.equal(report.inputSha256, input.reviewInputSha256, 'Stale replay evidence');
+  assert.equal(report.reviewedAt, input.observedAt);
+}
+
 if (
   process.argv[1] &&
   path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
@@ -45,12 +52,20 @@ if (
   );
   const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
   const previousPath = '.claude/state/themes/ci-review.json';
-  const report = extractReview(
-    JSON.parse(fs.readFileSync(process.argv[2], 'utf8')),
-    read('.claude/state/themes/ci-followup.json'),
-    read('.claude/state/themes/experiments.json').experiments.map(e => e.themeKey),
-    fs.existsSync(path.join(root, previousPath)) ? read(previousPath) : null
-  );
+  const input = read('.claude/state/themes/ci-followup.json');
+  let report;
+  if (process.argv[2] === '--replay') {
+    report = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+    validateReplay(report, input, process.argv[5]);
+    fs.cpSync(process.argv[4], path.join(root, '.local/ci/theme-followup'), { recursive: true });
+  } else {
+    report = extractReview(
+      JSON.parse(fs.readFileSync(process.argv[2], 'utf8')),
+      input,
+      read('.claude/state/themes/experiments.json').experiments.map(e => e.themeKey),
+      fs.existsSync(path.join(root, previousPath)) ? read(previousPath) : null
+    );
+  }
   // The following check-theme-review step enforces schema, evidence, changed paths and immutable observations.
   fs.writeFileSync(
     path.join(root, '.claude/state/themes/ci-review.json'),

@@ -14,6 +14,9 @@ const reportPath = '.claude/state/themes/ci-review.json';
 const experimentsPath = '.claude/state/themes/experiments.json';
 const meaningful = text => typeof text === 'string' && text.trim() && !/^(test|todo|tbd|placeholder|sample|テスト|仮|未記入)[.!。]*$/i.test(text.trim());
 const evidenceRef = ref => typeof ref === 'string' && (/^https:\/\/[^/\s]+\/[^\s]+$/.test(ref) || /^(\.claude|\.local|apps|packages)\/[^\s]+$/.test(ref)) && !ref.split('/').includes('..');
+export function evidenceFilePath(ref) {
+  return ref.replace(/(?:#[^\s]*|:[1-9]\d*(?:-[1-9]\d*)?)$/, '');
+}
 export function validateReview(report, input, files, before, after) {
   assert.equal(report.schemaVersion, 1);
   assert.equal(report.inputSha256, input.reviewInputSha256);
@@ -121,7 +124,7 @@ if (
   const report = read(reportPath);
   for (const row of [...report.findings, ...(report.sourceReviews ?? [])]) {
     for (const ref of row.evidenceRefs) {
-      if (!ref.startsWith('https://')) assert.ok(fs.existsSync(path.join(ROOT, ref.split('#')[0])), `Missing evidence: ${ref}`);
+      if (!ref.startsWith('https://')) assert.ok(fs.existsSync(path.join(ROOT, evidenceFilePath(ref))), `Missing evidence: ${ref}`);
     }
   }
   const { codeChanged, proposalChanges } = validateReview(

@@ -6,6 +6,11 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
+    inputs:
+      review_run:
+        description: '保存済みレビューの再検証run ID（未指定なら全量監査）'
+        required: false
+        type: string
 permissions:
   contents: write
   issues: write
@@ -27,20 +32,26 @@ jobs:
         id: plan
         env:
           EVENT_NAME: ${{ github.event_name }}
+          REVIEW_RUN_ID: ${{ inputs.review_run }}
         run: |
-          if [ "$EVENT_NAME" = workflow_dispatch ]; then
+          if [ -n "$REVIEW_RUN_ID" ]; then
+            test "$EVENT_NAME" = workflow_dispatch
+            [[ "$REVIEW_RUN_ID" =~ ^[0-9]+$ ]]
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "replay=true" >> "$GITHUB_OUTPUT"
+          elif [ "$EVENT_NAME" = workflow_dispatch ]; then
             node .claude/scripts/themes/theme-followup.mjs --plan --force
           else
             node .claude/scripts/themes/theme-followup.mjs --plan
           fi
       - name: 🟢 Setup Node.js
-        if: steps.plan.outputs.run == 'true'
+        if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '20'
           cache: npm
       - name: Install audit dependencies
-        if: steps.plan.outputs.run == 'true'
+        if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
         run: npm ci --ignore-scripts
       - name: Install browser
         if: steps.plan.outputs.run == 'true'
@@ -156,16 +167,29 @@ jobs:
         run: |
           node .claude/scripts/lib/summarize-claude-execution.mjs "$CLAUDE_EXECUTION_FILE" > .local/ci/theme-followup/review-diagnosis.txt
           cat .local/ci/theme-followup/review-diagnosis.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Restore saved review for verification
+        id: replay
+        if: steps.plan.outputs.replay == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEW_RUN_ID: ${{ inputs.review_run }}
+        run: |
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$REVIEW_RUN_ID" --jq .path)" = .github/workflows/theme-chart-audit-weekly.yml
+          gh run download "$REVIEW_RUN_ID" -n theme-followup-evidence -D /tmp/theme-replay-followup
+          gh run download "$REVIEW_RUN_ID" -n theme-review-evidence -D /tmp/theme-replay-review
+          node .claude/scripts/themes/record-theme-review.mjs --replay /tmp/theme-replay-review/.claude/state/themes/ci-review.json "/tmp/theme-replay-followup/${GITHUB_WORKSPACE#/}/.local/ci/theme-followup" "$REVIEW_RUN_ID"
       - name: Verify review and changed files
         id: review_check
-        if: always() && steps.review.outcome == 'success'
+        if: always() && (steps.review.outcome == 'success' || steps.replay.outcome == 'success')
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
         run: |
-          test -s "$CLAUDE_EXECUTION_FILE"
           git diff --exit-code HEAD -- .claude/scripts/themes/check-theme-review.mjs .claude/scripts/themes/validate-theme-state.mjs
           git diff --exit-code HEAD -- .claude/scripts/themes/record-theme-review.mjs
-          node .claude/scripts/themes/record-theme-review.mjs "$CLAUDE_EXECUTION_FILE"
+          if [ -n "$CLAUDE_EXECUTION_FILE" ]; then
+            test -s "$CLAUDE_EXECUTION_FILE"
+            node .claude/scripts/themes/record-theme-review.mjs "$CLAUDE_EXECUTION_FILE"
+          fi
           node .claude/scripts/themes/check-theme-review.mjs
           node .claude/scripts/themes/validate-theme-state.mjs
           npm run theme:quality:test
@@ -199,7 +223,7 @@ jobs:
             git push origin develop
           fi
       - name: Preserve review evidence
-        if: always() && steps.review_plan.outputs.run == 'true'
+        if: always() && (steps.review_plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true')
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: theme-review-evidence

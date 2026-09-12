@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateReview } from '../check-theme-review.mjs';
+import { validateReview, evidenceFilePath } from '../check-theme-review.mjs';
 
 const input = {
   observedAt: '2026-09-18',
@@ -138,4 +138,10 @@ test('placeholder evidence and unsupported complete source coverage are rejected
     { ...report, unreviewedThemes: [] },
     { ...report, sourceReviews: [{ themeKey: 'test-theme', detail: '公式資料確認済み', evidenceRefs: ['.local/runtime.json'] }] },
   ]) assert.throws(() => validateReview(bad, input, [record], before, before));
+});
+
+test('file evidence supports line numbers without treating them as a filename', () => {
+  assert.equal(evidenceFilePath('.local/ci/theme-followup/runtime.json:7492-7650'), '.local/ci/theme-followup/runtime.json');
+  assert.equal(evidenceFilePath('packages/config.ts#L12-L18'), 'packages/config.ts');
+  assert.equal(evidenceFilePath('.claude/state/themes/quality.json'), '.claude/state/themes/quality.json');
 });
