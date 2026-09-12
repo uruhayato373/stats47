@@ -16,8 +16,8 @@ describe('getSurveyEditorialContent', () => {
     const content = getSurveyEditorialContent('census');
 
     expect(content?.readerQuestions).toContainEqual({
-      question: '30代前半男性の未婚率が高い都道府県は？',
-      rankingKey: 'unmarried-ratio-male-30-34',
+      question: '40代前半（40〜44歳）男性の未婚率が高い都道府県は？',
+      rankingKey: 'unmarried-ratio-male-40-44',
     });
     expect(content?.caveats.length).toBeGreaterThan(0);
   });

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "id": "34700240984-1",
-  "status": "implementation-needed",
+  "status": "proposed",
   "keyword": "40代 未婚 割合 日本 国勢調査",
   "targetPath": "/survey/census",
   "needs": "「40代(40〜44歳・45〜49歳)の未婚率が国勢調査で男女別に何%か、都道府県によってどう違うか」を知りたい検索。国勢調査という一次統計の裏付けを求めている。",
   "gap": "対象ページのreaderQuestionsは「30代前半男性の未婚率が高い都道府県は？」のみで、40代(40-44/45-49、男女計4区分)の未婚率ランキングへの導線が一切ない。該当metric(unmarried-ratio-male-40-44/45-49、unmarried-ratio-female-40-44/45-49)はisActive:trueかつKNOWN_RANKING_KEYSに公開済みだが、censusハブから発見できない。競合uub.jpは2010年国勢調査の47都道府県別40代未婚率表を持ち都道府県比較ニーズに直接回答している。onet.co.jp/nozze.comは全国値中心の解説記事で都道府県別データは持たない。",
-  "done": "apps/web/src/features/survey/survey-editorial.tsのcensusブロックreaderQuestionsに「40代前半(40〜44歳)男性の未婚率が高い都道府県は？」→rankingKey:unmarried-ratio-male-40-44、および対応する女性版(unmarried-ratio-female-40-44)を既存の配列項目と同じ形式で追加する。survey-editorial.test.tsの件数期待値を更新し、npm run type-check --workspace apps/webで検証する。出典は既存metric configのsource(e-Stat 0000010201)を流用し新規一次資料調査は不要。",
+  "done": "censusの既存の未婚率案内を、30代前半男性から40代前半（40〜44歳）男性へ差し替えた。質問とrankingKeyを同時に更新し、国勢調査に属する公開済みランキングへの導線とした。代表導線は最大5件を維持し、他の4件は保持した。男女全区分の案内を追加したものではない。",
   "method": "internal-links",
   "competitors": [
     {
@@ -22,7 +22,13 @@
       "findings": "2015年国勢調査の40代前半・後半男女別未婚率(男性29.3%/25.2%、女性19.1%/15.3%)を示し結婚相談所の実績で締める記事。都道府県別データもあるが対象年齢は30-34歳男性・25-29歳女性など別区分で40代の県別値は無い。"
     }
   ],
-  "patches": [],
+  "patches": [
+    {
+      "property": "question",
+      "oldText": "30代前半男性の未婚率が高い都道府県は？",
+      "newText": "40代前半（40〜44歳）男性の未婚率が高い都道府県は？"
+    }
+  ],
   "research": {
     "targetPage": {
       "url": "https://stats47.jp/survey/census",
@@ -55,6 +61,41 @@
   },
   "selectedAt": "2026-09-12",
   "inputHash": "a7b8fb952041c0af767f8c74dea8858ff39b46380642855288486aab770bcd54",
-  "methods": [],
-  "files": []
+  "methods": [
+    "internal-links"
+  ],
+  "files": [
+    {
+      "path": "apps/web/src/features/survey/survey-editorial.ts",
+      "beforeSha256": "c37cd0d78de5377a8588e6f979db48073be096e44ed58583f500a2e73b1fd561",
+      "sha256": "b8f382d5f914f80af4baa8979d47ecb24b306d5af93dc7941b2ca7ec5ae63f47"
+    }
+  ],
+  "implementation": {
+    "actor": "Codex",
+    "kind": "reviewed-existing-link-replacement",
+    "preparedAt": "2026-09-12T15:08:36.367Z",
+    "reason": "追加案は代表導線3〜5件の既存検査に違反したため不採用。5件の枠内で既存の未婚率案内を検索語に合わせた。",
+    "linkChanges": [
+      {
+        "fromRankingKey": "unmarried-ratio-male-30-34",
+        "toRankingKey": "unmarried-ratio-male-40-44"
+      }
+    ],
+    "verification": {
+      "verifiedAt": "2026-09-12T15:08:36.367Z",
+      "localUrl": "http://127.0.0.1:3037/survey/census",
+      "canonical": "https://stats47.jp/survey/census",
+      "question": "40代前半（40〜44歳）男性の未婚率が高い都道府県は？",
+      "destination": "/ranking/unmarried-ratio-male-40-44",
+      "renderedHtmlSha256": "574fd69ce7388646afe6c0aef89293dae92938d63a282dec5c4992e53ae6e93b",
+      "tests": {
+        "survey": 16,
+        "workspaceTypes": "pass",
+        "fullBuild": "pass"
+      },
+      "indexingChanged": false
+    },
+    "publication": "pending"
+  }
 }
