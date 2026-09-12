@@ -1061,12 +1061,14 @@
         "implementedThemeKey": "retail-commerce",
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "小売販売と店舗・雇用の地域差",
           "adoptedScope": "店舗数・売場面積・年間商品販売額に、小売業のみの従業者数C350302の47県・2021年度を接続。",
           "reason": "卸売を含む雇用との対象差を解消。調査時点の人数を年度平均とせず、今回未取得の月次業態別系列は含めない。",
           "evidence": ".local/verification/themes/retail-employment-source/ingest-proof.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -1735,13 +1737,15 @@
         ],
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "工場立地と投資予定",
           "reason": "2024年の取得済み確報を使用。44県数値＋3県秘匿の47県公表状態と公式全国値を保持。2025年一覧は確認したが本環境で原表取得が403となったため、最新版とは表示しない。",
           "source": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040281965&fileKind=0",
           "sourceSha256": "8efee5987545c812125415122dc1471547e5089f8ccc33cf5b331f68b407c572",
           "evidence": ".local/verification/themes/factory-investment-source.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-252/checkpoint-252.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-252/checkpoint-252.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -2359,13 +2363,15 @@
         ],
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "文化財の種類・所在地と観光導線",
           "adoptedScope": "特別史跡・特別名勝・特別天然記念物の167件と県別所在地。保存費・既存文化財件数と対象を分ける。",
           "reason": "公式DBの3種類の全検索結果を固定。県別検索の広域文化財漏れを県・市等の一次資料で補い、地域を定めない14件を県へ配分しない。",
           "originalAllCultureInventoryFulfilled": false,
           "evidence": ".local/verification/themes/cultural-heritage-source/reproduced/verification.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -3948,13 +3954,15 @@
         ],
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "条件不利地域の集落と高齢化",
           "reason": "原典図表2-93は全国＋10ブロックであり、45県の個別内訳は未公表。県の値を推定せず、県選択を公式ブロック参照へ接続する。北海道・沖縄は1道県ブロック。",
           "source": "https://www.mlit.go.jp/kokudoseisaku/content/001903318.pdf",
           "sourceSha256": "577a570f6bca52f6458a59e3929e91269ae0ffa78bf88434851d1d87ae6b2e5c",
           "original47PrefectureCoreFulfilled": false,
-          "evidence": ".local/verification/themes/depopulated-settlements-source/adoption-summary.json"
+          "evidence": ".local/verification/themes/depopulated-settlements-source/adoption-summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -7593,13 +7601,15 @@
         ],
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "道路橋・トンネルの老朽化と点検",
           "adoptedScope": "全道路管理者の橋梁・トンネル診断集計に、2025年度点検実施施設名一覧の153326橋の架設年度分布を併記。",
           "reason": "掲載橋の39158件は架設年度不明のまま分母に残す。年度差を実年齢にせず、全管理730788橋の年齢構成へ一般化しない。",
           "originalAllManagedBridgeAgeInventoryFulfilled": false,
           "evidence": ".local/verification/themes/bridge-inspection-age-source/reproduced/bridge-source-proof.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -8200,12 +8210,14 @@
         ],
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "積雪と雪にさらされる地域・人口",
           "adoptedScope": "既存の雪日数と積雪量に、2016年度豪雪指定区域×2020年基準人口の47県Geo分析を接続。",
           "reason": "250m格子の中心包含を使用し、境界を横切る格子の感度範囲・原典境界・整数人口保存則を表示。指定なし23県と取得失敗を区別する。現在の指定人口への読替えはしない。",
           "evidence": ".local/verification/themes/snow-designation-source/ingester-proof.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -8600,12 +8612,14 @@
         "implementedThemeKey": "environmental-quality",
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "測定局・水域別の環境基準達成",
           "adoptedScope": "PM2.5測定局の県別集計と、2023年度河川BOD・湖沼/海域CODの原表3427掲載行。",
           "reason": "全国は公式本編、県別は各県欄の掲載行を母集団として保持する。香川西汐入川の類型相違は原典表記と補足を併記。2024年度資料の原表/全国不一致は未解決で、2023年度を最新と表現しない。",
           "evidence": ".local/verification/themes/water-quality-source.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -8979,13 +8993,15 @@
         "implementedThemeKey": "landslide-exposure",
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "土砂災害区域と人口・施設",
           "adoptedScope": "A33-25の利用条件を確認した46県で、2020年基準250m人口とP05行政・公的集会施設を警戒区域／特別警戒区域に重ねる。",
           "reason": "京都は原典の商用制限により対象外とし、未取得を0へ変換しない。指定前区域と線形データを面積分析から除外し、特別警戒区域が警戒区域の部分集合とならない原典差も保持する。",
           "originalAllPrefectureCoverageFulfilled": false,
           "evidence": ".local/verification/themes/landslide-exposure-source/reproduced/ingester-proof.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -9054,7 +9070,7 @@
         "implementedThemeKey": "tsunami-exposure",
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "沿岸地域の津波想定と避難施設",
           "adoptedScope": "許諾と原典範囲を確認した29県の固定版津波想定を個別に使い、原表の浸水深区分ごとに2020/2050人口・P05行政/公的集会施設を集計。東京は島しょ部の想定範囲のみ。",
           "reason": "88入力（津波想定30入力）と29県別途中artifactの保存則を確認。全国合算を作らず、未集計18県を0にしない。東京の想定対象外と区分不能を分離し、安全性を意味させない。固定版のため最新想定とは表示しない。",
@@ -9072,7 +9088,9 @@
             },
             "tokyoScope": "island-scenarios-only"
           },
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -9329,12 +9347,14 @@
         ],
         "scopeAdoption": {
           "adoptedAt": "2026-09-11",
-          "status": "local-data-and-display-verified-unpublished",
+          "status": "published-and-display-verified",
           "originalScope": "災害別避難施設と支援計画",
           "adoptedScope": "個別避難計画と津波避難施設に、GSI掲載の緊急避難場所115878件の8災害対応、指定避難所83294件の一般/福祉別を併記。",
           "reason": "2026-09-04更新の公表CSVを105原典SHAで固定。原典の1/空欄の意味を保持し、未公表自治体21件や施設定義差を表示する。実際の避難可能性や避難成功率へ読替えない。",
           "evidence": ".local/verification/themes/shelter-applicability-source/reproduced/ingester-proof.json",
-          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json"
+          "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
+          "publishedAt": "2026-09-11",
+          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -11313,7 +11333,15 @@
       "hold": 8,
       "dataValidationPending": 101
     },
-    "dataValidationGate": "pending-per-metric-and-source"
+    "dataValidationGate": "pending-per-metric-and-source",
+    "latestRelease": {
+      "status": "55-themes-published-and-verified",
+      "record": ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+      "buildId": "DPaW5i_gnBuIKcU6veJqI",
+      "scopeAssessment": "114 minimum core met; 5 limited; 1 core unfulfilled; 8 hold",
+      "measurement": "THEME-EXPANSION-EFFECT-01"
+    },
+    "implementationStatusScope": "implementationStatus records historical catalog wiring only; current data, adopted scope and production status are in latestRelease.record."
   },
   "origin": {
     "researchCommit": "43cde14ac",

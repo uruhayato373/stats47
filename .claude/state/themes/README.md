@@ -207,7 +207,17 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule THEME-LAUN
 
 `dataQuality.ageReviewKeys` は最新観測が5年以上前の一次資料確認候補であり、未更新の確定ではない。5年周期の調査を自動で stale-data にしない。`freshnessStatus` は公表済み新年との照合が別工程であることを示す。
 
-定期フォロー: 元PCには2026-09-08登録の「全テーマの品質確認と継続改善」の記録がある。このPCではテーマ監査の設定が見つからなかったため、2026-09-09にCodex heartbeat `automation`「テーマ拡充の検証と継続改善」をこのタスクへ登録した。毎週月曜09:00 JSTに確認し、月初は公式資料・構成も見直す。変化のない既知警告は通知しない。元PCの稼働が確認できた場合は重複を照合する。GitHub週次監査はworkflowの公開後に稼働する。
+定期フォロー: `.github/workflows/theme-chart-audit-weekly.yml` に集約する。毎日09:00 JSTの期日判定は依存インストール前に実行し、月曜・月初・未観測d7/d28/d56・手動実行だけ重い監査を行う。日曜のGSC/GA4週次取得を月曜に読み、期間不足・未計測・取得失敗は別々に保存する。期日に観測済みでも標本が不足していれば、次の週次監査で再観測する。
+
+- 機械観測: `ci-followup.json`。全55テーマ×PC/mobileのHTML終端・見出し・章・カード・年固定比較表・グラフ・JS例外・同一originのHTTPエラーを確認する。最初の503を再試行成功で上書きしない。2並列、HTML本文30秒・エラー本文5秒・全量15分の上限を設け、応答待ちで他のテーマを止めない。
+- raw HTML/応答/cf-ray/スクリーンショット: レビュー開始前に実行runの`theme-followup-evidence` artifact（30日）へ保存する。レビュー結果と権限拒否の診断は`theme-review-evidence` artifactへ保存する。gitには要約とrun URLを残す。
+- 改善判断: `.claude/prompts/ci/theme-followup.md`。`--json-schema`による構造化出力を`record-theme-review.mjs`で取り出し（観測日・入力hashはCIが付与）、検証後の`ci-review.json`だけをCIが保存する。新しい異常・checkpoint状態・月替わりで既存Claude OAuthを使い、公式資料の月次調査と証拠付き修正を最大1件行う。公式URL付きの`sourceReviews`を月内で累積し、記録のないテーマはCIが未確認として計算する。仮の文言・根拠パス不在は拒否し、残りは次回の週次監査で再開する。全国住宅の空間原典がない候補105を代替データで完了にしない。
+- 保存済みレビューだけを再検証する場合は `gh workflow run theme-chart-audit-weekly.yml --ref develop -f review_run=<元run ID>`。同じworkflowのartifactを復元し、元run・入力hash・観測日が現在の観測と一致する場合だけ通常の検査・保存へ進む。再試験を新しい画面観測として扱わない。
+- `check-theme-review.mjs` が変更範囲・実験日付/baseline/観測の不変性を確認し、状態検査とテストを必須化する。コード変更は全型検査・対象テスト・web build後にdraft PRへ出す。CIはmerge/deployを実行しない。確認待ちの`theme-improvement` PRがある場合は重複作成をしない。
+- 固定`theme-alert`は異常内容が変わったときだけ更新、復旧でClose。認証・レビュー・検査の失敗はworkflowを失敗させる。定期起動はこのCIへ集約し、ローカルheartbeatを重複登録しない。
+
+手動再実行は `gh workflow run theme-chart-audit-weekly.yml`。ローカル再現は `node .claude/scripts/themes/theme-followup.mjs --plan --today YYYY-MM-DD`、`npm run theme:portfolio:audit`、`node --import tsx .claude/scripts/themes/audit-theme-runtime.ts`。画面の限定確認は `--themes real-income,railway`（全量の代わりに完了扱いしない）。
+
 
 
 ## 別PCでテーマ改善の検証を再開する
@@ -268,5 +278,4 @@ Turbo経由では `--env-mode=loose` が必要。公開品質baselineへstaged�
 未開始pendingの改善baselineを修正する場合は `evaluate-theme-experiments.mjs --update-baseline <id> '<json>'` を使う。
 baseline・期間・scope・status・evidenceRefsのみ変更でき、launchや公開日・観測・判定がある実験は拒否する。
 修正前後の値と公式APIの期間・条件・SHAは `.claude/state/metrics/themes/` に保存する。欠測を0で補完しない。
-ローカルbuild日を公開日としない。Codex heartbeatはタスク側の設定でgit移行されないため、重複登録前に
-既存設定を確認する。週次CIの計測と既知警告の抑制はこのREADME前半の契約に従う。
+ローカルbuild日を公開日としない。継続フォローはCIに集約し、計測と既知警告の抑制はこのREADME前半の契約に従う。

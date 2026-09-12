@@ -1,35 +1,63 @@
 name: 📈 Theme Quality Audit (weekly)
 
-# 日曜05:00 JST。公開R2をread-only検査し、構成・履歴・coverage・recipeの退行を検知。
+# 毎日09:00 JSTに期日判定。月曜・月初・未観測のd7/d28/d56・手動だけ全量監査。
 # 新規/変化した異常だけissueを更新し、同じ警告は再通知しない。
 on:
   schedule:
-    - cron: "0 20 * * 6"
+    - cron: '0 0 * * *'
   workflow_dispatch:
+    inputs:
+      review_run:
+        description: '保存済みレビューの再検証run ID（未指定なら全量監査）'
+        required: false
+        type: string
 permissions:
   contents: write
   issues: write
+  pull-requests: write
 concurrency:
   group: theme-chart-audit
   cancel-in-progress: false
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
           fetch-depth: 1
+      - name: Decide whether observations are due
+        id: plan
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REVIEW_RUN_ID: ${{ inputs.review_run }}
+        run: |
+          if [ -n "$REVIEW_RUN_ID" ]; then
+            test "$EVENT_NAME" = workflow_dispatch
+            [[ "$REVIEW_RUN_ID" =~ ^[0-9]+$ ]]
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "replay=true" >> "$GITHUB_OUTPUT"
+          elif [ "$EVENT_NAME" = workflow_dispatch ]; then
+            node .claude/scripts/themes/theme-followup.mjs --plan --force
+          else
+            node .claude/scripts/themes/theme-followup.mjs --plan
+          fi
       - name: 🟢 Setup Node.js
+        if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
+          node-version: '20'
           cache: npm
       - name: Install audit dependencies
+        if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
         run: npm ci --ignore-scripts
+      - name: Install browser
+        if: steps.plan.outputs.run == 'true'
+        run: npx playwright install --with-deps chromium
       - name: 🔎 Audit catalog and public data
+        if: steps.plan.outputs.run == 'true'
         id: check
         run: |
           set +e
@@ -37,24 +65,44 @@ jobs:
           live_code=${PIPESTATUS[0]}
           timeout --kill-after=20s 480s npm run theme:portfolio:audit 2>&1 | tee /tmp/theme-quality.log
           quality_code=${PIPESTATUS[0]}
+          timeout --kill-after=20s 900s node --import tsx .claude/scripts/themes/audit-theme-runtime.ts 2>&1 | tee .local/ci/theme-followup/runtime.log
+          runtime_code=${PIPESTATUS[0]}
+          node .claude/scripts/themes/theme-followup.mjs --live-code "$live_code" --quality-code "$quality_code" --runtime-code "$runtime_code" >> "$GITHUB_OUTPUT"
+          summary_code=$?
           {
             echo "live_code=$live_code"
             echo "quality_code=$quality_code"
-            node .claude/scripts/themes/build-theme-alert.mjs --output /tmp/theme-alert.md --live-code "$live_code" --quality-code "$quality_code"
+            echo "runtime_code=$runtime_code"
+            echo "summary_code=$summary_code"
+            node .claude/scripts/themes/build-theme-alert.mjs --output /tmp/theme-alert.md --live-code "$live_code" --quality-code "$quality_code" --followup-code "$summary_code"
             alert_code=$?
             echo "alert_code=$alert_code"
           } >> "$GITHUB_OUTPUT"
           cat /tmp/theme-alert.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve evidence including initial failures
+        if: always() && steps.plan.outputs.run == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: theme-followup-evidence
+          path: |
+            .local/ci/theme-followup/
+            .claude/state/themes/ci-followup.json
+            /tmp/theme-live.log
+            /tmp/theme-quality.log
+            /tmp/theme-alert.md
+          include-hidden-files: true
+          retention-days: 30
       - name: 📤 Commit observations to develop
-        if: steps.check.outputs.alert_code == '0'
+        id: commit
+        if: steps.check.outputs.alert_code == '0' && steps.check.outputs.summary_code == '0'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for observation in .claude/state/theme-charts/live-audit.json .claude/state/themes/quality.json .claude/state/themes/quality.definitions.json .claude/state/themes/quality.observations.json .claude/state/themes/quality.lastGoodObservations.json .claude/state/themes/portfolio.json .claude/state/themes/experiments.json; do
+          for observation in .claude/state/theme-charts/live-audit.json .claude/state/themes/quality.json .claude/state/themes/quality.definitions.json .claude/state/themes/quality.observations.json .claude/state/themes/quality.lastGoodObservations.json .claude/state/themes/portfolio.json .claude/state/themes/experiments.json .claude/state/themes/ci-followup.json; do
             if [ -f "$observation" ]; then git add -- "$observation"; fi
           done
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "chore(theme): weekly quality observations [skip ci]"
+          git commit -m "chore(theme): quality and runtime observations [skip ci]"
           git pull --rebase origin develop
           git push origin develop
       - name: Update actionable alert
@@ -78,12 +126,121 @@ jobs:
           elif [ -n "$existing" ]; then
             gh issue close "$existing" --comment "テーマ品質監査の異常が解消しました。"
           fi
+      - name: Check for a pending improvement PR
+        id: review_plan
+        if: always() && steps.commit.outcome == 'success' && steps.check.outputs.review_required == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create theme-improvement --description "テーマの証拠付き改善案" --color 0e8a16 --force
+          existing=$(gh pr list --base develop --label theme-improvement --state open --json number --jq 'length')
+          if [ "$existing" = 0 ]; then echo "run=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Review evidence and prepare one improvement
+        id: review
+        if: always() && steps.review_plan.outputs.run == 'true'
+        timeout-minutes: 20
+        uses: anthropics/claude-code-base-action@646b4a772085257c35182cd167bdd6b3b1017675 # v2.1.220
+        env:
+          NODE_VERSION: '20.x'
+        with:
+          prompt_file: .claude/prompts/ci/theme-followup.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: 'false'
+          settings: '{"disableAllHooks":true}'
+          claude_args: |
+            --model sonnet
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["proposed","no-change","blocked"]},"summary":{"type":"string","minLength":20,"maxLength":1000},"findings":{"type":"array","items":{"type":"object","properties":{"themeKey":{"type":"string"},"detail":{"type":"string","minLength":20},"evidenceRefs":{"type":"array","items":{"type":"string","minLength":10},"minItems":1}},"required":["themeKey","detail","evidenceRefs"],"additionalProperties":false},"maxItems":10},"tests":{"type":"array","items":{"type":"string"}},"sourceReviews":{"type":"array","items":{"type":"object","properties":{"themeKey":{"type":"string"},"detail":{"type":"string","minLength":20},"evidenceRefs":{"type":"array","items":{"type":"string","minLength":10},"minItems":1}},"required":["themeKey","detail","evidenceRefs"],"additionalProperties":false}}},"required":["status","summary","findings","sourceReviews","tests"],"additionalProperties":false}'
+            --effort high
+            --max-turns 80
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Write,Edit,Glob,Grep,Bash,WebFetch,WebSearch"
+            --allowedTools "Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Bash(node *),Bash(npx tsx *),Bash(npx vitest run *),Bash(npm run *)"
+            --disallowedTools "Bash(git *),Bash(gh *),Bash(npm run deploy*),Bash(npm run push*),Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+      - name: Summarize review execution
+        if: always() && steps.review_plan.outputs.run == 'true'
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: |
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$CLAUDE_EXECUTION_FILE" > .local/ci/theme-followup/review-diagnosis.txt
+          cat .local/ci/theme-followup/review-diagnosis.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Restore saved review for verification
+        id: replay
+        if: steps.plan.outputs.replay == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEW_RUN_ID: ${{ inputs.review_run }}
+        run: |
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$REVIEW_RUN_ID" --jq .path)" = .github/workflows/theme-chart-audit-weekly.yml
+          gh run download "$REVIEW_RUN_ID" -n theme-followup-evidence -D /tmp/theme-replay-followup
+          gh run download "$REVIEW_RUN_ID" -n theme-review-evidence -D /tmp/theme-replay-review
+          node .claude/scripts/themes/record-theme-review.mjs --replay /tmp/theme-replay-review/.claude/state/themes/ci-review.json "/tmp/theme-replay-followup/${GITHUB_WORKSPACE#/}/.local/ci/theme-followup" "$REVIEW_RUN_ID"
+      - name: Verify review and changed files
+        id: review_check
+        if: always() && (steps.review.outcome == 'success' || steps.replay.outcome == 'success')
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+          REPLAY_MODE: ${{ steps.plan.outputs.replay }}
+        run: |
+          git diff --exit-code HEAD -- .claude/scripts/themes/check-theme-review.mjs .claude/scripts/themes/validate-theme-state.mjs
+          git diff --exit-code HEAD -- .claude/scripts/themes/record-theme-review.mjs
+          if [ "$REPLAY_MODE" != true ]; then
+            test -s "$CLAUDE_EXECUTION_FILE"
+            node .claude/scripts/themes/record-theme-review.mjs "$CLAUDE_EXECUTION_FILE"
+          fi
+          node .claude/scripts/themes/check-theme-review.mjs
+          node .claude/scripts/themes/validate-theme-state.mjs
+          npm run theme:quality:test
+      - name: Verify implementation
+        if: always() && steps.review_check.outcome == 'success' && steps.review_check.outputs.code_changed == 'true'
+        run: |
+          npm run type-check
+          npm run test:run --workspace apps/web -- src/features/theme-dashboard
+          npm run build --workspace apps/web
+      - name: Publish verified review
+        if: success() && steps.review_check.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROPOSAL_CHANGES: ${{ steps.review_check.outputs.proposal_changes }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$PROPOSAL_CHANGES" = true ]; then
+            branch="codex/theme-followup-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+            git switch -c "$branch"
+            while IFS= read -r file; do git add -- "$file"; done < .local/ci/theme-followup/review-paths.txt
+            git commit -m "fix(theme): propose evidence-based follow-up"
+            git fetch origin develop
+            git push origin "HEAD:$branch"
+            gh pr create --draft --base develop --head "$branch" --label theme-improvement --title "テーマ計測に基づく改善案" --body-file .local/ci/theme-followup/review-body.md
+          else
+            git add -- .claude/state/themes/ci-review.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "chore(theme): record evidence review [skip ci]"
+            git pull --rebase origin develop
+            git push origin develop
+          fi
+      - name: Preserve review evidence
+        if: always() && (steps.review_plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true')
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: theme-review-evidence
+          path: |
+            .local/ci/theme-followup/review*
+            .claude/state/themes/ci-review.json
+          include-hidden-files: true
+          retention-days: 30
       - name: Propagate audit failures
-        if: always()
+        if: always() && steps.plan.outputs.run == 'true'
         env:
           CHECK_OUTCOME: ${{ steps.check.outcome }}
           LIVE_CODE: ${{ steps.check.outputs.live_code }}
           QUALITY_CODE: ${{ steps.check.outputs.quality_code }}
           ALERT_CODE: ${{ steps.check.outputs.alert_code }}
+          SUMMARY_CODE: ${{ steps.check.outputs.summary_code }}
+          RUNTIME_CODE: ${{ steps.check.outputs.runtime_code }}
         run: |
-          test "$CHECK_OUTCOME" = success && test "$LIVE_CODE" = 0 && test "$QUALITY_CODE" = 0 && test "$ALERT_CODE" = 0
+          test "$CHECK_OUTCOME" = success && test "$LIVE_CODE" = 0 && test "$QUALITY_CODE" = 0 && test "$ALERT_CODE" = 0 && test "$SUMMARY_CODE" = 0 && test "$RUNTIME_CODE" = 0
