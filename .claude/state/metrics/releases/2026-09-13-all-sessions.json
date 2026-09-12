@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-09-13",
-  "status": "integrating",
+  "status": "publishing-data",
   "authorization": "User explicitly requested all-session integration, one production deployment, and cleanup to main/develop only.",
   "sourceRefs": {
     "develop": "4503b49ec27744a688b94445c351f56b7926a3a0",
@@ -57,14 +57,41 @@
     "workflowPolicy": {
       "workflows": 69,
       "findings": 0
+    },
+    "allWorkspaceTypeCheck": {
+      "passed": 25,
+      "total": 25
+    },
+    "scriptsTypeCheck": "passed",
+    "dataRefreshScopedTests": {
+      "passed": 32
+    },
+    "workflowCommitBackRegression": {
+      "passed": 105,
+      "skipped": 0
+    },
+    "geoPublicationTests": {
+      "passed": 10
+    },
+    "designSystem": "passed-after-fixing-10-inherited-heading-violations",
+    "localUi": {
+      "status": "pending-retry",
+      "attempt": "Cold Next dev compilation exceeded navigation timeout; stopped own port 3040 to run heavy checks sequentially on 8 GB host."
     }
   },
   "remaining": [
-    "Complete CI publication helpers, dependency integration and full release checks",
+    "Integrate dependency PRs and finish full build/local checks",
     "Rebuild/publish Geo source assets and catalog in CI",
     "Fetch and validate updated Rakuten catalogs in CI",
     "Merge release after green CI and verify production",
     "Verify SEO publication record and seven-day observation",
     "Synchronize main/develop and delete merged branches/worktrees"
-  ]
+  ],
+  "integrationCommit": "b3e803b0bf13d94e09e4cffd6d1b6790ddf6198a",
+  "ci": {
+    "affiliatePublish": 34725325729,
+    "geoSourcePublish": 34725325770,
+    "affiliateInventory": 34725325776,
+    "developQuality": 34725325771
+  }
 }
