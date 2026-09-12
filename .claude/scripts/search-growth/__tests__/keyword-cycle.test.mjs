@@ -57,6 +57,11 @@ test('observation starts at verified publication, with exactly seven days cooldo
   assert.deepEqual(recordDeployment(log,proposal,snapshot([row('x')]),deployment),log);
   assert.throws(()=>recordDeployment(log,{...proposal,id:'124-1'},snapshot([row('x')]),deployment));
 });
+test('an existing active log retains the keyword registry priority when GSC has no row', () => {
+  const keywords={keywords:[{...row('high'),priority:'high'}]};
+  const log={schemaVersion:1,entries:[{keyword:'high',targetPath:'/ranking/high',status:'active',actions:[]}]};
+  assert.equal(selectKeyword({keywords,log,snapshot:snapshot([])}).group,4);
+});
 test('rank history is append-only, verified by hash, and repeated runs never replace a date', t => {
   const repo=fs.mkdtempSync(path.join(os.tmpdir(),'keyword-history-')); t.after(()=>fs.rmSync(repo,{recursive:true,force:true}));
   fs.mkdirSync(path.join(repo,'data/seo'),{recursive:true}); fs.writeFileSync(path.join(repo,'data/seo/rank-history.json'),JSON.stringify({schemaVersion:1,snapshots:[]}));
