@@ -20,10 +20,16 @@ on:
         required: false
         type: string
       dry_run:
-        description: "R2 に書かず件数だけ出す"
+        description: "実データを取得・監査してartifactへ保存 (R2未公開)"
         required: false
         type: boolean
         default: false
+      scope:
+        description: "更新対象（返礼品だけを再取得する場合は furusato）"
+        required: false
+        type: choice
+        options: [all, items, furusato]
+        default: all
   schedule:
     # 毎日 JST 04:00 (UTC 19:00)。deploy や他の cron と重ならない時間帯。
     - cron: "0 19 * * *"
@@ -69,20 +75,40 @@ jobs:
       - name: 📦 Install
         run: npm ci
 
-      - name: 🛒 Fetch → R2
+      - name: 🛒 Fetch fresh snapshots to staging
         env:
           # 展開を env 経由にして、入力値がシェルに直接埋め込まれるのを避ける
           INPUT_LIMIT: ${{ inputs.limit }}
-          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          INPUT_SCOPE: ${{ inputs.scope }}
         run: |
           # 配列で組み立てる (単純な文字列連結は shellcheck SC2086 になる)
-          ARGS=()
+          ARGS=(--local .local/r2)
           if [ -n "$INPUT_LIMIT" ]; then ARGS+=(--limit "$INPUT_LIMIT"); fi
-          if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          if [ -n "$INPUT_SCOPE" ]; then ARGS+=(--scope "$INPUT_SCOPE"); fi
           # ★ -r setup-cli.js は必須。R2 の server barrel と repositories が server-only を
           #   import しており、素の tsx 実行では throw する (sync-snapshots/run.sh と同じ規約)。
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
             apps/web/scripts/sync-rakuten-catalog.ts "${ARGS[@]}"
+
+      - name: 🔎 Audit all prefectures and representative products
+        if: inputs.limit == '' && (inputs.scope == '' || inputs.scope == 'all')
+        run: |
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
+            apps/web/scripts/audit-rakuten-catalog.ts \
+            --input-dir .local/r2 --output-dir .local/rakuten-quality --terms さんま,コーヒー
+
+      - name: 📎 Preserve fetch and quality evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rakuten-catalog-${{ github.run_id }}
+          path: |
+            .local/r2/manifest.json
+            .local/r2/app/rakuten/
+            .local/rakuten-quality/audit.json
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: warn
 
       # ★ saveToR2 は .local/r2/ に書くだけ。実 R2 への反映は diff-push-r2 (S3 API) が行う
       #   2 段構成 (sync-snapshots/run.sh と同じ)。この段が無いと「書込済」と表示されても

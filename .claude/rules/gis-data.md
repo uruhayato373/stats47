@@ -96,6 +96,10 @@ sourceを書き換えただけでは同じkeyの旧values.jsonを公開できな
 
 ## 県の帰属 — 属性 → 空間結合 → 距離上限つき許容 (★2026-08-17 新設)
 
+ShapefileのDBFは `.cpg` を確認し、Shift_JIS / CP932 / Windows-31Jを正規化して初回読取時に指定する。`.cpg` が欠ける旧配布（W09/05など）は `registry.ts` の `shapefileEncoding` を明示する。読取後の再デコードでは欠損文字を復元できない。原典から再生成し、件数と非文字属性の一致・置換文字の不存在を確認する。ZIPの指定 `UTF-8/` がない場合も、同梱GeoJSONを先に探してUTF-8を厳格検証し、存在するのにDBFへ切り替えない（L01/26・L02/25で文字化けを実測）。
+
+A42/A43/A44/18のように同梱GeoJSON自体がUTF-8でない場合は、検証済みの `shapefileEncoding` がある時だけ同じZIPのShapefile全体へ切り替える。抽出途中のGeoJSONと混ぜない。文字化け後の属性や、潰れた形状から地名を推測して復元しない。A38/20は `node --import tsx packages/gis/src/mlit-ksj/scripts/rebuild-medical-areas.ts --source-zip <公式ZIP>` で原典SHAを照合し、原典の行政コード・県名だけで県別に分割する。一次・二次・三次各47県と原典件数を保存し、量子化・簡略化を行わず小島の形状を保つ。生成した `repair.json` は `export-geo-source-catalog.ts --source-manifest <repair.json>` に渡し、全出力のSHA・bytes・件数保存を確認して索引へ反映する。
+
 正典: `packages/gis/src/mlit-ksj/prefecture-assign.ts` (純関数・テスト 29 件)。
 **この経路以外で県を決めてはならない。**
 

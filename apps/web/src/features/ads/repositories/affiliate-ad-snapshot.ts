@@ -8,6 +8,7 @@ import {
   adVertical,
   type AffiliateVertical,
 } from "../constants/affiliate-category";
+import { isAffiliateActive, matchesRankingTarget, uniqueAffiliateDestinations } from "../constants/affiliate-delivery-policy";
 
 import type { AffiliateAd, AffiliateLocationCode } from "../types";
 
@@ -96,37 +97,15 @@ const loadSnapshot = createSnapshotReader<AffiliateAdsSnapshot, AffiliateAdsSnap
   fallback: { generatedAt: new Date(0).toISOString(), ads: [] },
 });
 
-function isActive(ad: AffiliateAdRow): boolean {
-  if (!ad.isActive) return false;
-  const today = new Date().toISOString().slice(0, 10);
-  if (ad.startDate && ad.startDate > today) return false;
-  if (ad.endDate && ad.endDate < today) return false;
-  return true;
-}
-
 function compareByPriorityDesc(a: AffiliateAdRow, b: AffiliateAdRow): number {
   return (b.priority ?? 0) - (a.priority ?? 0);
-}
-
-/**
- * ranking-key 単位のターゲティング判定 (転職クラスタの文脈一致配置)。
- * - targetRankingKeys 未設定/空 → 無制限 (従来挙動・後方互換)。
- * - 設定済 かつ rankingKey 指定あり → 一致時のみ対象 (ranking ページの native / sidebar 枠)。
- * - 設定済 かつ rankingKey 無し (blog 等 非 ranking 文脈) → 対象外。
- *   targetRankingKeys は広告を掲載できるページの hard allowlist として扱う。
- */
-function matchesRankingTarget(ad: AffiliateAdRow, rankingKey?: string): boolean {
-  const targets = ad.targetRankingKeys;
-  if (!targets || targets.length === 0) return true;
-  if (rankingKey == null) return false;
-  return targets.includes(rankingKey);
 }
 
 async function getActive(includeExperimentVariants = false): Promise<AffiliateAdRow[]> {
   if (process.env.NEXT_PHASE === "phase-production-build") return [];
   try {
     const snapshot = await loadSnapshot();
-    return snapshot.ads.filter(isActive).filter(
+    return snapshot.ads.filter((ad) => isAffiliateActive(ad)).filter(
       (ad) => includeExperimentVariants || !(ad.experimentId || ad.variantId),
     );
   } catch (error) {
@@ -155,7 +134,7 @@ export async function readActiveTextAdByVerticalFromR2(
   const set = new Set<AffiliateVertical>([vertical]);
   const matched = active
     .filter(
-      (a) => inVerticals(a, set) && a.locationCode === locationCode && a.adType === "text",
+      (a) => inVerticals(a, set) && a.locationCode === locationCode && a.adType === "text" && matchesRankingTarget(a),
     )
     .sort(compareByPriorityDesc);
   return matched[0] ?? null;
@@ -174,7 +153,7 @@ export async function readActiveTextAdsByVerticalsFromR2(
   if (verticals.length === 0) return [];
   const active = await getActive();
   const set = new Set(verticals);
-  return active
+  return uniqueAffiliateDestinations(active
     .filter(
       (a) =>
         inVerticals(a, set) &&
@@ -182,7 +161,7 @@ export async function readActiveTextAdsByVerticalsFromR2(
         a.adType === "text" &&
         matchesRankingTarget(a, rankingKey),
     )
-    .sort(compareByPriorityDesc)
+    .sort(compareByPriorityDesc))
     .slice(0, limit);
 }
 
@@ -197,11 +176,11 @@ export async function readActiveBannersByVerticalsFromR2(
   if (verticals.length === 0) return [];
   const active = await getActive();
   const set = new Set(verticals);
-  return active
+  return uniqueAffiliateDestinations(active
     .filter(
       (a) => inVerticals(a, set) && a.adType === "banner" && matchesRankingTarget(a, rankingKey),
     )
-    .sort(compareByPriorityDesc)
+    .sort(compareByPriorityDesc))
     .slice(0, limit);
 }
 
@@ -212,11 +191,12 @@ export async function readActiveBannersByVerticalsFromR2(
  */
 export async function readActiveExperimentVariantsByVerticalFromR2(
   vertical: AffiliateVertical,
+  rankingKey?: string,
 ): Promise<AffiliateAdRow[]> {
   const active = await getActive(true);
   const set = new Set<AffiliateVertical>([vertical]);
   return active
-    .filter((a) => inVerticals(a, set) && !!a.experimentId && !!a.variantId)
+    .filter((a) => inVerticals(a, set) && !!a.experimentId && !!a.variantId && matchesRankingTarget(a, rankingKey))
     .sort(compareByPriorityDesc);
 }
 
@@ -225,8 +205,8 @@ export async function readActiveBannersByLocationFromR2(
   limit = 10,
 ): Promise<AffiliateAdRow[]> {
   const active = await getActive();
-  return active
-    .filter((a) => a.locationCode === locationCode && a.adType === "banner")
-    .sort(compareByPriorityDesc)
+  return uniqueAffiliateDestinations(active
+    .filter((a) => a.locationCode === locationCode && a.adType === "banner" && matchesRankingTarget(a))
+    .sort(compareByPriorityDesc))
     .slice(0, limit);
 }

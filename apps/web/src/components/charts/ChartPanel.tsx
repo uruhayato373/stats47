@@ -7,6 +7,8 @@ import { cn } from '@stats47/components';
 import { SurfaceSection } from '@/components/surface';
 
 export interface ChartPanelProps {
+  /** 固定キーがあるグラフでは、SSRとクライアントで同じ見出しIDを使う。 */
+  id?: string;
   title?: ReactNode;
   children: ReactNode;
   icon?: ReactNode;
@@ -21,6 +23,7 @@ export interface ChartPanelProps {
 }
 
 export function ChartPanel({
+  id,
   title,
   children,
   icon,
@@ -35,11 +38,14 @@ export function ChartPanel({
 }: ChartPanelProps) {
   const hasHeader = title || description || action || icon;
   const generatedId = useId();
-  const titleId = title ? `${generatedId}-title` : undefined;
-  const descriptionId = description ? `${generatedId}-description` : undefined;
+  const titleId = title ? `${id ?? generatedId}-title` : undefined;
+  const descriptionId = description
+    ? `${id ?? generatedId}-description`
+    : undefined;
 
   return (
     <SurfaceSection
+      id={id}
       className={cn('w-full p-0', className)}
       aria-labelledby={titleId}
       aria-describedby={descriptionId}

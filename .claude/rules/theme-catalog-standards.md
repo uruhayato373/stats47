@@ -39,7 +39,7 @@ ThemeCatalog (SSOT, git TS)
         └─▶ R2 app/page-components/theme/<key>.json → 本番テーマページが読む (完全DBレス)
 ```
 
-- `THEME_CATALOGS` には現在 21 テーマを登録済み。登録テーマの生成物を直接編集しない。
+- 登録テーマの一覧は `THEME_CATALOGS` が正典。登録テーマの生成物を直接編集しない。
 - bespoke / 未登録 route をカタログ化する場合は catalog TS 作成と registry 登録を同じ変更で行い、golden diff を確認する。
 
 ---
@@ -186,6 +186,14 @@ metricGroups: [
 - **`defaultCheckedKeys` は 3 件以内**が目安 (4 件以上は warn)。mount 時にその数だけ
   時系列を取りに行くので、初期表示のコストに直結する。**そのカードで最初に見せたい対比**を選ぶ。
 - **全ての非 context 指標をどれかのグループに入れる** (未所属は `[group-orphan]` warn)。
+
+### 横断比較
+
+`ThemeComparisonSection` は既存の章の後で、`metricGroups.rankingKeys` と `tabIndicators` から
+比較対象を導出する。専用の overview 指標リストは持たない。県の中央値・差分・指標切替地図には
+同じ年次の有限な都道府県値だけを使い、全国・市区町村・別年を混ぜない。固定 `comparisonYear` を
+尊重し、既存 `comparisonMap` の地図は重複表示しない。比較地図は県選択だけで、章の配置や既存
+セレクタを置き換えない。誤読防止注記は公開 `RankingItem.annotation` / `description` を使う。
 
 ### 実行時の振る舞い (UI 側の約束)
 

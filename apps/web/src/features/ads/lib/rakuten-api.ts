@@ -19,6 +19,8 @@
  */
 
 /** 楽天市場 商品検索 API のレスポンス型 (formatVersion=2 / 要素はフラット) */
+import { furusatoQualityReasons, productQualityReasons, type RakutenQualityItem } from "./rakuten-item-quality";
+
 interface RakutenItemSearchResponse {
   count: number;
   page: number;
@@ -42,8 +44,8 @@ export interface RakutenItem {
   genreId: string;
 }
 
-/** ふるさと納税のジャンルID */
-export const FURUSATO_NOZEI_GENRE_ID = "553283";
+/** 日次取得・フォールバックとも Expected QPS=1 を下回る間隔を使う。 */
+export const RAKUTEN_REQUEST_INTERVAL_MS = 1200;
 
 /** 楽天トラベル 都道府県 middleClassCode マッピング */
 export const PREF_TO_TRAVEL_MIDDLE_CLASS: Record<string, string> = {
@@ -98,15 +100,32 @@ export const PREF_TO_TRAVEL_MIDDLE_CLASS: Record<string, string> = {
 
 interface SearchItemsParams {
   keyword?: string;
+  excludeKeyword?: string;
   genreId?: string;
   hits?: number;
   sort?: string;
   /** 既定 3 秒。ページ描画を止めないための上限で、超えたらカードを出さない。 */
   timeoutMs?: number;
+  /** Batch generation must distinguish failed requests from genuine zero results. */
+  strict?: boolean;
 }
 
 export const RAKUTEN_ITEM_SEARCH_ENDPOINT =
   "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701";
+
+export class RakutenApiError extends Error {
+  constructor(public readonly code: "missing-credentials" | "http" | "network" | "invalid-response", public readonly status?: number) {
+    // Never include request URLs, credentials or upstream response bodies in errors.
+    super(`Rakuten API ${code}${status ? ` (HTTP ${status})` : ""}`);
+    this.name = "RakutenApiError";
+  }
+}
+
+export function toRakutenQualityItem(item: RakutenItem): RakutenQualityItem {
+  return { name: item.itemName, url: item.affiliateUrl ?? item.itemUrl, price: item.itemPrice,
+    image: item.mediumImageUrls[0]?.imageUrl ?? item.smallImageUrls[0]?.imageUrl ?? null,
+    shopName: item.shopName, genreId: item.genreId };
+}
 
 function getRakutenConfig() {
   const applicationId = process.env.RAKUTEN_APP_ID;
@@ -159,13 +178,16 @@ export function normalizeRakutenItems(data: unknown): RakutenItem[] {
   });
 }
 
-/** 楽天市場 商品検索 API を呼び出す。失敗は常に [] (カードを出さない) に倒す。 */
+/** 楽天市場 商品検索 API。既定は [] へ縮退、バッチの strict は取得失敗を区別する。 */
 export async function searchRakutenItems(
   params: SearchItemsParams,
 ): Promise<RakutenItem[]> {
   const { applicationId, accessKey, affiliateId } = getRakutenConfig();
   // 新 API は applicationId と accessKey の両方が必須。片方でも欠ければ呼ばない。
-  if (!applicationId || !accessKey) return [];
+  if (!applicationId || !accessKey) {
+    if (params.strict) throw new RakutenApiError("missing-credentials");
+    return [];
+  }
 
   const url = new URL(RAKUTEN_ITEM_SEARCH_ENDPOINT);
   url.searchParams.set("applicationId", applicationId);
@@ -173,8 +195,14 @@ export async function searchRakutenItems(
   // 要素をフラットにする (未指定だと {Item:{...}} ラップになり呼び出し側が壊れる)
   url.searchParams.set("formatVersion", "2");
   url.searchParams.set("hits", String(params.hits ?? 4));
+  // Official API: restricted search + available products with images. Still validate titles ourselves.
+  // https://webservice.rakuten.co.jp/documentation/ichiba-item-search
+  url.searchParams.set("field", "1");
+  url.searchParams.set("imageFlag", "1");
+  url.searchParams.set("availability", "1");
 
   if (params.keyword) url.searchParams.set("keyword", params.keyword);
+  if (params.excludeKeyword) url.searchParams.set("NGKeyword", params.excludeKeyword);
   if (params.genreId) url.searchParams.set("genreId", params.genreId);
   if (params.sort) url.searchParams.set("sort", params.sort);
   // アフィリエイト URL を得るために必須。無いと itemUrl だけになり成果にならない。
@@ -188,40 +216,75 @@ export async function searchRakutenItems(
       next: { revalidate: 86400 },
       signal: AbortSignal.timeout(params.timeoutMs ?? 3000),
     });
-    if (!res.ok) return [];
+    if (!res.ok) throw new RakutenApiError("http", res.status);
     const data: RakutenItemSearchResponse = await res.json();
+    if (!data || !(Array.isArray(data.Items) || Array.isArray((data as unknown as { items?: unknown }).items))) {
+      throw new RakutenApiError("invalid-response");
+    }
     return normalizeRakutenItems(data);
-  } catch {
+  } catch (error) {
+    if (params.strict) throw error instanceof RakutenApiError ? error : new RakutenApiError("network");
     return [];
   }
 }
 
 /**
  * ふるさと納税の返礼品を検索する (都道府県指定)。
- * signatureKeyword があれば「県名 + 代表返礼品」で高意図検索し、0 件なら県名のみで再検索する
- * (絞りすぎで動的カードを失わないためのフォールバック)。
+ * 「ふるさと納税 + 県名 + 代表返礼品」で検索し、対象県の自治体ショップだけを採用する。
+ * 0 件なら代表返礼品を外す。553283 は「ギフト券・商品券」であり返礼品共通のジャンルではない。
  */
 export async function searchFurusatoItems(
   prefName: string,
   hits = 4,
   signatureKeyword?: string,
   timeoutMs?: number,
+  strict = false,
 ): Promise<RakutenItem[]> {
-  if (signatureKeyword) {
-    const focused = await searchRakutenItems({
-      keyword: `${prefName} ${signatureKeyword}`,
-      genreId: FURUSATO_NOZEI_GENRE_ID,
-      hits,
+  const { applicationId, accessKey } = getRakutenConfig();
+  if (!applicationId || !accessKey) {
+    if (strict) throw new RakutenApiError("missing-credentials");
+    return [];
+  }
+
+  const search = async (keyword: string) => {
+    const items = await searchRakutenItems({
+      keyword,
+      // 検索は商品説明にも一致するため、多めに取得して寄附先の県を確認する。
+      hits: 30,
       sort: "-reviewCount",
       timeoutMs,
+      strict,
+      // Both searches stay in food, not gift certificates (553283) or unrelated goods.
+      // Official category: https://www.rakuten.co.jp/category/100227/
+      genreId: "100227",
     });
+    const seen = new Set<string>();
+    return items.filter((item) => {
+      const value = toRakutenQualityItem(item);
+      if (furusatoQualityReasons(value, prefName, { requireShop: true, context: "food" }).length || seen.has(value.url)) return false;
+      seen.add(value.url);
+      return true;
+    }).slice(0, hits);
+  };
+  const keyword = `ふるさと納税 ${prefName}`;
+  if (signatureKeyword) {
+    const focused = await search(`${keyword} ${signatureKeyword}`);
     if (focused.length > 0) return focused;
+    // 2 回の検索の「後」ではなく「間」で待つ。直後の再検索による 429 を防ぐ。
+    await new Promise((resolve) => setTimeout(resolve, RAKUTEN_REQUEST_INTERVAL_MS));
   }
-  return searchRakutenItems({
-    keyword: prefName,
-    genreId: FURUSATO_NOZEI_GENRE_ID,
-    hits,
-    sort: "-reviewCount",
-    timeoutMs,
-  });
+  return search(keyword);
+}
+
+/** More candidates than display slots; low-quality results must not occupy the four slots. */
+export async function searchRakutenProductItems(keyword: string, hits = 4, timeoutMs = 15000): Promise<RakutenItem[]> {
+  const items = await searchRakutenItems({ keyword, excludeKeyword: "ふるさと納税", hits: 30,
+    sort: "-reviewCount", timeoutMs, strict: true });
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const value = toRakutenQualityItem(item);
+    if (productQualityReasons(value, keyword).length || seen.has(value.url)) return false;
+    seen.add(value.url);
+    return true;
+  }).slice(0, hits);
 }

@@ -152,3 +152,13 @@ describe("fetchMetricTimeseriesAction — データが無いとき", () => {
     expect(readStatsValues).not.toHaveBeenCalled();
   });
 });
+
+it('暦年の気象指標は旧snapshotの年度ラベルを補正する', async () => {
+  readRankingItemFromR2.mockResolvedValue(item(ESTAT_CONFIG));
+  readStatsValues.mockResolvedValue({ rows: [
+    { areaCode: '13000', yearCode: '2024100000', yearName: '2024年度（暫定値）', value: 18.5 },
+  ] });
+  const result = await fetchMetricTimeseriesAction('average-temperature', '13000');
+  expect(result.points).toEqual([{ year: '2024100000', yearName: '2024年（暫定値）', value: 18.5 }]);
+  expect(fetchFormattedStats).not.toHaveBeenCalled();
+});

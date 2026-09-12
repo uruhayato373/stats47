@@ -1,4 +1,5 @@
-import { CATEGORY_AFFILIATE_MAP } from "../constants/affiliate-category";
+import { adVertical } from "../constants/affiliate-category";
+import { isAffiliateDestinationExcluded, type AffiliateDestination } from "../constants/affiliate-delivery-policy";
 import { readActiveBannersByLocationFromR2 as findActiveBannersByLocation } from "../repositories/affiliate-ad-snapshot";
 
 import { BannerAd } from "./BannerAd";
@@ -6,6 +7,7 @@ import { BannerAd } from "./BannerAd";
 interface SidebarStickyBannerAdProps {
   /** GA4 link_position。設置面ごとに変える (例: "home-left-rail") */
   position?: string;
+  excludeAds?: readonly AffiliateDestination[];
 }
 
 /**
@@ -24,14 +26,13 @@ interface SidebarStickyBannerAdProps {
  */
 export async function SidebarStickyBannerAd({
   position = "sidebar-sticky",
+  excludeAds = [],
 }: SidebarStickyBannerAdProps) {
-  const banners = await findActiveBannersByLocation("sidebar-sticky", 1);
-  const banner = banners[0];
+  const banners = await findActiveBannersByLocation("sidebar-sticky", Infinity);
+  const banner = banners.find((ad) => !isAffiliateDestinationExcluded({ href: ad.htmlContent, programRef: ad.programRef }, excludeAds));
   if (!banner || !banner.imageUrl) return null;
 
-  const affiliateCategory = banner.categoryKey
-    ? CATEGORY_AFFILIATE_MAP[banner.categoryKey]
-    : undefined;
+  const affiliateCategory = adVertical(banner);
 
   return (
     <div className="hidden lg:block">

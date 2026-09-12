@@ -6,8 +6,9 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   1. page-data-batch: e-Stat → .local/r2/app/stats/<metric>/{values,cities}.json (R2 直書き)
 #   2. diff-push-r2 --prefix app/stats: 観測値を R2 に push
 #   3. sync-snapshots run.sh: 派生 snapshot (master / ranking-values / area-profile 等) を
-#      git TS + R2 観測値から再生成 → R2 push。exporter は .local/r2 (本 run で更新済) を
-#      公開 URL より優先して読むため、同一 job 内で最新観測値を反映できる。
+#      git TS + R2 観測値から再生成 → R2 push。CI reader はS3から更新済観測値を読む。
+#   snapshot_scope=ranking は指定1〜50件の都道府県stats/item/values/正規化値と
+#   全件ranking-items索引だけを更新。master/area-profile/correlation等は更新しない。
 #
 # ※ 旧 db:pull/db:push (ビルド DB round-trip) は廃止。観測値も exporter も DB を読まない
 #   (page-data-batch / export-master-snapshots / generate-ranking-items / area-profile は
@@ -28,7 +29,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #
 # request file 形式 (data/data-refresh-requests.json):
 #   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false,
-#     "migrateLegacyRecipes": false }
+#     "migrateLegacyRecipes": false, "snapshotScope": "all" }
 #   - metric: 空なら全 metric (2,295 件・60 分では終わらない可能性があるので通常は指定する)
 #   - dryRun: true = fetch と形状検証のみ (R2 に書かない)
 #   - allowEmpty: 0 件 fatal を警告に落とす key (カンマ区切り)。★下記の注意を読むこと
@@ -54,6 +55,12 @@ on:
         description: "更新する metric key (空なら全 metric)"
         required: false
         default: ""
+      snapshot_scope:
+        description: "派生更新範囲。ranking: 指定1〜50件の都道府県rankingと全件索引のみ"
+        required: false
+        default: all
+        type: choice
+        options: [all, ranking]
       since:
         description: "差分取得の起点 (YYYY-MM-DD、空なら全期間)"
         required: false
@@ -124,6 +131,7 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           INPUT_METRIC: ${{ inputs.metric }}
+          INPUT_SNAPSHOT_SCOPE: ${{ inputs.snapshot_scope }}
           INPUT_SINCE: ${{ inputs.since }}
           INPUT_ALLOW_EMPTY: ${{ inputs.allow_empty }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
@@ -132,6 +140,7 @@ jobs:
           REQ=data/data-refresh-requests.json
           if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
             METRIC=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.metric??''))")
+            SNAPSHOT_SCOPE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.snapshotScope??'all'))")
             SINCE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.since??''))")
             ALLOW_EMPTY=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.allowEmpty??''))")
             DRY=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
@@ -148,13 +157,24 @@ jobs:
             exit 0
           else
             METRIC="$INPUT_METRIC"
+            SNAPSHOT_SCOPE="${INPUT_SNAPSHOT_SCOPE:-all}"
             SINCE="$INPUT_SINCE"
             ALLOW_EMPTY="$INPUT_ALLOW_EMPTY"
             DRY="$INPUT_DRY_RUN"
             MIGRATE_LEGACY_RECIPES="$INPUT_MIGRATE_LEGACY_RECIPES"
           fi
+          case "$SNAPSHOT_SCOPE" in
+            all|ranking) ;;
+            *) echo 'snapshot_scope must be all or ranking' >&2; exit 1 ;;
+          esac
+          # ranking入力はGITHUB_OUTPUTへ渡す前にも形式を限定する。
+          if [ "$SNAPSHOT_SCOPE" = "ranking" ] && ! [[ "$METRIC" =~ ^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$ ]]; then
+            echo 'ranking scope requires explicit comma-separated metric keys' >&2
+            exit 1
+          fi
           {
             echo "metric=$METRIC"
+            echo "snapshot_scope=$SNAPSHOT_SCOPE"
             echo "since=$SINCE"
             echo "allow_empty=$ALLOW_EMPTY"
             echo "dry_run=$DRY"
@@ -178,6 +198,34 @@ jobs:
         if: steps.resolve.outputs.skip != 'true'
         run: npm ci
 
+      - name: 🔎 Validate ranking refresh scope
+        if: steps.resolve.outputs.skip != 'true'
+        env:
+          SNAPSHOT_SCOPE: ${{ steps.resolve.outputs.snapshot_scope }}
+          REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
+          REFRESH_SINCE: ${{ steps.resolve.outputs.since }}
+          REFRESH_ALLOW_EMPTY: ${{ steps.resolve.outputs.allow_empty }}
+          MIGRATE_LEGACY_RECIPES: ${{ steps.resolve.outputs.migrate_legacy_recipes }}
+        run: |
+          [ "$SNAPSHOT_SCOPE" = "ranking" ] || exit 0
+          if [ -n "$REFRESH_SINCE" ] || [ -n "$REFRESH_ALLOW_EMPTY" ] || [ "$MIGRATE_LEGACY_RECIPES" = "true" ]; then
+            echo 'ranking scope requires full fetch without allow_empty; 互換recipeの移行と併用不可' >&2
+            exit 1
+          fi
+          npx tsx -e '
+            const { getMetricConfig } = require("@stats47/data-configs");
+            const { GONE_RANKING_KEYS } = require("./packages/ranking/src/config/gone-ranking-keys.ts");
+            const keys = process.env.REFRESH_METRIC.split(",");
+            if (keys.length > 50 || new Set(keys).size !== keys.length) throw new Error("Expected 1-50 unique metric keys");
+            for (const key of keys) {
+              if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) throw new Error("Invalid metric key: " + key);
+              const config = getMetricConfig(key);
+              if (!config?.isActive || !config.entities.includes("prefecture") || GONE_RANKING_KEYS.has(key)) throw new Error("Not an active prefecture ranking: " + key);
+              if (config.source.kind !== "estat" && config.source.kind !== "kakei-chousa") throw new Error("No e-Stat fetch path: " + key);
+            }
+            console.log("Validated ranking refresh scope: " + keys.length);
+          '
+
       # e-Stat → .local/r2/app/stats (観測値 R2 直書き)。dry_run=true なら fetch のみ。
       # ★ゲートで落ちても「取り込みに成功した分」は push させる (partial-publish)。
       #   以前は 1 件でもゲートに掛かると exit 1 → 後続の push が skip され、
@@ -190,13 +238,20 @@ jobs:
         id: batch
         continue-on-error: true
         if: steps.resolve.outputs.skip != 'true'
+        env:
+          SNAPSHOT_SCOPE: ${{ steps.resolve.outputs.snapshot_scope }}
+          REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
+          REFRESH_SINCE: ${{ steps.resolve.outputs.since }}
+          REFRESH_ALLOW_EMPTY: ${{ steps.resolve.outputs.allow_empty }}
+          REFRESH_DRY_RUN: ${{ steps.resolve.outputs.dry_run }}
         run: |
           # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           ARGS=()
-          [ -n "${{ steps.resolve.outputs.metric }}" ] && ARGS+=(--metric "${{ steps.resolve.outputs.metric }}")
-          [ -n "${{ steps.resolve.outputs.since }}" ] && ARGS+=(--since "${{ steps.resolve.outputs.since }}")
-          [ -n "${{ steps.resolve.outputs.allow_empty }}" ] && ARGS+=(--allow-empty "${{ steps.resolve.outputs.allow_empty }}")
-          [ "${{ steps.resolve.outputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
+          [ -n "$REFRESH_METRIC" ] && ARGS+=(--metric "$REFRESH_METRIC")
+          [ -n "$REFRESH_SINCE" ] && ARGS+=(--since "$REFRESH_SINCE")
+          [ -n "$REFRESH_ALLOW_EMPTY" ] && ARGS+=(--allow-empty "$REFRESH_ALLOW_EMPTY")
+          [ "$REFRESH_DRY_RUN" = "true" ] && ARGS+=(--dry-run)
+          [ "$SNAPSHOT_SCOPE" = "ranking" ] && ARGS+=(--kind prefecture)
           echo "page-data-batch.ts ${ARGS[*]}"
           npx tsx packages/data-configs/scripts/page-data-batch.ts "${ARGS[@]}"
 
@@ -210,7 +265,33 @@ jobs:
       # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)
         if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
-        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
+        env:
+          SNAPSHOT_SCOPE: ${{ steps.resolve.outputs.snapshot_scope }}
+          REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
+          BATCH_OUTCOME: ${{ steps.batch.outcome }}
+        run: |
+          if [ "$SNAPSHOT_SCOPE" = "ranking" ]; then
+            test "$BATCH_OUTCOME" = "success" || { echo 'Scoped fetch failed; no observations published' >&2; exit 1; }
+            # 全対象の取得成功とstagingの完全一致を、最初のPUTより前に検査する。
+            node -e '
+              const fs = require("node:fs");
+              const keys = process.env.REFRESH_METRIC.split(",");
+              const base = ".local/r2/app/stats";
+              if (JSON.stringify(fs.readdirSync(base).sort()) !== JSON.stringify([...keys].sort())) throw new Error("Unexpected stats scope");
+              for (const key of keys) {
+                const dir = base + "/" + key;
+                if (JSON.stringify(fs.readdirSync(dir)) !== JSON.stringify(["values.json"])) throw new Error("Unexpected stats files: " + key);
+                const data = JSON.parse(fs.readFileSync(dir + "/values.json", "utf8"));
+                if (data.metricKey !== key || data.entityKind !== "prefecture" || !data.rows?.length || data.meta?.rowCount !== data.rows.length || !data.meta?.recipe || !data.rows.some(row => Number.isFinite(row.value))) throw new Error("Empty/wrong stats: " + key);
+              }
+            '
+            IFS=',' read -r -a KEYS <<< "$REFRESH_METRIC"
+            for KEY in "${KEYS[@]}"; do
+              npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/stats/$KEY/"
+            done
+          else
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
+          fi
 
       # 派生 snapshot (master / ranking-values / area-profile 等) を git TS + 更新済観測値から
       # 再生成 → R2 push (run.sh は CI=true で push する)。
@@ -232,11 +313,62 @@ jobs:
       #   (この job は R2_ACCESS_KEY_ID 等 S3 認証を持つため、production にすれば S3 API 経由の
       #   一覧に切り替わる。既知の罠: memory project_kakei_expansion_pipeline_gotchas)。
       - name: 🗂️ Regenerate derived snapshots + push to R2
-        if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.resolve.outputs.snapshot_scope != 'ranking'
         env:
           NODE_ENV: production
           NODE_OPTIONS: --max-old-space-size=8192
         run: bash .claude/skills/db/sync-snapshots/run.sh
+
+      # statsのPUT完了後、production/S3 readで同じキーの配信用派生を生成する。
+      # items --onlyでもall.jsonは全registryから生成される。索引を部分集合へ縮めない。
+      - name: 🗂️ Regenerate scoped ranking snapshots + push to R2
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.resolve.outputs.snapshot_scope == 'ranking'
+        env:
+          NODE_ENV: production
+          NODE_OPTIONS: --max-old-space-size=8192
+          REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
+        run: |
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --only "$REFRESH_METRIC"
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-values.ts --only "$REFRESH_METRIC"
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-normalized-values.ts --only "$REFRESH_METRIC"
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js -e '
+            const fs = require("node:fs");
+            const path = require("node:path");
+            const { getMetricConfig, listAllMetrics } = require("@stats47/data-configs");
+            const { GONE_RANKING_KEYS } = require("./packages/ranking/src/config/gone-ranking-keys.ts");
+            const { activeNormalizationOptions } = require("./packages/ranking/src/scripts/generate-ranking-normalized-values.ts");
+            const { rankingNormalizedValuesKeyPath } = require("./packages/ranking/src/types/snapshot.ts");
+            const read = file => JSON.parse(fs.readFileSync(".local/r2/" + file, "utf8"));
+            const sameKeys = (actual, expected) => JSON.stringify([...actual].sort()) === JSON.stringify([...expected].sort());
+            const keys = process.env.REFRESH_METRIC.split(",");
+            if (!sameKeys(fs.readdirSync(".local/r2/app/ranking"), keys)) throw new Error("Unexpected ranking scope");
+            if (!sameKeys(fs.readdirSync(".local/r2/app/ranking-items"), ["all.json"])) throw new Error("Unexpected index staging");
+            const all = read("app/ranking-items/all.json");
+            const expected = listAllMetrics().filter(c => c.entities.includes("prefecture") && !GONE_RANKING_KEYS.has(c.key)).map(c => c.key);
+            if (all.count !== expected.length || !Array.isArray(all.items) || !sameKeys(all.items.map(item => item.rankingKey), expected)) throw new Error("Incomplete all.json inventory");
+            for (const key of keys) {
+              const config = getMetricConfig(key);
+              const options = activeNormalizationOptions(config);
+              const files = ["item.json", "values.json", ...options.map(option => path.basename(rankingNormalizedValuesKeyPath(key, option.type))), ...(options.length ? ["national-trend.json"] : [])];
+              if (!sameKeys(fs.readdirSync(".local/r2/app/ranking/" + key), files)) throw new Error("Incomplete/unexpected ranking files: " + key);
+              const item = read("app/ranking/" + key + "/item.json").item;
+              if (item?.rankingKey !== key || !item.latestYear || !sameKeys(item.availableYears.map(year => year.yearCode), [...new Set(read("app/stats/" + key + "/values.json").rows.map(row => row.yearCode))])) throw new Error("Wrong item years: " + key);
+              if (JSON.stringify(all.items.find(entry => entry.rankingKey === key)) !== JSON.stringify(item)) throw new Error("Item/index mismatch: " + key);
+              for (const file of files.filter(file => file !== "item.json")) {
+                const data = read("app/ranking/" + key + "/" + file);
+                if (data.rankingKey !== key || data.areaType !== "prefecture") throw new Error("Wrong snapshot identity: " + key + "/" + file);
+                const rows = file === "national-trend.json" ? data.series?.flatMap(series => series.points) : data.partitions?.flatMap(partition => partition.values);
+                if (!rows?.length) throw new Error("Empty snapshot: " + key + "/" + file);
+                if (rows.some(row => row.yearName !== row.yearCode + (config.yearFormat === "fiscal" ? "年度" : "年"))) throw new Error("Stale year labels: " + key + "/" + file);
+              }
+            }
+            console.log("Validated full inventory and scoped ranking files: " + keys.length);
+          '
+          IFS=',' read -r -a KEYS <<< "$REFRESH_METRIC"
+          for KEY in "${KEYS[@]}"; do
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/ranking/$KEY/"
+          done
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking-items/
 
       - name: 🧹 Purge Workers Cache after snapshot refresh
         if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
@@ -257,7 +389,7 @@ jobs:
       # 次の退行を見逃す。逆に「増やす」方向を自動化すると壊れたデータを自動で
       # 追認してしまうため、**現行リストの部分集合になったときだけ** commit-back する。
       - name: 🔻 Shrink shape allowlist (縮小時のみ commit-back)
-        if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true' && github.event_name != 'pull_request')
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.snapshot_scope != 'ranking' && (steps.resolve.outputs.dry_run != 'true' && github.event_name != 'pull_request')
         continue-on-error: true
         run: npx tsx packages/data-configs/scripts/shrink-shape-allowlist.ts --apply
 
@@ -316,8 +448,8 @@ jobs:
           PUBLIC_CONTRACT_OUTCOME: ${{ steps.public_contract.outcome }}
         run: |
           if [ "$BATCH_OUTCOME" = "failure" ]; then
-            echo "page-data-batch がゲートで落ちた。成功分の push は完了しているが、" >&2
-            echo "落ちた metric の R2 は旧データのまま。ログの [fatal] 行を見て是正する。" >&2
+            echo "page-data-batch がゲートで落ちた。full scopeは成功分のみ公開、ranking scopeは公開停止。" >&2
+            echo "ログの [fatal] 行とPush observations工程を確認して是正する。" >&2
           fi
           if [ "$PUBLIC_CONTRACT_OUTCOME" = "failure" ]; then
             echo "更新後の公開データ契約監査が落ちた。ranking / theme / blog の欠落を是正する。" >&2

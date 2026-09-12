@@ -10,6 +10,9 @@ import { cn } from '@stats47/components';
  */
 export const LEFT_RAIL_GRID_CLASS =
   'min-[992px]:grid min-[992px]:grid-cols-[264px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10';
+const COMPACT_LEFT_RAIL_GRID_CLASS =
+  'min-[992px]:grid min-[992px]:grid-cols-[224px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start';
+
 export const LEFT_RAIL_VISIBLE_CLASS = 'hidden min-[992px]:block';
 export const LEFT_RAIL_NARROW_ONLY_CLASS = 'min-[992px]:hidden';
 
@@ -19,6 +22,8 @@ interface LeftRailLayoutProps {
   /** 本文の意味要素。PageShell は div、ArticleShell は main を使う。 */
   mainAs?: 'div' | 'main';
   mainClassName?: string;
+  /** データ中心のダッシュボードで、左ナビより本文幅を優先する。 */
+  density?: 'default' | 'compact';
 }
 
 /**
@@ -32,11 +37,18 @@ export function LeftRailLayout({
   children,
   mainAs = 'div',
   mainClassName,
+  density = 'default',
 }: LeftRailLayoutProps) {
   const Main = mainAs;
 
   return (
-    <div className={LEFT_RAIL_GRID_CLASS}>
+    <div
+      className={
+        density === 'compact'
+          ? COMPACT_LEFT_RAIL_GRID_CLASS
+          : LEFT_RAIL_GRID_CLASS
+      }
+    >
       <aside className={LEFT_RAIL_VISIBLE_CLASS}>{leftRail}</aside>
       <Main className={cn('min-w-0', mainClassName)}>{children}</Main>
     </div>

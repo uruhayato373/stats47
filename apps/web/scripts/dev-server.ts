@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { spawn, type ChildProcess } from 'node:child_process';
+import { spawn, spawnSync, type ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,6 +15,18 @@ const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const APP_ROOT = path.resolve(SCRIPT_DIR, '..');
 const PAGE_COMPONENTS_ROOT = path.join(SCRIPT_DIR, 'data', 'page-components');
 const LOCAL_R2_ROOT = path.resolve(APP_ROOT, '..', '..', '.local', 'r2');
+
+function stopChild(child: ChildProcess | null): void {
+  if (!child?.pid || child.exitCode !== null) return;
+  if (process.platform === 'win32') {
+    // This PID belongs to a direct child created by this supervisor.
+    spawnSync('taskkill.exe', ['/PID', String(child.pid), '/T', '/F'], {
+      windowsHide: true,
+      stdio: 'ignore',
+      timeout: 5000,
+    });
+  } else child.kill();
+}
 
 function parsePort(value: string | undefined, fallback: number): number {
   if (!value) return fallback;
@@ -43,7 +55,9 @@ async function waitForGateway(url: string, child: ChildProcess): Promise<void> {
       );
     }
     try {
-      const response = await fetch(`${url}/__health`);
+      const response = await fetch(`${url}/__health`, {
+        signal: AbortSignal.timeout(1000),
+      });
       if (response.ok) return;
     } catch {
       // 起動待ち。最終試行まで短い間隔で再確認する。
@@ -71,6 +85,7 @@ function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {
     cwd: APP_ROOT,
     env,
     stdio: 'inherit',
+    windowsHide: true,
   });
 }
 
@@ -112,7 +127,7 @@ function startWindowsGateway(port: number, upstream: string): ChildProcess {
       '-CacheSeconds',
       String(cacheSeconds),
     ],
-    { cwd: APP_ROOT, stdio: 'inherit' }
+    { cwd: APP_ROOT, stdio: 'inherit', windowsHide: true }
   );
 }
 
@@ -125,8 +140,8 @@ async function main(): Promise<void> {
   const stop = (exitCode: number): void => {
     if (isStopping) return;
     isStopping = true;
-    next?.kill();
-    gateway?.kill();
+    stopChild(next);
+    stopChild(gateway);
     process.exitCode = exitCode;
   };
 
@@ -146,7 +161,13 @@ async function main(): Promise<void> {
       console.error('R2開発ゲートウェイを起動できませんでした', error);
       stop(1);
     });
-    await waitForGateway(gatewayUrl, gateway);
+    try {
+      await waitForGateway(gatewayUrl, gateway);
+    } catch (error) {
+      stop(1);
+      throw error;
+    }
+    if (isStopping) return;
     console.log(`[dev] R2 data/images: ${gatewayUrl}`);
     next = startNext(nextPort, gatewayUrl);
   } else {

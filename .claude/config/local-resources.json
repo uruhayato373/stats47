@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "diskWarnGiB": 25,
+  "diskCriticalGiB": 15,
+  "memoryWarnGiB": 3,
+  "memoryCriticalGiB": 1.5,
+  "cacheAgeDays": 7,
+  "historyDays": 30,
+  "scanTimeoutSeconds": 120,
+  "cachePaths": [
+    "apps/web/.next/cache",
+    "apps/admin/.next/cache",
+    "apps/web/.next/standalone/apps/web/.next/cache"
+  ],
+  "protectedPaths": [
+    "books",
+    "docs/books",
+    ".claude/pdfs",
+    ".local/r2",
+    ".local/affiliate-status"
+  ]
+}

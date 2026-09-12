@@ -12,6 +12,7 @@ url = "https://graphql.mcp.cloudflare.com/mcp"
 url = "https://observability.mcp.cloudflare.com/mcp"
 
 [mcp_servers.codex]
+enabled = false
 command = "codex"
 args = ["mcp-server"]
 
@@ -20,8 +21,16 @@ command = "node"
 args = [".claude/scripts/search-growth/mcp/server.mjs"]
 
 [mcp_servers.shadcn]
+enabled = false
 command = "npx"
 args = [
     "shadcn@latest",
     "mcp",
 ]
+
+# Native file tools and gh cover these operations in standalone Codex.
+[mcp_servers.filesystem]
+enabled = false
+
+[mcp_servers.github]
+enabled = false

@@ -39,6 +39,8 @@ const BASELINE = new Set([
   "DataUsageCard",
   "DefinitionsCard",
   "FeaturedRankingCard",
+  // SurfaceLinkCard composite: shared versioned GIS preview and display-area provenance across directory and related sources.
+  "GeoSourceLinkCard",
   "KeyMetricsTableCard",
   "KpiCard",
   "MultiStatCard",

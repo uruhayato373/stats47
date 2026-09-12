@@ -1,5 +1,6 @@
 # Memory Index
 
+- [feedback_geo_source_initial_display.md](feedback_geo_source_initial_display.md) — GISは操作前の地図表示・区画切替・一覧リンクによる移動を検証。代表区画を選んだ後のPASSだけで初期表示を完了扱いしない
 - [project_ai_content_headless_claude_batch.md](project_ai_content_headless_claude_batch.md) — 個別ai-content改善はheadless author+critic。大規模構造補完は決定的backfill + 境界サンプル意味レビューへ分離。枠枯渇・スロットリング・rebase競合の罠
 - [feedback_geo_mesh_evidence_integrity.md](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
 - [feedback_geo_publication_boundary.md](feedback_geo_publication_boundary.md) — Geoは空間演算・全入力集合・途中artifactを必須化。保存則だけでは洪水107入力の欠落を検出できず、生成・R2・外部公開を別ゲートで検証する
@@ -52,7 +53,7 @@
 - [reference_publish_youtube_47_summary.md](reference_publish_youtube_47_summary.md) — 47県カウントアップまとめ動画(~22分)スキル /publish-youtube-47-summary
 - [reference_voicevox_setup.md](reference_voicevox_setup.md) — VOICEVOX engine(CPU版)ローカル起動。CLIのみで127.0.0.1:50021
 - [project_redesign_bundle.md](project_redesign_bundle.md) — Claude Designリデザイン11ページ×4案取込済。/apply-redesign、ranking=D案Phase1完了
-- [affiliate-strategy.md](affiliate-strategy.md) — アフィリエイト戦略(A8.netバナー登録・記事内配置ルール)
+- [affiliate-strategy.md](affiliate-strategy.md) — 広告の停止・文脈・同一案件重複・連続可視1秒の検証、楽天返礼品分類
 - [project_city_choropleth_design.md](project_city_choropleth_design.md) — 市区町村コロプレス切替の設計結論(既存スキーマ・ドリルダウン方式)
 - [project_ga4_setup.md](project_ga4_setup.md) — GA4設定状況(カスタムイベント・Consent Mode・管理画面)
 - [reference_estat_wage_survey.md](reference_estat_wage_survey.md) — 賃金構造基本統計調査(0003445758)の職種別年収データ構造・登録済みキー

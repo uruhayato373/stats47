@@ -9,7 +9,6 @@ import { Readable } from "node:stream";
 import unzipper from "unzipper";
 
 import * as shapefile from "shapefile";
-import iconv from "iconv-lite";
 
 import type { KsjCodeConfig } from "./types";
 
@@ -108,7 +107,8 @@ export async function downloadZip(
  */
 export async function extractGeoJson(
   zipPath: string,
-  geojsonDirInZip: string
+  geojsonDirInZip: string,
+  encodingOverride?: 'utf-8' | 'shift-jis',
 ): Promise<string[]> {
   const extractDir = zipPath.replace(/\.zip$/, "");
   if (!fs.existsSync(extractDir)) {
@@ -119,6 +119,11 @@ export async function extractGeoJson(
   const usedOutputNames = new Set<string>();
 
   const directory = await unzipper.Open.file(zipPath);
+  const isLegacyGeoJson = (entryPath: string) => /shift[-_]?jis\//i.test(entryPath);
+  const hasTargetGeoJson = geojsonDirInZip !== "" && directory.files.some(
+    (entry: { path: string }) => entry.path.endsWith(".geojson") &&
+      entry.path.includes(geojsonDirInZip) && !isLegacyGeoJson(entry.path)
+  );
 
   for (const [entryIndex, entry] of directory.files.entries()) {
     const entryPath = entry.path;
@@ -128,10 +133,9 @@ export async function extractGeoJson(
 
     // UTF-8 ディレクトリ内を優先
     const isInTargetDir =
-      geojsonDirInZip === "" || entryPath.includes(geojsonDirInZip);
+      !hasTargetGeoJson || entryPath.includes(geojsonDirInZip);
     // Shift-JIS ディレクトリは除外
-    const isShiftJis =
-      entryPath.includes("Shift-JIS/") || entryPath.includes("ShiftJIS/");
+    const isShiftJis = isLegacyGeoJson(entryPath);
 
     if (!isInTargetDir && geojsonDirInZip !== "") continue;
     if (isShiftJis) continue;
@@ -146,6 +150,17 @@ export async function extractGeoJson(
     usedOutputNames.add(outputName);
     const outputPath = path.join(extractDir, outputName);
     const content = await entry.buffer();
+    // Legacy-encoding compatibility for A42–A44 originals; remove when all supported archives provide valid UTF-8 GeoJSON.
+    // Only an explicitly verified DBF encoding authorizes this fallback. Never mix
+    // partially extracted GeoJSON with a second representation of the same data.
+    try {
+      new TextDecoder("utf-8", { fatal: true }).decode(content);
+    } catch (error) {
+      if (!encodingOverride) throw error;
+      const files = await extractAndConvertShapefile(zipPath, extractDir, encodingOverride);
+      if (!files.length) throw error;
+      return files;
+    }
     fs.writeFileSync(outputPath, content);
     geojsonFiles.push(outputPath);
     console.log(
@@ -156,7 +171,7 @@ export async function extractGeoJson(
   if (geojsonFiles.length === 0) {
     // GeoJSON がない場合 → Shapefile からの変換を試みる
     console.log(`  GeoJSON 未検出。Shapefile からの変換を試みます...`);
-    const shpFiles = await extractAndConvertShapefile(zipPath, extractDir);
+    const shpFiles = await extractAndConvertShapefile(zipPath, extractDir, encodingOverride);
     if (shpFiles.length === 0) {
       throw new Error(
         `GeoJSON/Shapefile not found in zip: ${zipPath}`
@@ -184,9 +199,16 @@ export function cleanupTempFiles(zipPath: string): void {
 /**
  * zip から Shapefile を抽出し、Node.js の shapefile ライブラリで GeoJSON に変換
  */
+export function resolveShapefileEncoding(cpg?: string, override?: 'utf-8' | 'shift-jis'): string {
+  if (override) return override;
+  const label = cpg?.trim().toLowerCase().replace(/[_\s-]/g, '');
+  return label && ['shiftjis', 'sjis', '932', 'cp932', 'windows31j'].includes(label) ? 'shift-jis' : 'utf-8';
+}
+
 async function extractAndConvertShapefile(
   zipPath: string,
-  extractDir: string
+  extractDir: string,
+  encodingOverride?: 'utf-8' | 'shift-jis',
 ): Promise<string[]> {
   const directory = await unzipper.Open.file(zipPath);
 
@@ -226,14 +248,8 @@ async function extractAndConvertShapefile(
     }
 
     // .cpg で文字エンコーディングを確認
-    let encoding = "UTF-8";
     const cpgEntry = files.get(".cpg");
-    if (cpgEntry) {
-      const cpgContent = (await cpgEntry.buffer()).toString().trim();
-      if (cpgContent.toLowerCase().includes("shift") || cpgContent === "932") {
-        encoding = "Shift_JIS";
-      }
-    }
+    const encoding = resolveShapefileEncoding(cpgEntry ? (await cpgEntry.buffer()).toString() : undefined, encodingOverride);
 
     // shapefile ライブラリで GeoJSON に変換
     console.log(
@@ -250,27 +266,14 @@ async function extractAndConvertShapefile(
 
     const source = await shapefile.open(
       shpBuffer,
-      encoding === "Shift_JIS" ? undefined : dbfBuffer,
-      { encoding: encoding === "Shift_JIS" ? undefined : "utf-8" }
+      dbfBuffer,
+      { encoding }
     );
 
     let result = await source.read();
     while (!result.done) {
       features.push(result.value as never);
       result = await source.read();
-    }
-
-    // Shift_JIS の場合は dbf を iconv でデコード
-    if (encoding === "Shift_JIS") {
-      const source2 = await shapefile.open(shpBuffer, dbfBuffer);
-      const features2: typeof features = [];
-      let r2 = await source2.read();
-      while (!r2.done) {
-        features2.push(r2.value as never);
-        r2 = await source2.read();
-      }
-      features.length = 0;
-      features.push(...features2);
     }
 
     const geojson = {

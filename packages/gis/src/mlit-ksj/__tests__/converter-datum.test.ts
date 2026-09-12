@@ -54,6 +54,55 @@ describe('Tokyo Datum conversion', () => {
     }
   });
 
+  it('医療機関の名称・区分・診療科目・病床数を原典の意味どおりに保持する', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'stats47-medical-fields-'));
+    try {
+      const file = join(directory, 'medical.geojson');
+      writeFileSync(
+        file,
+        JSON.stringify({
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: [135, 35] },
+              properties: {
+                P04_001: 2,
+                P04_002: '地域診療所',
+                P04_003: '所在地',
+                P04_004: '内科',
+                P04_005: '小児科',
+                P04_006: null,
+                P04_007: 9,
+                P04_008: 19,
+              },
+            },
+          ],
+        })
+      );
+      const result = convertGeoJsonFilesToTopoJson([file], 'P04', {
+        quantize: 0,
+        simplifyQuantile: 0,
+      });
+      const object = Object.values(result.topology.objects)[0];
+      expect(object.type).toBe('GeometryCollection');
+      if (object.type !== 'GeometryCollection')
+        throw new Error('Expected collection');
+      expect(object.geometries[0].properties).toEqual({
+        facilityType: 2,
+        facilityName: '地域診療所',
+        address: '所在地',
+        departments1: '内科',
+        departments2: '小児科',
+        departments3: null,
+        administratorType: 9,
+        beds: 19,
+      });
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
+
   it('ファイル数と入力byte上限を超えない決定的なグループへ分割する', () => {
     const groups = partitionByLimits(
       [6, 4, 8, 2],

@@ -24,6 +24,7 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     dataId: "W09",
     downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/W09/W09-05/W09-05_GML.zip",
     geojsonDirInZip: "",
+    shapefileEncoding: 'shift-jis',
     propertyMap: {},
     simplifyOptions: { quantize: 100000, simplifyQuantile: 0.01 },
     // W09_002 は 5 桁市区町村コード (湖沼の所在地)。
@@ -298,6 +299,7 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
   }],
   ["C28", {
     dataId: "C28",
+    shapefileEncoding: "shift-jis",
     downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/C28/C28-{VERSION}/C28-{VERSION}_GML.zip",
     geojsonDirInZip: "",
     propertyMap: {},
@@ -336,6 +338,9 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     dataId,
     officialPageDiscovery: true,
     geojsonDirInZip: "",
+    // Legacy DBF is verified CP932 without CPG; remove when all supported archives for the dataset declare a correct encoding.
+    ...(["A03", "A30a5", "A42", "A43", "A44"].includes(dataId)
+      ? { shapefileEncoding: "shift-jis" as const } : {}),
     propertyMap: {},
   }]),
 ]);

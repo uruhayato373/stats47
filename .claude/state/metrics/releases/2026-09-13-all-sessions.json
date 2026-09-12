@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-13",
+  "status": "integrating",
+  "authorization": "User explicitly requested all-session integration, one production deployment, and cleanup to main/develop only.",
+  "sourceRefs": {
+    "develop": "4503b49ec27744a688b94445c351f56b7926a3a0",
+    "workspace": "d870a3d93962bd011c9266304ea55e3b42ef6d6c",
+    "seoPilot": "2f48116a094aa5a9daedc0a9cceb34d733cf6798"
+  },
+  "backup": ".local/verification/release/2026-09-13-all-sessions/all-refs.bundle",
+  "included": [
+    "Uncommitted note cover refresh and dashboard collection",
+    "Seven-day GSC workflow and one-keyword census link proposal",
+    "Unmerged Geo source pages, affiliate placement safety and local resource controls",
+    "Dependabot PRs 948, 951, 952"
+  ],
+  "integrationPolicy": {
+    "themes": "Keep the published 55-theme chapter structure and 128-theme coverage; port independent comparison and calendar-year fixes without restoring the old replacement dashboard.",
+    "geo": "Keep all current analyses reachable and add original source GIS pages; publish only after source validation and exact R2 readback.",
+    "note": "Preserve existing 286-cover publication evidence; no repeat external note edits.",
+    "history": "Preserve immutable SEO rank history and archive refs before branch deletion.",
+    "themeMeasurement": "Preserve the original 55-theme release dates and d7/d28/d56 checkpoints. Record comparison/calendar/industry changes as later changes and keep confounded guards; local-finance retains its specialized comparison and applies cross-metric comparison to supplementary indicators."
+  },
+  "checks": {
+    "noteTests": {
+      "passed": 93
+    },
+    "resourceTests": {
+      "passed": 4,
+      "skipped": 1,
+      "skipReason": "Windows PowerShell gateway test requires Windows."
+    },
+    "geoImageReadback": {
+      "objects": 150,
+      "passed": 150,
+      "sourceCatalogMissing": 51,
+      "repairDatasets": 12,
+      "floodDisplayMissing": true
+    },
+    "webFocusedTests": {
+      "passed": 384,
+      "files": 55
+    },
+    "gisTests": {
+      "passed": 247,
+      "files": 30
+    },
+    "affiliateNodeTests": {
+      "passed": 49
+    },
+    "preflightPr": {
+      "passed": 14,
+      "failed": 0
+    },
+    "webTypeCheck": "passed",
+    "workflowPolicy": {
+      "workflows": 69,
+      "findings": 0
+    }
+  },
+  "remaining": [
+    "Complete CI publication helpers, dependency integration and full release checks",
+    "Rebuild/publish Geo source assets and catalog in CI",
+    "Fetch and validate updated Rakuten catalogs in CI",
+    "Merge release after green CI and verify production",
+    "Verify SEO publication record and seven-day observation",
+    "Synchronize main/develop and delete merged branches/worktrees"
+  ]
+}

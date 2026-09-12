@@ -1,6 +1,9 @@
 ---
 paths:
   - "apps/web/src/features/ogp/**"
+  - "apps/web/src/features/geo-analysis/**/*Thumbnail*"
+  - "apps/web/scripts/*geo-source-thumbnails.ts"
+  - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
   - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
   - ".claude/{scripts/ogp,state/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
   - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
@@ -25,6 +28,18 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 ---
 
 ## 1. 画像資産カタログ (全種別)
+
+**GIS単体カード**: `generate-geo-source-thumbnails.ts` が公開対象の実GISから
+横長640×360（16:9）と正方形256×256（1:1）のWebPを生成する。全国・都道府県・地域拡大の
+選定と表示例ラベルは `features/geo-analysis/lib/geo-source-thumbnail.ts` の版付きTS設定。
+両比率で同じ範囲を再投影し、CSSのcoverで切り落とさない。北を上に保ち、背景境界は既存NII加工物を使う。
+色は原典の位置・形状、標高、土地利用だけを示し、分析結果や危険度の推定にしない。
+`app/geo/datasets/<ID>/thumbnails/<version>/{wide,square}.webp` と共通 `manifest.json` が配信契約。
+背景が地図のためlight/darkを増やさず同一画像を使い、文字はDOMに置く。
+PC一覧は横長、モバイル一覧と関連リンクは正方形。右の全件ナビはテキストのまま維持する。
+staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレビュー経路は開発時だけ有効。
+生成既定はローカルのみで、`--plan`がremoteを検証してから共通publisher用planを作る。
+画像・元データの欠落/版不一致/空の表示範囲は失敗にし、未反映画像はUIで代替表示してリンクを残す。
 
 > **正典の配信方式**: OGP は下表の「静的 R2 URL」を `openGraph.images` に設定する
 > (`apps/web/src/lib/metadata/ogp-image.ts` の `ogpImageUrl` / `ogpImageKeys`)。ランタイム

@@ -22,6 +22,7 @@ import {
   adVertical,
 } from "../../../apps/web/src/features/ads/constants/affiliate-category";
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
+import { isAffiliateActive } from "../../../apps/web/src/features/ads/constants/affiliate-delivery-policy";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
@@ -78,52 +79,6 @@ const CATEGORY_KEYS = [
   "ict",
 ] as const;
 
-// ページ種別 → 実際に描画される location/adType のカバレッジ (apps/web/src/app 実装ベース)。
-// impression は「そのページ種別にトラフィックがあり、かつ枠が描画される」ときだけ発生する。
-const PAGE_COVERAGE: Array<{
-  pageType: string;
-  route: string;
-  component: string;
-  servesLocation: string;
-  adType: string;
-}> = [
-  {
-    pageType: "ブログ記事",
-    route: "/blog/[slug]",
-    component: "ArticleAffiliateBanner",
-    servesLocation: "categoryKey 一致 banner (記事末尾)",
-    adType: "banner",
-  },
-  {
-    pageType: "ランキング詳細",
-    route: "/ranking/[rankingKey]",
-    component: "AffiliateAdSlot",
-    servesLocation: "sidebar-bottom text → fallback AdSense",
-    adType: "text",
-  },
-  {
-    pageType: "エリア(都道府県)",
-    route: "/areas/[areaCode]",
-    component: "AreaBannerAd",
-    servesLocation: "area-sidebar banner",
-    adType: "banner",
-  },
-  {
-    pageType: "市区町村",
-    route: "/areas/[areaCode]/cities/[cityCode]",
-    component: "AreaBannerAd",
-    servesLocation: "area-sidebar banner",
-    adType: "banner",
-  },
-  {
-    pageType: "カテゴリ一覧",
-    route: "/category/[categoryKey]",
-    component: "(枠なし?)",
-    servesLocation: "未配置の可能性",
-    adType: "-",
-  },
-];
-
 function tally<T extends string>(values: T[]): Record<string, number> {
   const out: Record<string, number> = {};
   for (const v of values) out[v] = (out[v] ?? 0) + 1;
@@ -144,12 +99,13 @@ function main(): void {
       : new Date().toISOString().slice(0, 10);
 
   const checkSize = args.includes("--check-size");
-  const active = AFFILIATE_ADS.filter((a) => a.isActive);
+  const active = AFFILIATE_ADS.filter((ad) => isAffiliateActive(ad));
   const byCategory = tally(active.map((a) => a.categoryKey ?? "(null)"));
   const byVertical = tally(active.map((a) => adVertical(a) ?? "(unresolved)"));
   const byLocation = tally(active.map((a) => a.locationCode ?? "(null)"));
   const byAdType = tally(active.map((a) => a.adType ?? "(null)"));
   const uniqueTitles = new Set(active.map((a) => a.title)).size;
+  const uniquePrograms = new Set(active.flatMap((ad) => ad.programRef ? [ad.programRef] : [])).size;
 
   const coveredCategories = CATEGORY_KEYS.filter((k) => (byCategory[k] ?? 0) > 0);
   const gapCategories = CATEGORY_KEYS.filter((k) => !(byCategory[k] ?? 0));
@@ -192,6 +148,9 @@ function main(): void {
       entries: AFFILIATE_ADS.length,
       active: active.length,
       uniqueAdvertisers: uniqueTitles,
+      uniqueTitles,
+      uniquePrograms,
+      programRefMissing: active.filter((ad) => !ad.programRef).length,
     },
     byCategory,
     byVertical,
@@ -232,11 +191,11 @@ function main(): void {
   lines.push(`# アフィリエイト在庫 棚卸し (${date})`);
   lines.push("");
   lines.push(
-    `総枠数 **${snapshot.totals.entries}** / active **${snapshot.totals.active}** / 実広告主 **${snapshot.totals.uniqueAdvertisers}** 社`,
+    `総枠数 **${snapshot.totals.entries}** / active **${snapshot.totals.active}** / 登録案件 **${snapshot.totals.uniquePrograms}** 件 (広告主の社数ではない)`,
   );
   lines.push("");
 
-  lines.push("## カテゴリ別 (17 軸カバレッジ)");
+  lines.push("## 旧categoryKey別の在庫数 (参考。掲載可否ではない)");
   lines.push("");
   lines.push(
     `カバー **${coveredCategories.length}/${CATEGORY_KEYS.length}** 軸。`,
@@ -246,13 +205,13 @@ function main(): void {
   lines.push("|---|---|---|");
   for (const k of CATEGORY_KEYS) {
     const n = byCategory[k] ?? 0;
-    const state = n === 0 ? "❌ ゼロ (機会損失)" : n <= 2 ? "⚠ 手薄" : "✅";
+    const state = n === 0 ? "直接指定なし" : n <= 2 ? "少数" : "在庫あり";
     lines.push(`| ${k} | ${n} | ${state} |`);
   }
   lines.push("");
   if (gapCategories.length) {
     lines.push(
-      `> **広告ゼロの軸 (${gapCategories.length})**: ${gapCategories.join(", ")} — 該当カテゴリのランキング/記事に広告が出ず impression を取りこぼす。`,
+      `> **旧categoryKey指定なし (${gapCategories.length})**: ${gapCategories.join(", ")} — 配信はvertical・内容・対象keyで解決するため、掲載漏れや機会損失を意味しない。`,
     );
     lines.push("");
   }
@@ -265,7 +224,7 @@ function main(): void {
   lines.push("|---|---|---|");
   for (const v of AFFILIATE_VERTICALS) {
     const n = byVertical[v] ?? 0;
-    const state = n === 0 ? "❌ ゼロ (機会損失)" : n <= 2 ? "⚠ 手薄" : "✅";
+    const state = n === 0 ? "在庫なし" : n <= 2 ? "少数" : "在庫あり";
     lines.push(`| ${v} | ${n} | ${state} |`);
   }
   lines.push("");
@@ -313,18 +272,11 @@ function main(): void {
   }
   lines.push("");
 
-  lines.push("## ページ種別 → 描画カバレッジ");
+  lines.push("## ページ別の配置確認");
   lines.push("");
-  lines.push("| ページ種別 | route | component | 描画 location | adType |");
-  lines.push("|---|---|---|---|---|");
-  for (const c of PAGE_COVERAGE) {
-    lines.push(
-      `| ${c.pageType} | \`${c.route}\` | ${c.component} | ${c.servesLocation} | ${c.adType} |`,
-    );
-  }
-  lines.push("");
+  lines.push("共有resolver・配信条件で生成する placement-map-latest.json を参照。検索需要の母数と実表示は別。全ページの表示確認済みとはみなさない。");
   lines.push(
-    "> impression を増やすには (a) ゼロ軸の在庫補充 と (b) 高トラフィック page type への枠描画 の両方が要る。",
+    "> 在庫数だけで枠を増やさない。文脈・掲載条件・viewable impression・成果の証拠を確認する。人口/医療等には明示対象keyのゲートがある。",
   );
   lines.push("");
 

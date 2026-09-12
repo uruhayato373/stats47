@@ -29,9 +29,13 @@ export function RankingPageClientShell({
   model,
 }: RankingPageClientShellProps) {
   const affiliateBanners = model.nativeBanners.filter(isLandscapeBanner);
-  const inContentAffiliateBanner = shouldShowRankingInContentAffiliate(rankingKey)
+  const inContentAffiliateBanner = !ADSENSE_DISPLAY_ENABLED && shouldShowRankingInContentAffiliate(rankingKey)
     ? (affiliateBanners[0] ?? null)
     : null;
+  // 中段を抑止したページでは先頭を落とさず、読了枠へ戻す。
+  const nativeAffiliateBanners = (inContentAffiliateBanner ? affiliateBanners.slice(1) : affiliateBanners).slice(0, 3);
+  const usedAffiliateAds = [inContentAffiliateBanner, ...nativeAffiliateBanners]
+    .filter((banner) => banner !== null);
 
   return (
     <RankingKeyPageClient
@@ -62,6 +66,7 @@ export function RankingPageClientShell({
             surveys={model.originalSurveys}
             surveyRelatedItems={model.surveyRelatedItems}
             rankingName={model.rankingName}
+            excludeAffiliateAds={usedAffiliateAds}
           />
         ),
         correlation: (
@@ -95,11 +100,7 @@ export function RankingPageClientShell({
         nativeAffiliate: (
           <RankingPageNativeAffiliateSection
             key="native-affiliate"
-            banners={
-              ADSENSE_DISPLAY_ENABLED
-                ? affiliateBanners
-                : affiliateBanners.slice(1)
-            }
+            banners={nativeAffiliateBanners}
             categoryKey={model.rankingItem.categoryKey}
           />
         ),

@@ -4,6 +4,11 @@ import { describe, expect, it } from 'vitest';
 import { ChartPanel } from '../ChartPanel';
 
 describe('ChartPanel', () => {
+  it('固定IDを指定した領域と見出しを対応させる', () => {
+    render(<ChartPanel id="theme-ports-map" title="港湾取扱量"><div>chart</div></ChartPanel>);
+    expect(screen.getByRole('heading')).toHaveAttribute('id', 'theme-ports-map-title');
+    expect(screen.getByRole('region', { name: '港湾取扱量' })).toHaveAttribute('aria-labelledby', 'theme-ports-map-title');
+  });
   it('見出しでチャート領域をアクセシブルに命名する', () => {
     render(
       <ChartPanel title="出生率・死亡率の推移">

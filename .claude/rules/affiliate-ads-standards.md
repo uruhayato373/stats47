@@ -49,6 +49,13 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 - **反映 (公開) は develop への push で `publish-affiliate-ads.yml` が自動発火** (workflow_dispatch ではない)。ローカルからの R2 push は不可。
 - **手編集 JSON を SSOT にしない。** 必ず git TS を編集 → CI が R2 を生成。
 
+**配信の安全ゲート**: `affiliate-delivery-policy.ts` の停止案件・active期間・対象keyを
+配信repositoryと配置マップで共有する。停止案件は古いsnapshotの `isActive:true` でも除外する。
+人口・医療という統計分類だけでは婚活・ジム等の申込意図とみなさず、明示の対象keyがない広告は掲載しない。
+同一案件・同一クリック先は候補数の上限適用前に重複を除き、本文とレールも重ねない。
+固定の転職枠もlabor文脈のrankingに限り、IT案件の対象keyを迂回しない。
+カテゴリ一覧は `CATEGORY_PAGE_AFFILIATE_POLICY` の17軸を正とし、nullを在庫不足とみなさない。
+
 ## 2. vertical → 送客ページの対応 (設計指針)
 
 **本表は「その意図軸をどのページに当てるか」の設計指針であって、提携状況の台帳ではない。**
@@ -59,9 +66,9 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 | `labor` (転職・年収) | 転職エージェント・求人・フリーランス案件 | 年収・所得・職業別 ranking・`/themes/{labor-wages,occupation-salary}` |
 | `housing` (住宅・引越し) | 不動産・リフォーム・引越し・住宅ローン | `/areas`・住宅・地価・建設 ranking・`/themes/living-housing` |
 | `economy` (投資・保険・家計) | FP 相談・証券・保険・家計見直し | 県民所得・貯蓄率・物価 ranking・`/themes/{consumer-prices,real-income}` |
-| `health` (健康・医療) | フィットネス・健康食品・ボディケア | 医療・社会保障・健康 ranking・`/themes/{healthcare,aging-society}` |
+| `health` (健康・医療) | フィットネス・健康食品・ボディケア | 行動意図を確認した対象rankingに限定。一般の医療・高齢化テーマへ自動展開しない |
 | `energy` (通信・エネルギー) | 回線・格安 SIM・電力ガス・蓄電池 | エネルギー・通信 ranking |
-| `population` (人口・子育て) | 子育て・育児用品・汎用 | 人口・世帯・子育て ranking・`/themes/population-dynamics` |
+| `population` (人口・子育て) | 子育て・育児用品等 | 行動意図を確認した対象rankingに限定。人口分類だけで婚活広告へ誘導しない |
 | `furusato` (ふるさと納税) | 返礼品ポータル | `/areas`・財政・地域 ranking・`/themes/local-finance` |
 | `education` (通信教育・資格) | 資格講座・プログラミング/AI スクール・語学 | 教育 ranking・`/themes/education-culture` |
 | `mobility` (自動車・交通) | 自動車保険・車査定・交通 | 交通事故・交通安全 ranking・`/themes/{roads,railway,ports,safety}` |
@@ -164,7 +171,10 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 - **サイズがコードに明記されない ASP** (ValueCommerce の gifbanner / 楽天の pict) は `inspect-banner.mjs` で
   **画像を fetch して実測**する (2x 高解像度素材は表示サイズ=実寸/2)。A8 は `<img width/height>` で明記される。
-- **A8 以外は別インプレッションピクセルを持たない** → `trackingPixelUrl: null` (解決層は imageUrl のみ必須)。
+- **ピクセル有無はASP名で推測せず発行原稿で確認する。** もしもにも独立1pxピクセルがある
+  （2026-09-08に1863/55で実測）。クリックURLとピクセルの `a_id/p_id/pc_id/pl_id` 一致を保ち、
+  原稿の `referrerpolicy` / `attributionsrc` / `rel` も登録時に確認する。元コードに無い場合だけ
+  `trackingPixelUrl: null`。afbのleadも同様に落とさない。
 
 ## 4. 配置 & priority 規約
 
@@ -517,13 +527,13 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 | ページ種別 | アフィリ枠 | 解決キー |
 |---|---|---|
-| blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天商品 / ハウス枠×2 | tagKeys → vertical、ランキング名 → 品目 |
+| blog | 本文 banner / 本文 text (自動挿入 最大4) / 右レール banner / 読了後の楽天商品または県別返礼品（最大1枚）/ ハウス枠×2 | surveyIds → tagKeys → vertical、記事タイトル・副題 → 品目／単一県 |
 | ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品。AdSense停止中は本文中段 banner 1 + 右レール banner ≤2 を上段へ移設 | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
 | category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
 | survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
 | themes | native ≤4 / theme-end 300×250 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` (本文中央ハウス枠は 2026-08-06 撤去。bespoke の themes/local-finance は InContent×2 のみで native なし) |
-| areas 県 | ハウス枠 / `AreaBannerAd`。AdSense停止中は本文中段 banner 1 | `area-sidebar` / 本文は `furusato` vertical |
-| areas 市区町村 | `AreaBannerAd` / 楽天ふるさと納税 | `area-sidebar` / 親県コード |
+| areas 県 | ハウス枠 / `AreaBannerAd` / 県データブック後の楽天ふるさと納税。AdSense停止中は本文中段 banner 1 | `area-sidebar` / 本文は `furusato` vertical / 5桁県コード |
+| areas 市区町村 | `AreaBannerAd` / 本文末の楽天ふるさと納税 | `area-sidebar` / 親県コードへ正規化 |
 | areas 市区町村 カテゴリ (`/areas/*/cities/*/<categoryKey>`) | native ≤3 (`position=city-native`) | URL の categoryKey → vertical (2026-09-02) |
 | japan (`/japan/<themeSlug>`) | native ≤3 (`position=japan-native`) | 都道府県テーマと同じ slug → `THEME_AFFILIATE_MAP` (2026-09-02) |
 | municipalities テーマ (`/municipalities/themes/<slug>`) | native ≤3 (`position=municipality-theme-native`) | `MUNICIPALITY_THEME_AFFILIATE_MAP` (2026-09-02。slug を足したら写像も足す — 契約テストが全件を要求) |
@@ -531,8 +541,8 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | home | ハウス枠 / native ≤4 (economy 固定) / **sidebar-sticky (縦長の受け皿・左レール lg+)** | 無し (vertical 解決の手掛かりが無いページ)・`sidebar-sticky` |
 | compare | native ≤4 | categoryKey → vertical |
 
-> 上表は 2026-08-06 にコード実態と突合して是正した (旧版は blog/ranking/areas 県に
-> ふるさと納税を過剰記載。`FurusatoNozeiCard` の実使用は市区町村ページのみ)。
+> blog / areas の楽天導線は 2026-09-08 にローカル実装。オーナー指定により未デプロイ・R2未更新。
+> ranking の既存商品カードは位置・枚数を維持する。新しい枠を一覧・home・themeには増やさない。
 >
 > **2026-09-02 の全ページ棚卸し**: GSC 2026-W35 の imp を route 別に集計し、枠の無い route が
 > `/japan` (54 imp/週)・`/municipalities` (0)・`/geo` (0)・法務ページだけであることを確認した。
@@ -616,7 +626,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 |---|---|---|---|
 | `AFFILIATE_ADS` (vertical 解決) | 汎用の自動配置。**基本はこれ** | ページ意図に自動追従させたいとき | `affiliate-ads-data.ts` |
 | `targetRankingKeys` | **ページ限定配置** | 高EPC 案件を特定ランキングだけに当てる | 同上 (フィールド) |
-| `SIDEBAR_PROMO_BANNERS` | 全ページ共通の固定ハウス枠 | vertical 非依存で出したい主力案件 | `constants/sidebar-banners.ts` |
+| `SIDEBAR_PROMO_BANNERS` | 対象ランキング限定の固定案件枠 | labor の対象keyのみ。本文・通常レールとの同一案件重複は禁止 | `constants/sidebar-banners.ts` |
 | 直接配置台帳 | 記事本文の href 直書き | 記事と案件の 1:1 編集判断 | `affiliate-direct-placements-data.ts` |
 | 楽天動的 (API) | 文脈商品・返礼品 | 審査不要・在庫無限。食品/地域文脈 | `rakuten-api.ts` (env の App ID) |
 
@@ -657,6 +667,31 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 **品目を検出できないページ・API が 0 件のページでは何も描画しない** — 無差別に出すと
 記事と無関係な商品が並び読者価値を損なう (`blog-quality-standards.md` のリンク配置規律と同じ)。
 
+**返礼品の検索・地域一致**: `553283` は楽天の「ギフト券・商品券・ギフトコード」であって、
+ふるさと納税の共通genreではない（[楽天の分類](https://www.rakuten.co.jp/category/553283/)）。
+食品genre `100227` で `ふるさと納税 + 県名 + signatureKeyword` → 品質検証後0件ならsignatureを外して検索する。
+新規取得は商品名にふるさと納税を含み、ショップ名が対象の都道府県名で始まる返礼品だけを採用する。
+旧snapshotにショップ情報がない場合は、商品名の都道府県名が対象県だけと確認できたものを
+`legacy-title` として区別する。削除条件: 47県すべてをショップ検証付きで再取得・公開し、旧キャッシュが失効した後。ショップ検証済みや最新再取得済みとは扱わない。
+送料専用・地域不明・別県商品は除外し、食文化記事のfood文脈では券類も除外する。
+通常商品のさんま／秋刀魚等の表記揺れは共有品質関数で扱い、品目違い・器具・寄附商品を混ぜない。
+検索は30件取得して地域検証後に最大4件。フォールバックの呼び出し「間」にも1.2秒空ける。
+通常の商品検索は `NGKeyword=ふるさと納税` で寄附商品を分離する。
+
+**楽天カードの表示契約**: 本文はモバイル2列・広い画面4列、既存ranking右レールは2列。
+ブログは `blog-rakuten-placement.ts` が1枚だけ選ぶ。単一県の食卓・食文化・特産品・返礼品記事は
+その県の返礼品、複数県の比較・品目記事は該当商品。公開タイトルと副題だけを判定に使い、
+本文中の偶然の言及では増やさない。健康・事故等の別文脈には置かない。
+リンクはAPI発行のものを改変せず、通常URLを成果クリックとして記録しない。
+寄附額／商品価格を区別して表示し、最新の金額・受付／在庫状況はリンク先で確認する旨を付ける。
+県別返礼品に在庫がなければ同じ県の一覧へ戻す。Affiliate ID未設定時は広告を出さない。
+
+返礼品だけを再取得する入口は `sync-rakuten-catalog.ts --scope furusato`（workflow入力も同名）。
+既定は従来通りall。API再取得をファイルへ保存する検証は `--local .local/<directory>`、
+保存しない検証は `--dry-run`。両者の同時指定は禁止。認証不在・失敗・正常0件をmanifestで区別し、
+失敗時は既存snapshotを上書きしない。旧snapshotのオフライン再検証は `audit-rakuten-catalog.ts` を使い、
+元のgeneratedAtを保持する。本番R2反映は承認後に既存CIを使う。
+
 ### 需要 × 供給の突合は機械が行う
 
 `.claude/scripts/ads/build-placement-map.mjs` が GSC ページ別実測 × 在庫 × 確定EPC を突合し
@@ -665,7 +700,7 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 
 出力の読み方:
 - `gaps[].kinds` — `banner-zero` / `text-zero` (在庫欠落) / `oversupply` (在庫過多・仕入れ優先度↓)
-- `unmapped.byReason` — **広告が出ていない imp** を理由別に集計。`category-unmapped:<key>` は写像追加で即解消できる
+- `unmapped.byReason` — **意図未解決または広告なし方針に該当するGSC検索表示数**。広告表示の実測ではない。nullを写像追加で機械的に埋めない
 - `reverseCandidates` — 確定EPC 上位の未接続案件 + 当て先 ranking キーの suggest。
   **`shared: true` は doboku-note と同一 A8 口座で共用している案件**で、EPC は口座横断の実績。
   stats47 単独の実力として扱わない。`suggestedRankingKeys` は候補であって適用ではない

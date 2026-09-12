@@ -27,7 +27,7 @@ export function CityPageFooter({
         activeCityCode={activeCityCode}
       />
       <AreaBannerAd />
-      <FurusatoNozeiCard areaCode={areaCode} />
+      <FurusatoNozeiCard areaCode={areaCode} position="city-furusato-content" layout="content" />
       {ADSENSE_DISPLAY_ENABLED && (
         <div className="mt-8">
           <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />

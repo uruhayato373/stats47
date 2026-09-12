@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * GA4 から アフィリエイト計測イベント (affiliate_impression / affiliate_click) を取得し、
- * overview（広告/vertical/position）・experiments・pages を独立reportとして集計する。
+ * overview（広告/vertical/position）・experiments・pages と、任意の placements を独立取得する。
  * 1 reportのrich tier成功が、別reportのcustom dimension欠落を隠さない。
  *
  * /affiliate-improvement の observe モードのデータ源。
@@ -24,6 +24,8 @@ const {
   IMPRESSION_EVENT,
   REPORT_SPECS,
   fetchAllReports,
+  pivot,
+  shortName,
 } = require("./lib/affiliate-ga4-reports-core.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -34,6 +36,11 @@ const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"
 //   CTR の分母にならなかった (直近 7 日 3,346 件が全件 AdSense 由来・残余ゼロ)。
 //   改名日より前の窓を指定しても affiliate_impression は 0 件になる (それが正しい挙動)。
 const EVENTS = [IMPRESSION_EVENT, CLICK_EVENT];
+const REPORT_PAGE_SIZE = 10000;
+// 既存の pages（ページ単位）を変えず、配置・端末・広告の同時内訳を別reportで保持する。
+const PLACEMENT_DIMENSIONS = [
+  "eventName", "pagePath", "deviceCategory", "customEvent:ad_id", "customEvent:link_position",
+];
 
 function resolveKey() {
   for (const name of KEY_CANDIDATES) {
@@ -46,22 +53,67 @@ function resolveKey() {
 }
 
 async function runReport(analyticsdata, dimensions, days) {
-  const { data } = await analyticsdata.properties.runReport({
-    property: `properties/${PROPERTY_ID}`,
-    requestBody: {
-      dateRanges: [{ startDate: `${days}daysAgo`, endDate: "today" }],
-      dimensions: dimensions.map((name) => ({ name })),
-      metrics: [{ name: "eventCount" }],
-      dimensionFilter: {
-        filter: {
-          fieldName: "eventName",
-          inListFilter: { values: EVENTS },
+  const rows = [];
+  const metadata = [];
+  let rowCount = null;
+  do {
+    const { data } = await analyticsdata.properties.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      requestBody: {
+        dateRanges: [{ startDate: `${days}daysAgo`, endDate: "today" }],
+        dimensions: dimensions.map((name) => ({ name })),
+        metrics: [{ name: "eventCount" }],
+        dimensionFilter: {
+          filter: {
+            fieldName: "eventName",
+            inListFilter: { values: EVENTS },
+          },
         },
+        orderBys: dimensions.map((dimensionName) => ({ dimension: { dimensionName } })),
+        limit: REPORT_PAGE_SIZE,
+        offset: rows.length,
       },
-      limit: 10000,
-    },
-  });
-  return data.rows || [];
+    });
+    if (!Number.isSafeInteger(data.rowCount) || data.rowCount < 0) {
+      throw new Error("ga4-row-count-unavailable");
+    }
+    if (rowCount !== null && rowCount !== data.rowCount) {
+      throw new Error("ga4-row-count-changed-during-pagination");
+    }
+    rowCount = data.rowCount;
+    const batch = data.rows ?? [];
+    if (!Array.isArray(batch) || (batch.length === 0 && rows.length < rowCount)) {
+      throw new Error("ga4-incomplete-report-page");
+    }
+    rows.push(...batch);
+    metadata.push(data.metadata ?? null);
+    if (rows.length > rowCount) throw new Error("ga4-row-count-exceeded");
+  } while (rows.length < rowCount);
+  return { rows, fetchQuality: { rowCount, rowsFetched: rows.length, pagesFetched: metadata.length, metadata } };
+}
+
+async function collectReports(analyticsdata, days) {
+  const qualityByDimensions = new Map();
+  const fetchRows = async (dimensions) => {
+    const report = await runReport(analyticsdata, dimensions, days);
+    qualityByDimensions.set(dimensions.slice(1).map(shortName).join("|"), report.fetchQuality);
+    return report.rows;
+  };
+  const dimensions = PLACEMENT_DIMENSIONS.slice(1).map(shortName);
+  const [required, placements] = await Promise.all([
+    fetchAllReports(fetchRows, REPORT_SPECS),
+    fetchRows(PLACEMENT_DIMENSIONS).then((rows) => ({
+      reportName: "placements", dimensions, rows: pivot(rows, PLACEMENT_DIMENSIONS),
+      failures: [], availability: "available",
+    })).catch((error) => ({
+      reportName: "placements", dimensions, rows: null, availability: "unavailable",
+      failures: [{ dimensions, reason: String(error?.message ?? error) }],
+    })),
+  ]);
+  // optional report を取得できなくても従来3reportは保存する。欠損は [] / 0 にしない。
+  return Object.fromEntries(Object.entries({ ...required, placements }).map(([name, report]) => [
+    name, { ...report, fetchQuality: qualityByDimensions.get(report.dimensions.join("|")) ?? null },
+  ]));
 }
 
 async function main() {
@@ -72,14 +124,11 @@ async function main() {
   const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
 
   const days = Number(process.argv[2] || 28);
-  const reports = await fetchAllReports(
-    (dimensions) => runReport(analyticsdata, dimensions, days),
-    REPORT_SPECS,
-  );
+  const reports = await collectReports(analyticsdata, days);
   for (const report of Object.values(reports)) {
     for (const failure of report.failures) {
       process.stderr.write(
-        `[warn] report=${report.reportName} dims=[${failure.dimensions.join(", ")}] 取得失敗 → 次の tier: ${failure.reason}\n`,
+        `[warn] report=${report.reportName} dims=[${failure.dimensions.join(", ")}] 取得失敗: ${failure.reason}\n`,
       );
     }
   }
@@ -120,6 +169,7 @@ async function main() {
     hasVerticalBreakdown: hasVerticalDims,
     hasCategoryBreakdown: hasCategoryDims,
     hasVariantBreakdown: hasVariantDims,
+    hasPlacementBreakdown: reports.placements.availability === "available",
     totals: {
       impressions: totalImp,
       clicks: totalClick,
@@ -133,10 +183,14 @@ async function main() {
     overview: reports.overview.rows,
     experiments: reports.experiments.rows,
     pages: reports.pages.rows,
+    placements: reports.placements.rows,
     reportQuality: Object.fromEntries(
       Object.entries(reports).map(([name, report]) => [
         name,
-        { dimensions: report.dimensions, failures: report.failures },
+        {
+          dimensions: report.dimensions, failures: report.failures,
+          availability: report.availability ?? "available", fetchQuality: report.fetchQuality,
+        },
       ]),
     ),
   };
@@ -210,7 +264,11 @@ async function main() {
   );
 }
 
-main().catch((e) => {
-  process.stderr.write(`[error] ${e.message}\n`);
-  process.exit(1);
-});
+module.exports = { PLACEMENT_DIMENSIONS, REPORT_PAGE_SIZE, collectReports, runReport };
+
+if (require.main === module) {
+  main().catch((e) => {
+    process.stderr.write(`[error] ${e.message}\n`);
+    process.exit(1);
+  });
+}

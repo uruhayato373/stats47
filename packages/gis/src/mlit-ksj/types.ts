@@ -37,6 +37,8 @@ export interface KsjCodeConfig {
   officialPageDiscovery?: true;
   /** zip 内の GeoJSON 格納パス */
   geojsonDirInZip: string;
+  /** 明示されたDBF文字コード。CPGがない旧資料の再現に使用する。 */
+  shapefileEncoding?: 'utf-8' | 'shift-jis';
   /** KSJ 属性コード → 人間可読名 (例: { N02_001: "railwayType" }) */
   propertyMap: Record<string, string>;
   /** 簡略化パラメータ。省略時は geometryType から派生 */
@@ -70,6 +72,7 @@ export interface KsjResolvedDataset {
   latestVersion: string;
   downloadUrlPattern: string;
   geojsonDirInZip: string;
+  shapefileEncoding?: 'utf-8' | 'shift-jis';
   propertyMap: Record<string, string>;
   simplifyOptions: KsjSimplifyOptions;
   attribution: string;

@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
-import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -60,9 +60,7 @@ export async function GeoCrossAnalysisArticle({
   contextLayer,
 }: Props) {
   const config = GEO_CROSS_ANALYSIS_CONFIGS[slug];
-  const spec = GEO_ANALYSES.find(
-    (analysis) => analysis.slug === slug
-  );
+  const spec = GEO_ANALYSES.find((analysis) => analysis.slug === slug);
   const bundle = await loadGeoAnalysisBundle(slug);
   if (!spec || !bundle) {
     notFound();
@@ -104,6 +102,23 @@ export async function GeoCrossAnalysisArticle({
         meta={`データ生成 ${generatedDate} ・ coverage ${snapshot.dataQuality.actualAreas}/${snapshot.dataQuality.expectedAreas}`}
       />
 
+      <nav
+        aria-label="入力データを単体で見る"
+        className="mb-5 flex flex-wrap items-center gap-x-4 text-sm"
+      >
+        <span className="font-semibold">まず単体で見る：</span>
+        {GEO_LAYERS.filter((layer) =>
+          layer.related.some((related) => related === slug)
+        ).map((layer) => (
+          <Link
+            key={layer.slug}
+            href={`/geo/layers/${layer.slug}?pref=${initialPrefCode}`}
+            className="inline-flex min-h-11 items-center text-primary underline"
+          >
+            {layer.name}
+          </Link>
+        ))}
+      </nav>
       {config.hazardMapUrl ? (
         <div
           role="note"
@@ -296,11 +311,12 @@ export async function GeoCrossAnalysisArticle({
           国土交通省または原典提供者が本分析の内容を保証・推奨するものではありません。
         </p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          {slug === 'population-snow-designation' || slug === 'population-landslide-exposure'
+          {slug === 'population-snow-designation' ||
+          slug === 'population-landslide-exposure'
             ? '指定区域と人口の原典・検証記録は各県の検算データで確認できます。上記の生成日は取得日ではありません。'
             : slug === 'population-public-facility-access'
-            ? '施設原典の取得日・人口原典の検証記録は各県の検算データで確認できます。上記の生成日は取得日ではありません。'
-            : '原典の初回取得日時は旧パイプラインで未記録です。上記の生成日は取得日ではありません。'}
+              ? '施設原典の取得日・人口原典の検証記録は各県の検算データで確認できます。上記の生成日は取得日ではありません。'
+              : '原典の初回取得日時は旧パイプラインで未記録です。上記の生成日は取得日ではありません。'}
           対象版・入力ファイルのSHA-256・途中データは「検算」とデータ導線で確認できます。
         </p>
       </SurfaceSection>
@@ -325,17 +341,17 @@ export async function GeoCrossAnalysisArticle({
       <SurfaceSection className="mt-6">
         <SectionHeader title="関連する地域分析" hideRule />
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          {GEO_ANALYSES.filter(
-            (analysis) => analysis.slug !== slug
-          ).map((analysis) => (
-            <Link
-              key={analysis.slug}
-              className="font-medium text-primary underline"
-              href={`/geo/${analysis.slug}`}
-            >
-              {analysis.title}
-            </Link>
-          ))}
+          {GEO_ANALYSES.filter((analysis) => analysis.slug !== slug).map(
+            (analysis) => (
+              <Link
+                key={analysis.slug}
+                className="font-medium text-primary underline"
+                href={`/geo/${analysis.slug}`}
+              >
+                {analysis.title}
+              </Link>
+            )
+          )}
         </div>
       </SurfaceSection>
     </PageShell>

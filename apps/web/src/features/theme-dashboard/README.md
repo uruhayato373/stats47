@@ -119,3 +119,11 @@ R2 push や本番デプロイなしでチャート構成を確認できる。
 ## Backlog
 
 Implementation backlog lives in `.claude/todo/backlog.md`. Keep this README for architecture and local feature conventions only.
+
+### 指標の横断比較
+
+`ThemeComparisonSection` は既存の章・チャートの後に県別分布と指標横断表を置く。
+比較対象は既存 `metricGroups` / `tabIndicators` から導出し、カタログへ別リストを追加しない。
+同じ年次の県値から中央値と差分を求め、固定比較年も尊重する。`comparisonMap` のあるグループの
+地図は重複させない。地図クリックは共有県選択へ接続し、市区町村にはドリルダウンしない。
+暦年の古い「年度」ラベルは `themeYearLabel` が補正し、月・基準日・注記は保持する。

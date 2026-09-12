@@ -1,14 +1,13 @@
 import { BUSINESS_PLAN_M1_X_POSTS } from './m1';
 import { GEO_ANALYSES } from './geo-analyses';
+import { GEO_LAYERS } from './geo-layers';
 
 /** Geoの公開・索引・リダイレクトを同じ集合から決定する。 */
 export const GEO_STAGES = ['population', 'overlap', 'audit'] as const;
 export const GEO_PREF_CODES = Array.from({ length: 47 }, (_, i) =>
   String(i + 1).padStart(2, '0')
 );
-export const GEO_ANALYSIS_SLUGS = GEO_ANALYSES.map(
-  (a) => a.slug
-);
+export const GEO_ANALYSIS_SLUGS = GEO_ANALYSES.map((a) => a.slug);
 export const GEO_STAGE_LANDINGS = [
   ...new Set(
     BUSINESS_PLAN_M1_X_POSTS.map((p) => p.canonicalUrl).filter((path) =>
@@ -21,6 +20,8 @@ export const GEO_INDEXABLE_ROUTES = [
   '/geo/compare',
   '/geo/method',
   '/geo/data-catalog',
+  '/geo/layers',
+  ...GEO_LAYERS.map((layer) => `/geo/layers/${layer.slug}`),
   ...GEO_ANALYSIS_SLUGS.map((slug) => `/geo/${slug}`),
   ...GEO_STAGE_LANDINGS,
 ];
@@ -37,7 +38,10 @@ export function resolveGeoStageRoute(
   if (
     !GEO_ANALYSIS_SLUGS.some((s) => s === slug) ||
     !GEO_PREF_CODES.includes(prefCode) ||
-    !(GEO_STAGES.some((s) => s === stage) || (slug === "population-public-facility-access" && stage === "facilities"))
+    !(
+      GEO_STAGES.some((s) => s === stage) ||
+      (slug === 'population-public-facility-access' && stage === 'facilities')
+    )
   )
     return null;
   return GEO_STAGE_LANDINGS.includes(path)
