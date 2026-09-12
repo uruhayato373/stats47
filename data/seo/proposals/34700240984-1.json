@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "34700240984-1",
+  "status": "implementation-needed",
+  "keyword": "40代 未婚 割合 日本 国勢調査",
+  "targetPath": "/survey/census",
+  "needs": "「40代(40〜44歳・45〜49歳)の未婚率が国勢調査で男女別に何%か、都道府県によってどう違うか」を知りたい検索。国勢調査という一次統計の裏付けを求めている。",
+  "gap": "対象ページのreaderQuestionsは「30代前半男性の未婚率が高い都道府県は？」のみで、40代(40-44/45-49、男女計4区分)の未婚率ランキングへの導線が一切ない。該当metric(unmarried-ratio-male-40-44/45-49、unmarried-ratio-female-40-44/45-49)はisActive:trueかつKNOWN_RANKING_KEYSに公開済みだが、censusハブから発見できない。競合uub.jpは2010年国勢調査の47都道府県別40代未婚率表を持ち都道府県比較ニーズに直接回答している。onet.co.jp/nozze.comは全国値中心の解説記事で都道府県別データは持たない。",
+  "done": "apps/web/src/features/survey/survey-editorial.tsのcensusブロックreaderQuestionsに「40代前半(40〜44歳)男性の未婚率が高い都道府県は？」→rankingKey:unmarried-ratio-male-40-44、および対応する女性版(unmarried-ratio-female-40-44)を既存の配列項目と同じ形式で追加する。survey-editorial.test.tsの件数期待値を更新し、npm run type-check --workspace apps/webで検証する。出典は既存metric configのsource(e-Stat 0000010201)を流用し新規一次資料調査は不要。",
+  "method": "internal-links",
+  "competitors": [
+    {
+      "url": "https://uub.jp/pdr/j/mikon.html",
+      "findings": "2010年国勢調査に基づく47都道府県別・男女別・年代別(20-50代)未婚率の一覧表。東京都は男性30.8%・女性22.2%など全県値を掲載し都道府県比較ニーズに直接回答するが、出典年は2010年で古い。"
+    },
+    {
+      "url": "https://onet.co.jp/marriage_column/4149/",
+      "findings": "2020年国勢調査の全国値(男性40-44歳29.1%・45-49歳27.2%、女性40-44歳19.4%・45-49歳17.6%)を提示する解説記事。都道府県別データはなく、婚活方法の案内が主目的で範囲は全国のみ。"
+    },
+    {
+      "url": "https://www.nozze.com/enquete/1052/",
+      "findings": "2015年国勢調査の40代前半・後半男女別未婚率(男性29.3%/25.2%、女性19.1%/15.3%)を示し結婚相談所の実績で締める記事。都道府県別データもあるが対象年齢は30-34歳男性・25-29歳女性など別区分で40代の県別値は無い。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/survey/census",
+      "status": 200,
+      "fetchedAt": "2026-09-12T14:47:31.631Z",
+      "inputHash": "a7b8fb952041c0af767f8c74dea8858ff39b46380642855288486aab770bcd54",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "137050838a11bfd3fa66e12610208d232e0ae62905012d916eb7acb2a248ac7f",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "6cf41b24f837e6a61abe76baeb0bfa39c99794ed3033cafe805ca4293834ae44"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "40代 未婚 割合 日本 国勢調査"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://uub.jp/pdr/j/mikon.html"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://onet.co.jp/marriage_column/4149/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.nozze.com/enquete/1052/"
+      }
+    ]
+  },
+  "selectedAt": "2026-09-12",
+  "inputHash": "a7b8fb952041c0af767f8c74dea8858ff39b46380642855288486aab770bcd54",
+  "methods": [],
+  "files": []
+}
