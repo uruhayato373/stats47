@@ -128,3 +128,12 @@ test('saved review retry is explicit, restores only evidence and uses the same p
   assert.match(steps.find(s => s.id === 'review_check').run, /check-theme-review.mjs/);
   assert.doesNotMatch(steps.find(s => s.name === 'Install browser').if, /replay/);
 });
+
+test('a fresh review cannot silently reuse an old report when execution output is missing', () => {
+  const verify = workflow.jobs.audit.steps.find(s => s.id === 'review_check');
+  const prefix = verify.run.slice(0, verify.run.indexOf('node .claude/scripts/themes/check-theme-review.mjs'));
+  const script = 'git() { return 0; }; node() { return 77; };\n' + prefix;
+  const run = replay => spawnSync('bash', ['-e', '-c', script], {env:{...process.env, CLAUDE_EXECUTION_FILE:'', REPLAY_MODE:replay}}).status;
+  assert.equal(run(''), 1, 'missing fresh execution file must fail before existing report validation');
+  assert.equal(run('true'), 0, 'explicit replay already restored and bound its report');
+});

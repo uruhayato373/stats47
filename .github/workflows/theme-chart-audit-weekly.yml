@@ -183,10 +183,11 @@ jobs:
         if: always() && (steps.review.outcome == 'success' || steps.replay.outcome == 'success')
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+          REPLAY_MODE: ${{ steps.plan.outputs.replay }}
         run: |
           git diff --exit-code HEAD -- .claude/scripts/themes/check-theme-review.mjs .claude/scripts/themes/validate-theme-state.mjs
           git diff --exit-code HEAD -- .claude/scripts/themes/record-theme-review.mjs
-          if [ -n "$CLAUDE_EXECUTION_FILE" ]; then
+          if [ "$REPLAY_MODE" != true ]; then
             test -s "$CLAUDE_EXECUTION_FILE"
             node .claude/scripts/themes/record-theme-review.mjs "$CLAUDE_EXECUTION_FILE"
           fi
