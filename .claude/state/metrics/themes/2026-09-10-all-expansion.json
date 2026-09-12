@@ -7640,7 +7640,7 @@
   "ciFollowupMigration": {
     "status": "ci-verified-awaiting-main-activation",
     "workflow": ".github/workflows/theme-chart-audit-weekly.yml",
-    "implementationCommit": "2dec4e93c",
+    "implementationCommit": "cc8e98087",
     "firstRun": "https://github.com/uruhayato373/stats47/actions/runs/34654495422",
     "schedule": "daily 09:00 JST planner; full audit on Monday, first day of month, unobserved d7/d28/d56, or manual dispatch",
     "measurementDatesPreserved": [
@@ -7651,7 +7651,7 @@
     "localVerification": {
       "allWorkspaceTypeCheck": "pass",
       "themeTests": {
-        "passed": 423,
+        "passed": 427,
         "skipped": 1,
         "skipReason": "local landslide canonical artifacts unavailable"
       },
@@ -7663,10 +7663,14 @@
         "passed": 22
       },
       "docs": "pass",
-      "preflight": "pass"
+      "preflight": "pass",
+      "qualityRatchetContracts": {
+        "passed": 34,
+        "includes": "planner-aware error propagation and negative tests for runtime/summary failures"
+      }
     },
     "remaining": [
-      "Merge to main with PR quality checks",
+      "Complete main PR checks and merge",
       "Retire local heartbeat automation after CI activation"
     ],
     "firstRunObservation": {
@@ -7794,6 +7798,7 @@
       "passed": 426,
       "skipped": 1,
       "skipReason": "canonical landslide artifacts absent"
-    }
+    },
+    "pullRequest": "https://github.com/uruhayato373/stats47/pull/958"
   }
 }
