@@ -94,7 +94,7 @@ jobs:
           retention-days: 30
       - name: 📤 Commit observations to develop
         id: commit
-        if: steps.check.outputs.alert_code == '0' && steps.check.outputs.summary_code == '0'
+        if: steps.plan.outputs.run == 'true' && steps.check.outcome == 'success' && steps.check.outputs.alert_code == '0' && steps.check.outputs.summary_code == '0'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -106,11 +106,12 @@ jobs:
           git pull --rebase origin develop
           git push origin develop
       - name: Update actionable alert
-        if: always() && steps.check.outputs.alert_code == '0'
+        if: always() && steps.plan.outputs.run == 'true' && steps.check.outcome == 'success' && steps.check.outputs.alert_code == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ALERT_OPEN: ${{ steps.check.outputs.alert_open }}
         run: |
+          test "$ALERT_OPEN" = true || test "$ALERT_OPEN" = false
           gh label create theme-alert --description "テーマのデータ・構成監査" --color b60205 --force
           gh label create auto-generated --description "機械監査アラート" --color ededed --force
           existing=$(gh issue list --label theme-alert --state open --json number --jq '.[0].number')
@@ -123,7 +124,7 @@ jobs:
             else
               gh issue create --title "[Theme Alert] テーマ品質の確認が必要です" --label theme-alert --label auto-generated --body-file /tmp/theme-alert.md
             fi
-          elif [ -n "$existing" ]; then
+          elif [ "$ALERT_OPEN" = false ] && [ -n "$existing" ]; then
             gh issue close "$existing" --comment "テーマ品質監査の異常が解消しました。"
           fi
       - name: Check for a pending improvement PR
