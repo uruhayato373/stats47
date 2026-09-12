@@ -1,7 +1,16 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  readFileSync,
+  mkdirSync,
+  mkdtempSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { gzipSync } from 'node:zlib';
+import { setTimeout as retryDelay } from 'node:timers/promises';
+import { downloadSourceArchive } from '../../../packages/gis/src/mlit-ksj/scripts/rebuild-source-page-data';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import type {
@@ -24,6 +33,12 @@ import {
   type RepairManifest,
 } from './geo-source-publish-core';
 import { buildGeoSourceCatalog } from './export-geo-source-catalog';
+
+vi.mock('node:timers/promises', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('node:timers/promises')>();
+  const setTimeout = vi.fn(async () => undefined);
+  return { ...actual, setTimeout, default: { ...actual, setTimeout } };
+});
 
 const roots: string[] = [];
 afterEach(() => {
@@ -360,5 +375,126 @@ describe('Geo exact source publication', () => {
         generatedAt: '2026-09-13T00:00:00Z',
       })
     ).toThrow('Missing');
+  });
+});
+
+describe('official source ZIP transport retry', () => {
+  const url =
+    'https://nlftp.mlit.go.jp/ksj/gml/data/P04/P04-20/P04-20_44_GML.zip';
+  function setup() {
+    const f = fixture();
+    const destination = path.join(f.root, 'official.zip');
+    vi.mocked(retryDelay).mockClear();
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    return { ...f, destination };
+  }
+  afterEach(() => vi.restoreAllMocks());
+
+  it('retries 502 and honors a bounded 429 Retry-After before committing only the complete ZIP', async () => {
+    const f = setup();
+    writeFileSync(f.destination, 'previous-complete');
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(
+        new Response('temporary upstream failure', { status: 502 })
+      )
+      .mockResolvedValueOnce(
+        new Response('limited', {
+          status: 429,
+          headers: { 'Retry-After': '99999' },
+        })
+      )
+      .mockImplementationOnce(async () => {
+        expect(readFileSync(f.destination, 'utf8')).toBe('previous-complete');
+        expect(existsSync(f.destination + '.partial')).toBe(false);
+        return new Response('complete-zip');
+      });
+    vi.stubGlobal('fetch', fetcher);
+    await downloadSourceArchive(url, f.destination);
+    expect(fetcher).toHaveBeenCalledTimes(3);
+    expect(vi.mocked(retryDelay).mock.calls.map(([ms]) => ms)).toEqual([
+      2000, 60000,
+    ]);
+    expect(readFileSync(f.destination, 'utf8')).toBe('complete-zip');
+    expect(existsSync(f.destination + '.partial')).toBe(false);
+  });
+
+  it.each([400, 401, 403, 404])(
+    'stops permanent HTTP %i immediately without modifying an existing ZIP',
+    async (status) => {
+      const f = setup();
+      writeFileSync(f.destination, 'previous-complete');
+      const fetcher = vi.fn(async () => new Response('permanent', { status }));
+      vi.stubGlobal('fetch', fetcher);
+      await expect(downloadSourceArchive(url, f.destination)).rejects.toThrow(
+        `Official download failed: ${status}`
+      );
+      expect(fetcher).toHaveBeenCalledTimes(1);
+      expect(retryDelay).not.toHaveBeenCalled();
+      expect(readFileSync(f.destination, 'utf8')).toBe('previous-complete');
+      expect(existsSync(f.destination + '.partial')).toBe(false);
+    }
+  );
+
+  it.each(['network', 'timeout'])(
+    'retries a %s failure before headers',
+    async (kind) => {
+      const f = setup();
+      const error =
+        kind === 'network'
+          ? new TypeError('fetch failed')
+          : Object.assign(new Error('timed out'), { name: 'TimeoutError' });
+      const fetcher = vi
+        .fn()
+        .mockRejectedValueOnce(error)
+        .mockResolvedValueOnce(new Response('complete-zip'));
+      vi.stubGlobal('fetch', fetcher);
+      await downloadSourceArchive(url, f.destination);
+      expect(fetcher).toHaveBeenCalledTimes(2);
+      expect(retryDelay).toHaveBeenCalledWith(2000);
+      expect(readFileSync(f.destination, 'utf8')).toBe('complete-zip');
+    }
+  );
+
+  it('cleans interrupted streaming attempts and stops at five requests', async () => {
+    const f = setup();
+    const fetcher = vi.fn(
+      async () =>
+        new Response(
+          new ReadableStream({
+            start(controller) {
+              controller.enqueue(new TextEncoder().encode('partial-zip'));
+              queueMicrotask(() =>
+                controller.error(
+                  Object.assign(new Error('socket reset'), {
+                    code: 'ECONNRESET',
+                  })
+                )
+              );
+            },
+          })
+        )
+    );
+    vi.stubGlobal('fetch', fetcher);
+    await expect(downloadSourceArchive(url, f.destination)).rejects.toThrow(
+      'socket reset'
+    );
+    expect(fetcher).toHaveBeenCalledTimes(5);
+    expect(vi.mocked(retryDelay).mock.calls.map(([ms]) => ms)).toEqual([
+      2000, 4000, 8000, 16000,
+    ]);
+    expect(existsSync(f.destination)).toBe(false);
+    expect(existsSync(f.destination + '.partial')).toBe(false);
+  });
+
+  it('does not retry a local filesystem failure and removes its partial file', async () => {
+    const f = setup();
+    mkdirSync(f.destination);
+    const fetcher = vi.fn(async () => new Response('complete-zip'));
+    vi.stubGlobal('fetch', fetcher);
+    await expect(downloadSourceArchive(url, f.destination)).rejects.toThrow();
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(retryDelay).not.toHaveBeenCalled();
+    expect(existsSync(f.destination + '.partial')).toBe(false);
   });
 });

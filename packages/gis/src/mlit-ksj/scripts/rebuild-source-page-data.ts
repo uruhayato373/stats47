@@ -1,14 +1,17 @@
 /** Rebuild the bounded source-page repairs from official ZIPs. */
 import { createHash } from 'node:crypto';
 import {
-  createWriteStream,
   existsSync,
   mkdirSync,
   readFileSync,
+  renameSync,
+  rmSync,
   writeFileSync,
 } from 'node:fs';
+import { open } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
+import { setTimeout as delay } from 'node:timers/promises';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { gzipSync } from 'node:zlib';
@@ -43,7 +46,64 @@ export const SOURCE_REPAIR_VERSIONS: Readonly<Record<string, string>> = {
   N08: '21',
 };
 
-/** Only official HTTPS archives are accepted; local callers may provide already downloaded ZIPs. */
+const SOURCE_DOWNLOAD_ATTEMPTS = 5;
+const SOURCE_DOWNLOAD_TIMEOUT_MS = 600_000;
+const SOURCE_RETRY_INITIAL_DELAY_MS = 2_000;
+const SOURCE_RETRY_MAX_DELAY_MS = 60_000;
+
+class SourceDownloadHttpError extends Error {
+  constructor(
+    readonly status: number,
+    readonly retryAfterMs: number,
+    url: string
+  ) {
+    super(`Official download failed: ${status} ${url}`);
+  }
+}
+
+function retryableSourceDownload(error: unknown): boolean {
+  if (error instanceof SourceDownloadHttpError)
+    return error.status === 429 || (error.status >= 500 && error.status < 600);
+  if (!(error instanceof Error)) return false;
+  if (error.name === 'TimeoutError' || error.name === 'AbortError') return true;
+  if (
+    error instanceof TypeError &&
+    /fetch failed|terminated|network/i.test(error.message)
+  )
+    return true;
+  const networkCodes = new Set([
+    'ECONNRESET',
+    'ECONNREFUSED',
+    'ETIMEDOUT',
+    'EAI_AGAIN',
+    'ENOTFOUND',
+    'EPIPE',
+    'UND_ERR_SOCKET',
+    'UND_ERR_CONNECT_TIMEOUT',
+    'UND_ERR_HEADERS_TIMEOUT',
+    'UND_ERR_BODY_TIMEOUT',
+  ]);
+  return [error, (error as { cause?: unknown }).cause].some(
+    (candidate) =>
+      candidate !== null &&
+      typeof candidate === 'object' &&
+      'code' in candidate &&
+      typeof candidate.code === 'string' &&
+      networkCodes.has(candidate.code)
+  );
+}
+
+function sourceRetryDelay(header: string | null): number {
+  if (!header) return 0;
+  const milliseconds = /^\d+$/.test(header.trim())
+    ? Number(header) * 1_000
+    : Date.parse(header) - Date.now();
+  return Number.isFinite(milliseconds)
+    ? Math.min(SOURCE_RETRY_MAX_DELAY_MS, Math.max(0, milliseconds))
+    : 0;
+}
+
+/** Publish a complete local ZIP atomically; transient transport failures never become source data. */
 export async function downloadSourceArchive(
   url: string,
   destination: string
@@ -55,14 +115,60 @@ export async function downloadSourceArchive(
     !parsed.pathname.endsWith('.zip')
   )
     throw new Error('Not an official KSJ archive URL');
-  const response = await fetch(url, { signal: AbortSignal.timeout(600_000) });
-  if (!response.ok || !response.body)
-    throw new Error(`Official download failed: ${response.status} ${url}`);
+  const partial = `${destination}.partial`;
   mkdirSync(path.dirname(destination), { recursive: true });
-  await pipeline(
-    Readable.fromWeb(response.body as import('node:stream/web').ReadableStream),
-    createWriteStream(destination)
-  );
+  for (let attempt = 1; attempt <= SOURCE_DOWNLOAD_ATTEMPTS; attempt++) {
+    rmSync(partial, { force: true });
+    try {
+      const response = await fetch(url, {
+        signal: AbortSignal.timeout(SOURCE_DOWNLOAD_TIMEOUT_MS),
+      });
+      if (!response.ok) {
+        const error = new SourceDownloadHttpError(
+          response.status,
+          sourceRetryDelay(response.headers.get('retry-after')),
+          url
+        );
+        await response.body?.cancel().catch(() => undefined);
+        throw error;
+      }
+      if (!response.body)
+        throw new Error(`Official download has no body: ${url}`);
+      // Open before connecting the response: an already-errored response can make
+      // pipeline reject before createWriteStream's asynchronous open completes.
+      const handle = await open(partial, 'w');
+      try {
+        await pipeline(
+          Readable.fromWeb(
+            response.body as import('node:stream/web').ReadableStream
+          ),
+          handle.createWriteStream()
+        );
+      } finally {
+        await handle.close();
+      }
+      renameSync(partial, destination);
+      return;
+    } catch (error) {
+      rmSync(partial, { force: true });
+      if (
+        !retryableSourceDownload(error) ||
+        attempt === SOURCE_DOWNLOAD_ATTEMPTS
+      )
+        throw error;
+      const waitMs = Math.min(
+        SOURCE_RETRY_MAX_DELAY_MS,
+        Math.max(
+          SOURCE_RETRY_INITIAL_DELAY_MS * 2 ** (attempt - 1),
+          error instanceof SourceDownloadHttpError ? error.retryAfterMs : 0
+        )
+      );
+      console.warn(
+        `Official download retry ${attempt + 1}/${SOURCE_DOWNLOAD_ATTEMPTS} in ${waitMs}ms: ${url} (${error instanceof Error ? error.message : String(error)})`
+      );
+      await delay(waitMs);
+    }
+  }
 }
 
 type Output = {

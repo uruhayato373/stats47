@@ -71,16 +71,74 @@
       "skipped": 0
     },
     "geoPublicationTests": {
-      "passed": 10
+      "passed": 19
     },
     "designSystem": "passed-after-fixing-10-inherited-heading-violations",
     "localUi": {
-      "status": "pending-retry",
-      "attempt": "Cold Next dev compilation exceeded navigation timeout; stopped own port 3040 to run heavy checks sequentially on 8 GB host."
+      "status": "passed",
+      "viewports": [
+        390,
+        1440
+      ],
+      "paths": [
+        "/themes/climate",
+        "/themes/local-economy",
+        "/geo"
+      ],
+      "httpStatus": 200,
+      "horizontalOverflow": false,
+      "pageErrors": 0,
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/ui",
+      "interactions": {
+        "countySelection": "高知県 (39000)",
+        "indicatorSelection": "年平均気温",
+        "retainedExistingChapters": true,
+        "selectionAddsRegionalContext": true
+      }
+    },
+    "fullWebBuild": {
+      "status": "passed",
+      "staticPages": 1638,
+      "commit": "b52bacdd57d6f8eb18999640ade4446e1b5af9f6"
+    },
+    "dependencyInstall": {
+      "status": "passed",
+      "csv-parse": "7.0.2",
+      "sharp": "0.35.4",
+      "js-yaml": "4.3.2",
+      "audit": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0,
+        "scope": "npm audit --package-lock-only after updating qs override to 6.16.0"
+      },
+      "qs": "6.16.0"
+    },
+    "finalWebCoverage": {
+      "status": "passed",
+      "files": 281,
+      "tests": 2099,
+      "linesPercent": 51.21,
+      "existingWarnings": [
+        "Two previously unexecuted TypeScript entrypoints could not be parsed by the coverage provider; exclusion policy unchanged."
+      ]
+    },
+    "releaseFixes": {
+      "focusedTests": 56,
+      "webTypeCheck": "passed",
+      "gisTypeCheck": "passed",
+      "allWorkflowActionlint": "passed",
+      "workflowPolicy": {
+        "workflows": 70,
+        "findings": 0
+      }
     }
   },
   "remaining": [
-    "Integrate dependency PRs and finish full build/local checks",
+    "Wait for final release PR CI",
     "Rebuild/publish Geo source assets and catalog in CI",
     "Fetch and validate updated Rakuten catalogs in CI",
     "Merge release after green CI and verify production",
@@ -90,8 +148,43 @@
   "integrationCommit": "b3e803b0bf13d94e09e4cffd6d1b6790ddf6198a",
   "ci": {
     "affiliatePublish": 34725325729,
-    "geoSourcePublish": 34725325770,
     "affiliateInventory": 34725325776,
-    "developQuality": 34725325771
+    "developQuality": 34725325771,
+    "releasePr": 963,
+    "releaseQualityInitial": 34725784676,
+    "affiliateGa4": 34725598497,
+    "rakutenStaging": 34726078364,
+    "geoSourcePublishInitial": 34725325770
+  },
+  "affiliateSnapshot": {
+    "run": 34725325729,
+    "status": "published-and-readback-matched",
+    "records": 263,
+    "active": 260,
+    "stopped": 3,
+    "activePrograms": 128,
+    "observedAt": "2026-09-12T23:27:03Z",
+    "meaning": "Inventory counts, not actual rendered impressions."
+  },
+  "affiliateMeasurement": {
+    "run": 34725598497,
+    "status": "fetched",
+    "range": {
+      "start": "2026-08-16",
+      "end": "2026-09-13",
+      "inclusiveCalendarDays": 29,
+      "includesPartialCurrentDay": true
+    },
+    "placementRows": 9472,
+    "meaning": "Freshness and instrumentation baseline only; not an improvement-effect comparison. Preserve the 2026-09-08 baseline.",
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/affiliate-ga4"
+  },
+  "geoPublicationAttempt1": {
+    "run": 34725325770,
+    "status": "failed-before-publish",
+    "error": "Official P04-20_44_GML.zip returned HTTP 502",
+    "publicWrites": 0,
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-attempt-1",
+    "followup": "Add bounded transient-download retries, then rerun the complete exact publication."
   }
 }

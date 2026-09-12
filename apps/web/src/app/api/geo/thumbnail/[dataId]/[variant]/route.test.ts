@@ -44,7 +44,7 @@ describe('GIS thumbnail development reader', () => {
     expect(response.headers.get('location')).toBe(
       'https://storage.stats47.jp/app/geo/datasets/L01/thumbnails/26/wide.webp'
     );
-    expect(response.headers.get('cache-control')).toBe('no-store');
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
   });
   it('does not hide other filesystem failures with a remote redirect', async () => {
     vi.mocked(readFile).mockRejectedValue(
@@ -52,18 +52,23 @@ describe('GIS thumbnail development reader', () => {
     );
     const response = await request();
     expect(response.status).toBe(404);
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
     expect(response.headers.get('location')).toBeNull();
   });
   it.each([
     ['unknown', 'wide'],
     ['L01', '../manifest'],
   ])('rejects invalid scope %s/%s', async (id, variant) => {
-    expect((await request(id, variant)).status).toBe(404);
+    const response = await request(id, variant);
+    expect(response.status).toBe(404);
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
     expect(readFile).not.toHaveBeenCalled();
   });
   it('keeps the preview API disabled in production', async () => {
     vi.stubEnv('NODE_ENV', 'production');
-    expect((await request()).status).toBe(404);
+    const response = await request();
+    expect(response.status).toBe(404);
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
     expect(readFile).not.toHaveBeenCalled();
   });
 });

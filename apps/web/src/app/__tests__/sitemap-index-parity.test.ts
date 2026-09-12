@@ -1,4 +1,5 @@
 import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
+import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 import { describe, expect, it, vi } from "vitest";
 
 import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
@@ -53,7 +54,16 @@ describe("sitemap index ↔ shard の件数整合", () => {
       (entry) => new URL(entry.url).pathname,
     );
     expect(paths).not.toContain("/geo/2050-population");
-    expect(paths.filter((path) => path === '/geo' || path.startsWith('/geo/'))).toEqual(GEO_INDEXABLE_ROUTES);
+    // 原典カタログは分析ルートとは別に、公開可能なライセンスだけを提出する。
+    const sourcePaths = GIS_DATASETS
+      .filter((dataset) => getKsjLicensePolicy(dataset.license).sourcePublication === 'public-r2-eligible')
+      .map((dataset) => `/geo/datasets/${dataset.dataId}`);
+    const geoPaths = paths.filter((path) => path === '/geo' || path.startsWith('/geo/'));
+    expect(geoPaths).toEqual([...GEO_INDEXABLE_ROUTES, ...sourcePaths]);
+    expect(new Set(geoPaths).size).toBe(geoPaths.length);
+    for (const dataset of GIS_DATASETS.filter((entry) => getKsjLicensePolicy(entry.license).sourcePublication !== 'public-r2-eligible')) {
+      expect(paths).not.toContain(`/geo/datasets/${dataset.dataId}`);
+    }
     expect(paths).toEqual(
       expect.arrayContaining([
         "/geo/population-land-price",

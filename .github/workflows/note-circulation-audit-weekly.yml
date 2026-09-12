@@ -118,7 +118,7 @@ jobs:
             echo "- Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             echo "- Report artifact: note-circulation-audit"
             if [ -f .claude/state/metrics/note-cover-audit-latest.json ]; then
-              node -e 'const r = require("./.claude/state/metrics/note-cover-audit-latest.json"); console.log(`- Cover audit: ${r.status} / ${JSON.stringify(r.summary)} / coverage=${r.coverage.complete}`);'
+              node -e 'const r = require("./.claude/state/metrics/note-cover-audit-latest.json"); console.log("- Cover audit: " + r.status + " / " + JSON.stringify(r.summary) + " / coverage=" + r.coverage.complete);'
             fi
             if [ -n "$REPORT" ]; then
               node - "$REPORT" <<'NODE'

@@ -24,9 +24,37 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-import { describe, expect, it } from "vitest";
+import type { ReactElement } from "react";
+
+import { describe, expect, it, vi } from "vitest";
 
 import { resolveContentVerticalChain } from "@/features/ads/constants/affiliate-category";
+import type { ResolvedAffiliateBanner } from "@/features/ads/types";
+
+import { RankingPageClientShell } from "../components/RankingKeyPage/RankingPageClientShell";
+
+import type { RankingPageModel } from "../services/load-ranking-page-model";
+
+const display = vi.hoisted(() => ({ adsense: false }));
+vi.mock("@/lib/google-adsense", () => ({
+  get ADSENSE_DISPLAY_ENABLED() { return display.adsense; },
+}));
+vi.mock("@/features/ads", async () => ({
+  ...await import("@/features/ads/utils"),
+  BannerAd: () => null,
+}));
+vi.mock("../funnel/RankingFunnelCta", () => ({ RankingFunnelCta: () => null }));
+vi.mock("../components/RankingKeyPage/RankingKeyPageClient", () => ({ RankingKeyPageClient: () => null }));
+vi.mock("../components/RankingKeyPage/RankingPageAiSections", () => ({
+  RankingPageFaqSection: () => null, RankingPageInsightsSection: () => null,
+}));
+vi.mock("../components/RankingKeyPage/RankingPageAsyncSections", () => ({
+  RankingPageCorrelationSection: () => null, RankingPageSupplementCardsSection: () => null,
+}));
+vi.mock("../components/RankingKeyPage/RankingPageBreadcrumbs", () => ({ RankingPageBreadcrumbs: () => null }));
+vi.mock("../components/RankingKeyPage/RankingPageNativeAffiliateSection", () => ({ RankingPageNativeAffiliateSection: () => null }));
+vi.mock("../components/RankingKeyPage/RankingPageRelatedRankingsSection", () => ({ RankingPageRelatedRankingsSection: () => null }));
+vi.mock("../components/RankingKeyPage/RankingPageSidebarSection", () => ({ RankingPageSidebarSection: () => null }));
 
 const MODEL_SRC = readFileSync(
   resolve(import.meta.dirname, "../services/load-ranking-page-model.ts"),
@@ -87,10 +115,32 @@ describe("ranking native アフィリエイトの解決契約", () => {
     expect(SHELL_SRC).toContain("model.nativeBanners.filter(isLandscapeBanner)");
     expect(SHELL_SRC).toMatch(/shouldShowRankingInContentAffiliate\(\s*rankingKey\s*\)/);
     expect(SHELL_SRC).toContain('position="ranking-incontent"');
-    expect(SHELL_SRC).toMatch(
-      /ADSENSE_DISPLAY_ENABLED\s*\?\s*affiliateBanners\s*:\s*affiliateBanners\.slice\(1\)/,
-    );
     expect(CONTENT_SRC).toContain("!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate");
+  });
+
+  it.each([
+    { adsense: false, rankingKey: "library-count", middle: "ad1", end: ["ad2", "ad3", "ad4"] },
+    { adsense: false, rankingKey: "psychiatric-bed-count", middle: null, end: ["ad1", "ad2", "ad3"] },
+    { adsense: true, rankingKey: "library-count", middle: null, end: ["ad1", "ad2", "ad3"] },
+  ])("実際に中段へ置いた広告だけを読了・レールから除く: $rankingKey / AdSense=$adsense", ({ adsense, rankingKey, middle, end }) => {
+    display.adsense = adsense;
+    const nativeBanners: ResolvedAffiliateBanner[] = ["vertical", "ad1", "ad2", "ad3", "ad4", "ad5"].map((id) => ({
+      id, title: id, href: `https://example.com/${id}`, imageUrl: `https://example.com/${id}.png`,
+      width: 300, height: id === "vertical" ? 600 : 250, trackingPixelUrl: null, vertical: null,
+    }));
+    const model = { nativeBanners, rankingItem: { categoryKey: "education" } } as RankingPageModel;
+    // 子コンポーネントの描画ではなく、shell が各配置へ渡す実データを検証する。
+    const rendered = RankingPageClientShell({ rankingKey, model });
+    const sections = rendered.props.sections as {
+      inContentAffiliate: ReactElement<{ children: ReactElement<{ adId: string }> }> | null;
+      nativeAffiliate: ReactElement<{ banners: ResolvedAffiliateBanner[] }>;
+      sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
+    };
+    expect(sections.inContentAffiliate?.props.children.props.adId ?? null).toBe(middle);
+    expect(sections.nativeAffiliate.props.banners.map((banner) => banner.id)).toEqual(end);
+    expect(sections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(
+      middle ? [middle, ...end] : end,
+    );
   });
 
   it("読了位置は3列の単一ブロックにし、独立した5件目を置かない", () => {
