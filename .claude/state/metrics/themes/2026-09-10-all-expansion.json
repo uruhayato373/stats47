@@ -7638,9 +7638,9 @@
     "assessment": "validation.next253Tsunami29.scopeAudit"
   },
   "ciFollowupMigration": {
-    "status": "ci-reverification-in-progress",
+    "status": "ci-verified-awaiting-main-activation",
     "workflow": ".github/workflows/theme-chart-audit-weekly.yml",
-    "implementationCommit": "9752ac65e",
+    "implementationCommit": "2dec4e93c",
     "firstRun": "https://github.com/uruhayato373/stats47/actions/runs/34654495422",
     "schedule": "daily 09:00 JST planner; full audit on Monday, first day of month, unobserved d7/d28/d56, or manual dispatch",
     "measurementDatesPreserved": [
@@ -7651,7 +7651,7 @@
     "localVerification": {
       "allWorkspaceTypeCheck": "pass",
       "themeTests": {
-        "passed": 421,
+        "passed": 423,
         "skipped": 1,
         "skipReason": "local landslide canonical artifacts unavailable"
       },
@@ -7666,7 +7666,6 @@
       "preflight": "pass"
     },
     "remaining": [
-      "Verify structured AI review persistence in CI",
       "Merge to main with PR quality checks",
       "Retire local heartbeat automation after CI activation"
     ],
@@ -7718,6 +7717,11 @@
         "status": "failure",
         "reviewPersistence": "pass: c0b17678d",
         "reviewSemantic": "manually rejected placeholder content; saved review invalidated and all source reviews reopened"
+      },
+      {
+        "run": "https://github.com/uruhayato373/stats47/actions/runs/34659520106",
+        "status": "failure",
+        "reviewFailure": "Line-number-qualified evidence path was interpreted as a filename; the actual file was present"
       }
     ],
     "runtimeVerifications": [
@@ -7751,8 +7755,45 @@
         "observationCommit": "464d4ab3c",
         "issue": "https://github.com/uruhayato373/stats47/issues/957",
         "initialFailuresPreserved": true
+      },
+      {
+        "run": "https://github.com/uruhayato373/stats47/actions/runs/34659520106",
+        "expected": 110,
+        "checked": 110,
+        "passed": 108,
+        "failed": 2,
+        "durationSeconds": 170.064,
+        "findings": [
+          "occupation-salary/390: education salary chart source-unavailable and HTTP 503",
+          "safety/390: traffic accident deaths chart source-unavailable and HTTP 503"
+        ],
+        "rootCause": "unconfirmed",
+        "observationCommit": "69bd2c023",
+        "issue": "https://github.com/uruhayato373/stats47/issues/957",
+        "initialFailuresPreserved": true
       }
     ],
-    "reviewContentRepair": "Reject placeholder summaries/details and nonexistent evidence; accumulate official URL sourceReviews per month and derive unreviewed themes in CI"
+    "reviewContentRepair": "Reject placeholder summaries/details and nonexistent evidence; accumulate official URL sourceReviews per month and derive unreviewed themes in CI",
+    "savedReviewReplay": {
+      "run": "https://github.com/uruhayato373/stats47/actions/runs/34660696995",
+      "sourceRun": "https://github.com/uruhayato373/stats47/actions/runs/34659520106",
+      "status": "success",
+      "observationReused": true,
+      "reviewCommit": "50d40c3fc",
+      "checks": "same observation identity, evidence paths, change boundaries, experiment immutability, theme tests and Git commit passed"
+    },
+    "reviewOutcome": {
+      "status": "no-change",
+      "findings": 3,
+      "sourceReviews": 0,
+      "unreviewedThemes": 55,
+      "codeChanges": false,
+      "note": "503 root cause remains unconfirmed. Narrative hypotheses about hover/prefetch triggers are not established by the recorded runtime events; raw observations are authoritative."
+    },
+    "ciThemeTests": {
+      "passed": 426,
+      "skipped": 1,
+      "skipReason": "canonical landslide artifacts absent"
+    }
   }
 }
