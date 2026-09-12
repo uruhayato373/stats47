@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-12",
+  "period": {
+    "periodStart": "2026-09-03",
+    "periodEnd": "2026-09-09",
+    "windowDays": 7
+  },
+  "inputHash": "fe871d2a54deacce67e671d75be00194ab5bf8248d36718e6c9394dc3bff5ffe",
+  "movements": [
+    {
+      "keyword": "猛暑日日数 都 道府県",
+      "targetPath": "/blog/temperature-extremes-map",
+      "before": 67,
+      "after": 20,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 47
+    },
+    {
+      "keyword": "完全失業率",
+      "targetPath": "/blog/unemployment-structure",
+      "before": 60,
+      "after": 21.666666666666668,
+      "beforeImpressions": 1,
+      "impressions": 3,
+      "change": 38.33333333333333
+    },
+    {
+      "keyword": "出生率 ランキング 日本",
+      "targetPath": "/blog/fertility-rate-prefecture-gap",
+      "before": 28,
+      "after": 1.6129032258064515,
+      "beforeImpressions": 1,
+      "impressions": 31,
+      "change": 26.387096774193548
+    },
+    {
+      "keyword": "漁かく量",
+      "targetPath": "/japan/fishery-marine",
+      "before": 37,
+      "after": 63,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": -26
+    },
+    {
+      "keyword": "郡山 人口",
+      "targetPath": "/areas/07000/cities/07203/population",
+      "before": 10.238095238095237,
+      "after": 35,
+      "beforeImpressions": 21,
+      "impressions": 1,
+      "change": -24.761904761904763
+    },
+    {
+      "keyword": "出生率ランキング 日本",
+      "targetPath": "/blog/fertility-rate-prefecture-gap",
+      "before": 25,
+      "after": 1,
+      "beforeImpressions": 1,
+      "impressions": 6,
+      "change": 24
+    },
+    {
+      "keyword": "高知 年収",
+      "targetPath": "/areas/39000/occupation-salary",
+      "before": 50,
+      "after": 26,
+      "beforeImpressions": 1,
+      "impressions": 3,
+      "change": 24
+    },
+    {
+      "keyword": "年収 高知",
+      "targetPath": "/areas/39000/occupation-salary",
+      "before": 46.25,
+      "after": 22.333333333333332,
+      "beforeImpressions": 4,
+      "impressions": 3,
+      "change": 23.916666666666668
+    },
+    {
+      "keyword": "姫路市の人口",
+      "targetPath": "/areas/28000/cities/28201/population",
+      "before": 12,
+      "after": 35,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -23
+    },
+    {
+      "keyword": "県民所得ランキング",
+      "targetPath": "/blog/prefectural-income-gdp-ranking",
+      "before": 31,
+      "after": 8,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 23
+    }
+  ],
+  "verdicts": [],
+  "selected": {
+    "keyword": "40代 未婚 割合 日本 国勢調査",
+    "targetPath": "/survey/census",
+    "rank": 4.385786802030457,
+    "impressions": 591,
+    "clicks": 0,
+    "group": 5,
+    "previousMethod": null,
+    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
+  },
+  "observing": [],
+  "pendingPublication": []
+}

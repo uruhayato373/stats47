@@ -1,0 +1,153 @@
+name: 🔎 SEO keyword seven-day cycle
+
+on:
+  schedule:
+    - cron: '15 1 * * *' # 毎日10:15 JST
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ['Deploy to Cloudflare Workers']
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+concurrency:
+  group: seo-keyword-cycle
+  cancel-in-progress: false
+
+jobs:
+  cycle:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Test keyword lifecycle and evidence guards
+        run: node --test .claude/scripts/search-growth/__tests__/*.test.mjs
+      - name: Fetch finalized seven-day GSC ranks
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+        run: node .claude/scripts/search-growth/fetch-keyword-ranks.mjs --repo "$GITHUB_WORKSPACE" --days 7
+      - name: Review due keywords and select one
+        id: cycle
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_RUN: ${{ github.event.workflow_run.id }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" = workflow_run ]; then
+            node .claude/scripts/search-growth/keyword-cycle.mjs deployment --run "$DEPLOY_RUN" >> "$GITHUB_STEP_SUMMARY"
+          else
+            node .claude/scripts/search-growth/keyword-cycle.mjs run >> "$GITHUB_STEP_SUMMARY"
+          fi
+          node .claude/scripts/search-growth/check-keyword-state.mjs --base HEAD
+      - name: Commit measurements before review
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- data/seo/improvement-log.json data/seo/rank-history.json data/seo/rank-history/ data/seo/selections/ data/seo/latest-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore(seo): record seven-day keyword observations [skip ci]'
+            git pull --rebase origin develop
+            git push origin develop
+          fi
+      - name: Check pending keyword proposal
+        id: plan
+        if: github.event_name != 'workflow_run' && steps.cycle.outputs.selected == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create seo-keyword-cycle --description '1キーワードの検索意図に基づく改善' --color 0e8a16 --force
+          pending=$(gh pr list --base develop --state open --label seo-keyword-cycle --json number --jq length)
+          if [ "$pending" = 0 ]; then echo 'review=true' >> "$GITHUB_OUTPUT"; fi
+      - name: Research intent and propose one bounded improvement
+        id: review
+        if: steps.plan.outputs.review == 'true'
+        timeout-minutes: 15
+        uses: anthropics/claude-code-base-action@646b4a772085257c35182cd167bdd6b3b1017675 # v2.1.220
+        env:
+          NODE_VERSION: '20.x'
+        with:
+          prompt_file: .claude/prompts/ci/keyword-cycle.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: 'false'
+          settings: '{"disableAllHooks":true}'
+          claude_args: |
+            --model sonnet
+            --effort high
+            --max-turns 45
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["proposed","no-change","implementation-needed","needs-approval"]},"keyword":{"type":"string"},"targetPath":{"type":"string"},"needs":{"type":"string","minLength":20,"maxLength":500},"gap":{"type":"string","minLength":20,"maxLength":500},"done":{"type":"string","minLength":20,"maxLength":500},"method":{"type":"string","enum":["title","description","intro","faq","content","internal-links","data"]},"competitors":{"type":"array","minItems":1,"maxItems":3,"items":{"type":"object","properties":{"url":{"type":"string"},"findings":{"type":"string","minLength":20}},"required":["url","findings"],"additionalProperties":false}},"patches":{"type":"array","maxItems":3,"items":{"type":"object","properties":{"property":{"type":"string"},"oldText":{"type":"string"},"newText":{"type":"string","maxLength":900}},"required":["property","oldText","newText"],"additionalProperties":false}}},"required":["status","keyword","targetPath","needs","gap","done","method","competitors","patches"],"additionalProperties":false}'
+            --tools "Read,Glob,Grep,WebFetch,WebSearch"
+            --allowedTools "Read,Glob,Grep,WebFetch,WebSearch"
+            --disallowedTools "Read(.env*),Read(**/.env*),Read(stats47-*.json),Read(/tmp/stats47-sa/**),Read(/proc/**)"
+            --permission-mode dontAsk
+            --no-session-persistence
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+      - name: Preserve review execution diagnosis
+        if: always() && steps.plan.outputs.review == 'true'
+        env:
+          EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: node .claude/scripts/lib/summarize-claude-execution.mjs "$EXECUTION_FILE" > .local/seo-rank-watch/review-diagnosis.json
+      - name: Validate research and apply text proposal
+        id: proposal
+        if: steps.plan.outputs.review == 'true' && steps.review.outcome == 'success'
+        env:
+          EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: |
+          git diff --exit-code HEAD
+          test -s "$EXECUTION_FILE"
+          node .claude/scripts/search-growth/keyword-review.mjs "$EXECUTION_FILE" "$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          node .claude/scripts/search-growth/check-keyword-state.mjs --base HEAD
+          node --test .claude/scripts/search-growth/__tests__/keyword-cycle.test.mjs
+          cat .local/seo-rank-watch/review-body.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Verify proposed implementation
+        if: steps.proposal.outputs.code_changed == 'true'
+        run: |
+          npm run type-check
+          npm run test:run --workspace apps/web -- src/features/survey
+          npm run validate:config
+          npm run validate:catalog
+          npm run build --workspace apps/web
+      - name: Create draft keyword PR
+        if: success() && steps.proposal.outcome == 'success' && steps.proposal.outputs.proposal == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          branch="codex/seo-keyword-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          git switch -c "$branch"
+          while IFS= read -r file; do git add -- "$file"; done < .local/seo-rank-watch/proposal-paths.txt
+          git commit -m 'fix(seo): propose one search-intent improvement'
+          git push origin "HEAD:$branch"
+          gh pr create --draft --base develop --head "$branch" --label seo-keyword-cycle --title '検索意図に基づく1キーワードの改善' --body-file .local/seo-rank-watch/review-body.md
+      - name: Record no-change research
+        if: success() && steps.proposal.outcome == 'success' && steps.proposal.outputs.proposal == 'false'
+        run: |
+          git add -- data/seo/latest-review.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore(seo): record keyword research without a change [skip ci]'
+            git pull --rebase origin develop
+            git push origin develop
+          fi
+      - name: Preserve observations and review evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: seo-keyword-evidence
+          path: .local/seo-rank-watch/
+          include-hidden-files: true
+          retention-days: 30
