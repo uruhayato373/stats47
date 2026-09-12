@@ -7638,7 +7638,7 @@
     "assessment": "validation.next253Tsunami29.scopeAudit"
   },
   "ciFollowupMigration": {
-    "status": "ci-verified-awaiting-main-activation",
+    "status": "ci-active-deployment-verification-pending",
     "workflow": ".github/workflows/theme-chart-audit-weekly.yml",
     "implementationCommit": "cc8e98087",
     "firstRun": "https://github.com/uruhayato373/stats47/actions/runs/34654495422",
@@ -7667,11 +7667,14 @@
       "qualityRatchetContracts": {
         "passed": 34,
         "includes": "planner-aware error propagation and negative tests for runtime/summary failures"
+      },
+      "checkerWiring": {
+        "checkers": 119,
+        "newFindings": 0
       }
     },
     "remaining": [
-      "Complete main PR checks and merge",
-      "Retire local heartbeat automation after CI activation"
+      "Verify automatic code deployment"
     ],
     "firstRunObservation": {
       "expected": 110,
@@ -7799,6 +7802,23 @@
       "skipped": 1,
       "skipReason": "canonical landslide artifacts absent"
     },
-    "pullRequest": "https://github.com/uruhayato373/stats47/pull/958"
+    "pullRequest": "https://github.com/uruhayato373/stats47/pull/958",
+    "mainActivation": {
+      "commit": "c9f5b1970ac621e0a947fb85e321552c21f408c0",
+      "mergedAt": "2026-09-12T00:43:59Z",
+      "workflowState": "active",
+      "workflowBlob": "3052adb7a95d1cd626b733fa1fc8b994c968eba7",
+      "pullRequestChecksPassed": 18,
+      "qualityRun": "https://github.com/uruhayato373/stats47/actions/runs/34662039215"
+    },
+    "localHeartbeat": {
+      "id": "automation",
+      "status": "deleted",
+      "confirmedAt": "2026-09-12T00:45:14.133252+00:00"
+    },
+    "deployment": {
+      "run": "https://github.com/uruhayato373/stats47/actions/runs/34662603951",
+      "status": "in-progress"
+    }
   }
 }

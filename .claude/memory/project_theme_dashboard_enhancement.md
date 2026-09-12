@@ -54,3 +54,5 @@ aging-society:6, occupation-salary:5, population-dynamics:5, safety:4, consumer-
 
 - **CIのAIレビュー保存**: actionの実行成功は成果物の保存成功を意味しない。初回は出力ファイルなし、次は最終文に説明文・JSON fenceが付きJSON.parseが失敗した（run `34657295841`）。`--json-schema`の`structured_output`をCIが読み、入力hashと観測日はCIの観測台帳から付与する。通常テキストだけのsuccessは拒否する。構造化後も「test」等の仮データが保存されたため、仮文言・不正な根拠・存在しないファイルを拒否し、原典確認の公式URL記録から未確認テーマをCIで導出する。構造・範囲・実験不変性・テストの成功だけを意味的なレビュー完了と扱わない。正典は`record-theme-review.mjs`と`check-theme-review.mjs`、公式仕様は[structured outputs](https://code.claude.com/docs/en/agent-sdk/structured-outputs)（2026-09-12確認）。
 - **監査の本文待ちにも期限を置く**: エラーHTTP応答の本文取得にはナビゲーションtimeoutが効かず、初回CIは65/110で全体timeoutになった。`response.body()`等の証拠取得にも期限を付け、取得不能自体を保存して後続画面を検査する。固定年比較表はKPIカードとは別に年と行数を検証する。画面仕様の誤認や監査停止を、本番503の原因と混同しない。
+
+- **CI化の配線台帳**: 新しい監査をworkflowへ追加したら`.claude/config/quality-gates.json`にもcommand・owner・scheduleを登録する。既存validatorを定期実行へ広げた場合もtriggerを更新する。期日判定を入れた最終statusテストにはruntime/summaryを含む全exit codeを渡し、各失敗を成功扱いできない負例を確認する。baseline拡大で未配線を隠さない。
