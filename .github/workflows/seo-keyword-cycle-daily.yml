@@ -1,6 +1,13 @@
 name: 🔎 SEO keyword seven-day cycle
 
 on:
+  push:
+    branches: [develop]
+    paths:
+      - '.github/workflows/seo-keyword-cycle-daily.yml'
+      - '.claude/scripts/search-growth/*keyword*.mjs'
+      - '.claude/scripts/search-growth/lib/keyword-cycle.mjs'
+      - '.claude/prompts/ci/keyword-cycle.md'
   schedule:
     - cron: '15 1 * * *' # 毎日10:15 JST
   workflow_dispatch: {}
