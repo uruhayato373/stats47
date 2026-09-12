@@ -7638,7 +7638,7 @@
     "assessment": "validation.next253Tsunami29.scopeAudit"
   },
   "ciFollowupMigration": {
-    "status": "ci-active-alert-replay-correction-pending",
+    "status": "complete",
     "workflow": ".github/workflows/theme-chart-audit-weekly.yml",
     "implementationCommit": "cc8e98087",
     "firstRun": "https://github.com/uruhayato373/stats47/actions/runs/34654495422",
@@ -7651,7 +7651,7 @@
     "localVerification": {
       "allWorkspaceTypeCheck": "pass",
       "themeTests": {
-        "passed": 427,
+        "passed": 429,
         "skipped": 1,
         "skipReason": "local landslide canonical artifacts unavailable"
       },
@@ -7673,9 +7673,7 @@
         "newFindings": 0
       }
     },
-    "remaining": [
-      "Verify original deployment and publish the replay alert guard correction"
-    ],
+    "remaining": [],
     "firstRunObservation": {
       "expected": 110,
       "checked": 65,
@@ -7798,7 +7796,7 @@
       "note": "503 root cause remains unconfirmed. Narrative hypotheses about hover/prefetch triggers are not established by the recorded runtime events; raw observations are authoritative."
     },
     "ciThemeTests": {
-      "passed": 426,
+      "passed": 429,
       "skipped": 1,
       "skipReason": "canonical landslide artifacts absent"
     },
@@ -7809,7 +7807,16 @@
       "workflowState": "active",
       "workflowBlob": "3052adb7a95d1cd626b733fa1fc8b994c968eba7",
       "pullRequestChecksPassed": 18,
-      "qualityRun": "https://github.com/uruhayato373/stats47/actions/runs/34662039215"
+      "qualityRun": "https://github.com/uruhayato373/stats47/actions/runs/34662039215",
+      "alertCorrection": {
+        "commit": "4a1d3947e5ceda94ff132f3007c510eb2dcc50da",
+        "mergedAt": "2026-09-12T01:02:56Z",
+        "pullRequest": "https://github.com/uruhayato373/stats47/pull/959",
+        "pullRequestChecksPassed": 18,
+        "qualityRun": "https://github.com/uruhayato373/stats47/actions/runs/34663086530",
+        "workflowBlob": "438eb1e192f29f0954804b6434ec135da17c73e6",
+        "workflowState": "active"
+      }
     },
     "localHeartbeat": {
       "id": "automation",
@@ -7818,7 +7825,10 @@
     },
     "deployment": {
       "run": "https://github.com/uruhayato373/stats47/actions/runs/34662603951",
-      "status": "in-progress"
+      "status": "success",
+      "commit": "c9f5b1970ac621e0a947fb85e321552c21f408c0",
+      "productionRoutes": "pass",
+      "sitemapIndex": "pass"
     },
     "alertReplayRepair": {
       "sourceRun": "https://github.com/uruhayato373/stats47/actions/runs/34660696995",
@@ -7835,7 +7845,47 @@
           "explicit healthy state can close",
           "all audit exit codes propagate"
         ]
+      },
+      "status": "verified-and-active",
+      "validationRun": "https://github.com/uruhayato373/stats47/actions/runs/34663080614",
+      "validationResult": "success; observation commit and issue update skipped; review guards and 429 tests passed with 1 existing GIS skip",
+      "issueStateAfterReplay": "OPEN",
+      "mainCommit": "4a1d3947e5ceda94ff132f3007c510eb2dcc50da"
+    },
+    "completedAt": "2026-09-12T01:04:15.796024+00:00",
+    "productionSmoke": {
+      "run": "https://github.com/uruhayato373/stats47/actions/runs/34663107372",
+      "status": "success",
+      "healthChecks": {
+        "passed": 11,
+        "total": 11
+      },
+      "browser": {
+        "passedFirstAttempt": 46,
+        "passedAfterRetry": 2,
+        "failedFinally": 0,
+        "initialFailures": [
+          "ranking detail at tablet width: main boundingBox null",
+          "blog detail at tablet width: main boundingBox null"
+        ],
+        "initialFailureLogsPreserved": true
+      },
+      "warmCache": {
+        "passed": 28,
+        "failed": 0
       }
-    }
+    },
+    "redundantDeployment": {
+      "run": "https://github.com/uruhayato373/stats47/actions/runs/34663613232",
+      "status": "cancelled",
+      "reason": "CI-only correction after successful production deployment; confirmed no apps/packages/package manifests/turbo changes relative to deployed c9f5b1970. Cancelled duplicate app deployment before deployment step."
+    },
+    "pendingFollowups": [
+      "Intermittent runtime HTTP 503 remains unresolved in Issue 957; preserve first failures",
+      "Monthly official-source refresh has 55 unreviewed themes carried forward",
+      "Scope 105 housing-only national spatial source remains unfulfilled",
+      "Observe d7/d28/d56 on the preserved dates; improvement proposals use validated draft PRs"
+    ],
+    "evidenceDirectory": "/Users/minamidaisuke/stats47/.local/verification/themes/2026-09-12-ci-followup/"
   }
 }

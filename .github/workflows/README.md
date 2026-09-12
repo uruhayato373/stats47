@@ -27,6 +27,10 @@
 新しい判断材料・月替わりのみ証拠をレビューし、変更は検証済みdraft PR、無変更は`ci-review.json`へ記録する。
 GA4週次取得はJapan-only pages-clean/theme-navigationと成功・期間メタを保存する。
 
+キーワード順位は `seo-keyword-cycle-daily.yml` が毎日10:15 JSTに確定7日GSCを取得する。
+実装のdevelop push・手動実行でも動作確認できる。期限到来分を判定し、1キーワードの検索意図を調べて検証付きdraft PRを準備する。
+観察開始は公開成功・変更文言の実測後。台帳は `data/seo/`、詳細はsearch-growthの週次サイクル契約。
+
 ### ブランチ戦略
 
 ```

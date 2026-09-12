@@ -6,6 +6,20 @@ primary_agent: gsc-analyst
 
 # search-growth — 検索成長統合基盤
 
+## キーワード単位の7日サイクル
+
+キーワードの順位改善は `data/seo/` を台帳に、確定7日GSC → 期限到来分の判定 → 1キーワード選択 → 検索意図と上位ページ比較 → 小変更の下書きPR → 公開確認 → 7日観察で回す。詳細は `reference/weekly-cycle-contract.md` の「キーワード順位サイクル」。横断診断と同じGSC認証・期間SSOTを使う。
+
+```bash
+npm run seo:rank:fetch -- --repo /path/to/stats47   # 常に --days 7
+npm run seo:rank:cycle                           # 判定・1件選択・レポート
+npm run seo:rank:check -- --base origin/main       # 履歴の改変検査
+```
+
+`seo-keyword-cycle-daily.yml` が毎日10:15 JSTに実行し、公開成功後にも観察開始を確認する。`keyword-review.mjs` は検索・閲覧記録付きの構造化結果から、対象ページ内の既存文言だけを置換する。AIはRead/WebSearch/WebFetchのみ。実装された変更は検証後のdraft PRへ、追加実装が必要なものは同じキーワードの具体案をdraft PRへ保存し、実装済みと混同しない。noindex・大きな構造変更は承認対象。候補がなければ何も改善しない。
+
+実装: `.claude/scripts/search-growth/{fetch-keyword-ranks,keyword-cycle,keyword-review}.mjs`、純粋判定: `lib/keyword-cycle.mjs`、CI prompt: `.claude/prompts/ci/keyword-cycle.md`。
+
 GSC だけを見る運用をやめ、**検索露出・クリック・インデックス・流入後行動・実ユーザー性能・サーバー状態を
 一つの証拠チェーン**で診断する。基盤・安全境界は`reference/platform-contract.md`、期間・承認・
 14/28/56日判定は`reference/weekly-cycle-contract.md`を正典とする。進捗は`.claude/todo/`だけで管理する。
