@@ -124,6 +124,14 @@ jobs:
           cat .local/seo-rank-watch/review-body.md >> "$GITHUB_STEP_SUMMARY"
       - name: Verify proposed implementation
         if: steps.proposal.outputs.code_changed == 'true'
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_ENV: production
+          NEXT_PUBLIC_BASE_URL: https://stats47.jp
+          NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+          NODE_OPTIONS: '--max-old-space-size=4096'
         run: |
           npm run type-check
           npm run test:run --workspace apps/web -- src/features/survey
