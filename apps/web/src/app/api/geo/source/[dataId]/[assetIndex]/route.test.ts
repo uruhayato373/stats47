@@ -1,10 +1,15 @@
+import { gzipSync, gunzipSync } from 'node:zlib';
+
+import { getR2Client } from '@stats47/r2-storage/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 
 import { loadGeoSourceItem } from '@/features/geo-analysis';
 
 import { GET } from './route';
 
 vi.mock('@/features/geo-analysis', () => ({ loadGeoSourceItem: vi.fn() }));
+vi.mock('@stats47/r2-storage/server', () => ({ getR2Client: vi.fn() }));
 
 const assetKey = 'gis/mlit-ksj/L01/26/prefectures/01.topojson';
 const fetchMock = vi.fn<typeof fetch>();
@@ -17,6 +22,7 @@ beforeEach(() => {
   vi.resetAllMocks();
   vi.stubGlobal('fetch', fetchMock);
   vi.stubEnv('R2_PUBLIC_FETCH_URL', 'https://storage.stats47.jp/');
+  vi.stubEnv('CLOUDFLARE_WORKERS', 'false');
   vi.mocked(loadGeoSourceItem).mockResolvedValue({
     dataId: 'L01', version: '26', sourceUrl: 'https://nlftp.mlit.go.jp/',
     assets: [{ key: assetKey, label: '北海道', bytes: 2 }],
@@ -61,15 +67,47 @@ describe('Geo source proxy cache contract', () => {
     expect(response.headers.get('cache-control')).toBe('private, no-store');
   });
 
-  it('keeps the successful public object stream cacheable', async () => {
+  it('does not cache the local public mirror stream', async () => {
     const upstream = new Response('{}');
     fetchMock.mockResolvedValue(upstream);
     const response = await request();
     expect(response.status).toBe(200);
     expect(response.body).toBe(upstream.body);
-    expect(response.headers.get('cache-control')).toBe('public, max-age=86400');
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
     expect(await response.text()).toBe('{}');
     expect(fetchMock).toHaveBeenCalledWith('https://storage.stats47.jp/' + assetKey,
       expect.objectContaining({ signal: expect.any(AbortSignal) }));
+  });
+
+  it('streams compressed R2 bytes without expanding or refetching them over HTTP', async () => {
+    vi.stubEnv('CLOUDFLARE_WORKERS', 'true');
+    const original = JSON.stringify({ type: 'FeatureCollection', features: [], padding: 'x'.repeat(250_000) });
+    const bytes = gzipSync(original);
+    const body = new ReadableStream({ start(controller) { controller.enqueue(bytes); controller.close(); } });
+    const arrayBuffer = vi.fn(() => { throw Error('Must not buffer nationwide GIS'); });
+    const get = vi.fn().mockResolvedValue({ body, size: bytes.length, httpEtag: '"stored-gzip"', httpMetadata: { contentEncoding: 'gzip' }, arrayBuffer });
+    vi.mocked(getR2Client).mockResolvedValue({ get } as unknown as Awaited<ReturnType<typeof getR2Client>>);
+    const response = await request();
+    expect(response.status).toBe(200);
+    expect(response.body).toBe(body);
+    expect(response.headers.get('content-encoding')).toBeNull();
+    expect(response.headers.get('content-length')).toBe(String(bytes.length));
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
+    const received = Buffer.from(await response.arrayBuffer());
+    expect(received).toEqual(bytes);
+    expect(gunzipSync(received).toString()).toBe(original);
+    expect(arrayBuffer).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(get).toHaveBeenCalledWith(assetKey);
+  });
+
+  it.each(['missing', 'unavailable'])('fails closed when the production binding is %s', async (state) => {
+    vi.stubEnv('CLOUDFLARE_WORKERS', 'true');
+    if (state === 'missing') vi.mocked(getR2Client).mockResolvedValue({ get: vi.fn().mockResolvedValue(null) } as unknown as Awaited<ReturnType<typeof getR2Client>>);
+    else vi.mocked(getR2Client).mockRejectedValue(new Error('binding unavailable'));
+    const response = await request();
+    expect(response.status).toBe(502);
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

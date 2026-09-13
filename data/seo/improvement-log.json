@@ -1,4 +1,42 @@
 {
   "schemaVersion": 1,
-  "entries": []
+  "entries": [
+    {
+      "keyword": "40代 未婚 割合 日本 国勢調査",
+      "targetPath": "/survey/census",
+      "status": "observing",
+      "actions": [
+        {
+          "date": "2026-09-13",
+          "rankAtAction": 4.385786802030457,
+          "baselinePeriod": {
+            "periodStart": "2026-09-04",
+            "periodEnd": "2026-09-10",
+            "windowDays": 7
+          },
+          "baselineHash": "bf1e7f7de2dbd3cf746ac1ca0cd1d7a456b30d2be618475e8b745a20b43fbe3e",
+          "needs": "「40代(40〜44歳・45〜49歳)の未婚率が国勢調査で男女別に何%か、都道府県によってどう違うか」を知りたい検索。国勢調査という一次統計の裏付けを求めている。",
+          "done": "censusの既存の未婚率案内を、30代前半男性から40代前半（40〜44歳）男性へ差し替えた。質問とrankingKeyを同時に更新し、国勢調査に属する公開済みランキングへの導線とした。代表導線は最大5件を維持し、他の4件は保持した。男女全区分の案内を追加したものではない。",
+          "method": "internal-links",
+          "proposalId": "34700240984-1",
+          "deployment": {
+            "date": "2026-09-13",
+            "sha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
+            "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34739098468"
+          },
+          "files": [
+            {
+              "path": "apps/web/src/features/survey/survey-editorial.ts",
+              "beforeSha256": "c37cd0d78de5377a8588e6f979db48073be096e44ed58583f500a2e73b1fd561",
+              "sha256": "b8f382d5f914f80af4baa8979d47ecb24b306d5af93dc7941b2ca7ec5ae63f47"
+            }
+          ],
+          "methods": [
+            "internal-links"
+          ]
+        }
+      ],
+      "nextReviewDate": "2026-09-20"
+    }
+  ]
 }

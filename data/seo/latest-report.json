@@ -6,7 +6,7 @@
     "periodEnd": "2026-09-10",
     "windowDays": 7
   },
-  "inputHash": "0f5fd95e7a5c5cd9c98985d7649094a0abe61789db9fdf165042f9490afbe2aa",
+  "inputHash": "bf1e7f7de2dbd3cf746ac1ca0cd1d7a456b30d2be618475e8b745a20b43fbe3e",
   "movements": [
     {
       "keyword": "完全失業率",
@@ -100,16 +100,12 @@
     }
   ],
   "verdicts": [],
-  "selected": {
-    "keyword": "40代 未婚 割合 日本 国勢調査",
-    "targetPath": "/survey/census",
-    "rank": 4.385786802030457,
-    "impressions": 591,
-    "clicks": 0,
-    "group": 5,
-    "previousMethod": null,
-    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
-  },
-  "observing": [],
+  "selected": null,
+  "observing": [
+    {
+      "keyword": "40代 未婚 割合 日本 国勢調査",
+      "nextReviewDate": "2026-09-20"
+    }
+  ],
   "pendingPublication": []
 }

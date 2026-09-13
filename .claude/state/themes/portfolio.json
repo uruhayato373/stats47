@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-11",
+  "generatedAt": "2026-09-13",
   "themes": [
     {
       "themeKey": "aging-society",
@@ -66,7 +66,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 25,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -180,7 +180,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 11,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -258,7 +258,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 9,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -337,7 +337,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -413,7 +413,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-climate.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 10,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -522,7 +522,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -599,7 +599,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -678,7 +678,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -763,7 +763,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-consumer-prices.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 15,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -873,7 +873,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 10,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -958,7 +958,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -1041,7 +1041,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2011",
         "ageReviewKeys": [
@@ -1119,7 +1119,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2008",
         "ageReviewKeys": [
@@ -1191,7 +1191,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#education-culture-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 29,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -1306,7 +1306,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -1378,7 +1378,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-fishery-marine.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 23,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -1479,7 +1479,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1593,7 +1593,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 15,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -1671,7 +1671,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2008",
         "ageReviewKeys": [
@@ -1747,7 +1747,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1826,7 +1826,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2013",
         "ageReviewKeys": [
@@ -1903,7 +1903,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 11,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1980,7 +1980,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 47,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -2093,7 +2093,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 7,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -2174,7 +2174,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -2252,7 +2252,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 7,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -2321,7 +2321,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 18,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -2426,7 +2426,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 20,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -2541,7 +2541,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -2615,7 +2615,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2026",
         "ageReviewKeys": [],
@@ -2684,7 +2684,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 37,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -2802,7 +2802,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-local-economy.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 17,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -2925,7 +2925,7 @@
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 39,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3033,7 +3033,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3107,7 +3107,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 16,
         "oldestLatestDataYear": "2006",
         "ageReviewKeys": [
@@ -3197,7 +3197,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3266,7 +3266,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-manufacturing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 13,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -3374,7 +3374,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -3447,7 +3447,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 39,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3557,7 +3557,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 32,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -3664,7 +3664,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-ports.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3769,7 +3769,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3838,7 +3838,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-railway.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3938,7 +3938,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 25,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -4053,7 +4053,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 17,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -4127,7 +4127,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2013",
         "ageReviewKeys": [
@@ -4207,7 +4207,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -4281,7 +4281,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-roads.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 16,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -4384,7 +4384,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#safety-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 46,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -4497,7 +4497,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -4576,7 +4576,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -4649,7 +4649,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-tourism.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 17,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -4762,7 +4762,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 2,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -4836,7 +4836,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -4910,7 +4910,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-11T23:54:26.610Z",
+        "observedAt": "2026-09-13T05:17:38.434Z",
         "keysChecked": 9,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],

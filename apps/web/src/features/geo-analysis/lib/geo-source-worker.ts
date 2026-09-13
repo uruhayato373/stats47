@@ -40,7 +40,8 @@ function geometryBounds(geometry: Geometry): Bounds {
 scope.onmessage = async ({ data }) => {
   try {
     if (data.type === 'load') {
-      const response = await fetch(data.url);
+      // Older deployments could cache a truncated 200 response for a day.
+      const response = await fetch(data.url, { cache: 'no-store' });
       if (!response.ok) throw Error('地図データを読み込めませんでした。');
       let buffer = await response.arrayBuffer();
       const signature = new Uint8Array(

@@ -119,6 +119,16 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     heading: "地域経済",
     dataSelector: '[data-theme-chart="true"]',
     expectedChartCount: 2,
+    // 産業分類不詳を除く比率を100%へ正規化せず、元の値の推移を表示する。
+    representativeTypes: ["line-chart"],
+  },
+  {
+    id: "theme-healthcare",
+    path: "/themes/healthcare",
+    canonicalPath: "/themes/healthcare",
+    heading: "医療・健康",
+    dataSelector: '[data-theme-chart="true"]',
+    expectedChartCount: 4,
     representativeTypes: ["donut-chart"],
   },
   {
