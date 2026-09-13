@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "date": "2026-09-13",
-  "status": "deployed-followup-fix-required",
-  "authorization": "User explicitly requested all-session integration, one production deployment, and cleanup to main/develop only.",
+  "status": "published-and-verified-with-known-theme-observations",
+  "authorization": "User explicitly requested all-session integration, production deployment, and cleanup to main/develop only. A second application deployment fixes a production GIS delivery defect found during verification.",
   "sourceRefs": {
     "develop": "4503b49ec27744a688b94445c351f56b7926a3a0",
     "workspace": "d870a3d93962bd011c9266304ea55e3b42ef6d6c",
@@ -220,14 +220,173 @@
         "notExercisedReason": "Aging390/1440 have zero visible affiliate links; not evidence of inventory absence"
       },
       "evidence": ".local/verification/release/2026-09-13-all-sessions/postdeploy-affiliate-dom-verifier-v2",
-      "scope": "Representative DOM only; third-party ads/analytics blocked, no clicks or revenue validation"
+      "scope": "Representative DOM only; third-party ads/analytics blocked, no clicks or revenue validation",
+      "okinawaScopedFollowup": {
+        "width": 390,
+        "status": "PASS_WITH_DECLARED_BOUNDARY",
+        "html200CompleteBuildMatch": true,
+        "visibleLinks": 1,
+        "findings": [],
+        "httpErrors": 0,
+        "pageErrors": 0,
+        "verifiedPrefetchAborts": 11,
+        "deploymentSha": "45cfa07b93d833f3f5332db4f8e3fe14b84f128d",
+        "buildId": "G72RvTCO3QhlH8AVrEK2Z",
+        "evidence": ".local/verification/release/2026-09-13-all-sessions/postdeploy-pr964-scoped"
+      }
+    },
+    "themeProductionScopedFollowup": {
+      "checked": 6,
+      "pass": 2,
+      "fail": 4,
+      "html200CompleteBuildMatch": 6,
+      "pageErrors": 0,
+      "cases": [
+        {
+          "theme": "railway",
+          "width": 1440,
+          "pass": false,
+          "findings": [
+            "chart:railway-freight-trend:source-unavailable",
+            "network:503"
+          ]
+        },
+        {
+          "theme": "real-income",
+          "width": 1440,
+          "pass": false,
+          "findings": [
+            "chart:real-income-household-composition:source-unavailable",
+            "network:503"
+          ]
+        },
+        {
+          "theme": "tourism",
+          "width": 1440,
+          "pass": true,
+          "findings": []
+        },
+        {
+          "theme": "railway",
+          "width": 390,
+          "pass": true,
+          "findings": []
+        },
+        {
+          "theme": "real-income",
+          "width": 390,
+          "pass": false,
+          "findings": [
+            "chart:real-income-cpi-breakdown-expenses:source-unavailable",
+            "network:503"
+          ]
+        },
+        {
+          "theme": "tourism",
+          "width": 390,
+          "pass": false,
+          "findings": [
+            "chart:theme-tourism-hotel-supply-trend:source-unavailable",
+            "network:503"
+          ]
+        }
+      ],
+      "deploymentSha": "45cfa07b93d833f3f5332db4f8e3fe14b84f128d",
+      "buildId": "G72RvTCO3QhlH8AVrEK2Z",
+      "deploymentRun": 34741815793,
+      "errorResponses": 13,
+      "responseErrorCode": 1102,
+      "causeBoundary": "Current theme503 response bodies contain Cloudflare1102 resource-limit text. CPU vs memory and generating workload are not established. No causal attribution to GIS, and changed environment prevents a controlled before/after comparison. Issue957 remains open; scoped recovery does not establish full55/110 clean. Prior initial failures remain unchanged. Bodies captured4646 bytes match Content-Length and HTML closing tag, while stream completion flags remain false and are not overwritten.",
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/postdeploy-pr964-scoped",
+      "summarySha256": "e12bb666e0f9d5718fe87d4f8b1828c6f9be5ed0ba09fbc1893c07fd8630c6ce",
+      "issue": 957
+    },
+    "geoProductionFinal": {
+      "initialRun": {
+        "expected": 100,
+        "completed": 100,
+        "passed": 99,
+        "failed": 1,
+        "initialMapsPassed": 100,
+        "pageErrors": 0,
+        "documentBuildMatches": 100,
+        "result": "initial100/result.json"
+      },
+      "followup": {
+        "expected": 1,
+        "completed": 1,
+        "passed": 1,
+        "failed": 0,
+        "cases": [
+          "L01:320"
+        ],
+        "pageErrors": 0,
+        "documentBuildMatches": 1,
+        "result": "followup-L01-320/result.json"
+      },
+      "effectiveCoverage": {
+        "sourcePages": 50,
+        "viewportCases": 100,
+        "viewports": [
+          320,
+          1440
+        ],
+        "meaning": "99 first-run passes plus one separately retained followup; not an all-pass initial run"
+      },
+      "failureAssessment": {
+        "case": "L01:320",
+        "classification": "audit-interaction-scroll-position",
+        "initialFailure": "Normal popup summary click intercepted by sticky header after map was scrolled partly above viewport",
+        "evidence": [
+          "initial100/L01-320-failure.png",
+          "initial100/L01-320-failure-dom.html",
+          "initial100/http/L01-320/index.json"
+        ],
+        "correction": "Normal DOM scroll centers the map before normal click; no force click, no Leaflet state manipulation, no application change",
+        "followupViewport": {
+          "map": {
+            "x": 29,
+            "y": 269.5,
+            "width": 262,
+            "height": 420
+          },
+          "header": {
+            "x": 0,
+            "y": 0,
+            "width": 320,
+            "height": 56
+          },
+          "scrollY": 113
+        },
+        "rawPropertyRows": 148,
+        "screenshot": "followup-L01-320/L01-320-operated.png"
+      },
+      "bodyIntegrity": {
+        "nativeGzipResponses": 285,
+        "allStoredBodyHashesMatch": true,
+        "allDecodedHashesMatch": true,
+        "file": "browser-body-readback.json",
+        "canonicalComparison": "Each map readiness check compares actual browser decoded bytes/SHA with the canonical current public source bound to CI item/index"
+      },
+      "deployedSha": "45cfa07b93d833f3f5332db4f8e3fe14b84f128d",
+      "buildId": "G72RvTCO3QhlH8AVrEK2Z",
+      "viewerHash": "28f61abf19c6a5c18f4ebb34365e35972f0bf201e108d9807109636c66056d27",
+      "apiRouteSha256": "1be7d6688d166cd546a11d38c4e57bd5d680b60852fd5263b58a164336cd0a99",
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-production/native-45cfa07b",
+      "assessmentSha256": "80e97e4d0dba44c38e6e90efb96f95dd54c43f67b8ad1ea918cb5dbf920cce34",
+      "evidenceHashes": {
+        "initial100/result.json": "920d725c46115a00af8059b35e979d3d8f41fc757f66615098d5ad6f07bd1749",
+        "initial100/release-binding.json": "bc1053927ffff76ec662b2612f9431c8b99cc92fabcde27d21f2cd47b110dbf9",
+        "initial100/document-build-postparse.json": "2ec96d4b305c25e70f7fabb96dba5e50d72ca60dfd59190f43c7b82b674af7b8",
+        "initial100/runner.mjs": "6c6c8b76e9ba3c8b8191f7890b8b85f0f5260cfcd5b397f181f586e9c33ba33f",
+        "followup-L01-320/result.json": "98a6a1e0571745dccc2b6851720f1c926ccbb267ae41c2ae55b9115bdf25cece",
+        "followup-L01-320/release-binding.json": "f505aa4295f9f86287abba2d7f747bfe56a9272724122013178fed55c0895e87",
+        "followup-L01-320/runner.mjs": "cc34c9e1db9767293ea0360cce8ebf4fe5be10df2ca18bdd9ab3f4bab0aac2e9",
+        "browser-body-readback.json": "e2075541dcaa7da3d47658108978720d97d6a762fa7d94876f7628cf943f30aa"
+      }
     }
   },
-  "remaining": [
-    "Validate and release native R2 Geo stream correction",
-    "Recheck final production Geo and failed theme/affiliate paths preserving initial observations",
-    "Merge final records, synchronize main/develop and remove verification worktree"
-  ],
+  "remaining": [],
   "integrationCommit": "902a94001f5ee4cba576cd54a0fda2c2794db464",
   "ci": {
     "affiliatePublish": 34725325729,
@@ -248,7 +407,13 @@
     "pageComponents": 34739121587,
     "climate": 34739300618,
     "finalPurge": 34739661070,
-    "seoDeploymentCallback": 34739515900
+    "seoDeploymentCallback": 34739515900,
+    "geoStreamPr": 964,
+    "geoStreamQualityInitial": 34740979345,
+    "geoStreamQuality": 34741425669,
+    "geoStreamApplicationDeploy": 34741815793,
+    "seoScheduledObservation": 34742055806,
+    "seoGeoDeploymentCallback": 34742201455
   },
   "affiliateSnapshot": {
     "run": 34725325729,
@@ -302,7 +467,7 @@
     "evidence": ".local/verification/release/2026-09-13-all-sessions/rakuten-staging"
   },
   "gitCleanup": {
-    "status": "only-main-develop-remain-final-record-sync-pending",
+    "status": "branch-and-owned-worktree-cleanup-completed",
     "originalWorkFilesVerified": 49,
     "originalRoot": "clean and fast-forwarded to integrated develop",
     "deletedLocalBranches": 25,
@@ -314,13 +479,19 @@
     "retainedUntilMainMerge": [],
     "oldWorktreesRemoved": 3,
     "staleWorktreeMetadataPruned": 1,
-    "activeVerificationWorktree": "detached; remove after production verification",
+    "activeVerificationWorktree": null,
     "backup": ".local/verification/release/2026-09-13-all-sessions/integrated-refs.bundle",
     "dependencyBranchesAutomaticallyDeleted": 3,
     "remoteBranches": [
       "main",
       "develop"
-    ]
+    ],
+    "verificationWorktreeRemoved": "/tmp/stats47-all-sessions-release",
+    "ownedServer3040Stopped": true,
+    "otherServer3011Preserved": true,
+    "finalRefsEvidence": ".local/verification/release/2026-09-13-all-sessions/final-git-state.json",
+    "applicationSourceMatchesDeployed": "45cfa07b93d833f3f5332db4f8e3fe14b84f128d",
+    "removedWorktreeDataBackup": ".local/verification/release/2026-09-13-all-sessions/worktree-local-backup.json"
   },
   "geoPublicationProgress": {
     "run": 34726806521,
@@ -331,7 +502,7 @@
     "status": "published-and-all-query-readbacks-verified",
     "applicationDeployment": "success",
     "completedAt": "2026-09-13T04:03:28.337Z",
-    "canonicalPostPurgeVerification": "pending"
+    "canonicalPostPurgeVerification": "51 indexes and per-page representative browser GIS verified; not all17717 canonical GET"
   },
   "integratedAutomationUpdates": [
     {
@@ -341,6 +512,14 @@
     {
       "commit": "32a272b01a60caec7dabdc5691ed601fa1c17fc1",
       "scope": "CI workflow health and R2 freshness observations; existing unrelated workflow failures are retained."
+    },
+    {
+      "commit": "d794c03695038a7a97a1c4f9ac9033b9addd9f75",
+      "scope": "SEO latest-report inputHash update only; seven-day history and observing action unchanged."
+    },
+    {
+      "commit": "a60423c52428fbf935f2e941009dbcd4024a414b",
+      "scope": "Second deployment callback changes latest-report inputHash only; rank history and original observing action hashes unchanged."
     }
   ],
   "geoPublication": {
@@ -380,7 +559,15 @@
     "status": "implementation-not-started",
     "firstDesignReviewDate": "2026-09-20",
     "policy": "Use measured phase timing to remove redundant work, keep the full integrity contract, and compare time and cost before claiming improvement.",
-    "releaseProcessCorrection": "Finish related local data, interaction and background-image checks before starting final CI; previous early CI starts caused superseded checks. Keep initial failure evidence and scope local retries to affected behavior."
+    "releaseProcessCorrection": "Finish related local data, interaction and background-image checks before starting final CI; previous early CI starts caused superseded checks. Keep initial failure evidence and scope local retries to affected behavior.",
+    "applicationCiBacklogId": "BUILD-PERF-PHASE34",
+    "applicationCiStatus": "implementation-not-started; measured per-job timings recorded",
+    "appliedThisRelease": [
+      "Freeze related code changes before CI; retain initial failures",
+      "No repeat R2 generation or publication for the GIS delivery correction",
+      "Actual browser response hashing and bounded fail-fast diagnostics",
+      "Scoped repeat of affected local/browser cases; full production Geo audit after shared viewer change"
+    ]
   },
   "rakutenPublication": {
     "status": "pass",
@@ -460,23 +647,23 @@
         "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-local/basemap-d50e4cd04"
       }
     },
-    "remaining": "All 100 production cases in progress; final frozen-head CI succeeded.",
+    "remaining": "none; all100 initial maps and required operations verified, with one separately retained scroll-position followup",
     "r2RegenerationRequired": false,
     "basemapChange": "Use provider-native zoom 2 tiles when the map displays zoom 0/1; retain higher-zoom behavior and show existing VMAP0 source attribution below the map.",
     "basemapEvidence": "https://maps.gsi.go.jp/development/ichiran.html; actual zoom 0/1 requests returned 404, representative zoom 2 requests returned 200. Final browser images all loaded from native zoom 2."
   },
   "applicationDeployment": {
     "status": "success",
-    "pr": 963,
-    "sha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
-    "run": 34739098468,
-    "mergedAt": "2026-09-13T04:57:08Z",
-    "deployedAt": "2026-09-13T05:02:32Z",
-    "completedAt": "2026-09-13T05:07:18Z",
-    "buildId": "o8rD_ONDBIC8-aCy-knPe",
+    "pr": 964,
+    "sha": "45cfa07b93d833f3f5332db4f8e3fe14b84f128d",
+    "run": 34741815793,
+    "mergedAt": "2026-09-13T06:03:24Z",
+    "deployedAt": "2026-09-13T06:08:47Z",
+    "completedAt": "2026-09-13T06:13:14Z",
+    "buildId": "G72RvTCO3QhlH8AVrEK2Z",
     "smokeRoutes": "passed",
     "sitemap": "passed",
-    "evidence": ".local/verification/release/2026-09-13-all-sessions/app-deployment.json"
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-followup-deployment"
   },
   "r2Followup": {
     "pageComponents": {
@@ -509,10 +696,16 @@
     "callbackRun": 34739515900,
     "deploymentSha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
     "rankHistoryChanged": false,
-    "effect": "not-yet-measured"
+    "effect": "not-yet-measured",
+    "geoFollowupCallback": {
+      "run": 34742201455,
+      "conclusion": "success",
+      "originalHistoryAndActionUnchanged": true,
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/seo-after-geo-followup.json"
+    }
   },
   "geoStreamFollowup": {
-    "status": "ready-for-ci",
+    "status": "deployed-and-production-verified",
     "symptom": "L01 API response HTTP200 ends after2093056 bytes and fails JSON parsing; direct storage decoded74673426 bytes parses correctly",
     "storedGzipBytes": 6248864,
     "change": "Use raw R2 binding body in production without HTTP decompression, keep gzip decoding in browser worker, forbid reuse of old truncated cached200 responses",
@@ -565,6 +758,86 @@
     "docs": {
       "errors": 0,
       "existingWarnings": 4
+    },
+    "initialCi": {
+      "run": 34740979345,
+      "head": "7bd76f18cd2881b85c4974c1dbdbc30812971e91",
+      "conclusion": "failure",
+      "e2e": {
+        "passed": 102,
+        "failed": 1,
+        "failure": "Old local-economy donut expectation after R2 now publishes intended line-chart"
+      },
+      "fixCommit": "0e83deb03d1ce6002a550c2b6eaa558ff41d9757",
+      "localFocusedE2e": {
+        "passed": 2,
+        "failed": 0,
+        "durationSeconds": 18.2,
+        "retainedDonutCoverage": "healthcare"
+      },
+      "runtimeSourceChanged": false
+    },
+    "finalCi": {
+      "run": 34741425669,
+      "head": "0e83deb03d1ce6002a550c2b6eaa558ff41d9757",
+      "conclusion": "success",
+      "checksSuccessful": 18,
+      "fullE2ePassed": 104,
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-stream-final-ci.json"
+    },
+    "productionEvidence": ".local/verification/release/2026-09-13-all-sessions/geo-production/native-45cfa07b/assessment.json"
+  },
+  "initialApplicationDeployment": {
+    "status": "success",
+    "pr": 963,
+    "sha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
+    "run": 34739098468,
+    "mergedAt": "2026-09-13T04:57:08Z",
+    "deployedAt": "2026-09-13T05:02:32Z",
+    "completedAt": "2026-09-13T05:07:18Z",
+    "buildId": "o8rD_ONDBIC8-aCy-knPe",
+    "smokeRoutes": "passed",
+    "sitemap": "passed",
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/app-deployment.json"
+  },
+  "followupObservations": [
+    {
+      "issue": 957,
+      "status": "open",
+      "scope": "Theme chart POST and RSC prefetch resource-limit503",
+      "evidence": "Cloudflare1102 response bytes; CPU vs memory/workload unconfirmed",
+      "next": "Correlate invocation logs for saved cf-ray with outcome/CPU, then localized reproduction and full55/110 audit"
+    },
+    {
+      "scope": "SEO keyword",
+      "status": "observing",
+      "nextReviewDate": "2026-09-20"
+    },
+    {
+      "scope": "55 theme experiments",
+      "status": "observing",
+      "d7": "2026-09-18",
+      "d28": "2026-10-09",
+      "d56": "2026-11-06"
+    },
+    {
+      "scope": "Affiliate placement measurement",
+      "status": "pending-finalized-after-window",
+      "T48h": "2026-09-15T14:02:32+09:00",
+      "T14d": "2026-09-27"
     }
+  ],
+  "remainingScope": "No remaining application/data publication or requested source-page implementation work. Known theme resource-limit issue and future measurement checkpoints are tracked in followupObservations; final metadata synchronization is recorded by the Git verification artifact.",
+  "completedBacklogGates": [
+    "AFF-PLACEMENT-RELEASE-01",
+    "GEO-SOURCE-PAGES-01"
+  ],
+  "finalRecordValidation": {
+    "docsErrors": 0,
+    "existingDocsWarnings": 4,
+    "applicationChanges": false,
+    "applicationDeploymentCount": 2,
+    "noAdditionalDeploymentForRecords": true,
+    "scope": "Final record PR contains operational records only. Final merge and ref proof follow CI."
   }
 }

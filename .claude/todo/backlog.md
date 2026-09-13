@@ -180,18 +180,6 @@ updated: 2026-09-13
 - **停止条件**: サイト・口座帰属を確定できなければ停止し、不在を未提携や終了と推測しない。新規・重複申請、認証回避、成果リンクへの確認クリック、本番変更・deploy・R2 pushは禁止。既存在庫を未確認のまま削除しない。
 - **完了条件**: 各対象の状態・在庫判断を実機証拠へ結び付け、必要なローカル修正と対象の検証が完了する。不明が残る間はカードを維持し、人間作業またはガード復旧による再開条件を明記する。
 
-### [AFF-PLACEMENT-RELEASE-01] 配置安全化と楽天品質修正の公開前ゲートを完了する
-
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-08]
-
-- **owner**: affiliate-manager（配置・データ品質）/ devops-runner（検証・公開）/ オーナー（CI実行・公開承認）
-- **優先度・前提**: 公開前必須。ユーザーは別セッションを含む専用ブランチ `codex/workspace-updates-20260908` へのcommit・pushを承認済み。本番公開は未承認で、未提携停止・対象key制約・本文/レール重複抑止・viewability修正を未デプロイのまとまりとして扱う。
-- **次（実行順）**: ①オーナーの明示承認後、既存CIのSecretsを使って今回の検索条件で楽天APIを再取得する（キーのローカル再設定・取り出しは不要）。公開前の独立検証をCIで行う場合も起動承認を取り、R2書込・cache purgeを実行しない入口を用意する。②47県と対象商品の新規取得結果を品質監査し、地域・食品文脈・正常0件fallbackを確認する。③承認された公開を1回にまとめる。④公開後の同一定義・確定期間のGA4内訳とASP成果を収集し、効果判定だけをimprovement-triageへ渡す。
-- **証拠**: `.local/affiliate-status/placement-audit-20260908/` の候補判定・テスト・Rakuten再検証結果。CIのSecretsと定期同期の成功は確認済み（詳細はaffiliate-improvementログ）。取得済みsnapshotの再検証を新検索条件でのAPI取得と呼ばない。ローカル取得の `rakuten-refresh-blocker.json` / notAttempted は履歴として維持する。
-- **検証の境界**: ローカルの検証結果はaffiliate-improvementログの同IDを参照する。代表ページの確認を全URLの実画面確認や収益改善の証明として扱わない。他の実行中タスクを含む全体検証では、作業途中の参照欠落をこちらで削除・仮実装して通さない。
-- **停止条件**: 未確定の口座帰属、認証不足、取得失敗、品質違反、ビルド/画面検証失敗、公開承認なし。認証をチャットへ貼らせず、同意なくCI起動・R2 push・deploy・GA4設定変更をしない。
-- **完了条件**: 新しい検証済みデータと配置修正の公開が確認でき、計測定義の切替日・対象ページ/端末/枠別の追跡先が確定する。配置の実装完了と収益改善の実証を混同しない。
-
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:.github/workflows/generate-article-charts.yml の run で検出 slug 数 > 0] [起票:2026-08-31]
@@ -519,19 +507,6 @@ updated: 2026-09-13
 - **停止条件**: 未検証のDrive原本・GIS・WIP・認証profileを削除しない。既存セッションの一括終了やGit履歴リセットで軽量化しない。Node数・メモリはツール稼働を含む瞬間値であり、条件を合わせず削減効果と断定しない。
 - **完了条件**: 再起動後の同条件計測を保存し、参考文献のDrive復元検証と source-vault:check が通る。GISは回収した各対象から保全先と再生成手順が辿れ、保全できないものには保持理由を残す。導入済み予算・定期点検方式は local-environment.md と自動化インベントリを参照する。
 
-
-### [GEO-SOURCE-PAGES-01] 50種類の単体GISページを一覧順に整備・検証する
-
-タグ: [UI・UX] [種類:制作] [実行:対話] [起票:2026-09-08]
-
-- **カード画像**: 表示範囲・版の設定は `geo-source-thumbnail.ts`、生成進捗は `.claude/state/geo/source-thumbnails.json`、画像/表示検証は `.claude/state/geo/source-thumbnails-audit.json`、R2同期結果と別PC読み込み検証は `.claude/state/geo/source-thumbnails-publication.json`。表示だけなら再生成は不要。設定変更時は生成器→画像監査→remote照合→共通画像publisher→全画像・manifestのS3/public GET照合の順に進める（GIS README）。画像の同期とページ本体・原典GISの本番確認を混同しない。
-- **別PCでの再開**: 作業ブランチは `codex/workspace-updates-20260908`。Gitで引き継ぐのは実装・生成設定・台帳・検証記録。画像本体と生成manifestはR2を使い、開発用preview APIもローカル画像が無ければR2へ転送する。原典GISの `.local/r2/`・修復証跡・A31b分割manifestはGit対象外。地図データが無いPCでは、下記の索引・GISを取得し、修正版がremote未反映ならGIS READMEの原典再生成手順で復元する。以前の台帳の合格をそのPCの地図再現確認と扱わず、取得・版・SHAを確認して再検証する。
-
-- **担当・進捗の正典**: Geo単体ページ実装担当。ページ別の順序・内容整備・地図確認・エラー・本番確認は `.claude/state/geo/source-pages.json`。人向け一覧は `.local/geo-source-pages/progress.html`（同台帳から生成）。再開時は `node --import tsx apps/web/scripts/audit-geo-source-pages.ts` で差分を反映し、件数を本カードへ複製しない。
-- **再開入力**: URLは `/geo/datasets/<dataId>`、一覧順は `GeoSourceNavigation`、版付き読み方は `packages/data-configs/src/business-plan/geo-source-pages.ts`（区域・防災は同階層の `geo-source-policy-pages.ts`、施設・交通・推計人口は `geo-source-service-pages.ts`）。配信索引は `.local/r2/app/geo/layers/items.json` と `.local/r2/app/geo/datasets/<dataId>/item.json`。A31b分割の証跡は `.local/r2/app/geo/datasets/A31b/manifest.json`、原典からの修復証跡は同じ階層の `{W09,L01,L02,A03,A30a5,A38,A42,A43,A44,P04,C28,N08}/repair.json`。医療圏の再生成は `packages/gis/src/mlit-ksj/scripts/rebuild-medical-areas.ts --source-zip <公式ZIP>`、P04/C28/N08は同階層の `rebuild-source-page-data.ts --data-id <ID> --source-dir <公式ZIP保存先>`（詳細はGIS README）。索引の再生成時は `export-geo-source-catalog.ts` に `--source-manifest .local/r2/app/geo/datasets/A38/repair.json` を必ず渡す（原典から復元した配布ファイルも索引へ含めるため）。
-- **次（実行順）**: ①台帳で要修正・表示確認待ちを先に解消。②台帳の未整備項目を「土地・自然」→「区域・防災」→「施設」→「交通」→「統計」の順で、原典の時点・範囲・属性・単位を確認し読み方を作る。③対象IDを `audit-geo-source-pages.ts --ids <ID,...>` で検証し台帳更新。④本番反映の明示指示後に、索引・A31b表示ファイル・各repair.json記載の修正版とアプリを一括反映し、本番で同じ確認を行う。
-- **停止条件**: 原典SHA・地物数保存・公開利用条件のいずれかが一致しなければ当該GISを完了にしない。地図取得失敗・属性文字化け・横はみ出しを残したまま確認済みにしない。代表ファイルの確認を全ファイル保証と扱わず、ローカル生成を本番公開済みと扱わない。自動表示対象はボタン操作前の描画も検査し、L03-aでは区画変更・一覧リンクによるGIS往復後の初期化と、非表示で読み込んだ地図を表示した際の自動復旧を確認する（台帳`map.initialDisplay`に自動/手動を記録）。利用者の内部ブラウザでの再発報告は、別の検証用ブラウザの合格だけで解消扱いにしない。本番デプロイは別途明示指示時のみ。
-- **完了条件**: 対象50種類に版付きの読み方・時点・範囲・属性・出典があり、代表区画の形状と属性を320/1440px幅で確認できる。同じ検証でGIS一覧の全件表示・検索・解除・現在地、区画全体へ戻す操作、地図と状況説明が重ならないこと、拡大ボタンの44px操作領域を確認する。L01では初期画面に地図全体が収まり、1区画だけの選択操作が省かれ、属性・出典を展開して読めることも確認する。共通ビューア・一覧を変更した場合は台帳の確認結果を失効させ、再検証する。A31bは全201原典のSHA・地物数保存と最終manifestが一致し、最終的に公開先で同じ索引と地図が応答する。
 
 ### [RULES-DEMOTE-01] 常時読み込みから外した rule の移設と reference 化
 
@@ -1103,8 +1078,12 @@ updated: 2026-09-13
 タグ: [種類:改善] [実行:対話] [起票:2026-07-12]
 
 - **owner**: Claude Code
+- **状態**: 実装未着手。変更をまとめてからCIを開始し、同一入力で合格したローカル検査は変更理由がなければ繰り返さない運用を先行する。
 - **trigger**: 1本のPRで現行build jobの壁時間とcache sizeを測れるとき。
+- **追加の実測根拠（2026-09-13）**: PR964の初回CI `34740979345` はE2E 102/103成功。公開R2の地域経済チャートは意図した折れ線へ更新済みだったが、テストの旧ドーナツ表示要求が残っていた。テストmatrixだけを修正した次回CI `34741425669` でも全体build・型・unit・E2Eが実行され、18チェック成功。job全体（依存導入などを含む）はStatic Gates 533秒、Full E2E 522秒、Build Check 309秒で並行実行されており、合算を待ち時間と扱わない。コードだけでなく公開データ版も検証入力として記録する必要がある。
+- **次（実行順）**: ①jobごとの依存導入・build・検査・cache復元/保存の壁時間を測る。②コード・lockfile・生成設定・データmanifestの組を固定し、同じ入力の検証済みbuildを後続jobで再利用できるか試す。③アプリ変更、テスト変更、運用記録だけの変更に応じたrequired checksを設計し、無関係な全体buildの繰り返しを減らす。④同じscopeの前後時間と費用を比較する。公開R2を候補コードへ組み合わせるE2Eでは、カタログ変更の公開前後で期待値がずれるケースを別途検出する。
 - **停止条件**: restore/save込みで短縮しない、cacheが過大、または検査を弱める場合は採用しない。
+- **完了条件**: 変更種別ごとに必要な検査が必ず実行され、入力変更時のcache失効と失敗伝播を確認する。復元/保存込みの同条件比較で短縮が実測されるまで高速化完了とはしない。今回のリリースへCI構成変更を追加しない。
 
 ### [AREA-DATABOOK-REMAINDER] 県データブックの小粒残件
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-13T03:25:19.338Z",
+  "updatedAt": "2026-09-13T06:32:10.845Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4150,6 +4150,80 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-13T03:25:19.338Z"
+    },
+    "AFF-PLACEMENT-RELEASE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-13T06:28:21.370Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 34726845212",
+              "gh run view 34725325729",
+              "gh run view 34739098468",
+              "node --conditions=react-server /tmp/stats47-okinawa-dom-scoped.cjs --run --expected-sha 45cfa07b93d833f3f5332db4f8e3fe14b84f128d --expected-build G72RvTCO3QhlH8AVrEK2Z --out /tmp/stats47-okinawa-pr964-first"
+            ],
+            "pass": true
+          },
+          "evidence": "Rakuten fresh510 canonical readbacks matched; affiliate snapshot263/260active/3stopped published; app PR963 deployed. Representative DOM initial9 PASS/2 not-exercised/1 prefetch503, isolated Okinawa390 followup PASS. Initial failure retained, no single full12-pass claim. T0 Sep13",
+          "failReason": null,
+          "followUps": [
+            "AFF-RAKUTEN-FIRST-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-13T06:28:21.370Z"
+    },
+    "GEO-SOURCE-PAGES-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-13T06:32:10.845Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 34726806521",
+              "node /tmp/geo-source-production-audit.mjs --repo /tmp/stats47-all-sessions-release --base-url https://stats47.jp --execute --run 34726806521 --proof-dir /tmp/stats47-geo-source-publication-34726806521 --output /tmp/geo-source-production-audit-native-final"
+            ],
+            "pass": true
+          },
+          "evidence": "Native production45cfa07b buildG72RvTCO3QhlH8AVrEK2Z:50 pages/100 initial maps,99 initial operation passes plus one separated L01:320 normal-scroll followup pass; no forced click.100 originalHTML+1followup build matches,pageErrors0.285 actual nativegzip browser responses stored/d",
+          "failReason": null,
+          "followUps": [
+            "GEO-SOURCE-PUBLISH-PERF-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-13T06:32:10.845Z"
     }
   }
 }
