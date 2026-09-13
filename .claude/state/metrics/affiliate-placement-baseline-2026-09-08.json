@@ -694,9 +694,9 @@
   "effect": {
     "status": "not-assessable",
     "reasons": [
-      "new-placement-change-not-deployed",
       "after-window-missing",
-      "a8-outcomes-not-period-matched"
+      "a8-outcomes-not-period-matched",
+      "simultaneous-placement-and-measurement-definition-changes"
     ]
   },
   "deployment": {
@@ -709,13 +709,21 @@
       "conclusion": "success"
     },
     "planned": {
-      "deployedAt": null,
-      "status": "not-deployed",
+      "deployedAt": "2026-09-13T05:02:32Z",
+      "status": "deployed",
       "changes": [
         "same-position card impression and item click",
         "ordinary Rakuten search link excluded from affiliate_click",
         "existing kakei-chousa ranking product card moved after related rankings with rakuten-sidebar; card count unchanged"
-      ]
+      ],
+      "pr": 963,
+      "sha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34739098468"
+    },
+    "followup": {
+      "instrumentationReviewAt": "2026-09-15T05:02:32Z",
+      "effectReviewDate": "2026-09-27",
+      "windowPolicy": "Use finalized explicit nonoverlapping dates, same cohort and placement definitions. Existing days=28/7 commands include 29/8 calendar days and a partial current day; they do not provide a fixed after-window."
     }
   },
   "ci": {

@@ -30,3 +30,13 @@ job ログを読みに行っても「始まってすらいない」ので何も�
 正典: `.claude/skills/dev/deploy/SKILL.md`「CI が『失敗』に見えるが実は superseded」
 
 関連: [[feedback_cloud_github_api_mcp_only]] / [[feedback_shared_working_copy_git_race]]
+
+## 2026-09-13 最終CIの早期開始と未完了commit待ち
+
+**問題**: 画面確認中の追加修正や記録を小刻みにpushし、合格済みの検査を含むCIが後続runに置き換わった。commitフックが実行中なのに次のpushへ進み、意図した最新commitより一つ前のHEADをpushする手戻りも発生した。
+
+**原因**: ローカルの機能確認だけで最終CIを先行させ、背景画像までの視覚確認を完了条件に含めていなかった。非同期commandのsession IDを完了と取り違え、exit codeの確認を依存操作の前提にしなかった。
+
+**対策**: ①独立するローカル確認で初期表示・操作・背景までの問題をまとめて回収。②必要な修正と公開前記録をまとめる。③commitの明示的なexit_code=0を待ち、HEAD・staged/unstaged・untrackedを確認してpush。④以後は最新HEADのCIと独立したread-only確認だけを進める。最終的な公開後記録は後段へまとめ、検証中のHEADを小さな記録だけで更新しない。追加不具合があれば必要な検査は再実行し、過去のPASSを現在版へ流用しない。根拠は`branch-workflow.md`のpreflight/まとめて公開と、2026-09-13全セッションrelease記録。
+
+**待ち時間の区別**: run 34737942636では9検査job成功後に集約jobがrunner未割当でqueuedになった。検査時間とrunner待ちを混ぜず、全体conclusionが成功するまではCI完了としない。

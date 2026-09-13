@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-09-13",
-  "status": "publishing-data",
+  "status": "deployed-followup-fix-required",
   "authorization": "User explicitly requested all-session integration, one production deployment, and cleanup to main/develop only.",
   "sourceRefs": {
     "develop": "4503b49ec27744a688b94445c351f56b7926a3a0",
@@ -150,9 +150,10 @@
     },
     "finalPrCi": {
       "status": "success",
-      "commit": "8f66cb638b68d66fb3849572af38b0eed11b6f65",
-      "run": 34731862870,
-      "scope": "Last completed full CI; latest metadata checkpoint will receive full PR CI before merge."
+      "commit": "9e99128405b2a10b0bc70785d19fcf1a5506d7bc",
+      "run": 34738656412,
+      "requiredChecksSuccessful": 18,
+      "scope": "Final frozen application source before PR963 merge; all build, types, tests, coverage, E2E and security jobs passed."
     },
     "rootDependencyInstall": {
       "status": "passed",
@@ -171,14 +172,61 @@
         "S10a-320/1440": "Actual minimum zoom 3 prevents valid global route bounds fitting the viewport."
       },
       "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-local/initial-e4b8f08"
+    },
+    "themeProductionInitial": {
+      "run": 34739779902,
+      "themes": 55,
+      "cases": 110,
+      "passed": 107,
+      "failed": 3,
+      "failures": [
+        "railway/390 chart fetch 503",
+        "tourism/390 chart fetch 503",
+        "real-income/1440 chart fetch 503"
+      ],
+      "originalExperimentDatesPreserved": true,
+      "cause": "unconfirmed",
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/theme-production-initial",
+      "workflowConclusion": "failure",
+      "review": "no-change; cause unconfirmed; no draft PR created"
+    },
+    "geoProductionInitial": {
+      "status": "stopped-after-shared-streaming-defect",
+      "completedCases": 46,
+      "passed": 43,
+      "failed": 3,
+      "interruptedCases": 1,
+      "notStarted": 53,
+      "failures": [
+        "A31b/320 React418; geometry/operations passed",
+        "L01/320 truncated JSON prevents initial map",
+        "L02/320 truncated JSON prevents initial map"
+      ],
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-production/partial-f09ac2ca"
+    },
+    "affiliateProductionDom": {
+      "initialVerifier": "Flight chunk regex and unclassified prefetch aborts failed; original responses retained",
+      "correctedVerifier": {
+        "cases": 12,
+        "passed": 9,
+        "notExercised": 2,
+        "failed": 1,
+        "pageHttpHtmlBuildPassed": 12,
+        "pageErrors": 0,
+        "duplicatePrograms": 0,
+        "heldPrograms": 0,
+        "horizontalOverflow": 0,
+        "failure": "Okinawa390: five prefetch responses503, origin cause unconfirmed",
+        "notExercisedReason": "Aging390/1440 have zero visible affiliate links; not evidence of inventory absence"
+      },
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/postdeploy-affiliate-dom-verifier-v2",
+      "scope": "Representative DOM only; third-party ads/analytics blocked, no clicks or revenue validation"
     }
   },
   "remaining": [
-    "Wait for latest-head full CI after completed local visual verification",
-    "Merge release and verify production Geo 100 cases",
-    "Publish page-component and six climate snapshots from main, then verify canonical content and theme 110 cases",
-    "Verify SEO publication record and seven-day observation",
-    "Synchronize main/develop and remove remaining merged branches/verification worktree"
+    "Validate and release native R2 Geo stream correction",
+    "Recheck final production Geo and failed theme/affiliate paths preserving initial observations",
+    "Merge final records, synchronize main/develop and remove verification worktree"
   ],
   "integrationCommit": "902a94001f5ee4cba576cd54a0fda2c2794db464",
   "ci": {
@@ -194,8 +242,13 @@
     "rakutenPublish": 34726845212,
     "releaseQualitySecond": 34726808490,
     "releaseQualitySecondResult": "All build, type, unit, coverage and E2E jobs passed; only checker registration failed, now fixed and checked locally.",
-    "releaseQuality": 34731862870,
-    "geoPostPublishPurge": 34737102195
+    "releaseQuality": 34738656412,
+    "geoPostPublishPurge": 34737102195,
+    "applicationDeploy": 34739098468,
+    "pageComponents": 34739121587,
+    "climate": 34739300618,
+    "finalPurge": 34739661070,
+    "seoDeploymentCallback": 34739515900
   },
   "affiliateSnapshot": {
     "run": 34725325729,
@@ -249,7 +302,7 @@
     "evidence": ".local/verification/release/2026-09-13-all-sessions/rakuten-staging"
   },
   "gitCleanup": {
-    "status": "in-progress",
+    "status": "only-main-develop-remain-final-record-sync-pending",
     "originalWorkFilesVerified": 49,
     "originalRoot": "clean and fast-forwarded to integrated develop",
     "deletedLocalBranches": 25,
@@ -258,15 +311,16 @@
       "main",
       "develop"
     ],
-    "retainedUntilMainMerge": [
-      "dependabot/npm_and_yarn/csv-parse-7.0.2",
-      "dependabot/npm_and_yarn/sharp-0.35.4",
-      "dependabot/npm_and_yarn/js-yaml-4.3.2"
-    ],
+    "retainedUntilMainMerge": [],
     "oldWorktreesRemoved": 3,
     "staleWorktreeMetadataPruned": 1,
     "activeVerificationWorktree": "detached; remove after production verification",
-    "backup": ".local/verification/release/2026-09-13-all-sessions/integrated-refs.bundle"
+    "backup": ".local/verification/release/2026-09-13-all-sessions/integrated-refs.bundle",
+    "dependencyBranchesAutomaticallyDeleted": 3,
+    "remoteBranches": [
+      "main",
+      "develop"
+    ]
   },
   "geoPublicationProgress": {
     "run": 34726806521,
@@ -275,7 +329,7 @@
     "dryRun": "success",
     "publishAndReadbackStartedAt": "2026-09-13T01:21:35Z",
     "status": "published-and-all-query-readbacks-verified",
-    "applicationDeployment": "not-started",
+    "applicationDeployment": "success",
     "completedAt": "2026-09-13T04:03:28.337Z",
     "canonicalPostPurgeVerification": "pending"
   },
@@ -406,9 +460,111 @@
         "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-local/basemap-d50e4cd04"
       }
     },
-    "remaining": "Latest-head full PR CI, then all 100 production cases. Current local proof consists of original 100 cases plus scoped 8-case and 2-case follow-ups; these are not represented as one fresh 100-case run.",
+    "remaining": "All 100 production cases in progress; final frozen-head CI succeeded.",
     "r2RegenerationRequired": false,
     "basemapChange": "Use provider-native zoom 2 tiles when the map displays zoom 0/1; retain higher-zoom behavior and show existing VMAP0 source attribution below the map.",
     "basemapEvidence": "https://maps.gsi.go.jp/development/ichiran.html; actual zoom 0/1 requests returned 404, representative zoom 2 requests returned 200. Final browser images all loaded from native zoom 2."
+  },
+  "applicationDeployment": {
+    "status": "success",
+    "pr": 963,
+    "sha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
+    "run": 34739098468,
+    "mergedAt": "2026-09-13T04:57:08Z",
+    "deployedAt": "2026-09-13T05:02:32Z",
+    "completedAt": "2026-09-13T05:07:18Z",
+    "buildId": "o8rD_ONDBIC8-aCy-knPe",
+    "smokeRoutes": "passed",
+    "sitemap": "passed",
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/app-deployment.json"
+  },
+  "r2Followup": {
+    "pageComponents": {
+      "run": 34739121587,
+      "status": "success",
+      "completedAt": "2026-09-13T05:00:59Z"
+    },
+    "climate": {
+      "run": 34739300618,
+      "status": "success",
+      "completedAt": "2026-09-13T05:09:14Z",
+      "scope": "six explicit climate metrics; ranking snapshots only"
+    },
+    "canonicalReadback": {
+      "status": "passed",
+      "requests": 180,
+      "http200": 180,
+      "contentChecks": 185,
+      "passed": 185,
+      "cacheBust": false,
+      "retries": 0,
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/postdeploy-canonical-first"
+    }
+  },
+  "seoObservation": {
+    "status": "observing",
+    "keyword": "40代 未婚 割合 日本 国勢調査",
+    "proposalId": "34700240984-1",
+    "nextReviewDate": "2026-09-20",
+    "callbackRun": 34739515900,
+    "deploymentSha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
+    "rankHistoryChanged": false,
+    "effect": "not-yet-measured"
+  },
+  "geoStreamFollowup": {
+    "status": "ready-for-ci",
+    "symptom": "L01 API response HTTP200 ends after2093056 bytes and fails JSON parsing; direct storage decoded74673426 bytes parses correctly",
+    "storedGzipBytes": 6248864,
+    "change": "Use raw R2 binding body in production without HTTP decompression, keep gzip decoding in browser worker, forbid reuse of old truncated cached200 responses",
+    "causeBoundary": "Public-proxy path truncation reproduced; exact runtime mechanism and relationship to theme503/React418 remain unconfirmed",
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-production/l01-response-diagnosis",
+    "nativeRuntime": {
+      "runtime": "Miniflare/workerd",
+      "storedBytes": 6248864,
+      "receivedBytes": 6248864,
+      "storedSha256": "06580fd3795aa81683cc48d5dbf4405220d99e808d8cb9504a8ba72110f36970",
+      "decodedBytes": 74673426,
+      "decodedSha256": "c64df72a4e4fb40fc9e75412231f90b68990833c859b79b52880123fb867d0be",
+      "objectArrayBufferCalls": 0,
+      "publicFetchCalls": 0,
+      "invalidKeyStatus": 404,
+      "missingObjectStatus": 502,
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-native-runtime"
+    },
+    "testsPassed": 107,
+    "testFiles": 23,
+    "webTypeCheck": "passed",
+    "lint": "passed",
+    "fullBuild": {
+      "status": "passed",
+      "staticPages": 1638,
+      "buildId": "8h6azw7DCB7UkBj3VC5Y1"
+    },
+    "localBrowser": {
+      "buildId": "8h6azw7DCB7UkBj3VC5Y1",
+      "initialCases": 8,
+      "initialPassed": 4,
+      "initialBodyCaptureFailures": 4,
+      "initialFailureReason": "Inspector cache evicted large local public-mirror responses; all four maps rendered but subsequent operations had not run",
+      "followupCases": 4,
+      "followupPassed": 4,
+      "followupFailed": 0,
+      "scope": "L01/L02/A31b/G04-a ×320/1440; four initially successful cases plus four affected-case followups, not one fresh eight-case run",
+      "browserResponseShaMatches": true,
+      "l01DecodedBytes": 74673426,
+      "l01Features": 25565,
+      "l02DecodedBytes": 59564126,
+      "l02Features": 21431,
+      "pageErrors": 0,
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-local/native-r2-cdp4"
+    },
+    "preflight": {
+      "passed": 14,
+      "durationSeconds": 17.4
+    },
+    "docs": {
+      "errors": 0,
+      "existingWarnings": 4
+    }
   }
 }

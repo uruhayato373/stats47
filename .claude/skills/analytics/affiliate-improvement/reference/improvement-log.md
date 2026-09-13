@@ -145,7 +145,7 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 ## AFF-IMPRESSION-ROUTING-01 AdSense停止枠への既存在庫配線
 
 - **判断日**: 2026-08-16
-- **デプロイ日**: 未デプロイ
+- **デプロイ日**: 2026-09-13 14:02:32 JST（PR963 / deploy34739098468）
 - **目的**: AdSense停止後の空き位置を使い、無関係な案件や新規在庫を増やさず、文脈一致バナーの
   viewable impression を増やす。50%以上を1秒という計測閾値は変更しない。
 - **事前証拠**:
@@ -170,16 +170,18 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - **想定効果**: 増加幅は未確定。主指標 `affiliate_impression/PV` が baseline 0.710を上回るかを検証する。
   収益効果はCTR/CV/確定成果が揃うまで主張しない。
 - **検証手順 (デプロイ後14日)**:
-  1. `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 7` を前後の重複しないfinalized 7日で実行する。
+  1. 前後の重複しないfinalized 7日を明示日付で取得する。現行 `fetch-affiliate-ga4.cjs 7` は7daysAgo〜todayの8暦日・当日途中を含み、固定7日比較には使わない。
   2. 同じ日付範囲のGA4 pageviewsで `affiliate_impression/PV` を計算する。
   3. `ranking-incontent` / `ranking-sidebar` / `area-content` のimpression・click・CTRを確認する。
   4. page type別 engagement rateとASPの発生/確定成果を併記する。CTRやengagementが悪化した場合は
      枠追加を続けず、position単位で撤去/移設する。
-- **判定**: `effect/pending`。デプロイ前のため効果未判定。`variant_id` / `experiment_id` dimension欠落は
+- **判定**: `effect/pending`。公開後の確定した比較期間が未取得のため効果未判定。`variant_id` / `experiment_id` dimension欠落は
   position別集計を妨げないが、クリエイティブA/B判定は引き続き行わない。
 - **訂正**: 過去ログの「`other`=vertical未解決ページ」という解釈は過大。最新ad_id/position内訳では
   fixed house bannerも意図的に`other`を送るため合成値である。`AFF-CATEGORY-MAP-01`は前提不成立として
   改善バックログから削除し、今後の写像漏れはplacement-mapの`unmapped.byReason`で判定する。
+
+- **2026-09-13公開確認**: [deploy34739098468](https://github.com/uruhayato373/stats47/actions/runs/34739098468) は本番公開・route smoke・sitemap検査が成功。計測定義の切替は14:02:32 JST。9/15にpage/device/placement別の到達を確認し、9/27に確定した非重複期間の比較可否を判定する。同時施策・click定義変更はconfoundedとして扱う。新しいGA4取得9472 placement行は公開前baselineであり、効果の根拠にしない。
 
 ---
 
@@ -204,7 +206,7 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 
 ## AFF-PLACEMENT-RELEASE-01 配置・楽天品質・計測のローカル安全化
 
-- **検証日**: 2026-09-08。**デプロイ日**: 未デプロイ（ユーザー指定はローカルまで）。
+- **検証日**: 2026-09-08。**デプロイ日**: 2026-09-13 14:02:32 JST（後続の全セッション統合・公開指示によりPR963で公開）。
 - **想定効果**: 収益増分は未推定。目的は未提携3案件の配信停止、同一案件の重複抑止、人口/医療分類からの無関係な広告の除外、楽天の品目・県帰属の品質確保、連続50%×1秒の計測回復。
 - **実装**: 停止・allowlist・programRef/URL重複を共有ポリシーへ集約。ランキング本文とレール、県本文とレール、home、実験・固定枠に適用。カテゴリ一覧は17軸の明示方針。楽天は取得/表示の双方で品質検査し、認証不足と正常0件を分離。GA4の既存3reportを保ち、ページ×端末×広告×枠の内訳を追加した。
 - **再現コマンド**:
@@ -252,3 +254,10 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - **承認境界**: ユーザーから「別セッションの変更もすべてコミットしてpush」の追加指示あり。広告SSOTをdevelopへpushすると自動公開が発火するため、Geoを含む全変更を公開を伴わない専用ブランチ `codex/workspace-updates-20260908` で保存する。develop/mainへの反映・CI dispatch・R2更新・デプロイは未承認のまま。
 - **先行検証**: 追加指示前にorigin/develop `58a9aacbc` 基点の別worktreeで広告だけを分離検証し、`npm run type-check` は25 workspace・9 scripts configともexit 0。その分離案ではcommit・pushしていない。追加指示後はGeo側の編集停止を確認し、共有作業ツリーの現HEAD `5aee9b322` から全変更を保存する。Geoの未完了・未検証点はbacklogと `.claude/state/geo/source-pages.json` を維持し、本番公開可能とは判定しない。
 - **変更の差分**: コミット前検査で見つかった旧楽天snapshotの互換処理3か所へ削除条件を追記した（検証済み新データへの移行と旧キャッシュ失効）。動作変更はなく、広告301件のテスト・代表6ページ・フルwebビルドは上記PASSを継承し、この準備では再実行しない。
+
+### 2026-09-13 統合公開と計測引渡し
+
+- **公開**: PR963、main `f09ac2ca978e501b29b9f8c9d1c81b9872601d98`。アプリrun34739098468は全工程成功。過去のWindows制限・旧snapshot再検証・ローカル認証不足は上記の当時の履歴として保持する。
+- **楽天の新規取得と公開**: run34726845212で510検索（463品目・47県）、有品373・正常空137・失敗0。品質監査49/49、公開先510canonical GETは200・内容・新規取得epochがすべて一致。商品存在と収益効果は別に扱う。
+- **計測境界**: 2026-09-08固定baselineとafter=nullを維持。T48h=9/15 14:02:32 JSTは在庫・DOM・GA4送信の確認、T14d=9/27は明示日付・確定期間・同一cohort/placement・期間とサイトが一致するASP成果を確認する。現行CIのdays=28は29暦日で当日を含む。収益・CTR改善は未判定。
+- **証拠**: `.claude/state/metrics/releases/2026-09-13-all-sessions.json` と `.local/verification/release/2026-09-13-all-sessions/` のapp-deployment・rakuten-publication・affiliate-ga4。代表DOMの実施結果は公開確認後に追記する。

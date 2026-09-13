@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-09-12T15:11:45.359Z",
+  "verifiedAt": "2026-09-13T05:09:05Z",
   "status": "active",
   "activationPr": "https://github.com/uruhayato373/stats47/pull/960",
   "definitionCommit": "a646aa98139deacee4a5604e8630fe319ed4b03b",
   "executionRef": "develop",
-  "verifiedRuntimeCommit": "16fa8e7049795ca368850e7a3f27e8d197878835",
+  "verifiedRuntimeCommit": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
   "workflow": {
     "id": 356553183,
     "path": ".github/workflows/seo-keyword-cycle-daily.yml",
@@ -36,7 +36,7 @@
     "selectionImpressions": 591,
     "pr": "https://github.com/uruhayato373/stats47/pull/961",
     "headCommit": "2f48116a094aa5a9daedc0a9cceb34d733cf6798",
-    "status": "draft-ready",
+    "status": "observing",
     "change": "国勢調査の既存未婚率導線を30代前半男性から40〜44歳男性へ差替。質問とrankingKeyを同時に更新。",
     "validation": {
       "surveyTests": 16,
@@ -46,16 +46,31 @@
       "publicDestinationHttp": 200,
       "canonicalMaintained": true
     },
-    "published": false,
-    "nextReviewDate": null
+    "published": true,
+    "nextReviewDate": "2026-09-20",
+    "publishedInPr": 963
   },
-  "observing": [],
+  "observing": [
+    {
+      "keyword": "40代 未婚 割合 日本 国勢調査",
+      "nextReviewDate": "2026-09-20"
+    }
+  ],
   "verdicts": [],
   "siteDeployment": {
     "requiredForAutomation": false,
-    "cancelledRun": 34700199060,
-    "productionDeployStep": "skipped",
-    "reason": "アプリソースと依存関係の差分0を検証。初回改善は別のdraft PRで未公開。"
+    "productionDeployStep": "success",
+    "initialAutomationActivation": {
+      "requiredForAutomation": false,
+      "cancelledRun": 34700199060,
+      "productionDeployStep": "skipped",
+      "reason": "アプリソースと依存関係の差分0を検証。初回改善は別のdraft PRで未公開。"
+    },
+    "run": 34739098468,
+    "sha": "f09ac2ca978e501b29b9f8c9d1c81b9872601d98",
+    "deployedAt": "2026-09-13T05:02:32Z",
+    "callbackRun": 34739515900,
+    "callbackResult": "observing-record-verified"
   },
   "evidenceDirectory": ".local/verification/seo/2026-09-12-seven-day-loop/"
 }
