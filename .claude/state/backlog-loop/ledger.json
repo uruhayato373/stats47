@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T16:19:24.119Z",
+  "updatedAt": "2026-09-13T03:22:10.799Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4048,6 +4048,27 @@
           "followUps": [
             "THEME-EXPANSION-IMPLEMENT-01"
           ]
+        },
+        {
+          "at": "2026-09-13T03:22:10.799Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run theme:expansion:test",
+              "npm run theme:expansion:check"
+            ],
+            "pass": true
+          },
+          "evidence": "Removed the already-completed decision card resurrected by all-session integration. Original 2026-09-09 completion attempts retained. Current decision tests 13/13 and expansion check passed: all 128 decisions, 82 verified codes, first batch 3, errors 0. Implementation/source resi",
+          "failReason": null,
+          "followUps": [
+            "THEME-EXPANSION-IMPLEMENT-01"
+          ]
         }
       ],
       "quarantine": {
@@ -4056,7 +4077,7 @@
         "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": "2026-09-09T11:47:43.363Z"
+      "completedAt": "2026-09-13T03:22:10.799Z"
     },
     "THEME-PORTFOLIO-REMAINDER-01": {
       "class": "impl-large",
