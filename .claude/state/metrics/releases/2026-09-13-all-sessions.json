@@ -142,17 +142,26 @@
       "newFindings": 0,
       "regressionTests": 11,
       "remainingStaticStepsPassed": 23
+    },
+    "finalPrCi": {
+      "status": "success",
+      "commit": "bd42993278261dc56f0c19e8125df33251a918b1",
+      "run": 34727494874
+    },
+    "rootDependencyInstall": {
+      "status": "passed",
+      "packages": 1646,
+      "auditVulnerabilities": 0
     }
   },
   "remaining": [
-    "Wait for final release PR CI",
     "Rebuild/publish Geo source assets and catalog in CI",
     "Fetch and validate updated Rakuten catalogs in CI",
     "Merge release after green CI and verify production",
     "Verify SEO publication record and seven-day observation",
     "Synchronize main/develop and delete merged branches/worktrees"
   ],
-  "integrationCommit": "e4b8f08eadbf360b5ae27f84dea5d5f35e2769c0",
+  "integrationCommit": "bd42993278261dc56f0c19e8125df33251a918b1",
   "ci": {
     "affiliatePublish": 34725325729,
     "affiliateInventory": 34725325776,
@@ -165,7 +174,8 @@
     "geoSourcePublish": 34726806521,
     "rakutenPublish": 34726845212,
     "releaseQualitySecond": 34726808490,
-    "releaseQualitySecondResult": "All build, type, unit, coverage and E2E jobs passed; only checker registration failed, now fixed and checked locally."
+    "releaseQualitySecondResult": "All build, type, unit, coverage and E2E jobs passed; only checker registration failed, now fixed and checked locally.",
+    "releaseQuality": 34727494874
   },
   "affiliateSnapshot": {
     "run": 34725325729,
@@ -217,5 +227,40 @@
       "foodFallbackPrefectures": 0
     },
     "evidence": ".local/verification/release/2026-09-13-all-sessions/rakuten-staging"
-  }
+  },
+  "gitCleanup": {
+    "status": "in-progress",
+    "originalWorkFilesVerified": 49,
+    "originalRoot": "clean and fast-forwarded to integrated develop",
+    "deletedLocalBranches": 25,
+    "deletedRemoteBranches": 8,
+    "localBranches": [
+      "main",
+      "develop"
+    ],
+    "retainedUntilMainMerge": [
+      "dependabot/npm_and_yarn/csv-parse-7.0.2",
+      "dependabot/npm_and_yarn/sharp-0.35.4",
+      "dependabot/npm_and_yarn/js-yaml-4.3.2"
+    ],
+    "oldWorktreesRemoved": 3,
+    "staleWorktreeMetadataPruned": 1,
+    "activeVerificationWorktree": "detached; remove after production verification",
+    "backup": ".local/verification/release/2026-09-13-all-sessions/integrated-refs.bundle"
+  },
+  "geoPublicationProgress": {
+    "run": 34726806521,
+    "preparation": "success",
+    "preparationCompletedAt": "2026-09-13T00:44:28Z",
+    "dryRun": "success",
+    "publishAndReadbackStartedAt": "2026-09-13T01:21:35Z",
+    "status": "publish-and-readback-in-progress",
+    "applicationDeployment": "not-started"
+  },
+  "integratedAutomationUpdates": [
+    {
+      "commit": "df00f0c9504d4d4bdc7ea9b5c1db19d5f21557ab",
+      "scope": "Two blog queue generation timestamp records only."
+    }
+  ]
 }
