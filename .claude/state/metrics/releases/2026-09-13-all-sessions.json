@@ -36,7 +36,8 @@
       "passed": 150,
       "sourceCatalogMissing": 51,
       "repairDatasets": 12,
-      "floodDisplayMissing": true
+      "floodDisplayMissing": true,
+      "timing": "Before Geo publication; missing catalog/display fields describe the initial state only."
     },
     "webFocusedTests": {
       "passed": 384,
@@ -51,7 +52,10 @@
     },
     "preflightPr": {
       "passed": 14,
-      "failed": 0
+      "failed": 0,
+      "durationSeconds": 12.1,
+      "commit": "1b0d73fd8f8862f67464f2f71bfc7e398b0f3389",
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/logs/stats47-release-preflight-final.log"
     },
     "webTypeCheck": "passed",
     "workflowPolicy": {
@@ -145,8 +149,9 @@
     },
     "finalPrCi": {
       "status": "success",
-      "commit": "bd42993278261dc56f0c19e8125df33251a918b1",
-      "run": 34727494874
+      "commit": "8f66cb638b68d66fb3849572af38b0eed11b6f65",
+      "run": 34731862870,
+      "scope": "Last completed full CI; latest metadata checkpoint will receive full PR CI before merge."
     },
     "rootDependencyInstall": {
       "status": "passed",
@@ -155,13 +160,13 @@
     }
   },
   "remaining": [
-    "Rebuild/publish Geo source assets and catalog in CI",
-    "Fetch and validate updated Rakuten catalogs in CI",
-    "Merge release after green CI and verify production",
+    "Finish Rakuten actual CI publication and local Geo 100 cases",
+    "Merge release after latest-head full CI and verify production",
+    "Publish page-component and six climate snapshots from main, then verify canonical content",
     "Verify SEO publication record and seven-day observation",
-    "Synchronize main/develop and delete merged branches/worktrees"
+    "Synchronize main/develop and remove remaining merged branches/verification worktree"
   ],
-  "integrationCommit": "bd42993278261dc56f0c19e8125df33251a918b1",
+  "integrationCommit": "902a94001f5ee4cba576cd54a0fda2c2794db464",
   "ci": {
     "affiliatePublish": 34725325729,
     "affiliateInventory": 34725325776,
@@ -175,7 +180,8 @@
     "rakutenPublish": 34726845212,
     "releaseQualitySecond": 34726808490,
     "releaseQualitySecondResult": "All build, type, unit, coverage and E2E jobs passed; only checker registration failed, now fixed and checked locally.",
-    "releaseQuality": 34727494874
+    "releaseQuality": 34731862870,
+    "geoPostPublishPurge": 34737102195
   },
   "affiliateSnapshot": {
     "run": 34725325729,
@@ -254,13 +260,50 @@
     "preparationCompletedAt": "2026-09-13T00:44:28Z",
     "dryRun": "success",
     "publishAndReadbackStartedAt": "2026-09-13T01:21:35Z",
-    "status": "publish-and-readback-in-progress",
-    "applicationDeployment": "not-started"
+    "status": "published-and-all-query-readbacks-verified",
+    "applicationDeployment": "not-started",
+    "completedAt": "2026-09-13T04:03:28.337Z",
+    "canonicalPostPurgeVerification": "pending"
   },
   "integratedAutomationUpdates": [
     {
       "commit": "df00f0c9504d4d4bdc7ea9b5c1db19d5f21557ab",
       "scope": "Two blog queue generation timestamp records only."
+    },
+    {
+      "commit": "32a272b01a60caec7dabdc5691ed601fa1c17fc1",
+      "scope": "CI workflow health and R2 freshness observations; existing unrelated workflow failures are retained."
     }
-  ]
+  ],
+  "geoPublication": {
+    "completedAt": "2026-09-13T04:03:28.337Z",
+    "mode": "published-public-query-verified",
+    "planSha256": "7c2de4a702f32b301745514192f59a1fa9373c93bcf415e819690e24e2e0c28b",
+    "candidates": 17717,
+    "changed": 17717,
+    "uploaded": 17717,
+    "skipped": 0,
+    "verified": 17717,
+    "run": 34726806521,
+    "status": "success",
+    "storedBytes": 2199375814,
+    "datasets": 50,
+    "indexObjects": 51,
+    "sourceProofsVerified": 13,
+    "existingThumbnailsExcluded": 150,
+    "proofIntegrity": "All plan/result key sets, stored SHA/bytes and public decoded SHA/bytes/status matched; all 13 source proof hashes matched.",
+    "publicReadbackScope": "All 17,717 objects with cache-bust query; canonical indexes and per-page GIS checks follow purge.",
+    "phaseDurationSeconds": {
+      "prepare": 2549,
+      "dryRun": 2227,
+      "publishAndReadback": 9713
+    },
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-publication"
+  },
+  "efficiencyFollowup": {
+    "backlogId": "GEO-SOURCE-PUBLISH-PERF-01",
+    "status": "implementation-not-started",
+    "firstDesignReviewDate": "2026-09-20",
+    "policy": "Use measured phase timing to remove redundant work, keep the full integrity contract, and compare time and cost before claiming improvement."
+  }
 }
