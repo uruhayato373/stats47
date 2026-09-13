@@ -9,8 +9,8 @@ https://stats47.jp/geo/population-flood-risk?pref=10,2026-09-02
 https://stats47.jp/geo/population-flood-risk?pref=36,2026-09-02
 https://stats47.jp/geo/population-station-access?pref=10,2026-09-02
 https://stats47.jp/geo/population-flood-risk?pref=11,2026-09-01
-https://stats47.jp/areas/41000/cities/41206/population,2026-08-26
 https://stats47.jp/areas/31000/consumer-prices,2026-08-21
+https://stats47.jp/survey/construction-orders-statistics,2026-08-09
 https://stats47.jp/areas/30000/healthcare,2026-08-07
 https://stats47.jp/areas/37000/consumer-prices,2026-08-06
 https://stats47.jp/areas/06000/cities/06204,2026-08-06
@@ -78,22 +78,9 @@ https://stats47.jp/ranking/physical-disability-rehabilitation-center-cases,2026-
 https://stats47.jp/ranking/senility-death-count,2026-03-30
 https://stats47.jp/ranking/bus-driver-annual-income,2026-03-30
 https://stats47.jp/ranking/department-supermarket-count,2026-03-30
-https://stats47.jp/areas/20000/cities/20202/population,2026-03-21
-https://stats47.jp/areas/29000/cities/29363/population,2026-03-18
-https://stats47.jp/areas/05000/cities/05201/population,1970-01-01
-https://stats47.jp/areas/07000/cities/07202/population,1970-01-01
 https://stats47.jp/areas/09000/cities/09202,1970-01-01
-https://stats47.jp/areas/17000/cities/17206/population,1970-01-01
-https://stats47.jp/areas/18000/cities/18202/population,1970-01-01
-https://stats47.jp/areas/18000/cities/18206/population,1970-01-01
-https://stats47.jp/areas/18000/cities/18322/economy,1970-01-01
-https://stats47.jp/areas/24000/cities/24207/economy,1970-01-01
-https://stats47.jp/areas/24000/cities/24209/economy,1970-01-01
-https://stats47.jp/areas/31000/cities/31202/population,1970-01-01
-https://stats47.jp/areas/32000/cities/32448/economy,1970-01-01
 https://stats47.jp/areas/36000/cities/36206,1970-01-01
 https://stats47.jp/areas/37000/tourism,1970-01-01
-https://stats47.jp/areas/41000/cities/41345/population,1970-01-01
 https://stats47.jp/blog/cup-noodles-consumption-expenditure-vs-sports-annual,1970-01-01
 https://stats47.jp/blog/flood-affected-rivers-prefecture-gap,1970-01-01
 https://stats47.jp/blog/gasoline-consumption-quantity-vs-densely-inhabited-district,1970-01-01
@@ -269,7 +256,6 @@ https://stats47.jp/ranking/annual-sales-amount-per-establishment,1970-01-01
 https://stats47.jp/ranking/apartment-ratio,1970-01-01
 https://stats47.jp/ranking/aquaculture-harvest,1970-01-01
 https://stats47.jp/ranking/assistance-expenditure-ratio-pref-finance,1970-01-01
-https://stats47.jp/ranking/assistance-expenses-prefecture,1970-01-01
 https://stats47.jp/ranking/average-age-of-first-marriage-husband,1970-01-01
 https://stats47.jp/ranking/average-broadcast-media-consumption-time-employed-man,1970-01-01
 https://stats47.jp/ranking/average-height-middle-school-second-grade-female,1970-01-01
@@ -297,13 +283,11 @@ https://stats47.jp/ranking/barber-beauty-salon-count-per-100k,1970-01-01
 https://stats47.jp/ranking/births,1970-01-01
 https://stats47.jp/ranking/block-park-count-per-100km2,1970-01-01
 https://stats47.jp/ranking/book-magazine-retail-annual-sales-per-capita,1970-01-01
-https://stats47.jp/ranking/building-fire-count,1970-01-01
 https://stats47.jp/ranking/building-fire-count-per-100-thousand-people,1970-01-01
 https://stats47.jp/ranking/building-fire-damage-amount-per-building-fire,1970-01-01
 https://stats47.jp/ranking/building-fire-damage-amount-per-person,1970-01-01
 https://stats47.jp/ranking/bus-operators,1970-01-01
 https://stats47.jp/ranking/certified-childcare-center-count-per-100k-0-5,1970-01-01
-https://stats47.jp/ranking/certified-childcare-center-education-cost-per-student,1970-01-01
 https://stats47.jp/ranking/charcoal-production,1970-01-01
 https://stats47.jp/ranking/city-gas-sales-volume,1970-01-01
 https://stats47.jp/ranking/city-ward-assembly-members,1970-01-01
@@ -350,7 +334,6 @@ https://stats47.jp/ranking/disabled-job-ratio-per-1000,1970-01-01
 https://stats47.jp/ranking/disaster-damage-amount,1970-01-01
 https://stats47.jp/ranking/disaster-damage-amount-per-person,1970-01-01
 https://stats47.jp/ranking/disaster-recovery-expenditure-ratio-pref-finance,1970-01-01
-https://stats47.jp/ranking/discharged-patients,1970-01-01
 https://stats47.jp/ranking/divorces,1970-01-01
 https://stats47.jp/ranking/divorces-per-total-population,1970-01-01
 https://stats47.jp/ranking/domestic-bank-deposit-balance,1970-01-01
@@ -424,7 +407,6 @@ https://stats47.jp/ranking/fulfillment-rate,1970-01-01
 https://stats47.jp/ranking/fulltime-physicians-general-hospital-per-100beds,1970-01-01
 https://stats47.jp/ranking/future-burden-ratio,1970-01-01
 https://stats47.jp/ranking/garbage-landfill-rate,1970-01-01
-https://stats47.jp/ranking/gasoline-sales-volume,1970-01-01
 https://stats47.jp/ranking/gdp-growth-rate-pref-h17,1970-01-01
 https://stats47.jp/ranking/general-clinic-count-per-100k,1970-01-01
 https://stats47.jp/ranking/general-clinic-count-per-100km2,1970-01-01
@@ -606,7 +588,6 @@ https://stats47.jp/ranking/population-growth-rate,1970-01-01
 https://stats47.jp/ranking/post-office-count-per-100km2,1970-01-01
 https://stats47.jp/ranking/postal-savings-balance,1970-01-01
 https://stats47.jp/ranking/postal-savings-balance-per-capita,1970-01-01
-https://stats47.jp/ranking/prefectural-assembly-members,1970-01-01
 https://stats47.jp/ranking/prefectural-general-administration-staff,1970-01-01
 https://stats47.jp/ranking/primary-activity-avg-time-female,1970-01-01
 https://stats47.jp/ranking/prime-contractor-completed-construction,1970-01-01
@@ -622,7 +603,6 @@ https://stats47.jp/ranking/private-university-student-ratio,1970-01-01
 https://stats47.jp/ranking/production-age-population-ratio,1970-01-01
 https://stats47.jp/ranking/psychiatric-bed-count-per-100k,1970-01-01
 https://stats47.jp/ranking/psychiatric-hospital-count-per-100k,1970-01-01
-https://stats47.jp/ranking/psychiatric-inpatients-per-fulltime-physician-per-day,1970-01-01
 https://stats47.jp/ranking/psychiatric-inpatients-per-nurse-per-day,1970-01-01
 https://stats47.jp/ranking/psychiatric-outpatients-per-fulltime-physician-per-day,1970-01-01
 https://stats47.jp/ranking/public-assistance-education-beneficiaries-per-1000,1970-01-01
@@ -770,6 +750,7 @@ https://stats47.jp/ranking/youth-education-facility-count-per-million,1970-01-01
 https://stats47.jp/survey/insurance-rate-org-statistics,1970-01-01
 https://stats47.jp/survey/port-statistics,1970-01-01
 https://stats47.jp/survey/telecommunications-service-contract-report,1970-01-01
+https://stats47.jp/ranking/gini-coefficient-disposable-income,2026-09-05
 https://stats47.jp/survey/local-public-employee-salary,2026-08-27
 https://stats47.jp/survey/pension-insurance-annual-report,2026-08-26
 https://stats47.jp/survey/freight-regional-flow-survey,2026-08-25

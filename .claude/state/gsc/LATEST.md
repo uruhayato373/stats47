@@ -1,4 +1,4 @@
-# GSC カバレッジ是正 — 2026-W36 (2026-09-07)
+# GSC カバレッジ是正 — 2026-W36 (2026-09-13)
 
 > SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
 > 入力観測日: 2026-09-04 / 入力週齢: 1 週
@@ -23,17 +23,18 @@
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **3147** / 要対応 pending: **796**
+- 追跡 URL: **3147** / 要対応 pending: **779**
 
 | action | 件数 | 意味 |
 |---|---:|---|
-| observe-after-fix | 789 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
-| content-check | 11 | soft404→現在200=薄さ/描画 未判定 |
+| fix-5xx | 7 | 現在も5xx=実バグ(最優先) |
+| observe-after-fix | 770 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| content-check | 6 | soft404→現在200=薄さ/描画 未判定 |
 | enrich | 23 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
-| verify-intent | 4 | 現在も404=公開漏れ or 死亡の判別 |
-| none | 2320 | 意図的/解消済=放置 |
+| verify-intent | 3 | 現在も404=公開漏れ or 死亡の判別 |
+| none | 2338 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**789 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**770 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 
