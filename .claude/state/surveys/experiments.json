@@ -173,7 +173,31 @@
             }
           }
         },
-        "d56": null
+        "d56": {
+          "observedAt": "2026-09-13",
+          "window": [
+            "2026-W33",
+            "2026-W37"
+          ],
+          "values": {
+            "gsc.clicks": {
+              "value": 0,
+              "status": "measured"
+            },
+            "gsc.impressions": {
+              "value": 728,
+              "status": "measured"
+            },
+            "gsc.averagePosition": {
+              "value": 8.49,
+              "status": "measured"
+            },
+            "gsc.ctr": {
+              "value": 0,
+              "status": "measured"
+            }
+          }
+        }
       },
       "verdict": "pending",
       "notes": "baseline は 56d 非重複 2 窓 (2026-W24: 05-16〜06-12 + 2026-W28: 06-13〜07-10、daily.csv で日付実測)。impressions 809 >= 100 のため CTR 判定可。ローカル実装済み (2026-07-14)・未デプロイ — startedAt/evaluateAt はデプロイ確定時に記入する。転職・就活の季節性 (年度替わり・賞与後) を判定時に注記すること",
