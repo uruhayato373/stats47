@@ -13,7 +13,10 @@ import {
 } from 'react-leaflet';
 
 import { fitGeoSourceBounds } from '../lib/fit-geo-source-bounds';
-import { GEO_BASEMAP } from '../lib/geo-basemap';
+import {
+  GEO_BASEMAP,
+  GEO_BASEMAP_SHORELINE_ATTRIBUTION,
+} from '../lib/geo-basemap';
 import {
   formatGeoSourceProperty,
   visibleGeoSourceFields,
@@ -218,6 +221,7 @@ export function GeoSourceMap({
           <TileLayer
             url={GEO_BASEMAP.url}
             attribution={GEO_BASEMAP.attribution}
+            minNativeZoom={GEO_BASEMAP.minNativeZoom}
             maxZoom={17}
           />
           <SourceContent
@@ -237,6 +241,9 @@ export function GeoSourceMap({
             ? '地図データを読み込んでいます…'
             : 'total' in status &&
               `区画内 ${status.total.toLocaleString('ja-JP')}地物／表示対象候補 ${status.matched.toLocaleString('ja-JP')}地物${status.matched > status.displayed ? `。うち${status.displayed}地物を表示中。拡大すると表示対象を絞れます。` : '。青い地物をタップして属性を確認。'}`)}
+      </p>
+      <p className="text-xs leading-relaxed text-muted-foreground">
+        {GEO_BASEMAP_SHORELINE_ATTRIBUTION}
       </p>
     </div>
   );
