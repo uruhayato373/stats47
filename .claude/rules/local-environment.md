@@ -3,7 +3,10 @@ paths:
   - "package.json"
   - "turbo.json"
   - "apps/*/package.json"
-  - "apps/web/scripts/{dev-server.ts,r2-dev-gateway.ps1}"
+  - "apps/web/scripts/{dev-server.ts,r2-dev-gateway.ps1,r2-dev-cache.ps1}"
+  - ".claude/config/local-resources.json"
+  - ".claude/scripts/lib/local-resource*"
+  - "scripts/scheduled/local-resources.ps1"
   - ".claude/agents/{db-schema-manager,data-ingester,r2-publisher,devops-runner}.md"
 ---
 # ローカル開発環境
@@ -120,7 +123,7 @@ listen は `127.0.0.1`、method は `GET` / `HEAD`、R2 key は path traversal �
 **TLS 検証を無効化しない。** `npm run dev:web` または `npm run dev --workspace=apps/web` で自動的に有効になる。
 一時的に従来経路へ戻す場合だけ `R2_DEV_GATEWAY=0` を指定する。Windows 以外では gateway を起動しない。
 
-**gateway は GET を 300 秒メモリキャッシュする (2026-08-21)**。`GetContext()` の逐次ループなので、
+**gateway は GET を 300 秒メモリキャッシュする (2026-08-21)**。リクエスト処理は逐次なので、
 アプリが並列に投げた R2 fetch も 1 本ずつ社内プロキシへ出ていく。同じオブジェクトを読み直さない
 だけで、R2 依存の重いページが実測で速くなった (同一端末・warm・中央値):
 
@@ -171,6 +174,53 @@ CI (Linux) は `HTTPS_PROXY` が無いので、**env があるときだけ dispa
 **e-Stat の app ID は `apps/web/.env.development` にある** (公開 ID・git tracked・秘密ではない)。
 `NEXT_PUBLIC_ESTAT_APP_ID` が未設定でも、スクリプトがこのファイルを読めば e-Stat を叩ける。
 
+### Windows の NotebookLM 連携
+
+既存の `notebooklm-cross-query.mjs` / `notebooklm-notebook-builder.mjs` は
+`%USERPROFILE%\.notebooklm-venv\Scripts\notebooklm.exe` を自動検出する。PATH の変更は不要。
+2026-09-09 に専用環境で `notebooklm-py[browser,mcp]==0.8.2` を確認した。
+これは Google 公式 SDK ではなく、既存スキルが採用する
+[notebooklm-py](https://github.com/teng-lin/notebooklm-py) の CLI / MCP。
+
+初回導入は `uv venv --python python "$env:USERPROFILE/.notebooklm-venv"`、続いて
+`uv pip install --python "$env:USERPROFILE/.notebooklm-venv/Scripts/python.exe" 'notebooklm-py[browser,mcp]==0.8.2' 'truststore==0.10.4'`。
+既存環境がある場合は再作成しない。
+
+```powershell
+$env:PYTHONIOENCODING = 'utf-8'
+$notebookCli = Join-Path $env:USERPROFILE '.notebooklm-venv/Scripts/notebooklm.exe'
+& $notebookCli login --browser chrome
+```
+
+Google ログインは本人が専用ブラウザーで行う。ログイン完了は CLI が自動検出する。
+認証状態はユーザーフォルダーの `.notebooklm` 配下に置き、リポジトリへコピーしたり内容を出力しない。
+利用可能の判定はインストール成功ではなく、認証検査・ノートブック一覧・引用付き質問応答の成功で行う。
+
+**Codex はローカル stdio MCP を使う。** 登録先は `%USERPROFILE%\.codex\config.toml` の
+`[mcp_servers.notebooklm]`。既存の MCP を残して、次のコマンドで追加する。
+
+```powershell
+codex mcp add notebooklm --env 'PYTHONIOENCODING=utf-8' --env 'NO_PROXY=localhost,127.0.0.1,::1,.local' -- "$env:USERPROFILE/.notebooklm-venv/Scripts/python.exe" -c 'import truststore; truststore.inject_into_ssl(); from notebooklm.mcp.__main__ import main; main()' --profile default --log-level WARNING
+```
+
+- `truststore` は MCP プロセス内で Windows の信頼済み証明書ストアを使用する。
+  TLS 検証は有効のまま。専用環境以外やパッケージ本体を書き換えない。
+- この端末では `NO_PROXY` の Google 除外により直接通信が HTTP 503 の社内ブロック応答となった。
+  MCP のみ除外先をローカル宛てに限定し、既定の `HTTP_PROXY` / `HTTPS_PROXY` 経由にすると接続成功。
+  コマンド中のカンマを含む `--env` 引数は PowerShell で必ず引用する。
+- 同じ MCP テーブルに `startup_timeout_sec = 60`、`tool_timeout_sec = 180`、
+  `env_vars = ["HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"]` を設定する。
+  プロキシ認証値は設定ファイルに複製せず、環境から引き継ぐ。
+- 初期化・`notebook_list`・`source_list`・`chat_ask` の実通信まで検証する。
+  このタスクでツールが出ていなければ、アプリの「設定 → MCP servers」から再起動する。
+  認証期限切れだけは専用ブラウザーで再ログインする。
+- CLI を直接検査する場合も同じプロキシ除外設定を用い、上の Python 起動コードの import 先を
+  `notebooklm.notebooklm_cli` に替えて `auth check --test --json` / `list --json` を渡す。
+
+仕様: [NotebookLM 実装](https://github.com/teng-lin/notebooklm-py) /
+[Windows 証明書ストア](https://truststore.readthedocs.io/en/latest/) /
+[Codex MCP 設定](https://developers.openai.com/codex/mcp/)。
+
 ### ★Windows では `next build` が完走しない (2026-08-05)
 
 `npm run build --workspace apps/web` は `/themes/[themeSlug]/opengraph-image` の prerender で
@@ -188,31 +238,20 @@ fileURLToPath(join(import.meta.url, "../noto-sans-v27-latin-regular.ttf"))
 - **`npm run build | tail` の終了コードを成功判定に使わない**。`tail` の exit code が返るため
   build の失敗が隠れる (2026-08-05 に実際に「exit 0」と誤報した)。判定は出力本文を読む。
 
-### ★`npm run type-check` は Windows で「走らずに落ちる」(2026-08-06)
+### ★Windows の型検査と古い生成型 (2026-09-08)
 
-ルートと `packages/estat-api` の `type-check` スクリプトは
-`NODE_OPTIONS="--max-old-space-size=4096" tsc --noEmit` という **POSIX の env 前置**を使う。
-npm は Windows でスクリプトを `cmd.exe /d /s /c` 経由で実行するため、これは
-
-```
-'NODE_OPTIONS' は、内部コマンドまたは外部コマンド、
-操作可能なプログラムまたはバッチ ファイルとして認識されていません。
-```
-
-で即座に失敗する。**型エラーが 0 でも exit 1 になり、逆に「走った」と誤認しやすい**
-(2026-08-06 に実際に「turbo type-check exit 0」と誤報告した。見ていたのは背景タスクの
-ラッパーの終了コードで、turbo は一度も起動していなかった)。
-
-Windows での代替:
-
-```bash
-NODE_OPTIONS="--max-old-space-size=4096" npx turbo run type-check --continue
-cd packages/estat-api && NODE_OPTIONS="--max-old-space-size=4096" npx tsc --noEmit
-```
-
-Git Bash から `npx turbo` / `npx tsc` を直接呼べば env 前置が効く (npm を挟まないため)。
-`--continue` を付けないと最初の失敗で残りが検査されない。
-**判定は必ず出力本文の `error TS` 件数で行う** (`| tail` や `| grep` の終了コードを見ない)。
+- **問題**: npm は Windows で `cmd.exe` を使うため、`NODE_OPTIONS=... tsc` という
+  POSIX の環境変数前置は型検査を起動できない。
+- **対策**: root と `packages/estat-api` は `cross-env` 経由へ修正済み。
+  通常の `npm run type-check` を使う。workspace の前置構文への回帰は
+  `.claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs` が拒否する。
+- **別原因**: admin の `.local/next-e2e/types/validator.ts` は、API route を削除した後も
+  古い import を保持することがある。生成型を手編集したり、型検査から除外したりしない。
+  apps/admin で `npx cross-env NEXT_DIST_DIR=.local/next-e2e next typegen`、続いて
+  `npx cross-env NEXT_DIST_DIR=.local/next-admin-dev next typegen` で現在の route から再生成する。
+  chunk を消さずに型だけ更新できるので、常設 dev の再起動・出力ディレクトリ削除は不要。
+- **判定**: コマンド本体の exit code と全 workspace / scripts の完走を確認する。
+  パイプ末尾や背景ラッパーの exit 0 を成功の根拠にしない。
 
 ### ★ファイルを書くときは Write/Edit を使う。heredoc で内容を流し込まない (2026-08-21)
 
@@ -287,6 +326,48 @@ npm run dev --workspace=apps/web   # turbo を介さず最速 (✓ Ready in 2s)
 - ルート `npm run dev`（`turbo run dev`）は **23 パッケージすべての dev を起動**し、出力が混ざって "Ready" を検出しづらく、port 3000 を listen する前に体感で固まる。web 単体なら数秒で起動する（2026-06-20 に同じ取り違えで時間を浪費した）。
 - dev サーバーは**常駐プロセス**。エージェントが起動するときは `run_in_background: true` で起動し、**出力ファイルを polling して `✓ Ready` を確認**する。前面 `sleep` での固定待ちは禁止（タイムアウト・取りこぼしの元）。
 - 表示が更新されないときは「キャッシュ」を疑う前に **dev サーバーが listen しているか**を先に確認する（`lsof -i :3000` / `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/`）。
+
+## ローカル資源の予算と保持
+
+端末の予算・掃除対象・保持日数の機械契約は `.claude/config/local-resources.json`。
+計測は非常駐、`.local/resource-health/` に最新値と日別30件、容量監査2世代だけを保存する。全体走査は月次とし、
+通常の開発前チェックではディレクトリを再帰走査しない。容量はファイル長合計で、junctionは辿らず、
+hardlinkの重複は除かない。回収量はドライブ空き容量の前後も合わせて判断する。
+
+- Turboは `turbo.json` のキャッシュ上限 `2GB`、同時実行2件。実行時にTurbo自身が回収する。
+- ローカルVitestは最大2 worker、preflightも最大2件。フルbuildは節目だけ、必要な対象を絞って検証する。
+- Windows R2 gatewayのキャッシュ本文は合計64MiB、1件8MiB、最大2000件。期限切れは待受中も回収する。
+  これはプロセス全体のメモリ上限ではない。大きい本文・長さ不明の本文・ローカルファイルはストリーム転送する。
+- dev supervisorは終了時に自分で起動した子プロセスだけを終了する。Nodeやブラウザ全体を一括停止しない。
+- `.codex/config.toml` はstandalone Codex用に再帰Codex・filesystem・GitHub・shadcn MCPを無効化する。
+  ファイル操作とGitHub操作は標準ツールと`gh`で行う。変更は次回Codex起動から反映し、既存セッションを強制終了しない。
+- editorの監視・検索から `.local`、`.turbo`、生成動画、追加worktreeを除外する。
+
+Windowsの登録入口は `scripts/scheduled/local-resources.ps1 -Action Install`。毎日09:00とログオン時に
+日次計測、7日ごとの限定掃除、30日ごとの容量監査を実行する。同日重複・同時実行を避け、上限15分で終了する。
+ログイン中かつ端末が稼働できるときの処理であり、電源OFF中は実行されない。通知はCodexの
+「stats47 ローカル資源の点検結果を確認」が結果を読み、新しい異常・意味のある変化・復旧時だけ行う。
+
+```bash
+npm run local:health                 # 軽い計測。dev:web起動前にも実行
+npm run local:audit                  # 容量走査（通常は月次だけ）
+npm run local:cleanup                # 削除候補だけ表示
+npm run local:cleanup -- --apply     # 条件を満たした生成cacheだけ削除
+npm run local:resources:test         # 削除境界・保持・メモリ予算のテスト
+```
+
+自動掃除は登録済みworktree内の指定されたNext cacheだけを対象とし、最終変更から7日以上、
+リンクなし、対象が計画後に変化していない、開発プロセスが停止中、の全条件を要求する。
+初回の `--include-recent` は明示的な掃除依頼時だけ使う。削除先は必ずルート配下の絶対パスで再検証する。
+容量不足は空き25GiB未満で警告・15GiB未満で重大、RAMは利用可能3GiB未満で警告・1.5GiB未満で重大。
+メモリは瞬間値なので継続状況と実行中作業も見て判断し、不明な計測値を正常と扱わない。
+
+WIPのあるworktree、認証profile、`.local/r2`、参考文献、成果物や運用台帳は年齢だけで消さない。
+GISの一時領域は処理ごとにOS一時フォルダーへ作り、入力URL・hash・成果の保存先・復元手順を残す。
+展開ファイルは残すZIPのentryとSHA-256を照合してから回収する。原本ZIPや固有スクリプトは別途保全確認が必要。
+参考文献は既存source-vault契約に従いprivate Driveからの復元検証とcoverage 100%を満たしてから回収する。
+共有npm cacheは必要時に `npm cache verify` で整合性確認・不要blob回収を行う。uv・ブラウザの共有cacheは
+利用元と再取得コストを調べてから扱い、定期的な全消去はしない。worktreeは必要時だけ作り、未完了変更を統合してから閉じる。
 
 ## 頻用コマンド
 

@@ -7,6 +7,8 @@ import {
   selectPromoBannerIndexForRanking,
 } from "@/features/ads";
 import type { AffiliateVertical } from "@/features/ads/constants/affiliate-category";
+import type { AffiliateDestination } from "@/features/ads/constants/affiliate-delivery-policy";
+import { SIDEBAR_PROMO_BANNERS } from "@/features/ads/constants/sidebar-banners";
 import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
 
@@ -36,6 +38,8 @@ interface RankingPageSidebarSectionProps {
   surveyRelatedItems?: { rankingKey: string; title: string }[];
   /** ランキング名。楽天商品カードの品目検出に使う。 */
   rankingName: string;
+  /** 本文で既に使うリンクを除外し、レールで同じ案件を繰り返さない。 */
+  excludeAffiliateAds?: readonly AffiliateDestination[];
 }
 
 function RankingPageSidebarSkeleton() {
@@ -55,6 +59,7 @@ export function RankingPageSidebarSection({
   surveys,
   surveyRelatedItems,
   rankingName,
+  excludeAffiliateAds = [],
 }: RankingPageSidebarSectionProps) {
   // 品目が一致する家計調査だけを優先する。null（広告なし）の解決結果は覆さない。
   // 品目・R2在庫がない場合、カード自身が何も描画しない。
@@ -66,6 +71,8 @@ export function RankingPageSidebarSection({
       position={prioritizeRakutenItems ? "rakuten-sidebar" : "ranking-sidebar"}
     />
   );
+  const promoBannerIndex = selectPromoBannerIndexForRanking(rankingKey);
+  const reservedPromo = affiliateVertical === "labor" ? SIDEBAR_PROMO_BANNERS[promoBannerIndex] : undefined;
   const contextualAffiliateBanners = (
     <AffiliateAdSlot
       categoryKey={rankingItem.categoryKey ?? ""}
@@ -74,6 +81,7 @@ export function RankingPageSidebarSection({
       rankingKey={rankingKey}
       bannerOnly
       bannerLimit={2}
+      excludeAds={reservedPromo ? [...excludeAffiliateAds, reservedPromo] : excludeAffiliateAds}
     />
   );
 
@@ -97,7 +105,12 @@ export function RankingPageSidebarSection({
           />
         </SurfaceCard>
       )}
-      <SidebarPromoBanner index={selectPromoBannerIndexForRanking(rankingKey)} />
+      <SidebarPromoBanner
+        index={promoBannerIndex}
+        rankingKey={rankingKey}
+        vertical={affiliateVertical}
+        excludeAds={excludeAffiliateAds}
+      />
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
       {!prioritizeRakutenItems && rakutenItems}
       <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />

@@ -19,6 +19,7 @@ import {
 
 import { FixedYearComparisonPanel } from './FixedYearComparisonPanel';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
+import { ThemeComparisonSection } from './ThemeComparisonSection';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
 import type { MetricKpi } from './metric-kpi';
@@ -441,6 +442,14 @@ export function ThemeMetricsDashboard({
       {remainingEmbedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
       ))}
+      {!cardsOnly && themeConfig.hideMap && (
+        <ThemeComparisonSection
+          themeConfig={themeConfig}
+          metricGroups={metricGroups}
+          indicatorDataMap={indicatorDataMap}
+          selectedPrefectureCode={selectedPrefectureCode}
+        />
+      )}
       {markdownComponents.length > 0 && (
         <div className="space-y-4">
           {markdownComponents.map((chart) => (

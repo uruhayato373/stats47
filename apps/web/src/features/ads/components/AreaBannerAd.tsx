@@ -1,4 +1,5 @@
-import { CATEGORY_AFFILIATE_MAP } from "../constants/affiliate-category";
+import { adVertical } from "../constants/affiliate-category";
+import { isAffiliateDestinationExcluded, type AffiliateDestination } from "../constants/affiliate-delivery-policy";
 import { readActiveBannersByLocationFromR2 as findActiveBannersByLocation } from "../repositories/affiliate-ad-snapshot";
 
 import { BannerAd } from "./BannerAd";
@@ -8,16 +9,16 @@ import { BannerAd } from "./BannerAd";
  * area-sidebar スロットのバナーを priority 降順で最大2件表示する。
  * 該当なしの場合は何も表示しない（AdSense フォールバックなし）。
  */
-export async function AreaBannerAd() {
-  const banners = await findActiveBannersByLocation("area-sidebar", 2);
+export async function AreaBannerAd({ excludeAds = [] }: { excludeAds?: readonly AffiliateDestination[] } = {}) {
+  const banners = (await findActiveBannersByLocation("area-sidebar", Infinity))
+    .filter((banner) => !isAffiliateDestinationExcluded({ href: banner.htmlContent, programRef: banner.programRef }, excludeAds))
+    .slice(0, 2);
   if (banners.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-3">
       {banners.map((banner) => {
-        const affiliateCategory = banner.categoryKey
-          ? CATEGORY_AFFILIATE_MAP[banner.categoryKey]
-          : undefined;
+        const affiliateCategory = adVertical(banner);
         return (
           <BannerAd
             key={banner.id}

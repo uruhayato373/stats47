@@ -1,4 +1,20 @@
 export { GeoAnalysisTracker } from './components/GeoAnalysisTracker';
+export { GeoAnalysisCards } from './components/GeoAnalysisCards';
+export { GeoLayerCards } from './components/GeoLayerCards';
+export {
+  loadGeoSourceCatalog,
+  loadGeoSourceItem,
+} from './lib/load-geo-source-catalog';
+export { GeoSourceExplorer } from './components/GeoSourceExplorer';
+export { GeoSourceDirectory } from './components/GeoSourceDirectory';
+export { GeoSourceNavigation } from './components/GeoSourceNavigation';
+export { GeoSourceReading } from './components/GeoSourceReading';
+export {
+  findGeoSourceThumbnail,
+  geoThumbnailKey,
+} from './lib/geo-source-thumbnail';
+export { GeoLayerExplorer } from './components/GeoLayerExplorer';
+export { projectGeoLayer } from './lib/geo-layer-data';
 export { GeoCrossAnalysisArticle } from './components/GeoCrossAnalysisArticle';
 export { GeoSpatialEvidenceExplorer } from './components/GeoSpatialEvidenceExplorer';
 export { GeoDecisionExplorer } from './components/GeoDecisionExplorer';

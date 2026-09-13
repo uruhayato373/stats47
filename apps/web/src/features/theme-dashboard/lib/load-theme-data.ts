@@ -1,5 +1,6 @@
 import "server-only";
 
+import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 import { fetchPrefectureTopology, fetchAllCitiesTopology } from "@stats47/gis/geoshape";
 import {
@@ -10,6 +11,8 @@ import {
 import { isOk, type AreaType, type TopoJSONTopology } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
+
+import { themeYearLabel } from "./theme-year-label";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
 import type { RankingItem, RankingValue } from "@stats47/ranking";
@@ -167,12 +170,21 @@ export async function loadThemeData(
   const indicatorDataMap: Record<string, ThemeIndicatorData> = {};
   for (const { key, item } of validItems) {
     const valResult = valuesResults.find((v) => v.key === key);
-    const values = valResult?.values ?? [];
+    const yearFormat = METRICS_REGISTRY[key]?.yearFormat;
+    const normalizeYear = <T extends { yearCode: string; yearName?: string | null }>(year: T) => ({
+      ...year,
+      yearName: themeYearLabel(year.yearCode, year.yearName, yearFormat),
+    });
+    const values = (valResult?.values ?? []).map(normalizeYear);
     if (values.length > 0) {
       indicatorDataMap[key] = {
-        rankingItem: item,
+        rankingItem: {
+          ...item,
+          ...(item.latestYear ? { latestYear: normalizeYear(item.latestYear) } : {}),
+          ...(item.availableYears ? { availableYears: item.availableYears.map(normalizeYear) } : {}),
+        },
         rankingValues: values,
-        availableYears: item.availableYears ?? [],
+        availableYears: (item.availableYears ?? []).map(normalizeYear),
         nationalValue: valResult?.nationalValue,
         nationalSeries: valResult?.nationalSeries,
       };

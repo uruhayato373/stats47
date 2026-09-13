@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -22,6 +24,7 @@ import {
 } from "@/features/ads";
 import {
     AreaBannerAd,
+    FurusatoNozeiCard,
     resolveAffiliateBannersByVertical,
 } from "@/features/ads/server";
 import { AreaDatabookSection } from "@/features/area-databook";
@@ -140,7 +143,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         // ★ 2026-07-28: locationCode "area-sidebar" の在庫は市区町村ページの
                         //   フッターにしか描画されておらず、枠名と実際の描画位置が食い違っていた。
                         //   県ページ (6,723 imp) のレール下部にも出す。
-                        bottomWidgets={<AreaBannerAd />}
+                        bottomWidgets={<AreaBannerAd excludeAds={!ADSENSE_DISPLAY_ENABLED && areaContentBanner ? [areaContentBanner] : []} />}
                     />
                 }
             >
@@ -175,6 +178,10 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         areaCode={areaCode}
                         areaName={profile.areaName}
                     />
+
+                    <Suspense fallback={null}>
+                        <FurusatoNozeiCard areaCode={areaCode} position="area-furusato-content" layout="content" />
+                    </Suspense>
 
                     <AreaGeoInsightsSection
                         areaCode={areaCode}

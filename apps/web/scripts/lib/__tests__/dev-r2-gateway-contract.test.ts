@@ -89,6 +89,7 @@ describe('Windows development R2 gateway contract', () => {
     // 上限が外れるとメモリを無制限に食う。
     expect(gateway).toContain('$maxCacheBytes');
     expect(gateway).toContain('$maxCacheEntries');
+    expect(gateway).toContain("'r2-dev-cache.ps1'");
   });
 
   it('lets the developer turn the cache off from the environment', () => {

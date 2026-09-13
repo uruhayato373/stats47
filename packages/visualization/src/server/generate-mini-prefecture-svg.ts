@@ -71,7 +71,7 @@ function normalizePrefCode(value: unknown): number | null {
   return code ? Number(code) : null;
 }
 
-function readPrefectureFeatures(): Feature[] {
+export function readPrefectureFeatures(): Feature[] {
   if (prefectureFeaturesCache) return prefectureFeaturesCache;
 
   // Cloudflare Workers を含む全ランタイムで同じ地図を使うため、GIS SSOTを

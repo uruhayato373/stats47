@@ -95,6 +95,7 @@ function resolveDataset(
     latestVersion: meta.latestVersion,
     downloadUrlPattern: code.downloadUrlPattern,
     geojsonDirInZip: code.geojsonDirInZip,
+    shapefileEncoding: code.shapefileEncoding,
     propertyMap: code.propertyMap,
     simplifyOptions: code.simplifyOptions ?? defaultSimplifyOptions(meta.geometryType),
     attribution: ATTRIBUTION,
@@ -148,7 +149,7 @@ export async function runKsjPipeline(
   }
 
   // 2. GeoJSON 抽出
-  const geojsonFiles = await extractGeoJson(zipPath, def.geojsonDirInZip);
+  const geojsonFiles = await extractGeoJson(zipPath, def.geojsonDirInZip, def.shapefileEncoding);
 
   // 3. 変換 & 保存
   const outputFiles: KsjPipelineResult["outputFiles"] = [];

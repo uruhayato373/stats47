@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-12
+updated: 2026-09-13
 ---
 
 # バックログ (タスクマスタ)
@@ -138,11 +138,27 @@ updated: 2026-09-12
 タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node .claude/scripts/ads/audit-affiliate-inventory.ts の furusato 横長 banner ≥ 7] [起票:2026-09-03] [期日:2026-09-30]
 
 - **owner**: uruhayato373 (ASP 提携) / affiliate-manager (登録)
-- **再開条件**: A8・もしもへ再ログインしてstats47帰属をassertする。2026-09-08は両ASPで
-  ログイン未検知のため照合・申請0件。台帳上appliedのチョイス `s00000019332001` と
-  さとふる `s00000014771001` は承認照合を先に行い、重複申請しない。
-  もしもポケマル3830も台帳approvedなので既存提携を確認する。料率だけでなく成果・否認条件と
-  素材を確認し、申請対象または公開対象を指定して承認を得る。
+- **追加申請の前提**: 最新の提携状態・観測範囲・証拠は `.claude/state/ads/affiliate-stocktake-latest.json` を参照。
+  チョイス `s00000019332001` とさとふる `s00000014771001` は実機で明示未提携を確認したため、
+  承認待ちとして扱わない。過去の申請履歴がある両案件は再申請せず、掲載判断は状態の証拠に基づく。
+  もしもは2026-09-08にSID638943一致を確認済み。既存返礼品3830・3172は提携中なので再申請不要。
+- **現在地 (2026-09-08)**: もしもの新規3件は申請済み。3831ポケットマルシェは審査待ち、
+  1863食べチョク・55楽天トラベルは承認済み（状態の正典は `affiliate-catalog.json`）。
+  承認済み2件の300×250原稿は `.local/affiliate-harvest/moshimo/2026-09-08/` に取得済み・在庫SSOT未登録。
+  これらは通常商品／旅行の案件であり、ふるさと納税ポータル在庫の完了件数には含めない。
+- **追加6件の次工程**: オーナー承認後にstats47から各1回申請済み（2026-09-08、重複送信なし）。
+  A8の羽田産直 `s00000021701002`・九州お取り寄せ本舗 `s00000020875001` は承認済みなので、
+  掲載適合性を確定して素材取得・ローカル登録へ進む。WESTERモール `s00000027147001`・
+  北海道ぎょれん `s00000021814001`、afbのふるさとプレミアム `9156`・日本の旅 鉄道の旅 `16537` は
+  審査待ちにつき状態照合のみ行い、再申請しない。状態の正典は `.claude/state/ads/{a8,affiliate}-catalog.json`。
+  6件とも広告在庫未登録・未掲載。送信/再照合の証拠は `.local/affiliate-ops/` に保持。
+- **次**: 返礼品3830・3172の原稿取得と掲載条件確認、上記承認済み素材のローカル登録。
+  食品は産地に一致する食文化/特産品ページ、鉄道旅行は国内観光の文脈に限定し、返礼品在庫と混同しない。
+  承認後も案件別eligibility・重複・成果条件・申請対象サイトを再照合する。浜名湖産直 `12522` は
+  対象商品の紹介文が掲載条件のため保留。条件原文はこのPCの `C:/tmp/stats47-{a8,afb}-offer-details-20260908.json`。
+  楽天トラベルは既存の直接提携広告と比較して採用先を決め、二重配信しない。
+  もしも発行原稿の独立ピクセル・referrerpolicy・attributionsrc・PR条件を落とさない。
+  別セッションを含む専用ブランチ `codex/workspace-updates-20260908` へのcommit・pushは承認済み。develop/main反映・R2更新・デプロイは別途公開承認を得てから行う。
 - **なぜ**: #913 で家計調査 (ランキング 28,867 + ブログ 12,366 imp/週) と農業・地方財政が furusato に
   集まる。一方 furusato の横長バナーは **4 本** (イオン九州 ×2・ふるさと本舗・au PAY) で、3 枠を
   埋めると毎ページ同じ並びになる。需要と在庫が最も逆転している軸。
@@ -153,6 +169,28 @@ updated: 2026-09-12
 - **完了条件**: furusato の横長 300x250 が 7 本以上、かつ priority 上位 3 が全国対応ポータル
   (地域限定のイオン九州が上位 3 に入らない)。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
+
+### [AFF-STOCKTAKE-RECONCILE-01] 提携棚卸しの不明案件と既存在庫の不一致を再照合する
+
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-09-08] [期日:2026-09-15]
+
+- **owner**: affiliate-operator（状態照合）/ affiliate-manager（在庫判断・ローカル修正）/ オーナー（手動ログイン）
+- **証拠・対象の正典**: `.claude/state/ads/affiliate-stocktake-latest.json`。詳細な件数・状態・素材一覧は本カードへ複製しない。
+- **次（実行順）**: ①帰属ガードを確認してからA8 `26822001`、afb `15671`・`14033`・`16511`・`15831` の不明状態を再照合する。②楽天は正しい広告リンク作成用IDかをオーナーに確認し、stats47の登録と既存リンクの口座一致を確認する。登録変更は別承認とする。未提携が確定した3案件は `affiliate-delivery-policy.ts` の共通停止へ反映済み、重複はprogramRef/クリック先で除外済み。これらの公開前確認は `AFF-PLACEMENT-RELEASE-01` へ分離する。
+- **停止条件**: サイト・口座帰属を確定できなければ停止し、不在を未提携や終了と推測しない。新規・重複申請、認証回避、成果リンクへの確認クリック、本番変更・deploy・R2 pushは禁止。既存在庫を未確認のまま削除しない。
+- **完了条件**: 各対象の状態・在庫判断を実機証拠へ結び付け、必要なローカル修正と対象の検証が完了する。不明が残る間はカードを維持し、人間作業またはガード復旧による再開条件を明記する。
+
+### [AFF-PLACEMENT-RELEASE-01] 配置安全化と楽天品質修正の公開前ゲートを完了する
+
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-08]
+
+- **owner**: affiliate-manager（配置・データ品質）/ devops-runner（検証・公開）/ オーナー（CI実行・公開承認）
+- **優先度・前提**: 公開前必須。ユーザーは別セッションを含む専用ブランチ `codex/workspace-updates-20260908` へのcommit・pushを承認済み。本番公開は未承認で、未提携停止・対象key制約・本文/レール重複抑止・viewability修正を未デプロイのまとまりとして扱う。
+- **次（実行順）**: ①オーナーの明示承認後、既存CIのSecretsを使って今回の検索条件で楽天APIを再取得する（キーのローカル再設定・取り出しは不要）。公開前の独立検証をCIで行う場合も起動承認を取り、R2書込・cache purgeを実行しない入口を用意する。②47県と対象商品の新規取得結果を品質監査し、地域・食品文脈・正常0件fallbackを確認する。③承認された公開を1回にまとめる。④公開後の同一定義・確定期間のGA4内訳とASP成果を収集し、効果判定だけをimprovement-triageへ渡す。
+- **証拠**: `.local/affiliate-status/placement-audit-20260908/` の候補判定・テスト・Rakuten再検証結果。CIのSecretsと定期同期の成功は確認済み（詳細はaffiliate-improvementログ）。取得済みsnapshotの再検証を新検索条件でのAPI取得と呼ばない。ローカル取得の `rakuten-refresh-blocker.json` / notAttempted は履歴として維持する。
+- **検証の境界**: ローカルの検証結果はaffiliate-improvementログの同IDを参照する。代表ページの確認を全URLの実画面確認や収益改善の証明として扱わない。他の実行中タスクを含む全体検証では、作業途中の参照欠落をこちらで削除・仮実装して通さない。
+- **停止条件**: 未確定の口座帰属、認証不足、取得失敗、品質違反、ビルド/画面検証失敗、公開承認なし。認証をチャットへ貼らせず、同意なくCI起動・R2 push・deploy・GA4設定変更をしない。
+- **完了条件**: 新しい検証済みデータと配置修正の公開が確認でき、計測定義の切替日・対象ページ/端末/枠別の追跡先が確定する。配置の実装完了と収益改善の実証を混同しない。
 
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 
@@ -471,6 +509,30 @@ updated: 2026-09-12
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [LOCAL-RESOURCE-BUDGET-01] 資料の復元経路と再起動後のメモリ削減効果を確認する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-10]
+
+- **owner**: devops-runner（計測・保持確認）／オーナー（Codex再起動）
+- **次（実行順）**: ①次回Codex再起動後に local:health を実行し、重複MCP設定変更の適用とNode数・専用メモリを同じ代表作業で比較する。②日本国勢図会のprivate Drive保管6分割bundleをWindowsへ復元し、既存source-vaultのSHA-256検証と再展開検証を通してから books/ を回収する。③残る一時GISの原本ZIP・固有スクリプトは取得URL・成果保存先・復元手順がそろうものから回収する。
+- **再開材料**: 端末内 .local/resource-health/ の計測・掃除・GIS復元台帳、既存 source-inventory/japan-zue/2025-26/source-bundle-manifest.json。Driveの日本国勢図会/2025・2026年版にmanifestと6分割ファイルの存在・非共有・容量を確認し、ローカル1746ファイルのhash一致と全profileのcoverage 100%は検証済み。Drive connectorのバイナリ返却先はsediment URIで、このWindows端末への復元経路は未確立。
+- **停止条件**: 未検証のDrive原本・GIS・WIP・認証profileを削除しない。既存セッションの一括終了やGit履歴リセットで軽量化しない。Node数・メモリはツール稼働を含む瞬間値であり、条件を合わせず削減効果と断定しない。
+- **完了条件**: 再起動後の同条件計測を保存し、参考文献のDrive復元検証と source-vault:check が通る。GISは回収した各対象から保全先と再生成手順が辿れ、保全できないものには保持理由を残す。導入済み予算・定期点検方式は local-environment.md と自動化インベントリを参照する。
+
+
+### [GEO-SOURCE-PAGES-01] 50種類の単体GISページを一覧順に整備・検証する
+
+タグ: [UI・UX] [種類:制作] [実行:対話] [起票:2026-09-08]
+
+- **カード画像**: 表示範囲・版の設定は `geo-source-thumbnail.ts`、生成進捗は `.claude/state/geo/source-thumbnails.json`、画像/表示検証は `.claude/state/geo/source-thumbnails-audit.json`、R2同期結果と別PC読み込み検証は `.claude/state/geo/source-thumbnails-publication.json`。表示だけなら再生成は不要。設定変更時は生成器→画像監査→remote照合→共通画像publisher→全画像・manifestのS3/public GET照合の順に進める（GIS README）。画像の同期とページ本体・原典GISの本番確認を混同しない。
+- **別PCでの再開**: 作業ブランチは `codex/workspace-updates-20260908`。Gitで引き継ぐのは実装・生成設定・台帳・検証記録。画像本体と生成manifestはR2を使い、開発用preview APIもローカル画像が無ければR2へ転送する。原典GISの `.local/r2/`・修復証跡・A31b分割manifestはGit対象外。地図データが無いPCでは、下記の索引・GISを取得し、修正版がremote未反映ならGIS READMEの原典再生成手順で復元する。以前の台帳の合格をそのPCの地図再現確認と扱わず、取得・版・SHAを確認して再検証する。
+
+- **担当・進捗の正典**: Geo単体ページ実装担当。ページ別の順序・内容整備・地図確認・エラー・本番確認は `.claude/state/geo/source-pages.json`。人向け一覧は `.local/geo-source-pages/progress.html`（同台帳から生成）。再開時は `node --import tsx apps/web/scripts/audit-geo-source-pages.ts` で差分を反映し、件数を本カードへ複製しない。
+- **再開入力**: URLは `/geo/datasets/<dataId>`、一覧順は `GeoSourceNavigation`、版付き読み方は `packages/data-configs/src/business-plan/geo-source-pages.ts`（区域・防災は同階層の `geo-source-policy-pages.ts`、施設・交通・推計人口は `geo-source-service-pages.ts`）。配信索引は `.local/r2/app/geo/layers/items.json` と `.local/r2/app/geo/datasets/<dataId>/item.json`。A31b分割の証跡は `.local/r2/app/geo/datasets/A31b/manifest.json`、原典からの修復証跡は同じ階層の `{W09,L01,L02,A03,A30a5,A38,A42,A43,A44,P04,C28,N08}/repair.json`。医療圏の再生成は `packages/gis/src/mlit-ksj/scripts/rebuild-medical-areas.ts --source-zip <公式ZIP>`、P04/C28/N08は同階層の `rebuild-source-page-data.ts --data-id <ID> --source-dir <公式ZIP保存先>`（詳細はGIS README）。索引の再生成時は `export-geo-source-catalog.ts` に `--source-manifest .local/r2/app/geo/datasets/A38/repair.json` を必ず渡す（原典から復元した配布ファイルも索引へ含めるため）。
+- **次（実行順）**: ①台帳で要修正・表示確認待ちを先に解消。②台帳の未整備項目を「土地・自然」→「区域・防災」→「施設」→「交通」→「統計」の順で、原典の時点・範囲・属性・単位を確認し読み方を作る。③対象IDを `audit-geo-source-pages.ts --ids <ID,...>` で検証し台帳更新。④本番反映の明示指示後に、索引・A31b表示ファイル・各repair.json記載の修正版とアプリを一括反映し、本番で同じ確認を行う。
+- **停止条件**: 原典SHA・地物数保存・公開利用条件のいずれかが一致しなければ当該GISを完了にしない。地図取得失敗・属性文字化け・横はみ出しを残したまま確認済みにしない。代表ファイルの確認を全ファイル保証と扱わず、ローカル生成を本番公開済みと扱わない。自動表示対象はボタン操作前の描画も検査し、L03-aでは区画変更・一覧リンクによるGIS往復後の初期化と、非表示で読み込んだ地図を表示した際の自動復旧を確認する（台帳`map.initialDisplay`に自動/手動を記録）。利用者の内部ブラウザでの再発報告は、別の検証用ブラウザの合格だけで解消扱いにしない。本番デプロイは別途明示指示時のみ。
+- **完了条件**: 対象50種類に版付きの読み方・時点・範囲・属性・出典があり、代表区画の形状と属性を320/1440px幅で確認できる。同じ検証でGIS一覧の全件表示・検索・解除・現在地、区画全体へ戻す操作、地図と状況説明が重ならないこと、拡大ボタンの44px操作領域を確認する。L01では初期画面に地図全体が収まり、1区画だけの選択操作が省かれ、属性・出典を展開して読めることも確認する。共通ビューア・一覧を変更した場合は台帳の確認結果を失効させ、再検証する。A31bは全201原典のSHA・地物数保存と最終manifestが一致し、最終的に公開先で同じ索引と地図が応答する。
+
 ### [RULES-DEMOTE-01] 常時読み込みから外した rule の移設と reference 化
 
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:npm run docs:check] [起票:2026-09-08]
@@ -572,8 +634,11 @@ updated: 2026-09-12
 タグ: [UI・UX] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- src/features/ads] [起票:2026-09-03] [期日:2026-10-31]
 
 - **owner**: ranking-ui-manager / affiliate-manager
-- **現在地**: `codex/affiliate-optimization` に配置移動と商品click/impressionの配置名統一を実装中。
-  元のdevelopは変更せず、公開承認待ち。固定28日baselineは
+- **現在地 (2026-09-08)**: 既存の配置移動・商品click/impression統一はdevelopへマージ済み。
+  今回の47県本文・市区町村・ブログ読了後の楽天導線と返礼品検索修正は専用ブランチ `codex/workspace-updates-20260908` でGeo変更とともに保存する。
+  公開タイトルの検査では県別返礼品42記事・商品126記事が候補（在庫・副題により実表示数は異なる）。
+  表示・地域一致・検索条件の正典は `.claude/rules/affiliate-ads-standards.md` §12。
+  専用ブランチへのcommit・pushは承認済みだが、develop/main反映・R2更新・デプロイは未承認。固定28日baselineは
   `.claude/state/metrics/affiliate-placement-baseline-2026-09-08.json`。
 - **公開後の次**: 48時間後に `rakuten-sidebar` のpage/device別計測を確認し、未取得なら
   商品在庫・DOM表示・GA4送信を切り分ける。14日以上の非重複窓で表示/PV・商品クリックを比較し、
@@ -583,9 +648,11 @@ updated: 2026-09-12
 - **なぜ**: 「納豆消費量ランキング」の読者に最も合うのは品目一致の楽天商品カードだが、現在は
   右レールの末尾 (`RakutenItemsCard`) にあり、GA4 では `blog-sidebar` / `ranking-sidebar` に
   混ざって計測されるため効果を分離できない。
-- **次**: (a) 出典調査が kakei-chousa のページでは楽天商品カードを右レール先頭 (関連ランキングの
-  直後) に置く (b) `position` を `rakuten-sidebar` に分けて `link_position` で読めるようにする
-  (dimension は登録済みなので値追加のみ、`analytics-event-standards.md` §2 に追記)。
+- **次**: 公開承認後、既存CIの `scope=furusato` で47県の返礼品を再取得し、関連変更をまとめて本番反映する。
+  ローカルには楽天API認証が無いため新検索の実API再取得は未検証。配信snapshotと対象ページを確認してから
+  上記48時間・14日計測へ進む。GSC・収益効果は未測定で、掲載候補数を収益増の根拠にしない。
+- **停止条件**: 公開の再承認が無い間はdevelop/main反映・R2更新・デプロイをしない。API取得エラー・他県混入・
+  通常商品への寄附額表示・PR/計測欠落があれば公開せず取得条件または表示を修正する。
 - **完了条件**: GA4 の `link_position=rakuten-sidebar` が家計調査ページで取れ、CTR が
   native 枠と比較できる。
 
@@ -887,6 +954,19 @@ updated: 2026-09-12
 - **散布図とタイルマップで律速が重なる**: `per-capita-income-gap` / `purchasing-power-adjusted` /
   `international-cooperation-volunteer-map` の 3 記事は両方の図が同じ SSOT 欠落で止まっている。
   **指標を投入すれば 2 種類まとめて解ける**ので、この 3 記事を先に片付ける
+
+### [GEO-SOURCE-PUBLISH-PERF-01] Geo原典の生成・公開時間を計測し、検証強度を保って待ち時間を減らす
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run scripts/geo-source-publish.test.ts] [起票:2026-09-13] [期日:2026-09-20]
+
+- **owner**: gis-pipeline-runner（生成・再開）／r2-publisher（公開契約）／devops-runner（CI）
+- **状態・着手時期**: 実装未着手。今回の公開完了後、次回Geo原典更新前に計測・設計から着手する。期日は初回設計の確認期限。
+- **実測根拠**: [Geo run 34726806521](https://github.com/uruhayato373/stats47/actions/runs/34726806521) の2026-09-13 UTCの準備は00:01:59〜00:44:28（42分29秒）、dry-runは00:44:28〜01:21:35（37分07秒）。apply/readbackは01:21:35〜04:03:28（2時間41分53秒）、runはsuccess。17,717件・stored 2,199,375,814 bytesを公開し全件のS3/公開query照合に成功。3フェーズ合計4時間01分29秒（job準備等を除く）。[アプリCI run 34731862870](https://github.com/uruhayato373/stats47/actions/runs/34731862870) は `8f66cb638` で01:58:36〜02:08:11（9分35秒）・success。再取得は `gh run view 34726806521 --repo uruhayato373/stats47 --json jobs`。
+- **コード根拠・未計測部分**: `apps/web/scripts/geo-source-publish-core.ts` の `buildExactPlan`、dry-run preflight＋共有publisher、apply preflight＋共有publisher＋PUT後確認は、変更対象1件につき計6回のHEADを行う構造。共有処理は `packages/r2-storage/src/scripts/push-exact-r2-assets-core.ts`。`mapGeoSourceBatch` は4件固定バッチの全終了待ちで、`.github/workflows/geo-source-publish.yml` は準備・dry-runもglobal `r2-write` lock内に置き、楽天公開の待ち要因になる。対象コードのdevelop pushは全件再生成・公開を発火する。実API数・HEADや解凍の時間寄与・短縮率は未計測。
+- **次（実行順）**: ①phase別の壁時間、件数、API種類別回数、最大同時数、転送bytes、lock待ちを記録し、今回runの終了値を比較元に固定する。②最大4件のworker poolで空き枠を継続利用し、失敗検出後の新規dispatch停止とin-flight完了待ちをテストする。③候補の重複解凍・HEADの整理を計測結果から選ぶ。④原典SHA＋生成コード＋schemaに結び付いた検証済み生成物の再利用・再開を設計し、失効条件と失効時の再生成を固定する。⑤コードpushは検証、公開は明示scopeのCIへ分離する。準備と書込lockの分離は、巨大artifactの保存・転送・復元時間と費用を含めて採否を決める。
+- **保持する契約・停止条件**: 全scope検査を最初のPUTより前に完了し、ETag条件PUT、gzipとdecoded両方のSHA、S3とcache-bust付き公開HTTPの全件照合、catalog-lastを保持する。purge後のcanonical検証は索引51件＋50ページの代表GISを予定範囲として区別し、実行時の対象キー・件数を記録する。全GISのcanonical GET完了とは扱わない。変更分への同強度検証と定期全件監査は別契約として設計・検証し、後者を前者の代用にしない。scope漏れ、再利用の失効判定不能、異常後の新規dispatch、検証強度低下、転送込みの時間・費用悪化があれば採用を止める。現在のCIをcancel/rerunせず、今回リリースへの実装追加をしない。短縮率の予測を成果にしない。
+- **完了条件**: 対象テストで並行上限4・失敗後停止・ETag変更・gzip/decoded不一致・scope漏れ・生成物失効・catalog順序の異常を拒否し、同一scope/bytesの比較可能なCIで全フェーズと待ち時間・API数・転送量の変更前後を残す。変更なし／一部変更／再開／全件監査の各経路で、必要な公開対象と同強度検証の取り落しがない。未採用案は実測理由を残し、実測短縮が確認できるまで高速化完了としない。
+- **既存カードとの境界**: `SYNC-SNAPSHOTS-MANIFEST-CARRY-01` は一般snapshotのmanifest持ち越し、`BUILD-PERF-PHASE34` はアプリCI cache・型検査の重複が対象。本カードはGeo原典生成からexact公開・再開・書込lockまでを扱う。
 
 ### [SYNC-SNAPSHOTS-MANIFEST-CARRY-01] sync-snapshots の「差分 push」が CI では毎回フル push になる
 

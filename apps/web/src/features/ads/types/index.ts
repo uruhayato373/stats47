@@ -47,6 +47,7 @@ export type AffiliateOfferSnapshot = Pick<
 >;
 
 export interface ResolvedAffiliateAd {
+  programRef?: string;
   /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
   id: string;
   title: string;
@@ -55,6 +56,7 @@ export interface ResolvedAffiliateAd {
 }
 
 export interface ResolvedAffiliateBanner {
+  programRef?: string;
   /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
   id: string;
   title: string;
@@ -104,7 +106,7 @@ export interface AffiliateAd {
   /**
    * ranking-key 単位のターゲティング (任意・転職クラスタの文脈一致配置用)。
    * - 未設定/空 → categoryKey 単位の従来挙動 (後方互換)。
-   * - 設定済 → ranking ページではこの key 群に一致する時のみ表示。非 ranking 文脈 (blog 等) では適用しない。
+   * - 設定済 → この key 群に一致するrankingでのみ表示。非ranking文脈 (blog 等) では掲載しない。
    * 例: エンジニア転職広告を職種年収 ranking のうち software-engineer / system-consultant 等にだけ出す。
    */
   /** 設定時は掲載可能な ranking key の hard allowlist。非 ranking 文脈では掲載しない。 */

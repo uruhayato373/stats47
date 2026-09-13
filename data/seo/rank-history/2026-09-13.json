@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-09-13",
+  "generatedAt": "2026-09-12T15:01:04.179Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-09-04",
+      "periodEnd": "2026-09-10",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1634,
+    "rows": [
+      {
+        "keyword": "40代 未婚 割合 日本 国勢調査",
+        "targetPath": "/survey/census",
+        "rank": 4.385786802030457,
+        "impressions": 591,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-08-28",
+      "periodEnd": "2026-09-03",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1513,
+    "rows": []
+  }
+}

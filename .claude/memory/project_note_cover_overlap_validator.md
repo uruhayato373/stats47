@@ -22,3 +22,7 @@ note 記事 cover SVG (1280×670) で `font-size 180` の big number を `y=250`
 - `.claude/skills/note/edit-note-draft/SKILL.md` の品質チェックリスト末尾に項目化済み
 - 失敗が出たら font-size を縮小（180→130 程度）または y を下げる。font-size 180 は cover では原則使わない
 - 教訓は `.claude/skills/management/knowledge/SKILL.md` の「note 記事 cover SVG で大きな数字テキストがリード文と重なる」エントリにも記録済み
+
+**Satoriで文字をpath化したカバー**（`generate-cover-refresh.ts`）には`<text>`が無い。
+旧検査のexit 0を重なり検証済みの根拠にしない。生成時の`onNodeDetected`で取得した実レイアウトの
+文字境界・交差を検査し、制作manifestの`textBounds`/`textOverlap`と縮小目視の全てを通す。

@@ -14,6 +14,25 @@ OGP 画像 (Satori 動的生成)・note カバー・サイト内リンクカー�
 
 ## 実行
 
+### note公開記事のカバー設定（最初に実行）
+
+noteのカバー未設定・設定状況を調べる場合は、次のGET専用監査を使う。
+
+```bash
+npm run note:covers:audit
+npm run note:covers:test
+```
+
+- 公開一覧の全ページとgit TSカタログの和集合を、v3記事詳細APIで全件確認する。
+- 判定元は詳細の`data.eyecatch`のみ。一覧の`eyecatch`には本文先頭画像が入る場合があるため、設定済みの根拠にしない。
+- `configured` / `missing` / `unknown`を分ける。取得失敗・フィールド欠損・帰属不一致は`unknown`、一覧の件数不一致・途中失敗は`incomplete`にする。
+- 終了コード: `0`=全件設定済み・カタログ集合一致、`1`=未設定または集合差分、`2`=取得失敗・不完全。`--report-only`による成功扱いは用意しない。
+- 出力は`.claude/state/metrics/note-cover-audit-latest.json`（毎回置換、時刻・完全性・記事別URL・根拠・都道府県別家計調査の集計付き）。`--output /tmp/note-cover.json`で保存先を指定できる。
+- 公開前の下書き・画像の見た目・画像URLの到達性・R2保存状況はこの判定に含めない。画像の保存状況は下記ギャラリーで別途確認する。
+- 既存`note-circulation-audit-weekly.yml`にも接続し、失敗を既存アラートとartifactへ渡す。外部公開・画像生成はしない。
+
+### 保存画像と配信画像のギャラリー
+
 ```bash
 # 全タブ (ranking はサンプル 30) → /tmp/ogp-image-gallery.html
 node .claude/scripts/ogp/build-image-gallery.mjs
@@ -32,6 +51,8 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 `category-ogp` `areas-ogp` (静的 R2・**県シルエットカード** ogp-image-standards.md §5.7) /
 `blog-card` `ranking-card` (リンクカード light/dark) / `note-cover` (note カバー) /
 `pref-silhouette` (県シルエット SNS 素材 5比率×blue/dark)。
+
+`note-cover`タブのOK/MissingはR2公開URLの到達性を表す。note上でのカバー設定件数として報告しない。
 
 - OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する (静的フォールバック・
   ランタイム 500 をそのまま反映 = 真実を映す監査)。
@@ -67,7 +88,7 @@ Cell content: ≤ 10 words each.
 ## File Boundary
 
 - 読み取り専用 (本番 URL・R2 公開 URL・state JSON の read のみ)。
-- 書き込みは自分の成果物のみ: 生成 HTML (`/tmp/`) と `.claude/state/ogp/inventory.json` (`--audit` 時)。
+- 書き込みは自分の成果物のみ: 生成 HTML (`/tmp/`) と `.claude/state/ogp/inventory.json` (`--audit` 時)、note専用監査の`.claude/state/metrics/note-cover-audit-latest.json`。
 
 ## 自動化との関係
 

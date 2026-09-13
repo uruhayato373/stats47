@@ -77,11 +77,21 @@ function loadMetricMaps() {
 /** TSの純resolverを共有する。写像の正規表現抽出でnullや後続mapを取りこぼさない。 */
 export function loadAffiliateMaps() {
   const runtime = tsxRequire(join(ROOT, "apps/web/src/features/ads/constants/affiliate-category.ts"), import.meta.url);
+  const delivery = tsxRequire(join(ROOT, "apps/web/src/features/ads/constants/affiliate-delivery-policy.ts"), import.meta.url);
+  const { ALL_THEMES } = tsxRequire(join(ROOT, "apps/web/src/features/theme-dashboard/config/all-themes.ts"), import.meta.url);
+  const { AREA_THEMES } = tsxRequire(join(ROOT, "apps/web/src/features/theme-dashboard/config/area-theme-slugs.ts"), import.meta.url);
   return {
     categoryMap: runtime.CATEGORY_AFFILIATE_MAP,
+    categoryPagePolicy: runtime.CATEGORY_PAGE_AFFILIATE_POLICY,
     themeMap: runtime.THEME_AFFILIATE_MAP,
+    municipalityThemeMap: runtime.MUNICIPALITY_THEME_AFFILIATE_MAP,
+    themeContent: Object.fromEntries(ALL_THEMES.map(theme => [theme.themeKey, { tagKeys: theme.relatedArticleTagKeys ?? [] }])),
+    areaThemeKeys: AREA_THEMES.map(theme => theme.themeKey),
     tagMap: runtime.TAG_AFFILIATE_MAP,
     resolveContentVertical: runtime.resolveContentVertical,
+    resolveContentVerticalChain: runtime.resolveContentVerticalChain,
+    adVertical: runtime.adVertical,
+    ...delivery,
   };
 }
 
@@ -118,30 +128,20 @@ export function surveyKeysFromRows(rows) {
 }
 
 /** SSOT から vertical × adType の在庫数を数える。 */
-function loadInventory() {
-  const lines = readFileSync(join(ROOT, "apps/web/scripts/affiliate-ads-data.ts"), "utf8").split("\n");
-  const starts = [];
-  lines.forEach((l, i) => {
-    if (l.includes('"id":') && l.includes('"af_')) starts.push(i);
-  });
+export function loadInventory(maps = loadAffiliateMaps(), today) {
+  const { AFFILIATE_ADS } = tsxRequire(join(ROOT, "apps/web/scripts/affiliate-ads-data.ts"), import.meta.url);
+  const ads = AFFILIATE_ADS.filter(ad => maps.isAffiliateActive(ad, today));
   const total = {};
   const banner = {};
   const text = {};
-  starts.forEach((s, idx) => {
-    const end = idx + 1 < starts.length ? starts[idx + 1] : lines.length;
-    const b = lines.slice(s, end);
-    const v = (k) => {
-      const l = b.find((x) => x.includes(`"${k}":`));
-      return l ? l.split(":").slice(1).join(":").trim().replace(/,$/, "").replace(/^"|"$/g, "") : null;
-    };
-    if (v("isActive") !== "true") return;
-    const vert = v("vertical");
-    if (!vert) return;
+  for (const ad of ads) {
+    const vert = maps.adVertical(ad);
+    if (!vert) continue;
     total[vert] = (total[vert] ?? 0) + 1;
-    if (v("adType") === "text") text[vert] = (text[vert] ?? 0) + 1;
+    if (ad.adType === "text") text[vert] = (text[vert] ?? 0) + 1;
     else banner[vert] = (banner[vert] ?? 0) + 1;
-  });
-  return { total, banner, text };
+  }
+  return { ads, total, banner, text, countsAre: "active creative records, not per-page eligible programs", activeCreatives: ads.length, uniqueDestinations: maps.uniqueAffiliateDestinations(ads).length };
 }
 
 /** 明示ローカルsnapshot、無指定なら公開R2。取得不能はsource/errorに残す。 */
@@ -186,7 +186,7 @@ async function main() {
 
   const { keyToCategory, keyTitles } = loadMetricMaps();
   const affiliateMaps = loadAffiliateMaps();
-  const inventory = loadInventory();
+  const { ads: inventoryAds, ...inventory } = loadInventory(affiliateMaps);
   const r2Dir = argAfter("--r2-dir");
   const localPath = key => r2Dir ? join(r2Dir, key) : null;
   const surveyKeys = surveyKeysFromRows(rows);
@@ -206,7 +206,7 @@ async function main() {
     surveyItems: Object.fromEntries(surveys.filter(row => Array.isArray(row.data?.items)).map(row => [row.key, row.data.items])),
   };
 
-  const demand = core.aggregateDemand(rows, maps);
+  const demand = core.aggregateDemand(rows, maps, inventoryAds);
   const gap = core.buildGapReport({
     byVertical: demand.byVertical,
     unmapped: demand.unmapped,
@@ -229,7 +229,7 @@ async function main() {
       sharedProgramIds,
       minEpc: 50,
       // blocklist (アダルト・テスト用プログラム等) を候補から外す。判定は scout と同じ実装を使う。
-      isExcluded: (e) => scoutCore.isBlocked(e, curated),
+      isExcluded: (e) => scoutCore.isBlocked(e, curated) || affiliateMaps.isAffiliateDeliveryHeld({ id: "", programRef: `a8:${e.programId}` }),
     })
     .slice(0, 20)
     .map((c) => ({ ...c, suggestedRankingKeys: core.suggestTargetRankingKeys(c.name, keyTitles, { limit: 3 }) }));
@@ -237,7 +237,7 @@ async function main() {
   const out = {
     generatedAt: new Date().toISOString(),
     gscWeek: week,
-    measurement: { source: "GSC pages", impressions: "search-result impressions", clicks: "organic-search clicks", actualAdImpressions: false, attribution: "content intent before inventory fallback; not actual served ads or revenue" },
+    measurement: { source: "GSC pages", impressions: "search-result impressions", clicks: "organic-search clicks", actualAdImpressions: false, attribution: "intent and eligible resolver pools are separate; neither is actual served ads or revenue", candidateExclusions: "slot limits/layout, manual article ads, Rakuten R2, house ads, experiment variants and live R2 availability are not modeled" },
     inputs: {
       pages: rows.length,
       rankingKeys: Object.keys(keyToCategory).length,
@@ -250,10 +250,12 @@ async function main() {
       surveys: surveys.map(({ key, source, error, data }) => ({ key, source, items: data?.items?.length ?? null, ...(error ? { error } : {}) })),
     },
     demand: {
+      denominator: demand.denominator,
       byType: demand.byType,
       byVertical: demand.byVertical,
       byTypeVertical: demand.byTypeVertical.sort((a, b) => b.imp - a.imp),
     },
+    pages: demand.pages,
     supply: inventory,
     gaps: gap.gaps,
     unmapped: { totalImp: gap.unmappedImp, byReason: gap.unmappedByReason, top: demand.unmapped.slice(0, 30) },

@@ -1,0 +1,94 @@
+{
+  "date": "2026-09-11",
+  "fetched_at": "2026-09-12T19:35:10.383Z",
+  "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
+  "d1": {
+    "readQueries": 0,
+    "writeQueries": 0,
+    "rowsRead": 0,
+    "rowsWritten": 0,
+    "databases": []
+  },
+  "workers": {
+    "totalRequests": 122768,
+    "totalErrors": 142,
+    "totalSubrequests": 1021,
+    "byScript": {
+      "stats47": {
+        "requests": 121741,
+        "errors": 142,
+        "subrequests": 1021,
+        "cpu_p50_us": 13335,
+        "cpu_p99_us": 2419358,
+        "wall_p50_us": 454563,
+        "wall_p99_us": 5933249
+      },
+      "__unknown__": {
+        "requests": 1027,
+        "errors": 0,
+        "subrequests": 0,
+        "cpu_p50_us": 590,
+        "cpu_p99_us": 1510,
+        "wall_p50_us": 695211,
+        "wall_p99_us": 2114615
+      }
+    }
+  },
+  "r2_operations": {
+    "classA": 10065,
+    "classB": 336374,
+    "otherOps": 1472,
+    "totalEgressBytes": 63785702583,
+    "byBucket": {
+      "doboku-note-archive": {
+        "classA": 352,
+        "classB": 920,
+        "other": 0,
+        "egressBytes": 393629695
+      },
+      "stats47": {
+        "classA": 9713,
+        "classB": 330520,
+        "other": 1472,
+        "egressBytes": 63284388021
+      },
+      "doboku-note": {
+        "classA": 0,
+        "classB": 4934,
+        "other": 0,
+        "egressBytes": 107684867
+      }
+    }
+  },
+  "r2_storage": {
+    "totalBytes": 29851650699,
+    "totalObjects": 82632,
+    "byBucket": {
+      "stats47-private": {
+        "bytes": 30225351,
+        "objects": 631,
+        "uploads": 0
+      },
+      "stats47": {
+        "bytes": 21880243639,
+        "objects": 68593,
+        "uploads": 0
+      },
+      "doboku-note": {
+        "bytes": 883782644,
+        "objects": 10629,
+        "uploads": 0
+      },
+      "stats47-cache": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      },
+      "doboku-note-archive": {
+        "bytes": 7057399065,
+        "objects": 2779,
+        "uploads": 0
+      }
+    }
+  }
+}

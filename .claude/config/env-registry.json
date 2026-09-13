@@ -59,6 +59,13 @@
       ]
     },
     {
+      "name": "BROWSER_USE_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CATALOG_INDEX",
       "visibility": "server",
       "contexts": [
@@ -224,14 +231,14 @@
       ]
     },
     {
-      "name": "DRY_RUN",
+      "name": "DRAFT_DELETE_PATHS",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "DRAFT_DELETE_PATHS",
+      "name": "DRY_RUN",
       "visibility": "server",
       "contexts": [
         "process"
@@ -246,6 +253,13 @@
     },
     {
       "name": "ESTAT_APP_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPANSION_QUEUE_NOW",
       "visibility": "server",
       "contexts": [
         "process"
@@ -267,13 +281,6 @@
     },
     {
       "name": "EXPECTED_TITLE",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "EXPANSION_QUEUE_NOW",
       "visibility": "server",
       "contexts": [
         "process"
@@ -774,14 +781,14 @@
       ]
     },
     {
-      "name": "NO_PROXY",
+      "name": "NOTE_KEY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "NOTE_KEY",
+      "name": "NO_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -803,13 +810,6 @@
     },
     {
       "name": "PATH",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "PUBLISHED_DELETE_PATHS",
       "visibility": "server",
       "contexts": [
         "process"
@@ -842,6 +842,13 @@
       "contexts": [
         "process",
         "secret"
+      ]
+    },
+    {
+      "name": "PUBLISHED_DELETE_PATHS",
+      "visibility": "server",
+      "contexts": [
+        "process"
       ]
     },
     {
@@ -937,6 +944,13 @@
     },
     {
       "name": "RANKING_KEYS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "REFRESH_METRIC",
       "visibility": "server",
       "contexts": [
         "process"

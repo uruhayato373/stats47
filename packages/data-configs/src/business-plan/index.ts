@@ -2,6 +2,8 @@ export * from './types';
 export * from './content-opportunities';
 export * from './m1';
 export * from './geo-routes';
+export * from './geo-layers';
+export * from './geo-source-pages';
 export * from './geo-content-lifecycle';
 export * from './catalog';
 export * from './geo-analyses';

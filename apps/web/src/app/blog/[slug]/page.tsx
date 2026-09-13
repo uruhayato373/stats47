@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -22,7 +24,8 @@ import {
     OperatorProfileCard,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
-import { RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
+import { resolveBlogRakutenPlacement } from "@/features/ads/constants/blog-rakuten-placement";
+import { FurusatoNozeiCard, RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
@@ -166,6 +169,11 @@ export default async function BlogPostPage({ params }: PageProps) {
     // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
     const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const affiliateVertical = resolveContentVertical(affiliateInput).vertical;
+    const rakutenPlacement = resolveBlogRakutenPlacement({
+        title: article.title,
+        subtitle: article.frontmatter.subtitle,
+        vertical: affiliateVertical,
+    });
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
 
@@ -235,7 +243,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* 記事の主題が品目のとき楽天市場の商品を出す (公開 430 記事中 131 件が該当)。
                 品目を検出できない記事では何も描画しない。 */}
-            <RakutenItemsCard sourceText={article.title} position="blog-sidebar" />
 
             {/* 個別記事では本文後へ積まれるモバイルを長くしないため、追加探索カードは右レールだけに置く。 */}
             <div className="hidden lg:contents">
@@ -362,6 +369,19 @@ export default async function BlogPostPage({ params }: PageProps) {
                             />
 
                             <BlogProductCta blogSlug={slug} />
+
+                            {/* PC・モバイル共通の読了導線。右レールとの重複は作らない。 */}
+                            {rakutenPlacement && (
+                                <div className="mt-8">
+                                    <Suspense fallback={null}>
+                                        {rakutenPlacement.kind === "furusato" ? (
+                                            <FurusatoNozeiCard areaCode={rakutenPlacement.areaCode} position="blog-furusato-content" layout="content" />
+                                        ) : (
+                                            <RakutenItemsCard sourceText={rakutenPlacement.sourceText} position="blog-rakuten-content" layout="content" />
+                                        )}
+                                    </Suspense>
+                                </div>
+                            )}
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">

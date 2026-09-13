@@ -1,0 +1,417 @@
+{
+  "checkedAt": "2026-09-09T06:02:02.900Z",
+  "rendererHash": "54828189ba45f2daaec249947c33e0b84f3b0291ed1a4bace12972e897a62067",
+  "datasets": 50,
+  "images": 100,
+  "totalBytes": 1041648,
+  "browserWidths": [
+    320,
+    390,
+    768,
+    1280,
+    1440
+  ],
+  "items": [
+    {
+      "id": "G04-a",
+      "bytes": 21982,
+      "coloredPixels": [
+        15150,
+        41868
+      ]
+    },
+    {
+      "id": "L01",
+      "bytes": 51082,
+      "coloredPixels": [
+        15586,
+        41653
+      ]
+    },
+    {
+      "id": "L02",
+      "bytes": 54306,
+      "coloredPixels": [
+        13867,
+        38160
+      ]
+    },
+    {
+      "id": "L03-a",
+      "bytes": 44104,
+      "coloredPixels": [
+        42042,
+        111980
+      ]
+    },
+    {
+      "id": "W09",
+      "bytes": 10080,
+      "coloredPixels": [
+        7334,
+        12445
+      ]
+    },
+    {
+      "id": "A16",
+      "bytes": 31888,
+      "coloredPixels": [
+        16247,
+        37948
+      ]
+    },
+    {
+      "id": "A17",
+      "bytes": 7330,
+      "coloredPixels": [
+        2657,
+        15443
+      ]
+    },
+    {
+      "id": "A22",
+      "bytes": 9376,
+      "coloredPixels": [
+        25450,
+        44075
+      ]
+    },
+    {
+      "id": "A38",
+      "bytes": 18622,
+      "coloredPixels": [
+        13127,
+        80531
+      ]
+    },
+    {
+      "id": "N03",
+      "bytes": 25484,
+      "coloredPixels": [
+        13232,
+        80858
+      ]
+    },
+    {
+      "id": "P04",
+      "bytes": 40846,
+      "coloredPixels": [
+        8574,
+        45726
+      ]
+    },
+    {
+      "id": "P05",
+      "bytes": 36298,
+      "coloredPixels": [
+        7094,
+        29255
+      ]
+    },
+    {
+      "id": "P11",
+      "bytes": 43138,
+      "coloredPixels": [
+        9759,
+        52848
+      ]
+    },
+    {
+      "id": "P29",
+      "bytes": 38352,
+      "coloredPixels": [
+        7736,
+        36325
+      ]
+    },
+    {
+      "id": "P36",
+      "bytes": 10138,
+      "coloredPixels": [
+        558,
+        2157
+      ]
+    },
+    {
+      "id": "C28",
+      "bytes": 5628,
+      "coloredPixels": [
+        242,
+        1473
+      ]
+    },
+    {
+      "id": "N02",
+      "bytes": 40674,
+      "coloredPixels": [
+        12715,
+        27957
+      ]
+    },
+    {
+      "id": "N07",
+      "bytes": 44648,
+      "coloredPixels": [
+        10466,
+        53811
+      ]
+    },
+    {
+      "id": "S12",
+      "bytes": 28126,
+      "coloredPixels": [
+        2911,
+        8259
+      ]
+    },
+    {
+      "id": "mesh1000r6",
+      "bytes": 17828,
+      "coloredPixels": [
+        11281,
+        66765
+      ]
+    },
+    {
+      "id": "A03",
+      "bytes": 11198,
+      "coloredPixels": [
+        24574,
+        42546
+      ]
+    },
+    {
+      "id": "A09",
+      "bytes": 29776,
+      "coloredPixels": [
+        10546,
+        64142
+      ]
+    },
+    {
+      "id": "A18",
+      "bytes": 12800,
+      "coloredPixels": [
+        18641,
+        35205
+      ]
+    },
+    {
+      "id": "A19",
+      "bytes": 4278,
+      "coloredPixels": [
+        15089,
+        26186
+      ]
+    },
+    {
+      "id": "A23",
+      "bytes": 18172,
+      "coloredPixels": [
+        15543,
+        26218
+      ]
+    },
+    {
+      "id": "A24",
+      "bytes": 6574,
+      "coloredPixels": [
+        28408,
+        49342
+      ]
+    },
+    {
+      "id": "A25",
+      "bytes": 7480,
+      "coloredPixels": [
+        2914,
+        17045
+      ]
+    },
+    {
+      "id": "A30a5",
+      "bytes": 8356,
+      "coloredPixels": [
+        10187,
+        18371
+      ]
+    },
+    {
+      "id": "A31a",
+      "bytes": 4752,
+      "coloredPixels": [
+        565,
+        1016
+      ]
+    },
+    {
+      "id": "A42",
+      "bytes": 9272,
+      "coloredPixels": [
+        2320,
+        3647
+      ]
+    },
+    {
+      "id": "A43",
+      "bytes": 3482,
+      "coloredPixels": [
+        1146,
+        1933
+      ]
+    },
+    {
+      "id": "A44",
+      "bytes": 4666,
+      "coloredPixels": [
+        12452,
+        21503
+      ]
+    },
+    {
+      "id": "A45",
+      "bytes": 4996,
+      "coloredPixels": [
+        3834,
+        7225
+      ]
+    },
+    {
+      "id": "A51",
+      "bytes": 5242,
+      "coloredPixels": [
+        2238,
+        3557
+      ]
+    },
+    {
+      "id": "A52",
+      "bytes": 11600,
+      "coloredPixels": [
+        1164,
+        4385
+      ]
+    },
+    {
+      "id": "A53",
+      "bytes": 16290,
+      "coloredPixels": [
+        17677,
+        29995
+      ]
+    },
+    {
+      "id": "A54",
+      "bytes": 11834,
+      "coloredPixels": [
+        3402,
+        7049
+      ]
+    },
+    {
+      "id": "A55",
+      "bytes": 15032,
+      "coloredPixels": [
+        31235,
+        53612
+      ]
+    },
+    {
+      "id": "G04-c",
+      "bytes": 18624,
+      "coloredPixels": [
+        15441,
+        42827
+      ]
+    },
+    {
+      "id": "G04-d",
+      "bytes": 25096,
+      "coloredPixels": [
+        38467,
+        68630
+      ]
+    },
+    {
+      "id": "G08",
+      "bytes": 28392,
+      "coloredPixels": [
+        13745,
+        22223
+      ]
+    },
+    {
+      "id": "L03-b",
+      "bytes": 16728,
+      "coloredPixels": [
+        31678,
+        56554
+      ]
+    },
+    {
+      "id": "L03-b-c",
+      "bytes": 36798,
+      "coloredPixels": [
+        20709,
+        132884
+      ]
+    },
+    {
+      "id": "L03-b-u",
+      "bytes": 22680,
+      "coloredPixels": [
+        15365,
+        54398
+      ]
+    },
+    {
+      "id": "N08",
+      "bytes": 5910,
+      "coloredPixels": [
+        460,
+        1648
+      ]
+    },
+    {
+      "id": "S05-d",
+      "bytes": 8802,
+      "coloredPixels": [
+        3117,
+        5561
+      ]
+    },
+    {
+      "id": "S10a",
+      "bytes": 43158,
+      "coloredPixels": [
+        15181,
+        41160
+      ]
+    },
+    {
+      "id": "m250r6",
+      "bytes": 29508,
+      "coloredPixels": [
+        9283,
+        55635
+      ]
+    },
+    {
+      "id": "m500r6",
+      "bytes": 24872,
+      "coloredPixels": [
+        10268,
+        60638
+      ]
+    },
+    {
+      "id": "A31b",
+      "bytes": 15350,
+      "coloredPixels": [
+        2254,
+        7995
+      ]
+    }
+  ],
+  "productionVerified": false
+}

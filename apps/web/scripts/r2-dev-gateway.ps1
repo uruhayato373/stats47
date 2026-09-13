@@ -61,10 +61,7 @@ $client.Timeout = [TimeSpan]::FromSeconds(60)
 #
 # 安全側の制約: 200 応答だけ / Range・条件付きリクエストは対象外 / サイズと件数に上限。
 # ---------------------------------------------------------------------------
-$cacheStore = [System.Collections.Generic.Dictionary[string, object]]::new()
-$cacheOrder = [System.Collections.Generic.Queue[string]]::new()
-$maxCacheBytes = 8MB
-$maxCacheEntries = 2000
+. (Join-Path $PSScriptRoot 'r2-dev-cache.ps1')
 
 function Test-Cacheable {
   param([System.Net.HttpListenerRequest]$Request)
@@ -79,31 +76,6 @@ function Test-Cacheable {
   $cc = $Request.Headers["Cache-Control"]
   if ($cc -and $cc -match "no-cache|no-store") { return $false }
   return $true
-}
-
-function Add-CacheEntry {
-  param([string]$Key, [object]$Entry)
-
-  if ($cacheStore.ContainsKey($Key)) { return }
-  $cacheStore[$Key] = $Entry
-  $cacheOrder.Enqueue($Key)
-  # 件数上限を超えたら古いものから落とす (dev 用なので厳密な LRU にはしない)。
-  while ($cacheOrder.Count -gt $maxCacheEntries) {
-    $evict = $cacheOrder.Dequeue()
-    [void]$cacheStore.Remove($evict)
-  }
-}
-
-function Get-CacheEntry {
-  param([string]$Key)
-
-  $entry = $null
-  if (-not $cacheStore.TryGetValue($Key, [ref]$entry)) { return $null }
-  if ([DateTime]::UtcNow -ge $entry.ExpiresAt) {
-    [void]$cacheStore.Remove($Key)
-    return $null
-  }
-  return $entry
 }
 
 function Write-TextResponse {
@@ -123,7 +95,23 @@ function Write-TextResponse {
 function Resolve-LocalOverrideFile {
   param([string]$Key)
 
-  if ($localR2Base -and $Key.StartsWith("app/municipalities/", [StringComparison]::Ordinal)) {
+  if ($localR2Base -and (
+      $Key.StartsWith("app/municipalities/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("app/geo/layers/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("app/geo/datasets/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A31b/25/display/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A03/03/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A30a5/11/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/P04/20/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/C28/07/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/N08/21/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A38/20/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A42/18/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A43/18/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/A44/18/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/W09/05/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/L01/26/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("gis/mlit-ksj/L02/25/", [StringComparison]::Ordinal))) {
     $r2RelativePath = $Key.Replace(
       [IO.Path]::AltDirectorySeparatorChar,
       [IO.Path]::DirectorySeparatorChar
@@ -160,15 +148,17 @@ function Write-LocalFileResponse {
     [string]$FilePath
   )
 
-  $bytes = [IO.File]::ReadAllBytes($FilePath)
+  $file = [IO.File]::OpenRead($FilePath)
+  try {
   $Response.StatusCode = 200
   $Response.ContentType = "application/json; charset=utf-8"
   $Response.Headers["Cache-Control"] = "no-store"
   $Response.Headers["X-R2-Dev-Source"] = "local-override"
-  $Response.ContentLength64 = $bytes.Length
+  $Response.ContentLength64 = $file.Length
   if ($Request.HttpMethod -eq "GET") {
-    $Response.OutputStream.Write($bytes, 0, $bytes.Length)
+    $file.CopyTo($Response.OutputStream)
   }
+  } finally { $file.Dispose() }
 }
 
 function Copy-ResponseHeader {
@@ -188,14 +178,16 @@ function Copy-ResponseHeader {
 $listener.Start()
 Write-Host "[r2-dev-gateway] listening on http://127.0.0.1:$Port"
 if ($CacheSeconds -gt 0) {
-  Write-Host "[r2-dev-gateway] GET cache: ${CacheSeconds}s TTL / max $($maxCacheEntries) entries / max $($maxCacheBytes) bytes each"
+  Write-Host "[r2-dev-gateway] GET cache: ${CacheSeconds}s TTL / max $($maxCacheEntries) entries / max $($maxCacheBytes) bytes each / total $($maxTotalCacheBytes) bytes"
 } else {
   Write-Host "[r2-dev-gateway] GET cache: disabled"
 }
 
 try {
   while ($listener.IsListening) {
-    $context = $listener.GetContext()
+    $pendingContext = $listener.GetContextAsync()
+    while (-not $pendingContext.Wait(1000)) { Remove-ExpiredCacheEntries }
+    $context = $pendingContext.GetAwaiter().GetResult()
     $request = $context.Request
     $response = $context.Response
     $remoteRequest = $null
@@ -280,7 +272,7 @@ try {
       $storeBytes = $null
       if ($cacheable -and [int]$remoteResponse.StatusCode -eq 200) {
         $declaredLength = $remoteResponse.Content.Headers.ContentLength
-        if ($null -eq $declaredLength -or $declaredLength -le $maxCacheBytes) {
+        if ($null -ne $declaredLength -and $declaredLength -le $maxCacheBytes) {
           $storeBytes = $remoteResponse.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult()
           if ($storeBytes.Length -gt $maxCacheBytes) { $storeBytes = $null }
         }
@@ -307,10 +299,17 @@ try {
       }
     }
     catch {
-      if ($response.OutputStream.CanWrite) {
-        Write-TextResponse -Response $response -StatusCode 502 -Text "R2 gateway error"
+      $requestFailure = $_.Exception.Message
+      try {
+        if ($response.OutputStream.CanWrite) {
+          Write-TextResponse -Response $response -StatusCode 502 -Text "R2 gateway error"
+        }
       }
-      Write-Warning "[r2-dev-gateway] $($_.Exception.Message)"
+      catch {
+        # A disconnected client may have received headers already. Keep serving other requests.
+        $response.Abort()
+      }
+      Write-Warning "[r2-dev-gateway] $requestFailure"
     }
     finally {
       if ($null -ne $remoteResponse) {
@@ -319,7 +318,7 @@ try {
       if ($null -ne $remoteRequest) {
         $remoteRequest.Dispose()
       }
-      $response.OutputStream.Close()
+      try { $response.OutputStream.Close() } catch { $response.Abort() }
     }
   }
 }

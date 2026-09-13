@@ -29,6 +29,9 @@ export interface RakutenSnapshotItem {
   image: string | null;
   reviewCount: number;
   reviewAverage: number;
+  /** Optional for legacy snapshots until all catalogs include verified metadata and old caches expire. */
+  shopName?: string;
+  genreId?: string;
 }
 
 export interface RakutenSnapshot {
@@ -66,6 +69,8 @@ export function parseRakutenSnapshot(value: unknown): RakutenSnapshot {
       image: item.image,
       reviewCount: item.reviewCount as number,
       reviewAverage: item.reviewAverage as number,
+      ...(typeof item.shopName === "string" ? { shopName: item.shopName } : {}),
+      ...(typeof item.genreId === "string" ? { genreId: item.genreId } : {}),
     };
   });
   return { generatedAt: value.generatedAt, items };
@@ -97,6 +102,8 @@ interface RakutenApiItemLike {
   smallImageUrls: { imageUrl: string }[];
   reviewCount: number;
   reviewAverage: number;
+  shopName?: string;
+  genreId?: string;
 }
 
 /**
@@ -113,6 +120,8 @@ export function toSnapshotItems(items: RakutenApiItemLike[]): RakutenSnapshotIte
     image: it.mediumImageUrls[0]?.imageUrl ?? it.smallImageUrls[0]?.imageUrl ?? null,
     reviewCount: it.reviewCount,
     reviewAverage: it.reviewAverage,
+    ...(it.shopName ? { shopName: it.shopName } : {}),
+    ...(it.genreId ? { genreId: it.genreId } : {}),
   }));
 }
 

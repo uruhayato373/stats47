@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T03:14:14.803Z",
+  "generatedAt": "2026-09-13T03:18:05.591Z",
   "results": [
     {
       "key": "app/rakuten/items/うどん.json",
@@ -7,7 +7,7 @@
       "why": "sync-rakuten-catalog.yml (日次)。古いと商品名・価格が古いまま配信される",
       "generatedAt": "2026-09-11T21:30:14.972Z",
       "error": null,
-      "ageDays": 0.23888693287037038,
+      "ageDays": 1.2415580787037037,
       "status": "fresh"
     },
     {
@@ -16,7 +16,7 @@
       "why": "sync-rakuten-catalog.yml (日次)。ふるさと納税カードの返礼品が古くなる",
       "generatedAt": "2026-09-11T21:30:14.972Z",
       "error": null,
-      "ageDays": 0.23888693287037038,
+      "ageDays": 1.2415580787037037,
       "status": "fresh"
     },
     {
@@ -25,7 +25,7 @@
       "why": "blog-auto-publish.yml (公開のたび)。止まると新規記事が一覧に出ない",
       "generatedAt": "2026-09-07T16:16:55.167Z",
       "error": null,
-      "ageDays": 4.456477268518518,
+      "ageDays": 5.459148414351852,
       "status": "fresh"
     }
   ]

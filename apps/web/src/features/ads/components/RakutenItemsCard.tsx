@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import { detectProductKeyword } from "../constants/product-keywords";
+import { productQualityReasons, selectQualityItems } from "../lib/rakuten-item-quality";
 import { readRakutenItemsFromR2 } from "../repositories/rakuten-snapshot";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
@@ -13,6 +14,7 @@ interface RakutenItemsCardProps {
   sourceText: string;
   /** 計測用の配置ラベル。 */
   position?: string;
+  layout?: "sidebar" | "content";
 }
 
 /**
@@ -26,6 +28,7 @@ interface RakutenItemsCardProps {
 export async function RakutenItemsCard({
   sourceText,
   position = "sidebar",
+  layout = "sidebar",
 }: RakutenItemsCardProps) {
   const keyword = detectProductKeyword(sourceText);
   if (!keyword) return null;
@@ -33,7 +36,10 @@ export async function RakutenItemsCard({
   // ★ R2 snapshot を読む (実行時に楽天 API を叩かない)。日次 cron が焼く。
   //   理由: 楽天の Expected QPS=1 に対し、deploy 後の warm-cache が sitemap 全 URL を
   //   叩くため 646 ページ分がバーストしていた。正典: repositories/rakuten-snapshot.ts
-  const items = await readRakutenItemsFromR2(keyword.searchTerm);
+  const items = selectQualityItems(
+    await readRakutenItemsFromR2(keyword.searchTerm),
+    (item) => productQualityReasons(item, keyword.searchTerm),
+  );
   if (items.length === 0) return null;
 
   // 品目別 CTR を ad_id custom dimension で追えるようにする。
@@ -50,7 +56,7 @@ export async function RakutenItemsCard({
       position={position}
       adId={adId}
     >
-    <div className="rounded-none border border-green-100 bg-green-50/50 p-4">
+    <div className={getSurfaceCardClassName({ className: "p-4" })}>
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground/70">PR</span>
         {/* 検索URLは未発行の通常リンク。商品affiliateUrlと混ぜて成果クリックを数えない。 */}
@@ -59,7 +65,7 @@ export async function RakutenItemsCard({
           aria-label={`${keyword.term}を楽天市場で探す`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-0.5 text-[10px] text-green-600 hover:underline"
+          className="flex items-center gap-0.5 text-xs text-primary hover:underline"
         >
           楽天市場で探す
           <ExternalLink size={10} />
@@ -70,7 +76,7 @@ export async function RakutenItemsCard({
         {keyword.term}の人気商品
       </p>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className={layout === "content" ? "grid grid-cols-2 gap-3 sm:grid-cols-4" : "grid grid-cols-2 gap-2"}>
         {items.map((item) => (
           <TrackedAffiliateLink
             key={item.url}
@@ -90,7 +96,7 @@ export async function RakutenItemsCard({
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                   loading="lazy"
                 />
               </div>
@@ -99,13 +105,14 @@ export async function RakutenItemsCard({
               <p className="line-clamp-2 text-[11px] leading-tight text-foreground">
                 {item.name}
               </p>
-              <p className="mt-1 text-[11px] font-bold text-green-600">
-                {item.price.toLocaleString()}円
+              <p className="mt-1 text-xs font-bold text-primary">
+                {item.price.toLocaleString("ja-JP")}円
               </p>
             </div>
           </TrackedAffiliateLink>
         ))}
       </div>
+      <p className="mt-3 text-xs text-muted-foreground">価格・在庫・送料は楽天市場の商品ページでご確認ください。</p>
     </div>
     </AdImpressionTracker>
   );

@@ -141,7 +141,7 @@ export default async function HomePage() {
         <SidebarPromoBanner index={0} />
       </div>
       <div className="mt-4">
-        <SidebarStickyBannerAd position="home-left-rail" />
+        <SidebarStickyBannerAd position="home-left-rail" excludeAds={homeNativeBanners} />
       </div>
     </aside>
   );

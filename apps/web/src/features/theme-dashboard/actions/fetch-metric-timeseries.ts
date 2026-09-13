@@ -1,23 +1,24 @@
-"use server";
+'use server';
 
-import {
-  readRankingItemFromR2,
-} from "@stats47/ranking/server";
-import { readStatsValues } from "@stats47/stats-r2/readers";
-import { isOk } from "@stats47/types";
+import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
+import { readRankingItemFromR2 } from '@stats47/ranking/server';
+import { readStatsValues } from '@stats47/stats-r2/readers';
+import { isOk } from '@stats47/types';
 
 import {
   aggregateMetricTimeseries,
   EMPTY_TIMESERIES as EMPTY_RESULT,
   type MetricTimeseriesResult,
   type TimeseriesSourceRow,
-} from "../lib/aggregate-metric-timeseries";
+} from '../lib/aggregate-metric-timeseries';
+import { themeYearLabel } from '../lib/theme-year-label';
+
 
 export type {
   MetricTimeseriesPoint,
   MetricTimeseriesResult,
   MetricTimeseriesSource,
-} from "../lib/aggregate-metric-timeseries";
+} from '../lib/aggregate-metric-timeseries';
 
 /**
  * 指標の時系列データを取得する Server Action
@@ -29,9 +30,9 @@ export type {
 
 export async function fetchMetricTimeseriesAction(
   rankingKey: string,
-  areaCode: string,
+  areaCode: string
 ): Promise<MetricTimeseriesResult> {
-  const result = await readRankingItemFromR2(rankingKey, "prefecture");
+  const result = await readRankingItemFromR2(rankingKey, 'prefecture');
   if (!result || !isOk(result) || !result.data) return EMPTY_RESULT;
 
   /**
@@ -41,10 +42,18 @@ export async function fetchMetricTimeseriesAction(
    */
   try {
     const rawData: TimeseriesSourceRow[] =
-      (await readStatsValues(rankingKey, "prefecture"))?.rows ?? [];
+      (await readStatsValues(rankingKey, 'prefecture'))?.rows ?? [];
     if (!rawData || rawData.length === 0) return EMPTY_RESULT;
 
-    return aggregateMetricTimeseries(rawData, areaCode);
+    const aggregated = aggregateMetricTimeseries(rawData, areaCode);
+    const yearFormat = METRICS_REGISTRY[rankingKey]?.yearFormat;
+    return {
+      ...aggregated,
+      points: aggregated.points.map((point) => ({
+        ...point,
+        yearName: themeYearLabel(point.year, point.yearName, yearFormat),
+      })),
+    };
   } catch {
     return EMPTY_RESULT;
   }

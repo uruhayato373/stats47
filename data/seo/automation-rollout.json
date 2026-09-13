@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-12T15:11:45.359Z",
+  "status": "active",
+  "activationPr": "https://github.com/uruhayato373/stats47/pull/960",
+  "definitionCommit": "a646aa98139deacee4a5604e8630fe319ed4b03b",
+  "executionRef": "develop",
+  "verifiedRuntimeCommit": "16fa8e7049795ca368850e7a3f27e8d197878835",
+  "workflow": {
+    "id": 356553183,
+    "path": ".github/workflows/seo-keyword-cycle-daily.yml",
+    "state": "active",
+    "scheduleJst": "毎日10:15"
+  },
+  "verification": {
+    "keywordTests": 90,
+    "keywordTestsSkipped": 0,
+    "workspaceTypes": "pass",
+    "prQualityRun": "https://github.com/uruhayato373/stats47/actions/runs/34699673700",
+    "firstSuccessfulCycle": "https://github.com/uruhayato373/stats47/actions/runs/34700240984",
+    "pendingProposalReplay": "https://github.com/uruhayato373/stats47/actions/runs/34700885540",
+    "pendingProposalSkippedSecondReview": true
+  },
+  "initialFailure": {
+    "run": "https://github.com/uruhayato373/stats47/actions/runs/34699063054",
+    "adopted": false,
+    "reasons": [
+      "WebFetchの403が読取実績に混入した。HTTP 200の公開HTMLを独立取得し、本文hashと読取記録を照合する方式へ修正。",
+      "main未登録のworkflowを含む新規branch pushがGitHub Appに拒否された。main反映前は計測のみとし、反映後のPR作成成功を実測。"
+    ]
+  },
+  "pilot": {
+    "keyword": "40代 未婚 割合 日本 国勢調査",
+    "targetPath": "/survey/census",
+    "selectionRank": 4.385786802030457,
+    "selectionImpressions": 591,
+    "pr": "https://github.com/uruhayato373/stats47/pull/961",
+    "headCommit": "2f48116a094aa5a9daedc0a9cceb34d733cf6798",
+    "status": "draft-ready",
+    "change": "国勢調査の既存未婚率導線を30代前半男性から40〜44歳男性へ差替。質問とrankingKeyを同時に更新。",
+    "validation": {
+      "surveyTests": 16,
+      "workspaceTypes": "pass",
+      "fullBuild": "pass",
+      "localHttp": 200,
+      "publicDestinationHttp": 200,
+      "canonicalMaintained": true
+    },
+    "published": false,
+    "nextReviewDate": null
+  },
+  "observing": [],
+  "verdicts": [],
+  "siteDeployment": {
+    "requiredForAutomation": false,
+    "cancelledRun": 34700199060,
+    "productionDeployStep": "skipped",
+    "reason": "アプリソースと依存関係の差分0を検証。初回改善は別のdraft PRで未公開。"
+  },
+  "evidenceDirectory": ".local/verification/seo/2026-09-12-seven-day-loop/"
+}

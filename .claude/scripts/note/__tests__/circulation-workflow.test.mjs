@@ -29,12 +29,15 @@ test("catalog, unit and live audits feed one strict status", () => {
   assert.equal(audit.id, "audit");
   assert.match(audit.run, /npm run note:catalog:validate/);
   assert.match(audit.run, /npm run note:circulation:test/);
+  assert.match(audit.run, /npm run note:covers:test/);
+  assert.match(audit.run, /npm run note:covers:audit[^\n]*\n\s*\[ "\$\{PIPESTATUS\[0\]\}" -eq 0 \] \|\| STATUS=1/);
   assert.match(audit.run, /npm run note:circulation:audit/);
   assert.match(audit.run, /summary\.compliantHashtags !== summary\.total/);
   assert.match(audit.run, /summary\.exactMagazineMemberships !== summary\.liveMagazines/);
   assert.match(audit.run, /summary\.pinnedArticles !== 1/);
   assert.match(audit.run, /summary\.profiledArticles !== 1/);
   assert.match(audit.run, /exit_code=\$STATUS/);
+  assert.match(step("📤 Upload audit report").with.path, /note-cover-audit-latest\.json/);
 });
 
 test("failure updates one alert, recovery closes it, and final step propagates red", () => {

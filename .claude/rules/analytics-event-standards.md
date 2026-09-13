@@ -122,11 +122,16 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > **affiliate の配置値・クリック定義変更 (2026-09-08・実装準備、未デプロイ)**:
 > `RakutenItemsCard` の商品クリックはカード impression と同じ `link_position` を送り、
 > `FurusatoNozeiCard` の商品クリックも `sidebar-item` から `sidebar` へ揃える。
+> 本文に置く楽天カードは `area-furusato-content` / `city-furusato-content` /
+> `blog-furusato-content` / `blog-rakuten-content` を使い、同じカードの表示とクリックを一致させる。
+> ブログ右レールの商品カードは本文読了後へ移設し、二重表示・二重impressionを作らない。
 > 家計調査の ranking で広告意図が `null` でない場合、関連ランキング直後へ移す既存商品カードは
 > `rakuten-sidebar` を使う。その他の ranking 商品カードは `ranking-sidebar` を維持する。
 > 登録済み `link_position` / `ad_id` / `affiliate_vertical` を再利用し、新しい custom dimension は無い。
 > 楽天市場の通常検索リンクは `affiliate_click` の対象から外し、商品リンクのクリックだけを数える。
-> impression は引き続きカード単位・50%表示×1秒。旧 `*-item` と親配置の分離および検索クリック除外で
+> impression はカード単位で、表示中タブで50%以上を連続1秒満たした場合だけ送る。
+> 50%未満・退出・タブ非表示では待機を破棄し、再表示時に1秒を取り直す。
+> 旧実装は交差率未確認のため過大計上し得た。今回の厳密化、旧 `*-item` と親配置の分離、検索クリック除外で
 > CTR の定義が変わるため、デプロイ境界をまたぐ配置別CTRを単純比較しない。
 > 公開後は日付を固定した非重複期間で `pagePath × deviceCategory × ad_id × link_position` とPVを取得する。
 

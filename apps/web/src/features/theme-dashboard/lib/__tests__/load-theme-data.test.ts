@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const { readItem, readValues } = vi.hoisted(() => ({ readItem: vi.fn(), readValues: vi.fn() }));
 vi.mock('server-only', () => ({}));
+vi.mock('@stats47/data-configs/registry', () => ({ METRICS_REGISTRY: { value: { yearFormat: 'calendar' } } }));
 vi.mock('@stats47/ranking/server', () => ({
   readRankingItemFromR2: readItem,
   readAllYearsRankingValuesFromR2: readValues,
@@ -35,4 +36,17 @@ describe('テーマの固定比較年', () => {
     const result = await loadThemeData(config('existing'));
     expect(result?.indicatorDataMap.value.rankingValues).toEqual([row('2024')]);
   });
+});
+
+
+it('暦年のラベルを最新年・選択肢・県値すべてで揃える', async () => {
+  readItem.mockResolvedValue({ success: true, data: {
+    latestYear: { yearCode: '2024100000', yearName: '2024年度' },
+    availableYears: [{ yearCode: '2024100000', yearName: '2024年度' }],
+  } });
+  readValues.mockResolvedValue({ success: true, data: [{ ...row('2024'), yearName: '2024年度' }] });
+  const data = (await loadThemeData(config('existing')))?.indicatorDataMap.value;
+  expect(data?.rankingItem.latestYear?.yearName).toBe('2024年');
+  expect(data?.availableYears?.[0].yearName).toBe('2024年');
+  expect(data?.rankingValues[0].yearName).toBe('2024年');
 });

@@ -45,7 +45,7 @@
     "@stats47/logger": "*",
     "@stats47/types": "*",
     "server-only": "^0.0.1",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.4"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^5.20260825.1",

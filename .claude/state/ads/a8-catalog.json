@@ -35,7 +35,16 @@
       "rewardYen": 30076,
       "epcYen": 890,
       "confirmRatePct": 30.39,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:03:59.504Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000023687001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000023687001.txt"
+      }
     },
     "s00000014289002": {
       "programId": "s00000014289002",
@@ -71,7 +80,16 @@
       "rewardYen": 12000,
       "epcYen": 707,
       "confirmRatePct": 95.79,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:02.943Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000014289002",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000014289002.txt"
+      }
     },
     "s00000024182002": {
       "programId": "s00000024182002",
@@ -107,7 +125,16 @@
       "rewardYen": 10000,
       "epcYen": 892,
       "confirmRatePct": 32.45,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:06.385Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000024182002",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000024182002.txt"
+      }
     },
     "s00000020560002": {
       "programId": "s00000020560002",
@@ -143,7 +170,16 @@
       "rewardYen": 7029,
       "epcYen": 1583,
       "confirmRatePct": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:09.918Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000020560002",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000020560002.txt"
+      }
     },
     "s00000009778002": {
       "programId": "s00000009778002",
@@ -179,7 +215,16 @@
       "rewardYen": 9775,
       "epcYen": 160,
       "confirmRatePct": 33.33,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:13.666Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000009778002",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000009778002.txt"
+      }
     },
     "s00000000018037": {
       "programId": "s00000000018037",
@@ -467,7 +512,16 @@
       "rewardYen": 10000,
       "epcYen": 92,
       "confirmRatePct": 90.08,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:17.156Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000013449001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000013449001.txt"
+      }
     },
     "s00000015770001": {
       "programId": "s00000015770001",
@@ -576,7 +630,16 @@
       ],
       "rewardYen": 10000,
       "confirmRatePct": 50,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:20.557Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000010346001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000010346001.txt"
+      }
     },
     "s00000016275010": {
       "programId": "s00000016275010",
@@ -686,7 +749,16 @@
       "rewardYen": 10000,
       "epcYen": 224,
       "confirmRatePct": 29.16,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:23.979Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000023920003",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000023920003.txt"
+      }
     },
     "s00000025720001": {
       "programId": "s00000025720001",
@@ -721,7 +793,16 @@
       ],
       "rewardYen": 8000,
       "confirmRatePct": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:27.786Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000025720001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000025720001.txt"
+      }
     },
     "s00000021488002": {
       "programId": "s00000021488002",
@@ -822,7 +903,16 @@
       "rewardYen": 10000,
       "epcYen": 47,
       "confirmRatePct": 88.23,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:31.234Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000021329001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000021329001.txt"
+      }
     },
     "s00000019026001": {
       "programId": "s00000019026001",
@@ -969,7 +1059,16 @@
       "rewardYen": 20000,
       "epcYen": 16,
       "confirmRatePct": 50,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:34.644Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000017938001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000017938001.txt"
+      }
     },
     "s00000026477001": {
       "programId": "s00000026477001",
@@ -998,7 +1097,16 @@
       "rewardYen": 26000,
       "epcYen": 145,
       "confirmRatePct": 50,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:37.957Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026477001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026477001.txt"
+      }
     },
     "s00000010261001": {
       "programId": "s00000010261001",
@@ -8499,7 +8607,7 @@
       "lastError": {
         "step": "check-approval",
         "error": "session-expired",
-        "at": "2026-09-05T22:00:09.877Z"
+        "at": "2026-09-12T22:00:12.381Z"
       }
     },
     "s00000019877001": {
@@ -8525,7 +8633,16 @@
       "rewardYen": 8000,
       "epcYen": 62,
       "confirmRatePct": 66.66,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:41.274Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000019877001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000019877001.txt"
+      }
     },
     "s00000024191001": {
       "programId": "s00000024191001",
@@ -8607,7 +8724,16 @@
       ],
       "rewardYen": 6400,
       "confirmRatePct": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:44.669Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000027372001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000027372001.txt"
+      }
     },
     "s00000017718022": {
       "programId": "s00000017718022",
@@ -8684,7 +8810,16 @@
         }
       ],
       "rewardYen": 11278,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:48.234Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000010841004",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000010841004.txt"
+      }
     },
     "s00000002404014": {
       "programId": "s00000002404014",
@@ -8747,7 +8882,16 @@
         }
       ],
       "rewardYen": 30000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:51.623Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026977002",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026977002.txt"
+      }
     },
     "s00000026977003": {
       "programId": "s00000026977003",
@@ -8770,7 +8914,16 @@
         }
       ],
       "rewardYen": 30000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:55.068Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026977003",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026977003.txt"
+      }
     },
     "s00000026977001": {
       "programId": "s00000026977001",
@@ -8793,7 +8946,16 @@
         }
       ],
       "rewardYen": 16500,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:04:58.493Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026977001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026977001.txt"
+      }
     },
     "s00000023903002": {
       "programId": "s00000023903002",
@@ -8841,7 +9003,16 @@
       "rewardYen": 5000,
       "epcYen": 206,
       "confirmRatePct": 61.77,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:05:01.871Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000000040014",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000000040014.txt"
+      }
     },
     "s00000024161001": {
       "programId": "s00000024161001",
@@ -9161,7 +9332,16 @@
       "rewardYen": 4490,
       "epcYen": 7,
       "confirmRatePct": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:05:05.368Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000010235003",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000010235003.txt"
+      }
     },
     "s00000000204051": {
       "programId": "s00000000204051",
@@ -9453,7 +9633,16 @@
           "to": "applied",
           "at": "2026-07-28T11:35:50.179Z"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:05:09.084Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000027056001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000027056001.txt"
+      }
     },
     "s00000026729001": {
       "programId": "s00000026729001",
@@ -9479,7 +9668,16 @@
           "to": "applied",
           "at": "2026-07-28T11:35:59.564Z"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:05:12.618Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026729001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026729001.txt"
+      }
     },
     "s00000026422001": {
       "programId": "s00000026422001",
@@ -9505,7 +9703,16 @@
           "to": "applied",
           "at": "2026-07-28T11:36:08.842Z"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:05:16.357Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026422001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026422001.txt"
+      }
     },
     "s00000022438001": {
       "programId": "s00000022438001",
@@ -9531,7 +9738,16 @@
           "to": "applied",
           "at": "2026-07-28T11:36:27.566Z"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:05:19.734Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000022438001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000022438001.txt"
+      }
     },
     "s00000025809001": {
       "programId": "s00000025809001",
@@ -9780,7 +9996,16 @@
           "to": "applied",
           "at": "2026-07-28T11:39:13.536Z"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:10:38.562Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000027432001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000027432001.txt"
+      }
     },
     "s00000027383001": {
       "programId": "s00000027383001",
@@ -9914,7 +10139,16 @@
           "to": "applied",
           "at": "2026-07-28T11:40:46.370Z"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:10:45.227Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000022375001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000022375001.txt"
+      }
     },
     "s00000025188001": {
       "programId": "s00000025188001",
@@ -10107,7 +10341,16 @@
           "to": "applied",
           "at": "2026-07-28T07:35:12.883Z"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:03:52.317Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000014771001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000014771001.txt"
+      }
     },
     "s00000019332001": {
       "programId": "s00000019332001",
@@ -10133,7 +10376,16 @@
           "to": "applied",
           "note": "already-on-a8-no-send"
         }
-      ]
+      ],
+      "lastPartnershipCheck": {
+        "status": "none",
+        "rawStatus": "未提携",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:03:55.956Z",
+        "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000019332001",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000019332001.txt"
+      }
     },
     "s00000025743001": {
       "programId": "s00000025743001",
@@ -10266,7 +10518,176 @@
         "createdAt": null,
         "updatedAt": null
       }
+    },
+    "s00000021701002": {
+      "programId": "s00000021701002",
+      "name": "羽田空港が運営する産地直送通販サイト【羽田産直セレクション】",
+      "genre": "羽田空港が運営する産地直送通販サイト【羽田産直セレクション】",
+      "company": "羽田空港公式通販サイト",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.10400000000000001,
+      "rewardRatePct": 8,
+      "rewardType": "rate",
+      "status": "approved",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-09-08T02:53:21.146Z",
+          "note": "owner-selected-four-programs-2026-09-08; explicitly-approved; food-not-furusato; preserve-original-score",
+          "operationId": "a8-s00000021701002-2026-09-08T02-52-42-796Z",
+          "evidencePath": "C:\\Users\\m004195\\stats47\\.local\\affiliate-ops\\plans\\a8-s00000021701002-2026-09-08T02-52-42-796Z.json"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-09-08T02:53:21.241Z",
+          "note": "application-sent; awaiting-live-confirmation",
+          "operationId": "a8-s00000021701002-2026-09-08T02-52-42-796Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-09-08T02:58:47.637Z",
+          "note": "live-site001-reconciled-approved; unknown-journal-preserved; no-resend",
+          "operationId": "a8-s00000021701002-2026-09-08T02-52-42-796Z",
+          "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T02-53-12-533Z/haneda-reconciliation.json"
+        }
+      ]
+    },
+    "s00000027147001": {
+      "programId": "s00000027147001",
+      "name": "地域特産品やお土産が買える通販サイト【JR西日本公式/WESTERモール】",
+      "genre": "地域特産品やお土産が買える通販サイト【JR西日本公式/WESTERモール】",
+      "company": "西日本旅客鉄道株式会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.2743,
+      "rewardRatePct": 7.35,
+      "epcYen": 51,
+      "confirmRatePct": 100,
+      "rewardType": "rate",
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-09-08T03:04:00.468Z",
+          "note": "owner-selected-four-programs-2026-09-08; explicitly-approved; food-not-furusato; preserve-original-score",
+          "operationId": "a8-s00000027147001-2026-09-08T03-03-35-168Z",
+          "evidencePath": "C:\\Users\\m004195\\stats47\\.local\\affiliate-ops\\plans\\a8-s00000027147001-2026-09-08T03-03-35-168Z.json"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-09-08T03:04:00.507Z",
+          "note": "application-sent; awaiting-live-confirmation",
+          "operationId": "a8-s00000027147001-2026-09-08T03-03-35-168Z"
+        },
+        {
+          "at": "2026-09-08T03:06:37.195Z",
+          "note": "live-site001-reconciled-pending; unknown-journal-preserved; no-resend",
+          "operationId": "a8-s00000027147001-2026-09-08T03-03-35-168Z",
+          "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T03-03-52-925Z/wester-reconciliation.json"
+        }
+      ]
+    },
+    "s00000020875001": {
+      "programId": "s00000020875001",
+      "name": "九州に眠る、まぼろしのグルメ産直サイト。全品送料無料【九州お取り寄せ本舗】",
+      "genre": "九州に眠る、まぼろしのグルメ産直サイト。全品送料無料【九州お取り寄せ本舗】",
+      "company": "九州お取り寄せ本舗",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.22,
+      "rewardRatePct": 15,
+      "confirmRatePct": 40,
+      "rewardType": "rate",
+      "status": "approved",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-09-08T03:07:38.512Z",
+          "note": "owner-selected-four-programs-2026-09-08; explicitly-approved; food-not-furusato; preserve-original-score",
+          "operationId": "a8-s00000020875001-2026-09-08T03-03-39-619Z",
+          "evidencePath": "C:\\Users\\m004195\\stats47\\.local\\affiliate-ops\\plans\\a8-s00000020875001-2026-09-08T03-03-39-619Z.json"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-09-08T03:07:38.578Z",
+          "note": "application-sent; awaiting-live-confirmation",
+          "operationId": "a8-s00000020875001-2026-09-08T03-03-39-619Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-09-08T03:07:46.689Z",
+          "note": "live-site001-detail-partnered",
+          "operationId": "a8-s00000020875001-2026-09-08T03-03-39-619Z",
+          "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T03-07-00-589Z/s00000020875001-confirmed-detail.txt"
+        }
+      ]
+    },
+    "s00000021814001": {
+      "programId": "s00000021814001",
+      "name": "カニ・ほたて・いくらが『送料無料』 でお取り寄せ【北海道ぎょれん】",
+      "genre": "カニ・ほたて・いくらが『送料無料』 でお取り寄せ【北海道ぎょれん】",
+      "company": "ぎょれん販売株式会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.23,
+      "rewardRatePct": 5,
+      "confirmRatePct": 100,
+      "rewardType": "rate",
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-09-08T03:07:59.085Z",
+          "note": "owner-selected-four-programs-2026-09-08; explicitly-approved; food-not-furusato; preserve-original-score",
+          "operationId": "a8-s00000021814001-2026-09-08T03-03-43-761Z",
+          "evidencePath": "C:\\Users\\m004195\\stats47\\.local\\affiliate-ops\\plans\\a8-s00000021814001-2026-09-08T03-03-43-761Z.json"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-09-08T03:07:59.118Z",
+          "note": "application-sent; awaiting-live-confirmation",
+          "operationId": "a8-s00000021814001-2026-09-08T03-03-43-761Z"
+        }
+      ]
+    },
+    "s00000026077001": {
+      "programId": "s00000026077001",
+      "name": "廃車買取専門店【ハイシャル】",
+      "genre": null,
+      "company": null,
+      "vertical": "mobility",
+      "score": null,
+      "status": "approved",
+      "source": "existing-partnership",
+      "history": [
+        {
+          "from": null,
+          "to": "approved",
+          "at": "2026-09-08T04:20:11.037Z",
+          "note": "Account-scoped partnered-list stocktake; not proof of stats47 placement eligibility."
+        }
+      ],
+      "lastPartnershipCheck": {
+        "status": "approved",
+        "rawStatus": "提携中",
+        "scope": "account",
+        "accountId": "a25050375786",
+        "checkedAt": "2026-09-08T04:01:21.750Z",
+        "sourceURL": "https://media-console.a8.net/program/list/partnered?pageNo=1&pageSize=100&sortKey=APPROVED_DATE&sortOrder=DESC",
+        "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/partnered-all.json"
+      }
     }
   },
-  "updatedAt": "2026-09-05T22:00:09.891Z"
+  "updatedAt": "2026-09-12T22:00:12.394Z"
 }

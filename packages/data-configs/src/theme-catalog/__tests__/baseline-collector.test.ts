@@ -56,10 +56,10 @@ describe('baseline lock (ratchet)', () => {
 
   it('componentType ごとの chart 数を固定する (chart 種別内訳の baseline)', () => {
     expect(live.chartsByType).toEqual({
-      'line-chart': 49,
+      'line-chart': 50,
       'mixed-chart': 2,
       'composition-chart': 3,
-      'donut-chart': 4,
+      'donut-chart': 3,
       'cpi-profile': 1,
       'cpi-heatmap': 0,
       'kpi-card': 0,

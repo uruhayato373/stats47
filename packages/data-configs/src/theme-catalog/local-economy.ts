@@ -143,8 +143,9 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
   "charts": [
     {
       "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart",
-      "title": "産業別就業者構成比",
+      "componentType": "line-chart",
+      "title": "産業別就業者比率の推移",
+      "annotation": "産業分類不詳などにより3系列の合計は100%になりません。元の就業者比率を表示しています。",
       "componentProps": {
         "seriesRefs": [
           {
@@ -162,8 +163,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
             "label": "第3次産業就業者比率",
             "colorRole": "series-12"
           }
-        ],
-        "topN": 3
+        ]
       },
       "relatedRankingKeys": [
         "employed-people-ratio-primary",

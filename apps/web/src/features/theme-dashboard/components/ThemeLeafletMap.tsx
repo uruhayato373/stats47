@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useCallback, useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useState, useTransition } from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-
-import { lookupArea } from "@stats47/area";
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import { useTopoJsonToGeoJson } from "@stats47/visualization/leaflet/hooks/useTopoJsonToGeoJson";
+import { lookupArea } from '@stats47/area';
+import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
+import { useTopoJsonToGeoJson } from '@stats47/visualization/leaflet/hooks/useTopoJsonToGeoJson';
 
 const TileSwitcher = dynamic(
-  () => import("@stats47/visualization/leaflet").then((mod) => mod.TileSwitcher),
+  () =>
+    import('@stats47/visualization/leaflet').then((mod) => mod.TileSwitcher),
   { ssr: false }
 );
 
@@ -19,22 +19,26 @@ import {
   getLeafletBorderColor,
   rankingItemToMapConfig,
   useThemedLeafletTile,
-} from "@/features/map-visualization/client";
+} from '@/features/map-visualization/client';
 
-import { useTheme } from "@/hooks/useTheme";
+import { useTheme } from '@/hooks/useTheme';
 
-import { fetchMunicipalityDrilldownAction } from "../actions";
+import { fetchMunicipalityDrilldownAction } from '../actions';
 
-import type { RankingItem, RankingValue } from "@stats47/ranking";
-import type { TopoJSONTopology } from "@stats47/types";
-import type { MapDataPoint } from "@stats47/visualization/d3";
-
+import type { RankingItem, RankingValue } from '@stats47/ranking';
+import type { TopoJSONTopology } from '@stats47/types';
+import type { MapDataPoint } from '@stats47/visualization/d3';
 
 const LeafletChoroplethMap = dynamic(
-  () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
+  () =>
+    import('@stats47/visualization/leaflet').then(
+      (mod) => mod.LeafletChoroplethMap
+    ),
   {
     ssr: false,
-    loading: () => <Skeleton className="h-[400px] lg:h-[500px] w-full rounded-md" />,
+    loading: () => (
+      <Skeleton className="h-[400px] lg:h-[500px] w-full rounded-md" />
+    ),
   }
 );
 
@@ -46,6 +50,8 @@ interface ThemeLeafletMapProps {
   onPrefectureClick: (code: string | null) => void;
   /** ドリルダウン時に使用する年度コード（省略時: rankingItem.latestYear.yearCode） */
   yearCode?: string;
+  /** 地域比較の概況では県選択だけを行い、市区町村へ切り替えない。 */
+  enableDrilldown?: boolean;
 }
 
 /**
@@ -61,11 +67,19 @@ export function ThemeLeafletMap({
   selectedPrefectureCode,
   onPrefectureClick,
   yearCode,
+  enableDrilldown = true,
 }: ThemeLeafletMapProps) {
   const { theme } = useTheme();
-  const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(theme);
+  // 比較地図の背景は地理院淡色に揃える。
+  const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(
+    theme,
+    enableDrilldown ? 0 : 1
+  );
 
-  const colorConfig = useMemo(() => rankingItemToMapConfig(rankingItem), [rankingItem]);
+  const colorConfig = useMemo(
+    () => rankingItemToMapConfig(rankingItem),
+    [rankingItem]
+  );
 
   // 全国合計・値なしを除外
   const data: MapDataPoint[] = useMemo(
@@ -74,10 +88,15 @@ export function ThemeLeafletMap({
   );
 
   // ドリルダウン状態
-  const [municipalityTopology, setMunicipalityTopology] = useState<TopoJSONTopology | null>(null);
-  const [municipalityValues, setMunicipalityValues] = useState<RankingValue[]>([]);
+  const [municipalityTopology, setMunicipalityTopology] =
+    useState<TopoJSONTopology | null>(null);
+  const [municipalityValues, setMunicipalityValues] = useState<RankingValue[]>(
+    []
+  );
   const [isPending, startTransition] = useTransition();
-  const [drilldownPrefCode, setDrilldownPrefCode] = useState<string | null>(null);
+  const [drilldownPrefCode, setDrilldownPrefCode] = useState<string | null>(
+    null
+  );
 
   const municipalityGeojson = useTopoJsonToGeoJson(municipalityTopology);
 
@@ -88,6 +107,10 @@ export function ThemeLeafletMap({
 
   const handlePrefectureClick = useCallback(
     (code: string) => {
+      if (!enableDrilldown) {
+        onPrefectureClick(code);
+        return;
+      }
       // 同じ都道府県をクリック → ドリルダウン解除
       if (code === drilldownPrefCode) {
         setDrilldownPrefCode(null);
@@ -118,7 +141,13 @@ export function ThemeLeafletMap({
         }
       });
     },
-    [drilldownPrefCode, onPrefectureClick, rankingItem, yearCode]
+    [
+      drilldownPrefCode,
+      onPrefectureClick,
+      rankingItem,
+      yearCode,
+      enableDrilldown,
+    ]
   );
 
   const handleBackToNational = useCallback(() => {
@@ -149,8 +178,8 @@ export function ThemeLeafletMap({
               {municipalityData.length > 0
                 ? `（${municipalityData.length}市区町村）`
                 : isPending
-                  ? "（読み込み中...）"
-                  : "（市区町村データなし）"}
+                  ? '（読み込み中...）'
+                  : '（市区町村データなし）'}
             </span>
           )}
         </div>
@@ -166,14 +195,21 @@ export function ThemeLeafletMap({
         unit={rankingItem.unit}
         onPrefectureClick={handlePrefectureClick}
         selectedPrefectureCode={selectedPrefectureCode}
+        fitToPrefectures={!enableDrilldown}
         municipalityGeojson={municipalityGeojson}
         municipalityData={municipalityData}
         municipalityColorConfig={colorConfig}
         borderColor={getLeafletBorderColor(theme)}
-        className="h-[400px] lg:h-[500px] rounded-md overflow-hidden"
+        className={
+          enableDrilldown
+            ? 'h-[400px] lg:h-[500px] rounded-md overflow-hidden'
+            : 'h-[360px] lg:h-[400px] overflow-hidden'
+        }
       />
 
-      <TileSwitcher onTileChange={setCurrentTile} isDark={isDark} />
+      {enableDrilldown && (
+        <TileSwitcher onTileChange={setCurrentTile} isDark={isDark} />
+      )}
     </div>
   );
 }

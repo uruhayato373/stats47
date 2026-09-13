@@ -44,6 +44,7 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
 
   return (
     <ChartPanel
+      id="theme-migration-flow"
       title="都道府県 人口移動フロー"
       description="焦点の都道府県と全国との「人の出入り」。フロー図で県間の転入・転出の量を、アニメ地図で移動の動きを示します。"
       action={

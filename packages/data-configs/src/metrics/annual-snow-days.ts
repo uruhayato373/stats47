@@ -19,7 +19,7 @@ export const annualSnowDays: MetricConfig = {
     "from": 2020,
     "to": 2020
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateOranges",
     "colorSchemeType": "sequential",

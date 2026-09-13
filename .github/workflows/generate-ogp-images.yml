@@ -23,6 +23,7 @@ on:
           - note-covers
           - pref-silhouette
           - blog
+          - geo-thumbnails
       limit:
         description: '1回の件数上限 (安全上限500、残りは再実行)'
         required: false
@@ -34,6 +35,12 @@ on:
       ranking_keys:
         description: 'ranking / ranking-cards のみ: 対象キーのカンマ区切り (最大50件)'
         required: false
+        default: ''
+      staged_asset_id:
+        description: 'geo-thumbnails: 一時draft添付ファイルのasset ID（同期後に削除）'
+        default: ''
+      staged_sha256:
+        description: 'geo-thumbnails: 受け渡しbundle全体のSHA256'
         default: ''
       apply:
         description: 'R2 へ push する (false=生成のみ)'
@@ -60,6 +67,7 @@ env:
 
 jobs:
   generate:
+    if: inputs.type != 'geo-thumbnails'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -141,3 +149,52 @@ jobs:
           PLAN=".local/image-generation-publish-plan-${{ github.event.inputs.type }}.json"
           test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
           npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+
+  publish-geo-thumbnails:
+    if: inputs.type == 'geo-thumbnails'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout reviewed generation state
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Import exact reviewed image bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          STAGED_ASSET_ID: ${{ inputs.staged_asset_id }}
+          STAGED_SHA256: ${{ inputs.staged_sha256 }}
+        run: |
+          [[ "$STAGED_ASSET_ID" =~ ^[0-9]+$ ]] || exit 1
+          [[ "$STAGED_SHA256" =~ ^[a-f0-9]{64}$ ]] || exit 1
+          mkdir -p "$RUNNER_TEMP/geo-thumbnail-transfer"
+          BUNDLE="$RUNNER_TEMP/geo-thumbnail-transfer/geo-thumbnails.json"
+          gh api -H "Accept: application/octet-stream" "repos/$GH_REPO/releases/assets/$STAGED_ASSET_ID" > "$BUNDLE"
+          printf '%s  %s\n' "$STAGED_SHA256" "$BUNDLE" | sha256sum --check
+          node --import tsx apps/web/scripts/sync-geo-source-thumbnails.ts --import "$BUNDLE"
+      - name: Inspect R2 and validate exact publish plan
+        run: |
+          node --import tsx apps/web/scripts/sync-geo-source-thumbnails.ts --plan
+          node --import tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan .local/image-generation-publish-plan-geo-thumbnails.json --dry-run
+      - name: Publish reviewed thumbnails and verify every object
+        if: inputs.apply
+        run: |
+          node --import tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan .local/image-generation-publish-plan-geo-thumbnails.json
+          node --import tsx apps/web/scripts/sync-geo-source-thumbnails.ts --verify
+      - name: Save publication evidence
+        if: inputs.apply
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: geo-thumbnail-publication
+          path: .claude/state/geo/source-thumbnails-publication.json
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 7

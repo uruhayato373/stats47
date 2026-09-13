@@ -23,6 +23,7 @@ import type {
  * banner は imageUrl あり、text は imageUrl=null。
  */
 interface ResolvedAffiliateVariant {
+  programRef?: string;
   /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
   id: string;
   experimentId: string;
@@ -45,6 +46,7 @@ function verticalFromCategoryKey(categoryKey: string): AffiliateVertical | undef
 }
 
 function toBanner(b: {
+  programRef?: string;
   id: string;
   title: string;
   htmlContent: string;
@@ -58,6 +60,7 @@ function toBanner(b: {
   // imageUrl は必須。trackingPixelUrl は任意 (ValueCommerce 等は別ピクセルを持たない)。
   if (!b.imageUrl) return null;
   return {
+    ...(b.programRef ? { programRef: b.programRef } : {}),
     id: b.id,
     title: b.title,
     href: b.htmlContent,
@@ -82,6 +85,7 @@ export async function resolveAffiliateAd(
   const dbAd = await findActiveTextAdByVertical(vertical, locationCode);
   if (!dbAd) return null;
   return {
+    ...(dbAd.programRef ? { programRef: dbAd.programRef } : {}),
     id: dbAd.id,
     title: dbAd.title,
     href: dbAd.htmlContent,
@@ -102,6 +106,7 @@ export async function resolveAffiliateTextAds(
   if (!vertical) return [];
   const ads = await findActiveTextAdsByVerticals([vertical], locationCode, limit, rankingKey);
   return ads.map((ad) => ({
+    ...(ad.programRef ? { programRef: ad.programRef } : {}),
     id: ad.id,
     title: ad.title,
     href: ad.htmlContent,
@@ -131,6 +136,7 @@ export async function resolveAffiliateTextAdsByTagKeys(
     if (seen.has(ad.title)) continue;
     seen.add(ad.title);
     unique.push({
+      ...(ad.programRef ? { programRef: ad.programRef } : {}),
       id: ad.id,
       title: ad.title,
       href: ad.htmlContent,
@@ -181,6 +187,7 @@ export async function resolveAffiliateTextAdsByVertical(
 ): Promise<ResolvedAffiliateAd[]> {
   const ads = await findActiveTextAdsByVerticals([vertical], locationCode, limit, rankingKey);
   return ads.map((ad) => ({
+    ...(ad.programRef ? { programRef: ad.programRef } : {}),
     id: ad.id,
     title: ad.title,
     href: ad.htmlContent,
@@ -254,11 +261,13 @@ export async function resolveAffiliateBannersByVertical(
  */
 export async function resolveExperimentVariantsByCategoryKey(
   categoryKey: string,
+  rankingKey?: string,
+  verticalOverride?: AffiliateVertical | null,
 ): Promise<ResolvedAffiliateVariant[]> {
-  const vertical = verticalFromCategoryKey(categoryKey);
+  const vertical = verticalOverride !== undefined ? verticalOverride : verticalFromCategoryKey(categoryKey);
   if (!vertical) return [];
 
-  const rows = await findActiveExperimentVariantsByVertical(vertical);
+  const rows = await findActiveExperimentVariantsByVertical(vertical, rankingKey);
   if (rows.length < 2) return []; // 実験は最低 2 variant 必要
 
   return rows
@@ -272,6 +281,7 @@ export async function resolveExperimentVariantsByCategoryKey(
       const creativeSize =
         adType === "banner" && r.width && r.height ? `${r.width}x${r.height}` : "text";
       return {
+        ...(r.programRef ? { programRef: r.programRef } : {}),
         id: r.id,
         experimentId: r.experimentId as string,
         variantId: r.variantId as string,

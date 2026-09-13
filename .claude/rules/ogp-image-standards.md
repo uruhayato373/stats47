@@ -1,6 +1,9 @@
 ---
 paths:
   - "apps/web/src/features/ogp/**"
+  - "apps/web/src/features/geo-analysis/**/*Thumbnail*"
+  - "apps/web/scripts/*geo-source-thumbnails.ts"
+  - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
   - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
   - ".claude/{scripts/ogp,state/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
   - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
@@ -25,6 +28,18 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 ---
 
 ## 1. 画像資産カタログ (全種別)
+
+**GIS単体カード**: `generate-geo-source-thumbnails.ts` が公開対象の実GISから
+横長640×360（16:9）と正方形256×256（1:1）のWebPを生成する。全国・都道府県・地域拡大の
+選定と表示例ラベルは `features/geo-analysis/lib/geo-source-thumbnail.ts` の版付きTS設定。
+両比率で同じ範囲を再投影し、CSSのcoverで切り落とさない。北を上に保ち、背景境界は既存NII加工物を使う。
+色は原典の位置・形状、標高、土地利用だけを示し、分析結果や危険度の推定にしない。
+`app/geo/datasets/<ID>/thumbnails/<version>/{wide,square}.webp` と共通 `manifest.json` が配信契約。
+背景が地図のためlight/darkを増やさず同一画像を使い、文字はDOMに置く。
+PC一覧は横長、モバイル一覧と関連リンクは正方形。右の全件ナビはテキストのまま維持する。
+staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレビュー経路は開発時だけ有効。
+生成既定はローカルのみで、`--plan`がremoteを検証してから共通publisher用planを作る。
+画像・元データの欠落/版不一致/空の表示範囲は失敗にし、未反映画像はUIで代替表示してリンクを残す。
 
 > **正典の配信方式**: OGP は下表の「静的 R2 URL」を `openGraph.images` に設定する
 > (`apps/web/src/lib/metadata/ogp-image.ts` の `ogpImageUrl` / `ogpImageKeys`)。ランタイム
@@ -54,6 +69,10 @@ theme のみ専用コンポーネント無し (route 内インライン JSX)。t
 ---
 
 ## 2. 目視確認 (ギャラリー) と棚卸し
+
+note全記事のカバー制作方針・KPI・比較実験の契約は
+[`note戦略.md`](../../docs/30_note記事企画/note戦略.md#カバーの制作改善方針) を参照する。
+未設定の是正と設定済み画像の効果改善を分け、PVと表示回数から無条件にCTRを算出しない。
 
 種別ごとに 1 枚の自己完結 HTML で目視確認する。生成は
 `.claude/scripts/ogp/build-image-gallery.mjs` (skill `/audit-ogp-images`)。動的 OGP は本番 URL、
@@ -224,8 +243,16 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   入力R2キー / config / topologyを記録する。
   WebPやmanifestを手編集せず、`generate-ogp-images.ts --type ranking-cards` で再生成する。
 - **note カバー**: `note/<vertical>/<slug>/images/cover-1280x670.png` に事前生成 archive (Satori 統一デザイン)。
+  note上の設定有無は`npm run note:covers:audit`でv3記事詳細の`data.eyecatch`を全件検査する。
+  一覧サムネイルは本文画像を代用する場合があり、R2保存画像やHTTP 200も設定済みの根拠にならない。
+  取得失敗・フィールド欠損は`unknown`、全量取得できない場合は`incomplete`として合格させない。
   既存 SVG 系統 (`generate-note-covers.mjs` + `svg-to-png.js`) と Remotion `NoteCover` は **deprecate (削除しない)**。
-  ※ note.com 公開済みカバーの差し替えではなく R2 archive + 今後の正系統。
+  R2 archiveの生成だけではnote.comのカバーは差し替わらない。
+  公開カバーの改修は`catalog/cover-designs.ts`の編集判断 + `generate-cover-refresh.ts` +
+  共有`note-cover-render.ts`のeditorial rendererを使う。県輪郭/数字は既存GIS/観測値から決定的に生成し、
+  全件の文字境界・重なり・縮小表示を検査する。ユーザーが依頼した公開変更は画像専用
+  `update-note-covers.mjs`で行い、記事内容の保全hash・画像SHA・変更時刻・配信結果を記録する。
+  手順と入力契約は[カタログREADME](../scripts/note/catalog/README.md#公開カバーの制作と差し替え)。
   - **★koumuin-claude-code / koumuin-estat-claude-code は Satori 系の対象外 (二重 SSOT 回避・2026-07-09)**。
     この 2 シリーズは bespoke カバーが正典 = `.claude/scripts/note/generate-koumuin-covers.cjs`
     (共通背景 `assets/koumuin-cover-bg.png` + カテゴリトーン + 中央ボックス、frontmatter 駆動、sharp 合成)

@@ -5,6 +5,16 @@ import { describe, expect, it } from 'vitest';
 import { ChartFooter } from '../ChartFooter';
 
 describe('ChartFooter', () => {
+  it('固定IDのメニューを開くと操作ボタンと内容が相互に対応する', async () => {
+    const user = userEvent.setup();
+    render(<ChartFooter id="theme-ports-footer" rankingLinks={[{ label: '輸出', url: '/ranking/export' }, { label: '輸入', url: '/ranking/import' }]} />);
+    const trigger = screen.getByRole('button', { name: 'ランキング2件を表示' });
+    expect(trigger).toHaveAttribute('id', 'theme-ports-footer-ranking-trigger');
+    await user.click(trigger);
+    expect(trigger).toHaveAttribute('aria-controls', 'theme-ports-footer-ranking-content');
+    expect(screen.getByRole('menu')).toHaveAttribute('id', 'theme-ports-footer-ranking-content');
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-labelledby', trigger.id);
+  });
   it('単一の出典・ランキングをアイコン付きの短い導線で表示する', async () => {
     const user = userEvent.setup();
     render(

@@ -20,16 +20,18 @@ import type { TopoJSONTopology } from "@stats47/types";
 
 vi.mock("leaflet/dist/leaflet.css", () => ({}));
 
+const mapApi = vi.hoisted(() => ({
+  addControl: vi.fn(), removeControl: vi.fn(),
+  fitBounds: vi.fn(), on: vi.fn(), off: vi.fn(),
+}));
+
 vi.mock("react-leaflet", () => ({
   MapContainer: ({ children }: { children?: React.ReactNode }) => (
     <div data-testid="map-container">{children}</div>
   ),
   TileLayer: ({ url }: { url: string }) => <div data-testid="tile-layer" data-url={url} />,
   GeoJSON: () => <div data-testid="geojson-layer" />,
-  useMap: () => ({
-    addControl: vi.fn(),
-    removeControl: vi.fn(),
-  }),
+  useMap: () => mapApi,
 }));
 
 vi.mock("../MapColorLegend", () => ({
@@ -79,7 +81,7 @@ const TOPOLOGY = {
   },
 } as unknown as TopoJSONTopology;
 
-function renderMap(topology: TopoJSONTopology | null) {
+function renderMap(topology: TopoJSONTopology | null, fitToPrefectures = false) {
   return render(
     <LeafletChoroplethMap
       topology={topology}
@@ -87,11 +89,18 @@ function renderMap(topology: TopoJSONTopology | null) {
       colorConfig={COLOR_CONFIG}
       tileUrl={TILE_URL}
       attribution="test"
+      fitToPrefectures={fitToPrefectures}
     />,
   );
 }
 
 describe("leaflet choropleth base map contract", () => {
+  it("fits the full prefecture extent when the overview opts in", async () => {
+    mapApi.fitBounds.mockClear();
+    renderMap(TOPOLOGY, true);
+    await waitFor(() => expect(mapApi.fitBounds).toHaveBeenCalled());
+    expect(mapApi.on).toHaveBeenCalledWith('resize', expect.any(Function));
+  });
   it("renders the base tile layer while the topology is still loading", () => {
     renderMap(null);
 

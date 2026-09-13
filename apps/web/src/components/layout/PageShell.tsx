@@ -19,6 +19,8 @@ interface PageShellProps {
    * 992px+ で左に表示するサイドレール（ページ内ナビ・カテゴリ探索等）。省略すると左レールなし。
    */
   leftRail?: ReactNode;
+  /** 左ナビを狭め、データの表示幅を優先する。寸法は LeftRailLayout が所有。 */
+  leftRailDensity?: 'default' | 'compact';
   /**
    * 992px 未満で左レールをどう扱うか。
    * - `stack`（既定）: 本文の下に積む。関連リンク集など「読み終えた後で見る」もの向け
@@ -78,6 +80,7 @@ export function PageShell({
   variant = 'default',
   rightRail,
   leftRail,
+  leftRailDensity,
   rightRailBreakpoint = 'xl',
   leftRailNarrowBehavior = 'stack',
   className,
@@ -112,7 +115,11 @@ export function PageShell({
       {hasRight || hasLeft ? (
         <>
           {showLeft ? (
-            <LeftRailLayout leftRail={leftRail} mainClassName={mainClass}>
+            <LeftRailLayout
+              leftRail={leftRail}
+              mainClassName={mainClass}
+              density={leftRailDensity}
+            >
               {children}
             </LeftRailLayout>
           ) : (

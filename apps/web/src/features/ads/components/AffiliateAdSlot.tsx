@@ -7,6 +7,7 @@ import {
 } from "@/lib/google-adsense";
 
 import { CATEGORY_AFFILIATE_MAP, type AffiliateVertical } from "../constants/affiliate-category";
+import { isAffiliateDestinationExcluded, type AffiliateDestination } from "../constants/affiliate-delivery-policy";
 import {
   resolveAffiliateBannersByVertical,
   resolveAffiliateTextAdsByVertical,
@@ -42,6 +43,7 @@ interface AffiliateAdSlotProps {
   textLimit?: number;
   /** GA4 link_position。未指定時は既存の ranking/sidebar ラベルを維持する。 */
   trackingPosition?: string;
+  excludeAds?: readonly AffiliateDestination[];
 }
 
 function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocationCode {
@@ -70,14 +72,16 @@ export async function AffiliateAdSlot({
   bannerLimit = 1,
   textLimit = 2,
   trackingPosition,
+  excludeAds = [],
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
   const affiliateCategory =
     vertical !== undefined ? vertical : (CATEGORY_AFFILIATE_MAP[categoryKey] ?? null);
 
   // 0. A/B 実験 (sidebar のみ)。experimentId 付き variant が 2 件以上あればクライアント加重ランダム出し分け。
-  if (position === "sidebar") {
-    const variants = await resolveExperimentVariantsByCategoryKey(categoryKey);
+  if (position === "sidebar" && affiliateCategory) {
+    const variants = (await resolveExperimentVariantsByCategoryKey(categoryKey, rankingKey, affiliateCategory))
+      .filter((ad) => !isAffiliateDestinationExcluded(ad, excludeAds));
     const eligibleVariants = bannerOnly
       ? variants.filter(
           (variant) => variant.adType === "banner" && !!variant.imageUrl,
@@ -97,11 +101,11 @@ export async function AffiliateAdSlot({
   // 1. バナー優先 (sidebar のみ)。ranking の主要トラフィックに視認性の高い枠を出す。
   //    ★ 2026-08-04: 上位 1 件の早期 return をやめ bannerLimit 件まで積む。
   if (position === "sidebar" && affiliateCategory) {
-    const banners = await resolveAffiliateBannersByVertical(
+    const banners = (await resolveAffiliateBannersByVertical(
       affiliateCategory,
-      Math.max(1, bannerLimit),
+      Infinity,
       rankingKey,
-    );
+    )).filter((ad) => !isAffiliateDestinationExcluded(ad, excludeAds)).slice(0, Math.max(1, bannerLimit));
     if (banners.length > 0) {
       return (
         <>
@@ -131,12 +135,12 @@ export async function AffiliateAdSlot({
   //      「テキストへ戻さない」ゲートの存在を検査する)。意図軸の有無は内側で分岐する。
   if (!bannerOnly) {
     const ads = affiliateCategory
-      ? await resolveAffiliateTextAdsByVertical(
+      ? (await resolveAffiliateTextAdsByVertical(
           affiliateCategory,
           locationCode,
-          textLimit,
+          Infinity,
           rankingKey,
-        )
+        )).filter((ad) => !isAffiliateDestinationExcluded(ad, excludeAds)).slice(0, textLimit)
       : [];
     if (ads.length > 0) {
       return (

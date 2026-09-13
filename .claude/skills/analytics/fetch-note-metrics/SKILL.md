@@ -1,157 +1,88 @@
 ---
 name: fetch-note-metrics
-description: note.com sitesettings/stats から記事別メトリクス (view / comment / like) を取得する。Use when user says "noteメトリクス", "note統計", "note ビュー数取得", "fetch-note-metrics". browser-use CLI で Chrome Profile 5 (stats47 ログイン済) 経由で取得、.claude/state/metrics/note/ に JSON snapshot 保存。
+description: note.com/dashboardから記事別インプレッション・PV・スキ・コメント・売上を期間指定で収集し、カバー監査と突合する。Use when user says "noteメトリクス", "note統計", "note ビュー数取得", "fetch-note-metrics". stats47専用Chrome Profile 5を使用する読み取り専用CLI。
 disable-model-invocation: true
 primary_agent: sns-metrics-sync
 ---
 
-note.com の著者ダッシュボード `sitesettings/stats` から、全記事のメトリクスを取得するスキル。
-
-`publish-note` 系と違い **読み取り専用**。週次で回して「どの記事が刺さっているか」を定量的に把握する。
-
-## 用途
-
-- 週次レビュー時の note 成績確認（Weekly Metrics Issue の note セクション元データ）
-- 次の note 記事企画判断のデータ駆動化
-- スキ / ビューの伸び記録によるトレンド把握
+noteの現行ダッシュボードを読み、期間・記事数・合計・カバー状態の照合結果を保存する。
+[2026-09-08の公式変更](https://note.com/info/n/n39880d8a9c57)で旧ビューがインプレッションとPVへ
+分離されたため、新しい値はschemaVersion 2として旧`views`と分ける。旧形式へ別名で保存しない。
 
 ## 前提
 
-- **Chrome の "Profile 5" に `note.com/stats47` のログインセッションが必要**
-  - 公開操作と計測の両方を stats47 専用 Profile 5 に統一する
-  - 最初の 1 回は手動ログイン、以降は Chrome の persistent cookie で維持される（数週間〜数ヶ月）
-  - sitesettings は sensitive なので稀に再認証が要求される可能性あり
-- browser-use CLI が `~/.browser-use-env/bin/browser-use` に install 済み
-- アカウント設定画面の `note ID === "stats47"` と取得記事 URL のハンドルを照合し、不一致は保存前に停止する
-
-## 引数
-
-```
-/fetch-note-metrics
-```
-
-引数なし。単純に「今取得」するのみ。
+- Chrome **Profile 5**にstats47のログインがあること。未ログインならユーザーのログインが必要。
+- `~/.browser-use-env/bin/browser-use`を使用する。別の場所なら`BROWSER_USE_BIN`で指定する。
+- アカウント設定画面の`note ID === stats47`と全記事URLの帰属を照合する。不一致なら取得を止める。
+- カバー突合には24時間以内の全量監査結果が必要。未設定があっても監査の取得範囲が完全なら利用できる。
 
 ## 実行
 
 ```bash
-bash .claude/scripts/note/fetch-note-metrics.sh
+# 最初にカバー状態を更新（exit 1=未設定/集合差分、2=取得不完全）
+npm run note:covers:audit
+# JSTの昨日までの28日間。上の未設定exit 1でこの計測を止めない。
+npm run note:metrics:fetch
+# 同じ日付の再取得、実験の変更前後14日など
+npm run note:metrics:fetch -- --start 2026-08-15 --end 2026-09-11
+# 取得・突合ロジックのテスト
+npm run note:metrics:test
 ```
 
-スクリプトの動作:
+旧入口`bash .claude/scripts/note/fetch-note-metrics.sh`も新CLIへ委譲する。
+`--output-dir PATH`と`--cover-audit PATH`で保存先・監査入力を指定できる。
+デフォルトProfile以外を使う必要がある場合のみ`--profile NAME`を指定する。帰属チェックは省略できない。
 
-1. `browser-use --profile "Profile 5"` で note.com/sitesettings/stats を開く
-2. ログイン画面に遷移したら exit 2
-3. アカウント設定画面の `note ID === "stats47"` を照合する（不一致は exit 4）
-4. 「もっとみる」ボタンを全展開
-5. 全記事の DOM から `{url, noteId, title, views, comments, likes}` を抽出
-6. 全URLが `note.com/stats47/n/*` かつ note catalog 登録済みであることを照合
-7. URL で重複排除、totals 付与後にのみ `.claude/state/metrics/note/note-YYYY-MM-DD.json` へ atomic 保存
+## 収集と検証
+
+1. stats47を確認して`https://note.com/dashboard`のカスタム期間を開く。
+2. URLと可視の選択期間、JST、記事/サマリー集計時刻を照合する。当日・未来日・2021-05-01より前を拒否する。
+3. `記事一覧`テーブルだけを読み、ヘッダー名で5指標を対応付ける。列変更・空欄・未知表記は失敗にする。
+   桁区切りを除いて数値化する。現行UIの`-`は実測0、存在しない行は欠測として分離する。
+4. 「もっとみる」を終端まで開く。読み込み中の一時消失後は再表示を確認して継続する。
+   取得の重複・停止・上限到達を成功扱いしない。
+5. 公開記事カタログと突合し、未登録・欠落・公開状態の差分を残す。
+   行合計は画面のインプレッション/PV/スキ/コメントと一致させる。
+   全体売上には記事以外も含むため、`totals.salesJpy`は記事行合計、`dashboardTotals.salesJpy`は別保存する。
+6. 最新カバー監査と記事IDで結合し、表示量順の棚卸し一覧を生成する。
+   比較に必要な値や画像が未取得なら候補にしない。`baselineEligible`は全期間公開・表示ありの粗い条件であり、
+   実験への割当・母数充足・他施策の除外を済ませた意味ではない。
+
+集計定義・確定時刻は[公式ヘルプ](https://www.help-note.com/hc/ja/articles/360010324194)、
+記事一覧は[公式ヘルプ](https://www.help-note.com/hc/ja/articles/61982766676121)を参照する。
+カバーの指標・比較契約は[`note戦略.md`](../../../../../docs/30_note記事企画/note戦略.md#カバー改善のkpiと比較方法)が正典。
+PV/インプレッションをカバーCTRにしない。流入元別PV・記事内クリック・読了はこのCLIでは未取得。
 
 ## 出力
 
-```json
-{
-  "fetched_at": "2026-04-24T13:00:00.000Z",
-  "period_label": "月 (直近 30 日)",
-  "source": "note.com/sitesettings/stats",
-  "articles": [
-    {
-      "url": "https://note.com/stats47/n/nf962c6702b93",
-      "noteId": "nf962c6702b93",
-      "title": "【2023年版】都道府県「年間日照時間」ランキング！...",
-      "views": 746,
-      "comments": 0,
-      "likes": 0
-    },
-    ...
-  ],
-  "totals": {
-    "articles": 36,
-    "views": 4734,
-    "comments": 2,
-    "likes": 104
-  }
-}
-```
+`.claude/state/metrics/note/dashboard/`へatomic保存する。
 
-## Exit code
+| ファイル | 内容 |
+|---|---|
+| `<開始日>_<終了日>_<取得時刻>.json` | 取得ごとのschemaVersion 2履歴。期間、集計時刻、articles、totals、coverage、issues、raw DOM値 |
+| `latest.json` | 最新の取得試行。失敗でも更新して古い成功を最新に見せない |
+| `cover-metrics-latest.json` | カバー×新指標の棚卸し。未設定/既存見直し/要調査、記事別欠測を明示 |
+| `cover-metrics-latest.csv` | 全公開記事の確認用一覧。実測0は0、欠測は空欄。計測状態列で区別 |
 
-- `0`: 成功
-- `2`: ログイン切れ（手動再ログインが必要）
-- `3`: browser-use 実行エラー
-- `4`: stats47 以外のアカウントを検出
-- それ以外: Node.js / bash のエラー
+**終了コード**: `0`=計測とカバー突合が完全、`2`=不完全またはエラー。exit 2だけでログイン切れと決めず、`issues`を見る。
 
-## ⚠️ 必須: 終了時クリーンアップ
+一覧の欠落だけが残り、全ページ終端と合計一致を確認できた場合、取得済みの記事は棚卸しに利用する。
+ただし全体は`incomplete`のまま、欠落記事は`metricsAvailability: missing_period_row`、指標`null`、
+`baselineEligible: false`にする。期間を広げて表示されても元の期間を0埋めしない。
+列・帰属・合計・鮮度に異常がある場合は、突合一覧を比較に利用しない。
 
-`browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。さらに named profile は `$TMPDIR/browser-use-user-data-dir-*` へ複製され、異常終了時に Chrome と複製が残る。スクリプト末尾と `trap` で必ず以下 4 段すべてを実行する:
+## 終了時クリーンアップ
 
-```bash
-trap '
-  browser-use --headed --profile "Profile 5" close 2>/dev/null || true
-  pkill -KILL -f "browser_use.skill_cli.daemon" 2>/dev/null
-  pkill -KILL -f "user-data-dir=.*ms-playwright/mcp-chrome" 2>/dev/null
-  pkill -KILL -f "browser-use-user-data-dir-" 2>/dev/null
-  find "${TMPDIR:-/tmp}" -maxdepth 1 -type d -name "browser-use-user-data-dir-*" -exec rm -rf -- {} + 2>/dev/null || true
-  osascript -e "tell application \"Google Chrome\"
-    repeat with w in windows
-      repeat with t in tabs of w
-        if URL of t contains \"note.com/sitesettings\" or URL of t contains \"note.com/login\" then
-          close t
-        end if
-      end repeat
-    end repeat
-  end tell" 2>/dev/null || true
-' EXIT INT TERM
+CLIは実行ごとのnamed sessionを使い、正常・異常終了とも自分のsessionを`close`する。
+2026-09-12のインストール済みbrowser-useでは`close`がdaemon停止を要求する実装だが、
+session一覧が0でもOSプロセスが残る事例を確認した。OSのPIDも確認し、残存時は自分のdaemonと
+子プロセスだけを停止し、自分が複製したprofileだけを削除する。
+他のtaskのdaemonやユーザーのChromeタブをglobalな`pkill`やAppleScriptで閉じない。
 
-# ... メイン処理 ...
-```
+## ログイン切れ
 
-trap を入れずに 1 日に何度も実行すると Chrome / Python daemon + note タブ + 一時 profile 複製が累積する（2026-09-06 に複製18個・約1.2GBと孤立Chrome 4系統を確認）。
+`collection_failed`の理由が`login_required`またはアカウント確認タイムアウトなら、Profile 5で
+[アカウント設定](https://note.com/settings/account)を開き、note IDを確認する。再認証はユーザー工程。
+他アカウントにログインしたまま再実行しない。
 
-## ログイン切れの対応
-
-Exit 2 が出た場合:
-
-1. 通常の Chrome を起動（**Chrome メニュー → Profile 5 を選択**）
-2. https://note.com/login でログイン（「ログインしたままにする」チェック）
-3. 試しに https://note.com/sitesettings/stats を開いてダッシュボードが見えることを確認
-4. Chrome を閉じる（cookie は残る）
-5. 本スクリプトを再実行
-
-## 実行頻度
-
-**週 1 回**（fetch-metrics-weekly の相乗り推奨、将来的に）。日次は note のビュー変動が小さくノイズが多い。
-
-## トラブルシューティング
-
-### Profile Path の特定
-```bash
-ls "/Users/$USER/Library/Application Support/Google/Chrome/" | grep -E "^(Default|Profile)"
-# 各 profile の display 名
-for d in "/Users/$USER/Library/Application Support/Google/Chrome/"*/; do
-  name=$(basename "$d")
-  display=$(python3 -c "import json; print(json.load(open('$d/Preferences')).get('profile', {}).get('name', ''))" 2>/dev/null)
-  [[ -n "$display" ]] && echo "$name → $display"
-done
-```
-
-note.com の cookie がどの profile にあるかは、各 profile で一度 browser-use open しないと確認できない（Chrome 実行中は Cookies DB ロックで直読不可）。
-
-### browser-use eval で `result: None` が返る
-複雑な multi-line スクリプトは eval で失敗することがある。**single-line / `JSON.stringify(...)` でラップ**して渡すと安定。
-
-## 将来の拡張（本スキルスコープ外）
-
-- L2 集約: `.claude/state/metrics/note/history.csv` に週次で append、前週比表示
-- L3 統合: `generate-weekly-metrics-issue.mjs` に note セクション追加
-- 期間切り替え: 週/年/全期間 の取得モード
-- 記事個別ページの深い情報（公開日、マガジン、タグ）の追加取得
-- `note-strategist` サブエージェント化
-
-## 関連
-
-- Issue #89（本スキルの親 Issue）
-- `.claude/skills/note/publish-note/SKILL.md`（note 書き込み側、browser-use 共通パターン）
-- `.claude/skills/management/knowledge/SKILL.md`（cookie persistence の学び）
+本CLIはローカルの読み取り専用収集。週次実行や実験の開始は自動登録しない。

@@ -1,0 +1,773 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-09T08:31:56.053Z",
+  "workflowRun": "https://github.com/uruhayato373/stats47/actions/runs/34328972150",
+  "datasets": 50,
+  "images": 100,
+  "verification": "authenticated S3 GET and public HTTPS GET; SHA256 matches local bytes for every image and manifest",
+  "sourcePagesProductionVerified": false,
+  "objects": [
+    {
+      "key": "app/geo/datasets/G04-a/thumbnails/11/manifest.json",
+      "sha256": "bba48fe6b5b4d3b638632bece9640091e334a3d7e20c8639c0be57f0be4aae08",
+      "bytes": 2059
+    },
+    {
+      "key": "app/geo/datasets/G04-a/thumbnails/11/square.webp",
+      "sha256": "ba80bb9159371cf18363ed6c3f2078cb0267a3186c22d302e084362257738fc6",
+      "bytes": 7672
+    },
+    {
+      "key": "app/geo/datasets/G04-a/thumbnails/11/wide.webp",
+      "sha256": "f0a47e2a0b065607788e238a0aadab5cb8ecf5375fd4ac220f91f2d41daa459f",
+      "bytes": 14310
+    },
+    {
+      "key": "app/geo/datasets/L01/thumbnails/26/manifest.json",
+      "sha256": "6290498c252157f073169af88909293841ed56c5b88488e14224af17a9875edc",
+      "bytes": 1986
+    },
+    {
+      "key": "app/geo/datasets/L01/thumbnails/26/square.webp",
+      "sha256": "bd11ccef3896adea94507b0eacf0bc9d175c57c5dd55006286941bc9ab1d38d7",
+      "bytes": 14664
+    },
+    {
+      "key": "app/geo/datasets/L01/thumbnails/26/wide.webp",
+      "sha256": "0f6cf6a9883e825ee9f6c5891a0a7a3cb2afdf4416575f18255bc7a28adcacc3",
+      "bytes": 36418
+    },
+    {
+      "key": "app/geo/datasets/L02/thumbnails/25/manifest.json",
+      "sha256": "84eeb51ce687cce965a300f9337366b615b103b64f875ae9ae097187a553b8da",
+      "bytes": 1998
+    },
+    {
+      "key": "app/geo/datasets/L02/thumbnails/25/square.webp",
+      "sha256": "123771a81f78aace1c2ed6550094afd8363d4ebe96261fba0157ae6b762b9e93",
+      "bytes": 15890
+    },
+    {
+      "key": "app/geo/datasets/L02/thumbnails/25/wide.webp",
+      "sha256": "bdeb1567303c23cc6357ba76f904801c274fa846c362dab8652618a6434299ec",
+      "bytes": 38416
+    },
+    {
+      "key": "app/geo/datasets/L03-a/thumbnails/21/manifest.json",
+      "sha256": "c2a54683f9decc60ca3e83c697f570bef735a7bff4d4a76aca119f51ba97bf1b",
+      "bytes": 2031
+    },
+    {
+      "key": "app/geo/datasets/L03-a/thumbnails/21/square.webp",
+      "sha256": "566fb6387a44b61227195b94a17221c13e840fe94255cfc397e8a4fe1945575c",
+      "bytes": 15466
+    },
+    {
+      "key": "app/geo/datasets/L03-a/thumbnails/21/wide.webp",
+      "sha256": "950a8de45b7e70a3d2d7db9ebd7d6cce1736f7abb6063fa1441d6239353221dd",
+      "bytes": 28638
+    },
+    {
+      "key": "app/geo/datasets/W09/thumbnails/05/manifest.json",
+      "sha256": "05f200ac2a219eeeab866264ee6f4ad16590e93c9d882517386a50841e180915",
+      "bytes": 1973
+    },
+    {
+      "key": "app/geo/datasets/W09/thumbnails/05/square.webp",
+      "sha256": "e2790781fca6602e1daace8f1400b7bb797b1a2b2ed086702f696f35027b7a38",
+      "bytes": 3508
+    },
+    {
+      "key": "app/geo/datasets/W09/thumbnails/05/wide.webp",
+      "sha256": "c7dac124b98a83d4264c8afe2011d6b7dfbbfb68ddaa7e293bde4fd1d466bc72",
+      "bytes": 6572
+    },
+    {
+      "key": "app/geo/datasets/A16/thumbnails/20/manifest.json",
+      "sha256": "a7614c8a1e3637047d0c9e5f84c64ab03cdce4603f70d570b71c30d39db5621b",
+      "bytes": 1993
+    },
+    {
+      "key": "app/geo/datasets/A16/thumbnails/20/square.webp",
+      "sha256": "d4bb233a7ddca12c88ebbba0419d90f53592bb53d7fe3f05c0f2d4dae12211b3",
+      "bytes": 11022
+    },
+    {
+      "key": "app/geo/datasets/A16/thumbnails/20/wide.webp",
+      "sha256": "6b5b74333d19f6813fcbc95e8ceae39fe4812b14d49cc88572f9d8c718982ac4",
+      "bytes": 20866
+    },
+    {
+      "key": "app/geo/datasets/A17/thumbnails/17/manifest.json",
+      "sha256": "7909db45d7c8d9d5c755ce345fffc640f5e51c8de75f1ab6ed51f0cf9e2898b0",
+      "bytes": 1983
+    },
+    {
+      "key": "app/geo/datasets/A17/thumbnails/17/square.webp",
+      "sha256": "c45cd3add95551dc6845d976869206fc2520e409a1f9d53e3388b08d61823298",
+      "bytes": 2260
+    },
+    {
+      "key": "app/geo/datasets/A17/thumbnails/17/wide.webp",
+      "sha256": "b5930e66f219a9ce08b3594f35ef0c033cea27605b9c54c8ccad24e67c82e7a8",
+      "bytes": 5070
+    },
+    {
+      "key": "app/geo/datasets/A22/thumbnails/16/manifest.json",
+      "sha256": "32a1dcb120fb6b5645e8a2e1c784c776eee0aa9a21f8fad1383d197e0b2086ee",
+      "bytes": 2038
+    },
+    {
+      "key": "app/geo/datasets/A22/thumbnails/16/square.webp",
+      "sha256": "5c4547b53b64b7c1e3c4c51e2fc8fb97a8fe24a32c3229576a9228923c5ede0a",
+      "bytes": 3628
+    },
+    {
+      "key": "app/geo/datasets/A22/thumbnails/16/wide.webp",
+      "sha256": "8007659a0c8273953ece7a3fc6c923ecec44b36e9bcdf0da4027ef77545fb2eb",
+      "bytes": 5748
+    },
+    {
+      "key": "app/geo/datasets/A38/thumbnails/20/manifest.json",
+      "sha256": "0250202de64100c8e9c5202aeff5e2be22eca2e1510c419553540e6e74c0fecb",
+      "bytes": 2009
+    },
+    {
+      "key": "app/geo/datasets/A38/thumbnails/20/square.webp",
+      "sha256": "438409244d8a8cabaed3a0f97e71e62ba0fe1e784d1613ff8d0e85f62aea26c4",
+      "bytes": 5338
+    },
+    {
+      "key": "app/geo/datasets/A38/thumbnails/20/wide.webp",
+      "sha256": "d9d36d264bf91729b99ada2d9408b0b9374d6610ece88d136486af21fc6eeab8",
+      "bytes": 13284
+    },
+    {
+      "key": "app/geo/datasets/N03/thumbnails/20250101/manifest.json",
+      "sha256": "86a3b6fcb0e5f0f0ece1cf665d5d07e2ac0ad51a031f944f6e9f180e1b14997d",
+      "bytes": 2037
+    },
+    {
+      "key": "app/geo/datasets/N03/thumbnails/20250101/square.webp",
+      "sha256": "172b5a810e5369a2f433082e388d24f149eda4a58314aa9978a5669a7aeb271a",
+      "bytes": 6878
+    },
+    {
+      "key": "app/geo/datasets/N03/thumbnails/20250101/wide.webp",
+      "sha256": "072d01825c94cc41dadd93bb7e7dbfe2b673baf2b5a59bdba0b86090415027d4",
+      "bytes": 18606
+    },
+    {
+      "key": "app/geo/datasets/P04/thumbnails/20/manifest.json",
+      "sha256": "32b4dd735ecb6948b0856fb4bfb4dced8404027c33bce3aa75b6a9c6a8c20b37",
+      "bytes": 1987
+    },
+    {
+      "key": "app/geo/datasets/P04/thumbnails/20/square.webp",
+      "sha256": "ddcbace9258055533a08a9fe26338cd2c596be5906e33597b95c07ee5ce5cfd6",
+      "bytes": 7094
+    },
+    {
+      "key": "app/geo/datasets/P04/thumbnails/20/wide.webp",
+      "sha256": "97e62096dbe58d06b66882014b0ebb0a59ac07112d337dea875a485084f8cf0f",
+      "bytes": 33752
+    },
+    {
+      "key": "app/geo/datasets/P05/thumbnails/22/manifest.json",
+      "sha256": "359ecbbca0bdc73bfbc154d490819c71ef92071f3784cda3fcc89feb1295186a",
+      "bytes": 2011
+    },
+    {
+      "key": "app/geo/datasets/P05/thumbnails/22/square.webp",
+      "sha256": "1472825bc5213099bc6239b9ab195be1d55235d3379587e9e59f80472067617f",
+      "bytes": 7002
+    },
+    {
+      "key": "app/geo/datasets/P05/thumbnails/22/wide.webp",
+      "sha256": "d47e54b4bd63a96498c8dd359723eb0afb2834b81615ae53ef3d7c218889b25d",
+      "bytes": 29296
+    },
+    {
+      "key": "app/geo/datasets/P11/thumbnails/22/manifest.json",
+      "sha256": "39f5bd06aa760d966ad853e89ac7474b2cc7f0a870e6cf466aa0d9620be22092",
+      "bytes": 1990
+    },
+    {
+      "key": "app/geo/datasets/P11/thumbnails/22/square.webp",
+      "sha256": "f9cd7fa743ab921ab2788a7c4a940b138a4130971cdf7c01ea3991054d6a1dc0",
+      "bytes": 6484
+    },
+    {
+      "key": "app/geo/datasets/P11/thumbnails/22/wide.webp",
+      "sha256": "6bfa7416b822e139432f967728362d73cf0e1e699aba2a9f9f34e1d94e7e5cb7",
+      "bytes": 36654
+    },
+    {
+      "key": "app/geo/datasets/P29/thumbnails/23/manifest.json",
+      "sha256": "1808dd35788830990ae5e88d3c7346314ed7163a076fbbc612137327de337ccf",
+      "bytes": 1979
+    },
+    {
+      "key": "app/geo/datasets/P29/thumbnails/23/square.webp",
+      "sha256": "92c13303aee05ec5f5d4053e2d0b9e3480750bf15a94536d69d69071dd35f609",
+      "bytes": 6848
+    },
+    {
+      "key": "app/geo/datasets/P29/thumbnails/23/wide.webp",
+      "sha256": "ab0ab6630b73a693d8ad71fdd51fb1ed11a67ba5f58e24acd5e179c8e5a3f0ec",
+      "bytes": 31504
+    },
+    {
+      "key": "app/geo/datasets/P36/thumbnails/23/manifest.json",
+      "sha256": "5282f2fb9479e3fda17fbb53ac4d660c6ef1580a7385b21a36fa249f7ee9a5c9",
+      "bytes": 1990
+    },
+    {
+      "key": "app/geo/datasets/P36/thumbnails/23/square.webp",
+      "sha256": "d22c6e67c52bc56e661ca33163746689c7600debb1cf10da52c60cd1941a4b52",
+      "bytes": 3128
+    },
+    {
+      "key": "app/geo/datasets/P36/thumbnails/23/wide.webp",
+      "sha256": "0470d142ac67f8ce482744d3fb922bba6993ad4ed7f8984a6683f7f50a6fd72c",
+      "bytes": 7010
+    },
+    {
+      "key": "app/geo/datasets/C28/thumbnails/07/manifest.json",
+      "sha256": "5a518ba333e7eda43f1e04a600ce3d1782bc21bdb2a1817423c8a44c95c4129c",
+      "bytes": 1988
+    },
+    {
+      "key": "app/geo/datasets/C28/thumbnails/07/square.webp",
+      "sha256": "3ff8bcac7f45855e8e4afc3a46ee3996c47fc02d8339e56c8a9089e2d2548049",
+      "bytes": 1968
+    },
+    {
+      "key": "app/geo/datasets/C28/thumbnails/07/wide.webp",
+      "sha256": "c5ee98bce2cfba0aae32a77a13a5540e1650eace4c4dc2f8bc301e34452d8ae1",
+      "bytes": 3660
+    },
+    {
+      "key": "app/geo/datasets/N02/thumbnails/25/manifest.json",
+      "sha256": "0463c6d4bd7781d79afdecf184f042528dffe0e4cceb8ced2ded5c906c83e795",
+      "bytes": 1994
+    },
+    {
+      "key": "app/geo/datasets/N02/thumbnails/25/square.webp",
+      "sha256": "c13059e6af1a231f54a6418b52e56a9563737a95f40bafc1e8a3ac989a478d09",
+      "bytes": 13602
+    },
+    {
+      "key": "app/geo/datasets/N02/thumbnails/25/wide.webp",
+      "sha256": "cc7c4c19a5991cb0d3afd4d57ca38ca0414dece5bd47c9eb178d3794a0b78ed5",
+      "bytes": 27072
+    },
+    {
+      "key": "app/geo/datasets/N07/thumbnails/22/manifest.json",
+      "sha256": "b3be2b0e6af2461573d1738c3dbde82c89cbc514785679995fbe65dfe2533de9",
+      "bytes": 1990
+    },
+    {
+      "key": "app/geo/datasets/N07/thumbnails/22/square.webp",
+      "sha256": "43715285313cbf86c0d43683ce6c7ac695e3be58bfba808d0e715d42d5c8a26a",
+      "bytes": 7838
+    },
+    {
+      "key": "app/geo/datasets/N07/thumbnails/22/wide.webp",
+      "sha256": "6b750adc48769e00285cb1a6b3cbb8dc6ddb6807736b405b4fcf6a51c13977be",
+      "bytes": 36810
+    },
+    {
+      "key": "app/geo/datasets/S12/thumbnails/25/manifest.json",
+      "sha256": "6ca1da39bdad4ef4e51f4b9fe3748ac0347ab3c8d4fa648b8fb540febd4f8067",
+      "bytes": 1998
+    },
+    {
+      "key": "app/geo/datasets/S12/thumbnails/25/square.webp",
+      "sha256": "8cb97643b70d778becf7480fc0808fbb9a1008572adfd49e658108f164574152",
+      "bytes": 10012
+    },
+    {
+      "key": "app/geo/datasets/S12/thumbnails/25/wide.webp",
+      "sha256": "4915ce2880e1b6ee6898318a515cb771f649a12032882b9d79ae6602875da59f",
+      "bytes": 18114
+    },
+    {
+      "key": "app/geo/datasets/mesh1000r6/thumbnails/24/manifest.json",
+      "sha256": "4ddaea608c24190399fe857cae9a26dcc095db6e9f73d809c55290d7997e827b",
+      "bytes": 2048
+    },
+    {
+      "key": "app/geo/datasets/mesh1000r6/thumbnails/24/square.webp",
+      "sha256": "3686c851477100f5155c0b1dd0fd1e9dac0d7ea5419cf63247cb37e7f6c10e26",
+      "bytes": 5560
+    },
+    {
+      "key": "app/geo/datasets/mesh1000r6/thumbnails/24/wide.webp",
+      "sha256": "f4364e133a8d69f2ad70add382269152d7f347fcfd4874a16cea1d9f11a18738",
+      "bytes": 12268
+    },
+    {
+      "key": "app/geo/datasets/A03/thumbnails/03/manifest.json",
+      "sha256": "14672f2114ad9b9659a2d5ffdc53f7a27ec15d5bfbefc0766876b65508b3d0a9",
+      "bytes": 2047
+    },
+    {
+      "key": "app/geo/datasets/A03/thumbnails/03/square.webp",
+      "sha256": "ed6a2cb7d11db127834977dcfbedb5743b4b831c3cd3a4e8db3fb2cbed1fb334",
+      "bytes": 4542
+    },
+    {
+      "key": "app/geo/datasets/A03/thumbnails/03/wide.webp",
+      "sha256": "6112167ca0fd8ff21b3a175c44ded4ce20f97761d04bfb5f075276513bab326e",
+      "bytes": 6656
+    },
+    {
+      "key": "app/geo/datasets/A09/thumbnails/18/manifest.json",
+      "sha256": "066d7405a2dd8c3c7d8f7948f3c57eecec80b01823a92ebe59f0dc3d56704b0b",
+      "bytes": 1982
+    },
+    {
+      "key": "app/geo/datasets/A09/thumbnails/18/square.webp",
+      "sha256": "7cd4f3612eb16d63d2680da1b6d2ccc5161e95f997c7b89e96793c24080ed02b",
+      "bytes": 7324
+    },
+    {
+      "key": "app/geo/datasets/A09/thumbnails/18/wide.webp",
+      "sha256": "38e49878f4fa3423b688033928e72cf35641ec5227d094d49bb4951df8e163dc",
+      "bytes": 22452
+    },
+    {
+      "key": "app/geo/datasets/A18/thumbnails/16/manifest.json",
+      "sha256": "be9a882a88edc01c55d0749a1db948ee4f47f8889cbc06edfe6d39b97fd90a7e",
+      "bytes": 2066
+    },
+    {
+      "key": "app/geo/datasets/A18/thumbnails/16/square.webp",
+      "sha256": "fa99629f33a8076b9df1da783e43355ab6c9600d5650868fa88ba6d4761b9674",
+      "bytes": 4710
+    },
+    {
+      "key": "app/geo/datasets/A18/thumbnails/16/wide.webp",
+      "sha256": "f2e7d741af00eb6cdf5847000c84f5619560f06be3b99fdafe9ee07796294073",
+      "bytes": 8090
+    },
+    {
+      "key": "app/geo/datasets/A19/thumbnails/17/manifest.json",
+      "sha256": "30e533f0cc6b31bccec0884ae7f6102c5c0fbeef3adb379ea9b550f10a88b680",
+      "bytes": 2004
+    },
+    {
+      "key": "app/geo/datasets/A19/thumbnails/17/square.webp",
+      "sha256": "79c747e7d1dc2025e89124deecc1b001fabe7b71144ca2dd25950a6eabdd2cc9",
+      "bytes": 1720
+    },
+    {
+      "key": "app/geo/datasets/A19/thumbnails/17/wide.webp",
+      "sha256": "8b9d68aa1172804209d7e0d26d7db0603a442bb50247152a7059279eeb4d8a34",
+      "bytes": 2558
+    },
+    {
+      "key": "app/geo/datasets/A23/thumbnails/16/manifest.json",
+      "sha256": "d5b770607c0e04ac1d42b728bf3c98a0b74416ae3106551b4c78992be8a9dce2",
+      "bytes": 2049
+    },
+    {
+      "key": "app/geo/datasets/A23/thumbnails/16/square.webp",
+      "sha256": "bd83e739066ce09aaef0da2ca86785163fb5d3715e8efbc12ebef69f7c2822ff",
+      "bytes": 6698
+    },
+    {
+      "key": "app/geo/datasets/A23/thumbnails/16/wide.webp",
+      "sha256": "23164af46ee6ccb1efb8f802e220b6e766a7a1990f8d1bded94eef0503796f31",
+      "bytes": 11474
+    },
+    {
+      "key": "app/geo/datasets/A24/thumbnails/16/manifest.json",
+      "sha256": "d7c33478728c493883f50597df29577dc982b389962064f8d9c0d52cf8a91326",
+      "bytes": 2018
+    },
+    {
+      "key": "app/geo/datasets/A24/thumbnails/16/square.webp",
+      "sha256": "a05f22476378a4bda132c89c8d037af99d9cab12519362f589f26ed4156e6dba",
+      "bytes": 2556
+    },
+    {
+      "key": "app/geo/datasets/A24/thumbnails/16/wide.webp",
+      "sha256": "77d7930e3d1f40acc33a5bf3a23a3817394d0b3ed4df44868d2d80653a414d0c",
+      "bytes": 4018
+    },
+    {
+      "key": "app/geo/datasets/A25/thumbnails/16/manifest.json",
+      "sha256": "d7157a9af2b32f27a2b9d7d8fb0ec9ff4525eb14767ef6d802dfc67b86a3dca1",
+      "bytes": 1994
+    },
+    {
+      "key": "app/geo/datasets/A25/thumbnails/16/square.webp",
+      "sha256": "1fc76aafe372bbdd1cb283c6b6a6eb0754932b3cd7d7c7ba1f12d4f17ddca85e",
+      "bytes": 2374
+    },
+    {
+      "key": "app/geo/datasets/A25/thumbnails/16/wide.webp",
+      "sha256": "87827d80762f2f3083f6f1e5b3af35bee080943b1650c72528997c47690930a8",
+      "bytes": 5106
+    },
+    {
+      "key": "app/geo/datasets/A30a5/thumbnails/11/manifest.json",
+      "sha256": "ecf722338ab95b22865e86dd6de6b31d0a3745c6db776a80f22174bbdef97560",
+      "bytes": 2055
+    },
+    {
+      "key": "app/geo/datasets/A30a5/thumbnails/11/square.webp",
+      "sha256": "386f73295d99a73935192af943cd514b47f7a5b3c07d660563b383cf77b43de9",
+      "bytes": 2982
+    },
+    {
+      "key": "app/geo/datasets/A30a5/thumbnails/11/wide.webp",
+      "sha256": "7f54d9783f647bef8d519c54b8fd048408492c6d996da3932b7bb628ea7fc586",
+      "bytes": 5374
+    },
+    {
+      "key": "app/geo/datasets/A31a/thumbnails/24/manifest.json",
+      "sha256": "40d6746f2139bddef97047d8bb0ea01c91257d49de3c3dd2dd50bdf46b35043f",
+      "bytes": 2082
+    },
+    {
+      "key": "app/geo/datasets/A31a/thumbnails/24/square.webp",
+      "sha256": "61cb9d5cf39d1aaf5eeb5119e9f2d4d15bd1d63fc8df73526221185fd0c12e5a",
+      "bytes": 1482
+    },
+    {
+      "key": "app/geo/datasets/A31a/thumbnails/24/wide.webp",
+      "sha256": "7ce1d97ff2ff08d63a9aee82482447aa94b1bb41b7e7d3c5e9a9e5e618a75e41",
+      "bytes": 3270
+    },
+    {
+      "key": "app/geo/datasets/A42/thumbnails/18/manifest.json",
+      "sha256": "a930db1987a66626397b1affe27c7dfe03cce6b2c6a17648250dddef338ac13b",
+      "bytes": 2039
+    },
+    {
+      "key": "app/geo/datasets/A42/thumbnails/18/square.webp",
+      "sha256": "75f447f9423ea974fb263a7bd2fcd1f305a11d569f61b2fd22be552676759ef9",
+      "bytes": 3452
+    },
+    {
+      "key": "app/geo/datasets/A42/thumbnails/18/wide.webp",
+      "sha256": "466a866555173c315a022aa103c085d11ad457e2a6c77b2f860d0edda09b8023",
+      "bytes": 5820
+    },
+    {
+      "key": "app/geo/datasets/A43/thumbnails/18/manifest.json",
+      "sha256": "c110297e45ba64f1db21259e5c9f2104282dc54916c24de6e2b483b043bb2e68",
+      "bytes": 2021
+    },
+    {
+      "key": "app/geo/datasets/A43/thumbnails/18/square.webp",
+      "sha256": "a1340f27b0131041f23c5830f941ffa37cd702bb6578f436fa5fb6797ecbd8d9",
+      "bytes": 1276
+    },
+    {
+      "key": "app/geo/datasets/A43/thumbnails/18/wide.webp",
+      "sha256": "a722ed52ab61a593ce652b646d374046183cec8908a6bc8c8c6f0792755aff9a",
+      "bytes": 2206
+    },
+    {
+      "key": "app/geo/datasets/A44/thumbnails/18/manifest.json",
+      "sha256": "905467cf1f5073f7654d96da175c0c21712e204205defc39fbe2de4881cf198a",
+      "bytes": 2027
+    },
+    {
+      "key": "app/geo/datasets/A44/thumbnails/18/square.webp",
+      "sha256": "4f388dc1fabdd3fa2508aeca9789242515993e775912bba195ea2952c7f749da",
+      "bytes": 1684
+    },
+    {
+      "key": "app/geo/datasets/A44/thumbnails/18/wide.webp",
+      "sha256": "3b6f10ec739026cf7e60e46ac3c9dcbaacc28d9b80dbe0ecef0a56e3218f40f7",
+      "bytes": 2982
+    },
+    {
+      "key": "app/geo/datasets/A45/thumbnails/19/manifest.json",
+      "sha256": "705906f472267b278daa68d9ad4ef084b64a418d85f4e946ed65d19825036511",
+      "bytes": 1995
+    },
+    {
+      "key": "app/geo/datasets/A45/thumbnails/19/square.webp",
+      "sha256": "1e2c54c9251333b3386d14da214e7c51a86d20a5a29ba2e775a0069afb38cd8a",
+      "bytes": 1708
+    },
+    {
+      "key": "app/geo/datasets/A45/thumbnails/19/wide.webp",
+      "sha256": "6e394171207d8d19e8af7bcc4cebf6246931c24e2c421c54b6b7904c6dc98724",
+      "bytes": 3288
+    },
+    {
+      "key": "app/geo/datasets/A51/thumbnails/24/manifest.json",
+      "sha256": "011c28f70fc8e4cb8815472630b1ef926803e45c920d0c28cc4a5f05b209a816",
+      "bytes": 2074
+    },
+    {
+      "key": "app/geo/datasets/A51/thumbnails/24/square.webp",
+      "sha256": "b81fa861eca606570a584db620fb603fc47e368cb74ef0937246d276fb385b18",
+      "bytes": 2134
+    },
+    {
+      "key": "app/geo/datasets/A51/thumbnails/24/wide.webp",
+      "sha256": "0aad24b8917bdb739090a5d3b92cd088e5a732475cd4fe38dc431e1a4379b1f6",
+      "bytes": 3108
+    },
+    {
+      "key": "app/geo/datasets/A52/thumbnails/23/manifest.json",
+      "sha256": "fd079e9fe234ce88c83e604872ddf2d8ef5c65e974b58e194bbecd27863af917",
+      "bytes": 1989
+    },
+    {
+      "key": "app/geo/datasets/A52/thumbnails/23/square.webp",
+      "sha256": "735ee761b8b5d3e2b81ab2324103adc582249c87c767d4de074c1decfe87b2fc",
+      "bytes": 3416
+    },
+    {
+      "key": "app/geo/datasets/A52/thumbnails/23/wide.webp",
+      "sha256": "bf1deca8f5bad83fb269c71797f618e99904295814b17e4a875693212bd245bb",
+      "bytes": 8184
+    },
+    {
+      "key": "app/geo/datasets/A53/thumbnails/24/manifest.json",
+      "sha256": "1116529963458e213776822ce5cbd8966262c9509c3fe7b32a4e56483f611565",
+      "bytes": 2036
+    },
+    {
+      "key": "app/geo/datasets/A53/thumbnails/24/square.webp",
+      "sha256": "68e45cbd4ab9643f9929b7732f549fbf20c5c0fe4b45d12f61f9beb804e368da",
+      "bytes": 6264
+    },
+    {
+      "key": "app/geo/datasets/A53/thumbnails/24/wide.webp",
+      "sha256": "0a31284de6de446344f42676900878551a1f72746e43e4bff6543242d48e8cee",
+      "bytes": 10026
+    },
+    {
+      "key": "app/geo/datasets/A54/thumbnails/23/manifest.json",
+      "sha256": "0bc391fa0bc570b6b3b5b63f6dcfa039355c2b92dbce48b6b8dcb1c83b8f821e",
+      "bytes": 2003
+    },
+    {
+      "key": "app/geo/datasets/A54/thumbnails/23/square.webp",
+      "sha256": "9b73771ac72e786308f6d94923029299dcb269af2cd97b78ec863af576e64157",
+      "bytes": 4266
+    },
+    {
+      "key": "app/geo/datasets/A54/thumbnails/23/wide.webp",
+      "sha256": "2a843603e18f1486f375a10cddc46736ffe52f0fc353e05a42fac23c26615bc5",
+      "bytes": 7568
+    },
+    {
+      "key": "app/geo/datasets/A55/thumbnails/24/manifest.json",
+      "sha256": "ea706b11d059931293ce5cdd0d1b407a1cc473f21421f58eed9569724df9bcae",
+      "bytes": 2058
+    },
+    {
+      "key": "app/geo/datasets/A55/thumbnails/24/square.webp",
+      "sha256": "4722e1980d8df5ca712e30f6d6f7a607d313004dc619b1ee3af678b23ec35e36",
+      "bytes": 5700
+    },
+    {
+      "key": "app/geo/datasets/A55/thumbnails/24/wide.webp",
+      "sha256": "b235e23ef3e15f91bfe074fe392bc41881bc9822b9eed8e98efbad59fdd62603",
+      "bytes": 9332
+    },
+    {
+      "key": "app/geo/datasets/G04-c/thumbnails/11/manifest.json",
+      "sha256": "f2f63ef48e8081d984875f1b2f5ca2cfdb76b7feddbd99aa6f5379975c32225b",
+      "bytes": 2069
+    },
+    {
+      "key": "app/geo/datasets/G04-c/thumbnails/11/square.webp",
+      "sha256": "276e39f04e39bb8751b3d0c857c28e170da90362c3fe2f6bc194c75efeaf2355",
+      "bytes": 5930
+    },
+    {
+      "key": "app/geo/datasets/G04-c/thumbnails/11/wide.webp",
+      "sha256": "17ea6970d5992fc43042195a8fe8d2aa44adb4c879e86a88b5c23dcb9a045302",
+      "bytes": 12694
+    },
+    {
+      "key": "app/geo/datasets/G04-d/thumbnails/11/manifest.json",
+      "sha256": "f4c302974befa99b8dd6a83b8fb87521d0d718303f5f9366420df29f475cbbbf",
+      "bytes": 2039
+    },
+    {
+      "key": "app/geo/datasets/G04-d/thumbnails/11/square.webp",
+      "sha256": "d28de93027418102f8842ce16bc7b5d789f4395949dfb20d685df1be904157c1",
+      "bytes": 10450
+    },
+    {
+      "key": "app/geo/datasets/G04-d/thumbnails/11/wide.webp",
+      "sha256": "eab4a184f0d0fe53042c70f5a09482535afc8ee2dd79f87cc6989aa57a2739f3",
+      "bytes": 14646
+    },
+    {
+      "key": "app/geo/datasets/G08/thumbnails/15/manifest.json",
+      "sha256": "c381eee82aae79c0f5d968831945405da037012c686d9eac4de409f13e60a7a8",
+      "bytes": 1998
+    },
+    {
+      "key": "app/geo/datasets/G08/thumbnails/15/square.webp",
+      "sha256": "ad0d4b60c7787faa7b51ff99ed2c9a799c175977b3c1df352c2628c327e7988e",
+      "bytes": 11512
+    },
+    {
+      "key": "app/geo/datasets/G08/thumbnails/15/wide.webp",
+      "sha256": "bd794d2667323ef52e02fb179c575114a3b869e0cf6dc04ff8a8160175c61082",
+      "bytes": 16880
+    },
+    {
+      "key": "app/geo/datasets/L03-b/thumbnails/21/manifest.json",
+      "sha256": "e158153e33418e98b9a1996b9843351125c67de8178239874931741c88fe30d5",
+      "bytes": 2060
+    },
+    {
+      "key": "app/geo/datasets/L03-b/thumbnails/21/square.webp",
+      "sha256": "67295dd0ea57721c1c453caa7a0d50a2c0a1a0c5d725735661125bc9cc7746b1",
+      "bytes": 6276
+    },
+    {
+      "key": "app/geo/datasets/L03-b/thumbnails/21/wide.webp",
+      "sha256": "c26920b0047d22e30f1165987bd3a4508a2752e11ddec89e94baa0ed752a9afb",
+      "bytes": 10452
+    },
+    {
+      "key": "app/geo/datasets/L03-b-c/thumbnails/21/manifest.json",
+      "sha256": "d771420552a5f6ef37a15e3fd2899d0efc095b280533ca140804e565779cb242",
+      "bytes": 2091
+    },
+    {
+      "key": "app/geo/datasets/L03-b-c/thumbnails/21/square.webp",
+      "sha256": "02645974e1b13a01eae3832591d85ae0a290d20e81c07c01b9c4fcca02a57ef2",
+      "bytes": 3254
+    },
+    {
+      "key": "app/geo/datasets/L03-b-c/thumbnails/21/wide.webp",
+      "sha256": "d07c9ba66d329532c31cf73aafacd0f8571c806c5681e8e9be98d06d4bba9956",
+      "bytes": 33544
+    },
+    {
+      "key": "app/geo/datasets/L03-b-u/thumbnails/21/manifest.json",
+      "sha256": "a4bbf89474bbecb41ef89ee31a0cd43b43082d2ea0ee38c7ec919604f62a2301",
+      "bytes": 2069
+    },
+    {
+      "key": "app/geo/datasets/L03-b-u/thumbnails/21/square.webp",
+      "sha256": "2329a0cb84aaf983effe741f04816b7ff47d0c17a5543e817804639704750346",
+      "bytes": 7558
+    },
+    {
+      "key": "app/geo/datasets/L03-b-u/thumbnails/21/wide.webp",
+      "sha256": "571d9b3517f1817a3b13bceb1fdba55d68586ab59c82fbee76336040092a7e5e",
+      "bytes": 15122
+    },
+    {
+      "key": "app/geo/datasets/N08/thumbnails/21/manifest.json",
+      "sha256": "948aaa8a536f5e56cc6c3a9ee4e66e3361b16511f7c9a009a6616d756314a188",
+      "bytes": 1981
+    },
+    {
+      "key": "app/geo/datasets/N08/thumbnails/21/square.webp",
+      "sha256": "4cf97954e6bf4c24f9e85f45c460fad61f4bd0e402f154d8645c219bcab08279",
+      "bytes": 2106
+    },
+    {
+      "key": "app/geo/datasets/N08/thumbnails/21/wide.webp",
+      "sha256": "15c7d6d156634ae3156987c3d38c3e81ea732951a872a9a075debd0fe91ebf47",
+      "bytes": 3804
+    },
+    {
+      "key": "app/geo/datasets/S05-d/thumbnails/18/manifest.json",
+      "sha256": "768087372434bd4a577929dfa24d6536364a2ef8deb0088986153b324d3fe6ab",
+      "bytes": 2107
+    },
+    {
+      "key": "app/geo/datasets/S05-d/thumbnails/18/square.webp",
+      "sha256": "2b5e1d3cfddfae913fea2a0c89cdc48e57b76f70182e7e43578b1866c05bea27",
+      "bytes": 3398
+    },
+    {
+      "key": "app/geo/datasets/S05-d/thumbnails/18/wide.webp",
+      "sha256": "97089924987f7b9df61b220f518310a80dc8c73b2a8a549807daeeaed127f28b",
+      "bytes": 5404
+    },
+    {
+      "key": "app/geo/datasets/S10a/thumbnails/16/manifest.json",
+      "sha256": "c2bc62ff63385d0fd63da85119a00fc9d8361cf14f5e4a86f587cecf56063184",
+      "bytes": 2108
+    },
+    {
+      "key": "app/geo/datasets/S10a/thumbnails/16/square.webp",
+      "sha256": "80a645517f0eea23159dc1eabf2f3241e6bab1fe81ad76ec99b4c5b940910563",
+      "bytes": 12624
+    },
+    {
+      "key": "app/geo/datasets/S10a/thumbnails/16/wide.webp",
+      "sha256": "f575037ba579feff7e7ba95fa3e173dcd94cedab64d0225dd31c4d4da82936cd",
+      "bytes": 30534
+    },
+    {
+      "key": "app/geo/datasets/m250r6/thumbnails/24/manifest.json",
+      "sha256": "f1430cf11301cee08220aaa56b2383954b6477f502440cddeba3749b049d8090",
+      "bytes": 3016
+    },
+    {
+      "key": "app/geo/datasets/m250r6/thumbnails/24/square.webp",
+      "sha256": "22ae3028619085cf0dc4c74a5ed6f94025f7564520633185e009788c714d763f",
+      "bytes": 5172
+    },
+    {
+      "key": "app/geo/datasets/m250r6/thumbnails/24/wide.webp",
+      "sha256": "f47dedcb21bcff1598e2ef21093633d1c5d5f507c378bb6ff790022b3d69da1c",
+      "bytes": 24336
+    },
+    {
+      "key": "app/geo/datasets/m500r6/thumbnails/24/manifest.json",
+      "sha256": "814fc67cb1d54cad743fb30dbb92798229dc57dd523d0f88f9452658551c606f",
+      "bytes": 2055
+    },
+    {
+      "key": "app/geo/datasets/m500r6/thumbnails/24/square.webp",
+      "sha256": "c0b154a6fc9e3a96c32b7ccf4528fad2f7ef0cd35c0bc43153e0062a9906adae",
+      "bytes": 5894
+    },
+    {
+      "key": "app/geo/datasets/m500r6/thumbnails/24/wide.webp",
+      "sha256": "102788b07d2e5afc1d1b5cfc3b46df0cd12038eb53aa088b9ae8b50706efba0d",
+      "bytes": 18978
+    },
+    {
+      "key": "app/geo/datasets/A31b/thumbnails/25/manifest.json",
+      "sha256": "b5a0a5452d2e1de2469c6caca7e3527079d2c7f00db24560995773c1b344929c",
+      "bytes": 6535
+    },
+    {
+      "key": "app/geo/datasets/A31b/thumbnails/25/square.webp",
+      "sha256": "5bef0f69e882a290015f815881376b8d3ac3e0bd030f0547c7d1b03fe8bfcaa9",
+      "bytes": 4146
+    },
+    {
+      "key": "app/geo/datasets/A31b/thumbnails/25/wide.webp",
+      "sha256": "f2bce062261b53e2d43f71203e225a5536911c65897a0016d08226f9d3aa8ffc",
+      "bytes": 11204
+    }
+  ],
+  "crossPcPreview": {
+    "checkedAt": "2026-09-09T08:30:32.6679719Z",
+    "localFileAbsent": true,
+    "redirectStatus": 307,
+    "redirectTarget": "http://127.0.0.1:4777/app/geo/datasets/L01/thumbnails/26/wide.webp",
+    "remoteStatus": 200,
+    "bytes": 36418,
+    "sha256": "0f6cf6a9883e825ee9f6c5891a0a7a3cb2afdf4416575f18255bc7a28adcacc3",
+    "match": true
+  },
+  "temporaryTransferRemoved": true,
+  "ciPermissionsRestored": true
+}

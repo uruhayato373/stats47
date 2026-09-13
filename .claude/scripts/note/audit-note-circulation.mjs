@@ -255,6 +255,7 @@ console.log(`site link: ${articleSummary.withSiteLink}/${articleSummary.total}`)
 console.log(`related note: ${articleSummary.withRelatedNoteLink}/${articleSummary.total}`);
 console.log(`magazine link: ${articleSummary.withMagazineLink}/${articleSummary.total}`);
 console.log(`hashtag >=95: ${articleSummary.compliantHashtags}/${articleSummary.total}`);
+console.log(`cover: configured=${articleSummary.coversConfigured} missing=${articleSummary.coversMissing} unknown=${articleSummary.coversUnknown}`);
 console.log(`magazine exact: ${report.summary.exactMagazineMemberships}/${liveMagazines.length}`);
 console.log(`report: ${OUTPUT}`);
 

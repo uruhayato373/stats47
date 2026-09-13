@@ -17,6 +17,7 @@ import {
   KNOWN_MUNICIPALITY_THEME_SLUGS,
   listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
+import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 import {
   readActiveKeysForSitemapFromR2,
   readSurveysFromR2,
@@ -61,7 +62,7 @@ const PREFECTURE_CODES = Array.from(
 /** Type A テーマ（都道府県単位で集計できるもの）— ports/railway/roads は除外 */
 const TYPE_A_THEME_SLUGS = [...AREA_THEME_SLUGS];
 
-const GEO_PAGES: MetadataRoute.Sitemap = GEO_INDEXABLE_ROUTES.map((path) => ({
+const GEO_PAGES: MetadataRoute.Sitemap = [...GEO_INDEXABLE_ROUTES,...GIS_DATASETS.filter(dataset=>getKsjLicensePolicy(dataset.license).sourcePublication==='public-r2-eligible').map(dataset=>`/geo/datasets/${dataset.dataId}`)].map((path) => ({
   url: BASE_URL + path,
   changeFrequency: 'monthly' as const,
   priority: 0.5,

@@ -189,7 +189,7 @@ async function processArchive(options: {
       uncompressedBytes: number;
     }> = [];
     try {
-      const geojsonFiles = await extractGeoJson(sourceZipPath, '');
+      const geojsonFiles = await extractGeoJson(sourceZipPath, '', getCodeConfig(dataset.dataId)?.shapefileEncoding);
       const groups = partitionByLimits(
         geojsonFiles,
         (file) => statSync(file).size,

@@ -252,7 +252,7 @@
       "expectedConfigHash": "bfe416412473b0c2",
       "themeKey": "local-economy",
       "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart"
+      "componentType": "line-chart"
     },
     {
       "metricKey": "employed-people-ratio-secondary",
@@ -260,7 +260,7 @@
       "expectedConfigHash": "6043c40a971e363d",
       "themeKey": "local-economy",
       "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart"
+      "componentType": "line-chart"
     },
     {
       "metricKey": "employed-people-ratio-tertiary",
@@ -268,7 +268,7 @@
       "expectedConfigHash": "c3cd05630b85cad4",
       "themeKey": "local-economy",
       "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart"
+      "componentType": "line-chart"
     },
     {
       "metricKey": "employment-mobility-rate",

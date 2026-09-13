@@ -1,0 +1,74 @@
+name: Geo source data and viewer index
+
+on:
+  # First release can run before this workflow exists on main. Subsequent generation
+  # changes use the same bounded publisher, never a broad R2 mirror sync.
+  push:
+    branches: [develop]
+    paths:
+      - '.github/workflows/geo-source-publish.yml'
+      - 'apps/web/scripts/publish-geo-source-pages.ts'
+      - 'apps/web/scripts/geo-source-publish-core.ts'
+      - 'apps/web/scripts/export-geo-source-catalog.ts'
+      - 'packages/gis/src/mlit-ksj/scripts/rebuild-source-page-data.ts'
+      - 'packages/gis/src/mlit-ksj/scripts/rebuild-medical-areas.ts'
+      - 'packages/gis/src/mlit-ksj/scripts/build-flood-view-files.ts'
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: 'all, none (indexes only), or repair IDs separated by commas'
+        required: true
+        default: 'all'
+        type: string
+      apply:
+        description: 'Publish the exact plan after a successful dry-run'
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Test exact scope, conservation, compression and write guards
+        working-directory: apps/web
+        run: npx vitest run scripts/geo-source-publish.test.ts
+      - name: Rebuild official sources and prepare exact plan
+        env:
+          REPAIR_IDS: ${{ github.event_name == 'push' && 'all' || inputs.ids }}
+        run: npx tsx apps/web/scripts/publish-geo-source-pages.ts prepare --ids "$REPAIR_IDS"
+      - name: Dry-run the complete exact plan
+        run: npx tsx apps/web/scripts/publish-geo-source-pages.ts publish
+      - name: Publish and verify S3 and public HTTP bytes
+        if: github.event_name == 'push' || inputs.apply
+        run: npx tsx apps/web/scripts/publish-geo-source-pages.ts publish --apply
+      - name: Preserve exact keys, original source proof and readback
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: geo-source-publication-${{ github.run_id }}
+          path: .local/verification/geo-source-publish/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

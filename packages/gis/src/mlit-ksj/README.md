@@ -43,6 +43,74 @@ npm run audit:public-ksj-manifests --workspace packages/gis
 
 ## パイプライン処理
 
+### 単体GISページの原典修復
+
+`scripts/rebuild-source-page-data.ts --data-id P04|C28|N08 --source-dir <公式ZIP保存先>` は、
+P04/20の全47県、C28/07の4レイヤー、N08/21の区域・標点をローカルR2へ再生成する。
+ZIPは公式配布名のまま一時領域へ保存し、実行はリポジトリルートから `node --import tsx` を付ける。
+出典URL・元ZIP SHA・出力SHA・地物数は `app/geo/datasets/<ID>/repair.json` に記録する。
+R2への転送はこのスクリプトでは行わない。
+
+P04の属性対応は `property-map.ts` が正典。施設名は002、分類は001、診療科目は004〜006、
+開設者分類は007、病床数は008であり、診療科目を県コードとして扱わない。
+C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で切れているため、
+同梱UTF-8 GMLの関係ID・設置期間・変遷IDを照合して復元する。ZIPのSHAが変われば停止する。
+一般の再デコードや名称からの推測では修復しない。
+
+単体ページの確認状況は `.claude/state/geo/source-pages.json`、残作業は
+`.claude/todo/backlog.md` の `GEO-SOURCE-PAGES-01` を参照する。
+
+### 単体GISのカード画像
+
+リポジトリルートで `node --import tsx apps/web/scripts/generate-geo-source-thumbnails.ts` を実行する。
+入力はローカルの公開catalog/itemと原典GIS（ローカル優先、無ければR2）。
+`R2_PUBLIC_FETCH_URL` はWindowsの開発gatewayなどの読み込み先を指定できる。
+`--ids L01,N02` で対象を限定できる。出力は `.local/image-staging/geo-thumbnails/`、
+機械進捗は `.claude/state/geo/source-thumbnails.json`。元データは変更しない。
+
+表示範囲・版・配布ファイル・表示例ラベルの正典は
+`apps/web/src/features/geo-analysis/lib/geo-source-thumbnail.ts`。
+全国分布は空港などの疎な地点、詳細は都道府県または地域抜粋で表す。
+島しょを除く場合や配布ファイルの一部を使う場合は表示例に明記し、収録範囲と混同しない。
+横長16:9（640×360）と正方形1:1（256×256）を同じ地理範囲から各々生成し、
+追加のOGP・SNS比率は消費先ができるまで作らない。描画は北上のMercator、地物の間引きなし。
+密な流動線は明示した発着地の属性条件で抜粋し、条件と対象地物数をmanifestへ記録する。
+全国の空港は原典の標点、狭い保存地区は地域拡大を使う。メッシュの線が色を覆う縮尺では格子線を省く。
+標高は固定5段階、100m等の土地利用は原典区分、1km土地利用は最多面積の区分で色分けする。
+元GISの形状・属性は保持し、詳細ページの青色表示と色の役割が異なることを一覧で説明する。
+
+`node --import tsx apps/web/scripts/audit-geo-source-thumbnails.ts --browser` で全画像の寸法・SHA・
+版/入力系譜・色の付いた画素を確認し、320/390/768/1280/1440pxのカード・検索・リンクを検査する。
+画像見本とスクリーンショットは `.local/geo-source-thumbnails/`、検証結果は
+`.claude/state/geo/source-thumbnails-audit.json`。本番公開とは別のローカル検証である。
+本番反映時は生成に `--plan` を付けてremoteを照合し、
+`packages/r2-storage/src/scripts/push-generated-image-set.ts --plan .local/image-generation-publish-plan-geo-thumbnails.json`
+へ渡す（2時間有効の共通plan）。既定のローカル生成はアップロード可能なplanを作らない。
+
+別PCの表示では、開発用preview APIがローカルstagingを優先し、ファイルが無ければR2へ転送する。
+画像を使うだけなら原典GISの取得や再生成は不要。画像本体とmanifestはR2、生成設定・検証記録はGitで管理する。
+
+ローカルにS3認証が無い場合は、生成・目視確認済みの画像を次の手順で既存CIへ渡す。
+1. `node --import tsx apps/web/scripts/sync-geo-source-thumbnails.ts --export /tmp/geo-thumbnails.json`。
+   Git上の生成fingerprint・版・入力キーと画像SHAを照合した150objectだけを出力する。
+2. bundle全体のSHA256を取り、`geo-thumbnail-transfer-<SHA先頭12桁>` の一時draft releaseへ
+   `geo-thumbnails.json` として添付する。画像bundleをGitへcommitしない。
+3. `generate-ogp-images.yml` を対象作業ブランチで手動実行する。
+   `type=geo-thumbnails`、`staged_asset_id=<添付ファイルのasset ID>`、`staged_sha256=<SHA全体>`、
+   `apply=true` を指定する。CIは対象・SHA検証→S3照合→共通publisher dry-run→反映→
+   全画像・manifestのS3/public GETによるSHA照合を行う。サイト本体はデプロイしない。
+4. artifact `geo-thumbnail-publication` のJSONを
+   `.claude/state/geo/source-thumbnails-publication.json` へ取り込み、一時draft releaseを削除する。
+   反映失敗時は未完了として残し、再実行時はremote照合からやり直す。
+
+受け渡しでは生成したPCのrendererHashをGitの生成記録で固定し、別OSで再描画しない。
+CIは既定でcontents:read。private draftの添付取得はread権限では403になるため、
+オーナーの明示承認を得た同期1回だけ画像同期jobにcontents:writeを設定し、終了後に必ずreadへ戻す。
+checkoutはpersist-credentials:falseのままにする。添付asset IDを直接指定し、draft自体は公開しない。
+CIが参照する設定とfingerprintが変わったbundleは拒否する。R2画像の照合成功と、
+GIS索引・原データ・ページ本体の本番公開確認は別の状態として管理する。
+
+
 ```
 MLIT zip ダウンロード → /tmp/ に保存
   → GeoJSON 抽出（UTF-8/ ディレクトリ優先）

@@ -20,7 +20,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "type-check": "NODE_OPTIONS=\"--max-old-space-size=4096\" tsc --noEmit"
+    "type-check": "cross-env NODE_OPTIONS=--max-old-space-size=4096 tsc --noEmit"
   },
   "dependencies": {
     "@stats47/area": "*",

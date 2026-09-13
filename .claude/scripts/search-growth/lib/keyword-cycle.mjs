@@ -86,7 +86,8 @@ export function selectKeyword({ keywords, log, snapshot, pending = [] }) {
   const rows = new Map(snapshot.current.rows.map(row => [pairKey(row), row]));
   const blocked = new Set([...log.entries.filter(e => ['observing', 'achieved'].includes(e.status)), ...pending].map(e => e.keyword));
   const blockedPaths = new Set([...log.entries.filter(e => e.status === 'observing'), ...pending].map(e => e.targetPath));
-  const registered = new Map([...keywords.keywords, ...log.entries].map(e => [e.keyword, e]));
+  const registered = new Map(keywords.keywords.map(e => [e.keyword, e]));
+  for (const entry of log.entries) registered.set(entry.keyword, { ...registered.get(entry.keyword), ...entry });
   const candidates = [];
   for (const entry of registered.values()) {
     if (blocked.has(entry.keyword) || blockedPaths.has(entry.targetPath)) continue;

@@ -1,0 +1,2122 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-08T04:20:11.037Z",
+  "scope": {
+    "site": "stats47.jp",
+    "a8": "shared account a25050375786; not stats47-exclusive",
+    "moshimoSiteId": "638943",
+    "afbSiteId": "959426"
+  },
+  "complete": false,
+  "sources": [
+    {
+      "path": ".claude/state/ads/affiliate-catalog.json",
+      "beforeSha256": "2710f570c89571792aa723c599ab165eac52306c27b9bf6947cd591504e3294d"
+    },
+    {
+      "path": ".claude/state/ads/a8-catalog.json",
+      "beforeSha256": "b3a8fb4e4f9ed67dab108c599fddf26567c011aca6d2bd25c6d6a039ff547803"
+    }
+  ],
+  "evidence": [
+    {
+      "asp": "moshimo",
+      "list": "partnered",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/partnered-1.txt",
+      "sha256": "3c6d00e9e34d341d9fd4215fd834709be75f0d637bc42ce60f2b376b2a53debe"
+    },
+    {
+      "asp": "moshimo",
+      "list": "applying",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/applying-1.txt",
+      "sha256": "9abebc0fa44d92fa7ff8fb2d2f5be3e9e6ee212ea596c1df0e5a76b7689aad09"
+    },
+    {
+      "asp": "moshimo",
+      "list": "denied",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/denied-1.txt",
+      "sha256": "e17f315f0041d3f418f4d3f053afdb8b7d7c2daa66674a5e4b744a8ca03c3fd5"
+    },
+    {
+      "asp": "afb",
+      "list": "partnered",
+      "path": ".local/affiliate-status/stocktake-20260908/afb/partnered-page-1.json",
+      "sha256": "3249c8d7d257f49856fab74bba57027a4592629a6d5ae594c3c10ca4b20de784"
+    },
+    {
+      "asp": "afb",
+      "list": "partnered",
+      "path": ".local/affiliate-status/stocktake-20260908/afb/partnered-page-2.json",
+      "sha256": "dae7dee485bcb041f80081cfd4a921fd9b2258e668410520254d9e456c42ce19"
+    },
+    {
+      "asp": "afb",
+      "list": "applying",
+      "path": ".local/affiliate-status/stocktake-20260908/afb/applying-page-1.json",
+      "sha256": "06b816e67fa34488632276ee67b01ed0f8109a34accaff5164ee24a82a98ed0a"
+    },
+    {
+      "asp": "afb",
+      "list": "rejected",
+      "path": ".local/affiliate-status/stocktake-20260908/afb/rejected-page-1.json",
+      "sha256": "74eaf16de97874e171e909108ef71b43dd053dba3c339001c26206949e2b9ff7"
+    },
+    {
+      "asp": "afb",
+      "list": "released",
+      "path": ".local/affiliate-status/stocktake-20260908/afb/released-page-1.json",
+      "sha256": "241e79049225df4d96daf307113ff379ef90ff36a22a53283e21709c8f3a83f8"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "7404",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7404.txt",
+      "sha256": "97724c05be7b53f636042f509be820aaaa90f5486a77fb394bd73e8576b2c492"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "7614",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7614.txt",
+      "sha256": "3a8bdf4f6f5891993581530155feb46583128e5c3583cda66c3b5bd84cbf70fd"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "7048",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7048.txt",
+      "sha256": "f2261a69e6cfa0a3a94f81a28f2bbb98a8abd4a156a747339d56cf8361d26904"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "7042",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7042.txt",
+      "sha256": "f2261a69e6cfa0a3a94f81a28f2bbb98a8abd4a156a747339d56cf8361d26904"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "6398",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6398.txt",
+      "sha256": "2baf2e50a17032e078ea4cda9a8049c95ed64021438a22ebeb39ef600e35553b"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "6623",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6623.txt",
+      "sha256": "f2261a69e6cfa0a3a94f81a28f2bbb98a8abd4a156a747339d56cf8361d26904"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "7392",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7392.txt",
+      "sha256": "f2261a69e6cfa0a3a94f81a28f2bbb98a8abd4a156a747339d56cf8361d26904"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "6214",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6214.txt",
+      "sha256": "f2261a69e6cfa0a3a94f81a28f2bbb98a8abd4a156a747339d56cf8361d26904"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "5685",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-5685.txt",
+      "sha256": "f2261a69e6cfa0a3a94f81a28f2bbb98a8abd4a156a747339d56cf8361d26904"
+    },
+    {
+      "asp": "moshimo",
+      "list": "detail",
+      "id": "7558",
+      "path": ".local/affiliate-status/stocktake-20260908/moshimo/detail-7558.txt",
+      "sha256": "20137c9ea0020b57ba4f80a02181adbd818c29e019b381b5720d42d3de3f6879"
+    },
+    {
+      "asp": "a8",
+      "path": ".local/affiliate-status/stocktake-20260908/a8/manifest.json",
+      "sha256": "e2739fad8e6b5d6dd6cfc55fcced4516e5a77824fcadfe5dcda61a276efb0014"
+    }
+  ],
+  "coverage": {
+    "a8": {
+      "partnered": {
+        "uiTotal": 161,
+        "pageRows": [
+          100,
+          61,
+          0
+        ],
+        "unique": 161,
+        "complete": true
+      },
+      "applying": {
+        "uiTotal": null,
+        "csvTotal": 19,
+        "pageRows": [
+          19,
+          19
+        ],
+        "unique": 19,
+        "complete": true,
+        "totalCaveat": "UI does not display a total; unpaginated list, CSV and terminal repeat agree"
+      }
+    },
+    "moshimo": {
+      "partnered": {
+        "total": 44,
+        "pages": 1,
+        "complete": true
+      },
+      "applying": {
+        "total": 29,
+        "pages": 1,
+        "complete": true
+      },
+      "denied": {
+        "total": 37,
+        "pages": 1,
+        "complete": true
+      }
+    },
+    "afb": {
+      "partnered": {
+        "total": 72,
+        "pages": 2,
+        "complete": true
+      },
+      "applying": {
+        "total": 7,
+        "pages": 1,
+        "complete": true
+      },
+      "rejected": {
+        "total": 40,
+        "pages": 1,
+        "complete": true
+      },
+      "released": {
+        "total": 1,
+        "pages": 1,
+        "complete": true
+      }
+    },
+    "rakuten": {
+      "complete": false,
+      "authenticated": true,
+      "registeredSiteCount": 0,
+      "siteAsserted": false,
+      "reason": "registered-sites-empty; owner must confirm this is the account used for existing stats47 links",
+      "evidencePath": ".local/affiliate-status/stocktake-20260908/rakuten/sites.json"
+    },
+    "valuecommerce": {
+      "complete": true,
+      "authenticated": true,
+      "siteAsserted": true,
+      "siteId": "3751516",
+      "partnered": {
+        "total": 7,
+        "pages": 1,
+        "complete": true
+      },
+      "applying": {
+        "total": 1,
+        "pages": 1,
+        "complete": true
+      },
+      "source": ".local/affiliate-status/stocktake-20260908/valuecommerce/summary.json",
+      "sha256": "6f67628075ccd10c137a2652c5f414e56a483cdfbb0defe93c8bcf7f58b3c2f3"
+    }
+  },
+  "valuecommerceObservation": {
+    "siteId": "3751516",
+    "siteName": "統計で見る都道府県",
+    "registeredSiteUrl": "http://stats47.jp",
+    "observedAt": "2026-09-08T04:36:44.541Z",
+    "source": ".local/affiliate-status/stocktake-20260908/valuecommerce/summary.json",
+    "sha256": "6f67628075ccd10c137a2652c5f414e56a483cdfbb0defe93c8bcf7f58b3c2f3",
+    "catalogIntegration": "Observed program catalog; legacy three-ASP automatic collector and creative programRef remain unchanged.",
+    "programs": [
+      {
+        "programId": "2098976",
+        "merchantId": "2784542",
+        "name": "リクナビNEXT『会員登録』キャンペーン",
+        "status": "approved",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/2098976"
+      },
+      {
+        "programId": "179",
+        "merchantId": "221",
+        "name": "高級ホテル・旅館予約「一休.com」",
+        "status": "approved",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/179"
+      },
+      {
+        "programId": "2076856",
+        "merchantId": "2630061",
+        "name": "看護師求人サイト MCナースネット会員登録キャンペーン",
+        "status": "approved",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/2076856"
+      },
+      {
+        "programId": "2040179",
+        "merchantId": "2382533",
+        "name": "旅行予約のエクスペディア【Expedia】　宿泊／航空券＋宿泊／航空券",
+        "status": "approved",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/2040179"
+      },
+      {
+        "programId": "2136156",
+        "merchantId": "2201292",
+        "name": "ヤフーショッピング　自動提携機能用プロモーション",
+        "status": "approved",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/2136156"
+      },
+      {
+        "programId": "2147651",
+        "merchantId": "3366797",
+        "name": "食べログ　飲食店ネット予約プログラム",
+        "status": "approved",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/2147651"
+      },
+      {
+        "programId": "2171594",
+        "merchantId": "3741265",
+        "name": "40~50代のIT人材向け転職支援【エイジレスエージェント】",
+        "status": "approved",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/2171594"
+      },
+      {
+        "programId": "2161931",
+        "merchantId": "3553003",
+        "name": "看護師の転職支援はディップ「ナースではたらこ」",
+        "status": "applying",
+        "detailUrl": "https://aff.valuecommerce.ne.jp/ad/adDetail/2161931"
+      }
+    ],
+    "existingLinkMapping": [
+      {
+        "localAdId": "af_ikyu_travel_001",
+        "legacyProgramRef": "valuecommerce:892653250",
+        "linkPid": "892653250",
+        "linkPidMeaning": "adSpaceId",
+        "adSpaceId": "892653250",
+        "programId": "179",
+        "merchantId": "221",
+        "programName": "高級ホテル・旅館予約「一休.com」",
+        "adId": "2851410",
+        "status": "approved",
+        "mappingEvidence": "Existing ad space detail names the assigned program; exact normalized name matches the site-scoped partnered row.",
+        "sourceUrl": "https://aff.valuecommerce.ne.jp/ad/adFlightDetail/892653250",
+        "productionDeliveryVerified": false,
+        "evidence": {
+          "path": ".local/affiliate-status/stocktake-20260908/valuecommerce/flight-892653250-inspection.json",
+          "sha256": "5688a7ef2bb6e51dd856e6b3d86288bccb81fc6f2b7626cab386a9a326b765cc"
+        }
+      },
+      {
+        "localAdId": "af_expedia_travel_001",
+        "legacyProgramRef": "valuecommerce:892653257",
+        "linkPid": "892653257",
+        "linkPidMeaning": "adSpaceId",
+        "adSpaceId": "892653257",
+        "programId": "2040179",
+        "merchantId": "2382533",
+        "programName": "旅行予約のエクスペディア【Expedia】　宿泊／航空券＋宿泊／航空券",
+        "adId": "2500718",
+        "status": "approved",
+        "mappingEvidence": "Existing ad space detail names the assigned program; exact normalized name matches the site-scoped partnered row.",
+        "sourceUrl": "https://aff.valuecommerce.ne.jp/ad/adFlightDetail/892653257",
+        "productionDeliveryVerified": false,
+        "evidence": {
+          "path": ".local/affiliate-status/stocktake-20260908/valuecommerce/flight-892653257-inspection.json",
+          "sha256": "de93faf1ec37a8d42814c30fb02895b5761194c73da8bb9d39535059eeb9d3d7"
+        }
+      }
+    ],
+    "additionalAdSpace": {
+      "adSpaceId": "892582744",
+      "name": "LinkSwitch_892582744",
+      "advertiser": "MC-ナースネット",
+      "configuredAdCount": 7,
+      "detailNotInspected": true
+    },
+    "limitations": [
+      "Program/merchant IDs and ad-space PID are kept distinct.",
+      "Rejected/released program lists are outside the requested partnered/pending scan."
+    ]
+  },
+  "appliedChanges": {
+    "statusCount": 77,
+    "nameCount": 0,
+    "a8Added": [
+      "s00000026077001"
+    ],
+    "a8Promoted": [],
+    "transitions": [
+      {
+        "program": "moshimo-7333",
+        "asp": "moshimo",
+        "id": "7333",
+        "name": "マネカフェ｜カフェタイムで気軽にFP診断",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=2&limit=100&shop_site_id=638943",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+      },
+      {
+        "program": "moshimo-7059",
+        "asp": "moshimo",
+        "id": "7059",
+        "name": "みんなの生命保険アドバイザーの無料保険相談",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=2&limit=100&shop_site_id=638943",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+      },
+      {
+        "program": "moshimo-6548",
+        "asp": "moshimo",
+        "id": "6548",
+        "name": "テックゲートエキスパート｜20代・30代のITコンサル転職の相談",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "否認中",
+        "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+      },
+      {
+        "program": "moshimo-6171",
+        "asp": "moshimo",
+        "id": "6171",
+        "name": "One Month Program｜ビジネスパーソン向けの1ヶ月短期集中英語パーソナルトレーニングプログラムの無料カウンセリング申込",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "否認中",
+        "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+      },
+      {
+        "program": "moshimo-6128",
+        "asp": "moshimo",
+        "id": "6128",
+        "name": "お仕事ラボ｜大手調剤チェーンの経営で安心♪薬剤師の派遣・転職の新規申込",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "否認中",
+        "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+      },
+      {
+        "program": "moshimo-5816",
+        "asp": "moshimo",
+        "id": "5816",
+        "name": "忍者CODE｜未経験からプロを目指せるオンラインプログラミングスクールの新規各種申込",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "否認中",
+        "url": "https://af.moshimo.com/af/shop/promotion/search?apply_status=3&shop_site_id=638943&limit=100",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/live.json"
+      },
+      {
+        "program": "moshimo-6214",
+        "asp": "moshimo",
+        "id": "6214",
+        "name": "住空間本舗｜キッチンリフォームの無料現地調査申込み",
+        "catalog": "applying",
+        "actual": "unavailable",
+        "rawStatus": "このプロモーションは終了しました。",
+        "url": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=6214&shop_site_id=638943",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/detail-6214.txt"
+      },
+      {
+        "program": "moshimo-5685",
+        "asp": "moshimo",
+        "id": "5685",
+        "name": "保険相談アイパートナーズ｜FPへの無料相談",
+        "catalog": "applying",
+        "actual": "unavailable",
+        "rawStatus": "このプロモーションは終了しました。",
+        "url": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=5685&shop_site_id=638943",
+        "evidence": ".local/affiliate-status/stocktake-20260908/moshimo/detail-5685.txt"
+      },
+      {
+        "program": "afb-16330",
+        "asp": "afb",
+        "id": "16330",
+        "name": "月額2,200円～ポケット型Wi-Fi【にゃんこWi-Fi】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16728",
+        "asp": "afb",
+        "id": "16728",
+        "name": "東京ガスのウォーターサーバー",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16674",
+        "asp": "afb",
+        "id": "16674",
+        "name": "基本料金と電力量料金が「シンプルな」実質再エネ電力プラン【キューエネスでんき】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16654",
+        "asp": "afb",
+        "id": "16654",
+        "name": "新規オープン【MBDクリニック 恵比寿院】来院プロモーション",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16588",
+        "asp": "afb",
+        "id": "16588",
+        "name": "オンライン心療内科【mentoa（メントア）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16575",
+        "asp": "afb",
+        "id": "16575",
+        "name": "【タダ電】WEB申込完了",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16507",
+        "asp": "afb",
+        "id": "16507",
+        "name": "リゾートバイト 日本の旅館でおもてなし【OMOTENA（オモテナ）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16263",
+        "asp": "afb",
+        "id": "16263",
+        "name": "複数の運用方法を比較して無料で学べる！選べる！【ウェルスコーチ（資産運用）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13669",
+        "asp": "afb",
+        "id": "13669",
+        "name": "妊婦さんのための医療保険相談「ガーデン」",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15177",
+        "asp": "afb",
+        "id": "15177",
+        "name": "【英語コーチングスクール PRESENCE】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15066",
+        "asp": "afb",
+        "id": "15066",
+        "name": "妊娠・出産・育児の保険ならベビープラネット保険相談",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14999",
+        "asp": "afb",
+        "id": "14999",
+        "name": "経理・財務の経験者に選ばれる特化型エージェント【BEET-AGENT（ビートエージェント）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14642",
+        "asp": "afb",
+        "id": "14642",
+        "name": "ITエンジニア特化最強の転職エージェント【KIKKAKE AGENT（キッカケエージェント）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15199",
+        "asp": "afb",
+        "id": "15199",
+        "name": "ゲーム業界の求人・転職・中途採用情報なら【ファミキャリ！】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14581",
+        "asp": "afb",
+        "id": "14581",
+        "name": "今話題の60分500円の英会話スクール【One Coin English/ワンコイングリッシュ】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15202",
+        "asp": "afb",
+        "id": "15202",
+        "name": "コンサル特化の転職エージェント【MyVision（マイビジョン）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14192",
+        "asp": "afb",
+        "id": "14192",
+        "name": "SDGsの新築・リフォームの住環境情報サイト【ハウジングバザール】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14040",
+        "asp": "afb",
+        "id": "14040",
+        "name": "[スマートフォン専用]若手ハイエンド向け転職サイト『ASSIGN』",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13857",
+        "asp": "afb",
+        "id": "13857",
+        "name": "税理士・科目合格者特化の転職エージェント【ハイスタ税理士】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13856",
+        "asp": "afb",
+        "id": "13856",
+        "name": "公認会計士特化型転職エージェント【ハイスタ会計士】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13735",
+        "asp": "afb",
+        "id": "13735",
+        "name": "保険の無料相談サイト「ガーデン」",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13615",
+        "asp": "afb",
+        "id": "13615",
+        "name": "弁護士・法務人材専門の転職エージェント【NO-LIMIT（ノーリミット）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15713",
+        "asp": "afb",
+        "id": "15713",
+        "name": "学資保険一括資料請求比較【トモママ】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13223",
+        "asp": "afb",
+        "id": "13223",
+        "name": "学資保険の無料相談サイト「ガーデン」",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15977",
+        "asp": "afb",
+        "id": "15977",
+        "name": "＜多汗症＞24時間予約受付可【東京オンラインクリニック】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16236",
+        "asp": "afb",
+        "id": "16236",
+        "name": "20代のキャリア悩みに特化した無料カウンセリングサービス【キャリコン】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-12640",
+        "asp": "afb",
+        "id": "12640",
+        "name": "【法人・事業者様向け】採用・人事担当の方の強い味方！【ドラEVER】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-11624",
+        "asp": "afb",
+        "id": "11624",
+        "name": "知育玩具・おもちゃのサブスク定額レンタル【キッズラボラトリー】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16019",
+        "asp": "afb",
+        "id": "16019",
+        "name": "「安い」「早い」「簡単」日本国内のWiFiレンタルなら【NETAGE（ネットエイジ）】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16168",
+        "asp": "afb",
+        "id": "16168",
+        "name": "家計の悩みから資産運用までマルっとFPに相談【マネーサファリ】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-11045",
+        "asp": "afb",
+        "id": "11045",
+        "name": "国内最大級の外壁塗装の一括見積もりサイト【リショップナビ外壁塗装】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-8745",
+        "asp": "afb",
+        "id": "8745",
+        "name": "家計の不安をスッキリ解決！【保険見直しラボ】 保険相談",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-9679",
+        "asp": "afb",
+        "id": "9679",
+        "name": "外資系・日系グローバル企業の転職・求人なら【ロバート・ウォルターズ】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16062",
+        "asp": "afb",
+        "id": "16062",
+        "name": "世界対応 高速Wi-Fi【HIS Wi-Fi】",
+        "catalog": "applying",
+        "actual": "approved",
+        "rawStatus": "提携中",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=rel",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16742",
+        "asp": "afb",
+        "id": "16742",
+        "name": "口と腸から考えるトータル免疫ケアサプリ【THE MENEKI】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16732",
+        "asp": "afb",
+        "id": "16732",
+        "name": "Dr.ピラティス 来店完了",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16731",
+        "asp": "afb",
+        "id": "16731",
+        "name": "Dr.トレーニング 来店完了",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16724",
+        "asp": "afb",
+        "id": "16724",
+        "name": "引っ越し一括見積もりなら【HALESEE（ハレシー）】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16698",
+        "asp": "afb",
+        "id": "16698",
+        "name": "中古車の自社ローン専門店【カーリバ】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16472",
+        "asp": "afb",
+        "id": "16472",
+        "name": "即戦力のエンジニアを目指すエンジニア育成スクール【techmeets（テックミーツ）】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16418",
+        "asp": "afb",
+        "id": "16418",
+        "name": "保険の見直し・無料相談なら【ほけんの110番】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16179",
+        "asp": "afb",
+        "id": "16179",
+        "name": "格安航空券・飛行機・LCCの予約なら【travelist（トラベリスト）】＜国内航空券＞",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16177",
+        "asp": "afb",
+        "id": "16177",
+        "name": "ホテル旅館予約なら【travelist（トラベリスト）】＜宿泊予約＞",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16178",
+        "asp": "afb",
+        "id": "16178",
+        "name": "格安航空券・飛行機・LCC＋ホテルのセット予約なら【travelist（トラベリスト）】＜宿泊＋航空チケット予約＞",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15892",
+        "asp": "afb",
+        "id": "15892",
+        "name": "時短正社員のワーママ向け転職支援サービス【リアルミーキャリア】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-16264",
+        "asp": "afb",
+        "id": "16264",
+        "name": "＜キャリアアップ転職用＞ITエンジニア専門の転職エージェント【ユニゾンキャリア転職】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15698",
+        "asp": "afb",
+        "id": "15698",
+        "name": "IT・WEBエンジニア専門の転職支援サービス【ユニゾンキャリア転職】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15118",
+        "asp": "afb",
+        "id": "15118",
+        "name": "相性でマッチングする20代向け転職支援サービス【相性転職パーソナルファイル】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15277",
+        "asp": "afb",
+        "id": "15277",
+        "name": "未来の選択肢を広げる転職エージェント【9Eキャリア】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15217",
+        "asp": "afb",
+        "id": "15217",
+        "name": "豪華客船クルーズ旅行・予約なら【ベルーナツーリズム(ゆめやど)】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14863",
+        "asp": "afb",
+        "id": "14863",
+        "name": "転職成功率・面談満足度の高いおすすめエージェントをご紹介【Z転職】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14385",
+        "asp": "afb",
+        "id": "14385",
+        "name": "ゲーム業界の転職・求人情報【G-JOBエージェント】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14268",
+        "asp": "afb",
+        "id": "14268",
+        "name": "ハウスクリーニング・不用品回収・引越しなど400以上のサービス予約｜くらしのマーケット",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14263",
+        "asp": "afb",
+        "id": "14263",
+        "name": "【格安航空券センター】国内往復飛行機チケット比較LCC予約サイト",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13496",
+        "asp": "afb",
+        "id": "13496",
+        "name": "【nearMe.Airport】自宅/ホテルと空港を結ぶ次世代空港送迎サービス",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13085",
+        "asp": "afb",
+        "id": "13085",
+        "name": "外資系・グローバル企業への転職なら【en world(エンワールド)】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13143",
+        "asp": "afb",
+        "id": "13143",
+        "name": "Webエンジニア就職に強いプログラミングスクール【RUNTEQ（ランテック）】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-12963",
+        "asp": "afb",
+        "id": "12963",
+        "name": "各職種に精通したコンサルタントがサポート【LHH転職エージェント】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-12567",
+        "asp": "afb",
+        "id": "12567",
+        "name": "ICL（眼内コラマーレンズ）・レーシック・白内障治療は【先進会眼科】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-10325",
+        "asp": "afb",
+        "id": "10325",
+        "name": "介護業界に特化した転職支援サービス 【レバウェル介護】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-12310",
+        "asp": "afb",
+        "id": "12310",
+        "name": "既卒・第二新卒・フリーターの就職を徹底サポート【ネットビジョンアカデミー】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-13790",
+        "asp": "afb",
+        "id": "13790",
+        "name": "住宅ローンを無料で一括比較【モゲチェック】（これから家を買う方向け：借り入れ）",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-11028",
+        "asp": "afb",
+        "id": "11028",
+        "name": "住宅ローンを無料で一括比較【モゲチェック】（今のローンを見直したい方向け：借り換え）",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14108",
+        "asp": "afb",
+        "id": "14108",
+        "name": "未経験者向けITエンジニアスクール＆就職サポート【キャリスタカレッジ】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-10829",
+        "asp": "afb",
+        "id": "10829",
+        "name": "月給20万円からステップアップ！若者に特化した転職支援サービス《キャリアスタート》",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-6628",
+        "asp": "afb",
+        "id": "6628",
+        "name": "【税理士探しの強い味方　税理士紹介エージェント】お問い合わせプロモーション",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-14386",
+        "asp": "afb",
+        "id": "14386",
+        "name": "＜ゲーム業界専門＞転職エージェント【Hiraku agent】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-15699",
+        "asp": "afb",
+        "id": "15699",
+        "name": "IT・WEBエンジニア専門の就活支援サービス【ユニゾンキャリア就活】",
+        "catalog": "applying",
+        "actual": "none",
+        "rawStatus": "提携却下",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=2",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      },
+      {
+        "program": "afb-10585",
+        "asp": "afb",
+        "id": "10585",
+        "name": "20代の第二新卒・既卒・フリーター・ニート向け就職・転職エージェント【UZUZ】新規無料会員登録完了",
+        "catalog": "approved",
+        "actual": "none",
+        "rawStatus": "提携解除",
+        "url": "https://www.afi-b.com/pa/promolist/?rel=3",
+        "evidence": ".local/affiliate-status/stocktake-20260908/afb/stocktake.json"
+      }
+    ],
+    "nameCorrections": [],
+    "verticalCorrections": [
+      {
+        "program": "afb-8745",
+        "name": "家計の不安をスッキリ解決！【保険見直しラボ】 保険相談",
+        "vertical": "economy",
+        "reason": "保険見直し相談は保険・家計商材。"
+      },
+      {
+        "program": "afb-9679",
+        "name": "外資系・日系グローバル企業の転職・求人なら【ロバート・ウォルターズ】",
+        "vertical": "labor",
+        "reason": "グローバル企業への転職・求人サービス。"
+      },
+      {
+        "program": "afb-11045",
+        "name": "国内最大級の外壁塗装の一括見積もりサイト【リショップナビ外壁塗装】",
+        "vertical": "housing",
+        "reason": "外壁塗装の一括見積もりは住宅リフォーム。"
+      },
+      {
+        "program": "afb-11624",
+        "name": "知育玩具・おもちゃのサブスク定額レンタル【キッズラボラトリー】",
+        "vertical": "population",
+        "reason": "知育玩具のレンタルは子育て・育児用品。"
+      },
+      {
+        "program": "afb-12640",
+        "name": "【法人・事業者様向け】採用・人事担当の方の強い味方！【ドラEVER】",
+        "vertical": "labor",
+        "reason": "法人向け採用・人事支援は雇用・求人商材。読者適合性は未判断。"
+      },
+      {
+        "program": "afb-13223",
+        "name": "学資保険の無料相談サイト「ガーデン」",
+        "vertical": "economy",
+        "reason": "学資保険の相談であり教育講座ではない。"
+      },
+      {
+        "program": "afb-13615",
+        "name": "弁護士・法務人材専門の転職エージェント【NO-LIMIT（ノーリミット）】",
+        "vertical": "labor",
+        "reason": "弁護士・法務人材の転職エージェント。"
+      },
+      {
+        "program": "afb-13669",
+        "name": "妊婦さんのための医療保険相談「ガーデン」",
+        "vertical": "economy",
+        "reason": "妊婦向けでも提供商材は医療保険相談。"
+      },
+      {
+        "program": "afb-13735",
+        "name": "保険の無料相談サイト「ガーデン」",
+        "vertical": "economy",
+        "reason": "保険の無料相談サービス。"
+      },
+      {
+        "program": "afb-13856",
+        "name": "公認会計士特化型転職エージェント【ハイスタ会計士】",
+        "vertical": "labor",
+        "reason": "公認会計士の転職エージェント。"
+      },
+      {
+        "program": "afb-13857",
+        "name": "税理士・科目合格者特化の転職エージェント【ハイスタ税理士】",
+        "vertical": "labor",
+        "reason": "税理士・科目合格者の転職エージェント。"
+      },
+      {
+        "program": "afb-14040",
+        "name": "[スマートフォン専用]若手ハイエンド向け転職サイト『ASSIGN』",
+        "vertical": "labor",
+        "reason": "若手ハイエンド層向け転職サイト。"
+      },
+      {
+        "program": "afb-14192",
+        "name": "SDGsの新築・リフォームの住環境情報サイト【ハウジングバザール】",
+        "vertical": "housing",
+        "reason": "新築・リフォームの住環境情報サービス。"
+      },
+      {
+        "program": "afb-14581",
+        "name": "今話題の60分500円の英会話スクール【One Coin English/ワンコイングリッシュ】",
+        "vertical": "education",
+        "reason": "英会話スクールは語学教育。"
+      },
+      {
+        "program": "afb-14642",
+        "name": "ITエンジニア特化最強の転職エージェント【KIKKAKE AGENT（キッカケエージェント）】",
+        "vertical": "labor",
+        "reason": "ITエンジニアの転職エージェント。"
+      },
+      {
+        "program": "afb-14999",
+        "name": "経理・財務の経験者に選ばれる特化型エージェント【BEET-AGENT（ビートエージェント）】",
+        "vertical": "labor",
+        "reason": "経理・財務経験者の転職エージェント。"
+      },
+      {
+        "program": "afb-15066",
+        "name": "妊娠・出産・育児の保険ならベビープラネット保険相談",
+        "vertical": "economy",
+        "reason": "妊娠・育児向けでも提供商材は保険相談。"
+      },
+      {
+        "program": "afb-15177",
+        "name": "【英語コーチングスクール PRESENCE】",
+        "vertical": "education",
+        "reason": "英語コーチングスクールは語学教育。"
+      },
+      {
+        "program": "afb-15199",
+        "name": "ゲーム業界の求人・転職・中途採用情報なら【ファミキャリ！】",
+        "vertical": "labor",
+        "reason": "ゲーム業界の求人・転職支援。"
+      },
+      {
+        "program": "afb-15202",
+        "name": "コンサル特化の転職エージェント【MyVision（マイビジョン）】",
+        "vertical": "labor",
+        "reason": "コンサル職向け転職エージェント。"
+      },
+      {
+        "program": "afb-15713",
+        "name": "学資保険一括資料請求比較【トモママ】",
+        "vertical": "economy",
+        "reason": "学資保険の資料請求・比較が成果行動。"
+      },
+      {
+        "program": "afb-15977",
+        "name": "＜多汗症＞24時間予約受付可【東京オンラインクリニック】",
+        "vertical": "health",
+        "reason": "医療機関の多汗症診療予約。掲載適格性は未判断。"
+      },
+      {
+        "program": "afb-16019",
+        "name": "「安い」「早い」「簡単」日本国内のWiFiレンタルなら【NETAGE（ネットエイジ）】",
+        "vertical": "energy",
+        "reason": "国内Wi-Fiレンタルは通信回線商材。"
+      },
+      {
+        "program": "afb-16062",
+        "name": "世界対応 高速Wi-Fi【HIS Wi-Fi】",
+        "vertical": "energy",
+        "reason": "海外利用を含むWi-Fiレンタルは通信回線商材。"
+      },
+      {
+        "program": "afb-16168",
+        "name": "家計の悩みから資産運用までマルっとFPに相談【マネーサファリ】",
+        "vertical": "economy",
+        "reason": "家計・資産運用に関するFP相談。"
+      },
+      {
+        "program": "afb-16236",
+        "name": "20代のキャリア悩みに特化した無料カウンセリングサービス【キャリコン】",
+        "vertical": "labor",
+        "reason": "キャリア相談は就労・転職支援。"
+      },
+      {
+        "program": "afb-16263",
+        "name": "複数の運用方法を比較して無料で学べる！選べる！【ウェルスコーチ（資産運用）】",
+        "vertical": "economy",
+        "reason": "資産運用の相談・比較サービスは投資商材。リスク適格性は未判断。"
+      },
+      {
+        "program": "afb-16330",
+        "name": "月額2,200円～ポケット型Wi-Fi【にゃんこWi-Fi】",
+        "vertical": "energy",
+        "reason": "ポケット型Wi-Fi契約は通信回線商材。"
+      },
+      {
+        "program": "afb-16507",
+        "name": "リゾートバイト 日本の旅館でおもてなし【OMOTENA（オモテナ）】",
+        "vertical": "labor",
+        "reason": "リゾートバイトは宿泊予約でなく就労・人材派遣。"
+      },
+      {
+        "program": "afb-16575",
+        "name": "【タダ電】WEB申込完了",
+        "vertical": "energy",
+        "reason": "電気供給サービスの申込は電力商材。"
+      },
+      {
+        "program": "afb-16588",
+        "name": "オンライン心療内科【mentoa（メントア）】",
+        "vertical": "health",
+        "reason": "オンライン心療内科は医療サービス。掲載適格性は未判断。"
+      },
+      {
+        "program": "afb-16654",
+        "name": "新規オープン【MBDクリニック 恵比寿院】来院プロモーション",
+        "vertical": "health",
+        "reason": "クリニック来院は医療サービス。掲載適格性は未判断。"
+      },
+      {
+        "program": "afb-16674",
+        "name": "基本料金と電力量料金が「シンプルな」実質再エネ電力プラン【キューエネスでんき】",
+        "vertical": "energy",
+        "reason": "電力プラン契約は電力・エネルギー商材。"
+      }
+    ]
+  },
+  "preservedPipelineDifferences": [
+    {
+      "id": "s00000014771001",
+      "name": "ふるさと納税サイト【さとふる】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000014771001.txt"
+    },
+    {
+      "id": "s00000019332001",
+      "name": "ふるさと納税サイト「ふるさとチョイス」",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000019332001.txt"
+    },
+    {
+      "id": "s00000023687001",
+      "name": "大阪ガスのインターネット「さすガねっと」",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000023687001.txt"
+    },
+    {
+      "id": "s00000014289002",
+      "name": "ヒゲや全身のムダ毛のお悩みに！男性脱毛の【メンズリゼ】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000014289002.txt"
+    },
+    {
+      "id": "s00000024182002",
+      "name": "副業・フリーランスエンジニアプラットフォーム【エンジニアデータバンク】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000024182002.txt"
+    },
+    {
+      "id": "s00000020560002",
+      "name": "【増大・長茎】施術限定 ーメンズライフクリニックー",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000020560002.txt"
+    },
+    {
+      "id": "s00000009778002",
+      "name": "たかの友梨 ブライダルホワイトコース お試しキャンペーン",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000009778002.txt"
+    },
+    {
+      "id": "s00000013449001",
+      "name": "メンズ医療脱毛なら【ゴリラ脱毛】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000013449001.txt"
+    },
+    {
+      "id": "s00000010346001",
+      "name": "女性限定・初心者専門の英会話スクール【b わたしの英会話】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000010346001.txt"
+    },
+    {
+      "id": "s00000023920003",
+      "name": "日本語教師を目指すなら、東京・大阪・京都・兵庫のKEC日本語学院",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000023920003.txt"
+    },
+    {
+      "id": "s00000025720001",
+      "name": "立川のボイトレスクール【DECO MUSIC SCHOOL】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000025720001.txt"
+    },
+    {
+      "id": "s00000021329001",
+      "name": "脱毛は男のたしなみ【RBL_ローランドビューティーラウンジ】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000021329001.txt"
+    },
+    {
+      "id": "s00000017938001",
+      "name": "フリーランスエンジニアの無料カウンセリング実施で20,000円！【ポテパンフリーランス】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000017938001.txt"
+    },
+    {
+      "id": "s00000026477001",
+      "name": "フリーコンサルタントのための案件紹介サービス【フリーコンサルタント.jp】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026477001.txt"
+    },
+    {
+      "id": "s00000019877001",
+      "name": "手作り結婚指輪・婚約指輪の来店予約【鎌倉彫金工房】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000019877001.txt"
+    },
+    {
+      "id": "s00000027372001",
+      "name": "骨盤をケアし、アクティブな毎日へ締めつけない体幹サポート【DERIT TECH(デリットテック)】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000027372001.txt"
+    },
+    {
+      "id": "s00000010841004",
+      "name": "当社グループ独占の人気商品！【家庭用ルームランナー販売店】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000010841004.txt"
+    },
+    {
+      "id": "s00000000040014",
+      "name": "【公式】BIGLOBE WiMAX +5G",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000000040014.txt"
+    },
+    {
+      "id": "s00000010235003",
+      "name": "【MEN’S　TBC】エステティック体験コース申込",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000010235003.txt"
+    },
+    {
+      "id": "s00000027056001",
+      "name": "全国約580拠点【三井不動産のワークスタイリング】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000027056001.txt"
+    },
+    {
+      "id": "s00000026729001",
+      "name": "不動産売却・査定のご相談なら【不動産SHOPナカジツ】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026729001.txt"
+    },
+    {
+      "id": "s00000026422001",
+      "name": "くふうイエタテカウンター｜家づくりの無料相談サービス",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026422001.txt"
+    },
+    {
+      "id": "s00000022438001",
+      "name": "お家づくりなら、LIFULL HOME'S【住まいの窓口】へご相談ください",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000022438001.txt"
+    },
+    {
+      "id": "s00000027432001",
+      "name": "仲介手数料無料で不動産を売却するなら【ゼロチュー売却】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000027432001.txt"
+    },
+    {
+      "id": "s00000022375001",
+      "name": "1万円からはじめる不動産投資 不動産クラウドファンディング【FUNDROP】",
+      "pipelineStatus": "applied",
+      "actual": "none",
+      "rawStatus": "未提携",
+      "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000022375001.txt"
+    }
+  ],
+  "pipelineObservationPolicy": "lastPartnershipCheck records current account status without rewriting historical application lifecycle. It is not an ad-delivery gate.",
+  "unknown": {
+    "a8": [
+      {
+        "id": "s00000026822001",
+        "reason": "no-such-id; account guard unavailable on detail; not interpreted as ended"
+      }
+    ],
+    "afb": [
+      {
+        "key": "afb-15671",
+        "name": "【PID:15671】 出会い",
+        "id": "15671",
+        "catalogStatus": "approved",
+        "actual": "unknown"
+      },
+      {
+        "key": "afb-14033",
+        "name": "AIxVRビジネス英会話のスマチュー【Smart Tutor（スマートチューター）】",
+        "id": "14033",
+        "catalogStatus": "approved",
+        "actual": "unknown"
+      },
+      {
+        "key": "afb-16511",
+        "name": "水回りトラブル業界最安値に挑戦中！【水まわりドクター24】",
+        "id": "16511",
+        "catalogStatus": "applying",
+        "actual": "unknown"
+      },
+      {
+        "key": "afb-15831",
+        "name": "格安スマホ・SIM【y.u mobile（ワイユーモバイル）】",
+        "id": "15831",
+        "catalogStatus": "approved",
+        "actual": "unknown"
+      }
+    ],
+    "otherAsps": [
+      "rakuten"
+    ]
+  },
+  "uncataloguedNegativeObservations": [
+    {
+      "asp": "moshimo",
+      "id": "7302",
+      "name": "DMM 生成AI CAMP 学び放題｜月額16,280円（税抜価格14,800円）で生成AIを好きなだけ学べる！生成AIスクールの 新規無料セミナー予約",
+      "status": "none",
+      "rawStatus": "否認中"
+    },
+    {
+      "asp": "moshimo",
+      "id": "7276",
+      "name": "楽天カード・楽天プレミアムカード｜クレジットカードの発行",
+      "status": "none",
+      "rawStatus": "否認中"
+    },
+    {
+      "asp": "moshimo",
+      "id": "6041",
+      "name": "WithCode(ウィズコード)｜Web制作会社が運営するプログラミングスクールの無料体験",
+      "status": "none",
+      "rawStatus": "否認中"
+    },
+    {
+      "asp": "moshimo",
+      "id": "4788",
+      "name": "IT道場｜プログラミングスクールの無料カウンセリング申し込み",
+      "status": "none",
+      "rawStatus": "否認中"
+    },
+    {
+      "asp": "moshimo",
+      "id": "1421",
+      "name": "SAMURAI ENGINEER(侍エンジニア)｜無料カウンセリング予約",
+      "status": "none",
+      "rawStatus": "否認中"
+    },
+    {
+      "asp": "moshimo",
+      "id": "969",
+      "name": "IT・Web転職特化エージェント【レバテックキャリア】無料会員登録 / レバレジーズ株式会社",
+      "status": "none",
+      "rawStatus": "否認中"
+    },
+    {
+      "asp": "moshimo",
+      "id": "170",
+      "name": "「Amazon.co.jp」商品購入（商品カテゴリによって報酬率が異なります）",
+      "status": "none",
+      "rawStatus": "否認中"
+    },
+    {
+      "asp": "afb",
+      "id": "15335",
+      "name": "待ち時間なしで治療ができるオンラインのEDクリニック【レバクリ】",
+      "status": "none",
+      "rawStatus": "提携却下"
+    },
+    {
+      "asp": "afb",
+      "id": "15236",
+      "name": "デジタルクリニックグループのオンライン診療　『ED（勃起不全）』　予約完了",
+      "status": "none",
+      "rawStatus": "提携却下"
+    },
+    {
+      "asp": "afb",
+      "id": "16400",
+      "name": "【RUNTEQ（ランテック）】Python × AIコース",
+      "status": "none",
+      "rawStatus": "提携却下"
+    },
+    {
+      "asp": "afb",
+      "id": "11439",
+      "name": "リクルートが運営する1日33円からできる英会話サービス『スタディサプリ ENGLISH／新日常英会話コース』有料会員登録",
+      "status": "none",
+      "rawStatus": "提携却下"
+    },
+    {
+      "asp": "afb",
+      "id": "10994",
+      "name": "【スタディサプリ ENGLISH】ビジネス英語コース",
+      "status": "none",
+      "rawStatus": "提携却下"
+    },
+    {
+      "asp": "afb",
+      "id": "7733",
+      "name": "中学生レベルからTOEICや受験のリスニングテスト対策、ビジネス英会話まで学べる『スタディサプリ ENGLISH』有料会員登録",
+      "status": "none",
+      "rawStatus": "提携却下"
+    }
+  ],
+  "inventory": {
+    "automaticCreatives": 263,
+    "automaticActive": 263,
+    "automaticInactive": 0,
+    "automaticUniqueProgramRefs": 131,
+    "profiles": 131,
+    "directCreatives": 2,
+    "directPlacementTargets": 4,
+    "summaryByAsp": [
+      {
+        "asp": "a8",
+        "automaticCreatives": 257,
+        "automaticActive": 257,
+        "automaticInactive": 0,
+        "automaticUniqueProgramRefs": 125,
+        "directCreatives": 1,
+        "directActive": 1,
+        "directPlacementTargets": 2,
+        "combinedUniqueProgramRefs": 125,
+        "refSemantics": "program id (afb decorated tracking code normalized to PID)"
+      },
+      {
+        "asp": "moshimo",
+        "automaticCreatives": 0,
+        "automaticActive": 0,
+        "automaticInactive": 0,
+        "automaticUniqueProgramRefs": 0,
+        "directCreatives": 1,
+        "directActive": 1,
+        "directPlacementTargets": 2,
+        "combinedUniqueProgramRefs": 1,
+        "refSemantics": "program id (afb decorated tracking code normalized to PID)"
+      },
+      {
+        "asp": "afb",
+        "automaticCreatives": 3,
+        "automaticActive": 3,
+        "automaticInactive": 0,
+        "automaticUniqueProgramRefs": 3,
+        "directCreatives": 0,
+        "directActive": 0,
+        "directPlacementTargets": 0,
+        "combinedUniqueProgramRefs": 3,
+        "refSemantics": "program id (afb decorated tracking code normalized to PID)"
+      },
+      {
+        "asp": "rakuten",
+        "automaticCreatives": 1,
+        "automaticActive": 1,
+        "automaticInactive": 0,
+        "automaticUniqueProgramRefs": 1,
+        "directCreatives": 0,
+        "directActive": 0,
+        "directPlacementTargets": 0,
+        "combinedUniqueProgramRefs": 1,
+        "refSemantics": "local ad-id based reference, not confirmed merchant program id"
+      },
+      {
+        "asp": "valuecommerce",
+        "automaticCreatives": 2,
+        "automaticActive": 2,
+        "automaticInactive": 0,
+        "automaticUniqueProgramRefs": 2,
+        "directCreatives": 0,
+        "directActive": 0,
+        "directPlacementTargets": 0,
+        "combinedUniqueProgramRefs": 2,
+        "refSemantics": "pid is issued-link identifier, not confirmed merchant program id"
+      },
+      {
+        "asp": "unknown",
+        "automaticCreatives": 0,
+        "automaticActive": 0,
+        "automaticInactive": 0,
+        "automaticUniqueProgramRefs": 0,
+        "directCreatives": 0,
+        "directActive": 0,
+        "directPlacementTargets": 0,
+        "combinedUniqueProgramRefs": 0,
+        "refSemantics": "program id (afb decorated tracking code normalized to PID)"
+      }
+    ],
+    "unpartneredAds": [
+      {
+        "id": "s00000026970001",
+        "name": "ClassPass (クラスパス) ジムもスパも、このアプリひとつで。",
+        "actual": "none",
+        "rawStatus": "未提携",
+        "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026970001.json",
+        "adIds": [
+          "af_classpass_001"
+        ],
+        "deliveryVerified": false
+      },
+      {
+        "id": "s00000014870004",
+        "name": "見積もり比較で家計を節約【火災保険一括見積もり依頼サイト】",
+        "actual": "none",
+        "rawStatus": "未提携",
+        "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000014870004.json",
+        "adIds": [
+          "af_housing_banner_001"
+        ],
+        "deliveryVerified": false
+      },
+      {
+        "id": "s00000013307005",
+        "name": "マカ×シトルリン×クラチャイダムの男の活力サプリ【マカエンペラー】",
+        "actual": "none",
+        "rawStatus": "未提携",
+        "evidence": ".local/affiliate-status/stocktake-20260908/a8/details/s00000013307005.json",
+        "adIds": [
+          "af_maca_emperor_001"
+        ],
+        "deliveryVerified": false
+      }
+    ],
+    "unsupportedAsps": [
+      {
+        "id": "af_ikyu_travel_001",
+        "title": "一休.com 宿泊予約",
+        "programRef": "valuecommerce:892653250",
+        "asp": "valuecommerce",
+        "catalogueId": "892653250",
+        "status": "approved",
+        "verifiedProgramId": "179",
+        "verifiedMerchantId": "221",
+        "note": "catalogueId is ad-space link PID; mapping verified in valuecommerceObservation; production delivery not verified"
+      },
+      {
+        "id": "af_rakuten_travel_001",
+        "title": "楽天トラベル",
+        "programRef": "rakuten:af_rakuten_travel_001",
+        "asp": "rakuten",
+        "catalogueId": "af_rakuten_travel_001",
+        "status": "unknown",
+        "note": "Direct affiliate route; not Moshimo"
+      },
+      {
+        "id": "af_expedia_travel_001",
+        "title": "Expedia",
+        "programRef": "valuecommerce:892653257",
+        "asp": "valuecommerce",
+        "catalogueId": "892653257",
+        "status": "approved",
+        "verifiedProgramId": "2040179",
+        "verifiedMerchantId": "2382533",
+        "note": "catalogueId is ad-space link PID; mapping verified in valuecommerceObservation; production delivery not verified"
+      }
+    ],
+    "source": ".local/affiliate-status/stocktake-20260908/inventory/stocktake-inventory.json",
+    "sourceSha256": "827bbb6a90e34ff2f3432755feac9ab704281b12e3394e1d39451a2d51540468",
+    "samePlacementReview": [
+      {
+        "programRef": "a8:s00000000018047",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "economy",
+        "ids": [
+          "af_conoha_ai_canvas_001",
+          "af_ai-conoha-ai-canvas_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "336x280",
+          "300x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000005230001",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "travel",
+        "ids": [
+          "af_jalan_tourism_001",
+          "af_s00000005230001_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "250x250",
+          "300x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000008903009",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "economy",
+        "ids": [
+          "af_economy_banner_001",
+          "af_tossy_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "300x300",
+          "250x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000015695001",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "health",
+        "ids": [
+          "af_rizap_socialsecurity_001",
+          "af_rizap_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "300x250",
+          "300x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000017136001",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "mobility",
+        "ids": [
+          "af_ucarpac_mobility_001",
+          "af_s00000017136001_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "300x250",
+          "300x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000017980001",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "travel",
+        "ids": [
+          "af_ozmall_001",
+          "af_ozmall_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "300x250",
+          "300x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000018427002",
+        "locationCode": "sidebar-bottom",
+        "adType": "text",
+        "vertical": "labor",
+        "ids": [
+          "af_shukatsu_neo_text_economy",
+          "af_neo_a8_text_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "nullxnull",
+          "nullxnull"
+        ]
+      },
+      {
+        "programRef": "a8:s00000023371004",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "travel",
+        "ids": [
+          "af_alpha_foods_001",
+          "af_s00000023371004_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "300x250",
+          "300x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000024824001",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "labor",
+        "ids": [
+          "af_tenshoku_agent_navi_laborwage_001",
+          "af_agent-navi_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "300x250",
+          "250x250"
+        ]
+      },
+      {
+        "programRef": "a8:s00000025401001",
+        "locationCode": "blog-bottom",
+        "adType": "banner",
+        "vertical": "health",
+        "ids": [
+          "af_repilates_001",
+          "af_repilates_a8_001"
+        ],
+        "classification": "same-placement-multiple-creatives-review",
+        "sizes": [
+          "300x250",
+          "300x250"
+        ]
+      }
+    ],
+    "profileStatuses": {
+      "pending-classification": 130,
+      "pilot-ready": 1
+    },
+    "activeCreativeProfileStatuses": {
+      "pending-classification": 261,
+      "pilot-ready": 2
+    },
+    "checks": [
+      {
+        "name": "compliance-check",
+        "exitCode": 0
+      },
+      {
+        "name": "inventory-size-check",
+        "exitCode": 0
+      }
+    ],
+    "limitations": [
+      "isActive true means local authored flag, not evidence of live delivery or eligibility.",
+      "catalog status is a local snapshot and must be joined to current live ASP observations by parent.",
+      "compliance structure only; content, PR disclosure, orphan links, remote image dimensions not checked.",
+      "ValueCommerce pid and Rakuten local reference are not guaranteed merchant-level unique program identifiers.",
+      "Dynamic Rakuten product/furusato cards are not AFFILIATE_ADS creatives; API/catalog pipeline is outside these three authored files."
+    ]
+  },
+  "policies": [
+    "A8 lifecycle remains separate from observed partnership; 未提携 is not evidence of rejection.",
+    "No unknown record downgraded on list absence.",
+    "No applications, ad changes, publication, R2 update, or catalog deletion.",
+    "Previously appliedAt and eligibility retained; A8 account membership does not establish stats47 placement eligibility."
+  ],
+  "validation": {
+    "catalog": {
+      "errors": [],
+      "warnings": [
+        "moshimo-54: vertical 未設定",
+        "afb-15637: vertical 未設定",
+        "afb-16464: vertical 未設定",
+        "afb-16143: vertical 未設定",
+        "afb-16153: vertical 未設定",
+        "afb-15580: vertical 未設定",
+        "afb-15671: name 未補完 (【PID:15671】 出会い)",
+        "afb-15671: vertical 未設定",
+        "afb-14611: vertical 未設定",
+        "afb-13462: vertical 未設定",
+        "afb-13217: vertical 未設定",
+        "afb-16427: vertical 未設定",
+        "afb-44: vertical 未設定",
+        "afb-16728: vertical 未設定",
+        "afb-10884: vertical 未設定"
+      ]
+    },
+    "hashes": "pass",
+    "listParity": "pass",
+    "targetedTests": {
+      "passed": 75,
+      "failed": 0
+    },
+    "webTypeCheck": "pass",
+    "docsCheck": {
+      "errors": 0,
+      "existingWarnings": 3,
+      "backlogTestsPassed": 83
+    },
+    "adSourcesUnchanged": true,
+    "fullBuild": "not-run; catalog-only changes, no release",
+    "liveAdDelivery": "not-verified"
+  }
+}
