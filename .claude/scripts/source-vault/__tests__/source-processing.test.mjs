@@ -6,6 +6,7 @@ import test from 'node:test';
 
 import {
   parseContentCrop,
+  resolveContentCrop,
   parsePageSelector,
   stageStatus,
   validateCropSpec,
@@ -141,6 +142,31 @@ test('page image contract validates dpi, format, quality, and content crop geome
   assert.throws(() => validatePageImageContract({ dpi: 30 }), /dpi must be an integer/);
   assert.throws(() => parseContentCrop('1970x2550'), /WxH\+X\+Y/);
   assert.throws(() => parseContentCrop('0x10+1+1'), /positive/);
+});
+
+test('content crop can be declared per rendered page size and resolves by the actual render', () => {
+  const contract = validatePageImageContract({
+    dpi: 216,
+    format: 'jpg',
+    contentCrop: { '2400x3090': '1800x3000+300+80', '4800x5436': '3200x5200+800+170' },
+  });
+  assert.deepEqual(Object.keys(contract.contentCrop.byRenderedSize), ['2400x3090', '4800x5436']);
+  assert.deepEqual(resolveContentCrop(contract.contentCrop, { width: 4800, height: 5436 }), {
+    geometry: '3200x5200+800+170',
+    width: 3200,
+    height: 5200,
+    x: 800,
+    y: 170,
+  });
+  assert.throws(
+    () => resolveContentCrop(contract.contentCrop, { width: 2400, height: 2718 }),
+    /no entry for rendered page 2400x2718/
+  );
+  const single = parseContentCrop('10x10+1+1');
+  assert.deepEqual(resolveContentCrop(single, { width: 99, height: 99 }), single);
+  assert.equal(resolveContentCrop(null, { width: 1, height: 1 }), null);
+  assert.throws(() => parseContentCrop({ wide: '10x10+1+1' }), /rendered page size WxH/);
+  assert.throws(() => parseContentCrop({}), /at least one rendered page size/);
 });
 
 test('markdown transcription pages require page/kind frontmatter and existing figure ids', () => {

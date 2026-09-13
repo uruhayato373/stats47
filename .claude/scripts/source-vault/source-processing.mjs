@@ -151,6 +151,23 @@ export function validateOcrLayout(rotation, psm) {
  */
 export function parseContentCrop(geometry) {
   if (geometry == null) return null;
+  if (typeof geometry === 'object' && !Array.isArray(geometry)) {
+    // 同じ資料の中で Kindle のウィンドウ寸法が違う分冊が混ざる場合は、render 後のフルページ pixel "WxH" を
+    // key にして本文領域を分冊ごとに宣言する。extract が実際の render 寸法で引く (該当なしは停止)
+    const byRenderedSize = {};
+    for (const [size, value] of Object.entries(geometry)) {
+      if (!/^\d+x\d+$/.test(size))
+        throw new Error(`contentCrop map key must be the rendered page size WxH: ${size}`);
+      byRenderedSize[size] = parseContentCropGeometry(value);
+    }
+    if (Object.keys(byRenderedSize).length === 0)
+      throw new Error('contentCrop map must declare at least one rendered page size');
+    return { byRenderedSize };
+  }
+  return parseContentCropGeometry(geometry);
+}
+
+function parseContentCropGeometry(geometry) {
   const match =
     typeof geometry === 'string' &&
     geometry.match(/^(\d+)x(\d+)\+(\d+)\+(\d+)$/);
@@ -158,6 +175,20 @@ export function parseContentCrop(geometry) {
   const [width, height, x, y] = match.slice(1).map(Number);
   if (width < 1 || height < 1) throw new Error('contentCrop size must be positive');
   return { geometry, width, height, x, y };
+}
+
+/** contentCrop が render 寸法 map のときは実際の fullPagePixels で 1 つに解決する。 */
+export function resolveContentCrop(contentCrop, fullPagePixels) {
+  if (contentCrop == null) return null;
+  if (!contentCrop.byRenderedSize) return contentCrop;
+  const key = `${fullPagePixels.width}x${fullPagePixels.height}`;
+  const resolved = contentCrop.byRenderedSize[key];
+  if (!resolved) {
+    throw new Error(
+      `contentCrop has no entry for rendered page ${key} (declared: ${Object.keys(contentCrop.byRenderedSize).join(', ')})`
+    );
+  }
+  return resolved;
 }
 
 export function validatePageImageContract(pageImage, label = 'pageImage') {
@@ -785,7 +816,8 @@ async function extract(options) {
   if (!Number.isInteger(dpi) || dpi < 72 || dpi > 600)
     throw new Error('--dpi must be an integer from 72 to 600');
   const pageFormat = pageImageContract?.format ?? 'png';
-  const contentCrop = pageImageContract?.contentCrop ?? null;
+  const contentCropContract = pageImageContract?.contentCrop ?? null;
+  let contentCrop = null;
   const { rotationDegrees, pageSegmentationMode } = validateOcrLayout(
     options.rotate ?? workspace.ocrRotationDegrees ?? 0,
     options.psm ?? workspace.ocrPageSegmentationMode ?? 6
@@ -849,6 +881,7 @@ async function extract(options) {
       const dimensions = await run('magick', ['identify', '-format', '%w %h', renderedPng]);
       const [width, height] = dimensions.stdout.trim().split(/\s+/).map(Number);
       fullPagePixels = { width, height };
+      contentCrop = resolveContentCrop(contentCropContract, fullPagePixels);
     }
     if (contentCrop) {
       if (

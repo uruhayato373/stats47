@@ -18,6 +18,8 @@ primary_agent: open-data-curator
 ## 前提
 - profile が `.claude/config/source-vault.json` にあり、`processing.pageImage` (dpi / format / quality / `contentCrop`) を
   宣言している。Kindle 画面スキャンのように UI 枠があるものは `contentCrop` (`WxH+X+Y`、render 後 pixel) を必ず置く。
+  同じ資料でウィンドウ寸法が違う分冊が混ざるときは `{"<render後W>x<H>": "WxH+X+Y", ...}` の map で宣言し、
+  extract が実際の render 寸法で引く (該当なしは停止)。
 - 作業は `$TMPDIR/stats47-source-vault/` だけで行い、repo 内に PDF・画像・OCR を置かない。
 - Drive はローカルマウント経由 (`npm run source-vault -- vault-root` で解決先を確認。無ければ `STATS47_SOURCE_VAULT_ROOT`)。folder/file ID を Git へ書かない。
 
