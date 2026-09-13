@@ -1741,5 +1741,58 @@
       "localStatus": "ready",
       "production": "unverified"
     }
-  ]
+  ],
+  "productionAudit": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-09-13T06:30:33.554Z",
+    "status": "verified-with-separated-followup",
+    "canonicalReleaseRecord": ".claude/state/metrics/releases/2026-09-13-all-sessions.json",
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-production/native-45cfa07b/assessment.json",
+    "evidenceSha256": "80e97e4d0dba44c38e6e90efb96f95dd54c43f67b8ad1ea918cb5dbf920cce34",
+    "sourceRun": "34726806521",
+    "sourcePlanSha256": "7c2de4a702f32b301745514192f59a1fa9373c93bcf415e819690e24e2e0c28b",
+    "deployedSha": "45cfa07b93d833f3f5332db4f8e3fe14b84f128d",
+    "buildId": "G72RvTCO3QhlH8AVrEK2Z",
+    "viewerHash": "28f61abf19c6a5c18f4ebb34365e35972f0bf201e108d9807109636c66056d27",
+    "viewerFiles": 12,
+    "apiRouteSha256": "1be7d6688d166cd546a11d38c4e57bd5d680b60852fd5263b58a164336cd0a99",
+    "initialRun": {
+      "expected": 100,
+      "completed": 100,
+      "passed": 99,
+      "failed": 1,
+      "initialMapsPassed": 100,
+      "pageErrors": 0,
+      "documentBuildMatches": 100,
+      "result": "initial100/result.json"
+    },
+    "followup": {
+      "expected": 1,
+      "completed": 1,
+      "passed": 1,
+      "failed": 0,
+      "cases": [
+        "L01:320"
+      ],
+      "pageErrors": 0,
+      "documentBuildMatches": 1,
+      "result": "followup-L01-320/result.json"
+    },
+    "effectiveCoverage": {
+      "sourcePages": 50,
+      "viewportCases": 100,
+      "viewports": [
+        320,
+        1440
+      ],
+      "meaning": "99 first-run passes plus one separately retained followup; not an all-pass initial run"
+    },
+    "historicalLocalAudit": {
+      "updatedAt": "2026-09-09T06:14:00.301Z",
+      "scope": "local representative file; production not checked",
+      "fingerprintsAreHistorical": true,
+      "currentViewerVerifiedOnlyByThisProductionAudit": true
+    },
+    "persistence": "This field is a projection. The local auditor rewrites its state; durable release record and evidence remain authoritative."
+  }
 }
