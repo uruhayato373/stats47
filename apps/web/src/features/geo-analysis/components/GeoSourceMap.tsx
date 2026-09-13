@@ -12,6 +12,7 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 
+import { fitGeoSourceBounds } from '../lib/fit-geo-source-bounds';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
 import {
   formatGeoSourceProperty,
@@ -29,7 +30,6 @@ type MapStatus =
     }
   | { error: string }
   | null;
-const FIT_OPTIONS = { padding: L.point(18, 18), maxZoom: 13, animate: false };
 
 function SourceContent({
   url,
@@ -73,7 +73,7 @@ function SourceContent({
       if (!initialBounds) return;
       if (!hasFitted) {
         hasFitted = true;
-        map.fitBounds(initialBounds, FIT_OPTIONS);
+        fitGeoSourceBounds(map, initialBounds);
       }
       sendView();
     };
@@ -199,7 +199,7 @@ export function GeoSourceMap({
           disabled={!bounds || !!error}
           onClick={() => {
             map.current?.closePopup();
-            if (bounds) map.current?.fitBounds(bounds, FIT_OPTIONS);
+            if (bounds && map.current) fitGeoSourceBounds(map.current, bounds);
           }}
         >
           区画全体に戻す
@@ -210,7 +210,7 @@ export function GeoSourceMap({
           ref={map}
           center={[36, 138]}
           zoom={5}
-          minZoom={3}
+          minZoom={0}
           scrollWheelZoom={false}
           preferCanvas
           className="h-[420px] w-full sm:h-[560px] [&_.leaflet-control-zoom_a]:!h-11 [&_.leaflet-control-zoom_a]:!w-11 [&_.leaflet-control-zoom_a]:!leading-[44px]"

@@ -157,12 +157,25 @@
       "status": "passed",
       "packages": 1646,
       "auditVulnerabilities": 0
+    },
+    "geoLocalInitial": {
+      "commit": "e4b8f08eadbf360b5ae27f84dea5d5f35e2769c0",
+      "cases": 100,
+      "passed": 95,
+      "failed": 5,
+      "initialDisplayPassed": 98,
+      "failures": {
+        "A43-320": "Feature click target selection; verifier corrected, scoped confirmation pending.",
+        "L03-a-320/1440": "Closed selector label check; verifier corrected, scoped confirmation pending.",
+        "S10a-320/1440": "Actual minimum zoom 3 prevents valid global route bounds fitting the viewport."
+      },
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-local/initial-e4b8f08"
     }
   },
   "remaining": [
-    "Finish Rakuten actual CI publication and local Geo 100 cases",
-    "Merge release after latest-head full CI and verify production",
-    "Publish page-component and six climate snapshots from main, then verify canonical content",
+    "Verify map-fit fix in 8 scoped local cases and latest-head full CI",
+    "Merge release and verify production Geo 100 cases",
+    "Publish page-component and six climate snapshots from main, then verify canonical content and theme 110 cases",
     "Verify SEO publication record and seven-day observation",
     "Synchronize main/develop and remove remaining merged branches/verification worktree"
   ],
@@ -298,12 +311,77 @@
       "dryRun": 2227,
       "publishAndReadback": 9713
     },
-    "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-publication"
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-publication",
+    "a31b": {
+      "originalSources": 201,
+      "displayAssets": 17344,
+      "sourceFeatures": 16513541,
+      "displayFeatures": 16513541,
+      "perSourceConservation": "201/201 matched CI manifest lineage"
+    }
   },
   "efficiencyFollowup": {
     "backlogId": "GEO-SOURCE-PUBLISH-PERF-01",
     "status": "implementation-not-started",
     "firstDesignReviewDate": "2026-09-20",
     "policy": "Use measured phase timing to remove redundant work, keep the full integrity contract, and compare time and cost before claiming improvement."
+  },
+  "rakutenPublication": {
+    "status": "pass",
+    "runId": 34726845212,
+    "jobId": 103670059619,
+    "workflowConclusion": "success",
+    "freshFetch": {
+      "generatedAt": "2026-09-13T04:06:17.223Z",
+      "finishedAt": "2026-09-13T04:18:32.008Z",
+      "logicalQueries": 510,
+      "itemQueries": 463,
+      "prefectureQueries": 47,
+      "withItems": 373,
+      "normalEmpty": 137,
+      "failed": 0,
+      "complete": true,
+      "snapshotCount": 510
+    },
+    "qualityAudit": {
+      "expected": 49,
+      "audited": 49,
+      "unavailable": 0,
+      "rejectedItems": 0,
+      "regionalFallbacks": 0,
+      "foodFallbacks": 0
+    },
+    "publicReadback": {
+      "observedAt": "2026-09-13T04:21:43.460Z",
+      "mode": "canonical-GET-no-cache-bust",
+      "requests": 510,
+      "http200": 510,
+      "sameFreshEpoch": 510,
+      "semanticMatches": 510,
+      "failures": 0,
+      "retries": 0,
+      "addedCacheBust": false,
+      "evidence": "readback-canonical/public-readback.json"
+    },
+    "caveats": [
+      "510 refers to logical queries; fallback API call count is not claimed.",
+      "Quality audit timestamp is revalidation time, not a second fresh API fetch.",
+      "Matching public snapshots does not assert affiliate revenue effect.",
+      "Workflow metadata head SHA is not assumed equal to checkout develop SHA."
+    ],
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/rakuten-publication"
+  },
+  "geoMapFitFix": {
+    "cause": "Valid international routes span nearly 354 degrees longitude. Minimum zoom 3 prevents full initial and reset views; at zoom 0 the 262px mobile map also needs less than 18px side padding.",
+    "change": "Allow zoom 0 and reduce fit padding only when needed to contain projected bounds at minimum zoom. Initial fit, reset and hidden-container recovery use the same helper. Regional fits retain 18px padding and maximum zoom 13.",
+    "checks": {
+      "realLeafletTestsPassed": 4,
+      "relatedTestsPassed": 96,
+      "relatedTestFiles": 22,
+      "webTypeCheck": "passed",
+      "changedFileLint": "passed"
+    },
+    "remaining": "Updated build: 8 scoped local cases, then all 100 production cases; latest-head full PR CI before deployment.",
+    "r2RegenerationRequired": false
   }
 }
