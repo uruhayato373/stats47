@@ -1,19 +1,21 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-12",
+  "observedAt": "2026-09-13",
   "status": "fail",
   "themeCount": 55,
   "runtime": {
     "expected": 110,
     "checked": 110,
-    "failed": 2
+    "failed": 3
   },
   "problems": [
-    "occupation-salary/390:chart:theme-occ-edu-trend:source-unavailable",
-    "occupation-salary/390:network:503",
+    "railway/390:chart:railway-freight-trend:source-unavailable",
+    "railway/390:network:503",
+    "real-income/1440:chart:real-income-cpi-breakdown:source-unavailable",
+    "real-income/1440:network:503",
     "runtime-process:1",
-    "safety/390:chart:traffic-accident-deaths-trend:source-unavailable",
-    "safety/390:network:503"
+    "tourism/390:chart:theme-tourism-hotel-supply-trend:source-unavailable",
+    "tourism/390:network:503"
   ],
   "checkpoints": [
     {
@@ -130,8 +132,8 @@
       "verdict": "insufficient-data"
     }
   ],
-  "alertBody": "# テーマ継続確認\n- occupation-salary/390:chart:theme-occ-edu-trend:source-unavailable\n- occupation-salary/390:network:503\n- runtime-process:1\n- safety/390:chart:traffic-accident-deaths-trend:source-unavailable\n- safety/390:network:503\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "1c3a9d95387e377e8d374287797669f0ca8920d1e1a7c92506de572ac5cf5d7b",
+  "alertBody": "# テーマ継続確認\n- railway/390:chart:railway-freight-trend:source-unavailable\n- railway/390:network:503\n- real-income/1440:chart:real-income-cpi-breakdown:source-unavailable\n- real-income/1440:network:503\n- runtime-process:1\n- tourism/390:chart:theme-tourism-hotel-supply-trend:source-unavailable\n- tourism/390:network:503\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "98c971300fb3a9264d5b2d0aeae7077fc0d8ca23e54fe81be66f77bbfbd9b4df",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34659520106"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34739779902"
 }
