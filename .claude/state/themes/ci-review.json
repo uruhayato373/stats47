@@ -1,28 +1,44 @@
 {
   "status": "no-change",
-  "summary": "品質観測(quality.json)はerrors:0、warnings 62件はすべて既知のpartial-coverage(coverage不足は不具合と断定しない既定の限定事項)で、修正対象の欠陥は無かった。runtime監査(ci-followup.json/runtime.json)の実問題はoccupation-salaryとsafetyのwidth=390における503+source-unavailableのみ。両者とも23:56:38〜23:57:05の30秒以内に集中し、自ページ自体の再取得とリンクhover由来の別ranking prefetch(_rsc)が同時に503を返しており、real-incomeで既に観測済み(THEME-EXPANSION-EFFECT-01)で「503の発生原因・HTMLストリームの上流終了要因は未確定」とされているのと同型の再発である。原因(Cloudflareエッジの一時的挙動か監査自体のバースト負荷か)を今回も特定できず、`loadThemeChartResult`のcatch-allへリトライを足す等の推測修正は行わなかった(evidence-based-judgment.mdの状況2/3に抵触するため)。新規55テーマのd7チェックポイントは2026-09-18が未到来でpending維持が正しく、既存THEME-EXP-001(population-dynamics)はd56(2026-09-08)到達済みでbaseline不足によるinsufficient-data判定が既存CLI出力のまま保持されており変更不要だった。原典確認(sourceReviews)は前回reviewが仮データ無効化により全55テーマ未確認扱いだが、今回は503調査を優先したため0件で、次回へ継続する。候補105(地震曝露の住宅部分)の全国住宅空間原典は総務省統計局「地域メッシュ統計」の項目一覧候補を検索したが、住宅数がメッシュ項目に含まれるかをPDFで確認しきれず未充足のまま。次回はstat.go.jp/data/meshの年度別統計項目PDFを直接開いて確認する。",
+  "summary": "今回のCI証拠を確認した。runtime監査はrailway(390px)・real-income(1440px)・tourism(390px)の3テーマでnetwork:503+該当チャートsource-unavailableを検出したが、これはTHEME-EXPANSION-EFFECT-01が「9/18までに再観測」と予告していた対象そのもので、発生原因(Cloudflareエッジの一時挙動かCI自体のバースト負荷か)は今回も特定できなかった。evidence-based-judgment.mdの状況2/3に抵触するためリトライ追加等の推測修正はしていない。quality.jsonはerrors:0、warnings62件は既知のpartial-coverageで修正対象なし。実験チェックポイントはTHEME-STRUCTURE系がd7(2026-09-18)未到来でpending維持が正しく、THEME-EXP-001のd56は既存のinsufficient-dataのまま変更していない。候補105(地震曝露の住宅空間原典)はe-Stat統計地理情報システム(GIS statmap-search)がJS駆動SPAでWebFetchでは内容取得できず今回も未確認。不存在の断定はしていない。原典確認(sourceReviews)は、portfolio.jsonの officialSourceReviewedAt が全55テーマで2026-09-09(4日前・同月)と既に新しく、55テーマ全件の再検証は重複作業と判断し実施しなかった。結果としてコード変更は行っていない。次の条件: (a) 503は次回d7観測時点でも再発する場合、cf-rayとタイミングログを蓄積してから原因切り分けに着手する。(b) 候補105はブラウザ実行可能なツールでe-Stat GIS検索を開くか地域メッシュ統計の項目一覧PDFを直接確認する。",
   "findings": [
     {
-      "themeKey": "occupation-salary",
-      "detail": "width=390でchart:theme-occ-edu-trendがsource-unavailable。同一チェック内でnetwork:503が4件(自ページ/themes/occupation-salary?pref=all再取得1件、関連ranking prefetch(school-teacher/software-engineer/truck-driver)3件)、23:56:38〜23:56:47の間に集中。真因は特定できず未修正。",
+      "themeKey": "railway",
+      "detail": "width=390でchart:railway-freight-trendがsource-unavailable。自ページ再取得503(cf-ray a3a4b54fddae19b0-ORD)+survey/freight-regional-flow-survey・ranking/railway-passengersのprefetch503が同時発生。THEME-EXPANSION-EFFECT-01が予告した再観測対象で、原因は今回も未特定のため修正せず。",
       "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:7492-7650",
+        ".local/ci/theme-followup/runtime.json:8067-8184",
         ".claude/state/themes/ci-followup.json"
       ]
     },
     {
-      "themeKey": "safety",
-      "detail": "width=390でchart:traffic-accident-deaths-trendがsource-unavailable。network:503が2件(consumer-consultation-accepted-cases prefetch、自ページ/themes/safety?pref=all再取得)、23:57:02〜23:57:05に集中。occupation-salaryと同じ30秒圏内かつ同じパターン(自ページ再取得503→該当チャートのみsource-unavailable)。",
+      "themeKey": "real-income",
+      "detail": "width=1440でchart:real-income-cpi-breakdownがsource-unavailable。自ページ再取得503(cf-ray a3a4b2087d5de81a-ORD)+labor-wages等のprefetch503が同時発生。前回のTHEME-EXPANSION-EFFECT-01評価でも同テーマ・同型の503が既出(発生原因未確定)で、今回も再現したのみで新規原因証拠はない。",
       "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:8653-8679"
+        ".local/ci/theme-followup/runtime.json:2522-2670",
+        ".claude/state/themes/ci-followup.json"
+      ]
+    },
+    {
+      "themeKey": "tourism",
+      "detail": "width=390でchart:theme-tourism-hotel-supply-trendがsource-unavailable。survey/accommodation-survey・themes/tourism自ページ・themes一覧・japanページのprefetchが同時に503(23:21:33前後に集中)。railway/real-incomeと同一シグネチャ(自ページ再取得503→対応チャートのみsource-unavailable)。",
+      "evidenceRefs": [
+        ".local/ci/theme-followup/runtime.json:8539-8720"
       ]
     },
     {
       "themeKey": "earthquake-exposure",
-      "detail": "候補105(THEME-EXPANSION-IMPLEMENT-01)の全国住宅戸数の空間原典を検索。総務省統計局「地域メッシュ統計」がメッシュ単位で住宅数を持つか統計項目一覧PDFで確認しようとしたが、WebFetchでは項目一覧ページから該当PDFの内容まで辿れず未確認のまま。人口・世帯・建物・部分PLATEAUでの代替はしていない。",
+      "detail": "候補105(THEME-EXPANSION-IMPLEMENT-01)の住宅空間原典を再確認。e-Stat統計地理情報システム(gis/statmap-search?toukeiCode=00200522、住宅・土地統計調査)のメッシュ/小地域データ提供有無をWebFetchで確認しようとしたが、ページがJS駆動SPAでダウンロード対象一覧を読み取れず未確認のまま(前回試行のstat.go.jp/data/meshと同じツール限界)。全国住宅の原典が存在しないとは断定していない。既存の`.local/verification/themes/earthquake-housing-source/`成果物は本セッション環境に残存せず再検証不可。",
       "evidenceRefs": [
-        "https://www.stat.go.jp/data/mesh/index.html",
-        "https://www.stat.go.jp/data/mesh/k_koumok.html"
+        "https://www.e-stat.go.jp/gis/statmap-search?page=1&type=1&toukeiCode=00200522",
+        "https://www.e-stat.go.jp/statistics/00200522",
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json:6062-6072"
+      ]
+    },
+    {
+      "themeKey": "population-dynamics",
+      "detail": "THEME-EXP-001のd56(due 2026-09-08)はbaseline不足(baseline-missing-or-low-sample等)によりinsufficient-dataのまま。既存CLI出力・保存済み観測を変更する根拠は今回なし。",
+      "evidenceRefs": [
+        ".claude/state/themes/experiments.json"
       ]
     }
   ],
@@ -88,7 +104,7 @@
     "water-services"
   ],
   "schemaVersion": 1,
-  "inputSha256": "1c3a9d95387e377e8d374287797669f0ca8920d1e1a7c92506de572ac5cf5d7b",
-  "reviewedAt": "2026-09-12",
+  "inputSha256": "98c971300fb3a9264d5b2d0aeae7077fc0d8ca23e54fe81be66f77bbfbd9b4df",
+  "reviewedAt": "2026-09-13",
   "month": "2026-09"
 }
