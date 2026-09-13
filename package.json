@@ -31,6 +31,8 @@
     "geo:build-flood-analysis": "tsx packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts --flood-only && npm run geo:audit-analysis",
     "geo:build-station-access": "tsx packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts --station-access-only && npm run geo:audit-analysis",
     "geo:audit-analysis": "tsx packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts",
+    "geo:audit-source-pages": "tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/audit-geo-source-pages.ts",
+    "rakuten:catalog:audit": "tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/audit-rakuten-catalog.ts",
     "geo:build-data-catalog": "npm run build:data-catalog --workspace packages/gis",
     "geo:check-data-catalog": "npm run check:data-catalog --workspace packages/gis",
     "geo:export-content-pipeline": "npm run export:geo-content-pipeline --workspace packages/data-configs",

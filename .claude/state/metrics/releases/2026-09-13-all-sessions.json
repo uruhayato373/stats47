@@ -20,7 +20,7 @@
     "geo": "Keep all current analyses reachable and add original source GIS pages; publish only after source validation and exact R2 readback.",
     "note": "Preserve existing 286-cover publication evidence; no repeat external note edits.",
     "history": "Preserve immutable SEO rank history and archive refs before branch deletion.",
-    "themeMeasurement": "Preserve the original 55-theme release dates and d7/d28/d56 checkpoints. Record comparison/calendar/industry changes as later changes and keep confounded guards; local-finance retains its specialized comparison and applies cross-metric comparison to supplementary indicators."
+    "themeMeasurement": "Preserve the original 55-theme release dates and d7/d28/d56 checkpoints. Record comparison/calendar/industry changes as later changes that constrain causal attribution; local-finance retains its specialized comparison and applies cross-metric comparison to supplementary indicators."
   },
   "checks": {
     "noteTests": {
@@ -99,7 +99,8 @@
     "fullWebBuild": {
       "status": "passed",
       "staticPages": 1638,
-      "commit": "b52bacdd57d6f8eb18999640ade4446e1b5af9f6"
+      "commit": "e4b8f08eadbf360b5ae27f84dea5d5f35e2769c0",
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/logs/stats47-release-full-build-final.log"
     },
     "dependencyInstall": {
       "status": "passed",
@@ -135,6 +136,12 @@
         "workflows": 70,
         "findings": 0
       }
+    },
+    "checkerWiring": {
+      "checkers": 126,
+      "newFindings": 0,
+      "regressionTests": 11,
+      "remainingStaticStepsPassed": 23
     }
   },
   "remaining": [
@@ -145,7 +152,7 @@
     "Verify SEO publication record and seven-day observation",
     "Synchronize main/develop and delete merged branches/worktrees"
   ],
-  "integrationCommit": "b3e803b0bf13d94e09e4cffd6d1b6790ddf6198a",
+  "integrationCommit": "e4b8f08eadbf360b5ae27f84dea5d5f35e2769c0",
   "ci": {
     "affiliatePublish": 34725325729,
     "affiliateInventory": 34725325776,
@@ -154,7 +161,11 @@
     "releaseQualityInitial": 34725784676,
     "affiliateGa4": 34725598497,
     "rakutenStaging": 34726078364,
-    "geoSourcePublishInitial": 34725325770
+    "geoSourcePublishInitial": 34725325770,
+    "geoSourcePublish": 34726806521,
+    "rakutenPublish": 34726845212,
+    "releaseQualitySecond": 34726808490,
+    "releaseQualitySecondResult": "All build, type, unit, coverage and E2E jobs passed; only checker registration failed, now fixed and checked locally."
   },
   "affiliateSnapshot": {
     "run": 34725325729,
@@ -186,5 +197,25 @@
     "publicWrites": 0,
     "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-attempt-1",
     "followup": "Add bounded transient-download retries, then rerun the complete exact publication."
+  },
+  "rakutenStaging": {
+    "run": 34726078364,
+    "generatedAt": "2026-09-12T23:46:38.010Z",
+    "finishedAt": "2026-09-12T23:59:16.195Z",
+    "expected": 510,
+    "succeededWithItems": 374,
+    "normalEmpty": 136,
+    "failed": 0,
+    "snapshots": 510,
+    "complete": true,
+    "qualityAudit": {
+      "expected": 49,
+      "audited": 49,
+      "unavailable": 0,
+      "rejectedItems": 0,
+      "regionalFallbackPrefectures": 0,
+      "foodFallbackPrefectures": 0
+    },
+    "evidence": ".local/verification/release/2026-09-13-all-sessions/rakuten-staging"
   }
 }
