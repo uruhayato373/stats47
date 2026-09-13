@@ -103,8 +103,9 @@
     "fullWebBuild": {
       "status": "passed",
       "staticPages": 1638,
-      "commit": "e4b8f08eadbf360b5ae27f84dea5d5f35e2769c0",
-      "evidence": ".local/verification/release/2026-09-13-all-sessions/logs/stats47-release-full-build-final.log"
+      "commit": "d50e4cd04e70fcbcf60a0d48f823a8aed2642eec",
+      "buildId": "zam9roIoFT0hyE-KfEq6i",
+      "evidence": ".local/verification/release/2026-09-13-all-sessions/logs/stats47-release-full-build-basemap.log"
     },
     "dependencyInstall": {
       "status": "passed",
@@ -173,7 +174,7 @@
     }
   },
   "remaining": [
-    "Verify map-fit fix in 8 scoped local cases and latest-head full CI",
+    "Wait for latest-head full CI after completed local visual verification",
     "Merge release and verify production Geo 100 cases",
     "Publish page-component and six climate snapshots from main, then verify canonical content and theme 110 cases",
     "Verify SEO publication record and seven-day observation",
@@ -324,7 +325,8 @@
     "backlogId": "GEO-SOURCE-PUBLISH-PERF-01",
     "status": "implementation-not-started",
     "firstDesignReviewDate": "2026-09-20",
-    "policy": "Use measured phase timing to remove redundant work, keep the full integrity contract, and compare time and cost before claiming improvement."
+    "policy": "Use measured phase timing to remove redundant work, keep the full integrity contract, and compare time and cost before claiming improvement.",
+    "releaseProcessCorrection": "Finish related local data, interaction and background-image checks before starting final CI; previous early CI starts caused superseded checks. Keep initial failure evidence and scope local retries to affected behavior."
   },
   "rakutenPublication": {
     "status": "pass",
@@ -379,9 +381,34 @@
       "relatedTestsPassed": 96,
       "relatedTestFiles": 22,
       "webTypeCheck": "passed",
-      "changedFileLint": "passed"
+      "changedFileLint": "passed",
+      "scopedLocalCases": {
+        "passed": 8,
+        "failed": 0,
+        "commit": "b3ae2dc3306db4deb7ba7d2c66745490b46a84a4",
+        "visualLimit": "World background was still missing at zoom 0/1; this initial failure is retained."
+      },
+      "basemapLocalCases": {
+        "passed": 2,
+        "failed": 0,
+        "commit": "d50e4cd04e70fcbcf60a0d48f823a8aed2642eec",
+        "buildId": "zam9roIoFT0hyE-KfEq6i",
+        "worldRouteCandidates": 11581,
+        "nativeTileZoom": 2,
+        "displayedMapZoom": [
+          0,
+          1
+        ],
+        "allVisibleTilesHttp200": true,
+        "imageNaturalWidth": 256,
+        "nativeZoom0Or1Requests": 0,
+        "screenshots": "Land and sea rendered; only margins outside the projection remain.",
+        "evidence": ".local/verification/release/2026-09-13-all-sessions/geo-local/basemap-d50e4cd04"
+      }
     },
-    "remaining": "Updated build: 8 scoped local cases, then all 100 production cases; latest-head full PR CI before deployment.",
-    "r2RegenerationRequired": false
+    "remaining": "Latest-head full PR CI, then all 100 production cases. Current local proof consists of original 100 cases plus scoped 8-case and 2-case follow-ups; these are not represented as one fresh 100-case run.",
+    "r2RegenerationRequired": false,
+    "basemapChange": "Use provider-native zoom 2 tiles when the map displays zoom 0/1; retain higher-zoom behavior and show existing VMAP0 source attribution below the map.",
+    "basemapEvidence": "https://maps.gsi.go.jp/development/ichiran.html; actual zoom 0/1 requests returned 404, representative zoom 2 requests returned 200. Final browser images all loaded from native zoom 2."
   }
 }

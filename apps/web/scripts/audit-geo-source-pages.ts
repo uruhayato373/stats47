@@ -54,6 +54,8 @@ const viewerHash = sha(
     'apps/web/src/features/geo-analysis/lib/geo-source-sampling.ts',
     'apps/web/src/features/geo-analysis/lib/geo-source-properties.ts',
     'apps/web/src/features/geo-analysis/lib/geo-source-initial-asset.ts',
+    'apps/web/src/features/geo-analysis/lib/fit-geo-source-bounds.ts',
+    'apps/web/src/features/geo-analysis/lib/geo-basemap.ts',
   ]
     .map((file) => readFileSync(path.join(root, file), 'utf8'))
     .join('\n')
