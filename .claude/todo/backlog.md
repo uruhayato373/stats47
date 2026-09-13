@@ -520,17 +520,6 @@ updated: 2026-09-13
 - **完了条件**: 再起動後の同条件計測を保存し、参考文献のDrive復元検証と source-vault:check が通る。GISは回収した各対象から保全先と再生成手順が辿れ、保全できないものには保持理由を残す。導入済み予算・定期点検方式は local-environment.md と自動化インベントリを参照する。
 
 
-### [WORKSPACE-RELEASE-GATES-01] 共有ブランチの公開前検査で残る4件を切り分けて解消する
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run preflight:pr] [起票:2026-09-09]
-
-- **owner**: devops-runner（切り分け・統合）／各UI・単位・survey担当（必要な是正）
-- **対象・根拠**: `codex/workspace-updates-20260908`、基準commit `213886cd0`。2026-09-09の `npm run preflight:pr` は14ゲート中10成功・4失敗。2026-09-10の資源管理変更のpush前にも同じ4ゲートの失敗を確認。対象コード・生成物は今回の変更に含まれない。
-- **未解決**: Card Censusは既存の `GeoSourceLinkCard` が未登録。Unit Semantics Mirrorは正典と生成物が比較不一致（改行差か内容差かは未確定）。Survey Taxonomyはtheme charts 54／resolved 31でstate driftと最低82未達。Sitemap / Tag Keysは公開R2の `app/blog/all.json` 取得が9/9はHTTP 503、9/10は`SELF_SIGNED_CERT_IN_CHAIN`。
-- **次**: ①既存カード構成と登録基準を照合する。②単位の生成差分を切り分ける。③現行ThemeCatalogと調査対応を照合して必要な派生を再生成する。④R2取得を正常な証明書・接続で再試行し、全14ゲートを再検証する。
-- **停止条件**: 原因未確定のまま基準登録・閾値引下げ・TLS検証無効化で通さない。既存の別作業の変更を戻さない。共有pushの完了を本番リリース可能と扱わない。
-- **完了条件**: 原因と必要な是正を各正典へ反映し、`npm run preflight:pr` の全14ゲート成功を記録する。型・フルbuild・本番確認はこの検査の成功とは分け、リリース時の影響範囲に応じて実行する。
-
 ### [GEO-SOURCE-PAGES-01] 50種類の単体GISページを一覧順に整備・検証する
 
 タグ: [UI・UX] [種類:制作] [実行:対話] [起票:2026-09-08]

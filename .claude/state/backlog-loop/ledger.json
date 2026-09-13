@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-13T03:22:10.799Z",
+  "updatedAt": "2026-09-13T03:25:19.338Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4117,6 +4117,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-11T16:19:24.119Z"
+    },
+    "WORKSPACE-RELEASE-GATES-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "共有ブランチの公開前検査で残る4件を切り分けて解消する",
+      "attempts": [
+        {
+          "at": "2026-09-13T03:25:19.338Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "All-session integration now passes all 14 preflight gates in 12.1s, including Card Census, Unit Semantics Mirror, Survey Taxonomy and Sitemap/Tag Keys, without lowering gates or disabling TLS. Evidence: .local/verification/release/2026-09-13-all-sessions/logs/stats47-release-pref",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-13T03:25:19.338Z"
     }
   }
 }
