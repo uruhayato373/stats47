@@ -71,5 +71,14 @@ export const FUKUSHIMA_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://aizu-shokuno-jin.jp/aizu_asparagus/",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "nameko",
+      name: "ナメコ",
+      municipality: "いわき市ほか",
+      description:
+        "いわき市などで広葉樹のおが粉培地を使い、温湿度を管理して栽培されるなめこ。天然物に近い芯の太さとしっかりした歯ごたえ、濃い旨みを持つ生産者が多い。",
+      sourceUrl: "https://iwaki-megumi-navi.com/vegetables/article.html?id=27",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

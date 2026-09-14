@@ -72,5 +72,23 @@ export const GUNMA_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.city.ota.gunma.jp/page/4591.html",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "brix-nine",
+      name: "ブリックスナイン",
+      municipality: "太田市ほか",
+      description:
+        "太田市などで栽培される高糖度トマトのブランド。根を制限して水分を抑える栽培法で糖度9度以上に仕上げ、大玉より小ぶりながら凝縮した甘みとコクが持ち味。",
+      sourceUrl: "https://www.city.ota.gunma.jp/site/furusato/1022906.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "aka-imo",
+      name: "赤いも",
+      municipality: "神流町",
+      description:
+        "神流町の山間部で江戸時代から作られてきた赤い皮のじゃがいも。粘質で煮崩れしにくく、地元では皮ごと蒸して焼く「いも串」など郷土料理に使われてきた。",
+      sourceUrl: "https://www.town.kanna.gunma.jp/kanko/taberu_tokusan/index.html",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

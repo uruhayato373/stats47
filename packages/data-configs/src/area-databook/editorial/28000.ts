@@ -80,5 +80,24 @@ export const HYOGO_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.ja-tajima.or.jp/tokusan/yasai/sansho.html",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "tamba-dainagon-azuki",
+      name: "丹波大納言小豆",
+      municipality: "丹波市（春日町ほか）",
+      description:
+        "丹波市春日町が発祥とされる大粒の高級小豆。江戸期に幕府や御所へ献上された歴史を持ち、煮くずれしにくく上品な甘みと光沢から和菓子店で最高級品として使われる。",
+      sourceUrl:
+        "https://www.city.tamba.lg.jp/soshiki/norinshinkoka/gyomuannai/6/2/12874.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "botan-nabe-inoshishi",
+      name: "猪肉（ぼたん鍋）",
+      municipality: "丹波篠山市",
+      description:
+        "丹波篠山市は「ぼたん鍋」発祥の地とされ、天然の猪肉を使う。野山の木の実を食べて育つため脂が適度にのり、くさみが少なく煮込むほどやわらかくなるのが特徴。",
+      sourceUrl: "https://tourism.sasayama.jp/botannabe/",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

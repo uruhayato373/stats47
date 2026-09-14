@@ -80,5 +80,24 @@ export const MIYAZAKI_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.town.gokase.miyazaki.jp/kanko/omiyagetokusanhin/tokusanomiyage/gokaseyamame.html",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "miyazaki-jidokko",
+      name: "みやざき地頭鶏",
+      municipality: "県内広域",
+      description:
+        "霧島山麓の在来種「地頭鶏」を宮崎県が改良した地鶏ブランド。1平方メートルあたり2羽以下のゆったりした環境で4〜5カ月以上飼育し、弾力がありながら柔らかな肉質に仕上げる。",
+      sourceUrl: "https://www.pref.miyazaki.lg.jp/kense/koho/kense-faq/qa_page/16-q22.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "miyazaki-boshiitake",
+      name: "みやざき乾しいたけ",
+      municipality: "日向市ほか県内広域",
+      description:
+        "日向市などで盛んな原木栽培の乾しいたけ。県は認定制度を設けて生産と流通を後押ししており、天日と時間をかけてじっくり乾燥させることで香りと旨みを凝縮させる。",
+      sourceUrl:
+        "https://www.pref.miyazaki.lg.jp/sanson-mokuzai/shigoto/ringyo/tokuyorinsan/20241119131718.html",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

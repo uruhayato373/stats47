@@ -82,5 +82,23 @@ export const MIE_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.pref.mie.lg.jp/common/content/000101326.pdf",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "ise-hijiki",
+      name: "伊勢ひじき",
+      municipality: "鳥羽市・志摩市・南伊勢町・尾鷲市ほか",
+      description:
+        "伊勢志摩沿岸の岩場で採れるひじきを、蒸してから乾燥させる伝統の「伊勢方式」で仕上げた加工品。江戸期の文献にも名産として記され、長く太い茎が特徴。",
+      sourceUrl: "https://www.maff.go.jp/j/keikaku/syokubunka/traditional-foods/menu/ise_hiziki.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "ao-sanori",
+      name: "青さのり",
+      municipality: "伊勢湾・英虞湾・熊野灘沿岸ほか",
+      description:
+        "三重県は「あおさのり」ことヒトエグサの生産量が全国の約6割を占める全国一の産地。1970年代に県内で養殖技術が確立し、伊勢湾沿岸に春の風物詩を作り出す。",
+      sourceUrl: "https://www.maff.go.jp/j/keikaku/syokubunka/traditional-foods/menu/aosanori.html",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

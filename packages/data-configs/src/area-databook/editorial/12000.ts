@@ -72,5 +72,32 @@ export const CHIBA_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.pref.chiba.lg.jp/kkbunka/b-shigen/500sen/tokusan.html",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "tomisato-suika",
+      name: "富里スイカ",
+      municipality: "富里市",
+      description:
+        "富里市は関東ローム層の水はけのよい土壌と昼夜の寒暖差を生かしたスイカの名産地。市は令和3年にすいか条例を制定し、生産者・市民一体で「富里スイカ」ブランドを守っている。",
+      sourceUrl: "https://www.city.tomisato.lg.jp/0000012162.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "shiro-takenoko",
+      name: "白たけのこ",
+      municipality: "大多喜町",
+      description:
+        "大多喜町は県内有数のたけのこ産地で、酸性の白い土壌で育つ筍は色が白く苦みやえぐみが少ない。「幻の白たけのこ」と称され、都内の料亭からも求められる高級食材。",
+      sourceUrl: "https://jaisumi.or.jp/agriculture-and-food/farm_crops/120.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "mineoka-gyunyu",
+      name: "牛乳",
+      municipality: "南房総市（嶺岡地域）ほか安房地域",
+      description:
+        "南房総市嶺岡は徳川吉宗が享保期にインド産の白牛を放ち「白牛酪」を作らせた、日本の酪農発祥の地とされる。千葉県史跡に指定され、酪農のさと資料館が歴史を伝える。",
+      sourceUrl: "https://www.pref.chiba.lg.jp/kyouiku/bunkazai/bunkazai/p411-025.html",
+      accessedAt: "2026-09-14",
+    },
   ],
 };
