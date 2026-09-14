@@ -170,3 +170,43 @@ export interface KakeiMarketingAnalysis {
   /** 次に作る制作単位 */
   nextAction: string;
 }
+
+export const KAKEI_EXPENSE_EVIDENCE_DIRECTIONS = ["same", "inverse"] as const;
+
+export type KakeiExpenseEvidenceDirection =
+  (typeof KAKEI_EXPENSE_EVIDENCE_DIRECTIONS)[number];
+
+/**
+ * note 家計シリーズ (a-kakei-<pref>) の十大費目 1 つを裏付ける根拠指標 1 件。
+ * direction: "same" = 指標が高いほど費目割合も高い想定 / "inverse" = 逆相関の想定。
+ */
+export interface KakeiExpenseEvidenceRef {
+  metricKey: string;
+  direction: KakeiExpenseEvidenceDirection;
+  /** 番号が小さいほど優先。evidence-data 生成は R2 データが実在する上位 2 件を採用する */
+  priority: number;
+  rationale: string;
+}
+
+/** 十大費目 1 つ (chart-data.json の categoryBreakdown catName と一致) の SSOT エントリ */
+export interface KakeiExpenseEvidenceEntry {
+  catName: string;
+  /** 47都道府県庁所在市の対全国平均比率ランキングの key (*-expenditure-ratio-multi-person-households) */
+  shareMetricKey: string;
+  evidence: readonly KakeiExpenseEvidenceRef[];
+}
+
+/** effectiveRank から verdict (strong/weak/contrary) を決める閾値 */
+export interface KakeiExpenseEvidenceThresholds {
+  strong: number;
+  weak: number;
+}
+
+/**
+ * `expense-evidence.json` の型契約。十大費目 → 根拠指標の対応表 (authored SSOT)。
+ */
+export interface KakeiExpenseEvidenceInventory {
+  version: string;
+  thresholds: KakeiExpenseEvidenceThresholds;
+  entries: readonly KakeiExpenseEvidenceEntry[];
+}

@@ -1,0 +1,204 @@
+{
+  "version": "2026-09-15",
+  "thresholds": { "strong": 15, "weak": 31 },
+  "entries": [
+    {
+      "catName": "食料",
+      "shareMetricKey": "food-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "consumer-price-difference-index-food",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "食料の物価が高い地域ほど食料費割合も上がる"
+        },
+        {
+          "metricKey": "average-persons-per-general-household",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "世帯人数が多い地域ほど食料支出割合が増える"
+        }
+      ]
+    },
+    {
+      "catName": "住居",
+      "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "private-rental-housing-rent-per-3-3m2",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "家賃相場が高い地域ほど住居費割合も上がる"
+        },
+        {
+          "metricKey": "owner-occupied-housing-ratio",
+          "direction": "inverse",
+          "priority": 2,
+          "rationale": "持ち家率が高い地域ほど住居費割合は下がる"
+        }
+      ]
+    },
+    {
+      "catName": "光熱・水道",
+      "shareMetricKey": "utilities-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "average-temperature",
+          "direction": "inverse",
+          "priority": 1,
+          "rationale": "気温が低い地域ほど光熱費割合が上がる"
+        },
+        {
+          "metricKey": "maximum-snow-depth",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "積雪が多い地域ほど暖房費がかさみ割合が上がる"
+        },
+        {
+          "metricKey": "kerosene-consumption-quantity",
+          "direction": "same",
+          "priority": 3,
+          "rationale": "灯油消費が多い地域ほど光熱費割合も上がる"
+        }
+      ]
+    },
+    {
+      "catName": "家具・家事用品",
+      "shareMetricKey": "furniture-household-goods-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "housing-floor-area",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "住宅の床面積が広い地域ほど家具支出割合が上がる"
+        },
+        {
+          "metricKey": "consumer-price-difference-index-furniture-household",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "家事用品の物価が高い地域ほど割合も上がる"
+        }
+      ]
+    },
+    {
+      "catName": "被服及び履物",
+      "shareMetricKey": "clothing-footwear-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "consumer-price-difference-index-clothing-footwear",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "被服の物価が高い地域ほど被服費割合も上がる"
+        },
+        {
+          "metricKey": "department-supermarket-count-per-100k",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "百貨店・スーパーが多い地域ほど購入機会が増える"
+        }
+      ]
+    },
+    {
+      "catName": "保健医療",
+      "shareMetricKey": "healthcare-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "physicians-in-medical-facilities-per-100k",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "医師数が多い地域ほど受診機会が増え割合が上がる"
+        },
+        {
+          "metricKey": "elderly-population-ratio",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "高齢者が多い地域ほど医療費割合が上がる"
+        }
+      ]
+    },
+    {
+      "catName": "交通・通信",
+      "shareMetricKey": "transport-communication-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "car-ownership-multi-person-households-per-1000",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "自家用車の保有が多い地域ほど交通費割合が上がる"
+        },
+        {
+          "metricKey": "commute-by-car",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "車通勤が多い地域ほど交通費割合が上がる"
+        }
+      ]
+    },
+    {
+      "catName": "教育",
+      "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "private-university-student-ratio",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "私立大学生の割合が高い地域ほど教育費割合が上がる"
+        },
+        {
+          "metricKey": "high-school-advancement-rate",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "高校進学率が高い地域ほど教育費割合が上がる"
+        },
+        {
+          "metricKey": "university-capacity-index",
+          "direction": "inverse",
+          "priority": 3,
+          "rationale": "県内大学収容力が低い地域ほど教育費割合が上がる"
+        },
+        {
+          "metricKey": "in-pref-university-entrance-ratio-by-highschool-origin",
+          "direction": "inverse",
+          "priority": 4,
+          "rationale": "県内進学率が低い地域ほど仕送りで教育費が増える"
+        }
+      ]
+    },
+    {
+      "catName": "教養娯楽",
+      "shareMetricKey": "culture-recreation-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "travel-participation-rate-overnight",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "宿泊旅行の行動者率が高い地域ほど割合が上がる"
+        },
+        {
+          "metricKey": "consumer-price-difference-index-culture-recreation",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "教養娯楽の物価が高い地域ほど割合も上がる"
+        }
+      ]
+    },
+    {
+      "catName": "その他の消費支出",
+      "shareMetricKey": "other-consumption-expenditure-ratio-multi-person-households",
+      "evidence": [
+        {
+          "metricKey": "elderly-population-ratio",
+          "direction": "same",
+          "priority": 1,
+          "rationale": "高齢者が多い地域ほど交際費等の割合が上がる"
+        },
+        {
+          "metricKey": "private-life-insurance-contracts-per-1000",
+          "direction": "same",
+          "priority": 2,
+          "rationale": "生命保険加入が多い地域ほど割合が上がる"
+        }
+      ]
+    }
+  ]
+}

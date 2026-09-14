@@ -29,7 +29,10 @@ for (const slug of slugs) {
   if (!title) { missing.push(slug + " (no title)"); continue; }
   if (!noteUrl) { missing.push(slug + " (not published)"); continue; }
   if (src.includes(`key: "${slug}"`)) { missing.push(slug + " (already in catalog)"); continue; }
-  const magazine = slug.startsWith("b-kakei-") ? "s47-kakei-reading" : "s47-economy";
+  // 家計シリーズ (a-kakei-*/b-kakei-*/d-kakei-*) は全て "s47-kakei-reading" マガジン所属。
+  // ★2026-09-15 修正: 以前は b-kakei-* 以外 (a-/d-kakei-*) が "s47-economy" 誤既定になっていたが、
+  // 実際の live catalog (公開済み47件の a-kakei-*) は全件 "s47-kakei-reading" だった。
+  const magazine = "s47-kakei-reading";
   const series = slug.startsWith("b-kakei-") ? "B" : slug.startsWith("d-kakei-") ? "D" : "A";
   const lines = [
     "  {",
