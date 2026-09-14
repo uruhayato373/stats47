@@ -695,8 +695,10 @@ updated: 2026-09-14
   Drive へ配置し `stage-status` で S0〜S4 到達。台帳は同日に再 build し、県ページ判定が OCR テキストの単一県名検出
   (`detectedPrefecture`) に依存するため 34 ページの resolution が入れ替わった (表紙が県候補になる等の誤判定は新旧双方にある)。
   area wave では `md/<doc>/pNNNN.md` の frontmatter (`kind`) と見出しを一次の手掛かりにし、台帳の県名判定だけを信用しない。
-- **次**: DataBookの61候補は既存area/editorial責務で必要なwaveだけ実装する。偏差値資料は図表権利と一次資料の
-  両方が確定した項目だけholdを解除する。準備工程の再実行は不要。
+- **次**: DataBookのarea editorial waveは完了 (2026-09-14、area-curator)。60候補全件を判定し、大半は偽陽性
+  (分冊表紙・広告ページ・奥付・家計調査KPI表を単一県名OCR一致で誤検出) または既存editorialと重複・9/9満杯。
+  一次資料で裏取りできた21件のみ12県のeditorialへ追加済み (`validate:area-databook`/`tsc`/`source-vault:check` green)。
+  残るは偏差値資料のみ: 図表権利と一次資料の両方が確定した項目だけholdを解除する (オーナー判断待ち・未着手)。
 - **完了条件**: 3資料の全抽出候補がresolutionを持ち、公開候補100%で一次資料・年度・単位・地域粒度・rightsが
   確定し、書籍値の直接投入、原文・元図・内部cropの公開が0である。
 - **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
