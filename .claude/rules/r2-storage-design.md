@@ -22,7 +22,9 @@ paths:
 
 - **読み取り**はローカル可 (公開 URL `https://storage.stats47.jp`、認証不要)。
 - **書き込み**はローカル / CI 両方から remote R2 へ直接可能。常駐するローカル R2 ミラーは廃止済み
-  (`.local/r2`はsnapshot/articleの一時stagingに限る)。
+  (`.local/r2` は push の一時 staging。秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため
+  常駐させず `local:cleanup` が 7 日で回収する。CI は runner 内で自分の staging を作る。KSJ ミラーは R2 `gis/`
+  から再取得できる。同日実測 2.1GB (`app/` 14MB・`gis/` 2,130MB) は削除済み)。
 - ローカル書き込みには R2 S3 creds (`.env.local`: `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT`) または `wrangler login` 認証が必要。`_assert-ci-write.ts` はデフォルト許可（ローカル実行時は `console.warn` を出すだけ）。
 - 対象スクリプト: `diff-push-r2.ts` / `push-generated-image-set.ts` / `push-r2-wrangler.ts` /
   `db-r2-sync.ts push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`。

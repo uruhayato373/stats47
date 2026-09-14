@@ -343,8 +343,11 @@ hardlinkの重複は除かない。回収量はドライブ空き容量の前後
   ファイル操作とGitHub操作は標準ツールと`gh`で行う。変更は次回Codex起動から反映し、既存セッションを強制終了しない。
 - editorの監視・検索から `.local`、`.turbo`、生成動画、追加worktreeを除外する。
 
-Windowsの登録入口は `scripts/scheduled/local-resources.ps1 -Action Install`。毎日09:00とログオン時に
-日次計測、7日ごとの限定掃除、30日ごとの容量監査を実行する。同日重複・同時実行を避け、上限15分で終了する。
+Windowsの登録入口は `scripts/scheduled/local-resources.ps1 -Action Install`、Macは
+`bash scripts/scheduled/local-resources.sh install` (launchd `com.stats47.local-resources`)。どちらも毎日09:00と
+ログオン時に日次計測、7日ごとの限定掃除、30日ごとの容量監査を実行し、同時に `git maintenance start` で
+git自身のcommit-graph・prefetch・incremental repackを登録する (2026-09-14にpackが25個・loose 6,286個まで
+溜まっていた再発防止。履歴は書き換えない)。同日重複・同時実行を避け、上限15分で終了する。
 ログイン中かつ端末が稼働できるときの処理であり、電源OFF中は実行されない。通知はCodexの
 「stats47 ローカル資源の点検結果を確認」が結果を読み、新しい異常・意味のある変化・復旧時だけ行う。
 
@@ -356,13 +359,26 @@ npm run local:cleanup -- --apply     # 条件を満たした生成cacheだけ削
 npm run local:resources:test         # 削除境界・保持・メモリ予算のテスト
 ```
 
-自動掃除は登録済みworktree内の指定されたNext cacheだけを対象とし、最終変更から7日以上、
-リンクなし、対象が計画後に変化していない、開発プロセスが停止中、の全条件を要求する。
-初回の `--include-recent` は明示的な掃除依頼時だけ使う。削除先は必ずルート配下の絶対パスで再検証する。
+自動掃除の対象は `cachePaths` (登録済みworktree内の再生成cache) と `scratchRoots` (OS一時領域直下の
+`stats47-*`) だけで、最終変更が各entryの `ageDays` 以上前、リンクなし、対象が計画後に変化していない、
+開発プロセスが停止中 (Macは `ps` で同じbusy判定)、の全条件を要求する。`cachePaths` の `*` は末尾segmentだけに
+許し、登録済みworktreeと `scratchExclude` (source-vault・japan-zue・geo-ui) は名前が一致しても消さない。
+初回の `--include-recent` は明示的な掃除依頼時だけ使う。削除先は必ず許可リストを再展開して再検証する。
+
+| 対象 | 寿命 | 消す主体 |
+|---|---|---|
+| `.next/cache`・`.turbo/cache/*`・`.local/{tmp,rakuten-cli-test-*,regen-*}` | 7日 | `local:cleanup` |
+| `.local/verification/*`・`.local/geo-source-*`・`.claude/state/estat-city-meta-cache` | 30日 | 同上 |
+| `.local/r2` (push staging。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる) | 7日 | 同上 |
+| `C:/tmp/stats47-*` / `/tmp/stats47-*` (worktree・除外名を除く) | 14日 | 同上 |
+| 認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |
+| git追跡の生snapshot (psi/url-inspection/cloudflare/note/releases/analytics週次) | `prune-state-snapshots.mjs` の `RETENTION_POLICIES` | `fetch-metrics-weekly.yml` |
 容量不足は空き25GiB未満で警告・15GiB未満で重大、RAMは利用可能3GiB未満で警告・1.5GiB未満で重大。
 メモリは瞬間値なので継続状況と実行中作業も見て判断し、不明な計測値を正常と扱わない。
 
-WIPのあるworktree、認証profile、`.local/r2`、参考文献、成果物や運用台帳は年齢だけで消さない。
+WIPのあるworktree、認証profile、参考文献、成果物や運用台帳は年齢だけで消さない。
+`.local/r2` は R2 への push staging で、秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため常駐させない
+(CI は runner 内で自分の staging を作る。KSJ ミラーは R2 `gis/` から再取得できる)。7日で回収する。
 GISの一時領域は処理ごとにOS一時フォルダーへ作り、入力URL・hash・成果の保存先・復元手順を残す。
 展開ファイルは残すZIPのentryとSHA-256を照合してから回収する。原本ZIPや固有スクリプトは別途保全確認が必要。
 参考文献は既存source-vault契約に従いprivate Driveからの復元検証とcoverage 100%を満たしてから回収する。

@@ -100,6 +100,7 @@ jobs:
             /tmp/note-circulation.log
             /tmp/note-product-navigation.log
           if-no-files-found: warn
+          retention-days: 14
 
       - name: 🚨 Open or update note circulation alert
         if: always() && steps.audit.outputs.exit_code != '0'

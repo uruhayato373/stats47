@@ -137,14 +137,19 @@ const report = {
   issues,
   articles: checks,
 };
-function save(name, data) {
-  const p = path.join(state, name);
+function save(name, data, dir = state) {
+  fs.mkdirSync(dir, { recursive: true });
+  const p = path.join(dir, name);
   fs.writeFileSync(p + '.tmp', JSON.stringify(data, null, 2) + '\n');
   fs.renameSync(p + '.tmp', p);
 }
 save('note-cover-audit-latest.json', audit);
-save(`note-cover-audit-${manifest.version}-after.json`, audit);
-save(`note-cover-refresh-${manifest.version}-verification.json`, report);
+// 版ごとの検証証跡は release 台帳 (metrics/releases/<date>-<name>.json、keep 8) に置く。
+// metrics 直下の日付名 JSON は check-repo-hygiene.cjs (DATED_STATE_ARTIFACT) が止める。
+const releases = path.join(state, 'releases');
+const stamp = new Date().toISOString().slice(0, 10);
+save(`${stamp}-note-cover-audit-${manifest.version}-after.json`, audit, releases);
+save(`${stamp}-note-cover-refresh-${manifest.version}-verification.json`, report, releases);
 console.log(
   JSON.stringify(
     { status: report.status, summary: report.summary, issues: report.issues },

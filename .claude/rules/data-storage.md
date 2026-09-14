@@ -87,6 +87,8 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 **判定軸**: アプリは読まない。エージェントが時系列で深掘り参照するためのログ・スナップショット・実験状態。人間は基本的に直接読まない (LATEST.md など要約ファイルは除く)。
 
+**寿命を宣言せずに日付名で増やさない (2026-09-14)**: git に置く生 snapshot は `.claude/scripts/lib/prune-state-snapshots.mjs` の `RETENTION_POLICIES` に置き場と keep 件数を持つものだけ (週次 `fetch-metrics-weekly.yml` が commit 直前に削除する)。release の検証証跡は `.claude/state/metrics/releases/<date>-<name>.json` (keep 8)、実行時の生 artifact は `.local/verification/` (30 日でローカル掃除) か CI artifact (≤30 日)。`.claude/state/metrics` 直下の日付名 JSON は `check-repo-hygiene.cjs` の `DATED_STATE_ARTIFACT` が止め、`prune-state-snapshots.test.mjs` が「追跡中の日付名 state は policy / 恒久宣言 / baseline のどれかに属する」ことを固定する。
+
 | データ | 保存先 |
 |---|---|
 | GSC/GA4/AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新） |

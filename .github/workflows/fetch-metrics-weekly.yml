@@ -263,6 +263,11 @@ jobs:
         continue-on-error: true
         run: (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --audit | tee -a "$GITHUB_STEP_SUMMARY")
 
+      # 生 snapshot の寿命は prune-state-snapshots.mjs の RETENTION_POLICIES が SSOT。
+      # ここで消すと、削除が下の週次 commit に同梱され git の追跡数が週ごとに増えない。
+      - name: 🧹 Prune raw snapshots to their declared retention
+        run: npm run state:snapshots:prune
+
       - name: 📤 Commit & push to develop
         run: |
           # 生成先は packages/data-configs 側 (apps/web と packages/ranking の両方が読むため)。
@@ -273,6 +278,9 @@ jobs:
           git add .claude/skills/analytics/adsense-improvement/reference/snapshots
           git add .claude/state/metrics
           git add .claude/skills/management/nsm-experiment/reference/weekly-snapshots
+          # state:snapshots:prune の削除分 (週次 append する state の古い世代)
+          git add .claude/state/business-plan/history 2>/dev/null || true
+          git add .claude/state/search-growth/manifests 2>/dev/null || true
           # 是正ループの自動再構築物
           git add .claude/state/blog/remediation-queue.json 2>/dev/null || true
           git add .claude/state/blog/topic-queue.json 2>/dev/null || true
