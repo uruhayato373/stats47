@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,66 @@ updated: 2026-09-13
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [STATE-R2-MIGRATION-01] 日次観測 state の残り 4 domain を R2 `state/` へ移す (psi → cloudflare → url-inspection → search-growth)
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:git log --since=4.weeks --name-only -- .claude/state/metrics | sort -u | wc -l が 230 未満、かつ curl -sI https://storage.stats47.jp/state/psi/index.json が 200] [起票:2026-09-14] [期日:2026-10-12]
+
+- **owner**: Claude Code (実装) / オーナー (PR 承認・Cloudflare lifecycle)
+- **前提**: PR `feat/ga4-affiliate-state-r2` で 1 domain 目 (`state/ads/ga4-affiliate/`) の型が出来ている。
+  `state-pull.mjs` (公開 URL → gitignored `live/`)、`index.json` 維持、週次集約だけ commit-back、
+  `prune-state-snapshots.mjs` の policy 削除、という 4 手順を domain ごとに繰り返す。
+- **背景 (2026-09-14 実測)**: `.claude/state/metrics` は 4 週で 230 commit。大半が psi / cloudflare /
+  url-inspection の日次 `[skip ci]` commit-back。git を肥大化させず agent の Grep 対象にも入れない置き場は
+  R2 `state/` (400 日 lifecycle・`r2-storage-design.md`)。
+- **次 (実行順)**: ① `psi-audit-daily.yml`: `psi-batch-*.json` を `state/psi/` へ、`history.csv` は git のまま。
+  読み手 `psi-threshold-check.mjs` / `fetch-psi-audit.mjs` / `search-growth/lib/sources.mjs` に「local 無ければ
+  `live/`」を足す。② `cloudflare-usage-daily.yml` (`cloudflare/snapshots/`)。③ `url-inspection-daily.cjs`
+  (`gsc/url-inspection/`)。④ `search-growth-weekly.yml` の `latest.json` / `live/`。domain ごとに 1 PR、
+  移行後に `RETENTION_POLICIES` の該当 scope を消す。
+- **停止条件**: 日次アラート (`[PSI Alert]` / `[Cloudflare Alert]`) の起票経路を壊さない (読み手が CI 内で
+  直前に書いた raw を読む経路は維持する)。R2 へ書けなかった日は raw を捨てず artifact に残す。
+- **完了条件**: 4 domain とも日次 commit-back が消え、`fetch-metrics-weekly.yml` の週次 1 commit だけが
+  `.claude/state/metrics` を触る。`npm run state:pull -- <domain>` が 4 domain で動く。
+
+### [STATE-R2-LIFECYCLE-01] R2 `state/` prefix の object lifecycle rule (400 日) をオーナーが設定する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:Cloudflare ダッシュボード R2 → stats47 → Settings → Object lifecycle rules に prefix state/ の 400 日ルールがある] [起票:2026-09-14] [期日:2026-09-28]
+
+- **owner**: オーナー
+- **何を**: Cloudflare ダッシュボード → R2 → `stats47` → Settings → Object lifecycle rules → Add rule:
+  prefix `state/`、Delete uploaded objects after 400 days。コード変更なし。
+- **なぜ**: `state/` は CI が日次・週次で書き続ける生 snapshot の置き場で、他の prefix と違い GC を
+  `r2-retention.ts` の allowlist で運用しない (正典 `r2-storage-design.md` 「削除ポリシー」)。
+  ルールが無いと 32GB (2026-09-12) の R2 に上乗せで増え続ける。
+- **停止条件**: prefix を `state/` 以外に広げない (`app/` `gis/` は PROTECTED)。
+
+### [CONFIG-SECRET-CLAUDE-JSON-01] `~/.claude.json` の github MCP に残る平文 PAT を退避する (gh CLI のプロキシ認証が前提)
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:node -e "const j=require(require('os').homedir()+'/.claude.json');console.log(Object.keys(j.mcpServers.github?.env||{}))" が [] を返す] [起票:2026-09-14] [期日:2026-10-12]
+
+- **owner**: オーナー
+- **現状 (2026-09-14)**: Codex 側 (`~/.codex/config.toml`) の PAT は削除・github MCP を無効化済み。Claude 側
+  (`~/.claude.json` user スコープ) の github MCP は `GITHUB_PERSONAL_ACCESS_TOKEN` を平文で持つが、会社 PC では
+  `gh` CLI が「Proxy Authentication Required」で使えないため、この MCP が唯一の GitHub API 経路として残している。
+- **次**: ① 会社 PC で `gh auth login` を通す (プロキシ設定 `HTTPS_PROXY` + `gh config set http_unix_socket` 等を
+  試す)。② 通ったら `claude mcp remove -s user github` し、`~/dotfiles/bin/mcp-user.{ps1,zsh}` の集合と一致させる。
+  ③ 平文で置かれていた PAT は GitHub 側で revoke して発行し直す。
+- **停止条件**: gh が通る前に MCP を消さない (GitHub Issues / PR 操作が会社 PC で不能になる)。
+
+### [MAC-FIRST-RUN-01] 自宅 Mac で二拠点セットアップを初回実行し、Mac 固有の罠を local-environment.md に記録する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:Mac で node .claude/scripts/setup-memory-symlink.mjs --check と node .claude/scripts/lib/sync-codex-mirror.cjs --check が exit 0] [起票:2026-09-14] [期日:2026-09-28]
+
+- **owner**: オーナー (Mac 操作) / Claude Code (罠の記録)
+- **手順**: `local-environment.md` 「2 台で同じ形にする手順」の Mac 列を上から実行する
+  (dotfiles clone → `link.mjs --host mac` → `git clone --filter=blob:none` → memory link → `core.hooksPath` →
+  `~/tmp` → `local-resources.sh install` → `gh auth login; codex login` → mirror check)。
+- **要確認 (未実測)**: `codex/host.mac.toml` の filesystem / notebooklm パスは仮置き (`/Users/kazu/...`)。
+  `local-resources.mjs` の darwin `ps` 分岐と `assertNoLinks` の `/private/tmp` realpath は実機未検証。
+  `.claude/settings.local.json` の seed (`stats47.local.mac.json`) の許可リストも初回で調整する。
+- **完了条件**: Mac 側の `claude mcp list` / `codex mcp list` の名前集合が Windows と一致し、
+  `local-environment.md` に Mac 節の実測が 1 つ以上追記されている。
 
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
