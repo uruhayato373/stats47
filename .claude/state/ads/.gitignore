@@ -1,0 +1,4 @@
+# 生 snapshot は R2 state/ads/ga4-affiliate/ が正典 (CI が push)。ローカルは npm run state:pull -- ads/ga4-affiliate で live/ に取得する。
+# 2026-08-28 までの追跡済み ga4-affiliate-*.json は履歴として残す (ignore は新規分にだけ効く)。
+live/
+ga4-affiliate-????-??-??.json
