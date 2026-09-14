@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
