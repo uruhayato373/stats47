@@ -9,6 +9,7 @@ import {
   assertInside,
   assertNoLinks,
   scanTree,
+  scanTargets,
   evaluate,
   assertIdle,
   planCaches,
@@ -16,10 +17,22 @@ import {
   allowedTargets,
   probeProcesses,
   isNodeProcess,
+  worktreeStatus,
 } from '../local-resources.mjs';
 
+test('audit aggregates overlapping targets without rereading children', (t) => {
+  const { root, target } = fixture(t);
+  const expected = scanTree(target);
+  const results = scanTargets([target, root, target]);
+  assert.equal(results.length, 2);
+  assert.deepEqual(results[0], { target, ...expected });
+  assert.deepEqual(results[1], { target: root, ...scanTree(root) });
+});
+
 function fixture(t) {
-  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-resource-test-')));
+  const root = fs.realpathSync(
+    fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-resource-test-'))
+  );
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const target = path.join(root, 'apps/web/.next/cache');
   fs.mkdirSync(target, { recursive: true });
@@ -142,10 +155,14 @@ test('glob allowlist expands only the last segment and never reaches outside the
     protectedPaths: [],
   };
   // Literal entries are listed even when absent (planCaches skips them); globs expand to real children.
-  const targets = allowedTargets([root], config).map((x) => path.relative(root, x.target));
+  const targets = allowedTargets([root], config).map((x) =>
+    path.relative(root, x.target)
+  );
   assert.deepEqual(
     targets.sort(),
-    ['.turbo/cache/a.tar.zst', '.turbo/cache/b.tar.zst', 'missing/dir'].map((p) => p.split('/').join(path.sep))
+    ['.turbo/cache/a.tar.zst', '.turbo/cache/b.tar.zst', 'missing/dir'].map(
+      (p) => p.split('/').join(path.sep)
+    )
   );
   assert.throws(
     () => allowedTargets([root], { ...config, cachePaths: ['.turbo/*/x'] }),
@@ -170,9 +187,16 @@ test('glob allowlist expands only the last segment and never reaches outside the
 
 test('scratch cleanup honours prefix, excludes, per-entry age and registered worktrees', (t) => {
   const { root } = fixture(t);
-  const scratch = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-scratch-root-')));
+  const scratch = fs.realpathSync(
+    fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-scratch-root-'))
+  );
   t.after(() => fs.rmSync(scratch, { recursive: true, force: true }));
-  for (const name of ['stats47-old', 'stats47-source-vault-x', 'other-project', 'stats47-worktree']) {
+  for (const name of [
+    'stats47-old',
+    'stats47-source-vault-x',
+    'other-project',
+    'stats47-worktree',
+  ]) {
     fs.mkdirSync(path.join(scratch, name));
     fs.writeFileSync(path.join(scratch, name, 'f.txt'), name);
   }
@@ -186,13 +210,18 @@ test('scratch cleanup honours prefix, excludes, per-entry age and registered wor
     protectedPaths: [],
   };
   const roots = [root, path.join(scratch, 'stats47-worktree')];
-  const names = allowedTargets(roots, config).map((x) => path.basename(x.target));
+  const names = allowedTargets(roots, config).map((x) =>
+    path.basename(x.target)
+  );
   assert.deepEqual(names, ['stats47-old']);
   const now = Date.now() + 15 * 86400000;
   const plan = planCaches(roots, { config, now });
   assert.equal(plan[0].kind, 'scratch');
   assert.equal(plan[0].reason, 'aged-scratch');
-  assert.equal(planCaches(roots, { config, now: Date.now() + 10 * 86400000 })[0].eligible, false);
+  assert.equal(
+    planCaches(roots, { config, now: Date.now() + 10 * 86400000 })[0].eligible,
+    false
+  );
   assert.ok(removeCache(plan[0], roots, { processes: [] }, config) > 0);
   assert.ok(fs.existsSync(path.join(scratch, 'stats47-worktree/f.txt')));
   assert.ok(fs.existsSync(path.join(scratch, 'other-project/f.txt')));
@@ -201,14 +230,111 @@ test('scratch cleanup honours prefix, excludes, per-entry age and registered wor
   assert.throws(() => assertInside(scratch, scratch));
 });
 
+test('GIS scratch entries preserve work scripts and registered worktrees', (t) => {
+  const { root } = fixture(t);
+  const geo = path.join(root, 'stats47-geo-ui');
+  fs.mkdirSync(geo);
+  fs.writeFileSync(path.join(geo, 'source.zip'), 'download');
+  fs.writeFileSync(path.join(geo, 'repair.ts'), 'unique work');
+  const config = {
+    cachePaths: [],
+    cacheAgeDays: 7,
+    scratchAgeDays: 14,
+    scratchRoots: { [process.platform]: [root] },
+    scratchPrefix: 'stats47-',
+    scratchExclude: ['stats47-geo-ui'],
+    scratchCachePaths: [{ path: 'stats47-geo-ui/*.zip', ageDays: 14 }],
+    protectedPaths: [],
+  };
+  assert.equal(allowedTargets([geo], config).length, 0);
+  const plan = planCaches([], { config, now: Date.now() + 15 * 86400000 });
+  assert.equal(plan.length, 1);
+  removeCache(plan[0], [], { processes: [] }, config);
+  assert.ok(fs.existsSync(path.join(geo, 'repair.ts')));
+  assert.ok(!fs.existsSync(path.join(geo, 'source.zip')));
+});
+
 test('POSIX process probe feeds the same idle gate as the Windows probe', () => {
-  const idle = probeProcesses('1 100 /sbin/launchd\n2 200 /usr/bin/node /repo/.claude/hooks/session-guard.js\n');
+  const idle = probeProcesses(
+    '1 100 /sbin/launchd\n2 200 /usr/bin/node /repo/.claude/hooks/session-guard.js\n'
+  );
   assert.equal(idle.length, 2);
   assert.doesNotThrow(() => assertIdle({ processes: idle }));
-  const busy = probeProcesses('3 300 node /repo/node_modules/.bin/../next/dist/bin/next dev\n');
+  const busy = probeProcesses(
+    '3 300 node /repo/node_modules/.bin/../next/dist/bin/next dev\n'
+  );
   assert.equal(busy[0].busy, true);
   assert.throws(() => assertIdle({ processes: busy }), /Active/);
   assert.equal(probeProcesses('garbage line\n').length, 0);
   assert.throws(() => assertIdle({ processes: null }));
-  assert.ok(isNodeProcess({ name: 'node' }) && isNodeProcess({ name: 'node.exe' }));
+  assert.ok(
+    isNodeProcess({ name: 'node' }) && isNodeProcess({ name: 'node.exe' })
+  );
+});
+
+// worktreeStatus(): dirty + scratchAgeDays 超の worktree だけを検知する。削除はしない
+// (2026-09-14: 09-08 起点の worktree 4 本が 6 日間気づかれずに放置された再発防止)。
+function initGitRepo(t) {
+  const root = fs.realpathSync(
+    fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-worktree-status-'))
+  );
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const git = (args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+  git(['init', '-q', '-b', 'main']);
+  git(['config', 'user.email', 'test@example.com']);
+  git(['config', 'user.name', 'test']);
+  fs.writeFileSync(path.join(root, 'README.md'), 'root\n');
+  git(['add', '.']);
+  git(['commit', '-q', '-m', 'init']);
+  return { root, git };
+}
+
+test('worktreeStatus: dirty かつ scratchAgeDays 超だけを stale とする', (t) => {
+  const { root, git } = initGitRepo(t);
+  const wt = path.join(root, '..', `stats47-worktree-status-wt-${process.pid}`);
+  t.after(() => fs.rmSync(wt, { recursive: true, force: true }));
+  git(['worktree', 'add', '-b', 'feature/x', wt]);
+  fs.writeFileSync(path.join(wt, 'draft.md'), 'uncommitted');
+
+  const config = { scratchAgeDays: 14 };
+  const recent = worktreeStatus(wt, {
+    root,
+    now: Date.now(),
+    staleAfterDays: config.scratchAgeDays,
+  });
+  assert.equal(recent.branch, 'feature/x');
+  assert.equal(recent.detached, false);
+  assert.equal(recent.dirtyFiles, 1);
+  assert.equal(recent.stale, false, '新しいうちは stale にしない');
+
+  const future = worktreeStatus(wt, {
+    root,
+    now: Date.now() + 20 * 86400000,
+    staleAfterDays: config.scratchAgeDays,
+  });
+  assert.equal(future.stale, true, '15 日超の未コミットは stale にする');
+
+  git(['worktree', 'remove', '--force', wt]);
+  fs.mkdirSync(wt, { recursive: true });
+  const clean = worktreeStatus(wt, {
+    root,
+    now: Date.now() + 20 * 86400000,
+    staleAfterDays: config.scratchAgeDays,
+  });
+  assert.equal(
+    clean.dirtyFiles,
+    -1,
+    'worktree でなくなった場所は計測不能として扱う (誤検知しない)'
+  );
+  assert.equal(clean.stale, false);
+});
+
+test('worktreeStatus: メインの working tree は root=true で stale 判定の対象にしない', (t) => {
+  const { root } = initGitRepo(t);
+  const status = worktreeStatus(root, {
+    root,
+    now: Date.now() + 100 * 86400000,
+  });
+  assert.equal(status.root, true);
+  assert.equal(status.stale, false, 'target===root は stale 条件から除外する');
 });

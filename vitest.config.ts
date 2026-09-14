@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
+    maxWorkers: process.env.CI ? undefined : 2,
     projects: [
       'packages/ai-content/vitest.config.ts',
       'packages/area/vitest.config.ts',

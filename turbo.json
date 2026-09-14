@@ -22,7 +22,12 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/standalone/**/.next/cache/**",
+        "dist/**"
+      ]
     },
     "lint": {},
     "type-check": {},
@@ -43,7 +48,10 @@
     "pipeline:images": {
       "dependsOn": ["^build"],
       "inputs": [".local/r2/ranking/**/*.json"],
-      "outputs": [".local/r2/ranking/**/images/**", ".local/r2/ranking/**/reels/**"]
+      "outputs": [
+        ".local/r2/ranking/**/images/**",
+        ".local/r2/ranking/**/reels/**"
+      ]
     },
     "pipeline:captions": {
       "dependsOn": ["pipeline:images"],

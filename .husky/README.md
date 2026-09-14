@@ -4,6 +4,11 @@
 
 本プロジェクトでは、コード品質の維持とセキュリティ確保のため、`husky` と `apps/web/scripts/pre-commit-checks.sh` を使用したコミット前チェックを導入しています。
 
+変更ファイル一覧は3種類の差分条件ごとに一度だけ取得します。共通の静的検査7件は
+`preflight-commit.mjs --commit-static` に集約し、最大2件を同時実行して各検査の所要時間を表示します。
+型・文書・コンテンツの条件付き検査は引き続きcommit hookが実行します。
+`npm audit` は依存manifest・lock変更時だけローカル実行し、PRと週次の `security-scan.yml` でも検査します。
+
 ## チェック項目
 
 コミット（`git commit`）時に自動的に実行される項目は以下の通りです。

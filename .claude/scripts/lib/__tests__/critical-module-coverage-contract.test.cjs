@@ -17,9 +17,9 @@ const EXPECTED_IDS = new Set([
   "link-audit-core",
   "ranking-route-metadata",
 ]);
-const DATA_COMMAND = "(cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)";
+const DATA_COMMAND = "(cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)";
 const R2_COMMAND = "(cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)";
-const WEB_COMMAND = "(cd apps/web && npx vitest run src/features/ranking/utils/__tests__/generate-meta-data.test.ts --coverage --coverage.reporter=text-summary --coverage.thresholds.lines=0 --coverage.thresholds.statements=0 --coverage.thresholds.functions=0 --coverage.thresholds.branches=0)";
+const WEB_COMMAND = "npm run test:coverage -w apps/web";
 const CONTRACT_COMMAND = "node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs";
 
 function jobBlock(text, jobId) {
@@ -110,7 +110,7 @@ function auditWorkflow(text) {
   const findings = [];
   const steps = stepBlocks(jobBlock(text, "test"));
   const coverageStep = steps.find((step) => stepHasCommand(step, DATA_COMMAND) || stepHasCommand(step, R2_COMMAND));
-  if (!coverageStep || !stepHasCommand(coverageStep, DATA_COMMAND) || !stepHasCommand(coverageStep, R2_COMMAND) || !stepHasCommand(coverageStep, WEB_COMMAND) || isSoftFail(coverageStep)) {
+  if (!coverageStep || !stepHasCommand(coverageStep, DATA_COMMAND) || !stepHasCommand(coverageStep, R2_COMMAND) || !steps.some((step) => stepHasCommand(step, WEB_COMMAND) && !isSoftFail(step)) || isSoftFail(coverageStep)) {
     findings.push("CRITICAL_MODULE_COVERAGE_NOT_BLOCKING");
   }
   const contractStep = stepBlocks(jobBlock(text, "static-gates"))
@@ -174,6 +174,8 @@ test("正常な9領域inventoryとblocking workflowを受理する", () => {
   assert.deepEqual(auditInventory(inventory, fixtureEnvironment(inventory)), []);
   assert.deepEqual(auditWorkflow(healthyWorkflow()), []);
 });
+
+
 
 test("critical moduleのinventory欠落を検出する", () => {
   const inventory = fixtureInventory();

@@ -184,6 +184,14 @@ test("root の type-check が scripts の型検査を呼ぶ", () => {
   );
 });
 
+test("Codexの同一コードを二重型検査せず、先に共有リンクの整合を検査する", () => {
+  const command = JSON.parse(read("package.json")).scripts["type-check:scripts"];
+  assert.match(command, /sync-codex-mirror\.cjs --check && node/);
+  assert.doesNotMatch(command, /\.agents\/skills/);
+  assert.equal(fs.realpathSync(path.join(ROOT, ".agents/skills/ads/scout-asp/scripts/a8-browser.ts")),
+    fs.realpathSync(path.join(ROOT, ".claude/skills/ads/scout-asp/scripts/a8-browser.ts")));
+});
+
 test("workspace の type-check は Windows でも起動できる", () => {
   for (const group of ["apps", "packages"]) {
     for (const entry of fs.readdirSync(path.join(ROOT, group), { withFileTypes: true })) {

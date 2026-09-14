@@ -54,6 +54,52 @@
   },
   "scratchPrefix": "stats47-",
   "scratchAgeDays": 14,
+  "scratchCachePaths": [
+    {
+      "path": "stats47-geo-ui/*.zip",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/*_GML",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/a38-source-level-*",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/thumbnail-inputs",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.shp",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.dbf",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.shx",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.prj",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/attribute-input",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/sharp-runtime",
+      "ageDays": 1
+    },
+    {
+      "path": "mlit-ksj-*",
+      "ageDays": 1
+    }
+  ],
   "scratchExclude": [
     "stats47-source-vault*",
     "stats47-japan-zue-*",

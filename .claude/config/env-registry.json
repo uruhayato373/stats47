@@ -2,6 +2,7 @@
   "version": 1,
   "description": "Environment variable names and exposure classes. Values must never be stored here.",
   "variables": [
+    { "name": "STATS47_COVERAGE_SPLIT", "visibility": "server", "contexts": ["process"] },
     {
       "name": "ACCESSIBILITY_BASELINE",
       "visibility": "server",
@@ -179,6 +180,13 @@
       "contexts": [
         "process",
         "variable"
+      ]
+    },
+    {
+      "name": "CODEX_THREAD_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
       ]
     },
     {

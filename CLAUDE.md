@@ -42,6 +42,7 @@
 - **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**Codex を使う経路は 2 つあり、規律が違う**:
   - **① Claude Code から MCP 経由** (`mcp__codex__codex`) — Claude のツールコールとして**同期実行**されるため HEAD/index の奪い合いは構造的に起きない。既定は `sandbox:"read-only"`。規約は **`.claude/rules/codex-mcp.md`**
   - **② standalone Codex** (VSCode 拡張 / `codex` TUI) — 独立プロセス。**⚠️ git 競合注意**: 同一作業ツリーで同時編集すると commit 混在・WIP 混入・型/lock 不整合が起きる（実例: 2026-06-21 に Codex の zod schema 型エラー + package-lock 未更新で CI 2回 fail）。同時に走らせない、または git worktree を分ける
+  - **編集開始前に `npm run agent:session -- --status`** で共通の作業状況を確認し、`--register` / 節目の `--note` / 完了時の `--release` を使う。引数と保持条件は `.claude/rules/local-environment.md`「Codex / Claude の作業共有」。
   - どちらの経路でも `git add -A` 厳禁・取り込み後は `npm run type-check` (全パッケージ)。検知補助: `.claude/hooks/session-guard.js`（Claude セッション間のみ）。詳細: memory `feedback_shared_working_copy_git_race`
 
 ## 作業の節目で記録する

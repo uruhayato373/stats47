@@ -7,9 +7,12 @@
  * errorがあればblockし、同じターンで是正させる。鮮度warningは週次workflowが通知する。
  */
 
-const { execFileSync } = require("node:child_process");
+const { execFileSync, execFile } = require("node:child_process");
+const { promisify } = require("node:util");
+const execAsync = promisify(execFile);
 const fs = require("node:fs");
 const path = require("node:path");
+const { fingerprint, readSuccess, writeSuccess } = require("../scripts/lib/stop-docs-cache.cjs");
 
 const projectDir = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..");
 const relevant =
@@ -30,23 +33,28 @@ function changedFiles() {
       ["status", "--porcelain=v1", "-z", "--untracked-files=all"],
       { cwd: projectDir, encoding: "utf8", timeout: 10_000 },
     );
-    return output
-      .split("\0")
-      .filter(Boolean)
-      .map((entry) => entry.slice(3))
-      .map((entry) => entry.includes(" -> ") ? entry.split(" -> ").at(-1) : entry)
-      .filter((file) => relevant.test(file));
+    const records = output.split("\0");
+    const files = [];
+    for (let i = 0; i < records.length; i++) {
+      const entry = records[i];
+      if (!entry) continue;
+      files.push(entry.slice(3));
+      if (/[RC]/.test(entry.slice(0, 2))) files.push(records[++i]);
+    }
+    return files.filter((file) => file && relevant.test(file));
   } catch {
     return [];
   }
 }
 
-function run(script, args) {
+async function run(script, args) {
   try {
-    const stdout = execFileSync("node", [path.join(projectDir, script), ...args], {
+    const { stdout } = await execAsync(process.execPath, [path.join(projectDir, script), ...args], {
       cwd: projectDir,
       encoding: "utf8",
       timeout: 90_000,
+      windowsHide: true,
+      maxBuffer: 4 * 1024 * 1024,
       env: { ...process.env, CLAUDE_PROJECT_DIR: projectDir },
     });
     return { ok: true, output: stdout };
@@ -65,14 +73,23 @@ function run(script, args) {
   }
 }
 
-function main() {
+async function main() {
   if (input().stop_hook_active) process.exit(0);
   const changed = changedFiles();
   if (changed.length === 0) process.exit(0);
 
-  const governance = run(".claude/scripts/lib/check-docs-governance.cjs", []);
-  const links = run(".claude/scripts/lib/check-docs-links.cjs", ["--baseline"]);
-  if (governance.ok && links.ok) process.exit(0);
+  const cacheFile = path.join(projectDir, ".local", "stop-docs-success.json");
+  const cacheEnabled = !Object.keys(process.env).some((key) => key.startsWith("DOCS_"));
+  const before = cacheEnabled ? fingerprint(projectDir) : null;
+  if (readSuccess(cacheFile, before)) return;
+  const [governance, links] = await Promise.all([
+    run(".claude/scripts/lib/check-docs-governance.cjs", []),
+    run(".claude/scripts/lib/check-docs-links.cjs", ["--baseline"]),
+  ]);
+  if (governance.ok && links.ok) {
+    writeSuccess(cacheFile, before, cacheEnabled ? fingerprint(projectDir) : null);
+    return;
+  }
 
   const failed = [governance, links].filter((result) => !result.ok);
   const details = failed
@@ -103,4 +120,4 @@ function main() {
   );
 }
 
-main();
+main().catch((error) => { process.stderr.write(`docs検査未完了: ${error.message}\n`); process.exitCode = 0; });

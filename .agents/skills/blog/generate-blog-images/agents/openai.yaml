@@ -1,6 +1,1 @@
-interface:
-  display_name: 'Generate Blog Images'
-  short_description: 'Generate reproducible stats47 blog images'
-  default_prompt: 'Use $generate-blog-images to generate and validate the blog OGP and title-free light/dark card bundle.'
-policy:
-  allow_implicit_invocation: false
+../../../../../.claude/skills/blog/generate-blog-images/agents/openai.yaml

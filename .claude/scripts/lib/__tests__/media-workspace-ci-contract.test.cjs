@@ -8,6 +8,19 @@ const WORKFLOW = path.join(ROOT, ".github/workflows/pr-quality-check.yml");
 const REGISTRY = path.join(ROOT, ".claude/config/quality-gates.json");
 const REMOTION_BUILD = "npm run build --workspace=apps/remotion";
 
+test("E2E内の重複型検査を省いても独立型検査の失敗は必須集約へ伝播する", () => {
+  const workflow = fs.readFileSync(WORKFLOW, "utf8");
+  const e2e = jobBlock(workflow, "e2e").join("\n");
+  assert.match(e2e, /NEXT_SKIP_BUILD_TYPECHECK: 'true'/);
+  const typeCheck = jobBlock(workflow, "type-check").join("\n");
+  assert.match(typeCheck, /run: npm run type-check/);
+  assert.doesNotMatch(typeCheck, /continue-on-error:\s*true|^\s+if:/m);
+  const aggregate = jobBlock(workflow, "quality-check").join("\n");
+  assert.match(aggregate, /needs:.*type-check/);
+  assert.match(aggregate, /needs:.*e2e/);
+  assert.match(aggregate, /failure/);
+});
+
 function jobBlock(text, jobId) {
   const lines = text.split(/\r?\n/);
   const jobsIndex = lines.findIndex((line) => /^jobs:\s*$/.test(line));

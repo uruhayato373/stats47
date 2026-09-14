@@ -148,6 +148,12 @@ gis/mlit-ksj/{dataId}/{version}/{scope}/
 
 ### 洪水Geo分析の保存先
 
+原典ZIP・展開Shapefileはローカルの永続データにしない。作業中だけ一時領域に置き、
+R2成果物・provenanceを検証し、原典の公式URL（洪水は下記R2原典）から再取得できることを確認して削除する。
+成功時は保持期間を設けず即時削除する。手作業の一時領域は検証後に
+`npm run local:cleanup -- --gis-only --include-recent --apply` で清掃する。
+失敗・中断した入力は1日経過後の日次清掃で回収する。作業コードはデータと分ける。
+
 洪水Geo分析の原典ZIPは例外として`gis/mlit-ksj/A31b/25/source/{riverClass}/{mesh}.zip`に保持する。
 `source/_meta.json`はURL・河川区分・メッシュ・SHA・bytesを記録する。旧`source/{mesh}.zip`は
 片区分専用のため上書きせず、URL/SHA一致時だけ区分20の新キーへコピーする。

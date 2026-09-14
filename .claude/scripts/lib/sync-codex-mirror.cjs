@@ -4,11 +4,11 @@
 /**
  * Codex が読む生成物を Claude 側の SSOT から作り直す (二重管理のドリフト止め)。
  *
- *   .claude/skills/**            → .agents/skills/**        (バイト同一コピー)
+ *   .claude/skills/**            → .agents/skills/**        (SKILL.md は生成コピー、補助ファイルは相対 symlink)
  *   .claude/agents/<name>.md     → .codex/agents/<name>.toml (frontmatter → キー、本文 → developer_instructions)
  *
  * 決定事項 (2026-09-14):
- *   - 正典は .claude 側。.agents/skills と .codex/agents は tracked のままの生成物で、手で直さない。
+ *   - 正典は .claude 側。SKILL.md は検出用コピー、補助ファイルはリンク、agent TOML は形式変換した生成物。正典を二重管理しない。
  *   - `.claude/` → `.Codex/` の書き換えはしない。Codex は AGENTS.md → CLAUDE.md 経由で .claude/rules を
  *     読むので原文が正しい (旧 mirror は存在しない .Codex/rules/… を 188 ファイルで指していた)。
  *   - 週次 snapshot・レビュー等のデータ (reference/snapshots, snapshots, reference/reviews,
@@ -71,17 +71,24 @@ function planSkills() {
     for (const dst of walkFiles(SKILLS_DST)) {
       const r = path.relative(SKILLS_DST, dst);
       seen.add(r);
-      // 既存 symlink で .claude/skills を指すものは SSOT 参照なので触らない
-      if (isLinkInto(dst, SKILLS_SRC)) continue;
+      // Codex discovery requires a regular SKILL.md; support files may be links.
+      if (path.basename(r) === "SKILL.md" && expected.has(r)) {
+        const src = expected.get(r).src;
+        if (!fs.lstatSync(dst).isFile() || fs.readFileSync(dst, "utf8") !== fs.readFileSync(src, "utf8"))
+          actions.push({ op: "copy", path: dst, src });
+        continue;
+      }
+      // 同名の原本を指すリンクだけを許可する。別 skill への誤リンクは修復する。
+      const source = path.join(SKILLS_SRC, r);
+      if (isLinkInto(dst, SKILLS_SRC) && (fs.statSync(dst).isDirectory() ||
+          (fs.existsSync(source) && fs.realpathSync(dst) === fs.realpathSync(source)))) continue;
       const want = expected.get(r);
       if (!want) {
         actions.push({ op: "delete", path: dst });
         continue;
       }
       if (fs.lstatSync(want.src).isSymbolicLink()) continue; // src 側 symlink はコピーしない
-      const a = fs.readFileSync(want.src);
-      const b = fs.readFileSync(dst);
-      if (!a.equals(b)) actions.push({ op: "write", path: dst, src: want.src });
+      actions.push({ op: "link", path: dst, src: want.src });
     }
   }
   for (const [r, { src }] of expected) {
@@ -90,7 +97,7 @@ function planSkills() {
     // 生成物側に「ディレクトリ symlink」があり、その配下に該当する場合は既に届いている
     const dst = path.join(SKILLS_DST, r);
     if (coveredByDirLink(dst)) continue;
-    actions.push({ op: "write", path: dst, src });
+    actions.push({ op: path.basename(r) === "SKILL.md" ? "copy" : "link", path: dst, src });
   }
   return actions;
 }
@@ -177,7 +184,15 @@ function apply(actions) {
       continue;
     }
     fs.mkdirSync(path.dirname(a.path), { recursive: true });
-    if (a.src) fs.copyFileSync(a.src, a.path);
+    if (a.op === "link") {
+      // unlink のみ。既存リンクの原本へ書き込んだり、原本を削除したりしない。
+      try { fs.unlinkSync(a.path); } catch (error) { if (error.code !== "ENOENT") throw error; }
+      fs.symlinkSync(path.relative(path.dirname(a.path), a.src).split(path.sep).join("/"), a.path, "file");
+    }
+    else if (a.src) {
+      try { fs.unlinkSync(a.path); } catch (error) { if (error.code !== "ENOENT") throw error; }
+      fs.copyFileSync(a.src, a.path);
+    }
     else fs.writeFileSync(a.path, a.content);
   }
 }

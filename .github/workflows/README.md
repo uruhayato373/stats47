@@ -106,6 +106,9 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
    - テスト失敗で停止（continue-on-error: false）
    - カバレッジレポートをアーティファクトとしてアップロード
    - `.claude/config/critical-module-coverage.json` が重要module floorの正典
+   - `test:packages:ci` は通常テストを実行し、重要moduleの8テストファイルだけを後続のcoverage検査へ分担する。
+     対象は同じinventoryから取得し、各Vitest projectの設定で除外する（CLIの除外指定には依存しない）。
+     ローカルの `test:packages` は分割せず全件実行する。Webの重要module floorは全体coverageで同時検査する。
 
 4. ✅ **Verify Build**: `npm run build`
    - ビルドエラーで失敗

@@ -329,9 +329,11 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
 | 認証 | `gh auth login; codex login` (設定ファイルに token を書かない) | 同左 |
 | Codex mirror | `node .claude/scripts/lib/sync-codex-mirror.cjs --check` | 同左 |
 
-- `.agents/skills` と `.codex/agents/*.toml` は **`.claude/skills` / `.claude/agents/*.md` からの生成物**。
+- `.agents/skills` の補助ファイルは **`.claude/skills` の同名原本への相対 symlink**。`SKILL.md` だけは Codex の検出に必要な通常ファイルとして自動生成する（ファイル symlink は検出されない）。原本は `.claude/skills` のみ。既存のフォルダー symlink は利用可能。
+  `.codex/agents/*.toml` は `.claude/agents/*.md` を形式変換した生成物。
   手で直さず `node .claude/scripts/lib/sync-codex-mirror.cjs` で再生成する (E12 が CI と pre-commit で
-  ドリフトを止める)。`.codex/hooks.json` は `.claude/hooks/*.js` を直接指す (複製は 2026-09-14 に廃止)。
+  ドリフトを止める)。skills の本文更新はリンクへ即時反映され、ファイル追加・削除時だけ再生成する。
+  `type-check:scripts` はリンク一致確認後に原本だけを型検査する。`.codex/hooks.json` は `.claude/hooks/*.js` を直接指す (複製は 2026-09-14 に廃止)。
 - `~/.claude/settings.json` は dotfiles への symlink、`~/.codex/config.toml` は dotfiles の
   `codex/base.toml` + `host.<os>.toml` を**セクション単位でマージ** (Codex デスクトップが書く
   `[projects.*]` / `[plugins.*]` / runtime パスを壊さない)。マシン固有の許可と `additionalDirectories` は
@@ -359,8 +361,16 @@ npm run dev --workspace=apps/web   # turbo を介さず最速 (✓ Ready in 2s)
 通常の開発前チェックではディレクトリを再帰走査しない。容量はファイル長合計で、junctionは辿らず、
 hardlinkの重複は除かない。回収量はドライブ空き容量の前後も合わせて判断する。
 
+月次監査は親子フォルダーを一度の走査で集計し、ユーザー共通のCodex/Claude保存領域も測る。
+共有履歴DB・認証profileは自動削除しない。定期処理の失敗は成功済みの日次計測とは別に再試行する。
+ビルド成果物とTurbo保存対象から、standalone内に入れ子になった `.next/cache` も除外する。
+
 - Turboは `turbo.json` のキャッシュ上限 `2GB`、同時実行2件。実行時にTurbo自身が回収する。
 - ローカルVitestは最大2 worker、preflightも最大2件。フルbuildは節目だけ、必要な対象を絞って検証する。
+- pre-commitの共通静的検査は `preflight-commit.mjs --commit-static` と共有し最大2件で実行する。
+  Stopの文書検査は2件並列。同じ入力ツリーのファイル・リンク先のsize/mtime/ctime、Node版、UTC日付が
+  一致するときだけ `.local/stop-docs-success.json` の成功結果を再利用する。検査失敗・timeout・途中変更は保存しない。
+  `DOCS_*` の環境上書き時は結果再利用を無効化する。CIと手動の `docs:check` は毎回検査する。
 - Windows R2 gatewayのキャッシュ本文は合計64MiB、1件8MiB、最大2000件。期限切れは待受中も回収する。
   これはプロセス全体のメモリ上限ではない。大きい本文・長さ不明の本文・ローカルファイルはストリーム転送する。
 - dev supervisorは終了時に自分で起動した子プロセスだけを終了する。Nodeやブラウザ全体を一括停止しない。
@@ -370,7 +380,7 @@ hardlinkの重複は除かない。回収量はドライブ空き容量の前後
 
 Windowsの登録入口は `scripts/scheduled/local-resources.ps1 -Action Install`、Macは
 `bash scripts/scheduled/local-resources.sh install` (launchd `com.stats47.local-resources`)。どちらも毎日09:00と
-ログオン時に日次計測、7日ごとの限定掃除、30日ごとの容量監査を実行し、同時に `git maintenance start` で
+ログオン時に日次計測、日次の限定掃除、30日ごとの容量監査を実行し、同時に `git maintenance start` で
 git自身のcommit-graph・prefetch・incremental repackを登録する (2026-09-14にpackが25個・loose 6,286個まで
 溜まっていた再発防止。履歴は書き換えない)。同日重複・同時実行を避け、上限15分で終了する。
 ログイン中かつ端末が稼働できるときの処理であり、電源OFF中は実行されない。通知はCodexの
@@ -388,6 +398,11 @@ npm run local:resources:test         # 削除境界・保持・メモリ予算�
 `stats47-*`) だけで、最終変更が各entryの `ageDays` 以上前、リンクなし、対象が計画後に変化していない、
 開発プロセスが停止中 (Macは `ps` で同じbusy判定)、の全条件を要求する。`cachePaths` の `*` は末尾segmentだけに
 許し、登録済みworktreeと `scratchExclude` (source-vault・japan-zue・geo-ui) は名前が一致しても消さない。
+ただし `scratchCachePaths` のGIS原典ZIP・展開データ・画像生成入力は検証成功後に即時削除する。
+R2成果物・provenance・原典の再取得手段を確認後、`npm run local:cleanup -- --gis-only --include-recent --apply` を実行する。
+失敗・中断で残った入力は最終変更から1日経過後の日次清掃で回収する（稼働中は削除しない）。
+geo-ui直下の作業スクリプトは残す。今後のGIS処理では原典を作業中だけ一時領域へ取得し、
+R2成果物・provenanceと原典URLの再取得可能性を確認して処理後に削除する。原典ZIPがすべてR2にあるとは限らない。
 初回の `--include-recent` は明示的な掃除依頼時だけ使う。削除先は必ず許可リストを再展開して再検証する。
 
 | 対象 | 寿命 | 消す主体 |
@@ -423,10 +438,31 @@ WIPのあるworktree、認証profile、参考文献、成果物や運用台帳�
 `.local/r2` は R2 への push staging で、秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため常駐させない
 (CI は runner 内で自分の staging を作る。KSJ ミラーは R2 `gis/` から再取得できる)。7日で回収する。
 GISの一時領域は処理ごとにOS一時フォルダーへ作り、入力URL・hash・成果の保存先・復元手順を残す。
-展開ファイルは残すZIPのentryとSHA-256を照合してから回収する。原本ZIPや固有スクリプトは別途保全確認が必要。
+R2成果物・provenanceと原典の再取得手段を検証したら、原典ZIPも展開ファイルも即時回収する。固有スクリプトはデータ清掃の対象外。
 参考文献は既存source-vault契約に従いprivate Driveからの復元検証とcoverage 100%を満たしてから回収する。
 共有npm cacheは必要時に `npm cache verify` で整合性確認・不要blob回収を行う。uv・ブラウザの共有cacheは
 利用元と再取得コストを調べてから扱い、定期的な全消去はしない。worktreeは必要時だけ作り、未完了変更を統合してから閉じる。
+
+### ★worktree の後始末は bash の `rm -rf` を使わない (2026-09-14)
+
+`git worktree remove` がディレクトリを消せずに終わることがある (Windows のファイルロック等)。
+その後始末を Git Bash (MSYS) の `rm -rf` に任せると、**MSYS のパス変換が意図しないパスへ
+展開し、無関係なディレクトリ (今回はメインの working tree 自体) を巻き込んで削除する事故が
+起きる** (2026-09-14 実測: `rm -rf "C:/tmp/stats47-*"` の実行中に `apps/admin/` 配下
+5,268 ファイルが消えた。commit は無傷だったため `git checkout -- .` で復旧した)。
+
+```bash
+npm run local:worktree:remove -- <worktree-path> [--force]
+```
+
+`.claude/scripts/lib/remove-worktree.mjs` は bash を経由せず Node の `fs.rmSync` だけで
+パスを解決するため、シェルのパス変換が原理的に起きない。削除前に「対象が `git worktree list`
+に登録されているか」「メインの working tree ではないか」を検証してから消す。
+
+放置された worktree に気づく仕組みも足した。`npm run local:audit` の `staleWorktrees` に
+「未コミット差分を抱えたまま `scratchAgeDays` (既定14日) 超放置」された登録済み worktree が
+列挙される (削除はしない。気づくためだけの観測)。09-08 起点の worktree 4 本が 6 日間気づかれず、
+中身は既に develop に着地済みだったことの再発防止。
 
 ## 頻用コマンド
 
@@ -460,3 +496,22 @@ npm run admin
 > 完全DBレスでは観測値・配信は R2 が SSOT、設定/運用は git TS が SSOT で履歴は git に残る。
 
 未公開データのローカル確認では `WEB_DEV_HOST=127.0.0.1 npm run dev:web` を使い、Next.jsの待受をループバックに限定する。WEB_DEV_HOSTはdev-serverが--hostnameへ渡す（未指定時は既存のNext.js既定値）。
+
+### Codex / Claude の作業共有
+
+- Windows PowerShellでは以下の `npm` を `npm.cmd` とする。`npm.ps1` 経由でオプションが欠落する場合は `node .claude/hooks/session-guard.js` を直接使う。
+- 編集開始時に `npm run agent:session -- --status` で担当・タスク・最終メモを確認する。
+- `npm run agent:session -- --register --agent codex --session <task-id> --task <backlog-id>` で登録する。
+  Claude は `--agent claude` を使う。ID はタスク中固定し、既存タスクなら同じ backlog ID を使う。
+  Codex の `CODEX_THREAD_ID` / Claude の `CLAUDE_SESSION_ID` がある場合は `--session` を省略できる。
+- 同一作業場所、または別 worktree の同一タスクを検出すると警告する。排他ロックではなく、登録に参加するセッションの重複検知。
+  編集は worktree を分け、同じタスクを別担当が実行中なら担当と範囲を調整する。
+- 作業の節目に同じ登録コマンドへ `--note "変更対象・検証コマンド・結果・次の一手"` を加えて更新する。
+  45分で活動判定が切れるため、長い作業ではその前に更新する。
+- 完了時は `npm run agent:session -- --release --session <task-id> --note "検証結果・成果物の場所"`。
+  残タスクは既存 backlog、恒久判断は rules に残す。session メモは7日で回収する一時状態。
+- 保存先は Git common directory の `session-locks/`。同じリポジトリの worktree 間で共有し、gitに追跡しない。
+  別PC・別cloneの担当調整は共有backlogを使う。hook未対応環境でも上記CLIを明示実行できる。
+- 検証結果はコード・lockfile・設定・生成データとコマンドが同じ場合だけ引き継ぐ。
+  session メモ単独では検査を省略しない。型検査は既存incremental cacheを利用し、CIの必須検査は維持する。
+- `npm run test:agent-efficiency` がリンク共有・誤リンク検知・検査対象・待ち枠の再利用・セッション共有を検証する。

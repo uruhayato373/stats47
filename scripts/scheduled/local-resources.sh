@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # macOS counterpart of local-resources.ps1: register a launchd agent that runs the local
-# resource check daily, eligible generated-cache/scratch cleanup weekly and the storage audit
+# resource check daily, eligible generated-cache/scratch cleanup daily and the storage audit
 # monthly. No persistent process; each run exits. Windows uses Task Scheduler (the .ps1).
 #
 #   bash scripts/scheduled/local-resources.sh install   # register launchd agent + git maintenance
@@ -62,7 +62,7 @@ PLIST
     ;;
 esac
 
-# Same cadence as local-resources.ps1: check daily / cleanup every 7 days / audit every 30 days.
+# Same cadence as local-resources.ps1: check daily / cleanup daily / audit every 30 days.
 mkdir -p "$STATE_DIR"
 CADENCE="$STATE_DIR/cadence.json"
 [ -f "$CADENCE" ] || echo '{}' > "$CADENCE"
@@ -72,10 +72,10 @@ cadence_get() { "$NODE_PATH_BIN" -e 'const c=JSON.parse(require("fs").readFileSy
 cadence_set() { "$NODE_PATH_BIN" -e 'const fs=require("fs");const p=process.argv[1];const c=JSON.parse(fs.readFileSync(p,"utf8"));c[process.argv[2]]=process.argv[3];fs.writeFileSync(p,JSON.stringify(c,null,2)+"\n")' "$CADENCE" "$1" "$2"; }
 days_since() { "$NODE_PATH_BIN" -e 'const d=process.argv[1];process.stdout.write(d?String((Date.now()-Date.parse(d))/86400000):"999")' "$1"; }
 
-[ "$(cadence_get check)" = "$TODAY" ] && exit 0
 had_failure=0
 for mode in check cleanup audit; do
-  case "$mode" in cleanup) min=7 ;; audit) min=30 ;; *) min=0 ;; esac
+  [ "$(cadence_get "$mode")" = "$TODAY" ] && continue
+  case "$mode" in cleanup) min=1 ;; audit) min=30 ;; *) min=0 ;; esac
   if [ "$min" -gt 0 ] && [ "$(days_since "$(cadence_get "$mode")" | cut -d. -f1)" -lt "$min" ]; then continue; fi
   args=("$REPO/.claude/scripts/lib/local-resources.mjs" "$mode" --record)
   [ "$mode" = cleanup ] && args+=(--apply)

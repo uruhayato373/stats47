@@ -47,30 +47,63 @@ export function assertNoLinks(root, target) {
 
 export function scanTree(
   root,
-  { deadline = Date.now() + CONFIG.scanTimeoutSeconds * 1000 } = {}
+  { deadline = Date.now() + CONFIG.scanTimeoutSeconds * 1000, onResult } = {}
 ) {
-  let bytes = 0,
-    files = 0,
-    newest = 0,
-    links = 0;
   function visit(dir) {
     if (Date.now() > deadline) throw new Error(`Scan timed out: ${root}`);
     const stat = fs.lstatSync(dir);
+    const result = { bytes: 0, files: 0, newest: 0, links: 0 };
     if (stat.isSymbolicLink()) {
-      links++;
-      return;
+      result.links = 1;
+    } else {
+      result.newest = stat.mtimeMs;
+      if (stat.isFile()) {
+        result.bytes = stat.size;
+        result.files = 1;
+      } else {
+        if (!stat.isDirectory()) throw new Error(`Special file: ${dir}`);
+        for (const item of fs.readdirSync(dir)) {
+          const child = visit(path.join(dir, item));
+          result.bytes += child.bytes;
+          result.files += child.files;
+          result.links += child.links;
+          result.newest = Math.max(result.newest, child.newest);
+        }
+      }
     }
-    newest = Math.max(newest, stat.mtimeMs);
-    if (stat.isFile()) {
-      bytes += stat.size;
-      files++;
-      return;
-    }
-    if (!stat.isDirectory()) throw new Error(`Special file: ${dir}`);
-    for (const item of fs.readdirSync(dir)) visit(path.join(dir, item));
+    onResult?.(dir, result);
+    return result;
   }
-  visit(root);
-  return { bytes, files, newest, links };
+  return visit(root);
+}
+
+// Parent and child measurements share one traversal; never follow directory links.
+export function scanTargets(directories) {
+  const targets = [...new Set(directories.map((p) => path.resolve(p)))];
+  const wanted = new Set(targets);
+  const results = new Map();
+  const attempted = [];
+  for (const target of [...targets].sort((a, b) => a.length - b.length)) {
+    if (results.has(target)) continue;
+    const parent = attempted.find((p) => target.startsWith(p + path.sep));
+    if (parent) {
+      results.set(target, {
+        error: `Parent scan incomplete or linked: ${parent}`,
+      });
+      continue;
+    }
+    attempted.push(target);
+    try {
+      scanTree(target, {
+        onResult: (p, result) => {
+          if (wanted.has(p)) results.set(p, result);
+        },
+      });
+    } catch (error) {
+      results.set(target, { error: error.message });
+    }
+  }
+  return targets.map((target) => ({ target, ...results.get(target) }));
 }
 
 export function evaluate(sample, config = CONFIG) {
@@ -187,8 +220,64 @@ function worktrees() {
   );
 }
 
+// 登録済み worktree のうち「未コミット差分を抱えたまま scratchAgeDays 超放置」を検知する。
+// 削除はしない (WIP を守る規約はそのまま) — 気づかれないまま忘れられる事故を防ぐ観測だけを追加する
+// (2026-09-14: 09-08 起点の worktree 4 本が 6 日間気づかれず、中身は既に develop に着地済みだった)。
+export function worktreeStatus(
+  target,
+  {
+    root = ROOT,
+    now = Date.now(),
+    staleAfterDays = CONFIG.scratchAgeDays ?? 14,
+  } = {}
+) {
+  let branch = null;
+  try {
+    const head = execFileSync(
+      'git',
+      ['-C', target, 'rev-parse', '--abbrev-ref', 'HEAD'],
+      {
+        encoding: 'utf8',
+        timeout: 10000,
+        windowsHide: true,
+      }
+    ).trim();
+    branch = head === 'HEAD' ? null : head; // detached HEAD
+  } catch {
+    branch = null;
+  }
+  let dirtyFiles = 0;
+  try {
+    const status = execFileSync(
+      'git',
+      ['-C', target, 'status', '--porcelain'],
+      {
+        encoding: 'utf8',
+        timeout: 10000,
+        windowsHide: true,
+      }
+    );
+    dirtyFiles = status.split('\n').filter(Boolean).length;
+  } catch {
+    dirtyFiles = -1; // 計測不能 (worktree 自体が壊れている等)
+  }
+  const scan = scanTree(target);
+  const ageDays = (now - scan.newest) / 86400000;
+  return {
+    target,
+    root: target === root,
+    branch,
+    detached: branch === null,
+    dirtyFiles,
+    ageDays: Math.round(ageDays * 10) / 10,
+    stale: target !== root && dirtyFiles > 0 && ageDays > staleAfterDays,
+  };
+}
+
 function globToRegExp(pattern) {
-  const escaped = pattern.replace(/[.+^$(){}|[\]\\]/g, '\\$&').replace(/\*/g, '[^/\\\\]*');
+  const escaped = pattern
+    .replace(/[.+^$(){}|[\]\\]/g, '\\$&')
+    .replace(/\*/g, '[^/\\\\]*');
   return new RegExp('^' + escaped + '$');
 }
 
@@ -197,7 +286,9 @@ function expandPattern(base, relative) {
   const segments = relative.split(/[\\/]+/).filter(Boolean);
   const last = segments.at(-1) ?? '';
   if (segments.slice(0, -1).some((segment) => segment.includes('*')))
-    throw new Error('Wildcard is only allowed in the last segment: ' + relative);
+    throw new Error(
+      'Wildcard is only allowed in the last segment: ' + relative
+    );
   if (!last.includes('*')) return [path.join(base, ...segments)];
   const parent = path.join(base, ...segments.slice(0, -1));
   if (!fs.existsSync(parent)) return [];
@@ -229,7 +320,11 @@ function scratchRoots(config, platform = process.platform) {
 
 // Everything cleanup may touch: generated caches under each worktree root plus aged scratch
 // directories directly under the OS scratch roots. A registered worktree is never scratch.
-export function allowedTargets(roots, config = CONFIG, platform = process.platform) {
+export function allowedTargets(
+  roots,
+  config = CONFIG,
+  platform = process.platform
+) {
   const targets = [];
   const resolvedRoots = roots.map((r) => path.resolve(r));
   for (const root of roots)
@@ -240,12 +335,37 @@ export function allowedTargets(roots, config = CONFIG, platform = process.platfo
   const excludes = (config.scratchExclude ?? []).map(globToRegExp);
   for (const root of scratchRoots(config, platform)) {
     if (!fs.existsSync(root)) continue;
+    for (const entry of config.scratchCachePaths ?? []) {
+      for (const target of expandPattern(root, entry.path)) {
+        assertInside(root, target);
+        const resolved = path.resolve(target);
+        if (
+          resolvedRoots.some(
+            (r) =>
+              r === resolved ||
+              r.startsWith(resolved + path.sep) ||
+              resolved.startsWith(r + path.sep)
+          )
+        )
+          continue;
+        targets.push({
+          root,
+          target,
+          ageDays: entry.ageDays ?? config.scratchAgeDays,
+          kind: 'scratch',
+        });
+      }
+    }
     for (const name of fs.readdirSync(root)) {
       if (!prefix || !name.startsWith(prefix)) continue;
       if (excludes.some((re) => re.test(name))) continue;
       const target = path.join(root, name);
       const resolved = path.resolve(target);
-      if (resolvedRoots.some((r) => r === resolved || r.startsWith(resolved + path.sep)))
+      if (
+        resolvedRoots.some(
+          (r) => r === resolved || r.startsWith(resolved + path.sep)
+        )
+      )
         continue;
       targets.push({
         root,
@@ -285,7 +405,13 @@ export function planCaches(
             : 'recent',
       });
     } catch (error) {
-      items.push({ root, target, kind, eligible: false, reason: error.message });
+      items.push({
+        root,
+        target,
+        kind,
+        eligible: false,
+        reason: error.message,
+      });
     }
   }
   return items;
@@ -391,27 +517,27 @@ function audit(sample) {
       '.git',
       'books',
       '.claude/worktrees',
-      ...cacheEntries(CONFIG).map((entry) => entry.path.replace(/[\\/]\*$/, '')),
+      ...cacheEntries(CONFIG).map((entry) =>
+        entry.path.replace(/[\\/]\*$/, '')
+      ),
     ].map((p) => path.join(ROOT, p)),
     ...worktrees().filter((p) => p !== ROOT),
     ...scratchRoots(CONFIG),
     path.join(os.tmpdir(), 'stats47-flood-view'),
     'C:/tmp/stats47-geo-ui',
+    path.join(os.homedir(), '.codex'),
+    path.join(os.homedir(), '.claude'),
     ...(process.platform === 'win32'
       ? ['npm-cache', 'ms-playwright', 'uv/cache'].map((p) =>
           path.join(os.homedir(), 'AppData/Local', p)
         )
       : []),
   ];
-  const measurements = directories
-    .filter((p) => fs.existsSync(p))
-    .map((target) => {
-      try {
-        return { target, ...scanTree(target) };
-      } catch (error) {
-        return { target, error: error.message };
-      }
-    });
+  const measurements = scanTargets(directories.filter((p) => fs.existsSync(p)));
+  const staleWorktrees = worktrees()
+    .filter((p) => p !== ROOT)
+    .map((p) => worktreeStatus(p))
+    .filter((w) => w.stale);
   return {
     observedAt: sample.observedAt,
     method: 'file-length, junctions not followed; hardlinks not deduplicated',
@@ -419,6 +545,7 @@ function audit(sample) {
     protectedResidue: CONFIG.protectedPaths.filter((p) =>
       fs.existsSync(path.join(ROOT, p))
     ),
+    staleWorktrees,
   };
 }
 
@@ -426,7 +553,7 @@ export async function main(args = process.argv.slice(2)) {
   const mode = args[0] || 'check';
   if (!['check', 'audit', 'cleanup'].includes(mode))
     throw new Error(
-      'Use check, audit, or cleanup [--apply] [--include-recent] [--record]'
+      'Use check, audit, or cleanup [--apply] [--include-recent] [--gis-only] [--record]'
     );
   fs.mkdirSync(STATE, { recursive: true });
   const lock = path.join(STATE, 'run.lock');
@@ -450,6 +577,9 @@ export async function main(args = process.argv.slice(2)) {
       const roots = worktrees();
       const plan = planCaches(roots, {
         includeRecent: args.includes('--include-recent'),
+        config: args.includes('--gis-only')
+          ? { ...CONFIG, cachePaths: [], scratchPrefix: '' }
+          : CONFIG,
       });
       result = {
         observedAt: sample.observedAt,

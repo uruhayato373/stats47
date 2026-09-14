@@ -458,3 +458,41 @@ test("[E3] .codex/hooks.json の command が指す hook も存在検査する", 
   assert.equal(result.status, 1);
   assert.match(result.stdout, /\[E3\].*missing-hook\.js/);
 });
+
+test("mirror はログ・コード・指示の実体を共有し、誤リンクと壊れたリンクを検出する", (t) => {
+  const root = fixture({
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/skills/dev/probe/SKILL.md": "probe",
+    ".claude/skills/dev/probe/reference/improvement-log.md": "before",
+    ".claude/skills/dev/probe/scripts/run.ts": "export {};",
+    ".agents/skills/dev/probe/SKILL.md": "old",
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const invoke = (...args) => spawnSync(process.execPath, [MIRROR, ...args], {
+    cwd: root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root },
+  });
+  assert.equal(invoke().status, 0);
+  const target = path.join(root, ".agents/skills/dev/probe/reference/improvement-log.md");
+  const skill = path.join(root, ".agents/skills/dev/probe/SKILL.md");
+  assert.ok(fs.lstatSync(skill).isFile(), "Codex discovers regular SKILL.md files");
+  fs.unlinkSync(skill);
+  fs.symlinkSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), skill, "file");
+  assert.equal(invoke("--check").status, 1, "file links must be repaired for discovery");
+  assert.equal(invoke().status, 0);
+  assert.ok(fs.lstatSync(skill).isFile());
+  assert.ok(fs.lstatSync(target).isSymbolicLink());
+  assert.ok(!path.isAbsolute(fs.readlinkSync(target)), "別PCでも使える相対リンク");
+  fs.writeFileSync(target, "after");
+  assert.equal(fs.readFileSync(path.join(root, ".claude/skills/dev/probe/reference/improvement-log.md"), "utf8"), "after");
+  assert.equal(invoke("--check").status, 0, "原本更新後もコピーの再生成は不要");
+  fs.unlinkSync(target);
+  fs.symlinkSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), target, "file");
+  assert.equal(invoke("--check").status, 1, "別の原本を指す誤リンクは不一致");
+  assert.equal(invoke().status, 0);
+  assert.equal(fs.readFileSync(target, "utf8"), "after");
+  fs.unlinkSync(target);
+  fs.symlinkSync("missing", target, "file");
+  assert.equal(invoke("--check").status, 1);
+  assert.equal(invoke().status, 0);
+  assert.equal(fs.readFileSync(target, "utf8"), "after");
+});

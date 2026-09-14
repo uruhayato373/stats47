@@ -92,6 +92,10 @@ npm run check:data-catalog --workspace packages/gis
 `official-policy.ts` の期待アーカイブ数とR2 `manifest.json` 数の一致であり、部分アップロードは未完了。
 再実行時はmanifest宣言objectを照合し、欠損scopeを全再取得、manifest外objectをexact削除して収束させる。
 
+R2成果物・provenance・原典の再取得手段を検証したら、原典ZIP・展開データを即時削除する。
+通常pipelineの清掃に加え、手作業のGIS一時領域は `npm run local:cleanup -- --gis-only --include-recent --apply` で回収する。
+成功データを14日保持しない。失敗・中断した入力だけ1日経過後の日次清掃へ委ねる。
+
 ## 出力先
 
 ```

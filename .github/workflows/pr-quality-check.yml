@@ -417,7 +417,7 @@ jobs:
       - name: 🚦 Preflight Aggregator Contract
         # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
         # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
-        run: node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs
+        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs
         continue-on-error: false
 
       - name: 🛑 Commit Message Skip-Token Guard
@@ -659,7 +659,7 @@ jobs:
       #   環境依存のレンダリング比較は packages/visualization/vitest.config.ts で
       #   RUN_RENDER_TESTS=1 の opt-in に分けてある。
       - name: 🧪 Run Package Unit Tests
-        run: npm run test:packages
+        run: npm run test:packages:ci
         continue-on-error: false
 
       - name: 🎯 Critical Pure Module Coverage
@@ -667,9 +667,8 @@ jobs:
         # shape/unit/dependency/validator/recipe/value/link/R2 parser/routeの
         # 実測module floorを個別に固定する。JSON/HTML成果物は保存せず、V8がメモリ上で判定する。
         run: |
-          (cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)
+          (cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)
           (cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)
-          (cd apps/web && npx vitest run src/features/ranking/utils/__tests__/generate-meta-data.test.ts --coverage --coverage.reporter=text-summary --coverage.thresholds.lines=0 --coverage.thresholds.statements=0 --coverage.thresholds.functions=0 --coverage.thresholds.branches=0)
         continue-on-error: false
 
       # apps/admin は root の `test:packages` (`--project '@stats47/*'`) に含まれない。
@@ -1001,6 +1000,8 @@ jobs:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
           NODE_OPTIONS: '--max-old-space-size=4096'
+          # 必須のtype-check jobとquality-check集約で型検査する。同じPRでの再検査を省く。
+          NEXT_SKIP_BUILD_TYPECHECK: 'true'
         run: npx playwright test --project=e2e-chromium
         working-directory: apps/web
 

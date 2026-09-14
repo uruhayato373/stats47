@@ -315,6 +315,11 @@ const nextConfig: NextConfig = {
   // NFT (Node File Tracing) から開発用パッケージを除外（約52-55MBの削減）
   outputFileTracingExcludes: {
     "*": [
+      // Runtime output must not capture development caches through monorepo tracing.
+      "./.next/cache/**/*",
+      "./.next/standalone/**/*",
+      "../../apps/*/.next/cache/**/*",
+      "../../apps/*/.next/standalone/**/*",
       // ビルドツール（本番実行時は不要）
       "./node_modules/webpack/**/*",
       "./node_modules/terser-webpack-plugin/**/*",

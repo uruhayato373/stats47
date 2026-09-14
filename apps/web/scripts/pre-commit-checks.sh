@@ -14,13 +14,21 @@ NC='\033[0m' # No Color
 # エラーカウント
 ERROR_COUNT=0
 
+# ステージ済みパスは一度取得し、一時ファイルの掃除で index が変わった場合だけ再取得する。
+refresh_staged_paths() {
+PRECOMMIT_PATHS_0=$(git diff --cached --name-only --diff-filter=ACM)
+PRECOMMIT_PATHS_1=$(git diff --cached --name-only)
+PRECOMMIT_PATHS_2=$(git diff --cached --name-only --diff-filter=ACMRD)
+}
+refresh_staged_paths
+
 # スクリプトのディレクトリを取得
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WEB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # 1. TypeScript型チェック（staged に apps/web の .ts/.tsx が含まれる場合のみ実行）
 echo -e "${GREEN}📐 TypeScript型チェック...${NC}"
-STAGED_WEB_TSFILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^apps/web/.*\.(ts|tsx)$' || true)
+STAGED_WEB_TSFILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '^apps/web/.*\.(ts|tsx)$' | grep -v '^apps/web/scripts/' || true)
 if [ -n "$STAGED_WEB_TSFILES" ]; then
   if ! (cd "$WEB_DIR" && npm run type-check > /dev/null 2>&1); then
     echo -e "${RED}❌ TypeScriptの型エラーが検出されました。${NC}"
@@ -40,7 +48,7 @@ fi
 #       (2026-08-13 是正)。対象ディレクトリの正典は package.json の type-check:scripts。
 echo -e "${GREEN}📐 scripts の型チェック...${NC}"
 REPO_ROOT_FOR_SCRIPTS="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-STAGED_SCRIPT_TSFILES=$(git diff --cached --name-only --diff-filter=ACM \
+STAGED_SCRIPT_TSFILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" \
   | grep -E '(^|/)scripts/.*\.(ts|mts|tsx)$' || true)
 if [ -n "$STAGED_SCRIPT_TSFILES" ]; then
   if ! (cd "$REPO_ROOT_FOR_SCRIPTS" && npm run type-check:scripts > /dev/null 2>&1); then
@@ -54,42 +62,13 @@ else
   echo -e "${GREEN}✅ scripts の .ts 変更なし、型チェック skip${NC}"
 fi
 
-# 2. デザインシステムガード
-echo -e "${GREEN}🎨 デザインシステムチェック...${NC}"
-if ! (cd "$WEB_DIR" && npm run design-system:check > /dev/null 2>&1); then
-  echo -e "${RED}❌ デザインシステム違反が検出されました。${NC}"
-  echo -e "${YELLOW}💡 詳細を確認: npm run design-system:check${NC}"
-  ERROR_COUNT=$((ERROR_COUNT + 1))
-else
-  echo -e "${GREEN}✅ デザインシステムチェック成功${NC}"
-fi
-
-# 2.1 R2 依存 route の SSG ガード (2026-06-22 障害の再発防止)
-# ranking/areas/cities は generateStaticParams を持つと ● SSG 化 → build 時 R2 不可 →
-# notFound 永久固着。ƒ (オンデマンド ISR) を維持しているか検証する。
-echo -e "${GREEN}🛡️  R2 依存 route SSG ガード...${NC}"
+# Common static gates: shared with preflight, at most two processes at once.
 GUARD_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
-  echo -e "${RED}❌ R2 依存 route に generateStaticParams が混入しています。${NC}"
-  echo -e "${YELLOW}💡 .claude/rules/nextjs-ssg-preservation.md §generateStaticParams 固着${NC}"
-  ERROR_COUNT=$((ERROR_COUNT + 1))
-fi
-
-# 2.1a private参考文献のローカル残存・利用契約ガード
-# repo内cacheを拒否し、全profileのmanifest・active利用仕様・非公開派生物契約・解決台帳100%を照合する。
-echo -e "${GREEN}📚 参考文献source vaultチェック...${NC}"
-if ! (cd "$GUARD_ROOT" && npm run source-vault:check > /dev/null 2>&1); then
-  echo -e "${RED}❌ 参考文献のrepo内残存、manifest、active利用仕様、または非公開派生物契約に違反があります。${NC}"
-  echo -e "${YELLOW}💡 詳細: npm run source-vault:check${NC}"
-  ERROR_COUNT=$((ERROR_COUNT + 1))
-else
-  echo -e "${GREEN}✅ 参考文献source vault契約に適合${NC}"
-fi
 
 # 2.2 sync-snapshots の task ドリフト (2026-08-05 の calculated-stats 書き忘れの再発防止)
 # run.sh に task を足しても動くので CI は緑のまま、task の存在と実行順を人と agent が
 # 読む面 (SKILL.md の task 表) だけが欠落する。両者を 1:1 に保つ。
-if git diff --cached --name-only | grep -q "^.claude/skills/db/sync-snapshots/"; then
+if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -q "^.claude/skills/db/sync-snapshots/"; then
   echo -e "${GREEN}🔁 sync-snapshots task ドリフト...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-sync-snapshots-tasks.cjs"; then
     echo -e "${RED}❌ run.sh の TASKS と SKILL.md の task 表がずれています。${NC}"
@@ -100,7 +79,7 @@ fi
 # 2.1b ドキュメントガバナンス
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
-STAGED_DOCS=$(git diff --cached --name-only --diff-filter=ACMRD | grep -E \
+STAGED_DOCS=$(printf '%s\n' "$PRECOMMIT_PATHS_0"RD | grep -E \
   '^(docs/|\.claude/todo/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
 if [ -n "$STAGED_DOCS" ]; then
   echo -e "${GREEN}📚 ドキュメントガバナンスチェック...${NC}"
@@ -116,7 +95,7 @@ fi
 # 2.1c file:// URL の文字列連結ガード
 # `file://${process.argv[1]}` は Windows で必ず不一致になり、ESM のエントリポイント
 # 判定なら main() が呼ばれないまま exit 0 で終わる (失敗ではなく無言の no-op)。
-STAGED_JS=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
+STAGED_JS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
   '^(\.claude/scripts/|apps/|packages/|scripts/).*\.(js|cjs|mjs|ts|tsx|mts|cts)$' || true)
 if [ -n "$STAGED_JS" ]; then
   echo -e "${GREEN}🔗 file:// URL ガード...${NC}"
@@ -133,7 +112,7 @@ fi
 # 状態で dispatch すると **main の古い config で再生成され、しかも成功する** (R2 の
 # generatedAt も更新されるので失敗に見えない)。2026-08-17 に婚姻率・離婚率の seoTitle で
 # 実際に踏み、2026-07-14 と同じ事故を繰り返した。正典: .claude/skills/db/sync-snapshots/SKILL.md
-STAGED_DISPATCH=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
+STAGED_DISPATCH=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
   '^data/workflow-dispatch-requests\.json$' || true)
 if [ -n "$STAGED_DISPATCH" ]; then
   echo -e "${GREEN}🚦 dispatch request の main 反映順...${NC}"
@@ -170,7 +149,7 @@ fi
 #   いずれも baseline 方式で既存違反は素通りし、新規混入だけを止める。
 #   ★root は GUARD_ROOT を使う (PROJECT_ROOT はこのブロックより後で定義されるので空になり、
 #     存在しないパスを叩いて 3 つとも「失敗」になる)。
-STAGED_ANY=$(git diff --cached --name-only --diff-filter=ACM || true)
+STAGED_ANY=$(printf '%s\n' "$PRECOMMIT_PATHS_0" || true)
 if [ -n "$STAGED_ANY" ]; then
   echo -e "${GREEN}🔐 環境変数レジストリ・資産ポリシー・保守負債ガード...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-env-registry.cjs"; then
@@ -190,7 +169,7 @@ fi
 
 # 2.1.1 画像生成差分/publish policy ガード
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
-STAGED_IMAGE_PIPELINE=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
+STAGED_IMAGE_PIPELINE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
   '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?|category-images)\.ts|manage-blog-codex-backgrounds\.ts|data/(image-generator-registry|blog-(ogp-visual|codex-background)-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|blog-codex-background-workflow|ranking-(ogp-fallback|thumbnail)-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|blog-codex-background-catalog|gemini-image-client)\.test\.ts|lib/assets/(ogp-bg-brand-(dark|light)\.jpg|blog-codex-backgrounds/.*\.jpg))|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
 if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   echo -e "${GREEN}🖼️  画像生成 pipeline policy チェック...${NC}"
@@ -208,29 +187,11 @@ if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   fi
 fi
 
-# 2.2 カード系コンポーネントの増殖ガード (Phase 0-5 / スパゲッティ化の止血)
-# *Card のベースライン超過を弾く。新規カードは既存共有カードで表現できないか先に検討する。
-echo -e "${GREEN}🃏 カード census ガード...${NC}"
-if ! node "$GUARD_ROOT/.claude/scripts/lib/check-card-census.cjs"; then
-  echo -e "${RED}❌ ベースライン外の新規 *Card が追加されています。${NC}"
-  echo -e "${YELLOW}💡 docs/01_技術設計/04_デザインシステム.md / .claude/rules/ui-components.md${NC}"
-  ERROR_COUNT=$((ERROR_COUNT + 1))
-fi
-
-# 2.2.1 広告配置・右レール契約ガード (2026-07-29 / 2026-08-02 の再発防止)
-# 広告の隣接・rail 部品誤用・生 AdSenseAd・右レール独立scroll/テキストPR・死んだ slot 定数を弾く。
-echo -e "${GREEN}📢 広告配置ガード...${NC}"
-if ! node "$GUARD_ROOT/.claude/scripts/lib/check-ad-placement.cjs"; then
-  echo -e "${RED}❌ 広告の配置規約に違反しています。${NC}"
-  echo -e "${YELLOW}💡 docs/01_技術設計/04_デザインシステム.md / .claude/rules/ui-components.md${NC}"
-  ERROR_COUNT=$((ERROR_COUNT + 1))
-fi
-
 # 2.3 ESLint (staged の apps/web TS/TSX) — CI の next lint と同基準で import/order 等を事前に弾く
 # 背景: import/order は CI (Code Quality Check) でのみ検出され、ローカルで気付けず CI を1サイクル無駄にしていた
 # (2026-06-23 deploy 時に発生)。staged ファイルだけを next lint にかけて高速に事前検出する。
 echo -e "${GREEN}🧹 ESLint (staged ファイル)...${NC}"
-STAGED_WEB_TS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^apps/web/src/.*\.(ts|tsx)$' || true)
+STAGED_WEB_TS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '^apps/web/src/.*\.(ts|tsx)$' || true)
 if [ -n "$STAGED_WEB_TS" ]; then
   LINT_ARGS=$(echo "$STAGED_WEB_TS" | sed 's#^apps/web/#--file #' | tr '\n' ' ')
   if ! (cd "$WEB_DIR" && npx next lint $LINT_ARGS > /tmp/precommit-lint.out 2>&1); then
@@ -269,6 +230,7 @@ for pattern in "${TMP_PATTERNS[@]}"; do
       rm -f "$f"
       # ステージングからも除外
       git reset HEAD "$fname" 2>/dev/null || true
+      PRECOMMIT_INDEX_CHANGED=1
       CLEANED=$((CLEANED + 1))
     fi
   done
@@ -280,29 +242,14 @@ else
   echo -e "${GREEN}✅ 一時ファイルチェック成功${NC}"
 fi
 
-# 3.1 tracked/staged リポジトリ衛生ガード
-# 既存findingはbaselineで許容し、新規悪化だけをブロックする。
-# 全tracked pathを見ることで staged path と既存pathの case/Unicode衝突も検出する。
-echo -e "${GREEN}🧹 リポジトリ衛生回帰チェック...${NC}"
-if ! node "$PROJECT_ROOT/.claude/scripts/lib/check-repo-hygiene.cjs" --baseline; then
-  echo -e "${RED}❌ 新規の一時出力・大容量ファイル・path衝突が検出されました。${NC}"
-  ERROR_COUNT=$((ERROR_COUNT + 1))
-fi
-
-# 3.2 観測値の桁揃えガード
-# 共有規約 (@stats47/utils の resolveValuePrecision + formatValueWithPrecision) の迂回を検出。
-# maximumFractionDigits の単独指定・素の toLocaleString は同じ図の中で「60.4」と「44」を
-# 混在させる (2026-07-31 実発生)。既存違反は baseline で許容し、新規混入だけをブロックする。
-echo -e "${GREEN}🔢 数値整形（桁揃え）チェック...${NC}"
-if ! node "$PROJECT_ROOT/.claude/scripts/lib/check-value-format.cjs" --baseline; then
-  echo -e "${RED}❌ 観測値の桁揃えが共有規約を迂回しています。${NC}"
-  ERROR_COUNT=$((ERROR_COUNT + 1))
-fi
-
 # 4. ファイルサイズチェック
+if [ "${PRECOMMIT_INDEX_CHANGED:-0}" = 1 ]; then refresh_staged_paths; fi
+if ! node "$GUARD_ROOT/.claude/scripts/lib/preflight-commit.mjs" --commit-static; then
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+fi
 echo -e "${GREEN}📏 ファイルサイズチェック...${NC}"
 MAX_FILE_SIZE=1048576 # 1MB
-LARGE_FILES=$(git diff --cached --name-only --diff-filter=ACM | while read file; do
+LARGE_FILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | while read file; do
   if [ -f "$file" ]; then
     # macOSとLinuxの両方に対応
     if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -342,7 +289,7 @@ fi
 
 # 5. 命名規則チェック
 echo -e "${GREEN}📝 命名規則チェック...${NC}"
-INVALID_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '.*[A-Z].*\.(ts|tsx|js|jsx)$' | grep -v node_modules || true)
+INVALID_FILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '.*[A-Z].*\.(ts|tsx|js|jsx)$' | grep -v node_modules || true)
 
 if [ -n "$INVALID_FILES" ]; then
   echo -e "${YELLOW}⚠️  大文字を含むファイル名が検出されました:${NC}"
@@ -355,7 +302,9 @@ fi
 
 # 6. セキュリティチェック - 依存関係の脆弱性
 echo -e "${GREEN}🔒 依存関係の脆弱性チェック...${NC}"
-if (cd "$WEB_DIR" && npm audit --audit-level=moderate > /dev/null 2>&1); then
+if ! printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -Eq '(^|/)(package(-lock)?\.json|npm-shrinkwrap\.json)$'; then
+  echo -e "${GREEN}✅ 依存関係変更なし。脆弱性検査はCI・定期検査で実行${NC}"
+elif (cd "$WEB_DIR" && npm audit --audit-level=moderate > /dev/null 2>&1); then
   echo -e "${GREEN}✅ 脆弱性チェック成功${NC}"
 else
   echo -e "${YELLOW}⚠️  中程度以上の脆弱性が検出されました。${NC}"
@@ -366,7 +315,7 @@ fi
 
 # 7. シークレット漏洩チェック（簡易版）
 echo -e "${GREEN}🔐 シークレット漏洩チェック...${NC}"
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+STAGED_FILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0")
 SECRET_PATTERNS=(
   "password\s*=\s*['\"][^'\"]+['\"]"
   "api[_-]?key\s*=\s*['\"][^'\"]+['\"]"
@@ -423,7 +372,7 @@ fi
 
 # 8. ブログ記事の Factual cross-check (2026-05-25 追加)
 echo -e "${GREEN}📊 ブログ記事 factual cross-check...${NC}"
-STAGED_ARTICLES=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^docs/21_ブログ記事原稿/[^/]+/article\.md$" || true)
+STAGED_ARTICLES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^docs/21_ブログ記事原稿/[^/]+/article\.md$" || true)
 
 if [ -n "$STAGED_ARTICLES" ]; then
   FACTUAL_FAILED=0
@@ -512,7 +461,7 @@ fi
 # .claude/scripts/lib/unit-semantics.mjs を自動生成している (.claude/scripts/** は素の node 実行で
 # TS を import できない)。手写しの二重実装はドリフトする — それが単位解釈 44 箇所の独立実装を生み、
 # 「千円 SSOT × 円 本文」の桁ずれ誤検出を招いた。どちらかだけの変更を止める。
-STAGED_UNIT=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^(packages/data-configs/src/unit/|\.claude/scripts/lib/unit-semantics\.mjs)" || true)
+STAGED_UNIT=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^(packages/data-configs/src/unit/|\.claude/scripts/lib/unit-semantics\.mjs)" || true)
 
 if [ -n "$STAGED_UNIT" ]; then
   echo -e "${GREEN}📏 単位セマンティクスの鏡チェック...${NC}"
@@ -528,7 +477,7 @@ fi
 
 # 6.5 metric config の year 正規化チェック (2026-05-29 追加 / .claude/rules/estat-api.md「年の正規化」)
 echo -e "${GREEN}📅 metric years 正規化チェック...${NC}"
-STAGED_METRICS=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/metrics/.+\.ts$" | grep -v "index.ts" || true)
+STAGED_METRICS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/metrics/.+\.ts$" | grep -v "index.ts" || true)
 
 if [ -n "$STAGED_METRICS" ]; then
   if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-metric-years.ts > /tmp/validate-years.log 2>&1); then
@@ -590,7 +539,7 @@ fi
 
 # 6.5b topic カタログ (カテゴリ内グループ分類 SSOT) の整合
 #      (packages/data-configs/src/topics/README.md)。カタログ TS が staged のとき発火。
-STAGED_TOPICS=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/topics/.+[.]ts$" || true)
+STAGED_TOPICS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/topics/.+[.]ts$" || true)
 
 if [ -n "$STAGED_TOPICS" ]; then
   echo -e "${GREEN}topic カタログ整合チェック...${NC}"
@@ -607,7 +556,7 @@ fi
 
 # 6.6 theme-catalog (指標×チャート SSOT) の整合 + 生成物鮮度チェック
 #     (.claude/rules/theme-catalog-standards.md)。カタログ TS または生成物が staged のとき発火。
-STAGED_CATALOG=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/theme-catalog/.+\.ts$|^packages/types/src/indicator-sets/.+\.ts$|^apps/web/scripts/data/page-components/theme/.+\.json$" || true)
+STAGED_CATALOG=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/theme-catalog/.+\.ts$|^packages/types/src/indicator-sets/.+\.ts$|^apps/web/scripts/data/page-components/theme/.+\.json$" || true)
 
 if [ -n "$STAGED_CATALOG" ]; then
   echo -e "${GREEN}📚 theme-catalog 整合チェック...${NC}"
@@ -635,7 +584,7 @@ fi
 #       metric config か生成物が staged のとき発火。生成物を挟む理由は
 #       「共通 Header 経由で METRICS_REGISTRY が全 route の dev bundle に入るのを防ぐ」
 #       (apps/web/scripts/generate-runtime-metric-summaries.ts)。
-STAGED_RUNTIME_SUMMARY=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/(metrics/.+|categories)\.ts$|^apps/web/src/config/runtime-metric-summaries\.generated\.ts$" || true)
+STAGED_RUNTIME_SUMMARY=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(metrics/.+|categories)\.ts$|^apps/web/src/config/runtime-metric-summaries\.generated\.ts$" || true)
 if [ -n "$STAGED_RUNTIME_SUMMARY" ]; then
   echo ""
   echo -e "${GREEN}🧾 runtime metric summaries 鮮度チェック...${NC}"
@@ -653,7 +602,7 @@ fi
 #       metric config・導出規則・GSC snapshot・生成物 のいずれかが staged のとき発火。
 #       この生成物を挟む理由は「/ranking を R2 非依存の純静的 SSG のまま保つ」ため
 #       (apps/web/scripts/generate-ranking-prominence.ts)。
-STAGED_PROMINENCE=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/(metrics/.+|categories)\.ts$|^packages/data-configs/src/prominence/.+\.ts$|^\.claude/skills/analytics/gsc-improvement/reference/snapshots/.+/pages\.csv$" || true)
+STAGED_PROMINENCE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(metrics/.+|categories)\.ts$|^packages/data-configs/src/prominence/.+\.ts$|^\.claude/skills/analytics/gsc-improvement/reference/snapshots/.+/pages\.csv$" || true)
 if [ -n "$STAGED_PROMINENCE" ]; then
   echo ""
   echo -e "${GREEN}🏅 ranking prominence 鮮度チェック...${NC}"
@@ -669,7 +618,7 @@ fi
 
 # 6.6b area-databook (県データブック SSOT) の整合 + 生成物鮮度チェック
 #      (.claude/rules/area-databook-standards.md)。テンプレ/editorial または生成物が staged のとき発火。
-STAGED_DATABOOK=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/area-databook/.+\.ts$|^apps/web/scripts/data/page-components/area/.+\.json$" || true)
+STAGED_DATABOOK=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/area-databook/.+\.ts$|^apps/web/scripts/data/page-components/area/.+\.json$" || true)
 
 if [ -n "$STAGED_DATABOOK" ]; then
   echo -e "${GREEN}🗾 area-databook 整合チェック...${NC}"
@@ -701,7 +650,7 @@ fi
 
 # 6.7 アフィリエイト広告のサイズ規約チェック (.claude/rules/affiliate-ads-standards.md §サイズ)
 #     affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
-STAGED_AFFILIATE=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^apps/web/scripts/affiliate-ads-data\.ts$" || true)
+STAGED_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^apps/web/scripts/affiliate-ads-data\.ts$" || true)
 
 if [ -n "$STAGED_AFFILIATE" ]; then
   echo -e "${GREEN}📐 アフィリエイト サイズ規約チェック...${NC}"
@@ -718,7 +667,7 @@ fi
 # 6.8 直接配置アフィリエイト台帳の構造チェック (/audit-affiliate-compliance)
 #     affiliate-direct-placements-data.ts が staged のとき、ID 重複・URL scheme・配置形式の
 #     構造 error を弾く (ネットワーク不要。本文突合は週次 CI が --live で実行)。
-STAGED_DIRECT_AFFILIATE=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^apps/web/scripts/affiliate-direct-placements-data\.ts$" || true)
+STAGED_DIRECT_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^apps/web/scripts/affiliate-direct-placements-data\.ts$" || true)
 
 if [ -n "$STAGED_DIRECT_AFFILIATE" ]; then
   echo -e "${GREEN}📐 直接配置アフィリエイト 構造チェック...${NC}"
@@ -734,7 +683,7 @@ fi
 
 # 7. テストカバレッジチェック（オプション - 変更されたファイルに関連するテストのみ）
 echo -e "${GREEN}🧪 テストカバレッジチェック（オプション）...${NC}"
-STAGED_TS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' | grep -v '\.test\.' | grep -v '\.stories\.' || true)
+STAGED_TS_FILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '\.(ts|tsx)$' | grep -v '\.test\.' | grep -v '\.stories\.' || true)
 
 if [ -n "$STAGED_TS_FILES" ]; then
   echo -e "${YELLOW}💡 変更されたファイル: $(echo "$STAGED_TS_FILES" | wc -l | tr -d ' ')件${NC}"

@@ -1,4 +1,7 @@
+# Disabled in the ChatGPT/Codex app: each open thread spawns its own copy (npx + 3 node
+# processes, ~245MB) and the app freezes on this 16GB machine. Claude Code keeps it via .mcp.json.
 [mcp_servers.chrome-devtools]
+enabled = false
 command = "npx"
 args = [
     "-y",
@@ -16,7 +19,9 @@ enabled = false
 command = "codex"
 args = ["mcp-server"]
 
+# Disabled in the ChatGPT/Codex app for the same reason (one copy per thread). Claude Code keeps it via .mcp.json.
 [mcp_servers.seo-observability]
+enabled = false
 command = "node"
 args = [".claude/scripts/search-growth/mcp/server.mjs"]
 

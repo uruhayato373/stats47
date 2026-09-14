@@ -6,7 +6,7 @@
  *
  * 2026-09-14 まで 9 本の `tsc --noEmit -p` を `&&` で直列に回していて、会社 Windows PC の pre-commit で
  * 141 秒かかっていた。ここでは
- *   - 並列実行 (既定 3 本。`TSC_CONCURRENCY` で変更。RAM 3GiB 未満の警告閾値を超えない範囲)
+ *   - 並列実行 (既定 2 本。`TSC_CONCURRENCY` で変更。RAM 3GiB 未満の警告閾値を超えない範囲)
  *   - `--incremental` + `.local/tsbuildinfo/<name>.tsbuildinfo` (gitignore 済み `.local/`) で 2 回目以降は
  *     変更ファイルだけを検査する。CI (fresh checkout) では単に並列になる
  * 対象の一覧は package.json の `type-check:scripts` に引数として並べたまま置く
@@ -29,7 +29,7 @@ if (configs.length === 0) {
   console.error("usage: node .claude/scripts/lib/type-check-scripts.mjs <tsconfig.json> [...]");
   process.exit(2);
 }
-const concurrency = Math.max(1, Number(process.env.TSC_CONCURRENCY) || Math.min(3, os.cpus().length));
+const concurrency = Math.max(1, Number(process.env.TSC_CONCURRENCY) || Math.min(2, os.cpus().length));
 fs.mkdirSync(BUILDINFO_DIR, { recursive: true });
 
 function runOne(config) {
@@ -60,6 +60,7 @@ function runOne(config) {
 }
 
 async function main() {
+  const started = Date.now();
   const queue = [...configs];
   const results = [];
   await Promise.all(
@@ -74,7 +75,7 @@ async function main() {
     console.error(`✗ ${r.config} (${(r.ms / 1000).toFixed(1)}s)`);
     console.error(r.out.trimEnd());
   }
-  const total = Math.max(...results.map((r) => r.ms));
+  const total = Date.now() - started;
   console.log(
     `${failed.length ? "✗" : "✓"} type-check:scripts — ${results.length - failed.length}/${results.length} ok, ` +
       `wall ${(total / 1000).toFixed(1)}s, concurrency ${concurrency}, incremental cache ${path.relative(ROOT, BUILDINFO_DIR)}`,

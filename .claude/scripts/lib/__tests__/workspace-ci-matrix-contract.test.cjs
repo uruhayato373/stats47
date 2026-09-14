@@ -60,7 +60,7 @@ function inventoryWorkspaces(root) {
       if (files.length === 0) continue;
       items.push({
         id: entry.name,
-        relative: path.relative(root, directory),
+        relative: path.relative(root, directory).split(path.sep).join('/'),
         manifest: JSON.parse(fs.readFileSync(manifestFile, "utf8")),
         sourceCount: files.filter((file) => !TEST_FILE.test(file)).length,
         testCount: files.filter((file) => TEST_FILE.test(file)).length,
@@ -210,11 +210,13 @@ function auditWorkspaceMatrix({ inventory, registry, workflow, rootManifest, vit
       }
       if (!required.has(check.job)) findings.push(`${label}_${kind.toUpperCase().replace("-", "_")}_NOT_REQUIRED`);
 
-      if (kind === "test" && check.command === "npm run test:packages") {
+      if (kind === "test" && ["npm run test:packages", "npm run test:packages:ci"].includes(check.command)) {
         if (!vitestProjects.has(item.relative)) findings.push(`${label}_TEST_PROJECT_MISSING`);
         if (!rootManifest.scripts?.["test:packages"]?.includes("--project '@stats47/*'")) {
           findings.push("ROOT_PACKAGE_TEST_RUNNER_INVALID");
         }
+        if (check.command.endsWith(':ci') && rootManifest.scripts?.['test:packages:ci'] !== 'node .claude/scripts/lib/test-packages-ci.mjs')
+          findings.push('ROOT_PACKAGE_TEST_RUNNER_INVALID');
       }
       if (kind === "type-check" && check.command === "npm run type-check") {
         if (!rootManifest.scripts?.["type-check"]?.includes("turbo run type-check")) {
