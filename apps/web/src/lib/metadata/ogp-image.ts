@@ -6,7 +6,7 @@
  * Cloudflare Worker で例外を投げる (error 1101) ため使わない。
  * 正典: `.claude/rules/ogp-image-standards.md`。
  *
- * 生成: `apps/web/scripts/generate-ogp-images.ts` (ranking/areas) /
+ * 生成: `apps/web/scripts/generate-ogp-images.ts` (ranking/areas/products) /
  *        `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (blog、`ogp/ogp.png`)。
  */
 
@@ -36,4 +36,5 @@ export const ogpImageKeys = {
   blog: (slug: string) => `app/blog/${slug}/ogp/ogp.png`,
   ranking: (rankingKey: string) => `app/ranking/${rankingKey}/ogp/ogp.png`,
   area: (areaCode: string) => `app/areas/${areaCode}/ogp/ogp.png`,
+  product: (slug: string) => `app/products/${slug}/ogp/ogp.png`,
 } as const;

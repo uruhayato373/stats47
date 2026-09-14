@@ -547,6 +547,7 @@ describe('image generator registry', () => {
       'ranking-cards',
       'note-covers',
       'pref-silhouette',
+      'products',
     ]);
     const ids = IMAGE_GENERATOR_TYPES.map(
       (type) => IMAGE_GENERATOR_SPECS[type].generator

@@ -17,6 +17,7 @@
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking-cards [--limit N]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type note-covers   [--limit N] [--note-source remote|local]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type pref-silhouette [--key 28,13]
+ *   npx tsx apps/web/scripts/generate-ogp-images.ts --type products       [--key kindle-k-s1-02]
  *
  * areas = 県シルエットカード (blue/ogp比率) を app/areas/<code>/ogp/ogp.png へ。
  * pref-silhouette = SNS 素材ライブラリ (5比率 × blue/dark) を
@@ -64,6 +65,11 @@ import {
 } from './data/pref-silhouette-tokens';
 import { isSafeNoteSlug } from './lib/image-entity-policy';
 import {
+  buildProductOgpElement,
+  resolveProductBackgroundPath,
+  sha256File,
+} from './lib/product-ogp-render';
+import {
   buildImageGenerationManifest,
   calculateRendererHash,
   createImageGenerationPlan,
@@ -77,6 +83,9 @@ import { createImageGenerationInspector } from './lib/image-generation-r2-inspec
 import { resolveRankingImageVisualization } from './lib/ranking-image-visualization';
 import { selectRankingImagePartition } from './lib/ranking-image-year';
 import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
+import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
+
+import type { StorefrontProduct } from '../src/features/products/types';
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
@@ -402,6 +411,7 @@ interface PreparedImage {
   rankingData?: BuiltRankingData;
   rankingVisualization?: ReturnType<typeof resolveRankingImageVisualization>;
   note?: NoteEntry & { title: string };
+  product?: StorefrontProduct;
 }
 
 /** draft.md frontmatter の title を抜く。 */
@@ -457,6 +467,8 @@ async function main() {
   } else if (opts.type === 'pref-silhouette') {
     // 2 桁県コード "01".."47" (SNS 素材の content_key)
     ids = listAreaCodes().map((c) => c.slice(0, 2));
+  } else if (opts.type === 'products') {
+    ids = STOREFRONT_PRODUCTS.map((product) => product.slug);
   } else {
     ids = opts.keys ?? (await listRankingKeys(opts.source));
   }
@@ -541,6 +553,17 @@ async function main() {
         }))
       );
     }
+    if (opts.type === 'products') {
+      return [
+        {
+          key: `app/products/${id}/ogp/ogp.png`,
+          variant: 'ogp',
+          contentType: 'image/png' as const,
+          width: 1200,
+          height: 630,
+        },
+      ];
+    }
     const n = noteEntries.find((e) => e.slug === id)!;
     return [
       {
@@ -559,6 +582,7 @@ async function main() {
     if (opts.type === 'ranking-cards') return rankingThumbnailKeys(id).manifest;
     if (opts.type === 'pref-silhouette')
       return `sns/pref-silhouette/${id}/generation.json`;
+    if (opts.type === 'products') return `app/products/${id}/ogp/generation.json`;
     const n = noteEntries.find((entry) => entry.slug === id)!;
     return `${n.r2Path}/images/cover-generation.json`;
   };
@@ -575,6 +599,7 @@ async function main() {
     let rankingData: BuiltRankingData | undefined;
     let rankingVisualization: PreparedImage['rankingVisualization'];
     let note: PreparedImage['note'];
+    let product: PreparedImage['product'];
 
     if (opts.type === 'ranking' || opts.type === 'ranking-cards') {
       const built = await buildRankingOgpData(id);
@@ -618,6 +643,24 @@ async function main() {
         ratios: PREF_CARD_RATIO_KEYS,
         themes: PREF_CARD_PUSH_THEMES,
       };
+    } else if (opts.type === 'products') {
+      const found = STOREFRONT_PRODUCTS.find((candidate) => candidate.slug === id);
+      if (!found) return null;
+      product = found;
+      const backgroundPath = resolveProductBackgroundPath({
+        projectRoot: PROJECT_ROOT,
+        channel: found.channel,
+        productId: found.id,
+      });
+      input = {
+        slug: id,
+        channel: found.channel,
+        channelLabel: found.channelLabel,
+        title: found.title,
+        priceYen: found.priceYen,
+        // 背景差し替え (kindle表紙の再アップロード等) だけで再生成させる入力指紋。
+        backgroundSha256: sha256File(backgroundPath),
+      };
     } else {
       const entry = noteEntries.find((candidate) => candidate.slug === id);
       if (!entry) return null;
@@ -654,7 +697,7 @@ async function main() {
       rendererHash,
       assets: assetContractsFor(id),
     });
-    return { id, plan, rankingData, rankingVisualization, note };
+    return { id, plan, rankingData, rankingVisualization, note, product };
   };
 
   console.log(`入力指紋を計算中 (renderer=${rendererHash.slice(0, 12)})...`);
@@ -924,6 +967,24 @@ async function main() {
             format: 'webp',
           },
         };
+      } else if (opts.type === 'products') {
+        const product = preparedImage.product!;
+        const el = buildProductOgpElement({
+          projectRoot: PROJECT_ROOT,
+          channel: product.channel,
+          channelLabel: product.channelLabel,
+          title: product.title,
+          priceYen: product.priceYen,
+          productId: product.id,
+        });
+        const out = stagePath(plan.assets[0].key);
+        await renderToPng(el, fonts, out);
+        assetFiles.set(plan.assets[0].key, out);
+        metadata = {
+          slug: id,
+          channel: product.channel,
+          productId: product.id,
+        };
       } else {
         // note-covers
         const note = preparedImage.note!;
@@ -989,7 +1050,9 @@ async function main() {
         ? 'app/areas'
         : opts.type === 'pref-silhouette'
           ? 'sns/pref-silhouette'
-          : 'app/ranking';
+          : opts.type === 'products'
+            ? 'app/products'
+            : 'app/ranking';
   console.log(`staging: ${stageRoot}/${prefix}`);
   console.log(`publish plan: ${publishPlanPath}`);
   console.log(
