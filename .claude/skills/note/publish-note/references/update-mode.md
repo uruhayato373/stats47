@@ -171,3 +171,23 @@ bash .claude/scripts/note/fix-note-figure-split.sh <slug> [<slug> ...]
 `ins_img` は `Home` を段落ノード先頭への Range 移動に置き換えたが、
 **この Range 版は新規公開での実地検証が未了**。新規公開のあとは
 `audit-note-figure-split.mjs` で分断 0 を確認すること。
+
+## 公開済み記事の更新は「draft_reedit=true → 公開に進む → 更新する」の順でしか本番に乗らない (2026-09-15 実測)
+
+`a-kakei-kumamoto` の更新で、`/notes/<id>/edit` を開いて本文と画像を差し替えたあと
+`/notes/<id>/publish/` へ **URL 遷移**して「更新する」を押したところ、publish guard は
+`PUT /api/v1/text_notes/<id>` の 200 を観測し「記事が公開されました」も出たが、
+**公開 API (`/api/v3/notes/<id>`) の本文は旧のまま**だった (図 4・旧見出し)。
+PUT は再編集ドラフトの保存に留まり、本番へは適用されない。
+
+正しい経路は `fix-note-figure-split.sh` で 47 本実証済みのもの:
+
+1. `https://editor.note.com/notes/<id>/edit?draft_reedit=true` を開く
+2. 本文・画像を差し替える
+3. エディタ画面の **「公開に進む」ボタンを click** する (URL 遷移しない)
+4. publish guard を仕込み、「更新する」を click する
+5. `https://note.com/api/v3/notes/<id>` を取得し、新しい見出しと figure 数が本文にあることを実測する
+   (「記事が公開されました」モーダルと PUT 200 は下書き保存でも出るので証拠にしない)
+
+自動化は `.claude/scripts/note/publish-kakei-update.sh <slug>` (a-kakei 用。上の 5 手順と
+本文全消去 (実クリック + Range 全選択 + 実キー Backspace。eval の execCommand だけでは消えない) を実装)。

@@ -76,15 +76,11 @@ ACC=$(NBU eval "(()=>{try{return JSON.parse(document.body.innerText).data.urlnam
 echo "  account gate ok: $ACC"
 
 # ---- 編集画面: 既存本文を消して差し替え ----
-np_ensure "https://editor.note.com/notes/$KEY/edit" || { echo "FAIL $SLUG cannot open editor"; exit 1; }
-sleep 3
+# 公開済み記事は draft_reedit=true で開く (fix-note-figure-split.sh で 47 本実証済みの経路)。
+# /edit だけで開いて /publish/ へ URL 遷移すると PUT は下書き保存に留まり本番が変わらない (2026-09-15 実測)。
+NBU open "https://editor.note.com/notes/$KEY/edit?draft_reedit=true" >/dev/null 2>&1; sleep 7
 NBU state 2>&1 > /tmp/ns.txt
-if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then
-  # 公開済み記事は draft_reedit=true でないと編集画面が開かない場合がある (fix-note-figure-split.sh と同じ経路)
-  NBU open "https://editor.note.com/notes/$KEY/edit?draft_reedit=true" >/dev/null 2>&1; sleep 7
-  NBU state 2>&1 > /tmp/ns.txt
-  grep -qE "contenteditable=true role=textbox" /tmp/ns.txt || { echo "FAIL $SLUG editor not loaded"; exit 1; }
-fi
+grep -qE "contenteditable=true role=textbox" /tmp/ns.txt || { echo "FAIL $SLUG editor not loaded"; exit 1; }
 BEFORE=$(NBU eval "(()=>{const e=document.querySelector('[contenteditable=true]');return String(e?e.innerText.length:0)})()" 2>&1 | sed -n 's/^result: //p' | head -1)
 echo "  existing body chars=${BEFORE:-0}"
 NBU eval "(function(){const e=document.querySelector('[contenteditable=true]');if(!e)return 'no-editor';const figs=[...e.querySelectorAll('figure[embedded-service=attachment]')];for(const target of figs){const r=document.createRange();r.selectNode(target);const s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('delete');}if(figs.length)e.dispatchEvent(new InputEvent('input',{bubbles:true,inputType:'deleteContent'}));return 'attachments-removed:'+figs.length;})();" >/dev/null 2>&1
@@ -159,7 +155,10 @@ echo "  editor body chars=${LEN:-0} figures=${EMB:-0} (expect $EXPECT_EMBEDS)"
 [ "${EMB:-0}" -ne "$EXPECT_EMBEDS" ] && { echo "FAIL $SLUG embeds ${EMB:-0} != expected $EXPECT_EMBEDS"; exit 1; }
 
 # ---- 公開設定 → 更新する (2 段) ----
-np_ensure "https://editor.note.com/notes/$KEY/publish/" || { echo "FAIL $SLUG publish page"; exit 1; }
+NBU state 2>&1 > /tmp/ns.txt
+PUB=$(np_btn /tmp/ns.txt "公開に進む")
+[ -n "$PUB" ] || { echo "FAIL $SLUG 公開に進む not found"; NBU screenshot /tmp/note-update-$SLUG-pub.png >/dev/null 2>&1; exit 1; }
+NBU click "$PUB" >/dev/null 2>&1; sleep 3
 np_install_publish_guard "$ADIR/hashtags.txt" 1500 || { echo "FAIL $SLUG publish guard install"; exit 1; }
 CLICKED=$(NBU eval "(function(){function deep(r,a){r.querySelectorAll('*').forEach(function(e){if(e.tagName==='BUTTON')a.push(e);if(e.shadowRoot)deep(e.shadowRoot,a);});return a;}var b=deep(document,[]).find(function(x){return (x.textContent||'').trim()==='更新する';});if(b){b.click();return 'clicked';}return 'nf';})();" 2>&1)
 echo "$CLICKED" | grep -q "clicked" || { echo "FAIL $SLUG 更新する button not found"; exit 1; }
@@ -174,6 +173,14 @@ np_close_modal
 sleep 3
 V=$(np_verify "$NOTE_URL" "$TITLE")
 [ "$V" = "ok" ] || { echo "FAIL $SLUG verify: $V"; exit 1; }
+# 本番 API の本文が draft の見出しと figure 数を持つことを実測 (下書き保存止まりを検出)
+H3=$(grep -m3 '^## ' "$ADIR/draft.md" | tail -1 | sed 's/^## //')
+LIVE=$(curl -s -A "Mozilla/5.0" "https://note.com/api/v3/notes/$KEY" | python3 -c "
+import json,sys,re
+d=json.load(sys.stdin).get('data',{}); b=d.get('body') or ''
+print('figures=%d heading=%s' % (len(re.findall(r'<figure',b)), 'yes' if sys.argv[1] in b else 'no'))" "$H3")
+echo "  live api: $LIVE (expect figures>=$EXPECT_EMBEDS heading=yes)"
+echo "$LIVE" | grep -q "heading=yes" || { echo "FAIL $SLUG live body not updated (draft only?)"; exit 1; }
 python3 - "$ADIR/draft.md" <<'PY'
 import sys,re,datetime
 p=sys.argv[1]; s=open(p,encoding="utf-8").read(); today=datetime.date.today().isoformat()

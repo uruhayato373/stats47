@@ -226,8 +226,10 @@ function buildPlans(source, views, options) {
         : null;
       if (article.nextBestArticle && !next?.noteUrl)
         throw new Error(`${article.key}: nextBestArticle が未公開`);
-      if (article.nextBestArticle && !magazine?.noteUrl)
-        throw new Error(`${article.key}: magazine が未公開`);
+      // マガジンが note 上で未公開 (noteUrl null) なら footer からマガジンカードを省くだけ。
+      // 未知のマガジン id だけを止める (a-kakei 47 本は s47-kakei-reading が未公開のまま運用中)。
+      if (article.nextBestArticle && article.magazine && !magazineRecord)
+        throw new Error(`${article.key}: magazine が catalog に無い (${article.magazine})`);
       const liveRepair = remediation.get(article.key) || { forceNormalizeLegacy: false, repairs: [] };
       const repairs = [
         ...(article.publishedLinkRepairs || []),

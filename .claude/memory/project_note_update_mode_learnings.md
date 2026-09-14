@@ -82,3 +82,10 @@ DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operatio
 note配信PNGは減色される（初回API試験は画素平均絶対誤差0.66/255）ので、配信バイトSHAの完全一致は要求しない。
 
 カバーは**派生物**。SSOT = frontmatter(title/is_paid/category) + 背景アセット(`.claude/scripts/note/assets/koumuin-cover-bg.png` / magazine 別背景) + 生成器 `generate-koumuin-covers.cjs`(`--magazine` 有)。全て **commit `32176c1b` / branch `feature/koumuin-note-cover-redesign`(develop 未マージ)**。Satori 汎用 note-cover から koumuin 2シリーズは除外済(二重SSOT回避、正典 `ogp-image-standards.md` §5)。関連 [[project_note_publish_flow_2026_06]] / [[feedback_note_publish_automation]] / [[feedback_shared_working_copy_git_race]]。
+
+## 2026-09-15 追記: 公開済み記事の本文差し替えは draft_reedit 経路でしか本番に乗らない
+`/notes/<id>/edit` で編集して `/notes/<id>/publish/` へ URL 遷移し「更新する」を押すと、PUT 200 と
+「記事が公開されました」は出るが公開 API の本文は旧のまま (下書き保存止まり)。正しくは
+`edit?draft_reedit=true` → エディタ上の「公開に進む」を click → guard → 「更新する」。成功判定は
+`https://note.com/api/v3/notes/<id>` の本文に新見出し・figure 数があること。全消去は実クリック +
+Range 全選択 + 実キー Backspace (eval の execCommand だけでは消えない)。実装: `publish-kakei-update.sh`。
