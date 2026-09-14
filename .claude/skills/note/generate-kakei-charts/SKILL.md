@@ -117,5 +117,36 @@ docs/31_note記事原稿/<slug>/
 表示しており、記事本文の注記 (「全国値ではない」) と矛盾していた。
 **図は本文より先に読まれる**ので、ここが誤っていると注記が意味を失う。
 
-品目名は倍率ラベルの手前で打ち切る (`…`)。長い品目名が倍率と重なって
-どちらも読めなくなる事故があった (例: 「教養娯楽用耐久財修理代 0.16倍」)。
+品目名は **省略しない** (2026-09-15 以降)。名前列の幅を広げ、収まらない品目があれば
+generate-charts.js が例外で止まる (監査に見えない `…` 切り詰めをしない)。extreme-items は片側 10 件。
+
+## 決定的テンプレ版パイプライン (2026-09-15 再設計。a-kakei 47 本の正典)
+
+本文を LLM で書かない。数字はすべて `chart-data.json` と `evidence-data.json` から差し込み、
+図 5 枚 (十大費目・費目割合の 47 県タイルマップ・特徴品目 10+10・根拠ランキング 2 本) を付ける。
+根拠指標の SSOT は `packages/data-configs/src/evidence-inventory/kakei-note/expense-evidence.json`
+(費目 → shareMetricKey + 根拠 metric の priority / direction / 閾値)。verdict は順位から機械判定し
+「整合する / 中位で弱い / 逆方向で説明できない」の 3 分岐で書く (相関であり因果ではない旨を固定文で付す)。
+
+```bash
+S=a-kakei-kumamoto
+bash .claude/scripts/note/restore-from-r2.sh $S                                   # docs/31 に無ければ復元
+node .claude/scripts/note/build-kakei-note-chart-data.mjs --pref 43000            # chart-data.json
+node .claude/scripts/note/build-kakei-note-evidence-data.mjs --slug $S            # evidence-data.json + data/*.json
+npx tsx .claude/scripts/blog/generate-article-charts.ts --slug $S --base docs/31_note記事原稿   # data/*.svg (blog 契約)
+node .claude/skills/note/generate-kakei-charts/scripts/generate-charts.js $S     # category-ratio / extreme-items
+cp docs/31_note記事原稿/$S/data/*.svg docs/31_note記事原稿/$S/images/ && rm -f docs/31_note記事原稿/$S/images/*-ig.svg
+node .claude/scripts/lib/svg-to-png.cjs docs/31_note記事原稿/$S/images
+node .claude/scripts/note/build-kakei-note-draft.mjs --slug $S                    # draft.md (frontmatter 保持)
+node .claude/scripts/note/audit-kakei-note-content.mjs $S                          # 9 チェック。exit 0 のみ公開可
+bash .claude/scripts/note/publish-kakei-update.sh $S                              # 公開済み記事の本文+画像差し替え (ローカル Chrome)
+node .claude/scripts/note/audit-note-figure-split.mjs $S                          # 図の分断 0 を実測
+node .claude/scripts/note/audit-kakei-note-content.mjs $S --live                   # figure 5 / リンク 200 / OGP 200
+node .claude/scripts/note/build-kakei-related-picks.mjs --write                    # 次に読む (同費目・同向きで倍率が近い県)
+node .claude/scripts/note/update-published-navigation.mjs --slug $S --commit      # フッタ再付与
+```
+
+- `--all` は build-kakei-note-{evidence-data,draft}.mjs と generate-charts.js が対応。公開は 1 本ずつ (Profile 5 排他ロック)。
+- 監査の不変条件と定型文は `.claude/scripts/note/lib/kakei-note-{body,audit}.mjs`。テストは `__tests__/kakei-note-*.test.mjs`。
+- 根拠 3 枚の PNG は SVG から再生成可能なので git に追跡しない (asset policy)。R2 復元後は svg-to-png で作り直す。
+- 商品カード (Kindle) は `/products/<slug>` の固有 OGP (`app/products/<slug>/ogp/ogp.png`、`generate-ogp-images.ts --type products`) が前提。

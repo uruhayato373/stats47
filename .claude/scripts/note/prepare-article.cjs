@@ -71,10 +71,18 @@ if (productArchiveField) {
 }
 let body = raw.replace(/^---\n[\s\S]*?\n---\n*/, "");
 // 画像参照の位置（直前見出し）を控える
-const imgRefs = []; let lastH = "";
-for (const l of raw.split("\n")) {
+// afterText = 画像の直前にある非空行 (見出し or 段落) の先頭 24 字。見出し直下でない図
+// (段落の後ろに置く地図・根拠ランキング等) を draft の位置どおりに挿すための anchor。
+// 見出し直下の図では afterHeading と同じ文字列になる。
+const imgRefs = []; let lastH = ""; let lastText = "";
+const bodyStart = raw.replace(/^---\n[\s\S]*?\n---\n*/, "");
+for (const l of bodyStart.split("\n")) {
   const h = l.match(/^#{1,3}\s+(.+)/); if (h) lastH = h[1].trim();
-  const im = l.match(/!\[.*?\]\((?:\.\/)?images\/([^)]+)\)/); if (im) imgRefs.push({ file: im[1], afterHeading: lastH });
+  const im = l.match(/!\[.*?\]\((?:\.\/)?images\/([^)]+)\)/);
+  if (im) { imgRefs.push({ file: im[1], afterHeading: lastH, afterText: lastText }); continue; }
+  if (l.trim() && !/^<!--/.test(l.trim())) {
+    lastText = [...l.replace(/^#{1,3}\s+/, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").trim()].slice(0, 24).join("");
+  }
 }
 // アフィリエイトバナープレースホルダー {{AFFILIATE_BANNER:X}} を抽出して除去
 const affiliateBanners = [];

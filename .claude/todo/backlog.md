@@ -21,6 +21,24 @@ updated: 2026-09-14
 
 ## 🔴 高 — 今月中に着手したい
 
+### [NOTE-KAKEI-REDESIGN-ROLLOUT-01] note 家計シリーズ残り 46 本を決定的テンプレ + 図5枚で再公開する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/note/audit-kakei-note-content.mjs "^a-kakei-" --live が 47/47 PASS、かつ node .claude/scripts/note/audit-note-figure-split.mjs "^a-kakei-" で分断 0] [起票:2026-09-15] [期日:2026-09-30]
+
+- **owner**: Claude Code (生成・監査・逐次更新) / オーナー (パイロット確認後の go)
+- **前提**: 熊本 (`a-kakei-kumamoto`) をパイロットとして再公開済み。手順の正典は
+  `.claude/skills/note/generate-kakei-charts/SKILL.md`「決定的テンプレ版パイプライン」。
+- **次 (実行順)**: ① docs/31 に無い 4 本 (aichi / aomori / hiroshima / hokkaido) を `restore-from-r2.sh` で復元
+  ② `build-kakei-note-evidence-data.mjs --all` → 図 5 枚 (generate-article-charts / generate-charts.js / svg-to-png)
+  → `build-kakei-note-draft.mjs --all` → `audit-kakei-note-content.mjs "^a-kakei-"` 47/47 PASS
+  ③ `publish-kakei-update.sh <slug>` を 1 本ずつ (20〜40 秒待ち。失敗は再実行、Profile 5 ロック)
+  ④ live 監査 → `build-kakei-related-picks.mjs --write` → `update-published-navigation.mjs --all --commit`
+  ⑤ develop push (sync-note-r2 が R2 同期 + docs/31 削除)
+- **停止条件**: ローカル監査 FAIL の記事は公開しない。図の分断が 1 本でも出たら
+  `ins_img` の anchor 方式 (prepare-article `afterText`) を直してから再開。本番デプロイは含まない
+  (商品 OGP は PR で別途)。
+- **完了条件**: 検証コマンドが 47/47 PASS、note ダッシュボードで 4 週後に PV 中央値を再計測 (baseline 2、2026-08-17〜09-13)。
+
 ### [STATE-R2-MIGRATION-01] 日次観測 state の残り 4 domain を R2 `state/` へ移す (psi → cloudflare → url-inspection → search-growth)
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:git log --since=4.weeks --name-only -- .claude/state/metrics | sort -u | wc -l が 230 未満、かつ curl -sI https://storage.stats47.jp/state/psi/index.json が 200] [起票:2026-09-14] [期日:2026-10-12]

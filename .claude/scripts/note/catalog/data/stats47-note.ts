@@ -3020,6 +3020,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-aichi",
     stats47Targets: ["/blog/aichi-food-culture", "/areas/23000"],
+    nextBestArticle: "a-kakei-gunma",
   },
   {
     key: "a-kakei-aomori",
@@ -3033,6 +3034,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-aomori",
     stats47Targets: ["/blog/aomori-food-culture", "/areas/02000"],
+    nextBestArticle: "a-kakei-akita",
   },
   {
     key: "a-kakei-hokkaido",
@@ -3046,6 +3048,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-hokkaido",
     stats47Targets: ["/blog/hokkaido-food-culture", "/areas/01000"],
+    nextBestArticle: "a-kakei-mie",
   },
   {
     key: "a-kakei-hiroshima",
@@ -3059,6 +3062,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-hiroshima",
     stats47Targets: ["/blog/hiroshima-food-culture", "/areas/34000"],
+    nextBestArticle: "a-kakei-toyama",
   },
   {
     key: "a-kakei-akita",
@@ -3072,6 +3076,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-akita",
     stats47Targets: ["/blog/akita-food-culture", "/areas/05000"],
+    nextBestArticle: "a-kakei-aomori",
   },
   {
     key: "a-kakei-chiba",
@@ -3085,6 +3090,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-chiba",
     stats47Targets: ["/blog/chiba-food-culture", "/areas/12000"],
+    nextBestArticle: "a-kakei-tokyo",
   },
   {
     key: "a-kakei-ehime",
@@ -3098,6 +3104,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ehime",
     stats47Targets: ["/blog/ehime-food-culture", "/areas/38000"],
+    nextBestArticle: "a-kakei-toyama",
   },
   {
     key: "a-kakei-fukui",
@@ -3111,6 +3118,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukui",
     stats47Targets: ["/blog/fukui-food-culture", "/areas/18000"],
+    nextBestArticle: "a-kakei-shizuoka",
   },
   {
     key: "a-kakei-fukuoka",
@@ -3124,6 +3132,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukuoka",
     stats47Targets: ["/blog/fukuoka-food-culture", "/areas/40000"],
+    nextBestArticle: "a-kakei-hyogo",
   },
   {
     key: "a-kakei-fukushima",
@@ -3137,6 +3146,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukushima",
     stats47Targets: ["/blog/fukushima-food-culture", "/areas/07000"],
+    nextBestArticle: "a-kakei-gifu",
   },
   {
     key: "a-kakei-gifu",
@@ -3150,6 +3160,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-gifu",
     stats47Targets: ["/blog/gifu-food-culture", "/areas/21000"],
+    nextBestArticle: "a-kakei-fukushima",
   },
   {
     key: "a-kakei-gunma",
@@ -3163,6 +3174,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-gunma",
     stats47Targets: ["/blog/gunma-food-culture", "/areas/10000"],
+    nextBestArticle: "a-kakei-fukushima",
   },
   {
     key: "a-kakei-hyogo",
@@ -3176,6 +3188,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-hyogo",
     stats47Targets: ["/blog/hyogo-food-culture", "/areas/28000"],
+    nextBestArticle: "a-kakei-osaka",
   },
   {
     key: "a-kakei-ibaraki",
@@ -3189,6 +3202,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ibaraki",
     stats47Targets: ["/blog/ibaraki-food-culture", "/areas/08000"],
+    nextBestArticle: "a-kakei-ishikawa",
   },
   {
     key: "a-kakei-ishikawa",
@@ -3202,6 +3216,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ishikawa",
     stats47Targets: ["/blog/ishikawa-food-culture", "/areas/17000"],
+    nextBestArticle: "a-kakei-ibaraki",
   },
   {
     key: "a-kakei-iwate",
@@ -3215,6 +3230,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-iwate",
     stats47Targets: ["/blog/iwate-food-culture", "/areas/03000"],
+    nextBestArticle: "a-kakei-tottori",
   },
   {
     key: "a-kakei-kagawa",
@@ -3228,6 +3244,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kagawa",
     stats47Targets: ["/blog/kagawa-food-culture", "/areas/37000"],
+    nextBestArticle: "a-kakei-iwate",
   },
   {
     key: "a-kakei-kagoshima",
@@ -3241,6 +3258,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kagoshima",
     stats47Targets: ["/blog/kagoshima-food-culture", "/areas/46000"],
+    nextBestArticle: "a-kakei-okayama",
   },
   {
     key: "a-kakei-kanagawa",
@@ -3254,6 +3272,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kanagawa",
     stats47Targets: ["/blog/kanagawa-food-culture", "/areas/14000"],
+    nextBestArticle: "a-kakei-tokushima",
   },
   {
     key: "a-kakei-kochi",
@@ -3267,6 +3286,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kochi",
     stats47Targets: ["/blog/kochi-food-culture", "/areas/39000"],
+    nextBestArticle: "a-kakei-tottori",
   },
   {
     key: "a-kakei-kumamoto",
@@ -3280,6 +3300,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kumamoto",
     stats47Targets: ["/blog/kumamoto-food-culture", "/areas/43000"],
+    nextBestArticle: "a-kakei-tokushima",
   },
   {
     key: "a-kakei-kyoto",
@@ -3293,6 +3314,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kyoto",
     stats47Targets: ["/blog/kyoto-food-culture", "/areas/26000"],
+    nextBestArticle: "a-kakei-kumamoto",
   },
   {
     key: "a-kakei-mie",
@@ -3306,6 +3328,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-mie",
     stats47Targets: ["/blog/mie-food-culture", "/areas/24000"],
+    nextBestArticle: "a-kakei-hokkaido",
   },
   {
     key: "a-kakei-miyagi",
@@ -3319,6 +3342,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-miyagi",
     stats47Targets: ["/blog/miyagi-food-culture", "/areas/04000"],
+    nextBestArticle: "a-kakei-kagawa",
   },
   {
     key: "a-kakei-miyazaki",
@@ -3332,6 +3356,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-miyazaki",
     stats47Targets: ["/blog/miyazaki-food-culture", "/areas/45000"],
+    nextBestArticle: "a-kakei-nagano",
   },
   {
     key: "a-kakei-nagano",
@@ -3345,6 +3370,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nagano",
     stats47Targets: ["/blog/nagano-food-culture", "/areas/20000"],
+    nextBestArticle: "a-kakei-yamaguchi",
   },
   {
     key: "a-kakei-nagasaki",
@@ -3358,6 +3384,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nagasaki",
     stats47Targets: ["/blog/nagasaki-food-culture", "/areas/42000"],
+    nextBestArticle: "a-kakei-wakayama",
   },
   {
     key: "a-kakei-nara",
@@ -3371,6 +3398,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nara",
     stats47Targets: ["/blog/nara-food-culture", "/areas/29000"],
+    nextBestArticle: "a-kakei-kanagawa",
   },
   {
     key: "a-kakei-niigata",
@@ -3384,6 +3412,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-niigata",
     stats47Targets: ["/blog/niigata-food-culture", "/areas/15000"],
+    nextBestArticle: "a-kakei-fukuoka",
   },
   {
     key: "a-kakei-oita",
@@ -3397,6 +3426,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-oita",
     stats47Targets: ["/blog/oita-food-culture", "/areas/44000"],
+    nextBestArticle: "a-kakei-ibaraki",
   },
   {
     key: "a-kakei-okayama",
@@ -3410,6 +3440,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-okayama",
     stats47Targets: ["/blog/okayama-food-culture", "/areas/33000"],
+    nextBestArticle: "a-kakei-kagoshima",
   },
   {
     key: "a-kakei-okinawa",
@@ -3423,6 +3454,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-okinawa",
     stats47Targets: ["/blog/okinawa-food-culture", "/areas/47000"],
+    nextBestArticle: "a-kakei-fukui",
   },
   {
     key: "a-kakei-osaka",
@@ -3436,6 +3468,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-osaka",
     stats47Targets: ["/blog/osaka-food-culture", "/areas/27000"],
+    nextBestArticle: "a-kakei-hyogo",
   },
   {
     key: "a-kakei-saga",
@@ -3449,6 +3482,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-saga",
     stats47Targets: ["/blog/saga-food-culture", "/areas/41000"],
+    nextBestArticle: "a-kakei-gifu",
   },
   {
     key: "a-kakei-saitama",
@@ -3462,6 +3496,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-saitama",
     stats47Targets: ["/blog/saitama-food-culture", "/areas/11000"],
+    nextBestArticle: "a-kakei-tokyo",
   },
   {
     key: "a-kakei-shiga",
@@ -3475,6 +3510,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shiga",
     stats47Targets: ["/blog/shiga-food-culture", "/areas/25000"],
+    nextBestArticle: "a-kakei-kyoto",
   },
   {
     key: "a-kakei-shimane",
@@ -3488,6 +3524,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shimane",
     stats47Targets: ["/blog/shimane-food-culture", "/areas/32000"],
+    nextBestArticle: "a-kakei-nagasaki",
   },
   {
     key: "a-kakei-shizuoka",
@@ -3501,6 +3538,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shizuoka",
     stats47Targets: ["/blog/shizuoka-food-culture", "/areas/22000"],
+    nextBestArticle: "a-kakei-fukui",
   },
   {
     key: "a-kakei-tochigi",
@@ -3514,6 +3552,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tochigi",
     stats47Targets: ["/blog/tochigi-food-culture", "/areas/09000"],
+    nextBestArticle: "a-kakei-ishikawa",
   },
   {
     key: "a-kakei-tokushima",
@@ -3527,6 +3566,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tokushima",
     stats47Targets: ["/blog/tokushima-food-culture", "/areas/36000"],
+    nextBestArticle: "a-kakei-kanagawa",
   },
   {
     key: "a-kakei-tokyo",
@@ -3540,6 +3580,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tokyo",
     stats47Targets: ["/blog/tokyo-food-culture", "/areas/13000"],
+    nextBestArticle: "a-kakei-saitama",
   },
   {
     key: "a-kakei-tottori",
@@ -3553,6 +3594,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tottori",
     stats47Targets: ["/blog/tottori-food-culture", "/areas/31000"],
+    nextBestArticle: "a-kakei-kochi",
   },
   {
     key: "a-kakei-toyama",
@@ -3566,6 +3608,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-toyama",
     stats47Targets: ["/blog/toyama-food-culture", "/areas/16000"],
+    nextBestArticle: "a-kakei-hiroshima",
   },
   {
     key: "a-kakei-wakayama",
@@ -3579,6 +3622,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-wakayama",
     stats47Targets: ["/blog/wakayama-food-culture", "/areas/30000"],
+    nextBestArticle: "a-kakei-nagasaki",
   },
   {
     key: "a-kakei-yamagata",
@@ -3592,6 +3636,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamagata",
     stats47Targets: ["/blog/yamagata-food-culture", "/areas/06000"],
+    nextBestArticle: "a-kakei-shiga",
   },
   {
     key: "a-kakei-yamaguchi",
@@ -3605,6 +3650,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamaguchi",
     stats47Targets: ["/blog/yamaguchi-food-culture", "/areas/35000"],
+    nextBestArticle: "a-kakei-nagano",
   },
   {
     key: "a-kakei-yamanashi",
@@ -3618,6 +3664,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamanashi",
     stats47Targets: ["/blog/yamanashi-food-culture", "/areas/19000"],
+    nextBestArticle: "a-kakei-oita",
   },
   {
     key: "b-kakei-academic-food",
