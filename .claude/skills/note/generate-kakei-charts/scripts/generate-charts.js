@@ -43,12 +43,12 @@ function generateCategoryRatioSvg(data) {
   const { _meta, categoryBreakdown } = data;
   const cats = categoryBreakdown.slice(0, 10);
 
-  const W = 600;
+  const W = 960;
   const rowH = 32;
   const barH = 22;
   const topMargin = 62;
   const bottomMargin = 25;
-  const labelW = 108;
+  const labelW = 150;
   const barLeft = labelW + 8;
   const barRight = W - 12;
   const barAreaW = barRight - barLeft;
@@ -118,8 +118,10 @@ function renderColumn(col, n, rowH, startY, colX, colW) {
   const nameFontSize = 14;
   const valueFontSize = 13;
   const circleFontSize = 14;
-  const barStartX = colX + colW * 0.52;
-  const barMaxW = colW * 0.44;
+  // 名前列を優先して広く取る (0.52/0.44 だと長い品目名が倍率と重なって
+  // 打ち切らざるを得なかった)。バー領域は右端に残った幅で描く。
+  const barStartX = colX + colW * 0.68;
+  const barMaxW = colW * 0.27;
   const valueEndX = barStartX - 10;
   const barH = 16;
   const FONT_COL = "'Noto Sans JP', sans-serif";
@@ -141,17 +143,19 @@ function renderColumn(col, n, rowH, startY, colX, colW) {
     svg += `  <circle cx="${colX + 28}" cy="${cy}" r="${circleR}" fill="${col.color}"/>`;
     svg += `  <text x="${colX + 28}" y="${cy + circleFontSize * 0.36}" text-anchor="middle" font-family="${FONT_COL}" font-size="${circleFontSize}" font-weight="bold" fill="#ffffff">${item.rank}</text>\n`;
     // Item name
-    // 品目名は倍率ラベルの手前で打ち切る (長い名前が倍率と重なって読めなくなるため)。
     // 全角 1em / 半角 0.55em で幅を見積もる。
     const nameStartX = colX + 28 + circleR + 8;
     const nameMaxPx = valueEndX - 46 - nameStartX;
     const widthOf = (t) => [...t].reduce((w, ch) => w + (/[\x00-\x7F]/.test(ch) ? 0.55 : 1) * nameFontSize, 0);
-    let shown = item.name;
-    if (widthOf(shown) > nameMaxPx) {
-      while (shown.length > 1 && widthOf(shown + "\u2026") > nameMaxPx) shown = shown.slice(0, -1);
-      shown += "\u2026";
+    const nameWidth = widthOf(item.name);
+    if (nameWidth > nameMaxPx) {
+      throw new Error(
+        "extreme-items chart: item name \"" + item.name + "\" (\u2248" + Math.round(nameWidth) +
+          "px) does not fit in the " + Math.round(nameMaxPx) + "px name column (colW=" + colW +
+          "). Widen the name-column ratio in renderColumn() rather than truncating."
+      );
     }
-    svg += `  <text x="${nameStartX}" y="${cy + nameFontSize * 0.36}" font-family="${FONT_COL}" font-size="${nameFontSize}" font-weight="bold" fill="#1f2937">${esc(shown)}</text>\n`;
+    svg += `  <text x="${nameStartX}" y="${cy + nameFontSize * 0.36}" font-family="${FONT_COL}" font-size="${nameFontSize}" font-weight="bold" fill="#1f2937">${esc(item.name)}</text>\n`;
     // Value
     svg += `  <text x="${valueEndX}" y="${cy + valueFontSize * 0.36}" text-anchor="end" font-family="${FONT_COL}" font-size="${valueFontSize}" fill="${col.color}" font-weight="600">${item.label}</text>\n`;
     // Bar
@@ -165,14 +169,16 @@ function renderColumn(col, n, rowH, startY, colX, colW) {
 function generateExtremeItemsSvg(data) {
   const { _meta, topRatioItems, bottomRatioItems } = data;
   const filteredBottom = bottomRatioItems.filter((i) => i.ratio > 0);
-  const N = 5;
+  const N = 10;
   const tops = topRatioItems.slice(0, N);
   const bots = filteredBottom.slice(0, N);
 
-  const W = 960;
-  const COL_W = 432;
+  // COL_W は renderColumn の名前列比 (0.68) が最長品目名 (実測 ≈224px、
+  // 「自動車保険料以外の輸送機器保険料」等) を余裕をもって収める幅に合わせて広げてある。
+  const W = 1176;
+  const COL_W = 540;
   const LEFT_X = 30;
-  const RIGHT_X = 498;
+  const RIGHT_X = 606;
   const rowH = 56;
   const headerY = 80;
   const startY = headerY + 44;
