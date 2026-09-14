@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "profile": "gis-business-guide",
+  "sourceKey": "gis-business-guide",
+  "edition": "2022",
+  "input": {
+    "documents": 1,
+    "pages": 230,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 230,
+  "resolvedCount": 230,
+  "resolutionCoverage": 1,
+  "actionableCount": 18,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 212,
+    "context-only": 18
+  },
+  "byKind": {
+    "page": 230
+  },
+  "publicOriginalReuse": "forbidden"
+}

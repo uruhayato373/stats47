@@ -663,7 +663,9 @@ async function buildPageSource(context) {
         processing,
       };
     }
-    const prefecture = detectedPrefecture(text);
+    const prefecture = context.profile.sourceKey === 'prefecture-databook'
+      ? detectedPrefecture(text)
+      : null;
     if (prefecture) {
       const [code, name] = prefecture;
       return {

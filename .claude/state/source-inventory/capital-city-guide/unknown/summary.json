@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "profile": "capital-city-guide",
+  "sourceKey": "capital-city-guide",
+  "edition": "unknown",
+  "input": {
+    "documents": 1,
+    "pages": 150,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 150,
+  "resolvedCount": 150,
+  "resolutionCoverage": 1,
+  "actionableCount": 0,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 150
+  },
+  "byKind": {
+    "page": 150
+  },
+  "publicOriginalReuse": "forbidden"
+}

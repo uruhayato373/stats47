@@ -89,9 +89,9 @@ test('source vault profiles follow the canonical private Drive hierarchy', async
       'money-health-ranking': '参考文献/おカネと健康 都道府県ランキング/版不明',
       'yabai-kenmin-ranking': '参考文献/全国47都道府県やばい県民ランキング/版不明',
       'amusement-shop-density': '参考文献/全国都道府県遊技営業店密度ランキング/版不明',
-      'gis-business-guide': '参考文献/最新GISのビジネス活用がよ〜くわかる本/版不明',
+      'gis-business-guide': '参考文献/最新GISのビジネス活用がよ〜くわかる本/2022年版',
       'prefecture-ranking-consumption':
-        '参考文献/統計から読み解く47都道府県ランキング 消費・子供・スポーツ編/版不明',
+        '参考文献/統計から読み解く47都道府県ランキング 消費・子供・スポーツ編/2020年版',
       'average-income-ranking': '参考文献/都道府県別平均年収ランキング/版不明',
     }
   );

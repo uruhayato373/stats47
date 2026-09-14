@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "profile": "yabai-kenmin-ranking",
+  "sourceKey": "yabai-kenmin-ranking",
+  "edition": "unknown",
+  "input": {
+    "documents": 1,
+    "pages": 50,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 50,
+  "resolvedCount": 50,
+  "resolutionCoverage": 1,
+  "actionableCount": 0,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 50
+  },
+  "byKind": {
+    "page": 50
+  },
+  "publicOriginalReuse": "forbidden"
+}

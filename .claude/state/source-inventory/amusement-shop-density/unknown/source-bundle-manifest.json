@@ -3,7 +3,7 @@
   "profile": "amusement-shop-density",
   "sourceKey": "amusement-shop-density",
   "edition": "unknown",
-  "revision": 2,
+  "revision": 3,
   "sourceRootName": "全国都道府県遊技営業店密度ランキング",
   "storage": {
     "provider": "google-drive",
@@ -11,98 +11,248 @@
     "layout": "expanded",
     "folderPath": "参考文献/全国都道府県遊技営業店密度ランキング/版不明"
   },
-  "contentSha256": "9caca84143025feeddaee2e02a92a2628de092ec13278d01d1659f1b013eee9b",
-  "fileCount": 17,
+  "contentSha256": "fa95a4d96d478c01239aad323065cf6dd620dcf717c2e6c9bff931b319b8addb",
+  "fileCount": 47,
   "componentCounts": {
-    "markdown": 0,
+    "markdown": 15,
     "figures": 0,
     "pageImages": 15,
     "ocrRaw": 0,
-    "transcripts": 0,
+    "transcripts": 15,
     "pdfs": 1,
     "auxiliary": 1
   },
-  "createdAt": "2026-09-09T22:34:48.022Z",
+  "createdAt": "2026-09-14T10:56:12.927Z",
   "files": [
     {
+      "path": "md/p0001.md",
+      "bytes": 166,
+      "sha256": "b75fe24d3c0aae23331d4e03927a682c74be999fa52dd3362a0c1f696fa82863"
+    },
+    {
+      "path": "md/p0002.md",
+      "bytes": 600,
+      "sha256": "0e168e7150d7a63b25881fb46ad825b3b1d44229bc8e144dd7618ffdad6b070a"
+    },
+    {
+      "path": "md/p0003.md",
+      "bytes": 277,
+      "sha256": "ab6dedf064261f939865fa565417ee3635491d8d1fc83d0f938a70e16983e0eb"
+    },
+    {
+      "path": "md/p0004.md",
+      "bytes": 183,
+      "sha256": "48209dcdeab03b69068aac70a1eb1115d77987ae7f17d45856f8ccf1d5df17be"
+    },
+    {
+      "path": "md/p0005.md",
+      "bytes": 360,
+      "sha256": "0c5a06bd2f4e0d081ecbfa83f603509f6148210268649f609a19e77f5334f69e"
+    },
+    {
+      "path": "md/p0006.md",
+      "bytes": 2282,
+      "sha256": "a9d5f3d780c4f6d6dd3a0e254027df9807373eb9187c3bcbca029ea5a5162f10"
+    },
+    {
+      "path": "md/p0007.md",
+      "bytes": 938,
+      "sha256": "eeafa1a9c4c16e1e2f8ad4007a4f0f936e21ff3baa0fbfe7571f56617846ab05"
+    },
+    {
+      "path": "md/p0008.md",
+      "bytes": 40,
+      "sha256": "40c217724e3353c474fad5e9d2ca861323b08e3de0b5a35bb744fc3168f55a28"
+    },
+    {
+      "path": "md/p0009.md",
+      "bytes": 40,
+      "sha256": "3d7dd09d9f72e1641b659c0e32579a3108665fab76377ee0066d857a24ae35d8"
+    },
+    {
+      "path": "md/p0010.md",
+      "bytes": 41,
+      "sha256": "a31c60def25d636de7dae3cc489d347f9c2725b8d4d51f4434e23661b072e066"
+    },
+    {
+      "path": "md/p0011.md",
+      "bytes": 41,
+      "sha256": "5858f90caf550f35873e2de35a3e07acff732577b25fb655d09d01a7aa4ec966"
+    },
+    {
+      "path": "md/p0012.md",
+      "bytes": 41,
+      "sha256": "9fd1f6f0a189e4f032637eb134aba901e7d93e05d696e9c142a62087dc13618d"
+    },
+    {
+      "path": "md/p0013.md",
+      "bytes": 41,
+      "sha256": "cfd950d35f61709aa23fc7fa17bee23ef65866eb9bf5bdc026364c8ab95cf3af"
+    },
+    {
+      "path": "md/p0014.md",
+      "bytes": 41,
+      "sha256": "8f4982cd70b9c4eb33ee3a6d42920d8025fccaf98a2f0f488e94ad7f2565bbd5"
+    },
+    {
+      "path": "md/p0015.md",
+      "bytes": 41,
+      "sha256": "5c6700f80908cc44e7a219256837d5c6ae92250882f2e14c9ae08349d0dd2a59"
+    },
+    {
       "path": "page-dims.json",
-      "bytes": 591,
-      "sha256": "8efe6939e75c57cfc87c6972671a5dbe116aa5d88766402f8019deea703f7baf"
+      "bytes": 825,
+      "sha256": "6abb1712e59ef2de417565f01f42b9779cc01739a4506db8493a4f9f2e98dae8"
     },
     {
       "path": "pages/p0001.jpg",
-      "bytes": 150400,
-      "sha256": "11ddc3674691b74a84864d1041595333f27725487cc4debbbd8c6df00bf59bc8"
+      "bytes": 126103,
+      "sha256": "d32daaaec89d8a261059246b3b93fc8a8f0e6efa862f2634f9d6e7092da5c7fa"
     },
     {
       "path": "pages/p0002.jpg",
-      "bytes": 379987,
-      "sha256": "047b6b377a80ffe20c9580373c738e34530df08875d519c956be0880216c1ca1"
+      "bytes": 311920,
+      "sha256": "19d6654ba2869ac3f083751865a08e885bbf6675fffd16c10b8c1caf547dfe75"
     },
     {
       "path": "pages/p0003.jpg",
-      "bytes": 379757,
-      "sha256": "ea71cc2356be92f603a4a37856bc35cd93b3245b738ab252d869d2e6e27ef549"
+      "bytes": 304748,
+      "sha256": "2f38d85776fe55970765fd8635ba3c1587db6e0a3347eabd90a5f1dc71be824c"
     },
     {
       "path": "pages/p0004.jpg",
-      "bytes": 364162,
-      "sha256": "04f49b0e948e40bd5400251d8fdc7fbd10e6e9e18da45dd3e5951af50012bd0f"
+      "bytes": 297305,
+      "sha256": "b3482d384e6fa61d1bbea6f094551e60341c3a4762652293410e738faf9229e6"
     },
     {
       "path": "pages/p0005.jpg",
-      "bytes": 347702,
-      "sha256": "399dba74769c0c0b2734568810aa3666585b19aa4c6b8c2679c474d3e1cd99ed"
+      "bytes": 291479,
+      "sha256": "caba7fdc0e3b518c473916df5d163698b32d82e091a258edf2190b06db6d421f"
     },
     {
       "path": "pages/p0006.jpg",
-      "bytes": 584154,
-      "sha256": "9619aa4c85d9775100cc5f1a01642ada6b1740f42ecf7ca0370ce8d0684e4bb6"
+      "bytes": 510281,
+      "sha256": "c12a052719c3e2cc05f394790ab4470b241d8999ee8f1e2c67a945580cac9b95"
     },
     {
       "path": "pages/p0007.jpg",
-      "bytes": 283086,
-      "sha256": "622b05f5642119247a0c84a0a857da82c4169ab0f14649872cb184fc81401fa4"
+      "bytes": 244506,
+      "sha256": "d90675d7327d552cae8524e292ebdb523ce48f2855894f53f3d04522bf2c0e35"
     },
     {
       "path": "pages/p0008.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
     },
     {
       "path": "pages/p0009.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
     },
     {
       "path": "pages/p0010.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
     },
     {
       "path": "pages/p0011.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
     },
     {
       "path": "pages/p0012.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
     },
     {
       "path": "pages/p0013.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
     },
     {
       "path": "pages/p0014.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
     },
     {
       "path": "pages/p0015.jpg",
-      "bytes": 260492,
-      "sha256": "0a7c97a5c2a5211f612dc76dccde8d7a17414e1641ba5428550e8918738d978f"
+      "bytes": 228233,
+      "sha256": "4ce483545dd0a325dc7e5cb82f76023eaed3ba937bc9bd5954b81f8cd25e932c"
+    },
+    {
+      "path": "transcripts/p0001.txt",
+      "bytes": 119,
+      "sha256": "e600753d6fb695483543c3157360f12404fe483b2434f801da47763ffd558dc8"
+    },
+    {
+      "path": "transcripts/p0002.txt",
+      "bytes": 903,
+      "sha256": "c27c550bbadf68c6a8c4803809fb0f4150c57d45eb5eb5fe6fcf943115447010"
+    },
+    {
+      "path": "transcripts/p0003.txt",
+      "bytes": 742,
+      "sha256": "aa132447efd5c0c6fb83c813c02aee5d8006ec3ea60a4134a6abe8aac8e1c882"
+    },
+    {
+      "path": "transcripts/p0004.txt",
+      "bytes": 617,
+      "sha256": "9b5317837a073554de1fcedf6a7e5133559003f487c91fad5e7b4cd8d48d5091"
+    },
+    {
+      "path": "transcripts/p0005.txt",
+      "bytes": 672,
+      "sha256": "780aabd7ece6fca97ac3aab8c51ee867d6d1e06f8a3fcebfd5acea022a8d9439"
+    },
+    {
+      "path": "transcripts/p0006.txt",
+      "bytes": 2288,
+      "sha256": "843398f52c7b5043c015b7c3ee06977cb704fccb88bb98bdb27279cfd89400f6"
+    },
+    {
+      "path": "transcripts/p0007.txt",
+      "bytes": 980,
+      "sha256": "e622182b620ab4ee25c7e77275f4ec5edde8a4bceb7f8e09f78e82ab12064a27"
+    },
+    {
+      "path": "transcripts/p0008.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
+    },
+    {
+      "path": "transcripts/p0009.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
+    },
+    {
+      "path": "transcripts/p0010.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
+    },
+    {
+      "path": "transcripts/p0011.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
+    },
+    {
+      "path": "transcripts/p0012.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
+    },
+    {
+      "path": "transcripts/p0013.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
+    },
+    {
+      "path": "transcripts/p0014.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
+    },
+    {
+      "path": "transcripts/p0015.txt",
+      "bytes": 700,
+      "sha256": "833d49761e91d0d7c68df698ff2b9f4e485f2b9a1c5307e0b80b348d7c412aa5"
     },
     {
       "path": "全国都道府県遊技営業店密度ランキング.pdf",

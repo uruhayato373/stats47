@@ -29,9 +29,9 @@ test('all reference inventories have 100% resolution coverage', async () => {
   const pending = checked.filter((profile) => profile.inventory === 'pending');
   assert.deepEqual(
     built.map((profile) => profile.profile).sort(),
-    ['claude-skills-guide-2026', 'japan-zue', 'kakei-marketing-2015', 'prefecture-databook-2021', 'prefecture-deviation']
+    ['amusement-shop-density', 'average-income-ranking', 'capital-city-guide', 'claude-skills-guide-2026', 'gis-business-guide', 'japan-zue', 'kakei-marketing-2015', 'money-health-ranking', 'prefecture-databook-2021', 'prefecture-deviation', 'prefecture-ranking-consumption', 'yabai-kenmin-ranking']
   );
-  assert.equal(pending.length, 7);
+  assert.equal(pending.length, 0);
   for (const profile of built) {
     assert.equal(profile.valid, true);
     assert.equal(profile.coverage, 1);
