@@ -1,13 +1,22 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-13",
+  "date": "2026-09-14",
   "period": {
-    "periodStart": "2026-09-04",
-    "periodEnd": "2026-09-10",
+    "periodStart": "2026-09-05",
+    "periodEnd": "2026-09-11",
     "windowDays": 7
   },
-  "inputHash": "2977fb8959ee1256d3c965fc821ce4a72693228a3630dbcd6145cf8bdb5586c2",
+  "inputHash": "a2adf531f3247b21c1ae9e4393baaed30f80c20b8f144cdbea282ad7749ef3dc",
   "movements": [
+    {
+      "keyword": "自動車保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 70.57142857142857,
+      "after": 34.2,
+      "beforeImpressions": 7,
+      "impressions": 10,
+      "change": 36.37142857142857
+    },
     {
       "keyword": "完全失業率",
       "targetPath": "/blog/unemployment-structure",
@@ -18,31 +27,49 @@
       "change": -33
     },
     {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 76.56521739130434,
+      "after": 46.18518518518518,
+      "beforeImpressions": 23,
+      "impressions": 27,
+      "change": 30.38003220611916
+    },
+    {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 29.57894736842105,
+      "after": 57.9,
+      "beforeImpressions": 38,
+      "impressions": 20,
+      "change": -28.321052631578947
+    },
+    {
       "keyword": "北海道 年収",
       "targetPath": "/areas/01000/occupation-salary",
-      "before": 48,
-      "after": 20.333333333333332,
-      "beforeImpressions": 1,
-      "impressions": 9,
-      "change": 27.666666666666668
+      "before": 44.5,
+      "after": 17.75,
+      "beforeImpressions": 2,
+      "impressions": 8,
+      "change": 26.75
     },
     {
-      "keyword": "出生率 ランキング 日本",
-      "targetPath": "/blog/fertility-rate-prefecture-gap",
-      "before": 28,
-      "after": 1.6129032258064515,
+      "keyword": "県債 利率 ランキング",
+      "targetPath": "/blog/local-government-debt-burden",
+      "before": 39,
+      "after": 12.333333333333334,
       "beforeImpressions": 1,
-      "impressions": 31,
-      "change": 26.387096774193548
+      "impressions": 6,
+      "change": 26.666666666666664
     },
     {
-      "keyword": "県民所得 ランキング",
-      "targetPath": "/blog/per-capita-income-gap",
-      "before": 48,
-      "after": 21.785714285714285,
-      "beforeImpressions": 1,
-      "impressions": 14,
-      "change": 26.214285714285715
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 29.714285714285715,
+      "after": 56.285714285714285,
+      "beforeImpressions": 7,
+      "impressions": 7,
+      "change": -26.57142857142857
     },
     {
       "keyword": "漁かく量",
@@ -54,53 +81,35 @@
       "change": -26
     },
     {
-      "keyword": "自動車保険 加入率",
+      "keyword": "任意保険 加入 率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 63,
-      "after": 37.7,
-      "beforeImpressions": 9,
-      "impressions": 10,
-      "change": 25.299999999999997
+      "before": 76.33333333333333,
+      "after": 51.57142857142857,
+      "beforeImpressions": 6,
+      "impressions": 7,
+      "change": 24.76190476190476
     },
     {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 75.6086956521739,
-      "after": 51.285714285714285,
-      "beforeImpressions": 23,
-      "impressions": 28,
-      "change": 24.322981366459622
-    },
-    {
-      "keyword": "出生率ランキング 日本",
-      "targetPath": "/blog/fertility-rate-prefecture-gap",
-      "before": 25,
-      "after": 1,
+      "keyword": "和歌山県 平均年収",
+      "targetPath": "/areas/30000/occupation-salary",
+      "before": 34,
+      "after": 11,
       "beforeImpressions": 1,
-      "impressions": 6,
-      "change": 24
-    },
-    {
-      "keyword": "年収 高知",
-      "targetPath": "/areas/39000/occupation-salary",
-      "before": 46.25,
-      "after": 22.25,
-      "beforeImpressions": 4,
-      "impressions": 4,
-      "change": 24
-    },
-    {
-      "keyword": "県債 利率 ランキング",
-      "targetPath": "/blog/local-government-debt-burden",
-      "before": 39,
-      "after": 16,
-      "beforeImpressions": 1,
-      "impressions": 2,
+      "impressions": 1,
       "change": 23
     }
   ],
   "verdicts": [],
-  "selected": null,
+  "selected": {
+    "keyword": "外国人",
+    "targetPath": "/blog/foreign-residents-diversity-map",
+    "rank": 2.9418103448275863,
+    "impressions": 464,
+    "clicks": 37,
+    "group": 5,
+    "previousMethod": null,
+    "editableFile": null
+  },
   "observing": [
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",

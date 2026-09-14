@@ -10,6 +10,11 @@
       "date": "2026-09-13",
       "file": "data/seo/rank-history/2026-09-13.json",
       "sha256": "3f1547d02de41e5d9591dfa9d2db46633473ef574f3fa19f44f2fe0ae25bf836"
+    },
+    {
+      "date": "2026-09-14",
+      "file": "data/seo/rank-history/2026-09-14.json",
+      "sha256": "f93c65bb7a85d713ababb4e29e98ba470042610f6ffbcf0da52559ebab2154c1"
     }
   ]
 }
