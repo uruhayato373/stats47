@@ -121,6 +121,11 @@ export const REAL_INCOME_SET: IndicatorSet = {
       "role": "context"
     },
     {
+      "rankingKey": "avg-propensity-to-consume-worker-households",
+      "shortLabel": "平均消費性向",
+      "role": "context"
+    },
+    {
       "rankingKey": "household-survey-consumption-expenditure",
       "shortLabel": "消費支出（全費目）",
       "role": "secondary"

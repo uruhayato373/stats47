@@ -116,6 +116,17 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
         "surveyedAt": "2026-09-08",
         "rationale": "既存の通勤流動図に、就業・通学地への集中を読むための基準を付ける。"
       }
+    },
+    {
+      "rankingKey": "day-time-population",
+      "shortLabel": "昼間人口",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "昼夜間人口比率(率)の実数根拠として、就業地への流入規模を詳細索引に保持する。"
+      }
     }
   ],
   "charts": [

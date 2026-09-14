@@ -91,6 +91,11 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "sex-ratio-total",
+      "shortLabel": "人口性比",
+      "role": "context"
+    },
+    {
       "rankingKey": "interprefecture-net-migration-age15to24",
       "shortLabel": "15〜24歳の県間転入超過数",
       "role": "secondary"

@@ -182,6 +182,17 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "surveyedAt": "2026-09-08",
         "rationale": "転出者数は「出生と死亡・転入と転出の内訳」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
       }
+    },
+    {
+      "rankingKey": "sex-ratio-total",
+      "shortLabel": "人口性比",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "男女構成比は転入超過・年齢構成と合わせて読む背景指標として詳細索引に保持する。"
+      }
     }
   ],
   "metricGroups": [

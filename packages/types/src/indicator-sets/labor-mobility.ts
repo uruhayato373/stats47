@@ -61,6 +61,11 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "day-time-population",
+      "shortLabel": "昼間人口",
+      "role": "context"
+    },
+    {
       "rankingKey": "non-regular-employment-rate",
       "shortLabel": "非正規雇用率",
       "role": "secondary"

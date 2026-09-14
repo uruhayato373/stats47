@@ -702,36 +702,6 @@ updated: 2026-09-14
 - **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
   `rights-hold`または`primary-source-unavailable`で停止する。remote R2、git push、PR、deploy、外部公開は別途承認。
 
-### [KAKEI-MARKETING-CONTENT-01] 『マーケティングに使える「家計調査」』の分析・論点80件をstats47へ段階展開する
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:inventory:check] [起票:2026-09-05]
-
-- **owner**: 台帳は`open-data-curator`、new-metricは`data-ingester`（実在検証は`estat-researcher`）、evidenceTopicsは`theme-designer`、記事は`article-writer`→`blog-critic`。
-- **現状証拠**: profile `kakei-marketing-2015`（Drive `参考文献/マーケティングに使える家計調査/2015年版`、bundle r3 = PDF + ページ画像307 + 生OCR307 + Markdown文字起こし307 + 図表crop113、`stage-status` で S0〜S4 到達）を全307ページOCR（jpn_vert）し、
-  `packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json` に分析・論点33件＋県庁所在市47件を authored、
-  `.claude/state/source-inventory/kakei-marketing/2015/` は coverage 100%（combined-analysis 259 / new-metric 13 / reuse 3 / context-only 27 / not-applicable 5）。
-  wave 0 として education-culture・real-income・fishery-marine に evidenceTopics を各1件追加済み（`validate:catalog` green）。契約は
-  `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md` §4.4。
-- **進捗（2026-09-06）**: step 2〜5 は記事側が完了。既存記事更新 wave・新規記事 wave A/B の全記事と
-  `<pref>-food-culture` 47本すべてが quality-gate + blog-critic PASS で R2 公開済み（live md5 一致で実測）。
-  47本すべての live 本文に「数量×価格で分解する」H2 がある。接地器 `build-kakei-quantity-price.mjs` は
-  未 commit だったので `countsNote`（counts は「他の〜」残余品目を除いた数）付きで develop へ載せた。
-- **次（実行順）**:
-  1. **残るのは deploy のみ**: new-metric 2件（`academic-achievement-test-average-rate` / `information-communication-expenditure`
-     → `information-communication-coefficient`）は config・R2・KNOWN/SITEMAP まで反映済み。
-     develop→main PR → CI green → merge → CDN purge → Googlebot UA で `/ranking/academic-achievement-test-average-rate` /
-     `/ranking/information-communication-coefficient` / `/ranking/information-communication-expenditure` が 200
-     （title が「見つかりません」でない）を実測する（`ranking-publisher` 手順 6〜8）。
-     既存記事の改稿（`income-quintile-education` 等の prerender 済みページ）もこの deploy で本番反映される。
-  2. inventory の `combined-analysis` 各項目が記事・theme・area のいずれかへ接続されているかを
-     管理画面 `/content/references` で確認し、未接続分だけを次の wave に回す。
-- **停止条件**: 書籍の数値・図表・本文を公開物へ流さない。全国集計（五分位・年齢階級・月次）を/rankingへ載せない。
-  県庁所在市の値を県全体として書かない。一次資料で再取得できない項目は`primary-source-unavailable`へ戻す。
-  R2 write・deploy・SNS公開は別途承認。
-- **完了条件**: new-metric 2件が`validate:config`/`validate:years` green で公開パイプラインに乗り、既存記事更新wave と
-  新規記事wave A の全記事が quality-gate + critic PASS、県別シリーズ47本が公開済みで、inventoryの`combined-analysis`各項目が
-  記事・theme・areaのいずれかへ実在証跡で接続されている（管理画面`/content/references`で確認）。
-
 ### [REFERENCE-SOURCE-KINDLE-BATCH-01] Drive直下にあったKindleスキャン7冊の書誌確定とS2以降
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:check] [起票:2026-09-10]
@@ -761,30 +731,20 @@ updated: 2026-09-14
 <!-- reference-theme-plans:start -->
 | metricKey | title | targetTheme | status | hypothesis |
 | --- | --- | --- | --- | --- |
-| general-households | 一般世帯数 | population-dynamics | draft | 人口総数だけでは見えない世帯構造を人口動態の基礎軸に加える |
 | projected-population-2020 | 将来推計人口 | population-dynamics | blocked | 将来人口と現在の人口動態を同じ時間軸で比較する |
-| area-ratio-of-total | 面積割合 | climate | draft | 国土面積の差を気候・居住条件の解釈に使う前提軸として置く |
-| sex-ratio-total | 人口性比 | population-dynamics | draft | 男女構成の地域差を人口移動・年齢構成と合わせて読む |
-| day-time-population | 昼間人口 | labor-mobility | draft | 就業地への流入規模を通勤移動の絶対数コンテキストとして示す |
 | gross-prefectural-product-expenditure-nominal-h27 | 県内総生産 | local-economy | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する |
-| electricity-generation-capacity | 発電電力量 | local-economy | draft | 電力供給規模と地域の産業基盤を並べて読む |
-| avg-propensity-to-consume-worker-households | 平均消費性向 | real-income | draft | 所得のうち消費へ回る割合を地域別の家計行動として比較する |
-| municipality-count | 市町村数 | local-finance | draft | 自治体数を行政サービス・財政構造の基礎条件として示す |
-| agricultural-employment-population | 農業就業人口 | local-economy | draft | 農業産出額と担い手規模を組み合わせて産業構造を読む |
-| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | 製造品出荷額だけでは見えない生産拠点の厚みを示す |
-| households-on-public-assistance | 生活保護被保護実世帯数 | local-finance | draft | 実数を制度利用者の優劣にせず、人口規模と自治体財政の基礎条件として読む |
-| infant-deaths | 乳児死亡数 | healthcare | draft | 小標本の年次変動を明示し、実数と出生千対を分けて医療・人口動態を読む |
-| infant-mortality-rate-per-1000-births | 乳児死亡率 | healthcare | draft | 出生千対の率を単年順位へ短絡せず、複数年推移と出生数を合わせて読む |
-| average-life-expectancy-female-20 | 20歳女性の平均余命 | healthcare | draft | 出生時平均余命と年齢別平均余命を分離し、女性20歳時点の地域差を読む |
-| average-life-expectancy-female-65 | 65歳女性の平均余命 | healthcare | draft | 高齢期の平均余命を出生時平均余命と混同せず、医療・生活条件と合わせて読む |
-| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | 男女・年齢別系列を同じ値として扱わず、男性系列の地域差を検証する |
 | students-requiring-japanese-instruction | 日本語指導が必要な児童生徒数 | education-culture | blocked | 国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む |
+| general-households | 一般世帯数 | population-dynamics | draft | [却下 2026-09-14] 人口動態=増減メカニズムと無関係、世帯構造は別テーマ向き |
+| area-ratio-of-total | 面積割合 | climate | draft | [却下 2026-09-14] 面積割合は気候(気象)と直接関係せず地理指標 |
+| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | [却下 2026-09-14] 登録済みmanufacturing-establishmentsと同一statsDataId重複、年度が古い |
+| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | [却下 2026-09-14] subtitle年齢欠落・値63年が0歳時点と矛盾、metric要修正が先 |
 <!-- reference-theme-plans:end -->
 
-- **ブログ下書き**: `docs/21_ブログ記事原稿/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。
-- **次**: テーマは残るdraftの15指標を既存カタログへ採択する順序を需要と重複で決める。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
+- **2026-09-14 テーマ企画14件を判定 (theme-designer)**: 採択11件をcontext roleでThemeCatalogへ追加 (`sex-ratio-total`→population-dynamics、`day-time-population`→labor-mobility、`electricity-generation-capacity`/`agricultural-employment-population`→local-economy、`avg-propensity-to-consume-worker-households`→real-income、`municipality-count`/`households-on-public-assistance`→local-finance、`infant-deaths`/`infant-mortality-rate-per-1000-births`/`average-life-expectancy-female-20`/`average-life-expectancy-female-65`→healthcare)。却下3件: `general-households`(人口動態=増減メカニズムと無関係、世帯構造テーマ向き)、`area-ratio-of-total`(気候テーマと面積は無関係、landweatherカテゴリのまま)、`number-of-establishments-manufacturing`(登録済み`manufacturing-establishments`と同一statsDataId・年度が古い重複)、`average-life-expectancy-male`(subtitleに年齢欠落・値63年が0歳時点と矛盾し要metric修正)。`generate:catalog`→`validate:catalog`(0 error/0 warn)→`tsc --noEmit -p apps/web/tsconfig.json`(0 error)まで確認済み。
+- **ブログ下書き**: `docs/21_ブログ記事原稿/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。`general-households`/`number-of-establishments-manufacturing`は却下済みのため、該当2本のペア構成をarticle-writerが着手前に見直す。
+- **次**: blocked 3件はactiveな公開metricが出た時点で再判定する。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
 - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
-- **完了条件**: activeなテーマ企画19件が採択または理由付き不採用となり、blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
+- **完了条件**: blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 
