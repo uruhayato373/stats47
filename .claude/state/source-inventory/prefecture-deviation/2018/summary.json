@@ -7,15 +7,18 @@
     "documents": 6,
     "pages": 103,
     "extractionComplete": true,
-    "internalCropCount": 1
+    "internalCropCount": 0
   },
   "itemCount": 103,
   "resolvedCount": 103,
   "resolutionCoverage": 1,
-  "actionableCount": 0,
-  "blockedCount": 103,
+  "actionableCount": 56,
+  "blockedCount": 44,
   "byResolution": {
-    "rights-hold": 103
+    "primary-source-unavailable": 44,
+    "combined-analysis": 51,
+    "not-applicable": 3,
+    "context-only": 5
   },
   "byKind": {
     "page": 103

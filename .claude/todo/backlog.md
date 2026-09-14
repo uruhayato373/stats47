@@ -683,26 +683,26 @@ updated: 2026-09-14
 - **完了条件**: GA4 の `link_position=rakuten-sidebar` が家計調査ページで取れ、CTR が
   native 枠と比較できる。
 
-### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する（家計調査書籍は KAKEI-MARKETING-CONTENT-01）
+### [PREFECTURE-DEVIATION-S5-01] 『47都道府県の偏差値』の一次資料候補25件をmetric/theme/ranking候補へ展開する
 
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:ready] [起票:2026-08-29]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:test] [起票:2026-09-15]
 
-- **owner**: 全体は`open-data-curator`、2021都道府県DataBookは`area-curator`、Claudeスキル構築ガイドは`knowledge-curator`。
-- **現状証拠**: 全ページOCR・内部crop・解決台帳を完了。DataBook 8 PDF / 580ページは`combined-analysis` 60 /
-  `context-only` 19 / `not-applicable` 501、偏差値資料6 PDF / 103ページは`rights-hold` 103、Claudeガイド
-  1 PDF / 33ページは`context-only` 7 / `not-applicable` 26。3資料ともresolution coverage 100%。
-  DataBook は 2026-09-14 に S1 (contentCrop 付き) → S2 (OCR 580 + Markdown 580) → S3 (crop 235) を revision 3 として
-  Drive へ配置し `stage-status` で S0〜S4 到達。台帳は同日に再 build し、県ページ判定が OCR テキストの単一県名検出
-  (`detectedPrefecture`) に依存するため 34 ページの resolution が入れ替わった (表紙が県候補になる等の誤判定は新旧双方にある)。
-  area wave では `md/<doc>/pNNNN.md` の frontmatter (`kind`) と見出しを一次の手掛かりにし、台帳の県名判定だけを信用しない。
-- **次**: DataBookのarea editorial waveは完了 (2026-09-14、area-curator)。60候補全件を判定し、大半は偽陽性
-  (分冊表紙・広告ページ・奥付・家計調査KPI表を単一県名OCR一致で誤検出) または既存editorialと重複・9/9満杯。
-  一次資料で裏取りできた21件のみ12県のeditorialへ追加済み (`validate:area-databook`/`tsc`/`source-vault:check` green)。
-  残るは偏差値資料のみ: 図表権利と一次資料の両方が確定した項目だけholdを解除する (オーナー判断待ち・未着手)。
-- **完了条件**: 3資料の全抽出候補がresolutionを持ち、公開候補100%で一次資料・年度・単位・地域粒度・rightsが
-  確定し、書籍値の直接投入、原文・元図・内部cropの公開が0である。
-- **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
-  `rights-hold`または`primary-source-unavailable`で停止する。remote R2、git push、PR、deploy、外部公開は別途承認。
+- **owner**: 台帳は`open-data-curator`、metricKey実在検証は`estat-researcher`、投入は`data-ingester`。
+- **現状証拠**: profile `prefecture-deviation` (Drive `参考文献/47都道府県の偏差値/2018年版`、6分冊PDF・103ページ)を
+  全ページOCR (jpn+eng, rotate 90, psm 4)。一律`rights-hold`103件だった旧判定 (書誌確定前の暫定placeholder) を撤去し、
+  `packages/data-configs/src/evidence-inventory/prefecture-deviation/analyses.json` に章単位の分析・論点53件を authored
+  (kakei-marketingと同じ形式)。`.claude/state/source-inventory/prefecture-deviation/2018/`はcoverage 100%
+  (`combined-analysis` 25 / `primary-source-unavailable` 20 / `context-only` 5 / `not-applicable` 3)。
+  書籍の偏差値・数値そのものは転記せず、章の着想だけを一次資料 (総務省家計調査・人口動態調査・国勢調査・
+  住宅土地統計調査・文科省学力調査等) で独立再検証可能かを判定した。
+- **次**: `combined-analysis` 25件を1件ずつ、①既存metric/rankingとの重複確認、②未登録なら`estat-researcher`が
+  statsDataId実在検証、③`data-ingester`が投入、の順で管理画面`/content/references`にunit接続が出るまで進める。
+  `context-only`5件 (自動車検査登録情報協会・全国軽自動車協会連合会等の業界団体統計) は既存記事の分析文脈補強にのみ使う。
+- **停止条件**: 書籍の偏差値・数値・図表・本文を公開物へ直接流さない。一次資料で再取得できない項目は
+  `primary-source-unavailable`のまま留める (`週刊朝日`独自集計の東大・京大合格者数ランキング等、20件は既に該当)。
+  R2 write・deploy・SNS公開は別途承認。
+- **完了条件**: `combined-analysis`25件全てがreuse-existing-metric/new-metricいずれかで既存SSOTへ接続され、
+  管理画面`/content/references`で実在証跡が確認できる。
 
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 

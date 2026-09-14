@@ -60,6 +60,26 @@ test('Japan Zue inventory preserves the audited full-candidate denominator', asy
   assert.ok((await stat(inventoryPath)).size < 1024 * 1024);
 });
 
+test('prefecture-deviation inventory resolves per authored analysis, not a rights-hold monoculture', async () => {
+  // 2026-09-15 までは書誌確定前の暫定判定として全103ページを一律 rights-hold にしていた。
+  // 家計調査(2016年)ベースの品目別統計等、公式一次資料へ接続できるページが大半であることが
+  // 個別ページの再検証で判明したため、prefectureDeviationAnalyses() 経由の解決に置き換えた。
+  const summary = JSON.parse(
+    await readFile(
+      path.join(STATE_ROOT, 'prefecture-deviation/2018/summary.json'),
+      'utf8'
+    )
+  );
+  assert.equal(summary.itemCount, 103);
+  assert.equal(summary.resolutionCoverage, 1);
+  assert.notEqual(summary.byResolution['rights-hold'], 103);
+  assert.ok(!('rights-hold' in summary.byResolution));
+  assert.ok(
+    (summary.byResolution['combined-analysis'] ?? 0) > 0,
+    'expected at least one page resolved via an official primary source'
+  );
+});
+
 test('committed inventories contain no book body, OCR body, or local path', async () => {
   const profiles = [
     'japan-zue/2025-26',

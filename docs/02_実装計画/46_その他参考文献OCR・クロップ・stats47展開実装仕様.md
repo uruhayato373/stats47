@@ -2,9 +2,9 @@
 title: その他参考文献OCR・クロップ・stats47展開実装仕様
 type: implementation-spec
 date: 2026-08-29
-updated: 2026-09-10
+updated: 2026-09-15
 status: active
-related_backlog: KAKEI-MARKETING-CONTENT-01
+related_backlog: PREFECTURE-DEVIATION-S5-01
 owner: open-data-curator
 tags: [evidence, provenance, ocr, crop, source-vault, content-pipeline]
 ---

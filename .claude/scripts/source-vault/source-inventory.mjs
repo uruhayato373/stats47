@@ -74,6 +74,20 @@ const KAKEI_MARKETING_ANALYSES_PATH = path.join(
   PROJECT_ROOT,
   'packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json'
 );
+const PREFECTURE_DEVIATION_ANALYSES_PATH = path.join(
+  PROJECT_ROOT,
+  'packages/data-configs/src/evidence-inventory/prefecture-deviation/analyses.json'
+);
+// 展開PDF (スキャンした書類 6〜11.pdf) を読み順に並べたdocument id。書籍の物理ページ順と一致する
+// (各文書の最終scanと次文書の先頭scanを画像で照合して確定済み: 2026-09-15)。
+const PREFECTURE_DEVIATION_DOCUMENT_ORDER = [
+  'pdf-d94b818219b5', // スキャンした書類 6.pdf
+  'pdf-4fcdf5566f4b', // スキャンした書類 7.pdf
+  'pdf-09319e8b49d6', // スキャンした書類 8.pdf
+  'pdf-2766824be5aa', // スキャンした書類 9.pdf
+  'pdf-b8bcd5ecfcbd', // スキャンした書類 10.pdf
+  'pdf-cbc8cb48fc39', // スキャンした書類 11.pdf
+];
 const ANTHROPIC_SKILLS_DOCS =
   'https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview';
 const GUIDE_ADOPTIONS = new Map([
@@ -486,10 +500,10 @@ async function buildJapanZue(context) {
   };
 }
 
-async function kakeiMarketingAnalyses() {
-  const { analyses } = await readJson(KAKEI_MARKETING_ANALYSES_PATH);
+async function loadPageRangeAnalyses(analysesPath) {
+  const { analyses } = await readJson(analysesPath);
   if (!Array.isArray(analyses) || analyses.length === 0) {
-    throw new Error(`No authored analyses: ${KAKEI_MARKETING_ANALYSES_PATH}`);
+    throw new Error(`No authored analyses: ${analysesPath}`);
   }
   const ids = new Set();
   for (const analysis of analyses) {
@@ -511,6 +525,38 @@ async function kakeiMarketingAnalyses() {
     }
   }
   return analyses;
+}
+
+async function kakeiMarketingAnalyses() {
+  return loadPageRangeAnalyses(KAKEI_MARKETING_ANALYSES_PATH);
+}
+
+async function prefectureDeviationAnalyses() {
+  return loadPageRangeAnalyses(PREFECTURE_DEVIATION_ANALYSES_PATH);
+}
+
+// 6分冊PDFをまたぐ通し scan ページ番号 (1始まり) を解決する。prefecture-deviation の analyses.json は
+// この通しページで範囲を宣言しており、prefecture-databook/kakei-marketing と違い単一documentではないため、
+// documentごとにリセットされる page.page をそのままでは使えない。各documentの先頭オフセットを
+// PREFECTURE_DEVIATION_DOCUMENT_ORDER (物理ページ順、画像照合で確定済み) と実ページ数から解決する。
+function resolvePrefectureDeviationOffsets(documents) {
+  const offsets = new Map();
+  let offset = 0;
+  for (const id of PREFECTURE_DEVIATION_DOCUMENT_ORDER) {
+    const document = documents.find((entry) => entry.id === id);
+    if (!document) {
+      throw new Error(`prefecture-deviation document order references missing document: ${id}`);
+    }
+    offsets.set(id, offset);
+    offset += document.pages;
+  }
+  const totalPages = documents.reduce((sum, entry) => sum + entry.pages, 0);
+  if (offset !== totalPages) {
+    throw new Error(
+      `prefecture-deviation document order covers ${offset} pages, workspace has ${totalPages}`
+    );
+  }
+  return offsets;
 }
 
 async function editorialSources() {
@@ -562,6 +608,12 @@ async function buildPageSource(context) {
   const kakeiAnalyses = context.profile.sourceKey === 'kakei-marketing'
     ? await kakeiMarketingAnalyses()
     : [];
+  const prefectureDeviationAnalysesList = context.profile.sourceKey === 'prefecture-deviation'
+    ? await prefectureDeviationAnalyses()
+    : [];
+  const prefectureDeviationOffsets = context.profile.sourceKey === 'prefecture-deviation'
+    ? resolvePrefectureDeviationOffsets(workspace.documents)
+    : null;
   const seenPageImages = new Set();
   const items = pages.map(({ document, page, text }) => {
     const id = `${context.profile.sourceKey}-${context.profile.edition}-${document.id}-p${String(page.page).padStart(4, '0')}`;
@@ -581,11 +633,31 @@ async function buildPageSource(context) {
       transcriptSha256: page.transcriptSha256,
     };
     if (context.profile.sourceKey === 'prefecture-deviation') {
+      const globalPage = prefectureDeviationOffsets.get(document.id) + page.page;
+      const analysis = prefectureDeviationAnalysesList.find(
+        (entry) => globalPage >= entry.pages[0] && globalPage <= entry.pages[1]
+      );
+      if (!analysis) {
+        return {
+          id, source,
+          topicHint: `non-analysis page ${document.id} p.${page.page} (global p.${globalPage})`,
+          resolution: 'not-applicable',
+          reason: '章扉・図版のみ等で、分析・論点に属さないページ',
+          processing,
+        };
+      }
       return {
         id, source,
-        topicHint: `rights review page ${document.id} p.${page.page}`,
-        resolution: 'rights-hold',
-        reason: '書誌は国立国会図書館で確定したが各図表の再利用条件と一次資料照合が未確定のため公開停止',
+        topicHint: analysis.id,
+        resolution: analysis.resolution,
+        reason: analysis.resolutionReason,
+        ...(analysis.primarySources?.[0] ? { primarySource: analysis.primarySources[0] } : {}),
+        mapping: {
+          metricKeys: analysis.metricKeys ?? [],
+          surveyIds: analysis.surveyIds ?? [],
+          geoScopes: analysis.geoScopes ?? [],
+          contentRoles: analysis.contentRoles ?? [],
+        },
         processing,
       };
     }

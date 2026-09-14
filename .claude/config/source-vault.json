@@ -44,7 +44,7 @@
     "prefecture-deviation": {
       "sourceKey": "prefecture-deviation",
       "edition": "2018",
-      "revision": 1,
+      "revision": 2,
       "sourceRootName": "47都道府県の偏差値",
       "driveSourceFolderName": "47都道府県の偏差値",
       "driveEditionFolderName": "2018年版",
