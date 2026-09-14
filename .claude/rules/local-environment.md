@@ -369,15 +369,16 @@ npm run local:resources:test         # 削除境界・保持・メモリ予算�
 |---|---|---|
 | `.next/cache`・`.turbo/cache/*`・`.local/{tmp,rakuten-cli-test-*,regen-*}` | 7日 | `local:cleanup` |
 | `.local/verification/*`・`.local/geo-source-*`・`.claude/state/estat-city-meta-cache` | 30日 | 同上 |
-| `.local/r2/gis` (公開可KSJのR2ミラー。R2から再取得できる) | 60日 | 同上 |
+| `.local/r2` (push staging。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる) | 7日 | 同上 |
 | `C:/tmp/stats47-*` / `/tmp/stats47-*` (worktree・除外名を除く) | 14日 | 同上 |
-| `.local/r2/app` (push staging)・認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |
+| 認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |
 | git追跡の生snapshot (psi/url-inspection/cloudflare/note/releases/analytics週次) | `prune-state-snapshots.mjs` の `RETENTION_POLICIES` | `fetch-metrics-weekly.yml` |
 容量不足は空き25GiB未満で警告・15GiB未満で重大、RAMは利用可能3GiB未満で警告・1.5GiB未満で重大。
 メモリは瞬間値なので継続状況と実行中作業も見て判断し、不明な計測値を正常と扱わない。
 
-WIPのあるworktree、認証profile、`.local/r2/app`、参考文献、成果物や運用台帳は年齢だけで消さない。
-`.local/r2/gis` は R2 `gis/` の再取得可能なミラーなので60日未使用で回収してよい。
+WIPのあるworktree、認証profile、参考文献、成果物や運用台帳は年齢だけで消さない。
+`.local/r2` は R2 への push staging で、秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため常駐させない
+(CI は runner 内で自分の staging を作る。KSJ ミラーは R2 `gis/` から再取得できる)。7日で回収する。
 GISの一時領域は処理ごとにOS一時フォルダーへ作り、入力URL・hash・成果の保存先・復元手順を残す。
 展開ファイルは残すZIPのentryとSHA-256を照合してから回収する。原本ZIPや固有スクリプトは別途保全確認が必要。
 参考文献は既存source-vault契約に従いprivate Driveからの復元検証とcoverage 100%を満たしてから回収する。
