@@ -398,6 +398,24 @@ npm run local:resources:test         # 削除境界・保持・メモリ予算�
 | `C:/tmp/stats47-*` / `/tmp/stats47-*` (worktree・除外名を除く) | 14日 | 同上 |
 | 認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |
 | git追跡の生snapshot (psi/url-inspection/cloudflare/note/releases/analytics週次) | `prune-state-snapshots.mjs` の `RETENTION_POLICIES` | `fetch-metrics-weekly.yml` |
+| `.local/{tsbuildinfo/,asset-policy-cache.json,maintenance-debt-cache.json,docs-links-cache.json}` (pre-commit の stat キャッシュ) | 掃除対象外 (数 MB)。おかしければ消してよい (次回 cold 走行で再生成) | 手動 |
+
+### pre-commit を速くする仕掛け (2026-09-14・会社 Windows 実測)
+
+pre-commit は Windows で約 12 分かかっていた。律速は tsc の直列実行と、全文を毎回読む I/O (antivirus 込み) で、
+sharp のデコードや検査ロジックではない (`--cpu-prof` で `readFileUtf8` が 31 秒中 21 秒)。
+
+| ステップ | 前 → 後 (warm) | 仕掛け |
+|---|---|---|
+| `type-check:scripts` (tsc 9 本) | 141s → 45s | `type-check-scripts.mjs`: 並列 3 + `--incremental` (`.local/tsbuildinfo/`)。対象一覧は package.json の引数のまま (coverage テストが文字列を読む) |
+| `test:image-pipeline` (vitest 11 本) | 184s → 86s | scripts 系テストに `// @vitest-environment node` (DOM 不使用。jsdom 起動 152 秒が 0 に)。`test.setup.tsx` は `window` が無ければ DOM モックを飛ばす |
+| `check-asset-policy` | 31s → 7s | (size, mtimeMs) → sha256 / 寸法 / 抽出参照のキャッシュ |
+| `check-maintenance-debt` | 31s → 4s | (size, mtimeMs) → findings のキャッシュ |
+| `check-docs-links` (Stop hook でも走る) | 38s → 3s | (size, mtimeMs) → 抽出参照のキャッシュ |
+| `type-check:image-pipeline` (tsc 3 本) | 40s → 25s | 同 runner |
+
+判定は内容だけで決まるため結果は不変 (findings 件数で確認済み)。CI は `.local/` が無いので cold 走行 = 従来と同じ判定で、
+tsc だけ並列になる。vitest の残り 86 秒はテスト自身のモジュール import (sharp / next) で、project 絞り込みでは縮まない。
 容量不足は空き25GiB未満で警告・15GiB未満で重大、RAMは利用可能3GiB未満で警告・1.5GiB未満で重大。
 メモリは瞬間値なので継続状況と実行中作業も見て判断し、不明な計測値を正常と扱わない。
 

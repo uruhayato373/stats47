@@ -116,6 +116,26 @@ const isPlaceholder = (p) =>
 // 自己 (このチェッカーの regex 例) は走査対象から外す。
 const SELF = rel(__filename);
 const BASELINE_REL = rel(BASELINE_PATH);
+// ── ローカル stat キャッシュ (2026-09-14) ──
+// 会社 Windows では走査対象の全文読みに 38 秒かかる (Stop hook・pre-commit の両方で走る)。
+// 抽出結果は内容と相対パスだけで決まるので (size, mtimeMs) が同じファイルは前回の参照一覧を使う。
+// 置き場は gitignore 済み .local/。壊れていれば捨てて作り直す。
+const STAT_CACHE = process.env.DOCS_LINKS_CACHE || path.join(ROOT, ".local", "docs-links-cache.json");
+let statCache = {};
+try {
+  const parsed = JSON.parse(fs.readFileSync(STAT_CACHE, "utf8"));
+  if (parsed && parsed.version === 1 && parsed.entries) statCache = parsed.entries;
+} catch { /* 初回 or 破損 */ }
+const nextCache = {};
+function extractRefs(text) {
+  const refs = [];
+  for (const match of text.matchAll(DOCS_REF_RE)) {
+    if (isEmbeddedDocsSegment(text, match.index)) continue;
+    if (isPlaceholder(match[0])) continue;
+    refs.push(match[0]);
+  }
+  return refs;
+}
 for (const f of scanFiles) {
   const relativePath = rel(f);
   if (
@@ -126,18 +146,20 @@ for (const f of scanFiles) {
   ) {
     continue;
   }
-  const text = readSafe(f);
-  const matches = [...text.matchAll(DOCS_REF_RE)];
-  if (matches.length === 0) continue;
-  const referrer = rel(f);
-  for (const match of matches) {
-    if (isEmbeddedDocsSegment(text, match.index)) continue;
-    const m = match[0];
-    if (isPlaceholder(m)) continue;
+  let st;
+  try { st = fs.statSync(f); } catch { continue; }
+  const hit = statCache[relativePath];
+  const refs = hit && hit.size === st.size && hit.mtimeMs === st.mtimeMs ? hit.refs : extractRefs(readSafe(f));
+  nextCache[relativePath] = { size: st.size, mtimeMs: st.mtimeMs, refs };
+  for (const m of refs) {
     if (!refMap.has(m)) refMap.set(m, new Set());
-    refMap.get(m).add(referrer);
+    refMap.get(m).add(relativePath);
   }
 }
+try {
+  fs.mkdirSync(path.dirname(STAT_CACHE), { recursive: true });
+  fs.writeFileSync(STAT_CACHE, JSON.stringify({ version: 1, entries: nextCache }));
+} catch { /* cache は任意 */ }
 
 // ── broken 参照検出 ───────────────────────────────────────────
 const broken = [];

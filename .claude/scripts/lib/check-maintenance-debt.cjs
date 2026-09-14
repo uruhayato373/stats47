@@ -167,9 +167,35 @@ function inspect(file) {
   return results;
 }
 
+// ── ローカル stat キャッシュ (2026-09-14) ──
+// 会社 Windows では 7,959 本を毎 commit 読む I/O が 31 秒。findings は内容と相対パスだけで決まるので
+// (size, mtimeMs) が同じファイルは前回の結果を使う。置き場は gitignore 済み .local/。壊れていれば作り直す。
+const STAT_CACHE = process.env.MAINTENANCE_DEBT_CACHE || path.join(ROOT, ".local", "maintenance-debt-cache.json");
+function loadStatCache() {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(STAT_CACHE, "utf8"));
+    if (parsed && parsed.version === 1 && parsed.entries) return parsed.entries;
+  } catch { /* fall through */ }
+  return {};
+}
 function collect() {
   const files = SCAN_ROOTS.flatMap(walk);
-  return { files: files.length, findings: files.flatMap(inspect) };
+  const cache = loadStatCache();
+  const next = {};
+  const findings = [];
+  for (const file of files) {
+    const relative = rel(file);
+    const st = fs.statSync(file);
+    const hit = cache[relative];
+    const results = hit && hit.size === st.size && hit.mtimeMs === st.mtimeMs ? hit.results : inspect(file);
+    next[relative] = { size: st.size, mtimeMs: st.mtimeMs, results };
+    findings.push(...results);
+  }
+  try {
+    fs.mkdirSync(path.dirname(STAT_CACHE), { recursive: true });
+    fs.writeFileSync(STAT_CACHE, JSON.stringify({ version: 1, entries: next }));
+  } catch { /* cache は任意 */ }
+  return { files: files.length, findings };
 }
 
 function main() {
