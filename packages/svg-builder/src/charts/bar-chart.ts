@@ -148,12 +148,25 @@ const CARD_THEMES: Record<PaletteName, CardTheme> = {
 const HIGHLIGHT_STROKE = "#111827";
 const HIGHLIGHT_STROKE_WIDTH = 3;
 
-/** `highlightName` と `BarItem.name` / `label` をトリム比較する。 */
+/**
+ * `highlightName` と `BarItem.name` / `label` を比較する。
+ * 都道府県名は末尾の 都/道/府/県 の有無が揺れる ("熊本県" と "熊本"、"1位 熊本" 等) ので、
+ * 接尾辞と順位プレフィックスを落として比較する。
+ */
+function normalizePrefLabel(s: string): string {
+  return s
+    .trim()
+    .replace(/^\d+位\s*/, "")
+    .replace(/(都|道|府|県)$/, "");
+}
 function isHighlightedItem(d: BarItem, highlightName: string | undefined): boolean {
   if (!highlightName) return false;
-  const target = highlightName.trim();
+  const target = normalizePrefLabel(highlightName);
   if (!target) return false;
-  return d.name?.trim() === target || d.label.trim() === target;
+  return (
+    (d.name !== undefined && normalizePrefLabel(d.name) === target) ||
+    normalizePrefLabel(d.label) === target
+  );
 }
 
 /** 半角=0.55em / 全角=1.0em の概算幅（他の fit* 関数と同じヒューリスティック）。 */

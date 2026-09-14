@@ -82,6 +82,14 @@ const PREF_NAME_TO_CODE = (() => {
 // 都道府県名 → コード。areaCode ("43" / "43000") がそのまま渡ってくる場合もある
 // (highlightPref はどちらの形式も許容する) ので、数字だけの文字列は名前引きせず
 // 先頭2桁を直接コードとして返す。
+// コード ("43" / "43000") → 都道府県名。名前が渡された場合はそのまま返す。
+const prefNameOf = (v) => {
+  const s = String(v || '').trim();
+  if (!/^\d{1,5}$/.test(s)) return s;
+  const code = s.slice(0, 2).padStart(2, '0');
+  for (const [name, c] of PREF_NAME_TO_CODE) if (c === code) return name;
+  return s;
+};
 const prefCodeOf = (name) => {
   const s = String(name || '').trim();
   if (/^\d{1,5}$/.test(s)) return s.slice(0, 2).padStart(2, '0');
@@ -267,7 +275,8 @@ function genBarChartSvg(
     highLabel,
     lowLabel,
     showBars,
-    highlightName: highlightPref ? normPref(highlightPref) : undefined,
+    // 数字コード ('43000') でも名前でも受ける。bar-chart 側が 都/道/府/県 接尾辞を落として照合する。
+    highlightName: highlightPref ? prefNameOf(highlightPref) : undefined,
     focusNote,
   });
 }
