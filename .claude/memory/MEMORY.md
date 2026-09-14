@@ -108,3 +108,4 @@
 
 - [feedback_ssds_denominator_evidence.md](feedback_ssds_denominator_evidence.md) — SSDSの素unitは実数の証拠ではない。公式算式で分母を確定しsubtitle/labelへ保持、二重正規化禁止。
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法
+- [two-machine local footprint 2026-09](project_two_machine_local_footprint_2026-09.md) — dotfiles/mirror/state:pull の運用ポインタ、この Windows PC の pre-commit 12 分・vitest フレーク・preflight 環境要因
