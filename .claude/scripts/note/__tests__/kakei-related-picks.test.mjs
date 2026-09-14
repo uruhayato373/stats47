@@ -16,25 +16,34 @@ test("pickDominant picks the max |ratio-1|, first wins ties", () => {
   assert.equal(pickDominant(breakdown).catName, "教育");
 });
 
-test("choosePick: same catName wins, largest |ratio-1| among candidates (not closest to self)", () => {
+test("choosePick: same catName + same side, nearest ratio wins (not the most extreme)", () => {
   const records = [
     { key: "a-kakei-a", catName: "住居", ratio: 1.1, side: "above" },
     { key: "a-kakei-b", catName: "住居", ratio: 0.5, side: "below" },
     { key: "a-kakei-c", catName: "住居", ratio: 1.2, side: "above" },
-    { key: "a-kakei-d", catName: "教育", ratio: 2.0, side: "above" },
+    { key: "a-kakei-d", catName: "住居", ratio: 1.9, side: "above" },
+    { key: "a-kakei-e", catName: "教育", ratio: 2.0, side: "above" },
   ];
-  // self=a: candidates with catName=住居 excluding self are b(|1-0.5|=0.5) and c(|1.2-1|=0.2).
-  // b has the larger |ratio-1| so it wins, even though c's ratio is numerically closer to a's.
-  assert.equal(choosePick(records[0], records), "a-kakei-b");
+  // self=a: same catName+side are c(|1.2-1.1|=0.1) and d(0.8); c is nearest. b is other side, e other cat.
+  assert.equal(choosePick(records[0], records), "a-kakei-c");
 });
 
-test("choosePick: tie on |ratio-1| breaks by key ascending", () => {
+test("choosePick: same catName but no same side -> nearest ratio among same catName", () => {
+  const records = [
+    { key: "a-kakei-a", catName: "住居", ratio: 1.1, side: "above" },
+    { key: "a-kakei-b", catName: "住居", ratio: 0.5, side: "below" },
+    { key: "a-kakei-c", catName: "住居", ratio: 0.9, side: "below" },
+  ];
+  assert.equal(choosePick(records[0], records), "a-kakei-c");
+});
+
+test("choosePick: tie on nearest ratio breaks by key ascending", () => {
   const records = [
     { key: "a-kakei-z", catName: "住居", ratio: 1.5, side: "above" },
-    { key: "a-kakei-m", catName: "住居", ratio: 0.5, side: "below" },
+    { key: "a-kakei-m", catName: "住居", ratio: 1.1, side: "above" },
     { key: "a-kakei-a", catName: "住居", ratio: 1.3, side: "above" },
   ];
-  // self=a: candidates z(|1.5-1|=0.5) and m(|0.5-1|=0.5) are tied -> key ascending -> m wins
+  // self=a(1.3): z(0.2) and m(0.2) tie -> key ascending -> m
   assert.equal(choosePick(records[2], records), "a-kakei-m");
 });
 

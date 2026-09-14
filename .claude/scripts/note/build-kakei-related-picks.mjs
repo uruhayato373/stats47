@@ -78,15 +78,19 @@ async function loadChartData(entry) {
 
 export function choosePick(self, records) {
   const others = records.filter((r) => r.key !== self.key);
-  const sameCat = others.filter((r) => r.catName === self.catName);
-  if (sameCat.length > 0) {
-    return sameCat.reduce((best, cur) => {
-      const diff = Math.abs(cur.ratio - 1);
-      const bestDiff = Math.abs(best.ratio - 1);
-      if (diff !== bestDiff) return diff > bestDiff ? cur : best;
+  // 同じ費目・同じ向き (above/below) で倍率が最も近い県 = 読者にとって「似た家計の県」。
+  // 最も極端な県へ集中させない (旧実装は 教育 11 本 → 埼玉 のようにハブ化した)。
+  const nearest = (cands) =>
+    cands.reduce((best, cur) => {
+      const diff = Math.abs(cur.ratio - self.ratio);
+      const bestDiff = Math.abs(best.ratio - self.ratio);
+      if (diff !== bestDiff) return diff < bestDiff ? cur : best;
       return cur.key < best.key ? cur : best;
     }).key;
-  }
+  const sameCat = others.filter((r) => r.catName === self.catName);
+  const sameCatSide = sameCat.filter((r) => r.side === self.side);
+  if (sameCatSide.length > 0) return nearest(sameCatSide);
+  if (sameCat.length > 0) return nearest(sameCat);
   const sameDirection = others.filter((r) => r.side === self.side);
   if (sameDirection.length > 0) {
     return sameDirection.reduce((best, cur) => {
