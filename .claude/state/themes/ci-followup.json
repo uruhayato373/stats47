@@ -1,21 +1,25 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-13",
+  "observedAt": "2026-09-14",
   "status": "fail",
   "themeCount": 55,
   "runtime": {
     "expected": 110,
     "checked": 110,
-    "failed": 3
+    "failed": 5
   },
   "problems": [
-    "railway/390:chart:railway-freight-trend:source-unavailable",
-    "railway/390:network:503",
-    "real-income/1440:chart:real-income-cpi-breakdown:source-unavailable",
-    "real-income/1440:network:503",
+    "aging-society/390:chart:cmp-pop-elderly-household:source-unavailable",
+    "aging-society/390:network:503",
+    "fishery-marine/390:chart:theme-fishery-output-trend:source-unavailable",
+    "fishery-marine/390:network:503",
+    "real-income/390:chart:real-income-cpi-breakdown-expenses:source-unavailable",
+    "real-income/390:network:503",
     "runtime-process:1",
-    "tourism/390:chart:theme-tourism-hotel-supply-trend:source-unavailable",
-    "tourism/390:network:503"
+    "safety/1440:chart:safety-fire-casualties-donut:source-unavailable",
+    "safety/1440:network:503",
+    "safety/390:chart:fire-emergency-trend-fire:source-unavailable",
+    "safety/390:network:503"
   ],
   "checkpoints": [
     {
@@ -132,8 +136,8 @@
       "verdict": "insufficient-data"
     }
   ],
-  "alertBody": "# テーマ継続確認\n- railway/390:chart:railway-freight-trend:source-unavailable\n- railway/390:network:503\n- real-income/1440:chart:real-income-cpi-breakdown:source-unavailable\n- real-income/1440:network:503\n- runtime-process:1\n- tourism/390:chart:theme-tourism-hotel-supply-trend:source-unavailable\n- tourism/390:network:503\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "98c971300fb3a9264d5b2d0aeae7077fc0d8ca23e54fe81be66f77bbfbd9b4df",
+  "alertBody": "# テーマ継続確認\n- aging-society/390:chart:cmp-pop-elderly-household:source-unavailable\n- aging-society/390:network:503\n- fishery-marine/390:chart:theme-fishery-output-trend:source-unavailable\n- fishery-marine/390:network:503\n- real-income/390:chart:real-income-cpi-breakdown-expenses:source-unavailable\n- real-income/390:network:503\n- runtime-process:1\n- safety/1440:chart:safety-fire-casualties-donut:source-unavailable\n- safety/1440:network:503\n- safety/390:chart:fire-emergency-trend-fire:source-unavailable\n- safety/390:network:503\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "cbe99c553e73fdcba4b6f770a51bcea99485c0e8d6a68d43db8131aa74f0cc47",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34739779902"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34803363700"
 }
