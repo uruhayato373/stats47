@@ -63,7 +63,7 @@ const itemLabel = (it) => `${it.name}(${fmtRatio(it.ratio)})`;
 
 export function buildIntro({ pref, city, year, dominant }) {
   const p1 = `${pref}の県庁所在地・${city}の家計を、総務省「家計調査」(${year}年・二人以上の世帯)で十大費目に分けて見ると、47都道府県庁所在市の単純平均を1.00としたとき、最も乖離が大きいのは${dominant.catName}の${fmtRatio(dominant.ratio)}です。`;
-  const p2 = `この記事では、十大費目の偏り、47県の中での${city}の位置、突出した個別品目、そして${dominant.catName}の${sideDescOf(dominant.side)}なる背景を他の都道府県統計で確かめる、という順で${city}の家計を読み解きます。比率はすべて47市平均に対する倍率で、家計調査が公表する全国平均とは基準が異なります。`;
+  const p2 = `この記事では、十大費目の偏り、47県の中での${city}の位置、突出した個別品目、そして${dominant.catName}が${sideDescOf(dominant.side)}なる背景を他の都道府県統計で確かめる、という順で${city}の家計を読み解きます。比率はすべて47市平均に対する倍率で、家計調査が公表する全国平均とは基準が異なります。`;
   const p3 = `十大費目とは食料、住居、光熱・水道、家具・家事用品、被服及び履物、保健医療、交通・通信、教育、教養娯楽、その他の消費支出の10区分で、家計調査が消費支出を分類する最上位の区分です。`;
   return [p1, p2, p3];
 }
@@ -78,7 +78,7 @@ export function buildPCategories({ chartData, dominant }) {
     sentences.push(`下回るのは${below.length}費目で、${listJoin(below, catLabel)}です。`);
   }
   sentences.push(
-    `最も大きく離れているのは${dominant.catName}の${fmtRatio(dominant.ratio)}、最も平均に近いのは${closest.catName}の${fmtRatio(closest.ratio)}で、${dominant.city}の家計は${dominant.catName}に${sideDescOf(dominant.side)}偏った構造だとわかります。`,
+    `最も大きく離れているのは${dominant.catName}の${fmtRatio(dominant.ratio)}、最も平均に近いのは${closest.catName}の${fmtRatio(closest.ratio)}で、${dominant.city}の家計は${dominant.catName}が${dominant.side === "above" ? "高い" : "低い"}ほうに偏った構造だとわかります。`,
   );
   return sentences.join("");
 }
@@ -118,7 +118,7 @@ function verdictSentence({ ev, pref, dominant }) {
     return `${ev.title}は${pref}が全国${rankStr}(${valStr}、${ev.year}年)で、${dominant.catName}が${sideDescOf(dominant.side)}なることと整合します。`;
   }
   if (ev.verdict === "weak") {
-    return `${ev.title}は${pref}が全国${rankStr}(${valStr}、${ev.year}年)で中位にあり、${dominant.catName}の${sideDescOf(dominant.side)}なる理由としては説明力が弱い指標です。`;
+    return `${ev.title}は${pref}が全国${rankStr}(${valStr}、${ev.year}年)で中位にあり、${dominant.catName}が${sideDescOf(dominant.side)}なる理由としては説明力が弱い指標です。`;
   }
   return `${ev.title}は${pref}が全国${rankStr}(${valStr}、${ev.year}年)で、${dominant.catName}の偏りとは逆方向にあり、この指標では説明できません。`;
 }

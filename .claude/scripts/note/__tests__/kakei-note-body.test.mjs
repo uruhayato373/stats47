@@ -160,7 +160,7 @@ test("(b) buildPEvidence の1文目は verdict (strong/weak/contrary) ごとに�
 
   const weak = buildPEvidence({ ev: { ...baseEv, verdict: "weak" }, pref, dominant, ranking: EV1_RANKING });
   assert.ok(
-    weak.startsWith("テスト指標は熊本県が全国5位(10.5%、2024年)で中位にあり、教育の高くなる理由としては説明力が弱い指標です。"),
+    weak.startsWith("テスト指標は熊本県が全国5位(10.5%、2024年)で中位にあり、教育が高くなる理由としては説明力が弱い指標です。"),
   );
 
   const contrary = buildPEvidence({ ev: { ...baseEv, verdict: "contrary" }, pref, dominant, ranking: EV1_RANKING });

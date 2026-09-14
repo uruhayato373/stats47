@@ -84,7 +84,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 152,
+    "count": 154,
     "representatives": [
       {
         "rankingKey": "crude-birth-rate",
@@ -299,7 +299,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 869,
+    "count": 872,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
@@ -600,7 +600,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 286,
+    "count": 289,
     "representatives": [
       {
         "rankingKey": "physical-disability-certificates-issued",

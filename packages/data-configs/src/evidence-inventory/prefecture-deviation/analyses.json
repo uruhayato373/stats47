@@ -14,8 +14,24 @@
         15
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省家計調査(品目別、都道府県庁所在市)の実数を独立に再取得できる、一次資料の所在が明確な消費統計群",
-      "metricKeys": [],
+      "resolutionReason": "総務省家計調査(品目別、都道府県庁所在市)の実数を独立に再取得できる、一次資料の所在が明確な消費統計群 個別品目は既存metricで充足(すし外食/サケ/牛肉/豚肉/その他の肉/米/はくさい)。魚介類・生鮮野菜は家計調査cat01の中分類集計(010200000/010510000)を新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "sushi-dining-consumption-expenditure",
+        "salmon-consumption-expenditure",
+        "salmon-consumption-quantity",
+        "beef-consumption-expenditure",
+        "beef-consumption-quantity",
+        "pork-consumption-expenditure",
+        "pork-consumption-quantity",
+        "other-meat-consumption-expenditure",
+        "other-meat-consumption-quantity",
+        "rice-consumption-expenditure",
+        "rice-consumption-quantity",
+        "chinese-cabbage-consumption-expenditure",
+        "chinese-cabbage-consumption-quantity",
+        "seafood-consumption-expenditure",
+        "fresh-vegetables-consumption-expenditure"
+      ],
       "surveyIds": [
         "kakei-chousa",
         "household-survey"
@@ -57,8 +73,12 @@
         16
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "消費側(家計調査)と生産側(漁業・養殖業生産統計)の両方が公式統計として独立に再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "消費側(家計調査)と生産側(漁業・養殖業生産統計)の両方が公式統計として独立に再取得できる 消費側(konbu-consumption-*)・生産側(fishery-species-catch-kelp)いずれも既存metricで充足済み。",
+      "metricKeys": [
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity",
+        "fishery-species-catch-kelp"
+      ],
       "surveyIds": [
         "kakei-chousa",
         "household-survey"
@@ -111,8 +131,11 @@
         18
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "家計調査(品目別)の消費統計として独立再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "家計調査(品目別)の消費統計として独立再取得できる かつお節・削り節消費は既存metric(katsuobushi-consumption-*)で充足済み。生産統計側は本analysisの主対象ではなく未着手。",
+      "metricKeys": [
+        "katsuobushi-consumption-expenditure",
+        "katsuobushi-consumption-quantity"
+      ],
       "surveyIds": [
         "kakei-chousa",
         "household-survey"
@@ -154,8 +177,13 @@
         21
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "厚労省人口動態調査・人口動態統計特殊報告・総務省人口推計はいずれも公式統計で最新年を再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "厚労省人口動態調査・人口動態統計特殊報告・総務省人口推計はいずれも公式統計で最新年を再取得できる 婚姻件数・離婚件数・合計特殊出生率は既存metricで充足(15歳未満人口はyoung-population-ratioで近似)。デキ婚率(結婚期間別出生の特殊集計)はe-Stat検索(人口動態統計特殊報告/結婚期間別出生/出産前妊娠期間)で0件、API未登録の特殊報告のみでc判定。",
+      "metricKeys": [
+        "marriages",
+        "divorces",
+        "young-population-ratio",
+        "total-fertility-rate"
+      ],
       "surveyIds": [
         "vital-statistics",
         "population-estimates"
@@ -219,8 +247,10 @@
         22
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "算出元の住宅・土地統計調査、全国消費実態調査は公式統計で、独自算出も計算式が明記されており再現できる",
-      "metricKeys": [],
+      "resolutionReason": "算出元の住宅・土地統計調査、全国消費実態調査は公式統計で、独自算出も計算式が明記されており再現できる 世帯年収は既存metric annual-income-per-household(社会・人口統計体系L家計)で近似充足。子育て世帯年収は全国家計構造調査0003426650で世帯類型112/113/114(夫婦と未婚の子1〜3人)の3コード合算が必要で単純な単一cdCat設定に収まらず、今回は新規metric化を見送り(将来のcalculated-metric候補)。相対的貧困率は書籍独自算出のため再取得対象外。",
+      "metricKeys": [
+        "annual-income-per-household"
+      ],
       "surveyIds": [
         "housing-land-survey",
         "national-household-survey"
@@ -273,8 +303,11 @@
         24
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省社会生活基本調査、厚労省社会福祉施設等調査はいずれも公式統計",
-      "metricKeys": [],
+      "resolutionReason": "総務省社会生活基本調査、厚労省社会福祉施設等調査はいずれも公式統計 父親の育児参加率(husband-childcare-rate)・保育所等数(nursery-count-per-100k-0-5)いずれも既存metricで充足済み。",
+      "metricKeys": [
+        "husband-childcare-rate",
+        "nursery-count-per-100k-0-5"
+      ],
       "surveyIds": [
         "social-life-basic-survey",
         "social-welfare-facility-survey"
@@ -328,8 +361,11 @@
         25
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "文科省全国学力・学習状況調査、保育所等関連状況取りまとめはいずれも公式統計",
-      "metricKeys": [],
+      "resolutionReason": "文科省全国学力・学習状況調査、保育所等関連状況取りまとめはいずれも公式統計 学力テスト正答率は既存metricで充足。待機児童数は社会・人口統計体系0000010110のcdCat01=J250502(保育所等利用待機児童数、2001-2024年度)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "academic-achievement-test-average-rate",
+        "nursery-waiting-children-count"
+      ],
       "surveyIds": [
         "academic-achievement-survey",
         "childcare-related-status-report"
@@ -382,8 +418,12 @@
         29
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "文科省の複数調査と総務省経済センサスはいずれも公式統計で再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "文科省の複数調査と総務省経済センサスはいずれも公式統計で再取得できる 不登校(中学/小学)は既存metricで充足。学習塾軒数は経済センサス‐活動調査0004003273(tab=301-2021、2021年)で実在確認し新規metric化(2026-09-15)。自己肯定率・新聞購読率・読書率(全国学力・学習状況調査)、校内暴力/暴力行為(児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査)はe-Statキーワード検索で0件、両調査ともAPI未登録のためc判定。",
+      "metricKeys": [
+        "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "cram-school-establishment-count"
+      ],
       "surveyIds": [
         "academic-achievement-survey",
         "student-guidance-issues-survey",
@@ -448,8 +488,10 @@
         31
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省社会生活基本調査・家計調査、文科省学校基本調査はいずれも公式統計",
-      "metricKeys": [],
+      "resolutionReason": "総務省社会生活基本調査・家計調査、文科省学校基本調査はいずれも公式統計 教育費は既存metric(education-cost-all-households他)で近似充足。通学時間はe-Stat検索0件(社会生活基本調査に該当表を確認できず)。大学(四年制)進学率・短大進学率は学校基本調査由来だがe-Stat検索で「大学進学率」「四年制大学」「学校基本調査 進学」いずれも0件のためc判定(社会・人口統計体系Eには高校卒業者の進学率E4701のみで大学・短大の内訳無し)。",
+      "metricKeys": [
+        "education-cost-all-households"
+      ],
       "surveyIds": [
         "social-life-basic-survey",
         "kakei-chousa",
@@ -535,8 +577,10 @@
         35
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省家計調査の実数として独立再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "総務省家計調査の実数として独立再取得できる 仕送り額は既存metricで充足済み。",
+      "metricKeys": [
+        "domestic-student-remittance-consumption-expenditure"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -612,8 +656,11 @@
         37
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "厚労省衛生行政報告例は公式統計で再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "厚労省衛生行政報告例は公式統計で再取得できる 美容室数は既存metricで充足済み。",
+      "metricKeys": [
+        "beauty-salon-count",
+        "barber-beauty-salon-count"
+      ],
       "surveyIds": [
         "health-admin-report"
       ],
@@ -674,8 +721,10 @@
         39
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省家計調査の実数として独立再取得できる(第1・2章の家計調査ベース統計と同じパターン)",
-      "metricKeys": [],
+      "resolutionReason": "総務省家計調査の実数として独立再取得できる(第1・2章の家計調査ベース統計と同じパターン) 貯蓄額は既存metricで充足済み。",
+      "metricKeys": [
+        "current-savings-balance-multi-person-households"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -736,8 +785,10 @@
         41
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省住宅・土地統計調査の実数として独立再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "総務省住宅・土地統計調査の実数として独立再取得できる 持ち家率は既存metricで充足済み。",
+      "metricKeys": [
+        "owner-occupied-housing-ratio"
+      ],
       "surveyIds": [
         "housing-land-survey"
       ],
@@ -798,8 +849,12 @@
         44
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省国勢調査・住宅土地統計調査はいずれも公式統計で再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "総務省国勢調査・住宅土地統計調査はいずれも公式統計で再取得できる 核家族率・空き家率は既存metricで充足。三世代世帯人員は国勢調査0003445285のcdCat01=R1(再掲・3世代世帯、2020年)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "nuclear-family-households-ratio",
+        "three-generation-household-members",
+        "vacant-housing-rate"
+      ],
       "surveyIds": [
         "census",
         "housing-land-survey"
@@ -872,7 +927,7 @@
         46
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省国勢調査の実数として独立再取得できる",
+      "resolutionReason": "総務省国勢調査の実数として独立再取得できる 国勢調査0000010101に20〜24/25〜29/30〜34/35〜39歳の男女別人口(A120501等)は存在するが、書籍の「20〜30代」区分に対応する単一の性比指標は社会・人口統計体系の指標表(0000010201、#A02101〜105)に無く、4階級×男女8コードの合算が必要。単純な単一cdCat設定に収まらず今回は新規metric化を見送り(将来のcalculated-metric候補)。",
       "metricKeys": [],
       "surveyIds": [
         "census"
@@ -1020,7 +1075,7 @@
         51
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる",
+      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる 人口動態調査の死因簡単分類表(0003411663)に熱中症の単独区分はないが、詳細ICD表0003412075にT67(熱及び光線の作用)がcat02として存在する。ただしcat01が男/女のみで総数コードが無く、男女2コードの合算が必要なため単純な単一cdCat設定に収まらず、今回は新規metric化を見送り(将来のcalculated-metric候補)。",
       "metricKeys": [],
       "surveyIds": [
         "vital-statistics"
@@ -1144,8 +1199,10 @@
         59
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "中小企業庁の統計情報は公式統計で再取得できる。57-59ページは未確認だが同一区間の統計と推定し、独立検証が前提",
-      "metricKeys": [],
+      "resolutionReason": "中小企業庁の統計情報は公式統計で再取得できる。57-59ページは未確認だが同一区間の統計と推定し、独立検証が前提 企業数は既存metric(経済センサス由来)で近似充足。中小企業庁統計そのものはe-Stat検索で0件。",
+      "metricKeys": [
+        "nonprimary-enterprises-count"
+      ],
       "surveyIds": [
         "economic-census-basic"
       ],
@@ -1186,8 +1243,11 @@
         60
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "内閣府県民経済計算、総務省労働力調査はいずれも公式統計",
-      "metricKeys": [],
+      "resolutionReason": "内閣府県民経済計算、総務省労働力調査はいずれも公式統計 県民所得・完全失業率は既存metricで充足済み。",
+      "metricKeys": [
+        "prefectural-income-per-capita",
+        "unemployment-rate"
+      ],
       "surveyIds": [],
       "geoScopes": [
         "prefecture-set"
@@ -1297,8 +1357,11 @@
         68
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省社会生活統計指標、林野庁の統計情報はいずれも公式統計",
-      "metricKeys": [],
+      "resolutionReason": "総務省社会生活統計指標、林野庁の統計情報はいずれも公式統計 可住地面積率・森林面積割合は既存metricで充足済み。",
+      "metricKeys": [
+        "habitable-area-ratio",
+        "forest-area-ratio"
+      ],
       "surveyIds": [],
       "geoScopes": [
         "prefecture-set"
@@ -1421,8 +1484,11 @@
         78
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "総務省国勢調査、社会生活基本調査はいずれも公式統計",
-      "metricKeys": [],
+      "resolutionReason": "総務省国勢調査、社会生活基本調査はいずれも公式統計 自家用車通勤は既存metricで充足。読書人口はhobby-participation-rate-reading(趣味としての読書の行動者率)で近似充足(社会生活基本調査の設問区分が完全一致とは限らない)。",
+      "metricKeys": [
+        "commute-by-car",
+        "hobby-participation-rate-reading"
+      ],
       "surveyIds": [
         "census",
         "social-life-basic-survey"
@@ -1496,8 +1562,10 @@
         83
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "厚労省人口動態調査の実数として独立再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "厚労省人口動態調査の実数として独立再取得できる 人口動態調査0003411610のcdCat01=00110(第1子)+cdCat02=00110(母)で第1子出生時の母の平均年齢(2015-2024年)を実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "mothers-age-at-first-birth"
+      ],
       "surveyIds": [
         "vital-statistics"
       ],
@@ -1578,8 +1646,10 @@
         88
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "厚労省の児童虐待相談対応件数(福祉行政報告例・報道発表資料)は公式統計として再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "厚労省の児童虐待相談対応件数(福祉行政報告例・報道発表資料)は公式統計として再取得できる 社会・人口統計体系0000010110のcdCat01=J3209(児童相談所における児童虐待相談の対応件数、2010-2023年度)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "child-abuse-consultation-cases"
+      ],
       "surveyIds": [],
       "geoScopes": [
         "prefecture-set"
@@ -1637,8 +1707,8 @@
         91,
         91
       ],
-      "resolution": "combined-analysis",
-      "resolutionReason": "警察庁犯罪統計資料は公式統計として再取得できる",
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "警察庁犯罪統計資料はe-Stat未登録。社会・人口統計体系K安全(0000010111)の刑法犯認知件数(K4201他)は凶悪犯/粗暴犯/窃盗犯/知能犯/風俗犯の粗い分類のみで、自動車盗の単独区分は存在しない。keyword検索(\"自動車盗\"/\"犯罪統計\"/\"警察庁\")もいずれも0件。",
       "metricKeys": [],
       "surveyIds": [
         "police-statistics"
@@ -1704,8 +1774,10 @@
         93
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる 人口動態調査0003411663のcdCat01=09303(脳梗塞、死亡率人口10万対、2015-2024年)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "deaths-cerebral-infarction-per-100k"
+      ],
       "surveyIds": [
         "vital-statistics"
       ],
@@ -1766,8 +1838,11 @@
         100
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる",
-      "metricKeys": [],
+      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる 自殺者数・交通事故死亡者数は既存metricで充足済み。",
+      "metricKeys": [
+        "suicide-count",
+        "traffic-accident-deaths-per-100k"
+      ],
       "surveyIds": [
         "vital-statistics"
       ],
