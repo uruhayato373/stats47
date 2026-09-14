@@ -252,6 +252,7 @@ import { chestConsumptionQuantity } from "./metrics/chest-consumption-quantity";
 import { chickenConsumptionExpenditure } from "./metrics/chicken-consumption-expenditure";
 import { chickenConsumptionQuantity } from "./metrics/chicken-consumption-quantity";
 import { chikuwaConsumptionExpenditure } from "./metrics/chikuwa-consumption-expenditure";
+import { childAbuseConsultationCases } from "./metrics/child-abuse-consultation-cases";
 import { childConsultationCenterCasesPer1000 } from "./metrics/child-consultation-center-cases-per-1000";
 import { childConsultationCenterCases } from "./metrics/child-consultation-center-cases";
 import { childRearingAllowanceRecipients } from "./metrics/child-rearing-allowance-recipients";
@@ -396,6 +397,7 @@ import { cpiRegionalDifferenceIndexTotalTokyo100 } from "./metrics/cpi-regional-
 import { crabConsumptionExpenditure } from "./metrics/crab-consumption-expenditure";
 import { crabConsumptionQuantity } from "./metrics/crab-consumption-quantity";
 import { craftMaterialsConsumptionExpenditure } from "./metrics/craft-materials-consumption-expenditure";
+import { cramSchoolEstablishmentCount } from "./metrics/cram-school-establishment-count";
 import { crimeRatePer1k } from "./metrics/crime-rate-per-1k";
 import { criminalArrestRate } from "./metrics/criminal-arrest-rate";
 import { criminalRecognitionCountOfProstitutionCrimeRate } from "./metrics/criminal-recognition-count-of-prostitution-crime-rate";
@@ -443,6 +445,7 @@ import { dayTimePopulation } from "./metrics/day-time-population";
 import { daytimePopulationRatio } from "./metrics/daytime-population-ratio";
 import { deathAccident } from "./metrics/death-accident";
 import { deathCount } from "./metrics/death-count";
+import { deathsCerebralInfarctionPer100k } from "./metrics/deaths-cerebral-infarction-per-100k";
 import { deathsCerebrovascularDiseasePer100k } from "./metrics/deaths-cerebrovascular-disease-per-100k";
 import { deathsCerebrovascularDisease } from "./metrics/deaths-cerebrovascular-disease";
 import { deathsDiabetesPer100k } from "./metrics/deaths-diabetes-per-100k";
@@ -768,6 +771,7 @@ import { freshShiitakeConsumptionExpenditure } from "./metrics/fresh-shiitake-co
 import { freshShiitakeConsumptionQuantity } from "./metrics/fresh-shiitake-consumption-quantity";
 import { freshUdonSobaConsumptionExpenditure } from "./metrics/fresh-udon-soba-consumption-expenditure";
 import { freshUdonSobaConsumptionQuantity } from "./metrics/fresh-udon-soba-consumption-quantity";
+import { freshVegetablesConsumptionExpenditure } from "./metrics/fresh-vegetables-consumption-expenditure";
 import { freshwaterClamConsumptionExpenditure } from "./metrics/freshwater-clam-consumption-expenditure";
 import { freshwaterClamConsumptionQuantity } from "./metrics/freshwater-clam-consumption-quantity";
 import { friedTofuConsumptionExpenditure } from "./metrics/fried-tofu-consumption-expenditure";
@@ -1355,6 +1359,7 @@ import { monthlyAverageActualWorkingHoursMalePre2019 } from "./metrics/monthly-a
 import { monthlyAverageActualWorkingHoursMale } from "./metrics/monthly-average-actual-working-hours-male";
 import { monthlyParkingConsumptionExpenditure } from "./metrics/monthly-parking-consumption-expenditure";
 import { mopedCount } from "./metrics/moped-count";
+import { mothersAgeAtFirstBirth } from "./metrics/mothers-age-at-first-birth";
 import { motorcycleCount } from "./metrics/motorcycle-count";
 import { moversIn } from "./metrics/movers-in";
 import { moversOut } from "./metrics/movers-out";
@@ -1490,6 +1495,7 @@ import { nurseryCountPer100k05 } from "./metrics/nursery-count-per-100k-0-5";
 import { nurseryEducationDiffusionRate } from "./metrics/nursery-education-diffusion-rate";
 import { nurseryTeacherAnnualIncome } from "./metrics/nursery-teacher-annual-income";
 import { nurseryUtilizationRate } from "./metrics/nursery-utilization-rate";
+import { nurseryWaitingChildrenCount } from "./metrics/nursery-waiting-children-count";
 import { nursesGeneralHospitalPer100beds } from "./metrics/nurses-general-hospital-per-100beds";
 import { nursesInMedicalFacilitiesPer100k } from "./metrics/nurses-in-medical-facilities-per-100k";
 import { nursesPer100kPopulation } from "./metrics/nurses-per-100k-population";
@@ -2067,6 +2073,7 @@ import { schoolTeacherAnnualIncome } from "./metrics/school-teacher-annual-incom
 import { scienceMuseumCount } from "./metrics/science-museum-count";
 import { seaBreamConsumptionExpenditure } from "./metrics/sea-bream-consumption-expenditure";
 import { seaBreamConsumptionQuantity } from "./metrics/sea-bream-consumption-quantity";
+import { seafoodConsumptionExpenditure } from "./metrics/seafood-consumption-expenditure";
 import { secondaryActivityAvgTimeEmployedFemale } from "./metrics/secondary-activity-avg-time-employed-female";
 import { secondaryActivityAvgTimeEmployedMale } from "./metrics/secondary-activity-avg-time-employed-male";
 import { secondaryActivityAvgTimeUnemployedFemale } from "./metrics/secondary-activity-avg-time-unemployed-female";
@@ -2341,6 +2348,7 @@ import { themePopulationPyramid80PlusFemale } from "./metrics/theme-population-p
 import { themePopulationPyramid80PlusMale } from "./metrics/theme-population-pyramid-80-plus-male";
 import { themeProstitutionCrimeRecognitionCount } from "./metrics/theme-prostitution-crime-recognition-count";
 import { thermalPowerPlantCount } from "./metrics/thermal-power-plant-count";
+import { threeGenerationHouseholdMembers } from "./metrics/three-generation-household-members";
 import { tissuePaperConsumptionExpenditure } from "./metrics/tissue-paper-consumption-expenditure";
 import { tobaccoConsumptionExpenditure } from "./metrics/tobacco-consumption-expenditure";
 import { tofuConsumptionExpenditure } from "./metrics/tofu-consumption-expenditure";
@@ -2847,6 +2855,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "chicken-consumption-expenditure": chickenConsumptionExpenditure,
   "chicken-consumption-quantity": chickenConsumptionQuantity,
   "chikuwa-consumption-expenditure": chikuwaConsumptionExpenditure,
+  "child-abuse-consultation-cases": childAbuseConsultationCases,
   "child-consultation-center-cases-per-1000": childConsultationCenterCasesPer1000,
   "child-consultation-center-cases": childConsultationCenterCases,
   "child-rearing-allowance-recipients": childRearingAllowanceRecipients,
@@ -2991,6 +3000,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "crab-consumption-expenditure": crabConsumptionExpenditure,
   "crab-consumption-quantity": crabConsumptionQuantity,
   "craft-materials-consumption-expenditure": craftMaterialsConsumptionExpenditure,
+  "cram-school-establishment-count": cramSchoolEstablishmentCount,
   "crime-rate-per-1k": crimeRatePer1k,
   "criminal-arrest-rate": criminalArrestRate,
   "criminal-recognition-count-of-prostitution-crime-rate": criminalRecognitionCountOfProstitutionCrimeRate,
@@ -3038,6 +3048,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "daytime-population-ratio": daytimePopulationRatio,
   "death-accident": deathAccident,
   "death-count": deathCount,
+  "deaths-cerebral-infarction-per-100k": deathsCerebralInfarctionPer100k,
   "deaths-cerebrovascular-disease-per-100k": deathsCerebrovascularDiseasePer100k,
   "deaths-cerebrovascular-disease": deathsCerebrovascularDisease,
   "deaths-diabetes-per-100k": deathsDiabetesPer100k,
@@ -3363,6 +3374,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "fresh-shiitake-consumption-quantity": freshShiitakeConsumptionQuantity,
   "fresh-udon-soba-consumption-expenditure": freshUdonSobaConsumptionExpenditure,
   "fresh-udon-soba-consumption-quantity": freshUdonSobaConsumptionQuantity,
+  "fresh-vegetables-consumption-expenditure": freshVegetablesConsumptionExpenditure,
   "freshwater-clam-consumption-expenditure": freshwaterClamConsumptionExpenditure,
   "freshwater-clam-consumption-quantity": freshwaterClamConsumptionQuantity,
   "fried-tofu-consumption-expenditure": friedTofuConsumptionExpenditure,
@@ -3950,6 +3962,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "monthly-average-actual-working-hours-male": monthlyAverageActualWorkingHoursMale,
   "monthly-parking-consumption-expenditure": monthlyParkingConsumptionExpenditure,
   "moped-count": mopedCount,
+  "mothers-age-at-first-birth": mothersAgeAtFirstBirth,
   "motorcycle-count": motorcycleCount,
   "movers-in": moversIn,
   "movers-out": moversOut,
@@ -4085,6 +4098,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "nursery-education-diffusion-rate": nurseryEducationDiffusionRate,
   "nursery-teacher-annual-income": nurseryTeacherAnnualIncome,
   "nursery-utilization-rate": nurseryUtilizationRate,
+  "nursery-waiting-children-count": nurseryWaitingChildrenCount,
   "nurses-general-hospital-per-100beds": nursesGeneralHospitalPer100beds,
   "nurses-in-medical-facilities-per-100k": nursesInMedicalFacilitiesPer100k,
   "nurses-per-100k-population": nursesPer100kPopulation,
@@ -4662,6 +4676,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "science-museum-count": scienceMuseumCount,
   "sea-bream-consumption-expenditure": seaBreamConsumptionExpenditure,
   "sea-bream-consumption-quantity": seaBreamConsumptionQuantity,
+  "seafood-consumption-expenditure": seafoodConsumptionExpenditure,
   "secondary-activity-avg-time-employed-female": secondaryActivityAvgTimeEmployedFemale,
   "secondary-activity-avg-time-employed-male": secondaryActivityAvgTimeEmployedMale,
   "secondary-activity-avg-time-unemployed-female": secondaryActivityAvgTimeUnemployedFemale,
@@ -4936,6 +4951,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "theme-population-pyramid-80-plus-male": themePopulationPyramid80PlusMale,
   "theme-prostitution-crime-recognition-count": themeProstitutionCrimeRecognitionCount,
   "thermal-power-plant-count": thermalPowerPlantCount,
+  "three-generation-household-members": threeGenerationHouseholdMembers,
   "tissue-paper-consumption-expenditure": tissuePaperConsumptionExpenditure,
   "tobacco-consumption-expenditure": tobaccoConsumptionExpenditure,
   "tofu-consumption-expenditure": tofuConsumptionExpenditure,
