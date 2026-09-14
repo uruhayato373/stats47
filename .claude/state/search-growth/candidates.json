@@ -134,7 +134,7 @@
       "id": "server-risk::/ranking/assistance-expenses-prefecture",
       "url": "/ranking/assistance-expenses-prefecture",
       "type": "server-risk",
-      "status": "pending",
+      "status": "dismissed",
       "score": 0.096,
       "scoreBreakdown": {
         "impact": 0.8,
@@ -159,13 +159,15 @@
       "limitations": [],
       "expectedMetric": "5xx / empty 200 の解消",
       "suggestedVerification": "本番 HTTP を Googlebot UA で再実測 + Cloudflare GraphQL で 5xx 推移確認",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "dismissedAt": "2026-09-14T00:13:10.795Z",
+      "dismissReason": "2026-09-13 collect で HTTP 503 を観測したが、2026-09-14 09:15 JST に Googlebot UA で実測すると 200 (261KB)。継続する 5xx ではなく現時点で是正対象なし (weekly-review 2026-W37)"
     },
     {
       "id": "server-risk::/ranking/building-fire-count",
       "url": "/ranking/building-fire-count",
       "type": "server-risk",
-      "status": "pending",
+      "status": "dismissed",
       "score": 0.096,
       "scoreBreakdown": {
         "impact": 0.8,
@@ -190,7 +192,9 @@
       "limitations": [],
       "expectedMetric": "5xx / empty 200 の解消",
       "suggestedVerification": "本番 HTTP を Googlebot UA で再実測 + Cloudflare GraphQL で 5xx 推移確認",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "dismissedAt": "2026-09-14T00:13:10.967Z",
+      "dismissReason": "2026-09-13 collect で HTTP 503 を観測したが、2026-09-14 09:15 JST に Googlebot UA で実測すると 200 (293KB)。継続する 5xx ではなく現時点で是正対象なし (weekly-review 2026-W37)"
     },
     {
       "id": "server-risk::/ranking/certified-childcare-center-education-cost-per-student",
