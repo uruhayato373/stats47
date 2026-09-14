@@ -14,6 +14,8 @@ import {
 } from "@/features/products";
 
 import { getRequiredBaseUrl } from "@/lib/env";
+import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 
 import type { Metadata } from "next";
 
@@ -30,10 +32,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = findStorefrontProduct(slug);
   if (!product) return { title: "商品が見つかりません" };
 
+  const baseUrl = getRequiredBaseUrl();
+  const canonicalPath = `/products/${product.slug}`;
+
   return {
     title: `${product.title} | stats47`,
     description: product.description,
-    alternates: { canonical: `/products/${product.slug}` },
+    alternates: { canonical: canonicalPath },
+    ...generateOGMetadata({
+      title: `${product.title} | stats47`,
+      description: product.description,
+      imageUrl: ogpImageUrl(ogpImageKeys.product(product.slug)),
+      url: `${baseUrl}${canonicalPath}`,
+    }),
   };
 }
 
