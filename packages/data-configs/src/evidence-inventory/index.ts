@@ -19,8 +19,15 @@ export type {
   InternalEvidenceAdoption,
   JapanZueCandidate,
   JapanZueEvidenceItem,
+  KakeiExpenseEvidenceDirection,
+  KakeiExpenseEvidenceEntry,
+  KakeiExpenseEvidenceInventory,
+  KakeiExpenseEvidenceRef,
+  KakeiExpenseEvidenceThresholds,
   KakeiMarketingAnalysis,
   ReferenceSourcePolicy,
 } from "./types";
+export { KAKEI_EXPENSE_EVIDENCE_DIRECTIONS } from "./types";
 export * from "./japan-zue";
 export * from "./kakei-marketing";
+export * from "./kakei-note";
