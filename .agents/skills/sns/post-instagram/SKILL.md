@@ -68,7 +68,7 @@ fetch(\`https://graph.instagram.com/v21.0/me?access_token=\${process.env.INSTAGR
 ### Step 2: 投稿スクリプト実行
 
 ```bash
-npx tsx .Codex/skills/sns/post-instagram/post-instagram.ts <rankingKey> [<rankingKey> ...] [flags]
+npx tsx .claude/skills/sns/post-instagram/post-instagram.ts <rankingKey> [<rankingKey> ...] [flags]
 ```
 
 ### Step 3: API フロー（スクリプト内部）
@@ -112,8 +112,8 @@ npx tsx .Codex/skills/sns/post-instagram/post-instagram.ts <rankingKey> [<rankin
 
 投稿成功後、以下を更新:
 
-- **投稿台帳 `.Codex/state/sns/posts.json`**（`sns-posts-store.cjs` の `updateById`/`insert` 経由、または `/mark-sns-posted`。手編集しない。完全DBレス。旧 D1 sns_posts は廃止）: `post_url`, `posted_at`, `platform=instagram`, `status=posted`
-- **投稿ログ**: `.Codex/state/metrics/sns/instagram-publish-log.csv` に `posted_at, ranking_key, media_id, type, permalink` を追記
+- **投稿台帳 `.claude/state/sns/posts.json`**（`sns-posts-store.cjs` の `updateById`/`insert` 経由、または `/mark-sns-posted`。手編集しない。完全DBレス。旧 D1 sns_posts は廃止）: `post_url`, `posted_at`, `platform=instagram`, `status=posted`
+- **投稿ログ**: `.claude/state/metrics/sns/instagram-publish-log.csv` に `posted_at, ranking_key, media_id, type, permalink` を追記
 
 ## キャプション・画像の配置規約
 

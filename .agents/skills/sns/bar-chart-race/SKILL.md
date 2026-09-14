@@ -13,7 +13,7 @@ Bar Chart Race (全年度推移の順位変動アニメ動画) を 1 本の線�
 `render-bar-chart-race` / `post-bar-chart-race-captions` の 3 スキルを統合した (詳細手順は `reference/` に温存)。
 
 > **位置づけ**: BCR は Instagram リール / X 向けの動画フォーマット。
-> YouTube pilot は通常動画 master-first、TikTok は撤退済みのため対象外 (`.Codex/rules/sns-content-standards.md` §0)。レンダは 1 本 4-20 分かかるため
+> YouTube pilot は通常動画 master-first、TikTok は撤退済みのため対象外 (`.claude/rules/sns-content-standards.md` §0)。レンダは 1 本 4-20 分かかるため
 > 瞬発力トラック (react-to-news) からは外す。投稿は本スキルでは行わず、各チャネルの既存投稿フローに委ねる。
 > **Remotion BCR レンダの正典入口は本スキル** (静止画/動画一般は `/render-sns-stills`、プレビューは `/preview-remotion`)。
 >
@@ -52,11 +52,11 @@ npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population --platf
 2. **render**: `apps/remotion/scripts/pipeline/render-bar-chart-race.ts` で動画化。`--dry-run` で対象確認 → 本番。
    `--platform instagram` / `--platform x`。詳細 `reference/render.md`。
 3. **captions**: `reference/captions.md` の型で全 SNS キャプションを生成し posts.json に draft 登録
-   (UTM は `.Codex/rules/sns-content-standards.md` §4)。
+   (UTM は `.claude/rules/sns-content-standards.md` §4)。
 4. **投稿は本スキルでは行わない**。各チャネルの既存投稿フロー (`publish-x` / IG cron 等) に委ねる。
 
 ## 参照
 
-- 詳細手順: `.Codex/skills/sns/bar-chart-race/reference/{generate,render,captions}.md`
+- 詳細手順: `.claude/skills/sns/bar-chart-race/reference/{generate,render,captions}.md`
 - レンダスクリプト: `apps/remotion/scripts/pipeline/render-bar-chart-race.ts`
-- チャネル規約・頻度リミット: `.Codex/rules/sns-content-standards.md`
+- チャネル規約・頻度リミット: `.claude/rules/sns-content-standards.md`

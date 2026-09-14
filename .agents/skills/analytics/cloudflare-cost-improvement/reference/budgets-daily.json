@@ -1,7 +1,7 @@
 {
   "version": 1,
   "description": "Cloudflare 日次 usage 閾値。月次無料枠を 30 日で割った値 + 異常検知用の前日比閾値。違反時は cloudflare-usage-daily.yml で [Cloudflare Alert] Issue を起票する。",
-  "source": "Workers Paid plan free tier (https://developers.cloudflare.com/workers/platform/pricing/)",
+  "source": "Cloudflare R2 pricing (https://developers.cloudflare.com/r2/pricing/, accessed 2026-08-24)",
   "context_2026_04_29": {
     "phase_10_completed": "production D1 (stats47_static) を削除。daily D1 = 0 を期待",
     "r2_migration": "Phase 0-7 で 33,500 ファイル / ~836MB を R2 に push 済。安定運用後の class A ops は通常 < 100/日",
@@ -68,8 +68,18 @@
       "operator": ">",
       "threshold": 18,
       "severity": "warning",
-      "title": "R2 storage > 18GB",
-      "note": "無料枠 10GB/月・月額 $0.6/GB-month 課金中。2026-07-27 に incremental-cache 未GC (8.85GB) を削除しアカウント合計 15.2GB 実測 (stats47 11.2GB + doboku-note 系 4.01GB)。閾値は削減後実測 + 余裕 2.8GB で再設定 (旧 50GB は緩すぎて9GBのゴミが検知されなかった、詳細 .claude/todo/improvements.md [R2-STORAGE-01] / .claude/rules/r2-storage-design.md)"
+      "title": "R2 account storage > 18GB",
+      "note": "siteScope=account。Standard storageは10GB-month/月まで無料、超過は$0.015/GB-month。stats47以外のbucket増加も検知するアカウント予算alertで、原因判定はbucket別metricで行う。2026-07-27 に incremental-cache 未GC (8.85GB) を削除しアカウント合計 15.2GB実測。旧50GBは緩すぎて9GBの不要cacheを検知できなかった"
+    },
+    {
+      "rule_id": "r2-stats47-storage-growth",
+      "metric_key": "r2_bucket_stats47_storage_gb",
+      "required": true,
+      "operator": ">",
+      "threshold": 12.5,
+      "severity": "warning",
+      "title": "stats47 bucket storage > 12.5GB",
+      "note": "siteScope=stats47。2026-08-22 GraphQL実測11.59GBに0.91GBの調査余白を加えた閾値。8/19→8/22のstats47純増0.21GBの4倍超で、超過時はr2-duのprefix集計とincremental-cache世代監査を行う。ISRは別途4世代上限でもfail-closedに検査する"
     },
     {
       "rule_id": "r2-egress-spike",

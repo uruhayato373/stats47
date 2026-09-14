@@ -106,7 +106,7 @@ const tagsPath = fs.existsSync(path.join(articleDir, 'hashtags.txt'))
   ? path.join(articleDir, 'hashtags.txt')
   : path.join(articleDir, 'tags.txt');
 const tags = fs.existsSync(tagsPath)
-  ? fs.readFileSync(tagsPath, 'utf8').trim().split('\n').map(s => s.trim()).filter(Boolean).slice(0, 50)
+  ? fs.readFileSync(tagsPath, 'utf8').trim().split('\n').map(s => s.trim()).filter(Boolean).slice(0, 99)
   : [];
 
 // 画像ファイルの検出
@@ -436,9 +436,9 @@ updateで本文を全消去しても旧添付が残る場合があるため、2�
 新規有料記事は次の二段階で確定する。
 
 ```bash
-bash .Codex/scripts/note/publish-new-note.sh <slug> <vertical> --prepare-publish
+bash .claude/scripts/note/publish-new-note.sh <slug> <vertical> --prepare-publish
 # /tmp/note-ready-<slug>.png を目視
-bash .Codex/scripts/note/publish-new-note.sh <slug> <vertical> --commit-publish
+bash .claude/scripts/note/publish-new-note.sh <slug> <vertical> --commit-publish
 ```
 
 ## Phase 6: 下書き保存

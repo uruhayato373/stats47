@@ -22,13 +22,13 @@ primary_agent: sns-renderer
 
 2. dry-run で対象を確認:
    ```bash
-   node .Codex/scripts/remotion/archive.mjs
-   node .Codex/scripts/remotion/archive.mjs --only <slug>   # 特定プロジェクトのみ
+   node .claude/scripts/remotion/archive.mjs
+   node .claude/scripts/remotion/archive.mjs --only <slug>   # 特定プロジェクトのみ
    ```
 
 3. 実行:
    ```bash
-   node .Codex/scripts/remotion/archive.mjs --apply
+   node .claude/scripts/remotion/archive.mjs --apply
    ```
    - デフォルトは **move** (source を消す)。`--copy` で残す
    - dest が既存かつ同サイズなら skip (べき等)
@@ -72,11 +72,11 @@ primary_agent: sns-renderer
 | SNS 47 分割など再投稿候補 | `sns/<slug>/` | `sns/migration-flow/tokyo.mp4` |
 | メタ (description / caption / thumbnail) | `video/<slug>/metadata/` | `video/migration-flow-47/metadata/description.txt` |
 
-詳細: `.Codex/rules/r2-storage-design.md`
+詳細: `.claude/rules/r2-storage-design.md`
 
 ## 参照
 
-- スクリプト: `.Codex/scripts/remotion/archive.mjs`
-- 共通 lib: `.Codex/scripts/remotion/lib.mjs`
-- R2 push: `.Codex/skills/db/push-r2/SKILL.md`
+- スクリプト: `.claude/scripts/remotion/archive.mjs`
+- 共通 lib: `.claude/scripts/remotion/lib.mjs`
+- R2 push: `.claude/skills/db/push-r2/SKILL.md`
 - 関連: `/prune-remotion-output`

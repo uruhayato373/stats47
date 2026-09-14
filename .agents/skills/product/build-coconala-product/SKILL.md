@@ -6,12 +6,12 @@ primary_agent: coconala-product-manager
 co_agents: [data-ingester, estat-researcher]
 ---
 
-ココナラ商品ファクトリー (`packages/product-factory`) を操作して、型付き商品カタログ (A-01〜L-07・174 件) から
+ココナラ商品ファクトリー (`packages/product-factory`) を操作して、型付き商品カタログ (P-01〜P-14・14パック) から
 成果物一式を生成・検証し、**オーナーの実機検証・出品を待つ状態**まで仕上げる。
 
 ## 大原則
 
-- **必ず `.Codex/rules/coconala-product-standards.md` に従う**（SSOT 構造・生成フロー・出典/許諾/免責・禁止事項・出品規律）。
+- **必ず `.claude/rules/coconala-product-standards.md` に従う**（SSOT 構造・生成フロー・出典/許諾/免責・禁止事項・出品規律）。
 - 商品定義は git TS (`src/catalog/`) が SSOT。生成バイナリは `.local/coconala-products/`（**git 管理外・公開 R2 へ置かない**）。
 - **Office 実機検証・ココナラ出品はしない**（人間工程）。「生成成功」を「互換性検証済み」と書かない。
 
@@ -30,8 +30,8 @@ error があれば `src/catalog/` の該当 family ファイルを修正して�
 
 ### B. 商品を生成する
 ```bash
-npm run products:generate --workspace=@stats47/product-factory -- --id <ID>   # 単品
-npm run products:generate --workspace=@stats47/product-factory -- --all        # 全商品 (~10分・.local に約584M)
+npm run products:generate --workspace=@stats47/product-factory -- --id <ID> --version <NEW_VERSION>
+npm run products:generate --workspace=@stats47/product-factory -- --all --version <NEW_VERSION>
 ```
 生成先 `.local/coconala-products/<id>/<version>/`。各商品に product.(pptx|xlsx) + preview + listing + SOURCES + LICENSE + manual.pdf + manifest + READINESS。
 
@@ -51,11 +51,16 @@ npx tsx packages/product-factory/src/data/load-ranking-values.ts <rankingKey>   
 
 ### E. リリース台帳を再生成する
 ```bash
-npm run products:report --workspace=@stats47/product-factory   # .Codex/state/products/catalog-status.json
+npm run products:report --workspace=@stats47/product-factory   # .claude/state/products/catalog-status.json
 ```
 
+同コマンドは横断販売カタログ `.local/product-portfolio/catalog.{html,csv}` も生成する。
+改訂Kindleは `-- --kindle-version <VERSION>`、noteは `--note-revision <REVISION>` で固定する。商品・公開記録・納品版・未完了工程を混同しない。
+note販売準備は `npx tsx packages/product-factory/src/channels/note/cli.ts revision --revision <NEW_REVISION> --all`。
+旧v1直参照のgenerate/promoteは使わず、既存の `_delivery` 固定SHAに接続する。
+
 ### F. オーナーへ渡す
-各商品の `.local/coconala-products/<id>/v1/READINESS.md`（機械充足項目 vs オーナー実施項目）を案内する。
+各商品の `.local/coconala-products/<id>/<version>/READINESS.md`（機械充足項目 vs オーナー実施項目）を案内する。
 **実機検証（Windows 推奨）と出品はオーナーが実施**する。commit/push/deploy は明示指示があるときだけ。
 
 ## 委譲
@@ -64,8 +69,8 @@ npm run products:report --workspace=@stats47/product-factory   # .Codex/state/pr
 - 実機検証・出品 → 人間（オーナー）。
 
 ## 関連
-- 正典: `.Codex/rules/coconala-product-standards.md`
+- 正典: `.claude/rules/coconala-product-standards.md`
 - モジュール: `packages/product-factory/README.md`
-- agent: `.Codex/agents/coconala-product-manager.md`
+- agent: `.claude/agents/coconala-product-manager.md`
 - note・KDP・Brain・ココナラ横断の商品ポートフォリオ、需要ゲート、共通content bundleを扱う場合:
-  `reference/multi-channel-content-product-factory.md`（進捗SSOTは`.Codex/todo/backlog.md`）
+  `reference/multi-channel-content-product-factory.md`（進捗SSOTは`.claude/todo/backlog.md`）

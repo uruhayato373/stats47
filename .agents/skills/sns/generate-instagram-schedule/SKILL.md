@@ -12,8 +12,8 @@ Instagram 投稿スケジュール JSON を自動生成する。
 以下 3 つのソースから「投稿済み / スケジュール済み」キーを収集し、すべて除外する:
 
 1. **ローカル D1** `sns_posts` テーブル（`platform='instagram' AND status='posted'`）
-2. **`.Codex/state/ig-posted-log.jsonl`** — GitHub Actions 投稿後に自動追記されるログ
-3. **`.Codex/state/instagram-w*-schedule.json`** — 過去・現在の全スケジュールファイル
+2. **`.claude/state/ig-posted-log.jsonl`** — GitHub Actions 投稿後に自動追記されるログ
+3. **`.claude/state/instagram-w*-schedule.json`** — 過去・現在の全スケジュールファイル
 
 ## 実行前の確認事項
 
@@ -25,16 +25,16 @@ Instagram 投稿スケジュール JSON を自動生成する。
 
 ```bash
 # 候補一覧確認（--dry-run）
-node .Codex/scripts/instagram/generate-schedule.cjs \
+node .claude/scripts/instagram/generate-schedule.cjs \
   --from 2026-06-11 --to 2026-07-01 \
   --images 14 --reels 3 \
   --dry-run
 
 # スケジュール生成・保存
-node .Codex/scripts/instagram/generate-schedule.cjs \
+node .claude/scripts/instagram/generate-schedule.cjs \
   --from 2026-06-11 --to 2026-07-01 \
   --images 14 --reels 3 \
-  --out .Codex/state/instagram-w20-schedule.json
+  --out .claude/state/instagram-w20-schedule.json
 ```
 
 ## 引数
@@ -57,7 +57,7 @@ node .Codex/scripts/instagram/generate-schedule.cjs \
 
 2. schedule JSON を commit → **main へ反映** (cron は main checkout で動くため):
    ```bash
-   git add .Codex/state/instagram-wXX-schedule.json
+   git add .claude/state/instagram-wXX-schedule.json
    git commit -m "feat(instagram): WXX スケジュール追加"
    # develop 経由で develop→main PR (通常デプロイフローに同乗)
    ```

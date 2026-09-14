@@ -32,7 +32,7 @@ primary_agent: blog-editor
 
 ## テーブル
 
-> **⚠ 記事内でのマークダウンテーブルは全面禁止 (2026-06-04・例外なし)。** モバイルで読みにくく、本文・チャートとの情報重複が発生しやすいため、記事本文に `| … |` の表を一切置かない。データの提示には SVG チャート（`/generate-article-charts`）、列挙・手順・比較は箇条書き (bullet list)、少量の数値は本文の太字で表現すること。二次元比較がどうしても必要ならグループ化横棒・散布図等の SVG 図にする。`<ranking-table>` コンポーネントも使用禁止（専用ランキングページへの `<source-link>` で導線を確保する）。決定的検査: `quality-gate.mjs` が区切り行 `|---|` の存在を blocker で検出する。正典: `.Codex/rules/blog-quality-standards.md`。
+> **⚠ 記事内でのマークダウンテーブルは全面禁止 (2026-06-04・例外なし)。** モバイルで読みにくく、本文・チャートとの情報重複が発生しやすいため、記事本文に `| … |` の表を一切置かない。データの提示には SVG チャート（`/generate-article-charts`）、列挙・手順・比較は箇条書き (bullet list)、少量の数値は本文の太字で表現すること。二次元比較がどうしても必要ならグループ化横棒・散布図等の SVG 図にする。`<ranking-table>` コンポーネントも使用禁止（専用ランキングページへの `<source-link>` で導線を確保する）。決定的検査: `quality-gate.mjs` が区切り行 `|---|` の存在を blocker で検出する。正典: `.claude/rules/blog-quality-standards.md`。
 
 ```markdown
 | 列A | 列B | 列C |
@@ -203,8 +203,8 @@ MDX 不要。HTML カスタムタグとして `react-markdown` の `components` 
 
 ランキングページ・相関ページへの誘導リンク。横幅いっぱいのカード形式で右矢印付き。
 
-> **配置の正典は `.Codex/rules/blog-quality-standards.md`「source-link の配置」**。
-> 本ファイルは記法 (タグ形式) を示すのみ。`/ranking/` への `<source-link>` は**対応する図・データを扱うセクション内 (SVG 図の直下) にインライン配置**し、記事末尾に 2 個以上集約しないこと (検査: `node .Codex/scripts/blog/audit-article-structure.mjs`)。
+> **配置の正典は `.claude/rules/blog-quality-standards.md`「source-link の配置」**。
+> 本ファイルは記法 (タグ形式) を示すのみ。`/ranking/` への `<source-link>` は**対応する図・データを扱うセクション内 (SVG 図の直下) にインライン配置**し、記事末尾に 2 個以上集約しないこと (検査: `node .claude/scripts/blog/audit-article-structure.mjs`)。
 
 ```html
 <source-link href="/ranking/unmarried-ratio-male-30-34">47都道府県の未婚率ランキングをもっと見る</source-link>

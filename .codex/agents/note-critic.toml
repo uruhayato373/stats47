@@ -1,6 +1,6 @@
 name = "note-critic"
-description = 'note 記事（A/B/C/D シリーズ）の意味レビュー専任。記事は read-only、判定は review.md に書き出す。修正は呼び元 agent (note-manager / write-note-section) が行う。Use when user says "note記事レビュー", "note校閲", "note品質チェック", "公開前確認".'
-developer_instructions = """
+description = "note 記事（A/B/C/D シリーズ）の意味レビュー専任。記事は read-only、判定は review.md に書き出す。修正は呼び元 agent (note-manager / write-note-section) が行う。Use when user says \"note記事レビュー\", \"note校閲\", \"note品質チェック\", \"公開前確認\"."
+developer_instructions = '''
 # Note Critic Agent
 
 note.com 記事の品質レビューを専任する agent。`edit-note-draft` スキルが「修正案提案」を担うのに対し、
@@ -104,8 +104,8 @@ date: YYYY-MM-DD
 
 ## 必読 rules
 
-- `.Codex/rules/critic-review-protocol.md` — **全 critic 共通のレビュープロトコル (分離原則 / verdict / 重大度 / Output Contract の正典)**
-- `.Codex/rules/evidence-based-judgment.md` — 推測での指摘禁止・定量で指摘
+- `.claude/rules/critic-review-protocol.md` — **全 critic 共通のレビュープロトコル (分離原則 / verdict / 重大度 / Output Contract の正典)**
+- `.claude/rules/evidence-based-judgment.md` — 推測での指摘禁止・定量で指摘
 
 ## 関連
 
@@ -113,4 +113,4 @@ date: YYYY-MM-DD
 - `write-note-section` スキル — B/C/D 記事執筆
 - `post-note-ranking` スキル — A シリーズ量産
 - `/publish-note` スキル — 投稿自動化（review.md PASS 後に実行）
-- `note-manager` エージェント — 公開ライフサイクル管理"""
+- `note-manager` エージェント — 公開ライフサイクル管理'''

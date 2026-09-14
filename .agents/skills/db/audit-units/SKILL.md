@@ -6,7 +6,7 @@ primary_agent: data-ingester
 
 # audit-units — 単位の横断監査
 
-正典: `.Codex/rules/unit-semantics-standards.md`。
+正典: `.claude/rules/unit-semantics-standards.md`。
 
 単位の解釈は 5 つの面 (config / ブログ / 書籍 / 地図 / ランキング) に散らばっており、
 どれか 1 つだけ見ても事故は見つからない。ここで一度に走らせる。
@@ -29,7 +29,7 @@ npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts --check
 ```
 
 `--check` が失敗したら**先に再生成する** (`--check` を外して実行)。鏡が古いまま他の監査を回すと、
-`.Codex/scripts/**` 側だけ古い解釈で判定してしまう。
+`.claude/scripts/**` 側だけ古い解釈で判定してしまう。
 
 ### 2. config の単位 (語彙と金額スケール)
 
@@ -45,7 +45,7 @@ npm run audit:money-unit-scale --workspace=@stats47/data-configs
 ### 3. ブログ本文の値照合 (艦隊)
 
 ```bash
-node .Codex/scripts/blog/audit-published-blog.mjs            # 全公開記事 (--limit N で小さく試せる)
+node .claude/scripts/blog/audit-published-blog.mjs            # 全公開記事 (--limit N で小さく試せる)
 node -e '
 const a = require("/tmp/published-blog-audit.json");
 const hits = a.results.flatMap((r) =>
@@ -55,7 +55,7 @@ for (const h of hits.slice(0, 20)) console.log(" ", h.sev, h.slug, "—", h.m);
 '
 ```
 
-単一記事なら `node .Codex/scripts/blog/quality-gate.mjs <slug>`。
+単一記事なら `node .claude/scripts/blog/quality-gate.mjs <slug>`。
 
 **報告された不一致を鵜呑みにしない。** 実測では大半が「data 側の単位表記が不正確」で、
 本文が正しいケースがある (正典 `unit-semantics-standards.md` §4 の分母つき単位)。
@@ -81,8 +81,8 @@ npx tsx packages/product-factory/scripts/audit-book-facts.mts --book K-S1-01   #
 タイルマップの再生成時に `map-value-match.mjs` が SSOT と突合する。
 
 ```bash
-node --test .Codex/scripts/lib/__tests__/map-value-match.test.mjs
-npx tsx .Codex/scripts/blog/regenerate-tile-maps.ts   # dry-run。matchRate が落ちた地図が出る
+node --test .claude/scripts/lib/__tests__/map-value-match.test.mjs
+npx tsx .claude/scripts/blog/regenerate-tile-maps.ts   # dry-run。matchRate が落ちた地図が出る
 ```
 
 ## 判定
@@ -107,7 +107,7 @@ npx tsx .Codex/scripts/blog/regenerate-tile-maps.ts   # dry-run。matchRate が�
 
 ## 関連
 
-- 正典: `.Codex/rules/unit-semantics-standards.md`
-- 実装: `packages/data-configs/src/unit/unit-semantics.ts` (正典) / `.Codex/scripts/lib/unit-semantics.mjs` (鏡)
-- 数値の書き方 (本文側): `.Codex/rules/blog-quality-standards.md`
-- 実証ベース判定: `.Codex/rules/evidence-based-judgment.md`
+- 正典: `.claude/rules/unit-semantics-standards.md`
+- 実装: `packages/data-configs/src/unit/unit-semantics.ts` (正典) / `.claude/scripts/lib/unit-semantics.mjs` (鏡)
+- 数値の書き方 (本文側): `.claude/rules/blog-quality-standards.md`
+- 実証ベース判定: `.claude/rules/evidence-based-judgment.md`

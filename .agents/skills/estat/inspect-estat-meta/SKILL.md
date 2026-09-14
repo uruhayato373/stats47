@@ -9,7 +9,7 @@ e-Stat API のメタデータ（カテゴリ・年・地域の構造）を調査
 
 ## 事前確認
 
-調査前に `.Codex/skills/estat/references/README.md` を確認し、既知のテーブル構造やコード体系を把握すること。該当する調査のリファレンスファイルがあれば、そちらも読むこと。
+調査前に `.claude/skills/estat/references/README.md` を確認し、既知のテーブル構造やコード体系を把握すること。該当する調査のリファレンスファイルがあれば、そちらも読むこと。
 
 ## 用途
 
@@ -67,7 +67,7 @@ node scripts/temp-inspect-meta.mjs <statsDataId>
    - **cat01 コード**: 取得したいカテゴリ（例: `J250502`）
    - **time 形式**: 年コードの形式（`2024000000` or `2024100000` 等）
      - ⚠️ **metric config の `years` / R2 yearCode には 4 桁年 (`2024`) で入れる**。フルタイムコード
-       (`2024100000`) を転記しない（「2009100000 問題」再発防止。規約: `.Codex/rules/estat-api.md`「年の正規化」）
+       (`2024100000`) を転記しない（「2009100000 問題」再発防止。規約: `.claude/rules/estat-api.md`「年の正規化」）
    - **area レベル**: 都道府県は `lvArea=2` / 5桁 `XX000` 形式
    - **tab / cat02〜**: 複数ディメンションがある場合のフィルタ値
 
@@ -78,9 +78,9 @@ node scripts/temp-inspect-meta.mjs <statsDataId>
 
 ### Phase 3: よく使う表は references に記録（完全DBレス）
 
-4. **CLASS_INF は e-Stat API (`getMetaInfo`) から毎回再取得できる**ため、永続キャッシュは不要。旧 D1 `estat_metainfo.class_inf` への書き戻しは廃止（8,000 行の自動カタログは retired D1 由来で git 再生成不可。DBレスの恒久カタログは **git-tracked `.Codex/skills/estat/references/*.md` + e-Stat API**）。
+4. **CLASS_INF は e-Stat API (`getMetaInfo`) から毎回再取得できる**ため、永続キャッシュは不要。旧 D1 `estat_metainfo.class_inf` への書き戻しは廃止（8,000 行の自動カタログは retired D1 由来で git 再生成不可。DBレスの恒久カタログは **git-tracked `.claude/skills/estat/references/*.md` + e-Stat API**）。
 
-   **頻繁に使う統計表**だけ、把握した構造（ディメンション一覧・各項目数・都道府県ランキング取得の推奨パラメータ）を `.Codex/skills/estat/references/<調査名>.md` に追記しておく。これが次回以降 API を叩かずに参照できる恒久カタログになる（`references/README.md` の索引にも 1 行追加する）。
+   **頻繁に使う統計表**だけ、把握した構造（ディメンション一覧・各項目数・都道府県ランキング取得の推奨パラメータ）を `.claude/skills/estat/references/<調査名>.md` に追記しておく。これが次回以降 API を叩かずに参照できる恒久カタログになる（`references/README.md` の索引にも 1 行追加する）。
 
 ### Phase 4: 後処理
 

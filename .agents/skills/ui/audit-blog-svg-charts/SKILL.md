@@ -7,7 +7,7 @@ primary_agent: chart-author
 # /audit-blog-svg-charts
 
 ブログ記事 SVG チャートの規約違反を検出し、是正優先リストを出力するスキル。
-`.Codex/rules/blog-svg-chart-standards.md` を基準とする。
+`.claude/rules/blog-svg-chart-standards.md` を基準とする。
 
 ## 実行
 
@@ -29,7 +29,7 @@ Layer 1 を使わず CLI / 一時スクリプト内で SVG を直接組んでい
 
 ```bash
 # generate-article-charts.ts 内に SVG テンプレートリテラルを直接書いているか
-grep -n "function gen.*Svg\|<svg\|viewBox" .Codex/scripts/blog/generate-article-charts.ts
+grep -n "function gen.*Svg\|<svg\|viewBox" .claude/scripts/blog/generate-article-charts.ts
 ```
 
 **除外（誤検知）**: 呼び出しコードの `generateBarChartSvg(...)` 等は対象外。
@@ -43,7 +43,7 @@ grep -n "function gen.*Svg\|<svg\|viewBox" .Codex/scripts/blog/generate-article-
 grep -rn \
   --include="*.mjs" --include="*.ts" --include="*.cjs" \
   -E 'fill=["\'"'"']#[0-9a-fA-F]{3,6}["\'"'"']|stroke=["\'"'"']#[0-9a-fA-F]{3,6}["\'"'"']' \
-  packages/svg-builder/src/ .Codex/scripts/blog/
+  packages/svg-builder/src/ .claude/scripts/blog/
 ```
 
 **除外**: `svgThemeStyle()` 内のハードコード（規格色 `#ffffff`, `#0f172a` 等）は対象外。
@@ -66,7 +66,7 @@ grep -rn \
 > **カード型ランキングは2レイアウト（2026-06-20）**: `layout:"columns"`（横長 960×404・ブログ本文 `<name>.svg`）と
 > `layout:"portrait"`（縦長 1080×1350・Instagram 用 `<name>-ig.svg`）の2種を `generate-article-charts.ts` が両出力する。
 > `-ig.svg` は記事 markdown に埋め込まない SNS 専用アセットなので、article.md 参照を辿る監査では「未参照」として扱わない
-> （orphan 判定しない）。カタログ正典は `.Codex/rules/blog-svg-chart-standards.md`。
+> （orphan 判定しない）。カタログ正典は `.claude/rules/blog-svg-chart-standards.md`。
 
 ### C. CSS 変数使用（重大度: high）
 
@@ -75,7 +75,7 @@ grep -rn \
 ```bash
 grep -rn --include="*.ts" --include="*.mjs" \
   -E 'hsl\(var\(--' \
-  packages/svg-builder/src/ .Codex/scripts/blog/
+  packages/svg-builder/src/ .claude/scripts/blog/
 ```
 
 ### D. svgThemeStyle() 未挿入（重大度: medium）
@@ -151,15 +151,15 @@ find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
 
 | ツール | 用途 |
 |---|---|
-| `.Codex/scripts/lib/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint + **`lintSvgSize`（カタログ別正規サイズ／アスペクト比統一・2026-06-21）** |
-| `.Codex/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（内容 lint + **サイズ lint**）。本スキルよりも広範・パブリック R2 対応 |
+| `.claude/scripts/lib/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint + **`lintSvgSize`（カタログ別正規サイズ／アスペクト比統一・2026-06-21）** |
+| `.claude/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（内容 lint + **サイズ lint**）。本スキルよりも広範・パブリック R2 対応 |
 
 > **★アスペクト比統一 gate（2026-06-21）**: `lintSvgSize(filename, content)` が filename→chartType→正規 viewBox 幅
 > （bar 960/680・scatter 720・tile-grid 720・line/stacked 680・summary 960）を blocker で検査。`audit-chart-quality.mjs`
 > と `quality-gate.mjs`（pre-commit + publish-blog.yml）に配線済。正典 `blog-svg-chart-standards.md` §6。是正は
 > `rerender-ranking-columns.mts`（960×404）/ `rerender-scatter-canonical.mts`（720×720・単色）。
 > **R2 反映は S3 API（diff-push-r2）で。`push-r2-wrangler` は flaky（Upload 完了表示でも未永続化）→ S3 GET で検証。**
-| `.Codex/scripts/blog/build-svg-gallery.mjs` | 全 SVG の目視レビュー用 HTML ギャラリー生成（下記） |
+| `.claude/scripts/blog/build-svg-gallery.mjs` | 全 SVG の目視レビュー用 HTML ギャラリー生成（下記） |
 
 `/audit-blog-svg-charts` は **ソースコード（packages/svg-builder・scripts）の規約準拠** を見る。
 `audit-chart-quality.mjs` は **生成済み SVG ファイルの品質** を見る。両者は補完関係。
@@ -173,13 +173,13 @@ find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
 
 ```bash
 # R2 公開 URL から全記事の SVG を取得してギャラリー生成（どこでも実行可）
-node .Codex/scripts/blog/build-svg-gallery.mjs --source r2 --out /tmp/blog-svg-gallery.html
+node .claude/scripts/blog/build-svg-gallery.mjs --source r2 --out /tmp/blog-svg-gallery.html
 
 # ローカルに pull 済みなら local 走査（高速・オフライン）
-node .Codex/scripts/blog/build-svg-gallery.mjs --source local
+node .claude/scripts/blog/build-svg-gallery.mjs --source local
 
 # 動作確認用に件数を絞る
-node .Codex/scripts/blog/build-svg-gallery.mjs --source r2 --limit 20
+node .claude/scripts/blog/build-svg-gallery.mjs --source r2 --limit 20
 ```
 
 生成後は `SendUserFile` で HTML をユーザーに送付する。ギャラリーの機能:
@@ -196,7 +196,7 @@ node .Codex/scripts/blog/build-svg-gallery.mjs --source r2 --limit 20
 
 ## 関連
 
-- 基準: `.Codex/rules/blog-svg-chart-standards.md`
+- 基準: `.claude/rules/blog-svg-chart-standards.md`
 - 実行エージェント: `chart-author`
 - ライブラリ: `packages/svg-builder/src/`
-- ギャラリー生成: `.Codex/scripts/blog/build-svg-gallery.mjs`
+- ギャラリー生成: `.claude/scripts/blog/build-svg-gallery.mjs`

@@ -43,7 +43,7 @@ $ARGUMENTS — [--source <name>] [--limit N] [--youtube] [--whitepaper]
 
 ### Phase 1: ソース別データ取得
 
-`--source` の値に応じて、`.Codex/skills/blog/discover-trends/sources/` 配下の該当 markdown を読み、その手順に従って **そのソース固有のデータ取得** を行う。
+`--source` の値に応じて、`.claude/skills/blog/discover-trends/sources/` 配下の該当 markdown を読み、その手順に従って **そのソース固有のデータ取得** を行う。
 
 | --source 値 | 参照ファイル | 取得元 |
 |---|---|---|
@@ -74,7 +74,7 @@ $ARGUMENTS — [--source <name>] [--limit N] [--youtube] [--whitepaper]
 
 ### Phase 2: フィルタリング
 
-1. 以下のカテゴリキーワードマップで、各トレンドを stats47 の 16 カテゴリに分類する。完全一致しなくても Codex のセマンティック推論でカテゴリとの関連性を判断する。
+1. 以下のカテゴリキーワードマップで、各トレンドを stats47 の 16 カテゴリに分類する。完全一致しなくても Claude のセマンティック推論でカテゴリとの関連性を判断する。
 
 | category_key | カテゴリ名 | 関連キーワード |
 |---|---|---|
@@ -133,7 +133,7 @@ curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
 
 **4c. e-Stat 統計表カタログ検索 (references + API):**
 
-- まず git-tracked `.Codex/skills/estat/references/*.md` を検索: `grep -rniE "{keyword}" .Codex/skills/estat/references/*.md`
+- まず git-tracked `.claude/skills/estat/references/*.md` を検索: `grep -rniE "{keyword}" .claude/skills/estat/references/*.md`
 - 見つからなければ `/search-estat`（e-Stat API 検索）。有用な統計表は `/inspect-estat-meta` で references に追記する（DBレスの恒久カタログ）
 - 新規ランキング候補は `/fetch-estat-data <statsDataId>` → TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 + `/page-data-batch --metric <key>` で登録
 - （旧 D1 `estat_metainfo` の 8,399 件自動カタログは retired D1 由来で廃止）
@@ -162,14 +162,14 @@ curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles[] | {slug
 
 `--whitepaper` が無い場合は本 Phase を丸ごと skip し、Phase 5 の「白書の切り口」欄は空欄のままにする。
 
-**前提**: NotebookLM CLI（`~/bin/notebooklm`）と認証が必要。**ローカル環境専用**（リモート実行コンテナには CLI が無いため自動 skip）。利用可能ノートブックと ID は `.Codex/skills/blog/notebooklm-research/SKILL.md` の「利用可能ノートブック」表を参照。
+**前提**: NotebookLM CLI（`~/bin/notebooklm`）と認証が必要。**ローカル環境専用**（リモート実行コンテナには CLI が無いため自動 skip）。利用可能ノートブックと ID は `.claude/skills/blog/notebooklm-research/SKILL.md` の「利用可能ノートブック」表を参照。
 
 1. **対象を絞る**: Phase 3 のマッチ度が **★★☆ 以上**、かつ Phase 4 の重複チェックを通過した候補のうち、注目度（popularity）上位 **最大 5 件**のみを対象にする。NotebookLM は 1 クエリ ~30 秒・逐次実行のため、件数を絞ることが重要。
 
 2. **白書クエリを実行**: 各対象候補について、決定論的ラッパーを呼ぶ:
 
 ```bash
-node .Codex/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書,国土交通白書" \
   "「{トレンドキーワード}」に関連して、{category名} 分野で白書が指摘している社会的課題・政策的背景・今後の方向性を教えてください。都道府県間の格差や地域差に触れた記述があれば優先してください。"
 ```
@@ -209,11 +209,11 @@ node .Codex/scripts/notebooklm-cross-query.mjs --json \
    ```
    - 該当 `statsDataId` が見つからない → **その候補は離脱**（「白書アングルあり / データ未整備」として Phase 5 で ★☆☆ のまま記録、将来の e-Stat 追加待ち）
 
-   **(b) データ取得**: 見つかった `statsDataId` を `/fetch-estat-data` で取得し、必要なら TS-config 追加 → `/sync-metrics-cache --apply` → `/page-data-batch --metric <key>`（`.Codex/rules/data-sqlite-ssot.md` の取り込みフロー準拠）。
+   **(b) データ取得**: 見つかった `statsDataId` を `/fetch-estat-data` で取得し、必要なら TS-config 追加 → `/sync-metrics-cache --apply` → `/page-data-batch --metric <key>`（`.claude/rules/data-sqlite-ssot.md` の取り込みフロー準拠）。
 
    **(c) 白書に再照会**: 取得データの実際の上位/下位県を文脈に入れて白書へ再質問し、切り口を**実データで検証・精緻化**する:
    ```bash
-   node .Codex/scripts/notebooklm-cross-query.mjs --json \
+   node .claude/scripts/notebooklm-cross-query.mjs --json \
      --notebooks "最新の白書,国土交通白書" \
      "{指標名} は実データで 1位{県A}・47位{県B} だった。白書が指摘する{社会課題}と整合するか、地域差の要因として白書が挙げる論点を教えてください。"
    ```
@@ -312,7 +312,7 @@ node .Codex/scripts/notebooklm-cross-query.mjs --json \
 11. Phase 5 の候補詳細 + 上記サマリーを以下に保存:
 
 ```
-.Codex/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md
+.claude/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md
 ```
 
 - `{source}` は実行時の `--source` 値（`all` / `gsc` / `trends` 等）
@@ -329,7 +329,7 @@ node .Codex/scripts/notebooklm-cross-query.mjs --json \
 - **`--whitepaper` 固有**: NotebookLM CLI + 認証必須（**ローカル環境専用**）。リモート実行コンテナでは CLI 不在のため自動 skip。1 候補 ~30 秒・逐次のため対象を ★★☆ 以上の上位 5 件に絞る。回答は転記でなく **記事の問い** に再構成する（白書の文言コピペは AI 生成感を招く）
 - **`--deep` 固有**: e-Stat 取得を伴う重い補完ループ。**必ず起動条件（★☆☆ ∧ 白書強アングル ∧ candidate 無し）と最大 2 候補・最大 2 周のゲートで縛る**（無条件ループ禁止）。ループ制御は決定的に、切り口の良し悪し判定のみ agent。`/search-estat` 該当なしは即離脱（無いデータは作れない）
 - **企画と執筆の分離**: 本スキルは企画素材（白書の切り口を含む）の発見まで。公開済記事を白書で深掘り補強するのは `/notebooklm-research`（目的が異なる）
-- **保存先**: 出力は必ず `.Codex/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md`。会話内でもサマリーを表示
+- **保存先**: 出力は必ず `.claude/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md`。会話内でもサマリーを表示
 
 ## 関連スキル
 

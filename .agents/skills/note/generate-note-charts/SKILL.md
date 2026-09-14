@@ -31,7 +31,7 @@ docs/31_note記事原稿/<slug>/images/
 ```
 
 > **ephemeral outbox**: docs/31 は作業時のみ存在（push後CI自動削除）。
-> ディレクトリが存在しない場合は先に `bash .Codex/scripts/note/restore-from-r2.sh <slug>` で復元する。
+> ディレクトリが存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する。
 
 ## 手順
 
@@ -135,7 +135,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/svg-to-png.js" docs/31_note記事原稿/<slug>
 | カバー画像テンプレート | [scripts/cover-template.js](scripts/cover-template.js) |
 | SVG→PNG 変換 | [scripts/svg-to-png.js](scripts/svg-to-png.js) |
 | 完成例 SVG | [examples/](examples/) |
-| SVG 規約の詳細 | `.Codex/skills/blog/generate-article-charts/SKILL.md` |
+| SVG 規約の詳細 | `.claude/skills/blog/generate-article-charts/SKILL.md` |
 | svg-builder API | `packages/svg-builder/` |
 
 ## 注意

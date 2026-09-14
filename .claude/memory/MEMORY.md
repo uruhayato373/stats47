@@ -107,3 +107,4 @@
 - [project_kakei_marketing_book_pipeline.md](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』(2015)をsource-vault profile kakei-marketing-2015で保全(r2=ページ画像同梱)・全307ページ解決済(analyses.json 80件)。展開はbacklog KAKEI-MARKETING-CONTENT-01。Kindle縦書きスキャンはjpn_vert+UI枠crop、Driveはローカルマウントをそのまま--parts-dirに渡せる
 
 - [feedback_ssds_denominator_evidence.md](feedback_ssds_denominator_evidence.md) — SSDSの素unitは実数の証拠ではない。公式算式で分母を確定しsubtitle/labelへ保持、二重正規化禁止。
+- [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法

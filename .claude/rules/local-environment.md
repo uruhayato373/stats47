@@ -313,6 +313,31 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
   になり、「symlink 不可」と誤診する (2026-08-05 に実際に誤診した)。判定するなら
   `node -e 'require("fs").symlinkSync(...)'` を使う。
 
+### ★2 台 (会社 Windows / 自宅 Mac) で同じ形にする手順 (2026-09-14)
+
+個人設定は private リポジトリ `uruhayato373/dotfiles` (秘密値なし)、プロジェクト設定は本リポジトリが運ぶ。
+どちらの PC も次の順で 1 回だけ実行する。
+
+| 手順 | Windows (PowerShell) | Mac (zsh) |
+|---|---|---|
+| dotfiles | `git clone <dotfiles> $env:USERPROFILE\dotfiles; node $env:USERPROFILE\dotfiles\bin\link.mjs --host windows` | `git clone <dotfiles> ~/dotfiles && node ~/dotfiles/bin/link.mjs --host mac` |
+| stats47 | `git clone -c core.symlinks=true --filter=blob:none <stats47>` | `git clone --filter=blob:none <stats47>` |
+| memory | `node .claude/scripts/setup-memory-symlink.mjs` (junction) | 同左 (symlink) |
+| hooks | `git config core.hooksPath .husky` | 同左 |
+| 一時領域 | `C:\tmp` (`STATS47_WORKTREE_ROOT`) | `~/tmp` (`/tmp` は 3 日で掃除される) |
+| 定期掃除 | `scripts/scheduled/local-resources.ps1 -Action Install` | `bash scripts/scheduled/local-resources.sh install` |
+| 認証 | `gh auth login; codex login` (設定ファイルに token を書かない) | 同左 |
+| Codex mirror | `node .claude/scripts/lib/sync-codex-mirror.cjs --check` | 同左 |
+
+- `.agents/skills` と `.codex/agents/*.toml` は **`.claude/skills` / `.claude/agents/*.md` からの生成物**。
+  手で直さず `node .claude/scripts/lib/sync-codex-mirror.cjs` で再生成する (E12 が CI と pre-commit で
+  ドリフトを止める)。`.codex/hooks.json` は `.claude/hooks/*.js` を直接指す (複製は 2026-09-14 に廃止)。
+- `~/.claude/settings.json` は dotfiles への symlink、`~/.codex/config.toml` は dotfiles の
+  `codex/base.toml` + `host.<os>.toml` を**セクション単位でマージ** (Codex デスクトップが書く
+  `[projects.*]` / `[plugins.*]` / runtime パスを壊さない)。マシン固有の許可と `additionalDirectories` は
+  gitignore 済みの `.claude/settings.local.json` に置く。
+- Mac 固有の罠はまだ実測が無い。最初に Mac で動かしたときに本節へ追記する。
+
 ## dev サーバー起動 ★ルート `npm run dev` を使わない
 
 **Web サイトの動作確認は必ず web 単体で起動する。ルート `npm run dev`（= `turbo run dev`）を使わない。**

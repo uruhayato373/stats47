@@ -7,7 +7,7 @@ primary_agent: sns-metrics-sync
 ---
 
 > **⚠️ ARCHIVED (2026-07-04)**: 「全 SNS 同時投稿」モデル (TikTok/YouTube Shorts 量産前提) は撤退により廃止。
-> 正典は `.Codex/rules/sns-content-standards.md`。チャネル別に post-x / generate-instagram-schedule /
+> 正典は `.claude/rules/sns-content-standards.md`。チャネル別に post-x / generate-instagram-schedule /
 > bar-chart-race を使い、週次運用は `/sns-weekly-plan` で束ねる。復活する場合はこのバナーを外して skills/sns/ に戻す。
 
 全 SNS（X / YouTube）の投稿用キャプションを一括生成してローカルに保存する。

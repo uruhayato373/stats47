@@ -4,7 +4,7 @@ description: セッション中の再利用可能なパターンを抽出し lea
 primary_agent: knowledge-curator
 ---
 
-セッション中に発見した再利用可能なパターン（エラー解決策・ワークアラウンド・ユーザー修正）を抽出し、`.Codex/skills/learned/` に保存する。
+セッション中に発見した再利用可能なパターン（エラー解決策・ワークアラウンド・ユーザー修正）を抽出し、`.claude/skills/learned/` に保存する。
 
 ## 用途
 
@@ -12,7 +12,7 @@ primary_agent: knowledge-curator
 - ユーザーから「そうじゃない」「こうして」と修正を受けた後
 - 同じエラーを 2 回以上解決した場合
 - フレームワーク固有のワークアラウンドを発見した場合
-- AGENTS.md「行動原則 3. ミスから学ぶ」に該当する状況を検出した場合
+- CLAUDE.md「行動原則 3. ミスから学ぶ」に該当する状況を検出した場合
 
 ## `/knowledge` との違い
 
@@ -20,7 +20,7 @@ primary_agent: knowledge-curator
 |---|---|---|
 | 記録内容 | 何が起きたか（問題・原因・対策） | どう対処するか（トリガー → アクション） |
 | 記録タイミング | バグ解決時に手動実行 | セッション中に随時 |
-| 保存先 | `.Codex/skills/management/knowledge/SKILL.md` 末尾 | `.Codex/skills/learned/{pattern-name}.md` 個別ファイル |
+| 保存先 | `.claude/skills/management/knowledge/SKILL.md` 末尾 | `.claude/skills/learned/{pattern-name}.md` 個別ファイル |
 | 活用方法 | 過去の失敗を参照 | 同じ状況で自動的に対処パターンを適用 |
 
 ## 手順
@@ -37,7 +37,7 @@ primary_agent: knowledge-curator
 
 ### Phase 2: パターン記録
 
-`.Codex/skills/learned/{pattern-name}.md` に以下の形式で保存:
+`.claude/skills/learned/{pattern-name}.md` に以下の形式で保存:
 
 ```markdown
 # {パターン名}
@@ -59,7 +59,7 @@ primary_agent: knowledge-curator
 
 ## 注意
 
-- AGENTS.md や既存ドキュメントに既に記載されている内容は記録しない
+- CLAUDE.md や既存ドキュメントに既に記載されている内容は記録しない
 - コードパターン・アーキテクチャ（コードを読めば分かること）は記録しない
 - 一時的な状態（デバッグ中の作業メモ等）は記録しない
 - パターンファイルが 20 個を超えたら、確信度 0.3 以下のものを整理する

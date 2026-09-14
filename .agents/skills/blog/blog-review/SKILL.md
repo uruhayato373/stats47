@@ -71,7 +71,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 3. 記事本文・チャート説明・データ出典を確認する
 4. 上記の構造・観点に従いレビューを作成する
 5. レビュー全文はセッション内で提示し、別ファイルには保存しない。横断的な未完了施策だけを
-   `.Codex/todo/improvements.md` へID付きで統合する。
+   `.claude/todo/improvements.md` へID付きで統合する。
 5b. **★公開ゲート用 `review.md` は必ず書き出す**: `docs/21_ブログ記事原稿/{slug}/review.md` に下記を Write。
    `quality-gate.mjs` は `published:true` の記事でこの `review.md` (verdict: PASS・実体200字以上) が
    無いと公開を blocker で止める (自己採点公開の防止)。**記事本文 (article.md) は編集しない**。
@@ -137,7 +137,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 
 #### 2. 本文・チャート
 
-- **文体が ですます調 に統一されているか** (★2026-06-08、正典 `.Codex/rules/blog-quality-standards.md`「文体」)。本文の地の文に である調 (である。/だ。/だった。/ではない。/だろう。/のだ。/動詞終止形 〜する。〜なる。) が混在していないか。`quality-gate.mjs` が copula である調を blocker 検出するが、動詞終止形の常体は目視/critic で確認。callout・引用・データ出典の体言止めは対象外。混在は ですます へ修正
+- **文体が ですます調 に統一されているか** (★2026-06-08、正典 `.claude/rules/blog-quality-standards.md`「文体」)。本文の地の文に である調 (である。/だ。/だった。/ではない。/だろう。/のだ。/動詞終止形 〜する。〜なる。) が混在していないか。`quality-gate.mjs` が copula である調を blocker 検出するが、動詞終止形の常体は目視/critic で確認。callout・引用・データ出典の体言止めは対象外。混在は ですます へ修正
 - フロントマター直後に `# タイトル` (h1) が残っていないか (ページ側で `<h1>` を表示するため二重になる)
 - チャートプレースホルダー `<!-- chart:... -->` が残っていないか (SVG 画像に置換済みか)
 - `![alt](data/file.svg)` の画像ファイルが `data/` ディレクトリに実在するか
@@ -192,7 +192,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 - **ランキングチャートに対応する `<source-link>` があるか** (ランキング → リンク対応チェック)
 - **`<source-link>` が末尾に集約されていないか** (インライン分散チェック)
   - 各 `<source-link>` は、 そのランキングデータを言及・分析しているセクションの末尾に配置すべき
-  - 配置の正典: `.Codex/rules/blog-quality-standards.md`「source-link の配置」。決定的検査: `node .Codex/scripts/blog/audit-article-structure.mjs` (`/ranking/` の末尾集約 2 個以上を検出)
+  - 配置の正典: `.claude/rules/blog-quality-standards.md`「source-link の配置」。決定的検査: `node .claude/scripts/blog/audit-article-structure.mjs` (`/ranking/` の末尾集約 2 個以上を検出)
 - **リンク先の存在確認** (完全DBレス。旧 D1 indicators は廃止): `<source-link>` や `### 関連記事` のリンク先が実在・公開済みか R2 で確認
   - ランキングは `curl -s -o /dev/null -w '%{http_code}' https://storage.stats47.jp/app/ranking/<key>/item.json` が 200 か
   - 存在しないキーが見つかった場合の **類似キー検索** (必須):
@@ -276,4 +276,4 @@ curl -s "https://storage.stats47.jp/app/blog/all.json" \
 
 ## 移行ステータス
 
-本 skill は旧 `/expert-review` (`.Codex/skills/blog/expert-review/`) と旧 `/proofread-article` (`.Codex/skills/blog/proofread-article/`) を統合したもの。 旧 skill は削除済み。 旧 skill 名を docs / 他 skill / agent.md で参照している箇所は順次更新する。
+本 skill は旧 `/expert-review` (`.claude/skills/blog/expert-review/`) と旧 `/proofread-article` (`.claude/skills/blog/proofread-article/`) を統合したもの。 旧 skill は削除済み。 旧 skill 名を docs / 他 skill / agent.md で参照している箇所は順次更新する。

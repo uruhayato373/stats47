@@ -8,7 +8,7 @@ primary_agent: performance-auditor
 
 PSI、Chrome DevTools、Cloudflare Workers の実測値からボトルネックを特定し、最小の変更を実装して再計測する。Performance / LCP / CLS / INP / TBT / TTFB と Workers CPU・Wall time を扱う。
 
-実証ベース判定ルール（`.Codex/rules/evidence-based-judgment.md`）に従い、推測ベースの判定を禁止。すべての effect/* ラベルは実測コマンドの結果を根拠とする。
+実証ベース判定ルール（`.claude/rules/evidence-based-judgment.md`）に従い、推測ベースの判定を禁止。すべての effect/* ラベルは実測コマンドの結果を根拠とする。
 
 ## データの保管場所
 
@@ -17,16 +17,16 @@ PSI、Chrome DevTools、Cloudflare Workers の実測値からボトルネック�
 | 生メトリクス CSV | `reference/snapshots/YYYY-MM-DD/metrics.csv` |
 | 目標しきい値設定 | `budgets.json` |
 | 改善施策ログ（append-only） | `reference/improvement-log.md` |
-| 未完了の施策 | `.Codex/todo/improvements.md` |
+| 未完了の施策 | `.claude/todo/improvements.md` |
 | PSI Alert（自動起票） | GitHub Issues ラベル `psi-alert,auto-generated` |
-| 週次集約 | `.Codex/state/metrics/psi/{history.csv,LATEST.md}` |
-| Cloudflare機械メトリクス | `.Codex/state/metrics/cloudflare/` |
+| 週次集約 | `.claude/state/metrics/psi/{history.csv,LATEST.md}` |
+| Cloudflare機械メトリクス | `.claude/state/metrics/cloudflare/` |
 
-レビュー全文や一時ハンドオフ文書を新規作成しない。未完了策は改善バックログ、実測・実装履歴は本 skill の `reference/improvement-log.md`、再生成可能な機械値は `.Codex/state/metrics/` に保存する。
+レビュー全文や一時ハンドオフ文書を新規作成しない。未完了策は改善バックログ、実測・実装履歴は本 skill の `reference/improvement-log.md`、再生成可能な機械値は `.claude/state/metrics/` に保存する。
 
 ## MCP前提
 
-Codex の `/mcp` で次を確認する。
+Claude Code の `/mcp` で次を確認する。
 
 | MCP | 用途 | 必須状態 |
 |---|---|---|
@@ -57,7 +57,7 @@ Chrome DevTools MCP のモバイル再現条件を固定する。
 ### 0. 作業前
 
 1. `git status --short --branch` で既存変更を確認する。勝手にpull・resetしない。
-2. `.Codex/todo/improvements.md` の対象IDと本runbookを読む。
+2. `.claude/todo/improvements.md` の対象IDと本runbookを読む。
 3. `apps/web/wrangler.toml` のobservability設定を確認する。計測量・費用の根拠なしにsamplingを変更しない。
 4. 本番deploy、R2 write、Cloudflare Rules変更は実装・検証と分離する。ユーザー承認までは実行しない。
 
@@ -196,10 +196,10 @@ TopoJSON生成に触れない段階ではGIS / visualizationのfull testは省�
 curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/<path>&strategy=mobile&key=$PSI_API_KEY"
 
 # 週次 LATEST 確認
-cat .Codex/state/metrics/psi/LATEST.md
+cat .claude/state/metrics/psi/LATEST.md
 ```
 
-参照: `.Codex/rules/evidence-based-judgment.md`
+参照: `.claude/rules/evidence-based-judgment.md`
 
 - [ ] 上記 PSI API コマンドを実行したか
 - [ ] before/after の実測値（LCP ms / CLS）を記録したか
@@ -209,15 +209,15 @@ cat .Codex/state/metrics/psi/LATEST.md
 
 deploy直後の1回だけで `effect/full` にしない。変更を `effect/pending` としてログへ追記し、重複しないbefore/after期間で判定する。
 
-## Codex投入プロンプト
+## Claude Code投入プロンプト
 
 ```text
 /performance-improvement を使って、2026-08-05 MCP監査で確定したWeb性能改善を実装してください。
 
 SSOT:
-- .Codex/skills/analytics/performance-improvement/SKILL.md
-- .Codex/skills/analytics/performance-improvement/reference/improvement-log.md の [MCP-PERF-2026-08-05]
-- .Codex/todo/improvements.md
+- .claude/skills/analytics/performance-improvement/SKILL.md
+- .claude/skills/analytics/performance-improvement/reference/improvement-log.md の [MCP-PERF-2026-08-05]
+- .claude/todo/improvements.md
 
 最初に /mcp を確認し、chrome-devtools と cloudflare-docs の接続、cloudflare-observability と cloudflare-graphql の認証状態を報告してください。後者が Needs authentication なら認証を案内し、Chrome/ローカルで進められる作業は止めないでください。
 

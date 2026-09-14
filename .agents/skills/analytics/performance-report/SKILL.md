@@ -1,6 +1,6 @@
 ---
 name: performance-report
-description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". .Codex/state/metrics/psi の history.csv / LATEST.md から分析.
+description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". .claude/state/metrics/psi の history.csv / LATEST.md から分析.
 argument-hint: "[--period 7d|28d|3m] [--compare]"
 allowed-tools: Read, Bash, Grep
 primary_agent: performance-auditor
@@ -9,17 +9,17 @@ co_agents: [gsc-analyst]
 
 # /performance-report — CWV 総合レポート（PSI state ベース）
 
-`.Codex/state/metrics/psi/` に蓄積された PSI 計測履歴からパフォーマンス総合レポートを生成する。
+`.claude/state/metrics/psi/` に蓄積された PSI 計測履歴からパフォーマンス総合レポートを生成する。
 トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
 
 > **2026-06-21 PSI 統合**。旧版は `packages/database/scripts/performance-report.ts`（削除済）を実行し
 > `performance-improvement/snapshots/*/metrics.csv`（writer 消滅で枯渇）を読んでいた。CWV 監視は PSI 日次
-> ワークフローに一本化済（→ `/lighthouse-audit`）。本スキルは **`.Codex/state/metrics/psi/history.csv`
+> ワークフローに一本化済（→ `/lighthouse-audit`）。本スキルは **`.claude/state/metrics/psi/history.csv`
 > （日次トレンド）+ `LATEST.md`（最新前日比）** を入力に、エージェントがレポートを生成する（専用 D1 スクリプトは不要）。
 
 ## 前提条件
 
-- `.Codex/state/metrics/psi/history.csv` にデータがあること（日次 CI `psi-audit-daily.yml` が蓄積。手動は `/lighthouse-audit`）
+- `.claude/state/metrics/psi/history.csv` にデータがあること（日次 CI `psi-audit-daily.yml` が蓄積。手動は `/lighthouse-audit`）
 - トレンド比較には複数日のデータが必要
 
 ## 引数
@@ -33,16 +33,16 @@ co_agents: [gsc-analyst]
 
 ## 実行手順（エージェント駆動・DBレス）
 
-1. **最新サマリを読む**: `.Codex/state/metrics/psi/LATEST.md`（前日比矢印 + 閾値違反強調。digest 済の人間向けレポート）
+1. **最新サマリを読む**: `.claude/state/metrics/psi/LATEST.md`（前日比矢印 + 閾値違反強調。digest 済の人間向けレポート）
 
 2. **トレンド用に history.csv を期間で絞る**:
 
    ```bash
    # ヘッダ + 直近 period 日分。history.csv は date,url,strategy,page_type,score_performance,
    #   lcp_ms,cls,tbt_ms,fcp_ms,ttfb_ms,violations_error,violations_warning
-   head -1 .Codex/state/metrics/psi/history.csv
+   head -1 .claude/state/metrics/psi/history.csv
    awk -F, -v since="$(date -v-28d +%F 2>/dev/null || date -d '28 days ago' +%F)" 'NR==1||$1>=since' \
-     .Codex/state/metrics/psi/history.csv
+     .claude/state/metrics/psi/history.csv
    ```
 
 3. **最新の閾値違反を取り直す**（必要なら）:
@@ -98,9 +98,9 @@ co_agents: [gsc-analyst]
 
 ## 出力
 
-週次数値は `.Codex/state/metrics/psi/`、詳細な施策履歴は
-`.Codex/skills/analytics/performance-improvement/reference/improvement-log.md` を使う。
-未完了の改善だけを `.Codex/todo/improvements.md` へID・対象ページ・実行手順・budget・完了条件付きで統合し、
+週次数値は `.claude/state/metrics/psi/`、詳細な施策履歴は
+`.claude/skills/analytics/performance-improvement/reference/improvement-log.md` を使う。
+未完了の改善だけを `.claude/todo/improvements.md` へID・対象ページ・実行手順・budget・完了条件付きで統合し、
 レポート全文は保存しない。
 
 書き出し後にパスを報告。CWV 改善ログ・同週 weekly-review は「関連リンク」に相対パスで参照。
@@ -119,8 +119,8 @@ co_agents: [gsc-analyst]
 
 ## 参照
 
-- `.Codex/skills/analytics/lighthouse-audit/SKILL.md` — PSI 計測（本レポートの入力を作る）
-- `.Codex/state/metrics/psi/{history.csv,LATEST.md}` — 計測履歴（入力 SSOT）
-- `.Codex/scripts/psi/psi-threshold-check.mjs` — 閾値違反の取得（`npm run psi-audit:check`）
-- `.Codex/skills/analytics/performance-improvement/budgets.json` — 閾値設定
-- `.Codex/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
+- `.claude/skills/analytics/lighthouse-audit/SKILL.md` — PSI 計測（本レポートの入力を作る）
+- `.claude/state/metrics/psi/{history.csv,LATEST.md}` — 計測履歴（入力 SSOT）
+- `.claude/scripts/psi/psi-threshold-check.mjs` — 閾値違反の取得（`npm run psi-audit:check`）
+- `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
+- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ

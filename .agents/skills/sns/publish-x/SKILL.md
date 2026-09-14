@@ -15,7 +15,7 @@ X の UI は頻繁に変わるため、セレクタが壊れていると **予�
 1. **初回投稿 or 前回から 1 週間以上空いた場合**:
    必ず `--dry-run` で予約モード到達を確認してから実投稿する:
    ```bash
-   npx tsx .Codex/skills/sns/publish-x/publish-x.ts <rankingKey> 2026-04-20T21:00 --dry-run
+   npx tsx .claude/skills/sns/publish-x/publish-x.ts <rankingKey> 2026-04-20T21:00 --dry-run
    ```
    - Chromium で予約ダイアログまで到達し、予約モード（`tweetButton` に「予約設定」or「Schedule」）が検出できるか確認
    - 成功: `.local/playwright-x-debug/<ts>_<key>_dry-run-scheduled-mode.png` に screenshot 保存
@@ -55,7 +55,7 @@ X の UI は頻繁に変わるため、セレクタが壊れていると **予�
 
 **複数投稿の例:**
 ```bash
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts \
+npx tsx .claude/skills/sns/publish-x/publish-x.ts \
   annual-income-per-household 2026-04-12T08:00 \
   divorces-per-total-population 2026-04-14T08:00 \
   disposable-income-worker-households 2026-04-16T08:00
@@ -64,12 +64,12 @@ npx tsx .Codex/skills/sns/publish-x/publish-x.ts \
 **引用RTの例（`/find-quote-rt --post` から委譲される）:**
 ```bash
 # テキストのみ（即時）
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts total-fertility-rate \
+npx tsx .claude/skills/sns/publish-x/publish-x.ts total-fertility-rate \
   --quote-url "https://x.com/xxx/status/123456" \
   --caption /tmp/quote-rt-caption.txt --domain ranking
 
 # 県動画を opt-in 添付（migration-flow → gis-cross 遷移）
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts migration-flow-aichi \
+npx tsx .claude/skills/sns/publish-x/publish-x.ts migration-flow-aichi \
   --quote-url "https://x.com/xxx/status/123456" \
   --caption /tmp/quote-rt-caption.txt \
   --media .local/r2/sns/migration-flow/aichi/x/stills/reel.mp4 --domain gis-cross
@@ -92,7 +92,7 @@ npx tsx .Codex/skills/sns/publish-x/publish-x.ts migration-flow-aichi \
 ## 実行
 
 ```bash
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts <args>
+npx tsx .claude/skills/sns/publish-x/publish-x.ts <args>
 ```
 
 スクリプトが自動で以下を実行する:
@@ -189,8 +189,8 @@ await page.locator('[data-testid="tweetButton"] span span:text-is("予約設定"
 
 ## 参照
 
-- キャプション生成: `.Codex/skills/sns/post-x/SKILL.md`
-- 画像生成: `.Codex/skills/sns/render-sns-stills/SKILL.md`
-- 投稿完了処理: `.Codex/skills/sns/mark-sns-posted/SKILL.md`
+- キャプション生成: `.claude/skills/sns/post-x/SKILL.md`
+- 画像生成: `.claude/skills/sns/render-sns-stills/SKILL.md`
+- 投稿完了処理: `.claude/skills/sns/mark-sns-posted/SKILL.md`
 - 永続プロファイル: `.local/playwright-x-profile/`
-- スクリプト本体: `.Codex/skills/sns/publish-x/publish-x.ts`
+- スクリプト本体: `.claude/skills/sns/publish-x/publish-x.ts`

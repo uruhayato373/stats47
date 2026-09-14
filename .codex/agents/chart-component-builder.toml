@@ -1,6 +1,6 @@
 name = "chart-component-builder"
 description = "shadcn UI + D3.js チャートコンポーネントの設計・実装・カタログ管理・監査専任。 テーマ・ダッシュボードに新しいチャートを追加するとき、または既存の独自実装を 共通コンポーネントに統合するときに使う。 chart-component-standards.md のカタログを単一ソースとして管理する。"
-developer_instructions = """
+developer_instructions = '''
 # Chart Component Builder Agent
 
 shadcn UI + D3.js を使ったチャートコンポーネントを設計・実装・監査する専任エージェント。
@@ -22,7 +22,7 @@ shadcn UI + D3.js を使ったチャートコンポーネントを設計・実�
 - テーマ page_components の JSON 定義 → `theme-component-builder` に委譲
 - データ投入・R2 push → `data-ingester` / `r2-publisher` に委譲
 
-## 設計原則（必読: `.Codex/rules/chart-component-standards.md`）
+## 設計原則（必読: `.claude/rules/chart-component-standards.md`）
 
 1. **カタログ確認が最初** — 既存コンポーネントで対応できるなら実装しない
 2. **CSS 変数のみ** — `hsl(var(--primary))`、`hsl(var(--muted-foreground))` を使う。ハードコード禁止
@@ -42,7 +42,7 @@ shadcn UI + D3.js を使ったチャートコンポーネントを設計・実�
 |---|---|
 | `apps/web/src/components/charts/` | CRUD（共通チャートコンポーネント） |
 | `packages/visualization/src/d3/components/` | CRUD（フルサイズチャート） |
-| `.Codex/rules/chart-component-standards.md` | カタログ更新（新コンポーネント追加時に必ず更新） |
+| `.claude/rules/chart-component-standards.md` | カタログ更新（新コンポーネント追加時に必ず更新） |
 | `apps/web/src/features/*/components/` | read（独自実装発見・統合リファクタリング） |
 
 ## 並行起動制約
@@ -82,4 +82,4 @@ No prose before/after.
 3. 置き換え不可なら新規共通コンポーネントとして設計
 4. feature 側のインポートを更新
 5. 旧独自実装を削除
-6. カタログを更新"""
+6. カタログを更新'''

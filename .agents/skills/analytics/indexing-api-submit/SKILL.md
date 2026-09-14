@@ -8,8 +8,8 @@ status: retired
 # indexing-api-submit — RETIRED (Google Indexing API 準拠是正)
 
 > **⚠️ このスキルは 2026-07-23 に退役しました。** 通常ページへの Indexing API 送信は行いません。
-> 正典: `.Codex/skills/analytics/search-growth/reference/platform-contract.md`の
-> 「Indexing API準拠」/ `.Codex/todo/improvements.md [INDEXING-AUTO-01]`。
+> 正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`の
+> 「Indexing API準拠」/ `.claude/todo/improvements.md [INDEXING-AUTO-01]`。
 
 ## なぜ退役したか (公式仕様)
 
@@ -36,31 +36,31 @@ coverageState 遷移の実測を欠いたまま effect/pending だった)、公�
    - content 補強 (soft-404 / thin 200 を実データで厚くする)
 2. **観測 (URL Inspection API)**
    ```bash
-   node .Codex/scripts/gsc/url-inspection-daily.cjs --limit 50
+   node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50
    ```
    `coverageState` / `lastCrawlTime` / `googleCanonical` の遷移を実測する
-   (`.Codex/rules/evidence-based-judgment.md` 準拠。「送ったから登録される」ではなく実測で判定)。
+   (`.claude/rules/evidence-based-judgment.md` 準拠。「送ったから登録される」ではなく実測で判定)。
 
 この観測は `gsc-url-inspection-daily.yml` (毎日) と統合 search-growth 基盤
-(`.Codex/skills/analytics/search-growth/`) の `observe-after-fix` フローが担います。
+(`.claude/skills/analytics/search-growth/`) の `observe-after-fix` フローが担います。
 coverage 是正キュー (`build-coverage-queue.mjs`) の旧 `resubmit` action は `observe-after-fix` に改名済みです。
 
 ## 保持している証拠 (削除しない)
 
 過去の送信ログは監査証拠として保持します (編集・削除しない):
 
-- `.Codex/state/metrics/gsc/resubmit-history.json` (auto-resubmit の累計送信履歴)
-- `.Codex/skills/analytics/indexing-api-submit/reference/indexing-api-log/YYYY-MM-DD.jsonl` (手動送信ログ)
+- `.claude/state/metrics/gsc/resubmit-history.json` (auto-resubmit の累計送信履歴)
+- `.claude/skills/analytics/indexing-api-submit/reference/indexing-api-log/YYYY-MM-DD.jsonl` (手動送信ログ)
 
 ## 退役したコードパス
 
 - `.github/workflows/gsc-auto-resubmit-daily.yml` — schedule 削除・retired stub 化 (送信しない)
-- `.Codex/scripts/gsc/auto-resubmit.mjs` — publish path 撤去・retired stub 化
-- `.Codex/scripts/gsc/submit-cities-indexing.mjs` — publish path 撤去・retired stub 化
+- `.claude/scripts/gsc/auto-resubmit.mjs` — publish path 撤去・retired stub 化
+- `.claude/scripts/gsc/submit-cities-indexing.mjs` — publish path 撤去・retired stub 化
 
 ## 参照
 
 - 公式制約: https://developers.google.com/search/apis/indexing-api/v3/quickstart (アクセス日 2026-07-23)
-- 準拠是正の正典: `.Codex/skills/analytics/search-growth/reference/platform-contract.md`
-- 代替フロー: `.Codex/skills/analytics/gsc-coverage-remediation/SKILL.md` (observe-after-fix)
-- 観測実装: `.Codex/scripts/gsc/url-inspection-daily.cjs`
+- 準拠是正の正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`
+- 代替フロー: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` (observe-after-fix)
+- 観測実装: `.claude/scripts/gsc/url-inspection-daily.cjs`

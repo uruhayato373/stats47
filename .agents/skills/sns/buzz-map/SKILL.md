@@ -1,6 +1,6 @@
 ---
 name: buzz-map
-description: バズ地図カード（まちの計量舎系の日本地図×統計）の静止画PNG・動画MP4を「spec作成 → レンダ → 目視 → 改善」の反復で作る統合スキル。Use when user says "バズ地図", "buzz-map", "地図カード作成", "地図動画". 型・トークン・テーマカタログの正典は .Codex/rules/buzz-map-standards.md。
+description: バズ地図カード（まちの計量舎系の日本地図×統計）の静止画PNG・動画MP4を「spec作成 → レンダ → 目視 → 改善」の反復で作る統合スキル。Use when user says "バズ地図", "buzz-map", "地図カード作成", "地図動画". 型・トークン・テーマカタログの正典は .claude/rules/buzz-map-standards.md。
 disable-model-invocation: true
 argument-hint: "<theme_id|specパス> [--ratio 45|11|169|916] [--video] [--preview] [--year N --summary]"
 primary_agent: sns-renderer
@@ -20,7 +20,7 @@ co_agents: [x-strategist, instagram-strategist, gis-curator]
 
 ## 工程
 
-> **★バッチ量産の既定経路 (2026-07-17〜)**: 単発の下記工程に加え、**`npx tsx .Codex/scripts/sns/prepare-buzz-map-batch.ts`**
+> **★バッチ量産の既定経路 (2026-07-17〜)**: 単発の下記工程に加え、**`npx tsx .claude/scripts/sns/prepare-buzz-map-batch.ts`**
 > (dry-run 既定・`--apply` で spec→render→R2→caption→**landing contract + isPostable ゲート通過分のみ** posts.json draft)
 > が選定〜draft を一括処理する。管理画面は **read-only gallery `/buzz-map`**
 > (`npm run admin` → 127.0.0.1:4747/buzz-map — catalog横断表示・素材previewのみ)。
@@ -88,45 +88,45 @@ ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts -
 curl -s -o /dev/null -w "%{http_code}\n" https://storage.stats47.jp/sns/buzz-map/<id>/instagram/stills/slide-1-cover-1080x1350.png
 ```
 
-- draft 登録は `.Codex/scripts/lib/sns-posts-store.cjs` の `insert()`（platform=instagram / domain=buzz-map / content_key=<id> / media_path=R2キー / caption / `template=buzzmap-<型>` / status=draft）。**予約/投稿はせず draft 止まり**が既定（投稿タイミングは instagram-strategist / 人間が判断）。
+- draft 登録は `.claude/scripts/lib/sns-posts-store.cjs` の `insert()`（platform=instagram / domain=buzz-map / content_key=<id> / media_path=R2キー / caption / `template=buzzmap-<型>` / status=draft）。**予約/投稿はせず draft 止まり**が既定（投稿タイミングは instagram-strategist / 人間が判断）。
 - リールの content-type が `application/octet-stream` になる場合、IG Reels API が弾く可能性があるため投稿前に確認する。
 
 ### spec 自動生成（step 1 のデータ接地）
 
 ```bash
 # 型A（e-Stat 観測値 → 二値化）。--theme blue|dark|paper で配色テーマ選択（省略=blue。§1 配色規則）
-npx tsx .Codex/scripts/sns/build-buzz-map-spec.ts --metric <key> --id <id> \
+npx tsx .claude/scripts/sns/build-buzz-map-spec.ts --metric <key> --id <id> \
   --level muni|pref --mode threshold --op gte --value N --title "..." --accent social|infra \
   [--theme dark] --label-hit "..." --label-miss "..."
 
 # 型C 点プロット（KSJ topojson → 属性フィルタ → 代表点）
-npx tsx .Codex/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
   --mode point-plot --filter "S12_057>=5000" --id <id> --title "..." --accent social \
   --label-hit "..." --data-year "令和4年度"
 
 # 点→自治体二値（型A・◯◯がある/ない自治体。--invert で無い側）
-npx tsx .Codex/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
   --mode point-muni --invert --id <id> --title "..." --accent infra --label-hit "駅なし" --label-miss "駅あり"
 
 # 型D 線ネットワーク＋時系列（供用開始年で伸びる網図）
-npx tsx .Codex/scripts/sns/build-buzz-map-spec-ksj.ts --mode line-network \
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --mode line-network \
   --r2-key app/highway-history/highway-sections.topojson --id <id> --year-prop N06_002 \
   --title "..." --accent infra --label-hit "高速道路 総延長km" --data-year "1962-2020"
 #   → 静止画 BuzzMap-Still-45（最新年全網図） / 時系列 BuzzMap-Reel-11（--frames=0-89 --scale=0.5 で試写）
 
 # DPF（GraphQL 取得した GeoJSON を投入）
-npx tsx .Codex/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojson --mode point-plot --id <id> ...
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojson --mode point-plot --id <id> ...
 
 # 型C 地名系（国土地理院 地名情報）。全国点データは一度だけ取得して R2 に永続化 → 以後は再取得不要
-npx tsx .Codex/scripts/sns/fetch-gsi-place-names.ts --all               # 初回のみ (居住地名+自然地名 z15・約42万タイル)
+npx tsx .claude/scripts/sns/fetch-gsi-place-names.ts --all               # 初回のみ (居住地名+自然地名 z15・約42万タイル)
 #   → .local/gsi-pni/points.json を R2 へ: diff-push-r2.ts --prefix gis/gsi-pni
-npx tsx .Codex/scripts/sns/build-buzz-map-spec-gsi.ts --pattern "宿" --id shuku-place-names \
+npx tsx .claude/scripts/sns/build-buzz-map-spec-gsi.ts --pattern "宿" --id shuku-place-names \
   --title "「宿」のつく地名はどこか" --accent social \
   --label-admin "字・町名（行政地名）" --label-nature "自然地名" [--theme dark]
 #   → 居住地名=accent・自然地名=accent2 の 2 色型C。候補は catalog --lane gsi で払い出す
 
 # 型E 掛け合わせ（既存 spec 2 つをマージ: 塗り × 点/線）
-npx tsx .Codex/scripts/sns/merge-buzz-map-specs.ts \
+npx tsx .claude/scripts/sns/merge-buzz-map-specs.ts \
   --base <塗りspec> --overlay <点or線spec> --id <id> --title "..." --subtitle "..."
 #   → 塗り=accent・overlay=accent2 で色分離。組み合わせネタは combo カタログの候補から選ぶ
 #   ※ --theme は 3 ヘルパー共通（merge は --theme > base > overlay の順で継承）
@@ -154,6 +154,6 @@ npx tsx .Codex/scripts/sns/merge-buzz-map-specs.ts \
 
 ## 参照
 
-- 規約の正典: `.Codex/rules/buzz-map-standards.md`（型仕様・トークン・テーマカタログ・決定ログ）
+- 規約の正典: `.claude/rules/buzz-map-standards.md`（型仕様・トークン・テーマカタログ・決定ログ）
 - 実装: `apps/remotion/src/features/buzz-map/`（tokens.ts=機械正本 / types.ts=spec 型）
-- 投稿・頻度リミット・R2 保持: `.Codex/rules/sns-content-standards.md`（§1, §2-9→§2-10, §5.5）
+- 投稿・頻度リミット・R2 保持: `.claude/rules/sns-content-standards.md`（§1, §2-9→§2-10, §5.5）

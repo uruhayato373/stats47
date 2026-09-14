@@ -7,14 +7,14 @@ primary_agent: ranking-publisher
 新規 / 有効化した metric のランキングを **本番で 200 を返す公開状態まで届ける** 起動口スキル。
 
 **本スキルは実コードを書かない。** `ranking-publisher` agent (公開多段パイプラインの単一オーナー) を起動し、
-公開すべき key を渡すだけ。ロジック・OUTPUT FORMAT・本番実測は agent 定義 (`.Codex/agents/ranking-publisher.md`) に閉じる。
+公開すべき key を渡すだけ。ロジック・OUTPUT FORMAT・本番実測は agent 定義 (`.claude/agents/ranking-publisher.md`) に閉じる。
 
 ## なぜ必要か
 
 `MetricConfig.isActive:true` にしただけでは本番公開されない。本番アプリは R2 snapshot + 派生キーリスト
 (KNOWN / SITEMAP / INDEXABLE) と整合して初めて 200 を返す。未整合だと 404 / sitemap 未掲載のまま放置される
 (memory `project_ranking_publish_pipeline_gap`: 2026-06-03 に 122 metric を有効化したが未反映で全件未達)。
-正典: `.Codex/rules/metric-config-standards.md` §isActive:true ≠ 本番公開。
+正典: `.claude/rules/metric-config-standards.md` §isActive:true ≠ 本番公開。
 
 ## 引数
 
@@ -39,13 +39,13 @@ primary_agent: ranking-publisher
 ## 規約
 
 - **コードを書かない** (orchestrator)。公開ロジックは ranking-publisher agent に閉じる。
-- **デプロイ規律**: keys PR のマージ = 本番反映。ユーザー承認を得てまとめてマージする (`.Codex/rules/branch-workflow.md`)。
-- **実証ベース**: 本番 200 を Googlebot UA で実測してから「公開済み」と言う (`.Codex/rules/evidence-based-judgment.md`)。
+- **デプロイ規律**: keys PR のマージ = 本番反映。ユーザー承認を得てまとめてマージする (`.claude/rules/branch-workflow.md`)。
+- **実証ベース**: 本番 200 を Googlebot UA で実測してから「公開済み」と言う (`.claude/rules/evidence-based-judgment.md`)。
 
 ## 参照
 
-- agent: `.Codex/agents/ranking-publisher.md` (公開パイプラインの単一オーナー)
+- agent: `.claude/agents/ranking-publisher.md` (公開パイプラインの単一オーナー)
 - keys 自動同期: `.github/workflows/sync-snapshots.yml` (sync-ranking-keys job)
-- 公開判定の正典: `.Codex/rules/metric-config-standards.md` §isActive:true ≠ 本番公開
-- SSG 保全: `.Codex/rules/nextjs-ssg-preservation.md` (R2 依存 route に generateStaticParams を付けない)
-- 月次 metric 拡充の全体像: `.Codex/agents/ranking-expander.md` (+ ブログSEO戦略は `.Codex/agents/blog-seo-strategist.md` §戦略コンテキスト)
+- 公開判定の正典: `.claude/rules/metric-config-standards.md` §isActive:true ≠ 本番公開
+- SSG 保全: `.claude/rules/nextjs-ssg-preservation.md` (R2 依存 route に generateStaticParams を付けない)
+- 月次 metric 拡充の全体像: `.claude/agents/ranking-expander.md` (+ ブログSEO戦略は `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト)

@@ -10,7 +10,7 @@ Cloudflare Cache Purge API を叩いて stats47.jp / storage.stats47.jp の CDN 
 
 ## 用途
 
-`/deploy` の Step 7 で「Purge 推奨」と判定された際、ユーザーにダッシュボード操作を依頼する代わりに Codex が直接実行する。
+`/deploy` の Step 7 で「Purge 推奨」と判定された際、ユーザーにダッシュボード操作を依頼する代わりに Claude が直接実行する。
 
 主な実行タイミング:
 - middleware ルール追加 / 変更後（Fix 7/8 のような 200 → 410 切替）

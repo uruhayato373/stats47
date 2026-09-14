@@ -26,14 +26,36 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 - **公開状態の真実源**: **R2 `draft.md` の frontmatter**（`note_url` フィールド）。`note-published-urls.json` は `build-note-published-index.mjs` が再構築する派生インデックス
 - **更新 (update モード) の前に復元が必要**:
   ```bash
-  bash .Codex/scripts/note/restore-from-r2.sh <slug>
+  bash .claude/scripts/note/restore-from-r2.sh <slug>
   # → docs/31 に draft.md + images/ を復元 (R2 公開 URL 経由・認証不要)
   # 更新完了後は次の develop push で自動的に再同期・削除される
   ```
 
-**画像**: `--update` 時は restore 後に `.Codex/scripts/note/regenerate-svg-png.sh` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソース。
+**画像**: `--update` 時は restore 後に `.claude/scripts/note/regenerate-svg-png.sh` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソース。
 
 ## 引数（バッチ対応）
+
+### 公開済み記事のカバーだけを変更する場合
+
+本文更新の`--update`とは別に、`.claude/scripts/note/update-note-covers.mjs`を使う。
+制作判断は`catalog/cover-designs.ts`、制作は`generate-cover-refresh.ts`と共有Satori rendererに置く。
+今回の全件改修入力は`.local/note-cover-refresh/2026-09-12/`の公開前スナップショットとproduction manifest。
+制作・保存の契約は[カタログREADME](../../../scripts/note/catalog/README.md#公開カバーの制作と差し替え)を参照する。
+
+```bash
+node --import tsx .claude/scripts/note/generate-cover-refresh.ts
+# 全画像を目視し、manifestのvisualReviewをpassにしてからローカル検査
+node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-12/production-manifest.json
+# ユーザーが依頼した公開カバー変更を反映（--keys / --limit で限定可能）
+node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-12/production-manifest.json --commit
+node .claude/scripts/note/verify-cover-refresh.mjs --manifest .local/note-cover-refresh/2026-09-12/production-manifest.json
+```
+
+**画像の保存だけで公開カバーに即時反映される**（2026-09-12 UI実測）。「更新する」を押す必要はない。
+実際のUIで観測した画像専用POSTを認証済みProfile 5で実行し、本文・タイトル・価格・有料境界・タグ・公開日時のhashを照合する。
+通常の本文編集・再公開は行わない。独自の一意sessionを使い、終了時はそのdaemon・Chrome・一時profileだけを片付ける。
+応答不明のPOSTは再送せず、journalと記事詳細・配信画像を調べてから復旧する。
+最終検証は全公開記事を再取得し、維持したカバーの不変・新カバーのURL一致・記事内容のhash一致を確認する。
 
 カンマ区切りで複数記事を指定可能:
 
@@ -56,7 +78,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 公開済み記事を修正済み draft.md で更新する（価格変更・誤字修正・記述更新の保守用）。
 詳細手順は **[references/update-mode.md](references/update-mode.md)** を参照。
 
-- 対象 slug が `.Codex/state/note-published-urls.json` の `articles` に無ければ
+- 対象 slug が `.claude/state/note-published-urls.json` の `articles` に無ければ
   「未公開のため更新不可」で中断
 - 本文と本文中画像のみ差し替える。アイキャッチ・ハッシュタグ・価格は触らない
 - 有料記事の更新は有料エリア境界の再設定が絡む。**公開更新の依頼がある場合だけ**、Phase 7-Boundaryで境界を設定し、エージェントがscreenshotを目視確認してから同じセッションで確定する。確認できなければ公開せずユーザーへ引き継ぐ（詳細は`references/scheduling.md`）。
@@ -76,31 +98,31 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 
 ```bash
 # 1. ドラフトが docs/31 に無ければ R2 から復元
-bash .Codex/scripts/note/restore-from-r2.sh <slug>
+bash .claude/scripts/note/restore-from-r2.sh <slug>
 
 # 2. カバーを生成 (images/cover-1280x670.{svg,png})
-#    ★ koumuin-Codex / koumuin-estat-Codex シリーズは専用ジェネレータを使う
+#    ★ koumuin-claude-code / koumuin-estat-claude-code シリーズは専用ジェネレータを使う
 #      (共通のキャッチー背景 + カテゴリトーン + 中央ボックス。SVG+PNG を直接出力し sharp で合成):
-node .Codex/scripts/note/generate-koumuin-covers.cjs --slug <slug>
+node .claude/scripts/note/generate-koumuin-covers.cjs --slug <slug>
 #    それ以外 (stats47-note 等) は汎用版:
-# node .Codex/scripts/note/generate-note-covers.mjs --slug <slug>
+# node .claude/scripts/note/generate-note-covers.mjs --slug <slug>
 
-# 3. ハッシュタグ 90 個を生成 (hashtags.txt)
-node .Codex/scripts/note/generate-note-hashtags.mjs --slug <slug>
+# 3. ハッシュタグ 99 個を生成 (hashtags.txt)
+node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
 ```
 
 - カバー: `docs/31_note記事原稿/[vertical/]<slug>/images/cover-1280x670.{svg,png}`
   **koumuin シリーズは `generate-koumuin-covers.cjs` が PNG まで生成する**（背景 bitmap は
-  `.Codex/scripts/note/assets/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
+  `.claude/scripts/note/assets/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
   アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
   `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
-- ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 90 個。Phase 7 でタグ入力時に使う。
+- ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 99 個。Phase 7 でタグ入力時に使う。
 
 ## 前提条件
 
 1. browser-use CLI がインストール済み
 2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`
-   （存在しない場合は先に `bash .Codex/scripts/note/restore-from-r2.sh <slug>` で R2 から復元する）
+   （存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で R2 から復元する）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **ダウンロード商品の場合**: `product_archive` に `.local/geo-products/` 配下の50MB以下のZIP、`product_attachment_after` に有料本文内の見出しを指定する。`prepare-article.cjs` はパス・拡張子・容量・有料設定をfail-closedで検証する
@@ -222,15 +244,34 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 主なポイント:
 - **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
 - **Phase 7-Boundary（有料境界・自動・2026-06-16 実機確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭見出しを錨**に有料ラインを自動設定。✅ **境界画面 DOM は確定済（update 11 本 + 新規 2 本連続成功）**。⚠️ **誤露出防止で最終「投稿/更新」前に境界を screenshot で目視確認**してから押す（エージェントが Read で screenshot 検証後に押下して可）。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
-- **Phase 7-Tags**: ハッシュタグは `hashtags.txt` から読んで入力する（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）。note は最大 99 タグまで設定可能。`hashtags.txt` に 90 個生成しているので全行を使う（99 未満に抑えてエラー回避）。
+- **Phase 7-Tags**: ハッシュタグは `hashtags.txt` から読んで入力する（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）。note の実機上限は 99 タグ。`hashtags.txt` の 99 行を使い、公開後に API で 95 個以上を確認する。
   ```bash
   cat docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt
   ```
   `hashtags.txt` が無い場合は投稿を中断し `generate-note-hashtags.mjs` を先に実行する。
 - 「公開に進む」→ タグ入力（上記 Phase 7-Tags）→ マガジン追加 → 日時設定 → 投稿
-- ★**エディタ操作の実体は関数ライブラリ `.Codex/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`ins_file`+`new_post_tags`+`new_post_magazine`+`paid_setline_from_settings`（新規）/ `do_update`）。新規有料記事は`publish-new-note.sh ... --prepare-publish`で境界 screenshot まで進め、エージェントが目視してから同じセッションで`--commit-publish`を実行する。手書きせずこれを使う
+- ★**エディタ操作の実体は関数ライブラリ `.claude/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`ins_file`+`new_post_tags`+`new_post_magazine`+`paid_setline_from_settings`（新規）/ `do_update`）。新規有料記事は`publish-new-note.sh ... --prepare-publish`で境界 screenshot まで進め、エージェントが目視してから同じセッションで`--commit-publish`を実行する。手書きせずこれを使う
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
+
+### 公開済み記事のハッシュタグ専用更新
+
+本文の差し替えを行わず、公開済み記事を 95〜99 タグに揃えるときは専用スクリプトを使う。
+
+```bash
+# 棚卸しのみ
+node .claude/scripts/note/update-published-hashtags.mjs --all --audit-only
+
+# 無料・有料を含む全公開記事（95未満のみ更新）
+node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid
+```
+
+- Phase 1 の `stats47` アカウント照合は省略しない
+- 元のタグを優先し、数値のみのタグと note が受理しないハイフン入りタグを除外して 99 個まで補完する
+- 公開版の再編集 URL（`?draft_reedit=true`）から開き、送信前の無料本文が現在の公開版と一致することを検証する
+- 95 タグ未満の記事に未公開下書きがある場合は fail-closed で停止し、下書きを公開・破棄しない
+- 有料記事は既存境界が選択済みであることを検証し、`/tmp/stats47-note-hashtag-boundaries/` に screenshot を保存する
+- 更新前後で価格・有料境界・note が送信した無料本文を照合し、更新後の公開 API が 95 タグ未満なら失敗とする
 
 ### Phase 8 後: 公開 URL をフロントマターに記録（★真実源への書き込み）
 
@@ -243,26 +284,26 @@ NOTE_URL="https://note.com/stats47/n/nXXXXX"
 SLUG="<slug>"
 
 # 2. docs/31 の draft.md が存在しない場合は R2 から復元
-bash .Codex/scripts/note/restore-from-r2.sh "$SLUG"
+bash .claude/scripts/note/restore-from-r2.sh "$SLUG"
 
 # 3. frontmatter に note_url / published / published_at を追加（migrate スクリプト転用）
 NOTE_URL="$NOTE_URL" DRY_RUN=false \
-  node .Codex/scripts/note/migrate-note-frontmatter.mjs --slug "$SLUG"
+  node .claude/scripts/note/migrate-note-frontmatter.mjs --slug "$SLUG"
 # ↑ note-published-urls.json に URL が入っていれば自動取得。
 #   新規公開で未登録の場合は下記の手動追記を先に行う。
 
 # 4. note-published-urls.json に追記（派生インデックスの仮登録）
 # → migrate 実行後に build-note-published-index.mjs で再構築する方が正確
-node .Codex/scripts/note/build-note-published-index.mjs
+node .claude/scripts/note/build-note-published-index.mjs
 
 # 5. R2 に反映（S3 API 経由 or develop push → sync-note-r2.yml）
 # ローカルに S3 creds があれば:
-node .Codex/scripts/note/sync-note-r2.mjs  # または develop push でCIに委ねる
+node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委ねる
 ```
 
 **新規公開時の追加手順** (note-published-urls.json にまだ存在しない場合):
 ```javascript
-// .Codex/state/note-published-urls.json の articles に手動追記
+// .claude/state/note-published-urls.json の articles に手動追記
 "<slug>": {
   "vertical": "<vertical>",
   "title": "<title>",
@@ -276,7 +317,7 @@ node .Codex/scripts/note/sync-note-r2.mjs  # または develop push でCIに委�
 追記後に `migrate-note-frontmatter.mjs --slug <slug>` → `build-note-published-index.mjs` を実行する。
 
 - **下書き保存のみ**（公開していない）の場合は上記不要
-- **ドラフト管理中だった場合**: `.Codex/state/note-draft-index.json` の `drafts` から同 slug を削除する
+- **ドラフト管理中だった場合**: `.claude/state/note-draft-index.json` の `drafts` から同 slug を削除する
   （公開後は frontmatter の `note_url` が真実源になるため）
 
 - **ClipboardEvent 制約**: 最初の1セグメントのみ ClipboardEvent でペースト可能。2回目以降は `type` コマンドを使う
@@ -294,4 +335,4 @@ node .Codex/scripts/note/sync-note-r2.mjs  # または develop push でCIに委�
 - note 記事テンプレート: `/post-note-ranking` スキル
 - note 記事執筆: `/write-note-section` スキル
 - note 記事編集: `/edit-note-draft` スキル
-- 自動化パターン: `.Codex/agents/browser-publisher.md` の note.com セクション
+- 自動化パターン: `.claude/agents/browser-publisher.md` の note.com セクション

@@ -140,4 +140,4 @@ JS
 
 - `/fetch-gsc-data` — 集計データ取得（こちらはクエリ単位）
 - `/submit-sitemap` — sitemap 再送信
-- `.Codex/skills/analytics/gsc-improvement/reference/improvement-log.md` — 施策観測ログ（個別 URL 検査結果を貼り付けて証拠化）
+- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — 施策観測ログ（個別 URL 検査結果を貼り付けて証拠化）

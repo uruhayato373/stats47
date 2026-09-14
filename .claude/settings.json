@@ -25,6 +25,13 @@
       "Read(**/service-account*.json)"
     ]
   },
+  "enabledMcpjsonServers": [
+    "cloudflare-observability",
+    "cloudflare-graphql",
+    "chrome-devtools",
+    "seo-observability",
+    "codex"
+  ],
   "hooks": {
     "PreToolUse": [
       {

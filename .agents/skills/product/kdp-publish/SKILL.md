@@ -12,7 +12,7 @@ Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行�
 ```
 node .claude/scripts/kdp/login.mjs                                  # 初回のみ: headed で手動ログイン (2FA 含む)
 node .claude/scripts/kdp/capture-account.mjs --write                # 初回のみ: knownAsin を .local へ
-npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --apply   # 出品内容 SoT を KINDLE_BOOKS から生成
+npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <VERSION> # 非公開の改訂書誌提案を生成
 
 # ── バッチ (通常運用。1 つのブラウザで全冊・冪等) ──
 node .claude/scripts/kdp/kdp-batch.mjs --phase draft                # 未完の下書きを完成させる (verify で欠けだけ埋める)
@@ -53,7 +53,7 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update --commit # 修正
 
 ## フロー
 
-1. **SoT を確定**: `products:kindle:kdp-listings --apply` で `kdp-listings.json` を最新化。
+1. **SoT を確定**: `products:kindle:kdp-listings --version <VERSION>` で非公開の改訂書誌提案を生成する。旧`--apply`一括上書きは禁止。改訂版の独立レビュー・Previewer・暗号化保全・オーナー承認後に、対象IDだけの出品台帳切替を別工程で行う。
    カテゴリ・DRM・AI 開示・フリガナはすべて git TS が SSOT なので手で書かない
    (`kdp-{category,publishing-policy,reading}.ts`)。`status` / `asin` / `draftId` は upsert 保持。
 2. **構造確認**: DOM が変わった疑いがあるときだけ `--probe` で `.local/kdp-debug/probe-<id>.json` を確認。
@@ -74,7 +74,7 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update --commit # 修正
    (文言 grep は「出版」がどのページにもあるので使わない)。成功時に `status:listed`+asin を書き戻し。
    ASIN 割当が遅れる本は `kdp-drafts.mjs` (一覧) で後追いする。
 8. **状態同期**: `--phase status`はASINの有無に関係なく`draft|in_review|live|unknown`、生表示、確認日時、販売開始日をlistingsへ保存する。
-9. **既刊修正**: 原稿/表紙SSOTを修正・再生成し、`kindle:archive --push`で新revisionを保全してから`--update`。archiveとローカル完成物のSHAが違えばKDPへ送らない。
+9. **既刊修正**: 原稿/表紙SSOTを修正・新versionへ生成し、`kindle:archive --push --id <ID> --version <VERSION>`で保全、同版を`--audit --deep --record`で検証してから`--update`。出品台帳のEPUB/表紙パス・保全版・ローカル全必須ファイルのSHAに加え、`kdp-release-gate.mjs`が現行原稿・本文品質・対象版の独立レビューを確認する。未達なら単発でもバッチでも送らない。本文検査だけでオーナー承認を代替しない。
 
 ## ガードレール
 
