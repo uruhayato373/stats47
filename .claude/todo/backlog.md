@@ -628,9 +628,13 @@ updated: 2026-09-13
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:ready] [起票:2026-08-29]
 
 - **owner**: 全体は`open-data-curator`、2021都道府県DataBookは`area-curator`、Claudeスキル構築ガイドは`knowledge-curator`。
-- **現状証拠**: 全ページOCR・内部crop・解決台帳を完了。DataBook 8 PDF / 580ページは`combined-analysis` 61 /
-  `context-only` 19 / `not-applicable` 500、偏差値資料6 PDF / 103ページは`rights-hold` 103、Claudeガイド
+- **現状証拠**: 全ページOCR・内部crop・解決台帳を完了。DataBook 8 PDF / 580ページは`combined-analysis` 60 /
+  `context-only` 19 / `not-applicable` 501、偏差値資料6 PDF / 103ページは`rights-hold` 103、Claudeガイド
   1 PDF / 33ページは`context-only` 7 / `not-applicable` 26。3資料ともresolution coverage 100%。
+  DataBook は 2026-09-14 に S1 (contentCrop 付き) → S2 (OCR 580 + Markdown 580) → S3 (crop 235) を revision 3 として
+  Drive へ配置し `stage-status` で S0〜S4 到達。台帳は同日に再 build し、県ページ判定が OCR テキストの単一県名検出
+  (`detectedPrefecture`) に依存するため 34 ページの resolution が入れ替わった (表紙が県候補になる等の誤判定は新旧双方にある)。
+  area wave では `md/<doc>/pNNNN.md` の frontmatter (`kind`) と見出しを一次の手掛かりにし、台帳の県名判定だけを信用しない。
 - **次**: DataBookの61候補は既存area/editorial責務で必要なwaveだけ実装する。偏差値資料は図表権利と一次資料の
   両方が確定した項目だけholdを解除する。準備工程の再実行は不要。
 - **完了条件**: 3資料の全抽出候補がresolutionを持ち、公開候補100%で一次資料・年度・単位・地域粒度・rightsが

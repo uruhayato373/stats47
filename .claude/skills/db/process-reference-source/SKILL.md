@@ -71,11 +71,13 @@ npm run source-vault:process -- md-check --workspace <derived-dir> --check
 
 ### S3 図クロップ (agent が spec、CLI が切り出し)
 `<derived-dir>/crop-spec.template.json` を複製し、S1 の `pages/` 画像上の pixel 座標 (contentCrop 後) で crop を宣言する。
+spec のトップレベルに `"coordinateSpace": "page-image"` を置く (CLI が profile の `pageImage` dpi で描画し contentCrop を
+当ててから box を切る。省略時の `full-page` は PDF を 180 dpi でフル描画した座標系 = 家計調査本までの旧動作)。
 `internalUseOnly:true` / `purpose` / `sourceRef` / `intendedStats47Use` / `primarySourceRequired:true` は必須。
 ```bash
 npm run source-vault:process -- crop --workspace <derived-dir> --spec <derived-dir>/crop-spec.json
 ```
-`crops/<id>.png` と `crop-manifest.json` ができる。S2 の md の `figures[]` に crop id を書き、`md-check --check` を再実行する。
+`crops/<id>.png` (page-image 空間では pages/ と同じ形式、例 `.jpg`) と `crop-manifest.json` ができる。S2 の md の `figures[]` に crop id を書き、`md-check --check` を再実行する。
 
 ### Drive の版 folder へ足す (revision を上げる)
 1. `.claude/config/source-vault.json` の `profiles.<profile>.revision` を N+1 にする。
