@@ -67,7 +67,7 @@
       "shareMetricKey": "furniture-household-goods-expenditure-ratio-multi-person-households",
       "evidence": [
         {
-          "metricKey": "housing-floor-area",
+          "metricKey": "floor-area-per-dwelling-owner",
           "direction": "same",
           "priority": 1,
           "rationale": "住宅の床面積が広い地域ほど家具支出割合が上がる"
@@ -109,7 +109,7 @@
           "rationale": "医師数が多い地域ほど受診機会が増え割合が上がる"
         },
         {
-          "metricKey": "elderly-population-ratio",
+          "metricKey": "ratio-65-plus",
           "direction": "same",
           "priority": 2,
           "rationale": "高齢者が多い地域ほど医療費割合が上がる"
@@ -187,7 +187,7 @@
       "shareMetricKey": "other-consumption-expenditure-ratio-multi-person-households",
       "evidence": [
         {
-          "metricKey": "elderly-population-ratio",
+          "metricKey": "ratio-65-plus",
           "direction": "same",
           "priority": 1,
           "rationale": "高齢者が多い地域ほど交際費等の割合が上がる"
