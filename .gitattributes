@@ -39,3 +39,6 @@ _redirects text eol=lf
 *.ttf binary
 *.eot binary
 
+
+# git hooks are shell scripts without an extension; a CRLF shebang breaks sh on every OS
+.husky/* text eol=lf

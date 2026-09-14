@@ -5,8 +5,13 @@
  * 長期比較の SSOT は各ディレクトリの history.csv / LATEST.md。生 snapshot は直近の
  * デバッグ入力だけを残し、古い世代は Git 履歴から復元できる。キューや投稿台帳など
  * 状態を持つ JSON は対象にしない。
+ *
+ * 寿命の SSOT は下の RETENTION_POLICIES だけ。fetch-metrics-weekly.yml が commit 直前に
+ * `npm run state:snapshots:prune` を実行し、削除は週次 snapshot と同じ commit に載る。
+ * .claude/state/metrics 直下に日付名 JSON を新規に置くことは check-repo-hygiene.cjs
+ * (DATED_STATE_ARTIFACT) が止める。release 証跡は metrics/releases/<date>-<name>.json。
  */
-import { readdirSync, rmSync } from "node:fs";
+import { existsSync, readdirSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -28,6 +33,42 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 30,
   },
+  note: {
+    directory: ".claude/state/metrics/note",
+    pattern: /^note-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
+  releases: {
+    directory: ".claude/state/metrics/releases",
+    pattern: /^\d{4}-\d{2}-\d{2}-.+\.json$/,
+    keep: 8,
+  },
+  "business-plan": {
+    directory: ".claude/state/business-plan/history",
+    pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 12,
+  },
+  "search-growth-manifests": {
+    directory: ".claude/state/search-growth/manifests",
+    pattern: /^\d{4}-W\d{2}\.json$/,
+    keep: 8,
+  },
+  // analytics の週次 snapshot ディレクトリ。wave 判定が before 週を参照するため 26 週残す。
+  "analytics-gsc": {
+    directory: ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+    pattern: /^\d{4}-W\d{2}$/,
+    keep: 26,
+  },
+  "analytics-ga4": {
+    directory: ".claude/skills/analytics/ga4-improvement/reference/snapshots",
+    pattern: /^\d{4}-W\d{2}$/,
+    keep: 26,
+  },
+  "analytics-adsense": {
+    directory: ".claude/skills/analytics/adsense-improvement/reference/snapshots",
+    pattern: /^\d{4}-W\d{2}$/,
+    keep: 26,
+  },
 });
 
 export function selectSnapshotsToPrune(files, pattern, keep) {
@@ -42,10 +83,12 @@ export function pruneScope(scope, { dryRun = false, root = PROJECT_ROOT } = {}) 
   const policy = RETENTION_POLICIES[scope];
   if (!policy) throw new Error(`不明な scope: ${scope}`);
   const directory = resolve(root, policy.directory);
-  const files = readdirSync(directory);
+  // ディレクトリ未作成の scope (新しい PC・空の環境) は「削除対象なし」として扱う。
+  const files = existsSync(directory) ? readdirSync(directory) : [];
   const targets = selectSnapshotsToPrune(files, policy.pattern, policy.keep);
   if (!dryRun) {
-    for (const file of targets) rmSync(resolve(directory, file));
+    // 週次 snapshot ディレクトリ (analytics-*) はディレクトリごと消す。
+    for (const file of targets) rmSync(resolve(directory, file), { recursive: true });
   }
   return {
     scope,
@@ -62,7 +105,7 @@ function parseArgs(argv) {
     scope !== "all" &&
     !Object.prototype.hasOwnProperty.call(RETENTION_POLICIES, scope)
   ) {
-    throw new Error(`--scope は all/psi/gsc/cloudflare のいずれかです: ${scope}`);
+    throw new Error(`--scope は all/${Object.keys(RETENTION_POLICIES).join("/")} のいずれかです: ${scope}`);
   }
   return { scope, dryRun: argv.includes("--dry-run") };
 }

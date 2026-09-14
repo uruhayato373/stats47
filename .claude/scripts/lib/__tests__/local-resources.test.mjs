@@ -13,6 +13,9 @@ import {
   assertIdle,
   planCaches,
   removeCache,
+  allowedTargets,
+  probeProcesses,
+  isNodeProcess,
 } from '../local-resources.mjs';
 
 function fixture(t) {
@@ -124,3 +127,88 @@ test(
     assert.equal(run.status, 0, `${run.stdout}\n${run.stderr}`);
   }
 );
+
+test('glob allowlist expands only the last segment and never reaches outside the root', (t) => {
+  const { root } = fixture(t);
+  const turbo = path.join(root, '.turbo/cache');
+  fs.mkdirSync(turbo, { recursive: true });
+  fs.writeFileSync(path.join(turbo, 'a.tar.zst'), 'x');
+  fs.writeFileSync(path.join(turbo, 'b.tar.zst'), 'y');
+  fs.writeFileSync(path.join(root, '.turbo/keep.json'), 'config');
+  const config = {
+    cachePaths: [{ path: '.turbo/cache/*', ageDays: 1 }, 'missing/dir'],
+    cacheAgeDays: 7,
+    scratchRoots: {},
+    protectedPaths: [],
+  };
+  // Literal entries are listed even when absent (planCaches skips them); globs expand to real children.
+  const targets = allowedTargets([root], config).map((x) => path.relative(root, x.target));
+  assert.deepEqual(
+    targets.sort(),
+    ['.turbo/cache/a.tar.zst', '.turbo/cache/b.tar.zst', 'missing/dir'].map((p) => p.split('/').join(path.sep))
+  );
+  assert.throws(
+    () => allowedTargets([root], { ...config, cachePaths: ['.turbo/*/x'] }),
+    /last segment/
+  );
+  // Only the exact expanded entries can be removed; a sibling outside the glob is refused.
+  const plan = planCaches([root], { includeRecent: true, config });
+  assert.equal(plan.length, 2);
+  assert.throws(
+    () =>
+      removeCache(
+        { ...plan[0], target: path.join(root, '.turbo/keep.json') },
+        [root],
+        { processes: [] },
+        config
+      ),
+    /allowlisted/
+  );
+  assert.ok(removeCache(plan[0], [root], { processes: [] }, config) > 0);
+  assert.ok(fs.existsSync(path.join(root, '.turbo/keep.json')));
+});
+
+test('scratch cleanup honours prefix, excludes, per-entry age and registered worktrees', (t) => {
+  const { root } = fixture(t);
+  const scratch = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-scratch-root-')));
+  t.after(() => fs.rmSync(scratch, { recursive: true, force: true }));
+  for (const name of ['stats47-old', 'stats47-source-vault-x', 'other-project', 'stats47-worktree']) {
+    fs.mkdirSync(path.join(scratch, name));
+    fs.writeFileSync(path.join(scratch, name, 'f.txt'), name);
+  }
+  const config = {
+    cachePaths: [],
+    cacheAgeDays: 7,
+    scratchRoots: { [process.platform]: [scratch] },
+    scratchPrefix: 'stats47-',
+    scratchAgeDays: 14,
+    scratchExclude: ['stats47-source-vault*'],
+    protectedPaths: [],
+  };
+  const roots = [root, path.join(scratch, 'stats47-worktree')];
+  const names = allowedTargets(roots, config).map((x) => path.basename(x.target));
+  assert.deepEqual(names, ['stats47-old']);
+  const now = Date.now() + 15 * 86400000;
+  const plan = planCaches(roots, { config, now });
+  assert.equal(plan[0].kind, 'scratch');
+  assert.equal(plan[0].reason, 'aged-scratch');
+  assert.equal(planCaches(roots, { config, now: Date.now() + 10 * 86400000 })[0].eligible, false);
+  assert.ok(removeCache(plan[0], roots, { processes: [] }, config) > 0);
+  assert.ok(fs.existsSync(path.join(scratch, 'stats47-worktree/f.txt')));
+  assert.ok(fs.existsSync(path.join(scratch, 'other-project/f.txt')));
+  assert.ok(fs.existsSync(path.join(scratch, 'stats47-source-vault-x/f.txt')));
+  // The scratch root itself is never a target, whatever the config says.
+  assert.throws(() => assertInside(scratch, scratch));
+});
+
+test('POSIX process probe feeds the same idle gate as the Windows probe', () => {
+  const idle = probeProcesses('1 100 /sbin/launchd\n2 200 /usr/bin/node /repo/.claude/hooks/session-guard.js\n');
+  assert.equal(idle.length, 2);
+  assert.doesNotThrow(() => assertIdle({ processes: idle }));
+  const busy = probeProcesses('3 300 node /repo/node_modules/.bin/../next/dist/bin/next dev\n');
+  assert.equal(busy[0].busy, true);
+  assert.throws(() => assertIdle({ processes: busy }), /Active/);
+  assert.equal(probeProcesses('garbage line\n').length, 0);
+  assert.throws(() => assertIdle({ processes: null }));
+  assert.ok(isNodeProcess({ name: 'node' }) && isNodeProcess({ name: 'node.exe' }));
+});

@@ -146,6 +146,12 @@ const PR_GATES = [
     hint: "指摘要素の意味と操作性を是正する。baselineは増やさない",
   },
   {
+    name: "Repo Hygiene",
+    why: "寿命を宣言しない日付名 state・一時/巨大ファイルの追跡 (ローカル肥大化の入口)",
+    run: () => tryRun("node", [checker("check-repo-hygiene.cjs"), "--baseline"]),
+    hint: "release 証跡は .claude/state/metrics/releases/、生 snapshot は prune 対象ディレクトリへ置く (.claude/rules/data-storage.md)",
+  },
+  {
     name: "Metric Registry",
     why: "metric を足す/消すと registry.ts が古くなる",
     run: () => tryRun("npm", ["run", "build:registry", "--workspace=@stats47/data-configs", "--", "--check"]),

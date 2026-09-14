@@ -185,6 +185,17 @@ async function collect() {
     }
   }
 
+  // ── docs/31 の派生 PNG (同名 SVG から regenerate-svg-png.sh で再生成できる) ──
+  // note.com への貼付に PNG 実体は要るが、git に載せる必要はない (66.9MB の主因)。
+  // 既存分は baseline で許容し、新規に追跡へ加わる派生 PNG だけを止める。
+  const trackedSet = new Set(images.map(rel));
+  for (const file of images) {
+    const relPath = rel(file);
+    if (!relPath.startsWith("docs/31_note記事原稿/") || !/\.png$/i.test(relPath)) continue;
+    const svgSibling = relPath.replace(/\.png$/i, ".svg");
+    if (trackedSet.has(svgSibling)) add(findings, "DERIVED_PNG_TRACKED", file, `regenerable from ${path.basename(svgSibling)}; do not track the PNG`);
+  }
+
   // ── ローカル画像参照の解決検査 (MD/HTML/CSS/TS(X)) ──
   let checkedText = 0;
   const referencedBasenames = new Set();

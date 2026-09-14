@@ -252,6 +252,7 @@ jobs:
           name: blog-svg-gallery
           path: /tmp/blog-svg-gallery.html
           if-no-files-found: warn
+          retention-days: 14
 
       - name: 📤 Push regenerated/repaired assets to R2 (本番時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}

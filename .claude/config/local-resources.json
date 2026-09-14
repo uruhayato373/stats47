@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "diskWarnGiB": 25,
   "diskCriticalGiB": 15,
   "memoryWarnGiB": 3,
@@ -10,13 +10,28 @@
   "cachePaths": [
     "apps/web/.next/cache",
     "apps/admin/.next/cache",
-    "apps/web/.next/standalone/apps/web/.next/cache"
+    "apps/web/.next/standalone/apps/web/.next/cache",
+    { "path": ".turbo/cache/*", "ageDays": 7 },
+    { "path": ".local/r2/gis", "ageDays": 60 },
+    { "path": ".local/verification/*", "ageDays": 30 },
+    { "path": ".local/tmp", "ageDays": 7 },
+    { "path": ".local/rakuten-cli-test-*", "ageDays": 7 },
+    { "path": ".local/regen-*", "ageDays": 7 },
+    { "path": ".local/geo-source-*", "ageDays": 30 },
+    { "path": ".claude/state/estat-city-meta-cache", "ageDays": 30 }
   ],
+  "scratchRoots": {
+    "win32": ["C:/tmp"],
+    "darwin": ["/tmp"]
+  },
+  "scratchPrefix": "stats47-",
+  "scratchAgeDays": 14,
+  "scratchExclude": ["stats47-source-vault*", "stats47-japan-zue-*", "stats47-geo-ui"],
   "protectedPaths": [
     "books",
     "docs/books",
     ".claude/pdfs",
-    ".local/r2",
+    ".local/r2/app",
     ".local/affiliate-status"
   ]
 }

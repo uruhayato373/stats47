@@ -135,6 +135,8 @@ test("--pr のゲートは PR CI (Static Gates) と同じコマンドを指す",
     "generate-sitemap-blog-entries.ts",
     "generate-known-tag-keys.ts",
     "generate-ranking-prominence.ts",
+    // 2026-09-14: 日付名 state の追跡を止める hygiene gate も PR CI と同じ引数で走らせる
+    "check-repo-hygiene.cjs",
   ];
   for (const command of shared) {
     assert.ok(src.includes(command), `preflight --pr が ${command} を失っている`);

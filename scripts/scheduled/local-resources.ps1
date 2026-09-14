@@ -17,6 +17,9 @@ if ($Action -eq 'Install') {
   $principal = New-ScheduledTaskPrincipal -UserId ([Security.Principal.WindowsIdentity]::GetCurrent().Name) -LogonType Interactive -RunLevel Limited
   Register-ScheduledTask -TaskName $taskName -Action $taskAction -Trigger $triggers -Settings $settings -Principal $principal -Description 'Local resource check daily; eligible generated cache cleanup weekly; storage audit monthly. No persistent process.' -Force | Out-Null
   Get-ScheduledTask -TaskName $taskName | Select-Object TaskName, State
+  # git 自身の commit-graph / prefetch / incremental repack を Task Scheduler へ登録する (pack が 25 個に
+  # 溜まった 2026-09-14 の再発防止)。履歴は書き換えない。
+  & git -C $repo maintenance start
   exit 0
 }
 if ($Action -eq 'Remove') {
