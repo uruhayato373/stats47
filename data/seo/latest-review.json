@@ -1,101 +1,52 @@
 {
   "schemaVersion": 1,
-  "id": "34700240984-1",
-  "status": "proposed",
-  "keyword": "40代 未婚 割合 日本 国勢調査",
-  "targetPath": "/survey/census",
-  "needs": "「40代(40〜44歳・45〜49歳)の未婚率が国勢調査で男女別に何%か、都道府県によってどう違うか」を知りたい検索。国勢調査という一次統計の裏付けを求めている。",
-  "gap": "対象ページのreaderQuestionsは「30代前半男性の未婚率が高い都道府県は？」のみで、40代(40-44/45-49、男女計4区分)の未婚率ランキングへの導線が一切ない。該当metric(unmarried-ratio-male-40-44/45-49、unmarried-ratio-female-40-44/45-49)はisActive:trueかつKNOWN_RANKING_KEYSに公開済みだが、censusハブから発見できない。競合uub.jpは2010年国勢調査の47都道府県別40代未婚率表を持ち都道府県比較ニーズに直接回答している。onet.co.jp/nozze.comは全国値中心の解説記事で都道府県別データは持たない。",
-  "done": "censusの既存の未婚率案内を、30代前半男性から40代前半（40〜44歳）男性へ差し替えた。質問とrankingKeyを同時に更新し、国勢調査に属する公開済みランキングへの導線とした。代表導線は最大5件を維持し、他の4件は保持した。男女全区分の案内を追加したものではない。",
-  "method": "internal-links",
+  "id": "34812821313-1",
+  "status": "no-change",
+  "keyword": "外国人",
+  "targetPath": "/blog/foreign-residents-diversity-map",
+  "needs": "「外国人」単体で検索するユーザーは、言葉の法的定義、出入国在留管理庁の生活支援・在留手続き情報、雇用関連の求人・制度情報など多様な意図を持つ。上位表示ページの構成から見る限り、都道府県別の人口比率統計を主目的とした検索は支配的な意図として確認できない。",
+  "gap": "対象ページは外国人人口の都道府県別比率・地図・製造業県との相関を扱う統計コンテンツ。上位のkotobank(用語辞典)・法務省生活支援ポータルはいずれも統計データや都道府県別数値を含まない、扱う情報の種類が根本的に異なるページで、内容形式を比較できる直接競合ではない。対象ページは既に平均掲載順位2.9・週464インプレッション・37クリックと強い実績があり、タイトル・説明・本文の追加情報で埋められる具体的な不足は見つからなかった。なお対象URLへのWebFetchは403で失敗し、.local/seo-rank-watch/target-page.txtにはタイトルとメタディスクリプションのみが記録され本文は確認できていない。",
+  "done": "「外国人」という語は検索意図が辞書・法的手続き・雇用など多方向に分散しており、対象ページのテーマ(都道府県別統計・地図)と一致するのはその一部に限られる。この意図の広さはタイトルや説明文の書き換えでは埋められず、対象ページの順位(平均2.9)も既に良好なため、今回は変更を提案しない。",
+  "method": "content",
   "competitors": [
     {
-      "url": "https://uub.jp/pdr/j/mikon.html",
-      "findings": "2010年国勢調査に基づく47都道府県別・男女別・年代別(20-50代)未婚率の一覧表。東京都は男性30.8%・女性22.2%など全県値を掲載し都道府県比較ニーズに直接回答するが、出典年は2010年で古い。"
+      "url": "https://kotobank.jp/word/%E5%A4%96%E5%9B%BD%E4%BA%BA-42384",
+      "findings": "「外国人」の法的定義・歴史的背景・参政権議論を解説する辞書コンテンツ。統計データ、都道府県別分布、国籍別人数、出入国数のいずれも含まれない。"
     },
     {
-      "url": "https://onet.co.jp/marriage_column/4149/",
-      "findings": "2020年国勢調査の全国値(男性40-44歳29.1%・45-49歳27.2%、女性40-44歳19.4%・45-49歳17.6%)を提示する解説記事。都道府県別データはなく、婚活方法の案内が主目的で範囲は全国のみ。"
-    },
-    {
-      "url": "https://www.nozze.com/enquete/1052/",
-      "findings": "2015年国勢調査の40代前半・後半男女別未婚率(男性29.3%/25.2%、女性19.1%/15.3%)を示し結婚相談所の実績で締める記事。都道府県別データもあるが対象年齢は30-34歳男性・25-29歳女性など別区分で40代の県別値は無い。"
+      "url": "https://www.moj.go.jp/isa/support/portal/index.html",
+      "findings": "出入国在留管理庁の生活支援ポータル。入国手続・雇用・教育・医療・税金等を多言語で案内する実用情報サイトで、統計情報や都道府県別外国人数データは含まれない。"
     }
   ],
-  "patches": [
-    {
-      "property": "question",
-      "oldText": "30代前半男性の未婚率が高い都道府県は？",
-      "newText": "40代前半（40〜44歳）男性の未婚率が高い都道府県は？"
-    }
-  ],
+  "patches": [],
   "research": {
     "targetPage": {
-      "url": "https://stats47.jp/survey/census",
+      "url": "https://stats47.jp/blog/foreign-residents-diversity-map",
       "status": 200,
-      "fetchedAt": "2026-09-12T14:47:31.631Z",
-      "inputHash": "a7b8fb952041c0af767f8c74dea8858ff39b46380642855288486aab770bcd54",
+      "fetchedAt": "2026-09-14T06:18:37.001Z",
+      "inputHash": "a2adf531f3247b21c1ae9e4393baaed30f80c20b8f144cdbea282ad7749ef3dc",
       "htmlFile": ".local/seo-rank-watch/target-page.html",
-      "htmlSha256": "137050838a11bfd3fa66e12610208d232e0ae62905012d916eb7acb2a248ac7f",
+      "htmlSha256": "9f0caea80889489f14bca58d8ca151edc29a3a4e04580d567b7332482afd8a08",
       "textFile": ".local/seo-rank-watch/target-page.txt",
-      "textSha256": "6cf41b24f837e6a61abe76baeb0bfa39c99794ed3033cafe805ca4293834ae44"
+      "textSha256": "faa276b2753a6851ec60d14e77a5ed658ae8a6910e140020a2f816c107025af0"
     },
     "toolCalls": [
       {
         "name": "WebSearch",
-        "target": "40代 未婚 割合 日本 国勢調査"
+        "target": "外国人"
       },
       {
         "name": "WebFetch",
-        "target": "https://uub.jp/pdr/j/mikon.html"
+        "target": "https://kotobank.jp/word/%E5%A4%96%E5%9B%BD%E4%BA%BA-42384"
       },
       {
         "name": "WebFetch",
-        "target": "https://onet.co.jp/marriage_column/4149/"
-      },
-      {
-        "name": "WebFetch",
-        "target": "https://www.nozze.com/enquete/1052/"
+        "target": "https://www.moj.go.jp/isa/support/portal/index.html"
       }
     ]
   },
-  "selectedAt": "2026-09-12",
-  "inputHash": "a7b8fb952041c0af767f8c74dea8858ff39b46380642855288486aab770bcd54",
-  "methods": [
-    "internal-links"
-  ],
-  "files": [
-    {
-      "path": "apps/web/src/features/survey/survey-editorial.ts",
-      "beforeSha256": "c37cd0d78de5377a8588e6f979db48073be096e44ed58583f500a2e73b1fd561",
-      "sha256": "b8f382d5f914f80af4baa8979d47ecb24b306d5af93dc7941b2ca7ec5ae63f47"
-    }
-  ],
-  "implementation": {
-    "actor": "Codex",
-    "kind": "reviewed-existing-link-replacement",
-    "preparedAt": "2026-09-12T15:08:36.367Z",
-    "reason": "追加案は代表導線3〜5件の既存検査に違反したため不採用。5件の枠内で既存の未婚率案内を検索語に合わせた。",
-    "linkChanges": [
-      {
-        "fromRankingKey": "unmarried-ratio-male-30-34",
-        "toRankingKey": "unmarried-ratio-male-40-44"
-      }
-    ],
-    "verification": {
-      "verifiedAt": "2026-09-12T15:08:36.367Z",
-      "localUrl": "http://127.0.0.1:3037/survey/census",
-      "canonical": "https://stats47.jp/survey/census",
-      "question": "40代前半（40〜44歳）男性の未婚率が高い都道府県は？",
-      "destination": "/ranking/unmarried-ratio-male-40-44",
-      "renderedHtmlSha256": "574fd69ce7388646afe6c0aef89293dae92938d63a282dec5c4992e53ae6e93b",
-      "tests": {
-        "survey": 16,
-        "workspaceTypes": "pass",
-        "fullBuild": "pass"
-      },
-      "indexingChanged": false
-    },
-    "publication": "pending"
-  }
+  "selectedAt": "2026-09-14",
+  "inputHash": "a2adf531f3247b21c1ae9e4393baaed30f80c20b8f144cdbea282ad7749ef3dc",
+  "methods": [],
+  "files": []
 }
