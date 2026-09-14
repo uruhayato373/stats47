@@ -22,20 +22,20 @@ primary_agent: ranking-expander
 
 ## 真実源
 
-- 状態SSOT: `.Codex/state/estat/expansion-queue.json` (candidate/generated/published/measured + categoryTraffic)
-- 候補プール: `.Codex/state/estat/ssds-candidates.json` (enumerate-ssds-indicators.mjs → CI で再生成)
+- 状態SSOT: `.claude/state/estat/expansion-queue.json` (candidate/generated/published/measured + categoryTraffic)
+- 候補プール: `.claude/state/estat/ssds-candidates.json` (enumerate-ssds-indicators.mjs → CI で再生成)
 
 ## 使い方
 
 ```bash
 # キュー最新化 + 状態表示 (候補をスコア・生成/公開状態を検出・upsert)
-node .Codex/scripts/estat/build-expansion-queue.mjs
+node .claude/scripts/estat/build-expansion-queue.mjs
 
 # 次に生成すべき pending 上位 N (score 降順・細分除外。計測後は流入カテゴリが上位)
-node .Codex/scripts/estat/build-expansion-queue.mjs --next 30
+node .claude/scripts/estat/build-expansion-queue.mjs --next 30
 
 # 公開バッチの GSC 流入を計測しキューに反映 (公開 4 週後)
-node .Codex/scripts/estat/measure-expansion-impact.mjs [--week YYYY-Www]
+node .claude/scripts/estat/measure-expansion-impact.mjs [--week YYYY-Www]
 ```
 
 ## ループ手順 (ranking-expander エージェントが実行)
@@ -56,8 +56,8 @@ node .Codex/scripts/estat/measure-expansion-impact.mjs [--week YYYY-Www]
 
 ## 関連
 
-- エージェント: `.Codex/agents/ranking-expander.md` (キュレーション判断のオーナー)
-- スクリプト: `.Codex/scripts/estat/{build-expansion-queue,gen-ssds-configs,measure-expansion-impact,enumerate-ssds-indicators,discover-prefecture-candidates,fetch-estat-meta}.mjs`
-- 知見/状態: memory `project_estat_expansion_pipeline_2026_07` / `.Codex/state/estat/expansion-queue.json`
-- 正典: `.Codex/rules/metric-config-standards.md` / `.Codex/rules/estat-api.md` / 現在計画は `.Codex/todo/weekly.md`
-- 対比: `.Codex/rules/blog-remediation-loop.md` (同型の型)
+- エージェント: `.claude/agents/ranking-expander.md` (キュレーション判断のオーナー)
+- スクリプト: `.claude/scripts/estat/{build-expansion-queue,gen-ssds-configs,measure-expansion-impact,enumerate-ssds-indicators,discover-prefecture-candidates,fetch-estat-meta}.mjs`
+- 知見/状態: memory `project_estat_expansion_pipeline_2026_07` / `.claude/state/estat/expansion-queue.json`
+- 正典: `.claude/rules/metric-config-standards.md` / `.claude/rules/estat-api.md` / 現在計画は `.claude/todo/weekly.md`
+- 対比: `.claude/rules/blog-remediation-loop.md` (同型の型)

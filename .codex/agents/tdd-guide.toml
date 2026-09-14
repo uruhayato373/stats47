@@ -1,6 +1,6 @@
 name = "tdd-guide"
 description = "テスト駆動開発（Red-Green-Refactor）のガイド、テストカバレッジ向上、ユニット/E2Eの使い分け設計、D1・e-Stat API・R2のモック戦略立案、テストアンチパターン検出を担当する。TDDで実装を進めたい、またはテスト設計の相談をしたいときに使う。"
-developer_instructions = """
+developer_instructions = '''
 # TDD Guide Agent
 
 テスト駆動開発（Red-Green-Refactor）のガイドとテスト品質の向上を担当するエージェント。
@@ -95,11 +95,11 @@ npx vitest run --reporter=verbose 2>&1 | tail -5
 ## 参照
 
 - `apps/web/tests/README.md` — テスト構成・追加指針
-- `.Codex/rules/coding-standards.md` — AAA パターン・命名規則
+- `.claude/rules/coding-standards.md` — AAA パターン・命名規則
 
 ## Output Contract
 
-詳細は `.Codex/rules/agent-output-contract.md` を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `Test | Phase (Red/Green/Refactor) | Status | Next Step`
@@ -107,4 +107,4 @@ npx vitest run --reporter=verbose 2>&1 | tail -5
 - prose / section header / 前置き文 はすべて禁止
 
 例外: **Template C** (report) を使う場面
-- テスト戦略の設計総括 (モック方針など)"""
+- テスト戦略の設計総括 (モック方針など)'''

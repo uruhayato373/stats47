@@ -12,7 +12,7 @@ Google Search Console `webmasters.sitemaps.submit` API を叩いて sitemap.xml 
 
 - middleware の 410 / noindex ルール追加後、Google に最新 URL 一覧を早く再認識させたい
 - 新規ランキング / 記事の追加後、インデックス化を加速したい
-- 従来 GSC UI で手動実行していた「sitemap を送信」を Codex から自動化
+- 従来 GSC UI で手動実行していた「sitemap を送信」を Claude から自動化
 
 ## 前提
 
@@ -103,4 +103,4 @@ JS
 
 - `/fetch-gsc-data` — GSC 検索パフォーマンス取得（同じサービスアカウント鍵を再利用）
 - `/deploy` — middleware / sitemap.ts 変更後、本スキルを続けて呼ぶと効果的
-- `.Codex/skills/analytics/gsc-improvement/reference/improvement-log.md` — 施策効果の観測ログ
+- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — 施策効果の観測ログ

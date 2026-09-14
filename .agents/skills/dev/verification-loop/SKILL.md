@@ -24,7 +24,7 @@ primary_agent: devops-runner
 
 ### Phase 0: 既知の問題参照（推奨）
 
-`.Codex/skills/management/knowledge/SKILL.md` と `.Codex/skills/learned/` を読み、今回の変更に関連する過去の失敗パターンがないか確認する。
+`.claude/skills/management/knowledge/SKILL.md` と `.claude/skills/learned/` を読み、今回の変更に関連する過去の失敗パターンがないか確認する。
 
 DB マイグレーション・デプロイ・API 連携に関わる変更時は必須。それ以外はスキップ可。
 

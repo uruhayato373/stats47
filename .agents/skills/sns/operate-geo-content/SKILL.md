@@ -60,7 +60,7 @@ baseline投稿は分析の入口として15件中3件まで許可する。Geoの
 9. 管理画面 `npm run admin` → `/strategy` と `/content/x` は監査・閲覧だけに使う。
    予約、即時投稿、dry-run、caption編集、レンダ、R2 pushを管理画面から実行しない。
 10. 外部X投稿はユーザーが明示した場合だけ、`x-strategist` が `/publish-x` に委譲する。
-   `/publish-x` 自身の安全dry-run契約は維持し、管理画面には露出しない。
+    `/publish-x` 自身の安全dry-run契約は維持し、管理画面には露出しない。
 
 ## 機械Gate
 

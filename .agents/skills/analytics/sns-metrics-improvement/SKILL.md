@@ -6,7 +6,7 @@ primary_agent: sns-metrics-sync
 
 X / YouTube / Instagram の投稿メトリクス（impressions / views / likes / engagement）を **週次スナップショット + 施策ログ**で追跡するスキル。
 
-実証ベース判定ルール（`.Codex/rules/evidence-based-judgment.md`）に従い、すべての effect/* ラベルは実測値を根拠とする。
+実証ベース判定ルール（`.claude/rules/evidence-based-judgment.md`）に従い、すべての effect/* ラベルは実測値を根拠とする。
 
 ## データの保管場所
 
@@ -14,7 +14,7 @@ X / YouTube / Instagram の投稿メトリクス（impressions / views / likes /
 |---|---|
 | 週次メトリクス CSV | `snapshots/YYYY-MM-DD/metrics.csv` |
 | 改善施策ログ（append-only） | `reference/improvement-log.md` |
-| 書き込みスクリプト | `.Codex/scripts/lib/sns-metrics-store.cjs` |
+| 書き込みスクリプト | `.claude/scripts/lib/sns-metrics-store.cjs` |
 
 ## スナップショット収集
 
@@ -29,7 +29,7 @@ X / YouTube / Instagram の投稿メトリクス（impressions / views / likes /
 
 ## 実証チェックリスト（effect/* ラベルを付ける前に必須）
 
-参照: `.Codex/rules/evidence-based-judgment.md`
+参照: `.claude/rules/evidence-based-judgment.md`
 
 - [ ] `snapshots/<date>/metrics.csv` の実測値を取得したか
 - [ ] before/after の比較対象（投稿日・プラットフォーム・指標）が明確か

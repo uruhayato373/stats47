@@ -44,8 +44,8 @@ subagent は起動しない:
 
 #### Track B: コンテンツ資産
 ```
-- 投稿台帳 `.Codex/state/sns/posts.json` から投稿状況を集計（完全DBレス。旧 D1 sns_posts は廃止）:
-  `node -e 'const s=require("./.Codex/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'`
+- 投稿台帳 `.claude/state/sns/posts.json` から投稿状況を集計（完全DBレス。旧 D1 sns_posts は廃止）:
+  `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'`
 - .local/r2/sns/ の生成済みコンテンツ
 - ブログ記事の企画状況（`gh issue list --label content/blog --state open`）
 ```
@@ -132,17 +132,17 @@ YouTube → Instagram → X → note.com → サイト → 各 SNS のフォロ�
 ### Step 6: SSOTとTODOへ反映する
 
 採択した成長ループとゲートは `docs/00_プロジェクト管理/03_マーケティング戦略.md` または
-`02_収益化戦略.md` へ直接反映する。未完了の実験だけを `.Codex/todo/improvements.md` へ
+`02_収益化戦略.md` へ直接反映する。未完了の実験だけを `.claude/todo/improvements.md` へ
 実行順・停止条件・完了条件付きで統合し、レビュー全文は保存しない。
 
 ### Step 7: 変遷を確認する
 
-戦略文書のGit履歴と `.Codex/state/experiments.json` を参照する。
+戦略文書のGit履歴と `.claude/state/experiments.json` を参照する。
 
 ## 参照
 
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
-- 投稿台帳 `.Codex/state/sns/posts.json`（`sns-posts-store.cjs` 経由）— SNS 投稿状況・メトリクスキャッシュ
-- `.Codex/skills/management/weekly-plan/SKILL.md` — 週次計画
+- 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）— SNS 投稿状況・メトリクスキャッシュ
+- `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画
 - 原典: Ognjen Boskovic の Growth Loops フレームワーク

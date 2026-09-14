@@ -122,4 +122,4 @@ const latestRows = prefRows.filter(r => r.yearCode === latestYear).sort((a, b) =
 - 比較テーマ定義: `docs/10_SNS戦略/04_地方財政テーマSNS展開.md`
 - キャプション生成: `--step captions` (詳細 `reference/captions.md`)
 - Remotion プレビュー: `/preview-remotion --type comparison`
-- UTM ルール・チャネル規約: `.Codex/rules/sns-content-standards.md` §4 / §1 (TikTok 撤退)
+- UTM ルール・チャネル規約: `.claude/rules/sns-content-standards.md` §4 / §1 (TikTok 撤退)

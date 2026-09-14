@@ -1,7 +1,7 @@
 ---
 name: expand-indicators
 description: |
-  .Codex/todo/backlog.md の検証済み候補を、git TS config → e-Stat → R2 の
+  .claude/todo/backlog.md の検証済み候補を、git TS config → e-Stat → R2 の
   完全DBレス経路で少数ずつ追加する。Use when user says "指標追加", "indicator 拡充",
   "/expand-indicators".
 argument-hint: "--target <N> [--priority high|medium] [--dry-run]"
@@ -10,7 +10,7 @@ primary_agent: data-ingester
 
 # expand-indicators — 検証済み指標の追加
 
-`.Codex/todo/backlog.md` の表から候補を選び、一次統計を再確認してから
+`.claude/todo/backlog.md` の表から候補を選び、一次統計を再確認してから
 `packages/data-configs/src/metrics/*.ts` に追加する。観測値の経路は
 **git TS config → e-Stat → R2**。永続・リモート D1 は使わない。
 
@@ -27,19 +27,19 @@ primary_agent: data-ingester
 
 ## 必読
 
-- `.Codex/rules/metric-config-standards.md`
-- `.Codex/rules/estat-api.md`
-- `.Codex/rules/data-provenance-standards.md`
-- `.Codex/rules/r2-storage-design.md`
-- `.Codex/rules/branch-workflow.md`
+- `.claude/rules/metric-config-standards.md`
+- `.claude/rules/estat-api.md`
+- `.claude/rules/data-provenance-standards.md`
+- `.claude/rules/r2-storage-design.md`
+- `.claude/rules/branch-workflow.md`
 
 ## 実行手順
 
 ### 1. 候補を抽出する
 
 ```bash
-node .Codex/scripts/management/parse-backlog.cjs \
-  --backlog .Codex/todo/backlog.md \
+node .claude/scripts/management/parse-backlog.cjs \
+  --backlog .claude/todo/backlog.md \
   --priority high \
   --status pending \
   --limit 10
@@ -55,7 +55,7 @@ node .Codex/scripts/management/parse-backlog.cjs \
 - `statsDataId`、都道府県軸、分類コード、年、単位がメタ情報と一致する
 - 代表3県の値をAPI原値と照合できる
 - 47都道府県比較として欠測・秘匿・特殊地域軸を説明できる
-- provenance が `.Codex/rules/data-provenance-standards.md` を満たす
+- provenance が `.claude/rules/data-provenance-standards.md` を満たす
 
 調査用のrecipeや応答は `/tmp/expand-indicators/` に置く。
 
@@ -89,10 +89,10 @@ npx tsx packages/data-configs/scripts/page-data-batch.ts --metric <key> --dry-ru
 
 ### 6. TODOを閉じる
 
-- config・R2・公開確認まで完了した候補行は `.Codex/todo/backlog.md` から削除する。
+- config・R2・公開確認まで完了した候補行は `.claude/todo/backlog.md` から削除する。
 - 取得不能、重複、価値不足が確定した候補も削除する。理由はGit差分または必要に応じて
   失敗履歴はGitに委ね、再開可能な未完了手順だけをTODOへ残す。
-- 効果測定が必要な公開施策だけ `.Codex/todo/improvements.md` に追加する。
+- 効果測定が必要な公開施策だけ `.claude/todo/improvements.md` に追加する。
   単なる投入履歴は追加しない。
 - frontmatter の件数と `updated` を更新する。
 
@@ -116,8 +116,8 @@ npx tsx packages/data-configs/scripts/page-data-batch.ts --metric <key> --dry-ru
 
 ## 関連
 
-- 候補: [`.Codex/todo/backlog.md`](../../../../.Codex/todo/backlog.md)
-- パーサ: [`.Codex/scripts/management/parse-backlog.cjs`](../../../scripts/management/parse-backlog.cjs)
+- 候補: [`.claude/todo/backlog.md`](../../../../.claude/todo/backlog.md)
+- パーサ: [`.claude/scripts/management/parse-backlog.cjs`](../../../scripts/management/parse-backlog.cjs)
 - 観測値投入: [`/page-data-batch`](../../db/page-data-batch/SKILL.md)
 - 公開: [`/publish-ranking`](../../db/publish-ranking/SKILL.md)
 - 大量候補の計測ゲート: [`/expand-rankings`](../expand-rankings/SKILL.md)

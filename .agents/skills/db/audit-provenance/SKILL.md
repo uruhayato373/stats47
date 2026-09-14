@@ -6,7 +6,7 @@ primary_agent: open-data-curator
 
 # audit-provenance — データ出典・再現性の監査と是正
 
-正典: `.Codex/rules/data-provenance-standards.md`。機械チェック (lint + queue) は床、意味判断 (出典が本当に
+正典: `.claude/rules/data-provenance-standards.md`。機械チェック (lint + queue) は床、意味判断 (出典が本当に
 正しいか) は agent/人間。
 
 ## いつ使うか
@@ -18,9 +18,9 @@ primary_agent: open-data-curator
 
 ### 1. 棚卸し (現状把握)
 ```bash
-npx tsx .Codex/scripts/provenance/audit-provenance-queue.ts
+npx tsx .claude/scripts/provenance/audit-provenance-queue.ts
 ```
-→ `.Codex/state/provenance/{queue.json,LATEST.md}` を再生成。クラス分布 (A/A'/B/C/D) と是正対象 (C欠落+D) を表示。
+→ `.claude/state/provenance/{queue.json,LATEST.md}` を再生成。クラス分布 (A/A'/B/C/D) と是正対象 (C欠落+D) を表示。
 `LATEST.md` の「是正対象」リストが worklist。
 
 ### 2. lint で床を確認
@@ -47,7 +47,7 @@ npm run validate:config --workspace=@stats47/data-configs 2>&1 | grep -E "内訳
 ### 4. 再検証
 ```bash
 npm run validate:config --workspace=@stats47/data-configs   # error 0 を確認
-npx tsx .Codex/scripts/provenance/audit-provenance-queue.ts # 是正対象が減ったことを確認
+npx tsx .claude/scripts/provenance/audit-provenance-queue.ts # 是正対象が減ったことを確認
 ```
 是正済みは queue.json の needsWork から自動的に外れる (registry 再評価)。
 
@@ -61,8 +61,8 @@ npx tsx .Codex/scripts/provenance/audit-provenance-queue.ts # 是正対象が減
 - 人間: D クラスで出典が真に不明なケースの最終判断
 
 ## 関連
-- 正典: `.Codex/rules/data-provenance-standards.md`
+- 正典: `.claude/rules/data-provenance-standards.md`
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
-- queue: `.Codex/scripts/provenance/audit-provenance-queue.ts` → `.Codex/state/provenance/`
+- queue: `.claude/scripts/provenance/audit-provenance-queue.ts` → `.claude/state/provenance/`
 - cron: `.github/workflows/provenance-audit-weekly.yml`
-- 手本 (blog): `.Codex/scripts/blog/build-lineage-queue.mjs`
+- 手本 (blog): `.claude/scripts/blog/build-lineage-queue.mjs`

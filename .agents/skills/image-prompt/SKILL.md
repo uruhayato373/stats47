@@ -19,8 +19,8 @@ co_agents: [x-strategist, blog-editor, note-manager, sns-renderer]
 
 **担当外（別ルート）**:
 - ブログ記事別 OGP / 一覧サムネ背景 → `/generate-blog-images`（Codex imagegen + git JPEG + Satori/Sharp）
-- その他の動的タイトル差し込み OGP → Satori（種別カタログ・棚卸しは `.Codex/rules/ogp-image-standards.md`）
-- OGP / カバー / リンクカード画像の目視確認・棚卸し → `/audit-ogp-images`（`.Codex/scripts/ogp/build-image-gallery.mjs`）
+- その他の動的タイトル差し込み OGP → Satori（種別カタログ・棚卸しは `.claude/rules/ogp-image-standards.md`）
+- OGP / カバー / リンクカード画像の目視確認・棚卸し → `/audit-ogp-images`（`.claude/scripts/ogp/build-image-gallery.mjs`）
 
 ## 引数
 
@@ -128,5 +128,5 @@ use-case に応じて以下の推奨パスを出力する:
 
 - `reference/catalog.md` — 全 43 テンプレートのカタログ
 - `reference/formats.md` — 用途別のサイズ・セーフエリア・制約
-- `.Codex/rules/ogp-image-standards.md` — OGP / カバー / リンクカード画像の種別カタログ SSOT・棚卸し・生成方式
+- `.claude/rules/ogp-image-standards.md` — OGP / カバー / リンクカード画像の種別カタログ SSOT・棚卸し・生成方式
 - `apps/web/src/features/ogp/` — Satori 製 OGP コンポーネント実体（`DefaultOgp` / `BlogOgp` / `RankingOgp` ほか）

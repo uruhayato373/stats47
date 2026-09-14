@@ -64,7 +64,7 @@ function generateCategoryRatioSvg(data) {
     `<style>text{font-family:${FONT}}</style>`,
     `<rect width="${W}" height="${H}" fill="${BG}" rx="6"/>`,
     // Title
-    `<text x="${W / 2}" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="${TITLE_COLOR}">大分類別 \u2014 全国平均との比率</text>`,
+    `<text x="${W / 2}" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="${TITLE_COLOR}">大分類別 \u2014 47県庁所在市平均との比率</text>`,
     `<text x="${W / 2}" y="44" text-anchor="middle" font-size="11" fill="${SUBTITLE_COLOR}">${esc(_meta.prefName)}\uFF08${esc(_meta.cityName)}\uFF09${_meta.year}\u5E74</text>`,
     // Center reference line
     `<line x1="${px(centerX)}" y1="${topMargin - 4}" x2="${px(centerX)}" y2="${px(topMargin + cats.length * rowH - 4)}" stroke="${LABEL_COLOR}" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>`,
@@ -141,7 +141,17 @@ function renderColumn(col, n, rowH, startY, colX, colW) {
     svg += `  <circle cx="${colX + 28}" cy="${cy}" r="${circleR}" fill="${col.color}"/>`;
     svg += `  <text x="${colX + 28}" y="${cy + circleFontSize * 0.36}" text-anchor="middle" font-family="${FONT_COL}" font-size="${circleFontSize}" font-weight="bold" fill="#ffffff">${item.rank}</text>\n`;
     // Item name
-    svg += `  <text x="${colX + 28 + circleR + 8}" y="${cy + nameFontSize * 0.36}" font-family="${FONT_COL}" font-size="${nameFontSize}" font-weight="bold" fill="#1f2937">${esc(item.name)}</text>\n`;
+    // 品目名は倍率ラベルの手前で打ち切る (長い名前が倍率と重なって読めなくなるため)。
+    // 全角 1em / 半角 0.55em で幅を見積もる。
+    const nameStartX = colX + 28 + circleR + 8;
+    const nameMaxPx = valueEndX - 46 - nameStartX;
+    const widthOf = (t) => [...t].reduce((w, ch) => w + (/[\x00-\x7F]/.test(ch) ? 0.55 : 1) * nameFontSize, 0);
+    let shown = item.name;
+    if (widthOf(shown) > nameMaxPx) {
+      while (shown.length > 1 && widthOf(shown + "\u2026") > nameMaxPx) shown = shown.slice(0, -1);
+      shown += "\u2026";
+    }
+    svg += `  <text x="${nameStartX}" y="${cy + nameFontSize * 0.36}" font-family="${FONT_COL}" font-size="${nameFontSize}" font-weight="bold" fill="#1f2937">${esc(shown)}</text>\n`;
     // Value
     svg += `  <text x="${valueEndX}" y="${cy + valueFontSize * 0.36}" text-anchor="end" font-family="${FONT_COL}" font-size="${valueFontSize}" fill="${col.color}" font-weight="600">${item.label}</text>\n`;
     // Bar
@@ -194,23 +204,23 @@ function generateExtremeItemsSvg(data) {
   svg += `\n  <rect width="${W}" height="${H}" fill="#f9fafb"/>\n`;
 
   // Title
-  svg += `  <text x="${W / 2}" y="36" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">\u5168\u56FD\u5E73\u5747\u3068\u6BD4\u3079\u3066\u7279\u5FB4\u7684\u306A\u54C1\u76EE</text>\n`;
+  svg += `  <text x="${W / 2}" y="36" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">47\u770C\u5E81\u6240\u5728\u5E02\u5E73\u5747\u3068\u6BD4\u3079\u3066\u7279\u5FB4\u7684\u306A\u54C1\u76EE</text>\n`;
   svg += `  <text x="${W / 2}" y="58" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#6b7280">${esc(_meta.prefName)}\uFF08${esc(_meta.cityName)}\uFF09${_meta.year}\u5E74</text>\n`;
 
   // Left column — top items
   svg += renderColumn(
-    { label: "\u5168\u56FD\u5E73\u5747\u3088\u308A\u591A\u3044", color: "#1565c0", barColor: "#42a5f5", bgColor: "#e3f2fd", items: leftItems },
+    { label: "47\u5E02\u5E73\u5747\u3088\u308A\u591A\u3044", color: "#1565c0", barColor: "#42a5f5", bgColor: "#e3f2fd", items: leftItems },
     N, rowH, startY, LEFT_X, COL_W
   );
 
   // Right column — bottom items
   svg += renderColumn(
-    { label: "\u5168\u56FD\u5E73\u5747\u3088\u308A\u5C11\u306A\u3044", color: "#b71c1c", barColor: "#ef5350", bgColor: "#fef2f2", items: rightItems },
+    { label: "47\u5E02\u5E73\u5747\u3088\u308A\u5C11\u306A\u3044", color: "#b71c1c", barColor: "#ef5350", bgColor: "#fef2f2", items: rightItems },
     N, rowH, startY, RIGHT_X, COL_W
   );
 
   // Note
-  svg += `  <text x="${W / 2}" y="${startY + contentH + 25}" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#6b7280">\u51FA\u5178\uFF1A\u7DCF\u52D9\u7701\u300C\u5BB6\u8A08\u8ABF\u67FB\u300D${_meta.year}\u5E74\u3000\u5168\u56FD\u5E73\u5747\u3068\u306E\u6BD4\u7387</text>\n`;
+  svg += `  <text x="${W / 2}" y="${startY + contentH + 25}" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#6b7280">\u51FA\u5178\uFF1A\u7DCF\u52D9\u7701\u300C\u5BB6\u8A08\u8ABF\u67FB\u300D${_meta.year}\u5E74\u300047\u770C\u5E81\u6240\u5728\u5E02\u5E73\u5747\u3068\u306E\u6BD4\u7387</text>\n`;
 
   svg += `</svg>`;
   return svg;

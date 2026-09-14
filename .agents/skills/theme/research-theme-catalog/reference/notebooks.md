@@ -6,6 +6,8 @@
 > 増設: `node .claude/scripts/notebooklm-notebook-builder.mjs find-or-create "<名前>"` →
 > `add-source --notebook "<名前>" --file <白書PDF> --title "<白書名>"` → 下表に追記。
 > クエリ: `node .claude/scripts/notebooklm-cross-query.mjs --notebooks "<名前>" "<質問>"`。
+> Codex の MCP 接続手順は `.claude/rules/local-environment.md`「Windows の NotebookLM 連携」を参照。
+> MCP では `notebook_list` → `source_list` (`status: "ready"`) → `chat_ask` の順に使う。
 
 ## 登録済みノートブック
 
@@ -35,6 +37,12 @@
 
 ## 運用メモ
 
+- 登録 ID は `notebook_list` と照合してから使う。2026-09-09 の MCP 検査では「最新の白書」を確認できたが、
+  上表の「国土交通白書」は一覧に現れなかった。未確認の ID を調査済みとして扱わない。
+- 横断ノートには自サイトの説明も含まれる。指標採用の根拠を調べる際は `chat_ask.source_ids` で
+  読み込み済みの白書に限定し、返った引用の `source_id` と資料名・図表番号を照合する。
+  2026-09-09 の「最新の白書」は 35 資料中 20 件が ready（自サイト 1 件を含む）、15 件が error。
+  国土交通白書などの error 資料は読み取りに成功するまで根拠として使わない。
 - 白書は**引用付き回答だけ**受け取り、PDF 全文をコンテキストに載せない (トークン節約)。
 - 認証期限切れ (cross-query 終了コード 2) のときは `notebooklm` CLI の再認証が必要。
 - 1 テーマ 1 ノートブックが基本だが、横断白書 (「最新の白書」) は複数テーマで共用してよい。

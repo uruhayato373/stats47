@@ -30,7 +30,7 @@ $ARGUMENTS — --scope <name> [scope-specific args]
 
 ## scope 別ガイドの参照
 
-`--scope` 値に応じて `.Codex/skills/dev/review-feature/scopes/<name>.md` を読み、その手順に従ってレビューを実行する:
+`--scope` 値に応じて `.claude/skills/dev/review-feature/scopes/<name>.md` を読み、その手順に従ってレビューを実行する:
 
 | --scope 値 | 参照ファイル | 主なパネリスト数 | 対象 |
 |---|---|---|---|
@@ -54,7 +54,7 @@ $ARGUMENTS — --scope <name> [scope-specific args]
 ### 保存方針
 
 レビュー全文はセッション内で提示し、ファイルへ保存しない。修正が未完了で残る場合だけ
-`.Codex/todo/backlog.md` へID付きで統合し、対象、再現・根拠、最初の修正手順、
+`.claude/todo/backlog.md` へID付きで統合し、対象、再現・根拠、最初の修正手順、
 禁止事項、完了条件、検証コマンドを記載する。横断的な恒久規約は既存rulesへ反映する。
 
 ### 出力フォーマット（共通骨格）

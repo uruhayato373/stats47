@@ -51,14 +51,14 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
    - ロードマップの進捗欄は古い可能性が高いため、ソースオブトゥルースとして扱わない
 4. 上記の構造・観点に従いレビューを作成
 5. 確定した恒久判断は対象の戦略文書・rules・READMEへ直接反映する
-6. 未完了の対策だけを `.Codex/todo/improvements.md` または
+6. 未完了の対策だけを `.claude/todo/improvements.md` または
    `backlog.md` へ、ID・優先度・実行順・停止条件・完了条件付きで統合する
 7. レビュー全文はセッション内で提示し、別ファイルとして保存しない
 
 ## 保存方針
 
 - 恒久判断: レビュー対象の既存SSOT
-- 未完了策: `.Codex/todo/` の該当バックログ
+- 未完了策: `.claude/todo/` の該当バックログ
 - 全文: セッション出力のみ。完了履歴はGitを参照
 
 本文には以下の順でセクションを含める:
@@ -76,7 +76,7 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
 
 ## 実証チェックリスト（批判的指摘を Issue にまとめる前に必須）
 
-参照: `.Codex/rules/evidence-based-judgment.md`
+参照: `.claude/rules/evidence-based-judgment.md`
 
 - [ ] 「実態データを直接検証する」を文字通り実行したか:
   - 主張する事象の実証コマンド（curl / GSC API / GA4 API / D1 query 等）を最低 1 つ実行
@@ -93,6 +93,6 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
 
 ## 参照
 
-- `.Codex/rules/todo-standards.md` — レビュー由来TODOの必須項目
-- `.Codex/rules/docs-vs-issues.md` — 保存先判定
+- `.claude/rules/todo-standards.md` — レビュー由来TODOの必須項目
+- `.claude/rules/docs-vs-issues.md` — 保存先判定
 - `git log -- <レビュー対象>` — 過去の判断変遷

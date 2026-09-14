@@ -1,6 +1,6 @@
 ---
 name: fetch-adsense-data
-description: Google AdSense Management API から広告収益・RPM・CTR・ビューアビリティを取得する。Use when user says "AdSenseデータ", "広告収益", "RPM", "AdSense snapshot". snapshot モードで週次 CSV を .Codex/skills/analytics/adsense-improvement/reference/snapshots/ に保存.
+description: Google AdSense Management API から広告収益・RPM・CTR・ビューアビリティを取得する。Use when user says "AdSenseデータ", "広告収益", "RPM", "AdSense snapshot". snapshot モードで週次 CSV を .claude/skills/analytics/adsense-improvement/reference/snapshots/ に保存.
 primary_agent: adsense-analyst
 ---
 
@@ -29,27 +29,27 @@ $ARGUMENTS — [期間] [ディメンション] [snapshot YYYY-Www]
 
 ## 前提
 
-AdSense Management API は **OAuth 2.0** が必須（サービスアカウントでは広告主データにアクセス不可）。scope は read-only の `https://www.googleapis.com/auth/adsense.readonly` だけを使う（書き込み API は自動化しない。正典 `.Codex/scripts/google-admin/README.md`）。
+AdSense Management API は **OAuth 2.0** が必須（サービスアカウントでは広告主データにアクセス不可）。scope は read-only の `https://www.googleapis.com/auth/adsense.readonly` だけを使う（書き込み API は自動化しない。正典 `.claude/scripts/google-admin/README.md`）。
 
 - **CI設定の正典は GitHub Actions**（CI 専任・`.env.local` を正典にしない）。公開識別子は Repository Variables、秘密情報は Secrets に分離して次の 4 つを設定する:
   - Repository Variable `GOOGLE_ADSENSE_CLIENT_ID`
   - `GOOGLE_ADSENSE_CLIENT_SECRET`
   - `GOOGLE_ADSENSE_REFRESH_TOKEN`（`adsense.readonly`）
   - Repository Variable `GOOGLE_ADSENSE_ACCOUNT_ID`（`pub-7995274743017484`）
-- ローカルで ad hoc 実行する場合のみ、同じ 4 変数を shell env か `.env.local` に置く（`.Codex/scripts/google-admin/audit-adsense.mjs` が `.env.local` から自己ロードする）。値は git へ commit しない。
+- ローカルで ad hoc 実行する場合のみ、同じ 4 変数を shell env か `.env.local` に置く（`.claude/scripts/google-admin/audit-adsense.mjs` が `.env.local` から自己ロードする）。値は git へ commit しない。
 - npm パッケージ: `googleapis`（既にインストール済み）
 - AdSense 管理画面: `ca-pub-7995274743017484` の審査通過・広告配信中
 
 ## 初回セットアップ: リフレッシュトークン取得
 
-**正典スクリプトは `.Codex/scripts/adsense/oauth-setup.js`**（read-only scope で loopback redirect。使い捨て一時スクリプトを新たに書かない）。
+**正典スクリプトは `.claude/scripts/adsense/oauth-setup.js`**（read-only scope で loopback redirect。使い捨て一時スクリプトを新たに書かない）。
 
 ```bash
 # Google Cloud Console 側の前提: AdSense Management API 有効・データアクセスに adsense.readonly・
 # 公開ステータス「本番環境」・OAuth クライアントは Desktop app タイプ（詳細はスクリプト冒頭のコメント）
 cd ~/stats47 && read -r CID && read -rs CSEC && \
   GOOGLE_ADSENSE_CLIENT_ID="$CID" GOOGLE_ADSENSE_CLIENT_SECRET="$CSEC" \
-  node .Codex/scripts/adsense/oauth-setup.js; unset CID CSEC
+  node .claude/scripts/adsense/oauth-setup.js; unset CID CSEC
 # → ブラウザで認可 → refresh_token を stdout に 1 度だけ出力し accounts.list で実接続を検証する
 ```
 
@@ -167,7 +167,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ## snapshot モード
 
-週次レビュー時に全ディメンションを全件取得し、`.Codex/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。
+週次レビュー時に全ディメンションを全件取得し、`.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。
 
 ### 呼び出し例
 
@@ -179,7 +179,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ### 実行スクリプト
 
-正典実装 `.Codex/scripts/metrics/fetch-adsense-snapshot.mjs` を実行する
+正典実装 `.claude/scripts/metrics/fetch-adsense-snapshot.mjs` を実行する
 (旧: SKILL 内に同義スクリプトを複製していたが、公式 CPC 契約導入時の
 drift 防止のため 2026-07-28 に正典参照へ一本化した):
 
@@ -197,7 +197,7 @@ npm run fetch-adsense-snapshot -- <YYYY-Www> --dry-run   # API を呼ばず期�
 
 ### 保存後の挙動
 
-- 保存先ディレクトリ: `.Codex/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/`
+- 保存先ディレクトリ: `.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/`
 - 各ファイルの行数
 - 期間 / 合計収益サマリー
 

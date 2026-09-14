@@ -29,24 +29,24 @@ primary_agent: strategy-advisor
 
 1. **直近 4 週の週次レビュー**（今月＋先月末をカバー）
    ```bash
-   ls -t .Codex/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -4
+   ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -4
    ```
    → 各レビューの「成果」「未達」「来週への申し送り」「パターン分析」を抽出。**繰り返し未達のテーマ**（複数週で stall しているもの）を特定する。これが今月の重点候補の最有力。
 
 2. **現在の週次計画**（今週の未消化を見る）
    ```bash
-   grep -E "^- \[ \]" .Codex/todo/weekly.md 2>/dev/null || true
+   grep -E "^- \[ \]" .claude/todo/weekly.md 2>/dev/null || true
    ```
 
 3. **3 つのバックログから今月着手すべき pending を抽出**（真実源・実体はここ）
    ```bash
    # 改善施策: Tier 1/2 の pending / in-progress / effect-pending（due が今月のもの優先）
-   grep -E "pending|in-progress|effect/pending" .Codex/todo/improvements.md | head -30
+   grep -E "pending|in-progress|effect/pending" .claude/todo/improvements.md | head -30
    # 機能・自動化: P0-P2 の active 項目
-   sed -n '/^## 🔴 /,/^## 🟣 /p' .Codex/todo/backlog.md | \
+   sed -n '/^## 🔴 /,/^## 🟣 /p' .claude/todo/backlog.md | \
      grep -E "^## |^### |status.*(pending|in-progress|blocked)"
    # 指標拡充
-   head -40 .Codex/todo/backlog.md
+   head -40 .claude/todo/backlog.md
    ```
 
 4. **実装計画上の現在地**
@@ -57,21 +57,21 @@ primary_agent: strategy-advisor
 
 5. **NSM / 主要指標の現状**（既に集約済みの LATEST を読むだけ。API は叩かない）
    ```bash
-   cat .Codex/state/metrics/gsc/LATEST.md 2>/dev/null | head -20
-   cat .Codex/state/metrics/ga4/LATEST.md 2>/dev/null | head -20
-   ls -t .Codex/skills/management/nsm-experiment/reference/weekly-snapshots/*.json | head -1
-   node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage review-input
+   cat .claude/state/metrics/gsc/LATEST.md 2>/dev/null | head -20
+   cat .claude/state/metrics/ga4/LATEST.md 2>/dev/null | head -20
+   ls -t .claude/skills/management/nsm-experiment/reference/weekly-snapshots/*.json | head -1
+   node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input
    ```
    → GSCの数値だけでなく、計測週・review・候補判断・effect verdictの接続状態を月次入力にする。
 
 6. **現在の月次計画**（月替わり時は上書き前に達成状況を読む）
    ```bash
-   cat .Codex/todo/monthly.md 2>/dev/null
+   cat .claude/todo/monthly.md 2>/dev/null
    ```
 
 7. **TODO インボックスの triage**（セッション中に捕捉した未整理 TODO を振り分ける）
    ```bash
-   cat .Codex/todo/backlog.md
+   cat .claude/todo/backlog.md
    ```
    → 分類待ちカードへタグを付ける（改善施策だけ improvement-triage 経由で `improvements.md` へ / PR で閉じるバグ→Issues）。
    → 振り分けた行は受信箱から削除する。整理済み履歴を受信箱へ残さない。**今月の重点テーマ候補**にも受信箱由来の項目を含めて検討する。
@@ -103,12 +103,12 @@ primary_agent: strategy-advisor
 
 ### Phase 5: 出力
 
-Write tool で `.Codex/todo/monthly.md` を上書きする。frontmatter 必須。作成後にパスを報告する。
+Write tool で `.claude/todo/monthly.md` を上書きする。frontmatter 必須。作成後にパスを報告する。
 
 保存後に月次接続ゲートを実行する。
 
 ```bash
-node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage monthly --write --strict
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly --write --strict
 ```
 
 FAILが残る場合は月次計画を「完了」と報告せず、欠落週review・候補判断・effect反映を週配分へ入れて再実行する。
@@ -198,20 +198,20 @@ tags: []
 
 - **毎月初（第 1 週の月曜など）に 1 回実行**する想定。`/monthly-plan` だけで完結。
 - **GSC運用サイクルは重点テーマ数に数えない健康管理の床**。GSCを重点に選ばない月も固定節を省略しない。
-- 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `.Codex/todo/monthly.md` の `focus_themes` を読む。
+- 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `.claude/todo/monthly.md` の `focus_themes` を読む。
 - **タスクの実体（status / due）は各バックログが真実源。** 月次計画は選定理由と配分だけを持ち、進捗は週次計画とバックログで扱う。
 - 月末の振り返りは独立スキルを作らず、**翌月の `/monthly-plan` の Phase 1-2 + 「前月の振り返り」セクション**で吸収する（軽量維持のため。重い振り返りが必要なら `/weekly-review` の月末回で代替）。
 - 月次計画は蓄積せず毎月上書きする。前月結果は週次レビューと git 履歴に残す。
 
 ## 保存先
 
-- 本スキル出力: `.Codex/todo/monthly.md`（frontmatter `type: monthly-plan`, `month: YYYY-MM`, `focus_themes: [...]`）
+- 本スキル出力: `.claude/todo/monthly.md`（frontmatter `type: monthly-plan`, `month: YYYY-MM`, `focus_themes: [...]`）
 - 週次が参照: `/weekly-plan` Phase 1 Agent D / Phase 2
 
 ## 参照
 
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — 収益レーン・意思決定ゲート（重点選定の最上位基準）
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
-- `.Codex/todo/improvements.md` / `backlog.md` — TODO 真実源
-- `.Codex/skills/management/weekly-plan/SKILL.md` — 月次を分割消化する週次レイヤー
-- `.Codex/rules/docs-vs-issues.md` — docs/ 配下に置く根拠
+- `.claude/todo/improvements.md` / `backlog.md` — TODO 真実源
+- `.claude/skills/management/weekly-plan/SKILL.md` — 月次を分割消化する週次レイヤー
+- `.claude/rules/docs-vs-issues.md` — docs/ 配下に置く根拠

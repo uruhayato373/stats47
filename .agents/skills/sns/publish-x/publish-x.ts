@@ -81,10 +81,10 @@ interface PostConfig {
   quoteUrl?: string;
   /** --from-queue 時の元 draft レコード id。指定時は updateDb がこの id だけを更新する */
   recordId?: number;
-  /** --from-queue 時: 予約成功で status を 'scheduled' にする (既定は 'posted')。 */
-  markScheduledOnly?: boolean;
   /** --from-queue 時のメディア再生成用: quick-still で media が作れる ranking key か */
   regenKey?: string;
+  /** 即時投稿後に X 上で本文一致まで確認した実投稿 URL。posted 更新時に必須 */
+  verifiedPostUrl?: string;
 }
 
 // ─── 引数パース ────────────────────────────────────
@@ -190,7 +190,6 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boo
         scheduledDate: new Date(String(d.scheduled_at)),
         postType: "original" as const,
         recordId: Number(d.id),
-        markScheduledOnly: true,
         // ranking domain のみ quick-still で media を再生成できる
         regenKey: dom === "ranking" && !imagePaths.length ? key : undefined,
       };
@@ -405,6 +404,62 @@ async function ensureLogin(page: Page): Promise<void> {
   throw new Error(
     `ログイン待ちタイムアウト（5分）。${EXPECT_ACCOUNT ? `@${EXPECT_ACCOUNT} にログインしてから` : "ログインしてから"}再実行してください。`
   );
+}
+
+function normalizePostText(value: string): string {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+async function resolveImmediatePostUrl(
+  page: Page,
+  caption: string,
+  publishedAfterMs: number,
+): Promise<string | null> {
+  const handle = EXPECT_ACCOUNT || (await currentHandle(page));
+  if (!handle) return null;
+
+  const needle = normalizePostText(caption).slice(0, 80);
+  if (!needle) return null;
+
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    await page.goto(`https://x.com/${handle}/with_replies`, {
+      waitUntil: "domcontentloaded",
+    });
+    await page.waitForTimeout(2500);
+    const hit = await page
+      .locator('article[data-testid="tweet"]')
+      .evaluateAll(
+        (nodes, args) => {
+          const normalize = (value: string) => value.replace(/\s+/g, " ").trim();
+          for (const node of nodes) {
+            const text = normalize(
+              node.querySelector('[data-testid="tweetText"]')?.textContent || "",
+            );
+            const datetime = node.querySelector("time")?.getAttribute("datetime") || "";
+            const timestamp = Date.parse(datetime);
+            if (
+              !text.includes(args.needle) ||
+              !Number.isFinite(timestamp) ||
+              timestamp < args.publishedAfterMs - 5 * 60_000
+            ) {
+              continue;
+            }
+            const href = [...node.querySelectorAll('a[href*="/status/"]')]
+              .map((anchor) => anchor.getAttribute("href") || "")
+              .find((candidate) =>
+                new RegExp(`^/${args.handle}/status/\\d+(?:$|[/?#])`, "i").test(candidate),
+              );
+            if (href) return new URL(href, location.origin).href;
+          }
+          return null;
+        },
+        { handle, needle, publishedAfterMs },
+      )
+      .catch(() => null);
+    if (hit && store.isVerifiedXPostUrl(hit)) return hit;
+    await page.waitForTimeout(2000);
+  }
+  return null;
 }
 
 // ─── 予約投稿 ──────────────────────────────────────
@@ -739,6 +794,7 @@ async function publishPost(
   }
 
   await saveScreenshot(page, post.contentKey, "immediate-before-post");
+  const publishedAfterMs = Date.now();
   // メディア添付時は pointer event が別要素に intercept され Playwright click が
   // silently 失敗するため、DOM レベル el.click() で投稿ハンドラを直接発火する
   // （予約パスの scheduleOption と同じ対策）。
@@ -761,8 +817,16 @@ async function publishPost(
     );
     return false;
   }
-  console.log(`✅ 即時投稿完了: ${post.contentKey}`);
-  await page.waitForTimeout(2000);
+  const verifiedPostUrl = await resolveImmediatePostUrl(page, caption, publishedAfterMs);
+  if (!verifiedPostUrl) {
+    console.error(
+      `🚨 即時投稿の実URLを確認できません。台帳を posted に更新しません: ${post.contentKey}`,
+    );
+    await saveScreenshot(page, post.contentKey, "immediate-url-unverified");
+    return false;
+  }
+  post.verifiedPostUrl = verifiedPostUrl;
+  console.log(`✅ 即時投稿完了・実URL確認: ${verifiedPostUrl}`);
   return true;
 }
 
@@ -777,17 +841,15 @@ function updateDb(
     return;
   }
 
-  // --from-queue 予約は投稿時刻に X が自動投稿するため、台帳上は 'scheduled' (posted 昇格は
-  // 時刻経過後に mark-sns-posted)。既存の単発 original 投稿 (markScheduledOnly 無し) は従来どおり 'posted'。
-  const status = post.markScheduledOnly ? "scheduled" : "posted";
-  // JST カレンダー日付で保存（toISOString だと UTC になり 23:00 JST 以降は前日になる）
-  const formatJstDate = (d: Date): string => {
-    const jst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
-    return jst.toISOString().split("T")[0];
-  };
-  const postedAt = post.scheduledDate
-    ? formatJstDate(post.scheduledDate)
-    : formatJstDate(new Date());
+  // 予約は投稿時刻に X が自動投稿するため、台帳上は 'scheduled' (posted 昇格は
+  // 実 URL 確認後に mark-sns-posted)。即時投稿だけを 'posted' にする。
+  const status = post.scheduledDate ? "scheduled" : "posted";
+  const postUrl = post.verifiedPostUrl;
+  if (status === "posted" && !store.isVerifiedXPostUrl(postUrl)) {
+    throw new Error(`X の posted 更新には確認済み実投稿 URL が必要です: ${post.contentKey}`);
+  }
+  // posted_at は監査時に実投稿と照合できるよう、日付だけでなく実時刻を保持する。
+  const postedAt = new Date().toISOString();
 
   // 共有ストア経由のため SQL 文字列ではなく素の JS 値で扱う（'' エスケープ不要）。
   const caption = fs.readFileSync(post.captionPath, "utf-8").trim();
@@ -817,8 +879,10 @@ function updateDb(
         quote_url: post.quoteUrl ?? "",
         media_path: post.imagePaths[0] ?? "",
         has_link: 1,
+        post_url: postUrl,
         status,
-        posted_at: postedAt,
+        scheduled_at: post.scheduledDate?.toISOString() ?? null,
+        posted_at: status === "posted" ? postedAt : null,
       });
       console.log(`📝 DB INSERT: ${post.contentKey} → ${status}`);
     } else {
@@ -835,7 +899,26 @@ function updateDb(
           (p.status === "draft" || p.status === "scheduled")
       );
       for (const p of toMarkPosted) {
-        store.updateById(p.id, { status, posted_at: postedAt });
+        store.updateById(p.id, {
+          status,
+          scheduled_at: post.scheduledDate?.toISOString() ?? null,
+          posted_at: status === "posted" ? postedAt : null,
+          ...(postUrl ? { post_url: postUrl } : {}),
+        });
+      }
+      if (toMarkPosted.length === 0 && status === "posted") {
+        store.insert({
+          platform: "x",
+          post_type: "original",
+          domain: post.domain,
+          content_key: post.contentKey,
+          caption,
+          post_url: postUrl,
+          media_path: post.imagePaths[0] ?? null,
+          has_link: /https?:\/\//.test(caption) ? 1 : 0,
+          status,
+          posted_at: postedAt,
+        });
       }
 
       // UPDATE 2: caption（caption が空/未設定の original 行。status 条件なし）
@@ -855,6 +938,7 @@ function updateDb(
     }
   } catch (e) {
     console.error(`DB 更新失敗: ${post.contentKey}`, e);
+    throw e;
   }
 }
 
@@ -960,4 +1044,7 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

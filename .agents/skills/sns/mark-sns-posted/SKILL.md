@@ -6,8 +6,8 @@ primary_agent: sns-metrics-sync
 co_agents: [instagram-strategist, x-strategist]
 ---
 
-手動投稿後に `sns-posts-store.cjs` 経由で `.Codex/state/sns/posts.json` に記録し、メディアファイルを削除する。
-記録と同時に `.Codex/state/sns/post-log.md` が自動再生成される（視覚確認用）。
+手動投稿後に `sns-posts-store.cjs` 経由で `.claude/state/sns/posts.json` に記録し、メディアファイルを削除する。
+記録と同時に `.claude/state/sns/post-log.md` が自動再生成される（視覚確認用）。
 
 > **SQLite / D1 は使わない。** SSOT は `posts.json` のみ (完全DBレス doc12)。
 
@@ -28,8 +28,8 @@ co_agents: [instagram-strategist, x-strategist]
 (X 側が予約時刻に自動投稿する)。**予約時刻を過ぎた scheduled を posted へ昇格**するには:
 
 ```bash
-node .Codex/scripts/sns/promote-scheduled-x.cjs --dry-run   # 昇格対象を確認
-node .Codex/scripts/sns/promote-scheduled-x.cjs --apply     # scheduled→posted (posted_at=予約日)
+node .claude/scripts/sns/promote-scheduled-x.cjs --dry-run   # 昇格対象を確認
+node .claude/scripts/sns/promote-scheduled-x.cjs --apply     # scheduled→posted (posted_at=予約日)
 ```
 
 - X の実投稿 URL (`post_url`) が確認済みの行だけ昇格する。時刻超過だけの行は `HOLD` として保留する。
@@ -61,7 +61,7 @@ contentType に応じたディレクトリを確認する:
 記録後 `post-log.md` が自動再生成されるので、内容を目視確認すること。
 
 ```js
-const store = require('.Codex/scripts/lib/sns-posts-store.cjs');
+const store = require('.claude/scripts/lib/sns-posts-store.cjs');
 const now = new Date().toISOString();
 
 // 既存レコードがなければ新規 INSERT
@@ -101,10 +101,10 @@ find .local/r2/sns/<contentType>/<contentKey> -type d -empty -delete
 
 ### 6. post-log.md で視覚確認
 
-記録後、`.Codex/state/sns/post-log.md` の先頭行に今投稿した内容が追加されているか確認する。
+記録後、`.claude/state/sns/post-log.md` の先頭行に今投稿した内容が追加されているか確認する。
 
 ```bash
-head -20 .Codex/state/sns/post-log.md
+head -20 .claude/state/sns/post-log.md
 ```
 
 ### 7. 結果報告
@@ -122,7 +122,7 @@ head -20 .Codex/state/sns/post-log.md
 
 ## 参照
 
-- SSOT: `.Codex/state/sns/posts.json`
-- 視覚確認: `.Codex/state/sns/post-log.md`（自動生成）
-- ストア: `.Codex/scripts/lib/sns-posts-store.cjs`
+- SSOT: `.claude/state/sns/posts.json`
+- 視覚確認: `.claude/state/sns/post-log.md`（自動生成）
+- ストア: `.claude/scripts/lib/sns-posts-store.cjs`
 - R2 削除: `packages/r2-storage/src/scripts/delete-r2-prefix.ts`

@@ -10,23 +10,23 @@ co_agents: [improvement-triage]
 
 - **直接配置 SSOT**: `apps/web/scripts/affiliate-direct-placements-data.ts` (`AFFILIATE_DIRECT_PLACEMENTS[]`)
 - **自動配置 SSOT**: `apps/web/scripts/affiliate-ads-data.ts` (サイズ規約は `audit-affiliate-inventory.ts --check-size` が担当)
-- **判定コア**: `.Codex/scripts/ads/lib/affiliate-compliance-core.mjs` (純粋関数・`node --test` 対象)
-- **state 出力**: `.Codex/state/ads/compliance-latest.json` (`--live` 時のみ更新)
+- **判定コア**: `.claude/scripts/ads/lib/affiliate-compliance-core.mjs` (純粋関数・`node --test` 対象)
+- **state 出力**: `.claude/state/ads/compliance-latest.json` (`--live` 時のみ更新)
 
 ## 実行
 
 ```bash
 # 1. 構造検証のみ (ネットワーク不要・pre-commit と同等)
-npx tsx .Codex/scripts/ads/audit-affiliate-compliance.ts --check
+npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check
 
 # 2. 本文突合 (R2 公開 URL から配置先記事を取得して双方向監査)
-npx tsx .Codex/scripts/ads/audit-affiliate-compliance.ts --live
+npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --live
 
 # 3. 公開全記事の走査 (台帳未登録の <affiliate-banner> タグ検出。週次 CI 相当)
-npx tsx .Codex/scripts/ads/audit-affiliate-compliance.ts --live --scan-all-blog
+npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --live --scan-all-blog
 
 # 4. 自動配置の canonical サイズ (既存ゲート)
-npx tsx .Codex/scripts/ads/audit-affiliate-inventory.ts --json --check-size
+npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size
 ```
 
 ## 検出項目と是正の振り分け
@@ -48,9 +48,9 @@ npx tsx .Codex/scripts/ads/audit-affiliate-inventory.ts --json --check-size
 
 | ファイル | 役割 |
 |---|---|
-| `.Codex/scripts/ads/audit-affiliate-compliance.ts` | 監査 CLI (決定的) |
-| `.Codex/scripts/ads/lib/affiliate-compliance-core.mjs` | 判定コア (純粋関数) |
-| `.Codex/scripts/ads/__tests__/affiliate-compliance-core.test.mjs` | fixture テスト (`node --test`) |
+| `.claude/scripts/ads/audit-affiliate-compliance.ts` | 監査 CLI (決定的) |
+| `.claude/scripts/ads/lib/affiliate-compliance-core.mjs` | 判定コア (純粋関数) |
+| `.claude/scripts/ads/__tests__/affiliate-compliance-core.test.mjs` | fixture テスト (`node --test`) |
 | `apps/web/scripts/affiliate-direct-placements-data.ts` | 直接配置 SSOT |
-| `.Codex/state/ads/compliance-latest.json` | 最新監査 state (operations state の入力) |
-| `.Codex/rules/affiliate-ads-standards.md` | 規約 (PR 表記・サイズの正典) |
+| `.claude/state/ads/compliance-latest.json` | 最新監査 state (operations state の入力) |
+| `.claude/rules/affiliate-ads-standards.md` | 規約 (PR 表記・サイズの正典) |

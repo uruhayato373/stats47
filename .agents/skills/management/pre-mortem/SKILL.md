@@ -34,7 +34,7 @@ echo "articles:         $(curl -s "$R2/app/blog/all.json" | jq '.articles | leng
 # 相関ペア総数
 echo "correlations:     $(curl -s "$R2/app/correlation/stats.json" | jq '.total')"
 # SNS 投稿件数は投稿台帳 posts.json から:
-node -e 'const s=require("./.Codex/scripts/lib/sns-posts-store.cjs");console.log("sns_posts:",s.loadAll().length)'
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");console.log("sns_posts:",s.loadAll().length)'
 # area_profiles は Derived（エフェメラル計算 → R2 app/areas/<code>/profile.json、47 都道府県分）
 # 全 metric 定義（inactive 含む）を数えるなら git TS: ls packages/data-configs/src/metrics/*.ts | wc -l
 ```
@@ -122,7 +122,7 @@ Phase 2 の各シナリオに対して、**予防策（Prevention）** と **耐
 
 ### Phase 4: 対策の統合
 
-1. 採択した予防策を、改善なら `.Codex/todo/improvements.md`、機能・自動化なら
+1. 採択した予防策を、改善なら `.claude/todo/improvements.md`、機能・自動化なら
    `backlog.md` へ統合する。
 2. 各項目に優先度、trigger、最初の実行手順、停止条件、完了条件を付ける。
 3. 恒久的な禁止事項や判断基準は既存の戦略・rulesへ直接反映する。
@@ -222,16 +222,16 @@ Phase 2 の各シナリオに対して、**予防策（Prevention）** と **耐
 - **既に対策済みのものは正当に評価する**: 無理にリスクを誇張しない
 
 ### 共通
-- 既存対策との重複は `.Codex/todo/` と対象rulesを検索して防ぐ。
+- 既存対策との重複は `.claude/todo/` と対象rulesを検索して防ぐ。
 
 ## 保存先
 
-未完了策は `.Codex/todo/`、恒久判断は既存SSOT。分析全文は保存しない。
+未完了策は `.claude/todo/`、恒久判断は既存SSOT。分析全文は保存しない。
 
 ## 参照
 
-- `git log -- .Codex/todo/` — 過去に採択・完了した対策
+- `git log -- .claude/todo/` — 過去に採択・完了した対策
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — 収益レーン・意思決定ゲート
 - `docs/00_プロジェクト管理/03_マーケティング戦略.md` — T1〜T4・PVモデル
-- `.Codex/skills/management/critical-review/SKILL.md` — 批判的レビュー（計画書向け、対になるスキル）
+- `.claude/skills/management/critical-review/SKILL.md` — 批判的レビュー（計画書向け、対になるスキル）

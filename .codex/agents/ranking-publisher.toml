@@ -32,7 +32,7 @@ developer_instructions = '''
 
 `MetricConfig.isActive:true` は出発点にすぎない。本番アプリは R2 snapshot と派生リストと整合して 200 を返す。
 ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも GONE にも無い）は素通り → page で `notFound()`=404。
-いずれも **200 ではない**ので、下記を整合再生成する必要がある（正典: `.Codex/rules/metric-config-standards.md`
+いずれも **200 ではない**ので、下記を整合再生成する必要がある（正典: `.claude/rules/metric-config-standards.md`
 「isActive:true ≠ 本番公開」/ memory `project_ranking_publish_pipeline_gap`）。
 
 ## 公開パイプライン（依存順・各 Step は委譲 or 実行）
@@ -53,7 +53,7 @@ ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも 
                                        CI: gh workflow run sync-snapshots.yml -f only=ranking-values
                                        ★必ず Step 1 (ranking-items) の後。実描画値・OGP・blog がこれを読む。
                                        2026-07-27 に Phase 6 以降 2 ヶ月間 writer 不在化していた事故の恒久対策
-                                       (.Codex/rules/metric-config-standards.md)
+                                       (.claude/rules/metric-config-standards.md)
 3. KNOWN_RANKING_KEYS 再生成        → apps/web/scripts/generate-known-ranking-keys.ts
                                        (isActive + R2 item.json 200 を KNOWN に。要 R2_PUBLIC_FETCH_URL)
                                        出力: packages/ranking/src/config/known-ranking-keys.ts → 要 git commit
@@ -88,10 +88,10 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 - スキーマ・migration → **db-schema-manager**。
 
 ## 必読 rules / docs
-- `.Codex/rules/metric-config-standards.md` —「isActive:true ≠ 本番公開」多段依存
-- `.Codex/rules/branch-workflow.md` — develop→main、デプロイ規律、実行環境差分（cloud は workflow dispatch 不可）
-- `.Codex/rules/r2-storage-design.md` / `.Codex/rules/data-sqlite-ssot.md` — R2 namespace / 完全DBレス
-- `.Codex/todo/backlog.md` —「122 metric の本番公開」手順
+- `.claude/rules/metric-config-standards.md` —「isActive:true ≠ 本番公開」多段依存
+- `.claude/rules/branch-workflow.md` — develop→main、デプロイ規律、実行環境差分（cloud は workflow dispatch 不可）
+- `.claude/rules/r2-storage-design.md` / `.claude/rules/data-sqlite-ssot.md` — R2 namespace / 完全DBレス
+- `.claude/todo/backlog.md` —「122 metric の本番公開」手順
 - memory `project_ranking_publish_pipeline_gap`
 
 ## 触る files
@@ -109,7 +109,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 ## 関連
 - 公開スクリプト: `packages/ranking/src/scripts/generate-ranking-items.ts` / `apps/web/scripts/generate-known-ranking-keys.ts`
 - middleware: `apps/web/src/middleware.ts`（ranking は isGone のみ 410、未登録は notFound 委譲）
-- 姉妹 agent: `.Codex/agents/ranking-ui-manager.md`（UI）/ `.Codex/agents/data-ingester.md`（観測値）/ `.Codex/agents/r2-publisher.md`（push）
+- 姉妹 agent: `.claude/agents/ranking-ui-manager.md`（UI）/ `.claude/agents/data-ingester.md`（観測値）/ `.claude/agents/r2-publisher.md`（push）
 
 ## Output Contract
 

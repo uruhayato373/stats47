@@ -1,10 +1,10 @@
 name = "area-databook-designer"
 description = "areaページ「県データブック」の47県共通テンプレを設計する。実在rankingKeyだけを使い、指標、block、section順をAREA_DATABOOK_TEMPLATEへ反映する。テンプレ設計・section追加・指標採否判断に使う。"
-developer_instructions = """
+developer_instructions = '''
 # Area Databook Designer Agent
 
 `/areas/[code]` の高密度化テンプレを設計する専任エージェント。正典 (必読):
-**`.Codex/rules/area-databook-standards.md`** (SSOT 構造・データ経路・ブロック文法・validator・禁止事項) +
+**`.claude/rules/area-databook-standards.md`** (SSOT 構造・データ経路・ブロック文法・validator・禁止事項) +
 **`docs/01_技術設計/03_情報設計.md`** (area の県軸・回遊面としての責務) — すべてそこに従う。
 
 > **役割分担 (重複しない)**
@@ -75,4 +75,4 @@ developer_instructions = """
 ## Output Contract
 
 chat は `Result | Changed files | Generated files | Gates | Unverified` の1表のみ。レイアウト判断の
-根拠は参照したSSOTまたは実測値に限定する。"""
+根拠は参照したSSOTまたは実測値に限定する。'''

@@ -4,7 +4,7 @@ description: >
   特定の課題(goal)について「実装 → 計測 → 評価・改善」のサイクルを反復して、終了条件を満たすまで漏れなく追跡するメタスキル。
   既存の improvement 系スキル(performance-improvement / gsc-improvement / ga4-improvement / adsense-improvement / sns-metrics-improvement / cloudflare-cost-improvement)を統括する。
   define(定義) → cycle(サイクル実行) → status(進捗確認) → close(完了 or 撤退) の流れで、サイクルごとに人間確認を挟みつつ goal 達成まで運用する。
-  記録は .Codex/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md に 1 goal 1 ファイルで append-only。
+  記録は .claude/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md に 1 goal 1 ファイルで append-only。
   Use when user asks to [/goal, 課題達成, 目標達成, サイクル運用, やり切る, 終了条件まで反復, PSI 改善のループ管理, goal 進捗].
 primary_agent: strategy-advisor
 ---
@@ -54,15 +54,15 @@ stats47 には改善ループスキル(performance-improvement / gsc-improvement
 
 | パス | 役割 |
 |---|---|
-| `.Codex/skills/management/goal/SKILL.md` | 本ファイル(メイン定義) |
-| `.Codex/skills/management/goal/reference/goal-template.md` | 新規 goal 用 md テンプレ |
-| `.Codex/skills/management/goal/reference/metric-adapters.md` | metric × improvement skill 紐付け表 |
-| `.Codex/skills/management/goal/reference/cycle-decision-tree.md` | effect 判定からの分岐フロー |
-| `.Codex/skills/management/goal/scripts/create-goal.cjs` | define 時のテンプレ展開・slug 重複チェック |
-| `.Codex/skills/management/goal/scripts/update-cycle.cjs` | cycle の md / meta.json 更新 |
-| `.Codex/skills/management/goal/scripts/status-report.cjs` | status のテーブル生成 |
-| `.Codex/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md` | **goal 記録ファイル**(append-only) |
-| `.Codex/state/goals/<slug>/meta.json` | ステータス・cycle 数等の機械可読版 |
+| `.claude/skills/management/goal/SKILL.md` | 本ファイル(メイン定義) |
+| `.claude/skills/management/goal/reference/goal-template.md` | 新規 goal 用 md テンプレ |
+| `.claude/skills/management/goal/reference/metric-adapters.md` | metric × improvement skill 紐付け表 |
+| `.claude/skills/management/goal/reference/cycle-decision-tree.md` | effect 判定からの分岐フロー |
+| `.claude/skills/management/goal/scripts/create-goal.cjs` | define 時のテンプレ展開・slug 重複チェック |
+| `.claude/skills/management/goal/scripts/update-cycle.cjs` | cycle の md / meta.json 更新 |
+| `.claude/skills/management/goal/scripts/status-report.cjs` | status のテーブル生成 |
+| `.claude/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md` | **goal 記録ファイル**(append-only) |
+| `.claude/state/goals/<slug>/meta.json` | ステータス・cycle 数等の機械可読版 |
 
 ---
 
@@ -91,7 +91,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 **手順**:
 
-1. **slug 重複チェック**: `.Codex/state/goals/<slug>/` が既存なら拒否(別 slug を提案)
+1. **slug 重複チェック**: `.claude/state/goals/<slug>/` が既存なら拒否(別 slug を提案)
 2. **AskUserQuestion で対話的に収集**(以下 6 項目):
    - タイトル(短文)
    - 連携 metric(psi / gsc / ga4 / adsense / sns / cost / custom)
@@ -101,17 +101,17 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
    - 仮説プール(リスト、後で追加可)
 3. `reference/metric-adapters.md` を Read して、選ばれた metric に対応する計測コマンド・improvement-log パス・budget ファイルを取得
 4. **ベースライン計測の確認**:
-   - 既存の最新計測データが `.Codex/state/metrics/<metric>/` にあれば使う
+   - 既存の最新計測データが `.claude/state/metrics/<metric>/` にあれば使う
    - なければ「ベースライン計測を先に実行してください」と促す
-5. `node .Codex/skills/management/goal/scripts/create-goal.cjs --slug <slug> --metric <metric> --title "<title>" --success-criteria "<criteria>" --abort-criteria "<criteria>" --max-cycles <N>` を実行
-6. 生成された md(`.Codex/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md`)を表示
+5. `node .claude/skills/management/goal/scripts/create-goal.cjs --slug <slug> --metric <metric> --title "<title>" --success-criteria "<criteria>" --abort-criteria "<criteria>" --max-cycles <N>` を実行
+6. 生成された md(`.claude/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md`)を表示
 7. ユーザーに「次サイクルを開始しますか?(`/goal cycle <slug>`)」と問う
 
 **出力**:
 ```
 ✅ Goal 登録完了: <slug>
-   md: .Codex/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md
-   meta: .Codex/state/goals/<slug>/meta.json
+   md: .claude/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md
+   meta: .claude/state/goals/<slug>/meta.json
    ベースライン: <値>
 次: /goal cycle <slug>
 ```
@@ -124,7 +124,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 **手順**:
 
-1. `.Codex/state/goals/<slug>/meta.json` を Read してステータスを確認
+1. `.claude/state/goals/<slug>/meta.json` を Read してステータスを確認
 2. **未着手 cycle**なら:
    - 仮説プールから次の仮説候補を 3 件まで提示
    - AskUserQuestion で採用する仮説を選ばせる(複数選択可)
@@ -149,7 +149,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
    - 判定 = adverse の場合: 「revert PR を作成してください」と促す
    - goal reference mdのcycleセクションにappend:
      - 仮説 / 想定効果 / 施策(PR) / デプロイ日 / 計測(取得コマンド・ソース) / 判定 / 次サイクル
-   - `node .Codex/skills/management/goal/scripts/update-cycle.cjs --slug <slug> --cycle N --status judged --effect <effect>` で meta.json 更新
+   - `node .claude/skills/management/goal/scripts/update-cycle.cjs --slug <slug> --cycle N --status judged --effect <effect>` で meta.json 更新
 6. **判定完了後の自動判定**:
    - effect/full かつ終了条件達成 → 「`/goal close <slug>` で完了処理しますか?」
    - cycle 数 ≥ max_cycles → 「撤退判定が必要です。`/goal close <slug> timeout`」
@@ -173,7 +173,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 **手順**:
 
-1. `node .Codex/skills/management/goal/scripts/status-report.cjs [--slug <slug>]` を実行
+1. `node .claude/skills/management/goal/scripts/status-report.cjs [--slug <slug>]` を実行
 2. 出力(markdown table)をそのまま返す
 
 **slug 指定時の出力**:
@@ -217,7 +217,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
    - 効かなかった施策(effect/none or effect/adverse の cycle から抽出)
    - 教訓(自然言語、3-5 行)
    - 共通原則として残す内容
-4. 教訓を `/knowledge` (`.Codex/skills/management/knowledge/SKILL.md`) に追記:
+4. 教訓を `/knowledge` (`.claude/skills/management/knowledge/SKILL.md`) に追記:
    ```markdown
    ---
    ## <goal タイトル> (goal: <slug>)
@@ -232,7 +232,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 ```
 ✅ Goal クローズ完了: <slug> → CLOSED-<種別>
    学習資産を /knowledge に移管しました。
-   md: .Codex/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md
+   md: .claude/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md
 ```
 
 ---
@@ -243,7 +243,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 **手順**:
 
-1. `.Codex/state/goals/*/meta.json` を全 Read
+1. `.claude/state/goals/*/meta.json` を全 Read
 2. status・最終更新日でソートして table 出力:
 
 ```markdown
@@ -263,7 +263,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 ## evidence-based-judgment ルールへの準拠
 
-`.Codex/rules/evidence-based-judgment.md` に従い、各 cycle の効果判定で以下を必須化:
+`.claude/rules/evidence-based-judgment.md` に従い、各 cycle の効果判定で以下を必須化:
 
 - [ ] 検証コマンドを実行したか(metric-adapter から)
 - [ ] 公式ドキュメント URL を引用したか(仕様主張がある場合)
@@ -293,7 +293,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 ## 出力契約(Agent 連携時)
 
-`/goal cycle` が内部で Agent ツールを呼ぶときは、prompt の **冒頭**で OUTPUT FORMAT を必ず固定する(`.Codex/rules/agent-output-contract.md` 準拠):
+`/goal cycle` が内部で Agent ツールを呼ぶときは、prompt の **冒頭**で OUTPUT FORMAT を必ず固定する(`.claude/rules/agent-output-contract.md` 準拠):
 
 ```
 OUTPUT FORMAT: 1 markdown table or short bullet list (≤ 200 words total).
@@ -316,8 +316,8 @@ If verdict needs justification, add a Reason column with ≤ 8 words.
 
 ## 参照
 
-- `.Codex/rules/evidence-based-judgment.md` — 実証ベース判定ルール
-- `.Codex/rules/agent-output-contract.md` — Agent 出力契約
-- `.Codex/skills/management/knowledge/SKILL.md` — 教訓の蓄積
-- `.Codex/skills/analytics/performance-improvement/reference/improvement-log.md` — PSI 改善履歴(連携例)
+- `.claude/rules/evidence-based-judgment.md` — 実証ベース判定ルール
+- `.claude/rules/agent-output-contract.md` — Agent 出力契約
+- `.claude/skills/management/knowledge/SKILL.md` — 教訓の蓄積
+- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — PSI 改善履歴(連携例)
 - 本スキルの設計プラン（承認済）— Git 履歴の goal skill 設計

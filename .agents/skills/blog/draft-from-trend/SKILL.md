@@ -17,7 +17,7 @@ primary_agent: article-writer
 ## 用途
 
 - ある metric について 1 本記事を立ち上げたいとき (metric key を直接指定)
-- `.Codex/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md` やユーザー指示・GSC ギャップから「次に書くテーマ」を決めて記事化したいとき
+- `.claude/skills/blog/trends-snapshots/trends-{source}-YYYY-MM-DD.md` やユーザー指示・GSC ギャップから「次に書くテーマ」を決めて記事化したいとき
 - 1 回の実行で **1 記事** を作る (バッチ化禁止、品質ゲートが効かなくなるため)
 
 ## 引数
@@ -29,10 +29,10 @@ primary_agent: article-writer
 
 - `metricKey`: `packages/data-configs/src/metrics/<key>.ts` に実在し `isActive:true` の key (例 `public-phone-count`)。**実在チェック必須** (`feedback_backlog_ranking_key_audit`: AI が実在しない key を捏造しがち)。
 - `trend-snapshot-path` / 自然文: そこから metric を 1 つ選定して slug を確定する
-- `--from queue`: **記事ネタ選定キュー起点**。`node .Codex/scripts/blog/build-topic-queue.mjs --next 1` で
+- `--from queue`: **記事ネタ選定キュー起点**。`node .claude/scripts/blog/build-topic-queue.mjs --next 1` で
   次の pending 候補を取得し、その `archetype` / `metricKeys` / `suggestedTitle` を Step 1 の入力に使う。
   取得したら `--mark-in-progress <topicKey>`、公開まで進んだら `--mark-done <topicKey> --slug <slug>` で
-  キュー状態を更新する。ネタ選定の仕組みは `.Codex/skills/blog/plan-article-queue/SKILL.md`。
+  キュー状態を更新する。ネタ選定の仕組みは `.claude/skills/blog/plan-article-queue/SKILL.md`。
 
 ## 手順
 
@@ -42,7 +42,7 @@ primary_agent: article-writer
    - archetype B (相関・真因) を狙うなら相関させる 2 metric (例 空き家率 × 高齢化率)。`--from queue` なら候補が metricKeys を持つ。
 2. **metric key の実在を確認**: `ls packages/data-configs/src/metrics/<key>.ts` と R2 `curl -sI https://storage.stats47.jp/app/stats/<key>/values.json` が 200 か。無ければ別 key に。
 3. `slug` を curiosity-gap を意識して確定 (英小文字 kebab)。既存公開記事と重複しないか `curl -s https://storage.stats47.jp/app/blog/all.json` で確認 (カニバリ防止)。
-4. **archetype を決める** (`.Codex/rules/blog-quality-standards.md` の A/B/C/D/D2/E/F/G)。決めた型の必須分析視点・章構成に沿って書く。
+4. **archetype を決める** (`.claude/rules/blog-quality-standards.md` の A/B/C/D/D2/E/F/G)。決めた型の必須分析視点・章構成に沿って書く。
 
 **型別のデータ源** (`--from queue` の archetype に対応):
 
@@ -56,7 +56,7 @@ primary_agent: article-writer
 ### Step 2: データ接地 (R2 直)
 
 ```bash
-node .Codex/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metricKey>[,<metricKey2>]
+node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metricKey>[,<metricKey2>]
 ```
 
 - 出力: `docs/21_ブログ記事原稿/<slug>/data/<key>-prefecture-rankings.json` (R2 公開 URL から取得・value 降順で rank 再計算・統一スキーマ `{areaName,rank,value,unit,label}`)。
@@ -64,7 +64,7 @@ node .Codex/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metricK
 - **散布図 (archetype B) は専用ヘルパーで生成** (相関 snapshot の scatterData を変換、手 join 不要):
 
   ```bash
-  node .Codex/scripts/blog/fetch-correlation-scatter.mjs --slug <slug> --base <metricA> --pair <metricB>
+  node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug <slug> --base <metricA> --pair <metricB>
   ```
 
   出力 `<A>--<B>-scatter.json` (+ `.source.json`) が `{title,xLabel,xUnit,yLabel,yUnit,points}` スキーマ。
@@ -74,11 +74,11 @@ node .Codex/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metricK
   県内市町村を value 降順で `<name>-ranking.json` (統一スキーマ) に整形する。**数値は finance-cards JSON のみ使う**。
 - **G型 (移動フロー)**: R2 `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json` から
   対象県の転出先/転入元を集計して `<name>-ranking.json` にする。
-- **本文の数値・rank はこの data の値のみ使う** (捏造防止)。e-Stat 規約は `.Codex/rules/estat-api.md`。
+- **本文の数値・rank はこの data の値のみ使う** (捏造防止)。e-Stat 規約は `.claude/rules/estat-api.md`。
 
 ### Step 3: article.md 生成 (docs/21 outbox)
 
-`docs/21_ブログ記事原稿/<slug>/article.md` を新規作成。**`.Codex/rules/blog-quality-standards.md` が品質の正典**。要点:
+`docs/21_ブログ記事原稿/<slug>/article.md` を新規作成。**`.claude/rules/blog-quality-standards.md` が品質の正典**。要点:
 
 - **frontmatter**: `title`(curiosity-gap・N位/X倍差で終わらない) / `seoTitle` / `subtitle` / `slug` / `description`(緊張感セットアップ) / `archetype` / `category` / `tags` / `publishedAt` / `published: false`(作成時は false、公開時に true)。
 - **文体は ですます調**で統一 (である調 copula 混在は gate blocker)。
@@ -92,7 +92,7 @@ node .Codex/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metricK
 ### Step 4: チャート生成
 
 ```bash
-node .Codex/scripts/blog/generate-article-charts.ts --slug <slug>
+node .claude/scripts/blog/generate-article-charts.ts --slug <slug>
 ```
 
 - `data/*.json` → `data/*.svg` を生成。認識サフィックス: `*-prefecture-rankings.json`(bar・`pref` フィールド必須) / `*-timeseries.json`(line) / `*-scatter.json`(scatter) / `*-tile-grid.json`(地図)。
@@ -101,7 +101,7 @@ node .Codex/scripts/blog/generate-article-charts.ts --slug <slug>
 ### Step 5: Factual cross-check ★必須
 
 ```bash
-node .Codex/scripts/lib/article-factual-check.mjs "docs/21_ブログ記事原稿/<slug>/article.md" "docs/21_ブログ記事原稿/<slug>/data"
+node .claude/scripts/lib/article-factual-check.mjs "docs/21_ブログ記事原稿/<slug>/article.md" "docs/21_ブログ記事原稿/<slug>/data"
 ```
 
 - exit 0 で次へ。`RANK_MISMATCH`/数値捏造の blocker があれば data の正しい値で本文を Edit して再実行。framing 自体が data と矛盾するなら draft を破棄して metric/角度を選び直す。
@@ -109,7 +109,7 @@ node .Codex/scripts/lib/article-factual-check.mjs "docs/21_ブログ記事原稿
 ### Step 6: 品質ゲート + critic
 
 ```bash
-node .Codex/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/article.md
+node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/article.md
 ```
 
 - **公開する記事は `blog-critic` (別 agent) の `review.md` (verdict: PASS) が必須** (自己採点禁止)。`/blog-review --mode expert` で生成し、PASS になるまで本文を直す。
@@ -123,7 +123,7 @@ node .Codex/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/a
 ## 規約
 
 - **コードを直接書かない** (orchestrator)。R2 データ接地は `fetch-ranking-data-r2.mjs`、チャートは `generate-article-charts.ts`、検証は `article-factual-check.mjs`/`quality-gate.mjs`。
-- **md-syntax 準拠**: `<source-link>` `<data-source>` は `.Codex/skills/blog/md-syntax/SKILL.md`。
+- **md-syntax 準拠**: `<source-link>` `<data-source>` は `.claude/skills/blog/md-syntax/SKILL.md`。
 - **TILE_GRID_LAYOUT**: タイルマップは `packages/visualization/src/d3/constants/tile-grid-layout.ts` から import。
 - **完成記事の参考**: 公開済み良記事 (`curl -s https://storage.stats47.jp/app/blog/<slug>/article.md`、例 `health-life-expectancy-structure` / `sports-urban-paradox`)。
 - **1 回 1 記事**: バッチ化禁止。
@@ -153,13 +153,18 @@ node .claude/scripts/blog/build-article-prompt.mjs --slug <slug> --archetype <F|
 
 ## 参照
 
-- **記事品質の正典: `.Codex/rules/blog-quality-standards.md`** (archetype A〜E / curiosity gap / callout / 内部リンク / source-link 配置 / 表禁止 / ですます / 図あたり字数)
-- `.Codex/skills/blog/discover-trends/SKILL.md` (トレンド発見・任意の入力源)
-- `.Codex/scripts/blog/fetch-ranking-data-r2.mjs` (R2 直データ接地)
-- `.Codex/skills/blog/generate-article-charts/SKILL.md`
-- `.Codex/skills/blog/md-syntax/SKILL.md`
-- `.Codex/skills/blog/brushup-blog/SKILL.md` (公開後の是正・反復)
-- `.Codex/skills/blog/proofread-article/SKILL.md`
+- **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (archetype A〜E / curiosity gap / callout / 内部リンク / source-link 配置 / 表禁止 / ですます / 図あたり字数)
+- `.claude/skills/blog/discover-trends/SKILL.md` (トレンド発見・任意の入力源)
+- `.claude/scripts/blog/fetch-ranking-data-r2.mjs` (R2 直データ接地)
+- `.claude/scripts/blog/fetch-migration-flow.mjs` (型G 移動フローの接地)
+- `.claude/scripts/blog/build-kakei-quantity-price.mjs` (家計調査の食料品目を「支出額 = 数量 × 価格」に分解し、県庁所在市の 4 区分 findings カードを接地。県別食卓記事 `<pref>-food-culture` の更新用)
+- `.claude/scripts/blog/fetch-kakei-monthly.mjs` (型C 用。家計調査 全国・二人以上の世帯の月次品目表と 2020 年基準 CPI を e-Stat から直接読み、年次集計・指数化・月別パターン・購入単価 (金額÷数量) の折れ線 data JSON を作る。source.json は kind:estat)
+- `.claude/scripts/blog/fetch-municipal-finance.mjs` (型F 市町村財政の接地)
+- `.claude/scripts/blog/build-article-prompt.mjs` (型 F/G/E の執筆プロンプト生成)
+- `.claude/skills/blog/generate-article-charts/SKILL.md`
+- `.claude/skills/blog/md-syntax/SKILL.md`
+- `.claude/skills/blog/brushup-blog/SKILL.md` (公開後の是正・反復)
+- `.claude/skills/blog/proofread-article/SKILL.md`
 
 ## 完了条件
 

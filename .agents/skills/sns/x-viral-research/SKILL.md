@@ -27,7 +27,7 @@ X 上で stats47 の題材圏 (都道府県統計・ランキング・日本地�
 - 非表示・取得不能のmetricは`0`でなく`null`相当として扱い、0件とlogin/selector/rate-limit失敗を区別する。
 - 同一投稿の再観測は取得日付きで追記し、過去metricsを上書きしない。
 - 第三者の本文・画像・動画は内部調査だけに使い、git、公開R2、自社投稿素材、画像生成入力へ流用しない。
-- browser-use終了時は`.Codex/rules/browser-use-cleanup.md`のdaemon停止・タブ閉鎖・一時profile削除を必ず行う。
+- browser-use終了時は`.claude/rules/browser-use-cleanup.md`のdaemon停止・タブ閉鎖・一時profile削除を必ず行う。
 
 ## 引数
 
@@ -68,7 +68,7 @@ export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:
 BU="browser-use --headed --profile 'Profile 5'"
 ```
 
-`.Codex/rules/browser-use-cleanup.md` の 3 段 trap (daemon kill / temp user-data-dir 掃除 /
+`.claude/rules/browser-use-cleanup.md` の 3 段 trap (daemon kill / temp user-data-dir 掃除 /
 Chrome タブクローズ) を必ず仕込む。
 
 ### Phase 1: 軸別に検索 → 上位投稿を収集
@@ -101,7 +101,7 @@ Chrome タブクローズ) を必ず仕込む。
 
 ### Phase 3: 台帳へ upsert (機械 state)
 
-`.Codex/state/sns/x-viral-posts.json` に post_url キーで upsert (既存エントリの metrics は
+`.claude/state/sns/x-viral-posts.json` に post_url キーで upsert (既存エントリの metrics は
 取得日付きで追記し、履歴を潰さない):
 
 ```jsonc
@@ -125,7 +125,7 @@ Chrome タブクローズ) を必ず仕込む。
 
 ### Phase 4: 比較用レポート出力
 
-`.Codex/skills/sns/x-viral-research/reference/reports/YYYY-MM-DD.md`
+`.claude/skills/sns/x-viral-research/reference/reports/YYYY-MM-DD.md`
 (frontmatter `type: x-viral-research`):
 
 ```markdown
@@ -145,14 +145,14 @@ tags: [competitor, sns]
 - <buzz-map カタログ / X template への反映候補。§2-10 承認ゲート経由と明記>
 ```
 
-採択した未完了策だけを `.Codex/todo/improvements.md` へID付きで追加する。
+採択した未完了策だけを `.claude/todo/improvements.md` へID付きで追加する。
 
 ### Phase 5: カタログへの反映 (★人間承認ゲート)
 
 示唆を `sns-content-standards.md` §2 や `buzz-map-standards.md` §4 (curated ideas / テーマ台帳) に
 反映するときは **§2-10 の手順に従う** (diff 提案 → ユーザー承認 → 編集 → `x-catalog.cjs --check`)。
 本スキルが rules を直接書き換えることは無い。buzz-map の新テーマ案は
-`.Codex/scripts/sns/data/buzz-map-curated-ideas.ts` への追加提案として提示する (追加も承認後)。
+`.claude/scripts/sns/data/buzz-map-curated-ideas.ts` への追加提案として提示する (追加も承認後)。
 
 ## やらないこと (意図的)
 
@@ -168,8 +168,8 @@ tags: [competitor, sns]
 
 ## 関連
 
-- 投稿基盤・検索文法の先行実装: `.Codex/skills/sns/find-quote-rt/SKILL.md`
-- アカウント単位の競合観測: `.Codex/skills/sns/competitor-scan/SKILL.md`
-- 型の正典: `.Codex/rules/sns-content-standards.md` §2 / `.Codex/rules/buzz-map-standards.md` §1・§4
-- cleanup 規約: `.Codex/rules/browser-use-cleanup.md`
+- 投稿基盤・検索文法の先行実装: `.claude/skills/sns/find-quote-rt/SKILL.md`
+- アカウント単位の競合観測: `.claude/skills/sns/competitor-scan/SKILL.md`
+- 型の正典: `.claude/rules/sns-content-standards.md` §2 / `.claude/rules/buzz-map-standards.md` §1・§4
+- cleanup 規約: `.claude/rules/browser-use-cleanup.md`
 - 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search`

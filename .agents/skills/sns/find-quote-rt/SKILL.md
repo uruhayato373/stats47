@@ -157,7 +157,7 @@ score = engagement * (0.4 + 0.6 * freshness)  # 鮮度ボーナス 60%
 
 ```bash
 # 直近2件の quote_rt content_key（category は metric config の category から解決）
-node -e 'const s=require("./.Codex/scripts/lib/sns-posts-store.cjs");
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
   const recent=s.query(p=>p.post_type==="quote_rt"&&p.platform==="x")
     .sort((a,b)=>(b.posted_at||"").localeCompare(a.posted_at||"")).slice(0,2)
     .map(p=>p.content_key);
@@ -187,7 +187,7 @@ fetch(R2+"/app/ranking-items/all.json").then(r=>r.json()).then(s=>{
 キーワードはツイート内容に応じて動的に変更する。同一 `content_key` は過去7日以内に使用していれば除外（投稿台帳 `posts.json` から。完全DBレス。旧 D1 sns_posts は廃止）:
 
 ```bash
-node -e 'const s=require("./.Codex/scripts/lib/sns-posts-store.cjs");
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
   const cut=new Date(Date.now()-7*864e5).toISOString();
   const used=s.query(p=>p.post_type==="quote_rt"&&(p.posted_at||"")>cut).map(p=>p.content_key);
   console.log(JSON.stringify([...new Set(used)]))'
@@ -271,13 +271,13 @@ EOF
 
 ```bash
 # テキストのみ（デフォルト） — 即時投稿
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts <content_key> \
+npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
   --quote-url "https://x.com/xxx/status/123456" \
   --caption /tmp/quote-rt-caption.txt \
   --domain ranking
 
 # --with-media 指定かつ Phase 4d で県動画が選ばれた場合は --media を追加
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts <content_key> \
+npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
   --quote-url "https://x.com/xxx/status/123456" \
   --caption /tmp/quote-rt-caption.txt \
   --media .local/r2/sns/migration-flow/aichi/x/stills/reel.mp4 \

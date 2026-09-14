@@ -13,23 +13,27 @@ primary_agent: ranking-content-author
 
 > **2026-06-21 DBレス再構築済**。旧版は D1 (`ai_content` テーブル + 生成 CLI + D1→R2 exporter) に依存し
 > commit `7569bd5c` "dbless Part D" で削除されていたが、**D1 非依存で再構築**した。D1 は一切使わない。
-> 担当 agent: `ranking-content-author`。品質ゲート: `.Codex/scripts/ai-content/audit-ai-content.mjs`。
-> モデル選択とagent起動promptは `.Codex/rules/model-prompting.md` /
-> `.Codex/rules/agent-output-contract.md` を正典とする。
+> 担当 agent: `ranking-content-author`。品質ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`。
+> モデル選択とagent起動promptは `.claude/rules/model-prompting.md` /
+> `.claude/rules/agent-output-contract.md` を正典とする。
 
 ## モデル運用ポリシー（★コストゲート・2026-08-30）
 
 定期量産は **Gemini API 無料枠**、agent は例外是正に限定する。
 
-| 役割 | 実行者 | 契約 |
+| 役割 | 実行者 | 品質 / コスト契約 |
 |---|---|---|
-| author | `gemini-2.5-flash-lite` API | structured JSON、既定3件/日、並列1 |
-| 決定的ゲート | `audit-ai-content.mjs` | blocker 0 のみ継続 |
-| critic | author と別リクエストの Gemini API | PASS / REVISE。最大1回再生成 |
-| 例外是正 | ranking-content-author / critic | quarantine や高流入 key だけ |
+| author (日次) | `gemini-2.5-flash-lite` API | structured JSON schema、既定 3件/日、並列 1 |
+| 決定的ゲート | `audit-ai-content.mjs` | 数値捏造・括弧羅列・重複・欠落は blocker |
+| critic (日次) | author と別リクエストの Gemini API | `PASS | REVISE`。REVISE は指摘付きで最大1回再生成 |
+| 例外是正 | `ranking-content-author` + `ranking-content-critic` | 3回連続失敗の quarantine や高流入 key だけ |
 
-`GEMINI_API_KEY` は課金無効の専用 Google AI Studio project から発行する。
-無料 tier へは公開統計と公開用解説だけを送り、秘密・個人情報を入れない。
+`GEMINI_API_KEY` は**課金無効の専用 Google AI Studio project**から発行する。
+コードはキーが有料 project に属するかを事前証明できないため、これは Secret 所有者の運用ゲート。
+無料 tier のデータ利用条件を踏まえ、公開統計と公開用解説だけを送り、秘密・個人情報は入れない。
+
+Claude Code/OAuth を使う自動生成は廃止のまま。過去に 5 件で $79〜$90、0 件で $87.31 を消費したため、
+定期経路に戻さない。
 
 ## データソース（DBレス）
 
@@ -48,15 +52,21 @@ R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server'
 |---|---|---|
 | `list-pending.ts` | `ai:list` | R2 active keys → missing / incomplete / complete を分類（ワークリスト） |
 | `build-input.ts` | `ai:input -- <key>` | R2 → `RankingContentInput` + prompt 文字列（純 read） |
-| `preflight-gemini.ts` | `ai:preflight` | structured 実生成でモデル・認証・quota を切り分け |
-| `generate-parallel.ts` | `ai:gen -- [opts]` | Gemini author → audit → Gemini critic → outbox/report |
+| `preflight-gemini.ts` | `ai:preflight` | 極小の structured 実生成でモデル・認証・quota を切り分け |
+| `generate-parallel.ts` | `ai:gen -- [opts]` | Gemini API author → audit → Gemini critic → outbox/report。CLI は手動 fallback |
 
 ## クイックスタート
 
-> **日次量産の正典**は `.github/workflows/ai-content-gemini-daily.yml`。
-> Gemini API で author → audit → 別リクエスト critic → publish dispatch まで実行する。
+> **現在の日次正典**: `.github/workflows/ai-content-gemini-daily.yml` (07:15 JST、既定3件)。
+> 件数は `.claude/state/metrics/ai-content/history.csv` で 7 run 以上を観測した後だけ見直す。
 
-> Codex の Bash から `generate-parallel.ts` の Codex CLI 子プロセスを起動しない。
+> **2026-08-21 当時の経緯**: 件数を決めるのは週次計画 (`.claude/todo/weekly.md` の Must) だった。月間目標は
+> `.claude/todo/monthly.md` が持つ。日次 CI (`ai-content-generate-daily.yml`) は
+> 2026-08-21 に削除した — 対話セッションと同じ Pro/Max 利用枠を食う一方で歩留まりが
+> 08-19 に 0/5 ($87.31)、08-20 に 1/5 ($21.33) まで落ちたため。
+> **当時は生成を対話セッションが行っていた**。現在の定期経路は Gemini API。
+
+> Claude Code の Bash から `generate-parallel.ts` の claude CLI 子プロセスを起動しない。
 > 大きい stdin が詰まるため、対話セッションでは agent 生成、端末では CLI、日次は workflow と経路を混在させない。
 
 ### 1. 対象把握
@@ -76,7 +86,7 @@ NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.sta
   npm run ai:gen --workspace=@stats47/ai-content -- \
   --model gemini-api --critic gemini-api --concurrency 1 --limit 3 --dry-run
 
-# 実行は課金無効の専用キーでのみ
+# 実行は課金無効の専用キーでのみ行う
 GEMINI_API_KEY=... npm run ai:gen --workspace=@stats47/ai-content -- \
   --model gemini-api --critic gemini-api --concurrency 1 --limit 3 --retries 1 --outbox
 ```
@@ -101,8 +111,8 @@ GEMINI_API_KEY=... npm run ai:gen --workspace=@stats47/ai-content -- \
 | `--keys k1,k2` | （pending 走査） | 対象 key を明示（pending 判定をスキップ） |
 | `--out <dir>` | `.local/r2` | staging 出力 dir |
 | `--dry-run` | false | **LLM を呼ばず** prompt 長と staging パスだけ出す（セッション内検証用・課金なし） |
-| `--outbox` | false | git 公開 outbox へ書込 |
-| `--report <file>` | なし | 成否・API request・token の JSON report |
+| `--outbox` | false | git 公開 outbox へフラット書込（develop へ push 後に publisher を起動） |
+| `--report <file>` | なし | 件数・成否・APIリクエスト・トークンの JSON report（本文なし） |
 
 ## 手動で 1 件処理する場合（エージェント生成）
 
@@ -111,11 +121,11 @@ GEMINI_API_KEY=... npm run ai:gen --workspace=@stats47/ai-content -- \
 NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
   npm run ai:input --workspace=@stats47/ai-content -- <rankingKey> --prompt-only > /tmp/prompt-<key>.txt
 
-# 2) prompt に従い JSON 生成（agent もしくは Codex CLI）→ /tmp/out-<key>.json
+# 2) prompt に従い JSON 生成（agent もしくは claude CLI）→ /tmp/out-<key>.json
 #    出力は AiContentSnapshotRow 形式（faq / prefectureCommentary は JSON 文字列、insights / regionalAnalysis は Markdown）
 
 # 3) ★必ず決定的ゲート（blocker 0 を確認）
-node .Codex/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
+node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 
 # 4) blocker 0 なら staging に置く → r2-publisher が push
 ```
@@ -130,18 +140,46 @@ node .Codex/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 **outbox はフラットな `<rankingKey>.json` でなければならない**。workflow の検出 glob が
 `data/ai-content-staging/*.json` なので、`app/ranking/<key>/` の階層を作ると拾われない。
 
-## Routine（日次 CI）
+## ローカル量産（headless claude CLI・Agent tool は使わない）
 
-`ai-content-gemini-daily.yml` が次を一続きで実行する。
+Gemini 日次 CI が止まっている間、または在庫を人が決めた量だけ消化するときの入口。
+**ユーザー端末で実行する**（Claude Code セッション内は Keychain を読めず未ログインになる。
+セッションからは `--dry-run` だけ）。1 件は prompt ≈5,000 字 + 出力で終わり、Agent tool 経路
+（1 件 $16-18）の約 1/60。正典: `ranking-content-standards.md` §2026-09-05。
 
-1. 全件キューを再構築し、needs-regen を `LIMIT` 件選ぶ (件数の SSOT は workflow。ここに数値を書かない)
-2. R2観測値から対象別 prompt を決定的に準備する
-3. Gemini API がauthor → audit → 独立 critic を回す
-4. PASS 分だけ outbox へ書き、token / pass rate を metrics に記録する
-5. develop へ push し、`publish-ai-content.yml` を明示 dispatch する
+```bash
+# 既定: キューの needs-regen 上位 35 件 / author=critic=Sonnet 5 / 1 push = 1 commit → publish-ai-content.yml
+bash .claude/scripts/ai-content/run-claude-batch.sh
+# パイロット (モデル比較): 10 件ずつ、通過率と 1 件あたり input/output トークンを summary で読む
+bash .claude/scripts/ai-content/run-claude-batch.sh --limit 10 --model claude-haiku --retries 2
+bash .claude/scripts/ai-content/run-claude-batch.sh --limit 10 --model claude-sonnet --retries 2
+# 1 件だけ試す (push しない)
+bash .claude/scripts/ai-content/run-claude-batch.sh --keys <rankingKey> --no-push
+```
 
-`GEMINI_API_KEY` 未登録、対象あり生成0件、push / dispatch 未確認は hard fail。
-既定件数は3で、7 run 以上の quota 実測後にだけ見直す。
+スクリプトは preflight (最小 1 call で認証確認) → キュー再導出 → 生成 → `audit-ai-content.mjs` →
+Claude critic → `history.csv` / quarantine state 記録 → 1 commit → rebase → push → publish run 待ち、まで行う。
+summary の「1 request あたり input が 40K 超」警告が出たら rules が漏れ込んでいる (cwd / `--setting-sources`)。
+
+## 手動例外是正（quarantine / 高流入 key のみ）
+
+以下は日次量産・ローカル量産の代替ではない。Gemini 自動経路で 3 回失敗したキーや、公開優先度が高く
+人手判断が必要なキーだけを対象にする。
+
+1. **対象を出す。** quarantine state と GSC 優先度を確認し、明示キーだけを選ぶ。
+2. **1 件ずつ author agent を foreground で起動**し、`data/ai-content-staging/<key>.json` を書かせる。
+3. **機械の床を通す。** `node .claude/scripts/ai-content/audit-ai-content.mjs --file <path>`。
+   blocker があれば同じ author に blocker と対象 field だけ渡して外科修正し、再実行する。
+4. **critic を別コンテキストで回す** (batch ≤10 key。§critic の起動方法)。
+   **★PASS を確認してから push する。** 自動経路は Gemini critic を機械強制するが、手動例外では
+   agentの判定記録を作業証拠として確認する。
+5. **push する。** develop へ push すると `publish-ai-content.yml` が push トリガーで発火し、
+   R2 反映前に `audit-ai-content.mjs` を再実行する。発火しなければ
+   `gh workflow run publish-ai-content.yml -f keys="<key>"` で明示 dispatch する。
+
+**通過分だけ公開する。** 1 件落ちても残りを止めない。公開 0 件のときは「成功」と report しない。
+連続で critic に落ちるキーは `record-generation-outcome.mjs` に記録すると
+`build-ai-content-queue.mjs --next` が 3 回目から除外する。
 
 ## 品質ゲート（必須）
 
@@ -156,7 +194,7 @@ node .Codex/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 
 ### critic の起動方法 (★batch + compact + delta・2026-07-07 / TOKEN-AICONTENT-01)
 
-per-key に critic agent を起動しない。以下の 3 点でセッション消費を抑える (正典: `.Codex/agents/ranking-content-critic.md`):
+per-key に critic agent を起動しない。以下の 3 点でセッション消費を抑える (正典: `.claude/agents/ranking-content-critic.md`):
 
 1. **batch 起動 (≤10 key / 1 agent)**: key リストを 1 度の Agent 起動で渡す (doc09 §5 の設計)。
    起動 prompt 冒頭に OUTPUT FORMAT (Template A: `Key | Section | Issue | Severity | Recommendation`、
@@ -164,7 +202,7 @@ per-key に critic agent を起動しない。以下の 3 点でセッション�
 2. **compact 読み**: critic は R2 JSON を生読みせず jq で実コンテンツのみ取得 (critic agent 定義に
    コマンド記載。実測 -22%)。
 3. **REVISE 再審査は `mode: delta`**: author が指摘フィールドのみ外科修正 → critic に前回指摘 +
-   修正フィールドを渡して delta 起動 (全文・正典の再読なし)。quarantine の手動是正だけに使う。
+   修正フィールドを渡して delta 起動 (全文・正典の再読なし)。quarantine の手動是正レビューも delta で行う。
 
 ## エラーハンドリング
 
@@ -176,7 +214,7 @@ per-key に critic agent を起動しない。以下の 3 点でセッション�
 
 - 生成パイプライン: `packages/ai-content/src/scripts/{list-pending,build-input,generate-parallel}.ts`
 - プロンプトテンプレート: `packages/ai-content/src/services/prompts/ranking-content-prompt.ts`（ゲートと同期）
-- 決定的ゲート: `.Codex/scripts/ai-content/audit-ai-content.mjs`
+- 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`
 - 型定義: `packages/ai-content/src/types/snapshot.ts`（`AiContentSnapshotRow`）
-- 担当 agent: `.Codex/agents/ranking-content-author.md` / 意味レビュー: `ranking-content-critic`
-- backlog: `.Codex/todo/backlog.md` `[AICONTENT-DBLESS-REBUILD]`
+- 担当 agent: `.claude/agents/ranking-content-author.md` / 意味レビュー: `ranking-content-critic`
+- backlog: `.claude/todo/backlog.md` `[AICONTENT-DBLESS-REBUILD]`

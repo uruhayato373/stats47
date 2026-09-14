@@ -365,7 +365,7 @@ docs/31_note記事原稿/<slug>/_data/
 ```
 
 > **ephemeral outbox**: docs/31 は作業時のみ存在（push後CI自動削除）。
-> 既存 slug の場合は `bash .Codex/scripts/note/restore-from-r2.sh <slug>` で復元してから書き込む。
+> 既存 slug の場合は `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元してから書き込む。
 
 #### chart-data.json（必須）
 
@@ -466,7 +466,7 @@ docs/31_note記事原稿/<slug>/_data/
 ## 参照
 
 - note 戦略: `docs/30_note記事企画/note戦略.md`
-- チャート生成: `.Codex/skills/note/generate-note-charts/SKILL.md`
-- Remotion 画像: `.Codex/skills/sns/render-sns-stills/SKILL.md`
+- チャート生成: `.claude/skills/note/generate-note-charts/SKILL.md`
+- Remotion 画像: `.claude/skills/sns/render-sns-stills/SKILL.md`
 - ranking_items スキーマ: `packages/database/src/schema/ranking_items.ts`
 - correlation_analysis スキーマ: `packages/database/src/schema/correlation_analysis.ts`

@@ -76,7 +76,7 @@
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化・指標拡充バックログ | `.claude/todo/backlog.md`（tier 見出し + タグ行のカード形式） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
-| プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink。**新しいマシンで clone した直後に `bash .claude/scripts/setup-memory-symlink.sh` を 1 回実行**して symlink を張る |
+| プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink (Windows は junction)。**新しいマシンで clone した直後に `node .claude/scripts/setup-memory-symlink.mjs` を 1 回実行**して張る (`--check` で確認。純 Node なので Windows / Mac 共通) |
 
 ## ドキュメント参照ガイド
 

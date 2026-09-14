@@ -43,14 +43,15 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 # 集計するエフェメラル producer (build-correlation-snapshot.ts) として再実装 (DBレス Derived)。
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
+  "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
   "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
-  "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
   # ★calculated-stats は ranking-values より前に置くこと。計算型 metric の正典
   #   app/stats/<key>/values.json を作る producer で、ranking-values はそれを配信用に
   #   射影するだけだから (逆順だと計算型が 1 年前のまま配信される)。
   "calculated-stats|packages/ranking/src/scripts/generate-calculated-stats.ts"
   "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
+  "municipality-ranking|packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published"
   "ranking-normalized-values|packages/ranking/src/scripts/generate-ranking-normalized-values.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
@@ -104,6 +105,19 @@ for task in "${TASKS[@]}"; do
     continue
   fi
 
+  # ★ranking-items の per-key item.json は master が直後に remote から再読込する。
+  # saveToR2 は .local/r2 への staging だけなので、末尾の一括 push まで待つと master が
+  # 旧 item.json を読み、fresh な staging を同じ path へ上書きする (2026-08-27 実測)。
+  # 生成直後に per-key を S3 へ反映し、後続 metadata/master の read-after-write を保証する。
+  # この push が不完全なまま master を続けると旧値を再び焼き込むため、失敗時は即停止する。
+  if [ "$label" = "ranking-items" ] && [ "$DRY_RUN" = "0" ] && push_allowed; then
+    echo "── ranking-items の per-key item.json を先に push (後続 metadata/master が remote から読むため) ──"
+    if ! npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking; then
+      echo "❌ ranking-items の中間 push に失敗。stale item の再取込を防ぐため後続 task を停止します"
+      exit 1
+    fi
+  fi
+
   # ★calculated-stats だけは書いた直後に push する (2026-08-05 実測で必要と判明)。
   #
   # 各 task は .local/r2 に書き、push は末尾に 1 回 — が原則だが、**reader は
@@ -113,7 +127,7 @@ for task in "${TASKS[@]}"; do
   # 初回はこれが無く、app/stats は 18 年に更新されたのに app/ranking は 1 年のまま
   # 旧値 (山形 545,206) を配信していた。
   # page-data-batch → 即 push → run.sh という data-refresh の構造と同じ理由。
-  # diff-push は差分のみなので、末尾の全体 push と二重になっても無害。
+  # manifest は prefix ごとに別なので、末尾の全体 push では再送され得る。
   if [ "$label" = "calculated-stats" ] && [ "$DRY_RUN" = "0" ] && push_allowed; then
     echo "── calculated-stats の出力を先に push (後続 ranking-values が remote から読むため) ──"
     if ! npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats; then
@@ -159,7 +173,19 @@ if [ "$DRY_RUN" = "0" ]; then
   if [ "$CI" = "true" ] || [ "$GITHUB_ACTIONS" = "true" ] || [ "$ALLOW_LOCAL_R2_WRITE" = "1" ]; then
     echo ""
     echo "════ R2 push ════"
-    if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts; then
+    PUSH_ARGS=()
+    # 単独実行時に CI runner へ同梱された無関係な staging asset を巻き込まない。
+    # municipality ranking は専用 URL namespace のため prefix を安全に限定できる。
+    if [ "$ONLY" = "municipality-ranking" ]; then
+      PUSH_ARGS+=(--prefix app/municipalities)
+    elif [ "$ONLY" = "blog" ]; then
+      PUSH_ARGS+=(--prefix app/blog)
+    elif [ "$ONLY" = "ranking-items" ] && [ ${#FAILED[@]} -eq 0 ]; then
+      # per-key は中間 push 済み。prefix ごとに manifest が別なので全体 push は再送になる。
+      # 単独成功時は残る inventory のみ。生成失敗時は部分生成済み item の救済を維持する。
+      PUSH_ARGS+=(--prefix app/ranking-items)
+    fi
+    if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts "${PUSH_ARGS[@]}"; then
       echo "✅ snapshot を R2 に push 完了"
     else
       echo "❌ R2 push 失敗"

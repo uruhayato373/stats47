@@ -10,15 +10,15 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 テーマの「何を、どのチャートで、なぜ載せるか」の**素材を実際に調査して検証済み提案を出す**スキル。
 採否判断・カタログ実装は行わない (theme-designer / theme-component-builder の責務)。
 
-> 正典規約: `.Codex/rules/theme-catalog-standards.md` / 実行 agent: `.Codex/agents/theme-researcher.md` /
-> 呼び元がAgent toolを使う場合: `.Codex/rules/model-prompting.md` /
-> `.Codex/rules/agent-output-contract.md` (最大1体)
+> 正典規約: `.claude/rules/theme-catalog-standards.md` / 実行 agent: `.claude/agents/theme-researcher.md` /
+> 呼び元がAgent toolを使う場合: `.claude/rules/model-prompting.md` /
+> `.claude/rules/agent-output-contract.md` (最大1体)
 
 ## ★ 実証原則 (これを破った提案は呼び元が破棄する)
 
 以下の Stage は「説明」ではなく**実際に実行するアクション**。tool を 1 つも呼ばずに提案を出すのは失敗
 (2026-07-04 に 0-tool 捏造事故あり)。**未検証の候補・実行していない調査方法・推測 URL を書かない**
-(`.Codex/rules/evidence-based-judgment.md`)。e-Stat 実在は必ず解決してから返す (「未確認」を残さない)。
+(`.claude/rules/evidence-based-judgment.md`)。e-Stat 実在は必ず解決してから返す (「未確認」を残さない)。
 
 ## 使い方
 
@@ -48,10 +48,10 @@ npm run theme:dashboard-catalog:query -- <theme>
 
 ```bash
 # 台帳で対象テーマの白書ノートブックを確認
-cat .Codex/skills/theme/research-theme-catalog/reference/notebooks.md
+cat .claude/skills/theme/research-theme-catalog/reference/notebooks.md
 
 # 対象テーマの白書に問う (引用付き回答だけ受領・PDF はコンテキストに載せない)
-node .Codex/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm-cross-query.mjs \
   --notebooks "<対象白書ノートブック名>" \
   "<theme> の地域差を示す統計指標に加え、政策上の問い、対象集団、供給・アクセス・参加・成果等の論点を列挙してください。各項目に引用と出典統計名を付けてください。"
 ```
@@ -83,7 +83,7 @@ stats47 へ採用する前に Stage 2 の e-Stat / metric SSOT 照合を必ず�
 ```bash
 # 既存 snapshot CSV からテーマ関連クエリの impressions/CTR を grep
 grep -iE "<theme 関連キーワード>" \
-  .Codex/skills/analytics/gsc-improvement/reference/snapshots/*/queries.csv | sort -t',' -k3 -rn | head -20
+  .claude/skills/analytics/gsc-improvement/reference/snapshots/*/queries.csv | sort -t',' -k3 -rn | head -20
 ```
 
 ## Stage 2: 実在確認 (必須・inline。estat-researcher サブ agent を spawn しない)
@@ -95,7 +95,7 @@ synthesize せず終わる事故が続いたため (2026-07-04)、**サブ agent
 # (a) 既登録かの一次チェック (登録済みなら投入不要)
 grep -c '"<candidate-key>":' packages/data-configs/src/registry.ts
 # (b) 既知 Gap は backlog に statsDataId 付きで documented なことがある (再利用可)
-grep -iE "<theme 関連語>" .Codex/todo/backlog.md
+grep -iE "<theme 関連語>" .claude/todo/backlog.md
 ```
 
 - 登録済み (`✅登録済`) → そのまま採用候補
@@ -108,19 +108,11 @@ grep -iE "<theme 関連語>" .Codex/todo/backlog.md
 省庁等の公式 HTTPS URL を実際に開いて確認し、関連 ranking / theme / tag はコード上の実在 route だけを残す。
 NotebookLM の引用だけ、または内部導線が 0 件の候補は採用推奨にしない。
 
-各 chart 候補について、次も一次資料または metric config で確認する。
-
-- 指標定義、母集団、分母、統計主体、単位
-- 系列断絶、定義変更、比較不能条件、左右軸など具体的な誤読リスク
-- 実在 active metric の `relatedRankingKeys`。タイトル類似だけの推測 mapping は不採用
-- 誤読リスクが無い場合は `annotation` を作らない。汎用的な chart の読み方は出力しない
-
 ## Stage 3: 統合・提案
 
-`.Codex/todo/backlog.md` の7列候補表へ、実在確認に合格した候補だけを追加する。フォーマットは
-`.Codex/agents/theme-researcher.md` の「提案の出力先フォーマット」に従う。不採用・unknown・重複候補は追加しない。
+`.claude/todo/backlog.md` の7列候補表へ、実在確認に合格した候補だけを追加する。フォーマットは
+`.claude/agents/theme-researcher.md` の「提案の出力先フォーマット」に従う。不採用・unknown・重複候補は追加しない。
 
-chart 候補は `Candidate | componentType | relatedRankingKeys | annotation candidate | Evidence | Verdict`、
 論点レンズ候補は `Lens | Question | Official source | Related routes | Verdict` の table-only で呼び出し元へ返す。
 候補のまま永続化せず、採択後に theme-designer が `EVIDENCE_SOURCE_CATALOG` と
 `ThemeCatalog.evidenceTopics` へ反映する。
@@ -155,14 +147,32 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 
 ## モデル役割分担 (トークン節約)
 
-| 役割                                     | モデル                                 |
-| ---------------------------------------- | -------------------------------------- |
-| Stage 1 収集 (NotebookLM/競合/GSC)       | theme-researcher が tool を直接実行    |
-| Stage 2 実在検証                         | theme-researcher が inline tool で確認 |
-| 統合・提案文書化 (theme-researcher 本体) | sonnet                                 |
-| 提案採否・カタログ設計                   | メインセッション (上位モデル)          |
+| 役割 | モデル |
+|---|---|
+| Stage 1 収集 (NotebookLM/競合/GSC) | theme-researcher が tool を直接実行 |
+| Stage 2 実在検証 | theme-researcher が inline tool で確認 |
+| 統合・提案文書化 (theme-researcher 本体) | sonnet |
+| 提案採否・カタログ設計 | メインセッション (上位モデル) |
 
 ## 関連
+
+### 128候補の判断・検証を再利用する
+
+採否・統合先・保留の再開条件と初回実装仕様は `reference/theme-feasibility-catalog.json` の
+`decision` / `firstBatch` / `implementationWaves` を参照する。A/B/Cは調査時点の実現性評価で、
+採否や公開状況ではない。後続の作業入口は `.claude/todo/backlog.md` の `THEME-EXPANSION-IMPLEMENT-01`。
+
+- 全件の判断、統合先、実装順と初回指標の比較年を検査: `npm run theme:expansion:check`
+- 欠測・地理混入・重複・不正な引き渡しを拒否するテスト: `npm run theme:expansion:test`
+- コード明記のSSDS系列を再取得: 既存の `NEXT_PUBLIC_ESTAT_APP_ID` を環境に設定して `npm run theme:expansion:verify`
+
+実装は `.claude/scripts/themes/verify-theme-expansion.mjs`、取得証拠は
+`.claude/state/estat/theme-expansion-verification.json`。生のAPI応答は既定で
+`/tmp/stats47-theme-expansion-api/` に保存し、gitには取得条件・hash・年別県数・欠測を残す。
+再取得は候補の採否を変更しない。原典の年度・母集団・系列改定の判断は担当が確認し、
+`check` を再実行する。公式ファイル・GIS・コード未解決指標まで検証済みとは扱わない。
+
+### 関連資料
 
 - 規約: `.claude/rules/theme-catalog-standards.md`
 - agent: `.claude/agents/theme-researcher.md`

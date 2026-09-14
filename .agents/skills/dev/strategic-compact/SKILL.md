@@ -41,7 +41,7 @@ primary_agent: devops-runner
 
 | 生き残る | 失われる |
 |---|---|
-| AGENTS.md の全内容 | 会話の中間推論 |
+| CLAUDE.md の全内容 | 会話の中間推論 |
 | memory ファイル（MEMORY.md 経由） | ファイル内容のキャッシュ |
 | タスクリスト | grep/glob の検索結果 |
 | Git の状態（status, log） | 過去のツール実行結果 |

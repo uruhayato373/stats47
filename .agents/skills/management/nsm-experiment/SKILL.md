@@ -4,7 +4,7 @@ description: >
   NSM（週間エンゲージドセッション数）改善の実験ライフサイクルを管理する。
   propose（候補提案）→ start（実行開始）→ measure（前後比較）→ close（学び記録）の
   PDCA ループを回す。セッション間で継続作業を持越す場合は pending/resume で復帰可能。
-  .Codex/state/experiments.json を状態保存先に使い、playbook + rubric で意思決定を支援する。
+  .claude/state/experiments.json を状態保存先に使い、playbook + rubric で意思決定を支援する。
   Use when user asks to [NSM 実験, 仮説検証, /nsm-experiment, 実験提案, 効果測定,
   PDCA サイクル, 作業継続, 残作業確認, pending 作業, GSC インデックスリクエスト].
 primary_agent: strategy-advisor
@@ -16,7 +16,7 @@ primary_agent: strategy-advisor
 
 stats47 では GSC/GA4 スナップショットと `improvement-log.md` で施策の記録はできるが、「どの仮説を検証中か」「baseline から何日経過したか」「前後比較の結果はどうか」を仕組み化できていない。`improvement-log.md` は append-only のフリーテキスト、ログ性は高いが PDCA ループを閉じる機能はない。
 
-本スキルは Anthropic "Building Skills for Codex" ガイド **Pattern 3: Iterative refinement** を NSM 改善に適用し、以下のサイクルを仕組み化する:
+本スキルは Anthropic "Building Skills for Claude" ガイド **Pattern 3: Iterative refinement** を NSM 改善に適用し、以下のサイクルを仕組み化する:
 
 ```
 Plan       : propose 候補を playbook + rubric で評価 → start
@@ -62,7 +62,7 @@ abandoned  abandoned  running (re-measure)
 
 **目的**: 新セッション or 作業再開時に、中断中の実験と残作業を即座に把握する。
 
-1. `node .Codex/scripts/lib/experiments-state.mjs pending` を実行
+1. `node .claude/scripts/lib/experiments-state.mjs pending` を実行
 2. 何も出力がなければ「継続作業なし。`/nsm-experiment propose` で次の候補を見ますか？」と返す
 3. 出力がある場合は以下のフォーマットで markdown 出力:
 
@@ -86,7 +86,7 @@ abandoned  abandoned  running (re-measure)
 
 ### resume: 特定実験の継続作業を guide
 
-1. `node .Codex/scripts/lib/experiments-state.mjs get <id>` で取得
+1. `node .claude/scripts/lib/experiments-state.mjs get <id>` で取得
 2. `pending_user_actions` が空 or 未定義なら「継続作業なし」と返す
 3. 各 `pending_user_actions[]` について順に:
    a. action 名と参照ファイル（`reference`）を表示
@@ -97,14 +97,14 @@ abandoned  abandoned  running (re-measure)
 
 ### propose: 候補提案
 
-1. `node .Codex/scripts/lib/metrics-reader.mjs --json` で現状取得（今週 vs 前週、チャネル別、トップクエリ）
+1. `node .claude/scripts/lib/metrics-reader.mjs --json` で現状取得（今週 vs 前週、チャネル別、トップクエリ）
 2. `reference/playbook.md` を Read してパターンカタログを読み込む
 3. `reference/rubric.md` を Read して評価軸を読み込む
 4. 現状メトリクスと playbook を突き合わせ、適用可能な実験を洗い出す
 5. 各候補を rubric で採点（インパクト 40% / 工数 30% / 学習価値 20% / 確実性 10%）
 6. 加重合計降順で上位 3-5 件を表示
 7. ユーザーに「どれを experiments.json に追加するか」尋ねる
-8. 採用する候補を Write/Edit で `.Codex/state/experiments.json` に追加。id は `EXP-NNN` 形式で連番（`experiments-state.mjs` の `addExperiment` を使うか、JSON を直接編集）
+8. 採用する候補を Write/Edit で `.claude/state/experiments.json` に追加。id は `EXP-NNN` 形式で連番（`experiments-state.mjs` の `addExperiment` を使うか、JSON を直接編集）
 
 **出力例**:
 ```
@@ -126,7 +126,7 @@ abandoned  abandoned  running (re-measure)
 1. `getExperiment(id)` で取得、存在確認
 2. status が `proposed` であることを確認
 3. **baseline を確定**: この時点のメトリクスを取得して experiment.baseline に保存（`metrics-reader.mjs --json` の出力の該当部分）
-4. `transitionStatus(id, 'running')` で遷移（= `.Codex/state/experiments.json` を更新）
+4. `transitionStatus(id, 'running')` で遷移（= `.claude/state/experiments.json` を更新）
 5. 実行アクションリスト（experiment.actions）を表示
 6. ユーザーに「実際の編集作業」を促す
 
@@ -158,8 +158,8 @@ abandoned  abandoned  running (re-measure)
 
 ### list / show
 
-- `list`: `node .Codex/scripts/lib/experiments-state.mjs list [--status S]` で表形式
-- `show <id>`: `node .Codex/scripts/lib/experiments-state.mjs get <id>` で詳細表示
+- `list`: `node .claude/scripts/lib/experiments-state.mjs list [--status S]` で表形式
+- `show <id>`: `node .claude/scripts/lib/experiments-state.mjs get <id>` で詳細表示
 
 ## 制約事項
 
@@ -178,11 +178,11 @@ abandoned  abandoned  running (re-measure)
 
 | 連携先 | 役割 |
 |---|---|
-| **`.Codex/scripts/lib/experiments-state.mjs`** | state I/O 本体 |
-| **`.Codex/scripts/lib/metrics-reader.mjs`** | baseline と current の計測 |
-| **`.Codex/scripts/snapshot-weekly-metrics.mjs`** | 週次スナップショット（propose 時の背景データ） |
-| **`.Codex/skills/management/weekly-plan/SKILL.md`** | Phase で実験提案を自動化 |
-| **`.Codex/skills/management/weekly-review/SKILL.md`** | 実験進捗セクションで running を自動表示 |
+| **`.claude/scripts/lib/experiments-state.mjs`** | state I/O 本体 |
+| **`.claude/scripts/lib/metrics-reader.mjs`** | baseline と current の計測 |
+| **`.claude/scripts/snapshot-weekly-metrics.mjs`** | 週次スナップショット（propose 時の背景データ） |
+| **`.claude/skills/management/weekly-plan/SKILL.md`** | Phase で実験提案を自動化 |
+| **`.claude/skills/management/weekly-review/SKILL.md`** | 実験進捗セクションで running を自動表示 |
 | **`reference/playbook.md`** | 実験パターンカタログ |
 | **`reference/rubric.md`** | 優先順位評価軸 |
 | **`reference/definition.md`** | NSM 定義（詳細は `[Critical Review] North Star Metric` Issue を参照） |
@@ -212,11 +212,11 @@ abandoned  abandoned  running (re-measure)
 
 ## 実証チェックリスト（measure / close で effect を判定する前に必須）
 
-参照: `.Codex/rules/evidence-based-judgment.md`
+参照: `.claude/rules/evidence-based-judgment.md`
 
 - [ ] 検証コマンドを実行したか（実験のメトリクス取得元 API を直接叩く）:
   - 該当する `/fetch-{gsc,ga4,adsense}-data` でメトリクスを取得
-  - `.Codex/scripts/lib/metrics-reader.mjs` で statefile から取得
+  - `.claude/scripts/lib/metrics-reader.mjs` で statefile から取得
   - 比較期間（before / experiment 中 / after）を明確に CSV に
 - [ ] 想定効果値の根拠（過去類似実験 / 計算式 / 参照論文）を `propose` 段階で書いたか
 - [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を使っていないか
@@ -232,5 +232,5 @@ abandoned  abandoned  running (re-measure)
 - `reference/playbook.md` — 実験パターンカタログ
 - `reference/rubric.md` — 優先順位評価軸
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM の完全な定義
-- `.Codex/scripts/lib/experiments-state.mjs` — state 実装
-- `.Codex/scripts/lib/metrics-reader.mjs` — 計測実装
+- `.claude/scripts/lib/experiments-state.mjs` — state 実装
+- `.claude/scripts/lib/metrics-reader.mjs` — 計測実装

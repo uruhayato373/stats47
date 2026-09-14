@@ -273,5 +273,5 @@ GES は WebGL ベースの SPA のため、`state` で取得できる要素が�
 
 - ESP 生成: `apps/ges/scripts/generate-port-projects.ts`
 - 都道府県版 ESP 生成: `apps/ges/scripts/generate-projects.ts`
-- browser-use パターン: `.Codex/agents/browser-publisher.md`
-- TikTok 自動投稿（類似パターン）: `.Codex/skills/sns/publish-tiktok/SKILL.md`
+- browser-use パターン: `.claude/agents/browser-publisher.md`
+- TikTok 自動投稿（類似パターン）: `.claude/skills/sns/publish-tiktok/SKILL.md`

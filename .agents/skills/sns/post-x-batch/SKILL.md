@@ -11,9 +11,9 @@ primary_agent: x-strategist
 `scheduled_at` 付き) で積む。**このスキルは投稿しない** — 投稿は別途ローカルで
 `publish-x --from-queue` が消化する (クラウド生成 → ローカル投稿の受け渡しは posts.json のみ)。
 
-> **型・画像・頻度の SSOT は `.Codex/rules/sns-content-standards.md`** (§1 quota / §2-0 templates /
+> **型・画像・頻度の SSOT は `.claude/rules/sns-content-standards.md`** (§1 quota / §2-0 templates /
 > §2-8 相性 / §2-9 画像)。本スキルはテンプレ本文を持たず、必ずそこを参照する。カタログは
-> `.Codex/scripts/lib/x-catalog.cjs` が機械参照する。
+> `.claude/scripts/lib/x-catalog.cjs` が機械参照する。
 
 ## 引数
 
@@ -33,7 +33,7 @@ primary_agent: x-strategist
 ### ① 候補選定 (決定的)
 
 ```bash
-node .Codex/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [--start YYYY-MM-DD]
+node .claude/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [--start YYYY-MM-DD]
 # → .local/r2/sns/_queue/candidates.json
 ```
 
@@ -41,8 +41,11 @@ node .Codex/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [-
 - 公開済み ranking キー ∩ metric 索引を母集団に、季節性 (当月テーマ語)・category ローテ・
   dedup (同 key 30日 / 同 key×template 90日) で決定的にスコア → 上位 N 件を選定。
 - 各候補に §2-8 相性表で `template` (§2-0) を割付、§1 quota (1 日上限) を守って `scheduledAt` を割付。
-- 出力の各要素: `{ key, domain, category, title, unit, template, imageKind, scheduledAt, structure, charMax }`。
+- 出力の各要素: `{ key, domain, category, title, readerLabel, hook, unit, template, imageKind, scheduledAt, structure, charMax }`。
   **キャプションは無い** (③で書く)。
+- `readerLabel` は読者向けの平易な呼び方、`hook` はサイトが同じ指標に使っている問いかけ
+  (正典は metric config の導出規則。`build-discovery-index.ts` が解決する)。
+  **指標の呼び方はこの 2 つを使い、`title` の調査名をそのまま本文に書かない**。
 
 ### ② 画像バッチ (決定的)
 
@@ -51,7 +54,7 @@ node .Codex/skills/sns/post-x-batch/scripts/select-candidates.cjs --count <N> [-
 ```bash
 # candidates.json の key ごとに (ranking-card):
 node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>x.imageKind==="ranking-card").forEach(x=>console.log(x.key))' \
-  | while read k; do npx tsx .Codex/scripts/sns/quick-still.ts --key "$k"; done
+  | while read k; do npx tsx .claude/scripts/sns/quick-still.ts --key "$k"; done
 ```
 
 - 出力は §2-9 の out_path (`.local/r2/sns/ranking/<key>/x/stills/<key>.png`)。publish-x が読む正典パス。
@@ -68,10 +71,14 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
 - **型は §2-0 の該当 `template` の `structure` に従う** (本スキルに型本文は無い。rules を読む)。
 - **数値は R2 の実データのみ** (quick-still の出力 `caption.txt` / `source.json` に上位5・下位5・倍率がある)。
   推測値を書かない (`evidence-based-judgment.md`)。
+- **指標の呼び方は `readerLabel` / `hook`**。「牛肉消費支出額」ではなく「牛肉への支出」と書く。
+  `hook` は 47 都道府県の並びを問う汎用文なので、そのまま 1 行目にせず語彙を揃える参考にする
+  (`quick-still` が出す `caption.txt` の見出しは `hook` を使った既定案)。
+  正式な統計名は出典に触れるときだけ使う。
 - **URL は書かず `{{url}}` トークンを 1 個だけ置く** (register が §4 の UTM URL に決定的置換する。URL を
   LLM が書くと捏造・UTM 不整合になる)。
 - **ハッシュタグ 3-5 個**。本文 (URL・改行除く) は `charMax` 以下。
-- **勝ちパターンを反映**: `.Codex/state/sns/x-winning-patterns.json` があれば、confidence hi/mid の
+- **勝ちパターンを反映**: `.claude/state/sns/x-winning-patterns.json` があれば、confidence hi/mid の
   featureSignal (効く template / フック) を優先する (無ければ §2-8 相性の既定でよい)。
 - 既存・同バッチと似すぎない (④の類似度ゲートで弾かれる)。
 
@@ -87,7 +94,7 @@ captions.json の 1 要素例:
 ### ④ lint ゲート (決定的)
 
 ```bash
-node .Codex/skills/sns/post-x-batch/scripts/lint-x-captions.cjs --in .local/r2/sns/_queue/captions.json
+node .claude/skills/sns/post-x-batch/scripts/lint-x-captions.cjs --in .local/r2/sns/_queue/captions.json
 ```
 
 - 検査: 文字数 (≤ charMax) / ハッシュタグ 3-5 / `{{url}}` ちょうど 1・生 URL 禁止 / NG 語 / 既存・同バッチ類似度 < 0.8。
@@ -97,9 +104,9 @@ node .Codex/skills/sns/post-x-batch/scripts/lint-x-captions.cjs --in .local/r2/s
 
 ```bash
 # まず dry-run で確認
-node .Codex/skills/sns/post-x-batch/scripts/register-drafts.cjs --in .local/r2/sns/_queue/captions.json --dry-run
+node .claude/skills/sns/post-x-batch/scripts/register-drafts.cjs --in .local/r2/sns/_queue/captions.json --dry-run
 # 問題なければ本登録
-node .Codex/skills/sns/post-x-batch/scripts/register-drafts.cjs --in .local/r2/sns/_queue/captions.json
+node .claude/skills/sns/post-x-batch/scripts/register-drafts.cjs --in .local/r2/sns/_queue/captions.json
 ```
 
 - `{{url}}` を §4 UTM URL に置換し、`store.insert` で `status=draft` (`template` / `scheduled_at` /
@@ -110,9 +117,9 @@ node .Codex/skills/sns/post-x-batch/scripts/register-drafts.cjs --in .local/r2/s
 生成した draft は **ローカルで** 消化する:
 
 ```bash
-node .Codex/scripts/sns/check-x-post-budget.cjs          # 週次の残枠を確認
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts --from-queue --dry-run   # 初回必須 (予約モード確認)
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts --from-queue             # 予約投稿 → status=scheduled
+node .claude/scripts/sns/check-x-post-budget.cjs          # 週次の残枠を確認
+npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue --dry-run   # 初回必須 (予約モード確認)
+npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue             # 予約投稿 → status=scheduled
 ```
 
 ## 完了報告 (Output Contract)
@@ -122,9 +129,9 @@ npx tsx .Codex/skills/sns/publish-x/publish-x.ts --from-queue             # 予�
 
 ## 関連
 
-- 型・画像・頻度 SSOT: `.Codex/rules/sns-content-standards.md` §1/§2
-- カタログ API: `.Codex/scripts/lib/x-catalog.cjs`
-- 画像最短経路: `.Codex/scripts/sns/quick-still.ts`
-- 投稿 (ローカル): `.Codex/skills/sns/publish-x/`
-- 勝ちパターン: `.Codex/scripts/sns/analyze-x-winning-patterns.mjs` → `.Codex/state/sns/x-winning-patterns.json`
-- オーナー agent: `.Codex/agents/x-strategist.md`
+- 型・画像・頻度 SSOT: `.claude/rules/sns-content-standards.md` §1/§2
+- カタログ API: `.claude/scripts/lib/x-catalog.cjs`
+- 画像最短経路: `.claude/scripts/sns/quick-still.ts`
+- 投稿 (ローカル): `.claude/skills/sns/publish-x/`
+- 勝ちパターン: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `.claude/state/sns/x-winning-patterns.json`
+- オーナー agent: `.claude/agents/x-strategist.md`

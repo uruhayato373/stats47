@@ -9,7 +9,7 @@ primary_agent: instagram-strategist
 > **⚠️ ARCHIVED (2026-07-04)**: browser-use 経由の MBS 予約は GHA cron `post-instagram-scheduled.yml`
 > (`generate-instagram-schedule` → `post-from-schedule.cjs`) と二重で脆弱なため退役。IG 予約は
 > `/generate-instagram-schedule` で schedule を生成し GHA に投稿を委ねる。正典は
-> `.Codex/rules/sns-content-standards.md`。復活する場合はこのバナーを外して skills/sns/ に戻す。
+> `.claude/rules/sns-content-standards.md`。復活する場合はこのバナーを外して skills/sns/ に戻す。
 
 Playwright（永続プロファイル）で Meta Business Suite (https://business.facebook.com) を自動操作し、Instagram の予約投稿を設定する。
 
@@ -53,11 +53,11 @@ MBS の UI は publish-x の X UI と同様に変わりやすい。**「予約�
 
 ```bash
 # 1 件 dry-run（初回検証）
-npx tsx .Codex/skills/sns/schedule-instagram-mbs/schedule-instagram-mbs.ts \
+npx tsx .claude/skills/sns/schedule-instagram-mbs/schedule-instagram-mbs.ts \
   fiscal-strength-index-prefecture 2026-04-28T09:00 --domain bar-chart-race --type reels --dry-run
 
 # 本番予約 6 件
-npx tsx .Codex/skills/sns/schedule-instagram-mbs/schedule-instagram-mbs.ts \
+npx tsx .claude/skills/sns/schedule-instagram-mbs/schedule-instagram-mbs.ts \
   fiscal-strength-index-prefecture 2026-04-28T09:00 \
   local-tax-ratio-pref-finance 2026-04-30T09:00 \
   welfare-expenditure-ratio-pref-finance 2026-05-03T09:00 \

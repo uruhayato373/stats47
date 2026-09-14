@@ -526,10 +526,53 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
 #### デプロイ後の停止条件・判定手順
 
 1. ~~通常HTMLを同一coloで2回取得し、2回目がWorkers Cache HITかつwarm TTFBがbefore 924msより改善。~~ 完了。
-2. ~~同じURLへRSC header付きで取得し、`text/x-component` + `private, no-store`。HTMLと混ざらない。~~ 完了。
+2. ~~同じURLへRSC header付きで取得し、`text/x-component` + `private, no-store`。HTMLと混ざらない。~~
+   **2026-09-07 に取り消し。下記「RSC分離の欠落」を参照。**
 3. blog exact URL公開とsnapshot全更新を各1回実走し、purge直後に新内容が返る。
 4. 2026-08-23以降、日次PSI 7点でLCP/TTFB回帰が無いことを確認し、数値目標を先に固定してから
    `effect/full|partial|none`を判定する。
+
+#### 2026-09-07 RSC分離の欠落（middlewareはflightヘッダーを観測できない）
+
+- **実測**: `curl -H 'RSC: 1' https://stats47.jp/` は `text/x-component` を返しながら
+  `Cache-Control: public, max-age=0, must-revalidate` + `Cache-Tag: stats47-html,stats47-path:%2F`
+  + `Cloudflare-CDN-Cache-Control: public, max-age=86400,...` を付けていた。`/` と
+  `/ranking/total-population` の両方で再現。
+- **原因**: `next/dist/server/web/adapter.js` が `NextRequest` を組み立てる直前に `FLIGHT_HEADERS`
+  (`rsc` / `next-router-state-tree` / `next-router-prefetch` / `next-hmr-refresh` /
+  `next-router-segment-prefetch`) を `requestHeaders.delete()` する。よって **middleware の
+  `req.headers` に RSC ヘッダーは存在しない**。`shouldBypassPageCache` は同じ関数でも、
+  raw request を持つ `worker-cache-gateway.ts` では true、middleware では false になる。
+  header 別 probe で切り分け済み: `authorization` / `__prerender_bypass` / **`next-url`** は
+  `private, no-store` になり、`rsc` / `next-router-*` / `x-nextjs-data` だけが素通りする
+  (`next-url` は `FLIGHT_HEADERS` に含まれないため middleware でも読める)。
+  `x-nextjs-data` は別機構で、`dist/server/lib/server-ipc/utils.js` の `INTERNAL_HEADERS`
+  (外部 request から honor しないヘッダー) に入っているため落ちる。
+- **regression ではない**: `cache-policy.ts` と `worker-cache-gateway.ts` は 2026-08-16 の
+  `cc67d5264` から byte 一致で、middleware の cache ブロックも quote 差のみ。next は 15.5.23 →
+  15.5.24 に上がっているが、**15.5.23 の adapter も同一の削除を行う** (tarball を取得して確認)。
+  つまり header だけの RSC request では最初から通っていなかった。
+  2026-08-16 の判定 2 が通ったのは、実ブラウザの prefetch が常に `Next-Url` を送るためと考えられる
+  (`create-initial-router-state.js` の `nextUrl` は `location.pathname` に fallback するので必ず truthy)。
+  記録された curl 再現コマンドには `Next-Url` が無く、実行結果と一致しない。
+- **実被害の範囲**: 本番 probe では RSC 応答に `CF-Cache-Status` が付かず、RSC を 2 回叩いた直後の
+  通常 HTML も `MISS` のままだった。Cloudflare は現状 `text/x-component` を保存していない。
+  実ブラウザは `Next-Url` を送るので no-store 側に落ちる。したがって**現時点で誤配信は観測されず、
+  Cloudflare 側の挙動に依存した潜在的な契約違反**として扱う。なぜ Cloudflare が RSC 応答を
+  cache lookup すらしないのかは未特定 (zone の Cache Rule を確認できていない)。
+- **修正**: 判定の権威を gateway へ移した。`enforcePageCacheBypass(request, response)` を
+  `cache-policy.ts` に追加し、`worker-cache-gateway.ts` の出口で必ず通す。判定は
+  ①raw header に flight ヘッダーがある ②応答の Content-Type が `text/x-component` の OR で、
+  該当すれば `private, no-store` + `Vary: RSC,...` に置換し `Cloudflare-CDN-Cache-Control` と
+  `Cache-Tag` を削除する。通常 HTML は同一オブジェクトのまま素通しでコスト 0。
+  middleware 側は Next.js の仕様上これ以上判定できないため変更しない。
+- **なぜ既存テストで落ちなかったか**: `cache-policy.test.ts` は合成 `Request` に `RSC: 1` を
+  直接載せていた。Next.js の削除は実 middleware 実行時にしか起きないので、**本番で起こり得ない
+  入力を検証していた**。新テストは `NEXT_FLIGHT_REQUEST_HEADERS` を使って削除を再現し、
+  middleware 単体では public になることを明示したうえで、gateway 通過後に no-store になることを固定する。
+- **機械検証**: `cache-policy.test.ts` + `workers-cache-contract.test.ts` + `middleware.test.ts`
+  で 98 件 pass、`apps/web` type-check 0 error。ゲート自体の感度も実測した —
+  `enforcePageCacheBypass` を no-op 化すると 7 件、gateway の呼び出しを外すと契約テスト 1 件が落ちる。
 
 #### 今回有効化しないCloudflare設定
 
@@ -542,3 +585,59 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
 - **判定**: `effect/pending`。実装、deploy、private/RSC分離、warm HIT、単発lab afterまでは完了。
   ただし`insufficient-sample`（after 1点）と`insufficient-target`（効果ラベル用の数値目標未固定）を
   guardとして宣言し、field効果はまだ推論しない。残りは公開Workflowの実purge 1回と日次PSI 7点。
+
+## [TRIAGE-2026-09-07] Due 超過施策の実測確定 (improvement-triage)
+
+期日到達済み performance 系施策を本番 curl / PSI history / GA4 API で実測して確定した。
+
+- **PERF-RANKING-PAYLOAD-01 → effect/full 確定**: 本番 `curl -A Googlebot https://stats47.jp/ranking/total-population`
+  実測 (2026-09-07) で非圧縮 HTML **232,847 bytes** (baseline 1,232,628 bytes = **81.1% 削減**、
+  目標 50% を大幅超過・理論値 82% にほぼ一致)。`/prefecture.topojson` (public origin) は 200 /
+  `Content-Length: 1015004` / `CF-Cache-Status: HIT` で正常配信を確認。完了条件達成。
+
+- **PERF-AREA-DOM-01 → effect/full 確定 (計測手段は代替)**: `/areas/13000` 本番 HTML (2026-09-07取得)
+  を実測すると nav 要素 9 個・`/ranking/` リンク合計 121 本 (平均 13.4/nav、目標 12/nav に近い) で
+  「1 nav に子要素 873 個」の肥大は解消していることを確認。生 HTML のタグ総数も 1,991 (raw grep) で
+  大幅減。**ただし完了条件で指定していた Lighthouse `dom_size` 経由の自動検証は不能と判明** —
+  `.claude/state/metrics/psi/psi-batch-*.json` を 2026-08-05〜09-06 の全 37 batch で確認したところ
+  `dom_size` が**常に null**（一度も実データが入っていない）。実装済みの nav 制限自体は本番実測で
+  裏取りできたため本行は完了とするが、`dom_size` collector 自体の不具合は別課題として起票する
+  (`fetch-psi-audit.mjs` の `extractDomSize` が本番 Lighthouse レスポンスから値を取れていない)。
+
+- **A11Y-AREA-CONTRAST-01 → effect/full 確定**: 日次 PSI 最新 5 batch (2026-09-02〜09-06)
+  `psi-batch-*.json` で `/areas/13000` mobile/desktop とも `scores.accessibility: 100`
+  (before 97、目標「contrast 違反 0」達成)。本番 HTML (2026-09-07取得) でも
+  `text-blue-700 dark:text-blue-400` クラスと「男性」「女性」ラベルの存在を確認。完了条件達成。
+
+- **PERF-RANKING-LCP-02 → 完了条件未達 (要因の一次診断つき)**: `.claude/state/metrics/psi/history.csv`
+  の `ranking/total-population,mobile` 直近 3 週 (08-23〜09-06) の LCP は 10,936〜13,841ms
+  (平均約 12,300ms) で、baseline 9,347ms (2026-08-04) より **悪化 (+約 32%)**。最新 batch
+  (2026-09-06) の `lcp_element` を実測すると LCP 要素は依然 Leaflet タイル
+  (`/tiles/light_all/5/28/12@2x.png`、fetchpriority=high 設定は生きている) だが、
+  breakdown が `resourceLoadDelay: 3,059ms` / `TTFB: 1,554ms` と大きく、タイル取得開始自体が
+  遅延している。**[仮説・未検証]** 同時期にデプロイした PERF-RANKING-PAYLOAD-01
+  (topology をクライアント `useEffect` fetch へ変更) がハイドレーション後の直列処理を増やし、
+  Leaflet 初期化 → タイル要求の開始を遅らせている可能性がある。優先度設定 (fetchpriority=high) 自体は
+  効いていないという意味ではなく、**その手前の遅延**が支配的。この行は「baseline からの改善」という
+  完了条件を満たさなかったため確定し、原因調査は別タスクへ引き継ぐ。
+
+- **PERF-WORKERS-CACHE-01 → 部分回帰を検出 (完了条件未達)**: 2026-08-16 verified 時点では
+  RSC request が `private, no-store` / `CF-Cache-Status`・`Age` なしだったが、**2026-09-07 に同じ
+  再現コマンド** (`curl -H 'RSC: 1' -H 'Next-Router-Prefetch: 1' -H 'Next-Router-State-Tree: ...'
+  https://stats47.jp/` および `.../ranking/total-population`) で再実行すると、応答は
+  `Cache-Control: public, max-age=0, must-revalidate` / `Vary: Accept-Encoding` (HTML と同一) /
+  `cache-tag: stats47-html,stats47-path:...` / `cloudflare-cdn-cache-control: public, max-age=86400,...`
+  を返し、通常 HTML と同じ共有キャッシュ扱いになっている (`Content-Type: text/x-component` は正しく
+  RSC ペイロードなので、Worker/middleware 自体はリクエストに到達し RSC と判定しているが、
+  `apps/web/src/lib/cache-policy.ts` の `resolvePageCacheHeaders`/`isRscRequest` が期待どおりの
+  `PRIVATE_PAGE_CACHE_CONTROL` を返していない)。コード自体 (`isRscRequest` の `RSC_REQUEST_HEADERS`)
+  は正しく実装されているように見えるため、デプロイされているビルドとの乖離、または middleware 実行順の
+  別要因が疑われる。「blog exact URL公開とsnapshot全更新を各1回実走し、purge直後に新内容が返る」の
+  停止条件は未検証のまま、この RSC/HTML 分離の回帰が優先度の高い課題として見つかった。原因調査・修正は
+  別タスクへ引き継ぐ (production の RSC prefetch がキャッシュされることで stale/誤配信のリスクがある)。
+
+- **DEPS-MAJOR-SECURITY-01 → 解消済み確定**: `gh api repos/uruhayato373/stats47/dependabot/alerts
+  --paginate` (2026-09-07実行) で全 198 件の alert が `fixed` (196) / `auto_dismissed` (2) のみ、
+  `open` 状態は **0 件**。ローカル `npm audit` (dev込み) も moderate 4 件 (qs パッケージ由来、fix
+  available) のみで critical/major は残存しない。当時記録された「Dependabot 残 76 件・critical 19」は
+  すでに Dependabot 自身の自動 PR/security update で解消されていた。完了条件達成。
