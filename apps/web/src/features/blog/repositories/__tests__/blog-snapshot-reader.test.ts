@@ -267,3 +267,33 @@ describe('readArticleSummariesBySurveyIdFromR2', () => {
     ]);
   });
 });
+
+describe('readArticleSummariesByTagKeysFromR2', () => {
+  it('複数タグを1回のsnapshot取得で集約し、タグ順・重複除去・上限を守る', async () => {
+    loadSnapshot.mockResolvedValueOnce({
+      ...SNAPSHOT,
+      articles: [
+        {
+          ...article('both', '2026-05-01'),
+          tags: [{ tagKey: 'population' }, { tagKey: 'economy' }],
+        },
+        { ...article('economy', '2026-04-01'), tags: [{ tagKey: 'economy' }] },
+        article('population', '2026-03-01'),
+      ],
+    });
+    const { readArticleSummariesByTagKeysFromR2 } = await importReader();
+
+    const articles = await readArticleSummariesByTagKeysFromR2(
+      ['population', 'economy'],
+      3,
+      2
+    );
+
+    expect(loadSnapshot).toHaveBeenCalledTimes(1);
+    expect(articles.map((item) => item.slug)).toEqual([
+      'both',
+      'population',
+      'economy',
+    ]);
+  });
+});

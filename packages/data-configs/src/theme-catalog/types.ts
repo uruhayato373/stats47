@@ -47,6 +47,21 @@ export const CATALOG_COMPONENT_TYPES = [
 
 export type CatalogComponentType = (typeof CATALOG_COMPONENT_TYPES)[number];
 
+/**
+ * 指標の採用基準 (代表性・比較可能性・補完性・データ品質・読者への有用性)。
+ * `.claude/rules/theme-catalog-standards.md` §4 の採用基準に対応する controlled vocabulary。
+ * 定型文で埋めず、実際に満たす基準だけを列挙する (満たさない基準を書かない)。
+ */
+export const ADOPTION_CRITERIA = [
+  'representativeness', // 代表性: テーマの主要な問いを直接表す
+  'comparability', // 比較可能性: 都道府県間・時系列で同一基準で比較できる
+  'complementarity', // 補完性: 他の採用指標と異なる角度を補う
+  'dataQuality', // データ品質: 欠損・改定が少なく信頼できる
+  'readerValue', // 読者への有用性: 読者の意思決定に直接役立つ
+] as const;
+
+export type AdoptionCriterion = (typeof ADOPTION_CRITERIA)[number];
+
 /** 指標選定の根拠 (白書・調査由来)。新規追加指標では必須 (validator warn)。 */
 export interface MetricSelection {
   /** 提案元 (白書名 / 調査名 / 競合ダッシュボード名) */
@@ -57,6 +72,15 @@ export interface MetricSelection {
   surveyedAt: string;
   /** 採用理由 (なぜこのテーマにこの指標が要るか) */
   rationale: string;
+  /**
+   * この指標が満たす採用基準 (複数可)。根拠不足なら書かず採用を保留する
+   * (validator は空でも error にしない。定型的に全項目を埋めることを防ぐため warn に留める)。
+   */
+  adoptionCriteria?: AdoptionCriterion[];
+  /** 読者がこの指標に尋ねる具体的な問い (section/evidenceTopics の問いより指標1件に絞った粒度)。 */
+  readerQuestion?: string;
+  /** 対象読者、またはこの指標が支える意思決定 (例: "地方移住を検討する読者の家計試算")。 */
+  targetReaderOrDecision?: string;
 }
 
 /** カタログ内の 1 指標。IndicatorSet.metrics の 1 エントリに対応。 */
@@ -102,6 +126,19 @@ export interface CatalogChart {
    */
   section?: string | null;
   sortOrder: number;
+  /**
+   * 何と比べる可視化か (例: "全国平均との差", "前年との時系列推移", "他都道府県との横断比較")。
+   * `annotation` (誤読防止の注釈) とは役割が異なり、比較対象そのものを短く記録する。
+   * area-databook の `compareNationalAvg` (boolean) と違い、テーマのチャートは比較対象が
+   * 多様なため自由記述にする。省略可 (単一指標の単純表示など比較が無いチャートもある)。
+   */
+  comparisonBasis?: string;
+  /**
+   * なぜこの componentType / レイアウトを選んだか (社内向け根拠・監査用)。
+   * ★読者向け UI には絶対に描画しない (componentType から説明文を自動生成しない、という
+   * 既存禁止パターンと対になる内部フィールド)。admin のカタログ監査画面だけが表示する。
+   */
+  visualizationRationale?: string;
 }
 
 /**
@@ -190,6 +227,26 @@ export function normalizeUnitForAxis(unit: string): string {
   return unit.normalize('NFKC').trim();
 }
 
+/**
+ * HARM (Health / Ambition / Relation / Money)。共通事業方針の正本は Obsidian vault、
+ * 配布版は `.claude/shared-policy/POLICY.md`、stats47 固有の適用は
+ * `.claude/shared-policy/application.json`。定義自体はここに複製せず、軸の識別子だけを持つ。
+ */
+export const HARM_AXES = ['health', 'ambition', 'relation', 'money'] as const;
+
+export type HarmAxis = (typeof HARM_AXES)[number];
+
+/**
+ * テーマが読者のどの悩み・目標に関係するか (企画・テーマ側で管理する任意メタデータ)。
+ * 複数該当・該当なしを許容し、全テーマ・全指標に強制しない (POLICY.md の判断の問い #2 に対応)。
+ * 「該当するだけで収益性がある」と判断しないための reason 必須 — 分類だけの記録を禁止する。
+ */
+export interface HarmRelevance {
+  axis: HarmAxis;
+  /** なぜこの軸に該当するか (読者の具体的な悩み・意思決定に紐づける。分類だけの記録は不可)。 */
+  reason: string;
+}
+
 /** テーマ 1 件の統合カタログ (指標選定 + チャート割当 + 選定根拠)。 */
 export interface ThemeCatalog {
   key: string;
@@ -216,4 +273,11 @@ export interface ThemeCatalog {
   relatedArticleTagKeys?: string[];
   /** 不採用にした候補指標の記録 (再調査防止) */
   rejectedCandidates?: Array<{ rankingKey: string; reason: string }>;
+  /**
+   * このテーマが関係する HARM 軸 (任意・複数可)。UI には描画しない — 企画側が
+   * 「次に見せる自然な収益導線」を判断するための内部メタデータ (admin のカタログ監査画面が表示)。
+   * `/themes/*` は収益化より深掘り導線を優先する面のため (収益化戦略 §4)、ここでの分類が
+   * 直接 UI の広告枠を増減させることはない。
+   */
+  harmRelevance?: HarmRelevance[];
 }

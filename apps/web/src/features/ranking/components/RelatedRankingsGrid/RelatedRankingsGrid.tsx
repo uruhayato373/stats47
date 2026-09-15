@@ -3,7 +3,7 @@ import Link from "next/link";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
 
-import { SurfaceCard, SurfaceLinkCard } from "@/components/surface";
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/server";
 
@@ -45,7 +45,7 @@ export async function RelatedRankingsGrid({
   if (items.length === 0) return null;
 
   return (
-    <SurfaceCard className="p-0">
+    <section>
       <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
         <div className="flex items-center gap-2">
           <ListOrdered className="h-4 w-4 text-muted-foreground" />
@@ -90,6 +90,6 @@ export async function RelatedRankingsGrid({
           })}
         </div>
       </div>
-    </SurfaceCard>
+    </section>
   );
 }

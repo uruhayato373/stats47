@@ -26,7 +26,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "symbols",
       kind: "symbols",
       title: "県のシンボル",
-      sortOrder: 5,
+      sortOrder: 150,
       blocks: [{ blockType: "symbol-card", blockKey: "symbols-card" }],
     },
     /* ① 特産品 -------------------------------------------------------- */
@@ -35,7 +35,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       kind: "specialties",
       title: "特産品",
       description: "県を代表する農水産物・加工品",
-      sortOrder: 8,
+      sortOrder: 160,
       blocks: [{ blockType: "specialty-list", blockKey: "specialties-list" }],
     },
     /* ② 農業生産 ------------------------------------------------------ */
@@ -43,7 +43,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "agriculture",
       kind: "agriculture",
       title: "農業生産",
-      sortOrder: 10,
+      sortOrder: 120,
       blocks: [
         { blockType: "agri-top10", blockKey: "agri-top10" },
         {
@@ -70,7 +70,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "food",
       kind: "food",
       title: "県の食",
-      sortOrder: 20,
+      sortOrder: 130,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -99,7 +99,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "civic-population",
       kind: "civic-population",
       title: "人口・世帯",
-      sortOrder: 30,
+      sortOrder: 10,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -229,7 +229,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "civic-living",
       kind: "civic-living",
       title: "暮らし",
-      sortOrder: 40,
+      sortOrder: 30,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -264,7 +264,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "civic-economy",
       kind: "civic-economy",
       title: "経済・雇用",
-      sortOrder: 50,
+      sortOrder: 20,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -330,7 +330,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "civic-industry",
       kind: "civic-industry",
       title: "産業",
-      sortOrder: 60,
+      sortOrder: 50,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -354,7 +354,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "household",
       kind: "household",
       title: "世帯",
-      sortOrder: 70,
+      sortOrder: 60,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -488,7 +488,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       kind: "education-facility",
       title: "学校・施設",
       description: "人口 10 万人当たりの施設数など",
-      sortOrder: 120,
+      sortOrder: 70,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -526,7 +526,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       kind: "consumption",
       title: "消費",
       description: "県庁所在市の 1 世帯当たり年間支出",
-      sortOrder: 130,
+      sortOrder: 140,
       blocks: [
         {
           blockType: "ranked-kpi-grid",
@@ -576,7 +576,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "safety-living",
       kind: "civic-living",
       title: "安全・くらし",
-      sortOrder: 140,
+      sortOrder: 40,
       blocks: [
         {
           blockType: "chart",

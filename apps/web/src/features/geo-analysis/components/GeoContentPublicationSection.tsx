@@ -7,7 +7,7 @@ import {
 } from '@stats47/gis';
 
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard, SurfaceSection } from '@/components/surface';
+import { SurfaceCard } from '@/components/surface';
 
 import { geoAnalysisPublicDataUrl } from '../lib/load-geo-analysis-evidence';
 
@@ -29,7 +29,7 @@ export function GeoContentPublicationSection({
   const detailKey = geoAnalysisPrefKey(slug, prefCode2);
 
   return (
-    <SurfaceSection id="article-data" className="mt-6 scroll-mt-24">
+    <section id="article-data" className="mt-6 scroll-mt-24">
       <SectionHeader
         title="再現・検証データ"
         description="結論だけでなく、入力、空間処理、県別途中データ、保存則を同じ分析の証拠として公開しています。"
@@ -146,6 +146,6 @@ export function GeoContentPublicationSection({
           ))}
         </ol>
       </details>
-    </SurfaceSection>
+    </section>
   );
 }

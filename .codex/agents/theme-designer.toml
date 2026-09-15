@@ -9,7 +9,12 @@ developer_instructions = '''
 > **`packages/data-configs/src/theme-catalog/<key>.ts` (`ThemeCatalog`) が唯一の SSOT**。IndicatorSet TS と
 > page-components JSON は**そこからの生成物 (手編集禁止)**。指標選定 + チャート割当 + 選定根拠 (selection) を
 > この 1 ファイルで編集し `npm run generate:catalog` → `validate:catalog` する。
-> 規約: `.claude/rules/theme-catalog-standards.md`。調査・提案の前段は `theme-researcher` が担い、採択分を本 agent がカタログ化する。
+> **2026-09-15 追加フィールドも本 agent が編集する**: `selection.adoptionCriteria`(採用基準) /
+> `selection.readerQuestion` / `selection.targetReaderOrDecision`、`charts[].comparisonBasis` /
+> `charts[].visualizationRationale`、`ThemeCatalog.harmRelevance` (HARM該当・任意)。
+> いずれも読者向け UI には描画しない内部メタデータで、`/quality/catalog-audit` が監査表示する。
+> 定型文で埋めず、根拠不足なら未記入のまま採用を保留してよい (validator は warn に留める)。
+> 規約: `.claude/rules/theme-catalog-standards.md` §4/§4.7/§4.8。調査・提案の前段は `theme-researcher` が担い、採択分を本 agent がカタログ化する。
 
 ## 担当範囲
 
@@ -209,7 +214,10 @@ export const <THEME>_CATALOG: ThemeCatalog = {
   category: "<primary-category>", usage: "theme",
   metrics: [
     { rankingKey: "...", shortLabel: "...", role: "primary",
-      selection: { proposedBy: "<白書/調査>", sourceUrl: "https://...", surveyedAt: "2026-..", rationale: "..." } },
+      selection: { proposedBy: "<白書/調査>", sourceUrl: "https://...", surveyedAt: "2026-..", rationale: "...",
+        adoptionCriteria: ["representativeness", "readerValue"], // 満たす基準だけ列挙 (任意)
+        readerQuestion: "指標1件に絞った読者の問い (任意)",
+        targetReaderOrDecision: "対象読者/支える意思決定 (任意)" } },
     { rankingKey: "...", shortLabel: "...", role: "secondary" },
     { rankingKey: "...", shortLabel: "...", role: "context" },
   ],
@@ -217,8 +225,10 @@ export const <THEME>_CATALOG: ThemeCatalog = {
     { componentKey: "...", componentType: "line-chart", title: "...",
       componentProps: { estatParams: [/* metric source から転記 */], labels: ["..."], seriesColors: ["#3b82f6"] },
       relatedRankingKeys: ["..."], annotation: "必要な場合だけ", sourceName: "...",
-      gridColumnSpan: 12, dataSource: "ranking", sortOrder: 0 },
+      gridColumnSpan: 12, dataSource: "ranking", sortOrder: 0,
+      comparisonBasis: "何と比べる可視化か (任意)", visualizationRationale: "componentType選定理由 (任意・内部監査用)" },
   ],
+  // harmRelevance: [{ axis: "money", reason: "具体的な読者の悩み・意思決定に紐づける (任意・複数可)" }],
   evidenceTopics: [
     { key: "...", lensKey: "regional-access", title: "...", question: "...", summary: "...",
       sourceKeys: ["..."], relatedRankingKeys: ["..."], relatedChartKeys: ["..."],

@@ -1,20 +1,27 @@
-name: 🧮 Enumerate SSDS Indicators
+name: 🧮 Enumerate SSDS Indicators (weekly)
 
 # SSDS (社会・人口統計体系) 都道府県テーブルの全 cat01 を列挙し、既存 config と突合して
-# 未使用 cdCat01 = クリーンに追加できるランキング候補を洗い出す。read-only。
-# e-Stat APP_ID は CI 専任。専用ブランチ estat-ssds-run への push で発火 (main デプロイ不要)。
+# 未使用 cdCat01 = クリーンに追加できるランキング候補を洗い出す。read-only (R2/D1 非書込)。
+# e-Stat APP_ID は CI 専任。
+#
+# 2026-07-27 に一度手動で生成した .claude/state/estat/ssds-candidates.json (4,114 件) が
+# 更新の仕組みを持たず陳腐化していたため、週次 cron で自動更新するようにした。
+# 「データを取得するか」とは独立に「どんな指標が存在するか」を安く俯瞰するための発見カタログで、
+# ranking-expander 等の候補選定インプットになる (実データ投入は data-ingester に委譲)。
 
 on:
+  schedule:
+    - cron: "30 20 * * 6" # 土 20:30 UTC = 日 05:30 JST (estat-year-coverage-audit 20:00 の後、非重複)
   workflow_dispatch:
   push:
-    branches: [estat-ssds-run]
+    branches: [estat-ssds-run] # cloud 環境で dispatch 不可のときの代替トリガー (branch-workflow.md)
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: estat-ssds
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
@@ -24,9 +31,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: 🧰 Checkout
+      - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
@@ -41,11 +49,15 @@ jobs:
       - name: 🧮 Enumerate SSDS cdCat01
         run: node .claude/scripts/estat/enumerate-ssds-indicators.mjs
 
-      - name: 📤 Upload candidates
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: ssds-candidates
-          path: .claude/state/estat/ssds-candidates*.json
-          retention-days: 30
-          if-no-files-found: warn
+      - name: 📤 Commit catalog to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/estat/ssds-candidates*.json
+          if git diff --cached --quiet; then
+            echo "No catalog changes"
+            exit 0
+          fi
+          git commit -m "chore(data): weekly SSDS indicator catalog refresh $(date -u +%Y-%m-%d) [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop

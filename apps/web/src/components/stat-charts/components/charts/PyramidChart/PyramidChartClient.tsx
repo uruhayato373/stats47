@@ -17,11 +17,13 @@ const PyramidChart = dynamic(
 interface PyramidChartClientProps {
   chartData: PyramidChartData[];
   year?: string;
+  unit?: string;
 }
 
 export const PyramidChartClient: React.FC<PyramidChartClientProps> = ({
   chartData,
   year,
+  unit,
 }) => {
   return (
     <div>
@@ -30,7 +32,7 @@ export const PyramidChartClient: React.FC<PyramidChartClientProps> = ({
           <span className="text-sm text-muted-foreground">{year}</span>
         </div>
       )}
-      <PyramidChart chartData={chartData} height={400} />
+      <PyramidChart chartData={chartData} height={400} unit={unit} />
     </div>
   );
 };

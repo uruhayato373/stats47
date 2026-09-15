@@ -150,11 +150,21 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
     sourceUrl: "https://www.meti.go.jp/report/...",// 出典 URL (evidence-based-judgment.md 準拠)
     surveyedAt: "2026-07-04",                      // 調査日
     rationale: "製造業の付加価値の地域偏在を示す主指標のため",
+    adoptionCriteria: ["representativeness", "readerValue"], // 採用基準 (下記)
+    readerQuestion: "この県のものづくりは全国でどの位置にあるか", // 指標1件に絞った読者の問い
+    targetReaderOrDecision: "立地・進学先を検討する読者の比較材料", // 対象読者/支える意思決定
   } }
 ```
 
 - **不採用にした候補は `rejectedCandidates` に残す** (`{ rankingKey, reason }`)。再調査の重複を防ぐ。
 - 出典は URL + アクセス日を必須とする (`.claude/rules/evidence-based-judgment.md`)。推測で「白書由来」と書かない。
+- **`adoptionCriteria` は採用基準の controlled vocabulary** (`ADOPTION_CRITERIA`、types.ts):
+  `representativeness`(代表性) / `comparability`(比較可能性) / `complementarity`(補完性) /
+  `dataQuality`(データ品質) / `readerValue`(読者への有用性)。**満たす基準だけを列挙する**
+  (定型的に全項目を埋めない)。validator は空でも error にしない (`[no-adoption-criteria]` warn) —
+  根拠不足なら記入せず採用を保留してよい。
+- **`readerQuestion` / `targetReaderOrDecision` は任意**。section/evidenceTopics の問いより
+  指標 1 件に絞った粒度で書く。読者向け本文にそのまま露出しない (内部の判断根拠)。
 
 ---
 
@@ -257,6 +267,46 @@ evidenceTopics: [
 
 ---
 
+## 4.7 チャートの比較対象・可視化選定理由 (`comparisonBasis` / `visualizationRationale`) — 2026-09-15 新設
+
+`CatalogChart` に監査・意味レビュー用の内部メタデータを持たせる。**どちらも読者向け UI には描画しない**
+(componentType から説明文を自動生成しない、という既存禁止パターンと対になる内部フィールド)。
+
+```ts
+{ componentKey: '...', componentType: 'line-chart', /* ... */,
+  comparisonBasis: '全国平均との差の時系列推移',       // 何と比べる可視化か (自由記述)
+  visualizationRationale: '傾きの変化が焦点のため折れ線を選定', // なぜこの componentType/レイアウトか
+}
+```
+
+- `comparisonBasis` は area-databook の `compareNationalAvg` (boolean) と役割は同じだが、テーマの
+  チャートは比較対象が多様 (前年比・他都道府県・他指標との相関等) なため自由記述にする。
+- `visualizationRationale` は admin のカタログ監査画面 (§8) だけが表示する。UI コンポーネントが
+  このフィールドを読んで描画することは禁止 (機械検査は該当なし。レビュー時に grep で確認する)。
+- どちらも省略可。単一指標の単純表示など比較や特筆すべき選定理由が無いチャートには書かない。
+
+## 4.8 HARM 該当 (`harmRelevance`) — 2026-09-15 新設
+
+テーマが読者のどの悩み・目標 (Health / Ambition / Relation / Money) に関係するかを、企画・テーマ側が
+任意で記録する。**HARM の定義自体はここに複製しない** — 正本は Obsidian vault、配布版は
+`.claude/shared-policy/POLICY.md`、stats47 固有の適用は `.claude/shared-policy/application.json`
+(規約は `.claude/rules/shared-business-policy.md`)。
+
+```ts
+harmRelevance: [
+  { axis: 'money', reason: '家計の可処分所得を比較し、家計や住まい選びの判断材料にする読者に関連する。' },
+]
+```
+
+- **複数該当・該当なしを許容し、全テーマに強制しない**。分類だけの記録 (reason 空欄) は validator
+  error で拒否する — 「該当するだけで収益性がある」と判断させないため。
+- `/themes/*` は収益化より深掘り導線を優先する面 (`docs/00_プロジェクト管理/02_収益化戦略.md` §4)。
+  ここでの分類は UI の広告枠を直接増減させない。admin のカタログ監査画面 (§8) が企画側の参照材料として表示する。
+- テーマ名から読者の購入意図を決めつけない。reason には具体的な読者の悩み・意思決定を書く
+  (POLICY.md の「判断の問い」に対応)。
+
+---
+
 ## 5. validator (`npm run validate:catalog`)
 
 決定的 lint `packages/data-configs/scripts/validate-theme-catalog.ts`。pre-commit + CI に配線済み。
@@ -271,6 +321,11 @@ evidenceTopics: [
 | **warn (metricGroups)**        | `[group-default-many]` 初期チェック 4 件以上 (mount 時にその数だけ時系列を取りに行く) / `[group-large]` 系列候補 9 件以上 / `[group-orphan]` 非 context 指標がどのグループにも未所属                                                                                                   |
 | **error (evidenceTopics)**     | source/lens 不在、key 重複、ranking 非実在・inactive、chart 非実在、theme 非実在・自己参照、tag/key 形式違反、公式 source が HTTPS でない                                                                                                                                              |
 | **warn (evidenceTopics)**      | ranking/theme/tag の内部導線が 1 件もない                                                                                                                                                                                                                                              |
+| **error (harmRelevance)**      | `[harm-axis]` axis が HARM_AXES 外 / `[harm-axis-dup]` 同一テーマ内で axis 重複 / `[harm-reason]` reason が空                                                                                                                                                                          |
+| **error (chart selection meta)** | `[comparison-basis]` / `[visualization-rationale]` — 指定時に空文字                                                                                                                                                                                                                 |
+| **warn (adoptionCriteria)**    | `[no-adoption-criteria]` primary/secondary で selection はあるが adoptionCriteria 未記入 (根拠不足なら記入せず保留してよい)                                                                                                                                                             |
+| **error (adoptionCriteria)**   | `[adoption-criteria]` ADOPTION_CRITERIA 外の値                                                                                                                                                                                                                                        |
+| **warn (chart-temporal-fit)**  | `[chart-temporal-fit]` line-chart が参照する指標の `years` が1年しかない (推移を描けない・チャート型の再検討候補。2026-09-15新設・実測13件・誤検知の余地が無い確実な不整合のみ検出するため warn のまま運用する)                                                                          |
 
 ---
 
@@ -314,7 +369,9 @@ evidenceTopics: [
 | `metrics` (role≠context)                           | ページ上部の指標カード群のタイル (値 + 順位)。**チェックすると下の折れ線に系列が重なる**                                                                               | `to-theme-config.ts` の `tabIndicators` → `ThemeMetricsDashboard` → `MetricSwitcherPanel`         |
 | **`metricGroups`**                                 | **1 グループ = 指標カード 1 枚**。1 ページに複数枚が縦に並ぶ。省略時は非 context 指標を 1 枚に倒す                                                                     | `ThemePageLayout` が `THEME_CATALOGS` を直読み → `ThemeDashboardClient` → `ThemeMetricsDashboard` |
 | `metrics` (全 role・context 含む)                  | 左レールの折りたたみ「全指標」。狭幅は本文上部の同等 UI                                                                                                                | `ThemeSideNav` / `ThemePageLayout`                                                                |
-| `metrics.selection`                                | **UI 非表示**。採否・再調査用の内部 provenance として SSOT に保持                                                                                                      | —                                                                                                 |
+| `metrics.selection` (adoptionCriteria/readerQuestion/targetReaderOrDecision 含む) | **UI 非表示**。採否・再調査用の内部 provenance として SSOT に保持。`/quality/catalog-audit` (§8.1) が読み取り専用表示 | —                                                                                                 |
+| `charts.comparisonBasis` / `charts.visualizationRationale` | **UI 非表示**。監査・意味レビュー用の内部メタデータ。`/quality/catalog-audit` (§8.1) だけが表示                                                                       | —                                                                                                 |
+| `harmRelevance`                                    | **UI 非表示**。企画側の参照材料。`/quality/catalog-audit` (§8.1) が読み取り専用表示                                                                                    | —                                                                                                 |
 | `charts.componentProps`                            | チャート本体 (line/mixed/composition/donut/cpi/pyramid)                                                                                                                | `ThemeDbChartRenderer`                                                                            |
 | `charts.annotation`                                | 系列断絶・母集団差・比較不能条件など、この可視化固有の誤読防止注釈                                                                                                     | generator → `componentProps.annotation` → `ChartFooter`                                           |
 | `charts.sourceName` / `sourceLink`                 | チャートカード footer の出典                                                                                                                                            | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer)                                        |
@@ -333,6 +390,21 @@ evidenceTopics: [
 > カタログ無しテーマ (climate / local-finance) は
 > IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
 > (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
+
+## 8.1 管理画面 (`/quality/catalog-audit`) — 2026-09-15 新設
+
+`apps/admin/app/quality/catalog-audit/page.tsx` で読み取り専用のカタログ完全性監査を表示する
+(既存 `/quality` へ1行のキューサマリを追加。書き換え機能は追加しない)。表示内容:
+
+- テーマ別: metrics 件数、selection/adoptionCriteria/readerQuestion の充足率、harmRelevance の有無
+- validator (`validate-theme-catalog.ts`) の error/warn を種別ごとに集計、テーマ別の内訳
+- HARM 該当テーマの一覧 (axis + reason。企画側の参照材料であり、UI の広告枠設定ではない)
+- `visualizationRationale` 等の内部メタデータは値をそのまま表示してよい (読者向け UI には出ない
+  ことが実装契約であり、admin は監査目的でこの内容を見る場所)
+
+値は `THEME_CATALOGS` (git TS SSOT) と validator の再実行結果から都度算出し、別の台帳やキャッシュへ
+複製しない。実装は `apps/admin/lib/server/catalog-audit.ts` が `validate-theme-catalog.ts` の
+export 済み関数を再利用する (判定ロジックを admin 側へ複製しない)。
 
 ---
 

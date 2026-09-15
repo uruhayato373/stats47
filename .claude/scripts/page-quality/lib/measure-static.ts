@@ -3,8 +3,6 @@ import * as cheerio from "cheerio";
 import type { MetricKey, MetricValue } from "../types";
 import { resolveDispatcher } from "./http-dispatcher";
 
-const dispatcher = resolveDispatcher();
-
 export interface StaticMeasurement {
   http_status: number;
   html_bytes: number;
@@ -41,8 +39,9 @@ export async function fetchHtml(
 ): Promise<{ status: number; html: string; bytes: number }> {
   const res = await fetch(url, {
     headers: { "User-Agent": "stats47-page-quality-audit/1.0" },
+    signal: AbortSignal.timeout(45_000),
     // @ts-expect-error undiciのdispatcherはfetchのRequestInit型に無いが実行時は解釈される
-    dispatcher,
+    dispatcher: resolveDispatcher(url),
   });
   const html = await res.text();
   return { status: res.status, html, bytes: Buffer.byteLength(html, "utf-8") };
@@ -57,8 +56,9 @@ export async function fetchRscBytes(url: string): Promise<MetricValue> {
   try {
     const res = await fetch(url, {
       headers: { RSC: "1", "User-Agent": "stats47-page-quality-audit/1.0" },
+      signal: AbortSignal.timeout(45_000),
       // @ts-expect-error undiciのdispatcherはfetchのRequestInit型に無いが実行時は解釈される
-      dispatcher,
+      dispatcher: resolveDispatcher(url),
     });
     if (!res.ok) return unmeasured(`RSC fetch HTTP ${res.status}`);
     const text = await res.text();

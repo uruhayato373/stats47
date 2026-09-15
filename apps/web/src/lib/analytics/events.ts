@@ -240,6 +240,7 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  *   OFF は「見るのをやめた」だけで関心の表明ではないため、送ると ON/OFF が
  *   相殺されて「どの指標が見られたか」が読めなくなる
  * - `category_sidebar`: category ページ左のカテゴリナビ（home と同じリストの別配置）
+ * - `area_sidebar`: 都道府県ページ右のカテゴリナビ（home と同じリストの別配置）
  * - `product_catalog`: 商品一覧から商品詳細への導線
  * - `blog_product`: ブログ本文末の商品詳細への文脈一致導線
  * - `blog_sidebar` / `blog_discovery_mobile`: ブログ一覧の右レール / モバイル上部の探索導線
@@ -267,6 +268,7 @@ export type NavSurface =
   | 'theme_kpi_switcher'
   | 'theme_evidence'
   | 'category_sidebar'
+  | 'area_sidebar'
   | 'product_catalog'
   | 'blog_product'
   | 'blog_sidebar'

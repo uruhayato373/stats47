@@ -342,6 +342,8 @@ export function BarChartRace({
                     ref={svgRef}
                     viewBox={`0 0 ${viewWidth} ${viewHeight}`}
                     className="w-full h-full"
+                    role="img"
+                    aria-label={`${title ? `バーチャートレース「${title}」` : "バーチャートレース"}。時点数: ${data.length}。上位${topN}件。単位: ${unit || "未設定"}`}
                 />
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-background/50">

@@ -127,6 +127,7 @@ export default async function GeoLayersPage() {
       <ContentDisclosure
         title={`登録カタログ（公開対象外を含む${GIS_DATASETS.length}件）`}
         className="mt-6"
+        bordered={false}
       >
         <p className="mb-4 text-sm">
           収録候補を含む登録一覧です。すべてがサイト内で閲覧できるわけではありません。年度・範囲・利用条件は原典の確認が必要です。

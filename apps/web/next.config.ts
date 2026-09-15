@@ -44,6 +44,8 @@ const isCloudflareWorkers = process.env.CLOUDFLARE_WORKERS === "true";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // dev中の.nextを壊さず、ローカル公開相当検査を別成果物へ出せるようにする。
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   // OpenNextの要件: standalone出力を有効化
   output: "standalone",
   // trailing slash を統一（/ranking/ → /ranking にリダイレクト）

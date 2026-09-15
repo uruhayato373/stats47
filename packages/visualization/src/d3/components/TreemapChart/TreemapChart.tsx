@@ -131,6 +131,8 @@ export function TreemapChart({
         viewBox={`0 0 ${width} ${height}`}
         className="w-full h-auto"
         style={{ maxWidth: "100%" }}
+        role="img"
+        aria-label={`ツリーマップ。階層: ${data.name}。単位: ${unit || "未設定"}`}
       />
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center">

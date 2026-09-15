@@ -4,19 +4,19 @@ import {
   verticalsFromTagKeys,
   type AffiliateVertical,
   type ContentVerticalInput,
-} from "../constants/affiliate-category";
+} from '../constants/affiliate-category';
 import {
   readActiveBannersByVerticalsFromR2 as findActiveBannersByVerticals,
   readActiveExperimentVariantsByVerticalFromR2 as findActiveExperimentVariantsByVertical,
   readActiveTextAdByVerticalFromR2 as findActiveTextAdByVertical,
   readActiveTextAdsByVerticalsFromR2 as findActiveTextAdsByVerticals,
-} from "../repositories/affiliate-ad-snapshot";
+} from '../repositories/affiliate-ad-snapshot';
 
 import type {
   AffiliateLocationCode,
   ResolvedAffiliateAd,
   ResolvedAffiliateBanner,
-} from "../types";
+} from '../types';
 
 /**
  * A/B テスト (AFF-05) の variant 候補。client (VariantAdSlot) が加重ランダムで1つ選ぶ。
@@ -29,7 +29,7 @@ interface ResolvedAffiliateVariant {
   experimentId: string;
   variantId: string;
   weight: number;
-  adType: "banner" | "text";
+  adType: 'banner' | 'text';
   title: string;
   href: string;
   trackingPixelUrl: string | null;
@@ -41,7 +41,9 @@ interface ResolvedAffiliateVariant {
 }
 
 /** categoryKey (e-Stat 17 軸) → vertical。写像外は undefined。 */
-function verticalFromCategoryKey(categoryKey: string): AffiliateVertical | undefined {
+function verticalFromCategoryKey(
+  categoryKey: string
+): AffiliateVertical | undefined {
   return CATEGORY_AFFILIATE_MAP[categoryKey];
 }
 
@@ -69,7 +71,9 @@ function toBanner(b: {
     width: b.width ?? 300,
     height: b.height ?? 250,
     // 解決は adVertical と同じ規約 (vertical 正・categoryKey フォールバック)。
-    vertical: b.vertical ?? (b.categoryKey ? CATEGORY_AFFILIATE_MAP[b.categoryKey] ?? null : null),
+    vertical:
+      b.vertical ??
+      (b.categoryKey ? (CATEGORY_AFFILIATE_MAP[b.categoryKey] ?? null) : null),
   };
 }
 
@@ -78,7 +82,7 @@ function toBanner(b: {
  */
 export async function resolveAffiliateAd(
   categoryKey: string,
-  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  locationCode: AffiliateLocationCode = 'sidebar-bottom'
 ): Promise<ResolvedAffiliateAd | null> {
   const vertical = verticalFromCategoryKey(categoryKey);
   if (!vertical) return null;
@@ -98,13 +102,18 @@ export async function resolveAffiliateAd(
  */
 export async function resolveAffiliateTextAds(
   categoryKey: string,
-  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  locationCode: AffiliateLocationCode = 'sidebar-bottom',
   limit = 2,
-  rankingKey?: string,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateAd[]> {
   const vertical = verticalFromCategoryKey(categoryKey);
   if (!vertical) return [];
-  const ads = await findActiveTextAdsByVerticals([vertical], locationCode, limit, rankingKey);
+  const ads = await findActiveTextAdsByVerticals(
+    [vertical],
+    locationCode,
+    limit,
+    rankingKey
+  );
   return ads.map((ad) => ({
     ...(ad.programRef ? { programRef: ad.programRef } : {}),
     id: ad.id,
@@ -121,8 +130,8 @@ export async function resolveAffiliateTextAds(
  */
 export async function resolveAffiliateTextAdsByTagKeys(
   tagKeys: string[],
-  locationCode: AffiliateLocationCode = "sidebar-bottom",
-  limit = 2,
+  locationCode: AffiliateLocationCode = 'sidebar-bottom',
+  limit = 2
 ): Promise<ResolvedAffiliateAd[]> {
   const verticals = verticalsFromTagKeys(tagKeys);
   if (verticals.length === 0) return [];
@@ -153,12 +162,18 @@ export async function resolveAffiliateTextAdsByTagKeys(
 export async function resolveAffiliateBanners(
   tagKeys: string[],
   limit = 2,
-  rankingKey?: string,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateBanner[]> {
   const verticals = verticalsFromTagKeys(tagKeys);
   if (verticals.length === 0) return [];
-  const banners = await findActiveBannersByVerticals(verticals, limit, rankingKey);
-  return banners.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+  const banners = await findActiveBannersByVerticals(
+    verticals,
+    limit,
+    rankingKey
+  );
+  return banners
+    .map(toBanner)
+    .filter((b): b is ResolvedAffiliateBanner => b !== null);
 }
 
 /**
@@ -168,12 +183,18 @@ export async function resolveAffiliateBanners(
 export async function resolveAffiliateBannersByCategoryKey(
   categoryKey: string,
   limit = 1,
-  rankingKey?: string,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateBanner[]> {
   const vertical = verticalFromCategoryKey(categoryKey);
   if (!vertical) return [];
-  const banners = await findActiveBannersByVerticals([vertical], limit, rankingKey);
-  return banners.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+  const banners = await findActiveBannersByVerticals(
+    [vertical],
+    limit,
+    rankingKey
+  );
+  return banners
+    .map(toBanner)
+    .filter((b): b is ResolvedAffiliateBanner => b !== null);
 }
 
 /**
@@ -181,11 +202,16 @@ export async function resolveAffiliateBannersByCategoryKey(
  */
 export async function resolveAffiliateTextAdsByVertical(
   vertical: AffiliateVertical,
-  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  locationCode: AffiliateLocationCode = 'sidebar-bottom',
   limit = 2,
-  rankingKey?: string,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateAd[]> {
-  const ads = await findActiveTextAdsByVerticals([vertical], locationCode, limit, rankingKey);
+  const ads = await findActiveTextAdsByVerticals(
+    [vertical],
+    locationCode,
+    limit,
+    rankingKey
+  );
   return ads.map((ad) => ({
     ...(ad.programRef ? { programRef: ad.programRef } : {}),
     id: ad.id,
@@ -203,14 +229,20 @@ export async function resolveAffiliateTextAdsByVertical(
 export async function resolveAffiliateBannersForContent(
   input: ContentVerticalInput,
   limit = 8,
-  rankingKey?: string,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateBanner[]> {
   const chain = resolveContentVerticalChain(input);
   if (chain.blocked) return [];
   // 上位段の在庫がゼロのときだけ次段へ落とす (旧 ranking の tags → categoryKey と同じ)。
   for (const step of chain.steps) {
-    const rows = await findActiveBannersByVerticals(step.verticals, limit, rankingKey);
-    const banners = rows.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+    const rows = await findActiveBannersByVerticals(
+      step.verticals,
+      limit,
+      rankingKey
+    );
+    const banners = rows
+      .map(toBanner)
+      .filter((b): b is ResolvedAffiliateBanner => b !== null);
     if (banners.length > 0) return banners;
   }
   return [];
@@ -222,20 +254,30 @@ export async function resolveAffiliateBannersForContent(
  */
 export async function resolveAffiliateTextAdsForContent(
   input: ContentVerticalInput,
-  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  locationCode: AffiliateLocationCode = 'sidebar-bottom',
   limit = 2,
-  rankingKey?: string,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateAd[]> {
   const chain = resolveContentVerticalChain(input);
   if (chain.blocked) return [];
   for (const step of chain.steps) {
-    const ads = await findActiveTextAdsByVerticals(step.verticals, locationCode, 20, rankingKey);
+    const ads = await findActiveTextAdsByVerticals(
+      step.verticals,
+      locationCode,
+      20,
+      rankingKey
+    );
     const seen = new Set<string>();
     const unique: ResolvedAffiliateAd[] = [];
     for (const ad of ads) {
       if (seen.has(ad.title)) continue;
       seen.add(ad.title);
-      unique.push({ id: ad.id, title: ad.title, href: ad.htmlContent, trackingPixelUrl: ad.trackingPixelUrl });
+      unique.push({
+        id: ad.id,
+        title: ad.title,
+        href: ad.htmlContent,
+        trackingPixelUrl: ad.trackingPixelUrl,
+      });
       if (unique.length >= limit) break;
     }
     if (unique.length > 0) return unique;
@@ -249,10 +291,16 @@ export async function resolveAffiliateTextAdsForContent(
 export async function resolveAffiliateBannersByVertical(
   vertical: AffiliateVertical,
   limit = 2,
-  rankingKey?: string,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateBanner[]> {
-  const banners = await findActiveBannersByVerticals([vertical], limit, rankingKey);
-  return banners.map(toBanner).filter((b): b is ResolvedAffiliateBanner => b !== null);
+  const banners = await findActiveBannersByVerticals(
+    [vertical],
+    limit,
+    rankingKey
+  );
+  return banners
+    .map(toBanner)
+    .filter((b): b is ResolvedAffiliateBanner => b !== null);
 }
 
 /**
@@ -262,24 +310,32 @@ export async function resolveAffiliateBannersByVertical(
 export async function resolveExperimentVariantsByCategoryKey(
   categoryKey: string,
   rankingKey?: string,
-  verticalOverride?: AffiliateVertical | null,
+  verticalOverride?: AffiliateVertical | null
 ): Promise<ResolvedAffiliateVariant[]> {
-  const vertical = verticalOverride !== undefined ? verticalOverride : verticalFromCategoryKey(categoryKey);
+  const vertical =
+    verticalOverride !== undefined
+      ? verticalOverride
+      : verticalFromCategoryKey(categoryKey);
   if (!vertical) return [];
 
-  const rows = await findActiveExperimentVariantsByVertical(vertical, rankingKey);
+  const rows = await findActiveExperimentVariantsByVertical(
+    vertical,
+    rankingKey
+  );
   if (rows.length < 2) return []; // 実験は最低 2 variant 必要
 
   return rows
     .filter((r) => {
       // banner は画像必須、text は htmlContent(href) 必須
-      if (r.adType === "banner") return !!r.imageUrl;
+      if (r.adType === 'banner') return !!r.imageUrl;
       return !!r.htmlContent;
     })
     .map((r) => {
-      const adType = r.adType === "banner" ? "banner" : "text";
+      const adType = r.adType === 'banner' ? 'banner' : 'text';
       const creativeSize =
-        adType === "banner" && r.width && r.height ? `${r.width}x${r.height}` : "text";
+        adType === 'banner' && r.width && r.height
+          ? `${r.width}x${r.height}`
+          : 'text';
       return {
         ...(r.programRef ? { programRef: r.programRef } : {}),
         id: r.id,
@@ -290,7 +346,7 @@ export async function resolveExperimentVariantsByCategoryKey(
         title: r.title,
         href: r.htmlContent,
         trackingPixelUrl: r.trackingPixelUrl,
-        imageUrl: adType === "banner" ? r.imageUrl : null,
+        imageUrl: adType === 'banner' ? r.imageUrl : null,
         width: r.width,
         height: r.height,
         creativeSize,
@@ -308,10 +364,13 @@ export async function resolveAffiliateBannersByCategory(): Promise<
   const allVerticals = [...new Set(Object.values(CATEGORY_AFFILIATE_MAP))];
   const banners = await findActiveBannersByVerticals(allVerticals, 100);
 
-  const result: Partial<Record<AffiliateVertical, ResolvedAffiliateBanner>> = {};
+  const result: Partial<Record<AffiliateVertical, ResolvedAffiliateBanner>> =
+    {};
 
   for (const b of banners) {
-    const vertical = b.vertical ?? (b.categoryKey ? CATEGORY_AFFILIATE_MAP[b.categoryKey] : undefined);
+    const vertical =
+      b.vertical ??
+      (b.categoryKey ? CATEGORY_AFFILIATE_MAP[b.categoryKey] : undefined);
     if (!vertical || result[vertical]) continue;
     const resolved = toBanner(b);
     if (resolved) result[vertical] = resolved;

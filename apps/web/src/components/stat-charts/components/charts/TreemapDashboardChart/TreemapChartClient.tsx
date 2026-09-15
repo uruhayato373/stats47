@@ -16,12 +16,14 @@ const TreemapChart = dynamic(
 
 interface TreemapChartClientProps {
   data: HierarchyDataNode;
+  unit?: string;
 }
 
 export const TreemapChartClient: React.FC<TreemapChartClientProps> = ({
   data,
+  unit,
 }) => (
   <div className="w-full">
-    <TreemapChart data={data} width={700} height={420} />
+    <TreemapChart data={data} width={700} height={420} unit={unit} />
   </div>
 );

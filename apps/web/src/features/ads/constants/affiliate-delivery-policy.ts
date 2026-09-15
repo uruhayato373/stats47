@@ -3,11 +3,12 @@ import { adVertical } from "./affiliate-category";
 import type { AffiliateAd } from "../types";
 
 /**
- * 掲載停止の authored SSOT。2026-09-08 のA8実機照合で未提携を確認。
+ * 掲載停止の authored SSOT。提携状態または文脈・実績の判断で停止した案件を保持する。
  * snapshot更新前でも停止が効くよう、exportとruntimeの両方から参照する。
  * 提携の再確認なしに解除しない。証拠: affiliate-stocktake-latest.json。
  */
 export const AFFILIATE_DELIVERY_HOLDS = [
+  { adId: "af_aeon_kyushu_001", programRef: "a8:s00000025671001" },
   { adId: "af_classpass_001", programRef: "a8:s00000026970001" },
   { adId: "af_housing_banner_001", programRef: "a8:s00000014870004" },
   { adId: "af_maca_emperor_001", programRef: "a8:s00000013307005" },

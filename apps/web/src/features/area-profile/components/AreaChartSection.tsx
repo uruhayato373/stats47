@@ -1,6 +1,6 @@
 import { BarChart3 } from "lucide-react";
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
+import { SectionHeader } from "@/components/section";
 import { DashboardComponentRenderer, loadPageComponents, type PageComponent } from "@/components/stat-charts/server";
 import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
 
@@ -36,12 +36,8 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
       </div>
 
       {Array.from(sections.entries()).map(([sectionName, sectionCharts]) => (
-        <ChartPanel
-          key={sectionName}
-          title={sectionName}
-          titleClassName="text-base"
-          contentClassName="space-y-4"
-        >
+        <section key={sectionName} className="space-y-4">
+          <SectionHeader title={sectionName} hideRule />
             {sectionCharts.map((chart) => (
               <div key={chart.componentKey}>
                 <DashboardComponentRenderer
@@ -74,7 +70,7 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
                 />
               </div>
             ))}
-        </ChartPanel>
+        </section>
       ))}
     </section>
   );

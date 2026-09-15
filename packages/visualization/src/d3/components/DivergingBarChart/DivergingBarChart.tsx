@@ -229,6 +229,8 @@ export function DivergingBarChart({
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
           className="h-auto w-full"
+          role="img"
+          aria-label={`正負分岐棒グラフ。系列: ${positiveName}、${negativeName}。項目数: ${data.length}。単位: ${unit || "未設定"}`}
         />
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/50">

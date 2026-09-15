@@ -1,0 +1,82 @@
+name: 🗓️ e-Stat Year Coverage Audit (weekly)
+
+# 単年設定 (years.from === years.to 等) の metric config が、e-Stat に本当はもっと多くの年の
+# 実データを持っていないかを機械的に検査する (read-only・R2 write なし)。
+#
+# 背景 (2026-09-15): ThemeCatalog の line-chart が単年指標を参照して推移を描けない事故が
+# 13 件見つかり、全件 e-Stat 実測したところ全件に本来もっと多くの年の実データが存在した
+# (config の years を最新1年だけに絞ったまま登録していた)。active metric 2,445 件中 755 件
+# (うち e-Stat 由来 582 件) が同じ単年設定であり、755 件を一度に本番 e-Stat へ照会すると
+# 負荷が大きいため、週次で少しずつ (--batch-size) 巡回する。
+#
+# これは「壊れている」ことの検知ではなく「config が e-Stat の実際のカバレッジより
+# 狭いかもしれない候補」を機械的に見つけるだけの発見キューのため、Issue は起票しない
+# (remediation-queue.json 等と同じ「見つけたら queue に積む」設計。data-ingester が
+# .claude/state/data/estat-year-coverage/LATEST.md を見て順に是正する)。
+#
+# 正典: packages/ranking/src/scripts/audit-estat-year-coverage.ts (実装コメント参照) /
+#       .claude/rules/metric-config-standards.md「years は最新年だけに絞らない」
+
+on:
+  schedule:
+    - cron: "0 20 * * 6" # 土 20:00 UTC = 日 05:00 JST (ranking-integrity 04:30 の後、非重複)
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: "1回の実行で確認する件数"
+        required: false
+        default: "100"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estat-year-coverage-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔎 Audit e-Stat year coverage (batch)
+        run: |
+          npx tsx packages/ranking/src/scripts/audit-estat-year-coverage.ts \
+            --batch-size "${{ inputs.batch_size || '100' }}" \
+            2>&1 | tee /tmp/estat-year-coverage.log
+          {
+            echo "### e-Stat 年カバレッジ監査"
+            echo '```'
+            cat /tmp/estat-year-coverage.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 📤 Commit audit result to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/data/estat-year-coverage
+          if git diff --cached --quiet; then
+            echo "No audit changes"
+            exit 0
+          fi
+          git commit -m "chore(data): weekly e-Stat year coverage audit $(date -u +%Y-%m-%d) [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop

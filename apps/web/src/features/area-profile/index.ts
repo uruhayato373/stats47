@@ -10,7 +10,6 @@
 export { AreaProfilePageClient } from './components/AreaProfilePageClient';
 export { AreaProfileSidebar } from './components/AreaProfileSidebar';
 export { RelatedAreas } from './components/RelatedAreas';
-export { CategoryNavGrid } from './components/CategoryNavGrid';
 export { CitiesNavCard } from './components/CitiesNavCard';
 export { CityBreadcrumbs } from './components/CityBreadcrumbs';
 export { CityPageFooter } from './components/CityPageFooter';
@@ -27,6 +26,7 @@ export {
 } from './utils/generate-structured-data';
 export { generateAreaMetadata } from './utils/generate-area-metadata';
 export { getCityRouteContext } from './utils/city-route-context';
+export { selectDistinctProfileItems } from './utils/select-distinct-profile-items';
 
 // 都道府県選択（home / category / /areas 共通）
 export { PrefectureNavigator } from './components/PrefectureNavigator';

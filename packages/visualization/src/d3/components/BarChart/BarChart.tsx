@@ -65,6 +65,13 @@ export function BarChart({
                 marker: "square" as const,
             }))
             : [];
+    const categories = data.map((item) => String(item[indexBy])).filter(Boolean);
+    const accessibleLabel = [
+        title ? `棒グラフ「${title}」` : "棒グラフ",
+        categories.length > 0 ? `項目数: ${categories.length}` : undefined,
+        hasKeys && keys ? `系列: ${keys.join("、")}` : undefined,
+        `単位: ${unit || "未設定"}`,
+    ].filter(Boolean).join("。");
 
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
@@ -282,6 +289,8 @@ export function BarChart({
                     ref={svgRef}
                     viewBox={`0 0 ${width} ${height}`}
                     className="w-full h-auto"
+                    role="img"
+                    aria-label={accessibleLabel}
                 />
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-background/50">

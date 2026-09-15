@@ -21,6 +21,40 @@ updated: 2026-09-14
 
 ## 🔴 高 — 今月中に着手したい
 
+### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:audit-weekly -- --base-url https://stats47.jp] [起票:2026-09-15]
+
+- **owner**: ranking-ui-manager (ranking) / theme-ui-manager (theme) / site-ux-manager (共通部品・横断)
+- 2026-09-15、`page-quality:audit-weekly` を本番全 6,237 URL に実行 (初の全件試行)。
+  error 2,698 / warning 5,106。**duplicate_link_ratio がほぼ全テンプレートの支配的違反**で、
+  個別ページの内容問題ではなく共通コンポーネント由来の疑いが強い:
+
+  | テンプレート | 対象URL数 | error | warning | duplicate_link_ratio 内訳 |
+  |---|---:|---:|---:|---|
+  | prefecture-detail (`/areas/[code]`) | 2,491 | 1,691 | 1,612 | error 1,691 + warning 752 = 対象の 98% |
+  | blog (`/blog/[slug]`) | 606 | 606 | 112 | error 605 = 対象の **99.8%** |
+  | ranking (`/ranking/[key]`) | 2,170 | 227 | 3,197 | error 227 + warning 1,941 (ad_duplicate_count warning も1,256件) |
+  | geo-analysis | 71 | 55 | 10 | error 55 = 対象の 77% |
+  | theme | 56 | 38 | 34 | error 38 = 対象の 68% |
+  | survey | 148 | 64 | 83 | error 56 + warning 83 |
+  | category | 17 | 11 | 8 | error 11 |
+  | municipality | 360 | 0 | 0 | **異常なし** (比較対象として健全) |
+
+- **注意 (実証ベース)**: prefecture-detail は並行 Codex セッション (`area-density-optimization` /
+  `area-all-optimization`、2026-09-15実施)が「ranking リンク重複排除」を含む最適化を
+  ローカル dev server で検証済みだが**本番未デプロイ**。本監査は現行本番 (デプロイ前) を
+  見ているため、そのセッションの変更が本番反映されれば prefecture-detail 分は改善している
+  可能性が高い。**デプロイ後に再実測してから母数を再評価すること** (未検証のまま「直った」
+  と判断しない)。
+- **次 (実行順)**: ①上記デプロイ待ちの分を除いた ranking/blog/theme/survey/category の
+  duplicate_link_ratio 原因(共通ナビ・関連記事ウィジェット・広告リンクの重複生成箇所)を
+  各 owner が最小1テンプレートで特定 ②修正 ③`page-quality:check`(代表URL)で個別確認
+  ④全件は次回週次 `page-quality-audit-weekly.yml` で確認 (毎回全件を手動実行しない)。
+- **完了条件**: 週次監査の error 件数が縮小傾向 (ラチェット化は別途検討)。
+- 生データ: `.claude/state/metrics/page-quality/{latest.json,LATEST.md,snapshots/2026-09-15.json}`、
+  管理画面 `/quality/page-audit`。
+
 ### [NOTE-KAKEI-REDESIGN-ROLLOUT-01] note 家計シリーズ残り 46 本を決定的テンプレ + 図5枚で再公開する
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/note/audit-kakei-note-content.mjs "^a-kakei-" --live が 47/47 PASS、かつ node .claude/scripts/note/audit-note-figure-split.mjs "^a-kakei-" で分断 0] [起票:2026-09-15] [期日:2026-09-30]
@@ -211,7 +245,7 @@ updated: 2026-09-14
 - **停止条件**: デプロイ後の smoke (`.github/scripts/smoke-test-routes.sh`) で ranking / blog が
   200 以外、または `x-nextjs-prerender` の notFound 固着 → main を前 SHA へ戻す。
 
-### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 4 本 / 週 5.4 万 imp)
+### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 2 本 / 週 5.4 万 imp)
 
 タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node .claude/scripts/ads/audit-affiliate-inventory.ts の furusato 横長 banner ≥ 7] [起票:2026-09-03] [期日:2026-09-30]
 
@@ -238,14 +272,13 @@ updated: 2026-09-14
   もしも発行原稿の独立ピクセル・referrerpolicy・attributionsrc・PR条件を落とさない。
   別セッションを含む専用ブランチ `codex/workspace-updates-20260908` へのcommit・pushは承認済み。develop/main反映・R2更新・デプロイは別途公開承認を得てから行う。
 - **なぜ**: #913 で家計調査 (ランキング 28,867 + ブログ 12,366 imp/週) と農業・地方財政が furusato に
-  集まる。一方 furusato の横長バナーは **4 本** (イオン九州 ×2・ふるさと本舗・au PAY) で、3 枠を
-  埋めると毎ページ同じ並びになる。需要と在庫が最も逆転している軸。
+  集まる。一方、全国対応の横長バナーは **2 本** (ふるさと本舗・au PAY) だけである。イオン九州3枠は
+  地域・購買意図の不一致と成果0円の実績から2026-09-15に全配信を停止した。需要と在庫が最も逆転している軸。
 - **候補**: さとふる / ふるなび / 楽天ふるさと納税 / ANA のふるさと納税 (A8・もしも・afb のどこで
   提携できるかは `/affiliate-operate` の走査で確認。ブランド適合は人の判断)。
 - **手順**: ユーザーが ASP で提携申請 → 承認後 `/register-affiliate-banner register` で 300x250
   を 1 案件 1 エントリ登録 (vertical=furusato、priority は確定 EPC バンド) → develop push で R2 反映。
-- **完了条件**: furusato の横長 300x250 が 7 本以上、かつ priority 上位 3 が全国対応ポータル
-  (地域限定のイオン九州が上位 3 に入らない)。
+- **完了条件**: furusato の横長 300x250 が 7 本以上、かつ priority 上位 3 が全国対応ポータル。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
 
 ### [AFF-STOCKTAKE-RECONCILE-01] 提携棚卸しの不明案件と既存在庫の不一致を再照合する
@@ -574,6 +607,43 @@ updated: 2026-09-14
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [THEME-CHART-TEMPORAL-MISMATCH-01] line-chartが単年設定の13指標を再取り込みして年範囲を拡張する
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-15]
+
+- **owner**: data-ingester (年範囲拡張・再取り込み。判断待ちなし、以下は全件データ存在確認済み)
+- `npm run validate:catalog` の `[chart-temporal-fit]` warn (2026-09-15新設) が機械的に検出。
+  対象10テーマ13指標の line-chart が、`years: {from,to}` が単年 (from===to) の指標を参照しており
+  推移を描けない状態だった (componentKeyに「trend」を含むものも複数: `theme-health-expense-trend`
+  `railway-passenger-trend-jr` `roads-length-trend` 等)。
+- **2026-09-15 e-Stat実データで確認済み (getStatsData実測、値がnullでない年のみ集計)**:
+  全13指標とも**e-Statに複数年の実データが存在する**(config側の年範囲設定が不足していただけ)。
+  チャート型変更は不要、年範囲拡張が正解。
+
+  | metric key | statsDataId | config年数 | e-Stat実在年数 | 実在年 |
+  |---|---|---:|---:|---|
+  | national-medical-expense-per-person | 0000010209 | 1 | 14 | 1999-2022 (隔年等) |
+  | turnover-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
+  | job-change-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
+  | gender-wage-gap | 0003426933 | 1 | 2 | 2021-2022 |
+  | single-person-household-ratio | 0000010201 | 1 | 9 | 1980-2020 (5年おき) |
+  | jr-passenger-transport | 0000010103 | 1 | 19 | 2005-2023 |
+  | consumer-price-difference-index-housing | 0000010212 | 1 | 12 | 2013-2024 |
+  | consumer-price-difference-index-food | 0000010212 | 1 | 12 | 2013-2024 |
+  | actual-income-worker-households-per-month | 0000010212 | 1 | 50 | 1975-2024 |
+  | road-total-length-with-expressway | 0000010108 | 1 | 19 | 2005-2023 |
+  | road-expressway-length | 0000010108 | 1 | 19 | 2005-2023 |
+  | building-fire-count-per-100-thousand-people | 0000010211 | 1 | 49 | 1975-2023 |
+  | air-passenger-transport | 0000010103 | 1 | 49 | 1975-2023 |
+
+- **次 (実行順)**: ①各 `packages/data-configs/src/metrics/<key>.ts` の `years` を上表の実在年範囲へ
+  拡張 (5年おき等の指標は `{years:[...]}` 形式、連続年は `{from,to}`) ②`validate:years`/`validate:config`
+  ③`page-data-batch --metric <key>` で再取り込み ④`npm run validate:catalog` で
+  `chart-temporal-fit` warn 解消を確認。gender-wage-gap は2年のみのため折れ線でなく2点比較の
+  表示 (mixed-chart等) が妥当か theme-designer が判断してもよい。
+- **完了条件**: 対象13件で `chart-temporal-fit` warn が解消 (ラチェットは新規追加時の再発防止)。
+- **検証**: `npx tsx packages/data-configs/scripts/validate-theme-catalog.ts`
 
 ### [LOCAL-RESOURCE-BUDGET-01] 資料の復元経路と再起動後のメモリ削減効果を確認する
 
@@ -1036,6 +1106,21 @@ updated: 2026-09-14
 5. 完了した行は削除する。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [CATEGORY-NAV-CONSOLIDATION-01] カテゴリ一覧UIの2実装 (PortalCategoryGrid / CategoryNavGrid) 統合検討
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-15]
+
+- home (`/`) と `/category/[categoryKey]` は同一の `PortalCategoryGrid`
+  (`apps/web/src/features/home-portal/components/PortalCategoryGrid.tsx`) を使い、17カテゴリの
+  順序・データ源 (`CATEGORY_DEFS`) は一致している (整合済み・対応不要)。
+- 一方 `/areas/[areaCode]` は別実装の `CategoryNavGrid`
+  (`apps/web/src/features/area-profile/components/CategoryNavGrid.tsx`) を使い、アイコン+色タイル
+  (件数なし) と `PortalCategoryGrid` のテキスト+件数行という異なる見た目・挙動になっている。
+- trigger: `/areas/[areaCode]` を次に触るセッションで、統合が本当に妥当か (県スコープの
+  リンク生成・件数表示の要否が違うため意図的な分離の可能性もある) を精読してから判断する。
+  2026-09-15 時点でこのファイルは別の並行セッションが直後に編集済み (uncommitted) のため、
+  今回は触れずこのカードだけ残す。
 
 ### [MUNI-RANKING-EXPANSION-01] 市区町村ランキング拡充 (全量公開 2026-09-01 実施済み・残は SSDS 未使用分)
 

@@ -6,7 +6,8 @@
 
 | ワークフロー                                        | トリガー                                           | 実行内容                                                                                                                                                                                                        |
 | --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR Quality Check                                    | PR作成・更新 (main)                                | Lint、Type Check、Unit Test、共有チャートgolden render、Coverage、Build、Playwright E2E                                                                                                                          |
+| PR Quality Check                                    | PR作成・更新 (main)                                | Static gateは常時実行。差分に応じてType Check、Unit Test、web/admin/Remotion、共有チャートgolden、代表Playwrightを選択し、Web buildは1回だけ生成して再利用                                                           |
+| Full Quality Suite (`quality-suite-weekly.yml`)     | 毎週日曜7時30分JST、手動                           | 全workspace型検査、Web coverage、全package/admin/Remotion unit、Admin/Remotion build、Admin/Web全Playwrightを実行。失敗は固定`quality-suite-alert` Issueへ集約し、回復時に自動Close                            |
 | Deploy to Cloudflare Workers                        | Push (main)                                        | Build、認証確認、デプロイ、ヘルスチェック                                                                                                                                                                       |
 | Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
 | Ranking AI Content / Gemini (`ai-content-gemini-daily.yml`) | 毎日7時15分JST、手動 | 課金無効の専用 Gemini API key で既定3件を structured 生成。決定的監査 + 別リクエスト critic 通過分だけ publish workflow を明示 dispatch。件数・通過率・token を state へ記録 |
@@ -94,7 +95,8 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 **ワークフロー**: `pr-quality-check.yml`
 
-自動実行されるチェック項目（各jobは最大5〜15分、並列実行）：
+Static gateは常に実行する。その他は変更パスを決定的に分類し、影響するjobだけを並列実行する。
+全件の型検査・coverage・Playwrightは毎週日曜の`quality-suite-weekly.yml`でも実行する。
 
 1. ✅ **ESLint**: `npm run lint`
    - Lintエラーで失敗（continue-on-error: false）
@@ -102,24 +104,27 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 2. ✅ **Type Check**: `npx tsc --noEmit --skipLibCheck`
    - 型エラーで失敗（continue-on-error: false）
 
-3. ✅ **Unit Tests with Coverage**: packages・web・admin unitと重要module別floor
+3. ✅ **Unit Tests**: 変更範囲に応じたpackages・web・admin unitと重要module別floor
    - テスト失敗で停止（continue-on-error: false）
-   - カバレッジレポートをアーティファクトとしてアップロード
    - `.claude/config/critical-module-coverage.json` が重要module floorの正典
    - `test:packages:ci` は通常テストを実行し、重要moduleの8テストファイルだけを後続のcoverage検査へ分担する。
      対象は同じinventoryから取得し、各Vitest projectの設定で除外する（CLIの除外指定には依存しない）。
-     ローカルの `test:packages` は分割せず全件実行する。Webの重要module floorは全体coverageで同時検査する。
+     ローカルの `test:packages` は分割せず全件実行する。Web全体coverageとレポート保存は週次full suiteが担当する。
 
 4. ✅ **Verify Build**: `npm run build`
    - ビルドエラーで失敗
+   - 成功した`.next`をartifact化し、代表E2Eとpage-qualityが同じbuildを再利用
 
 5. ✅ **Visualization Render Golden**: `RUN_RENDER_TESTS=1 npm run test:run --workspace=@stats47/visualization`
    - 共有チャート9種のPNG差分で失敗し、差分artifactを保存
    - golden更新は原因・旧新SHA-256を登録した変更だけ許可
 
-6. ✅ **Full E2E**: Playwright + Chromium
-   - 本番ビルドを起動して全E2Eを1 workerで実行
+6. ✅ **Representative E2E**: Playwright + Chromium
+   - 主要導線、レスポンシブ、アクセシビリティ、構造化データを代表検査
    - 失敗時を含め、HTMLレポートとtest-resultsを30日間保存
+
+全Playwright、Web coverage、全workspace型検査は週次full suiteで補完する。週次異常は
+日付ごとに増やさず固定Issueを更新し、正常復帰した実行で閉じる。
 
 **並列実行制御**:
 

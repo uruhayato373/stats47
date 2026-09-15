@@ -389,6 +389,18 @@ skill には詳細を複製せず本節への参照だけを置く。
 | リリース (develop→main) | CI (`pr-quality-check.yml`) を権威とし、ローカルで同じ全体検査を重複実行しない |
 | ブラウザ実測 | ユーザーが求めた場合・視覚的な判断が必要な場合・静的検査では判定できない場合に限定する |
 
+ローカルの標準入口は2つだけにする。
+
+```bash
+npm run check:local          # 変更テンプレートの代表ページ。起動済みdevを再利用
+npm run check:release-local  # 明示時のみ。production build 1回を代表page-qualityとE2Eで共有
+```
+
+`check:local` は未コミット差分を基準に最大3テンプレートを選び、ブラウザ計測を1 URL 1 sampleで
+実行する。型検査は`--typecheck`、直接対応するunit test（最大12件）は`--tests`を明示したときだけ追加する。
+`check:release-local` はdevの`.next`と別の`.local/next-release`へbuildし、起動中のdevを壊さない。
+全URL・3 sample・全E2Eは週次GitHub Actionsを権威とする。
+
 フル build / 全テストを省略した場合は、最終報告で「何を検証し、何を未実行か」を明示する。
 `apps/web` のフル `build` は重いので、小変更のたびに実行しない。dev サーバーは
 `npm run dev:web` (ルート `npm run dev` は 23 パッケージを起動するので使わない)。常駐は

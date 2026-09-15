@@ -300,7 +300,15 @@ export function ThemeMetricsDashboard({
       defaultCheckedKeys={panel.defaultCheckedKeys}
     />
   );
-  const renderChart = (chart: PageComponent) => (
+  const renderChart = (chart: PageComponent) =>
+    chart.componentType === 'markdown-section' ? (
+      <ThemeDbChartRenderer
+        key={chart.componentKey}
+        chart={chart}
+        prefCode={pageComponentsAreaCode}
+        prefName={areaName}
+      />
+    ) : (
     <ChartPanel
       key={chart.componentKey}
       title={chart.title}

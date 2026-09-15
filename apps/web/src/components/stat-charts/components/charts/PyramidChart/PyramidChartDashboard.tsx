@@ -3,7 +3,7 @@ import { logger } from "@stats47/logger";
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
-import { toPyramidChartData } from "../../../adapters";
+import { resolveChartUnit, toPyramidChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
@@ -23,7 +23,7 @@ export const PyramidChartDashboard = async ({
   config,
 }: DashboardItemProps<"pyramid-chart">) => {
   const { title, rankingLink, sourceName, sourceLink, annotation, rankingLinks } = common;
-  const { maleParams, femaleParams, ageGroups, description } = config;
+  const { maleParams, femaleParams, ageGroups, unit: configuredUnit, description } = config;
   const areaCode = common.area.areaCode;
 
   if (!maleParams?.length || !femaleParams?.length) {
@@ -52,6 +52,7 @@ export const PyramidChartDashboard = async ({
     const femaleDataList = femaleResponses.map((r) => ("data" in r ? r.data : []));
 
     const chartData = toPyramidChartData(maleDataList, femaleDataList, ageGroups);
+    const unit = resolveChartUnit(configuredUnit, [...maleDataList, ...femaleDataList]) ?? "人";
 
     if (chartData.length === 0) {
       return <ErrorDisplay title={title} message="データがありません" />;
@@ -70,14 +71,14 @@ export const PyramidChartDashboard = async ({
             source={sourceName ?? undefined}
             sourceLink={sourceLink}
             sourceLinks={common.sourceLinks}
-            sourceDetail="人"
+            sourceDetail={unit}
             annotation={annotation}
             rankingLink={rankingLink}
             rankingLinks={rankingLinks}
           />
         }
       >
-        <PyramidChartClient chartData={chartData} year={latestYear} />
+        <PyramidChartClient chartData={chartData} year={latestYear} unit={unit} />
       </ChartPanel>
     );
   } catch (err) {

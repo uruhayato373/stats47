@@ -114,6 +114,26 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 
 `--strict` で warn も exit 1 (現在 warn は 0 件のため実質 no-op、将来用)。
 
+## `years` は最新年だけに絞らない (★再発防止・2026-09-15)
+
+`years: {from,to}` を「最新年 1 件」で登録し、e-Stat には実際にもっと古い年の実データが
+あるのに反映し忘れる事故が **active metric 2,445 件中 755 件 (31%)** の規模で確認された
+(ThemeCatalog の line-chart が単年指標を参照して推移を描けない、という形で 13 件が実際に発覚し、
+全件 e-Stat 実測で複数年の実データが確認された。詳細: `.claude/todo/backlog.md`
+`THEME-CHART-TEMPORAL-MISMATCH-01`)。
+
+- **新規 metric 登録時**は `getMetaInfo` の `time` CLASS_OBJ (`/inspect-estat-meta`) だけでなく、
+  対象の `cdCat01` 等を pin した **`getStatsData` で実際に値が non-null な年**を確認する
+  (`time` 一覧は表全体の年であって、この指標が全年で値を持つとは限らない)。
+- **既存 metric を触るとき**も、単年設定 (`years.from === years.to`) を見つけたら「本当に
+  1 年しかないか」を疑い、ついでに確認する (触ったついでの是正。全件一括の棚卸しは別途)。
+- 単年判定を回避するために存在しない年を書かない。確認できた年だけを列挙する。
+- **既存 755 件の棚卸しは週次 `estat-year-coverage-audit-weekly.yml` が少しずつ巡回する**
+  (`packages/ranking/src/scripts/audit-estat-year-coverage.ts`、都道府県1件をサンプルに
+  `getStatsData` で実測し config と比較。755 件を一括では照会しない)。候補は
+  `.claude/state/data/estat-year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
+  config の `years` を拡張し、`data/data-refresh-requests.json` push で再取り込みする。
+
 ## 量産時の必須手順 (agent / skill)
 
 新規 metric を作成・編集したら **必ず実行**:

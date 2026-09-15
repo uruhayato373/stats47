@@ -1,5 +1,7 @@
 import { CHART_COLORS } from "../constants";
 
+import { resolveChartUnit } from "./resolve-chart-unit";
+
 import type { MixedChartData } from "../types/visualization";
 import type { StatsSchema } from "@stats47/types";
 
@@ -60,7 +62,7 @@ export function toMixedChartData(
       name: label,
       color: lineColors?.[i] ?? CHART_COLORS[(colLabels.length + i) % CHART_COLORS.length],
     })),
-    leftUnit,
-    rightUnit,
+    leftUnit: resolveChartUnit(leftUnit, columnDataList),
+    rightUnit: resolveChartUnit(rightUnit, lineDataList),
   };
 }

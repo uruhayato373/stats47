@@ -4,7 +4,7 @@ import { logger } from "@stats47/logger";
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
-import { toBarChartRaceData } from "../../../adapters";
+import { resolveChartUnit, toBarChartRaceData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
@@ -21,6 +21,7 @@ export async function D3BarChartRaceDashboard({
   const { estatParams, unit, description, aspectRatio } = config;
 
   let data: BarChartRaceFrame[] = [];
+  let resolvedUnit = unit;
   let fetchErrorMessage: string | null = null;
 
   try {
@@ -29,6 +30,7 @@ export async function D3BarChartRaceDashboard({
       fetchErrorMessage = result.error;
     } else {
       data = toBarChartRaceData(result.data);
+      resolvedUnit = resolveChartUnit(unit, [result.data]);
     }
   } catch (err) {
     logger.error(
@@ -55,7 +57,7 @@ export async function D3BarChartRaceDashboard({
         />
       }
     >
-      <D3BarChartRaceClient data={data} unit={unit} aspectRatio={aspectRatio} />
+      <D3BarChartRaceClient data={data} unit={resolvedUnit} aspectRatio={aspectRatio} />
     </ChartPanel>
   );
 }

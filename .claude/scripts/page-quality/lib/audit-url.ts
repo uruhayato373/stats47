@@ -1,10 +1,17 @@
 import type { PageAuditResult, PageTemplateKey } from "../types";
 import { analyzeHtml, fetchHtml, fetchRscBytes } from "./measure-static";
-import { measureBrowserMetrics } from "./measure-browser";
+import {
+  measureBrowserMetrics,
+  type BrowserMeasurementSession,
+} from "./measure-browser";
 
 export interface AuditUrlOptions {
   /** true ならPlaywrightでLCP/CLS/INP/console error/横スクロール/タップ領域も計測する。 */
   withBrowser: boolean;
+  /** 複数URL監査でChromium processを共有する。 */
+  browserSession?: BrowserMeasurementSession;
+  /** ローカル代表検査は1、定期計測は3を標準とする。 */
+  browserRuns?: number;
   /** URL Policy 上、301/410 が正しい (notFoundやredirectを退行として扱わない)。 */
   expectedRedirectOrGone?: boolean;
 }
@@ -51,7 +58,9 @@ export async function auditUrl(
   }
 
   if (options.withBrowser && httpStatus != null && httpStatus >= 200 && httpStatus < 300) {
-    const browserMetrics = await measureBrowserMetrics(url);
+    const browserMetrics = options.browserSession
+      ? await options.browserSession.measure(url, { runs: options.browserRuns })
+      : await measureBrowserMetrics(url, { runs: options.browserRuns });
     metrics.lcp_ms = browserMetrics.lcp_ms;
     metrics.cls = browserMetrics.cls;
     metrics.inp_ms = browserMetrics.inp_ms;

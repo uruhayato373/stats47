@@ -19,7 +19,7 @@ export const StackedAreaDashboard = async ({
   config,
 }: DashboardItemProps<"stacked-area">) => {
   const { title, area, rankingLink, sourceName, sourceLink, annotation, rankingLinks } = common;
-  const { estatParams, labels, normalize, description, yAxisConfig, sharedYDomain } = config as DashboardItemProps<"stacked-area">["config"] & { sharedYDomain?: [number, number] };
+  const { estatParams, labels, unit, normalize, description, yAxisConfig, sharedYDomain } = config as DashboardItemProps<"stacked-area">["config"] & { sharedYDomain?: [number, number] };
   const areaCode = area.areaCode;
 
   let chartData: StackedAreaData | null = null;
@@ -48,7 +48,7 @@ export const StackedAreaDashboard = async ({
       if (!hasAnyData) {
         fetchErrorMessage = "データがありません";
       } else {
-        chartData = toStackedAreaData(rawDataList, labels);
+        chartData = toStackedAreaData(rawDataList, labels, unit);
       }
     }
   } catch (err) {

@@ -1,0 +1,213 @@
+name: 🧪 Full Quality Suite (weekly)
+
+on:
+  schedule:
+    - cron: "30 22 * * 6" # JST 日曜 07:30。visualization render (06:30) の後
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: quality-suite-weekly
+  cancel-in-progress: false
+
+jobs:
+  type-check:
+    name: All workspace type checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Run all type checks
+        run: npm run type-check
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+
+  tests:
+    name: Full unit tests and coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Run web coverage suite
+        run: npm run test:coverage -w apps/web
+      - name: Run all package tests
+        run: npm run test:packages:ci
+      - name: Run admin unit tests
+        run: npm run test --workspace=apps/admin
+      - name: Run Remotion unit tests
+        run: npm run test --workspace=apps/remotion
+      - name: Bundle Remotion compositions
+        run: npm run build --workspace=apps/remotion
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: weekly-web-coverage
+          path: apps/web/coverage/
+          if-no-files-found: ignore
+          retention-days: 30
+
+  admin-e2e:
+    name: Full admin build and E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and lint Admin Console
+        run: |
+          npm run build --workspace=apps/admin
+          npm run lint --workspace=apps/admin
+        env:
+          NODE_ENV: production
+          NODE_OPTIONS: --max-old-space-size=4096
+      - name: Audit content operations SSOT
+        run: npm run audit:content-operations
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run full Admin E2E suite
+        run: npm run test:e2e --workspace=apps/admin
+        env:
+          CI: "true"
+          NODE_ENV: production
+      - name: Upload Admin Playwright evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: weekly-admin-playwright-report
+          path: |
+            apps/admin/playwright-report/
+            apps/admin/test-results/
+          if-no-files-found: ignore
+          retention-days: 30
+
+  web-e2e:
+    name: Full web build and E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      NODE_ENV: production
+      NEXT_PUBLIC_ENV: production
+      NEXT_PUBLIC_BASE_URL: https://stats47.jp
+      NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
+      R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+      NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+      NEXT_SKIP_BUILD_TYPECHECK: "true"
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build web once
+        run: npm run workers:clean --workspace=apps/web && npm run build --workspace=apps/web
+        env:
+          NEXT_PUBLIC_R2_PUBLIC_URL: ""
+          R2_PUBLIC_FETCH_URL: ""
+      - name: Start built web app
+        working-directory: apps/web
+        run: |
+          npx next start --port 3100 > /tmp/weekly-next.log 2>&1 &
+          echo $! > /tmp/weekly-next.pid
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:3100/ > /dev/null && exit 0
+            sleep 2
+          done
+          cat /tmp/weekly-next.log
+          exit 1
+      - name: Run full Playwright suite
+        working-directory: apps/web
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: http://localhost:3100
+        run: npx playwright test --project=e2e-chromium
+      - name: Stop web app
+        if: always()
+        run: kill "$(cat /tmp/weekly-next.pid)" 2>/dev/null || true
+      - name: Upload Playwright evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: weekly-playwright-report
+          path: |
+            apps/web/playwright-report/
+            apps/web/test-results/
+            /tmp/weekly-next.log
+          if-no-files-found: ignore
+          retention-days: 30
+
+  report:
+    name: Update weekly quality alert
+    if: always()
+    needs: [type-check, tests, admin-e2e, web-e2e]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Update fixed quality issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TYPE_RESULT: ${{ needs.type-check.result }}
+          TEST_RESULT: ${{ needs.tests.result }}
+          ADMIN_RESULT: ${{ needs.admin-e2e.result }}
+          E2E_RESULT: ${{ needs.web-e2e.result }}
+        run: |
+          TITLE="[Quality Alert] 週次フル検査に失敗があります"
+          gh label create quality-suite-alert --description "週次フル品質検査" --color b60205 --force
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label quality-suite-alert --json number --jq '.[0].number // empty')
+          if [ "$TYPE_RESULT" = success ] && [ "$TEST_RESULT" = success ] && [ "$ADMIN_RESULT" = success ] && [ "$E2E_RESULT" = success ]; then
+            if [ -n "$existing" ]; then
+              gh issue close "$existing" --repo "$GITHUB_REPOSITORY" --reason completed --comment "週次フル検査が正常に戻りました。"
+            fi
+            exit 0
+          fi
+          cat > /tmp/quality-suite-issue.md <<EOF
+          週次フル品質検査で失敗が検出されました。
+
+          - 型検査: $TYPE_RESULT
+          - 単体テスト・カバレッジ・Remotion bundle: $TEST_RESULT
+          - Admin build・全E2E: $ADMIN_RESULT
+          - Webビルド・全E2E: $E2E_RESULT
+          - 実行: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+
+          同じ障害ではこのIssueを更新し、全検査の回復時に自動で閉じます。
+          EOF
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file /tmp/quality-suite-issue.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --label "quality-suite-alert,auto-generated" --body-file /tmp/quality-suite-issue.md
+          fi
+          exit 1

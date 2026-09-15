@@ -243,6 +243,13 @@ import { useD3Tooltip } from "@stats47/visualization";
 const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 ```
 
+### 数値軸と単位
+
+- 数値軸は `compactAxisFormat` で短く表示し、完全値はツールチップに表示する
+- 単位を持つ統計チャートは、設定値を優先し、未設定時は観測値の `unit` を引き継ぐ
+- 解決した単位は単軸・複数軸を問わず描画プリミティブへ渡し、ツールチップにも表示する
+- 単位の解決は `resolveChartUnit` を使い、各チャートに個別の fallback を書かない
+
 ### SVG サイズ
 
 - ミニチャート: `viewBox="0 0 260 84"` を基準に `width="100%"` でレスポンシブ
@@ -287,6 +294,10 @@ const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = 
 | C. 独自カードラッパー | `features/`配下にcard/frame様の独自ラッパー | grep |
 | D. useD3Tooltip未使用 | D3使用ファイルに`useD3Tooltip`なし | grep |
 | E. shadcn Card未使用 | カード形状なのに`Card`インポートなし | grep |
+| F. 単位の受け渡し漏れ | 単位対応プリミティブに `unit` がない | `design-system:check` |
+| G. 軸ラベルのはみ出し | 数値軸で `toLocaleString()` を直接使用 | `design-system:check` |
+| H. 独自ツールチップDOM | chart内の `createElement("div")` / `innerHTML` | `design-system:check` |
+| I. SVGの説明不足 | `role="img"` / `aria-label` のないチャートSVG | `design-system:check` |
 
 §2-D の例外認定リストに載っているものはB・Dの対象外とする。
 
@@ -296,6 +307,7 @@ const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = 
 
 | 日付 | 変更内容 |
 |---|---|
+| 2026-09-15 | 単位解決・短縮軸・共通ツールチップの表示契約と機械検査を追加 |
 | 2026-06-17 | 全コンポーネントをカタログ化（3層構造・SSoT確立）。`features/stat-charts/` → `components/stat-charts/` 移行記録 |
 | 2026-06 | 初版作成（MiniCharts・ChartCard・基本ルール） |
 

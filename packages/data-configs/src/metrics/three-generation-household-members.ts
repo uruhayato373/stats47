@@ -5,6 +5,7 @@ export const threeGenerationHouseholdMembers: MetricConfig = {
   "title": "3世代世帯人員",
   "unit": "人",
   "category": "population",
+  "surveyId": "census",
   "source": {
     "kind": "estat",
     "statsDataId": "0003445285",

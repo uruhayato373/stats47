@@ -14,13 +14,13 @@ npm run test:coverage # カバレッジ付き実行
 
 - 設定: `vitest.config.ts`
 - テストファイル: `src/**/*.test.ts(x)`, `src/**/__tests__/**`
-- CI: `.github/workflows/pr-quality-check.yml`
+- CI: PRは変更範囲の通常テスト、週次`quality-suite-weekly.yml`は全体coverage
 
 ### カバレッジ方針（回帰防止 floor・単一ソース）
 
 カバレッジは「目標 100%」ではなく **「下げない floor（回帰防止線）」** で運用します。
 
-- **単一ソース**: `apps/web/coverage-thresholds.json`（lines/statements/functions/branches）。`vitest.config.ts` がこれを読んで enforce（未達で `test:coverage` が exit 1）し、CI のカバレッジコメントも同ファイルを表示する。**閾値を他の場所にハードコードしない**（過去に CI と vitest で 100/10 に分裂した反省）。
+- **単一ソース**: `apps/web/coverage-thresholds.json`（lines/statements/functions/branches）。`vitest.config.ts` がこれを読んで enforce（未達で `test:coverage` が exit 1）する。週次CIはcoverage成果物を保存する。**閾値を他の場所にハードコードしない**（過去に CI と vitest で 100/10 に分裂した反省）。
 - **分母はロジック層のみ**: `src/app` は `page` / `layout` / `route` / OGP / sitemap 等の結線ファイルだけを除外し、同階層の再利用ロジックは coverage 対象にする。`src/middleware.ts`・`src/providers`・`src/store` の結線は E2E 担当。
 - **重要module floor**: `.claude/config/critical-module-coverage.json` がroute metadataを含む重要契約のmodule別lines / branches / functionsを保持し、PRで個別にenforceする。
 - **floor の bump**: floor は自動追随しない。カバレッジが十分上がったら、四半期または大型 PR の節目に `coverage-thresholds.json` を手動で引き上げる（放置すると形骸化する）。緑=十分ではなく「floor を割っていない」だけ。
@@ -28,13 +28,19 @@ npm run test:coverage # カバレッジ付き実行
 ## 2. E2E テスト（Playwright）
 
 Next.js の本番ビルドを起動し、実際のブラウザでページ遷移・操作・表示を検証します。
-PRではknown route matrixとresponsive smokeをrequired jobで実行し、全件は専用E2E jobで検証します。ブラウザはChromiumのみです。
+PRでは主要導線・レスポンシブ・アクセシビリティ・構造化データの代表specをrequired jobで実行し、全件は週次`quality-suite-weekly.yml`で検証します。ブラウザはChromiumのみです。
 
 ```bash
 npm run test:e2e       # Chromium で実行
 npm run test:e2e:ui    # UI モード
 npm run test:e2e:headed # ブラウザ表示あり
 ```
+
+通常のローカル確認はルートから`npm run check:local`を使います。起動済みdevサーバーを再利用し、
+未コミット差分から最大3テンプレートを選び、各1回計測します。型検査は`--typecheck`、直接対応するunit test最大12件は
+`--tests`を付けた場合だけ追加します。production相当を明示確認するときは
+`npm run check:release-local`を使い、1回のbuildを代表page-qualityとE2Eで共有します。
+全URL・複数回計測・全E2Eは週次CIが担当します。
 
 - 設定: `playwright.config.ts`
 - サーバー未起動時は `npm run build` と `next start` を自動実行

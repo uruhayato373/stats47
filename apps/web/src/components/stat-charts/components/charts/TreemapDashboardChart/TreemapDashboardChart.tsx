@@ -3,7 +3,7 @@ import { logger } from "@stats47/logger";
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
-import { toTreemapData } from "../../../adapters";
+import { resolveChartUnit, toTreemapData } from "../../../adapters";
 import { fetchEstatDataWithCategories } from "../../../services";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
@@ -26,6 +26,7 @@ export const TreemapDashboardChart = async ({
   const areaCode = area.areaCode;
 
   let data: HierarchyData | null = null;
+  let unit: string | undefined;
   let fetchErrorMessage: string | null = null;
 
   try {
@@ -38,6 +39,7 @@ export const TreemapDashboardChart = async ({
     if ("error" in result) {
       fetchErrorMessage = result.error;
     } else {
+      unit = resolveChartUnit(undefined, [result.data]);
       data = toTreemapData(result.data, {
         rootCode,
         childCodes,
@@ -74,7 +76,7 @@ export const TreemapDashboardChart = async ({
         />
       }
     >
-      <TreemapChartClient data={data} />
+      <TreemapChartClient data={data} unit={unit} />
     </ChartPanel>
   );
 };

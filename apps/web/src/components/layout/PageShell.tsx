@@ -96,13 +96,10 @@ export function PageShell({
         ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_316px] xl:gap-10 xl:items-start'
         : '';
 
-  // 左レールと右レールは併存しない (showLeft = hasLeft && !hasRight) ので、
-  // 積み下ろしの境界はどちらか一方だけを見ればよい。
-  const narrowHiddenClass = showLeft
-    ? LEFT_RAIL_NARROW_ONLY_CLASS
-    : rightRailBreakpoint === 'lg'
-      ? 'lg:hidden'
-      : 'xl:hidden';
+  const rightRailClass =
+    rightRailBreakpoint === 'lg'
+      ? 'mt-10 space-y-8 lg:mt-0'
+      : 'mt-10 space-y-8 xl:mt-0';
 
   // reading variant は本文カラムを可読幅に制限（レールが無い場合は中央寄せ）
   const mainClass = cn(
@@ -113,8 +110,8 @@ export function PageShell({
   return (
     <div className={cn(SHELL_WIDTH_CLASS, 'py-8', className)}>
       {hasRight || hasLeft ? (
-        <>
-          {showLeft ? (
+        showLeft ? (
+          <>
             <LeftRailLayout
               leftRail={leftRail}
               mainClassName={mainClass}
@@ -122,28 +119,20 @@ export function PageShell({
             >
               {children}
             </LeftRailLayout>
-          ) : (
-            <div className={rightGridClass}>
-              <div className={mainClass}>{children}</div>
-              {hasRight && (
-                <div
-                  className={
-                    rightRailBreakpoint === 'lg'
-                      ? 'hidden lg:block'
-                      : 'hidden xl:block'
-                  }
-                >
-                  {rightRail}
-                </div>
-              )}
-            </div>
-          )}
-          {/* レール表示幅未満でレールを本文下に積み下ろす */}
-          <div className={cn('mt-10 space-y-8', narrowHiddenClass)}>
-            {hasRight && rightRail}
-            {showLeft && leftRailNarrowBehavior === 'stack' && leftRail}
+            {leftRailNarrowBehavior === 'stack' && (
+              <div
+                className={cn('mt-10 space-y-8', LEFT_RAIL_NARROW_ONLY_CLASS)}
+              >
+                {leftRail}
+              </div>
+            )}
+          </>
+        ) : (
+          <div className={rightGridClass}>
+            <div className={mainClass}>{children}</div>
+            {hasRight && <div className={rightRailClass}>{rightRail}</div>}
           </div>
-        </>
+        )
       ) : (
         <div className={mainClass}>{children}</div>
       )}

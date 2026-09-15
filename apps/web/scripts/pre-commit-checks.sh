@@ -26,10 +26,13 @@ refresh_staged_paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WEB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-# 1. TypeScript型チェック（staged に apps/web の .ts/.tsx が含まれる場合のみ実行）
+# 1. TypeScript型チェック
+# 通常commitでは実行しない。web全体を読むため単一ファイル変更でも約1分かかり、
+# 編集の反復を止める。main PRの必須CIと週次full suiteが全体を検査する。
+# ローカルで明示確認したい場合だけ PRECOMMIT_FULL_TYPECHECK=1 を付ける。
 echo -e "${GREEN}📐 TypeScript型チェック...${NC}"
 STAGED_WEB_TSFILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '^apps/web/.*\.(ts|tsx)$' | grep -v '^apps/web/scripts/' || true)
-if [ -n "$STAGED_WEB_TSFILES" ]; then
+if [ -n "$STAGED_WEB_TSFILES" ] && [ "${PRECOMMIT_FULL_TYPECHECK:-0}" = "1" ]; then
   if ! (cd "$WEB_DIR" && npm run type-check > /dev/null 2>&1); then
     echo -e "${RED}❌ TypeScriptの型エラーが検出されました。${NC}"
     echo -e "${YELLOW}💡 詳細を確認: npm run type-check${NC}"
@@ -37,6 +40,9 @@ if [ -n "$STAGED_WEB_TSFILES" ]; then
   else
     echo -e "${GREEN}✅ 型チェック成功${NC}"
   fi
+elif [ -n "$STAGED_WEB_TSFILES" ]; then
+  echo -e "${GREEN}✅ 全体型チェックは高速commitではskip（PR CI・週次CIで実行）${NC}"
+  echo -e "${YELLOW}💡 明示実行: PRECOMMIT_FULL_TYPECHECK=1 git commit ...${NC}"
 else
   echo -e "${GREEN}✅ apps/web の .ts/.tsx 変更なし、型チェック skip${NC}"
 fi

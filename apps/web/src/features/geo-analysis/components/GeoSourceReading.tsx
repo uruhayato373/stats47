@@ -1,7 +1,6 @@
 import { GIS_DATASETS_BY_ID } from '@stats47/gis/mlit-ksj';
 
 import { ContentDisclosure } from '@/components/content';
-import { SurfaceCard } from '@/components/surface';
 
 import { findGeoSourceThumbnail } from '../lib/geo-source-thumbnail';
 
@@ -15,7 +14,7 @@ export function GeoSourceReading({
   content: GeoSourcePageContent;
 }) {
   return (
-    <SurfaceCard
+    <section
       className="mt-3 space-y-3 p-3"
       data-geo-reading={content.dataId}
     >
@@ -85,6 +84,6 @@ export function GeoSourceReading({
           })}
         </ul>
       </section>
-    </SurfaceCard>
+    </section>
   );
 }

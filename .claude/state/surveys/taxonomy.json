@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-13T18:20:01.465Z",
+  "generatedAt": "2026-09-15T08:52:59.436Z",
   "masterSurveyCount": 150,
   "ranking": {
-    "metrics": 2551,
-    "activeMetrics": 2408,
-    "applicableMetrics": 2464,
-    "activeApplicableMetrics": 2322,
+    "metrics": 2559,
+    "activeMetrics": 2416,
+    "applicableMetrics": 2472,
+    "activeApplicableMetrics": 2330,
     "notApplicable": 87,
     "activeNotApplicable": 86,
-    "resolved": 2464,
+    "resolved": 2472,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2322,
+    "activeResolved": 2330,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -116,8 +116,8 @@
       "boj-statistics": 5,
       "buried-cultural-property-statistics": 1,
       "care-service-facility-survey": 7,
-      "census": 307,
-      "childcare-related-status-report": 1,
+      "census": 308,
+      "childcare-related-status-report": 2,
       "city-planning-survey": 8,
       "closed-school-facility-survey": 1,
       "commercial-dynamics-survey": 5,
@@ -127,7 +127,7 @@
       "construction-work-statistics": 4,
       "cpi-annual": 19,
       "crop-statistics": 8,
-      "economic-census-activity": 62,
+      "economic-census-activity": 63,
       "economic-census-basic": 19,
       "economic-structure-survey": 14,
       "electricity-business-statistics": 2,
@@ -161,7 +161,7 @@
       "japan-post-statistics": 6,
       "job-placement-statistics": 11,
       "junior-high-athletics-membership-survey": 10,
-      "kakei-chousa": 707,
+      "kakei-chousa": 709,
       "labor-market-annual": 9,
       "late-elderly-medical-annual-report": 1,
       "life-insurance-business-statistics": 4,
@@ -238,7 +238,7 @@
       "truck-operator-statistics": 1,
       "urban-park-survey": 12,
       "vehicle-registration-statistics": 1,
-      "vital-statistics": 59,
+      "vital-statistics": 61,
       "voter-registration-statistics": 1,
       "wage-structure-survey": 76,
       "waste-management-survey": 7,
@@ -247,7 +247,7 @@
       "water-pollution-survey": 3,
       "waterworks-statistics": 5,
       "weather-statistics": 12,
-      "welfare-admin-report": 18,
+      "welfare-admin-report": 19,
       "wind-power-deployment-statistics": 2,
       "wood-supply-demand-report": 6,
       "workers-compensation-annual-report": 2,
@@ -289,6 +289,7 @@
       "agriculture-forestry-census": [
         "agriculture-production",
         "forestry-timber",
+        "local-economy",
         "natural-environment"
       ],
       "area-survey": [
@@ -373,6 +374,7 @@
         "manufacturing"
       ],
       "electricity-business-statistics": [
+        "local-economy",
         "regional-energy"
       ],
       "employment-structure-survey": [
@@ -620,6 +622,7 @@
         "safety"
       ],
       "public-assistance-survey": [
+        "local-finance",
         "public-assistance",
         "single-parent-households"
       ],
@@ -2062,6 +2065,7 @@
       "themeKeys": [
         "agriculture-production",
         "forestry-timber",
+        "local-economy",
         "natural-environment"
       ],
       "blogSlugs": [
@@ -2154,7 +2158,7 @@
     },
     {
       "surveyId": "census",
-      "rankingCount": 307,
+      "rankingCount": 308,
       "themeKeys": [
         "aging-society",
         "childcare-services",
@@ -2314,7 +2318,7 @@
     },
     {
       "surveyId": "childcare-related-status-report",
-      "rankingCount": 1,
+      "rankingCount": 2,
       "themeKeys": [
         "childcare-services"
       ],
@@ -2407,7 +2411,7 @@
     },
     {
       "surveyId": "economic-census-activity",
-      "rankingCount": 62,
+      "rankingCount": 63,
       "themeKeys": [
         "business-demography",
         "construction-industry",
@@ -2481,6 +2485,7 @@
       "surveyId": "electricity-business-statistics",
       "rankingCount": 2,
       "themeKeys": [
+        "local-economy",
         "regional-energy"
       ],
       "blogSlugs": [
@@ -2846,7 +2851,7 @@
     },
     {
       "surveyId": "kakei-chousa",
-      "rankingCount": 707,
+      "rankingCount": 709,
       "themeKeys": [
         "earthquake-exposure",
         "living-housing",
@@ -3849,6 +3854,7 @@
       "surveyId": "public-assistance-survey",
       "rankingCount": 16,
       "themeKeys": [
+        "local-finance",
         "public-assistance",
         "single-parent-households"
       ],
@@ -4193,7 +4199,7 @@
     },
     {
       "surveyId": "vital-statistics",
-      "rankingCount": 59,
+      "rankingCount": 61,
       "themeKeys": [
         "aging-society",
         "healthcare",
@@ -4345,7 +4351,7 @@
     },
     {
       "surveyId": "welfare-admin-report",
-      "rankingCount": 18,
+      "rankingCount": 19,
       "themeKeys": [
         "disability-support",
         "local-finance",

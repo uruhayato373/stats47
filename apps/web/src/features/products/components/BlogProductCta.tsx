@@ -1,6 +1,6 @@
 import { BookOpen } from "lucide-react";
 
-import { SurfaceSection, getSurfaceCardClassName } from "@/components/surface";
+import { SurfaceSection } from "@/components/surface";
 
 import { findKindleProductForBlog } from "../storefront";
 
@@ -25,10 +25,7 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
             href={href}
             label={`${product.id}:${product.title}`}
             surface="blog_product"
-            className={getSurfaceCardClassName({
-              interactive: true,
-              className: "mt-4 inline-flex items-center border-primary/30 px-4 py-2 text-sm font-medium text-primary",
-            })}
+            className="mt-4 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             内容と価格を確認する →
           </TrackedProductLink>

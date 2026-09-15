@@ -13,6 +13,8 @@ interface ChartStateProps {
 interface ChartMessageStateProps extends ChartStateProps {
   title?: ReactNode;
   message?: ReactNode;
+  /** 親の ChartPanel 内で使う場合は false にして外枠を重ねない。 */
+  bordered?: boolean;
 }
 
 export function ChartLoading({ height, className }: ChartStateProps) {
@@ -47,9 +49,10 @@ export function ChartErrorState({
   message = "チャートを表示できません",
   height = 250,
   className,
+  bordered = true,
 }: ChartMessageStateProps) {
-  return (
-    <SurfaceCard className={cn("p-4", className)}>
+  const content = (
+    <>
       {title && <h3 className="mb-3 text-lg font-semibold">{title}</h3>}
       <div
         className="flex items-center justify-center bg-muted/10 text-sm text-destructive"
@@ -57,8 +60,11 @@ export function ChartErrorState({
       >
         {message}
       </div>
-    </SurfaceCard>
+    </>
   );
+
+  if (!bordered) return <div className={className}>{content}</div>;
+  return <SurfaceCard className={cn("p-4", className)}>{content}</SurfaceCard>;
 }
 
 export function ChartLoadingCard({

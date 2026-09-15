@@ -5,6 +5,7 @@ export const mothersAgeAtFirstBirth: MetricConfig = {
   "title": "第1子出生時の母の平均年齢",
   "unit": "歳",
   "category": "population",
+  "surveyId": "vital-statistics",
   "source": {
     "kind": "estat",
     "statsDataId": "0003411610",

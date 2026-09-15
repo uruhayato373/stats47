@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from '@stats47/data-configs/business-plan';
 
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard, SurfaceSection } from '@/components/surface';
+import { SurfaceCard } from '@/components/surface';
 
 import { formatGeoValue, isGeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
 import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
@@ -38,7 +38,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <SurfaceSection>
+    <section>
       <SectionHeader
         title={`${areaName}の空間分析`}
         description="人口・住まい・防災・交通を、都道府県平均だけでなく公式GISレイヤーの重なりから確認します。"
@@ -71,6 +71,6 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
           </SurfaceCard>
         ))}
       </div>
-    </SurfaceSection>
+    </section>
   );
 }

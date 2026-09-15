@@ -66,7 +66,9 @@ Stage 1: 素材収集 (同一セッションの並列tool call)
   c. GSC 検索需要 — 既存 snapshot CSV を grep (API を再取得しない)
 Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher サブ agent を spawn しない)。
      過去に estat-researcher を background 起動して待ち、自分の turn が synthesize せず終わる事故が続いた
-     (2026-07-04)。よって: (a) 登録済みは `grep registry.ts`、(b) 未登録候補は自分で e-Stat を
+     (2026-07-04)。よって: (a) 登録済みは `grep registry.ts`、(b) 未登録候補はまず
+     `.claude/state/estat/ssds-candidates.json` (週次自動更新、SSDS都道府県指標の未使用cdCat01一覧。
+     `.github/workflows/estat-ssds-enum.yml`) に該当が無いか確認し、無ければ自分で e-Stat を
      WebFetch/検索して **statsDataId+cdCat01 を突き止める**。解決できない候補は提案へ混ぜず`unknown`として不採用記録へ送る。
      (AI 生成 key は実在 metric と乖離しがち。memory: feedback_backlog_ranking_key_audit)
      論点候補は公式 HTTPS URL、`EVIDENCE_SOURCE_CATALOG`、関連 route の実在を照合する。

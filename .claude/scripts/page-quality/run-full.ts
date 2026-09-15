@@ -5,7 +5,7 @@
  * ブラウザ計測(LCP/CLS/INP等)は重いため既定では静的解析のみ (--with-browser で追加、通常は使わない)。
  *
  * Usage:
- *   tsx .claude/scripts/page-quality/run-full.ts --base-url https://stats47.jp [--concurrency 4] [--with-browser] [--limit 200]
+ *   tsx .claude/scripts/page-quality/run-full.ts --base-url https://stats47.jp [--concurrency 4] [--with-browser] [--runs 3] [--limit 200]
  *
  * Exit code:
  *   0 = error違反なし
@@ -13,6 +13,7 @@
  *   2 = 入力不備・実行時エラー
  */
 import { auditUrl } from "./lib/audit-url";
+import { createBrowserMeasurementSession } from "./lib/measure-browser";
 import { currentCommitSha } from "./lib/git-diff";
 import { enumerateAllUrls } from "./lib/enumerate-urls";
 import { evaluateAll, loadBudgets } from "./lib/thresholds";
@@ -31,10 +32,15 @@ function parseArgs() {
     const i = args.indexOf(flag);
     return i >= 0 ? args[i + 1] : undefined;
   };
+  const browserRuns = Number(get("--runs") ?? "3");
+  if (!Number.isInteger(browserRuns) || browserRuns < 1 || browserRuns > 5) {
+    throw new Error(`--runs は1〜5の整数で指定してください: ${browserRuns}`);
+  }
   return {
     baseUrl: get("--base-url") ?? "http://localhost:3100",
     concurrency: Number(get("--concurrency") ?? "4"),
     withBrowser: args.includes("--with-browser"),
+    browserRuns,
     limit: get("--limit") ? Number(get("--limit")) : undefined,
   };
 }
@@ -72,12 +78,22 @@ async function main() {
 
   const generatedAt = new Date().toISOString();
   let done = 0;
-  const results: PageAuditResult[] = await runWithConcurrency(urls, opts.concurrency, async ({ path, template }) => {
-    const result = await auditUrl(opts.baseUrl, path, template, { withBrowser: opts.withBrowser });
-    done += 1;
-    if (done % 200 === 0) console.log(`  ${done}/${urls.length}`);
-    return result;
-  });
+  const browserSession = opts.withBrowser ? await createBrowserMeasurementSession() : undefined;
+  let results: PageAuditResult[];
+  try {
+    results = await runWithConcurrency(urls, opts.concurrency, async ({ path, template }) => {
+      const result = await auditUrl(opts.baseUrl, path, template, {
+        withBrowser: opts.withBrowser,
+        browserSession,
+        browserRuns: opts.browserRuns,
+      });
+      done += 1;
+      if (done % 200 === 0) console.log(`  ${done}/${urls.length}`);
+      return result;
+    });
+  } finally {
+    await browserSession?.close();
+  }
 
   const budgets = loadBudgets();
   const date = generatedAt.slice(0, 10);

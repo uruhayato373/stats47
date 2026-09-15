@@ -343,6 +343,8 @@ export function CityMapChart({
         preserveAspectRatio="xMidYMid meet"
         className="w-full h-auto"
         style={{ touchAction: "none" }}
+        role="img"
+        aria-label={`市区町村別コロプレス地図。データ数: ${data.length}。単位: ${unit || "未設定"}`}
       />
     </div>
   );

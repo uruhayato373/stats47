@@ -5,6 +5,7 @@ export const cramSchoolEstablishmentCount: MetricConfig = {
   "title": "学習塾事業所数",
   "unit": "事業所",
   "category": "economy",
+  "surveyId": "economic-census-activity",
   "source": {
     "kind": "estat",
     "statsDataId": "0004003273",

@@ -348,6 +348,8 @@ export function PrefectureMapChart({
         preserveAspectRatio="xMidYMid meet"
         className="w-full h-auto"
         style={{ touchAction: "none" }}
+        role="img"
+        aria-label={`都道府県別コロプレス地図。データ数: ${data.length}。単位: ${unit || "未設定"}`}
       />
 
     </div>

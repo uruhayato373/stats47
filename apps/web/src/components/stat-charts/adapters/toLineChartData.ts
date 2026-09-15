@@ -1,12 +1,15 @@
 import { CHART_COLORS } from "../constants";
 
+import { resolveChartUnit } from "./resolve-chart-unit";
+
 import type { LineChartData } from "../types/visualization";
 import type { StatsSchema } from "@stats47/types";
 
 export function toLineChartData(
   rawDataList: StatsSchema[][],
   seriesLabels?: string[],
-  seriesColors?: string[]
+  seriesColors?: string[],
+  unit?: string,
 ): LineChartData {
   const labels = seriesLabels ?? rawDataList.map(() => "");
   const yearMap = new Map<string, Record<string, string | number>>();
@@ -38,6 +41,6 @@ export function toLineChartData(
       name: label,
       color: seriesColors?.[i] ?? CHART_COLORS[i % CHART_COLORS.length],
     })),
-    unit: rawDataList[0]?.[0]?.unit ?? undefined,
+    unit: resolveChartUnit(unit, rawDataList),
   };
 }

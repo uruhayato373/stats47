@@ -1,7 +1,5 @@
 import { BookOpen } from "lucide-react";
 
-
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { DashboardComponentRenderer } from "@/components/stat-charts/server";
 import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
 import { getSurfaceCardClassName } from "@/components/surface";
@@ -10,7 +8,6 @@ import { AreaChartSection } from "@/features/area-profile";
 
 import { getAreaDatabook, type AreaDatabookViewData } from "../server/get-area-databook";
 
-import { DatabookToc } from "./DatabookToc";
 import { GenderPairedKpiGrid } from "./GenderPairedKpiGrid";
 import { PrefSymbolPanel } from "./PrefSymbolPanel";
 import { RankedKpiGrid } from "./RankedKpiGrid";
@@ -34,14 +31,23 @@ function sectionHasContent(
   return section.blocks.some((block) => {
     switch (block.blockType) {
       case "symbol-card":
+        return data.editorial !== null;
       case "specialty-list":
-        return data.editorial !== null && data.editorial.specialties.length >= 0;
+        return (data.editorial?.specialties.length ?? 0) > 0;
       case "agri-top10":
         return (data.databook?.agriTop10.length ?? 0) > 0;
       default:
         return true; // ranked-kpi / gender-paired / chart は databook 前提で常に描画
     }
   });
+}
+
+function hasMultipleHalfWidthCharts(section: DatabookSectionType): boolean {
+  return section.blocks.filter(
+    (block) =>
+      block.blockType === "chart" &&
+      (block.chart.gridColumnSpan ?? 12) <= 6,
+  ).length > 1;
 }
 
 function renderBlock(
@@ -75,24 +81,28 @@ function renderBlock(
     case "agri-top10":
       if (!data.databook || data.databook.agriTop10.length === 0) return null;
       return (
-        <ul key={block.blockKey} className="grid grid-cols-2 gap-1.5 @container @sm:grid-cols-3">
-          {data.databook.agriTop10.map((it, i) => (
-            <li
-              key={it.name}
-              className={getSurfaceCardClassName({
-                className: "flex items-baseline justify-between px-2.5 py-1.5 text-sm",
-              })}
-            >
-              <span className="text-muted-foreground">
-                {i + 1}. {it.name}
-              </span>
-              <span className="font-bold tabular-nums">
-                {it.value.toLocaleString("ja-JP")}
-                <span className="ml-0.5 text-[11px] text-muted-foreground">{it.unit}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div key={block.blockKey} className="@container">
+          <ul
+            className={getSurfaceCardClassName({
+              className: "grid grid-cols-2 gap-px overflow-hidden bg-border p-0 @sm:grid-cols-3",
+            })}
+          >
+            {data.databook.agriTop10.map((it, i) => (
+              <li
+                key={it.name}
+                className="flex items-baseline justify-between bg-card px-2.5 py-1.5 text-sm"
+              >
+                <span className="text-muted-foreground">
+                  {i + 1}. {it.name}
+                </span>
+                <span className="font-bold tabular-nums">
+                  {it.value.toLocaleString("ja-JP")}
+                  <span className="ml-0.5 text-[11px] text-muted-foreground">{it.unit}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       );
     case "chart": {
       const chart = block.chart;
@@ -158,28 +168,55 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
         <h2 className="text-xl font-bold">{areaName}のデータブック</h2>
       </div>
 
-      <DatabookToc
-        items={sections.map((s) => ({ sectionKey: s.sectionKey, title: s.title }))}
-      />
-
-      {sections.map((section) => (
-        <div
-          key={section.sectionKey}
-          id={`databook-${section.sectionKey}`}
-          className="scroll-mt-24"
-        >
-          <ChartPanel
-            title={section.title}
-            titleClassName="text-base"
-            description={section.description}
-            contentClassName="space-y-4"
+      {sections.map((section) => {
+        const useHalfWidthCharts = hasMultipleHalfWidthCharts(section);
+        return (
+          <section
+            key={section.sectionKey}
+            id={`databook-${section.sectionKey}`}
+            aria-labelledby={`databook-${section.sectionKey}-title`}
+            className="scroll-mt-24 space-y-3 border-t border-border pt-5 first:border-t-0 first:pt-0"
           >
-            {section.blocks.map((block) =>
-              renderBlock(block, data, areaCode, areaName),
-            )}
-          </ChartPanel>
-        </div>
-      ))}
+            <div>
+              <h3
+                id={`databook-${section.sectionKey}-title`}
+                className="text-lg font-bold text-foreground"
+              >
+                {section.title}
+              </h3>
+              {section.description && (
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  {section.description}
+                </p>
+              )}
+            </div>
+            <div className="@container grid grid-cols-12 gap-3">
+              {section.blocks.map((block) => {
+              const useHalfWidth =
+                block.blockType === "chart" &&
+                (block.chart.gridColumnSpan ?? 12) <= 6 &&
+                useHalfWidthCharts;
+              const key =
+                block.blockType === "chart"
+                  ? block.chart.componentKey
+                  : block.blockKey;
+              return (
+                <div
+                  key={key}
+                  className={
+                    useHalfWidth
+                      ? "col-span-12 @md:col-span-6"
+                      : "col-span-12"
+                  }
+                >
+                  {renderBlock(block, data, areaCode, areaName)}
+                </div>
+              );
+              })}
+            </div>
+          </section>
+        );
+      })}
     </section>
   );
 }

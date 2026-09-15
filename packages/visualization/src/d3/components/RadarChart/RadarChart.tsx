@@ -242,6 +242,8 @@ export function RadarChart({
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
           className="h-auto w-full"
+          role="img"
+          aria-label={`${title ? `レーダーチャート「${title}」` : "レーダーチャート"}。軸: ${axes.map((axis) => axis.label).join("、")}。系列: ${data.map((item) => item.label).join("、")}`}
         />
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/50">

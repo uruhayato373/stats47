@@ -2,7 +2,7 @@
  * 変更時の軽量検査。git diffから影響テンプレートを判定し、代表URL1件ずつだけ計測する。
  *
  * Usage:
- *   tsx .claude/scripts/page-quality/run-representative.ts --base-url http://localhost:3100 [--base origin/main] [--all] [--no-browser]
+ *   tsx .claude/scripts/page-quality/run-representative.ts --base-url http://localhost:3100 [--base origin/main] [--all] [--no-browser] [--runs 1]
  *
  * Exit code:
  *   0 = error違反なし (warningのみは0)
@@ -11,6 +11,7 @@
  */
 import { affectedTemplates, PAGE_TEMPLATES } from "./templates";
 import { auditUrl } from "./lib/audit-url";
+import { createBrowserMeasurementSession } from "./lib/measure-browser";
 import { changedFilesSince, currentCommitSha } from "./lib/git-diff";
 import { evaluateAll, loadBudgets } from "./lib/thresholds";
 import { appendHistory, readPreviousValue, writeLatestJson, writeLatestMarkdown } from "./lib/storage";
@@ -22,18 +23,47 @@ function parseArgs() {
     const i = args.indexOf(flag);
     return i >= 0 ? args[i + 1] : undefined;
   };
+  const browserRuns = Number(get("--runs") ?? "1");
+  if (!Number.isInteger(browserRuns) || browserRuns < 1 || browserRuns > 5) {
+    throw new Error(`--runs は1〜5の整数で指定してください: ${browserRuns}`);
+  }
+  const maxTemplatesRaw = get("--max-templates");
+  const maxTemplates = maxTemplatesRaw ? Number(maxTemplatesRaw) : undefined;
+  if (maxTemplates !== undefined && (!Number.isInteger(maxTemplates) || maxTemplates < 1)) {
+    throw new Error(`--max-templates は1以上の整数で指定してください: ${maxTemplatesRaw}`);
+  }
   return {
     baseUrl: get("--base-url") ?? "http://localhost:3100",
     diffBase: get("--base") ?? "origin/main",
     all: args.includes("--all"),
     withBrowser: !args.includes("--no-browser"),
+    browserRuns,
+    maxTemplates,
   };
 }
 
 async function main() {
   const opts = parseArgs();
   const changed = opts.all ? [] : changedFilesSince(opts.diffBase);
-  const templates = opts.all ? [...PAGE_TEMPLATES] : affectedTemplates(changed);
+  let templates = opts.all ? [...PAGE_TEMPLATES] : affectedTemplates(changed);
+  if (!opts.all && opts.maxTemplates && templates.length > opts.maxTemplates) {
+    const priority = [
+      "home",
+      "prefecture-detail",
+      "theme",
+      "ranking",
+      "blog",
+      "geo-analysis",
+      "prefecture-list",
+      "municipality",
+      "category",
+      "survey",
+      "other",
+    ];
+    templates = [...templates]
+      .sort((left, right) => priority.indexOf(left.key) - priority.indexOf(right.key))
+      .slice(0, opts.maxTemplates);
+  }
 
   if (templates.length === 0) {
     console.log(
@@ -48,12 +78,19 @@ async function main() {
 
   const generatedAt = new Date().toISOString();
   const results: PageAuditResult[] = [];
-  for (const template of templates) {
-    console.log(`  計測中: ${template.key} ${template.representativeUrl}`);
-    const result = await auditUrl(opts.baseUrl, template.representativeUrl, template.key, {
-      withBrowser: opts.withBrowser,
-    });
-    results.push(result);
+  const browserSession = opts.withBrowser ? await createBrowserMeasurementSession() : undefined;
+  try {
+    for (const template of templates) {
+      console.log(`  計測中: ${template.key} ${template.representativeUrl}`);
+      const result = await auditUrl(opts.baseUrl, template.representativeUrl, template.key, {
+        withBrowser: opts.withBrowser,
+        browserSession,
+        browserRuns: opts.browserRuns,
+      });
+      results.push(result);
+    }
+  } finally {
+    await browserSession?.close();
   }
 
   const budgets = loadBudgets();

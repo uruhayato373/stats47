@@ -15,7 +15,10 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
         "surveyedAt": "2026-09-08",
-        "rationale": "総人口は「人口は増えているか」を読むため主要画面へ配置する。"
+        "rationale": "総人口は「人口は増えているか」を読むため主要画面へ配置する。",
+        "adoptionCriteria": ["complementarity", "readerValue"],
+        "readerQuestion": "人口増減率が示す変化は、どれくらいの規模の県で起きているか（小さな県の急減と大きな県の微減を混同しない）。",
+        "targetReaderOrDecision": "増減率だけでなく絶対的な人口規模を把握したい読者（自治体規模の比較、市場規模の見立て）。"
       }
     },
     {
@@ -59,7 +62,10 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
         "surveyedAt": "2026-09-08",
-        "rationale": "人口増減率は主問に直接答える見出し指標として残す。"
+        "rationale": "人口増減率は主問に直接答える見出し指標として残す。",
+        "adoptionCriteria": ["representativeness", "comparability", "readerValue"],
+        "readerQuestion": "自分の県、または比較したい県の人口は増えているか、減っているか。",
+        "targetReaderOrDecision": "移住・進学・就職で居住地を検討する読者、または自地域の将来像を把握したい読者。"
       }
     },
     {
@@ -70,7 +76,10 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
         "surveyedAt": "2026-09-08",
-        "rationale": "自然増減率は「出生と死亡・転入と転出の内訳」を読むため主要画面へ配置する。"
+        "rationale": "自然増減率は「出生と死亡・転入と転出の内訳」を読むため主要画面へ配置する。",
+        "adoptionCriteria": ["complementarity", "dataQuality"],
+        "readerQuestion": "人口増減は出生と死亡の差（自然要因）で起きているのか、転入と転出の差（社会要因）で起きているのか。",
+        "targetReaderOrDecision": "人口減少の背景（少子化か人口流出か）を理解したい読者、地域の実情を調べる読者。"
       }
     },
     {
@@ -257,7 +266,9 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "natural-social-change",
-      "sortOrder": 10
+      "sortOrder": 10,
+      "comparisonBasis": "同一都道府県内での出生数と死亡数の時系列推移（自然増減の内訳比較）",
+      "visualizationRationale": "出生・死亡は交差（デッドクロス）の有無が地域差の核心のため折れ線で推移を見せる。棒グラフでは交差点が読み取りにくい。"
     },
     {
       "componentKey": "theme-pop-migration-trend",
@@ -288,7 +299,9 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "natural-social-change",
-      "sortOrder": 20
+      "sortOrder": 20,
+      "comparisonBasis": "外国人転入者数と転出者数の時系列推移",
+      "visualizationRationale": "こちらも交差の有無が焦点のため、自然増減チャートと同じ折れ線形式に揃えテーマ内の視覚的一貫性を保つ。"
     },
     {
       "componentKey": "md-population-dynamics-discussion",
@@ -419,6 +432,12 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "md-population-dynamics-discussion",
         "md-population-dynamics-faq"
       ]
+    }
+  ],
+  "harmRelevance": [
+    {
+      "axis": "ambition",
+      "reason": "転入超過率・人口増減率は、進学・就職・転職を機に居住地を検討する読者が、成長地域か縮小地域かを比較する材料になる。人口動態そのものが悩みではなく、移住・キャリア選択の判断材料としての関連。"
     }
   ]
 };

@@ -11,3 +11,4 @@ export { toStackedAreaData } from "./toStackedAreaData";
 export { toRadarChartData } from "./toRadarChartData";
 export { toMixedChartData } from "./toMixedChartData";
 export { toPyramidChartData } from "./toPyramidChartData";
+export { resolveChartUnit } from "./resolve-chart-unit";

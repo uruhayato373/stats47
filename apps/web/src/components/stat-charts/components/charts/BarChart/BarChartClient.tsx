@@ -4,11 +4,15 @@ import React from "react";
 
 import dynamic from "next/dynamic";
 
+import {
+  compactAxisFormat,
+  type ChartDataNode,
+} from "@stats47/visualization/d3";
+
 import { CHART_COLORS } from "../../../constants";
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 import type { BarChartData } from "../../../types/visualization";
-import type { ChartDataNode } from "@stats47/visualization/d3";
 
 const BarChart = dynamic(
   () => import("@stats47/visualization/d3/BarChart").then((mod) => mod.BarChart),
@@ -26,7 +30,7 @@ export const BarChartClient: React.FC<BarChartClientProps> = ({
   chartType = "stacked-bar",
   xDomain,
 }) => {
-  const { categoryKey, data, series } = chartData;
+  const { categoryKey, data, series, unit } = chartData;
   const indexBy = categoryKey;
   const isMultiSeries = chartType === "stacked-bar" || chartType === "grouped";
 
@@ -41,7 +45,8 @@ export const BarChartClient: React.FC<BarChartClientProps> = ({
         height={300}
         showLegend
         colors={colors}
-        valueFormat={(d) => d.toLocaleString()}
+        valueFormat={compactAxisFormat}
+        unit={unit}
         xDomain={xDomain}
         mode={chartType === "grouped" ? "grouped" : "stacked"}
       />
@@ -58,7 +63,8 @@ export const BarChartClient: React.FC<BarChartClientProps> = ({
       colors={
         series[0]?.color ? [series[0].color] : CHART_COLORS
       }
-      valueFormat={(d) => d.toLocaleString()}
+      valueFormat={compactAxisFormat}
+      unit={unit}
       xDomain={xDomain}
     />
   );

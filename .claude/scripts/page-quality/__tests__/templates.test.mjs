@@ -17,6 +17,16 @@ test("共通レイアウトの変更は全テンプレートを返す", () => {
   assert.equal(result.length, PAGE_TEMPLATES.length);
 });
 
+test("共通CSS・UI primitiveの変更は全テンプレートを返す", () => {
+  for (const changedPath of [
+    "apps/web/src/app/globals.css",
+    "apps/web/src/components/ui/Button.tsx",
+    "apps/web/tailwind.config.ts",
+  ]) {
+    assert.equal(affectedTemplates([changedPath]).length, PAGE_TEMPLATES.length);
+  }
+});
+
 test("広告コンポーネントの変更は全テンプレートを返す", () => {
   const result = affectedTemplates(["apps/web/src/features/ads/components/AreaBannerAd.tsx"]);
   assert.equal(result.length, PAGE_TEMPLATES.length);

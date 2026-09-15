@@ -20,6 +20,17 @@ const unmeasured = (reason: string): MetricValue => ({ value: null, reason });
 // 標準監査条件 (.claude/skills/analytics/performance-improvement/SKILL.md と同一のモバイル再現条件)。
 const VIEWPORT = { width: 412, height: 915 };
 const DEVICE_SCALE_FACTOR = 2.625;
+type BrowserInstance = Awaited<ReturnType<typeof chromium.launch>>;
+
+export interface BrowserMeasurementOptions {
+  runs?: number;
+  timeoutMs?: number;
+}
+
+export interface BrowserMeasurementSession {
+  measure(url: string, options?: BrowserMeasurementOptions): Promise<BrowserMeasurement>;
+  close(): Promise<void>;
+}
 
 const IN_PAGE_COLLECTOR = `
 window.__pageQuality = { lcp: 0, cls: 0, inpCandidates: [] };
@@ -59,44 +70,35 @@ function median(values: number[]): number | null {
   return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
 }
 
-/**
- * Playwrightでの実ブラウザ計測。LCP/CLS/INPはN回計測の中央値 (単発のノイズに引きずられない)。
- * console/page errorと横スクロール・タップ領域は決定的なので1回で確定する。
- * launch/navigationが失敗した場合は全項目をnull+理由で返す (推測値を書かない)。
- */
-export async function measureBrowserMetrics(
+function launchFailure(reason: string): BrowserMeasurement {
+  return {
+    lcp_ms: unmeasured(reason),
+    cls: unmeasured(reason),
+    inp_ms: unmeasured(reason),
+    ttfb_ms: unmeasured(reason),
+    request_count: unmeasured(reason),
+    transfer_bytes: unmeasured(reason),
+    console_errors: 0,
+    page_errors: 0,
+    mobile_horizontal_scroll: false,
+    small_tap_targets: 0,
+  };
+}
+
+async function measureWithBrowser(
+  browser: BrowserInstance,
   url: string,
-  { runs = 3, timeoutMs = 20000 }: { runs?: number; timeoutMs?: number } = {}
+  { runs = 3, timeoutMs = 20000 }: BrowserMeasurementOptions = {}
 ): Promise<BrowserMeasurement> {
-  let browser: Awaited<ReturnType<typeof chromium.launch>>;
+  const context = await browser.newContext({
+    viewport: VIEWPORT,
+    deviceScaleFactor: DEVICE_SCALE_FACTOR,
+    isMobile: true,
+    hasTouch: true,
+    userAgent:
+      "Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) stats47-page-quality-audit",
+  });
   try {
-    browser = await chromium.launch({ headless: true });
-  } catch (e) {
-    const reason = `chromium launch failed: ${(e as Error).message}`;
-    return {
-      lcp_ms: unmeasured(reason),
-      cls: unmeasured(reason),
-      inp_ms: unmeasured(reason),
-      ttfb_ms: unmeasured(reason),
-      request_count: unmeasured(reason),
-      transfer_bytes: unmeasured(reason),
-      console_errors: 0,
-      page_errors: 0,
-      mobile_horizontal_scroll: false,
-      small_tap_targets: 0,
-    };
-  }
-
-  try {
-    const context = await browser.newContext({
-      viewport: VIEWPORT,
-      deviceScaleFactor: DEVICE_SCALE_FACTOR,
-      isMobile: true,
-      hasTouch: true,
-      userAgent:
-        "Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) stats47-page-quality-audit",
-    });
-
     let consoleErrors = 0;
     let pageErrors = 0;
     const lcpSamples: number[] = [];
@@ -106,6 +108,8 @@ export async function measureBrowserMetrics(
     let requestCount: number | null = null;
     let transferBytes: number | null = null;
     let navigationFailed: string | null = null;
+    let horizontalScroll = false;
+    let smallTapTargets = 0;
 
     for (let i = 0; i < runs; i++) {
       const page = await context.newPage();
@@ -127,7 +131,10 @@ export async function measureBrowserMetrics(
       }
       await page.addInitScript(IN_PAGE_COLLECTOR);
       try {
-        await page.goto(url, { waitUntil: "networkidle", timeout: timeoutMs });
+        await page.goto(url, {
+          waitUntil: runs === 1 ? "domcontentloaded" : "networkidle",
+          timeout: timeoutMs,
+        });
         await page.waitForTimeout(500); // レイアウトシフト・LCP確定を待つ
         const metrics = await page.evaluate(
           () =>
@@ -146,6 +153,20 @@ export async function measureBrowserMetrics(
         if (i === 0) {
           requestCount = requestCounter;
           transferBytes = bytesCounter;
+          const layout = await page.evaluate(() => {
+            const scroll = document.documentElement.scrollWidth > document.documentElement.clientWidth + 1;
+            const interactive = Array.from(
+              document.querySelectorAll("a, button, input, select, textarea, [role='button']")
+            );
+            const small = interactive.filter((element) => {
+              const rect = element.getBoundingClientRect();
+              if (rect.width === 0 && rect.height === 0) return false;
+              return rect.width < 44 || rect.height < 44;
+            }).length;
+            return { scroll, small };
+          });
+          horizontalScroll = layout.scroll;
+          smallTapTargets = layout.small;
         }
       } catch (e) {
         navigationFailed = (e as Error).message;
@@ -153,34 +174,6 @@ export async function measureBrowserMetrics(
         await page.close();
       }
     }
-
-    // 横スクロール・タップ領域は最後に開いたページ状態で1回だけ確定判定する
-    const page = await context.newPage();
-    let horizontalScroll = false;
-    let smallTapTargets = 0;
-    try {
-      await page.goto(url, { waitUntil: "domcontentloaded", timeout: timeoutMs });
-      const result = await page.evaluate(() => {
-        const scroll = document.documentElement.scrollWidth > document.documentElement.clientWidth + 1;
-        const interactive = Array.from(
-          document.querySelectorAll("a, button, input, select, textarea, [role='button']")
-        );
-        const small = interactive.filter((el) => {
-          const rect = el.getBoundingClientRect();
-          if (rect.width === 0 && rect.height === 0) return false; // 非表示要素は対象外
-          return rect.width < 44 || rect.height < 44;
-        }).length;
-        return { scroll, small };
-      });
-      horizontalScroll = result.scroll;
-      smallTapTargets = result.small;
-    } catch (e) {
-      navigationFailed = navigationFailed ?? (e as Error).message;
-    } finally {
-      await page.close();
-    }
-
-    await context.close();
 
     if (navigationFailed && lcpSamples.length === 0) {
       const reason = `navigation failed: ${navigationFailed}`;
@@ -216,6 +209,41 @@ export async function measureBrowserMetrics(
       small_tap_targets: smallTapTargets,
     };
   } finally {
-    await browser.close();
+    await context.close();
+  }
+}
+
+/** 1回起動したChromiumを複数URLで共有する。URLごとに独立contextを作るため状態は混在しない。 */
+export async function createBrowserMeasurementSession(): Promise<BrowserMeasurementSession> {
+  let browser: BrowserInstance | null = null;
+  let failureReason: string | null = null;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch (e) {
+    failureReason = `chromium launch failed: ${(e as Error).message}`;
+  }
+
+  return {
+    measure: (url, options) =>
+      browser
+        ? measureWithBrowser(browser, url, options)
+        : Promise.resolve(launchFailure(failureReason ?? "chromium launch failed")),
+    close: async () => {
+      if (browser) await browser.close();
+      browser = null;
+    },
+  };
+}
+
+/** 単独呼び出し向け互換API。複数URLではsessionを共有する。 */
+export async function measureBrowserMetrics(
+  url: string,
+  options: BrowserMeasurementOptions = {}
+): Promise<BrowserMeasurement> {
+  const session = await createBrowserMeasurementSession();
+  try {
+    return await session.measure(url, options);
+  } finally {
+    await session.close();
   }
 }

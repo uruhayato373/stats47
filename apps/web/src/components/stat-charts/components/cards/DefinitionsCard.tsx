@@ -132,6 +132,7 @@ export const DefinitionsCard: React.FC<DashboardItemProps<"definitions-card">> =
   return (
     <ContentDisclosure
       title={title}
+      bordered={false}
       headingLevel={3}
       leading={<InfoIcon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />}
       description={data.description}

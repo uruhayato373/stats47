@@ -5,6 +5,7 @@ export const nurseryWaitingChildrenCount: MetricConfig = {
   "title": "保育所等利用待機児童数",
   "unit": "人",
   "category": "socialsecurity",
+  "surveyId": "childcare-related-status-report",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010110",

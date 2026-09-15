@@ -122,7 +122,8 @@ schedule を **default branch のファイルから読む**ので、main に残�
 
 ## なぜ PR を develop → main にだけ置くか
 
-- `pr-quality-check.yml` (フル suite) の trigger は `pull_request: branches: [main]` のため、**フル CI は main PR でしか発火しない**
+- `pr-quality-check.yml` の trigger は `pull_request: branches: [main]` のため、**差分連動の必須CIは main PR でしか発火しない**。static gateは常時、型・unit・build・代表E2E等は変更パスに応じて実行する
+- 全workspace型検査・coverage・全E2Eは `quality-suite-weekly.yml` が毎週と手動dispatchで補完し、失敗は固定Issueへ集約する
 - feature/* → develop の PR は self-merge → PR 自体を作る価値がない (オーバーヘッドだけ)
 - develop → main の PR を「本番デプロイの最終ゲート」に集約することで、CI green + 履歴境界 + ロールバック単位の 3 つを 1 箇所で確保
 

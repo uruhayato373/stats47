@@ -1,5 +1,6 @@
 import { fetchPrefectures } from '@stats47/area';
 import { fireEvent, render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, it, expect, vi } from 'vitest';
 
 const { trackMock } = vi.hoisted(() => ({ trackMock: vi.fn() }));
@@ -43,12 +44,13 @@ describe('AreaSelectionPanels', () => {
     );
   });
 
-  it('地図タイルクリックで areas_map を計測する', () => {
+  it('地図タイルクリックで areas_map を計測する', async () => {
+    const user = userEvent.setup();
     render(<AreaSelectionPanels {...data} surface="areas" />);
-    // 地図 (group) 内の東京都タイルをクリック (一覧リンクと区別する)
-    const mapGroup = screen.getAllByRole('group', {
+    await user.click(screen.getByRole('tab', { name: '地図から探す' }));
+    const mapGroup = screen.getByRole('group', {
       name: '地図から都道府県を選ぶ',
-    })[0];
+    });
     fireEvent.click(
       within(mapGroup).getByRole('link', { name: '東京都の統計を見る' })
     );
@@ -69,6 +71,11 @@ describe('AreaSelectionPanels', () => {
     ).toBeInTheDocument();
   });
 
+  it('初期表示の都道府県リンクを47件の1組だけ描画する', () => {
+    render(<AreaSelectionPanels {...data} surface="areas" />);
+    expect(screen.getAllByRole('link')).toHaveLength(47);
+  });
+
   it('左レールの地方選択をデスクトップ一覧へ反映する (view state)', () => {
     render(
       <AreaDirectoryRegionProvider>
@@ -84,9 +91,9 @@ describe('AreaSelectionPanels', () => {
     fireEvent.click(kanto);
     expect(kanto).toHaveAttribute('aria-pressed', 'true');
 
-    const desktopDirectory = screen.getAllByRole('navigation', {
+    const desktopDirectory = screen.getByRole('navigation', {
       name: '都道府県一覧',
-    })[0];
+    });
     expect(
       within(desktopDirectory).getByRole('region', {
         name: '北海道・東北',
@@ -99,13 +106,7 @@ describe('AreaSelectionPanels', () => {
   });
 
   it('embedded の地図・一覧クリックを配置別に計測する', () => {
-    render(
-      <AreaSelectionPanels
-        {...data}
-        variant="embedded"
-        surface="home"
-      />
-    );
+    render(<AreaSelectionPanels {...data} variant="embedded" surface="home" />);
 
     const mapGroup = screen.getByRole('group', {
       name: '地図から都道府県を選ぶ',

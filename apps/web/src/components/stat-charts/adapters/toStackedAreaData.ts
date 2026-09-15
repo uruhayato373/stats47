@@ -1,5 +1,7 @@
 import { CHART_COLORS } from "../constants";
 
+import { resolveChartUnit } from "./resolve-chart-unit";
+
 import type { StatsSchema } from "@stats47/types";
 import type { StackedAreaSeriesConfig } from "@stats47/visualization/d3";
 
@@ -12,7 +14,8 @@ export interface StackedAreaData {
 
 export function toStackedAreaData(
   rawDataList: StatsSchema[][],
-  seriesLabels?: string[]
+  seriesLabels?: string[],
+  unit?: string,
 ): StackedAreaData {
   const labels = seriesLabels ?? rawDataList.map(() => "");
   const yearMap = new Map<string, Record<string, string | number>>();
@@ -44,6 +47,6 @@ export function toStackedAreaData(
       label,
       color: CHART_COLORS[i % CHART_COLORS.length],
     })),
-    unit: rawDataList[0]?.[0]?.unit ?? undefined,
+    unit: resolveChartUnit(unit, rawDataList),
   };
 }

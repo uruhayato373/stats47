@@ -1,5 +1,7 @@
 import { getChartColor } from "../constants";
 
+import { resolveChartUnit } from "./resolve-chart-unit";
+
 import type { StatsSchema } from "@stats47/types";
 
 export interface CompositionSegment {
@@ -88,7 +90,7 @@ export function toCompositionChartData(
     series.push({ key: othersLabel, label: othersLabel, color: "hsl(var(--muted-foreground))" });
   }
 
-  const unit = rawDataList[0]?.[0]?.unit ?? "";
+  const unit = resolveChartUnit(undefined, rawDataList) ?? "";
   const latestYearLabel =
     trendData.length > 0
       ? String(trendData[trendData.length - 1].label)

@@ -30,6 +30,7 @@ export function ProductOgp({ data }: Props) {
     >
       <img
         src={data.backgroundImage}
+        alt=""
         width={1200}
         height={630}
         style={{

@@ -67,9 +67,13 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 判断フロー: 「① にあるか？ → ② にあるか？ → 無ければ作る（汎用なら ②、その feature 専用なら ③）」。
 
+- **既存UIで目的を満たせる場合は新しいUIを作らない。** 同じカテゴリ・テーマ・地域選択を別の見た目で再実装せず、既存部品を共用する。
+- **探索導線のクリック数を増やさない。** 表示領域に収まるリンク一覧は常時表示し、情報密度だけを理由に折りたたみや中間画面を追加しない。
+
 - **`@stats47/components` の shadcn ベースコンポーネント（① プリミティブ）を最優先で使う。**
   Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
 - **Card は基底（① `Card` / ② `SurfaceCard`）から作る。** feature 内に独自カード枠を新規定義しない（Card 乱立の解消は Phase 0-1）。
+- **カード内カードは禁止。** `SurfaceCard` / `SurfaceSection` / `SurfaceLinkCard` / `RailCard` / `ChartPanel` 等の外枠を相互にネストしない。外側を通常の `section` にするか、内側を border と shadow のない list / table / link row にする。`npm run design-system:check -w apps/web` の `no-nested-card-surfaces` が JSX 親子関係と `getSurfaceCardClassName` のネストを検査する。
 - **FAQ / 定義 / AI考察など本文の開閉 UI は `@/components/content` を再利用する。** 複数FAQ=`FaqSection`、単一本文=`ContentDisclosure`。feature 内の独自 Radix Accordion、`▼` / `▲` 文字、`text-lg` 見出しを追加しない。表示契約と機械ゲートの正典は `docs/01_技術設計/04_デザインシステム.md`。
 
 ## チャートコンポーネント（★新規追加前に必読）

@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
 
-import { SurfaceCard, SurfaceSection } from '@/components/surface';
+import { SurfaceCard } from '@/components/surface';
 
 import { trackGeoRegionSelect } from '@/lib/analytics/events';
 
@@ -103,7 +103,7 @@ export function GeoDecisionExplorer({
   ] as const;
 
   return (
-    <SurfaceSection aria-labelledby="geo-decision-title">
+    <section aria-labelledby="geo-decision-title">
       <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold text-primary">
@@ -150,6 +150,6 @@ export function GeoDecisionExplorer({
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         洪水は1kmメッシュ中心点による近似、駅800mは直線距離です。個別地点の安全や実際の徒歩経路を判定する値ではありません。
       </p>
-    </SurfaceSection>
+    </section>
   );
 }

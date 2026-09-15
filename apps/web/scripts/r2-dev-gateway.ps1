@@ -47,6 +47,25 @@ $listener.Prefixes.Add("http://127.0.0.1:$Port/")
 $handler = [System.Net.Http.HttpClientHandler]::new()
 $handler.UseProxy = $true
 $handler.DefaultProxyCredentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+$explicitProxy = @(
+  $env:HTTPS_PROXY,
+  $env:https_proxy,
+  $env:HTTP_PROXY,
+  $env:http_proxy
+) | Where-Object { $_ } | Select-Object -First 1
+if ($explicitProxy) {
+  $proxyUri = $null
+  if (-not [Uri]::TryCreate($explicitProxy, [UriKind]::Absolute, [ref]$proxyUri) -or
+      $proxyUri.Scheme -notin @("http", "https")) {
+    throw "HTTPS_PROXY / HTTP_PROXY は絶対 HTTP(S) URL にしてください"
+  }
+  $proxy = [System.Net.WebProxy]::new($proxyUri)
+  $proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+  $handler.Proxy = $proxy
+  Write-Host "[r2-dev-gateway] upstream proxy: explicit environment proxy"
+} else {
+  Write-Host "[r2-dev-gateway] upstream proxy: Windows default"
+}
 $client = [System.Net.Http.HttpClient]::new($handler)
 $client.Timeout = [TimeSpan]::FromSeconds(60)
 

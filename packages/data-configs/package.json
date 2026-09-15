@@ -40,6 +40,11 @@
       "import": "./src/theme-catalog/types.ts",
       "require": "./src/theme-catalog/types.ts"
     },
+    "./theme-catalog-validator": {
+      "types": "./scripts/validate-theme-catalog.ts",
+      "import": "./scripts/validate-theme-catalog.ts",
+      "require": "./scripts/validate-theme-catalog.ts"
+    },
     "./unit": {
       "types": "./src/unit/index.ts",
       "import": "./src/unit/index.ts",

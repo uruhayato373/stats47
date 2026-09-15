@@ -27,7 +27,7 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "vertical": "furusato",
     "categoryKey": null,
     "locationCode": "blog-bottom",
-    "isActive": true,
+    "isActive": false,
     "priority": 5,
     "startDate": null,
     "endDate": null,
@@ -38,7 +38,7 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "width": 300,
     "height": 250,
     "createdAt": "2026-03-10 01:30:42",
-    "updatedAt": "2026-06-01 00:00:00"
+    "updatedAt": "2026-09-15 00:00:00"
   },
   {
     "id": "af_aeon_kyushu_area_001",
@@ -48,7 +48,7 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "vertical": "furusato",
     "categoryKey": null,
     "locationCode": "area-sidebar",
-    "isActive": true,
+    "isActive": false,
     "priority": 20,
     "startDate": null,
     "endDate": null,
@@ -59,7 +59,7 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "width": 300,
     "height": 250,
     "createdAt": "2026-03-26 09:01:57",
-    "updatedAt": "2026-06-01 00:00:00"
+    "updatedAt": "2026-09-15 00:00:00"
   },
   {
     "id": "af_ahamo_001",
@@ -5390,7 +5390,7 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "vertical": "furusato",
     "categoryKey": null,
     "locationCode": "sidebar-bottom",
-    "isActive": true,
+    "isActive": false,
     "priority": 10,
     "startDate": null,
     "endDate": null,
@@ -5401,7 +5401,7 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "width": null,
     "height": null,
     "createdAt": "2026-07-28 20:27:12",
-    "updatedAt": "2026-07-28 20:27:12"
+    "updatedAt": "2026-09-15 00:00:00"
   },
   {
     "id": "af_s00000020001003_a8_text_001",

@@ -1620,7 +1620,7 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
     "humanContact": "unknown",
     "conditionSource": null,
     "verifiedAt": null,
-    "portfolioStatus": "pending-classification",
+    "portfolioStatus": "paused",
     "allowedPageTypes": []
   },
   {

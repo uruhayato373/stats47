@@ -69,4 +69,10 @@ describe("toBarChartData", () => {
     expect(result.series[0].name).toBe("");
     expect(result.series[1].name).toBe("");
   });
+
+  it("設定単位を優先し、未設定なら観測値の単位を引き継ぐ", () => {
+    const rawDataList = [[baseRow]];
+    expect(toBarChartData(rawDataList, ["人口"], "bar").unit).toBe("人");
+    expect(toBarChartData(rawDataList, ["人口"], "bar", "万人").unit).toBe("万人");
+  });
 });

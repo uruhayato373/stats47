@@ -177,6 +177,43 @@ export async function readArticleSummariesByTagKeyFromR2(
     .map((a) => ({ slug: a.slug, title: a.title, description: a.description }));
 }
 
+export async function readArticleSummariesByTagKeysFromR2(
+  tagKeys: string[],
+  limit = 5,
+  perTag = limit
+): Promise<Array<{ slug: string; title: string; description: string | null }>> {
+  if (tagKeys.length === 0) return [];
+
+  const snapshot = await loadSnapshot();
+  const published = snapshot.articles
+    .filter((article) => article.published === true)
+    .sort(compareByPublishedAtDesc);
+  const seen = new Set<string>();
+  const result: Array<{
+    slug: string;
+    title: string;
+    description: string | null;
+  }> = [];
+
+  for (const tagKey of tagKeys) {
+    const batch = published
+      .filter((article) => article.tags.some((tag) => tag.tagKey === tagKey))
+      .slice(0, perTag);
+    for (const article of batch) {
+      if (seen.has(article.slug) || result.length >= limit) continue;
+      seen.add(article.slug);
+      result.push({
+        slug: article.slug,
+        title: article.title,
+        description: article.description,
+      });
+    }
+    if (result.length >= limit) break;
+  }
+
+  return result;
+}
+
 export async function readArticleSummariesBySurveyIdFromR2(
   surveyId: string,
   limit = 6
