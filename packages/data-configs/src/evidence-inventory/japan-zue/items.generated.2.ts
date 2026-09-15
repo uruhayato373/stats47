@@ -14578,6 +14578,7 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_2: readonly JapanZueEvidenceItem[] = [
       ],
       "categoryKey": "socialsecurity",
       "themeSlugs": [
+        "local-finance",
         "public-assistance"
       ],
       "geoScopes": [
@@ -14826,6 +14827,9 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_2: readonly JapanZueEvidenceItem[] = [
         "vital-statistics"
       ],
       "categoryKey": "socialsecurity",
+      "themeSlugs": [
+        "healthcare"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -16280,6 +16284,9 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_2: readonly JapanZueEvidenceItem[] = [
         "life-tables"
       ],
       "categoryKey": "socialsecurity",
+      "themeSlugs": [
+        "healthcare"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
