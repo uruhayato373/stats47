@@ -157,6 +157,19 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
+      # ランキング拡充ループの計測ゲート (build-expansion-queue.mjs 冒頭コメントが正典)。
+      # 「計測ゲート付き需要ファースト」= 公開→GSC実測→流入が付いたカテゴリのみ深掘り。
+      # 2026-07-12 に構築したがどの workflow からも呼ばれず、2ヶ月手動実行漏れで
+      # categoryTraffic が空のまま止まっていた (2026-09-15 に発覚・手動復旧)。再発防止でここに固定する。
+      # 順序は measure (queue に gsc を付与) → build (categoryTraffic に集計 + status 再計算)。
+      - name: 📈 Measure ranking expansion impact (GSC → queue)
+        continue-on-error: true # GSC snapshot 欠落等で週次計測本体を止めない
+        run: node .claude/scripts/estat/measure-expansion-impact.mjs
+
+      - name: 🧮 Rebuild ranking expansion queue (status + categoryTraffic)
+        continue-on-error: true
+        run: node .claude/scripts/estat/build-expansion-queue.mjs
+
       # GSC カバレッジ是正キューを本番 HTTP 実測で再構築する
       # (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
       #
@@ -284,6 +297,8 @@ jobs:
           # 是正ループの自動再構築物
           git add .claude/state/blog/remediation-queue.json 2>/dev/null || true
           git add .claude/state/blog/topic-queue.json 2>/dev/null || true
+          # ランキング拡充ループ (計測ゲート付き需要ファースト) の状態SSOT
+          git add .claude/state/estat/expansion-queue.json 2>/dev/null || true
           # GSC カバレッジ是正キュー (再実測で verdict が最新化される)
           git add .claude/state/gsc 2>/dev/null || true
           git add .claude/state/metrics/gsc/coverage-drilldown 2>/dev/null || true
