@@ -96,7 +96,12 @@
     {
       "code": "LARGE_FILE",
       "file": ".claude/state/estat/expansion-queue.json",
-      "message": "1383608 bytes exceeds 1048576 bytes"
+      "message": "1399387 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": ".claude/state/estat/prefecture-candidates.json",
+      "message": "3140232 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
