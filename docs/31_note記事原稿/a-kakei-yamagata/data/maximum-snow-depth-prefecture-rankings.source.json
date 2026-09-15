@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "maximum-snow-depth",
+  "year": "2007",
+  "unit": "ｃｍ",
+  "label": "最深積雪",
+  "readerLabel": "最深積雪",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/maximum-snow-depth/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug a-kakei-yamagata --keys maximum-snow-depth --data-name maximum-snow-depth-prefecture-rankings",
+  "fetchedAt": "2026-09-15T09:48:22.440Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

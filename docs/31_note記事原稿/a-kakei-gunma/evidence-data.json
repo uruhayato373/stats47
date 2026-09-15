@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-gunma",
+    "prefCode": "10000",
+    "prefName": "群馬県",
+    "cityName": "前橋市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:43.717Z",
+    "titleSha": "cd009647f36928d682cf24a67f6cbf39fb4f63ad298fcbaa24b916b27cf832bf",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "住居",
+    "ratio": 0.6045162066350082,
+    "side": "below",
+    "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+    "shareTitle": "住居費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 44,
+    "value": 4,
+    "rankingUrl": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+    "chartName": "housing-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "title": "民営家賃（3.3m²当たり月額）",
+      "unit": "円",
+      "year": "2024",
+      "rank": 35,
+      "value": 3833,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 13,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
+      "chartName": "private-rental-housing-rent-per-3-3m2-prefecture-rankings"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 12,
+      "value": 71.1,
+      "direction": "inverse",
+      "expectedHigh": true,
+      "effectiveRank": 12,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+      "chartName": "owner-occupied-housing-ratio-prefecture-rankings"
+    }
+  ]
+}

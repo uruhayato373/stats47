@@ -9,6 +9,6 @@
   "source": "r2:app/ranking/high-school-advancement-rate/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug a-kakei-kumamoto --keys high-school-advancement-rate --data-name high-school-advancement-rate-prefecture-rankings",
-  "fetchedAt": "2026-09-14T21:48:11.177Z",
+  "fetchedAt": "2026-09-15T09:47:56.566Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

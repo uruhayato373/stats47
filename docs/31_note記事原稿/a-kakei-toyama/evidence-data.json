@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-toyama",
+    "prefCode": "16000",
+    "prefName": "富山県",
+    "cityName": "富山市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:19.785Z",
+    "titleSha": "907b50997bd3294d06a59ce001433a57587fa7804aaf9a287dbe430facdd0f49",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 0.7635644494198913,
+    "side": "below",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 37,
+    "value": 2.3,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 44,
+      "value": 9.3,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 4,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 18,
+      "value": 58.4,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 30,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

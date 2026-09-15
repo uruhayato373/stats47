@@ -26,7 +26,7 @@ tags:
 
 47市平均を上回るのは8費目で、教育(1.44倍)、保健医療(1.26倍)、被服及び履物(1.22倍)、住居(1.19倍)、交通・通信(1.09倍)、食料(1.06倍)、その他の消費支出(1.04倍)、教養娯楽(1.03倍)です。下回るのは2費目で、光熱・水道(0.88倍)、家具・家事用品(0.93倍)です。最も大きく離れているのは教育の1.44倍、最も平均に近いのは教養娯楽の1.03倍で、熊本市の家計は教育が高いほうに偏った構造だとわかります。
 
-![教育費割合の47都道府県マップ](images/education-expenditure-ratio-multi-person-households-tile-grid.svg)
+![教育費割合の47都道府県マップ](images/education-expenditure-ratio-multi-person-households-tile-grid.png)
 
 上の地図は、消費支出に占める教育の割合(教育費割合)を47都道府県で比べたもので、熊本県は9位(4.5%)です。割合が最も高いのは埼玉県(6.0%)、次いで千葉県(6.0%)、東京都(6.0%)で、最も低いのは秋田県(0.9%)です。倍率は「47市平均に対して何倍か」、地図の順位は「支出全体に占める割合が大きい順」なので、同じ費目でも見方が違います。倍率が高くても割合の順位が中位にとどまる場合は、他の費目も同じように多いことを意味します。全国ランキングの詳細は[教育費割合](https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households)で確認できます。
 
@@ -38,11 +38,11 @@ tags:
 
 ## 教育の高さを他の統計で確かめる
 
-![私立大学学生数割合の都道府県ランキング](images/private-university-student-ratio-prefecture-rankings.svg)
+![私立大学学生数割合の都道府県ランキング](images/private-university-student-ratio-prefecture-rankings.png)
 
 私立大学学生数割合は熊本県が全国20位(59.4%、2024年)で中位にあり、教育が高くなる理由としては説明力が弱い指標です。全国1位は神奈川県(92.7%)、最下位は島根県(0.0%)です。順位は値が大きい順で、全国ランキングは[私立大学学生数割合](https://stats47.jp/ranking/private-university-student-ratio)で確認できます。
 
-![高等学校卒業者の進学率の都道府県ランキング](images/high-school-advancement-rate-prefecture-rankings.svg)
+![高等学校卒業者の進学率の都道府県ランキング](images/high-school-advancement-rate-prefecture-rankings.png)
 
 高等学校卒業者の進学率は熊本県が全国38位(50.4%、2023年)で、教育の偏りとは逆方向にあり、この指標では説明できません。全国1位は東京都(74.1%)、最下位は沖縄県(46.7%)です。順位は値が大きい順で、全国ランキングは[高等学校卒業者の進学率](https://stats47.jp/ranking/high-school-advancement-rate)で確認できます。
 

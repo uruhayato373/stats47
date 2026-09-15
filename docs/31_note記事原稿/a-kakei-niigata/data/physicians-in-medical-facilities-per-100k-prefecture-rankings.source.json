@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "physicians-in-medical-facilities-per-100k",
+  "year": "2022",
+  "unit": "人",
+  "label": "医師数",
+  "readerLabel": "医師数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/physicians-in-medical-facilities-per-100k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug a-kakei-niigata --keys physicians-in-medical-facilities-per-100k --data-name physicians-in-medical-facilities-per-100k-prefecture-rankings",
+  "fetchedAt": "2026-09-15T09:48:05.059Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

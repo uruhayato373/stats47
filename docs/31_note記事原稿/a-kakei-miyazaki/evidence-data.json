@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-miyazaki",
+    "prefCode": "45000",
+    "prefName": "宮崎県",
+    "cityName": "宮崎市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:00.459Z",
+    "titleSha": "6ee61a97f758243fb9aefc294dd6ca0d437b32429aa77f97de670408a81de247",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 0.6063602459764798,
+    "side": "below",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 37,
+    "value": 2.3,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 36,
+      "value": 35.7,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 12,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 46,
+      "value": 48,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 2,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

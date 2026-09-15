@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-tokushima",
+    "prefCode": "36000",
+    "prefName": "徳島県",
+    "cityName": "徳島市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:16.651Z",
+    "titleSha": "f9f9b2bbca4847f3af0d80359be62492031324f8c753bcb44c91ce290f6ad03d",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 1.4740856463588243,
+    "side": "above",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 5,
+    "value": 5.2,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 30,
+      "value": 42.6,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 30,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 16,
+      "value": 59.7,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 16,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

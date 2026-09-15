@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-tokyo",
+    "prefCode": "13000",
+    "prefName": "東京都",
+    "cityName": "東京",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:17.719Z",
+    "titleSha": "6bd4e75eac9669dcad2e01dde71b27e0a10c0696f5370ae77178df7171665cb2",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 2.0938095662461134,
+    "side": "above",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 1,
+    "value": 6,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 2,
+      "value": 92.4,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 2,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 1,
+      "value": 74.1,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 1,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

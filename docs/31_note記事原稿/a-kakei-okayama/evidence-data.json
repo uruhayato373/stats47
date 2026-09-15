@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-okayama",
+    "prefCode": "33000",
+    "prefName": "岡山県",
+    "cityName": "岡山市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:07.040Z",
+    "titleSha": "f4180a771f2755dacf1da7958baa636b92bd810d8116270582f081532ed862cb",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "家具・家事用品",
+    "ratio": 1.2666477091358377,
+    "side": "above",
+    "shareMetricKey": "furniture-household-goods-expenditure-ratio-multi-person-households",
+    "shareTitle": "家具・家事用品費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 2,
+    "value": 4.8,
+    "rankingUrl": "https://stats47.jp/ranking/furniture-household-goods-expenditure-ratio-multi-person-households",
+    "chartName": "furniture-household-goods-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "floor-area-per-dwelling-owner",
+      "title": "持ち家住宅の延べ面積",
+      "unit": "ｍ2",
+      "year": "2023",
+      "rank": 19,
+      "value": 131.4,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 19,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/floor-area-per-dwelling-owner",
+      "chartName": "floor-area-per-dwelling-owner-prefecture-rankings"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-furniture-household",
+      "title": "消費者物価地域差指数",
+      "unit": "（全国=100）",
+      "year": "2024",
+      "rank": 42,
+      "value": 96.8,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 42,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/consumer-price-difference-index-furniture-household",
+      "chartName": "consumer-price-difference-index-furniture-household-prefecture-rankings"
+    }
+  ]
+}

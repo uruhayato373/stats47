@@ -1,59 +1,109 @@
-<svg width="960" height="454" viewBox="0 0 960 454" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="群馬県の特徴的な支出品目">
+<svg width="1176" height="734" viewBox="0 0 1176 734" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="群馬県の特徴的な支出品目">
   <title>群馬県の特徴的な支出品目</title>
-  <rect width="960" height="454" fill="#f9fafb"/>
-  <text x="480" y="36" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">47県庁所在市平均と比べて特徴的な品目</text>
-  <text x="480" y="58" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#6b7280">群馬県（前橋市）2024年</text>
-  <rect x="30" y="80" width="432" height="40" rx="8" fill="#1565c0"/>  <text x="246" y="106" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">47市平均より多い</text>
-  <rect x="30" y="124" width="432" height="56" rx="6" fill="#e3f2fd"/>
+  <rect width="1176" height="734" fill="#f9fafb"/>
+  <text x="588" y="36" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">47県庁所在市平均と比べて特徴的な品目</text>
+  <text x="588" y="58" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#6b7280">群馬県（前橋市）2024年</text>
+  <rect x="30" y="80" width="540" height="40" rx="8" fill="#1565c0"/>  <text x="300" y="106" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">47市平均より多い</text>
+  <rect x="30" y="124" width="540" height="56" rx="6" fill="#e3f2fd"/>
   <circle cx="58" cy="152" r="17" fill="#1565c0"/>  <text x="58" y="157.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">1</text>
   <text x="83" y="157.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">自動車教習料</text>
-  <text x="244.64000000000001" y="156.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">3.39倍</text>
-  <rect x="254.64000000000001" y="144" width="190.1" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="30" y="180" width="432" height="56" rx="6" fill="#ffffff"/>
+  <text x="387.20000000000005" y="156.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">3.39倍</text>
+  <rect x="397.20000000000005" y="144" width="145.8" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="180" width="540" height="56" rx="6" fill="#ffffff"/>
   <circle cx="58" cy="208" r="17" fill="#1565c0"/>  <text x="58" y="213.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">2</text>
   <text x="83" y="213.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">ベッド</text>
-  <text x="244.64000000000001" y="212.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.72倍</text>
-  <rect x="254.64000000000001" y="200" width="152.7" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="30" y="236" width="432" height="56" rx="6" fill="#e3f2fd"/>
+  <text x="387.20000000000005" y="212.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.72倍</text>
+  <rect x="397.20000000000005" y="200" width="117.1" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="236" width="540" height="56" rx="6" fill="#e3f2fd"/>
   <circle cx="58" cy="264" r="17" fill="#1565c0"/>  <text x="58" y="269.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">3</text>
-  <text x="83" y="269.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">ペット・他のペ…</text>
-  <text x="244.64000000000001" y="268.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.72倍</text>
-  <rect x="254.64000000000001" y="256" width="152.2" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="30" y="292" width="432" height="56" rx="6" fill="#ffffff"/>
+  <text x="83" y="269.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">ペット・他のペット用品</text>
+  <text x="387.20000000000005" y="268.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.72倍</text>
+  <rect x="397.20000000000005" y="256" width="116.8" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="292" width="540" height="56" rx="6" fill="#ffffff"/>
   <circle cx="58" cy="320" r="17" fill="#1565c0"/>  <text x="58" y="325.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">4</text>
-  <text x="83" y="325.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">自動車保険料以…</text>
-  <text x="244.64000000000001" y="324.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.42倍</text>
-  <rect x="254.64000000000001" y="312" width="135.7" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="30" y="348" width="432" height="56" rx="6" fill="#e3f2fd"/>
+  <text x="83" y="325.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">自動車保険料以外の輸送機器保険料</text>
+  <text x="387.20000000000005" y="324.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.42倍</text>
+  <rect x="397.20000000000005" y="312" width="104.1" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="348" width="540" height="56" rx="6" fill="#e3f2fd"/>
   <circle cx="58" cy="376" r="17" fill="#1565c0"/>  <text x="58" y="381.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">5</text>
   <text x="83" y="381.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">他の冠婚葬祭費</text>
-  <text x="244.64000000000001" y="380.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.15倍</text>
-  <rect x="254.64000000000001" y="368" width="120.4" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="498" y="80" width="432" height="40" rx="8" fill="#b71c1c"/>  <text x="714" y="106" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">47市平均より少ない</text>
-  <rect x="498" y="124" width="432" height="56" rx="6" fill="#fef2f2"/>
-  <circle cx="526" cy="152" r="17" fill="#b71c1c"/>  <text x="526" y="157.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">1</text>
-  <text x="551" y="157.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">住宅関係負担費</text>
-  <text x="712.64" y="156.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.04倍</text>
-  <rect x="722.64" y="144" width="190.1" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
-  <rect x="498" y="180" width="432" height="56" rx="6" fill="#ffffff"/>
-  <circle cx="526" cy="208" r="17" fill="#b71c1c"/>  <text x="526" y="213.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">2</text>
-  <text x="551" y="213.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">被服賃借料</text>
-  <text x="712.64" y="212.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.10倍</text>
-  <rect x="722.64" y="200" width="179.4" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
-  <rect x="498" y="236" width="432" height="56" rx="6" fill="#fef2f2"/>
-  <circle cx="526" cy="264" r="17" fill="#b71c1c"/>  <text x="526" y="269.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">3</text>
-  <text x="551" y="269.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">私立高校</text>
-  <text x="712.64" y="268.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.11倍</text>
-  <rect x="722.64" y="256" width="176.5" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
-  <rect x="498" y="292" width="432" height="56" rx="6" fill="#ffffff"/>
-  <circle cx="526" cy="320" r="17" fill="#b71c1c"/>  <text x="526" y="325.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">4</text>
-  <text x="551" y="325.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">公営家賃</text>
-  <text x="712.64" y="324.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.11倍</text>
-  <rect x="722.64" y="312" width="176.5" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
-  <rect x="498" y="348" width="432" height="56" rx="6" fill="#fef2f2"/>
-  <circle cx="526" cy="376" r="17" fill="#b71c1c"/>  <text x="526" y="381.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">5</text>
-  <text x="551" y="381.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">炊事用ガス器具</text>
-  <text x="712.64" y="380.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.12倍</text>
-  <rect x="722.64" y="368" width="175.2" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
-  <text x="480" y="429" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#6b7280">出典：総務省「家計調査」2024年　47県庁所在市平均との比率</text>
+  <text x="387.20000000000005" y="380.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.15倍</text>
+  <rect x="397.20000000000005" y="368" width="92.4" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="404" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="58" cy="432" r="17" fill="#1565c0"/>  <text x="58" y="437.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">6</text>
+  <text x="83" y="437.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">他の運動用具</text>
+  <text x="387.20000000000005" y="436.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.08倍</text>
+  <rect x="397.20000000000005" y="424" width="89.5" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="460" width="540" height="56" rx="6" fill="#e3f2fd"/>
+  <circle cx="58" cy="488" r="17" fill="#1565c0"/>  <text x="58" y="493.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">7</text>
+  <text x="83" y="493.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">自動車等関連用品</text>
+  <text x="387.20000000000005" y="492.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.04倍</text>
+  <rect x="397.20000000000005" y="480" width="87.7" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="516" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="58" cy="544" r="17" fill="#1565c0"/>  <text x="58" y="549.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">8</text>
+  <text x="83" y="549.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">他の男子用洋服</text>
+  <text x="387.20000000000005" y="548.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.02倍</text>
+  <rect x="397.20000000000005" y="536" width="87" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="572" width="540" height="56" rx="6" fill="#e3f2fd"/>
+  <circle cx="58" cy="600" r="17" fill="#1565c0"/>  <text x="58" y="605.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">9</text>
+  <text x="83" y="605.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">他の教養娯楽用耐久財</text>
+  <text x="387.20000000000005" y="604.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">2.00倍</text>
+  <rect x="397.20000000000005" y="592" width="86.1" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="30" y="628" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="58" cy="656" r="17" fill="#1565c0"/>  <text x="58" y="661.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">10</text>
+  <text x="83" y="661.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">他の麺類外食</text>
+  <text x="387.20000000000005" y="660.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#1565c0" font-weight="600">1.99倍</text>
+  <rect x="397.20000000000005" y="648" width="85.4" height="16" rx="4" fill="#42a5f5" opacity="0.8"/>
+  <rect x="606" y="80" width="540" height="40" rx="8" fill="#b71c1c"/>  <text x="876" y="106" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">47市平均より少ない</text>
+  <rect x="606" y="124" width="540" height="56" rx="6" fill="#fef2f2"/>
+  <circle cx="634" cy="152" r="17" fill="#b71c1c"/>  <text x="634" y="157.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">1</text>
+  <text x="659" y="157.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">住宅関係負担費</text>
+  <text x="963.2" y="156.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.04倍</text>
+  <rect x="973.2" y="144" width="145.8" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="180" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="634" cy="208" r="17" fill="#b71c1c"/>  <text x="634" y="213.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">2</text>
+  <text x="659" y="213.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">被服賃借料</text>
+  <text x="963.2" y="212.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.10倍</text>
+  <rect x="973.2" y="200" width="137.6" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="236" width="540" height="56" rx="6" fill="#fef2f2"/>
+  <circle cx="634" cy="264" r="17" fill="#b71c1c"/>  <text x="634" y="269.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">3</text>
+  <text x="659" y="269.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">私立高校</text>
+  <text x="963.2" y="268.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.11倍</text>
+  <rect x="973.2" y="256" width="135.4" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="292" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="634" cy="320" r="17" fill="#b71c1c"/>  <text x="634" y="325.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">4</text>
+  <text x="659" y="325.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">公営家賃</text>
+  <text x="963.2" y="324.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.11倍</text>
+  <rect x="973.2" y="312" width="135.4" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="348" width="540" height="56" rx="6" fill="#fef2f2"/>
+  <circle cx="634" cy="376" r="17" fill="#b71c1c"/>  <text x="634" y="381.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">5</text>
+  <text x="659" y="381.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">炊事用ガス器具</text>
+  <text x="963.2" y="380.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.12倍</text>
+  <rect x="973.2" y="368" width="134.4" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="404" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="634" cy="432" r="17" fill="#b71c1c"/>  <text x="634" y="437.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">6</text>
+  <text x="659" y="437.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">葬儀関係費</text>
+  <text x="963.2" y="436.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.12倍</text>
+  <rect x="973.2" y="424" width="133.9" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="460" width="540" height="56" rx="6" fill="#fef2f2"/>
+  <circle cx="634" cy="488" r="17" fill="#b71c1c"/>  <text x="634" y="493.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">7</text>
+  <text x="659" y="493.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">バス通学定期代</text>
+  <text x="963.2" y="492.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.14倍</text>
+  <rect x="973.2" y="480" width="130.6" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="516" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="634" cy="544" r="17" fill="#b71c1c"/>  <text x="634" y="549.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">8</text>
+  <text x="659" y="549.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">他の工事費</text>
+  <text x="963.2" y="548.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.15倍</text>
+  <rect x="973.2" y="536" width="128.9" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="572" width="540" height="56" rx="6" fill="#fef2f2"/>
+  <circle cx="634" cy="600" r="17" fill="#b71c1c"/>  <text x="634" y="605.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">9</text>
+  <text x="659" y="605.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">私立大学</text>
+  <text x="963.2" y="604.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.17倍</text>
+  <rect x="973.2" y="592" width="126.4" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <rect x="606" y="628" width="540" height="56" rx="6" fill="#ffffff"/>
+  <circle cx="634" cy="656" r="17" fill="#b71c1c"/>  <text x="634" y="661.04" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#ffffff">10</text>
+  <text x="659" y="661.04" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="bold" fill="#1f2937">ビデオレコーダー・プレイヤー</text>
+  <text x="963.2" y="660.68" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#b71c1c" font-weight="600">0.18倍</text>
+  <rect x="973.2" y="648" width="124.1" height="16" rx="4" fill="#ef5350" opacity="0.8"/>
+  <text x="588" y="709" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#6b7280">出典：総務省「家計調査」2024年　47県庁所在市平均との比率</text>
 </svg>

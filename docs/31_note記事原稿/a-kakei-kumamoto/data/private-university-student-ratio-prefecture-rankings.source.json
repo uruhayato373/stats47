@@ -9,6 +9,6 @@
   "source": "r2:app/ranking/private-university-student-ratio/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug a-kakei-kumamoto --keys private-university-student-ratio --data-name private-university-student-ratio-prefecture-rankings",
-  "fetchedAt": "2026-09-14T21:48:10.870Z",
+  "fetchedAt": "2026-09-15T09:47:56.318Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

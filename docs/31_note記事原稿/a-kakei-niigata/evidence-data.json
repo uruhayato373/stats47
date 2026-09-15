@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-niigata",
+    "prefCode": "15000",
+    "prefName": "新潟県",
+    "cityName": "新潟市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:04.750Z",
+    "titleSha": "e9a072028dace40b4054f30a10653dd552ee119607633179d5c4a7f2507dbda0",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "保健医療",
+    "ratio": 0.810439036061175,
+    "side": "below",
+    "shareMetricKey": "healthcare-expenditure-ratio-multi-person-households",
+    "shareTitle": "保健医療費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 46,
+    "value": 4,
+    "rankingUrl": "https://stats47.jp/ranking/healthcare-expenditure-ratio-multi-person-households",
+    "chartName": "healthcare-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "physicians-in-medical-facilities-per-100k",
+      "title": "医師数",
+      "unit": "人",
+      "year": "2022",
+      "rank": 44,
+      "value": 212.8,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 4,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/physicians-in-medical-facilities-per-100k",
+      "chartName": "physicians-in-medical-facilities-per-100k-prefecture-rankings"
+    },
+    {
+      "metricKey": "ratio-65-plus",
+      "title": "65歳以上人口割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 13,
+      "value": 34.2,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 35,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/ratio-65-plus",
+      "chartName": "ratio-65-plus-prefecture-rankings"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-shiga",
+    "prefCode": "25000",
+    "prefName": "滋賀県",
+    "cityName": "大津市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:12.316Z",
+    "titleSha": "c909a25d33ecbe1a18f757aa5c8d8157282ccb4f49c0b1a7553cd2747c1aadcb",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 1.3141741469076194,
+    "side": "above",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 12,
+    "value": 4.1,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 10,
+      "value": 78.2,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 10,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 13,
+      "value": 61.7,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 13,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

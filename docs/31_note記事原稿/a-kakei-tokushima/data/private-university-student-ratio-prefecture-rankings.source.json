@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "private-university-student-ratio",
+  "year": "2024",
+  "unit": "％",
+  "label": "私立大学学生数割合",
+  "readerLabel": "私立大学学生数割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/private-university-student-ratio/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug a-kakei-tokushima --keys private-university-student-ratio --data-name private-university-student-ratio-prefecture-rankings",
+  "fetchedAt": "2026-09-15T09:48:16.983Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

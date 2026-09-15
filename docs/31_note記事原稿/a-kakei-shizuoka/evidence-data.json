@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-shizuoka",
+    "prefCode": "22000",
+    "prefName": "静岡県",
+    "cityName": "静岡市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:14.421Z",
+    "titleSha": "ff317cb26d8dd29542eadd40a6907de0b12d00b79014f81bb89aa31b3c2ff96d",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "住居",
+    "ratio": 1.362698363306017,
+    "side": "above",
+    "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+    "shareTitle": "住居費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 10,
+    "value": 8.3,
+    "rankingUrl": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+    "chartName": "housing-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "title": "民営家賃（3.3m²当たり月額）",
+      "unit": "円",
+      "year": "2024",
+      "rank": 14,
+      "value": 4602,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 14,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
+      "chartName": "private-rental-housing-rent-per-3-3m2-prefecture-rankings"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 25,
+      "value": 67.4,
+      "direction": "inverse",
+      "expectedHigh": false,
+      "effectiveRank": 23,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+      "chartName": "owner-occupied-housing-ratio-prefecture-rankings"
+    }
+  ]
+}

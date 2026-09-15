@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-saitama",
+    "prefCode": "11000",
+    "prefName": "埼玉県",
+    "cityName": "さいたま市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:11.162Z",
+    "titleSha": "bfe8f132beeb8ccbd1a9fc485760983051818fc31b816da4ac35d105d6a90413",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 2.123054946220877,
+    "side": "above",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 1,
+    "value": 6,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 3,
+      "value": 91.8,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 3,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 6,
+      "value": 65.8,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 6,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

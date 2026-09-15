@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-kochi",
+    "prefCode": "39000",
+    "prefName": "高知県",
+    "cityName": "高知市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:54.871Z",
+    "titleSha": "3d350de30e1a33f77b4739857911b4902aed025ad43d7e024e5acf630b548c5c",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "住居",
+    "ratio": 1.392023862403351,
+    "side": "above",
+    "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+    "shareTitle": "住居費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 4,
+    "value": 9.2,
+    "rankingUrl": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+    "chartName": "housing-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "title": "民営家賃（3.3m²当たり月額）",
+      "unit": "円",
+      "year": "2024",
+      "rank": 24,
+      "value": 4150,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 24,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
+      "chartName": "private-rental-housing-rent-per-3-3m2-prefecture-rankings"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 27,
+      "value": 66,
+      "direction": "inverse",
+      "expectedHigh": false,
+      "effectiveRank": 21,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+      "chartName": "owner-occupied-housing-ratio-prefecture-rankings"
+    }
+  ]
+}
