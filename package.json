@@ -2,6 +2,9 @@
   "name": "stats47-monorepo",
   "private": true,
   "scripts": {
+    "policy:sync": "node .claude/shared-policy/sync.mjs --sync",
+    "policy:check": "node .claude/shared-policy/sync.mjs --check",
+    "preadmin": "npm run policy:check",
     "build": "turbo run build",
     "affiliate:a8-outcome:check": "node .claude/scripts/ads/check-a8-outcome-gate.mjs --json",
     "coconala-publish": "node .claude/scripts/coconala/coconala-publish.mjs",

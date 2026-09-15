@@ -1,5 +1,7 @@
 # stats47 - 統計で見る都道府県
 
+**共通事業方針**: 企画・収益化・事業の週次/月次計画とレビューの着手前に [共通方針](.claude/shared-policy/POLICY.md) と [このプロジェクトへの適用](.claude/shared-policy/application.json) を読む(管理画面は「戦略・収益化」→「共通事業方針」)。方針内の判断契約を出力へ反映する。`npm run policy:check` で配布状態を確認する。正本はこのリポジトリではなく **Obsidian vault** の `.claude/共通事業方針SSOT.md`。変更は正本側で行い `npm run policy:sync` で配布する。写しは手編集しない。詳細は `.claude/rules/shared-business-policy.md`。
+
 都道府県統計データの可視化 Web アプリケーション。e-Stat API から 47 都道府県の統計を取得し、ランキング・ダッシュボード・チャートで表示する。モノレポ構成: `apps/{web,remotion,ges}` + `packages/*`（詳細は `.claude/rules/local-environment.md`）。
 
 ## 行動原則 (12軸)
@@ -104,6 +106,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `nextjs-ssg-preservation.md` | layout / page / route 変更 (cookies() 禁止・generateStaticParams と R2 の関係) | apps/web/src/app・middleware |
 | `ogp-image-standards.md` | OGP / リンクカード / note カバー画像の生成・差分反映 | features/ogp・scripts/ogp・skills/image-prompt |
 | `r2-storage-design.md` | snapshot 追加・変更・R2 キー設計・保持ポリシー | packages/r2-storage・skills/db/push-r2 等 |
+| `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |
 | `data-storage.md` | スキル設計時の記録先判定 (git TS / R2 vs `.claude/` vs `docs/`) | .claude/skills・state・todo・docs |
 | `data-sqlite-ssot.md` | 完全DBレスの用語と決定表 (正典は doc 12) | packages/database |
 | `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / ライセンス境界) | packages/gis・skills/gis |

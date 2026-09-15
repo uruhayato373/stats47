@@ -92,3 +92,6 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 生成先は通常dev=`.local/next-admin-dev`、E2E=`.local/next-e2e`、build/start=`.next` に分離する。
 起動中のdevとbuildで同じwebpack chunkを上書きしないための契約で、`run-next.mjs` と
 `playwright.config.ts` が `NEXT_DIST_DIR` を設定する。
+## 共通事業方針の表示
+
+「戦略・収益化」→「共通事業方針」(`/strategy/policy`) で、Obsidian vault正本(`.claude/共通事業方針SSOT.md`)から配布されたHARM・判断の問い・原則を読み取り専用表示する。全画面共通の表示ではなく、この専用ページだけに置く。同じ配布版をエージェントも参照する。`npm run admin` の起動前に `policy:check` が内容の整合性（正本があれば最新版との一致も）を検査する。正本更新後はObsidian vaultで `npm run policy:sync`。個別適用は `.claude/shared-policy/application.json`、収益モデルとKPIは既存戦略が正本。

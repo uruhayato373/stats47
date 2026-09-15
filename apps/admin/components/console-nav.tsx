@@ -27,15 +27,11 @@ const NAV_GROUPS: readonly NavGroup[] = [
     ],
   },
   {
-    title: "調査・設計",
+    title: "戦略・収益化",
     items: [
+      { href: "/strategy/policy", label: "共通方針" },
       { href: "/strategy", label: "方針・事業計画" },
       { href: "/research", label: "調査カタログ" },
-    ],
-  },
-  {
-    title: "収益",
-    items: [
       { href: "/revenue", label: "収益 (AdSense)" },
       { href: "/ads", label: "アフィリエイト運用" },
     ],
