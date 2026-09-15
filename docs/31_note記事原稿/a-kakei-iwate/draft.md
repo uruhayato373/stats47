@@ -4,6 +4,7 @@ description: "盛岡市の家計は47市平均に比べ住居が1.44倍と最も
 status: published
 note_url: "https://note.com/stats47/n/na3020a08cef7"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

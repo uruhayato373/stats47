@@ -4,6 +4,7 @@ description: "岡山市の家計は47市平均に比べ家具・家事用品が1
 status: published
 note_url: "https://note.com/stats47/n/ne788feae75bf"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

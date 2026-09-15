@@ -4,6 +4,7 @@ description: "前橋市の家計は47市平均に比べ住居が0.60倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n1b9bf465327d"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

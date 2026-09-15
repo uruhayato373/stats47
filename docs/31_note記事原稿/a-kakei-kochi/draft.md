@@ -4,6 +4,7 @@ description: "高知市の家計は47市平均に比べ住居が1.39倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n29417de32c83"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

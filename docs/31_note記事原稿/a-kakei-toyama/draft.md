@@ -4,6 +4,7 @@ description: "富山市の家計は47市平均に比べ教育が0.76倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n13bca568c98a"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

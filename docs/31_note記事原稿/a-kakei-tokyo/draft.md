@@ -4,6 +4,7 @@ description: "東京の家計は47市平均に比べ教育が2.09倍と最も高
 status: published
 note_url: "https://note.com/stats47/n/n9d384a674462"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

@@ -4,6 +4,7 @@ description: "和歌山市の家計は47市平均に比べ教育が0.52倍と最
 status: published
 note_url: "https://note.com/stats47/n/ncc56ff8990d0"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

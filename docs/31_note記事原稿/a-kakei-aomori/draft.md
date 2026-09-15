@@ -4,6 +4,7 @@ description: "青森市の家計は47市平均に比べ教育が0.35倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n85831c0c47aa"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

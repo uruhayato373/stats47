@@ -4,6 +4,7 @@ description: "松江市の家計は47市平均に比べ教育が0.48倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n75d68c2bb7e9"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

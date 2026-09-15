@@ -4,6 +4,7 @@ description: "長崎市の家計は47市平均に比べ教育が0.51倍と最も
 status: published
 note_url: "https://note.com/stats47/n/nd547ff50cbe6"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

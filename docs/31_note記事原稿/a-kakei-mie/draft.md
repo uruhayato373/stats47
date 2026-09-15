@@ -4,6 +4,7 @@ description: "津市の家計は47市平均に比べ住居が1.28倍と最も高
 status: published
 note_url: "https://note.com/stats47/n/n8113876eaeab"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

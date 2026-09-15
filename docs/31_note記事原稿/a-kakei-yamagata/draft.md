@@ -4,6 +4,7 @@ description: "山形市の家計は47市平均に比べ光熱・水道が1.30倍
 status: published
 note_url: "https://note.com/stats47/n/na3d645a7d50c"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

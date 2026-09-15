@@ -4,6 +4,7 @@ description: "広島市の家計は47市平均に比べ教育が0.83倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n0be24c40b88d"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

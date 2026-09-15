@@ -4,6 +4,7 @@ description: "大阪市の家計は47市平均に比べ交通・通信が0.66倍
 status: published
 note_url: "https://note.com/stats47/n/n7ac1079b6f20"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

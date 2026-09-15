@@ -4,6 +4,7 @@ description: "さいたま市の家計は47市平均に比べ教育が2.12倍と
 status: published
 note_url: "https://note.com/stats47/n/ne760e2866251"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

@@ -4,6 +4,7 @@ description: "山口市の家計は47市平均に比べ教育が0.70倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n88dde65e0774"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

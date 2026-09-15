@@ -4,6 +4,7 @@ description: "松山市の家計は47市平均に比べ教養娯楽が0.77倍と
 status: published
 note_url: "https://note.com/stats47/n/nb627534c8b66"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

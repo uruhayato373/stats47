@@ -4,6 +4,7 @@ description: "金沢市の家計は47市平均に比べ交通・通信が1.28倍
 status: published
 note_url: "https://note.com/stats47/n/ndf2afaef16c0"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

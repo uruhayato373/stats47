@@ -4,6 +4,7 @@ description: "京都市の家計は47市平均に比べ教育が1.40倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n2a18f8e7098c"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

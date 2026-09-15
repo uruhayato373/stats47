@@ -4,6 +4,7 @@ description: "福島市の家計は47市平均に比べ住居が0.58倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n4c363c356b63"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

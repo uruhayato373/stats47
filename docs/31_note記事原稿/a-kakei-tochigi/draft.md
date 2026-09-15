@@ -4,6 +4,7 @@ description: "宇都宮市の家計は47市平均に比べ交通・通信が1.40
 status: published
 note_url: "https://note.com/stats47/n/n0fd0305a6b8c"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

@@ -4,6 +4,7 @@ description: "新潟市の家計は47市平均に比べ保健医療が0.81倍と
 status: published
 note_url: "https://note.com/stats47/n/ndd0bb1c14aa4"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

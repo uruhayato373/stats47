@@ -4,6 +4,7 @@ description: "鹿児島市の家計は47市平均に比べ家具・家事用品�
 status: published
 note_url: "https://note.com/stats47/n/n555435ada7ed"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

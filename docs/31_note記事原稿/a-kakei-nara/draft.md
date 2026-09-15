@@ -4,6 +4,7 @@ description: "奈良市の家計は47市平均に比べ教育が1.74倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n366d898d8107"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査

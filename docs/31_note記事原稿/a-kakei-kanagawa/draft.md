@@ -4,6 +4,7 @@ description: "横浜市の家計は47市平均に比べ教育が1.51倍と最も
 status: published
 note_url: "https://note.com/stats47/n/nd0326279977a"
 published_at: "2026-09-06"
+updated_at: "2026-09-15"
 published: true
 tags:
   - 家計調査
