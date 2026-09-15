@@ -134,8 +134,12 @@ function buildQueue() {
 
   const prio = (e) => {
     let p = e.score;
-    if (e.fine) p -= 3;                                   // 細分は下位
-    p += Math.min(3, (catTraffic[e.category] || 0) / 50); // 流入が付いたカテゴリを優先
+    if (e.fine) p -= 3;                                     // 細分は下位
+    // 流入が付いたカテゴリを優先。旧 cap=3/divisor=50 は 50 imp 超で全カテゴリが
+    // 頭打ちになり、実測 6 倍差 (safetyenvironment 1657 vs economy 269) が priority に
+    // 反映されなかった (2026-09-15 に build-expansion-queue 復旧時に発覚)。
+    // cap=10/divisor=100 で imp 1000 まで線形に差が付くようにする。
+    p += Math.min(10, (catTraffic[e.category] || 0) / 100);
     return p;
   };
   entries.forEach((e) => (e.priority = Math.round(prio(e) * 100) / 100));
