@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "individual-evacuation-plan-listed-persons",
+  "year": "2026",
+  "unit": "人",
+  "label": "避難行動要支援者名簿の掲載人数",
+  "readerLabel": "避難行動要支援者名簿の掲載人数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/individual-evacuation-plan-listed-persons/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug evacuation-plan-coverage-urban-prefecture-gap --keys individual-evacuation-plan-listed-persons --data-name individual-evacuation-plan-listed-persons-prefecture-rankings",
+  "fetchedAt": "2026-09-15T21:42:06.912Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

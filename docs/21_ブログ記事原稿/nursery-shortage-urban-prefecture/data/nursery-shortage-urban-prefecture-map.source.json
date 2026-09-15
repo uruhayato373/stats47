@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "nursery-count-per-100k-0-5",
+  "year": "2020",
+  "unit": "所",
+  "label": "保育所等数",
+  "readerLabel": "保育所等数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/nursery-count-per-100k-0-5/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug nursery-shortage-urban-prefecture --keys nursery-count-per-100k-0-5 --with-map",
+  "fetchedAt": "2026-09-15T21:35:54.951Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

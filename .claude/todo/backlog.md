@@ -21,6 +21,29 @@ updated: 2026-09-13
 
 ## 🔴 高 — 今月中に着手したい
 
+### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
+
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-23]
+
+- **背景**: 統計そのものより「悩み・不安」起点の記事がSEOに効くという仮説で、白書(NotebookLM)調査+note/X調査の両方で裏付けが取れた5テーマを記事化した。5本とも `quality-gate.mjs` / `article-factual-check.mjs` / blog-critic すべて PASS 済み (`docs/21_ブログ記事原稿/{nursery-shortage-urban-prefecture, vacant-housing-rate-inherited-home-risk, elderly-welfare-expenditure-prefecture-gap, evacuation-plan-coverage-urban-prefecture-gap, intellectual-crime-tokyo-kagawa-gap}/`)。
+- **公開の現在地**: `/publish-bulk-articles` の Phase 1(検証)・Phase 2(staging、`.local/r2/app/blog/<slug>/` に `published: true` で配置済み)までは完了。Phase 3(OGP/カード背景のCodex生成)で停止 — このセッションでは Codex MCP が `CONNECTION_CLOSED` だった。ユーザーが `codex login` を完了させたことは確認済みだが、**MCP再接続には新しいセッション起動が必要**(同一セッション内では再接続できなかった)。
+- **画像生成の準備**: 5本分の背景生成リクエストは `.local/blog-imagegen/requests/<slug>.json` に作成済み (プロンプト・promptHash・出力先 `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` まで確定)。新セッションでCodex MCPが繋がったら `npm run blog-images:codex -- ingest-article --slug <slug> --input <path> --prompt-hash <hash>` → `generate-blog-thumbnails.ts --slug <5slugs>` から Phase 3 を再開し、Phase 4(R2 push・all.json反映・cache purge)→ Phase 5(HTTP検証)へ進める。
+- **SNS下書き**: X投稿文5本・Instagramキャプション5本は作成済み、`.claude/state/sns/pain-point-series-drafts.md` に保存済み。**投稿・予約は記事が本番公開されてから、ユーザーの明示許可を得て実施する**(まだ実行していない)。X下書き作成agentの申し送り: 各投稿に添付する画像とチャートSVGの形式一致は未確認、投稿前に要突合。
+- **次**: 新セッションで `codex login status` → MCP接続確認 → 上記Phase 3から再開。
+- **停止条件**: 画像なし(共有背景fallback)でR2にpushしない(OGP/カードが404で公開される事故を防ぐ設計)。
+- **完了条件**: 5記事すべてが本番で200 + OGP/thumbnail画像が正しく出る + SNS投稿(X/IG)まで実施されている。
+
+### [ESTAT-META-BATCH-RESUME-01] e-Stat統計表8,706件のメタ情報取得バッチが未完のまま残っている
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:ls .claude/state/estat/meta/ | wc -l で9,000件超を確認] [起票:2026-09-16] [期日:2026-09-30]
+
+- **背景**: SSDS以外のe-Stat統計表8,706件(discover-prefecture-candidates.mjsで発見済み、`.claude/state/estat/prefecture-candidates.json`)について、各テーブルの分類軸(cdCat01等)を `fetch-estat-meta.mjs` (`getMetaInfo`) で取得しカタログ化する準備段階の作業。9バッチに分割し、専用トリガーブランチ `estat-meta-run` へのforce push → CI (`estat-fetch-meta.yml`) → artifact取得 → `.claude/state/estat/meta/` へマージ、を自動ループしている。
+- **並行セッションとのgitレース事故があり** (memory `feedback_shared_working_copy_git_race` 実例)、`EnterWorktree` で `worktree-estat-meta-batches` に分離してオーケストレーションを継続していた。
+- **現在地 (2026-09-16 06:05〜起動中のプロセス確認時点)**: バッチ3/9 が実行中 (CI run 35028913795, in_progress)。バックグラウンドプロセス (`node run-meta-batches.mjs 3`, PID要再確認) がスクラッチパッド (`/private/tmp/claude-501/.../scratchpad/run-meta-batches.mjs`) から実行中。バッチ4〜9 (約6,000件強) は未着手。
+- **セッション終了時のリスク**: このバックグラウンドプロセスがこのセッションに紐づいている場合、セッション終了で処理が中断される可能性がある。次のセッションで再開する場合は、`.claude/state/estat/meta/` のファイル数と `.claude/scripts/estat/proof-batch-statsids.json` の内容(現在バッチ何件目か)を確認してから、スクリプトを再実行するか判断すること。
+- **次**: セッション再開時にまず `ps aux | grep run-meta-batches` でプロセス生存を確認。死んでいたら `node run-meta-batches.mjs <次のバッチ番号>` で再開。
+- **完了条件**: 9バッチ全て完了し `.claude/state/estat/meta/` に8,706件相当のメタ情報が揃い、meta-summary.json を再構築できる状態。
+
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-09-21]
