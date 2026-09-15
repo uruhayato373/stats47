@@ -234,12 +234,17 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  *   調査ハブから、その調査を使う各コンテンツ面への逆方向導線
  * - `theme_evidence`: 白書・統計の論点からランキング・関連テーマ・記事へ進む導線。
  *   `nav_label` は `<topic-key>:<target-type>:<target-key>`。
+ * - `theme_ranking` / `theme_blog`: テーマページの指標一覧・比較表・詳細チャートから
+ *   ランキング詳細への導線 (`theme_ranking`)、関連記事一覧からブログ記事への導線
+ *   (`theme_blog`)。テーマ拡充後の回遊効果測定 (THEME-INTERNALNAV-01) のため
+ *   2026-09-15 に追加。THEME-EXPANSION-EFFECT-01 のd7観測 (2026-09-18) 前に計装漏れを埋める。
  * - `theme_kpi_switcher`: テーマページの指標カードのタイル（`MetricSwitcherPanel`）。
  *   `nav_label` に rankingKey が入るので、どの指標が見られているかを追える。
  *   ★2026-08-06 の複数チェック化以降、送るのは**チェック ON のときだけ**。
  *   OFF は「見るのをやめた」だけで関心の表明ではないため、送ると ON/OFF が
  *   相殺されて「どの指標が見られたか」が読めなくなる
  * - `category_sidebar`: category ページ左のカテゴリナビ（home と同じリストの別配置）
+ * - `area_sidebar`: 都道府県ページ右のカテゴリナビ（home と同じリストの別配置）
  * - `product_catalog`: 商品一覧から商品詳細への導線
  * - `blog_product`: ブログ本文末の商品詳細への文脈一致導線
  * - `blog_sidebar` / `blog_discovery_mobile`: ブログ一覧の右レール / モバイル上部の探索導線
@@ -266,7 +271,10 @@ export type NavSurface =
   | 'theme_switcher'
   | 'theme_kpi_switcher'
   | 'theme_evidence'
+  | 'theme_ranking'
+  | 'theme_blog'
   | 'category_sidebar'
+  | 'area_sidebar'
   | 'product_catalog'
   | 'blog_product'
   | 'blog_sidebar'

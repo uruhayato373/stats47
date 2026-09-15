@@ -199,7 +199,9 @@ describe("quality server", () => {
     // 撒いていないキューは存在しないと分かる形で返る (throw しない)
     expect(d.queues.filter((q: any) => !q.exists).length).toBeGreaterThan(0);
     expect(d.queuesWithDefects).toBe(1);
-  });
+    // catalogAuditQueue() が ThemeCatalog 全件を毎回検証するため既定 5000ms を超えることがある
+    // (ローカル単独実行で 3.4s 実測・CI 並列実行では超過してタイムアウトした)。
+  }, 15000);
 });
 
 describe("ops-ledger server", () => {

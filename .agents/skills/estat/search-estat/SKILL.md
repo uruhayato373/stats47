@@ -9,7 +9,7 @@ e-Stat API の統計表を検索し、statsDataId を特定する。
 
 ## 事前確認
 
-新規検索の前に `.Codex/skills/estat/references/README.md` を確認し、既知のテーブルや e-Stat API 未登録の統計を把握すること。該当する調査のリファレンスファイルがあれば、そちらも読むこと。
+新規検索の前に `.claude/skills/estat/references/README.md` を確認し、既知のテーブルや e-Stat API 未登録の統計を把握すること。該当する調査のリファレンスファイルがあれば、そちらも読むこと。
 
 ## 用途
 
@@ -32,14 +32,14 @@ e-Stat API の統計表を検索し、statsDataId を特定する。
 
 ### Phase 0: git-tracked references カタログを確認（API より先に実行）
 
-完全DBレス。**恒久カタログは git-tracked `.Codex/skills/estat/references/*.md`**（`/inspect-estat-meta` で把握した頻用表を蓄積する索引）。e-Stat API を叩く前にまずここを検索する。
+完全DBレス。**恒久カタログは git-tracked `.claude/skills/estat/references/*.md`**（`/inspect-estat-meta` で把握した頻用表を蓄積する索引）。e-Stat API を叩く前にまずここを検索する。
 
 > 旧「ローカル D1 `estat_metainfo` の 8,000 行自動カタログ」は廃止（retired D1 由来で git 再生成不可・seed なし）。カタログの真実源は **e-Stat API（Reference / 再生成）** で、よく使う表だけ references/*.md に蓄積する運用に移行した。
 
 ```bash
 # references 索引をキーワードで検索（statsDataId が見つかれば API 不要）
-grep -rniE "キーワード" .Codex/skills/estat/references/*.md
-cat .Codex/skills/estat/references/README.md   # 分野別索引（社会・人口統計体系のコード体系を含む）
+grep -rniE "キーワード" .claude/skills/estat/references/*.md
+cat .claude/skills/estat/references/README.md   # 分野別索引（社会・人口統計体系のコード体系を含む）
 ```
 
 **references で見つかった場合**: その statsDataId で `/inspect-estat-meta` へ進む（Phase 1 をスキップ）。
@@ -185,7 +185,7 @@ statsDataId を絞り込んだあと、**その座標で実際に何年分取れ
 再生成をやり直すことになる。
 
 ```bash
-node .Codex/scripts/estat/audit-time-coverage.cjs
+node .claude/scripts/estat/audit-time-coverage.cjs
 ```
 
 候補 metric ごとに「期待年範囲 / 実在年範囲 / 年数 / 推定行数 / 充分か」の表を出す

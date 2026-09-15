@@ -7,7 +7,7 @@ primary_agent: chart-component-builder
 # /audit-chart-components
 
 チャートコンポーネントの規約違反を検出し、是正優先リストを出力するスキル。
-`.Codex/rules/chart-component-standards.md` を基準とする。
+`.claude/rules/chart-component-standards.md` を基準とする。
 
 ## 実行
 
@@ -133,6 +133,6 @@ sed -i 's/#64748b/hsl(var(--muted-foreground))/g' <対象ファイル>
 
 ## 関連
 
-- 基準: `.Codex/rules/chart-component-standards.md`
+- 基準: `.claude/rules/chart-component-standards.md`
 - 実行エージェント: `chart-component-builder`
 - 共通コンポーネント: `apps/web/src/components/charts/`

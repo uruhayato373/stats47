@@ -47,12 +47,11 @@ interface AreaSelectionPanelsProps extends AreaDirectoryData {
 /**
  * 都道府県選択パネル（レスポンシブ・計測の合流点）。
  *
- * - full: 広いコンテナは「軽量タイル地図 + 地方別ディレクトリ」の 2 ペイン、
- *   狭いコンテナは既定「一覧」のタブ切り替え。
+ * - full: 画面幅にかかわらず一覧/地図をタブで切り替え、選択中の一方だけを描画する。
  * - embedded: 地図を常時表示し、コンテナ幅 768px 以上でコンパクト一覧を併記する。
  *   PageShell のレール表示幅では `AreaDirectoryRegionNav` が地方フィルタを担う。
  *
- * 非表示ペインも DOM に描画するため、全47県リンクは常に初期HTMLに含まれる。
+ * 初期HTMLには既定の一覧だけを描画し、47県リンクを1組に保つ。
  * 計測は既存 nav_click を配置・導線別の surface で送る。
  */
 export function AreaSelectionPanels({
@@ -111,9 +110,23 @@ export function AreaSelectionPanels({
   }
 
   return (
-    <div className={className}>
-      {/* デスクトップ: 2 ペイン */}
-      <div className="hidden gap-8 @md:grid @md:grid-cols-[minmax(0,520px)_minmax(0,1fr)] @md:items-start">
+    <Tabs defaultValue="list" className={className}>
+      <TabsList className="grid h-auto w-full grid-cols-2">
+        <TabsTrigger value="list" className="min-h-11">
+          一覧から探す
+        </TabsTrigger>
+        <TabsTrigger value="map" className="min-h-11">
+          地図から探す
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="list" className="mt-4">
+        <AreaDirectoryList
+          regionGroups={regionGroups}
+          activeRegionCode={activeRegionCode}
+          onSelect={onListSelect}
+        />
+      </TabsContent>
+      <TabsContent value="map" className="mt-4">
         <AreaTileMap
           tiles={tiles}
           gridCols={gridCols}
@@ -121,43 +134,7 @@ export function AreaSelectionPanels({
           regionLegend={legend}
           onSelect={onMapSelect}
         />
-        <div>
-          <AreaDirectoryList
-            regionGroups={regionGroups}
-            activeRegionCode={activeRegionCode}
-            onSelect={onListSelect}
-          />
-        </div>
-      </div>
-
-      {/* モバイル / タブレット: タブ切替（既定=一覧） */}
-      <div className="@md:hidden">
-        <Tabs defaultValue="list">
-          <TabsList className="grid h-auto w-full grid-cols-2">
-            <TabsTrigger value="list" className="min-h-11">
-              一覧から探す
-            </TabsTrigger>
-            <TabsTrigger value="map" className="min-h-11">
-              地図から探す
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="list">
-            <AreaDirectoryList
-              regionGroups={regionGroups}
-              onSelect={onListSelect}
-            />
-          </TabsContent>
-          <TabsContent value="map">
-            <AreaTileMap
-              tiles={tiles}
-              gridCols={gridCols}
-              gridRows={gridRows}
-              regionLegend={legend}
-              onSelect={onMapSelect}
-            />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
+      </TabsContent>
+    </Tabs>
   );
 }

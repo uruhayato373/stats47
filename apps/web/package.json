@@ -29,6 +29,7 @@
     "test:smoke:local": "npx tsx scripts/smoke-test.ts --base-url http://localhost:3000",
     "test:smoke:playwright": "playwright test --config playwright.smoke.config.ts",
     "type-check": "npx cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" tsc --noEmit --skipLibCheck",
+    "type-check:local": "npx cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" tsc --noEmit --skipLibCheck --incremental --tsBuildInfoFile .web-local.tsbuildinfo",
     "generate:search-index": "npx cross-env NODE_ENV=development NODE_OPTIONS=\"--conditions react-server\" npx tsx scripts/generate-search-index.ts",
     "prebuild": "npx cross-env NODE_ENV=development NODE_OPTIONS=\"--conditions react-server\" npx tsx scripts/generate-search-index.ts",
     "workers:clean": "rimraf .next .open-next",

@@ -27,9 +27,10 @@ function rankTone(rank: number): string {
 }
 
 const COLS: Record<number, string> = {
+  1: "grid-cols-1",
   2: "@sm:grid-cols-2",
-  3: "@sm:grid-cols-2 @lg:grid-cols-3",
-  4: "@sm:grid-cols-2 @lg:grid-cols-4",
+  3: "@sm:grid-cols-2 @md:grid-cols-3",
+  4: "@sm:grid-cols-2 @md:grid-cols-4",
 };
 
 /**
@@ -39,25 +40,46 @@ const COLS: Record<number, string> = {
  */
 export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
   const hasCapitalCityValue = metrics.some((m) => m.capitalCityValue);
+  const effectiveColumns = Math.min(columns, metrics.length);
 
   return (
     <div className="@container">
-      <div className={cn("grid grid-cols-1 gap-2", COLS[columns])}>
+      <dl
+        className={getSurfaceCardClassName({
+          className: cn(
+            "grid grid-cols-1 gap-px overflow-hidden bg-border p-0",
+            COLS[effectiveColumns],
+          ),
+        })}
+      >
         {metrics.map((m) => {
           const v = databook?.metrics[m.rankingKey];
           return (
-            <Link
+            <div
               key={m.rankingKey}
-              href={`/ranking/${m.rankingKey}`}
-              className={getSurfaceCardClassName({
-                interactive: true,
-                className: "flex flex-col justify-between p-3",
-              })}
+              className="group flex min-h-16 flex-col justify-between bg-card px-3 py-2.5"
             >
-              <div className="flex items-start justify-between gap-2">
-                <span className="text-xs font-medium text-muted-foreground leading-snug">
+              <dt className="text-xs font-medium leading-snug text-muted-foreground group-hover:text-foreground">
+                <Link
+                  href={`/ranking/${m.rankingKey}`}
+                  className="hover:text-primary hover:underline"
+                >
                   {m.shortLabel}
                   {m.capitalCityValue && <span className="text-[10px]">※</span>}
+                </Link>
+              </dt>
+              <dd className="mt-1 flex items-end justify-between gap-2">
+                <span className="min-w-0">
+                  {v ? (
+                    <>
+                      <span className="text-base font-bold tabular-nums text-foreground">
+                        {formatValue(v.value)}
+                      </span>
+                      <span className="ml-1 text-[11px] text-muted-foreground">{v.unit}</span>
+                    </>
+                  ) : (
+                    <span className="text-sm text-muted-foreground">—</span>
+                  )}
                 </span>
                 {v && v.rank >= 1 && v.rank <= 47 && (
                   <span
@@ -69,29 +91,17 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
                     {v.rank}位
                   </span>
                 )}
-              </div>
-              <div className="mt-2">
-                {v ? (
-                  <>
-                    <span className="text-lg font-bold tabular-nums text-foreground">
-                      {formatValue(v.value)}
-                    </span>
-                    <span className="ml-1 text-xs text-muted-foreground">{v.unit}</span>
-                    {m.compareNationalAvg && (
-                      <p className="mt-0.5 text-[11px] text-muted-foreground tabular-nums">
-                        全国平均 {formatValue(v.nationalAvg)}
-                        {v.unit}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <span className="text-sm text-muted-foreground">—</span>
-                )}
-              </div>
-            </Link>
+              </dd>
+              {v && m.compareNationalAvg && (
+                <dd className="mt-0.5 text-[11px] tabular-nums text-muted-foreground">
+                  全国平均 {formatValue(v.nationalAvg)}
+                  {v.unit}
+                </dd>
+              )}
+            </div>
           );
         })}
-      </div>
+      </dl>
       {hasCapitalCityValue && (
         <p className="mt-1.5 text-[10px] text-muted-foreground">
           ※ は県庁所在市の値（家計調査）

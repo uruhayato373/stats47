@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-okinawa",
+    "prefCode": "47000",
+    "prefName": "沖縄県",
+    "cityName": "那覇市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:08.102Z",
+    "titleSha": "71b39db5aed7586ad1c76e55371509f3792089020d309b07b3179ce7d3e6aebb",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "住居",
+    "ratio": 1.3267737899968546,
+    "side": "above",
+    "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+    "shareTitle": "住居費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 2,
+    "value": 10.3,
+    "rankingUrl": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+    "chartName": "housing-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "title": "民営家賃（3.3m²当たり月額）",
+      "unit": "円",
+      "year": "2024",
+      "rank": 13,
+      "value": 4614,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 13,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
+      "chartName": "private-rental-housing-rent-per-3-3m2-prefecture-rankings"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 47,
+      "value": 42.6,
+      "direction": "inverse",
+      "expectedHigh": false,
+      "effectiveRank": 1,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+      "chartName": "owner-occupied-housing-ratio-prefecture-rankings"
+    }
+  ]
+}

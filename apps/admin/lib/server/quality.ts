@@ -1,5 +1,6 @@
 import "server-only";
 
+import { catalogAuditSummary } from "./catalog-audit";
 import { contentOperations } from "./content-operations";
 import { cached, fileExists, readJson, TTL, wrap, type Wrapped } from "./state-io";
 
@@ -205,7 +206,46 @@ export function qualityQueues(): QualityQueue[] {
         detail: `SVG ${d.totalSvgs ?? "-"} / darkMode 非準拠 ${d.articlesDarkModeNonCompliant ?? "-"}`,
       }),
     ),
+    q(
+      "page-quality",
+      "ページ品質 (肥大化・重複・速度)",
+      `${Q}/metrics/page-quality/latest.json`,
+      "違反ページ",
+      (d) => {
+        const violations = Array.isArray(d.violations) ? d.violations : [];
+        const errorUrls = new Set(
+          violations.filter((v: { severity?: string }) => v.severity === "error").map((v: { url?: string }) => v.url)
+        );
+        return {
+          generatedAt: d.generated_at,
+          total: Array.isArray(d.results) ? d.results.length : null,
+          defects: errorUrls.size,
+          detail: `${d.mode ?? "-"} / warning ${violations.length - errorUrls.size} 件。詳細は /quality/page-audit`,
+        };
+      },
+    ),
+    catalogAuditQueue(),
   ];
+}
+
+/**
+ * ThemeCatalog は state ファイルを持たない (git TS SSOT を毎回検証する)。
+ * `q()` はファイル読み取り前提のため、他の live 計算キュー (content-operations) と同じ
+ * 直接構築パターンにする。
+ */
+function catalogAuditQueue(): QualityQueue {
+  const summary = catalogAuditSummary();
+  return {
+    key: "catalog-audit",
+    label: "テーマカタログ完全性 (選定根拠・HARM)",
+    file: "packages/data-configs/src/theme-catalog/ (git TS SSOT)",
+    exists: true,
+    generatedAt: null,
+    total: summary.themeCount,
+    defects: summary.totalErrorCount,
+    defectLabel: "error",
+    detail: `warning ${summary.totalWarnCount} 件 / HARM該当 ${summary.harmThemes.length} テーマ。詳細は /quality/catalog-audit`,
+  };
 }
 
 export interface QualitySummary {

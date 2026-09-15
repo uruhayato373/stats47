@@ -74,7 +74,7 @@ export async function FurusatoNozeiCard({
           {link.prefName}の人気返礼品
         </p>
 
-        <div className={layout === "content" ? "grid grid-cols-2 gap-3 sm:grid-cols-4" : "grid grid-cols-2 gap-2"}>
+        <div className={layout === "content" ? "grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4" : "grid grid-cols-2 gap-px border border-border bg-border"}>
           {items.map((item) => {
             return (
               <TrackedAffiliateLink
@@ -84,10 +84,7 @@ export async function FurusatoNozeiCard({
                 adId={furusatoAdId}
                 label={item.name}
                 position={position}
-                className={getSurfaceCardClassName({
-                  interactive: true,
-                  className: "flex flex-col overflow-hidden p-0",
-                })}
+                className="flex flex-col overflow-hidden bg-card transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {item.image && (
                   <div className="aspect-square bg-muted flex items-center justify-center overflow-hidden">
@@ -141,10 +138,7 @@ export async function FurusatoNozeiCard({
         adId={furusatoAdId}
         label={`${link.prefName}のふるさと納税`}
         position={position}
-        className={getSurfaceCardClassName({
-          interactive: true,
-          className: "flex items-center justify-between gap-3 px-4 py-3",
-        })}
+        className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 text-foreground transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <div>
           <p className="text-sm font-bold text-foreground">

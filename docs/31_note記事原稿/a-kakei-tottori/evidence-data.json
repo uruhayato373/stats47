@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-tottori",
+    "prefCode": "31000",
+    "prefName": "鳥取県",
+    "cityName": "鳥取市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:18.729Z",
+    "titleSha": "1274dde5586f0605a0127ecd7d32114276a9b233590398a94f11e6af5c28ef34",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "住居",
+    "ratio": 1.4085571168173872,
+    "side": "above",
+    "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+    "shareTitle": "住居費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 6,
+    "value": 8.9,
+    "rankingUrl": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+    "chartName": "housing-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "title": "民営家賃（3.3m²当たり月額）",
+      "unit": "円",
+      "year": "2024",
+      "rank": 38,
+      "value": 3803,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 38,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
+      "chartName": "private-rental-housing-rent-per-3-3m2-prefecture-rankings"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 15,
+      "value": 69.6,
+      "direction": "inverse",
+      "expectedHigh": false,
+      "effectiveRank": 33,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+      "chartName": "owner-occupied-housing-ratio-prefecture-rankings"
+    }
+  ]
+}

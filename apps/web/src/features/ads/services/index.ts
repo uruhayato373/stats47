@@ -7,8 +7,5 @@ export {
   resolveAffiliateTextAdsByVertical,
   resolveAffiliateTextAdsForContent,
   resolveExperimentVariantsByCategoryKey,
-} from "./resolve-affiliate-ad";
-export type {
-  ResolvedAffiliateAd,
-  ResolvedAffiliateBanner,
-} from "../types";
+} from './resolve-affiliate-ad';
+export type { ResolvedAffiliateAd, ResolvedAffiliateBanner } from '../types';

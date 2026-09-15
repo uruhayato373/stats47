@@ -6,7 +6,7 @@ user-invocable: false
 primary_agent: instagram-strategist
 ---
 
-> **⚠️ ARCHIVED (2026-07-04)**: 量産時代の一括生成。正典は `.Codex/rules/sns-content-standards.md`。
+> **⚠️ ARCHIVED (2026-07-04)**: 量産時代の一括生成。正典は `.claude/rules/sns-content-standards.md`。
 > チャネル別に post-x / render-sns-stills / bar-chart-race を使い、週次運用は `/sns-weekly-plan`。
 > 復活する場合はこのバナーを外して skills/sns/ に戻す。
 

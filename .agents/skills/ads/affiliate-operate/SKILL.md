@@ -9,24 +9,23 @@ co_agents: [affiliate-manager]
 3 ASP の**提携運用** (状態照合 / 申請 / 走査) を回す。ローカル限定 (Playwright 永続プロファイル)。
 Mac / Windows 双方で動く。
 
-> **正典は `.Codex/rules/affiliate-ads-standards.md` §11**。本 skill は手順のみ。
-> 接続設定は `.Codex/config/affiliate-asp.json`、提携台帳は `.Codex/state/ads/affiliate-catalog.json`、
-> サイト帰属の判定は `.Codex/scripts/ads/lib/asp-site-guard.mjs` が SSOT。
+> **正典は `.claude/rules/affiliate-ads-standards.md` §11**。本 skill は手順のみ。
+> 接続設定は `.claude/config/affiliate-asp.json`、提携台帳は `.claude/state/ads/affiliate-catalog.json`、
+> サイト帰属の判定は `.claude/scripts/ads/lib/asp-site-guard.mjs` が SSOT。
 > A8 の**案件開拓**は `/scout-asp`、A8 の**成果取込**は `/a8-report` が担当 (役割が違う)。
 
 ## モード
 
 | mode | コマンド | 副作用 |
 |---|---|---|
-| `status` (既定) | `node .Codex/scripts/ads/affiliate-status.mjs [--asp a8,moshimo,afb]` | なし (read-only) |
+| `status` (既定) | `node .claude/scripts/ads/affiliate-status.mjs [--asp a8,moshimo,afb]` | なし (read-only) |
 | `status --write` | 同上 `--write` | カタログ JSON を実機値で更新 |
-| `status --verify-moshimo-details` | 同上 `--asp moshimo --verify-moshimo-details` | 一覧に無いもしも案件を詳細ページで確定 (read-only) |
-| `apply` (dry-run) | `node .Codex/scripts/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | なし |
-| `apply --commit` | 同上 `--commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
-| `scan` (afb) | `node .Codex/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
-| `scan` (もしも) | `node .Codex/scripts/ads/moshimo-scan.mjs [--query <語>] [--vertical <軸>]` | なし (同上) |
-| `harvest` (afb) | `node .Codex/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` | なし (原稿を `.local/affiliate-harvest/afb/` に保存。SSOT 登録・公開は別工程) |
-| `budget` | `node .Codex/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
+| `apply` (dry-run) | `node .claude/scripts/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | plan を書き出す (押さない) |
+| `apply --commit` | `同上 --plan <operationId> --commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
+| `scan` (afb) | `node .claude/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
+| `scan` (もしも) | `node .claude/scripts/ads/moshimo-scan.mjs [--query <語>] [--vertical <軸>]` | なし (同上) |
+| `harvest` (afb) | `node .claude/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` | なし (原稿を `.local/affiliate-harvest/afb/` に保存。SSOT 登録・公開は別工程) |
+| `budget` | `node .claude/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
 
 ## 手順
 
@@ -34,14 +33,14 @@ Mac / Windows 双方で動く。
 
 各 ASP に手動ログインして永続プロファイルを作る。**認証情報は agent が扱わない。**
 
-- A8: `node .Codex/skills/ads/scout-asp/scripts/login.mjs`
+- A8: `node .claude/skills/ads/scout-asp/scripts/login.mjs`
 - もしも / afb: `affiliate-status.mjs` 実行時にブラウザが開くので、その場で人間がログインする
   (ログイン待ちのティッカーが出る。最大 10〜15 分)
 
 ### 1. status — 実機とカタログを突合する
 
 ```bash
-node .Codex/scripts/ads/affiliate-status.mjs
+node .claude/scripts/ads/affiliate-status.mjs
 ```
 
 - 各 ASP の提携中 / 申請中一覧を読み、`affiliate-catalog.json` の `status` と比較してドリフトを出す。
@@ -50,13 +49,6 @@ node .Codex/scripts/ads/affiliate-status.mjs
 - 反映するときだけ `--write` を付ける (既定は read-only)。`--write` は正遷移の反映に加えて
   **name の補完**も行う (placeholder のみ上書き。既存の名前は壊さない)。
 - ログ: `.local/affiliate-status/status.log`
-
-もしもで一覧に無い案件を確定するときは、まず
-`--asp moshimo --verify-moshimo-details` を read-only で実行する。詳細ページの
-「プロモーション詳細」以降にある単独行だけを読み、`未申請 / 否認中 → none`、
-`このプロモーションは終了しました。 → unavailable` と確定する。詳細が `申請中 / 提携中`
-なのに一覧に無い場合は pagination / selector drift として全書き込みを停止する。read-only の結果と
-SID・件数パリティを確認後にだけ、同じ引数へ `--write` を加える。
 
 **出力で必ず確認すること (2026-08-04 の事故を受けて機械化済み)**
 
@@ -73,7 +65,7 @@ SID・件数パリティを確認後にだけ、同じ引数へ `--write` を加
 ### 2. scan — afb の未提携案件を掘る
 
 ```bash
-node .Codex/scripts/ads/afb-scan.mjs --vertical travel,economy
+node .claude/scripts/ads/afb-scan.mjs --vertical travel,economy
 ```
 
 - 既定は検索モード (全件クロールは遅いため)。`--mode crawl --max-pages N` で深掘りできる。
@@ -85,11 +77,21 @@ node .Codex/scripts/ads/afb-scan.mjs --vertical travel,economy
 ### 3. apply — 提携申請する
 
 ```bash
-# まず dry-run (押せる状態かだけ確認)
-node .Codex/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154
-# オーナー承認を得てから実申請
-node .Codex/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit
+# 1. dry-run。押せる状態かを確認し、plan を .local/affiliate-ops/plans/ に書き出す
+node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154
+#    → 出力の `plan: moshimo-6154-<timestamp>` が operationId
+
+# 2. オーナー承認を得てから、その plan だけを実行する
+node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --plan moshimo-6154-<timestamp> --commit
 ```
+
+- **★`--commit --id` は使えない (exit 2)。`--commit` は `--plan` 必須**。id 直指定だと
+  「見た画面」と「押す画面」が別 run になり、間の差し替えを検知できないため
+  (doc 42 §6.3 / `affiliate-ads-standards.md` §11)。
+- plan は **24 時間で失効**する。期限切れ・画面が変わっている場合は押さずに失効させるので、
+  dry-run からやり直す。
+- 同じ plan を 2 度は実行できない。journal に `sent` が残っている operation は
+  自動再送しない (二重申請の防止)。状態を知りたいときは `affiliate-status` で実機を見る。
 
 - **`--commit` は外部への不可逆送信 (規約同意を伴う)。オーナーの明示承認なしに実行しない。**
 - **週上限がある** (config `asps.<name>.weeklyApplyMax`。現在 100 — 2026-07-28 にオーナー判断で 10→100)。
@@ -125,9 +127,9 @@ git で運ばれるもの / 運ばれないものを取り違えると、重複�
 
 | 引き継がれる (git) | 引き継がれない (マシン固有) |
 |---|---|
-| 提携台帳 `.Codex/state/ads/affiliate-catalog.json` (申請履歴・週上限の入力) | **Playwright 永続プロファイル `.local/playwright-*-profile`** (gitignore) |
-| A8 カタログ `.Codex/state/ads/a8-catalog.json` (状態機械・承認待ち) | セッション state `.local/playwright-*-state.json` |
-| 接続設定 `.Codex/config/affiliate-asp.json` (URL / ラベル / 週上限) | 走査結果 `.local/playwright-*-debug/` (再実行すれば作れる) |
+| 提携台帳 `.claude/state/ads/affiliate-catalog.json` (申請履歴・週上限の入力) | **Playwright 永続プロファイル `.local/playwright-*-profile`** (gitignore) |
+| A8 カタログ `.claude/state/ads/a8-catalog.json` (状態機械・承認待ち) | セッション state `.local/playwright-*-state.json` |
+| 接続設定 `.claude/config/affiliate-asp.json` (URL / ラベル / 週上限) | 走査結果 `.local/playwright-*-debug/` (再実行すれば作れる) |
 | 広告 SSOT `apps/web/scripts/affiliate-ads-data.ts` | — |
 
 - **初回は各 ASP へ人間が手動ログインする**。認証情報は config にも env にも置かない規約なので、
@@ -145,7 +147,7 @@ afb は承認追跡と広告原稿のローカル取得まで実装済み、も�
 | 工程 | A8 | もしも / afb |
 |---|---|---|
 | 案件探索 | `scout` | ✅ `moshimo-scan` / `afb-scan` |
-| 申請 | `apply --id` | ✅ `affiliate-apply --commit` |
+| 申請 | `apply --id` | ✅ `affiliate-apply --plan … --commit` |
 | **承認の追跡** | `check-approval` (週次で applied→approved) | ✅ `affiliate-status --write` (実機照合で applying→approved。名前も補完する) |
 | **広告コード取得** | `harvest` | afb=`afb-harvest.mjs --id ...` / もしも=未実装 |
 | SSOT 追記 | `append-affiliate-ads` | afb/もしもとも手動登録のみ |
@@ -170,14 +172,14 @@ afb は承認追跡と広告原稿のローカル取得まで実装済み、も�
 - 回避する引数・環境変数は用意していない。作らない。
 - afb の切替が効かない場合は debug artifact (`.local/playwright-afb-debug/<runId>/`) の
   スクリーンショットと visible-text.txt を読み、Chosen ウィジェットの selector 変化を診断する。
-- 期待 ID そのものが違う可能性もある (config `.Codex/config/affiliate-asp.json` の `sites`)。
+- 期待 ID そのものが違う可能性もある (config `.claude/config/affiliate-asp.json` の `sites`)。
   実機の表示を確認してから config を直す。**推測で書き換えない。**
 
 ## 関連
 
-- 規約: `.Codex/rules/affiliate-ads-standards.md` (§0 意図軸 / §11 3 ASP 提携運用)
-- 設定: `.Codex/config/affiliate-asp.json` / 台帳: `.Codex/state/ads/affiliate-catalog.json`
-- コア: `.Codex/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`)
-- agent: `.Codex/agents/affiliate-operator.md`
+- 規約: `.claude/rules/affiliate-ads-standards.md` (§0 意図軸 / §11 3 ASP 提携運用)
+- 設定: `.claude/config/affiliate-asp.json` / 台帳: `.claude/state/ads/affiliate-catalog.json`
+- コア: `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`)
+- agent: `.claude/agents/affiliate-operator.md`
 - 隣接 skill: `/scout-asp` (A8 案件開拓) / `/a8-report` (A8 成果取込) / `/register-affiliate-banner` (SSOT 登録)
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

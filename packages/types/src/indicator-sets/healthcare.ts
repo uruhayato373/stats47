@@ -106,6 +106,26 @@ export const HEALTHCARE_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "infant-deaths",
+      "shortLabel": "乳児死亡数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "infant-mortality-rate-per-1000-births",
+      "shortLabel": "乳児死亡率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "average-life-expectancy-female-20",
+      "shortLabel": "平均余命（女性20歳時点）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "average-life-expectancy-female-65",
+      "shortLabel": "平均余命（女性65歳時点）",
+      "role": "context"
+    },
+    {
       "rankingKey": "medical-physicians-under-40",
       "shortLabel": "40歳未満の医療施設従事医師数（2024年末）",
       "role": "secondary"

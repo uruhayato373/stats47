@@ -6,7 +6,7 @@ primary_agent: improvement-triage
 
 # triage-improvement-log
 
-`.Codex/todo/improvements.md` の pending / in-progress 施策を、**Tier × 期日カテゴリ** のマトリクスで一望し、人間が「次にどれを潰すか」を判定するための UX レイヤースキル。
+`.claude/todo/improvements.md` の pending / in-progress 施策を、**Tier × 期日カテゴリ** のマトリクスで一望し、人間が「次にどれを潰すか」を判定するための UX レイヤースキル。
 
 `triage-matrix.mjs` (原始抽出) の上に、weekly triage 用の表示モード (markdown / csv / matrix) と自動アクション提案を追加する。
 
@@ -21,16 +21,16 @@ primary_agent: improvement-triage
 
 ```bash
 # Markdown 素通し (Tier 順 table)
-node .Codex/scripts/lib/triage-matrix.mjs --format markdown
+node .claude/scripts/lib/triage-matrix.mjs --format markdown
 
 # CSV エクスポート (Notion / スプレッドシート向け)
-node .Codex/scripts/lib/triage-matrix.mjs --format csv > /tmp/triage.csv
+node .claude/scripts/lib/triage-matrix.mjs --format csv > /tmp/triage.csv
 
 # Tier × 期日マトリクス + 自動アクション提案 (推奨)
-node .Codex/scripts/lib/triage-matrix.mjs --format matrix
+node .claude/scripts/lib/triage-matrix.mjs --format matrix
 
 # 基準週を指定 (ISO 8601, 過去週の triage を再現するため)
-node .Codex/scripts/lib/triage-matrix.mjs --format matrix --week 2026-W21
+node .claude/scripts/lib/triage-matrix.mjs --format matrix --week 2026-W21
 ```
 
 ## 引数
@@ -53,7 +53,7 @@ Tier 順 table + 詳細リンク。
 ```
 tier,status,id,title,deployed_at,due,overdue_days,owner,metric
 2,pending,BLOG-CTR-02,"SEO タイトル改修, 上位 50 記事",2026-05-17,,1,,gsc
-1,in-progress,T0-DECAY-01,旧記事 410 化バッチ,2026-05-10,2026-05-24,8,Codex,gsc
+1,in-progress,T0-DECAY-01,旧記事 410 化バッチ,2026-05-10,2026-05-24,8,claude,gsc
 ```
 
 title 内のカンマは `"..."` でエスケープ。`"` 自体は `""` でエスケープ。
@@ -73,8 +73,8 @@ Tier × 期日カテゴリの集計マトリクス。
 
 ### 自動アクション提案
 
-- **EXP-005** (gsc, tier 1, deployed 2026-04-20, 28d): 期限切れ警告: 検証コマンド実行 or due 延長 → .Codex/todo/improvements.md#exp-005
-- **T2-CLEAN-03** (ga4, tier 2, due 2026-05-10): effect 判定実施を本週内に → .Codex/todo/improvements.md#t2-clean-03
+- **EXP-005** (gsc, tier 1, deployed 2026-04-20, 28d): 期限切れ警告: 検証コマンド実行 or due 延長 → .claude/todo/improvements.md#exp-005
+- **T2-CLEAN-03** (ga4, tier 2, due 2026-05-10): effect 判定実施を本週内に → .claude/todo/improvements.md#t2-clean-03
 ```
 
 期日カテゴリ判定 (今日基準):
@@ -100,32 +100,32 @@ Tier × 期日カテゴリの集計マトリクス。
 
 ```bash
 # 1. matrix で全体感を把握
-node .Codex/scripts/lib/triage-matrix.mjs --format matrix
+node .claude/scripts/lib/triage-matrix.mjs --format matrix
 
 # 2. 「超過」列に注目し、各施策の検証コマンドを実行
 # 3. 必要なら csv に書き出して Notion に貼る
-node .Codex/scripts/lib/triage-matrix.mjs --format csv > /tmp/triage-$(date +%Y-W%V).csv
+node .claude/scripts/lib/triage-matrix.mjs --format csv > /tmp/triage-$(date +%Y-W%V).csv
 ```
 
 ### weekly-plan で着手対象を決めるとき
 
 ```bash
 # 今週日曜までに due の施策のみ抽出 (markdown 素通し)
-node .Codex/scripts/lib/triage-matrix.mjs --format markdown
+node .claude/scripts/lib/triage-matrix.mjs --format markdown
 # → Tier 1 の「今週」列の施策を週次計画に転記
 ```
 
 ## 関連
 
-- `.Codex/scripts/lib/triage-matrix.mjs` — 本スキルの実装
+- `.claude/scripts/lib/triage-matrix.mjs` — 本スキルの実装
 - `.github/workflows/improvement-log-reminder-weekly.yml` — 週次 triage Issue 起票 (本スキルの主要呼び出し元)
-- `.Codex/todo/improvements.md` — 改善バックログ全体 (TODO 真実源)
-- `.Codex/rules/docs-vs-issues.md` — 改善施策の置き場所
-- `.Codex/rules/evidence-based-judgment.md` — effect 判定の実証ベース原則
+- `.claude/todo/improvements.md` — 改善バックログ全体 (TODO 真実源)
+- `.claude/rules/docs-vs-issues.md` — 改善施策の置き場所
+- `.claude/rules/evidence-based-judgment.md` — effect 判定の実証ベース原則
 
 ## 制約・注意
 
-- 本スキルは `.Codex/todo/improvements.md` を直接書き換えない (read-only)
+- 本スキルは `.claude/todo/improvements.md` を直接書き換えない (read-only)
 - 集計対象は triage-matrix.mjs の対象と同じ (status: pending | in-progress)
 - TEMPLATE section (`-XXX` で終わる ID 等) は自動除外
 - マトリクスの集計は今日 (UTC) を基準。timezone shift は意図的に行わない

@@ -177,6 +177,9 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
      枠追加を続けず、position単位で撤去/移設する。
 - **判定**: `effect/pending`。公開後の確定した比較期間が未取得のため効果未判定。`variant_id` / `experiment_id` dimension欠落は
   position別集計を妨げないが、クリエイティブA/B判定は引き続き行わない。
+- **2026-09-15 方針変更（ローカル実装・未デプロイ）**: 県別返礼品リンクと競合するため、県ページの
+  `area-content` と右レールの汎用アフィリエイト枠を撤去した。デプロイ後は `area-content` を継続施策から外し、
+  撤去前後を同一施策の効果として結合しない。ranking側の配置は変更しない。
 - **訂正**: 過去ログの「`other`=vertical未解決ページ」という解釈は過大。最新ad_id/position内訳では
   fixed house bannerも意図的に`other`を送るため合成値である。`AFF-CATEGORY-MAP-01`は前提不成立として
   改善バックログから削除し、今後の写像漏れはplacement-mapの`unmapped.byReason`で判定する。

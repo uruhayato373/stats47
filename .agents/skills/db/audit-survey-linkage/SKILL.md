@@ -4,7 +4,7 @@ description: ranking ↔ 統計調査 (survey) 紐付けの決定的監査と是
 primary_agent: survey-curator
 ---
 
-ranking↔survey 紐付けの監査・是正スキル。**正典: `.Codex/rules/survey-linkage-standards.md`**
+ranking↔survey 紐付けの監査・是正スキル。**正典: `.claude/rules/survey-linkage-standards.md`**
 (SSOT 構造・導出優先順位・編集フロー・禁止事項)。
 
 **本スキルは導出ロジックを書かない。** 監査スクリプトは本番生成 (`generate-ranking-items.ts`) と
@@ -41,7 +41,7 @@ npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check 
 
 ```bash
 npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts \
-  --json .Codex/state/surveys/taxonomy.json --tighten-ratchet
+  --json .claude/state/surveys/taxonomy.json --tighten-ratchet
 npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check
 ```
 
@@ -80,9 +80,9 @@ CI: `gh workflow run sync-snapshots.yml -f only=ranking-items` → 完了後 `-f
 
 ## 参照
 
-- 正典: `.Codex/rules/survey-linkage-standards.md`
+- 正典: `.claude/rules/survey-linkage-standards.md`
 - 監査スクリプト: `packages/ranking/src/scripts/audit-survey-linkage.ts`
-- agent: `.Codex/agents/survey-curator.md`
+- agent: `.claude/agents/survey-curator.md`
 - **役割分離**: 本スキル = 紐付け層の監査・是正の実行エンジン。監査結果を台帳化し需要・編集品質と
-  合わせて評価する層は `/manage-survey-portfolio` (`.Codex/state/surveys/portfolio.json` へ転記。
+  合わせて評価する層は `/manage-survey-portfolio` (`.claude/state/surveys/portfolio.json` へ転記。
   紐付けロジック・是正手順は本スキルにのみ置き、そちらへ再定義しない)

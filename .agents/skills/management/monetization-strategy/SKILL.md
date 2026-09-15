@@ -35,7 +35,7 @@ stats47 は都道府県統計データの可視化サイト。以下の特性を
 
 以下を調査する:
 - 公開記事数・ランキングページ数（DB articles テーブル、ranking_items テーブル）
-- SNS フォロワー数・エンゲージメント（投稿台帳 `.Codex/state/sns/posts.json` のキャッシュカラム〔`sns-posts-store.cjs` 経由〕 + `.Codex/skills/analytics/sns-metrics-improvement/snapshots/`）
+- SNS フォロワー数・エンゲージメント（投稿台帳 `.claude/state/sns/posts.json` のキャッシュカラム〔`sns-posts-store.cjs` 経由〕 + `.claude/skills/analytics/sns-metrics-improvement/snapshots/`）
 - 直近のアクセス規模（既知のデータがあれば使用）
 
 ### Step 2: 候補戦略のブレインストーム
@@ -131,8 +131,8 @@ stats47 に適した収益化モデルを 3-5 案生成する。以下のカテ�
 critical-review の結論から戦略本体に反映すべき変更を特定し、`docs/00_プロジェクト管理/02_収益化戦略.md` の関連セクションを Edit tool で更新する。
 
 - 追記・修正対象: 収益レーン、優先順位、意思決定ゲート、禁止事項
-- 施策の status・期日・担当は戦略本体に重複記載せず、`.Codex/todo/` の該当バックログへ反映
-- 未完了の施策だけを `.Codex/todo/improvements.md` または `backlog.md` へ具体化し、レビュー全文は保存しない
+- 施策の status・期日・担当は戦略本体に重複記載せず、`.claude/todo/` の該当バックログへ反映
+- 未完了の施策だけを `.claude/todo/improvements.md` または `backlog.md` へ具体化し、レビュー全文は保存しない
 
 ### Step 7: 過去判断の参照
 
@@ -150,5 +150,5 @@ critical-review の結論から戦略本体に反映すべき変更を特定し�
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
 - `docs/00_プロジェクト管理/01_プロジェクト定義.md` — プロジェクト概要
-- `.Codex/skills/management/growth-loops/SKILL.md` — 成長ループ分析
+- `.claude/skills/management/growth-loops/SKILL.md` — 成長ループ分析
 - 原典: Paweł Huryn の Monetization Strategy フレームワーク

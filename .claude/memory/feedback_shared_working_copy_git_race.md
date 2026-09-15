@@ -84,3 +84,8 @@ main の commit を replay して途中で停止する。その detached な中�
 - **対策**: main 由来の未同期変更は `git diff origin/develop...origin/main`（共通祖先→main）で検査する。develop-only は PASS、main-only は検出する実 Git fixture を回帰テストに固定した。PASS は「両 branch 同一」ではなく「main 由来の未同期変更なし」と表示する。
 
 関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]] [[feedback_sync_snapshots_checks_out_main]]
+
+**作業共有と回収の境界 (2026-09-14)**:
+- **問題**: Codexの作業登録が共有ガードへ届かず、既存のworktree回収処理はGitの削除拒否後にも削除へ進めた。
+- **原因**: ガードのIDがClaude入力に限定され、回収処理のcatchが「対象が存在するか」だけを判定していた。
+- **対策**: 共通CLI・Git common directoryで担当と一時メモを共有する。回収はGit登録が解除された場合だけ続け、未保存変更・メイン作業場所を実Git fixtureで保護する。手順は `.claude/rules/local-environment.md`「Codex / Claude の作業共有」、検証は `session-guard.test.cjs` / `remove-worktree.test.mjs`。

@@ -321,6 +321,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                 }
             >
                 <div className="space-y-6">
+                    {/* TOC (lg 未満で記事冒頭に表示。lg 以上は右 rail に表示) */}
+                    <div className="lg:hidden">
+                        <ArticleTableOfContents content={article.content} />
+                    </div>
+
                     <ArticleCard>
                             {/* 記事ヘッダー */}
                             <header className="mb-8 border-b border-border pb-6 font-news-article">
@@ -352,11 +357,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 </div>
                             </header>
 
-                            {/* TOC (lg 未満で記事冒頭に表示。lg 以上は右 rail に表示) */}
-                            <div className="mb-8 lg:hidden">
-                                <ArticleTableOfContents content={article.content} />
-                            </div>
-
                             {/* 記事本文 */}
                             <ArticleRenderer
                                 article={article}
@@ -368,26 +368,24 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 affiliateBanners={articleBanners}
                             />
 
-                            <BlogProductCta blogSlug={slug} />
-
-                            {/* PC・モバイル共通の読了導線。右レールとの重複は作らない。 */}
-                            {rakutenPlacement && (
-                                <div className="mt-8">
-                                    <Suspense fallback={null}>
-                                        {rakutenPlacement.kind === "furusato" ? (
-                                            <FurusatoNozeiCard areaCode={rakutenPlacement.areaCode} position="blog-furusato-content" layout="content" />
-                                        ) : (
-                                            <RakutenItemsCard sourceText={rakutenPlacement.sourceText} position="blog-rakuten-content" layout="content" />
-                                        )}
-                                    </Suspense>
-                                </div>
-                            )}
-
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">
                                 <ShareButtons title={article.title} url={`/blog/${slug}`} variant="prominent" />
                             </div>
                     </ArticleCard>
+
+                    <BlogProductCta blogSlug={slug} />
+
+                    {/* PC・モバイル共通の読了導線。右レールとの重複は作らない。 */}
+                    {rakutenPlacement && (
+                        <Suspense fallback={null}>
+                            {rakutenPlacement.kind === "furusato" ? (
+                                <FurusatoNozeiCard areaCode={rakutenPlacement.areaCode} position="blog-furusato-content" layout="content" />
+                            ) : (
+                                <RakutenItemsCard sourceText={rakutenPlacement.sourceText} position="blog-rakuten-content" layout="content" />
+                            )}
+                        </Suspense>
+                    )}
                 </div>
             </ArticleShell>
         </>

@@ -28,15 +28,15 @@ primary_agent: article-writer
 
 ## --target queue: 計画的是正 (★推奨・週次バッチの実行エンジン)
 
-`build-remediation-queue.mjs` が作る**状態付き是正キュー** (`.Codex/state/blog/remediation-queue.json`) を消費し、
+`build-remediation-queue.mjs` が作る**状態付き是正キュー** (`.claude/state/blog/remediation-queue.json`) を消費し、
 pending 上位 N 件を順に是正する。GSC 流入 (expectedLift) × 品質 blocker severity を**統合スコア**で序列化し、
 publish-blocker を持つ記事 (**must-fix レーン**) を最上位に置く。「次に何を直すか」「何本消化したか」「効いたか」を
-キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `.Codex/rules/blog-remediation-loop.md`。
+キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `.claude/rules/blog-remediation-loop.md`。
 
 ### Step 1: キューを最新化
 
 ```bash
-node .Codex/scripts/blog/build-remediation-queue.mjs
+node .claude/scripts/blog/build-remediation-queue.mjs
 # audit を fresh 取得 (audit-published-blog.mjs) → 最新 GSC とマージ → 状態を保ったまま upsert。
 # done は「直近 brushup 済 かつ audit が blocker 0 を確認」した記事のみ。blocker が残れば自動で再 pending。
 ```
@@ -44,7 +44,7 @@ node .Codex/scripts/blog/build-remediation-queue.mjs
 ### Step 2: 次の N 件を取り出す
 
 ```bash
-node .Codex/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上位 N を JSONL で出力
+node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上位 N を JSONL で出力
 ```
 
 各 entry は `{slug, lane, priority, combinedScore, gsc{}, quality{blockers,prosePerChart,flags}}`。
@@ -53,25 +53,25 @@ node .Codex/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上位
 
 各 slug について順に:
 
-1. **in-progress に印**: `node .Codex/scripts/blog/build-remediation-queue.mjs --mark-in-progress <slug>`
+1. **in-progress に印**: `node .claude/scripts/blog/build-remediation-queue.mjs --mark-in-progress <slug>`
 2. **focus は `quality.flags` の blocker 内訳から決める** (`--target article` のリライトエンジンを適用):
    - markdown 表 / truncated 表 / チャート0 → 表を **SVG (上位5+下位5)** に置換
-   - `である調 文末` (dearuEndings>0) → **本文を ですます調 に変換** (である。→です。/だった。→でした。/ではない。→ではありません。/動詞終止形→ます形)。callout・引用・データ出典の体言止めは対象外 (正典 `.Codex/rules/blog-quality-standards.md`「文体」)。**★copula だけの正規表現一括置換は禁止** (2026-06-13 実証): 動詞終止形・形容詞終止 (〜もたらす。/〜多い。) が常体で残り「です。」と混在して崩壊し、`quality-gate.mjs` は copula しか見ないため**通ってしまう**。必ず article-writer エンジンが**文単位で ですます完全化**する
+   - `である調 文末` (dearuEndings>0) → **本文を ですます調 に変換** (である。→です。/だった。→でした。/ではない。→ではありません。/動詞終止形→ます形)。callout・引用・データ出典の体言止めは対象外 (正典 `.claude/rules/blog-quality-standards.md`「文体」)。**★copula だけの正規表現一括置換は禁止** (2026-06-13 実証): 動詞終止形・形容詞終止 (〜もたらす。/〜多い。) が常体で残り「です。」と混在して崩壊し、`quality-gate.mjs` は copula しか見ないため**通ってしまう**。必ず article-writer エンジンが**文単位で ですます完全化**する
    - `rank 主張あるが data 無し` (検証不能 blocker) → R2 `app/ranking/<key>/values.json` から `data/<name>-prefecture-rankings.json` を生成 (value 降順で rank 再計算) し本文数値を data に一致させる
    - `prose/図 <350` → **各図直下に「なぜ上位/下位か」の解釈段落**を追加 (記事アーキタイプの必須分析視点。図あたり ~600字)
-   - `adjacent-callouts` → 最重要の注意だけを callout に残し、分析・読み方・補足は通常本文へ戻すか対応する節へ分散する (連続配置のまま余白だけ足さない)。全記事の機械是正は `node .Codex/scripts/blog/fix-consecutive-callouts.mjs --base docs/21_ブログ記事原稿 --apply` を使う
+   - `adjacent-callouts` → 最重要の注意だけを callout に残し、分析・読み方・補足は通常本文へ戻すか対応する節へ分散する (連続配置のまま余白だけ足さない)。全記事の機械是正は `node .claude/scripts/blog/fix-consecutive-callouts.mjs --base docs/21_ブログ記事原稿 --apply` を使う
    - `internalLinks<3` / source-link 末尾集約 → source-link を各図直下にインライン配置
-   - `リンク切れ (soft 404 / 410 Gone)` → **勝手に近そうな別ページへ張り替えない**。`.Codex/scripts/blog/data/broken-link-remap.json` に置換先 (アンカーテキストが指す指標が実在 metric の title と一致する場合のみ。無ければ `to: null` = リンク解除) と `reason` を追記し、`node .Codex/scripts/blog/fix-broken-internal-links.mjs --apply` で決定的に是正する (置換先を live 実測し到達不能なら中断する)。正典 `.Codex/rules/blog-quality-standards.md` §内部リンクの実在
+   - `リンク切れ (soft 404 / 410 Gone)` → **勝手に近そうな別ページへ張り替えない**。`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (アンカーテキストが指す指標が実在 metric の title と一致する場合のみ。無ければ `to: null` = リンク解除) と `reason` を追記し、`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply` で決定的に是正する (置換先を live 実測し到達不能なら中断する)。正典 `.claude/rules/blog-quality-standards.md` §内部リンクの実在
    - opportunity レーン (blocker 無し・CTR 改善余地) → `CTR-reframe`
 3. **記事アーキタイプを 1 つ選び frontmatter `archetype: A|B|C|D|E` を宣言** (正典「記事アーキタイプ」)。型の章構成・必須分析視点に従う。
-4. **quality-gate を通す**: `node .Codex/scripts/blog/quality-gate.mjs <draft path>`。`prose/図` blocker を含め blocker 0 になるまで直す。
+4. **quality-gate を通す**: `node .claude/scripts/blog/quality-gate.mjs <draft path>`。`prose/図` blocker を含め blocker 0 になるまで直す。
 5. **blog-critic を別 agent で起動** → `docs/21_…/<slug>/review.md` verdict: PASS まで反復 (★自己採点禁止)。
-6. **done に印 + wave_id**: `node .Codex/scripts/blog/build-remediation-queue.mjs --mark-done <slug> --wave-id YYYY-MM-DD-manual`
+6. **done に印 + wave_id**: `node .claude/scripts/blog/build-remediation-queue.mjs --mark-done <slug> --wave-id YYYY-MM-DD-manual`
 
 ### Step 4: wave を記録 (history + 改善ログ)
 
-- `.Codex/state/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.Codex/rules/blog-data-schema.md` の命名規則)。
-- `.Codex/todo/improvements.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
+- `.claude/state/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
+- `.claude/todo/improvements.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
 - 公開は CI (`publish-blog.yml` / develop push)。`quality-gate.mjs` が公開前に再 enforce する。
 
 ### cadence (週次・人手ゲート)
@@ -83,11 +83,11 @@ node .Codex/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上位
 
 ### model 傾斜と delta 再審査 (トークン節約・2026-07-07 / TOKEN-CONTENT-01)
 
-critic 往復のコストを下げる 2 つの機構。モデル選択の正典は `.Codex/rules/model-prompting.md`、
+critic 往復のコストを下げる 2 つの機構。モデル選択の正典は `.claude/rules/model-prompting.md`、
 対象別 tier の決定実装は `build-remediation-queue.mjs`:
 
-agent起動promptとモデル別の共通規律は `.Codex/rules/model-prompting.md` /
-`.Codex/rules/agent-output-contract.md` を正典とする。
+agent起動promptとモデル別の共通規律は `.claude/rules/model-prompting.md` /
+`.claude/rules/agent-output-contract.md` を正典とする。
 
 1. **model 傾斜**: `build-remediation-queue.mjs` が各 entry に `reviewTier` を付与する (GSC impressions 上位 30 = `opus` / 他 = `sonnet`。ai-content の `build-ai-content-queue.mjs` と同規則)。`blog-mass-rewrite.js` は tier2 (`reviewTier==='opus'`) の初回 critic を opus で起動し、他は既定 (sonnet)。author (rewrite) は常に sonnet 固定。総コストを floor に保ったまま流入上位の審査品質だけ引き上げる。
 2. **delta 再審査**: REVISE 後の再レビュー (`blog-revise-fix.js`) は blog-critic を **mode: delta** で起動する — 前回 review.md の指摘 + 変更 hunk のみを見て、正典 465行と記事全文を再読しない (機械的な床は `quality-gate.mjs` が公開前に毎回フル実行するため落ちない)。delta は読む量が少ないため opus で起動しても安価。
@@ -107,7 +107,7 @@ GSC の impressions × CTR と D1 の article メタデータを掛け合わせ�
 
 | データ | 場所 |
 |---|---|
-| GSC ページ別週次 | `.Codex/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` |
+| GSC ページ別週次 | `.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` |
 | ブログ記事 (公開) | R2 `app/blog/all.json` (`.articles`。旧 D1 articles テーブルは廃止) |
 
 ### 実行フロー (priority)
@@ -116,10 +116,10 @@ GSC の impressions × CTR と D1 の article メタデータを掛け合わせ�
 
 ```bash
 # 最新週を特定
-ls .Codex/skills/analytics/gsc-improvement/reference/snapshots/ | sort | tail -1
+ls .claude/skills/analytics/gsc-improvement/reference/snapshots/ | sort | tail -1
 ```
 
-`.Codex/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` を Read する。
+`.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` を Read する。
 `/blog/` を含む行のみを抽出し、 slug を `https://stats47.jp/blog/` 以降の文字列として取得する。
 
 #### Step 2: R2 blog snapshot から記事メタデータ取得
@@ -144,7 +144,7 @@ GSC データは実測値。 D1 の `articles` テーブルの `updated_at` が�
 
 #### Step 4: brushup-queue.md 出力
 
-`.Codex/state/blog/remediation-queue.json` に以下の形式で書き出す:
+`.claude/state/blog/remediation-queue.json` に以下の形式で書き出す:
 
 ```markdown
 # ブログ改善優先度キュー
@@ -185,12 +185,12 @@ GSC データは実測値。 D1 の `articles` テーブルの `updated_at` が�
 補強完了後、 必ず factual cross-check を通す:
 
 ```bash
-node .Codex/scripts/lib/article-factual-check.mjs \
+node .claude/scripts/lib/article-factual-check.mjs \
   ".local/r2/app/blog/<slug>/article.md" \
   ".local/r2/app/blog/<slug>/data"
 ```
 
-exit 1 なら修正 → 再 check して pass するまで繰り返す。 詳細: `.Codex/skills/blog/SHARED-failure-cases.md`
+exit 1 なら修正 → 再 check して pass するまで繰り返す。 詳細: `.claude/skills/blog/SHARED-failure-cases.md`
 
 ### 共通 Step A: 記事読込・診断 + ground-truth 確認 (全 focus)
 
@@ -204,7 +204,7 @@ exit 1 なら修正 → 再 check して pass するまで繰り返す。 詳細
 
 ### focus=CTR-reframe のフロー (default)
 
-全文 reframe で CTR を改善する。タイトルの curiosity gap が CTR の主因 (`.Codex/rules/blog-quality-standards.md` の実証)。
+全文 reframe で CTR を改善する。タイトルの curiosity gap が CTR の主因 (`.claude/rules/blog-quality-standards.md` の実証)。
 
 #### C-1. 関連 metrics 探索 (面白い対比探し)
 
@@ -232,7 +232,7 @@ curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
 
 #### C-3. best framing で全文 reframe
 
-best 案で seoTitle / description / 本文を再構成する。構成テンプレ (`.Codex/rules/blog-quality-standards.md` 準拠):
+best 案で seoTitle / description / 本文を再構成する。構成テンプレ (`.claude/rules/blog-quality-standards.md` 準拠):
 
 1. 冒頭 (緊張感セットアップ + 中核質問)
 2. データ概要
@@ -291,12 +291,12 @@ nlm cross query --notebooks "<ノートブック名>" \
 | focus | 反映先 | 内容 |
 |---|---|---|
 | 最新データ更新 | データ説明部分 | data/*.json・D1 の最新年度値に差し替え |
-| CTA強化 (関連ランキング誘導) | **対応する図・データを扱う H2 セクション内** (SVG 図の直下等) | そのセクションが言及するランキングへ `<source-link href="/ranking/...">` を**インライン配置**。**記事末尾に集約しない** (回遊性・文脈性を損なう)。ナビ目的の `/category/` `/themes/` への `<source-link>` は末尾の関連セクションで可。検査: `node .Codex/scripts/blog/audit-article-structure.mjs` |
+| CTA強化 (関連ランキング誘導) | **対応する図・データを扱う H2 セクション内** (SVG 図の直下等) | そのセクションが言及するランキングへ `<source-link href="/ranking/...">` を**インライン配置**。**記事末尾に集約しない** (回遊性・文脈性を損なう)。ナビ目的の `/category/` `/themes/` への `<source-link>` は末尾の関連セクションで可。検査: `node .claude/scripts/blog/audit-article-structure.mjs` |
 
 ### 共通 Step B: bold+括弧レンダリングバグ検出・修正 (必須, 全 focus)
 
 ```bash
-node .Codex/scripts/blog/lint-article.cjs <slug>
+node .claude/scripts/blog/lint-article.cjs <slug>
 ```
 
 exit 1 (問題あり) の場合は、 検出行を Edit ツールで修正する。
@@ -312,7 +312,7 @@ exit 1 (問題あり) の場合は、 検出行を Edit ツールで修正する
 リライト確定前に factual + 形式の防壁を通す:
 
 ```bash
-node .Codex/scripts/blog/quality-gate.mjs <slug>
+node .claude/scripts/blog/quality-gate.mjs <slug>
 # exit 0 → 確定 / exit 1 → blocker を修正して再実行 (batch では revert + skip)
 ```
 
@@ -323,15 +323,15 @@ quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の da
 > verdict: PASS) が無いと quality-gate が blocker で止める。**リライトした本人が自己採点しない** ——
 > 必ず別コンテキストの blog-critic に意味レビュー (冗長・図表重複・水増し・CTA過多・読者価値) を依頼し、
 > REVISE 指摘を反映してから PASS を得る。文字数の量的十分性も critic が判断する (高い文字数床で水増しを誘発しない)。
-> 詳細: `.Codex/rules/blog-quality-standards.md`「品質の3層モデルと critic 必須」。
+> 詳細: `.claude/rules/blog-quality-standards.md`「品質の3層モデルと critic 必須」。
 
 #### 共通 Step B2: 表現の正典化 (全 brushup で必ず適用・2026-06-02)
 
-リライト時、記事 markdown を `.Codex/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」に揃える。
+リライト時、記事 markdown を `.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」に揃える。
 以下は **quality-gate が blocker 化**しているので必ず是正する (棚卸し: `audit-published-blog.mjs`):
 
 1. **チャート**: `<chart-placeholder ... data="X"/>` と インライン `<svg>` を **生成画像 `![](data/X.svg)`** に統一。
-   - data/*.json があれば `node .Codex/scripts/blog/generate-article-charts.ts --slug <slug>` で **上位5+下位5** SVG を生成し placeholder を自動置換。data が無ければ `fetch-ranking-data-r2.mjs` で ranking から取得してから生成。
+   - data/*.json があれば `node .claude/scripts/blog/generate-article-charts.ts --slug <slug>` で **上位5+下位5** SVG を生成し placeholder を自動置換。data が無ければ `fetch-ranking-data-r2.mjs` で ranking から取得してから生成。
 2. **記事内『関連ランキング/関連記事』セクション削除**: ページ側 (`RelatedRankingsSection`/`BlogRelatedArticlesSection`) が正典。`## 関連ランキング` `### 関連記事` 見出しごと markdown から除去 (二重表示の解消)。
 3. **source-link を各図直下にインライン配置**: 末尾集約をやめ、対応する図の直下へ分散。
 4. **truncated 表 / 上下非対称表の除去**: 全件表 or SVG 化 (上下対称)。
@@ -355,13 +355,13 @@ GSC で改善余地の大きい blog 記事を優先度順に選び、`--target 
 
 - **1 回最大 5 記事** (`--count` > 5 は 5 にクランプ)
 - **全件 skip 日は commit せず終了**
-- **90 日以内に brushup した記事は dedup** (`.Codex/state/blog/auto-brushup-history.json`)
+- **90 日以内に brushup した記事は dedup** (`.claude/state/blog/auto-brushup-history.json`)
 - **NotebookLM 不使用** (バッチは CTR-reframe focus 固定。エキスパート視点追加は対話実行のみ)
 
 ### Step 1: 候補選定
 
 ```bash
-node .Codex/scripts/blog/select-brushup-candidates.mjs --count 5 > /tmp/candidates.jsonl
+node .claude/scripts/blog/select-brushup-candidates.mjs --count 5 > /tmp/candidates.jsonl
 ```
 
 候補が 0 件なら終了。(注: 旧 30 日 plan `auto-brushup-plan.json` / `generate-brushup-plan.mjs` は cron 廃止に伴い**参照しない** — deprecated)
@@ -372,7 +372,7 @@ node .Codex/scripts/blog/select-brushup-candidates.mjs --count 5 > /tmp/candidat
 
 - リライト前に `cp .local/r2/app/blog/<slug>/article.md /tmp/brushup-backup-<slug>.md`
 - 5 案採点で合計 30 点未満なら skip
-- `node .Codex/scripts/blog/quality-gate.mjs <slug>` が exit 1 なら revert (`cp /tmp/brushup-backup-<slug>.md .local/r2/app/blog/<slug>/article.md`) + skip-log
+- `node .claude/scripts/blog/quality-gate.mjs <slug>` が exit 1 なら revert (`cp /tmp/brushup-backup-<slug>.md .local/r2/app/blog/<slug>/article.md`) + skip-log
 
 `--dry-run` の場合はここで停止し、候補一覧 + 各 framing スコアを report 出力 (書込・commit なし)。
 
@@ -380,7 +380,7 @@ node .Codex/scripts/blog/select-brushup-candidates.mjs --count 5 > /tmp/candidat
 
 ```bash
 npm run articles:sync-from-r2 --workspace=packages/database
-bash .Codex/skills/db/sync-snapshots/run.sh --only blog
+bash .claude/skills/db/sync-snapshots/run.sh --only blog
 
 git checkout -b feature/brushup-batch-YYYY-MM-DD develop
 git add .
@@ -394,28 +394,28 @@ gh pr create --base main --head develop \
   --body "$(cat /tmp/brushup-report.md)"
 ```
 
-**ここで停止する。`gh pr merge --auto` は付けない** — CI green 確認後に人間がマージする (`.Codex/rules/branch-workflow.md` の develop→main ゲート)。
+**ここで停止する。`gh pr merge --auto` は付けない** — CI green 確認後に人間がマージする (`.claude/rules/branch-workflow.md` の develop→main ゲート)。
 
 ### Step 4: history 更新
 
-`.Codex/state/blog/auto-brushup-history.json` に通過記事を追記:
+`.claude/state/blog/auto-brushup-history.json` に通過記事を追記:
 
 ```jsonc
 { "date": "YYYY-MM-DD", "wave_id": "YYYY-MM-DD-auto", "slug": "...", "framing": "...", "expectedLift": N }
 ```
 
-- `wave_id` は `YYYY-MM-DD-auto`。同日再実行は `-2`, `-3` と連番化し、既存 `2026-05-25-auto` 等と衝突させない (`.Codex/rules/blog-data-schema.md` の wave 命名規則)。
-- skip した記事は `.Codex/state/blog/auto-brushup-skipped.log` に記録 (週次レビューで prompt 改善の手がかり)。
+- `wave_id` は `YYYY-MM-DD-auto`。同日再実行は `-2`, `-3` と連番化し、既存 `2026-05-25-auto` 等と衝突させない (`.claude/rules/blog-data-schema.md` の wave 命名規則)。
+- skip した記事は `.claude/state/blog/auto-brushup-skipped.log` に記録 (週次レビューで prompt 改善の手がかり)。
 
 ---
 
 ## 参照
 
-- **記事品質の正典: `.Codex/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
-- 優先度キュー: `.Codex/state/blog/remediation-queue.json` (`--target priority` で生成)
+- **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
+- 優先度キュー: `.claude/state/blog/remediation-queue.json` (`--target priority` で生成)
 - 品質確認: `/blog-review --mode proofread` で最終チェック
-- factual + 形式の防壁: `node .Codex/scripts/blog/quality-gate.mjs <slug>` (内部で `article-factual-check.mjs` を呼ぶ)
-- 失敗事例 ledger: `.Codex/skills/blog/SHARED-failure-cases.md`
+- factual + 形式の防壁: `node .claude/scripts/blog/quality-gate.mjs <slug>` (内部で `article-factual-check.mjs` を呼ぶ)
+- 失敗事例 ledger: `.claude/skills/blog/SHARED-failure-cases.md`
 - nlm ヘルプ: `nlm cross --help` (エキスパート視点追加 focus 用)
 
 ## 移行ステータス

@@ -45,4 +45,10 @@ describe("toLineChartData", () => {
     expect(result.lines[0].name).toBe("");
     expect(result.data).toHaveLength(2);
   });
+
+  it("設定単位を優先し、未設定なら観測値の単位を引き継ぐ", () => {
+    const rawDataList = [[baseRow]];
+    expect(toLineChartData(rawDataList).unit).toBe("人");
+    expect(toLineChartData(rawDataList, undefined, undefined, "万人").unit).toBe("万人");
+  });
 });

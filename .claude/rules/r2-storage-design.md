@@ -22,7 +22,9 @@ paths:
 
 - **読み取り**はローカル可 (公開 URL `https://storage.stats47.jp`、認証不要)。
 - **書き込み**はローカル / CI 両方から remote R2 へ直接可能。常駐するローカル R2 ミラーは廃止済み
-  (`.local/r2`はsnapshot/articleの一時stagingに限る)。
+  (`.local/r2` は push の一時 staging。秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため
+  常駐させず `local:cleanup` が 7 日で回収する。CI は runner 内で自分の staging を作る。KSJ ミラーは R2 `gis/`
+  から再取得できる。同日実測 2.1GB (`app/` 14MB・`gis/` 2,130MB) は削除済み)。
 - ローカル書き込みには R2 S3 creds (`.env.local`: `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT`) または `wrangler login` 認証が必要。`_assert-ci-write.ts` はデフォルト許可（ローカル実行時は `console.warn` を出すだけ）。
 - 対象スクリプト: `diff-push-r2.ts` / `push-generated-image-set.ts` / `push-r2-wrangler.ts` /
   `db-r2-sync.ts push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`。
@@ -168,6 +170,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 |---|---|---|
 | `incremental-cache/<buildId>/` (ISR キャッシュ) | **最新 3 世代のみ保持**。旧世代は二度と読まれない | デプロイ完了後に自動 GC (`.github/workflows/r2-isr-gc.yml`、`workflow_run` トリガー + 日曜 03:30 JST の取りこぼし回収) + 手動 `r2-maintenance.yml` (`mode: isr-generations`) |
 | `sns/**/*.mp4` (投稿済み) | 投稿後 30 日で削除 | `.github/workflows/cleanup-r2-sns-videos.yml` (週次。正典 `sns-content-standards.md` §5.5) |
+| **`state/<domain>/**`** (CI が書く観測 state の生 snapshot。2026-09-14 新設) | **400 日**。Cloudflare の object lifecycle rule で自動失効させる唯一の prefix。`PROTECTED_PREFIXES` 外、`r2-retention.ts` の対象にもしない | Cloudflare ダッシュボード (R2 → stats47 → Settings → Object lifecycle rules: prefix `state/`・400 days) をオーナーが 1 回設定。git には週次集約だけを残す (`data-storage.md`)。最初の domain は `state/ads/ga4-affiliate/` (`affiliate-ga4-weekly.yml`)。書き手は CI のみ、ローカルは `npm run state:pull -- <domain>` で公開 URL から `live/` へ取得 |
 | 移行済み旧 prefix (下記「既存キーの移行状態」) | `packages/r2-storage/src/scripts/r2-retention.ts` の `RETENTION_TARGETS` (コード内 allowlist) のみ | 手動 `r2-maintenance.yml` (`mode: retention-prefixes`) |
 | 公開不可KSJ source mirror | `gis/mlit-ksj/{C02,C09,C23,P03,P12,P13,P17,P18,P35,W01,W05}/` のexact allowlistのみ | `r2-retention.ts` `license-remediation-ksj-*`。dry-run→承認→手動workflow |
 | 承認済み旧KSJランキングの終了・新版移行 | `license-retention-20260905.json` のexact keyのみ。raw・終了9本・新版2本の不要正規化を別targetに固定 | `r2-maintenance.yml`で承認済みrevisionを指定。削除前に全対象のkey/size/ETag一致、削除後に残存0を要求 |

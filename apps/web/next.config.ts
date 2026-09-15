@@ -44,6 +44,8 @@ const isCloudflareWorkers = process.env.CLOUDFLARE_WORKERS === "true";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // dev中の.nextを壊さず、ローカル公開相当検査を別成果物へ出せるようにする。
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   // OpenNextの要件: standalone出力を有効化
   output: "standalone",
   // trailing slash を統一（/ranking/ → /ranking にリダイレクト）
@@ -315,6 +317,11 @@ const nextConfig: NextConfig = {
   // NFT (Node File Tracing) から開発用パッケージを除外（約52-55MBの削減）
   outputFileTracingExcludes: {
     "*": [
+      // Runtime output must not capture development caches through monorepo tracing.
+      "./.next/cache/**/*",
+      "./.next/standalone/**/*",
+      "../../apps/*/.next/cache/**/*",
+      "../../apps/*/.next/standalone/**/*",
       // ビルドツール（本番実行時は不要）
       "./node_modules/webpack/**/*",
       "./node_modules/terser-webpack-plugin/**/*",

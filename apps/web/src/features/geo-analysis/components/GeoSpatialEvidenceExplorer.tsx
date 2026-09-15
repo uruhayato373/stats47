@@ -22,7 +22,7 @@ import {
 } from '@stats47/components/atoms/ui/tabs';
 
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard, SurfaceSection } from '@/components/surface';
+import { SurfaceCard } from '@/components/surface';
 
 import {
   trackGeoMapInteraction,
@@ -205,7 +205,7 @@ function GeoSpatialEvidenceExplorerState({
     });
   };
   return (
-    <SurfaceSection
+    <section
       id={syncUrl ? 'spatial-evidence' : `${slug}-spatial-evidence`}
       className="mb-6 scroll-mt-24"
       aria-label="県内の空間分析"
@@ -406,6 +406,6 @@ function GeoSpatialEvidenceExplorerState({
         背景地図は地理院タイルをその都度読み込んでいます。背景の道路・地形は計算には使いません。
         {GEO_BASEMAP_SHORELINE_ATTRIBUTION}
       </p>
-    </SurfaceSection>
+    </section>
   );
 }

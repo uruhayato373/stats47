@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-ehime",
+    "prefCode": "38000",
+    "prefName": "愛媛県",
+    "cityName": "松山市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:37.763Z",
+    "titleSha": "abb52b635a4e15a5165b8e58e269bd01482da0baaaa45988bc8e4e7ade9e6fc9",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教養娯楽",
+    "ratio": 0.7721141294288266,
+    "side": "below",
+    "shareMetricKey": "culture-recreation-expenditure-ratio-multi-person-households",
+    "shareTitle": "教養娯楽費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 37,
+    "value": 8.5,
+    "rankingUrl": "https://stats47.jp/ranking/culture-recreation-expenditure-ratio-multi-person-households",
+    "chartName": "culture-recreation-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "travel-participation-rate-overnight",
+      "title": "旅行（1泊2日以上）の行動者率",
+      "unit": "％",
+      "year": "2021",
+      "rank": 45,
+      "value": 18.1,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 3,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/travel-participation-rate-overnight",
+      "chartName": "travel-participation-rate-overnight-prefecture-rankings"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-culture-recreation",
+      "title": "消費者物価地域差指数",
+      "unit": "（全国=100）",
+      "year": "2024",
+      "rank": 19,
+      "value": 97.5,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 29,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/consumer-price-difference-index-culture-recreation",
+      "chartName": "consumer-price-difference-index-culture-recreation-prefecture-rankings"
+    }
+  ]
+}

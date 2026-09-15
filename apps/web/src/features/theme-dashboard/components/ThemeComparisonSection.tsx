@@ -26,6 +26,8 @@ import {
 import { ChartPanel } from '@/components/charts/ChartPanel';
 import { SurfaceCard } from '@/components/surface';
 
+import { trackNavClick } from '@/lib/analytics/events';
+
 import {
   formatOverviewDifference,
   formatOverviewValue,
@@ -184,6 +186,13 @@ export function ThemeComparisonSection({
                       <Link
                         href={`/ranking/${current.key}`}
                         className="text-primary underline"
+                        onClick={() =>
+                          trackNavClick({
+                            surface: 'theme_ranking',
+                            label: `${themeConfig.themeKey}:comparison-map:${current.key}`,
+                            href: `/ranking/${current.key}`,
+                          })
+                        }
                       >
                         定義・出典
                       </Link>
@@ -349,6 +358,13 @@ export function ThemeComparisonSection({
                       <Link
                         href={`/ranking/${key}`}
                         className="text-primary underline underline-offset-4"
+                        onClick={() =>
+                          trackNavClick({
+                            surface: 'theme_ranking',
+                            label: `${themeConfig.themeKey}:comparison-table:${key}`,
+                            href: `/ranking/${key}`,
+                          })
+                        }
                       >
                         {overviewLabels[key] ?? data.rankingItem.title}
                       </Link>

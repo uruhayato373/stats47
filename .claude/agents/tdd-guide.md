@@ -28,10 +28,12 @@ model: opus
 ### 1. Red（失敗するテストを書く）
 
 ```bash
-# テストを先に書く
-npx vitest run --reporter=verbose 2>&1 | tail -5
+# テストを先に書く（対象ファイルだけを指定する。全体実行はしない）
+npx vitest run <対象テストファイル> --reporter=verbose 2>&1 | tail -5
 # → FAIL が確認できること
 ```
+
+範囲は `.claude/rules/local-environment.md`「検証コマンドの粒度」に従う。
 
 ### 2. Green（最小限のコードで通す）
 

@@ -226,6 +226,28 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
         "surveyedAt": "2026-09-08",
         "rationale": "ラスパイレス指数は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
       }
+    },
+    {
+      "rankingKey": "municipality-count",
+      "shortLabel": "市町村数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "自治体数を行政サービス・財政指標を読む基礎条件として詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "households-on-public-assistance",
+      "shortLabel": "生活保護被保護実世帯数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "扶助費比率の実数根拠として、制度利用世帯数を財政の基礎条件に保持する。"
+      }
     }
   ],
   "charts": [],

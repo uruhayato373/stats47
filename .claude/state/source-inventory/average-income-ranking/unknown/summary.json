@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "profile": "average-income-ranking",
+  "sourceKey": "average-income-ranking",
+  "edition": "unknown",
+  "input": {
+    "documents": 1,
+    "pages": 110,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 110,
+  "resolvedCount": 110,
+  "resolutionCoverage": 1,
+  "actionableCount": 0,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 110
+  },
+  "byKind": {
+    "page": 110
+  },
+  "publicOriginalReuse": "forbidden"
+}

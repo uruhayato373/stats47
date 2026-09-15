@@ -16,7 +16,7 @@ interface ChartWithFallbackProps {
 
 function FallbackImage({ src, alt }: { src?: string; alt?: string }) {
     if (!src) {
-        return <ChartErrorState message="チャートを表示できません" height={256} />;
+        return <ChartErrorState message="チャートを表示できません" height={256} bordered={false} />;
     }
     return <Image src={src} alt={alt || "チャート"} width={800} height={400} className="h-auto w-full max-w-full" />;
 }

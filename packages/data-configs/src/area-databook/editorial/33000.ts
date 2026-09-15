@@ -71,5 +71,14 @@ export const OKAYAMA_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.okayama-kanko.jp/souvenir",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "satosho-makomotake",
+      name: "里庄まこもたけ",
+      municipality: "里庄町",
+      description:
+        "里庄町の特産品で、イネ科のマコモに黒穂菌が寄生して茎が肥大した野菜。もっちりとした歯応えとクセの少ない上品な風味を持ち、中華料理の高級食材としても使われる。",
+      sourceUrl: "https://www.town.satosho.okayama.jp/site/makomotake/",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

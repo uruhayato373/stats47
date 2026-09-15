@@ -1,0 +1,5 @@
+# ripgrep (Claude Code の Grep / Explore) から生成物の複製を外す (2026-09-14)。
+# .agents/skills と .codex/agents は sync-codex-mirror.cjs が .claude/ から生成し E12 が一致を保証する。
+# SSOT は .claude/skills と .claude/agents/*.md なので、検索で二重に当たる必要がない。git には影響しない。
+.agents/skills/
+.codex/agents/

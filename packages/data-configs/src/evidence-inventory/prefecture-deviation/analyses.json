@@ -1,0 +1,1930 @@
+{
+  "sourceKey": "prefecture-deviation",
+  "edition": "2018",
+  "reviewedAt": "2026-09-15",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "prefecture-deviation-2018-a01",
+      "chapter": 1,
+      "question": "家計調査の品目別消費支出は、都道府県ごとの食文化の違いを独立に検証できる材料になるか",
+      "thesis": "すし外食費用・魚介類・サケ・牛肉・豚肉・生鮮野菜・その他の肉・米・はくさい等、家計調査(品目別、都道府県庁所在市)の消費量・支出額ランキングが連続する区間。書籍の偏差値は再現せず、家計調査の実数を最新年で再取得して独立指標化できるかを確認する。",
+      "pages": [
+        1,
+        15
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省家計調査(品目別、都道府県庁所在市)の実数を独立に再取得できる、一次資料の所在が明確な消費統計群 個別品目は既存metricで充足(すし外食/サケ/牛肉/豚肉/その他の肉/米/はくさい)。魚介類・生鮮野菜は家計調査cat01の中分類集計(010200000/010510000)を新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "sushi-dining-consumption-expenditure",
+        "salmon-consumption-expenditure",
+        "salmon-consumption-quantity",
+        "beef-consumption-expenditure",
+        "beef-consumption-quantity",
+        "pork-consumption-expenditure",
+        "pork-consumption-quantity",
+        "other-meat-consumption-expenditure",
+        "other-meat-consumption-quantity",
+        "rice-consumption-expenditure",
+        "rice-consumption-quantity",
+        "chinese-cabbage-consumption-expenditure",
+        "chinese-cabbage-consumption-quantity",
+        "seafood-consumption-expenditure",
+        "fresh-vegetables-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別、全国・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査(品目別)から最新年の47都道府県庁所在市データを再取得し、既存の食品消費metricとの重複を確認したうえでranking/theme候補を絞る"
+    },
+    {
+      "id": "prefecture-deviation-2018-a02",
+      "chapter": 1,
+      "question": "昆布消費量(家計調査)と昆布生産(漁業・養殖業生産統計)は北海道でどうねじれているか",
+      "thesis": "昆布の家計消費が沖縄で高く、生産地の北海道でむしろ低いという「生産と消費のねじれ」を、家計調査の消費側統計と農水省漁業・養殖業生産統計の生産側統計を組み合わせて検証する論点。",
+      "pages": [
+        16,
+        16
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "消費側(家計調査)と生産側(漁業・養殖業生産統計)の両方が公式統計として独立に再取得できる 消費側(konbu-consumption-*)・生産側(fishery-species-catch-kelp)いずれも既存metricで充足済み。",
+      "metricKeys": [
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity",
+        "fishery-species-catch-kelp"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別、全国・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "農林水産省",
+          "publicationOrDataset": "漁業・養殖業生産統計",
+          "url": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の昆布消費量と農水省の都道府県別昆布生産量を突合し、型B(散布図)の記事候補として評価する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a03",
+      "chapter": 1,
+      "question": "かつお節ほか食の偏差値後半の品目も家計調査で独立再取得できるか",
+      "thesis": "かつお節など食の偏差値の残り品目と、第2章冒頭への導入部分。品目の生産統計(かつお節生産高)と消費統計(削り節消費量)が別出典である可能性に注意しつつ、家計調査ベースの消費統計として扱う。",
+      "pages": [
+        17,
+        18
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "家計調査(品目別)の消費統計として独立再取得できる かつお節・削り節消費は既存metric(katsuobushi-consumption-*)で充足済み。生産統計側は本analysisの主対象ではなく未着手。",
+      "metricKeys": [
+        "katsuobushi-consumption-expenditure",
+        "katsuobushi-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別、全国・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "かつお節消費量を家計調査から再取得し、生産統計(農水省)と混同しないよう出典を区別して記事化する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a04",
+      "chapter": 2,
+      "question": "婚姻件数・デキ婚率・離婚件数・少子化関連指標は厚労省人口動態調査で独立再取得できるか",
+      "thesis": "婚姻件数、デキ婚率(結婚期間が妊娠期間より短い出生数の割合)、離婚件数、15歳未満人口、合計特殊出生率が連続する区間。いずれも厚生労働省人口動態調査・人口動態統計特殊報告、総務省人口推計を出典とする公式統計。",
+      "pages": [
+        19,
+        21
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "厚労省人口動態調査・人口動態統計特殊報告・総務省人口推計はいずれも公式統計で最新年を再取得できる 婚姻件数・離婚件数・合計特殊出生率は既存metricで充足(15歳未満人口はyoung-population-ratioで近似)。デキ婚率(結婚期間別出生の特殊集計)はe-Stat検索(人口動態統計特殊報告/結婚期間別出生/出産前妊娠期間)で0件、API未登録の特殊報告のみでc判定。",
+      "metricKeys": [
+        "marriages",
+        "divorces",
+        "young-population-ratio",
+        "total-fertility-rate"
+      ],
+      "surveyIds": [
+        "vital-statistics",
+        "population-estimates"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態調査",
+          "url": "https://www.mhlw.go.jp/toukei/list/81-1a.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態統計特殊報告",
+          "url": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/tokusyu/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2009"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "人口推計",
+          "url": "https://www.stat.go.jp/data/jinsui/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "厚労省人口動態調査から最新年の婚姻件数・離婚件数・合計特殊出生率を再取得し、既存metricとの重複を確認"
+    },
+    {
+      "id": "prefecture-deviation-2018-a05",
+      "chapter": 2,
+      "question": "子育て世帯の相対的貧困率(独自算出)と子育て世帯年収は元の政府統計から再現できるか",
+      "thesis": "相対的貧困率は総務省住宅・土地統計調査の世帯年収データから書籍が独自算出した値であり、書籍の算出結果自体は再現せず、元の住宅・土地統計調査と全国消費実態調査(子育て世帯年収)から独立に計算し直す。",
+      "pages": [
+        22,
+        22
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "算出元の住宅・土地統計調査、全国消費実態調査は公式統計で、独自算出も計算式が明記されており再現できる 世帯年収は既存metric annual-income-per-household(社会・人口統計体系L家計)で近似充足。子育て世帯年収は全国家計構造調査0003426650で世帯類型112/113/114(夫婦と未婚の子1〜3人)の3コード合算が必要で単純な単一cdCat設定に収まらず、今回は新規metric化を見送り(将来のcalculated-metric候補)。相対的貧困率は書籍独自算出のため再取得対象外。",
+      "metricKeys": [
+        "annual-income-per-household"
+      ],
+      "surveyIds": [
+        "housing-land-survey",
+        "national-household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "住宅・土地統計調査",
+          "url": "https://www.stat.go.jp/data/jyutaku/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "全国消費実態調査",
+          "url": "https://www.stat.go.jp/data/zensho/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2014"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "住宅・土地統計調査の世帯年収分布から相対的貧困率を独自算出し直すか、既存の同種metricで代替できないか確認"
+    },
+    {
+      "id": "prefecture-deviation-2018-a06",
+      "chapter": 2,
+      "question": "父親の育児・家事参加率と保育園数の地域差は独立に検証できるか",
+      "thesis": "総務省社会生活基本調査(子育て期男性の育児・家事関連時間)と厚労省社会福祉施設等調査(保育園数)による都道府県差。",
+      "pages": [
+        23,
+        24
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省社会生活基本調査、厚労省社会福祉施設等調査はいずれも公式統計 父親の育児参加率(husband-childcare-rate)・保育所等数(nursery-count-per-100k-0-5)いずれも既存metricで充足済み。",
+      "metricKeys": [
+        "husband-childcare-rate",
+        "nursery-count-per-100k-0-5"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey",
+        "social-welfare-facility-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査",
+          "url": "https://www.stat.go.jp/data/shakai/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2011",
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "社会福祉施設等調査",
+          "url": "https://www.mhlw.go.jp/toukei/list/23-22.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2015"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "社会生活基本調査の最新回から育児・家事関連時間を、社会福祉施設等調査から保育園数を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a07",
+      "chapter": 2,
+      "question": "全国学力テスト正答率と待機児童数はそれぞれ独立の公式統計として再取得できるか",
+      "thesis": "文科省全国学力・学習状況調査の正答率と、こども家庭庁(調査時点は厚労省)保育所等関連状況取りまとめの待機児童数。",
+      "pages": [
+        25,
+        25
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "文科省全国学力・学習状況調査、保育所等関連状況取りまとめはいずれも公式統計 学力テスト正答率は既存metricで充足。待機児童数は社会・人口統計体系0000010110のcdCat01=J250502(保育所等利用待機児童数、2001-2024年度)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "academic-achievement-test-average-rate",
+        "nursery-waiting-children-count"
+      ],
+      "surveyIds": [
+        "academic-achievement-survey",
+        "childcare-related-status-report"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省・国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査",
+          "url": "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+          "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm",
+          "dataYears": [
+            "2017"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "こども家庭庁",
+          "publicationOrDataset": "保育所等関連状況取りまとめ",
+          "url": "https://www.cfa.go.jp/policies/hoiku/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2017"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "全国学力・学習状況調査の最新年の都道府県別正答率をnew-metric化する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a08",
+      "chapter": 2,
+      "question": "小学生の自己肯定率・新聞購読率・読書率、中学生の不登校数はどこまで文科省統計で裏取りできるか",
+      "thesis": "文科省全国学力・学習状況調査(自己肯定率・新聞購読率・読書率)と児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査(不登校中学生数・校内暴力発生件数)、経済センサス基礎調査(学習塾軒数)が連続する区間。",
+      "pages": [
+        26,
+        29
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "文科省の複数調査と総務省経済センサスはいずれも公式統計で再取得できる 不登校(中学/小学)は既存metricで充足。学習塾軒数は経済センサス‐活動調査0004003273(tab=301-2021、2021年)で実在確認し新規metric化(2026-09-15)。自己肯定率・新聞購読率・読書率(全国学力・学習状況調査)、校内暴力/暴力行為(児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査)はe-Statキーワード検索で0件、両調査ともAPI未登録のためc判定。",
+      "metricKeys": [
+        "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "cram-school-establishment-count"
+      ],
+      "surveyIds": [
+        "academic-achievement-survey",
+        "student-guidance-issues-survey",
+        "economic-census-basic"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省・国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査",
+          "url": "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+          "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm",
+          "dataYears": [
+            "2017"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "文部科学省",
+          "publicationOrDataset": "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査",
+          "url": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1302902.htm",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省",
+          "publicationOrDataset": "経済センサス基礎調査",
+          "url": "https://www.stat.go.jp/data/e-census/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2014"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "不登校中学生数・校内暴力発生件数を児童生徒の問題行動等調査の最新年から再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a09",
+      "chapter": 2,
+      "question": "小学生の通学時間・教育費・大学進学率は総務省・文科省の統計で最新化できるか",
+      "thesis": "総務省社会生活基本調査(通学時間)、総務省家計調査(教育費)、文科省学校基本調査(四年制大学・短大進学率)が連続する区間。",
+      "pages": [
+        30,
+        31
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省社会生活基本調査・家計調査、文科省学校基本調査はいずれも公式統計 教育費は既存metric(education-cost-all-households他)で近似充足。通学時間はe-Stat検索0件(社会生活基本調査に該当表を確認できず)。大学(四年制)進学率・短大進学率は学校基本調査由来だがe-Stat検索で「大学進学率」「四年制大学」「学校基本調査 進学」いずれも0件のためc判定(社会・人口統計体系Eには高校卒業者の進学率E4701のみで大学・短大の内訳無し)。",
+      "metricKeys": [
+        "education-cost-all-households"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey",
+        "kakei-chousa",
+        "school-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査",
+          "url": "https://www.stat.go.jp/data/shakai/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2011",
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別、全国・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "文部科学省",
+          "publicationOrDataset": "学校基本調査",
+          "url": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/1267995.htm",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "学校基本調査の最新年から都道府県別四年制大学進学率をnew-metric化する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a10",
+      "chapter": 2,
+      "question": "四年制大学進学率の続きと、東大・京大合格者数ランキングはどこまで一次資料で裏取りできるか",
+      "thesis": "四年制大学進学率(文科省学校基本調査、既存論点の続き)と、週刊朝日が独自集計した高校別東大・京大合格者数を都道府県別に平均した私家版ランキングが混在する区間。週刊朝日の集計方法・母集団が公式統計から独立に検証できないため、頁ごとの出典切り分けを保留する。",
+      "pages": [
+        32,
+        34
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "東大・京大合格者数ランキングは週刊朝日が独自集計した私家版データで、同一手法での再取得経路がなく、区間内の文科省統計との切り分けも未確定",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "週刊朝日ランキングは書籍アイデアの着想のみに留め、文科省学校基本調査の四年制大学進学率で独立に再検証する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a11",
+      "chapter": 2,
+      "question": "大学生への仕送り額は家計調査で独立に再取得できるか",
+      "thesis": "総務省家計調査(2016年、5年平均)ベースの都道府県別仕送り額ランキング。",
+      "pages": [
+        35,
+        35
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省家計調査の実数として独立再取得できる 仕送り額は既存metricで充足済み。",
+      "metricKeys": [
+        "domestic-student-remittance-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別、全国・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の最新年から仕送り額を再取得し既存metricと重複確認"
+    },
+    {
+      "id": "prefecture-deviation-2018-a12",
+      "chapter": 2,
+      "question": "全国大学生協連の学生生活実態調査による仕送り額の実態は、公式統計と補完的に扱えるか",
+      "thesis": "全国大学生活協同組合連合会が毎年実施する学生生活実態調査からの仕送り額データ。長期継続する透明な調査だが政府統計ではないため、既存記事の分析文脈の補強に留め、独立の指標としては採用しない。",
+      "pages": [
+        36,
+        36
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "全国大学生協連は非営利団体による継続調査で手法は公開されているが政府統計ではなく、独立指標としての採否は保留",
+      "metricKeys": [],
+      "surveyIds": [
+        "national-household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "theme"
+      ],
+      "primarySources": [
+        {
+          "organization": "全国大学生活協同組合連合会",
+          "publicationOrDataset": "学生生活実態調査",
+          "url": "https://www.univcoop.or.jp/press/life/report.html",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "仕送り額記事の分析文脈として全国大学生協連調査を参照注記に追加する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a13",
+      "chapter": 2,
+      "question": "美容室数の統計コラムと厚労省衛生行政報告例は独立に再取得できるか",
+      "thesis": "美容室数(人口10万人あたり)は厚生労働省衛生行政報告例が出典。統計コラム②は同データの地方度指標としての読み方を論じる。",
+      "pages": [
+        37,
+        37
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "厚労省衛生行政報告例は公式統計で再取得できる 美容室数は既存metricで充足済み。",
+      "metricKeys": [
+        "beauty-salon-count",
+        "barber-beauty-salon-count"
+      ],
+      "surveyIds": [
+        "health-admin-report"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "衛生行政報告例(美容師・美容所数)",
+          "url": "https://www.mhlw.go.jp/toukei/list/is-hoken_eisei.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "衛生行政報告例の最新年から美容室数をnew-metric化する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a14",
+      "chapter": 2,
+      "question": "第3章への章扉は統計的論点を持つか",
+      "thesis": "第2章から第3章「住まいと生活」への章扉ページ。統計データを持たない。",
+      "pages": [
+        38,
+        38
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "章扉のみで統計的論点を持たない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a15",
+      "chapter": 3,
+      "question": "1世帯あたり貯蓄額は家計調査で独立に再取得できるか",
+      "thesis": "総務省家計調査ベースの都道府県別貯蓄額ランキング(章冒頭)。",
+      "pages": [
+        39,
+        39
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省家計調査の実数として独立再取得できる(第1・2章の家計調査ベース統計と同じパターン) 貯蓄額は既存metricで充足済み。",
+      "metricKeys": [
+        "current-savings-balance-multi-person-households"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別、全国・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の最新年から1世帯あたり貯蓄額を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a16",
+      "chapter": 3,
+      "question": "40ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        40,
+        40
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a17",
+      "chapter": 3,
+      "question": "持ち家率は総務省住宅・土地統計調査で独立に再取得できるか",
+      "thesis": "都道府県別持ち家率ランキング。東北・北陸で高く、都市部で低い傾向。",
+      "pages": [
+        41,
+        41
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省住宅・土地統計調査の実数として独立再取得できる 持ち家率は既存metricで充足済み。",
+      "metricKeys": [
+        "owner-occupied-housing-ratio"
+      ],
+      "surveyIds": [
+        "housing-land-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "住宅・土地統計調査",
+          "url": "https://www.stat.go.jp/data/jyutaku/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "住宅・土地統計調査の最新回から持ち家率を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a18",
+      "chapter": 3,
+      "question": "42ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        42,
+        42
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a19",
+      "chapter": 3,
+      "question": "核家族率・三世代世帯人数・空き家率は総務省国勢調査・住宅土地統計調査で独立に再取得できるか",
+      "thesis": "核家族率・三世代世帯人数(総務省国勢調査2015)、空き家率(総務省住宅・土地統計調査)が連続する区間。",
+      "pages": [
+        43,
+        44
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省国勢調査・住宅土地統計調査はいずれも公式統計で再取得できる 核家族率・空き家率は既存metricで充足。三世代世帯人員は国勢調査0003445285のcdCat01=R1(再掲・3世代世帯、2020年)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "nuclear-family-households-ratio",
+        "three-generation-household-members",
+        "vacant-housing-rate"
+      ],
+      "surveyIds": [
+        "census",
+        "housing-land-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "国勢調査",
+          "url": "https://www.stat.go.jp/data/kokusei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2015"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "住宅・土地統計調査",
+          "url": "https://www.stat.go.jp/data/jyutaku/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2013"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "国勢調査の最新回から核家族率・三世代世帯人数を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a20",
+      "chapter": 3,
+      "question": "45ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        45,
+        45
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a21",
+      "chapter": 3,
+      "question": "20〜30代男女比は総務省国勢調査で独立に再取得できるか",
+      "thesis": "20〜30代の男女比(女性比)ランキング。九州で女性比が高い傾向。",
+      "pages": [
+        46,
+        46
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省国勢調査の実数として独立再取得できる 国勢調査0000010101に20〜24/25〜29/30〜34/35〜39歳の男女別人口(A120501等)は存在するが、書籍の「20〜30代」区分に対応する単一の性比指標は社会・人口統計体系の指標表(0000010201、#A02101〜105)に無く、4階級×男女8コードの合算が必要。単純な単一cdCat設定に収まらず今回は新規metric化を見送り(将来のcalculated-metric候補)。",
+      "metricKeys": [],
+      "surveyIds": [
+        "census"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "国勢調査",
+          "url": "https://www.stat.go.jp/data/kokusei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2015"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "国勢調査の最新回から年代別男女比を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a22",
+      "chapter": 3,
+      "question": "47ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        47,
+        47
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a23",
+      "chapter": 3,
+      "question": "自動車保有台数は業界団体統計を一次資料として扱えるか",
+      "thesis": "自動車検査登録情報協会の統計情報による都道府県別自動車保有台数。継続的に公開される業界統計だが政府統計ではないため、独立指標としての採否は保留する。",
+      "pages": [
+        48,
+        48
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "自動車検査登録情報協会は継続公開される業界統計だが政府統計ではなく、rights区分をallowedと断定できない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "theme"
+      ],
+      "primarySources": [
+        {
+          "organization": "自動車検査登録情報協会",
+          "publicationOrDataset": "自動車保有車両数統計",
+          "url": "https://www.airia.or.jp/publish/statistics/",
+          "dataYears": [
+            "2017"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "自動車保有台数は国土交通省の自動車保有車両数統計等、政府側の同等統計に置き換えられないか確認する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a24",
+      "chapter": 3,
+      "question": "軽自動車比率は全国軽自動車協会連合会の統計を一次資料として扱えるか",
+      "thesis": "全国軽自動車協会連合会の統計による都道府県別軽自動車比率。業界団体統計であり政府統計ではない。",
+      "pages": [
+        49,
+        49
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "全国軽自動車協会連合会は業界団体で、rights区分をallowedと断定できない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "theme"
+      ],
+      "primarySources": [
+        {
+          "organization": "全国軽自動車協会連合会",
+          "publicationOrDataset": "軽自動車保有台数統計",
+          "url": "https://www.zenkeijikyo.or.jp/statistics",
+          "dataYears": [
+            "2017"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "軽自動車比率は国土交通省の自動車検査登録統計等、政府側の同等統計に置き換えられないか確認する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a25",
+      "chapter": 3,
+      "question": "50ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        50,
+        50
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a26",
+      "chapter": 3,
+      "question": "熱中症死亡者数は厚労省人口動態統計で独立に再取得できるか",
+      "thesis": "熱中症による死亡者数(厚労省人口動態統計、2014〜2016年平均)の都道府県別ランキング。",
+      "pages": [
+        51,
+        51
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる 人口動態調査の死因簡単分類表(0003411663)に熱中症の単独区分はないが、詳細ICD表0003412075にT67(熱及び光線の作用)がcat02として存在する。ただしcat01が男/女のみで総数コードが無く、男女2コードの合算が必要なため単純な単一cdCat設定に収まらず、今回は新規metric化を見送り(将来のcalculated-metric候補)。",
+      "metricKeys": [],
+      "surveyIds": [
+        "vital-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態統計(熱中症死亡)",
+          "url": "https://www.mhlw.go.jp/toukei/list/81-1a.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2014",
+            "2015",
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "人口動態統計の最新年から熱中症死亡者数を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a27",
+      "chapter": 3,
+      "question": "52ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        52,
+        52
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a28",
+      "chapter": 3,
+      "question": "コンビニ勢力図(統計コラム③)は一次資料として再取得できるか",
+      "thesis": "「各社発表に基づき独自調査(2017年)」とする、書籍側が各コンビニチェーンの発表を集計した独自調査。単一の一次資料に一意に遡れない。",
+      "pages": [
+        53,
+        53
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "各社発表を書籍が独自集計したもので、同一手法・同一時点での再取得経路がない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "コンビニ店舗数の都道府県別データは各社IR資料または日本フランチャイズチェーン協会統計で個別に再構成できるか検討する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a29",
+      "chapter": 3,
+      "question": "第4章への章扉は統計的論点を持つか",
+      "thesis": "第3章から第4章「働き方」への章扉ページ。統計データを持たない。",
+      "pages": [
+        54,
+        54
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "章扉のみで統計的論点を持たない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a30",
+      "chapter": 4,
+      "question": "55ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        55,
+        55
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a31",
+      "chapter": 4,
+      "question": "企業数は中小企業庁の統計情報で独立に再取得できるか",
+      "thesis": "都道府県別企業数(人口1万人あたり)ランキング。中小企業庁の統計情報(2014年)が出典。",
+      "pages": [
+        56,
+        59
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "中小企業庁の統計情報は公式統計で再取得できる。57-59ページは未確認だが同一区間の統計と推定し、独立検証が前提 企業数は既存metric(経済センサス由来)で近似充足。中小企業庁統計そのものはe-Stat検索で0件。",
+      "metricKeys": [
+        "nonprimary-enterprises-count"
+      ],
+      "surveyIds": [
+        "economic-census-basic"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "中小企業庁",
+          "publicationOrDataset": "中小企業実態基本調査等の統計情報(企業数)",
+          "url": "https://www.chusho.meti.go.jp/koukai/chousa/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2014"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "中小企業庁または経済センサスの最新データから企業数を再取得し、56ページ以外の内容を個別頁で再確認する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a32",
+      "chapter": 4,
+      "question": "県民所得と年間完全失業率は内閣府・総務省統計で独立に再取得できるか",
+      "thesis": "内閣府県民経済計算(県民所得)と総務省労働力調査(完全失業率)。",
+      "pages": [
+        60,
+        60
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "内閣府県民経済計算、総務省労働力調査はいずれも公式統計 県民所得・完全失業率は既存metricで充足済み。",
+      "metricKeys": [
+        "prefectural-income-per-capita",
+        "unemployment-rate"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "内閣府",
+          "publicationOrDataset": "県民経済計算(国民経済計算体系)",
+          "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2016.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "労働力調査",
+          "url": "https://www.stat.go.jp/data/roudou/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2015"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "県民経済計算の最新年から県民所得を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a33",
+      "chapter": 4,
+      "question": "61〜64ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        61,
+        64
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a34",
+      "chapter": 4,
+      "question": "田中さん・佐藤さんの人数分布は私企業データベースに依存せず再現できるか",
+      "thesis": "「名字由来net」運営会社の民間データベースによる都道府県別名字分布。姓の分布統計は公的な悉皆調査がなく、独立の一次資料に置き換えられない。",
+      "pages": [
+        65,
+        65
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "名字由来netは私企業が独自収集したデータベースで、公式統計としての裏付けがない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "名字分布は企画の着想としてのみ扱い、統計ページや記事の根拠数値には使わない"
+    },
+    {
+      "id": "prefecture-deviation-2018-a35",
+      "chapter": 4,
+      "question": "66・67ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        66,
+        67
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a36",
+      "chapter": 4,
+      "question": "可住地面積率と森林率は総務省・林野庁の統計で独立に再取得できるか",
+      "thesis": "可住地面積率(総務省社会生活統計指標)と森林率(林野庁統計情報)。",
+      "pages": [
+        68,
+        68
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省社会生活統計指標、林野庁の統計情報はいずれも公式統計 可住地面積率・森林面積割合は既存metricで充足済み。",
+      "metricKeys": [
+        "habitable-area-ratio",
+        "forest-area-ratio"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標-都道府県の指標-(可住地面積率)",
+          "url": "https://www.stat.go.jp/data/shihyou/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2015"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "林野庁",
+          "publicationOrDataset": "森林・林業統計要覧(森林率)",
+          "url": "https://www.rinya.maff.go.jp/j/kikaku/toukei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "社会生活統計指標・森林率の最新データを再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a37",
+      "chapter": 4,
+      "question": "69ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        69,
+        69
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a38",
+      "chapter": 5,
+      "question": "オートキャンプ人口とホテル軒数は業界団体統計・総務省統計に依存する形でどこまで再取得できるか",
+      "thesis": "日本オートキャンプ協会「オートキャンプ白書」(業界団体)とホテル軒数の総務省統計が混在する区間。業界団体統計の比重が大きく、公式統計部分と切り分けが不明瞭。",
+      "pages": [
+        70,
+        70
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "業界団体統計(日本オートキャンプ協会)が主体で、政府統計との厳密な切り分けができない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "theme"
+      ],
+      "primarySources": [
+        {
+          "organization": "日本オートキャンプ協会",
+          "publicationOrDataset": "オートキャンプ白書(オートキャンプ人口)",
+          "url": "https://www.autocamp.or.jp/",
+          "dataYears": [
+            "2017"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "レジャー統計の独立記事化は、観光庁など政府統計に出典を絞って再設計する"
+    },
+    {
+      "id": "prefecture-deviation-2018-a39",
+      "chapter": 5,
+      "question": "71〜77ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        71,
+        77
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a40",
+      "chapter": 5,
+      "question": "自家用車通勤・通学率と読書人口は総務省統計で独立に再取得できるか",
+      "thesis": "総務省国勢調査(自家用車通勤・通学率)と社会生活基本調査(25歳以上読書人口)。",
+      "pages": [
+        78,
+        78
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "総務省国勢調査、社会生活基本調査はいずれも公式統計 自家用車通勤は既存metricで充足。読書人口はhobby-participation-rate-reading(趣味としての読書の行動者率)で近似充足(社会生活基本調査の設問区分が完全一致とは限らない)。",
+      "metricKeys": [
+        "commute-by-car",
+        "hobby-participation-rate-reading"
+      ],
+      "surveyIds": [
+        "census",
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "国勢調査",
+          "url": "https://www.stat.go.jp/data/kokusei/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2015"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査",
+          "url": "https://www.stat.go.jp/data/shakai/",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2011",
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "国勢調査・社会生活基本調査の最新回から再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a41",
+      "chapter": 5,
+      "question": "79〜82ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        79,
+        82
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a42",
+      "chapter": 5,
+      "question": "第一子出生時年齢(女性)は厚労省人口動態調査で独立に再取得できるか",
+      "thesis": "第一子出産年齢(女性)の都道府県別ランキング。デキ婚率・ラブホテル軒数との相関が論じられるが、相関先の統計は別途裏取りが必要。",
+      "pages": [
+        83,
+        83
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "厚労省人口動態調査の実数として独立再取得できる 人口動態調査0003411610のcdCat01=00110(第1子)+cdCat02=00110(母)で第1子出生時の母の平均年齢(2015-2024年)を実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "mothers-age-at-first-birth"
+      ],
+      "surveyIds": [
+        "vital-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態調査",
+          "url": "https://www.mhlw.go.jp/toukei/list/81-1a.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "人口動態調査の最新年から第一子出産年齢を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a43",
+      "chapter": 5,
+      "question": "第6章への章扉は統計的論点を持つか",
+      "thesis": "第5章から第6章「社会と健康」への章扉ページ。統計データを持たない。",
+      "pages": [
+        84,
+        84
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "章扉のみで統計的論点を持たない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a44",
+      "chapter": 6,
+      "question": "85〜87ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        85,
+        87
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a45",
+      "chapter": 6,
+      "question": "児童虐待相談対応件数は厚労省の報道発表資料で独立に再取得できるか",
+      "thesis": "18歳未満人口あたりの児童虐待相談対応件数(厚労省報道発表資料、2016年)。",
+      "pages": [
+        88,
+        88
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "厚労省の児童虐待相談対応件数(福祉行政報告例・報道発表資料)は公式統計として再取得できる 社会・人口統計体系0000010110のcdCat01=J3209(児童相談所における児童虐待相談の対応件数、2010-2023年度)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "child-abuse-consultation-cases"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "児童虐待相談対応件数(福祉行政報告例・報道発表資料)",
+          "url": "https://www.mhlw.go.jp/toukei/list/list38-25.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "こども家庭庁公表の最新の児童虐待相談対応件数を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a46",
+      "chapter": 6,
+      "question": "89・90ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        89,
+        90
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a47",
+      "chapter": 6,
+      "question": "自動車盗認知件数は警察庁犯罪統計資料で独立に再取得できるか",
+      "thesis": "人口1万人あたり自動車盗認知件数(警察庁犯罪統計資料、2012〜2016年平均)。",
+      "pages": [
+        91,
+        91
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "警察庁犯罪統計資料はe-Stat未登録。社会・人口統計体系K安全(0000010111)の刑法犯認知件数(K4201他)は凶悪犯/粗暴犯/窃盗犯/知能犯/風俗犯の粗い分類のみで、自動車盗の単独区分は存在しない。keyword検索(\"自動車盗\"/\"犯罪統計\"/\"警察庁\")もいずれも0件。",
+      "metricKeys": [],
+      "surveyIds": [
+        "police-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "警察庁",
+          "publicationOrDataset": "犯罪統計資料",
+          "url": "https://www.npa.go.jp/publications/statistics/index.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "警察庁犯罪統計資料の最新年から自動車盗認知件数を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a48",
+      "chapter": 6,
+      "question": "92ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        92,
+        92
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a49",
+      "chapter": 6,
+      "question": "脳梗塞死亡者数は厚労省人口動態統計で独立に再取得できるか",
+      "thesis": "人口10万人あたり脳梗塞死亡者数(厚労省人口動態統計)。食塩消費量との関連が論じられる。",
+      "pages": [
+        93,
+        93
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる 人口動態調査0003411663のcdCat01=09303(脳梗塞、死亡率人口10万対、2015-2024年)で実在確認し新規metric化(2026-09-15)。",
+      "metricKeys": [
+        "deaths-cerebral-infarction-per-100k"
+      ],
+      "surveyIds": [
+        "vital-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態調査",
+          "url": "https://www.mhlw.go.jp/toukei/list/81-1a.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "人口動態統計の最新年から脳梗塞死亡者数を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a50",
+      "chapter": 6,
+      "question": "94〜99ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        94,
+        99
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a51",
+      "chapter": 6,
+      "question": "自殺者数・交通事故死亡者数は厚労省人口動態統計で独立に再取得できるか",
+      "thesis": "人口10万人あたり自殺者数・交通事故死亡者数(厚労省人口動態統計、2014〜2016年平均)。経済的要因との相関が論じられる。",
+      "pages": [
+        100,
+        100
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "厚労省人口動態統計の実数として独立再取得できる 自殺者数・交通事故死亡者数は既存metricで充足済み。",
+      "metricKeys": [
+        "suicide-count",
+        "traffic-accident-deaths-per-100k"
+      ],
+      "surveyIds": [
+        "vital-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "人口動態調査",
+          "url": "https://www.mhlw.go.jp/toukei/list/81-1a.html",
+          "termsUrl": "https://www.digital.go.jp/resources/open_data",
+          "dataYears": [
+            "2016"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "人口動態統計の最新年から自殺者数・交通事故死亡者数を再取得"
+    },
+    {
+      "id": "prefecture-deviation-2018-a52",
+      "chapter": 6,
+      "question": "101・102ページの論点は何か(未確認)",
+      "thesis": "個別頁画像を確認できておらず、一次資料への接続を判定できない。",
+      "pages": [
+        101,
+        102
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "個別ページの画像・OCRを確認できておらず、出典を推測せず未解決のまま保留する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": ""
+    },
+    {
+      "id": "prefecture-deviation-2018-a53",
+      "chapter": 6,
+      "question": "地方紙比率は日本ABC協会のレポートを一次資料として扱えるか",
+      "thesis": "日本ABC協会「新聞発行社レポート」(2017年)による都道府県別地方紙比率。業界団体(新聞公査機構)による継続レポートだが政府統計ではない。",
+      "pages": [
+        103,
+        103
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "日本ABC協会は新聞業界の公査機構によるレポートで継続性・透明性はあるが政府統計ではなく、rights区分をallowedと断定できない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "theme"
+      ],
+      "primarySources": [
+        {
+          "organization": "日本ABC協会",
+          "publicationOrDataset": "新聞発行社レポート(地方紙比率)",
+          "url": "https://www.pressnet.or.jp/data/circulation/",
+          "dataYears": [
+            "2017"
+          ],
+          "checkedAt": "2026-09-15",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "地方紙比率は総務省の新聞発行部数統計等、政府側の同等データに置き換えられないか確認する"
+    }
+  ]
+}

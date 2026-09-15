@@ -71,5 +71,33 @@ export const SHIZUOKA_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.alic.go.jp/koho/kikaku03_000985.html",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "midori-mai",
+      name: "緑米",
+      municipality: "清水町",
+      description:
+        "清水町で栽培される古代米の一種。黒米・赤米と同様に縄文時代に伝来したとされる希少品種で、通常のもち米より粘りが強く、おにぎりや日本酒の原料に使われる。",
+      sourceUrl: "https://www.kakitagawa.or.jp/midorimai",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "kajiki",
+      name: "カジキ",
+      municipality: "下田市",
+      description:
+        "下田市の須崎地区はかつて突きん棒漁でカジキを大量に水揚げした漁村。市は「下田市Sea級グルメ」としてカジキ料理を打ち出し、夏には国際カジキ釣り大会も開かれる。",
+      sourceUrl: "https://www.city.shimoda.shizuoka.jp/category/060100syoukougyou/151305.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "me-kyabetsu",
+      name: "芽キャベツ",
+      municipality: "掛川市・菊川市・御前崎市ほか",
+      description:
+        "静岡県は芽キャベツの生産量が全国の9割超を占め、なかでも掛川市・菊川市・御前崎市が中心産地。寒暖差のある盆地の気候が冬場の甘みを引き出すとされる。",
+      sourceUrl:
+        "https://www.pref.shizuoka.jp/kensei/information/myshizuoka/1002255/1040933/1011259.html",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

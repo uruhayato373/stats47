@@ -138,6 +138,28 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
         "surveyedAt": "2026-09-08",
         "rationale": "既存の産業別就業割合に生産側の見方を補い、農業の弱い地域経済構成を補完する。"
       }
+    },
+    {
+      "rankingKey": "agricultural-employment-population",
+      "shortLabel": "農業就業人口",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "農業産出額と組み合わせて担い手規模を読む背景指標として詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "electricity-generation-capacity",
+      "shortLabel": "発電電力量",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "電力供給規模を産業基盤の背景条件として詳細索引に保持する。"
+      }
     }
   ],
   "charts": [

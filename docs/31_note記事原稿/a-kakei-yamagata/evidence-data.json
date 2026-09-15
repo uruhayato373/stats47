@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-yamagata",
+    "prefCode": "06000",
+    "prefName": "山形県",
+    "cityName": "山形市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:21.910Z",
+    "titleSha": "0eb3b94aff2c1ee614c2cd2255b55540df5a180549e7b4c1781a4a480f871e4d",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "光熱・水道",
+    "ratio": 1.2982233197088155,
+    "side": "above",
+    "shareMetricKey": "utilities-expenditure-ratio-multi-person-households",
+    "shareTitle": "光熱・水道費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 4,
+    "value": 9.4,
+    "rankingUrl": "https://stats47.jp/ranking/utilities-expenditure-ratio-multi-person-households",
+    "chartName": "utilities-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "average-temperature",
+      "title": "年平均気温",
+      "unit": "℃",
+      "year": "2024",
+      "rank": 42,
+      "value": 13.9,
+      "direction": "inverse",
+      "expectedHigh": false,
+      "effectiveRank": 6,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/average-temperature",
+      "chartName": "average-temperature-prefecture-rankings"
+    },
+    {
+      "metricKey": "maximum-snow-depth",
+      "title": "最深積雪",
+      "unit": "ｃｍ",
+      "year": "2007",
+      "rank": 4,
+      "value": 25,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 4,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/maximum-snow-depth",
+      "chartName": "maximum-snow-depth-prefecture-rankings"
+    }
+  ]
+}

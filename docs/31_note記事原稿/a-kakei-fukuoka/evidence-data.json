@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-fukuoka",
+    "prefCode": "40000",
+    "prefName": "福岡県",
+    "cityName": "福岡市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:40.304Z",
+    "titleSha": "3f27a2c32de596dee68380d7b1e8a037ebb2506436a204201cb2ba7768ced039",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "交通・通信",
+    "ratio": 0.8001631653389533,
+    "side": "below",
+    "shareMetricKey": "transport-communication-expenditure-ratio-multi-person-households",
+    "shareTitle": "交通・通信費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 39,
+    "value": 12.5,
+    "rankingUrl": "https://stats47.jp/ranking/transport-communication-expenditure-ratio-multi-person-households",
+    "chartName": "transport-communication-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "car-ownership-multi-person-households-per-1000",
+      "title": "自動車所有数量",
+      "unit": "台",
+      "year": "2014",
+      "rank": 39,
+      "value": 1352,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 9,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/car-ownership-multi-person-households-per-1000",
+      "chartName": "car-ownership-multi-person-households-per-1000-prefecture-rankings"
+    },
+    {
+      "metricKey": "commute-by-car",
+      "title": "自宅外通勤・通学者数（自家用車）",
+      "unit": "人",
+      "year": "2020",
+      "rank": 4,
+      "value": 1133443,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 44,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/commute-by-car",
+      "chartName": "commute-by-car-prefecture-rankings"
+    }
+  ]
+}

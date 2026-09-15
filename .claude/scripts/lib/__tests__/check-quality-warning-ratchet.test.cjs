@@ -59,10 +59,12 @@ test('[mutation] owner欠落と期限切れを拒否する', () => {
   assert.ok(errors.some((error) => error.includes('expired exception')));
 });
 
-test('[mutation] baseline引上げとcode追加を拒否する', () => {
+test('[mutation] baseline引上げを拒否するが、新規code追加 (初回登録) は許可する', () => {
   const previous = [entry('theme-catalog', 'no-selection', 120)];
   const current = [entry('theme-catalog', 'no-selection', 121), entry('theme-catalog', 'new-code', 1)];
   const errors = auditBaselineGrowth(current, previous);
   assert.ok(errors.some((error) => error.includes('baseline increased')));
-  assert.ok(errors.some((error) => error.includes('baseline code added')));
+  // 新しい validator 検査を追加した回は、実測値を baseline へ初回登録できないと
+  // 検査自体を導入できなくなる。実測との整合は auditWarningBaseline が別途担保する。
+  assert.ok(!errors.some((error) => error.includes('baseline code added')));
 });

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "profile": "amusement-shop-density",
+  "sourceKey": "amusement-shop-density",
+  "edition": "unknown",
+  "input": {
+    "documents": 1,
+    "pages": 15,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 15,
+  "resolvedCount": 15,
+  "resolutionCoverage": 1,
+  "actionableCount": 0,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 15
+  },
+  "byKind": {
+    "page": 15
+  },
+  "publicOriginalReuse": "forbidden"
+}

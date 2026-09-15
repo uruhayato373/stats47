@@ -87,6 +87,8 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 **判定軸**: アプリは読まない。エージェントが時系列で深掘り参照するためのログ・スナップショット・実験状態。人間は基本的に直接読まない (LATEST.md など要約ファイルは除く)。
 
+**寿命を宣言せずに日付名で増やさない (2026-09-14)**: git に置く生 snapshot は `.claude/scripts/lib/prune-state-snapshots.mjs` の `RETENTION_POLICIES` に置き場と keep 件数を持つものだけ (週次 `fetch-metrics-weekly.yml` が commit 直前に削除する)。release の検証証跡は `.claude/state/metrics/releases/<date>-<name>.json` (keep 8)、実行時の生 artifact は `.local/verification/` (30 日でローカル掃除) か CI artifact (≤30 日)。`.claude/state/metrics` 直下の日付名 JSON は `check-repo-hygiene.cjs` の `DATED_STATE_ARTIFACT` が止め、`prune-state-snapshots.test.mjs` が「追跡中の日付名 state は policy / 恒久宣言 / baseline のどれかに属する」ことを固定する。
+
 | データ | 保存先 |
 |---|---|
 | GSC/GA4/AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新） |
@@ -94,6 +96,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | AdSense デバイス別履歴 + 施策 before/after（RPM レバー分解） | `.claude/state/metrics/adsense/{history-devices.csv,impact-LATEST.md}`（`metrics:digest` がデバイス別 history と LATEST.md の退行アラートを、`metrics:adsense-impact` が施策 before/after を自動生成。判定は improvement-triage） |
 | 改善施策の agent 用詳細ログ (検証コマンド・仮説・期日) | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` |
 | GSC カバレッジ是正キュー (404/soft404/5xx の A/B 分類・状態保持) | `.claude/state/gsc/{coverage-remediation-queue.json,LATEST.md,coverage-totals-history.csv}`（`build-coverage-queue.mjs` が生成。生 export は `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`、skill `/gsc-coverage-remediation`） |
+| e-Stat 年カバレッジ監査キュー (単年設定 metric の拡張候補) | `.claude/state/data/estat-year-coverage/{queue.json,LATEST.md}`（`estat-year-coverage-audit-weekly.yml` が週次で少しずつ巡回生成。正典 `.claude/rules/metric-config-standards.md`「years は最新年だけに絞らない」） |
 | 整合性監査マーカー (agent/skill/script ドリフトの監査済み記録) | `.claude/state/consistency/audited.json`（`check-agent-skill-consistency.cjs --mark-audited` が記録。Stop hook `check-consistency-on-stop.js` がこのハッシュと現在の変更を比較してゲート判定。skill `/audit-consistency`） |
 | PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（最新1件を保持。長期履歴は `history.csv`、過去の生JSONはGit履歴から復元。GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 月次 snapshot JSON + budget 閾値・要約 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（施策一覧は `.claude/todo/improvements.md`） |
@@ -101,7 +104,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（生JSONは最新30件を保持。GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
 | **SNS 投稿台帳 (投稿履歴の SSOT)** | `.claude/state/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` / IG cron は `.claude/scripts/instagram/record-posted.cjs`（内部で store を呼ぶ）。全 SNS 自動化スクリプトはこのストア経由。`ig-posted-log.jsonl` は二重投稿防止用で SSOT ではない。完全DBレス・永続 D1 なし） |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
-| アフィリエイト運用 state (在庫棚卸し / GA4 実測 / compliance / 実験 registry / **集約状態**) | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json,compliance-latest.json,experiments.json,affiliate-operations-latest.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back。実験 registry の書込は `/manage-affiliate-experiment` のみ。dashboard HTML は `/tmp` 生成の派生物で git 管理しない） |
+| アフィリエイト運用 state (在庫棚卸し / GA4 実測 / compliance / 実験 registry / **集約状態**) | `.claude/state/ads/{inventory-*.json,compliance-latest.json,experiments.json,affiliate-operations-latest.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成。実験 registry の書込は `/manage-affiliate-experiment` のみ。dashboard HTML は `/tmp` 生成の派生物で git 管理しない）。**GA4 実測の生 snapshot は 2026-09-14 から R2 `state/ads/ga4-affiliate/{<date>,latest,index}.json` (CI が push・400 日 lifecycle)、git は週次集約 `ga4-affiliate-history.csv` (vertical × position × 週) だけ**。ローカルで生 JSON が要るときは `npm run state:pull -- ads/ga4-affiliate` → gitignored `live/`。2026-08-28 までの追跡済み `ga4-affiliate-*.json` は履歴として残す |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
 | **Claude routine のトークン実績** (日次生成 1 run 1 行) | `.claude/state/metrics/claude-usage/history.csv`（書込: `.claude/scripts/lib/record-claude-usage.mjs` のみ・追記専用。件数を上げる判断の実測根拠。**4 種を合計しない** — cache_read は割引されるため。`token_source=none` は 0 ではなく未取得。読み方は同ディレクトリの README） |
 | 実験 state（PDCA） | `.claude/state/experiments.json` |

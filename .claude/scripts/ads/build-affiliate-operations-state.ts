@@ -40,17 +40,29 @@ function readJsonIfExists(path: string): any | null {
   return JSON.parse(readFileSync(path, "utf8"));
 }
 
-/** ga4-affiliate-YYYY-MM-DD.json のうち最新日付のものを選ぶ (ファイル名で決定的に)。 */
+/**
+ * 最新の GA4 snapshot を日付で選ぶ (ファイル名で決定的に)。
+ * 候補は 2 箇所: CI が今回書いた / 履歴として追跡済みの `ga4-affiliate-YYYY-MM-DD.json` と、
+ * `npm run state:pull -- ads/ga4-affiliate` が R2 から取得した gitignored `live/ga4-affiliate/YYYY-MM-DD.json`。
+ * 生 snapshot の正典は R2 state/ (2026-09-14)。両方あれば日付が新しい方を使う。
+ */
 function latestGa4Snapshot(): { data: any; relPath: string } | null {
-  const names = readdirSync(STATE_DIR)
-    .filter((n) => /^ga4-affiliate-\d{4}-\d{2}-\d{2}\.json$/.test(n))
-    .sort();
-  const name = names.at(-1);
-  if (!name) return null;
-  return {
-    data: readJsonIfExists(resolve(STATE_DIR, name)),
-    relPath: `.claude/state/ads/${name}`,
-  };
+  const candidates: { date: string; abs: string; relPath: string }[] = [];
+  for (const n of readdirSync(STATE_DIR)) {
+    const m = /^ga4-affiliate-(\d{4}-\d{2}-\d{2})\.json$/.exec(n);
+    if (m) candidates.push({ date: m[1], abs: resolve(STATE_DIR, n), relPath: `.claude/state/ads/${n}` });
+  }
+  const liveDir = resolve(STATE_DIR, "live", "ga4-affiliate");
+  if (existsSync(liveDir)) {
+    for (const n of readdirSync(liveDir)) {
+      const m = /^(\d{4}-\d{2}-\d{2})\.json$/.exec(n);
+      if (m) candidates.push({ date: m[1], abs: resolve(liveDir, n), relPath: `.claude/state/ads/live/ga4-affiliate/${n}` });
+    }
+  }
+  candidates.sort((a, b) => a.date.localeCompare(b.date));
+  const latest = candidates.at(-1);
+  if (!latest) return null;
+  return { data: readJsonIfExists(latest.abs), relPath: latest.relPath };
 }
 
 function main(): void {

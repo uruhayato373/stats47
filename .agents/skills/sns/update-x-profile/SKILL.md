@@ -18,7 +18,7 @@ X プロフィール (@stats47jp373) の bio・固定ポスト・リプライツ
 ## 真実源
 
 - **文案カタログ + 現在 live**: `docs/10_SNS戦略/05_SNSプロフィール.md` (人間が読み返す)
-- **live state (agent 用詳細)**: `.Codex/skills/sns/update-x-profile/state.json` — 最終更新日・各 CTA の UTM・実 URL・tweetId
+- **live state (agent 用詳細)**: `.claude/skills/sns/update-x-profile/state.json` — 最終更新日・各 CTA の UTM・実 URL・tweetId
 - **永続プロファイル**: `.local/playwright-x-profile/` (publish-x と共用)
 
 ## 引数
@@ -142,10 +142,10 @@ fs.writeFileSync(STATE_PATH, JSON.stringify(state, null, 2));
 
 ## 関連
 
-- `.Codex/skills/sns/publish-x/SKILL.md` — 通常の予約投稿スキル (Playwright 永続プロファイル共用)
-- `.Codex/skills/sns/generate-utm-url/SKILL.md` — UTM 付与の共通ロジック
-- `.Codex/skills/analytics/fetch-x-data/SKILL.md` — review モードで使用
-- `.Codex/rules/browser-use-cleanup.md` — Playwright 終了時の cleanup 規約
+- `.claude/skills/sns/publish-x/SKILL.md` — 通常の予約投稿スキル (Playwright 永続プロファイル共用)
+- `.claude/skills/sns/generate-utm-url/SKILL.md` — UTM 付与の共通ロジック
+- `.claude/skills/analytics/fetch-x-data/SKILL.md` — review モードで使用
+- `.claude/rules/browser-use-cleanup.md` — Playwright 終了時の cleanup 規約
 - `docs/10_SNS戦略/05_SNSプロフィール.md` — 文案カタログと運用ルール
 
 ## 履歴

@@ -7,7 +7,7 @@ co_agents: [estat-researcher]
 
 # verify-value-distribution — 疑わしい値分布を検証してプロファイルに記録する
 
-正典: `.Codex/rules/metric-config-standards.md` §検証済みプロファイル方式。
+正典: `.claude/rules/metric-config-standards.md` §検証済みプロファイル方式。
 機械は**広く疑う**だけで正当かは判定できない。中身を確かめるのがこの skill の仕事。
 
 ## なぜ人 (agent) が要るのか
@@ -32,7 +32,7 @@ co_agents: [estat-researcher]
 npx tsx packages/data-configs/scripts/scan-stats-shape.ts --verification-queue > /tmp/vq.json
 
 # または週次監査の成果物から
-cat .Codex/state/ranking/integrity-audit.json | jq '.valueVerification'
+cat .claude/state/ranking/integrity-audit.json | jq '.valueVerification'
 ```
 
 `profileViolated` があれば**そちらを先に**見る。未検証より深刻で、「検証時に書いた予測をデータが
@@ -85,7 +85,7 @@ cat .Codex/state/ranking/integrity-audit.json | jq '.valueVerification'
 | 状況 | 対応 |
 |---|---|
 | 軸の絞り忘れ・単位の誤り | config 是正 → `data/data-refresh-requests.json` で再取り込み (data-ingester) |
-| 出典そのものが取得不能 | 代替出典を `.Codex/todo/backlog.md` へ。当面は退役 |
+| 出典そのものが取得不能 | 代替出典を `.claude/todo/backlog.md` へ。当面は退役 |
 | 実態が 0 で ranking にならない | `isActive: false` + GONE 登録 (手順は `ranking-key-consistency.test.ts` の「直し方」) |
 
 ### 6. 検証する
@@ -114,4 +114,4 @@ npx tsx packages/data-configs/scripts/scan-stats-shape.ts --verification-queue |
 - 台帳: `packages/data-configs/src/verified-value-profiles.ts`
 - 監査 check (l): `packages/ranking/src/scripts/audit-ranking-data-integrity.ts`
 - 壊れの allowlist (別 SSOT): `packages/data-configs/src/expected-shape-anomaly.ts`
-- 形状ゲート: `.Codex/rules/metric-config-standards.md` §機械的な検査
+- 形状ゲート: `.claude/rules/metric-config-standards.md` §機械的な検査

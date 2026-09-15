@@ -78,8 +78,11 @@ function auditBaselineGrowth(current, previous) {
   const old = new Map(previous.map((entry) => [key(entry), entry.count]));
   for (const entry of current) {
     const previousCount = old.get(key(entry));
-    if (previousCount === undefined) errors.push(`${key(entry)}: baseline code added`);
-    else if (entry.count > previousCount) errors.push(`${key(entry)}: baseline increased ${previousCount}->${entry.count}`);
+    // 新規 warning コードの初回登録は許可する (新しい validator 検査を追加した回に、
+    // 実測値をそのまま baseline へ記録できないと検査自体を導入できなくなるため)。
+    // 実測との整合は auditWarningBaseline が別途担保する。既存コードの再増加だけを拒否する。
+    if (previousCount === undefined) continue;
+    if (entry.count > previousCount) errors.push(`${key(entry)}: baseline increased ${previousCount}->${entry.count}`);
   }
   return errors;
 }

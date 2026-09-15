@@ -84,6 +84,17 @@ export interface BarChartOptions {
    * X 軸・グリッド線・軸ラベルを描画するか。デフォルト: false。"single" レイアウトのみ対応。
    */
   showAxis?: boolean;
+  /**
+   * ハイライトする都道府県名（`BarItem.name` または `label` とトリム後に一致するもの）。
+   * 一致したカード/バーに 2〜3px の輪郭を追加する（"single" / "columns" / "portrait" 全レイアウト対応）。
+   */
+  highlightName?: string;
+  /**
+   * タイトル/サブタイトル直下に表示する 1 行の注記（例:「熊本県: 12位 35.2%」）。
+   * "columns" / "single" レイアウトのみ対応。横幅に収まらない場合は 2 行に折り返し、
+   * その分だけヘッダー領域を広げる（viewBox 幅は変えない）。
+   */
+  focusNote?: string;
 }
 
 // ---------- 共通定数 ----------
@@ -130,6 +141,57 @@ const CARD_THEMES: Record<PaletteName, CardTheme> = {
   purple: { header: "#7b1fa2", bar: "#ab47bc", cardAlt: "#f3e5f5", badgeText: "#7b1fa2" },
 };
 
+/**
+ * highlightName に一致したカード/バーの輪郭色。red/blue/orange/green/purple のどのテーマとも
+ * 衝突しない中立の濃色（既存パレットを増やさず、強調だけを担う）。
+ */
+const HIGHLIGHT_STROKE = "#111827";
+const HIGHLIGHT_STROKE_WIDTH = 3;
+
+/**
+ * `highlightName` と `BarItem.name` / `label` を比較する。
+ * 都道府県名は末尾の 都/道/府/県 の有無が揺れる ("熊本県" と "熊本"、"1位 熊本" 等) ので、
+ * 接尾辞と順位プレフィックスを落として比較する。
+ */
+function normalizePrefLabel(s: string): string {
+  return s
+    .trim()
+    .replace(/^\d+位\s*/, "")
+    .replace(/(都|道|府|県)$/, "");
+}
+function isHighlightedItem(d: BarItem, highlightName: string | undefined): boolean {
+  if (!highlightName) return false;
+  const target = normalizePrefLabel(highlightName);
+  if (!target) return false;
+  return (
+    (d.name !== undefined && normalizePrefLabel(d.name) === target) ||
+    normalizePrefLabel(d.label) === target
+  );
+}
+
+/** 半角=0.55em / 全角=1.0em の概算幅（他の fit* 関数と同じヒューリスティック）。 */
+function measureUnits(text: string): number {
+  return [...text].reduce((w, ch) => w + (/[ -~｡-ﾟ]/.test(ch) ? 0.55 : 1.0), 0);
+}
+
+/**
+ * focusNote を横幅 availW に収める行へ分割する（1〜2行）。1 行で収まればそのまま返し、
+ * 収まらなければ「長い方の行が最短になる」分割点で 2 行にする（fitTitleLines と同じ考え方）。
+ */
+function wrapFocusNote(text: string, availW: number, fontSize: number): string[] {
+  const trimmed = text.trim();
+  if (measureUnits(trimmed) * fontSize <= availW) return [trimmed];
+  const chars = [...trimmed];
+  let best = { at: Math.ceil(chars.length / 2), widest: Infinity };
+  for (let i = 1; i < chars.length; i++) {
+    const a = measureUnits(chars.slice(0, i).join(""));
+    const b = measureUnits(chars.slice(i).join(""));
+    const widest = Math.max(a, b);
+    if (widest < best.widest) best = { at: i, widest };
+  }
+  return [chars.slice(0, best.at).join(""), chars.slice(best.at).join("")];
+}
+
 /** カラム1本分の行 SVG を生成 */
 function renderCardColumn(
   items: BarItem[],
@@ -141,15 +203,19 @@ function renderCardColumn(
   /** データセット全体で解決した小数桁。上位/下位で揃わないと読み比べられないので呼び元が決める */
   precision: number,
   showBars: boolean,
+  highlightName: string | undefined,
+  /** focusNote 分の見出し・1行目 Y（既定値は focusNote なしのとき） */
+  headerY: number = HEADER_Y,
+  firstRowY: number = FIRST_ROW_Y,
 ): string {
   const header = [
-    `  <rect x="${colX}" y="${HEADER_Y}" width="${CARD_W}" height="${HEADER_H}" rx="8" fill="${theme.header}"/>`,
-    `  <text x="${colX + CARD_W / 2}" y="${HEADER_Y + 26}" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">${headerLabel}</text>`,
+    `  <rect x="${colX}" y="${headerY}" width="${CARD_W}" height="${HEADER_H}" rx="8" fill="${theme.header}"/>`,
+    `  <text x="${colX + CARD_W / 2}" y="${headerY + 26}" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">${headerLabel}</text>`,
   ].join("\n");
 
   const rows = items
     .map((d, i) => {
-      const rowY = FIRST_ROW_Y + i * ROW_GAP;
+      const rowY = firstRowY + i * ROW_GAP;
       const cardBg = i % 2 === 0 ? theme.cardAlt : "#ffffff";
       const cy = rowY + 22;
       const w = toBarW(d.value);
@@ -158,8 +224,11 @@ function renderCardColumn(
       const valStr = unit
         ? `${formatValueLabel(d.value, precision)} ${unit}`
         : formatValueLabel(d.value, precision);
+      const highlightAttrs = isHighlightedItem(d, highlightName)
+        ? ` stroke="${HIGHLIGHT_STROKE}" stroke-width="${HIGHLIGHT_STROKE_WIDTH}"`
+        : "";
       return [
-        `  <rect x="${colX}" y="${rowY}" width="${CARD_W}" height="${CARD_H}" rx="6" fill="${cardBg}"/>`,
+        `  <rect x="${colX}" y="${rowY}" width="${CARD_W}" height="${CARD_H}" rx="6" fill="${cardBg}"${highlightAttrs}/>`,
         `  <circle cx="${colX + BADGE_DX}" cy="${cy}" r="${BADGE_R}" fill="${theme.header}"/>`,
         `  <text x="${colX + BADGE_DX}" y="${cy + 4.3}" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">${rank}</text>`,
         `  <text x="${colX + NAME_DX}" y="${cy + 4.7}" font-size="13" font-weight="bold" fill="#1f2937">${name}</text>`,
@@ -188,6 +257,8 @@ function renderColumnsLayout(
     rightPalette = "blue",
     highLabel = "上位",
     lowLabel = "下位",
+    highlightName,
+    focusNote,
   } = options;
 
   const leftTheme = CARD_THEMES[palette] ?? CARD_THEMES.red;
@@ -201,12 +272,20 @@ function renderColumnsLayout(
   const toBarW = (v: number) =>
     Math.max(0, Math.round((Math.max(0, v) / globalMax) * CARD_BAR_AREA_W * 1000) / 1000);
 
+  // focusNote 分だけヘッダー領域を下へ広げる（収まらなければ 2 行に折り返し、その分さらに広げる）
+  const FOCUS_NOTE_FONT = 13;
+  const FOCUS_NOTE_LINE_H = 18;
+  const noteLines = focusNote ? wrapFocusNote(focusNote, COLS_W - 2 * COL_L_X, FOCUS_NOTE_FONT) : [];
+  const noteExtraH = noteLines.length ? noteLines.length * FOCUS_NOTE_LINE_H + 6 : 0;
+  const headerY = HEADER_Y + noteExtraH;
+  const firstRowY = FIRST_ROW_Y + noteExtraH;
+
   const N = Math.max(topItems.length, bottomItems.length);
-  const totalH = FIRST_ROW_Y + N * ROW_GAP + BOTTOM_PAD;
+  const totalH = firstRowY + N * ROW_GAP + BOTTOM_PAD;
 
   const showBars = options.showBars ?? true;
-  const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit, precision, showBars);
-  const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit, precision, showBars);
+  const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit, precision, showBars, highlightName, headerY, firstRowY);
+  const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit, precision, showBars, highlightName, headerY, firstRowY);
 
   // ★区切りの空白はタイトル側 (大きいフォント) に置く。tspan の中に入れると 14px 幅の
   //   空きしか取れず、「第3次産業就業者比率2020年」のように指標名と年が詰まって読める
@@ -215,6 +294,16 @@ function renderColumnsLayout(
     ? `${title}　<tspan font-size="14" font-weight="normal" class="svg-tick">${subtitle}</tspan>`
     : title;
 
+  const noteSvg = noteLines.length
+    ? "\n" +
+      noteLines
+        .map(
+          (line, i) =>
+            `  <text x="${COLS_W / 2}" y="${58 + i * FOCUS_NOTE_LINE_H}" text-anchor="middle" font-size="${FOCUS_NOTE_FONT}" class="svg-tick">${line}</text>`,
+        )
+        .join("\n")
+    : "";
+
   const sourceSvg = source
     ? `\n  <text x="${COLS_W - COL_L_X}" y="${totalH - 22}" text-anchor="end" font-size="11" class="svg-tick">出典: ${source}</text>`
     : "";
@@ -222,7 +311,7 @@ function renderColumnsLayout(
   return `<svg width="${COLS_W}" height="${totalH}" viewBox="0 0 ${COLS_W} ${totalH}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
 ${svgThemeStyle()}
   <rect width="${COLS_W}" height="${totalH}" class="svg-bg"/>
-  <text x="${COLS_W / 2}" y="40" text-anchor="middle" font-size="18" font-weight="bold" class="svg-title">${titleText}</text>
+  <text x="${COLS_W / 2}" y="40" text-anchor="middle" font-size="18" font-weight="bold" class="svg-title">${titleText}</text>${noteSvg}
 ${leftCol}
 ${rightCol}${sourceSvg}
 </svg>`;
@@ -267,6 +356,7 @@ function renderPortraitSection(
   /** データセット全体で解決した小数桁 (呼び元が 1 度だけ決める) */
   precision: number,
   showBars: boolean,
+  highlightName?: string,
 ): string {
   const x = PORT_PAD;
   const header = [
@@ -288,8 +378,11 @@ function renderPortraitSection(
       const badgeCy = y + 38;
       const w = toBarW(d.value);
       const barY = y + rowH - 30;
+      const highlightAttrs = isHighlightedItem(d, highlightName)
+        ? ` stroke="${HIGHLIGHT_STROKE}" stroke-width="${HIGHLIGHT_STROKE_WIDTH}"`
+        : "";
       return [
-        `  <rect x="${x}" y="${y}" width="${PORT_CONTENT_W}" height="${rowH}" rx="10" fill="${cardBg}"/>`,
+        `  <rect x="${x}" y="${y}" width="${PORT_CONTENT_W}" height="${rowH}" rx="10" fill="${cardBg}"${highlightAttrs}/>`,
         `  <circle cx="${badgeCx}" cy="${badgeCy}" r="22" fill="${theme.header}"/>`,
         `  <text x="${badgeCx}" y="${badgeCy + 8}" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">${rank}</text>`,
         `  <text x="${x + 84}" y="${y + 46}" font-size="30" font-weight="bold" fill="#1f2937">${name}</text>`,
@@ -318,6 +411,7 @@ function renderPortraitLayout(
     rightPalette = "blue",
     highLabel = "上位",
     lowLabel = "下位",
+    highlightName,
   } = options;
 
   const topTheme = CARD_THEMES[palette] ?? CARD_THEMES.red;
@@ -342,11 +436,11 @@ function renderPortraitLayout(
   const startY = PORT_TITLE_BOTTOM + Math.max(0, Math.floor((avail - contentH) / 2));
 
   const sec1 = renderPortraitSection(
-    topItems, startY, rowH, topTheme, `${highLabel}${tN}`, toBarW, unit, precision, options.showBars ?? true,
+    topItems, startY, rowH, topTheme, `${highLabel}${tN}`, toBarW, unit, precision, options.showBars ?? true, highlightName,
   );
   const sec2Top = startY + sec1H + PORT_SECTION_GAP;
   const sec2 = renderPortraitSection(
-    bottomItems, sec2Top, rowH, bottomTheme, `${lowLabel}${bN}`, toBarW, unit, precision, options.showBars ?? true,
+    bottomItems, sec2Top, rowH, bottomTheme, `${lowLabel}${bN}`, toBarW, unit, precision, options.showBars ?? true, highlightName,
   );
 
   // 長いタイトルは見切れるため概算幅でフォントを自動フィット。年(サブタイトル)は別行・大きめ。
@@ -394,9 +488,16 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     colorFn,
     xMin = 0,
     showAxis = false,
+    highlightName,
+    focusNote,
   } = options;
 
-  const firstY = 36;
+  // focusNote 分だけタイトル直下を広げる（収まらなければ 2 行に折り返し、その分さらに広げる）
+  const FOCUS_NOTE_FONT = 10;
+  const FOCUS_NOTE_LINE_H = 14;
+  const noteLines = focusNote ? wrapFocusNote(focusNote, W - 40, FOCUS_NOTE_FONT) : [];
+  const noteExtraH = noteLines.length ? noteLines.length * FOCUS_NOTE_LINE_H + 4 : 0;
+  const firstY = 36 + noteExtraH;
 
   const dataItems = items.filter((d) => !d.isSeparator);
   const maxVal = Math.max(...dataItems.map((d) => d.value), xMin + 1);
@@ -454,8 +555,11 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     const midY = y + 13;
     const valX = LABEL_X + w + 4;
     const valStr = formatValueLabel(d.value, precision);
+    const highlightAttrs = isHighlightedItem(d, highlightName)
+      ? ` stroke="${HIGHLIGHT_STROKE}" stroke-width="${HIGHLIGHT_STROKE_WIDTH}"`
+      : "";
     return [
-      `  <rect x="${LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"/>`,
+      `  <rect x="${LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"${highlightAttrs}/>`,
       `  <text x="${LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" class="svg-axis">${d.label}</text>`,
       `  <text x="${valX}" y="${midY}" font-size="12" class="svg-tick" font-weight="bold">${valStr}</text>`,
     ].join("\n");
@@ -465,10 +569,20 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     ? `${title}<tspan font-size="10" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
     : title;
 
+  const noteSvg = noteLines.length
+    ? "\n" +
+      noteLines
+        .map(
+          (line, i) =>
+            `  <text x="${W / 2}" y="${34 + i * FOCUS_NOTE_LINE_H}" text-anchor="middle" font-size="${FOCUS_NOTE_FONT}" class="svg-tick">${line}</text>`,
+        )
+        .join("\n")
+    : "";
+
   return `<svg width="${W}" height="${totalH}" viewBox="0 0 ${W} ${totalH}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
 ${svgThemeStyle()}
   <rect width="${W}" height="${totalH}" class="svg-bg" rx="6"/>
-  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${titleText}</text>
+  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${titleText}</text>${noteSvg}
 ${gridLines.join("\n")}${showAxis ? `\n  <!-- 軸ラベル -->\n  <text x="${W / 2}" y="${totalH - 4}" text-anchor="middle" font-size="10" class="svg-tick">${unit}</text>` : ""}
 ${rows.join("\n")}
 </svg>`;

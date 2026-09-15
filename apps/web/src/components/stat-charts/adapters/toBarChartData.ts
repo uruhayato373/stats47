@@ -1,6 +1,7 @@
 import { CHART_COLORS } from "../constants";
 
 import { extractYearsFromStats } from "./extract-years-from-stats";
+import { resolveChartUnit } from "./resolve-chart-unit";
 
 import type { BarChartData } from "../types/visualization";
 import type { StatsSchema } from "@stats47/types";
@@ -16,15 +17,16 @@ import type { StatsSchema } from "@stats47/types";
 export function toBarChartData(
   rawDataList: StatsSchema[][],
   seriesLabels?: string[],
-  chartType: "bar" | "stacked-bar" | "grouped" = "stacked-bar"
+  chartType: "bar" | "stacked-bar" | "grouped" = "stacked-bar",
+  unit?: string,
 ): BarChartData {
   const labels =
     seriesLabels ?? rawDataList.map(() => "");
   if (chartType === "bar") {
-    return toSimpleBarChartData(rawDataList, labels);
+    return toSimpleBarChartData(rawDataList, labels, unit);
   }
   // "stacked-bar" and "grouped" use the same data structure (series per year)
-  return toStackedBarChartData(rawDataList, labels);
+  return toStackedBarChartData(rawDataList, labels, unit);
 }
 
 /**
@@ -32,7 +34,8 @@ export function toBarChartData(
  */
 export function toStackedBarChartData(
   rawDataList: StatsSchema[][],
-  seriesLabels: string[]
+  seriesLabels: string[],
+  unit?: string,
 ): BarChartData {
   const yearMap = new Map<string, Record<string, string | number>>();
 
@@ -63,7 +66,7 @@ export function toStackedBarChartData(
       name: label,
       color: CHART_COLORS[i % CHART_COLORS.length],
     })),
-    unit: rawDataList[0]?.[0]?.unit ?? undefined,
+    unit: resolveChartUnit(unit, rawDataList),
   };
 }
 
@@ -72,7 +75,8 @@ export function toStackedBarChartData(
  */
 function toSimpleBarChartData(
   rawDataList: StatsSchema[][],
-  seriesLabels: string[]
+  seriesLabels: string[],
+  unit?: string,
 ): BarChartData {
   const data = seriesLabels
     .map((label, index) => {
@@ -103,6 +107,6 @@ function toSimpleBarChartData(
       name: label,
       color: CHART_COLORS[i % CHART_COLORS.length],
     })),
-    unit: data[0]?.unit,
+    unit: resolveChartUnit(unit, rawDataList),
   };
 }

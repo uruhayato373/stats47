@@ -146,6 +146,12 @@ const PR_GATES = [
     hint: "指摘要素の意味と操作性を是正する。baselineは増やさない",
   },
   {
+    name: "Repo Hygiene",
+    why: "寿命を宣言しない日付名 state・一時/巨大ファイルの追跡 (ローカル肥大化の入口)",
+    run: () => tryRun("node", [checker("check-repo-hygiene.cjs"), "--baseline"]),
+    hint: "release 証跡は .claude/state/metrics/releases/、生 snapshot は prune 対象ディレクトリへ置く (.claude/rules/data-storage.md)",
+  },
+  {
     name: "Metric Registry",
     why: "metric を足す/消すと registry.ts が古くなる",
     run: () => tryRun("npm", ["run", "build:registry", "--workspace=@stats47/data-configs", "--", "--check"]),
@@ -279,32 +285,58 @@ const GATES = [
   },
 ];
 
+// Same gate objects as --pr where applicable; the commit hook keeps its scoped gates.
+export const COMMIT_GATES = [
+  ...PR_GATES.filter((gate) => ["Card Census", "Ad Placement", "Repo Hygiene"].includes(gate.name)),
+  { name: "Design System", run: () => tryRun("npm", ["run", "design-system:check"], { cwd: WEB_DIR }) },
+  { name: "Source Vault", run: () => tryRun("npm", ["run", "source-vault:check"]) },
+  ...[
+    ["R2 Route SSG", "check-r2-route-ssg.cjs", []],
+    ["Value Format", "check-value-format.cjs", ["--baseline"]],
+  ].map(([name, script, args]) => ({ name, run: () => tryRun("node", [checker(script), ...args]) })),
+];
+
+// 空いた枠から次のゲートを実行する。遅いゲートを含む一組の終了待ちを作らない。
+export async function runGates(gates, all, concurrency) {
+  const results = new Array(gates.length);
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(concurrency, gates.length) }, async () => {
+    while (next < gates.length) {
+      const index = next++;
+      const gate = gates[index];
+      const started = Date.now();
+      try {
+        results[index] = { gate, result: await gate.run(all) };
+      } catch (error) {
+        results[index] = { gate, result: { ok: false, output: String(error) } };
+      }
+      results[index].result.durationMs = Date.now() - started;
+    }
+  }));
+  return results;
+}
+
 async function main() {
   const all = process.argv.includes("--all");
   const pr = process.argv.includes("--pr");
-  const gates = pr ? PR_GATES : GATES;
+  const commitStatic = process.argv.includes("--commit-static");
+  const gates = commitStatic ? COMMIT_GATES : pr ? PR_GATES : GATES;
   const started = Date.now();
 
-  const label = pr ? "push 前プリフライト (生成物の鮮度)" : "プリフライト";
+  const label = commitStatic ? "commit 共通静的検査" : pr ? "push 前プリフライト (生成物の鮮度)" : "プリフライト";
   console.log(`${GREEN}🚀 ${label} — ${gates.length} ゲートを並列実行${NC}${all ? " (--all)" : ""}\n`);
 
   // ★並列。1 つ落ちても他を止めない (まとめて出すのが本スクリプトの目的)。
-  const results = [];
   // Collect every failure while bounding local peak memory, including PR gates.
-  const concurrency = process.env.CI ? gates.length : 2;
-  for (let offset = 0; offset < gates.length; offset += concurrency) {
-    results.push(...await Promise.all(
-      gates.slice(offset, offset + concurrency)
-        .map(async (gate) => ({ gate, result: await gate.run(all) })),
-    ));
-  }
+  const concurrency = process.env.CI && !commitStatic ? gates.length : 2;
+  const results = await runGates(gates, all, concurrency);
 
   const failed = [];
   for (const { gate, result } of results) {
     if (result.skipped) {
       console.log(`${DIM}⊘ ${gate.name} — ${result.output}${NC}`);
     } else if (result.ok) {
-      console.log(`${GREEN}✅ ${gate.name}${NC}`);
+      console.log(`${GREEN}✅ ${gate.name}${NC} (${(result.durationMs / 1000).toFixed(1)}s)`);
     } else {
       console.log(`${RED}❌ ${gate.name}${NC} ${DIM}(${gate.why})${NC}`);
       failed.push({ gate, result });

@@ -63,5 +63,14 @@ export const KOCHI_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.pref.kochi.lg.jp/doc/hachikin/",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "monpa-ebi",
+      name: "モンパエビ（セミエビ）",
+      municipality: "土佐清水市",
+      description:
+        "土佐清水市などで水揚げされるセミエビの地方名。漁獲量が極端に少なく市場に出回りにくいため「幻のエビ」とも呼ばれ、身の弾力と独特の甘みが珍重される。",
+      sourceUrl: "https://www.chisanchisho.pref.kochi.lg.jp/life/dtl.php?hdnKey=1053",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

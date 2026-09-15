@@ -42,6 +42,29 @@ const SIZE_OGP = 600 * 1024;
 const SIZE_PUBLIC = 1024 * 1024;
 const SIZE_OTHER = 2 * 1024 * 1024;
 
+// ── ローカル stat キャッシュ (2026-09-14) ──
+// 会社 Windows の実測では 31 秒のうち 21 秒が 7,390 本のテキストを毎回 UTF-8 で読む I/O だった。
+// 画像は (size, mtimeMs) → sha256/寸法、テキストは (size, mtimeMs) → 抽出済み参照 を .local/ に持ち、
+// 変わっていないファイルは読まない。判定は内容だけで決まるので結果は同じ。壊れていれば捨てて作り直す。
+const STAT_CACHE = path.join(ROOT, ".local", "asset-policy-cache.json");
+function loadStatCache() {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(STAT_CACHE, "utf8"));
+    if (parsed && parsed.version === 2 && parsed.images && parsed.texts) return parsed;
+  } catch { /* fall through */ }
+  return { version: 2, images: {}, texts: {} };
+}
+function saveStatCache(cache) {
+  try {
+    fs.mkdirSync(path.dirname(STAT_CACHE), { recursive: true });
+    fs.writeFileSync(STAT_CACHE, JSON.stringify(cache));
+  } catch { /* cache は任意 */ }
+}
+function statKey(file) {
+  const st = fs.statSync(file);
+  return { size: st.size, mtimeMs: st.mtimeMs };
+}
+
 function rel(file) { return path.relative(ROOT, file).split(path.sep).join("/"); }
 function key(f) { return `${f.code}:${f.file}:${f.message}`; }
 function add(findings, code, file, message) { findings.push({ code, file: rel(file), message }); }
@@ -146,25 +169,39 @@ async function collect() {
 
   // ── 画像本体の検査 (デコード/寸法/容量/形式一致/SVG 安全性/重複) ──
   const hashGroups = new Map();
-  let raster = 0, svg = 0;
+  const cache = loadStatCache();
+  let raster = 0, svg = 0, cacheHits = 0;
   for (const file of images) {
     const ext = path.extname(file).toLowerCase().replace(/^\./, "");
     if (ext === "svg") { inspectSvg(file, findings); svg++; continue; }
     raster++;
-    const buf = fs.readFileSync(file);
-    const hash = crypto.createHash("sha256").update(buf).digest("hex");
+    const relPath = rel(file);
+    const key = statKey(file);
+    let entry = cache.images[relPath];
+    if (entry && entry.size === key.size && entry.mtimeMs === key.mtimeMs) cacheHits++;
+    else {
+      const buf = fs.readFileSync(file);
+      entry = { ...key, hash: crypto.createHash("sha256").update(buf).digest("hex"), bytes: buf.length };
+      try {
+        const m = await sharp(buf).metadata();
+        entry.meta = { width: m.width, height: m.height, format: m.format };
+      } catch (error) { entry.error = String(error.message).split("\n")[0]; }
+      cache.images[relPath] = entry;
+    }
+    const { hash, bytes } = entry;
     if (!hashGroups.has(hash)) hashGroups.set(hash, []);
-    hashGroups.get(hash).push({ path: rel(file), isSymlink: fs.lstatSync(file).isSymbolicLink() });
-    try {
-      const meta = await sharp(buf).metadata();
+    hashGroups.get(hash).push({ path: relPath, isSymlink: fs.lstatSync(file).isSymbolicLink() });
+    if (entry.error) add(findings, "INVALID_IMAGE", file, entry.error);
+    else {
+      const meta = entry.meta;
       if (!meta.width || !meta.height) add(findings, "INVALID_DIMENSIONS", file, "pixel寸法を取得できない");
       const allowed = FORMAT_EXT[meta.format];
       if (allowed && !allowed.includes(ext)) add(findings, "FORMAT_MISMATCH", file, `format=${meta.format} ext=.${ext}`);
       if (isOgImage(file) && (meta.width !== 1200 || meta.height !== 630))
         add(findings, "OGP_PRESET", file, `expected=1200x630 actual=${meta.width}x${meta.height}`);
-    } catch (error) { add(findings, "INVALID_IMAGE", file, String(error.message).split("\n")[0]); }
+    }
     const limit = isOgImage(file) ? SIZE_OGP : file.startsWith(PUBLIC + path.sep) ? SIZE_PUBLIC : SIZE_OTHER;
-    if (buf.length > limit) add(findings, "OVERSIZED_PUBLIC_ASSET", file, `${buf.length} bytes > ${limit} bytes`);
+    if (bytes > limit) add(findings, "OVERSIZED_PUBLIC_ASSET", file, `${bytes} bytes > ${limit} bytes`);
   }
   // SHA-256 完全同一 (2枚以上) を重複として報告。message にグループ (代表 + 他) を含める。
   // 例外1: docs/31 (note.com 原稿) の記事同梱画像は、note.com が記事ごとに画像実体の
@@ -185,16 +222,36 @@ async function collect() {
     }
   }
 
+  // ── docs/31 の派生 PNG (同名 SVG から regenerate-svg-png.sh で再生成できる) ──
+  // note.com への貼付に PNG 実体は要るが、git に載せる必要はない (66.9MB の主因)。
+  // 既存分は baseline で許容し、新規に追跡へ加わる派生 PNG だけを止める。
+  const trackedSet = new Set(images.map(rel));
+  for (const file of images) {
+    const relPath = rel(file);
+    if (!relPath.startsWith("docs/31_note記事原稿/") || !/\.png$/i.test(relPath)) continue;
+    const svgSibling = relPath.replace(/\.png$/i, ".svg");
+    if (trackedSet.has(svgSibling)) add(findings, "DERIVED_PNG_TRACKED", file, `regenerable from ${path.basename(svgSibling)}; do not track the PNG`);
+  }
+
   // ── ローカル画像参照の解決検査 (MD/HTML/CSS/TS(X)) ──
   let checkedText = 0;
   const referencedBasenames = new Set();
   for (const file of textFiles) {
     const inDocRoot = DOC_ROOTS.some((r) => file.startsWith(r + path.sep));
     const scanRefsForMissing = inDocRoot || /\.(?:css|scss|html?)$/i.test(file) || file.startsWith(PUBLIC + path.sep);
-    let source;
-    try { source = fs.readFileSync(file, "utf8"); } catch { continue; }
+    const relPath = rel(file);
+    let refs;
+    try {
+      const key = statKey(file);
+      const entry = cache.texts[relPath];
+      if (entry && entry.size === key.size && entry.mtimeMs === key.mtimeMs) { refs = entry.refs; cacheHits++; }
+      else {
+        refs = extractRefs(file, fs.readFileSync(file, "utf8"));
+        cache.texts[relPath] = { ...key, refs };
+      }
+    } catch { continue; }
     checkedText++;
-    for (const target of extractRefs(file, source)) {
+    for (const target of refs) {
       const base = path.basename(target.split(/[?#]/)[0]);
       if (IMAGE_EXT.test(base)) referencedBasenames.add(base);
       if (!scanRefsForMissing) continue; // TS(X) は参照集計のみ (誤検出防止), 欠落 block はしない
@@ -212,7 +269,12 @@ async function collect() {
     if (!referencedBasenames.has(path.basename(file))) warnings.push({ code: "UNREFERENCED_IMAGE", file: rel(file), message: "どのテキストからも参照されていない可能性" });
   }
 
-  return { checkedImages: images.length, checkedRaster: raster, checkedSvg: svg, checkedText, findings, warnings };
+  // 追跡から外れたファイルの entry を落としてから保存する (肥大化防止)
+  const live = new Set(files.map(rel));
+  for (const k of Object.keys(cache.images)) if (!live.has(k)) delete cache.images[k];
+  for (const k of Object.keys(cache.texts)) if (!live.has(k)) delete cache.texts[k];
+  saveStatCache(cache);
+  return { checkedImages: images.length, checkedRaster: raster, checkedSvg: svg, checkedText, cacheHits, findings, warnings };
 }
 
 async function main() {

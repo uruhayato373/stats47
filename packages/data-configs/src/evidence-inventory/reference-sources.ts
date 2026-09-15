@@ -34,8 +34,8 @@ export const REFERENCE_SOURCE_POLICIES = [
     statePath:
       ".claude/state/source-inventory/prefecture-deviation/2018/inventory.json",
     inputUnit: "page",
-    fallbackResolution: "rights-hold",
-    fallbackReason: "書誌は確定済みだが各図表の再利用条件と一次資料照合が未確定のため全ページを公開停止",
+    fallbackResolution: "not-applicable",
+    fallbackReason: "章扉・図版のみ等で、分析・論点に属さないページ",
     publicOriginalReuse: "forbidden",
   },
   {

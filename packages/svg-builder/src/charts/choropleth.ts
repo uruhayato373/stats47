@@ -133,6 +133,16 @@ export interface ChoroplethOptions {
    * 「良い/悪い」とは表記せず、順位の数字だけを出す。下位は出さない。
    */
   showRankList?: boolean;
+  /**
+   * 単一都道府県をハイライトする都道府県コード（"43" / "43000" いずれの形式も可。
+   * `ChoroplethItem.code` と同じ規則で 2 桁に正規化する）。
+   *
+   * 指定時、該当タイルの外周に強調用の枠線を 1 本だけ追加描画する。塗り (fill) は変えず
+   * `stroke` のみを重ねる (`fill="none"`) ので、タイル数や凡例判定など他の不変量
+   * ({@link lintTileGridQuality}) には影響しない。該当コードのタイルが存在しない
+   * （data に無い、または TILE_GRID に無い）場合は何も描画しない。
+   */
+  highlightCode?: string;
 }
 
 /** D3 スキーム名 → interpolator 関数を解決（無ければ null）。 */
@@ -547,6 +557,7 @@ export function generateChoroplethSvg(
     showValue = true,
     legendLabels: rawLegendLabels,
     showRankList = true,
+    highlightCode,
   } = options;
   const legendLabels = normalizeLegendLabels(rawLegendLabels);
   const safeUnit = typeof unit === "string" ? unit : "";
@@ -619,6 +630,23 @@ export function generateChoroplethSvg(
       `  </g>`,
     ].join("\n");
   });
+
+  // ── ハイライト枠 (単一県) ──
+  // 塗りは変えず stroke のみを重ねる。TILE_GRID / byCode どちらかに無いコードは無視する
+  // (存在しないタイルへ枠だけ描くと空中に浮いた線になるため)。
+  let highlightOverlay = "";
+  if (highlightCode) {
+    const hCode = String(highlightCode).slice(0, 2).padStart(2, "0");
+    const grid = TILE_GRID[hCode];
+    if (grid && byCode.has(hCode)) {
+      const [col, row, cs, rs] = grid;
+      const hx = MAP_X + col * PITCH;
+      const hy = MAP_Y + row * PITCH;
+      const hw = cs * PITCH - GAP;
+      const hh = rs * PITCH - GAP;
+      highlightOverlay = `  <rect x="${hx.toFixed(1)}" y="${hy.toFixed(1)}" width="${hw}" height="${hh}" rx="3" fill="none" stroke="${TILE_INK_DARK}" stroke-width="3"/>`;
+    }
+  }
 
   // ── 左カラム: タイトル ──
   const { lines: titleLines, font: titleFont } = fitTitleLines(title, COL_W, 19, 13);
@@ -745,6 +773,7 @@ export function generateChoroplethSvg(
 ${head.join("\n")}
 ${rankLists.join("\n")}
 ${tiles.filter(Boolean).join("\n")}
+${highlightOverlay}
 ${legend.join("\n")}
 </svg>`;
 }

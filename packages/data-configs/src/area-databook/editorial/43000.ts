@@ -74,5 +74,14 @@ export const KUMAMOTO_EDITORIAL: AreaEditorial = {
         "https://www.maff.go.jp/j/keikaku/syokubunka/k_ryouri/search_menu/menu/kono_shirono_sugata_zushi_kumamoto.html",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "shichijo-melon",
+      name: "七城メロン",
+      municipality: "菊池市",
+      description:
+        "菊池市七城町できれいな地下水と土壌を生かして栽培されるブランドメロン。糖度センサーで14度以上を選別し、道の駅七城メロンドームでホームランメロンなど複数品種を販売する。",
+      sourceUrl: "https://www.melondome.co.jp/",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

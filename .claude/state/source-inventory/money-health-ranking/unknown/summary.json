@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "profile": "money-health-ranking",
+  "sourceKey": "money-health-ranking",
+  "edition": "unknown",
+  "input": {
+    "documents": 1,
+    "pages": 60,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 60,
+  "resolvedCount": 60,
+  "resolutionCoverage": 1,
+  "actionableCount": 2,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 58,
+    "context-only": 2
+  },
+  "byKind": {
+    "page": 60
+  },
+  "publicOriginalReuse": "forbidden"
+}

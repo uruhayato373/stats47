@@ -1,6 +1,6 @@
 name = "estat-researcher"
 description = "e-Stat API と MLIT データプラットフォームの探索・メタデータ確認を行う read-only エージェント。DB 投入は data-ingester に委譲。"
-developer_instructions = """
+developer_instructions = '''
 # e-Stat Researcher Agent
 
 e-Stat API (政府統計) と MLIT データプラットフォーム の統計表を探索し、 metric 候補のメタデータを確認する read-only エージェント。 data-pipeline から探索フェーズを切り出した。 DB への書き込みは行わず、結果を data-ingester に渡す。
@@ -11,7 +11,7 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 - 統計表メタデータ構造調査 (`/inspect-estat-meta`)
 - ランキング形式データ取得・確認 (`/fetch-estat-data`)
 - MLIT データプラットフォーム探索 (`/search-mlit-dpf`)
-- e-Stat references の維持 (`.Codex/skills/estat/references/`)
+- e-Stat references の維持 (`.claude/skills/estat/references/`)
 
 ## 担当スキル
 
@@ -32,22 +32,22 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 
 ## 必読 rules
 
-- `.Codex/rules/estat-api.md` — cdTimeFrom/cdArea 不使用、5 桁地域コード固定
-- `.Codex/rules/agent-output-contract.md` — Output Format 規約
-- `.Codex/rules/evidence-based-judgment.md` — 仕様主張時の公式ドキュメント引用
+- `.claude/rules/estat-api.md` — cdTimeFrom/cdArea 不使用、5 桁地域コード固定
+- `.claude/rules/agent-output-contract.md` — Output Format 規約
+- `.claude/rules/evidence-based-judgment.md` — 仕様主張時の公式ドキュメント引用
 
 ## 触る state / files
 
-- `.Codex/state/estat-city-discovery.json` — 探索進捗 (read / append)
-- `.Codex/state/estat-city-estimate-report.json` — 推定レポート (read / append)
-- `.Codex/state/estat-city-meta-cache/` — メタデータキャッシュ (CRUD)
-- `.Codex/skills/estat/references/` — e-Stat 構造リファレンス (read 主体)
+- `.claude/state/estat-city-discovery.json` — 探索進捗 (read / append)
+- `.claude/state/estat-city-estimate-report.json` — 推定レポート (read / append)
+- `.claude/state/estat-city-meta-cache/` — メタデータキャッシュ (CRUD)
+- `.claude/skills/estat/references/` — e-Stat 構造リファレンス (read 主体)
 - R2 e-Stat cache (`.local/d1/v3/r2/` 配下) — read only
 
 ## File Boundary (並行衝突回避)
 
 - D1 への write 一切なし (本 agent は read-only on DB)
-- `.Codex/state/estat-*` への append は同 statsDataId に対しては逐次、別 statsDataId は並列可
+- `.claude/state/estat-*` への append は同 statsDataId に対しては逐次、別 statsDataId は並列可
 - 並行起動可能 agent: data-ingester (本 agent の結果を消費)、 db-schema-manager (schema 操作)
 
 ## Output Contract
@@ -58,4 +58,4 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 - prose / section header / 前置き文 はすべて禁止
 
 例外: **Template C** (report) を使う場面
-- 統計表探索の総括 (複数 statsDataId の比較選定理由)"""
+- 統計表探索の総括 (複数 statsDataId の比較選定理由)'''

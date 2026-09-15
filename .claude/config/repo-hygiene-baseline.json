@@ -4,6 +4,86 @@
   "maxFileSize": 1048576,
   "findings": [
     {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/affiliate-placement-baseline-2026-09-08.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/content-release-2026-09-08.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/geo-flood-repair-2026-09-05.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/geo-page-audit-2026-09-05.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/geo-release-publication-2026-09-05.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-branding-update-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-circulation-audit-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-cover-audit-2026-09-12-v1-after.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-cover-audit-2026-09-12.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-cover-production-2026-09-12-v1.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-cover-refresh-2026-09-12-v1-verification.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-cover-refresh-2026-09-12-v1.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-hashtag-audit-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-magazine-expansion-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-navigation-pilot-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
+      "code": "DATED_STATE_ARTIFACT",
+      "file": ".claude/state/metrics/note-referrals-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+    },
+    {
       "code": "FORBIDDEN_ARTIFACT",
       "file": ".claude/state/blog/auto-brushup-skipped.log",
       "message": "temporary/build/database artifact is tracked"
@@ -16,12 +96,17 @@
     {
       "code": "LARGE_FILE",
       "file": ".claude/state/estat/expansion-queue.json",
-      "message": "1383608 bytes exceeds 1048576 bytes"
+      "message": "1399387 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": ".claude/state/estat/prefecture-candidates.json",
+      "message": "3140232 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
       "file": ".claude/state/gsc/coverage-remediation-queue.json",
-      "message": "1190073 bytes exceeds 1048576 bytes"
+      "message": "1600441 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
@@ -31,7 +116,7 @@
     {
       "code": "LARGE_FILE",
       "file": ".claude/state/search-growth/candidates.json",
-      "message": "1184790 bytes exceeds 1048576 bytes"
+      "message": "1601463 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
@@ -181,7 +266,7 @@
     {
       "code": "LARGE_FILE",
       "file": "apps/web/public/search-index.json",
-      "message": "1896763 bytes exceeds 1048576 bytes"
+      "message": "2375431 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
@@ -197,11 +282,6 @@
       "code": "LARGE_FILE",
       "file": "docs/assets/ranking-thumbnail-ab-proposal.png",
       "message": "1236655 bytes exceeds 1048576 bytes"
-    },
-    {
-      "code": "LARGE_FILE",
-      "file": "package-lock.json",
-      "message": "1198537 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",

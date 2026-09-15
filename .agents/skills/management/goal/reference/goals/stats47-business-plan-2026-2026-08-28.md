@@ -1,0 +1,1 @@
+../../../../../../.claude/skills/management/goal/reference/goals/stats47-business-plan-2026-2026-08-28.md

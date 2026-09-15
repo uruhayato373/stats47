@@ -11,6 +11,8 @@ co_agents: [note-manager, kindle-publisher, kdp-operator]
 
 ## 起動 / 停止
 
+共通事業方針は「戦略・収益化」→「共通事業方針」(`/strategy/policy`) の専用ページで読み取り専用表示する(全画面共通ヘッダーには置かない)。`npm run admin` は起動前に `policy:check` を実行する。正本はObsidian vaultの `.claude/共通事業方針SSOT.md`。正本更新後はObsidian vault側で `npm run policy:sync` を実行して配布版を更新する。画面とagentの参照先は `.claude/shared-policy/`、個別適用は `application.json`。
+
 ```bash
 npm run admin              # http://127.0.0.1:4747/ (Ctrl-C で停止)
 PORT=5000 npm run admin    # ポート変更

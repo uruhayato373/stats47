@@ -9,28 +9,13 @@ import {
   computeFontSize,
   computeMarginsByRatio,
 } from "../../../shared/layout";
-import { CHART_STYLES } from "../../constants";
-import { TOOLTIP_STYLES, clampTooltipPosition, useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { CHART_STYLES, compactAxisFormat } from "../../constants";
+import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3StackedAreaChartProps, StackedAreaDataNode } from "./types";
 
-const TOOLTIP_ID_STACKED = "stacked-area-tooltip";
-
 function defaultFormat(value: number): string {
   return value.toLocaleString();
-}
-
-/**
- * innerHTML へ補間する前にデータ由来テキストの HTML 特殊文字をエスケープする
- * (js/html-constructed-from-input)。ラベル・単位はデータ/props 由来のため XSS を防ぐ。
- */
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 }
 
 /**
@@ -60,7 +45,7 @@ export function StackedAreaChart({
   yDomain: yDomainProp,
 }: D3StackedAreaChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
+  const { showStackedTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
   const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.timeSeries);
 
@@ -90,8 +75,23 @@ export function StackedAreaChart({
 
   const defaultYFormat = normalize
     ? (v: number) => `${Math.round(v)}%`
-    : defaultFormat;
+    : compactAxisFormat;
   const yFormat = yAxisFormatter ?? defaultYFormat;
+  const categoryLabels = data
+    .map((row) => String(row.label ?? row[categoryKey] ?? ""))
+    .filter(Boolean);
+  const firstCategory = categoryLabels[0];
+  const lastCategory = categoryLabels[categoryLabels.length - 1];
+  const accessibleLabel = [
+    title ? `積み上げ面グラフ「${title}」` : "積み上げ面グラフ",
+    `系列: ${series.map((item) => item.label).join("、")}`,
+    firstCategory
+      ? `期間: ${firstCategory === lastCategory ? firstCategory : `${firstCategory}から${lastCategory}`}`
+      : undefined,
+    `単位: ${normalize ? "%" : unit || "未設定"}`,
+  ]
+    .filter(Boolean)
+    .join("。");
 
   useEffect(() => {
     if (!svgRef.current || !data.length || !series.length) return;
@@ -155,9 +155,7 @@ export function StackedAreaChart({
       .y1((d) => y(d[1]))
       .curve(curveMonotoneX);
 
-    // Draw areas with per-series tooltips
-    const labelMap = new Map(series.map((s) => [s.key, s.label]));
-
+    // Draw areas. The category overlay below owns the shared value tooltip.
     svg
       .append("g")
       .selectAll("path")
@@ -166,21 +164,7 @@ export function StackedAreaChart({
       .attr("fill", (d) => colorMap.get(d.key) ?? "#888")
       .attr("fill-opacity", 0.7)
       .attr("d", areaFn)
-      .attr("class", "transition-opacity duration-200")
-      .style("cursor", "pointer")
-      .on("mouseenter", function (event, d) {
-        select(this).attr("fill-opacity", 0.9);
-        const seriesLabel = labelMap.get(d.key) ?? d.key;
-        showTooltip(event, seriesLabel, {
-          metricTitle: seriesLabel,
-          unit: normalize ? "%" : unit,
-        });
-      })
-      .on("mousemove", (event) => updateTooltipPosition(event))
-      .on("mouseleave", function () {
-        select(this).attr("fill-opacity", 0.7);
-        hideTooltip();
-      });
+      .attr("class", "transition-opacity duration-200");
 
     // Hover guideline
     const hoverLine = svg
@@ -211,34 +195,26 @@ export function StackedAreaChart({
         hoverLine.attr("x1", xPos).attr("x2", xPos).attr("stroke-opacity", 0.4);
         const categoryLabel =
           (d.label as string) ?? String(d[categoryKey]);
-        const unitStr = escapeHtml(normalize ? "%" : unit);
         const total = keys.reduce((sum, k) => sum + (Number(d[k]) || 0), 0);
-        const rows = series.map((s) => {
+        const items = series.map((s) => {
           const val = Number(d[s.key]) || 0;
           const pct = total > 0 ? ((val / total) * 100).toFixed(1) : "0.0";
-          return `<div style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${escapeHtml(String(s.color))};opacity:0.7;flex-shrink:0;"></span><span style="font-size:0.6875rem;">${escapeHtml(String(s.label))}</span><span style="margin-left:auto;font-variant-numeric:tabular-nums;font-weight:600;font-size:0.75rem;">${val.toLocaleString()}</span><span style="font-size:0.625rem;color:hsl(var(--muted-foreground));">${unitStr}</span><span style="font-size:0.625rem;color:hsl(var(--muted-foreground));">(${pct}%)</span></div>`;
+          return {
+            name: s.label,
+            value: val,
+            color: s.color,
+            unit: normalize ? "%" : unit,
+            detail: normalize ? undefined : `(${pct}%)`,
+          };
         });
-        let tooltip = document.getElementById(TOOLTIP_ID_STACKED) as HTMLDivElement | null;
-        if (!tooltip) {
-          tooltip = document.createElement("div");
-          tooltip.id = TOOLTIP_ID_STACKED;
-          Object.assign(tooltip.style, TOOLTIP_STYLES);
-          document.body.appendChild(tooltip);
-        }
-        tooltip.innerHTML = `<div style="display:grid;gap:4px;"><div style="font-weight:500;border-bottom:1px solid hsl(var(--border));padding-bottom:4px;margin-bottom:2px;">${escapeHtml(categoryLabel)}</div>${rows.join("")}</div>`;
-        tooltip.style.opacity = "1";
-        clampTooltipPosition(tooltip, event.pageX, event.pageY);
+        showStackedTooltip(event, categoryLabel, items, {
+          formatter: tooltipFormatter,
+        });
       })
-      .on("mousemove", (event: MouseEvent) => {
-        const tooltip = document.getElementById(TOOLTIP_ID_STACKED) as HTMLDivElement | null;
-        if (tooltip) {
-          clampTooltipPosition(tooltip, event.pageX, event.pageY);
-        }
-      })
+      .on("mousemove", (event: MouseEvent) => updateTooltipPosition(event))
       .on("mouseleave", () => {
         hoverLine.attr("stroke-opacity", 0);
-        const tooltip = document.getElementById(TOOLTIP_ID_STACKED);
-        if (tooltip) tooltip.style.opacity = "0";
+        hideTooltip();
       });
 
     // X axis — 5年ごとに間引き
@@ -300,7 +276,7 @@ export function StackedAreaChart({
     unit,
     yFormat,
     tooltipFormatter,
-    showTooltip,
+    showStackedTooltip,
     hideTooltip,
     updateTooltipPosition,
     yDomainProp,
@@ -324,6 +300,8 @@ export function StackedAreaChart({
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
           className="h-auto w-full"
+          role="img"
+          aria-label={accessibleLabel}
         />
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/50">

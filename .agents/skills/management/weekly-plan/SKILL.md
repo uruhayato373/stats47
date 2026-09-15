@@ -40,9 +40,9 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
-- 投稿台帳 `.Codex/state/sns/posts.json` からステータス別集計 (完全DBレス。旧 D1 sns_posts は廃止):
+- 投稿台帳 `.claude/state/sns/posts.json` からステータス別集計 (完全DBレス。旧 D1 sns_posts は廃止):
   ```bash
-  node -e 'const s=require("./.Codex/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
+  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
 - .local/r2/blog/ 配下の記事数（公開済み / 下書き）
 - ブログ記事の未実行企画（`ls docs/22_YouTube企画/backlog/ docs/30_note記事企画/backlog/ 2>/dev/null | head -20` 件数）
@@ -61,49 +61,49 @@ primary_agent: strategy-advisor
   curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'
   ```
 
-- SNS 投稿実績（投稿台帳 `.Codex/state/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
+- SNS 投稿実績（投稿台帳 `.claude/state/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
   ```bash
-  node -e 'const s=require("./.Codex/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
+  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
-  - **SNS 週次運用の入口は `/sns-weekly-plan`**（先週計測→題材→IG/X 生成予約→消化チェック）。正典 `.Codex/rules/sns-content-standards.md`
+  - **SNS 週次運用の入口は `/sns-weekly-plan`**（先週計測→題材→IG/X 生成予約→消化チェック）。正典 `.claude/rules/sns-content-standards.md`
 
 - SNS パフォーマンス
   - **最新値**: 投稿台帳 posts.json の impressions/likes/replies キャッシュから集計（`/update-sns-metrics` 実行後に更新済み）
     ```bash
-    node -e 'const s=require("./.Codex/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,replies:0};a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.replies+=p.replies||0}console.log(JSON.stringify(acc,null,2))'
+    node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,replies:0};a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.replies+=p.replies||0}console.log(JSON.stringify(acc,null,2))'
     ```
-  - **時系列履歴**: `.Codex/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
+  - **時系列履歴**: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
 
 - GA4/GSC メトリクス
-  → KPI・WoW・フェーズゲートは`.Codex/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`の
+  → KPI・WoW・フェーズゲートは`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`の
     `finalized7d`と、その直前で重複しない`previous7d`を参照する
-  → `.Codex/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/`の28日
+  → `.claude/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/`の28日
     overview/pages/queries/devicesは機会発見にだけ使い、前回snapshotとの差をWoWと呼ばない
   → GA4 KPIはJapan-only clean slice。rawはpollution監視に限定する
   → snapshot が存在しない場合は「計測データなし」と報告
 
-- NSM 実験進捗（`.Codex/state/experiments.json` から active 実験を取得）
+- NSM 実験進捗（`.claude/state/experiments.json` から active 実験を取得）
   ```bash
-  node .Codex/scripts/lib/experiments-state.mjs active
-  node .Codex/scripts/lib/experiments-state.mjs pending
+  node .claude/scripts/lib/experiments-state.mjs active
+  node .claude/scripts/lib/experiments-state.mjs pending
   ```
   → running / measuring 中の実験と、pending_user_actions を把握
   → 次週の計画に「continue 実験」「measure 実行予定」を組み込む準備
 
-- NSM 週次 snapshot JSON（`.Codex/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）
+- NSM 週次 snapshot JSON（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）
   → weekly-review の Phase 0 で生成されたサマリ。engagedSessions / clicks / position 等の前週比
 
 - SEO カバレッジ指標（完全DBレス。旧 D1 `seo_tracking` / `seo_actions` テーブルは廃止）
-  → GSCカバレッジ推移: `.Codex/state/gsc/LATEST.md`
-  → `.Codex/state/metrics/gsc/history.csv`はローリング28日系列（列名`*_rolling28d`・機会発見用）。
+  → GSCカバレッジ推移: `.claude/state/gsc/LATEST.md`
+  → `.claude/state/metrics/gsc/history.csv`はローリング28日系列（列名`*_rolling28d`・機会発見用）。
     週次ゲートは`history-finalized7d.csv`と`LATEST.md`上段の確定7日KPIを使う
-    （`.Codex/skills/analytics/search-growth/reference/weekly-cycle-contract.md`）
-  → 未完了 SEO 施策: `.Codex/todo/improvements.md`（status != done の行）
+    （`.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md`）
+  → 未完了 SEO 施策: `.claude/todo/improvements.md`（status != done の行）
   → トレンド（改善中 / 悪化中 / 横ばい）を判定し計画に反映
 
 - GSC運用サイクル
   ```bash
-  node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage review-input
+  node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input
   ```
   → FAIL項目は今週のMust候補にする。特に前週review欠落、候補判断0件、確定verdict未反映を他の検索施策より先に閉じる
 
@@ -115,23 +115,23 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
-- **事業計画の実行state**: `npm run business-plan:check` と
+- **事業計画の実行state**: 先に `npm run business-plan:check` と
   `npm run business-plan:build-state` を実行し、`.claude/state/business-plan/latest.json` の
-  `nextActions`・`sourceFreshness`・`eventCounts` を読む。`ready` / `in-progress` のみ候補にし、
-  `gated` はreadinessGateの証拠が揃うまで着手しない。未計測は0へ変換しない。
-- **今月の月次計画（重点テーマ）**: `.Codex/todo/monthly.md` の frontmatter `focus_themes` と「構成タスク」を Read
+  `nextActions`・`sourceFreshness`・`eventCounts` を読む。`ready` / `in-progress` だけを候補にし、
+  `gated` をMustへ入れる場合はreadinessGateを満たす証拠を明記する。未計測は0へ変換しない。
+- **今月の月次計画（重点テーマ）**: `.claude/todo/monthly.md` の frontmatter `focus_themes` と「構成タスク」を Read
   ```bash
-  cat .Codex/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
+  cat .claude/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
-- docs/02_実装計画/00_INDEX.md の現在地と、`.Codex/todo/04`〜`06` の未完了タスク
-- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .Codex/todo/backlog.md の tier 見出し (🔴🟡🟢🟣) で優先度判定
+- docs/02_実装計画/00_INDEX.md の現在地と、`.claude/todo/04`〜`06` の未完了タスク
+- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .claude/todo/backlog.md の tier 見出し (🔴🟡🟢🟣) で優先度判定
 
-- 改善バックログ pending 一覧（**真実源**: `.Codex/todo/improvements.md`）
+- 改善バックログ pending 一覧（**真実源**: `.claude/todo/improvements.md`）
   ```bash
   # Tier 1/2 の pending / in-progress を表示
   grep -E "^\| (AFF|INDEXING|SEO|BLOG|ADSENSE|GA4|PSI|CWV|P0|Q-|CTR|CONTENT|AICONTENT)" \
-    .Codex/todo/improvements.md
+    .claude/todo/improvements.md
   ```
   → Tier 1 は Must 優先、Tier 2 は Should 候補として計画に組み込む
   → due が今週以内のエントリを最優先
@@ -141,39 +141,39 @@ primary_agent: strategy-advisor
   npm run search-growth:status
   npm run search-growth:triage      # レビュー対象の最大3件 (technical/content/measurement 各1)
   # 人間承認済み (status=approved) の一覧 — weekly-plan が採用してよいのはここだけ
-  jq '[.candidates[] | select(.status=="approved")]' .Codex/state/search-growth/candidates.json
+  jq '[.candidates[] | select(.status=="approved")]' .claude/state/search-growth/candidates.json
   ```
   → weekly-reviewで証拠確認・人間承認（`npm run search-growth:approve -- --candidate <ID>`で機械記録。
     週2件・全active WIP≤5をCLIが機械強制）された`status=approved`の候補だけを対象にする。
-    未承認候補を`.Codex/todo/improvements.md`へ自動追加しない。
+    未承認候補を`.claude/todo/improvements.md`へ自動追加しない。
   → 採用は最大1〜2件（technical/blockerとacquisition/contentを原則各1件）。全active施策のWIPは5以下。
   → CTR候補はpage×query・現行title/content・past effectを確認し、一括title書換えを計画しない。
   → 効果判定日は`npm run search-growth:measure -- --candidate <ID>`（14/28/56日）。
 
-- AdSense収益密度candidate（`.Codex/state/metrics/adsense/candidates-latest.json`・運用正典 `/adsense-improvement`）
+- AdSense収益密度candidate（`.claude/state/metrics/adsense/candidates-latest.json`・運用正典 `/adsense-improvement`）
   → 週次レビューで審査した最大3件のうち、**人間承認済みを最大1件/週だけ**採用する。AdSense active WIP≤2。
   → 1実験1レバー（lazy-load・slot・Auto ads・formatを同時に変えない）。rollback・guardrail
     （収益/GA4 sessions/viewability/LCP/CLS）・14/28日判定日を計画に明記する。
   → 計測が不完全な間（measurement-gap候補が出ている間）は広告枠を増やさない。
 
-- ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `.Codex/state/blog/remediation-queue.json`）
+- ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
   ```bash
   # 最新化 (audit fresh + GSC マージ、状態保持の upsert) → 次の 3 件を取り出す
-  node .Codex/scripts/blog/build-remediation-queue.mjs
-  node .Codex/scripts/blog/build-remediation-queue.mjs --next 3
+  node .claude/scripts/blog/build-remediation-queue.mjs
+  node .claude/scripts/blog/build-remediation-queue.mjs --next 3
   ```
   → pending 上位 3 件を「**ブログ品質是正 3 本**」として Phase 3 の **Must** に転載する (must-fix レーン優先)。
   → 実行は `/brushup-blog --target queue --next 3` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS → publish)。
-  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `.Codex/rules/blog-remediation-loop.md`。
+  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `.claude/rules/blog-remediation-loop.md`。
 
-- ブログ新規記事キュー（**新規記事を継続拡充**・真実源: `.Codex/state/blog/topic-queue.json`）
+- ブログ新規記事キュー（**新規記事を継続拡充**・真実源: `.claude/state/blog/topic-queue.json`）
   ```bash
   # 週次 cron (fetch-metrics-weekly.yml) で再生成済だが、当日最新化して次の 4-5 件を取り出す
-  node .Codex/scripts/blog/build-topic-queue.mjs
-  node .Codex/scripts/blog/build-topic-queue.mjs --next 5
+  node .claude/scripts/blog/build-topic-queue.mjs
+  node .claude/scripts/blog/build-topic-queue.mjs --next 5
   ```
   → must-write レーン上位を「**新規記事 N 本**」として Phase 3 の **Must** に転載する（型ミックスを整える:
-    月次目標 B5/D2 4/A3-4/F3/G1-2、`.Codex/agents/blog-seo-strategist.md` §戦略コンテキスト）。
+    月次目標 B5/D2 4/A3-4/F3/G1-2、`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト）。
   → 実行は `/draft-from-trend --from queue`（1 本ずつ）→ generate-article-charts → **blog-critic PASS** → publish。
   → A/D2型は実query需要があるdirect-intentを優先する。元ranking URLのimpressionsを新記事需要へ流用しない。
   → ⚠️ **B 型は決定的フィルタ（`lib/topic-queue-spurious-core.mjs`: 自己/派生・同義・規模ペア・
@@ -181,19 +181,19 @@ primary_agent: strategy-advisor
     相関テーマ自体のpage×query需要と「見かけの相関 vs 真因」を説明できる機序があるか人手で吟味してから採用する
     （キューは候補生成であり最終決定ではない）。
   → これも毎週の**定常 Must**。是正キュー（既存改善）と新規キュー（新規拡充）の両輪で回す。
-    仕組み: `.Codex/skills/blog/plan-article-queue/SKILL.md`。
+    仕組み: `.claude/skills/blog/plan-article-queue/SKILL.md`。
 
 - レビュー由来の未完了策
-  `.Codex/todo/{improvements,backlog}.md` のIDを確認し、同じ原因の重複タスクを統合
+  `.claude/todo/{improvements,backlog}.md` のIDを確認し、同じ原因の重複タスクを統合
 
 - 前週のレビュー + 現在計画の残タスク自動抽出
-  cat .Codex/todo/weekly.md 2>/dev/null
-  ls -t .Codex/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -1
+  cat .claude/todo/weekly.md 2>/dev/null
+  ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -1
   → 上書き前の current-week と前週レビューを取得
   → 計画 vs 実績の差分と「来週への申し送り」を抽出
   → **前週計画の `- [ ] xxx` (未チェック) を抽出** し、Phase 3 の「前週からの持ち越し」セクションに自動転載:
     ```bash
-    grep -E "^- \[ \]" .Codex/todo/weekly.md 2>/dev/null || true
+    grep -E "^- \[ \]" .claude/todo/weekly.md 2>/dev/null || true
     ```
   → 持ち越しが 3 件以上なら Phase 4 で「工数見積もりが楽観的すぎないか」を厳しく検証
 
@@ -235,12 +235,13 @@ primary_agent: strategy-advisor
 3. **機会**: Track E のトレンド機会を評価。stats47 データとマッチするトレンドがあれば記事化・SNS投稿の優先度を上げる
 4. **リスク**: 放置すると悪化すること（技術的負債、トークン失効、コンテンツ枯渇）
 5. **タイミング**: 今週でなければ意味がないこと（季節性、ニュース連動）
+6. **事業計画ゲート**: 地域分析pilot、商品、B2B、Pro/AIの開始条件を満たしたか。売上目標は予測でなく仮説として扱う
 
 ### Phase 2.5: NSM 実験候補の提案
 
 `/nsm-experiment propose` を呼んで、現状メトリクスから新規実験候補 3-5 件を rubric 付きで取得する。
 
-- 入力: `.Codex/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` + `.Codex/skills/management/nsm-experiment/references/playbook.md`
+- 入力: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` + `.claude/skills/management/nsm-experiment/references/playbook.md`
 - 出力: 候補リスト（impact / effort / learning / certainty の加重合計順）
 - 候補は Phase 3 の Must / Should の選択肢として検討する
 
@@ -273,7 +274,7 @@ Phase 3 の提案を以下の3つの視点で攻撃する:
    - 「自動化」「リファクタ」が手段の目的化になっていないか
 
 2. **「先週と同じ失敗を繰り返してないか？」**
-   - 上書き前の `.Codex/todo/weekly.md` と前週レビューを照合
+   - 上書き前の `.claude/todo/weekly.md` と前週レビューを照合
    - 毎週 Must に入りながら未達のタスクは、分割するか優先度を上げる
    - 工数見積もりが楽観的でないか
 
@@ -285,7 +286,7 @@ Phase 3 の提案を以下の3つの視点で攻撃する:
 
 ### Phase 5: 出力
 
-Write tool で `.Codex/todo/weekly.md` を上書きする。frontmatter を必ず含めること。
+Write tool で `.claude/todo/weekly.md` を上書きする。frontmatter を必ず含めること。
 
 ```yaml
 ---
@@ -302,7 +303,7 @@ tags: []
 保存後に次週接続ゲートを実行する。
 
 ```bash
-node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage plan --write --strict
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage plan --write --strict
 ```
 
 FAILが残る場合は週次計画を「完了」と報告せず、GSC運用サイクルの未接続項目をMustへ反映して再実行する。
@@ -364,11 +365,11 @@ tags: []
 
 ## 改善ログ pending (今週着手対象)
 
-<!-- .Codex/todo/improvements.md から今週着手する Tier 1/2 エントリを転載。
+<!-- .claude/todo/improvements.md から今週着手する Tier 1/2 エントリを転載。
      真実源は improvements.md、当週ビューは週次計画。 -->
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
-| 1 | gsc | T0-DECAY-01 | in-progress | 2026-06-14 | Codex |
+| 1 | gsc | T0-DECAY-01 | in-progress | 2026-06-14 | claude |
 
 ## 今週のタスク
 
@@ -389,7 +390,7 @@ tags: []
 ## 関連ドキュメント・施策
 
 <!-- 改善/機能backlog ID、Pre-Mortem、NSM実験、snapshot期間を列挙 -->
-- 前週レビュー: `.Codex/skills/management/weekly-review/reference/reviews/YYYY-W(n-1).md`
+- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-W(n-1).md`
 - 前月Pre-Mortem由来のTODO ID（該当時）
 - 関連改善施策: `SEARCH-GROWTH-CYCLE-01`（該当ID）
 
@@ -408,16 +409,16 @@ tags: []
 
 ## 保存先
 
-- 本スキル出力: `.Codex/todo/weekly.md`
-- ペアの週次レビュー: `.Codex/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
-- Phase 4 では `.Codex/todo/` のレビュー由来項目と対象SSOTのGit履歴を参照する
+- 本スキル出力: `.claude/todo/weekly.md`
+- ペアの週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
+- Phase 4 では `.claude/todo/` のレビュー由来項目と対象SSOTのGit履歴を参照する
 
 ## 参照
 
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
 - `gh issue list --state open --label enhancement` — 未解決の機能改善 Issue（残存ラベル）
-- `.Codex/todo/weekly.md` / `.Codex/skills/management/weekly-review/reference/reviews/` — 現在計画と過去レビュー
-- 投稿台帳 `.Codex/state/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `.Codex/skills/analytics/sns-metrics-improvement/snapshots/` — SNS コンテンツ状況・メトリクス
-- `.Codex/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
-- `.Codex/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Track E で不足時に提案、`--source all` で全 6 ソース統合）
+- `.claude/todo/weekly.md` / `.claude/skills/management/weekly-review/reference/reviews/` — 現在計画と過去レビュー
+- 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNS コンテンツ状況・メトリクス
+- `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
+- `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Track E で不足時に提案、`--source all` で全 6 ソース統合）

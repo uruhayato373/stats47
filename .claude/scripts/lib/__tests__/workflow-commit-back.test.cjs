@@ -306,3 +306,74 @@ test('[mutation] 読み取り目的の gh pr view (代入) は検出しない', 
   const run = 'NUM=$(gh pr view "$BRANCH" --json number -q .number)';
   assert.deepEqual(findStalePrExistenceGuard(run), []);
 });
+
+// CI artifact は「読み手が要る間だけ」置く。retention 未指定は GitHub 既定の 90 日で、
+// 誰も読まない検証出力が四半期残る。上限 30 日、それを超える例外は理由付きで allowlist に置く。
+const ARTIFACT_RETENTION_MAX_DAYS = 30;
+const ARTIFACT_RETENTION_ALLOWLIST = {
+  'pr-quality-check.yml': { 'coverage-report': 90 }, // coverage 推移を四半期で比較する
+};
+
+function collectArtifactUploads(workflowFile, dir = WORKFLOW_DIR) {
+  const doc = yaml.load(fs.readFileSync(path.join(dir, workflowFile), 'utf8'));
+  const uploads = [];
+  for (const job of Object.values(doc.jobs ?? {})) {
+    for (const step of job.steps ?? []) {
+      if (!String(step.uses ?? '').startsWith('actions/upload-artifact@')) continue;
+      uploads.push({ name: step.with?.name ?? '(unnamed)', retention: step.with?.['retention-days'] });
+    }
+  }
+  return uploads;
+}
+
+function auditArtifactRetention(dir, allowlist = ARTIFACT_RETENTION_ALLOWLIST) {
+  const violations = [];
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.yml'))) {
+    for (const upload of collectArtifactUploads(file, dir)) {
+      const allowed = allowlist[file]?.[upload.name];
+      if (upload.retention === undefined) violations.push(`${file}: ${upload.name} retention-days 未指定`);
+      else if (Number(upload.retention) > (allowed ?? ARTIFACT_RETENTION_MAX_DAYS))
+        violations.push(`${file}: ${upload.name} retention-days=${upload.retention}`);
+    }
+  }
+  return violations;
+}
+
+test('upload-artifact は retention-days を明示し 30 日以内に収める (allowlist 以外)', () => {
+  assert.deepEqual(auditArtifactRetention(WORKFLOW_DIR), []);
+});
+
+test('[mutation] retention 未指定と 31 日超を検出する', () => {
+  const dir = fs.mkdtempSync(path.join(tmpdir(), 'stats47-artifact-retention-'));
+  const original = WORKFLOW_DIR;
+  const file = path.join(dir, 'probe.yml');
+  fs.writeFileSync(
+    file,
+    [
+      'jobs:',
+      '  a:',
+      '    steps:',
+      '      - uses: actions/upload-artifact@v7',
+      '        with:',
+      '          name: no-retention',
+      '      - uses: actions/upload-artifact@v7',
+      '        with:',
+      '          name: too-long',
+      '          retention-days: 31',
+      '      - uses: actions/upload-artifact@v7',
+      '        with:',
+      '          name: fine',
+      '          retention-days: 7',
+    ].join('\n')
+  );
+  assert.deepEqual(auditArtifactRetention(dir, {}), [
+    'probe.yml: no-retention retention-days 未指定',
+    'probe.yml: too-long retention-days=31',
+  ]);
+  // allowlist に載せた組だけが上限を超えられる
+  assert.deepEqual(auditArtifactRetention(dir, { 'probe.yml': { 'too-long': 31 } }), [
+    'probe.yml: no-retention retention-days 未指定',
+  ]);
+  fs.rmSync(dir, { recursive: true, force: true });
+  assert.equal(WORKFLOW_DIR, original);
+});

@@ -21,7 +21,11 @@ export default defineConfig({
     globals: true,
     environment: "node",
     include: ["src/**/__tests__/**/*.test.ts", "src/**/*.test.ts"],
-    exclude: ["**/node_modules/**", "**/dist/**"],
+    exclude: ["**/node_modules/**", "**/dist/**",
+      ...(process.env.STATS47_COVERAGE_SPLIT === '1'
+        ? criticalCoverage.modules.filter((m) => m.workspace === 'packages/data-configs').flatMap((m) => m.tests)
+        : []),
+    ],
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],

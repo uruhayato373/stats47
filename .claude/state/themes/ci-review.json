@@ -1,44 +1,35 @@
 {
   "status": "no-change",
-  "summary": "今回のCI証拠を確認した。runtime監査はrailway(390px)・real-income(1440px)・tourism(390px)の3テーマでnetwork:503+該当チャートsource-unavailableを検出したが、これはTHEME-EXPANSION-EFFECT-01が「9/18までに再観測」と予告していた対象そのもので、発生原因(Cloudflareエッジの一時挙動かCI自体のバースト負荷か)は今回も特定できなかった。evidence-based-judgment.mdの状況2/3に抵触するためリトライ追加等の推測修正はしていない。quality.jsonはerrors:0、warnings62件は既知のpartial-coverageで修正対象なし。実験チェックポイントはTHEME-STRUCTURE系がd7(2026-09-18)未到来でpending維持が正しく、THEME-EXP-001のd56は既存のinsufficient-dataのまま変更していない。候補105(地震曝露の住宅空間原典)はe-Stat統計地理情報システム(GIS statmap-search)がJS駆動SPAでWebFetchでは内容取得できず今回も未確認。不存在の断定はしていない。原典確認(sourceReviews)は、portfolio.jsonの officialSourceReviewedAt が全55テーマで2026-09-09(4日前・同月)と既に新しく、55テーマ全件の再検証は重複作業と判断し実施しなかった。結果としてコード変更は行っていない。次の条件: (a) 503は次回d7観測時点でも再発する場合、cf-rayとタイミングログを蓄積してから原因切り分けに着手する。(b) 候補105はブラウザ実行可能なツールでe-Stat GIS検索を開くか地域メッシュ統計の項目一覧PDFを直接確認する。",
+  "summary": "今回のCI証拠(ci-followup.json/runtime.json/runtime.log)を確認した。503+source-unavailableはaging-society(390)・fishery-marine(390)・real-income(390)・safety(390/1440)の4テーマ5件で、前回(09-13)のrailway/real-income/tourismから対象が入れ替わった。各失敗は自ページ再取得503と、同時刻に無関係な複数ranking/survey routeへのprefetchも503になる同一シグネチャで、110チェック中5件(約4.5%)の散発率も前回同水準。原因(CIバースト負荷かCloudflareエッジか)を切り分ける新規証拠はなく、evidence-based-judgment.mdの状況3・3-aに抵触するため推測修正はしていない。runtime-process:1はこの5件を反映した終了コードで別バグではない。quality.jsonはerrors:0、warnings62件は既存partial-coverageで新規劣化なし。experimentsはTHEME-STRUCTURE-*/THEME-LAUNCH-*系のd7が最短2026-09-18で未到来のためpending維持が正しく、THEME-EXP-001のd56は既存insufficient-dataのまま変更なし。monthly:false(月次確認日外)だが前回reviewが同月かつunreviewedThemes54件残存のため代表例(manufacturing/roads/healthcare)のsourceUrlを試みたところ、いずれも同一の総務省ポータルを指し、WebFetchは文字化けで内容確認不能、Bash経由curlも権限拒否で手段が尽きた。個別テーマの更新年・定義は今回確認できず不存在の断定もしていない。候補105は月次外のため対象外。コード変更なし。次の条件: (a) 503がd7再観測(09-18)以降も同シグネチャで続くならcf-ray蓄積で切り分け着手、(b) sourceUrl確認は文字コード変換対応の経路確保後に再試行。",
   "findings": [
     {
-      "themeKey": "railway",
-      "detail": "width=390でchart:railway-freight-trendがsource-unavailable。自ページ再取得503(cf-ray a3a4b54fddae19b0-ORD)+survey/freight-regional-flow-survey・ranking/railway-passengersのprefetch503が同時発生。THEME-EXPANSION-EFFECT-01が予告した再観測対象で、原因は今回も未特定のため修正せず。",
+      "themeKey": "aging-society",
+      "detail": "width=390でchart:cmp-pop-elderly-householdがsource-unavailable。自ページ再取得503+ranking/elderly-workers-ratio等のprefetch503が同時発生。前回reviewの railway/tourism と同一シグネチャで対象テーマが入れ替わっただけ。",
       "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:8067-8184",
+        ".local/ci/theme-followup/runtime.json:6062-6090",
         ".claude/state/themes/ci-followup.json"
+      ]
+    },
+    {
+      "themeKey": "fishery-marine",
+      "detail": "width=390でchart:theme-fishery-output-trendがsource-unavailable。自ページ再取得503が同時刻に発生、原因未特定。",
+      "evidenceRefs": [
+        ".local/ci/theme-followup/runtime.json:6198-6210"
       ]
     },
     {
       "themeKey": "real-income",
-      "detail": "width=1440でchart:real-income-cpi-breakdownがsource-unavailable。自ページ再取得503(cf-ray a3a4b2087d5de81a-ORD)+labor-wages等のprefetch503が同時発生。前回のTHEME-EXPANSION-EFFECT-01評価でも同テーマ・同型の503が既出(発生原因未確定)で、今回も再現したのみで新規原因証拠はない。",
+      "detail": "width=390でchart:real-income-cpi-breakdown-expensesがsource-unavailable。survey/retail-price-survey・ranking/gini-coefficient-disposable-incomeのprefetchも同時503。前回1440pxで同テーマが既出しており、幅を変えても再現する散発的事象。",
       "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:2522-2670",
-        ".claude/state/themes/ci-followup.json"
+        ".local/ci/theme-followup/runtime.json:8280-8305"
       ]
     },
     {
-      "themeKey": "tourism",
-      "detail": "width=390でchart:theme-tourism-hotel-supply-trendがsource-unavailable。survey/accommodation-survey・themes/tourism自ページ・themes一覧・japanページのprefetchが同時に503(23:21:33前後に集中)。railway/real-incomeと同一シグネチャ(自ページ再取得503→対応チャートのみsource-unavailable)。",
+      "themeKey": "safety",
+      "detail": "width=1440とwidth=390の両方でchart(safety-fire-casualties-donut / fire-emergency-trend-fire)がsource-unavailable。ranking/natural-disaster系のprefetchも同時503で、safety/(pref=all)自ページの再取得503が共通原因候補だが未確定。",
       "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:8539-8720"
-      ]
-    },
-    {
-      "themeKey": "earthquake-exposure",
-      "detail": "候補105(THEME-EXPANSION-IMPLEMENT-01)の住宅空間原典を再確認。e-Stat統計地理情報システム(gis/statmap-search?toukeiCode=00200522、住宅・土地統計調査)のメッシュ/小地域データ提供有無をWebFetchで確認しようとしたが、ページがJS駆動SPAでダウンロード対象一覧を読み取れず未確認のまま(前回試行のstat.go.jp/data/meshと同じツール限界)。全国住宅の原典が存在しないとは断定していない。既存の`.local/verification/themes/earthquake-housing-source/`成果物は本セッション環境に残存せず再検証不可。",
-      "evidenceRefs": [
-        "https://www.e-stat.go.jp/gis/statmap-search?page=1&type=1&toukeiCode=00200522",
-        "https://www.e-stat.go.jp/statistics/00200522",
-        ".claude/state/metrics/themes/2026-09-10-all-expansion.json:6062-6072"
-      ]
-    },
-    {
-      "themeKey": "population-dynamics",
-      "detail": "THEME-EXP-001のd56(due 2026-09-08)はbaseline不足(baseline-missing-or-low-sample等)によりinsufficient-dataのまま。既存CLI出力・保存済み観測を変更する根拠は今回なし。",
-      "evidenceRefs": [
-        ".claude/state/themes/experiments.json"
+        ".local/ci/theme-followup/runtime.json:3283-3298",
+        ".local/ci/theme-followup/runtime.json:9403-9448"
       ]
     }
   ],
@@ -104,7 +95,7 @@
     "water-services"
   ],
   "schemaVersion": 1,
-  "inputSha256": "98c971300fb3a9264d5b2d0aeae7077fc0d8ca23e54fe81be66f77bbfbd9b4df",
-  "reviewedAt": "2026-09-13",
+  "inputSha256": "cbe99c553e73fdcba4b6f770a51bcea99485c0e8d6a68d43db8131aa74f0cc47",
+  "reviewedAt": "2026-09-14",
   "month": "2026-09"
 }

@@ -1,6 +1,6 @@
 ---
 name: fetch-ga4-data
-description: Google Analytics 4 Data API からアクセスデータを取得する。Use when user says "GA4データ", "PV確認", "アクセス分析", "GA4 snapshot". PV・流入経路・デバイス別レポート対応。snapshot モードで週次 CSV を .Codex/skills/analytics/ga4-improvement/reference/snapshots/ に全件保存.
+description: Google Analytics 4 Data API からアクセスデータを取得する。Use when user says "GA4データ", "PV確認", "アクセス分析", "GA4 snapshot". PV・流入経路・デバイス別レポート対応。snapshot モードで週次 CSV を .claude/skills/analytics/ga4-improvement/reference/snapshots/ に全件保存.
 primary_agent: ga4-analyst
 co_agents: [ga4-analyst]
 ---
@@ -206,7 +206,7 @@ GA4 データは GSC より遅延が少なく、前日分まで取得可能。
 
 ## snapshot モード
 
-週次レビュー時に全レポートを全件取得し、`.Codex/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。git で施策 → 数値変化の履歴を追えるようにするのが目的。
+週次レビュー時に全レポートを全件取得し、`.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。git で施策 → 数値変化の履歴を追えるようにするのが目的。
 
 ### 呼び出し例
 
@@ -251,7 +251,7 @@ const dateRanges = [{ startDate: fmt(startDate), endDate: fmt(endDate) }];
 
 // 保存先
 const WEEK = '<YYYY-Www>'; // 引数から受け取る
-const OUT_DIR = path.resolve(`.Codex/skills/analytics/ga4-improvement/reference/snapshots/${WEEK}`);
+const OUT_DIR = path.resolve(`.claude/skills/analytics/ga4-improvement/reference/snapshots/${WEEK}`);
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
 // CSV ヘルパー
@@ -293,7 +293,7 @@ function toRow(row, dimNames, metricNames) {
 }
 
 // クリーン値フィルタ: country=Japan のセッションのみ抽出
-// 詳細: .Codex/memory/feedback_ga4_history_unreliable_wow.md
+// 詳細: .claude/memory/feedback_ga4_history_unreliable_wow.md
 const JAPAN_FILTER = {
   filter: { fieldName: 'country', stringFilter: { value: 'Japan' } },
 };
@@ -445,7 +445,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 スクリプト完了後、以下を報告する:
 
-- 保存先ディレクトリ: `.Codex/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/`
+- 保存先ディレクトリ: `.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/`
 - 各ファイルの行数
 - 主要指標サマリー（overview.csv の PV/users/sessions）
 

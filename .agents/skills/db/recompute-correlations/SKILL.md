@@ -14,7 +14,7 @@ R2 の `app/stats/<metric>/values.json` を入力に、指標ペアの相関を 
 `:memory:` SQLite** で集計してプロセス終了とともに破棄する。
 
 > ✅ **実装済み (2026-06-14)** — 実体は `packages/correlation/src/scripts/build-correlation-snapshot.ts`。
-> `/sync-snapshots` の `correlation` task として配線済み (`.Codex/skills/db/sync-snapshots/run.sh`)。
+> `/sync-snapshots` の `correlation` task として配線済み (`.claude/skills/db/sync-snapshots/run.sh`)。
 > 単体実行も可能。旧 SKILL が予定していた `recompute.ts` / D1 temp 方式は採らず、R2 観測値を直接読み
 > `:memory:` better-sqlite3 で集計する方式で実装した。
 

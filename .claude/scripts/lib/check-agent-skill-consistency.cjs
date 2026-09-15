@@ -10,7 +10,7 @@
  * 検出 (決定的):
  *   [E1] SKILL.md の primary_agent / co_agents が指す agent ファイルが存在するか
  *   [E2] SKILL.md 本文が参照する .claude/scripts|hooks のスクリプトが存在するか
- *   [E3] settings.json の hook command が指すファイルが存在するか
+ *   [E3] settings.json / .codex/hooks.json の hook command が指すファイルが存在するか
  *   [E4] 全 custom agent の frontmatter (name/description/model) が完全か
  *   [E5] 全 custom agent に Output Contract があるか
  *   [E6] 全 active skill の frontmatter (name/description/primary_agent) が完全か
@@ -19,6 +19,8 @@
  *   [E9] agent/skill frontmatter に YAML として危険な plain scalar が無いか
  *   [E10] Claude Code → Codex MCP と blog画像skillの入口がSSOTどおりか
  *   [E11] SNSチャネル方針 (YouTube master-first pilot / TikTok撤退) と生成経路が整合するか
+ *   [E12] Codex が読む生成物 (.agents/skills / .codex/agents) が .claude の SSOT と一致するか
+ *         (再生成: node .claude/scripts/lib/sync-codex-mirror.cjs)
  *   [W1] .claude/scripts/** のスクリプトがどこからも参照されていない (orphan)
  *   [W2] 非 dead の SKILL.md が参照する packages/**|apps/** の scripts が存在しない (dead-skill 検知)
  *
@@ -421,14 +423,16 @@ function checkSkillExternalScriptRefs(findings, scope) {
 }
 
 function checkHookFiles(findings) {
-  for (const sname of ["settings.json", "settings.local.json"]) {
-    const sp = path.join(ROOT, ".claude", sname);
+  // Codex 側の hooks.json も同じ検査に載せる (2026-09-14: .codex/hooks/*.js を廃止し .claude/hooks/ を共有)
+  for (const srel of [".claude/settings.json", ".claude/settings.local.json", ".codex/hooks.json"]) {
+    const sp = path.join(ROOT, srel);
     if (!fs.existsSync(sp)) continue;
+    const sname = srel;
     let json;
     try {
       json = JSON.parse(readSafe(sp));
     } catch {
-      findings.push({ level: "error", code: "E3", file: `.claude/${sname}`, msg: "JSON parse 失敗" });
+      findings.push({ level: "error", code: "E3", file: sname, msg: "JSON parse 失敗" });
       continue;
     }
     const hooks = json.hooks || {};
@@ -437,12 +441,12 @@ function checkHookFiles(findings) {
         for (const h of grp.hooks || []) {
           const cmd = h.command || "";
           // command 中の .claude/.../*.{js,cjs,mjs,sh} パスを抽出
-          const m = cmd.match(/\.claude\/[A-Za-z0-9._/-]+\.(?:js|cjs|mjs|sh|ts)/);
+          const m = cmd.match(/\.(?:claude|codex)\/[A-Za-z0-9._/-]+\.(?:js|cjs|mjs|sh|ts)/);
           if (m && !fs.existsSync(path.join(ROOT, m[0]))) {
             findings.push({
               level: "error",
               code: "E3",
-              file: `.claude/${sname}`,
+              file: sname,
               msg: `hook ${ev} の command が指す ${m[0]} が存在しない`,
             });
           }
@@ -518,6 +522,36 @@ function checkCodexMcpContract(findings, scope) {
       msg: "Codex repo skillはClaude skill物理SSOTへのsymlinkにする",
     });
   }
+}
+
+// [E12] Codex が読む生成物は .claude 側から機械生成する。手編集や取りこぼしはここで止める。
+// mirror が無い環境 (テスト fixture・部分 checkout) では検査しない。
+function checkCodexMirror(findings, scope) {
+  const roots = [".claude/skills/", ".claude/agents/", ".agents/skills/", ".codex/agents/"];
+  if (scope && ![...scope].some((file) => roots.some((r) => file.startsWith(r)))) return;
+  if (!fs.existsSync(path.join(ROOT, ".codex/agents")) || !fs.existsSync(path.join(ROOT, ".agents/skills"))) return;
+  let mirror;
+  try {
+    mirror = require("./sync-codex-mirror.cjs");
+  } catch (error) {
+    findings.push({ level: "error", code: "E12", file: ".claude/scripts/lib/sync-codex-mirror.cjs", msg: `読み込み失敗: ${error.message}` });
+    return;
+  }
+  let actions;
+  try {
+    actions = [...mirror.planSkills(), ...mirror.planAgents()];
+  } catch (error) {
+    findings.push({ level: "error", code: "E12", file: ".claude/agents", msg: `mirror 計画に失敗: ${error.message}` });
+    return;
+  }
+  if (actions.length === 0) return;
+  const shown = actions.slice(0, 8).map((a) => `[${a.op}] ${path.relative(ROOT, a.path).split(path.sep).join("/")}`);
+  findings.push({
+    level: "error",
+    code: "E12",
+    file: ".agents/skills + .codex/agents",
+    msg: `Codex mirror が SSOT とずれている (${actions.length} 件: ${shown.join(", ")}${actions.length > 8 ? ", …" : ""})。node .claude/scripts/lib/sync-codex-mirror.cjs で再生成する`,
+  });
 }
 
 function checkSnsChannelPolicy(findings, scope) {
@@ -792,6 +826,7 @@ function runChecks({ orphan, scope }) {
     checkHookFiles(findings);
   }
   checkCodexMcpContract(findings, scope);
+  checkCodexMirror(findings, scope);
   checkSnsChannelPolicy(findings, scope);
   if (orphan) checkOrphanScripts(findings);
   return findings;

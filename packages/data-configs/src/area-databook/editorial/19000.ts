@@ -90,5 +90,14 @@ export const YAMANASHI_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.pref.yamanashi.jp/oishii-mirai/nochikusanbutsu_ichiran.html",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "yugao",
+      name: "ユウガオ",
+      municipality: "富士北麓・南都留地域ほか",
+      description:
+        "富士北麓・南都留地域で栽培されるウリ科の夏野菜。かんぴょうの原料としても使われる品種で、山梨では味噌汁や煮物など家庭料理の具材として親しまれてきた。",
+      sourceUrl: "https://www.pref.yamanashi.jp/shokuhin-st/shokuiku/yamanashinoshoku/yuugao.html",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

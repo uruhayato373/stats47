@@ -235,9 +235,9 @@ stats47 の主力は 1,800+ 件のランキングページ。以下を重点チ�
 
 ### Phase 4: 出力
 
-監査全文はセッション内で提示する。未完了の改善だけを `.Codex/todo/improvements.md` へ
+監査全文はセッション内で提示する。未完了の改善だけを `.claude/todo/improvements.md` へ
 ID・優先度・対象URL・実行手順・停止条件・計測方法・完了条件付きで統合する。再現可能な機械結果は
-`.Codex/state/`、比較用のagent履歴は本skillの `reference/` に置く。
+`.claude/state/`、比較用のagent履歴は本skillの `reference/` に置く。
 
 ## 出力フォーマット
 
@@ -382,7 +382,7 @@ focus: "all | technical | content | keywords | programmatic"
 
 ## 前回レポートとの比較
 
-`.Codex/todo/improvements.md` とGSCのhistory/improvement logを読み:
+`.claude/todo/improvements.md` とGSCのhistory/improvement logを読み:
 - 前回アクションのstatusを確認
 - 主要指標の推移を比較
 - 未完了のP0/P1は同じIDを更新し、重複行を作らない
@@ -395,10 +395,10 @@ focus: "all | technical | content | keywords | programmatic"
 ### データ参照
 ```bash
 # カバレッジ指標の推移（GSC state。旧 seo_tracking の代替）
-cat .Codex/state/gsc/LATEST.md                                  # 最新サマリ
-cat .Codex/state/metrics/gsc/history.csv | tail -10             # 時系列（直近10件）
+cat .claude/state/gsc/LATEST.md                                  # 最新サマリ
+cat .claude/state/metrics/gsc/history.csv | tail -10             # 時系列（直近10件）
 # 未完了の SEO 施策（改善バックログ。旧 seo_actions の代替）
-grep -nE "status:\s*(pending|in.progress)" .Codex/todo/improvements.md
+grep -nE "status:\s*(pending|in.progress)" .claude/todo/improvements.md
 ```
 
 ### レポート出力時
@@ -406,7 +406,7 @@ grep -nE "status:\s*(pending|in.progress)" .Codex/todo/improvements.md
 - 改善バックログの未完了施策（status != done）をアクションリストに反映（重複登録しない）
 
 ### 新規施策の登録
-監査で新たに発見した改善施策は `.Codex/todo/improvements.md` に追記する（`improvement-triage` が status を管理する唯一の writer）。frontmatter/簡易表の行として tier・期日・target_metric を記録する（規約: `.Codex/rules/docs-vs-issues.md`）。
+監査で新たに発見した改善施策は `.claude/todo/improvements.md` に追記する（`improvement-triage` が status を管理する唯一の writer）。frontmatter/簡易表の行として tier・期日・target_metric を記録する（規約: `.claude/rules/docs-vs-issues.md`）。
 
 ## トーンと姿勢
 
@@ -423,17 +423,17 @@ grep -nE "status:\s*(pending|in.progress)" .Codex/todo/improvements.md
 
 ## サイト回遊グラフのルーティング
 
-`.Codex/todo/backlog.md`の`KAIYU-HUB-01`を監査・実装するときは、
+`.claude/todo/backlog.md`の`KAIYU-HUB-01`を監査・実装するときは、
 `reference/site-navigation-graph.md`を必ず読む。進捗と優先順位はTODO、node/edge、score、placement、
 GA4 event、段階実装、受入条件はreferenceを正典とする。Phase 0は`--focus content`のread-only監査として実行し、
 Phase 1以降へ自動的に進めない。
 
 ## 実証チェックリスト（監査結果を Issue/レポートに confirmed と書く前に必須）
 
-参照: `.Codex/rules/evidence-based-judgment.md`
+参照: `.claude/rules/evidence-based-judgment.md`
 
 - [ ] 検証コマンドを実行したか:
-  - インデックス状況: `node .Codex/scripts/gsc/url-inspection-daily.cjs` で URL 単位の coverageState / lastCrawlTime を取得（GSC impressions だけで「インデックス済み」と判定しない）
+  - インデックス状況: `node .claude/scripts/gsc/url-inspection-daily.cjs` で URL 単位の coverageState / lastCrawlTime を取得（GSC impressions だけで「インデックス済み」と判定しない）
   - 本番 HTTP: `curl -A "Mozilla/5.0 (compatible; Googlebot/2.1)" -o /dev/null -w "%{http_code}\n" https://stats47.jp/<path>`
   - 構造化データ: 公式 Rich Results テスト（`https://search.google.com/test/rich-results?url=<URL>`）
 - [ ] Google 検索仕様の主張は公式 URL（`developers.google.com/search/...`）を併記したか
@@ -446,15 +446,15 @@ Phase 1以降へ自動的に進めない。
 
 ## 参照
 
-- `.Codex/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得
-- `.Codex/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得
-- `.Codex/skills/blog/discover-trends/sources/gsc.md` — GSC トレンド検出（`/discover-trends --source gsc`）
+- `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得
+- `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得
+- `.claude/skills/blog/discover-trends/sources/gsc.md` — GSC トレンド検出（`/discover-trends --source gsc`）
 - `apps/web/src/app/sitemap.ts` — サイトマップ生成
 - `apps/web/src/lib/structured-data/` — 構造化データ実装
 - `apps/web/src/middleware.ts` — リダイレクト設定
 - `apps/web/tests/e2e/seo/` — SEO 関連 E2E テスト
-- `.Codex/state/gsc/LATEST.md` / `.Codex/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
-- `.Codex/todo/improvements.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
+- `.claude/state/gsc/LATEST.md` / `.claude/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
+- `.claude/todo/improvements.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
 - `reference/site-navigation-graph.md` — `KAIYU-HUB-01`のサイト横断回遊グラフ・レコメンド実装詳細
 
 ## page_components の責務分離監査 (area / theme)
@@ -463,7 +463,7 @@ Phase 1以降へ自動的に進めない。
 どちらのページも中途半端になる (判定基準: `docs/01_技術設計/03_情報設計.md`)。
 
 ```bash
-node .Codex/scripts/audit/page-components-audit.cjs
+node .claude/scripts/audit/page-components-audit.cjs
 ```
 
 git TS SSOT (`apps/web/scripts/data/page-components/<pageType>/<pageKey>.json`) を読み、

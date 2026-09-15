@@ -11,6 +11,7 @@ const MAGAZINES = readFileSync(join(NOTE_DIR, "note-magazine.mjs"), "utf8");
 const KAKEI = readFileSync(join(NOTE_DIR, "publish-kakei-one.sh"), "utf8");
 const PUBLISH_LIB = readFileSync(join(NOTE_DIR, "note-publish-lib.sh"), "utf8");
 const HASHTAG_UPDATER = readFileSync(join(NOTE_DIR, "update-published-hashtags.mjs"), "utf8");
+const CATALOG_ENTRIES_BUILDER = readFileSync(join(NOTE_DIR, "build-kakei-catalog-entries.mjs"), "utf8");
 
 test("new note publication serializes Profile 5 access and removes temporary Chrome state", () => {
   assert.match(PUBLISHER, /stats47-note-profile5\.lock/);
@@ -61,4 +62,9 @@ test("published hashtag updates lock Profile 5 and clean only resolved temporary
   assert.match(HASHTAG_UPDATER, /entry\.name\.startsWith\('browser-use-user-data-dir-'\)/);
   assert.doesNotMatch(HASHTAG_UPDATER, /rm -rf .*browser-use-user-data-dir/);
   assert.match(HASHTAG_UPDATER, /if \(options\.auditOnly\) return;\s+\n\s*acquireProfileLock\(\)/);
+});
+
+test("kakei catalog entry builder defaults a-/d-kakei magazine to s47-kakei-reading (not s47-economy)", () => {
+  assert.match(CATALOG_ENTRIES_BUILDER, /const magazine = "s47-kakei-reading";/);
+  assert.doesNotMatch(CATALOG_ENTRIES_BUILDER, /const magazine = "s47-economy"/);
 });

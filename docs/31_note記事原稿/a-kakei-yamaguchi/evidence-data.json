@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-yamaguchi",
+    "prefCode": "35000",
+    "prefName": "山口県",
+    "cityName": "山口市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:22.956Z",
+    "titleSha": "ad97d53e73f8f51d926bfd06687415baf41a492c0f6230602427905c88b3b7d1",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 0.7011485217022261,
+    "side": "below",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 35,
+    "value": 2.4,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 42,
+      "value": 19.1,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 6,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 43,
+      "value": 48.5,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 5,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

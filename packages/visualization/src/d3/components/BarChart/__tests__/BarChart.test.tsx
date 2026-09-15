@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { ChartDataNode } from "../../../types/base";
 import { BarChart } from "../BarChart";
@@ -47,5 +47,27 @@ describe("BarChart SVG structure", () => {
         const svg = container.querySelector("svg");
         expect(svg?.hasAttribute("width")).toBe(false);
         expect(svg?.hasAttribute("height")).toBe(false);
+    });
+
+    it("単位を支援技術と共通ツールチップへ渡す", async () => {
+        const { container } = render(
+            <BarChart title="人口" data={mockData} valueKey="value" unit="人" />
+        );
+
+        expect(
+            screen.getByRole("img", {
+                name: "棒グラフ「人口」。項目数: 2。単位: 人",
+            })
+        ).toBeTruthy();
+
+        const bar = container.querySelector("rect");
+        expect(bar).toBeTruthy();
+        fireEvent.mouseEnter(bar!);
+
+        await waitFor(() => {
+            const tooltip = document.getElementById("prefecture-map-tooltip");
+            expect(tooltip?.textContent).toContain("100");
+            expect(tooltip?.textContent).toContain("人");
+        });
     });
 });

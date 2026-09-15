@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "owner-occupied-housing-ratio",
+  "year": "2023",
+  "unit": "％",
+  "label": "持ち家比率",
+  "readerLabel": "持ち家比率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/owner-occupied-housing-ratio/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug a-kakei-kagawa --keys owner-occupied-housing-ratio --data-name owner-occupied-housing-ratio-prefecture-rankings",
+  "fetchedAt": "2026-09-15T09:47:51.778Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

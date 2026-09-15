@@ -47,10 +47,14 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() { }
 } as typeof ResizeObserver;
 
-// Radix UI Select 等で使用される DOM メソッドのモック
-window.HTMLElement.prototype.scrollIntoView = vi.fn();
-window.HTMLElement.prototype.hasPointerCapture = vi.fn();
-window.HTMLElement.prototype.releasePointerCapture = vi.fn();
+// Radix UI Select 等で使用される DOM メソッドのモック。
+// scripts 系の純 Node テスト (`// @vitest-environment node`) は jsdom を立てないので window が無い。
+// jsdom 起動が 1 ファイルあたり十数秒かかる Windows で pre-commit を縮めるための分岐 (2026-09-14)。
+if (typeof window !== "undefined") {
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  window.HTMLElement.prototype.hasPointerCapture = vi.fn();
+  window.HTMLElement.prototype.releasePointerCapture = vi.fn();
+}
 
 // Next.js Router のモック
 vi.mock("next/navigation", () => ({

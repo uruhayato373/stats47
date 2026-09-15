@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "private-rental-housing-rent-per-3-3m2",
+  "year": "2024",
+  "unit": "円",
+  "label": "民営家賃（3.3m²当たり月額）",
+  "readerLabel": "民営家賃（3.3m²当たり月額）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/private-rental-housing-rent-per-3-3m2/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug a-kakei-aichi --keys private-rental-housing-rent-per-3-3m2 --data-name private-rental-housing-rent-per-3-3m2-prefecture-rankings",
+  "fetchedAt": "2026-09-15T09:47:33.765Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

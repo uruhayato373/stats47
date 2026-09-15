@@ -111,21 +111,36 @@ function collectScriptsNeedingNodeModules() {
   };
   for (const r of roots) walk(r);
 
+  // needsInstall はファイルごとに新しい seen で探索するため、共有モジュールの読み込みと相対 import の
+  // stat 解決が何度も繰り返される (会社 Windows 実測: 157 秒中 読み込み 65 秒 + stat 39 秒)。
+  // 2 つは純関数なのでプロセス内でメモ化する。探索の判定ロジックは変えない。
+  const importsMemo = new Map();
   const readImports = (absolute) => {
+    if (importsMemo.has(absolute)) return importsMemo.get(absolute);
     let src;
     try {
       src = fs.readFileSync(absolute, 'utf8');
     } catch {
+      importsMemo.set(absolute, null);
       return null;
     }
     const specs = [];
     for (const m of src.matchAll(/(?:from|import)\s+["']([^"']+)["']/g)) specs.push(m[1]);
     for (const m of src.matchAll(/\brequire\(\s*["']([^"']+)["']\s*\)/g)) specs.push(m[1]);
+    importsMemo.set(absolute, specs);
     return specs;
   };
 
   /** 相対 import を解決して実ファイルを返す (拡張子省略・index も試す) */
+  const resolveMemo = new Map();
   const resolveRelative = (fromFile, spec) => {
+    const memoKey = path.dirname(fromFile) + '\0' + spec;
+    if (resolveMemo.has(memoKey)) return resolveMemo.get(memoKey);
+    const resolved = resolveRelativeUncached(fromFile, spec);
+    resolveMemo.set(memoKey, resolved);
+    return resolved;
+  };
+  const resolveRelativeUncached = (fromFile, spec) => {
     const base = path.resolve(path.dirname(fromFile), spec);
     const candidates = [
       base,

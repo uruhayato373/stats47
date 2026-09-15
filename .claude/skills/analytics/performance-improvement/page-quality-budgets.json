@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "description": "ページ肥大化・重複・表示速度低下の合否判定閾値 (page_type × metric_key の組で一意)。PSI/Lighthouseのbudgets.jsonとは別ファイル (対象がDOM/リンク/広告/構造化データなど静的解析中心のため)。comparison=absoluteは1回の計測値そのもの、delta_pctは直近履歴からの増加率(%)を見る。初期値はpage-quality:check初回実行時の実測を基に暫定設定し、以後は実測で調整する。",
+  "schema": {
+    "page_type": "対象テンプレート (home/prefecture-list/prefecture-detail/municipality/ranking/category/theme/geo-analysis/blog/survey/other/all)",
+    "metric_key": "計測項目キー (types.ts の MetricKey)",
+    "comparison": "absolute (単発閾値) | delta_pct (直近履歴からの増加率%)",
+    "threshold": "閾値",
+    "operator": "<= | >= | < | >",
+    "severity": "error | warning"
+  },
+  "budgets": [
+    { "page_type": "all", "metric_key": "html_bytes", "comparison": "absolute", "threshold": 900000, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "html_bytes", "comparison": "delta_pct", "threshold": 30, "operator": "<=", "severity": "error" },
+    { "page_type": "all", "metric_key": "rsc_bytes", "comparison": "absolute", "threshold": 500000, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "rsc_bytes", "comparison": "delta_pct", "threshold": 30, "operator": "<=", "severity": "error" },
+    { "page_type": "all", "metric_key": "dom_nodes", "comparison": "absolute", "threshold": 4000, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "dom_nodes", "comparison": "delta_pct", "threshold": 30, "operator": "<=", "severity": "error" },
+    { "page_type": "all", "metric_key": "duplicate_link_ratio", "comparison": "absolute", "threshold": 0.3, "operator": "<=", "severity": "error", "note": "同一hrefのリンクが全体の30%を超える=意図しない大量重複" },
+    { "page_type": "all", "metric_key": "duplicate_link_ratio", "comparison": "absolute", "threshold": 0.15, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "jsonld_syntax_errors", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "error" },
+    { "page_type": "all", "metric_key": "jsonld_bytes", "comparison": "absolute", "threshold": 50000, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "jsonld_bytes", "comparison": "delta_pct", "threshold": 30, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "ad_duplicate_count", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "同一クリック先の広告リンクが同一ページに複数回出現" },
+    { "page_type": "all", "metric_key": "console_errors", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "error" },
+    { "page_type": "all", "metric_key": "page_errors", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "error" },
+    { "page_type": "all", "metric_key": "mobile_horizontal_scroll", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "error" },
+    { "page_type": "all", "metric_key": "small_tap_targets", "comparison": "absolute", "threshold": 5, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "lcp_ms", "comparison": "absolute", "threshold": 4000, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "cls", "comparison": "absolute", "threshold": 0.25, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "inp_ms", "comparison": "absolute", "threshold": 500, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "ttfb_ms", "comparison": "absolute", "threshold": 1500, "operator": "<=", "severity": "warning" },
+
+    { "page_type": "prefecture-detail", "metric_key": "dom_nodes", "comparison": "absolute", "threshold": 3500, "operator": "<=", "severity": "warning", "note": "2026-09 area-all-optimizationでDOM削減対応後の目安。実測で調整する" },
+    { "page_type": "ranking", "metric_key": "html_bytes", "comparison": "absolute", "threshold": 700000, "operator": "<=", "severity": "warning", "note": "PERF-RANKING-PAYLOAD-01対応後の目安。実測で調整する" }
+  ]
+}

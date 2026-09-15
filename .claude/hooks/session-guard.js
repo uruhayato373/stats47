@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * session-guard.js — 同一 working copy で複数 Claude セッションが同時稼働しているかを検知し、
+ * session-guard.js — 同一 working copy または同一タスクで Codex / Claude セッションが同時稼働しているかを検知し、
  * SessionStart 時に警告する (git race の事前防止)。
  *
  * 背景: 2 セッションが同一 cwd で動くと .git (HEAD/index/refs/working tree) を共有し、commit 混入・
@@ -8,22 +8,48 @@
  * feedback_shared_working_copy_git_race は「警告するだけで防止しない」状態だった。本フックは
  * **検知して警告する機構**を足す (①の穴埋め)。
  *
- * 仕組み: セッションごとに .claude/state/session-locks/<sessionId>.json に last_seen を記録。
- *   - SessionStart: 自分のロックを登録 + 同一 cwd の「fresh(=45分以内に活動)な他セッション」があれば警告を stdout。
- *   - Stop:        自分のロックの last_seen を更新 (稼働中の証跡)。警告は出さない (静かに refresh)。
- * cwd キー = CLAUDE_PROJECT_DIR の realpath (= working copy root)。worktree / 別 clone は path が異なるため
- * 警告対象外 = 「安全に分離された並行作業」は邪魔しない。
- *
- * 設計上の安全性: 例外を投げず常に exit 0 (フックがセッションを壊さない)。
- * 登録: .claude/settings.json hooks.SessionStart と hooks.Stop の両方。
- * 関連: memory feedback_shared_working_copy_git_race / .claude/state/session-locks/ (gitignore 済)
+ * Git common directory の session-locks を共有し、CLIでCodexからも登録・確認・終了できる。
+ * 同一作業場所または同じtaskの45分以内の活動を警告する。7日で一時メモを回収する。
+ * 旧 .claude/state/session-locks も移行期間の読み取りに含める。
+ * --status / --check は読み取りのみ。--register / --release は自分の記録だけを更新する。
+ * 使い方・担当引継ぎ: .claude/rules/local-environment.md「Codex / Claude の作業共有」。
+ * テスト: .claude/scripts/lib/__tests__/session-guard.test.cjs
  */
 "use strict";
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("node:child_process");
+const { createHash } = require("node:crypto");
 
 const ROOT = process.env.CLAUDE_PROJECT_DIR || process.cwd();
-const LOCK_DIR = path.join(ROOT, ".claude/state/session-locks");
+// worktree 間でも同じ作業状況を読む。Git外のfixtureはローカルへ退避する。
+function commonDirectory() {
+  try {
+    return execFileSync("git", ["rev-parse", "--path-format=absolute", "--git-common-dir"],
+      { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], windowsHide: true }).trim();
+  } catch { return path.join(ROOT, ".claude/state"); }
+}
+const COMMON_DIR = commonDirectory();
+const LOCK_DIR = path.join(COMMON_DIR, "session-locks");
+const READ_DIRS = [...new Set([LOCK_DIR, path.join(ROOT, ".claude/state/session-locks"),
+  path.join(path.dirname(COMMON_DIR), ".claude/state/session-locks")])];
+function lockPath(id) {
+  return path.join(LOCK_DIR, createHash("sha256").update(id).digest("hex") + ".json");
+}
+function records() {
+  const found = new Map();
+  for (const dir of READ_DIRS) {
+    if (!fs.existsSync(dir)) continue;
+    for (const name of fs.readdirSync(dir)) {
+      if (!name.endsWith(".json")) continue;
+      const rec = readJson(path.join(dir, name));
+      if (rec?.sessionId && (!found.has(rec.sessionId) || rec.lastSeen > found.get(rec.sessionId).lastSeen)) {
+        found.set(rec.sessionId, rec);
+      }
+    }
+  }
+  return [...found.values()];
+}
 const FRESH_MS = 45 * 60 * 1000; // 45分以内に last_seen 更新があれば「稼働中」とみなす
 const STALE_PRUNE_MS = 7 * 24 * 60 * 60 * 1000; // 7日超の古いロックは掃除
 
@@ -51,24 +77,10 @@ function cwdKey(input) {
   } catch {}
   return c;
 }
-function listOtherFresh(myId, key) {
-  let names = [];
-  try {
-    names = fs.readdirSync(LOCK_DIR);
-  } catch {
-    return [];
-  }
-  const t = Date.now();
-  const out = [];
-  for (const n of names) {
-    if (!n.endsWith(".json")) continue;
-    const l = readJson(path.join(LOCK_DIR, n));
-    if (!l || !l.sessionId || l.sessionId === myId) continue;
-    if (l.cwd !== key) continue; // 同一 working copy のみ (worktree/別clone は別 path = 安全)
-    if (t - (l.lastSeen || 0) > FRESH_MS) continue; // stale は除外
-    out.push(l);
-  }
-  return out;
+function listOtherFresh(myId, key, task) {
+  return records().filter((rec) => rec.sessionId !== myId && !rec.released &&
+    Date.now() - (rec.lastSeen || 0) <= FRESH_MS &&
+    (rec.cwd === key || (task && rec.task === task)));
 }
 function prune() {
   let names = [];
@@ -89,12 +101,14 @@ function prune() {
     }
   }
 }
-function upsert(myId, key) {
+function upsert(myId, key, details = {}) {
   try {
     fs.mkdirSync(LOCK_DIR, { recursive: true });
-    const f = path.join(LOCK_DIR, safeId(myId) + ".json");
+    const f = lockPath(myId);
     const prev = readJson(f);
     const rec = {
+      ...prev,
+      ...details,
       sessionId: myId,
       cwd: key,
       startedAt: prev && prev.startedAt ? prev.startedAt : new Date().toISOString(),
@@ -102,40 +116,74 @@ function upsert(myId, key) {
       lastSeenIso: new Date().toISOString(),
     };
     fs.writeFileSync(f, JSON.stringify(rec, null, 2) + "\n");
-  } catch {}
+    return true;
+  } catch { return false; }
 }
 
 function main() {
-  let input = {};
-  try {
-    input = JSON.parse(readStdin() || "{}");
-  } catch {
-    input = {};
+  const args = process.argv.slice(2);
+  const cli = args.length > 0;
+  const actions = ["--status", "--check", "--register", "--release"];
+  const options = ["--session", "--task", "--agent", "--note"];
+  if (cli) {
+    if (args.filter((arg) => actions.includes(arg)).length !== 1) {
+      console.error("--status / --check / --register / --release の1つを指定してください");
+      return 1;
+    }
+    for (let index = 0; index < args.length; index++) {
+      if (actions.includes(args[index])) continue;
+      if (!options.includes(args[index]) || !args[index + 1] || args[index + 1].startsWith("--")) {
+        console.error("不正な引数: " + args[index]); return 1;
+      }
+      index++;
+    }
   }
-  const myId = input.session_id || process.env.CLAUDE_SESSION_ID || "unknown";
+  function value(flag) {
+    const index = args.indexOf(flag);
+    return index >= 0 && args[index + 1] && !args[index + 1].startsWith("--") ? args[index + 1] : undefined;
+  }
+  let input = {};
+  // CLIはstdinを読まない。端末・Codexのパイプ待ちで停止しない。
+  if (!cli) {
+    try { input = JSON.parse(readStdin() || "{}"); } catch { input = {}; }
+  }
+  const myId = value("--session") || input.session_id || process.env.CODEX_THREAD_ID || process.env.CLAUDE_SESSION_ID;
   const event = input.hook_event_name || "";
   const key = cwdKey(input);
-
-  prune();
-  const others = listOtherFresh(myId, key); // upsert 前に「他」を見る
-  upsert(myId, key);
-
-  // 警告は SessionStart のみ (Stop は last_seen 更新だけ・静か)。--check で手動確認も可。
-  const wantWarn = event === "SessionStart" || process.argv.includes("--check");
-  if (wantWarn && others.length) {
-    const o = others[0];
-    const mins = Math.round((Date.now() - (o.lastSeen || 0)) / 60000);
-    const lines = [
-      `⚠️ 別の Claude セッションが同一 working copy で稼働中の可能性があります (git race 注意)。`,
-      `   working copy: ${key}`,
-      `   他セッション: ${others.length} 件 (例 ${safeId(o.sessionId).slice(0, 8)}… / 最終活動 ${mins}分前)`,
-      `   → HEAD / index / working tree を共有するため commit 混入・ファイル上書きが起こりえます。`,
-      `   回避: 別トピックは worktree に分離 → git worktree add ../stats47-<topic> <branch>`,
-      `   commit 時は git add で明示パス指定 + 'git diff --cached --name-only' で混入チェック。`,
-      `   詳細: memory feedback_shared_working_copy_git_race`,
-    ];
-    process.stdout.write(lines.join("\n") + "\n");
+  const task = value("--task");
+  if (args.includes("--status")) {
+    console.log(JSON.stringify(records().map((rec) => ({ ...rec,
+      active: !rec.released && Date.now() - (rec.lastSeen || 0) <= FRESH_MS })), null, 2));
+    return 0;
   }
-  process.exit(0);
+  if (args.includes("--register") || args.includes("--release")) {
+    if (!myId) { console.error("--session または CODEX_THREAD_ID / CLAUDE_SESSION_ID が必要です"); return 1; }
+  }
+  const others = listOtherFresh(myId, key, task);
+  const write = !cli || args.includes("--register") || args.includes("--release");
+  if (write && myId) {
+    prune();
+    const details = {};
+    if (value("--agent")) details.agent = value("--agent");
+    else if (process.env.CODEX_THREAD_ID) details.agent = "codex";
+    if (task) details.task = task;
+    if (value("--note")) details.note = value("--note");
+    if (args.includes("--release")) details.released = true;
+    else if (event === "SessionStart" || args.includes("--register")) details.released = false;
+    if (!upsert(myId, key, details) && cli) { console.error("作業状況を保存できませんでした"); return 1; }
+  }
+  const wantWarn = event === "SessionStart" || args.includes("--check") || args.includes("--register");
+  if (wantWarn && others.length) {
+    console.log("⚠️ Codex / Claude の作業が重複する可能性があります。担当と作業場所を確認してください。");
+    for (const rec of others) {
+      console.log(JSON.stringify({ session: safeId(rec.sessionId), agent: rec.agent || "claude",
+        task: rec.task || null, cwd: rec.cwd, note: rec.note || null, lastSeenIso: rec.lastSeenIso }));
+    }
+  }
+  // hookは警告のみ。明示checkの呼び元は重複をexit codeで扱える。
+  return cli && wantWarn && others.length ? 1 : 0;
 }
-main();
+if (require.main === module) {
+  try { process.exitCode = main(); }
+  catch (error) { console.error(error.message); process.exitCode = process.argv.length > 2 ? 1 : 0; }
+}

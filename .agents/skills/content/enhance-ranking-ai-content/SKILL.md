@@ -22,7 +22,7 @@ primary_agent: ranking-content-author
 
 **棲み分け**:
 - 本スキル: **リライト専用** (既存 ai-content.json が存在する前提)、NotebookLM 出典で内容深化
-- `/generate-ai-content`: **初回生成専用** (未生成 → 値、Codex/Gemini 並列、`--limit N --force`)
+- `/generate-ai-content`: **初回生成専用** (未生成 → 値、Claude/Gemini 並列、`--limit N --force`)
 - `/notebooklm-research`: **公開済ブログ記事 (`article.md`) 補強専用** (対象が異なる)
 - `/brushup-blog --target article`: **GSC ベース seoTitle / description 改訂** (メタ改訂、内容深化とは別軸)
 
@@ -32,23 +32,23 @@ primary_agent: ranking-content-author
 
 ### NotebookLM CLI
 - `~/bin/notebooklm` (notebooklm-py v0.4.1 以上)。初回認証は `notebooklm login`
-- 詳細セットアップ: `.Codex/skills/blog/notebooklm-research/SKILL.md`
+- 詳細セットアップ: `.claude/skills/blog/notebooklm-research/SKILL.md`
 
 ### ラッパースクリプト
-- `.Codex/scripts/notebooklm-cross-query.mjs` (横断クエリ、`--json` 出力)
+- `.claude/scripts/notebooklm-cross-query.mjs` (横断クエリ、`--json` 出力)
 - 利用可能 notebook 4 件 (SKILL.md 「利用可能ノートブック」参照、stats47 では主に「最新の白書」)
 
 ### ai_content 関連の既存資源（DBレス）
 - 型: `packages/ai-content/src/types/snapshot.ts` → `AiContentSnapshotRow` (yearCode, faq, regionalAnalysis, insights, prefectureCommentary)
 - 入力 + prompt: `packages/ai-content/src/scripts/build-input.ts` → `buildRankingContentPromptForKey(key, area, { extraContext })`（R2 観測値 + item.json から組む。**D1 不使用**）
 - prompt: `packages/ai-content/src/services/prompts/ranking-content-prompt.ts` → `buildRankingContentPrompt(input, { extraContext })`
-- 決定的ゲート: `.Codex/scripts/ai-content/audit-ai-content.mjs`（blocker 0 が公開条件）
+- 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`（blocker 0 が公開条件）
 - 保存: staging `.local/r2/app/ranking/<key>/ai-content.json` → R2 push は r2-publisher / `diff-push-r2 app/ranking`
 - reader: `packages/ai-content/src/repositories/read-ranking-ai-content-snapshot.ts`
 - R2 key: `app/ranking/<rankingKey>/ai-content.json`
 
 ### GSC 低 CTR 抽出
-- `.Codex/scripts/gsc/extract-low-ctr-ranking-pages.mjs --format json` で候補リスト取得
+- `.claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs --format json` で候補リスト取得
 
 ## 引数
 
@@ -90,30 +90,30 @@ NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.sta
 
 ```bash
 # (a) 社会的背景・政策動向
-node .Codex/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書" \
   "「{rankingName}」の社会的背景・近年の政策動向を白書記述から教えてください。具体的な事例があれば 2-3 件併記してください。"
 
 # (b) 上位県・下位県の地域特性
-node .Codex/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書" \
   "上位 5 県 ({top5}) と下位 5 県 ({bottom5}) の地域特性 (産業/人口/地理) を白書から整理してください。"
 
 # (c) 自治体事例・取組
-node .Codex/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書" \
   "「{rankingName}」に関連する自治体施策・取組を 2-3 件、白書から教えてください。"
 ```
 
-各 JSON 出力の `results[].response.answer` を Codex セッション側で読み取り、要約 → 後段の `extraContext` 用に整形。`references` (引用箇所) は出典記録用に保持。
+各 JSON 出力の `results[].response.answer` を Claude セッション側で読み取り、要約 → 後段の `extraContext` 用に整形。`references` (引用箇所) は出典記録用に保持。
 
 ### Step 4: (オプション) WebSearch 補完
 
-白書で情報不足な場合のみ実行 (時事性ある ranking、例: 観光客数 / 出生率 / 半導体生産)。Codex セッションの WebSearch ツールで 1-2 件のみ補完。検索結果はサマリ化して `extraContext` に追記。
+白書で情報不足な場合のみ実行 (時事性ある ranking、例: 観光客数 / 出生率 / 半導体生産)。Claude セッションの WebSearch ツールで 1-2 件のみ補完。検索結果はサマリ化して `extraContext` に追記。
 
 ### Step 5: リライト案生成
 
-`buildRankingContentPrompt(input, { extraContext: "..." })` で再生成プロンプトを構築 → Codex セッション側で実行 (or `npx tsx packages/ai-content/src/scripts/generate-parallel.ts` の wrapper)。
+`buildRankingContentPrompt(input, { extraContext: "..." })` で再生成プロンプトを構築 → Claude セッション側で実行 (or `npx tsx packages/ai-content/src/scripts/generate-parallel.ts` の wrapper)。
 
 `extraContext` の組み立て方:
 ```
@@ -148,7 +148,7 @@ node .Codex/scripts/notebooklm-cross-query.mjs --json \
 
 ```bash
 # 決定的ゲート（blocker 0 を確認）
-node .Codex/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
+node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 
 # R2 反映後の timestamp 確認 (公開エンドポイント)
 curl -I https://storage.stats47.jp/app/ranking/<rankingKey>/ai-content.json | grep -i last-modified
@@ -156,7 +156,7 @@ curl -I https://storage.stats47.jp/app/ranking/<rankingKey>/ai-content.json | gr
 
 ### Step 7: 改善ログに section append
 
-`.Codex/todo/improvements.md` に新 section を append (id: `AICONTENT-NNN` 連番、due は today + 28d):
+`.claude/todo/improvements.md` に新 section を append (id: `AICONTENT-NNN` 連番、due は today + 28d):
 
 ```markdown
 ## [AICONTENT-NNN] <ranking_key> ai_content リライト (NotebookLM 補強)
@@ -164,10 +164,10 @@ curl -I https://storage.stats47.jp/app/ranking/<rankingKey>/ai-content.json | gr
 - **status**: pending
 - **tier**: 2
 - **target_metric**: ranking-ctr
-- **owner**: Codex
+- **owner**: claude
 - **deployed_at**: YYYY-MM-DD (today)
 - **due**: YYYY-MM-DD (today + 28d)
-- **verification_command**: `node .Codex/scripts/gsc/extract-low-ctr-ranking-pages.mjs --filter-key <ranking_key>`
+- **verification_command**: `node .claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs --filter-key <ranking_key>`
 - **related_pr**: #N
 
 ### 背景 (Before)
@@ -193,7 +193,7 @@ NotebookLM クエリ数: 3
 WebSearch 補完: あり / なし
 差分: faq +N字 / regionalAnalysis +N字 / insights +N字 / prefectureCommentary +N字
 R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:MM:SSZ)
-改善ログ: .Codex/todo/improvements.md [AICONTENT-NNN]
+改善ログ: .claude/todo/improvements.md [AICONTENT-NNN]
 検証期日: YYYY-MM-DD (4 週後)
 ```
 
@@ -204,7 +204,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 - **1 セッション 1 件**: 引数は単一 ranking_key、glob / 複数指定 / バッチ実行は禁止
 - **月 5-10 件上限**: AI 生成感の蓄積・GSC ノイズ回避のため上限を運用ルールとして設定
 - **`--dry-run` 推奨**: 初回実行時は必ず `--dry-run` で diff を確認、納得後に再実行
-- **main 直接 push 禁止**: develop 経由必須 (`.Codex/rules/branch-workflow.md`)
+- **main 直接 push 禁止**: develop 経由必須 (`.claude/rules/branch-workflow.md`)
 - **frontmatter の `deployed_at` / `due` 更新**: Step 7 で必ず today / today+28d を埋める
 - **出典明記**: `extraContext` に notebook 名 + 引用箇所要約を必ず含める
 
@@ -225,7 +225,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 - NotebookLM 1 クエリ ~30 秒 × 3 = 約 90 秒/件
 - DBレスでは **1 件だけ R2 push**（旧 `exportRankingAiContentSnapshot` の全件 2,000 件 PUT は不要・削除済）
 - ISR キャッシュ (24h) があるため即時反映には個別 purge が必要 (`/purge-cdn` スキル参照)
-- 効果 (CTR / position) は **4 週後の GSC snapshot** でないと判定不能 ([`evidence-based-judgment.md`](.Codex/rules/evidence-based-judgment.md))
+- 効果 (CTR / position) は **4 週後の GSC snapshot** でないと判定不能 ([`evidence-based-judgment.md`](.claude/rules/evidence-based-judgment.md))
 
 ## 関連
 
@@ -233,15 +233,15 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 - `/notebooklm-research` (公開済ブログ用、本スキルとは対象が異なる)
 - `/brushup-blog --target article` (GSC ベース seoTitle 改訂、メタ改訂で内容深化とは別軸)
 - r2-publisher / `diff-push-r2 app/ranking` (Step 6 の staging → R2 push 担当)
-- 改善バックログ: `.Codex/todo/improvements.md`
-- 効果判定ルール: `.Codex/rules/evidence-based-judgment.md` (effect/* 付与前必読)
-- GSC 抽出: `.Codex/scripts/gsc/extract-low-ctr-ranking-pages.mjs`
-- NotebookLM ラッパー: `.Codex/scripts/notebooklm-cross-query.mjs`
+- 改善バックログ: `.claude/todo/improvements.md`
+- 効果判定ルール: `.claude/rules/evidence-based-judgment.md` (effect/* 付与前必読)
+- GSC 抽出: `.claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs`
+- NotebookLM ラッパー: `.claude/scripts/notebooklm-cross-query.mjs`
 
 ## 完了条件
 
 - [ ] 新 faq / regionalAnalysis / insights / prefectureCommentary が audit ゲート blocker 0 で staging に書き出され、R2 反映済
 - [ ] R2 `app/ranking/<ranking_key>/ai-content.json` の last-modified が更新済
-- [ ] `.Codex/todo/improvements.md` に `[AICONTENT-NNN]` section が append 済 (status: pending, due 4 週後)
+- [ ] `.claude/todo/improvements.md` に `[AICONTENT-NNN]` section が append 済 (status: pending, due 4 週後)
 - [ ] commit メッセージで `<ranking_key>` を明示
 - [ ] 改善ログ section に `verification_command` が埋まっており、4 週後に再実行で effect 判定可能

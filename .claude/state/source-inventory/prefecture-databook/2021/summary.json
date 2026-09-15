@@ -7,17 +7,17 @@
     "documents": 8,
     "pages": 580,
     "extractionComplete": true,
-    "internalCropCount": 1
+    "internalCropCount": 235
   },
   "itemCount": 580,
   "resolvedCount": 580,
   "resolutionCoverage": 1,
-  "actionableCount": 80,
+  "actionableCount": 79,
   "blockedCount": 0,
   "byResolution": {
-    "not-applicable": 500,
+    "not-applicable": 501,
     "context-only": 19,
-    "combined-analysis": 61
+    "combined-analysis": 60
   },
   "byKind": {
     "page": 580

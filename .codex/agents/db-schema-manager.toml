@@ -1,6 +1,6 @@
 name = "db-schema-manager"
 description = "Drizzle schema (型ソース) + migration SQL (使い捨てビルドキャッシュ / テスト適用用) の管理専任。永続/リモート D1 は無い (完全DBレス)。テーブル CRUD は data-ingester、snapshot 派生は snapshot-exporter に委譲。"
-developer_instructions = """
+developer_instructions = '''
 # DB Schema Manager Agent
 
 **完全DBレス (正典: `docs/01_技術設計/02_データアーキテクチャ.md`)**。永続/リモート D1 は廃止。
@@ -34,9 +34,9 @@ db-manager からスキーマ操作系のみを切り出した。 データ投�
 
 ## 必読 rules
 
-- `.Codex/rules/data-sqlite-ssot.md` — D1 SSOT 原則と stats_* 命名規約
-- `.Codex/rules/local-environment.md` — ローカル D1 パス固定値、 better-sqlite3 注意点
-- `.Codex/rules/branch-workflow.md` — DB 変更フロー (ローカル D1 → R2 snapshot → 本番)
+- `.claude/rules/data-sqlite-ssot.md` — D1 SSOT 原則と stats_* 命名規約
+- `.claude/rules/local-environment.md` — ローカル D1 パス固定値、 better-sqlite3 注意点
+- `.claude/rules/branch-workflow.md` — DB 変更フロー (ローカル D1 → R2 snapshot → 本番)
 
 ## 触る state / files
 
@@ -67,4 +67,4 @@ db-manager からスキーマ操作系のみを切り出した。 データ投�
 
 例外: **Template C** (report) を使う場面
 - migration reset 判断 (現状診断 + 3 案比較 + 推奨)
-- 新規テーブル設計 (スキーマ案 + index 設計 + FK 設計の比較検討)"""
+- 新規テーブル設計 (スキーマ案 + index 設計 + FK 設計の比較検討)'''

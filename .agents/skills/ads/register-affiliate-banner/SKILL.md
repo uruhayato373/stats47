@@ -9,7 +9,7 @@ co_agents: [devops-runner]
 アフィリエイト広告を **意図軸 (AffiliateVertical 10 軸) SSOT** に対話式で登録する。
 「在庫ギャップを提案 → ユーザーが ASP 提携 → 1 件ずつ登録」を 1 案件 = 1 エントリで回す。
 
-> **正典は `.Codex/rules/affiliate-ads-standards.md`**。本 skill は手順のみ。vertical 写像・プログラム表・
+> **正典は `.claude/rules/affiliate-ads-standards.md`**。本 skill は手順のみ。vertical 写像・プログラム表・
 > サイズ・GA4 手順の SSOT はルール側。**旧「categoryKey ごとに 8-9 件複製」方式は廃止** (vertical 1 つで解決)。
 
 ## モード
@@ -21,10 +21,10 @@ co_agents: [devops-runner]
 
 ## propose — 次に提携すべき案件を 1 件提案
 
-1. 在庫を棚卸し: `npx tsx .Codex/scripts/ads/audit-affiliate-inventory.ts` → **vertical カバレッジ** (10 軸)
+1. 在庫を棚卸し: `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts` → **vertical カバレッジ** (10 軸)
    の在庫ゼロ/手薄軸を特定。**ゼロ/手薄の軸は固定文でなく audit 出力
-   (`.Codex/state/ads/inventory-latest.json` の `coverage.gapVerticals` / `thinVerticals`) から読む**。
-2. トラフィックと突合: `.Codex/state/ads/ga4-affiliate-*.json` (GA4) + GSC の高トラフィックページ種別を見て、
+   (`.claude/state/ads/inventory-latest.json` の `coverage.gapVerticals` / `thinVerticals`) から読む**。
+2. トラフィックと突合: `.claude/state/ads/ga4-affiliate-*.json` (GA4) + GSC の高トラフィックページ種別を見て、
    「トラフィックはあるが在庫ゼロ/手薄」の vertical を優先度づけ。
 3. `rules §2 利用プログラム表` と照合し、その vertical の **要提携プログラムを 1 件**、根拠つきで提示:
    - Output: `Vertical | 提携先候補 | 根拠 (想定 imp 機会 / 単価帯 / 送客ページ) | ASP`。
@@ -40,13 +40,9 @@ state (`affiliate-catalog.json` / `a8-catalog.json`) を読む** — §2 の表�
 
 ユーザーが ASP で提携承認 → 広告コードを持っている前提。
 
-> **active登録の前提**: `programRef`があり、`affiliate-offer-profiles-data.ts`に同じ参照の
-> profileが存在し、`pending-classification` / `blocked` / `paused`でなく、広告verticalが
-> `allowedVerticals`に含まれること。満たさない広告はactive登録しない。
-
 ### Step 1: コード解析 (ASP 別)
 
-> A8 コードの抽出は `.Codex/scripts/ads/lib/a8-code-core.mjs` の `parseA8Code(html)` に関数化済み
+> A8 コードの抽出は `.claude/scripts/ads/lib/a8-code-core.mjs` の `parseA8Code(html)` に関数化済み
 > (自動 scout `/scout-asp` と抽出仕様を共有)。手動でも同関数で {htmlContent, imageUrl, trackingPixelUrl,
 > width, height, adType} を得られる。下表は ASP 別の抽出ルール (A8 は関数化・VC/楽天は手動)。
 
@@ -66,7 +62,7 @@ state (`affiliate-catalog.json` / `a8-catalog.json`) を読む** — §2 の表�
 サイズがコードに無い (VC/楽天) / 広告主がコードから不明な場合は、**画像を実際に取得して判別**する:
 
 ```bash
-node .Codex/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
+node .claude/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
 # → {format, width, height, canonical, canonicalSize, savedTo} を JSON 出力
 ```
 - 出力の `canonical` が **false なら登録しない** → ASP で 300×250 (canonical) 素材を選び直してもらう
@@ -87,7 +83,6 @@ node .Codex/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
 ```typescript
 {
   id: "af_<service>_<vertical>_001",       // 一意。複数 placement が要るときだけ placement 別に分ける
-  programRef: "a8:s00000000000000",       // ★案件profileへの安定参照。広告コードから検証済みIDを使う
   title: "サービス名",                      // banner=内部ラベル / text=表示文言
   htmlContent: "https://px.a8.net/svt/ejp?a8mat=...",
   areaCode: null,
@@ -107,13 +102,13 @@ node .Codex/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
 
 > **A/B テスト (任意)**: `experimentId`/`variantId`/`weight` を付けると同一実験の 2 件以上で
 > `VariantAdSlot` の加重ランダム出し分けになる。実験の開始・判定は `/manage-affiliate-experiment`
-> (reference: `.Codex/skills/ads/manage-affiliate-experiment/reference/creative-ab-testing.md`) で行う。
+> (reference: `.claude/skills/ads/manage-affiliate-experiment/reference/creative-ab-testing.md`) で行う。
 
 ### Step 5: 検証
 ```bash
 npx tsc --noEmit -p apps/web/tsconfig.json
-npx tsx .Codex/scripts/ads/audit-affiliate-inventory.ts --json --check-size   # サイズ違反ゼロ (exit 0)
-npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only  # profile/programRef含む検証だけ。R2 writeなし
+npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size   # サイズ違反ゼロ (exit 0)
+npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-affiliate-ads-snapshot.ts  # vertical 検証 pass
 ```
 
 ### Step 6: 反映 (ユーザー判断)
@@ -129,14 +124,14 @@ outward-facing なので push はユーザーに確認。反映後、対象 vert
 
 | ASP | 読む先 |
 |---|---|
-| もしも / afb | `.Codex/state/ads/affiliate-catalog.json` の `programs[].asps[].status` |
-| A8 | `.Codex/state/ads/a8-catalog.json` の `entries[].status` |
+| もしも / afb | `.claude/state/ads/affiliate-catalog.json` の `programs[].asps[].status` |
+| A8 | `.claude/state/ads/a8-catalog.json` の `entries[].status` |
 
 vertical 別に `approved` / `applying` を集計して一覧する。**固定文を持たない** —
 数えるたびに実態が変わるため、必ず state を読んで数える。
 
 - 最終照合日は `affiliate-catalog.json` の `verifiedAt`。古ければ `/affiliate-operate status` を促す。
-- 在庫ゼロ/手薄の vertical は `.Codex/state/ads/inventory-latest.json` の `coverage` から読む。
+- 在庫ゼロ/手薄の vertical は `.claude/state/ads/inventory-latest.json` の `coverage` から読む。
 - **提携済み = 配信中ではない**。配信 SSOT は `apps/web/scripts/affiliate-ads-data.ts` で、
   もしも / afb は広告コード取得 (harvest) の経路が無いため提携済みでも未配信のことがある。
   両者を混同して「提携したのに出ていない」と誤診しない。
@@ -155,19 +150,19 @@ vertical 別に `approved` / `applying` を集計して一覧する。**固定�
    文脈一致の位置に挿入 (`md-content.tsx` がレンダリング)。note はカスタム要素未対応のため生 HTML。
    担当は `blog-editor` / `article-writer`。
 3. **PR 表記 (景表法)**: blog は記事冒頭の PR 宣言 + リンク直前の `※PR：` の両方、note は `#PR`/`#広告`。
-4. **検証**: `npx tsx .Codex/scripts/ads/audit-affiliate-compliance.ts --live --check` で
+4. **検証**: `npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --live --check` で
    孤立 / 表記漏れ / 未登録タグがゼロであること。
 
 ## 関連ファイル
 
 | ファイル | 役割 |
 |---|---|
-| `.Codex/rules/affiliate-ads-standards.md` | **★正典** (vertical ハブ・プログラム表・サイズ・GA4・登録フロー) |
+| `.claude/rules/affiliate-ads-standards.md` | **★正典** (vertical ハブ・プログラム表・サイズ・GA4・登録フロー) |
 | `apps/web/scripts/affiliate-ads-data.ts` | **★自動配置 SSOT** (`AFFILIATE_ADS`、git TS) |
 | `apps/web/scripts/affiliate-direct-placements-data.ts` | **★直接配置 SSOT** (`AFFILIATE_DIRECT_PLACEMENTS`、git TS) |
-| `.Codex/scripts/ads/audit-affiliate-compliance.ts` | 直接配置の compliance 監査 (`/audit-affiliate-compliance`) |
+| `.claude/scripts/ads/audit-affiliate-compliance.ts` | 直接配置の compliance 監査 (`/audit-affiliate-compliance`) |
 | `apps/web/src/features/ads/constants/affiliate-category.ts` | 意図ハブ (`AffiliateVertical` / 3 map / `adVertical`) |
-| `.Codex/scripts/ads/inspect-banner.mjs` | バナー画像を fetch → サイズ実測 + canonical 判定 + 目視用保存 (VC/楽天のサイズ確定・広告主判別) |
-| `.Codex/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (vertical カバレッジ + `--check-size`) |
+| `.claude/scripts/ads/inspect-banner.mjs` | バナー画像を fetch → サイズ実測 + canonical 判定 + 目視用保存 (VC/楽天のサイズ確定・広告主判別) |
+| `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (vertical カバレッジ + `--check-size`) |
 | `apps/web/scripts/export-affiliate-ads-snapshot.ts` | SSOT → R2 (vertical 検証) |
 | `.github/workflows/publish-affiliate-ads.yml` | develop push で R2 反映 |

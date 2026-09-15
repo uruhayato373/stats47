@@ -1,5 +1,7 @@
 # stats47 - 統計で見る都道府県
 
+**共通事業方針**: 企画・収益化・事業の週次/月次計画とレビューの着手前に [共通方針](.claude/shared-policy/POLICY.md) と [このプロジェクトへの適用](.claude/shared-policy/application.json) を読む(管理画面は「戦略・収益化」→「共通事業方針」)。方針内の判断契約を出力へ反映する。`npm run policy:check` で配布状態を確認する。正本はこのリポジトリではなく **Obsidian vault** の `.claude/共通事業方針SSOT.md`。変更は正本側で行い `npm run policy:sync` で配布する。写しは手編集しない。詳細は `.claude/rules/shared-business-policy.md`。
+
 都道府県統計データの可視化 Web アプリケーション。e-Stat API から 47 都道府県の統計を取得し、ランキング・ダッシュボード・チャートで表示する。モノレポ構成: `apps/{web,remotion,ges}` + `packages/*`（詳細は `.claude/rules/local-environment.md`）。
 
 ## 行動原則 (12軸)
@@ -42,6 +44,7 @@
 - **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**Codex を使う経路は 2 つあり、規律が違う**:
   - **① Claude Code から MCP 経由** (`mcp__codex__codex`) — Claude のツールコールとして**同期実行**されるため HEAD/index の奪い合いは構造的に起きない。既定は `sandbox:"read-only"`。規約は **`.claude/rules/codex-mcp.md`**
   - **② standalone Codex** (VSCode 拡張 / `codex` TUI) — 独立プロセス。**⚠️ git 競合注意**: 同一作業ツリーで同時編集すると commit 混在・WIP 混入・型/lock 不整合が起きる（実例: 2026-06-21 に Codex の zod schema 型エラー + package-lock 未更新で CI 2回 fail）。同時に走らせない、または git worktree を分ける
+  - **編集開始前に `npm run agent:session -- --status`** で共通の作業状況を確認し、`--register` / 節目の `--note` / 完了時の `--release` を使う。引数と保持条件は `.claude/rules/local-environment.md`「Codex / Claude の作業共有」。
   - どちらの経路でも `git add -A` 厳禁・取り込み後は `npm run type-check` (全パッケージ)。検知補助: `.claude/hooks/session-guard.js`（Claude セッション間のみ）。詳細: memory `feedback_shared_working_copy_git_race`
 
 ## 作業の節目で記録する
@@ -50,15 +53,8 @@
 
 ## 検証コマンドの粒度
 
-`apps/web` のフル `build` は重いので、毎回の小変更では実行しない。影響範囲に応じて段階的に検証する。
-
-- 小さな UI / 型 / 単一コンポーネント変更: `npm run type-check --workspace apps/web` を優先
-- ロジック変更・変換処理・共通ユーティリティ変更: 対象テスト + type-check
-- route / metadata / generateStaticParams / SSG / R2 snapshot 生成・参照に触る変更: 必要に応じて対象ページやスクリプトを限定検証
-- フル `npm run build --workspace apps/web`: まとまった変更の節目、SSG/本番配信挙動に関わる変更、リリース前、またはユーザーが明示した場合に実行
-- フル build を省略した場合は、最終報告で「何を検証し、何を未実行か」を明示する
-- dev サーバーは `npm run dev:web` (ルート `npm run dev` は 23 パッケージを起動するので使わない)。常駐は background + Ready polling
-- Windows では `next build` が完走せず `type-check` の env 前置も落ちる。Linux CI が権威。罠の正典は `local-environment.md`
+変更規模に応じた検査範囲・重複回避・依存関係操作の排他は `.claude/rules/local-environment.md`
+「検証コマンドの粒度」が正典。詳細をここに複製しない。
 
 | 種別 | 記録先 |
 |---|---|
@@ -76,7 +72,7 @@
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化・指標拡充バックログ | `.claude/todo/backlog.md`（tier 見出し + タグ行のカード形式） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
-| プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink。**新しいマシンで clone した直後に `bash .claude/scripts/setup-memory-symlink.sh` を 1 回実行**して symlink を張る |
+| プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink (Windows は junction)。**新しいマシンで clone した直後に `node .claude/scripts/setup-memory-symlink.mjs` を 1 回実行**して張る (`--check` で確認。純 Node なので Windows / Mac 共通) |
 
 ## ドキュメント参照ガイド
 
@@ -103,6 +99,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `nextjs-ssg-preservation.md` | layout / page / route 変更 (cookies() 禁止・generateStaticParams と R2 の関係) | apps/web/src/app・middleware |
 | `ogp-image-standards.md` | OGP / リンクカード / note カバー画像の生成・差分反映 | features/ogp・scripts/ogp・skills/image-prompt |
 | `r2-storage-design.md` | snapshot 追加・変更・R2 キー設計・保持ポリシー | packages/r2-storage・skills/db/push-r2 等 |
+| `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |
+| `page-quality-standards.md` | ページ肥大化・重複・速度の継続監視 (変更時代表URL/週次全URL、PSI/Cloudflare監視とは別系統) | .claude/scripts/page-quality・apps/admin/app/quality/page-audit |
 | `data-storage.md` | スキル設計時の記録先判定 (git TS / R2 vs `.claude/` vs `docs/`) | .claude/skills・state・todo・docs |
 | `data-sqlite-ssot.md` | 完全DBレスの用語と決定表 (正典は doc 12) | packages/database |
 | `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / ライセンス境界) | packages/gis・skills/gis |

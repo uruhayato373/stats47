@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-aomori",
+    "prefCode": "02000",
+    "prefName": "青森県",
+    "cityName": "青森市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:35.702Z",
+    "titleSha": "39dba1db7e860ce90265c99c3898b2a781713b414605131df45f844c43623e40",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 0.34669846626244855,
+    "side": "below",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 46,
+    "value": 1.3,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 28,
+      "value": 45,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 20,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 31,
+      "value": 54.2,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 17,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

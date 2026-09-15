@@ -5,7 +5,6 @@ import { getSurfaceCardClassName } from "@/components/surface";
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";
 import type { DatabookGenderPair } from "@stats47/data-configs";
 
-
 interface Props {
   pairs: DatabookGenderPair[];
   databook: AreaDatabookSnapshot | null;
@@ -80,7 +79,11 @@ function GenderCell({
  */
 export function GenderPairedKpiGrid({ pairs, databook }: Props) {
   return (
-    <div className="flex flex-col gap-2">
+    <div
+      className={getSurfaceCardClassName({
+        className: "divide-y divide-border overflow-hidden p-0",
+      })}
+    >
       {pairs.map((p) => {
         const male = databook?.metrics[p.maleKey] ?? null;
         const female = databook?.metrics[p.femaleKey] ?? null;
@@ -88,9 +91,7 @@ export function GenderPairedKpiGrid({ pairs, databook }: Props) {
         return (
           <div
             key={p.label}
-            className={getSurfaceCardClassName({
-              className: "flex items-stretch overflow-hidden p-0",
-            })}
+            className="flex min-h-16 items-stretch"
           >
             <GenderCell
               href={`/ranking/${p.maleKey}`}

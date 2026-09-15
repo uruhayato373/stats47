@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-13
+updated: 2026-09-14
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,100 @@ updated: 2026-09-13
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:audit-weekly -- --base-url https://stats47.jp] [起票:2026-09-15]
+
+- **owner**: ranking-ui-manager (ranking) / theme-ui-manager (theme) / site-ux-manager (共通部品・横断)
+- 2026-09-15、`page-quality:audit-weekly` を本番全 6,237 URL に実行 (初の全件試行)。
+  error 2,698 / warning 5,106。**duplicate_link_ratio がほぼ全テンプレートの支配的違反**で、
+  個別ページの内容問題ではなく共通コンポーネント由来の疑いが強い:
+
+  | テンプレート | 対象URL数 | error | warning | duplicate_link_ratio 内訳 |
+  |---|---:|---:|---:|---|
+  | prefecture-detail (`/areas/[code]`) | 2,491 | 1,691 | 1,612 | error 1,691 + warning 752 = 対象の 98% |
+  | blog (`/blog/[slug]`) | 606 | 606 | 112 | error 605 = 対象の **99.8%** |
+  | ranking (`/ranking/[key]`) | 2,170 | 227 | 3,197 | error 227 + warning 1,941 (ad_duplicate_count warning も1,256件) |
+  | geo-analysis | 71 | 55 | 10 | error 55 = 対象の 77% |
+  | theme | 56 | 38 | 34 | error 38 = 対象の 68% |
+  | survey | 148 | 64 | 83 | error 56 + warning 83 |
+  | category | 17 | 11 | 8 | error 11 |
+  | municipality | 360 | 0 | 0 | **異常なし** (比較対象として健全) |
+
+- **注意 (実証ベース)**: prefecture-detail は並行 Codex セッション (`area-density-optimization` /
+  `area-all-optimization`、2026-09-15実施)が「ranking リンク重複排除」を含む最適化を
+  ローカル dev server で検証済みだが**本番未デプロイ**。本監査は現行本番 (デプロイ前) を
+  見ているため、そのセッションの変更が本番反映されれば prefecture-detail 分は改善している
+  可能性が高い。**デプロイ後に再実測してから母数を再評価すること** (未検証のまま「直った」
+  と判断しない)。
+- **次 (実行順)**: ①上記デプロイ待ちの分を除いた ranking/blog/theme/survey/category の
+  duplicate_link_ratio 原因(共通ナビ・関連記事ウィジェット・広告リンクの重複生成箇所)を
+  各 owner が最小1テンプレートで特定 ②修正 ③`page-quality:check`(代表URL)で個別確認
+  ④全件は次回週次 `page-quality-audit-weekly.yml` で確認 (毎回全件を手動実行しない)。
+- **完了条件**: 週次監査の error 件数が縮小傾向 (ラチェット化は別途検討)。
+- 生データ: `.claude/state/metrics/page-quality/{latest.json,LATEST.md,snapshots/2026-09-15.json}`、
+  管理画面 `/quality/page-audit`。
+
+### [STATE-R2-MIGRATION-01] 日次観測 state の残り 4 domain を R2 `state/` へ移す (psi → cloudflare → url-inspection → search-growth)
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:git log --since=4.weeks --name-only -- .claude/state/metrics | sort -u | wc -l が 230 未満、かつ curl -sI https://storage.stats47.jp/state/psi/index.json が 200] [起票:2026-09-14] [期日:2026-10-12]
+
+- **owner**: Claude Code (実装) / オーナー (PR 承認・Cloudflare lifecycle)
+- **前提**: PR `feat/ga4-affiliate-state-r2` で 1 domain 目 (`state/ads/ga4-affiliate/`) の型が出来ている。
+  `state-pull.mjs` (公開 URL → gitignored `live/`)、`index.json` 維持、週次集約だけ commit-back、
+  `prune-state-snapshots.mjs` の policy 削除、という 4 手順を domain ごとに繰り返す。
+- **背景 (2026-09-14 実測)**: `.claude/state/metrics` は 4 週で 230 commit。大半が psi / cloudflare /
+  url-inspection の日次 `[skip ci]` commit-back。git を肥大化させず agent の Grep 対象にも入れない置き場は
+  R2 `state/` (400 日 lifecycle・`r2-storage-design.md`)。
+- **次 (実行順)**: ① `psi-audit-daily.yml`: `psi-batch-*.json` を `state/psi/` へ、`history.csv` は git のまま。
+  読み手 `psi-threshold-check.mjs` / `fetch-psi-audit.mjs` / `search-growth/lib/sources.mjs` に「local 無ければ
+  `live/`」を足す。② `cloudflare-usage-daily.yml` (`cloudflare/snapshots/`)。③ `url-inspection-daily.cjs`
+  (`gsc/url-inspection/`)。④ `search-growth-weekly.yml` の `latest.json` / `live/`。domain ごとに 1 PR、
+  移行後に `RETENTION_POLICIES` の該当 scope を消す。
+- **停止条件**: 日次アラート (`[PSI Alert]` / `[Cloudflare Alert]`) の起票経路を壊さない (読み手が CI 内で
+  直前に書いた raw を読む経路は維持する)。R2 へ書けなかった日は raw を捨てず artifact に残す。
+- **完了条件**: 4 domain とも日次 commit-back が消え、`fetch-metrics-weekly.yml` の週次 1 commit だけが
+  `.claude/state/metrics` を触る。`npm run state:pull -- <domain>` が 4 domain で動く。
+
+### [STATE-R2-LIFECYCLE-01] R2 `state/` prefix の object lifecycle rule (400 日) をオーナーが設定する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:Cloudflare ダッシュボード R2 → stats47 → Settings → Object lifecycle rules に prefix state/ の 400 日ルールがある] [起票:2026-09-14] [期日:2026-09-28]
+
+- **owner**: オーナー
+- **何を**: Cloudflare ダッシュボード → R2 → `stats47` → Settings → Object lifecycle rules → Add rule:
+  prefix `state/`、Delete uploaded objects after 400 days。コード変更なし。
+- **なぜ**: `state/` は CI が日次・週次で書き続ける生 snapshot の置き場で、他の prefix と違い GC を
+  `r2-retention.ts` の allowlist で運用しない (正典 `r2-storage-design.md` 「削除ポリシー」)。
+  ルールが無いと 32GB (2026-09-12) の R2 に上乗せで増え続ける。
+- **停止条件**: prefix を `state/` 以外に広げない (`app/` `gis/` は PROTECTED)。
+
+### [CONFIG-SECRET-CLAUDE-JSON-01] `~/.claude.json` の github MCP に残る平文 PAT を退避する (gh CLI のプロキシ認証が前提)
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:node -e "const j=require(require('os').homedir()+'/.claude.json');console.log(Object.keys(j.mcpServers.github?.env||{}))" が [] を返す] [起票:2026-09-14] [期日:2026-10-12]
+
+- **owner**: オーナー
+- **現状 (2026-09-14)**: Codex 側 (`~/.codex/config.toml`) の PAT は削除・github MCP を無効化済み。Claude 側
+  (`~/.claude.json` user スコープ) の github MCP は `GITHUB_PERSONAL_ACCESS_TOKEN` を平文で持つが、会社 PC では
+  `gh` CLI が「Proxy Authentication Required」で使えないため、この MCP が唯一の GitHub API 経路として残している。
+- **次**: ① 会社 PC で `gh auth login` を通す (プロキシ設定 `HTTPS_PROXY` + `gh config set http_unix_socket` 等を
+  試す)。② 通ったら `claude mcp remove -s user github` し、`~/dotfiles/bin/mcp-user.{ps1,zsh}` の集合と一致させる。
+  ③ 平文で置かれていた PAT は GitHub 側で revoke して発行し直す。
+- **停止条件**: gh が通る前に MCP を消さない (GitHub Issues / PR 操作が会社 PC で不能になる)。
+
+### [MAC-FIRST-RUN-01] 自宅 Mac で二拠点セットアップを初回実行し、Mac 固有の罠を local-environment.md に記録する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:Mac で node .claude/scripts/setup-memory-symlink.mjs --check と node .claude/scripts/lib/sync-codex-mirror.cjs --check が exit 0] [起票:2026-09-14] [期日:2026-09-28]
+
+- **owner**: オーナー (Mac 操作) / Claude Code (罠の記録)
+- **手順**: `local-environment.md` 「2 台で同じ形にする手順」の Mac 列を上から実行する
+  (dotfiles clone → `link.mjs --host mac` → `git clone --filter=blob:none` → memory link → `core.hooksPath` →
+  `~/tmp` → `local-resources.sh install` → `gh auth login; codex login` → mirror check)。
+- **要確認 (未実測)**: `codex/host.mac.toml` の filesystem / notebooklm パスは仮置き (`/Users/kazu/...`)。
+  `local-resources.mjs` の darwin `ps` 分岐と `assertNoLinks` の `/private/tmp` realpath は実機未検証。
+  `.claude/settings.local.json` の seed (`stats47.local.mac.json`) の許可リストも初回で調整する。
+- **完了条件**: Mac 側の `claude mcp list` / `codex mcp list` の名前集合が Windows と一致し、
+  `local-environment.md` に Mac 節の実測が 1 つ以上追記されている。
 
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
@@ -133,7 +227,7 @@ updated: 2026-09-13
 - **停止条件**: デプロイ後の smoke (`.github/scripts/smoke-test-routes.sh`) で ranking / blog が
   200 以外、または `x-nextjs-prerender` の notFound 固着 → main を前 SHA へ戻す。
 
-### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 4 本 / 週 5.4 万 imp)
+### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 2 本 / 週 5.4 万 imp)
 
 タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node .claude/scripts/ads/audit-affiliate-inventory.ts の furusato 横長 banner ≥ 7] [起票:2026-09-03] [期日:2026-09-30]
 
@@ -160,14 +254,13 @@ updated: 2026-09-13
   もしも発行原稿の独立ピクセル・referrerpolicy・attributionsrc・PR条件を落とさない。
   別セッションを含む専用ブランチ `codex/workspace-updates-20260908` へのcommit・pushは承認済み。develop/main反映・R2更新・デプロイは別途公開承認を得てから行う。
 - **なぜ**: #913 で家計調査 (ランキング 28,867 + ブログ 12,366 imp/週) と農業・地方財政が furusato に
-  集まる。一方 furusato の横長バナーは **4 本** (イオン九州 ×2・ふるさと本舗・au PAY) で、3 枠を
-  埋めると毎ページ同じ並びになる。需要と在庫が最も逆転している軸。
+  集まる。一方、全国対応の横長バナーは **2 本** (ふるさと本舗・au PAY) だけである。イオン九州3枠は
+  地域・購買意図の不一致と成果0円の実績から2026-09-15に全配信を停止した。需要と在庫が最も逆転している軸。
 - **候補**: さとふる / ふるなび / 楽天ふるさと納税 / ANA のふるさと納税 (A8・もしも・afb のどこで
   提携できるかは `/affiliate-operate` の走査で確認。ブランド適合は人の判断)。
 - **手順**: ユーザーが ASP で提携申請 → 承認後 `/register-affiliate-banner register` で 300x250
   を 1 案件 1 エントリ登録 (vertical=furusato、priority は確定 EPC バンド) → develop push で R2 反映。
-- **完了条件**: furusato の横長 300x250 が 7 本以上、かつ priority 上位 3 が全国対応ポータル
-  (地域限定のイオン九州が上位 3 に入らない)。
+- **完了条件**: furusato の横長 300x250 が 7 本以上、かつ priority 上位 3 が全国対応ポータル。
 - **禁止**: 楽天ふるさと納税の代わりに楽天市場の商品カードで代用しない (別チャネル)。
 
 ### [AFF-STOCKTAKE-RECONCILE-01] 提携棚卸しの不明案件と既存在庫の不一致を再照合する
@@ -497,6 +590,43 @@ updated: 2026-09-13
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [THEME-CHART-TEMPORAL-MISMATCH-01] line-chartが単年設定の13指標を再取り込みして年範囲を拡張する
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-15]
+
+- **owner**: data-ingester (年範囲拡張・再取り込み。判断待ちなし、以下は全件データ存在確認済み)
+- `npm run validate:catalog` の `[chart-temporal-fit]` warn (2026-09-15新設) が機械的に検出。
+  対象10テーマ13指標の line-chart が、`years: {from,to}` が単年 (from===to) の指標を参照しており
+  推移を描けない状態だった (componentKeyに「trend」を含むものも複数: `theme-health-expense-trend`
+  `railway-passenger-trend-jr` `roads-length-trend` 等)。
+- **2026-09-15 e-Stat実データで確認済み (getStatsData実測、値がnullでない年のみ集計)**:
+  全13指標とも**e-Statに複数年の実データが存在する**(config側の年範囲設定が不足していただけ)。
+  チャート型変更は不要、年範囲拡張が正解。
+
+  | metric key | statsDataId | config年数 | e-Stat実在年数 | 実在年 |
+  |---|---|---:|---:|---|
+  | national-medical-expense-per-person | 0000010209 | 1 | 14 | 1999-2022 (隔年等) |
+  | turnover-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
+  | job-change-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
+  | gender-wage-gap | 0003426933 | 1 | 2 | 2021-2022 |
+  | single-person-household-ratio | 0000010201 | 1 | 9 | 1980-2020 (5年おき) |
+  | jr-passenger-transport | 0000010103 | 1 | 19 | 2005-2023 |
+  | consumer-price-difference-index-housing | 0000010212 | 1 | 12 | 2013-2024 |
+  | consumer-price-difference-index-food | 0000010212 | 1 | 12 | 2013-2024 |
+  | actual-income-worker-households-per-month | 0000010212 | 1 | 50 | 1975-2024 |
+  | road-total-length-with-expressway | 0000010108 | 1 | 19 | 2005-2023 |
+  | road-expressway-length | 0000010108 | 1 | 19 | 2005-2023 |
+  | building-fire-count-per-100-thousand-people | 0000010211 | 1 | 49 | 1975-2023 |
+  | air-passenger-transport | 0000010103 | 1 | 49 | 1975-2023 |
+
+- **次 (実行順)**: ①各 `packages/data-configs/src/metrics/<key>.ts` の `years` を上表の実在年範囲へ
+  拡張 (5年おき等の指標は `{years:[...]}` 形式、連続年は `{from,to}`) ②`validate:years`/`validate:config`
+  ③`page-data-batch --metric <key>` で再取り込み ④`npm run validate:catalog` で
+  `chart-temporal-fit` warn 解消を確認。gender-wage-gap は2年のみのため折れ線でなく2点比較の
+  表示 (mixed-chart等) が妥当か theme-designer が判断してもよい。
+- **完了条件**: 対象13件で `chart-temporal-fit` warn が解消 (ラチェットは新規追加時の再発防止)。
+- **検証**: `npx tsx packages/data-configs/scripts/validate-theme-catalog.ts`
+
 ### [LOCAL-RESOURCE-BUDGET-01] 資料の復元経路と再起動後のメモリ削減効果を確認する
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-10]
@@ -623,68 +753,26 @@ updated: 2026-09-13
 - **完了条件**: GA4 の `link_position=rakuten-sidebar` が家計調査ページで取れ、CTR が
   native 枠と比較できる。
 
-### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する（家計調査書籍は KAKEI-MARKETING-CONTENT-01）
+### [PREFECTURE-DEVIATION-S5-01] 『47都道府県の偏差値』の一次資料候補25件をmetric/theme/ranking候補へ展開する
 
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:ready] [起票:2026-08-29]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:test] [起票:2026-09-15]
 
-- **owner**: 全体は`open-data-curator`、2021都道府県DataBookは`area-curator`、Claudeスキル構築ガイドは`knowledge-curator`。
-- **現状証拠**: 全ページOCR・内部crop・解決台帳を完了。DataBook 8 PDF / 580ページは`combined-analysis` 61 /
-  `context-only` 19 / `not-applicable` 500、偏差値資料6 PDF / 103ページは`rights-hold` 103、Claudeガイド
-  1 PDF / 33ページは`context-only` 7 / `not-applicable` 26。3資料ともresolution coverage 100%。
-- **次**: DataBookの61候補は既存area/editorial責務で必要なwaveだけ実装する。偏差値資料は図表権利と一次資料の
-  両方が確定した項目だけholdを解除する。準備工程の再実行は不要。
-- **完了条件**: 3資料の全抽出候補がresolutionを持ち、公開候補100%で一次資料・年度・単位・地域粒度・rightsが
-  確定し、書籍値の直接投入、原文・元図・内部cropの公開が0である。
-- **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
-  `rights-hold`または`primary-source-unavailable`で停止する。remote R2、git push、PR、deploy、外部公開は別途承認。
-
-### [KAKEI-MARKETING-CONTENT-01] 『マーケティングに使える「家計調査」』の分析・論点80件をstats47へ段階展開する
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:inventory:check] [起票:2026-09-05]
-
-- **owner**: 台帳は`open-data-curator`、new-metricは`data-ingester`（実在検証は`estat-researcher`）、evidenceTopicsは`theme-designer`、記事は`article-writer`→`blog-critic`。
-- **現状証拠**: profile `kakei-marketing-2015`（Drive `参考文献/マーケティングに使える家計調査/2015年版`、bundle r3 = PDF + ページ画像307 + 生OCR307 + Markdown文字起こし307 + 図表crop113、`stage-status` で S0〜S4 到達）を全307ページOCR（jpn_vert）し、
-  `packages/data-configs/src/evidence-inventory/kakei-marketing/analyses.json` に分析・論点33件＋県庁所在市47件を authored、
-  `.claude/state/source-inventory/kakei-marketing/2015/` は coverage 100%（combined-analysis 259 / new-metric 13 / reuse 3 / context-only 27 / not-applicable 5）。
-  wave 0 として education-culture・real-income・fishery-marine に evidenceTopics を各1件追加済み（`validate:catalog` green）。契約は
-  `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md` §4.4。
-- **進捗（2026-09-06）**: step 2〜5 は記事側が完了。既存記事更新 wave・新規記事 wave A/B の全記事と
-  `<pref>-food-culture` 47本すべてが quality-gate + blog-critic PASS で R2 公開済み（live md5 一致で実測）。
-  47本すべての live 本文に「数量×価格で分解する」H2 がある。接地器 `build-kakei-quantity-price.mjs` は
-  未 commit だったので `countsNote`（counts は「他の〜」残余品目を除いた数）付きで develop へ載せた。
-- **次（実行順）**:
-  1. **残るのは deploy のみ**: new-metric 2件（`academic-achievement-test-average-rate` / `information-communication-expenditure`
-     → `information-communication-coefficient`）は config・R2・KNOWN/SITEMAP まで反映済み。
-     develop→main PR → CI green → merge → CDN purge → Googlebot UA で `/ranking/academic-achievement-test-average-rate` /
-     `/ranking/information-communication-coefficient` / `/ranking/information-communication-expenditure` が 200
-     （title が「見つかりません」でない）を実測する（`ranking-publisher` 手順 6〜8）。
-     既存記事の改稿（`income-quintile-education` 等の prerender 済みページ）もこの deploy で本番反映される。
-  2. inventory の `combined-analysis` 各項目が記事・theme・area のいずれかへ接続されているかを
-     管理画面 `/content/references` で確認し、未接続分だけを次の wave に回す。
-- **停止条件**: 書籍の数値・図表・本文を公開物へ流さない。全国集計（五分位・年齢階級・月次）を/rankingへ載せない。
-  県庁所在市の値を県全体として書かない。一次資料で再取得できない項目は`primary-source-unavailable`へ戻す。
+- **owner**: 台帳は`open-data-curator`、metricKey実在検証は`estat-researcher`、投入は`data-ingester`。
+- **現状証拠**: profile `prefecture-deviation` (Drive `参考文献/47都道府県の偏差値/2018年版`、6分冊PDF・103ページ)を
+  全ページOCR (jpn+eng, rotate 90, psm 4)。一律`rights-hold`103件だった旧判定 (書誌確定前の暫定placeholder) を撤去し、
+  `packages/data-configs/src/evidence-inventory/prefecture-deviation/analyses.json` に章単位の分析・論点53件を authored
+  (kakei-marketingと同じ形式)。`.claude/state/source-inventory/prefecture-deviation/2018/`はcoverage 100%
+  (`combined-analysis` 25 / `primary-source-unavailable` 20 / `context-only` 5 / `not-applicable` 3)。
+  書籍の偏差値・数値そのものは転記せず、章の着想だけを一次資料 (総務省家計調査・人口動態調査・国勢調査・
+  住宅土地統計調査・文科省学力調査等) で独立再検証可能かを判定した。
+- **次**: `combined-analysis` 25件を1件ずつ、①既存metric/rankingとの重複確認、②未登録なら`estat-researcher`が
+  statsDataId実在検証、③`data-ingester`が投入、の順で管理画面`/content/references`にunit接続が出るまで進める。
+  `context-only`5件 (自動車検査登録情報協会・全国軽自動車協会連合会等の業界団体統計) は既存記事の分析文脈補強にのみ使う。
+- **停止条件**: 書籍の偏差値・数値・図表・本文を公開物へ直接流さない。一次資料で再取得できない項目は
+  `primary-source-unavailable`のまま留める (`週刊朝日`独自集計の東大・京大合格者数ランキング等、20件は既に該当)。
   R2 write・deploy・SNS公開は別途承認。
-- **完了条件**: new-metric 2件が`validate:config`/`validate:years` green で公開パイプラインに乗り、既存記事更新wave と
-  新規記事wave A の全記事が quality-gate + critic PASS、県別シリーズ47本が公開済みで、inventoryの`combined-analysis`各項目が
-  記事・theme・areaのいずれかへ実在証跡で接続されている（管理画面`/content/references`で確認）。
-
-### [REFERENCE-SOURCE-KINDLE-BATCH-01] Drive直下にあったKindleスキャン7冊の書誌確定とS2以降
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:check] [起票:2026-09-10]
-
-- **owner**: `open-data-curator` (県庁所在地ガイドは `area-curator`、GIS本は `geo-analysis-curator`)。
-- **現状証拠**: 2026-09-10 に vault を展開配置へ移行した際、`参考文献/` 直下に未整理だった 7 冊
-  (`capital-city-guide` / `money-health-ranking` / `yabai-kenmin-ranking` / `amusement-shop-density` / `gis-business-guide` /
-  `prefecture-ranking-consumption` / `average-income-ranking`) を profile 化し S0 保全 + S1 ページ画像 (contentCrop 無し) まで完了。
-  奥付が Kindle レビュー画面で終わるため版・ISBN 未確認 (`edition: unknown` / `版不明`)。`やばい県民` は一意ページ 28/50 で本文 62% まで、
-  `平均年収` は 84% までの不完全スキャン。`source-inventory check-all` は 7 profile を `pending` として列挙している。doc 46 §1 に表あり。
-- **次**: ①国立国会図書館サーチ等で書誌を確定し profile `bibliography` と Drive folder 名 (`版不明` → 年版) を更新する。
-  ②Kindle UI 枠の `contentCrop` を profile ごとに決めて S1 を再生成する (kakei と同じ手順)。③不完全スキャン 2 冊は再スキャンするか
-  `rights-hold` のまま除外するか判断する。④S2 (OCR + Markdown) → S4 台帳。`source-inventory.mjs` の `loadExtractionPages` は
-  transcript 必須なので `--mode image` だけの workspace では build できない (S2 を先に通す)。
-- **停止条件**: 権利判断が終わるまで全項目 `rights-hold`。書籍値・図表・本文を公開物へ流さない。
-- **完了条件**: 7 profile が `check-all` で `valid: true` / coverage 100% になり、`stage-status` で S4 到達。
-- **付帯**: `参考文献/_移行前/` (旧 tar bundle 37 file + 生 PDF 16 本) は全 profile の `verify --vault` 通過を確認済み。削除はオーナー判断。
+- **完了条件**: `combined-analysis`25件全てがreuse-existing-metric/new-metricいずれかで既存SSOTへ接続され、
+  管理画面`/content/references`で実在証跡が確認できる。
 
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
@@ -697,30 +785,20 @@ updated: 2026-09-13
 <!-- reference-theme-plans:start -->
 | metricKey | title | targetTheme | status | hypothesis |
 | --- | --- | --- | --- | --- |
-| general-households | 一般世帯数 | population-dynamics | draft | 人口総数だけでは見えない世帯構造を人口動態の基礎軸に加える |
 | projected-population-2020 | 将来推計人口 | population-dynamics | blocked | 将来人口と現在の人口動態を同じ時間軸で比較する |
-| area-ratio-of-total | 面積割合 | climate | draft | 国土面積の差を気候・居住条件の解釈に使う前提軸として置く |
-| sex-ratio-total | 人口性比 | population-dynamics | draft | 男女構成の地域差を人口移動・年齢構成と合わせて読む |
-| day-time-population | 昼間人口 | labor-mobility | draft | 就業地への流入規模を通勤移動の絶対数コンテキストとして示す |
 | gross-prefectural-product-expenditure-nominal-h27 | 県内総生産 | local-economy | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する |
-| electricity-generation-capacity | 発電電力量 | local-economy | draft | 電力供給規模と地域の産業基盤を並べて読む |
-| avg-propensity-to-consume-worker-households | 平均消費性向 | real-income | draft | 所得のうち消費へ回る割合を地域別の家計行動として比較する |
-| municipality-count | 市町村数 | local-finance | draft | 自治体数を行政サービス・財政構造の基礎条件として示す |
-| agricultural-employment-population | 農業就業人口 | local-economy | draft | 農業産出額と担い手規模を組み合わせて産業構造を読む |
-| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | 製造品出荷額だけでは見えない生産拠点の厚みを示す |
-| households-on-public-assistance | 生活保護被保護実世帯数 | local-finance | draft | 実数を制度利用者の優劣にせず、人口規模と自治体財政の基礎条件として読む |
-| infant-deaths | 乳児死亡数 | healthcare | draft | 小標本の年次変動を明示し、実数と出生千対を分けて医療・人口動態を読む |
-| infant-mortality-rate-per-1000-births | 乳児死亡率 | healthcare | draft | 出生千対の率を単年順位へ短絡せず、複数年推移と出生数を合わせて読む |
-| average-life-expectancy-female-20 | 20歳女性の平均余命 | healthcare | draft | 出生時平均余命と年齢別平均余命を分離し、女性20歳時点の地域差を読む |
-| average-life-expectancy-female-65 | 65歳女性の平均余命 | healthcare | draft | 高齢期の平均余命を出生時平均余命と混同せず、医療・生活条件と合わせて読む |
-| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | 男女・年齢別系列を同じ値として扱わず、男性系列の地域差を検証する |
 | students-requiring-japanese-instruction | 日本語指導が必要な児童生徒数 | education-culture | blocked | 国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む |
+| general-households | 一般世帯数 | population-dynamics | draft | [却下 2026-09-14] 人口動態=増減メカニズムと無関係、世帯構造は別テーマ向き |
+| area-ratio-of-total | 面積割合 | climate | draft | [却下 2026-09-14] 面積割合は気候(気象)と直接関係せず地理指標 |
+| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | [却下 2026-09-14] 登録済みmanufacturing-establishmentsと同一statsDataId重複、年度が古い |
+| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | [却下 2026-09-14] subtitle年齢欠落・値63年が0歳時点と矛盾、metric要修正が先 |
 <!-- reference-theme-plans:end -->
 
-- **ブログ下書き**: `docs/21_ブログ記事原稿/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。
-- **次**: テーマは残るdraftの15指標を既存カタログへ採択する順序を需要と重複で決める。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
+- **2026-09-14 テーマ企画14件を判定 (theme-designer)**: 採択11件をcontext roleでThemeCatalogへ追加 (`sex-ratio-total`→population-dynamics、`day-time-population`→labor-mobility、`electricity-generation-capacity`/`agricultural-employment-population`→local-economy、`avg-propensity-to-consume-worker-households`→real-income、`municipality-count`/`households-on-public-assistance`→local-finance、`infant-deaths`/`infant-mortality-rate-per-1000-births`/`average-life-expectancy-female-20`/`average-life-expectancy-female-65`→healthcare)。却下3件: `general-households`(人口動態=増減メカニズムと無関係、世帯構造テーマ向き)、`area-ratio-of-total`(気候テーマと面積は無関係、landweatherカテゴリのまま)、`number-of-establishments-manufacturing`(登録済み`manufacturing-establishments`と同一statsDataId・年度が古い重複)、`average-life-expectancy-male`(subtitleに年齢欠落・値63年が0歳時点と矛盾し要metric修正)。`generate:catalog`→`validate:catalog`(0 error/0 warn)→`tsc --noEmit -p apps/web/tsconfig.json`(0 error)まで確認済み。
+- **ブログ下書き**: `docs/21_ブログ記事原稿/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。`general-households`/`number-of-establishments-manufacturing`は却下済みのため、該当2本のペア構成をarticle-writerが着手前に見直す。
+- **次**: blocked 3件はactiveな公開metricが出た時点で再判定する。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
 - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
-- **完了条件**: activeなテーマ企画19件が採択または理由付き不採用となり、blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
+- **完了条件**: blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 
@@ -1011,6 +1089,21 @@ updated: 2026-09-13
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [CATEGORY-NAV-CONSOLIDATION-01] カテゴリ一覧UIの2実装 (PortalCategoryGrid / CategoryNavGrid) 統合検討
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-15]
+
+- home (`/`) と `/category/[categoryKey]` は同一の `PortalCategoryGrid`
+  (`apps/web/src/features/home-portal/components/PortalCategoryGrid.tsx`) を使い、17カテゴリの
+  順序・データ源 (`CATEGORY_DEFS`) は一致している (整合済み・対応不要)。
+- 一方 `/areas/[areaCode]` は別実装の `CategoryNavGrid`
+  (`apps/web/src/features/area-profile/components/CategoryNavGrid.tsx`) を使い、アイコン+色タイル
+  (件数なし) と `PortalCategoryGrid` のテキスト+件数行という異なる見た目・挙動になっている。
+- trigger: `/areas/[areaCode]` を次に触るセッションで、統合が本当に妥当か (県スコープの
+  リンク生成・件数表示の要否が違うため意図的な分離の可能性もある) を精読してから判断する。
+  2026-09-15 時点でこのファイルは別の並行セッションが直後に編集済み (uncommitted) のため、
+  今回は触れずこのカードだけ残す。
+
 ### [MUNI-RANKING-EXPANSION-01] 市区町村ランキング拡充 (全量公開 2026-09-01 実施済み・残は SSDS 未使用分)
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-01]
@@ -1078,7 +1171,7 @@ updated: 2026-09-13
 タグ: [種類:改善] [実行:対話] [起票:2026-07-12]
 
 - **owner**: Claude Code
-- **状態**: 実装未着手。変更をまとめてからCIを開始し、同一入力で合格したローカル検査は変更理由がなければ繰り返さない運用を先行する。
+- **状態**: 未完了範囲はCIのbuild成果物再利用・変更種別ごとの検査分岐・短縮効果の実測。型検査の必須性を維持し、同一入力で合格したローカル検査は変更理由がなければ繰り返さない。
 - **trigger**: 1本のPRで現行build jobの壁時間とcache sizeを測れるとき。
 - **追加の実測根拠（2026-09-13）**: PR964の初回CI `34740979345` はE2E 102/103成功。公開R2の地域経済チャートは意図した折れ線へ更新済みだったが、テストの旧ドーナツ表示要求が残っていた。テストmatrixだけを修正した次回CI `34741425669` でも全体build・型・unit・E2Eが実行され、18チェック成功。job全体（依存導入などを含む）はStatic Gates 533秒、Full E2E 522秒、Build Check 309秒で並行実行されており、合算を待ち時間と扱わない。コードだけでなく公開データ版も検証入力として記録する必要がある。
 - **次（実行順）**: ①jobごとの依存導入・build・検査・cache復元/保存の壁時間を測る。②コード・lockfile・生成設定・データmanifestの組を固定し、同じ入力の検証済みbuildを後続jobで再利用できるか試す。③アプリ変更、テスト変更、運用記録だけの変更に応じたrequired checksを設計し、無関係な全体buildの繰り返しを減らす。④同じscopeの前後時間と費用を比較する。公開R2を候補コードへ組み合わせるE2Eでは、カタログ変更の公開前後で期待値がずれるケースを別途検出する。

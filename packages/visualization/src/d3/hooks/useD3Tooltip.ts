@@ -115,6 +115,8 @@ export interface TooltipSeriesItem {
   value: number | null;
   color: string;
   unit?: string;
+  /** 値と単位の後ろへ添える割合などの補足 */
+  detail?: string;
 }
 
 /**
@@ -138,6 +140,7 @@ export function createStackedTooltipContent(params: {
           ${formatter(item.value!)}
         </span>
         <span style="font-size: 0.625rem; color: hsl(var(--muted-foreground));">${item.unit ?? unit}</span>
+        ${item.detail ? `<span style="font-size: 0.625rem; color: hsl(var(--muted-foreground));">${item.detail}</span>` : ""}
       </div>`
     )
     .join("");

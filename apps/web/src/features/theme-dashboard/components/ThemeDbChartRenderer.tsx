@@ -97,6 +97,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
         <ChartErrorState
           message="データソースからチャートを取得できません"
           height={200}
+          bordered={false}
         />
       </div>
     );

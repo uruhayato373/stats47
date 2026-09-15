@@ -25,7 +25,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 ## 引数
 
 - **原稿ファイル**: `docs/31_note記事原稿/<slug>/draft.md`
-  （docs/31 になければ先に `bash .Codex/scripts/note/restore-from-r2.sh <slug>` で復元する）
+  （docs/31 になければ先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する）
 - **シリーズ**: B / C / D
 - **トーン**: 会話的 / 権威的 / データドリブン
 - **ターゲット読者レベル**: 初心者 / 中級者 / 上級者
@@ -142,15 +142,15 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 - [ ] 煽りタイトル・攻撃的表現がない
 - [ ] 初心者でも理解できる平易な文章になっている
 - [ ] チャートが記事内容と対応している
-- [ ] `hashtags.txt` が存在し、ハッシュタグが 100 個以内である
-- [ ] cover SVG/PNG を新規生成・編集した場合、`node .Codex/scripts/note/check-cover-overlap.cjs <slug>/images/cover*.svg` が exit 0 で通る（CJK テキストの重なり検出）
+- [ ] `hashtags.txt` が存在し、有効で重複のないハッシュタグが 99 個ある
+- [ ] cover SVG/PNG を新規生成・編集した場合、`node .claude/scripts/note/check-cover-overlap.cjs <slug>/images/cover*.svg` が exit 0 で通る（CJK テキストの重なり検出）
 
 ## 公開準備（編集完了後）
 
 ### 1. メタデータ（完全DBレス: DB 登録はしない）
 
 > ★**note は完全DBレス。D1 `note_articles` テーブルは廃止済（使わない）。** 状態は **draft.md の frontmatter** と
-> **`.Codex/state/note-published-urls.json`** で表す。旧版の「ローカル D1 に INSERT」手順は無効。
+> **`.claude/state/note-published-urls.json`** で表す。旧版の「ローカル D1 に INSERT」手順は無効。
 
 編集完了したら draft.md の frontmatter を整える（`title` / `is_paid` / `price_jpy` / `published: false`）。
 ハッシュタグは同ディレクトリ `hashtags.txt`。DB への登録・INSERT は一切不要。
@@ -169,17 +169,17 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 ### 4. note.com への投稿手順
 
-投稿は **`/publish-note`**（実体は browser-use + `.Codex/scripts/note/editor-helpers.sh`）に委譲する。手順の要点:
+投稿は **`/publish-note`**（実体は browser-use + `.claude/scripts/note/editor-helpers.sh`）に委譲する。手順の要点:
 
-1. `node .Codex/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` で Phase 0 を生成
+1. `node .claude/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` で Phase 0 を生成
 2. `editor-helpers.sh` を `source` し、新規は `new_post_*` 系、既存更新は `process_article <slug> <noteId> <vertical>` → screenshot 目視 → `do_update`
 3. `images/` の画像は `ins_img` が再挿入（`.svg` は同名 `.png` に置換）。表は `images/table-N.png` で画像化（markdown 表は note でリテラルパイプ表示になる）
-4. 公開後は **`.Codex/state/note-published-urls.json`** に slug→URL / is_paid / published_at（update なら updated_at）を記録（**D1 更新は無い**）
+4. 公開後は **`.claude/state/note-published-urls.json`** に slug→URL / is_paid / published_at（update なら updated_at）を記録（**D1 更新は無い**）
 5. note 戦略の進捗があれば `docs/30_note記事企画/` 配下を更新
 
 ## 参照
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`
 - UTM ルール: `/generate-utm-url` スキル
-- **執筆パターン 9 型（SSoT）**: `.Codex/skills/note/reference/note-writing-patterns.md`
+- **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
   → 編集時にフック・導入が型に沿っているかチェックすること。

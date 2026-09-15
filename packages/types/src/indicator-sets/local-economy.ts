@@ -71,6 +71,16 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "agricultural-employment-population",
+      "shortLabel": "農業就業人口",
+      "role": "context"
+    },
+    {
+      "rankingKey": "electricity-generation-capacity",
+      "shortLabel": "発電電力量",
+      "role": "context"
+    },
+    {
       "rankingKey": "employment-location-quotient-manufacturing",
       "shortLabel": "製造業の従業者特化係数",
       "role": "secondary"

@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-wakayama",
+    "prefCode": "30000",
+    "prefName": "和歌山県",
+    "cityName": "和歌山市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:20.840Z",
+    "titleSha": "c5e893a0f3d61b2bc5cda79fa9e5b7bd9d912a8eb77b2a1f0784d7a64b017750",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 0.5248204400761047,
+    "side": "below",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 41,
+    "value": 2,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 31,
+      "value": 39.9,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 17,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 25,
+      "value": 57.1,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 23,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

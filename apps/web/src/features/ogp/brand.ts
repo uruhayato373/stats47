@@ -41,6 +41,12 @@ export const OGP_MAP = {
   bluePalette: OGP_MAP_BLUE_PALETTE,
 } as const;
 
+/** 商品OGP: 全面背景画像の上に敷く左側可読性スクリーン (ink基調)。 */
+export const OGP_PRODUCT_SCRIM = {
+  leftGradient:
+    'linear-gradient(90deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.88) 62%, rgba(15,23,42,0) 100%)',
+} as const;
+
 export const FONT = {
   sansJP: '"Noto Sans JP", sans-serif',
   mono: '"JetBrains Mono", monospace',

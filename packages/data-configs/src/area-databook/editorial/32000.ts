@@ -72,5 +72,24 @@ export const SHIMANE_EDITORIAL: AreaEditorial = {
       sourceUrl: "https://www.e-oki.net/experience/7690/",
       accessedAt: "2026-07-18",
     },
+    {
+      slug: "ita-wakame",
+      name: "板わかめ",
+      municipality: "県内沿岸部",
+      description:
+        "島根の海で採れたワカメを板状に薄く伸ばして乾燥させた特産加工品。「めのは」とも呼ばれ、あぶって手でもみ、温かいご飯にかけたり手巻きずしの海苔代わりに使う。",
+      sourceUrl:
+        "https://www.pref.shimane.lg.jp/admin/seisaku/koho/esque/2020/shimanesque115_2/8.html",
+      accessedAt: "2026-09-14",
+    },
+    {
+      slug: "shussai-shoga",
+      name: "出西しょうが",
+      municipality: "出雲市（斐川町出西地区）",
+      description:
+        "出雲市斐川町の出西地区でのみ栽培される希少なしょうが。約400年の栽培の歴史を持ち繊維が少なく柔らかで、江戸期には大名への献上品としても重宝された。",
+      sourceUrl: "https://www.kankou-shimane.com/destination/21214",
+      accessedAt: "2026-09-14",
+    },
   ],
 };

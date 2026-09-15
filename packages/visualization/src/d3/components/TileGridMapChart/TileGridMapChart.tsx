@@ -251,6 +251,8 @@ export function TileGridMap({
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="xMidYMid meet"
         className="w-full h-auto"
+        role="img"
+        aria-label={`都道府県タイルグリッド地図。データ数: ${data.length}。単位: ${unit || "未設定"}`}
       />
 
     </div>

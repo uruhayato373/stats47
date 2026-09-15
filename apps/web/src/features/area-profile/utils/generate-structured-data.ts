@@ -4,10 +4,13 @@
  * SEO対策のための構造化データを生成
  */
 
-import { getRequiredBaseUrl } from "@/lib/env";
+import { getRequiredBaseUrl } from '@/lib/env';
 
-import type { AreaProfileData } from "@stats47/area-profile";
+import { selectDistinctProfileItems } from './select-distinct-profile-items';
 
+import type { AreaProfileData } from '@stats47/area-profile';
+
+const STRUCTURED_DATA_ITEMS_PER_DIRECTION = 6;
 
 /**
  * 地域プロファイルページのパンくずリスト構造化データ（BreadcrumbList）を生成
@@ -23,23 +26,23 @@ export function generateAreaProfileBreadcrumbStructuredData({
   const baseUrl = getRequiredBaseUrl();
 
   return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: [
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 1,
-        name: "ホーム",
+        name: 'ホーム',
         item: baseUrl,
       },
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 2,
-        name: "都道府県一覧",
+        name: '都道府県一覧',
         item: `${baseUrl}/areas`,
       },
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 3,
         name: `${profile.areaName}の特徴`,
       },
@@ -60,29 +63,27 @@ export function generateAreaProfileStructuredData({
 }): object {
   const baseUrl = getRequiredBaseUrl();
 
-  const additionalProperty = [
-    ...profile.strengths.map((item) => ({
-      "@type": "PropertyValue" as const,
-      name: item.indicator,
-      value: item.value,
-      unitText: item.unit,
-    })),
-    ...profile.weaknesses.map((item) => ({
-      "@type": "PropertyValue" as const,
-      name: item.indicator,
-      value: item.value,
-      unitText: item.unit,
-    })),
+  // 検索結果で代表性を持つ上位・下位だけを含める。全件を埋め込むと県によって
+  // 数百件の PropertyValue が HTML と RSC payload の双方へ複製される。
+  const representativeItems = [
+    ...selectDistinctProfileItems(profile.strengths, STRUCTURED_DATA_ITEMS_PER_DIRECTION),
+    ...selectDistinctProfileItems(profile.weaknesses, STRUCTURED_DATA_ITEMS_PER_DIRECTION),
   ];
+  const additionalProperty = representativeItems.map((item) => ({
+    '@type': 'PropertyValue' as const,
+    name: item.indicator,
+    value: item.value,
+    unitText: item.unit,
+  }));
 
   return {
-    "@context": "https://schema.org",
-    "@type": "AdministrativeArea",
+    '@context': 'https://schema.org',
+    '@type': 'AdministrativeArea',
     name: profile.areaName,
     url: `${baseUrl}/areas/${profile.areaCode}`,
     containedInPlace: {
-      "@type": "Country",
-      name: "日本",
+      '@type': 'Country',
+      name: '日本',
     },
     ...(additionalProperty.length > 0 && { additionalProperty }),
   };

@@ -59,6 +59,19 @@ function inspect(files) {
       findings.push(finding("FORBIDDEN_ARTIFACT", file, "temporary/build/database artifact is tracked"));
     }
 
+    // Dated one-off state directly under .claude/state/metrics has no declared lifetime and is never
+    // pruned. Release evidence belongs in .claude/state/metrics/releases/<date>-<name>.json (keep 8);
+    // raw snapshots belong in a directory that prune-state-snapshots.mjs owns.
+    if (/^\.claude\/state\/metrics\/[^/]*\d{4}-\d{2}-\d{2}[^/]*\.json$/.test(file)) {
+      findings.push(
+        finding(
+          "DATED_STATE_ARTIFACT",
+          file,
+          "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)",
+        ),
+      );
+    }
+
     const absolute = path.join(ROOT, file);
     let stat;
     try {

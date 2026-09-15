@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-yamanashi",
+    "prefCode": "19000",
+    "prefName": "山梨県",
+    "cityName": "甲府市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:23.949Z",
+    "titleSha": "7c58e79e345356ae40d187ec879a28ba2f868955865ae1cac7e61b5554da178c",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "交通・通信",
+    "ratio": 1.1612650054952502,
+    "side": "above",
+    "shareMetricKey": "transport-communication-expenditure-ratio-multi-person-households",
+    "shareTitle": "交通・通信費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 10,
+    "value": 17.2,
+    "rankingUrl": "https://stats47.jp/ranking/transport-communication-expenditure-ratio-multi-person-households",
+    "chartName": "transport-communication-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "car-ownership-multi-person-households-per-1000",
+      "title": "自動車所有数量",
+      "unit": "台",
+      "year": "2014",
+      "rank": 8,
+      "value": 1938,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 8,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/car-ownership-multi-person-households-per-1000",
+      "chartName": "car-ownership-multi-person-households-per-1000-prefecture-rankings"
+    },
+    {
+      "metricKey": "commute-by-car",
+      "title": "自宅外通勤・通学者数（自家用車）",
+      "unit": "人",
+      "year": "2020",
+      "rank": 41,
+      "value": 277598,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 41,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/commute-by-car",
+      "chartName": "commute-by-car-prefecture-rankings"
+    }
+  ]
+}

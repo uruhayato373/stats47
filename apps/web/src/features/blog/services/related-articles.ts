@@ -1,6 +1,6 @@
-import "server-only";
+import 'server-only';
 
-import { readArticleSummariesByTagKeyFromR2 } from "../repositories/blog-snapshot-reader";
+import { readArticleSummariesByTagKeysFromR2 } from '../repositories/blog-snapshot-reader';
 
 export interface RelatedArticleSummary {
   slug: string;
@@ -25,25 +25,9 @@ interface GetRelatedArticlesOptions {
  */
 export async function getRelatedArticleSummaries(
   tagKeys: string[],
-  { limit = 5, perTag }: GetRelatedArticlesOptions = {},
+  { limit = 5, perTag }: GetRelatedArticlesOptions = {}
 ): Promise<RelatedArticleSummary[]> {
   if (tagKeys.length === 0) return [];
 
-  const batches = await Promise.all(
-    tagKeys.map((tagKey) =>
-      readArticleSummariesByTagKeyFromR2(tagKey, perTag ?? limit),
-    ),
-  );
-
-  const seen = new Set<string>();
-  const result: RelatedArticleSummary[] = [];
-  for (const batch of batches) {
-    for (const article of batch) {
-      if (seen.has(article.slug) || result.length >= limit) continue;
-      seen.add(article.slug);
-      result.push(article);
-    }
-    if (result.length >= limit) break;
-  }
-  return result;
+  return readArticleSummariesByTagKeysFromR2(tagKeys, limit, perTag ?? limit);
 }

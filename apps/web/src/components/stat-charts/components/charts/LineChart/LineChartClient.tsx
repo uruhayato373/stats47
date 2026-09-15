@@ -33,9 +33,6 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
   const valueKey = lines.length === 1 ? lines[0]?.dataKey : undefined;
   const series = lines.length > 1 ? lines : undefined;
 
-  // 単位ラベルは 2 軸のときだけ D3 へ渡す。左右で単位が違うと軸頭の表示が無いと
-  // 読めないため。単軸チャート (既存の page_components 由来 20 テーマ) は
-  // 従来どおり unit を渡さず、見た目を変えない。
   const hasRightSeries = lines.some((line) => line.yAxis === "right");
 
   const latest = data.length > 0 ? data[data.length - 1] : null;
@@ -53,7 +50,7 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
         height={250}
         colors={lines.length === 1 ? lines[0]?.color ? [lines[0].color] : undefined : undefined}
         yDomain={yDomain}
-        unit={hasRightSeries ? unit : undefined}
+        unit={unit}
         rightUnit={hasRightSeries ? rightUnit : undefined}
       />
       {showLatestValues && latest && lines.length > 1 && (

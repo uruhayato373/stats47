@@ -1,6 +1,9 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 
+import { findNestedCardSurfaces } from './lib/card-nesting-audit.mjs';
+import { findChartContractViolations } from './lib/chart-contract-audit.mjs';
+
 const cwd = process.cwd();
 // Phase 0-6 (2026-06-23) で src/app の既存債務 (Card 直 import / bg-white) を是正し、
 // app も全ルール対象に昇格。components / features / app を一律で検査する。
@@ -284,6 +287,48 @@ function checkFile(relativePath) {
 const violations = scanRoots
   .flatMap((root) => listFiles(root))
   .flatMap((file) => checkFile(file));
+
+// カード外枠の中へ別のカード外枠を置くと、境界線と余白が二重になり情報密度が落ちる。
+// 正規表現では div/grid を挟む JSX やコメントを区別できないため TypeScript AST で検査する。
+const cardAuditFiles = [
+  ...scanRoots.flatMap((root) => listFiles(root)),
+  ...listFiles('../admin/app'),
+  ...listFiles('../admin/components'),
+];
+for (const relativePath of cardAuditFiles) {
+  if (!relativePath.endsWith('.tsx')) continue;
+  const source = readFileSync(path.join(cwd, relativePath), 'utf8');
+  for (const nested of findNestedCardSurfaces(source, relativePath)) {
+    violations.push({
+      ruleId: 'no-nested-card-surfaces',
+      message: `${nested.parent} の内側に ${nested.child} を置かない。外側を通常 section にするか、内側を区切り線付きリストへ変えること。`,
+      file: relativePath,
+      lineNumber: nested.lineNumber,
+      line: `<${nested.child}>`,
+    });
+  }
+}
+
+// 統計チャートは軸を短く、完全値と単位を共通ツールチップで表示する。
+// 表示崩れの原因になる単位の渡し忘れ・完全桁の軸・個別 tooltip 実装を止める。
+const chartAuditFiles = [
+  ...listFiles('src/components/stat-charts/components/charts'),
+  ...listFiles('../../packages/visualization/src/d3/components'),
+].filter((relativePath) =>
+  relativePath.endsWith('.tsx') && !relativePath.includes('__tests__')
+);
+for (const relativePath of chartAuditFiles) {
+  const source = readFileSync(path.join(cwd, relativePath), 'utf8');
+  for (const chartViolation of findChartContractViolations(source, relativePath)) {
+    violations.push({
+      ruleId: chartViolation.ruleId,
+      message: chartViolation.detail,
+      file: relativePath,
+      lineNumber: chartViolation.lineNumber,
+      line: 'chart display contract',
+    });
+  }
+}
 
 // PageShell / ArticleShell の surface は異なっても、左レールの列・境界・DOM 構造は
 // LeftRailLayout を単一契約として共有する。片方だけ独自実装へ戻る drift を止める。

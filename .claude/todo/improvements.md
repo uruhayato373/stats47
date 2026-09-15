@@ -29,6 +29,7 @@ status: active
 
 | ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
+| NOTE-KAKEI-REDESIGN-EFFECT-01 | note家計シリーズ47本の決定的テンプレ化(図5枚・根拠指標・商品カード)後のPV変化を判定する。**2026-09-15実装完了・全数本番反映済み**: baseline PV中央値2 (2026-08-17〜09-13、47本合計108PV、note dashboard latest.json)。[target: PV中央値 baseline比+50%以上 または 47本合計PV +100以上]。検証コマンド: `npm run note:metrics:fetch` で2026-09-15以降4週分を取得し、series A (a-kakei-*) のPV中央値・合計をbaselineと比較する | pending | 2026-10-13 | claude | content |
 | RANKING-REINDEX-01 | 復帰56 rankingが5週連続 GSC imp 0 (RANKING-GONE-RESTORE-01 を effect/none で確定・2026-08-05)。URL Inspection で coverageState を確定し、未収録なら sitemap 再送信で再収録を促す。**2026-09-07実測**: 日次URL Inspection履歴 (2026-08-05〜09-07の全CSV、251件のユニークrankingキーを検査済) を突合したが、復帰56キーは**1件もこれまでの日次サンプルに含まれていない** (ランダム抽出500件/日ローテーションが偶然当たっていない)。次: 56キーを明示指定した一回限りのURL Inspection実行が必要 | pending | 2026-09-21 | claude | gsc |
 | BLOG-SEO-TYPES-01 | D2/F/Gを含む記事型ポートフォリオの4週効果を既存A型と比較する。**2026-09-07実測**: topic-queue done は81件 (A:29/B:12/D2:23/F:7/G:10) に増加し、当初の「F/G公開0件で比較不成立」は解消。まだ4週齢に満たない記事が大半のため比較は次回に延期 | effect/pending | 2026-09-28 | claude | gsc |
 | BLOG-SEO-QUEUE-01 | topic queue起点の記事が需要候補を正しく選び、公開後に検索表示を得たか確認する。**2026-09-07実測**: 前提だった BLOG-QUEUE-TRACK-01 の状態ずれは解消 (in-progress 0件)。queue doneが1件→81件に増え標本は確保できたので、次回は81件のうち公開4週以上経過した分でGSC実測を行う | effect/pending | 2026-09-28 | claude | gsc |

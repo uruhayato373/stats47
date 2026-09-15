@@ -11,7 +11,7 @@ primary_agent: devops-runner
 - 大規模リファクタリング後の品質確認
 - `/deploy` 前の最終チェック（Step 2 の代替）
 - PR 作成前の self-review
-- 15 分ごとの定期チェック（長時間セッション時）
+- 変更をまとめた節目の確認（時間経過だけで同じ検査を再実行しない）
 
 ## 引数
 
@@ -22,9 +22,15 @@ primary_agent: devops-runner
 
 ## 手順
 
+対象は `.claude/rules/local-environment.md`「検証コマンドの粒度」で選ぶ。小変更にフルbuild・全テストを強制しない。
+既に成功した同じ入力・同じコマンドの結果は引き継ぎ、コード・依存・設定・生成データの変更、
+失敗、未解決の懸念がある場合に再検証する。Codex / Claude の記録方法は
+`.claude/rules/local-environment.md`「Codex / Claude の作業共有」を参照する。
+以下はリリース向けの全項目。省略した項目と理由は最終報告へ記載する。
+
 ### Phase 0: 既知の問題参照（推奨）
 
-`.Codex/skills/management/knowledge/SKILL.md` と `.Codex/skills/learned/` を読み、今回の変更に関連する過去の失敗パターンがないか確認する。
+`.claude/skills/management/knowledge/SKILL.md` と `.claude/skills/learned/` を読み、今回の変更に関連する過去の失敗パターンがないか確認する。
 
 DB マイグレーション・デプロイ・API 連携に関わる変更時は必須。それ以外はスキップ可。
 

@@ -9,7 +9,7 @@ import { SurfaceCard } from "@/components/surface";
  */
 export function ComparisonEmpty() {
     return (
-        <div className="flex flex-col items-center justify-center rounded-none border border-dashed border-border bg-card py-16 px-4 text-center">
+        <div className="flex flex-col items-center justify-center px-4 py-16 text-center">
             <div className="relative mb-6">
                 <div className="h-24 w-24 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
                     <MapPin size={48} />

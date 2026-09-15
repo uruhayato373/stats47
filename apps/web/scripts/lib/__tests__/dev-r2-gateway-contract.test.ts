@@ -60,9 +60,20 @@ describe('Windows development R2 gateway contract', () => {
 
     expect(gateway).toContain('Add-Type -AssemblyName System.Net.Http');
     expect(gateway).toContain('DefaultNetworkCredentials');
+    expect(gateway).toContain('$env:HTTPS_PROXY');
+    expect(gateway).toContain('$handler.Proxy = $proxy');
+    expect(gateway).toContain('Windows default');
     expect(gateway).toContain('"GET", "HEAD"');
     expect(gateway).not.toContain('ServerCertificateCustomValidationCallback');
     expect(gateway).not.toContain('NODE_TLS_REJECT_UNAUTHORIZED');
+  });
+
+  it('validates an explicit proxy before overriding the Windows default', () => {
+    const gateway = read('scripts/r2-dev-gateway.ps1');
+
+    expect(gateway).toContain('[Uri]::TryCreate');
+    expect(gateway).toContain('@("http", "https")');
+    expect(gateway).toContain('[System.Net.WebProxy]::new($proxyUri)');
   });
 
   it('keeps the .ps1 in UTF-8 with a BOM', () => {

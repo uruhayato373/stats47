@@ -13,13 +13,13 @@ stats47 の SNS 競合を**テーマ別の名乗りで巡回**し、フォロワ
 @riskmap.jp のような感情系競合を取りこぼす) を機械化したもの。
 
 > **SSOT**: SNS競合のアカウント単位定点観測は本スキルを運用正典とする。Xの投稿単位調査は
-> `.Codex/skills/sns/x-viral-research/SKILL.md`、自社実測は`update-sns-metrics`へ分離する。
+> `.claude/skills/sns/x-viral-research/SKILL.md`、自社実測は`update-sns-metrics`へ分離する。
 > Instagram専用の投稿単位Playwright collectorは未採択・未実装であり、その存在を前提にしない。
 > 必要になった場合は、新しい効果仮説と予算を示して本スキルの拡張として再提案する。
 
 > **設計判断**: 競合は「統計アカウント」だけではない。**同じ都道府県ネタを扱う感情喚起系** (治安/災害/格差/
 > ご当地自虐) が最大の SNS 競合。名乗りの軸を複数走らせて取りこぼしを防ぐ。結果は判断材料であり、
-> **煽り路線への追随はしない** (`.Codex/rules/sns-content-standards.md` §0 差別化軸)。
+> **煽り路線への追随はしない** (`.claude/rules/sns-content-standards.md` §0 差別化軸)。
 
 ## 既知の競合 (memory から)
 
@@ -45,8 +45,8 @@ stats47 の SNS 競合を**テーマ別の名乗りで巡回**し、フォロワ
 2. **各競合について記録**: handle / フォロワー数 (取得日) / 直近投稿頻度 / 直近で伸びた投稿 (テーマ・エンゲージ) / フォーマット
 3. **前回スキャンとの差分**: `reference/reports/*.md` の最新とフォロワー増減・新規競合をdiff
 4. **stats47 への示唆**: 取りこぼしている題材・フォーマット・名乗り軸を 3-5 個 (煽り追随ではなく信頼性×網羅性で差別化できる切り口)
-5. **レポート出力**: `.Codex/skills/sns/competitor-scan/reference/reports/YYYY-MM-DD.md`
-6. **TODO化**: 採択した未完了策だけを `.Codex/todo/improvements.md` へID付きで追加
+5. **レポート出力**: `.claude/skills/sns/competitor-scan/reference/reports/YYYY-MM-DD.md`
+6. **TODO化**: 採択した未完了策だけを `.claude/todo/improvements.md` へID付きで追加
 
 ## 出力フォーマット
 
@@ -79,7 +79,7 @@ tags: [competitor]
 1. 本スキルのレポート「stats47 への示唆」から、カタログのどの行をどう変えるかを具体化する
    (例:「competitor が『◯◯県あるある』で伸びている → §2-8 で population×体験を ○→◎ に上げる」)。
 2. x-strategist が **diff 提案**として提示する (どのテーブルのどのセルを変えるか)。
-3. **ユーザーが承認してから** rules を編集し、`node .Codex/scripts/lib/x-catalog.cjs --check` を通す。
+3. **ユーザーが承認してから** rules を編集し、`node .claude/scripts/lib/x-catalog.cjs --check` を通す。
 4. 反映後は `analyze-x-winning-patterns` の実測で効果を検証する (`evidence-based-judgment.md`)。
 
 ## やらないこと (意図的)
@@ -91,6 +91,6 @@ tags: [competitor]
 
 ## 関連
 
-- チャネル戦略・差別化軸: `.Codex/rules/sns-content-standards.md` §0
+- チャネル戦略・差別化軸: `.claude/rules/sns-content-standards.md` §0
 - 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search` / `project_competitor_indicator_benchmark` / `reference_competitor_research_label`
 - 週次運用への組み込み: `/sns-weekly-plan` Step 2

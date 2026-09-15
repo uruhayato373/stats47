@@ -16,17 +16,40 @@ permissions:
   pull-requests: write
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Phase 2 並列化 (2026-07-12): 旧「単一 quality-check job で全 step を直列」を
-# 独立 job へ分割し、依存インストール後の gate/type-check/test/build/thumbnail を
-# 並列実行してクリティカルパスを短縮する。
-#   - 各 step の run / env / continue-on-error は不変 (検査内容を弱めない)。
+# 独立jobを差分分類し、影響するgate/type-check/test/buildだけを並列実行する。
+#   - static gateは全PRで必ず実行する。
+#   - Web buildは1回だけ作り、代表E2Eとpage-qualityが同じartifactを再利用する。
+#   - coverage・全E2E・全workspace型検査は週次full suiteでも全件実行する。
 #   - 集約 job `quality-check` (name: Code Quality Check) が全 job を needs + if:always() で
 #     検証し、単一の required status check を維持する (branch protection の再設定を不要にする)。
-#   - R2 secret / build env は build job だけに渡す (Thumbnail は公開 URL のみで secret 不要)。
-#   - Blog Thumbnail Gate の「全件→変更分」仕様変更・CI cache 導入は本 PR に含めない (別 Phase)。
+#   - R2 secret / build env は必要なjobだけに渡す (Thumbnail は公開 URL のみで secret 不要)。
 # ─────────────────────────────────────────────────────────────────────────────
 
 jobs:
+  changes:
+    name: Plan affected quality jobs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      type_check: ${{ steps.plan.outputs.type_check }}
+      tests: ${{ steps.plan.outputs.tests }}
+      packages: ${{ steps.plan.outputs.packages }}
+      web: ${{ steps.plan.outputs.web }}
+      admin: ${{ steps.plan.outputs.admin }}
+      remotion: ${{ steps.plan.outputs.remotion }}
+      visualization: ${{ steps.plan.outputs.visualization }}
+      remote_assets: ${{ steps.plan.outputs.remote_assets }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Classify changed paths
+        id: plan
+        run: |
+          git diff --name-only -z "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" \
+            | node .claude/scripts/lib/plan-pr-quality.mjs --stdin0 >> "$GITHUB_OUTPUT"
+
   static-gates:
     name: Static Gates
     runs-on: ubuntu-latest
@@ -417,7 +440,7 @@ jobs:
       - name: 🚦 Preflight Aggregator Contract
         # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
         # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
-        run: node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs
+        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs
         continue-on-error: false
 
       - name: 🛑 Commit Message Skip-Token Guard
@@ -604,6 +627,8 @@ jobs:
 
   type-check:
     name: Type Check
+    needs: changes
+    if: needs.changes.outputs.type_check == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -629,7 +654,9 @@ jobs:
         continue-on-error: false # 型エラーで失敗させる
 
   test:
-    name: Unit Tests & Coverage
+    name: Unit Tests
+    needs: changes
+    if: needs.changes.outputs.tests == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -648,8 +675,9 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🧪 Run Unit Tests with Coverage
-        run: npm run test:coverage -w apps/web
+      - name: 🧪 Run Web Unit Tests
+        if: needs.changes.outputs.web == 'true'
+        run: npm run test:run -w apps/web
         continue-on-error: false # テスト失敗で止める
 
       # ★2026-07-31 新設。この step が無かった間、packages/* の vitest (12 パッケージ・
@@ -659,135 +687,34 @@ jobs:
       #   環境依存のレンダリング比較は packages/visualization/vitest.config.ts で
       #   RUN_RENDER_TESTS=1 の opt-in に分けてある。
       - name: 🧪 Run Package Unit Tests
-        run: npm run test:packages
+        if: needs.changes.outputs.packages == 'true'
+        run: npm run test:packages:ci
         continue-on-error: false
 
       - name: 🎯 Critical Pure Module Coverage
+        if: needs.changes.outputs.packages == 'true'
         # 全体率を上げるための除外ではなく、shape/unit/dependency/validator/recipe/value/R2 parserの
         # shape/unit/dependency/validator/recipe/value/link/R2 parser/routeの
         # 実測module floorを個別に固定する。JSON/HTML成果物は保存せず、V8がメモリ上で判定する。
         run: |
-          (cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)
+          (cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)
           (cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)
-          (cd apps/web && npx vitest run src/features/ranking/utils/__tests__/generate-meta-data.test.ts --coverage --coverage.reporter=text-summary --coverage.thresholds.lines=0 --coverage.thresholds.statements=0 --coverage.thresholds.functions=0 --coverage.thresholds.branches=0)
         continue-on-error: false
 
       # apps/admin は root の `test:packages` (`--project '@stats47/*'`) に含まれない。
       # active workspace の unit / route integration suite を明示実行し、失敗時は
       # required `test` job → 集約 `quality-check` を通じてPRを止める。
       - name: 🧪 Run Admin Unit Tests
+        if: needs.changes.outputs.admin == 'true'
         run: npm run test --workspace=apps/admin
         continue-on-error: false
 
-      - name: 📊 Upload coverage to artifacts
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: coverage-report
-          path: apps/web/coverage/
-          retention-days: 90
-
-      - name: 💬 Comment PR with coverage summary
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          script: |
-            const fs = require('fs');
-            const path = require('path');
-
-            try {
-              const coverageSummaryPath = path.join(process.cwd(), 'apps/web/coverage', 'coverage-summary.json');
-              if (fs.existsSync(coverageSummaryPath)) {
-                const summary = JSON.parse(fs.readFileSync(coverageSummaryPath, 'utf8'));
-                const total = summary.total;
-
-                // メトリクス計算
-                const lines = total.lines.pct.toFixed(2);
-                const statements = total.statements.pct.toFixed(2);
-                const functions = total.functions.pct.toFixed(2);
-                const branches = total.branches.pct.toFixed(2);
-
-                // 回帰防止 floor (単一ソース coverage-thresholds.json を vitest と共有)。目標値ではない。
-                const ct = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'apps/web', 'coverage-thresholds.json'), 'utf8'));
-                const floor = { lines: ct.lines, statements: ct.statements, functions: ct.functions, branches: ct.branches };
-                // floor 以上=🟢 / floor-10pt 以内=🟡 / 未満=🔴
-                const getBadge = (value, f) => value >= f ? '🟢' : value >= f - 10 ? '🟡' : '🔴';
-
-                // ファイル別のカバレッジ（上位10件、低カバレッジ優先）
-                const fileCoverage = Object.entries(summary)
-                  .filter(([key]) => key !== 'total')
-                  .map(([file, data]) => ({
-                    file: file.replace(process.cwd() + '/', '').replace(/^src\//, ''),
-                    lines: data.lines.pct,
-                    statements: data.statements.pct,
-                    functions: data.functions.pct,
-                    branches: data.branches.pct
-                  }))
-                  .sort((a, b) => a.lines - b.lines) // 低い順にソート
-                  .slice(0, 10);
-
-                const lowCoverageFiles = fileCoverage.filter(f => f.lines < floor.lines);
-                const highCoverageFiles = fileCoverage.filter(f => f.lines >= floor.lines);
-
-                let fileList = '';
-                if (lowCoverageFiles.length > 0) {
-                  fileList += '\n\n**⚠️ 低カバレッジファイル（改善推奨）:**\n';
-                  fileList += lowCoverageFiles.map(f =>
-                    `- \`${f.file}\`: ${f.lines.toFixed(1)}% (Lines)`
-                  ).join('\n');
-                }
-                if (highCoverageFiles.length > 0 && lowCoverageFiles.length < 10) {
-                  fileList += '\n\n**✅ 高カバレッジファイル（参考）:**\n';
-                  fileList += highCoverageFiles.slice(0, 5).map(f =>
-                    `- \`${f.file}\`: ${f.lines.toFixed(1)}% (Lines)`
-                  ).join('\n');
-                }
-
-                const workflowUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-
-                const comment = `## 📊 Test Coverage Report
-
-                | Metric | Coverage | Status |
-                |--------|----------|--------|
-                | Lines | ${lines}% | ${getBadge(parseFloat(lines), floor.lines)} |
-                | Statements | ${statements}% | ${getBadge(parseFloat(statements), floor.statements)} |
-                | Functions | ${functions}% | ${getBadge(parseFloat(functions), floor.functions)} |
-                | Branches | ${branches}% | ${getBadge(parseFloat(branches), floor.branches)} |
-
-                **Floor (回帰防止線・目標ではありません):** Lines ${floor.lines}% / Statements ${floor.statements}% / Functions ${floor.functions}% / Branches ${floor.branches}% — vitest が enforce (未達で CI 失敗)。src/app は結線ファイルだけを除外し、再利用ロジックは分母へ含める。
-
-                📥 [Download full coverage report](${workflowUrl})${fileList}
-
-                <details>
-                <summary>📋 Coverage Details</summary>
-
-                Full HTML report is available in the workflow artifacts. Download the \`coverage-report\` artifact and open \`coverage/index.html\` in your browser.
-
-                **How to view:**
-                1. Go to the [workflow run](${workflowUrl})
-                2. Download the \`coverage-report\` artifact
-                3. Extract and open \`coverage/index.html\` in your browser
-                </details>`;
-
-                // await 必須: 未await だと 503 等の reject が try/catch を素通りして
-                // unhandled rejection になり、cosmetic なコメント投稿の失敗で job 全体が落ちる
-                // (2026-07-20 GitHub API 503 障害で Unit Tests が誤って fail した事例)。
-                await github.rest.issues.createComment({
-                  issue_number: context.issue.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: comment
-                });
-              }
-            } catch (error) {
-              console.error('Failed to generate coverage comment:', error);
-            }
-
-      # 注: カバレッジ閾値の enforce は上の「Run Unit Tests with Coverage」step に一本化。
-      # vitest.config.ts が coverage-thresholds.json (単一ソース) を読み floor 未達で exit 1 する。
-      # 旧「Check coverage thresholds」step (閾値リテラル 10 を再ハードコード) は重複のため削除。
+      # カバレッジ全数・レポートは quality-suite-weekly.yml へ集約する。
 
   admin-quality:
     name: Admin Build & E2E
+    needs: changes
+    if: needs.changes.outputs.admin == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -844,6 +771,8 @@ jobs:
 
   remotion-quality:
     name: Remotion Bundle
+    needs: changes
+    if: needs.changes.outputs.remotion == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -874,6 +803,8 @@ jobs:
 
   visualization-render:
     name: Visualization Render Golden
+    needs: changes
+    if: needs.changes.outputs.visualization == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -908,6 +839,8 @@ jobs:
 
   build:
     name: Build Check
+    needs: changes
+    if: needs.changes.outputs.web == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -941,8 +874,20 @@ jobs:
           NEXT_SKIP_BUILD_TYPECHECK: 'true'
         continue-on-error: false # ビルドエラーで失敗させる
 
+      - name: 📦 Share verified Next.js build
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pr-web-next-build
+          path: |
+            apps/web/.next/
+            !apps/web/.next/cache/**
+          include-hidden-files: true
+          retention-days: 1
+
   remote-asset-audit:
     name: Blog Thumbnail Gate
+    needs: changes
+    if: needs.changes.outputs.remote_assets == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -970,7 +915,9 @@ jobs:
         continue-on-error: false
 
   e2e:
-    name: Full E2E
+    name: Representative E2E
+    needs: [changes, build]
+    if: needs.changes.outputs.web == 'true' && needs.build.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 25
 
@@ -990,9 +937,30 @@ jobs:
       - name: 🌐 Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: 🎭 Run full Playwright E2E suite
-        # playwright.config.ts が本番ビルド + next start を起動し、全導線・SEO・
-        # middleware・アクセシビリティを Chromium 1 worker で安定して検証する。
+      - name: 📥 Reuse verified Next.js build
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pr-web-next-build
+          path: apps/web/.next
+
+      - name: ▶️ Start verified web build
+        working-directory: apps/web
+        env:
+          NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: |
+          npx next start --port 3100 > /tmp/pr-e2e-next.log 2>&1 &
+          echo $! > /tmp/pr-e2e-next.pid
+          for _ in $(seq 1 60); do
+            curl -sf http://localhost:3100/ > /dev/null && exit 0
+            sleep 2
+          done
+          cat /tmp/pr-e2e-next.log
+          exit 1
+
+      - name: 🎭 Run representative Playwright E2E suite
+        # PRでは主要導線・レスポンシブ・アクセシビリティ・構造化データを検査する。
+        # 全E2Eは quality-suite-weekly.yml が毎週実行する。
         env:
           NODE_ENV: production
           NEXT_PUBLIC_ENV: production
@@ -1001,8 +969,20 @@ jobs:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
           NODE_OPTIONS: '--max-old-space-size=4096'
-        run: npx playwright test --project=e2e-chromium
+          # 必須のtype-check jobとquality-check集約で型検査する。同じPRでの再検査を省く。
+          NEXT_SKIP_BUILD_TYPECHECK: 'true'
+          PLAYWRIGHT_TEST_BASE_URL: http://localhost:3100
+        run: >-
+          npx playwright test --project=e2e-chromium
+          tests/e2e/public-route-contract.spec.ts
+          tests/e2e/responsive-pr.spec.ts
+          tests/e2e/accessibility/representative-routes.spec.ts
+          tests/e2e/seo/structured-data.spec.ts
         working-directory: apps/web
+
+      - name: 🛑 Stop web app
+        if: always()
+        run: kill "$(cat /tmp/pr-e2e-next.pid)" 2>/dev/null || true
 
       - name: 📊 Upload Playwright report
         if: always()
@@ -1015,23 +995,87 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
+  page-quality:
+    name: Page Quality (representative)
+    needs: [changes, build]
+    if: needs.changes.outputs.web == 'true' && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # git diff origin/main...HEAD で影響テンプレートを判定するため全履歴取得
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🌐 Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: 📥 Reuse verified Next.js build
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pr-web-next-build
+          path: apps/web/.next
+
+      - name: ▶️ Start web app
+        env:
+          NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: |
+          npx next start --port 3100 &
+          echo $! > /tmp/next-start.pid
+          for _ in $(seq 1 30); do
+            curl -sf http://localhost:3100/ > /dev/null && exit 0
+            sleep 2
+          done
+          echo "::error::next start did not become ready"
+          exit 1
+        working-directory: apps/web
+
+      - name: 🔍 Run representative page-quality check
+        # 変更のあった影響テンプレートの代表URLだけを軽量検査する。
+        # 明確な退行 (error) だけをCI失敗にし、軽微な変動はwarningとしてlatest.jsonへ記録する。
+        run: npm run page-quality:check -- --base-url http://localhost:3100 --base origin/${{ github.base_ref }}
+
+      - name: 🛑 Stop web app
+        if: always()
+        run: kill "$(cat /tmp/next-start.pid)" 2>/dev/null || true
+
+      - name: 📊 Upload page-quality report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: page-quality-report
+          path: .claude/state/metrics/page-quality/LATEST.md
+          if-no-files-found: ignore
+          retention-days: 30
+
   # 集約 job: 上記 job を全て needs し、単一の required status check
   # (branch protection が要求する "Code Quality Check") を維持する。
-  # if:always() で常に実行し、いずれかが failure/cancelled/skipped なら明示的に失敗させる
-  # (needs のいずれかが失敗すると本 job は skip されうるため、結果を明示チェックする)。
+  # if:always() で常に実行し、実行対象jobの failure/cancelled を明示的に失敗させる。
+  # 差分分類で対象外になったjobの skipped は正常とする。
   quality-check:
     name: Code Quality Check
-    needs: [static-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e]
+    needs: [changes, static-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e, page-quality]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
       - name: 🧮 Verify all required checks passed
-        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
+          echo "changes=${{ needs.changes.result }} static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }} page-quality=${{ needs.page-quality.result }}"
           exit 1
 
       - name: ✅ All Checks Passed

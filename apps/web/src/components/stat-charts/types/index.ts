@@ -159,6 +159,7 @@ export type DashboardConfigMap = {
   "line-chart": {
     estatParams: GetStatsDataParams | GetStatsDataParams[];
     labels?: string[];
+    unit?: string;
     description?: string;
     yAxisConfig?: YAxisConfig;
     /** チャート下に最新値リストを表示するか（デフォルト: false） */
@@ -260,6 +261,7 @@ export type DashboardConfigMap = {
     maleParams: GetStatsDataParams[];
     /** 女性の年齢別人口パラメータ配列（0-4歳女, 5-9歳女, ...） */
     femaleParams: GetStatsDataParams[];
+    unit?: string;
     /** 年齢階級ラベル配列 */
     ageGroups?: string[];
     description?: string;

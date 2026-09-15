@@ -4,7 +4,6 @@ import { SpecialtyImage } from "./SpecialtyImage";
 
 import type { AreaEditorial } from "@stats47/data-configs";
 
-
 /** R2 公開 URL のベース (イラスト解決用)。特産品イラストは常にここから解決を試み、
  *  未生成の県は SpecialtyImage 内の onError でイニシャルに degrade する。 */
 const R2_PUBLIC_BASE = "https://storage.stats47.jp";
@@ -23,41 +22,43 @@ export function SpecialtyList({ editorial }: Props) {
   if (!editorial || editorial.specialties.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 gap-3 @container @md:grid-cols-2">
-      {editorial.specialties.map((sp) => {
-        const imgUrl = `${R2_PUBLIC_BASE}/app/areas/${editorial.areaCode}/specialty/${sp.slug}.webp`;
-        return (
-          <div
-            key={sp.slug}
-            className={getSurfaceCardClassName({ className: "flex gap-3 p-3" })}
-          >
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-none bg-muted">
-              <SpecialtyImage
-                src={imgUrl}
-                alt={sp.name}
-                fallbackInitial={sp.name.slice(0, 1)}
-              />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-baseline gap-2">
-                <h4 className="text-sm font-bold text-foreground">{sp.name}</h4>
-                <span className="text-[11px] text-muted-foreground">{sp.municipality}</span>
+    <div className="@container">
+      <div className="grid grid-cols-1 gap-3 @md:grid-cols-2">
+        {editorial.specialties.map((sp) => {
+          const imgUrl = `${R2_PUBLIC_BASE}/app/areas/${editorial.areaCode}/specialty/${sp.slug}.webp`;
+          return (
+            <div
+              key={sp.slug}
+              className={getSurfaceCardClassName({ className: "flex gap-3 p-3" })}
+            >
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-none bg-muted">
+                <SpecialtyImage
+                  src={imgUrl}
+                  alt={sp.name}
+                  fallbackInitial={sp.name.slice(0, 1)}
+                />
               </div>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                {sp.description}
-              </p>
-              <a
-                href={sp.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 inline-block text-[10px] text-primary hover:underline"
-              >
-                出典
-              </a>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline gap-2">
+                  <h4 className="text-sm font-bold text-foreground">{sp.name}</h4>
+                  <span className="text-[11px] text-muted-foreground">{sp.municipality}</span>
+                </div>
+                <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                  {sp.description}
+                </p>
+                <a
+                  href={sp.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block text-[10px] text-primary hover:underline"
+                >
+                  出典
+                </a>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

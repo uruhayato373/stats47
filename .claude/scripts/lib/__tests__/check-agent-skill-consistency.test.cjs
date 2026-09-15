@@ -403,3 +403,96 @@ test("ただの文字列一致では参照とみなさない", () => {
   const result = runWithOrphan(root);
   assert.match(result.stdout, /thing[.]ts.*orphan/, "無関係な文字列一致を参照と誤認している");
 });
+
+// [E12] Codex mirror: 生成物 (.agents/skills / .codex/agents) が SSOT からずれていれば止め、
+// 再生成後は通る。mirror ディレクトリが無い fixture では検査しない (既存 fixture を壊さない)。
+const MIRROR = path.resolve(__dirname, "..", "sync-codex-mirror.cjs");
+
+test("[E12] mirror が無い fixture では検査しない", (t) => {
+  const root = fixture({
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/skills/dev/probe/SKILL.md": "---\nname: probe\ndescription: probe skill\nprimary_agent: worker\n---\n\nbody\n",
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const result = run(root);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.doesNotMatch(result.stdout, /\[E12\]/);
+});
+
+test("[E12] ドリフトした mirror を止め、再生成すると通る", (t) => {
+  const root = fixture({
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/skills/dev/probe/SKILL.md": "---\nname: probe\ndescription: probe skill\nprimary_agent: worker\n---\n\nbody\n",
+    ".claude/skills/analytics/x/reference/snapshots/2026-W01/q.csv": "data",
+    ".agents/skills/dev/probe/SKILL.md": "stale copy",
+    ".agents/skills/gone/SKILL.md": "no longer in SSOT",
+    ".codex/agents/worker.toml": 'name = "worker"\n',
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const drifted = run(root);
+  assert.equal(drifted.status, 1);
+  assert.match(drifted.stdout, /\[E12\]/);
+
+  const regen = spawnSync(process.execPath, [MIRROR], { cwd: root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root } });
+  assert.equal(regen.status, 0, regen.stdout + regen.stderr);
+  assert.equal(fs.readFileSync(path.join(root, ".agents/skills/dev/probe/SKILL.md"), "utf8"), fs.readFileSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), "utf8"));
+  assert.ok(!fs.existsSync(path.join(root, ".agents/skills/gone")), "SSOT に無い skill は消える");
+  assert.ok(!fs.existsSync(path.join(root, ".agents/skills/analytics/x/reference/snapshots")), "snapshot データは mirror しない");
+  const toml = fs.readFileSync(path.join(root, ".codex/agents/worker.toml"), "utf8");
+  assert.match(toml, /^name = "worker"\ndescription = "bounded executor"\ndeveloper_instructions = '''\n## Output Contract/m);
+  assert.doesNotMatch(toml, /\.Codex\//);
+
+  const clean = run(root);
+  assert.equal(clean.status, 0, clean.stdout + clean.stderr);
+  const check = spawnSync(process.execPath, [MIRROR, "--check"], { cwd: root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root } });
+  assert.equal(check.status, 0, check.stdout + check.stderr);
+});
+
+test("[E3] .codex/hooks.json の command が指す hook も存在検査する", (t) => {
+  const root = fixture({
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".codex/hooks.json": JSON.stringify({ hooks: { Stop: [{ hooks: [{ type: "command", command: "node '.claude/hooks/missing-hook.js'" }] }] } }),
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const result = run(root);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /\[E3\].*missing-hook\.js/);
+});
+
+test("mirror はログ・コード・指示の実体を共有し、誤リンクと壊れたリンクを検出する", (t) => {
+  const root = fixture({
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/skills/dev/probe/SKILL.md": "probe",
+    ".claude/skills/dev/probe/reference/improvement-log.md": "before",
+    ".claude/skills/dev/probe/scripts/run.ts": "export {};",
+    ".agents/skills/dev/probe/SKILL.md": "old",
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const invoke = (...args) => spawnSync(process.execPath, [MIRROR, ...args], {
+    cwd: root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root },
+  });
+  assert.equal(invoke().status, 0);
+  const target = path.join(root, ".agents/skills/dev/probe/reference/improvement-log.md");
+  const skill = path.join(root, ".agents/skills/dev/probe/SKILL.md");
+  assert.ok(fs.lstatSync(skill).isFile(), "Codex discovers regular SKILL.md files");
+  fs.unlinkSync(skill);
+  fs.symlinkSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), skill, "file");
+  assert.equal(invoke("--check").status, 1, "file links must be repaired for discovery");
+  assert.equal(invoke().status, 0);
+  assert.ok(fs.lstatSync(skill).isFile());
+  assert.ok(fs.lstatSync(target).isSymbolicLink());
+  assert.ok(!path.isAbsolute(fs.readlinkSync(target)), "別PCでも使える相対リンク");
+  fs.writeFileSync(target, "after");
+  assert.equal(fs.readFileSync(path.join(root, ".claude/skills/dev/probe/reference/improvement-log.md"), "utf8"), "after");
+  assert.equal(invoke("--check").status, 0, "原本更新後もコピーの再生成は不要");
+  fs.unlinkSync(target);
+  fs.symlinkSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), target, "file");
+  assert.equal(invoke("--check").status, 1, "別の原本を指す誤リンクは不一致");
+  assert.equal(invoke().status, 0);
+  assert.equal(fs.readFileSync(target, "utf8"), "after");
+  fs.unlinkSync(target);
+  fs.symlinkSync("missing", target, "file");
+  assert.equal(invoke("--check").status, 1);
+  assert.equal(invoke().status, 0);
+  assert.equal(fs.readFileSync(target, "utf8"), "after");
+});

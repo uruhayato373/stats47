@@ -19,7 +19,7 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 
 ## 実行環境の判定（★最初に必ず確認）
 
-本 skill の `gh` コマンド例は **ローカル Mac 環境**前提。**Codex on the web / クラウド実行環境**では前提が違うので最初に判定する。
+本 skill の `gh` コマンド例は **ローカル Mac 環境**前提。**Claude Code on the web / クラウド実行環境**では前提が違うので最初に判定する。
 
 | 能力 | ローカル | web / クラウド実行 |
 |---|---|---|
@@ -148,7 +148,7 @@ git rev-list --count origin/develop..origin/main   # main が develop より先�
   git push origin develop
   ```
 
-  詳細規約: `.Codex/rules/branch-workflow.md` の「hotfix / main 直行を入れたら main → develop を即同期する」。
+  詳細規約: `.claude/rules/branch-workflow.md` の「hotfix / main 直行を入れたら main → develop を即同期する」。
 
 ### Step 1.5: feature ブランチ化（develop/main にいる場合）
 
@@ -166,6 +166,10 @@ git branch -f develop origin/develop
 
 ### Step 2: テスト・型チェック・ビルド
 
+リリース段階のローカル事前ゲート (`.claude/rules/local-environment.md`「検証コマンドの粒度」
+参照)。PR 作成前に fail-fast するためのもので、Step 4 の CI (`pr-quality-check.yml`) と
+重複させる意図はない — CI 待ちより先にここで落とすことで往復を減らす。
+
 以下を**順番に**実行する。いずれかが失敗した場合はユーザーに報告し、続行するか確認する。
 
 ```bash
@@ -178,8 +182,8 @@ cd apps/web && npx eslint src/ --ext .ts,.tsx && cd ../..
 # 3. ユニットテスト
 cd apps/web && npx vitest run && cd ../..
 
-# 4. 再発防止ガード (.Codex/scripts/lib/check-*.cjs — 検出時 exit 1 で停止)
-node .Codex/scripts/lib/check-published-drafts.cjs   # 公開済み記事の下書きが docs/21 に残っていないか
+# 4. 再発防止ガード (.claude/scripts/lib/check-*.cjs — 検出時 exit 1 で停止)
+node .claude/scripts/lib/check-published-drafts.cjs   # 公開済み記事の下書きが docs/21 に残っていないか
 ```
 
 全パスしたら Step 2.5 へ進む。
@@ -239,7 +243,7 @@ gh pr create --base main --head develop --title "Release: <短い要約>" --body
 - [x] R2 sync OK（.local/r2/ に 24h 以内の未 push ファイルなし）
 - [ ] Playwright E2E（該当なら）
 
-🤖 Generated with [Codex](https://Codex.com/Codex)
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
 EOF
 )"
 ```
@@ -307,11 +311,11 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 # CDN キャッシュ疑いは ?cb=$(date +%s) を付けてオリジン Worker の応答を直接確認
 ```
 
-不一致なら未完（例: ranking を `isActive:true` にしても `KNOWN_RANKING_KEYS` / R2 `all.json` 未反映だと middleware の `isGone || !isKnown` で 410 のまま）。ranking 公開の多段依存は memory `project_ranking_publish_pipeline_gap` / `.Codex/todo/backlog.md`「122 metric (完全データ) の本番公開」参照。
+不一致なら未完（例: ranking を `isActive:true` にしても `KNOWN_RANKING_KEYS` / R2 `all.json` 未反映だと middleware の `isGone || !isKnown` で 410 のまま）。ranking 公開の多段依存は memory `project_ranking_publish_pipeline_gap` / `.claude/todo/backlog.md`「122 metric (完全データ) の本番公開」参照。
 
 ### Step 8: Cloudflare Purge 自動実行の判定
 
-以下のいずれかに該当する変更が含まれる場合、**`/purge-cdn` を Codex が自動実行**する（ダッシュボード操作不要）。
+以下のいずれかに該当する変更が含まれる場合、**`/purge-cdn` を Claude が自動実行**する（ダッシュボード操作不要）。
 
 - `apps/web/src/middleware.ts` のルール追加・変更（特に 410 / 301 / noindex 分岐）
 - `apps/web/src/app/**/page.tsx` の `generateMetadata` で `robots` / `canonical` を変更

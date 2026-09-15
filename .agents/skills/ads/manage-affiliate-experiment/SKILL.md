@@ -1,6 +1,6 @@
 ---
 name: manage-affiliate-experiment
-description: アフィリエイト クリエイティブ A/B 実験のライフサイクル管理 (plan/start/observe/decide/close)。実験 registry (.Codex/state/ads/experiments.json) と SSOT の variant エントリを整合させ、判定は決定的スクリプトに委ねる。Use when user says "アフィリエイトABテスト", "クリエイティブ実験", "variant 実験", "実験を開始/判定/終了".
+description: アフィリエイト クリエイティブ A/B 実験のライフサイクル管理 (plan/start/observe/decide/close)。実験 registry (.claude/state/ads/experiments.json) と SSOT の variant エントリを整合させ、判定は決定的スクリプトに委ねる。Use when user says "アフィリエイトABテスト", "クリエイティブ実験", "variant 実験", "実験を開始/判定/終了".
 primary_agent: affiliate-manager
 co_agents: [improvement-triage, ga4-analyst]
 ---
@@ -8,7 +8,7 @@ co_agents: [improvement-triage, ga4-analyst]
 アフィリエイト広告の **クリエイティブ A/B 実験を registry ベースで運用**する。
 配分・計測の技術仕様は `reference/creative-ab-testing.md` (AFF-05 framework、実装済) を参照。
 
-- **実験 registry (SSOT)**: `.Codex/state/ads/experiments.json` — 書込はこの skill のみ
+- **実験 registry (SSOT)**: `.claude/state/ads/experiments.json` — 書込はこの skill のみ
 - **variant 実体**: 下記 2 種類 (`kind` で区別する)
 
 ### 実験の 2 種類 (★2026-08-04 に `kind: "code"` を新設)
@@ -35,26 +35,20 @@ co_agents: [improvement-triage, ga4-analyst]
 
 ### plan — 実験を設計する (registry 追加はまだしない)
 
-1. 対象枠 (locationCode) と vertical を決め、`.Codex/state/ads/affiliate-operations-latest.json` の
+1. 対象枠 (locationCode) と vertical を決め、`.claude/state/ads/affiliate-operations-latest.json` の
    `measurementGate` が `ready` で `ga4Snapshot` に variant dimension があることを確認
    (blocked のまま実験を始めない)。
-   二層portfolio pilotでは加えて`affiliate-portfolio-latest.json`と
-   `affiliate-pilot-readiness-latest.json`を読み、programRef/profile/outcome、既存実験なし、
-   実現可能性、案件・ページ・pushのowner承認がすべてreadyであることを確認する。
 2. **停止条件を事前固定**する: `minSamplePerVariant` (既定 1,000 imp) / `minDurationDays` (既定 28) /
-   `maxDurationDays` (既定 84) / `primaryMetric` (ctr) / measurement freshness / confound guard。
-   snapshot 1点へ検定や「95%有意」を後付けせず、gate通過後もCTRと相対差を人間へ提示するだけにする。
+   `maxDurationDays` (既定 84) / `primaryMetric` (ctr)。`ready-to-decide` は sample・期間・freshness・
+   confound guard を通過して人間へ観測値を提示できる状態であり、勝者確定ではない。単一snapshotへ
+   2標本比率検定を当てて「95%有意」を装わず、CTR・相対差・guardを併記して人間が判断する。
 3. variant は 2〜3 個に絞る (4 個以上は必要サンプルが急増)。
 
 ### start — 実験を開始する
 
-開始前に`npx tsx .Codex/scripts/ads/build-affiliate-pilot-state.ts --check`を通す。
-`readiness.status !== "ready"`ならregistry/creative/pushを一切変更しない。同時にactiveにできる
-二層portfolio pilotは1件だけで、theme/category/homeへ新しい枠を追加しない。
-
 1. `apps/web/scripts/affiliate-ads-data.ts` に同一 `experimentId`・別 `variantId` のエントリを 2〜3 件
    追加 (`/register-affiliate-banner` の Step 4 と同じ形式 + experiment フィールド)。
-2. `.Codex/state/ads/experiments.json` の `experiments[]` に registry エントリを追加:
+2. `.claude/state/ads/experiments.json` の `experiments[]` に registry エントリを追加:
    ```json
    {
      "experimentId": "ranking-sidebar-economy",
@@ -66,26 +60,25 @@ co_agents: [improvement-triage, ga4-analyst]
      "maxDurationDays": 84,
      "primaryMetric": "ctr",
      "decisionRule": "sample・期間・freshness・confound guard通過後にCTRと相対差を提示し、人間が判断する",
-     "confounds": [],
      "status": "active",
      "winnerVariantId": null
    }
    ```
-3. 検証: `npx tsx .Codex/scripts/ads/build-affiliate-operations-state.ts` で `experiments.invalid` が
+3. 検証: `npx tsx .claude/scripts/ads/build-affiliate-operations-state.ts` で `experiments.invalid` が
    空であること (variant 重複 / weight 不正 / 対象枠不一致 / registry-SSOT 不整合を決定的に検出)。
 4. 反映はユーザー確認の上 develop push (`publish-affiliate-ads.yml` が R2 反映)。
 
 ### observe — 進行状況を確認する
 
 `affiliate-operations-latest.json` の `experiments` を読む (週次 CI が自動更新)。手動更新は
-`node .Codex/scripts/ads/fetch-affiliate-ga4.cjs 28` (要 GA4 鍵) → `build-affiliate-operations-state.ts`。
+`node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` (要 GA4 鍵) → `build-affiliate-operations-state.ts`。
 
 ### decide — ready-to-decide の実験を人間に提示する
 
 1. `experiments.readyToDecide` の variant 別 imp / click / CTR を表で提示。
-2. sample・期間・measurement freshness・confound guardの結果とCTRの相対差を添えて
-   **ユーザーに判断を仰ぐ** (統計的有意性を捏造せず、自動採用しない)。
-3. 効果の記録は `.Codex/rules/evidence-based-judgment.md` のテンプレで
+2. `decisionGuards`、CTR、相対差を添えて **ユーザーに判断を仰ぐ** (自動採用しない)。
+   `measurement-gate-blocked` / `confounded` があれば判定不能のままにする。
+3. 効果の記録は `.claude/rules/evidence-based-judgment.md` のテンプレで
    `reference/improvement-log.md` (affiliate-improvement) に書き、status 更新は improvement-triage へ。
 
 ### close — 実験を終了する
@@ -102,9 +95,9 @@ co_agents: [improvement-triage, ga4-analyst]
 | ファイル | 役割 |
 |---|---|
 | `reference/creative-ab-testing.md` | 配分方式 (client 加重ランダム + sticky)・GA4 計測・停止ルールの現行仕様 |
-| `.Codex/state/ads/experiments.json` | 実験 registry (SSOT) |
-| `.Codex/scripts/ads/build-affiliate-operations-state.ts` | 決定的判定 + 集約 state 生成 |
-| `.Codex/scripts/ads/lib/affiliate-operations-core.mjs` | 判定コア (純粋関数・`node --test` 対象) |
-| `.Codex/scripts/ads/__tests__/affiliate-operations-core.test.mjs` | 判定コアの fixture テスト (gate/実験 status/state validate) |
+| `.claude/state/ads/experiments.json` | 実験 registry (SSOT) |
+| `.claude/scripts/ads/build-affiliate-operations-state.ts` | 決定的判定 + 集約 state 生成 |
+| `.claude/scripts/ads/lib/affiliate-operations-core.mjs` | 判定コア (純粋関数・`node --test` 対象) |
+| `.claude/scripts/ads/__tests__/affiliate-operations-core.test.mjs` | 判定コアの fixture テスト (gate/実験 status/state validate) |
 | `apps/web/scripts/affiliate-ads-data.ts` | variant 実体 (experimentId/variantId/weight) |
 | `apps/web/src/features/ads/components/VariantAdSlot.tsx` | 出し分け実装 (client 加重ランダム + sticky) |

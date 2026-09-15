@@ -30,7 +30,7 @@ import { THEME_INDICATOR_SETS } from '@stats47/types';
 
 import { METRICS_REGISTRY } from '../src/registry';
 import { LOCAL_FINANCE_RATIO_METRICS } from '../src/theme-catalog/local-finance-ratios';
-import { normalizeUnitForAxis } from '../src/theme-catalog/types';
+import { normalizeUnitForAxis, HARM_AXES, ADOPTION_CRITERIA } from '../src/theme-catalog/types';
 import {
   listThemeCatalogs,
   CATALOG_COMPONENT_TYPES,
@@ -572,7 +572,141 @@ export function validateEvidenceTopics(
   }
 }
 
-function main() {
+const HARM_AXIS_SET = new Set<string>(HARM_AXES);
+const ADOPTION_CRITERIA_SET = new Set<string>(ADOPTION_CRITERIA);
+
+/**
+ * テーマの HARM 該当 (企画側の任意メタデータ) を検査する。
+ *
+ * 「該当するだけで収益性がある」と判断させないため、reason の空欄・定型文だけは弾く。
+ * 該当の要否・妥当性そのものは意味判断なので機械では見ない (agent/人間のレビュー対象)。
+ */
+export function validateHarmRelevance(
+  c: ThemeCatalog,
+  errors: string[]
+): void {
+  const entries = c.harmRelevance;
+  if (!entries || entries.length === 0) return;
+
+  const seenAxes = new Set<string>();
+  for (const entry of entries) {
+    const where = `${c.key} harmRelevance`;
+    if (!HARM_AXIS_SET.has(entry.axis)) {
+      errors.push(`[harm-axis] ${where}: axis "${entry.axis}" が HARM_AXES に不在`);
+    }
+    if (seenAxes.has(entry.axis)) {
+      errors.push(`[harm-axis-dup] ${where}: axis "${entry.axis}" が重複`);
+    }
+    seenAxes.add(entry.axis);
+    if (!entry.reason?.trim()) {
+      errors.push(`[harm-reason] ${where}: axis "${entry.axis}" の reason が空`);
+    }
+  }
+}
+
+/**
+ * MetricSelection の追加構造 (adoptionCriteria) の実在検査 + 記入の後押し (warn のみ)。
+ *
+ * ★空欄を定型文で埋めさせないため error にはしない (根拠不足なら未記入のまま採用を保留してよい)。
+ */
+export function validateAdoptionCriteria(
+  c: ThemeCatalog,
+  errors: string[],
+  warns: string[]
+): void {
+  for (const m of c.metrics) {
+    const criteria = m.selection?.adoptionCriteria;
+    if (!criteria) continue;
+    for (const criterion of criteria) {
+      if (!ADOPTION_CRITERIA_SET.has(criterion)) {
+        errors.push(
+          `[adoption-criteria] ${c.key}: "${m.rankingKey}" の adoptionCriteria "${criterion}" が ADOPTION_CRITERIA に不在`
+        );
+      }
+    }
+  }
+  for (const m of c.metrics) {
+    if (m.role === 'context') continue;
+    if (m.selection && !m.selection.adoptionCriteria?.length) {
+      warns.push(
+        `[no-adoption-criteria] ${c.key}: ${m.role} 指標 "${m.rankingKey}" の selection に adoptionCriteria 未記入`
+      );
+    }
+  }
+}
+
+/**
+ * YearSpec から年数を数える。`'all'` は R2 を読まないと分からないため未知として扱い、
+ * 誤検知を避けるために検査対象から外す (確実に 1 年だけと言えるものだけを見る)。
+ */
+function yearCount(years: unknown): number | null {
+  if (years === 'all') return null;
+  if (years && typeof years === 'object') {
+    const y = years as { from?: number; to?: number; years?: number[] };
+    if (Array.isArray(y.years)) return y.years.length;
+    if (typeof y.from === 'number' && typeof y.to === 'number') return y.to - y.from + 1;
+  }
+  return null;
+}
+
+/**
+ * line-chart は時系列の推移を見せるためのチャート型。参照指標が 1 年分のデータしか
+ * 持たない場合、折れ線は点1つにしかならず「推移」が原理的に描けない (チャート型と
+ * データ形状の不一致)。まず warn で実測し、誤検知が無いことを確認してから昇格する
+ * (`metric-config-standards.md` の warn→error 昇格パターンに合わせる)。
+ */
+export function validateChartTemporalFit(
+  chart: ThemeCatalog['charts'][number],
+  where: string,
+  warns: string[]
+): void {
+  if (chart.componentType !== 'line-chart') return;
+  for (const key of new Set(chart.relatedRankingKeys ?? [])) {
+    const metric = METRICS_REGISTRY[key];
+    if (!metric) continue; // 実在チェックは別関数の責務
+    const count = yearCount((metric as { years?: unknown }).years);
+    if (count !== null && count <= 1) {
+      warns.push(
+        `[chart-temporal-fit] ${where}: line-chart が参照する "${key}" は年数 ${count} 件 — 推移を描けない (表示方法の再検討候補)`
+      );
+    }
+  }
+}
+
+/** comparisonBasis / visualizationRationale は指定時に空文字を許さない (annotation と同じ規律)。 */
+export function validateChartSelectionMeta(
+  c: ThemeCatalog,
+  errors: string[]
+): void {
+  for (const ch of c.charts) {
+    const where = `${c.key}/${ch.componentKey}`;
+    if (ch.comparisonBasis !== undefined && !ch.comparisonBasis.trim()) {
+      errors.push(`[comparison-basis] ${where}: comparisonBasis は空でない文字列にする`);
+    }
+    if (
+      ch.visualizationRationale !== undefined &&
+      !ch.visualizationRationale.trim()
+    ) {
+      errors.push(
+        `[visualization-rationale] ${where}: visualizationRationale は空でない文字列にする`
+      );
+    }
+  }
+}
+
+export interface CatalogValidationResult {
+  catalogs: ThemeCatalog[];
+  errors: string[];
+  warns: string[];
+  estatParamsChecked: number;
+}
+
+/**
+ * カタログ検証の本体 (CLI の print/exit を含まない)。
+ * admin のカタログ監査画面 (`/quality/catalog-audit`) が `npm run validate:catalog` と
+ * 同じ判定ロジックを再利用するための入口 — 判定を admin 側へ複製しない。
+ */
+export function runCatalogValidation(): CatalogValidationResult {
   const catalogs = listThemeCatalogs();
   const errors: string[] = [];
   const warns: string[] = [];
@@ -625,6 +759,7 @@ function main() {
         errors,
         warns
       );
+      validateChartTemporalFit(ch, `${c.key}/${ch.componentKey}`, warns);
       // componentProps の形を chart 種別ごとに検証 (WP1)。従来は union membership しか
       // 見ておらず、必須フィールド欠落の壊れた chart を素通りさせていた。
       for (const msg of validateChartProps(
@@ -724,11 +859,20 @@ function main() {
     // metricGroups (指標カードの編成)。省略時は UI が「非 context を 1 グループ」に倒すので検査不要。
     validateMetricGroups(c, metricKeys, errors, warns);
     validateEvidenceTopics(c, themeKeys, errors, warns);
+    validateHarmRelevance(c, errors);
+    validateAdoptionCriteria(c, errors, warns);
+    validateChartSelectionMeta(c, errors);
   }
 
   validateIndicatorHubContentCompleteness(catalogs, errors, warns);
 
   const estatParamsChecked = validatePageComponentEstatParams(errors);
+
+  return { catalogs, errors, warns, estatParamsChecked };
+}
+
+function main() {
+  const { catalogs, errors, warns, estatParamsChecked } = runCatalogValidation();
 
   console.log(
     `theme-catalog 検証: ${catalogs.length} themes / estatParams ${estatParamsChecked} 件 / ` +

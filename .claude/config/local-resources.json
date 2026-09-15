@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "diskWarnGiB": 25,
   "diskCriticalGiB": 15,
   "memoryWarnGiB": 3,
@@ -10,13 +10,105 @@
   "cachePaths": [
     "apps/web/.next/cache",
     "apps/admin/.next/cache",
-    "apps/web/.next/standalone/apps/web/.next/cache"
+    "apps/web/.next/standalone/apps/web/.next/cache",
+    {
+      "path": ".turbo/cache/*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/r2",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/verification/*",
+      "ageDays": 30
+    },
+    {
+      "path": ".local/tmp",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/rakuten-cli-test-*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/regen-*",
+      "ageDays": 7
+    },
+    {
+      "path": ".local/geo-source-*",
+      "ageDays": 30
+    },
+    {
+      "path": ".claude/state/estat-city-meta-cache",
+      "ageDays": 30
+    }
+  ],
+  "scratchRoots": {
+    "win32": [
+      "C:/tmp"
+    ],
+    "darwin": [
+      "/tmp"
+    ]
+  },
+  "scratchPrefix": "stats47-",
+  "scratchAgeDays": 14,
+  "scratchCachePaths": [
+    {
+      "path": "stats47-geo-ui/*.zip",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/*_GML",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/a38-source-level-*",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/thumbnail-inputs",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.shp",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.dbf",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.shx",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/A38-20_*.prj",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/attribute-input",
+      "ageDays": 1
+    },
+    {
+      "path": "stats47-geo-ui/sharp-runtime",
+      "ageDays": 1
+    },
+    {
+      "path": "mlit-ksj-*",
+      "ageDays": 1
+    }
+  ],
+  "scratchExclude": [
+    "stats47-source-vault*",
+    "stats47-japan-zue-*",
+    "stats47-geo-ui"
   ],
   "protectedPaths": [
     "books",
     "docs/books",
     ".claude/pdfs",
-    ".local/r2",
     ".local/affiliate-status"
   ]
 }

@@ -111,6 +111,16 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
       "role": "context"
     },
     {
+      "rankingKey": "municipality-count",
+      "shortLabel": "市町村数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "households-on-public-assistance",
+      "shortLabel": "生活保護被保護実世帯数",
+      "role": "context"
+    },
+    {
       "rankingKey": "child-welfare-expenses-prefecture",
       "shortLabel": "児童福祉費（都道府県財政）",
       "role": "secondary"

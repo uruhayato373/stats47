@@ -2,6 +2,7 @@
   "version": 1,
   "description": "Environment variable names and exposure classes. Values must never be stored here.",
   "variables": [
+    { "name": "STATS47_COVERAGE_SPLIT", "visibility": "server", "contexts": ["process"] },
     {
       "name": "ACCESSIBILITY_BASELINE",
       "visibility": "server",
@@ -73,14 +74,14 @@
       ]
     },
     {
-      "name": "CHECKER_WIRING_BASELINE",
+      "name": "CHECK_RUNTIME_CONFIG",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "CHECK_RUNTIME_CONFIG",
+      "name": "CHECKER_WIRING_BASELINE",
       "visibility": "server",
       "contexts": [
         "process"
@@ -182,6 +183,13 @@
       ]
     },
     {
+      "name": "CODEX_THREAD_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CONTENT_KEY",
       "visibility": "server",
       "contexts": [
@@ -225,6 +233,13 @@
     },
     {
       "name": "DOCS_LINKS_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_LINKS_CACHE",
       "visibility": "server",
       "contexts": [
         "process"
@@ -454,14 +469,14 @@
       ]
     },
     {
-      "name": "HTTPS_PROXY",
+      "name": "HTTP_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "HTTP_PROXY",
+      "name": "HTTPS_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -584,6 +599,13 @@
     },
     {
       "name": "MAINTENANCE_DEBT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MAINTENANCE_DEBT_CACHE",
       "visibility": "server",
       "contexts": [
         "process"
@@ -767,6 +789,13 @@
       ]
     },
     {
+      "name": "NO_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "NODE_ENV",
       "visibility": "server",
       "contexts": [
@@ -782,13 +811,6 @@
     },
     {
       "name": "NOTE_KEY",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "NO_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -1035,6 +1057,14 @@
       ]
     },
     {
+      "name": "SURVEY_STATE_MAX_AGE_DAYS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "survey portfolio / linkage 監査 state の鮮度上限日数 (既定 35)。validate-survey-portfolio.ts が読む"
+    },
+    {
       "name": "SURVEYS_JSON",
       "visibility": "server",
       "contexts": [
@@ -1042,12 +1072,11 @@
       ]
     },
     {
-      "name": "SURVEY_STATE_MAX_AGE_DAYS",
+      "name": "TSC_CONCURRENCY",
       "visibility": "server",
       "contexts": [
         "process"
-      ],
-      "note": "survey portfolio / linkage 監査 state の鮮度上限日数 (既定 35)。validate-survey-portfolio.ts が読む"
+      ]
     },
     {
       "name": "USER",

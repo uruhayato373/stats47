@@ -6,11 +6,11 @@ co_agents: [improvement-triage]
 ---
 
 GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-not-indexed) を **週次で計画的に順次是正**する閉ループ。
-ブログ品質是正ループ (`.Codex/rules/blog-remediation-loop.md`) と同型。「次に何を直すか・何をやったか・効いたか」を
+ブログ品質是正ループ (`.claude/rules/blog-remediation-loop.md`) と同型。「次に何を直すか・何をやったか・効いたか」を
 **1 つの状態付きキュー**で追える。
 
-> **本 SKILL がこのループの運用正典 (runbook)**。2026-07-12 に旧 `docs/02_実装計画/12` を統合し .Codex に一本化。
-> **SSOT (機械)**: `.Codex/state/gsc/coverage-remediation-queue.json`。**人間向け要約**: `.Codex/state/gsc/LATEST.md`。
+> **本 SKILL がこのループの運用正典 (runbook)**。2026-07-12 に旧 `docs/02_実装計画/12` を統合し .claude に一本化。
+> **SSOT (機械)**: `.claude/state/gsc/coverage-remediation-queue.json`。**人間向け要約**: `.claude/state/gsc/LATEST.md`。
 > オーナー agent: `gsc-analyst` / status 更新: `improvement-triage`。
 
 ## 前提となる事実 (これを取り違えない)
@@ -19,7 +19,7 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
   0 件にはできないし目標でもない。GSC は 410 も「404」に束ねる。Google の再クロールは遅く週〜月単位でしか減らない。
 - **実際に直すべきは「sitemap/サイトが参照しているのに 404/soft404/5xx」= 生きてるのに誤登録された URL だけ**。
   これは本番 HTTP を実測すれば機械的に判別できる (現在 200 を返すか)。
-- 効果判定は `.Codex/rules/evidence-based-judgment.md` に従う (推測で effect/* を付けない)。
+- 効果判定は `.claude/rules/evidence-based-judgment.md` に従う (推測で effect/* を付けない)。
 
 ## ループ全体図
 
@@ -61,7 +61,7 @@ actionable カテゴリ (404 / soft404 / 5xx / crawled / discovered) の URL を
 ## 命名規約 (observe-after-fix)
 
 > **Indexing API 送信は 2026-07-23 に退役**（公式に JobPosting/BroadcastEvent VideoObject 専用。
-> 準拠正典: `.Codex/skills/analytics/search-growth/reference/platform-contract.md`）。
+> 準拠正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`）。
 > 通常ページの再クロールは「送信」ではなく「直してから URL Inspection で観測 (observe-after-fix)」で行う。
 
 build が本番 HTTP を Googlebot UA で実測して live-misflagged (404/5xx/crawled だが現在 200) を選別し
@@ -82,10 +82,10 @@ sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-
 ```bash
 # (任意) UI export を Playwright で自動化する。カバレッジは公式 API が無く UI export しか経路がない。
 # 初回だけ headed Chrome で人間が Google にログインする (認証情報はスクリプトが扱わない)。
-node .Codex/scripts/gsc/export-coverage-playwright.mjs --probe   # 初回: DOM 構造を確認
-node .Codex/scripts/gsc/export-coverage-playwright.mjs           # ~/Downloads へ zip を保存
+node .claude/scripts/gsc/export-coverage-playwright.mjs --probe   # 初回: DOM 構造を確認
+node .claude/scripts/gsc/export-coverage-playwright.mjs           # ~/Downloads へ zip を保存
 
-python3 .Codex/scripts/gsc/ingest-gsc-export.py        # ~/Downloads の GSC zip を自動検出・正規化
+python3 .claude/scripts/gsc/ingest-gsc-export.py        # ~/Downloads の GSC zip を自動検出・正規化
 # 週を明示する場合: --week 2026-W25 / 日付指定: --date 2026-06-16
 ```
 
@@ -97,7 +97,7 @@ python3 .Codex/scripts/gsc/ingest-gsc-export.py        # ~/Downloads の GSC zip
 
 ### Phase 2 — キュー構築 (本番 HTTP 実測)
 ```bash
-node .Codex/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実測 → 分類 → upsert
+node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実測 → 分類 → upsert
 # 高速 (実測せずキャッシュ): --no-probe   /  実測上限: --probe-limit 5000
 ```
 - actionable カテゴリ (404 / soft404 / 5xx / crawled-not-indexed / discovered) のみ実測する。意図的カテゴリは放置。
@@ -105,8 +105,8 @@ node .Codex/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
 - 状態 (pending / in-progress / done / resolved-by-design) を **upsert で保持**。done を毎回潰さない。
 
 ### Phase 3 — 報告
-- `.Codex/state/gsc/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
-- `node .Codex/scripts/gsc/build-coverage-queue.mjs --next 20` で次にやる actionable を JSONL で取得。
+- `.claude/state/gsc/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
+- `node .claude/scripts/gsc/build-coverage-queue.mjs --next 20` で次にやる actionable を JSONL で取得。
 
 ### Phase 4 — 是正 (action 別。gsc-analyst サブエージェントに委譲)
 
@@ -118,8 +118,8 @@ node .Codex/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
 | `verify-intent` | 旧URL/内部パス (`/tmp/*` `/.local/*` 等) か確認。死亡が正なら放置確定 | gsc-analyst |
 
 `content-check` の大きな独立バッチだけを subagent 最大1体に委譲する (Agent tool,
-`mode: bypassPermissions`)。`.Codex/rules/model-prompting.md` と
-`.Codex/rules/agent-output-contract.md` に従い、Task Capsule と **OUTPUT FORMAT を prompt 冒頭に固定**する:
+`mode: bypassPermissions`)。`.claude/rules/model-prompting.md` と
+`.claude/rules/agent-output-contract.md` に従い、Task Capsule と **OUTPUT FORMAT を prompt 冒頭に固定**する:
 ```
 OUTPUT FORMAT: 1 markdown table only.
 Columns: URL | thin? | 推奨 (resubmit/noindex/enrich) | 理由(≤10語)
@@ -131,14 +131,14 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 - **live (observe-after-fix) は送信ではなく「直してから観測」**。Indexing API 送信は 2026-07-23 に退役した
   (公式に JobPosting/BroadcastEvent VideoObject 専用・準拠是正)。次を行う:
   1. sitemap 掲載整合 (`SITEMAP_RANKING_KEYS` / `sitemap.ts`)・内部リンク強化・canonical 是正・content 補強
-  2. `node .Codex/scripts/gsc/url-inspection-daily.cjs --limit 50` で coverageState / lastCrawlTime を観測
+  2. `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50` で coverageState / lastCrawlTime を観測
 - `coverage-live-observe-urls.csv` は観測対象の候補リスト (送信キューではない)。
 - ローカルからの R2 push は禁止 (`_assert-ci-write` で停止)。
 
 ### Phase 6 — 記録 (真実源を更新)
-- 完了した URL を done に: `node .Codex/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
+- 完了した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
 - `improvement-log.md` の `[COVERAGE-LOOP-01]` に「何をやったか」(送信件数・content-check 結果・fix-5xx PR) を追記。
-- 改善バックログ `.Codex/todo/improvements.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
+- 改善バックログ `.claude/todo/improvements.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
 - **effect/* を付ける前に実証チェックリスト** (`evidence-based-judgment.md`): 送信した URL が次週 indexed 化したかを
   URL Inspection / totals-history で確認してからでないと effect/full を付けない。
 
@@ -151,18 +151,18 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 | 役割 | パス | 書く / 読む |
 |---|---|---|
-| **状態付きキュー (SSOT・機械)** | `.Codex/state/gsc/coverage-remediation-queue.json` | build が書く / skill・agent が読む |
-| 人間向け要約 | `.Codex/state/gsc/LATEST.md` | build が書く / 人間が読む |
-| 経過観測 (週次件数) | `.Codex/state/gsc/coverage-totals-history.csv` | build が追記 |
-| 取り込み済 drilldown | `.Codex/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
-| observe-after-fix 対象 | `.Codex/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
-| agent 用詳細ログ | `.Codex/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
-| TODO 真実源 | `.Codex/todo/improvements.md` `COVERAGE-LOOP-01` | improvement-triage |
+| **状態付きキュー (SSOT・機械)** | `.claude/state/gsc/coverage-remediation-queue.json` | build が書く / skill・agent が読む |
+| 人間向け要約 | `.claude/state/gsc/LATEST.md` | build が書く / 人間が読む |
+| 経過観測 (週次件数) | `.claude/state/gsc/coverage-totals-history.csv` | build が追記 |
+| 取り込み済 drilldown | `.claude/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
+| observe-after-fix 対象 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
+| agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
+| TODO 真実源 | `.claude/todo/improvements.md` `COVERAGE-LOOP-01` | improvement-triage |
 
 ## cadence (週次)
 
 **自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
-(`build-coverage-queue.mjs` → `.Codex/state/gsc/` を develop へ commit-back)。
+(`build-coverage-queue.mjs` → `.claude/state/gsc/` を develop へ commit-back)。
 入力週が 1 週以内なら本番 HTTP を再実測する。新しい export がなく入力週が 2 週以上古い場合は、
 古い母集団を最新と誤認しないよう fail-closed で停止する。失敗時は `[Coverage Alert]` Issue
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
@@ -179,10 +179,10 @@ Google ログイン済み Playwright profile を要求し、GitHub Actions に�
 
 ## 関連
 - 運用正典: 本 SKILL（2026-07-12 に旧 GSC カバレッジ是正計画を統合。旧版は Git 履歴）
-- 同型: `.Codex/rules/blog-remediation-loop.md` (ブログ品質是正ループ)
-- 実測判定: `.Codex/rules/evidence-based-judgment.md`
-- export 手順 (手動): `.Codex/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`
-- export 自動化 (Playwright): `.Codex/scripts/gsc/export-coverage-playwright.mjs`
+- 同型: `.claude/rules/blog-remediation-loop.md` (ブログ品質是正ループ)
+- 実測判定: `.claude/rules/evidence-based-judgment.md`
+- export 手順 (手動): `.claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`
+- export 自動化 (Playwright): `.claude/scripts/gsc/export-coverage-playwright.mjs`
   — カバレッジは公式 API が無く UI export しか経路がないため
   (google-admin README「公式 API がないものだけローカル headed Playwright に残す」に該当)。
   初回のみ人間が Google にログインする。保存名は消費側 `ingest-gsc-export.py` の

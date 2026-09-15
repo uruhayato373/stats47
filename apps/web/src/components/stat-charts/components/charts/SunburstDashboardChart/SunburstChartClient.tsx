@@ -16,12 +16,14 @@ const SunburstChart = dynamic(
 
 interface SunburstChartClientProps {
   data: HierarchyDataNode;
+  unit?: string;
 }
 
 export const SunburstChartClient: React.FC<SunburstChartClientProps> = ({
   data,
+  unit,
 }) => (
   <div className="flex items-center justify-center min-h-[400px]">
-    <SunburstChart data={data} width={500} height={500} />
+    <SunburstChart data={data} width={500} height={500} unit={unit} />
   </div>
 );

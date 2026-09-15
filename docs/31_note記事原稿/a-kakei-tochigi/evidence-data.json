@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-tochigi",
+    "prefCode": "09000",
+    "prefName": "栃木県",
+    "cityName": "宇都宮市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:15.519Z",
+    "titleSha": "e559994e74f51de8ac11e716d5dc1a9a0f154820ff40d3a0b7b7b2460c5c129e",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "交通・通信",
+    "ratio": 1.4013300813596468,
+    "side": "above",
+    "shareMetricKey": "transport-communication-expenditure-ratio-multi-person-households",
+    "shareTitle": "交通・通信費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 4,
+    "value": 19.3,
+    "rankingUrl": "https://stats47.jp/ranking/transport-communication-expenditure-ratio-multi-person-households",
+    "chartName": "transport-communication-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "car-ownership-multi-person-households-per-1000",
+      "title": "自動車所有数量",
+      "unit": "台",
+      "year": "2014",
+      "rank": 11,
+      "value": 1893,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 11,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/car-ownership-multi-person-households-per-1000",
+      "chartName": "car-ownership-multi-person-households-per-1000-prefecture-rankings"
+    },
+    {
+      "metricKey": "commute-by-car",
+      "title": "自宅外通勤・通学者数（自家用車）",
+      "unit": "人",
+      "year": "2020",
+      "rank": 15,
+      "value": 661453,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 15,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/commute-by-car",
+      "chartName": "commute-by-car-prefecture-rankings"
+    }
+  ]
+}

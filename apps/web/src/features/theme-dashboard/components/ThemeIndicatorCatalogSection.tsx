@@ -1,9 +1,9 @@
-import Link from 'next/link';
-
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { findIndicatorSet } from '@stats47/types';
 
 import { SurfaceSection } from '@/components/surface/SurfaceCard';
+
+import { TrackedThemeLink } from './TrackedThemeLink';
 
 /**
  * テーマの全指標を role 別に一覧するセクション (server component)。
@@ -62,12 +62,14 @@ export function ThemeIndicatorCatalogSection({
               <ul className="mt-2 space-y-2">
                 {items.map((m) => (
                   <li key={m.rankingKey}>
-                    <Link
+                    <TrackedThemeLink
                       href={`/ranking/${m.rankingKey}`}
+                      trackingLabel={`${themeKey}:indicator-catalog:${m.rankingKey}`}
+                      surface="theme_ranking"
                       className="text-sm text-primary hover:underline"
                     >
                       {m.shortLabel}
-                    </Link>
+                    </TrackedThemeLink>
                   </li>
                 ))}
               </ul>

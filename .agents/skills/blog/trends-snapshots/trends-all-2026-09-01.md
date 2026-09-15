@@ -1,0 +1,1 @@
+../../../../.claude/skills/blog/trends-snapshots/trends-all-2026-09-01.md

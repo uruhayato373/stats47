@@ -208,6 +208,8 @@ export function Scatterplot({
                     ref={svgRef}
                     viewBox={`0 0 ${width} ${height}`}
                     className="w-full h-auto"
+                    role="img"
+                    aria-label={`${title ? `散布図「${title}」` : "散布図"}。横軸: ${xLabel || "未設定"}。縦軸: ${yLabel || "未設定"}。点数: ${data.length}`}
                 />
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-background/50">

@@ -99,11 +99,14 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot
 - impression / click を pivot し (vertical × position) ごとに `CTR = click / impression` を算出。`hasVerticalBreakdown` が false なら `affiliate_vertical` 未登録 (rules §6 の手順で登録)
 
 > ⚠ **2 つの前提** (満たさないと内訳が取れない):
-> 1. **GA4 鍵**: `stats47-*.json` がリポジトリルートに必要。**クラウド / web 実行環境には鍵が無いため、
->    実測は GitHub Actions で行う** → `.github/workflows/affiliate-ga4-weekly.yml`
+> 1. **GA4 鍵**: `stats47-*.json` がリポジトリルートに必要。**鍵はローカルに置かず、実測は GitHub Actions で行う**
+>    (2026-09-14 オーナー決定: API key は CI 限定) → `.github/workflows/affiliate-ga4-weekly.yml`
 >    (週次 cron + `workflow_dispatch`)。シークレット `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` を鍵ファイルに
->    復元して `fetch-affiliate-ga4.cjs` を実行し、snapshot を develop に commit-back する。
->    鍵のあるローカルなら直接 `node …` でも可。
+>    復元して `fetch-affiliate-ga4.cjs` を実行し、**生 snapshot は R2 `state/ads/ga4-affiliate/`
+>    (`<date>.json` / `latest.json` / `index.json`) へ push、git には週次集約
+>    `.claude/state/ads/ga4-affiliate-history.csv` (`append-ga4-affiliate-history.mjs`) だけを commit-back する**。
+>    ローカルで生 snapshot が要るときは `npm run state:pull -- ads/ga4-affiliate` (公開 URL・認証不要) で
+>    `.claude/state/ads/live/ga4-affiliate/` に取得する (gitignore 済み)。T14d / T28d の効果判定は history.csv で足りる。
 > 2. **custom dimension 登録**: `affiliate_vertical` / `affiliate_category` / `link_position` を GA4 管理画面で
 >    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない (登録手順の正典:
 >    `.claude/rules/affiliate-ads-standards.md` §6)。未登録時はスクリプトが `eventName` 単位の総数に

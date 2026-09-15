@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-kagoshima",
+    "prefCode": "46000",
+    "prefName": "鹿児島県",
+    "cityName": "鹿児島市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:52.439Z",
+    "titleSha": "6804f11fb937a51602a7b18984f242a8124377936cbf18b6708ca5b05e6e9dd6",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "家具・家事用品",
+    "ratio": 0.8319159639330824,
+    "side": "below",
+    "shareMetricKey": "furniture-household-goods-expenditure-ratio-multi-person-households",
+    "shareTitle": "家具・家事用品費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 47,
+    "value": 3.4,
+    "rankingUrl": "https://stats47.jp/ranking/furniture-household-goods-expenditure-ratio-multi-person-households",
+    "chartName": "furniture-household-goods-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "floor-area-per-dwelling-owner",
+      "title": "持ち家住宅の延べ面積",
+      "unit": "ｍ2",
+      "year": "2023",
+      "rank": 42,
+      "value": 108.8,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 6,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/floor-area-per-dwelling-owner",
+      "chartName": "floor-area-per-dwelling-owner-prefecture-rankings"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-furniture-household",
+      "title": "消費者物価地域差指数",
+      "unit": "（全国=100）",
+      "year": "2024",
+      "rank": 46,
+      "value": 95.3,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 2,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/consumer-price-difference-index-furniture-household",
+      "chartName": "consumer-price-difference-index-furniture-household-prefecture-rankings"
+    }
+  ]
+}

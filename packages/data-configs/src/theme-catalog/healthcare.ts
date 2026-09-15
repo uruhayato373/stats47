@@ -215,6 +215,50 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
         "surveyedAt": "2026-09-08",
         "rationale": "供給密度では分からない緊急時のアクセスを追加し、過疎×医療Geoと接続する。"
       }
+    },
+    {
+      "rankingKey": "infant-deaths",
+      "shortLabel": "乳児死亡数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-14",
+        "rationale": "実数は小標本で年次変動が大きいため、乳児死亡率と分けて背景指標として詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "infant-mortality-rate-per-1000-births",
+      "shortLabel": "乳児死亡率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-14",
+        "rationale": "出生千対の率を複数年推移・出生数と合わせて読む背景指標として詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "average-life-expectancy-female-20",
+      "shortLabel": "平均余命（女性20歳時点）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-14",
+        "rationale": "健康寿命(女性)と対にして生涯の平均余命を読む背景指標として詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "average-life-expectancy-female-65",
+      "shortLabel": "平均余命（女性65歳時点）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-14",
+        "rationale": "高齢期の平均余命を出生時系列と区別し、医療・生活条件の背景指標として詳細索引に保持する。"
+      }
     }
   ],
   "charts": [

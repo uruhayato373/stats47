@@ -84,9 +84,10 @@ describe('PageShell — leftRail', () => {
 });
 
 describe('PageShell — rightRail', () => {
-  it('既定 (xl) は本文下にも積む', () => {
+  it('同じレールを複製せず、狭幅では本文下・xl以上では右列に置く', () => {
     render(<PageShell rightRail={RIGHT}>{MAIN}</PageShell>);
-    expect(screen.getAllByLabelText('right-rail')).toHaveLength(2);
+    const rail = screen.getByLabelText('right-rail');
+    expect(rail.parentElement).toHaveClass('mt-10', 'xl:mt-0');
   });
 
   it('rightRailBreakpoint=lg で lg 境界のクラスに切り替わる', () => {
@@ -96,5 +97,10 @@ describe('PageShell — rightRail', () => {
       </PageShell>
     );
     expect(container.querySelector('.lg\\:grid')).not.toBeNull();
+    expect(screen.getByLabelText('right-rail').parentElement).toHaveClass(
+      'mt-10',
+      'lg:mt-0'
+    );
   });
+
 });

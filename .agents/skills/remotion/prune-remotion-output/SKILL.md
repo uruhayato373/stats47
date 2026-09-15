@@ -19,9 +19,9 @@ primary_agent: sns-renderer
 
 1. dry-run で確認:
    ```bash
-   node .Codex/scripts/remotion/prune.mjs            # age >= 7d
-   node .Codex/scripts/remotion/prune.mjs --age 0    # 全 scratch 即対象
-   node .Codex/scripts/remotion/prune.mjs --age 14   # 2 週間以上のみ
+   node .claude/scripts/remotion/prune.mjs            # age >= 7d
+   node .claude/scripts/remotion/prune.mjs --age 0    # 全 scratch 即対象
+   node .claude/scripts/remotion/prune.mjs --age 14   # 2 週間以上のみ
    ```
    - 出力例:
      ```
@@ -35,8 +35,8 @@ primary_agent: sns-renderer
 
 3. 実削除:
    ```bash
-   node .Codex/scripts/remotion/prune.mjs --apply
-   node .Codex/scripts/remotion/prune.mjs --age 14 --apply
+   node .claude/scripts/remotion/prune.mjs --apply
+   node .claude/scripts/remotion/prune.mjs --age 14 --apply
    ```
 
 ## 「うっかり保存し損ね」を防ぐ運用
@@ -47,6 +47,6 @@ primary_agent: sns-renderer
 
 ## 参照
 
-- スクリプト: `.Codex/scripts/remotion/prune.mjs`
-- 共通 lib: `.Codex/scripts/remotion/lib.mjs`
+- スクリプト: `.claude/scripts/remotion/prune.mjs`
+- 共通 lib: `.claude/scripts/remotion/lib.mjs`
 - 関連: `/archive-remotion-output`

@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-shimane",
+    "prefCode": "32000",
+    "prefName": "島根県",
+    "cityName": "松江市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:48:13.384Z",
+    "titleSha": "93dd821de6b94652886f850e51d5a5f36232d834d3c116d4890a6a25322315b6",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "教育",
+    "ratio": 0.4794135726870372,
+    "side": "below",
+    "shareMetricKey": "education-expenditure-ratio-multi-person-households",
+    "shareTitle": "教育費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 45,
+    "value": 1.7,
+    "rankingUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+    "chartName": "education-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-university-student-ratio",
+      "title": "私立大学学生数割合",
+      "unit": "％",
+      "year": "2024",
+      "rank": 47,
+      "value": 0,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 1,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/private-university-student-ratio",
+      "chartName": "private-university-student-ratio-prefecture-rankings"
+    },
+    {
+      "metricKey": "high-school-advancement-rate",
+      "title": "高等学校卒業者の進学率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 39,
+      "value": 50.1,
+      "direction": "same",
+      "expectedHigh": false,
+      "effectiveRank": 9,
+      "verdict": "strong",
+      "rankingUrl": "https://stats47.jp/ranking/high-school-advancement-rate",
+      "chartName": "high-school-advancement-rate-prefecture-rankings"
+    }
+  ]
+}

@@ -12,14 +12,14 @@ primary_agent: x-strategist
 
 > 設計判断: 瞬発力のボトルネックは DB クエリ速度ではなく「①ネタ→指標の発見」「②指標→ビジュアル生成」だった
 > (完全DBレスのまま解決)。動画 (bar-chart-race) は 1 本 10-20 分レンダリングなので**瞬発力トラックから外す**。
-> 静止画 (X / Instagram / note) が本命。関連: `.Codex/rules/data-sqlite-ssot.md`(DBレス正典)。
+> 静止画 (X / Instagram / note) が本命。関連: `.claude/rules/data-sqlite-ssot.md`(DBレス正典)。
 
 ## 前提 (初回/データ更新時のみ)
 
 指標発見索引はローカルの再生成可能キャッシュ (DBレス互換)。指標を追加/改名したら再生成する:
 
 ```bash
-npx tsx .Codex/scripts/sns/build-discovery-index.ts   # → .Codex/state/sns/metric-discovery-index.json (2211件)
+npx tsx .claude/scripts/sns/build-discovery-index.ts   # → .claude/state/sns/metric-discovery-index.json (2211件)
 ```
 
 ## フロー
@@ -27,13 +27,13 @@ npx tsx .Codex/scripts/sns/build-discovery-index.ts   # → .Codex/state/sns/met
 ### Step 1. ネタ→指標を発見する
 
 ニュースのキーワード(自由文・複数語可)を渡す。**ニュース語彙と指標語彙のギャップ**は同義語辞書
-(`.Codex/scripts/sns/` の `news-synonyms.json`, 76見出し) が吸収する (例: 「移住」→転入/転出、「少子化」→出生率/出生数、
+(`.claude/scripts/sns/` の `news-synonyms.json`, 76見出し) が吸収する (例: 「移住」→転入/転出、「少子化」→出生率/出生数、
 「賃上げ」→賃金/給与/所得、「値上げ」→消費者物価)。
 
 ```bash
-node .Codex/scripts/sns/find-metrics.mjs "少子化" --top 5
-# 複数語は AND ボーナス:  node .Codex/scripts/sns/find-metrics.mjs "年収 医師" --top 5
-# 機械可読:              node .Codex/scripts/sns/find-metrics.mjs "移住" --top 5 --json
+node .claude/scripts/sns/find-metrics.mjs "少子化" --top 5
+# 複数語は AND ボーナス:  node .claude/scripts/sns/find-metrics.mjs "年収 医師" --top 5
+# 機械可読:              node .claude/scripts/sns/find-metrics.mjs "移住" --top 5 --json
 ```
 
 - 出力の `key` 列が指標キー(= ranking key)。`headline` は seoTitle 由来の「1位◯◯県(値)」でニュース性判断に使う。
@@ -45,7 +45,7 @@ node .Codex/scripts/sns/find-metrics.mjs "少子化" --top 5
 選んだキーで、記事(article.md)非依存の単発生成。R2 観測値を公開URLから取得(認証不要)。
 
 ```bash
-npx tsx .Codex/scripts/sns/quick-still.ts --key births
+npx tsx .claude/scripts/sns/quick-still.ts --key births
 # 出力: .local/r2/sns/ranking/<key>/x/  (publish-x が読む §2-9 正典パス)
 #   stills/<key>.svg / stills/<key>.png       … 横長 960x404 (X / ブログ / note)
 #   stills/<key>-ig.svg / stills/<key>-ig.png … 縦長 1080x1350 (Instagram フィード/リール)
@@ -73,7 +73,7 @@ curl -s https://storage.stats47.jp/app/correlation/by-ranking-key/<key>.json | h
 
 ```bash
 # X: quick-still の横長PNG + caption をそのまま渡す。まず --dry-run
-npx tsx .Codex/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> \
+npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> \
   --media  .local/r2/sns/ranking/<key>/x/stills/<key>.png \
   --caption .local/r2/sns/ranking/<key>/x/caption.txt \
   --dry-run
@@ -95,8 +95,8 @@ npx tsx .Codex/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> \
 
 ## 関連
 
-- 発見索引: `.Codex/scripts/sns/{build-discovery-index.ts,find-metrics.mjs,news-synonyms.json}`
-- 生成: `.Codex/scripts/sns/quick-still.ts` (svg-builder `generateBarChartSvg` 再利用 / sharp で PNG 化)
+- 発見索引: `.claude/scripts/sns/{build-discovery-index.ts,find-metrics.mjs,news-synonyms.json}`
+- 生成: `.claude/scripts/sns/quick-still.ts` (svg-builder `generateBarChartSvg` 再利用 / sharp で PNG 化)
 - 投稿: `/publish-x` `/post-instagram` `/push-r2` `/mark-sns-posted`
 - 週次でまとめて回す運用: `/sns-weekly-plan` (企画→生成→予約→計測)
-- 図の規約: `.Codex/rules/blog-svg-chart-standards.md` (横960 / 縦1080)
+- 図の規約: `.claude/rules/blog-svg-chart-standards.md` (横960 / 縦1080)

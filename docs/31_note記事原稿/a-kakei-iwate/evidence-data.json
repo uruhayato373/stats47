@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-iwate",
+    "prefCode": "03000",
+    "prefName": "岩手県",
+    "cityName": "盛岡市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:50.093Z",
+    "titleSha": "d3ad546d79bdcf205b37f832644bef4e71c39c12bae5d1f9566dfb109721dc6c",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "住居",
+    "ratio": 1.4440925246847613,
+    "side": "above",
+    "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+    "shareTitle": "住居費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 4,
+    "value": 9.2,
+    "rankingUrl": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+    "chartName": "housing-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "title": "民営家賃（3.3m²当たり月額）",
+      "unit": "円",
+      "year": "2024",
+      "rank": 26,
+      "value": 4070,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 26,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
+      "chartName": "private-rental-housing-rent-per-3-3m2-prefecture-rankings"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 14,
+      "value": 70.3,
+      "direction": "inverse",
+      "expectedHigh": false,
+      "effectiveRank": 34,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+      "chartName": "owner-occupied-housing-ratio-prefecture-rankings"
+    }
+  ]
+}

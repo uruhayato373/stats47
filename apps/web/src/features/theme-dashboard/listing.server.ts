@@ -11,3 +11,4 @@ import "server-only";
  * root barrel (`./server`) は互換性のため残す。
  */
 export { ALL_THEMES } from "./config/all-themes";
+export { AREA_THEMES } from "./config/area-theme-slugs";

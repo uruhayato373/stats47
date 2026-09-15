@@ -6,7 +6,7 @@ primary_agent: strategy-advisor
 
 # weekly-review
 
-当週の計画と実測を突合し、`.Codex/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
+当週の計画と実測を突合し、`.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
 へ週次レビューを保存する。詳細なfield定義と出力templateは`reference/runbook.md`を必要なsectionだけ読む。
 
 ## 引数
@@ -16,24 +16,25 @@ primary_agent: strategy-advisor
 ## Phase 0: NSM snapshot
 
 ```bash
-node .Codex/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
+node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 
-事業計画stateも同じ週次証拠として更新する。
+同じ週次証拠として事業計画stateを検証・記録する。
 
 ```bash
 npm run business-plan:check
 npm run business-plan:build-state -- --snapshot
 ```
 
-`.claude/state/business-plan/latest.json` の開始ゲートと計測状態を読み、未計測を0にしない。
+`.claude/state/business-plan/latest.json` の `sourceFreshness`、`eventCounts`、`nextActions` を読み、
+未計測を0にせず、開始ゲート未達の施策を実行済みと扱わない。
 
 既存snapshotがあれば再生成しない。上書きが必要な根拠がある時だけ`--force`を使う。
 
 続けてGSC入力契約を検査する。
 
 ```bash
-node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week [YYYY-Www]
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week [YYYY-Www]
 ```
 
 FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成前なので、この段階ではreview/planの欠落自体は検査しない。
@@ -48,8 +49,8 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | コンテンツ | R2 blog/ranking snapshot、topic/remediation queue |
 | 性能・流入 | GSC / GA4の確定7日summary、AdSense / SNSの最新snapshot |
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
-| NSM実験 | `.Codex/skills/management/nsm-experiment/reference/` |
-| 計画差分 | `.Codex/todo/weekly.md` |
+| NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
+| 計画差分 | `.claude/todo/weekly.md` |
 | 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
@@ -68,7 +69,7 @@ GSC/GA4は次の用途を混在させない。
 1. current-weekのcheckboxとgit/R2/snapshot証拠を突合する。
 2. Must / Should / Couldごとに完了・未完了・計画外を分ける。
 3. KPI変化は同じ定義・同じ期間のsnapshotだけで比較する。
-4. effect判定が必要な施策は`.Codex/rules/evidence-based-judgment.md`に従う。
+4. effect判定が必要な施策は`.claude/rules/evidence-based-judgment.md`に従う。
 5. 未完了は削除せず、次週へ渡す理由とownerを記録する。
 6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
 7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
@@ -87,14 +88,15 @@ GSC/GA4は次の用途を混在させない。
 - 課題、繰り返しパターン、学び
 - 来週への申し送り
 - 参照したsnapshot / backlog ID / file
+- 事業計画のready/in-progress、開始ゲート、計測欠損、Go/Pivot/Stop判断
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
-`.Codex/todo/weekly.md`はレビュー中に書き換えない。
+`.claude/todo/weekly.md`はレビュー中に書き換えない。
 
 保存後に接続ゲートを実行する。
 
 ```bash
-node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage review --week [YYYY-Www] --write --strict
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review --week [YYYY-Www] --write --strict
 ```
 
 FAILが残る場合はレビューを「完了」と報告せず、出力された次アクションをBlockersに残す。
@@ -109,8 +111,9 @@ FAILが残る場合はレビューを「完了」と報告せず、出力され�
 - review fileのweek、snapshot期間、参照pathが一致する。
 - KPIはfinalized7d、候補はrolling28dという用途が明記されている。
 - 実測の無い数値・効果・完了を記録していない。
-- search-growth候補は最大3件で、未承認候補を`.Codex/todo/improvements.md`へ自動追加していない。
+- search-growth候補は最大3件で、未承認候補を`.claude/todo/improvements.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。
+- 事業計画stateが当週に生成され、未計測・手動・部分計測を区別している。
 - GSC証拠がfreshで候補がある場合、approve/dismissが最低1件記録されている。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
 

@@ -32,6 +32,17 @@ docs/31_note記事原稿/a-<rankingKey>/
 
 ## Phase 1: R2入力を固定する
 
+通常は、1 ranking keyずつ次の共通コマンドでPhase 1〜3のローカル原稿を生成する。
+
+```bash
+npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <rankingKey>
+```
+
+このコマンドは47県・欠損・ゼロ除算をfail-closedで検査し、`chart-data.json`、`draft.md`、
+`data-provenance.json`、`tags.txt`と既存Remotion用の`.local/r2/sns/ranking/<key>/`入力を作る。
+決定的ゲートで停止した場合は`.claude/state/content-operations/note-generation-blockers.json`へ
+理由を機械記録し、管理画面`/content/references`では`blocked`として表示する。成功時は同keyの記録を自動解除する。
+
 次のpublic snapshotを取得し、HTTP statusとschemaを確認する。
 
 - `https://storage.stats47.jp/app/ranking/<rankingKey>/item.json`
@@ -78,6 +89,13 @@ docs/31_note記事原稿/a-<rankingKey>/
 `reference/runbook.md`の「Phase 3: 画像生成」にある既存Remotion compositionを使い、
 `chart-data.json`から4枚を生成する。新しいrendererや一時SSOTを作らない。
 画像生成を依頼されていない場合は省略できるが、chatで未生成と明示する。
+
+```bash
+npm run pipeline:sns --workspace apps/remotion -- --stills-only --note-only --key <rankingKey>
+mkdir -p docs/31_note記事原稿/a-<rankingKey>/images
+cp .local/r2/sns/ranking/<rankingKey>/note/images/*.png docs/31_note記事原稿/a-<rankingKey>/images/
+npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <rankingKey> --check --require-images
+```
 
 ## Gate
 

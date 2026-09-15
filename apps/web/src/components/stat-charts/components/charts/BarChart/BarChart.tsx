@@ -58,7 +58,7 @@ export const DashboardBarChart = async ({
       fetchErrorMessage = firstError.error;
     } else {
       const rawDataList = responses.map((r) => ("data" in r ? r.data : []));
-      chartData = toBarChartData(rawDataList, labels, chartType);
+      chartData = toBarChartData(rawDataList, labels, chartType, unitProp);
       if (chartData.data.length === 0) {
         fetchErrorMessage = "データがありません";
       }
@@ -88,7 +88,7 @@ export const DashboardBarChart = async ({
           source={sourceName ?? undefined}
           sourceLink={sourceLink}
           sourceLinks={common.sourceLinks}
-          sourceDetail={unitProp}
+          sourceDetail={chartData.unit}
           rankingLink={rankingLink}
         />
       }

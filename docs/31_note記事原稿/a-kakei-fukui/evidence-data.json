@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "slug": "a-kakei-fukui",
+    "prefCode": "18000",
+    "prefName": "福井県",
+    "cityName": "福井市",
+    "year": "2024",
+    "generatedAt": "2026-09-15T09:47:38.909Z",
+    "titleSha": "eef4db750512e43f5ec794fde02769ac389eba833fe05da13acc927b4bcd0786",
+    "thresholds": {
+      "strong": 15,
+      "weak": 31
+    },
+    "ssotVersion": "2026-09-15"
+  },
+  "dominant": {
+    "catName": "住居",
+    "ratio": 1.3461692934666236,
+    "side": "above",
+    "shareMetricKey": "housing-expenditure-ratio-multi-person-households",
+    "shareTitle": "住居費割合",
+    "unit": "％",
+    "year": "2024",
+    "rank": 9,
+    "value": 8.6,
+    "rankingUrl": "https://stats47.jp/ranking/housing-expenditure-ratio-multi-person-households",
+    "chartName": "housing-expenditure-ratio-multi-person-households-tile-grid"
+  },
+  "evidence": [
+    {
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "title": "民営家賃（3.3m²当たり月額）",
+      "unit": "円",
+      "year": "2024",
+      "rank": 30,
+      "value": 3927,
+      "direction": "same",
+      "expectedHigh": true,
+      "effectiveRank": 30,
+      "verdict": "weak",
+      "rankingUrl": "https://stats47.jp/ranking/private-rental-housing-rent-per-3-3m2",
+      "chartName": "private-rental-housing-rent-per-3-3m2-prefecture-rankings"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "unit": "％",
+      "year": "2023",
+      "rank": 7,
+      "value": 73.5,
+      "direction": "inverse",
+      "expectedHigh": false,
+      "effectiveRank": 41,
+      "verdict": "contrary",
+      "rankingUrl": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+      "chartName": "owner-occupied-housing-ratio-prefecture-rankings"
+    }
+  ]
+}

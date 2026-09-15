@@ -1,0 +1,1 @@
+../../../.claude/skills/learned/synchronous-cpu-regression.md

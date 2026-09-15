@@ -1,10 +1,12 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { ArrowRight, TrendingDown, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
-import { SurfaceCard } from "@/components/surface";
+import { SurfaceCard } from '@/components/surface';
 
-import type { AreaProfileData } from "../types";
+import { selectDistinctProfileItems } from '../utils';
+
+import type { AreaProfileData } from '../types';
 
 interface AreaRelatedRankingsCardProps {
   profile: AreaProfileData;
@@ -24,94 +26,119 @@ export function AreaRelatedRankingsCard({
   profile,
   limit = 6,
 }: AreaRelatedRankingsCardProps) {
-  const strengths = profile.strengths.slice(0, limit);
-  const weaknesses = profile.weaknesses.slice(0, limit);
+  const strengths = selectDistinctProfileItems(profile.strengths, limit);
+  const weaknesses = selectDistinctProfileItems(profile.weaknesses, limit);
 
   if (strengths.length === 0 && weaknesses.length === 0) return null;
 
   return (
-    <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      {/* TOP - 強み */}
-      {strengths.length > 0 && (
-        <SurfaceCard className="p-0">
-          <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
-              <h3 className="text-base font-semibold">
-                {profile.areaName}が上位
-              </h3>
+    <section aria-labelledby="area-highlights-title">
+      <div className="mb-4">
+        <h2
+          id="area-highlights-title"
+          className="text-xl font-bold text-foreground"
+        >
+          {profile.areaName}の特徴
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          全国順位が高い指標と低い指標を、代表値から確認できます。
+        </p>
+      </div>
+      <SurfaceCard className="grid grid-cols-1 divide-y divide-border overflow-hidden p-0 md:grid-cols-2 md:divide-x md:divide-y-0">
+        {/* TOP - 強み */}
+        {strengths.length > 0 && (
+          <div>
+            <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="h-4 w-4 text-emerald-600" />
+                <h3 className="text-base font-semibold">
+                  {profile.areaName}が上位
+                </h3>
+              </div>
+              <Link
+                href="/themes"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+              >
+                テーマ一覧
+                <ArrowRight className="h-3 w-3" />
+              </Link>
             </div>
-            <Link
-              href="/themes"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
-            >
-              テーマ一覧
-              <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
-          <div className="px-5 pb-5 pt-3">
-            <ol className="space-y-1.5">
-              {strengths.map((item, idx) => (
-                <li
-                  key={`${item.rankingKey}-${idx}`}
-                  className="flex items-baseline gap-2"
-                >
-                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded bg-emerald-50 text-[10px] font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
-                    {item.rank}位
-                  </span>
-                  <Link
-                    href={`/ranking/${item.rankingKey}`}
-                    className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
+            <div className="px-5 pb-5 pt-3">
+              <ol className="space-y-1.5">
+                {strengths.map((item, idx) => (
+                  <li
+                    key={`${item.rankingKey}-${idx}`}
+                    className="flex items-baseline gap-2"
                   >
-                    {item.indicator}
-                  </Link>
-                </li>
-              ))}
-            </ol>
+                    <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-emerald-50 text-[10px] font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
+                      {item.rank}位
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <Link
+                        href={`/ranking/${item.rankingKey}`}
+                        className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
+                      >
+                        {item.indicator}
+                      </Link>
+                      <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
+                        {item.value.toLocaleString('ja-JP')}
+                        {item.unit}（{item.year}）
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
-        </SurfaceCard>
-      )}
+        )}
 
-      {/* BOTTOM - 弱み */}
-      {weaknesses.length > 0 && (
-        <SurfaceCard className="p-0">
-          <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
-            <div className="flex items-center gap-2">
-              <TrendingDown className="h-4 w-4 text-red-600" />
-              <h3 className="text-base font-semibold">
-                {profile.areaName}が下位
-              </h3>
+        {/* BOTTOM - 弱み */}
+        {weaknesses.length > 0 && (
+          <div>
+            <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
+              <div className="flex items-center gap-2">
+                <TrendingDown className="h-4 w-4 text-red-600" />
+                <h3 className="text-base font-semibold">
+                  {profile.areaName}が下位
+                </h3>
+              </div>
+              <Link
+                href="/themes"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+              >
+                テーマ一覧
+                <ArrowRight className="h-3 w-3" />
+              </Link>
             </div>
-            <Link
-              href="/themes"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
-            >
-              テーマ一覧
-              <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
-          <div className="px-5 pb-5 pt-3">
-            <ol className="space-y-1.5">
-              {weaknesses.map((item, idx) => (
-                <li
-                  key={`${item.rankingKey}-${idx}`}
-                  className="flex items-baseline gap-2"
-                >
-                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded bg-red-50 text-[10px] font-bold text-red-700 dark:bg-red-950 dark:text-red-400">
-                    {item.rank}位
-                  </span>
-                  <Link
-                    href={`/ranking/${item.rankingKey}`}
-                    className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
+            <div className="px-5 pb-5 pt-3">
+              <ol className="space-y-1.5">
+                {weaknesses.map((item, idx) => (
+                  <li
+                    key={`${item.rankingKey}-${idx}`}
+                    className="flex items-baseline gap-2"
                   >
-                    {item.indicator}
-                  </Link>
-                </li>
-              ))}
-            </ol>
+                    <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-red-50 text-[10px] font-bold text-red-700 dark:bg-red-950 dark:text-red-400">
+                      {item.rank}位
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <Link
+                        href={`/ranking/${item.rankingKey}`}
+                        className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
+                      >
+                        {item.indicator}
+                      </Link>
+                      <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
+                        {item.value.toLocaleString('ja-JP')}
+                        {item.unit}（{item.year}）
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
-        </SurfaceCard>
-      )}
+        )}
+      </SurfaceCard>
     </section>
   );
 }

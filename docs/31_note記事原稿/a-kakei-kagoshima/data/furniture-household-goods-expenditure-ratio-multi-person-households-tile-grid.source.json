@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "furniture-household-goods-expenditure-ratio-multi-person-households",
+  "source": "r2:app/ranking/furniture-household-goods-expenditure-ratio-multi-person-households/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "tile-grid",
+  "dataFile": "furniture-household-goods-expenditure-ratio-multi-person-households-tile-grid.json",
+  "year": "2024",
+  "unit": "％",
+  "label": "家具・家事用品費割合"
+}

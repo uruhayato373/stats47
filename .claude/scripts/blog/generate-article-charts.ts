@@ -79,8 +79,22 @@ const PREF_NAME_TO_CODE = (() => {
   }
   return map;
 })();
-const prefCodeOf = (name) =>
-  PREF_NAME_TO_CODE.get(String(name || '').trim()) || '';
+// 都道府県名 → コード。areaCode ("43" / "43000") がそのまま渡ってくる場合もある
+// (highlightPref はどちらの形式も許容する) ので、数字だけの文字列は名前引きせず
+// 先頭2桁を直接コードとして返す。
+// コード ("43" / "43000") → 都道府県名。名前が渡された場合はそのまま返す。
+const prefNameOf = (v) => {
+  const s = String(v || '').trim();
+  if (!/^\d{1,5}$/.test(s)) return s;
+  const code = s.slice(0, 2).padStart(2, '0');
+  for (const [name, c] of PREF_NAME_TO_CODE) if (c === code) return name;
+  return s;
+};
+const prefCodeOf = (name) => {
+  const s = String(name || '').trim();
+  if (/^\d{1,5}$/.test(s)) return s.slice(0, 2).padStart(2, '0');
+  return PREF_NAME_TO_CODE.get(s) || '';
+};
 
 // ---------- CLI 引数 ----------
 const args = process.argv.slice(2);
@@ -216,6 +230,8 @@ function genBarChartSvg(
   const highLabel = (Array.isArray(data) ? null : data.highLabel) ?? '上位';
   const lowLabel = (Array.isArray(data) ? null : data.lowLabel) ?? '下位';
   const showBars = (Array.isArray(data) ? null : data.showBars) ?? true;
+  const highlightPref = (Array.isArray(data) ? null : data.highlightPref) ?? undefined;
+  const focusNote = (Array.isArray(data) ? null : data.focusNote) ?? undefined;
 
   // 記事 JSON の rank は旧 fetcher が連番で作っている場合があるため、
   // values snapshot の正典と同じ「値降順・同値は同順位」で導出する。
@@ -259,6 +275,9 @@ function genBarChartSvg(
     highLabel,
     lowLabel,
     showBars,
+    // 数字コード ('43000') でも名前でも受ける。bar-chart 側が 都/道/府/県 接尾辞を落として照合する。
+    highlightName: highlightPref ? prefNameOf(highlightPref) : undefined,
+    focusNote,
   });
 }
 
@@ -272,6 +291,7 @@ function genTileGridMapSvg(data) {
   if (!items.length) return `<!-- empty data -->`;
   const title = get('title') ?? '都道府県マップ';
   const unit = get('unit') ?? '';
+  const highlightPref = get('highlightPref');
 
   const choroplethItems = items
     .filter((it) => typeof it.value === 'number' && isFinite(it.value))
@@ -294,6 +314,7 @@ function genTileGridMapSvg(data) {
     colorMin: get('colorMin'),
     colorMax: get('colorMax'),
     legendLabels: get('legendLabels'),
+    highlightCode: highlightPref ? prefCodeOf(highlightPref) : undefined,
   });
 }
 

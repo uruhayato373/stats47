@@ -6,9 +6,23 @@ primary_agent: gsc-analyst
 
 # search-growth — 検索成長統合基盤
 
+## キーワード単位の7日サイクル
+
+キーワードの順位改善は `data/seo/` を台帳に、確定7日GSC → 期限到来分の判定 → 1キーワード選択 → 検索意図と上位ページ比較 → 小変更の下書きPR → 公開確認 → 7日観察で回す。詳細は `reference/weekly-cycle-contract.md` の「キーワード順位サイクル」。横断診断と同じGSC認証・期間SSOTを使う。
+
+```bash
+npm run seo:rank:fetch -- --repo /path/to/stats47   # 常に --days 7
+npm run seo:rank:cycle                           # 判定・1件選択・レポート
+npm run seo:rank:check -- --base origin/main       # 履歴の改変検査
+```
+
+`seo-keyword-cycle-daily.yml` が毎日10:15 JSTに実行し、公開成功後にも観察開始を確認する。`keyword-review.mjs` は検索・閲覧記録付きの構造化結果から、対象ページ内の既存文言だけを置換する。AIはRead/WebSearch/WebFetchのみ。実装された変更は検証後のdraft PRへ、追加実装が必要なものは同じキーワードの具体案をdraft PRへ保存し、実装済みと混同しない。noindex・大きな構造変更は承認対象。候補がなければ何も改善しない。
+
+実装: `.claude/scripts/search-growth/{fetch-keyword-ranks,keyword-cycle,keyword-review}.mjs`、純粋判定: `lib/keyword-cycle.mjs`、CI prompt: `.claude/prompts/ci/keyword-cycle.md`。
+
 GSC だけを見る運用をやめ、**検索露出・クリック・インデックス・流入後行動・実ユーザー性能・サーバー状態を
 一つの証拠チェーン**で診断する。基盤・安全境界は`reference/platform-contract.md`、期間・承認・
-14/28/56日判定は`reference/weekly-cycle-contract.md`を正典とする。進捗は`.Codex/todo/`だけで管理する。
+14/28/56日判定は`reference/weekly-cycle-contract.md`を正典とする。進捗は`.claude/todo/`だけで管理する。
 
 ```
 既存 snapshot (GSC/GA4/PSI/coverage/inspection/cloudflare) + live collector (sitemap/crux/http/lighthouse)
@@ -45,7 +59,7 @@ carry over) → weekly-review が `triage` の最大3件を審査 → 人間が 
   read-only GET なので実行され **live 実測**する (blocker 候補 + control を probe。sitemap.xml から inSitemap 判定)。
 - **crux (CrUX/History)・GSC Sitemaps API メタ・lighthouse** は creds/ツールが要り、無ければ `skipped` =
   **live 未検証** と明示する (既存 fetcher を subprocess 実行するのは creds がある source のみ)。
-- partial/missing を成功・0 件にしない。live snapshot は `.Codex/state/search-growth/live/` (gitignore・ephemeral)。
+- partial/missing を成功・0 件にしない。live snapshot は `.claude/state/search-growth/live/` (gitignore・ephemeral)。
 
 ## MCP (read-only・任意)
 
@@ -71,7 +85,7 @@ write は tool として存在しない**。詳細は`reference/platform-contrac
 ## 効果判定 (evidence-based-judgment 必読)
 
 candidate を実装 → 14/28/56 日で `measure` の suggestedVerification に従い再計測。**自動 issue は PSI/Cloudflare
-閾値 alert のみ**。一般候補は人間承認後に `.Codex/todo/improvements.md` へ追加する。CTR 候補は過去の
+閾値 alert のみ**。一般候補は人間承認後に `.claude/todo/improvements.md` へ追加する。CTR 候補は過去の
 title rewrite の effect/none を踏まえ confidence を抑制済 — CTR だけを根拠に大量 rewrite しない。
 
 ## 専門 runbook (統合入口から参照)
@@ -94,16 +108,16 @@ observe-after-fix (sitemap/内部リンク/canonical/content 修正 + URL Inspec
 
 ## 実装
 
-- pipeline: `.Codex/scripts/search-growth/{collect,normalize,analyze,report,cli}.mjs`
-- lib: `.Codex/scripts/search-growth/lib/{contracts,freshness,redaction,join-url,scoring,sources,service,state}.mjs`
-- MCP: `.Codex/scripts/search-growth/mcp/server.mjs`
-- state: `.Codex/state/search-growth/{latest,candidates,health,past-effects}.json` + `manifests/`
+- pipeline: `.claude/scripts/search-growth/{collect,normalize,analyze,report,cli}.mjs`
+- lib: `.claude/scripts/search-growth/lib/{contracts,freshness,redaction,join-url,scoring,sources,service,state}.mjs`
+- MCP: `.claude/scripts/search-growth/mcp/server.mjs`
+- state: `.claude/state/search-growth/{latest,candidates,health,past-effects}.json` + `manifests/`
 - CI: `.github/workflows/search-growth-weekly.yml` (weekly candidate rebuild・committed snapshot 再利用)
-- test: `.Codex/scripts/search-growth/__tests__/*.test.mjs`
+- test: `.claude/scripts/search-growth/__tests__/*.test.mjs`
 
 ## 参照
 
 - `reference/platform-contract.md` — source、Observation、candidate、MCP、安全・準拠境界
 - `reference/weekly-cycle-contract.md` — finalized7d / rolling28d、triage、WIP、14/28/56日判定
-- `.Codex/todo/backlog.md` — 実装・live検証の残作業
-- `.Codex/todo/improvements.md` — 採択施策と効果判定
+- `.claude/todo/backlog.md` — 実装・live検証の残作業
+- `.claude/todo/improvements.md` — 採択施策と効果判定

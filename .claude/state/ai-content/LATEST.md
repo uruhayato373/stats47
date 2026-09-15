@@ -1,20 +1,20 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-09-13T00:02:22.497Z
-- GSC snapshot: 2026-W36 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
+- 生成: 2026-09-15T00:41:26.239Z
+- GSC snapshot: 2026-W37 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 171 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
 
 ## サマリ (active ranking 全件 2408 件)
 
-- ✅ done: 2166 件 (90.0% / impressions 計 73347)
-- ⏳ needs-regen: 242 件 (impressions 計 6)
+- ✅ done: 2166 件 (90.0% / impressions 計 84394)
+- ⏳ needs-regen: 242 件 (impressions 計 4)
   - 内訳: incomplete 1 / missing 241
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **43.8 件/日** (2026-07-30 からの平均)
+- 消化ペース: **41.9 件/日** (2026-07-30 からの平均)
 - 残り 242 件 → **完了見込み 約 6 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
@@ -23,10 +23,10 @@
 |---|---|---|
 | Mon, 07 Sep 2026 20:30:52 GMT | consumption-expenditure-total | 14 |
 | Mon, 07 Sep 2026 20:30:52 GMT | food-expenditure-total | 7 |
+| Mon, 07 Sep 2026 15:23:25 GMT | education-expenditure-total | 6 |
 | Mon, 07 Sep 2026 15:23:25 GMT | academic-achievement-test-average-rate | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | clothing-footwear-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | culture-recreation-expenditure-total | 0 |
-| Mon, 07 Sep 2026 15:23:25 GMT | education-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | furniture-household-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | health-medical-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | housing-expenditure-total | 0 |
@@ -35,32 +35,32 @@
 | Mon, 07 Sep 2026 15:23:25 GMT | other-living-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | transport-communication-expenditure-total | 0 |
 | Mon, 07 Sep 2026 15:23:25 GMT | utilities-expenditure-total | 0 |
-| Sun, 06 Sep 2026 23:12:37 GMT | woodland-area | 11 |
+| Sun, 06 Sep 2026 23:12:37 GMT | woodland-area | 53 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
 | impressions | key | reason | review | blockers |
 |---|---|---|---|---|
-| 6 | gini-coefficient-disposable-income | incomplete | 🟠手動是正候補 | missing-pref-commentary |
-| 0 | construction-private-employees | missing | 🟠手動是正候補 | - |
-| 0 | information-private-establishments | missing | 🟠手動是正候補 | - |
-| 0 | information-private-employees | missing | 🟠手動是正候補 | - |
-| 0 | broadband-service-contract-count | missing | 🟠手動是正候補 | - |
-| 0 | broadband-contract-count-excluding-39-4g | missing | 🟠手動是正候補 | - |
-| 0 | patent-application-count | missing | 🟠手動是正候補 | - |
-| 0 | design-application-count | missing | 🟠手動是正候補 | - |
-| 0 | trademark-application-count | missing | 🟠手動是正候補 | - |
-| 0 | patent-registration-count | missing | 🟠手動是正候補 | - |
-| 0 | design-registration-count | missing | 🟠手動是正候補 | - |
-| 0 | trademark-registration-count | missing | 🟠手動是正候補 | - |
-| 0 | patent-inventor-count | missing | 🟠手動是正候補 | - |
-| 0 | furusato-donation-amount-prefecture | missing | 🟠手動是正候補 | - |
-| 0 | furusato-donation-count-prefecture | missing | 🟠手動是正候補 | - |
-| 0 | furusato-fundraising-cost-prefecture | missing | 🟠手動是正候補 | - |
-| 0 | furusato-return-gift-procurement-cost-prefecture | missing | 🟠手動是正候補 | - |
-| 0 | furusato-return-gift-shipping-cost-prefecture | missing | 🟠手動是正候補 | - |
-| 0 | furusato-tax-deduction-municipal-prefecture | missing | 🟠手動是正候補 | - |
-| 0 | furusato-tax-deduction-prefectural-prefecture | missing | 🟠手動是正候補 | - |
+| 4 | gini-coefficient-disposable-income | incomplete | 🟠手動是正候補 | missing-pref-commentary |
+| 0 | ambulance-transported-deaths | missing | 🟠手動是正候補 | - |
+| 0 | ambulance-transported-mild | missing | 🟠手動是正候補 | - |
+| 0 | ambulance-transported-moderate | missing | 🟠手動是正候補 | - |
+| 0 | ambulance-transported-other | missing | 🟠手動是正候補 | - |
+| 0 | ambulance-transported-persons | missing | 🟠手動是正候補 | - |
+| 0 | ambulance-transported-severe | missing | 🟠手動是正候補 | - |
+| 0 | amusement-industry-employees | missing | 🟠手動是正候補 | - |
+| 0 | amusement-industry-establishments | missing | 🟠手動是正候補 | - |
+| 0 | amusement-industry-net-value-added | missing | 🟠手動是正候補 | - |
+| 0 | amusement-industry-revenue | missing | 🟠手動是正候補 | - |
+| 0 | beef-cattle-count | missing | 🟠手動是正候補 | - |
+| 0 | births-first-child | missing | 🟠手動是正候補 | - |
+| 0 | births-mother-age25to29 | missing | 🟠手動是正候補 | - |
+| 0 | births-mother-age30to34 | missing | 🟠手動是正候補 | - |
+| 0 | births-mother-age35to39 | missing | 🟠手動是正候補 | - |
+| 0 | births-mother-age40plus | missing | 🟠手動是正候補 | - |
+| 0 | births-mother-under25 | missing | 🟠手動是正候補 | - |
+| 0 | births-second-child | missing | 🟠手動是正候補 | - |
+| 0 | births-third-child-plus | missing | 🟠手動是正候補 | - |
 
 > 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、
 > 既定 3件を outbox 経由で R2 へ公開する。個別の独自考察改善はローカルの headless author+critic、

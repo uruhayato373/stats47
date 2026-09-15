@@ -23,7 +23,7 @@ $ARGUMENTS — [--type <name>] [type 固有の引数...]
 
 ## type 別ガイドの参照
 
-`--type` 値に応じて `.Codex/skills/sns/preview-remotion/types/<type>.md` を読み、その手順に従う:
+`--type` 値に応じて `.claude/skills/sns/preview-remotion/types/<type>.md` を読み、その手順に従う:
 
 | --type 値 | 参照ファイル | 上書きする preview-data ファイル | 対象コンポジション例 |
 |---|---|---|---|

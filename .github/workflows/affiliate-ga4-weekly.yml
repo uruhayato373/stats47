@@ -10,6 +10,13 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 #
 # 失敗を隠さない: GA4 取得に失敗しても集約 state は生成し、measurementGate=blocked として記録する。
 # 自動化は観測と候補生成 (recommendedActions) まで。広告変更・effect 判定・push・deploy はしない。
+#
+# 置き場 (2026-09-14・docs/01_技術設計/02_データアーキテクチャ.md):
+#   - 生 snapshot ga4-affiliate-<date>.json は git に足さず R2 `state/ads/ga4-affiliate/` へ push する
+#     (公開 URL。ローカルは `npm run state:pull -- ads/ga4-affiliate` で live/ に取得。lifecycle 400 日)。
+#   - git には週次集約 `.claude/state/ads/ga4-affiliate-history.csv` だけを commit-back する
+#     (vertical × position × 週。T14d / T28d の効果判定はこれで足りる)。
+#   - artifact は従来どおり 30 日 (デバッグ用)。
 
 on:
   workflow_dispatch:
@@ -22,11 +29,19 @@ on:
     - cron: "0 13 * * 0" # JST 22:00 Sunday (UTC 13:00) — inventory/compliance refresh の後
 
 permissions:
-  contents: read
+  contents: write # 週次集約 CSV の commit-back
 
 concurrency:
   group: affiliate-ga4-fetch
   cancel-in-progress: false
+
+env:
+  # diff-push-r2.ts が要求する R2 S3 認証 (sync-snapshots.yml と同じ導出)
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
 
 jobs:
   fetch:
@@ -69,6 +84,45 @@ jobs:
       - name: 🔐 Cleanup GA4 key
         if: always()
         run: rm -f stats47-f6b5dae19196.json
+
+      # 生 snapshot は R2 state/ が正典。index.json は公開 R2 が list できない代わりの object 一覧。
+      - name: 📤 Publish raw snapshot to R2 state/ads/ga4-affiliate/
+        id: publish
+        if: steps.ga4.outcome == 'success'
+        run: |
+          set -euo pipefail
+          FILE=$(find .claude/state/ads -maxdepth 1 -name 'ga4-affiliate-????-??-??.json' | sort | tail -1)
+          [ -n "$FILE" ] || { echo "::error::snapshot が無い"; exit 1; }
+          DATE=$(basename "$FILE" .json | sed 's/^ga4-affiliate-//')
+          STAGE=.local/r2/state/ads/ga4-affiliate
+          mkdir -p "$STAGE"
+          cp "$FILE" "$STAGE/$DATE.json"
+          cp "$FILE" "$STAGE/latest.json"
+          # 既存 index (無ければ空) に今回の key を足して重複を除く
+          curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/index.json" -o /tmp/index.json || echo '[]' > /tmp/index.json
+          node -e '
+            const fs=require("fs"); const idx=JSON.parse(fs.readFileSync("/tmp/index.json","utf8"));
+            const keys=[...new Set([...idx, process.argv[1]+".json", "latest.json"])].sort();
+            fs.writeFileSync(process.argv[2], JSON.stringify(keys, null, 2)+"\n");
+          ' "$DATE" "$STAGE/index.json"
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/ads/ga4-affiliate/"
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+
+      # git に残すのは週次集約だけ。生 JSON は .claude/state/ads/.gitignore で追跡しない。
+      - name: 📝 Append weekly aggregate and commit back
+        if: steps.ga4.outcome == 'success'
+        run: |
+          set -euo pipefail
+          node .claude/scripts/ads/append-ga4-affiliate-history.mjs "${{ steps.publish.outputs.file }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/ads/ga4-affiliate-history.csv
+          if git diff --cached --quiet; then echo "No aggregate changes"; exit 0; fi
+          git commit -m "chore(ads): ga4 affiliate weekly aggregate ${{ steps.publish.outputs.date }} [skip ci]"
+          # API 取得と R2 push を挟むので develop が進みうる。push 直前に取り直す (fetch-metrics-weekly と同じ)。
+          git pull --rebase --autostash origin develop
+          git push origin develop
 
       - name: 🔍 Rebuild local inventory/compliance inputs
         run: |

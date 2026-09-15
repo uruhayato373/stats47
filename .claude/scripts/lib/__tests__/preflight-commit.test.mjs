@@ -6,7 +6,29 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { resolveInvocation } from "../preflight-commit.mjs";
+import { resolveInvocation, runGates } from "../preflight-commit.mjs";
+
+test("空いた枠を再利用し、同時数を守り、例外後も残りのゲートを検査する", async () => {
+  let releaseFirst;
+  const blocked = new Promise((resolve) => { releaseFirst = resolve; });
+  const started = [];
+  let active = 0;
+  let maximum = 0;
+  const gates = [0, 1, 2, 3].map((index) => ({ name: String(index), run: async () => {
+    started.push(index);
+    maximum = Math.max(maximum, ++active);
+    try {
+      if (index === 0) await blocked;
+      if (index === 2) { releaseFirst(); throw new Error("probe failure"); }
+      return { ok: true };
+    } finally { active--; }
+  } }));
+  const results = await runGates(gates, false, 2);
+  assert.equal(maximum, 2);
+  assert.deepEqual(started, [0, 1, 2, 3]);
+  assert.deepEqual(results.map((r) => r.result.ok), [true, true, false, true]);
+  assert.match(results[2].result.output, /probe failure/);
+});
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 const PREFLIGHT = path.join(ROOT, ".claude/scripts/lib/preflight-commit.mjs");
@@ -135,6 +157,8 @@ test("--pr のゲートは PR CI (Static Gates) と同じコマンドを指す",
     "generate-sitemap-blog-entries.ts",
     "generate-known-tag-keys.ts",
     "generate-ranking-prominence.ts",
+    // 2026-09-14: 日付名 state の追跡を止める hygiene gate も PR CI と同じ引数で走らせる
+    "check-repo-hygiene.cjs",
   ];
   for (const command of shared) {
     assert.ok(src.includes(command), `preflight --pr が ${command} を失っている`);
@@ -147,7 +171,7 @@ test("--pr は GATES ではなく PR_GATES を使う (commit 用の 3 ゲート�
     path.join(ROOT, ".claude/scripts/lib/preflight-commit.mjs"),
     "utf8"
   );
-  assert.match(src, /const gates = pr \? PR_GATES : GATES;/);
+  assert.match(src, /pr \? PR_GATES : GATES/);
   // 集約表示・件数表示が gates 変数を見ていること (GATES 直参照に戻すと --pr の件数が嘘になる)
   assert.ok(!/\$\{GATES\.length\}/.test(src), "件数表示が GATES 固定に戻っている");
 });

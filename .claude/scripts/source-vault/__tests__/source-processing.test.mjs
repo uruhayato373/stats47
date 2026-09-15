@@ -6,6 +6,7 @@ import test from 'node:test';
 
 import {
   parseContentCrop,
+  resolveContentCrop,
   parsePageSelector,
   stageStatus,
   validateCropSpec,
@@ -141,6 +142,78 @@ test('page image contract validates dpi, format, quality, and content crop geome
   assert.throws(() => validatePageImageContract({ dpi: 30 }), /dpi must be an integer/);
   assert.throws(() => parseContentCrop('1970x2550'), /WxH\+X\+Y/);
   assert.throws(() => parseContentCrop('0x10+1+1'), /positive/);
+});
+
+test('crop spec coordinateSpace defaults to full-page and page-image needs a pageImage contract', () => {
+  const workspace = {
+    profile: 'prefecture-databook-2021',
+    sourceKey: 'prefecture-databook',
+    edition: '2021',
+    revision: 2,
+    sourceBundleSha256: 'abc',
+    documents: [{ id: 'pdf-123', path: 'sample.pdf', pages: 2 }],
+  };
+  const spec = {
+    schemaVersion: 1,
+    profile: workspace.profile,
+    sourceKey: workspace.sourceKey,
+    edition: workspace.edition,
+    revision: workspace.revision,
+    sourceBundleSha256: workspace.sourceBundleSha256,
+    internalUseOnly: true,
+    publicOriginalReuse: 'forbidden',
+    crops: [
+      {
+        id: 'pdf123-p0001-tab-1',
+        document: 'pdf-123',
+        page: 1,
+        box: { unit: 'pixel', x: 10, y: 20, width: 300, height: 200 },
+        purpose: '表の原本照合',
+        sourceRef: 'p.1',
+        intendedStats47Use: '内部照合',
+        primarySourceRequired: true,
+      },
+    ],
+  };
+  assert.equal(validateCropSpec(spec, workspace), spec);
+  assert.throws(
+    () => validateCropSpec({ ...spec, coordinateSpace: 'page-image' }, workspace),
+    /page-image requires processing.pageImage/
+  );
+  assert.throws(
+    () => validateCropSpec({ ...spec, coordinateSpace: 'pixels' }, workspace),
+    /coordinateSpace must be one of full-page\|page-image/
+  );
+  const withContract = { ...workspace, pageImage: { dpi: 216, format: 'jpg', quality: 85, contentCrop: null } };
+  assert.equal(
+    validateCropSpec({ ...spec, coordinateSpace: 'page-image' }, withContract).coordinateSpace,
+    'page-image'
+  );
+});
+
+test('content crop can be declared per rendered page size and resolves by the actual render', () => {
+  const contract = validatePageImageContract({
+    dpi: 216,
+    format: 'jpg',
+    contentCrop: { '2400x3090': '1800x3000+300+80', '4800x5436': '3200x5200+800+170' },
+  });
+  assert.deepEqual(Object.keys(contract.contentCrop.byRenderedSize), ['2400x3090', '4800x5436']);
+  assert.deepEqual(resolveContentCrop(contract.contentCrop, { width: 4800, height: 5436 }), {
+    geometry: '3200x5200+800+170',
+    width: 3200,
+    height: 5200,
+    x: 800,
+    y: 170,
+  });
+  assert.throws(
+    () => resolveContentCrop(contract.contentCrop, { width: 2400, height: 2718 }),
+    /no entry for rendered page 2400x2718/
+  );
+  const single = parseContentCrop('10x10+1+1');
+  assert.deepEqual(resolveContentCrop(single, { width: 99, height: 99 }), single);
+  assert.equal(resolveContentCrop(null, { width: 1, height: 1 }), null);
+  assert.throws(() => parseContentCrop({ wide: '10x10+1+1' }), /rendered page size WxH/);
+  assert.throws(() => parseContentCrop({}), /at least one rendered page size/);
 });
 
 test('markdown transcription pages require page/kind frontmatter and existing figure ids', () => {

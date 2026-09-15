@@ -186,10 +186,10 @@ note 記事の stats47.jp リンクには UTM パラメータを付けない。�
 
 執筆完了時に `hashtags.txt` を記事ディレクトリ直下に作成する。
 
-- note は**最大 100 個**のハッシュタグを登録できる
-- `#キーワード` 形式で、スペース区切り、1 行にまとめる
+- note の運用上限は **99 個**。公開後に 95 個以上を確保する
+- `#キーワード` 形式で、1 行 1 タグとする
 - 記事のテーマ・登場する都道府県・関連する統計指標・一般的な発見系ワードを網羅する
-- 参考: R2 の任意記事を `bash .Codex/scripts/note/restore-from-r2.sh b2-sunshine-duration` で復元して確認
+- 参考: R2 の任意記事を `bash .claude/scripts/note/restore-from-r2.sh b2-sunshine-duration` で復元して確認
 
 ## 出力
 
@@ -207,12 +207,12 @@ docs/31 は ephemeral outbox。生成後に note-draft-index.json に登録し�
 ```bash
 node -e "
 const fs=require('fs');
-const f='.Codex/state/note-draft-index.json';
+const f='.claude/state/note-draft-index.json';
 const d=JSON.parse(fs.readFileSync(f,'utf8'));
 d.drafts['<slug>']={vertical:'<vertical>',r2_path:null};
 fs.writeFileSync(f,JSON.stringify(d,null,2)+'\n');
 "
-git add .Codex/state/note-draft-index.json docs/31_note記事原稿/<slug>
+git add .claude/state/note-draft-index.json docs/31_note記事原稿/<slug>
 git commit -m "note: <slug> ドラフト生成"
 git push origin develop
 # → CI が R2 同期 + docs/31 削除。復元は restore-from-r2.sh <slug>
@@ -222,5 +222,5 @@ git push origin develop
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`
 - UTM ルール: `/generate-utm-url` スキル
-- **執筆パターン 9 型（SSoT）**: `.Codex/skills/note/reference/note-writing-patterns.md`
+- **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
   → フック・導入の型は plan.md に記載済みの型を使う。plan.md に型の記載がない場合は `/design-note-structure` に戻る。

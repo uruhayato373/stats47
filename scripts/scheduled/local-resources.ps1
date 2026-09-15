@@ -1,4 +1,4 @@
-﻿param(
+param(
   [ValidateSet('Install', 'Run', 'Remove')]
   [string]$Action = 'Run',
   [string]$NodePath = ''
@@ -15,8 +15,11 @@ if ($Action -eq 'Install') {
   $triggers = @((New-ScheduledTaskTrigger -Daily -At '09:00'), (New-ScheduledTaskTrigger -AtLogOn -User ([Security.Principal.WindowsIdentity]::GetCurrent().Name)))
   $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Minutes 15)
   $principal = New-ScheduledTaskPrincipal -UserId ([Security.Principal.WindowsIdentity]::GetCurrent().Name) -LogonType Interactive -RunLevel Limited
-  Register-ScheduledTask -TaskName $taskName -Action $taskAction -Trigger $triggers -Settings $settings -Principal $principal -Description 'Local resource check daily; eligible generated cache cleanup weekly; storage audit monthly. No persistent process.' -Force | Out-Null
+  Register-ScheduledTask -TaskName $taskName -Action $taskAction -Trigger $triggers -Settings $settings -Principal $principal -Description 'Local resource check daily; eligible generated cache cleanup daily; storage audit monthly. No persistent process.' -Force | Out-Null
   Get-ScheduledTask -TaskName $taskName | Select-Object TaskName, State
+  # git 自身の commit-graph / prefetch / incremental repack を Task Scheduler へ登録する (pack が 25 個に
+  # 溜まった 2026-09-14 の再発防止)。履歴は書き換えない。
+  & git -C $repo maintenance start
   exit 0
 }
 if ($Action -eq 'Remove') {
@@ -32,10 +35,10 @@ if (Test-Path -LiteralPath $cadencePath) {
   foreach ($property in $previous.PSObject.Properties) { $cadence[$property.Name] = $property.Value }
 }
 $today = (Get-Date).ToString('yyyy-MM-dd')
-if ($cadence['check'] -eq $today) { exit 0 }
 $hadFailure = $false
 foreach ($mode in @('check', 'cleanup', 'audit')) {
-  $days = if ($mode -eq 'cleanup') { 7 } elseif ($mode -eq 'audit') { 30 } else { 0 }
+  if ($cadence[$mode] -eq $today) { continue }
+  $days = if ($mode -eq 'cleanup') { 1 } elseif ($mode -eq 'audit') { 30 } else { 0 }
   if ($days -gt 0 -and $cadence[$mode] -and ((Get-Date) - [DateTime]$cadence[$mode]).TotalDays -lt $days) { continue }
   $arguments = @((Join-Path $repo '.claude/scripts/lib/local-resources.mjs'), $mode, '--record')
   if ($mode -eq 'cleanup') { $arguments += '--apply' }

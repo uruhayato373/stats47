@@ -151,6 +151,10 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > `utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=<noteId>`
 > へ転送するため、新しい custom dimension なしで記事別の送客と販売先 CTA を結合できる。
 
+> **nav_surface の値追加 (2026-09-15・県ページ回遊導線)**: 都道府県ページ右レールの
+> 共通カテゴリ一覧を `area_sidebar` として追加した。登録済み `nav_surface` / `nav_label` の
+> 値追加であり、新しい custom dimension はない。
+
 > `❓要確認` は「code コメントで登録前提と書かれているが、GA4 管理画面での実登録を確認していない」状態。
 > `.claude/rules/evidence-based-judgment.md` に従い、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。
 > 推測で `✅` にしない。

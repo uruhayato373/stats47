@@ -1,15 +1,15 @@
 ---
 name: create-skill
-description: Codex スキルの作成・設計ガイド。新しいスキルを作成するとき、既存スキルを改善するときに自動参照する背景知識.
+description: Claude Code スキルの作成・設計ガイド。新しいスキルを作成するとき、既存スキルを改善するときに自動参照する背景知識.
 user-invocable: false
 disable-model-invocation: true
 primary_agent: devops-runner
 ---
 
-Codex スキルの設計・実装ガイド。公式ドキュメント（code.Codex.com/docs/en/skills）とこのプロジェクトの規約を統合。
+Claude Code スキルの設計・実装ガイド。公式ドキュメント（code.claude.com/docs/en/skills）とこのプロジェクトの規約を統合。
 
-モデル選択、Task Capsule、委譲上限は `.Codex/rules/model-prompting.md`、fork / Agent 起動時の
-出力形式は `.Codex/rules/agent-output-contract.md` を正典とする。個別SKILLへ長い共通promptを複製しない。
+モデル選択、Task Capsule、委譲上限は `.claude/rules/model-prompting.md`、fork / Agent 起動時の
+出力形式は `.claude/rules/agent-output-contract.md` を正典とする。個別SKILLへ長い共通promptを複製しない。
 
 ## スキルのディレクトリ構造
 
@@ -20,7 +20,7 @@ Codex スキルの設計・実装ガイド。公式ドキュメント（code.Cod
 │   ├── spec.md        # 仕様・規約
 │   └── examples.md    # 使用例
 ├── scripts/           # 実行可能スクリプト
-│   └── helper.js      # Codex が実行するスクリプト
+│   └── helper.js      # Claude が実行するスクリプト
 └── examples/          # 完成物の参考例
     └── sample.svg     # 実際の出力サンプル
 ```
@@ -34,7 +34,7 @@ Codex スキルの設計・実装ガイド。公式ドキュメント（code.Cod
 ```yaml
 ---
 name: skill-name              # 小文字・ハイフン区切り（省略時はディレクトリ名）
-description: 何をするスキルか  # Codex が自動呼出しを判断する根拠（必須推奨）
+description: 何をするスキルか  # Claude が自動呼出しを判断する根拠（必須推奨）
 disable-model-invocation: true # true → ユーザーのみ /name で呼出し可
 user-invocable: false          # false → /menu に表示しない（背景知識用）
 allowed-tools: Read, Grep      # スキル実行時に許可なく使えるツール
@@ -52,9 +52,9 @@ Task CapsuleとOutput Formatを冒頭で固定する。
 
 | パターン | 設定 | 用途 |
 |----------|------|------|
-| ユーザー＆Codex両方が呼出し | (デフォルト) | 汎用リファレンス・軽い作業 |
+| ユーザー＆Claude両方が呼出し | (デフォルト) | 汎用リファレンス・軽い作業 |
 | ユーザーのみ呼出し | `disable-model-invocation: true` | デプロイ・副作用のある操作 |
-| Codexのみ呼出し | `user-invocable: false` | 背景知識・規約 |
+| Claudeのみ呼出し | `user-invocable: false` | 背景知識・規約 |
 
 ### 本文の構成パターン
 
@@ -135,7 +135,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/helper.js" $ARGUMENTS
 
 ## examples/ の設計
 
-**完成物の実例**を置く。Codex が構造を理解する最良のリファレンス。
+**完成物の実例**を置く。Claude が構造を理解する最良のリファレンス。
 
 - 実際の記事から生成した SVG / JSON / マークダウン
 - コメント付きで「なぜこの構造か」を説明（任意）
@@ -144,8 +144,8 @@ node "${CLAUDE_SKILL_DIR}/scripts/helper.js" $ARGUMENTS
 
 | 場所 | パス | 適用範囲 |
 |------|------|----------|
-| プロジェクト | `.Codex/skills/<name>/SKILL.md` | このリポジトリ |
-| 個人 | `~/.Codex/skills/<name>/SKILL.md` | 全プロジェクト |
+| プロジェクト | `.claude/skills/<name>/SKILL.md` | このリポジトリ |
+| 個人 | `~/.claude/skills/<name>/SKILL.md` | 全プロジェクト |
 | エンタープライズ | managed settings | 組織全体 |
 
 同名の場合の優先順位: エンタープライズ > 個人 > プロジェクト。
@@ -153,7 +153,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/helper.js" $ARGUMENTS
 ## ベストプラクティス
 
 1. **SKILL.md は 500 行以内**: 詳細は reference/ に分離
-2. **description は具体的に**: Codex の自動呼出し判断の根拠になる
+2. **description は具体的に**: Claude の自動呼出し判断の根拠になる
 3. **副作用のあるスキルは `disable-model-invocation: true`**: デプロイ・DB変更・外部API呼出し等
 4. **一時ファイルはプロジェクトルートに作成しない**: `/tmp/` を使用する。やむを得ずルートに作成する場合は、スキルの最終ステップに削除処理を必ず含める（pre-commit フックが `tmp_*`, `*.db` 等を自動削除するが、スキル側でも責任を持つ）
 5. **スクリプトは `${CLAUDE_SKILL_DIR}` で参照**: 作業ディレクトリに依存しない

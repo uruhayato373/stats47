@@ -1,6 +1,6 @@
 ---
 name: fetch-gsc-data
-description: Google Search Console API から検索パフォーマンスデータを取得する。Use when user says "GSCデータ", "検索パフォーマンス", "検索クエリ分析", "GSC snapshot". クエリ・ページ・デバイス・国別レポート対応。snapshot モードで週次 CSV を .Codex/skills/analytics/gsc-improvement/reference/snapshots/ に全件保存.
+description: Google Search Console API から検索パフォーマンスデータを取得する。Use when user says "GSCデータ", "検索パフォーマンス", "検索クエリ分析", "GSC snapshot". クエリ・ページ・デバイス・国別レポート対応。snapshot モードで週次 CSV を .claude/skills/analytics/gsc-improvement/reference/snapshots/ に全件保存.
 primary_agent: gsc-analyst
 co_agents: [theme-designer, gsc-analyst]
 ---
@@ -143,7 +143,7 @@ main();
 
 ## snapshot モード
 
-週次レビュー時に全ディメンションを全件取得し、`.Codex/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。git で施策 → 数値変化の履歴を追えるようにするのが目的。
+週次レビュー時に全ディメンションを全件取得し、`.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。git で施策 → 数値変化の履歴を追えるようにするのが目的。
 
 **3 段階のコピーを自動で行う**:
 
@@ -181,7 +181,7 @@ const fmt = (d) => d.toISOString().slice(0, 10);
 
 // 保存先
 const WEEK = '<YYYY-Www>'; // 引数から受け取る
-const OUT_DIR = path.resolve(`.Codex/skills/analytics/gsc-improvement/reference/snapshots/${WEEK}`);
+const OUT_DIR = path.resolve(`.claude/skills/analytics/gsc-improvement/reference/snapshots/${WEEK}`);
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
 // CSV ヘルパー: カンマ・改行・ダブルクォートを含む場合のみクォート
@@ -305,7 +305,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 スクリプト完了後、以下を報告する:
 
-- 保存先ディレクトリ: `.Codex/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/`
+- 保存先ディレクトリ: `.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/`
 - 各ファイルの行数（queries.csv N rows / pages.csv N rows 等）
 - 手動 CSV（index-coverage.csv / index-trend.csv）のコピー有無
 - 主要指標サマリー（queries.csv 上位 5 件の clicks 合計 vs 全体 clicks 等）
@@ -316,9 +316,9 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 2. **Coverage Drilldown 自動集計（Phase 8、2026-04-26）**:
    `url-inspection-daily.cjs` が URL Inspection API（quota 2,000/site/day の 75% = 1,500 URL）で自動取得・集計するため、本 skill での追加作業は不要。
-   - 出力先: `.Codex/state/metrics/gsc/coverage-drilldown/YYYY-Www/`
+   - 出力先: `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/`
    - 自動実行: GitHub Actions `gsc-url-inspection-daily.yml` (毎朝 JST 06:00)
-   - 詳細: 親 issue #115 / #43 / `.Codex/scripts/gsc/url-inspection-daily.cjs` ヘッダコメント
+   - 詳細: 親 issue #115 / #43 / `.claude/scripts/gsc/url-inspection-daily.cjs` ヘッダコメント
    - **手動 export は廃止**（旧 Phase 7 `parse-coverage-drilldown.cjs` は Phase 8 で完全代替して削除）
 
 ## よく使うパターン

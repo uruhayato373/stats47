@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "profile": "prefecture-ranking-consumption",
+  "sourceKey": "prefecture-ranking-consumption",
+  "edition": "2020",
+  "input": {
+    "documents": 1,
+    "pages": 310,
+    "extractionComplete": true,
+    "internalCropCount": 0
+  },
+  "itemCount": 310,
+  "resolvedCount": 310,
+  "resolutionCoverage": 1,
+  "actionableCount": 40,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 270,
+    "context-only": 40
+  },
+  "byKind": {
+    "page": 310
+  },
+  "publicOriginalReuse": "forbidden"
+}

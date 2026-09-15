@@ -24,6 +24,7 @@ const VAULT_SCRIPT = path.join(SCRIPT_DIR, 'source-vault.mjs');
 const TEMP_VAULT_ROOT = path.join(tmpdir(), 'stats47-source-vault');
 const BOOLEAN_OPTIONS = new Set(['force', 'contract-only', 'allow-all-pages', 'check']);
 const MD_PAGE_KINDS = new Set(['text', 'figure', 'table', 'mixed', 'blank']);
+const CROP_COORDINATE_SPACES = new Set(['full-page', 'page-image']);
 const PDF_TOOLS = ['pdfinfo', 'pdftotext', 'pdftoppm', 'tesseract', 'magick'];
 
 function usage() {
@@ -151,6 +152,23 @@ export function validateOcrLayout(rotation, psm) {
  */
 export function parseContentCrop(geometry) {
   if (geometry == null) return null;
+  if (typeof geometry === 'object' && !Array.isArray(geometry)) {
+    // 同じ資料の中で Kindle のウィンドウ寸法が違う分冊が混ざる場合は、render 後のフルページ pixel "WxH" を
+    // key にして本文領域を分冊ごとに宣言する。extract が実際の render 寸法で引く (該当なしは停止)
+    const byRenderedSize = {};
+    for (const [size, value] of Object.entries(geometry)) {
+      if (!/^\d+x\d+$/.test(size))
+        throw new Error(`contentCrop map key must be the rendered page size WxH: ${size}`);
+      byRenderedSize[size] = parseContentCropGeometry(value);
+    }
+    if (Object.keys(byRenderedSize).length === 0)
+      throw new Error('contentCrop map must declare at least one rendered page size');
+    return { byRenderedSize };
+  }
+  return parseContentCropGeometry(geometry);
+}
+
+function parseContentCropGeometry(geometry) {
   const match =
     typeof geometry === 'string' &&
     geometry.match(/^(\d+)x(\d+)\+(\d+)\+(\d+)$/);
@@ -158,6 +176,20 @@ export function parseContentCrop(geometry) {
   const [width, height, x, y] = match.slice(1).map(Number);
   if (width < 1 || height < 1) throw new Error('contentCrop size must be positive');
   return { geometry, width, height, x, y };
+}
+
+/** contentCrop が render 寸法 map のときは実際の fullPagePixels で 1 つに解決する。 */
+export function resolveContentCrop(contentCrop, fullPagePixels) {
+  if (contentCrop == null) return null;
+  if (!contentCrop.byRenderedSize) return contentCrop;
+  const key = `${fullPagePixels.width}x${fullPagePixels.height}`;
+  const resolved = contentCrop.byRenderedSize[key];
+  if (!resolved) {
+    throw new Error(
+      `contentCrop has no entry for rendered page ${key} (declared: ${Object.keys(contentCrop.byRenderedSize).join(', ')})`
+    );
+  }
+  return resolved;
 }
 
 export function validatePageImageContract(pageImage, label = 'pageImage') {
@@ -785,7 +817,8 @@ async function extract(options) {
   if (!Number.isInteger(dpi) || dpi < 72 || dpi > 600)
     throw new Error('--dpi must be an integer from 72 to 600');
   const pageFormat = pageImageContract?.format ?? 'png';
-  const contentCrop = pageImageContract?.contentCrop ?? null;
+  const contentCropContract = pageImageContract?.contentCrop ?? null;
+  let contentCrop = null;
   const { rotationDegrees, pageSegmentationMode } = validateOcrLayout(
     options.rotate ?? workspace.ocrRotationDegrees ?? 0,
     options.psm ?? workspace.ocrPageSegmentationMode ?? 6
@@ -849,6 +882,7 @@ async function extract(options) {
       const dimensions = await run('magick', ['identify', '-format', '%w %h', renderedPng]);
       const [width, height] = dimensions.stdout.trim().split(/\s+/).map(Number);
       fullPagePixels = { width, height };
+      contentCrop = resolveContentCrop(contentCropContract, fullPagePixels);
     }
     if (contentCrop) {
       if (
@@ -998,6 +1032,13 @@ export function validateCropSpec(spec, workspace) {
     errors.push('internalUseOnly must be true');
   if (spec.publicOriginalReuse !== 'forbidden')
     errors.push('publicOriginalReuse must be forbidden');
+  // box の座標系。full-page = PDF を job.dpi (既定 180) で描画したフルページ pixel (従来動作)。
+  // page-image = S1 の pages/ 画像 (profile の pageImage dpi + contentCrop 適用後) の pixel。
+  const coordinateSpace = spec.coordinateSpace ?? 'full-page';
+  if (!CROP_COORDINATE_SPACES.has(coordinateSpace))
+    errors.push(`coordinateSpace must be one of ${[...CROP_COORDINATE_SPACES].join('|')}`);
+  if (coordinateSpace === 'page-image' && !workspace.pageImage)
+    errors.push('coordinateSpace page-image requires processing.pageImage in the profile');
   if (!Array.isArray(spec.crops) || spec.crops.length === 0)
     errors.push('crops must contain at least one job');
   const ids = new Set();
@@ -1086,7 +1127,10 @@ async function crop(options) {
           `PDF SHA-256 no longer matches the source manifest: ${document.path}`
         );
       }
-      const dpi = Number(job.dpi ?? 180);
+      const pageImageSpace = (spec.coordinateSpace ?? 'full-page') === 'page-image';
+      if (pageImageSpace && job.dpi != null)
+        throw new Error(`Crop ${job.id}: dpi is fixed by processing.pageImage in page-image space`);
+      const dpi = Number(job.dpi ?? (pageImageSpace ? workspace.pageImage.dpi : 180));
       if (!Number.isInteger(dpi) || dpi < 72 || dpi > 600)
         throw new Error(`Invalid dpi for crop ${job.id}`);
       const { rotationDegrees } = validateOcrLayout(
@@ -1106,28 +1150,46 @@ async function crop(options) {
         '%w %h',
         pagePath,
       ]);
-      const [pageWidth, pageHeight] = dimensions.stdout
+      let [pageWidth, pageHeight] = dimensions.stdout
         .trim()
         .split(/\s+/)
         .map(Number);
+      let contentCrop = null;
+      if (pageImageSpace) {
+        // S1 の pages/ 画像と同じ本文領域に切ってから box を当てる (box は contentCrop 適用後の pixel)
+        contentCrop = resolveContentCrop(workspace.pageImage.contentCrop, { width: pageWidth, height: pageHeight });
+        if (contentCrop) {
+          const croppedPath = `${pagePath}.content.png`;
+          await run('magick', [pagePath, '-crop', contentCrop.geometry, '+repage', croppedPath]);
+          await rm(pagePath, { force: true });
+          await run('magick', [croppedPath, pagePath]);
+          await rm(croppedPath, { force: true });
+          pageWidth = contentCrop.width;
+          pageHeight = contentCrop.height;
+        }
+      }
       const { x, y, width, height } = job.box;
       if (x + width > pageWidth || y + height > pageHeight) {
         throw new Error(
           `Crop ${job.id} exceeds rendered page ${pageWidth}x${pageHeight}: ${width}x${height}+${x}+${y}`
         );
       }
-      const outputPath = path.join(outputDir, `${job.id}.png`);
+      // page-image 空間では S1 の pages/ と同じ形式・品質で書く (全面 crop が png で肥大しないように)
+      const outputFormat = pageImageSpace ? workspace.pageImage.format : 'png';
+      const outputPath = path.join(outputDir, `${job.id}.${outputFormat}`);
       if ((await pathExists(outputPath)) && !options.force) {
         throw new Error(
           `Crop output already exists; use --force: ${outputPath}`
         );
       }
       await rm(outputPath, { force: true });
+      await rm(path.join(outputDir, `${job.id}.${outputFormat === 'png' ? 'jpg' : 'png'}`), { force: true });
       await run('magick', [
         pagePath,
         '-crop',
         `${width}x${height}+${x}+${y}`,
         '+repage',
+        ...(outputFormat === 'jpg' ? ['-quality', String(workspace.pageImage.quality)] : []),
         outputPath,
       ]);
       results.push({
@@ -1136,6 +1198,8 @@ async function crop(options) {
         page: job.page,
         dpi,
         rotationDegrees,
+        coordinateSpace: pageImageSpace ? 'page-image' : 'full-page',
+        contentCrop: contentCrop ? contentCrop.geometry : null,
         box: job.box,
         purpose: job.purpose,
         sourceRef: job.sourceRef,

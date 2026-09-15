@@ -76,7 +76,7 @@ export async function RakutenItemsCard({
         {keyword.term}の人気商品
       </p>
 
-      <div className={layout === "content" ? "grid grid-cols-2 gap-3 sm:grid-cols-4" : "grid grid-cols-2 gap-2"}>
+      <div className={layout === "content" ? "grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4" : "grid grid-cols-2 gap-px border border-border bg-border"}>
         {items.map((item) => (
           <TrackedAffiliateLink
             key={item.url}
@@ -85,10 +85,7 @@ export async function RakutenItemsCard({
             adId={adId}
             label={item.name}
             position={position}
-            className={getSurfaceCardClassName({
-              interactive: true,
-              className: "flex flex-col overflow-hidden p-0",
-            })}
+            className="flex flex-col overflow-hidden bg-card transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {item.image && (
               <div className="flex aspect-square items-center justify-center overflow-hidden bg-muted">

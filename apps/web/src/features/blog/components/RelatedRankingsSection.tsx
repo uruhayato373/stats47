@@ -1,8 +1,10 @@
+import Link from "next/link";
+
 import { getRankingTitle, readRelatedRankingItemsByTagKeysFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { BarChart3 } from "lucide-react";
 
-import { RailCard, SurfaceLinkCard } from "@/components/surface";
+import { RailCard } from "@/components/surface";
 
 import { getCategoryKeysForBlogTagKeys } from "@/config/category-blog-tag-keys";
 
@@ -45,20 +47,20 @@ export async function RelatedRankingsSection({
       titleClassName="text-base font-semibold text-foreground"
       bodyClassName="p-4 pt-3"
     >
-      <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
+      <div className={compact ? "divide-y divide-border" : "grid grid-cols-1 gap-x-4 sm:grid-cols-2 lg:grid-cols-3"}>
         {rankings.map((ranking) => (
-          <SurfaceLinkCard
+          <Link
             key={ranking.rankingKey}
             href={`/ranking/${ranking.rankingKey}`}
-            className="block p-3"
+            className="group block border-b border-border py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <p className="text-sm font-medium line-clamp-2">
+            <p className="line-clamp-2 text-sm font-medium group-hover:text-primary">
               {ranking.title}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
               都道府県別ランキング
             </p>
-          </SurfaceLinkCard>
+          </Link>
         ))}
       </div>
     </RailCard>

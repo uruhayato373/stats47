@@ -62,4 +62,10 @@ describe("GenderPairedKpiGrid", () => {
     expect(html).toContain("全国12位");
     expect(html).toContain("全国20位");
   });
+
+  it("各行をカード化せず1つの表面にまとめる", () => {
+    const html = markup();
+    expect(html.match(/shadow-sm/g)).toHaveLength(1);
+    expect(html).toContain("divide-y");
+  });
 });

@@ -39,17 +39,17 @@ Phase 6 (2026-05-27) で観測値ストア (`stats_prefecture` / `stats_city` / 
 
 1. 全 metric 検証:
    ```bash
-   node .Codex/scripts/db/verify-d1-integrity.mjs
+   node .claude/scripts/db/verify-d1-integrity.mjs
    ```
 
 2. 特定 metric:
    ```bash
-   node .Codex/scripts/db/verify-d1-integrity.mjs --metric japanese-population
+   node .claude/scripts/db/verify-d1-integrity.mjs --metric japanese-population
    ```
 
 3. strict モード (警告も failure):
    ```bash
-   node .Codex/scripts/db/verify-d1-integrity.mjs --strict
+   node .claude/scripts/db/verify-d1-integrity.mjs --strict
    ```
 
 ## 出力 (Phase 7 以降)
@@ -89,11 +89,11 @@ exit code: 0 (clean), 1 (warning only), 2 (error)。`--strict` では warning �
 - `/sync-snapshots` 実行前 (R2 に壊れたデータを push しないため)
 - `/export-d1-to-remotion-static` 実行前 (動画用 JSON に欠損データを書かないため)
 - `/page-data-batch` などで大量投入後の確認
-- 週次レビュー時 (`.Codex/skills/management/weekly-review/reference/reviews/`)
+- 週次レビュー時 (`.claude/skills/management/weekly-review/reference/reviews/`)
 
 ## 参照
 
-- 実装: `.Codex/scripts/db/verify-d1-integrity.mjs` (Phase 2 で新規、Phase 7 で R2 fetch 対応に refactor 予定)
-- 親方針: `.Codex/rules/data-sqlite-ssot.md`, `.Codex/rules/r2-storage-design.md`
+- 実装: `.claude/scripts/db/verify-d1-integrity.mjs` (Phase 2 で新規、Phase 7 で R2 fetch 対応に refactor 予定)
+- 親方針: `.claude/rules/data-sqlite-ssot.md`, `.claude/rules/r2-storage-design.md`
 - 現行データ設計: `docs/01_技術設計/02_データアーキテクチャ.md`
 - 関連: `/sync-snapshots`, `/export-d1-to-remotion-static`, `/page-data-batch`, `/sync-metrics-cache`

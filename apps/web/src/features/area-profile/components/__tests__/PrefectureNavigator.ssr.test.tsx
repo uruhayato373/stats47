@@ -26,7 +26,7 @@ describe("PrefectureNavigator (SSR / 初期 HTML)", () => {
       expect(html).toContain(`href="/areas/${pref.prefCode}"`);
     }
     expect(html).toContain("都道府県名を検索");
-    expect(html).toContain("地図から都道府県を選ぶ");
+    expect(html).toContain("地図から探す");
   });
 
   it("embedded も地図の47県から直接遷移できる", () => {

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@stats47/components";
+import { compactAxisFormat, useD3Tooltip } from "@stats47/visualization/d3";
 
 import type { CompositionChartData } from "../../../adapters/toCompositionChartData";
 
@@ -49,7 +50,7 @@ export const CompositionChartClient: React.FC<CompositionChartClientProps> = ({
 
 function DonutChart({ chartData }: { chartData: CompositionChartData }) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
+  const { showTooltip, updateTooltipPosition, hideTooltip } = useD3Tooltip();
   const { trendData, series, unit } = chartData;
 
   const latest =
@@ -97,8 +98,6 @@ function DonutChart({ chartData }: { chartData: CompositionChartData }) {
         .append("g")
         .attr("transform", `translate(${size / 2},${size / 2})`);
 
-      const tooltip = tooltipRef.current;
-
       g.selectAll("path")
         .data(pie(pieData))
         .join("path")
@@ -106,46 +105,34 @@ function DonutChart({ chartData }: { chartData: CompositionChartData }) {
         .attr("fill", (d) => d.data.color)
         .attr("cursor", "pointer")
         .on("mouseenter", (event, d) => {
-          if (!tooltip) return;
           d3.select(event.currentTarget).attr("opacity", 0.8);
-          const unitText = unit ? ` ${unit}` : "";
-          tooltip.innerHTML = `<span style="color:${d.data.color}">●</span> ${d.data.label}<br><strong>${d.data.value.toLocaleString()}${unitText}</strong>（${d.data.pct}%）`;
-          tooltip.style.opacity = "1";
+          showTooltip(event, d.data.label, {
+            value: d.data.value,
+            unit,
+            metricTitle: `構成比 ${d.data.pct}%`,
+          });
         })
-        .on("mousemove", (event) => {
-          if (!tooltip || !svgRef.current) return;
-          const rect = svgRef.current.getBoundingClientRect();
-          tooltip.style.left = `${event.clientX - rect.left}px`;
-          tooltip.style.top = `${event.clientY - rect.top - 40}px`;
-        })
+        .on("mousemove", (event) => updateTooltipPosition(event))
         .on("mouseleave", (event) => {
-          if (!tooltip) return;
           d3.select(event.currentTarget).attr("opacity", 1);
-          tooltip.style.opacity = "0";
+          hideTooltip();
         });
     });
 
     return () => { cancelled = true; };
-  }, [latest, filteredSeries, total, unit]);
+  }, [latest, filteredSeries, total, unit, showTooltip, updateTooltipPosition, hideTooltip]);
 
   if (!latest) return null;
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <div className="relative">
-        <svg
-          ref={svgRef}
-          viewBox="0 0 200 200"
-          className="w-40 h-40"
-          role="img"
-          aria-label="構成比ドーナツチャート"
-        />
-        <div
-          ref={tooltipRef}
-          className="absolute pointer-events-none rounded bg-popover border border-border px-2 py-1 text-xs shadow-sm whitespace-nowrap transition-opacity duration-150"
-          style={{ opacity: 0 }}
-        />
-      </div>
+      <svg
+        ref={svgRef}
+        viewBox="0 0 200 200"
+        className="w-40 h-40"
+        role="img"
+        aria-label={`構成比ドーナツチャート。単位: ${unit || "未設定"}`}
+      />
       <div className="w-full border-t pt-2">
         <ul className="divide-y divide-border">
           {filteredSeries.map((s, i) => {
@@ -184,6 +171,7 @@ function VerticalStacked({
   chartData: CompositionChartData;
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const { showTooltip, updateTooltipPosition, hideTooltip } = useD3Tooltip();
   const { trendData, series, unit, latestYearLabel } = chartData;
 
   useEffect(() => {
@@ -243,12 +231,23 @@ function VerticalStacked({
         .join("g")
         .attr("fill", (d) => colorMap.get(d.key) ?? "#888")
         .selectAll("rect")
-        .data((d) => d)
+        .data((layer) => layer.map((point) => ({ point, key: layer.key })))
         .join("rect")
-        .attr("x", (d) => x(String(d.data.category)) ?? 0)
-        .attr("y", (d) => y(d[1]))
-        .attr("height", (d) => Math.max(0, y(d[0]) - y(d[1])))
-        .attr("width", x.bandwidth());
+        .attr("x", (d) => x(String(d.point.data.category)) ?? 0)
+        .attr("y", (d) => y(d.point[1]))
+        .attr("height", (d) => Math.max(0, y(d.point[0]) - y(d.point[1])))
+        .attr("width", x.bandwidth())
+        .attr("cursor", "pointer")
+        .on("mouseenter", (event, d) => {
+          const label = String(d.point.data.label ?? d.point.data.category);
+          showTooltip(event, label, {
+            value: d.point[1] - d.point[0],
+            unit,
+            metricTitle: d.key,
+          });
+        })
+        .on("mousemove", (event) => updateTooltipPosition(event))
+        .on("mouseleave", () => hideTooltip());
 
       // X軸
       const xAxis = d3
@@ -271,7 +270,7 @@ function VerticalStacked({
       const yAxis = d3
         .axisLeft(y)
         .ticks(5)
-        .tickFormat((v) => Number(v).toLocaleString());
+        .tickFormat((v) => compactAxisFormat(Number(v)));
 
       svg
         .append("g")
@@ -289,7 +288,7 @@ function VerticalStacked({
     });
 
     return () => { cancelled = true; };
-  }, [trendData, series, unit]);
+  }, [trendData, series, unit, showTooltip, updateTooltipPosition, hideTooltip]);
 
   const latest = trendData.length > 0 ? trendData[trendData.length - 1] : null;
   const total = latest
@@ -304,7 +303,7 @@ function VerticalStacked({
         className="w-full h-auto"
         preserveAspectRatio="xMidYMid meet"
         role="img"
-        aria-label="構成比推移チャート"
+        aria-label={`構成比推移チャート。単位: ${unit || "未設定"}`}
       />
       {latest && (
         <div className="mt-3 pt-2 border-t">

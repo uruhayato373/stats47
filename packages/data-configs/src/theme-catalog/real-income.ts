@@ -161,6 +161,17 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
         "surveyedAt": "2026-09-08",
         "rationale": "消費者物価地域差指数は「物価条件を詳しく見る」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
       }
+    },
+    {
+      "rankingKey": "avg-propensity-to-consume-worker-households",
+      "shortLabel": "平均消費性向",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "所得のうち消費へ回る割合を家計行動の背景指標として詳細索引に保持する。"
+      }
     }
   ],
   "charts": [
