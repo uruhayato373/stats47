@@ -4,20 +4,23 @@ import { type ComponentPropsWithoutRef } from "react";
 
 import Link from "next/link";
 
-import { trackNavClick } from "@/lib/analytics/events";
+import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
 
-interface TrackedThemeEvidenceLinkProps
+interface TrackedThemeLinkProps
   extends Omit<ComponentPropsWithoutRef<typeof Link>, "href" | "onClick"> {
   href: string;
   trackingLabel: string;
+  /** GA4 nav_surface (`.claude/rules/analytics-event-standards.md`)。呼び出し元ごとに固定値を渡す。 */
+  surface: NavSurface;
 }
 
-/** 白書論点セクションからの内部遷移を既存 nav_click で計測する。 */
-export function TrackedThemeEvidenceLink({
+/** テーマページからの内部遷移を既存 nav_click で計測する (server component から使う共有 client parts)。 */
+export function TrackedThemeLink({
   trackingLabel,
   href,
+  surface,
   ...props
-}: TrackedThemeEvidenceLinkProps) {
+}: TrackedThemeLinkProps) {
   return (
     <Link
       href={href}
@@ -25,7 +28,7 @@ export function TrackedThemeEvidenceLink({
         trackNavClick({
           label: trackingLabel,
           href,
-          surface: "theme_evidence",
+          surface,
         })
       }
       {...props}

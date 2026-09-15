@@ -8,7 +8,7 @@ import { BookOpenText } from 'lucide-react';
 
 import { SurfaceSection } from '@/components/surface';
 
-import { TrackedThemeEvidenceLink } from './TrackedThemeEvidenceLink';
+import { TrackedThemeLink } from './TrackedThemeLink';
 
 /**
  * 白書・報告書から採択した論点を、関連ランキング・テーマ・記事へ接続する。
@@ -92,14 +92,15 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                     {rankings.map((ranking) => {
                       const href = `/ranking/${ranking.key}`;
                       return (
-                        <TrackedThemeEvidenceLink
+                        <TrackedThemeLink
                           key={ranking.key}
                           href={href}
                           trackingLabel={`${topic.key}:ranking:${ranking.key}`}
+                          surface="theme_evidence"
                           className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                         >
                           {ranking.title}
-                        </TrackedThemeEvidenceLink>
+                        </TrackedThemeLink>
                       );
                     })}
                   </div>
@@ -115,14 +116,15 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                     {themes.map((theme) => {
                       const href = `/themes/${theme.key}`;
                       return (
-                        <TrackedThemeEvidenceLink
+                        <TrackedThemeLink
                           key={theme.key}
                           href={href}
                           trackingLabel={`${topic.key}:theme:${theme.key}`}
+                          surface="theme_evidence"
                           className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                         >
                           {theme.title}
-                        </TrackedThemeEvidenceLink>
+                        </TrackedThemeLink>
                       );
                     })}
                   </div>
@@ -138,14 +140,15 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                     {topic.relatedArticleTagKeys?.map((tagKey) => {
                       const href = `/tag/${tagKey}`;
                       return (
-                        <TrackedThemeEvidenceLink
+                        <TrackedThemeLink
                           key={tagKey}
                           href={href}
                           trackingLabel={`${topic.key}:tag:${tagKey}`}
+                          surface="theme_evidence"
                           className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                         >
                           #{tagKey}
-                        </TrackedThemeEvidenceLink>
+                        </TrackedThemeLink>
                       );
                     })}
                   </div>

@@ -12,6 +12,8 @@ import { ChartPanel } from "@/components/charts/ChartPanel";
 import { RankingBarList } from "@/components/charts/RankingBarList";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
+import { trackNavClick } from "@/lib/analytics/events";
+
 import { fetchMetricTimeseriesAction, type MetricTimeseriesPoint } from "../actions";
 
 import { ChartEmptyState, ChartLoading } from "./ChartState";
@@ -127,6 +129,13 @@ export function MetricFocusCharts({
         <Link
           href={`/ranking/${metricKey}`}
           className="text-xs text-primary hover:underline"
+          onClick={() =>
+            trackNavClick({
+              surface: "theme_ranking",
+              label: `metric-focus:${metricKey}`,
+              href: `/ranking/${metricKey}`,
+            })
+          }
         >
           指標の詳細 →
         </Link>

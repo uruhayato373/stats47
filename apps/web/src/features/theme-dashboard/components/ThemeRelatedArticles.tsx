@@ -2,9 +2,11 @@ import "server-only";
 
 import { Newspaper } from "lucide-react";
 
-import { SurfaceLinkCard } from "@/components/surface";
+import { getSurfaceCardClassName } from "@/components/surface";
 
 import { getRelatedArticleSummaries } from "@/features/blog/server";
+
+import { TrackedThemeLink } from "./TrackedThemeLink";
 
 interface ThemeRelatedArticlesProps {
   /** 関連記事を引くタグキー一覧 */
@@ -36,10 +38,15 @@ export async function ThemeRelatedArticles({
       <div className="p-4 pt-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {visible.map((article) => (
-            <SurfaceLinkCard
+            <TrackedThemeLink
               key={article.slug}
               href={`/blog/${article.slug}`}
-              className="block p-3"
+              trackingLabel={`theme-related-articles:${article.slug}`}
+              surface="theme_blog"
+              className={getSurfaceCardClassName({
+                interactive: true,
+                className: "block p-3",
+              })}
             >
               <p className="text-sm font-medium line-clamp-2 leading-snug">
                 {article.title}
@@ -49,7 +56,7 @@ export async function ThemeRelatedArticles({
                   {article.description}
                 </p>
               )}
-            </SurfaceLinkCard>
+            </TrackedThemeLink>
           ))}
         </div>
       </div>
