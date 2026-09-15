@@ -537,7 +537,8 @@ async function publishPlan(ctx, plan, before, publicBefore) {
         && (!application.addedProduct || live.body.includes(plan.footer.productUrl))
       );
       const repairsOk = plan.repairs.every(
-        (repair) => !live.body.includes(repair.fromUrl) && live.body.includes(repair.toUrl),
+        (repair) => repair.mode === "regenerate-card"
+          || (!live.body.includes(repair.fromUrl) && live.body.includes(repair.toUrl)),
       );
       if (footerOk && repairsOk) break;
       await sleep(1_000);
@@ -554,7 +555,11 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     )) {
       throw new Error(`更新後本文で回遊URLを確認できません: api=${JSON.stringify(patch)}`);
     }
+    // regenerate-card は URL を維持したままカード文言だけを直すため toUrl を持たず、
+    // fromUrl は成功後も本文に残り続ける (replace-url/replace-card とは逆の成立条件)。
+    // 正しさは末尾の bodySignature 完全一致チェックが保証するので、ここでは対象外にする。
     for (const repair of plan.repairs) {
+      if (repair.mode === "regenerate-card") continue;
       if (live.body.includes(repair.fromUrl) || !live.body.includes(repair.toUrl)) {
         throw new Error(`更新後本文でリンク修復を確認できません: ${repair.fromUrl}`);
       }
