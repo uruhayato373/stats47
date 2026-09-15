@@ -140,6 +140,7 @@ node .claude/scripts/lib/svg-to-png.cjs docs/31_note記事原稿/$S/images
 node .claude/scripts/note/build-kakei-note-draft.mjs --slug $S                    # draft.md (frontmatter 保持)
 node .claude/scripts/note/audit-kakei-note-content.mjs $S                          # 9 チェック。exit 0 のみ公開可
 bash .claude/scripts/note/publish-kakei-update.sh $S                              # 公開済み記事の本文+画像差し替え (ローカル Chrome)
+# 複数本まとめて更新する場合: publish-kakei-update-batch.sh <slug1> <slug2> ... (Profile 5 を使い回し、1本失敗しても継続)
 node .claude/scripts/note/audit-note-figure-split.mjs $S                          # 図の分断 0 を実測
 node .claude/scripts/note/audit-kakei-note-content.mjs $S --live                   # figure 5 / リンク 200 / OGP 200
 node .claude/scripts/note/build-kakei-related-picks.mjs --write                    # 次に読む (同費目・同向きで倍率が近い県)
