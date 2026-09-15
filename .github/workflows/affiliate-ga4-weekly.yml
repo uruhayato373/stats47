@@ -91,7 +91,7 @@ jobs:
         if: steps.ga4.outcome == 'success'
         run: |
           set -euo pipefail
-          FILE=$(ls -1 .claude/state/ads/ga4-affiliate-????-??-??.json | sort | tail -1)
+          FILE=$(find .claude/state/ads -maxdepth 1 -name 'ga4-affiliate-????-??-??.json' | sort | tail -1)
           [ -n "$FILE" ] || { echo "::error::snapshot が無い"; exit 1; }
           DATE=$(basename "$FILE" .json | sed 's/^ga4-affiliate-//')
           STAGE=.local/r2/state/ads/ga4-affiliate

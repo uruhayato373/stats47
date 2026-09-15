@@ -144,7 +144,7 @@ jobs:
         run: |
           npx next start --port 3100 > /tmp/weekly-next.log 2>&1 &
           echo $! > /tmp/weekly-next.pid
-          for i in $(seq 1 60); do
+          for _ in $(seq 1 60); do
             curl -sf http://localhost:3100/ > /dev/null && exit 0
             sleep 2
           done
