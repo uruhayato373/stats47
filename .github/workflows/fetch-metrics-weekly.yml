@@ -157,19 +157,6 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
-      # ランキング拡充ループの計測ゲート (build-expansion-queue.mjs 冒頭コメントが正典)。
-      # 「計測ゲート付き需要ファースト」= 公開→GSC実測→流入が付いたカテゴリのみ深掘り。
-      # 2026-07-12 に構築したがどの workflow からも呼ばれず、2ヶ月手動実行漏れで
-      # categoryTraffic が空のまま止まっていた (2026-09-15 に発覚・手動復旧)。再発防止でここに固定する。
-      # 順序は measure (queue に gsc を付与) → build (categoryTraffic に集計 + status 再計算)。
-      - name: 📈 Measure ranking expansion impact (GSC → queue)
-        continue-on-error: true # GSC snapshot 欠落等で週次計測本体を止めない
-        run: node .claude/scripts/estat/measure-expansion-impact.mjs
-
-      - name: 🧮 Rebuild ranking expansion queue (status + categoryTraffic)
-        continue-on-error: true
-        run: node .claude/scripts/estat/build-expansion-queue.mjs
-
       # GSC カバレッジ是正キューを本番 HTTP 実測で再構築する
       # (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
       #
@@ -280,6 +267,19 @@ jobs:
       # ここで消すと、削除が下の週次 commit に同梱され git の追跡数が週ごとに増えない。
       - name: 🧹 Prune raw snapshots to their declared retention
         run: npm run state:snapshots:prune
+
+      # ランキング拡充ループの計測ゲート (build-expansion-queue.mjs 冒頭コメントが正典)。
+      # 「計測ゲート付き需要ファースト」= 公開→GSC実測→流入が付いたカテゴリのみ深掘り。
+      # 2026-07-12 に構築したがどの workflow からも呼ばれず、2ヶ月手動実行漏れで
+      # categoryTraffic が空のまま止まっていた (2026-09-15 に発覚・手動復旧)。再発防止でここに固定する。
+      # 順序は measure (queue に gsc を付与) → build (categoryTraffic に集計 + status 再計算)。
+      # continue-on-error は使わない (quality-exceptions baseline は縮小専用・新規追加を拒否する)。
+      # 代わりに失敗をログへ出した上で exit 0 にし、後続の Commit ステップを止めない。
+      - name: 📈 Measure ranking expansion impact (GSC → queue)
+        run: node .claude/scripts/estat/measure-expansion-impact.mjs || echo "::warning::measure-expansion-impact failed, continuing"
+
+      - name: 🧮 Rebuild ranking expansion queue (status + categoryTraffic)
+        run: node .claude/scripts/estat/build-expansion-queue.mjs || echo "::warning::build-expansion-queue failed, continuing"
 
       - name: 📤 Commit & push to develop
         run: |
