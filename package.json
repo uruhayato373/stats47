@@ -5,6 +5,11 @@
     "policy:sync": "node .claude/shared-policy/sync.mjs --sync",
     "policy:check": "node .claude/shared-policy/sync.mjs --check",
     "preadmin": "npm run policy:check",
+    "page-quality:check": "tsx .claude/scripts/page-quality/run-representative.ts",
+    "page-quality:audit-weekly": "tsx .claude/scripts/page-quality/run-full.ts",
+    "page-quality:validate": "tsx .claude/scripts/page-quality/validate-schema.ts",
+    "page-quality:aggregate": "tsx .claude/scripts/page-quality/aggregate.ts",
+    "page-quality:test": "node --import tsx --test .claude/scripts/page-quality/__tests__/*.test.mjs",
     "build": "turbo run build",
     "affiliate:a8-outcome:check": "node .claude/scripts/ads/check-a8-outcome-gate.mjs --json",
     "coconala-publish": "node .claude/scripts/coconala/coconala-publish.mjs",
@@ -159,6 +164,7 @@
   "devDependencies": {
     "@types/shapefile": "^0.6.4",
     "@types/unzipper": "^0.10.11",
+    "cheerio": "^1.2.0",
     "csv-parse": "^7.0.2",
     "eslint-plugin-react-hooks": "7.0.1",
     "googleapis": "^171.4.0",
@@ -196,11 +202,11 @@
   },
   "packageManager": "npm@10.8.2",
   "dependencies": {
-    "image-size": "file:packages/product-factory/src/shims/image-size-disabled",
     "d3": "^7.9.0",
     "d3-scale-chromatic": "^3.1.0",
     "http-proxy-agent": "^8.0.0",
     "https-proxy-agent": "^8.0.0",
+    "image-size": "file:packages/product-factory/src/shims/image-size-disabled",
     "topojson-client": "^3.1.0",
     "topojson-simplify": "^3.0.3"
   }

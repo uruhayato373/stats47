@@ -1,0 +1,107 @@
+name: 📐 Page Quality Audit (weekly)
+
+# ページの肥大化・重複・表示速度低下を、公開対象の全URLで週次に検知する。
+# 変更時 (PR) の軽量検査は pr-quality-check.yml の page-quality job が代表URLだけを見る。
+# こちらは sitemap.xml から全URLを列挙し、本番へ直接アクセスして静的解析する
+# (audit-site-links.mjs / smoke-test-routes.sh と同じく本番直読み。ローカルbuildは不要)。
+# LCP/CLS/INP等のブラウザ計測は対象外 (5000ページ規模でコストが見合わないため、
+# 代表URLの軽量検査側だけが担当する)。
+#
+# 既存の日次PSI (psi-audit-daily.yml) ・Cloudflare監視とは責務が別 (それらは変更・削除しない)。
+# 正典: .claude/rules/page-quality-standards.md
+
+on:
+  schedule:
+    - cron: "0 18 * * 6" # 土 18:00 UTC = 日 03:00 JST (internal-link-audit 04:00 の前)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: page-quality-audit-weekly
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Run full page-quality audit (production)
+        id: audit
+        run: |
+          set +e
+          npm run page-quality:audit-weekly -- --base-url https://stats47.jp --concurrency 4 2>&1 | tee /tmp/page-quality-audit.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: 🧹 Prune old snapshots
+        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope page-quality
+
+      - name: 📤 Commit audit result to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/page-quality/
+          if git diff --cached --quiet; then
+            echo "No audit changes"
+            exit 0
+          fi
+          git commit -m "chore(page-quality): weekly full audit $(date -u +%Y-%m-%d) [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop
+
+      - name: 🚨 Open issue on regressions
+        if: steps.audit.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Page Quality Alert] ページ肥大化・重複の週次監査で退行を検出"
+          {
+            echo "## ページ品質 週次監査 ($DATE)"
+            echo ""
+            echo "HTML/RSC肥大化・DOM過剰・リンク重複・広告重複・構造化データ異常のerror違反を検出しました。"
+            echo "詳細は管理コンソール \`/quality/page-audit\` または以下を参照。"
+            echo ""
+            echo '```'
+            sed -n '/\[page-quality\] 違反/,$p' /tmp/page-quality-audit.log | head -80
+            echo '```'
+            echo ""
+            echo "正典: .claude/rules/page-quality-standards.md"
+          } > /tmp/page-quality-issue.md
+
+          gh label create page-quality-alert --description "ページ肥大化・重複・速度の週次監査アラート" --color "d93f0b" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label page-quality-alert --search "\"[Page Quality Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — replacing with latest audit"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/page-quality-issue.md
+          else
+            gh issue create --title "$TITLE" --label "page-quality-alert,auto-generated" --body-file /tmp/page-quality-issue.md
+          fi
+
+      - name: ✅ Close recovered page-quality alert
+        if: steps.audit.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label page-quality-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "ページ品質監査が正常へ復旧したため自動Closeします。"
+            done

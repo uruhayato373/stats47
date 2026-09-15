@@ -166,6 +166,10 @@ git branch -f develop origin/develop
 
 ### Step 2: テスト・型チェック・ビルド
 
+リリース段階のローカル事前ゲート (`.claude/rules/local-environment.md`「検証コマンドの粒度」
+参照)。PR 作成前に fail-fast するためのもので、Step 4 の CI (`pr-quality-check.yml`) と
+重複させる意図はない — CI 待ちより先にここで落とすことで往復を減らす。
+
 以下を**順番に**実行する。いずれかが失敗した場合はユーザーに報告し、続行するか確認する。
 
 ```bash

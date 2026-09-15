@@ -118,7 +118,8 @@ Next.js dev の RSC は global fetch を独自ラッパに差し替えるため�
 (`scripts/r2-dev-gateway.ps1`) を自動起動し、dev 子プロセスだけの `R2_PUBLIC_FETCH_URL` と
 `NEXT_PUBLIC_R2_PUBLIC_URL` を `http://127.0.0.1:4777` に差し替える。配信コードと本番設定は変更しない。
 
-gateway は Windows の既定 proxy credentials と証明書ストアを使う。接続先は固定の HTTPS upstream、
+gateway は `HTTPS_PROXY` / `HTTP_PROXY` があればその経路を明示的に使い、未設定時だけ Windows の既定 proxy に戻る。
+どちらも Windows の既定 credentials と証明書ストアを使う。接続先は固定の HTTPS upstream、
 listen は `127.0.0.1`、method は `GET` / `HEAD`、R2 key は path traversal を拒否する。
 **TLS 検証を無効化しない。** `npm run dev:web` または `npm run dev --workspace=apps/web` で自動的に有効になる。
 一時的に従来経路へ戻す場合だけ `R2_DEV_GATEWAY=0` を指定する。Windows 以外では gateway を起動しない。
@@ -354,6 +355,65 @@ npm run dev --workspace=apps/web   # turbo を介さず最速 (✓ Ready in 2s)
 - dev サーバーは**常駐プロセス**。エージェントが起動するときは `run_in_background: true` で起動し、**出力ファイルを polling して `✓ Ready` を確認**する。前面 `sleep` での固定待ちは禁止（タイムアウト・取りこぼしの元）。
 - 表示が更新されないときは「キャッシュ」を疑う前に **dev サーバーが listen しているか**を先に確認する（`lsof -i :3000` / `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/`）。
 
+## 検証コマンドの粒度
+
+検査は変更規模に応じて3段階のいずれかを選ぶ。**本節が正典**であり、`CLAUDE.md` や各 agent /
+skill には詳細を複製せず本節への参照だけを置く。
+
+### 3段階モデル
+
+1. **開発中**: 変更箇所に直接関係する型・構文確認 + 関連テストだけを実行する。UI 変更では
+   デザイン規約の静的検査 (`/design-review` 等) を必要に応じて実行する。**全体ビルド・全テスト・
+   47都道府県の個別巡回・ブラウザ実測はしない**。
+2. **まとまった変更の完了時**: 影響する workspace の型検査 (`npm run type-check --workspace <pkg>`)
+   + 対象機能のテスト。SSOT や生成処理を変更した場合だけ対応する生成・整合性検証を追加する。
+   共通レイアウト/テンプレート変更は「代表コンポーネントのテスト + 全対象が同じテンプレートを
+   参照する契約検査」を基本とする (実例: `page-shell-rail-contract.test.tsx` /
+   `left-rail-layout-contract.test.tsx` / `article-shell-left-rail-contract.test.tsx`)。
+   **47都道府県を個別にブラウザ表示して確認しない**。
+3. **公開前・定期監査**: 全体ビルド・全テスト・全URL/47都道府県/リンク/構造化データ/広告DOM/
+   表示速度の横断検査。CI (`pr-quality-check.yml`)・定期監査 (`page-quality-audit-weekly.yml` /
+   `psi-audit-daily.yml` 等)・明示的なリリース確認で実施する。ユーザーが明示した場合や、
+   本番・ブラウザでしか確認できない問題 (Cloudflare Workers ランタイム固有の挙動等) では
+   個別に実施してよい。
+
+### 変更種別ごとの標準
+
+| 変更種別 | 標準 |
+|---|---|
+| docs / rules / agent / SKILL だけの変更 | 文書ガバナンス検査だけ (`npm run docs:fix` → `npm run docs:check`)。Web の型検査・ビルドは不要 |
+| 小規模 UI 変更 | 対象テスト または `npm run type-check --workspace apps/web`。両方が同じ事実を重複検査する場合は片方でよい |
+| ロジック変更・変換処理・共通ユーティリティ | 対象テスト + 影響 workspace の型検査 |
+| route / metadata / generateStaticParams / SSG / R2 snapshot 参照 | 対象 route と関連契約テストを検査 (`nextjs-ssg-preservation.md` のチェックリスト参照) |
+| 生成テンプレート変更 (git TS → R2 反映スクリプト等) | 生成 dry-run または差分確認 + validator (実例: `sync-snapshots.yml` の `dry_run=true` 入力、`npm run page-quality:validate`) |
+| リリース (develop→main) | CI (`pr-quality-check.yml`) を権威とし、ローカルで同じ全体検査を重複実行しない |
+| ブラウザ実測 | ユーザーが求めた場合・視覚的な判断が必要な場合・静的検査では判定できない場合に限定する |
+
+フル build / 全テストを省略した場合は、最終報告で「何を検証し、何を未実行か」を明示する。
+`apps/web` のフル `build` は重いので、小変更のたびに実行しない。dev サーバーは
+`npm run dev:web` (ルート `npm run dev` は 23 パッケージを起動するので使わない)。常駐は
+background + Ready polling。Windows では `next build` が完走せず `type-check` の env 前置も
+落ちる (Linux CI が権威。罠は本ファイル内「★Windows では」節)。
+
+### 検査の重複を防ぐ
+
+- 同じ変更内容に対して複数 agent が同じテストを繰り返さない。先行 agent が実行したコマンド・
+  対象・結果を引き継ぎ、コード変更が無ければ再実行しない (`agent:session` の `--note` に
+  検証結果を残す運用は下記「Codex / Claude の作業共有」と共通)。
+- 検査失敗後は、原因に関係する検査だけを再実行する。「念のため」という理由だけで検査範囲を
+  広げない。
+- 検査を追加する場合は、その検査が発見する具体的な失敗を説明できることを条件とする。
+
+### agent の責務分担
+
+`devops-runner` が全体検査・リリース検証の所有者 (`/run-tests` フル・`/deploy`)。
+`code-reviewer` / `ui-reviewer` / `ui-consistency-reviewer` / `performance-auditor` は原則
+read-only で、必要な検査を「提案」するに留め、無条件に全検査を自ら実行しない (現状の
+Output Contract・担当外欄で既に明記済み)。実装 agent は自分が変更した箇所に対応する最小限の
+検査までを担当する。同じ検査を別 agent へ再委譲しない。ブラウザ監査・全URL監査は
+page-quality (週次 `page-quality-audit-weekly.yml`) / PSI (日次 `psi-audit-daily.yml`) など
+専任スキル・定期処理へ渡す。
+
 ## ローカル資源の予算と保持
 
 端末の予算・掃除対象・保持日数の機械契約は `.claude/config/local-resources.json`。
@@ -515,3 +575,20 @@ npm run admin
 - 検証結果はコード・lockfile・設定・生成データとコマンドが同じ場合だけ引き継ぐ。
   session メモ単独では検査を省略しない。型検査は既存incremental cacheを利用し、CIの必須検査は維持する。
 - `npm run test:agent-efficiency` がリンク共有・誤リンク検知・検査対象・待ち枠の再利用・セッション共有を検証する。
+
+### `npm install` / lockfile 更新の排他 (同一作業ツリー)
+
+新しいツールは作らず、既存の `agent:session` をそのまま使う。
+
+- `npm install` / `npm ci` / lockfile 更新の前に `npm run agent:session -- --status` と稼働中
+  プロセス (`dev:web` / `npm run admin` / turbo) を確認する。
+- 別セッションが同じ作業ツリーで稼働中、または `--note` に install 実行中の記録があるときは、
+  新たな install を開始しない。install の再試行を並行して走らせない。
+- dev サーバー・管理画面 (`apps/admin`) が `node_modules` を使用中の場合は、必要に応じて担当
+  セッションと調整してから更新する。
+- install を始める・終えるタイミングで `--register` / `--release` の `--note` に
+  「npm install 実行中」「npm install 完了」等を残し、他セッションが `--status` で判断できる
+  ようにする。
+- テスト実行だけが依存不足で失敗する場合 (例: 特定パッケージの devDependency 欠如) を、
+  アプリ実装そのものの失敗と混同しない。
+- `git add -A` は引き続き禁止。

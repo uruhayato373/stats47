@@ -10,6 +10,9 @@ model: sonnet
 
 ## 担当範囲
 
+検査範囲の粒度は `.claude/rules/local-environment.md`「検証コマンドの粒度」に従う。全体検査・
+リリース検証は本 agent が所有し、他 agent へ同じ検査を再委譲しない。
+
 - ユニットテスト / E2E テスト / 型チェックの実行
 - Feature → develop → main のマージとデプロイ
 - Git 履歴のリセット（.git 肥大化時）

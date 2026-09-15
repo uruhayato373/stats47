@@ -1016,13 +1016,72 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
+  page-quality:
+    name: Page Quality (representative)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # git diff origin/main...HEAD で影響テンプレートを判定するため全履歴取得
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🌐 Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: 🏗️ Build web app
+        env:
+          NODE_ENV: production
+          NEXT_SKIP_BUILD_TYPECHECK: 'true'
+        run: npm run build --workspace apps/web
+
+      - name: ▶️ Start web app
+        run: |
+          npx next start --port 3100 &
+          echo $! > /tmp/next-start.pid
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:3100/ > /dev/null && exit 0
+            sleep 2
+          done
+          echo "::error::next start did not become ready"
+          exit 1
+        working-directory: apps/web
+
+      - name: 🔍 Run representative page-quality check
+        # 変更のあった影響テンプレートの代表URLだけを軽量検査する。
+        # 明確な退行 (error) だけをCI失敗にし、軽微な変動はwarningとしてlatest.jsonへ記録する。
+        run: npm run page-quality:check -- --base-url http://localhost:3100 --base origin/${{ github.base_ref }}
+
+      - name: 🛑 Stop web app
+        if: always()
+        run: kill "$(cat /tmp/next-start.pid)" 2>/dev/null || true
+
+      - name: 📊 Upload page-quality report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: page-quality-report
+          path: .claude/state/metrics/page-quality/LATEST.md
+          if-no-files-found: ignore
+          retention-days: 30
+
   # 集約 job: 上記 job を全て needs し、単一の required status check
   # (branch protection が要求する "Code Quality Check") を維持する。
   # if:always() で常に実行し、いずれかが failure/cancelled/skipped なら明示的に失敗させる
   # (needs のいずれかが失敗すると本 job は skip されうるため、結果を明示チェックする)。
   quality-check:
     name: Code Quality Check
-    needs: [static-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e]
+    needs: [static-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e, page-quality]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -1032,7 +1091,7 @@ jobs:
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
+          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }} page-quality=${{ needs.page-quality.result }}"
           exit 1
 
       - name: ✅ All Checks Passed

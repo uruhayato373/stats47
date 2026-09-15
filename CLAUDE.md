@@ -53,15 +53,8 @@
 
 ## 検証コマンドの粒度
 
-`apps/web` のフル `build` は重いので、毎回の小変更では実行しない。影響範囲に応じて段階的に検証する。
-
-- 小さな UI / 型 / 単一コンポーネント変更: `npm run type-check --workspace apps/web` を優先
-- ロジック変更・変換処理・共通ユーティリティ変更: 対象テスト + type-check
-- route / metadata / generateStaticParams / SSG / R2 snapshot 生成・参照に触る変更: 必要に応じて対象ページやスクリプトを限定検証
-- フル `npm run build --workspace apps/web`: まとまった変更の節目、SSG/本番配信挙動に関わる変更、リリース前、またはユーザーが明示した場合に実行
-- フル build を省略した場合は、最終報告で「何を検証し、何を未実行か」を明示する
-- dev サーバーは `npm run dev:web` (ルート `npm run dev` は 23 パッケージを起動するので使わない)。常駐は background + Ready polling
-- Windows では `next build` が完走せず `type-check` の env 前置も落ちる。Linux CI が権威。罠の正典は `local-environment.md`
+変更規模に応じた検査範囲・重複回避・依存関係操作の排他は `.claude/rules/local-environment.md`
+「検証コマンドの粒度」が正典。詳細をここに複製しない。
 
 | 種別 | 記録先 |
 |---|---|
@@ -107,6 +100,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `ogp-image-standards.md` | OGP / リンクカード / note カバー画像の生成・差分反映 | features/ogp・scripts/ogp・skills/image-prompt |
 | `r2-storage-design.md` | snapshot 追加・変更・R2 キー設計・保持ポリシー | packages/r2-storage・skills/db/push-r2 等 |
 | `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |
+| `page-quality-standards.md` | ページ肥大化・重複・速度の継続監視 (変更時代表URL/週次全URL、PSI/Cloudflare監視とは別系統) | .claude/scripts/page-quality・apps/admin/app/quality/page-audit |
 | `data-storage.md` | スキル設計時の記録先判定 (git TS / R2 vs `.claude/` vs `docs/`) | .claude/skills・state・todo・docs |
 | `data-sqlite-ssot.md` | 完全DBレスの用語と決定表 (正典は doc 12) | packages/database |
 | `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / ライセンス境界) | packages/gis・skills/gis |

@@ -22,7 +22,7 @@ primary_agent: devops-runner
 
 ## 手順
 
-対象は `CLAUDE.md`「検証コマンドの粒度」で選ぶ。小変更にフルbuild・全テストを強制しない。
+対象は `.claude/rules/local-environment.md`「検証コマンドの粒度」で選ぶ。小変更にフルbuild・全テストを強制しない。
 既に成功した同じ入力・同じコマンドの結果は引き継ぎ、コード・依存・設定・生成データの変更、
 失敗、未解決の懸念がある場合に再検証する。Codex / Claude の記録方法は
 `.claude/rules/local-environment.md`「Codex / Claude の作業共有」を参照する。

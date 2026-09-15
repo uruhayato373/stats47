@@ -205,6 +205,24 @@ export function qualityQueues(): QualityQueue[] {
         detail: `SVG ${d.totalSvgs ?? "-"} / darkMode 非準拠 ${d.articlesDarkModeNonCompliant ?? "-"}`,
       }),
     ),
+    q(
+      "page-quality",
+      "ページ品質 (肥大化・重複・速度)",
+      `${Q}/metrics/page-quality/latest.json`,
+      "違反ページ",
+      (d) => {
+        const violations = Array.isArray(d.violations) ? d.violations : [];
+        const errorUrls = new Set(
+          violations.filter((v: { severity?: string }) => v.severity === "error").map((v: { url?: string }) => v.url)
+        );
+        return {
+          generatedAt: d.generated_at,
+          total: Array.isArray(d.results) ? d.results.length : null,
+          defects: errorUrls.size,
+          detail: `${d.mode ?? "-"} / warning ${violations.length - errorUrls.size} 件。詳細は /quality/page-audit`,
+        };
+      },
+    ),
   ];
 }
 
