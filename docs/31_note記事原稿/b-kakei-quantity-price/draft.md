@@ -53,6 +53,10 @@ tags:
 
 品目を数えるだけでも県の性格が出ます。北海道は「多く買う」に分類される品目が18と多く、香川県は11でした。北海道は量で押す食卓、香川県は特定の品目に強く集中する食卓、という違いがここに表れています。個別の品目については[北海道の食卓を扱った記事](https://stats47.jp/blog/hokkaido-food-culture)と[香川県の食卓を扱った記事](https://stats47.jp/blog/kagawa-food-culture)でも確認できます。
 
+![北海道の食卓を数量×価格で分解した内訳](images/hokkaido-quantity-price-findings.png)
+
+![香川の食卓を数量×価格で分解した内訳](images/kagawa-quantity-price-findings.png)
+
 ## この読み方には限界もある
 
 便利な分解ですが、注意すべき点が3つあります。

@@ -25,6 +25,10 @@ tags:
 
 上位には九州勢が目立ちます。1位の宮崎県のほか、4位の福岡県が2,383円、8位の鹿児島県が2,195円です。下位は四国と東北の日本海側にまとまっていて、45位徳島県1,430円、46位山形県1,282円、47位高知県1,105円、44位秋田県1,484円という並びでした。詳しい分布は[ぎょうざ消費支出額のランキング](https://stats47.jp/ranking/gyoza-frozen-consumption-expenditure)で確認できます。
 
+![ぎょうざ消費支出額の都道府県ランキング](images/gyoza-frozen-consumption-expenditure-prefecture-rankings.png)
+
+![ぎょうざ消費支出額の都道府県マップ](images/frozen-gyoza-spending-prefecture-gap-map.png)
+
 ## 誰を数えているのか
 
 ここから確認作業に入ります。1つめは対象です。
