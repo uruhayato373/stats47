@@ -155,6 +155,12 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 共通カテゴリ一覧を `area_sidebar` として追加した。登録済み `nav_surface` / `nav_label` の
 > 値追加であり、新しい custom dimension はない。
 
+> **link_position の値追加 (2026-09-16・ranking 本文中段の楽天カード置換)**: 家計調査系
+> ranking の本文中段 native (`RankingPageRakutenNativeSection`) に `rakuten-native`
+> (`RakutenItemsCard`、モバイル・商品軸) と `furusato-native` (`FurusatoNozeiCard`、
+> デスクトップ・1位県の地域軸) を追加した。どちらも登録済み `link_position` の値追加で、
+> 新しい custom dimension の登録は不要。
+
 > `❓要確認` は「code コメントで登録前提と書かれているが、GA4 管理画面での実登録を確認していない」状態。
 > `.claude/rules/evidence-based-judgment.md` に従い、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。
 > 推測で `✅` にしない。

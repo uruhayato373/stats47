@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-14
+updated: 2026-09-16
 ---
 
 # バックログ (タスクマスタ)
@@ -1113,6 +1113,49 @@ updated: 2026-09-14
 4. 本番反映はユーザー承認後にまとめて1回行い、HTTP 200、年、単位、代表値を実測する。
 5. 完了した行は削除する。
 
+### [AFF-PRODUCT-KEYWORD-GAP-01] 家計調査系19指標が品目辞書から漏れ、楽天商品カードが出ない (1文字品目・「〜料」接尾辞)
+
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- src/features/ads] [起票:2026-09-16] [期日:2026-10-31]
+
+- **owner**: affiliate-manager (辞書導出規則) / ranking-ui-manager (表示確認)
+- 2026-09-16 実測 (家計調査系 706 metric の title を `detectProductKeyword` に通した): 検出あり 600 / 検出なし 106。
+  106 のうち 87 はサービス・料金・費目合計で商品カードにならないのが正しいが、**19 件は商品**なのに
+  `apps/web/src/features/ads/constants/product-keyword-derivation.ts` の 2 規則で落ちている:
+  - `:72` `term.length < 2` → 1 文字品目 6 種 × (支出額+消費量) = 12 件: 桃・梨・柿・米・傘・酢
+  - `:51` `/[代料費賃税]$/` (費目接尾辞) → 「〜料」で終わる商品 7 件: 炭酸飲料・乳飲料・茶飲料・乳酸菌飲料・風味調味料・他の調味料・修繕材料
+  影響: これらのランキングでは右レール (デスクトップ) と本文中段 (モバイル、`AFF-RANKING-RAKUTEN-NATIVE-01` 以降) の
+  商品軸カードが出ず、地域軸 (1 位県の返礼品) に代替される。
+- **次**: ①「飲料・調味料・材料」を費目扱いから除く例外を足す (接尾辞判定を stem 全体で見る)。
+  ②1 文字品目は blog タイトルで誤検出が確実 (「山梨」→梨、「米国」→米) なので無条件 allowlist にしない。
+  ranking の `sourceText` は正準 title (`{品目}消費支出額|消費量`) なので、**title 全体がその形に一致する場合だけ**
+  1 文字品目を許す (`detectProductKeyword` に完全形一致の分岐を足すか、呼び出し側で正準 title を別引数で渡す)。
+  ③`generate-runtime-metric-summaries.ts` を再実行して `RUNTIME_PRODUCT_KEYWORDS` を再生成 (現 465 語)。
+  ④vitest に「山梨県を含む blog タイトルで 梨 を検出しない」「桃消費支出額 では 桃 を検出する」の両方向を足す。
+- **停止条件**: blog 側 (`resolveBlogRakutenPlacement` / `blog-rakuten-content`) の既存テストが 1 件でも赤になる変更は入れない。
+- **完了条件**: 上記 19 metric の `/ranking/<key>` で商品カードが描画され (ローカル実測)、`src/features/ads` のテストと blog の誤検出テストが緑。
+
+### [METRIC-SUBTITLE-KAKEI-NOTE-01] 家計調査系 706 metric の subtitle が調査方法の定型文で、一覧・h1 直下に冗長表示される
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-09-16]
+
+- **owner**: data-ingester (config 一括是正) / ranking-ui-manager (表示面の確認)
+- 実測 (2026-09-16): `packages/data-configs/src/metrics/` の `kind: "kakei-chousa"` 706 件すべてが
+  `subtitle: "都道府県庁所在市の二人以上世帯の年間{品目}消費支出額"` の形。`metric-config-standards.md` の役割表では
+  subtitle は「同名指標を区別する短い定義補足」で、調査方法は `note` / `description` の責務。lint `subtitle-redundant`
+  (`validate-metric-config.ts:250`) は「subtitle が title を包含」を真の識別子 (乳用牛(めす)) のために許容しているので、この定型文はすり抜ける。
+- 表示への影響: ranking 右レールと関連ランキンググリッドは 2026-09-16 に UI 側で除外済み
+  (`select-sidebar-items.ts` の `getSidebarDetail`: subtitle が title を含む場合は識別に使えないとして非表示)。**残っている面**:
+  ranking 詳細の h1 直下 (`classifyRankingSubtitle` 経由)、category / survey / municipalities 一覧の `${title}（${subtitle}）` 連結
+  (`app/category/[categoryKey]/page.tsx:184`、`app/survey/[surveyKey]/page.tsx:211`、`app/municipalities/**`) で
+  「納豆消費支出額（都道府県庁所在市の二人以上世帯の年間納豆消費支出額）」の重複が出る。
+- **次**: ①決定的スクリプトで 706 件の subtitle 定型文を `note` (「都道府県庁所在市の二人以上世帯・年間値」等の短文 1 種) へ移し、
+  subtitle は null にする (同名衝突がある metric だけ短い識別子を残す)。②`validate:config` / `validate:years` を通す。
+  ③`sync-snapshots` の `ranking-items` で item.json を再生成 (デプロイが先: `branch-workflow.md`「R2 反映は main のコードで動く」)。
+  ④UI 側の暫定ヒューリスティック (`getSidebarDetail` の包含判定・`classifyRankingSubtitle`) はデータ側が揃ったあとに縮退を検討する。
+- **停止条件**: 一括書き換えで `subtitle-redundant` 以外の lint error が増えたら止める。R2 反映とデプロイはオーナー承認後。
+- **完了条件**: 家計調査系 config の subtitle 行に定型文が 0 件、category / survey 一覧のタイトルに定型文の括弧書きが出ない、
+  ranking 詳細ではチャート下の note として表示される。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [CATEGORY-NAV-CONSOLIDATION-01] カテゴリ一覧UIの2実装 (PortalCategoryGrid / CategoryNavGrid) 統合検討
@@ -1391,3 +1434,27 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
   公開し、旧stubを非公開化する方針が有力)。どの note 投稿を非公開/削除するかは
   公開済みコンテンツへの不可逆操作なのでオーナー判断が必要。
 - **完了条件**: 各組が1本に統合される、またはそれぞれ独立して残す理由が記録される。
+
+### [ESTAT-META-BATCH-ARTIFACTS-01] getMetaInfo 9 バッチ (1,000 表) の CI artifact を 2026-10-15 失効前に保全するか、ESTAT-CATALOG-01 に吸収して捨てるか
+
+タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [起票:2026-09-16] [期日:2026-10-14]
+
+- **owner**: オーナー (判断) / estat-researcher (保全する場合の実行)
+- 事実 (2026-09-16 実測): `estat-meta-run` ブランチへの push で `estat-fetch-meta.yml` が 2026-09-15 11:24〜22:56 UTC に
+  8 run 成功 (batch 1/9, 3/9〜9/9。2/9 は独立した run / commit が見つからない)。入力は `.claude/scripts/estat/proof-batch-statsids.json`
+  の 1,000 statsDataId (discover Phase 1 の候補 8,706 表から抽出)。**結果は各 run の artifact `estat-meta` (約 0.96 MB/run、
+  retention 30 日) にしか無く**、リポジトリにも R2 にも無い。失効: run 9 が 2026-10-15T23:09Z、他はそれより前。
+  取得: `gh run download <runId> -n estat-meta -D .local/estat-meta/batch-<n>` (run 9 = 35033358636、run 1 = 34963136368、
+  一覧は `gh run list --workflow=estat-fetch-meta.yml --branch=estat-meta-run`)。`.claude/state/estat/meta/` の 77 件は
+  7 月の SSDS 調査分で、この 1,000 表とは重複しない。
+- 判断材料: 同日に `ESTAT-CATALOG-01` (月次 R2 カタログが全表の getMetaInfo 要約を保有し、`estat-fetch-meta.yml` と
+  `prefecture-candidates.json` を退役予定) が実装された。カタログの初回 run が 10/14 までに県 + 市区町村 (≈12,000 表) を
+  終えるなら、この 1,000 表分は捨ててよい。終わらないなら artifact を落として橋渡しにする。
+- **次**: ①10/7 頃に `curl https://storage.stats47.jp/estat-catalog/manifest.json` で `collectAreas.{2,3}.metaPending` を確認。
+  ②0 なら本カードを削除 (保全不要)。③残っているなら 8 run 分を `.local/estat-meta/` に download し、`.claude/state/estat/` に
+  置くか (LARGE_FILE 例外が要る) カタログ完了まで `.local/` 保持かを決める。
+  ④併せて `estat-meta-run` / `worktree-estat-meta-batches` ブランチの後始末。後者には
+  `0591b72fe chore(blog): 悩み起点5記事の下書きとSNS/公開チェックポイントを保存` が乗っており、
+  **develop に同内容があるか確認してから**削除する (未マージなら先に取り込む)。
+- **禁止**: 判断前に artifact を作り直す目的で `estat-meta-run` へ再 push しない (e-Stat API を 1,000 表分再消費する)。
+- **完了条件**: 保全 or 廃棄が決まり実行済み。ブランチ 2 本の扱いが決まっている。

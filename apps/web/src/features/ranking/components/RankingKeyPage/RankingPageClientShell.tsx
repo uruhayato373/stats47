@@ -1,9 +1,11 @@
 import { BannerAd, isLandscapeBanner } from "@/features/ads";
+import { detectProductKeyword } from "@/features/ads/constants/product-keywords";
 
 import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense";
 
 import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
 import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
+import { computeRankingHeaderStats } from "../../utils/compute-ranking-header-stats";
 
 import { shouldShowRankingInContentAffiliate } from "./ranking-incontent-affiliate-policy";
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
@@ -14,6 +16,7 @@ import {
 } from "./RankingPageAsyncSections";
 import { RankingPageBreadcrumbs } from "./RankingPageBreadcrumbs";
 import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateSection";
+import { RankingPageRakutenNativeSection } from "./RankingPageRakutenNativeSection";
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
 
@@ -36,6 +39,16 @@ export function RankingPageClientShell({
   const nativeAffiliateBanners = (inContentAffiliateBanner ? affiliateBanners.slice(1) : affiliateBanners).slice(0, 3);
   const usedAffiliateAds = [inContentAffiliateBanner, ...nativeAffiliateBanners]
     .filter((banner) => banner !== null);
+
+  // 家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) は本文中段 native を楽天カードへ置換する
+  // (2026-09-16)。モバイル=商品軸・デスクトップ=1位県の返礼品。上段 in-content の A8 と
+  // 右レール除外 (usedAffiliateAds) は不変 — nativeAffiliateBanners の計算そのものは変えない。
+  const isKakeiChousa = (model.originalSurveys ?? []).some((survey) => survey.id === "kakei-chousa");
+  const top1Entry = computeRankingHeaderStats(model.rankingValues ?? []).top3[0] ?? null;
+  const hasProductKeyword = detectProductKeyword(model.rankingName ?? "") !== null;
+  const useRakutenNative = (model.affiliateVertical ?? null) !== null
+    && isKakeiChousa
+    && (top1Entry !== null || hasProductKeyword);
 
   return (
     <RankingKeyPageClient
@@ -97,7 +110,14 @@ export function RankingPageClientShell({
             />
           </div>
         ) : null,
-        nativeAffiliate: (
+        nativeAffiliate: useRakutenNative ? (
+          <RankingPageRakutenNativeSection
+            key="native-affiliate"
+            rankingName={model.rankingName}
+            top1={top1Entry ? { areaCode: top1Entry.areaCode, areaName: top1Entry.areaName } : null}
+            hasProductKeyword={hasProductKeyword}
+          />
+        ) : (
           <RankingPageNativeAffiliateSection
             key="native-affiliate"
             banners={nativeAffiliateBanners}

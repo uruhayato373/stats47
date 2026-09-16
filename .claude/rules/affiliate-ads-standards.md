@@ -182,7 +182,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 | ページ種別 | 解決キー |
 |---|---|
-| ranking | **出典調査 → タグ → categoryKey** (`resolveContentVertical`。2026-09-03) → vertical の banner (priority 上位) → text → AdSense fallback。native 枠とサイドバー (`AffiliateAdSlot vertical=`) は同じ解決結果を使う |
+| ranking | **出典調査 → タグ → categoryKey** (`resolveContentVertical`。2026-09-03) → vertical の banner (priority 上位) → text → AdSense fallback。native 枠とサイドバー (`AffiliateAdSlot vertical=`) は同じ解決結果を使う。**家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) の本文中段 native は `RankingPageRakutenNativeSection` に置換** — モバイル(lg未満)=商品軸 `RakutenItemsCard position="rakuten-native"`（品目なしは地域軸で代替）、デスクトップ=地域軸 `FurusatoNozeiCard position="furusato-native"`（1位県、見出し「1位 ◯◯県の人気返礼品」）。右レールの商品カードは `hidden lg:block` でデスクトップ限定。上段 in-content の A8 と右レール除外 (`usedAffiliateAds`) は不変 (2026-09-16) |
 | category | `categoryKey` → vertical |
 | blog | **出典調査 → 記事 `tags`** (`resolveContentVertical`。2026-09-03) → vertical の banner/text。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
 | survey | `SURVEY_AFFILIATE_MAP[surveyKey]` → 無ければ所属ランキングの categoryKey 最頻値 |
@@ -528,7 +528,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | ページ種別 | アフィリ枠 | 解決キー |
 |---|---|---|
 | blog | 本文 banner / 本文 text (自動挿入 最大4) / 右レール banner / 読了後の楽天商品または県別返礼品（最大1枚）/ ハウス枠×2 | surveyIds → tagKeys → vertical、記事タイトル・副題 → 品目／単一県 |
-| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品。AdSense停止中は本文中段 banner 1 + 右レール banner ≤2 を上段へ移設 | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
+| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品。AdSense停止中は本文中段 banner 1 + 右レール banner ≤2 を上段へ移設。**家計調査系は本文中段 native を楽天カードへ置換** (モバイル=商品軸 `rakuten-native`、デスクトップ=1位県の地域軸 `furusato-native`。右レール商品カードはデスクトップ限定 `hidden lg:block`。2026-09-16) | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
 | category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
 | survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
 | themes | native ≤4 / theme-end 300×250 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` (本文中央ハウス枠は 2026-08-06 撤去。bespoke の themes/local-finance は InContent×2 のみで native なし) |
@@ -542,7 +542,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | compare | native ≤4 | categoryKey → vertical |
 
 > blog / areas の楽天導線は 2026-09-08 にローカル実装。オーナー指定により未デプロイ・R2未更新。
-> ranking の既存商品カードは位置・枚数を維持する。新しい枠を一覧・home・themeには増やさない。
+> ranking の商品カードは 2026-09-16 から家計調査系のみデスクトップ右レール + モバイル本文中段 (上記) に配置する。新しい枠を一覧・home・themeには増やさない。
 >
 > **2026-09-02 の全ページ棚卸し**: GSC 2026-W35 の imp を route 別に集計し、枠の無い route が
 > `/japan` (54 imp/週)・`/municipalities` (0)・`/geo` (0)・法務ページだけであることを確認した。

@@ -258,6 +258,31 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - **先行検証**: 追加指示前にorigin/develop `58a9aacbc` 基点の別worktreeで広告だけを分離検証し、`npm run type-check` は25 workspace・9 scripts configともexit 0。その分離案ではcommit・pushしていない。追加指示後はGeo側の編集停止を確認し、共有作業ツリーの現HEAD `5aee9b322` から全変更を保存する。Geoの未完了・未検証点はbacklogと `.claude/state/geo/source-pages.json` を維持し、本番公開可能とは判定しない。
 - **変更の差分**: コミット前検査で見つかった旧楽天snapshotの互換処理3か所へ削除条件を追記した（検証済み新データへの移行と旧キャッシュ失効）。動作変更はなく、広告301件のテスト・代表6ページ・フルwebビルドは上記PASSを継承し、この準備では再実行しない。
 
+---
+
+## [AFF-RANKING-RAKUTEN-NATIVE-01] 家計調査系 ranking 本文中段を楽天カードへ置換
+
+- **デプロイ日**: 未定・ローカル実装 2026-09-16
+- **想定効果**: `rakuten-native` + `furusato-native` 合計 imp ≥ 2,000/28日 かつ click ≥ 1
+  [根拠: baseline (GA4 28日 〜2026-08-28) — 楽天商品カード ranking 右レール 424 imp / 0 click、
+  中段 native (A8 furusato バナー等) 2,545 imp / 1 click、上段 in-content 1,477 imp / 1 click、
+  右レール A8 等 4,169 imp / 2 click。中段 native の imp 水準を楽天カードでも維持できるという想定]
+- **検証コマンド**: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28`（デプロイ後 4 週。
+  `link_position` 別に `rakuten-native` / `furusato-native` の imp・click を before/after 比較）
+- **実測**: 未（未デプロイのため計測不能）
+- **判定**: `effect/pending`
+- **未確定 / 仮説**: **[仮説]** ranking 本文中段の A8 furusato バナー (au PAY ふるさと納税等、
+  ページ内容と不一致な意匠) を、内容一致する楽天カード (モバイル=商品軸 `RakutenItemsCard
+  position="rakuten-native"`、デスクトップ=1位県の地域軸 `FurusatoNozeiCard
+  position="furusato-native"`) に置き換えると、読了導線としての関連性が上がり imp が中段 native
+  相当 (baseline 2,545/28日) 並みに増える。右レール商品カードはデスクトップ限定
+  (`hidden lg:block`) にし、モバイルでの本文中段との二重表示を避ける。**検証期日**:
+  2026-10-14。**期日後の判定基準**: `rakuten-native`+`furusato-native` 合計 imp が 1,000 未満なら
+  「位置の問題」ではなく計装漏れ (impression tracker の交差判定) または楽天 R2 在庫の欠品を疑い、
+  `sync-rakuten-catalog.ts` の manifest と `AdImpressionTracker` の発火ログを確認する。
+  同時デプロイの `AFF-RESOLUTION-EFFECT-01` / `AFF-IMPRESSION-ROUTING-01` と観測窓が重なるため
+  `link_position` 別に分けて読み、位置ごとの寄与を混同しない (guard: confounded)。
+
 ### 2026-09-13 統合公開と計測引渡し
 
 - **公開**: PR963、main `f09ac2ca978e501b29b9f8c9d1c81b9872601d98`。アプリrun34739098468は全工程成功。過去のWindows制限・旧snapshot再検証・ローカル認証不足は上記の当時の履歴として保持する。

@@ -98,6 +98,16 @@ describe("楽天カードの成果クリックと表示の結合キー", () => {
     expect(screen.getByText("寄附額 3,000円")).toBeInTheDocument();
   });
 
+  it("headingPrefixを見出しへ反映する (ranking 1位県カード等)", async () => {
+    render(await FurusatoNozeiCard({ areaCode: "01000", headingPrefix: "1位 " }));
+    expect(screen.getByText("1位 北海道の人気返礼品")).toBeInTheDocument();
+  });
+
+  it("headingPrefix省略時は従来どおりprefixなしの見出しになる", async () => {
+    render(await FurusatoNozeiCard({ areaCode: "01000" }));
+    expect(screen.getByText("北海道の人気返礼品")).toBeInTheDocument();
+  });
+
   it("品目のない統計には商品カードも表示イベントも作らない", async () => {
     expect(await RakutenItemsCard({ sourceText: "高校生の平均身長" })).toBeNull();
     expect(readRakutenItemsFromR2).not.toHaveBeenCalled();

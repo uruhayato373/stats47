@@ -14,6 +14,8 @@ interface FurusatoNozeiCardProps {
   position?: string;
   layout?: "sidebar" | "content";
   context?: FurusatoContext;
+  /** 見出し・計測ラベルの先頭に付ける接頭辞 (例: ranking 1位県カードの "1位 ")。既定は "" (従来どおり)。 */
+  headingPrefix?: string;
 }
 
 /**
@@ -22,7 +24,7 @@ interface FurusatoNozeiCardProps {
  * 日次更新の返礼品 snapshot を表示し、在庫が無ければ県別一覧リンクへフォールバックする。
  */
 export async function FurusatoNozeiCard({
-  areaCode, position = "sidebar", layout = "sidebar", context,
+  areaCode, position = "sidebar", layout = "sidebar", context, headingPrefix = "",
 }: FurusatoNozeiCardProps) {
   const link = getFurusatoNozeiLink(areaCode);
   if (!link) return null;
@@ -50,7 +52,7 @@ export async function FurusatoNozeiCard({
     return (
       <AdImpressionTracker
         category="furusato"
-        label={`${link.prefName}の人気返礼品`}
+        label={`${headingPrefix}${link.prefName}の人気返礼品`}
         position={position}
         adId={furusatoAdId}
       >
@@ -71,7 +73,7 @@ export async function FurusatoNozeiCard({
         </div>
 
         <p className="text-sm font-bold text-foreground mb-3">
-          {link.prefName}の人気返礼品
+          {headingPrefix}{link.prefName}の人気返礼品
         </p>
 
         <div className={layout === "content" ? "grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4" : "grid grid-cols-2 gap-px border border-border bg-border"}>
@@ -124,7 +126,7 @@ export async function FurusatoNozeiCard({
   return (
     <AdImpressionTracker
       category="furusato"
-      label={`${link.prefName}のふるさと納税`}
+      label={`${headingPrefix}${link.prefName}のふるさと納税`}
       position={position}
       adId={furusatoAdId}
     >
@@ -142,7 +144,7 @@ export async function FurusatoNozeiCard({
       >
         <div>
           <p className="text-sm font-bold text-foreground">
-            {link.prefName}のふるさと納税を探す
+            {headingPrefix}{link.prefName}のふるさと納税を探す
           </p>
           <p className="mt-0.5 text-xs text-muted-foreground">
             楽天ふるさと納税で{link.prefName}の返礼品をチェック
