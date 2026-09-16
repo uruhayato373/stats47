@@ -8,6 +8,7 @@
  *                                          モデルへ渡す指示を stdout へ (skill の対話経路が theme-researcher に渡す)
  *   apply   --theme <key> --input <json> [--dry-run] [--require-catalog] [--surveyed-at ...]
  *                                          モデル出力 JSON を gate に通し、通過分だけカタログへ書く。結果 JSON を stdout へ
+ *   reapply [--dir <dir>] [--dry-run]     保存済みチャンク出力 (<label>.output.json) を現在の gate で再適用 (gate 修正後の回収用)
  *   run     [--themes a,b] [--limit N] [--concurrency 1-2] [--model claude-sonnet] [--effort low|medium]
  *           [--chunk-size 6] [--budget-usd 5] [--capacity-wait-min 30] [--capacity-retries 3] [--max-fail-rate 0.3]
  *           [--min-entries-for-rate 10] [--report <dir>] [--dry-run]
@@ -161,6 +162,34 @@ async function cmdApply(args) {
   });
   process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
   if (result.accepted === 0 && result.targets > 0) process.exitCode = 2;
+}
+
+/**
+ * 保存済みのチャンク出力 (<label>.output.json) を現在の gate で再適用する。
+ * gate を直した後に、前 run で誤って落とした entry を LLM を呼び直さずに回収する用途。
+ * 書き込み済みの指標は対象から外れているので not-a-target で無視され、二重書き込みにならない。
+ */
+async function cmdReapply(args) {
+  const dir = args.dir ?? LOCAL_DIR;
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".output.json")).sort();
+  const fetchSource = createFetcher();
+  const classIndex = loadClassIndex();
+  const summary = [];
+  for (const file of files) {
+    const themeKey = file.replace(/\.output\.json$/, "").replace(/#\d+$/, "");
+    const [target] = listTargets({ theme: themeKey });
+    if (!target) continue; // 全件記入済み
+    attachClassNames(target, classIndex);
+    const output = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
+    const gate = await gateEntries(target, output, { fetchSource, classIndex, surveyedAt: args["surveyed-at"] ?? todayIso() });
+    const written = args["dry-run"] ? { inline: [], evidence: [] } : applySelections(themeKey, gate.accepted);
+    const recovered = Object.keys(gate.accepted);
+    const stillRejected = gate.rejected.filter((r) => !r.reasons.includes("not-a-target"));
+    summary.push({ file, recovered, stillRejected });
+    log(`${file}: 回収 ${recovered.length} (${recovered.join(", ") || "-"}) / 依然不合格 ${stillRejected.length}${written.inline.length + written.evidence.length ? "" : args["dry-run"] ? " (dry-run)" : ""}`);
+    for (const r of stillRejected) log(`   ✗ ${r.rankingKey}: ${r.reasons.join(", ")}`);
+  }
+  process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
 }
 
 // ---------------------------------------------------------------------------
@@ -501,6 +530,7 @@ async function main() {
   if (sub === "targets") return cmdTargets(args);
   if (sub === "prompt") return cmdPrompt(args);
   if (sub === "apply") return cmdApply(args);
+  if (sub === "reapply") return cmdReapply(args);
   if (sub === "run") return cmdRun(args);
   console.error("使い方: selection-backfill.mjs <targets|prompt|apply|run> [options] (冒頭コメント参照)");
   process.exit(1);
