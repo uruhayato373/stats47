@@ -25,7 +25,7 @@ metadata:
 - `.claude/scripts/estat/fetch-estat-meta.mjs` — getMetaInfoで次元構造 (キュレーション素材)。sampleValues12件cap
 - deprecated: `expand-indicators` skill / `ingest-indicator.mjs` (削除済 stats_prefecture 依存)。投入は `page-data-batch.ts` (R2直行) が現役
 - **e-Stat APP_ID `NEXT_PUBLIC_ESTAT_APP_ID` は CI専任** (.env.localに無い・2026-05-29集約)。secrets.NEXT_PUBLIC_ESTAT_APP_ID
-- **workflow_dispatch は default(main)ブランチ限定** → main デプロイ無しで回すため専用ブランチ push トリガーにした: `discover-estat-candidates.yml`(branch `estat-discovery-run`) / `estat-fetch-meta.yml`(branch `estat-meta-run`)。該当ブランチへ push=発火。結果は artifact + ログ
+- **workflow_dispatch は default(main)ブランチ限定** → main デプロイ無しで回すため専用ブランチ push トリガーにした: `discover-estat-candidates.yml`(branch `estat-discovery-run`) / `estat-fetch-meta.yml`(branch `estat-meta-run`)。該当ブランチへ push=発火。結果は artifact + ログ ※`estat-fetch-meta.yml`+branch `estat-meta-run` は 2026-09-16 退役 (collectArea 2,3 の getMetaInfo は R2 estat-catalog `meta/<id>.json`。全国表は catalog 未対応で CI 経由の取得は無し。ローカル `fetch-estat-meta.mjs` は残置、APP_ID があれば可)
 - 投入=`data-refresh.yml`(page-data-batch→R2)、公開=KNOWN/sitemap再生成→deploy→本番200実測
 
 ## SSDS 列挙の実数 (2026-07-11 確定・enumerate-ssds-indicators.mjs)

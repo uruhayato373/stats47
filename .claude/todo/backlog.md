@@ -680,6 +680,8 @@ updated: 2026-09-16
   5. 上記が安定稼働したら旧発見スクリプト3系統を退役: `discover-prefecture-candidates.mjs` +
      `discover-estat-candidates.yml` + git内 `prefecture-candidates.json` (3.1MB・LARGE_FILE例外) /
      `estat-fetch-meta.yml` / `estat-city-discovery.json` (いずれもcatalogの`index/tables/`から導出可能)
+     → `estat-fetch-meta.yml` + branch `estat-meta-run` + `proof-batch-statsids.json` は 2026-09-16 にオーナー指示で
+     1ヶ月待ちを前倒しして退役済み (manifest metaPending 0 を実測)。`discover-*` と `estat-city-discovery.json` は未着手
   6. `ssds-candidates.json`をcatalog派生に置換、find-metricsに未登録候補の索引を追加
 - **完了条件**: manifestの`collectAreas.{2,3}.metaPending`が0、consumer 3件の配線完了、旧スクリプト退役
   (旧スクリプトの退役は新カタログが最低1ヶ月安定稼働してから)

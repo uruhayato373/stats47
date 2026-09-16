@@ -129,6 +129,8 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
 1. `discover-prefecture-candidates.mjs` + `discover-estat-candidates.yml` + git内
    `prefecture-candidates.json` (3.1MB・LARGE_FILE例外) と `estat-fetch-meta.yml` /
    `estat-city-discovery.json`の退役 — catalogの`index/tables/`から導出できるようになる
+   (`estat-fetch-meta.yml` + トリガー branch `estat-meta-run` + `proof-batch-statsids.json` は 2026-09-16 に退役済み。
+   collectArea 2,3 の getMetaInfo は catalog `meta/<statsDataId>.json` を読む。残りは未着手)
 2. `ssds-candidates.json`をcatalog派生に置換、find-metricsに未登録候補の索引を追加
 3. 全国(collectArea=1)のmeta対象決定、shard二次分割、self-dispatch連鎖
 
