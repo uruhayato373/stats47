@@ -46,10 +46,10 @@ export function SurveyTaxonomyCard({
 
   if (variant === "section") {
     return (
-      <SurfaceSection className="mt-8 p-5">
+      <SurfaceSection className="mt-8">
         <div className="flex items-center gap-2">
           <FileText className="h-4 w-4 text-muted-foreground" />
-          <h2 className="text-lg font-bold text-foreground">{title}</h2>
+          <h2 className="text-xl font-bold text-foreground">{title}</h2>
         </div>
         <div className="mt-3">
           {description && (

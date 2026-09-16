@@ -6,7 +6,7 @@ import {
 } from '@stats47/data-configs/theme-catalog';
 import { BookOpenText } from 'lucide-react';
 
-import { SurfaceSection } from '@/components/surface';
+import { SectionCard } from '@/components/surface';
 
 import { TrackedThemeLink } from './TrackedThemeLink';
 
@@ -21,27 +21,28 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
   if (topics.length === 0) return null;
 
   return (
-    <SurfaceSection
+    <section
       id="theme-evidence"
-      className="mt-8 p-0"
+      className="mt-8"
       aria-labelledby="theme-evidence-topics-title"
     >
-      <div className="border-b border-border px-5 py-4">
-        <div className="flex items-center gap-2">
-          <BookOpenText className="h-4 w-4 text-muted-foreground" aria-hidden />
-          <h2
-            id="theme-evidence-topics-title"
-            className="text-lg font-bold text-foreground"
-          >
-            白書・統計から見る論点
-          </h2>
-        </div>
-        <p className="mt-1 text-sm text-muted-foreground">
-          公的資料の論点から、関連する都道府県データと次に読むテーマを整理しています。
-        </p>
+      <div className="flex items-center gap-2">
+        <BookOpenText className="h-4 w-4 text-muted-foreground" aria-hidden />
+        <h2
+          id="theme-evidence-topics-title"
+          className="text-xl font-bold text-foreground"
+        >
+          白書・統計から見る論点
+        </h2>
       </div>
+      <p className="mt-1 text-sm text-muted-foreground">
+        公的資料の論点から、関連する都道府県データと次に読むテーマを整理しています。
+      </p>
 
-      <div className="grid grid-cols-1 gap-6 p-5 md:grid-cols-2">
+      <SectionCard
+        className="mt-3"
+        bodyClassName="grid grid-cols-1 gap-6 md:grid-cols-2"
+      >
         {topics.map((topic) => {
           const lens = EVIDENCE_LENS_CATALOG[topic.lensKey];
           const rankings = (topic.relatedRankingKeys ?? []).flatMap(
@@ -181,7 +182,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
             </article>
           );
         })}
-      </div>
-    </SurfaceSection>
+      </SectionCard>
+    </section>
   );
 }

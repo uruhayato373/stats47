@@ -53,7 +53,7 @@ export function ChartErrorState({
 }: ChartMessageStateProps) {
   const content = (
     <>
-      {title && <h3 className="mb-3 text-lg font-semibold">{title}</h3>}
+      {title && <h3 className="mb-3 text-sm font-semibold text-foreground">{title}</h3>}
       <div
         className="flex items-center justify-center bg-muted/10 text-sm text-destructive"
         style={{ height }}

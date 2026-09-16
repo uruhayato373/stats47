@@ -43,7 +43,7 @@ export function ThemeIndicatorCatalogSection({
       id="theme-related-indicators"
       className="mt-8 scroll-mt-24 p-5"
     >
-      <h2 className="text-lg font-bold text-foreground">このテーマの全指標</h2>
+      <h2 className="text-xl font-bold text-foreground">このテーマの全指標</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         このテーマで扱う{metrics.length}
         指標。各リンクから47都道府県ランキングを確認できます。

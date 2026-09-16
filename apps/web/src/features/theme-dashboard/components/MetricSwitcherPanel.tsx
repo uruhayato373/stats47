@@ -522,7 +522,6 @@ export function MetricSwitcherPanel({
       <ChartPanel
         id={id}
         title={title}
-        titleClassName="text-base"
         contentClassName="p-0"
         footer={
           representative ? (
