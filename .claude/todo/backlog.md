@@ -616,6 +616,40 @@ updated: 2026-09-16
 - **禁止**: 全国(collectArea=1)の一律`--meta-scope 1`実行 (推定20万表超・時間予算超過のリスク。
   必ず実測件数を見てから判断)
 
+### [THEME-SELECTION-BACKFILL-01] ThemeCatalogの選定根拠(selection)未記入552件を夜間の無人バッチで白書・公式統計から裏付ける
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:windows] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-09-16]
+
+- **owner**: theme-designer (catalog TS の書き手) / theme-researcher (調査) / validator は data-configs scripts
+- **背景 (2026-09-16 実測)**: `validate:catalog` の `no-adoption-criteria` warn は 561 件。aging-society の
+  9 指標を theme-researcher(sonnet) → 呼び元検証 → 書き込みで処理し 552 件へ。1 テーマ 19 分
+  (agent 9 分・41 tool call・28.5 万 token / 検証+書き込み+gate 10 分)。受け入れ検証で agent が
+  社会生活統計指標コードを 7 件中 2 件誤記 (#A06603/04 ≠ config の #A06601/02) したのを捕捉。
+  NotebookLM CLI はこの PC では SSL 証明書エラーで不可、白書は WebFetch で足りた。
+  55 テーマ×約 15 分 = 約 14 時間なので 1 晩では終わらず、5 時間利用枠で止まる前提で 2〜3 晩。
+- **次 (実行順)**:
+  1. validator (`packages/data-configs/scripts/validate-theme-catalog.ts`) へ 3 gate を error で追加:
+     (a) `selection.rationale`/`proposedBy` 中の `#[A-Z]\d{5,}` コードが metric config の `cdCat01` と一致し、
+     さらに e-Stat カタログ (`node --import tsx .claude/scripts/estat/catalog.mjs search --id <statsDataId>`、
+     初回 `pull`・社内PCは proxy preload) で解決した分類コード名が rationale の指標名と矛盾しない
+     (**前提**: `ESTAT-CATALOG-01` の run で `index/classes/` が push 済みであること。2026-09-16 07:35 時点は
+     2 回目 run が in_progress で分類行 0 件のため、この半分は run 完了後に有効化する)
+     (b) `sourceUrl` が HTTP 到達可能 (`.claude/scripts/audit/theme-chart-live-audit.mjs` の
+     `resolveDispatcher` でプロキシ経由) (c) 定型フレーズ (「詳細索引に保持し」「実値として比較する」等) を
+     rationale に含まない。加えて `no-adoption-criteria` 件数の ratchet (baseline 552・減少専用) を
+     `pr-quality-check` / `develop-quality-gate` に配線
+  2. skill `/backfill-theme-selection <theme>`: theme-researcher (Task Capsule 固定・table-only) →
+     theme-designer が `selection` だけを書く。**role は変更しない** (推奨は夜間レポートへ出し人が判断)
+  3. 夜間ドライバ `.claude/scripts/themes/run-selection-backfill.sh` (`run-claude-batch.sh` の型):
+     専用 worktree・1 テーマ 1 attempt・gate 不合格は skip 記録・並列 2 まで・`wait_for_capacity`・
+     **夜 1 コミット** (このPCは pre-commit 12 分/回)・レポートを
+     `.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-selection-backfill.md`
+  4. 翌朝: レポートの role 推奨と skip を人が処理、ratchet の数字を weekly review が読む
+- **完了条件**: `no-adoption-criteria` = 0、role 推奨リストの人間処理完了、ratchet が CI に配線済み
+- **停止条件**: 1 晩の gate 不合格率 > 30% (prompt か gate の問題なので続行しない)、枠エラー 3 連続
+- **禁止**: 夜間バッチによる role 変更・rejectedCandidates への追加・`git commit --no-verify`・
+  gate 未通過の selection の書き込み
+
 ### [THEME-CHART-TEMPORAL-MISMATCH-01] line-chartが単年設定の13指標を再取り込みして年範囲を拡張する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-15]

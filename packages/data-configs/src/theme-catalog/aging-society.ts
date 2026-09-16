@@ -13,10 +13,13 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "shortLabel": "高齢化率",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "高齢化率は主問に直接答える見出し指標として残す。"
+        "proposedBy": "令和7年版 高齢社会白書 第1章第1節4「地域別に見た高齢化」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_1_4.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書が地域比較の中心指標として都道府県別の高齢化率（秋田39.5%・東京22.7%）を掲げており、テーマの主問「高齢化はどう進んでいるか」に直接答える見出し指標。社会生活統計指標#A03503と定義が一致する。",
+        "adoptionCriteria": ["representativeness", "comparability", "readerValue"],
+        "readerQuestion": "自分の県の高齢化率（65歳以上人口割合）は全国のどの位置にあるか。",
+        "targetReaderOrDecision": "移住先や実家の将来、医療・介護需要を考える読者の比較材料。"
       }
     },
     {
@@ -35,10 +38,13 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "shortLabel": "合計特殊出生率",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
-        "surveyedAt": "2026-09-08",
-        "rationale": "合計特殊出生率は主問に直接答える見出し指標として残す。"
+        "proposedBy": "人口動態統計 令和6年（2024）確定数 報道発表（厚生労働省・2025-09-16）",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/dl/14_houdouR06.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省が確定数公表の「調査結果のポイント」先頭に置く看板指標（令和6年は1.15で過去最低・9年連続低下）。出生の水準を都道府県で同一定義で比較でき、高齢化率と対になる主問の見出し指標。",
+        "adoptionCriteria": ["representativeness", "dataQuality", "readerValue"],
+        "readerQuestion": "自分の県の合計特殊出生率は、全国値1.15や過去最低の水準とどう違うか。",
+        "targetReaderOrDecision": "出産・子育て環境や移住先の少子化の程度を比較したい読者。"
       }
     },
     {
@@ -123,32 +129,41 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "shortLabel": "65歳以上世帯割合",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "65歳以上世帯割合は「高齢者はどの世帯で暮らすか」を読むため主要画面へ配置する。"
+        "proposedBy": "令和7年版 高齢社会白書 第1章第1節3「家族と世帯」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書が「65歳以上の者のいる世帯は全世帯の49.5%」と、本指標と同じ分子・分母で提示している。「高齢者はどの世帯で暮らすか」の章の基準となる指標。",
+        "adoptionCriteria": ["representativeness", "comparability", "dataQuality"],
+        "readerQuestion": "65歳以上の世帯員がいる世帯は全世帯の何割で、県ごとにどう違うか。",
+        "targetReaderOrDecision": "実家の高齢者世帯の支援や見守りの頻度を考える読者の目安。"
       }
     },
     {
       "rankingKey": "marriages-per-total-population",
       "shortLabel": "婚姻率（人口千人）",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "婚姻率は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "人口動態統計 令和6年（2024）確定数 報道発表（厚生労働省）／社会生活統計指標 #A06601",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/dl/14_houdouR06.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省の確定数が婚姻件数（令和6年485,092組・増加）を「調査結果のポイント」に掲げる。人口千人当たりの率（#A06601）で家族形成の入口を県別に比較し、「婚姻と家族形成」章（candidateId 42）の指標とする。",
+        "adoptionCriteria": ["dataQuality", "comparability", "readerValue"],
+        "readerQuestion": "人口千人当たりの婚姻件数は、自分の県では全国とどう違うか。",
+        "targetReaderOrDecision": "結婚・家族形成の地域差を知りたい読者、移住先を検討する読者。"
       }
     },
     {
       "rankingKey": "divorces-per-total-population",
       "shortLabel": "離婚率（人口千人）",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "離婚率は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "人口動態統計 令和6年（2024）確定数 報道発表（厚生労働省）／社会生活統計指標 #A06602",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/dl/14_houdouR06.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省の確定数が離婚件数（令和6年185,904組・増加）を「調査結果のポイント」に掲げる。人口千人当たりの率（#A06602）で婚姻率と対にして県別に比較し、「婚姻と家族形成」章（candidateId 42）の指標とする。",
+        "adoptionCriteria": ["dataQuality", "comparability", "readerValue"],
+        "readerQuestion": "人口千人当たりの離婚件数は、自分の県では全国とどう違うか。",
+        "targetReaderOrDecision": "家族形成や離婚後の生活設計を考える読者の比較材料。"
       }
     },
     {
@@ -200,10 +215,13 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "shortLabel": "高齢単独世帯（一般世帯に対して）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "社会生活統計指標（統計でみる都道府県のすがた）指標算式 #A06304（総務省統計局）",
         "sourceUrl": "https://www.stat.go.jp/data/k-sugata/pdf/shiki.pdf",
-        "surveyedAt": "2026-09-08",
-        "rationale": "高齢化率と出生中心の主表示に暮らしの形を加える。既存の高齢世帯チャートと一章へ統合。"
+        "surveyedAt": "2026-09-16",
+        "rationale": "社会生活統計指標の#A06304（65歳以上の単独世帯数÷一般世帯数）として公式収録。分母が一般世帯であり、高齢社会白書の独居率（分母＝65歳以上人口）とは別指標のため、章の注記で区別したうえで「高齢者はどの世帯で暮らすか」の章に置く。",
+        "adoptionCriteria": ["dataQuality", "comparability"],
+        "readerQuestion": "65歳以上が一人で暮らす単独世帯は一般世帯の何%で、県によってどう違うか。",
+        "targetReaderOrDecision": "高齢の親の見守りや同居を検討する読者の目安。"
       }
     },
     {
@@ -211,10 +229,13 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "shortLabel": "高齢夫婦のみの世帯の割合",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "高齢夫婦のみの世帯の割合は「高齢者はどの世帯で暮らすか」を読むため主要画面へ配置する。"
+        "proposedBy": "社会生活統計指標（統計でみる都道府県のすがた）指標算式 #A06302（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/k-sugata/pdf/shiki.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "社会生活統計指標の#A06302（夫65歳以上・妻60歳以上の夫婦のみ世帯数÷一般世帯数）として公式収録。高齢単独世帯と対にして、高齢期の暮らし方の型を同じ分母で読む。",
+        "adoptionCriteria": ["dataQuality", "comparability", "complementarity"],
+        "readerQuestion": "夫65歳以上・妻60歳以上の夫婦のみ世帯は一般世帯の何%で、県によってどう違うか。",
+        "targetReaderOrDecision": "高齢期の同居・別居の暮らし方を考える読者の目安。"
       }
     },
     {
@@ -266,10 +287,27 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "shortLabel": "老人ホーム定員（65歳以上千人当たり）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "社会生活統計指標（統計でみる都道府県のすがた）指標算式 #J042011（総務省統計局）",
         "sourceUrl": "https://www.stat.go.jp/data/k-sugata/pdf/shiki.pdf",
-        "surveyedAt": "2026-09-08",
-        "rationale": "高齢化率だけでは見えない施設供給を、同じ高齢者人口基準で比較する。"
+        "surveyedAt": "2026-09-16",
+        "rationale": "社会生活統計指標の#J042011（老人ホーム定員数÷65歳以上人口・千人当たり）として公式収録。高齢者人口を分母にそろえた施設供給の指標で、高齢化率だけでは見えない受け皿を同じ基準で比較する。公式ダッシュボード研究カタログでもRESAS「介護需給分析」が介護供給を独立メニューとしている。",
+        "adoptionCriteria": ["dataQuality", "comparability", "complementarity"],
+        "readerQuestion": "65歳以上人口千人当たりの老人ホーム定員は、自分の県ではどれくらいか。",
+        "targetReaderOrDecision": "親の施設入所先や介護を前提とした移住を検討する読者の比較材料。"
+      }
+    },
+    {
+      "rankingKey": "elderly-workers-ratio",
+      "shortLabel": "高齢就業者割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 高齢社会白書 第1章第2節1「就業・所得」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書が高齢者の就業を主要論点とし、65〜69歳の労働力人口比率54.9%・就業率の10年で13.5ポイント上昇を示す。県別の高齢就業者割合（#F0350303）で地域差を読み、「高齢者の就業」章（candidateId 36）の指標とする。",
+        "adoptionCriteria": ["representativeness", "dataQuality", "comparability"],
+        "readerQuestion": "65歳以上のうち働いている人の割合は、県によってどう違うか。",
+        "targetReaderOrDecision": "高齢期の就労や再雇用、移住先の就業環境を検討する読者。"
       }
     }
   ],
