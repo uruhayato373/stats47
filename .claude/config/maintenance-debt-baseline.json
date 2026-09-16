@@ -49,7 +49,6 @@
     "UNBOUNDED_LEGACY:.claude/scripts/ads/audit-affiliate-inventory.ts:// pre-commit / CI ゲート: --check-size 指定時は非 canonical・非 legacy サイズがあれば exit 1。": 1,
     "UNBOUNDED_LEGACY:.claude/scripts/blog/generate-brushup-plan.mjs:* @deprecated 2026-05-29: cron 自律 brushup を廃止し /brushup-blog --target batch": 1,
     "UNBOUNDED_LEGACY:.claude/scripts/lib/check-agent-skill-consistency.cjs:// frontmatter に status: dead または deprecated: true があれば link/script 参照検査から除外する。": 1,
-    "UNBOUNDED_LEGACY:.claude/scripts/lib/update-skill-primary-agent.cjs:// priority sort: NEW (0) > ACTIVE (1) > DEPRECATED (2)": 1,
     "UNBOUNDED_LEGACY:.claude/scripts/themes/build-theme-portfolio.ts:base.selectionMissingCount = null; // legacy は selection 概念なし": 1,
     "UNBOUNDED_LEGACY:.claude/skills/ads/register-affiliate-banner/SKILL.md:(canonical 4 種 = **300×250 / 250×250 / 320×100 / text** のみ。legacy 一点物も新規不可・rules §3)。": 1,
     "UNBOUNDED_LEGACY:.claude/skills/ads/register-affiliate-banner/SKILL.md:categoryKey: null,                        // @deprecated。原則 null (vertical で解決)": 1,

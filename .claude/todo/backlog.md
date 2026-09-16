@@ -1482,28 +1482,27 @@ updated: 2026-09-16
 - **trigger**: 履歴書換えを実施する場合は、全clone・fork・open branchへの影響を合意し、専用maintenance windowを取る。
 - **禁止**: owner承認なしにfilter-repo、force push、branch削除を行わない。
 
-### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 5 本の削除可否 (元 6 本、1 本は 2026-09-16 削除済み)
+### [SCRIPT-ORPHAN-DELETE-01] 用途を判断できない orphan スクリプト 9 本 ((c) 群) の要否判定
 
-タグ: [種類:意思決定] [実行:対話] [起票:2026-08-17]
+タグ: [種類:意思決定] [実行:対話] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs で orphan 一覧を再取得] [起票:2026-08-17]
 
 - **owner**: uruhayato373 (削除可否はオーナー判断)
 - **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
-  (下記「orphan 29 本の分類」)。残るのは (a) 群 5 本の削除可否だけ。
-- **(a) 役目が終わっている 5 本**: `blog/gen-chart-svg.cjs` (自身が
-  「⚠ SUPERSEDED (2026-05-27)」と明記) / `lib/update-skill-primary-agent.cjs` (一回きりの移行) /
-  `note/generate-remaining-covers.cjs` (一回きりの一括生成) / `note/inject-affiliate-blocks.mjs`
-  (一回きりの一括注入) / `sns/backfill-x-templates.cjs` (一回きりの backfill)。
-  `estat/estimate-city-data-size.mjs` (廃止済み永続 D1 の行数試算が前提) は 2026-09-16 にオーナー承認で削除済み
-  (出力 `estat-city-estimate-report.json`・cache `estat-city-meta-cache/` と local-resources / .gitignore の登録も同時に撤去)。
-- **次**: オーナーが残り 5 本の削除を承認する。承認後は git rm するだけ (履歴から復元可)。
-- **完了条件**: 5 本が削除されるか、残す理由が本エントリに追記されている。
-- **禁止**: (b)(c) 群を巻き込んで一括削除しない。
+  (下記「orphan 29 本の分類」)。
+- **済 (2026-09-16)**: (a) 群 6 本をオーナー承認で削除。`estat/estimate-city-data-size.mjs` (D1 前提。出力・cache・
+  local-resources / .gitignore 登録も同時撤去) と、`blog/gen-chart-svg.cjs` / `lib/update-skill-primary-agent.cjs`
+  (maintenance-debt baseline の UNBOUNDED_LEGACY 1 件も除去) / `note/generate-remaining-covers.cjs` /
+  `note/inject-affiliate-blocks.mjs` / `sns/backfill-x-templates.cjs`。いずれも他スクリプト・skill・workflow からの参照なし。
+- **trigger**: 次のリリース (main マージ) 後。(c) 群 9 本が依然として未使用なら (a) と同じ扱いで削除する。
+- **次**: 検証コマンドで orphan 一覧を再取得し、(c) の 9 本それぞれに「使った / 使っていない」を付けてオーナーへ出す。
+- **完了条件**: (c) 群が削除されるか、(b) 群と同じく残す理由が本エントリに追記されている。
+- **禁止**: (b) 群を巻き込んで一括削除しない。
 
 #### orphan 29 本の分類 (2026-08-17 実測・`check-agent-skill-consistency.cjs`)
 
 エントリ記載の 20 本は古い。実測は **29 本**。全件に残す/消す理由を付けた。
 
-**(a) 役目が終わっている 6 本** → 上記のとおり削除候補 (オーナー判断)
+**(a) 役目が終わっている 6 本** → 2026-09-16 に全て削除済み (上記「済」)
 
 **(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
 
@@ -1521,13 +1520,13 @@ updated: 2026-09-16
 `probe-*` は note.com の UI が変わったとき再実行する read-only 調査用。note は SPA で
 DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp-publish` と同じ理由)。
 
-**(c) 用途が判断できない 10 本** → 1 リリース残して未使用なら (a) 群へ落とす
+**(c) 用途が判断できない 9 本** → 1 リリース残して未使用なら (a) 群へ落とす (本カードの残作業)
 
 `blog/build-article-data-from-r2.mjs` / `blog/prefecture-food-profile.mjs` /
 `blog/select-conformance-candidates.mjs` / `gsc/discover-trends-fetch.cjs` /
 `note/affiliate-incremental.sh` / `note/download-affiliate-banners.mjs` /
-`note/expand-for-fix.mjs` / `note/publish-new-note.sh` / `psi/generate-cwv-pr.mjs` /
-`estat/estimate-city-data-size.mjs` は D1 前提が明確なので (a) へ寄せた (2026-09-16 削除済み)
+`note/expand-for-fix.mjs` / `note/publish-new-note.sh` / `psi/generate-cwv-pr.mjs`
+(元 10 本。`estat/estimate-city-data-size.mjs` は D1 前提が明確なので (a) へ寄せ、2026-09-16 に削除済み)
 
 **なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
 これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。
