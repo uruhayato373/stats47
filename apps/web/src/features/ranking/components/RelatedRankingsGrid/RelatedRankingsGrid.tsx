@@ -7,6 +7,8 @@ import { SurfaceLinkCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/server";
 
+import { getSidebarDetail } from "../RankingSidebar/select-sidebar-items";
+
 interface RelatedRankingsGridProps {
   /** 現在表示中の rankingKey (除外用) */
   rankingKey: string;
@@ -65,12 +67,7 @@ export async function RelatedRankingsGrid({
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => {
             const readerLabel = item.readerLabel ?? item.title;
-            const title = item.subtitle
-              ? `${readerLabel}（${item.subtitle}）`
-              : readerLabel;
-            const subtitle = [item.demographicAttr, item.normalizationBasis]
-              .filter(Boolean)
-              .join(" / ");
+            const detail = getSidebarDetail(item);
             return (
               <SurfaceLinkCard
                 key={item.rankingKey}
@@ -78,11 +75,24 @@ export async function RelatedRankingsGrid({
                 className="group flex flex-col gap-1 px-3 py-2.5"
               >
                 <span className="line-clamp-2 text-sm font-medium leading-snug text-foreground group-hover:text-primary">
-                  {title}
+                  {readerLabel}
                 </span>
-                {subtitle && (
+                {detail && (
                   <span className="line-clamp-1 text-[11px] text-muted-foreground">
-                    {subtitle}
+                    {detail}
+                  </span>
+                )}
+                {item.top1 && (
+                  <span className="line-clamp-1 text-xs text-muted-foreground">
+                    <span className="font-semibold text-amber-600">
+                      {item.top1.rank ?? 1}位
+                    </span>{" "}
+                    {item.top1.areaName}{" "}
+                    {item.top1.value ? (
+                      <span className="font-semibold text-foreground">
+                        {item.top1.value}{item.unit}
+                      </span>
+                    ) : null}
                   </span>
                 )}
               </SurfaceLinkCard>

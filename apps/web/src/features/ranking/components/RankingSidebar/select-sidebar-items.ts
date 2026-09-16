@@ -26,6 +26,23 @@ export interface SidebarRankingItem {
 /** サーバー側で Client へ渡す上限。Client の展開時表示件数と一致させる */
 export const MAX_SIDEBAR_ITEMS = 20;
 
+/**
+ * サイドバー1行に表示する補足テキストを決める。
+ * subtitle が title をそのまま含む場合（家計調査系の「都道府県庁所在市の二人以上世帯の
+ * 年間〜」等）は名称の言い換えに過ぎず一覧上の識別に使えないため除外し、
+ * demographicAttr/normalizationBasis（男性/人口10万人あたり等の短い区分）へ縮退する。
+ */
+export function getSidebarDetail(
+    item: Pick<SidebarRankingItem, "title" | "subtitle" | "demographicAttr" | "normalizationBasis">,
+): string | null {
+    const subtitle = item.subtitle?.trim();
+    const isRedundant = !!subtitle && !!item.title && subtitle.includes(item.title);
+    if (subtitle && !isRedundant) return subtitle;
+    return (
+        [item.demographicAttr, item.normalizationBasis].filter(Boolean).join("・") || null
+    );
+}
+
 /** 文字列の簡易ハッシュ（安定ソート用） */
 export function hashString(s: string): number {
     let h = 0;
