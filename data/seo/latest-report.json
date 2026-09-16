@@ -1,93 +1,84 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-16",
+  "date": "2026-09-17",
   "period": {
-    "periodStart": "2026-09-07",
-    "periodEnd": "2026-09-13",
+    "periodStart": "2026-09-08",
+    "periodEnd": "2026-09-14",
     "windowDays": 7
   },
-  "inputHash": "44d9ba0f070916a03cc424b07dd77e973eb783f550b57892cfe656c226f14bfb",
+  "inputHash": "6221f747f306f694f6a35a79282d1a0eccffe8fa32b42633bbaf6e60637c1073",
   "movements": [
+    {
+      "keyword": "漁かく量",
+      "targetPath": "/japan/fishery-marine",
+      "before": 36,
+      "after": 91,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -55
+    },
     {
       "keyword": "任意保険 加入率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 30.689655172413794,
-      "after": 72.4,
-      "beforeImpressions": 29,
+      "before": 32.18518518518519,
+      "after": 78.75,
+      "beforeImpressions": 27,
       "impressions": 20,
-      "change": -41.71034482758621
+      "change": -46.56481481481481
+    },
+    {
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 34.75,
+      "after": 78.66666666666667,
+      "beforeImpressions": 8,
+      "impressions": 6,
+      "change": -43.91666666666667
+    },
+    {
+      "keyword": "漁獲量",
+      "targetPath": "/japan/fishery-marine",
+      "before": 11.5,
+      "after": 54,
+      "beforeImpressions": 4,
+      "impressions": 1,
+      "change": -42.5
+    },
+    {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 75.47619047619048,
+      "after": 38.25806451612903,
+      "beforeImpressions": 21,
+      "impressions": 31,
+      "change": 37.21812596006145
+    },
+    {
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 70.875,
+      "after": 38.714285714285715,
+      "beforeImpressions": 8,
+      "impressions": 7,
+      "change": 32.160714285714285
+    },
+    {
+      "keyword": "中絶 理由 ランキング",
+      "targetPath": "/ranking/abortion-rate",
+      "before": 40,
+      "after": 9.666666666666666,
+      "beforeImpressions": 1,
+      "impressions": 3,
+      "change": 30.333333333333336
     },
     {
       "keyword": "地方債 利率 ランキング",
       "targetPath": "/blog/local-government-debt-burden",
-      "before": 44.5,
-      "after": 3.625,
-      "beforeImpressions": 2,
-      "impressions": 8,
-      "change": 40.875
-    },
-    {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 31,
-      "after": 69.42857142857143,
-      "beforeImpressions": 6,
+      "before": 30.666666666666668,
+      "after": 3.7142857142857144,
+      "beforeImpressions": 3,
       "impressions": 7,
-      "change": -38.42857142857143
-    },
-    {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 79,
-      "after": 40.714285714285715,
-      "beforeImpressions": 6,
-      "impressions": 7,
-      "change": 38.285714285714285
-    },
-    {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 78.75,
-      "after": 41.37931034482759,
-      "beforeImpressions": 20,
-      "impressions": 29,
-      "change": 37.37068965517241
-    },
-    {
-      "keyword": "自動車保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 67,
-      "after": 36.2,
-      "beforeImpressions": 8,
-      "impressions": 10,
-      "change": 30.799999999999997
-    },
-    {
-      "keyword": "日本 米 消費量",
-      "targetPath": "/ranking/rice-consumption-quantity",
-      "before": 51,
-      "after": 21,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 30
-    },
-    {
-      "keyword": "県債 利率 ランキング",
-      "targetPath": "/blog/local-government-debt-burden",
-      "before": 39,
-      "after": 12.333333333333334,
-      "beforeImpressions": 1,
-      "impressions": 6,
-      "change": 26.666666666666664
-    },
-    {
-      "keyword": "漁かく量",
-      "targetPath": "/japan/fishery-marine",
-      "before": 37,
-      "after": 63,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": -26
+      "change": 26.952380952380953
     },
     {
       "keyword": "郡山 人口",
@@ -97,15 +88,24 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 26
+    },
+    {
+      "keyword": "合計特殊出生率 都道府県別 ランキング",
+      "targetPath": "/blog/fertility-rate-prefecture-gap",
+      "before": 1,
+      "after": 26.5,
+      "beforeImpressions": 3,
+      "impressions": 2,
+      "change": -25.5
     }
   ],
   "verdicts": [],
   "selected": {
     "keyword": "外国人",
     "targetPath": "/blog/foreign-residents-diversity-map",
-    "rank": 2.6729191090269637,
-    "impressions": 853,
-    "clicks": 50,
+    "rank": 2.6512166859791426,
+    "impressions": 863,
+    "clicks": 47,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
