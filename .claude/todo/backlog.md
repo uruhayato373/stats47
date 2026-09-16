@@ -683,7 +683,7 @@ updated: 2026-09-16
      → 2026-09-16 にオーナー指示で 1ヶ月待ちを前倒しし退役済み (manifest metaPending 0 を実測): `estat-fetch-meta.yml` +
      branch `estat-meta-run` + `proof-batch-statsids.json`、`discover-estat-candidates.yml` + branch `estat-discovery-run` +
      `discover-prefecture-candidates.mjs` + `prefecture-candidates.json` (読み手ゼロ)、`estat-city-discovery.json`
-     (読み手 2 件を catalog へ配線: estimate-city-data-size.mjs → `lib/estat-catalog/pulled.mjs`、estat-researcher → `search --collect-area 3`)。手順5 は完了
+     (読み手 2 件のうち estat-researcher は `search --collect-area 3` へ配線、estimate-city-data-size.mjs は D1 前提のため同日削除)。手順5 は完了
   6. `ssds-candidates.json`をcatalog派生に置換、find-metricsに未登録候補の索引を追加
 - **完了条件**: manifestの`collectAreas.{2,3}.metaPending`が0、consumer 3件の配線完了、旧スクリプト退役
   (旧スクリプトの退役は新カタログが最低1ヶ月安定稼働してから)
@@ -1482,20 +1482,21 @@ updated: 2026-09-16
 - **trigger**: 履歴書換えを実施する場合は、全clone・fork・open branchへの影響を合意し、専用maintenance windowを取る。
 - **禁止**: owner承認なしにfilter-repo、force push、branch削除を行わない。
 
-### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 6 本の削除可否
+### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 5 本の削除可否 (元 6 本、1 本は 2026-09-16 削除済み)
 
 タグ: [種類:意思決定] [実行:対話] [起票:2026-08-17]
 
 - **owner**: uruhayato373 (削除可否はオーナー判断)
 - **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
-  (下記「orphan 29 本の分類」)。残るのは (a) 群 6 本の削除可否だけ。
-- **(a) 役目が終わっている 6 本**: `blog/gen-chart-svg.cjs` (自身が
+  (下記「orphan 29 本の分類」)。残るのは (a) 群 5 本の削除可否だけ。
+- **(a) 役目が終わっている 5 本**: `blog/gen-chart-svg.cjs` (自身が
   「⚠ SUPERSEDED (2026-05-27)」と明記) / `lib/update-skill-primary-agent.cjs` (一回きりの移行) /
   `note/generate-remaining-covers.cjs` (一回きりの一括生成) / `note/inject-affiliate-blocks.mjs`
-  (一回きりの一括注入) / `sns/backfill-x-templates.cjs` (一回きりの backfill) /
-  `estat/estimate-city-data-size.mjs` (廃止済み永続 D1 の行数試算が前提)。
-- **次**: オーナーが 6 本の削除を承認する。承認後は git rm するだけ (履歴から復元可)。
-- **完了条件**: 6 本が削除されるか、残す理由が本エントリに追記されている。
+  (一回きりの一括注入) / `sns/backfill-x-templates.cjs` (一回きりの backfill)。
+  `estat/estimate-city-data-size.mjs` (廃止済み永続 D1 の行数試算が前提) は 2026-09-16 にオーナー承認で削除済み
+  (出力 `estat-city-estimate-report.json`・cache `estat-city-meta-cache/` と local-resources / .gitignore の登録も同時に撤去)。
+- **次**: オーナーが残り 5 本の削除を承認する。承認後は git rm するだけ (履歴から復元可)。
+- **完了条件**: 5 本が削除されるか、残す理由が本エントリに追記されている。
 - **禁止**: (b)(c) 群を巻き込んで一括削除しない。
 
 #### orphan 29 本の分類 (2026-08-17 実測・`check-agent-skill-consistency.cjs`)
@@ -1526,7 +1527,7 @@ DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp
 `blog/select-conformance-candidates.mjs` / `gsc/discover-trends-fetch.cjs` /
 `note/affiliate-incremental.sh` / `note/download-affiliate-banners.mjs` /
 `note/expand-for-fix.mjs` / `note/publish-new-note.sh` / `psi/generate-cwv-pr.mjs` /
-`estat/estimate-city-data-size.mjs` は D1 前提が明確なので (a) へ寄せた
+`estat/estimate-city-data-size.mjs` は D1 前提が明確なので (a) へ寄せた (2026-09-16 削除済み)
 
 **なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
 これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。

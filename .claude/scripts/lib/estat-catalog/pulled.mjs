@@ -1,5 +1,5 @@
 // pull 済みカタログ (`catalog.mjs pull` が置く .local/estat-catalog/) の読み取り。
-// CLI の search と他スクリプト (estimate-city-data-size 等) で同じ読み方を共有する。
+// CLI の search と、索引を読む他スクリプトで同じ読み方を共有する。
 import fs from "node:fs";
 import path from "node:path";
 
@@ -15,16 +15,4 @@ export function loadPulled(pullDir) {
     if (fs.existsSync(p)) tables.push(...JSON.parse(fs.readFileSync(p, "utf8")));
   }
   return { surveys, tables };
-}
-
-/** 指定 collectArea の現役表 (removedAt 無し) を getStatsList 要約と同じ 4 フィールドに絞る */
-export function listTablesByCollectArea(tables, collectArea) {
-  return tables
-    .filter((t) => Number(t.collectArea) === Number(collectArea) && !t.removedAt)
-    .map((t) => ({
-      statsDataId: t.statsDataId,
-      statName: t.statName ?? "",
-      title: t.title ?? "",
-      govOrg: t.govOrg ?? null,
-    }));
 }

@@ -38,10 +38,6 @@
     {
       "path": ".local/geo-source-*",
       "ageDays": 30
-    },
-    {
-      "path": ".claude/state/estat-city-meta-cache",
-      "ageDays": 30
     }
   ],
   "scratchRoots": {

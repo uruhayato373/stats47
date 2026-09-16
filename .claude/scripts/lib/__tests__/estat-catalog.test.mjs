@@ -339,12 +339,12 @@ test("computeSurveysSummary: statCode 単位に集計し removedAt は除外す�
   assert.equal(summary[0].metaFetched, 1);
 });
 
-// --- pulled.mjs: pull 済み索引の読み取り (estat-city-discovery.json の置換経路) ---
+// --- pulled.mjs: pull 済み索引の読み取り ---
 
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { listTablesByCollectArea, loadPulled } from "../estat-catalog/pulled.mjs";
+import { loadPulled } from "../estat-catalog/pulled.mjs";
 
 function makePullDir() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "estat-catalog-pull-"));
@@ -379,14 +379,4 @@ test("loadPulled は surveys の statCode 順に tables を連結し、索引が
 test("loadPulled は manifest が無ければ pull を促して throw する", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "estat-catalog-empty-"));
   assert.throws(() => loadPulled(dir), /catalog\.mjs pull/);
-});
-
-test("listTablesByCollectArea は removedAt 無しの指定 collectArea だけを getStatsList 要約 4 フィールドに絞る", () => {
-  const { tables } = loadPulled(makePullDir());
-  const rows = listTablesByCollectArea(tables, 3);
-  assert.deepEqual(rows, [
-    { statsDataId: "A1", statName: "国勢調査", title: "市区町村 表", govOrg: "総務省" },
-    { statsDataId: "B1", statName: "人口動態", title: "市区町村", govOrg: null },
-  ]);
-  assert.equal(listTablesByCollectArea(tables, 2).length, 1);
 });
