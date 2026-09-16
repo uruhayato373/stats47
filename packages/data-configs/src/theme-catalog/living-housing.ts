@@ -12,10 +12,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "shortLabel": "空き家率",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "空き家率は主問に直接答える見出し指標として残す。"
+        "proposedBy": "令和6年版高齢社会白書 第1章第2節4「生活環境」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "内閣府の高齢社会白書は、居住者が長期不在の「使用目的のない空き家」がこの20年で約1.9倍に増えたことを住宅・土地統計調査の数値で示し、高齢化に伴う住まいの承継が進まない実態を政策課題として位置付けている。この白書の記述は、空き家比率が単なる余剰住宅の指標ではなく、世帯の高齢化・継承の停滞を映す指標であることを裏付けており、テーマ「住宅ストックは余っているか」の中心的な問いに直接対応する。",
+        "adoptionCriteria": ["representativeness", "readerValue"],
+        "readerQuestion": "自分の住む都道府県では、使われていない空き家がどれくらいの割合で増えているか。",
+        "targetReaderOrDecision": "地域の空き家対策や住宅承継の必要性を判断したい自治体職員・住民"
       }
     },
     {
@@ -23,10 +26,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "shortLabel": "持ち家率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "持ち家率は「住宅ストックは余っているか」を読むため主要画面へ配置する。"
+        "proposedBy": "令和6年版高齢社会白書 第1章第2節4「生活環境」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は65歳以上の者の住宅所有状況として持家率が8割を超えることを示し、高齢期の住まいの安定性を測る基礎データとして持ち家比率を扱っている。この記述は、持ち家率が世帯の資産・居住継続の安定度を表す指標であることを裏付け、空き家比率と対にして地域差を比較する意義を補強する。",
+        "adoptionCriteria": ["complementarity", "dataQuality"],
+        "readerQuestion": "自分の都道府県の持ち家率は全国平均や過去と比べて高いか低いか。",
+        "targetReaderOrDecision": "住宅政策の地域比較を行う自治体職員・研究者"
       }
     },
     {
@@ -56,10 +62,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "shortLabel": "世帯数",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "世帯数は「住む世帯はどう変わるか」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "令和5年版高齢社会白書 第1章第1節3「家族と世帯」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2023/html/zenbun/s1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は、高齢者のいる世帯数を全世帯数（5,191万4千世帯）と対比して示しており、世帯数そのものが世帯構成の変化を測る基準単位として用いられている。この記述は、世帯数がテーマ「住む世帯はどう変わるか」における分母として不可欠であり、他の世帯構成比指標（核家族世帯率など）と組み合わせて初めて地域差や時系列変化を解釈できることを裏付ける。",
+        "adoptionCriteria": ["comparability", "complementarity"],
+        "readerQuestion": "自分の都道府県の総世帯数はどのように推移してきたか。",
+        "targetReaderOrDecision": "住宅需要や世帯構成の変化を把握したい自治体の住宅政策担当者"
       }
     },
     {
@@ -67,10 +76,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "shortLabel": "核家族世帯率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "核家族世帯率は「住む世帯はどう変わるか」を読むため主要画面へ配置する。"
+        "proposedBy": "令和5年版高齢社会白書 第1章第1節3「家族と世帯」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2023/html/zenbun/s1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は、昭和55年に半数を占めていた三世代世帯が令和3年には夫婦のみ世帯・単独世帯へと構成割合が入れ替わったことを示しており、核家族世帯（夫婦のみ・夫婦と子・ひとり親と子）の増加傾向を裏付ける一次資料となっている。この記述は、核家族世帯割合が単身化と並んで世帯構成の変化を捉える鍵指標であることを示し、テーマの章立て「世帯構成の変化」に直接対応する。",
+        "adoptionCriteria": ["representativeness", "complementarity"],
+        "readerQuestion": "自分の都道府県で核家族世帯の割合はどのように変化してきたか。",
+        "targetReaderOrDecision": "世帯構成の変化を踏まえて住宅・福祉施策を検討する自治体職員"
       }
     },
     {
@@ -122,10 +134,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "shortLabel": "DID人口密度（DID面積1km²当たり）",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A",
-        "surveyedAt": "2026-09-08",
-        "rationale": "DID面積1km²を基準にした人口集中地区人口密度として比較する。関連指標の索引で補足する。"
+        "proposedBy": "埼玉県 統計FAQ「人口集中地区（DID）とは何ですか」（埼玉県企画財政部統計課）",
+        "sourceUrl": "https://www.pref.saitama.lg.jp/a0206/toukeifaq/q3-1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この解説は、人口集中地区（DID）が「人口密度4,000人/km2以上」という基準で市区町村内に設定される統計上の地域単位であることを示しており、DID人口密度指標はこの基準がどの程度の実際の集積度として実現しているかを都道府県間で比較できる代表的な尺度になる。住宅ストックの余り方や住戸の広さを論じる際、人口がどれだけ密に集まっている地域に住宅が立地しているかという前提条件を示す点で、都市の人口集積と計画上の区域の章の問いに直接つながる。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の住む都道府県の人口集中地区はどれくらい人が密集しているのか。",
+        "targetReaderOrDecision": "都市計画やコンパクトシティ政策を検討する自治体職員・住民"
       }
     },
     {
@@ -166,10 +181,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "shortLabel": "単独世帯割合",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "単独世帯割合は「住む世帯はどう変わるか」を読むため主要画面へ配置する。"
+        "proposedBy": "鹿児島県 令和2年国勢調査結果（人口等基本集計結果：世帯の構成）（鹿児島県企画部統計課）",
+        "sourceUrl": "https://www.pref.kagoshima.jp/ac09/tokei/bunya/kokutyo/r2kokutyo/r2jinnkoutoukihonnsyuukeisetainokousei.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この結果は、令和2年国勢調査において単独世帯（1人世帯）が一般世帯の中で最も多い世帯類型になったことを都道府県単位で示しており、単身化と一人暮らしの進行度合いを地域間で比較する際の直接的な代表指標となる。住む世帯の形がどう変わるかというテーマの問いに対し、世帯構成の変化を定量的に裏付ける基礎データとして機能する。",
+        "adoptionCriteria": ["representativeness", "readerValue"],
+        "readerQuestion": "自分の住む地域では一人暮らし世帯がどれくらいの割合を占めているのか。",
+        "targetReaderOrDecision": "単身世帯向け住宅政策や見守りサービスを検討する自治体・事業者"
       }
     },
     {
@@ -177,10 +195,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "shortLabel": "最低居住面積水準以上の世帯割合",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/k-sugata/pdf/shiki.pdf",
-        "surveyedAt": "2026-09-08",
-        "rationale": "持ち家/借家の平均床面積を、世帯の住居条件という問いへ接続する。"
+        "proposedBy": "徳島県庁コールセンターすだちくんコール「誘導居住面積水準、最低居住面積水準とは何ですか。」（徳島県）",
+        "sourceUrl": "https://www.pref.tokushima.lg.jp/FAQ/docs/00018685/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この解説は、最低居住面積水準が国の住生活基本計画に基づき世帯人数ごとに定められた「必要不可欠な住宅の広さ」の政策的しきい値であることを示している。この水準以上の世帯割合は、住戸の広さが最低限の生活水準を満たしているかを都道府県間で比較できる指標であり、どれくらいの広さに住むかというテーマの章の問いに直接応える。",
+        "adoptionCriteria": ["representativeness", "comparability", "dataQuality"],
+        "readerQuestion": "自分の地域では最低限必要とされる広さに満たない世帯がどれくらいいるのか。",
+        "targetReaderOrDecision": "住宅の質・広さに関する政策目標の達成度を確認したい行政担当者"
       }
     }
   ],

@@ -12,10 +12,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "離職率",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "離職率は主問に直接答える見出し指標として残す。"
+        "proposedBy": "令和4年就業構造基本調査結果報告書 用語の解説（茨城県統計課、総務省統計局調査に基づく）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/rodo/syugyo04-2/yougo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省の就業構造基本調査を基にした用語解説は「離職者」を過去1年間に仕事を辞めて現在無業の者と定義しており、離職率はこの離職者数を継続就業者・転職者と合わせた母数で割った値である。仕事を辞めて再就業していない層を都道府県間で比較できるため、雇用環境から労働市場を離れる動きを直接示す代表指標として位置付けられる。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の地域は仕事を辞めたまま無業になっている人の割合が高いのか低いのか。",
+        "targetReaderOrDecision": "地域の雇用の安定性を評価したい自治体職員や求職者支援機関の担当者。"
       }
     },
     {
@@ -23,10 +26,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "転職率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "転職率は「離職と転職」を読むため主要画面へ配置する。"
+        "proposedBy": "令和4年就業構造基本調査結果報告書 用語の解説（茨城県統計課、総務省統計局調査に基づく）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/rodo/syugyo04-2/yougo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ用語解説は「転職者」を過去1年間に前職を辞めて現職に就いた者と定義しており、転職率はこの転職者数を現在の有業者数で割った値である。離職率が仕事を離れる動きを表すのに対し、転職率は仕事を移る動きを表すため、両者を並べることで離職と転職という異なる就業異動の種類を読み分けられる補完的な指標となる。",
+        "adoptionCriteria": ["complementarity", "comparability"],
+        "readerQuestion": "自分の地域では仕事を辞めた人のうちどれくらいが別の仕事に移っているのか。",
+        "targetReaderOrDecision": "地域の人材流動性を把握したい労働政策担当者や転職支援サービス事業者。"
       }
     },
     {
@@ -34,10 +40,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "有効求人倍率",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "有効求人倍率は主問に直接答える見出し指標として残す。"
+        "proposedBy": "一般職業紹介状況(職業安定業務統計) 労働統計所在案内（労働政策研究・研修機構）",
+        "sourceUrl": "https://www.jil.go.jp/kokunai/statistics/shozai/html/a01.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "一般職業紹介状況の解説は有効求人倍率をハローワークの月間有効求人数を月間有効求職者数で割った値と定義しており、求職者1人あたり何件の求人があるかを毎月・地域別に把握できる。求人と求職のバランスを直接示すため、人手不足や雇用の需給ひっ迫の度合いを測る中心指標として位置付けられる。",
+        "adoptionCriteria": ["representativeness", "dataQuality"],
+        "readerQuestion": "自分の地域は求職者に対して求人がどれだけあるのか。",
+        "targetReaderOrDecision": "求人難や人手不足の実態を確認したい企業経営者や自治体の産業政策担当者。"
       }
     },
     {
@@ -45,10 +54,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "失業率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "失業率は「求人と失業の需給」を読むため主要画面へ配置する。"
+        "proposedBy": "労働力調査かんたんガイド（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/roudou/kantan/gaiyo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省統計局の解説によれば完全失業率は労働力調査の中核的な公表結果の一つであり、月例経済報告の雇用指標として景気判断や雇用対策に活用されている。国勢調査に基づく5年分の時系列データを都道府県別に比較することで、地域の労働市場の需給ひっ迫度を長期的に確認できる指標として位置付けられる。",
+        "adoptionCriteria": ["comparability", "dataQuality"],
+        "readerQuestion": "自分の地域の完全失業率はこの20年でどう変化してきたのか。",
+        "targetReaderOrDecision": "地域経済の景気判断や雇用対策の効果を確認したい行政担当者。"
       }
     },
     {
@@ -56,10 +68,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "就職率（公共職業安定所）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "公共職業安定所の就職率を求人・求職と職業紹介の章に配置する。人口の就業率とは区別する。"
+        "proposedBy": "一般職業紹介状況(職業安定業務統計) 労働統計所在案内（労働政策研究・研修機構）",
+        "sourceUrl": "https://www.jil.go.jp/kokunai/statistics/shozai/html/a01.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "一般職業紹介状況の解説では就職率をハローワークの就職件数を求職申込件数で除した値としており、求職活動がどれだけ実際の就職に結びついているかを示す。有効求人倍率が需給の量的バランスを示すのに対し、就職率は職業紹介の成立度合いを示すため、求人・求職環境を別角度から補完する指標として位置付けられる。",
+        "adoptionCriteria": ["complementarity", "readerValue"],
+        "readerQuestion": "自分の地域ではハローワークでの求職活動がどれだけ実際の就職につながっているのか。",
+        "targetReaderOrDecision": "職業紹介の実効性を確認したいハローワーク利用者や就労支援担当者。"
       }
     },
     {
@@ -67,10 +82,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "テレワーク率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/shugyou/2022/index.html",
-        "surveyedAt": "2026-09-08",
-        "rationale": "テレワーク率は「就業の状態と働き方」を読むため主要画面へ配置する。"
+        "proposedBy": "令和4年就業構造基本調査結果報告書 用語の解説（茨城県統計課、総務省統計局調査に基づく）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/rodo/syugyo04-2/yougo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "就業構造基本調査の用語解説はテレワークを有業者がICTを活用してオフィス以外の場所で働くことと定義しており、令和4年調査で初めて都道府県別に集計された新しい働き方の指標である。就業の状態や通勤との関係を地域間で比較する材料となり、離職・転職といった移動とは異なる「働き方の柔軟性」という角度からテーマを補完する。",
+        "adoptionCriteria": ["complementarity", "readerValue"],
+        "readerQuestion": "自分の地域では働く人のうちどれくらいがテレワークを実施しているのか。",
+        "targetReaderOrDecision": "地域の働き方の柔軟性や通勤負担の変化を知りたい在宅勤務希望者や企業の人事担当者。"
       }
     },
     {
@@ -89,10 +107,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "月間平均実労働時間（男性）",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/F",
-        "surveyedAt": "2026-09-08",
-        "rationale": "月間平均を基準にした月間平均実労働時間数として比較する。関連指標の索引で補足する。"
+        "proposedBy": "労働政策研究・研修機構「労働統計用語解説」112 実労働時間数の項（JILPT）",
+        "sourceUrl": "https://www.jil.go.jp/kokunai/statistics/yougo/d21.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この用語解説は、毎月勤労統計調査で用いられる実労働時間数を「労働者が実際に労働した時間数」と明確に定義し、所定内・所定外労働時間との合成関係を示している。月間平均実労働時間数（男性）はこの実労働時間数を性別・都道府県別に集計した値であり、長時間就業の地域差を比較する章の土台となる基礎統計として位置付けられる。",
+        "adoptionCriteria": ["comparability", "dataQuality"],
+        "readerQuestion": "自分の住む都道府県の男性労働者は全国平均より長く働いているか。",
+        "targetReaderOrDecision": "労働時間の地域差を確認したい読者・自治体の労働政策担当者。"
       }
     },
     {
@@ -100,10 +121,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "就業異動率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "政府統計の総合窓口(e-Stat)「指標計算式」F 労働 F04104「就業異動率」",
         "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/F",
-        "surveyedAt": "2026-09-08",
-        "rationale": "既存の長期チャートを指標カードからも見つけられるようにする。"
+        "surveyedAt": "2026-09-16",
+        "rationale": "e-Statの指標計算式ページは、就業異動率が転職者数・離職者数・新規就業者数を合算し15歳以上人口で割った合成指標であることを明示している。この定義は、離職・転職・新規就業という異なる動きをひとつの比率にまとめる指標であり、テーマの「離職・転職・就業異動の違い」という論点や「就業異動率を詳しく見る」章の代表指標として直接対応する。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の県では転職・離職・新規就業を合わせた人の動きはどれくらい活発か。",
+        "targetReaderOrDecision": "地域の労働移動の活発さを都道府県間で比較したい読者。"
       }
     },
     {
@@ -111,10 +135,13 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "shortLabel": "昼夜間人口比率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/k-sugata/pdf/shiki.pdf",
-        "surveyedAt": "2026-09-08",
-        "rationale": "既存の通勤流動図に、就業・通学地への集中を読むための基準を付ける。"
+        "proposedBy": "政府統計の総合窓口(e-Stat)「指標計算式」A 人口・世帯 A6108「昼夜間人口比率」",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A",
+        "surveyedAt": "2026-09-16",
+        "rationale": "e-Statの指標計算式ページはA6108コードを昼夜間人口比率として定義しており、国勢調査の常住人口に対する通勤・通学による流入出を反映した指標であることを示す。この比率は「通勤通学と昼間人口」章で、就業地としての中心性や通勤流動の地域差を捉える中心指標として機能する。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の県は通勤・通学で人口が流入する側か、流出する側か。",
+        "targetReaderOrDecision": "通勤・通学による昼夜間の人口移動を把握したい読者や都市計画担当者。"
       }
     },
     {

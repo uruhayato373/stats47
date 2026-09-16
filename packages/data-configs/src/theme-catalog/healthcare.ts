@@ -12,10 +12,13 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "医師数（人口10万人当たり）",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
-        "surveyedAt": "2026-09-08",
-        "rationale": "人口10万人を基準にした医師数として比較する。対象範囲を表示して主章に配置する。"
+        "proposedBy": "医師・歯科医師・薬剤師統計 平成18(2006)年 結果の概要 3-2-4「都道府県(従業地)別にみた人口10万対医師数」（厚生労働省）",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/ishi/06/kekka1-2-4.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省の医師・歯科医師・薬剤師統計は、人口10万対医師数を全国値と都道府県別値の両方で継続的に公表しており、経年比較・地域比較の基準指標として扱われている。医療人材の供給という章の冒頭で示す代表指標として適しており、読者が「自分の地域に医師はどれだけいるか」を最初に確認する起点になる。",
+        "adoptionCriteria": ["representativeness", "comparability", "readerValue"],
+        "readerQuestion": "自分の都道府県には人口あたりでどれくらいの医師がいるのか。",
+        "targetReaderOrDecision": "医療提供体制の地域差を把握したい住民・自治体担当者。"
       }
     },
     {
@@ -23,10 +26,13 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "看護師・准看護師数（人口10万人当たり）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
-        "surveyedAt": "2026-09-08",
-        "rationale": "人口10万人を基準にした看護師・准看護師数として比較する。対象範囲を表示して主章に配置する。"
+        "proposedBy": "看護職員確保対策（看護師等の確保を促進するための措置に関する基本的指針の紹介ページ）（厚生労働省）",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000095525.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省は看護師等の人材確保の促進に関する法律に基づく基本指針で、看護師等の確保を良質かつ適切な医療提供の前提条件として明示している。医師数だけでは捉えられない病床運営の実働人員という角度を補い、医師数と対にして地域の医療人材の厚みを示す補完的指標になる。",
+        "adoptionCriteria": ["complementarity", "readerValue"],
+        "readerQuestion": "医師だけでなく看護師の配置も地域によって十分なのか。",
+        "targetReaderOrDecision": "医療人材確保の政策担当者・就業先を検討する看護職。"
       }
     },
     {
@@ -34,10 +40,13 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "一般病院数（人口10万人当たり）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
-        "surveyedAt": "2026-09-08",
-        "rationale": "人口10万人を基準にした一般病院数として比較する。対象範囲を表示して主章に配置する。"
+        "proposedBy": "令和4年医療施設調査・病院報告の概況（千葉県健康福祉部健康福祉指導課、令和4年）",
+        "sourceUrl": "https://www.pref.chiba.lg.jp/kenshidou/toukeidata/kakushukousei/r04-shisetsu.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "医療施設調査に基づくこの概況資料は、人口10万人当たりの病院数を都道府県順位（最高17.8、最低3.6）とともに示しており、人口規模の異なる都道府県間で入院医療を担う施設の密度を比較する基準として位置付けている。医療人材と施設の章で「医療資源の供給」をまず把握するための出発点となる指標である。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の都道府県には人口当たりどれくらいの病院があるのか。",
+        "targetReaderOrDecision": "地域の入院医療インフラの充実度を把握したい住民・自治体担当者。"
       }
     },
     {
@@ -45,10 +54,13 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "一般病院病床数（人口10万人当たり）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
-        "surveyedAt": "2026-09-08",
-        "rationale": "人口10万人を基準にした一般病院病床数として比較する。対象範囲を表示して主章に配置する。"
+        "proposedBy": "令和4年医療施設調査・病院報告の概況（千葉県健康福祉部健康福祉指導課、令和4年）",
+        "sourceUrl": "https://www.pref.chiba.lg.jp/kenshidou/toukeidata/kakushukousei/r04-shisetsu.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同資料は病床数を人口10万人当たりで示し、都道府県順位（最高2328.1、最低798.9）を併記することで、病院数だけでは捉えきれない収容力の地域差を明らかにしている。病院数と病床数を対にして見ることで、施設の「数」と「規模」の両面から医療供給を評価できる点が、病院数指標を補完する。",
+        "adoptionCriteria": ["comparability", "complementarity"],
+        "readerQuestion": "病院の数は同程度でも、実際に入院できる病床はどれだけ確保されているのか。",
+        "targetReaderOrDecision": "地域医療計画の担当者や病床整備の議論をする自治体職員。"
       }
     },
     {
@@ -67,10 +79,13 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "1人当たり国民医療費",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
-        "surveyedAt": "2026-09-08",
-        "rationale": "1人当たりを基準にした1人当たりの国民医療費として比較する。対象範囲を表示して主章に配置する。"
+        "proposedBy": "医療費の地域差分析（厚生労働省保険局）",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/database/iryomap/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省は都道府県別の1人当たり医療費を年齢構成の違いを補正した地域差指数として毎年公表しており、医療費水準の地域比較の公式な物差しとして位置づけている。1人当たり国民医療費はこの地域差指数の基礎データであり、医療費章で地域間の負担差を示す代表指標として適している。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の都道府県の1人当たり医療費は全国平均と比べて高いのか低いのか。",
+        "targetReaderOrDecision": "医療費の地域差を確認したい住民・保険者・自治体担当者。"
       }
     },
     {
@@ -78,10 +93,13 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "一般病院の平均在院日数",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
-        "surveyedAt": "2026-09-08",
-        "rationale": "平均を基準にした一般病院平均在院日数として比較する。対象範囲を表示して主章に配置する。"
+        "proposedBy": "令和4年医療施設調査・病院報告の概況（千葉県健康福祉部健康福祉指導課、令和4年）",
+        "sourceUrl": "https://www.pref.chiba.lg.jp/kenshidou/toukeidata/kakushukousei/r04-shisetsu.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この資料は平均在院日数を病床種類別・都道府県順位付きで公表しており、病床数や病院数という「供給量」だけでなく、実際の入院利用の効率性・回転率を示す別角度の指標として位置付けている。病床利用率と対になることで、供給と利用を分けて把握するという章立ての狙いに直結する。",
+        "adoptionCriteria": ["comparability", "complementarity", "dataQuality"],
+        "readerQuestion": "自分の地域の病院は全国平均に比べて入院が長引きやすいのか、それとも早く退院できるのか。",
+        "targetReaderOrDecision": "入院医療の効率性を比較したい研究者・医療政策担当者。"
       }
     },
     {
@@ -89,10 +107,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "病床利用率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "病床利用率は「入院の供給と利用」を読むため主要画面へ配置する。"
+        "proposedBy": "社会・人口統計体系 都道府県データ「社会生活統計指標」I 健康・医療（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010209",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省統計局の社会・人口統計体系は、都道府県別の医療提供体制を横断比較するための指標群としてI10104「一般病院病床利用率」を1975年度から継続収録しており、病床が地域でどの程度埋まっているかを示す代表的な供給利用指標として位置付けている。テーマ「入院の供給と利用」で病床数・平均在院日数と組み合わせて読むことで、供給量だけでなく実際の稼働状況を都道府県間で比較できる。",
+        "adoptionCriteria": ["representativeness", "comparability", "dataQuality"]
       }
     },
     {
@@ -100,10 +119,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "生活習慣病死亡（日本人人口10万人当たり）",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
-        "surveyedAt": "2026-09-08",
-        "rationale": "日本人人口10万人を基準にした生活習慣病による死亡者数として比較する。関連指標の索引で補足する。"
+        "proposedBy": "社会・人口統計体系 都道府県データ「社会生活統計指標」I 健康・医療（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010209",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ社会・人口統計体系の都道府県データはI06101「生活習慣病による死亡者数（人口10万人当たり）」を1975年度から収録しており、人口動態統計を都道府県間で比較可能な形に整えた死因別死亡の代表指標として扱われている。テーマの「主要死因による死亡」の章で、地域の健康アウトカムの違いを把握する中心指標として機能する。",
+        "adoptionCriteria": ["representativeness", "comparability", "dataQuality"]
       }
     },
     {
@@ -177,10 +197,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "気分障害の外来受療率（人口10万人当たり）",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004026105",
-        "surveyedAt": "2026-09-08",
-        "rationale": "人口10万人を基準にした気分障害（うつ病を含む）の受療率（外来）として比較する。関連指標の索引で補足する。"
+        "proposedBy": "令和5年患者調査 全国編Z5-2 第5-2表「受療率（人口10万対）の年次推移，入院－外来×傷病分類別」（厚生労働省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004025892",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省の患者調査は傷病分類別受療率の再掲項目として「気分［感情］障害（躁うつ病を含む）」を入院・外来別に区分して長期時系列で公表しており、精神疾患の中でも特にうつ病を含む気分障害の外来受療動向を他の傷病と同一基準で追える構成になっている。テーマの「こころの状態と相談・受療」の章で、医療機関を実際に利用している患者側の規模を示す指標として、供給側指標（医師数や病床）を補完する役割を持つ。",
+        "adoptionCriteria": ["representativeness", "complementarity", "comparability"]
       }
     },
     {
@@ -188,10 +209,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "健康寿命（男性）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.mhlw.go.jp/content/10904750/001363069.pdf",
-        "surveyedAt": "2026-09-08",
-        "rationale": "医師数・医療費・粗死亡率に偏る現行構成へ健康の結果指標を置く。男女を対で扱う。"
+        "proposedBy": "令和6年版高齢社会白書 第1章第2節2「健康・福祉」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_2_2.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は健康寿命を「健康上の問題で日常生活に制限のない期間」と定義し、国民生活基礎調査を用いたサリバン法により男女別に算出した全国値を平均寿命の延びと対比させて掲載している。男性の健康寿命は平均寿命との差（不健康期間）を測る基礎となる数値であり、テーマの「健康に生活できる期間」の章で、都道府県別の健康寿命を読み解く際の定義的な裏付けになる。",
+        "adoptionCriteria": ["representativeness", "readerValue"]
       }
     },
     {
@@ -199,10 +221,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "健康寿命（女性）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.mhlw.go.jp/content/10904750/001363069.pdf",
-        "surveyedAt": "2026-09-08",
-        "rationale": "医師数・医療費・粗死亡率に偏る現行構成へ健康の結果指標を置く。男女を対で扱う。"
+        "proposedBy": "令和6年版高齢社会白書 第1章第2節2「健康・福祉」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_2_2.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同白書は女性の健康寿命についても男性と並置して示しており、平均寿命の延び（女性1.15年）を上回る健康寿命の延び（女性1.76年）という形で、単なる長寿化ではなく健康に生活できる期間そのものの伸びを評価している。テーマの「健康寿命と平均寿命」の章で、男女差・都道府県差を語る際の全国基準値として女性の健康寿命を単独で扱う根拠になる。",
+        "adoptionCriteria": ["representativeness", "readerValue", "complementarity"]
       }
     },
     {
@@ -210,10 +233,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "shortLabel": "救急搬送の病院収容所要時間",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.fdma.go.jp/publication/rescue/items/kkkg_r07_01_kyukyu.pdf",
-        "surveyedAt": "2026-09-08",
-        "rationale": "供給密度では分からない緊急時のアクセスを追加し、過疎×医療Geoと接続する。"
+        "proposedBy": "令和6年版 消防白書 第2章第5節「1．救急業務の実施状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r6/chapter2/section5/68130.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書は病院収容所要時間を「119番通報を受けてから医師に引き継ぐまでに要した時間」と定義し、全国平均の年次推移をコロナ禍前との比較で示すことで、救急搬送の迅速性が経年で悪化しているかを継続的に監視する指標として位置付けている。テーマの「救急搬送の所要時間と初診時の傷病程度」の章で、地域の医療アクセスの実態を利用者側の体感時間として示す指標になる。",
+        "adoptionCriteria": ["representativeness", "readerValue", "dataQuality"]
       }
     },
     {

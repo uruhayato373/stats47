@@ -12,10 +12,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "shortLabel": "財政力指数",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "財政力指数は主問に直接答える見出し指標として残す。"
+        "proposedBy": "財政用語の解説「財政力指数」（長泉町公式サイト）",
+        "sourceUrl": "https://www.town.nagaizumi.lg.jp/soshiki/kikaku/4/1631.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方公共団体の財政運営を語るうえで、自主的な税収でどこまで標準的な行政需要を賄えるかを示すこの指数は最も基本的な出発点であり、地方交付税に頼る度合いという地域差を1つの数値に集約できる。都道府県間の財源基盤の違いを比較する章の中心指標として、他の収支・負担指標を読み解く前提を与える。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の都道府県は自前の税収でどれだけ標準的な行政サービスを賄えているか。",
+        "targetReaderOrDecision": "都道府県間の財源基盤の違いを比較したい読者。"
       }
     },
     {
@@ -23,10 +26,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "shortLabel": "経常収支比率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "経常収支比率は「財政運営の余裕と負担」を読むため主要画面へ配置する。"
+        "proposedBy": "財政用語の解説「経常収支比率」（長泉町公式サイト）",
+        "sourceUrl": "https://www.town.nagaizumi.lg.jp/soshiki/kikaku/4/1631.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この指標は財源が義務的経費で固定化されている度合い、すなわち政策的な自由度をどれだけ残せているかを測るものであり、財政力指数が示す財源の量とは別の角度から財政運営の余裕を評価できる。硬直度が高いほど新規施策や緊急対応に回せる一般財源が乏しいことを示すため、財政運営の余裕と負担を扱う章で財政力指数を補完する役割を持つ。",
+        "adoptionCriteria": ["complementarity", "comparability"],
+        "readerQuestion": "経常的な支出に一般財源がどれだけ縛られており、政策的に自由に使える余地がどれくらい残っているか。",
+        "targetReaderOrDecision": "財政運営の弾力性・硬直化の程度を都道府県間で比較したい読者。"
       }
     },
     {
@@ -34,10 +40,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "shortLabel": "実質公債費比率",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "実質公債費比率は主問に直接答える見出し指標として残す。"
+        "proposedBy": "健全化判断比率の説明「実質公債費比率」（大阪市公式サイト）",
+        "sourceUrl": "https://www.city.osaka.lg.jp/zaisei/page/0000661357.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方公共団体の財政健全化法に基づく4指標の一つであり、単年度の借入返済負担が財政規模に対してどれだけ重いかを公営企業や特別会計への繰出しまで含めて捉える点で、単純な起債残高だけでは見えない現在の負担の実態を示す。現在の負担を扱う章で、将来負担比率と対をなす指標として位置付けられる。",
+        "adoptionCriteria": ["representativeness", "dataQuality"],
+        "readerQuestion": "自分の都道府県は毎年度の借金返済の負担がどれだけ財政規模に対して重いか。",
+        "targetReaderOrDecision": "現在の公債費負担の重さを都道府県間で比較したい読者。"
       }
     },
     {
@@ -45,10 +54,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "shortLabel": "将来負担比率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "将来負担比率は「財政運営の余裕と負担」を読むため主要画面へ配置する。"
+        "proposedBy": "健全化判断比率の説明「将来負担比率」（大阪市公式サイト）",
+        "sourceUrl": "https://www.city.osaka.lg.jp/zaisei/page/0000661357.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "実質公債費比率が単年度の返済負担を示すのに対し、この指標は地方公社や第三セクターの損失補償まで含めた将来にわたる潜在的負債の残高を捉えるものであり、現在と将来の負担を区別して把握するというテーマの目的に直結する。財政健全化法の4指標の一つとして、都道府県間で共通の基準に基づき算定されるため比較可能性も高い。",
+        "adoptionCriteria": ["representativeness", "comparability", "complementarity"],
+        "readerQuestion": "自分の都道府県は将来にわたってどれだけの潜在的な負債を抱えているか。",
+        "targetReaderOrDecision": "将来世代への負担の大きさを都道府県間で比較したい読者。"
       }
     },
     {
@@ -122,10 +134,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "shortLabel": "人件費割合",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "人件費割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+        "proposedBy": "財政用語の解説「人件費」（富山市公式ウェブサイト）",
+        "sourceUrl": "https://www.city.toyama.lg.jp/shisei/yosan/1010829/1003118.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "人件費は性質別歳出の中で義務的経費の柱の一つであり、経常収支比率を押し上げる主要因でもあるため、歳出決算総額に占める人件費の割合を見ることで、財政の硬直化の内訳を職員給与や議員報酬といった具体的な支出項目に分解して確認できる。性質別歳出を分けて見る章で、経常収支比率の内実を裏付ける補完的な指標となる。",
+        "adoptionCriteria": ["complementarity", "readerValue"],
+        "readerQuestion": "都道府県の歳出のうちどれだけが職員給与など人件費に充てられているか。",
+        "targetReaderOrDecision": "性質別歳出の構成を職種・給与の観点から確認したい読者。"
       }
     },
     {
@@ -133,10 +148,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "shortLabel": "扶助費割合",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "扶助費割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+        "proposedBy": "地方財政の状況（総務省、令和7年3月）第1部 4 地方経費の内容「性質別歳出」",
+        "sourceUrl": "https://www.soumu.go.jp/main_content/000998475.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省の地方財政白書は扶助費を義務的経費の一つとして位置付け、生活困窮者・児童・障害者等への援助に要する経費であり任意に削減することが困難な支出であると説明している。扶助費割合は歳出に占める義務的な社会保障関係経費の重さを示し、都道府県財政の弾力性を測る指標として「財政運営の余裕と負担」の章の問いに直結する。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の都道府県は歳出のうちどれくらいを社会保障関係の給付に振り向けているか。",
+        "targetReaderOrDecision": "都道府県の財政の硬直度合いを他地域と比較したい読者。"
       }
     },
     {
@@ -144,10 +162,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "shortLabel": "投資的経費割合",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "投資的経費割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+        "proposedBy": "令和5年版 地方財政白書ビジュアル版（令和3年度決算）「歳出 4.性質別歳出」（総務省）",
+        "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/r05data/2023data/r05020304.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方財政白書ビジュアル版は性質別歳出を義務的経費・投資的経費・その他の経費の3区分で説明しており、投資的経費は普通建設事業費など社会資本整備に充てられる裁量的支出として義務的経費と対比される。投資的経費割合は歳出構成の裁量性を示し、扶助費割合など義務的経費の比率と組み合わせることで財政運営の余裕を多面的に把握できる。",
+        "adoptionCriteria": ["representativeness", "complementarity", "comparability"],
+        "readerQuestion": "この都道府県は社会資本整備にどれだけ歳出を振り向けているか、それは年々どう変化しているか。",
+        "targetReaderOrDecision": "公共投資の水準を地域間・時系列で比較したい読者。"
       }
     },
     {
