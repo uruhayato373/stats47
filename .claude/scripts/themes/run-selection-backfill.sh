@@ -25,6 +25,10 @@
 #   bash .claude/scripts/themes/run-selection-backfill.sh --themes tsunami-exposure,ports --in-place
 #   bash .claude/scripts/themes/run-selection-backfill.sh --dry-run              # LLM を呼ばない (配線確認)
 #   bash .claude/scripts/themes/run-selection-backfill.sh --push-develop         # 終了後 develop へ push
+#   bash .claude/scripts/themes/run-selection-backfill.sh --resume --skip-pull   # 中断した run の続き (worktree を reset しない)
+#
+# セッションから切り離して回す (ハーネスの timeout に殺されない):
+#   nohup setsid bash .claude/scripts/themes/run-selection-backfill.sh > .local/selection-backfill/full-run.log 2>&1 &
 #
 # 正典: .claude/todo/backlog.md THEME-SELECTION-BACKFILL-01 / skill /backfill-theme-selection
 set -euo pipefail
@@ -43,6 +47,7 @@ IN_PLACE=0
 SKIP_PULL=0
 PUSH_DEVELOP=0
 NO_COMMIT=0
+RESUME=0
 WORKTREE="${SELECTION_BACKFILL_WORKTREE:-$MAIN_ROOT/../stats47-selection-backfill}"
 EXTRA_RUN=()
 
@@ -64,6 +69,7 @@ while [ $# -gt 0 ]; do
     --skip-pull) SKIP_PULL=1; shift ;;
     --push-develop) PUSH_DEVELOP=1; shift ;;
     --no-commit) NO_COMMIT=1; shift ;;
+    --resume) RESUME=1; shift ;;
     --worktree) WORKTREE="$2"; shift 2 ;;
     -h|--help) usage; exit 0 ;;
     *) die "unknown arg: $1 (--help で使い方)" ;;
@@ -87,7 +93,13 @@ if [ "$IN_PLACE" = 1 ]; then
 else
   BRANCH="selection-backfill/$DATE_TAG"
   git -C "$MAIN_ROOT" fetch -q origin develop
-  if [ -d "$WORKTREE/.git" ] || [ -f "$WORKTREE/.git" ]; then
+  if [ "$RESUME" = 1 ]; then
+    # 中断した run の続き: worktree の通過済み書き込み (未コミット) を reset で消さない。
+    # 対象は listTargets が現在のカタログから再導出するので、書き込み済みの指標は自然に外れる
+    [ -d "$WORKTREE/.git" ] || [ -f "$WORKTREE/.git" ] || die "--resume: worktree が無い ($WORKTREE)"
+    BRANCH="$(git -C "$WORKTREE" rev-parse --abbrev-ref HEAD)"
+    log "worktree 再開 (reset なし): $WORKTREE (branch $BRANCH)"
+  elif [ -d "$WORKTREE/.git" ] || [ -f "$WORKTREE/.git" ]; then
     log "worktree 再利用: $WORKTREE → origin/develop へ reset"
     git -C "$WORKTREE" checkout -q -B "$BRANCH" origin/develop
     git -C "$WORKTREE" reset -q --hard origin/develop
