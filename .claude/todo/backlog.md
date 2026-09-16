@@ -21,6 +21,64 @@ updated: 2026-09-16
 
 ## 🔴 高 — 今月中に着手したい
 
+### [UI-CARD-TYPOGRAPHY-UNIFY-01] カードの見出し・本文・余白を役割契約に統一する (A 済 / B 実装済・検証途中 / C 未着手)
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-09-16] [期日:2026-09-30]
+
+- **owner**: site-ux-manager (横断契約・機械ゲート) / ranking-ui-manager (ranking 面) / theme-ui-manager (themes 面)
+- **背景 (2026-09-16 実測・5 ページ・デスクトップ幅)**: 同じ役割のカードが feature ごとに見出しサイズ/太さ/余白を上書き・再実装し、
+  ranking 詳細で本文カード見出しが 14/600・14/500・16/600・14/700 の 4 系統、FAQ 本文 14px / 考察 15px に対し他カード 12px、
+  `/areas/04000` 右レールで 14/500 と 16/600 が混在、`/themes/real-income` でチャート見出しが同一ページ内 16/600 (9 枚) と
+  14/600 (6 枚)、category の分類カードが 13/700・余白 8/12。規約 (`04_デザインシステム.md`) はカード見出し/本文/余白の数値を
+  持たず、旧資料 `.claude/design-system/{prohibited,principles,quick-reference}.md` は余白を `p-5以上`/`p-6`/`p-0禁止` と 3 値で
+  並立させコード正典 `SurfaceCard p-4` と食い違う。計測方法: DOM で `border`+`bg-card` を持つ最外郭要素ごとに最初の見出し
+  (h2-h4 / font-weight≥600) の font-size/weight、本文の最頻 font-size、padding を集計。
+- **契約 (確定。数値はコードが正典・文書へ二重管理しない)**:
+  - レール/リンク一覧カード = `RailCard` 既定 (h3 `text-sm font-medium text-muted-foreground`・ヘッダ `px-4 py-3`・本文 `px-4 pb-4 pt-3`)、
+    リンク行 = `RailLinkItem` (`py-1.5 text-sm`、2026-09-16 に text-xs から統一)、2 行目 `text-xs`
+  - 見出し付き本文カード = `SectionCard` (`components/surface/SurfaceCard.tsx`、RailCard と同じ HeaderedSurfaceCard の variant。
+    h3 `text-sm font-semibold text-foreground`・ヘッダ `px-4 py-3`・本文 `p-4`)。`ChartPanel` と同じ見た目。非チャート用
+  - メタ文字 = `text-xs`。`text-[10px]`/`text-[11px]`/`text-[13px]` の任意値は使わない
+  - `titleClassName` のサイズ/太さ上書き禁止 (色だけ可: AreaProfileSidebar の emerald/amber)
+  - ページ節見出し: h2 `text-xl font-bold`、節内の小見出し h3 `text-base font-semibold`。h1 だけ `text-2xl font-bold`。`text-lg` 見出し禁止
+  - カード内カード禁止は維持 (SectionCard の内側は枠なしのリンク行にする)
+- **済 (A) — commit `3ca99124c`**: SectionCard 新設 + card census 登録 / RailLinkItem text-sm / RailCard 再実装 7 件
+  (RelatedAreas・AreaProfileSidebar・CitiesNavCard・CorrelationSection+Skeleton・PortStatisticsMapCard・RankingSidebarSkeleton・RailAdSlot)
+  を共通部品化 / blog 関連ランキング・目次と CityRankingSection の titleClassName 上書き削除 (ArticleTableOfContents の compact prop 削除) /
+  楽天・返礼品・運営者カードを semibold + text-xs へ / PortalCategoryGrid sidebar・RailLinksCard の任意 px を scale へ。
+  `/areas/04000` 右レール 4 枚が 14/500・リンク 14px に揃ったことをブラウザ実測済み
+- **B — 実装済み・検証途中 (この PC で 2026-09-16 に Sonnet が編集、型/design-system/card census/eslint は緑、対象 vitest は実行途中で中断)**:
+  対象 14 ファイル = RankingSourceCard / RelatedRankingsGrid (SectionCard 化。内側 9 枚は枠付き SurfaceLinkCard から枠なしリンク行へ =
+  カード内カード禁止のため。**見た目の確認が未了**) / DataUsageCard (SurfaceCard + tint) / RankingPageCardsSkeleton / AreaRelatedRankingsCard /
+  AreaRelatedBlogArticles (h2 text-2xl→text-xl) / AreaDatabookSection (節内 h3 text-lg→text-base semibold) / ThemeRelatedArticles /
+  ThemeEvidenceTopicsSection / ThemeIndicatorCatalogSection (h2 text-lg→text-xl) / MetricFocusCharts・MetricSwitcherPanel
+  (`titleClassName="text-base"` 削除 = themes のチャート見出し 16→14px) / ChartState (h3 text-lg→text-sm) / SurveyTaxonomyCard section 変種
+  (h2 text-lg→text-xl、p-5 撤去)。**次の PC ではまず** `cd apps/web && npx vitest run src/features/ranking src/features/area-profile
+  src/features/area-databook src/features/theme-dashboard src/features/survey src/components` を通し、`git diff` で
+  ThemeEvidenceTopicsSection の見出し扱い (h2 を節見出しとして残したか SectionCard title にしたか) を確認する
+- **C — 未着手 (機械ゲート + 文書)**:
+  1. `apps/web/scripts/check-design-system.mjs` に規則を追加 (既存の `rules` 配列と同形式・`allow` で例外):
+     `no-card-title-scale-override` (`titleClassName=` に `text-(xs|sm|base|lg|xl|2xl)|font-\w+` を含む。features/app 対象) /
+     `no-manual-card-header` (`border-b` と `px-N` と `py-N` を同一 class 文字列に持つ手書きヘッダ。features/app 対象、`src/components/**` は許可) /
+     `no-arbitrary-text-size` (`text-\[(10|11|13)px\]`。A 実施前は 87 箇所/40 ファイル。残存ファイルを**縮小専用 allowlist** に列挙し新規を止める。
+     `src/features/ogp/**` と Remotion 系は対象外) / `no-text-lg-heading` (`<h[23]` と `text-lg` の同居。`MarkdownSectionRenderer` は allowlist) /
+     `no-h2-text-2xl` (hero・PageHeader 以外)。checker のテストがあれば規則ごとに 1 ケース足す
+  2. 文書: `docs/01_技術設計/04_デザインシステム.md` に「カードの役割契約」節 (部品名で書く。数値は書かない) / `.claude/rules/ui-components.md` に
+     「RailCard/SectionCard の titleClassName でサイズを上書きしない」「feature 内で SurfaceCard p-0 + 手書きヘッダを作らない」を追記 /
+     `.claude/design-system/{prohibited,principles,quick-reference}.md` の余白数値 (`p-5以上`/`p-6`/`p-0禁止`) を削除し「コード正典 = SurfaceCard p-4」へ
+  3. ブラウザ再計測 (上記の計測方法) を `/ranking/natto-consumption-expenditure` `/areas/04000` `/themes/real-income` `/category/economy`
+     `/blog/local-government-debt-burden` で行い、役割ごとに 1 系統に収束したことを確認。RelatedRankingsGrid の枠なし化と
+     ranking 右レールのリンク 14px 化の見た目を目視
+- **未決 (オーナー判断)**: ① FAQ/定義/考察 (開閉 UI) の本文 14px は規約どおりだが他カードの 12px と並ぶと大きく見える —
+  他カードを 14px へ上げるか開閉 UI を 13px へ寄せるか ② category の分類カード (13/700・8/12、`CategoryTopicGroups`) を契約へ寄せるか
+  ③ `MarkdownSectionRenderer` の h2 16px (テーマ本文内) の扱い
+- **環境メモ**: この Windows PC で node_modules が lock とずれ `@babel/core` 不在 → pre-commit の `next lint` が落ちる。`npm install` で復元済み。
+  共有ツリーで作業するときは `git commit -- <paths>` で staged を残さない (別セッションの commit に巻き込まれた実例あり)
+- **停止条件**: 契約テスト (`right-rail-banner-contract` / `page-shell-rail-contract` / `left-rail-layout-contract` / chart contract audit) を弱めない。
+  デプロイはオーナー指示で 1 回
+- **完了条件**: 5 ページ計測で役割ごとに 1 系統 / `check-design-system` の新規則が緑で既存違反 0 (allowlist は縮小専用) / 文書 3 点更新 /
+  `npm run type-check --workspace=apps/web` と対象 vitest が緑
+
 ### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
 
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:audit-weekly -- --base-url https://stats47.jp] [起票:2026-09-15]
