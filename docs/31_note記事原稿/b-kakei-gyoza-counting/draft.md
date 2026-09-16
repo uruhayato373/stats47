@@ -4,6 +4,7 @@ description: "餃子の街といえば宇都宮と浜松のはずでしょうか
 status: published
 note_url: "https://note.com/stats47/n/n2f50bb479647"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査

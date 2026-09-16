@@ -4,6 +4,7 @@ description: "バーゲンで値札が下がれば、消費者が払う金額も
 status: published
 note_url: "https://note.com/stats47/n/neb44a932f9f2"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査

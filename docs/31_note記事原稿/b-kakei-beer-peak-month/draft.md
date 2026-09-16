@@ -4,6 +4,7 @@ description: "ビールがいちばん売れる月はいつでしょうか。夏
 status: published
 note_url: "https://note.com/stats47/n/n5b11edb996f3"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査

@@ -4,6 +4,7 @@ description: "大学進学率が低い県は教育水準も低いのでしょう
 status: published
 note_url: "https://note.com/stats47/n/n2d53f8a5fbb8"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 学校基本調査

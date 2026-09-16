@@ -4,6 +4,7 @@ description: "支出額が多い県は、それだけたくさん食べている
 status: published
 note_url: "https://note.com/stats47/n/n7ba6c516c1e9"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査

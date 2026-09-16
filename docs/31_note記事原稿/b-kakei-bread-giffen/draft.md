@@ -4,6 +4,7 @@ description: "値段が上がると買う量も増える。食パンはそんな
 status: published
 note_url: "https://note.com/stats47/n/nc3a7ebf40516"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査

@@ -4,6 +4,7 @@ description: "ほうれんそうをよく食べる県は学力テストの上位
 status: published
 note_url: "https://note.com/stats47/n/n78ffa2c7da3b"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査

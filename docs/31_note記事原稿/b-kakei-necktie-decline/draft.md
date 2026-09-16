@@ -4,6 +4,7 @@ description: "市場が縮んだと聞いたとき、値段が下がったのか
 status: published
 note_url: "https://note.com/stats47/n/ncbfe818867f4"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査
