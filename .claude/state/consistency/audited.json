@@ -1,21 +1,9 @@
 {
-  "hash": "3e4c0788f21dee0114b0a0201984194e971135e3c3f314c5a3fbf49d433baeae",
-  "audited_at": "2026-09-16T04:22:23",
+  "hash": "f4bbc99ee141622a4ccb9f24d055e3cc6eafead1a88c171ab5ddfad25caf8519",
+  "audited_at": "2026-09-16T06:03:01",
   "files": [
-    ".agents/skills/estat/inspect-estat-meta/SKILL.md",
-    ".agents/skills/estat/search-estat/SKILL.md",
-    ".claude/agents/estat-researcher.md",
-    ".claude/agents/survey-curator.md",
-    ".claude/agents/theme-researcher.md",
-    ".claude/rules/estat-api.md",
-    ".claude/rules/r2-storage-design.md",
-    ".claude/scripts/estat/catalog.mjs",
-    ".claude/scripts/lib/__tests__/estat-catalog.test.mjs",
-    ".claude/scripts/lib/estat-catalog/api.mjs",
-    ".claude/scripts/lib/estat-catalog/index.mjs",
-    ".claude/scripts/lib/estat-catalog/normalize.mjs",
-    ".claude/scripts/lib/estat-catalog/s3.mjs",
-    ".claude/skills/estat/inspect-estat-meta/SKILL.md",
-    ".claude/skills/estat/search-estat/SKILL.md"
+    ".claude/rules/affiliate-ads-standards.md",
+    ".claude/rules/analytics-event-standards.md",
+    ".claude/skills/analytics/affiliate-improvement/reference/improvement-log.md"
   ]
 }
