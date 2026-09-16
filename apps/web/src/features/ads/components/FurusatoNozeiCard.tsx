@@ -72,7 +72,7 @@ export async function FurusatoNozeiCard({
           </TrackedAffiliateLink>
         </div>
 
-        <p className="text-sm font-bold text-foreground mb-3">
+        <p className="mb-3 text-sm font-semibold text-foreground">
           {headingPrefix}{link.prefName}の人気返礼品
         </p>
 
@@ -100,14 +100,14 @@ export async function FurusatoNozeiCard({
                   </div>
                 )}
                 <div className="p-2">
-                  <p className="text-[11px] leading-tight line-clamp-2 text-foreground">
+                  <p className="text-xs leading-tight line-clamp-2 text-foreground">
                     {item.name}
                   </p>
                   <p className="text-xs font-bold text-primary mt-1">
                     寄附額 {item.price.toLocaleString("ja-JP")}円
                   </p>
                   {item.reviewCount > 0 && (
-                    <p className="text-[10px] text-muted-foreground/70 mt-0.5">
+                    <p className="text-xs text-muted-foreground/70 mt-0.5">
                       ★{item.reviewAverage} ({item.reviewCount})
                     </p>
                   )}
@@ -143,7 +143,7 @@ export async function FurusatoNozeiCard({
         className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 text-foreground transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <div>
-          <p className="text-sm font-bold text-foreground">
+          <p className="text-sm font-semibold text-foreground">
             {headingPrefix}{link.prefName}のふるさと納税を探す
           </p>
           <p className="mt-0.5 text-xs text-muted-foreground">

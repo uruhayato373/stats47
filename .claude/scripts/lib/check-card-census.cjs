@@ -62,6 +62,10 @@ const BASELINE = new Set([
   "RailSearchCard",
   "RankingDefinitionCard",
   "RankingSourceCard",
+  // 見出し付き本文カード (2026-09-16)。RailCard と同じ HeaderedSurfaceCard 実装で variant だけが違う
+  // (h3 text-sm font-semibold / body p-4)。非チャートの本文カードが ChartPanel を借用したり
+  // feature 内で SurfaceCard p-0 + 手書きヘッダを再実装するのを止めるための共有 composite。
+  "SectionCard",
   "SurfaceCard",
   "SurfaceLinkCard",
   "SurveyCard",

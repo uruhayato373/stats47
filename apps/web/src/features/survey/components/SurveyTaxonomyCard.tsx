@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { FileText } from "lucide-react";
 
-import { RailCard, SurfaceSection } from "@/components/surface";
+import { RailCard, RailLinkItem, RailLinkList, SurfaceSection } from "@/components/surface";
 
 import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
 
@@ -44,26 +44,78 @@ export function SurveyTaxonomyCard({
 }: SurveyTaxonomyCardProps) {
   if (surveys.length === 0) return null;
 
-  const body = (
-    <>
+  if (variant === "section") {
+    return (
+      <SurfaceSection className="mt-8 p-5">
+        <div className="flex items-center gap-2">
+          <FileText className="h-4 w-4 text-muted-foreground" />
+          <h2 className="text-lg font-bold text-foreground">{title}</h2>
+        </div>
+        <div className="mt-3">
+          {description && (
+            <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
+          )}
+          <nav aria-label={title} className="flex flex-col gap-0.5">
+            {surveys.map((survey) => {
+              const href = `/survey/${survey.id}`;
+              return (
+                <Link
+                  key={survey.id}
+                  href={href}
+                  className="py-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                  onClick={() => trackNavClick({ label: survey.id, href, surface })}
+                >
+                  {survey.name}
+                </Link>
+              );
+            })}
+          </nav>
+          {relatedItems.length > 0 && (
+            <>
+              <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
+                同じ調査のランキング
+              </p>
+              <nav className="mt-1 flex flex-col gap-0.5">
+                {relatedItems.map((item) => (
+                  <Link
+                    key={item.rankingKey}
+                    href={`/ranking/${item.rankingKey}`}
+                    className="py-1 text-xs transition-colors hover:text-primary"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </nav>
+            </>
+          )}
+        </div>
+      </SurfaceSection>
+    );
+  }
+
+  return (
+    <RailCard
+      title={title}
+      icon={<FileText className="h-4 w-4 text-muted-foreground" />}
+    >
       {description && (
         <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
       )}
-      <nav aria-label={title} className="flex flex-col gap-0.5">
+      <RailLinkList aria-label={title}>
         {surveys.map((survey) => {
           const href = `/survey/${survey.id}`;
           return (
-            <Link
+            <RailLinkItem
               key={survey.id}
               href={href}
-              className="py-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
+              className="font-medium text-foreground"
               onClick={() => trackNavClick({ label: survey.id, href, surface })}
             >
               {survey.name}
-            </Link>
+            </RailLinkItem>
           );
         })}
-      </nav>
+      </RailLinkList>
       {relatedItems.length > 0 && (
         <>
           <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
@@ -82,28 +134,6 @@ export function SurveyTaxonomyCard({
           </nav>
         </>
       )}
-    </>
-  );
-
-  if (variant === "section") {
-    return (
-      <SurfaceSection className="mt-8 p-5">
-        <div className="flex items-center gap-2">
-          <FileText className="h-4 w-4 text-muted-foreground" />
-          <h2 className="text-lg font-bold text-foreground">{title}</h2>
-        </div>
-        <div className="mt-3">{body}</div>
-      </SurfaceSection>
-    );
-  }
-
-  return (
-    <RailCard
-      title={title}
-      icon={<FileText className="h-4 w-4 text-muted-foreground" />}
-      bodyClassName="px-4 pb-4 pt-3"
-    >
-      {body}
     </RailCard>
   );
 }

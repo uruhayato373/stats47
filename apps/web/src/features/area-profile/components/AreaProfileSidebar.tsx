@@ -8,7 +8,7 @@ import {
 } from '@stats47/components/atoms/ui/tooltip';
 import { TrendingDown, TrendingUp } from 'lucide-react';
 
-import { SurfaceCard } from '@/components/surface';
+import { RailCard, RailLinkList } from '@/components/surface';
 
 import { selectDistinctProfileItems } from '../utils';
 
@@ -35,55 +35,53 @@ function RankingCard({ title, items, icon, titleClassName }: RankingCardProps) {
   const visibleItems = selectDistinctProfileItems(items, SIDEBAR_ITEM_LIMIT);
 
   return (
-    <SurfaceCard className="overflow-hidden p-0">
-      <div className="border-b border-border px-3 py-3">
-        <h3
-          className={`text-base font-semibold flex items-center gap-1.5 ${titleClassName}`}
-        >
-          {icon}
+    <RailCard
+      title={
+        <>
           {/* 件数は「全国上位に何件入っているか」の事実なので総数を出す */}
           {title}（{items.length}件）
-        </h3>
-      </div>
-      <div className="px-3 pb-3 pt-3">
-        <TooltipProvider delayDuration={300}>
-          <nav className="flex flex-col gap-0.5">
-            {visibleItems.map((item) => (
-              <Tooltip key={item.rankingKey}>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={`/ranking/${item.rankingKey}`}
-                    className="group flex items-center gap-2 px-2 py-1.5 rounded-md transition-colors hover:bg-accent/50"
+        </>
+      }
+      icon={icon}
+      titleClassName={titleClassName}
+    >
+      <TooltipProvider delayDuration={300}>
+        <RailLinkList>
+          {visibleItems.map((item) => (
+            <Tooltip key={item.rankingKey}>
+              <TooltipTrigger asChild>
+                <Link
+                  href={`/ranking/${item.rankingKey}`}
+                  className="group flex items-center gap-2 py-1.5 text-sm transition-colors hover:bg-accent/50"
+                >
+                  {/* 順位 */}
+                  <span
+                    className={`text-xs font-bold shrink-0 w-6 text-right whitespace-nowrap ${titleClassName}`}
                   >
-                    {/* 順位 */}
-                    <span
-                      className={`text-xs font-bold shrink-0 w-6 text-right whitespace-nowrap ${titleClassName}`}
-                    >
-                      {item.rank}位
-                    </span>
+                    {item.rank}位
+                  </span>
 
-                    {/* 指標名 */}
-                    <span className="flex-1 min-w-0 line-clamp-1 text-xs leading-relaxed">
-                      {item.indicator}
-                    </span>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="left" className="max-w-[240px]">
-                  <p className="font-medium">{item.indicator}</p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    全国{item.rank}位
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {item.value.toLocaleString('ja-JP')}
-                    {item.unit}（{item.year}）
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            ))}
-          </nav>
-        </TooltipProvider>
-      </div>
-    </SurfaceCard>
+                  {/* 指標名 */}
+                  <span className="flex-1 min-w-0 line-clamp-1 text-sm leading-relaxed">
+                    {item.indicator}
+                  </span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="left" className="max-w-[240px]">
+                <p className="font-medium">{item.indicator}</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  全国{item.rank}位
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {item.value.toLocaleString('ja-JP')}
+                  {item.unit}（{item.year}）
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </RailLinkList>
+      </TooltipProvider>
+    </RailCard>
   );
 }
 

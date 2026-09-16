@@ -44,8 +44,6 @@ export async function RelatedRankingsSection({
     <RailCard
       title="関連ランキング"
       icon={<BarChart3 className="h-4 w-4 text-muted-foreground" />}
-      titleClassName="text-base font-semibold text-foreground"
-      bodyClassName="p-4 pt-3"
     >
       <div className={compact ? "divide-y divide-border" : "grid grid-cols-1 gap-x-4 sm:grid-cols-2 lg:grid-cols-3"}>
         {rankings.map((ranking) => (

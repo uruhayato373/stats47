@@ -117,7 +117,8 @@ export function ArticleCard({
   );
 }
 
-interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title"> {
+interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title"> {
+  variant: "rail" | "section";
   title?: ReactNode;
   icon?: ReactNode;
   children: ReactNode;
@@ -126,7 +127,8 @@ interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title
   titleClassName?: string;
 }
 
-export function RailCard({
+function HeaderedSurfaceCard({
+  variant,
   title,
   icon,
   children,
@@ -135,7 +137,7 @@ export function RailCard({
   bodyClassName,
   titleClassName,
   ...props
-}: RailCardProps) {
+}: HeaderedSurfaceCardProps) {
   return (
     <SurfaceSection className={cn("p-0", className)} {...props}>
       {(title || icon || headerAction) && (
@@ -145,7 +147,9 @@ export function RailCard({
             {title && (
               <h3
                 className={cn(
-                  "truncate text-sm font-medium text-muted-foreground",
+                  variant === "rail"
+                    ? "truncate text-sm font-medium text-muted-foreground"
+                    : "text-sm font-semibold text-foreground",
                   titleClassName,
                 )}
               >
@@ -156,9 +160,37 @@ export function RailCard({
           {headerAction}
         </div>
       )}
-      <div className={cn("px-4 pb-4 pt-3", bodyClassName)}>{children}</div>
+      <div
+        className={cn(
+          variant === "rail" ? "px-4 pb-4 pt-3" : "p-4",
+          bodyClassName,
+        )}
+      >
+        {children}
+      </div>
     </SurfaceSection>
   );
+}
+
+interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title"> {
+  title?: ReactNode;
+  icon?: ReactNode;
+  children: ReactNode;
+  headerAction?: ReactNode;
+  bodyClassName?: string;
+  titleClassName?: string;
+}
+
+export function RailCard(props: RailCardProps) {
+  return <HeaderedSurfaceCard variant="rail" {...props} />;
+}
+
+/**
+ * 見出し付きコンテンツカード（本文中の非チャートカード）。
+ * ヘッダー/本文の視覚契約は ChartPanel と共有する (border-b px-4 py-3 / h3 text-sm font-semibold / p-4)。
+ */
+export function SectionCard(props: RailCardProps) {
+  return <HeaderedSurfaceCard variant="section" {...props} />;
 }
 
 interface RailLinkListProps extends ComponentPropsWithoutRef<"nav"> {
@@ -189,7 +221,7 @@ export function RailLinkItem({
   return (
     <Link
       className={cn(
-        "group flex items-center py-1.5 text-xs transition-colors hover:text-primary",
+        "group flex items-center py-1.5 text-sm transition-colors hover:text-primary",
         className,
       )}
       {...props}

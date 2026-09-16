@@ -52,17 +52,12 @@ export function PortalCategoryGrid({
           <span
             className={cn(
               "min-w-0 flex-1 font-medium text-foreground group-hover:text-primary",
-              variant === "sidebar" ? "text-[13px]" : "text-[15px]",
+              variant === "sidebar" ? "text-sm" : "text-[15px]",
             )}
           >
             {category.categoryName}
           </span>
-          <span
-            className={cn(
-              "tabular-nums text-muted-foreground",
-              variant === "sidebar" ? "text-[11px]" : "text-xs",
-            )}
-          >
+          <span className="tabular-nums text-xs text-muted-foreground">
             {category.count.toLocaleString()}件
           </span>
           <ChevronRight
@@ -78,7 +73,7 @@ export function PortalCategoryGrid({
         className={cn(
           "flex items-center justify-between border-b border-border font-semibold text-primary hover:bg-accent/50",
           variant === "sidebar"
-            ? "min-h-9 px-2 py-1.5 text-[13px]"
+            ? "min-h-9 px-2 py-1.5 text-sm"
             : "min-h-12 px-1 py-2.5 text-[15px] md:col-span-2",
         )}
       >

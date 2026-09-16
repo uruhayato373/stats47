@@ -285,7 +285,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     // レール末尾の sticky クラスタ: PCでTOCが読中に追従する。モバイルは本文冒頭だけを使う。
     const railSticky = (
         <div className="hidden lg:block">
-            <ArticleTableOfContents content={article.content} compact />
+            <ArticleTableOfContents content={article.content} />
         </div>
     );
 
