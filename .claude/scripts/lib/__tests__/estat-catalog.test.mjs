@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   classifyTimeKind,
   classRows,
+  normalizeCollectArea,
   normalizeTableRow,
   PREFECTURE_CODES,
   summarizeMeta,
@@ -70,6 +71,24 @@ test("normalizeTableRow: getStatsList/getMetaInfo 共通の TABLE_INF を正規�
   assert.equal(row.collectArea, "2");
   assert.deepEqual(row.mainCategory, { code: "02", name: "人口・世帯" });
   assert.equal(row.subCategory, null);
+});
+
+test("normalizeCollectArea: e-Stat実測の日本語ラベルを数字コードへ正規化する (2026-09-16回帰)", () => {
+  // 実測: getStatsList の COLLECT_AREA は型定義の "1"/"2"/"3" ではなく日本語ラベルを返す
+  // (初回run で全23,180件のcollectAreaが空扱いになりtoFetchMeta=0になった実障害)
+  assert.equal(normalizeCollectArea("全国"), "1");
+  assert.equal(normalizeCollectArea("都道府県"), "2");
+  assert.equal(normalizeCollectArea("市区町村"), "3");
+  assert.equal(normalizeCollectArea("2"), "2");
+  assert.equal(normalizeCollectArea("該当なし"), null); // getMetaInfo で観測される値
+  assert.equal(normalizeCollectArea(null), null);
+});
+
+test("normalizeTableRow: 日本語ラベルのCOLLECT_AREAでも正しい数字コードになる", () => {
+  const raw = { "@id": "0000010101", COLLECT_AREA: "都道府県" };
+  assert.equal(normalizeTableRow(raw, "9").collectArea, "2"); // ラベルが読めればfallbackより優先
+  const rawUnknown = { "@id": "0000010101", COLLECT_AREA: "該当なし" };
+  assert.equal(normalizeTableRow(rawUnknown, "2").collectArea, "2"); // 読めなければfallbackへ
 });
 
 test("classifyTimeKind: 名称の末尾から年次/年度/月次を判定する", () => {

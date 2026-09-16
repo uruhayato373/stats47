@@ -28,6 +28,21 @@ export function asArray(x) {
 }
 
 /**
+ * e-Stat の COLLECT_AREA は API 仕様上 "1"/"2"/"3" だが、実測 (2026-09-16 初回run) では
+ * getStatsList が日本語ラベル ("全国"/"都道府県"/"市区町村") を返す。getMetaInfo は
+ * "該当なし" 等の別値を返すこともある。数字コードに正規化できないものは null を返し、
+ * 呼び出し側の fallbackCollectArea (crawl 時に自分で指定した collectArea) に委ねる。
+ */
+const COLLECT_AREA_LABELS = { 全国: "1", 都道府県: "2", 市区町村: "3" };
+export function normalizeCollectArea(value) {
+  if (value == null) return null;
+  const s = String(value);
+  if (COLLECT_AREA_LABELS[s]) return COLLECT_AREA_LABELS[s];
+  if (/^[123]$/.test(s)) return s;
+  return null;
+}
+
+/**
  * getStatsList の TABLE_INF 項目、または getMetaInfo の METADATA_INF.TABLE_INF を
  * 共通の表行に正規化する (両者はフィールド名が一致するため 1 関数で扱える)。
  */
@@ -42,7 +57,7 @@ export function normalizeTableRow(raw, fallbackCollectArea = null) {
     surveyDate: raw.SURVEY_DATE != null ? String(raw.SURVEY_DATE) : null,
     openDate: raw.OPEN_DATE ?? null,
     updatedDate: raw.UPDATED_DATE ?? null,
-    collectArea: raw.COLLECT_AREA ?? fallbackCollectArea ?? null,
+    collectArea: normalizeCollectArea(raw.COLLECT_AREA) ?? fallbackCollectArea ?? null,
     mainCategory: raw.MAIN_CATEGORY
       ? { code: raw.MAIN_CATEGORY["@no"] ?? null, name: pickString(raw.MAIN_CATEGORY) }
       : null,
