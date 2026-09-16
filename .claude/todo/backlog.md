@@ -1209,6 +1209,27 @@ updated: 2026-09-16
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [PRECOMMIT-STAGED-SCOPE-01] pre-commit の working-tree 走査ゲートが、別セッションの未コミット編集で無関係な commit を止める
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs] [起票:2026-09-16]
+
+- **owner**: devops-runner
+- **trigger**: 同一作業ツリーで 2 セッション以上が並行するとき (この repo では常態)。次に同じ理由で commit が止まったら着手する。
+- **実測 (2026-09-16 17:0x JST)**: docs のみを staged した commit (`.claude/todo/backlog.md` +17 行) が、pre-commit の
+  `preflight-commit.mjs --commit-static` 内 **Card Census** (`check-card-census.cjs`) で中止された。原因は別セッションが
+  **unstaged** で編集中だった `apps/web/src/components/surface/SurfaceCard.tsx` の `SectionCard` (BASELINE 未登録)。
+  `check-card-census.cjs:86` は `fs.readdirSync` で working tree 全体を走査し、staged 内容を見ない。回避に使った
+  「origin/develop ベースの worktree + node_modules junction」は `git worktree remove --force` が junction を辿って本体の
+  `apps/*/node_modules` を消す事故を起こした (memory `feedback_worktree_junction_deletes_target`)。
+- **次**: `preflight-commit.mjs` に既にある `stagedWebFiles()` (ESLint ゲートが使用、staged な `apps/web/src` の TS/TSX が無ければ skip) を
+  `--commit-static` の Card Census / Ad Placement / Static Accessibility にも適用し、staged に `apps/web/src/**/*.tsx` が無い commit では
+  skip する (`skipped: true` を出力に残す)。CI の `npm run preflight` / `preflight:pr` は従来どおり全体走査のまま (縮退させない)。
+  `preflight-commit.test.mjs` に「staged が docs のみ + working tree に BASELINE 外 *Card がある → commit-static は緑」の固定を足す。
+- **停止条件・禁止**: staged に *.tsx がある commit の検査強度を落とさない。gate を `--no-verify` で迂回する運用にしない。
+  worktree へ本体の `node_modules` を junction で共有しない。
+- **完了条件**: 上記の再現条件 (docs のみ staged + 別セッションの未登録 Card が unstaged) で pre-commit が通り、
+  同じ状態で `npm run preflight` は従来どおり Card Census で落ちる。
+
 ### [CATEGORY-NAV-CONSOLIDATION-01] カテゴリ一覧UIの2実装 (PortalCategoryGrid / CategoryNavGrid) 統合検討
 
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-15]
