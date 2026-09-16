@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-15T08:52:59.436Z",
+  "generatedAt": "2026-09-16T10:44:38.813Z",
   "masterSurveyCount": 150,
   "ranking": {
-    "metrics": 2559,
-    "activeMetrics": 2416,
-    "applicableMetrics": 2472,
-    "activeApplicableMetrics": 2330,
+    "metrics": 2563,
+    "activeMetrics": 2420,
+    "applicableMetrics": 2476,
+    "activeApplicableMetrics": 2334,
     "notApplicable": 87,
     "activeNotApplicable": 86,
-    "resolved": 2472,
+    "resolved": 2476,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2330,
+    "activeResolved": 2334,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -137,7 +137,7 @@
       "establishment-enterprise-census": 11,
       "factory-location-survey": 3,
       "farmland-transfer-conversion-report": 1,
-      "fire-annual-report": 13,
+      "fire-annual-report": 15,
       "fishery-aquaculture-production": 21,
       "fishery-census": 10,
       "fixed-asset-tax-land-statistics": 5,
@@ -157,7 +157,7 @@
       "housing-starts-statistics": 14,
       "inbound-consumption-survey": 3,
       "industrial-statistics": 1,
-      "insurance-rate-org-statistics": 8,
+      "insurance-rate-org-statistics": 10,
       "japan-post-statistics": 6,
       "job-placement-statistics": 11,
       "junior-high-athletics-membership-survey": 10,
@@ -2557,7 +2557,7 @@
     },
     {
       "surveyId": "fire-annual-report",
-      "rankingCount": 13,
+      "rankingCount": 15,
       "themeKeys": [
         "safety"
       ],
@@ -2804,7 +2804,7 @@
     },
     {
       "surveyId": "insurance-rate-org-statistics",
-      "rankingCount": 8,
+      "rankingCount": 10,
       "themeKeys": [],
       "blogSlugs": [
         "annual-sunshine-duration-vs-auto-liability-insurance-amount",
