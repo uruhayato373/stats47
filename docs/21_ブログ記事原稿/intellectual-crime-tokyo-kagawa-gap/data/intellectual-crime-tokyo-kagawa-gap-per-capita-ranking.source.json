@@ -1,0 +1,15 @@
+{
+  "kind": "derived",
+  "rankingKeys": ["intellectual-crime-per-100k", "total-population"],
+  "year": "2023",
+  "unit": "件",
+  "label": "知能犯認知件数（人口10万人当たり）",
+  "readerLabel": "人口10万人当たり知能犯認知件数",
+  "transform": "intellectual-crime-per-100k の認知件数 ÷ total-population の人口 × 100000 (編集部算出、小数第1位)",
+  "formula": "value = count(intellectual-crime-per-100k, pref, 2023) / population(total-population, pref, 2023) * 100000",
+  "source": "r2:app/ranking/intellectual-crime-per-100k/values.json + r2:app/ranking/total-population/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking (件数・人口) → 編集部計算",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug intellectual-crime-tokyo-kagawa-gap --keys intellectual-crime-per-100k,total-population --dry-run; 上記2ファイルの values を areaCode で join し value/population*100000 を再計算",
+  "fetchedAt": "2026-09-16T00:00:00.000Z",
+  "generatedBy": "article-writer (manual per-capita calculation)"
+}

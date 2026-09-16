@@ -21,6 +21,18 @@ updated: 2026-09-16
 
 ## 🔴 高 — 今月中に着手したい
 
+### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
+
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-23]
+
+- **背景**: 統計そのものより「悩み・不安」起点の記事がSEOに効くという仮説で、白書(NotebookLM)調査+note/X調査の両方で裏付けが取れた5テーマを記事化した。5本とも `quality-gate.mjs` / `article-factual-check.mjs` / blog-critic すべて PASS 済み (`docs/21_ブログ記事原稿/{nursery-shortage-urban-prefecture, vacant-housing-rate-inherited-home-risk, elderly-welfare-expenditure-prefecture-gap, evacuation-plan-coverage-urban-prefecture-gap, intellectual-crime-tokyo-kagawa-gap}/`)。
+- **公開の現在地**: `/publish-bulk-articles` の Phase 1(検証)・Phase 2(staging、`.local/r2/app/blog/<slug>/` に `published: true` で配置済み)までは完了。Phase 3(OGP/カード背景のCodex生成)で停止 — このセッションでは Codex MCP が `CONNECTION_CLOSED` だった。ユーザーが `codex login` を完了させたことは確認済みだが、**MCP再接続には新しいセッション起動が必要**(同一セッション内では再接続できなかった)。
+- **画像生成の準備**: 5本分の背景生成リクエストは `.local/blog-imagegen/requests/<slug>.json` に作成済み (プロンプト・promptHash・出力先 `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` まで確定)。新セッションでCodex MCPが繋がったら `npm run blog-images:codex -- ingest-article --slug <slug> --input <path> --prompt-hash <hash>` → `generate-blog-thumbnails.ts --slug <5slugs>` から Phase 3 を再開し、Phase 4(R2 push・all.json反映・cache purge)→ Phase 5(HTTP検証)へ進める。
+- **SNS下書き**: X投稿文5本・Instagramキャプション5本は作成済み、`.claude/state/sns/pain-point-series-drafts.md` に保存済み。**投稿・予約は記事が本番公開されてから、ユーザーの明示許可を得て実施する**(まだ実行していない)。X下書き作成agentの申し送り: 各投稿に添付する画像とチャートSVGの形式一致は未確認、投稿前に要突合。
+- **次**: 新セッションで `codex login status` → MCP接続確認 → 上記Phase 3から再開。
+- **停止条件**: 画像なし(共有背景fallback)でR2にpushしない(OGP/カードが404で公開される事故を防ぐ設計)。
+- **完了条件**: 5記事すべてが本番で200 + OGP/thumbnail画像が正しく出る + SNS投稿(X/IG)まで実施されている。
+
 ### [UI-CARD-TYPOGRAPHY-UNIFY-01] カードの見出し・本文・余白を役割契約に統一する (A 済 / B 実装済・検証途中 / C 未着手)
 
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-09-16] [期日:2026-09-30]

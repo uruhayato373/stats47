@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
+  "year": "2022",
+  "unit": "千円",
+  "label": "老人福祉費",
+  "readerLabel": "老人福祉費",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/per-capita-elderly-welfare-expenditure-65plus-pref-municipal/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug elderly-welfare-expenditure-prefecture-gap --keys per-capita-elderly-welfare-expenditure-65plus-pref-municipal --with-map",
+  "fetchedAt": "2026-09-15T21:41:17.567Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
