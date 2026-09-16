@@ -12,6 +12,7 @@ import {
   toGeoScopeStorageEntityKind,
   validateMunicipalityCatalogs,
 } from '..';
+import { METRICS_REGISTRY } from '../../registry';
 
 describe('municipality geo scope and catalog', () => {
   it('municipality-setと個別municipalityだけを自治体scopeと判定する', () => {
@@ -50,9 +51,16 @@ describe('municipality geo scope and catalog', () => {
     );
   });
 
-  it('active city metric 184件を候補母集団として列挙し、全件に理由を持つ', () => {
+  it('active city metric 全件を候補母集団として列挙し、全件に理由を持つ', () => {
     const entries = listMunicipalityMetricAvailability();
-    expect(entries).toHaveLength(184);
+    // 母集団は MetricConfig SSOT から導出する (件数を直書きすると city entity を持つ config を
+    // 1 本足すたびに落ちる。2026-09-16 に 184→188 で実際に落ちた)。
+    const expectedKeys = Object.values(METRICS_REGISTRY)
+      .filter((metric) => metric.isActive && metric.entities.includes('city'))
+      .map((metric) => metric.key)
+      .sort();
+    expect(entries.map((entry) => entry.metricKey).sort()).toEqual(expectedKeys);
+    expect(entries.length).toBeGreaterThanOrEqual(184);
     for (const { availability } of entries) {
       if (availability.status !== 'published') {
         expect(availability.reason.length).toBeGreaterThan(0);
@@ -81,6 +89,8 @@ describe('municipality geo scope and catalog', () => {
 
     // 全量公開 (2026-09-01 オーナー指示): 候補184 − 除外13 = 171。
     // 除外13 = cities.json不在4 + 値重複7 + データ品質監査未了2 (理由はcatalogのunsupported/unknownに記録)。
+    // 2026-09-16 以降に足された city entity 付き config (火災 2・自動車保険 2 等) は catalog 未登録 = unknown で、
+    // 公開集合 171 には入らない (公開時に catalog へ published を書く)。
     expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(171);
     for (const key of [
       'total-population',
