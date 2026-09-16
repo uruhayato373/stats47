@@ -37,7 +37,7 @@ THEMES=""
 MODEL=claude-sonnet
 EFFORT=medium
 CONCURRENCY=2
-BUDGET_USD=4
+BUDGET_USD=5
 DRY_RUN=0
 IN_PLACE=0
 SKIP_PULL=0
@@ -58,7 +58,7 @@ while [ $# -gt 0 ]; do
     --effort) EFFORT="$2"; shift 2 ;;
     --concurrency) CONCURRENCY="$2"; shift 2 ;;
     --budget-usd) BUDGET_USD="$2"; shift 2 ;;
-    --capacity-wait-min|--capacity-retries|--max-fail-rate|--min-entries-for-rate) EXTRA_RUN+=("$1" "$2"); shift 2 ;;
+    --chunk-size|--capacity-wait-min|--capacity-retries|--max-fail-rate|--min-entries-for-rate) EXTRA_RUN+=("$1" "$2"); shift 2 ;;
     --dry-run) DRY_RUN=1; shift ;;
     --in-place) IN_PLACE=1; shift ;;
     --skip-pull) SKIP_PULL=1; shift ;;

@@ -9,7 +9,7 @@
  *   apply   --theme <key> --input <json> [--dry-run] [--require-catalog] [--surveyed-at ...]
  *                                          モデル出力 JSON を gate に通し、通過分だけカタログへ書く。結果 JSON を stdout へ
  *   run     [--themes a,b] [--limit N] [--concurrency 1-2] [--model claude-sonnet] [--effort low|medium]
- *           [--budget-usd 4] [--capacity-wait-min 30] [--capacity-retries 3] [--max-fail-rate 0.3]
+ *           [--chunk-size 6] [--budget-usd 5] [--capacity-wait-min 30] [--capacity-retries 3] [--max-fail-rate 0.3]
  *           [--min-entries-for-rate 10] [--report <dir>] [--dry-run]
  *                                          headless claude CLI でテーマを並列 2 まで処理し、gate → 書き込み → report
  *
@@ -286,34 +286,96 @@ function emptyThemeResult(target) {
   };
 }
 
+function chunkArray(items, size) {
+  const out = [];
+  for (let i = 0; i < items.length; i += size) out.push(items.slice(i, i + size));
+  return out;
+}
+
+const EMPTY_USAGE = { inputTokens: 0, outputTokens: 0, totalTokens: 0, thinkingTokens: 0, costUsd: 0, numTurns: 0, modelId: null };
+
+/**
+ * 1 テーマを --chunk-size 指標ずつ claude に渡す (healthcare 38 指標を 1 call に載せると予算上限・
+ * コンテキスト肥大で丸ごと落ちるため)。チャンクごとに gate → 書き込みまで済ませるので、
+ * 途中の chunk が落ちても通過済みは残る。枠エラー (capacity-exhausted) だけは run 全体を止めるため再 throw。
+ */
 async function processTheme(target, opts, state) {
   const result = emptyThemeResult(target);
   if (opts.dryRun) {
     result.status = "dry-run";
     result.untouched = 0;
+    result.chunks = chunkArray(target.metrics, opts.chunkSize).length;
     return result;
   }
-  const prompt = buildPrompt(target, { surveyedAt: opts.surveyedAt });
-  fs.writeFileSync(path.join(opts.localDir, `${target.themeKey}.prompt.md`), prompt);
-  const parsed = await callClaude(prompt, opts, state);
-  result.usage = { ...parsed.usage, costUsd: parsed.costUsd, modelId: parsed.modelId, numTurns: parsed.numTurns };
-  fs.writeFileSync(path.join(opts.localDir, `${target.themeKey}.output.json`), parsed.text);
-  let output;
-  try {
-    output = JSON.parse(parsed.text);
-  } catch {
-    result.status = "invalid-json";
-    result.error = `モデル出力が JSON でない: ${parsed.text.slice(0, 120)}`;
-    return result;
-  }
-  const applied = await applyOutput(target, output, {
-    surveyedAt: opts.surveyedAt,
-    dryRun: false,
-    requireCatalog: opts.requireCatalog,
-    fetchSource: opts.fetchSource,
+  const chunks = chunkArray(target.metrics, opts.chunkSize);
+  Object.assign(result, {
+    untouched: 0,
+    chunks: chunks.length,
+    usage: { ...EMPTY_USAGE },
+    written: { inline: [], evidence: [] },
+    acceptedKeys: [],
+    rejectedDetail: [],
+    skippedDetail: [],
+    untouchedKeys: [],
+    roleRecommendations: [],
+    checks: [],
+    chunkErrors: [],
   });
-  Object.assign(result, applied);
-  result.status = applied.accepted === applied.targets ? "complete" : applied.accepted > 0 ? "partial" : "none-accepted";
+  for (const [i, metrics] of chunks.entries()) {
+    const sub = { ...target, metrics };
+    const label = chunks.length > 1 ? `${target.themeKey}#${i + 1}` : target.themeKey;
+    const prompt = buildPrompt(sub, { surveyedAt: opts.surveyedAt });
+    fs.writeFileSync(path.join(opts.localDir, `${label}.prompt.md`), prompt);
+    let parsed;
+    try {
+      parsed = await callClaude(prompt, opts, state);
+    } catch (e) {
+      if (e?.code === "capacity-exhausted") throw e;
+      result.chunkErrors.push(`${label}: ${String(e?.message ?? e).slice(0, 200)}`);
+      result.untouched += metrics.length;
+      result.untouchedKeys.push(...metrics.map((m) => m.rankingKey));
+      log(`  ✗ ${label}: ${String(e?.message ?? e).slice(0, 160)}`);
+      continue;
+    }
+    for (const k of ["inputTokens", "outputTokens", "totalTokens", "thinkingTokens"]) result.usage[k] += parsed.usage[k] ?? 0;
+    result.usage.costUsd += parsed.costUsd ?? 0;
+    result.usage.numTurns += parsed.numTurns ?? 0;
+    result.usage.modelId ??= parsed.modelId;
+    fs.writeFileSync(path.join(opts.localDir, `${label}.output.json`), parsed.text);
+    let output;
+    try {
+      output = JSON.parse(parsed.text);
+    } catch {
+      result.chunkErrors.push(`${label}: モデル出力が JSON でない: ${parsed.text.slice(0, 120)}`);
+      result.untouched += metrics.length;
+      result.untouchedKeys.push(...metrics.map((m) => m.rankingKey));
+      continue;
+    }
+    const applied = await applyOutput(sub, output, {
+      surveyedAt: opts.surveyedAt,
+      dryRun: false,
+      requireCatalog: opts.requireCatalog,
+      fetchSource: opts.fetchSource,
+    });
+    result.accepted += applied.accepted;
+    result.rejected += applied.rejected;
+    result.skipped += applied.skipped;
+    result.untouched += applied.untouched;
+    result.written.inline.push(...applied.written.inline);
+    result.written.evidence.push(...applied.written.evidence);
+    result.acceptedKeys.push(...applied.acceptedKeys);
+    result.rejectedDetail.push(...applied.rejectedDetail);
+    result.skippedDetail.push(...applied.skippedDetail);
+    result.untouchedKeys.push(...applied.untouchedKeys);
+    result.roleRecommendations.push(...applied.roleRecommendations);
+    result.checks.push(...applied.checks);
+    if (chunks.length > 1) {
+      log(`  · ${label}: 通過 ${applied.accepted}/${metrics.length} 不合格 ${applied.rejected} skip ${applied.skipped} / $${(parsed.costUsd ?? 0).toFixed(2)} turns ${parsed.numTurns}`);
+    }
+  }
+  if (result.chunkErrors.length) result.error = result.chunkErrors.join(" | ");
+  result.status =
+    result.accepted === result.targets ? "complete" : result.accepted > 0 ? "partial" : result.chunkErrors.length ? "error" : "none-accepted";
   return result;
 }
 
@@ -321,7 +383,8 @@ async function cmdRun(args) {
   const opts = {
     model: args.model ?? "claude-sonnet",
     effort: args.effort ?? "medium",
-    budgetUsd: Number(args["budget-usd"] ?? 4),
+    budgetUsd: Number(args["budget-usd"] ?? 5),
+    chunkSize: Math.max(1, Number(args["chunk-size"] ?? 6)),
     concurrency: Math.min(2, Math.max(1, Number(args.concurrency ?? 2))),
     capacityWaitMin: Number(args["capacity-wait-min"] ?? 30),
     capacityRetries: Number(args["capacity-retries"] ?? 3),
