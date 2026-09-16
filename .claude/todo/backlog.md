@@ -728,7 +728,8 @@ updated: 2026-09-16
   1. 今夜: `nohup setsid bash .claude/scripts/themes/run-selection-backfill.sh --push-develop > .local/selection-backfill/full-run-2026-09-17.log 2>&1 &`
      (worktree は自動で origin/develop にリセットされ、残 275 件を再導出する。`--push-develop` で
      stop 条件到達でも exit 3 は正常扱いされ commit + develop へ rebase push まで進む)
-  2. 翌朝: report の「gate 不合格」「資料なし」「role の推奨」を人が処理 (develop への取り込みは 1 で自動化済み)
+  2. 翌朝: report の「gate 不合格」「資料なし」を人が処理 (develop への取り込みは 1 で自動化済み)。
+     「role の推奨」の処理は `THEME-ROLE-REVIEW-01` に分離済み
   3. session limit のリセット時刻 (前回 12:40am JST) をまたいで回すと最も長く継続できる。1 晩で終わらなければ
      同じコマンドを翌晩も繰り返す (残数は catalog から都度再導出されるので `--themes` 指定は不要)
   4. Windows PC で回すなら pdftotext (poppler) を入れる。無ければ PDF 出典は到達性のみで通る (`skipped-pdf`)
@@ -736,6 +737,38 @@ updated: 2026-09-16
 - **停止条件**: 1 晩の gate 不合格率 > 30% (prompt か gate の問題なので続行しない)、枠エラー 3 連続
 - **禁止**: 夜間バッチによる role 変更・rejectedCandidates への追加・`git commit --no-verify`・
   gate 未通過の selection の書き込み
+
+### [THEME-ROLE-REVIEW-01] 夜間backfillのrole変更提案を人が採否判断しThemeCatalogへ反映・サイトへ展開する
+
+タグ: [エージェント・SSOT] [種類:意思決定] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-09-17]
+
+- **owner**: theme-designer (採否判断・`<theme>.ts` 編集) / 最終承認はユーザー
+- **背景**: `THEME-SELECTION-BACKFILL-01` の調査は selection の裏付けだけでなく、副産物として
+  「今の role (primary/secondary/context) は適切か」の判定も出す。これは selection と違い
+  **採用すればサイト表示 (指標カードの並び) が変わる**唯一の出力。ただし夜間バッチは role を
+  書き換えない (禁止事項) ので、人の採否判断とカタログ編集を挟まないとサイトに届かない。
+- **進捗管理 (2026-09-17 新設)**: `.claude/scripts/themes/build-role-review-queue.mjs` が
+  全 `reference/audits/*-selection-backfill.md` の「role の推奨」を横断集約し
+  `.claude/state/theme/{role-review-queue.json,LATEST.md}` へ書く。夜間 run が自動で再構築する
+  (driver に配線済み)。**「反映済み」は手動フラグでなく `THEME_CATALOGS` の実際の role と
+  recommended の一致で自動判定する** (手動フラグはドリフトする)。現在: 45 件 pending (2026-09-16 run 分)
+- **サイトへの展開経路 (実行順)**:
+  1. `.claude/state/theme/LATEST.md` で pending 一覧を確認
+  2. 1 件ずつ採否判断し記録: `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs decide --theme <theme> --key <rankingKey> --decision accept|reject --note "..."`
+  3. accept した分を対象 `<theme>.ts` (または `expanded.ts` の tuple 第3要素) の role へ反映
+  4. `npm run generate:catalog --workspace=@stats47/data-configs && npm run validate:catalog --workspace=@stats47/data-configs && npm run type-check --workspace=@stats47/data-configs`
+  5. localhost で視覚 QA (`theme-improvement-execution.md` の QA チェックリスト)
+  6. commit → develop へ push
+  7. **別承認で** GitHub Actions 「🗂️ Sync Snapshots → R2」(`workflow_dispatch`、`only=page-components`) を実行
+     → R2 の `page-components/theme/<key>.json` が更新され、完全DBレスなので**アプリ再デプロイ無しで**
+     本番テーマページに反映される
+  8. `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs` を再実行し、対象行が
+     `applied` になったことを確認
+- **完了条件**: `role-review-queue.json` の `pending`+`accepted` が 0 (backfill が続く限り毎晩増える。
+  日次で LATEST.md を捌く運用が定着したら本カードは削除し `THEME-SELECTION-BACKFILL-01` の「次」だけに戻す)
+- **禁止**: 承認前の R2 push、`experiments.json` への baseline 登録なしの本番反映
+- **参照**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md`
+  (採択ゲート・実装契約・視覚QAの正典)
 
 ### [THEME-CHART-TEMPORAL-MISMATCH-01] line-chartが単年設定の13指標を再取り込みして年範囲を拡張する
 

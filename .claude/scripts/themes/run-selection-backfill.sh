@@ -185,13 +185,17 @@ if (entry && actual < entry.count) {
 }
 EOF
 
+# role 変更提案の進捗 queue を再構築 (report の「role の推奨」を横断集約。THEME-ROLE-REVIEW-01)
+node --import tsx .claude/scripts/themes/build-role-review-queue.mjs || log "WARN: role-review-queue 再構築失敗 (report は書けているので続行)"
+
 # ---- 7. commit -------------------------------------------------------------------
 if [ "$NO_COMMIT" = 1 ]; then
   log "--no-commit: 変更は作業ツリーに残す ($ROOT)"
   exit "$RUN_STATUS"
 fi
 git add -- packages/data-configs/src/theme-catalog .claude/config/quality-warning-baseline.json \
-  .claude/skills/theme/manage-theme-portfolio/reference/audits
+  .claude/skills/theme/manage-theme-portfolio/reference/audits \
+  .claude/state/theme/role-review-queue.json .claude/state/theme/LATEST.md
 if git diff --cached --quiet; then
   log "commit 対象なし (通過 0 件)"
   exit "$RUN_STATUS"
