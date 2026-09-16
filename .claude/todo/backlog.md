@@ -759,9 +759,11 @@ updated: 2026-09-16
   4. `npm run generate:catalog --workspace=@stats47/data-configs && npm run validate:catalog --workspace=@stats47/data-configs && npm run type-check --workspace=@stats47/data-configs`
   5. localhost で視覚 QA (`theme-improvement-execution.md` の QA チェックリスト)
   6. commit → develop へ push
-  7. **別承認で** GitHub Actions 「🗂️ Sync Snapshots → R2」(`workflow_dispatch`、`only=page-components`) を実行
-     → R2 の `page-components/theme/<key>.json` が更新され、完全DBレスなので**アプリ再デプロイ無しで**
-     本番テーマページに反映される
+  7. **別承認で develop→main の通常デプロイ** (`.claude/rules/branch-workflow.md`)。role は
+     `packages/types/src/indicator-sets/<key>.ts` (codegen) 経由で `apps/web` に**ビルド時 static
+     import** される (`config/all-themes.ts` → `to-theme-config.ts` の `tabIndicators`/
+     `defaultRankingKey`)。**R2 push だけでは反映されない** (2026-09-17 訂正: page-components R2
+     sync で足りるのは chart 定義側だけで、role が駆動するカード表示は毎回アプリデプロイが要る)
   8. `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs` を再実行し、対象行が
      `applied` になったことを確認
 - **完了条件**: `role-review-queue.json` の `pending`+`accepted` が 0 (backfill が続く限り毎晩増える。
