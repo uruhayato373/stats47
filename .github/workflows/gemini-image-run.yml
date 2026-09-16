@@ -7,7 +7,7 @@ name: 🎨 Gemini Image Run (request-file)
 #   1. push (主経路・cloud 用): develop に data/gemini-image-requests.json を commit/push
 #      → 本 workflow が生成 → 消費した request を git rm で commit-back [skip ci]。
 #      cloud セッションは actions:write が無く workflow_dispatch 不可 (403) のため、
-#      youtube-upload-request / estat-discovery-run と同じ push トリガー方式を採る。
+#      youtube-upload-request / estat-catalog-run と同じ push トリガー方式を採る。
 #   2. workflow_dispatch (ローカル fallback): slugs/budget を入力して手動実行。
 #
 # request file 形式 (data/gemini-image-requests.json):

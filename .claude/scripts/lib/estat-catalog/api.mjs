@@ -1,6 +1,6 @@
 // e-Stat API (getStatsList / getMetaInfo) の薄い fetch 層。
 // 素 fetch + 独自ヘルパーで完結させる (packages/estat-api は logger/R2 依存が重く
-// .claude/scripts では避ける方針 — 既存の discover-prefecture-candidates.mjs 等と同じ)。
+// .claude/scripts では避ける方針 — 既存の fetch-estat-meta.mjs 等と同じ)。
 import { config } from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
