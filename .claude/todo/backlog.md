@@ -1591,27 +1591,3 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
   公開し、旧stubを非公開化する方針が有力)。どの note 投稿を非公開/削除するかは
   公開済みコンテンツへの不可逆操作なのでオーナー判断が必要。
 - **完了条件**: 各組が1本に統合される、またはそれぞれ独立して残す理由が記録される。
-
-### [ESTAT-META-BATCH-ARTIFACTS-01] getMetaInfo 9 バッチ (1,000 表) の CI artifact を 2026-10-15 失効前に保全するか、ESTAT-CATALOG-01 に吸収して捨てるか
-
-タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [起票:2026-09-16] [期日:2026-10-14]
-
-- **owner**: オーナー (判断) / estat-researcher (保全する場合の実行)
-- 事実 (2026-09-16 実測): `estat-meta-run` ブランチへの push で `estat-fetch-meta.yml` が 2026-09-15 11:24〜22:56 UTC に
-  8 run 成功 (batch 1/9, 3/9〜9/9。2/9 は独立した run / commit が見つからない)。入力は `.claude/scripts/estat/proof-batch-statsids.json`
-  の 1,000 statsDataId (discover Phase 1 の候補 8,706 表から抽出)。**結果は各 run の artifact `estat-meta` (約 0.96 MB/run、
-  retention 30 日) にしか無く**、リポジトリにも R2 にも無い。失効: run 9 が 2026-10-15T23:09Z、他はそれより前。
-  取得: `gh run download <runId> -n estat-meta -D .local/estat-meta/batch-<n>` (run 9 = 35033358636、run 1 = 34963136368、
-  一覧は `gh run list --workflow=estat-fetch-meta.yml --branch=estat-meta-run`)。`.claude/state/estat/meta/` の 77 件は
-  7 月の SSDS 調査分で、この 1,000 表とは重複しない。
-- 判断材料: 同日に `ESTAT-CATALOG-01` (月次 R2 カタログが全表の getMetaInfo 要約を保有し、`estat-fetch-meta.yml` と
-  `prefecture-candidates.json` を退役予定) が実装された。カタログの初回 run が 10/14 までに県 + 市区町村 (≈12,000 表) を
-  終えるなら、この 1,000 表分は捨ててよい。終わらないなら artifact を落として橋渡しにする。
-- **次**: ①10/7 頃に `curl https://storage.stats47.jp/estat-catalog/manifest.json` で `collectAreas.{2,3}.metaPending` を確認。
-  ②0 なら本カードを削除 (保全不要)。③残っているなら 8 run 分を `.local/estat-meta/` に download し、`.claude/state/estat/` に
-  置くか (LARGE_FILE 例外が要る) カタログ完了まで `.local/` 保持かを決める。
-  ④併せて `estat-meta-run` / `worktree-estat-meta-batches` ブランチの後始末。後者には
-  `0591b72fe chore(blog): 悩み起点5記事の下書きとSNS/公開チェックポイントを保存` が乗っており、
-  **develop に同内容があるか確認してから**削除する (未マージなら先に取り込む)。
-- **禁止**: 判断前に artifact を作り直す目的で `estat-meta-run` へ再 push しない (e-Stat API を 1,000 表分再消費する)。
-- **完了条件**: 保全 or 廃棄が決まり実行済み。ブランチ 2 本の扱いが決まっている。
