@@ -24,6 +24,7 @@ import {
   recordFetchSuccess,
   upsertTableRow,
 } from "../lib/estat-catalog/index.mjs";
+import { loadPulled } from "../lib/estat-catalog/pulled.mjs";
 import { getObjectJson } from "../lib/estat-catalog/s3.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -319,23 +320,8 @@ async function cmdPull() {
   console.log(`pull 完了: ${surveys.length} 調査 / ${tablesCount} 表 / ${classesCount} 分類行 → ${path.relative(PROJECT_ROOT, PULL_DIR)}`);
 }
 
-function loadPulled() {
-  const manifestPath = path.join(PULL_DIR, "manifest.json");
-  if (!fs.existsSync(manifestPath)) {
-    console.error(`${path.relative(PROJECT_ROOT, PULL_DIR)} が無い。先に 'catalog.mjs pull' を実行`);
-    process.exit(1);
-  }
-  const surveys = JSON.parse(fs.readFileSync(path.join(PULL_DIR, "index/surveys.json"), "utf8"));
-  const tables = [];
-  for (const s of surveys) {
-    const p = path.join(PULL_DIR, `index/tables/${s.statCode}.json`);
-    if (fs.existsSync(p)) tables.push(...JSON.parse(fs.readFileSync(p, "utf8")));
-  }
-  return { surveys, tables };
-}
-
 async function cmdSearch(args) {
-  const { tables } = loadPulled();
+  const { tables } = loadPulled(PULL_DIR);
   const terms = args._.filter(Boolean);
   const id = args.id;
   if (id) {

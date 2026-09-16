@@ -2,7 +2,8 @@
 /**
  * e-Stat 市区町村データの D1 行数 / バイト数試算
  *
- * 1. e-Stat getStatsList (collectArea=3) で全 statsDataId を取得
+ * 1. R2 estat-catalog (pull 済み .local/estat-catalog/) から collectArea=3 の全 statsDataId を取得
+ *    (旧 .claude/state/estat-city-discovery.json snapshot は 2026-09-16 退役。先に `catalog.mjs pull`)
  * 2. 各 statsDataId に getMetaInfo を叩き CLASS_INF を取得 (キャッシュ済はスキップ)
  * 3. CLASS_INF から cdCat01 数 × time 数 × area 数を計算
  * 4. 1 行あたり 116 bytes (stats_city 実測 217MB/1.87M 行) で容量推定
@@ -20,6 +21,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
+import { listTablesByCollectArea, loadPulled } from "../lib/estat-catalog/pulled.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
@@ -42,7 +44,7 @@ const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
 const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
 
 const CACHE_DIR = path.join(PROJECT_ROOT, ".claude/state/estat-city-meta-cache");
-const SNAPSHOT = path.join(PROJECT_ROOT, ".claude/state/estat-city-discovery.json");
+const PULL_DIR = path.join(PROJECT_ROOT, ".local/estat-catalog");
 const REPORT = path.join(PROJECT_ROOT, ".claude/state/estat-city-estimate-report.json");
 fs.mkdirSync(CACHE_DIR, { recursive: true });
 
@@ -50,40 +52,11 @@ const BYTES_PER_ROW = 116; // stats_city: 217MB / 1.87M = 116 B/row
 const D1_LIMIT_BYTES = 10 * 1024 * 1024 * 1024; // 10 GB
 const CITY_AREA_COUNT = 1913; // 市区町村数 (上限)
 
-function pickString(v) {
-  if (typeof v === "string") return v;
-  if (v && typeof v === "object" && "$" in v) return String(v.$);
-  return null;
-}
-
-async function fetchStatsList() {
-  if (fs.existsSync(SNAPSHOT)) {
-    const j = JSON.parse(fs.readFileSync(SNAPSHOT, "utf-8"));
-    console.log(`📂 既存 snapshot 使用: ${j.length} 件`);
-    return j;
-  }
-  console.log("📡 getStatsList (collectArea=3) で全件取得中...");
-  const params = new URLSearchParams({
-    appId: APP_ID,
-    lang: "J",
-    collectArea: "3",
-    limit: "10000",
-    startPosition: "1",
-  });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?${params}`;
-  const res = await fetch(url, fetchOpts);
-  const json = await res.json();
-  const tables = json?.GET_STATS_LIST?.DATALIST_INF?.TABLE_INF;
-  const arr = Array.isArray(tables) ? tables : tables ? [tables] : [];
-  const summary = arr.map((t) => ({
-    statsDataId: String(t["@id"]),
-    statName: pickString(t.STAT_NAME) ?? "",
-    title: pickString(t.TITLE) ?? pickString(t.STATISTICS_NAME) ?? "",
-    govOrg: pickString(t.GOV_ORG) ?? null,
-  }));
-  fs.writeFileSync(SNAPSHOT, JSON.stringify(summary, null, 2));
-  console.log(`💾 snapshot saved: ${summary.length} 件 → ${SNAPSHOT}`);
-  return summary;
+function loadCityTables() {
+  const { tables } = loadPulled(PULL_DIR);
+  const rows = listTablesByCollectArea(tables, 3);
+  console.log(`📂 estat-catalog (collectArea=3): ${rows.length} 件`);
+  return rows;
 }
 
 async function fetchMeta(statsDataId) {
@@ -159,7 +132,7 @@ function estimateRowsFromClassObjs(classObjs) {
 }
 
 async function main() {
-  const list = await fetchStatsList();
+  const list = loadCityTables();
   const target = HARD_LIMIT > 0 ? list.slice(0, HARD_LIMIT) : list;
   console.log(`\n🎯 試算対象: ${target.length} 件 (delay=${DELAY_MS}ms / 推定所要 ${Math.ceil(target.length * DELAY_MS / 60000)} 分)\n`);
 

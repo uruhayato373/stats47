@@ -682,8 +682,8 @@ updated: 2026-09-16
      `estat-fetch-meta.yml` / `estat-city-discovery.json` (いずれもcatalogの`index/tables/`から導出可能)
      → 2026-09-16 にオーナー指示で 1ヶ月待ちを前倒しし退役済み (manifest metaPending 0 を実測): `estat-fetch-meta.yml` +
      branch `estat-meta-run` + `proof-batch-statsids.json`、`discover-estat-candidates.yml` + branch `estat-discovery-run` +
-     `discover-prefecture-candidates.mjs` + `prefecture-candidates.json` (読み手ゼロ)。`estat-city-discovery.json` は
-     estimate-city-data-size.mjs / estat-researcher が現役で読むため未着手
+     `discover-prefecture-candidates.mjs` + `prefecture-candidates.json` (読み手ゼロ)、`estat-city-discovery.json`
+     (読み手 2 件を catalog へ配線: estimate-city-data-size.mjs → `lib/estat-catalog/pulled.mjs`、estat-researcher → `search --collect-area 3`)。手順5 は完了
   6. `ssds-candidates.json`をcatalog派生に置換、find-metricsに未登録候補の索引を追加
 - **完了条件**: manifestの`collectAreas.{2,3}.metaPending`が0、consumer 3件の配線完了、旧スクリプト退役
   (旧スクリプトの退役は新カタログが最低1ヶ月安定稼働してから)
@@ -1352,7 +1352,7 @@ updated: 2026-09-16
   2. **SSDS 未使用 733 指標** (`expansion-survey.json` の `ssdsUntapped`・同じ 1,913 団体軸) —
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業
-  3. 非 SSDS 3,361 表 (`.claude/state/estat-city-discovery.json`) — 表ごとに軸 pin 設計が要る長尾
+  3. 非 SSDS 3,349 表 (R2 estat-catalog `npm run estat:catalog:search -- <語> --collect-area 3`、2026-09-16 manifest) — 表ごとに軸 pin 設計が要る長尾
 - **計測**: 公開 28 日後 (2026-09-29 目安) に GSC/GA4 で市区町村面の実測。pilot の 9/21 判定は
   confounded (doc 44 記録済み)
 - **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01` (公開 key が 10 を超えたため trigger 1 は成立。

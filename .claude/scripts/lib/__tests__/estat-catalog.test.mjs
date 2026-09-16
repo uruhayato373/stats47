@@ -338,3 +338,55 @@ test("computeSurveysSummary: statCode 単位に集計し removedAt は除外す�
   assert.deepEqual(summary[0].tablesByCollectArea, { "2": 1, "3": 1 });
   assert.equal(summary[0].metaFetched, 1);
 });
+
+// --- pulled.mjs: pull 済み索引の読み取り (estat-city-discovery.json の置換経路) ---
+
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { listTablesByCollectArea, loadPulled } from "../estat-catalog/pulled.mjs";
+
+function makePullDir() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "estat-catalog-pull-"));
+  fs.mkdirSync(path.join(dir, "index/tables"), { recursive: true });
+  fs.writeFileSync(path.join(dir, "manifest.json"), "{}");
+  fs.writeFileSync(
+    path.join(dir, "index/surveys.json"),
+    JSON.stringify([{ statCode: "00200521" }, { statCode: "00450011" }, { statCode: "99999999" }]),
+  );
+  fs.writeFileSync(
+    path.join(dir, "index/tables/00200521.json"),
+    JSON.stringify([
+      { statsDataId: "A1", statCode: "00200521", statName: "国勢調査", title: "市区町村 表", govOrg: "総務省", collectArea: 3 },
+      { statsDataId: "A2", statCode: "00200521", statName: "国勢調査", title: "都道府県 表", govOrg: "総務省", collectArea: 2 },
+      { statsDataId: "A3", statCode: "00200521", statName: "国勢調査", title: "消えた表", govOrg: "総務省", collectArea: 3, removedAt: "2026-09-01T00:00:00Z" },
+    ]),
+  );
+  fs.writeFileSync(
+    path.join(dir, "index/tables/00450011.json"),
+    JSON.stringify([{ statsDataId: "B1", statCode: "00450011", statName: "人口動態", title: "市区町村", govOrg: null, collectArea: "3" }]),
+  );
+  return dir;
+}
+
+test("loadPulled は surveys の statCode 順に tables を連結し、索引が無い statCode は読み飛ばす", () => {
+  const dir = makePullDir();
+  const { surveys, tables } = loadPulled(dir);
+  assert.equal(surveys.length, 3);
+  assert.deepEqual(tables.map((t) => t.statsDataId), ["A1", "A2", "A3", "B1"]);
+});
+
+test("loadPulled は manifest が無ければ pull を促して throw する", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "estat-catalog-empty-"));
+  assert.throws(() => loadPulled(dir), /catalog\.mjs pull/);
+});
+
+test("listTablesByCollectArea は removedAt 無しの指定 collectArea だけを getStatsList 要約 4 フィールドに絞る", () => {
+  const { tables } = loadPulled(makePullDir());
+  const rows = listTablesByCollectArea(tables, 3);
+  assert.deepEqual(rows, [
+    { statsDataId: "A1", statName: "国勢調査", title: "市区町村 表", govOrg: "総務省" },
+    { statsDataId: "B1", statName: "人口動態", title: "市区町村", govOrg: null },
+  ]);
+  assert.equal(listTablesByCollectArea(tables, 2).length, 1);
+});

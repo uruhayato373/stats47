@@ -26,7 +26,7 @@
   "nonSsdsDiscovery": {
    "asOf": "2026-05-17",
    "totalTables": 3361,
-   "note": ".claude/state/estat-city-discovery.json (市区町村area軸を持つ全statsDataId)。主な調査: 住宅・土地統計993 / 国勢調査592 / 就業構造387 / 作物統計320 / 人口動態290 / 漁業センサス239 / 地域保健142 / 経済センサス224"
+   "note": "R2 estat-catalog `npm run estat:catalog:search -- <語> --collect-area 3` (市区町村area軸を持つ全statsDataId。2026-09-16 manifest で 3,349 表。旧 .claude/state/estat-city-discovery.json 5月版は同日退役)。主な調査: 住宅・土地統計993 / 国勢調査592 / 就業構造387 / 作物統計320 / 人口動態290 / 漁業センサス239 / 地域保健142 / 経済センサス224"
   }
  },
  "classification": [
