@@ -70,6 +70,23 @@ proposalは `.claude/skills/theme/manage-theme-portfolio/reference/reviews/` ま
 各提案に主問、一次情報URL、利点、誤読リスク、想定実装差分を書く。人間の採択前に
 ThemeCatalogを編集しない。実装へ進める時は `experiments.json` にbaselineを登録する。
 
+### 入力源: 夜間 selection backfill の role 推奨 (2026-09-17 追記)
+
+`run-selection-backfill.sh` (`.claude/rules/theme-catalog-standards.md` §4「selection」) は
+selection の裏付け調査の副産物として `change-role` 相当の提案を `reference/audits/<日付>-
+selection-backfill.md` の「role の推奨」表に出す (夜間バッチ自身は role を書き換えない)。
+これは本契約の proposal と同じ採択ゲートに入る**追加の入力源**であり、別フローではない。
+
+- 横断集約・進捗管理: `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs` が
+  全 audit report の推奨を `.claude/state/theme/role-review-queue.json` + 人間向け
+  `.claude/state/theme/LATEST.md` に集約する (夜間 run が自動で再構築する)。
+  「反映済み (`applied`)」は手動フラグではなく、実際の `THEME_CATALOGS` の role が
+  recommended と一致したかで自動判定する。
+- 採択・却下は `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs decide
+  --theme <theme> --key <rankingKey> --decision accept|reject --note "..."` で記録してから、
+  下記「Claude Code実装契約」どおり `<theme>.ts` を編集する。
+- 進捗の正典 backlog: `THEME-ROLE-REVIEW-01`。
+
 ## Claude Code実装契約
 
 ```text

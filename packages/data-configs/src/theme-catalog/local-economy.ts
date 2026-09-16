@@ -12,10 +12,13 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "shortLabel": "課税対象所得（納税義務者1人当たり）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D",
-        "surveyedAt": "2026-09-08",
-        "rationale": "納税義務者1人を基準にした課税対象所得として比較する。対象範囲を表示して主章に配置する。"
+        "proposedBy": "市町村税課税状況等の調（総務省、大阪府公表資料）",
+        "sourceUrl": "https://www.pref.osaka.lg.jp/o040050/shichoson/zei/kazei06.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この調査は地方自治法に基づき毎年実施される市町村税課税の唯一の統計資料であり、税制改正の基礎資料として位置付けられている。納税義務者1人当たりの課税対象所得は、県民経済計算の県民所得（企業所得等を含む経済全体の指標）とは異なり、個人の実際の課税ベースの所得水準を市町村単位まで比較できる点で、県民所得を補完する角度を提供する。",
+        "adoptionCriteria": ["complementarity", "dataQuality"],
+        "readerQuestion": "実際に税金を納めている住民1人当たりの所得は地域ごとにどれくらい違うのか。",
+        "targetReaderOrDecision": "個人の所得水準を市区町村単位で比較したい読者・地方財政の担当者。"
       }
     },
     {
@@ -23,10 +26,13 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "shortLabel": "1人当たり県民所得",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "1人当たり県民所得は主問に直接答える見出し指標として残す。"
+        "proposedBy": "県民経済計算「統計の目的」（内閣府経済社会総合研究所）",
+        "sourceUrl": "https://www.esri.cao.go.jp/jp/sna/sonota/kenmin/contents/mokuteki.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "内閣府経済社会総合研究所は県民経済計算を「総合的な県経済指標」と位置付け、県の行財政・経済政策の基礎資料とすると明記している。1人当たり県民所得はこの県民経済計算の中核指標であり、地域の所得形成水準を都道府県間で比較する際の代表指標として、テーマ「地域経済」の冒頭で扱うべき指標である。",
+        "adoptionCriteria": ["representativeness", "readerValue"],
+        "readerQuestion": "自分の都道府県の1人当たり県民所得は全国平均や他県と比べて高いか低いか。",
+        "targetReaderOrDecision": "地域の所得水準を把握したい住民・地方自治体の政策担当者。"
       }
     },
     {
@@ -89,10 +95,13 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "shortLabel": "第2次産業就業者比率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "第2次産業就業者比率は「どの産業で働いているか」を読むため主要画面へ配置する。"
+        "proposedBy": "平成12年国勢調査 産業（大分類）別就業者数（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2000/kihon2/00/03.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国勢調査は産業3部門別の就業者数・構成比を全国・都道府県単位で継続的に公表しており、第2次産業就業者比率は製造業・建設業など生産基盤の厚みを地域間で比較する際の代表的な指標として扱われている。第1次・第3次産業比率と組み合わせることで、地域の就業構造を3区分で立体的に把握できる。",
+        "adoptionCriteria": ["representativeness", "comparability", "complementarity"],
+        "readerQuestion": "自分の県は製造業や建設業で働く人の割合が全国と比べて多いか少ないか。",
+        "targetReaderOrDecision": "地域の産業構造・雇用構成を比較したい読者。"
       }
     },
     {
@@ -100,10 +109,13 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "shortLabel": "第3次産業就業者比率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "第3次産業就業者比率は「どの産業で働いているか」を読むため主要画面へ配置する。"
+        "proposedBy": "平成12年国勢調査 産業（大分類）別就業者数（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2000/kihon2/00/03.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国勢調査の産業3部門別集計では第3次産業就業者が就業者全体の過半を占めることが示されており、サービス業や公務など第3次産業への就業比率は地域経済の産業構造のうち最も比重の大きい部分を示す。第1次・第2次産業比率と合わせて用いることで、就業構造全体（合計100%）を都道府県間で比較できる。",
+        "adoptionCriteria": ["representativeness", "comparability", "complementarity"],
+        "readerQuestion": "自分の県はサービス業など第3次産業で働く人の割合が全国と比べて多いか少ないか。",
+        "targetReaderOrDecision": "地域の産業構造・雇用構成を比較したい読者。"
       }
     },
     {
@@ -133,10 +145,13 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "shortLabel": "農業産出額",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "proposedBy": "生産農業所得統計の概要（農林水産省）",
         "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/nougyou_sansyutu/gaiyou/",
-        "surveyedAt": "2026-09-08",
-        "rationale": "既存の産業別就業割合に生産側の見方を補い、農業の弱い地域経済構成を補完する。"
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省は生産農業所得統計の利用上の注意として、都道府県別の農業産出額推計値は各地域の農業生産シェアを分析する用途に使うものと明示している。これは農業産出額が地域間の農業生産規模を比較するための指標であることを示しており、県民所得や産業別就業構成では捉えきれない農業という生産基盤の実額を補う指標である。",
+        "adoptionCriteria": ["complementarity", "readerValue"],
+        "readerQuestion": "自分の県の農業生産規模は全国の中でどれくらいの位置にあるか。",
+        "targetReaderOrDecision": "地域の農業生産基盤の大きさを把握したい読者・農政担当者。"
       }
     },
     {

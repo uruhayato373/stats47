@@ -12,10 +12,13 @@ export const CONSTRUCTION_INDUSTRY_CATALOG: ThemeCatalog = {
       "shortLabel": "元請完成工事高",
       "role": "primary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・初回実装",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
-        "surveyedAt": "2026-09-09",
-        "rationale": "建設業者所在地別の元請取引規模を2023年度の同じ条件で比較する。"
+        "proposedBy": "e-Stat 政府統計の総合窓口「建設工事受注動態統計調査 建設工事施工統計調査 調査結果表（時系列、第1表～第13表）第2表 業種別－完成工事高、元請完成工事高、元請比率、下請完成工事高」（総務省統計局／国土交通省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003126303",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表は建設工事施工統計調査の結果を業種別に完成工事高・元請完成工事高・元請比率・下請完成工事高として区分して公表しており、元請完成工事高が完成工事高全体から下請分を除いた元請段階の取引金額であることを示す。テーマが「工事の取引段階と統計の対象年を分けて確認する」ことを掲げるため、この指標は事業規模を元請段階でそろえて都道府県比較する代表的な指標となる。",
+        "adoptionCriteria": ["representativeness", "comparability"],
+        "readerQuestion": "自分の都道府県の建設業者は元請としてどれだけの工事を受注しているか。",
+        "targetReaderOrDecision": "都道府県の建設業の事業規模を把握したい行政・業界関係者。"
       }
     },
     {
@@ -23,10 +26,13 @@ export const CONSTRUCTION_INDUSTRY_CATALOG: ThemeCatalog = {
       "shortLabel": "許可業者数",
       "role": "secondary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・初回実装",
-        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
-        "surveyedAt": "2026-09-09",
-        "rationale": "完成工事高とは別に建設業の担い手となる許可業者数を比較する。"
+        "proposedBy": "建設業許可業者数調査の結果について－建設業許可業者の現況（令和5年3月末現在）－（国土交通省 不動産・建設経済局 建設業課、令和5年5月24日公表、報道発表資料）",
+        "sourceUrl": "https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo13_hh_000001_00239.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通省が毎年公表する建設業許可業者数調査は、建設業の担い手（許可業者）の増減を全国・都道府県別・業種別に示す唯一の全国調査であり、令和5年度末時点で479,383業者という全国値が公表されている。テーマ「建設業の担い手はどこに多いか」を検証する上で、この許可業者数は都道府県間の担い手規模を比較する基礎データとなる。",
+        "adoptionCriteria": ["representativeness", "dataQuality"],
+        "readerQuestion": "自分の都道府県には建設業許可業者が何社あり、増減の傾向はどうか。",
+        "targetReaderOrDecision": "地域の建設業の担い手数の推移を確認したい自治体・業界団体。"
       }
     },
     {
@@ -45,10 +51,13 @@ export const CONSTRUCTION_INDUSTRY_CATALOG: ThemeCatalog = {
       "shortLabel": "従業者数",
       "role": "secondary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・初回実装",
+        "proposedBy": "政府統計コード定義集「従業者数（民営）」（e-Stat 項目定義）",
         "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
-        "surveyedAt": "2026-09-09",
-        "rationale": "2021年経済センサスの民営事業所における建設業従業者数を単年比較する。"
+        "surveyedAt": "2026-09-16",
+        "rationale": "この定義集は、経済センサスに基づく「従業者数（民営）」が民営事業所に限定した従業者数であり、休職者・長期欠勤者を除く点を明示している。建設業に分類される民営事業所の従業者数を都道府県別に見ることで、許可業者数（事業者の数）とは異なる角度から「建設業で働く人はどこに多いか」という章の問いに事業所単位で直接答える補完的な指標となる。",
+        "adoptionCriteria": ["complementarity", "dataQuality"],
+        "readerQuestion": "建設業の民営事業所で実際に働いている人はどの都道府県に多いか。",
+        "targetReaderOrDecision": "地域の建設業雇用規模を事業所単位で把握したい研究者・自治体職員。"
       }
     }
   ],

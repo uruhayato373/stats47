@@ -12,12 +12,11 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "shortLabel": "総人口",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "総人口は「人口は増えているか」を読むため主要画面へ配置する。",
-        "readerQuestion": "人口増減率が示す変化は、どれくらいの規模の県で起きているか（小さな県の急減と大きな県の微減を混同しない）。",
-        "targetReaderOrDecision": "増減率だけでなく絶対的な人口規模を把握したい読者（自治体規模の比較、市場規模の見立て）。"
+        "proposedBy": "人口推計（2024年（令和6年）10月1日現在）結果の概要（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省統計局の人口推計は総人口の最新値と前年からの増減を全国基準値として毎年公表しており、都道府県別人口の合計や経年比較の出発点になる。テーマの「人口は増えているか」を検討する際、まず総数の水準を押さえることが前提となり、増減率など他の指標を解釈する分母としても機能する。",
+        "adoptionCriteria": ["representativeness", "dataQuality"]
       }
     },
     {
@@ -25,10 +24,11 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "shortLabel": "合計特殊出生率",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
-        "surveyedAt": "2026-09-08",
-        "rationale": "出生行動の指標は少子高齢化側で解説し、ここでは人口変化の実数・率を優先する。 主表示は「少子高齢化」へ集約する。関連指標としての導線は保持する。"
+        "proposedBy": "人口動態調査 人口動態統計 確定数 出生上巻 4-1「年次別にみた出生数・出生率（人口千対）・出生性比及び合計特殊出生率」（厚生労働省／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411595",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表は出生数・出生率と並べて合計特殊出生率を収録しており、年齢構成の違いによる影響を除いた出生水準として都道府県間で比較できるよう設計されている。テーマの「出生と母の年齢・出生順位」を扱う章で、出生数という実数だけでは見えない一人当たりの出生水準を補う指標として位置付けられる。",
+        "adoptionCriteria": ["comparability", "complementarity"]
       }
     },
     {
@@ -58,12 +58,11 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "shortLabel": "人口増減率",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "人口増減率は主問に直接答える見出し指標として残す。",
-        "readerQuestion": "自分の県、または比較したい県の人口は増えているか、減っているか。",
-        "targetReaderOrDecision": "移住・進学・就職で居住地を検討する読者、または自地域の将来像を把握したい読者。"
+        "proposedBy": "人口推計（2024年（令和6年）10月1日現在）結果の概要（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "人口推計の結果概要は都道府県別の人口増加率を明示的に取り上げて地域差を示しており、テーマの中心的な問いである「人口は増えているか」に直接答える数値になっている。総人口の実数と組み合わせることで、自然増減・社会増減の内訳を見る前段の全体像を提供する。",
+        "adoptionCriteria": ["representativeness", "comparability", "readerValue"]
       }
     },
     {
@@ -71,12 +70,11 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "shortLabel": "自然増減率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
-        "surveyedAt": "2026-09-08",
-        "rationale": "自然増減率は「出生と死亡・転入と転出の内訳」を読むため主要画面へ配置する。",
-        "readerQuestion": "人口増減は出生と死亡の差（自然要因）で起きているのか、転入と転出の差（社会要因）で起きているのか。",
-        "targetReaderOrDecision": "人口減少の背景（少子化か人口流出か）を理解したい読者、地域の実情を調べる読者。"
+        "proposedBy": "人口動態調査 人口動態統計 確定数 総覧中巻1「人口動態総覧，都道府県（特別区－指定都市再掲）別」（厚生労働省／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411563",
+        "surveyedAt": "2026-09-16",
+        "rationale": "都道府県別の人口動態総覧では自然増減率が出生率・死亡率と並ぶ表側項目として設計されており、人口千人当たりの水準で地域を横並びに比較できる。テーマの「出生と死亡・転入と転出の内訳」を扱う章で、総人口の増減を出生・死亡要因に切り分ける鍵となる指標として位置付けられる。",
+        "adoptionCriteria": ["representativeness", "comparability"]
       }
     },
     {
@@ -150,10 +148,11 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "shortLabel": "出生数",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
-        "surveyedAt": "2026-09-08",
-        "rationale": "出生数は「出生と死亡・転入と転出の内訳」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "人口動態調査 人口動態統計 確定数 出生上巻 4-1「年次別にみた出生数・出生率（人口千対）・出生性比及び合計特殊出生率」（厚生労働省／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411595",
+        "surveyedAt": "2026-09-16",
+        "rationale": "出生数は戸籍法に基づく届出の全数を毎月集計する人口動態調査の基礎数値であり、自然増減率や合計特殊出生率のもとになる実数として欠損や改定が少ない。テーマの「出生と死亡・転入と転出の内訳」を実数で裏付ける一次データとして、率指標だけでは見えない規模感を補う役割を持つ。",
+        "adoptionCriteria": ["dataQuality", "complementarity"]
       }
     },
     {
@@ -172,10 +171,11 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "shortLabel": "外国人転入者数",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "転入者数は「出生と死亡・転入と転出の内訳」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "住民基本台帳人口移動報告 参考表「移動前の住所地別転入者数－都道府県，市区町村（移動者，日本人移動者，外国人移動者）」（総務省統計局／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004014382",
+        "surveyedAt": "2026-09-16",
+        "rationale": "住民基本台帳人口移動報告は転入者数を移動者・日本人移動者・外国人移動者に区分して都道府県別に集計しており、外国人転入者数は国内移動とは異なる国際的な流入を実数で示す独自区分になっている。テーマの「どこからどこへ移動するか」を扱う章で、国内移動だけでは捉えきれない人口動態の側面を補う指標として位置付けられる。",
+        "adoptionCriteria": ["complementarity", "dataQuality"]
       }
     },
     {
@@ -183,10 +183,13 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "shortLabel": "外国人転出者数",
       "role": "context",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "転出者数は「出生と死亡・転入と転出の内訳」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "住民基本台帳人口移動報告 年報（実数）表11「年齢（５歳階級），男女別他市区町村からの転入者数，他市区町村への転出者数，転入超過数－全国，都道府県，市区町村（移動者，日本人移動者，外国人移動者）」（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003419945",
+        "surveyedAt": "2026-09-16",
+        "rationale": "住民基本台帳人口移動報告の年報表11は、移動者を「移動者」「日本人移動者」「外国人移動者」の3区分で公表しており、外国人を含む転出者数を切り分けて把握できることを示している。これにより、人口動態の社会減が日本人と外国人のどちら側の移動で生じているかを区別でき、テーマの転入と転出のどちらで生じているかという問いに答える際の内訳情報として機能する。",
+        "adoptionCriteria": ["complementarity", "dataQuality"],
+        "readerQuestion": "外国人の転出は地域の人口減少にどの程度寄与しているか。",
+        "targetReaderOrDecision": "地域の社会増減を日本人・外国人別に把握したい自治体担当者。"
       }
     },
     {

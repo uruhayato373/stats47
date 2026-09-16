@@ -312,11 +312,27 @@ export function htmlToText(html) {
     .replace(/<\/(p|div|li|tr|h[1-6]|td|th|section|article)>/gi, "\n")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'");
+    .replace(/&apos;/g, "'")
+    // 数値実体参照 (&#8594; = → など。cao.go.jp の白書本文が矢印をこれで書く。2026-09-16 に quote-not-found の誤検知)
+    .replace(/&#x([0-9a-f]+);?/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);?/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replace(/&amp;/g, "&");
+}
+
+/** 正規化済み本文に引用があるか。完全一致か、正規化後 12 文字以上の連続一致 (モデルが文の一部を省いた抜粋。句読点・空白を除いた密な日本語なので数値を含む 12 文字は十分に固有。実例: 厚労省 PDF の「13小児科」は18,009人となっており) を許す。 */
+const QUOTE_PARTIAL_WINDOW = 12;
+export function quoteMatch(normalizedText, normalizedQuote) {
+  if (!normalizedQuote) return "not-found";
+  if (normalizedText.includes(normalizedQuote)) return "found";
+  if (normalizedQuote.length >= QUOTE_PARTIAL_WINDOW) {
+    for (let i = 0; i + QUOTE_PARTIAL_WINDOW <= normalizedQuote.length; i += 2) {
+      if (normalizedText.includes(normalizedQuote.slice(i, i + QUOTE_PARTIAL_WINDOW))) return "found-partial";
+    }
+  }
+  return "not-found";
 }
 
 function detectCharset(contentType, bytes) {
@@ -468,11 +484,9 @@ export async function gateEntries(target, output, { fetchSource, classIndex = nu
       } else {
         if (quote.length < QUOTE_MIN || quote.length > QUOTE_MAX) {
           reasons.push(`quote-length:${quote.length}`);
-        } else if (normalizeForQuote(res.text).includes(normalizeForQuote(quote))) {
-          check.quote = "found";
         } else {
-          check.quote = "not-found";
-          reasons.push("quote-not-found");
+          check.quote = quoteMatch(normalizeForQuote(res.text), normalizeForQuote(quote));
+          if (check.quote === "not-found") reasons.push("quote-not-found");
         }
       }
     }

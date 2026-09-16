@@ -17,6 +17,7 @@ import {
   listTargets,
   normalizeForQuote,
   patchInlineSelection,
+  quoteMatch,
   readEvidenceFile,
   serializeEvidenceFile,
 } from "../selection-backfill-core.mjs";
@@ -163,6 +164,20 @@ describe("gateEntries", () => {
     );
     assert.equal(r.roleRecommendations.length, 1);
     assert.equal("role" in r.accepted["ratio-65-plus"], false);
+  });
+});
+
+describe("quoteMatch / htmlToText", () => {
+  it("数値実体参照 (&#8594; 等) を復号する", () => {
+    assert.equal(htmlToText("<p>平成22年&#8594;令和元年 &#x2192; &amp;</p>").trim(), "平成22年→令和元年 → &");
+  });
+
+  it("文の一部を省いた抜粋は 12 文字以上の連続一致なら found-partial、短い断片や無関係は not-found", () => {
+    const text = normalizeForQuote("主たる診療科が「13小児科」と「31産婦人科」「32産科」及び「外科※」の医師数をみると、「13小児科」は18,009人となっており");
+    assert.equal(quoteMatch(text, normalizeForQuote("「13小児科」は18,009人となっており")), "found");
+    assert.equal(quoteMatch(text, normalizeForQuote("主たる診療科が「13小児科」の医師数は18,009人となっており、前年より増えている")), "found-partial");
+    assert.equal(quoteMatch(text, normalizeForQuote("小児科の医師数は18,009人")), "not-found");
+    assert.equal(quoteMatch(text, normalizeForQuote("この文章は資料に存在しない捏造であり、十二文字以上の長さを持っている。")), "not-found");
   });
 });
 
