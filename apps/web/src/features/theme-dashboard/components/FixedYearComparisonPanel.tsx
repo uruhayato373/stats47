@@ -24,6 +24,7 @@ const MAP_COLORS = { colorScheme: 'interpolateBlues', colorSchemeType: 'sequenti
 
 /** Compare observed prefecture values in an explicitly selected survey year. */
 export function FixedYearComparisonPanel({
+  id,
   title,
   metrics,
   comparisonYear,
@@ -33,6 +34,8 @@ export function FixedYearComparisonPanel({
   tabLabels = {},
   showMap = false,
 }: {
+  /** SSRとクライアントで同じ見出しIDを使うための固定キー (ChartPanel の useId フォールバック回避) */
+  id?: string;
   title?: string;
   metrics: MetricKpi[];
   comparisonYear: string;
@@ -66,6 +69,7 @@ export function FixedYearComparisonPanel({
 
   return (
     <ChartPanel
+      id={id}
       title={title}
       footer={
         <ChartFooter

@@ -43,6 +43,8 @@ const NATIONAL_CODE = '00000';
 const COMPARISON_DASH = '6,4';
 
 interface MetricSwitcherPanelProps {
+  /** SSRとクライアントで同じ見出しIDを使うための固定キー (ChartPanel の useId フォールバック回避) */
+  id?: string;
   /** カード見出し (複数指標を束ねるグループ名。未指定なら見出しを表示しない) */
   title?: string;
   /** 同じ章に系列の詳細図がある場合は、値を重複描画しない。 */
@@ -192,6 +194,7 @@ function emptyMessage(state: ChartState): string {
  *   2 本以上のときは破線を出さない (系列が増えすぎて読めなくなる)
  */
 export function MetricSwitcherPanel({
+  id,
   title,
   summaryOnly = false,
   metrics,
@@ -517,6 +520,7 @@ export function MetricSwitcherPanel({
       data-series-count={readyMetricCount}
     >
       <ChartPanel
+        id={id}
         title={title}
         titleClassName="text-base"
         contentClassName="p-0"

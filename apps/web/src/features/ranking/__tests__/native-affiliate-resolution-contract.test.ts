@@ -180,17 +180,23 @@ describe("ranking native アフィリエイトの解決契約", () => {
     const kakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: kakeiModel });
     const kakeiSections = kakeiRendered.props.sections as {
       nativeAffiliate: ReactElement<{ top1: { areaCode: string } | null; hasProductKeyword: boolean }>;
+      inContentAffiliate: ReactElement | null;
       sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
     expect(kakeiSections.nativeAffiliate.type).toBe(RankingPageRakutenNativeSection);
     expect(kakeiSections.nativeAffiliate.props.top1?.areaCode).toBe("07000");
     expect(kakeiSections.nativeAffiliate.props.hasProductKeyword).toBe(true);
+    // 上段 in-content の A8 も家計調査系では描画しない (2026-09-16 オーナー判断)。
+    expect(kakeiSections.inContentAffiliate).toBeNull();
 
     const nonKakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: nonKakeiModel });
     const nonKakeiSections = nonKakeiRendered.props.sections as {
+      inContentAffiliate: ReactElement | null;
       sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
     };
-    // 上段 in-content の A8 と右レール除外 (usedAffiliateAds) は kakei か否かで変わらない。
+    expect(nonKakeiSections.inContentAffiliate).not.toBeNull();
+    // 描画しなかった A8 も右レール除外 (usedAffiliateAds) には残す = レールへ流れ込ませない。
+    expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(["b1"]);
     expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(
       nonKakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id),
     );

@@ -276,7 +276,9 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
   position="rakuten-native"`、デスクトップ=1位県の地域軸 `FurusatoNozeiCard
   position="furusato-native"`) に置き換えると、読了導線としての関連性が上がり imp が中段 native
   相当 (baseline 2,545/28日) 並みに増える。右レール商品カードはデスクトップ限定
-  (`hidden lg:block`) にし、モバイルでの本文中段との二重表示を避ける。**検証期日**:
+  (`hidden lg:block`) にし、モバイルでの本文中段との二重表示を避ける。同日のオーナー判断で
+  上段 in-content の A8 (ふるさと本舗、baseline 1,477 imp / 1 click) も家計調査系では描画しない
+  (本文の A8 はゼロ。除外リストは据え置きでレールへ流さない)。**検証期日**:
   2026-10-14。**期日後の判定基準**: `rakuten-native`+`furusato-native` 合計 imp が 1,000 未満なら
   「位置の問題」ではなく計装漏れ (impression tracker の交差判定) または楽天 R2 在庫の欠品を疑い、
   `sync-rakuten-catalog.ts` の manifest と `AdImpressionTracker` の発火ログを確認する。

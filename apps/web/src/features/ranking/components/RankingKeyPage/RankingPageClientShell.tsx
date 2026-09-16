@@ -40,15 +40,16 @@ export function RankingPageClientShell({
   const usedAffiliateAds = [inContentAffiliateBanner, ...nativeAffiliateBanners]
     .filter((banner) => banner !== null);
 
-  // 家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) は本文中段 native を楽天カードへ置換する
-  // (2026-09-16)。モバイル=商品軸・デスクトップ=1位県の返礼品。上段 in-content の A8 と
-  // 右レール除外 (usedAffiliateAds) は不変 — nativeAffiliateBanners の計算そのものは変えない。
+  // 家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) は本文の A8 を出さず楽天カードにする
+  // (2026-09-16)。中段 native はモバイル=商品軸・デスクトップ=1位県の返礼品、上段 in-content は
+  // 描画しない。usedAffiliateAds は据え置き — 出さなかった A8 が右レールへ流れ込まないようにする。
   const isKakeiChousa = (model.originalSurveys ?? []).some((survey) => survey.id === "kakei-chousa");
   const top1Entry = computeRankingHeaderStats(model.rankingValues ?? []).top3[0] ?? null;
   const hasProductKeyword = detectProductKeyword(model.rankingName ?? "") !== null;
   const useRakutenNative = (model.affiliateVertical ?? null) !== null
     && isKakeiChousa
     && (top1Entry !== null || hasProductKeyword);
+  const renderedInContentBanner = useRakutenNative ? null : inContentAffiliateBanner;
 
   return (
     <RankingKeyPageClient
@@ -94,19 +95,19 @@ export function RankingPageClientShell({
         funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (
           <RankingFunnelCta key="funnel-cta" rankingKey={rankingKey} />
         ) : null,
-        inContentAffiliate: inContentAffiliateBanner ? (
+        inContentAffiliate: renderedInContentBanner ? (
           <div key="in-content-affiliate" className="flex justify-center">
             <BannerAd
-              href={inContentAffiliateBanner.href}
-              imageUrl={inContentAffiliateBanner.imageUrl}
-              trackingPixelUrl={inContentAffiliateBanner.trackingPixelUrl}
-              width={inContentAffiliateBanner.width}
-              height={inContentAffiliateBanner.height}
-              label={inContentAffiliateBanner.title}
-              category={inContentAffiliateBanner.vertical ?? "other"}
+              href={renderedInContentBanner.href}
+              imageUrl={renderedInContentBanner.imageUrl}
+              trackingPixelUrl={renderedInContentBanner.trackingPixelUrl}
+              width={renderedInContentBanner.width}
+              height={renderedInContentBanner.height}
+              label={renderedInContentBanner.title}
+              category={renderedInContentBanner.vertical ?? "other"}
               position="ranking-incontent"
-              adId={inContentAffiliateBanner.id}
-              creativeSize={`${inContentAffiliateBanner.width}x${inContentAffiliateBanner.height}`}
+              adId={renderedInContentBanner.id}
+              creativeSize={`${renderedInContentBanner.width}x${renderedInContentBanner.height}`}
             />
           </div>
         ) : null,
