@@ -203,7 +203,7 @@ const r=JSON.parse(fs.readFileSync(dir+'/'+f,'utf8'));
 console.log(r.totals.accepted+' selections / '+r.themes.length+' themes'+(r.stopReason?' / stop: '+r.stopReason:''));")"
 git commit -q -m "chore(theme): selection backfill $DATE_TAG — $ACCEPTED" \
   -m "一次資料で裏付けた selection を書き込み (gate: 定型文 / https 到達 / 引用実在 / コード一致)。role は変更しない。report: .claude/skills/theme/manage-theme-portfolio/reference/audits/$DATE_TAG-selection-backfill.md" \
-  -m "Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+  -m "Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 log "committed on $BRANCH: $(git rev-parse --short HEAD) ($ACCEPTED)"
 
 if [ "$PUSH_DEVELOP" = 1 ]; then
