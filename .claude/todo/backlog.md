@@ -1265,6 +1265,21 @@ updated: 2026-09-16
 - **完了条件**: `/geo` → 任意県の重なり地図が全 6 カードで 3 クリック (カード → Select 開く → 県)、東京都なら 1 クリック。分析ページの県選択 UI が 1 個 (Select) + テーブルリンクのみ。既存 URL (`?stage=audit`, `/NN/audit`, `/NN/population`, `/NN/overlap`) がすべて 200。vitest・type-check・design-system:check 緑。上記 (a)〜(e) を実測した記録をこのカードの削除 commit に残す。
 - **範囲外 (完了後に必要なら別カード)**: `/geo/compare` の「県を 1 つ選ぶ → 4 カード」を `/geo` 先頭に統合し、6 カードに選択県の `pref` を持たせて **2 クリック化**する案。効果は大きいが `/geo/compare` の canonical・`GEO_INDEXABLE_ROUTES`・`middleware.test.ts` (UTM 付き `/geo/compare` の検証) に及ぶ。
 
+### [NOTE-NAV-REPORT-RETENTION-01] update-published-navigation の日次レポートが hygiene の DATED_STATE_ARTIFACT に抵触して commit を止める
+
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-repo-hygiene.cjs --baseline] [起票:2026-09-16]
+
+- **owner**: note-manager
+- **trigger**: 次に `.claude/scripts/note/update-published-navigation.mjs` を実行し、そのレポートを commit しようとしたとき。
+- **実測 (2026-09-16)**: 別 PC 向け sync commit で `.claude/state/metrics/note-navigation-pilot-2026-09-1{4,5,6}.json` の 3 本が
+  pre-commit の Repo Hygiene ゲート (`check-repo-hygiene.cjs`) の `DATED_STATE_ARTIFACT` で止まった。ルールは 2026-09-14 (e4fabb4b3) に
+  追加されたが、writer の `REPORT_PATH` (`update-published-navigation.mjs:33`) は `.claude/state/metrics/` 直下に日付名で書いたまま。
+  09-06 分はルール以前にコミット済みで baseline に載っている。3 本はこの PC の未追跡のまま残し、commit からは外した。
+- **次**: `REPORT_PATH` を `prune-state-snapshots.mjs` が所有するディレクトリ (例 `.claude/state/metrics/note/navigation/`) へ変え、
+  同スクリプトに prune policy (`note-navigation-pilot-YYYY-MM-DD.json`, keep 8 程度) を追加する。09-06 の既存ファイルは同じ場所へ
+  `git mv` して baseline から外す。update-published-navigation の SKILL / README に出力先を反映する。
+
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [PRECOMMIT-STAGED-SCOPE-01] pre-commit の working-tree 走査ゲートが、別セッションの未コミット編集で無関係な commit を止める
