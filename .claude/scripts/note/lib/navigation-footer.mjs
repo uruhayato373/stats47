@@ -149,8 +149,10 @@ export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUI
           && currentDescription === escapeHtml(repair.description);
         return alreadyCorrect ? figure : externalCard(fromUrl, repair.title, repair.description, idFactory);
       });
-      if (!matched) throw new Error(`公開本文に修復対象のカードが見つかりません: ${fromUrl}`);
-      results.push({ mode: repair.mode, fromUrl, toUrl: fromUrl, changed: output !== before });
+      // カードがまだ存在しない記事 (本文差し替え直後など) では何もしない。
+      // 新規追加は applyNavigationFooter の hasUrl 判定に委ねる (regenerate-card は
+      // 既存カードの文言訂正専任で、新規追加の責務を持たない)。
+      results.push({ mode: repair.mode, fromUrl, toUrl: fromUrl, changed: matched && output !== before });
       continue;
     }
 

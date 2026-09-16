@@ -231,18 +231,18 @@ test("regenerate-card repair rewrites a magazine-derived wrong title while keepi
   assert.match(result.body, new RegExp(title.replace(/[.*+?^${}()|[\]\\—]/g, "\\$&")));
 });
 
-test("regenerate-card repair throws when the target card is absent from the body", () => {
+test("regenerate-card repair is a no-op when the target card is absent from the body (本文差し替え直後など、新規追加は applyNavigationFooter に委ねる)", () => {
   const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
-  assert.throws(
-    () => applyPublishedLinkRepairs(
-      "<p>関係ないカードだけの本文</p>",
-      [{
-        mode: "regenerate-card",
-        fromUrl: "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5",
-        title,
-        description,
-      }],
-    ),
-    /修復対象のカードが見つかりません/,
+  const body = "<p>関係ないカードだけの本文</p>";
+  const result = applyPublishedLinkRepairs(
+    body,
+    [{
+      mode: "regenerate-card",
+      fromUrl: "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5",
+      title,
+      description,
+    }],
   );
+  assert.strictEqual(result.body, body);
+  assert.strictEqual(result.changed, false);
 });
