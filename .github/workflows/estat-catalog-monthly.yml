@@ -1,0 +1,95 @@
+name: 📚 e-Stat Catalog (monthly)
+
+# e-Stat メタデータ完全カタログを R2 estat-catalog/ へ月次更新する。
+# 完全DBレス・read-only な発見基盤 (観測値は対象外・既存 app/stats/ 経路のまま)。
+#
+# パイプライン:
+#   1. catalog.mjs run: getStatsList (全国/都道府県/市区町村) → S3 から既存索引取得 →
+#      差分 plan → getMetaInfo を時間予算まで → .local/r2/estat-catalog/ に staging
+#   2. diff-push-r2 --prefix estat-catalog: R2 へ push
+#
+# git への commit-back はしない (状態は R2 の manifest.json のみ)。
+# concurrency は estat-catalog 専用 group とし、r2-write (data-refresh / sync-snapshots) と
+# 直列化しない — このプレフィックスは本 workflow が専有し app 配信に触れないため、
+# 30〜150 分の crawl 中に他の R2 反映を塞ぐ必要がない。
+#
+# 初回バックフィルは県 8,825 + 市区町村 ~3,400 ≈ 12,000 表。時間予算 150 分/run では
+# 1 回で終わらないため、estat-catalog-run ブランチへの push を 3〜4 回繰り返して
+# manifest の metaPending が 0 になるまで回す。
+#
+# workflow_dispatch は default ブランチ (main) 限定のため、main デプロイ無しで回せるよう
+# 専用ブランチ estat-catalog-run への push でも発火させる (既存 estat 系と同じ方式)。
+#
+# 設計: docs/02_実装計画/48_e-Statカタログ実装仕様.md
+
+on:
+  workflow_dispatch:
+    inputs:
+      meta_scope:
+        description: "getMetaInfo を取る collectArea (カンマ区切り。1=全国 2=都道府県 3=市区町村)"
+        required: false
+        default: "2,3"
+      time_budget_min:
+        description: "getMetaInfo に使う時間予算 (分)"
+        required: false
+        default: "150"
+      max_meta:
+        description: "getMetaInfo の上限件数 (空なら時間予算のみで制御)"
+        required: false
+        default: ""
+      dry_run:
+        description: "true: L1 (getStatsList) のみ実行し getMetaInfo も R2 push もしない"
+        required: false
+        default: "false"
+  push:
+    branches: [estat-catalog-run]
+  schedule:
+    # 3日 03:00 JST = 2日 18:00 UTC。data-refresh (5日03:00 UTC) と非重複。
+    - cron: "0 18 2 * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: estat-catalog
+  cancel-in-progress: false
+
+env:
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install deps
+        run: npm ci
+
+      - name: 📚 Run catalog crawl
+        run: |
+          ARGS=(run --meta-scope "${{ github.event.inputs.meta_scope || '2,3' }}" \
+                     --time-budget-min "${{ github.event.inputs.time_budget_min || '150' }}")
+          MAX_META="${{ github.event.inputs.max_meta }}"
+          if [ -n "$MAX_META" ]; then ARGS+=(--max-meta "$MAX_META"); fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
+          node --import tsx .claude/scripts/estat/catalog.mjs "${ARGS[@]}"
+
+      - name: 📤 Push to R2
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix estat-catalog

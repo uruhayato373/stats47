@@ -53,7 +53,10 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
    **active/total を区別する** (`perSurveyActive` = 配信されるべき数)。R2 は active のみ配信するため、
    全在庫未公開の調査 (inactive-only) が R2 に無いのは正常 — stale (r2-drift) と誤診しない (2026-07-14 教訓)。
    焼き込みの実測突合は `--compare-r2` (item 単位で live surveyIds vs git 導出。月次監査に配線済)。
-2. **未分類 item の回収** (最重要の定常運用): レポートの「辞書未カバー statsDataId」を e-Stat で調査名確認 →
+2. **未分類 item の回収** (最重要の定常運用): レポートの「辞書未カバー statsDataId」をまず
+   `node --import tsx .claude/scripts/estat/catalog.mjs search --id <statsDataId>` (初回のみ先に`pull`。
+   月次更新のe-Statメタデータ完全カタログ。`docs/02_実装計画/48_e-Statカタログ実装仕様.md`) で調査名確認、
+   無ければ e-Stat で調査名確認 →
    `packages/data-configs/src/ssds/estat-provenance.generated.json` の `statsDataIdToSurvey` に追記 →
    再監査で回収件数を実測。**出典 (e-Stat URL + アクセス日) なしで調査名を書かない** (evidence-based-judgment)。
 3. **surveys.json の lifecycle**: 新調査の追加 (id kebab-case / name / organization / url)、

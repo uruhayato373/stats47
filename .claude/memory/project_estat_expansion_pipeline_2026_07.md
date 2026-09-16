@@ -60,5 +60,15 @@ metadata:
 - エージェント `ranking-expander`(`.claude/agents/`。キュレーション判断オーナー。投入=data-ingester/公開=ranking-publisher/計測=gsc-analyst委譲)
 - 計測 `measure-expansion-impact.mjs`(公開4週後GSC流入→キュー反映→build再実行でcategoryTraffic更新)
 
+## ★2026-09-16: 発見の入口をカタログ化 (この文書の拡充ループとは別軸)
+
+拡充ループ(需要ファースト)は「公開してよいか」の出口フィルタ。一方で「e-Statに何があるか」を
+毎回生APIで調べ直す非効率が残っていたため、statsDataId一覧+getMetaInfo要約(年次・エリア種別・
+47県判定)を全国/都道府県/市区町村で月次保有する`estat-catalog/`をR2に新設した(オーナー判断:
+R2は低コストなので発見の入口は絞らない。深掘りするかどうかの絞り込みは従来どおり出口=公開判断
+で行う)。CLI `.claude/scripts/estat/catalog.mjs`、workflow `estat-catalog-monthly.yml`、
+設計は `docs/02_実装計画/48_e-Statカタログ実装仕様.md`。初回backfillと`ssds-candidates.json`の
+catalog派生への置換は `.claude/todo/backlog.md` `ESTAT-CATALOG-01`。
+
 ## 次: 公開サイクル (最後に1デプロイ)
 develop の ~39本 + main の 7本を **一括投入(e-Stat→R2 values.json)→ generate-ranking-items(item.json)→ KNOWN/SITEMAP再生成 → 最後に1デプロイ → 本番200実測**。ingestは data-refresh(main checkout・--metric単一)なので、1デプロイ実現には develop読みの push-trigger投入workflow が要る(未実装)。GSC実測は公開4週後。関連: [[project_competitor_indicator_benchmark]] / .claude/todo/backlog.md

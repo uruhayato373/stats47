@@ -67,6 +67,9 @@ Stage 1: 素材収集 (同一セッションの並列tool call)
 Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher サブ agent を spawn しない)。
      過去に estat-researcher を background 起動して待ち、自分の turn が synthesize せず終わる事故が続いた
      (2026-07-04)。よって: (a) 登録済みは `grep registry.ts`、(b) 未登録候補はまず
+     `node --import tsx .claude/scripts/estat/catalog.mjs search <語>` (初回のみ先に`pull`。月次更新の
+     e-Statメタデータ完全カタログ。全国/都道府県/市区町村の全statsDataId+年次+エリア種別。
+     `docs/02_実装計画/48_e-Statカタログ実装仕様.md`) と
      `.claude/state/estat/ssds-candidates.json` (週次自動更新、SSDS都道府県指標の未使用cdCat01一覧。
      `.github/workflows/estat-ssds-enum.yml`) に該当が無いか確認し、無ければ自分で e-Stat を
      WebFetch/検索して **statsDataId+cdCat01 を突き止める**。解決できない候補は提案へ混ぜず`unknown`として不採用記録へ送る。

@@ -17,7 +17,7 @@
 - [feedback_develop_had_no_ci_gate.md](feedback_develop_had_no_ci_gate.md) — develop pushは長らく無検査で壊れが次のマージ担当に回っていた。2026-08-20にdevelop-quality-gate.yml + npm run preflightで是正
 - [feedback_debt_baseline_shrink_only.md](feedback_debt_baseline_shrink_only.md) — maintenance-debt baselineは縮小専用(2026-07-14)。CI --ratchet-checkが増加拒否。新規debtは実修正かルール修正のみ
 - [feedback_workflow_arg_vector_quoted.md](feedback_workflow_arg_vector_quoted.md) — CI workflowの可変引数列はbash配列("${ARGS[@]}")。文字列連結は1トークン化(2026-07-14に6workflow regression)。ガード=ARG_VECTOR_QUOTED
-- [project_estat_expansion_pipeline_2026_07.md](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開(2026-07-11): 生候補17万metric=不可能。本命=SSDS未使用cdCat01列挙。DBレス発見パイプライン。APP_IDはCI専任→専用ブランチpushトリガー。需要ファースト
+- [project_estat_expansion_pipeline_2026_07.md](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開(2026-07-11): 生候補17万metric=不可能。SSDS未使用cdCat01列挙+需要ファースト拡充ループ。★09-16追記: 発見入口はR2 estat-catalog(月次・全collectArea)で絞らない、出口だけ絞る
 - [project_youtube_mass_experiment_2026_07.md](project_youtube_mass_experiment_2026_07.md) — YouTube量産実験(2026-07-11〜)。familyアカウントで月1上限撤廃(ペース1日1本)。ガード緩和=youtube-experiment.json(削除で月1復帰)、重複/pauseガード維持。CI投稿経路実証(GitHub Release→develop-push→GOOGLE_OAUTH)。BCRはapp/stats(全年)読む
 - [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — TODO真実源=.claude/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
 - [project_kakei_expansion_pipeline_gotchas.md](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充(2026-07-10)の罠: kakei @area=県庁所在市コード→NN000写像 / master exportはNODE_ENV=production必須 / saveToR2はローカルstagingのみ→diff-push-r2
