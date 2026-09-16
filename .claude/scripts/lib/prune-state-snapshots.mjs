@@ -74,6 +74,12 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
+  // page-components-audit.cjs が書く area/theme 責務分離の棚卸しレポート (手動・不定期)。直近 8 回分を残す。
+  "seo-audit-area-theme": {
+    directory: ".claude/skills/analytics/seo-audit/reference/audits",
+    pattern: /^\d{4}-\d{2}-\d{2}-area-theme-audit\.md$/,
+    keep: 8,
+  },
 });
 
 export function selectSnapshotsToPrune(files, pattern, keep) {

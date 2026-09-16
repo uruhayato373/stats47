@@ -3,6 +3,7 @@
 import { Button } from "@stats47/components/atoms/ui/button";
 import { Download } from "lucide-react";
 
+import { SurfaceCard } from "@/components/surface";
 
 import type { AreaType } from "@/features/area";
 
@@ -35,10 +36,10 @@ export function DataUsageCard({
   const href = `/api/ranking/${encodeURIComponent(rankingKey)}/download?format=csv&basis=${basis}`;
 
   return (
-    <div className="flex items-center gap-4 rounded-none border border-primary/20 bg-primary/5 p-4 shadow-sm">
+    <SurfaceCard className="flex items-center gap-4 border-primary/20 bg-primary/5">
       <div className="min-w-0 flex-1">
-        <h2 className="text-sm font-bold text-primary">このデータを使う</h2>
-        <p className="mt-0.5 text-xs text-muted-foreground">
+        <h2 className="text-sm font-semibold text-primary">このデータを使う</h2>
+        <p className="mt-0.5 text-sm text-muted-foreground">
           47都道府県{yearText ? ` × ${yearText}` : "の"}データをCSVでダウンロード。クレジット表記すれば無料で商用利用できます。
         </p>
       </div>
@@ -56,6 +57,6 @@ export function DataUsageCard({
           ダウンロード
         </a>
       </Button>
-    </div>
+    </SurfaceCard>
   );
 }

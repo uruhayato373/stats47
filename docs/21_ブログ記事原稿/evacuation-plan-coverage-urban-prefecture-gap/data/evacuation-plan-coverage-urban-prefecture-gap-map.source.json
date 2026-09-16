@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "individual-evacuation-plan-coverage-rate",
+  "year": "2026",
+  "unit": "％",
+  "label": "個別避難計画の作成率",
+  "readerLabel": "個別避難計画の作成率",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/individual-evacuation-plan-coverage-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug evacuation-plan-coverage-urban-prefecture-gap --keys individual-evacuation-plan-coverage-rate --with-map",
+  "fetchedAt": "2026-09-15T21:42:06.612Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

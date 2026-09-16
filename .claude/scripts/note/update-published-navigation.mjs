@@ -16,13 +16,14 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import {
   applyNavigationFooter,
   applyPublishedLinkRepairs,
   applyVisibleNavigationBeforeSeparator,
   buildNoteProductCardUrl,
   canonicalizeNoteEditorBody,
+  resolveProductCardText,
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 
@@ -201,7 +202,7 @@ function auditRemediation() {
   }
 }
 
-function buildPlans(source, views, options) {
+export function buildPlans(source, views, options) {
   const articles = new Map(source.articles.map((article) => [article.key, article]));
   const magazines = new Map(source.magazines.map((magazine) => [magazine.key, magazine]));
   const remediation = auditRemediation();
@@ -224,6 +225,11 @@ function buildPlans(source, views, options) {
       const productTarget = options.products && !article.isPaid
         ? magazineRecord?.productTarget || null
         : null;
+      // マガジン名の代用ではなく、実商品SSOT (storefront.generated.ts) からnote商品カードの
+      // title/descriptionを解決する。マガジン単位ではなく商品単位の事実 (2026-09-16: 全189本で
+      // カードがマガジン名を表示し実商品と不一致だったことを実測)。
+      const productUrl = productTarget ? buildNoteProductCardUrl(productTarget, article.noteUrl) : null;
+      const productCardText = productTarget ? resolveProductCardText(productTarget) : null;
       if (article.nextBestArticle && !next?.noteUrl)
         throw new Error(`${article.key}: nextBestArticle が未公開`);
       // マガジンが note 上で未公開 (noteUrl null) なら footer からマガジンカードを省くだけ。
@@ -234,6 +240,16 @@ function buildPlans(source, views, options) {
       const repairs = [
         ...(article.publishedLinkRepairs || []),
         ...(options.repairRedirects ? liveRepair.repairs : []),
+        // あるべき商品カード状態を常に計算し、公開済み本文との差分だけを直す。
+        // catalog へ記事ごとに手書きしない (是正対象は productTarget を持つ記事すべて)。
+        ...(productUrl
+          ? [{
+              mode: "regenerate-card",
+              fromUrl: productUrl,
+              title: productCardText.title,
+              description: productCardText.description,
+            }]
+          : []),
       ].filter((repair, index, values) => values.findIndex(
         (candidate) => candidate.mode === repair.mode
           && candidate.fromUrl === repair.fromUrl
@@ -261,13 +277,9 @@ function buildPlans(source, views, options) {
               siteDescription: target
                 ? "47都道府県の順位・数値・グラフを無料で確認できます。"
                 : "公的統計を47都道府県のランキング・地図・グラフで確認できます。",
-              productUrl: productTarget
-                ? buildNoteProductCardUrl(productTarget, article.noteUrl)
-                : null,
-              productTitle: productTarget ? `${magazineRecord?.name || article.title}の商品・書籍` : null,
-              productDescription: productTarget
-                ? "無料の数値に加え、テーマ別に編集したKindle本または再利用しやすいデータ集を確認できます。"
-                : null,
+              productUrl,
+              productTitle: productCardText?.title ?? null,
+              productDescription: productCardText?.description ?? null,
             }
           : null,
       };
@@ -525,7 +537,8 @@ async function publishPlan(ctx, plan, before, publicBefore) {
         && (!application.addedProduct || live.body.includes(plan.footer.productUrl))
       );
       const repairsOk = plan.repairs.every(
-        (repair) => !live.body.includes(repair.fromUrl) && live.body.includes(repair.toUrl),
+        (repair) => repair.mode === "regenerate-card"
+          || (!live.body.includes(repair.fromUrl) && live.body.includes(repair.toUrl)),
       );
       if (footerOk && repairsOk) break;
       await sleep(1_000);
@@ -542,7 +555,11 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     )) {
       throw new Error(`更新後本文で回遊URLを確認できません: api=${JSON.stringify(patch)}`);
     }
+    // regenerate-card は URL を維持したままカード文言だけを直すため toUrl を持たず、
+    // fromUrl は成功後も本文に残り続ける (replace-url/replace-card とは逆の成立条件)。
+    // 正しさは末尾の bodySignature 完全一致チェックが保証するので、ここでは対象外にする。
     for (const repair of plan.repairs) {
+      if (repair.mode === "regenerate-card") continue;
       if (live.body.includes(repair.fromUrl) || !live.body.includes(repair.toUrl)) {
         throw new Error(`更新後本文でリンク修復を確認できません: ${repair.fromUrl}`);
       }
@@ -667,9 +684,11 @@ async function main() {
   if (report.articles.some((article) => article.result?.status === "failed")) process.exitCode = 1;
 }
 
-try {
-  await main();
-} catch (error) {
-  console.error(`ERROR: ${error.message}`);
-  process.exitCode = 1;
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  try {
+    await main();
+  } catch (error) {
+    console.error(`ERROR: ${error.message}`);
+    process.exitCode = 1;
+  }
 }

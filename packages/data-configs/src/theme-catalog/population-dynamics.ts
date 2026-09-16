@@ -16,7 +16,6 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
         "surveyedAt": "2026-09-08",
         "rationale": "総人口は「人口は増えているか」を読むため主要画面へ配置する。",
-        "adoptionCriteria": ["complementarity", "readerValue"],
         "readerQuestion": "人口増減率が示す変化は、どれくらいの規模の県で起きているか（小さな県の急減と大きな県の微減を混同しない）。",
         "targetReaderOrDecision": "増減率だけでなく絶対的な人口規模を把握したい読者（自治体規模の比較、市場規模の見立て）。"
       }
@@ -63,7 +62,6 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
         "surveyedAt": "2026-09-08",
         "rationale": "人口増減率は主問に直接答える見出し指標として残す。",
-        "adoptionCriteria": ["representativeness", "comparability", "readerValue"],
         "readerQuestion": "自分の県、または比較したい県の人口は増えているか、減っているか。",
         "targetReaderOrDecision": "移住・進学・就職で居住地を検討する読者、または自地域の将来像を把握したい読者。"
       }
@@ -77,7 +75,6 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
         "surveyedAt": "2026-09-08",
         "rationale": "自然増減率は「出生と死亡・転入と転出の内訳」を読むため主要画面へ配置する。",
-        "adoptionCriteria": ["complementarity", "dataQuality"],
         "readerQuestion": "人口増減は出生と死亡の差（自然要因）で起きているのか、転入と転出の差（社会要因）で起きているのか。",
         "targetReaderOrDecision": "人口減少の背景（少子化か人口流出か）を理解したい読者、地域の実情を調べる読者。"
       }

@@ -21,11 +21,11 @@ metadata:
 - **拡大の本命 = SSDS の未使用 cdCat01 列挙**。家計調査は品目展開で同様。needは住宅(vacant-housing脈)/医療受療率(患者・医療施設・地域保健≈1089候補)/年収(就業構造385)
 
 ## DBレス発見パイプライン (旧 D1 estat_metainfo 廃止・再構築済)
-- `.claude/scripts/estat/discover-prefecture-candidates.mjs` — collectArea=2列挙+既存config突合→JSON
+- (2026-09-16 削除) `discover-prefecture-candidates.mjs` — collectArea=2列挙+既存config突合→JSON。候補列挙は R2 estat-catalog `index/tables/` へ
 - `.claude/scripts/estat/fetch-estat-meta.mjs` — getMetaInfoで次元構造 (キュレーション素材)。sampleValues12件cap
 - deprecated: `expand-indicators` skill / `ingest-indicator.mjs` (削除済 stats_prefecture 依存)。投入は `page-data-batch.ts` (R2直行) が現役
 - **e-Stat APP_ID `NEXT_PUBLIC_ESTAT_APP_ID` は CI専任** (.env.localに無い・2026-05-29集約)。secrets.NEXT_PUBLIC_ESTAT_APP_ID
-- **workflow_dispatch は default(main)ブランチ限定** → main デプロイ無しで回すため専用ブランチ push トリガーにした: `discover-estat-candidates.yml`(branch `estat-discovery-run`) / `estat-fetch-meta.yml`(branch `estat-meta-run`)。該当ブランチへ push=発火。結果は artifact + ログ
+- **workflow_dispatch は default(main)ブランチ限定** → main デプロイ無しで回すため専用ブランチ push トリガーにした: `discover-estat-candidates.yml`(branch `estat-discovery-run`) / `estat-fetch-meta.yml`(branch `estat-meta-run`)。該当ブランチへ push=発火。結果は artifact + ログ ※`estat-fetch-meta.yml`+branch `estat-meta-run`、`discover-estat-candidates.yml`+branch `estat-discovery-run` は 2026-09-16 退役 (collectArea 2,3 の getMetaInfo は R2 estat-catalog `meta/<id>.json`。全国表は catalog 未対応で CI 経由の取得は無し。ローカル `fetch-estat-meta.mjs` は残置、APP_ID があれば可)
 - 投入=`data-refresh.yml`(page-data-batch→R2)、公開=KNOWN/sitemap再生成→deploy→本番200実測
 
 ## SSDS 列挙の実数 (2026-07-11 確定・enumerate-ssds-indicators.mjs)
@@ -59,6 +59,16 @@ metadata:
 - スキル `/expand-rankings`(`.claude/skills/management/expand-rankings/`。旧expand-indicators再構築)
 - エージェント `ranking-expander`(`.claude/agents/`。キュレーション判断オーナー。投入=data-ingester/公開=ranking-publisher/計測=gsc-analyst委譲)
 - 計測 `measure-expansion-impact.mjs`(公開4週後GSC流入→キュー反映→build再実行でcategoryTraffic更新)
+
+## ★2026-09-16: 発見の入口をカタログ化 (この文書の拡充ループとは別軸)
+
+拡充ループ(需要ファースト)は「公開してよいか」の出口フィルタ。一方で「e-Statに何があるか」を
+毎回生APIで調べ直す非効率が残っていたため、statsDataId一覧+getMetaInfo要約(年次・エリア種別・
+47県判定)を全国/都道府県/市区町村で月次保有する`estat-catalog/`をR2に新設した(オーナー判断:
+R2は低コストなので発見の入口は絞らない。深掘りするかどうかの絞り込みは従来どおり出口=公開判断
+で行う)。CLI `.claude/scripts/estat/catalog.mjs`、workflow `estat-catalog-monthly.yml`、
+設計は `docs/02_実装計画/48_e-Statカタログ実装仕様.md`。初回backfillと`ssds-candidates.json`の
+catalog派生への置換は `.claude/todo/backlog.md` `ESTAT-CATALOG-01`。
 
 ## 次: 公開サイクル (最後に1デプロイ)
 develop の ~39本 + main の 7本を **一括投入(e-Stat→R2 values.json)→ generate-ranking-items(item.json)→ KNOWN/SITEMAP再生成 → 最後に1デプロイ → 本番200実測**。ingestは data-refresh(main checkout・--metric単一)なので、1デプロイ実現には develop読みの push-trigger投入workflow が要る(未実装)。GSC実測は公開4週後。関連: [[project_competitor_indicator_benchmark]] / .claude/todo/backlog.md

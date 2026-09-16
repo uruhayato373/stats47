@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { SurfaceCard } from "@/components/surface";
+import { SectionCard } from "@/components/surface";
 
 interface CorrelatedItem {
     rankingKey: string;
@@ -43,28 +43,21 @@ export function CorrelationSectionClient({
     correlatedItems,
 }: CorrelationSectionClientProps) {
     return (
-        <SurfaceCard className="p-0">
-            <div className="border-b border-border px-4 py-3">
-                <h3 className="text-sm font-medium text-muted-foreground">
-                    相関が高い指標
-                </h3>
-            </div>
-            <div className="px-4 pb-4 pt-2">
-                <nav className="flex flex-col">
-                    {correlatedItems.map((item) => (
-                        <Link
-                            key={item.rankingKey}
-                            href={`/ranking/${item.rankingKey}`}
-                            className="flex items-center justify-between py-1.5 text-xs hover:text-primary transition-colors"
-                        >
-                            <span className="truncate mr-2">{item.title}</span>
-                            <span className={`shrink-0 font-mono ${rColor(item.pearsonR)}`}>
-                                {formatR(item.pearsonR)}
-                            </span>
-                        </Link>
-                    ))}
-                </nav>
-            </div>
-        </SurfaceCard>
+        <SectionCard title="相関が高い指標">
+            <nav className="flex flex-col">
+                {correlatedItems.map((item) => (
+                    <Link
+                        key={item.rankingKey}
+                        href={`/ranking/${item.rankingKey}`}
+                        className="flex items-center justify-between py-1.5 hover:text-primary transition-colors"
+                    >
+                        <span className="truncate mr-2 text-sm">{item.title}</span>
+                        <span className={`shrink-0 font-mono text-xs tabular-nums ${rColor(item.pearsonR)}`}>
+                            {formatR(item.pearsonR)}
+                        </span>
+                    </Link>
+                ))}
+            </nav>
+        </SectionCard>
     );
 }

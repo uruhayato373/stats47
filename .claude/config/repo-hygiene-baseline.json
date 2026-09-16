@@ -100,11 +100,6 @@
     },
     {
       "code": "LARGE_FILE",
-      "file": ".claude/state/estat/prefecture-candidates.json",
-      "message": "3140232 bytes exceeds 1048576 bytes"
-    },
-    {
-      "code": "LARGE_FILE",
       "file": ".claude/state/gsc/coverage-remediation-queue.json",
       "message": "1600441 bytes exceeds 1048576 bytes"
     },

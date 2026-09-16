@@ -11,7 +11,7 @@ import { trackRailClick } from "@/lib/analytics/events";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
-import type { SidebarRankingItem } from "./select-sidebar-items";
+import { getSidebarDetail, type SidebarRankingItem } from "./select-sidebar-items";
 
 
 
@@ -62,7 +62,7 @@ export function RankingSidebarClient({
 
     return (
         <RailCard
-            className="h-full w-full overflow-hidden animate-in fade-in duration-300"
+            className="w-full overflow-hidden animate-in fade-in duration-300"
             title={categoryName ?? "同カテゴリ"}
             icon={categoryIcon ? (
                 <CategoryIcon categoryKey={categoryKey ?? ""} lucideIconName={categoryIcon} className="h-4 w-4 text-muted-foreground" />
@@ -85,13 +85,11 @@ export function RankingSidebarClient({
                                 })
                             }
                         >
-                            <span className="flex min-w-0 flex-col">
+                            <span className="flex min-w-0 flex-col gap-0.5">
                                 <span className="line-clamp-1 leading-snug">
                                     {item.readerLabel ?? item.title}
                                     {(() => {
-                                        const detail = item.subtitle
-                                            || [item.demographicAttr, item.normalizationBasis].filter(Boolean).join("・")
-                                            || null;
+                                        const detail = getSidebarDetail(item);
                                         return detail ? (
                                             <span className="text-muted-foreground">
                                                 {" "}({detail})
@@ -100,11 +98,16 @@ export function RankingSidebarClient({
                                     })()}
                                 </span>
                                 {item.top1 ? (
-                                    <span className="line-clamp-1 text-[11px] leading-snug text-muted-foreground">
-                                        {item.top1.rank ?? 1}位 {item.top1.areaName}
-                                        {item.top1.value
-                                            ? ` ${item.top1.value}${item.unit ?? ""}`
-                                            : ""}
+                                    <span className="line-clamp-1 text-xs leading-snug text-muted-foreground">
+                                        <span className="font-semibold text-amber-600">
+                                            {item.top1.rank ?? 1}位
+                                        </span>{" "}
+                                        {item.top1.areaName}{" "}
+                                        {item.top1.value ? (
+                                            <span className="font-semibold text-foreground">
+                                                {item.top1.value}{item.unit ?? ""}
+                                            </span>
+                                        ) : null}
                                     </span>
                                 ) : null}
                             </span>

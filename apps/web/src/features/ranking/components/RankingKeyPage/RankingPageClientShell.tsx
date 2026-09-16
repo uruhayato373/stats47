@@ -1,9 +1,11 @@
 import { BannerAd, isLandscapeBanner } from "@/features/ads";
+import { detectProductKeyword } from "@/features/ads/constants/product-keywords";
 
 import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense";
 
 import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
 import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
+import { computeRankingHeaderStats } from "../../utils/compute-ranking-header-stats";
 
 import { shouldShowRankingInContentAffiliate } from "./ranking-incontent-affiliate-policy";
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
@@ -14,6 +16,7 @@ import {
 } from "./RankingPageAsyncSections";
 import { RankingPageBreadcrumbs } from "./RankingPageBreadcrumbs";
 import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateSection";
+import { RankingPageRakutenNativeSection } from "./RankingPageRakutenNativeSection";
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
 
@@ -36,6 +39,17 @@ export function RankingPageClientShell({
   const nativeAffiliateBanners = (inContentAffiliateBanner ? affiliateBanners.slice(1) : affiliateBanners).slice(0, 3);
   const usedAffiliateAds = [inContentAffiliateBanner, ...nativeAffiliateBanners]
     .filter((banner) => banner !== null);
+
+  // 家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) は本文の A8 を出さず楽天カードにする
+  // (2026-09-16)。中段 native はモバイル=商品軸・デスクトップ=1位県の返礼品、上段 in-content は
+  // 描画しない。usedAffiliateAds は据え置き — 出さなかった A8 が右レールへ流れ込まないようにする。
+  const isKakeiChousa = (model.originalSurveys ?? []).some((survey) => survey.id === "kakei-chousa");
+  const top1Entry = computeRankingHeaderStats(model.rankingValues ?? []).top3[0] ?? null;
+  const hasProductKeyword = detectProductKeyword(model.rankingName ?? "") !== null;
+  const useRakutenNative = (model.affiliateVertical ?? null) !== null
+    && isKakeiChousa
+    && (top1Entry !== null || hasProductKeyword);
+  const renderedInContentBanner = useRakutenNative ? null : inContentAffiliateBanner;
 
   return (
     <RankingKeyPageClient
@@ -81,23 +95,30 @@ export function RankingPageClientShell({
         funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (
           <RankingFunnelCta key="funnel-cta" rankingKey={rankingKey} />
         ) : null,
-        inContentAffiliate: inContentAffiliateBanner ? (
+        inContentAffiliate: renderedInContentBanner ? (
           <div key="in-content-affiliate" className="flex justify-center">
             <BannerAd
-              href={inContentAffiliateBanner.href}
-              imageUrl={inContentAffiliateBanner.imageUrl}
-              trackingPixelUrl={inContentAffiliateBanner.trackingPixelUrl}
-              width={inContentAffiliateBanner.width}
-              height={inContentAffiliateBanner.height}
-              label={inContentAffiliateBanner.title}
-              category={inContentAffiliateBanner.vertical ?? "other"}
+              href={renderedInContentBanner.href}
+              imageUrl={renderedInContentBanner.imageUrl}
+              trackingPixelUrl={renderedInContentBanner.trackingPixelUrl}
+              width={renderedInContentBanner.width}
+              height={renderedInContentBanner.height}
+              label={renderedInContentBanner.title}
+              category={renderedInContentBanner.vertical ?? "other"}
               position="ranking-incontent"
-              adId={inContentAffiliateBanner.id}
-              creativeSize={`${inContentAffiliateBanner.width}x${inContentAffiliateBanner.height}`}
+              adId={renderedInContentBanner.id}
+              creativeSize={`${renderedInContentBanner.width}x${renderedInContentBanner.height}`}
             />
           </div>
         ) : null,
-        nativeAffiliate: (
+        nativeAffiliate: useRakutenNative ? (
+          <RankingPageRakutenNativeSection
+            key="native-affiliate"
+            rankingName={model.rankingName}
+            top1={top1Entry ? { areaCode: top1Entry.areaCode, areaName: top1Entry.areaName } : null}
+            hasProductKeyword={hasProductKeyword}
+          />
+        ) : (
           <RankingPageNativeAffiliateSection
             key="native-affiliate"
             banners={nativeAffiliateBanners}

@@ -9,7 +9,16 @@ e-Stat API のメタデータ（カテゴリ・年・地域の構造）を調査
 
 ## 事前確認
 
-調査前に `.claude/skills/estat/references/README.md` を確認し、既知のテーブル構造やコード体系を把握すること。該当する調査のリファレンスファイルがあれば、そちらも読むこと。
+**最初に e-Statメタデータ完全カタログを確認する** (月次更新・`docs/02_実装計画/48_e-Statカタログ実装仕様.md`)。既に取得済みなら生API不要。
+
+```bash
+node --import tsx .claude/scripts/estat/catalog.mjs pull        # .local/estat-catalog/ が無い場合のみ (初回)
+node --import tsx .claude/scripts/estat/catalog.mjs search --id <statsDataId>
+```
+
+見つからない (未取得・全国collectArea=1で対象外・カタログ自体が初回backfill未実施) 場合のみ
+Phase 1 の生 API 呼び出しへ進む。
+また `.claude/skills/estat/references/README.md` を確認し、既知のテーブル構造やコード体系を把握すること。該当する調査のリファレンスファイルがあれば、そちらも読むこと。
 
 ## 用途
 

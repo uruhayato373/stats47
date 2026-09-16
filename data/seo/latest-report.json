@@ -1,75 +1,66 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "period": {
-    "periodStart": "2026-09-06",
-    "periodEnd": "2026-09-12",
+    "periodStart": "2026-09-07",
+    "periodEnd": "2026-09-13",
     "windowDays": 7
   },
-  "inputHash": "24bec4cdd92be8a293dbd8fd2213ffbfab20cf9b131121780e97e7faf701d138",
+  "inputHash": "a49fd7ded6168eb146416c93a7ba140bdc9a0cf874ea473e41249c6238977a22",
   "movements": [
     {
-      "keyword": "自動車保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 73.57142857142857,
-      "after": 32.1,
-      "beforeImpressions": 7,
-      "impressions": 10,
-      "change": 41.47142857142857
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 30.689655172413794,
+      "after": 72.4,
+      "beforeImpressions": 29,
+      "impressions": 20,
+      "change": -41.71034482758621
     },
     {
       "keyword": "地方債 利率 ランキング",
       "targetPath": "/blog/local-government-debt-burden",
       "before": 44.5,
-      "after": 3.5,
+      "after": 3.625,
       "beforeImpressions": 2,
-      "impressions": 6,
-      "change": 41
-    },
-    {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 30.15625,
-      "after": 66.14285714285714,
-      "beforeImpressions": 32,
-      "impressions": 21,
-      "change": -35.98660714285714
-    },
-    {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 77.76190476190476,
-      "after": 43.793103448275865,
-      "beforeImpressions": 21,
-      "impressions": 29,
-      "change": 33.968801313628894
-    },
-    {
-      "keyword": "完全失業率",
-      "targetPath": "/blog/unemployment-structure",
-      "before": 23,
-      "after": 56,
-      "beforeImpressions": 3,
-      "impressions": 1,
-      "change": -33
+      "impressions": 8,
+      "change": 40.875
     },
     {
       "keyword": "任意保険 加入 率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 30.428571428571427,
-      "after": 62.857142857142854,
-      "beforeImpressions": 7,
-      "impressions": 7,
-      "change": -32.42857142857143
-    },
-    {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 77.66666666666667,
-      "after": 46.142857142857146,
+      "before": 31,
+      "after": 69.42857142857143,
       "beforeImpressions": 6,
       "impressions": 7,
-      "change": 31.523809523809526
+      "change": -38.42857142857143
+    },
+    {
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 79,
+      "after": 40.714285714285715,
+      "beforeImpressions": 6,
+      "impressions": 7,
+      "change": 38.285714285714285
+    },
+    {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 78.75,
+      "after": 41.37931034482759,
+      "beforeImpressions": 20,
+      "impressions": 29,
+      "change": 37.37068965517241
+    },
+    {
+      "keyword": "自動車保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 67,
+      "after": 36.2,
+      "beforeImpressions": 8,
+      "impressions": 10,
+      "change": 30.799999999999997
     },
     {
       "keyword": "日本 米 消費量",
@@ -97,15 +88,24 @@
       "beforeImpressions": 1,
       "impressions": 2,
       "change": -26
+    },
+    {
+      "keyword": "郡山 人口",
+      "targetPath": "/areas/07000/cities/07203/population",
+      "before": 35,
+      "after": 9,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 26
     }
   ],
   "verdicts": [],
   "selected": {
     "keyword": "外国人",
     "targetPath": "/blog/foreign-residents-diversity-map",
-    "rank": 2.666208791208791,
-    "impressions": 728,
-    "clicks": 55,
+    "rank": 2.6729191090269637,
+    "impressions": 853,
+    "clicks": 50,
     "group": 5,
     "previousMethod": null,
     "editableFile": null

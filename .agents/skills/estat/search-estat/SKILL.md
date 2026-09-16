@@ -30,9 +30,18 @@ e-Stat API の統計表を検索し、statsDataId を特定する。
 
 ## 手順
 
-### Phase 0: git-tracked references カタログを確認（API より先に実行）
+### Phase 0: e-Statメタデータ完全カタログ → git-tracked references の順で確認（API より先に実行）
 
-完全DBレス。**恒久カタログは git-tracked `.claude/skills/estat/references/*.md`**（`/inspect-estat-meta` で把握した頻用表を蓄積する索引）。e-Stat API を叩く前にまずここを検索する。
+**最初に R2 estat-catalog を検索する** (`docs/02_実装計画/48_e-Statカタログ実装仕様.md`)。
+全国/都道府県/市区町村の全statsDataId + getMetaInfo要約 (年次・エリア種別・47県判定) を持つ月次更新カタログ。
+
+```bash
+node --import tsx .claude/scripts/estat/catalog.mjs pull   # 初回のみ (.local/estat-catalog/ へ取得)
+node --import tsx .claude/scripts/estat/catalog.mjs search <キーワード> [--pref-only] [--collect-area 2]
+```
+
+見つかればそのstatsDataIdで`/inspect-estat-meta`へ進む (Phase 1をスキップ)。見つからない場合だけ
+git-tracked references を確認する。**恒久カタログは git-tracked `.claude/skills/estat/references/*.md`**（`/inspect-estat-meta` で把握した頻用表を蓄積する索引）。
 
 > 旧「ローカル D1 `estat_metainfo` の 8,000 行自動カタログ」は廃止（retired D1 由来で git 再生成不可・seed なし）。カタログの真実源は **e-Stat API（Reference / 再生成）** で、よく使う表だけ references/*.md に蓄積する運用に移行した。
 

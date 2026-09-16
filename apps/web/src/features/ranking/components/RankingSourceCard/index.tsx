@@ -1,6 +1,6 @@
 import { Database, ExternalLink } from "lucide-react";
 
-import { SurfaceCard } from "@/components/surface";
+import { SectionCard } from "@/components/surface";
 
 /**
  * 地図データの出典情報（固定値）
@@ -36,40 +36,38 @@ export function RankingSourceCard({
   source,
 }: RankingSourceCardProps) {
   return (
-    <SurfaceCard className="mt-8 w-full p-0">
-      <div className="flex items-center gap-2 border-b border-border px-4 py-4">
-        <Database className="h-4 w-4 text-muted-foreground" />
-        <h3 className="text-base font-semibold text-foreground">出典・データソース</h3>
+    <SectionCard
+      className="mt-8 w-full"
+      title="出典・データソース"
+      icon={<Database className="h-4 w-4 text-muted-foreground" />}
+    >
+      {/* データ提供元 */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm">
+        <span className="text-muted-foreground min-w-fit">データ提供元:</span>
+        <a
+          href={source.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 font-medium text-primary hover:underline break-all"
+        >
+          {source.name}
+          <ExternalLink className="h-3 w-3" />
+        </a>
       </div>
-      <div className="p-4">
-        {/* データ提供元 */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm">
-          <span className="text-muted-foreground min-w-fit">データ提供元:</span>
-          <a
-            href={source.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 font-medium text-primary hover:underline break-all"
-          >
-            {source.name}
-            <ExternalLink className="h-3 w-3" />
-          </a>
-        </div>
 
-        {/* 地図データ */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm mt-3 pt-3 border-t border-border">
-          <span className="text-muted-foreground min-w-fit">地図データ:</span>
-          <a
-            href={MAP_DATA_SOURCE.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 font-medium text-primary hover:underline break-all"
-          >
-            {MAP_DATA_SOURCE.name}
-            <ExternalLink className="h-3 w-3" />
-          </a>
-        </div>
+      {/* 地図データ */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm mt-3 pt-3 border-t border-border">
+        <span className="text-muted-foreground min-w-fit">地図データ:</span>
+        <a
+          href={MAP_DATA_SOURCE.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 font-medium text-primary hover:underline break-all"
+        >
+          {MAP_DATA_SOURCE.name}
+          <ExternalLink className="h-3 w-3" />
+        </a>
       </div>
-    </SurfaceCard>
+    </SectionCard>
   );
 }

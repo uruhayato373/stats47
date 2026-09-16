@@ -1,4 +1,4 @@
-import { SurfaceCard } from "@/components/surface";
+import { RailCard } from "@/components/surface";
 
 import {
   ADSENSE_DISPLAY_ENABLED,
@@ -12,7 +12,7 @@ interface RailAdSlotProps {
 }
 
 /**
- * 右レール内の広告枠（SurfaceCard + "広告" ヘッダ、rectangle 想定）。
+ * 右レール内の広告枠（RailCard title="広告"、rectangle 想定）。
  *
  * RightRailWidgets の AdSense 枠と同じ文法。multiplex は入れない（全幅専用のため）。
  * slot.slotId が空文字なら何も描画しない。
@@ -25,13 +25,8 @@ interface RailAdSlotProps {
 export function RailAdSlot({ slot }: RailAdSlotProps) {
   if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
   return (
-    <SurfaceCard className="p-0">
-      <div className="border-b border-border px-4 py-3">
-        <h3 className="text-sm font-medium text-muted-foreground">広告</h3>
-      </div>
-      <div className="flex justify-center overflow-hidden p-2">
-        <AdSenseAd format={slot.format} slotId={slot.slotId} showLabel={false} />
-      </div>
-    </SurfaceCard>
+    <RailCard title="広告" bodyClassName="flex justify-center overflow-hidden p-2">
+      <AdSenseAd format={slot.format} slotId={slot.slotId} showLabel={false} />
+    </RailCard>
   );
 }

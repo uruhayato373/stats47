@@ -32,6 +32,7 @@ import { resolveContentVerticalChain } from "@/features/ads/constants/affiliate-
 import type { ResolvedAffiliateBanner } from "@/features/ads/types";
 
 import { RankingPageClientShell } from "../components/RankingKeyPage/RankingPageClientShell";
+import { RankingPageRakutenNativeSection } from "../components/RankingKeyPage/RankingPageRakutenNativeSection";
 
 import type { RankingPageModel } from "../services/load-ranking-page-model";
 
@@ -53,6 +54,7 @@ vi.mock("../components/RankingKeyPage/RankingPageAsyncSections", () => ({
 }));
 vi.mock("../components/RankingKeyPage/RankingPageBreadcrumbs", () => ({ RankingPageBreadcrumbs: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageNativeAffiliateSection", () => ({ RankingPageNativeAffiliateSection: () => null }));
+vi.mock("../components/RankingKeyPage/RankingPageRakutenNativeSection", () => ({ RankingPageRakutenNativeSection: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageRelatedRankingsSection", () => ({ RankingPageRelatedRankingsSection: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageSidebarSection", () => ({ RankingPageSidebarSection: () => null }));
 
@@ -148,5 +150,55 @@ describe("ranking native アフィリエイトの解決契約", () => {
     expect(AFFILIATE_SECTION_SRC).not.toContain('position="ranking-end"');
     expect(AFFILIATE_SECTION_SRC).not.toContain("<BannerAd");
     expect(AFFILIATE_SECTION_SRC).not.toContain("usable[4]");
+  });
+
+  it("家計調査 (kakei-chousa) の本文中段 native は楽天カードへ置換する (2026-09-16)", () => {
+    display.adsense = false;
+    const nativeBanners: ResolvedAffiliateBanner[] = ["b1"].map((id) => ({
+      id, title: id, href: `https://example.com/${id}`, imageUrl: `https://example.com/${id}.png`,
+      width: 300, height: 250, trackingPixelUrl: null, vertical: null,
+    }));
+    const baseModel = {
+      nativeBanners,
+      rankingItem: { categoryKey: "economy" },
+      affiliateVertical: "furusato" as const,
+      rankingName: "納豆消費支出額",
+      rankingValues: [
+        { areaCode: "07000", areaName: "福島県", rank: 1, value: 100 },
+        { areaCode: "01000", areaName: "北海道", rank: 2, value: 90 },
+      ],
+    };
+    const kakeiModel = {
+      ...baseModel,
+      originalSurveys: [{ id: "kakei-chousa", name: "家計調査" }],
+    } as RankingPageModel;
+    const nonKakeiModel = {
+      ...baseModel,
+      originalSurveys: [{ id: "other-survey", name: "他調査" }],
+    } as RankingPageModel;
+
+    const kakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: kakeiModel });
+    const kakeiSections = kakeiRendered.props.sections as {
+      nativeAffiliate: ReactElement<{ top1: { areaCode: string } | null; hasProductKeyword: boolean }>;
+      inContentAffiliate: ReactElement | null;
+      sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
+    };
+    expect(kakeiSections.nativeAffiliate.type).toBe(RankingPageRakutenNativeSection);
+    expect(kakeiSections.nativeAffiliate.props.top1?.areaCode).toBe("07000");
+    expect(kakeiSections.nativeAffiliate.props.hasProductKeyword).toBe(true);
+    // 上段 in-content の A8 も家計調査系では描画しない (2026-09-16 オーナー判断)。
+    expect(kakeiSections.inContentAffiliate).toBeNull();
+
+    const nonKakeiRendered = RankingPageClientShell({ rankingKey: "natto-consumption-expenditure", model: nonKakeiModel });
+    const nonKakeiSections = nonKakeiRendered.props.sections as {
+      inContentAffiliate: ReactElement | null;
+      sidebar: ReactElement<{ excludeAffiliateAds: ResolvedAffiliateBanner[] }>;
+    };
+    expect(nonKakeiSections.inContentAffiliate).not.toBeNull();
+    // 描画しなかった A8 も右レール除外 (usedAffiliateAds) には残す = レールへ流れ込ませない。
+    expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(["b1"]);
+    expect(kakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id)).toEqual(
+      nonKakeiSections.sidebar.props.excludeAffiliateAds.map((banner) => banner.id),
+    );
   });
 });

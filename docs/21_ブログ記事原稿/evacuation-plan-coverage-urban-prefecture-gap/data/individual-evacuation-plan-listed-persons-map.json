@@ -1,0 +1,249 @@
+{
+  "title": "避難行動要支援者名簿の掲載人数",
+  "subtitle": "2026年",
+  "label": "避難行動要支援者名簿の掲載人数",
+  "readerLabel": "避難行動要支援者名簿の掲載人数",
+  "hook": "避難行動要支援者名簿の掲載人数が最も多い県は？",
+  "unit": "人",
+  "year": "2026",
+  "rankingKey": "individual-evacuation-plan-listed-persons",
+  "source": "内閣府・消防庁「避難行動要支援者名簿及び個別避難計画の作成等に係る取組状況」",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "data": [
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 561498
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 556210
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 532533
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 494318
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 479054
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 418089
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 315775
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 282772
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 168917
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 166410
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 162305
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 152970
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 145845
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 133600
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 128959
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 124080
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 122008
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 107622
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 107487
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 93039
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 91103
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 87393
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "value": 85755
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "value": 84872
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "value": 76859
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 73152
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 71688
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 66570
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 64192
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 59027
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 57146
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 56253
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 51860
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 49345
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 48429
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 44777
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 44106
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 43108
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 41716
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 38615
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 37642
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 36594
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 29957
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 28935
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 25962
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 25614
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 22557
+    }
+  ]
+}

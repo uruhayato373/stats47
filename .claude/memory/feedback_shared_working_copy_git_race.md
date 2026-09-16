@@ -83,6 +83,16 @@ main の commit を replay して途中で停止する。その detached な中�
 - **原因**: tip 同士の `git diff origin/develop origin/main` は develop 側だけの変更も数える。
 - **対策**: main 由来の未同期変更は `git diff origin/develop...origin/main`（共通祖先→main）で検査する。develop-only は PASS、main-only は検出する実 Git fixture を回帰テストに固定した。PASS は「両 branch 同一」ではなく「main 由来の未同期変更なし」と表示する。
 
+**★「明示パス add → preflight → commit」の間に相手が commit すると staged 分ごと持っていかれる (2026-09-16・Windows)**:
+明示パスで `git add` した 5 ファイル (家計調査系 ranking の上段 A8 除去 + 規約/台帳) を `npm run preflight`
+(45 秒) にかけている間に、別セッションが theme-dashboard の 3 ファイルを commit → **index は 1 つなので私の
+staged 5 ファイルが相手の commit `a073edbac fix(theme-dashboard)` に同梱**された。相手はその上に merge commit
+まで積んでいたので履歴は書き換えず、事実を報告して残した。`git add -A` を避けても防げない (index 共有そのものが原因)。
+**How to apply:** 共有ツリーで commit するときは **staged 状態を残さない**。`git commit -- <path...>` (pathspec 付き
+commit は index に関係なく指定パスの作業ツリー内容だけを commit する) を使い、`git add` → 検査 → `git commit` の
+三段に分けない。検査 (preflight/型) は add 前に済ませる。commit 直後に `git show --stat HEAD` で自分のファイル**だけ**が
+入ったことを確認する。
+
 関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]] [[feedback_sync_snapshots_checks_out_main]]
 
 **作業共有と回収の境界 (2026-09-14)**:

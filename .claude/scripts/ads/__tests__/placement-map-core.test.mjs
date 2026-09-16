@@ -105,14 +105,16 @@ test("strategyは実在庫の2つのIT keyだけでeligible、他ranking・blog�
   for (const path of ["/blog/career", "/japan/labor-wages"]) assert.equal(eligibleAdsForPage(classifyPageUrl(path), maps, strategy, "2026-09-08").adCount, 0);
 });
 
-test("known3holdは旧snapshotのisActive:true・別IDでもprogramRef共有ガードで除外する", () => {
+test("delivery holdは旧snapshotのisActive:true・別IDでもprogramRef共有ガードで除外する", () => {
   const maps = loadAffiliateMaps();
+  // 件数は SSOT (AFFILIATE_DELIVERY_HOLDS) から導出する。直書きすると hold の追加ごとにテストが古くなる
+  // (2026-09-16 に 3→4 件で実際に落ちた)。
   const legacy = maps.AFFILIATE_DELIVERY_HOLDS.map((hold, index) => ({
     id: `old-snapshot-${index}`, programRef: hold.programRef, isActive: true,
     adType: "banner", vertical: "furusato", locationCode: "area-sidebar",
     htmlContent: `https://example.test/${index}`, imageUrl: "https://example.test/banner.png",
   }));
-  assert.equal(legacy.length, 3);
+  assert.ok(legacy.length > 0, "hold が 0 件だとガードを検証できない");
   assert.equal(eligibleAdsForPage(classifyPageUrl("/areas/01000"), maps, legacy, "2026-09-08").adCount, 0);
   assert.ok(loadInventory(maps).ads.every(ad => !maps.isAffiliateDeliveryHeld(ad)));
 });

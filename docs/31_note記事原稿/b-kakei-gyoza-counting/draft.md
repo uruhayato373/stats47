@@ -4,6 +4,7 @@ description: "餃子の街といえば宇都宮と浜松のはずでしょうか
 status: published
 note_url: "https://note.com/stats47/n/n2f50bb479647"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査
@@ -24,6 +25,10 @@ tags:
 そして餃子の街として知られる浜松を抱える静岡県は、1,952円で21位。ちょうど全国の真ん中あたりに位置しています。
 
 上位には九州勢が目立ちます。1位の宮崎県のほか、4位の福岡県が2,383円、8位の鹿児島県が2,195円です。下位は四国と東北の日本海側にまとまっていて、45位徳島県1,430円、46位山形県1,282円、47位高知県1,105円、44位秋田県1,484円という並びでした。詳しい分布は[ぎょうざ消費支出額のランキング](https://stats47.jp/ranking/gyoza-frozen-consumption-expenditure)で確認できます。
+
+![ぎょうざ消費支出額の都道府県ランキング](images/gyoza-frozen-consumption-expenditure-prefecture-rankings.png)
+
+![ぎょうざ消費支出額の都道府県マップ](images/frozen-gyoza-spending-prefecture-gap-map.png)
 
 ## 誰を数えているのか
 

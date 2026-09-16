@@ -180,7 +180,7 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
             <div>
               <h3
                 id={`databook-${section.sectionKey}-title`}
-                className="text-lg font-bold text-foreground"
+                className="text-base font-semibold text-foreground"
               >
                 {section.title}
               </h3>

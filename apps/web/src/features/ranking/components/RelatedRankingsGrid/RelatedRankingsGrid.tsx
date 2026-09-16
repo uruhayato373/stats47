@@ -3,9 +3,11 @@ import Link from "next/link";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
 
-import { SurfaceLinkCard } from "@/components/surface";
+import { SectionCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/server";
+
+import { getSidebarDetail } from "../RankingSidebar/select-sidebar-items";
 
 interface RelatedRankingsGridProps {
   /** 現在表示中の rankingKey (除外用) */
@@ -45,13 +47,11 @@ export async function RelatedRankingsGrid({
   if (items.length === 0) return null;
 
   return (
-    <section>
-      <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
-        <div className="flex items-center gap-2">
-          <ListOrdered className="h-4 w-4 text-muted-foreground" />
-          <h3 className="text-base font-semibold text-foreground">同カテゴリの関連ランキング</h3>
-        </div>
-        {categoryKey && (
+    <SectionCard
+      title="同カテゴリの関連ランキング"
+      icon={<ListOrdered className="h-4 w-4 text-muted-foreground" />}
+      headerAction={
+        categoryKey ? (
           <Link
             href={`/category/${categoryKey}`}
             className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
@@ -59,37 +59,44 @@ export async function RelatedRankingsGrid({
             すべて見る
             <ArrowRight className="h-3 w-3" />
           </Link>
-        )}
-      </div>
-      <div className="px-5 pb-5 pt-4">
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-          {items.map((item) => {
-            const readerLabel = item.readerLabel ?? item.title;
-            const title = item.subtitle
-              ? `${readerLabel}（${item.subtitle}）`
-              : readerLabel;
-            const subtitle = [item.demographicAttr, item.normalizationBasis]
-              .filter(Boolean)
-              .join(" / ");
-            return (
-              <SurfaceLinkCard
-                key={item.rankingKey}
-                href={`/ranking/${item.rankingKey}`}
-                className="group flex flex-col gap-1 px-3 py-2.5"
-              >
-                <span className="line-clamp-2 text-sm font-medium leading-snug text-foreground group-hover:text-primary">
-                  {title}
+        ) : undefined
+      }
+    >
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+        {items.map((item) => {
+          const readerLabel = item.readerLabel ?? item.title;
+          const detail = getSidebarDetail(item);
+          return (
+            <Link
+              key={item.rankingKey}
+              href={`/ranking/${item.rankingKey}`}
+              className="group flex flex-col gap-1 rounded-none px-3 py-2.5 transition-colors hover:bg-accent/40"
+            >
+              <span className="line-clamp-2 text-sm font-medium leading-snug text-foreground group-hover:text-primary">
+                {readerLabel}
+              </span>
+              {detail && (
+                <span className="line-clamp-1 text-xs text-muted-foreground">
+                  {detail}
                 </span>
-                {subtitle && (
-                  <span className="line-clamp-1 text-[11px] text-muted-foreground">
-                    {subtitle}
-                  </span>
-                )}
-              </SurfaceLinkCard>
-            );
-          })}
-        </div>
+              )}
+              {item.top1 && (
+                <span className="line-clamp-1 text-xs text-muted-foreground">
+                  <span className="font-semibold text-amber-600">
+                    {item.top1.rank ?? 1}位
+                  </span>{" "}
+                  {item.top1.areaName}{" "}
+                  {item.top1.value ? (
+                    <span className="font-semibold text-foreground">
+                      {item.top1.value}{item.unit}
+                    </span>
+                  ) : null}
+                </span>
+              )}
+            </Link>
+          );
+        })}
       </div>
-    </section>
+    </SectionCard>
   );
 }

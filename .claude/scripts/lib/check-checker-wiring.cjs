@@ -110,7 +110,14 @@ function readSafe(file) {
 }
 
 function includesChecker(text, checkerFile) {
-  return text.includes(checkerFile) || text.includes(path.basename(checkerFile));
+  if (text.includes(checkerFile) || text.includes(path.basename(checkerFile))) return true;
+  // TS の相対 import は拡張子を省く (`import { auditUrl } from "./lib/audit-url"`) ので、
+  // `.ts` checker は `/<stem>"` の形でも参照済みとみなす。2026-09-16 に page-quality/lib/audit-url.ts が
+  // run-representative.ts から実際に import されているのに UNWIRED と誤判定された。
+  const ext = path.extname(checkerFile);
+  if (ext !== ".ts" && ext !== ".tsx") return false;
+  const stem = path.basename(checkerFile, ext).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`/${stem}["']`).test(text);
 }
 
 function workflowTriggers(text) {

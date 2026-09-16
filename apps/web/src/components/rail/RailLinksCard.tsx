@@ -119,12 +119,12 @@ function RailLinks({
                     sizes="80px"
                     className="object-cover"
                   />
-                  <span className="absolute left-0 top-0 flex h-5 w-5 items-center justify-center bg-primary text-[11px] font-bold text-primary-foreground">
+                  <span className="absolute left-0 top-0 flex h-5 w-5 items-center justify-center bg-primary text-xs font-bold text-primary-foreground">
                     {index + 1}
                   </span>
                 </span>
               ) : (
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-primary/10 text-[11px] font-bold text-primary">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-primary/10 text-xs font-bold text-primary">
                   {index + 1}
                 </span>
               )}

@@ -92,6 +92,7 @@ paths:
 | `sns/`       | SNS サムネイル / 投稿用素材                  | Web アプリの fetch 対象外            |
 | `video/`     | web 埋め込み用 master 動画 + メタ    | `/archive-remotion-output` で集約    |
 | `archive/kindle-encrypted/` | KDPへ送信したEPUB・表紙・metadata・reviewの版別AES-256-GCM暗号化bundle | 配信用URLに対応しない別PC復元・rollback用。平文禁止、Git台帳=`.claude/state/products/kindle-archives.json` |
+| `estat-catalog/` | e-Stat メタデータ完全カタログ (statsDataId一覧・getMetaInfo要約・分類コード)。テーマ/相関/全国/市区町村展開の共通発見基盤 | 配信 snapshot ではなく再取得可能な API 由来カタログ。writer は `estat-catalog-monthly.yml` のみ (月次 cron + 専用ブランチ push)。詳細 `docs/02_実装計画/48_e-Statカタログ実装仕様.md` |
 
 ## 生成画像の差分反映契約
 
@@ -163,6 +164,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 | `staging/image-cache/` | AI 背景の再課金防止 cache (`ogp-image-standards.md` §5)。無期限 |
 | `archive/kindle-encrypted/` | KDP送信版の復元・rollback証跡。manifest署名とplain/cipher SHAが一致するrevisionを保持 |
 | `sns/` (投稿済み動画を除く) | 投稿予定・draft の素材 |
+| `estat-catalog/` | 再取得可能だが月次crawl(150分予算×複数run)を要し再生成コストが高い。writerは`estat-catalog-monthly.yml`のみ |
 
 ### 削除ポリシー (削除してよいもの)
 

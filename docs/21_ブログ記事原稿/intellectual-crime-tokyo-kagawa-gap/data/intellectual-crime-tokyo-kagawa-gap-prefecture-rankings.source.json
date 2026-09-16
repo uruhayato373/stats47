@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "intellectual-crime-per-100k",
+  "year": "2023",
+  "unit": "件",
+  "label": "知能犯認知件数",
+  "readerLabel": "知能犯認知件数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/intellectual-crime-per-100k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug intellectual-crime-tokyo-kagawa-gap --keys intellectual-crime-per-100k --data-name intellectual-crime-tokyo-kagawa-gap-prefecture-rankings",
+  "fetchedAt": "2026-09-15T21:43:24.790Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

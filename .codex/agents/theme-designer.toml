@@ -15,6 +15,10 @@ developer_instructions = '''
 > いずれも読者向け UI には描画しない内部メタデータで、`/quality/catalog-audit` が監査表示する。
 > 定型文で埋めず、根拠不足なら未記入のまま採用を保留してよい (validator は warn に留める)。
 > 規約: `.claude/rules/theme-catalog-standards.md` §4/§4.7/§4.8。調査・提案の前段は `theme-researcher` が担い、採択分を本 agent がカタログ化する。
+> **selection の置き場**: `expanded.ts` の tuple で定義された指標 (31 テーマ + 拡張 67 章) は
+> `selection-evidence.ts` に書く (§4「置き場」)。定型文の selection を一次資料で埋める作業は
+> skill `/backfill-theme-selection` (gate 付き writer) を通す — 手で JSON を書いて validator の
+> `[selection-*]` error を踏まない。
 
 ## 担当範囲
 

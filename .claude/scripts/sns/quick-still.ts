@@ -13,6 +13,7 @@
  *
  * Usage:
  *   npx tsx .claude/scripts/sns/quick-still.ts --key <rankingKey> [--out <dir>] [--year <YYYY>] [--require-png]
+ *   新構図のプレビュー: --layout spotlight|comparison|distribution --out <preview-dir>
  *
  * 出力 (既定 .local/r2/sns/ranking/<key>/x/ — publish-x が読む正典パス。§2-9 image catalog):
  *   stills/<key>.png       横長カード PNG (960x404、X 添付の既定 = ranking-card)
@@ -34,6 +35,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { generateBarChartSvg, type BarItem } from "../../../packages/svg-builder/src/charts/bar-chart.ts";
+import { STORY_LAYOUTS, renderRankingStoryCard } from "./lib/ranking-story-card.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -51,9 +53,16 @@ const KEY = getArg("--key");
 const YEAR = getArg("--year");
 const OUT_DIR_ARG = getArg("--out");
 const REQUIRE_PNG = args.includes("--require-png");
+// 既存の予約素材は再生成せず、新しい構図は明示指定で試す。
+const layoutArg = getArg("--layout") || "columns";
+const storyLayout = STORY_LAYOUTS.find(layout => layout === layoutArg);
+if (layoutArg !== "columns" && !storyLayout) {
+  console.error(`--layout: columns | ${STORY_LAYOUTS.join(" | ")}`);
+  process.exit(1);
+}
 
 if (!KEY) {
-  console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>] [--require-png]");
+  console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>] [--layout columns|spotlight|comparison|distribution] [--require-png]");
   process.exit(1);
 }
 const rankingKey = KEY;
@@ -71,6 +80,7 @@ interface RankingValue {
   areaName: string;
   value: number;
   unit?: string;
+  yearName?: string;
 }
 interface RankingPartition {
   yearCode: string;
@@ -145,9 +155,8 @@ async function main() {
     console.error(`[error] no partitions for key=${KEY}`);
     process.exit(2);
   }
-  const partition = YEAR
-    ? parts.find((p) => String(p.yearCode) === String(YEAR)) || parts[parts.length - 1]
-    : parts[parts.length - 1];
+  const partition = YEAR ? parts.find((p) => String(p.yearCode) === String(YEAR)) : parts[parts.length - 1];
+  if (!partition) throw new Error(`指定年 ${YEAR} のデータがありません`);
 
   const sorted = partition.values.slice().sort((a, b) => b.value - a.value);
   if (sorted.length === 0) {
@@ -196,7 +205,12 @@ async function main() {
     rightPalette,
   } as const;
 
-  const svgColumns = generateBarChartSvg(barItems, { ...baseOptions, layout: "columns" });
+  const svgColumns = storyLayout
+    ? renderRankingStoryCard(sorted, {
+        title, unit, source, layout: storyLayout,
+        year: sorted[0]?.yearName || (item?.latestYear?.yearCode === year ? item.latestYear.yearName : undefined) || `${year}年`,
+      })
+    : generateBarChartSvg(barItems, { ...baseOptions, layout: "columns" });
   const svgPortrait = generateBarChartSvg(barItems, { ...baseOptions, layout: "portrait" });
 
   const provenance = (file: string) =>
@@ -217,10 +231,11 @@ async function main() {
     unit,
     label: title,
     readerLabel,
-    transform: "all47 (quick-still が上位5+下位5を抽出)",
+    layout: layoutArg,
+    transform: storyLayout ? `全${sorted.length}県から${storyLayout}を描画 (IGは上位5+下位5)` : "all47 (quick-still が上位5+下位5を抽出)",
     source: `r2:app/ranking/${KEY}/values.json`,
     upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
-    restore: `npx tsx .claude/scripts/sns/quick-still.ts --key ${KEY} --year ${year}`,
+    restore: `npx tsx .claude/scripts/sns/quick-still.ts --key ${KEY} --year ${year} --layout ${layoutArg}`,
     fetchedAt: new Date().toISOString(),
     generatedBy: "quick-still.ts",
   };
@@ -286,6 +301,7 @@ ${bottomLines}
     readerLabel,
     hook,
     palette,
+    layout: layoutArg,
     outDir: path.relative(PROJECT_ROOT, BASE_DIR),
     files: {
       svgColumns: path.relative(PROJECT_ROOT, svgPath),

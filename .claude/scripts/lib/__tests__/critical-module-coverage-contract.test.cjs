@@ -19,7 +19,9 @@ const EXPECTED_IDS = new Set([
 ]);
 const DATA_COMMAND = "(cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)";
 const R2_COMMAND = "(cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)";
-const WEB_COMMAND = "npm run test:coverage -w apps/web";
+// PR は 1ffc269b7 (2026-09-15) で test:run に階層化し、web の coverage は quality-suite-weekly.yml が担う。
+// ここで固定するのは「web unit test が PR で blocking に走る」ことで、coverage の閾値は週次側の契約。
+const WEB_COMMAND = "npm run test:run -w apps/web";
 const CONTRACT_COMMAND = "node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs";
 
 function jobBlock(text, jobId) {

@@ -4,6 +4,7 @@ description: "支出額が多い県は、それだけたくさん食べている
 status: published
 note_url: "https://note.com/stats47/n/n7ba6c516c1e9"
 published_at: "2026-09-06"
+updated_at: "2026-09-16"
 published: true
 tags:
   - 家計調査
@@ -52,6 +53,10 @@ tags:
 2024年の北海道で「多く・高く買う」に入るのはワイン（数量指数124、価格指数129）でした。香川県ではかき（貝）が数量指数190・価格指数121、乾うどん・そばが数量指数146・価格指数121で、この区分に入っています。
 
 品目を数えるだけでも県の性格が出ます。北海道は「多く買う」に分類される品目が18と多く、香川県は11でした。北海道は量で押す食卓、香川県は特定の品目に強く集中する食卓、という違いがここに表れています。個別の品目については[北海道の食卓を扱った記事](https://stats47.jp/blog/hokkaido-food-culture)と[香川県の食卓を扱った記事](https://stats47.jp/blog/kagawa-food-culture)でも確認できます。
+
+![北海道の食卓を数量×価格で分解した内訳](images/hokkaido-quantity-price-findings.png)
+
+![香川の食卓を数量×価格で分解した内訳](images/kagawa-quantity-price-findings.png)
 
 ## この読み方には限界もある
 

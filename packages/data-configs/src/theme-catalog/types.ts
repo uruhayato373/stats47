@@ -62,6 +62,32 @@ export const ADOPTION_CRITERIA = [
 
 export type AdoptionCriterion = (typeof ADOPTION_CRITERIA)[number];
 
+/**
+ * 選定根拠 (selection) の定型文。`adoptionCriteria` を付けた = 「一次資料で裏付けた」と主張する
+ * エントリの rationale / proposedBy にこれらが残っていたら validator error (`[selection-boilerplate]`)。
+ * 2026-09-08 の全テーマ構成監査・2026-09-09 の 128 テーマ展開が機械的に埋めた文言で、
+ * 白書・統計を実際に読んで書いた根拠には現れない。夜間 backfill (THEME-SELECTION-BACKFILL-01) の
+ * gate と validator が同じ一覧を読む。
+ */
+export const SELECTION_BOILERPLATE_PHRASES = [
+  '詳細索引に保持し',
+  '実値として比較する',
+  '独立章へ追加する',
+  '冒頭の要約へ重ねない',
+  '見出し指標として残す',
+  '補足指標への導線を保持する',
+  '全テーマ構成監査',
+  '128テーマ実現性調査',
+  '128テーマ全体展開',
+] as const;
+
+/**
+ * rationale 等に書かれた社会生活統計指標コード (`#A03503` / `#A0191001` 等)。
+ * validator は metric config の `source.cdCat01` と一致しないものを error にする
+ * (2026-09-16 の受け入れ検証で agent が 7 件中 2 件誤記したのを捕捉した再発防止)。
+ */
+export const SELECTION_STAT_CODE_RE = /#[A-Z]\d{5,}/g;
+
 /** 指標選定の根拠 (白書・調査由来)。新規追加指標では必須 (validator warn)。 */
 export interface MetricSelection {
   /** 提案元 (白書名 / 調査名 / 競合ダッシュボード名) */

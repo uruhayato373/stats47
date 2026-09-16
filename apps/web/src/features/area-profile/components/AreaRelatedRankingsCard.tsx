@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
-import { SurfaceCard } from '@/components/surface';
+import { SectionCard } from '@/components/surface';
 
 import { selectDistinctProfileItems } from '../utils';
 
@@ -44,17 +44,13 @@ export function AreaRelatedRankingsCard({
           全国順位が高い指標と低い指標を、代表値から確認できます。
         </p>
       </div>
-      <SurfaceCard className="grid grid-cols-1 divide-y divide-border overflow-hidden p-0 md:grid-cols-2 md:divide-x md:divide-y-0">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {/* TOP - 強み */}
         {strengths.length > 0 && (
-          <div>
-            <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
-              <div className="flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-emerald-600" />
-                <h3 className="text-base font-semibold">
-                  {profile.areaName}が上位
-                </h3>
-              </div>
+          <SectionCard
+            title={`${profile.areaName}が上位`}
+            icon={<TrendingUp className="h-4 w-4 text-emerald-600" />}
+            headerAction={
               <Link
                 href="/themes"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
@@ -62,46 +58,41 @@ export function AreaRelatedRankingsCard({
                 テーマ一覧
                 <ArrowRight className="h-3 w-3" />
               </Link>
-            </div>
-            <div className="px-5 pb-5 pt-3">
-              <ol className="space-y-1.5">
-                {strengths.map((item, idx) => (
-                  <li
-                    key={`${item.rankingKey}-${idx}`}
-                    className="flex items-baseline gap-2"
-                  >
-                    <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-emerald-50 text-[10px] font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
-                      {item.rank}位
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <Link
-                        href={`/ranking/${item.rankingKey}`}
-                        className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
-                      >
-                        {item.indicator}
-                      </Link>
-                      <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
-                        {item.value.toLocaleString('ja-JP')}
-                        {item.unit}（{item.year}）
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
+            }
+          >
+            <ol className="space-y-1.5">
+              {strengths.map((item, idx) => (
+                <li
+                  key={`${item.rankingKey}-${idx}`}
+                  className="flex items-baseline gap-2"
+                >
+                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-emerald-50 text-xs font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
+                    {item.rank}位
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <Link
+                      href={`/ranking/${item.rankingKey}`}
+                      className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
+                    >
+                      {item.indicator}
+                    </Link>
+                    <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
+                      {item.value.toLocaleString('ja-JP')}
+                      {item.unit}（{item.year}）
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </SectionCard>
         )}
 
         {/* BOTTOM - 弱み */}
         {weaknesses.length > 0 && (
-          <div>
-            <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
-              <div className="flex items-center gap-2">
-                <TrendingDown className="h-4 w-4 text-red-600" />
-                <h3 className="text-base font-semibold">
-                  {profile.areaName}が下位
-                </h3>
-              </div>
+          <SectionCard
+            title={`${profile.areaName}が下位`}
+            icon={<TrendingDown className="h-4 w-4 text-red-600" />}
+            headerAction={
               <Link
                 href="/themes"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
@@ -109,36 +100,35 @@ export function AreaRelatedRankingsCard({
                 テーマ一覧
                 <ArrowRight className="h-3 w-3" />
               </Link>
-            </div>
-            <div className="px-5 pb-5 pt-3">
-              <ol className="space-y-1.5">
-                {weaknesses.map((item, idx) => (
-                  <li
-                    key={`${item.rankingKey}-${idx}`}
-                    className="flex items-baseline gap-2"
-                  >
-                    <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-red-50 text-[10px] font-bold text-red-700 dark:bg-red-950 dark:text-red-400">
-                      {item.rank}位
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <Link
-                        href={`/ranking/${item.rankingKey}`}
-                        className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
-                      >
-                        {item.indicator}
-                      </Link>
-                      <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
-                        {item.value.toLocaleString('ja-JP')}
-                        {item.unit}（{item.year}）
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
+            }
+          >
+            <ol className="space-y-1.5">
+              {weaknesses.map((item, idx) => (
+                <li
+                  key={`${item.rankingKey}-${idx}`}
+                  className="flex items-baseline gap-2"
+                >
+                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-red-50 text-xs font-bold text-red-700 dark:bg-red-950 dark:text-red-400">
+                    {item.rank}位
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <Link
+                      href={`/ranking/${item.rankingKey}`}
+                      className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
+                    >
+                      {item.indicator}
+                    </Link>
+                    <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
+                      {item.value.toLocaleString('ja-JP')}
+                      {item.unit}（{item.year}）
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </SectionCard>
         )}
-      </SurfaceCard>
+      </div>
     </section>
   );
 }

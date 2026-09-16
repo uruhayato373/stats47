@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { cn } from '@stats47/components';
 
-import { SurfaceCard } from '@/components/surface';
+import { RailCard } from '@/components/surface';
 
 import { OPERATOR_PROFILE } from '@/config/operator-profile';
 
@@ -23,10 +23,11 @@ export function OperatorProfileCard({
   className,
 }: OperatorProfileCardProps = {}) {
   return (
-    <SurfaceCard className={cn('flex flex-col', className)}>
-      <p className="mb-3 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
-        運営者
-      </p>
+    <RailCard
+      title="運営者"
+      className={cn('flex flex-col', className)}
+      bodyClassName="flex flex-1 flex-col"
+    >
       <div className="flex items-center gap-3">
         <Image
           src={OPERATOR_PROFILE.avatarSrc}
@@ -62,6 +63,6 @@ export function OperatorProfileCard({
           運営者について
         </Link>
       </div>
-    </SurfaceCard>
+    </RailCard>
   );
 }

@@ -93,7 +93,9 @@ export function RankingPageSidebarSection({
         areaType={areaType}
         categoryKey={rankingItem.categoryKey}
       />
-      {prioritizeRakutenItems && rakutenItems}
+      {/* 本文中段 (RankingPageRakutenNativeSection) のモバイル版と重複させないため、
+          優先表示時の右レール商品カードはデスクトップ限定にする (2026-09-16)。 */}
+      {prioritizeRakutenItems && <div className="hidden lg:block">{rakutenItems}</div>}
       {/* AdSense停止中は、空いた上段へ既存の文脈一致バナーを移す。
           枠数は最大2のまま、表示位置だけを上げてviewable impressionを増やす。 */}
       {!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}

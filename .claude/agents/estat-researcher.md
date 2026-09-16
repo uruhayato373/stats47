@@ -10,6 +10,7 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 
 ## 担当範囲
 
+- **e-Statメタデータ完全カタログの検索を先に使う** (初回のみ`catalog.mjs pull`→`catalog.mjs search`。月次更新・生API呼び出し不要。`docs/02_実装計画/48_e-Statカタログ実装仕様.md`)。見つからない場合のみ生API
 - e-Stat 統計表の検索 (`/search-estat`)
 - 統計表メタデータ構造調査 (`/inspect-estat-meta`)
 - ランキング形式データ取得・確認 (`/fetch-estat-data`)
@@ -41,9 +42,7 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 
 ## 触る state / files
 
-- `.claude/state/estat-city-discovery.json` — 探索進捗 (read / append)
-- `.claude/state/estat-city-estimate-report.json` — 推定レポート (read / append)
-- `.claude/state/estat-city-meta-cache/` — メタデータキャッシュ (CRUD)
+- R2 estat-catalog (`npm run estat:catalog:pull` → `.local/estat-catalog/`、`npm run estat:catalog:search -- <語> --collect-area 3`) — 市区町村表の探索 (read only。旧 `estat-city-discovery.json` は 2026-09-16 退役)
 - `.claude/skills/estat/references/` — e-Stat 構造リファレンス (read 主体)
 - R2 e-Stat cache (`.local/d1/v3/r2/` 配下) — read only
 

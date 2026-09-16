@@ -1,21 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "34935751406-1",
+  "id": "35061903935-1",
   "status": "no-change",
   "keyword": "外国人",
   "targetPath": "/blog/foreign-residents-diversity-map",
-  "needs": "「外国人」という単語単独の検索者の大半は、外国人の法的定義・在留資格・生活支援手続きを知りたい人（kotobankの辞書的定義、法務省の生活支援ポータル）。その中で少数派として、都道府県別の外国人比率など統計的な分布を知りたい人がいる。対象ページはこの少数派の統計ニーズに応える記事。",
-  "gap": "対象ページのtitle/descriptionは「東京3.4% vs 秋田0.4%、9倍差」「製造業県が上位」「2024年」と具体的な数値・年を明示し、統計ニーズを持つ検索者への回答として的確。target-page.txtの抽出結果がtitle/descriptionの2行のみでWebFetchも自ページに対しHTTP 403だったため、本文（見出し構成・FAQ有無・データ表）の具体的な不足は今回確認できていない＝未検証。",
-  "done": "平均掲載順位2.67・インプレッション728・クリック55（CTR約7.6%）は、この語の主要意図（辞書・法的定義・生活支援）から外れた統計ニッチとしては妥当な水準で、明確な欠陥は見えない。editableFileがnullのため自動置換は実行不可。本文へのアクセスが取れず未検証の部分が残るため、今回は変更を提案しない。次回同キーワードが選ばれた際はtarget-page.txtの抽出方式（title/description以外の本文抽出）の改善状況を確認したうえで再評価する。",
-  "method": "title",
+  "needs": "「外国人」という単語だけで検索する人は、辞書的な定義、在留資格・雇用手続き、生活支援情報のいずれかを探している。都道府県別の人口比率ランキングを探している人はごく一部で、通常は「外国人 比率」「外国人 多い県」のような複合語を使う(実際gsc.jsonにも別クエリとして存在)。",
+  "gap": "WebSearchで「外国人」を検索した実際の上位3件(kotobank・moj.go.jp・mhlw.go.jp)はいずれも定義/生活支援/雇用手続き情報で、都道府県ランキングを提供するページは含まれていなかった。対象ページはGSCで平均掲載順位2.67(直近28日は2.98)・表示回数853・クリック50(CTR約5.9%)と好順位ながら低CTRだが、これは真の対抗ページ(kotobank等)と直接競合した結果ではなく、単語単体の広すぎる検索意図と記事内容(比率ランキング)がそもそも一致していないためで、タイトル・meta・導入文の書き換えでは埋まらない不足である。",
+  "done": "対象記事のtitle/description/導入文は既に「外国人比率は東京3.4% vs 秋田0.4%で9倍差」という長尾意図(比率・都道府県ランキング)に正確に最適化されており、これは同じページ内で既に表示回数を持つ「外国人 多い県」「外国人 比率」等の複合語クエリに対して適切。単語単体「外国人」向けに定義・手続き寄りの文言を混ぜると、既に機能している長尾クエリの意図適合を薄める副作用の方が大きいため変更しない。selected.editableFileもnull(パイプライン側で安全な置換先ファイルが解決されていない)であり、この観点からも自動パッチは対象外。",
+  "method": "content",
   "competitors": [
     {
       "url": "https://kotobank.jp/word/%E5%A4%96%E5%9B%BD%E4%BA%BA-42384",
-      "findings": "複数辞書の定義を横断掲載。国籍を持たない人という基本定義＋法的権利・制限（入管、財産権、就労、二重国籍との違い）の歴史的解説。統計データは扱わず、用語・法制度の理解が対象範囲。"
+      "findings": "「外国人」の辞書的定義・法的地位・語源解説のみ。統計データやランキングは一切含まれず、対象ページの比率ランキング意図とは無関係。"
     },
     {
       "url": "https://www.moj.go.jp/isa/support/portal/index.html",
-      "findings": "法務省の多言語（19言語以上）生活支援ポータル。入国・在留手続、就労、子育て、医療、税金、災害対応など12章の生活ガイドを網羅。統計や都道府県比較は扱わず、手続き・生活支援情報が対象範囲。"
+      "findings": "出入国在留管理庁の生活支援ポータル。在留手続き・生活ガイドブック(19言語)・相談窓口案内が中心で、統計ランキングは提供していない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/jigyounushi/page11.html",
+      "findings": "厚労省の外国人雇用手続きページ。事業主向けの在留カード確認・届出義務など実務ガイドで、都道府県別データは扱っていない。"
     }
   ],
   "patches": [],
@@ -23,17 +27,25 @@
     "targetPage": {
       "url": "https://stats47.jp/blog/foreign-residents-diversity-map",
       "status": 200,
-      "fetchedAt": "2026-09-15T06:11:27.819Z",
-      "inputHash": "24bec4cdd92be8a293dbd8fd2213ffbfab20cf9b131121780e97e7faf701d138",
+      "fetchedAt": "2026-09-16T06:02:59.159Z",
+      "inputHash": "a49fd7ded6168eb146416c93a7ba140bdc9a0cf874ea473e41249c6238977a22",
       "htmlFile": ".local/seo-rank-watch/target-page.html",
-      "htmlSha256": "9808ebbd4a156f91ee3ac824edca615a9571db230c436030fefa65029bcaf743",
+      "htmlSha256": "6775aa51d54dca6de7e778786bedfadf487b3b33c6fe93d5d05745ed5277937f",
       "textFile": ".local/seo-rank-watch/target-page.txt",
       "textSha256": "faa276b2753a6851ec60d14e77a5ed658ae8a6910e140020a2f816c107025af0"
     },
     "toolCalls": [
       {
         "name": "WebSearch",
+        "target": "外国人 比率 都道府県"
+      },
+      {
+        "name": "WebSearch",
         "target": "外国人"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/blog/foreign-residents-diversity-map"
       },
       {
         "name": "WebFetch",
@@ -42,11 +54,15 @@
       {
         "name": "WebFetch",
         "target": "https://www.moj.go.jp/isa/support/portal/index.html"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/jigyounushi/page11.html"
       }
     ]
   },
-  "selectedAt": "2026-09-15",
-  "inputHash": "24bec4cdd92be8a293dbd8fd2213ffbfab20cf9b131121780e97e7faf701d138",
+  "selectedAt": "2026-09-16",
+  "inputHash": "a49fd7ded6168eb146416c93a7ba140bdc9a0cf874ea473e41249c6238977a22",
   "methods": [],
   "files": []
 }

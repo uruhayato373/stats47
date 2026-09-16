@@ -49,6 +49,7 @@ e-Stat の `@time` は **10 桁のフルタイムコード**（例 `"2009100000"
 
 ## 関連
 
+- **e-Statメタデータ完全カタログ** (全国/都道府県/市区町村のstatsDataId+分類コード+年次+エリア種別を月次でR2保有): 初回のみ`catalog.mjs pull`、以後`node --import tsx .claude/scripts/estat/catalog.mjs search <語>`。統計表の存在確認は生API呼び出しの前にこちらを先に引く。設計 `docs/02_実装計画/48_e-Statカタログ実装仕様.md`
 - e-Stat API クライアント: `packages/estat-api/`
 - 正準ユーティリティ: `packages/estat-api/src/stats-data/utils/extract-year-code.ts`（`extractYearCode`）
 - year lint: `packages/data-configs/scripts/validate-metric-years.ts`（`npm run validate:years`）

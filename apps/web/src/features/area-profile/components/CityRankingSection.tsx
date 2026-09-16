@@ -230,10 +230,7 @@ export function CityRankingSection({
 
           {/* テーブルカード */}
           {processedData.length > 0 ? (
-            <ChartPanel
-              title={selectedItem?.title ?? "ランキング"}
-              titleClassName="text-base"
-            >
+            <ChartPanel title={selectedItem?.title ?? "ランキング"}>
               <DataTable
                 columns={columns}
                 data={processedData}
@@ -244,10 +241,7 @@ export function CityRankingSection({
               />
             </ChartPanel>
           ) : (
-            <ChartPanel
-              title={selectedItem?.title ?? "ランキング"}
-              titleClassName="text-base"
-            >
+            <ChartPanel title={selectedItem?.title ?? "ランキング"}>
               <ChartEmptyState message="データがありません" height={128} />
             </ChartPanel>
           )}

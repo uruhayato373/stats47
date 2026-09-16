@@ -7,8 +7,6 @@ import { extractHeadings } from "../lib/heading-slug";
 interface ArticleTableOfContentsProps {
   /** Markdown 本文 */
   content: string;
-  /** コンパクト表示 (sidebar 用) */
-  compact?: boolean;
 }
 
 /**
@@ -21,7 +19,6 @@ interface ArticleTableOfContentsProps {
  */
 export function ArticleTableOfContents({
   content,
-  compact = false,
 }: ArticleTableOfContentsProps) {
   const headings = extractHeadings(content);
 
@@ -32,8 +29,6 @@ export function ArticleTableOfContents({
     <RailCard
       title="目次"
       icon={<List className="h-4 w-4 text-muted-foreground" />}
-      titleClassName={compact ? undefined : "text-base font-semibold text-foreground"}
-      bodyClassName="p-4 pt-3"
     >
       <nav aria-label="記事の目次">
         <ol className="space-y-1.5 text-sm">

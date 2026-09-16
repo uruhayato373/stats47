@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   MAX_SIDEBAR_ITEMS,
+  getSidebarDetail,
   selectSidebarItems,
   type SidebarRankingItem,
 } from "../select-sidebar-items";
@@ -100,5 +101,38 @@ describe("selectSidebarItems", () => {
     ];
     const result = selectSidebarItems(items, "current", "prefecture", 10);
     expect(result).toEqual([]);
+  });
+});
+
+describe("getSidebarDetail", () => {
+  it("subtitle が title をそのまま含む場合は言い換えに過ぎないので除外する", () => {
+    const item = makeItem("yokan", {
+      title: "ようかん消費支出額",
+      subtitle: "都道府県庁所在市の二人以上世帯の年間ようかん消費支出額",
+    });
+    expect(getSidebarDetail(item)).toBeNull();
+  });
+
+  it("subtitle が title を含まない真の識別子なら表示する", () => {
+    const item = makeItem("dairy-cattle", {
+      title: "乳用牛飼養頭数",
+      subtitle: "乳用牛（めす）の飼養頭数合計",
+    });
+    expect(getSidebarDetail(item)).toBe("乳用牛（めす）の飼養頭数合計");
+  });
+
+  it("subtitle が冗長でも demographicAttr/normalizationBasis があれば表示する", () => {
+    const item = makeItem("yokan-male", {
+      title: "ようかん消費支出額",
+      subtitle: "都道府県庁所在市の二人以上世帯の年間ようかん消費支出額",
+      demographicAttr: "男性",
+      normalizationBasis: "人口10万人あたり",
+    });
+    expect(getSidebarDetail(item)).toBe("男性・人口10万人あたり");
+  });
+
+  it("subtitle も区分もなければ null", () => {
+    const item = makeItem("plain", { title: "総人口", subtitle: null });
+    expect(getSidebarDetail(item)).toBeNull();
   });
 });

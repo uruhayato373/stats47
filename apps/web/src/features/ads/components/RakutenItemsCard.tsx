@@ -72,7 +72,7 @@ export async function RakutenItemsCard({
         </a>
       </div>
 
-      <p className="mb-3 text-sm font-bold text-foreground">
+      <p className="mb-3 text-sm font-semibold text-foreground">
         {keyword.term}の人気商品
       </p>
 
@@ -99,7 +99,7 @@ export async function RakutenItemsCard({
               </div>
             )}
             <div className="p-2">
-              <p className="line-clamp-2 text-[11px] leading-tight text-foreground">
+              <p className="line-clamp-2 text-xs leading-tight text-foreground">
                 {item.name}
               </p>
               <p className="mt-1 text-xs font-bold text-primary">

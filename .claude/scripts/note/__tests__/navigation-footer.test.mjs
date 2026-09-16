@@ -7,8 +7,18 @@ import {
   assertCleanCardUrl,
   buildNoteProductCardUrl,
   canonicalizeNoteEditorBody,
+  externalCard,
   normalizeLegacyStats47Links,
+  resolveProductCardText,
 } from "../lib/navigation-footer.mjs";
+
+// apps/web/src/features/products/storefront.generated.ts の実商品 (kindle-k-s1-01) と
+// packages 側のマガジン名 (s47-economy: 「都道府県ランキング｜家計・所得・物価」) は別物。
+// 是正対象のバグは productTitle にマガジン名が入ってしまうことなので、実商品側の値を
+// 直接ハードコードせず「実商品の値であること」「マガジン名でないこと」の両方を確認する。
+const REAL_PRODUCT_TARGET = "/products/kindle-k-s1-01";
+const WRONG_MAGAZINE_DERIVED_TITLE = "都道府県ランキング｜家計・所得・物価の商品・書籍";
+const WRONG_GENERIC_DESCRIPTION = "無料の数値に加え、テーマ別に編集したKindle本または再利用しやすいデータ集を確認できます。";
 
 const plan = {
   nextNoteUrl: "https://note.com/stats47/n/n023501038bd5",
@@ -165,4 +175,74 @@ test("published card repair removes stale embed metadata and keeps a clean link"
   assert.doesNotMatch(result.body, /biomass-power-station-count|embedded-service/);
   assert.match(result.body, /関連するエネルギーデータ/);
   assert.match(result.body, /href="https:\/\/stats47\.jp\/category\/energy"/);
+});
+
+test("resolveProductCardText resolves the real storefront record, not a magazine-derived placeholder", () => {
+  const result = resolveProductCardText(REAL_PRODUCT_TARGET);
+  assert.equal(typeof result.title, "string");
+  assert.equal(typeof result.description, "string");
+  assert.ok(result.title.length > 0 && result.description.length > 0);
+  // 旧バグの生成規則 (`${マガジン名}の商品・書籍`) の形と一致しないことを確認する。
+  assert.doesNotMatch(result.title, /の商品・書籍$/);
+  assert.notEqual(result.title, WRONG_MAGAZINE_DERIVED_TITLE);
+  assert.notEqual(result.description, WRONG_GENERIC_DESCRIPTION);
+});
+
+test("resolveProductCardText fails fast when the productTarget path is malformed", () => {
+  assert.throws(
+    () => resolveProductCardText(`${REAL_PRODUCT_TARGET}?utm_source=note`),
+    /商品導線pathが不正/,
+  );
+});
+
+test("resolveProductCardText fails fast when no storefront product matches the slug", () => {
+  assert.throws(
+    () => resolveProductCardText("/products/this-slug-does-not-exist"),
+    /商品ストアに productTarget が見つかりません/,
+  );
+});
+
+test("regenerate-card repair is idempotent once the card already shows the real product text", () => {
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5";
+  const correctBody = `<p>本文</p>${externalCard(url, title, description, ids())}`;
+  const result = applyPublishedLinkRepairs(
+    correctBody,
+    [{ mode: "regenerate-card", fromUrl: url, title, description }],
+    { idFactory: ids() },
+  );
+  assert.equal(result.changed, false);
+  assert.equal(result.body, correctBody);
+  assert.equal(result.repairs[0].changed, false);
+});
+
+test("regenerate-card repair rewrites a magazine-derived wrong title while keeping the external-article card", () => {
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5";
+  const wrongBody = `<p>本文</p>${externalCard(url, WRONG_MAGAZINE_DERIVED_TITLE, WRONG_GENERIC_DESCRIPTION, ids())}`;
+  const result = applyPublishedLinkRepairs(
+    wrongBody,
+    [{ mode: "regenerate-card", fromUrl: url, title, description }],
+    { idFactory: ids() },
+  );
+  assert.equal(result.changed, true);
+  assert.match(result.body, /embedded-service="external-article"/);
+  assert.doesNotMatch(result.body, /家計・所得・物価の商品・書籍/);
+  assert.match(result.body, new RegExp(title.replace(/[.*+?^${}()|[\]\\—]/g, "\\$&")));
+});
+
+test("regenerate-card repair is a no-op when the target card is absent from the body (本文差し替え直後など、新規追加は applyNavigationFooter に委ねる)", () => {
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const body = "<p>関係ないカードだけの本文</p>";
+  const result = applyPublishedLinkRepairs(
+    body,
+    [{
+      mode: "regenerate-card",
+      fromUrl: "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5",
+      title,
+      description,
+    }],
+  );
+  assert.strictEqual(result.body, body);
+  assert.strictEqual(result.changed, false);
 });

@@ -480,7 +480,7 @@ R2成果物・provenanceと原典URLの再取得可能性を確認して処理�
 | 対象 | 寿命 | 消す主体 |
 |---|---|---|
 | `.next/cache`・`.turbo/cache/*`・`.local/{tmp,rakuten-cli-test-*,regen-*}` | 7日 | `local:cleanup` |
-| `.local/verification/*`・`.local/geo-source-*`・`.claude/state/estat-city-meta-cache` | 30日 | 同上 |
+| `.local/verification/*`・`.local/geo-source-*` | 30日 | 同上 |
 | `.local/r2` (push staging。CI は runner 内で自分の staging を作るので常駐不要。KSJ ミラーも R2 から再取得できる) | 7日 | 同上 |
 | `C:/tmp/stats47-*` / `/tmp/stats47-*` (worktree・除外名を除く) | 14日 | 同上 |
 | 認証profile・`.local/affiliate-status` | 年齢では消さない | 手動 |

@@ -3,6 +3,7 @@ export {
   RailCard,
   RailLinkItem,
   RailLinkList,
+  SectionCard,
   SurfaceCard,
   SurfaceLinkCard,
   SurfaceSection,

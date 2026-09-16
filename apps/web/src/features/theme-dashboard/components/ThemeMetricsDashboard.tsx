@@ -279,6 +279,7 @@ export function ThemeMetricsDashboard({
   const renderPanel = (panel: (typeof panels)[number], summaryOnly = false) => panel.comparisonYear ? (
     <FixedYearComparisonPanel
       key={panel.key}
+      id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
       title={panel.title}
       metrics={panel.metrics}
       comparisonYear={panel.comparisonYear}
@@ -291,6 +292,7 @@ export function ThemeMetricsDashboard({
   ) : (
     <MetricSwitcherPanel
       key={panel.key}
+      id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
       summaryOnly={summaryOnly}
       title={panel.title}
       metrics={panel.metrics}
@@ -311,6 +313,7 @@ export function ThemeMetricsDashboard({
     ) : (
     <ChartPanel
       key={chart.componentKey}
+      id={`theme-${themeConfig.themeKey}-chart-${chart.componentKey}`}
       title={chart.title}
       footer={
         <ChartFooter

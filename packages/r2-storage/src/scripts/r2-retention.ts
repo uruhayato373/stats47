@@ -163,6 +163,7 @@ const PROTECTED_PREFIXES = [
   "note/",
   "ges/",
   "gis/",
+  "estat-catalog/",
   // video/ は一括保護しない (YouTube 撤退で一部が不要になったため)。
   // 代わりに「他チャネルで生きている master」を個別に保護する。
   "video/highway-history/", // Instagram 投稿の master (posts.json id=510)

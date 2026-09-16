@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-14
+updated: 2026-09-16
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,76 @@ updated: 2026-09-14
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
+
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-23]
+
+- **背景**: 統計そのものより「悩み・不安」起点の記事がSEOに効くという仮説で、白書(NotebookLM)調査+note/X調査の両方で裏付けが取れた5テーマを記事化した。5本とも `quality-gate.mjs` / `article-factual-check.mjs` / blog-critic すべて PASS 済み (`docs/21_ブログ記事原稿/{nursery-shortage-urban-prefecture, vacant-housing-rate-inherited-home-risk, elderly-welfare-expenditure-prefecture-gap, evacuation-plan-coverage-urban-prefecture-gap, intellectual-crime-tokyo-kagawa-gap}/`)。
+- **公開の現在地**: `/publish-bulk-articles` の Phase 1(検証)・Phase 2(staging、`.local/r2/app/blog/<slug>/` に `published: true` で配置済み)までは完了。Phase 3(OGP/カード背景のCodex生成)で停止 — このセッションでは Codex MCP が `CONNECTION_CLOSED` だった。ユーザーが `codex login` を完了させたことは確認済みだが、**MCP再接続には新しいセッション起動が必要**(同一セッション内では再接続できなかった)。
+- **画像生成の準備**: 5本分の背景生成リクエストは `.local/blog-imagegen/requests/<slug>.json` に作成済み (プロンプト・promptHash・出力先 `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` まで確定)。新セッションでCodex MCPが繋がったら `npm run blog-images:codex -- ingest-article --slug <slug> --input <path> --prompt-hash <hash>` → `generate-blog-thumbnails.ts --slug <5slugs>` から Phase 3 を再開し、Phase 4(R2 push・all.json反映・cache purge)→ Phase 5(HTTP検証)へ進める。
+- **SNS下書き**: X投稿文5本・Instagramキャプション5本は作成済み、`.claude/state/sns/pain-point-series-drafts.md` に保存済み。**投稿・予約は記事が本番公開されてから、ユーザーの明示許可を得て実施する**(まだ実行していない)。X下書き作成agentの申し送り: 各投稿に添付する画像とチャートSVGの形式一致は未確認、投稿前に要突合。
+- **次**: 新セッションで `codex login status` → MCP接続確認 → 上記Phase 3から再開。
+- **停止条件**: 画像なし(共有背景fallback)でR2にpushしない(OGP/カードが404で公開される事故を防ぐ設計)。
+- **完了条件**: 5記事すべてが本番で200 + OGP/thumbnail画像が正しく出る + SNS投稿(X/IG)まで実施されている。
+
+### [UI-CARD-TYPOGRAPHY-UNIFY-01] カードの見出し・本文・余白を役割契約に統一する (A 済 / B 実装済・検証途中 / C 未着手)
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-09-16] [期日:2026-09-30]
+
+- **owner**: site-ux-manager (横断契約・機械ゲート) / ranking-ui-manager (ranking 面) / theme-ui-manager (themes 面)
+- **背景 (2026-09-16 実測・5 ページ・デスクトップ幅)**: 同じ役割のカードが feature ごとに見出しサイズ/太さ/余白を上書き・再実装し、
+  ranking 詳細で本文カード見出しが 14/600・14/500・16/600・14/700 の 4 系統、FAQ 本文 14px / 考察 15px に対し他カード 12px、
+  `/areas/04000` 右レールで 14/500 と 16/600 が混在、`/themes/real-income` でチャート見出しが同一ページ内 16/600 (9 枚) と
+  14/600 (6 枚)、category の分類カードが 13/700・余白 8/12。規約 (`04_デザインシステム.md`) はカード見出し/本文/余白の数値を
+  持たず、旧資料 `.claude/design-system/{prohibited,principles,quick-reference}.md` は余白を `p-5以上`/`p-6`/`p-0禁止` と 3 値で
+  並立させコード正典 `SurfaceCard p-4` と食い違う。計測方法: DOM で `border`+`bg-card` を持つ最外郭要素ごとに最初の見出し
+  (h2-h4 / font-weight≥600) の font-size/weight、本文の最頻 font-size、padding を集計。
+- **契約 (確定。数値はコードが正典・文書へ二重管理しない)**:
+  - レール/リンク一覧カード = `RailCard` 既定 (h3 `text-sm font-medium text-muted-foreground`・ヘッダ `px-4 py-3`・本文 `px-4 pb-4 pt-3`)、
+    リンク行 = `RailLinkItem` (`py-1.5 text-sm`、2026-09-16 に text-xs から統一)、2 行目 `text-xs`
+  - 見出し付き本文カード = `SectionCard` (`components/surface/SurfaceCard.tsx`、RailCard と同じ HeaderedSurfaceCard の variant。
+    h3 `text-sm font-semibold text-foreground`・ヘッダ `px-4 py-3`・本文 `p-4`)。`ChartPanel` と同じ見た目。非チャート用
+  - メタ文字 = `text-xs`。`text-[10px]`/`text-[11px]`/`text-[13px]` の任意値は使わない
+  - `titleClassName` のサイズ/太さ上書き禁止 (色だけ可: AreaProfileSidebar の emerald/amber)
+  - ページ節見出し: h2 `text-xl font-bold`、節内の小見出し h3 `text-base font-semibold`。h1 だけ `text-2xl font-bold`。`text-lg` 見出し禁止
+  - カード内カード禁止は維持 (SectionCard の内側は枠なしのリンク行にする)
+- **済 (A) — commit `3ca99124c`**: SectionCard 新設 + card census 登録 / RailLinkItem text-sm / RailCard 再実装 7 件
+  (RelatedAreas・AreaProfileSidebar・CitiesNavCard・CorrelationSection+Skeleton・PortStatisticsMapCard・RankingSidebarSkeleton・RailAdSlot)
+  を共通部品化 / blog 関連ランキング・目次と CityRankingSection の titleClassName 上書き削除 (ArticleTableOfContents の compact prop 削除) /
+  楽天・返礼品・運営者カードを semibold + text-xs へ / PortalCategoryGrid sidebar・RailLinksCard の任意 px を scale へ。
+  `/areas/04000` 右レール 4 枚が 14/500・リンク 14px に揃ったことをブラウザ実測済み
+- **B — 実装済み・検証途中 (この PC で 2026-09-16 に Sonnet が編集、型/design-system/card census/eslint は緑、対象 vitest は実行途中で中断)**:
+  対象 14 ファイル = RankingSourceCard / RelatedRankingsGrid (SectionCard 化。内側 9 枚は枠付き SurfaceLinkCard から枠なしリンク行へ =
+  カード内カード禁止のため。**見た目の確認が未了**) / DataUsageCard (SurfaceCard + tint) / RankingPageCardsSkeleton / AreaRelatedRankingsCard /
+  AreaRelatedBlogArticles (h2 text-2xl→text-xl) / AreaDatabookSection (節内 h3 text-lg→text-base semibold) / ThemeRelatedArticles /
+  ThemeEvidenceTopicsSection / ThemeIndicatorCatalogSection (h2 text-lg→text-xl) / MetricFocusCharts・MetricSwitcherPanel
+  (`titleClassName="text-base"` 削除 = themes のチャート見出し 16→14px) / ChartState (h3 text-lg→text-sm) / SurveyTaxonomyCard section 変種
+  (h2 text-lg→text-xl、p-5 撤去)。**次の PC ではまず** `cd apps/web && npx vitest run src/features/ranking src/features/area-profile
+  src/features/area-databook src/features/theme-dashboard src/features/survey src/components` を通し、`git diff` で
+  ThemeEvidenceTopicsSection の見出し扱い (h2 を節見出しとして残したか SectionCard title にしたか) を確認する
+- **C — 未着手 (機械ゲート + 文書)**:
+  1. `apps/web/scripts/check-design-system.mjs` に規則を追加 (既存の `rules` 配列と同形式・`allow` で例外):
+     `no-card-title-scale-override` (`titleClassName=` に `text-(xs|sm|base|lg|xl|2xl)|font-\w+` を含む。features/app 対象) /
+     `no-manual-card-header` (`border-b` と `px-N` と `py-N` を同一 class 文字列に持つ手書きヘッダ。features/app 対象、`src/components/**` は許可) /
+     `no-arbitrary-text-size` (`text-\[(10|11|13)px\]`。A 実施前は 87 箇所/40 ファイル。残存ファイルを**縮小専用 allowlist** に列挙し新規を止める。
+     `src/features/ogp/**` と Remotion 系は対象外) / `no-text-lg-heading` (`<h[23]` と `text-lg` の同居。`MarkdownSectionRenderer` は allowlist) /
+     `no-h2-text-2xl` (hero・PageHeader 以外)。checker のテストがあれば規則ごとに 1 ケース足す
+  2. 文書: `docs/01_技術設計/04_デザインシステム.md` に「カードの役割契約」節 (部品名で書く。数値は書かない) / `.claude/rules/ui-components.md` に
+     「RailCard/SectionCard の titleClassName でサイズを上書きしない」「feature 内で SurfaceCard p-0 + 手書きヘッダを作らない」を追記 /
+     `.claude/design-system/{prohibited,principles,quick-reference}.md` の余白数値 (`p-5以上`/`p-6`/`p-0禁止`) を削除し「コード正典 = SurfaceCard p-4」へ
+  3. ブラウザ再計測 (上記の計測方法) を `/ranking/natto-consumption-expenditure` `/areas/04000` `/themes/real-income` `/category/economy`
+     `/blog/local-government-debt-burden` で行い、役割ごとに 1 系統に収束したことを確認。RelatedRankingsGrid の枠なし化と
+     ranking 右レールのリンク 14px 化の見た目を目視
+- **未決 (オーナー判断)**: ① FAQ/定義/考察 (開閉 UI) の本文 14px は規約どおりだが他カードの 12px と並ぶと大きく見える —
+  他カードを 14px へ上げるか開閉 UI を 13px へ寄せるか ② category の分類カード (13/700・8/12、`CategoryTopicGroups`) を契約へ寄せるか
+  ③ `MarkdownSectionRenderer` の h2 16px (テーマ本文内) の扱い
+- **環境メモ**: この Windows PC で node_modules が lock とずれ `@babel/core` 不在 → pre-commit の `next lint` が落ちる。`npm install` で復元済み。
+  共有ツリーで作業するときは `git commit -- <paths>` で staged を残さない (別セッションの commit に巻き込まれた実例あり)
+- **停止条件**: 契約テスト (`right-rail-banner-contract` / `page-shell-rail-contract` / `left-rail-layout-contract` / chart contract audit) を弱めない。
+  デプロイはオーナー指示で 1 回
+- **完了条件**: 5 ページ計測で役割ごとに 1 系統 / `check-design-system` の新規則が緑で既存違反 0 (allowlist は縮小専用) / 文書 3 点更新 /
+  `npm run type-check --workspace=apps/web` と対象 vitest が緑
 
 ### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
 
@@ -590,6 +660,74 @@ updated: 2026-09-14
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [ESTAT-CATALOG-01] e-Statメタデータ完全カタログの初回バックフィルと旧発見スクリプトの退役
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --import tsx .claude/scripts/estat/catalog.mjs search 人口] [起票:2026-09-16]
+
+- **owner**: estat-researcher (catalog検索の消費側配線) / r2-publisher (初回backfillのdispatch)
+- 2026-09-16、`.claude/scripts/estat/catalog.mjs` (run/pull/search) + `estat-catalog-monthly.yml`
+  (月次cron・専用ブランチpushトリガー) を実装済み。R2 `estat-catalog/` へ全国/都道府県/市区町村の
+  statsDataId一覧とgetMetaInfo要約 (年次・エリア種別・47県判定) を月次で保有する。
+  設計: `docs/02_実装計画/48_e-Statカタログ実装仕様.md`。単体テスト19件 (`npm run estat:catalog:test`) PASS。
+  **未実施**: 実e-Stat APIに対する初回runとR2 push (APP_IDはCI専任のためローカル未検証)。
+- **次 (実行順)**:
+  1. `estat-catalog-run` ブランチへpushしCIで初回run (`--dry-run`でL1件数を先に確認 → 全国の実件数を見て
+     `meta-scope`に1を足すか判断)
+  2. 時間予算150分では1回で終わらない (県+市区町村≈12,000表)。pendingが0になるまで3〜4回push
+  3. `curl https://storage.stats47.jp/estat-catalog/manifest.json` で反映を実測
+  4. `.claude/skills/estat/{search-estat,inspect-estat-meta}/SKILL.md` と
+     `.claude/agents/{estat-researcher,theme-researcher,survey-curator}.md` にcatalog検索を先に引く1行を追記
+  5. 上記が安定稼働したら旧発見スクリプト3系統を退役: `discover-prefecture-candidates.mjs` +
+     `discover-estat-candidates.yml` + git内 `prefecture-candidates.json` (3.1MB・LARGE_FILE例外) /
+     `estat-fetch-meta.yml` / `estat-city-discovery.json` (いずれもcatalogの`index/tables/`から導出可能)
+     → 2026-09-16 にオーナー指示で 1ヶ月待ちを前倒しし退役済み (manifest metaPending 0 を実測): `estat-fetch-meta.yml` +
+     branch `estat-meta-run` + `proof-batch-statsids.json`、`discover-estat-candidates.yml` + branch `estat-discovery-run` +
+     `discover-prefecture-candidates.mjs` + `prefecture-candidates.json` (読み手ゼロ)、`estat-city-discovery.json`
+     (読み手 2 件のうち estat-researcher は `search --collect-area 3` へ配線、estimate-city-data-size.mjs は D1 前提のため同日削除)。手順5 は完了
+  6. `ssds-candidates.json`をcatalog派生に置換、find-metricsに未登録候補の索引を追加
+- **完了条件**: manifestの`collectAreas.{2,3}.metaPending`が0、consumer 3件の配線完了、旧スクリプト退役
+  (旧スクリプトの退役は新カタログが最低1ヶ月安定稼働してから)
+- **禁止**: 全国(collectArea=1)の一律`--meta-scope 1`実行 (推定20万表超・時間予算超過のリスク。
+  必ず実測件数を見てから判断)
+
+### [THEME-SELECTION-BACKFILL-01] ThemeCatalogの選定根拠(selection)未記入540件を夜間の無人バッチで白書・公式統計から裏付ける
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:windows] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-09-16]
+
+- **owner**: theme-designer (catalog TS の書き手) / theme-researcher (調査) / validator は data-configs scripts
+- **背景 (2026-09-16 実測)**: `validate:catalog` の `no-adoption-criteria` warn は 539 件 (warn 合計 552 のうち。
+  chart-temporal-fit 13 を除く)。aging-society 9 指標を theme-researcher(sonnet) → 呼び元検証 → 書き込みで処理し
+  1 テーマ 19 分 (agent 9 分・41 tool call・28.5 万 token / 検証+書き込み+gate 10 分)。受け入れ検証で agent が
+  社会生活統計指標コードを 7 件中 2 件誤記 (#A06603/04 ≠ config の #A06601/02) したのを捕捉。
+  NotebookLM CLI はこの PC では SSL 証明書エラーで不可、白書は WebFetch で足りた。
+  **構造の発見**: 55 テーマ中 31 テーマ + 既存テーマ拡張 67 章は `expanded.ts` の tuple で定義され、
+  per-metric の selection 欄が無い → `selection-evidence.ts` を新設して置き場にした (規約 §4「置き場」)。
+- **完了 (2026-09-16 同日)**: 手順 1〜3 を実装・パイロット済 (詳細は skill `/backfill-theme-selection`)
+  1. validator: `[selection-code-mismatch]` / `[selection-boilerplate]` / `[selection-source-required]` /
+     `[selection-criteria-all]` を error で追加 (`validateSelectionEvidence`)。population-dynamics の 3 件は
+     proposedBy が内部監査名のまま adoptionCriteria が付いていたので外して対象に戻した (539 → 542)。
+     URL 到達性と引用実在は network が要るので validator でなく backfill gate が担う。ratchet は既存の
+     `check-quality-warning-ratchet.cjs` (baseline 548 → 540) を `develop-quality-gate.yml` にも配線
+  2. skill `/backfill-theme-selection` + `.claude/scripts/themes/selection-backfill{,-core}.mjs`
+     (targets / prompt / apply / run)。モデルはファイルを触らず JSON を返すだけ (tools = WebFetch/WebSearch、
+     cwd は repo 外)。gate: 引用の逐語照合 (HTML 本文 / PDF は pdftotext) ・https 到達・定型文・コード一致
+     (config cdCat01 + pull 済み e-Stat カタログ)・基準語彙。role / rejectedCandidates は書かない
+  3. 夜間ドライバ `.claude/scripts/themes/run-selection-backfill.sh`: 専用 worktree・npm ci・catalog pull・
+     preflight・並列 2・枠エラー 3 連続 (30 分待ち×3) と gate 不合格率 > 30% で停止・夜 1 コミット・
+     report を `manage-theme-portfolio/reference/audits/<日付>-selection-backfill.md`
+  - パイロット: tsunami-exposure 2 指標 → 通過 2/2、15 turns、128K トークン、$0.69。PDF 出典 2 件とも
+    pdftotext 経由で引用 found。残 540 件
+- **次 (実行順)**:
+  1. 今晩: ユーザー端末で `bash .claude/scripts/themes/run-selection-backfill.sh --limit 5` → report を見て
+     不合格率が 30% 未満なら翌晩から `--limit` なし (残 54 テーマ ≈ $0.35/指標 × 540 ≈ $190 API 換算、
+     Max 枠なら 2〜3 晩)
+  2. 翌朝: report の「gate 不合格」「資料なし」「role の推奨」を人が処理、worktree ブランチを develop へ ff-merge
+  3. Windows PC で回すなら pdftotext (poppler) を入れる。無ければ PDF 出典は到達性のみで通る (`skipped-pdf`)
+- **完了条件**: `no-adoption-criteria` = 0、role 推奨リストの人間処理完了 (ratchet 配線は完了)
+- **停止条件**: 1 晩の gate 不合格率 > 30% (prompt か gate の問題なので続行しない)、枠エラー 3 連続
+- **禁止**: 夜間バッチによる role 変更・rejectedCandidates への追加・`git commit --no-verify`・
+  gate 未通過の selection の書き込み
+
 ### [THEME-CHART-TEMPORAL-MISMATCH-01] line-chartが単年設定の13指標を再取り込みして年範囲を拡張する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-15]
@@ -1087,7 +1225,103 @@ updated: 2026-09-14
 4. 本番反映はユーザー承認後にまとめて1回行い、HTTP 200、年、単位、代表値を実測する。
 5. 完了した行は削除する。
 
+### [AFF-PRODUCT-KEYWORD-GAP-01] 家計調査系19指標が品目辞書から漏れ、楽天商品カードが出ない (1文字品目・「〜料」接尾辞)
+
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- src/features/ads] [起票:2026-09-16] [期日:2026-10-31]
+
+- **owner**: affiliate-manager (辞書導出規則) / ranking-ui-manager (表示確認)
+- 2026-09-16 実測 (家計調査系 706 metric の title を `detectProductKeyword` に通した): 検出あり 600 / 検出なし 106。
+  106 のうち 87 はサービス・料金・費目合計で商品カードにならないのが正しいが、**19 件は商品**なのに
+  `apps/web/src/features/ads/constants/product-keyword-derivation.ts` の 2 規則で落ちている:
+  - `:72` `term.length < 2` → 1 文字品目 6 種 × (支出額+消費量) = 12 件: 桃・梨・柿・米・傘・酢
+  - `:51` `/[代料費賃税]$/` (費目接尾辞) → 「〜料」で終わる商品 7 件: 炭酸飲料・乳飲料・茶飲料・乳酸菌飲料・風味調味料・他の調味料・修繕材料
+  影響: これらのランキングでは右レール (デスクトップ) と本文中段 (モバイル、`AFF-RANKING-RAKUTEN-NATIVE-01` 以降) の
+  商品軸カードが出ず、地域軸 (1 位県の返礼品) に代替される。
+- **次**: ①「飲料・調味料・材料」を費目扱いから除く例外を足す (接尾辞判定を stem 全体で見る)。
+  ②1 文字品目は blog タイトルで誤検出が確実 (「山梨」→梨、「米国」→米) なので無条件 allowlist にしない。
+  ranking の `sourceText` は正準 title (`{品目}消費支出額|消費量`) なので、**title 全体がその形に一致する場合だけ**
+  1 文字品目を許す (`detectProductKeyword` に完全形一致の分岐を足すか、呼び出し側で正準 title を別引数で渡す)。
+  ③`generate-runtime-metric-summaries.ts` を再実行して `RUNTIME_PRODUCT_KEYWORDS` を再生成 (現 465 語)。
+  ④vitest に「山梨県を含む blog タイトルで 梨 を検出しない」「桃消費支出額 では 桃 を検出する」の両方向を足す。
+- **停止条件**: blog 側 (`resolveBlogRakutenPlacement` / `blog-rakuten-content`) の既存テストが 1 件でも赤になる変更は入れない。
+- **完了条件**: 上記 19 metric の `/ranking/<key>` で商品カードが描画され (ローカル実測)、`src/features/ads` のテストと blog の誤検出テストが緑。
+
+### [METRIC-SUBTITLE-KAKEI-NOTE-01] 家計調査系 706 metric の subtitle が調査方法の定型文で、一覧・h1 直下に冗長表示される
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-09-16]
+
+- **owner**: data-ingester (config 一括是正) / ranking-ui-manager (表示面の確認)
+- 実測 (2026-09-16): `packages/data-configs/src/metrics/` の `kind: "kakei-chousa"` 706 件すべてが
+  `subtitle: "都道府県庁所在市の二人以上世帯の年間{品目}消費支出額"` の形。`metric-config-standards.md` の役割表では
+  subtitle は「同名指標を区別する短い定義補足」で、調査方法は `note` / `description` の責務。lint `subtitle-redundant`
+  (`validate-metric-config.ts:250`) は「subtitle が title を包含」を真の識別子 (乳用牛(めす)) のために許容しているので、この定型文はすり抜ける。
+- 表示への影響: ranking 右レールと関連ランキンググリッドは 2026-09-16 に UI 側で除外済み
+  (`select-sidebar-items.ts` の `getSidebarDetail`: subtitle が title を含む場合は識別に使えないとして非表示)。**残っている面**:
+  ranking 詳細の h1 直下 (`classifyRankingSubtitle` 経由)、category / survey / municipalities 一覧の `${title}（${subtitle}）` 連結
+  (`app/category/[categoryKey]/page.tsx:184`、`app/survey/[surveyKey]/page.tsx:211`、`app/municipalities/**`) で
+  「納豆消費支出額（都道府県庁所在市の二人以上世帯の年間納豆消費支出額）」の重複が出る。
+- **次**: ①決定的スクリプトで 706 件の subtitle 定型文を `note` (「都道府県庁所在市の二人以上世帯・年間値」等の短文 1 種) へ移し、
+  subtitle は null にする (同名衝突がある metric だけ短い識別子を残す)。②`validate:config` / `validate:years` を通す。
+  ③`sync-snapshots` の `ranking-items` で item.json を再生成 (デプロイが先: `branch-workflow.md`「R2 反映は main のコードで動く」)。
+  ④UI 側の暫定ヒューリスティック (`getSidebarDetail` の包含判定・`classifyRankingSubtitle`) はデータ側が揃ったあとに縮退を検討する。
+- **停止条件**: 一括書き換えで `subtitle-redundant` 以外の lint error が増えたら止める。R2 反映とデプロイはオーナー承認後。
+- **完了条件**: 家計調査系 config の subtitle 行に定型文が 0 件、category / survey 一覧のタイトルに定型文の括弧書きが出ない、
+  ranking 詳細ではチャート下の note として表示される。
+
+### [GEO-UX-CLICK-REDUCTION-01] /geo の入口・県選択・着地を 1 本化し、重なり地図までのクリックを減らす
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run src/features/geo-analysis src/lib/analytics] [起票:2026-09-16] [期日:2026-09-30]
+
+- **owner**: site-ux-manager (導線・IA) / geo-analysis-curator (lineage 表示が欠けないことの確認)
+- **実測根拠 (2026-09-16 localhost:3000、desktop 1493×1270)**: `/geo` は main 内リンク 21 本で、`/geo/compare`・`/geo/method`・`/geo/data-catalog` が各 2 回、上部ナビ「2. データを重ねて読む」は `#geo-analyses-heading` (直下セクションへのアンカー) で実質無意味。6 カードのうち地価・洪水・駅は `?pref=13&stage=overlap` に着地するが、豪雪・土砂・施設は stage 無しで **「1. 2020年基準人口の分布」タブに着地** (active tab を DOM で確認)。分析ページ (`/geo/population-flood-risk`) は main 内リンク 70・combobox 2・高さ 4,849px。県を選ぶ UI が **3 つ** (地図の Select / 「都道府県を最大3件で比較」の Select+追加ボタン / 47 行テーブルの「○○県の地図」リンク)。`/geo` → 東京以外の重なり地図は 3〜4 クリック。GSC 直近週の `/geo` は impressions 4・clicks 0 (seo-observability 2026-09-06) で検索流入はなく、サイト内回遊用の導線。
+- **次 (実行順・すべて `apps/web/src/app/geo/**` と `apps/web/src/features/geo-analysis/**` の中だけ)**:
+  1. **着地を「重なり」に統一**: `app/geo/[analysisSlug]/page.tsx` の stage 既定 `'population'` → `'overlap'`、`components/GeoCrossAnalysisArticle.tsx` の `initialStage = 'population'` も同様。`components/GeoAnalysisCards.tsx` のプレビュー 3 枚の href `/geo/${slug}?pref=13&stage=overlap` → `/geo/${slug}` (canonical と一致、非プレビュー 3 枚と同形)。`components/GeoSpatialEvidenceExplorer.tsx` の TabsTrigger から `1. `〜`4. ` の番号と `hasFacilities ? '3.' : '2.'` 式を外す (手順ではなく表示切替)。テスト `components/__tests__/GeoSpatialEvidenceExplorer.test.tsx` の `'3. 数値の確かめ方'` 4 箇所を追従。同コンポーネントは theme 埋め込み (`ThemeGeo*Client.tsx`) でも使われるが、それらのテストは番号を見ていない (grep 0 件)。
+  2. **県選択を 1 つに**: `GeoCrossAnalysisArticle.tsx` の `<GeoCrossAnalysisExplorer …/>` を `<SectionHeader title={config.mapTitle} description={config.mapSubtitle} hideRule />` に置換 (見出しは 47 行テーブルの文脈として残す)。`components/GeoCrossAnalysisExplorer.tsx` を削除し `features/geo-analysis/index.ts` の export を外す。`trackGeoCompareAdd` は `GeoPopulationExplorer.tsx` (`/geo/2050-population`) が使うので `lib/analytics/events.ts` とそのテストは触らない。47 行テーブルの「○○県の地図」 (`/geo/${slug}/${NN}/overlap`) は indexable landing 導線なので残す。
+  3. **`/geo` の入口を 1 本に**: `app/geo/page.tsx` の `<nav aria-label="地域データの調べ方">` (「1. GISを探す」「2. データを重ねて読む」) を削除し、`SectionHeader`「調べたい問いから選ぶ」+ `GeoAnalysisCards` を PageHeader 直下へ。rail の `RailLinksCard`「分析方法・出典」に `GISを探す → /geo/layers` を 1 行追加。`ContentDisclosure` 末尾の `/geo/method` リンクは rail と重複なので削除。`CompareLink` は xl 表示と `xl:hidden` の切替で常に 1 回なのでそのまま。
+  4. **地図より上のブロックを減らす**: `GeoCrossAnalysisArticle.tsx` の `<nav aria-label="分析の読み順">` (3 アンカー) を削除。`<nav aria-label="入力データを単体で見る">` (まず単体で見る) は JSX をそのまま `<GeoSpatialEvidenceExplorer>` の**直後**へ移動。洪水の `role="note"` 注意書きは安全情報なので地図の上に残す。`id="prefecture-comparison"` / `id="methods"` は Explorer 内リンク `/geo/${slug}#methods` が使うので残す。
+  5. **「数値の確かめ方」タブを常時表示へ**: `GeoSpatialEvidenceExplorer.tsx` の `<TabsTrigger value="audit">` と `<TabsContent value="audit">` を削除し、中身 (`spatialAuditRows` の 3 カード / `GeoLandslideAudit` / 照合文) を Tabs の直後・地図下リンク行の上に `SectionHeader title="数値の確かめ方" hideRule` 付きで常時描画。`useState(initialView === 'audit' ? 'overlap' : initialView)` で既存 URL (`?stage=audit`, `/geo/<slug>/<NN>/audit`) を重なり表示に読み替える。**`lib/geo-spatial-evidence.ts` の `SpatialView` / `isGeoSpatialView`、`packages/data-configs/src/business-plan/geo-routes.ts` の `GEO_STAGES` は変更しない** (ルート・sitemap・`geo-routes.test.ts` に波及させない)。
+  6. **検証**: `cd apps/web && npx vitest run src/features/geo-analysis src/lib/analytics` → `npm run type-check` → `npm run design-system:check` → `npm run dev:web` で localhost:3000 を実測: (a) `/geo` の 6 カードすべてで着地の active tab が「…重なり」系 (`document.querySelector('[role="tab"][data-state="active"]')`)、(b) 分析ページ main 内の `[role="combobox"]` が 1 個、(c) `/geo` main 内リンクに `#geo-analyses-heading` が無く `/geo/method`・`/geo/compare`・`/geo/data-catalog` が各 1 回 (xl 幅)、(d) `/geo/population-snow-designation/28/audit` と `/geo/population-flood-risk?pref=28&stage=audit` が 200 で地図と検算値の両方が出る、(e) `/themes/*` の Geo 埋め込み (雪・土砂・駅・施設) が崩れない。
+- **停止条件・禁止**: `geo-routes.ts` / `GEO_INDEXABLE_ROUTES` / middleware / sitemap に触る必要が出たら止めて別カードにする。`components/surface`・`components/rail` は別セッション (2026-09-16 時点で `cf1d3c9a`、RailCard/SectionCard タイポグラフィ統一) が編集中なので props・見た目を変えない (使うだけ)。lineage 表示 (検算 3 カード・「再現・検証データ」・47 行テーブル) を削らない (`geo-analysis-standards.md` の canonical 着地契約)。本番デプロイはしない (localhost 確認までで止め、まとめて 1 回・オーナー承認)。広告枠は `AFF-GEO-SLOT-01` (🟣) の判断待ちで触らない。
+- **完了条件**: `/geo` → 任意県の重なり地図が全 6 カードで 3 クリック (カード → Select 開く → 県)、東京都なら 1 クリック。分析ページの県選択 UI が 1 個 (Select) + テーブルリンクのみ。既存 URL (`?stage=audit`, `/NN/audit`, `/NN/population`, `/NN/overlap`) がすべて 200。vitest・type-check・design-system:check 緑。上記 (a)〜(e) を実測した記録をこのカードの削除 commit に残す。
+- **範囲外 (完了後に必要なら別カード)**: `/geo/compare` の「県を 1 つ選ぶ → 4 カード」を `/geo` 先頭に統合し、6 カードに選択県の `pref` を持たせて **2 クリック化**する案。効果は大きいが `/geo/compare` の canonical・`GEO_INDEXABLE_ROUTES`・`middleware.test.ts` (UTM 付き `/geo/compare` の検証) に及ぶ。
+
+### [NOTE-NAV-REPORT-RETENTION-01] update-published-navigation の日次レポートが hygiene の DATED_STATE_ARTIFACT に抵触して commit を止める
+
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-repo-hygiene.cjs --baseline] [起票:2026-09-16]
+
+- **owner**: note-manager
+- **trigger**: 次に `.claude/scripts/note/update-published-navigation.mjs` を実行し、そのレポートを commit しようとしたとき。
+- **実測 (2026-09-16)**: 別 PC 向け sync commit で `.claude/state/metrics/note-navigation-pilot-2026-09-1{4,5,6}.json` の 3 本が
+  pre-commit の Repo Hygiene ゲート (`check-repo-hygiene.cjs`) の `DATED_STATE_ARTIFACT` で止まった。ルールは 2026-09-14 (e4fabb4b3) に
+  追加されたが、writer の `REPORT_PATH` (`update-published-navigation.mjs:33`) は `.claude/state/metrics/` 直下に日付名で書いたまま。
+  09-06 分はルール以前にコミット済みで baseline に載っている。3 本はこの PC の未追跡のまま残し、commit からは外した。
+- **次**: `REPORT_PATH` を `prune-state-snapshots.mjs` が所有するディレクトリ (例 `.claude/state/metrics/note/navigation/`) へ変え、
+  同スクリプトに prune policy (`note-navigation-pilot-YYYY-MM-DD.json`, keep 8 程度) を追加する。09-06 の既存ファイルは同じ場所へ
+  `git mv` して baseline から外す。update-published-navigation の SKILL / README に出力先を反映する。
+
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [PRECOMMIT-STAGED-SCOPE-01] pre-commit の working-tree 走査ゲートが、別セッションの未コミット編集で無関係な commit を止める
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs] [起票:2026-09-16]
+
+- **owner**: devops-runner
+- **trigger**: 同一作業ツリーで 2 セッション以上が並行するとき (この repo では常態)。次に同じ理由で commit が止まったら着手する。
+- **実測 (2026-09-16 17:0x JST)**: docs のみを staged した commit (`.claude/todo/backlog.md` +17 行) が、pre-commit の
+  `preflight-commit.mjs --commit-static` 内 **Card Census** (`check-card-census.cjs`) で中止された。原因は別セッションが
+  **unstaged** で編集中だった `apps/web/src/components/surface/SurfaceCard.tsx` の `SectionCard` (BASELINE 未登録)。
+  `check-card-census.cjs:86` は `fs.readdirSync` で working tree 全体を走査し、staged 内容を見ない。回避に使った
+  「origin/develop ベースの worktree + node_modules junction」は `git worktree remove --force` が junction を辿って本体の
+  `apps/*/node_modules` を消す事故を起こした (memory `feedback_worktree_junction_deletes_target`)。
+- **次**: `preflight-commit.mjs` に既にある `stagedWebFiles()` (ESLint ゲートが使用、staged な `apps/web/src` の TS/TSX が無ければ skip) を
+  `--commit-static` の Card Census / Ad Placement / Static Accessibility にも適用し、staged に `apps/web/src/**/*.tsx` が無い commit では
+  skip する (`skipped: true` を出力に残す)。CI の `npm run preflight` / `preflight:pr` は従来どおり全体走査のまま (縮退させない)。
+  `preflight-commit.test.mjs` に「staged が docs のみ + working tree に BASELINE 外 *Card がある → commit-static は緑」の固定を足す。
+- **停止条件・禁止**: staged に *.tsx がある commit の検査強度を落とさない。gate を `--no-verify` で迂回する運用にしない。
+  worktree へ本体の `node_modules` を junction で共有しない。
+- **完了条件**: 上記の再現条件 (docs のみ staged + 別セッションの未登録 Card が unstaged) で pre-commit が通り、
+  同じ状態で `npm run preflight` は従来どおり Card Census で落ちる。
 
 ### [CATEGORY-NAV-CONSOLIDATION-01] カテゴリ一覧UIの2実装 (PortalCategoryGrid / CategoryNavGrid) 統合検討
 
@@ -1122,7 +1356,7 @@ updated: 2026-09-14
   2. **SSDS 未使用 733 指標** (`expansion-survey.json` の `ssdsUntapped`・同じ 1,913 団体軸) —
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業
-  3. 非 SSDS 3,361 表 (`.claude/state/estat-city-discovery.json`) — 表ごとに軸 pin 設計が要る長尾
+  3. 非 SSDS 3,349 表 (R2 estat-catalog `npm run estat:catalog:search -- <語> --collect-area 3`、2026-09-16 manifest) — 表ごとに軸 pin 設計が要る長尾
 - **計測**: 公開 28 日後 (2026-09-29 目安) に GSC/GA4 で市区町村面の実測。pilot の 9/21 判定は
   confounded (doc 44 記録済み)
 - **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01` (公開 key が 10 を超えたため trigger 1 は成立。
@@ -1252,27 +1486,27 @@ updated: 2026-09-14
 - **trigger**: 履歴書換えを実施する場合は、全clone・fork・open branchへの影響を合意し、専用maintenance windowを取る。
 - **禁止**: owner承認なしにfilter-repo、force push、branch削除を行わない。
 
-### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 6 本の削除可否
+### [SCRIPT-ORPHAN-DELETE-01] 用途を判断できない orphan スクリプト 9 本 ((c) 群) の要否判定
 
-タグ: [種類:意思決定] [実行:対話] [起票:2026-08-17]
+タグ: [種類:意思決定] [実行:対話] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs で orphan 一覧を再取得] [起票:2026-08-17]
 
 - **owner**: uruhayato373 (削除可否はオーナー判断)
 - **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
-  (下記「orphan 29 本の分類」)。残るのは (a) 群 6 本の削除可否だけ。
-- **(a) 役目が終わっている 6 本**: `blog/gen-chart-svg.cjs` (自身が
-  「⚠ SUPERSEDED (2026-05-27)」と明記) / `lib/update-skill-primary-agent.cjs` (一回きりの移行) /
-  `note/generate-remaining-covers.cjs` (一回きりの一括生成) / `note/inject-affiliate-blocks.mjs`
-  (一回きりの一括注入) / `sns/backfill-x-templates.cjs` (一回きりの backfill) /
-  `estat/estimate-city-data-size.mjs` (廃止済み永続 D1 の行数試算が前提)。
-- **次**: オーナーが 6 本の削除を承認する。承認後は git rm するだけ (履歴から復元可)。
-- **完了条件**: 6 本が削除されるか、残す理由が本エントリに追記されている。
-- **禁止**: (b)(c) 群を巻き込んで一括削除しない。
+  (下記「orphan 29 本の分類」)。
+- **済 (2026-09-16)**: (a) 群 6 本をオーナー承認で削除。`estat/estimate-city-data-size.mjs` (D1 前提。出力・cache・
+  local-resources / .gitignore 登録も同時撤去) と、`blog/gen-chart-svg.cjs` / `lib/update-skill-primary-agent.cjs`
+  (maintenance-debt baseline の UNBOUNDED_LEGACY 1 件も除去) / `note/generate-remaining-covers.cjs` /
+  `note/inject-affiliate-blocks.mjs` / `sns/backfill-x-templates.cjs`。いずれも他スクリプト・skill・workflow からの参照なし。
+- **trigger**: 次のリリース (main マージ) 後。(c) 群 9 本が依然として未使用なら (a) と同じ扱いで削除する。
+- **次**: 検証コマンドで orphan 一覧を再取得し、(c) の 9 本それぞれに「使った / 使っていない」を付けてオーナーへ出す。
+- **完了条件**: (c) 群が削除されるか、(b) 群と同じく残す理由が本エントリに追記されている。
+- **禁止**: (b) 群を巻き込んで一括削除しない。
 
 #### orphan 29 本の分類 (2026-08-17 実測・`check-agent-skill-consistency.cjs`)
 
 エントリ記載の 20 本は古い。実測は **29 本**。全件に残す/消す理由を付けた。
 
-**(a) 役目が終わっている 6 本** → 上記のとおり削除候補 (オーナー判断)
+**(a) 役目が終わっている 6 本** → 2026-09-16 に全て削除済み (上記「済」)
 
 **(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
 
@@ -1290,13 +1524,13 @@ updated: 2026-09-14
 `probe-*` は note.com の UI が変わったとき再実行する read-only 調査用。note は SPA で
 DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp-publish` と同じ理由)。
 
-**(c) 用途が判断できない 10 本** → 1 リリース残して未使用なら (a) 群へ落とす
+**(c) 用途が判断できない 9 本** → 1 リリース残して未使用なら (a) 群へ落とす (本カードの残作業)
 
 `blog/build-article-data-from-r2.mjs` / `blog/prefecture-food-profile.mjs` /
 `blog/select-conformance-candidates.mjs` / `gsc/discover-trends-fetch.cjs` /
 `note/affiliate-incremental.sh` / `note/download-affiliate-banners.mjs` /
-`note/expand-for-fix.mjs` / `note/publish-new-note.sh` / `psi/generate-cwv-pr.mjs` /
-`estat/estimate-city-data-size.mjs` は D1 前提が明確なので (a) へ寄せた
+`note/expand-for-fix.mjs` / `note/publish-new-note.sh` / `psi/generate-cwv-pr.mjs`
+(元 10 本。`estat/estimate-city-data-size.mjs` は D1 前提が明確なので (a) へ寄せ、2026-09-16 に削除済み)
 
 **なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
 これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。
@@ -1329,3 +1563,39 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
   衝突すると同じ失敗を繰り返す)。
 - **完了条件**: workflow が緑になる、または schedule が外れて横断ヘルスチェックの対象から消える。
 - **正典**: `.claude/rules/sns-content-standards.md` §5.5 (R2 素材保持ポリシー)
+
+### [NOTE-INS-IMG-HEADING-PLACEMENT-01] ins_img が見出し直前の段落をアンカーにすると画像が見出し直後へずれる
+
+タグ: [種類:不具合] [実行:対話] [起票:2026-09-16]
+
+- **owner**: 未定
+- **問題**: `.claude/scripts/note/editor-helpers.sh` の `ins_img` は、アンカー文字列を含む段落の
+  「次の `<p id=>`/`<li>`」を探して画像挿入位置にしているため、アンカー段落の直後が見出し
+  (`<h2>`/`<h3>`) だと見出しを読み飛ばし、次セクション先頭の段落の前に画像を置いてしまう
+  (実質: 画像が見出しの直後＝意図した位置の1ブロック先にずれる)。2026-09-16、b-kakei-* 8本の
+  画像復元時に `audit-note-figure-split.mjs` の misplaced 件数で発覚 (7/8 本で計14枚が該当)。
+  内容自体は正しい画像で欠落や誤情報ではないため公開は維持している。
+- **試して失敗した案**: アンカー段落自身をそのままクリックし段落末尾へキャレットを置いて
+  Enter する変更 → `b-kakei-necktie-decline` で misplaced が 1→2 に悪化して撤回済み
+  (原因未特定。`BU state` が出す accessibility tree のダンプ形式の想定が外れている可能性が高い)。
+- **次**: 実際に `BU state` の生ダンプ (`/tmp/ns.txt`) を見出し前後の段落で目視してから
+  awk の抽出条件を組み直す。ライブの note エディタで最低3パターン (見出し直前 / 見出し無し /
+  リスト直前) を実地検証してから全 note 記事へ展開する。
+- **禁止**: ライブ DOM の実物を見ずに正規表現だけを推測で直さない (今回の失敗の再発)。
+- **完了条件**: 見出し直前アンカーを含む記事で `audit-note-figure-split.mjs` の misplaced が 0。
+
+### [NOTE-RECOVERED-DUPLICATE-CONSOLIDATION-01] recovered-* に同一テーマの重複投稿が残っている
+
+タグ: [種類:意思決定] [実行:対話] [起票:2026-09-16]
+
+- **owner**: uruhayato373 (どちらを残すかの編集判断)
+- **問題**: note全体189本の商品カード監査中に発見。`recovered-n581a1409b2c9` と
+  `recovered-ned30a382334d` が同一タイトル「大学数ランキング」、`recovered-n6f8a367906d1` と
+  `recovered-nb2d65c42c28b` が同一タイトル「最高気温ランキング」で同日投稿。後者はさらに
+  3本目の stub (`n863f429319ca`) と、画像付きで書き直した後継記事 `a-maximum-temperature`
+  (現在 status:draft で未公開) も存在する。いずれもチャート画像パイプライン導入前の
+  note.com バックフィルによる復元 stub。
+- **次**: 各組で「どれを正本として残すか」を決める (後継記事があるものは後継を仕上げて
+  公開し、旧stubを非公開化する方針が有力)。どの note 投稿を非公開/削除するかは
+  公開済みコンテンツへの不可逆操作なのでオーナー判断が必要。
+- **完了条件**: 各組が1本に統合される、またはそれぞれ独立して残す理由が記録される。

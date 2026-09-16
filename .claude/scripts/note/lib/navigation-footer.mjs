@@ -1,4 +1,11 @@
 import { randomUUID } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const LIB_DIR = dirname(fileURLToPath(import.meta.url));
+const REPO_ROOT = resolve(LIB_DIR, "../../../..");
+const STOREFRONT_PATH = join(REPO_ROOT, "apps/web/src/features/products/storefront.generated.ts");
 
 function escapeHtml(value) {
   return String(value)
@@ -31,6 +38,33 @@ export function buildNoteProductCardUrl(productTarget, noteUrl) {
     `https://stats47.jp${productTarget}/from/note/${noteKey}`,
     "stats47.jp",
   );
+}
+
+function parseJsonStringLiteral(raw) {
+  return JSON.parse(`"${raw}"`);
+}
+
+function readStorefrontField(block, field) {
+  const match = block.match(new RegExp(`"${field}":\\s*"((?:[^"\\\\]|\\\\.)*)"`));
+  return match ? parseJsonStringLiteral(match[1]) : null;
+}
+
+/**
+ * note商品カードのtitle/descriptionを、マガジン名の代用ではなく
+ * 実商品SSOT (storefront.generated.ts) から解決する。見つからなければ fail-fast する。
+ */
+export function resolveProductCardText(productTarget) {
+  const slug = String(productTarget || "").match(/^\/products\/([a-z0-9-]+)$/)?.[1];
+  if (!slug) throw new Error(`商品導線pathが不正: ${productTarget}`);
+  const source = readFileSync(STOREFRONT_PATH, "utf8");
+  for (const match of source.matchAll(/\{[^{}]*\}/g)) {
+    const block = match[0];
+    if (readStorefrontField(block, "slug") !== slug) continue;
+    const title = readStorefrontField(block, "title");
+    const description = readStorefrontField(block, "description");
+    if (title && description) return { title, description };
+  }
+  throw new Error(`商品ストアに productTarget が見つかりません: ${productTarget}`);
 }
 
 export function normalizeLegacyStats47Links(body) {
@@ -70,7 +104,7 @@ function noteCard(url, noteKey, idFactory) {
   return `<figure ${attrs(id)} data-src="${escapeHtml(url)}" data-identifier="${escapeHtml(noteKey)}" embedded-service="note" embedded-content-key="${embed}">\n</figure>`;
 }
 
-function externalCard(url, title, description, idFactory) {
+export function externalCard(url, title, description, idFactory) {
   const id = idFactory();
   const embed = `emb${idFactory().replaceAll("-", "").slice(0, 12)}`;
   const hostname = new URL(url).hostname;
@@ -89,6 +123,10 @@ function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function figureByDataSrcPattern(url) {
+  return new RegExp(`<figure\\b[^>]*\\bdata-src="${escapeRegExp(url)}"[^>]*>[\\s\\S]*?<\\/figure>`, "g");
+}
+
 /** 公開本文に残る既知の旧URLだけを catalog 契約に従って修復する。 */
 export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUID } = {}) {
   const original = String(body);
@@ -97,17 +135,33 @@ export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUI
 
   for (const repair of repairs || []) {
     const fromUrl = assertCleanCardUrl(repair.fromUrl, "stats47.jp");
-    const toUrl = assertCleanCardUrl(repair.toUrl, "stats47.jp");
     const before = output;
+
+    if (repair.mode === "regenerate-card") {
+      // URLはそのまま、embedded-service="external-article"のカードを維持して
+      // title/descriptionだけを実商品SSOTの値へ揃える (replace-cardのような格下げはしない)。
+      let matched = false;
+      output = output.replace(figureByDataSrcPattern(fromUrl), (figure) => {
+        matched = true;
+        const currentTitle = figure.match(/<strong>([\s\S]*?)<\/strong>/)?.[1];
+        const currentDescription = figure.match(/<em>([\s\S]*?)<\/em>/)?.[1];
+        const alreadyCorrect = currentTitle === escapeHtml(repair.title)
+          && currentDescription === escapeHtml(repair.description);
+        return alreadyCorrect ? figure : externalCard(fromUrl, repair.title, repair.description, idFactory);
+      });
+      // カードがまだ存在しない記事 (本文差し替え直後など) では何もしない。
+      // 新規追加は applyNavigationFooter の hasUrl 判定に委ねる (regenerate-card は
+      // 既存カードの文言訂正専任で、新規追加の責務を持たない)。
+      results.push({ mode: repair.mode, fromUrl, toUrl: fromUrl, changed: matched && output !== before });
+      continue;
+    }
+
+    const toUrl = assertCleanCardUrl(repair.toUrl, "stats47.jp");
 
     if (repair.mode === "replace-url") {
       output = output.replaceAll(fromUrl, toUrl);
     } else if (repair.mode === "replace-card") {
-      const figurePattern = new RegExp(
-        `<figure\\b[^>]*\\bdata-src="${escapeRegExp(fromUrl)}"[^>]*>[\\s\\S]*?<\\/figure>`,
-        "g",
-      );
-      output = output.replace(figurePattern, (figure) => {
+      output = output.replace(figureByDataSrcPattern(fromUrl), (figure) => {
         const id = figure.match(/\\b(?:name|id)="([^"]+)"/)?.[1] || idFactory();
         return `<p ${attrs(id)}><a href="${escapeHtml(toUrl)}" rel="nofollow noopener" target="_blank">${escapeHtml(repair.linkText)}</a></p>`;
       });
