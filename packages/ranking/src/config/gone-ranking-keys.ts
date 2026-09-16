@@ -203,7 +203,6 @@ export const GONE_RANKING_KEYS = new Set([
   "final-waste-disposal-volume",
   "financial-capability-index-municipal",
   "fire-brigade-count",
-  "fire-damage-amount",
   "fire-damage-casualties",
   "fire-damage-death-count",
   "fire-damage-injury-count",

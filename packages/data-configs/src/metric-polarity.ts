@@ -57,6 +57,8 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "amusement-industry-establishments": { polarity: "neutral", evidence: "娯楽業の事業所実数は市場規模と事業所の集約度に左右され、サービス品質や利用機会の充足率を表さない。" },
   "amusement-industry-net-value-added": { polarity: "neutral", evidence: "娯楽業企業の純付加価値額を本所所在地へ帰属させた総額で、住民の所得や地域内全事業所の生産性とは異なる。" },
   "amusement-industry-revenue": { polarity: "neutral", evidence: "娯楽業企業の売上総額は本所集中と企業規模を反映し、利益率や住民の便益を直接表さない。" },
+  "auto-insurance-penetration-bodily-injury-actual": { polarity: "neutral", evidence: "人身傷害補償 (実損払) の普及率は支払方式の選好と保険料負担を含む契約構成で、高いほど良いとは断定できない。" },
+  "auto-insurance-penetration-bodily-injury-fixed": { polarity: "neutral", evidence: "人身傷害補償 (定額払) の普及率は実損払との選択を含む契約構成で、高いほど良いとは断定できない。" },
   "beef-cattle-count": { polarity: "neutral", evidence: "肉用目的の飼養頭数は畜産の生産規模で、採算・需要・環境負荷を併せなければ多寡の良否を決められない。" },
   "births-first-child": { polarity: "neutral", evidence: "第1子の出生実数は親世代の人口規模と出産選択を反映し、出生順位の多寡に価値の優劣を付けない。" },
   "births-mother-age25to29": { polarity: "neutral", evidence: "母25〜29歳の出生実数は該当年齢女性の人口構成に依存し、特定の出産年齢を望ましいと順位付けしない。" },
@@ -337,6 +339,10 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "dementia-death-rate": { polarity: "higher-is-worse", evidence: "死亡は多いほど悪い (争いのない事象)" },
   // 早期新生児死亡数
   "early-neonatal-deaths": { polarity: "higher-is-worse", evidence: "死亡は多いほど悪い (争いのない事象)" },
+  // 火災り災人員数
+  "fire-affected-persons-count": { polarity: "higher-is-worse", evidence: "火災の発生・死傷・損害は多いほど悪い (争いのない事象)" },
+  // 火災損害額
+  "fire-damage-amount": { polarity: "higher-is-worse", evidence: "火災の発生・死傷・損害は多いほど悪い (争いのない事象)" },
   // 火災死傷者数 / 事故当たり
   "fire-damage-casualties-per-accident": { polarity: "higher-is-worse", evidence: "火災の発生・死傷・損害は多いほど悪い (争いのない事象)" },
   // 火災死傷者数 / 人口当たり
