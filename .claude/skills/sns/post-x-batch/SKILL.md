@@ -63,6 +63,17 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
 - **画像はローカル R2 ミラーに出るだけで git に載らない**。publish 時に `--from-queue` が media 不在を
   検知して quick-still を再生成するため、クラウドで①③⑤だけ実行してもよい (画像は publish 時に確定)。
 
+#### 構図の比較プレビュー
+
+`quick-still.ts --layout spotlight|comparison|distribution --out <preview-dir> --require-png`
+で、1県の数値を主役にする・最大/最小を対比する・全県の分布を見せる3構図を選べる。
+例: `npx tsx .claude/scripts/sns/quick-still.ts --key waste-recycling-rate --year 2023 --layout spotlight --out .local/verification/x-visuals/spotlight --require-png`。
+型の実装は `.claude/scripts/sns/lib/ranking-story-card.ts`、再現用のlayoutと年は生成先の`source.json`に記録する。
+単位・年度・出典は保持し、中央値を全国平均と呼ばず、同値の最大/最小は同順位を明記する。
+`--layout`省略時は既存の`columns`。この比較生成は台帳・予約添付・カタログの既定割当を変更しない。
+既定割当の採択はSNS規約§2-10で扱う。表示した事実と本文の主張が合う画像を選ぶ。
+検証: `node --import tsx --test .claude/scripts/sns/__tests__/ranking-story-card.test.ts`。
+
 ### ③ キャプション執筆 (LLM — このフェーズだけが判断)
 
 `candidates.json` を読み、各要素に `caption` を足した `captions.json` を書く

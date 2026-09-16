@@ -87,6 +87,8 @@ import { assemblyExpensesPrefecture } from "./metrics/assembly-expenses-prefectu
 import { assistanceExpenditureRatioPrefFinance } from "./metrics/assistance-expenditure-ratio-pref-finance";
 import { assistanceExpensesPrefecture } from "./metrics/assistance-expenses-prefecture";
 import { associateProfessorAnnualIncome } from "./metrics/associate-professor-annual-income";
+import { autoInsurancePenetrationBodilyInjuryActual } from "./metrics/auto-insurance-penetration-bodily-injury-actual";
+import { autoInsurancePenetrationBodilyInjuryFixed } from "./metrics/auto-insurance-penetration-bodily-injury-fixed";
 import { autoLiabilityInsuranceAmountReceivedPerPayment } from "./metrics/auto-liability-insurance-amount-received-per-payment";
 import { autoMechanicAnnualIncome } from "./metrics/auto-mechanic-annual-income";
 import { autolockApartmentRate } from "./metrics/autolock-apartment-rate";
@@ -655,6 +657,8 @@ import { finalEnergyConsumptionPerCapita } from "./metrics/final-energy-consumpt
 import { finalEnergyConsumption } from "./metrics/final-energy-consumption";
 import { financialAssetsBalanceMultiPersonHouseholds } from "./metrics/financial-assets-balance-multi-person-households";
 import { financialDebtBalance } from "./metrics/financial-debt-balance";
+import { fireAffectedPersonsCount } from "./metrics/fire-affected-persons-count";
+import { fireDamageAmount } from "./metrics/fire-damage-amount";
 import { fireDamageCasualtiesPerAccident } from "./metrics/fire-damage-casualties-per-accident";
 import { fireDamageCasualtiesPerPopulation } from "./metrics/fire-damage-casualties-per-population";
 import { fireDamageHouseholdCountPer100BuildingFires } from "./metrics/fire-damage-household-count-per-100-building-fires";
@@ -2690,6 +2694,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "assistance-expenditure-ratio-pref-finance": assistanceExpenditureRatioPrefFinance,
   "assistance-expenses-prefecture": assistanceExpensesPrefecture,
   "associate-professor-annual-income": associateProfessorAnnualIncome,
+  "auto-insurance-penetration-bodily-injury-actual": autoInsurancePenetrationBodilyInjuryActual,
+  "auto-insurance-penetration-bodily-injury-fixed": autoInsurancePenetrationBodilyInjuryFixed,
   "auto-liability-insurance-amount-received-per-payment": autoLiabilityInsuranceAmountReceivedPerPayment,
   "auto-mechanic-annual-income": autoMechanicAnnualIncome,
   "autolock-apartment-rate": autolockApartmentRate,
@@ -3258,6 +3264,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "final-energy-consumption": finalEnergyConsumption,
   "financial-assets-balance-multi-person-households": financialAssetsBalanceMultiPersonHouseholds,
   "financial-debt-balance": financialDebtBalance,
+  "fire-affected-persons-count": fireAffectedPersonsCount,
+  "fire-damage-amount": fireDamageAmount,
   "fire-damage-casualties-per-accident": fireDamageCasualtiesPerAccident,
   "fire-damage-casualties-per-population": fireDamageCasualtiesPerPopulation,
   "fire-damage-household-count-per-100-building-fires": fireDamageHouseholdCountPer100BuildingFires,
