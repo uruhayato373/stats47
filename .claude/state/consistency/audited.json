@@ -1,9 +1,5 @@
 {
-  "hash": "f4bbc99ee141622a4ccb9f24d055e3cc6eafead1a88c171ab5ddfad25caf8519",
-  "audited_at": "2026-09-16T06:03:01",
-  "files": [
-    ".claude/rules/affiliate-ads-standards.md",
-    ".claude/rules/analytics-event-standards.md",
-    ".claude/skills/analytics/affiliate-improvement/reference/improvement-log.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-09-16T06:53:16",
+  "files": []
 }
