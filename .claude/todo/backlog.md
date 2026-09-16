@@ -690,36 +690,40 @@ updated: 2026-09-16
 - **禁止**: 全国(collectArea=1)の一律`--meta-scope 1`実行 (推定20万表超・時間予算超過のリスク。
   必ず実測件数を見てから判断)
 
-### [THEME-SELECTION-BACKFILL-01] ThemeCatalogの選定根拠(selection)未記入552件を夜間の無人バッチで白書・公式統計から裏付ける
+### [THEME-SELECTION-BACKFILL-01] ThemeCatalogの選定根拠(selection)未記入540件を夜間の無人バッチで白書・公式統計から裏付ける
 
 タグ: [エージェント・SSOT] [種類:改善] [実行:windows] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-09-16]
 
 - **owner**: theme-designer (catalog TS の書き手) / theme-researcher (調査) / validator は data-configs scripts
-- **背景 (2026-09-16 実測)**: `validate:catalog` の `no-adoption-criteria` warn は 561 件。aging-society の
-  9 指標を theme-researcher(sonnet) → 呼び元検証 → 書き込みで処理し 552 件へ。1 テーマ 19 分
-  (agent 9 分・41 tool call・28.5 万 token / 検証+書き込み+gate 10 分)。受け入れ検証で agent が
+- **背景 (2026-09-16 実測)**: `validate:catalog` の `no-adoption-criteria` warn は 539 件 (warn 合計 552 のうち。
+  chart-temporal-fit 13 を除く)。aging-society 9 指標を theme-researcher(sonnet) → 呼び元検証 → 書き込みで処理し
+  1 テーマ 19 分 (agent 9 分・41 tool call・28.5 万 token / 検証+書き込み+gate 10 分)。受け入れ検証で agent が
   社会生活統計指標コードを 7 件中 2 件誤記 (#A06603/04 ≠ config の #A06601/02) したのを捕捉。
   NotebookLM CLI はこの PC では SSL 証明書エラーで不可、白書は WebFetch で足りた。
-  55 テーマ×約 15 分 = 約 14 時間なので 1 晩では終わらず、5 時間利用枠で止まる前提で 2〜3 晩。
+  **構造の発見**: 55 テーマ中 31 テーマ + 既存テーマ拡張 67 章は `expanded.ts` の tuple で定義され、
+  per-metric の selection 欄が無い → `selection-evidence.ts` を新設して置き場にした (規約 §4「置き場」)。
+- **完了 (2026-09-16 同日)**: 手順 1〜3 を実装・パイロット済 (詳細は skill `/backfill-theme-selection`)
+  1. validator: `[selection-code-mismatch]` / `[selection-boilerplate]` / `[selection-source-required]` /
+     `[selection-criteria-all]` を error で追加 (`validateSelectionEvidence`)。population-dynamics の 3 件は
+     proposedBy が内部監査名のまま adoptionCriteria が付いていたので外して対象に戻した (539 → 542)。
+     URL 到達性と引用実在は network が要るので validator でなく backfill gate が担う。ratchet は既存の
+     `check-quality-warning-ratchet.cjs` (baseline 548 → 540) を `develop-quality-gate.yml` にも配線
+  2. skill `/backfill-theme-selection` + `.claude/scripts/themes/selection-backfill{,-core}.mjs`
+     (targets / prompt / apply / run)。モデルはファイルを触らず JSON を返すだけ (tools = WebFetch/WebSearch、
+     cwd は repo 外)。gate: 引用の逐語照合 (HTML 本文 / PDF は pdftotext) ・https 到達・定型文・コード一致
+     (config cdCat01 + pull 済み e-Stat カタログ)・基準語彙。role / rejectedCandidates は書かない
+  3. 夜間ドライバ `.claude/scripts/themes/run-selection-backfill.sh`: 専用 worktree・npm ci・catalog pull・
+     preflight・並列 2・枠エラー 3 連続 (30 分待ち×3) と gate 不合格率 > 30% で停止・夜 1 コミット・
+     report を `manage-theme-portfolio/reference/audits/<日付>-selection-backfill.md`
+  - パイロット: tsunami-exposure 2 指標 → 通過 2/2、15 turns、128K トークン、$0.69。PDF 出典 2 件とも
+    pdftotext 経由で引用 found。残 540 件
 - **次 (実行順)**:
-  1. validator (`packages/data-configs/scripts/validate-theme-catalog.ts`) へ 3 gate を error で追加:
-     (a) `selection.rationale`/`proposedBy` 中の `#[A-Z]\d{5,}` コードが metric config の `cdCat01` と一致し、
-     さらに e-Stat カタログ (`node --import tsx .claude/scripts/estat/catalog.mjs search --id <statsDataId>`、
-     初回 `pull`・社内PCは proxy preload) で解決した分類コード名が rationale の指標名と矛盾しない
-     (**前提**: `ESTAT-CATALOG-01` の run で `index/classes/` が push 済みであること。2026-09-16 07:35 時点は
-     2 回目 run が in_progress で分類行 0 件のため、この半分は run 完了後に有効化する)
-     (b) `sourceUrl` が HTTP 到達可能 (`.claude/scripts/audit/theme-chart-live-audit.mjs` の
-     `resolveDispatcher` でプロキシ経由) (c) 定型フレーズ (「詳細索引に保持し」「実値として比較する」等) を
-     rationale に含まない。加えて `no-adoption-criteria` 件数の ratchet (baseline 552・減少専用) を
-     `pr-quality-check` / `develop-quality-gate` に配線
-  2. skill `/backfill-theme-selection <theme>`: theme-researcher (Task Capsule 固定・table-only) →
-     theme-designer が `selection` だけを書く。**role は変更しない** (推奨は夜間レポートへ出し人が判断)
-  3. 夜間ドライバ `.claude/scripts/themes/run-selection-backfill.sh` (`run-claude-batch.sh` の型):
-     専用 worktree・1 テーマ 1 attempt・gate 不合格は skip 記録・並列 2 まで・`wait_for_capacity`・
-     **夜 1 コミット** (このPCは pre-commit 12 分/回)・レポートを
-     `.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-selection-backfill.md`
-  4. 翌朝: レポートの role 推奨と skip を人が処理、ratchet の数字を weekly review が読む
-- **完了条件**: `no-adoption-criteria` = 0、role 推奨リストの人間処理完了、ratchet が CI に配線済み
+  1. 今晩: ユーザー端末で `bash .claude/scripts/themes/run-selection-backfill.sh --limit 5` → report を見て
+     不合格率が 30% 未満なら翌晩から `--limit` なし (残 54 テーマ ≈ $0.35/指標 × 540 ≈ $190 API 換算、
+     Max 枠なら 2〜3 晩)
+  2. 翌朝: report の「gate 不合格」「資料なし」「role の推奨」を人が処理、worktree ブランチを develop へ ff-merge
+  3. Windows PC で回すなら pdftotext (poppler) を入れる。無ければ PDF 出典は到達性のみで通る (`skipped-pdf`)
+- **完了条件**: `no-adoption-criteria` = 0、role 推奨リストの人間処理完了 (ratchet 配線は完了)
 - **停止条件**: 1 晩の gate 不合格率 > 30% (prompt か gate の問題なので続行しない)、枠エラー 3 連続
 - **禁止**: 夜間バッチによる role 変更・rejectedCandidates への追加・`git commit --no-verify`・
   gate 未通過の selection の書き込み

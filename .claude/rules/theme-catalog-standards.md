@@ -25,6 +25,7 @@ paths:
 | 層                      | 場所                                                                  | 役割                                                                   |
 | ----------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | **SSOT**                | `packages/data-configs/src/theme-catalog/<key>.ts` (`ThemeCatalog`)   | 指標選定 + チャート割当 + 選定根拠 (selection)。**ここだけを編集する** |
+| SSOT (expanded 由来の selection) | `packages/data-configs/src/theme-catalog/selection-evidence.ts` | `expanded.ts` の tuple で定義された指標の selection (§4「置き場」)。backfill writer が再生成 |
 | 登録簿                  | `packages/data-configs/src/theme-catalog/index.ts` (`THEME_CATALOGS`) | カタログ駆動テーマの入口。ここに登録されたテーマだけ生成対象           |
 | 型                      | `packages/data-configs/src/theme-catalog/types.ts`                    | `ThemeCatalog` / `CatalogMetric` / `CatalogChart` / `MetricSelection`  |
 | **生成物** (手編集禁止) | `packages/types/src/indicator-sets/<key>.ts`                          | IndicatorSet codegen (`// AUTO-GENERATED — DO NOT EDIT`)               |
@@ -165,6 +166,26 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
   根拠不足なら記入せず採用を保留してよい。
 - **`readerQuestion` / `targetReaderOrDecision` は任意**。section/evidenceTopics の問いより
   指標 1 件に絞った粒度で書く。読者向け本文にそのまま露出しない (内部の判断根拠)。
+
+#### selection の置き場 (2026-09-16 新設 — 混在させない)
+
+| 指標の定義場所 | selection を書く場所 |
+|---|---|
+| `<theme>.ts` の `metrics[]` にインライン (24 テーマ) | その metric の `selection` (従来どおり) |
+| `expanded.ts` の spec tuple (31 テーマ) / 既存テーマ拡張 tuple (67 章) | `selection-evidence.ts` の `SELECTION_EVIDENCE[themeKey][rankingKey]` — tuple には欄が無い。`makeCatalog` / `extensionMetric` が定型文より優先して読む |
+
+`selection-evidence.ts` は JSON 形式の TS で、`selection-backfill.mjs apply` が丸ごと再生成する (手書きも同じ形を保つ)。
+どちらに書くかは writer が「`<theme>.ts` に rankingKey があるか」で機械判定する (`isInlineMetric`)。
+
+#### 「一次資料で裏付けた」と主張する selection の機械検査 (adoptionCriteria あり = 主張)
+
+validator が error にする: `[selection-code-mismatch]` (`#A03503` 等のコードが metric config の cdCat01 と不一致 —
+adoptionCriteria の有無に関わらず) / `[selection-boilerplate]` (`SELECTION_BOILERPLATE_PHRASES` の定型文が残る) /
+`[selection-source-required]` (https の sourceUrl と ISO 日付の surveyedAt が無い) / `[selection-criteria-all]` (5 基準全部)。
+URL の到達性・引用の実在 (`evidenceQuote` が本文にあるか) は network が要るので validator では見ず、
+backfill の gate (`.claude/scripts/themes/selection-backfill-core.mjs gateEntries`) が書き込み前に見る。
+定型文で埋めるくらいなら未記入のまま残す (`[no-adoption-criteria]` warn は warning ratchet で減少専用)。
+運用: skill `/backfill-theme-selection` (対話) / `run-selection-backfill.sh` (夜間無人)。
 
 ---
 
@@ -325,6 +346,7 @@ harmRelevance: [
 | **error (chart selection meta)** | `[comparison-basis]` / `[visualization-rationale]` — 指定時に空文字                                                                                                                                                                                                                 |
 | **warn (adoptionCriteria)**    | `[no-adoption-criteria]` primary/secondary で selection はあるが adoptionCriteria 未記入 (根拠不足なら記入せず保留してよい)                                                                                                                                                             |
 | **error (adoptionCriteria)**   | `[adoption-criteria]` ADOPTION_CRITERIA 外の値                                                                                                                                                                                                                                        |
+| **error (selection evidence)** | `[selection-code-mismatch]` 統計指標コードが metric config の cdCat01 と不一致 / `[selection-boilerplate]` adoptionCriteria 付きなのに定型文が残る / `[selection-source-required]` https sourceUrl・ISO surveyedAt が無い / `[selection-criteria-all]` 5 基準全部列挙 (§4「機械検査」・2026-09-16 新設) |
 | **warn (chart-temporal-fit)**  | `[chart-temporal-fit]` line-chart が参照する指標の `years` が1年しかない (推移を描けない・チャート型の再検討候補。2026-09-15新設・実測13件・誤検知の余地が無い確実な不整合のみ検出するため warn のまま運用する)                                                                          |
 
 ---
@@ -415,6 +437,7 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 - validator: `packages/data-configs/scripts/validate-theme-catalog.ts`
 - drift guard: `apps/web/src/features/theme-dashboard/actions/theme-chart-props.ts` 末尾 (`_ThemeChartTypeDriftGuard`)
 - 調査スキル: `.claude/skills/theme/research-theme-catalog/SKILL.md`
+- 選定根拠の backfill: `.claude/skills/theme/backfill-theme-selection/SKILL.md` (夜間 driver `.claude/scripts/themes/run-selection-backfill.sh`)
 - 公式ダッシュボード研究カタログ: `.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json`
 - 研究カタログ監査: `npm run theme:dashboard-catalog:test && npm run theme:dashboard-catalog:check`
 - 調査 agent: `.claude/agents/theme-researcher.md`

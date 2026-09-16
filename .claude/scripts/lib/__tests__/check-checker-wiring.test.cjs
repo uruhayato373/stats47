@@ -75,6 +75,16 @@ test("別scriptから参照される非critical checkerは配線済み", (t) => 
   assert.deepEqual(result.output.findings, []);
 });
 
+test("拡張子を省いたTS相対importで参照されるcheckerは配線済み", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  add(item.root, ".claude/scripts/page-quality/lib/audit-url.ts", "export function auditUrl() {}\n");
+  add(item.root, ".claude/scripts/page-quality/run-representative.ts", 'import { auditUrl } from "./lib/audit-url";\n');
+  const result = run(item);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(result.output.findings, []);
+});
+
 test("新規未配線checkerを検出する", (t) => {
   const item = fixture();
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));

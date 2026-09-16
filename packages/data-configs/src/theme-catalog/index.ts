@@ -48,6 +48,7 @@ export * from "./chart-dependencies";
 export * from "./faq-markdown";
 export * from "./theme-metric-content";
 export * from "./catalog-sections";
+export * from "./selection-evidence";
 
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */
 const BASE_THEME_CATALOGS: Record<string, ThemeCatalog> = {
@@ -88,7 +89,7 @@ function withExistingExtensions(catalog: ThemeCatalog): ThemeCatalog {
     if (extension.existingSectionKey || !extension.metrics.length) continue;
     const groupKeys: string[] = [];
     extension.metrics.forEach((metric, index) => {
-      const entry = extensionMetric(metric);
+      const entry = extensionMetric(catalog.key, metric);
       const existingIndex = metrics.findIndex((existing) => existing.rankingKey === entry.rankingKey);
       if (existingIndex === -1) {
         metrics.push(entry);

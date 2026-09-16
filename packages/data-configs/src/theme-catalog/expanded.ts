@@ -1,5 +1,6 @@
 import type { ThemeCatalog, CatalogMetric } from './types';
 import type { ChartColorRole } from './chart-color-role';
+import { SELECTION_EVIDENCE } from './selection-evidence';
 
 /**
  * 128候補のうち「新規テーマ」として採択した残り31テーマ。
@@ -19,11 +20,14 @@ type Spec = {
 };
 
 function makeCatalog(spec: Spec): ThemeCatalog {
+  // tuple には selection の欄が無い。一次資料で裏付けた根拠は selection-evidence.ts が持ち、
+  // 無いものだけ定型文で埋める (定型文は validator の [no-adoption-criteria] warn 対象)。
+  const evidence = SELECTION_EVIDENCE[spec.key] ?? {};
   const metrics = spec.metrics.map(([rankingKey, shortLabel, role = 'secondary']) => ({
     rankingKey,
     shortLabel,
     role,
-    selection: {
+    selection: evidence[rankingKey] ?? {
       proposedBy: '128テーマ実現性調査・全体展開',
       surveyedAt: '2026-09-09',
       rationale: `${shortLabel}を都道府県別の実値として比較する。`,
@@ -252,11 +256,11 @@ export const EXISTING_THEME_SECTION_EXTENSIONS: Record<string, Array<{ candidate
   ],
 };
 
-export function extensionMetric(metric: [string, string, CatalogMetric['role']?]): CatalogMetric {
+export function extensionMetric(themeKey: string, metric: [string, string, CatalogMetric['role']?]): CatalogMetric {
   return {
     rankingKey: metric[0],
     shortLabel: metric[1],
     role: metric[2] ?? 'secondary',
-    selection: { proposedBy: '128テーマ実現性調査・既存テーマ拡充', surveyedAt: '2026-09-09', rationale: `${metric[1]}を既存テーマの独立章へ追加する。` },
+    selection: SELECTION_EVIDENCE[themeKey]?.[metric[0]] ?? { proposedBy: '128テーマ実現性調査・既存テーマ拡充', surveyedAt: '2026-09-09', rationale: `${metric[1]}を既存テーマの独立章へ追加する。` },
   };
 }

@@ -109,6 +109,13 @@
       ]
     },
     {
+      "name": "PDF_TEXT_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CLAUDE_CODE_OAUTH_TOKEN",
       "visibility": "secret",
       "contexts": [

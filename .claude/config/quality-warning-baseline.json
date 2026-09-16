@@ -36,7 +36,7 @@
     {
       "source": "theme-catalog",
       "code": "no-adoption-criteria",
-      "count": 548,
+      "count": 540,
       "owner": "theme-designer",
       "reason": "adoptionCriteria requires evidence-backed selection rationale per metric; recording without evidence is worse than leaving it unrecorded",
       "expiresAt": "2026-10-31"

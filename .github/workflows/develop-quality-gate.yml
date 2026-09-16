@@ -92,3 +92,11 @@ jobs:
           node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
           node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
         continue-on-error: false
+
+      - name: 🧯 Quality Warning Ratchet
+        # validate:catalog / validate:polarity / validate:config の warn 件数が baseline
+        # (.claude/config/quality-warning-baseline.json) を超えていないか。baseline は縮小専用。
+        # 夜間の selection backfill (THEME-SELECTION-BACKFILL-01) が no-adoption-criteria を
+        # 減らして baseline を縮めるので、develop 着地点で増加を止める (実測 4 秒・決定的)。
+        run: node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
+        continue-on-error: false

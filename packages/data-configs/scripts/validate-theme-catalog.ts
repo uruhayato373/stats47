@@ -30,7 +30,13 @@ import { THEME_INDICATOR_SETS } from '@stats47/types';
 
 import { METRICS_REGISTRY } from '../src/registry';
 import { LOCAL_FINANCE_RATIO_METRICS } from '../src/theme-catalog/local-finance-ratios';
-import { normalizeUnitForAxis, HARM_AXES, ADOPTION_CRITERIA } from '../src/theme-catalog/types';
+import {
+  normalizeUnitForAxis,
+  HARM_AXES,
+  ADOPTION_CRITERIA,
+  SELECTION_BOILERPLATE_PHRASES,
+  SELECTION_STAT_CODE_RE,
+} from '../src/theme-catalog/types';
 import {
   listThemeCatalogs,
   CATALOG_COMPONENT_TYPES,
@@ -636,6 +642,67 @@ export function validateAdoptionCriteria(
 }
 
 /**
+ * 「一次資料で裏付けた」と主張する selection (= adoptionCriteria あり) の機械検査 (error)。
+ * THEME-SELECTION-BACKFILL-01 の夜間 backfill が書いたものを人間の目視なしで受け入れるための床。
+ *
+ * - `[selection-code-mismatch]` rationale 等の社会生活統計指標コード (#A03503 等) が、その指標の
+ *   metric config `source.cdCat01` と一致しない (2026-09-16 に agent が 7 件中 2 件誤記した再発防止)。
+ *   adoptionCriteria の有無に関わらず全 selection を見る (コードの誤記はどの entry でも誤り)
+ * - `[selection-boilerplate]` 定型文 (`SELECTION_BOILERPLATE_PHRASES`) が残っている
+ * - `[selection-source-required]` `sourceUrl` (https) / `surveyedAt` (ISO 日付) が無い
+ * - `[selection-criteria-all]` 5 基準を全部列挙している (「満たす基準だけ」の規律違反)
+ *
+ * URL の到達性・引用の実在は network が要るので validator では見ない
+ * (`.claude/scripts/themes/selection-backfill.mjs apply` の gate が見る)。
+ */
+export function validateSelectionEvidence(
+  c: ThemeCatalog,
+  errors: string[]
+): void {
+  for (const m of c.metrics) {
+    const s = m.selection;
+    if (!s) continue;
+    const where = `${c.key}: "${m.rankingKey}"`;
+    const cited = new Set(
+      [s.rationale, s.proposedBy, s.readerQuestion ?? '', s.targetReaderOrDecision ?? '']
+        .join('\n')
+        .match(SELECTION_STAT_CODE_RE) ?? []
+    );
+    if (cited.size > 0) {
+      const src = METRICS_REGISTRY[m.rankingKey]?.source as
+        | { kind?: string; cdCat01?: string }
+        | undefined;
+      const own = src?.kind === 'estat' ? src.cdCat01 : undefined;
+      for (const code of cited) {
+        if (code !== own) {
+          errors.push(
+            `[selection-code-mismatch] ${where}: selection に "${code}" とあるが metric config の cdCat01 は ${own ?? '(無し)'}`
+          );
+        }
+      }
+    }
+    if (!s.adoptionCriteria?.length) continue;
+    const text = `${s.proposedBy}\n${s.rationale}`;
+    for (const phrase of SELECTION_BOILERPLATE_PHRASES) {
+      if (text.includes(phrase)) {
+        errors.push(
+          `[selection-boilerplate] ${where}: adoptionCriteria 付きの selection に定型文「${phrase}」が残っている`
+        );
+      }
+    }
+    if (!s.sourceUrl?.startsWith('https://')) {
+      errors.push(`[selection-source-required] ${where}: adoptionCriteria 付きの selection に https の sourceUrl が無い`);
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s.surveyedAt) || Number.isNaN(Date.parse(s.surveyedAt))) {
+      errors.push(`[selection-source-required] ${where}: surveyedAt "${s.surveyedAt}" が ISO 日付でない`);
+    }
+    if (new Set(s.adoptionCriteria).size >= ADOPTION_CRITERIA.length) {
+      errors.push(`[selection-criteria-all] ${where}: adoptionCriteria が全 ${ADOPTION_CRITERIA.length} 基準 — 満たす基準だけを列挙する`);
+    }
+  }
+}
+
+/**
  * YearSpec から年数を数える。`'all'` は R2 を読まないと分からないため未知として扱い、
  * 誤検知を避けるために検査対象から外す (確実に 1 年だけと言えるものだけを見る)。
  */
@@ -861,6 +928,7 @@ export function runCatalogValidation(): CatalogValidationResult {
     validateEvidenceTopics(c, themeKeys, errors, warns);
     validateHarmRelevance(c, errors);
     validateAdoptionCriteria(c, errors, warns);
+    validateSelectionEvidence(c, errors);
     validateChartSelectionMeta(c, errors);
   }
 
