@@ -1,13 +1,22 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-17",
+  "date": "2026-09-18",
   "period": {
-    "periodStart": "2026-09-08",
-    "periodEnd": "2026-09-14",
+    "periodStart": "2026-09-09",
+    "periodEnd": "2026-09-15",
     "windowDays": 7
   },
-  "inputHash": "0953254ba18c1c630d5ca8f48fac6a0193d8da36c2ea511e18ad0e91e25acd12",
+  "inputHash": "443c8d2e5a562ffb5ffaea185aeb04a51ee92f6b0814d1b8951ec48d4d5af5fd",
   "movements": [
+    {
+      "keyword": "漁獲量とは",
+      "targetPath": "/japan/fishery-marine",
+      "before": 43,
+      "after": 99.5,
+      "beforeImpressions": 3,
+      "impressions": 2,
+      "change": -56.5
+    },
     {
       "keyword": "漁かく量",
       "targetPath": "/japan/fishery-marine",
@@ -18,22 +27,22 @@
       "change": -55
     },
     {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 32.18518518518519,
-      "after": 78.75,
-      "beforeImpressions": 27,
-      "impressions": 20,
-      "change": -46.56481481481481
-    },
-    {
       "keyword": "任意保険 加入 率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 34.75,
-      "after": 78.66666666666667,
-      "beforeImpressions": 8,
-      "impressions": 6,
-      "change": -43.91666666666667
+      "before": 36,
+      "after": 79,
+      "beforeImpressions": 7,
+      "impressions": 7,
+      "change": -43
+    },
+    {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 37.93103448275862,
+      "after": 80.61111111111111,
+      "beforeImpressions": 29,
+      "impressions": 18,
+      "change": -42.680076628352495
     },
     {
       "keyword": "漁獲量",
@@ -45,22 +54,13 @@
       "change": -42.5
     },
     {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 75.47619047619048,
-      "after": 38.25806451612903,
-      "beforeImpressions": 21,
-      "impressions": 31,
-      "change": 37.21812596006145
-    },
-    {
       "keyword": "任意保険 加入 率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 70.875,
-      "after": 38.714285714285715,
-      "beforeImpressions": 8,
-      "impressions": 7,
-      "change": 32.160714285714285
+      "before": 69.71428571428571,
+      "after": 36.75,
+      "beforeImpressions": 7,
+      "impressions": 8,
+      "change": 32.96428571428571
     },
     {
       "keyword": "中絶 理由 ランキング",
@@ -72,40 +72,40 @@
       "change": 30.333333333333336
     },
     {
-      "keyword": "地方債 利率 ランキング",
-      "targetPath": "/blog/local-government-debt-burden",
-      "before": 30.666666666666668,
-      "after": 3.7142857142857144,
-      "beforeImpressions": 3,
-      "impressions": 7,
-      "change": 26.952380952380953
+      "keyword": "デザイン 年収ランキング",
+      "targetPath": "/ranking/designer-annual-income",
+      "before": 20,
+      "after": 48.2,
+      "beforeImpressions": 1,
+      "impressions": 5,
+      "change": -28.200000000000003
     },
     {
-      "keyword": "郡山 人口",
-      "targetPath": "/areas/07000/cities/07203/population",
-      "before": 35,
-      "after": 9,
+      "keyword": "市町村 数",
+      "targetPath": "/blog/municipality-count-prefecture-gap",
+      "before": 30.666666666666668,
+      "after": 3,
+      "beforeImpressions": 3,
+      "impressions": 1,
+      "change": 27.666666666666668
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/43000",
+      "before": 28,
+      "after": 1,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 26
-    },
-    {
-      "keyword": "合計特殊出生率 都道府県別 ランキング",
-      "targetPath": "/blog/fertility-rate-prefecture-gap",
-      "before": 1,
-      "after": 26.5,
-      "beforeImpressions": 3,
-      "impressions": 2,
-      "change": -25.5
+      "change": 27
     }
   ],
   "verdicts": [],
   "selected": {
     "keyword": "外国人",
     "targetPath": "/blog/foreign-residents-diversity-map",
-    "rank": 2.6512166859791426,
-    "impressions": 863,
-    "clicks": 47,
+    "rank": 2.6789087093389297,
+    "impressions": 953,
+    "clicks": 45,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
