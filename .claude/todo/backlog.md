@@ -759,6 +759,10 @@ updated: 2026-09-18
   retry で通った flaky (blog 一覧サムネイル 30 秒 timeout / ranking 右レール契約) は Issue 本文に
   「retry 通過」として区別して載せる。
 - **完了条件**: smoke 失敗時に Issue が立ち、green に戻ったら自動 close されることを 1 回ずつ実測する。
+- **実施 (2026-09-18)**: `post-deploy-smoke.yml` に `issues: write`、list reporter の tee、`if: failure()` の upsert step
+  (label ensure → 固定 Issue `[Post-Deploy Alert] 本番スモークテストの失敗` を edit/create、本文は末尾サマリの
+  `N failed` / `N flaky` を分けて列挙 + ログ末尾)、`if: success()` の close step を追加。`alert-issue-lifecycle.test.cjs`
+  の WORKFLOWS、`docs-vs-issues.md` の Issues 表、自動化インベントリに登録。実測は下記。
 
 ### [CI-SPEED-UNIT-TESTS-EARLY-01] unit test を develop-gate の並列 job として走らせ、main PR まで一度も走らない状態を止める
 
