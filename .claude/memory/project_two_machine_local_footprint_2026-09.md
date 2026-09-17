@@ -33,3 +33,18 @@ husky は両 OS で一度も走っていなかった、memory の symlink は Wi
   へ退避した (Drive vault と sha256 全件一致を確認済み・14 日で自動回収)。
 - 4 本の worktree (`C:\tmp\stats47-affiliate-*-20260908`) は未コミット作業を含むので消していない。
   閉じるときは各 worktree で `git status --porcelain` が空になってから `git worktree remove`。
+
+## ChatGPT (Codex) アプリが会社 PC で「固まる」= ネットワークの 503 (2026-09-17 実測)
+
+- 症状: プロンプト送信後に UI が止まって見える。原因は会社ネットワーク (i-FILTER) が
+  `chatgpt.com/backend-api/codex/responses` を 503 (「警告」ページ) で遮断していること。websocket は毎回
+  (5 回リトライ ≈ 6.5 秒 → `falling back to HTTP`)、HTTP も断続的に遮断され、その時は数十秒〜数十分待った末に
+  503 エラーで turn が終わる。リポジトリ設定は無関係。`responses_websockets` flag は "removed" で websocket は切れない。
+- 証拠の取り方: `~/.codex/logs_2.sqlite` を `node:sqlite` (Node 22) で読む。`target='codex_api::endpoint::responses_websocket'`
+  の ERROR と `codex_core::responses_retry`。session の `task_complete.time_to_first_token_ms` で待ち時間が分かる。
+- Mac 側 f44ff75a0 (invalid transport で Codex 起動不能) は別症状。Windows でも `codex mcp list` / `codex doctor` は正常。
+- `~/.codex/config.toml` (git 外) で thread 起動ごとに失敗していた MCP 4 台 (notebooklm = Google 認証切れ、
+  cloudflare-graphql/observability = OAuth 未ログイン、cloudflare-api = env 未設定) を `enabled = false` にし、
+  dotfiles `codex/host.windows.toml` にも同じ無効化を入れた (link.mjs は host セクションで丸ごと置換するので url も持たせる)。
+- **注意**: `bin/link.mjs` は base.toml の `model` / `model_reasoning_effort` で先頭スカラーを置き換えるので、
+  アプリで選んだモデル (2026-09-17 時点 gpt-5.6-sol / xhigh) が gpt-6-astra / medium に戻る。実行前に base.toml を合わせる。
