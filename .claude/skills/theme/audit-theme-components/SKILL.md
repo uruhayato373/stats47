@@ -18,6 +18,8 @@ npm run theme:quality:test
 node --import tsx packages/data-configs/scripts/validate-theme-catalog.ts
 node --import tsx packages/data-configs/scripts/generate-theme-catalog.ts --check
 node --import tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts --check
+cd apps/web && npx vitest run src/features/theme-dashboard
+npm run design-system:check -w apps/web
 ```
 
 構造だけを確認する場合は `npm run theme:quality:check -- --offline --json /tmp/theme-structure.json`。
@@ -58,5 +60,6 @@ PDFの復元にはPopplerの`pdftotext`が必要。対象外県は`source.config
 - 単年・沿岸県だけ・秘匿は、それだけで不具合と断定しない。欠測を0にしない。
 - 同じ指標のカードと詳細図を重複表示せず、章の問いに必要な比較を残す。
 - 最高/最低気温、給与月額/年収、就職率/就業率、人口等の分母は定義まで確認する。
+- 1 指標グループはコンパクトカード (選択 UI なし)、2 件以上だけ切替パネル。UI 側の是正は theme-ui-manager。
 - 本体UIは theme-ui-manager、指標選定は theme-designer、定義/取得は data-ingesterへ渡す。
 - 結果は `.claude/state/themes/quality.json`。未完了策は既存backlogへ統合し、docsへレビュー全文を増やさない。

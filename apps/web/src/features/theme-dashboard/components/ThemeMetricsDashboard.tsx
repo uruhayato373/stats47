@@ -18,11 +18,18 @@ import {
 } from '../types';
 
 import { FixedYearComparisonPanel } from './FixedYearComparisonPanel';
+import {
+  isMultiMetricGroup,
+  isSingleMetricGroup,
+  type MetricKpi,
+  type MultiMetricGroup,
+  type SingleMetricGroup,
+} from './metric-kpi';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
+import { SingleMetricCard } from './SingleMetricCard';
 import { ThemeComparisonSection } from './ThemeComparisonSection';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
-import type { MetricKpi } from './metric-kpi';
 import type {
   CatalogMetricGroup,
   CatalogSection,
@@ -215,43 +222,64 @@ export function ThemeMetricsDashboard({
    *
    * metricGroups 未定義のテーマ (カタログ未登録のものを含む) は
    * 全 KPI を 1 グループにまとめる = 従来の 1 パネル構成と同じ。
+   *
+   * ★表示方式は**生存キーの実件数**で決める (2026-09-17)。1 件なら選択 UI の無い
+   *   SingleMetricCard、2 件以上なら MetricSwitcherPanel。カタログ定義では 2 件でも
+   *   観測不足で 1 件に減れば single に倒す。テーマ別の分岐は持たない。
    */
   const panels = useMemo(() => {
+    type Panel = {
+      key: string;
+      comparisonYear: string | undefined;
+      comparisonMap: boolean | undefined;
+      title: string | undefined;
+      metrics: SingleMetricGroup | MultiMetricGroup;
+      defaultCheckedKeys: string[];
+    };
+    const sized = (metrics: MetricKpi[]) =>
+      isSingleMetricGroup(metrics) || isMultiMetricGroup(metrics)
+        ? metrics
+        : null;
     if (!metricGroups || metricGroups.length === 0) {
-      return kpis.length > 0
+      const metrics = sized(kpis);
+      return metrics
         ? [
             {
               key: 'default',
-              comparisonYear: undefined as string | undefined,
-              comparisonMap: undefined as boolean | undefined,
+              comparisonYear: undefined,
+              comparisonMap: undefined,
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
-              title: undefined as string | undefined,
-              metrics: kpis,
+              title: undefined,
+              metrics,
               defaultCheckedKeys: [themeConfig.defaultRankingKey],
-            },
+            } satisfies Panel,
           ]
         : [];
     }
     const byKey = new Map(kpis.map((k) => [k.metricKey, k]));
-    return metricGroups
-      .map((group) => {
-        const groupMetrics = group.rankingKeys
+    return metricGroups.flatMap((group): Panel[] => {
+      const metrics = sized(
+        group.rankingKeys
           .map((key) => byKey.get(key))
-          .filter((m): m is MetricKpi => m !== undefined);
-        const alive = new Set(groupMetrics.map((m) => m.metricKey));
-        return {
+          .filter((m): m is MetricKpi => m !== undefined)
+      );
+      // 全滅したグループはカードごと出さない (空のカードは「壊れている」と読める)
+      if (!metrics) return [];
+      const alive = new Set(metrics.map((m) => m.metricKey));
+      return [
+        {
           key: group.key,
           comparisonYear: group.comparisonYear,
           comparisonMap: group.comparisonMap,
           title: group.title as string | undefined,
-          metrics: groupMetrics,
+          metrics,
           defaultCheckedKeys: group.defaultCheckedKeys.filter((k) =>
             alive.has(k)
           ),
-        };
-      })
-      .filter((panel) => panel.metrics.length > 0);
+        },
+      ];
+    });
   }, [metricGroups, kpis, themeConfig.defaultRankingKey]);
 
   // page_components チャート専用の地域コード。KPI パネル (kpis) とは別経路で、
@@ -276,7 +304,11 @@ export function ThemeMetricsDashboard({
     return null;
   }
 
-  const renderPanel = (panel: (typeof panels)[number], summaryOnly = false) => panel.comparisonYear ? (
+  type Panel = (typeof panels)[number];
+  /** 固定年比較と複数指標切替は全幅、1 指標カードはコンパクト (複数並ぶときだけ 2 列) */
+  const isCompact = (panel: Panel) =>
+    !panel.comparisonYear && isSingleMetricGroup(panel.metrics);
+  const renderPanel = (panel: Panel, summaryOnly = false) => panel.comparisonYear ? (
     <FixedYearComparisonPanel
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -288,6 +320,17 @@ export function ThemeMetricsDashboard({
       defaultMetricKey={panel.defaultCheckedKeys[0]}
       tabLabels={tabLabels}
       showMap={panel.comparisonMap}
+    />
+  ) : isSingleMetricGroup(panel.metrics) ? (
+    <SingleMetricCard
+      key={panel.key}
+      id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
+      summaryOnly={summaryOnly}
+      title={panel.title}
+      metric={panel.metrics[0]}
+      tabLabels={tabLabels}
+      selectedPrefectureCode={selectedPrefectureCode}
+      areaName={areaName}
     />
   ) : (
     <MetricSwitcherPanel
@@ -302,6 +345,42 @@ export function ThemeMetricsDashboard({
       defaultCheckedKeys={panel.defaultCheckedKeys}
     />
   );
+  /**
+   * パネル列を「連続するコンパクトカードの run」と「全幅パネル」に分け、順序を保ったまま描く。
+   * run が 2 件以上のときだけ container query の 2 列 grid で包む。1 件の run に grid wrapper は作らない。
+   */
+  const renderPanelRuns = (
+    list: Panel[],
+    summaryOnlyOf: (panel: Panel) => boolean = () => false
+  ) => {
+    const out: ReactNode[] = [];
+    for (let i = 0; i < list.length; ) {
+      const panel = list[i];
+      if (!isCompact(panel)) {
+        out.push(renderPanel(panel, summaryOnlyOf(panel)));
+        i += 1;
+        continue;
+      }
+      let j = i;
+      while (j < list.length && isCompact(list[j])) j += 1;
+      const run = list.slice(i, j);
+      if (run.length === 1) {
+        out.push(renderPanel(panel, summaryOnlyOf(panel)));
+      } else {
+        out.push(
+          <div
+            key={`compact-${panel.key}`}
+            data-theme-panel-grid="compact"
+            className="grid grid-cols-1 gap-4 @md:grid-cols-2"
+          >
+            {run.map((item) => renderPanel(item, summaryOnlyOf(item)))}
+          </div>
+        );
+      }
+      i = j;
+    }
+    return out;
+  };
   const renderChart = (chart: PageComponent) =>
     chart.componentType === 'markdown-section' ? (
       <ThemeDbChartRenderer
@@ -406,7 +485,7 @@ export function ThemeMetricsDashboard({
               </p>
             )}
           </div>
-          {chapter.panels.map((panel) => {
+          {renderPanelRuns(chapter.panels, (panel) => {
             const coveredKeys = new Set(
               chapter.charts.flatMap((chart) =>
                 ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
@@ -426,9 +505,8 @@ export function ThemeMetricsDashboard({
                 )
               )
             );
-            return renderPanel(
-              panel,
-              panel.metrics.every((metric) => coveredKeys.has(metric.metricKey))
+            return panel.metrics.every((metric) =>
+              coveredKeys.has(metric.metricKey)
             );
           })}
           {chapter.charts.length > 0 && (
@@ -441,11 +519,11 @@ export function ThemeMetricsDashboard({
           ))}
         </section>
       ))}
-      {remainingPanels.map((panel) => renderPanel(panel))}
+      {renderPanelRuns(remainingPanels)}
       {remainingCharts.length > 0 && (
         <div
           id="theme-charts"
-          className="grid scroll-mt-24 grid-cols-1 gap-4 @md:grid-cols-2"
+          className={`grid scroll-mt-24 grid-cols-1 gap-4 ${remainingCharts.length > 1 ? '@md:grid-cols-2' : ''}`}
         >
           {remainingCharts.map(renderChart)}
         </div>
