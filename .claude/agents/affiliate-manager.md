@@ -24,6 +24,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 - **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (ASP 別コード解析 [A8/ValueCommerce/楽天]・`inspect-banner.mjs` で画像 fetch → サイズ実測+広告主目視判別・canonical 検証・vertical 判定・1 エントリ追記)。`direct` = 直接属性方式の台帳登録。
 - **直接配置の inventory ownership** — 直接属性方式 (`<affiliate-banner>` / note 生 HTML) の台帳 SSOT `apps/web/scripts/affiliate-direct-placements-data.ts` を単一所有。配置と台帳登録をセットで守らせる。
 - **compliance 監査** (`/audit-affiliate-compliance`) — 孤立配置・本文タグ不一致・PR 表記 (景表法) 漏れ・台帳未登録タグ・canonical サイズを決定的スクリプトで監査。記事本文の是正は blog-editor / article-writer に委譲。
+- **関連性監査** (`/audit-affiliate-relevance`) — 公開全記事の明示policyと survey/tag 競合を決定的に抽出する。自動修正せず、記事意図を確認した例外だけ `blog-affiliate-policy.ts` に理由付きで記録する。
 - **配置マップの所有** (rules §12) — 「どのページ種別にどの枠で何を出すか」の正典と、需要×供給の突合 state
   `.claude/state/ads/placement-map-latest.json` (`build-placement-map.mjs` が週次 cron で生成) を維持する。
   propose は**この state を読む** (GSC×在庫×EPC の目視 JOIN は禁止 — 再現性が無く見落とすため)。
@@ -59,6 +60,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 | `/register-affiliate-banner` | バナー登録・配置設計 (自動配置 SSOT 追加 + `direct` 直接配置台帳) |
 | `/affiliate-improvement` | 在庫管理・dashboard・imp/click/CTR 改善ループ |
 | `/audit-affiliate-compliance` | PR 表記・孤立配置・リンク整合・canonical サイズの決定的監査 |
+| `/audit-affiliate-relevance` | 記事意図・survey・tag・明示policyの全量監査 |
 | `/manage-affiliate-experiment` | クリエイティブ A/B 実験の plan/start/observe/decide/close |
 | `/scout-asp` (co) | A8 自動 scout の register 段 + commit/push を担当 (ブラウザ操作は `asp-scout`) |
 

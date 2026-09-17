@@ -336,6 +336,11 @@ export function verticalsFromTagKeys(tagKeys: readonly string[]): AffiliateVerti
 }
 
 export interface ContentVerticalInput {
+  /**
+   * 編集判断で確定したページ固有の意図。プロパティ自体が無ければ自動解決、null は広告なし。
+   * データ出典 (surveyIds) と読者の購買意図が一致しない記事だけに使う。
+   */
+  explicitVertical?: AffiliateVertical | null;
   /** 出典調査 id (先頭が主調査)。ranking item.json / blog all.json の surveyIds */
   surveyIds?: readonly string[] | null;
   /** 記事・指標のタグキー */
@@ -345,6 +350,8 @@ export interface ContentVerticalInput {
 }
 
 export type ContentVerticalResolution =
+  | { source: "explicit"; vertical: AffiliateVertical; verticals: AffiliateVertical[] }
+  | { source: "explicit-none"; vertical: null; verticals: [] }
   | { source: "survey"; vertical: AffiliateVertical; verticals: AffiliateVertical[] }
   | { source: "survey-none"; vertical: null; verticals: [] }
   | { source: "tags"; vertical: AffiliateVertical; verticals: AffiliateVertical[] }
@@ -361,7 +368,7 @@ export type ContentVerticalResolution =
  */
 /** 在庫フォールバック鎖の 1 段。上から順に試し、在庫が出た段で止める。 */
 export interface ContentVerticalStep {
-  source: "survey" | "tags" | "category";
+  source: "explicit" | "survey" | "tags" | "category";
   verticals: AffiliateVertical[];
 }
 
@@ -383,6 +390,11 @@ export interface ContentVerticalChain {
 }
 
 export function resolveContentVerticalChain(input: ContentVerticalInput): ContentVerticalChain {
+  if (Object.prototype.hasOwnProperty.call(input, "explicitVertical")) {
+    return input.explicitVertical
+      ? { blocked: false, steps: [{ source: "explicit", verticals: [input.explicitVertical] }] }
+      : { blocked: true, steps: [] };
+  }
   const tagVerticals = verticalsFromTagKeys(input.tagKeys ?? []);
   const categoryVertical = input.categoryKey
     ? CATEGORY_AFFILIATE_MAP[input.categoryKey]
@@ -406,6 +418,11 @@ export function resolveContentVerticalChain(input: ContentVerticalInput): Conten
 }
 
 export function resolveContentVertical(input: ContentVerticalInput): ContentVerticalResolution {
+  if (Object.prototype.hasOwnProperty.call(input, "explicitVertical")) {
+    return input.explicitVertical
+      ? { source: "explicit", vertical: input.explicitVertical, verticals: [input.explicitVertical] }
+      : { source: "explicit-none", vertical: null, verticals: [] };
+  }
   for (const surveyId of input.surveyIds ?? []) {
     if (!(surveyId in SURVEY_AFFILIATE_MAP)) continue;
     const v = SURVEY_AFFILIATE_MAP[surveyId];

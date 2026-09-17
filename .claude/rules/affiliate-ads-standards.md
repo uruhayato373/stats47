@@ -184,7 +184,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 |---|---|
 | ranking | **出典調査 → タグ → categoryKey** (`resolveContentVertical`。2026-09-03) → vertical の banner (priority 上位) → text → AdSense fallback。native 枠とサイドバー (`AffiliateAdSlot vertical=`) は同じ解決結果を使う。**家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) の本文中段 native は `RankingPageRakutenNativeSection` に置換** — モバイル(lg未満)=商品軸 `RakutenItemsCard position="rakuten-native"`（品目なしは地域軸で代替）、デスクトップ=地域軸 `FurusatoNozeiCard position="furusato-native"`（1位県、見出し「1位 ◯◯県の人気返礼品」）。右レールの商品カードは `hidden lg:block` でデスクトップ限定。**上段 in-content の A8 も家計調査系では描画しない** (本文の A8 はゼロ)。右レール除外 (`usedAffiliateAds`) は据え置き = 描画しなかった A8 をレールへ流さない (2026-09-16) |
 | category | `categoryKey` → vertical |
-| blog | **出典調査 → 記事 `tags`** (`resolveContentVertical`。2026-09-03) → vertical の banner/text。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
+| blog | **記事明示policy → 出典調査 → 記事 `tags`** (`resolveContentVertical`) → vertical の banner/text。明示 `null` は広告なし。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
 | survey | `SURVEY_AFFILIATE_MAP[surveyKey]` → 無ければ所属ランキングの categoryKey 最頻値 |
 | theme | `relatedArticleTagKeys` → vertical、空なら `THEME_AFFILIATE_MAP[themeKey]` → vertical (フォールバック) |
 | area | `locationCode="area-sidebar"` の banner。AdSense停止中の県本文枠は地域意図として `furusato` vertical |
@@ -202,7 +202,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 `resolveContentVertical` に一本化した:
 
 ```
-出典調査 (SURVEY_AFFILIATE_MAP に載っている調査) → タグ (TAG_AFFILIATE_MAP) → カテゴリ (CATEGORY_AFFILIATE_MAP) → 無し
+記事明示policy (blogのみ) → 出典調査 (SURVEY_AFFILIATE_MAP) → タグ (TAG_AFFILIATE_MAP) → カテゴリ (CATEGORY_AFFILIATE_MAP) → 無し
 ```
 
 - 値 `null` は「主題はあるが合う商材が無い」。意図軸の広告を**出さず**ハウス枠・AdSense だけにする
@@ -211,6 +211,18 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 - ranking (native + サイドバー) / blog (本文・末尾・右レール・テキスト) / survey が同じ関数を通る。
   theme / area / home はページ種別が主題を決めるため従来どおり。
 - 契約テスト: `affiliate-category-map-contract.test.ts` (解決順・null の伝播・調査 id の実在)。
+
+### ブログ記事単位の関連性 policy と全量監査
+
+- 調査はデータの出典であり、必ずしも読者の購買意図ではない。例: 家計調査由来のゴルフ支出記事を
+  `furusato` と断定しない。
+- 例外は `blog-affiliate-policy.ts` に理由付きで明示する。値 `null` は「広告を出さない」という確定判断であり、
+  別 vertical への推測フォールバックを禁止する。通常記事は従来の自動解決を維持する。
+- `audit-affiliate-relevance.ts --check` は policy の slug・vertical・理由をPRで検証する。
+  `--live` は公開全記事の survey/tag 競合、surveyだけで決まる記事、複数verticalタグを
+  `.claude/state/ads/relevance-latest.json` へ出し、週次CIで更新する。
+- 監査結果はレビュー候補であり、自動修正しない。`affiliate-manager` が記事意図を確認し、必要な記事だけ
+  明示policyへ追加する。広告の有無や vertical をモデルの推測で一括変更しない。
 
 ### priority 規約
 
@@ -279,6 +291,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 | バナー / テキスト登録 (propose/register/direct) | `affiliate-manager` (skill `/register-affiliate-banner`) |
 | 在庫整理・監査・dashboard (`/tmp` 生成・git 管理しない) | `affiliate-manager` (skill `/affiliate-improvement`) |
 | compliance 監査 (孤立配置 / PR 表記 / 台帳未登録タグ) | `affiliate-manager` (skill `/audit-affiliate-compliance`、週次 CI `affiliate-dashboard-refresh.yml`) |
+| 関連性監査 (記事意図 / survey / tag / 明示policy) | `affiliate-manager` (skill `/audit-affiliate-relevance`、同週次 CI) |
 | クリエイティブ A/B 実験 (plan/start/observe/decide/close) | `affiliate-manager` (skill `/manage-affiliate-experiment`。勝者の自動反映は禁止) |
 | 集約状態 (`affiliate-operations-latest.json`) の生成・計測ゲート判定 | 決定的スクリプト `build-affiliate-operations-state.ts` (週次 CI `affiliate-ga4-weekly.yml`) |
 | サイズ / vertical 規約の enforcement | `affiliate-manager` (audit `--check-size` + export validation + pre-commit §6.7/6.8) |

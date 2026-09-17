@@ -39,7 +39,8 @@ docs/31_note記事原稿/<slug>/images/
 
 1. `draft.md` を読み、どのセクションにどんなチャートが効果的か検討
 2. ユーザーとチャート一覧を合意
-3. note 読者はスマホ閲覧が多いため **シンプルで一目でわかるチャート** を優先
+3. note 読者はスマホ閲覧が多いため **シンプルで一目でわかるチャート** を優先。ランキングは
+   `layout:"mobile"`（640×960）を使い、PC横長版やInstagram 4:5版を流用しない
 
 推奨チャート数・種類は [chart-patterns.md](reference/chart-patterns.md) を参照。
 

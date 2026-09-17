@@ -2,7 +2,6 @@
 
 import { type ReactNode, useMemo } from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import {
@@ -35,6 +34,7 @@ import { buildHeadingSlug } from "../lib/heading-slug";
 import { type InlineAffiliateBanner } from "../utils";
 
 import { preprocessCallouts } from "./md-preprocessor";
+import { ResponsiveArticleImage } from "./ResponsiveArticleImage";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
 
 /** 見出しの children から純粋なテキストを抽出 (TOC anchor 用) */
@@ -143,17 +143,7 @@ function makeMdComponents(
                 <span
                     className={`block mt-2 overflow-x-hidden not-prose ${isSvg ? "-mx-5 sm:-mx-8 md:mx-auto md:max-w-2xl" : "-mx-5 sm:-mx-8"}`}
                 >
-                    <Image
-                        src={resolvedSrc}
-                        alt={altText}
-                        width={800}
-                        height={450}
-                        className="h-auto w-full rounded-lg"
-                        sizes="(max-width: 768px) 100vw, 672px"
-                        decoding="async"
-                        loading="lazy"
-                        unoptimized
-                    />
+                    <ResponsiveArticleImage src={resolvedSrc} alt={altText} />
                 </span>
             );
         },

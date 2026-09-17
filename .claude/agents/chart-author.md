@@ -20,7 +20,7 @@ model: sonnet
 
 | スキル | 用途 |
 |---|---|
-| `/generate-article-charts` | ブログ記事の SVG チャート生成（`packages/svg-builder` 経由）。ランキングは**カード型・上位5+下位5固定**で横長columns(`<name>.svg`)+縦長portrait(`<name>-ig.svg`)を自動両出力。正典 `blog-data-schema.md` §1.5 |
+| `/generate-article-charts` | ブログ記事の SVG チャート生成（`packages/svg-builder` 経由）。ランキングは**カード型・上位5+下位5固定**でPC横長(`<name>.svg`)+mobile/note縦長(`<name>-mobile.svg`)+Instagram 4:5(`<name>-ig.svg`)を自動出力。正典 `blog-data-schema.md` §1.5 |
 | `/generate-note-charts` | note 記事用チャート生成 |
 | `/generate-kakei-charts` | 家計 note 専用チャート |
 | `/audit-blog-svg-charts` | SVG カタログ規約違反の検出・是正 |

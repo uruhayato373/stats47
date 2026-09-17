@@ -23,6 +23,9 @@ on:
       - ".claude/scripts/ads/build-placement-map.mjs"
       - ".claude/scripts/ads/lib/placement-map-core.mjs"
       - ".claude/scripts/ads/audit-affiliate-compliance.ts"
+      - ".claude/scripts/ads/audit-affiliate-relevance.ts"
+      - ".claude/scripts/ads/lib/affiliate-relevance-core.mjs"
+      - "apps/web/src/features/ads/constants/blog-affiliate-policy.ts"
       - ".github/workflows/affiliate-dashboard-refresh.yml"
   schedule:
     - cron: "0 12 * * 0" # JST 21:00 Sunday (UTC 12:00) — 週次棚卸し snapshot
@@ -62,6 +65,11 @@ jobs:
         # 落とさない (findings は state → operations state の recommendedActions が案内)。
         run: npx -y tsx .claude/scripts/ads/audit-affiliate-compliance.ts --live --scan-all-blog | tee /tmp/affiliate-compliance.md
 
+      - name: 🎯 Relevance audit (article intent × vertical, live)
+        # 自動分類の survey / tag が競合する記事と、明示policyの適用状況を state に残す。
+        # 意味判断を自動修正せず、affiliate-manager のレビュー候補だけを生成する。
+        run: npx -y tsx .claude/scripts/ads/audit-affiliate-relevance.ts --live | tee /tmp/affiliate-relevance.md
+
       - name: 🗺️ Build placement map (需要 GSC × 供給 在庫/EPC)
         # 「どのページ種別×vertical に imp があり、そこに在庫があるか / 広告が出ていないか」を
         # 決定的に突合して state に残す。propose (次に何を仕入れ・どこへ当てるか) の入力。
@@ -91,6 +99,7 @@ jobs:
           path: |
             .claude/state/ads/inventory-latest.json
             .claude/state/ads/compliance-latest.json
+            .claude/state/ads/relevance-latest.json
             .claude/state/ads/placement-map-latest.json
             .claude/state/ads/affiliate-portfolio-latest.json
           retention-days: 30
@@ -102,3 +111,4 @@ jobs:
           else
             echo "✅ compliance findings なし" >> "$GITHUB_STEP_SUMMARY"
           fi
+          cat /tmp/affiliate-relevance.md >> "$GITHUB_STEP_SUMMARY"

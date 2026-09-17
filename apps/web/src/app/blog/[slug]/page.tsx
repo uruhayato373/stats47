@@ -24,6 +24,7 @@ import {
     OperatorProfileCard,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
+import { applyBlogAffiliatePolicy } from "@/features/ads/constants/blog-affiliate-policy";
 import { resolveBlogRakutenPlacement } from "@/features/ads/constants/blog-rakuten-placement";
 import { FurusatoNozeiCard, RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
@@ -153,10 +154,13 @@ export default async function BlogPostPage({ params }: PageProps) {
     const tagKeys = articleTagData.map((t) => t.tagKey);
     // テキスト広告は本文 inline のみに置く。右レールの PR は画像バナーへ統一する。
     // 在庫が薄い vertical では空枠を作らない (md-content 側が index 不足を握りつぶす)。
-    // ★ 2026-09-03: 解決順を **出典調査 → タグ** に統一 (`resolveContentVertical`、ranking と同じ)。
+    // 解決順は **記事明示policy → 出典調査 → タグ** (`resolveContentVertical`)。
     //   家計調査の記事 (ブログ imp の 17%) は食文化タグで economy に落ち金融広告が出ていた。
     //   all.json の surveyIds 焼き込みで家計調査 → furusato、気象統計 → 広告なし、のように決める。
-    const affiliateInput = { surveyIds: article.surveyIds, tagKeys };
+    const affiliateInput = applyBlogAffiliatePolicy(slug, {
+        surveyIds: article.surveyIds,
+        tagKeys,
+    });
     const affiliateTextAds = await resolveAffiliateTextAdsForContent(
         affiliateInput,
         "sidebar-bottom",

@@ -289,6 +289,7 @@ jobs:
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
           node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
+          node --test .claude/scripts/lib/__tests__/svg-lint.responsive-bar.test.mjs
           # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
           # API キー不要の純粋関数テストなので PR で毎回回せる。
           npm run test:ai-content --workspace apps/web
@@ -329,6 +330,7 @@ jobs:
         # 正典: .claude/rules/affiliate-ads-standards.md / skill /audit-affiliate-compliance
         run: |
           npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check
+          npx tsx .claude/scripts/ads/audit-affiliate-relevance.ts --check
           node --test .claude/scripts/ads/__tests__/
         continue-on-error: false
 

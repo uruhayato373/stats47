@@ -38,6 +38,7 @@ import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import {
   lintSvgContent,
   lintSvgSize,
+  lintResponsiveBarPair,
   lintChoroplethLegend,
   lintFindingsParity,
   lintScatterData,
@@ -445,6 +446,28 @@ if (missingSvgFiles.length > 0) {
     `参照 SVG が存在しない ${missingSvgFiles.length}/${svgRefs.length} 件: ` +
       `${missingSvgFiles.slice(0, 3).join(', ')}${missingSvgFiles.length > 3 ? ' 他' : ''} — ` +
       `本番で画像切れになる。generate-article-charts を通すか本文の参照を外すこと`
+  );
+}
+
+// 横長2列ランキングは mobile 本文用の縦長バリアントを必須にする。
+// 960px canvas を390pxへ縮小すると13pxラベルが約5pxになり、表示されても読めない。
+const responsiveChartErrors = [];
+for (const base of svgRefs) {
+  const desktopPath = path.join(dataDir, `${base}.svg`);
+  if (!fs.existsSync(desktopPath)) continue;
+  const desktopSvg = fs.readFileSync(desktopPath, 'utf8');
+  const mobilePath = path.join(dataDir, `${base}-mobile.svg`);
+  const mobileSvg = fs.existsSync(mobilePath)
+    ? fs.readFileSync(mobilePath, 'utf8')
+    : null;
+  const result = lintResponsiveBarPair(`${base}.svg`, desktopSvg, mobileSvg);
+  responsiveChartErrors.push(...result.errors);
+}
+checks.responsiveChartErrors = responsiveChartErrors.length;
+if (responsiveChartErrors.length > 0) {
+  blockers.push(
+    `モバイル可読性違反 ${responsiveChartErrors.length} 件: ` +
+      `${responsiveChartErrors.slice(0, 2).join(' / ')}${responsiveChartErrors.length > 2 ? ' 他' : ''}`
   );
 }
 

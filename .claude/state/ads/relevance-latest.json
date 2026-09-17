@@ -1,0 +1,3972 @@
+{
+  "generatedAt": "2026-09-17T08:00:55.656Z",
+  "articleCount": 606,
+  "explicitPolicyCount": 1,
+  "reviewFindingCount": 270,
+  "resolvedCounts": {
+    "none": 205,
+    "population": 42,
+    "education": 12,
+    "furusato": 243,
+    "economy": 32,
+    "mobility": 3,
+    "labor": 36,
+    "travel": 6,
+    "housing": 5,
+    "health": 13,
+    "energy": 9
+  },
+  "explicitPolicies": [
+    {
+      "slug": "golf-green-fee-consumption-ranking",
+      "source": "explicit",
+      "effectiveVertical": null,
+      "automaticVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "policyReason": "家計調査はデータ出典にすぎず、ゴルフ料金・用品にふるさと納税広告は関連しない。適合案件の登録までは広告なし。"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "review",
+      "slug": "accommodation-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "travel"
+      ],
+      "tags": [
+        "家計調査",
+        "旅行",
+        "宿泊",
+        "消費支出",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "aging-solo-living-crisis",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "health"
+      ],
+      "tags": [
+        "高齢化",
+        "単独世帯",
+        "一人暮らし",
+        "介護",
+        "世帯構造"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "aichi-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "愛知県",
+        "家計調査",
+        "ウイスキー",
+        "食文化",
+        "名古屋めし"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "air-conditioner-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "akita-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "秋田県",
+        "家計調査",
+        "さんま",
+        "みそ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "allocation-tax-area",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "furusato"
+      ],
+      "tags": [
+        "地方交付税",
+        "財政",
+        "面積",
+        "地方財政"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "aomori-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "青森県",
+        "家計調査",
+        "りんご",
+        "ほたて",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "apple-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "りんご",
+        "家計調査",
+        "消費支出",
+        "東北",
+        "地産地消"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "area-ratio-prefecture-gap",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "housing"
+      ],
+      "tags": [
+        "面積",
+        "国土",
+        "地理"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "avg-height-high-school-2nd-male",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "education"
+      ],
+      "tags": [
+        "身長",
+        "高校生",
+        "都道府県格差",
+        "教育スポーツ",
+        "体位"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "avg-salary-admin-prefecture-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "labor",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "avg-salary-police-prefecture-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "labor",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "banana-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "バナナ消費量",
+        "食費",
+        "家計調査",
+        "都道府県ランキング",
+        "果物消費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "bean-sprouts-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "beef-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "牛肉消費量",
+        "食文化",
+        "西高東低",
+        "都道府県ランキング",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "beef-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "牛肉",
+        "消費量",
+        "食文化",
+        "西高東低",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "beef-consumption-quantity-vs-municipal-road-paving-rate",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "beef-unmarried-ratio",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "population",
+        "economy"
+      ],
+      "tags": [
+        "牛肉",
+        "未婚",
+        "結婚",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "beer-peak-month-july-to-december",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ビール",
+        "発泡酒",
+        "家計調査",
+        "酒税",
+        "消費支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "beer-vs-happoshu-shift",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ビール",
+        "発泡酒",
+        "家計調査",
+        "酒税",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "black-tea-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "紅茶",
+        "家計調査",
+        "食生活",
+        "都道府県格差",
+        "神奈川"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "black-tea-income-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "紅茶",
+        "家計調査",
+        "年収",
+        "消費支出",
+        "コーヒー"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "bonito-vs-oyster-fish-map",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "かつお",
+        "かき",
+        "消費支出",
+        "家計調査",
+        "魚食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "bread-consumption-expenditure-vs-final-education-university",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "bread-consumption-expenditure-vs-high-school-advancement",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "bread-consumption-expenditure-vs-site-area-per-dwelling",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "butter-vs-margarine-expenditure",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "バター",
+        "マーガリン",
+        "家計調査",
+        "食費",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "cake-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "candy-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "キャンデー",
+        "家計調査",
+        "食費",
+        "都道府県ランキング",
+        "のど飴"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "carbonated-drink-spending-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "炭酸飲料",
+        "消費支出",
+        "家計調査",
+        "都道府県ランキング",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "castella-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "カステラ",
+        "家計調査",
+        "長崎県",
+        "消費支出",
+        "ご当地菓子"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "cheese-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "チーズ",
+        "家計調査",
+        "食文化",
+        "都道府県ランキング",
+        "消費支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "chiba-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "千葉県",
+        "家計調査",
+        "ゼリー",
+        "プリン",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "chicken-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "鶏肉",
+        "家計調査",
+        "食習慣",
+        "都道府県別",
+        "総務省"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "chicken-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "鶏肉",
+        "消費量",
+        "食文化",
+        "地域差",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "child-height-regional-gap",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "education"
+      ],
+      "tags": [
+        "身長",
+        "体重",
+        "体格",
+        "中学生",
+        "学校保健統計"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "childcare-friendly-prefecture-ranking",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "education"
+      ],
+      "tags": [
+        "子育て",
+        "出生率",
+        "保育",
+        "教育"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "chinese-noodles-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "chinese-noodles-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "中華めん",
+        "家計調査",
+        "食文化",
+        "東北",
+        "ラーメン"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "chocolate-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "チョコレート",
+        "家計調査",
+        "消費支出",
+        "都道府県ランキング",
+        "お菓子"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "chocolate-snack-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "coffee-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "コーヒー消費量",
+        "都道府県ランキング",
+        "家計調査",
+        "食文化",
+        "2024年"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "coffee-shop-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "consumer-price-regional-gap",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "economy",
+        "housing"
+      ],
+      "tags": [
+        "物価",
+        "消費者物価指数",
+        "生活コスト",
+        "地域格差",
+        "移住"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "crab-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "かに",
+        "消費支出",
+        "家計調査",
+        "鳥取",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "croquette-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "cup-noodles-consumption-expenditure-vs-secondary-activity",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "cup-noodles-consumption-expenditure-vs-sports-annual",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "cup-noodles-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "カップ麺",
+        "消費支出",
+        "東北",
+        "家計調査",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "curry-roux-consumption-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "カレールウ消費量",
+        "都道府県ランキング",
+        "家計調査",
+        "食文化",
+        "新潟県"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "cut-flowers-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "delivery-fee-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "dining-out-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "外食",
+        "家計調査",
+        "エンゲル係数",
+        "消費支出",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "dual-income-house-size",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "housing"
+      ],
+      "tags": [
+        "共働き",
+        "住宅",
+        "持ち家",
+        "世帯"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "dual-income-household-ratio-vs-public-assistance-housing",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "housing"
+      ],
+      "tags": [
+        "共働き",
+        "住宅",
+        "福祉",
+        "相関"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "dual-income-household-ratio-vs-rooms-per-dwelling",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "housing"
+      ],
+      "tags": [
+        "共働き",
+        "住宅",
+        "人口",
+        "世帯構造"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "earthquake-insurance-prefecture-gap",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "地震",
+        "保険",
+        "災害",
+        "家計"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "education-expenses-gap",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "furusato",
+        "education"
+      ],
+      "tags": [
+        "財政",
+        "教育費",
+        "学校教育",
+        "教育格差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "ehime-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "愛媛県",
+        "家計調査",
+        "柑きつ類",
+        "しめじ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "elderly-population-care-capacity-gap",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "health",
+        "population"
+      ],
+      "tags": [
+        "介護",
+        "高齢化",
+        "社会保障"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "electricity-bill-hike-impact",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "energy",
+        "economy"
+      ],
+      "tags": [
+        "光熱費",
+        "電気代",
+        "物価",
+        "エネルギー",
+        "生活コスト"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "elementary-school-children-count",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "population",
+        "education"
+      ],
+      "tags": [
+        "小学生",
+        "児童数",
+        "少子化",
+        "教育",
+        "人口"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "engel-coefficient-prefecture-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "エンゲル係数",
+        "食費",
+        "物価高"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "エンゲル係数",
+        "県民所得",
+        "情報通信費",
+        "相関分析"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "extreme-heat-days-prefecture",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "health"
+      ],
+      "tags": [
+        "猛暑日",
+        "気象",
+        "高温",
+        "都道府県別",
+        "熱中症"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "fabric-softener-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "farmland-crisis-abandoned-land",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "population"
+      ],
+      "tags": [
+        "耕作放棄地",
+        "農地",
+        "担い手不足",
+        "高齢化",
+        "食料安全保障"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "fertility-fiscal-nexus",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "furusato"
+      ],
+      "tags": [
+        "人口",
+        "少子化",
+        "出生率",
+        "財政",
+        "地方創生"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "flavor-seasoning-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "food-consumption-prefecture-battle",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "食費",
+        "ラーメン",
+        "ぎょうざ",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "food-spending-pattern",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "食文化",
+        "家計調査",
+        "消費",
+        "食料品"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "food-trio-prefecture-map",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "豆腐",
+        "焼酎",
+        "昆布",
+        "食文化",
+        "消費量"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "forest-coverage-woodland-economy",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "housing",
+        "energy"
+      ],
+      "tags": [
+        "林業",
+        "森林",
+        "森林面積",
+        "林野面積",
+        "カーボンニュートラル"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "fresh-udon-soba-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "生うどん・そば",
+        "香川県",
+        "うどん消費",
+        "家計調査",
+        "2024年"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "fresh-udon-soba-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "生うどん",
+        "そば",
+        "麺類消費量",
+        "食文化",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "freshwater-clam-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "しじみ",
+        "家計調査",
+        "島根県",
+        "食文化",
+        "消費支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "frozen-gyoza-spending-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ぎょうざ",
+        "餃子",
+        "家計調査",
+        "消費支出",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "fukui-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "福井県",
+        "家計調査",
+        "ようかん",
+        "かに",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "fukuoka-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "福岡県",
+        "家計調査",
+        "たらこ",
+        "ラーメン",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "fukushima-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "福島県",
+        "家計調査",
+        "桃",
+        "日本酒",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "furikake-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ふりかけ",
+        "家計調査",
+        "福井県",
+        "食文化",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "future-population-disappearing-prefectures",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "furusato"
+      ],
+      "tags": [
+        "将来推計人口",
+        "人口減少",
+        "高齢化",
+        "財政力指数",
+        "2050年"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "garden-plants-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "population"
+      ],
+      "tags": [
+        "園芸用品",
+        "家計調査",
+        "持ち家率",
+        "高齢化",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "gas-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ガス代",
+        "家計調査",
+        "光熱費",
+        "都市ガス",
+        "プロパンガス"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "gasoline-consumption-quantity-vs-densely-inhabited-district",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "gasoline-expenditure-ranking",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": [
+        "ガソリン",
+        "家計消費",
+        "車社会",
+        "地域格差",
+        "生活費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "gifu-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "岐阜県",
+        "家計調査",
+        "じゃがいも",
+        "えのきたけ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "golf-participation-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": [
+        "ゴルフ",
+        "行動者率",
+        "スポーツ",
+        "都道府県ランキング",
+        "社会生活基本調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "green-tea-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "緑茶",
+        "お茶",
+        "消費量",
+        "静岡",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "grilled-eel-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "gunma-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "群馬県",
+        "家計調査",
+        "梨",
+        "みそ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "habitable-area-land-use",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "housing",
+        "population"
+      ],
+      "tags": [
+        "可住地面積",
+        "土地利用",
+        "林野面積",
+        "人口密度",
+        "国土"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "hamburger-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "heating-cost-vs-disposable-income",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "暖房費",
+        "光熱費",
+        "可処分所得",
+        "家計調査",
+        "寒冷地"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "hiroshima-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "広島県",
+        "家計調査",
+        "ソース消費支出額",
+        "かき消費支出額",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "hokkaido-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "北海道",
+        "家計調査",
+        "鮭",
+        "ほたて",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "home-ownership-rate-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "housing",
+        "economy"
+      ],
+      "tags": [
+        "持家率",
+        "住宅",
+        "北陸",
+        "沖縄",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "horse-mackerel-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "あじ",
+        "家計調査",
+        "魚介類",
+        "山口県",
+        "長崎県"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "household-consumption-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "消費支出",
+        "家計調査",
+        "生活費",
+        "エンゲル係数",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "household-liabilities-prefecture-gap",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "economy",
+        "housing"
+      ],
+      "tags": [
+        "家計",
+        "負債",
+        "住宅"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "household-spending-before-after-inflation",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "物価高",
+        "消費支出",
+        "食費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "hyogo-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "兵庫県",
+        "家計調査",
+        "コーヒー消費支出額",
+        "パン消費支出額",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "ibaraki-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "茨城県",
+        "家計調査",
+        "メロン",
+        "納豆",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "icecream-consumption-expenditure",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "アイスクリーム",
+        "消費支出",
+        "家計調査",
+        "都道府県",
+        "食費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-alcohol",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "所得格差",
+        "酒類消費",
+        "家計支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-appliance",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "家電",
+        "耐久財"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-beverage",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "紅茶",
+        "食生活"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-car",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor",
+        "mobility"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "所得格差",
+        "自動車",
+        "家計支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-clothing",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "衣料品",
+        "消費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-dining",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "外食",
+        "消費支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-education",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor",
+        "population"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "教育費",
+        "子育て"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-food-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "年収五分位",
+        "食料格差",
+        "消費支出",
+        "食生活"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-lesson",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor",
+        "population"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "教育費",
+        "子育て"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-luxury-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "所得格差",
+        "消費支出",
+        "贅沢品"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-medical-health",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "医療費",
+        "格差",
+        "消費支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-overview",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "エンゲル係数",
+        "消費支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-recreation-services",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "娯楽費",
+        "スポーツ"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-regressive",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "家計調査",
+        "年収",
+        "格差",
+        "生活費",
+        "たばこ"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "income-quintile-travel",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "travel"
+      ],
+      "tags": [
+        "家計調査",
+        "年収五分位",
+        "消費支出",
+        "旅行",
+        "格差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "information-communication-coefficient-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "情報通信費",
+        "エンゲル係数",
+        "通信費",
+        "生活コスト"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "inpatient-rate-aging-burden",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "health"
+      ],
+      "tags": [
+        "入院受療率",
+        "患者調査",
+        "高齢化",
+        "医療"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "instant-noodles-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "即席麺",
+        "カップ麺",
+        "都道府県ランキング",
+        "家計調査",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "ishikawa-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "石川県",
+        "家計調査",
+        "和菓子",
+        "れんこん",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "it-establishments-prefecture",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "経済",
+        "IT",
+        "情報通信",
+        "産業構造",
+        "事業所"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "it-industry-concentration",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "経済",
+        "IT",
+        "情報通信",
+        "産業構造",
+        "地域格差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "iwate-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "岩手県",
+        "家計調査",
+        "りんご",
+        "わかめ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "kagawa-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "香川県",
+        "家計調査",
+        "うどん",
+        "揚げかまぼこ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "kagoshima-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "鹿児島県",
+        "家計調査",
+        "焼酎",
+        "さつまいも",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "kanagawa-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "神奈川県",
+        "家計調査",
+        "しゅうまい",
+        "ハム",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "katsuobushi-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "かつお節",
+        "家計調査",
+        "沖縄",
+        "高知",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "kochi-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "高知県",
+        "家計調査",
+        "かつお",
+        "食文化",
+        "みかん"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "konbu-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "こんぶ",
+        "岩手県",
+        "北前船",
+        "家計調査",
+        "2024年"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "konbu-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "こんぶ",
+        "昆布",
+        "食文化",
+        "郷土料理",
+        "消費量"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "konnyaku-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "こんにゃく",
+        "家計調査",
+        "山形県",
+        "群馬県",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "kumamoto-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "熊本県",
+        "家計調査",
+        "鶏肉",
+        "すいか",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "kyoto-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "京都府",
+        "家計調査",
+        "なす",
+        "漬物",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "livable-prefecture-composite-ranking",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "economy",
+        "health"
+      ],
+      "tags": [
+        "住みやすさ",
+        "総合ランキング",
+        "所得",
+        "治安",
+        "医療"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "lotus-root-green-beans-mandarin-consumption",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "れんこん",
+        "さやまめ",
+        "みかん",
+        "消費支出",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "mackerel-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "さば",
+        "消費支出",
+        "家計調査",
+        "都道府県ランキング",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "main-road-paving-rate-vs-apple-consumption-quantity",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "mandarin-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "みかん",
+        "消費支出",
+        "家計調査",
+        "柑橘類",
+        "和歌山"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "manufacturing-labor-productivity-pref",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "製造業",
+        "労働生産性",
+        "装置産業",
+        "都道府県格差",
+        "工業統計"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "manufacturing-productivity",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "economy",
+        "labor"
+      ],
+      "tags": [
+        "製造業",
+        "労働生産性",
+        "付加価値",
+        "工業統計",
+        "自動化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "mayonnaise-consumption-expenditure",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "マヨネーズ",
+        "消費支出",
+        "食文化",
+        "家計調査",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "melon-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "メロン",
+        "家計調査",
+        "消費支出",
+        "茨城県",
+        "果物"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "middle-school-height-east-west-puzzle",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "education"
+      ],
+      "tags": [
+        "身長",
+        "中学生",
+        "学校保健統計",
+        "都道府県"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "mie-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "三重県",
+        "家計調査",
+        "練り製品",
+        "小麦粉",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "mineral-water-spending-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ミネラルウォーター",
+        "消費支出",
+        "家計調査",
+        "都道府県ランキング",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "miso-consumption-quantity-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "みそ",
+        "家計調査",
+        "食文化",
+        "地域差",
+        "発酵食品"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "miyagi-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "宮城県",
+        "家計調査",
+        "かまぼこ",
+        "チューハイ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "miyazaki-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "宮崎県",
+        "家計調査",
+        "焼酎",
+        "緑茶",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "mochi-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "もち消費量",
+        "都道府県ランキング",
+        "茨城県",
+        "家計調査",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "movie-theater-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "映画",
+        "消費支出",
+        "家計調査",
+        "余暇",
+        "地域格差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "musical-instrument-expenditure-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "楽器",
+        "埼玉県",
+        "家計調査",
+        "音楽教育",
+        "2024年"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "nagano-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "長野県",
+        "家計調査",
+        "しめじ",
+        "すいか",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "nagasaki-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "長崎県",
+        "家計調査",
+        "カステラ",
+        "鮮魚",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "nara-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "奈良県",
+        "家計調査",
+        "牛肉",
+        "柿",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "natto-child-weight-correlation",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "納豆",
+        "家計調査",
+        "体重",
+        "相関分析",
+        "東北"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "natto-consumption-east-west-divide",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "納豆",
+        "食文化",
+        "家計調査",
+        "東西差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "natto-consumption-expenditure",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "納豆",
+        "食文化",
+        "消費支出",
+        "地域差",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "natto-production-vs-consumption",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "納豆",
+        "家計調査",
+        "食文化",
+        "ご当地グルメ",
+        "マーケティング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "necktie-stockings-market-shrink",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "ネクタイ",
+        "ストッキング",
+        "クールビズ",
+        "消費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "niigata-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "新潟県",
+        "家計調査",
+        "豚肉",
+        "カレールウ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "noodle-consumption-prefecture-character",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "nursing-care-shortage-2040",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "health",
+        "population"
+      ],
+      "tags": [
+        "介護",
+        "高齢化",
+        "社会保障",
+        "福祉"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "oita-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "大分県",
+        "家計調査",
+        "干ししいたけ",
+        "焼肉",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "okayama-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "岡山県",
+        "家計調査",
+        "パン消費",
+        "桃",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "okinawa-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "沖縄県",
+        "家計調査",
+        "かつお節",
+        "食文化",
+        "琉球料理"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "osaka-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "大阪府",
+        "家計調査",
+        "洋菓子",
+        "パン",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "other-bread-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "パン消費",
+        "食生活",
+        "家計調査",
+        "都道府県別",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "other-cosmetics-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "oyster-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "かき消費量",
+        "牡蠣",
+        "家計調査",
+        "都道府県ランキング",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "pachinko-education-cost",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "education",
+        "population"
+      ],
+      "tags": [
+        "パチンコ",
+        "教育費",
+        "教育",
+        "人口密度"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "pasta-consumption-quantity",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "パスタ",
+        "食文化",
+        "消費量",
+        "家計調査",
+        "食生活"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "peach-consumption-quantity-vs-disaster-relief-expenses",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "peach-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "もも",
+        "桃",
+        "家計調査",
+        "福島県",
+        "果物消費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "pear-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "personal-computer-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "パソコン",
+        "消費支出",
+        "家計調査",
+        "都道府県ランキング",
+        "教育費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "pet-food-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "pickled-plum-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "pickled-plum-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "population-density-urbanization",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "population"
+      ],
+      "tags": [
+        "人口密度",
+        "都市化",
+        "人口集中地区",
+        "昼夜間人口",
+        "ベッドタウン"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "pork-consumption-expenditure",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "豚肉",
+        "消費支出",
+        "食文化",
+        "家計",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "pork-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "豚肉",
+        "消費量",
+        "食文化",
+        "家計調査",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "psychiatric-bed-count-vs-elementary-school-count",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "health",
+        "education"
+      ],
+      "tags": [
+        "医療",
+        "教育",
+        "社会保障",
+        "小学校"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "real-disposable-income-reversal",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "可処分所得",
+        "家賃",
+        "物価",
+        "県民所得",
+        "実質年収"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "refrigerator-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "電気冷蔵庫",
+        "消費支出",
+        "都道府県ランキング",
+        "耐久消費財"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "rice-consumption-quantity-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "米消費量",
+        "家計調査",
+        "食文化",
+        "都道府県ランキング",
+        "米離れ"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "road-infrastructure-density",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "mobility"
+      ],
+      "tags": [
+        "道路",
+        "舗装率",
+        "道路密度",
+        "交通量",
+        "インフラ"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "safe-driving-5-features",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "mobility"
+      ],
+      "tags": [
+        "交通安全",
+        "交通事故",
+        "交通安全白書"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "saga-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "佐賀県",
+        "家計調査",
+        "干しのり",
+        "和食",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "saitama-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "埼玉県",
+        "家計調査",
+        "きゅうり",
+        "ブロッコリー",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sake-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "清酒",
+        "日本酒",
+        "福島県",
+        "家計調査",
+        "2024年"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "scallop-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ほたて貝",
+        "消費支出",
+        "家計調査",
+        "青森県",
+        "水産物"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "school-lunch-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "population"
+      ],
+      "tags": [
+        "学校給食",
+        "家計調査",
+        "子育て",
+        "給食費無償化",
+        "教育費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "school-teacher-annual-income",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "labor",
+        "education"
+      ],
+      "tags": [
+        "教員",
+        "年収",
+        "給与",
+        "地域格差",
+        "学校"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sea-bream-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "たい",
+        "家計調査",
+        "消費支出",
+        "都道府県ランキング",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "shiga-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "滋賀県",
+        "家計調査",
+        "コーヒー消費量",
+        "大豆製品",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "shimane-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "島根県",
+        "家計調査",
+        "しじみ",
+        "いわし",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "shizuoka-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "静岡県",
+        "家計調査",
+        "緑茶",
+        "まぐろ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "shochu-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "焼酎",
+        "家計調査",
+        "消費量",
+        "都道府県格差",
+        "九州",
+        "経済"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "shochu-expenditure-vs-sake-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "焼酎",
+        "清酒",
+        "家計調査",
+        "都道府県格差",
+        "九州"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "shrimp-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "shumai-consumption-expenditure-vs-main-household-ratio-main",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "soba-udon-dining-consumption-expenditure",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "そば",
+        "うどん",
+        "外食費",
+        "食文化",
+        "都道府県格差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "soba-udon-dining-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "solar-panel-housing-prefecture-gap",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "energy",
+        "housing"
+      ],
+      "tags": [
+        "太陽光発電",
+        "住宅",
+        "一戸建",
+        "持ち家",
+        "住宅・土地統計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "soy-sauce-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "spinach-consumption-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ほうれんそう消費量",
+        "家計調査",
+        "食文化",
+        "都道府県ランキング",
+        "野菜消費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sports-spectating-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "squid-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "いか消費量",
+        "家計調査",
+        "食品消費",
+        "都道府県ランキング",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "strawberry-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "いちご消費量",
+        "家計調査",
+        "都道府県ランキング",
+        "食文化",
+        "栃木"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sugar-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "砂糖",
+        "家計調査",
+        "食習慣",
+        "都道府県別",
+        "総務省"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sunshine-pacific-vs-nihonkai",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "energy"
+      ],
+      "tags": [
+        "日照時間",
+        "快晴日数",
+        "晴れ",
+        "太陽光",
+        "気候"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sunshine-solar-housing-correlation",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "energy",
+        "housing"
+      ],
+      "tags": [
+        "太陽光発電",
+        "日照時間",
+        "再生可能エネルギー",
+        "住宅",
+        "戸建て"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sushi-dining-consumption-expenditure",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "すし",
+        "外食",
+        "食文化",
+        "消費支出",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "sweet-potato-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "さつまいも",
+        "家計調査",
+        "食文化",
+        "焼き芋",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "table-salt-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "taro-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "tempura-fry-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "textbook-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "education"
+      ],
+      "tags": [
+        "教育費",
+        "教科書代",
+        "家計調査",
+        "都道府県ランキング",
+        "教育格差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tissue-paper-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "tobacco-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "たばこ",
+        "家計調査",
+        "嗜好品",
+        "都道府県ランキング",
+        "消費支出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tochigi-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "栃木県",
+        "家計調査",
+        "いちご",
+        "梨",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tofu-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "豆腐消費量",
+        "都道府県ランキング",
+        "食文化",
+        "家計調査",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "toilet-paper-consumption-expenditure-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "tokushima-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "徳島県",
+        "家計調査",
+        "さつまいも",
+        "ちくわ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tokyo-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "東京",
+        "家計調査",
+        "トマト消費支出額",
+        "パスタ消費支出額",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tottori-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "鳥取県",
+        "家計調査",
+        "梨",
+        "かに",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "toyama-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "富山県",
+        "家計調査",
+        "ぶり",
+        "昆布",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "traffic-accident-deaths-regional-risk",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "mobility"
+      ],
+      "tags": [
+        "交通安全",
+        "交通事故"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tuition-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy",
+        "education"
+      ],
+      "tags": [
+        "教育費",
+        "家計調査",
+        "授業料",
+        "教育格差",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tuna-consumption-medical-expense-correlation",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": [
+        "まぐろ",
+        "医療費",
+        "国民健康保険",
+        "相関分析",
+        "食生活",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tuna-consumption-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "まぐろ",
+        "食生活",
+        "家計調査",
+        "消費量",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "health"
+      ],
+      "tags": [
+        "まぐろ",
+        "病院",
+        "医療",
+        "相関"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tuna-consumption-quantity-vs-national-medical-expense-per",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "まぐろ",
+        "消費量",
+        "医療費",
+        "家計調査",
+        "相関"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tuna-consumption-quantity-vs-sex-ratio-total",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "tuna-medical-expense",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "health",
+        "economy"
+      ],
+      "tags": [
+        "まぐろ",
+        "医療費",
+        "健康",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "tutoring-cost-university-advancement-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "education"
+      ],
+      "tags": [
+        "教育費",
+        "塾代",
+        "進学率",
+        "都道府県ランキング",
+        "相関分析"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "udon-soba-food-culture-prefecture-map",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "生うどん・そば",
+        "香川県",
+        "麺文化",
+        "家計調査"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "unhealthy-period-gender-prefecture-gap",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "health",
+        "population"
+      ],
+      "tags": [
+        "健康",
+        "医療",
+        "福祉",
+        "高齢化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "university-advancement-capacity",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "education",
+        "population"
+      ],
+      "tags": [
+        "大学",
+        "進学率",
+        "収容力指数",
+        "教育格差",
+        "人口流出"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "vacant-housing-aging-correlation",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "housing"
+      ],
+      "tags": [
+        "空き家率",
+        "高齢化",
+        "老年人口指数",
+        "住宅",
+        "人口減少"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "vacant-housing-vs-aging",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "population",
+        "housing"
+      ],
+      "tags": [
+        "空き家率",
+        "高齢化",
+        "65歳以上人口割合",
+        "住宅",
+        "人口減少"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "vacant-housing-vs-land-price",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "housing",
+        "population"
+      ],
+      "tags": [
+        "空き家率",
+        "地価",
+        "商業地",
+        "人口減少",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "wakayama-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "和歌山県",
+        "家計調査",
+        "みかん",
+        "昆布",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "water-infrastructure-crisis",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "population"
+      ],
+      "tags": [
+        "水道",
+        "インフラ",
+        "人口減少",
+        "下水道",
+        "公共サービス"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "water-sewage-crisis",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "furusato",
+        "population"
+      ],
+      "tags": [
+        "財政",
+        "下水道",
+        "上水道",
+        "インフラ",
+        "人口減少"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "water-sewer-expenditure-ranking",
+      "reason": "survey-blocks-tag",
+      "surveyVertical": null,
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "上下水道料",
+        "水道料金",
+        "家計調査",
+        "都道府県ランキング",
+        "生活費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "watermelon-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "すいか",
+        "消費支出",
+        "家計調査",
+        "都道府県ランキング",
+        "果物"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "welfare-expenses-squeeze",
+      "reason": "multiple-tag-verticals",
+      "tagVerticals": [
+        "furusato",
+        "population"
+      ],
+      "tags": [
+        "財政",
+        "民生費",
+        "高齢化",
+        "社会保障"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "wheat-flour-consumption-food-culture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "小麦粉",
+        "食品消費",
+        "家計調査",
+        "食文化",
+        "都道府県"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "wheat-flour-consumption-prefecture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "小麦粉",
+        "食品消費",
+        "家計調査",
+        "都道府県別",
+        "うどん"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "wheat-flour-expenditure-vs-quantity",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "小麦粉",
+        "消費支出",
+        "家計調査",
+        "都道府県別",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "whisky-consumption-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ウイスキー",
+        "家計調査",
+        "酒類消費",
+        "都道府県別",
+        "総務省"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "white-bread-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "whitebait-consumption-quantity-prefecture-gap",
+      "reason": "survey-without-intent-tag",
+      "surveyVertical": "furusato",
+      "tagVerticals": [],
+      "tags": []
+    },
+    {
+      "severity": "review",
+      "slug": "wine-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ワイン",
+        "消費支出",
+        "都道府県ランキング",
+        "家計調査",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "winter-coat-bargain-purchase-price",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "家計調査",
+        "消費者物価指数",
+        "婦人用コート",
+        "バーゲン",
+        "消費"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "womens-clothing-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "婦人服",
+        "消費支出",
+        "家計調査",
+        "ファッション",
+        "地域差"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "yakiniku-spending-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "焼肉",
+        "消費支出",
+        "家計調査",
+        "食文化",
+        "都道府県ランキング"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "yamagata-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "山形県",
+        "家計調査",
+        "こんにゃく",
+        "ヨーグルト",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "yamaguchi-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "山口県",
+        "家計調査",
+        "あじ",
+        "つくだ煮",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "yamanashi-food-culture",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "山梨県",
+        "家計調査",
+        "ぶどう",
+        "まぐろ",
+        "食文化"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "yogurt-spending-prefecture-gap",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ヨーグルト",
+        "家計調査",
+        "都道府県ランキング",
+        "食料品支出",
+        "乳製品"
+      ]
+    },
+    {
+      "severity": "review",
+      "slug": "yokan-expenditure-ranking",
+      "reason": "survey-tag-conflict",
+      "surveyVertical": "furusato",
+      "tagVerticals": [
+        "economy"
+      ],
+      "tags": [
+        "ようかん",
+        "家計調査",
+        "和菓子",
+        "消費支出",
+        "都道府県ランキング"
+      ]
+    }
+  ]
+}

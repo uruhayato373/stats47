@@ -6,13 +6,14 @@ name: 🎨 Regenerate Blog SVGs (svg-builder 経由・dark mode 付与)
 # 仕組み:
 #   1. R2 app/blog を .local/r2/app/blog にダウンロード (S3 list/get)
 #   2. all.json の slug ごとに generate-article-charts.ts --base .local/r2/app/blog を実行
-#      → data/*.json を入力に svg-builder で *.svg を再生成 (svgThemeStyle() 自動付与)
+#      → ranking はPC横長・mobile/note縦長・Instagram 4:5を同一JSONから再生成
+#      → その他の data/*.json も svg-builder で *.svg を再生成 (svgThemeStyle() 自動付与)
 #      → data/*.json を持たない無意味名 SVG (inline-chart-N) は対象外 (手動 brushup が必要)
 #   3. ギャラリー HTML を artifact として保存 (視覚レビュー用)
 #   4. 再生成したSVG keyを列挙し、dry_run=false のときだけbytes差分をexact publish
 #
-# ⚠️ 視覚変更を伴う: svg-builder の bar chart は layout:"columns" (カード型2列ランキング、
-#    順位バッジ+県名+値+横バー、960×N) が既定。旧 CLI の手書き2列とは座標・配色が異なる。
+# ⚠️ 視覚変更を伴う: bar chart はPC `columns` 960×404、本文mobile/note 640×960、
+#    Instagram 1080×1350を生成する。旧 CLI の手書き2列とは座標・配色が異なる。
 #    まず dry_run=true で artifact ギャラリーを確認してから本番 push すること。
 #
 # 使い方:

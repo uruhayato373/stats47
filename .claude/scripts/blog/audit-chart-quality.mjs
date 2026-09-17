@@ -37,6 +37,7 @@ import {
   lintSvgContent,
   extractInlineSvgs,
   lintSvgSize,
+  lintResponsiveBarPair,
   lintChoroplethLegend,
   lintFindingsParity,
   lintScatterData,
@@ -101,7 +102,8 @@ function auditArticle(slug) {
 
   // data/*.svg (内容 lint + カタログ別サイズ統一 lint + json ペア検査)
   if (fs.existsSync(dataDir)) {
-    for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith('.svg'))) {
+    const svgFiles = fs.readdirSync(dataDir).filter((x) => x.endsWith('.svg'));
+    for (const f of svgFiles) {
       const svg = fs.readFileSync(path.join(dataDir, f), 'utf8');
       const a = lintSvgContent(svg, f);
       const b = lintSvgSize(f, svg); // 非正規 viewBox 幅 (アスペクト比統一・再発防止)
@@ -169,6 +171,19 @@ function auditArticle(slug) {
           ...g.warnings,
         ],
       });
+    }
+    for (const f of svgFiles.filter((name) => !/-(?:mobile|ig)\.svg$/i.test(name))) {
+      const desktopSvg = fs.readFileSync(path.join(dataDir, f), 'utf8');
+      const mobileName = f.replace(/\.svg$/i, '-mobile.svg');
+      const mobileSvg = svgFiles.includes(mobileName)
+        ? fs.readFileSync(path.join(dataDir, mobileName), 'utf8')
+        : null;
+      const pair = lintResponsiveBarPair(f, desktopSvg, mobileSvg);
+      errors += pair.errors.length;
+      warnings += pair.warnings.length;
+      if (pair.errors.length || pair.warnings.length) {
+        details.push({ target: `data/${f} ↔ ${mobileName}`, ...pair });
+      }
     }
   }
   // article.md インライン <svg>

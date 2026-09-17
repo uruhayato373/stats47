@@ -206,12 +206,13 @@ const normPref = (s) =>
  * 重複しない範囲に自動縮小する。
  * layout（または layoutOverride）:
  *   "columns"（デフォルト）= 横長2列カード（ブログ本文 + X 用）
+ *   "mobile"              = 縦長スタックカード（ブログ mobile + note 本文用）
  *   "portrait"            = 縦長スタックカード（Instagram 用、4:5）
  *   "single"             = 縦1列+中略
  */
 function genBarChartSvg(
   data: any,
-  layoutOverride?: 'columns' | 'portrait' | 'single'
+  layoutOverride?: 'columns' | 'mobile' | 'portrait' | 'single'
 ) {
   const items = Array.isArray(data) ? data : data.data || [];
   if (!items.length) return `<!-- empty data -->`;
@@ -767,10 +768,20 @@ for (const { file, type, parsed } of jsonMeta) {
   chartNames.push(baseName);
   log(`  [gen] ${baseName}.svg  (${(svg.length / 1024).toFixed(1)} KB)`);
 
-  // ランキング棒は Instagram 用に縦長 portrait バリアントも出力する。
-  // data/<name>-ig.svg は SNS 専用アセットで、article.md には埋め込まない
-  // (ブログ本文は横長 columns の <name>.svg を参照する)。
+  // ランキング棒は同じ検証済みデータから媒体別バリアントを同時出力する。
+  // - <name>.svg: PC / X 用の横長 columns
+  // - <name>-mobile.svg: ブログ mobile / note 本文用の可読性優先レイアウト
+  // - <name>-ig.svg: Instagram 専用 4:5。記事 markdown には埋め込まない
   if (type === 'bar') {
+    const mobileSvg = genBarChartSvg(parsed, 'mobile');
+    fs.writeFileSync(
+      path.join(DATA_DIR, `${baseName}-mobile.svg`),
+      provenance + mobileSvg,
+      'utf8'
+    );
+    log(
+      `  [gen] ${baseName}-mobile.svg  (本文mobile ${(mobileSvg.length / 1024).toFixed(1)} KB)`
+    );
     const igSvg = genBarChartSvg(parsed, 'portrait');
     fs.writeFileSync(
       path.join(DATA_DIR, `${baseName}-ig.svg`),
