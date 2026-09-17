@@ -21,7 +21,7 @@ updated: 2026-09-18
 
 ## 🔴 高 — 今月中に着手したい
 
-### [THEME-CHART-FOOTER-OVERLAP-01] テーマページの「〜の分布」地図カードで SVG が footer に 40px 重なる (本番・2026-09-13 から継続)
+### [THEME-CHART-FOOTER-OVERLAP-01] 【誤検知・smoke 側で解消済み】テーマページの「〜の分布」地図カードで SVG が footer に 40px 重なると smoke が報告していた
 
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:cd apps/web && PLAYWRIGHT_TEST_BASE_URL=https://stats47.jp npx playwright test --config playwright.smoke.config.ts tests/smoke/theme-chart-overlap.spec.ts] [起票:2026-09-18] [期日:2026-09-30]
 
@@ -40,6 +40,12 @@ updated: 2026-09-18
   直したら上記 検証 コマンドを本番で 1 回通す。
 - **禁止**: 固定高 div で包んで隠さない (2026-08-04 に 154px 重なった同型事故の再発)。
 - **完了条件**: 本番 smoke の `theme-chart-overlap.spec.ts` が 2 テーマとも green。
+- **結論 (2026-09-18、本番を Playwright で実測)**: UI の不具合ではなく smoke の誤検知。Leaflet の overlay SVG は
+  表示領域 400px に対し上下 10% のバッファを持つ 480px の箱で、コンテナ (`h-[360px] lg:h-[400px] overflow-hidden`)
+  で切り取られており、スクリーンショットでも地図はカード内・footer は完全に可視。`getBoundingClientRect()` が
+  見えない 40px を含めていた。`theme-chart-overlap.spec.ts` を「overflow が visible でない祖先の下端を上限にした
+  見える下端」で判定するよう修正し、本番で 2 テーマ green、クリップ考慮を外す変異で 40px 赤に戻ることを確認。
+  UI 側 (`ThemeComparisonSection` / `ThemeLeafletMap`) は変更しない。残作業なし (削除待ち)。
 
 ### [CI-SPEED-STATIC-GATES-SPLIT-01] main PR の Static Gates (65 step 直列・486 秒) を domain 別の並列 job に分け、1 run で複数の失敗を報告する
 

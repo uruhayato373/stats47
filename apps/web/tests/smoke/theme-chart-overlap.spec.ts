@@ -11,7 +11,7 @@ import { expect, test } from "@playwright/test";
  *   ソース側の再発を止めるが、「実際に描画したら重なる」形の崩れ (凡例の折り返し増加・
  *   フォント差など) はブラウザで測らないと分からない。ここは本番の実測を担う。
  *
- * 検査: チャートカード (footer 付きパネル) ごとに
+ * 検査: チャートカード (footer 付きパネル) ごとに (SVG の下端は overflow で切り取られる祖先の下端を上限にした「見える下端」)
  *   1. SVG の下端が footer の上端を越えない (重なりゼロ)
  *   2. SVG の下端がカード下端を越えない (カード外へはみ出さない)
  *   3. SVG に描画要素がある (空チャートでないこと = 検査が素通りしていないことの担保)
@@ -78,11 +78,24 @@ test.describe("テーマチャートがカード枠を守る", () => {
           );
           if (svgs.length === 0) continue;
 
+          // ★見える下端で判定する。Leaflet の overlay SVG は表示領域の上下に 10% のバッファを
+          //   持つ (400px の地図で 480px の箱) が、コンテナの overflow:hidden で切り取られていて
+          //   描画上は重ならない。getBoundingClientRect() はその見えない部分まで含めるため、
+          //   2026-09-13〜18 に「40px 重なっている」と誤検知して 7 デプロイ連続で赤になった
+          //   (THEME-CHART-FOOTER-OVERLAP-01 で実測)。overflow が visible でない祖先の下端を上限に
+          //   取れば、固定高 div から溢れる D3 チャート (2026-08-04 の実害) は従来どおり検出できる。
+          const visibleBottom = (el: Element): number => {
+            let bottom = el.getBoundingClientRect().bottom;
+            for (let node = el.parentElement; node && node !== card; node = node.parentElement) {
+              if (getComputedStyle(node).overflow !== "visible") {
+                bottom = Math.min(bottom, node.getBoundingClientRect().bottom);
+              }
+            }
+            return bottom;
+          };
           const footerTop = footer.getBoundingClientRect().top;
           const cardBottom = card.getBoundingClientRect().bottom;
-          const maxSvgBottom = Math.max(
-            ...svgs.map((s) => s.getBoundingClientRect().bottom),
-          );
+          const maxSvgBottom = Math.max(...svgs.map(visibleBottom));
           out.push({
             title: heading.textContent?.trim().slice(0, 40) ?? "",
             overlapFooterPx: Math.round(maxSvgBottom - footerTop),
