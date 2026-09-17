@@ -4,7 +4,7 @@ import { getRankingTitle, readRelatedRankingItemsByTagKeysFromR2 } from "@stats4
 import { isOk } from "@stats47/types";
 import { BarChart3 } from "lucide-react";
 
-import { RailCard } from "@/components/surface";
+import { RailCard, RailNavRow } from "@/components/surface";
 
 import { getCategoryKeysForBlogTagKeys } from "@/config/category-blog-tag-keys";
 
@@ -45,22 +45,42 @@ export async function RelatedRankingsSection({
       title="関連ランキング"
       icon={<BarChart3 className="h-4 w-4 text-muted-foreground" />}
     >
-      <div className={compact ? "divide-y divide-border" : "grid grid-cols-1 gap-x-4 sm:grid-cols-2 lg:grid-cols-3"}>
-        {rankings.map((ranking) => (
-          <Link
-            key={ranking.rankingKey}
-            href={`/ranking/${ranking.rankingKey}`}
-            className="group block border-b border-border py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <p className="line-clamp-2 text-sm font-medium group-hover:text-primary">
-              {ranking.title}
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              都道府県別ランキング
-            </p>
-          </Link>
-        ))}
-      </div>
+      {compact ? (
+        <nav aria-label="関連ランキング" className="-mx-4 flex flex-col">
+          {rankings.map((ranking) => (
+            <RailNavRow
+              key={ranking.rankingKey}
+              href={`/ranking/${ranking.rankingKey}`}
+            >
+              <span className="flex flex-col gap-0.5">
+                <span className="line-clamp-2 leading-snug">
+                  {ranking.title}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  都道府県別ランキング
+                </span>
+              </span>
+            </RailNavRow>
+          ))}
+        </nav>
+      ) : (
+        <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2 lg:grid-cols-3">
+          {rankings.map((ranking) => (
+            <Link
+              key={ranking.rankingKey}
+              href={`/ranking/${ranking.rankingKey}`}
+              className="group block border-b border-border py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <p className="line-clamp-2 text-sm font-medium group-hover:text-primary">
+                {ranking.title}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                都道府県別ランキング
+              </p>
+            </Link>
+          ))}
+        </div>
+      )}
     </RailCard>
   );
 }

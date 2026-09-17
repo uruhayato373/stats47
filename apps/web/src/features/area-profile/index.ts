@@ -8,7 +8,6 @@
 
 // クライアントコンポーネント
 export { AreaProfilePageClient } from './components/AreaProfilePageClient';
-export { AreaProfileSidebar } from './components/AreaProfileSidebar';
 export { RelatedAreas } from './components/RelatedAreas';
 export { CitiesNavCard } from './components/CitiesNavCard';
 export { CityBreadcrumbs } from './components/CityBreadcrumbs';

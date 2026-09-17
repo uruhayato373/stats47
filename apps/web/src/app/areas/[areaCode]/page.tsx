@@ -13,9 +13,10 @@ import {
 } from '@stats47/components/atoms/ui/breadcrumb';
 import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
 import { AREA_DATABOOK_TEMPLATE } from '@stats47/data-configs';
+import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 
 import { PageShell } from '@/components/layout';
-import { RailLinksCard, RightRailWidgets } from '@/components/rail';
+import { RailCategoryList, RailLinksCard, RightRailWidgets } from '@/components/rail';
 import { RailCard } from '@/components/surface';
 
 import {
@@ -37,7 +38,6 @@ import {
 } from '@/features/area-profile';
 import { getAreaProfileAction } from '@/features/area-profile/server';
 import { AreaGeoInsightsSection } from '@/features/geo-analysis';
-import { PortalCategoryGrid } from '@/features/home-portal';
 import { AREA_THEMES } from '@/features/theme-dashboard/listing.server';
 
 import { ADSENSE_DISPLAY_ENABLED, HUB_INCONTENT } from '@/lib/google-adsense';
@@ -142,6 +142,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                   title={`${profile.areaName}の目次`}
                   items={AREA_DATABOOK_TOC_ITEMS}
                   layout="list"
+                  trackingSurface="area_sidebar"
                 />
                 <RailLinksCard
                   title={`${profile.areaName}をテーマから見る`}
@@ -155,11 +156,13 @@ export default async function AreaProfilePage({ params }: PageProps) {
                     href: '/themes',
                     label: 'すべてのテーマを見る →',
                   }}
+                  trackingSurface="area_sidebar"
                 />
                 <RailCard title="カテゴリから探す" aria-label="カテゴリから探す">
-                  <PortalCategoryGrid
-                    variant="sidebar"
-                    surface="area_sidebar"
+                  <RailCategoryList
+                    items={RANKING_PROMINENCE_CATEGORIES}
+                    showCount
+                    trackingSurface="area_sidebar"
                   />
                 </RailCard>
                 <RelatedAreas areaCode={areaCode} />

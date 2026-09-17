@@ -1,6 +1,6 @@
 import { fetchCities } from "@stats47/area";
 
-import { RailLinkItem, SectionCard } from "@/components/surface";
+import { RailNavRow, SectionCard } from "@/components/surface";
 
 interface CitiesNavCardProps {
   areaCode: string;
@@ -42,18 +42,14 @@ export function CitiesNavCard({
         {cities.map((city) => {
           const isActive = city.cityCode === activeCityCode;
           return (
-            <RailLinkItem
+            <RailNavRow
               key={city.cityCode}
               href={`/areas/${areaCode}/cities/${city.cityCode}`}
-              className={
-                "px-2 " +
-                (isActive
-                  ? "bg-primary/10 font-semibold text-primary"
-                  : "text-foreground/80")
-              }
+              active={isActive}
+              chevron={false}
             >
               {city.cityName}
-            </RailLinkItem>
+            </RailNavRow>
           );
         })}
       </nav>

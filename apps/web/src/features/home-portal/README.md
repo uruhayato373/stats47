@@ -21,6 +21,9 @@
 - 検索は共通Headerへ集約する
 - desktopは左に全17カテゴリ、右に注目ランキング6件、新着ブログ8件、
   利用意図6件、都道府県入口、運営者プロフィールを置く
+- 左のカテゴリ一覧は共通 `RailCategoryList`（`@/components/rail`）を使い、左レールは `RailStack` +
+  `RailCard` で組む。home 専用のカテゴリ grid（旧 `PortalCategoryGrid`）は持たない
+  (正典: `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」)
 - mobileはランキング・ブログ・利用意図を先に、カテゴリを後に表示する
 - ランキング、ブログ、利用意図は共通`HorizontalCardCarousel`を使う
 - カード比率は`PORTAL_CARD_ASPECT_CLASS`を使う

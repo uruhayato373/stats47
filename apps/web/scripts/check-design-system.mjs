@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { findNestedCardSurfaces } from './lib/card-nesting-audit.mjs';
 import { findChartContractViolations } from './lib/chart-contract-audit.mjs';
+import { findRailContractViolations } from './lib/rail-contract-audit.mjs';
 
 const cwd = process.cwd();
 // Phase 0-6 (2026-06-23) で src/app の既存債務 (Card 直 import / bg-white) を是正し、
@@ -305,6 +306,22 @@ for (const relativePath of cardAuditFiles) {
       file: relativePath,
       lineNumber: nested.lineNumber,
       line: `<${nested.child}>`,
+    });
+  }
+}
+
+// レール UI 契約 (左右レール共通の RailCard / RailStack / RailCategoryList / RailNavRow)。
+// 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」。rule ごとの意図は lib 側のコメント参照。
+for (const relativePath of scanRoots.flatMap((root) => listFiles(root))) {
+  if (!relativePath.endsWith('.tsx')) continue;
+  const source = readFileSync(path.join(cwd, relativePath), 'utf8');
+  for (const found of findRailContractViolations(source, relativePath)) {
+    violations.push({
+      ruleId: found.ruleId,
+      message: found.message,
+      file: relativePath,
+      lineNumber: found.lineNumber,
+      line: found.line,
     });
   }
 }

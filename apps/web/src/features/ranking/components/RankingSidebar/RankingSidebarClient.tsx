@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
+import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
 import type { AreaType } from "@/features/area";
 import { CategoryIcon } from "@/features/category";
@@ -62,20 +62,19 @@ export function RankingSidebarClient({
 
     return (
         <RailCard
-            className="w-full overflow-hidden animate-in fade-in duration-300"
             title={categoryName ?? "同カテゴリ"}
             icon={categoryIcon ? (
                 <CategoryIcon categoryKey={categoryKey ?? ""} lucideIconName={categoryIcon} className="h-4 w-4 text-muted-foreground" />
             ) : undefined}
-            bodyClassName="flex flex-col gap-0.5 px-4 pb-4 pt-3"
         >
                 {/* 関連ランキング: コンパクトリスト */}
                 <RailLinkList>
                     {displayOthers.map((item, index) => (
-                        <RailLinkItem
+                        <RailNavRow
                             key={`${item.rankingKey}-${item.areaType}`}
                             href={`${linkPrefix}/${item.rankingKey}`}
                             title={item.readerLabel ?? item.title}
+                            chevron={false}
                             onClick={() =>
                                 trackRailClick({
                                     widget: "related-rankings",
@@ -111,7 +110,7 @@ export function RankingSidebarClient({
                                     </span>
                                 ) : null}
                             </span>
-                        </RailLinkItem>
+                        </RailNavRow>
                     ))}
                 </RailLinkList>
 
@@ -120,7 +119,7 @@ export function RankingSidebarClient({
                     <button
                         type="button"
                         onClick={() => setIsExpanded(!isExpanded)}
-                        className="text-xs text-primary hover:text-primary/80 font-medium text-center py-1 transition-colors"
+                        className="block w-full text-xs text-primary hover:text-primary/80 font-medium text-center py-1 transition-colors"
                     >
                         {isExpanded
                             ? "折りたたむ"

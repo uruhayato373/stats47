@@ -161,6 +161,11 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > デスクトップ・1位県の地域軸) を追加した。どちらも登録済み `link_position` の値追加で、
 > 新しい custom dimension の登録は不要。
 
+> **nav_surface の値追加 (2026-09-17・レール UI 契約統一)**: `/ranking` 左レールのカテゴリ導線を
+> `ranking_category` として分離した (従来 `home_category` に混入していた)。`/geo` 右レールに
+> `geo_sidebar` を追加した。どちらも登録済み `nav_surface` / `nav_label` の値追加で、新しい
+> custom dimension は無い。
+
 > `❓要確認` は「code コメントで登録前提と書かれているが、GA4 管理画面での実登録を確認していない」状態。
 > `.claude/rules/evidence-based-judgment.md` に従い、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。
 > 推測で `✅` にしない。

@@ -1,12 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-
-import { cn } from '@stats47/components';
 import { ChevronDown, FileText, ListTree } from 'lucide-react';
 
 import { StatisticsScopeNav } from '@/components/navigation';
-import { SectionHeader, SectionIndexLink } from '@/components/section';
+import { RailStack } from '@/components/rail';
+import { SectionIndexLink } from '@/components/section';
+import { RailCard, RailNavRow } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
@@ -57,7 +56,7 @@ export function ThemeSideNav({
   surveys = [],
 }: Props) {
   return (
-    <div className="space-y-6 pr-1">
+    <RailStack>
       <ThemeGroupNavigation
         currentThemeKey={currentThemeKey}
         areaContext={areaContext}
@@ -68,80 +67,79 @@ export function ThemeSideNav({
       )}
 
       {pageLinks.length > 0 && (
-        <nav aria-label="このページの内容">
-          <SectionHeader title="このページ" as="h2" />
-          <ul className="space-y-1 border-y border-border py-2">
+        <RailCard title="このページ" bodyClassName="p-0">
+          <nav aria-label="このページの内容" className="pb-2">
             {pageLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() =>
-                    trackNavClick({
-                      surface: 'theme_section',
-                      label: `${currentThemeKey}:${link.href.slice(1)}`,
-                      href: link.href,
-                    })
-                  }
-                  className="block py-2 text-sm leading-relaxed hover:text-primary hover:underline"
-                >
-                  {link.label}
-                </Link>
-              </li>
+              <RailNavRow
+                key={link.href}
+                href={link.href}
+                chevron={false}
+                onClick={() =>
+                  trackNavClick({
+                    surface: 'theme_section',
+                    label: `${currentThemeKey}:${link.href.slice(1)}`,
+                    href: link.href,
+                  })
+                }
+              >
+                {link.label}
+              </RailNavRow>
             ))}
-          </ul>
-        </nav>
+          </nav>
+        </RailCard>
       )}
 
       {metrics.length > 0 && (
-        <details className="group border-y border-border py-2">
-          <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-            <ListTree className="size-4 text-muted-foreground" aria-hidden />
-            全指標（{metrics.length}）
-          </summary>
-          <nav aria-label="このテーマの全指標" className="pb-1 pt-2">
-            <ul className="space-y-1">
-              {metrics.map((metric) => (
-                <li key={metric.rankingKey}>
-                  <Link
-                    href={`/ranking/${metric.rankingKey}`}
-                    className="block py-1 text-sm leading-relaxed text-foreground hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                  >
-                    {metric.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <RailCard
+          title={`全指標（${metrics.length}）`}
+          icon={<ListTree className="size-4 text-muted-foreground" aria-hidden />}
+          collapsible
+          bodyClassName="p-0"
+        >
+          <nav aria-label="このテーマの全指標" className="pb-2">
+            {metrics.map((metric) => (
+              <RailNavRow
+                key={metric.rankingKey}
+                href={`/ranking/${metric.rankingKey}`}
+                chevron={false}
+              >
+                {metric.label}
+              </RailNavRow>
+            ))}
           </nav>
-        </details>
+        </RailCard>
       )}
 
       <nav aria-label="このテーマの出典調査">
-        <SectionHeader
-          title={
-            <span className="inline-flex items-center gap-2">
-              <FileText className="size-4 text-muted-foreground" aria-hidden />
-              出典調査
-            </span>
-          }
-          as="h2"
-          action={<SectionIndexLink href="/survey" label="調査一覧へ" />}
-        />
-        {surveys.length > 0 && (
-          <ul className="space-y-1 border-y border-border py-2">
-            {surveys.map((survey) => (
-              <li key={survey.id}>
-                <Link
+        <RailCard
+          title="出典調査"
+          icon={<FileText className="size-4 text-muted-foreground" aria-hidden />}
+          headerAction={<SectionIndexLink href="/survey" label="調査一覧へ" />}
+          bodyClassName="p-0"
+        >
+          {surveys.length > 0 && (
+            <div className="pb-2">
+              {surveys.map((survey) => (
+                <RailNavRow
+                  key={survey.id}
                   href={`/survey/${survey.id}`}
-                  className="block py-1 text-sm leading-relaxed text-foreground hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                  chevron={false}
+                  onClick={() =>
+                    trackNavClick({
+                      surface: 'theme_survey',
+                      label: survey.id,
+                      href: `/survey/${survey.id}`,
+                    })
+                  }
                 >
                   {survey.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+                </RailNavRow>
+              ))}
+            </div>
+          )}
+        </RailCard>
       </nav>
-    </div>
+    </RailStack>
   );
 }
 
@@ -160,12 +158,11 @@ function ThemeGroupNavigation({
 
   return (
     <nav aria-label="テーマを切り替える">
-      <SectionHeader
+      <RailCard
         title="テーマ"
-        as="h2"
-        action={<SectionIndexLink href="/themes" label="テーマ一覧へ" />}
-      />
-      <div className="border-y border-border">
+        headerAction={<SectionIndexLink href="/themes" label="テーマ一覧へ" />}
+        bodyClassName="p-0"
+      >
         {THEME_NAV_GROUPS.map((group) => {
           const groupOptions = group.themeKeys.flatMap((themeKey) => {
             const option = optionByKey.get(themeKey);
@@ -190,38 +187,33 @@ function ThemeGroupNavigation({
                   aria-hidden
                 />
               </summary>
-              <ul className="pb-2">
+              <div className="pb-2">
                 {groupOptions.map((option) => {
                   const isCurrent = option.themeKey === currentThemeKey;
                   return (
-                    <li key={option.themeKey}>
-                      <Link
-                        href={option.href}
-                        onClick={() =>
-                          trackNavClick({
-                            surface: 'theme_switcher',
-                            label: option.themeKey,
-                            href: option.href,
-                          })
-                        }
-                        aria-current={isCurrent ? 'page' : undefined}
-                        className={cn(
-                          'flex min-h-10 items-center px-4 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
-                          isCurrent
-                            ? 'bg-accent font-semibold text-primary'
-                            : 'text-foreground hover:bg-accent/50 hover:text-primary'
-                        )}
-                      >
-                        {option.title}
-                      </Link>
-                    </li>
+                    <RailNavRow
+                      key={option.themeKey}
+                      href={option.href}
+                      active={isCurrent}
+                      chevron={false}
+                      className="pl-4"
+                      onClick={() =>
+                        trackNavClick({
+                          surface: 'theme_switcher',
+                          label: option.themeKey,
+                          href: option.href,
+                        })
+                      }
+                    >
+                      {option.title}
+                    </RailNavRow>
                   );
                 })}
-              </ul>
+              </div>
             </details>
           );
         })}
-      </div>
+      </RailCard>
     </nav>
   );
 }
@@ -234,11 +226,10 @@ function RegionBlock({
   showPrefectureSelect: boolean;
 }) {
   return (
-    <div>
-      <SectionHeader title="地域" as="h2" />
+    <RailCard title="地域">
       {showScope && <StatisticsScopeNav current="prefectures" variant="rail" />}
       {showPrefectureSelect && <PrefectureControl hasScope={showScope} />}
-    </div>
+    </RailCard>
   );
 }
 

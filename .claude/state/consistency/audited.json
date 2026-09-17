@@ -1,5 +1,17 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-09-16T12:04:07",
-  "files": []
+  "hash": "8c920f10ff93ce83ea0fa857f4fece1f0aebf0855eea5424082adc044fd5fc8a",
+  "audited_at": "2026-09-17T06:26:25",
+  "files": [
+    ".agents/skills/theme/audit-theme-components/SKILL.md",
+    ".agents/skills/ui/design-review/SKILL.md",
+    ".claude/agents/site-ux-manager.md",
+    ".claude/agents/theme-ui-manager.md",
+    ".claude/agents/ui-consistency-reviewer.md",
+    ".claude/agents/ui-reviewer.md",
+    ".claude/rules/analytics-event-standards.md",
+    ".claude/rules/theme-catalog-standards.md",
+    ".claude/rules/ui-components.md",
+    ".claude/skills/theme/audit-theme-components/SKILL.md",
+    ".claude/skills/ui/design-review/SKILL.md"
+  ]
 }

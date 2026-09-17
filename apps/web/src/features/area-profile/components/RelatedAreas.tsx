@@ -4,7 +4,7 @@ import {
     REGIONS,
 } from "@stats47/area";
 
-import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
+import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
 interface Props {
     areaCode: string;
@@ -32,9 +32,9 @@ export function RelatedAreas({ areaCode }: Props) {
         <RailCard title={`${region.regionName}の都道府県`}>
             <RailLinkList>
                 {relatedPrefs.map((pref) => (
-                    <RailLinkItem key={pref.code} href={`/areas/${pref.code}`}>
+                    <RailNavRow key={pref.code} href={`/areas/${pref.code}`} chevron={false}>
                         {pref.name}
-                    </RailLinkItem>
+                    </RailNavRow>
                 ))}
             </RailLinkList>
         </RailCard>

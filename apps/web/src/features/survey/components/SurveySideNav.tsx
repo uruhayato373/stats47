@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { ListTree } from 'lucide-react';
 
 import { LEFT_RAIL_NARROW_ONLY_CLASS } from '@/components/layout';
-import { SectionHeader, SectionIndexLink } from '@/components/section';
+import { RailCategoryList, RailStack } from '@/components/rail';
+import { SectionIndexLink } from '@/components/section';
+import { RailCard, RailNavRow } from '@/components/surface';
 
 import { SurveyOutboundLinkArea } from './SurveyOutboundLinkArea';
 
@@ -36,79 +38,68 @@ export function SurveySideNav({
   categories,
 }: SurveyNavigationProps) {
   return (
-    <div className="space-y-6 pr-1">
-      <div>
-        <SectionHeader
-          title="調査"
-          as="h2"
-          action={<SectionIndexLink href="/survey" label="調査一覧へ" />}
-        />
-      </div>
+    <RailStack>
+      <RailCard
+        title="調査"
+        headerAction={<SectionIndexLink href="/survey" label="調査一覧へ" />}
+        bodyClassName="p-0"
+      >
+        {null}
+      </RailCard>
 
-      <nav aria-label="この調査ページの内容">
-        <SectionHeader title="このページ" as="h2" />
-        <ul className="border-t border-border">
+      <RailCard title="このページ" bodyClassName="p-0">
+        <nav aria-label="この調査ページの内容" className="pb-2">
           {pageLinks.map((item) => (
-            <li key={item.href} className="border-b border-border">
-              <a
-                href={item.href}
-                className="flex min-h-10 items-center px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-              >
-                {item.label}
-              </a>
-            </li>
+            <RailNavRow key={item.href} href={item.href} chevron={false}>
+              {item.label}
+            </RailNavRow>
           ))}
-        </ul>
-      </nav>
+        </nav>
+      </RailCard>
 
       {representativeRankings.length > 0 && (
-        <details className="group border-y border-border py-2">
-          <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-            <ListTree className="size-4 text-muted-foreground" aria-hidden />
-            代表ランキング（{representativeRankings.length}）
-          </summary>
+        <RailCard
+          title={`代表ランキング（${representativeRankings.length}）`}
+          icon={<ListTree className="size-4 text-muted-foreground" aria-hidden />}
+          collapsible
+          bodyClassName="p-0"
+        >
           <SurveyOutboundLinkArea surface="survey_ranking">
-            <nav aria-label="この調査の代表ランキング" className="pb-1 pt-2">
-              <ul className="space-y-1">
-                {representativeRankings.map((item) => (
-                  <li key={item.rankingKey}>
-                    <Link
-                      href={`/ranking/${item.rankingKey}`}
-                      className="block py-1 text-sm leading-relaxed text-foreground hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <nav aria-label="この調査の代表ランキング" className="pb-2">
+              {representativeRankings.map((item) => (
+                <RailNavRow
+                  key={item.rankingKey}
+                  href={`/ranking/${item.rankingKey}`}
+                  chevron={false}
+                >
+                  {item.label}
+                </RailNavRow>
+              ))}
             </nav>
           </SurveyOutboundLinkArea>
-        </details>
+        </RailCard>
       )}
 
       {categories.length > 0 && (
-        <SurveyOutboundLinkArea surface="survey_category">
-          <nav aria-label="この調査に関連する分類">
-            <SectionHeader title="関連する分類" as="h2" />
-            <ul className="space-y-1">
-              {categories.map((category) => (
-                <li key={category.categoryKey}>
-                  <Link
-                    href={`/category/${category.categoryKey}`}
-                    className="flex min-h-9 items-center justify-between gap-3 py-1 text-sm text-foreground hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                  >
-                    <span>{category.label}</span>
-                    <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-                      {category.count}件
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </SurveyOutboundLinkArea>
+        // RailCategoryList は trackingSurface で自前計測するため、SurveyOutboundLinkArea
+        // (click delegation による計測) で二重に包まない。
+        <nav aria-label="この調査に関連する分類">
+          <RailCard title="関連する分類" bodyClassName="px-4 pb-3 pt-0">
+            {/* 件数は「このページの調査に含まれるランキング数」で、全サイトの件数ではない */}
+            <p className="sr-only">件数はこの調査のランキング数です</p>
+            <RailCategoryList
+              items={categories.map((category) => ({
+                categoryKey: category.categoryKey,
+                categoryName: category.label,
+                count: category.count,
+              }))}
+              trackingSurface="survey_category"
+              className="-mx-4 border-t-0"
+            />
+          </RailCard>
+        </nav>
       )}
-    </div>
+    </RailStack>
   );
 }
 
@@ -132,18 +123,11 @@ export function SurveyMobileNav({
         調査一覧へ
       </Link>
       <nav aria-label="この調査ページの内容（モバイル）" className="pt-2">
-        <ul className="border-t border-border">
-          {pageLinks.map((item) => (
-            <li key={item.href} className="border-b border-border">
-              <a
-                href={item.href}
-                className="flex min-h-11 items-center px-2 text-sm"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {pageLinks.map((item) => (
+          <RailNavRow key={item.href} href={item.href} chevron={false}>
+            {item.label}
+          </RailNavRow>
+        ))}
       </nav>
       {categories.length > 0 && (
         <SurveyOutboundLinkArea surface="survey_category">

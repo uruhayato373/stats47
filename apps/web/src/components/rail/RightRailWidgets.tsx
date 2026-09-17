@@ -12,6 +12,8 @@ import {
   RANKING_SIDEBAR_TOP,
 } from '@/lib/google-adsense';
 
+import { RailStack } from './RailStack';
+
 interface RightRailWidgetsProps {
   /** 上部に挿入する追加 widget (関連ランキング・関連記事など) */
   topWidgets?: ReactNode;
@@ -57,7 +59,7 @@ export async function RightRailWidgets({
   const hasPromoOrAds = showPromoBanner || hasAdsense;
 
   return (
-    <div className="flex flex-col gap-3">
+    <RailStack>
       {/* 本文関連 widget（主役） */}
       {topWidgets}
       {midWidgets}
@@ -78,6 +80,6 @@ export async function RightRailWidgets({
       {ADSENSE_DISPLAY_ENABLED && showBottomAd && (
         <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />
       )}
-    </div>
+    </RailStack>
   );
 }

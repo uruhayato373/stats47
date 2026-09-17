@@ -12,6 +12,7 @@ describe('RailLinksCard', () => {
   it('リンク集合を独立したカードとして描画する', () => {
     render(
       <RailLinksCard
+        trackingSurface="blog_sidebar"
         title="人気の項目"
         items={ITEMS}
         moreLink={{ href: '/all', label: 'すべて見る →' }}
@@ -33,7 +34,7 @@ describe('RailLinksCard', () => {
 
   it('長いモバイル導線はカード単位で折りたためる', () => {
     const { container } = render(
-      <RailLinksCard title="カテゴリから探す" items={ITEMS} collapsible />
+      <RailLinksCard title="カテゴリから探す" items={ITEMS} collapsible trackingSurface="blog_sidebar" />
     );
 
     expect(
@@ -45,6 +46,7 @@ describe('RailLinksCard', () => {
   it('順位リンクに任意のサムネイルを表示できる', () => {
     const { container } = render(
       <RailLinksCard
+        trackingSurface="blog_sidebar"
         title="人気記事"
         layout="ranked"
         items={[
@@ -69,6 +71,7 @@ describe('RailLinksCard', () => {
   it('順位を付けない画像付きリンク一覧を表示できる', () => {
     const { container } = render(
       <RailLinksCard
+        trackingSurface="blog_sidebar"
         title="はじめに見るテーマ"
         layout="media"
         items={[
@@ -90,5 +93,19 @@ describe('RailLinksCard', () => {
     );
     expect(screen.getByRole('link', { name: '項目1' })).toBeInTheDocument();
     expect(container.querySelector('ol')).not.toBeInTheDocument();
+  });
+
+  it('タグのピルは丸みと小さい余白を使い、モバイルのタップ領域を保つ', () => {
+    render(
+      <RailLinksCard title="人気のタグ" layout="chips" items={ITEMS} trackingSurface="blog_sidebar" />
+    );
+
+    expect(screen.getByRole('link', { name: '項目1' })).toHaveClass(
+      'min-h-11',
+      'rounded-full',
+      'px-2',
+      'text-[11px]',
+      'sm:min-h-7'
+    );
   });
 });

@@ -1,5 +1,8 @@
+import { RailCard } from '@/components/surface';
+
 import type { NavSurface } from '@/lib/analytics/events';
 
+import { RailCategoryList } from './RailCategoryList';
 import { RailLinksCard } from './RailLinksCard';
 import { RailPrefectureCard, type RailPrefecture } from './RailPrefectureCard';
 
@@ -18,7 +21,7 @@ interface RailDataDiscoveryCardsProps {
   categories: readonly RailDiscoveryCategory[];
   themes: readonly RailDiscoveryTheme[];
   prefectures: readonly RailPrefecture[];
-  trackingSurface?: NavSurface;
+  trackingSurface: NavSurface;
   collapsible?: boolean;
 }
 
@@ -32,23 +35,25 @@ export function RailDataDiscoveryCards({
 }: RailDataDiscoveryCardsProps) {
   return (
     <>
-      <RailLinksCard
+      {/* カテゴリ導線は home と同じ縦型行 UI (RailCategoryList) を使う。件数は出さない */}
+      <RailCard
         title="カテゴリから探す"
-        items={categories.map((category) => ({
-          id: category.categoryKey,
-          label: category.categoryName,
-          href: `/category/${category.categoryKey}`,
-          trackingLabel: `category:${category.categoryKey}`,
-        }))}
-        layout="grid"
-        moreLink={{
-          href: '/ranking',
-          label: 'ランキング一覧を見る →',
-          trackingLabel: 'category:all',
-        }}
-        trackingSurface={trackingSurface}
+        aria-label="カテゴリから探す"
         collapsible={collapsible}
-      />
+        bodyClassName="px-4 pb-3 pt-0"
+      >
+        <RailCategoryList
+          items={categories}
+          showCount={false}
+          trackingSurface={trackingSurface}
+          moreLink={{
+            href: '/ranking',
+            label: 'ランキング一覧を見る',
+            trackingLabel: 'category:all',
+          }}
+          className="-mx-4 border-t-0"
+        />
+      </RailCard>
 
       <RailLinksCard
         title="テーマから探す"

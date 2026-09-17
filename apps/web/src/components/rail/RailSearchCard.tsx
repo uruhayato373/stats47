@@ -36,7 +36,7 @@ export function RailSearchCard({
         moreLink ? (
           <Link
             href={moreLink.href}
-            className="shrink-0 text-xs font-medium text-primary transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex min-h-11 shrink-0 items-center text-xs font-medium text-primary transition-colors hover:underline sm:min-h-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {moreLink.label}
           </Link>

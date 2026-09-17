@@ -22,9 +22,18 @@ describe('ThemePageLayout — 狭幅の読む順序', () => {
   });
 
   it('全指標・出典調査は狭幅で初期展開しない', () => {
-    const detailsTag = source.match(/<details[^>]*>/)?.[0];
+    // レール UI 契約統一 (2026-09-17) で自前の <details> を RailCard の
+    // collapsible (既定閉・details/summary は共通部品側が持つ) へ置き換えた。
+    // ここでは「その RailCard に defaultOpen が付いていないこと」で初期閉を固定する。
+    const cardIndex = source.indexOf('title="全指標・出典調査"');
+    expect(cardIndex).toBeGreaterThan(-1);
 
-    expect(detailsTag).toBeDefined();
-    expect(detailsTag).not.toMatch(/\sopen(?:=|\s|>)/);
+    const cardTagEnd = source.indexOf('>', cardIndex);
+    const cardOpenTag = source.slice(
+      source.lastIndexOf('<RailCard', cardIndex),
+      cardTagEnd
+    );
+    expect(cardOpenTag).toContain('collapsible');
+    expect(cardOpenTag).not.toContain('defaultOpen');
   });
 });

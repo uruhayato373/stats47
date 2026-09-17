@@ -40,22 +40,24 @@ Theme のページ内ナビと home / ranking / category のカテゴリ探索�
 ## コンポーネント
 
 ```
-カード             : bg-card border border-border p-6 shadow-sm（角丸なし=フラット）
+カード             : bg-card border border-border p-4 shadow-sm（角丸なし=フラット）
                     【stats47: @stats47/components の Card を優先使用】
 カード hover       : hover:shadow-md（shadow-lg 禁止）
-カードグリッド     : grid grid-cols-2 md:grid-cols-3 gap-6
-                    【stats47: ダッシュボードはコンテナクエリ @sm:/@md:/@lg: を使用】
+カードグリッド     : grid grid-cols-1 gap-4 @md:grid-cols-2（viewport md: 禁止、コンテナクエリ @sm:/@md:/@lg: を使用）
 CTAボタン（M）     : h-10 px-4 text-[1rem] font-medium bg-primary-500 text-white rounded-lg
 CTAボタン（S）     : h-8 px-3 text-[0.875rem] font-medium rounded-lg
-サブボタン         : h-10 px-4 bg-white text-slate-700 border border-slate-200 rounded-lg hover:bg-gray-50
+サブボタン         : h-10 px-4 bg-card text-foreground border border-border rounded-lg hover:bg-accent/50
 入力欄             : w-full px-3 py-2 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50
 セレクト           : appearance-none + カスタムSVGシェブロン（ネイティブ矢印禁止）
 バッジ             : bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium
 Alert（全種）      : flex items-start gap-3 p-4 border rounded-lg（border-l-4 禁止）
 テーブル外枠       : bg-card border border-border overflow-hidden（角丸なし=フラット）
 テーブルヘッダ     : <th scope="col"> text-left py-3 px-4 text-xs font-medium text-slate-500
-テーブルデータ行   : hover:bg-gray-50 transition-colors
+テーブルデータ行   : hover:bg-accent/50 transition-colors
 ディバイダー       : border-t border-slate-200（<hr> or role="separator"）
+レールカード       : RailCard（@/components/surface、bg-card border shadow-sm rounded-none、見出し border-b px-4 py-3）
+レール行           : RailNavRow / RailNavRowButton（透明背景 hover:bg-accent/50、active= aria-current + bg-accent font-semibold）
+カテゴリ導線       : RailCategoryList（@/components/rail、単列・区切り線・showCount=ランキング数）
 ```
 
 ## ナビゲーション

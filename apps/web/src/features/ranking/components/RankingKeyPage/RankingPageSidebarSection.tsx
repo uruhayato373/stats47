@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 
-import { SurfaceCard } from "@/components/surface";
-
 import {
+  RailAdSlot,
   SidebarPromoBanner,
   selectPromoBannerIndexForRanking,
 } from "@/features/ads";
@@ -14,7 +13,6 @@ import type { AreaType } from "@/features/area";
 
 import {
   ADSENSE_DISPLAY_ENABLED,
-  AdSenseAd,
   RANKING_SIDEBAR_TOP,
 } from "@/lib/google-adsense";
 
@@ -99,14 +97,7 @@ export function RankingPageSidebarSection({
       {/* AdSense停止中は、空いた上段へ既存の文脈一致バナーを移す。
           枠数は最大2のまま、表示位置だけを上げてviewable impressionを増やす。 */}
       {!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
-      {ADSENSE_DISPLAY_ENABLED && (
-        <SurfaceCard className="p-3">
-          <AdSenseAd
-            format={RANKING_SIDEBAR_TOP.format}
-            slotId={RANKING_SIDEBAR_TOP.slotId}
-          />
-        </SurfaceCard>
-      )}
+      <RailAdSlot slot={RANKING_SIDEBAR_TOP} />
       <SidebarPromoBanner
         index={promoBannerIndex}
         rankingKey={rankingKey}

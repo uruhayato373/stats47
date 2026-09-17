@@ -42,9 +42,12 @@ describe('BlogNavigationCards', () => {
   it('記事数の多いタグを10件まで表示する', () => {
     render(<BlogNavigationCards {...PROPS} />);
 
-    expect(
-      screen.getByRole('link', { name: '「タグ12」の記事を12件見る' })
-    ).toHaveAttribute('href', '/tag/タグ12');
+    const popularTag = screen.getByRole('link', {
+      name: '「タグ12」の記事を12件見る',
+    });
+
+    expect(popularTag).toHaveAttribute('href', '/tag/タグ12');
+    expect(popularTag).toHaveClass('rounded-full', 'px-2', 'sm:min-h-7');
     expect(
       screen.queryByRole('link', { name: '「タグ2」の記事を2件見る' })
     ).not.toBeInTheDocument();
