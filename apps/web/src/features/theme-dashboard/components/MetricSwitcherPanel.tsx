@@ -25,7 +25,7 @@ import {
 import { ChartEmptyState, ChartLoading } from './ChartState';
 import { ScrollableRow } from './ScrollableRow';
 
-import type { MetricKpi } from './metric-kpi';
+import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
 
 const CHART_HEIGHT = 250;
 const PREFECTURE_PROMPT_HEIGHT = 80;
@@ -49,8 +49,12 @@ interface MetricSwitcherPanelProps {
   title?: string;
   /** 同じ章に系列の詳細図がある場合は、値を重複描画しない。 */
   summaryOnly?: boolean;
-  /** このカードに並べる KPI 群 (タイルの中身・表示順) */
-  metrics: MetricKpi[];
+  /**
+   * このカードに並べる KPI 群 (タイルの中身・表示順)。
+   * ★2 件以上専用。1 件のグループは選択 UI を持たない `SingleMetricCard` が描く
+   *   (件数は観測不足で落とした後の実件数。ThemeMetricsDashboard が振り分ける)。
+   */
+  metrics: MultiMetricGroup;
   /** rankingKey → 短ラベル (tabIndicators の tabLabel)。無ければ title を使う */
   tabLabels: Record<string, string>;
   /** 選択中の都道府県コード (null = 47都道府県・未選択) */
@@ -88,7 +92,7 @@ type ChartState =
  * 平均のときは「都道府県平均」と呼び、「全国」の字を含めない
  * (docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md §3.1)。
  */
-function nationalSeriesName(
+export function nationalSeriesName(
   result: MetricTimeseriesResult | undefined
 ): string {
   return result?.source === 'national' ? '全国' : '都道府県平均';
@@ -183,6 +187,10 @@ function emptyMessage(state: ChartState): string {
  *
  * GA4 のスコアカードと GSC のチェックボックス折れ線の良いとこ取り。1 グループ = 1 枚で、
  * 1 ページに複数枚が並ぶ (編成は ThemeCatalog.metricGroups が SSOT)。
+ *
+ * ★有効指標が 2 件以上のグループ専用 (2026-09-17)。1 件しか残らないグループは
+ *   選択タイルを持たない `SingleMetricCard` が描く。ここでは「最後の 1 本を外せない」
+ *   ロックは残す (2 件以上から 1 本に絞った状態の話であり、1 件グループとは別)。
  *
  * 設計上の約束と理由:
  * - タイルにミニチャートを置かない。トレンドは下の折れ線が担うので、同じ事実を
@@ -455,8 +463,6 @@ export function MetricSwitcherPanel({
     tabLabels,
     colorOf,
   ]);
-
-  if (metrics.length === 0) return null;
 
   const toggle = (key: string, next: boolean) => {
     // 最後の 1 本は外せない。0 本になるとチャートが消え、

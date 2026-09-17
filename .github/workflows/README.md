@@ -6,9 +6,10 @@
 
 | ワークフロー                                        | トリガー                                           | 実行内容                                                                                                                                                                                                        |
 | --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR Quality Check                                    | PR作成・更新 (main)                                | Static gateは常時実行。差分に応じてType Check、Unit Test、web/admin/Remotion、共有チャートgolden、代表Playwrightを選択し、Web buildは1回だけ生成して再利用                                                           |
+| PR Quality Check                                    | PR作成・更新 (main)                                | Static Gates / Contract Tests / Catalog Gates の 3 job を常時並列実行 (2026-09-18 に 65 step 直列から分割。1 run で複数の失敗を報告する)。差分に応じてType Check、Unit Test、web/admin/Remotion、共有チャートgolden、代表Playwrightを選択し、Web buildは1回だけ生成して再利用。node_modules は lockfile hash キーのキャッシュで復元                                                           |
 | Full Quality Suite (`quality-suite-weekly.yml`)     | 毎週日曜7時30分JST、手動                           | 全workspace型検査、Web coverage、全package/admin/Remotion unit、Admin/Remotion build、Admin/Web全Playwrightを実行。失敗は固定`quality-suite-alert` Issueへ集約し、回復時に自動Close                            |
 | Deploy to Cloudflare Workers                        | Push (main)                                        | Build、認証確認、デプロイ、ヘルスチェック                                                                                                                                                                       |
+| Warm node_modules cache (`cache-node-modules.yml`)  | `package-lock.json` の main push、毎週月曜6時JST、手動 | default branch scope に node_modules キャッシュを置き、PR / develop の全 job の `npm ci` (実測 105〜122 秒/job) を skip させる |
 | Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
 | Ranking AI Content / Gemini (`ai-content-gemini-daily.yml`) | 毎日7時15分JST、手動 | 課金無効の専用 Gemini API key で既定3件を structured 生成。決定的監査 + 別リクエスト critic 通過分だけ publish workflow を明示 dispatch。件数・通過率・token を state へ記録 |
 | Backlog Loop Daily (`backlog-loop-daily.yml`)       | 毎日1時30分JST、手動、request push                 | .claude/todo の 05/01/06 を分類して処理し、**機械ゲートを通した証拠が台帳にあるものだけ**行削除する。verify が「行削除 ⇔ ledger の gate.pass」を突合し、宣言だけの完了を落とす                                     |
@@ -113,7 +114,7 @@ Static gateは常に実行する。その他は変更パスを決定的に分類
 
 4. ✅ **Verify Build**: `npm run build`
    - ビルドエラーで失敗
-   - 成功した`.next`をartifact化し、代表E2Eとpage-qualityが同じbuildを再利用
+   - 成功した`.next`をartifact化し、代表E2Eが同じbuildを再利用 (page-quality は 2026-09-18 に PR 必須から外し、週次 `page-quality-audit-weekly.yml` と明示実行 `check:release-local` に寄せた)
 
 5. ✅ **Visualization Render Golden**: `RUN_RENDER_TESTS=1 npm run test:run --workspace=@stats47/visualization`
    - 共有チャート9種のPNG差分で失敗し、差分artifactを保存

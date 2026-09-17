@@ -161,6 +161,8 @@ export function lintSvgContent(content, filename) {
 // 統一済みカタログ (ENFORCED) = error / 未統一 = warning (統一完了後 error に昇格)。
 const CANONICAL_WIDTH = {
   bar: [960, 680], // columns 960 (標準) / single 680。760/720/600 等の旧サイズは違反
+  'bar-mobile': [640], // ブログ mobile / note 本文向け縦長
+  'bar-social': [1080], // Instagram 4:5
   'tile-grid': [720], // 720×720 (2026-07-31 に 780×560 から変更。lintTileGridQuality 参照)
   summary: [960], // findings card 幅 960 (高さ可変)
   line: [680], // 680×420
@@ -170,6 +172,8 @@ const CANONICAL_WIDTH = {
 // 全カタログ統一完了 (2026-06-21): both 全件が正規幅。error で再発防止する。
 const SIZE_ENFORCED = new Set([
   'bar',
+  'bar-mobile',
+  'bar-social',
   'tile-grid',
   'summary',
   'scatter',
@@ -182,6 +186,10 @@ export function classifyChartTypeFromName(filename) {
   const f = String(filename)
     .replace(/\.svg$/i, '')
     .toLowerCase();
+  const rankingSuffix =
+    '(?:-prefecture-rankings|-top5-bottom5|-top-bottom|-rate-ranking|-income-ranking|-ranking|-rankings)';
+  if (new RegExp(`${rankingSuffix}-mobile$`).test(f)) return 'bar-mobile';
+  if (new RegExp(`${rankingSuffix}-ig$`).test(f)) return 'bar-social';
   if (
     /(?:-prefecture-rankings|-top5-bottom5|-top-bottom|-rate-ranking|-income-ranking|-ranking|-rankings)$/.test(
       f
@@ -195,6 +203,46 @@ export function classifyChartTypeFromName(filename) {
   if (/-stacked$/.test(f)) return 'stacked-bar';
   if (/(?:-summary-findings|-findings)$/.test(f)) return 'summary';
   return null; // 分類不能 (無意味名 inline-chart-N 等) は対象外
+}
+
+/**
+ * 横長ランキング本文画像に mobile 本文用バリアントが揃っているかを検査する。
+ * desktop SVG 自体の文字を大きくしても 390px 幅では縮小されるため、ファイル対を契約にする。
+ */
+export function lintResponsiveBarPair(filename, desktopContent, mobileContent) {
+  const errors = [];
+  const warnings = [];
+  if (classifyChartTypeFromName(filename) !== 'bar') return { errors, warnings };
+  const viewBox = String(desktopContent).match(
+    /viewBox\s*=\s*"0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/
+  );
+  if (!viewBox || Math.round(parseFloat(viewBox[1])) !== 960) {
+    return { errors, warnings }; // single(680) は mobile でも1列なので別バリアント不要
+  }
+  if (typeof mobileContent !== 'string' || mobileContent.length === 0) {
+    errors.push(
+      `mobile 本文用 SVG が無い: ${path_base(filename).replace(/\.svg$/i, '')}-mobile.svg。` +
+        '横長2列をスマホで縮小せず、同じ JSON から generate-article-charts で媒体別出力する'
+    );
+    return { errors, warnings };
+  }
+  const size = lintSvgSize(
+    path_base(filename).replace(/\.svg$/i, '-mobile.svg'),
+    mobileContent
+  );
+  errors.push(...size.errors);
+  warnings.push(...size.warnings);
+  const fontSizes = [...String(mobileContent).matchAll(/font-size="(\d+(?:\.\d+)?)"/g)]
+    .map((match) => Number(match[1]))
+    .filter(Number.isFinite);
+  const minFont = fontSizes.length > 0 ? Math.min(...fontSizes) : 0;
+  if (minFont < 20) {
+    errors.push(
+      `mobile 本文用 SVG の最小文字 ${minFont}px は基準 20px 未満。` +
+        '640px viewBox を390px表示した際の実効文字サイズを確保する'
+    );
+  }
+  return { errors, warnings };
 }
 
 /**

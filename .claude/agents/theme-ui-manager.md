@@ -52,8 +52,14 @@ model: sonnet
   の `actions`（`xl:hidden` で囲った `PrefectureSelect`）+ `xl:hidden` の `ThemeSwitcher` 帯。
   `ThemeDashboardTabbed` の hideMap 分岐に本体側 `prefectureSelector` を**二重に出さない**。デフォルト全国・`?pref=` 同期。
 - **ダッシュボード本体 `ThemeMetricsDashboard`**: 指標カードのグリッド + page-components チャート +
-  考察 (markdown)。各指標 = 1 枚の `ChartCard`（タイトル + 値 + 全国トレンド `MiniLineChart` + ランキングリンク）。
-  **データのみ KPI カード（KpiCardClient）・上位県バー（RankingBarList）・大トレンド・選択タブ・地図は出さない**。
+  考察 (markdown)。**1 グループ = 1 カードだが、選択 UI と中身は生存指標の実件数で分岐する**（2026-09-17〜。
+  カタログ定義件数ではなく観測不足フィルタ後の件数で判定）:
+  0 件はカードごと描かない、1 件は選択 UI の無い `SingleMetricCard`（見出し・値・単位・年次・順位・ランキング
+  導線を直接表示、`MiniLineChart` は県選択時に異なる年が 2 件以上あるときだけ）、2 件以上は選択 UI 付き
+  `MetricSwitcherPanel`。連続する 1 件カードは 2 枚以上まとまったときだけ `data-theme-panel-grid="compact"` の
+  container query grid（`@md:grid-cols-2`）で包む（`ThemeMetricsDashboard.renderPanelRuns`）。
+  選択肢が 1 件しかないのに checkbox / tab / 選択タイルを出す、または空の折れ線枠を置くのは DRIFT。
+  **データのみ KPI カード（KpiCardClient）・上位県バー（RankingBarList）・大トレンド・旧「指標タブ (1 指標 1 タブ)」・地図は出さない**。
   **`cardsOnly` prop は付けない**（付けるとチャートと考察が消える。2026-07-04 に付与をやめた。prop 自体は残存）。
   **指標カードの枚数は下のチャートとの重複を避けて絞る**（2026-08-04 に population-dynamics を 10 → 4）。
 - **データソースは R2 のみ**: `loadThemeData` → `readAllYearsRankingValuesFromR2`（`app/ranking/<key>/values.json`）。
@@ -90,9 +96,11 @@ grep -n "prefectureSelector" apps/web/src/features/theme-dashboard/components/Th
 # 2. eyebrow 固定ラベル
 grep -rn 'eyebrow="テーマダッシュボード"' apps/web/src/features/theme-dashboard/components/
 #    → 1 件でもあれば DRIFT (eyebrow は付けない)。
-# 3. データのみカード / 上位県バーの混入 (チャート付きのみのはず)
-grep -n "KpiCardClient\|RankingBarList\|上位都道府県\|全国推移" apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx
-#    → ヒットすれば DRIFT (チャート付き ChartCard グリッドのみに統一)。
+# 3. 件数別振り分け (0/1/2+) が維持されているか
+grep -c "isSingleMetricGroup\|SingleMetricCard" apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx
+#    → 2 以上が正 (振り分けの分岐 + renderPanel の呼び分け)。かつ
+cd apps/web && npx vitest run src/features/theme-dashboard/components/__tests__/all-theme-panel-kinds.test.tsx
+#    → 緑が正 (全テーマ × カタログを列挙し件数どおりの経路に入ることを固定)。
 # 4. e-Stat ライブ取得の混入 (R2 のみのはず)
 grep -n "fetchFormattedStats\|getEstatCacheStorage" apps/web/src/features/theme-dashboard/lib/load-theme-data.ts
 #    → ヒットすれば DRIFT (readAllYearsRankingValuesFromR2 等 R2 経由に統一)。
@@ -126,9 +134,11 @@ grep -n 'resolveChartAnnotation\|指標の定義・ランキング' apps/web/src
 | 依存先                                                       | 旧前提が残ると                   | 同期すべき内容                                          |
 | ------------------------------------------------------------ | -------------------------------- | ------------------------------------------------------- |
 | `apps/web/src/features/theme-dashboard/README.md`            | 正典が古くなる                   | アーキ表・データソース・local-finance 例外              |
+| `docs/01_技術設計/04_デザインシステム.md`                    | 件数規則が古くなる               | 「選択 UI と集合レイアウトの件数規則」・Responsive 表   |
 | `.claude/agents/theme-designer.md`                           | 指標を旧 UI 前提で設計           | 配置先（チャート付きカード）・role の表示先・地図の有無 |
 | `.claude/skills/theme/audit-theme-components/SKILL.md`       | 監査基準が旧 KPI 前提            | 本体 KPI=R2 ranking / page_components との役割分担      |
 | `.claude/skills/theme/optimize-themes/SKILL.md`              | 最適化が旧前提                   | データソース・カード構成                                |
+| `apps/web/src/features/theme-dashboard/components/SingleMetricCard.tsx` | 1 件カードの表示契約が古くなる | 選択 UI 不在・重複見出しなし・MiniLineChart の 2 時点条件 |
 | `apps/web/src/features/theme-dashboard/config/all-themes.ts` | hideMap/EMBEDDED_SECTIONS 不整合 | MAP_VISIBLE_THEMES / 例外セクション                     |
 
 検出 grep（旧前提の残骸を探す）:

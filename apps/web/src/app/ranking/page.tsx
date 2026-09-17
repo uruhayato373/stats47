@@ -21,10 +21,11 @@ import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-pro
 import { ChevronRight } from 'lucide-react';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
+import { RailCard, RailNavRow } from '@/components/surface';
 
 import { FooterAdSlot } from '@/features/ads';
-import { PortalCategoryGrid } from '@/features/home-portal';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -57,28 +58,26 @@ export function generateMetadata(): Metadata {
 
 export default function RankingIndexPage() {
   const leftRail = (
-    <aside className="lg:pr-1">
-      <SectionHeader title="カテゴリ" />
-      <PortalCategoryGrid variant="sidebar" />
+    <RailStack>
+      <RailCard title="カテゴリ" bodyClassName="px-4 pb-3 pt-0">
+        <RailCategoryList
+          items={RANKING_PROMINENCE_CATEGORIES}
+          showCount={false}
+          trackingSurface="ranking_category"
+          className="-mx-4 border-t-0"
+        />
+      </RailCard>
 
-      <div className="mt-6">
-        <SectionHeader title="他の探し方" />
-        <nav className="grid grid-cols-1 border-t border-border">
+      <RailCard title="他の探し方">
+        <nav aria-label="他の探し方" className="-mx-2 flex flex-col">
           {OTHER_ENTRY_POINTS.map((entry) => (
-            <Link
-              key={entry.href}
-              href={entry.href}
-              className="group flex min-h-10 items-center gap-2 border-b border-border px-2 py-1.5 text-sm font-medium transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-            >
-              <span className="min-w-0 flex-1 group-hover:text-primary">
-                {entry.label}
-              </span>
-              <ChevronRight className="size-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-            </Link>
+            <RailNavRow key={entry.href} href={entry.href}>
+              {entry.label}
+            </RailNavRow>
           ))}
         </nav>
-      </div>
-    </aside>
+      </RailCard>
+    </RailStack>
   );
 
   return (

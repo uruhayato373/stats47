@@ -86,7 +86,7 @@ export function GeoSourceNavigationList({
                       href={item.href}
                       prefetch={false}
                       aria-current={
-                        item.dataId === currentDataId ? 'true' : undefined
+                        item.dataId === currentDataId ? 'page' : undefined
                       }
                       data-geo-source={item.dataId}
                       className={cn(

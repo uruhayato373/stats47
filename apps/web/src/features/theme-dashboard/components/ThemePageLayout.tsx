@@ -20,8 +20,10 @@ import {
 import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
+import { RailStack } from '@/components/rail';
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
+import { RailCard, RailNavRow } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -278,79 +280,74 @@ export async function ThemePageLayout({
             </div>
           </div>
 
-          <nav
-            aria-label="このページの内容"
-            className={`mb-4 border-b border-border pb-3 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
-          >
-            <div className="flex items-center gap-x-5 gap-y-2 overflow-x-auto">
-              <span className="shrink-0 text-xs font-medium text-muted-foreground">
-                ページ内
-              </span>
-              <ThemeChapterLinks
-                links={pageLinks}
-                themeKey={theme.themeKey}
-                className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-              />
-            </div>
-            {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
-              <details className="group mt-1 border-t border-border pt-1">
-                <summary className="min-h-10 cursor-pointer py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                  <span className="group-open:hidden">
-                    全指標・出典調査を見る
-                  </span>
-                  <span className="hidden group-open:inline">
-                    全指標・出典調査を閉じる
-                  </span>
-                </summary>
-                <div className="grid gap-5 pb-2 sm:grid-cols-2">
-                  {themeMetrics.length > 0 && (
-                    <div>
-                      <p className="text-sm font-semibold text-muted-foreground">
-                        全指標（{themeMetrics.length}）
-                      </p>
-                      <ul className="mt-2 space-y-1">
-                        {themeMetrics.map((metric) => (
-                          <li key={metric.rankingKey}>
-                            <Link
+          <div className={`mb-4 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
+            <RailStack>
+              <RailCard title="ページ内" bodyClassName="px-4 pb-3 pt-0">
+                <nav
+                  aria-label="このページの内容"
+                  className="flex items-center gap-x-5 gap-y-2 overflow-x-auto"
+                >
+                  <ThemeChapterLinks
+                    links={pageLinks}
+                    themeKey={theme.themeKey}
+                    className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                  />
+                </nav>
+              </RailCard>
+
+              {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
+                <RailCard title="全指標・出典調査" collapsible bodyClassName="p-0">
+                  <div className="grid gap-5 px-4 pb-3 sm:grid-cols-2">
+                    {themeMetrics.length > 0 && (
+                      <div>
+                        <p className="pt-3 text-sm font-semibold text-muted-foreground">
+                          全指標（{themeMetrics.length}）
+                        </p>
+                        <nav aria-label="このテーマの全指標（モバイル）">
+                          {themeMetrics.map((metric) => (
+                            <RailNavRow
+                              key={metric.rankingKey}
                               href={`/ranking/${metric.rankingKey}`}
-                              className="block py-1 text-sm hover:text-primary hover:underline"
+                              chevron={false}
+                              className="px-0"
                             >
                               {metric.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-sm font-semibold text-muted-foreground">
-                      出典調査
-                    </p>
-                    <Link
-                      href="/survey"
-                      className="mt-1 inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                    >
-                      調査一覧へ
-                    </Link>
-                    {themeSurveys.length > 0 && (
-                      <ul className="mt-2 space-y-1">
-                        {themeSurveys.map((survey) => (
-                          <li key={survey.id}>
-                            <Link
+                            </RailNavRow>
+                          ))}
+                        </nav>
+                      </div>
+                    )}
+                    <div>
+                      <p className="pt-3 text-sm font-semibold text-muted-foreground">
+                        出典調査
+                      </p>
+                      <RailNavRow
+                        href="/survey"
+                        chevron={false}
+                        className="px-0 font-medium"
+                      >
+                        調査一覧へ
+                      </RailNavRow>
+                      {themeSurveys.length > 0 && (
+                        <nav aria-label="このテーマの出典調査（モバイル）">
+                          {themeSurveys.map((survey) => (
+                            <RailNavRow
+                              key={survey.id}
                               href={`/survey/${survey.id}`}
-                              className="block py-1 text-sm hover:text-primary hover:underline"
+                              chevron={false}
+                              className="px-0"
                             >
                               {survey.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                            </RailNavRow>
+                          ))}
+                        </nav>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </details>
-            )}
-          </nav>
+                </RailCard>
+              )}
+            </RailStack>
+          </div>
 
           {/* エリアページ経由時の視点バナー */}
           {areaContext && (

@@ -6,6 +6,8 @@
  * ## layout の使い方
  * - "single"（デフォルト）: 上位N件 → セパレーター → 下位N件 を縦1列で描画。viewBox 幅 680。
  * - "columns": セパレーター位置で分割し、上位を左カラム・下位を右カラムに並列表示。viewBox 幅 960。
+ * - "mobile": ブログ／note 本文向けに上位・下位を縦積み表示。viewBox 640×960。
+ * - "portrait": Instagram 向けの4:5縦長表示。viewBox 1080×1350。
  *
  * ## セパレーターの使い方
  * isSeparator: true のアイテムを挿入すると、"single" では破線と「…中略…」を描画、
@@ -64,16 +66,17 @@ export interface BarChartOptions {
    * レイアウト。デフォルト: "single"。
    * - "single": セパレーターを中略行として縦1列表示（viewBox 幅 680）
    * - "columns": 上位/下位を左右2列のカード型で表示（横長・ブログ本文 + X 向け。viewBox 幅 960）
+   * - "mobile": 上位→下位を縦1列表示（ブログ／note本文向け。640×960）
    * - "portrait": 上位→下位を縦1列スタックのカード型で表示（縦長 4:5・Instagram 向け。1080×1350）
    */
-  layout?: "single" | "columns" | "portrait";
+  layout?: "single" | "columns" | "mobile" | "portrait";
   /** "columns" 右カラム（下位/少ない側）のカラーテーマ。デフォルト "blue"。 */
   rightPalette?: PaletteName;
   /** "columns" 左カラムのヘッダーラベル。デフォルト "上位"。 */
   highLabel?: string;
   /** "columns" 右カラムのヘッダーラベル。デフォルト "下位"。 */
   lowLabel?: string;
-  /** カード型(columns/portrait)の値バーを表示するか。既定 true。符号付き値を数値カードだけで比較するときは false。 */
+  /** カード型(columns/mobile/portrait)の値バーを表示するか。既定 true。符号付き値を数値カードだけで比較するときは false。 */
   showBars?: boolean;
   /**
    * X 軸の起点値。デフォルト: 0。"single" レイアウトのみ対応。
@@ -330,6 +333,128 @@ function fitFontSize(text: string, availW: number, maxF: number, minF: number): 
   return Math.max(minF, Math.min(maxF, Math.floor(availW / units)));
 }
 
+// ---------- "mobile"（ブログ／note 本文向け縦長）レイアウト ----------
+// 390px 幅で表示したときも主要ラベルが約13pxを保つよう、Instagram 用とは別キャンバスにする。
+const MOBILE_W = 640;
+const MOBILE_H = 960;
+const MOBILE_PAD = 24;
+const MOBILE_CONTENT_W = MOBILE_W - MOBILE_PAD * 2;
+const MOBILE_BAR_AREA_W = 400;
+const MOBILE_HEADER_H = 44;
+const MOBILE_SECTION_GAP = 20;
+const MOBILE_HEADER_ROW_GAP = 10;
+const MOBILE_ROW_GAP = 8;
+const MOBILE_ROW_H = 58;
+const MOBILE_TITLE_BOTTOM = 110;
+const MOBILE_FOOTER_TOP = 930;
+
+function renderMobileSection(
+  items: BarItem[],
+  topY: number,
+  theme: CardTheme,
+  headerLabel: string,
+  toBarW: (v: number) => number,
+  unit: string,
+  precision: number,
+  showBars: boolean,
+  highlightName?: string,
+): string {
+  const x = MOBILE_PAD;
+  const header = [
+    `  <rect x="${x}" y="${topY}" width="${MOBILE_CONTENT_W}" height="${MOBILE_HEADER_H}" rx="8" fill="${theme.header}"/>`,
+    `  <text x="${x + 20}" y="${topY + 29}" font-size="20" font-weight="bold" fill="#ffffff">${headerLabel}</text>`,
+  ].join("\n");
+  const rowsTop = topY + MOBILE_HEADER_H + MOBILE_HEADER_ROW_GAP;
+  const rows = items.map((d, i) => {
+    const y = rowsTop + i * (MOBILE_ROW_H + MOBILE_ROW_GAP);
+    const cardBg = i % 2 === 0 ? theme.cardAlt : "#ffffff";
+    const rank = d.rank ?? i + 1;
+    const name = d.name ?? d.label;
+    const valStr = unit
+      ? `${formatValueLabel(d.value, precision)} ${unit}`
+      : formatValueLabel(d.value, precision);
+    const badgeCx = x + 30;
+    const badgeCy = y + 27;
+    const barW = toBarW(d.value);
+    const highlightAttrs = isHighlightedItem(d, highlightName)
+      ? ` stroke="${HIGHLIGHT_STROKE}" stroke-width="${HIGHLIGHT_STROKE_WIDTH}"`
+      : "";
+    return [
+      `  <rect x="${x}" y="${y}" width="${MOBILE_CONTENT_W}" height="${MOBILE_ROW_H}" rx="8" fill="${cardBg}"${highlightAttrs}/>` ,
+      `  <circle cx="${badgeCx}" cy="${badgeCy}" r="18" fill="${theme.header}"/>`,
+      `  <text x="${badgeCx}" y="${badgeCy + 7}" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">${rank}</text>`,
+      `  <text x="${x + 64}" y="${y + 34}" font-size="24" font-weight="bold" fill="#1f2937">${name}</text>`,
+      `  <text x="${x + MOBILE_CONTENT_W - 18}" y="${y + 34}" text-anchor="end" font-size="22" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
+      ...(showBars
+        ? [`  <rect x="${x + 64}" y="${y + 43}" width="${barW}" height="10" rx="4" fill="${theme.bar}" opacity="0.85"/>`]
+        : []),
+    ].join("\n");
+  }).join("\n");
+  return `${header}\n${rows}`;
+}
+
+function renderMobileLayout(
+  topItems: BarItem[],
+  bottomItems: BarItem[],
+  options: BarChartOptions,
+): string {
+  const {
+    title,
+    subtitle,
+    source,
+    unit = "",
+    ariaLabel = title,
+    palette = "red",
+    rightPalette = "blue",
+    highLabel = "上位",
+    lowLabel = "下位",
+    highlightName,
+  } = options;
+  const topTheme = CARD_THEMES[palette] ?? CARD_THEMES.red;
+  const bottomTheme = CARD_THEMES[rightPalette] ?? CARD_THEMES.blue;
+  const allValues = [...topItems, ...bottomItems].map((d) => d.value);
+  const globalMax = Math.max(...allValues, 1);
+  const precision = resolveValuePrecision(allValues);
+  const toBarW = (v: number) =>
+    Math.max(0, Math.round((Math.max(0, v) / globalMax) * MOBILE_BAR_AREA_W * 1000) / 1000);
+  const sectionHeight = (count: number) =>
+    MOBILE_HEADER_H + MOBILE_HEADER_ROW_GAP + count * MOBILE_ROW_H + Math.max(0, count - 1) * MOBILE_ROW_GAP;
+  const topHeight = sectionHeight(topItems.length);
+  const totalContentHeight = topHeight + MOBILE_SECTION_GAP + sectionHeight(bottomItems.length);
+  const availableHeight = MOBILE_FOOTER_TOP - MOBILE_TITLE_BOTTOM;
+  const startY = MOBILE_TITLE_BOTTOM + Math.max(0, Math.floor((availableHeight - totalContentHeight) / 2));
+  const showBars = options.showBars ?? true;
+  const topSection = renderMobileSection(
+    topItems, startY, topTheme, `${highLabel}${topItems.length}`, toBarW, unit, precision, showBars, highlightName,
+  );
+  const bottomSection = renderMobileSection(
+    bottomItems,
+    startY + topHeight + MOBILE_SECTION_GAP,
+    bottomTheme,
+    `${lowLabel}${bottomItems.length}`,
+    toBarW,
+    unit,
+    precision,
+    showBars,
+    highlightName,
+  );
+  const titleFont = fitFontSize(title, MOBILE_W - MOBILE_PAD * 2, 28, 20);
+  const titleY = subtitle ? 42 : 58;
+  const subtitleSvg = subtitle
+    ? `\n  <text x="${MOBILE_W / 2}" y="${titleY + titleFont + 8}" text-anchor="middle" font-size="20" class="svg-tick">${subtitle}</text>`
+    : "";
+  const sourceSvg = source
+    ? `\n  <text x="${MOBILE_W - MOBILE_PAD}" y="${MOBILE_H - 16}" text-anchor="end" font-size="20" class="svg-tick">出典: ${source}</text>`
+    : "";
+  return `<svg width="${MOBILE_W}" height="${MOBILE_H}" viewBox="0 0 ${MOBILE_W} ${MOBILE_H}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
+${svgThemeStyle()}
+  <rect width="${MOBILE_W}" height="${MOBILE_H}" class="svg-bg"/>
+  <text x="${MOBILE_W / 2}" y="${titleY}" text-anchor="middle" font-size="${titleFont}" font-weight="bold" class="svg-title">${title}</text>${subtitleSvg}
+${topSection}
+${bottomSection}${sourceSvg}
+</svg>`;
+}
+
 // ---------- "portrait"（縦長スタック・Instagram 向け 4:5）レイアウト ----------
 const PORT_W = 1080;       // viewBox 幅（1:1.25 = 4:5 縦長）
 const PORT_H = 1350;       // viewBox 高さ
@@ -469,13 +594,13 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
   const layout = options.layout ?? "single";
 
   // ---------- "columns" / "portrait" レイアウト（上位/下位を分割） ----------
-  if (layout === "columns" || layout === "portrait") {
+  if (layout === "columns" || layout === "mobile" || layout === "portrait") {
     const sepIdx = items.findIndex((d) => d.isSeparator);
     const topItems = sepIdx >= 0 ? items.slice(0, sepIdx) : items.slice(0, Math.ceil(items.length / 2));
     const bottomItems = sepIdx >= 0 ? items.slice(sepIdx + 1) : items.slice(Math.ceil(items.length / 2));
-    return layout === "portrait"
-      ? renderPortraitLayout(topItems, bottomItems, options)
-      : renderColumnsLayout(topItems, bottomItems, options);
+    if (layout === "portrait") return renderPortraitLayout(topItems, bottomItems, options);
+    if (layout === "mobile") return renderMobileLayout(topItems, bottomItems, options);
+    return renderColumnsLayout(topItems, bottomItems, options);
   }
 
   // ---------- "single" レイアウト ----------

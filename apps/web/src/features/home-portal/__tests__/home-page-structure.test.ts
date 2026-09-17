@@ -78,7 +78,10 @@ describe('home page structure (portal)', () => {
     expect(PAGE).toContain('const leftRail = (');
     expect(PAGE).toContain('<PageShell leftRail={leftRail}');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
-    expect(PAGE).toContain('<PortalCategoryGrid variant="sidebar" />');
+    expect(PAGE).toContain('<RailStack>');
+    expect(PAGE).toContain('<RailCategoryList');
+    expect(PAGE).toContain('trackingSurface="home_category"');
+    expect(PAGE).not.toContain('<PortalCategoryGrid');
     expect(PAGE).toContain('showHeader={false} embedded');
     expect(PAGE).not.toContain('overflow-y-auto');
     expect(PAGE).not.toContain('lg:max-h-');

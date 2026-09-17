@@ -30,7 +30,7 @@ import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
 const RUN_DATE = new Date().toISOString().slice(0, 10);
-const REPORT_PATH = join(ROOT, ".claude/state/metrics", `note-navigation-pilot-${RUN_DATE}.json`);
+const REPORT_PATH = join(ROOT, ".claude/state/metrics/note/navigation", `note-navigation-pilot-${RUN_DATE}.json`);
 const METRICS_PATH = join(ROOT, ".claude/state/metrics/note", `note-${RUN_DATE}.json`);
 const CIRCULATION_AUDIT_PATH = join(ROOT, ".claude/state/metrics", `note-circulation-audit-${RUN_DATE}.json`);
 

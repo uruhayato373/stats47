@@ -1,25 +1,21 @@
 {
   "schemaVersion": 1,
-  "id": "35061903935-1",
+  "id": "35282298612-1",
   "status": "no-change",
   "keyword": "外国人",
   "targetPath": "/blog/foreign-residents-diversity-map",
-  "needs": "「外国人」という単語だけで検索する人は、辞書的な定義、在留資格・雇用手続き、生活支援情報のいずれかを探している。都道府県別の人口比率ランキングを探している人はごく一部で、通常は「外国人 比率」「外国人 多い県」のような複合語を使う(実際gsc.jsonにも別クエリとして存在)。",
-  "gap": "WebSearchで「外国人」を検索した実際の上位3件(kotobank・moj.go.jp・mhlw.go.jp)はいずれも定義/生活支援/雇用手続き情報で、都道府県ランキングを提供するページは含まれていなかった。対象ページはGSCで平均掲載順位2.67(直近28日は2.98)・表示回数853・クリック50(CTR約5.9%)と好順位ながら低CTRだが、これは真の対抗ページ(kotobank等)と直接競合した結果ではなく、単語単体の広すぎる検索意図と記事内容(比率ランキング)がそもそも一致していないためで、タイトル・meta・導入文の書き換えでは埋まらない不足である。",
-  "done": "対象記事のtitle/description/導入文は既に「外国人比率は東京3.4% vs 秋田0.4%で9倍差」という長尾意図(比率・都道府県ランキング)に正確に最適化されており、これは同じページ内で既に表示回数を持つ「外国人 多い県」「外国人 比率」等の複合語クエリに対して適切。単語単体「外国人」向けに定義・手続き寄りの文言を混ぜると、既に機能している長尾クエリの意図適合を薄める副作用の方が大きいため変更しない。selected.editableFileもnull(パイプライン側で安全な置換先ファイルが解決されていない)であり、この観点からも自動パッチは対象外。",
-  "method": "content",
+  "needs": "単語だけの検索「外国人」は多義的。想定される代表的ニーズは(a)在留外国人の全国統計を知りたい人、(b)在日外国人自身が生活手続きを調べたい人、(c)辞書的な語義や求人を探す人で、都道府県別の分布差や製造業県との相関という統計分析を明確に求める検索とは限らない。",
+  "gap": "上位競合は①出入国在留管理庁の公式統計発表(全国集計・国籍別・在留資格別)、②同庁の外国人向け多言語生活支援ポータル、③辞書・求人・ニュース検索で、いずれも本ページの「都道府県別の分布差9倍・製造業県が上位」という分析角度とは競合していない。本ページのタイトル・ディスクリプションは既に核心数値(東京3.4% vs 秋田0.4%、9倍差、製造業県上位の理由)を明示しており、統計分析ニーズに対する回答は具体的。CTR4.7%は事実だが、裸の1語検索の多義性が原因である可能性を排除できず、タイトル/ディスクリプション不足と断定する実証(A/B比較や意図別クリックログ)がない。",
+  "done": "小さな文言修正で埋められる特定の不足が見当たらないため変更を提案しない。裸ターム「外国人」全体をカバーしようとタイトル/ディスクリプションを広げると、実際のコンテンツ(都道府県別統計分析)と見せ方が一致しなくなり、CLAUDE.mdの「順位のために文章を増やさない」に反する。CTR低下の原因を検証するなら、GSCのquery×deviceやユーザーの実クリック語(この裸キーワードの周辺クエリ群)を別途分析すべきで、今回のtitle/description差し替えでは対応できない。",
+  "method": "description",
   "competitors": [
     {
-      "url": "https://kotobank.jp/word/%E5%A4%96%E5%9B%BD%E4%BA%BA-42384",
-      "findings": "「外国人」の辞書的定義・法的地位・語源解説のみ。統計データやランキングは一切含まれず、対象ページの比率ランキング意図とは無関係。"
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00057.html",
+      "findings": "出入国在留管理庁の公式統計発表。在留外国人数395万6,619人(前年比5.0%増)、性別・国籍別トップ10・在留資格別・都道府県別分布(東京都19.6%最多)を全国集計レベルで提供。政策立案者・研究者・ジャーナリスト向け。都道府県間の比率格差(9倍差)や製造業との相関という深掘り分析はなく、本ページと直接競合しない。"
     },
     {
       "url": "https://www.moj.go.jp/isa/support/portal/index.html",
-      "findings": "出入国在留管理庁の生活支援ポータル。在留手続き・生活ガイドブック(19言語)・相談窓口案内が中心で、統計ランキングは提供していない。"
-    },
-    {
-      "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/jigyounushi/page11.html",
-      "findings": "厚労省の外国人雇用手続きページ。事業主向けの在留カード確認・届出義務など実務ガイドで、都道府県別データは扱っていない。"
+      "findings": "外国人生活支援ポータル。在日外国人自身が生活・就労・子育て・税務等の手続きを調べるための多言語(19言語)ガイドブック・相談窓口検索。統計分析ではなく生活情報ハブであり、検索意図が本ページ(統計比較)とは根本的に異なる。"
     }
   ],
   "patches": [],
@@ -27,18 +23,14 @@
     "targetPage": {
       "url": "https://stats47.jp/blog/foreign-residents-diversity-map",
       "status": 200,
-      "fetchedAt": "2026-09-16T06:02:59.159Z",
-      "inputHash": "a49fd7ded6168eb146416c93a7ba140bdc9a0cf874ea473e41249c6238977a22",
+      "fetchedAt": "2026-09-17T22:31:08.726Z",
+      "inputHash": "443c8d2e5a562ffb5ffaea185aeb04a51ee92f6b0814d1b8951ec48d4d5af5fd",
       "htmlFile": ".local/seo-rank-watch/target-page.html",
-      "htmlSha256": "6775aa51d54dca6de7e778786bedfadf487b3b33c6fe93d5d05745ed5277937f",
+      "htmlSha256": "ceaa18b988c8331337b56dd5307319acf302e4ba827c2b9c17f13743df200e98",
       "textFile": ".local/seo-rank-watch/target-page.txt",
       "textSha256": "faa276b2753a6851ec60d14e77a5ed658ae8a6910e140020a2f816c107025af0"
     },
     "toolCalls": [
-      {
-        "name": "WebSearch",
-        "target": "外国人 比率 都道府県"
-      },
       {
         "name": "WebSearch",
         "target": "外国人"
@@ -49,20 +41,16 @@
       },
       {
         "name": "WebFetch",
-        "target": "https://kotobank.jp/word/%E5%A4%96%E5%9B%BD%E4%BA%BA-42384"
+        "target": "https://www.moj.go.jp/isa/publications/press/13_00057.html"
       },
       {
         "name": "WebFetch",
         "target": "https://www.moj.go.jp/isa/support/portal/index.html"
-      },
-      {
-        "name": "WebFetch",
-        "target": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/jigyounushi/page11.html"
       }
     ]
   },
-  "selectedAt": "2026-09-16",
-  "inputHash": "a49fd7ded6168eb146416c93a7ba140bdc9a0cf874ea473e41249c6238977a22",
+  "selectedAt": "2026-09-18",
+  "inputHash": "443c8d2e5a562ffb5ffaea185aeb04a51ee92f6b0814d1b8951ec48d4d5af5fd",
   "methods": [],
   "files": []
 }

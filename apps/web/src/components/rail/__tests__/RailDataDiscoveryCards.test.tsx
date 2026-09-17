@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { RailDataDiscoveryCards } from '../RailDataDiscoveryCards';
@@ -14,6 +14,7 @@ describe('RailDataDiscoveryCards', () => {
         categories={[{ categoryKey: 'population', categoryName: '人口・世帯' }]}
         themes={[{ themeKey: 'population-dynamics', title: '人口動態' }]}
         prefectures={[{ prefCode: '13000', prefName: '東京都' }]}
+        trackingSurface="blog_sidebar"
       />
     );
 
@@ -26,5 +27,27 @@ describe('RailDataDiscoveryCards', () => {
     expect(
       screen.getByRole('region', { name: '都道府県から探す' })
     ).toBeInTheDocument();
+  });
+
+  it('カテゴリ region の中身は共有 RailCategoryList の nav であり、2列 grid ではない', () => {
+    const { container } = render(
+      <RailDataDiscoveryCards
+        categories={[{ categoryKey: 'population', categoryName: '人口・世帯' }]}
+        themes={[{ themeKey: 'population-dynamics', title: '人口動態' }]}
+        prefectures={[{ prefCode: '13000', prefName: '東京都' }]}
+        trackingSurface="blog_sidebar"
+      />
+    );
+
+    const categoryRegion = screen.getByRole('region', {
+      name: 'カテゴリから探す',
+    });
+    const categoryNav = within(categoryRegion).getByRole('navigation', {
+      name: 'カテゴリから探す',
+    });
+    expect(
+      within(categoryNav).getByRole('link', { name: /人口・世帯/ })
+    ).toHaveAttribute('href', '/category/population');
+    expect(container.innerHTML).not.toMatch(/grid-cols-2/);
   });
 });

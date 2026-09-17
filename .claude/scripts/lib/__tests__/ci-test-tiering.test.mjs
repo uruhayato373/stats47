@@ -75,9 +75,10 @@ test('PRは差分分類、週次は全数、ローカルcommitは全体型検査
   assert.match(pr, /name: pr-web-next-build/);
   assert.equal(
     (pr.match(/actions\/download-artifact@/g) ?? []).length,
-    2,
-    'E2Eとpage-qualityは同じbuild artifactを再利用する',
+    1,
+    '代表E2Eはbuild artifactを再利用する (page-quality は 2026-09-18 に PR 必須から外した)',
   );
+  assert.doesNotMatch(pr, /^  page-quality:$/m, 'page-quality は PR 必須 gate に戻さない (CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01)');
   assert.match(pr, /tests\/e2e\/seo\/structured-data\.spec\.ts/);
   assert.doesNotMatch(pr, /contains\(needs\.\*\.result, 'skipped'\)/);
   assert.doesNotMatch(pr, /npm run test:coverage -w apps\/web/);

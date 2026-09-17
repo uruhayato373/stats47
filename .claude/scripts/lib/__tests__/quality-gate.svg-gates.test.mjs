@@ -79,6 +79,10 @@ function makeFixture(mutate = () => {}) {
     article: GOOD_ARTICLE,
     files: {
       'sample-ranking.svg': GOOD_SVG,
+      'sample-ranking-mobile.svg':
+        '<svg viewBox="0 0 640 960" width="640" height="960">' +
+        '<style>@media (prefers-color-scheme:dark){.svg-bg{fill:#0f172a}}</style>' +
+        '<text font-size="20">愛知</text></svg>',
       'sample-ranking.json': JSON.stringify([
         {
           areaName: '愛知',
@@ -124,6 +128,7 @@ function convertToScatterFixture(f, svg = GOOD_SCATTER_SVG) {
   });
   f.files['sample-scatter.source.json'] = f.files['sample-ranking.source.json'];
   delete f.files['sample-ranking.svg'];
+  delete f.files['sample-ranking-mobile.svg'];
   delete f.files['sample-ranking.json'];
   delete f.files['sample-ranking.source.json'];
 }

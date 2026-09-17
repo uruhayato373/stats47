@@ -43,6 +43,11 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^note-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 4,
   },
+  "note-navigation": {
+    directory: ".claude/state/metrics/note/navigation",
+    pattern: /^note-navigation-pilot-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 8,
+  },
   releases: {
     directory: ".claude/state/metrics/releases",
     pattern: /^\d{4}-\d{2}-\d{2}-.+\.json$/,

@@ -1,4 +1,4 @@
-import { HOME_PORTAL_USE_CASES, listCategories } from '@stats47/data-configs';
+import { HOME_PORTAL_USE_CASES } from '@stats47/data-configs';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 
@@ -8,30 +8,7 @@ vi.mock('@/lib/analytics/events', () => ({
 }));
 
 import { PortalBlogCard } from '../PortalBlogCard';
-import { PortalCategoryGrid } from '../PortalCategoryGrid';
 import { PortalUseCaseGrid } from '../PortalUseCaseGrid';
-
-describe('PortalCategoryGrid', () => {
-  it('全カテゴリを /category/<key> リンクで描画する', () => {
-    render(<PortalCategoryGrid />);
-    const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(listCategories().length + 1);
-    const population = screen.getByRole('link', { name: /人口・世帯/ });
-    expect(population).toHaveAttribute('href', '/category/population');
-  });
-
-  it('カテゴリクリックで home_category を計測する', () => {
-    navMock.mockClear();
-    render(<PortalCategoryGrid />);
-    fireEvent.click(screen.getByRole('link', { name: /人口・世帯/ }));
-    expect(navMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        surface: 'home_category',
-        href: '/category/population',
-      })
-    );
-  });
-});
 
 describe('PortalUseCaseGrid', () => {
   it('active な use case を /themes/<key> リンクで描画する', () => {

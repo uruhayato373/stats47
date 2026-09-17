@@ -15,10 +15,14 @@ paths:
 
 ## 2段階の検査
 
-1. **変更時 (軽量)**: `npm run page-quality:check -- --base-url <url> --base <ref>` が git diff から
+1. **変更時 (軽量・明示実行)**: `npm run page-quality:check -- --base-url <url> --base <ref>` が git diff から
    影響テンプレートを判定し (`templates.ts` の `affectedTemplates()`)、各テンプレート代表URL 1件だけを検査する。
-   PR CI (`pr-quality-check.yml` の `page-quality` job) がローカルbuildを起動して実行する。
    共通レイアウト・広告・データ取得層 (`SHARED_PATH_RULES`) を変更した場合は全テンプレートを検査する。
+   リリース前は `npm run check:release-local` (production build 1 回を代表 E2E と共有) で実行する。
+   **PR CI の必須 gate ではない (2026-09-18 に外した)**: CI 内で `next start` して本番 R2 を読むため結果が
+   PR の差分と独立に変わり (本番データの変化、`SITEWIDE-DUPLICATE-LINK-RATIO-01` のようなサイト横断の
+   既知違反が代表 URL に乗る)、PR #974 で 5 連続失敗・#977 でも赤になった。PR 必須へ戻すのは、R2 を固定
+   fixture に差し替えて決定的にできたときだけ (`CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`)。
 2. **週次 (全件)**: `npm run page-quality:audit-weekly` が `sitemap.xml` から公開対象URLを列挙し
    (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析だけを行う
    (ブラウザ計測はコストが見合わないため対象外)。`page-quality-audit-weekly.yml` が実行し、

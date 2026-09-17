@@ -10,9 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
-import { ChevronDown } from 'lucide-react';
 
-import { RailCard, SurfaceSection } from '@/components/surface';
+import { RailCard } from '@/components/surface';
 
 import { trackNavClick, type NavSurface } from '@/lib/analytics/events';
 
@@ -81,7 +80,7 @@ function PrefectureCardBody({
       {moreHref && moreLabel && (
         <Link
           href={moreHref}
-          className="mt-3 inline-flex text-xs font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="mt-3 inline-flex min-h-11 items-center text-xs font-medium text-primary hover:underline sm:min-h-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           onClick={() => safeTrack('area:all', moreHref, trackingSurface)}
         >
           {moreLabel}
@@ -109,25 +108,8 @@ export function RailPrefectureCard({
     />
   );
 
-  if (collapsible) {
-    return (
-      <SurfaceSection className="overflow-hidden p-0" aria-label={title}>
-        <details className="group">
-          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-medium text-muted-foreground [&::-webkit-details-marker]:hidden">
-            <h3>{title}</h3>
-            <ChevronDown
-              aria-hidden="true"
-              className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
-            />
-          </summary>
-          <div className="border-t border-border px-4 pb-4 pt-3">{body}</div>
-        </details>
-      </SurfaceSection>
-    );
-  }
-
   return (
-    <RailCard title={title} aria-label={title}>
+    <RailCard title={title} aria-label={title} collapsible={collapsible}>
       {body}
     </RailCard>
   );

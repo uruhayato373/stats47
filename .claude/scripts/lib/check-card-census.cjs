@@ -66,6 +66,9 @@ const BASELINE = new Set([
   // (h3 text-sm font-semibold / body p-4)。非チャートの本文カードが ChartPanel を借用したり
   // feature 内で SurfaceCard p-0 + 手書きヘッダを再実装するのを止めるための共有 composite。
   "SectionCard",
+  // 指標グループが 1 件のときの単票 (2026-09-17)。ChartPanel + ChartFooter ベースの theme-dashboard
+  // composite で、選択 UI を持たず MetricSwitcherPanel と同じ KPI・推移・出典を描く (件数規則は doc 04)。
+  "SingleMetricCard",
   "SurfaceCard",
   "SurfaceLinkCard",
   "SurveyCard",

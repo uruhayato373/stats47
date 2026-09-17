@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { FileText } from "lucide-react";
 
-import { RailCard, RailLinkItem, RailLinkList, SurfaceSection } from "@/components/surface";
+import { RailCard, RailLinkList, RailNavRow, SectionCard } from "@/components/surface";
 
 import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
 
@@ -46,50 +46,48 @@ export function SurveyTaxonomyCard({
 
   if (variant === "section") {
     return (
-      <SurfaceSection className="mt-8">
-        <div className="flex items-center gap-2">
-          <FileText className="h-4 w-4 text-muted-foreground" />
-          <h2 className="text-xl font-bold text-foreground">{title}</h2>
-        </div>
-        <div className="mt-3">
-          {description && (
-            <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
-          )}
-          <nav aria-label={title} className="flex flex-col gap-0.5">
-            {surveys.map((survey) => {
-              const href = `/survey/${survey.id}`;
-              return (
+      <SectionCard
+        title={title}
+        icon={<FileText className="h-4 w-4 text-muted-foreground" />}
+        className="mt-8"
+      >
+        {description && (
+          <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
+        )}
+        <nav aria-label={title} className="flex flex-col gap-0.5">
+          {surveys.map((survey) => {
+            const href = `/survey/${survey.id}`;
+            return (
+              <Link
+                key={survey.id}
+                href={href}
+                className="py-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                onClick={() => trackNavClick({ label: survey.id, href, surface })}
+              >
+                {survey.name}
+              </Link>
+            );
+          })}
+        </nav>
+        {relatedItems.length > 0 && (
+          <>
+            <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
+              同じ調査のランキング
+            </p>
+            <nav className="mt-1 flex flex-col gap-0.5">
+              {relatedItems.map((item) => (
                 <Link
-                  key={survey.id}
-                  href={href}
-                  className="py-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
-                  onClick={() => trackNavClick({ label: survey.id, href, surface })}
+                  key={item.rankingKey}
+                  href={`/ranking/${item.rankingKey}`}
+                  className="py-1 text-xs transition-colors hover:text-primary"
                 >
-                  {survey.name}
+                  {item.title}
                 </Link>
-              );
-            })}
-          </nav>
-          {relatedItems.length > 0 && (
-            <>
-              <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
-                同じ調査のランキング
-              </p>
-              <nav className="mt-1 flex flex-col gap-0.5">
-                {relatedItems.map((item) => (
-                  <Link
-                    key={item.rankingKey}
-                    href={`/ranking/${item.rankingKey}`}
-                    className="py-1 text-xs transition-colors hover:text-primary"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </nav>
-            </>
-          )}
-        </div>
-      </SurfaceSection>
+              ))}
+            </nav>
+          </>
+        )}
+      </SectionCard>
     );
   }
 
@@ -105,14 +103,15 @@ export function SurveyTaxonomyCard({
         {surveys.map((survey) => {
           const href = `/survey/${survey.id}`;
           return (
-            <RailLinkItem
+            <RailNavRow
               key={survey.id}
               href={href}
+              chevron={false}
               className="font-medium text-foreground"
               onClick={() => trackNavClick({ label: survey.id, href, surface })}
             >
               {survey.name}
-            </RailLinkItem>
+            </RailNavRow>
           );
         })}
       </RailLinkList>

@@ -134,6 +134,7 @@ export default function MunicipalitiesHubPage() {
             },
           ]}
           layout="list"
+          trackingSurface="municipalities_theme"
         />
       }
     />

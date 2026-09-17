@@ -16,7 +16,7 @@ paths:
 - **サイト全体ナビの PC 常設左サイドバーは廃止**。グローバルナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
   - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` / `ArticleShell` の `leftRail` に置いてよい。Theme はグループ別テーマリンク + 地域 + 全指標 + 出典調査、survey は調査一覧 + このページ + 代表ランキング + 関連分類、home / `/ranking` / `/category/*` はカテゴリ探索を置く。Theme の「テーマ」「出典調査」には、それぞれ `/themes`・`/survey` の上位ハブリンクを1件置き、狭幅代替 UI にも同じ出口を残す。テーマの地域は「比較単位（47都道府県 / 市区町村 / 日本）」と「表示する都道府県」を分け、広幅では左レール、992px 未満では本文上部へ置く。テーマの表示グループは navigation-only SSOT `THEME_NAV_GROUPS` で管理し、ranking category / ThemeCatalog taxonomy と混ぜない。現在テーマのグループだけ初期展開する。
   - 左レールは両 Shell とも**右レールと併用できない**。右レールが指定された場合は右を優先する。
-  - **全ページの左レールは共通境界 `992px` から出す**。992px 時も本文幅 656px を確保でき、1024px 未満になりやすいアプリ内ブラウザでも横幅を有効利用できる。列幅・gap・表示境界・自然スクロールは `LeftRailLayout` だけが持ち、Shell や feature に複製しない。右レールの `lg` / `xl` 境界は別契約として維持する。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
+  - **全ページの左レールは共通境界 `992px` から出す**。992px 時も本文幅 656px を確保でき、1024px 未満になりやすいアプリ内ブラウザでも横幅を有効利用できる。列幅・gap・表示境界・自然スクロールは `LeftRailLayout` だけが持ち、Shell や feature に複製しない。右レールの `lg` / `xl` 境界は別契約として維持する。境界は別だが、Surface・見出し・リンク行・余白の視覚契約は左右共通（正典 04「レール UI 契約」）。部品は `RailStack` / `RailCard` / `RailNavRow` / `RailCategoryList`。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
   - **992px 未満で操作ナビを隠す場合は、同等の操作を本文上部へ置く**。PageShell は `leftRailNarrowBehavior="hide"`、ArticleShell は feature の狭幅ナビを使い、どちらも代替 UI に `LEFT_RAIL_NARROW_ONLY_CLASS` を付ける。関連リンク型の PageShell 左レールは既定 `stack` で本文後へ積んでよい。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
 - **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
@@ -73,7 +73,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - **`@stats47/components` の shadcn ベースコンポーネント（① プリミティブ）を最優先で使う。**
   Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
 - **Card は基底（① `Card` / ② `SurfaceCard`）から作る。** feature 内に独自カード枠を新規定義しない（Card 乱立の解消は Phase 0-1）。
-- **カード内カードは禁止。** `SurfaceCard` / `SurfaceSection` / `SurfaceLinkCard` / `RailCard` / `ChartPanel` 等の外枠を相互にネストしない。外側を通常の `section` にするか、内側を border と shadow のない list / table / link row にする。`npm run design-system:check -w apps/web` の `no-nested-card-surfaces` が JSX 親子関係と `getSurfaceCardClassName` のネストを検査する。
+- **カード内カードは禁止。** `SurfaceCard` / `SurfaceSection` / `SurfaceLinkCard` / `RailCard` / `ChartPanel` 等の外枠を相互にネストしない。外側を通常の `section` にするか、内側を border と shadow のない list / table / link row にする。`npm run design-system:check -w apps/web` の `no-nested-card-surfaces` が JSX 親子関係と `getSurfaceCardClassName` のネストを検査する。レール契約の機械ゲート = `rail-*` rule（`rail-contract-audit.mjs`）。
 - **FAQ / 定義 / AI考察など本文の開閉 UI は `@/components/content` を再利用する。** 複数FAQ=`FaqSection`、単一本文=`ContentDisclosure`。feature 内の独自 Radix Accordion、`▼` / `▲` 文字、`text-lg` 見出しを追加しない。表示契約と機械ゲートの正典は `docs/01_技術設計/04_デザインシステム.md`。
 
 ## チャートコンポーネント（★新規追加前に必読）
@@ -108,6 +108,8 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 | ダッシュボードカードグリッド                      | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
 
 コンテナクエリのブレイクポイントは `tailwind.config.ts` でカスタム定義（`@sm: 480px`, `@md: 768px`, `@lg: 1024px`）。プラグインのデフォルト値とは異なるので注意。ビューポートブレイクポイントとコンテナクエリの混在は意図的な設計。カードグリッドをビューポートの `md:` に変えると右レールあり画面で幅不足になるため、必ずコンテナクエリを使うこと。
+
+選択 UI と集合（grid）の 0/1/2+ 件数規則は `docs/01_技術設計/04_デザインシステム.md`「選択 UI と集合レイアウトの件数規則」が正典。テーマ実装は `SingleMetricCard`（1 件）/ `MetricSwitcherPanel`（2 件以上）を使い分ける。
 
 ## ダッシュボードコンポーネント
 

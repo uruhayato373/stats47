@@ -290,7 +290,11 @@ export type NavSurface =
   // 市区町村ランキングの県内地図 (自治体クリック→市区町村ページ) / テーマ一覧カード
   // (2026-09-01 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
   | 'municipalities_map'
-  | 'municipalities_theme';
+  | 'municipalities_theme'
+  // レール UI 契約統一 (2026-09-17 値追加。登録済み dimension の値追加なので GA4 側の作業は不要):
+  // /ranking の左レールのカテゴリ導線 (従来は home_category に混入していた) / /geo の右レール
+  | 'ranking_category'
+  | 'geo_sidebar';
 
 export function trackNavClick(params: {
   label: string;

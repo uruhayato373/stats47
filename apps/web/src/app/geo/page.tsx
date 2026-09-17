@@ -5,9 +5,9 @@ import { ArrowRight, MapPin } from 'lucide-react';
 
 import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
-import { RailLinksCard } from '@/components/rail';
+import { RailLinksCard, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard, SurfaceLinkCard } from '@/components/surface';
+import { RailCard, SurfaceLinkCard } from '@/components/surface';
 
 import { GeoAnalysisCards } from '@/features/geo-analysis';
 
@@ -49,12 +49,14 @@ export default function GeoPage() {
   return (
     <PageShell
       rightRail={
-        <aside aria-label="地域分析の関連情報" className="space-y-5">
+        <RailStack>
           <div className="hidden xl:block">
             <CompareLink />
           </div>
           <RailLinksCard
             title="地域の背景を知る"
+            layout="list"
+            trackingSurface="geo_sidebar"
             items={[
               {
                 id: 'population',
@@ -67,6 +69,8 @@ export default function GeoPage() {
           />
           <RailLinksCard
             title="分析方法・出典"
+            layout="list"
+            trackingSurface="geo_sidebar"
             items={[
               {
                 id: 'method',
@@ -80,9 +84,8 @@ export default function GeoPage() {
               },
             ]}
           />
-          <SurfaceCard>
-            <h3 className="text-sm font-semibold">地域を詳しく調べるために</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          <RailCard title="地域を詳しく調べるために">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               地図で気になる場所を見つけたら、県別の集計や一次資料も確認できます。推計や距離条件を踏まえて読み進めてください。
             </p>
             <Link
@@ -91,8 +94,8 @@ export default function GeoPage() {
             >
               stats47について
             </Link>
-          </SurfaceCard>
-        </aside>
+          </RailCard>
+        </RailStack>
       }
     >
       <Breadcrumbs

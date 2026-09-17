@@ -4,6 +4,7 @@ import Link from "next/link";
 
 
 import { cn } from "@stats47/components";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 /* カード外枠はトークン解決に依存せず、サイト全体で明示的に角丸なし。 */
 const surfaceCardClass =
@@ -125,7 +126,16 @@ interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"sectio
   headerAction?: ReactNode;
   bodyClassName?: string;
   titleClassName?: string;
+  /**
+   * details/summary で本文を折りたたむ (狭幅で本文下へ積まれるレール用)。
+   * 見出しが summary になり、折りたたみ時の見た目も左右レールで共通になる。
+   */
+  collapsible?: boolean;
+  /** collapsible のときの初期状態 (既定: 閉) */
+  defaultOpen?: boolean;
 }
+
+const HEADER_CLASS = "flex items-center justify-between gap-3 border-b border-border px-4 py-3";
 
 function HeaderedSurfaceCard({
   variant,
@@ -136,38 +146,71 @@ function HeaderedSurfaceCard({
   className,
   bodyClassName,
   titleClassName,
+  collapsible = false,
+  defaultOpen = false,
   ...props
 }: HeaderedSurfaceCardProps) {
+  const heading = title ? (
+    <h3
+      className={cn(
+        variant === "rail"
+          ? "truncate text-sm font-medium text-muted-foreground"
+          : "text-sm font-semibold text-foreground",
+        titleClassName,
+      )}
+    >
+      {title}
+    </h3>
+  ) : null;
+  const body = (
+    <div
+      className={cn(
+        variant === "rail" ? "px-4 pb-4 pt-3" : "p-4",
+        bodyClassName,
+      )}
+    >
+      {children}
+    </div>
+  );
+
+  if (collapsible) {
+    return (
+      <SurfaceSection className={cn("overflow-hidden p-0", className)} {...props}>
+        <details className="group" open={defaultOpen || undefined}>
+          <summary
+            className={cn(
+              HEADER_CLASS,
+              "min-h-12 cursor-pointer list-none [&::-webkit-details-marker]:hidden",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+            )}
+          >
+            <div className="flex min-w-0 items-center gap-2">
+              {icon}
+              {heading}
+            </div>
+            <ChevronDown
+              aria-hidden="true"
+              className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
+            />
+          </summary>
+          {body}
+        </details>
+      </SurfaceSection>
+    );
+  }
+
   return (
     <SurfaceSection className={cn("p-0", className)} {...props}>
       {(title || icon || headerAction) && (
-        <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
+        <div className={HEADER_CLASS}>
           <div className="flex min-w-0 items-center gap-2">
             {icon}
-            {title && (
-              <h3
-                className={cn(
-                  variant === "rail"
-                    ? "truncate text-sm font-medium text-muted-foreground"
-                    : "text-sm font-semibold text-foreground",
-                  titleClassName,
-                )}
-              >
-                {title}
-              </h3>
-            )}
+            {heading}
           </div>
           {headerAction}
         </div>
       )}
-      <div
-        className={cn(
-          variant === "rail" ? "px-4 pb-4 pt-3" : "p-4",
-          bodyClassName,
-        )}
-      >
-        {children}
-      </div>
+      {body}
     </SurfaceSection>
   );
 }
@@ -179,8 +222,16 @@ interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title
   headerAction?: ReactNode;
   bodyClassName?: string;
   titleClassName?: string;
+  collapsible?: boolean;
+  defaultOpen?: boolean;
 }
 
+/**
+ * レール内の独立したまとまり 1 つ = RailCard 1 枚 (左右レール共通の Surface 契約)。
+ * 外枠 (bg-card / 全周 border / shadow-sm / rounded-none)、見出し、本文 padding、
+ * 折りたたみの見た目をここだけが持つ。レール側で独自の枠・背景・padding を足さない。
+ * 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」
+ */
 export function RailCard(props: RailCardProps) {
   return <HeaderedSurfaceCard variant="rail" {...props} />;
 }
@@ -209,24 +260,108 @@ export function RailLinkList({
   );
 }
 
-interface RailLinkItemProps extends ComponentPropsWithoutRef<typeof Link> {
-  children: ReactNode;
+export type RailNavRowDensity = "compact" | "default";
+
+/**
+ * レール内リンク行の共通 class。左右レール・カテゴリ導線・ページ内ナビが同じ行を使う。
+ *
+ * - 通常行は透明背景。hover と選択中 (aria-current / aria-pressed) だけ背景を変える
+ * - モバイルのタップ領域は 44px (`min-h-11`)。sm 以上では密度を上げる
+ * - active はカラーバー (inset shadow / border-l) ではなく `bg-accent font-semibold text-primary`
+ */
+export function railNavRowClassName({
+  density = "compact",
+  active = false,
+  className,
+}: {
+  density?: RailNavRowDensity;
+  active?: boolean;
+  className?: string;
+} = {}) {
+  return cn(
+    "group flex w-full items-center justify-between gap-2 px-2 text-left text-foreground transition-colors",
+    "hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+    density === "compact"
+      ? "min-h-11 py-1.5 text-sm sm:min-h-9"
+      : "min-h-11 py-2 text-[15px] sm:min-h-10",
+    active && "bg-accent font-semibold text-primary",
+    className,
+  );
 }
 
-export function RailLinkItem({
+interface RailNavRowProps extends Omit<ComponentPropsWithoutRef<typeof Link>, "children"> {
+  children: ReactNode;
+  density?: RailNavRowDensity;
+  /** 選択中 (現在ページ)。aria-current="page" と active 表示を同時に出す */
+  active?: boolean;
+  /** 右端に添える件数などの補助テキスト */
+  trailing?: ReactNode;
+  /** 右向き矢印を出す (既定: 出す) */
+  chevron?: boolean;
+}
+
+/** レール内のリンク行 1 本。`RailLinkList` / `RailCategoryList` の中で使う */
+export function RailNavRow({
   children,
   className,
+  density,
+  active = false,
+  trailing,
+  chevron = true,
   ...props
-}: RailLinkItemProps) {
+}: RailNavRowProps) {
   return (
     <Link
-      className={cn(
-        "group flex items-center py-1.5 text-sm transition-colors hover:text-primary",
-        className,
-      )}
+      aria-current={active ? "page" : undefined}
+      className={railNavRowClassName({ density, active, className })}
       {...props}
     >
-      {children}
+      <span className="min-w-0 flex-1 truncate">{children}</span>
+      {trailing !== undefined && trailing !== null && (
+        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+          {trailing}
+        </span>
+      )}
+      {chevron && (
+        <ChevronRight
+          aria-hidden="true"
+          className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+        />
+      )}
     </Link>
+  );
+}
+
+interface RailNavRowButtonProps extends ComponentPropsWithoutRef<"button"> {
+  children: ReactNode;
+  density?: RailNavRowDensity;
+  /** 押下状態 (フィルタなど)。aria-pressed と active 表示を同時に出す */
+  pressed?: boolean;
+  trailing?: ReactNode;
+}
+
+/** リンクではなく状態を切り替える行 (aria-pressed)。見た目は RailNavRow と同じ */
+export function RailNavRowButton({
+  children,
+  className,
+  density,
+  pressed = false,
+  trailing,
+  ...props
+}: RailNavRowButtonProps) {
+  return (
+    <button
+      type="button"
+      aria-pressed={pressed}
+      className={railNavRowClassName({ density, active: pressed, className })}
+      {...props}
+    >
+      <span className="min-w-0 flex-1 truncate">{children}</span>
+      {trailing !== undefined && trailing !== null && (
+        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+          {trailing}
+        </span>
+      )}
+    </button>
   );
 }

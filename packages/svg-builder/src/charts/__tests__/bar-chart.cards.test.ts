@@ -9,7 +9,7 @@ const items: BarItem[] = [
   { label: '秋田県', rank: 47, value: -41.59 },
 ];
 
-describe.each(['columns', 'portrait'] as const)('%s ranking cards', (layout) => {
+describe.each(['columns', 'mobile', 'portrait'] as const)('%s ranking cards', (layout) => {
   const options = { title: '将来人口増減率', unit: '％', layout };
   const valueBars = (svg: string) => svg.match(/<rect[^>]+opacity="0\.(?:8|85)"/g) ?? [];
 
@@ -31,5 +31,22 @@ describe.each(['columns', 'portrait'] as const)('%s ranking cards', (layout) => 
     const svg = generateBarChartSvg(positiveItems, options);
     expect(svg).toBe(generateBarChartSvg(positiveItems, { ...options, showBars: true }));
     expect(valueBars(svg)).toHaveLength(4);
+  });
+});
+
+describe('mobile editorial ranking cards', () => {
+  it('uses a narrow stacked canvas and readable text for article and note bodies', () => {
+    const svg = generateBarChartSvg(items, {
+      title: '将来人口増減率',
+      subtitle: '2025年',
+      source: '総務省',
+      unit: '％',
+      layout: 'mobile',
+    });
+
+    expect(svg).toContain('width="640" height="960" viewBox="0 0 640 960"');
+    expect(svg).toContain('font-size="24" font-weight="bold" fill="#1f2937">東京都</text>');
+    expect(svg).toContain('font-size="22" font-weight="700"');
+    expect(svg).toContain('font-size="20" class="svg-tick">出典: 総務省</text>');
   });
 });

@@ -79,6 +79,7 @@ export function BlogNavigationCards({
 
       <RailLinksCard
         title="人気のタグ"
+        layout="chips"
         items={popularTags.map((tag) => ({
           id: tag.tagKey,
           label: tag.tagKey,

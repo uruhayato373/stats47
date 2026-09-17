@@ -35,3 +35,27 @@ export interface MetricKpi {
   /** 選択中都道府県の値をまだ取得中 (都道府県選択時のみ意味を持つ) */
   isLoading: boolean;
 }
+
+/**
+ * 指標グループの件数契約 (2026-09-17)。
+ *
+ * 選択 UI は「有効な選択肢が 2 件以上」のときだけ意味を持つ。1 件のグループに
+ * チェックボックス・タブ・選択タイルを出すと、外せない checked 状態と見出しの重複だけが残る。
+ * `MetricSwitcherPanel` は `MultiMetricGroup` しか受け取らず、1 件は `SingleMetricCard` が描く。
+ * 判定は ThemeCatalog の定義件数ではなく、観測不足で落とした**後**の実件数で行う。
+ * 正典: docs/01_技術設計/04_デザインシステム.md「選択 UI と集合レイアウトの件数規則」
+ */
+export type SingleMetricGroup = [MetricKpi];
+export type MultiMetricGroup = [MetricKpi, MetricKpi, ...MetricKpi[]];
+
+export function isSingleMetricGroup(
+  metrics: MetricKpi[]
+): metrics is SingleMetricGroup {
+  return metrics.length === 1;
+}
+
+export function isMultiMetricGroup(
+  metrics: MetricKpi[]
+): metrics is MultiMetricGroup {
+  return metrics.length >= 2;
+}

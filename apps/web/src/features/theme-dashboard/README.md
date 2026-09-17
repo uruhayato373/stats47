@@ -84,6 +84,8 @@ The migration is specified in
 
 A group whose metrics are all covered by its chapter's selected-area charts renders values only; it does not fetch or repeat the same trend. Every value tile carries the observation year and raw unit. At most two distinct units may share the switcher's axes. A single-year result uses natural-height text or a dated comparison table; it never reserves an empty chart canvas. A multi-year companion keeps its history. Composition charts require common observed years and a common unit; missing segments do not become zero.
 
+Each metric group's panel is chosen by its post-filter surviving metric count, not the catalog's defined count (2026-09-17). A fixed-year comparison group always renders `FixedYearComparisonPanel` full-width. Otherwise a group with one surviving metric renders `SingleMetricCard` — no selection UI, no empty trend canvas, a `MiniLineChart` only when the selected prefecture has two or more distinct observed years. A group with two or more surviving metrics renders `MetricSwitcherPanel` with its checkbox/tab selection UI. `ThemeMetricsDashboard.renderPanelRuns` groups consecutive single-metric panels into a `data-theme-panel-grid="compact"` container-query grid (`grid grid-cols-1 gap-4 @md:grid-cols-2`) only when the run has two or more panels; a lone compact panel and the `#theme-charts` fallback chart grid follow the same 0/1/2+ rule.
+
 Regional scope and observed period appear next to each additional chart. Explicit national series are labeled in the legend even when a prefecture is selected. Arithmetic means describe the available prefectures rather than asserting that all 47 were observed.
 
 Navigation uses existing `nav_click` dimensions: `theme_section` (`theme-key:anchor`), `theme_region` (5-digit code or `all`), `theme_switcher` (destination theme key), alongside `theme_kpi_switcher` and `theme_evidence`. The weekly GA4 collector writes Japan-only rolling-28-day `pages-clean.csv` and `theme-navigation.csv`, each with `.meta.json` recording its period, country filter and fetch status. Failed metadata must block use of an older CSV. Recurring review and tasks remain in the theme portfolio state/backlog, not in this README.
@@ -100,7 +102,7 @@ Theme chart は複数指標の関係を読むための可視化であり、指�
 - footer は primary hub と補助2件までを表示する。全関連指標は左レール／狭幅の「全指標」で探索する。
 - `ChartPanel` は title を accessible name にした `section` とし、説明文を外しても領域名を失わない。
 
-契約は `validate:catalog`、transform tests、Theme UI contract tests が固定する。
+契約は `validate:catalog`、transform tests、Theme UI contract tests が固定する。件数分岐・compact grid・`#theme-charts` ガードは `components/__tests__/metrics-dashboard-switcher.test.tsx`、単一指標カードの選択 UI 不在・重複見出しなし・固定高枠なし・遅延取得は `components/__tests__/SingleMetricCard.test.tsx`、全テーマ×カタログの件数別振り分けは `components/__tests__/all-theme-panel-kinds.test.tsx` が固定する（再現: `cd apps/web && npx vitest run src/features/theme-dashboard`）。
 
 ## R2 Reflection Flow
 

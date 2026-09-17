@@ -31,6 +31,11 @@ describe('category page featured ranking cards', () => {
     expect(PAGE).toContain('const leftRail = (');
     expect(PAGE).toContain('<PageShell leftRail={leftRail}');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
+    expect(PAGE).toContain('<RailStack>');
+    expect(PAGE).toContain('<RailCategoryList');
+    expect(PAGE).toContain('trackingSurface="category_sidebar"');
+    expect(PAGE).not.toContain('<PortalCategoryGrid');
+    expect(PAGE).not.toContain('<aside');
     expect(PAGE).toContain('listArticlesByTagKey(blogTagKey, 8)');
     expect(PAGE).toContain('surface="category_blog"');
     expect(PAGE).toContain('title={`${category.categoryName}の新着ブログ`}');

@@ -35,7 +35,8 @@ const CONSTANTS_FILE = path.join(SRC_DIR, "lib/google-adsense/constants.ts");
 const RIGHT_RAIL_FILES = {
   articleShell: "apps/web/src/components/layout/ArticleShell.tsx",
   sharedWidgets: "apps/web/src/components/rail/RightRailWidgets.tsx",
-  areaProfile: "apps/web/src/features/area-profile/components/AreaProfileSidebar.tsx",
+  // area 右レールは page.tsx が RightRailWidgets.topWidgets を直接組む (AreaProfileSidebar は 2026-09-17 に廃止)。
+  areaProfile: "apps/web/src/app/areas/[areaCode]/page.tsx",
   ranking: "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
   blog: "apps/web/src/app/blog/[slug]/page.tsx",
   affiliateSlot: "apps/web/src/features/ads/components/AffiliateAdSlot.tsx",

@@ -10,7 +10,7 @@
 | 禁止                               | 理由                                                 | 代替                          |
 | ---------------------------------- | ---------------------------------------------------- | ----------------------------- |
 | `text-black`                       | 純黒はコントラストが強すぎて長時間の利用で目が疲れる | `text-slate-900`（#0f172a）   |
-| `bg-gray-300` 以上の暗い背景       | テキストのコントラスト確保が困難になる               | `bg-gray-50` 〜 `bg-gray-200` |
+| `bg-gray-300` 以上の暗い背景       | テキストのコントラスト確保が困難になる               | semantic token `bg-muted` / `bg-accent`（hover・選択中・補助要素のみ。正典 `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」） |
 | `bg-primary-400`（薄いアクセント） | CTAとして弱く、目立たない                            | `bg-primary-500`              |
 | `text-gray-400` for body text      | WCAG不適合（コントラスト比不足）                     | `text-body`（#3d4b5f）        |
 | `border-gray-100`                  | 薄すぎて境界が見えない                               | `border-slate-200`（#e2e8f0） |
@@ -67,7 +67,7 @@
 | カードへの個別角丸（`rounded-xl`/`rounded-2xl` 等） | フラット採用（`--radius:0`）。手動角丸は統一感を崩す | `rounded-none`（既定）。円形のみ `rounded-full`                                                               |
 | `shadow-lg` / `shadow-2xl`                          | 影が強すぎてノイズになる                             | `shadow-sm` 〜 `shadow-md`（オーバーレイ: `shadow-xl`）                                                       |
 | `py-0.5` for buttons                                | タップターゲットが小さすぎる                         | `h-8` 以上（S: `h-8` / M: `h-10` / L: `h-12`）                                                                |
-| `p-0` on cards                                      | コンテンツが窮屈になる                               | `p-5` 以上                                                                                                    |
+| `p-0` on cards                                      | コンテンツが窮屈になる                               | `RailCard` 既定 padding（`px-4 pb-4 pt-3`）。正典 `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」          |
 | `gap-0` between sections                            | セクションの区切りが不明瞭                           | `gap-6` 以上                                                                                                  |
 | `m-0` for page content                              | ページ端にコンテンツが張り付く                       | `px-6 py-8` 以上                                                                                              |
 | PC で左に**サイト全体ナビ**の常設サイドバーを置く   | 2026-06 廃止。ヘッダーナビと役割が重複               | PC=ヘッダーナビ（カテゴリはメガメニュー）/ モバイル=`MobileNavDrawer`（`w-72`）。**ページ内ナビの例外は下記** |

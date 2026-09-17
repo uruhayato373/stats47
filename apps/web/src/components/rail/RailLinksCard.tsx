@@ -3,10 +3,10 @@
 import Link from 'next/link';
 
 import { cn } from '@stats47/components';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
-import { RailCard, SurfaceSection } from '@/components/surface';
+import { RailCard, RailNavRow } from '@/components/surface';
 
 import { trackNavClick, type NavSurface } from '@/lib/analytics/events';
 
@@ -24,26 +24,34 @@ export interface RailLinksCardItem {
   };
 }
 
+/**
+ * - `chips`: タグ専用のピル (rounded-full)。カテゴリ導線には使わない (RailCategoryList を使う)
+ * - `list`: 透明背景のリンク行 (RailNavRow)。テーマ・目次・関連リンクなど
+ * - `media` / `ranked`: サムネイル付き・順位付きの記事行
+ */
+export type RailLinksCardLayout = 'chips' | 'list' | 'media' | 'ranked';
+
 interface RailLinksCardProps {
   title: string;
   items: readonly RailLinksCardItem[];
-  layout?: 'chips' | 'grid' | 'list' | 'media' | 'ranked';
+  layout?: RailLinksCardLayout;
   moreLink?: {
     href: string;
     label: string;
     trackingLabel?: string;
   };
-  trackingSurface?: NavSurface;
+  /** GA4 nav_surface。必須 (未指定だとクリックが計測されないまま静かに落ちる) */
+  trackingSurface: NavSurface;
+  /** 狭幅で本文下へ積まれるとき details/summary で畳む (見た目は RailCard 共通) */
   collapsible?: boolean;
+  /** chips を横スクロール 1 行にする (狭幅の本文上部など) */
   horizontalOnMobile?: boolean;
 }
 
 function trackLink(
   item: Pick<RailLinksCardItem, 'href' | 'label' | 'trackingLabel'>,
-  surface?: NavSurface
+  surface: NavSurface
 ) {
-  if (!surface) return;
-
   try {
     trackNavClick({
       label: item.trackingLabel ?? item.label,
@@ -54,6 +62,10 @@ function trackLink(
     // 計測失敗で遷移を止めない。
   }
 }
+
+/** タグ用ピル。PC は高密度 (sm:min-h-7)、モバイルは 44px のタップ領域 (min-h-11) */
+export const RAIL_CHIP_CLASS =
+  'inline-flex min-h-11 shrink-0 snap-start items-center gap-1 rounded-full border border-muted-foreground/40 bg-muted px-2 text-[11px] font-medium leading-none text-foreground transition-colors hover:border-primary/50 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-7';
 
 function RailLinks({
   items,
@@ -100,7 +112,7 @@ function RailLinks({
 
   if (layout === 'ranked') {
     return (
-      <ol>
+      <ol aria-label="カード内リンク">
         {items.map((item, index) => (
           <li key={item.id} className="border-b border-border last:border-b-0">
             <Link
@@ -136,41 +148,19 @@ function RailLinks({
     );
   }
 
-  if (layout === 'grid') {
+  if (layout === 'list') {
     return (
-      <nav className="grid grid-cols-2 gap-2" aria-label="カード内リンク">
+      <nav className="-mx-2 flex flex-col" aria-label="カード内リンク">
         {items.map((item) => (
-          <Link
+          <RailNavRow
             key={item.id}
             href={item.href}
             aria-label={item.ariaLabel}
-            className="flex min-h-9 items-center border border-border bg-muted px-2.5 text-xs font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            trailing={item.count !== undefined ? item.count.toLocaleString('ja-JP') : undefined}
             onClick={() => trackLink(item, trackingSurface)}
           >
             {item.label}
-          </Link>
-        ))}
-      </nav>
-    );
-  }
-
-  if (layout === 'list') {
-    return (
-      <nav className="space-y-0.5" aria-label="カード内リンク">
-        {items.map((item) => (
-          <Link
-            key={item.id}
-            href={item.href}
-            aria-label={item.ariaLabel}
-            className="flex min-h-9 items-center justify-between gap-2 px-1 text-sm text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            onClick={() => trackLink(item, trackingSurface)}
-          >
-            <span>{item.label}</span>
-            <ChevronRight
-              aria-hidden="true"
-              className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
-            />
-          </Link>
+          </RailNavRow>
         ))}
       </nav>
     );
@@ -179,7 +169,7 @@ function RailLinks({
   return (
     <nav
       className={cn(
-        'flex flex-wrap gap-2',
+        'flex flex-wrap gap-1.5',
         horizontalOnMobile &&
           '-mx-1 flex-nowrap snap-x overflow-x-auto overscroll-x-contain px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
       )}
@@ -190,12 +180,15 @@ function RailLinks({
           key={item.id}
           href={item.href}
           aria-label={item.ariaLabel}
-          className="inline-flex min-h-8 shrink-0 snap-start items-center gap-1 border border-border bg-muted px-2.5 text-xs font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className={RAIL_CHIP_CLASS}
           onClick={() => trackLink(item, trackingSurface)}
         >
           <span>{item.label}</span>
           {item.count !== undefined && (
-            <span aria-hidden="true" className="text-muted-foreground">
+            <span
+              aria-hidden="true"
+              className="text-[10px] tabular-nums text-muted-foreground"
+            >
               {item.count}
             </span>
           )}
@@ -205,15 +198,18 @@ function RailLinks({
   );
 }
 
-function CardBody({
+/** 独立した共通リンクカード (chips / list / media / ranked)。枠・見出し・折りたたみは RailCard が持つ。 */
+export function RailLinksCard({
+  title,
   items,
-  layout,
+  layout = 'chips',
   moreLink,
   trackingSurface,
-  horizontalOnMobile,
-}: Omit<RailLinksCardProps, 'title' | 'collapsible'>) {
+  collapsible = false,
+  horizontalOnMobile = false,
+}: RailLinksCardProps) {
   return (
-    <>
+    <RailCard title={title} aria-label={title} collapsible={collapsible}>
       <RailLinks
         items={items}
         layout={layout}
@@ -223,7 +219,7 @@ function CardBody({
       {moreLink && (
         <Link
           href={moreLink.href}
-          className="mt-3 inline-flex text-xs font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="mt-3 inline-flex min-h-11 items-center text-xs sm:min-h-6 font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:text-foreground"
           onClick={() =>
             trackLink(
               {
@@ -238,50 +234,6 @@ function CardBody({
           {moreLink.label}
         </Link>
       )}
-    </>
-  );
-}
-
-/** チップ・グリッド・リスト・順位表に対応する、独立した共通リンクカード。 */
-export function RailLinksCard({
-  title,
-  items,
-  layout = 'chips',
-  moreLink,
-  trackingSurface,
-  collapsible = false,
-  horizontalOnMobile = false,
-}: RailLinksCardProps) {
-  const body = (
-    <CardBody
-      items={items}
-      layout={layout}
-      moreLink={moreLink}
-      trackingSurface={trackingSurface}
-      horizontalOnMobile={horizontalOnMobile}
-    />
-  );
-
-  if (collapsible) {
-    return (
-      <SurfaceSection className="overflow-hidden p-0" aria-label={title}>
-        <details className="group">
-          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-medium text-muted-foreground [&::-webkit-details-marker]:hidden">
-            <h3>{title}</h3>
-            <ChevronDown
-              aria-hidden="true"
-              className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
-            />
-          </summary>
-          <div className="border-t border-border px-4 pb-4 pt-3">{body}</div>
-        </details>
-      </SurfaceSection>
-    );
-  }
-
-  return (
-    <RailCard title={title} aria-label={title}>
-      {body}
     </RailCard>
   );
 }

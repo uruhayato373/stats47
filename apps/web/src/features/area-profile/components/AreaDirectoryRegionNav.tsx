@@ -1,9 +1,9 @@
 'use client';
 
 import { cn } from '@stats47/components';
-import { ChevronRight } from 'lucide-react';
 
 import { SectionHeader } from '@/components/section';
+import { RailNavRowButton } from '@/components/surface';
 
 import { regionStyle } from '../constants/region-styles';
 
@@ -30,9 +30,9 @@ export function AreaDirectoryRegionNav({ regions }: Props) {
   ];
 
   return (
-    <nav aria-label="地方で絞り込む" className="pr-1">
+    <nav aria-label="地方で絞り込む">
       <SectionHeader title="地方" as="h2" />
-      <div className="grid grid-cols-1 border-t border-border">
+      <div className="border-t border-border">
         {options.map((option) => {
           const active = activeRegionCode === option.regionCode;
           const swatch =
@@ -41,41 +41,21 @@ export function AreaDirectoryRegionNav({ regions }: Props) {
               : regionStyle(option.regionCode).swatch;
 
           return (
-            <button
+            <RailNavRowButton
               key={option.regionCode}
-              type="button"
-              aria-pressed={active}
+              pressed={active}
               onClick={() => setActiveRegionCode(option.regionCode)}
-              className={cn(
-                'group flex min-h-9 w-full items-center gap-2 border-b border-border px-2 py-1.5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
-                active ? 'bg-accent' : 'hover:bg-accent/50'
-              )}
             >
-              {swatch && (
-                <span
-                  aria-hidden="true"
-                  className={cn('size-2.5 shrink-0', swatch)}
-                />
-              )}
-              <span
-                className={cn(
-                  'min-w-0 flex-1 text-[13px]',
-                  active
-                    ? 'font-semibold text-primary'
-                    : 'font-medium text-foreground group-hover:text-primary'
+              <span className="flex min-w-0 items-center gap-2">
+                {swatch && (
+                  <span
+                    aria-hidden="true"
+                    className={cn('size-2.5 shrink-0', swatch)}
+                  />
                 )}
-              >
-                {option.regionName}
+                <span className="truncate">{option.regionName}</span>
               </span>
-              <ChevronRight
-                className={cn(
-                  'size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5',
-                  active
-                    ? 'text-primary'
-                    : 'text-muted-foreground group-hover:text-primary'
-                )}
-              />
-            </button>
+            </RailNavRowButton>
           );
         })}
       </div>

@@ -19,8 +19,9 @@ import {
 import { isOk } from '@stats47/types';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
-import { HorizontalCardCarousel } from '@/components/surface';
+import { HorizontalCardCarousel, RailCard } from '@/components/surface';
 
 import {
   FooterAdSlot,
@@ -34,7 +35,7 @@ import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { PrefectureNavigator } from '@/features/area-profile';
 import { listArticlesByTagKey } from '@/features/blog/server';
 import { findCategoryByKey } from '@/features/category/server';
-import { PortalBlogCard, PortalCategoryGrid } from '@/features/home-portal';
+import { PortalBlogCard } from '@/features/home-portal';
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
@@ -266,36 +267,30 @@ export default async function CategoryPage({ params }: PageProps) {
     notFound();
   }
   const leftRail = (
-    <aside className="lg:pr-1">
-      <SectionHeader title="カテゴリから探す" />
-      <PortalCategoryGrid
-        variant="sidebar"
-        activeCategoryKey={categoryKey}
-        surface="category_sidebar"
-      />
+    <RailStack>
+      <RailCard title="カテゴリから探す" bodyClassName="px-4 pb-3 pt-0">
+        <RailCategoryList
+          items={RANKING_PROMINENCE_CATEGORIES}
+          activeCategoryKey={categoryKey}
+          trackingSurface="category_sidebar"
+          className="-mx-4 border-t-0"
+        />
+      </RailCard>
 
       {sourceSurveys.length > 0 && (
-        <div className="mt-6">
-          <SurveyCard
-            surveys={sourceSurveys.map((survey) => ({
-              id: survey.id,
-              name: survey.name,
-            }))}
-            title="このカテゴリの出典調査"
-            surface="category_survey"
-          />
-        </div>
+        <SurveyCard
+          surveys={sourceSurveys.map((survey) => ({
+            id: survey.id,
+            name: survey.name,
+          }))}
+          title="このカテゴリの出典調査"
+          surface="category_survey"
+        />
       )}
 
-      {ADSENSE_DISPLAY_ENABLED && (
-        <div className="mt-6">
-          <RailAdSlot slot={RAIL_RECT} />
-        </div>
-      )}
-      <div className="mt-4">
-        <SidebarPromoBanner index={0} />
-      </div>
-    </aside>
+      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
+      <SidebarPromoBanner index={0} />
+    </RailStack>
   );
 
   return (

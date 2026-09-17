@@ -63,8 +63,10 @@ grep -rn \
 > は header/bar/cardAlt の専用色セット（red=`#dc2626`/`#ef4444`/`#fef2f2`、blue=`#1565c0`/`#42a5f5`/`#eff6ff`、
 > purple/orange/green は PALETTES と同系）。これらは上記許可リストに含むため対象外。SSoT は `bar-chart.ts`。
 >
-> **カード型ランキングは2レイアウト（2026-06-20）**: `layout:"columns"`（横長 960×404・ブログ本文 `<name>.svg`）と
-> `layout:"portrait"`（縦長 1080×1350・Instagram 用 `<name>-ig.svg`）の2種を `generate-article-charts.ts` が両出力する。
+> **カード型ランキングは3媒体レイアウト**: `layout:"columns"`（横長 960×404・PC本文 `<name>.svg`）、
+> `layout:"mobile"`（縦長 640×960・ブログmobile/note本文 `<name>-mobile.svg`）、
+> `layout:"portrait"`（縦長 1080×1350・Instagram 用 `<name>-ig.svg`）を `generate-article-charts.ts` が同時出力する。
+> PC版だけ参照される記事でもmobile版の存在・640幅・最小20pxフォントを監査する。
 > `-ig.svg` は記事 markdown に埋め込まない SNS 専用アセットなので、article.md 参照を辿る監査では「未参照」として扱わない
 > （orphan 判定しない）。カタログ正典は `.claude/rules/blog-svg-chart-standards.md`。
 

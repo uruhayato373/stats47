@@ -1,6 +1,6 @@
 ---
 name: ui-consistency-reviewer
-description: ページ横断 UI 一貫性 review 専任 + デザイン SSOT (15) の drift ゲート。 code-reviewer --scope ui-consistency 分離。 read-only。
+description: ページ横断 UI 一貫性 review 専任 + デザイン SSOT の drift ゲート。 code-reviewer --scope ui-consistency 分離。 read-only。
 model: opus
 ---
 
@@ -19,6 +19,8 @@ stats47 内のページ横断 UI 一貫性をレビューする agent。 code-re
 - page_components 一貫性 (同 categoryKey 内のカード並び、 KPI 配置)
 - レスポンシブブレイクポイント (`lg:` vs `@lg:`) の正しい使い分け
 - `@stats47/components` (shadcn ベース) の優先利用チェック
+- **レール drift 監査**: 左右の視覚差・カード内カード・独自カテゴリ UI・page-name variant・生 `<aside>`。
+  検査: `npm run design-system:check -w apps/web`、`npx vitest run src/app/__tests__/rail-contract-structure.test.ts`（`apps/web` から実行）。
 
 ### 重複判定プロトコル (★表層類似 ≠ 重複・誤判定の再発防止)
 

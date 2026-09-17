@@ -24,6 +24,7 @@ melta-ui デザインシステム準拠と UI/UX 品質評価を担当するエ�
 - `.claude/design-system/prohibited.md` — 76個の禁止パターン
 - `.claude/design-system/principles.md` — 5つのデザイン原則
 - `.claude/design-system/quick-reference.md` — コンポーネント・レイアウト・カラー
+- `docs/01_技術設計/04_デザインシステム.md` — レール UI 契約・Surface 3 段階の正典
 
 ## レビュー観点
 
@@ -32,6 +33,9 @@ melta-ui デザインシステム準拠と UI/UX 品質評価を担当するエ�
 3. **フォント**: `tracking-tight` 禁止（日本語可読性）
 4. **レイアウト**: コンテナクエリ vs ビューポートブレイクポイントの使い分け
 5. **ボーダー**: カラーバー禁止、全周 `border` で統一
+6. **レール/カード/Surface 3 段階**: `RailCard`/`RailNavRow`/`RailCategoryList` の視覚契約と `bg-card`/`bg-muted`/`bg-accent` の使い分け
+7. **dark モード**: コントラスト・境界が light と同等に成立するか
+8. **タップ領域・focus**: 44px タップ領域 (`min-h-11`)、`focus-visible:ring-2` の有無
 
 ## 担当外
 

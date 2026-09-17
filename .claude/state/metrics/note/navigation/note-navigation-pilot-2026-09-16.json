@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-09-16T00:25:47.948Z",
+  "account": "stats47",
+  "mode": "commit",
+  "measurementContract": {
+    "site": "GA4 sessionSource=note.com × landingPagePlusQueryString（カードは素URL）",
+    "noteToNote": "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
+    "magazine": "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
+    "product": "カードは /products/<slug>/from/note/<noteId> の素URL。サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送し、記事単位で集計"
+  },
+  "articles": [
+    {
+      "key": "b-kakei-necktie-decline",
+      "noteKey": "ncbfe818867f4",
+      "noteUrl": "https://note.com/stats47/n/ncbfe818867f4",
+      "baselineViews": null,
+      "nextBestArticle": "a-kakei-aichi",
+      "nextNoteUrl": "https://note.com/stats47/n/nda72a0bed2c4",
+      "nextBaselineViews": null,
+      "magazine": "s47-kakei-reading",
+      "magazineUrl": null,
+      "siteUrl": "https://stats47.jp/blog/necktie-stockings-market-shrink",
+      "productUrl": "https://stats47.jp/products/kindle-k-s1-02/from/note/ncbfe818867f4",
+      "linkRepairs": [
+        {
+          "mode": "regenerate-card",
+          "fromUrl": "https://stats47.jp/products/kindle-k-s1-02/from/note/ncbfe818867f4",
+          "title": "消費量日本一の食卓 — 家計調査で読む47都道府県の食",
+          "description": "家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読む。生産地や県民全体の消費を直接測る統計ではないことも整理する読み物。"
+        }
+      ],
+      "forceNormalizeLegacy": false,
+      "before": {
+        "bodySignature": "ba9dbaa9",
+        "hashtagCount": 99,
+        "price": 0,
+        "separator": null,
+        "hasDraft": false
+      },
+      "pending": true,
+      "wouldAddNextNote": true,
+      "wouldAddMagazine": false,
+      "wouldAddSite": false,
+      "wouldAddProduct": true,
+      "wouldNormalizeLegacyLinks": false,
+      "result": {
+        "status": "updated",
+        "beforeBodySignature": "ba9dbaa9",
+        "afterBodySignature": "81e02a3a",
+        "hashtagCount": 99,
+        "apiStatus": 200,
+        "identicalDraft": false,
+        "draftCompatibility": "none",
+        "paidBodyPreservedByPayload": false,
+        "changed": true,
+        "normalizedLegacyLinks": false,
+        "addedNextNote": true,
+        "addedMagazine": false,
+        "addedSite": false,
+        "addedProduct": true,
+        "repairs": [
+          {
+            "mode": "regenerate-card",
+            "fromUrl": "https://stats47.jp/products/kindle-k-s1-02/from/note/ncbfe818867f4",
+            "toUrl": "https://stats47.jp/products/kindle-k-s1-02/from/note/ncbfe818867f4",
+            "changed": false
+          }
+        ]
+      }
+    }
+  ]
+}

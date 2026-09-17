@@ -1,8 +1,11 @@
 export {
   ArticleCard,
   RailCard,
-  RailLinkItem,
   RailLinkList,
+  RailNavRow,
+  RailNavRowButton,
+  type RailNavRowDensity,
+  railNavRowClassName,
   SectionCard,
   SurfaceCard,
   SurfaceLinkCard,

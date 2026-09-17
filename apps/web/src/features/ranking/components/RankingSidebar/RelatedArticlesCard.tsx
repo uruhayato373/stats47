@@ -2,7 +2,7 @@ import { readTagsForItemFromR2 } from "@stats47/ranking/server";
 import { isOk, type AreaType } from "@stats47/types";
 import { Newspaper } from "lucide-react";
 
-import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
+import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
 import { getRelatedArticleSummaries } from "@/features/blog/server";
 
@@ -33,11 +33,11 @@ export async function RelatedArticlesCard({
     >
       <RailLinkList>
         {relatedArticles.map((article) => (
-          <RailLinkItem key={article.slug} href={`/blog/${article.slug}`}>
+          <RailNavRow key={article.slug} href={`/blog/${article.slug}`} chevron={false}>
             <span className="line-clamp-2 leading-snug">
               {article.title}
             </span>
-          </RailLinkItem>
+          </RailNavRow>
         ))}
       </RailLinkList>
     </RailCard>

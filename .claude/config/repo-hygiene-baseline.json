@@ -75,11 +75,6 @@
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-navigation-pilot-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
       "file": ".claude/state/metrics/note-referrals-2026-09-06.json",
       "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
     },

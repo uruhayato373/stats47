@@ -38,7 +38,7 @@ vi.mock(
 
 import { MetricSwitcherPanel } from "../MetricSwitcherPanel";
 
-import type { MetricKpi } from "../metric-kpi";
+import type { MetricKpi, MultiMetricGroup } from "../metric-kpi";
 
 const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
   metricKey,
@@ -53,7 +53,7 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
   ...over,
 });
 
-const METRICS = [kpi("wage"), kpi("unemployment"), kpi("job-ratio")];
+const METRICS: MultiMetricGroup = [kpi("wage"), kpi("unemployment"), kpi("job-ratio")];
 const LABELS = { wage: "賃金", unemployment: "失業率", "job-ratio": "有効求人倍率" };
 
 /** タイルはタイル全体が 1 つの role="checkbox" */
@@ -145,18 +145,6 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
     const wageTile = tile(/賃金/);
     expect(wageTile).toHaveTextContent("999");
     expect(wageTile).toHaveTextContent("東京都");
-  });
-
-  it("topRanked が無い指標はタイルの値が「—」になる (0 を捏造しない)", async () => {
-    render(
-      <MetricSwitcherPanel
-        metrics={[kpi("unsupported-metric", { topRanked: null })]}
-        tabLabels={{ "unsupported-metric": "県固有指標" }}
-        selectedPrefectureCode={null}
-        areaName="47都道府県"
-      />,
-    );
-    expect(tile(/県固有指標/)).toHaveTextContent("—");
   });
 
   it("チャート領域は選択案内になる (エラー文言ではない)", async () => {
@@ -438,20 +426,6 @@ describe("MetricSwitcherPanel — 平均を「都道府県平均」と称す (�
     expect(readChartData().lines[0].name).toBe("全国");
   });
 
-  it("action が空を返す計算型指標は R2 平均へ退避し「都道府県平均」と示す", async () => {
-    fetchMock.mockResolvedValue({ points: [], source: "none" });
-    render(
-      <MetricSwitcherPanel
-        metrics={[kpi("calc", { series: [{ year: 2020, value: 5 }, { year: 2021, value: 6 }] })]}
-        tabLabels={{ calc: "計算型" }}
-        selectedPrefectureCode="13000"
-        areaName="東京都"
-      />,
-    );
-    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
-    expect(readChartData().lines[0].name).toBe("都道府県平均");
-  });
-
   it("複数チェック時も R2 平均の系列は「（平均）」と明示する", async () => {
     fetchMock.mockResolvedValue({ points: [], source: "none" });
     render(
@@ -595,10 +569,11 @@ describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", (
     );
     render(
       <MetricSwitcherPanel
-        metrics={[kpi("cpi", { unit: "(全国=100)" })]}
-        tabLabels={{ cpi: "総合" }}
+        metrics={[kpi("cpi", { unit: "(全国=100)" }), kpi("other", { unit: "円" })]}
+        tabLabels={{ cpi: "総合", other: "別指標" }}
         selectedPrefectureCode="13000"
         areaName="東京都"
+        defaultCheckedKeys={["cpi"]}
       />,
     );
     await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
@@ -617,10 +592,11 @@ describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", (
     );
     render(
       <MetricSwitcherPanel
-        metrics={[kpi("wage", { unit: "円" })]}
-        tabLabels={{ wage: "賃金" }}
+        metrics={[kpi("wage", { unit: "円" }), kpi("other", { unit: "倍" })]}
+        tabLabels={{ wage: "賃金", other: "別指標" }}
         selectedPrefectureCode="13000"
         areaName="東京都"
+        defaultCheckedKeys={["wage"]}
       />,
     );
     await waitFor(() => expect(readChartData().lines).toHaveLength(2));
@@ -683,14 +659,6 @@ describe('監査後の表示契約', () => {
     toggleTile(/有効求人倍率/);
     expect(tile(/有効求人倍率/)).toHaveAttribute('aria-disabled', 'true');
     expect(chartedKeys()).toEqual(['wage', 'unemployment']);
-  });
-  it('単年は自然高の案内と実年を示す', async () => {
-    fetchMock.mockResolvedValue({ points: points([1]), source: 'area' });
-    renderPanel({ metrics: [kpi('wage', { yearName: '2020年' })] });
-    const message = await screen.findByText(/2020年の単年データ/);
-    expect(message.tagName).toBe('P');
-    expect(message).not.toHaveStyle({ height: '250px' });
-    expect(tile(/賃金/)).toHaveTextContent('2020年');
   });
   it('章の詳細図が同じ系列を示す場合、タイルから二重fetchしない', async () => {
     renderPanel({ summaryOnly: true });

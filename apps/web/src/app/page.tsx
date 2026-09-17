@@ -1,11 +1,13 @@
 import Link from 'next/link';
 
 import { fetchPrefectures } from '@stats47/area';
+import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import { Metadata } from 'next';
 
 import { PageShell, PageHeader } from '@/components/layout';
+import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
-import { HorizontalCardCarousel } from '@/components/surface';
+import { HorizontalCardCarousel, RailCard } from '@/components/surface';
 
 import {
   NativeAffiliateRow,
@@ -19,11 +21,7 @@ import {
 } from '@/features/ads/server';
 import { PrefectureNavigator } from '@/features/area-profile';
 import { listLatestArticles } from '@/features/blog/server';
-import {
-  PortalBlogCard,
-  PortalCategoryGrid,
-  PortalUseCaseGrid,
-} from '@/features/home-portal';
+import { PortalBlogCard, PortalUseCaseGrid } from '@/features/home-portal';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
 import { ADSENSE_DISPLAY_ENABLED, RAIL_RECT } from '@/lib/google-adsense';
@@ -119,10 +117,10 @@ export default async function HomePage() {
     8
   ).catch(() => []);
   const leftRail = (
-    <aside className="lg:pr-1">
-      <SectionHeader
+    <RailStack>
+      <RailCard
         title="カテゴリから探す"
-        action={
+        headerAction={
           <Link
             href="/ranking"
             className="font-semibold text-primary hover:underline"
@@ -130,20 +128,22 @@ export default async function HomePage() {
             一覧 →
           </Link>
         }
+        bodyClassName="px-4 pb-3 pt-0"
+      >
+        <RailCategoryList
+          items={RANKING_PROMINENCE_CATEGORIES}
+          trackingSurface="home_category"
+          moreLink={{ href: '/ranking', label: 'すべてのランキングを見る' }}
+          className="-mx-4 border-t-0"
+        />
+      </RailCard>
+      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
+      <SidebarPromoBanner index={0} />
+      <SidebarStickyBannerAd
+        position="home-left-rail"
+        excludeAds={homeNativeBanners}
       />
-      <PortalCategoryGrid variant="sidebar" />
-      {ADSENSE_DISPLAY_ENABLED && (
-        <div className="mt-6">
-          <RailAdSlot slot={RAIL_RECT} />
-        </div>
-      )}
-      <div className="mt-4">
-        <SidebarPromoBanner index={0} />
-      </div>
-      <div className="mt-4">
-        <SidebarStickyBannerAd position="home-left-rail" excludeAds={homeNativeBanners} />
-      </div>
-    </aside>
+    </RailStack>
   );
 
   return (

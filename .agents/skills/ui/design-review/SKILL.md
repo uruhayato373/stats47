@@ -30,12 +30,26 @@ $ARGUMENTS — レビュー対象のファイルパスまたはディレクト�
 1. `.claude/design-system/prohibited.md` — 禁止パターン一覧（SSOT）
 2. `.claude/design-system/quick-reference.md` — 正しいパターンのリファレンス
 
-### Step 3: 7 カテゴリ走査
+### Step 3: 機械ゲート実行 (rail-* contract)
+
+対象にレール系 UI (`RailCard` / `RailNavRow` / `RailCategoryList` / `RailLinksCard` / page.tsx の左右レール) が
+含まれる場合は、目視の前に決定的ゲートを走らせる。
+
+```bash
+npm run design-system:check -w apps/web
+```
+
+`rail-no-raw-aside-in-page` / `rail-card-no-muted-root` / `rail-links-no-grid-layout` /
+`rail-category-must-use-shared-list` / `rail-no-page-name-variant` / `rail-no-colored-inset-bar` /
+`rail-nav-needs-accessible-name` / `rail-row-needs-44px-tap-target` の 8 rule を含む
+(正典: `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」)。
+
+### Step 4: 7 カテゴリ走査
 
 対象ファイルの className / JSX を以下のカテゴリで走査する:
 
 1. **カラー**: `text-black`, `text-gray-400`（body用途）, `border-gray-100`, `bg-gray-300+` の検出
-2. **スペーシング・レイアウト**: `shadow-lg`/`shadow-2xl`, `rounded-none`（カード）, `p-0`（カード）, カラーバー（`border-t-4`, `border-l-4`）
+2. **スペーシング・レイアウト**: `shadow-lg`/`shadow-2xl`, `p-0`（カード）, カラーバー（`border-t-4`, `border-l-4`）
 3. **タイポグラフィ**: `tracking-tight`, `text-xs`（body用途）, `font-light`
 4. **モーション**: `duration-500+`, `prefers-reduced-motion` 未対応
 5. **ボーダー**: `border-gray-100`, `border-slate-400+`
@@ -46,7 +60,7 @@ $ARGUMENTS — レビュー対象のファイルパスまたはディレクト�
 フォーカスリング・dark mode の実配色は、コードを読んでも分からない。ページを実際に開いて測る:
 
 ```bash
-node .claude/scripts/ui/measure-page-a11y.mjs --url http://localhost:3000/areas
+node .claude/scripts/ui/measure-page-a11y.mjs http://localhost:3000/areas --widths 390,768,1024,1440
 ```
 
 複数の幅 × light/dark で、overflow・24px/44px 未満のタップ領域・キーボード到達・
@@ -59,7 +73,17 @@ console エラーを一度に出す。**dark は `colorScheme` ではなく loca
 - ビューポート `md:` がダッシュボードカードグリッドに使われていないか → コンテナクエリ `@md:` を推奨
 - h1 に `text-3xl` 以上が使われていないか → `text-2xl font-bold` を推奨
 
-### Step 4: 重大度判定
+**レール契約 (rail-* 8 rule、詳細は `rail-contract-audit.mjs`)**:
+- `rail-no-raw-aside-in-page`: page.tsx が独自の `<aside>` を描いていないか
+- `rail-card-no-muted-root`: `RailCard`/`SectionCard` の外枠に `bg-muted` が付いていないか
+- `rail-links-no-grid-layout`: `RailLinksCard layout="grid"`（廃止済み）が復活していないか
+- `rail-category-must-use-shared-list`: カテゴリ導線が `RailCategoryList` 以外で独自実装されていないか
+- `rail-no-page-name-variant`: `variant="home"` 等ページ名依存の variant が無いか
+- `rail-no-colored-inset-bar`: active 行をカラーバー（inset shadow）で示していないか
+- `rail-nav-needs-accessible-name`: レール内 `<nav>` に `aria-label`/`aria-labelledby` があるか
+- `rail-row-needs-44px-tap-target`: レール内リンク/ボタンがモバイル 44px（`min-h-11`）を満たすか
+
+### Step 5: 重大度判定
 
 各違反に重大度を付与:
 
@@ -75,7 +99,7 @@ console エラーを一度に出す。**dark は `colorScheme` ではなく loca
 - shadcn CSS 変数（`text-muted-foreground` 等）はセマンティックカラーとして許容する
 - hover 時の `shadow-md` は許容する
 
-### Step 5: レポート出力
+### Step 6: レポート出力
 
 ```markdown
 ## デザインレビュー: {対象}
