@@ -18,7 +18,11 @@ permissions:
 # ─────────────────────────────────────────────────────────────────────────────
 # 独立jobを差分分類し、影響するgate/type-check/test/buildだけを並列実行する。
 #   - static gateは全PRで必ず実行する。
-#   - Web buildは1回だけ作り、代表E2Eとpage-qualityが同じartifactを再利用する。
+#   - Web buildは1回だけ作り、代表E2Eが同じartifactを再利用する。
+#   - page-quality (代表URL) は 2026-09-18 に PR 必須から外した (CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01):
+#     本番 R2 依存とサイト横断の既知違反 (duplicate_link_ratio) で PR の差分と独立に赤になり、
+#     PR #974 で 5 連続失敗・#977 でも赤。週次 page-quality-audit-weekly.yml が全 URL を監査し
+#     alert Issue で通知する。リリース前の明示確認は `npm run check:release-local`。
 #   - coverage・全E2E・全workspace型検査は週次full suiteでも全件実行する。
 #   - 集約 job `quality-check` (name: Code Quality Check) が全 job を needs + if:always() で
 #     検証し、単一の required status check を維持する (branch protection の再設定を不要にする)。
@@ -1195,91 +1199,9 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
-  page-quality:
-    name: Page Quality (representative)
-    needs: [changes, build]
-    if: needs.changes.outputs.web == 'true' && needs.build.result == 'success'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-
-    steps:
-      - name: 🧰 Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0 # git diff origin/main...HEAD で影響テンプレートを判定するため全履歴取得
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: 📦 Restore node_modules cache
-        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
-        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
-        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
-        id: node-modules-cache
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: |
-            node_modules
-            apps/*/node_modules
-            packages/*/node_modules
-          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
-
-      - name: 📦 Install dependencies
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: npm ci
-
-      - name: 🌐 Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
-
-      - name: 📥 Reuse verified Next.js build
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: pr-web-next-build
-          path: apps/web/.next
-
-      - name: ▶️ Start web app
-        env:
-          NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
-          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-        run: |
-          npx next start --port 3100 &
-          echo $! > /tmp/next-start.pid
-          for _ in $(seq 1 30); do
-            curl -sf http://localhost:3100/ > /dev/null && exit 0
-            sleep 2
-          done
-          echo "::error::next start did not become ready"
-          exit 1
-        working-directory: apps/web
-
-      - name: 🔍 Run representative page-quality check
-        # 変更のあった影響テンプレートの代表URLだけを軽量検査する。
-        # 明確な退行 (error) だけをCI失敗にし、軽微な変動はwarningとしてlatest.jsonへ記録する。
-        run: npm run page-quality:check -- --base-url http://localhost:3100 --base origin/${{ github.base_ref }}
-
-      - name: 🛑 Stop web app
-        if: always()
-        run: kill "$(cat /tmp/next-start.pid)" 2>/dev/null || true
-
-      - name: 📊 Upload page-quality report
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: page-quality-report
-          path: .claude/state/metrics/page-quality/LATEST.md
-          if-no-files-found: ignore
-          retention-days: 30
-
-  # 集約 job: 上記 job を全て needs し、単一の required status check
-  # (branch protection が要求する "Code Quality Check") を維持する。
-  # if:always() で常に実行し、実行対象jobの failure/cancelled を明示的に失敗させる。
-  # 差分分類で対象外になったjobの skipped は正常とする。
   quality-check:
     name: Code Quality Check
-    needs: [changes, static-gates, contract-tests, catalog-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e, page-quality]
+    needs: [changes, static-gates, contract-tests, catalog-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -1289,7 +1211,7 @@ jobs:
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "changes=${{ needs.changes.result }} static-gates=${{ needs.static-gates.result }} contract-tests=${{ needs.contract-tests.result }} catalog-gates=${{ needs.catalog-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }} page-quality=${{ needs.page-quality.result }}"
+          echo "changes=${{ needs.changes.result }} static-gates=${{ needs.static-gates.result }} contract-tests=${{ needs.contract-tests.result }} catalog-gates=${{ needs.catalog-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
           exit 1
 
       - name: ✅ All Checks Passed

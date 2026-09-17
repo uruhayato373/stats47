@@ -152,6 +152,8 @@ updated: 2026-09-18
 - **実測 (2026-09-18)**: develop→main PR #977 の `page-quality` (representative) が同じ違反で赤 (merge blocker)。
   `/themes/population-dynamics` 0.5081 / `/blog` 0.3235 / `/ranking/total-population` 0.3151 (閾値 0.3)。
   rail/surface 統一 (1006e1e21) 後の値。CI 側の扱いは `CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`。
+  2026-09-18 に page-quality を PR 必須から外したので PR は止まらなくなったが、違反自体は未解消。
+  検知は週次 `page-quality-audit-weekly.yml` の alert Issue と、リリース前の `check:release-local` に移った。
 - 2026-09-15、`page-quality:audit-weekly` を本番全 6,237 URL に実行 (初の全件試行)。
   error 2,698 / warning 5,106。**duplicate_link_ratio がほぼ全テンプレートの支配的違反**で、
   個別ページの内容問題ではなく共通コンポーネント由来の疑いが強い:
@@ -767,6 +769,11 @@ updated: 2026-09-18
   PR に残すなら R2 読みを固定 fixture (build 時に落とした snapshot) に差し替え、readiness 待ちを
   60 秒から伸ばし、`digest-mismatch` を warning に落として決定的にする。
 - **完了条件**: PR run 5 回連続で page-quality の結果がコード差分以外で変わらない。
+- **実施 (2026-09-18)**: 最小案を採り、`pr-quality-check.yml` から `page-quality` job を削除して `quality-check` の
+  needs から外した (`ci-test-tiering.test.mjs` が PR 必須への復活を拒否)。代表 URL 検査は `check:release-local` /
+  `page-quality:check` の明示実行、全 URL は週次 `page-quality-audit-weekly.yml` + alert Issue が担う。
+  rule (`page-quality-standards.md`)・自動化インベントリ・CI README を追従。PR 必須へ戻す条件 (R2 固定 fixture
+  で決定的にする) は rule に残した。残件はその決定的化のみで、着手するかはオーナー判断。
 
 ### [CI-SPEED-STATIC-GATES-HEAVY-STEPS-01] Static Gates の重い step (Commit-back Contract 115 秒 / SEO Meta Factual 46 秒) を軽くするか scheduled へ寄せる
 

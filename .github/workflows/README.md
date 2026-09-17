@@ -114,7 +114,7 @@ Static gateは常に実行する。その他は変更パスを決定的に分類
 
 4. ✅ **Verify Build**: `npm run build`
    - ビルドエラーで失敗
-   - 成功した`.next`をartifact化し、代表E2Eとpage-qualityが同じbuildを再利用
+   - 成功した`.next`をartifact化し、代表E2Eが同じbuildを再利用 (page-quality は 2026-09-18 に PR 必須から外し、週次 `page-quality-audit-weekly.yml` と明示実行 `check:release-local` に寄せた)
 
 5. ✅ **Visualization Render Golden**: `RUN_RENDER_TESTS=1 npm run test:run --workspace=@stats47/visualization`
    - 共有チャート9種のPNG差分で失敗し、差分artifactを保存
