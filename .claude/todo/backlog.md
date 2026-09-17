@@ -21,6 +21,26 @@ updated: 2026-09-18
 
 ## 🔴 高 — 今月中に着手したい
 
+### [THEME-CHART-FOOTER-OVERLAP-01] テーマページの「〜の分布」地図カードで SVG が footer に 40px 重なる (本番・2026-09-13 から継続)
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:cd apps/web && PLAYWRIGHT_TEST_BASE_URL=https://stats47.jp npx playwright test --config playwright.smoke.config.ts tests/smoke/theme-chart-overlap.spec.ts] [起票:2026-09-18] [期日:2026-09-30]
+
+- **owner**: theme-ui-manager
+- **実測**: `post-deploy-smoke.yml` の `theme-chart-overlap.spec.ts` が 2026-09-13 (main f09ac2ca9) から毎デプロイ失敗。
+  最後の成功は 2026-09-12 (c9f5b1970)。`/themes/population-dynamics` の「人口増減率の分布」と
+  `/themes/healthcare` の「医師数（人口10万人当たり）の分布」で、SVG 下端が footer 上端を **40px** 越える
+  (retry でも同値 = 決定的)。2026-09-17 のリリース (PR #977) 後も同じ 2 カード・同じ 40px。
+- **原因箇所**: `apps/web/src/features/theme-dashboard/components/ThemeComparisonSection.tsx` の
+  `ChartPanel` (`contentClassName="p-0"`、footer「県を選択して比較 / 定義・出典」) 内の `ThemeOverviewMap`
+  (日本地図)。`b3e803b0b` (theme comparisons 統合) で入った構成。静的検査
+  (`check-design-system` の no-fixed-height-around-aspect-ratio-chart) は通っているので、地図側の
+  高さ確保 (凡例・viewBox) と ChartPanel の content 領域の噛み合わせを実描画で確認する。
+- **次**: `npm run dev:web` で `/themes/population-dynamics` を開き、地図 SVG の bounding box と
+  footer の位置を実測 → `ThemeOverviewMap` / `ChartPanel` のどちらで 40px が生まれるかを切り分けてから直す。
+  直したら上記 検証 コマンドを本番で 1 回通す。
+- **禁止**: 固定高 div で包んで隠さない (2026-08-04 に 154px 重なった同型事故の再発)。
+- **完了条件**: 本番 smoke の `theme-chart-overlap.spec.ts` が 2 テーマとも green。
+
 ### [CI-SPEED-STATIC-GATES-SPLIT-01] main PR の Static Gates (65 step 直列・486 秒) を domain 別の並列 job に分け、1 run で複数の失敗を報告する
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-09-18] [期日:2026-10-15]
@@ -717,6 +737,22 @@ updated: 2026-09-18
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [CI-POST-DEPLOY-SMOKE-ALERT-01] post-deploy-smoke の失敗が Issue にならず、5 日間・6 デプロイ赤のまま誰にも見えていなかった
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs] [起票:2026-09-18] [期日:2026-10-15]
+
+- **owner**: devops-runner
+- **実測 (2026-09-18)**: `post-deploy-smoke.yml` は 2026-09-13 から連続 failure (main f09ac2ca9 / 45cfa07b9 /
+  a5642a9e9 / 423bf9d1b / dfb6f6da7 / d9e171a60 / ae901da26) だが、`gh issue` を呼ばず label も持たないため
+  通知が一切出ない。`docs-vs-issues.md` の「アラート workflow は自分のラベルを ensure して Issue を起票する」
+  契約から外れている唯一の本番検査。中身は `THEME-CHART-FOOTER-OVERLAP-01` (本番の実 UI 不具合) だった。
+- **次**: 他の alert workflow と同じ lifecycle (`post-deploy-alert,auto-generated` ラベルを同 step で ensure →
+  固定 Issue を upsert → 復旧時に close) を `post-deploy-smoke.yml` に足し、`alert-issue-lifecycle.test.cjs` の
+  glob 対象に入れる。`docs-vs-issues.md` の Issues 表と `06_自動化インベントリ.md` に行を追加する。
+  retry で通った flaky (blog 一覧サムネイル 30 秒 timeout / ranking 右レール契約) は Issue 本文に
+  「retry 通過」として区別して載せる。
+- **完了条件**: smoke 失敗時に Issue が立ち、green に戻ったら自動 close されることを 1 回ずつ実測する。
 
 ### [CI-SPEED-UNIT-TESTS-EARLY-01] unit test を develop-gate の並列 job として走らせ、main PR まで一度も走らない状態を止める
 
