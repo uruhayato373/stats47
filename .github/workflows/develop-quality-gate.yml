@@ -13,9 +13,15 @@ name: 🚦 Develop Quality Gate
 #   しかも「自分が壊したのか継承したのか」の切り分けが毎回必要になる。
 #
 # ★設計方針: フル suite (pre-commit 相当・2 分超) を再実装しない。
-#   develop の着地点で「決定的・高速」な 3 ゲートだけを
+#   develop の着地点で「決定的・高速」なゲートだけを
 #   走らせ、壊れが次のマージ担当に回るのを止める。深い検査は従来どおり
 #   develop→main の PR (`pr-quality-check.yml`) が担う。
+#
+# ★2026-09-17 (CI-DEVELOP-GATE-COVERAGE-01) で Card Census / Design System Check /
+#   Ad Placement Guard / apps/web Unit Tests の 4 つを追加。PR #913 が入れた
+#   check-ad-placement のリテラル不一致と native 枠の在庫フォールバック喪失が develop で
+#   一度も検知されず、main への PR で初めて落ちた実例に基づく。Build Check・Full E2E・
+#   Remotion はここに足さない (重すぎて push が詰まり `--no-verify` を誘発する)。
 #
 #   ここに新しい検査を足すときは「決定的か」「1 分以内か」を満たすこと。満たさない
 #   ものは `pr-quality-check.yml` 側に置く (このゲートが重くなると develop への
@@ -99,4 +105,23 @@ jobs:
         # 夜間の selection backfill (THEME-SELECTION-BACKFILL-01) が no-adoption-criteria を
         # 減らして baseline を縮めるので、develop 着地点で増加を止める (実測 4 秒・決定的)。
         run: node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
+        continue-on-error: false
+
+      - name: 📐 Card Census
+        run: node .claude/scripts/lib/check-card-census.cjs
+        continue-on-error: false
+
+      - name: 🎨 Design System Check
+        run: npm run design-system:check -w apps/web
+        continue-on-error: false
+
+      - name: 📢 Ad Placement Guard
+        run: node .claude/scripts/lib/check-ad-placement.cjs
+        continue-on-error: false
+
+      - name: 🧪 Unit Tests (apps/web)
+        # CI-DEVELOP-GATE-COVERAGE-01 で追加 (2026-09-17)。決定的だが 4 ゲート中最も重い
+        # (実測 ~98 秒)。ジョブ全体が停止条件の 3 分を超えたら、ここから先に外して
+        # pr-quality-check.yml 側へ残す (判断は実測値で行う)。
+        run: npm run test:run -w apps/web
         continue-on-error: false

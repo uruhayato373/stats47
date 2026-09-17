@@ -7,7 +7,11 @@ import { RankingPageSidebarSection } from "@/features/ranking/components/Ranking
 import { RakutenItemsCard } from "../server";
 
 vi.mock("../server", () => ({ AffiliateAdSlot: () => null, RakutenItemsCard: () => null }));
-vi.mock("../index", () => ({ SidebarPromoBanner: () => null, selectPromoBannerIndexForRanking: () => 0 }));
+vi.mock("../index", () => ({
+  SidebarPromoBanner: () => null,
+  selectPromoBannerIndexForRanking: () => 0,
+  RailAdSlot: () => null,
+}));
 vi.mock("@/features/ranking/components/RankingSidebar", () => ({ RankingItemsSidebar: () => null }));
 vi.mock("@/features/ranking/components/RankingSidebar/PortStatisticsMapCard", () => ({ PortStatisticsMapCard: () => null }));
 vi.mock("@/features/ranking/components/RankingSidebar/RelatedArticlesCard", () => ({ RelatedArticlesCard: () => null }));
