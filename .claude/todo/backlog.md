@@ -23,7 +23,7 @@ updated: 2026-09-18
 
 ### [CI-SPEED-STATIC-GATES-SPLIT-01] main PR の Static Gates (65 step 直列・486 秒) を domain 別の並列 job に分け、1 run で複数の失敗を報告する
 
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-09-18] [期日:2026-10-15] [進行中]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-09-18] [期日:2026-10-15]
 
 - **owner**: devops-runner
 - **実測 (2026-09-16、PR #974)**: `pr-quality-check.yml` は 1 回 633 秒。Release PR が失敗 5 回 + cancel 1 回の
@@ -43,9 +43,14 @@ updated: 2026-09-18
   短縮されたことを run の job 時間で実測する。`check-checker-wiring.cjs --baseline` /
   `check-workspace-contract.cjs` / `audit-workflow-policy.cjs --strict` が green。
 
+- **実測 (2026-09-18、PR #977 run 35270099628)**: 3 job は並列に走り、壁時計は attempt 1 (cache miss) で
+  static-gates 246 / contract-tests 347 / catalog-gates 259 秒 = 347 秒 (旧 486 秒、-29%)、attempt 2 (cache hit) で
+  129 / 234 / 109 秒 = 234 秒 (-52%)。run 全体は 633 → 599 → 466 秒。クリティカルパスは Unit Tests (559→423 秒) に移った。
+  wiring / workspace-contract / workflow-policy / 契約テスト 97 + 107 + 9 はすべて green。完了条件を満たした。
+  残る最重 step は contract-tests 内の Workflow Commit-back Contract Gate (`CI-SPEED-STATIC-GATES-HEAVY-STEPS-01`)。
 ### [CI-SPEED-NODE-MODULES-CACHE-01] CI の各 job が独立に払っている `npm ci` (105〜122 秒) を node_modules キャッシュで短縮する
 
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/audit-workflow-policy.cjs --strict] [起票:2026-09-18] [期日:2026-10-15] [進行中]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/audit-workflow-policy.cjs --strict] [起票:2026-09-18] [期日:2026-10-15]
 
 - **owner**: devops-runner
 - **実測 (2026-09-17)**: `develop-quality-gate` の npm ci は 105 秒 (run 35218837673) と 122 秒 (35219636607)。
@@ -63,6 +68,10 @@ updated: 2026-09-18
 - **完了条件**: hit した run で Install dependencies 相当の時間が 30 秒以下になったことを job step 時間で
   実測し、develop-quality-gate の合計が 3 分以内に戻る。
 
+- **実測 (2026-09-18)**: PR #977 attempt 2 で 12 job すべて hit、復元 8〜11 秒、Install dependencies は skipped (0 秒)。
+  job 単位で 100〜130 秒短縮 (Static Gates 246→129、Catalog Gates 259→109、Remotion 154→47、Blog Thumbnail 152→28)。
+  develop-quality-gate の初回 (miss) は save 9 秒。attempt 1 では同一 key を複数 job が同時に reserve しようとして
+  "Unable to reserve cache" が 5 件出るが、最初の 1 job が save するので害は無い。
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-23]
@@ -138,6 +147,9 @@ updated: 2026-09-18
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:audit-weekly -- --base-url https://stats47.jp] [起票:2026-09-15]
 
 - **owner**: ranking-ui-manager (ranking) / theme-ui-manager (theme) / site-ux-manager (共通部品・横断)
+- **実測 (2026-09-18)**: develop→main PR #977 の `page-quality` (representative) が同じ違反で赤 (merge blocker)。
+  `/themes/population-dynamics` 0.5081 / `/blog` 0.3235 / `/ranking/total-population` 0.3151 (閾値 0.3)。
+  rail/surface 統一 (1006e1e21) 後の値。CI 側の扱いは `CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`。
 - 2026-09-15、`page-quality:audit-weekly` を本番全 6,237 URL に実行 (初の全件試行)。
   error 2,698 / warning 5,106。**duplicate_link_ratio がほぼ全テンプレートの支配的違反**で、
   個別ページの内容問題ではなく共通コンポーネント由来の疑いが強い:
@@ -746,6 +758,9 @@ updated: 2026-09-18
   読んで代表 URL を検査する。同じ PR で失敗 5 回中 5 回 (「next start did not become ready」
   「digest-mismatch: error」「違反: error=4 warning=16」)、6 回目でコード変更なく成功。コードではなく
   環境で落ちている必須 gate。
+- **実測 (2026-09-18、PR #977)**: 今回の失敗は環境ではなく決定的な違反 (`duplicate_link_ratio` 3 URL、
+  `SITEWIDE-DUPLICATE-LINK-RATIO-01` の症状)。つまりこの job は「本番 R2 依存の揺れ」と「diff から選ぶ代表
+  テンプレートに既知のサイト横断違反が乗る」の 2 経路で赤になり、どちらも PR のコード差分と独立に結果が変わる。
 - **次**: 週次の `page-quality:audit-weekly` が既にあるので、PR では必須から外して scheduled に寄せるのが最小。
   PR に残すなら R2 読みを固定 fixture (build 時に落とした snapshot) に差し替え、readiness 待ちを
   60 秒から伸ばし、`digest-mismatch` を warning に落として決定的にする。
