@@ -67,7 +67,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: ⚙️ GitHub Actions Syntax Guard
@@ -95,25 +109,6 @@ jobs:
         run: node .claude/scripts/lib/audit-workflow-policy.cjs --strict
         continue-on-error: false
 
-      - name: 🚨 Alert lifecycle contract
-        # domain alert は1障害=1Issue。日付違いの量産と、復旧後もopenのまま残る退行を止める。
-        run: npm run test:alert-lifecycle
-        continue-on-error: false
-
-      - name: 🔄 GSC operations cycle contract
-        # snapshot→review→候補判断→plan→月次集約の接続、JST週境界、coverage入力鮮度の退行を止める。
-        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs
-        continue-on-error: false
-
-      - name: 🔁 Workflow Commit-back Contract Gate
-        # cron が「確実にループし続ける」ための契約。2026-08-16 に 2 つの停止事故を踏んだ:
-        # pull せずに push して (fetch first) で毎回落ちる型 (11 workflow) と、
-        # ラチェット 1 つの赤で無関係な queue まで commit されない型 (是正ループが 17 日停止)。
-        # sync-snapshots は同じ「成果を落とす」型を 2 つ抱えていた (2026-08-17):
-        # 1 task の失敗で末尾 push に到達しない型と、timeout で push が途中打ち切られる型。
-        run: npm run test:workflow-commit-back
-        continue-on-error: false
-
       - name: 🧯 Quality Gate Ratchet Contracts
         # 既存warning/skip/fail-openと金額単位の例外は期限・owner付きbaselineで縮小のみ許可する。
         # 新しいchecker自身のmutation testと、週次監査がIssue更新後に失敗を伝播する契約も固定する。
@@ -128,54 +123,6 @@ jobs:
           node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main
           node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
           node .claude/scripts/lib/check-render-ci-contract.cjs --base origin/main
-        continue-on-error: false
-
-      - name: 🧭 Affiliate Offer Taxonomy Contract
-        # creative programRef と案件profileの1:1、vertical/lane/friction/成果条件の型を検査する。
-        # 未確認案件は pending-classification のまま明示し、配信候補へ混入させない。
-        run: npx tsx .claude/scripts/ads/audit-affiliate-offer-profiles.ts
-        continue-on-error: false
-
-      - name: 🤖 Content Generation Routine Contract Gate
-        # 対象あり生成0件をgreenに戻さない。LLM実行→決定的検証→公開の順序と
-        # OAuth / MCP / full-output の安全契約を静的に固定する。
-        run: npm run test:content-routines
-        continue-on-error: false
-
-      - name: 🗒️ note Catalog Contract Gate
-        # 読者表題への専門語再混入、catalog参照整合性、title重複を決定的に検査する。
-        # ローカルR2がある環境では draft/H1/cover title のドリフトも同じvalidatorが検出する。
-        run: |
-          npm run check:product-storefront --workspace apps/web
-          npm run note:catalog:validate
-        continue-on-error: false
-
-      - name: 🧭 Business Plan SSOT Contract Gate
-        # 25章の採用差分、100企画、owner/skill、設計文書、KPI参照を決定的に検査する。
-        # 原案のD1/PostGISをDBレス正典へ戻すドリフトも拒否する。
-        run: npm run business-plan:check
-        continue-on-error: false
-
-      - name: 🗂️ Backlog Loop Contract Gate
-        # バックログの行削除は「機械 gate を通した証拠が ledger にあること」が必要条件。
-        # 宣言だけの完了・排他 writer (04 / memory / learned) への write・
-        # blocked-owner の自動処理を、パーサ / キュー / 台帳 / verify の 4 層で不能にする。
-        run: npm run test:backlog-loop
-        continue-on-error: false
-
-      - name: 📈 Audit Script Contract Gate
-        # 監査スクリプトの判定は「行の存在」ではなく「値の有効性」を見る。
-        # e-Stat は該当なしを '-' / '‐' 等のプレースホルダで返すため、行だけを数えると
-        # 全国値が無い統計表を「全国値あり」と誤判定する (実測 1 件・2026-08-20 発見)。
-        run: npm run test:audit-scripts
-        continue-on-error: false
-
-      - name: 🖼️ Image Generation Pipeline Contract Gate
-        # planner/manifest/exact publisher/renderer hash と workflow policy の契約を
-        # ネットワークや本番R2に依存せず検証する。公開R2の鮮度監査は週次・post-deploy が担当する。
-        run: |
-          npm run type-check:image-pipeline
-          npm run test:image-pipeline
         continue-on-error: false
 
       - name: 🔁 Sync-Snapshots Task Drift
@@ -251,12 +198,6 @@ jobs:
           npm run source-vault:test
         continue-on-error: false
 
-      - name: 🗾 Japan Zue Evidence Inventory Gate
-        # private原本はCIへ持ち込まない。tracked candidate/item/summaryのhash同期、
-        # 1,428件の判定、pilot 10件の一次資料・単位・地域粒度・lineageを決定的に検査する。
-        run: node .claude/scripts/lib/check-japan-zue-evidence-inventory.mjs
-        continue-on-error: false
-
       - name: 🚧 Web e-Stat Import Boundary Guard
         # 本番 apps/web から e-Stat への推移的な値 import 到達を監視。
         # static/dynamic/re-export/require/wrapper/alias の新規 edge を PR base と比較して弾く。
@@ -265,42 +206,6 @@ jobs:
         run: |
           node --test .claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs
           node .claude/scripts/lib/check-web-estat-imports.cjs --base "${{ github.event.pull_request.base.sha }}"
-        continue-on-error: false
-
-      - name: 📚 Docs Governance and Link Guard
-        # 固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOTを検査。
-        # 鮮度は週次で通知し、PRでは構造errorと新規broken linkだけをブロックする。
-        run: |
-          node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/check-docs-links.test.cjs
-          node .claude/scripts/lib/check-docs-governance.cjs
-          node .claude/scripts/lib/check-docs-links.cjs --baseline
-        continue-on-error: false
-
-      - name: 📝 Blog Quality Gate Self-Test
-        # quality-gate.mjs が守る blog ルール (数値の書き方・SVG 構造/実在/命名・値照合) の
-        # 回帰テスト。ゲート本体ではなく **ゲートが壊れていないこと** を検査する。
-        # 正常データで発火しないことと違反注入で発火することの両方を見る (mutation testing)。
-        # 従来これらは手動実行しか経路が無く、gate が黙って効かなくなっても誰も気づけなかった。
-        # 正典: .claude/rules/blog-quality-standards.md「ルール ↔ 機械チェック 対応表」
-        run: |
-          node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
-          node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
-          node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
-          node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
-          node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
-          node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
-          node --test .claude/scripts/lib/__tests__/svg-lint.responsive-bar.test.mjs
-          # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
-          # API キー不要の純粋関数テストなので PR で毎回回せる。
-          npm run test:ai-content --workspace apps/web
-        continue-on-error: false
-
-      - name: 🤖 Agent / Skill Prompt Contract Guard
-        # 全custom agentのmodel/Output Contract、全active skillのowner、
-        # frontmatter構文、Opus 5過剰検証文言、subagent上限と共通契約参照を決定的に検査する。
-        run: |
-          node --test .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs
-          node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan
         continue-on-error: false
 
       - name: 📱 Static Asset Contract Guard
@@ -313,73 +218,6 @@ jobs:
         # public画像のデコード/容量/OGP寸法/SVG安全性と、記事内相対画像参照を検査。
         # 既存findingはbaselineで許容し、新規の欠落・肥大化だけをブロックする。
         run: node .claude/scripts/lib/check-asset-policy.cjs --baseline
-        continue-on-error: false
-
-      - name: 🗂️ Theme Portfolio State Guard
-        # テーマポートフォリオ state の schema + 判定規律 (根拠なし merge/retire 禁止・
-        # 重複実験防止・推測値/標本不足比率の混入防止・THEME_CATALOGS 整合) を検証。
-        # 読み取り専用で破壊的変更なし。正典: .claude/state/themes/README.md
-        run: |
-          node .claude/scripts/themes/validate-theme-state.mjs
-          npm run theme:quality:test
-        continue-on-error: false
-
-      - name: 📊 Affiliate Compliance / Operations Guard
-        # 直接配置台帳の構造検証 + compliance/operations 判定コアの fixture テスト。
-        # ネットワーク・R2 には触れない (本文突合 --live は週次 workflow が担当)。
-        # 正典: .claude/rules/affiliate-ads-standards.md / skill /audit-affiliate-compliance
-        run: |
-          npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check
-          npx tsx .claude/scripts/ads/audit-affiliate-relevance.ts --check
-          node --test .claude/scripts/ads/__tests__/
-        continue-on-error: false
-
-      - name: 🧮 AI Content Gate Guard
-        # ai-content の 2 つの決定的ゲートを検証する。
-        #   - number-audit  : 生成物の数値を実データと照合する (捏造検知)
-        #   - value-health  : 観測値が順位として成立するか (全県同値・県重複・47超)
-        # ネットワーク・R2 には触れない (実データ照合は audit-ai-content.mjs が実行時に行う)。
-        # 正典: .claude/rules/ranking-content-standards.md
-        run: node --test .claude/scripts/ai-content/__tests__/*.test.mjs
-        continue-on-error: false
-
-      - name: 📈 AdSense Metrics Contract Guard
-        # AdSense の job 契約 / ad unit inventory / unit history の突き合わせロジックと、
-        # コード側 slot 定数 (constants.ts) の決定的パーサを検証する。
-        # ネットワーク・AdSense API には触れない (実データ取得は週次 workflow が担当)。
-        # 正典: .claude/scripts/metrics/lib/adsense-report-contract.mjs
-        run: npm run metrics:test
-        continue-on-error: false
-
-      - name: 📐 PSI Collector Contract Guard
-        # PSI batch に保存する DOM 規模 (dom_size) の抽出が Lighthouse の 2 形式で成立し、
-        # 欠測を 0 と誤らないことを検証する。PSI API には触れない (実計測は日次 workflow)。
-        # 正典: .claude/scripts/psi/fetch-psi-audit.mjs
-        run: npm run psi:test
-        continue-on-error: false
-
-      - name: 🔐 Google Admin Allowlist Guard
-        # allowlist が意図した集合そのものであること、ad unit の破壊的 action が denylist の
-        # ままであること、承認ゲート (--commit / --approve token) が迂回できないこと、
-        # AdSense account assert が fail closed であることを検証する。browser は起動しない。
-        # 正典: .claude/scripts/google-admin/README.md
-        run: npm run google-admin:test
-        continue-on-error: false
-
-      - name: 📋 Survey Portfolio State Guard
-        # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
-        # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
-        # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
-        # (本文生成・R2 push・deploy は行わない)。正典: .claude/state/surveys/README.md
-        run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
-        continue-on-error: false
-
-      - name: 🧬 Survey Taxonomy Cross-Surface Guard
-        # ranking / ThemeCatalog chart / blog chart を同じ survey master へ接続した全量 state を検証。
-        # PR では R2 を再走査せず、git 由来の ranking/theme drift・state freshness・縮小専用
-        # ratchet を offline で確認する。blog の全量再取得は週次 workflow が担当する。
-        # 正典: .claude/rules/survey-linkage-standards.md
-        run: npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check
         continue-on-error: false
 
       - name: 🧹 Repository Hygiene Regression Guard
@@ -439,12 +277,6 @@ jobs:
           node --test .claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs
         continue-on-error: false
 
-      - name: 🚦 Preflight Aggregator Contract
-        # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
-        # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
-        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs
-        continue-on-error: false
-
       - name: 🛑 Commit Message Skip-Token Guard
         # commit メッセージの CI skip トークンを弾く commit-msg フックの検出力を固定する。
         # 同じ事故が 2026-08-05 と 2026-08-20 に発生 (どちらもトークンを話題にする commit)。
@@ -500,6 +332,289 @@ jobs:
             exit 1
           fi
           echo "✅ apps/web/src に D1 間接的 import なし"
+        continue-on-error: false
+
+      - name: 🏷 Known Tag Keys Gate
+        run: |
+          # middleware は KNOWN_TAG_KEYS に無い /tag/<key> を 410 Gone にする。
+          # このファイルが R2 blog snapshot から乖離すると、記事のタグリンクが黙って死ぬ。
+          # (2026-04-26〜07-24 は生成元だった D1 の廃止で凍結し 1,988 本が 410 だった)
+          # デプロイ前に PR で弾く。修正は生成スクリプトを流して commit するだけ。
+          # 規約: .claude/rules/blog-quality-standards.md「内部リンクの実在」
+          (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts --check)
+          # 未公開記事の /blog/<slug> は notFound が prerender として焼き付き
+          # HTTP 200 +「記事が見つかりません」で固着する。middleware で 410 に短絡するため
+          # 未公開集合が R2 の実態とズレていないかを検査する (再公開の取り残しも拾う)。
+          (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts --check)
+          # sitemap はビルド時 prerender され、その時点で R2 に到達できない。
+          # blog / tag / survey はこの git 定数が無いと「空の sitemap」が焼かれる
+          # (2026-08-06 実測: 公開 422 記事が 1 件も提出されず sitemap/4.xml は /blog のみだった)。
+          # 記事公開で R2 が変わるとこの定数は陳腐化するので PR で鮮度を弾く。
+          (cd apps/web && npx tsx scripts/generate-sitemap-blog-entries.ts --check)
+          # Header / home ポータル / 楽天商品カードが使うカテゴリ件数・代表ランキング・
+          # 品目語の生成物。ずれると表示が実データと食い違う。生成物を挟む理由は
+          # 「共通 Header 経由で METRICS_REGISTRY が全 route の bundle に入るのを防ぐ」
+          # (apps/web/scripts/generate-runtime-metric-summaries.ts)。
+          (cd apps/web && npx tsx scripts/generate-runtime-metric-summaries.ts --check)
+          # 索引 (/ranking のカテゴリ別代表)・ホーム注目 8 件・問いかけコピーの生成物。
+          # /ranking を R2 非依存の純静的 SSG のまま保つため、選定結果をビルド前に焼いている。
+          # 入力は git TS + git 管理下の GSC snapshot だけなのでネットワーク不要。
+          # (apps/web/scripts/generate-ranking-prominence.ts)
+          (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check)
+        continue-on-error: false
+
+  contract-tests:
+    name: Contract Tests
+    # CI-SPEED-STATIC-GATES-SPLIT-01 (2026-09-18): 旧 Static Gates 65 step 直列 (実測 486 秒) から分離。
+    # tooling 自身の `node --test` 自己検査群。最重は Workflow Commit-back Contract Gate (115 秒)。
+    # job を分けるのは並列化と「1 run で複数の失敗を報告する」ため (PR #974 は fail-fast で 1 件ずつ露出し 6 回目で通った)。
+    # step 単位の continue-on-error は使わない: check-checker-wiring.cjs が fail-open と分類し registry の blocking と矛盾する。
+    # git 履歴を使う step は無いので shallow checkout。
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: 🚨 Alert lifecycle contract
+        # domain alert は1障害=1Issue。日付違いの量産と、復旧後もopenのまま残る退行を止める。
+        run: npm run test:alert-lifecycle
+        continue-on-error: false
+
+      - name: 🔄 GSC operations cycle contract
+        # snapshot→review→候補判断→plan→月次集約の接続、JST週境界、coverage入力鮮度の退行を止める。
+        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs
+        continue-on-error: false
+
+      - name: 🔁 Workflow Commit-back Contract Gate
+        # cron が「確実にループし続ける」ための契約。2026-08-16 に 2 つの停止事故を踏んだ:
+        # pull せずに push して (fetch first) で毎回落ちる型 (11 workflow) と、
+        # ラチェット 1 つの赤で無関係な queue まで commit されない型 (是正ループが 17 日停止)。
+        # sync-snapshots は同じ「成果を落とす」型を 2 つ抱えていた (2026-08-17):
+        # 1 task の失敗で末尾 push に到達しない型と、timeout で push が途中打ち切られる型。
+        run: npm run test:workflow-commit-back
+        continue-on-error: false
+
+      - name: 🧭 Affiliate Offer Taxonomy Contract
+        # creative programRef と案件profileの1:1、vertical/lane/friction/成果条件の型を検査する。
+        # 未確認案件は pending-classification のまま明示し、配信候補へ混入させない。
+        run: npx tsx .claude/scripts/ads/audit-affiliate-offer-profiles.ts
+        continue-on-error: false
+
+      - name: 🤖 Content Generation Routine Contract Gate
+        # 対象あり生成0件をgreenに戻さない。LLM実行→決定的検証→公開の順序と
+        # OAuth / MCP / full-output の安全契約を静的に固定する。
+        run: npm run test:content-routines
+        continue-on-error: false
+
+      - name: 🗒️ note Catalog Contract Gate
+        # 読者表題への専門語再混入、catalog参照整合性、title重複を決定的に検査する。
+        # ローカルR2がある環境では draft/H1/cover title のドリフトも同じvalidatorが検出する。
+        run: |
+          npm run check:product-storefront --workspace apps/web
+          npm run note:catalog:validate
+        continue-on-error: false
+
+      - name: 🧭 Business Plan SSOT Contract Gate
+        # 25章の採用差分、100企画、owner/skill、設計文書、KPI参照を決定的に検査する。
+        # 原案のD1/PostGISをDBレス正典へ戻すドリフトも拒否する。
+        run: npm run business-plan:check
+        continue-on-error: false
+
+      - name: 🗂️ Backlog Loop Contract Gate
+        # バックログの行削除は「機械 gate を通した証拠が ledger にあること」が必要条件。
+        # 宣言だけの完了・排他 writer (04 / memory / learned) への write・
+        # blocked-owner の自動処理を、パーサ / キュー / 台帳 / verify の 4 層で不能にする。
+        run: npm run test:backlog-loop
+        continue-on-error: false
+
+      - name: 📈 Audit Script Contract Gate
+        # 監査スクリプトの判定は「行の存在」ではなく「値の有効性」を見る。
+        # e-Stat は該当なしを '-' / '‐' 等のプレースホルダで返すため、行だけを数えると
+        # 全国値が無い統計表を「全国値あり」と誤判定する (実測 1 件・2026-08-20 発見)。
+        run: npm run test:audit-scripts
+        continue-on-error: false
+
+      - name: 🖼️ Image Generation Pipeline Contract Gate
+        # planner/manifest/exact publisher/renderer hash と workflow policy の契約を
+        # ネットワークや本番R2に依存せず検証する。公開R2の鮮度監査は週次・post-deploy が担当する。
+        run: |
+          npm run type-check:image-pipeline
+          npm run test:image-pipeline
+        continue-on-error: false
+
+      - name: 🗾 Japan Zue Evidence Inventory Gate
+        # private原本はCIへ持ち込まない。tracked candidate/item/summaryのhash同期、
+        # 1,428件の判定、pilot 10件の一次資料・単位・地域粒度・lineageを決定的に検査する。
+        run: node .claude/scripts/lib/check-japan-zue-evidence-inventory.mjs
+        continue-on-error: false
+
+      - name: 📚 Docs Governance and Link Guard
+        # 固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOTを検査。
+        # 鮮度は週次で通知し、PRでは構造errorと新規broken linkだけをブロックする。
+        run: |
+          node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/check-docs-links.test.cjs
+          node .claude/scripts/lib/check-docs-governance.cjs
+          node .claude/scripts/lib/check-docs-links.cjs --baseline
+        continue-on-error: false
+
+      - name: 📝 Blog Quality Gate Self-Test
+        # quality-gate.mjs が守る blog ルール (数値の書き方・SVG 構造/実在/命名・値照合) の
+        # 回帰テスト。ゲート本体ではなく **ゲートが壊れていないこと** を検査する。
+        # 正常データで発火しないことと違反注入で発火することの両方を見る (mutation testing)。
+        # 従来これらは手動実行しか経路が無く、gate が黙って効かなくなっても誰も気づけなかった。
+        # 正典: .claude/rules/blog-quality-standards.md「ルール ↔ 機械チェック 対応表」
+        run: |
+          node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
+          node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
+          node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
+          node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
+          node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
+          node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
+          node --test .claude/scripts/lib/__tests__/svg-lint.responsive-bar.test.mjs
+          # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
+          # API キー不要の純粋関数テストなので PR で毎回回せる。
+          npm run test:ai-content --workspace apps/web
+        continue-on-error: false
+
+      - name: 🤖 Agent / Skill Prompt Contract Guard
+        # 全custom agentのmodel/Output Contract、全active skillのowner、
+        # frontmatter構文、Opus 5過剰検証文言、subagent上限と共通契約参照を決定的に検査する。
+        run: |
+          node --test .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs
+          node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan
+        continue-on-error: false
+
+      - name: 🧮 AI Content Gate Guard
+        # ai-content の 2 つの決定的ゲートを検証する。
+        #   - number-audit  : 生成物の数値を実データと照合する (捏造検知)
+        #   - value-health  : 観測値が順位として成立するか (全県同値・県重複・47超)
+        # ネットワーク・R2 には触れない (実データ照合は audit-ai-content.mjs が実行時に行う)。
+        # 正典: .claude/rules/ranking-content-standards.md
+        run: node --test .claude/scripts/ai-content/__tests__/*.test.mjs
+        continue-on-error: false
+
+      - name: 📈 AdSense Metrics Contract Guard
+        # AdSense の job 契約 / ad unit inventory / unit history の突き合わせロジックと、
+        # コード側 slot 定数 (constants.ts) の決定的パーサを検証する。
+        # ネットワーク・AdSense API には触れない (実データ取得は週次 workflow が担当)。
+        # 正典: .claude/scripts/metrics/lib/adsense-report-contract.mjs
+        run: npm run metrics:test
+        continue-on-error: false
+
+      - name: 📐 PSI Collector Contract Guard
+        # PSI batch に保存する DOM 規模 (dom_size) の抽出が Lighthouse の 2 形式で成立し、
+        # 欠測を 0 と誤らないことを検証する。PSI API には触れない (実計測は日次 workflow)。
+        # 正典: .claude/scripts/psi/fetch-psi-audit.mjs
+        run: npm run psi:test
+        continue-on-error: false
+
+      - name: 🔐 Google Admin Allowlist Guard
+        # allowlist が意図した集合そのものであること、ad unit の破壊的 action が denylist の
+        # ままであること、承認ゲート (--commit / --approve token) が迂回できないこと、
+        # AdSense account assert が fail closed であることを検証する。browser は起動しない。
+        # 正典: .claude/scripts/google-admin/README.md
+        run: npm run google-admin:test
+        continue-on-error: false
+
+      - name: 🚦 Preflight Aggregator Contract
+        # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
+        # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
+        run: node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/remove-worktree.test.mjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs
+        continue-on-error: false
+
+  catalog-gates:
+    name: Catalog Gates
+    # CI-SPEED-STATIC-GATES-SPLIT-01 (2026-09-18): 旧 Static Gates から分離した data-configs SSOT 検証と portfolio state。
+    # `npx tsx` が 2,000 件超の metric registry を読む step 群 (SEO Meta Factual 46 秒 / Theme Portfolio State 23 秒)。
+    # git 履歴を使う step は無いので shallow checkout。
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: 🗂️ Theme Portfolio State Guard
+        # テーマポートフォリオ state の schema + 判定規律 (根拠なし merge/retire 禁止・
+        # 重複実験防止・推測値/標本不足比率の混入防止・THEME_CATALOGS 整合) を検証。
+        # 読み取り専用で破壊的変更なし。正典: .claude/state/themes/README.md
+        run: |
+          node .claude/scripts/themes/validate-theme-state.mjs
+          npm run theme:quality:test
+        continue-on-error: false
+
+      - name: 📊 Affiliate Compliance / Operations Guard
+        # 直接配置台帳の構造検証 + compliance/operations 判定コアの fixture テスト。
+        # ネットワーク・R2 には触れない (本文突合 --live は週次 workflow が担当)。
+        # 正典: .claude/rules/affiliate-ads-standards.md / skill /audit-affiliate-compliance
+        run: |
+          npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check
+          npx tsx .claude/scripts/ads/audit-affiliate-relevance.ts --check
+          node --test .claude/scripts/ads/__tests__/
+        continue-on-error: false
+
+      - name: 📋 Survey Portfolio State Guard
+        # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
+        # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
+        # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
+        # (本文生成・R2 push・deploy は行わない)。正典: .claude/state/surveys/README.md
+        run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
+        continue-on-error: false
+
+      - name: 🧬 Survey Taxonomy Cross-Surface Guard
+        # ranking / ThemeCatalog chart / blog chart を同じ survey master へ接続した全量 state を検証。
+        # PR では R2 を再走査せず、git 由来の ranking/theme drift・state freshness・縮小専用
+        # ratchet を offline で確認する。blog の全量再取得は週次 workflow が担当する。
+        # 正典: .claude/rules/survey-linkage-standards.md
+        run: npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check
         continue-on-error: false
 
       - name: 📅 Metric Years Gate
@@ -598,35 +713,6 @@ jobs:
           npm run generate:editorial-index --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
-      - name: 🏷 Known Tag Keys Gate
-        run: |
-          # middleware は KNOWN_TAG_KEYS に無い /tag/<key> を 410 Gone にする。
-          # このファイルが R2 blog snapshot から乖離すると、記事のタグリンクが黙って死ぬ。
-          # (2026-04-26〜07-24 は生成元だった D1 の廃止で凍結し 1,988 本が 410 だった)
-          # デプロイ前に PR で弾く。修正は生成スクリプトを流して commit するだけ。
-          # 規約: .claude/rules/blog-quality-standards.md「内部リンクの実在」
-          (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts --check)
-          # 未公開記事の /blog/<slug> は notFound が prerender として焼き付き
-          # HTTP 200 +「記事が見つかりません」で固着する。middleware で 410 に短絡するため
-          # 未公開集合が R2 の実態とズレていないかを検査する (再公開の取り残しも拾う)。
-          (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts --check)
-          # sitemap はビルド時 prerender され、その時点で R2 に到達できない。
-          # blog / tag / survey はこの git 定数が無いと「空の sitemap」が焼かれる
-          # (2026-08-06 実測: 公開 422 記事が 1 件も提出されず sitemap/4.xml は /blog のみだった)。
-          # 記事公開で R2 が変わるとこの定数は陳腐化するので PR で鮮度を弾く。
-          (cd apps/web && npx tsx scripts/generate-sitemap-blog-entries.ts --check)
-          # Header / home ポータル / 楽天商品カードが使うカテゴリ件数・代表ランキング・
-          # 品目語の生成物。ずれると表示が実データと食い違う。生成物を挟む理由は
-          # 「共通 Header 経由で METRICS_REGISTRY が全 route の bundle に入るのを防ぐ」
-          # (apps/web/scripts/generate-runtime-metric-summaries.ts)。
-          (cd apps/web && npx tsx scripts/generate-runtime-metric-summaries.ts --check)
-          # 索引 (/ranking のカテゴリ別代表)・ホーム注目 8 件・問いかけコピーの生成物。
-          # /ranking を R2 非依存の純静的 SSG のまま保つため、選定結果をビルド前に焼いている。
-          # 入力は git TS + git 管理下の GSC snapshot だけなのでネットワーク不要。
-          # (apps/web/scripts/generate-ranking-prominence.ts)
-          (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check)
-        continue-on-error: false
-
   type-check:
     name: Type Check
     needs: changes
@@ -646,7 +732,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 📐 Type Check
@@ -674,7 +774,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🧪 Run Web Unit Tests
@@ -730,7 +844,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🏗️ Build Admin Console
@@ -788,7 +916,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🧪 Run Remotion Unit Tests
@@ -820,7 +962,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🎨 Compare deterministic chart renders
@@ -858,7 +1014,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🏗️ Build Check
@@ -905,7 +1075,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🖼️ Blog Image Renderer Contract Gate
@@ -933,7 +1117,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🌐 Install Playwright Chromium
@@ -1016,7 +1214,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-SPEED-NODE-MODULES-CACHE-01: setup-node の cache:'npm' は tarball だけで展開・link は毎回払う
+        # (実測 105〜122 秒/job)。lockfile hash キーで node_modules ごと復元し、hit 時は npm ci を skip する。
+        # postinstall/prepare を持つ workspace は無いので復元結果は npm ci と等価。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🌐 Install Playwright Chromium
@@ -1067,7 +1279,7 @@ jobs:
   # 差分分類で対象外になったjobの skipped は正常とする。
   quality-check:
     name: Code Quality Check
-    needs: [changes, static-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e, page-quality]
+    needs: [changes, static-gates, contract-tests, catalog-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e, page-quality]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -1077,7 +1289,7 @@ jobs:
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "changes=${{ needs.changes.result }} static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }} page-quality=${{ needs.page-quality.result }}"
+          echo "changes=${{ needs.changes.result }} static-gates=${{ needs.static-gates.result }} contract-tests=${{ needs.contract-tests.result }} catalog-gates=${{ needs.catalog-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }} page-quality=${{ needs.page-quality.result }}"
           exit 1
 
       - name: ✅ All Checks Passed

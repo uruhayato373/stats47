@@ -1,0 +1,68 @@
+name: 📦 Warm node_modules cache
+
+# ─────────────────────────────────────────────────────────────────────────────
+# main (default branch) scope に node_modules キャッシュを置く (CI-SPEED-NODE-MODULES-CACHE-01)。
+#
+# ★なぜ要るか: GitHub Actions のキャッシュは「同じ branch / PR の base / default branch」で
+#   作られたものしか復元できない。develop-quality-gate が develop で save しても
+#   develop→main の PR run は読めず、PR の初回は全 job が npm ci (実測 105〜122 秒) を払う。
+#   default branch (main) に同じ key で置けば、全 PR の初回から hit する。
+#
+# ★deploy-workers.yml で兼ねない理由: あちらは Node 22 (Wrangler 要件) で、PR/develop の
+#   job は Node 20。native module の ABI が違うので key を共有できない。
+#
+# ★発火: lockfile が main で変わったとき + 週 1 (未使用 7 日で evict されるのを防ぐ。
+#   restore の hit も「使用」に数えられる)。
+# ─────────────────────────────────────────────────────────────────────────────
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package-lock.json'
+      - '.github/workflows/cache-node-modules.yml'
+  schedule:
+    - cron: '0 21 * * 0' # 月曜 06:00 JST
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cache-node-modules
+  cancel-in-progress: true
+
+jobs:
+  warm:
+    name: Warm cache
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Restore node_modules cache
+        # key は pr-quality-check.yml / develop-quality-gate.yml と同一でなければ意味が無い。
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: 📋 Report
+        run: echo "cache-hit=${{ steps.node-modules-cache.outputs.cache-hit }} key=node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}" >> "$GITHUB_STEP_SUMMARY"

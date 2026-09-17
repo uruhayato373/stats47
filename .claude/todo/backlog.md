@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-16
+updated: 2026-09-18
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,48 @@ updated: 2026-09-16
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [CI-SPEED-STATIC-GATES-SPLIT-01] main PR の Static Gates (65 step 直列・486 秒) を domain 別の並列 job に分け、1 run で複数の失敗を報告する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-09-18] [期日:2026-10-15] [進行中]
+
+- **owner**: devops-runner
+- **実測 (2026-09-16、PR #974)**: `pr-quality-check.yml` は 1 回 633 秒。Release PR が失敗 5 回 + cancel 1 回の
+  6 回目で通った。Static Gates は 65 step を直列 fail-fast で回すため、各回で別の gate が 1 件ずつ露出した
+  (Quality Gate Ratchet → Affiliate Compliance → Checker Wiring → Workspace Contract)。Static Gates 単体は
+  run 35157109396 で 486 秒 (数週間前は約 200 秒)。最重 step は Workflow Commit-back Contract Gate 115 秒、
+  SEO Meta Factual Gate 46 秒、Image Pipeline Contract 28 秒。
+- **次**: 65 step を `static-gates` (repo/workflow guard + workspace contract) / `contract-tests` (`node --test` の
+  tooling 自己検査群) / `catalog-gates` (data-configs SSOT 検証 + portfolio state) の 3 job に分け、
+  `quality-check` の `needs` と結果 echo に 2 job を足す。step 単位の `continue-on-error` は使わない
+  (`check-checker-wiring.cjs` が fail-open と分類し、registry の `blocking: true` と矛盾して落ちる)。
+- **禁止**: `static-gates` job id と、そこに pin されている `npx eslint src` (web の lint prCheck) と
+  Workspace Contract Guard step (`workspace-ci-matrix-contract` / `critical-module-coverage-contract` が
+  job id で参照) は動かさない。`--base origin/main` / `BASE_SHA` を使う step は fetch-depth 0 の
+  `static-gates` に残す。
+- **完了条件**: 分割後の PR run で 3 job が並列に走り、Static Gates 系の壁時計が 486 秒から
+  短縮されたことを run の job 時間で実測する。`check-checker-wiring.cjs --baseline` /
+  `check-workspace-contract.cjs` / `audit-workflow-policy.cjs --strict` が green。
+
+### [CI-SPEED-NODE-MODULES-CACHE-01] CI の各 job が独立に払っている `npm ci` (105〜122 秒) を node_modules キャッシュで短縮する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/audit-workflow-policy.cjs --strict] [起票:2026-09-18] [期日:2026-10-15] [進行中]
+
+- **owner**: devops-runner
+- **実測 (2026-09-17)**: `develop-quality-gate` の npm ci は 105 秒 (run 35218837673) と 122 秒 (35219636607)。
+  `pr-quality-check.yml` は 10 job が各自 `npm ci` する。`setup-node` の `cache: 'npm'` は tarball の
+  キャッシュだけで、展開・link の時間は毎回払う。root `node_modules` は 1.7 GB、workspace 側は 24 dir 計
+  60 MB。`postinstall` / `prepare` を持つ workspace は無い (キャッシュ復元 = `npm ci` 結果と等価)。
+- **次**: `actions/cache` (SHA pin) を `node_modules` + `apps/*/node_modules` + `packages/*/node_modules` に
+  `package-lock.json` の hash + OS + Node major をキーにして張り、hit 時は `npm ci` を skip する。
+  対象は `develop-quality-gate.yml` と `pr-quality-check.yml` の全 job。`cache: 'npm'` は miss 時の
+  保険として残す。PR run は develop scope のキャッシュを読めない (GitHub の制約: 読めるのは同 branch /
+  base / default のみ) ため、同一 PR の 2 回目以降と lockfile 不変の期間で効く。main 側の
+  `deploy-workers.yml` にも同じ save を足すと default branch scope になり全 PR の初回でも効く。
+- **停止条件**: 復元が 60 秒を超える (圧縮後サイズが大きすぎる) なら root `node_modules` だけに絞って再計測。
+  `sharp` 等 native module が復元後に落ちるなら key に runner image を足す。
+- **完了条件**: hit した run で Install dependencies 相当の時間が 30 秒以下になったことを job step 時間で
+  実測し、develop-quality-gate の合計が 3 分以内に戻る。
 
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
@@ -659,6 +701,91 @@ updated: 2026-09-16
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [CI-SPEED-UNIT-TESTS-EARLY-01] unit test を develop-gate の並列 job として走らせ、main PR まで一度も走らない状態を止める
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-workspace-contract.cjs] [起票:2026-09-18] [期日:2026-11-15]
+
+- **owner**: devops-runner
+- **実測**: pre-commit は unit test を意図的に skip、develop-quality-gate は 2026-09-17 の実測で vitest 単体 162 秒が
+  停止条件 (1 job 直列 3 分) を超えたため外した (`CI-DEVELOP-GATE-COVERAGE-01`)。結果、unit test は
+  develop→main PR で初めて走り、PR #974 では Unit Tests job が 2 回落ち (Package / Web)、2026-09-17 には
+  `RailAdSlot` mock 欠落で web 4 test が crash したまま develop に潜んでいた。PR 側の Unit Tests job は 466 秒。
+- **次**: `develop-quality-gate.yml` に `unit-tests` job を **別 job** として追加する (直列の 3 分予算は
+  1 job の壁時計の話なので、並列なら push が詰まらない)。`CI-SPEED-NODE-MODULES-CACHE-01` の後に着手すると
+  install 分が消えて 162 秒 + 復元 30 秒程度に収まる。`pr-quality-check.yml` の Unit Tests job も
+  web / packages を並列 2 job に分け、`quality-gates.json` の prChecks (`job: test`) と
+  `critical-module-coverage-contract.test.cjs` (`jobBlock(text, "test")`) を追従させる。
+- **停止条件**: develop-gate の unit job が flake する (memory `project_two_machine_local_footprint`
+  の vitest フレーク) なら retry 1 回付きで様子を見て、それでも揺れるなら scheduled に戻す。
+- **完了条件**: develop push で unit test が並列に走り、意図的に壊した test が develop 着地時点で赤になる
+  ことを 1 回実測する。
+
+### [CI-SPEED-PREFLIGHT-PR-REGISTRY-01] `preflight:pr` の gate 一覧を手書き 15 件から registry / workflow 由来に変える
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs] [起票:2026-09-18] [期日:2026-11-15]
+
+- **owner**: devops-runner
+- **実測 (2026-09-16)**: `preflight-commit.mjs` の `PR_GATES` は手書き 15 件、Static Gates は 65 step。
+  PR #974 で実際に落ちた 4 gate (Quality Gate Ratchet Contracts / Affiliate Compliance `--check` /
+  Checker Wiring / Workspace Contract) はどれも `PR_GATES` に無く、push 前に走らせても防げなかった。
+  手同期の一覧は必ずドリフトする (memory `feedback_hand_synced_duplication`)。
+- **次**: 最小案は上の 4 gate を `PR_GATES` に追加する。恒久案は `quality-gates.json` の
+  `trigger: pull_request` かつ `networkOrSecrets: none` の gate を列挙して実行する
+  (registry が SSOT、`preflight-commit.test.mjs` の shared 一覧は registry 由来に置換)。
+  network を要する gate (SEO Meta Factual 等) は `--with-network` opt-in にする。
+- **完了条件**: `preflight:pr` が Static Gates の `networkOrSecrets: none` gate を全件含み、
+  片方から 1 つ落とすとテストが落ちる。
+
+### [CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01] 本番 R2 に依存して揺れる Page Quality (representative) を必須 gate から外すか決定的にする
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run page-quality:test] [起票:2026-09-18] [期日:2026-10-31]
+
+- **owner**: devops-runner
+- **実測 (2026-09-16、PR #974)**: `page-quality` job は CI 内で `next start` し `storage.stats47.jp` (本番 R2) を
+  読んで代表 URL を検査する。同じ PR で失敗 5 回中 5 回 (「next start did not become ready」
+  「digest-mismatch: error」「違反: error=4 warning=16」)、6 回目でコード変更なく成功。コードではなく
+  環境で落ちている必須 gate。
+- **次**: 週次の `page-quality:audit-weekly` が既にあるので、PR では必須から外して scheduled に寄せるのが最小。
+  PR に残すなら R2 読みを固定 fixture (build 時に落とした snapshot) に差し替え、readiness 待ちを
+  60 秒から伸ばし、`digest-mismatch` を warning に落として決定的にする。
+- **完了条件**: PR run 5 回連続で page-quality の結果がコード差分以外で変わらない。
+
+### [CI-SPEED-STATIC-GATES-HEAVY-STEPS-01] Static Gates の重い step (Commit-back Contract 115 秒 / SEO Meta Factual 46 秒) を軽くするか scheduled へ寄せる
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-runtime-budget.cjs] [起票:2026-09-18] [期日:2026-11-30]
+
+- **owner**: devops-runner
+- **実測 (run 35157109396)**: Workflow Commit-back Contract Gate 115 秒 (npm ci より重い)、SEO Meta Factual Gate
+  46 秒 (R2 を約 2,000 回読む = 「静的」ではない)、Image Generation Pipeline Contract 28 秒、
+  Theme Portfolio State 23 秒。
+- **次**: `test:workflow-commit-back` の 115 秒の内訳を `node --test --test-reporter` で取り、
+  重い test を `--test-concurrency` で並列化するか、workflow 全走査を差分対象に絞る。SEO Meta Factual は
+  `--only <staged keys>` を PR、`--fail-on-new` 全数を weekly に分ける (pre-commit 側は既にこの形)。
+  `check-runtime-budget.cjs` の予算 (`.claude/config/check-runtime-budgets.json`) にこれらを登録し、
+  再肥大化を機械で止める。
+- **完了条件**: 対象 step の合計が 100 秒以下、budget に登録済み。
+
+### [CI-SPEED-PRECOMMIT-TRIM-01] pre-commit を「秒単位のもの」だけに削り、metric config 時の `npx tsx` 直列 6 本と image pipeline 検査を preflight:pr / CI へ寄せる
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs] [起票:2026-09-18] [期日:2026-11-30]
+
+- **owner**: devops-runner
+- **実測 (2026-09-17)**: `apps/web/scripts/pre-commit-checks.sh` は 718 行・27 セクション。常時実行分は数秒だが、
+  パス連動が重い: metric config が staged だと `validate-metric-years` / `validate-metric-config` /
+  `audit-seo-meta-facts --only` (R2 ネットワーク) / `validate-polarity` / `generate-runtime-metric-summaries --check` /
+  `generate-ranking-prominence --check` の `npx tsx` 6 本が**直列**に走り、それぞれ 2,000 件超の registry を
+  読む (Windows PC で 12 分の記録: memory `project_two_machine_local_footprint_2026-09`)。
+  `.github/workflows/*.yml` か `package.json` が staged だと image pipeline の vitest + 型検査 (約 15 秒) と
+  `docs:check` が発火する。これらは develop-quality-gate / Static Gates でも走るので最大 3 重実行。
+- **次**: pre-commit に残すのは commit-msg / 一時ファイル掃除 / secret 走査 / file-url・import.meta guard /
+  `preflight-commit.mjs --commit-static` (7 並列 1 秒) だけにする。metric config 系 6 本は
+  `preflight:pr` に集約し (`CI-SPEED-PREFLIGHT-PR-REGISTRY-01`)、`npx tsx` の起動を 1 プロセスに
+  まとめる runner を検討する。`package.json` を image pipeline / docs の trigger から外す
+  (依存追加のたびに両方が走る理由が無い)。
+- **停止条件**: 外した検査が CI 側 (develop-gate または Static Gates) に無いものは外さない
+  (`CI-DEVELOP-GATE-COVERAGE-01` の症状を再発させない)。
+- **完了条件**: metric config 1 件 + workflow 1 件を staged した commit の pre-commit が Mac で 10 秒以内。
 
 ### [MEDIA-AFFILIATE-RELEASE-01] 媒体別画像と記事別アフィリエイト監査を公開まで完了する
 
