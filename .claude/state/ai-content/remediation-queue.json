@@ -1,17 +1,16 @@
 {
-  "generatedAt": "2026-09-16T00:23:00.887Z",
+  "generatedAt": "2026-09-17T00:33:31.731Z",
   "gscSnapshot": "2026-W37",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2408,
-    "done": 2165,
-    "needsRegen": 243,
+    "done": 2166,
+    "needsRegen": 242,
     "needsByReason": {
       "incomplete": 1,
-      "missing": 241,
-      "fetch-error:TypeError: fetch failed": 1
+      "missing": 241
     },
     "notEligible": 0,
     "notEligibleByCode": {},
@@ -22522,10 +22521,14 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "warns": [
+        "length-short"
+      ],
+      "lastModified": "Sun, 06 Sep 2026 21:23:19 GMT",
+      "updatedAt": "2026-09-06T13:31:11.991Z"
     },
     {
       "rankingKey": "gasoline-consumption-expenditure",
