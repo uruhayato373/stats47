@@ -46,6 +46,7 @@ updated: 2026-09-18
   見えない 40px を含めていた。`theme-chart-overlap.spec.ts` を「overflow が visible でない祖先の下端を上限にした
   見える下端」で判定するよう修正し、本番で 2 テーマ green、クリップ考慮を外す変異で 40px 赤に戻ることを確認。
   UI 側 (`ThemeComparisonSection` / `ThemeLeafletMap`) は変更しない。残作業なし (削除待ち)。
+  CI 実測: run 35288442221 (Linux Chromium、本番) で theme-chart-overlap 2 件とも green、smoke 全体 47 passed / 0 failed。
 
 ### [CI-SPEED-STATIC-GATES-SPLIT-01] main PR の Static Gates (65 step 直列・486 秒) を domain 別の並列 job に分け、1 run で複数の失敗を報告する
 
@@ -763,6 +764,8 @@ updated: 2026-09-18
   (label ensure → 固定 Issue `[Post-Deploy Alert] 本番スモークテストの失敗` を edit/create、本文は末尾サマリの
   `N failed` / `N flaky` を分けて列挙 + ログ末尾)、`if: success()` の close step を追加。`alert-issue-lifecycle.test.cjs`
   の WORKFLOWS、`docs-vs-issues.md` の Issues 表、自動化インベントリに登録。実測は下記。
+- **実測 (2026-09-18)**: `--ref develop` の dispatch で無効 host → health check 失敗 → Issue #978 起票 (run 35288205875)。
+  本番 URL で再 dispatch → 47 passed / 1 flaky / 0 failed → #978 自動 close (run 35288442221)。完了条件を満たした (削除待ち)。
 
 ### [CI-SPEED-UNIT-TESTS-EARLY-01] unit test を develop-gate の並列 job として走らせ、main PR まで一度も走らない状態を止める
 
