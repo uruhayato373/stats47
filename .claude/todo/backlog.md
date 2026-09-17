@@ -877,6 +877,20 @@ updated: 2026-09-16
   main 向けに残す。判断は実測値で行い、推測で足さない。
 - **完了条件**: develop 向け PR で上記ゲートが走り、意図的に壊した変更が develop マージ前に落ちる
   ことを 1 度実測する。
+- **実施・実測 (2026-09-17)**: `check-ad-placement.cjs` / `design-system:check` / `check-card-census.cjs` /
+  `vitest run -w apps/web` の 4 つを追加して develop へ push し、実 run
+  (35218837673) で計測した。ジョブ全体 328 秒・うち Unit Tests (vitest) 単体 162 秒。
+  停止条件の 3 分 (180 秒) を大幅に超過したため、**停止条件どおり vitest だけを外した**
+  (3 checker のみなら 166 秒で収まる。再実測は次 run で確認)。vitest は
+  `pr-quality-check.yml` 側に残る (現状維持)。
+  配線の過程で実際に develop 上に潜んでいた欠陥を発見: `1006e1e21` (rail/surface 統一) が
+  `RankingPageSidebarSection.tsx` に `RailAdSlot` を追加導入したが、
+  `rakuten-ranking-placement.test.tsx` の `../index` mock が追従しておらず 4 test が
+  crash していた (mock に `RailAdSlot: () => null` を追加して是正)。これは vitest ゲートが
+  発見できる欠陥の実例だが、**vitest 自体は時間超過で除外したため、今回追加した
+  3 checker では拾えない種類の欠陥**だった。完了条件の「意図的に壊した変更を検知」は
+  3 checker (Card Census / Design System / Ad Placement) の範囲では未実演。
+  vitest を develop 側に含める代替案 (別 job で並列化する等) が要るなら別カードで検討する。
 
 ### [AFF-PLACEMENT-MAP-CORE-01] placement-map-core を「出典調査 → タグ → カテゴリ」に追従させ、survey の stale 判定を直す
 

@@ -18,10 +18,15 @@ name: 🚦 Develop Quality Gate
 #   develop→main の PR (`pr-quality-check.yml`) が担う。
 #
 # ★2026-09-17 (CI-DEVELOP-GATE-COVERAGE-01) で Card Census / Design System Check /
-#   Ad Placement Guard / apps/web Unit Tests の 4 つを追加。PR #913 が入れた
-#   check-ad-placement のリテラル不一致と native 枠の在庫フォールバック喪失が develop で
-#   一度も検知されず、main への PR で初めて落ちた実例に基づく。Build Check・Full E2E・
-#   Remotion はここに足さない (重すぎて push が詰まり `--no-verify` を誘発する)。
+#   Ad Placement Guard を追加。PR #913 が入れた check-ad-placement のリテラル不一致と
+#   native 枠の在庫フォールバック喪失が develop で一度も検知されず、main への PR で
+#   初めて落ちた実例に基づく。apps/web Unit Tests (vitest) も候補に入れて実測したが、
+#   run 35218837673 でジョブ全体 328 秒 (vitest 単体 162 秒) となり停止条件の 3 分を
+#   大幅に超過したため外した (推測ではなく実測で判断。停止条件どおり `pr-quality-check.yml`
+#   側に残す)。配線の過程で実際に develop 上で赤くなる欠陥
+#   (RankingPageSidebarSection.tsx の RailAdSlot 追加に rakuten-ranking-placement.test.tsx
+#   の mock が追従していなかった) を発見・是正済み。Build Check・Full E2E・Remotion も
+#   同じ理由でここに足さない (重すぎて push が詰まり `--no-verify` を誘発する)。
 #
 #   ここに新しい検査を足すときは「決定的か」「1 分以内か」を満たすこと。満たさない
 #   ものは `pr-quality-check.yml` 側に置く (このゲートが重くなると develop への
@@ -117,11 +122,4 @@ jobs:
 
       - name: 📢 Ad Placement Guard
         run: node .claude/scripts/lib/check-ad-placement.cjs
-        continue-on-error: false
-
-      - name: 🧪 Unit Tests (apps/web)
-        # CI-DEVELOP-GATE-COVERAGE-01 で追加 (2026-09-17)。決定的だが 4 ゲート中最も重い
-        # (実測 ~98 秒)。ジョブ全体が停止条件の 3 分を超えたら、ここから先に外して
-        # pr-quality-check.yml 側へ残す (判断は実測値で行う)。
-        run: npm run test:run -w apps/web
         continue-on-error: false
