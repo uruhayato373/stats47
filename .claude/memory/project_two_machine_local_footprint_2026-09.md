@@ -48,3 +48,12 @@ husky は両 OS で一度も走っていなかった、memory の symlink は Wi
   dotfiles `codex/host.windows.toml` にも同じ無効化を入れた (link.mjs は host セクションで丸ごと置換するので url も持たせる)。
 - **注意**: `bin/link.mjs` は base.toml の `model` / `model_reasoning_effort` で先頭スカラーを置き換えるので、
   アプリで選んだモデル (2026-09-17 時点 gpt-5.6-sol / xhigh) が gpt-6-astra / medium に戻る。実行前に base.toml を合わせる。
+- **2 回目以降の turn が送れない (2026-09-16〜17、会社 PC のみ) = `personality` 未設定 × Statsig 遮断**: 同一スレッドの
+  2 通目は composer が「送信中」のまま `turn/start` が app-server に届かない (Electron ログは `config/read` で途切れる)。
+  原因は app.asar の turn 開始前処理 `readDefaultPersonality`: `config/read` に `personality` が無いと
+  `readExperimentPersonality()` が Statsig の評価 (`readExecutionAssignments`) を await するが、会社プロキシは
+  `ab.chatgpt.com` を 403 (RBAC: access denied) で遮断するため永遠に resolve しない。1 通目は別経路で値が入るので通る。
+  **修正 = `~/.codex/config.toml` に `personality = "friendly"` を明示** (dotfiles `codex/base.toml` にも同梱)。
+  設定後は**アプリ再起動が必要** (app-server が config をキャッシュ)。再現/検証は新規スレッドで「1+1=?」→「2+2=?」。
+  無関係と実測済み: アプリ版 (26.908.4834→9136 でも再現)、内部ブラウザ、repo/.codex 設定、MCP、git、queue/steer 設定、
+  仮スレッド ID、PAC (8/26 から不変)、OS 更新 (無し)、Statsig キャッシュ (9/10 から不変)。
