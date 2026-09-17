@@ -72,6 +72,8 @@ updated: 2026-09-18
   job 単位で 100〜130 秒短縮 (Static Gates 246→129、Catalog Gates 259→109、Remotion 154→47、Blog Thumbnail 152→28)。
   develop-quality-gate の初回 (miss) は save 9 秒。attempt 1 では同一 key を複数 job が同時に reserve しようとして
   "Unable to reserve cache" が 5 件出るが、最初の 1 job が save するので害は無い。
+  develop-quality-gate は hit 時 102 秒 (run 35272157199、miss 時 195〜223 秒) で 3 分予算に戻り、完了条件を満たした。
+  unit test を別 job で足す余地ができた (`CI-SPEED-UNIT-TESTS-EARLY-01`)。
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-23]
