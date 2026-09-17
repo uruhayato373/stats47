@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-09-14T22:41:13.584Z",
+  "account": "stats47",
+  "mode": "commit",
+  "measurementContract": {
+    "site": "GA4 sessionSource=note.com × landingPagePlusQueryString（カードは素URL）",
+    "noteToNote": "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
+    "magazine": "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
+    "product": "カードは /products/<slug>/from/note/<noteId> の素URL。サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送し、記事単位で集計"
+  },
+  "articles": [
+    {
+      "key": "a-kakei-kumamoto",
+      "noteKey": "n7e98a46bf791",
+      "noteUrl": "https://note.com/stats47/n/n7e98a46bf791",
+      "baselineViews": null,
+      "nextBestArticle": "a-kakei-tokushima",
+      "nextNoteUrl": "https://note.com/stats47/n/ne2abc0fc7530",
+      "nextBaselineViews": null,
+      "magazine": "s47-kakei-reading",
+      "magazineUrl": null,
+      "siteUrl": "https://stats47.jp/blog/kumamoto-food-culture",
+      "productUrl": "https://stats47.jp/products/kindle-k-s1-02/from/note/n7e98a46bf791",
+      "linkRepairs": [],
+      "forceNormalizeLegacy": false,
+      "before": {
+        "bodySignature": "c37570cb",
+        "hashtagCount": 99,
+        "price": 0,
+        "separator": null,
+        "hasDraft": false
+      },
+      "pending": true,
+      "wouldAddNextNote": false,
+      "wouldAddMagazine": false,
+      "wouldAddSite": false,
+      "wouldAddProduct": true,
+      "wouldNormalizeLegacyLinks": false,
+      "result": {
+        "status": "updated",
+        "beforeBodySignature": "c37570cb",
+        "afterBodySignature": "d1d39fda",
+        "hashtagCount": 99,
+        "apiStatus": 200,
+        "identicalDraft": false,
+        "draftCompatibility": "none",
+        "paidBodyPreservedByPayload": false,
+        "changed": true,
+        "normalizedLegacyLinks": false,
+        "addedNextNote": false,
+        "addedMagazine": false,
+        "addedSite": false,
+        "addedProduct": true,
+        "repairs": []
+      }
+    }
+  ]
+}
