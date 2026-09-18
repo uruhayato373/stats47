@@ -192,36 +192,26 @@ updated: 2026-09-18
 
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-09-21]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05]
 
 - **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
 - **症状 (実測)**: `.claude/state/metrics/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
+- **デプロイ後の実測 (2026-09-18 時点)**: PR #940 (`4ee6b5641` を含む) は 09-07 に main へ。以降の LCP は 09-07 9,230 / 09-10 9,735 / 09-11 8,548 / 09-12 5,738 / 09-15 7,709 / 09-16 7,964 / 09-17 7,538ms。
+  09-10 の 1 日を除きベースライン未満だが、完了条件の「3 週連続」には 09-28 まで観測が要る。期日をそこへ動かした (判定は週次レビューで)。
 - **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
 - **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
 - **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
-### [RSC-CACHE-BYPASS-01] RSC 応答が HTML と同じ共有キャッシュ設定で返る
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:curl -sD - -o /dev/null -H "RSC: 1" https://stats47.jp/ranking/total-population | grep -iE 'cache-tag|vary'] [起票:2026-09-07] [期日:2026-09-21]
-
-- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
-- **症状 (2026-09-07 本番実測)**: `/ranking/total-population` へ `RSC: 1` を付けたリクエストの応答が `Content-Type: text/x-component` を返しながら、`cache-tag: stats47-html,stats47-path:%2Franking%2Ftotal-population` と `cloudflare-cdn-cache-control: public, max-age=86400, stale-while-revalidate=604800` を持つ。`Vary` は `Accept-Encoding` のみで RSC ヘッダーを区別しない。HTML と RSC が同一キャッシュキーを共有する条件が成立している。
-- **切り分け済み**: (a) `RSC` / `Next-Router-State-Tree` / `Next-Router-Prefetch` / `x-nextjs-data` の 4 種すべてで bypass 分岐に入らない。(b) `RSC: 1` のときだけ `text/x-component` が返るのでヘッダー自体は Next.js 本体に届いている。(c) `apps/web/src/lib/cache-policy.ts` の設計は正しく (RSC は `private, no-store` + `RSC_VARY`)、`cache-policy.test.ts` と `middleware.test.ts` の 54 件は全通過。(d) 該当コードは 2026-08-15 `c46752ef2` で main に入っており未デプロイではない。→ **アプリのコードではなく `@opennextjs/cloudflare` 1.20.6 との統合層の問題**。
-- **未確認**: 実際にキャッシュ混入が起きたかは観測していない (RSC 応答に `CF-Cache-Status` が付かない)。本番でキャッシュ汚染を誘発する再現は実害が出るため行っていない。
-- **仮説 (未検証)**: `open-next.config.ts` の `withRegionalCache(r2IncrementalCache, { mode: "long-lived" })` が返すキャッシュ応答が HTML 用ヘッダーを引き継ぎ、middleware の判定結果を反映していない。
-- **次 (実行順)**: Worker gateway の RSC bypass は `3ce7e0edb` に実装済み。公開・実測の最新結果は [PR #940 の最終検証欄](https://github.com/uruhayato373/stats47/pull/940) を確認する。未検証の場合だけ RSC 応答の `private, no-store`・`Vary`・HTML cache-tag 非付与を実測する。上記仮説は修正前の調査記録であり、未着手と解釈しない。
-- **停止条件**: 本番でキャッシュ汚染を誘発する再現テストをしない。デプロイはオーナーの明示承認まで行わない。原因未特定のまま `withRegionalCache` を外さない (ISR キャッシュが効かなくなり別の劣化を生む)。
-- **完了条件**: RSC リクエストの応答が `Cache-Control: private, no-store` と RSC を含む `Vary` を返し、`cache-tag: stats47-html` が付かないことを本番で実測する。HTML 応答は従来どおり `CF-Cache-Status: HIT` を維持する。
-
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-14] [進行中]
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中]
 
 - **owner**: オーナー（GSC UI export）／Claude Code（取込・効果判定）
 - **現状**: 2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み。PR CI、Cloudflare deploy、post-deploy smoke、R2 ISR GC、CDN全体パージはすべて成功した。Googlebot UA実測で旧市区町村カテゴリsoft404 5件は全件301、親プロフィール200、未知カテゴリ410 + noindex。sitemapは旧カテゴリ0件 / 市区町村プロフィール360件、自治体Datasetは`description` / `license` / `distribution.contentUrl`を本番HTMLで確認した。
-- **次（実行順）**: ①次回週次runの成功、または入力が2週以上古くなった際の`coverage-alert`起票を確認する。②次回GSC UI exportで市区町村カテゴリsoft404 5→0と全体件数差を測定し、`COVERAGE-LOOP-01`へ効果観測を引き渡す。
+- **①は確認済 (2026-09-18)**: `fetch-metrics-weekly.yml` は 2026-09-13 run が success、`coverage-alert` Issue は 0 件。
+- **残り (オーナー)**: ②デプロイ (09-07) 後の GSC UI export がまだ無い (最新の coverage-drilldown は `2026-W36`、export 日 2026-09-04・soft-404 450)。次回 export で市区町村カテゴリ soft404 5→0 と全体件数差を測定し、`COVERAGE-LOOP-01` へ効果観測を引き渡す。
 - **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
 - **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
 
@@ -254,37 +244,15 @@ updated: 2026-09-18
 
 ### [COCONALA-HISTORICAL-SOURCE-01] 納品パックの歴史2指標を原典と再照合する
 
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-09-06] [期日:2026-09-13]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-06] [期日:2026-09-28]
 
-- **status**: pending（期日は次回確認期限）
+- **status**: 原典特定済み・値の照合待ち（2026-09-18）
 - **owner**: estat-researcher（一次資料照合）／coconala-product-manager（採否判断への引渡し）
-- **対象・根拠**: `.claude/state/products/coconala-packs-2026-09-06.json` の未検証2指標。P-06/P-12に含まれるstatsDataId `0000010205` の `E0910101`（`kindergarten-education-diffusion-rate`）と `E0910102`（`nursery-education-diffusion-rate`）。
-- **次**: 納品版のSOURCES・CSVから対象年と47地域値を固定し、当該年の公式表・定義・分母・単位・地域粒度へ照合する。
+- **対象・根拠**: `.claude/state/products/coconala-packs-2026-09-06.json` の未検証2指標。P-06/P-12に含まれるstatsDataId `0000010205` の `E0910101`（`kindergarten-education-diffusion-rate`）と `E0910102`（`nursery-education-diffusion-rate`）。納品版 (`.local/coconala-products/P-06/v1/SOURCES.csv` 118・151 行) の対象年は両方とも **2020 (基準年固定)**。
+- **2026-09-18 に確定したこと**: ①現行 API 表 `0000010205` の cat01 59 項目 (R2 estat-catalog 2026-09-16 版) に `#E0910101` / `#E0910102` は無く、残るのは `#E0910402 保育所等利用率` だけ → 現行表では照合できない。②e-Stat の統計表検索で「幼稚園教育普及度」は**年版の刊行物**にある: 『統計でみる都道府県のすがた』2007〜2023 年版、『社会生活統計指標－都道府県の指標－』2007〜2024 年版の **表 7 (E 教育)**、定義は「幼稚園修了者数／小学校第1学年児童数」(Excel 配布)。③ローカルには e-Stat appId が無い (CI 専任) ので API 経路は CI か owner 端末。
+- **次**: 『社会生活統計指標－都道府県の指標－2023 (または 2022)』表 7 の Excel を e-Stat (`stat-search/files?…query=社会生活統計指標 都道府県の指標`) から取得し、2020 年度列の 47 県値・定義 (分母 = 小学校第1学年児童数)・単位を納品 CSV と突合する。保育所側 (E0910102) も同表の「教育普及度[保育所]」で同様に照合する。ダウンロードはオーナー承認後 (外部ファイル取得)。
 - **停止条件**: 原典未取得や不一致時は未検証注記を維持する。推測補完、値・公開内容の変更、再出品は行わず、除外／継続の判断材料を商品担当へ渡す。外部変更は別途承認を得る。
 - **完了条件**: 2指標それぞれに原典URL・参照箇所・年・分母・47地域の一致／差異／欠測を既存商品stateへ記録する。確認不能なら探索範囲・不足資料・再開条件・採否判断担当を明示して引き渡し、未確認を確認済みにしない。
-
-### [AFF-DEPLOY-RESOLUTION-01] 広告解決順の変更 (#912/#913) を本番反映し、代表ページで実測する
-
-タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:curl -sA Googlebot https://stats47.jp/ranking/natto-consumption-expenditure | grep -c ふるさと] [起票:2026-09-03] [期日:2026-09-10]
-
-- **owner**: uruhayato373 (デプロイ承認) / Claude Code (実測)
-- **何を**: PR #912 (タグ写像 75 件 + japan/municipalities/市区町村カテゴリの native 枠) と PR #913
-  (解決順を出典調査 → タグ → カテゴリに統一、`SURVEY_AFFILIATE_MAP`) は develop にマージ済みだが
-  コード変更なので **develop → main のデプロイまで本番に出ない**。在庫 SSOT の priority 変更だけは
-  `publish-affiliate-ads.yml` で R2 反映済み (2026-09-03 実測 5/1/5)。
-- **なぜ**: ランキング流入の 38% (家計調査の食品品目 28,867 imp/週) に金融広告が出ている状態が
-  本番では続いている。試算では economy 35,613 → 6,746、furusato 2,904 → 31,465 imp/週。
-- **同時にデプロイされるもの**: improvements の `AFF-IMPRESSION-ROUTING-01` (AdSense 停止中の空き
-  位置へ文脈バナーを配線・コード実装済・未デプロイ) も同じデプロイに乗る。効果判定の窓が重なる
-  ので、判定は vertical 別 (furusato の増分) と position 別 (ranking-incontent) を分けて読む。
-- **次**: `/deploy` (develop → main PR → CI green → merge → CDN purge)。
-- **完了条件**:
-  - `/ranking/natto-consumption-expenditure` の native 枠にふるさと納税サイトが出る
-  - `/ranking/avg-height-high-school-2nd-male` に意図軸の広告が出ない (ハウス枠のみ)
-  - `/blog/local-government-debt-burden` の本文バナーが furusato
-  - 完了したら improvements の `AFF-RESOLUTION-EFFECT-01` へ引き渡す (baseline は起票済み)
-- **停止条件**: デプロイ後の smoke (`.github/scripts/smoke-test-routes.sh`) で ranking / blog が
-  200 以外、または `x-nextjs-prerender` の notFound 固着 → main を前 SHA へ戻す。
 
 ### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 2 本 / 週 5.4 万 imp)
 

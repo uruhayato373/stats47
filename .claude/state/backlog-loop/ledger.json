@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-18T09:23:46.981Z",
+  "updatedAt": "2026-09-18T09:33:47.235Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4546,6 +4546,74 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-18T09:23:46.981Z"
+    },
+    "AFF-DEPLOY-RESOLUTION-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:33:47.205Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -sA Googlebot https://stats47.jp/ranking/natto-consumption-expenditure",
+              "curl -sA Googlebot https://stats47.jp/ranking/avg-height-high-school-2nd-male",
+              "curl -sA Googlebot https://stats47.jp/blog/local-government-debt-burden"
+            ],
+            "pass": true
+          },
+          "evidence": "#913 (SURVEY_AFFILIATE_MAP) は PR #915 で 2026-09-03 10:51 JST に main へ (ddcfb8b3a) = 起票と同日にデプロイ済みでカードだけ残っていた。2026-09-18 本番実測: natto ranking は A8/afb 0 件・楽天カード (rakuten-native / rakuten-sidebar) のみ (native の furusato サイトは 09-16 の AFF-RANKING-RAKUTEN-NATIVE-01 で楽天カードへ置換済みのため条件は supe",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:33:47.205Z"
+    },
+    "RSC-CACHE-BYPASS-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:33:47.235Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -sD - -o /dev/null -H 'RSC: 1' https://stats47.jp/ranking/total-population"
+            ],
+            "pass": true
+          },
+          "evidence": "Worker gateway の RSC bypass (3ce7e0edb、PR #940 で 09-07 に main)。2026-09-18 本番実測: RSC 応答は content-type text/x-component / cache-control private, no-store / vary に RSC, Next-Router-State-Tree, Next-Router-Prefetch を含む / cache-tag 無し / cf-cache-status 無し。HTML 応答は cf-cache-status HIT ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:33:47.235Z"
     }
   }
 }
