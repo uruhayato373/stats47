@@ -35,6 +35,11 @@
       "date": "2026-09-18",
       "file": "data/seo/rank-history/2026-09-18.json",
       "sha256": "c6e9da0dea3f835ef421190d88fcbf00e98b79ffa87a91416d2be250842125e5"
+    },
+    {
+      "date": "2026-09-19",
+      "file": "data/seo/rank-history/2026-09-19.json",
+      "sha256": "113815c52c43c631baa97badf8d06c242e23466b6b3fad8ed425c0d966582a6e"
     }
   ]
 }
