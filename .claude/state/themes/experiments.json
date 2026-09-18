@@ -241,7 +241,31 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 25,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "social-increase-rate",
+              "household-ratio-with-65plus",
+              "single-person-household-old-population-ratio",
+              "elderly-couple-only-household-ratio",
+              "volunteer-activity-annual-participation-rate-15plus",
+              "elderly-workers-ratio"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -286,7 +310,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 10,
+            "oldestLatestDataYear": "2007",
+            "ageReviewKeys": [
+              "annual-clear-days",
+              "annual-snow-days",
+              "maximum-snow-depth"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 11
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -331,7 +376,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 15,
+            "oldestLatestDataYear": "2024",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -376,7 +438,34 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 29,
+            "oldestLatestDataYear": "2015",
+            "ageReviewKeys": [
+              "library-count-per-million",
+              "public-hall-count-per-million",
+              "final-education-university-graduate-school-ratio",
+              "hobby-participation-rate-theater",
+              "study-participation-rate-business",
+              "library-books",
+              "library-lending-books",
+              "total-museum-count",
+              "art-museum-count"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -421,7 +510,38 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 23,
+            "oldestLatestDataYear": "2015",
+            "ageReviewKeys": [
+              "fishery-output-value",
+              "fishery-species-catch-scallop",
+              "fishery-species-catch-japanese-squid",
+              "fishery-species-catch-tuna",
+              "fishery-species-catch-bonito",
+              "fishery-species-catch-mackerel",
+              "fishery-species-catch-pacific-saury",
+              "fishery-species-catch-yellowtail",
+              "fishery-species-catch-sardine",
+              "fishery-species-catch-pollock",
+              "fishery-species-catch-kelp",
+              "fishery-species-catch-snow-crab",
+              "fishery-species-catch-sea-bream"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 3
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -466,7 +586,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 51,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "average-life-expectancy-female-20",
+              "average-life-expectancy-female-65",
+              "life-expectancy-0-male",
+              "life-expectancy-0-female"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 46
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -511,7 +653,30 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 19,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "unemployment-rate",
+              "employment-rate",
+              "day-time-population-ratio",
+              "day-time-population",
+              "commuter-ratio-to-other-municipalities"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -556,7 +721,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 20,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "unemployment-rate",
+              "employment-rate",
+              "employed-people-ratio",
+              "labor-force-population-ratio-woman"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -601,7 +788,37 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 37,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "households",
+              "nuclear-family-households-ratio",
+              "elderly-couple-only-household-ratio",
+              "single-person-household-old-population-ratio",
+              "densely-inhabited-district-population-density",
+              "ratio-never-married-15-plus",
+              "single-person-household-ratio",
+              "single-households-age65plus-male",
+              "single-households-age65plus-female",
+              "average-persons-per-general-household",
+              "housing-land-debt-per-household",
+              "current-liabilities-balance-multi-person-households-per-household"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -646,7 +863,37 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 19,
+            "oldestLatestDataYear": "2014",
+            "ageReviewKeys": [
+              "per-capita-prefectural-income-h27",
+              "unemployment-rate",
+              "employed-people-ratio-primary",
+              "employed-people-ratio-secondary",
+              "employed-people-ratio-tertiary",
+              "number-of-establishments-economic-census-basic-survey",
+              "agricultural-employment-population",
+              "employment-location-quotient-manufacturing",
+              "employment-location-quotient-information-communication",
+              "employment-location-quotient-health-welfare",
+              "enterprise-net-value-added-all-industries",
+              "private-establishment-net-value-added"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -691,7 +938,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 41,
+            "oldestLatestDataYear": "2022",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -736,7 +1000,27 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 13,
+            "oldestLatestDataYear": "2015",
+            "ageReviewKeys": [
+              "industrial-water-usage",
+              "factory-location-area-annual"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 42
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -781,7 +1065,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 39,
+            "oldestLatestDataYear": "2022",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 18
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -826,7 +1127,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 33,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "social-increase-rate",
+              "day-time-population-ratio",
+              "five-year-residence-same-address",
+              "five-year-residence-other-prefecture"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -871,7 +1194,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 8,
+            "oldestLatestDataYear": "2023",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 39
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -916,7 +1256,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 5,
+            "oldestLatestDataYear": "2023",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -961,7 +1318,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 26,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "per-capita-prefectural-income-h27",
+              "annual-income-per-household",
+              "gini-coefficient-disposable-income",
+              "gini-coefficient-financial-assets"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -1006,7 +1385,26 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 16,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "average-road-traffic-volume"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -1051,7 +1449,27 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 46,
+            "oldestLatestDataYear": "2014",
+            "ageReviewKeys": [
+              "flood-damage-general-assets",
+              "flood-affected-municipalities"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 40
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -1096,7 +1514,32 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 17,
+            "oldestLatestDataYear": "2007",
+            "ageReviewKeys": [
+              "travel-participation-rate-domestic-tourism",
+              "travel-participation-rate-overseas",
+              "travel-participation-rate-overnight",
+              "travel-participation-rate-day-trip",
+              "number-of-hotel-facilities",
+              "number-of-hotel-rooms",
+              "airport-count"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
@@ -1138,7 +1581,31 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 12,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "construction-private-employees",
+              "construction-employed-residents",
+              "construction-employed-under30",
+              "construction-employed-age30to54",
+              "construction-employed-age55plus",
+              "construction-employed-female"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": null,
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-09-first-batch.json"
@@ -1164,7 +1631,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 3,
+            "oldestLatestDataYear": "2023",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": null,
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-09-first-batch.json"
@@ -1190,7 +1674,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 3,
+            "oldestLatestDataYear": "2021",
+            "ageReviewKeys": [
+              "information-private-establishments",
+              "information-private-employees",
+              "gross-prefectural-product-information-communication-h27"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": null,
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-09-first-batch.json"
@@ -1216,7 +1721,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 11,
+            "oldestLatestDataYear": "2014",
+            "ageReviewKeys": [
+              "agricultural-output-per-employed-person",
+              "agricultural-farm-count",
+              "core-agricultural-workers"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1243,7 +1769,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 9,
+            "oldestLatestDataYear": "2021",
+            "ageReviewKeys": [
+              "nonprimary-enterprises-count",
+              "nonprimary-enterprises-under5-count",
+              "nonprimary-enterprises-employees",
+              "nonprimary-enterprises-under5-employees"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1270,7 +1818,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 5,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "nursery-count-per-100k-0-5",
+              "nursery-children-per-nursery-teacher",
+              "nursery-utilization-rate"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1297,7 +1866,27 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 4,
+            "oldestLatestDataYear": "2014",
+            "ageReviewKeys": [
+              "broadband-service-contract-count",
+              "mobile-phone-ownership-multi-person-households-per-1000"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1324,7 +1913,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 4,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "volunteer-activity-annual-participation-rate-10plus",
+              "voter-turnout-governor",
+              "library-registered-users",
+              "community-building-volunteer-participation-rate-10plus"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 11
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1351,7 +1962,35 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 10,
+            "oldestLatestDataYear": "2015",
+            "ageReviewKeys": [
+              "hobby-participation-rate-art-appreciation",
+              "hobby-participation-rate-theater",
+              "hobby-participation-rate-classical-music",
+              "hobby-participation-rate-painting",
+              "library-lending-books",
+              "total-museum-count",
+              "relaxation-avg-time-male",
+              "relaxation-avg-time-female",
+              "hobby-leisure-avg-time-employed-male",
+              "hobby-leisure-avg-time-employed-female"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1378,7 +2017,33 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 8,
+            "oldestLatestDataYear": "2021",
+            "ageReviewKeys": [
+              "sleep-avg-time-female",
+              "sleep-avg-time-male",
+              "housework-avg-time-female",
+              "housework-avg-time-male",
+              "hobby-leisure-avg-time-employed-female",
+              "hobby-leisure-avg-time-employed-male",
+              "work-avg-time-employed-female",
+              "work-avg-time-employed-male"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1405,7 +2070,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 5,
+            "oldestLatestDataYear": "2011",
+            "ageReviewKeys": [
+              "intellectual-disability-support-facility-count-per-1m",
+              "intellectual-disability-support-facility-capacity-per-100k",
+              "intellectual-disability-support-facility-residents-per-100k"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1432,7 +2118,26 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 3,
+            "oldestLatestDataYear": "2008",
+            "ageReviewKeys": [
+              "earthquake-retrofit-housing"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1459,7 +2164,27 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 6,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "bod-pollution-load",
+              "cod-pollution-load"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1486,7 +2211,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 15,
+            "oldestLatestDataYear": "2007",
+            "ageReviewKeys": [
+              "woodland-area",
+              "forest-area-ratio",
+              "artificial-forest-area"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1513,7 +2259,26 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 4,
+            "oldestLatestDataYear": "2008",
+            "ageReviewKeys": [
+              "number-of-freight-cars"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1540,7 +2305,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 8,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "labor-force-population-ratio-woman",
+              "labor-force-population-ratio-man",
+              "housework-avg-time-female",
+              "housework-avg-time-male"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1567,7 +2354,27 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 3,
+            "oldestLatestDataYear": "2013",
+            "ageReviewKeys": [
+              "bus-operators",
+              "commute-by-car"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1594,7 +2401,26 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 11,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "health-checkup-recipients"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1621,7 +2447,31 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 7,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "financial-assets-balance-multi-person-households",
+              "financial-debt-balance",
+              "current-deposit-balance-ratio-multi-person-households",
+              "current-life-insurance-balance-ratio-multi-person-households",
+              "current-securities-balance-ratio-multi-person-households",
+              "housing-land-liabilities-ratio-multi-person-households"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1648,7 +2498,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 7,
+            "oldestLatestDataYear": "2024",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1675,7 +2542,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 6,
+            "oldestLatestDataYear": "2024",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1702,7 +2586,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 8,
+            "oldestLatestDataYear": "2026",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1729,7 +2630,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 8,
+            "oldestLatestDataYear": "2022",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1756,7 +2674,40 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 16,
+            "oldestLatestDataYear": "2006",
+            "ageReviewKeys": [
+              "restaurant-count-per-1000",
+              "number-of-hotel-facilities",
+              "number-of-hotel-rooms",
+              "laundry-beauty-bath-industry-establishments",
+              "laundry-beauty-bath-industry-employees",
+              "laundry-beauty-bath-industry-revenue",
+              "laundry-beauty-bath-industry-net-value-added",
+              "media-production-establishments",
+              "media-production-employees",
+              "media-production-revenue",
+              "media-production-net-value-added",
+              "amusement-industry-establishments",
+              "amusement-industry-employees",
+              "amusement-industry-revenue",
+              "amusement-industry-net-value-added"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1783,7 +2734,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 5,
+            "oldestLatestDataYear": "2023",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1810,7 +2778,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 6,
+            "oldestLatestDataYear": "2007",
+            "ageReviewKeys": [
+              "woodland-area",
+              "forest-area-ratio",
+              "artificial-forest-area"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1837,7 +2826,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 5,
+            "oldestLatestDataYear": "2022",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1864,7 +2870,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 17,
+            "oldestLatestDataYear": "2022",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1891,7 +2914,30 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 6,
+            "oldestLatestDataYear": "2013",
+            "ageReviewKeys": [
+              "car-ownership-multi-person-households-per-1000",
+              "commute-by-car",
+              "commute-by-bus",
+              "commute-by-train",
+              "bus-operators"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1918,7 +2964,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 4,
+            "oldestLatestDataYear": "2021",
+            "ageReviewKeys": [
+              "retail-establishments-by-prefecture",
+              "retail-sales-area-by-class",
+              "retail-sales-amount-by-prefecture",
+              "retail-employees"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1945,7 +3013,29 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 12,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "single-mother-employment-rate",
+              "single-father-employment-rate",
+              "single-mother-households",
+              "single-father-households"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1972,7 +3062,28 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 12,
+            "oldestLatestDataYear": "2021",
+            "ageReviewKeys": [
+              "sports-annual-participation-rate-10plus",
+              "hobby-participation-rate-sports-spectating",
+              "community-sports-facility-count-per-million"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -1999,7 +3110,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 2,
+            "oldestLatestDataYear": "2023",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 40
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -2026,7 +3154,24 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 9,
+            "oldestLatestDataYear": "2022",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
@@ -2055,7 +3200,33 @@
         "d28": "2026-10-09",
         "d56": "2026-11-06"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-09-18",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-09-18T03:33:23.119Z",
+            "keysChecked": 12,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "foreign-resident-count-per-100k",
+              "foreign-resident-count",
+              "foreign-resident-count-china-per-100k",
+              "foreign-resident-count-china",
+              "foreign-resident-count-korea-per-100k",
+              "foreign-resident-count-korea",
+              "foreign-resident-count-usa-per-100k",
+              "foreign-resident-count-usa"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "未公開。2026-07-12〜2026-09-05の56日を公式APIへ直接指定して取得した実カウントをbaselineとして保存する。欠落した前28日を0補完していない。PV11・impressions15は最低標本未満のため比率・効果を確定しない。実公開後にscheduleし、D7品質・D28暫定・D56観測と低標本の制約を記録する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json",

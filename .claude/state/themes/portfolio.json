@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-14",
+  "generatedAt": "2026-09-18",
   "themes": [
     {
       "themeKey": "aging-society",
@@ -15,7 +15,7 @@
       "contextMetricCount": 16,
       "selectionMissingCount": 0,
       "chartCount": 6,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -57,7 +57,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 25,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -120,7 +120,7 @@
       "contextMetricCount": 0,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -171,7 +171,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 11,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -249,7 +249,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 9,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -328,7 +328,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -395,7 +395,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-climate.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 10,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -504,7 +504,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -581,7 +581,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -609,7 +609,7 @@
       "contextMetricCount": 1,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -660,7 +660,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -730,7 +730,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-consumer-prices.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 15,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -789,7 +789,7 @@
       "contextMetricCount": 0,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -840,7 +840,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 10,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -925,7 +925,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -1008,7 +1008,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2011",
         "ageReviewKeys": [
@@ -1086,7 +1086,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2008",
         "ageReviewKeys": [
@@ -1111,7 +1111,7 @@
       "contextMetricCount": 3,
       "selectionMissingCount": 0,
       "chartCount": 2,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -1152,7 +1152,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#education-culture-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 29,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -1272,7 +1272,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -1338,7 +1338,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-fishery-marine.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 23,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -1451,7 +1451,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1514,7 +1514,7 @@
       "contextMetricCount": 0,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -1565,7 +1565,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 15,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -1643,7 +1643,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2008",
         "ageReviewKeys": [
@@ -1719,7 +1719,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1798,7 +1798,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2013",
         "ageReviewKeys": [
@@ -1824,7 +1824,7 @@
       "contextMetricCount": 0,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -1875,7 +1875,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 11,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1897,10 +1897,10 @@
       "latestDataYear": "2026",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 37,
-      "contextMetricCount": 9,
+      "contextMetricCount": 13,
       "selectionMissingCount": 0,
       "chartCount": 6,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -1940,10 +1940,12 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
-        "keysChecked": 47,
+        "observedAt": "2026-09-18T03:33:23.119Z",
+        "keysChecked": 51,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
+          "average-life-expectancy-female-20",
+          "average-life-expectancy-female-65",
           "life-expectancy-0-male",
           "life-expectancy-0-female"
         ],
@@ -2053,7 +2055,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 7,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -2134,7 +2136,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -2212,7 +2214,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 7,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -2232,10 +2234,10 @@
       "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 15,
-      "contextMetricCount": 1,
+      "contextMetricCount": 2,
       "selectionMissingCount": 0,
       "chartCount": 4,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -2275,13 +2277,14 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
-        "keysChecked": 18,
+        "observedAt": "2026-09-18T03:33:23.119Z",
+        "keysChecked": 19,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
           "unemployment-rate",
           "employment-rate",
           "day-time-population-ratio",
+          "day-time-population",
           "commuter-ratio-to-other-municipalities"
         ],
         "freshnessStatus": "requires-official-release-check",
@@ -2374,7 +2377,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 20,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -2489,7 +2492,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -2563,7 +2566,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2026",
         "ageReviewKeys": [],
@@ -2586,7 +2589,7 @@
       "contextMetricCount": 7,
       "selectionMissingCount": 0,
       "chartCount": 6,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -2626,7 +2629,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 37,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -2695,10 +2698,10 @@
       "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 10,
-      "contextMetricCount": 6,
+      "contextMetricCount": 8,
       "selectionMissingCount": 0,
       "chartCount": 4,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -2738,8 +2741,8 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-local-economy.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
-        "keysChecked": 17,
+        "observedAt": "2026-09-18T03:33:23.119Z",
+        "keysChecked": 19,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
           "per-capita-prefectural-income-h27",
@@ -2748,6 +2751,7 @@
           "employed-people-ratio-secondary",
           "employed-people-ratio-tertiary",
           "number-of-establishments-economic-census-basic-survey",
+          "agricultural-employment-population",
           "employment-location-quotient-manufacturing",
           "employment-location-quotient-information-communication",
           "employment-location-quotient-health-welfare",
@@ -2806,10 +2810,10 @@
       "latestDataYear": "2026",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 25,
-      "contextMetricCount": 12,
+      "contextMetricCount": 14,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -2852,8 +2856,8 @@
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
-        "keysChecked": 39,
+        "observedAt": "2026-09-18T03:33:23.119Z",
+        "keysChecked": 41,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
@@ -2960,7 +2964,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -2983,7 +2987,7 @@
       "contextMetricCount": 1,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -3034,7 +3038,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 16,
         "oldestLatestDataYear": "2006",
         "ageReviewKeys": [
@@ -3124,7 +3128,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3187,7 +3191,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-manufacturing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 13,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -3295,7 +3299,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -3362,7 +3366,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 39,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3413,10 +3417,10 @@
       "latestDataYear": "2050",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 22,
-      "contextMetricCount": 9,
+      "contextMetricCount": 10,
       "selectionMissingCount": 0,
       "chartCount": 4,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -3458,8 +3462,8 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
-        "keysChecked": 32,
+        "observedAt": "2026-09-18T03:33:23.119Z",
+        "keysChecked": 33,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
           "social-increase-rate",
@@ -3559,7 +3563,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-ports.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3664,7 +3668,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3727,7 +3731,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-railway.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3778,10 +3782,10 @@
       "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 5,
-      "contextMetricCount": 18,
+      "contextMetricCount": 19,
       "selectionMissingCount": 0,
       "chartCount": 4,
-      "officialSourceReviewedAt": "2026-09-10",
+      "officialSourceReviewedAt": "2026-09-14",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -3821,8 +3825,8 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
-        "keysChecked": 25,
+        "observedAt": "2026-09-18T03:33:23.119Z",
+        "keysChecked": 26,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
           "per-capita-prefectural-income-h27",
@@ -3885,7 +3889,7 @@
       "contextMetricCount": 0,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -3936,7 +3940,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 17,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -4020,7 +4024,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2013",
         "ageReviewKeys": [
@@ -4100,7 +4104,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -4128,7 +4132,7 @@
       "contextMetricCount": 5,
       "selectionMissingCount": 0,
       "chartCount": 1,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -4168,7 +4172,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-roads.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 16,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -4229,7 +4233,7 @@
       "contextMetricCount": 13,
       "selectionMissingCount": 0,
       "chartCount": 6,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -4270,7 +4274,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#safety-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 46,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -4383,7 +4387,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -4411,7 +4415,7 @@
       "contextMetricCount": 0,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -4462,7 +4466,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -4529,7 +4533,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-tourism.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 17,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -4591,7 +4595,7 @@
       "contextMetricCount": 0,
       "selectionMissingCount": 0,
       "chartCount": 0,
-      "officialSourceReviewedAt": "2026-09-09",
+      "officialSourceReviewedAt": "2026-09-16",
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
@@ -4642,7 +4646,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 2,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -4716,7 +4720,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -4790,7 +4794,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-14T03:44:07.325Z",
+        "observedAt": "2026-09-18T03:33:23.119Z",
         "keysChecked": 9,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
