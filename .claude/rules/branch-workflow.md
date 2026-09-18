@@ -130,9 +130,10 @@ schedule を **default branch のファイルから読む**ので、main に残�
 ## develop への push も高速ゲートを通る (★2026-08-20 新設)
 
 **「develop は完全に無検査」ではなくなった。** `develop-quality-gate.yml` が push ごとに
-ESLint / env registry / maintenance debt の 3 つだけを走らせる。
-**job 全体は実測 104 秒** (2026-08-20 の初回成功 run 32361789100)。
-大半は `npm ci` で、3 ゲート本体は数秒に収まる。
+fast-gates (ESLint / env registry / maintenance debt / warning ratchet / card census / design system /
+ad placement) と、別 job の unit-web / unit-packages (vitest 全件・coverage なし) を並列に走らせる。
+**fast-gates は実測 102 秒** (2026-09-18、node_modules キャッシュ hit 時。miss 時 195〜223 秒)。
+node_modules は lockfile hash キーの `actions/cache` で復元する (`cache-node-modules.yml` が main scope を温める)。
 
 なぜ足したか (実測): それ以前の develop は無検査だったため、pre-commit を通っていない変更が
 そのまま着地し、**壊れは「次に develop をマージする人」が払う**構造になっていた。
@@ -141,9 +142,10 @@ maintenance debt 1 件が origin/develop に入ったまま残っており (comm
 マージ担当が 3 サイクル・十数分を検査待ちに費やした。しかもマージ中は
 「自分が壊したのか継承したのか」の切り分けが毎回必要になる。
 
-- **ここに重い検査を足さない。** 「決定的か」「1 分以内か」を満たさないものは
-  `pr-quality-check.yml` 側に置く。develop への push が詰まると `--no-verify` を誘発し、
-  ゲートを足した意味が消える。
+- **fast-gates に重い検査を足さない。** 「決定的か」「1 分以内か」を満たさないものは
+  `pr-quality-check.yml` 側に置くか、develop-quality-gate の**別 job** にする (unit-web / unit-packages が
+  その形。1 job 3 分の予算は壁時計の話で、並列 job なら push は詰まらない)。develop への push が
+  詰まると `--no-verify` を誘発し、ゲートを足した意味が消える。
 - cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない (実測: 23 本中 22 本)。
   例外は `gsc-url-inspection-daily.yml` の 1 本だけで、state の CSV/MD しか触らないため緑で通る。
 - **`paths-ignore` で state を除外しない。** 実測すると 3 ゲートはいずれも
@@ -166,7 +168,8 @@ pre-commit の代替ではない (型・docs・画像 pipeline の深い検査�
 
 ### push 前に「生成物の鮮度」をまとめて確認する (★2026-09-06 追加)
 
-PR CI の Static Gates は **61 個の検査を直列に回し、最初の失敗で残りを実行しない**。
+PR CI の静的検査 (2026-09-18 から Static Gates / Contract Tests / Catalog Gates の 3 job 並列、各 job 内は直列) は
+**最初の失敗で同じ job の残りを実行しない**。
 指標や記事の母集団が変わると registry・sitemap・survey taxonomy・theme catalog・
 polarity などが**連鎖して同時に古くなる**ので、1 回の CI が 1 個しか報告せず往復が積み上がる。
 
@@ -177,7 +180,9 @@ polarity などが**連鎖して同時に古くなる**ので、1 回の CI が 
 npm run preflight:pr
 ```
 
-CI と同じコマンドを**並列**で回し、落ちたもの全部を 1 回で出す (実測 ~70 秒)。
+CI と同じコマンドを**並列**で回し、落ちたもの全部を 1 回で出す (実測 ~21 秒・19 gate)。
+2026-09-18 に PR #974 で実際に落ちた 4 gate (Quality Gate Ratchet / Affiliate Compliance / Checker Wiring /
+Workspace Contract) を追加した。それまでは一覧に無く、push 前に走らせても防げなかった。
 `main` が develop 非経由で進んでいないかも同時に見る (下記の同期規約)。
 重い検査 (型 / build / vitest / coverage / e2e) は含まないので **CI が権威**。
 

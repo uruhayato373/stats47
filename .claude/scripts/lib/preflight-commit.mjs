@@ -235,6 +235,47 @@ const PR_GATES = [
       return { ok: true, output: "sitemap / tag / prominence すべて最新" };
     },
   },
+  // 2026-09-18 (CI-SPEED-PREFLIGHT-PR-REGISTRY-01): PR #974 で実際に落ちた 4 gate は
+  // どれもここに無く、push 前に走らせても防げなかった (6 往復)。CI と同じコマンドで足す。
+  {
+    name: "Quality Gate Ratchet",
+    why: "money unit / quality exceptions / warning / render-ci の baseline は縮小専用 (origin/main 比)",
+    run: async () => {
+      for (const script of [
+        "check-money-unit-audit.cjs",
+        "check-quality-exceptions.cjs",
+        "check-quality-warning-ratchet.cjs",
+        "check-render-ci-contract.cjs",
+      ]) {
+        const r = await tryRun("node", [checker(script), "--base", "origin/main"]);
+        if (!r.ok) return { ...r, hint: `node .claude/scripts/lib/${script} --base origin/main` };
+      }
+      return { ok: true, output: "ratchet 4 種すべて baseline 内" };
+    },
+  },
+  {
+    name: "Affiliate Compliance",
+    why: "直接配置台帳・blog 関連性の構造 error (ネットワーク不要の --check)",
+    run: async () => {
+      for (const script of ["audit-affiliate-compliance.ts", "audit-affiliate-relevance.ts"]) {
+        const r = await tryRun("npx", ["tsx", `.claude/scripts/ads/${script}`, "--check"]);
+        if (!r.ok) return { ...r, hint: `npx tsx .claude/scripts/ads/${script} --check` };
+      }
+      return { ok: true, output: "affiliate compliance / relevance OK" };
+    },
+  },
+  {
+    name: "Checker Wiring",
+    why: "blocking な checker を足したのに quality-gates.json に宣言していない (2026-09-18 に develop で発生)",
+    run: () => tryRun("node", [checker("check-checker-wiring.cjs"), "--baseline"]),
+    hint: ".claude/config/quality-gates.json に gate を宣言する",
+  },
+  {
+    name: "Workspace Contract",
+    why: "workspace の追加・test/build/lint 方針変更と pr-quality-check.yml の job 配線がずれる",
+    run: () => tryRun("node", [checker("check-workspace-contract.cjs")]),
+    hint: "quality-gates.json の ciProfile.prChecks と pr-quality-check.yml の job を揃える",
+  },
   {
     name: "main 先行チェック",
     why: "main が develop 非経由で進むと PR が競合する (branch-workflow.md の同期規約)",

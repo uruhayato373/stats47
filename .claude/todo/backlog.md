@@ -785,6 +785,11 @@ updated: 2026-09-18
   の vitest フレーク) なら retry 1 回付きで様子を見て、それでも揺れるなら scheduled に戻す。
 - **完了条件**: develop push で unit test が並列に走り、意図的に壊した test が develop 着地時点で赤になる
   ことを 1 回実測する。
+- **実施 (2026-09-18)**: `develop-quality-gate.yml` に `unit-web` (`npm run test:run -w apps/web`) と `unit-packages`
+  (`npm run test:packages`、coverage なし) を fast-gates と並列の別 job として追加 (node_modules キャッシュ共有)。
+  PR 側の Unit Tests job 分割は contract (`critical-module-coverage-contract` が `test` job を pin) に触れるため見送り。
+  実測は下記 (CI の run 時間)。「意図的に壊した test」は develop を汚さないため CI では行わず、
+  同じコマンドで RailAdSlot mock 欠落が赤になった 2026-09-17 のローカル実測を根拠にする。
 
 ### [CI-SPEED-PREFLIGHT-PR-REGISTRY-01] `preflight:pr` の gate 一覧を手書き 15 件から registry / workflow 由来に変える
 
@@ -801,6 +806,11 @@ updated: 2026-09-18
   network を要する gate (SEO Meta Factual 等) は `--with-network` opt-in にする。
 - **完了条件**: `preflight:pr` が Static Gates の `networkOrSecrets: none` gate を全件含み、
   片方から 1 つ落とすとテストが落ちる。
+- **実施 (2026-09-18、最小案)**: PR #974 で落ちた 4 gate (Quality Gate Ratchet 4 種 / Affiliate Compliance +
+  Relevance `--check` / Checker Wiring / Workspace Contract) を `PR_GATES` に追加 (15→19 gate、実測 21 秒)。
+  `preflight-commit.test.mjs` の shared 一覧に 8 コマンドを追加し、CI・ローカルどちらから落としても赤になる。
+  恒久案 (registry 由来) は未着手。残りの `networkOrSecrets: none` な PR gate (route-contract / static-assets /
+  value-format / env-registry / maintenance-debt 等) は pre-commit か fast-gates が既に走らせている。
 
 ### [CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01] 本番 R2 に依存して揺れる Page Quality (representative) を必須 gate から外すか決定的にする
 

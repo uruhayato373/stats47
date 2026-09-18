@@ -22,8 +22,9 @@ name: 🚦 Develop Quality Gate
 #   native 枠の在庫フォールバック喪失が develop で一度も検知されず、main への PR で
 #   初めて落ちた実例に基づく。apps/web Unit Tests (vitest) も候補に入れて実測したが、
 #   run 35218837673 でジョブ全体 328 秒 (vitest 単体 162 秒) となり停止条件の 3 分を
-#   大幅に超過したため外した (推測ではなく実測で判断。停止条件どおり `pr-quality-check.yml`
-#   側に残す)。配線の過程で実際に develop 上で赤くなる欠陥
+#   大幅に超過したため fast-gates からは外した (推測ではなく実測で判断)。2026-09-18 に
+#   node_modules キャッシュで fast-gates が 102 秒へ戻ったので、vitest は**別 job**
+#   (unit-web / unit-packages、下記) として並列に走らせる。配線の過程で実際に develop 上で赤くなる欠陥
 #   (RankingPageSidebarSection.tsx の RailAdSlot 追加に rakuten-ranking-placement.test.tsx
 #   の mock が追従していなかった) を発見・是正済み。Build Check・Full E2E・Remotion も
 #   同じ理由でここに足さない (重すぎて push が詰まり `--no-verify` を誘発する)。
@@ -137,4 +138,76 @@ jobs:
 
       - name: 📢 Ad Placement Guard
         run: node .claude/scripts/lib/check-ad-placement.cjs
+        continue-on-error: false
+
+  # ★unit test を develop 着地点でも走らせる (CI-SPEED-UNIT-TESTS-EARLY-01、2026-09-18)。
+  #   fast-gates とは別 job なので、上の「1 job 3 分」予算に乗らない (壁時計は並列)。
+  #   それまで unit test は develop→main の PR で初めて走り、PR #974 で 2 回、2026-09-17 には
+  #   RailAdSlot mock 欠落で web 4 test が crash したまま develop に潜んでいた。
+  #   coverage は取らない (PR / 週次の担当)。node_modules は fast-gates と同じ key で復元する。
+  unit-web:
+    name: Unit Tests (web)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Restore node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: 🧪 Web unit tests
+        run: npm run test:run -w apps/web
+        continue-on-error: false
+
+  unit-packages:
+    name: Unit Tests (packages)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Restore node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: 🧪 Package unit tests
+        # ローカルと同じ全件 (coverage 分割なし)。PR 側の test:packages:ci + coverage step が正典。
+        run: npm run test:packages
         continue-on-error: false
