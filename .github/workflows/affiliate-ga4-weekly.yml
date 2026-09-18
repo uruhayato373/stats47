@@ -155,20 +155,20 @@ jobs:
         if: always()
         run: |
           set -euo pipefail
-          node -e '
-            const fs = require("fs");
-            const p = ".claude/state/ads/affiliate-operations-latest.json";
-            if (!fs.existsSync(p)) {
-              console.log("::error::affiliate-operations-latest.json が無い (集約 state を生成できていない)");
-              process.exit(1);
-            }
-            const gate = JSON.parse(fs.readFileSync(p, "utf8")).measurementGate ?? {};
-            console.log(`measurementGate: ${gate.status} ${(gate.reasons ?? []).join(", ")}`);
-            if (gate.status !== "ready") {
-              console.log(`::error::measurementGate=${gate.status} (${(gate.reasons ?? []).join(", ")})`);
-              process.exit(1);
-            }
-          '
+          node <<'NODE'
+          const fs = require("fs");
+          const p = ".claude/state/ads/affiliate-operations-latest.json";
+          if (!fs.existsSync(p)) {
+            console.log("::error::affiliate-operations-latest.json が無い (集約 state を生成できていない)");
+            process.exit(1);
+          }
+          const gate = JSON.parse(fs.readFileSync(p, "utf8")).measurementGate ?? {};
+          console.log(`measurementGate: ${gate.status} ${(gate.reasons ?? []).join(", ")}`);
+          if (gate.status !== "ready") {
+            console.log(`::error::measurementGate=${gate.status} (${(gate.reasons ?? []).join(", ")})`);
+            process.exit(1);
+          }
+          NODE
           if [ "${{ steps.ga4.outcome }}" != "success" ]; then
             echo "::error::GA4 取得 step が失敗した (outcome=${{ steps.ga4.outcome }})"
             exit 1
