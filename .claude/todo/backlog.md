@@ -21,86 +21,6 @@ updated: 2026-09-18
 
 ## 🔴 高 — 今月中に着手したい
 
-### [THEME-CHART-FOOTER-OVERLAP-01] 【誤検知・smoke 側で解消済み】テーマページの「〜の分布」地図カードで SVG が footer に 40px 重なると smoke が報告していた
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:cd apps/web && PLAYWRIGHT_TEST_BASE_URL=https://stats47.jp npx playwright test --config playwright.smoke.config.ts tests/smoke/theme-chart-overlap.spec.ts] [起票:2026-09-18] [期日:2026-09-30]
-
-- **owner**: theme-ui-manager
-- **実測**: `post-deploy-smoke.yml` の `theme-chart-overlap.spec.ts` が 2026-09-13 (main f09ac2ca9) から毎デプロイ失敗。
-  最後の成功は 2026-09-12 (c9f5b1970)。`/themes/population-dynamics` の「人口増減率の分布」と
-  `/themes/healthcare` の「医師数（人口10万人当たり）の分布」で、SVG 下端が footer 上端を **40px** 越える
-  (retry でも同値 = 決定的)。2026-09-17 のリリース (PR #977) 後も同じ 2 カード・同じ 40px。
-- **原因箇所**: `apps/web/src/features/theme-dashboard/components/ThemeComparisonSection.tsx` の
-  `ChartPanel` (`contentClassName="p-0"`、footer「県を選択して比較 / 定義・出典」) 内の `ThemeOverviewMap`
-  (日本地図)。`b3e803b0b` (theme comparisons 統合) で入った構成。静的検査
-  (`check-design-system` の no-fixed-height-around-aspect-ratio-chart) は通っているので、地図側の
-  高さ確保 (凡例・viewBox) と ChartPanel の content 領域の噛み合わせを実描画で確認する。
-- **次**: `npm run dev:web` で `/themes/population-dynamics` を開き、地図 SVG の bounding box と
-  footer の位置を実測 → `ThemeOverviewMap` / `ChartPanel` のどちらで 40px が生まれるかを切り分けてから直す。
-  直したら上記 検証 コマンドを本番で 1 回通す。
-- **禁止**: 固定高 div で包んで隠さない (2026-08-04 に 154px 重なった同型事故の再発)。
-- **完了条件**: 本番 smoke の `theme-chart-overlap.spec.ts` が 2 テーマとも green。
-- **結論 (2026-09-18、本番を Playwright で実測)**: UI の不具合ではなく smoke の誤検知。Leaflet の overlay SVG は
-  表示領域 400px に対し上下 10% のバッファを持つ 480px の箱で、コンテナ (`h-[360px] lg:h-[400px] overflow-hidden`)
-  で切り取られており、スクリーンショットでも地図はカード内・footer は完全に可視。`getBoundingClientRect()` が
-  見えない 40px を含めていた。`theme-chart-overlap.spec.ts` を「overflow が visible でない祖先の下端を上限にした
-  見える下端」で判定するよう修正し、本番で 2 テーマ green、クリップ考慮を外す変異で 40px 赤に戻ることを確認。
-  UI 側 (`ThemeComparisonSection` / `ThemeLeafletMap`) は変更しない。残作業なし (削除待ち)。
-  CI 実測: run 35288442221 (Linux Chromium、本番) で theme-chart-overlap 2 件とも green、smoke 全体 47 passed / 0 failed。
-
-### [CI-SPEED-STATIC-GATES-SPLIT-01] main PR の Static Gates (65 step 直列・486 秒) を domain 別の並列 job に分け、1 run で複数の失敗を報告する
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-09-18] [期日:2026-10-15]
-
-- **owner**: devops-runner
-- **実測 (2026-09-16、PR #974)**: `pr-quality-check.yml` は 1 回 633 秒。Release PR が失敗 5 回 + cancel 1 回の
-  6 回目で通った。Static Gates は 65 step を直列 fail-fast で回すため、各回で別の gate が 1 件ずつ露出した
-  (Quality Gate Ratchet → Affiliate Compliance → Checker Wiring → Workspace Contract)。Static Gates 単体は
-  run 35157109396 で 486 秒 (数週間前は約 200 秒)。最重 step は Workflow Commit-back Contract Gate 115 秒、
-  SEO Meta Factual Gate 46 秒、Image Pipeline Contract 28 秒。
-- **次**: 65 step を `static-gates` (repo/workflow guard + workspace contract) / `contract-tests` (`node --test` の
-  tooling 自己検査群) / `catalog-gates` (data-configs SSOT 検証 + portfolio state) の 3 job に分け、
-  `quality-check` の `needs` と結果 echo に 2 job を足す。step 単位の `continue-on-error` は使わない
-  (`check-checker-wiring.cjs` が fail-open と分類し、registry の `blocking: true` と矛盾して落ちる)。
-- **禁止**: `static-gates` job id と、そこに pin されている `npx eslint src` (web の lint prCheck) と
-  Workspace Contract Guard step (`workspace-ci-matrix-contract` / `critical-module-coverage-contract` が
-  job id で参照) は動かさない。`--base origin/main` / `BASE_SHA` を使う step は fetch-depth 0 の
-  `static-gates` に残す。
-- **完了条件**: 分割後の PR run で 3 job が並列に走り、Static Gates 系の壁時計が 486 秒から
-  短縮されたことを run の job 時間で実測する。`check-checker-wiring.cjs --baseline` /
-  `check-workspace-contract.cjs` / `audit-workflow-policy.cjs --strict` が green。
-
-- **実測 (2026-09-18、PR #977 run 35270099628)**: 3 job は並列に走り、壁時計は attempt 1 (cache miss) で
-  static-gates 246 / contract-tests 347 / catalog-gates 259 秒 = 347 秒 (旧 486 秒、-29%)、attempt 2 (cache hit) で
-  129 / 234 / 109 秒 = 234 秒 (-52%)。run 全体は 633 → 599 → 466 秒。クリティカルパスは Unit Tests (559→423 秒) に移った。
-  wiring / workspace-contract / workflow-policy / 契約テスト 97 + 107 + 9 はすべて green。完了条件を満たした。
-  残る最重 step は contract-tests 内の Workflow Commit-back Contract Gate (`CI-SPEED-STATIC-GATES-HEAVY-STEPS-01`)。
-### [CI-SPEED-NODE-MODULES-CACHE-01] CI の各 job が独立に払っている `npm ci` (105〜122 秒) を node_modules キャッシュで短縮する
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/audit-workflow-policy.cjs --strict] [起票:2026-09-18] [期日:2026-10-15]
-
-- **owner**: devops-runner
-- **実測 (2026-09-17)**: `develop-quality-gate` の npm ci は 105 秒 (run 35218837673) と 122 秒 (35219636607)。
-  `pr-quality-check.yml` は 10 job が各自 `npm ci` する。`setup-node` の `cache: 'npm'` は tarball の
-  キャッシュだけで、展開・link の時間は毎回払う。root `node_modules` は 1.7 GB、workspace 側は 24 dir 計
-  60 MB。`postinstall` / `prepare` を持つ workspace は無い (キャッシュ復元 = `npm ci` 結果と等価)。
-- **次**: `actions/cache` (SHA pin) を `node_modules` + `apps/*/node_modules` + `packages/*/node_modules` に
-  `package-lock.json` の hash + OS + Node major をキーにして張り、hit 時は `npm ci` を skip する。
-  対象は `develop-quality-gate.yml` と `pr-quality-check.yml` の全 job。`cache: 'npm'` は miss 時の
-  保険として残す。PR run は develop scope のキャッシュを読めない (GitHub の制約: 読めるのは同 branch /
-  base / default のみ) ため、同一 PR の 2 回目以降と lockfile 不変の期間で効く。main 側の
-  `deploy-workers.yml` にも同じ save を足すと default branch scope になり全 PR の初回でも効く。
-- **停止条件**: 復元が 60 秒を超える (圧縮後サイズが大きすぎる) なら root `node_modules` だけに絞って再計測。
-  `sharp` 等 native module が復元後に落ちるなら key に runner image を足す。
-- **完了条件**: hit した run で Install dependencies 相当の時間が 30 秒以下になったことを job step 時間で
-  実測し、develop-quality-gate の合計が 3 分以内に戻る。
-
-- **実測 (2026-09-18)**: PR #977 attempt 2 で 12 job すべて hit、復元 8〜11 秒、Install dependencies は skipped (0 秒)。
-  job 単位で 100〜130 秒短縮 (Static Gates 246→129、Catalog Gates 259→109、Remotion 154→47、Blog Thumbnail 152→28)。
-  develop-quality-gate の初回 (miss) は save 9 秒。attempt 1 では同一 key を複数 job が同時に reserve しようとして
-  "Unable to reserve cache" が 5 件出るが、最初の 1 job が save するので害は無い。
-  develop-quality-gate は hit 時 102 秒 (run 35272157199、miss 時 195〜223 秒) で 3 分予算に戻り、完了条件を満たした。
-  unit test を別 job で足す余地ができた (`CI-SPEED-UNIT-TESTS-EARLY-01`)。
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-23]
@@ -272,36 +192,26 @@ updated: 2026-09-18
 
 ### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
 
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-09-21]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05]
 
 - **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
 - **症状 (実測)**: `.claude/state/metrics/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
+- **デプロイ後の実測 (2026-09-18 時点)**: PR #940 (`4ee6b5641` を含む) は 09-07 に main へ。以降の LCP は 09-07 9,230 / 09-10 9,735 / 09-11 8,548 / 09-12 5,738 / 09-15 7,709 / 09-16 7,964 / 09-17 7,538ms。
+  09-10 の 1 日を除きベースライン未満だが、完了条件の「3 週連続」には 09-28 まで観測が要る。期日をそこへ動かした (判定は週次レビューで)。
 - **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
 - **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
 - **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
-### [RSC-CACHE-BYPASS-01] RSC 応答が HTML と同じ共有キャッシュ設定で返る
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:curl -sD - -o /dev/null -H "RSC: 1" https://stats47.jp/ranking/total-population | grep -iE 'cache-tag|vary'] [起票:2026-09-07] [期日:2026-09-21]
-
-- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
-- **症状 (2026-09-07 本番実測)**: `/ranking/total-population` へ `RSC: 1` を付けたリクエストの応答が `Content-Type: text/x-component` を返しながら、`cache-tag: stats47-html,stats47-path:%2Franking%2Ftotal-population` と `cloudflare-cdn-cache-control: public, max-age=86400, stale-while-revalidate=604800` を持つ。`Vary` は `Accept-Encoding` のみで RSC ヘッダーを区別しない。HTML と RSC が同一キャッシュキーを共有する条件が成立している。
-- **切り分け済み**: (a) `RSC` / `Next-Router-State-Tree` / `Next-Router-Prefetch` / `x-nextjs-data` の 4 種すべてで bypass 分岐に入らない。(b) `RSC: 1` のときだけ `text/x-component` が返るのでヘッダー自体は Next.js 本体に届いている。(c) `apps/web/src/lib/cache-policy.ts` の設計は正しく (RSC は `private, no-store` + `RSC_VARY`)、`cache-policy.test.ts` と `middleware.test.ts` の 54 件は全通過。(d) 該当コードは 2026-08-15 `c46752ef2` で main に入っており未デプロイではない。→ **アプリのコードではなく `@opennextjs/cloudflare` 1.20.6 との統合層の問題**。
-- **未確認**: 実際にキャッシュ混入が起きたかは観測していない (RSC 応答に `CF-Cache-Status` が付かない)。本番でキャッシュ汚染を誘発する再現は実害が出るため行っていない。
-- **仮説 (未検証)**: `open-next.config.ts` の `withRegionalCache(r2IncrementalCache, { mode: "long-lived" })` が返すキャッシュ応答が HTML 用ヘッダーを引き継ぎ、middleware の判定結果を反映していない。
-- **次 (実行順)**: Worker gateway の RSC bypass は `3ce7e0edb` に実装済み。公開・実測の最新結果は [PR #940 の最終検証欄](https://github.com/uruhayato373/stats47/pull/940) を確認する。未検証の場合だけ RSC 応答の `private, no-store`・`Vary`・HTML cache-tag 非付与を実測する。上記仮説は修正前の調査記録であり、未着手と解釈しない。
-- **停止条件**: 本番でキャッシュ汚染を誘発する再現テストをしない。デプロイはオーナーの明示承認まで行わない。原因未特定のまま `withRegionalCache` を外さない (ISR キャッシュが効かなくなり別の劣化を生む)。
-- **完了条件**: RSC リクエストの応答が `Cache-Control: private, no-store` と RSC を含む `Vary` を返し、`cache-tag: stats47-html` が付かないことを本番で実測する。HTML 応答は従来どおり `CF-Cache-Status: HIT` を維持する。
-
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-14] [進行中]
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中]
 
 - **owner**: オーナー（GSC UI export）／Claude Code（取込・効果判定）
 - **現状**: 2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み。PR CI、Cloudflare deploy、post-deploy smoke、R2 ISR GC、CDN全体パージはすべて成功した。Googlebot UA実測で旧市区町村カテゴリsoft404 5件は全件301、親プロフィール200、未知カテゴリ410 + noindex。sitemapは旧カテゴリ0件 / 市区町村プロフィール360件、自治体Datasetは`description` / `license` / `distribution.contentUrl`を本番HTMLで確認した。
-- **次（実行順）**: ①次回週次runの成功、または入力が2週以上古くなった際の`coverage-alert`起票を確認する。②次回GSC UI exportで市区町村カテゴリsoft404 5→0と全体件数差を測定し、`COVERAGE-LOOP-01`へ効果観測を引き渡す。
+- **①は確認済 (2026-09-18)**: `fetch-metrics-weekly.yml` は 2026-09-13 run が success、`coverage-alert` Issue は 0 件。
+- **残り (オーナー)**: ②デプロイ (09-07) 後の GSC UI export がまだ無い (最新の coverage-drilldown は `2026-W36`、export 日 2026-09-04・soft-404 450)。次回 export で市区町村カテゴリ soft404 5→0 と全体件数差を測定し、`COVERAGE-LOOP-01` へ効果観測を引き渡す。
 - **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
 - **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
 
@@ -334,53 +244,15 @@ updated: 2026-09-18
 
 ### [COCONALA-HISTORICAL-SOURCE-01] 納品パックの歴史2指標を原典と再照合する
 
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-09-06] [期日:2026-09-13]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-06] [期日:2026-09-28]
 
-- **status**: pending（期日は次回確認期限）
+- **status**: 原典特定済み・値の照合待ち（2026-09-18）
 - **owner**: estat-researcher（一次資料照合）／coconala-product-manager（採否判断への引渡し）
-- **対象・根拠**: `.claude/state/products/coconala-packs-2026-09-06.json` の未検証2指標。P-06/P-12に含まれるstatsDataId `0000010205` の `E0910101`（`kindergarten-education-diffusion-rate`）と `E0910102`（`nursery-education-diffusion-rate`）。
-- **次**: 納品版のSOURCES・CSVから対象年と47地域値を固定し、当該年の公式表・定義・分母・単位・地域粒度へ照合する。
+- **対象・根拠**: `.claude/state/products/coconala-packs-2026-09-06.json` の未検証2指標。P-06/P-12に含まれるstatsDataId `0000010205` の `E0910101`（`kindergarten-education-diffusion-rate`）と `E0910102`（`nursery-education-diffusion-rate`）。納品版 (`.local/coconala-products/P-06/v1/SOURCES.csv` 118・151 行) の対象年は両方とも **2020 (基準年固定)**。
+- **2026-09-18 に確定したこと**: ①現行 API 表 `0000010205` の cat01 59 項目 (R2 estat-catalog 2026-09-16 版) に `#E0910101` / `#E0910102` は無く、残るのは `#E0910402 保育所等利用率` だけ → 現行表では照合できない。②e-Stat の統計表検索で「幼稚園教育普及度」は**年版の刊行物**にある: 『統計でみる都道府県のすがた』2007〜2023 年版、『社会生活統計指標－都道府県の指標－』2007〜2024 年版の **表 7 (E 教育)**、定義は「幼稚園修了者数／小学校第1学年児童数」(Excel 配布)。③ローカルには e-Stat appId が無い (CI 専任) ので API 経路は CI か owner 端末。
+- **次**: 『社会生活統計指標－都道府県の指標－2023 (または 2022)』表 7 の Excel を e-Stat (`stat-search/files?…query=社会生活統計指標 都道府県の指標`) から取得し、2020 年度列の 47 県値・定義 (分母 = 小学校第1学年児童数)・単位を納品 CSV と突合する。保育所側 (E0910102) も同表の「教育普及度[保育所]」で同様に照合する。ダウンロードはオーナー承認後 (外部ファイル取得)。
 - **停止条件**: 原典未取得や不一致時は未検証注記を維持する。推測補完、値・公開内容の変更、再出品は行わず、除外／継続の判断材料を商品担当へ渡す。外部変更は別途承認を得る。
 - **完了条件**: 2指標それぞれに原典URL・参照箇所・年・分母・47地域の一致／差異／欠測を既存商品stateへ記録する。確認不能なら探索範囲・不足資料・再開条件・採否判断担当を明示して引き渡し、未確認を確認済みにしない。
-
-### [GIS-COMMERCIAL-LICENSE-BOUNDARY-01] 公開終了・新版切替の完了証跡を照合しカードを回収する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:機械] [検証:npm run geo:check-data-catalog] [起票:2026-09-05] [期日:2026-09-12]
-
-- **owner**: backlog-loop（完了gateとカード回収のみ）
-- **対象**: 外部作業は完了済み。公開・削除を再実行せず、既存証跡を照合してledgerへ記録し、本カードを排他writer経由で削除する。
-  公開・削除・退避・検証の証跡と件数の正典は `.claude/state/metrics/geo-release-publication-2026-09-05.json` の `legacyLicense`。
-- **次（実行順）**:
-  1. `legacyLicense` の公開・削除証跡と `legacySnsVerification.deletionApproval.status=COMPLETED`、`deletionEvidence.pendingIds=[]`、投稿台帳IDs592/632/636/749/796/800の`status=deleted`・`deleted_at`を照合する。catalog gateを通し、ledger証拠付きで本カードを回収する。新しい外部操作・認証・コンテンツ生成は不要。
-- **派生生成の停止は解消済み（2026-09-08照合）**: `602b885aa` は生成側でpublisherと同じ判定を使い、非商用KSJ由来9キーのitem出力を除外する。guardを緩める必要はない。ranking-items同期run `34132337368` は全job SUCCESS、公開可能な2,302 itemを反映済み。本カードの残りは上記の公開終了・SNS削除証跡の照合であり、派生生成の再修正ではない。
-- **再発防止の確認**: main/develop両経路にguard反映済み。共有索引544件は全行保持、分類修正20件一致。従来から公開終了指定の未公開1行も除外・HTTP410確認。guardを持たない旧checkoutまで保護済みとは扱わない。
-- **承認済み範囲**: ユーザー「やって」「進めて」「更新すべきものは更新して　古い資産は削除して」による上記データ置換・終了・exact削除・一括deploy。道の駅3記事は独立レビューPASS。別作業の学力metricは取り込まない。
-- **停止条件**: key集合/size/ETagが退避時と変わった対象は削除しない。削除済みraw435・派生59・旧ランキング126件を再実行しない。共有一覧の無関係レコード、別作業のWIP、backupを保持する。「加工済み」だけで商用可と扱わない。別作業のdevelopリリースと競合する変更は行わない。
-- **完了条件**: public R2の非商用11prefixが0件、catalog gate PASS、新版の出典・保存則・公開値が一致し、終了URL/ダウンロード・記事/SNSまで承認方針どおりの状態を本番実測する。
-
-
-### [AFF-DEPLOY-RESOLUTION-01] 広告解決順の変更 (#912/#913) を本番反映し、代表ページで実測する
-
-タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:curl -sA Googlebot https://stats47.jp/ranking/natto-consumption-expenditure | grep -c ふるさと] [起票:2026-09-03] [期日:2026-09-10]
-
-- **owner**: uruhayato373 (デプロイ承認) / Claude Code (実測)
-- **何を**: PR #912 (タグ写像 75 件 + japan/municipalities/市区町村カテゴリの native 枠) と PR #913
-  (解決順を出典調査 → タグ → カテゴリに統一、`SURVEY_AFFILIATE_MAP`) は develop にマージ済みだが
-  コード変更なので **develop → main のデプロイまで本番に出ない**。在庫 SSOT の priority 変更だけは
-  `publish-affiliate-ads.yml` で R2 反映済み (2026-09-03 実測 5/1/5)。
-- **なぜ**: ランキング流入の 38% (家計調査の食品品目 28,867 imp/週) に金融広告が出ている状態が
-  本番では続いている。試算では economy 35,613 → 6,746、furusato 2,904 → 31,465 imp/週。
-- **同時にデプロイされるもの**: improvements の `AFF-IMPRESSION-ROUTING-01` (AdSense 停止中の空き
-  位置へ文脈バナーを配線・コード実装済・未デプロイ) も同じデプロイに乗る。効果判定の窓が重なる
-  ので、判定は vertical 別 (furusato の増分) と position 別 (ranking-incontent) を分けて読む。
-- **次**: `/deploy` (develop → main PR → CI green → merge → CDN purge)。
-- **完了条件**:
-  - `/ranking/natto-consumption-expenditure` の native 枠にふるさと納税サイトが出る
-  - `/ranking/avg-height-high-school-2nd-male` に意図軸の広告が出ない (ハウス枠のみ)
-  - `/blog/local-government-debt-burden` の本文バナーが furusato
-  - 完了したら improvements の `AFF-RESOLUTION-EFFECT-01` へ引き渡す (baseline は起票済み)
-- **停止条件**: デプロイ後の smoke (`.github/scripts/smoke-test-routes.sh`) で ranking / blog が
-  200 以外、または `x-nextjs-prerender` の notFound 固着 → main を前 SHA へ戻す。
 
 ### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 2 本 / 週 5.4 万 imp)
 
@@ -745,54 +617,6 @@ updated: 2026-09-18
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [CI-POST-DEPLOY-SMOKE-ALERT-01] post-deploy-smoke の失敗が Issue にならず、5 日間・6 デプロイ赤のまま誰にも見えていなかった
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs] [起票:2026-09-18] [期日:2026-10-15]
-
-- **owner**: devops-runner
-- **実測 (2026-09-18)**: `post-deploy-smoke.yml` は 2026-09-13 から連続 failure (main f09ac2ca9 / 45cfa07b9 /
-  a5642a9e9 / 423bf9d1b / dfb6f6da7 / d9e171a60 / ae901da26) だが、`gh issue` を呼ばず label も持たないため
-  通知が一切出ない。`docs-vs-issues.md` の「アラート workflow は自分のラベルを ensure して Issue を起票する」
-  契約から外れている唯一の本番検査。中身は `THEME-CHART-FOOTER-OVERLAP-01` (本番の実 UI 不具合) だった。
-- **次**: 他の alert workflow と同じ lifecycle (`post-deploy-alert,auto-generated` ラベルを同 step で ensure →
-  固定 Issue を upsert → 復旧時に close) を `post-deploy-smoke.yml` に足し、`alert-issue-lifecycle.test.cjs` の
-  glob 対象に入れる。`docs-vs-issues.md` の Issues 表と `06_自動化インベントリ.md` に行を追加する。
-  retry で通った flaky (blog 一覧サムネイル 30 秒 timeout / ranking 右レール契約) は Issue 本文に
-  「retry 通過」として区別して載せる。
-- **完了条件**: smoke 失敗時に Issue が立ち、green に戻ったら自動 close されることを 1 回ずつ実測する。
-- **実施 (2026-09-18)**: `post-deploy-smoke.yml` に `issues: write`、list reporter の tee、`if: failure()` の upsert step
-  (label ensure → 固定 Issue `[Post-Deploy Alert] 本番スモークテストの失敗` を edit/create、本文は末尾サマリの
-  `N failed` / `N flaky` を分けて列挙 + ログ末尾)、`if: success()` の close step を追加。`alert-issue-lifecycle.test.cjs`
-  の WORKFLOWS、`docs-vs-issues.md` の Issues 表、自動化インベントリに登録。実測は下記。
-- **実測 (2026-09-18)**: `--ref develop` の dispatch で無効 host → health check 失敗 → Issue #978 起票 (run 35288205875)。
-  本番 URL で再 dispatch → 47 passed / 1 flaky / 0 failed → #978 自動 close (run 35288442221)。完了条件を満たした (削除待ち)。
-
-### [CI-SPEED-UNIT-TESTS-EARLY-01] unit test を develop-gate の並列 job として走らせ、main PR まで一度も走らない状態を止める
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-workspace-contract.cjs] [起票:2026-09-18] [期日:2026-11-15]
-
-- **owner**: devops-runner
-- **実測**: pre-commit は unit test を意図的に skip、develop-quality-gate は 2026-09-17 の実測で vitest 単体 162 秒が
-  停止条件 (1 job 直列 3 分) を超えたため外した (`CI-DEVELOP-GATE-COVERAGE-01`)。結果、unit test は
-  develop→main PR で初めて走り、PR #974 では Unit Tests job が 2 回落ち (Package / Web)、2026-09-17 には
-  `RailAdSlot` mock 欠落で web 4 test が crash したまま develop に潜んでいた。PR 側の Unit Tests job は 466 秒。
-- **次**: `develop-quality-gate.yml` に `unit-tests` job を **別 job** として追加する (直列の 3 分予算は
-  1 job の壁時計の話なので、並列なら push が詰まらない)。`CI-SPEED-NODE-MODULES-CACHE-01` の後に着手すると
-  install 分が消えて 162 秒 + 復元 30 秒程度に収まる。`pr-quality-check.yml` の Unit Tests job も
-  web / packages を並列 2 job に分け、`quality-gates.json` の prChecks (`job: test`) と
-  `critical-module-coverage-contract.test.cjs` (`jobBlock(text, "test")`) を追従させる。
-- **停止条件**: develop-gate の unit job が flake する (memory `project_two_machine_local_footprint`
-  の vitest フレーク) なら retry 1 回付きで様子を見て、それでも揺れるなら scheduled に戻す。
-- **完了条件**: develop push で unit test が並列に走り、意図的に壊した test が develop 着地時点で赤になる
-  ことを 1 回実測する。
-- **実施 (2026-09-18)**: `develop-quality-gate.yml` に `unit-web` (`npm run test:run -w apps/web`) と `unit-packages`
-  (`npm run test:packages`、coverage なし) を fast-gates と並列の別 job として追加 (node_modules キャッシュ共有)。
-  PR 側の Unit Tests job 分割は contract (`critical-module-coverage-contract` が `test` job を pin) に触れるため見送り。
-  実測は下記 (CI の run 時間)。「意図的に壊した test」は develop を汚さないため CI では行わず、
-  同じコマンドで RailAdSlot mock 欠落が赤になった 2026-09-17 のローカル実測を根拠にする。
-- **実測 (2026-09-18、run 35289478968)**: Fast Gates 71 秒 / Unit Tests (web) 229 秒 / Unit Tests (packages) 205 秒が並列、
-  全 job cache hit・green。壁時計は 229 秒で、fast-gates 単体は 3 分予算の中。完了条件を満たした (削除待ち)。
-
 ### [CI-SPEED-PREFLIGHT-PR-REGISTRY-01] `preflight:pr` の gate 一覧を手書き 15 件から registry / workflow 由来に変える
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs] [起票:2026-09-18] [期日:2026-11-15]
@@ -1055,7 +879,6 @@ updated: 2026-09-18
 - **停止条件**: 未検証のDrive原本・GIS・WIP・認証profileを削除しない。既存セッションの一括終了やGit履歴リセットで軽量化しない。Node数・メモリはツール稼働を含む瞬間値であり、条件を合わせず削減効果と断定しない。
 - **完了条件**: 再起動後の同条件計測を保存し、参考文献のDrive復元検証と source-vault:check が通る。GISは回収した各対象から保全先と再生成手順が辿れ、保全できないものには保持理由を残す。導入済み予算・定期点検方式は local-environment.md と自動化インベントリを参照する。
 
-
 ### [RULES-DEMOTE-01] 常時読み込みから外した rule の移設と reference 化
 
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:npm run docs:check] [起票:2026-09-08]
@@ -1083,41 +906,6 @@ updated: 2026-09-18
 - **次**: 外部公開と匿名閲覧の検証結果は上記stateのpublicationを参照。出品の再実行は不要。商品生成コード・本人照合修正・出品台帳・`.claude/state/products/coconala-packs-2026-09-06.json`を含むcommitのdevelop反映をGitで照合し、ledger gateでカードを閉じる。Office実機確認・本人手続きはCOCONALA-PROFILE-OWNER-01へ分離済み。
 - **停止条件**: 価格・公開未承認、公開manifestと不一致、空間結合・保存則FAILでは出品しない。需要未確認の公開はオーナーの明示指示を記録し、購入実績があるとは扱わない。note自動取得403を非公開・閲覧ゼロと誤判定しない。任意商圏・住所検索・鑑定・安全保証へ範囲を拡大しない。
 - **完了条件**: 承認記録、納品ZIPのSHA、サービスURL・販売条件・実際の納品物の一致を確認するか、オーナーが出品見送りを決定する。カード削除はbacklog-loopのledger gate経由。
-
-### [CI-DEVELOP-GATE-COVERAGE-01] develop 向け PR で決定的ゲートを走らせ、main への PR で初めて落ちる状態を止める
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:develop 向け PR で Static Gates 相当と Unit Tests が走ること] [起票:2026-09-03] [期日:2026-10-15]
-
-- **owner**: devops-runner
-- **症状 (2026-09-03 実測)**: PR #913 が入れた 2 つの欠陥 (check-ad-placement のリテラル不一致・
-  native 枠の在庫フォールバック喪失) が develop では一度も検知されず、デプロイ PR #915 で初めて落ちた。
-  `pr-quality-check.yml` は `pull_request: branches: [main]` でしか発火せず、develop 向け PR が通る
-  `develop-quality-gate.yml` は eslint・env registry・maintenance debt の 3 つだけ。husky は
-  依存に無く `core.hooksPath` も設定されないため pre-commit も発火しない。
-  結果、develop は「決定的ゲートを通っていないコードが積まれる場所」になっている。
-- **次**: `develop-quality-gate.yml` に、決定的で速い検査だけを足す。候補は
-  `check-ad-placement.cjs` / `design-system:check` / `check-card-census.cjs` (いずれも数秒) と
-  `vitest run` (apps/web で実測 98 秒)。**Build Check・Full E2E・Remotion は足さない**
-  (develop への push が詰まると `--no-verify` を誘発し、ゲートを足した意味が消える →
-  `branch-workflow.md`「ここに重い検査を足さない」)。
-- **停止条件**: 追加後の develop-quality-gate が実測 3 分を超えるなら、超えた分を外して
-  main 向けに残す。判断は実測値で行い、推測で足さない。
-- **完了条件**: develop 向け PR で上記ゲートが走り、意図的に壊した変更が develop マージ前に落ちる
-  ことを 1 度実測する。
-- **実施・実測 (2026-09-17)**: `check-ad-placement.cjs` / `design-system:check` / `check-card-census.cjs` /
-  `vitest run -w apps/web` の 4 つを追加して develop へ push し、実 run
-  (35218837673) で計測した。ジョブ全体 328 秒・うち Unit Tests (vitest) 単体 162 秒。
-  停止条件の 3 分 (180 秒) を大幅に超過したため、**停止条件どおり vitest だけを外した**
-  (3 checker のみなら 166 秒で収まる。再実測は次 run で確認)。vitest は
-  `pr-quality-check.yml` 側に残る (現状維持)。
-  配線の過程で実際に develop 上に潜んでいた欠陥を発見: `1006e1e21` (rail/surface 統一) が
-  `RankingPageSidebarSection.tsx` に `RailAdSlot` を追加導入したが、
-  `rakuten-ranking-placement.test.tsx` の `../index` mock が追従しておらず 4 test が
-  crash していた (mock に `RailAdSlot: () => null` を追加して是正)。これは vitest ゲートが
-  発見できる欠陥の実例だが、**vitest 自体は時間超過で除外したため、今回追加した
-  3 checker では拾えない種類の欠陥**だった。完了条件の「意図的に壊した変更を検知」は
-  3 checker (Card Census / Design System / Ad Placement) の範囲では未実演。
-  vitest を develop 側に含める代替案 (別 job で並列化する等) が要るなら別カードで検討する。
 
 ### [AFF-PLACEMENT-MAP-CORE-01] placement-map-core を「出典調査 → タグ → カテゴリ」に追従させ、survey の stale 判定を直す
 
@@ -1519,27 +1307,6 @@ updated: 2026-09-18
 4. 本番反映はユーザー承認後にまとめて1回行い、HTTP 200、年、単位、代表値を実測する。
 5. 完了した行は削除する。
 
-### [AFF-PRODUCT-KEYWORD-GAP-01] 家計調査系19指標が品目辞書から漏れ、楽天商品カードが出ない (1文字品目・「〜料」接尾辞)
-
-タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test --workspace apps/web -- src/features/ads] [起票:2026-09-16] [期日:2026-10-31]
-
-- **owner**: affiliate-manager (辞書導出規則) / ranking-ui-manager (表示確認)
-- 2026-09-16 実測 (家計調査系 706 metric の title を `detectProductKeyword` に通した): 検出あり 600 / 検出なし 106。
-  106 のうち 87 はサービス・料金・費目合計で商品カードにならないのが正しいが、**19 件は商品**なのに
-  `apps/web/src/features/ads/constants/product-keyword-derivation.ts` の 2 規則で落ちている:
-  - `:72` `term.length < 2` → 1 文字品目 6 種 × (支出額+消費量) = 12 件: 桃・梨・柿・米・傘・酢
-  - `:51` `/[代料費賃税]$/` (費目接尾辞) → 「〜料」で終わる商品 7 件: 炭酸飲料・乳飲料・茶飲料・乳酸菌飲料・風味調味料・他の調味料・修繕材料
-  影響: これらのランキングでは右レール (デスクトップ) と本文中段 (モバイル、`AFF-RANKING-RAKUTEN-NATIVE-01` 以降) の
-  商品軸カードが出ず、地域軸 (1 位県の返礼品) に代替される。
-- **次**: ①「飲料・調味料・材料」を費目扱いから除く例外を足す (接尾辞判定を stem 全体で見る)。
-  ②1 文字品目は blog タイトルで誤検出が確実 (「山梨」→梨、「米国」→米) なので無条件 allowlist にしない。
-  ranking の `sourceText` は正準 title (`{品目}消費支出額|消費量`) なので、**title 全体がその形に一致する場合だけ**
-  1 文字品目を許す (`detectProductKeyword` に完全形一致の分岐を足すか、呼び出し側で正準 title を別引数で渡す)。
-  ③`generate-runtime-metric-summaries.ts` を再実行して `RUNTIME_PRODUCT_KEYWORDS` を再生成 (現 465 語)。
-  ④vitest に「山梨県を含む blog タイトルで 梨 を検出しない」「桃消費支出額 では 桃 を検出する」の両方向を足す。
-- **停止条件**: blog 側 (`resolveBlogRakutenPlacement` / `blog-rakuten-content`) の既存テストが 1 件でも赤になる変更は入れない。
-- **完了条件**: 上記 19 metric の `/ranking/<key>` で商品カードが描画され (ローカル実測)、`src/features/ads` のテストと blog の誤検出テストが緑。
-
 ### [METRIC-SUBTITLE-KAKEI-NOTE-01] 家計調査系 706 metric の subtitle が調査方法の定型文で、一覧・h1 直下に冗長表示される
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-09-16]
@@ -1579,43 +1346,7 @@ updated: 2026-09-18
 - **完了条件**: `/geo` → 任意県の重なり地図が全 6 カードで 3 クリック (カード → Select 開く → 県)、東京都なら 1 クリック。分析ページの県選択 UI が 1 個 (Select) + テーブルリンクのみ。既存 URL (`?stage=audit`, `/NN/audit`, `/NN/population`, `/NN/overlap`) がすべて 200。vitest・type-check・design-system:check 緑。上記 (a)〜(e) を実測した記録をこのカードの削除 commit に残す。
 - **範囲外 (完了後に必要なら別カード)**: `/geo/compare` の「県を 1 つ選ぶ → 4 カード」を `/geo` 先頭に統合し、6 カードに選択県の `pref` を持たせて **2 クリック化**する案。効果は大きいが `/geo/compare` の canonical・`GEO_INDEXABLE_ROUTES`・`middleware.test.ts` (UTM 付き `/geo/compare` の検証) に及ぶ。
 
-### [NOTE-NAV-REPORT-RETENTION-01] update-published-navigation の日次レポートが hygiene の DATED_STATE_ARTIFACT に抵触して commit を止める
-
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-repo-hygiene.cjs --baseline] [起票:2026-09-16]
-
-- **owner**: note-manager
-- **trigger**: 次に `.claude/scripts/note/update-published-navigation.mjs` を実行し、そのレポートを commit しようとしたとき。
-- **実測 (2026-09-16)**: 別 PC 向け sync commit で `.claude/state/metrics/note-navigation-pilot-2026-09-1{4,5,6}.json` の 3 本が
-  pre-commit の Repo Hygiene ゲート (`check-repo-hygiene.cjs`) の `DATED_STATE_ARTIFACT` で止まった。ルールは 2026-09-14 (e4fabb4b3) に
-  追加されたが、writer の `REPORT_PATH` (`update-published-navigation.mjs:33`) は `.claude/state/metrics/` 直下に日付名で書いたまま。
-  09-06 分はルール以前にコミット済みで baseline に載っている。3 本はこの PC の未追跡のまま残し、commit からは外した。
-- **次**: `REPORT_PATH` を `prune-state-snapshots.mjs` が所有するディレクトリ (例 `.claude/state/metrics/note/navigation/`) へ変え、
-  同スクリプトに prune policy (`note-navigation-pilot-YYYY-MM-DD.json`, keep 8 程度) を追加する。09-06 の既存ファイルは同じ場所へ
-  `git mv` して baseline から外す。update-published-navigation の SKILL / README に出力先を反映する。
-
-
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
-
-### [PRECOMMIT-STAGED-SCOPE-01] pre-commit の working-tree 走査ゲートが、別セッションの未コミット編集で無関係な commit を止める
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs] [起票:2026-09-16]
-
-- **owner**: devops-runner
-- **trigger**: 同一作業ツリーで 2 セッション以上が並行するとき (この repo では常態)。次に同じ理由で commit が止まったら着手する。
-- **実測 (2026-09-16 17:0x JST)**: docs のみを staged した commit (`.claude/todo/backlog.md` +17 行) が、pre-commit の
-  `preflight-commit.mjs --commit-static` 内 **Card Census** (`check-card-census.cjs`) で中止された。原因は別セッションが
-  **unstaged** で編集中だった `apps/web/src/components/surface/SurfaceCard.tsx` の `SectionCard` (BASELINE 未登録)。
-  `check-card-census.cjs:86` は `fs.readdirSync` で working tree 全体を走査し、staged 内容を見ない。回避に使った
-  「origin/develop ベースの worktree + node_modules junction」は `git worktree remove --force` が junction を辿って本体の
-  `apps/*/node_modules` を消す事故を起こした (memory `feedback_worktree_junction_deletes_target`)。
-- **次**: `preflight-commit.mjs` に既にある `stagedWebFiles()` (ESLint ゲートが使用、staged な `apps/web/src` の TS/TSX が無ければ skip) を
-  `--commit-static` の Card Census / Ad Placement / Static Accessibility にも適用し、staged に `apps/web/src/**/*.tsx` が無い commit では
-  skip する (`skipped: true` を出力に残す)。CI の `npm run preflight` / `preflight:pr` は従来どおり全体走査のまま (縮退させない)。
-  `preflight-commit.test.mjs` に「staged が docs のみ + working tree に BASELINE 外 *Card がある → commit-static は緑」の固定を足す。
-- **停止条件・禁止**: staged に *.tsx がある commit の検査強度を落とさない。gate を `--no-verify` で迂回する運用にしない。
-  worktree へ本体の `node_modules` を junction で共有しない。
-- **完了条件**: 上記の再現条件 (docs のみ staged + 別セッションの未登録 Card が unstaged) で pre-commit が通り、
-  同じ状態で `npm run preflight` は従来どおり Card Census で落ちる。
 
 ### [CATEGORY-NAV-CONSOLIDATION-01] カテゴリ一覧UIの2実装 (PortalCategoryGrid / CategoryNavGrid) 統合検討
 
@@ -1692,8 +1423,6 @@ updated: 2026-09-18
 - **完了条件**: 採否の判断が実測根拠つきで記録され、採用時は設計が別 backlog として起票されること
 - **関連**: doc 43 (`docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md`) / `MUNI-AI-CONTENT-01`
 
-
-
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 
 タグ: [種類:改善] [実行:対話] [起票:2026-07-12]
@@ -1744,6 +1473,17 @@ updated: 2026-09-18
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [ADMIN-STAT-PILOT-01] 行政資料1業務の統計整理商品を検証し、有料pilotの採否を決める
+
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-09-18] [期日:2026-10-02]
+
+- **owner**: オーナー（実務例・協力者・購入条件） / strategy-advisor（比較と採否） / coconala-product-manager（採択後のサンプル仕様）
+- **正典**: `docs/00_プロジェクト管理/02_収益化戦略.md` §2・§3.4・§5。一般向け統計メディアを維持しながら、議会答弁・計画策定のために各所の統計をExcelへ集める重複作業を減らす。課題はオーナーとの議論で確認したが、対象業務の詳細・削減時間・支払者・価格・購入需要は未検証。
+- **優先・次（実行順）**: ①公開情報で再現できる実際の資料1件について、必要な地域粒度・統計・年次・完成条件・現行手順・再実施頻度を具体化する。②担当者3人を目安に、RESAS・自治体ダッシュボード・書籍・既存Excelでも残る作業と支払者の購入条件を確認する。③同じ仕様で助けられる場合だけ既存資産から無料サンプルを1つ作り、出典照合と利用者のExcel環境での編集を確認し、手直し込みの総時間を比較する。④収益化戦略§5の試用条件を満たした場合に価格・工数上限・時間単価・販売面を定め、有料pilotのGo/Pivot/Stopを判断する。期日は初回の採否・不足証拠確認日であり、未検証でも発売する期限ではない。
+- **既存タスクとの境界**: `PRODUCT-SALES-READINESS-01`等の品質是正・既存購入者への対応は維持するが、全商品完成を本検証の前提にしない。既存パックを利用できるかを先に調べ、用途未確認の新作・販売面を増やさない。採否後の優先順位は事業計画TS・商品カタログの開始条件にも反映する。商品在庫を需要の証拠と扱わない。
+- **停止条件**: 既存手段で十分、担当者ごとに要件が異なり共通化できない、必要な粒度が取得できない、照合・手直しを含む時間が減らない場合は対象変更または見送り。協力者・試用が得られなければ未検証と記録し、次回確認日と再開条件を決める。検索数・DL数・AI作成の架空ペルソナで実務試用を代替しない。実務者への連絡、販売・価格の外部反映はこのカードだけでは実行しない。
+- **完了条件**: 対象業務・必要粒度・代替手段・時間の測定方法と結果・支払者・購入経路・採算の入力が確認済み/未確認に分かれ、根拠付きのGo/Pivot/Stopが収益化戦略へ反映される。Goの場合だけ1商品・1販売面・価格・上限工数・観測期限が具体化される。実売を観測していなければ「事業成立」と報告しない。
 
 ### [AFF-NO-INTENT-FALLBACK-01] 「広告なし」にした主題 (身長・気候・犯罪など週 7,757+ imp) に何を出すか
 

@@ -8,7 +8,8 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 # クラウド / web 実行環境には GA4 鍵が無いため、実測は CI で行う (既存 metrics workflow と同じ
 # GOOGLE_SERVICE_ACCOUNT_KEY_JSON シークレットを stats47-*.json に復元して実行)。
 #
-# 失敗を隠さない: GA4 取得に失敗しても集約 state は生成し、measurementGate=blocked として記録する。
+# 失敗を隠さない: GA4 取得に失敗しても集約 state は生成し、measurementGate=blocked として記録したうえで、
+# 最後の「🚦 計測ゲート」step で run 自体を失敗させる (緑のまま観測が止まる事故を 2026-09 に起こしたため)。
 # 自動化は観測と候補生成 (recommendedActions) まで。広告変更・effect 判定・push・deploy はしない。
 #
 # 置き場 (2026-09-14・docs/01_技術設計/02_データアーキテクチャ.md):
@@ -144,11 +145,37 @@ jobs:
           if grep -q "## recommendedActions" /tmp/affiliate-operations.md 2>/dev/null; then
             cat /tmp/affiliate-operations.md >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "✅ 推奨アクションなし (measurementGate ready・findings なし)" >> "$GITHUB_STEP_SUMMARY"
+            echo "✅ 推奨アクションなし" >> "$GITHUB_STEP_SUMMARY"
           fi
           cat /tmp/affiliate-ga4.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
 
+      # 緑のまま観測が止まらないようにする最後の関門。state は上で生成済みなので、
+      # ここで落ちても measurementGate=blocked の記録と artifact は残る。
+      - name: 🚦 計測ゲート (GA4 失敗 / measurementGate blocked なら run を落とす)
+        if: always()
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require("fs");
+          const p = ".claude/state/ads/affiliate-operations-latest.json";
+          if (!fs.existsSync(p)) {
+            console.log("::error::affiliate-operations-latest.json が無い (集約 state を生成できていない)");
+            process.exit(1);
+          }
+          const gate = JSON.parse(fs.readFileSync(p, "utf8")).measurementGate ?? {};
+          console.log(`measurementGate: ${gate.status} ${(gate.reasons ?? []).join(", ")}`);
+          if (gate.status !== "ready") {
+            console.log(`::error::measurementGate=${gate.status} (${(gate.reasons ?? []).join(", ")})`);
+            process.exit(1);
+          }
+          NODE
+          if [ "${{ steps.ga4.outcome }}" != "success" ]; then
+            echo "::error::GA4 取得 step が失敗した (outcome=${{ steps.ga4.outcome }})"
+            exit 1
+          fi
+
       - name: 📤 Upload read-only portfolio state
+        if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: affiliate-portfolio-state

@@ -10,7 +10,7 @@
  */
 
 /** title からこの接尾辞を剥がすと品目名になる。長い順に試す。 */
-const TITLE_SUFFIXES = [
+export const TITLE_SUFFIXES = [
   "消費支出額",
   "購入数量",
   "消費数量",
@@ -21,7 +21,6 @@ const TITLE_SUFFIXES = [
 /**
  * 品目として採用しない語。楽天検索に流しても意味が無い / 誤誘導になるもの。
  * - 「教育」「住居」等の費目カテゴリ (商品ではない)
- * - 1〜2 文字の語 (「米」等の頻出漢字は記事本文と誤マッチしやすい)
  */
 const EXCLUDED_TERMS = new Set([
   "教育",
@@ -51,11 +50,28 @@ const EXCLUDED_TERMS = new Set([
 const SERVICE_CHARGE_SUFFIX = /[代料費賃税]$/;
 
 /**
+ * 「料」で終わっても商品であるもの。費目接尾辞の判定より先に見る
+ * (炭酸飲料・風味調味料・修繕材料 — 2026-09-16 実測で 8 metric が費目扱いで落ちていた)。
+ */
+const PRODUCT_TERM_SUFFIX = /(飲料|調味料|材料)$/;
+
+/**
+ * `text` が「{品目}{接尾辞}」という metric title そのものか。
+ *
+ * 1 文字の品目 (米・桃・梨・柿・傘・酢) は記事タイトルの一部として頻出する
+ * (「山梨」→梨、「米国」→米) ので、部分一致では使えない。ランキング名は metric title
+ * そのもの (正準形) なので、**完全一致のときだけ** 1 文字品目を採用する。
+ */
+export function isCanonicalProductTitle(text: string, term: string): boolean {
+  return TITLE_SUFFIXES.some((suffix) => text === `${term}${suffix}`);
+}
+
+/**
  * metric title の一覧から品目語を導出する。
  *
  * - 「うどん・そば」のような複合 title は中黒で分割する (記事タイトルは片方しか書かない)
- * - 1 文字の語は捨てる — 「米」「茶」「酒」は別語の一部として頻出し、無関係な記事に
- *   商品カードを出してしまう
+ * - 1 文字の語も辞書には入れる。部分一致で使うと「米国」→米 のように無関係な記事へ
+ *   商品カードを出すので、実行時は `isCanonicalProductTitle` (完全一致) のときだけ採用する
  *
  * 入力順に対して決定的で、重複は先勝ちで除く。
  */
@@ -69,9 +85,9 @@ export function deriveProductTermsFromTitles(
     const stem = title.slice(0, -suffix.length).trim();
     for (const part of stem.split("・")) {
       const term = part.trim();
-      if (term.length < 2) continue;
+      if (term.length === 0) continue;
       if (EXCLUDED_TERMS.has(term)) continue;
-      if (SERVICE_CHARGE_SUFFIX.test(term)) continue;
+      if (SERVICE_CHARGE_SUFFIX.test(term) && !PRODUCT_TERM_SUFFIX.test(term)) continue;
       terms.add(term);
     }
   }

@@ -12,6 +12,10 @@ export const AFFILIATE_DELIVERY_HOLDS = [
   { adId: "af_classpass_001", programRef: "a8:s00000026970001" },
   { adId: "af_housing_banner_001", programRef: "a8:s00000014870004" },
   { adId: "af_maca_emperor_001", programRef: "a8:s00000013307005" },
+  // 2026-09-18 オーナー判断 (AFF-BRAND-FIT-01): 公的統計サイトの信頼を優先し health 軸の
+  // 精力・マカ系サプリを停止する。再登録は a8-curated.json の blocklistKeywords が防ぐ。
+  { adId: "af_s00000013307001_a8_001", programRef: "a8:s00000013307001" },
+  { adId: "af_s00000013307001_a8_text_001", programRef: "a8:s00000013307001" },
 ] as const;
 
 export function isAffiliateDeliveryHeld(ad: Pick<AffiliateAd, "id" | "programRef" | "offerProfile">): boolean {

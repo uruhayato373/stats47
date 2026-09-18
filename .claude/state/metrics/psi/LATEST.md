@@ -1,8 +1,8 @@
-# PSI Latest — 2026-09-17
+# PSI Latest — 2026-09-18
 
-生成時刻: 2026-09-17T20:36:01.668Z
+生成時刻: 2026-09-18T19:56:09.972Z
 
-**しきい値違反: error 43 / warning 12**
+**しきい値違反: error 44 / warning 15**
 
 矢印の見方: ▲ 改善 / ▼ 悪化 / · 変化なし（前回計測との比較）
 
@@ -10,49 +10,49 @@
 
 | URL | Perf | LCP | CLS | TBT | TTFB |
 |---|---|---|---|---|---|
-| / | ERROR | | | | |
-| /ranking 🚨 | 92 ▲ (+12) | 3002ms ▲ | 0.000 · | 143ms ▲ | 8ms ▲ |
-| /areas 🚨 | 69 ▲ (+1) | 4904ms ▲ | 0.000 · | 222ms ▲ | 7ms ▼ |
-| /themes 🚨 | 88 ▼ (-7) | 2701ms · | 0.000 · | 326ms ▼ | 3ms ▲ |
-| /search 🚨 | 92 ▼ (-1) | 2869ms ▼ | 0.000 · | 161ms ▼ | 3ms ▲ |
-| /themes/population-dynamics | ERROR | | | | |
-| /themes/local-economy 🚨 | 59 ▲ (+17) | 2851ms ▲ | 0.000 · | 1920ms ▲ | 26ms ▼ |
+| / 🚨 | 86 | 3826ms | 0.000 | 186ms | 16ms |
+| /ranking 🚨 | 93 ▲ (+1) | 2858ms ▲ | 0.000 · | 164ms ▼ | 17ms ▼ |
+| /areas 🚨 | 75 ▲ (+6) | 4847ms ▲ | 0.000 · | 135ms ▲ | 6ms ▲ |
+| /themes 🚨 | 92 ▲ (+4) | 3001ms ▼ | 0.000 · | 142ms ▲ | 8ms ▼ |
+| /search 🚨 | 90 ▼ (-2) | 3018ms ▼ | 0.000 · | 91ms ▲ | 3ms · |
+| /themes/population-dynamics 🚨 | 59 | 3301ms | 0.000 | 2166ms | 59ms |
+| /themes/local-economy | ERROR | | | | |
 | /themes/labor-wages | ERROR | | | | |
-| /ranking/total-population 🚨 | 70 ▲ (+29) | 7538ms ▲ | 0.003 · | 254ms ▲ | 47ms ▼ |
-| /ranking/annual-sunshine-duration 🚨 | 64 ▲ (+12) | 8055ms ▼ | 0.003 · | 313ms ▲ | 10ms ▲ |
-| /ranking/future-population-change-rate-2050 | ERROR | | | | |
+| /ranking/total-population | ERROR | | | | |
+| /ranking/annual-sunshine-duration 🚨 | 72 ▲ (+8) | 7911ms ▲ | 0.003 · | 178ms ▲ | 28ms ▼ |
+| /ranking/future-population-change-rate-2050 🚨 | 50 | 7867ms | 0.003 | 601ms | 7ms |
 | /ranking/agricultural-output | ERROR | | | | |
-| /areas/13000 | ERROR | | | | |
+| /areas/13000 🚨 | 65 | 6140ms | 0.000 | 447ms | 7ms |
 | /areas/27000 | ERROR | | | | |
 | /areas/01000 | ERROR | | | | |
 | /areas/47000 | ERROR | | | | |
-| /blog | ERROR | | | | |
-| /blog/telework-gap-tokyo-6x | ERROR | | | | |
-| /about ⚠️ | 87 ▼ (-8) | 2277ms ▲ | 0.000 · | 395ms ▼ | 4ms ▲ |
+| /blog 🚨 | 84 | 4426ms | 0.000 | 92ms | 6ms |
+| /blog/telework-gap-tokyo-6x 🚨 | 93 | 2552ms | 0.000 | 102ms | 7ms |
+| /about 🚨 | 92 ▲ (+5) | 2715ms ▼ | 0.000 · | 86ms ▲ | 3ms ▲ |
 
 ## 💻 Desktop
 
 | URL | Perf | LCP | CLS | TBT | TTFB |
 |---|---|---|---|---|---|
-| / 🚨 | 88 ▼ (-8) | 1304ms ▼ | 0.000 · | 232ms ▼ | 7ms · |
-| /ranking 🚨 | 85 ▲ (+9) | 942ms ▼ | 0.069 · | 314ms ▲ | 40ms ▲ |
+| / 🚨 | 88 · | 1332ms ▼ | 0.000 · | 238ms ▼ | 10ms ▼ |
+| /ranking 🚨 | 87 ▲ (+2) | 958ms ▼ | 0.069 · | 275ms ▲ | 6ms ▲ |
 | /areas | ERROR | | | | |
 | /themes | ERROR | | | | |
-| /search 🚨 | 66 ▼ (-20) | 637ms ▼ | 0.000 · | 946ms ▼ | 4ms ▼ |
-| /themes/population-dynamics | ERROR | | | | |
-| /themes/local-economy | ERROR | | | | |
-| /themes/labor-wages | ERROR | | | | |
-| /ranking/total-population | ERROR | | | | |
-| /ranking/annual-sunshine-duration 🚨 | 55 ▼ (-2) | 1973ms ▲ | 0.154 · | 807ms ▲ | 10ms ▲ |
-| /ranking/future-population-change-rate-2050 🚨 | 61 ▲ (+9) | 1707ms ▲ | 0.094 · | 469ms ▲ | 60ms ▼ |
+| /search 🚨 | 83 ▲ (+17) | 534ms ▲ | 0.000 · | 364ms ▲ | 4ms · |
+| /themes/population-dynamics 🚨 | 72 | 932ms | 0.021 | 759ms | 34ms |
+| /themes/local-economy 🚨 | 70 | 801ms | 0.011 | 1021ms | 80ms |
+| /themes/labor-wages 🚨 | 69 | 794ms | 0.007 | 1047ms | 9ms |
+| /ranking/total-population 🚨 | 61 | 1953ms | 0.060 | 1175ms | 6ms |
+| /ranking/annual-sunshine-duration | ERROR | | | | |
+| /ranking/future-population-change-rate-2050 | ERROR | | | | |
 | /ranking/agricultural-output | ERROR | | | | |
-| /areas/13000 🚨 | 61 ▼ (-26) | 1300ms ▼ | 0.124 · | 859ms ▼ | 9ms ▼ |
+| /areas/13000 | ERROR | | | | |
 | /areas/27000 | ERROR | | | | |
 | /areas/01000 | ERROR | | | | |
-| /areas/47000 🚨 | 86 ▲ (+15) | 601ms ▲ | 0.055 · | 176ms ▲ | 30ms ▼ |
-| /blog | ERROR | | | | |
-| /blog/telework-gap-tokyo-6x 🚨 | 86 ▲ (+16) | 1314ms ▼ | 0.069 · | 174ms ▲ | 12ms ▼ |
-| /about | ERROR | | | | |
+| /areas/47000 🚨 | 84 ▼ (-2) | 1456ms ▼ | 0.069 · | 149ms ▲ | 8ms ▲ |
+| /blog 🚨 | 87 | 1526ms | 0.069 | 205ms | 10ms |
+| /blog/telework-gap-tokyo-6x 🚨 | 87 ▲ (+1) | 711ms ▲ | 0.000 · | 301ms ▼ | 13ms ▼ |
+| /about 🚨 | 80 | 653ms | 0.000 | 411ms | 3ms |
 
 ## 全履歴
 

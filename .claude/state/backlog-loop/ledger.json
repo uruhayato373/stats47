@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-13T06:32:10.845Z",
+  "updatedAt": "2026-09-18T09:33:47.235Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3761,9 +3761,9 @@
       "completedAt": "2026-09-05T13:57:38.507Z"
     },
     "GIS-COMMERCIAL-LICENSE-BOUNDARY-01": {
-      "class": "needs-owner",
-      "status": "open",
-      "sourceFile": null,
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
       "title": null,
       "attempts": [
         {
@@ -3804,6 +3804,24 @@
           "evidence": "route.class=needs-owner (delete可否等オーナー判断待ち)。CIループの対象外、行削除もしない。",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-09-18T09:23:46.882Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run geo:check-data-catalog"
+            ],
+            "pass": true
+          },
+          "evidence": "外部作業は完了済みの証跡照合のみ。geo-release-publication-2026-09-05.json legacyLicense.remoteDelete: raw 435 削除 PASS (run 33974655560)、ranking 126 ALL126_DELETED_S3_AND_PUBLIC404_VERIFIED。posts.json で 592/632/636/749/796/800 が status=deleted (2026-09-06T04:41〜04:49Z)。catalog gate 2026-09-18 PASS",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -3811,8 +3829,14 @@
         "lastReason": null,
         "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": null
+      "reclassifiedFrom": [
+        {
+          "from": "needs-owner",
+          "to": "misconception-close",
+          "at": "2026-09-18T09:23:46.882Z"
+        }
+      ],
+      "completedAt": "2026-09-18T09:23:46.882Z"
     },
     "SURVEY-TAXONOMY-COVERAGE-01": {
       "class": "impl-large",
@@ -4224,6 +4248,372 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-13T06:32:10.845Z"
+    },
+    "THEME-CHART-FOOTER-OVERLAP-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.758Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && PLAYWRIGHT_TEST_BASE_URL=https://stats47.jp npx playwright test --config playwright.smoke.config.ts tests/smoke/theme-chart-overlap.spec.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "smoke の誤検知 (Leaflet overlay 480px box を overflow:hidden で切り取り済み)。spec を見える下端判定へ修正 8aafad3a5。本番: CI run 35288442221 で 2 テーマ green、ローカル 2026-09-18 も 2 passed (初回は 30s 内にカード未描画で retry、overlap 判定ではない)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.758Z"
+    },
+    "CI-POST-DEPLOY-SMOKE-ALERT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.784Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "post-deploy-smoke.yml に固定 Issue upsert/close を追加 5faf06f86。Issue #978 起票 (run 35288205875) → 自動 close (run 35288442221)。テスト pass 4/fail 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.784Z"
+    },
+    "CI-SPEED-UNIT-TESTS-EARLY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.809Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-workspace-contract.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "develop-quality-gate.yml に unit-web / unit-packages 並列 job 0447653f1。run 35289478968: Fast Gates 71s / unit-web 229s / unit-packages 205s 並列 green。workspace contract OK 25 workspaces",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.809Z"
+    },
+    "CI-SPEED-STATIC-GATES-SPLIT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.833Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "Static Gates を 3 job 並列化 f15bbaadb。PR #977 run 35270099628: 壁時計 486→347s (miss) / 234s (hit)。契約テスト pass 18/fail 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.833Z"
+    },
+    "CI-SPEED-NODE-MODULES-CACHE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.858Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/audit-workflow-policy.cjs --strict"
+            ],
+            "pass": true
+          },
+          "evidence": "node_modules を lockfile hash でキャッシュ f15bbaadb。PR #977 attempt 2 で 12 job hit・復元 8〜11s・Install skipped。develop-quality-gate hit 時 102s (run 35272157199)。audit-workflow-policy --strict exit 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.858Z"
+    },
+    "NOTE-NAV-REPORT-RETENTION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.907Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-repo-hygiene.cjs --baseline"
+            ],
+            "pass": true
+          },
+          "evidence": "dee8d86c9 で REPORT_PATH を .claude/state/metrics/note/navigation/ へ、prune-state-snapshots.mjs に note-navigation (keep 8) 追加、既存 4 ファイル移動・baseline 5 行削除。hygiene: 13939 files / known 56 / new 0。SKILL/README に出力先の記述は元々無し (更新対象なし)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.907Z"
+    },
+    "AFF-PRODUCT-KEYWORD-GAP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.932Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run src/features/ads"
+            ],
+            "pass": true
+          },
+          "evidence": "product-keyword-derivation.ts: 飲料/調味料/材料 を費目接尾辞の例外に、1 文字品目を辞書へ (isCanonicalProductTitle)。product-keywords.ts: 1 文字品目は正準 title 完全一致のみ採用。RUNTIME_PRODUCT_KEYWORDS 465→486 (桃梨柿米傘酢鍋皿鉢 + 飲料/調味料/材料 12)。vitest ads 258 passed、1 文字ガードを外す mutation で 5 red。R2 snapshot は未生成 (app/rakuten/items",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.932Z"
+    },
+    "PRECOMMIT-STAGED-SCOPE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.957Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "COMMIT_GATES の Card Census / Ad Placement を stagedWebScoped で包み、staged に apps/web/src の TS/TSX が無い commit では skip (--pr は全体走査のまま)。テスト pass 13/fail 0。再現: docs のみ staged + 未登録 ZzzProbeCard.tsx unstaged で --commit-static 通過 (skipped)、--pr は Card Census で赤",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.957Z"
+    },
+    "CI-DEVELOP-GATE-COVERAGE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:23:46.981Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-workspace-contract.cjs",
+              "cd apps/web && npx vitest run src/features/ads"
+            ],
+            "pass": true
+          },
+          "evidence": "develop-quality-gate に check-ad-placement / design-system:check / check-card-census (4b7b13322) + unit-web / unit-packages 並列 job (0447653f1) が入り、develop push で決定的ゲートと unit test が走る (run 35289478968 green)。「意図的に壊した変更」の CI 実測は develop を汚さないため行わず、同じコマンド (vitest run) がローカルで mutation",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:23:46.981Z"
+    },
+    "AFF-DEPLOY-RESOLUTION-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:33:47.205Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -sA Googlebot https://stats47.jp/ranking/natto-consumption-expenditure",
+              "curl -sA Googlebot https://stats47.jp/ranking/avg-height-high-school-2nd-male",
+              "curl -sA Googlebot https://stats47.jp/blog/local-government-debt-burden"
+            ],
+            "pass": true
+          },
+          "evidence": "#913 (SURVEY_AFFILIATE_MAP) は PR #915 で 2026-09-03 10:51 JST に main へ (ddcfb8b3a) = 起票と同日にデプロイ済みでカードだけ残っていた。2026-09-18 本番実測: natto ranking は A8/afb 0 件・楽天カード (rakuten-native / rakuten-sidebar) のみ (native の furusato サイトは 09-16 の AFF-RANKING-RAKUTEN-NATIVE-01 で楽天カードへ置換済みのため条件は supe",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:33:47.205Z"
+    },
+    "RSC-CACHE-BYPASS-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-18T09:33:47.235Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -sD - -o /dev/null -H 'RSC: 1' https://stats47.jp/ranking/total-population"
+            ],
+            "pass": true
+          },
+          "evidence": "Worker gateway の RSC bypass (3ce7e0edb、PR #940 で 09-07 に main)。2026-09-18 本番実測: RSC 応答は content-type text/x-component / cache-control private, no-store / vary に RSC, Next-Router-State-Tree, Next-Router-Prefetch を含む / cache-tag 無し / cf-cache-status 無し。HTML 応答は cf-cache-status HIT ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-18T09:33:47.235Z"
     }
   }
 }

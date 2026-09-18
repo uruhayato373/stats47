@@ -1,5 +1,7 @@
 import { RUNTIME_PRODUCT_KEYWORDS } from "@/config/runtime-metric-summaries.generated";
 
+import { isCanonicalProductTitle } from "./product-keyword-derivation";
+
 /**
  * 記事・ランキングのタイトルから「楽天市場で売っている品目」を検出するための辞書。
  *
@@ -36,11 +38,19 @@ export function listProductKeywords(): ProductKeyword[] {
  * 一致が複数ある場合は **最も早く出現したもの**を採り、同じ位置なら**長い語**を採る。
  * 「そばつゆ」を含む記事で「そば」を拾わないための規則で、`detectPrefCodeFromText`
  * (ふるさと納税カード) と同じ判定にそろえている。
+ *
+ * 1 文字の品目 (米・桃・梨 等) は部分一致にせず、text が metric title そのもの
+ * (ランキング名 = 「桃消費支出額」) のときだけ採る。記事タイトルの「山梨」「米国」で
+ * 商品カードを出さないため (`isCanonicalProductTitle`)。
  */
 export function detectProductKeyword(text: string): ProductKeyword | null {
   let best: { keyword: ProductKeyword; index: number } | null = null;
 
   for (const keyword of listProductKeywords()) {
+    if (keyword.term.length < 2) {
+      if (isCanonicalProductTitle(text, keyword.term)) return keyword;
+      continue;
+    }
     const index = text.indexOf(keyword.term);
     if (index === -1) continue;
     if (
