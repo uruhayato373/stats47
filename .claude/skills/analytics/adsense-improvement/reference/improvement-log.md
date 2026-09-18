@@ -6,13 +6,14 @@
 ## [ADSENSE-PAUSE-01] 全AdSense表示の一時停止
 
 - **判断日**: 2026-08-16（オーナー明示判断）
-- **デプロイ日**: 未（コード実装済、効果計測の開始前）
+- **デプロイ日**: 2026-08-29（PR #849 の main マージ）。2026-09-18 に `curl -s https://stats47.jp/ | grep -c "adsbygoogle\|pagead2"` = 0 で本番の配信停止を確認
 - **ベースライン**: 2026-W32 finalized7d は earnings ¥130、page views 4,469、page RPM ¥29、impressions 4,152、viewability 51.7%、ad requests 16,508、coverage 36.1%。出典: `.claude/state/metrics/adsense/LATEST.md`
 - **変更**: `apps/web/src/lib/google-adsense/constants.ts` の `ADSENSE_DISPLAY_ENABLED=false` をSSOTとし、環境変数の値にかかわらず script / preconnect / Auto ads / 手動枠 / AdSense fallback / 広告用の空カード・予約高を全ページで生成しない。アフィリエイト広告は対象外
 - **想定する機会費用**: 現状と同程度なら AdSense 収益を週約¥130失う。UX・速度・回遊・代替収益の改善幅は未確定で、実測前に効果を主張しない
 - **検証**: デプロイ直後に本番HTMLとnetworkで `pagead2.googlesyndication.com` / `adsbygoogle` / AdSense用空枠が0件であることを確認。28日後に重複しない期間で Core Web Vitals、engagement、affiliate CTR、商品導線クリック、AdSense減収を比較する
 - **再開条件**: 28日実測を確認し、オーナーが明示承認した場合のみ全体スイッチを `true` へ戻す。個別ページから先に戻さない
-- **判定**: in-progress（未デプロイ。判定日はデプロイ日+28日へ更新する）
+- **実測（停止後）**: AdSense 確定7日 earnings は W32 ¥130 → W33 ¥118 → W34 ¥8、page views 4,469 → 324（`.claude/state/metrics/adsense/history.csv`）。W35 以降の snapshot は未取得
+- **判定**: in-progress（判定期日 = デプロイ+28日の 2026-09-26）。ただし比較材料のうち**アフィリエイト実測が 2026-08-28 以降存在しない**（`AFF-MEASURE-RECOVER-01`）ため、「代替収益」の項目は 09-26 時点では判定できない。CWV・engagement だけで判定するか期日を延ばすかはオーナーが決める
 
 ---
 
