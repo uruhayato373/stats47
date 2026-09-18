@@ -23,6 +23,7 @@ concurrency:
 
 permissions:
   contents: read
+  issues: write # 失敗を固定 Issue へ upsert し、復旧時に close する (CI-POST-DEPLOY-SMOKE-ALERT-01)
 
 jobs:
   smoke-test:
@@ -65,10 +66,83 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright smoke tests
+        id: smoke
         working-directory: apps/web
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.inputs.base_url || 'https://stats47.jp' }}
-        run: npx playwright test --config playwright.smoke.config.ts
+        # list reporter の出力を残し、失敗時の Issue 本文に「retry 後も失敗」と「flaky (retry で通過)」を
+        # 区別して載せる。pipefail で Playwright の exit code を落とさない。
+        run: |
+          set -o pipefail
+          npx playwright test --config playwright.smoke.config.ts 2>&1 | tee /tmp/smoke.log
+
+      # ★失敗を通知する (CI-POST-DEPLOY-SMOKE-ALERT-01)。
+      #   2026-09-13〜18 に 7 デプロイ連続で theme-chart-overlap が失敗していたが、この workflow は
+      #   Issue を起票しない唯一の本番検査だったため誰にも見えなかった。他の alert workflow と同じ
+      #   lifecycle (label を同 step で ensure → 固定 Issue を upsert → 復旧で close) に揃える。
+      #   health check / Playwright のどちらの失敗も `failure()` で拾う。
+      - name: 🚨 Upsert post-deploy alert issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+          BASE_URL: ${{ github.event.inputs.base_url || 'https://stats47.jp' }}
+        run: |
+          TITLE="[Post-Deploy Alert] 本番スモークテストの失敗"
+          BODY=/tmp/smoke-issue.md
+          {
+            echo "## 本番スモークテストが失敗しました"
+            echo
+            echo "- 対象: $BASE_URL"
+            echo "- デプロイ commit: \`$HEAD_SHA\`"
+            echo "- run: $RUN_URL (失敗時は artifact \`smoke-test-report\` に Playwright HTML report)"
+            echo "- 更新: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo
+            if [ -f /tmp/smoke.log ]; then
+              # list reporter の末尾サマリ「  N failed」「  N flaky」直下のインデント行をそれぞれ拾う
+              summary() { awk -v key="$1" '$0 ~ "^  [0-9]+ " key "$" {f=1; next} f && /^    \[/ {sub(/^ */,""); print "- " $0; next} f && /^  [0-9]+ / {f=0}' /tmp/smoke.log; }
+              echo "### retry 後も失敗したテスト"
+              echo
+              summary failed | grep . || echo "- (サマリを抽出できず。run のログを参照)"
+              echo
+              echo "### flaky (retry で通過したテスト・今回は止めていない)"
+              echo
+              summary flaky | grep . || echo "- なし"
+              echo
+              echo "<details><summary>ログ末尾</summary>"
+              echo
+              echo '```'
+              tail -n 60 /tmp/smoke.log
+              echo '```'
+              echo "</details>"
+            else
+              echo "Playwright 以前の health check (\`smoke-test.ts\`) で失敗しました。run のログを参照してください。"
+            fi
+            echo
+            echo "対応は \`.claude/todo/backlog.md\` へカード起票し、復旧すると次の deploy 後に自動 close されます。"
+          } > "$BODY"
+          # ラベルが無いと gh issue create が "could not add label" で落ち、通知自体が飛ばない
+          gh label create post-deploy-alert --description "本番スモークテストの失敗" --color "b60205" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label post-deploy-alert --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file "$BODY"
+            gh issue comment "$EXISTING" --body "再失敗: $RUN_URL"
+          else
+            gh issue create --title "$TITLE" --label "post-deploy-alert,auto-generated" --body-file "$BODY"
+          fi
+
+      - name: ✅ Close recovered post-deploy alert
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh issue list --state open --label post-deploy-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "本番スモークテストが復旧したため自動 close します: $RUN_URL"
+            done
 
       - name: Upload smoke test report
         if: failure()

@@ -94,6 +94,7 @@ skill、agent、prompt、READMEへ複製しない。
 | ページ肥大化・重複・速度の週次監査でerror違反 | `page-quality-alert,auto-generated` | `.github/workflows/page-quality-audit-weekly.yml` |
 | GSC週次レビュー・候補判断・次週計画の接続異常 | `gsc-cycle-alert,auto-generated` | `.github/workflows/gsc-operations-cycle-weekly.yml` |
 | 国土数値情報カタログの更新検知 | `ksj-catalog,auto-generated` | `.github/workflows/ksj-catalog-monthly.yml` |
+| 本番デプロイ後スモークテスト (health check / Playwright) の失敗 | `post-deploy-alert,auto-generated` | `.github/workflows/post-deploy-smoke.yml` |
 
 **アラート workflow は自分のラベルを同じ step で ensure する** (`gh label create <name> --force 2>/dev/null || true` → `gh issue create`)。ラベルが未登録だと `gh issue create` が `could not add label` で落ち、**通知が 1 度も飛ばない**。2026-08-12 に `rakuten-alert` 未登録でこれが起き、楽天同期が 9 日間死んでいたことを誰も知らなかった (ログの最終行も真因ではなくラベルエラーになり原因を隠す)。機械検査は `.claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs` が workflow を glob で走査して行う。
 

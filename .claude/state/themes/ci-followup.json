@@ -1,26 +1,14 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-14",
-  "status": "fail",
+  "observedAt": "2026-09-18",
+  "status": "pass",
   "themeCount": 55,
   "runtime": {
     "expected": 110,
     "checked": 110,
-    "failed": 5
+    "failed": 0
   },
-  "problems": [
-    "aging-society/390:chart:cmp-pop-elderly-household:source-unavailable",
-    "aging-society/390:network:503",
-    "fishery-marine/390:chart:theme-fishery-output-trend:source-unavailable",
-    "fishery-marine/390:network:503",
-    "real-income/390:chart:real-income-cpi-breakdown-expenses:source-unavailable",
-    "real-income/390:network:503",
-    "runtime-process:1",
-    "safety/1440:chart:safety-fire-casualties-donut:source-unavailable",
-    "safety/1440:network:503",
-    "safety/390:chart:fire-emergency-trend-fire:source-unavailable",
-    "safety/390:network:503"
-  ],
+  "problems": [],
   "checkpoints": [
     {
       "experimentId": "THEME-EXP-001",
@@ -134,10 +122,560 @@
         }
       },
       "verdict": "insufficient-data"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-aging-society",
+      "themeKey": "aging-society",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-climate",
+      "themeKey": "climate",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-consumer-prices",
+      "themeKey": "consumer-prices",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-education-culture",
+      "themeKey": "education-culture",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-fishery-marine",
+      "themeKey": "fishery-marine",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-healthcare",
+      "themeKey": "healthcare",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-labor-mobility",
+      "themeKey": "labor-mobility",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-labor-wages",
+      "themeKey": "labor-wages",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-living-housing",
+      "themeKey": "living-housing",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-local-economy",
+      "themeKey": "local-economy",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-local-finance",
+      "themeKey": "local-finance",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-manufacturing",
+      "themeKey": "manufacturing",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-occupation-salary",
+      "themeKey": "occupation-salary",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-population-dynamics",
+      "themeKey": "population-dynamics",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-ports",
+      "themeKey": "ports",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-railway",
+      "themeKey": "railway",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-real-income",
+      "themeKey": "real-income",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-roads",
+      "themeKey": "roads",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-safety",
+      "themeKey": "safety",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260908-tourism",
+      "themeKey": "tourism",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260909-construction-industry",
+      "themeKey": "construction-industry",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260909-waste-recycling",
+      "themeKey": "waste-recycling",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260909-information-industry",
+      "themeKey": "information-industry",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-agriculture-production",
+      "themeKey": "agriculture-production",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-business-demography",
+      "themeKey": "business-demography",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-childcare-services",
+      "themeKey": "childcare-services",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-communication-access",
+      "themeKey": "communication-access",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-community-participation",
+      "themeKey": "community-participation",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-cultural-participation",
+      "themeKey": "cultural-participation",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-daily-time-use",
+      "themeKey": "daily-time-use",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-disability-support",
+      "themeKey": "disability-support",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-earthquake-exposure",
+      "themeKey": "earthquake-exposure",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-environmental-quality",
+      "themeKey": "environmental-quality",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-forestry-timber",
+      "themeKey": "forestry-timber",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-freight-logistics",
+      "themeKey": "freight-logistics",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-gender-participation",
+      "themeKey": "gender-participation",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-geographic-access",
+      "themeKey": "geographic-access",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-health-checkups",
+      "themeKey": "health-checkups",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-household-assets-debt",
+      "themeKey": "household-assets-debt",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-innovation-patents",
+      "themeKey": "innovation-patents",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-land-property-market",
+      "themeKey": "land-property-market",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-landslide-exposure",
+      "themeKey": "landslide-exposure",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-local-government-digital",
+      "themeKey": "local-government-digital",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-local-services",
+      "themeKey": "local-services",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-long-term-care",
+      "themeKey": "long-term-care",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-natural-environment",
+      "themeKey": "natural-environment",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-public-assistance",
+      "themeKey": "public-assistance",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-regional-energy",
+      "themeKey": "regional-energy",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-regional-transport",
+      "themeKey": "regional-transport",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-retail-commerce",
+      "themeKey": "retail-commerce",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-single-parent-households",
+      "themeKey": "single-parent-households",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-sports-participation",
+      "themeKey": "sports-participation",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-tsunami-exposure",
+      "themeKey": "tsunami-exposure",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-LAUNCH-20260911-water-services",
+      "themeKey": "water-services",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
+    },
+    {
+      "experimentId": "THEME-STRUCTURE-20260911-foreign-residents",
+      "themeKey": "foreign-residents",
+      "checkpoint": "d7",
+      "due": "2026-09-18",
+      "status": "quality-only",
+      "reasons": [],
+      "values": {},
+      "verdict": "pending"
     }
   ],
-  "alertBody": "# テーマ継続確認\n- aging-society/390:chart:cmp-pop-elderly-household:source-unavailable\n- aging-society/390:network:503\n- fishery-marine/390:chart:theme-fishery-output-trend:source-unavailable\n- fishery-marine/390:network:503\n- real-income/390:chart:real-income-cpi-breakdown-expenses:source-unavailable\n- real-income/390:network:503\n- runtime-process:1\n- safety/1440:chart:safety-fire-casualties-donut:source-unavailable\n- safety/1440:network:503\n- safety/390:chart:fire-emergency-trend-fire:source-unavailable\n- safety/390:network:503\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "cbe99c553e73fdcba4b6f770a51bcea99485c0e8d6a68d43db8131aa74f0cc47",
+  "alertBody": "# テーマ継続確認\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "b356170fa8602704242a5778872fe6fb8b45387cea5da90a4502599658c37f29",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/34803363700"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/35303333091"
 }

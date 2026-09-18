@@ -49,6 +49,9 @@ jobs:
         run: npm ci
       - name: Run web coverage suite
         run: npm run test:coverage -w apps/web
+      - name: Run scoped workflow contracts (PR では差分連動)
+        run: npm run test:scoped-workflow-contracts
+
       - name: Run all package tests
         run: npm run test:packages:ci
       - name: Run admin unit tests

@@ -73,7 +73,7 @@ packages/data-configs/src/unit/unit-semantics.ts   ← 正典 (ここだけ編�
 
 | ゲート | どこで走るか |
 |---|---|
-| `generate-unit-semantics-mirror.ts --check` | pre-commit §6.45 (単位ファイルを触ったとき) / `pr-quality-check.yml` の **Unit Semantics Mirror Gate** |
+| `generate-unit-semantics-mirror.ts --check` | `npm run preflight:pr` (push 前) / develop-quality-gate の catalog-gates / `pr-quality-check.yml` の **Unit Semantics Mirror Gate** (2026-09-18 に pre-commit から移動) |
 | パリティテスト | `packages/data-configs/src/unit/__tests__/mirror-parity.test.ts` — 68 語彙の総当たり換算が完全一致することを assert |
 
 両方とも鏡を 1 箇所改変して**実際に発火することを実証済み** (2026-08-12)。

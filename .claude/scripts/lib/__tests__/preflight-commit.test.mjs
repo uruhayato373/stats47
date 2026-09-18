@@ -159,6 +159,15 @@ test("--pr のゲートは PR CI (Static Gates) と同じコマンドを指す",
     "generate-ranking-prominence.ts",
     // 2026-09-14: 日付名 state の追跡を止める hygiene gate も PR CI と同じ引数で走らせる
     "check-repo-hygiene.cjs",
+    // 2026-09-18: PR #974 で実際に落ちた 4 gate (CI-SPEED-PREFLIGHT-PR-REGISTRY-01)
+    "check-money-unit-audit.cjs",
+    "check-quality-exceptions.cjs",
+    "check-quality-warning-ratchet.cjs",
+    "check-render-ci-contract.cjs",
+    "audit-affiliate-compliance.ts",
+    "audit-affiliate-relevance.ts",
+    "check-checker-wiring.cjs",
+    "check-workspace-contract.cjs",
   ];
   for (const command of shared) {
     assert.ok(src.includes(command), `preflight --pr が ${command} を失っている`);

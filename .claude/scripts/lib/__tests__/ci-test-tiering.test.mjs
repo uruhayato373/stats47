@@ -41,6 +41,16 @@ test('共有依存の変更は利用アプリへ波及する', () => {
   assert.equal(result.packages, true);
 });
 
+test('workflow YAML か scoped-workflow テストの変更だけが重い workflow 契約を走らせる', () => {
+  assert.equal(classifyPrQualityPaths(['.github/workflows/sync-snapshots.yml']).workflow_contracts, true);
+  assert.equal(classifyPrQualityPaths(['.claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs']).workflow_contracts, true);
+  assert.equal(classifyPrQualityPaths(['apps/web/src/app/page.tsx']).workflow_contracts, false);
+  const pr = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-quality-check.yml'), 'utf8');
+  assert.match(pr, /if: needs\.changes\.outputs\.workflow_contracts == 'true'\n\s+run: npm run test:scoped-workflow-contracts/);
+  const weekly = fs.readFileSync(path.join(ROOT, '.github/workflows/quality-suite-weekly.yml'), 'utf8');
+  assert.match(weekly, /npm run test:scoped-workflow-contracts/, '週次は差分に関係なく全数を走らせる');
+});
+
 test('CI本体変更は全jobを自己検証する', () => {
   const result = classifyPrQualityPaths(['.github/workflows/pr-quality-check.yml']);
   assert.deepEqual(Object.values(result), Array(Object.keys(result).length).fill(true));

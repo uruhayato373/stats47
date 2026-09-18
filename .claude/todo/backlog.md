@@ -21,6 +21,33 @@ updated: 2026-09-18
 
 ## 🔴 高 — 今月中に着手したい
 
+### [THEME-CHART-FOOTER-OVERLAP-01] 【誤検知・smoke 側で解消済み】テーマページの「〜の分布」地図カードで SVG が footer に 40px 重なると smoke が報告していた
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:cd apps/web && PLAYWRIGHT_TEST_BASE_URL=https://stats47.jp npx playwright test --config playwright.smoke.config.ts tests/smoke/theme-chart-overlap.spec.ts] [起票:2026-09-18] [期日:2026-09-30]
+
+- **owner**: theme-ui-manager
+- **実測**: `post-deploy-smoke.yml` の `theme-chart-overlap.spec.ts` が 2026-09-13 (main f09ac2ca9) から毎デプロイ失敗。
+  最後の成功は 2026-09-12 (c9f5b1970)。`/themes/population-dynamics` の「人口増減率の分布」と
+  `/themes/healthcare` の「医師数（人口10万人当たり）の分布」で、SVG 下端が footer 上端を **40px** 越える
+  (retry でも同値 = 決定的)。2026-09-17 のリリース (PR #977) 後も同じ 2 カード・同じ 40px。
+- **原因箇所**: `apps/web/src/features/theme-dashboard/components/ThemeComparisonSection.tsx` の
+  `ChartPanel` (`contentClassName="p-0"`、footer「県を選択して比較 / 定義・出典」) 内の `ThemeOverviewMap`
+  (日本地図)。`b3e803b0b` (theme comparisons 統合) で入った構成。静的検査
+  (`check-design-system` の no-fixed-height-around-aspect-ratio-chart) は通っているので、地図側の
+  高さ確保 (凡例・viewBox) と ChartPanel の content 領域の噛み合わせを実描画で確認する。
+- **次**: `npm run dev:web` で `/themes/population-dynamics` を開き、地図 SVG の bounding box と
+  footer の位置を実測 → `ThemeOverviewMap` / `ChartPanel` のどちらで 40px が生まれるかを切り分けてから直す。
+  直したら上記 検証 コマンドを本番で 1 回通す。
+- **禁止**: 固定高 div で包んで隠さない (2026-08-04 に 154px 重なった同型事故の再発)。
+- **完了条件**: 本番 smoke の `theme-chart-overlap.spec.ts` が 2 テーマとも green。
+- **結論 (2026-09-18、本番を Playwright で実測)**: UI の不具合ではなく smoke の誤検知。Leaflet の overlay SVG は
+  表示領域 400px に対し上下 10% のバッファを持つ 480px の箱で、コンテナ (`h-[360px] lg:h-[400px] overflow-hidden`)
+  で切り取られており、スクリーンショットでも地図はカード内・footer は完全に可視。`getBoundingClientRect()` が
+  見えない 40px を含めていた。`theme-chart-overlap.spec.ts` を「overflow が visible でない祖先の下端を上限にした
+  見える下端」で判定するよう修正し、本番で 2 テーマ green、クリップ考慮を外す変異で 40px 赤に戻ることを確認。
+  UI 側 (`ThemeComparisonSection` / `ThemeLeafletMap`) は変更しない。残作業なし (削除待ち)。
+  CI 実測: run 35288442221 (Linux Chromium、本番) で theme-chart-overlap 2 件とも green、smoke 全体 47 passed / 0 failed。
+
 ### [CI-SPEED-STATIC-GATES-SPLIT-01] main PR の Static Gates (65 step 直列・486 秒) を domain 別の並列 job に分け、1 run で複数の失敗を報告する
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-09-18] [期日:2026-10-15]
@@ -718,6 +745,28 @@ updated: 2026-09-18
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CI-POST-DEPLOY-SMOKE-ALERT-01] post-deploy-smoke の失敗が Issue にならず、5 日間・6 デプロイ赤のまま誰にも見えていなかった
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs] [起票:2026-09-18] [期日:2026-10-15]
+
+- **owner**: devops-runner
+- **実測 (2026-09-18)**: `post-deploy-smoke.yml` は 2026-09-13 から連続 failure (main f09ac2ca9 / 45cfa07b9 /
+  a5642a9e9 / 423bf9d1b / dfb6f6da7 / d9e171a60 / ae901da26) だが、`gh issue` を呼ばず label も持たないため
+  通知が一切出ない。`docs-vs-issues.md` の「アラート workflow は自分のラベルを ensure して Issue を起票する」
+  契約から外れている唯一の本番検査。中身は `THEME-CHART-FOOTER-OVERLAP-01` (本番の実 UI 不具合) だった。
+- **次**: 他の alert workflow と同じ lifecycle (`post-deploy-alert,auto-generated` ラベルを同 step で ensure →
+  固定 Issue を upsert → 復旧時に close) を `post-deploy-smoke.yml` に足し、`alert-issue-lifecycle.test.cjs` の
+  glob 対象に入れる。`docs-vs-issues.md` の Issues 表と `06_自動化インベントリ.md` に行を追加する。
+  retry で通った flaky (blog 一覧サムネイル 30 秒 timeout / ranking 右レール契約) は Issue 本文に
+  「retry 通過」として区別して載せる。
+- **完了条件**: smoke 失敗時に Issue が立ち、green に戻ったら自動 close されることを 1 回ずつ実測する。
+- **実施 (2026-09-18)**: `post-deploy-smoke.yml` に `issues: write`、list reporter の tee、`if: failure()` の upsert step
+  (label ensure → 固定 Issue `[Post-Deploy Alert] 本番スモークテストの失敗` を edit/create、本文は末尾サマリの
+  `N failed` / `N flaky` を分けて列挙 + ログ末尾)、`if: success()` の close step を追加。`alert-issue-lifecycle.test.cjs`
+  の WORKFLOWS、`docs-vs-issues.md` の Issues 表、自動化インベントリに登録。実測は下記。
+- **実測 (2026-09-18)**: `--ref develop` の dispatch で無効 host → health check 失敗 → Issue #978 起票 (run 35288205875)。
+  本番 URL で再 dispatch → 47 passed / 1 flaky / 0 failed → #978 自動 close (run 35288442221)。完了条件を満たした (削除待ち)。
+
 ### [CI-SPEED-UNIT-TESTS-EARLY-01] unit test を develop-gate の並列 job として走らせ、main PR まで一度も走らない状態を止める
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-workspace-contract.cjs] [起票:2026-09-18] [期日:2026-11-15]
@@ -736,6 +785,13 @@ updated: 2026-09-18
   の vitest フレーク) なら retry 1 回付きで様子を見て、それでも揺れるなら scheduled に戻す。
 - **完了条件**: develop push で unit test が並列に走り、意図的に壊した test が develop 着地時点で赤になる
   ことを 1 回実測する。
+- **実施 (2026-09-18)**: `develop-quality-gate.yml` に `unit-web` (`npm run test:run -w apps/web`) と `unit-packages`
+  (`npm run test:packages`、coverage なし) を fast-gates と並列の別 job として追加 (node_modules キャッシュ共有)。
+  PR 側の Unit Tests job 分割は contract (`critical-module-coverage-contract` が `test` job を pin) に触れるため見送り。
+  実測は下記 (CI の run 時間)。「意図的に壊した test」は develop を汚さないため CI では行わず、
+  同じコマンドで RailAdSlot mock 欠落が赤になった 2026-09-17 のローカル実測を根拠にする。
+- **実測 (2026-09-18、run 35289478968)**: Fast Gates 71 秒 / Unit Tests (web) 229 秒 / Unit Tests (packages) 205 秒が並列、
+  全 job cache hit・green。壁時計は 229 秒で、fast-gates 単体は 3 分予算の中。完了条件を満たした (削除待ち)。
 
 ### [CI-SPEED-PREFLIGHT-PR-REGISTRY-01] `preflight:pr` の gate 一覧を手書き 15 件から registry / workflow 由来に変える
 
@@ -752,6 +808,11 @@ updated: 2026-09-18
   network を要する gate (SEO Meta Factual 等) は `--with-network` opt-in にする。
 - **完了条件**: `preflight:pr` が Static Gates の `networkOrSecrets: none` gate を全件含み、
   片方から 1 つ落とすとテストが落ちる。
+- **実施 (2026-09-18、最小案)**: PR #974 で落ちた 4 gate (Quality Gate Ratchet 4 種 / Affiliate Compliance +
+  Relevance `--check` / Checker Wiring / Workspace Contract) を `PR_GATES` に追加 (15→19 gate、実測 21 秒)。
+  `preflight-commit.test.mjs` の shared 一覧に 8 コマンドを追加し、CI・ローカルどちらから落としても赤になる。
+  恒久案 (registry 由来) は未着手。残りの `networkOrSecrets: none` な PR gate (route-contract / static-assets /
+  value-format / env-registry / maintenance-debt 等) は pre-commit か fast-gates が既に走らせている。
 
 ### [CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01] 本番 R2 に依存して揺れる Page Quality (representative) を必須 gate から外すか決定的にする
 
@@ -789,6 +850,14 @@ updated: 2026-09-18
   `check-runtime-budget.cjs` の予算 (`.claude/config/check-runtime-budgets.json`) にこれらを登録し、
   再肥大化を機械で止める。
 - **完了条件**: 対象 step の合計が 100 秒以下、budget に登録済み。
+- **実施 (2026-09-18、部分)**: 115 秒の内訳は `ranking-scoped-workflow.test.mjs` 1 ファイル 76 秒 (69 test が sync-snapshots /
+  generate-ogp-images の bash step をシム付きで実行、各 3〜6 秒)。依存は workflow YAML とテスト自身だけなので
+  `test:scoped-workflow-contracts` へ分離し、`plan-pr-quality.mjs` の新 flag `workflow_contracts` (workflow YAML か
+  *-scoped-workflow テストの変更時のみ true) で contract-tests job の step を差分連動にした。全数は週次
+  `quality-suite-weekly.yml` の tests job に追加。`test:workflow-commit-back` は残り 2 ファイル (数秒)。
+  **SEO Meta Factual (46 秒) は未着手**: PR で `--only <変更 key>` にするには shallow clone の catalog-gates job で
+  base SHA を fetch して diff を取る仕組みが要り、pre-commit 側の `--only` と同型の実装を別途足す必要がある。
+  `check-runtime-budgets.json` への登録も未 (network 検査を静的 budget に入れると毎 PR 46 秒増える)。
 
 ### [CI-SPEED-PRECOMMIT-TRIM-01] pre-commit を「秒単位のもの」だけに削り、metric config 時の `npx tsx` 直列 6 本と image pipeline 検査を preflight:pr / CI へ寄せる
 
@@ -810,6 +879,13 @@ updated: 2026-09-18
 - **停止条件**: 外した検査が CI 側 (develop-gate または Static Gates) に無いものは外さない
   (`CI-DEVELOP-GATE-COVERAGE-01` の症状を再発させない)。
 - **完了条件**: metric config 1 件 + workflow 1 件を staged した commit の pre-commit が Mac で 10 秒以内。
+- **実施 (2026-09-18)**: pre-commit から §6.45〜6.6b (単位鏡 / years / config / SEO meta `--only` / polarity / topics /
+  theme catalog / runtime summaries / prominence / area databook の `npx tsx` 直列、193 行) を外し、代わりに
+  develop-quality-gate.yml へ `catalog-gates` job (`npm run preflight:pr`、CI では main 先行チェックを skip) を追加した。
+  同じ検査は push 前 `preflight:pr` (18 gate・18〜21 秒) / develop 着地 / main PR Catalog Gates の 3 か所で走る。
+  pre-commit は 718→541 行。`package.json` を image pipeline / docs の trigger から外す案は、workflow policy 監査が
+  script 名の存在を見るため見送り。rule 4 本 (unit-semantics / theme-catalog / area-databook / blog-svg-chart) の
+  「pre-commit + CI」表記を追従。実測は次の commit で確認する。
 
 ### [MEDIA-AFFILIATE-RELEASE-01] 媒体別画像と記事別アフィリエイト監査を公開まで完了する
 

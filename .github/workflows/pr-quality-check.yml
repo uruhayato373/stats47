@@ -43,6 +43,7 @@ jobs:
       remotion: ${{ steps.plan.outputs.remotion }}
       visualization: ${{ steps.plan.outputs.visualization }}
       remote_assets: ${{ steps.plan.outputs.remote_assets }}
+      workflow_contracts: ${{ steps.plan.outputs.workflow_contracts }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -369,6 +370,7 @@ jobs:
 
   contract-tests:
     name: Contract Tests
+    needs: changes
     # CI-SPEED-STATIC-GATES-SPLIT-01 (2026-09-18): 旧 Static Gates 65 step 直列 (実測 486 秒) から分離。
     # tooling 自身の `node --test` 自己検査群。最重は Workflow Commit-back Contract Gate (115 秒)。
     # job を分けるのは並列化と「1 run で複数の失敗を報告する」ため (PR #974 は fail-fast で 1 件ずつ露出し 6 回目で通った)。
@@ -421,6 +423,14 @@ jobs:
         # sync-snapshots は同じ「成果を落とす」型を 2 つ抱えていた (2026-08-17):
         # 1 task の失敗で末尾 push に到達しない型と、timeout で push が途中打ち切られる型。
         run: npm run test:workflow-commit-back
+
+      - name: 🔁 Scoped Workflow Contract Gate (差分連動)
+        # ranking-scoped-workflow.test.mjs は sync-snapshots / generate-ogp-images の bash step を
+        # シム付きで実際に実行する (69 test・実測 76 秒 = 旧 Static Gates 最重 step の大半)。
+        # 依存は workflow YAML とテスト自身だけなので、それらが変わった PR だけ走らせる
+        # (CI-SPEED-STATIC-GATES-HEAVY-STEPS-01)。全数は週次 quality-suite-weekly.yml が担う。
+        if: needs.changes.outputs.workflow_contracts == 'true'
+        run: npm run test:scoped-workflow-contracts
         continue-on-error: false
 
       - name: 🧭 Affiliate Offer Taxonomy Contract
