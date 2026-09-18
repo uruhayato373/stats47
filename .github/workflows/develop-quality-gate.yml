@@ -211,3 +211,43 @@ jobs:
         # ローカルと同じ全件 (coverage 分割なし)。PR 側の test:packages:ci + coverage step が正典。
         run: npm run test:packages
         continue-on-error: false
+
+  # ★生成物の鮮度・catalog 契約を develop 着地点で走らせる (CI-SPEED-PRECOMMIT-TRIM-01、2026-09-18)。
+  #   `npm run preflight:pr` は PR CI の Catalog Gates / Static Gates と同じコマンド 18 種を並列に回す
+  #   (ローカル実測 18〜21 秒。CI では main 先行チェックを skip)。これが develop で走るので、
+  #   pre-commit から metric config 時の `npx tsx` 直列 6 本 (Windows で 12 分の記録) を外せる。
+  #   ratchet 系が origin/main と比較するため fetch-depth 0。
+  catalog-gates:
+    name: Catalog Gates (preflight:pr)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Restore node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: 🧭 Catalog / registry / generated-artifact gates
+        run: npm run preflight:pr
+        continue-on-error: false

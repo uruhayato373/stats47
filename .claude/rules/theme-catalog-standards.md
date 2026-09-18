@@ -56,7 +56,8 @@ ThemeCatalog (SSOT, git TS)
 ```
 
 - 生成物 (`indicator-sets/<key>.ts` / `page-components/theme/<key>.json`) を**手で編集してはならない**。
-  pre-commit + CI (`pr-quality-check.yml` の Theme Catalog Gate) が `--check` diff で手編集・生成忘れを両方向検知する。
+  `npm run preflight:pr` (push 前) + develop-quality-gate の catalog-gates + CI (`pr-quality-check.yml` の Theme Catalog Gate) が
+  `--check` diff で手編集・生成忘れを両方向検知する (2026-09-18 に pre-commit から移動)。
 - R2 反映は既存フロー (`/sync-snapshots --only page-components` 相当 → `export-page-components-snapshot.ts`) のまま。
   カタログ由来で実データ (JSON byte) が変わったときだけ R2 push が要る。
 
@@ -332,7 +333,7 @@ harmRelevance: [
 
 ## 5. validator (`npm run validate:catalog`)
 
-決定的 lint `packages/data-configs/scripts/validate-theme-catalog.ts`。pre-commit + CI に配線済み。
+決定的 lint `packages/data-configs/scripts/validate-theme-catalog.ts`。`preflight:pr` + develop-gate + CI に配線済み (pre-commit では走らない)。
 
 | レベル                         | 検査                                                                                                                                                                                                                                                                                   |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

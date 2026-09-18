@@ -790,6 +790,8 @@ updated: 2026-09-18
   PR 側の Unit Tests job 分割は contract (`critical-module-coverage-contract` が `test` job を pin) に触れるため見送り。
   実測は下記 (CI の run 時間)。「意図的に壊した test」は develop を汚さないため CI では行わず、
   同じコマンドで RailAdSlot mock 欠落が赤になった 2026-09-17 のローカル実測を根拠にする。
+- **実測 (2026-09-18、run 35289478968)**: Fast Gates 71 秒 / Unit Tests (web) 229 秒 / Unit Tests (packages) 205 秒が並列、
+  全 job cache hit・green。壁時計は 229 秒で、fast-gates 単体は 3 分予算の中。完了条件を満たした (削除待ち)。
 
 ### [CI-SPEED-PREFLIGHT-PR-REGISTRY-01] `preflight:pr` の gate 一覧を手書き 15 件から registry / workflow 由来に変える
 
@@ -848,6 +850,14 @@ updated: 2026-09-18
   `check-runtime-budget.cjs` の予算 (`.claude/config/check-runtime-budgets.json`) にこれらを登録し、
   再肥大化を機械で止める。
 - **完了条件**: 対象 step の合計が 100 秒以下、budget に登録済み。
+- **実施 (2026-09-18、部分)**: 115 秒の内訳は `ranking-scoped-workflow.test.mjs` 1 ファイル 76 秒 (69 test が sync-snapshots /
+  generate-ogp-images の bash step をシム付きで実行、各 3〜6 秒)。依存は workflow YAML とテスト自身だけなので
+  `test:scoped-workflow-contracts` へ分離し、`plan-pr-quality.mjs` の新 flag `workflow_contracts` (workflow YAML か
+  *-scoped-workflow テストの変更時のみ true) で contract-tests job の step を差分連動にした。全数は週次
+  `quality-suite-weekly.yml` の tests job に追加。`test:workflow-commit-back` は残り 2 ファイル (数秒)。
+  **SEO Meta Factual (46 秒) は未着手**: PR で `--only <変更 key>` にするには shallow clone の catalog-gates job で
+  base SHA を fetch して diff を取る仕組みが要り、pre-commit 側の `--only` と同型の実装を別途足す必要がある。
+  `check-runtime-budgets.json` への登録も未 (network 検査を静的 budget に入れると毎 PR 46 秒増える)。
 
 ### [CI-SPEED-PRECOMMIT-TRIM-01] pre-commit を「秒単位のもの」だけに削り、metric config 時の `npx tsx` 直列 6 本と image pipeline 検査を preflight:pr / CI へ寄せる
 
@@ -869,6 +879,13 @@ updated: 2026-09-18
 - **停止条件**: 外した検査が CI 側 (develop-gate または Static Gates) に無いものは外さない
   (`CI-DEVELOP-GATE-COVERAGE-01` の症状を再発させない)。
 - **完了条件**: metric config 1 件 + workflow 1 件を staged した commit の pre-commit が Mac で 10 秒以内。
+- **実施 (2026-09-18)**: pre-commit から §6.45〜6.6b (単位鏡 / years / config / SEO meta `--only` / polarity / topics /
+  theme catalog / runtime summaries / prominence / area databook の `npx tsx` 直列、193 行) を外し、代わりに
+  develop-quality-gate.yml へ `catalog-gates` job (`npm run preflight:pr`、CI では main 先行チェックを skip) を追加した。
+  同じ検査は push 前 `preflight:pr` (18 gate・18〜21 秒) / develop 着地 / main PR Catalog Gates の 3 か所で走る。
+  pre-commit は 718→541 行。`package.json` を image pipeline / docs の trigger から外す案は、workflow policy 監査が
+  script 名の存在を見るため見送り。rule 4 本 (unit-semantics / theme-catalog / area-databook / blog-svg-chart) の
+  「pre-commit + CI」表記を追従。実測は次の commit で確認する。
 
 ### [MEDIA-AFFILIATE-RELEASE-01] 媒体別画像と記事別アフィリエイト監査を公開まで完了する
 

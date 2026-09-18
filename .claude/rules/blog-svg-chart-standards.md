@@ -137,7 +137,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 | 凡例のグラデーションを CSS リテラルで書く        | `legendGradientCss(colorScheme)` で interpolator から導出する                  |
 | 極性を推測で埋める                               | 証拠のある分だけ収載。判断が割れたものは `EXCLUDED_FROM_SEED` に理由付きで残す |
 
-**ゲート**: `npm run validate:polarity --workspace=@stats47/data-configs`（pre-commit + CI の
+**ゲート**: `npm run validate:polarity --workspace=@stats47/data-configs`（`preflight:pr` + develop-gate + CI の
 Colorscheme Policy Gate）。幽霊キー・evidence 空・カバレッジの減少（増加専用ラチェット）・
 決定規則が語彙外の色を返す、を error にする。
 

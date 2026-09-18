@@ -279,6 +279,9 @@ const PR_GATES = [
   {
     name: "main 先行チェック",
     why: "main が develop 非経由で進むと PR が競合する (branch-workflow.md の同期規約)",
+    // push 前に人へ知らせるためのゲート。develop-quality-gate の中で走らせると dependabot の
+    // main 直行 merge のたびに develop が赤になるだけなので CI では外す。
+    skipInCi: true,
     run: async () => {
       const fetched = await tryRun("git", ["fetch", "origin", "main", "develop", "--quiet"]);
       if (!fetched.ok) return { ok: true, output: "origin へ到達できないので判定を見送る", skipped: true };
@@ -362,7 +365,8 @@ async function main() {
   const all = process.argv.includes("--all");
   const pr = process.argv.includes("--pr");
   const commitStatic = process.argv.includes("--commit-static");
-  const gates = commitStatic ? COMMIT_GATES : pr ? PR_GATES : GATES;
+  const selected = commitStatic ? COMMIT_GATES : pr ? PR_GATES : GATES;
+  const gates = process.env.CI ? selected.filter((gate) => !gate.skipInCi) : selected;
   const started = Date.now();
 
   const label = commitStatic ? "commit 共通静的検査" : pr ? "push 前プリフライト (生成物の鮮度)" : "プリフライト";

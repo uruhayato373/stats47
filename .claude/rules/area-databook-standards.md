@@ -147,7 +147,7 @@ Claude Code の codex MCP (`.claude/rules/codex-mcp.md`) とは別経路。文�
 
 ## 7. validator (`npm run validate:area-databook`)
 
-決定的 lint `packages/data-configs/scripts/validate-area-databook.ts`。pre-commit + CI (Area Databook Gate) に配線済。
+決定的 lint `packages/data-configs/scripts/validate-area-databook.ts`。`preflight:pr` + develop-gate + CI (Area Databook Gate) に配線済 (pre-commit では走らない)。
 
 | レベル | 検査 |
 |---|---|

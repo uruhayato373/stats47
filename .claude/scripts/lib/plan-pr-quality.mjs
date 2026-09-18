@@ -45,6 +45,14 @@ export function classifyPrQualityPaths(inputPaths) {
       /^\.claude\/rules\/chart-component-standards\.md$/,
     ])
   );
+  // sync-snapshots / generate-ogp-images の bash step をシム付きで実行する重い契約 (69 test・実測 76 秒)。
+  // 依存は workflow YAML とテスト自身だけなので、それらが変わった PR だけ走らせる。
+  const workflowContracts = paths.some((path) =>
+    matchesAny(path, [
+      /^\.github\/workflows\/[^/]+\.ya?ml$/,
+      /^\.claude\/scripts\/lib\/__tests__\/[^/]*scoped-workflow\.test\.mjs$/,
+    ])
+  );
   const remoteAssets = paths.some((path) =>
     matchesAny(path, [
       /^apps\/web\/scripts\/.*(?:image|ogp|thumbnail)/,
@@ -63,6 +71,7 @@ export function classifyPrQualityPaths(inputPaths) {
     remotion: ciCore || remotionSource || sharedRemotion,
     visualization: ciCore || chartSource,
     remote_assets: ciCore || remoteAssets,
+    workflow_contracts: ciCore || workflowContracts,
   };
 }
 
