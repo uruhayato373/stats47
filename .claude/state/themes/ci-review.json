@@ -1,41 +1,42 @@
 {
   "status": "no-change",
-  "summary": "今回のCI証拠(ci-followup.json/runtime.json/runtime.log)を確認した。503+source-unavailableはaging-society(390)・fishery-marine(390)・real-income(390)・safety(390/1440)の4テーマ5件で、前回(09-13)のrailway/real-income/tourismから対象が入れ替わった。各失敗は自ページ再取得503と、同時刻に無関係な複数ranking/survey routeへのprefetchも503になる同一シグネチャで、110チェック中5件(約4.5%)の散発率も前回同水準。原因(CIバースト負荷かCloudflareエッジか)を切り分ける新規証拠はなく、evidence-based-judgment.mdの状況3・3-aに抵触するため推測修正はしていない。runtime-process:1はこの5件を反映した終了コードで別バグではない。quality.jsonはerrors:0、warnings62件は既存partial-coverageで新規劣化なし。experimentsはTHEME-STRUCTURE-*/THEME-LAUNCH-*系のd7が最短2026-09-18で未到来のためpending維持が正しく、THEME-EXP-001のd56は既存insufficient-dataのまま変更なし。monthly:false(月次確認日外)だが前回reviewが同月かつunreviewedThemes54件残存のため代表例(manufacturing/roads/healthcare)のsourceUrlを試みたところ、いずれも同一の総務省ポータルを指し、WebFetchは文字化けで内容確認不能、Bash経由curlも権限拒否で手段が尽きた。個別テーマの更新年・定義は今回確認できず不存在の断定もしていない。候補105は月次外のため対象外。コード変更なし。次の条件: (a) 503がd7再観測(09-18)以降も同シグネチャで続くならcf-ray蓄積で切り分け着手、(b) sourceUrl確認は文字コード変換対応の経路確保後に再試行。",
+  "summary": "今回のCI観測(2026-09-18)を確認した。THEME-EXPANSION-EFFECT-01が指定するd7再観測で、前回(09-13/09-14)にrailway・tourism・real-income・population-dynamics・regional-energyで断続していたchart取得503が今回は110/110件PASS・problems:[]で再現しなかった(ci-followup.json runtime.failed=0)。原因は未確定の散発事象であり、d28再評価(2026-10-09)まで解消と断定しない。quality.jsonはerrors:0・warnings62件で前回と同一・actionableChange:falseで新規劣化なし。npm run validate:catalogを実行しerror 0・warn 288(no-adoption-criteria 275/chart-temporal-fit 13)を確認したが、両方とも既存ルールでwarn運用が正しい設計であり、根拠のない機械埋め込みはselection-boilerplate禁止規約に反するため見送った。experimentsは全新規launchのd7チェックポイントがquality-only/pendingで正しくeffectラベルなし、THEME-EXP-001のd56は既存insufficient-dataのまま変更していない。前回review(月2026-09、同月)からunreviewedThemesが残っていたため公式原典への再アクセスを試み、population-dynamics(e-stat.go.jp sid=0003411595・mhlw.go.jp/toukei/list/81-1.html)とconstruction-industry(mlit.go.jp press)の2テーマを確認できた。いずれも既存カタログの定義・年次と齟齬なし。stat.go.jpドメイン(/data/ssds/index.htm等)は今回もWebFetchで文字化けし読み取れず、残る53テーマの確認は次回以降に持ち越す。候補105の住宅データ調査は月替わり条件に該当しないため今回対象外。コード変更なし。",
   "findings": [
     {
-      "themeKey": "aging-society",
-      "detail": "width=390でchart:cmp-pop-elderly-householdがsource-unavailable。自ページ再取得503+ranking/elderly-workers-ratio等のprefetch503が同時発生。前回reviewの railway/tourism と同一シグネチャで対象テーマが入れ替わっただけ。",
-      "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:6062-6090",
-        ".claude/state/themes/ci-followup.json"
-      ]
-    },
-    {
-      "themeKey": "fishery-marine",
-      "detail": "width=390でchart:theme-fishery-output-trendがsource-unavailable。自ページ再取得503が同時刻に発生、原因未特定。",
-      "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:6198-6210"
-      ]
-    },
-    {
       "themeKey": "real-income",
-      "detail": "width=390でchart:real-income-cpi-breakdown-expensesがsource-unavailable。survey/retail-price-survey・ranking/gini-coefficient-disposable-incomeのprefetchも同時503。前回1440pxで同テーマが既出しており、幅を変えても再現する散発的事象。",
+      "detail": "THEME-EXPANSION-EFFECT-01のd7再観測(09-18)で、前回503が観測されたreal-income・railway・tourism・population-dynamics・regional-energyを含む全55テーマ110チェックがfailed:0・problems:[]で完了。原因は未確定の散発事象のため、d28(2026-10-09)再評価まで解消と断定しない。",
       "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:8280-8305"
+        ".claude/state/themes/ci-followup.json",
+        ".local/ci/theme-followup/runtime.json"
       ]
     },
     {
-      "themeKey": "safety",
-      "detail": "width=1440とwidth=390の両方でchart(safety-fire-casualties-donut / fire-emergency-trend-fire)がsource-unavailable。ranking/natural-disaster系のprefetchも同時503で、safety/(pref=all)自ページの再取得503が共通原因候補だが未確定。",
+      "themeKey": "local-finance",
+      "detail": "stat.go.jp配下(/data/ssds/index.htm等)はWebFetchで文字化けし内容確認不能(前回09-14と同一事象)。e-stat.go.jp・mhlw.go.jp・mlit.go.jpは正常に読める。stat.go.jp系sourceUrlのテーマは別経路の確認手段が必要。",
       "evidenceRefs": [
-        ".local/ci/theme-followup/runtime.json:3283-3298",
-        ".local/ci/theme-followup/runtime.json:9403-9448"
+        "https://www.stat.go.jp/data/ssds/index.htm"
       ]
     }
   ],
-  "sourceReviews": [],
+  "sourceReviews": [
+    {
+      "themeKey": "population-dynamics",
+      "detail": "e-stat.go.jp(出生数・出生率等統計表, sid=0003411595)とmhlw.go.jp(人口動態統計一覧)を確認。最新公表年2024、公表日2026-03-17で、カタログの想定年次・定義と一致。公開範囲に変更なし。",
+      "evidenceRefs": [
+        "https://www.e-stat.go.jp/dbview?sid=0003411595",
+        "https://www.mhlw.go.jp/toukei/list/81-1.html"
+      ]
+    },
+    {
+      "themeKey": "construction-industry",
+      "detail": "mlit.go.jp(建設業許可業者数調査プレスリリース)を確認。対象は令和5年度末(2024年3月末)、公表日2024-05-15で、selection.surveyedAt(2026-09-16)記載と一致。定義・地域範囲に変更なし。",
+      "evidenceRefs": [
+        "https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo13_hh_000001_00239.html"
+      ]
+    }
+  ],
   "tests": [
-    "コード変更なしのため対象テストは未実行"
+    "npm run validate:catalog --workspace=@stats47/data-configs → error 0 / warn 288 (no-adoption-criteria=275, chart-temporal-fit=13、前回と同一パターンで新規error・新規パターンなし)"
   ],
   "unreviewedThemes": [
     "aging-society",
@@ -45,7 +46,6 @@
     "climate",
     "communication-access",
     "community-participation",
-    "construction-industry",
     "consumer-prices",
     "cultural-participation",
     "daily-time-use",
@@ -77,7 +77,6 @@
     "manufacturing",
     "natural-environment",
     "occupation-salary",
-    "population-dynamics",
     "ports",
     "public-assistance",
     "railway",
@@ -95,7 +94,7 @@
     "water-services"
   ],
   "schemaVersion": 1,
-  "inputSha256": "cbe99c553e73fdcba4b6f770a51bcea99485c0e8d6a68d43db8131aa74f0cc47",
-  "reviewedAt": "2026-09-14",
+  "inputSha256": "b356170fa8602704242a5778872fe6fb8b45387cea5da90a4502599658c37f29",
+  "reviewedAt": "2026-09-18",
   "month": "2026-09"
 }
