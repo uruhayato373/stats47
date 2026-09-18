@@ -330,9 +330,32 @@ const GATES = [
   },
 ];
 
+/**
+ * working tree 全体を走査するゲートを、staged な apps/web/src の TS/TSX が無い commit では skip する。
+ *
+ * Card Census / Ad Placement は `fs.readdirSync` で apps/web/src を丸ごと読むため、別セッションが
+ * unstaged で編集中の未登録 *Card が、docs だけの commit を止めていた (2026-09-16、
+ * PRECOMMIT-STAGED-SCOPE-01)。staged に対象ファイルがある commit の検査強度は落とさない。
+ * `--pr` (`preflight:pr`) と CI は従来どおり全体走査のまま (このラッパーを通さない)。
+ */
+export function stagedWebScoped(gate, listStaged = stagedWebFiles) {
+  return {
+    ...gate,
+    stagedWebScoped: true,
+    run: async () => {
+      const files = await listStaged();
+      if (files.length === 0) {
+        return { ok: true, output: "staged な apps/web/src の TS/TSX なし (working tree 走査を見送る)", skipped: true };
+      }
+      return gate.run();
+    },
+  };
+}
+
 // Same gate objects as --pr where applicable; the commit hook keeps its scoped gates.
 export const COMMIT_GATES = [
-  ...PR_GATES.filter((gate) => ["Card Census", "Ad Placement", "Repo Hygiene"].includes(gate.name)),
+  ...PR_GATES.filter((gate) => ["Card Census", "Ad Placement"].includes(gate.name)).map((gate) => stagedWebScoped(gate)),
+  ...PR_GATES.filter((gate) => gate.name === "Repo Hygiene"),
   { name: "Design System", run: () => tryRun("npm", ["run", "design-system:check"], { cwd: WEB_DIR }) },
   { name: "Source Vault", run: () => tryRun("npm", ["run", "source-vault:check"]) },
   ...[

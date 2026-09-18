@@ -6,7 +6,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { resolveInvocation, runGates } from "../preflight-commit.mjs";
+import { COMMIT_GATES, resolveInvocation, runGates, stagedWebScoped } from "../preflight-commit.mjs";
 
 test("空いた枠を再利用し、同時数を守り、例外後も残りのゲートを検査する", async () => {
   let releaseFirst;
@@ -233,4 +233,41 @@ test("main先行の差分はdevelopだけのcommitを数えず、mainだけの�
   git("-c", "core.hooksPath=/dev/null", "commit", "-qm", "main");
   git("update-ref", "refs/remotes/origin/main", git("rev-parse", "HEAD"));
   assert.equal(git("diff", "--name-only", "origin/develop...origin/main"), "main.txt");
+});
+
+/**
+ * PRECOMMIT-STAGED-SCOPE-01: working tree 全体を走査する UI 契約ゲートは、staged に apps/web/src の
+ * TS/TSX が無い commit (docs だけ等) では走らせない。別セッションの unstaged な未登録 *Card が
+ * 無関係な commit を止めていたため。staged に対象がある commit では従来どおり実行する。
+ */
+test("commit-static: staged に apps/web/src の TS/TSX が無ければ working tree 走査ゲートを skip する", async () => {
+  let ran = 0;
+  const gate = stagedWebScoped(
+    { name: "Card Census", run: async () => { ran += 1; return { ok: false, output: "unstaged probe" }; } },
+    async () => [],
+  );
+  const result = await gate.run();
+  assert.equal(result.skipped, true);
+  assert.equal(result.ok, true);
+  assert.equal(ran, 0, "staged が空なのに走査ゲートが実行された");
+});
+
+test("commit-static: staged に apps/web/src の TS/TSX があれば従来どおり実行し、失敗を伝える", async () => {
+  const gate = stagedWebScoped(
+    { name: "Card Census", run: async () => ({ ok: false, output: "unregistered card" }) },
+    async () => ["src/components/ProbeCard.tsx"],
+  );
+  const result = await gate.run();
+  assert.equal(result.ok, false);
+  assert.notEqual(result.skipped, true);
+});
+
+test("commit-static: staged 範囲に縛るのは Card Census / Ad Placement だけ (Repo Hygiene 等は全体検査のまま)", () => {
+  assert.deepEqual(
+    COMMIT_GATES.filter((gate) => gate.stagedWebScoped).map((gate) => gate.name),
+    ["Card Census", "Ad Placement"],
+  );
+  const src = fs.readFileSync(PREFLIGHT, "utf8");
+  const prGates = src.slice(src.indexOf("const PR_GATES = ["), src.indexOf("const GATES = ["));
+  assert.ok(!/stagedWebScoped/.test(prGates), "--pr のゲートまで staged 範囲に縛られている (CI と同じ全体走査を保つ)");
 });
