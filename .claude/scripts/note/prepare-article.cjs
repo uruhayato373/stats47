@@ -7,7 +7,8 @@
 //   アフィリエイトバナープレースホルダー {{AFFILIATE_BANNER:X}} は affiliateBanners に控えて本文から除去。
 const fs = require("fs"), path = require("path");
 const slug = process.argv[2];
-const projectRoot = "/Users/minamidaisuke/stats47";
+// スクリプト位置から解決し、Codex/Claude の分離 worktree でも同じ checkout を読む。
+const projectRoot = path.resolve(__dirname, "../../..");
 const baseDirs = [];
 for (const root of ["docs/31_note記事原稿"]) {
   const rootAbs = path.join(projectRoot, root);

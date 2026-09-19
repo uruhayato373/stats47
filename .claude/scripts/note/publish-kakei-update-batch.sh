@@ -5,7 +5,8 @@
 #   * 記事間に 20-40 秒のランダム待機を入れる (SPA 状態の cool down)。
 # 使い方: publish-kakei-update-batch.sh <slug1> [<slug2> ...]
 set -uo pipefail
-ROOT=/Users/minamidaisuke/stats47
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 LOG="$ROOT/.local/kakei-update-batch-log.tsv"
 mkdir -p "$(dirname "$LOG")"; touch "$LOG"
 

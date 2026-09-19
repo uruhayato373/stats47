@@ -115,10 +115,6 @@ function hasUrl(body, url) {
   return body.includes(`data-src="${url}"`) || body.includes(`href="${url}"`);
 }
 
-function hasStats47Url(body) {
-  return /\b(?:href|data-src)="https?:\/\/(?:www\.)?stats47\.jp(?:[\/"?#]|$)/i.test(body);
-}
-
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -216,7 +212,10 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
       externalCard(magazineUrl, plan.magazineName, plan.magazineDescription, idFactory),
     );
   }
-  if (siteUrl && !hasStats47Url(output)) {
+  // 本文中に別の stats47 リンクがあっても、catalog が指定した主着地は省略しない。
+  // a-kakei は根拠ランキングへの本文リンクを持つため、host 単位で判定すると
+  // 県別ブログへの主 CTA が消えていた。重複判定は対象 URL 単位で行う。
+  if (siteUrl && !hasUrl(output, siteUrl)) {
     additions.push(
       `<p ${attrs(idFactory())}><strong>47都道府県のデータを確認する</strong><br>${escapeHtml(plan.siteDescription)}</p>`,
       externalCard(siteUrl, plan.siteTitle, plan.siteDescription, idFactory),
