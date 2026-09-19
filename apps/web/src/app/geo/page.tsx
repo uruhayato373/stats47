@@ -72,6 +72,7 @@ export default function GeoPage() {
             layout="list"
             trackingSurface="geo_sidebar"
             items={[
+              { id: 'layers', label: 'GISを探す', href: '/geo/layers' },
               {
                 id: 'method',
                 label: '地図の読み方と分析の限界',
@@ -105,23 +106,7 @@ export default function GeoPage() {
         title="地図で見る地域の変化"
         description="一つのGISで分布を知り、データを重ねて地域の変化を読む。"
       />
-      <nav
-        aria-label="地域データの調べ方"
-        className="mb-6 grid gap-4 sm:grid-cols-2"
-      >
-        <SurfaceLinkCard href="/geo/layers">
-          <h3 className="font-semibold">1. GISを探す</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            人口・住宅地価・駅を単体の地図で確認する →
-          </p>
-        </SurfaceLinkCard>
-        <SurfaceLinkCard href="#geo-analyses-heading">
-          <h3 className="font-semibold">2. データを重ねて読む</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            人口と地価・洪水・駅の関係を調べる →
-          </p>
-        </SurfaceLinkCard>
-      </nav>
+      {/* Narrow widths keep the prefecture-comparison entry above the cards (rail is hidden). */}
       <div className="mb-5 xl:hidden">
         <CompareLink />
       </div>
@@ -132,7 +117,7 @@ export default function GeoPage() {
         />
         <GeoAnalysisCards />
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-          地図は東京都本土（島しょを除く）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です。空白は人口・危険性・利便性の判定を示しません。
+          地図は兵庫県（淡路島を含む）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です。空白は人口・危険性・利便性の判定を示しません。
         </p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
           境界：国土交通省「国土数値情報（行政区域データ）」をもとに{' '}
@@ -146,11 +131,8 @@ export default function GeoPage() {
           >
             CC BY-SA 4.0
           </a>
-          。 駅名・位置は
-          <Link href="/geo/data-catalog" className="underline">
-            分析の駅データ
-          </Link>
-          を使用。
+          。
+          駅名・位置は分析の駅データ（「使用データ・年度・利用条件」に記載）を使用。
         </p>
       </section>
       <ContentDisclosure
@@ -171,12 +153,6 @@ export default function GeoPage() {
             1kmメッシュによる近似や推計の限界を、地図と合わせて確かめます。
           </li>
         </ol>
-        <Link
-          href="/geo/method"
-          className="mt-4 inline-flex min-h-11 items-center text-sm text-primary underline"
-        >
-          詳しい分析方法を見る
-        </Link>
       </ContentDisclosure>
     </PageShell>
   );

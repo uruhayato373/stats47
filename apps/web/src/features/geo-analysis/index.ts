@@ -15,11 +15,14 @@ export {
 } from './lib/geo-source-thumbnail';
 export { GeoLayerExplorer } from './components/GeoLayerExplorer';
 export { projectGeoLayer } from './lib/geo-layer-data';
+export {
+  GEO_DEFAULT_AREA_CODE,
+  GEO_DEFAULT_PREF_CODE,
+} from './lib/geo-default-prefecture';
 export { GeoCrossAnalysisArticle } from './components/GeoCrossAnalysisArticle';
 export { GeoSpatialEvidenceExplorer } from './components/GeoSpatialEvidenceExplorer';
 export { GeoDecisionExplorer } from './components/GeoDecisionExplorer';
 export { GeoPopulationExplorer } from './components/GeoPopulationExplorer';
-export { GeoCrossAnalysisExplorer } from './components/GeoCrossAnalysisExplorer';
 export { GeoContentPublicationSection } from './components/GeoContentPublicationSection';
 export { AreaGeoInsightsSection } from './components/AreaGeoInsightsSection';
 export { ThemeGeoPublicFacilityAccessSection } from './components/ThemeGeoPublicFacilityAccessSection';
