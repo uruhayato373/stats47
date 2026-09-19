@@ -2,16 +2,23 @@ import { GEO_LAYERS } from '@stats47/data-configs/business-plan';
 
 import { SurfaceLinkCard } from '@/components/surface';
 
-import { getTokyoMainlandGeography } from '../lib/geo-card-geography';
+import { getPrefectureCardGeography } from '../lib/geo-card-geography';
 import { buildGeoCardPreview } from '../lib/geo-card-preview';
+import {
+  GEO_DEFAULT_PREF_CODE,
+  GEO_DEFAULT_PREF_LABEL,
+} from '../lib/geo-default-prefecture';
 import { loadGeoAnalysisPrefBundle } from '../lib/load-geo-analysis-evidence';
 
 export async function GeoLayerCards() {
-  const geography = getTokyoMainlandGeography();
+  const geography = getPrefectureCardGeography(GEO_DEFAULT_PREF_CODE);
   const cards = await Promise.all(
     GEO_LAYERS.map(async (layer) => ({
       layer,
-      bundle: await loadGeoAnalysisPrefBundle(layer.sourceAnalysis, '13'),
+      bundle: await loadGeoAnalysisPrefBundle(
+        layer.sourceAnalysis,
+        GEO_DEFAULT_PREF_CODE
+      ),
     }))
   );
   return (
@@ -31,7 +38,7 @@ export async function GeoLayerCards() {
                 <svg
                   viewBox="0 0 640 360"
                   role="img"
-                  aria-label={`${layer.name}・東京都本土の表示例`}
+                  aria-label={`${layer.name}・${GEO_DEFAULT_PREF_LABEL}の表示例`}
                   className="absolute inset-0 h-full w-full bg-slate-50"
                 >
                   <path

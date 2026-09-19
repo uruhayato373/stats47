@@ -1,5 +1,7 @@
 import { readPrefectureFeatures } from '@stats47/visualization/server';
 
+import { GEO_DEFAULT_PREF_CODE } from './geo-default-prefecture';
+
 import type { GeoStationAccessPrefDetail } from '@stats47/gis';
 import type { Position } from 'geojson';
 
@@ -18,49 +20,37 @@ function boundsOf(rings: Position[][]): [number, number, number, number] {
   ];
 }
 
-/** The largest Tokyo landmass defines the mainland; nearby reclaimed islands
- * within its envelope remain visible. Izu/Ogasawara are outside this viewport.
- * Reuse the existing NII/KSJ boundary asset without a new data copy or tile fetch.
+/** Every polygon of the prefecture (mainland and islands such as 淡路島) from the
+ * existing NII/KSJ boundary asset. Nothing is cropped, so the viewport covers the
+ * whole prefecture; remote-island prefectures would need their own crop rule.
  */
-export function getTokyoMainlandGeography(): GeoCardGeography {
-  const tokyo = readPrefectureFeatures().find(
-    (f) => f.properties?.N03_007 === '13'
+export function getPrefectureCardGeography(
+  prefCode = GEO_DEFAULT_PREF_CODE
+): GeoCardGeography {
+  const prefecture = readPrefectureFeatures().find(
+    (f) => f.properties?.N03_007 === prefCode
   );
   if (
-    !tokyo ||
-    (tokyo.geometry.type !== 'MultiPolygon' &&
-      tokyo.geometry.type !== 'Polygon')
+    !prefecture ||
+    (prefecture.geometry.type !== 'MultiPolygon' &&
+      prefecture.geometry.type !== 'Polygon')
   ) {
-    throw new Error('Tokyo boundary is missing from the prefecture topology');
+    throw new Error(
+      `Prefecture ${prefCode} boundary is missing from the prefecture topology`
+    );
   }
   const polygons =
-    tokyo.geometry.type === 'MultiPolygon'
-      ? tokyo.geometry.coordinates
-      : [tokyo.geometry.coordinates];
-  const area = (ring: Position[]) =>
-    Math.abs(
-      ring.reduce((sum, p, i) => {
-        const next = ring[(i + 1) % ring.length];
-        return sum + p[0] * next[1] - next[0] * p[1];
-      }, 0)
-    );
-  const largest = polygons.reduce((best, polygon) =>
-    area(polygon[0]) > area(best[0]) ? polygon : best
-  );
-  const [west, south, east, north] = boundsOf(largest);
-  const rings = polygons
-    .filter((polygon) =>
-      polygon[0].some(
-        (p) => p[0] >= west && p[0] <= east && p[1] >= south && p[1] <= north
-      )
-    )
-    .flat();
+    prefecture.geometry.type === 'MultiPolygon'
+      ? prefecture.geometry.coordinates
+      : [prefecture.geometry.coordinates];
+  const rings = polygons.flat();
   return { rings, bounds: boundsOf(rings) };
 }
 
-/** Names and representative positions come from the same verified station bundle. */
+/** Names and representative positions come from the same verified station bundle
+ * (兵庫県: 神戸・姫路 on the south coast, 豊岡 in the north). */
 export function geoCardLandmarks(detail: GeoStationAccessPrefDetail) {
-  return ['奥多摩', '八王子', '新宿'].flatMap((name) => {
+  return ['豊岡', '姫路', '神戸'].flatMap((name) => {
     const station = detail.stations.find((s) => s[1] === name);
     return station
       ? [
@@ -68,7 +58,8 @@ export function geoCardLandmarks(detail: GeoStationAccessPrefDetail) {
             name: `${name}駅`,
             longitude: station[2],
             latitude: station[3],
-            below: name === '八王子',
+            // 姫路 is labelled below so neither label covers 淡路島.
+            below: name === '姫路',
           },
         ]
       : [];

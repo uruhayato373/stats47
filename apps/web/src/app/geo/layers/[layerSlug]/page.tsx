@@ -8,6 +8,7 @@ import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
 import {
+  GEO_DEFAULT_PREF_CODE,
   GeoLayerExplorer,
   GeoSourceNavigation,
   loadGeoSourceCatalog,
@@ -41,7 +42,7 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
     typeof query.pref === 'string' &&
     /^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(query.pref)
       ? query.pref
-      : '13';
+      : GEO_DEFAULT_PREF_CODE;
   const [bundle, snapshot, catalog] = await Promise.all([
     loadGeoAnalysisPrefBundle(layer.sourceAnalysis, pref),
     loadGeoAnalysisSnapshot(layer.sourceAnalysis),
