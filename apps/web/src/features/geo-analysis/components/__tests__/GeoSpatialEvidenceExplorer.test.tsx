@@ -117,9 +117,14 @@ describe('Geo表示境界の県・段階・証跡版', () => {
       />
     );
     expect(screen.getByRole('combobox', { name: '県' })).toHaveValue('28');
+    // Audit URLs open the overlap map; the audit block is always rendered below it.
     expect(
-      screen.getByRole('tab', { name: '3. 数値の確かめ方' })
+      screen.getByRole('tab', { name: '浸水包含の判定結果' })
     ).toHaveAttribute('aria-selected', 'true');
+    expect(screen.queryByRole('tab', { name: /数値の確かめ方/ })).toBeNull();
+    expect(
+      screen.getByRole('heading', { name: '数値の確かめ方' })
+    ).toBeInTheDocument();
     await waitFor(() =>
       expect(fetchGeoDetailAction).toHaveBeenLastCalledWith(
         'population-flood-risk',
@@ -176,7 +181,7 @@ describe('Geo表示境界の県・段階・証跡版', () => {
       target: { value: '28' },
     });
     fireEvent.mouseDown(
-      screen.getByRole('tab', { name: '3. 数値の確かめ方' }),
+      screen.getByRole('tab', { name: '浸水包含の判定結果' }),
       {
         button: 0,
         ctrlKey: false,
@@ -185,12 +190,30 @@ describe('Geo表示境界の県・段階・証跡版', () => {
     expect(window.location.pathname).toBe('/geo/population-flood-risk');
     expect(new URLSearchParams(window.location.search).get('pref')).toBe('28');
     expect(new URLSearchParams(window.location.search).get('stage')).toBe(
-      'audit'
+      'overlap'
     );
     expect(window.location.hash).toBe('#spatial-evidence');
     expect(screen.getByRole('link', { name: 'この県・この表示を共有' }))
-      .toHaveAttribute('href', '/geo/population-flood-risk?pref=28&stage=audit');
+      .toHaveAttribute('href', '/geo/population-flood-risk?pref=28&stage=overlap');
   });
+  it('タブに手順番号を付けず、検算は表示切替なしで地図の下に出す', async () => {
+    vi.mocked(fetchGeoDetailAction).mockImplementation(
+      async (_slug, pref, expected) => detail(pref, expected.generatedAt)
+    );
+    render(
+      <GeoSpatialEvidenceExplorer {...props()} initialView="overlap" />
+    );
+    await screen.findByTestId('map');
+    const tabs = screen.getAllByRole('tab').map((tab) => tab.textContent);
+    expect(tabs).toEqual(['人口の分布と変化', '浸水包含の判定結果']);
+    for (const label of tabs) expect(label).not.toMatch(/^\d+\./);
+    const audit = screen.getByTestId('spatial-audit');
+    expect(audit).toHaveTextContent('数値の確かめ方');
+    expect(audit).toHaveTextContent('全47県の途中データと県別集計を照合');
+    // Audit cards come from the loaded prefecture detail (spatialAuditRows).
+    expect(audit.querySelectorAll('p.tabular-nums').length).toBeGreaterThan(0);
+  });
+
   it('テーマ内では段階切替と外部県選択後もテーマURLを維持する', async () => {
     const themeUrl = '/themes/geographic-access?pref=13000#station-access';
     window.history.replaceState({}, '', themeUrl);
@@ -206,14 +229,14 @@ describe('Geo表示境界の県・段階・証跡版', () => {
     );
     await screen.findByTestId('map');
     fireEvent.mouseDown(
-      screen.getByRole('tab', { name: '3. 数値の確かめ方' }),
+      screen.getByRole('tab', { name: '浸水包含の判定結果' }),
       {
         button: 0,
         ctrlKey: false,
       }
     );
     expect(
-      screen.getByRole('tab', { name: '3. 数値の確かめ方' })
+      screen.getByRole('tab', { name: '浸水包含の判定結果' })
     ).toHaveAttribute('aria-selected', 'true');
     expect(
       `${window.location.pathname}${window.location.search}${window.location.hash}`

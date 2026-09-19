@@ -22,11 +22,11 @@ import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,
 } from '../lib/geo-cross-analysis';
+import { GEO_DEFAULT_PREF_CODE } from '../lib/geo-default-prefecture';
 import { loadGeoAnalysisBundle } from '../lib/load-geo-analysis-snapshot';
 
 import { GeoAnalysisTracker } from './GeoAnalysisTracker';
 import { GeoContentPublicationSection } from './GeoContentPublicationSection';
-import { GeoCrossAnalysisExplorer } from './GeoCrossAnalysisExplorer';
 import { GeoLandslideSummary } from './GeoLandslideSummary';
 import { GeoPublicFacilitySummary } from './GeoPublicFacilitySummary';
 import { GeoSnowDesignationSummary } from './GeoSnowDesignationSummary';
@@ -54,8 +54,8 @@ interface Props {
 
 export async function GeoCrossAnalysisArticle({
   slug,
-  initialPrefCode = '13',
-  initialStage = 'population',
+  initialPrefCode = GEO_DEFAULT_PREF_CODE,
+  initialStage = 'overlap',
   initialFacilityGroup = 'administrative',
   contextLayer,
 }: Props) {
@@ -102,23 +102,6 @@ export async function GeoCrossAnalysisArticle({
         meta={`データ生成 ${generatedDate} ・ coverage ${snapshot.dataQuality.actualAreas}/${snapshot.dataQuality.expectedAreas}`}
       />
 
-      <nav
-        aria-label="入力データを単体で見る"
-        className="mb-5 flex flex-wrap items-center gap-x-4 text-sm"
-      >
-        <span className="font-semibold">まず単体で見る：</span>
-        {GEO_LAYERS.filter((layer) =>
-          layer.related.some((related) => related === slug)
-        ).map((layer) => (
-          <Link
-            key={layer.slug}
-            href={`/geo/layers/${layer.slug}?pref=${initialPrefCode}`}
-            className="inline-flex min-h-11 items-center text-primary underline"
-          >
-            {layer.name}
-          </Link>
-        ))}
-      </nav>
       {config.hazardMapUrl ? (
         <div
           role="note"
@@ -140,14 +123,6 @@ export async function GeoCrossAnalysisArticle({
         </div>
       ) : null}
 
-      <nav
-        aria-label="分析の読み順"
-        className="mb-5 flex flex-wrap gap-4 text-sm text-primary underline"
-      >
-        <a href="#spatial-evidence">県内の地図</a>
-        <a href="#prefecture-comparison">県別の集計</a>
-        <a href="#methods">方法・出典・限界</a>
-      </nav>
       <GeoSpatialEvidenceExplorer
         slug={slug}
         analysisId={spec.id}
@@ -157,6 +132,23 @@ export async function GeoCrossAnalysisArticle({
         initialFacilityGroup={initialFacilityGroup}
         manifest={evidenceManifest}
       />
+      <nav
+        aria-label="入力データを単体で見る"
+        className="mb-5 flex flex-wrap items-center gap-x-4 text-sm"
+      >
+        <span className="font-semibold">まず単体で見る：</span>
+        {GEO_LAYERS.filter((layer) =>
+          layer.related.some((related) => related === slug)
+        ).map((layer) => (
+          <Link
+            key={layer.slug}
+            href={`/geo/layers/${layer.slug}?pref=${initialPrefCode}`}
+            className="inline-flex min-h-11 items-center text-primary underline"
+          >
+            {layer.name}
+          </Link>
+        ))}
+      </nav>
       <div id="prefecture-comparison" className="scroll-mt-24">
         <SectionHeader
           title="空間判定の結果を都道府県で比較"
@@ -171,12 +163,10 @@ export async function GeoCrossAnalysisArticle({
         <GeoPublicFacilitySummary snapshot={snapshot} />
       ) : (
         <>
-          <GeoCrossAnalysisExplorer
-            analysisId={spec.id}
-            comparisonLimit={spec.comparisonLimit}
-            mapTitle={config.mapTitle}
-            mapSubtitle={config.mapSubtitle}
-            snapshot={snapshot}
+          <SectionHeader
+            title={config.mapTitle}
+            description={config.mapSubtitle}
+            hideRule
           />
 
           <SurfaceSection className="mt-6">

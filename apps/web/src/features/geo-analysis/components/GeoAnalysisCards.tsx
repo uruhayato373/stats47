@@ -4,11 +4,15 @@ import { MapPin, ArrowUpRight } from 'lucide-react';
 import { SurfaceLinkCard } from '@/components/surface';
 
 import {
-  getTokyoMainlandGeography,
+  getPrefectureCardGeography,
   geoCardLandmarks,
 } from '../lib/geo-card-geography';
 import { buildGeoCardPreview } from '../lib/geo-card-preview';
 import { GEO_CROSS_ANALYSIS_CONFIGS } from '../lib/geo-cross-analysis';
+import {
+  GEO_DEFAULT_PREF_CODE,
+  GEO_DEFAULT_PREF_LABEL,
+} from '../lib/geo-default-prefecture';
 import { loadGeoAnalysisPrefBundle } from '../lib/load-geo-analysis-evidence';
 
 const cardCopy = {
@@ -46,10 +50,10 @@ export async function GeoAnalysisCards() {
   const cards = await Promise.all(
     PREVIEW_SLUGS.map(async (slug) => ({
       slug,
-      bundle: await loadGeoAnalysisPrefBundle(slug, '13'),
+      bundle: await loadGeoAnalysisPrefBundle(slug, GEO_DEFAULT_PREF_CODE),
     }))
   );
-  const geography = getTokyoMainlandGeography();
+  const geography = getPrefectureCardGeography(GEO_DEFAULT_PREF_CODE);
   const stationDetail = cards.find(
     (card) => card.slug === 'population-station-access'
   )?.bundle?.detail;
@@ -68,7 +72,7 @@ export async function GeoAnalysisCards() {
         return (
           <SurfaceLinkCard
             key={slug}
-            href={`/geo/${slug}?pref=13&stage=overlap`}
+            href={`/geo/${slug}`}
             aria-label={`${copy.question} ${config.eyebrow}の地図を見る`}
             className="group flex min-w-0 flex-col overflow-hidden p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
@@ -77,7 +81,7 @@ export async function GeoAnalysisCards() {
                 <svg
                   viewBox="0 0 640 360"
                   role="img"
-                  aria-label={`${bundle?.detail.areaName}本土の行政界と${config.overlapLabel}`}
+                  aria-label={`${GEO_DEFAULT_PREF_LABEL}の行政界と${config.overlapLabel}`}
                   className="absolute inset-0 block h-full w-full overflow-hidden bg-slate-50"
                 >
                   <path
@@ -149,7 +153,7 @@ export async function GeoAnalysisCards() {
               )}
               {preview && (
                 <span className="absolute bottom-2 left-2 border bg-background/95 px-2 py-1 text-xs">
-                  東京都本土（島しょを除く）
+                  {GEO_DEFAULT_PREF_LABEL}
                 </span>
               )}
             </div>

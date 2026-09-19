@@ -18,6 +18,8 @@ import { trackGeoRegionSelect } from '@/lib/analytics/events';
 
 import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
+import { GEO_DEFAULT_AREA_CODE } from '../lib/geo-default-prefecture';
+
 import type { GeoDecisionRow } from '../lib/build-geo-decision-rows';
 
 interface Props {
@@ -39,7 +41,7 @@ function percent(value: number): string {
 
 export function GeoDecisionExplorer({
   rows,
-  initialAreaCode = '13000',
+  initialAreaCode = GEO_DEFAULT_AREA_CODE,
 }: Props) {
   const fallbackCode = rows[0]?.areaCode ?? '';
   const validInitialCode = rows.some((row) => row.areaCode === initialAreaCode)
