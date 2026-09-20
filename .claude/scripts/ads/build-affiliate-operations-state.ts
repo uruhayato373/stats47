@@ -147,7 +147,7 @@ function main(): void {
   lines.push(`- freshness: inventory ${state.freshness.inventoryDays ?? "?"}d / ga4 ${state.freshness.ga4Days ?? "?"}d`);
   lines.push(`- coverage: gap=[${state.coverage.gapVerticals.join(", ")}] thin=[${state.coverage.thinVerticals.join(", ")}]`);
   lines.push(`- directPlacements: total ${state.directPlacements.total} / orphaned ${state.directPlacements.orphaned.length} / missingDisclosure ${state.directPlacements.missingDisclosure.length}`);
-  lines.push(`- experiments: active ${state.experiments.active.length} / readyToDecide ${state.experiments.readyToDecide.length} / invalid ${state.experiments.invalid.length} / inconclusive ${state.experiments.inconclusive.length}`);
+  lines.push(`- experiments: active ${state.experiments.active.length} / maturing ${state.experiments.maturing.length} / readyToDecide ${state.experiments.readyToDecide.length} / invalid ${state.experiments.invalid.length} / inconclusive ${state.experiments.inconclusive.length}`);
   lines.push("");
   if (state.recommendedActions.length) {
     lines.push("## recommendedActions (決定的生成)");

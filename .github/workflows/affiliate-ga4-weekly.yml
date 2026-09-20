@@ -16,8 +16,9 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 # 置き場 (2026-09-14・docs/01_技術設計/02_データアーキテクチャ.md):
 #   - 生 snapshot ga4-affiliate-<date>.json は git に足さず R2 `state/ads/ga4-affiliate/` へ push する
 #     (公開 URL。ローカルは `npm run state:pull -- ads/ga4-affiliate` で live/ に取得。lifecycle 400 日)。
-#   - git には週次集約 `.claude/state/ads/ga4-affiliate-history.csv` だけを commit-back する
-#     (vertical × position × 週。T14d / T28d の効果判定はこれで足りる)。
+#   - git には週次集約 `.claude/state/ads/ga4-affiliate-history.csv` と
+#     `.claude/state/ads/affiliate-experiment-history.csv` だけを commit-back する。
+#     前者は vertical × position、後者は experiment × variant の非重複週次累積に使う。
 #   - artifact は従来どおり 30 日 (デバッグ用)。
 
 on:
@@ -177,7 +178,7 @@ jobs:
           node .claude/scripts/ads/append-ga4-affiliate-history.mjs "${{ steps.publish.outputs.file }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/ads/ga4-affiliate-history.csv
+          git add .claude/state/ads/ga4-affiliate-history.csv .claude/state/ads/affiliate-experiment-history.csv
           if git diff --cached --quiet; then
             echo "No aggregate changes"
           else
@@ -196,6 +197,7 @@ jobs:
           # 同時pushでdevelopが先へ進んでも誤検知しない。remote上に今回の確定7日行があることを直接読む。
           git fetch --depth=1 origin develop
           git show FETCH_HEAD:.claude/state/ads/ga4-affiliate-history.csv > /tmp/remote-affiliate-history.csv
+          git show FETCH_HEAD:.claude/state/ads/affiliate-experiment-history.csv > /tmp/remote-affiliate-experiment-history.csv
           DATE="${{ steps.publish.outputs.date }}"
           node -e '
             const fs=require("fs");
@@ -204,6 +206,8 @@ jobs:
             if (!lines.some((line) => line.startsWith(date + ",7,_all,_all,"))) process.exit(1);
           ' /tmp/remote-affiliate-history.csv "$DATE" \
             || { echo "::error::develop history read-backに確定7日行が無い: $DATE"; exit 1; }
+          head -n 1 /tmp/remote-affiliate-experiment-history.csv | grep -qx 'date,days,experiment_id,variant_id,impressions,clicks,ctr' \
+            || { echo "::error::develop experiment history read-backのheaderが不正"; exit 1; }
 
       - name: 🔍 Rebuild local inventory/compliance inputs
         run: |
@@ -257,6 +261,25 @@ jobs:
             console.log(`::error::measurementGate=${gate.status} (${(gate.reasons ?? []).join(", ")})`);
             process.exit(1);
           }
+          const operations = JSON.parse(fs.readFileSync(p, "utf8"));
+          if ((operations.experiments?.invalid ?? []).length > 0) {
+            console.log(`::error::affiliate experiment invalid: ${JSON.stringify(operations.experiments.invalid)}`);
+            process.exit(1);
+          }
+          const portfolio = JSON.parse(fs.readFileSync(".claude/state/ads/affiliate-portfolio-latest.json", "utf8"));
+          for (const name of ["outcome", "portfolio"]) {
+            const value = portfolio.gates?.[name] ?? {};
+            console.log(`${name}Gate: ${value.status} ${(value.reasons ?? []).join(", ")}`);
+            if (value.status !== "ready") {
+              console.log(`::error::${name}Gate=${value.status} (${(value.reasons ?? []).join(", ")})`);
+              process.exit(1);
+            }
+          }
+          const pilot = JSON.parse(fs.readFileSync(".claude/state/ads/affiliate-pilot-readiness-latest.json", "utf8"));
+          if (pilot.plan && pilot.readiness?.status !== "ready") {
+            console.log(`::error::pilotReadiness=${pilot.readiness?.status} (${(pilot.readiness?.reasons ?? []).join(", ")})`);
+            process.exit(1);
+          }
           NODE
 
       - name: 📤 Upload read-only portfolio state
@@ -277,9 +300,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          TITLE="[Affiliate Measurement Alert] 週次GA4計測経路に異常がある"
+          TITLE="[Affiliate Measurement Alert] 週次の収益計測・pilot運用経路に異常がある"
           {
-            echo "確定7日の取得・R2 read-back・履歴commit-back・計測ゲートのいずれかが失敗しました。"
+            echo "確定7日の取得・R2 read-back・履歴commit-back・GA4/ASP成果/pilotゲートのいずれかが失敗しました。"
             echo
             echo "- run: ${RUN_URL}"
             echo "- ga4: ${{ steps.ga4.outcome }}"
@@ -294,6 +317,21 @@ jobs:
                 const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
                 console.log("- reasons: " + ((state.measurementGate?.reasons ?? []).join(", ") || "none"));
               ' .claude/state/ads/affiliate-operations-latest.json
+            fi
+            if [ -f .claude/state/ads/affiliate-portfolio-latest.json ]; then
+              node -e '
+                const fs=require("fs");
+                const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+                console.log("- outcome: " + state.gates?.outcome?.status + " " + ((state.gates?.outcome?.reasons ?? []).join(", ") || "none"));
+                console.log("- portfolio: " + state.gates?.portfolio?.status + " " + ((state.gates?.portfolio?.reasons ?? []).join(", ") || "none"));
+              ' .claude/state/ads/affiliate-portfolio-latest.json
+            fi
+            if [ -f .claude/state/ads/affiliate-pilot-readiness-latest.json ]; then
+              node -e '
+                const fs=require("fs");
+                const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+                console.log("- pilot: " + state.readiness?.status + " " + ((state.readiness?.reasons ?? []).join(", ") || "none"));
+              ' .claude/state/ads/affiliate-pilot-readiness-latest.json
             fi
           } > /tmp/affiliate-measurement-issue.md
           gh label create affiliate-measurement-alert \
@@ -314,5 +352,5 @@ jobs:
           gh issue list --state open --label affiliate-measurement-alert --limit 20 --json number --jq '.[].number' |
             while read -r NUMBER; do
               gh issue close "$NUMBER" --reason completed \
-                --comment "確定7日の取得・R2 read-back・履歴commit-back・計測ゲートが全て復旧しました (run ${{ github.run_id }})。"
+                --comment "確定7日の取得・R2 read-back・履歴commit-back・GA4/ASP成果/pilotゲートが全て復旧しました (run ${{ github.run_id }})。"
             done

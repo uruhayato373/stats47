@@ -1317,6 +1317,25 @@
     "moshimo-6722": {
       "name": "テックゴー｜IT転職エージェントの無料キャリア面談",
       "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [],
+        "allowedPageTypes": [],
+        "allowedRankingKeys": [
+          "software-engineer-annual-income",
+          "system-consultant-annual-income"
+        ],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-09-20T10:00:00.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-09-20 オーナーが計測経路を閉じるため『できることは全てやって閉じるまで』と実装・運用・公開を明示承認。stats47 SID638943、既存ランキング枠のみ、有料広告出稿なし。",
+          "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=6722&shop_site_id=638943 (2026-09-20 実機でSID638943・提携中・掲載条件を確認、body sha256 6b65315012f3)",
+          "成果は広告主新規のITエンジニアがWEB申込後30日以内に無料転職相談を完了した時点。MyVision社の他サービス面談済み、未面談、意思なし、不備・重複・キャンセル等は対象外。",
+          "ITエンジニア・ITコンサルの年収ランキングに限定。サービス名・ブランド名・社名等を使った広告出稿は行わず、PRを明示する。"
+        ]
+      },
       "asps": {
         "moshimo": {
           "promotionId": "6722",
@@ -2214,6 +2233,24 @@
     },
     "moshimo-2228": {
       "name": "グローバル・外資系・ハイクラスの転職支援サービス【Samurai Job】無料会員登録",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [],
+        "allowedPageTypes": [],
+        "allowedRankingKeys": [
+          "system-consultant-annual-income"
+        ],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-09-20T10:00:00.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-09-20 オーナーが計測経路を閉じるため『できることは全てやって閉じるまで』と実装・運用・公開を明示承認。stats47 SID638943、既存ランキング枠のみ、有料広告出稿なし。",
+          "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=2228&shop_site_id=638943 (2026-09-20 実機でSID638943・提携中・掲載条件を確認、body sha256 cb35116197fb)",
+          "成果は新規無料会員登録。過去のJAC転職支援利用者、現在年収600万円以下、転職意思を確認できない方、重複・虚偽・不備は対象外。",
+          "ハイクラス職種との文脈一致を守るためシステムコンサルタント年収ランキングに限定。サービス名・ブランド名・社名等を使った広告出稿は行わず、PRを明示する。"
+        ]
+      },
       "asps": {
         "moshimo": {
           "promotionId": "2228",

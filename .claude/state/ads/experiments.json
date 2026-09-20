@@ -37,6 +37,49 @@
         "banner": { "impressions": 821, "clicks": 1, "ctr": 0.001218026796589525 }
       },
       "notes": "2026-08-28 オーナーが banner を採用。2026-08-04より前は計装断絶のため比較窓に含めない。code実験のためweightではなく本文分岐を撤去して固定した"
+    },
+    {
+      "experimentId": "ranking-labor-lane-pilot-2026w39",
+      "kind": "creative",
+      "status": "active",
+      "portfolioPilot": true,
+      "surface": "ranking-sidebar",
+      "targetLocation": "sidebar-bottom",
+      "hypothesis": "システムコンサルタント年収ランキングでは、無料会員登録のdiscovery導線と無料キャリア面談のdecision導線で確定収益効率が異なる",
+      "variantIds": [
+        "discovery-registration",
+        "decision-consultation"
+      ],
+      "variantProgramRefs": {
+        "discovery-registration": "moshimo:2228",
+        "decision-consultation": "moshimo:6722"
+      },
+      "pagePath": "/ranking/system-consultant-annual-income",
+      "pageType": "ranking",
+      "primaryMetric": "confirmed-revenue-per-1000-viewable-impressions",
+      "startedAt": "2026-09-20",
+      "minSamplePerVariant": 1000,
+      "minImpressionsPerVariant": 1000,
+      "minClicksPerVariant": 10,
+      "minDurationDays": 28,
+      "maxDurationDays": 56,
+      "outcomeMaturityDays": 30,
+      "riskVertical": "labor",
+      "riskLevel": "low",
+      "personalDataLevel": "basic",
+      "reusesExistingPlacement": true,
+      "addsMobilePlacement": false,
+      "ctaCount": 1,
+      "ownerApprovals": {
+        "offer": true,
+        "page": true,
+        "push": true
+      },
+      "decisionRule": "各variantが1000 viewable impressions・10 clicks・28日を満たし、成果窓30日が成熟してから確定収益/1000 viewable impressionsを提示し、人間が判断する。56日で母数未達ならinconclusive。",
+      "confounds": [],
+      "owner": "affiliate-manager",
+      "winnerVariantId": null,
+      "notes": "2026-09-20にstats47 SID638943で成果条件・掲載条件・canonical 300x250原稿を実機確認。既存ranking sidebar枠だけを1 CTAとして再利用し、追加mobile枠・有料広告出稿は行わない。"
     }
   ]
 }

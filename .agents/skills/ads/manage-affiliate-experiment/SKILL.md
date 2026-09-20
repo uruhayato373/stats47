@@ -73,6 +73,22 @@ co_agents: [improvement-triage, ga4-analyst]
 `affiliate-operations-latest.json` の `experiments` を読む (週次 CI が自動更新)。手動更新は
 `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` (要 GA4 鍵) → `build-affiliate-operations-state.ts`。
 
+`portfolioPilot: true` の実験は `.claude/state/ads/affiliate-experiment-history.csv` に
+非重複の確定7日 variant値を蓄積し、`affiliate-pilot-readiness-latest.json` が開始日以後を累積する。
+最新7日 snapshot だけを合算値とみなさない。sample・最短期間に到達したら、勝者を決めず次の露出停止へ進む。
+
+### mature — portfolio pilot の露出を止めて成果を成熟させる
+
+`affiliate-pilot-readiness-latest.json` の `recommendedAction.id` が
+`stop-pilot-exposure-and-start-maturation` のときだけ実行する。
+
+1. 2 variant の `isActive` を `false` にし、registry を `status: "maturing"`、
+   `exposureEndedAt: YYYY-MM-DD` に更新する。通常在庫へフォールバックするので広告枠自体は消さない。
+2. deploy 後、`maturityDate = exposureEndedAt + outcomeMaturityDays` まで待つ。
+3. 成熟日に `moshimo-report.mjs --from <startedAt> --to <maturityDate>` を実行する。
+   `from` が開始日より前の report は実験前成果が混ざるため成熟扱いにしない。
+4. pilot state が `ready-to-present` になっても勝者は自動反映せず `decide` で人へ提示する。
+
 ### decide — ready-to-decide の実験を人間に提示する
 
 1. `experiments.readyToDecide` の variant 別 imp / click / CTR を表で提示。

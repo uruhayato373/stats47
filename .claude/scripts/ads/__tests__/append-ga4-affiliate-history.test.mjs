@@ -4,7 +4,15 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { HEADER, aggregateRows, appendHistory, mergeHistory } from "../append-ga4-affiliate-history.mjs";
+import {
+  EXPERIMENT_HEADER,
+  HEADER,
+  aggregateExperimentRows,
+  aggregateRows,
+  appendHistory,
+  mergeExperimentHistory,
+  mergeHistory,
+} from "../append-ga4-affiliate-history.mjs";
 
 const snapshot = (date, rows) => ({
   date,
@@ -57,14 +65,36 @@ test("date が無い snapshot は拒否する (壊れた行を追記しない)",
   assert.throws(() => aggregateRows({ days: 28, overview: [] }), /date/);
 });
 
+test("experiment × variant を週単位で合算し、同じ週の再実行は置換する", () => {
+  const source = {
+    ...snapshot("2026-09-26", []),
+    days: 7,
+    experiments: [
+      { experiment_id: "pilot", variant_id: "discovery", impressions: 10, clicks: 1 },
+      { experiment_id: "pilot", variant_id: "discovery", impressions: 5, clicks: 0 },
+      { experiment_id: "(unset)", variant_id: "(unset)", impressions: 99, clicks: 99 },
+    ],
+  };
+  const rows = aggregateExperimentRows(source);
+  assert.deepEqual(rows, [["2026-09-26", 7, "pilot", "discovery", 15, 1, "0.066667"]]);
+  const once = mergeExperimentHistory("", rows, source.date);
+  const replaced = mergeExperimentHistory(once, [["2026-09-26", 7, "pilot", "discovery", 20, 2, "0.100000"]], source.date);
+  assert.ok(replaced.startsWith(`${EXPERIMENT_HEADER}\n`));
+  assert.doesNotMatch(replaced, /,15,1,/);
+  assert.match(replaced, /,20,2,/);
+});
+
 test("appendHistory はファイルへ書き、ヘッダーを 1 回だけ持つ", () => {
   const dir = mkdtempSync(join(tmpdir(), "stats47-ga4-history-"));
   const snap = join(dir, "ga4-affiliate-2026-09-14.json");
   writeFileSync(snap, JSON.stringify(snapshot("2026-09-14", [{ affiliate_vertical: "x", link_position: "p", impressions: 1, clicks: 1 }])));
   const historyPath = join(dir, "history.csv");
-  appendHistory(snap, { historyPath });
-  appendHistory(snap, { historyPath });
+  const experimentHistoryPath = join(dir, "experiment-history.csv");
+  appendHistory(snap, { historyPath, experimentHistoryPath });
+  appendHistory(snap, { historyPath, experimentHistoryPath });
   const text = readFileSync(historyPath, "utf8");
+  const experimentText = readFileSync(experimentHistoryPath, "utf8");
   assert.equal(text.split("\n").filter((l) => l === HEADER).length, 1);
   assert.equal(text.split("\n").filter(Boolean).length, 3);
+  assert.equal(experimentText, `${EXPERIMENT_HEADER}\n`);
 });
