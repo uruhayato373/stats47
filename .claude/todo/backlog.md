@@ -1012,18 +1012,6 @@ updated: 2026-09-20
 - **完了条件**: 週次 `affiliate-dashboard-refresh.yml` の出力で家計調査ページが furusato に、
   学校保健統計ページが `no-intent` (新理由コード) に計上される。
 
-### [AFF-OFFER-LANE-01] offer profile の lane / friction 分類を進めて pilot readiness の blocked を解く
-
-タグ: [収益化] [種類:改善] [実行:対話] [検証:.claude/state/ads/affiliate-pilot-readiness-latest.json の readiness.status が blocked 以外] [起票:2026-09-03] [期日:2026-10-15]
-
-- **owner**: affiliate-manager (排他 writer)
-- **現状**: `affiliate-pilot-readiness-latest.json` は `eligible-lane-pair-missing` で blocked。
-  `affiliate-offer-profiles-data.ts` に discovery / decision の lane と F0〜F4 の行動負担が
-  付いた案件が pilot 可能な組になっていない。
-- **次**: furusato・economy・labor の上位案件から順に、ASP の成果条件 (確認元・確認日つき) を
-  読んで lane / friction を記録する。案件名や報酬額から推測しない (rules §2)。
-- **完了条件**: discovery と decision に 1 件ずつ以上 approved の案件があり、pilot plan を作れる。
-
 ### [AFF-VERTICAL-FIT-02] population / health / education 軸の上位在庫を主題に合わせて入れ替える
 
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-03] [期日:2026-10-15]
