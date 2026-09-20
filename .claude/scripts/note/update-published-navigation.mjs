@@ -726,6 +726,12 @@ async function main() {
         linkAttrInRepaired: linkAttr.test(repairedBody),
         repairedSample: (() => { const i = repairedBody.search(/stats47\.jp/); return i >= 0 ? repairedBody.slice(Math.max(0, i - 120), i + 60).replace(/\s+/g, " ") : null; })(),
         embeddedContents: Array.isArray(before.embeddedContents) ? before.embeddedContents.length : null,
+        siteUrl: plan.footer?.siteUrl ?? null,
+        productUrl: plan.footer?.productUrl ?? null,
+        productUrlInBody: plan.footer?.productUrl ? body.includes(`data-src="${plan.footer.productUrl}"`) : null,
+        productFigures: (body.match(/data-src="https:\/\/stats47\.jp\/products\/[^"]*"/g) || []).slice(0, 3),
+        magazineUrl: plan.footer?.magazineUrl ?? null,
+        magazineUrlInBody: plan.footer?.magazineUrl ? body.includes(`data-src="${plan.footer.magazineUrl}"`) : null,
       };
     }
     if (options.commit && !item.pending) item.result = { status: "already_compliant" };
