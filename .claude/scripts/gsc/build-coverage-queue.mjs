@@ -43,6 +43,10 @@ import {
   assertFreshCoverageSource,
   getCoverageSourceFreshness,
 } from "./lib/coverage-source-freshness.mjs";
+import {
+  getObserveAfterFixEntries,
+  summarizeCoverageQueue,
+} from "./lib/coverage-queue-state.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -131,6 +135,22 @@ const saveQueue = (q) => {
   fs.writeFileSync(QUEUE_PATH, JSON.stringify(q, null, 2) + "\n");
 };
 
+function refreshQueueDerivedState(q) {
+  q.generated_at = TODAY;
+  q.summary = summarizeCoverageQueue(q.queue);
+  const observe = getObserveAfterFixEntries(q.queue);
+  const outputDir = path.join(DRILLDOWN_DIR, q.week);
+  fs.mkdirSync(outputDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(outputDir, "coverage-live-observe-urls.csv"),
+    "URL,前回のクロール\n" +
+      observe.map((entry) => `${entry.url},${entry.gsc_last_crawl}`).join("\n") +
+      (observe.length ? "\n" : "")
+  );
+  saveQueue(q);
+  writeLatest(q, observe.length);
+}
+
 // ── --mark-* モード ────────────────────────────────────────────
 // SKILL の runbook は verify-intent の終着点を `resolved-by-design` と定めているが、
 // 以前は done / in-progress しか表現できず「死亡が正」を done (=直した) と混同していた。
@@ -179,7 +199,7 @@ if (markIP || markDone || markDesign) {
     missing.slice(0, 5).forEach((u) => console.error(`   ${u}`));
     process.exit(1);
   }
-  saveQueue(q);
+  refreshQueueDerivedState(q);
   const state = markIP ? "in-progress" : markDone ? "done" : "resolved-by-design";
   console.log(`[ok] ${changed} 件 → ${state}${waveId ? ` (wave ${waveId})` : ""}`);
   process.exit(0);
@@ -601,18 +621,7 @@ async function build() {
   // カテゴリ別総件数 (ingest が保存した aggregate)
   const gscTotals = sourceMetadata;
 
-  // サマリ集計
-  const byAction = {};
-  const byVerdict = {};
-  const byCategory = {};
-  for (const e of queue) {
-    byAction[e.action] = (byAction[e.action] ?? 0) + 1;
-    byVerdict[e.verdict] = (byVerdict[e.verdict] ?? 0) + 1;
-    byCategory[e.gsc_category] = (byCategory[e.gsc_category] ?? 0) + 1;
-  }
-  const pendingActionable = queue.filter(
-    (e) => e.status === "pending" && e.action !== "none"
-  ).length;
+  const summary = summarizeCoverageQueue(queue);
 
   const out = {
     generated_at: TODAY,
@@ -621,13 +630,7 @@ async function build() {
     source_age_weeks: sourceFreshness.ageWeeks,
     source: "GSC UI ページ export (ingest-gsc-export.py) + 本番 HTTP 実測",
     gsc_category_totals: gscTotals?.totals ?? null,
-    summary: {
-      tracked_urls: queue.length,
-      pending_actionable: pendingActionable,
-      by_action: byAction,
-      by_verdict: byVerdict,
-      by_category: byCategory,
-    },
+    summary,
     queue,
   };
   saveQueue(out);
@@ -635,9 +638,7 @@ async function build() {
   // observe-after-fix CSV: live-misflagged (404/5xx/crawled だが現在 200) の観測対象 URL。
   // Indexing API 送信はしない (準拠是正 2026-07-23)。sitemap/内部リンク/canonical を整えた上で
   // URL Inspection (url-inspection-daily.cjs) で coverageState 遷移を観測する。
-  const observe = queue.filter(
-    (e) => e.action === "observe-after-fix" && (e.status === "pending" || e.status === "in-progress")
-  );
+  const observe = getObserveAfterFixEntries(queue);
   const observeCsv = path.join(weekDir, "coverage-live-observe-urls.csv");
   fs.writeFileSync(
     observeCsv,
@@ -683,8 +684,8 @@ async function build() {
 
   // コンソール要約
   console.log(`\nカバレッジ是正キュー更新: ${path.relative(PROJECT_ROOT, QUEUE_PATH)} (week ${week})`);
-  console.log(`  tracked=${queue.length}  pending(actionable)=${pendingActionable}`);
-  console.log(`  by_action: ${JSON.stringify(byAction)}`);
+  console.log(`  tracked=${queue.length}  pending(actionable)=${summary.pending_actionable}`);
+  console.log(`  by_action: ${JSON.stringify(summary.by_action)}`);
   console.log(`  observe-after-fix CSV: ${path.relative(PROJECT_ROOT, observeCsv)} (${observe.length} URL)`);
   console.log(`\n次にやる (--next で JSONL):`);
   const order = queue
@@ -731,10 +732,10 @@ function writeLatest(out, observeCount) {
   L.push("");
   L.push(`- 追跡 URL: **${s.tracked_urls}** / 要対応 pending: **${s.pending_actionable}**`);
   L.push("");
-  L.push("| action | 件数 | 意味 |");
-  L.push("|---|---:|---|");
+  L.push("| action | 分類総数 | pending | 意味 |");
+  L.push("|---|---:|---:|---|");
   const am = {
-    "fix-5xx": "現在も5xx=実バグ(最優先)",
+    "fix-5xx": "probeで5xx分類。pendingなら実バグ(最優先)",
     "observe-after-fix": "404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測",
     deactivate: "config/データ無しの空200 ranking→KNOWN除去で404/410化",
     noindex: "空テンプレ/検索/未公開blog→noindex or 410",
@@ -747,7 +748,7 @@ function writeLatest(out, observeCount) {
   for (const [k, v] of Object.entries(s.by_action).sort(
     (a, b) => (ACTION_PRIORITY[a[0]] ?? 50) - (ACTION_PRIORITY[b[0]] ?? 50)
   )) {
-    L.push(`| ${k} | ${v} | ${am[k] ?? ""} |`);
+    L.push(`| ${k} | ${v} | ${s.pending_by_action?.[k] ?? 0} | ${am[k] ?? ""} |`);
   }
   L.push("");
   L.push(`- observe-after-fix CSV: \`<週>/coverage-live-observe-urls.csv\` (**${observeCount} URL**) → 修正後に url-inspection-daily.cjs で観測`);

@@ -204,6 +204,11 @@ test('日次 workflow が両方の監査を呼び、片方でも赤なら Issue 
 
   assert.match(source, /audit-workflow-health\.mjs/, 'cron 監査を呼んでいない');
   assert.match(source, /audit-r2-freshness\.mjs/, '鮮度監査を呼んでいない');
+  assert.match(
+    source,
+    /gh run list --workflow affiliate-ga4-weekly\.yml --event schedule --status success/,
+    '手動backfillのartifactが週次運用の成功を偽装する',
+  );
   // どちらか一方でも異常なら Issue (&& にすると片方の異常を見逃す)
   assert.match(
     source,
@@ -216,4 +221,11 @@ test('日次 workflow が両方の監査を呼び、片方でも赤なら Issue 
     /healthy == 'true' && steps\.freshness\.outputs\.fresh == 'true'/,
     'close の条件が AND でない = 異常が残っていても Issue を閉じる',
   );
+});
+
+test('R2鮮度監査がaffiliate GA4 latestを公開read pathから監視する', async () => {
+  const { WATCHED } = await import('../../ci/audit-r2-freshness.mjs');
+  const target = WATCHED.find((entry) => entry.key === 'state/ads/ga4-affiliate/latest.json');
+  assert.ok(target, 'affiliate GA4 latestがR2鮮度監査から漏れている');
+  assert.equal(target.maxAgeDays, 10);
 });

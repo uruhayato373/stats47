@@ -59,7 +59,7 @@ export function readAffiliateTotals(csvText) {
       clicks: Number(cells[idx.clicks]),
     });
   }
-  return rows;
+  return rows.sort((a, b) => a.date.localeCompare(b.date));
 }
 
 /** vertical 別の行から「意図軸が解決していない」表示の比率を出す。 */

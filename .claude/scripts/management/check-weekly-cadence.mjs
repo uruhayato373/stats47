@@ -9,6 +9,7 @@
 // 使い方:
 //   node .claude/scripts/management/check-weekly-cadence.mjs            # 人間向けサマリ (欠落があれば exit 1)
 //   node .claude/scripts/management/check-weekly-cadence.mjs --json     # CI 向け JSON (常に exit 0)
+//   node .claude/scripts/management/check-weekly-cadence.mjs --json --date 2026-09-20 # 境界検証用
 //
 // 判定: 直近 WINDOW 週分を対象に、cadence 開始 (最古ファイル) 以降で欠落している週を列挙する。
 //   - レビュー: 完了済みの週まで (今日が月曜なら先週まで) を対象
@@ -28,6 +29,8 @@ const PLAN_FILE = resolve(PROJECT_ROOT, ".claude/todo/weekly.md");
 const WINDOW = 10; // 遡って検査する週数 (これより古い穴は追わない)
 
 const jsonMode = process.argv.includes("--json");
+const dateArgIndex = process.argv.indexOf("--date");
+const dateArg = dateArgIndex >= 0 ? process.argv[dateArgIndex + 1] : null;
 
 /** ISO 週ラベル YYYY-Www を返す (Date は UTC 基準) */
 function isoWeekLabel(d) {
@@ -70,7 +73,11 @@ function missingWeeks(present, candidateLabels) {
     .sort();
 }
 
-const today = new Date();
+const today = dateArg ? new Date(`${dateArg}T12:00:00+09:00`) : new Date();
+if (Number.isNaN(today.getTime())) {
+  console.error(`[err] --date は YYYY-MM-DD で指定: ${dateArg}`);
+  process.exit(1);
+}
 const currentWeek = isoWeekLabel(today);
 
 // 完了済み最新週 = 直近の日曜が属する週 (月曜実行なら先週)
@@ -85,7 +92,13 @@ const missingReviews = missingWeeks(presentWeeks(REVIEW_DIR), reviewCandidates);
 const planWeek = existsSync(PLAN_FILE)
   ? readFileSync(PLAN_FILE, "utf8").match(/^week:\s*(\d{4}-W\d{2})$/m)?.[1]
   : null;
-const missingPlans = planWeek === currentWeek ? [] : [currentWeek];
+const nextWeekDate = new Date(today);
+nextWeekDate.setUTCDate(today.getUTCDate() + 7);
+const nextWeek = isoWeekLabel(nextWeekDate);
+// 日曜レビュー後に翌週計画まで先行作成する運用を許容する。月曜以降は当週計画だけを有効とする。
+const acceptedPlanWeeks = day === 0 ? [currentWeek, nextWeek] : [currentWeek];
+const expectedPlanWeek = day === 0 ? nextWeek : currentWeek;
+const missingPlans = acceptedPlanWeeks.includes(planWeek) ? [] : [expectedPlanWeek];
 const missingTotal = missingReviews.length + missingPlans.length;
 
 const bodyLines = [];
@@ -115,7 +128,16 @@ const body = bodyLines.join("\n");
 if (jsonMode) {
   process.stdout.write(
     JSON.stringify(
-      { currentWeek, lastCompletedWeek, missingReviews, missingPlans, missingTotal, body },
+      {
+        currentWeek,
+        lastCompletedWeek,
+        planWeek,
+        acceptedPlanWeeks,
+        missingReviews,
+        missingPlans,
+        missingTotal,
+        body,
+      },
       null,
       2,
     ) + "\n",

@@ -227,6 +227,7 @@ function revenueSection(week) {
     const ageDays = daysBetween(new Date(latestAff.date), weekSun);
     const imp = num(latestAff.impressions);
     const clicks = num(latestAff.clicks);
+    const windowDays = num(latestAff.days);
     const ctr = imp ? ((clicks ?? 0) / imp) * 100 : null;
     if (ageDays > REVENUE_SOURCE_MAX_AGE_DAYS) {
       lines.push(
@@ -235,7 +236,7 @@ function revenueSection(week) {
       );
     } else {
       lines.push(
-        `- アフィリエイト: 観測 ${latestAff.date}（28 日）imp **${num(imp)}** / click **${num(clicks)}**` +
+        `- アフィリエイト: 観測 ${latestAff.date}（${windowDays ?? "?"} 日）imp **${num(imp)}** / click **${num(clicks)}**` +
           `${ctr == null ? "" : ` / CTR **${ctr.toFixed(3)}%**`}。` +
           "確定発生額は ASP 管理画面が正典で、ここには含めない",
       );
