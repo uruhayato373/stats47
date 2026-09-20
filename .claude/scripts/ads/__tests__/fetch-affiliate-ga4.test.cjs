@@ -137,6 +137,36 @@ test("固定期間は両端を含む日数を保持する", () => {
   });
 });
 
+test("日曜と翌月曜の再実行は同じ確定済み日曜〜土曜を返す", () => {
+  const sunday = parseFetchWindow(["--weekly-finalized"], {
+    now: new Date("2026-09-20T12:00:00Z"),
+    timeZone: "Asia/Tokyo",
+  });
+  const monday = parseFetchWindow(["--weekly-finalized"], {
+    now: new Date("2026-09-21T12:00:00Z"),
+    timeZone: "Asia/Tokyo",
+  });
+  assert.deepEqual(sunday, {
+    startDate: "2026-09-13",
+    endDate: "2026-09-19",
+    days: 7,
+    mode: "weekly-finalized",
+  });
+  assert.deepEqual(monday, sunday);
+});
+
+test("土曜日は当日途中を含めず前週の日曜〜土曜を返す", () => {
+  assert.deepEqual(parseFetchWindow(["--weekly-finalized"], {
+    now: new Date("2026-09-19T08:00:00Z"),
+    timeZone: "Asia/Tokyo",
+  }), {
+    startDate: "2026-09-06",
+    endDate: "2026-09-12",
+    days: 7,
+    mode: "weekly-finalized",
+  });
+});
+
 test("固定期間の片側欠落・逆転・不正な日数を拒否する", () => {
   assert.throws(() => parseFetchWindow(["--start-date"]), /値がありません/);
   assert.throws(() => parseFetchWindow(["--start-date", "2026-09-01"]), /両方/);
@@ -147,4 +177,5 @@ test("固定期間の片側欠落・逆転・不正な日数を拒否する", ()
     "--start-date", "2026-09-01", "--end-date", "2026-09-20",
   ], { now: new Date("2026-09-20T12:00:00Z"), timeZone: "Asia/Tokyo" }), /昨日以前/);
   assert.throws(() => parseFetchWindow(["0"]), /1〜366/);
+  assert.throws(() => parseFetchWindow(["28", "--weekly-finalized"]), /同時指定/);
 });

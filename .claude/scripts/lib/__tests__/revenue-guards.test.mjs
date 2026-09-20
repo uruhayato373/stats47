@@ -138,3 +138,12 @@ test("backfill 行が末尾に来ても日付順に並べ、最新観測を誤�
     asof: "2026-09-21",
   }), []);
 });
+
+test("週次収益summaryはaffiliateの実際のwindow日数を表示する", () => {
+  const source = readFileSync(
+    join(PROJECT_ROOT, ".claude/scripts/metrics/generate-weekly-metrics-issue.mjs"),
+    "utf-8",
+  );
+  assert.match(source, /windowDays = num\(latestAff\.days\)/);
+  assert.doesNotMatch(source, /観測 \$\{latestAff\.date\}（28 日）/);
+});

@@ -13,9 +13,11 @@
  *
  * 実行:
  *   node .claude/scripts/ads/fetch-affiliate-ga4.cjs [days]
+ *   node .claude/scripts/ads/fetch-affiliate-ga4.cjs --weekly-finalized
  *   node .claude/scripts/ads/fetch-affiliate-ga4.cjs --start-date YYYY-MM-DD --end-date YYYY-MM-DD
  *
  *   days: 完了済み日だけを対象にする集計日数 (デフォルト 28、昨日まで)
+ *   weekly-finalized: 直近の日曜〜土曜。日曜/翌月曜の再実行でも同じ確定7日を返す。
  *   固定期間: before / after 比較や過去期間の再取得用。両端を含む。
  *
  * 出力: 標準出力に Markdown テーブル + .claude/state/ads/ga4-affiliate-<date>.json
@@ -89,6 +91,20 @@ function inclusiveDays(startDate, endDate) {
   ) + 1;
 }
 
+function finalizedWeeklyWindow(today) {
+  const dayOfWeek = new Date(`${today}T00:00:00Z`).getUTCDay();
+  const rawOffset = (dayOfWeek + 1) % 7;
+  // 土曜日当日はまだ日次値が完了していないため、前週の土曜日を使う。
+  const daysSinceCompletedSaturday = rawOffset === 0 ? 7 : rawOffset;
+  const endDate = addDays(today, -daysSinceCompletedSaturday);
+  return {
+    startDate: addDays(endDate, -6),
+    endDate,
+    days: 7,
+    mode: "weekly-finalized",
+  };
+}
+
 function parseFetchWindow(argv, {
   now = new Date(),
   timeZone = "Asia/Tokyo",
@@ -96,14 +112,21 @@ function parseFetchWindow(argv, {
   let days = 28;
   let startDate = null;
   let endDate = null;
+  let weeklyFinalized = false;
+  let hasDaysArgument = false;
   let index = 0;
 
   if (argv[0] && !argv[0].startsWith("--")) {
     days = Number(argv[0]);
+    hasDaysArgument = true;
     index = 1;
   }
   for (; index < argv.length; index += 1) {
     const flag = argv[index];
+    if (flag === "--weekly-finalized") {
+      weeklyFinalized = true;
+      continue;
+    }
     const value = argv[index + 1];
     if (flag === "--start-date" || flag === "--end-date") {
       if (!value || value.startsWith("--")) throw new Error(`${flag} の値がありません`);
@@ -114,6 +137,12 @@ function parseFetchWindow(argv, {
     else throw new Error(`未対応の引数です: ${flag}`);
   }
 
+  if (weeklyFinalized) {
+    if (hasDaysArgument || startDate != null || endDate != null) {
+      throw new Error("--weekly-finalized は days / 固定期間と同時指定できません");
+    }
+    return finalizedWeeklyWindow(dateInTimeZone(now, timeZone));
+  }
   if ((startDate == null) !== (endDate == null)) {
     throw new Error("--start-date と --end-date は両方指定してください");
   }

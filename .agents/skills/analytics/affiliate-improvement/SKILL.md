@@ -93,6 +93,7 @@ JSON は `.claude/state/ads/inventory-latest.json` (`byVertical` / `coverage.gap
 
 ```bash
 node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 昨日までの完了済み28日
+node .claude/scripts/ads/fetch-affiliate-ga4.cjs --weekly-finalized # 直近の確定済み日曜〜土曜
 node .claude/scripts/ads/fetch-affiliate-ga4.cjs \
   --start-date 2026-09-13 --end-date 2026-09-19 # before/after用の固定7日
 ```
@@ -111,9 +112,12 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs \
 >    (`<date>.json` / `latest.json` / `index.json`) へ push、git には週次集約
 >    `.claude/state/ads/ga4-affiliate-history.csv` (`append-ga4-affiliate-history.mjs`) だけを commit-back する**。
 >    ローカルで生 snapshot が要るときは `npm run state:pull -- ads/ga4-affiliate` (公開 URL・認証不要) で
->    `.claude/state/ads/live/ga4-affiliate/` に取得する (gitignore 済み)。T14d / T28d の効果判定は history.csv で足りる。
->    `workflow_dispatch` は `start_date` / `end_date` を同時指定できる。過去期間の backfill は日付objectへ追加するが、
->    R2 `latest.json` を古い期間へ巻き戻さない。
+>    `.claude/state/ads/live/ga4-affiliate/` に取得する (gitignore 済み)。CIの運用経路は確定7日だけを受理し、
+>    日曜22:00 JSTに本実行、月曜22:00 JSTに同じ窓を自動再取得する。T14d / T28d はhistory.csvの
+>    非重複2週 / 4週で判定する。R2 object/indexのread-back、develop上の確定7日履歴行、measurementGateを全て検証し、
+>    schedule失敗は即時Issueへupsert、月曜の復旧成功で自動closeする。
+>    `workflow_dispatch` は7日間の `start_date` / `end_date` を同時指定できる。過去期間のbackfillは
+>    日付objectへ追加するがR2 `latest.json` を巻き戻さず、運用アラートの復旧判定にも使わない。
 > 2. **custom dimension 登録**: `affiliate_vertical` / `affiliate_category` / `link_position` を GA4 管理画面で
 >    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない (登録手順の正典:
 >    `.claude/rules/affiliate-ads-standards.md` §6)。未登録時はスクリプトが `eventName` 単位の総数に

@@ -43,6 +43,11 @@ export const WATCHED = [
     maxAgeDays: 14,
     why: "blog-auto-publish.yml (公開のたび)。止まると新規記事が一覧に出ない",
   },
+  {
+    key: "state/ads/ga4-affiliate/latest.json",
+    maxAgeDays: 10,
+    why: "affiliate-ga4-weekly.yml (週次+翌日再取得)。古いと収益施策のeffectを判定できない",
+  },
 ];
 
 async function readGeneratedAt(key) {

@@ -19,11 +19,12 @@ test(`${files[0]}は観測artifactだけで外部変更しない`, () => {
   assert.doesNotMatch(source, FORBIDDEN_AD_MUTATIONS);
 });
 
-// GA4 週次は 2026-09-14 (c8c15e202) から、生 snapshot を R2 state/ に置き、git には週次集約 CSV だけを
-// commit-back する。書き戻しはその 1 ファイルに限定されていることを固定する。
-test(`${files[1]}は週次集約CSVの commit-back 以外に外部変更しない`, () => {
+// GA4週次は生snapshotをR2 state/へ置き、git書き戻しを週次集約CSVだけに限定する。
+// Issue mutationは運用異常のalert/recoveryだけに使い、広告配信自体は変更しない。
+test(`${files[1]}はgit書き戻しを週次集約CSVに限定し、広告配信を変更しない`, () => {
   const source = readFileSync(files[1], "utf8");
   assert.match(source, /permissions:\s*\n\s*contents: write/);
+  assert.match(source, /^\s*issues: write/m);
   assert.match(source, /upload-artifact/);
   const staged = [...source.matchAll(/^\s*git add (.+)$/gm)].map((m) => m[1].trim());
   assert.deepEqual(staged, [".claude/state/ads/ga4-affiliate-history.csv"]);
@@ -49,6 +50,36 @@ test("GA4週次は固定期間を受け取り、過去期間で latest を巻き
   assert.doesNotMatch(source, /find \.claude\/state\/ads[^\n]+ga4-affiliate/);
   assert.match(source, /historical backfill: latest\.json/);
   assert.match(source, /\[\[ "\$LATEST_DATE" > "\$DATE" \]\]/);
+});
+
+test("GA4週次は確定7日を日曜に取得し、月曜に同じ窓を自動再取得する", () => {
+  const source = readFileSync(files[1], "utf8");
+  assert.match(source, /cron: "0 13 \* \* 0,1"/);
+  assert.match(source, /ARGS=\(--weekly-finalized\)/);
+  assert.match(source, /\[ "\$WINDOW_DAYS" = "7" \]/);
+  assert.doesNotMatch(source, /^\s+days:\s*$/m);
+});
+
+test("GA4週次はR2とdevelop履歴行をread-backし、全step outcomeを最終ゲートへ含める", () => {
+  const source = readFileSync(files[1], "utf8");
+  assert.match(source, /cmp -s "\$FILE" \/tmp\/affiliate-readback\.json/);
+  assert.match(source, /cmp -s "\$STAGE\/latest\.json" \/tmp\/affiliate-latest-readback\.json/);
+  assert.match(source, /affiliate-index-readback\.json/);
+  assert.match(source, /git show FETCH_HEAD:\.claude\/state\/ads\/ga4-affiliate-history\.csv/);
+  assert.match(source, /line\.startsWith\(`\$\{date\},7,_all,_all,`\)/);
+  for (const id of ["ga4", "publish", "history", "operations"]) {
+    assert.match(source, new RegExp(`"${id}=\\$\\{\\{ steps\\.${id}\\.outcome \\}\\}"`));
+  }
+});
+
+test("GA4週次は計測失敗を即時upsertし、復旧時に自動closeする", () => {
+  const source = readFileSync(files[1], "utf8");
+  assert.match(source, /github\.event_name == 'schedule' && steps\.measurement_gate\.outcome != 'success'/);
+  assert.match(source, /github\.event_name == 'schedule' && steps\.measurement_gate\.outcome == 'success'/);
+  assert.match(source, /gh issue create/);
+  assert.match(source, /gh issue edit/);
+  assert.match(source, /gh issue close/);
+  assert.match(source, /gh label create affiliate-measurement-alert/);
 });
 
 test("adminと単体HTMLは同じportfolio view modelを使う", () => {
