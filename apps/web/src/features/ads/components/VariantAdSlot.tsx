@@ -24,11 +24,18 @@ interface AdVariant {
   width: number | null;
   height: number | null;
   creativeSize: string;
+  /** GA4 `affiliate_vertical` 用。variant 自身の意図軸 (null ならページ文脈値へ落とす)。 */
+  vertical: string | null;
 }
 
 interface VariantAdSlotProps {
   variants: AdVariant[];
-  category: string;
+  /**
+   * variant 自身が vertical を持たないときだけ使うページ文脈の意図軸。
+   * `category` という名前にしない — 呼び出し側がこれを計測値そのものだと誤解し、
+   * 広告の意図軸が GA4 から失われる事故が起きた (2026-09-20)。
+   */
+  pageVertical: string;
   position: string;
 }
 
@@ -55,7 +62,7 @@ function pickWeighted(variants: AdVariant[]): AdVariant {
  * - SSR / hydration 時は固定高さの空枠を描画し、mount 後に中身を差し込む (hydration mismatch 回避 + CLS 抑制)。
  * - 表示した variant の impression / click を experiment_id / variant_id / creative_size 付きで GA4 送信。
  */
-export function VariantAdSlot({ variants, category, position }: VariantAdSlotProps) {
+export function VariantAdSlot({ variants, pageVertical, position }: VariantAdSlotProps) {
   const [chosen, setChosen] = useState<AdVariant | null>(null);
 
   useEffect(() => {
@@ -107,7 +114,7 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
           trackingPixelUrl={chosen.trackingPixelUrl}
           width={chosen.width}
           height={chosen.height}
-          category={category}
+          category={chosen.vertical ?? pageVertical}
           label={chosen.title}
           position={position}
           adId={chosen.id}
@@ -127,7 +134,7 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
   //   正典: .claude/rules/analytics-event-standards.md
   return (
     <AdImpressionTracker
-      category={category}
+      category={chosen.vertical ?? pageVertical}
       label={chosen.title}
       position={position}
       adId={chosen.id}
@@ -141,7 +148,7 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
       </span>
       <TrackedAffiliateLink
         href={chosen.href}
-        category={category}
+        category={chosen.vertical ?? pageVertical}
         label={chosen.title}
         position={position}
         adId={chosen.id}

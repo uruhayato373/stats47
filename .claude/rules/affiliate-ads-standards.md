@@ -264,6 +264,37 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 `affiliate_vertical` 内訳 (行が vertical 別に分かれる) が取れること。取れたら effect 判定を意図軸ベースで行える。
 それまで `/affiliate-improvement` の効果判定は総数ベースと明記する (`.claude/rules/evidence-based-judgment.md`)。
 
+### 6.1 `affiliate_vertical` は広告自身の vertical を送る (★2026-09-20 に実際に壊れていた)
+
+**描画コンポーネントがページ文脈の値 (`affiliateCategory` prop) を計測値として送らないこと。**
+広告の意図軸は解決層 (`resolve-affiliate-ad.ts` の `toBanner` / `toTextAd`) が確定させ、
+`ResolvedAffiliateBanner.vertical` / `ResolvedAffiliateAd.vertical` に載せる。描画側はそれを渡す。
+
+2026-08-10〜09-06 の 28 日実測で、impression 26,674 のうち **約 29% が `other`、約 31% が `economy`**
+として記録されていた。在庫の偏りではなく、次の 3 つの計測欠陥が同時に起きていた。
+
+| 欠陥 | 影響 |
+|---|---|
+| `AffiliateTextAdList` がページ文脈 prop を渡し広告の vertical を捨てていた | text 広告の意図軸が全て失われる |
+| blog 本文の手動バナーが `category` を渡さず `BannerAd` の既定 `"other"` が流れた | `article-inline` の 1,395 impression が `other` |
+| `RakutenItemsCard` が `category="economy"` を固定していた | 意図軸 economy の分母が汚れ CTR を評価できない |
+
+この状態では vertical 別 CTR が信用できず、配置の意思決定ができない。規約は 3 つ。
+
+1. **広告自身の vertical を先に置く** — `category={ad.vertical ?? affiliateCategory ?? "other"}`。
+   ページ文脈値は fallback にのみ使い、変数名も `pageVertical` のように区別する。
+2. **10 軸の値を直書きしない** — 枠が単一 vertical 専用 (ふるさと納税カード・labor 固定プロモ) の場合だけ
+   許し、契約テストの allowlist に理由付きで登録する。
+3. **10 軸に属さない導線は 10 軸のラベルを使わない** — 楽天商品カードは `rakuten-items` のように
+   専用ラベルを持たせ、意図軸の分母と混ぜない。
+
+機械強制: `apps/web/src/features/ads/__tests__/affiliate-vertical-label-contract.test.ts`
+(components 全件を静的走査し、上記 1・2 に反する形で落ちる。allowlist の実在も検査する)。
+
+**時系列の断絶**: この是正の本番反映日を境に、`affiliate_vertical` 別の集計は連続しない
+(`other` と `economy` が正しい軸へ再配分されるため)。面別 (`link_position`) と全体 CTR は
+分母が変わらないので連続する。vertical 別の判断は是正後 28 日を新しいベースラインとして取り直す。
+
 ## 7. 登録フロー (`/register-affiliate-banner` — 対話式ループ)
 
 `affiliate-manager` がユーザーと 1 件ずつ対話しながら在庫を増やす。mode: `propose`(既定) / `register` / `direct` / `status`。

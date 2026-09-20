@@ -10,6 +10,8 @@
  *
  * 入力:
  *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
+ *   - .claude/state/ads/ga4-affiliate-history.csv (アフィリエイト観測)
+ *   - .claude/state/products/sales-ledger.json (商品の実売)
  *   - .claude/todo/improvements.md の status: pending|in-progress を抽出（pending 施策一覧）
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
@@ -189,22 +191,88 @@ function ga4Section(week) {
   return lines.join("\n") + "\n";
 }
 
-function adsenseSection(week) {
-  const hist = readCsv(".claude/state/metrics/adsense/history.csv");
-  if (!hist) return "_AdSense: history.csv が存在しません_\n";
-  const target = hist.rows.find((r) => r.week === week);
-  const idx = target ? hist.rows.indexOf(target) : -1;
-  const prev = idx > 0 ? hist.rows[idx - 1] : null;
-  if (!target) return `_AdSense: ${week} の行が見つかりません_\n`;
+/** 収益ソースの鮮度上限。これを超えたら 0 円ではなく「判定不能」と出す。 */
+const REVENUE_SOURCE_MAX_AGE_DAYS = 10;
+
+function daysBetween(from, to) {
+  return Math.floor((to.getTime() - from.getTime()) / 86_400_000);
+}
+
+/**
+ * 週次収益 (NSM) = AdSense 確定額 + アフィリエイト発生額 + 商品の実売額。
+ *
+ * 2026-09 に「流入は 4 週で倍増したのに収益がいくらか言えない」状態が 3 週間続いた。
+ * アフィリエイト観測が 2026-08-28 で止まっていたのに、誰も見ない state ファイルの中で
+ * 止まっていたため気づけなかった。**欠測を 0 円と印字しない** のがこの節の要点で、
+ * ソースが古い項目は「判定不能」と出して毎週目に入るようにする
+ * (正典: docs/00_プロジェクト管理/02_収益化戦略.md §1・§3.2)。
+ */
+function revenueSection(week) {
   const lines = [];
-  lines.push(`- Earnings: **${num(target.earnings)}**${arrow(num(target.earnings), num(prev?.earnings), false)}${pctDelta(num(target.earnings), num(prev?.earnings))}`);
-  lines.push(`- Page Views: **${num(target.page_views)}**${arrow(num(target.page_views), num(prev?.page_views), false)}${pctDelta(num(target.page_views), num(prev?.page_views))}`);
-  lines.push(`- RPM: **${num(target.rpm).toFixed(2)}**${arrow(num(target.rpm), num(prev?.rpm), false)}`);
-  lines.push(`- Clicks: **${num(target.clicks)}**${arrow(num(target.clicks), num(prev?.clicks), false)}`);
-  lines.push(`- CTR: **${(num(target.ctr) * 100).toFixed(2)}%**${arrow(num(target.ctr), num(prev?.ctr), false)}`);
-  lines.push(`- Viewability: **${(num(target.viewability) * 100).toFixed(1)}%**${arrow(num(target.viewability), num(prev?.viewability), false)}`);
+  const weekMon = monOfWeek(week);
+  const weekSun = new Date(weekMon);
+  weekSun.setUTCDate(weekMon.getUTCDate() + 6);
+  const sundayStr = weekSun.toISOString().slice(0, 10);
+
+  // --- AdSense: 2026-08-29 に恒久停止済み。再開しない前提で ¥0 を確定値として出す。
+  lines.push("- AdSense: **¥0**（2026-08-29 に恒久停止。再開前提の枠・スクリプトは撤去済み）");
+
+  // --- アフィリエイト: 発生額は ASP 管理画面にしかないため、ここでは観測の鮮度だけを判定する。
+  const aff = readCsv(".claude/state/ads/ga4-affiliate-history.csv");
+  const affRows = aff?.rows.filter((r) => r.affiliate_vertical === "_all" && r.link_position === "_all") ?? [];
+  const latestAff = affRows.length > 0 ? affRows[affRows.length - 1] : null;
+  if (!latestAff) {
+    lines.push("- アフィリエイト: **判定不能**（ga4-affiliate-history.csv に観測行が無い）");
+  } else {
+    const ageDays = daysBetween(new Date(latestAff.date), weekSun);
+    const imp = num(latestAff.impressions);
+    const clicks = num(latestAff.clicks);
+    const ctr = imp ? ((clicks ?? 0) / imp) * 100 : null;
+    if (ageDays > REVENUE_SOURCE_MAX_AGE_DAYS) {
+      lines.push(
+        `- アフィリエイト: **判定不能**（最終観測 ${latestAff.date} / ${ageDays} 日前。` +
+          `上限 ${REVENUE_SOURCE_MAX_AGE_DAYS} 日。週次 cron affiliate-ga4-weekly.yml を確認する）`,
+      );
+    } else {
+      lines.push(
+        `- アフィリエイト: 観測 ${latestAff.date}（28 日）imp **${num(imp)}** / click **${num(clicks)}**` +
+          `${ctr == null ? "" : ` / CTR **${ctr.toFixed(3)}%**`}。` +
+          "確定発生額は ASP 管理画面が正典で、ここには含めない",
+      );
+    }
+  }
+
+  // --- 商品: 実売の台帳。observations が空なら「実売 0 件」と「未計測」を区別して書く。
+  const ledgerPath = join(PROJECT_ROOT, ".claude/state/products/sales-ledger.json");
+  if (!existsSync(ledgerPath)) {
+    lines.push("- 商品: **判定不能**（sales-ledger.json が存在しない）");
+  } else {
+    let ledger = null;
+    try {
+      ledger = JSON.parse(readFileSync(ledgerPath, "utf-8"));
+    } catch {
+      ledger = null;
+    }
+    const obs = Array.isArray(ledger?.observations) ? ledger.observations : null;
+    if (obs == null) {
+      lines.push("- 商品: **判定不能**（sales-ledger.json に observations 配列が無い）");
+    } else if (obs.length === 0) {
+      lines.push("- 商品: **¥0**（実売の観測 0 件。有料 pilot 未開始 = ADMIN-STAT-PILOT-01）");
+    } else {
+      const inWeek = obs.filter((o) => typeof o?.date === "string" && o.date <= sundayStr);
+      const total = inWeek.reduce((sum, o) => sum + (num(o.amountYen) ?? 0), 0);
+      lines.push(`- 商品: **¥${total.toLocaleString("ja-JP")}**（観測 ${inWeek.length} 件）`);
+    }
+  }
+
+  lines.push("");
+  lines.push(
+    "> NSM は週次収益であって PV ではない。欠測は 0 円ではなく「判定不能」と記す" +
+      "（`.claude/memory/project_monetization_contract.md`）。",
+  );
   return lines.join("\n") + "\n";
 }
+
 
 // PSI は日次。直近 7 日の URL × strategy × day を集約
 function psiSection(week) {
@@ -313,9 +381,9 @@ function main() {
   lines.push("## 📊 GA4（サイトアクセス）");
   lines.push("");
   lines.push(ga4Section(week));
-  lines.push("## 💰 AdSense（広告収益）");
+  lines.push("## 💰 週次収益（NSM）");
   lines.push("");
-  lines.push(adsenseSection(week));
+  lines.push(revenueSection(week));
   lines.push("## 🚨 今週の自動起票 Issue（閾値違反）");
   lines.push("");
   lines.push(alertsSection(week));
@@ -330,7 +398,9 @@ function main() {
   lines.push(`- [PSI history.csv](../blob/develop/.claude/state/metrics/psi/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/psi/LATEST.md)`);
   lines.push(`- [GSC history.csv](../blob/develop/.claude/state/metrics/gsc/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/gsc/LATEST.md)`);
   lines.push(`- [GA4 history.csv](../blob/develop/.claude/state/metrics/ga4/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/ga4/LATEST.md)`);
-  lines.push(`- [AdSense history.csv](../blob/develop/.claude/state/metrics/adsense/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/adsense/LATEST.md)`);
+  lines.push(`- [アフィリエイト観測 ga4-affiliate-history.csv](../blob/develop/.claude/state/ads/ga4-affiliate-history.csv)`);
+  lines.push(`- [商品販売台帳 sales-ledger.json](../blob/develop/.claude/state/products/sales-ledger.json)`);
+  lines.push(`- AdSense は 2026-08-29 に恒久停止。過去分は [history.csv](../blob/develop/.claude/state/metrics/adsense/history.csv) に凍結`);
   lines.push("");
 
   process.stdout.write(lines.join("\n"));
