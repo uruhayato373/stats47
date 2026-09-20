@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { metadata as noteReferralMetadata } from "../../../app/products/[slug]/from/note/[noteKey]/page";
+import { generateMetadata as generateNoteReferralMetadata } from "../../../app/products/[slug]/from/note/[noteKey]/page";
 import {
   buildNoteProductDestination,
   isValidNoteKey,
@@ -60,10 +60,30 @@ describe("product storefront", () => {
     );
   });
 
-  it("note向けclean URLを検索結果には載せず、転送先への巡回を許可する", () => {
-    expect(noteReferralMetadata.robots).toMatchObject({
+  it("note向けclean URLを検索結果には載せず、転送先への巡回を許可する", async () => {
+    const metadata = await generateNoteReferralMetadata({
+      params: Promise.resolve({ slug: "kindle-k-s1-02", noteKey: "n68f5e09c8d62" }),
+    });
+    expect(metadata.robots).toMatchObject({
       index: false,
       follow: true,
     });
+  });
+
+  it("note向けclean URLは転送先を待たず、この URL 自身に商品のOGPを持つ (noteのカード解決用)", async () => {
+    const metadata = await generateNoteReferralMetadata({
+      params: Promise.resolve({ slug: "kindle-k-s1-02", noteKey: "n68f5e09c8d62" }),
+    });
+    const product = findStorefrontProduct("kindle-k-s1-02");
+    expect(metadata.openGraph?.title).toBe(`${product?.title} | stats47`);
+    expect(metadata.openGraph?.description).toBe(product?.description);
+    expect(metadata.openGraph?.images).toBeTruthy();
+  });
+
+  it("未知slugではOGPを持たずrobotsだけを返す", async () => {
+    const metadata = await generateNoteReferralMetadata({
+      params: Promise.resolve({ slug: "unknown", noteKey: "n68f5e09c8d62" }),
+    });
+    expect(metadata).toEqual({ robots: { index: false, follow: true } });
   });
 });
