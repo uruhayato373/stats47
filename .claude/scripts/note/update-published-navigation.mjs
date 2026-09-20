@@ -25,6 +25,7 @@ import {
   applyVisibleNavigationBeforeSeparator,
   buildNoteProductCardUrl,
   canonicalizeNoteEditorBody,
+  collapseDuplicateFooterHeadings,
   resolveProductCardText,
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
@@ -715,7 +716,9 @@ async function main() {
       // 「サイトカードが無い」判定の根拠を残す (2026-09-20: CI だけ 22 本で AddSite になり、ローカルでは 0 本)
       const body = before.body;
       const at = body.search(/stats47\.jp/);
-      const repairedBody = applyPublishedLinkRepairs(body, plan.repairs).body;
+      const repairedResult = applyPublishedLinkRepairs(body, plan.repairs);
+      const repairedBody = repairedResult.body;
+      const navigation = applyNavigationFooter(repairedBody, plan.footer);
       const linkAttr = /\b(?:href|data-src)="https?:\/\/(?:www\.)?stats47\.jp(?:[\/"?#]|$)/i;
       item.stats47Diagnostics = {
         refs: (body.match(/stats47\.jp/g) || []).length,
@@ -732,6 +735,9 @@ async function main() {
         productFigures: (body.match(/data-src="https:\/\/stats47\.jp\/products\/[^"]*"/g) || []).slice(0, 3),
         magazineUrl: plan.footer?.magazineUrl ?? null,
         magazineUrlInBody: plan.footer?.magazineUrl ? body.includes(`data-src="${plan.footer.magazineUrl}"`) : null,
+        repairedChanged: repairedResult.changed,
+        additions: navigation.additionsPreview,
+        collapsedLength: collapseDuplicateFooterHeadings(repairedBody).length,
       };
     }
     if (options.commit && !item.pending) item.result = { status: "already_compliant" };

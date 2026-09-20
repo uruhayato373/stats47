@@ -279,6 +279,7 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
     addedProduct: Boolean(productUrl) && additions.some((part) => part.includes(`data-src="${productUrl}"`)),
     addedDataset: datasets.some((dataset) => additions.some((part) => part.includes(`data-src="${dataset.noteUrl}"`))),
     dedupedFooterHeading,
+    additionsPreview: additions.map((part) => part.replace(/\s+/g, " ").slice(0, 90)),
   };
 }
 
