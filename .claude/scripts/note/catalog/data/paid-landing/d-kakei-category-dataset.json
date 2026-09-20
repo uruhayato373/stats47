@@ -1,0 +1,76 @@
+{
+  "key": "d-kakei-category-dataset",
+  "audienceHeading": "こんな人のためのデータです",
+  "audience": [
+    {
+      "strong": "出店・商圏分析・地域マーケティングの担当者",
+      "text": "「この県の家計はどの費目に厚いか」を、e-Statを自分で集計せずに一枚の表で押さえたい"
+    },
+    {
+      "strong": "卒論・ゼミ・自由研究で家計調査を使う学生",
+      "text": "18年分×47県の十大費目を、そのまま回帰や時系列分析に載せられる縦持ちで手元に置きたい"
+    },
+    {
+      "strong": "自治体職員・地域メディア・議会資料の担当者",
+      "text": "「うちの県は何にお金を使っているか」を、出典と算式を示せる形で図表にしたい"
+    }
+  ],
+  "audienceNote": "家計調査をe-Statから一度でも落とした人なら分かるとおり、表は年ごと・市ごとに分かれていて、十大費目を47市×18年で揃えるだけで半日かかります。その整形済みの結果を配布します。",
+  "learnHeading": "このデータでわかること",
+  "learn": [
+    {
+      "strong": "47市それぞれの十大費目の偏り",
+      "text": "47市平均を1.00とした比率。表計算ソフトで並べ替えるだけで「教育費が最も厚い市」「住居費が最も薄い市」が出ます"
+    },
+    {
+      "strong": "2007〜2024年の推移",
+      "text": "費目ごとの金額（円）が実額で入っているので、県間差が広がっているのか縮んでいるのかを追えます"
+    },
+    {
+      "strong": "基準を変えた比率",
+      "text": "全国平均を基準にしたい、特定の年を100にしたい、といった再計算を実額から自分でできます"
+    },
+    {
+      "strong": "検算と更新の手順（有料部分）",
+      "text": "十大費目の合計が消費支出と一致することを確かめる検算手順と、翌年以降に自分で更新するための再現手順"
+    }
+  ],
+  "sampleHeading": "データのサンプル",
+  "sampleLead": "添付ファイルの中身は次のとおりです。画像は実データの先頭部分をそのまま切り出したものです。",
+  "samples": [
+    {
+      "file": "docs/31_note記事原稿/d-kakei-category-dataset/images/sample-ratio-table.png",
+      "alt": "kakei-category-ratio-47.csv の先頭6行",
+      "caption": "1枚目は比率ファイル（kakei-category-ratio-47.csv）の先頭6行です。県コード・県名・県庁所在市・年に続いて、十大費目の47市平均比が並びます。47行で1県1行です。",
+      "uploadedUrl": "https://assets.st-note.com/img/1789877861-IPYH9SQhNyA3UmXLloKbZDfn.png",
+      "width": 4136,
+      "height": 1224
+    },
+    {
+      "file": "docs/31_note記事原稿/d-kakei-category-dataset/images/sample-timeseries-table.png",
+      "alt": "kakei-category-timeseries.csv の先頭10行",
+      "caption": "2枚目は時系列ファイル（kakei-category-timeseries.csv）の先頭10行です。年・県・費目を1行にした縦持ちで、金額は円の実額です。全部で8,460行あります。",
+      "uploadedUrl": "https://assets.st-note.com/img/1789877861-qX2MiJDSdaexWubhz3Ik7pNc.png",
+      "width": 2000,
+      "height": 1640
+    },
+    {
+      "file": "docs/31_note記事原稿/d-kakei-category-dataset/images/category-spread-range.png",
+      "alt": "十大費目ごとの最小の市と最大の市（2024年）",
+      "caption": "3枚目は、この比率CSVから十大費目ごとに最小の市と最大の市を拾って並べたものです。教育の8.7倍と食料の1.4倍が同じ物差しに乗ると、費目ごとの散らばりの違いが一目でわかります。",
+      "uploadedUrl": "https://assets.st-note.com/img/1789877862-bJWeG4QHnTofh30UYPMyR81V.png",
+      "width": 2720,
+      "height": 2192
+    }
+  ],
+  "sourceHeading": "データの出典",
+  "source": "出典：総務省統計局「家計調査」（都道府県庁所在市別・二人以上の世帯・年次、https://www.stat.go.jp/data/kakei/ ）を加工して作成。原データは政府統計の総合窓口（e-Stat）で公開されています。加工は筆者によるもので、総務省統計局が作成・公表したものではありません。",
+  "siteLink": {
+    "url": "https://stats47.jp/ranking/household-survey-education-expenditure",
+    "lead": "十大費目のうち教育費の47都道府県ランキングは、統計で見る都道府県で無料で確認できます。データセットを買う前に、どんな数字が入っているかを見ておきたい場合はこちらへ。",
+    "title": "教育支出（家計調査）の都道府県ランキング｜統計で見る都道府県",
+    "description": "二人以上の世帯の教育費を47都道府県庁所在市で順位付け。順位・金額・グラフを無料で確認できます。"
+  },
+  "siteLinkTail": "ここから先の有料部分では、データの再現手順と検算のしかた、添付ファイル3点のダウンロードを提供します。",
+  "appliedAt": "2026-09-20T04:19:29.665Z"
+}

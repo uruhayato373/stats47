@@ -1,0 +1,48 @@
+{
+  "key": "d-geo-ipss-prefecture-map",
+  "audienceHeading": "こんな人のためのデータです",
+  "audience": [
+    {
+      "strong": "都道府県の色分け地図を作る人",
+      "text": "2050年の人口増減率を、5桁の都道府県コード付きでそのまま境界データに結合したい"
+    },
+    {
+      "strong": "記事・企画資料で将来人口を引用する人",
+      "text": "表記揺れや2桁・5桁コードの混在を自分で直さず、検算済みの47行を使いたい"
+    },
+    {
+      "strong": "再現性を示す必要がある人",
+      "text": "どの一次資料のどの版から、どう加工したかを辞書と SHA-256 で示したい"
+    }
+  ],
+  "learnHeading": "このデータでわかること",
+  "learn": [
+    {
+      "strong": "47都道府県の2050年人口増減率",
+      "text": "2020年国勢調査人口を基準にした推計値（%）。東京都の+2.50%から秋田県の-41.59%まで、同じ定義で並びます"
+    },
+    {
+      "strong": "地図結合の前提が固定済み",
+      "text": "地域粒度=都道府県、地域コード=5桁、年=2050、値=2020年基準の増減率、単位=%。この5項目を確認済みで配布します"
+    },
+    {
+      "strong": "有料部分では再現と検算",
+      "text": "5ファイルの SHA-256、47行・重複・年・単位の機械検算、境界データ結合前後の保存則、市区町村データと誤認させない最終チェック"
+    }
+  ],
+  "sampleHeading": "データのサンプル",
+  "sampleLead": "添付 ZIP に入る analysis.csv の先頭部分です（値は実データそのまま）。",
+  "samples": [
+    {
+      "file": ".local/paid-landing/d-geo-ipss-prefecture-map/sample-analysis.png",
+      "alt": "analysis.csv の先頭6行",
+      "caption": "areaCode（5桁）、areaName、yearCode、yearName、value（2020年基準の増減率・%）、unit、rank の7列で47行。境界データとは areaCode で結合します。",
+      "uploadedUrl": "https://assets.st-note.com/img/1789878477-kPq0zbZ7DO8MxTdKhHcUa9o1.png",
+      "width": 1756,
+      "height": 1224
+    }
+  ],
+  "sourceHeading": "データの出典",
+  "source": "出典：国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」（https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/t-page.asp ）および総務省統計局「令和2年国勢調査」を加工して作成。2020年国勢調査人口に対する2050年推計人口の増減率を筆者が算出したもので、各機関が公表した値そのものではありません。",
+  "appliedAt": "2026-09-20T04:28:06.514Z"
+}

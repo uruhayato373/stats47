@@ -74,6 +74,9 @@ jobs:
             summary.profileWarnings !== 0 && `profileWarnings=${summary.profileWarnings}`,
             summary.pinnedArticles !== 1 && `pinned=${summary.pinnedArticles}`,
             summary.profiledArticles !== 1 && `profiled=${summary.profiledArticles}`,
+            // 有料記事の無料部分に出典・導入・サンプル画像・流入導線が揃っているか (paid_* は summary.errors にも含まれるが、
+            // Issue 本文で原因が分かるよう名前を出す。2026-09-20 に d-kakei-category-dataset で 4 欠陥同時発生)
+            summary.paidLandingErrors !== 0 && `paidLanding=${summary.paidLandingCompliant}/${summary.paidLandingApplicable} (errors=${summary.paidLandingErrors})`,
           ].filter(Boolean);
           if (failures.length) {
             console.error(`note circulation gate failed: ${failures.join(', ')}`);

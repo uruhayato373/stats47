@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1034 306" width="1034" height="306">
+<style>text{font-family:'Hiragino Sans', 'Noto Sans JP', sans-serif;}</style>
+<rect width="1034" height="306" fill="#fafafa"/>
+<text x="12" y="24" font-size="15" font-weight="700" fill="#1e293b">kakei-category-ratio-47.csv — 先頭6行</text>
+<text x="12" y="44" font-size="11" fill="#475569">2024年・二人以上の世帯・47都道府県庁所在市の単純平均 = 1.0000</text>
+<rect x="12" y="64" width="1010" height="186" fill="white" stroke="#e2e8f0"/>
+<rect x="12" y="64" width="1010" height="30" fill="#f1f5f9"/>
+<text x="18" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="start">prefCode</text>
+<text x="80" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="start">prefName</text>
+<text x="142" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="start">cityName</text>
+<text x="236" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">year</text>
+<text x="300" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">食料</text>
+<text x="364" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">住居</text>
+<text x="448" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">光熱・水道</text>
+<text x="552" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">家具・家事用品</text>
+<text x="636" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">被服及び履物</text>
+<text x="700" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">保健医療</text>
+<text x="784" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">交通・通信</text>
+<text x="848" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">教育</text>
+<text x="912" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">教養娯楽</text>
+<text x="1016" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">その他の消費支出</text>
+<line x1="12" y1="94" x2="1022" y2="94" stroke="#f1f5f9"/>
+<text x="18" y="111" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="80" y="111" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="142" y="111" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="236" y="111" font-size="11" fill="#1e293b" text-anchor="end">2024</text>
+<text x="300" y="111" font-size="11" fill="#1e293b" text-anchor="end">0.9379</text>
+<text x="364" y="111" font-size="11" fill="#1e293b" text-anchor="end">1.2661</text>
+<text x="448" y="111" font-size="11" fill="#1e293b" text-anchor="end">1.1328</text>
+<text x="552" y="111" font-size="11" fill="#1e293b" text-anchor="end">1.0854</text>
+<text x="636" y="111" font-size="11" fill="#1e293b" text-anchor="end">1.0503</text>
+<text x="700" y="111" font-size="11" fill="#1e293b" text-anchor="end">0.9643</text>
+<text x="784" y="111" font-size="11" fill="#1e293b" text-anchor="end">0.8091</text>
+<text x="848" y="111" font-size="11" fill="#1e293b" text-anchor="end">0.7983</text>
+<text x="912" y="111" font-size="11" fill="#1e293b" text-anchor="end">0.9470</text>
+<text x="1016" y="111" font-size="11" fill="#1e293b" text-anchor="end">0.8206</text>
+<rect x="12" y="120" width="1010" height="26" fill="#f8fafc"/>
+<line x1="12" y1="120" x2="1022" y2="120" stroke="#f1f5f9"/>
+<text x="18" y="137" font-size="11" fill="#1e293b" text-anchor="start">02000</text>
+<text x="80" y="137" font-size="11" fill="#1e293b" text-anchor="start">青森県</text>
+<text x="142" y="137" font-size="11" fill="#1e293b" text-anchor="start">青森市</text>
+<text x="236" y="137" font-size="11" fill="#1e293b" text-anchor="end">2024</text>
+<text x="300" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.9454</text>
+<text x="364" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.6399</text>
+<text x="448" y="137" font-size="11" fill="#1e293b" text-anchor="end">1.2788</text>
+<text x="552" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.9429</text>
+<text x="636" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.7518</text>
+<text x="700" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.8604</text>
+<text x="784" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.7771</text>
+<text x="848" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.3467</text>
+<text x="912" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.7576</text>
+<text x="1016" y="137" font-size="11" fill="#1e293b" text-anchor="end">0.8541</text>
+<line x1="12" y1="146" x2="1022" y2="146" stroke="#f1f5f9"/>
+<text x="18" y="163" font-size="11" fill="#1e293b" text-anchor="start">03000</text>
+<text x="80" y="163" font-size="11" fill="#1e293b" text-anchor="start">岩手県</text>
+<text x="142" y="163" font-size="11" fill="#1e293b" text-anchor="start">盛岡市</text>
+<text x="236" y="163" font-size="11" fill="#1e293b" text-anchor="end">2024</text>
+<text x="300" y="163" font-size="11" fill="#1e293b" text-anchor="end">0.9673</text>
+<text x="364" y="163" font-size="11" fill="#1e293b" text-anchor="end">1.4441</text>
+<text x="448" y="163" font-size="11" fill="#1e293b" text-anchor="end">1.1742</text>
+<text x="552" y="163" font-size="11" fill="#1e293b" text-anchor="end">0.9736</text>
+<text x="636" y="163" font-size="11" fill="#1e293b" text-anchor="end">1.0287</text>
+<text x="700" y="163" font-size="11" fill="#1e293b" text-anchor="end">0.9775</text>
+<text x="784" y="163" font-size="11" fill="#1e293b" text-anchor="end">1.1259</text>
+<text x="848" y="163" font-size="11" fill="#1e293b" text-anchor="end">0.6102</text>
+<text x="912" y="163" font-size="11" fill="#1e293b" text-anchor="end">0.9586</text>
+<text x="1016" y="163" font-size="11" fill="#1e293b" text-anchor="end">1.0134</text>
+<rect x="12" y="172" width="1010" height="26" fill="#f8fafc"/>
+<line x1="12" y1="172" x2="1022" y2="172" stroke="#f1f5f9"/>
+<text x="18" y="189" font-size="11" fill="#1e293b" text-anchor="start">04000</text>
+<text x="80" y="189" font-size="11" fill="#1e293b" text-anchor="start">宮城県</text>
+<text x="142" y="189" font-size="11" fill="#1e293b" text-anchor="start">仙台市</text>
+<text x="236" y="189" font-size="11" fill="#1e293b" text-anchor="end">2024</text>
+<text x="300" y="189" font-size="11" fill="#1e293b" text-anchor="end">0.9965</text>
+<text x="364" y="189" font-size="11" fill="#1e293b" text-anchor="end">1.6653</text>
+<text x="448" y="189" font-size="11" fill="#1e293b" text-anchor="end">1.0007</text>
+<text x="552" y="189" font-size="11" fill="#1e293b" text-anchor="end">0.9448</text>
+<text x="636" y="189" font-size="11" fill="#1e293b" text-anchor="end">1.0994</text>
+<text x="700" y="189" font-size="11" fill="#1e293b" text-anchor="end">0.8980</text>
+<text x="784" y="189" font-size="11" fill="#1e293b" text-anchor="end">0.9458</text>
+<text x="848" y="189" font-size="11" fill="#1e293b" text-anchor="end">1.3004</text>
+<text x="912" y="189" font-size="11" fill="#1e293b" text-anchor="end">0.9295</text>
+<text x="1016" y="189" font-size="11" fill="#1e293b" text-anchor="end">1.0498</text>
+<line x1="12" y1="198" x2="1022" y2="198" stroke="#f1f5f9"/>
+<text x="18" y="215" font-size="11" fill="#1e293b" text-anchor="start">05000</text>
+<text x="80" y="215" font-size="11" fill="#1e293b" text-anchor="start">秋田県</text>
+<text x="142" y="215" font-size="11" fill="#1e293b" text-anchor="start">秋田市</text>
+<text x="236" y="215" font-size="11" fill="#1e293b" text-anchor="end">2024</text>
+<text x="300" y="215" font-size="11" fill="#1e293b" text-anchor="end">0.9533</text>
+<text x="364" y="215" font-size="11" fill="#1e293b" text-anchor="end">0.6485</text>
+<text x="448" y="215" font-size="11" fill="#1e293b" text-anchor="end">1.2097</text>
+<text x="552" y="215" font-size="11" fill="#1e293b" text-anchor="end">1.0205</text>
+<text x="636" y="215" font-size="11" fill="#1e293b" text-anchor="end">0.7159</text>
+<text x="700" y="215" font-size="11" fill="#1e293b" text-anchor="end">0.8732</text>
+<text x="784" y="215" font-size="11" fill="#1e293b" text-anchor="end">1.0145</text>
+<text x="848" y="215" font-size="11" fill="#1e293b" text-anchor="end">0.2430</text>
+<text x="912" y="215" font-size="11" fill="#1e293b" text-anchor="end">0.8489</text>
+<text x="1016" y="215" font-size="11" fill="#1e293b" text-anchor="end">0.9066</text>
+<rect x="12" y="224" width="1010" height="26" fill="#f8fafc"/>
+<line x1="12" y1="224" x2="1022" y2="224" stroke="#f1f5f9"/>
+<text x="18" y="241" font-size="11" fill="#1e293b" text-anchor="start">06000</text>
+<text x="80" y="241" font-size="11" fill="#1e293b" text-anchor="start">山形県</text>
+<text x="142" y="241" font-size="11" fill="#1e293b" text-anchor="start">山形市</text>
+<text x="236" y="241" font-size="11" fill="#1e293b" text-anchor="end">2024</text>
+<text x="300" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.0813</text>
+<text x="364" y="241" font-size="11" fill="#1e293b" text-anchor="end">0.9180</text>
+<text x="448" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.2982</text>
+<text x="552" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.0695</text>
+<text x="636" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.0262</text>
+<text x="700" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.0149</text>
+<text x="784" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.0649</text>
+<text x="848" y="241" font-size="11" fill="#1e293b" text-anchor="end">0.8729</text>
+<text x="912" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.0751</text>
+<text x="1016" y="241" font-size="11" fill="#1e293b" text-anchor="end">1.0576</text>
+<text x="12" y="272" font-size="10.5" fill="#64748b">… 全47行 (北海道〜沖縄県)。列 = 県コード / 県名 / 県庁所在市 / 年 / 十大費目の47市平均比</text>
+<text x="1022" y="292" font-size="10" fill="#94a3b8" text-anchor="end">kakei-category-ratio-47.csv</text>
+</svg>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 548" width="680" height="548">
+<style>text{font-family:'Hiragino Sans', 'Noto Sans JP', sans-serif;}</style>
+<rect width="680" height="548" fill="#fafafa"/>
+<text x="16" y="28" font-size="17" font-weight="700" fill="#1e293b">十大費目の県間差 — 最小の市と最大の市 (2024年)</text>
+<text x="16" y="50" font-size="11.5" fill="#475569">47都道府県庁所在市の単純平均を1.00とした比率。右端は最大÷最小の倍率。添付 CSV から算出</text>
+<rect x="124" y="82" width="490" height="410" fill="white" stroke="#e2e8f0"/>
+<line x1="226.08333333333334" y1="82" x2="226.08333333333334" y2="492" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="0"/>
+<text x="226.08333333333334" y="508" font-size="10.5" fill="#64748b" text-anchor="middle">0.50</text>
+<line x1="328.1666666666667" y1="82" x2="328.1666666666667" y2="492" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="328.1666666666667" y="508" font-size="10.5" fill="#64748b" text-anchor="middle">1.00</text>
+<line x1="430.25" y1="82" x2="430.25" y2="492" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="0"/>
+<text x="430.25" y="508" font-size="10.5" fill="#64748b" text-anchor="middle">1.50</text>
+<line x1="532.3333333333334" y1="82" x2="532.3333333333334" y2="492" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="0"/>
+<text x="532.3333333333334" y="508" font-size="10.5" fill="#64748b" text-anchor="middle">2.00</text>
+<text x="328.1666666666667" y="76" font-size="10.5" fill="#64748b" text-anchor="middle">47市平均 = 1.00</text>
+<text x="114" y="116" font-size="12.5" font-weight="700" fill="#1e293b" text-anchor="end">教育</text>
+<line x1="173.6125" y1="112" x2="557.46625" y2="112" stroke="#ef4444" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+<circle cx="173.6125" cy="112" r="5" fill="white" stroke="#ef4444" stroke-width="2.5"/>
+<circle cx="557.46625" cy="112" r="5" fill="#ef4444"/>
+<text x="164.6125" y="106" font-size="10" fill="#475569" text-anchor="end">秋田市</text>
+<text x="164.6125" y="120" font-size="10" fill="#475569" text-anchor="end">0.24</text>
+<text x="566.46625" y="106" font-size="10" fill="#475569">さいたま市</text>
+<text x="566.46625" y="120" font-size="10" fill="#475569">2.12</text>
+<text x="666" y="116" font-size="12.5" font-weight="700" fill="#ef4444" text-anchor="end">×8.7</text>
+<text x="114" y="156" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">住居</text>
+<line x1="235.67916666666667" y1="152" x2="463.99875000000003" y2="152" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="235.67916666666667" cy="152" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="463.99875000000003" cy="152" r="5" fill="#3b82f6"/>
+<text x="226.67916666666667" y="146" font-size="10" fill="#475569" text-anchor="end">佐賀市</text>
+<text x="226.67916666666667" y="160" font-size="10" fill="#475569" text-anchor="end">0.55</text>
+<text x="472.99875000000003" y="146" font-size="10" fill="#475569">仙台市</text>
+<text x="472.99875000000003" y="160" font-size="10" fill="#475569">1.67</text>
+<text x="666" y="156" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×3.0</text>
+<text x="114" y="196" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">交通・通信</text>
+<line x1="258.95416666666665" y1="192" x2="410.09875" y2="192" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="258.95416666666665" cy="192" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="410.09875" cy="192" r="5" fill="#3b82f6"/>
+<text x="249.95416666666665" y="186" font-size="10" fill="#475569" text-anchor="end">大阪市</text>
+<text x="249.95416666666665" y="200" font-size="10" fill="#475569" text-anchor="end">0.66</text>
+<text x="419.09875" y="186" font-size="10" fill="#475569">宇都宮市</text>
+<text x="419.09875" y="200" font-size="10" fill="#475569">1.40</text>
+<text x="666" y="196" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×2.1</text>
+<text x="114" y="236" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">被服及び履物</text>
+<line x1="263.3641666666666" y1="232" x2="399.4616666666667" y2="232" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="263.3641666666666" cy="232" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="399.4616666666667" cy="232" r="5" fill="#3b82f6"/>
+<text x="254.36416666666662" y="226" font-size="10" fill="#475569" text-anchor="end">那覇市</text>
+<text x="254.36416666666662" y="240" font-size="10" fill="#475569" text-anchor="end">0.68</text>
+<text x="408.4616666666667" y="226" font-size="10" fill="#475569">さいたま市</text>
+<text x="408.4616666666667" y="240" font-size="10" fill="#475569">1.35</text>
+<text x="666" y="236" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×2.0</text>
+<text x="114" y="276" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">教養娯楽</text>
+<line x1="278.595" y1="272" x2="409.48625000000004" y2="272" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="278.595" cy="272" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="409.48625000000004" cy="272" r="5" fill="#3b82f6"/>
+<text x="269.595" y="266" font-size="10" fill="#475569" text-anchor="end">那覇市</text>
+<text x="269.595" y="280" font-size="10" fill="#475569" text-anchor="end">0.76</text>
+<text x="418.48625000000004" y="266" font-size="10" fill="#475569">さいたま市</text>
+<text x="418.48625000000004" y="280" font-size="10" fill="#475569">1.40</text>
+<text x="666" y="276" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×1.8</text>
+<text x="114" y="316" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">保健医療</text>
+<line x1="284.35249999999996" y1="312" x2="398.3183333333333" y2="312" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="284.35249999999996" cy="312" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="398.3183333333333" cy="312" r="5" fill="#3b82f6"/>
+<text x="275.35249999999996" y="306" font-size="10" fill="#475569" text-anchor="end">高知市</text>
+<text x="275.35249999999996" y="320" font-size="10" fill="#475569" text-anchor="end">0.79</text>
+<text x="407.3183333333333" y="306" font-size="10" fill="#475569">東京</text>
+<text x="407.3183333333333" y="320" font-size="10" fill="#475569">1.34</text>
+<text x="666" y="316" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×1.7</text>
+<text x="114" y="356" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">光熱・水道</text>
+<line x1="280.22833333333335" y1="352" x2="389.0491666666667" y2="352" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="280.22833333333335" cy="352" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="389.0491666666667" cy="352" r="5" fill="#3b82f6"/>
+<text x="271.22833333333335" y="346" font-size="10" fill="#475569" text-anchor="end">宮崎市</text>
+<text x="271.22833333333335" y="360" font-size="10" fill="#475569" text-anchor="end">0.77</text>
+<text x="398.0491666666667" y="346" font-size="10" fill="#475569">山形市</text>
+<text x="398.0491666666667" y="360" font-size="10" fill="#475569">1.30</text>
+<text x="666" y="356" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×1.7</text>
+<text x="114" y="396" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">その他の消費支出</text>
+<line x1="277.65583333333336" y1="392" x2="374.0225" y2="392" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="277.65583333333336" cy="392" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="374.0225" cy="392" r="5" fill="#3b82f6"/>
+<text x="268.65583333333336" y="386" font-size="10" fill="#475569" text-anchor="end">那覇市</text>
+<text x="268.65583333333336" y="400" font-size="10" fill="#475569" text-anchor="end">0.75</text>
+<text x="383.0225" y="386" font-size="10" fill="#475569">宇都宮市</text>
+<text x="383.0225" y="400" font-size="10" fill="#475569">1.22</text>
+<text x="666" y="396" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×1.6</text>
+<text x="114" y="436" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">家具・家事用品</text>
+<line x1="287.5170833333333" y1="432" x2="382.5975" y2="432" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="287.5170833333333" cy="432" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="382.5975" cy="432" r="5" fill="#3b82f6"/>
+<text x="278.5170833333333" y="426" font-size="10" fill="#475569" text-anchor="end">長崎市</text>
+<text x="278.5170833333333" y="440" font-size="10" fill="#475569" text-anchor="end">0.80</text>
+<text x="391.5975" y="426" font-size="10" fill="#475569">岡山市</text>
+<text x="391.5975" y="440" font-size="10" fill="#475569">1.27</text>
+<text x="666" y="436" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×1.6</text>
+<text x="114" y="476" font-size="12.5" font-weight="500" fill="#1e293b" text-anchor="end">食料</text>
+<line x1="302.56416666666667" y1="472" x2="366.71333333333337" y2="472" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="302.56416666666667" cy="472" r="5" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+<circle cx="366.71333333333337" cy="472" r="5" fill="#3b82f6"/>
+<text x="293.56416666666667" y="466" font-size="10" fill="#475569" text-anchor="end">松山市</text>
+<text x="293.56416666666667" y="480" font-size="10" fill="#475569" text-anchor="end">0.87</text>
+<text x="375.71333333333337" y="466" font-size="10" fill="#475569">東京</text>
+<text x="375.71333333333337" y="480" font-size="10" fill="#475569">1.19</text>
+<text x="666" y="476" font-size="12.5" font-weight="700" fill="#3b82f6" text-anchor="end">×1.4</text>
+<text x="16" y="534" font-size="10" fill="#94a3b8">出典: 総務省統計局「家計調査」(都道府県庁所在市別・二人以上の世帯) を加工して作成</text>
+</svg>

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-06T05:07:19.929Z",
+  "generatedAt": "2026-09-20T07:14:21.000Z",
   "source": "stats47-header-bg.png (built-in image generation) + deterministic SVG typography",
   "safeArea": {
     "width": 758,
@@ -126,6 +126,13 @@
       "height": 1006,
       "bytes": 1568154,
       "sha256": "e0827cca1dcc7bb9de0586e71cc12accb8b9d2ebfdb03bf8185d58e0bea22fd7"
+    },
+    {
+      "file": "magazine-s47-kakei-reading-1920x1006.png",
+      "width": 1920,
+      "height": 1006,
+      "bytes": 340053,
+      "sha256": "c04e9f9719a2b07f8670b385bb828cbad27f31361e9256617d227732cde097ac"
     }
   ]
 }

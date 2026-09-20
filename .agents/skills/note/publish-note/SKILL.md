@@ -336,3 +336,17 @@ node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委
 - note 記事執筆: `/write-note-section` スキル
 - note 記事編集: `/edit-note-draft` スキル
 - 自動化パターン: `.claude/agents/browser-publisher.md` の note.com セクション
+
+## 公開済み有料記事の無料部分を後から補強する (2026-09-20)
+
+出典・対象読者・わかること・サンプル画像・サイト導線を、editor を使わず PUT パッチで足す。契約は
+`.claude/rules/sns-content-standards.md` §2-7b、検査は `npm run note:circulation:audit` の `paid_*`。
+
+```bash
+node .claude/scripts/note/build-csv-sample-image.mjs --csv <csv> --out .local/paid-landing/<key>/sample-analysis.svg --rows 6
+node .claude/scripts/note/patch-note-paid-landing.mjs --slug <key>          # dry-run (所有者 API の無料部分 == 公開 API を確認)
+node .claude/scripts/note/patch-note-paid-landing.mjs --slug <key> --commit # 画像 upload → PUT → live 9 項目検証
+```
+
+spec は `.claude/scripts/note/catalog/data/paid-landing/<key>.json`。LLM に書かせた場合も、spec の数値が本文に無いと
+`findUnsupportedNumbers` が止める。

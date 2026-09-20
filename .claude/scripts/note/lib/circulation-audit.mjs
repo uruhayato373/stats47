@@ -123,6 +123,39 @@ export function extractCardUrls(body, embeddedContents = []) {
   return unique(urls);
 }
 
+// ── 有料記事の無料部分 (購入前に読める部分) の着地品質 ──
+// 2026-09-20: d-kakei-category-dataset (¥2,980) が公開 2 週で PV 2・売上 0 だった。無料部分に出典が無く
+// (統計局利用規約は出典と加工の明記を必須にしている)、対象読者・わかること・サンプル画像も無く、
+// 他記事からの流入リンクが 0 本だった。同じ欠陥を全有料記事で機械的に見つけるための検査。
+// 対象は統計データ商品 = 無料キュレーションマガジンに入っている有料記事だけ。有料マガジン (Claude Code 講座 /
+// D3 配色) の各章は「データの出典」を持たないので対象外にする (マガジン key を直書きせず isPaid で判定)。
+const PAID_SOURCE_PATTERN = /出典|総務省統計局|統計局|e-Stat|政府統計|国土数値情報|国土交通省|厚生労働省|文部科学省|農林水産省|経済産業省|環境省|国立社会保障・人口問題研究所|国勢調査|家計調査/;
+// 「この記事では〜を配布します」のような書き出しは読者像を示さないので数えない (旧 d-kakei が通ってしまった)。
+const PAID_INTRO_PATTERN = /こんな人|こんな方|向けです|向けの|わかること|できること|対象読者|次のような方|役に立つ方|使える方/;
+const PAID_PREMIUM_PRICE_JPY = 1000;
+
+export function auditPaidLanding({ article, live, expectedMagazine = null, inboundNoteLinkCount = null }) {
+  const livePaid = Number(live.price || 0) > 0;
+  const applicable = livePaid && article.vertical === "stats47-note" && expectedMagazine?.isPaid !== true;
+  if (!applicable) return { applicable: false, premium: false, checks: null, issues: [] };
+  const body = String(live.body || "");
+  const premium = Number(article.priceJpy || live.price || 0) >= PAID_PREMIUM_PRICE_JPY;
+  const checks = {
+    source: PAID_SOURCE_PATTERN.test(body),
+    intro: PAID_INTRO_PATTERN.test(body),
+    image: /<img\b/.test(body),
+    inbound: inboundNoteLinkCount === null ? null : inboundNoteLinkCount > 0,
+  };
+  const severity = premium ? "error" : "warning";
+  const issues = [];
+  // 出典は価格に関係なく必須 (無料部分だけ読む人にも出典が見える状態にする)
+  if (!checks.source) issues.push({ code: "paid_free_missing_source", severity: "error" });
+  if (!checks.intro) issues.push({ code: "paid_free_missing_intro", severity });
+  if (!checks.image) issues.push({ code: "paid_free_missing_image", severity });
+  if (checks.inbound === false) issues.push({ code: "paid_no_inbound_note_link", severity, detail: inboundNoteLinkCount });
+  return { applicable: true, premium, checks, issues };
+}
+
 export function buildArticleAudit({
   article,
   live,
@@ -130,6 +163,7 @@ export function buildArticleAudit({
   catalogNoteKeys,
   eligibleRelatedNoteKeys = new Set(),
   linkHealthByUrl = new Map(),
+  inboundNoteLinkCount = null,
 }) {
   const links = extractNavigationUrls(live.body, live.embedded_contents);
   const cardUrls = extractCardUrls(live.body, live.embedded_contents);
@@ -221,6 +255,15 @@ export function buildArticleAudit({
   if (brokenSiteLinks.length > 0) errors.push({ code: "broken_site_link", detail: brokenSiteLinks });
   if (redirectedSiteLinks.length > 0) warnings.push({ code: "redirected_site_link", detail: redirectedSiteLinks });
 
+  // フッター見出しの二重化 (2026-09-16 の商品カード一括追加で 190 本)。footer 適用時に畳むので再発は warning で捕まえる
+  const footerHeadings = (String(live.body || "").match(/次に読む<\/h2>/g) || []).length;
+  if (footerHeadings >= 2) warnings.push({ code: "duplicate_footer_heading", detail: footerHeadings });
+
+  const paidLanding = auditPaidLanding({ article, live, expectedMagazine, inboundNoteLinkCount });
+  for (const issue of paidLanding.issues) {
+    (issue.severity === "error" ? errors : warnings).push({ code: issue.code, detail: issue.detail ?? null });
+  }
+
   return {
     key: article.key,
     noteKey: live.key,
@@ -242,6 +285,10 @@ export function buildArticleAudit({
     expectedMagazineKey: expectedMagazineNoteKey,
     isPinned: Boolean(live.is_pinned),
     isProfiled: Boolean(live.is_profiled),
+    inboundNoteLinkCount,
+    paidLanding: paidLanding.applicable
+      ? { premium: paidLanding.premium, checks: paidLanding.checks, issueCodes: paidLanding.issues.map((issue) => issue.code) }
+      : null,
     errors,
     warnings,
   };
@@ -266,6 +313,16 @@ export function summarizeArticleAudits(articles) {
     ),
     pinnedArticles: countWith((article) => article.isPinned),
     profiledArticles: countWith((article) => article.isProfiled),
+    paidLandingApplicable: countWith((article) => Boolean(article.paidLanding)),
+    paidLandingCompliant: countWith((article) => article.paidLanding && article.paidLanding.issueCodes.length === 0),
+    paidLandingErrors: articles.reduce(
+      (sum, article) => sum + article.errors.filter((issue) => issue.code.startsWith("paid_")).length,
+      0,
+    ),
+    paidLandingWarnings: articles.reduce(
+      (sum, article) => sum + article.warnings.filter((issue) => issue.code.startsWith("paid_")).length,
+      0,
+    ),
   };
 }
 
