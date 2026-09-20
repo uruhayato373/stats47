@@ -179,6 +179,12 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    **アフィリエイトの週次観測**: `.claude/state/ads/ga4-affiliate-history.csv` と
    `.claude/state/ads/affiliate-operations-latest.json` を見る。評価の主指標は
    確定収益 / 1,000 viewable impression で、クリック数だけで勝敗を決めない。
+
+   **計測の健全性は機械が判定する**。`node .claude/scripts/metrics/check-revenue-guards.mjs`
+   を実行し、exit 0 なら健全。破れていたら markdown で理由が出る（観測の鮮度、意図軸が
+   未解決な表示の比率）。週次 cron `fetch-metrics-weekly.yml` が同じ判定を行い、破れていれば
+   `revenue-alert` ラベルの Issue を起票・更新し、回復したら自動クローズする。
+   閾値の SSOT は `.claude/config/revenue-guards.json` で、スクリプトへ直書きしない。
    - 候補は最大3件・**AdSense 実験の採用は最大1件/週・active WIP≤2**。1実験1レバーのみ。
    - CPC は**公式 `cost_per_click`** を使う。`earnings_per_click_legacy`（旧 cpc 列）は公式 CPC ではない。
    - unit/format/placement の比較は `IMPRESSIONS_RPM`（unit の Page RPM は分母0で無意味）。

@@ -1,0 +1,18 @@
+{
+  "$comment": "収益計測の健全性ガードの閾値 SSOT。check-revenue-guards.mjs だけがこれを読む。閾値をスクリプトへ直書きしない (effect-verdict/thresholds.mjs と同じ規律)。",
+  "version": "1.0.0",
+  "guards": {
+    "affiliateObservationMaxAgeDays": {
+      "value": 10,
+      "why": "週次 cron は日曜に回る。2 週続けて落ちたら異常。2026-08-28〜09-20 に 3 週間気づかなかった事故の再発防止"
+    },
+    "unresolvedVerticalShareMax": {
+      "value": 0.05,
+      "why": "affiliate_vertical が other / 未解決の表示比率の上限。2026-09-20 の是正前は 0.29 だった"
+    },
+    "impressionsPerPageviewMax": {
+      "value": 0.8,
+      "why": "表示 / PV の上限。枠の増殖検知。2026-08-10〜09-06 実測は 0.76 で、これ自体が多すぎる水準"
+    }
+  }
+}
