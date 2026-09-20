@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "week": "2026-W38",
-  "decidedAt": "2026-09-20T07:17:25.083Z",
+  "decidedAt": "2026-09-20T14:32:48.937Z",
   "thresholdsVersion": "1.0.0",
   "thresholdsPath": ".claude/scripts/lib/effect-verdict/thresholds.mjs",
   "note": "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",
