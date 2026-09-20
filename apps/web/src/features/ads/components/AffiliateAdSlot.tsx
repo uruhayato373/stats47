@@ -91,7 +91,7 @@ export async function AffiliateAdSlot({
       return (
         <VariantAdSlot
           variants={eligibleVariants}
-          category={affiliateCategory ?? "other"}
+          pageVertical={affiliateCategory ?? "other"}
           position={trackingPosition ?? "ranking-sidebar"}
         />
       );

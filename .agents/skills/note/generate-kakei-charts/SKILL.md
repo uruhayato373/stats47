@@ -156,3 +156,17 @@ node .claude/scripts/note/update-published-navigation.mjs --slug $S --commit    
 - 根拠 3 枚の PNG は SVG から再生成可能なので git に追跡しない (asset policy)。R2 復元後は svg-to-png で作り直す。
 - 根拠ランキング2枚の note 用 canonical は `data/*-prefecture-rankings-ig.svg` (1080x1350)。横長の通常版はブログ用で、note の `images/` へはコピーしない。
 - 商品カード (Kindle) は `/products/<slug>` の固有 OGP (`app/products/<slug>/ogp/ogp.png`、`generate-ogp-images.ts --type products`) が前提。
+
+## D 記事 (有料データセット `d-kakei-category-dataset`) のサンプル画像と更新 (2026-09-20)
+
+無料部分に置く「データのサンプル」3 枚 (比率 CSV 先頭 6 行 / 時系列 CSV 先頭 10 行 / 十大費目の最小〜最大レンジ) は
+添付する実 CSV から決定的に生成する。本文の数字 (8.7 倍等) と同じファイル由来なので手書きしない。
+
+```bash
+node .claude/scripts/note/build-kakei-dataset-sample-images.mjs            # images/*.svg + *.png (svg-to-png.cjs)
+STOP_BEFORE_COMMIT=1 bash .claude/scripts/note/publish-kakei-paid-update.sh # 有料記事の本文+画像+添付3件を差し替え、更新直前で停止
+bash .claude/scripts/note/publish-kakei-paid-update.sh                      # 「更新する」まで実行 (価格 2980 / 有料ライン / 添付 3 件 / 非露出を検証)
+node .claude/scripts/note/update-published-navigation.mjs --magazine s47-kakei-reading --commit  # 無料 53 本の末尾に dataset カード
+```
+
+`publish-kakei-update.sh` は無料専用 (is_paid で停止) なので有料記事には使わない。

@@ -1,0 +1,48 @@
+{
+  "key": "d-geo-flood-population-mesh",
+  "audienceHeading": "こんな人のためのデータです",
+  "audience": [
+    {
+      "strong": "防災・都市計画・住宅分野の資料を作る人",
+      "text": "「浸水想定区域に 2050 年時点でどれだけの人口が残るか」を 47 都道府県で同じ定義で比べたい"
+    },
+    {
+      "strong": "GIS の空間結合を自分で再現したい人",
+      "text": "1km 人口メッシュの中心点包含判定を、入力の版・件数・保存則まで追って確かめたい"
+    },
+    {
+      "strong": "記事・研究で数値を引用する人",
+      "text": "比率・人数・メッシュ数の 3 つが別の問いであることを踏まえ、出典と算式を示して使いたい"
+    }
+  ],
+  "learnHeading": "このデータでわかること",
+  "learn": [
+    {
+      "strong": "47都道府県 × 5指標",
+      "text": "2050年浸水想定区域人口比率、2020年同比率、2050年区域内人口、2050年人口増減率、区域内メッシュ数"
+    },
+    {
+      "strong": "どの県で比率と人数がずれるか",
+      "text": "新潟県は比率62.1%で947,140人、東京都は45.9%で6,603,525人。分母が違うので、比率と人数を別々に読めます"
+    },
+    {
+      "strong": "有料部分では再現手順",
+      "text": "入力201ファイルの取得と照合、中心点包含判定、県別途中 artifact、47県 aggregate、保存則監査までのコードと SHA-256"
+    }
+  ],
+  "sampleHeading": "データのサンプル",
+  "sampleLead": "添付 ZIP に入る analysis.csv の先頭部分です（values 列の JSON を列に展開して表示。値は実データそのまま）。",
+  "samples": [
+    {
+      "file": ".local/paid-landing/d-geo-flood-population-mesh/sample-analysis.png",
+      "alt": "analysis.csv の先頭6行",
+      "caption": "areaCode、areaName に続き、values 列に5指標（floodExposureShare2050 / floodExposureShare2020 / exposedPopulation2050 / populationChangeRate / exposedMeshCount）が JSON で入り、rank は2050年比率の表示順です。定義は同梱の DATA-DICTIONARY.md にあります。",
+      "uploadedUrl": "https://assets.st-note.com/img/1789878486-au1N5Bj3Em6oYZWQVtzFATly.png",
+      "width": 3764,
+      "height": 1224
+    }
+  ],
+  "sourceHeading": "データの出典",
+  "source": "出典：国土交通省「1kmメッシュ別将来推計人口（R6国政局推計）」（国土数値情報 mesh1000r6・version 24）および国土交通省「洪水浸水想定区域（1次メッシュ単位・2025年度）」（国土数値情報 A31b・version 25）を加工して作成。想定最大規模の区域とメッシュ中心点の包含判定は筆者によるもので、国土交通省が公表した値そのものではありません。",
+  "appliedAt": "2026-09-20T04:28:16.066Z"
+}

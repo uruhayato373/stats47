@@ -3019,7 +3019,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nda72a0bed2c4",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-aichi",
-    stats47Targets: ["/blog/aichi-food-culture", "/areas/23000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-gunma",
   },
   {
@@ -3033,7 +3033,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n85831c0c47aa",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-aomori",
-    stats47Targets: ["/blog/aomori-food-culture", "/areas/02000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-akita",
   },
   {
@@ -3047,7 +3047,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n39016e5f0002",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-hokkaido",
-    stats47Targets: ["/blog/hokkaido-food-culture", "/areas/01000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-mie",
   },
   {
@@ -3061,7 +3061,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0be24c40b88d",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-hiroshima",
-    stats47Targets: ["/blog/hiroshima-food-culture", "/areas/34000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-toyama",
   },
   {
@@ -3075,7 +3075,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5e9502c6507c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-akita",
-    stats47Targets: ["/blog/akita-food-culture", "/areas/05000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-aomori",
   },
   {
@@ -3089,7 +3089,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1d5481680c03",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-chiba",
-    stats47Targets: ["/blog/chiba-food-culture", "/areas/12000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokyo",
   },
   {
@@ -3103,7 +3103,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb627534c8b66",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ehime",
-    stats47Targets: ["/blog/ehime-food-culture", "/areas/38000"],
+    stats47Targets: ["/ranking/culture-recreation-expenditure-ratio-multi-person-households", "/ranking/travel-participation-rate-overnight", "/ranking/consumer-price-difference-index-culture-recreation"],
     nextBestArticle: "a-kakei-toyama",
   },
   {
@@ -3117,7 +3117,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n18bb5a58060c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukui",
-    stats47Targets: ["/blog/fukui-food-culture", "/areas/18000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-shizuoka",
   },
   {
@@ -3131,7 +3131,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb7cfd81af156",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukuoka",
-    stats47Targets: ["/blog/fukuoka-food-culture", "/areas/40000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-hyogo",
   },
   {
@@ -3145,7 +3145,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n4c363c356b63",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukushima",
-    stats47Targets: ["/blog/fukushima-food-culture", "/areas/07000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-gifu",
   },
   {
@@ -3159,7 +3159,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n6136c0f13156",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-gifu",
-    stats47Targets: ["/blog/gifu-food-culture", "/areas/21000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukushima",
   },
   {
@@ -3173,7 +3173,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1b9bf465327d",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-gunma",
-    stats47Targets: ["/blog/gunma-food-culture", "/areas/10000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukushima",
   },
   {
@@ -3187,7 +3187,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n6f5ab18ba6ff",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-hyogo",
-    stats47Targets: ["/blog/hyogo-food-culture", "/areas/28000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-osaka",
   },
   {
@@ -3201,7 +3201,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n65d95575f7a5",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ibaraki",
-    stats47Targets: ["/blog/ibaraki-food-culture", "/areas/08000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ishikawa",
   },
   {
@@ -3215,7 +3215,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ndf2afaef16c0",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ishikawa",
-    stats47Targets: ["/blog/ishikawa-food-culture", "/areas/17000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ibaraki",
   },
   {
@@ -3229,7 +3229,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na3020a08cef7",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-iwate",
-    stats47Targets: ["/blog/iwate-food-culture", "/areas/03000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-tottori",
   },
   {
@@ -3243,7 +3243,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne69b740f702e",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kagawa",
-    stats47Targets: ["/blog/kagawa-food-culture", "/areas/37000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-iwate",
   },
   {
@@ -3257,7 +3257,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n555435ada7ed",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kagoshima",
-    stats47Targets: ["/blog/kagoshima-food-culture", "/areas/46000"],
+    stats47Targets: ["/ranking/furniture-household-goods-expenditure-ratio-multi-person-households", "/ranking/floor-area-per-dwelling-owner", "/ranking/consumer-price-difference-index-furniture-household"],
     nextBestArticle: "a-kakei-okayama",
   },
   {
@@ -3271,7 +3271,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd0326279977a",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kanagawa",
-    stats47Targets: ["/blog/kanagawa-food-culture", "/areas/14000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokushima",
   },
   {
@@ -3285,7 +3285,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n29417de32c83",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kochi",
-    stats47Targets: ["/blog/kochi-food-culture", "/areas/39000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-tottori",
   },
   {
@@ -3299,7 +3299,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7e98a46bf791",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kumamoto",
-    stats47Targets: ["/blog/kumamoto-food-culture", "/areas/43000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokushima",
   },
   {
@@ -3313,7 +3313,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2a18f8e7098c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kyoto",
-    stats47Targets: ["/blog/kyoto-food-culture", "/areas/26000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kumamoto",
   },
   {
@@ -3327,7 +3327,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n8113876eaeab",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-mie",
-    stats47Targets: ["/blog/mie-food-culture", "/areas/24000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-hokkaido",
   },
   {
@@ -3341,7 +3341,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb479aff3cf05",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-miyagi",
-    stats47Targets: ["/blog/miyagi-food-culture", "/areas/04000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-kagawa",
   },
   {
@@ -3355,7 +3355,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7f0be4fef37c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-miyazaki",
-    stats47Targets: ["/blog/miyazaki-food-culture", "/areas/45000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagano",
   },
   {
@@ -3369,7 +3369,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb6061a164201",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nagano",
-    stats47Targets: ["/blog/nagano-food-culture", "/areas/20000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-yamaguchi",
   },
   {
@@ -3383,7 +3383,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd547ff50cbe6",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nagasaki",
-    stats47Targets: ["/blog/nagasaki-food-culture", "/areas/42000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-wakayama",
   },
   {
@@ -3397,7 +3397,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n366d898d8107",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nara",
-    stats47Targets: ["/blog/nara-food-culture", "/areas/29000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kanagawa",
   },
   {
@@ -3411,7 +3411,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ndd0bb1c14aa4",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-niigata",
-    stats47Targets: ["/blog/niigata-food-culture", "/areas/15000"],
+    stats47Targets: ["/ranking/healthcare-expenditure-ratio-multi-person-households", "/ranking/physicians-in-medical-facilities-per-100k", "/ranking/ratio-65-plus"],
     nextBestArticle: "a-kakei-fukuoka",
   },
   {
@@ -3425,7 +3425,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n37ab621d01ad",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-oita",
-    stats47Targets: ["/blog/oita-food-culture", "/areas/44000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ibaraki",
   },
   {
@@ -3439,7 +3439,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne788feae75bf",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-okayama",
-    stats47Targets: ["/blog/okayama-food-culture", "/areas/33000"],
+    stats47Targets: ["/ranking/furniture-household-goods-expenditure-ratio-multi-person-households", "/ranking/floor-area-per-dwelling-owner", "/ranking/consumer-price-difference-index-furniture-household"],
     nextBestArticle: "a-kakei-kagoshima",
   },
   {
@@ -3453,7 +3453,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n757284230786",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-okinawa",
-    stats47Targets: ["/blog/okinawa-food-culture", "/areas/47000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukui",
   },
   {
@@ -3467,7 +3467,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7ac1079b6f20",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-osaka",
-    stats47Targets: ["/blog/osaka-food-culture", "/areas/27000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-hyogo",
   },
   {
@@ -3481,7 +3481,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1972caf5203d",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-saga",
-    stats47Targets: ["/blog/saga-food-culture", "/areas/41000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-gifu",
   },
   {
@@ -3495,7 +3495,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne760e2866251",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-saitama",
-    stats47Targets: ["/blog/saitama-food-culture", "/areas/11000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokyo",
   },
   {
@@ -3509,7 +3509,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne5569b417135",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shiga",
-    stats47Targets: ["/blog/shiga-food-culture", "/areas/25000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kyoto",
   },
   {
@@ -3523,7 +3523,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n75d68c2bb7e9",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shimane",
-    stats47Targets: ["/blog/shimane-food-culture", "/areas/32000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagasaki",
   },
   {
@@ -3537,7 +3537,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n35ce2a1b9248",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shizuoka",
-    stats47Targets: ["/blog/shizuoka-food-culture", "/areas/22000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukui",
   },
   {
@@ -3551,7 +3551,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0fd0305a6b8c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tochigi",
-    stats47Targets: ["/blog/tochigi-food-culture", "/areas/09000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ishikawa",
   },
   {
@@ -3565,7 +3565,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne2abc0fc7530",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tokushima",
-    stats47Targets: ["/blog/tokushima-food-culture", "/areas/36000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kanagawa",
   },
   {
@@ -3579,7 +3579,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n9d384a674462",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tokyo",
-    stats47Targets: ["/blog/tokyo-food-culture", "/areas/13000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-saitama",
   },
   {
@@ -3593,7 +3593,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n24d6b689079d",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tottori",
-    stats47Targets: ["/blog/tottori-food-culture", "/areas/31000"],
+    stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-kochi",
   },
   {
@@ -3607,7 +3607,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n13bca568c98a",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-toyama",
-    stats47Targets: ["/blog/toyama-food-culture", "/areas/16000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-hiroshima",
   },
   {
@@ -3621,7 +3621,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncc56ff8990d0",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-wakayama",
-    stats47Targets: ["/blog/wakayama-food-culture", "/areas/30000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagasaki",
   },
   {
@@ -3635,7 +3635,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na3d645a7d50c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamagata",
-    stats47Targets: ["/blog/yamagata-food-culture", "/areas/06000"],
+    stats47Targets: ["/ranking/utilities-expenditure-ratio-multi-person-households", "/ranking/average-temperature", "/ranking/maximum-snow-depth"],
     nextBestArticle: "a-kakei-shiga",
   },
   {
@@ -3649,7 +3649,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n88dde65e0774",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamaguchi",
-    stats47Targets: ["/blog/yamaguchi-food-culture", "/areas/35000"],
+    stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagano",
   },
   {
@@ -3663,7 +3663,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3416a225e0c6",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamanashi",
-    stats47Targets: ["/blog/yamanashi-food-culture", "/areas/19000"],
+    stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-oita",
   },
   {
@@ -3782,6 +3782,6 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na416c57e461c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/d-kakei-category-dataset",
-    stats47Targets: ["/areas/01000", "/blog/hokkaido-food-culture"],
+    stats47Targets: ["/ranking/household-survey-education-expenditure", "/areas"],
   },
 ];

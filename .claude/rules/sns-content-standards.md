@@ -199,6 +199,32 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
   ただし note.com の spam 検知を避けるため、**同一セッションでの大量連続投稿は間隔を空ける**
   (旧「月 1-2 本」は spam 回避目的の保守値だった。上限撤廃後も「一気に数十本」は分散させる)。
 
+### 2-7b. note 有料記事 (統計データ商品) の無料部分 — 着地契約 (2026-09-20)
+
+`d-kakei-category-dataset` (¥2,980) が公開 2 週で PV 2・売上 0 だった原因は「無料部分に買う判断材料が無い」こと。
+統計データを売る有料記事 (vertical `stats47-note`・講座マガジン以外) は、**購入前に読める無料部分**に次の 4 点を必ず置く。
+機械検査は `audit-note-circulation.mjs` の `paid_*` (週次 `note-circulation-audit-weekly.yml` で gate、¥1,000 以上は error)。
+
+| 要素 | 置き方 | 検査 |
+|---|---|---|
+| 出典 | 統計局の記載形式「出典：総務省統計局「◯◯調査」（URL）を加工して作成」を無料側に書く。有料側だけに置かない (無料部分の数値も加工値なので利用規約上の記載義務は無料側に生じる) | `paid_free_missing_source` (価格を問わず error) |
+| 対象読者・わかること | 「こんな人のためのデータです」「このデータでわかること」を見出し付きで各 3 点以上 | `paid_free_missing_intro` |
+| サンプル画像 | 添付ファイルの先頭行や集計図を実データから生成した画像で見せる (手書きしない。kakei は `build-kakei-dataset-sample-images.mjs`) | `paid_free_missing_image` |
+| 流入導線 | 同マガジンの無料記事の末尾カード (`magazines.ts` の `datasetArticles`) と note マガジン所属で、他記事からのリンクを 1 本以上持つ | `paid_no_inbound_note_link` |
+
+**既存の有料記事へ後から足すときは editor を使わない。** `patch-note-paid-landing.mjs` が公開版の本文 HTML を所有者 API から取り、
+無料部分だけを組み直して PUT に差し込む (添付 figure と有料本文は温存、画像は presigned S3 post で API アップロード)。
+記事ごとの文言は `catalog/data/paid-landing/<key>.json` (spec) に置き、spec の数値が本文に無ければ止まる。
+
+```bash
+node .claude/scripts/note/build-csv-sample-image.mjs --csv <analysis.csv> --out .local/paid-landing/<key>/sample-analysis.svg --rows 6 [--expand-json values --keys a,b]
+node .claude/scripts/note/patch-note-paid-landing.mjs --slug <key>            # dry-run
+node .claude/scripts/note/patch-note-paid-landing.mjs --all --commit          # spec を持つ全記事を更新 + live 検証
+```
+
+添付を再アップロードする editor 経路 (`publish-kakei-paid-update.sh`) は本文全体を作り直すときだけ使う。note の
+**添付アップロード 1 日 10 回**制限に掛かるので dry run を繰り返さず、ゲートをスクリプト内に置いて 1 回で通す。
+
 ### 2-8. 角度 × カテゴリ相性表 (★SSOT・旧 post-x-6angles/reference から吸収)
 
 ランキングの categoryKey (17 軸) ごとに、どの切り口が効くかの早見表。`select-candidates.cjs` が

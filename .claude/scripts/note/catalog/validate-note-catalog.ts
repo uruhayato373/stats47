@@ -73,6 +73,12 @@ for (const magazine of NOTE_MAGAZINES) {
   }
 }
 
+// 0. magazine key 重複 (update-published-navigation.mjs は new Map で後勝ちになり、
+//    productTarget / description が黙って入れ替わる。2026-09-20 に s47-kakei-reading で実測)
+const magazineSeen = new Map<string, number>();
+for (const m of NOTE_MAGAZINES) magazineSeen.set(m.key, (magazineSeen.get(m.key) || 0) + 1);
+for (const [key, n] of magazineSeen) if (n > 1) errors.push(`magazine key 重複: "${key}" が ${n} 回`);
+
 // 1. key 重複 (vertical 横断で一意であること)
 const seen = new Map<string, number>();
 for (const a of NOTE_ARTICLES) seen.set(a.key, (seen.get(a.key) || 0) + 1);

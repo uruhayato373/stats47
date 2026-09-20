@@ -11,6 +11,8 @@
  *   node .claude/scripts/note/update-published-navigation.mjs --all --commit
  *   node .claude/scripts/note/update-published-navigation.mjs --products [--commit]
  *   node .claude/scripts/note/update-published-navigation.mjs --products --check
+ *   node .claude/scripts/note/update-published-navigation.mjs --magazine s47-kakei-reading [--commit]
+ *     (そのマガジンの無料記事だけに footer を適用。magazine.datasetArticle の有料記事カードもここで付く)
  */
 
 import { execFileSync } from "node:child_process";
@@ -23,6 +25,7 @@ import {
   applyVisibleNavigationBeforeSeparator,
   buildNoteProductCardUrl,
   canonicalizeNoteEditorBody,
+  collapseDuplicateFooterHeadings,
   resolveProductCardText,
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
@@ -41,12 +44,15 @@ function parseArgs(argv) {
   const allFree = argv.includes("--all-free") || argv.includes("--all");
   const repairRedirects = argv.includes("--repair-redirects") || argv.includes("--all");
   const products = argv.includes("--products");
+  const magazineIndex = argv.indexOf("--magazine");
+  const magazine = magazineIndex >= 0 ? argv[magazineIndex + 1] : null;
+  if (magazineIndex >= 0 && !magazine) throw new Error("--magazine <key> を指定してください");
   const check = argv.includes("--check");
   if (check && !products) throw new Error("--check は --products と同時に指定してください");
   if (slug && (allPlanned || allFree)) {
     throw new Error("--slug と --all-planned/--all-free/--all は同時指定できません");
   }
-  if (argv.includes("--commit") && !slug && !allPlanned && !allFree && !repairRedirects && !products) {
+  if (argv.includes("--commit") && !slug && !allPlanned && !allFree && !repairRedirects && !products && !magazine) {
     throw new Error("書き込み時は --slug <key> または一括オプションを指定してください");
   }
   return {
@@ -55,6 +61,7 @@ function parseArgs(argv) {
     allFree,
     repairRedirects,
     products,
+    magazine,
     check,
     commit: argv.includes("--commit"),
   };
@@ -125,6 +132,7 @@ function snapshot(note) {
       ? note.hashtag_notes.map((item) => item?.hashtag?.name).filter(Boolean)
       : [],
     hasDraft: Boolean(note.has_draft),
+    embeddedContents: Array.isArray(note.embedded_contents) ? note.embedded_contents : null,
     body: String(note.body || ""),
     bodySignature: fnv1a(note.body || ""),
   };
@@ -202,6 +210,45 @@ function auditRemediation() {
   }
 }
 
+/**
+ * 無料記事 article の末尾に載せる同マガジンの有料データ商品を選ぶ (決定的)。
+ *  - 商品 (価格降順・key 昇順) ごとに、無料記事 (key 昇順) を回しながら最大 INBOUND_TARGET 本へ割り当てる
+ *  - 無料記事 1 本に載せるカードは MAX_CARDS_PER_ARTICLE 枚まで (満杯の記事は飛ばす)
+ *  73 本の無料記事に ¥200 の CSV カードを全部載せる、7 商品を 1 本に積む、の両方を避けつつ全商品に流入を作る。
+ */
+export const DATASET_INBOUND_TARGET = 5;
+export const DATASET_MAX_CARDS_PER_ARTICLE = 3;
+export function chooseDatasetArticles(article, source) {
+  const free = source.articles
+    .filter((candidate) => candidate.magazine === article.magazine && !candidate.isPaid && candidate.noteUrl)
+    .map((candidate) => candidate.key).sort();
+  const paid = source.articles
+    .filter((candidate) => candidate.magazine === article.magazine && candidate.isPaid && candidate.noteUrl)
+    .sort((a, b) => (Number(b.priceJpy || 0) - Number(a.priceJpy || 0)) || a.key.localeCompare(b.key));
+  if (paid.length === 0 || free.length === 0) return [];
+  const load = new Map(free.map((key) => [key, []]));
+  const count = new Map(paid.map((product) => [product.key, 0]));
+  let cursor = 0;
+  const place = (product) => {
+    for (let step = 0; step < free.length; step += 1) {
+      const key = free[(cursor + step) % free.length];
+      const cards = load.get(key);
+      if (cards.length >= DATASET_MAX_CARDS_PER_ARTICLE || cards.includes(product)) continue;
+      cards.push(product);
+      count.set(product.key, count.get(product.key) + 1);
+      cursor = (cursor + step + 1) % free.length;
+      return true;
+    }
+    return false;
+  };
+  // 第 1 巡: 全商品に流入 1 本を保証する。第 2 巡以降: 空きがある限り目標本数まで増やす
+  for (const product of paid) place(product);
+  for (let round = 1; round < Math.min(DATASET_INBOUND_TARGET, free.length); round += 1) {
+    for (const product of paid) if (count.get(product.key) < Math.min(DATASET_INBOUND_TARGET, free.length)) place(product);
+  }
+  return load.get(article.key) || [];
+}
+
 export function buildPlans(source, views, options) {
   const articles = new Map(source.articles.map((article) => [article.key, article]));
   const magazines = new Map(source.magazines.map((magazine) => [magazine.key, magazine]));
@@ -213,15 +260,22 @@ export function buildPlans(source, views, options) {
         || article.publishedLinkRepairs?.length
         || (options.slug === article.key && !article.isPaid)
         || (options.allFree && !article.isPaid)
+        || (options.magazine && article.magazine === options.magazine && !article.isPaid && Boolean(article.noteUrl))
         || (options.products && !article.isPaid && Boolean(magazines.get(article.magazine)?.productTarget))
         || (options.repairRedirects && (liveRepair?.forceNormalizeLegacy || liveRepair?.repairs.length));
     })
     .map((article) => {
-      const includeFooter = (options.allFree || options.slug === article.key) && !article.isPaid
+      const includeFooter = (options.allFree || options.slug === article.key || options.magazine === article.magazine)
+        && !article.isPaid
         || Boolean(article.nextBestArticle);
       const next = includeFooter ? chooseRelatedArticle(article, source, views) : null;
       const magazineRecord = magazines.get(article.magazine);
       const magazine = includeFooter ? magazineRecord : null;
+      // 同じ無料マガジンに入っている有料データ商品へのカード。手書きリストを持たず catalog から導出する
+      // (2026-09-20: 38 商品のうち 23 本が他記事からの流入 0 だった)。有料記事自身には付けない。
+      const datasets = includeFooter && !article.isPaid && magazineRecord && !magazineRecord.isPaid
+        ? chooseDatasetArticles(article, source)
+        : [];
       const productTarget = options.products && !article.isPaid
         ? magazineRecord?.productTarget || null
         : null;
@@ -280,6 +334,11 @@ export function buildPlans(source, views, options) {
               productUrl,
               productTitle: productCardText?.title ?? null,
               productDescription: productCardText?.description ?? null,
+              datasets: datasets.map((dataset) => ({
+                noteUrl: dataset.noteUrl,
+                noteKey: noteKeyFromUrl(dataset.noteUrl),
+                lead: `「${dataset.title}」で、この記事の元データを手元で開ける形で配布しています。`,
+              })),
             }
           : null,
       };
@@ -298,6 +357,8 @@ function applyPlanBody(body, plan) {
         addedMagazine: false,
         addedSite: false,
         addedProduct: false,
+        addedDataset: false,
+        dedupedFooterHeading: false,
       };
   return {
     body: navigation.body,
@@ -307,6 +368,8 @@ function applyPlanBody(body, plan) {
     addedMagazine: navigation.addedMagazine,
     addedSite: navigation.addedSite,
     addedProduct: navigation.addedProduct,
+    addedDataset: navigation.addedDataset,
+    dedupedFooterHeading: navigation.dedupedFooterHeading,
     repairs: repaired.repairs,
   };
 }
@@ -530,11 +593,14 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     let live;
     for (let attempt = 0; attempt < 5; attempt += 1) {
       live = snapshot(await fetchNote(noteKey, 5, ctx.request));
+      // 検証は「この run で実際に足したカード」だけを見る。次の 1 本は views で選び直されるため、既に別記事への
+      // 深掘りカードがある本文では追加されず、plan の URL は本文に無いのが正しい (2026-09-20 に 3 本連続 FAIL で実測)。
       const footerOk = !plan.footer || (
-        (!plan.footer.nextNoteUrl || live.body.includes(plan.footer.nextNoteUrl))
-        && (!plan.footer.magazineUrl || live.body.includes(plan.footer.magazineUrl))
+        (!application.addedNextNote || live.body.includes(plan.footer.nextNoteUrl))
+        && (!application.addedMagazine || live.body.includes(plan.footer.magazineUrl))
         && (!application.addedSite || live.body.includes(plan.footer.siteUrl))
         && (!application.addedProduct || live.body.includes(plan.footer.productUrl))
+        && (plan.footer.datasets || []).every((dataset) => live.body.includes(dataset.noteUrl))
       );
       const repairsOk = plan.repairs.every(
         (repair) => repair.mode === "regenerate-card"
@@ -548,10 +614,11 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     if (live.price !== source.price || live.separator !== expectedSeparator) throw new Error("価格または有料境界が変化");
     if (live.hashtagCount !== before.hashtagCount) throw new Error(`タグ数が変化: ${before.hashtagCount} -> ${live.hashtagCount}`);
     if (plan.footer && (
-      (plan.footer.nextNoteUrl && !live.body.includes(plan.footer.nextNoteUrl))
-      || (plan.footer.magazineUrl && !live.body.includes(plan.footer.magazineUrl))
+      (application.addedNextNote && !live.body.includes(plan.footer.nextNoteUrl))
+      || (application.addedMagazine && !live.body.includes(plan.footer.magazineUrl))
       || (application.addedSite && !live.body.includes(plan.footer.siteUrl))
       || (application.addedProduct && !live.body.includes(plan.footer.productUrl))
+      || (plan.footer.datasets || []).some((dataset) => !live.body.includes(dataset.noteUrl))
     )) {
       throw new Error(`更新後本文で回遊URLを確認できません: api=${JSON.stringify(patch)}`);
     }
@@ -591,6 +658,8 @@ async function main() {
   const views = latestViews();
   let plans = buildPlans(source, views, options);
   if (options.slug) plans = plans.filter((plan) => plan.article.key === options.slug);
+  // --magazine は対象をそのマガジンの記事に限定する (nextBestArticle 由来の他マガジン plan を混ぜない)。
+  if (options.magazine) plans = plans.filter((plan) => plan.article.magazine === options.magazine);
   if (options.slug && plans.length !== 1) throw new Error(`navigation plan が見つかりません: ${options.slug}`);
 
   const report = {
@@ -624,6 +693,7 @@ async function main() {
       magazineUrl: plan.footer?.magazineUrl ?? null,
       siteUrl: plan.footer?.siteUrl ?? null,
       productUrl: plan.footer?.productUrl ?? null,
+      datasetNoteUrls: (plan.footer?.datasets || []).map((dataset) => dataset.noteUrl),
       linkRepairs: plan.repairs,
       forceNormalizeLegacy: plan.forceNormalizeLegacy,
       before: {
@@ -638,8 +708,38 @@ async function main() {
       wouldAddMagazine: application.addedMagazine,
       wouldAddSite: application.addedSite,
       wouldAddProduct: application.addedProduct,
+      wouldAddDataset: application.addedDataset,
+      wouldDedupeFooterHeading: application.dedupedFooterHeading,
       wouldNormalizeLegacyLinks: application.normalizedLegacyLinks,
     };
+    if (application.addedSite) {
+      // 「サイトカードが無い」判定の根拠を残す (2026-09-20: CI だけ 22 本で AddSite になり、ローカルでは 0 本)
+      const body = before.body;
+      const at = body.search(/stats47\.jp/);
+      const repairedResult = applyPublishedLinkRepairs(body, plan.repairs);
+      const repairedBody = repairedResult.body;
+      const navigation = applyNavigationFooter(repairedBody, plan.footer);
+      const linkAttr = /\b(?:href|data-src)="https?:\/\/(?:www\.)?stats47\.jp(?:[\/"?#]|$)/i;
+      item.stats47Diagnostics = {
+        refs: (body.match(/stats47\.jp/g) || []).length,
+        sample: at >= 0 ? body.slice(Math.max(0, at - 120), at + 60).replace(/\s+/g, " ") : null,
+        bodyLength: body.length,
+        repairedLength: repairedBody.length,
+        linkAttrInBefore: linkAttr.test(body),
+        linkAttrInRepaired: linkAttr.test(repairedBody),
+        repairedSample: (() => { const i = repairedBody.search(/stats47\.jp/); return i >= 0 ? repairedBody.slice(Math.max(0, i - 120), i + 60).replace(/\s+/g, " ") : null; })(),
+        embeddedContents: Array.isArray(before.embeddedContents) ? before.embeddedContents.length : null,
+        siteUrl: plan.footer?.siteUrl ?? null,
+        productUrl: plan.footer?.productUrl ?? null,
+        productUrlInBody: plan.footer?.productUrl ? body.includes(`data-src="${plan.footer.productUrl}"`) : null,
+        productFigures: (body.match(/data-src="https:\/\/stats47\.jp\/products\/[^"]*"/g) || []).slice(0, 3),
+        magazineUrl: plan.footer?.magazineUrl ?? null,
+        magazineUrlInBody: plan.footer?.magazineUrl ? body.includes(`data-src="${plan.footer.magazineUrl}"`) : null,
+        repairedChanged: repairedResult.changed,
+        additions: navigation.additionsPreview,
+        collapsedLength: collapseDuplicateFooterHeadings(repairedBody).length,
+      };
+    }
     if (options.commit && !item.pending) item.result = { status: "already_compliant" };
     report.articles.push(item);
     audited.push({ plan, before, item });
@@ -649,7 +749,17 @@ async function main() {
   console.log(`audit: planned=${plans.length} pending=${pendingCount}`);
   console.log(`report: ${REPORT_PATH}`);
   if (!options.commit) {
-    if (options.check && pendingCount > 0) process.exitCode = 1;
+    if (options.check && pendingCount > 0) {
+      // CI では report ファイルを読めないので、何が pending なのかをログに出す (環境差の切り分け用)
+      for (const article of report.articles.filter((entry) => entry.pending)) {
+        const flags = ["wouldAddNextNote", "wouldAddMagazine", "wouldAddSite", "wouldAddProduct", "wouldAddDataset", "wouldDedupeFooterHeading", "wouldNormalizeLegacyLinks"]
+          .filter((flag) => article[flag]).map((flag) => flag.replace("would", ""));
+        const repairs = article.linkRepairs.map((repair) => `${repair.mode}:${repair.fromUrl}`);
+        console.log(`  pending ${article.key}: ${flags.join(",") || "-"} repairs=${repairs.join(" ") || "-"}`);
+        if (article.stats47Diagnostics) console.log(`    stats47: ${JSON.stringify(article.stats47Diagnostics)}`);
+      }
+      process.exitCode = 1;
+    }
     return;
   }
 

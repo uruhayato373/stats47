@@ -91,9 +91,9 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 | データ | 保存先 |
 |---|---|
-| GSC/GA4/AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新） |
-| GSC/GA4/AdSense/PSI の週次集約履歴（前週比・人間向け LATEST.md） | `.claude/state/metrics/{gsc,ga4,adsense,psi}/{history.csv,LATEST.md}`（GitHub Actions が自動更新、人間は LATEST.md を見れば 10 秒で把握） |
-| AdSense デバイス別履歴 + 施策 before/after（RPM レバー分解） | `.claude/state/metrics/adsense/{history-devices.csv,impact-LATEST.md}`（`metrics:digest` がデバイス別 history と LATEST.md の退行アラートを、`metrics:adsense-impact` が施策 before/after を自動生成。判定は improvement-triage） |
+| GSC/GA4 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新）。adsense 配下は 2026-09-20 の恒久停止に伴う凍結記録で、更新されない |
+| GSC/GA4/PSI の週次集約履歴（前週比・人間向け LATEST.md） | `.claude/state/metrics/{gsc,ga4,psi}/{history.csv,LATEST.md}`（GitHub Actions が自動更新、人間は LATEST.md を見れば 10 秒で把握）。adsense 配下は凍結記録 |
+| （凍結記録）AdSense デバイス別履歴 + 施策 before/after | `.claude/state/metrics/adsense/{history-devices.csv,impact-LATEST.md}`。2026-09-20 に AdSense を恒久停止したため更新されない。週次収益は NSM（`generate-weekly-metrics-issue.mjs` の「週次収益 (NSM)」節）を見る |
 | 改善施策の agent 用詳細ログ (検証コマンド・仮説・期日) | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` |
 | GSC カバレッジ是正キュー (404/soft404/5xx の A/B 分類・状態保持) | `.claude/state/gsc/{coverage-remediation-queue.json,LATEST.md,coverage-totals-history.csv}`（`build-coverage-queue.mjs` が生成。生 export は `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`、skill `/gsc-coverage-remediation`） |
 | e-Stat 年カバレッジ監査キュー (単年設定 metric の拡張候補) | `.claude/state/data/estat-year-coverage/{queue.json,LATEST.md}`（`estat-year-coverage-audit-weekly.yml` が週次で少しずつ巡回生成。正典 `.claude/rules/metric-config-standards.md`「years は最新年だけに絞らない」） |

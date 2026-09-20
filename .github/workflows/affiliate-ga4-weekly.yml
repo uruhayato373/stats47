@@ -1,6 +1,6 @@
 name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 
-# GA4 から アフィリエイト計測イベント (ad_impression / affiliate_click) を取得し、
+# GA4 から アフィリエイト計測イベント (affiliate_impression / affiliate_click) を取得し、
 # (vertical × position) 別 snapshot と 集約状態 (affiliate-operations-latest.json) を
 # artifact と job summary に残す (週次運用ループの後半。前半 = 在庫/compliance は
 # affiliate-dashboard-refresh.yml が 1 時間前に実行)。
@@ -10,7 +10,8 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 #
 # 失敗を隠さない: GA4 取得に失敗しても集約 state は生成し、measurementGate=blocked として記録したうえで、
 # 最後の「🚦 計測ゲート」step で run 自体を失敗させる (緑のまま観測が止まる事故を 2026-09 に起こしたため)。
-# 自動化は観測と候補生成 (recommendedActions) まで。広告変更・effect 判定・push・deploy はしない。
+# 日曜に本実行、月曜に同じ確定7日を自動再取得する。日曜が一時障害でも翌日に自己回復し、
+# 失敗時は即時Issue、復旧時は自動closeする。広告変更・effect 判定・deploy はしない。
 #
 # 置き場 (2026-09-14・docs/01_技術設計/02_データアーキテクチャ.md):
 #   - 生 snapshot ga4-affiliate-<date>.json は git に足さず R2 `state/ads/ga4-affiliate/` へ push する
@@ -22,15 +23,19 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 on:
   workflow_dispatch:
     inputs:
-      days:
-        description: "集計日数"
+      start_date:
+        description: "確定7日間の開始日 YYYY-MM-DD (省略時は直近の日曜)"
         required: false
-        default: "28"
+      end_date:
+        description: "確定7日間の終了日 YYYY-MM-DD (省略時は直近の土曜)"
+        required: false
   schedule:
-    - cron: "0 13 * * 0" # JST 22:00 Sunday (UTC 13:00) — inventory/compliance refresh の後
+    # JST 日曜22:00が本実行、月曜22:00が自動回復。同じ日曜〜土曜を再取得するため二重計上しない。
+    - cron: "0 13 * * 0,1"
 
 permissions:
   contents: write # 週次集約 CSV の commit-back
+  issues: write # 計測失敗の即時alertと復旧close
 
 concurrency:
   group: affiliate-ga4-fetch
@@ -47,7 +52,7 @@ env:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -79,8 +84,25 @@ jobs:
           fi
           echo "$GOOGLE_SERVICE_ACCOUNT_KEY_JSON" > stats47-f6b5dae19196.json
           chmod 600 stats47-f6b5dae19196.json
-          DAYS="${{ github.event.inputs.days || '28' }}"
-          node .claude/scripts/ads/fetch-affiliate-ga4.cjs "$DAYS" | tee /tmp/affiliate-ga4.md
+          START_DATE="${{ github.event.inputs.start_date || '' }}"
+          END_DATE="${{ github.event.inputs.end_date || '' }}"
+          if [ -n "$START_DATE" ] || [ -n "$END_DATE" ]; then
+            ARGS=(--start-date "$START_DATE" --end-date "$END_DATE")
+          else
+            ARGS=(--weekly-finalized)
+          fi
+          WINDOW_JSON=$(node -e '
+            const { parseFetchWindow } = require("./.claude/scripts/ads/fetch-affiliate-ga4.cjs");
+            process.stdout.write(JSON.stringify(parseFetchWindow(process.argv.slice(1))));
+          ' -- "${ARGS[@]}")
+          SNAPSHOT_DATE=$(node -e 'process.stdout.write(JSON.parse(process.argv[1]).endDate)' "$WINDOW_JSON")
+          WINDOW_DAYS=$(node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).days))' "$WINDOW_JSON")
+          [ "$WINDOW_DAYS" = "7" ] || { echo "::error::運用経路は確定7日だけを受理します: ${WINDOW_DAYS}日"; exit 1; }
+          node .claude/scripts/ads/fetch-affiliate-ga4.cjs "${ARGS[@]}" | tee /tmp/affiliate-ga4.md
+          SNAPSHOT_FILE=".claude/state/ads/ga4-affiliate-$SNAPSHOT_DATE.json"
+          [ -f "$SNAPSHOT_FILE" ] || { echo "::error::snapshot が無い: $SNAPSHOT_FILE"; exit 1; }
+          echo "snapshot_file=$SNAPSHOT_FILE" >> "$GITHUB_OUTPUT"
+          echo "snapshot_date=$SNAPSHOT_DATE" >> "$GITHUB_OUTPUT"
 
       - name: 🔐 Cleanup GA4 key
         if: always()
@@ -92,13 +114,29 @@ jobs:
         if: steps.ga4.outcome == 'success'
         run: |
           set -euo pipefail
-          FILE=$(find .claude/state/ads -maxdepth 1 -name 'ga4-affiliate-????-??-??.json' | sort | tail -1)
+          FILE="${{ steps.ga4.outputs.snapshot_file }}"
+          DATE="${{ steps.ga4.outputs.snapshot_date }}"
           [ -n "$FILE" ] || { echo "::error::snapshot が無い"; exit 1; }
-          DATE=$(basename "$FILE" .json | sed 's/^ga4-affiliate-//')
+          [ -f "$FILE" ] || { echo "::error::snapshot が無い: $FILE"; exit 1; }
           STAGE=.local/r2/state/ads/ga4-affiliate
           mkdir -p "$STAGE"
           cp "$FILE" "$STAGE/$DATE.json"
-          cp "$FILE" "$STAGE/latest.json"
+          # 過去期間の backfill が latest を巻き戻さないよう、既存 latest の期間終端と比較する。
+          if curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/latest.json" -o /tmp/affiliate-latest.json; then
+            LATEST_DATE=$(node -e '
+              const fs=require("fs");
+              const value=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+              process.stdout.write(String(value.periodEnd || value.date || ""));
+            ' /tmp/affiliate-latest.json)
+          else
+            LATEST_DATE=""
+          fi
+          if [ -n "$LATEST_DATE" ] && [[ "$LATEST_DATE" > "$DATE" ]]; then
+            cp /tmp/affiliate-latest.json "$STAGE/latest.json"
+            echo "historical backfill: latest.json は $LATEST_DATE のまま維持"
+          else
+            cp "$FILE" "$STAGE/latest.json"
+          fi
           # 既存 index (無ければ空) に今回の key を足して重複を除く
           curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/index.json" -o /tmp/index.json || echo '[]' > /tmp/index.json
           node -e '
@@ -107,11 +145,32 @@ jobs:
             fs.writeFileSync(process.argv[2], JSON.stringify(keys, null, 2)+"\n");
           ' "$DATE" "$STAGE/index.json"
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/ads/ga4-affiliate/"
+          # push成功だけでなく、公開read pathから日別/latestの同一bytesとindex登録を確認する。
+          VERIFIED=false
+          for ATTEMPT in 1 2 3; do
+            CACHE_BUST="verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${ATTEMPT}"
+            if curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/$DATE.json?$CACHE_BUST" -o /tmp/affiliate-readback.json \
+              && cmp -s "$FILE" /tmp/affiliate-readback.json \
+              && curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/latest.json?$CACHE_BUST" -o /tmp/affiliate-latest-readback.json \
+              && cmp -s "$STAGE/latest.json" /tmp/affiliate-latest-readback.json \
+              && curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/index.json?$CACHE_BUST" -o /tmp/affiliate-index-readback.json \
+              && node -e '
+                const fs=require("fs");
+                const keys=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+                if (!Array.isArray(keys) || !keys.includes(process.argv[2]+".json")) process.exit(1);
+              ' /tmp/affiliate-index-readback.json "$DATE"; then
+              VERIFIED=true
+              break
+            fi
+            sleep $((ATTEMPT * 5))
+          done
+          [ "$VERIFIED" = "true" ] || { echo "::error::R2 read-back検証に失敗: $DATE.json / latest.json / index.json"; exit 1; }
           echo "file=$FILE" >> "$GITHUB_OUTPUT"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
 
       # git に残すのは週次集約だけ。生 JSON は .claude/state/ads/.gitignore で追跡しない。
       - name: 📝 Append weekly aggregate and commit back
+        id: history
         if: steps.ga4.outcome == 'success'
         run: |
           set -euo pipefail
@@ -119,11 +178,32 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .claude/state/ads/ga4-affiliate-history.csv
-          if git diff --cached --quiet; then echo "No aggregate changes"; exit 0; fi
-          git commit -m "chore(ads): ga4 affiliate weekly aggregate ${{ steps.publish.outputs.date }} [skip ci]"
-          # API 取得と R2 push を挟むので develop が進みうる。push 直前に取り直す (fetch-metrics-weekly と同じ)。
-          git pull --rebase --autostash origin develop
-          git push origin develop
+          if git diff --cached --quiet; then
+            echo "No aggregate changes"
+          else
+            git commit -m "chore(ads): ga4 affiliate weekly aggregate ${{ steps.publish.outputs.date }} [skip ci]"
+            # API取得とR2 pushを挟むのでdevelopが進みうる。push直前に取り直す。
+            PUSHED=false
+            for ATTEMPT in 1 2 3; do
+              if git pull --rebase --autostash origin develop && git push origin HEAD:develop; then
+                PUSHED=true
+                break
+              fi
+              sleep $((ATTEMPT * 5))
+            done
+            [ "$PUSHED" = "true" ] || { echo "::error::history commit-backに失敗"; exit 1; }
+          fi
+          # 同時pushでdevelopが先へ進んでも誤検知しない。remote上に今回の確定7日行があることを直接読む。
+          git fetch --depth=1 origin develop
+          git show FETCH_HEAD:.claude/state/ads/ga4-affiliate-history.csv > /tmp/remote-affiliate-history.csv
+          DATE="${{ steps.publish.outputs.date }}"
+          node -e '
+            const fs=require("fs");
+            const date=process.argv[2];
+            const lines=fs.readFileSync(process.argv[1], "utf8").split(/\r?\n/);
+            if (!lines.some((line) => line.startsWith(date + ",7,_all,_all,"))) process.exit(1);
+          ' /tmp/remote-affiliate-history.csv "$DATE" \
+            || { echo "::error::develop history read-backに確定7日行が無い: $DATE"; exit 1; }
 
       - name: 🔍 Rebuild local inventory/compliance inputs
         run: |
@@ -131,6 +211,7 @@ jobs:
           npx -y tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check > /tmp/affiliate-compliance.md
 
       - name: 🧮 Build portfolio + operations state (決定的判定 + validate)
+        id: operations
         run: |
           npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts | tee /tmp/affiliate-portfolio.md
           npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts --check
@@ -152,9 +233,17 @@ jobs:
       # 緑のまま観測が止まらないようにする最後の関門。state は上で生成済みなので、
       # ここで落ちても measurementGate=blocked の記録と artifact は残る。
       - name: 🚦 計測ゲート (GA4 失敗 / measurementGate blocked なら run を落とす)
+        id: measurement_gate
         if: always()
         run: |
           set -euo pipefail
+          for STEP in \
+            "ga4=${{ steps.ga4.outcome }}" \
+            "publish=${{ steps.publish.outcome }}" \
+            "history=${{ steps.history.outcome }}" \
+            "operations=${{ steps.operations.outcome }}"; do
+            [ "${STEP#*=}" = "success" ] || { echo "::error::${STEP%%=*} step outcome=${STEP#*=}"; exit 1; }
+          done
           node <<'NODE'
           const fs = require("fs");
           const p = ".claude/state/ads/affiliate-operations-latest.json";
@@ -169,10 +258,6 @@ jobs:
             process.exit(1);
           }
           NODE
-          if [ "${{ steps.ga4.outcome }}" != "success" ]; then
-            echo "::error::GA4 取得 step が失敗した (outcome=${{ steps.ga4.outcome }})"
-            exit 1
-          fi
 
       - name: 📤 Upload read-only portfolio state
         if: always()
@@ -185,3 +270,49 @@ jobs:
             .claude/state/ads/affiliate-operations-latest.json
             .claude/state/ads/affiliate-pilot-readiness-latest.json
           retention-days: 30
+
+      - name: 🚨 Raise affiliate measurement alert
+        if: always() && github.event_name == 'schedule' && steps.measurement_gate.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="[Affiliate Measurement Alert] 週次GA4計測経路に異常がある"
+          {
+            echo "確定7日の取得・R2 read-back・履歴commit-back・計測ゲートのいずれかが失敗しました。"
+            echo
+            echo "- run: ${RUN_URL}"
+            echo "- ga4: ${{ steps.ga4.outcome }}"
+            echo "- publish/read-back: ${{ steps.publish.outcome }}"
+            echo "- history commit-back: ${{ steps.history.outcome }}"
+            echo "- operations state: ${{ steps.operations.outcome }}"
+            echo "- measurement gate: ${{ steps.measurement_gate.outcome }}"
+            if [ -f .claude/state/ads/affiliate-operations-latest.json ]; then
+              echo
+              node -e '
+                const fs=require("fs");
+                const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+                console.log("- reasons: " + ((state.measurementGate?.reasons ?? []).join(", ") || "none"));
+              ' .claude/state/ads/affiliate-operations-latest.json
+            fi
+          } > /tmp/affiliate-measurement-issue.md
+          gh label create affiliate-measurement-alert \
+            --description "アフィリエイトGA4計測経路の異常" --color "b60205" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label affiliate-measurement-alert --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/affiliate-measurement-issue.md
+          else
+            gh issue create --title "$TITLE" --label "affiliate-measurement-alert,auto-generated" \
+              --body-file /tmp/affiliate-measurement-issue.md
+          fi
+
+      - name: ✅ Close recovered affiliate measurement alert
+        if: always() && github.event_name == 'schedule' && steps.measurement_gate.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label affiliate-measurement-alert --limit 20 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "確定7日の取得・R2 read-back・履歴commit-back・計測ゲートが全て復旧しました (run ${{ github.run_id }})。"
+            done

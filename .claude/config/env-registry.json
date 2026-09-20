@@ -2,7 +2,6 @@
   "version": 1,
   "description": "Environment variable names and exposure classes. Values must never be stored here.",
   "variables": [
-    { "name": "STATS47_COVERAGE_SPLIT", "visibility": "server", "contexts": ["process"] },
     {
       "name": "ACCESSIBILITY_BASELINE",
       "visibility": "server",
@@ -74,14 +73,14 @@
       ]
     },
     {
-      "name": "CHECK_RUNTIME_CONFIG",
+      "name": "CHECKER_WIRING_BASELINE",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "CHECKER_WIRING_BASELINE",
+      "name": "CHECK_RUNTIME_CONFIG",
       "visibility": "server",
       "contexts": [
         "process"
@@ -103,13 +102,6 @@
     },
     {
       "name": "CLAUDE_CLI_BIN",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
-      "name": "PDF_TEXT_BIN",
       "visibility": "server",
       "contexts": [
         "process"
@@ -309,6 +301,13 @@
       ]
     },
     {
+      "name": "FREE_PROBE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "GA4_PROPERTY_ID",
       "visibility": "server",
       "contexts": [
@@ -476,14 +475,14 @@
       ]
     },
     {
-      "name": "HTTP_PROXY",
+      "name": "HTTPS_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "HTTPS_PROXY",
+      "name": "HTTP_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -796,7 +795,7 @@
       ]
     },
     {
-      "name": "NO_PROXY",
+      "name": "NIMG",
       "visibility": "server",
       "contexts": [
         "process"
@@ -824,6 +823,13 @@
       ]
     },
     {
+      "name": "NO_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "OFFICIAL_THEME_PYTHON",
       "visibility": "server",
       "contexts": [
@@ -838,7 +844,21 @@
       ]
     },
     {
+      "name": "PAID_PROBE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PDF_TEXT_BIN",
       "visibility": "server",
       "contexts": [
         "process"
@@ -1057,7 +1077,21 @@
       ]
     },
     {
+      "name": "STATS47_COVERAGE_SPLIT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "STATS47_PROJECT_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SURVEYS_JSON",
       "visibility": "server",
       "contexts": [
         "process"
@@ -1070,13 +1104,6 @@
         "process"
       ],
       "note": "survey portfolio / linkage 監査 state の鮮度上限日数 (既定 35)。validate-survey-portfolio.ts が読む"
-    },
-    {
-      "name": "SURVEYS_JSON",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
     },
     {
       "name": "TSC_CONCURRENCY",

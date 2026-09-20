@@ -79,7 +79,9 @@ ins_file(){
     ' /tmp/ns.txt)
   if [ -z "$ANCHOR" ]; then echo "  [FAIL] attachment paragraph not found after: $H"; return 1; fi
   BU click "$ANCHOR" >/dev/null 2>&1; sleep 0.4
-  BU keys Home >/dev/null 2>&1; sleep 0.3
+  # Home は折り返し行の行頭へ飛び、長い段落を文の途中で割る (2026-09-20 に「ダ|ウンロード」で実測)。
+  # ins_img と同じく Range で段落ノードの先頭へ置く。
+  BU eval "(function(){const s=window.getSelection();if(!s||!s.anchorNode)return 'no-sel';let n=s.anchorNode;while(n&&n.nodeName!=='P'&&n.nodeName!=='LI'&&n.parentElement)n=n.parentElement;if(!n||(n.nodeName!=='P'&&n.nodeName!=='LI'))return 'no-para';const r=document.createRange();r.setStart(n,0);r.collapse(true);s.removeAllRanges();s.addRange(r);return 'caret-at-para-start';})();" >/dev/null 2>&1; sleep 0.3
   BU keys Enter >/dev/null 2>&1; sleep 0.4
   BU keys ArrowUp >/dev/null 2>&1; sleep 0.5
   BU state 2>&1 > /tmp/ns.txt
@@ -91,13 +93,20 @@ ins_file(){
   [ -n "$FB" ] || { echo "  [FAIL] file menu item not found"; return 1; }
   BU click "$FB" >/dev/null 2>&1; sleep 1.5
   BU state 2>&1 > /tmp/ns.txt
-  local UP=$(grep -oE "\[[0-9]+\]<input type=file" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  # 同じセッションで画像を挿した後は note-editor-image-upload-input も残るので、画像用でない file input を選ぶ
+  # (2026-09-20: 先頭の input を取って CSV が画像入力へ流れ、figure が出来ないまま OK 判定していた)。
+  local UP=$(grep -E "\[[0-9]+\]<input[^>]*type=file" /tmp/ns.txt | grep -v "image" | grep -oE "^\[[0-9]+\]" | grep -oE "[0-9]+" | head -1)
+  [ -n "$UP" ] || UP=$(grep -oE "\[[0-9]+\]<input type=file" /tmp/ns.txt | grep -oE "[0-9]+" | tail -1)
   [ -n "$UP" ] || { echo "  [FAIL] file upload input not found"; return 1; }
   BU upload "$UP" "$FILE" >/dev/null 2>&1 || { echo "  [FAIL] attachment upload command failed"; return 1; }
-  sleep 5
-  BU state 2>&1 > /tmp/ns.txt
-  local NAME=$(basename "$FILE")
-  if ! grep -qF "$NAME" /tmp/ns.txt; then echo "  [FAIL] uploaded attachment not visible: $NAME"; return 1; fi
+  # 成功判定は state の文字列一致ではなく添付 figure の実在 (本文にファイル名が書いてあると state の grep は常に当たる)
+  local NAME=$(basename "$FILE") n HAVE
+  for n in $(seq 1 15); do
+    sleep 2
+    HAVE=$(BU eval "(()=>{const e=document.querySelector('[contenteditable=true]');return String([...e.querySelectorAll('figure[embedded-service=attachment]')].some(f=>(f.textContent||'').includes('$NAME')&&/(KB|MB|バイト)/.test(f.textContent||'')))})()" 2>&1 | sed -n 's/^result: //p' | head -1)
+    [ "$HAVE" = "true" ] && break
+  done
+  if [ "$HAVE" != "true" ]; then echo "  [FAIL] attachment figure did not appear: $NAME"; return 1; fi
   echo "  [OK] $H <- $NAME (${BYTES} bytes)"
 }
 
@@ -168,7 +177,10 @@ paid_setline_from_settings(){
   local ESC=$(node -e "process.stdout.write(encodeURIComponent(process.argv[1]))" "$HSTRIP")
   # 同名の説明文ではなく、H1-H4見出しと完全一致する位置だけを対象にする。
   local CLICKED=$(BU eval "(function(){const norm=s=>(s||'').replace(/[\s　\140#]/g,'');const target=norm(decodeURIComponent('$ESC'));const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const hidx=all.findIndex(e=>/^H[1-4]$/.test(e.tagName)&&norm(e.textContent)===target);if(hidx<0)return 'heading-nf';for(let i=hidx;i>=0&&i>hidx-300;i--){const e=all[i];if(e.tagName==='BUTTON'&&(e.textContent||'').trim()==='ラインをこの場所に変更'){e.click();return 'clicked';}}return 'button-nf';})();" 2>&1)
-  echo "$CLICKED" | grep -q "clicked" || { echo "  [FAIL] paid heading line not found for: $HEAD ($CLICKED)"; return 1; }
+  # heading-nf は本文に見出しが無いので即 FAIL。button-nf は「ラインが既にその見出しの直前にある」
+  # (公開済み有料記事の本文差し替え時) でも起きるため、下の DOM 順序検証に判定を委ねる。
+  echo "$CLICKED" | grep -q "heading-nf" && { echo "  [FAIL] paid heading not found in body: $HEAD ($CLICKED)"; return 1; }
+  echo "$CLICKED" | grep -q "clicked" || echo "  [INFO] line button not clicked ($CLICKED) — verifying existing line position"
   sleep 1.5
   # browser-use state はviewport外の見出しを省略するため、DOM順序を直接検証する。
   local VERIFIED=$(BU eval "(function(){const norm=s=>(s||'').replace(/[\s　\140#]/g,'');const target=norm(decodeURIComponent('$ESC'));const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const i=all.findIndex(e=>e.id==='paywall-line');if(i<0||all[i].getAttribute('aria-pressed')!=='true')return 'line-invalid';const nearby=all.slice(i+1,i+13);const j=nearby.findIndex(e=>/^H[1-4]$/.test(e.tagName));if(j<0||norm(nearby[j].textContent)!==target)return 'heading-mismatch';const leaked=nearby.slice(0,j).some(e=>(/^H[1-4]$/.test(e.tagName)||['P','LI','FIGURE','BLOCKQUOTE'].includes(e.tagName))&&norm(e.textContent));return leaked?'content-before-heading':'verified';})();" 2>&1)

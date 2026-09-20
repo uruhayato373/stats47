@@ -1,5 +1,6 @@
 # Memory Index
 
+- [project_monetization_contract.md](project_monetization_contract.md) — 収益化の恒久判断。AdSenseは恒久停止(RPM ¥37で月¥1,400上限)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る(契約テストで強制)、本線は行政実務向け商品
 - [project_theme_selection_backfill_pipeline.md](project_theme_selection_backfill_pipeline.md) — ThemeCatalog selection の夜間 backfill。モデルは JSON のみ・決定的 gate が書く・expanded.ts 由来は selection-evidence.ts。headless claude はセッション内でも認証可、PDF は pdftotext で逐語照合
 - [feedback_note_product_card_ssot.md](feedback_note_product_card_ssot.md) — note商品カードはマガジンでなく実商品SSOTから解決。生成/修正は同一関数共有、regenerate-cardはカード不在時no-op
 - [project_note_ins_img_heading_placement_bug.md](project_note_ins_img_heading_placement_bug.md) — ins_imgは見出し直前アンカーで画像が見出し直後にずれる未解決バグ。盲目修正は悪化した実例あり
@@ -101,6 +102,8 @@
 - [project_sankey_landing_views.md](project_sankey_landing_views.md) — Sankey着地ビュー。migration(#393)/finance(#396)本番稼働、共通HubSankey。通勤はPhase 2(statsDataId 0003454526)
 - [feedback_sticky_aside_max_h.md](feedback_sticky_aside_max_h.md) — CSS Grid(items-start)内sticky asideにmax-h-[calc(100vh-5.5rem)]+overflow必須。削除でフッター非表示(2度踏んだ)
 - [feedback_workers_self_fetch_unbundle.md](feedback_workers_self_fetch_unbundle.md) — OpenNext Workersで静的アセット外す時、自ドメインfetchはdegrade(self-fetch)。ASSETS binding使う。デプロイ+スモークで検証
+- [project_note_paid_landing_patch.md](project_note_paid_landing_patch.md) — 公開済みnote有料記事の無料部分はeditorを使わずPUTパッチで直す(所有者APIが全文・separator=最後の無料要素id・画像はpresigned S3 post)。添付制限に掛からず38商品を同日是正。specの数値は本文実在ゲート
+- [project_note_attachment_upload_limits.md](project_note_attachment_upload_limits.md) — note添付uploadは1日10回/アカウント(画像は別枠)。有料記事の添付再upload flowはdry runを繰り返さず1回で通す。ins_fileはUL直前anchor禁止・逆順挿入・非画像input選択
 - [project_note_update_mode_learnings.md](project_note_update_mode_learnings.md) — カバーはv3詳細eyecatchで監査、画像専用CLIで更新（本文再公開不要）。制作TS/GIS/Satori・保全hash・変更journal。本文updateのeval-click・有料境界・temp profileの注意点
 - [project_asp_site_attribution.md](project_asp_site_attribution.md) — A8/もしも/afb は stats47 と doboku-note が同一口座に同居。サイト帰属assertを通さないと他サイトの数値を誤認(afbで実害)。A8成果でstats47単独と言えるのはsite-rowsのみ
 - [feedback_playwright_profile_dual_os.md](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂

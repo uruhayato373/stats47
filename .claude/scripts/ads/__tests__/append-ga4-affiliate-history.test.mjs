@@ -45,6 +45,14 @@ test("同じ date の再実行は置き換え、他の週は残す (二重計上
   assert.ok(again.startsWith(HEADER + "\n"));
 });
 
+test("過去期間を後から追加しても履歴を periodEnd 順に保つ", () => {
+  const recent = aggregateRows(snapshot("2026-09-14", [{ affiliate_vertical: "x", link_position: "p", impressions: 2, clicks: 0 }]));
+  const older = aggregateRows(snapshot("2026-09-07", [{ affiliate_vertical: "x", link_position: "p", impressions: 1, clicks: 0 }]));
+  const csv = mergeHistory(mergeHistory("", recent), older);
+  const dates = csv.split("\n").filter((line) => line.includes(",_all,_all,")).map((line) => line.slice(0, 10));
+  assert.deepEqual(dates, ["2026-09-07", "2026-09-14"]);
+});
+
 test("date が無い snapshot は拒否する (壊れた行を追記しない)", () => {
   assert.throws(() => aggregateRows({ days: 28, overview: [] }), /date/);
 });

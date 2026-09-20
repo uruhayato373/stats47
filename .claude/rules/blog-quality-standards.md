@@ -385,7 +385,7 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 | 関連データ DL | (コードから除去済・2026-06-02) | 記事に書かない |
 | 出典 | `## データ出典` テキスト または `<data-source>` タグ | ✅ どちらか (本文末) |
 | ランキング詳細への誘導 | `<source-link href="/ranking/{key}">` | ✅ **各図の直下にインライン**配置 (末尾集約禁止) |
-| AdSense 枠 | `<ad-slot></ad-slot>` (任意・未配置なら自動注入) | ✅ 任意 |
+| ~~AdSense 枠~~ | `<ad-slot></ad-slot>` は **2026-09-20 の恒久停止で無効**。`ADSENSE_DISPLAY_ENABLED=false` なので何も描画されない。新規記事に書かない (既存記事の残存タグは無害) | ❌ 使わない |
 
 **決定的検査 (`quality-gate.mjs` が blocker)**: `<chart-placeholder>` 残存 / インライン `<svg>` / 記事内 `関連(ランキング\|記事)` 見出し。これらは公開前に弾かれる。バッチ是正の対象でもある (2026-06-02 棚卸し: 記事内関連229・インラインsvg76・chart-placeholder54)。
 

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   applyNavigationFooter,
+  collapseDuplicateFooterHeadings,
   applyPublishedLinkRepairs,
   applyVisibleNavigationBeforeSeparator,
   assertCleanCardUrl,
@@ -255,4 +256,75 @@ test("regenerate-card repair is a no-op when the target card is absent from the 
   );
   assert.strictEqual(result.body, body);
   assert.strictEqual(result.changed, false);
+});
+
+test("footer adds the magazine's paid dataset card and does not duplicate an existing 次に読む heading", () => {
+  const datasetPlan = {
+    ...plan,
+    datasets: [{
+      noteUrl: "https://note.com/stats47/n/na416c57e461c",
+      noteKey: "na416c57e461c",
+      lead: "「教育費は8.7倍違う」で、この記事の元データを配布しています。",
+    }],
+  };
+  const first = applyNavigationFooter("<p>本文</p>", datasetPlan, { idFactory: ids() });
+  assert.equal(first.addedDataset, true);
+  assert.match(first.body, /data-src="https:\/\/note\.com\/stats47\/n\/na416c57e461c"/);
+  assert.match(first.body, /この記事の元データを手元で使う/);
+  assert.equal((first.body.match(/次に読む<\/h2>/g) || []).length, 1);
+
+  // 既に next/magazine/site/product のフッターを持つ公開記事へ dataset 枠だけを後から足す
+  const existing = applyNavigationFooter("<p>本文</p>", plan, { idFactory: ids() });
+  const added = applyNavigationFooter(existing.body, datasetPlan, { idFactory: ids() });
+  assert.equal(added.changed, true);
+  assert.equal(added.addedDataset, true);
+  assert.equal(added.addedNextNote, false);
+  assert.equal((added.body.match(/次に読む<\/h2>/g) || []).length, 1, "見出しを二重に作らない");
+  assert.equal((added.body.match(/<hr\b/g) || []).length, 1);
+  const again = applyNavigationFooter(added.body, datasetPlan, { idFactory: ids() });
+  assert.equal(again.changed, false, "dataset 枠も冪等");
+});
+
+test("a body that already carries a 深掘り card to a different article does not get a second one", () => {
+  const first = applyNavigationFooter("<p>本文</p>", plan, { idFactory: ids() });
+  const repick = { ...plan, nextNoteUrl: "https://note.com/stats47/n/nffffffffffff", nextNoteKey: "nffffffffffff" };
+  const second = applyNavigationFooter(first.body, repick, { idFactory: ids() });
+  assert.equal(second.changed, false);
+  assert.equal((second.body.match(/もう一歩深掘りする/g) || []).length, 1);
+  assert.equal(second.addedNextNote, false);
+});
+
+test("duplicated 次に読む headings collapse to one while every card is kept", () => {
+  const first = applyNavigationFooter("<p>本文</p>", { ...plan, productUrl: null }, { idFactory: ids() });
+  // 09-16 の一括追加を模す: 2 つ目のフッター見出し + 商品カード
+  const doubled = applyNavigationFooter(first.body, { productUrl: plan.productUrl, productTitle: plan.productTitle, productDescription: plan.productDescription }, { idFactory: ids() });
+  // 当時の実装はここで 2 個目の <hr><h2> を積んだ。今は 1 個に畳まれるので、擬似的に二重化した本文を作る
+  const legacy = doubled.body.replace(/(<p name="[^"]+" id="[^"]+"><strong>このテーマをまとめて読む・使う)/, '<p name="x" id="x"><br></p><hr name="y" id="y"><h2 name="z" id="z">次に読む</h2>$1');
+  assert.equal((legacy.match(/次に読む<\/h2>/g) || []).length, 2);
+  const fixed = collapseDuplicateFooterHeadings(legacy);
+  assert.equal((fixed.match(/次に読む<\/h2>/g) || []).length, 1);
+  assert.equal((fixed.match(/<hr\b/g) || []).length, 1);
+  assert.equal((fixed.match(/embedded-service="(?:note|external-article)"/g) || []).length, (legacy.match(/embedded-service="(?:note|external-article)"/g) || []).length, "カードは 1 枚も消えない");
+  const viaFooter = applyNavigationFooter(legacy, { productUrl: plan.productUrl, productTitle: plan.productTitle, productDescription: plan.productDescription }, { idFactory: ids() });
+  assert.equal(viaFooter.changed, true);
+  assert.equal(viaFooter.dedupedFooterHeading, true);
+  assert.equal(applyNavigationFooter(viaFooter.body, {}, { idFactory: ids() }).changed, false, "畳んだ後は冪等");
+});
+
+test("legacy free preview with a duplicated footer heading is collapsed across the whole body without extending it", () => {
+  const visible = '<p name="a" id="a">本文</p><hr name="h1" id="h1"><h2 name="t1" id="t1">次に読む</h2><p name="c1" id="c1">カード1</p><p name="x" id="x"><br></p><hr name="h2" id="h2"><h2 name="t2" id="t2">次に読む</h2><p name="c2" id="c2">カード2</p>';
+  const hidden = '<p name="sep" id="sep">試し読みの続き</p>';
+  const result = applyVisibleNavigationBeforeSeparator(visible + hidden, visible, "sep", {}, { idFactory: ids() });
+  assert.equal(result.changed, true);
+  assert.equal((result.body.match(/次に読む<\/h2>/g) || []).length, 1);
+  assert.ok(result.body.endsWith(hidden), "境界より後ろは触らない");
+  assert.ok(result.body.includes("カード1") && result.body.includes("カード2"));
+});
+
+test("regenerate-card leaves a correctly-addressed card alone when note returned it without any text", () => {
+  const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n68f5e09c8d62";
+  const stripped = `<figure name="f" id="f" data-src="${url}" data-identifier="null" embedded-service="external-article" embedded-content-key="emb1">\n<a href="${url}" rel="nofollow noopener" target="_blank"></a>\n</figure>`;
+  const result = applyPublishedLinkRepairs(stripped, [{ mode: "regenerate-card", fromUrl: url, title: "実質手取りの地図", description: "説明" }]);
+  assert.equal(result.changed, false);
+  assert.equal(result.body, stripped);
 });

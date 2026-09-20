@@ -36,6 +36,7 @@ const PALETTES = {
   "s47-housing": ["#a21caf", "#e879f9"],
   "s47-infrastructure": ["#334155", "#94a3b8"],
   "s47-energy": ["#a16207", "#fde047"],
+  "s47-kakei-reading": ["#9a3412", "#fdba74"], // 家計調査の読み方 (2026-09-20 新設)
 };
 
 function escapeXml(value) {

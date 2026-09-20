@@ -166,7 +166,9 @@
     "theme:quality:test": "node --import tsx --test .claude/scripts/themes/__tests__/",
     "theme:portfolio:audit": "bash .claude/scripts/themes/run-theme-portfolio-audit.sh",
     "geo:build-public-facility-access": "node --import tsx packages/gis/src/mlit-ksj/scripts/build-public-facility-access.ts",
-    "geo:audit-public-facility-access": "tsx packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts --public-facility-only"
+    "geo:audit-public-facility-access": "tsx packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts --public-facility-only",
+    "note:paid-landing:patch": "node .claude/scripts/note/patch-note-paid-landing.mjs",
+    "note:paid-landing:test": "node --test .claude/scripts/note/__tests__/paid-landing-patch.test.mjs"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",

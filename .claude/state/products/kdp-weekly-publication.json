@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-20T02:26:17.374Z",
+  "week": "2026-W38",
+  "scheduledAction": "S1 12冊の審査・販売開始・旧版停止を完了。新規出版なし",
+  "portfolio": {
+    "registeredCatalogCount": 32,
+    "activePublicationTargetCount": 15,
+    "maxNewPublicationsPerWeek": 1,
+    "cohortMeasurementWeeks": 4,
+    "s1Live": 3,
+    "s1InReview": 9,
+    "pilotLive": 0,
+    "pilotInReview": 0
+  },
+  "nextPilot": {
+    "ordinal": 1,
+    "concept": "47県庁所在市の食卓・家計ガイド",
+    "format": "1県1章",
+    "plannedPreparationWeek": "2026-W40",
+    "earliestPublicationWeek": "2026-W41"
+  },
+  "eligibleCandidateIds": [],
+  "cohortMeasurement": null,
+  "approvalRequired": true,
+  "status": "hold",
+  "blockers": [
+    "S1販売中 3/12",
+    "K-S1-01:in_review",
+    "K-S1-02:in_review",
+    "K-S1-05:in_review",
+    "K-S1-07:in_review",
+    "K-S1-08:in_review",
+    "K-S1-09:in_review",
+    "K-S1-10:in_review",
+    "K-S1-11:in_review",
+    "K-S1-12:in_review"
+  ],
+  "nextAction": "S1の審査状態を同期し、12冊すべてのlive read-backを完了する",
+  "candidate": null,
+  "publishCommand": null
+}

@@ -170,7 +170,9 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - **想定効果**: 増加幅は未確定。主指標 `affiliate_impression/PV` が baseline 0.710を上回るかを検証する。
   収益効果はCTR/CV/確定成果が揃うまで主張しない。
 - **検証手順 (デプロイ後14日)**:
-  1. 前後の重複しないfinalized 7日を明示日付で取得する。現行 `fetch-affiliate-ga4.cjs 7` は7daysAgo〜todayの8暦日・当日途中を含み、固定7日比較には使わない。
+  1. 前後の重複しないfinalized 7日を取得する。2026-09-20以降、週次CIは日曜〜土曜の確定7日を
+     日曜・月曜に同じ窓で自動取得し、T14d / T28dは非重複2週 / 4週から組み立てる。過去窓の補完だけ
+     `--start-date` / `--end-date` を使う。
   2. 同じ日付範囲のGA4 pageviewsで `affiliate_impression/PV` を計算する。
   3. `ranking-incontent` / `ranking-sidebar` / `area-content` のimpression・click・CTRを確認する。
   4. page type別 engagement rateとASPの発生/確定成果を併記する。CTRやengagementが悪化した場合は

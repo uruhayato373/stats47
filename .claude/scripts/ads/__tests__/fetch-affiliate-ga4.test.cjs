@@ -2,7 +2,15 @@
 
 const assert = require("node:assert/strict");
 const test = require("node:test");
-const { PLACEMENT_DIMENSIONS, REPORT_PAGE_SIZE, collectReports, runReport } = require("../fetch-affiliate-ga4.cjs");
+const {
+  PLACEMENT_DIMENSIONS,
+  REPORT_PAGE_SIZE,
+  collectReports,
+  parseFetchWindow,
+  runReport,
+} = require("../fetch-affiliate-ga4.cjs");
+
+const WINDOW = { startDate: "2026-08-23", endDate: "2026-09-19" };
 
 const row = (event, dimensions, count) => ({
   dimensionValues: [event, ...dimensions].map(value => ({ value })),
@@ -23,7 +31,7 @@ test("同じページでも端末・広告・位置が異なる内訳を混ぜ�
       row("affiliate_impression", ["/ranking/a", "mobile", "ad-2", "ranking-end"], 5),
     ]);
     return response([row("affiliate_impression", dimensions.slice(1).map(() => "value"), 35)]);
-  }), 28);
+  }), WINDOW);
   assert.equal(calls.length, 4);
   assert.ok(calls.some(d => JSON.stringify(d) === JSON.stringify(["eventName", "pagePath"])));
   assert.deepEqual(Object.keys(reports), ["overview", "experiments", "pages", "placements"]);
@@ -42,7 +50,7 @@ test("配置dimensionを取得できなければnullと理由を保存し、総�
     const dimensions = requestBody.dimensions.map(d => d.name);
     if (dimensions.includes("deviceCategory")) throw new Error("dimension-not-available");
     return response([row("affiliate_impression", dimensions.slice(1).map(() => "value"), 10)]);
-  }), 28);
+  }), WINDOW);
   assert.equal(reports.placements.availability, "unavailable");
   assert.equal(reports.placements.rows, null);
   assert.equal(reports.placements.fetchQuality, null);
@@ -53,7 +61,7 @@ test("配置dimensionを取得できなければnullと理由を保存し、総�
 });
 
 test("明示rowCount=0の空reportだけを、取得成功の空配列として扱う", async () => {
-  const reports = await collectReports(client(async () => response([])), 28);
+  const reports = await collectReports(client(async () => response([])), WINDOW);
   assert.equal(reports.placements.availability, "available");
   assert.deepEqual(reports.placements.rows, []);
   assert.equal(reports.placements.fetchQuality.rowCount, 0);
@@ -70,9 +78,10 @@ test("1万行を超える結果をoffsetで全取得し、sampling/thresholdメ�
       rows: request.requestBody.offset === 0 ? first : [last],
       metadata: { dataLossFromOtherRow: true, subjectToThresholding: true, samplingMetadatas: [{ samplesReadCount: "10", samplingSpaceSize: "100" }] },
     } };
-  }), PLACEMENT_DIMENSIONS, 28);
+  }), PLACEMENT_DIMENSIONS, WINDOW);
   assert.deepEqual(requests.map(r => r.offset), [0, REPORT_PAGE_SIZE]);
   assert.ok(requests.every(r => r.limit === REPORT_PAGE_SIZE));
+  assert.deepEqual(requests[0].dateRanges, [WINDOW]);
   assert.deepEqual(requests[0].orderBys.map(o => o.dimension.dimensionName), PLACEMENT_DIMENSIONS);
   assert.deepEqual(requests[0].dimensionFilter.filter.inListFilter.values, ["affiliate_impression", "affiliate_click"]);
   assert.equal(result.rows.length, REPORT_PAGE_SIZE + 1);
@@ -82,25 +91,91 @@ test("1万行を超える結果をoffsetで全取得し、sampling/thresholdメ�
 });
 
 test("rowCount欠損を0実績として成功させない", async () => {
-  await assert.rejects(runReport(client(async () => ({ data: {} })), PLACEMENT_DIMENSIONS, 28), /ga4-row-count-unavailable/);
+  await assert.rejects(runReport(client(async () => ({ data: {} })), PLACEMENT_DIMENSIONS, WINDOW), /ga4-row-count-unavailable/);
 });
 
 test("途中ページが空なら部分取得を成功として返さない", async () => {
   await assert.rejects(runReport(client(async ({ requestBody }) => ({ data: {
     rowCount: 2,
     rows: requestBody.offset === 0 ? [row("affiliate_impression", ["a"], 1)] : [],
-  } })), PLACEMENT_DIMENSIONS, 28), /ga4-incomplete-report-page/);
+  } })), PLACEMENT_DIMENSIONS, WINDOW), /ga4-incomplete-report-page/);
 });
 
 test("ページング中に総件数が変われば取得を止める", async () => {
   await assert.rejects(runReport(client(async ({ requestBody }) => ({ data: {
     rowCount: requestBody.offset === 0 ? 2 : 3,
     rows: [row("affiliate_impression", ["a"], 1)],
-  } })), PLACEMENT_DIMENSIONS, 28), /ga4-row-count-changed-during-pagination/);
+  } })), PLACEMENT_DIMENSIONS, WINDOW), /ga4-row-count-changed-during-pagination/);
 });
 
 test("rowCount以上の行が返れば不整合を明示する", async () => {
   await assert.rejects(runReport(client(async () => ({ data: {
     rowCount: 0, rows: [row("affiliate_impression", ["a"], 1)],
-  } })), PLACEMENT_DIMENSIONS, 28), /ga4-row-count-exceeded/);
+  } })), PLACEMENT_DIMENSIONS, WINDOW), /ga4-row-count-exceeded/);
+});
+
+test("相対日数は当日を除外し、完了済みの28日を絶対日付へ固定する", () => {
+  assert.deepEqual(parseFetchWindow(["28"], {
+    now: new Date("2026-09-20T12:00:00Z"),
+    timeZone: "Asia/Tokyo",
+  }), {
+    startDate: "2026-08-23",
+    endDate: "2026-09-19",
+    days: 28,
+    mode: "rolling-complete-days",
+  });
+});
+
+test("固定期間は両端を含む日数を保持する", () => {
+  assert.deepEqual(parseFetchWindow([
+    "--start-date", "2026-09-01", "--end-date", "2026-09-07",
+  ], { now: new Date("2026-09-20T12:00:00Z"), timeZone: "Asia/Tokyo" }), {
+    startDate: "2026-09-01",
+    endDate: "2026-09-07",
+    days: 7,
+    mode: "fixed",
+  });
+});
+
+test("日曜と翌月曜の再実行は同じ確定済み日曜〜土曜を返す", () => {
+  const sunday = parseFetchWindow(["--weekly-finalized"], {
+    now: new Date("2026-09-20T12:00:00Z"),
+    timeZone: "Asia/Tokyo",
+  });
+  const monday = parseFetchWindow(["--weekly-finalized"], {
+    now: new Date("2026-09-21T12:00:00Z"),
+    timeZone: "Asia/Tokyo",
+  });
+  assert.deepEqual(sunday, {
+    startDate: "2026-09-13",
+    endDate: "2026-09-19",
+    days: 7,
+    mode: "weekly-finalized",
+  });
+  assert.deepEqual(monday, sunday);
+});
+
+test("土曜日は当日途中を含めず前週の日曜〜土曜を返す", () => {
+  assert.deepEqual(parseFetchWindow(["--weekly-finalized"], {
+    now: new Date("2026-09-19T08:00:00Z"),
+    timeZone: "Asia/Tokyo",
+  }), {
+    startDate: "2026-09-06",
+    endDate: "2026-09-12",
+    days: 7,
+    mode: "weekly-finalized",
+  });
+});
+
+test("固定期間の片側欠落・逆転・不正な日数を拒否する", () => {
+  assert.throws(() => parseFetchWindow(["--start-date"]), /値がありません/);
+  assert.throws(() => parseFetchWindow(["--start-date", "2026-09-01"]), /両方/);
+  assert.throws(() => parseFetchWindow([
+    "--start-date", "2026-09-08", "--end-date", "2026-09-07",
+  ]), /以前/);
+  assert.throws(() => parseFetchWindow([
+    "--start-date", "2026-09-01", "--end-date", "2026-09-20",
+  ], { now: new Date("2026-09-20T12:00:00Z"), timeZone: "Asia/Tokyo" }), /昨日以前/);
+  assert.throws(() => parseFetchWindow(["0"]), /1〜366/);
+  assert.throws(() => parseFetchWindow(["28", "--weekly-finalized"]), /同時指定/);
 });
