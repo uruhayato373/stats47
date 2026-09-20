@@ -92,8 +92,13 @@ JSON は `.claude/state/ads/inventory-latest.json` (`byVertical` / `coverage.gap
 専用スクリプトで `affiliate_impression` / `affiliate_click` を (category × position) 別に取得する:
 
 ```bash
-node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot → .claude/state/ads/ga4-affiliate-<date>.json
+node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 昨日までの完了済み28日
+node .claude/scripts/ads/fetch-affiliate-ga4.cjs \
+  --start-date 2026-09-13 --end-date 2026-09-19 # before/after用の固定7日
 ```
+
+相対日数でも GA4 へは絶対日付へ固定して送り、当日途中の値を混ぜない。snapshot の `date` と
+ファイル名は `periodEnd`、実行時刻は `generatedAt` に記録する。固定期間は両端を含み、昨日以前・366日以内だけを許可する。
 
 - dimension: `eventName` + `customEvent:affiliate_vertical` (★canonical 10軸) + `customEvent:affiliate_category` + `customEvent:link_position`、metric: `eventCount`
 - impression / click を pivot し (vertical × position) ごとに `CTR = click / impression` を算出。`hasVerticalBreakdown` が false なら `affiliate_vertical` 未登録 (rules §6 の手順で登録)
@@ -107,6 +112,8 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot
 >    `.claude/state/ads/ga4-affiliate-history.csv` (`append-ga4-affiliate-history.mjs`) だけを commit-back する**。
 >    ローカルで生 snapshot が要るときは `npm run state:pull -- ads/ga4-affiliate` (公開 URL・認証不要) で
 >    `.claude/state/ads/live/ga4-affiliate/` に取得する (gitignore 済み)。T14d / T28d の効果判定は history.csv で足りる。
+>    `workflow_dispatch` は `start_date` / `end_date` を同時指定できる。過去期間の backfill は日付objectへ追加するが、
+>    R2 `latest.json` を古い期間へ巻き戻さない。
 > 2. **custom dimension 登録**: `affiliate_vertical` / `affiliate_category` / `link_position` を GA4 管理画面で
 >    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない (登録手順の正典:
 >    `.claude/rules/affiliate-ads-standards.md` §6)。未登録時はスクリプトが `eventName` 単位の総数に

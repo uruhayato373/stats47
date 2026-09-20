@@ -39,6 +39,18 @@ test("GA4週次はportfolio・operations・pilotを同じrunで生成する", ()
   assert.match(source, /build-affiliate-pilot-state\.ts/);
 });
 
+test("GA4週次は固定期間を受け取り、過去期間で latest を巻き戻さない", () => {
+  const source = readFileSync(files[1], "utf8");
+  assert.match(source, /start_date:/);
+  assert.match(source, /end_date:/);
+  assert.match(source, /--start-date "\$START_DATE" --end-date "\$END_DATE"/);
+  assert.match(source, /snapshot_file=\$SNAPSHOT_FILE/);
+  assert.match(source, /steps\.ga4\.outputs\.snapshot_file/);
+  assert.doesNotMatch(source, /find \.claude\/state\/ads[^\n]+ga4-affiliate/);
+  assert.match(source, /historical backfill: latest\.json/);
+  assert.match(source, /\[\[ "\$LATEST_DATE" > "\$DATE" \]\]/);
+});
+
 test("adminと単体HTMLは同じportfolio view modelを使う", () => {
   const admin = readFileSync("apps/admin/lib/server/ads.ts", "utf8");
   const dashboard = readFileSync(".claude/scripts/ads/build-affiliate-dashboard.ts", "utf8");

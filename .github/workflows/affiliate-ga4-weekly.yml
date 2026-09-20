@@ -23,9 +23,15 @@ on:
   workflow_dispatch:
     inputs:
       days:
-        description: "集計日数"
+        description: "完了済み日だけを対象にする集計日数 (固定期間未指定時)"
         required: false
         default: "28"
+      start_date:
+        description: "固定期間の開始日 YYYY-MM-DD (end_date と同時指定)"
+        required: false
+      end_date:
+        description: "固定期間の終了日 YYYY-MM-DD (start_date と同時指定)"
+        required: false
   schedule:
     - cron: "0 13 * * 0" # JST 22:00 Sunday (UTC 13:00) — inventory/compliance refresh の後
 
@@ -80,7 +86,23 @@ jobs:
           echo "$GOOGLE_SERVICE_ACCOUNT_KEY_JSON" > stats47-f6b5dae19196.json
           chmod 600 stats47-f6b5dae19196.json
           DAYS="${{ github.event.inputs.days || '28' }}"
-          node .claude/scripts/ads/fetch-affiliate-ga4.cjs "$DAYS" | tee /tmp/affiliate-ga4.md
+          START_DATE="${{ github.event.inputs.start_date || '' }}"
+          END_DATE="${{ github.event.inputs.end_date || '' }}"
+          if [ -n "$START_DATE" ] || [ -n "$END_DATE" ]; then
+            ARGS=(--start-date "$START_DATE" --end-date "$END_DATE")
+            SNAPSHOT_DATE="$END_DATE"
+          else
+            ARGS=("$DAYS")
+            SNAPSHOT_DATE=$(node -e '
+              const { parseFetchWindow } = require("./.claude/scripts/ads/fetch-affiliate-ga4.cjs");
+              process.stdout.write(parseFetchWindow([process.argv[1]]).endDate);
+            ' "$DAYS")
+          fi
+          node .claude/scripts/ads/fetch-affiliate-ga4.cjs "${ARGS[@]}" | tee /tmp/affiliate-ga4.md
+          SNAPSHOT_FILE=".claude/state/ads/ga4-affiliate-$SNAPSHOT_DATE.json"
+          [ -f "$SNAPSHOT_FILE" ] || { echo "::error::snapshot が無い: $SNAPSHOT_FILE"; exit 1; }
+          echo "snapshot_file=$SNAPSHOT_FILE" >> "$GITHUB_OUTPUT"
+          echo "snapshot_date=$SNAPSHOT_DATE" >> "$GITHUB_OUTPUT"
 
       - name: 🔐 Cleanup GA4 key
         if: always()
@@ -92,13 +114,29 @@ jobs:
         if: steps.ga4.outcome == 'success'
         run: |
           set -euo pipefail
-          FILE=$(find .claude/state/ads -maxdepth 1 -name 'ga4-affiliate-????-??-??.json' | sort | tail -1)
+          FILE="${{ steps.ga4.outputs.snapshot_file }}"
+          DATE="${{ steps.ga4.outputs.snapshot_date }}"
           [ -n "$FILE" ] || { echo "::error::snapshot が無い"; exit 1; }
-          DATE=$(basename "$FILE" .json | sed 's/^ga4-affiliate-//')
+          [ -f "$FILE" ] || { echo "::error::snapshot が無い: $FILE"; exit 1; }
           STAGE=.local/r2/state/ads/ga4-affiliate
           mkdir -p "$STAGE"
           cp "$FILE" "$STAGE/$DATE.json"
-          cp "$FILE" "$STAGE/latest.json"
+          # 過去期間の backfill が latest を巻き戻さないよう、既存 latest の期間終端と比較する。
+          if curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/latest.json" -o /tmp/affiliate-latest.json; then
+            LATEST_DATE=$(node -e '
+              const fs=require("fs");
+              const value=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+              process.stdout.write(String(value.periodEnd || value.date || ""));
+            ' /tmp/affiliate-latest.json)
+          else
+            LATEST_DATE=""
+          fi
+          if [ -n "$LATEST_DATE" ] && [[ "$LATEST_DATE" > "$DATE" ]]; then
+            cp /tmp/affiliate-latest.json "$STAGE/latest.json"
+            echo "historical backfill: latest.json は $LATEST_DATE のまま維持"
+          else
+            cp "$FILE" "$STAGE/latest.json"
+          fi
           # 既存 index (無ければ空) に今回の key を足して重複を除く
           curl -fsS "$R2_PUBLIC_FETCH_URL/state/ads/ga4-affiliate/index.json" -o /tmp/index.json || echo '[]' > /tmp/index.json
           node -e '
