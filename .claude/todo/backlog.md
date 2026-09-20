@@ -647,20 +647,6 @@ updated: 2026-09-20
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [NOTE-FOOTER-DUPLICATE-HEADING-01] 公開 note 記事に「次に読む」見出しが 2 回ある (09-16 の商品カード一括追加で二重化)
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/note/update-published-navigation.mjs --all-free] [起票:2026-09-20]
-
-- **owner**: note-manager
-- **問題**: `applyNavigationFooter` は追加枠があるたび `<hr><h2>次に読む</h2>` を末尾に足していたため、既に
-  フッターがある記事へ 2026-09-16 に商品カードを足した際、見出しが二重になった (例: `n39016e5f0002` で 2 個を実測)。
-  2026-09-20 に「既存の見出しがあれば追記のみ」へ直したので **新規追加では増えない** が、既存の二重見出しは残っている。
-- **済 (2026-09-20)**: `audit-note-circulation.mjs` に `duplicate_footer_heading` warning、`applyNavigationFooter` に
-  2 個目以降の `<hr><h2>次に読む</h2>` を畳む処理を追加 (commit 41de0b555)。190 本への live 配布を同日開始。
-- **次 (配布が途中で止まった場合)**: `node .claude/scripts/note/update-published-navigation.mjs --all-free --commit`
-  (冪等・畳み込み済みは already_compliant) → `npm run note:circulation:audit` で warnings 0 →
-  `gh workflow run note-circulation-audit-weekly.yml --ref develop` で週次 gate を緑にし Issue #962 を自動 close させる。
-- **完了条件**: 全公開記事で `次に読む</h2>` の出現が 1 以下 (監査の `duplicate_footer_heading` が 0)。
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
 
