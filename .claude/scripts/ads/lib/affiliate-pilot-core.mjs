@@ -78,7 +78,20 @@ export function evaluateAffiliatePilotReadiness({
   if (!plan) {
     reasons.push("pilot-plan-missing");
   } else {
-    if (!plan.programRef) reasons.push("pilot-program-ref-missing");
+    const variantProgramRefs = Array.isArray(plan.variantIds)
+      ? plan.variantIds.map((variantId) => plan.variantProgramRefs?.[variantId]).filter(Boolean)
+      : [];
+    if (!plan.programRef && variantProgramRefs.length === 0) reasons.push("pilot-program-ref-missing");
+    if (variantProgramRefs.length > 0) {
+      if (variantProgramRefs.length !== plan.variantIds.length) reasons.push("pilot-variant-program-refs-invalid");
+      if (new Set(variantProgramRefs).size !== variantProgramRefs.length) reasons.push("pilot-variant-program-refs-duplicate");
+      const offers = variantProgramRefs.map((programRef) => portfolio?.offers?.find((offer) => offer.programRef === programRef));
+      if (offers.some((offer) => !offer)) reasons.push("pilot-variant-offer-missing");
+      const lanes = new Set(offers.map((offer) => offer?.lane).filter(Boolean));
+      if (!lanes.has("discovery") || !lanes.has("decision")) reasons.push("pilot-lane-pair-invalid");
+      const verticals = new Set(offers.map((offer) => offer?.vertical).filter(Boolean));
+      if (verticals.size !== 1) reasons.push("pilot-vertical-mismatch");
+    }
     if (!plan.pagePath || !["ranking", "blog"].includes(plan.pageType)) reasons.push("pilot-page-invalid");
     if (!Array.isArray(plan.variantIds) || plan.variantIds.length !== 2) reasons.push("pilot-exactly-two-variants-required");
     if (plan.primaryMetric !== "confirmed-revenue-per-1000-viewable-impressions") reasons.push("pilot-primary-metric-invalid");
@@ -178,6 +191,10 @@ export function buildAffiliatePilotState(input) {
       ? { id: "resolve-pilot-start-gates", reasons: readiness.reasons }
     : verdict.status === "ready-to-present"
       ? { id: "present-pilot-verdict-to-owner", reasons: [] }
+      : verdict.reasons.length === 1 && verdict.reasons[0] === "pilot-outcomes-not-mature" && !input.plan?.exposureEndedAt
+        ? { id: "stop-pilot-exposure-and-start-maturation", reasons: verdict.reasons }
+        : verdict.reasons.includes("pilot-outcomes-not-mature") && input.plan?.exposureEndedAt
+          ? { id: "collect-mature-pilot-outcomes", reasons: verdict.reasons }
       : { id: "continue-one-pilot-observation", reasons: verdict.reasons };
   return {
     schemaVersion: AFFILIATE_PILOT_STATE_SCHEMA_VERSION,

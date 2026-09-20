@@ -8,6 +8,11 @@ import {
   estimateAffiliatePilotFeasibility,
   validateAffiliatePilotState,
 } from "./lib/affiliate-pilot-core.mjs";
+import {
+  aggregatePilotExperimentMetrics,
+  buildAffiliatePilotObservation,
+  parseAffiliateExperimentHistory,
+} from "./lib/affiliate-pilot-history-core.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "../../..");
 const STATE_DIR = resolve(ROOT, ".claude/state/ads");
@@ -34,15 +39,45 @@ function main(): void {
   // pilot planはowner承認後にregistryへ追加される。存在しない間は推測して作らない。
   const plan = (registry?.experiments ?? []).find((experiment: { portfolioPilot?: boolean }) => experiment.portfolioPilot === true) ?? null;
   const baseline = operations?.ga4Totals ?? null;
+  const ga4Path = portfolio?.sources?.ga4?.path ? resolve(ROOT, portfolio.sources.ga4.path) : null;
+  const ga4 = ga4Path ? readJson(ga4Path) : null;
   const feasibility = plan && baseline
     ? estimateAffiliatePilotFeasibility({
         baselineImpressions: baseline.impressions,
         baselineClicks: baseline.clicks,
-        baselineWindowDays: operations?.sources?.ga4?.days ?? 28,
+        baselineWindowDays: ga4?.days ?? 28,
         variantCount: plan.variantIds?.length ?? 2,
         minImpressionsPerVariant: plan.minImpressionsPerVariant,
         minClicksPerVariant: plan.minClicksPerVariant,
         maxDurationDays: plan.maxDurationDays,
+      })
+    : null;
+  const historyPath = resolve(STATE_DIR, "affiliate-experiment-history.csv");
+  const historyRows = existsSync(historyPath)
+    ? parseAffiliateExperimentHistory(readFileSync(historyPath, "utf8"))
+    : [];
+  const experimentMetrics = plan
+    ? aggregatePilotExperimentMetrics({
+        rows: historyRows,
+        experimentId: plan.experimentId,
+        startedAt: plan.startedAt,
+        exposureEndedAt: plan.exposureEndedAt ?? null,
+      })
+    : [];
+  const moshimo = readJson(resolve(ROOT, ".claude/state/metrics/affiliate/moshimo-results.json"));
+  const moshimoSource = portfolio?.sources?.additionalOutcomes?.find((source: { source?: string }) => source.source === "moshimo");
+  const observation = plan
+    ? buildAffiliatePilotObservation({
+        plan,
+        experimentMetrics,
+        outcomeSources: [{
+          programRefPrefix: "moshimo:",
+          status: moshimoSource?.status ?? "blocked",
+          periodFrom: moshimo?.period?.from ?? null,
+          periodTo: moshimo?.period?.to ?? null,
+          revenueByProgramRef: Object.fromEntries((moshimo?.records ?? []).map((record: { programRef: string; revenueYen: number }) => [record.programRef, record.revenueYen])),
+        }],
+        nowIso: new Date().toISOString(),
       })
     : null;
   const state = buildAffiliatePilotState({
@@ -52,7 +87,7 @@ function main(): void {
     activeExperiments: activeExperiments.filter((experiment: { portfolioPilot?: boolean }) => experiment.portfolioPilot !== true),
     ownerApprovals: plan?.ownerApprovals ?? {},
     feasibility,
-    observation: plan?.observation ?? null,
+    observation: plan?.observation ?? observation,
   });
   const errors = validateAffiliatePilotState(state);
   if (errors.length > 0) throw new Error(errors.join("\n"));
