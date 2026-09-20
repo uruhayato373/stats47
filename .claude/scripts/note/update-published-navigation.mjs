@@ -719,7 +719,16 @@ async function main() {
   console.log(`audit: planned=${plans.length} pending=${pendingCount}`);
   console.log(`report: ${REPORT_PATH}`);
   if (!options.commit) {
-    if (options.check && pendingCount > 0) process.exitCode = 1;
+    if (options.check && pendingCount > 0) {
+      // CI では report ファイルを読めないので、何が pending なのかをログに出す (環境差の切り分け用)
+      for (const article of report.articles.filter((entry) => entry.pending)) {
+        const flags = ["wouldAddNextNote", "wouldAddMagazine", "wouldAddSite", "wouldAddProduct", "wouldAddDataset", "wouldDedupeFooterHeading", "wouldNormalizeLegacyLinks"]
+          .filter((flag) => article[flag]).map((flag) => flag.replace("would", ""));
+        const repairs = article.linkRepairs.map((repair) => `${repair.mode}:${repair.fromUrl}`);
+        console.log(`  pending ${article.key}: ${flags.join(",") || "-"} repairs=${repairs.join(" ") || "-"}`);
+      }
+      process.exitCode = 1;
+    }
     return;
   }
 
