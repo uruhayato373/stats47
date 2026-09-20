@@ -43,9 +43,7 @@ export function TrackedAffiliateLink({
   })();
   // もしもの発行原稿は referrerpolicy + attributionsrc を必須とする。
   // noreferrer は referrerpolicy を無効化するため、もしもだけ nofollow/noopener/sponsored にする。
-  const moshimoAttributes = isMoshimo
-    ? ({ referrerPolicy: "no-referrer-when-downgrade", attributionsrc: "" } as const)
-    : {};
+  const moshimoAttributes = isMoshimo ? ({ attributionsrc: "" } as const) : {};
   return (
     // eslint-disable-next-line react/jsx-no-target-blank -- もしも原稿はreferrer送信必須。noopenerは常に維持する。
     <a
@@ -53,6 +51,7 @@ export function TrackedAffiliateLink({
       aria-label={label}
       target="_blank"
       rel={isMoshimo ? "nofollow noopener sponsored" : "noopener noreferrer sponsored"}
+      referrerPolicy={isMoshimo ? "no-referrer-when-downgrade" : undefined}
       className={className}
       {...moshimoAttributes}
       onClick={() =>

@@ -44,6 +44,18 @@ test("alt欠落と危険なblank linkを検出する", (t) => {
   assert.equal(result.status, 1); assert.ok(codes.includes("IMAGE_ALT_MISSING")); assert.ok(codes.includes("BLANK_REL_MISSING"));
 });
 
+test("明示referrerPolicyがあるblank linkはnoreferrerなしでも受理する", (t) => {
+  const item = fixture(`export const C=({managed})=> <a target="_blank" rel={managed ? "nofollow noopener sponsored" : "noopener noreferrer"} referrerPolicy={managed ? "no-referrer-when-downgrade" : undefined}>x</a>`);
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item); assert.equal(result.status, 0, result.stderr);
+});
+
+test("明示referrerPolicyがあってもnoopener欠落は拒否する", (t) => {
+  const item = fixture(`export const C=()=> <a target="_blank" rel="sponsored" referrerPolicy="origin">x</a>`);
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item); assert.equal(result.status, 1); assert.equal(result.output.findings[0].code, "BLANK_REL_MISSING");
+});
+
 test("click-only divと名前のないinputを検出する", (t) => {
   const item = fixture(`export const C=()=> <><div onClick={()=>{}}>x</div><input/></>`);
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
