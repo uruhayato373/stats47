@@ -201,7 +201,7 @@ jobs:
             const fs=require("fs");
             const date=process.argv[2];
             const lines=fs.readFileSync(process.argv[1], "utf8").split(/\r?\n/);
-            if (!lines.some((line) => line.startsWith(`${date},7,_all,_all,`))) process.exit(1);
+            if (!lines.some((line) => line.startsWith(date + ",7,_all,_all,"))) process.exit(1);
           ' /tmp/remote-affiliate-history.csv "$DATE" \
             || { echo "::error::develop history read-backに確定7日行が無い: $DATE"; exit 1; }
 
@@ -292,7 +292,7 @@ jobs:
               node -e '
                 const fs=require("fs");
                 const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
-                console.log(`- reasons: ${(state.measurementGate?.reasons ?? []).join(", ") || "none"}`);
+                console.log("- reasons: " + ((state.measurementGate?.reasons ?? []).join(", ") || "none"));
               ' .claude/state/ads/affiliate-operations-latest.json
             fi
           } > /tmp/affiliate-measurement-issue.md

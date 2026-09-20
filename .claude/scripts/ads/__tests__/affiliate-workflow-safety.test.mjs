@@ -66,7 +66,7 @@ test("GA4週次はR2とdevelop履歴行をread-backし、全step outcomeを最�
   assert.match(source, /cmp -s "\$STAGE\/latest\.json" \/tmp\/affiliate-latest-readback\.json/);
   assert.match(source, /affiliate-index-readback\.json/);
   assert.match(source, /git show FETCH_HEAD:\.claude\/state\/ads\/ga4-affiliate-history\.csv/);
-  assert.match(source, /line\.startsWith\(`\$\{date\},7,_all,_all,`\)/);
+  assert.match(source, /line\.startsWith\(date \+ ",7,_all,_all,"\)/);
   for (const id of ["ga4", "publish", "history", "operations"]) {
     assert.match(source, new RegExp(`"${id}=\\$\\{\\{ steps\\.${id}\\.outcome \\}\\}"`));
   }
