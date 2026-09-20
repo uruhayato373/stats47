@@ -6,6 +6,7 @@ import { GeoAnalysisCards } from '../../components/GeoAnalysisCards';
 import {
   GEO_HOME_ANALYSIS_NAV_ITEMS,
   GEO_HOME_LAYER_NAV_ITEMS,
+  getGeoHomeLayerNavItems,
 } from '../geo-home-copy';
 import { loadGeoAnalysisPrefBundle } from '../load-geo-analysis-evidence';
 
@@ -57,4 +58,11 @@ it('provides one direct navigation item for every public single-layer GIS', () =
       href: `/geo/layers/${layer.slug}`,
     }))
   );
+});
+
+it('marks exactly one single-layer GIS as the current page', () => {
+  const items = getGeoHomeLayerNavItems('population-mesh');
+  expect(items.filter((item) => item.active)).toEqual([
+    expect.objectContaining({ id: 'population-mesh' }),
+  ]);
 });

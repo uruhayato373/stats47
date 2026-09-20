@@ -14,6 +14,8 @@ export interface RailLinksCardItem {
   id: string;
   label: string;
   href: string;
+  /** 現在表示中のページ。list 行では aria-current と active 表示を付ける。 */
+  active?: boolean;
   count?: number;
   ariaLabel?: string;
   trackingLabel?: string;
@@ -156,7 +158,12 @@ function RailLinks({
             key={item.id}
             href={item.href}
             aria-label={item.ariaLabel}
-            trailing={item.count !== undefined ? item.count.toLocaleString('ja-JP') : undefined}
+            active={item.active}
+            trailing={
+              item.count !== undefined
+                ? item.count.toLocaleString('ja-JP')
+                : undefined
+            }
             onClick={() => trackLink(item, trackingSurface)}
           >
             {item.label}

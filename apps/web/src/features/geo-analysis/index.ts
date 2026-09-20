@@ -6,6 +6,7 @@ export {
   GEO_HOME_LAYER_NAV_ITEMS,
 } from './lib/geo-home-copy';
 export { GeoLayerCards } from './components/GeoLayerCards';
+export { GeoLayerNavigation } from './components/GeoLayerNavigation';
 export {
   loadGeoSourceCatalog,
   loadGeoSourceItem,

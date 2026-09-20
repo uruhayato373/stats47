@@ -1,6 +1,7 @@
 import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
 
 type GeoAnalysisSlug = (typeof GEO_ANALYSES)[number]['slug'];
+type GeoLayerSlug = (typeof GEO_LAYERS)[number]['slug'];
 
 /**
  * Hub / rail 向けの短いラベル。詳細ページの正式タイトルは変えず、
@@ -27,3 +28,10 @@ export const GEO_HOME_LAYER_NAV_ITEMS = GEO_LAYERS.map((layer) => ({
   label: layer.name,
   href: `/geo/layers/${layer.slug}`,
 }));
+
+export function getGeoHomeLayerNavItems(activeLayerSlug?: GeoLayerSlug) {
+  return GEO_HOME_LAYER_NAV_ITEMS.map((item) => ({
+    ...item,
+    active: item.id === activeLayerSlug,
+  }));
+}
