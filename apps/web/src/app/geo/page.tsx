@@ -17,6 +17,7 @@ import { SurfaceLinkCard } from '@/components/surface';
 import {
   GeoAnalysisCards,
   GEO_HOME_ANALYSIS_NAV_ITEMS,
+  GEO_HOME_LAYER_NAV_ITEMS,
 } from '@/features/geo-analysis';
 
 import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
@@ -32,8 +33,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/geo' },
 };
 
-const GEO_RESOURCE_LINKS = [
-  { id: 'layers', label: 'GISを探す', href: '/geo/layers' },
+const GEO_METHOD_LINKS = [
   {
     id: 'method',
     label: '地図の読み方・限界',
@@ -84,10 +84,17 @@ export default function GeoPage() {
             items={GEO_HOME_ANALYSIS_NAV_ITEMS}
           />
           <RailLinksCard
-            title="GIS・方法・出典"
+            title="GIS一覧"
             layout="list"
             trackingSurface="geo_sidebar"
-            items={GEO_RESOURCE_LINKS}
+            items={GEO_HOME_LAYER_NAV_ITEMS}
+            moreLink={{ href: '/geo/layers', label: 'すべてのGISを探す →' }}
+          />
+          <RailLinksCard
+            title="方法・出典"
+            layout="list"
+            trackingSurface="geo_sidebar"
+            items={GEO_METHOD_LINKS}
           />
         </RailStack>
       }
@@ -181,12 +188,21 @@ export default function GeoPage() {
         </nav>
       </section>
       <div className={`mt-6 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
-        <RailLinksCard
-          title="GIS・方法・出典"
-          layout="list"
-          trackingSurface="geo_sidebar"
-          items={GEO_RESOURCE_LINKS}
-        />
+        <RailStack>
+          <RailLinksCard
+            title="GIS一覧"
+            layout="list"
+            trackingSurface="geo_sidebar"
+            items={GEO_HOME_LAYER_NAV_ITEMS}
+            moreLink={{ href: '/geo/layers', label: 'すべてのGISを探す →' }}
+          />
+          <RailLinksCard
+            title="方法・出典"
+            layout="list"
+            trackingSurface="geo_sidebar"
+            items={GEO_METHOD_LINKS}
+          />
+        </RailStack>
       </div>
     </PageShell>
   );

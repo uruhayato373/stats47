@@ -1,4 +1,4 @@
-import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
 
 type GeoAnalysisSlug = (typeof GEO_ANALYSES)[number]['slug'];
 
@@ -19,4 +19,11 @@ export const GEO_HOME_ANALYSIS_NAV_ITEMS = GEO_ANALYSES.map((analysis) => ({
   id: analysis.slug,
   label: GEO_HOME_ANALYSIS_LABELS[analysis.slug],
   href: `/geo/${analysis.slug}`,
+}));
+
+/** 公開済みで単体表示できるGISだけを、正典の表示名・順序で案内する。 */
+export const GEO_HOME_LAYER_NAV_ITEMS = GEO_LAYERS.map((layer) => ({
+  id: layer.slug,
+  label: layer.name,
+  href: `/geo/layers/${layer.slug}`,
 }));

@@ -1,9 +1,12 @@
-import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
 
 import { GeoAnalysisCards } from '../../components/GeoAnalysisCards';
-import { GEO_HOME_ANALYSIS_NAV_ITEMS } from '../geo-home-copy';
+import {
+  GEO_HOME_ANALYSIS_NAV_ITEMS,
+  GEO_HOME_LAYER_NAV_ITEMS,
+} from '../geo-home-copy';
 import { loadGeoAnalysisPrefBundle } from '../load-geo-analysis-evidence';
 
 vi.mock('../load-geo-analysis-evidence', () => ({
@@ -43,4 +46,15 @@ it('provides one compact navigation label for every published analysis', () => {
   expect(
     GEO_HOME_ANALYSIS_NAV_ITEMS.every((item) => item.label.length <= 20)
   ).toBe(true);
+});
+
+it('provides one direct navigation item for every public single-layer GIS', () => {
+  expect(GEO_HOME_LAYER_NAV_ITEMS).toHaveLength(GEO_LAYERS.length);
+  expect(GEO_HOME_LAYER_NAV_ITEMS).toEqual(
+    GEO_LAYERS.map((layer) => ({
+      id: layer.slug,
+      label: layer.name,
+      href: `/geo/layers/${layer.slug}`,
+    }))
+  );
 });
