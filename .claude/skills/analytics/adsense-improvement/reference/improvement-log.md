@@ -1,9 +1,14 @@
-# AdSense 改善ログ (agent 用詳細)
+# AdSense 改善ログ (凍結記録)
+
+> **2026-09-20: AdSense は恒久停止した。このログは凍結記録で、新しい施策を追記しない。**
+> 正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、恒久事実は
+> `.claude/memory/project_monetization_contract.md`。広告レーンの改善は
+> `.claude/skills/analytics/affiliate-improvement/` で行う。
 
 一覧・status の真実源は `.claude/todo/improvements.md`。ここは検証コマンド・仮説・期日の詳細ログ。
 記入テンプレ: `.claude/rules/evidence-based-judgment.md` §改善ログ記入テンプレ。
 
-## [ADSENSE-PAUSE-01] 全AdSense表示の一時停止
+## [ADSENSE-PAUSE-01] 全AdSense表示の停止 → 恒久停止（確定）
 
 - **判断日**: 2026-08-16（オーナー明示判断）
 - **デプロイ日**: 2026-08-29（PR #849 の main マージ）。2026-09-18 に `curl -s https://stats47.jp/ | grep -c "adsbygoogle\|pagead2"` = 0 で本番の配信停止を確認
@@ -13,7 +18,11 @@
 - **検証**: デプロイ直後に本番HTMLとnetworkで `pagead2.googlesyndication.com` / `adsbygoogle` / AdSense用空枠が0件であることを確認。28日後に重複しない期間で Core Web Vitals、engagement、affiliate CTR、商品導線クリック、AdSense減収を比較する
 - **再開条件**: 28日実測を確認し、オーナーが明示承認した場合のみ全体スイッチを `true` へ戻す。個別ページから先に戻さない
 - **実測（停止後）**: AdSense 確定7日 earnings は W32 ¥130 → W33 ¥118 → W34 ¥8、page views 4,469 → 324（`.claude/state/metrics/adsense/history.csv`）。W35 以降の snapshot は未取得
-- **判定**: in-progress（判定期日 = デプロイ+28日の 2026-09-26）。ただし比較材料のうち**アフィリエイト実測が 2026-08-28 以降存在しない**（`AFF-MEASURE-RECOVER-01`）ため、「代替収益」の項目は 09-26 時点では判定できない。CWV・engagement だけで判定するか期日を延ばすかはオーナーが決める
+- **判定**: **確定 = 恒久停止（2026-09-20 オーナー判断）。effect ラベルは付けない。**
+  - **なぜ effect ラベルを付けないか**: 28日判定に必要な比較材料が揃わなかった。代替収益として比較するはずだった**アフィリエイト実測が 2026-08-28 以降存在しない**（`AFF-MEASURE-RECOVER-01`）。Core Web Vitals と回遊についても、スクリプト停止による LCP 改善は過去の計測で確定していないため主張しない。**取れなかったものを取れたことにしない。**
+  - **では何を根拠に恒久化したか**: 効果ではなく**上限金額**である。停止直前の通常週（2026-W33）は earnings ¥118 / page views 3,152 でページ RPM ¥37。現在のトラフィック（GA4 週 11,090 PV、`.claude/state/metrics/ga4/history.csv` 2026-W37）に同じ RPM を当てても月 ¥1,400〜1,800 にしかならない。月 20 万 PV まで伸びても月 ¥6,000〜7,400 の水準で、読者体験と表示速度を対価にするには見合わないとオーナーが判断した。**PV が伸びてもこの結論は変わらない**のが恒久化の理由である。
+  - **再開条件は持たない**: 再開するなら収益化戦略の改訂を伴う新しい判断であり、本ログの続きではない。
+  - **停止した運用**: `/fetch-adsense-data` の週次呼び出し、`/adsense-improvement` の改善ループ、weekly-review / weekly-plan の AdSense 計器と candidate 枠。週次収益は NSM（`generate-weekly-metrics-issue.mjs` の「週次収益 (NSM)」節）で追う。
 
 ---
 

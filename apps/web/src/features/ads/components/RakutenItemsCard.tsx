@@ -9,6 +9,16 @@ import { readRakutenItemsFromR2 } from "../repositories/rakuten-snapshot";
 import { AdImpressionTracker } from "./AdImpressionTracker";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
+/**
+ * 楽天商品カードの GA4 計測ラベル。意図軸 10 vertical には入れない。
+ *
+ * 2026-08-10〜09-06 の実測では、このカードが `economy` として記録されていたため、
+ * `economy` に全 impression の約 31% が集まり、意図軸としての economy の CTR を
+ * 評価できなくなっていた (楽天カードは 740 impression / 0 click)。商品検索は
+ * 「経済統計を読む意図」とは別の導線なので、分母を分けて計測する。
+ */
+const RAKUTEN_ITEMS_TRACKING_CATEGORY = "rakuten-items";
+
 interface RakutenItemsCardProps {
   /** 品目を探すテキスト (記事タイトル / ランキング名)。 */
   sourceText: string;
@@ -51,7 +61,7 @@ export async function RakutenItemsCard({
   //    とする (アイテム単位にすると同一 adId が 4 重に計上され CTR が 1/4 に歪む)。
   return (
     <AdImpressionTracker
-      category="economy"
+      category={RAKUTEN_ITEMS_TRACKING_CATEGORY}
       label={`${keyword.term}の人気商品`}
       position={position}
       adId={adId}
@@ -81,7 +91,7 @@ export async function RakutenItemsCard({
           <TrackedAffiliateLink
             key={item.url}
             href={item.url}
-            category="economy"
+            category={RAKUTEN_ITEMS_TRACKING_CATEGORY}
             adId={adId}
             label={item.name}
             position={position}

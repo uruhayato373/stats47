@@ -1,14 +1,17 @@
 ---
 name: fetch-adsense-data
-description: Google AdSense Management API から広告収益・RPM・CTR・ビューアビリティを取得する。Use when user says "AdSenseデータ", "広告収益", "RPM", "AdSense snapshot". snapshot モードで週次 CSV を .claude/skills/analytics/adsense-improvement/reference/snapshots/ に保存.
+description: 【停止中】AdSense は 2026-09-20 に恒久停止したため、このスキルは週次運用から外した。過去データの参照や、停止の確認で明示的に求められたときだけ使う。
 primary_agent: adsense-analyst
 ---
+
+> **2026-09-20: AdSense は恒久停止した。** 正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1。
+> 配信が無いので取得しても実績は 0 行で、週次運用から外している。呼ぶのは過去データの参照時だけ。
 
 Google AdSense Management API からサイトの広告パフォーマンスデータを取得する。
 
 2 つのモードがある:
 - **ad hoc モード** (デフォルト) — 指定期間/ディメンションで取得して結果を整形表示する
-- **snapshot モード** — 全ディメンションを全件取得して週次 snapshot ディレクトリに CSV 保存する。`/weekly-review` から呼ばれる
+- **snapshot モード** — 全ディメンションを全件取得して週次 snapshot ディレクトリに CSV 保存する（`/weekly-review` からの週次呼び出しは 2026-09-20 に停止した）
 
 ## 用途
 

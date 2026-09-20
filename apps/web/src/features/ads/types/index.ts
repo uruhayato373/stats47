@@ -53,6 +53,14 @@ export interface ResolvedAffiliateAd {
   title: string;
   href: string;
   trackingPixelUrl?: string | null;
+  /**
+   * 広告意図軸 (10 軸)。GA4 の `affiliate_vertical` に送るために解決層で確定させる。
+   * 描画側がページ文脈値 (`affiliateCategory`) を代わりに送ると、広告自身の意図軸が
+   * 計測から失われる (2026-09-20 実測: 全 impression の 29% が `other` として記録され、
+   * vertical 別 CTR で配置判断ができなくなっていた)。`ResolvedAffiliateBanner.vertical`
+   * と同じ規約で、banner / text の両方に持たせる。
+   */
+  vertical: AffiliateVertical | null;
 }
 
 export interface ResolvedAffiliateBanner {

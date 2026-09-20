@@ -41,7 +41,7 @@ export function AffiliateTextAdList({
       {ads.map((ad) => (
         <AdImpressionTracker
           key={ad.title}
-          category={affiliateCategory ?? "other"}
+          category={ad.vertical ?? affiliateCategory ?? "other"}
           label={ad.title}
           position={position}
           adId={ad.id}
@@ -56,7 +56,7 @@ export function AffiliateTextAdList({
             </div>
             <TrackedAffiliateLink
               href={ad.href}
-              category={affiliateCategory ?? "other"}
+              category={ad.vertical ?? affiliateCategory ?? "other"}
               label={ad.title}
               position={position}
               adId={ad.id}

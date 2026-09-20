@@ -1,5 +1,6 @@
 # Memory Index
 
+- [project_monetization_contract.md](project_monetization_contract.md) — 収益化の恒久判断。AdSenseは恒久停止(RPM ¥37で月¥1,400上限)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る(契約テストで強制)、本線は行政実務向け商品
 - [project_theme_selection_backfill_pipeline.md](project_theme_selection_backfill_pipeline.md) — ThemeCatalog selection の夜間 backfill。モデルは JSON のみ・決定的 gate が書く・expanded.ts 由来は selection-evidence.ts。headless claude はセッション内でも認証可、PDF は pdftotext で逐語照合
 - [feedback_note_product_card_ssot.md](feedback_note_product_card_ssot.md) — note商品カードはマガジンでなく実商品SSOTから解決。生成/修正は同一関数共有、regenerate-cardはカード不在時no-op
 - [project_note_ins_img_heading_placement_bug.md](project_note_ins_img_heading_placement_bug.md) — ins_imgは見出し直前アンカーで画像が見出し直後にずれる未解決バグ。盲目修正は悪化した実例あり
