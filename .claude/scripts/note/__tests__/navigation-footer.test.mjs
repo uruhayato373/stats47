@@ -320,3 +320,11 @@ test("legacy free preview with a duplicated footer heading is collapsed across t
   assert.ok(result.body.endsWith(hidden), "境界より後ろは触らない");
   assert.ok(result.body.includes("カード1") && result.body.includes("カード2"));
 });
+
+test("regenerate-card leaves a correctly-addressed card alone when note returned it without any text", () => {
+  const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n68f5e09c8d62";
+  const stripped = `<figure name="f" id="f" data-src="${url}" data-identifier="null" embedded-service="external-article" embedded-content-key="emb1">\n<a href="${url}" rel="nofollow noopener" target="_blank"></a>\n</figure>`;
+  const result = applyPublishedLinkRepairs(stripped, [{ mode: "regenerate-card", fromUrl: url, title: "実質手取りの地図", description: "説明" }]);
+  assert.equal(result.changed, false);
+  assert.equal(result.body, stripped);
+});

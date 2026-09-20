@@ -141,8 +141,12 @@ export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUI
         matched = true;
         const currentTitle = figure.match(/<strong>([\s\S]*?)<\/strong>/)?.[1];
         const currentDescription = figure.match(/<em>([\s\S]*?)<\/em>/)?.[1];
-        const alreadyCorrect = currentTitle === escapeHtml(repair.title)
-          && currentDescription === escapeHtml(repair.description);
+        // note は external-article カードの <a> 内テキストを配信経路 (CDN / リージョン) によって落として返す
+        // ことがある (2026-09-20: GitHub Actions からの取得で 22 本、ローカルでは 0 本)。URL が正しく文言が空の
+        // カードは「誤った文言」ではないので書き直さない (書き直しても次の取得でまた空になり、check が永久に赤になる)。
+        const renderedWithoutText = currentTitle === undefined && currentDescription === undefined;
+        const alreadyCorrect = renderedWithoutText || (currentTitle === escapeHtml(repair.title)
+          && currentDescription === escapeHtml(repair.description));
         return alreadyCorrect ? figure : externalCard(fromUrl, repair.title, repair.description, idFactory);
       });
       // カードがまだ存在しない記事 (本文差し替え直後など) では何もしない。
