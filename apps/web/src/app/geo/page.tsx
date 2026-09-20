@@ -4,12 +4,20 @@ import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 import { ArrowRight, MapPin } from 'lucide-react';
 
 import { ContentDisclosure } from '@/components/content';
-import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import {
+  Breadcrumbs,
+  LEFT_RAIL_NARROW_ONLY_CLASS,
+  PageHeader,
+  PageShell,
+} from '@/components/layout';
 import { RailLinksCard, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
-import { RailCard, SurfaceLinkCard } from '@/components/surface';
+import { SurfaceLinkCard } from '@/components/surface';
 
-import { GeoAnalysisCards } from '@/features/geo-analysis';
+import {
+  GeoAnalysisCards,
+  GEO_HOME_ANALYSIS_NAV_ITEMS,
+} from '@/features/geo-analysis';
 
 import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
@@ -24,7 +32,21 @@ export const metadata: Metadata = {
   alternates: { canonical: '/geo' },
 };
 
-function CompareLink() {
+const GEO_RESOURCE_LINKS = [
+  { id: 'layers', label: 'GISを探す', href: '/geo/layers' },
+  {
+    id: 'method',
+    label: '地図の読み方・限界',
+    href: '/geo/method',
+  },
+  {
+    id: 'sources',
+    label: '使用データと利用条件',
+    href: '/geo/data-catalog',
+  },
+] as const;
+
+function CompareLink({ compact = false }: { compact?: boolean }) {
   return (
     <SurfaceLinkCard
       href="/geo/compare"
@@ -32,9 +54,13 @@ function CompareLink() {
     >
       <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold">あなたの県から調べる</p>
+        <p className="text-sm font-semibold">
+          {compact ? '県から調べる' : 'あなたの県から調べる'}
+        </p>
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-          人口・地価・洪水・駅を県別に比較
+          {compact
+            ? '人口・地価・洪水・駅を比較'
+            : '人口・地価・洪水・駅を県別に比較'}
         </p>
       </div>
       <ArrowRight
@@ -48,56 +74,25 @@ function CompareLink() {
 export default function GeoPage() {
   return (
     <PageShell
-      rightRail={
+      leftRail={
         <RailStack>
-          <div className="hidden xl:block">
-            <CompareLink />
-          </div>
+          <CompareLink compact />
           <RailLinksCard
-            title="地域の背景を知る"
+            title="分析を選ぶ"
             layout="list"
             trackingSurface="geo_sidebar"
-            items={[
-              {
-                id: 'population',
-                label: '2050年の人口増減率ランキング',
-                href: POPULATION_BASELINE_RANKING_PATH,
-              },
-              { id: 'areas', label: '都道府県データブック', href: '/areas' },
-              { id: 'blog', label: '統計を読み解くブログ', href: '/blog' },
-            ]}
+            items={GEO_HOME_ANALYSIS_NAV_ITEMS}
           />
           <RailLinksCard
-            title="分析方法・出典"
+            title="GIS・方法・出典"
             layout="list"
             trackingSurface="geo_sidebar"
-            items={[
-              { id: 'layers', label: 'GISを探す', href: '/geo/layers' },
-              {
-                id: 'method',
-                label: '地図の読み方と分析の限界',
-                href: '/geo/method',
-              },
-              {
-                id: 'sources',
-                label: '使用データ・年度・利用条件',
-                href: '/geo/data-catalog',
-              },
-            ]}
+            items={GEO_RESOURCE_LINKS}
           />
-          <RailCard title="地域を詳しく調べるために">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              地図で気になる場所を見つけたら、県別の集計や一次資料も確認できます。推計や距離条件を踏まえて読み進めてください。
-            </p>
-            <Link
-              href="/about"
-              className="mt-3 inline-flex min-h-11 items-center text-sm text-primary underline"
-            >
-              stats47について
-            </Link>
-          </RailCard>
         </RailStack>
       }
+      leftRailDensity="compact"
+      leftRailNarrowBehavior="hide"
     >
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: '地域分析' }]}
@@ -106,8 +101,8 @@ export default function GeoPage() {
         title="地図で見る地域の変化"
         description="一つのGISで分布を知り、データを重ねて地域の変化を読む。"
       />
-      {/* Narrow widths keep the prefecture-comparison entry above the cards (rail is hidden). */}
-      <div className="mb-5 xl:hidden">
+      {/* 992px 未満では左レールが隠れるため、県比較の入口を本文上部へ残す。 */}
+      <div className={`mb-5 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
         <CompareLink />
       </div>
       <section aria-labelledby="geo-analyses-heading">
@@ -154,6 +149,45 @@ export default function GeoPage() {
           </li>
         </ol>
       </ContentDisclosure>
+      <section
+        aria-labelledby="geo-related-heading"
+        className="mt-8 border-t pt-6"
+      >
+        <SectionHeader
+          title={<span id="geo-related-heading">関連する地域データ</span>}
+        />
+        <nav
+          aria-label="関連する地域データ"
+          className="flex flex-wrap gap-x-6 gap-y-1"
+        >
+          <Link
+            href={POPULATION_BASELINE_RANKING_PATH}
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            2050年の人口増減率ランキング
+          </Link>
+          <Link
+            href="/areas"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            都道府県データブック
+          </Link>
+          <Link
+            href="/blog"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            統計を読み解くブログ
+          </Link>
+        </nav>
+      </section>
+      <div className={`mt-6 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
+        <RailLinksCard
+          title="GIS・方法・出典"
+          layout="list"
+          trackingSurface="geo_sidebar"
+          items={GEO_RESOURCE_LINKS}
+        />
+      </div>
     </PageShell>
   );
 }
