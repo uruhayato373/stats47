@@ -715,10 +715,16 @@ async function main() {
       // 「サイトカードが無い」判定の根拠を残す (2026-09-20: CI だけ 22 本で AddSite になり、ローカルでは 0 本)
       const body = before.body;
       const at = body.search(/stats47\.jp/);
+      const repairedBody = applyPublishedLinkRepairs(body, plan.repairs).body;
+      const linkAttr = /\b(?:href|data-src)="https?:\/\/(?:www\.)?stats47\.jp(?:[\/"?#]|$)/i;
       item.stats47Diagnostics = {
         refs: (body.match(/stats47\.jp/g) || []).length,
         sample: at >= 0 ? body.slice(Math.max(0, at - 120), at + 60).replace(/\s+/g, " ") : null,
         bodyLength: body.length,
+        repairedLength: repairedBody.length,
+        linkAttrInBefore: linkAttr.test(body),
+        linkAttrInRepaired: linkAttr.test(repairedBody),
+        repairedSample: (() => { const i = repairedBody.search(/stats47\.jp/); return i >= 0 ? repairedBody.slice(Math.max(0, i - 120), i + 60).replace(/\s+/g, " ") : null; })(),
         embeddedContents: Array.isArray(before.embeddedContents) ? before.embeddedContents.length : null,
       };
     }
