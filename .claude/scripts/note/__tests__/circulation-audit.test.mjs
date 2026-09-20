@@ -352,4 +352,7 @@ test("two 次に読む headings in a live body are warned", () => {
   assert.ok(audit.warnings.some((issue) => issue.code === "duplicate_footer_heading" && issue.detail === 2));
   const single = paidFixture({ price: 0, body: '<p>本文</p><hr><h2>次に読む</h2><p>a</p>' });
   assert.equal(single.warnings.some((issue) => issue.code === "duplicate_footer_heading"), false);
+  // 著者が本文に置いた「関連記事 / 次に読む」見出しはフッターの二重化ではない (koumuin 8 本で実測)
+  const authored = paidFixture({ price: 0, body: '<h2 name="a" id="a">関連記事 / 次に読む</h2><ul><li><p>x</p></li></ul><hr><h2 name="b" id="b">次に読む</h2><p>a</p>' });
+  assert.equal(authored.warnings.some((issue) => issue.code === "duplicate_footer_heading"), false);
 });

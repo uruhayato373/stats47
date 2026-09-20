@@ -310,3 +310,13 @@ test("duplicated 次に読む headings collapse to one while every card is kept"
   assert.equal(viaFooter.dedupedFooterHeading, true);
   assert.equal(applyNavigationFooter(viaFooter.body, {}, { idFactory: ids() }).changed, false, "畳んだ後は冪等");
 });
+
+test("legacy free preview with a duplicated footer heading is collapsed across the whole body without extending it", () => {
+  const visible = '<p name="a" id="a">本文</p><hr name="h1" id="h1"><h2 name="t1" id="t1">次に読む</h2><p name="c1" id="c1">カード1</p><p name="x" id="x"><br></p><hr name="h2" id="h2"><h2 name="t2" id="t2">次に読む</h2><p name="c2" id="c2">カード2</p>';
+  const hidden = '<p name="sep" id="sep">試し読みの続き</p>';
+  const result = applyVisibleNavigationBeforeSeparator(visible + hidden, visible, "sep", {}, { idFactory: ids() });
+  assert.equal(result.changed, true);
+  assert.equal((result.body.match(/次に読む<\/h2>/g) || []).length, 1);
+  assert.ok(result.body.endsWith(hidden), "境界より後ろは触らない");
+  assert.ok(result.body.includes("カード1") && result.body.includes("カード2"));
+});
