@@ -131,6 +131,7 @@ function snapshot(note) {
       ? note.hashtag_notes.map((item) => item?.hashtag?.name).filter(Boolean)
       : [],
     hasDraft: Boolean(note.has_draft),
+    embeddedContents: Array.isArray(note.embedded_contents) ? note.embedded_contents : null,
     body: String(note.body || ""),
     bodySignature: fnv1a(note.body || ""),
   };
@@ -710,6 +711,17 @@ async function main() {
       wouldDedupeFooterHeading: application.dedupedFooterHeading,
       wouldNormalizeLegacyLinks: application.normalizedLegacyLinks,
     };
+    if (application.addedSite) {
+      // 「サイトカードが無い」判定の根拠を残す (2026-09-20: CI だけ 22 本で AddSite になり、ローカルでは 0 本)
+      const body = before.body;
+      const at = body.search(/stats47\.jp/);
+      item.stats47Diagnostics = {
+        refs: (body.match(/stats47\.jp/g) || []).length,
+        sample: at >= 0 ? body.slice(Math.max(0, at - 120), at + 60).replace(/\s+/g, " ") : null,
+        bodyLength: body.length,
+        embeddedContents: Array.isArray(before.embeddedContents) ? before.embeddedContents.length : null,
+      };
+    }
     if (options.commit && !item.pending) item.result = { status: "already_compliant" };
     report.articles.push(item);
     audited.push({ plan, before, item });
@@ -726,6 +738,7 @@ async function main() {
           .filter((flag) => article[flag]).map((flag) => flag.replace("would", ""));
         const repairs = article.linkRepairs.map((repair) => `${repair.mode}:${repair.fromUrl}`);
         console.log(`  pending ${article.key}: ${flags.join(",") || "-"} repairs=${repairs.join(" ") || "-"}`);
+        if (article.stats47Diagnostics) console.log(`    stats47: ${JSON.stringify(article.stats47Diagnostics)}`);
       }
       process.exitCode = 1;
     }
