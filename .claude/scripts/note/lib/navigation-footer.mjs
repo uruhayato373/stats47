@@ -291,14 +291,23 @@ export function applyVisibleNavigationBeforeSeparator(
   const visible = String(publicBody);
   const preview = applyNavigationFooter(visible, plan, { idFactory });
   if (!preview.changed) return { ...preview, body: original, changed: false };
-  if (!preview.body.startsWith(visible)) throw new Error("公開プレビュー本文を安全に拡張できません");
+  // 二重見出しの畳み込みはプレビューの中身を変えるので「末尾への追記」ではない。追記が無く畳み込みだけなら
+  // 全文に同じ畳み込みを掛けて返す (公開プレビュー部分は全文の先頭にそのまま含まれる)。
+  const collapsedVisible = collapseDuplicateFooterHeadings(normalizeLegacyStats47Links(visible));
+  if (preview.body === collapsedVisible) {
+    if (!original.startsWith(visible)) throw new Error("公開プレビュー本文が全文の先頭と一致しません");
+    return { ...preview, body: collapseDuplicateFooterHeadings(normalizeLegacyStats47Links(original)), changed: true };
+  }
+  if (!preview.body.startsWith(collapsedVisible)) throw new Error("公開プレビュー本文を安全に拡張できません");
   const separatorIndex = original.indexOf(separator);
   const insertionIndex = original.lastIndexOf("<", separatorIndex);
   if (separatorIndex < 0 || insertionIndex < 0) throw new Error("旧試し読み境界を本文内で確認できません");
-  const addition = preview.body.slice(visible.length);
+  const addition = preview.body.slice(collapsedVisible.length);
+  const base = collapsedVisible === visible ? original : original.replace(visible, collapsedVisible);
+  const baseInsertion = base.lastIndexOf("<", base.indexOf(separator));
   return {
     ...preview,
-    body: `${original.slice(0, insertionIndex)}${addition}${original.slice(insertionIndex)}`,
+    body: `${base.slice(0, baseInsertion)}${addition}${base.slice(baseInsertion)}`,
     changed: true,
   };
 }

@@ -256,7 +256,8 @@ export function buildArticleAudit({
   if (redirectedSiteLinks.length > 0) warnings.push({ code: "redirected_site_link", detail: redirectedSiteLinks });
 
   // フッター見出しの二重化 (2026-09-16 の商品カード一括追加で 190 本)。footer 適用時に畳むので再発は warning で捕まえる
-  const footerHeadings = (String(live.body || "").match(/次に読む<\/h2>/g) || []).length;
+  // 見出し本文が「次に読む」だけのものを数える (本文中の「関連記事 / 次に読む」のような著者見出しは別物)
+  const footerHeadings = (String(live.body || "").match(/<h2[^>]*>次に読む<\/h2>/g) || []).length;
   if (footerHeadings >= 2) warnings.push({ code: "duplicate_footer_heading", detail: footerHeadings });
 
   const paidLanding = auditPaidLanding({ article, live, expectedMagazine, inboundNoteLinkCount });
