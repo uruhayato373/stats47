@@ -17,7 +17,9 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const HISTORY = path.join(ROOT, ".claude", "state", "ads", "ga4-affiliate-history.csv");
+const EXPERIMENT_HISTORY = path.join(ROOT, ".claude", "state", "ads", "affiliate-experiment-history.csv");
 export const HEADER = "date,days,affiliate_vertical,link_position,impressions,clicks,ctr";
+export const EXPERIMENT_HEADER = "date,days,experiment_id,variant_id,impressions,clicks,ctr";
 
 export function aggregateRows(snapshot) {
   const { date, days } = snapshot;
@@ -41,6 +43,33 @@ export function aggregateRows(snapshot) {
   return rows;
 }
 
+export function aggregateExperimentRows(snapshot) {
+  const { date, days } = snapshot;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(date))) throw new Error(`snapshot.date が不正: ${date}`);
+  const groups = new Map();
+  for (const row of snapshot.experiments ?? []) {
+    const experimentId = row.experiment_id;
+    const variantId = row.variant_id;
+    if (!experimentId || experimentId === "(unset)" || !variantId || variantId === "(unset)") continue;
+    const key = `${experimentId}\u0000${variantId}`;
+    const group = groups.get(key) ?? { experimentId, variantId, impressions: 0, clicks: 0 };
+    group.impressions += Number(row.impressions) || 0;
+    group.clicks += Number(row.clicks) || 0;
+    groups.set(key, group);
+  }
+  return [...groups.values()]
+    .sort((left, right) => left.experimentId.localeCompare(right.experimentId) || left.variantId.localeCompare(right.variantId))
+    .map((group) => [
+      date,
+      days,
+      group.experimentId,
+      group.variantId,
+      group.impressions,
+      group.clicks,
+      ratio(group.clicks, group.impressions),
+    ]);
+}
+
 function ratio(clicks, impressions) {
   const c = Number(clicks) || 0, i = Number(impressions) || 0;
   return i ? (c / i).toFixed(6) : "0";
@@ -52,25 +81,45 @@ function csvCell(v) {
 }
 
 export function mergeHistory(existingCsv, rows) {
-  const date = rows[0]?.[0];
+  return mergeDatedHistory(existingCsv, rows, HEADER);
+}
+
+export function mergeExperimentHistory(existingCsv, rows, date) {
+  return mergeDatedHistory(existingCsv, rows, EXPERIMENT_HEADER, date);
+}
+
+function mergeDatedHistory(existingCsv, rows, header, explicitDate = null) {
+  const date = explicitDate ?? rows[0]?.[0];
   const lines = existingCsv ? existingCsv.replace(/\r\n/g, "\n").split("\n").filter(Boolean) : [];
-  const body = lines.filter((l, i) => !(i === 0 && l === HEADER)).filter((l) => !l.startsWith(`${date},`));
+  const body = lines.filter((l, i) => !(i === 0 && l === header)).filter((l) => !date || !l.startsWith(`${date},`));
   body.push(...rows.map((r) => r.map(csvCell).join(",")));
   body.sort((a, b) => {
     const dateOrder = a.slice(0, 10).localeCompare(b.slice(0, 10));
     return dateOrder || a.localeCompare(b);
   });
-  const out = [HEADER, ...body];
+  const out = [header, ...body];
   return out.join("\n") + "\n";
 }
 
-export function appendHistory(snapshotPath, { historyPath = HISTORY } = {}) {
+export function appendHistory(snapshotPath, { historyPath = HISTORY, experimentHistoryPath = EXPERIMENT_HISTORY } = {}) {
   const snapshot = JSON.parse(fs.readFileSync(snapshotPath, "utf8"));
   const rows = aggregateRows(snapshot);
+  const experimentRows = aggregateExperimentRows(snapshot);
   const existing = fs.existsSync(historyPath) ? fs.readFileSync(historyPath, "utf8") : "";
+  const existingExperiment = fs.existsSync(experimentHistoryPath) ? fs.readFileSync(experimentHistoryPath, "utf8") : "";
   fs.mkdirSync(path.dirname(historyPath), { recursive: true });
   fs.writeFileSync(historyPath, mergeHistory(existing, rows));
-  return { date: snapshot.date, rows: rows.length, historyPath };
+  fs.writeFileSync(
+    experimentHistoryPath,
+    mergeExperimentHistory(existingExperiment, experimentRows, snapshot.date),
+  );
+  return {
+    date: snapshot.date,
+    rows: rows.length,
+    experimentRows: experimentRows.length,
+    historyPath,
+    experimentHistoryPath,
+  };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -81,4 +130,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   }
   const r = appendHistory(path.resolve(file));
   console.log(`[ga4-affiliate-history] ${r.date}: ${r.rows} rows → ${path.relative(ROOT, r.historyPath)}`);
+  console.log(`[affiliate-experiment-history] ${r.date}: ${r.experimentRows} rows → ${path.relative(ROOT, r.experimentHistoryPath)}`);
 }

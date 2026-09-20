@@ -64,6 +64,17 @@ test("曖昧な a8mat token は推測せず unresolved 扱いにする", () => {
   assert.equal(result.ambiguous.length, 1);
 });
 
+test("もしものclick URLからpromotion IDをprogramRefへ解決する", () => {
+  const result = deriveAffiliateProgramRefs([{
+    id: "moshimo",
+    htmlContent: "https://af.moshimo.com/af/c/click?a_id=1&p_id=1863&pc_id=2&pl_id=3",
+    imageUrl: "https://image.moshimo.com/af-img/banner.jpg",
+    trackingPixelUrl: "https://i.moshimo.com/af/i/impression?a_id=1&p_id=1863&pc_id=2&pl_id=3",
+  }]);
+  assert.equal(result.byAdId.moshimo, "moshimo:1863");
+  assert.deepEqual(result.unresolved, []);
+});
+
 test("unknown profile を discovery へ流す mutation は validator と queue の両方で失敗する", () => {
   const unknown = profile({
     lane: "unknown",
@@ -147,6 +158,21 @@ test("experiment variant は通常 reader と候補 queue から除外する", (
   });
   assert.equal(queues.discovery.length, 0);
   assert.ok(queues.excluded[0].reasons.includes("experiment-variant-isolated"));
+});
+
+test("公開中のportfolio pilotに属するvariantだけはlane pair候補として追跡する", () => {
+  const variant = ad({ experimentId: "pilot", variantId: "discovery", targetRankingKeys: ["school"] });
+  const queues = buildAffiliateOfferQueues({
+    profiles: [profile()],
+    ads: [variant],
+    outcomeAvailableProgramRefs: ["a8:s00000000000001"],
+    allowedExperimentIds: ["pilot"],
+    pageType: "ranking",
+    vertical: "education",
+    rankingKey: "school",
+  });
+  assert.equal(queues.discovery.length, 1);
+  assert.equal(queues.discovery[0].programRef, "a8:s00000000000001");
 });
 
 test("shared account outcome は広告別勝敗の候補へ入れない", () => {

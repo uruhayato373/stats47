@@ -63,18 +63,24 @@ function resultProgramRef(record, ads) {
   return refs.length === 1 ? refs[0] : null;
 }
 
-function outcomeByProgramRef({ a8Results, ads, outcomeGate, sharedProgramRefs }) {
+function outcomeByProgramRef({ a8Results, ads, outcomeGate, sharedProgramRefs, additionalOutcomeSources = [] }) {
   const map = new Map();
-  if (outcomeGate?.status !== "ready" || !Array.isArray(a8Results?.records)) return map;
-  for (const record of a8Results.records) {
-    const programRef = resultProgramRef(record, ads);
-    if (!programRef || sharedProgramRefs.includes(programRef)) continue;
-    const current = map.get(programRef) ?? { clicks: 0, conversions: 0, approved: 0, revenueYen: 0 };
-    current.clicks += Number(record.clicks) || 0;
-    current.conversions += Number(record.conversions) || 0;
-    current.approved += Number(record.approved) || 0;
-    current.revenueYen += Number(record.revenueYen) || 0;
-    map.set(programRef, current);
+  const sources = [
+    { data: a8Results, gate: outcomeGate },
+    ...additionalOutcomeSources,
+  ];
+  for (const source of sources) {
+    if (source?.gate?.status !== "ready" || !Array.isArray(source?.data?.records)) continue;
+    for (const record of source.data.records) {
+      const programRef = resultProgramRef(record, ads);
+      if (!programRef || sharedProgramRefs.includes(programRef)) continue;
+      const current = map.get(programRef) ?? { clicks: 0, conversions: 0, approved: 0, revenueYen: 0 };
+      current.clicks += Number(record.clicks) || 0;
+      current.conversions += Number(record.conversions) || 0;
+      current.approved += Number(record.approved) || 0;
+      current.revenueYen += Number(record.revenueYen) || 0;
+      map.set(programRef, current);
+    }
   }
   return map;
 }
@@ -89,8 +95,10 @@ export function buildAffiliatePortfolioState({
   a8Results,
   a8ResultsPath,
   outcomeGate,
+  additionalOutcomeSources = /** @type {Array<any>} */ ([]),
   sharedProgramRefs = [],
   activeExperiments = [],
+  pilotExperimentIds = [],
 }) {
   const profileByRef = new Map(profiles.map((profile) => [profile.programRef, profile]));
   const missingProgramRef = ads.filter((ad) => !ad.programRef).map((ad) => ad.id);
@@ -105,8 +113,21 @@ export function buildAffiliatePortfolioState({
   const coverageGate = { status: coverageReasons.length === 0 ? "ready" : "blocked", reasons: coverageReasons };
 
   const ga4Gate = ga4Quality(ga4, measurementGate);
-  const resolvedOutcomeGate = outcomeGate ?? { status: "blocked", reasons: ["outcome-gate-missing"] };
-  const outcomes = outcomeByProgramRef({ a8Results, ads, outcomeGate: resolvedOutcomeGate, sharedProgramRefs });
+  const baseOutcomeGate = outcomeGate ?? { status: "blocked", reasons: ["outcome-gate-missing"] };
+  const requiredAdditionalOutcomeReasons = additionalOutcomeSources
+    .filter((source) => source.required && source?.gate?.status !== "ready")
+    .flatMap((source) => source?.gate?.reasons ?? [`${source.source ?? "additional"}-outcome-gate-missing`]);
+  const resolvedOutcomeGate = {
+    status: baseOutcomeGate.status === "ready" && requiredAdditionalOutcomeReasons.length === 0 ? "ready" : "blocked",
+    reasons: [...new Set([...(baseOutcomeGate.reasons ?? []), ...requiredAdditionalOutcomeReasons])],
+  };
+  const outcomes = outcomeByProgramRef({
+    a8Results,
+    ads,
+    outcomeGate: baseOutcomeGate,
+    sharedProgramRefs,
+    additionalOutcomeSources,
+  });
   const adRows = ads.map((ad) => ({
     adId: ad.id,
     programRef: ad.programRef ?? null,
@@ -122,10 +143,17 @@ export function buildAffiliatePortfolioState({
     const impressionsValue = sumKnown(programAds.map((ad) => ad.metrics.impressions.value));
     const clicksValue = sumKnown(programAds.map((ad) => ad.metrics.clicks.value));
     const outcome = outcomes.get(profile.programRef) ?? null;
+    const additionalOutcomeSource = additionalOutcomeSources.find(
+      (source) => source.programRefPrefix && profile.programRef.startsWith(source.programRefPrefix),
+    );
+    const programOutcomeGate = additionalOutcomeSource?.gate ??
+      (profile.programRef.startsWith("a8:")
+        ? baseOutcomeGate
+        : { status: "blocked", reasons: ["confirmed-outcome-source-unsupported"] });
     const outcomeReason = sharedProgramRefs.includes(profile.programRef)
       ? "a8-shared-account-program"
-      : resolvedOutcomeGate.status !== "ready"
-        ? resolvedOutcomeGate.reasons.join(",")
+      : programOutcomeGate.status !== "ready"
+        ? programOutcomeGate.reasons.join(",")
         : "confirmed-outcome-unavailable-for-program";
     const revenue = outcome?.revenueYen ?? null;
     return {
@@ -153,7 +181,7 @@ export function buildAffiliatePortfolioState({
         ga4: ga4Gate,
         outcome: sharedProgramRefs.includes(profile.programRef)
           ? { status: "blocked", reasons: ["a8-shared-account-program"] }
-          : resolvedOutcomeGate,
+          : programOutcomeGate,
       },
     };
   });
@@ -163,6 +191,7 @@ export function buildAffiliatePortfolioState({
     ads,
     sharedProgramRefs,
     outcomeAvailableProgramRefs: [...outcomes.keys()],
+    allowedExperimentIds: pilotExperimentIds,
   };
   const compactQueue = (queue) => {
     const excludedByReason = {};
@@ -200,7 +229,7 @@ export function buildAffiliatePortfolioState({
   const hasEligibleCandidate = queueContexts.some(
     (context) => context.ranking.discovery.length + context.ranking.decision.length + context.blog.discovery.length + context.blog.decision.length > 0,
   );
-  const hasEligibleLanePair = queueContexts.some(
+  const hasEligibleLanePair = pilotExperimentIds.length > 0 || queueContexts.some(
     (context) =>
       (context.ranking.discovery.length > 0 && context.ranking.decision.length > 0) ||
       (context.blog.discovery.length > 0 && context.blog.decision.length > 0),
@@ -217,6 +246,15 @@ export function buildAffiliatePortfolioState({
     sources: {
       ga4: { path: ga4Path ?? null, generatedAt: ga4?.generatedAt ?? null, schemaVersion: ga4?.schemaVersion ?? null },
       a8: { path: a8ResultsPath ?? null, generatedAt: a8Results?.updatedAt ?? null, scope: "program-detail-account-wide" },
+      additionalOutcomes: additionalOutcomeSources.map((source) => ({
+        source: source.source,
+        path: source.path ?? null,
+        generatedAt: source.data?.updatedAt ?? null,
+        status: source.gate?.status ?? "blocked",
+        reasons: source.gate?.reasons ?? ["outcome-gate-missing"],
+        required: Boolean(source.required),
+        programRefPrefix: source.programRefPrefix ?? null,
+      })),
     },
     gates: {
       measurement: ga4Gate,

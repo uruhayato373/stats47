@@ -25,6 +25,9 @@ Mac / Windows 双方で動く。
 | `scan` (afb) | `node .claude/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
 | `scan` (もしも) | `node .claude/scripts/ads/moshimo-scan.mjs [--query <語>] [--vertical <軸>]` | なし (同上) |
 | `harvest` (afb) | `node .claude/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` | なし (原稿を `.local/affiliate-harvest/afb/` に保存。SSOT 登録・公開は別工程) |
+| `harvest` (もしも) | `node .claude/scripts/ads/moshimo-harvest.mjs --id <promotion_id[,promotion_id]>` | なし (原稿を `.local/affiliate-harvest/moshimo/` に保存。SSOT 登録・公開は別工程) |
+| `inspect-offer` (もしも) | `node .claude/scripts/ads/moshimo-inspect-offer.mjs --id <promotion_id[,promotion_id]>` | なし (成果・掲載条件を `.local/affiliate-offer-inspect/moshimo/` に証拠保全) |
+| `report` (もしも) | `node .claude/scripts/ads/moshimo-report.mjs [--from YYYY-MM-DD --to YYYY-MM-DD]` | `.claude/state/metrics/affiliate/moshimo-results.json` を更新 (stats47サイト別・最大93日) |
 | `budget` | `node .claude/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
 
 ## 手順
@@ -149,15 +152,20 @@ afb は承認追跡と広告原稿のローカル取得まで実装済み、も�
 | 案件探索 | `scout` | ✅ `moshimo-scan` / `afb-scan` |
 | 申請 | `apply --id` | ✅ `affiliate-apply --plan … --commit` |
 | **承認の追跡** | `check-approval` (週次で applied→approved) | ✅ `affiliate-status --write` (実機照合で applying→approved。名前も補完する) |
-| **広告コード取得** | `harvest` | afb=`afb-harvest.mjs --id ...` / もしも=未実装 |
+| **広告コード取得** | `harvest` | afb=`afb-harvest.mjs --id ...` / もしも=`moshimo-harvest.mjs --id ...` |
+| **成果・掲載条件確認** | `inspect-offer` | もしも=`moshimo-inspect-offer.mjs --id ...`。案件名からlane/frictionを推測せず実機条件を保全 |
+| **pilot成果成熟確認** | `report` | `moshimo-report.mjs --from <pilot.startedAt> --to <maturityDate>`。開始日より前を含む窓は混入として成熟扱いにしない |
 | SSOT 追記 | `append-affiliate-ads` | afb/もしもとも手動登録のみ |
 | 定期実行 | 週次 cron | ❌ 手動のみ |
 
 - **承認追跡は 2026-08-04 に埋まった**。`affiliate-status --write` が正遷移を反映するので、
   もしも / afb の承認が申請中のまま放置されることは無くなった (同日の照合で承認 17 件を反映)。
-- **残る断絶は、afb では「取得済み原稿のSSOT登録」、もしもでは「広告コード取得」**。
+- **残る断絶は、afb / もしもとも「取得済み原稿のSSOT登録」**。
   afb の harvest は PID 明示・approved・stats47 SID read-back・PID/name binding・canonical サイズ・
   クリック URL + lead pixel の完全性を満たす場合だけローカル保存する。登録・公開は別承認で行う。
+- もしもの harvest も promotion_id 明示・approved・eligibility approved・stats47 SID read-back・
+  案件名 binding・canonical サイズ・クリック URL + impression pixel の識別子一致・必須リンク属性を
+  満たす場合だけローカル保存する。登録・公開は別工程。
 - ただし**登録を増やせば収益が増えるとは限らない**。同一 vertical × 枠は banner 上位 1 +
   text 上位 2 しか表示されず、在庫 260 件に対し 28 日で impression が付いたのは 84 件だけ
   (2026-08-04 実測)。もしものharvestやSSOT登録自動化を広げる前に、計装が揃った状態の実測で在庫が制約かを確かめる。

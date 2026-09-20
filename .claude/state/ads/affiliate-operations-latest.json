@@ -1,8 +1,8 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-08-28T07:08:00.165Z",
+  "generatedAt": "2026-09-20T10:17:40.668Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
-  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-28.json",
+  "ga4Snapshot": ".claude/state/ads/live/ga4-affiliate/2026-09-19.json",
   "freshness": {
     "inventoryDays": 0,
     "ga4Days": 0
@@ -30,7 +30,42 @@
     "missingDisclosure": []
   },
   "experiments": {
-    "active": [],
+    "active": [
+      {
+        "experimentId": "ranking-labor-lane-pilot-2026w39",
+        "kind": "creative",
+        "targetLocation": "sidebar-bottom",
+        "startedAt": "2026-09-20",
+        "daysElapsed": 0,
+        "minSamplePerVariant": 1000,
+        "minDurationDays": 28,
+        "maxDurationDays": 56,
+        "sampleReached": false,
+        "minDurationReached": false,
+        "primaryMetric": "confirmed-revenue-per-1000-viewable-impressions",
+        "decisionRule": "各variantが1000 viewable impressions・10 clicks・28日を満たし、成果窓30日が成熟してから確定収益/1000 viewable impressionsを提示し、人間が判断する。56日で母数未達ならinconclusive。",
+        "decisionGuards": [
+          "insufficient-sample",
+          "insufficient-duration"
+        ],
+        "variants": [
+          {
+            "variantId": "discovery-registration",
+            "impressions": 0,
+            "clicks": 0,
+            "ctr": null
+          },
+          {
+            "variantId": "decision-consultation",
+            "impressions": 0,
+            "clicks": 0,
+            "ctr": null
+          }
+        ],
+        "status": "collecting"
+      }
+    ],
+    "maturing": [],
     "readyToDecide": [],
     "invalid": [],
     "inconclusive": [],
@@ -44,8 +79,8 @@
   },
   "recommendedActions": [],
   "ga4Totals": {
-    "impressions": 23771,
-    "clicks": 11,
-    "ctr": 0.00046274872744099955
+    "impressions": 4862,
+    "clicks": 8,
+    "ctr": 0.0016454134101192926
   }
 }

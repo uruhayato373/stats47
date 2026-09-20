@@ -27,7 +27,9 @@ test(`${files[1]}はgit書き戻しを週次集約CSVに限定し、広告配信
   assert.match(source, /^\s*issues: write/m);
   assert.match(source, /upload-artifact/);
   const staged = [...source.matchAll(/^\s*git add (.+)$/gm)].map((m) => m[1].trim());
-  assert.deepEqual(staged, [".claude/state/ads/ga4-affiliate-history.csv"]);
+  assert.deepEqual(staged, [
+    ".claude/state/ads/ga4-affiliate-history.csv .claude/state/ads/affiliate-experiment-history.csv",
+  ]);
   assert.match(source, /diff-push-r2\.ts --prefix "state\/ads\/ga4-affiliate\/"/);
   assert.doesNotMatch(source, /git push origin main/);
   assert.doesNotMatch(source, FORBIDDEN_AD_MUTATIONS);
@@ -38,6 +40,9 @@ test("GA4週次はportfolio・operations・pilotを同じrunで生成する", ()
   assert.match(source, /build-affiliate-portfolio-state\.ts/);
   assert.match(source, /build-affiliate-operations-state\.ts/);
   assert.match(source, /build-affiliate-pilot-state\.ts/);
+  assert.match(source, /affiliate experiment invalid/);
+  assert.match(source, /\["outcome", "portfolio"\]/);
+  assert.match(source, /pilotReadiness/);
 });
 
 test("GA4週次は固定期間を受け取り、過去期間で latest を巻き戻さない", () => {
