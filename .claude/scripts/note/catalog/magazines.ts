@@ -96,7 +96,8 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     description:
       "家計調査の支出額を読み解くための無料マガジン。十大費目で見る47都道府県の家計プロファイルと、支出額の読み違いを正す論点記事を束ねる。",
     verticals: ["stats47-note"],
-    noteUrl: null,
+    productTarget: "/products/kindle-k-s1-02",
+    noteUrl: "https://note.com/stats47/m/m8603c96e8466",
   },
   {
     key: "s47-economy",
@@ -247,16 +248,6 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     verticals: ["stats47-note"],
     productTarget: "/products/kindle-k-s1-08",
     noteUrl: "https://note.com/stats47/m/mc659ce45528f",
-  },
-  {
-    key: "s47-kakei-reading",
-    name: "家計調査の読み方｜47都道府県の家計を読み解く",
-    isPaid: false,
-    description:
-      "家計調査の品目別支出から、県庁所在市ごとの暮らしの偏りと、数量と価格・季節性・世代交代といった横断テーマを読む無料マガジン。",
-    verticals: ["stats47-note"],
-    productTarget: "/products/kindle-k-s1-02",
-    noteUrl: null,
   },
 ];
 

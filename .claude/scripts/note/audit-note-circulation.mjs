@@ -161,11 +161,23 @@ const liveMagazines = await mapConcurrent(
   fetchMagazine,
 );
 
+// 他の公開記事から本文リンク (カード / href) で参照されている回数。有料記事の流入導線の有無を測る。
+const inboundCountByNoteKey = new Map();
+for (const note of liveNotes) {
+  const ownKey = note.key;
+  for (const url of extractNavigationUrls(note.body, note.embedded_contents)) {
+    const key = noteKeyFromUrl(url);
+    if (!key || key === ownKey || !catalogNoteKeys.has(key)) continue;
+    inboundCountByNoteKey.set(key, (inboundCountByNoteKey.get(key) || 0) + 1);
+  }
+}
+
 const articleAudits = catalog.articles.map((article) => buildArticleAudit({
   article,
   live: liveByArticleKey.get(article.key),
   magazinesByKey,
   catalogNoteKeys,
+  inboundNoteLinkCount: inboundCountByNoteKey.get(noteKeyFromUrl(article.noteUrl)) || 0,
   eligibleRelatedNoteKeys: new Set(
     article.magazine
       ? catalog.articles
@@ -257,6 +269,7 @@ console.log(`magazine link: ${articleSummary.withMagazineLink}/${articleSummary.
 console.log(`hashtag >=95: ${articleSummary.compliantHashtags}/${articleSummary.total}`);
 console.log(`cover: configured=${articleSummary.coversConfigured} missing=${articleSummary.coversMissing} unknown=${articleSummary.coversUnknown}`);
 console.log(`magazine exact: ${report.summary.exactMagazineMemberships}/${liveMagazines.length}`);
+console.log(`paid landing (出典/導入/画像/流入): compliant=${articleSummary.paidLandingCompliant}/${articleSummary.paidLandingApplicable} errors=${articleSummary.paidLandingErrors} warnings=${articleSummary.paidLandingWarnings}`);
 console.log(`report: ${OUTPUT}`);
 
 if (!REPORT_ONLY && articleSummary.errors > 0) process.exitCode = 1;

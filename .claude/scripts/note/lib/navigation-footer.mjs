@@ -195,19 +195,45 @@ export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUI
  * 公開本文の末尾へ、主 CTA=次の1本、副 CTA=マガジンを追加する。
  * 同じURLが既にあれば再追加しない。stats47 の旧 http リンクは https へ正規化する。
  */
+/**
+ * 「次に読む」フッター見出しが 2 回以上ある本文を 1 回に畳む (2 個目以降の <hr><h2>次に読む</h2> だけを外し、
+ * カード本体は残す)。2026-09-16 の商品カード一括追加で 190 本が二重化していた (最大 3 個)。
+ */
+export function collapseDuplicateFooterHeadings(body) {
+  const pattern = /(?:<p [^>]*><br><\/p>)?<hr [^>]*><h2 [^>]*>次に読む<\/h2>/g;
+  let seen = 0;
+  return String(body).replace(pattern, (match) => (seen++ === 0 ? match : ""));
+}
+
 export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {}) {
   const original = String(body);
-  let output = normalizeLegacyStats47Links(original);
+  let output = collapseDuplicateFooterHeadings(normalizeLegacyStats47Links(original));
+  const dedupedFooterHeading = output !== normalizeLegacyStats47Links(original);
   const nextUrl = plan.nextNoteUrl ? assertCleanCardUrl(plan.nextNoteUrl, "note.com") : null;
   const magazineUrl = plan.magazineUrl ? assertCleanCardUrl(plan.magazineUrl, "note.com") : null;
   const siteUrl = plan.siteUrl ? assertCleanCardUrl(plan.siteUrl, "stats47.jp") : null;
   const productUrl = plan.productUrl ? assertCleanCardUrl(plan.productUrl, "stats47.jp") : null;
+  const datasets = (plan.datasets || []).map((dataset) => ({
+    ...dataset,
+    noteUrl: assertCleanCardUrl(dataset.noteUrl, "note.com"),
+  }));
   const additions = [];
 
-  if (nextUrl && !hasUrl(output, nextUrl)) {
+  // 「次の 1 本」は views で選ばれ直すため URL が変わりうる。既に深掘りカードがある記事へ 2 枚目を積まない
+  // (2026-09-20: s47-population 7 本で別記事へのカードが既にあり、URL 一致だけだと二重になる状態を検出)。
+  const hasNextBlock = output.includes("もう一歩深掘りする");
+  if (nextUrl && !hasNextBlock && !hasUrl(output, nextUrl)) {
     additions.push(
       `<p ${attrs(idFactory())}><strong>もう一歩深掘りする</strong><br>${escapeHtml(plan.nextNoteLead)}</p>`,
       noteCard(nextUrl, plan.nextNoteKey, idFactory),
+    );
+  }
+  // 同マガジンの有料データセット記事 (magazine.datasetArticles)。無料記事から有料商品への直接導線になる。
+  for (const dataset of datasets) {
+    if (hasUrl(output, dataset.noteUrl)) continue;
+    additions.push(
+      `<p ${attrs(idFactory())}><strong>この記事の元データを手元で使う</strong><br>${escapeHtml(dataset.lead)}</p>`,
+      noteCard(dataset.noteUrl, dataset.noteKey, idFactory),
     );
   }
   if (magazineUrl && !hasUrl(output, magazineUrl)) {
@@ -230,9 +256,14 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
   }
 
   if (additions.length > 0) {
-    const dividerId = idFactory();
-    const headingId = idFactory();
-    output += `<hr ${attrs(dividerId)}><h2 ${attrs(headingId)}>次に読む</h2>${additions.join("")}<p ${attrs(idFactory())}><br></p>`;
+    // 既に「次に読む」フッターがある記事へ枠を足すときは、見出しを二重に作らず末尾へ追記する。
+    if (/<h2\b[^>]*>次に読む<\/h2>/.test(output)) {
+      output += additions.join("");
+    } else {
+      const dividerId = idFactory();
+      const headingId = idFactory();
+      output += `<hr ${attrs(dividerId)}><h2 ${attrs(headingId)}>次に読む</h2>${additions.join("")}<p ${attrs(idFactory())}><br></p>`;
+    }
   }
 
   return {
@@ -243,6 +274,8 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
     addedMagazine: Boolean(magazineUrl) && additions.some((part) => part.includes(`data-src="${magazineUrl}"`)),
     addedSite: Boolean(siteUrl) && additions.some((part) => part.includes(`data-src="${siteUrl}"`)),
     addedProduct: Boolean(productUrl) && additions.some((part) => part.includes(`data-src="${productUrl}"`)),
+    addedDataset: datasets.some((dataset) => additions.some((part) => part.includes(`data-src="${dataset.noteUrl}"`))),
+    dedupedFooterHeading,
   };
 }
 

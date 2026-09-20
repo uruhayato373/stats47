@@ -1,0 +1,48 @@
+{
+  "key": "d-geo-land-price-future-population",
+  "audienceHeading": "こんな人のためのデータです",
+  "audience": [
+    {
+      "strong": "不動産・都市計画・地域金融の資料を作る人",
+      "text": "地価が上がる住宅地点の周囲で将来人口が減るのかを、県平均でなく地点単位の照合結果で示したい"
+    },
+    {
+      "strong": "地価公示と人口メッシュを自分で結合したい人",
+      "text": "17,890 地点と 1km メッシュの包含結合を、除外条件と分母まで辞書で確かめて再現したい"
+    },
+    {
+      "strong": "数値を引用する人",
+      "text": "標準地点は無作為標本ではないという適用限界を含めて、出典と算式付きで使いたい"
+    }
+  ],
+  "learnHeading": "このデータでわかること",
+  "learn": [
+    {
+      "strong": "47都道府県の地価と将来人口の対応",
+      "text": "住宅地の地価中央値（円/㎡）、対前年変動率中央値、2050年人口増減率、2050年推計人口、住宅地標準地点数を1行に持ちます"
+    },
+    {
+      "strong": "地点単位の照合結果",
+      "text": "住宅地点 17,890 件のうち人口メッシュに接続した 17,888 件を基に、地価上昇×人口減少の地点がどれだけあるかを県別に集計"
+    },
+    {
+      "strong": "有料部分では再現と検算",
+      "text": "CSV と JSON、分母・分子・除外条件の辞書、SHA-256、集計を再確認するコード"
+    }
+  ],
+  "sampleHeading": "データのサンプル",
+  "sampleLead": "添付 ZIP に入る analysis.csv の先頭部分です（values 列の JSON から主要5指標を列に展開して表示。値は実データそのまま）。",
+  "samples": [
+    {
+      "file": ".local/paid-landing/d-geo-land-price-future-population/sample-analysis.png",
+      "alt": "analysis.csv の先頭6行",
+      "caption": "areaCode、areaName に続き、values 列に 14 指標が JSON で入ります（表は主要5指標のみ展開）。rank は表示順です。全指標の定義は同梱の DATA-DICTIONARY.md にあります。",
+      "uploadedUrl": "https://assets.st-note.com/img/1789878496-bD4PJpyMjWucVqoxTUCL0H5k.png",
+      "width": 3532,
+      "height": 1224
+    }
+  ],
+  "sourceHeading": "データの出典",
+  "source": "出典：国土交通省「地価公示（2026年）」および国土交通省「1kmメッシュ別将来推計人口（R6国政局推計）」（国土数値情報）を加工して作成。住宅地点と人口メッシュの包含結合・中央値の算出は筆者によるもので、国土交通省が公表した値そのものではありません。",
+  "appliedAt": "2026-09-20T04:28:25.606Z"
+}

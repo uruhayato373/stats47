@@ -225,7 +225,103 @@ test("paid article does not require free-preview growth CTAs", () => {
     eligibleRelatedNoteKeys: new Set(),
   });
   assert.equal(article.errors.some((issue) => issue.code === "missing_catalog_site_target"), false);
-  assert.deepEqual(article.warnings, []);
+  // 無料記事向けの回遊 CTA 警告は出ない (有料記事の着地品質 paid_* は別系統で下のテストが固定する)
+  assert.deepEqual(article.warnings.filter((issue) => !issue.code.startsWith("paid_")), []);
+});
+
+function paidFixture({ price = 2980, body, magazine = "s47-kakei-reading", vertical = "stats47-note", inboundNoteLinkCount = 0, magazinesByKey = new Map() }) {
+  return buildArticleAudit({
+    article: {
+      key: "paid-dataset",
+      title: "dataset",
+      vertical,
+      isPaid: true,
+      priceJpy: price,
+      r2Body: true,
+      noteUrl: "https://note.com/stats47/n/n222",
+      magazine,
+      stats47Targets: [],
+    },
+    live: {
+      key: "n222",
+      status: "published",
+      price,
+      user: { urlname: "stats47" },
+      hashtag_notes: Array.from({ length: 99 }),
+      belonging_magazine_keys: [],
+      body,
+      embedded_contents: [],
+    },
+    magazinesByKey,
+    catalogNoteKeys: new Set(["n222"]),
+    eligibleRelatedNoteKeys: new Set(),
+    inboundNoteLinkCount,
+  });
+}
+
+test("paid data product without source/intro/image/inbound in the free preview fails every landing check", () => {
+  // 2026-09-20 の d-kakei-category-dataset 公開時点の無料部分を模す (出典・導入・画像・流入が全部無い)
+  const audit = paidFixture({ body: "<p>家計調査の十大費目を並べると、教育費は8.7倍です。</p><h2>配布するデータ</h2>" });
+  const codes = audit.errors.map((issue) => issue.code);
+  // 「家計調査」は統計名なので source 判定は通ってしまう → 統計名すら無い本文で source 欠落を固定する
+  const noSource = paidFixture({ body: "<p>十大費目を並べると、教育費は8.7倍です。</p>" });
+  assert.ok(noSource.errors.some((issue) => issue.code === "paid_free_missing_source"));
+  assert.ok(codes.includes("paid_free_missing_intro"), "¥1,000 以上は導入欠落を error にする");
+  assert.ok(codes.includes("paid_free_missing_image"));
+  assert.ok(codes.includes("paid_no_inbound_note_link"));
+  assert.deepEqual(audit.paidLanding.checks, { source: true, intro: false, image: false, inbound: false });
+});
+
+test("paid data product with source, intro, sample image and an inbound link passes", () => {
+  const audit = paidFixture({
+    inboundNoteLinkCount: 53,
+    body: '<h2>こんな人のためのデータです</h2><p>出店担当者向け</p><figure><img src="https://assets.st-note.com/x.png"></figure>'
+      + "<p>出典：総務省統計局「家計調査」を加工して作成</p>",
+  });
+  assert.deepEqual(audit.errors.filter((issue) => issue.code.startsWith("paid_")), []);
+  assert.deepEqual(audit.warnings.filter((issue) => issue.code.startsWith("paid_")), []);
+  assert.deepEqual(audit.paidLanding.issueCodes, []);
+});
+
+test("cheap paid ranking notes get warnings for intro/image/inbound but source is still a hard error", () => {
+  const audit = paidFixture({ price: 200, magazine: "s47-fiscal", body: "<p>都道府県別の順位です。</p>" });
+  assert.deepEqual(audit.errors.filter((issue) => issue.code.startsWith("paid_")).map((issue) => issue.code), ["paid_free_missing_source"]);
+  assert.deepEqual(
+    audit.warnings.filter((issue) => issue.code.startsWith("paid_")).map((issue) => issue.code).sort(),
+    ["paid_free_missing_image", "paid_free_missing_intro", "paid_no_inbound_note_link"],
+  );
+});
+
+test("chapters of paid (tutorial) magazines are outside the data-source landing rule, even under the stats47-note vertical", () => {
+  const paidMagazines = new Map([
+    ["koumuin-claude-code", { key: "koumuin-claude-code", isPaid: true, noteUrl: "https://note.com/stats47/m/m512ad7023815" }],
+    ["product-d3-colors", { key: "product-d3-colors", isPaid: true, noteUrl: "https://note.com/stats47/m/mfe0fab2606eb" }],
+    ["s47-fiscal", { key: "s47-fiscal", isPaid: false, noteUrl: "https://note.com/stats47/m/m30bb1cee28f7" }],
+  ]);
+  const tutorial = paidFixture({ price: 300, vertical: "koumuin-claude-code", magazine: "koumuin-claude-code", body: "<p>設定手順</p>", magazinesByKey: paidMagazines });
+  assert.equal(tutorial.paidLanding, null);
+  // catalog では vertical が stats47-note でも、有料マガジンの章 (paid-n* の Claude Code 記事) は対象外
+  const chapter = paidFixture({ price: 300, vertical: "stats47-note", magazine: "koumuin-claude-code", body: "<p>設定手順</p>", magazinesByKey: paidMagazines });
+  assert.equal(chapter.paidLanding, null);
+  assert.deepEqual(chapter.errors.filter((issue) => issue.code.startsWith("paid_")), []);
+  const colours = paidFixture({ price: 200, magazine: "product-d3-colors", body: "<p>配色</p>", magazinesByKey: paidMagazines });
+  assert.equal(colours.paidLanding, null);
+  // 無料マガジンに入っている ¥200 のランキング記事は対象
+  const ranking = paidFixture({ price: 200, magazine: "s47-fiscal", body: "<p>順位</p>", magazinesByKey: paidMagazines });
+  assert.ok(ranking.paidLanding);
+});
+
+test("summary exposes paid landing compliance so the weekly gate can fail on it", () => {
+  const good = paidFixture({
+    inboundNoteLinkCount: 1,
+    body: '<p>こんな人向け</p><img src="x.png"><p>出典：e-Stat を加工して作成</p>',
+  });
+  const bad = paidFixture({ body: "<p>本文のみ</p>" });
+  const summary = summarizeArticleAudits([good, bad]);
+  assert.equal(summary.paidLandingApplicable, 2);
+  assert.equal(summary.paidLandingCompliant, 1);
+  assert.equal(summary.paidLandingErrors, 4);
+  assert.equal(summary.paidLandingWarnings, 0);
 });
 
 test("free singleton article does not invent an unrelated note CTA", () => {
@@ -249,4 +345,11 @@ test("profile biography can expose the stats47 site when note has no generic web
   assert.equal(profile.hasBio, true);
   assert.equal(profile.hasSiteLink, true);
   assert.deepEqual(profile.warnings, [{ code: "profile_header_missing" }]);
+});
+
+test("two 次に読む headings in a live body are warned", () => {
+  const audit = paidFixture({ price: 0, body: '<p>本文</p><hr><h2>次に読む</h2><p>a</p><hr><h2>次に読む</h2><p>b</p>' });
+  assert.ok(audit.warnings.some((issue) => issue.code === "duplicate_footer_heading" && issue.detail === 2));
+  const single = paidFixture({ price: 0, body: '<p>本文</p><hr><h2>次に読む</h2><p>a</p>' });
+  assert.equal(single.warnings.some((issue) => issue.code === "duplicate_footer_heading"), false);
 });

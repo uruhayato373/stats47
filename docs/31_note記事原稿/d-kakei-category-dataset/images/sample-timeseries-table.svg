@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 410" width="500" height="410">
+<style>text{font-family:'Hiragino Sans', 'Noto Sans JP', sans-serif;}</style>
+<rect width="500" height="410" fill="#fafafa"/>
+<text x="12" y="24" font-size="15" font-weight="700" fill="#1e293b">kakei-category-timeseries.csv — 先頭10行</text>
+<text x="12" y="44" font-size="11" fill="#475569">年 × 県 × 費目の縦持ち。金額は正規化していない実額 (円/年)</text>
+<rect x="12" y="64" width="476" height="290" fill="white" stroke="#e2e8f0"/>
+<rect x="12" y="64" width="476" height="30" fill="#f1f5f9"/>
+<text x="58" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">year</text>
+<text x="70" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="start">prefCode</text>
+<text x="140" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="start">prefName</text>
+<text x="212" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="start">cityName</text>
+<text x="284" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="start">category</text>
+<text x="482" y="83" font-size="10.5" font-weight="700" fill="#475569" text-anchor="end">valueYen</text>
+<line x1="12" y1="94" x2="488" y2="94" stroke="#f1f5f9"/>
+<text x="58" y="111" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="111" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="111" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="111" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="111" font-size="11" fill="#1e293b" text-anchor="start">食料</text>
+<text x="482" y="111" font-size="11" fill="#1e293b" text-anchor="end">839,032</text>
+<rect x="12" y="120" width="476" height="26" fill="#f8fafc"/>
+<line x1="12" y1="120" x2="488" y2="120" stroke="#f1f5f9"/>
+<text x="58" y="137" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="137" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="137" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="137" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="137" font-size="11" fill="#1e293b" text-anchor="start">住居</text>
+<text x="482" y="137" font-size="11" fill="#1e293b" text-anchor="end">267,670</text>
+<line x1="12" y1="146" x2="488" y2="146" stroke="#f1f5f9"/>
+<text x="58" y="163" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="163" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="163" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="163" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="163" font-size="11" fill="#1e293b" text-anchor="start">光熱・水道</text>
+<text x="482" y="163" font-size="11" fill="#1e293b" text-anchor="end">290,083</text>
+<rect x="12" y="172" width="476" height="26" fill="#f8fafc"/>
+<line x1="12" y1="172" x2="488" y2="172" stroke="#f1f5f9"/>
+<text x="58" y="189" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="189" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="189" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="189" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="189" font-size="11" fill="#1e293b" text-anchor="start">家具・家事用品</text>
+<text x="482" y="189" font-size="11" fill="#1e293b" text-anchor="end">105,749</text>
+<line x1="12" y1="198" x2="488" y2="198" stroke="#f1f5f9"/>
+<text x="58" y="215" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="215" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="215" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="215" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="215" font-size="11" fill="#1e293b" text-anchor="start">被服及び履物</text>
+<text x="482" y="215" font-size="11" fill="#1e293b" text-anchor="end">156,455</text>
+<rect x="12" y="224" width="476" height="26" fill="#f8fafc"/>
+<line x1="12" y1="224" x2="488" y2="224" stroke="#f1f5f9"/>
+<text x="58" y="241" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="241" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="241" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="241" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="241" font-size="11" fill="#1e293b" text-anchor="start">保健医療</text>
+<text x="482" y="241" font-size="11" fill="#1e293b" text-anchor="end">156,250</text>
+<line x1="12" y1="250" x2="488" y2="250" stroke="#f1f5f9"/>
+<text x="58" y="267" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="267" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="267" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="267" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="267" font-size="11" fill="#1e293b" text-anchor="start">交通・通信</text>
+<text x="482" y="267" font-size="11" fill="#1e293b" text-anchor="end">434,444</text>
+<rect x="12" y="276" width="476" height="26" fill="#f8fafc"/>
+<line x1="12" y1="276" x2="488" y2="276" stroke="#f1f5f9"/>
+<text x="58" y="293" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="293" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="293" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="293" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="293" font-size="11" fill="#1e293b" text-anchor="start">教育</text>
+<text x="482" y="293" font-size="11" fill="#1e293b" text-anchor="end">129,156</text>
+<line x1="12" y1="302" x2="488" y2="302" stroke="#f1f5f9"/>
+<text x="58" y="319" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="319" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="319" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="319" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="319" font-size="11" fill="#1e293b" text-anchor="start">教養娯楽</text>
+<text x="482" y="319" font-size="11" fill="#1e293b" text-anchor="end">439,277</text>
+<rect x="12" y="328" width="476" height="26" fill="#f8fafc"/>
+<line x1="12" y1="328" x2="488" y2="328" stroke="#f1f5f9"/>
+<text x="58" y="345" font-size="11" fill="#1e293b" text-anchor="end">2007</text>
+<text x="70" y="345" font-size="11" fill="#1e293b" text-anchor="start">01000</text>
+<text x="140" y="345" font-size="11" fill="#1e293b" text-anchor="start">北海道</text>
+<text x="212" y="345" font-size="11" fill="#1e293b" text-anchor="start">札幌市</text>
+<text x="284" y="345" font-size="11" fill="#1e293b" text-anchor="start">その他の消費支出</text>
+<text x="482" y="345" font-size="11" fill="#1e293b" text-anchor="end">658,468</text>
+<text x="12" y="376" font-size="10.5" fill="#64748b">… 全8,460行 = 2007–2024年 (18年) × 47県 × 10費目。欠測なし</text>
+<text x="488" y="396" font-size="10" fill="#94a3b8" text-anchor="end">kakei-category-timeseries.csv</text>
+</svg>

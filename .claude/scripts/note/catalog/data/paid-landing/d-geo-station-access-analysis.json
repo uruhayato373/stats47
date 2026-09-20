@@ -1,0 +1,48 @@
+{
+  "key": "d-geo-station-access-analysis",
+  "audienceHeading": "こんな人のためのデータです",
+  "audience": [
+    {
+      "strong": "交通・まちづくり・住宅分野の資料を作る人",
+      "text": "2050年に駅から直線800m以内に住む人口が、県人口のどれだけ残るかを 47 都道府県で比べたい"
+    },
+    {
+      "strong": "駅勢圏の空間判定を自分で再現したい人",
+      "text": "駅グループ 9,080 の代表点と 1km メッシュ中心点の大円距離判定を、入力の版と件数まで追って確かめたい"
+    },
+    {
+      "strong": "数値を引用する人",
+      "text": "800m が徒歩時間や道路距離ではないという定義を踏まえ、出典と算式付きで使いたい"
+    }
+  ],
+  "learnHeading": "このデータでわかること",
+  "learn": [
+    {
+      "strong": "47都道府県 × 5指標",
+      "text": "2050年駅800m圏人口比率、2020年同比率、2050年駅800m圏人口、2050年人口増減率、駅800m圏メッシュ数"
+    },
+    {
+      "strong": "人口が減っても駅周辺の構成比が上がる県",
+      "text": "大阪府は県人口が-17.8%でも駅800m圏の比率は65.8%。比率と人数を分けて読めます"
+    },
+    {
+      "strong": "有料部分では再現手順",
+      "text": "駅代表点の作成、大円距離800m判定、県別途中 artifact、47県 aggregate、保存則監査までのコードと SHA-256"
+    }
+  ],
+  "sampleHeading": "データのサンプル",
+  "sampleLead": "添付 ZIP に入る analysis.csv の先頭部分です（values 列の JSON を列に展開して表示。値は実データそのまま）。",
+  "samples": [
+    {
+      "file": ".local/paid-landing/d-geo-station-access-analysis/sample-analysis.png",
+      "alt": "analysis.csv の先頭6行",
+      "caption": "areaCode、areaName に続き、values 列に5指標（stationAccessShare2050 / stationAccessShare2020 / accessiblePopulation2050 / populationChangeRate / accessibleMeshCount）が JSON で入り、rank は2050年比率の表示順です。定義は同梱の DATA-DICTIONARY.md にあります。",
+      "uploadedUrl": "https://assets.st-note.com/img/1789878505-5R1N0MVSLYzFwmlAKahDgx9W.png",
+      "width": 3920,
+      "height": 1224
+    }
+  ],
+  "sourceHeading": "データの出典",
+  "source": "出典：国土交通省「1kmメッシュ別将来推計人口（R6国政局推計）」（国土数値情報 mesh1000r6・version 24）および国土交通省「駅別乗降客数（2024年度・2025年度整備）」（国土数値情報 S12・version 25）を加工して作成。駅代表点からの大円距離800m判定は筆者によるもので、国土交通省が公表した値そのものではありません。",
+  "appliedAt": "2026-09-20T04:28:35.901Z"
+}
