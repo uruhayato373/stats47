@@ -123,8 +123,19 @@ function figureByDataSrcPattern(url) {
   return new RegExp(`<figure\\b[^>]*\\bdata-src="${escapeRegExp(url)}"[^>]*>[\\s\\S]*?<\\/figure>`, "g");
 }
 
-/** 公開本文に残る既知の旧URLだけを catalog 契約に従って修復する。 */
-export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUID } = {}) {
+/**
+ * 公開本文に残る既知の旧URLだけを catalog 契約に従って修復する。
+ * forceRegenerateCards: true の場合、regenerate-card は文言一致を見ずに毎回新しい
+ * embedded-content-key を発行する。note は同一 key を再解決しないらしく (2026-09-20 実測:
+ * 発行から5日経過・週次規模の再発行を経ても embedded_contents に一度も登録されなかった)、
+ * OGP 側の原因を直した直後に一度だけ全カードへ新しい解決機会を与えるための一回限りの手段。
+ * 通常運用 (週次 check・通常 commit) では false のまま、文言一致による無変更判定を維持する。
+ */
+export function applyPublishedLinkRepairs(
+  body,
+  repairs,
+  { idFactory = randomUUID, forceRegenerateCards = false } = {},
+) {
   const original = String(body);
   let output = normalizeLegacyStats47Links(original);
   const results = [];
@@ -139,11 +150,18 @@ export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUI
       let matched = false;
       output = output.replace(figureByDataSrcPattern(fromUrl), (figure) => {
         matched = true;
+        if (forceRegenerateCards) return externalCard(fromUrl, repair.title, repair.description, idFactory);
         const currentTitle = figure.match(/<strong>([\s\S]*?)<\/strong>/)?.[1];
         const currentDescription = figure.match(/<em>([\s\S]*?)<\/em>/)?.[1];
-        // note は external-article カードの <a> 内テキストを配信経路 (CDN / リージョン) によって落として返す
-        // ことがある (2026-09-20: GitHub Actions からの取得で 22 本、ローカルでは 0 本)。URL が正しく文言が空の
-        // カードは「誤った文言」ではないので書き直さない (書き直しても次の取得でまた空になり、check が永久に赤になる)。
+        // note の実配信ページは external-article カードの <a> 内テキストを一切使わず、
+        // embedded_contents レジストリ (embedded-content-key で解決) の内容だけを描画する。ここで
+        // 読んでいる本文 (note 公開API) はレジストリ解決前の生の保存値を返すことがあり、そのときは
+        // <a> 内テキストが欠けて見える (2026-09-20 実測: stats47.jp/products/.../from/note/<id> への
+        // カード全数で embedded_contents に未登録＝読者には空カードとして配信されていた。原因は転送先
+        // ページが OGP を持たず note 側の解決に失敗していたこと。apps/web/src/app/products/[slug]/
+        // from/note/[noteKey]/page.tsx で解消済み)。この <a> 内テキストは編集画面の初期プレビュー用の
+        // 置物であり実描画を左右しないため、空に見えても「誤った文言」として書き直さない
+        // (書き直しても次の取得でまた空になり得、check が意味なく赤くなるだけ)。
         const renderedWithoutText = currentTitle === undefined && currentDescription === undefined;
         const alreadyCorrect = renderedWithoutText || (currentTitle === escapeHtml(repair.title)
           && currentDescription === escapeHtml(repair.description));

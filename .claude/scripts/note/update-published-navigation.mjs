@@ -30,6 +30,10 @@ import {
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 
+// --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
+// (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
+let FORCE_REGENERATE_CARDS = false;
+
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
 const RUN_DATE = new Date().toISOString().slice(0, 10);
@@ -49,6 +53,13 @@ function parseArgs(argv) {
   if (magazineIndex >= 0 && !magazine) throw new Error("--magazine <key> を指定してください");
   const check = argv.includes("--check");
   if (check && !products) throw new Error("--check は --products と同時に指定してください");
+  const forceRegenerateCards = argv.includes("--force-regenerate-cards");
+  if (forceRegenerateCards && !products) {
+    throw new Error("--force-regenerate-cards は --products と同時に指定してください");
+  }
+  if (forceRegenerateCards && !argv.includes("--commit")) {
+    throw new Error("--force-regenerate-cards は --commit と同時に指定してください (audit-only では意味がない)");
+  }
   if (slug && (allPlanned || allFree)) {
     throw new Error("--slug と --all-planned/--all-free/--all は同時指定できません");
   }
@@ -63,6 +74,7 @@ function parseArgs(argv) {
     products,
     magazine,
     check,
+    forceRegenerateCards,
     commit: argv.includes("--commit"),
   };
 }
@@ -346,7 +358,9 @@ export function buildPlans(source, views, options) {
 }
 
 function applyPlanBody(body, plan) {
-  const repaired = applyPublishedLinkRepairs(body, plan.repairs);
+  const repaired = applyPublishedLinkRepairs(body, plan.repairs, {
+    forceRegenerateCards: FORCE_REGENERATE_CARDS,
+  });
   const navigation = plan.footer
       ? applyNavigationFooter(repaired.body, plan.footer)
     : {
@@ -502,11 +516,15 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   }
   let application;
   if (source.price === 0 && source.separator && plan.footer) {
-    const repaired = applyPublishedLinkRepairs(source.body, plan.repairs);
+    const repaired = applyPublishedLinkRepairs(source.body, plan.repairs, {
+      forceRegenerateCards: FORCE_REGENERATE_CARDS,
+    });
     const publicRepairs = plan.repairs.filter(
       (repair) => publicBefore.body.includes(repair.fromUrl) || publicBefore.body.includes(repair.toUrl),
     );
-    const repairedPublic = applyPublishedLinkRepairs(publicBefore.body, publicRepairs);
+    const repairedPublic = applyPublishedLinkRepairs(publicBefore.body, publicRepairs, {
+      forceRegenerateCards: FORCE_REGENERATE_CARDS,
+    });
     const visible = applyVisibleNavigationBeforeSeparator(
       repaired.body,
       repairedPublic.body,
@@ -654,6 +672,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
+  FORCE_REGENERATE_CARDS = options.forceRegenerateCards;
   const source = catalog();
   const views = latestViews();
   let plans = buildPlans(source, views, options);
