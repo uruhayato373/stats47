@@ -127,8 +127,19 @@ function figureByDataSrcPattern(url) {
   return new RegExp(`<figure\\b[^>]*\\bdata-src="${escapeRegExp(url)}"[^>]*>[\\s\\S]*?<\\/figure>`, "g");
 }
 
-/** 公開本文に残る既知の旧URLだけを catalog 契約に従って修復する。 */
-export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUID } = {}) {
+/**
+ * 公開本文に残る既知の旧URLだけを catalog 契約に従って修復する。
+ * forceRegenerateCards: true の場合、regenerate-card は文言一致を見ずに毎回新しい
+ * embedded-content-key を発行する。note は同一 key を再解決しないらしく (2026-09-20 実測:
+ * 発行から5日経過・週次規模の再発行を経ても embedded_contents に一度も登録されなかった)、
+ * OGP 側の原因を直した直後に一度だけ全カードへ新しい解決機会を与えるための一回限りの手段。
+ * 通常運用 (週次 check・通常 commit) では false のまま、文言一致による無変更判定を維持する。
+ */
+export function applyPublishedLinkRepairs(
+  body,
+  repairs,
+  { idFactory = randomUUID, forceRegenerateCards = false } = {},
+) {
   const original = String(body);
   let output = normalizeLegacyStats47Links(original);
   const results = [];
@@ -143,6 +154,7 @@ export function applyPublishedLinkRepairs(body, repairs, { idFactory = randomUUI
       let matched = false;
       output = output.replace(figureByDataSrcPattern(fromUrl), (figure) => {
         matched = true;
+        if (forceRegenerateCards) return externalCard(fromUrl, repair.title, repair.description, idFactory);
         const currentTitle = figure.match(/<strong>([\s\S]*?)<\/strong>/)?.[1];
         const currentDescription = figure.match(/<em>([\s\S]*?)<\/em>/)?.[1];
         // note の実配信ページは external-article カードの <a> 内テキストを一切使わず、

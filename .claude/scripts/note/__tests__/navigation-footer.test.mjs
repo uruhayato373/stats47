@@ -318,3 +318,38 @@ test("regenerate-card leaves a correctly-addressed card alone when note returned
   assert.equal(result.changed, false);
   assert.equal(result.body, stripped);
 });
+
+test("forceRegenerateCards issues a fresh embedded-content-key even when the card text already matches (note が古い key を再解決しないための一回限りの手段)", () => {
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5";
+  // idFactory を共有し、修復呼び出し側のカウンタが「初期生成時」から続くようにする
+  // (別々に ids() を呼ぶと両方 1 から始まり、同じ key が再生成されて偽陽性の pass になる)。
+  const sharedIdFactory = ids();
+  const correctBody = `<p>本文</p>${externalCard(url, title, description, sharedIdFactory)}`;
+  // ids() は counter を末尾にしか反映しないため、externalCard の embed (.slice(0,12)) は
+  // どの呼び出しでも "emb000000000000" に潰れる。差分を見るなら truncate されない name= 属性を使う。
+  const oldName = correctBody.match(/<figure name="([^"]+)"/)[1];
+  const result = applyPublishedLinkRepairs(
+    correctBody,
+    [{ mode: "regenerate-card", fromUrl: url, title, description }],
+    { idFactory: sharedIdFactory, forceRegenerateCards: true },
+  );
+  assert.equal(result.changed, true);
+  assert.equal(result.repairs[0].changed, true);
+  const newName = result.body.match(/<figure name="([^"]+)"/)[1];
+  assert.notEqual(newName, oldName);
+  assert.match(result.body, /data-src="https:\/\/stats47\.jp\/products\/kindle-k-s1-01\/from\/note\/n023501038bd5"/);
+});
+
+test("forceRegenerateCards also replaces a card that note is currently returning without visible text", () => {
+  const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n68f5e09c8d62";
+  const stripped = `<figure name="f" id="f" data-src="${url}" data-identifier="null" embedded-service="external-article" embedded-content-key="emb1">\n<a href="${url}" rel="nofollow noopener" target="_blank"></a>\n</figure>`;
+  const result = applyPublishedLinkRepairs(
+    stripped,
+    [{ mode: "regenerate-card", fromUrl: url, title: "実質手取りの地図", description: "説明" }],
+    { forceRegenerateCards: true },
+  );
+  assert.equal(result.changed, true);
+  assert.match(result.body, /実質手取りの地図/);
+  assert.doesNotMatch(result.body, /embedded-content-key="emb1"/);
+});
