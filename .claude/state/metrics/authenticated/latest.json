@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T06:55:08.753Z",
+  "generatedAt": "2026-09-21T06:59:30.757Z",
   "runId": "35561887453",
   "sources": [
     {
@@ -101,22 +101,18 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-09-21T06:48:27.457Z",
+      "observedAt": "2026-09-21T06:58:45.076Z",
       "activated": true,
-      "status": "pass",
-      "code": null,
+      "status": "failed",
+      "code": "auth_required",
       "runId": "35561887453",
-      "runAttempt": 6,
-      "metricsAvailable": true,
+      "runAttempt": 7,
+      "metricsAvailable": false,
       "evidence": {
-        "sha256": "254d945a1523ed03102b3e94fbb3b5c655b2155ff5b5a50942bc9a1b253705b1",
-        "bytes": 28396
+        "sha256": "83bf60d5f3e5d349eab2995acd1be3a9a5a0119dbe3619c0b39a114962959062",
+        "bytes": 1079
       },
-      "quality": {
-        "monthlyPeriod": "2026-08",
-        "monthlyRows": 1,
-        "monthlyComplete": true
-      },
+      "quality": null,
       "remaining": "payout_and_net_profit_not_collected"
     },
     {
