@@ -141,19 +141,31 @@ export function buildDashboardSnapshot({ raw, catalog, period, now = new Date().
   return report;
 }
 
+/** 検証済みsnapshotの棚卸し分類。鮮度・カバー照合・復元証跡の検証は呼び出し側で行う。 */
+export function classifyDashboardInventory(snapshot) {
+  const coverage = snapshot?.coverage;
+  if (snapshot?.account !== "stats47" || snapshot.schemaVersion !== 2
+    || coverage?.paginationComplete !== true || coverage.totalsMatched !== true
+    || !Array.isArray(coverage.missingFromDashboard) || !Array.isArray(snapshot.issues)) return "unavailable";
+  if (snapshot.status === "pass" && coverage.complete === true
+    && coverage.missingFromDashboard.length === 0 && snapshot.issues.length === 0) return "complete";
+  if (snapshot.status === "incomplete" && coverage.complete === false
+    && coverage.missingFromDashboard.length > 0 && snapshot.issues.length > 0
+    && snapshot.issues.every(i => i.code === "catalog_article_missing")) return "partial";
+  return "unavailable";
+}
+
 /** 状態×実測の一覧。CTRや効果ラベルを捏造せず、制作候補の並び順だけを提供する。 */
 export function buildCoverMetricsReport(snapshot, coverAudit, now = new Date().toISOString()) {
   const issues = [];
   const report = { schemaVersion: 1, generatedAt: now, status: "incomplete", issues, articles: [],
     period: snapshot.period, metricsFetchedAt: snapshot.fetchedAt, coverObservedAt: coverAudit?.completedAt,
     ctr: null, ctrUnavailableReason: "表示に対応するカバークリック数を取得していない" };
-  const complete = snapshot.status === "pass" && snapshot.coverage?.complete;
+  const inventory = classifyDashboardInventory(snapshot);
   // 一覧に出ない記事だけなら、合計まで検証済みの他の記事は棚卸しに利用できる。
   // 欠けた行を0へ補完せず、全体はincompleteを維持する。
-  const missingOnly = snapshot.status === "incomplete" && snapshot.coverage?.paginationComplete
-    && snapshot.coverage?.totalsMatched && snapshot.issues?.length > 0
-    && snapshot.issues.every(i => i.code === "catalog_article_missing");
-  if (!complete && !missingOnly) issues.push("metrics_invalid");
+  const missingOnly = inventory === "partial";
+  if (inventory === "unavailable") issues.push("metrics_invalid");
   if (snapshot.account !== "stats47" || snapshot.schemaVersion !== 2) issues.push("metrics_identity_invalid");
   if (coverAudit?.account !== "stats47" || !coverAudit.coverage?.complete || !Array.isArray(coverAudit.articles)) issues.push("cover_audit_incomplete");
   for (const timestamp of [snapshot.fetchedAt, coverAudit?.completedAt]) {
@@ -174,15 +186,20 @@ export function buildCoverMetricsReport(snapshot, coverAudit, now = new Date().t
     });
     byId.delete(a.noteId);
   }
-  for (const [id, a] of byId) {
-    if (!snapshot.coverage.missingFromDashboard.includes(id)) issues.push(`unexpected_cover_article:${id}`);
-    const knownCover = ["configured", "missing"].includes(a.cover?.status);
+  // カバー監査とカタログの時点が違っても、計測側が確認した欠測IDを一覧から落とさない。
+  const missingIds = new Set(snapshot.coverage.missingFromDashboard);
+  for (const id of new Set([...missingIds, ...byId.keys()])) {
+    const a = byId.get(id);
+    if (!missingIds.has(id)) issues.push(`unexpected_cover_article:${id}`);
+    const knownCover = ["configured", "missing"].includes(a?.cover?.status);
+    const cover = knownCover ? a.cover : { status: "unknown" };
     if (!knownCover) issues.push(`cover_unknown:${id}`);
-    report.articles.push({ noteId: id, url: a.noteUrl, title: a.title, catalogKey: a.catalogKey, vertical: a.vertical,
+    report.articles.push({ noteId: id, url: a?.noteUrl ?? `https://note.com/stats47/n/${id}`,
+      title: a?.title ?? null, catalogKey: a?.catalogKey ?? null, vertical: a?.vertical ?? null,
       publicationStatus: "published", publishedAt: null, series: null, isPaid: null,
       ...Object.fromEntries(Object.values(METRIC_COLUMNS).map(key => [key, null])),
-      fullPeriodExposure: null, baselineEligible: false, metricsAvailability: "missing_period_row", cover: a.cover,
-      lane: !knownCover ? "investigate" : a.cover.status === "missing" ? "remediation" : "review_existing" });
+      fullPeriodExposure: null, baselineEligible: false, metricsAvailability: "missing_period_row", cover,
+      lane: !knownCover ? "investigate" : cover.status === "missing" ? "remediation" : "review_existing" });
   }
   report.articles.sort((a, b) => (b.impressions ?? -1) - (a.impressions ?? -1) || (b.pageViews ?? -1) - (a.pageViews ?? -1) || a.noteId.localeCompare(b.noteId));
   report.summary = { published: report.articles.length,

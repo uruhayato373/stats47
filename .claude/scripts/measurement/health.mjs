@@ -13,6 +13,10 @@ export function measurementHealth(state, now = Date.now()) {
     return { source, capability: config.capability, status: !current ? 'stale' : !compatible ? 'failed' : item.status,
       code: !current ? 'measurement_stale' : !compatible ? 'capability_mismatch' : item.code ?? null,
       metricsAvailable: current && compatible && item.status === 'pass' && item.metricsAvailable === true,
+      inventoryAvailable: current && compatible && source === 'note' && item.inventoryAvailable === true
+        && (item.status === 'pass' || (item.status === 'failed' && item.code === 'report_incomplete')),
+      awaitingReauthentication: current && compatible && item.status === 'failed' && item.code === 'auth_required'
+        && item.recovery?.state === 'awaiting_reauthentication',
       remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null };
   });
   return { fresh, status: sources.every(s => s.status === 'pass') ? 'pass' : 'action_required', sources };
@@ -28,7 +32,7 @@ export function readMeasurementHealth(root = '.', now = Date.now()) {
 export function formatMeasurementHealth(health) {
   return ['最新の認証付き収集状態（週次KPIの期間とは別。欠測を0にしない）', '',
     '| 対象 | 収集範囲 | 状態 | 未取得・要対応 |', '|---|---|---|---|',
-    ...health.sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.code ?? s.remaining ?? 'なし'} |`),
+    ...health.sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.code ?? s.remaining ?? 'なし'}${s.awaitingReauthentication ? '（本人の再認証待ち・再接続停止）' : ''}${s.inventoryAvailable ? '（記事棚卸しのみ利用可・全件KPI不可）' : ''} |`),
     '', '生データはprivate R2。status-onlyの成功・ローリング期間の値を確定7日の収益として合算しない。'].join('\n');
 }
 

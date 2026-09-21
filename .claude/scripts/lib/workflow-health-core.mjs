@@ -26,6 +26,42 @@ export const DEFAULT_CANCELLED_FAILURE_MINUTES = 30;
 /** 何回連続で失敗したら unhealthy とするか */
 export const DEFAULT_MIN_STREAK = 2;
 
+// 初回main反映は2026-09-21 01:40 UTC。全cronへ日次前提を適用しない。
+// 同repoで3時間25分のschedule遅延を観測したため、予定時刻から6時間待つ。
+// cron時刻との整合は専用テストで固定する。
+export const SCHEDULE_CONTRACTS = Object.freeze({
+  "authenticated-measurement.yml": Object.freeze({
+    firstExpectedAt: "2026-09-21T09:20:00Z",
+    intervalHours: 24,
+    graceHours: 6,
+  }),
+});
+
+/** 猶予を過ぎた最新予定枠を返す。createdAtはAPIのcreated_atを正規化した値。 */
+export function evaluateSchedule(workflow, runs, nowMs) {
+  const contract = SCHEDULE_CONTRACTS[workflow];
+  if (!contract || !Number.isFinite(nowMs)) return null;
+  const firstMs = Date.parse(contract.firstExpectedAt);
+  const intervalMs = contract.intervalHours * 3600000;
+  const graceMs = contract.graceHours * 3600000;
+  // 猶予を過ぎた最新の予定枠。前回runの遅延分で次回の期限を延ばさない。
+  const slot = Math.floor((nowMs - firstMs - graceMs) / intervalMs);
+  const expectedMs = firstMs + Math.max(0, slot) * intervalMs;
+  const lastRunMs = runs.reduce((latest, run) => {
+    if (run.event !== undefined && run.event !== "schedule") return latest;
+    const createdMs = Date.parse(run.createdAt ?? "");
+    return Number.isFinite(createdMs) && createdMs <= nowMs ? Math.max(latest, createdMs) : latest;
+  }, -Infinity);
+  return {
+    code: slot < 0 || lastRunMs >= expectedMs ? null
+      : Number.isFinite(lastRunMs) ? "scheduled_run_stale" : "scheduled_run_missing",
+    expectedAt: new Date(expectedMs).toISOString(),
+    deadlineAt: new Date(expectedMs + graceMs).toISOString(),
+    lastRunAt: Number.isFinite(lastRunMs) ? new Date(lastRunMs).toISOString() : null,
+    graceHours: contract.graceHours,
+  };
+}
+
 /**
  * run 1 件を success / failure / neutral に分類する。
  *
@@ -64,13 +100,15 @@ function durationMinutes(run) {
 export function evaluateWorkflow(workflow, runs, options = {}) {
   const minStreak = options.minStreak ?? DEFAULT_MIN_STREAK;
   const nowMs = options.nowMs ?? null;
+  // event省略は既存のschedule専用callerとの互換。明示されたpush/dispatchは除外。
+  const scheduledRuns = runs.filter((run) => run.event === undefined || run.event === "schedule");
 
   let failureStreak = 0;
   let sawSuccess = false;
   let lastSuccessAt = null;
   const recentFailures = [];
 
-  for (const run of runs) {
+  for (const run of scheduledRuns) {
     const verdict = classifyRun(run, options);
     if (verdict === "success") {
       sawSuccess = true;
@@ -90,10 +128,9 @@ export function evaluateWorkflow(workflow, runs, options = {}) {
       ? Math.floor((nowMs - Date.parse(lastSuccessAt)) / 86400000)
       : null;
 
-  // run が 1 件も無い workflow は「まだ動いていない」だけなので unhealthy にしない。
-  // 誤検知を出すゲートは運用で無効化されるので、確実に言える形だけを赤にする。
-  const hasRuns = runs.length > 0;
-  const unhealthy = hasRuns && failureStreak >= minStreak;
+  // 初回予定・周期が確定したworkflowだけ、未発火/古いrunも検知する。
+  const schedule = evaluateSchedule(workflow, scheduledRuns, nowMs);
+  const unhealthy = (scheduledRuns.length > 0 && failureStreak >= minStreak) || Boolean(schedule?.code);
 
   return {
     workflow,
@@ -103,7 +140,8 @@ export function evaluateWorkflow(workflow, runs, options = {}) {
     daysSinceSuccess,
     everSucceeded: sawSuccess,
     recentFailures,
-    runsInspected: runs.length,
+    runsInspected: scheduledRuns.length,
+    schedule,
   };
 }
 
@@ -121,11 +159,11 @@ export function formatReport(summary, options = {}) {
   const lines = [];
   lines.push(`scheduled workflow ${summary.checked} 件を検査`);
   if (summary.unhealthy.length === 0) {
-    lines.push("連続失敗している cron は無い。");
+    lines.push("連続失敗している cron は無い。監視対象のschedule期限超過も無い。");
     return lines.join("\n");
   }
   lines.push("");
-  lines.push(`⚠️ 連続失敗 ${summary.unhealthy.length} 件:`);
+  lines.push(`⚠️ cron 異常 ${summary.unhealthy.length} 件:`);
   for (const r of summary.unhealthy) {
     const age =
       r.daysSinceSuccess === null
@@ -133,7 +171,10 @@ export function formatReport(summary, options = {}) {
           ? "最終成功日時不明"
           : `直近 ${r.runsInspected} 回に成功なし`
         : `最終成功から ${r.daysSinceSuccess} 日`;
-    lines.push(`- ${r.workflow}: ${r.failureStreak} 回連続失敗 (${age})`);
+    if (r.schedule?.code) {
+      lines.push(`- ${r.workflow}: ${r.schedule.code} (予定 ${r.schedule.expectedAt} / 猶予 ${r.schedule.graceHours}時間 / 最終schedule ${r.schedule.lastRunAt ?? "未観測"})`);
+    }
+    if (r.failureStreak > 0) lines.push(`- ${r.workflow}: ${r.failureStreak} 回連続失敗 (${age})`);
     for (const f of r.recentFailures) {
       const url = f.id && options.repoUrl ? ` ${options.repoUrl}/actions/runs/${f.id}` : "";
       lines.push(`    ${f.at ?? "?"} ${f.conclusion}${url}`);
