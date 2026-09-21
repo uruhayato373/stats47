@@ -15,6 +15,7 @@ import { GEO_SERVICE_OFFER } from "../../../packages/product-factory/src/channel
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
 
 import type { StorefrontProduct } from "../src/features/products/types";
+import { selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";
 
 const ROOT = path.resolve(__dirname, "../../..");
 const KDP_LISTINGS_PATH = path.join(ROOT, ".claude/config/kdp-listings.json");
@@ -24,14 +25,6 @@ const OUTPUT_PATH = path.join(
   "apps/web/src/features/products/storefront.generated.ts",
 );
 
-interface KdpListing {
-  readonly id: string;
-  readonly title: string;
-  readonly priceYen: number;
-  readonly asin?: string | null;
-  readonly kdpStatus?: string | null;
-}
-
 interface CoconalaListing {
   readonly title: string;
   readonly priceYen: number;
@@ -40,7 +33,7 @@ interface CoconalaListing {
 }
 
 interface KdpListingsFile {
-  readonly listings: Readonly<Record<string, KdpListing>>;
+  readonly listings: Readonly<Record<string, KindleStorefrontListing>>;
 }
 
 interface CoconalaListingsFile {
@@ -59,26 +52,28 @@ function buildStorefrontProducts(): StorefrontProduct[] {
   const productsById = new Map(ALL_PRODUCTS.map((product) => [product.id, product]));
 
   const kindleProducts = Object.entries(kdp)
-    .filter(([, listing]) => listing.kdpStatus === "live" && Boolean(listing.asin))
-    .map(([id, listing]): StorefrontProduct => {
+    .flatMap(([id, listing]): StorefrontProduct[] => {
+      const edition = selectLiveKindleEdition(listing);
+      if (!edition) return [];
       const book = booksById.get(id);
       if (!book) throw new Error(`KDP listing ${id}: KINDLE_BOOKS に定義がありません`);
-      const sourceBlogSlugs = book.chapters.flatMap((chapter) =>
+      const sourceBlogSlugs = edition === listing ? book.chapters.flatMap((chapter) =>
         chapter.source === "blog" && chapter.blogSlug ? [chapter.blogSlug] : [],
-      );
-      return {
+      ) : [];
+      return [{
         id,
         slug: `kindle-${id.toLowerCase()}`,
         channel: "kindle",
         channelLabel: "Kindle電子書籍",
-        title: listing.title,
-        description: book.concept,
-        priceYen: listing.priceYen,
-        externalUrl: `https://www.amazon.co.jp/dp/${listing.asin}`,
+        title: edition.title,
+        description: edition === listing ? book.concept :
+          "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+        priceYen: edition.priceYen,
+        externalUrl: `https://www.amazon.co.jp/dp/${edition.asin}`,
         included: ["Kindle電子書籍", "固定時点の公的統計", "図表とテーマ解説"],
         audience: ["地域差を読み物として知りたい方"],
         sourceBlogSlugs,
-      };
+      }];
     });
 
   const dataProducts = Object.entries(coconala)

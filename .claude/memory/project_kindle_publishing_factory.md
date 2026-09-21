@@ -89,7 +89,7 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 
 - **問題**: 全セッション統合のCIで `KDP_STATUS_INVALID` が20冊に発生し、取り下げ済み・設計待ちの本が「公開準備済み」に分類された。
 - **原因**: listings は `withdrawn` / `blocked-design` を保持していたが、`apps/admin/lib/content-operations/core.ts` は `draft` / `listed` だけを認識し、完成物やarchiveの存在でreadyへ進めていた。
-- **対策**: `blocked-thin` / `blocked-design` / `withdrawn` をblockedに正規化し、復元・公開案内より停止理由を優先する。未知の状態は監査エラーとblockedを維持する。状態追加時は同read model・unit test・`npm run audit:content-operations`を一緒に検証する。
+- **対策**: `blocked-thin` / `blocked-design` / `withdrawn` をblockedに正規化し、復元・公開案内より停止理由を優先する。未知の状態は監査エラーとblockedを維持する。状態追加時は同read model・unit test・`npm run audit:content-operations`を一緒に検証する。listings更新後は `npm run generate:product-storefront --workspace=web` → `check:product-storefront` → `note:catalog:validate` で公開カタログと参照先も同期する。新版の審査中は、`replacesAsin`と一致し販売継続フラグ・live証拠がある旧版だけを旧版の書名/価格/ASINで表示する（旧版であることを明記し、新版の収録章・本文改善を旧版へ流用しない）。
 - **証拠**: PR #999 / CI run `35550551365`、`apps/admin/tests/unit/content-operations.test.ts`。
 
 ## 正典
