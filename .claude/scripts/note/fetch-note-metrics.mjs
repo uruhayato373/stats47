@@ -8,6 +8,7 @@ import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { extractDashboardDom, collectDashboardPages } from "./lib/dashboard-dom.mjs";
 import { buildDashboardSnapshot, buildCoverMetricsReport, coverMetricsCsv, defaultPeriod, validatePeriod } from "./lib/dashboard-metrics.mjs";
+import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const run = promisify(execFile);
@@ -33,8 +34,17 @@ const cli = process.env.BROWSER_USE_BIN || (existsSync(cliDefault) ? cliDefault 
 const session = `note-metrics-${process.pid}-${Date.now()}`;
 const outputDir = resolve(options.outputDir);
 let closed = false;
+let playwrightContext;
+let playwrightPage;
 
 async function browser(command, ...args) {
+  if (unattended()) {
+    playwrightContext ??= await measurementContext('note');
+    playwrightPage ??= await playwrightContext.newPage();
+    if (command === 'open') { await playwrightPage.goto(args[0], { waitUntil: 'domcontentloaded', timeout: 45000 }); return {}; }
+    if (command === 'eval') return { result: await playwrightPage.evaluate(args[0]) };
+    throw new Error('unsupported_browser_command');
+  }
   const { stdout } = await run(cli, ["--session", session, "--json", ...(command === "open" ? ["--headed", "--profile", options.profile] : []), command, ...args],
     { timeout: 45_000, maxBuffer: 12_000_000 });
   const reply = JSON.parse(stdout);
@@ -62,6 +72,7 @@ function processList() {
 async function cleanup() {
   if (closed) return;
   closed = true;
+  if (unattended()) { await playwrightContext?.close(); return; }
   // Own named session only. Never pkill another task's browser/daemon or close user's tabs.
   const before = processList();
   const daemon = before.find(p => p.command.includes("browser_use.skill_cli.daemon") && p.command.split(/\s+/).includes(session));
@@ -100,6 +111,7 @@ try {
   await browser("open", "https://note.com/settings/account");
   await until(() => evaluate('JSON.stringify({account:/note ID\\s*stats47\\b/.test(document.body.innerText),login:location.pathname.includes("login")})'),
     state => { if (state.login) throw new Error("login_required"); return state.account; }, "stats47 account");
+  markMeasurementAuthenticated('note');
   // URL parameters were observed after selecting this custom period in the live UI.
   const url = new URL("https://note.com/dashboard");
   url.search = new URLSearchParams({ period: "CUSTOM", date: period.start, to: period.end }).toString();

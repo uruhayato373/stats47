@@ -126,6 +126,28 @@ npm run test:run   --workspace=@stats47/product-factory
 - **別PC復元の正典**は `.claude/state/products/kindle-archives.json`（Git）+ 上記R2暗号化bundle。`book.epub / cover.jpg / cover.png / metadata.json / READINESS.md`（`review.md`があれば同梱）のSHA-256からimmutable revisionを作る。暗号鍵はR2/Gitへ置かず、`KINDLE_ARCHIVE_KEY`、未設定時は当該PCの`R2_SECRET_ACCESS_KEY`からHKDFで導出する。認証Cookie・2FA・KDP profileはarchive対象外。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
 
+#### 編集設計 (design) が無い本は作らない (2026-09-19 確定)
+
+2026-09-19 の全 32 冊監査で、カタログは「データが何か」(`concept`) しか持たず、**誰のどんな悩みを解決するか・
+無料 (stats47.jp) と何が違って何に支払うのか・需要の証拠・タイトルの型**がどこにも無かった (書名 13 冊が
+「〇〇の地図 — キーワード列挙」、共通事業方針への参照 0 件)。そこで `KindleBook.design` (`types.ts` の
+`EditorialDesign`) を新設し、共通事業方針 `.claude/shared-policy/POLICY.md` の「判断の問い」5 つと
+`STRUCTURE.md` のタイトル 5 型・本文 9 型を、書籍ごとに書く場所にした。
+
+| 項目 | 中身 | validator |
+|---|---|---|
+| `readerProblem` | 誰の・どんな悩み (読者の言葉で) | 20 字未満は error |
+| `harm` + `harmReason` | H/A/R/M のどれか、または対象外の理由 | 理由 10 字未満は error |
+| `valueAndPayReason` | 無料で得られる価値と、有料で支払う理由 | 20 字未満は error |
+| `demandEvidence` | 検索・相談・購入の証拠。無ければ「未検証:」+ 次の検証 | 空は error (未計測を需要ありにしない) |
+| `titleCandidates` | **異なる 2 型で 2 案**。`title` はどちらかと一致 | 1 案・同型・不一致は error。型の上限字数超えは warn |
+| `bodyPatterns` | 9 型のうち主に使うもの | 空は error |
+
+`products:kindle:generate` は design の無い書籍を生成しない。`validate` は design の無い manuscript 以降の
+書籍を `design-missing` で warn する (2026-09-19 時点で 31 冊。S1-01 だけ設計済み)。既存 31 冊は
+backlog `KDP-EXPANSION-01` の順で設計してから再生成する。design を埋めるだけで需要ありとは判定しない
+(共通方針の原則)。表紙の主題は読点でも折る (`splitTitle`)。
+
 #### 章の中身の作り方（2026-08-12 確定・S2/S3/S4 の 20 冊）
 
 出品前の中身実測で、S2×11 / S3×8 / S4×1 の 20 冊が **1 章 = 定型 1 文 (144〜200 字) + 図**
@@ -192,7 +214,7 @@ Kindle Previewer で「表紙が描画されない / 途中ページが表示さ
 | CSS に `page-break-after:avoid`（見出し）/ `figure img{max-height}` / `orphans:widows` | 見出しの孤立と図のページ跨ぎを止める |
 | 扉と奥付は `.colophon{page-break-before:always}` で 2 ページに分ける | 1 ページに詰め込むと書籍の体裁にならない |
 
-#### 検証は 2 層 (2026-08-12 配線)
+#### 検証は 3 層 (2026-08-12 配線・2026-09-19 に ③ を追加)
 
 ```bash
 npm run products:kindle:verify-epub  --workspace=@stats47/product-factory            # 全 32 冊
@@ -203,6 +225,14 @@ npm run products:kindle:verify-epub  --workspace=@stats47/product-factory -- --b
 |---|---|---|
 | ① 仕様適合 | KDP の受理条件 | 外部の `epubcheck` (無ければスキップし、**その旨を出力する**) |
 | ② レイアウト不変量 | 上表の 6 項目を**生成物**に対して | `scripts/verify-epub.mts` |
+| ③ 本文不変量 | Web 記事の名残 (「この記事」= error) / 同じ年の「年」「年度」混在 / 率系指標に個数単位 (= error) / 同一指標の 2 章重複 / **冊間**の同一指標・同一段落 (全冊検査時のみ) | `src/channels/kindle/content-invariants.ts` (verify-epub から呼ぶ) |
+
+**③が要る理由も実測で確定している** — 2026-09-19 に販売中 22 冊 (v1) を展開したところ、①②は通るのに
+S1 各冊に「この記事 / 本記事」が 11〜38 件、S2/S3 で同一章に「2023年」と「2023年度」が 9〜19 章/冊、
+合計特殊出生率に「（人）」、S2/S3/S4 のランキング章 481 のうち 177 が他冊にも載る同一指標 (71 指標)、
+60 字以上の同一段落が 2 冊以上に 532 件あった。意味的な正しさ (分母・因果・対象世帯) は critic の領分で、
+③は文字列だけで決定的に数えられるものに限る。ブログ由来章の「この記事」は `fetch-content.ts` の
+`rewriteWebSelfReference` が書籍版だけ「この章」へ揃える (公開ブログ原文は変えない)。
 
 **②が要る理由は実測で確定している** — 3 症状が出ていた当時、epubcheck は
 **全 32 冊で 0 error 0 warning** だった。素の `<img>` 表紙は構文として妥当で、
@@ -278,7 +308,16 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **account assert 必須**: `.claude/config/kdp-account.json` の `accountEmail`/`accountName` が KDP のアカウント表示に一致することを確認してから操作。別アカウントは即中断。
 - **出品内容 SoT = `.claude/config/kdp-listings.json`**。改訂書誌は`products:kindle:kdp-listings --version <VERSION>`で`.local/kindle-listing-revisions/`へ準備提案を出し、公開記録と分離する。旧`--apply`での一括上書きは禁止。独立レビュー・Previewer・保全・承認後に対象IDだけ切り替える。カテゴリと読みはgit TSを参照し、公開履歴を保持する。
 - **KDP運用状態も同じSoT**に `kdpStatus`（`draft|in_review|live|unknown`）/ 生の日本語表示 / `kdpStatusCheckedAt` / `lastSubmittedAt` / `salesStartedAt`（販売中を初めて確認した日）/ ASIN を保存する。`listed`だけで審査中を販売中扱いしない。`kdp-batch --phase status`はASIN未割当でも毎回状態を書き戻す。
+- **出版工程の状態機械**も同じSoTに保存する。`publicationStage` は
+  `prepared → details_filled → files_processed → verified → submitted → live → previous_unpublished` の一方向。
+  再試行で前工程を実行してもstageは後退させず、工程ごとの時刻とread-back証拠を残す。
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開（`--commit`）は outward-facing・取り下げに時間がかかるため、オーナー明示承認時のみ**。未充填フィールド・公開未確定時は「公開した」と報告しない。
+- **週次レビュー→週次計画→公開の接続**: weekly-reviewはKDP本棚状態と`products:sales`の販売数/KENPを同期し、
+  `npm run kdp:weekly -- --week YYYY-Www --write`で`.claude/state/products/kdp-weekly-publication.json`を再生成する。
+  weekly-planは`prepare-one`なら1冊だけ準備し、`ready-for-owner-approval`ならその1冊だけを候補にできる。
+  計画への記載・checkbox・過去の包括承認は公開承認ではない。対象IDの新しい明示承認がある場合だけ
+  `npm run kdp:weekly-publish -- --week YYYY-Www --id <ID> --owner-approved <ID> --commit`を実行する。
+  専用入口は実行直前に4週実測・需要シグナル・週1冊上限・候補IDを再計算し、既存preflightへ渡す。
 - **★実公開を cron / launchd で無人実行しない（2026-08-16 オーナー判断で確定）**。
   2026-08-13 に `com.stats47.kdp-resume-daily`（毎日 8:30/14:30）が `--phase draft` に続けて
   `--phase publish --commit` を回し、残り 22 冊を無人で公開まで進める構成になっていた。
@@ -318,6 +357,12 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 実際には 1 件も入っていないのに ✓ が並ぶ (カテゴリで実際にそうなり、3 枠 ✓ と報告しながら
 1 枠も保存されていなかった)。カテゴリは「選択済み件数が期待どおり増えたか」、
 表紙は「未アップロード表示が消えたか」で判定する。
+
+**ブラウザ操作前にも fail-closed のプリフライトを置く**。タイトル/フリガナ/ローマ字/版番号/価格/
+旧版ASIN・免責文を決定的に検査し、タイトルを変更したのに読みの確認snapshotが古い場合は接続前に止める。
+account assert後は本棚を直前取得し、`下書き + レビュー中 + 今回新規` の見込みが10冊を超えないことを確認する。
+本棚に状態不明行がある、台帳の未公開件数より本棚の読取件数が少ない、行を1件も読めない場合は作成しない。
+表紙の非同期反映が90秒で終わらない場合だけ、同じ下書きで1回再アップロードする。2回失敗したら停止する。
 
 **KDP には本の作成数制限がある (2026-08-13 実測)**。未公開 (下書き + レビュー中) タイトルが
 約 10 冊に達すると「本の作成数制限を超えました」モーダルが出て、新規下書きの保存が

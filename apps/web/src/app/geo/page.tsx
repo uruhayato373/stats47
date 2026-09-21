@@ -4,12 +4,21 @@ import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 import { ArrowRight, MapPin } from 'lucide-react';
 
 import { ContentDisclosure } from '@/components/content';
-import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import {
+  Breadcrumbs,
+  LEFT_RAIL_NARROW_ONLY_CLASS,
+  PageHeader,
+  PageShell,
+} from '@/components/layout';
 import { RailLinksCard, RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
-import { RailCard, SurfaceLinkCard } from '@/components/surface';
+import { SurfaceLinkCard } from '@/components/surface';
 
-import { GeoAnalysisCards } from '@/features/geo-analysis';
+import {
+  GeoAnalysisCards,
+  GEO_HOME_ANALYSIS_NAV_ITEMS,
+  GEO_HOME_LAYER_NAV_ITEMS,
+} from '@/features/geo-analysis';
 
 import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
@@ -24,7 +33,20 @@ export const metadata: Metadata = {
   alternates: { canonical: '/geo' },
 };
 
-function CompareLink() {
+const GEO_METHOD_LINKS = [
+  {
+    id: 'method',
+    label: '地図の読み方・限界',
+    href: '/geo/method',
+  },
+  {
+    id: 'sources',
+    label: '使用データと利用条件',
+    href: '/geo/data-catalog',
+  },
+] as const;
+
+function CompareLink({ compact = false }: { compact?: boolean }) {
   return (
     <SurfaceLinkCard
       href="/geo/compare"
@@ -32,9 +54,13 @@ function CompareLink() {
     >
       <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold">あなたの県から調べる</p>
+        <p className="text-sm font-semibold">
+          {compact ? '県から調べる' : 'あなたの県から調べる'}
+        </p>
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-          人口・地価・洪水・駅を県別に比較
+          {compact
+            ? '人口・地価・洪水・駅を比較'
+            : '人口・地価・洪水・駅を県別に比較'}
         </p>
       </div>
       <ArrowRight
@@ -48,55 +74,32 @@ function CompareLink() {
 export default function GeoPage() {
   return (
     <PageShell
-      rightRail={
+      leftRail={
         <RailStack>
-          <div className="hidden xl:block">
-            <CompareLink />
-          </div>
+          <CompareLink compact />
           <RailLinksCard
-            title="地域の背景を知る"
+            title="分析を選ぶ"
             layout="list"
             trackingSurface="geo_sidebar"
-            items={[
-              {
-                id: 'population',
-                label: '2050年の人口増減率ランキング',
-                href: POPULATION_BASELINE_RANKING_PATH,
-              },
-              { id: 'areas', label: '都道府県データブック', href: '/areas' },
-              { id: 'blog', label: '統計を読み解くブログ', href: '/blog' },
-            ]}
+            items={GEO_HOME_ANALYSIS_NAV_ITEMS}
           />
           <RailLinksCard
-            title="分析方法・出典"
+            title="GIS一覧"
             layout="list"
             trackingSurface="geo_sidebar"
-            items={[
-              {
-                id: 'method',
-                label: '地図の読み方と分析の限界',
-                href: '/geo/method',
-              },
-              {
-                id: 'sources',
-                label: '使用データ・年度・利用条件',
-                href: '/geo/data-catalog',
-              },
-            ]}
+            items={GEO_HOME_LAYER_NAV_ITEMS}
+            moreLink={{ href: '/geo/layers', label: 'すべてのGISを探す →' }}
           />
-          <RailCard title="地域を詳しく調べるために">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              地図で気になる場所を見つけたら、県別の集計や一次資料も確認できます。推計や距離条件を踏まえて読み進めてください。
-            </p>
-            <Link
-              href="/about"
-              className="mt-3 inline-flex min-h-11 items-center text-sm text-primary underline"
-            >
-              stats47について
-            </Link>
-          </RailCard>
+          <RailLinksCard
+            title="方法・出典"
+            layout="list"
+            trackingSurface="geo_sidebar"
+            items={GEO_METHOD_LINKS}
+          />
         </RailStack>
       }
+      leftRailDensity="compact"
+      leftRailNarrowBehavior="hide"
     >
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: '地域分析' }]}
@@ -105,24 +108,8 @@ export default function GeoPage() {
         title="地図で見る地域の変化"
         description="一つのGISで分布を知り、データを重ねて地域の変化を読む。"
       />
-      <nav
-        aria-label="地域データの調べ方"
-        className="mb-6 grid gap-4 sm:grid-cols-2"
-      >
-        <SurfaceLinkCard href="/geo/layers">
-          <h3 className="font-semibold">1. GISを探す</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            人口・住宅地価・駅を単体の地図で確認する →
-          </p>
-        </SurfaceLinkCard>
-        <SurfaceLinkCard href="#geo-analyses-heading">
-          <h3 className="font-semibold">2. データを重ねて読む</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            人口と地価・洪水・駅の関係を調べる →
-          </p>
-        </SurfaceLinkCard>
-      </nav>
-      <div className="mb-5 xl:hidden">
+      {/* 992px 未満では左レールが隠れるため、県比較の入口を本文上部へ残す。 */}
+      <div className={`mb-5 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
         <CompareLink />
       </div>
       <section aria-labelledby="geo-analyses-heading">
@@ -132,7 +119,7 @@ export default function GeoPage() {
         />
         <GeoAnalysisCards />
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-          地図は東京都本土（島しょを除く）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です。空白は人口・危険性・利便性の判定を示しません。
+          地図は兵庫県（淡路島を含む）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です。空白は人口・危険性・利便性の判定を示しません。
         </p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
           境界：国土交通省「国土数値情報（行政区域データ）」をもとに{' '}
@@ -146,11 +133,8 @@ export default function GeoPage() {
           >
             CC BY-SA 4.0
           </a>
-          。 駅名・位置は
-          <Link href="/geo/data-catalog" className="underline">
-            分析の駅データ
-          </Link>
-          を使用。
+          。
+          駅名・位置は分析の駅データ（「使用データ・年度・利用条件」に記載）を使用。
         </p>
       </section>
       <ContentDisclosure
@@ -171,13 +155,55 @@ export default function GeoPage() {
             1kmメッシュによる近似や推計の限界を、地図と合わせて確かめます。
           </li>
         </ol>
-        <Link
-          href="/geo/method"
-          className="mt-4 inline-flex min-h-11 items-center text-sm text-primary underline"
-        >
-          詳しい分析方法を見る
-        </Link>
       </ContentDisclosure>
+      <section
+        aria-labelledby="geo-related-heading"
+        className="mt-8 border-t pt-6"
+      >
+        <SectionHeader
+          title={<span id="geo-related-heading">関連する地域データ</span>}
+        />
+        <nav
+          aria-label="関連する地域データ"
+          className="flex flex-wrap gap-x-6 gap-y-1"
+        >
+          <Link
+            href={POPULATION_BASELINE_RANKING_PATH}
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            2050年の人口増減率ランキング
+          </Link>
+          <Link
+            href="/areas"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            都道府県データブック
+          </Link>
+          <Link
+            href="/blog"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            統計を読み解くブログ
+          </Link>
+        </nav>
+      </section>
+      <div className={`mt-6 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
+        <RailStack>
+          <RailLinksCard
+            title="GIS一覧"
+            layout="list"
+            trackingSurface="geo_sidebar"
+            items={GEO_HOME_LAYER_NAV_ITEMS}
+            moreLink={{ href: '/geo/layers', label: 'すべてのGISを探す →' }}
+          />
+          <RailLinksCard
+            title="方法・出典"
+            layout="list"
+            trackingSurface="geo_sidebar"
+            items={GEO_METHOD_LINKS}
+          />
+        </RailStack>
+      </div>
     </PageShell>
   );
 }

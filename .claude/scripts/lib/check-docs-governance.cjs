@@ -156,6 +156,14 @@ function isoWeek(dateText) {
   return `${year}-W${String(week).padStart(2, "0")}`;
 }
 
+function acceptedWeeklyPlanWeeks(dateText) {
+  const currentWeek = isoWeek(dateText);
+  const date = new Date(`${dateText}T00:00:00Z`);
+  if (date.getUTCDay() !== 0) return [currentWeek];
+  date.setUTCDate(date.getUTCDate() + 7);
+  return [currentWeek, isoWeek(date.toISOString().slice(0, 10))];
+}
+
 function escapeTable(value) {
   return String(value || "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ").trim();
 }
@@ -567,14 +575,19 @@ function inspectRepository({
   const monthFile = config.todo.monthFile;
   const weekFile = config.todo.weekFile;
   const expectedMonth = now.slice(0, 7);
-  const expectedWeek = isoWeek(now);
+  const acceptedWeeks = acceptedWeeklyPlanWeeks(now);
   const actualMonth = frontmatters.get(monthFile)?.values.month;
   const actualWeek = frontmatters.get(weekFile)?.values.week;
   if (actualMonth && actualMonth !== expectedMonth) {
     add("warning", "DG031", monthFile, `monthが現在月でない: ${actualMonth} (現在 ${expectedMonth})`);
   }
-  if (actualWeek && actualWeek !== expectedWeek) {
-    add("warning", "DG032", weekFile, `weekが現在週でない: ${actualWeek} (現在 ${expectedWeek})`);
+  if (actualWeek && !acceptedWeeks.includes(actualWeek)) {
+    add(
+      "warning",
+      "DG032",
+      weekFile,
+      `weekが有効週でない: ${actualWeek} (有効 ${acceptedWeeks.join(" / ")})`,
+    );
   }
 
   // 実装計画: 命名、backlog参照、INDEX生成ブロック
@@ -814,6 +827,7 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
+  acceptedWeeklyPlanWeeks,
   dateAtJst,
   fixImplementationPlanIndex,
   inspectRepository,

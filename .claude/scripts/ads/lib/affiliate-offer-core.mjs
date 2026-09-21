@@ -46,6 +46,10 @@ function a8MaterialProgramToken(ad) {
 
 function explicitNonA8ProgramRef(ad) {
   const text = joinedTrackingText(ad);
+  if (/af\.moshimo\.com\/af\/c\/click/i.test(text)) {
+    const promotionId = text.match(/[?&]p_id=([0-9]+)/i)?.[1];
+    return promotionId ? `moshimo:${promotionId}` : null;
+  }
   if (/valuecommerce/i.test(text)) {
     const pid = text.match(/[?&]pid=([0-9]+)/i)?.[1];
     return pid ? `valuecommerce:${pid}` : null;
@@ -232,6 +236,7 @@ export function buildAffiliateOfferQueues({
   ads,
   sharedProgramRefs = [],
   outcomeAvailableProgramRefs = [],
+  allowedExperimentIds = [],
   pageType,
   vertical,
   rankingKey = null,
@@ -242,7 +247,9 @@ export function buildAffiliateOfferQueues({
     const reasons = offerBlockReasons({ profile, ads: programAds, sharedProgramRefs, outcomeAvailableProgramRefs });
     if (!profile.allowedVerticals.includes(vertical)) reasons.push("vertical-mismatch");
     if (!profile.allowedPageTypes.includes(pageType)) reasons.push("page-type-not-allowed");
-    if (programAds.some((ad) => ad.experimentId || ad.variantId)) reasons.push("experiment-variant-isolated");
+    if (programAds.some(
+      (ad) => (ad.experimentId || ad.variantId) && !allowedExperimentIds.includes(ad.experimentId),
+    )) reasons.push("experiment-variant-isolated");
     if (programAds.length === 0) reasons.push("active-creative-missing");
     if (
       pageType === "ranking" &&

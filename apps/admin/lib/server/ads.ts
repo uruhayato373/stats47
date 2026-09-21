@@ -36,7 +36,7 @@ export interface ExperimentVariant {
 export interface ExperimentRow {
   experimentId: string;
   kind: string;
-  bucket: "active" | "readyToDecide" | "invalid" | "inconclusive" | "closed";
+  bucket: "active" | "maturing" | "readyToDecide" | "invalid" | "inconclusive" | "closed";
   startedAt: string | null;
   daysElapsed: number | null;
   sampleReached: boolean | null;
@@ -135,6 +135,7 @@ function readOperations(): Wrapped<AdsOperations> {
     const exp = d.experiments ?? {};
     const buckets: ExperimentRow["bucket"][] = [
       "active",
+      "maturing",
       "readyToDecide",
       "invalid",
       "inconclusive",

@@ -34,7 +34,10 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
 - 書き下ろし章（freshFile）の配線と、企画の manuscript 昇格（需要ファースト＝1 冊ずつ）。
 - **生成物の検証（`products:kindle:verify-epub`）を生成のたびに実行する**。EPUB は `.local` にしか
   無く CI で検証できないため、これは**公開前のローカルゲート**であり自動では走らない。
-  2 層 = ① `epubcheck`（仕様適合）② レイアウト不変量（`scripts/verify-epub.mts`）。
+  3 層 = ① `epubcheck`（仕様適合）② レイアウト不変量（`scripts/verify-epub.mts`）
+  ③ 本文不変量（`src/channels/kindle/content-invariants.ts`: Web 記事の名残・年/年度混在・
+  率系の単位・同一指標の重複・全冊検査時の冊間重複。2026-09-19 の販売中 22 冊監査で①②を
+  通り抜けていた欠陥）。
   ★**①だけでは足りない**: 3 症状（表紙が描画されない / 途中ページが出ない / 改ページ不適切）が
   出ていた当時、epubcheck は全 32 冊で 0 error 0 warning だった（素の `<img>` 表紙は構文として
   妥当で、壊れるのはレイアウトだけ）。正典: `coconala-product-standards.md` §8。

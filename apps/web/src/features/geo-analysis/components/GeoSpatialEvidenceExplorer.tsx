@@ -112,7 +112,11 @@ function GeoSpatialEvidenceExplorerState({
   syncUrl = true,
 }: Props) {
   const [prefCode, setPrefCode] = useState(initialPrefCode);
-  const [view, setView] = useState(initialView);
+  // The audit content is always shown below the map, so `audit` URLs
+  // (?stage=audit, /<NN>/audit) keep working and open the overlap map.
+  const [view, setView] = useState<SpatialView>(
+    initialView === 'audit' ? 'overlap' : initialView
+  );
   const [facilityGroup, setFacilityGroup] =
     useState<PublicFacilityGroup>(initialFacilityGroup);
   const publicFacility = slug === 'population-public-facility-access';
@@ -271,21 +275,18 @@ function GeoSpatialEvidenceExplorerState({
       ) : null}
       <Tabs value={view} onValueChange={changeView} className="mt-4">
         <TabsList
-          className={`grid h-auto w-full grid-cols-1 ${hasFacilities ? 'sm:grid-cols-4' : 'sm:grid-cols-3'}`}
+          className={`grid h-auto w-full grid-cols-1 ${hasFacilities ? 'sm:grid-cols-3' : 'sm:grid-cols-2'}`}
         >
           <TabsTrigger value="population" className="min-h-11">
-            {slug === 'population-snow-designation' || landslide ? '1. 2020年基準人口の分布' : '1. 人口の分布と変化'}
+            {slug === 'population-snow-designation' || landslide ? '2020年基準人口の分布' : '人口の分布と変化'}
           </TabsTrigger>
           {hasFacilities ? (
             <TabsTrigger value="facilities" className="min-h-11">
-              2. 県内の原典施設
+              県内の原典施設
             </TabsTrigger>
           ) : null}
           <TabsTrigger value="overlap" className="min-h-11">
-            {hasFacilities ? '3.' : '2.'} {config.overlapLabel}
-          </TabsTrigger>
-          <TabsTrigger value="audit" className="min-h-11">
-            {hasFacilities ? '4.' : '3.'} 数値の確かめ方
+            {config.overlapLabel}
           </TabsTrigger>
         </TabsList>
         {(hasFacilities
@@ -343,25 +344,6 @@ function GeoSpatialEvidenceExplorerState({
             </p>
           </TabsContent>
         ))}
-        <TabsContent value="audit" className="mt-4">
-          {detail && !loading ? (detail.slug === 'population-landslide-exposure' ? <GeoLandslideAudit detail={detail} /> :
-            <div className="grid gap-3 sm:grid-cols-3">
-              {spatialAuditRows(detail).map((row) => (
-                <SurfaceCard key={row.label}>
-                  <p className="text-xs text-muted-foreground">{row.label}</p>
-                  <p className="mt-2 text-base font-semibold tabular-nums">
-                    {row.value}
-                  </p>
-                </SurfaceCard>
-              ))}
-            </div>
-          ) : null}
-          <p className="mt-3 text-sm text-muted-foreground">
-            {landslide ? '対象46県（京都府除外）の途中データと県別集計を照合（' : '全47県の途中データと県別集計を照合（'}
-            {manifest.quality.conservationChecks}
-            /{landslide ? 46 : 47}）。表示の人数は丸めているため足し算に1人程度の差が出ることがあります。検算は丸め前の値で行います。
-          </p>
-        </TabsContent>
       </Tabs>
       {loading ? (
         <p
@@ -385,6 +367,26 @@ function GeoSpatialEvidenceExplorerState({
           </Button>
         </div>
       ) : null}
+      <div className="mt-6" data-testid="spatial-audit">
+        <SectionHeader as="h3" title="数値の確かめ方" hideRule />
+        {detail && !loading ? (detail.slug === 'population-landslide-exposure' ? <GeoLandslideAudit detail={detail} /> :
+          <div className="grid gap-3 sm:grid-cols-3">
+            {spatialAuditRows(detail).map((row) => (
+              <SurfaceCard key={row.label}>
+                <p className="text-xs text-muted-foreground">{row.label}</p>
+                <p className="mt-2 text-base font-semibold tabular-nums">
+                  {row.value}
+                </p>
+              </SurfaceCard>
+            ))}
+          </div>
+        ) : null}
+        <p className="mt-3 text-sm text-muted-foreground">
+          {landslide ? '対象46県（京都府除外）の途中データと県別集計を照合（' : '全47県の途中データと県別集計を照合（'}
+          {manifest.quality.conservationChecks}
+          /{landslide ? 46 : 47}）。表示の人数は丸めているため足し算に1人程度の差が出ることがあります。検算は丸め前の値で行います。
+        </p>
+      </div>
       <div className="mt-4 flex flex-wrap gap-4 text-sm">
         <Link
           href={`/geo/${slug}?pref=${prefCode}&stage=${view}${publicFacility ? `&group=${facilityGroup}` : ''}`}

@@ -23,13 +23,24 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 | 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
 |---|---|---|---|
 | ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout連続配置/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**。**不可: 読者価値の有無** |
-| ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」 |
+| ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」・**定義整合 (下記)** |
 | ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
 
 **鉄則**:
 - **文字数 (prose) は「薄すぎ」を弾く床であって品質ではない。**表・markup・リンクでは稼げない (gate が prose のみ計測)。字数を満たしたいなら読者価値のある分析を書く。
 - **書いた本人が自分の記事を採点して公開してはならない。**必ず `blog-critic`(別 agent・別コンテキスト) の意味レビューを通す。執筆 (article-writer) と監査 (blog-critic) は分離する。
 - 機械 gate を pass しても「品質 OK」ではない。②③ を経て初めて品質が担保される。
+- **定義整合 (★2026-09-19 追加・BLOCK)**: 本文の解釈は指標の定義 (単位・対象と分母・期間の型・調査・名目/実質) に
+  縛られる。執筆と審査の両方が **同じ「指標定義シート」** を入力にする:
+  ```bash
+  npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <slug>   # または --article <path> / --keys a,b
+  ```
+  (data-configs の git TS から決定的に生成。判定はしない)。critic は次を BLOCK にする — (a) 本文の値・順位・年が
+  図 JSON と違う (b) 対象 (二人以上世帯全体 / 勤労者世帯 / 事業所…) や分母を取り違える (c) 名目と実質、暦年と年度を
+  混ぜる (d) 構成比の差を実額に換算する・平均を個人に置き換える (e) 相関を因果や説明割合として書く。
+  **なぜ**: K-S1-01 (2026-09-19) の全章レビューで BLOCK 8 / MAJOR 19 の大半がこの種類で、①の factual-check
+  (値の存在照合) も②の旧 rubric (読者価値) も捕まえていなかった。シートが「未宣言」を返す指標 (yearFormat 無し) は
+  本文で年の型を書く前に出典で確かめ、config へ反映する。
 - **critic は full / delta の二相で起動する (トークン節約)**: 初回審査は `full` (正典全観点 + 記事全文)、REVISE 後の再審査は `delta` (前回指摘 + 変更 hunk のみ、正典 465行と記事全文を再読しない。床は `quality-gate.mjs` が毎回フル実行するため落ちない)。GSC 流入上位 30 記事の初回 critic は opus、他は sonnet に傾斜する (`build-remediation-queue.mjs` の `reviewTier`。モデル規律は `.claude/rules/model-prompting.md`)。
 
 > **既存記事を計画的に順次是正するには (★どのセッションからでも開始可)**: 「次にどの記事を直すか」は
@@ -385,7 +396,7 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 | 関連データ DL | (コードから除去済・2026-06-02) | 記事に書かない |
 | 出典 | `## データ出典` テキスト または `<data-source>` タグ | ✅ どちらか (本文末) |
 | ランキング詳細への誘導 | `<source-link href="/ranking/{key}">` | ✅ **各図の直下にインライン**配置 (末尾集約禁止) |
-| AdSense 枠 | `<ad-slot></ad-slot>` (任意・未配置なら自動注入) | ✅ 任意 |
+| ~~AdSense 枠~~ | `<ad-slot></ad-slot>` は **2026-09-20 の恒久停止で無効**。`ADSENSE_DISPLAY_ENABLED=false` なので何も描画されない。新規記事に書かない (既存記事の残存タグは無害) | ❌ 使わない |
 
 **決定的検査 (`quality-gate.mjs` が blocker)**: `<chart-placeholder>` 残存 / インライン `<svg>` / 記事内 `関連(ランキング\|記事)` 見出し。これらは公開前に弾かれる。バッチ是正の対象でもある (2026-06-02 棚卸し: 記事内関連229・インラインsvg76・chart-placeholder54)。
 

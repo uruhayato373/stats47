@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-21T01:16:00.249Z",
+  "runId": "35549710650",
+  "sources": [
+    {
+      "source": "moshimo",
+      "capability": "outcomes",
+      "observedAt": "2026-09-21T01:07:55.104Z",
+      "activated": false,
+      "status": "failed",
+      "code": "auth_required",
+      "runId": "35549710650",
+      "metricsAvailable": false,
+      "evidence": {
+        "sha256": "bb61e58a6c4914983c642ece18f9060bc9aac4ff8b6ec72ece9dbec348db1059",
+        "bytes": 299
+      },
+      "quality": null,
+      "remaining": null
+    },
+    {
+      "source": "a8",
+      "capability": "site-outcomes",
+      "observedAt": "2026-09-21T01:07:36.807Z",
+      "activated": true,
+      "status": "pass",
+      "code": null,
+      "runId": "35549710650",
+      "metricsAvailable": true,
+      "evidence": {
+        "sha256": "3b41609b31291328467bf8c2f14891172b18c089682958ed9ed1f588434a82ac",
+        "bytes": 106178
+      },
+      "quality": null,
+      "remaining": null
+    },
+    {
+      "source": "afb",
+      "capability": "partnership-status",
+      "observedAt": "2026-09-21T01:07:36.474Z",
+      "activated": false,
+      "status": "failed",
+      "code": "auth_required",
+      "runId": "35549710650",
+      "metricsAvailable": false,
+      "evidence": {
+        "sha256": "6c47b427a65db6be781ebd067b34626204ffe81275c1e9ba9bdd5a3555d51c8e",
+        "bytes": 917
+      },
+      "quality": null,
+      "remaining": "outcomes_not_collected"
+    },
+    {
+      "source": "note",
+      "capability": "dashboard-metrics",
+      "observedAt": "2026-09-21T01:07:36.680Z",
+      "activated": false,
+      "status": "failed",
+      "code": "report_incomplete",
+      "runId": "35549710650",
+      "metricsAvailable": false,
+      "evidence": {
+        "sha256": "4f6663c61d092dfae676f765929b5face8baa71c380dae62d8f44daa002e70f1",
+        "bytes": 1698680
+      },
+      "quality": {
+        "expectedRows": 286,
+        "observedRows": 285,
+        "missingRows": 1,
+        "totalsMatched": true,
+        "paginationComplete": true
+      },
+      "remaining": null
+    },
+    {
+      "source": "gsc",
+      "capability": "coverage-export",
+      "observedAt": "2026-09-21T01:07:40.930Z",
+      "activated": false,
+      "status": "failed",
+      "code": "auth_required",
+      "runId": "35549710650",
+      "metricsAvailable": false,
+      "evidence": {
+        "sha256": "700fdfa0c81a4a349662484725577d1a6c17eb691fe09470863607c747241d1f",
+        "bytes": 559
+      },
+      "quality": null,
+      "remaining": null
+    },
+    {
+      "source": "kdp",
+      "capability": "publication-status",
+      "observedAt": "2026-09-21T01:08:02.946Z",
+      "activated": true,
+      "status": "pass",
+      "code": null,
+      "runId": "35549710650",
+      "metricsAvailable": false,
+      "evidence": {
+        "sha256": "c59b514e17fa89bebc8e9d40dec21d5954b522a367cac093d5778b173583d63a",
+        "bytes": 3808
+      },
+      "quality": null,
+      "remaining": "sales_report_adapter_required"
+    },
+    {
+      "source": "coconala",
+      "capability": "marketplace-metrics",
+      "observedAt": "2026-09-21T01:07:43.538Z",
+      "activated": true,
+      "status": "pass",
+      "code": null,
+      "runId": "35549710650",
+      "metricsAvailable": true,
+      "evidence": {
+        "sha256": "a9abc43eec5ce5113414525aaaa179cff08446e6312e222d29a99042dd49be86",
+        "bytes": 9160
+      },
+      "quality": null,
+      "remaining": null
+    }
+  ],
+  "status": "action_required"
+}

@@ -38,10 +38,29 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    `freshFile` で割り当て、blog 章の `blogSlug` が R2 実在することを確認して `status: "manuscript"` にする。
 2. **書き下ろしを執筆・レビュー**: fresh 章の本文は `article-writer` が起草 → `blog-critic` が別コンテキストで
    review.md（verdict:PASS）を出すまで直させる（author/critic 分離）。**書き下ろし比率 30% 以上**を満たす分量にする。
+   **レビューは書き下ろし章だけでなく全章 (ブログ由来章・図の数値を含む) を対象にする** — 2026-09-19 の K-S1-01 で、
+   書き下ろしだけを見た初回 PASS のあとに、ブログ由来 9 章から BLOCK 8 / MAJOR 19 が出た。critic には
+   (a) 章テキスト (EPUB を展開したもの) (b) 図の数値 JSON (R2 `app/blog/<slug>/data/<name>.json`)
+   (c) **指標定義シート** `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <blogSlug…>` を渡し、
+   `blog-quality-standards.md`「定義整合」を BLOCK 基準にする。findings の before は章本文の逐語で受け取り、
+   ブログ由来章は `editorial-corrections.ts` (書籍版のみの校訂・公開ブログは変えない)、書き下ろし章は
+   `manuscripts/<id>/*.md`、**図の中の文字 (図題・年の型・軸ラベル) は `figure-corrections.ts`** (PNG 化の直前に
+   SVG の文字列だけを置換。数値・点は触らない。ブログ側で図データを直したら before が消えるので生成が止まり、
+   エントリを外す) へ反映して再生成 → verify-epub (3 層) → critic の delta 再審査で PASS を取る。
+   図データそのもの (別年の指標への差し替え・小数桁) はブログ側の chart-author 工程で、書籍側では直せない。
+   同じ誤りは公開ブログにも残るので、review.md を blog remediation (`/blog-revise-fix`) へ引き渡す。
 3. **生成**: `products:kindle:generate -- --id <id> --version <NEW_VERSION>` → `.local/kindle-books/<id>/<NEW_VERSION>/`。既存版は上書き不可。
    出力の「書き下ろし比率」が 30% 以上（✅）であることを確認する（未達は赤字警告＝出品前提を満たさない）。
 4. **構造検証**: EPUB を unzip し、mimetype 先頭 STORE / 全 XHTML・OPF が整形式 / 画像参照が manifest 整合 を確認。
    vitest（`tests/kindle-channel.test.ts`）で回帰も見る。
+4b. **検証レポートと受領証** (`verify-publishable` / `kdp-release-gate` が見る機械証跡・2026-09-19):
+   `npx tsx packages/product-factory/scripts/verify-epub.mts --book <id> --version <VERSION> --report .claude/state/products/kindle-<VERSION>-verification.json`
+   (同じ版名の冊が複数あるときはファイルが既にあるので、一時ファイルへ出して `report[]` にマージする) →
+   `npx tsx packages/product-factory/scripts/write-review-receipt.mts --book <id> --version <VERSION> --reviewer /agents/blog-critic`
+   が review.md の PASS を実 EPUB の章 SHA・authoredSha256 に結び付けた `review.json` を書く (PASS でない版・再生成が要る版には書けない)。
+   `node --import tsx packages/product-factory/scripts/verify-publishable.mts --version <VERSION> --book <id> --content-only` で本文側の blocker 0 を確認する。
+   表紙背景 (`assets/cover-backgrounds/<id>.jpg`) は `codex exec` + `$imagegen` で横長 1536×1024 の文字なし帯絵を作り、
+   `ingest-cover-background.mts --band` で下 42% に置く (プロンプトの型は `.local/kindle-cover-imagegen/build-prompts.mjs`)。
 5. **版保全**: `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <VERSION>` → `--audit --id <id> --version <VERSION> --deep --record`。EPUB・表紙2種・metadata・READINESS（review.md/review.jsonがあれば同梱）をR2へ暗号化保全し、Git台帳とSHAを一致させる。pushだけでは検証済みにしない。
 6. **オーナーへ受け渡し**: `READINESS.md` に沿って人間が Kindle Previewer で表示確認 → `/kdp-publish`。別PCは`--restore --id <id>`で復元する。
 

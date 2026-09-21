@@ -57,6 +57,8 @@ describe('resolveAffiliateAd', () => {
       title: 'テスト広告',
       href: 'https://example.com/ad',
       trackingPixelUrl: null,
+      // 解決層が広告自身の意図軸を確定させる (描画側がページ文脈値で代用しないため)。
+      vertical: 'labor',
     });
   });
 });

@@ -5,6 +5,7 @@
  */
 import sharp from "sharp";
 import { correctBookArticle } from "./editorial-corrections";
+import { correctBookFigure } from "./figure-corrections";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 
@@ -74,6 +75,78 @@ async function svgToPng(svg: Buffer): Promise<Buffer> {
 }
 
 /**
+ * Web 記事としての自己言及 (「この記事」「本記事」) を書籍の章としての言い方に揃える。
+ * 公開ブログ原文は変更しない (書籍版のみ)。2026-09-19 の全冊監査で S1 各冊に 11〜38 件残っていた。
+ */
+export function rewriteWebSelfReference(body: string): string {
+  return (
+    body
+      .replace(/この記事/g, "この章")
+      .replace(/本記事/g, "本章")
+      // 社内用語 R2 (ストレージ名) は読者に意味が無い (2026-09-19 K-S1-07 で 9 か所)。「R2年」「R2-…」は触らない
+      .replace(/R2(?![年0-9A-Za-z_-])/g, "収録データ")
+  );
+}
+
+/**
+ * サイト内回遊のための段落を書籍版から外す。対象は構造で決める (語で推測しない):
+ *   - 「あわせて見る:」「本記事の対象データ:」「本記事の関連カテゴリ:」「関連ランキング:」「使用指標:」で始まる行
+ *   - テーマページ (`/themes/`) へのリンクを含み「テーマページ」と書いている段落
+ * 県名の `/areas/` リンクは分析文の中にあるので段落ごと消さない (mdToXhtml がリンクだけ落とす)。
+ */
+export function stripWebNavigation(body: string): string {
+  return body
+    .split("\n")
+    .filter((line) => {
+      if (/^(あわせて見る|本記事の対象データ|本記事の関連カテゴリ|関連ランキング|使用指標)[:：]/.test(line)) return false;
+      if (/\]\(\/themes\//.test(line) && line.includes("テーマページ")) return false;
+      return true;
+    })
+    .join("\n");
+}
+
+/**
+ * サイトの出典カード `<data-source label=".." year="..">` を、章に「データ出典」見出しが無いときだけ
+ * 章末の「## データ出典」に起こす。見出しがある章は本文が出典を書いているので、カードは
+ * md-to-xhtml が落とす (2026-09-19 K-S1-11 F00537: sports-participation-map に出典節が無かった)。
+ */
+export function appendDataSourceSection(body: string): string {
+  // 見出しの深さは記事により ##〜#### (2026-09-19 K-S1-09 G01: manufacturing-aichi-dominance は ###)。
+  if (/^#{2,4}\s*(データ)?出典/m.test(body)) return body;
+  const seen = new Set<string>();
+  const items: string[] = [];
+  for (const m of body.matchAll(/<data-source\b([^>]*)>/g)) {
+    const attrs = m[1];
+    const label = attrs.match(/\blabel="([^"]*)"/)?.[1]?.trim();
+    if (!label) continue;
+    const year = attrs.match(/\byear="([^"]*)"/)?.[1]?.trim();
+    const line = year ? `${label}（${year}）` : label;
+    if (seen.has(line)) continue;
+    seen.add(line);
+    items.push(`- ${line}`);
+  }
+  if (items.length === 0) return body;
+  return `${body.replace(/\s+$/, "")}\n\n## データ出典\n\n${items.join("\n")}\n`;
+}
+
+let publishedSlugs: Promise<ReadonlySet<string>> | undefined;
+
+/**
+ * 公開中 (published !== false) の blog slug 集合。出典一覧に URL を出してよい記事を決める。
+ * 未公開 slug は `/blog/<slug>` が 410 を返す (2026-09-19 K-S1-11 N30: sports-participation-map)。
+ * 真実源は R2 `app/blog/all.json`。1 回だけ取得して使い回す。
+ */
+export function fetchPublishedSlugSet(): Promise<ReadonlySet<string>> {
+  publishedSlugs ??= (async () => {
+    const res = await fetch(`${R2_BASE}/app/blog/all.json`);
+    if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): app/blog/all.json`);
+    const json = (await res.json()) as { articles?: { slug: string; published?: boolean }[] };
+    return new Set((json.articles ?? []).filter((a) => a.published !== false).map((a) => a.slug));
+  })();
+  return publishedSlugs;
+}
+
+/**
  * blog 記事を R2 から取得し、frontmatter 除去 + SVG→PNG 変換して返す。
  * 画像参照 `![alt](data/foo.svg)` は `![alt](images/<slug>__foo.png)` に書き換える。
  */
@@ -82,7 +155,8 @@ export async function fetchBlogArticle(slug: string): Promise<FetchedArticle> {
   if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): app/blog/${slug}/article.md`);
   const md = await res.text();
   const { fm, body: originalBody } = parseFrontmatter(md);
-  const body = correctBookArticle(slug, originalBody);
+  // 回遊行の除去は「本記事の…」を書き換える前に行う (書き換え後は行頭の語が変わり検出できない)。
+  const body = appendDataSourceSection(rewriteWebSelfReference(stripWebNavigation(correctBookArticle(slug, originalBody))));
   if (!body.trim()) throw new Error(`Empty blog body: ${slug}`);
 
   const images: FetchedImage[] = [];
@@ -97,7 +171,8 @@ export async function fetchBlogArticle(slug: string): Promise<FetchedArticle> {
     const svgRes = await fetch(svgUrl);
     const epubName = `${slug}__${ref.name}.png`;
     if (svgRes.ok) {
-      const svgBuf = Buffer.from(await svgRes.arrayBuffer());
+      // 図の中の文字 (図題・年の型) だけ書籍版で校訂してから PNG 化する (figure-corrections.ts)。
+      const svgBuf = Buffer.from(correctBookFigure(slug, ref.name, Buffer.from(await svgRes.arrayBuffer()).toString("utf8")), "utf8");
       try {
         const png = await svgToPng(svgBuf);
         images.push({ fileName: epubName, png, alt: ref.alt });

@@ -5,6 +5,7 @@ import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
 import {
   GeoCrossAnalysisArticle,
   GEO_CROSS_ANALYSIS_CONFIGS,
+  GEO_DEFAULT_PREF_CODE,
   isGeoCrossAnalysisSlug,
   isGeoSpatialView,
 } from '@/features/geo-analysis';
@@ -42,11 +43,12 @@ export default async function GeoCrossAnalysisPage({
   const prefCode = PREFECTURE_LIST_2DIGIT.some(
     (prefecture) => prefecture.code === query.pref
   )
-    ? (query.pref ?? '13')
-    : '13';
+    ? (query.pref ?? GEO_DEFAULT_PREF_CODE)
+    : GEO_DEFAULT_PREF_CODE;
+  // Every analysis lands on the overlap map; other stages stay reachable by URL.
   const stage = isGeoSpatialView(query.stage, analysisSlug)
     ? query.stage
-    : 'population';
+    : 'overlap';
 
   return (
     <GeoCrossAnalysisArticle

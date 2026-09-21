@@ -1,8 +1,14 @@
 ---
 name: adsense-improvement
-description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを .claude/todo/improvements.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
+description: 【凍結】AdSense は 2026-09-20 に恒久停止したため、この改善ループは運用しない。reference/ の過去ログは読み取り専用の記録として残す。
 primary_agent: adsense-analyst
 ---
+
+> **2026-09-20: AdSense は恒久停止した。このループは回さない。** 正典は
+> `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、恒久事実は
+> `.claude/memory/project_monetization_contract.md`。新しい AdSense 施策を
+> `.claude/todo/improvements.md` へ追加しないこと。広告レーンの改善は
+> `/affiliate-improvement` で行う。以下は凍結記録として残す。
 
 AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を snapshot と詳細ログで時系列追跡し、active 施策だけを `.claude/todo/improvements.md` で管理するスキル。
 

@@ -245,6 +245,26 @@ test("実験: sample 未到達 → collecting", () => {
   assert.ok(result.active[0].decisionGuards.includes("insufficient-sample"));
 });
 
+test("portfolio pilotは露出停止後にvariantをinactive化してmaturingへ移れる", () => {
+  const result = evaluateExperiments({
+    registry: [registryEntry({ status: "maturing", exposureEndedAt: "2026-07-01" })],
+    ads: ssotVariants([{ isActive: false }, { isActive: false }]),
+    variantMetrics: [],
+    nowIso: NOW,
+  });
+  assert.equal(result.invalid.length, 0);
+  assert.equal(result.maturing.length, 1);
+  assert.equal(result.maturing[0].status, "maturing");
+
+  const unsafe = evaluateExperiments({
+    registry: [registryEntry({ status: "maturing", exposureEndedAt: "2026-07-01" })],
+    ads: ssotVariants([{ isActive: true }, { isActive: false }]),
+    variantMetrics: [],
+    nowIso: NOW,
+  });
+  assert.ok(unsafe.invalid[0].reasons.includes("maturing-variants-still-active"));
+});
+
 test("実験: measurement gate blocked / confound は sample 到達後も ready にしない", () => {
   const result = evaluateExperiments({
     registry: [registryEntry({ confounds: ["same-slot-change"] })],

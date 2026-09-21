@@ -7,7 +7,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { resolve, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { KindleBook, BookChapter } from "./types";
-import { fetchBlogArticle, type FetchedImage } from "./fetch-content";
+import { fetchBlogArticle, fetchPublishedSlugSet, type FetchedImage } from "./fetch-content";
 import { mdToXhtml } from "./md-to-xhtml";
 import { buildCoverPng } from "./cover";
 import { buildRankingSections, type RankingSource } from "./ranking-databook";
@@ -72,7 +72,7 @@ export interface BuildBookResult {
   readonly chapterCount: number;
   readonly imageCount: number;
   readonly missingSlugs: readonly string[];
-  readonly sources: readonly { slug: string; title: string }[];
+  readonly sources: readonly { slug: string; title: string; published: boolean }[];
   /** 書き下ろし本文の文字数 (空白除く)。 */
   readonly freshChars: number;
   /** 再利用ブログ本文の文字数 (空白除く)。 */
@@ -126,14 +126,25 @@ ${sub}
 }
 
 /** 出典・免責ページの XHTML。 */
-function sourcesPage(sources: readonly { slug: string; title: string }[]): string {
+function sourcesPage(sources: readonly { slug: string; title: string; published: boolean }[]): string {
+  // 未公開の元記事は URL を出さない (410 を返す。2026-09-19 K-S1-11 N30)。
   const items = sources
-    .map((s) => `<p>「${escapeText(s.title)}」— ${R2_SITE}/blog/${escapeText(s.slug)}（統計で見る都道府県）</p>`)
+    .map((s) =>
+      s.published
+        ? `<p>「${escapeText(s.title)}」— ${R2_SITE}/blog/${escapeText(s.slug)}（統計で見る都道府県）</p>`
+        : `<p>「${escapeText(s.title)}」— 統計で見る都道府県（元記事は現在非公開。本書の章として収録）</p>`,
+    )
     .join("\n");
+  const publishedCount = sources.filter((s) => s.published).length;
+  const lead = !items
+    ? "ランキング章の原典メタデータと観測値の参照先は「指標別の出典・対象年」に収録しています。"
+    : publishedCount === sources.length
+      ? "各章の元記事は下記のページで公開しています。"
+      : `各章の元記事のうち${publishedCount}本は下記のページで公開しています。`;
   return `<section class="sources">
 <h1>出典と免責</h1>
 <h2>各章のもとになったデータ</h2>
-<p>${items ? "各章の元記事は下記のページで公開しています。" : "ランキング章の原典メタデータと観測値の参照先は「指標別の出典・対象年」に収録しています。"}指標ごとに対象年と母集団が異なるため、数値の比較には各章の定義と出典を確認してください。</p>
+<p>${lead}指標ごとに対象年と母集団が異なるため、数値の比較には各章の定義と出典を確認してください。</p>
 ${items}
 <h2>免責</h2>
 <p>本書は公的統計の概況を整理したものであり、意思決定の結果を保証するものではありません。国・府省・自治体および e-Stat の公認・推奨を示すものではありません。統計の定義・調査年・集計方法により数値の解釈が変わる場合があります。</p>
@@ -150,40 +161,41 @@ function stripLeadingHeading(md: string): string {
   return md.replace(/^\s*#\s+.*\n+/, "");
 }
 
-/** 全書籍に付与する「本書の図表の見方」本文 (markdown・上位5/下位5 カードの読み方)。 */
-function figureGuideMd(): string {
-  return `本書の各章には、都道府県を比べる図を添えています。ランキングの図は、四十七都道府県すべてを一枚に詰め込むのではなく、上位五県と下位五県だけを抜き出して左右に並べる形にしています。両端を並べると、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わるからです。
+/**
+ * 全書籍に付与する「本書の図表の見方」本文 (markdown・上位5/下位5 カードの読み方)。
+ * 全県表・相関の説明は、その本に実体があるときだけ載せる (2026-09-19 K-S1-02 レビュー: 相関も全県表も無い本に
+ * K-S1-01 用の定型が付いていた)。
+ */
+function figureGuideMd(opts: { hasFullTable: boolean; hasCorrelation: boolean; hasPartialCorrelation: boolean }): string {
+  return `本書の多くの章には、都道府県を比べる図を添えています。ランキングの図は、四十七都道府県すべてを一枚に詰め込むのではなく、上位と下位の県だけを抜き出して左右に並べる形にしています。両端を並べると、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わるからです。
 
-全県表が付いた章では、中位の県や同順位の県も表で確認できます。単一指標の大小順であり、住みやすさや個人の状態を順位付けしたものではありません。図や表の対象年は章ごとに確認してください。姉妹サイト stats47.jp の更新後の値が、本書の固定版と同じとは限りません。
+${opts.hasFullTable ? "全県表が付いた章では、中位の県や同順位の県も表で確認できます。" : ""}単一指標の大小順であり、住みやすさや個人の状態を順位付けしたものではありません。図や表の対象年は章ごとに確認してください。姉妹サイト stats47.jp の更新後の値が、本書の固定版と同じとは限りません。
+
 
 図で地域差を見つけたら、対象・分母・年次を確認します。差が見えることと、その原因が分かることは別です。世帯調査の平均を全住民の実態としたり、施設数を利用しやすさと読み替えたりしないよう注意してください。
 
-## 本文に出てくる「相関」の読み方
+${opts.hasCorrelation ? `## 本文に出てくる「相関」の読み方
 
 本文では、二つの指標がどれくらい連動しているかを示すために「相関」という言葉と、r という記号を使っています。読み飛ばしても本筋は追えますが、意味を知っておくと本文の見通しがよくなります。
 
 r は −1 から +1 までの数で、二つの指標の直線的な関係の強さを表します。r が +1 に近いほど「片方が高い県はもう片方も高い」、−1 に近いほど「片方が高い県はもう片方が低い」という直線的な関係が強くなります。0 に近くても、曲線的な関係がないとは限りません。値の大きさだけで因果関係や実務上の重要性を判断せず、対象・年次・分母と散布図を確認してください。
 
-「偏相関」は、指定した変数との直線的な関係を調整した後に、二つの変数の残差同士の相関を測る方法です。人口を調整しても、人口に関係する影響をすべて取り除けるとは限りません。調整変数・対象地域・欠測処理・変数間の構造によって解釈が変わり、調整後の相関だけで独立した効果や原因を証明することはできません。
-
-**連動していることと、片方がもう片方の原因であることは別です**。二つの指標が一緒に動いていても、共通する別の条件や測定方法が関係している場合があります。「可能性」という表現でも根拠の代わりにはなりません。説明の確かさは、元の数値と定義、比較の設計に戻って判断してください。`;
+${opts.hasPartialCorrelation ? `「偏相関」は、指定した変数との直線的な関係を調整した後に、二つの変数の残差同士の相関を測る方法です。人口を調整しても、人口に関係する影響をすべて取り除けるとは限りません。調整変数・対象地域・欠測処理・変数間の構造によって解釈が変わり、調整後の相関だけで独立した効果や原因を証明することはできません。
+` : ""}
+**連動していることと、片方がもう片方の原因であることは別です**。二つの指標が一緒に動いていても、共通する別の条件や測定方法が関係している場合があります。「可能性」という表現でも根拠の代わりにはなりません。説明の確かさは、元の数値と定義、比較の設計に戻って判断してください。` : ""}`;
 }
 
 /** 出典章を持たない書籍に自動付与する標準の「出典と再現について」本文 (markdown)。 */
-function autoSourcesChapterMd(book: KindleBook): string {
+function autoSourcesChapterMd(book: KindleBook, bodyText: string): string {
   return `本書は e-Stat（政府統計の総合窓口）等の公的データを整理したものです。指標ごとに対象年・母集団・集計方法が異なります。単純平均などの編集上の集計は全国集計値と区別して示しています。指標別出典と元記事を確認し、同じ対象範囲の数値を比較してください。
 
 ## データの基準年について
 
-本書のデータは基準年を固定した「買い切り」の内容です。収録年は指標ごとに異なります。推計を扱う章では観測値と区別し、推計の基準時点や仮定を確認してください。生成時点のR2保存データから取得しており、原典で公表された最新値と一致する保証はありません。比較前に各指標の収録年・対象地域・分母・原典を確認してください。関連する指標は姉妹サイト stats47.jp（統計で見る都道府県）でも確認できます。
-
-## 免責
-
-本書は公的統計の概況を整理・可視化したものであり、特定の意思決定の結果を保証するものではありません。国・府省・自治体および e-Stat の公認や推奨を示すものでもありません。統計は、その定義・調査年・集計方法によって数値の意味が変わることがあります。本書の数字を根拠に何かを判断される際は、各統計の原典にあたって定義をご確認いただくことをおすすめします。
+本書のデータは基準年を固定した「買い切り」の内容です。収録年は指標ごとに異なります。${/将来推計|推計人口|推計値/.test(bodyText) ? "推計を扱う章では観測値と区別し、推計の基準時点や仮定を確認してください。" : ""}本書が参照した stats47 の保存データ（生成時点）から取得しており、原典で公表された最新値と一致する保証はありません。比較前に各指標の収録年・対象地域・分母・原典を確認してください。関連する指標は姉妹サイト stats47.jp（統計で見る都道府県）でも確認できます。
 
 ## 再現性について
 
-順位表を再計算するには、元の数値に加え、対象地域、欠測の扱い、同順位、丸め方をそろえる必要があります。収録表と指標別出典から比較条件を確認してください。同じ調査名や基準年というだけで、異なる集計範囲の値が一致するわけではありません。`;
+順位表を再計算するには、元の数値に加え、対象地域、欠測の扱い、同順位、丸め方をそろえる必要があります。各章の出典から比較条件を確認してください。同じ調査名や基準年というだけで、異なる集計範囲の値が一致するわけではありません。`;
 }
 
 function isoModified(): string {
@@ -206,7 +218,8 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   const images: EpubImage[] = [];
   const imageSeen = new Set<string>();
   const missingSlugs: string[] = [];
-  const sources: { slug: string; title: string }[] = [];
+  const sources: { slug: string; title: string; published: boolean }[] = [];
+  const publishedSlugs = await fetchPublishedSlugSet();
   const rankingSources: RankingSource[] = [];
   const missingInputs: { key: string; reason: string }[] = [];
   const rankingRequested = book.chapters.reduce(
@@ -224,24 +237,19 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     bodyXhtml: titlePage(book),
   });
 
-  // 図表の見方 (fresh・K-S1-01 は intro 内に同等の記述があるため除く)。
-  if (book.id !== "K-S1-01") {
-    const md = figureGuideMd();
-    freshChars += countChars(`# 本書の図表の見方\n${md}`);
-    chapters.push({
-      id: "figguide",
-      fileName: "chap-00a.xhtml",
-      title: "本書の図表の見方",
-      bodyXhtml: `<h1>本書の図表の見方</h1>\n${mdToXhtml(md)}`,
-    });
-  }
+  // 図表の見方 (fresh・K-S1-01 は intro 内に同等の記述があるため除く)。本文を集めた後に、全県表・相関の有無で内容を決める。
+  const wantsFigureGuide = book.id !== "K-S1-01";
 
   let idx = 0;
+  // 本編 (blog 章) は「第1章 …」と番号を振る。書き下ろしは「はじめに」「第0章 …」「終章」を catalog の題のまま使う
+  // (2026-09-19 K-S1-04 m04 / K-S1-10 FB03 / K-S1-12 F03: 第0章と終章だけ番号があり本編に無い体系を統一)。
+  let bodyChapterNo = 0;
   for (const ch of book.chapters) {
     idx += 1;
     const id = `chap${String(idx).padStart(3, "0")}`;
     const fileName = `${id}.xhtml`;
-    const heading = `<h1>${escapeText(ch.title)}</h1>`;
+    const displayTitle = ch.source === "blog" ? `第${++bodyChapterNo}章 ${ch.title}` : ch.title;
+    const heading = `<h1>${escapeText(displayTitle)}</h1>`;
 
     if (ch.source === "fresh") {
       const raw = resolveFreshText(ch);
@@ -287,11 +295,13 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
           }
         }
         blogChars += countChars(art.body);
-        sources.push({ slug, title: art.title });
+        // 出典一覧には書籍の章題を出す (ブログの題は撤回済みの旧主張を含みうる: 2026-09-19 K-S1-04 m08)
+        // 出典一覧の題は目次と同じ「第N章 …」で出す (2026-09-19 K-S1-01/02/04 G01)
+        sources.push({ slug, title: displayTitle, published: publishedSlugs.has(slug) });
         chapters.push({
           id,
           fileName,
-          title: ch.title,
+          title: displayTitle,
           bodyXhtml: `${heading}\n${mdToXhtml(art.body)}`,
         });
       } catch {
@@ -354,12 +364,30 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     });
   }
 
+  if (wantsFigureGuide) {
+    const bodyAll = chapters.map((c) => c.bodyXhtml).join("\n");
+    const md = figureGuideMd({
+      hasFullTable: book.chapters.some((c) => c.source === "ranking"),
+      hasCorrelation: /相関/.test(bodyAll),
+      // 本文で使っていない「偏相関」の説明は出さない (2026-09-19 K-S1-09 F83 / K-S1-11 F00a02)
+      hasPartialCorrelation: /偏相関/.test(bodyAll),
+    });
+    freshChars += countChars(`# 本書の図表の見方\n${md}`);
+    // 扉 (chap-000) の直後に入るよう先頭側へ挿入する (ファイル名 chap-00a は spine 順で扉の次)。
+    chapters.splice(1, 0, {
+      id: "figguide",
+      fileName: "chap-00a.xhtml",
+      title: "本書の図表の見方",
+      bodyXhtml: `<h1>本書の図表の見方</h1>\n${mdToXhtml(md)}`,
+    });
+  }
+
   // 出典補章 (fresh 扱い・出典章が無い書籍にのみ自動付与)。
   const hasSourcesChapter = book.chapters.some((c) => c.source === "fresh" && c.title.includes("出典"));
   if (!hasSourcesChapter) {
     idx += 1;
     const sid = `chap${String(idx).padStart(3, "0")}`;
-    const md = autoSourcesChapterMd(book);
+    const md = autoSourcesChapterMd(book, chapters.map((c) => c.bodyXhtml).join("\n"));
     freshChars += countChars(`# 出典と再現について\n${md}`);
     chapters.push({
       id: sid,

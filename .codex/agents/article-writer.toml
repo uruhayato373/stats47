@@ -95,6 +95,10 @@ node .claude/scripts/lib/article-factual-check.mjs \
 5. `related_metrics` 指定があれば同様に公開 URL / git TS で取得
 6. **未公開確認**: `/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` に対象 slug が無いこと（既公開なら別ネタへ）
 7. **取得した数値の要約** (都道府県名 → rank, value のペア) をメモして以降の Phase で参照する（数値は実データのみ・捏造/推測厳禁）
+8. **指標定義シートを作り、解釈文はその範囲で書く** (★2026-09-19・`blog-quality-standards.md`「定義整合」):
+   `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --keys <metric_key>,<related...>` を実行し、
+   単位・対象と分母・期間の型 (暦年/年度)・調査・「読み違い注意」を読んでから書く。表に無い対象 (世帯範囲・
+   名目/実質・年) を本文に持ち込まない。critic は同じシートで審査し、違反は BLOCK になる
 
 ### Phase 2: タイトル設計 ★正典 = `.claude/rules/blog-quality-standards.md` (必読)
 

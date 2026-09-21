@@ -20,7 +20,8 @@ import {
   setKdpPricing,
   saveDraft,
 } from "./kdp-form.mjs";
-import { ROOT, writeBackDraftId, writeBackListing, shotPath, sleep } from "./kdp-session.mjs";
+import { ROOT, writeBackDraftId, writeBackListing, writeBackPublicationStage, shotPath, sleep } from "./kdp-session.mjs";
+import { normalizeKdpStatus } from "./kdp-status.mjs";
 import { assertKindleReleaseReady } from "./kdp-release-gate.mjs";
 import { captureKindleUpload } from "./kdp-archive-gate.mjs";
 import { resolve } from "node:path";
@@ -48,6 +49,7 @@ async function gotoStep(page, draftId, step) {
 export async function verifyDraft(page, lst, { tag = "[verify]" } = {}) {
   const r = {
     title: false,
+    edition: false,
     categories: false,
     manuscript: false,
     cover: false,
@@ -66,13 +68,16 @@ export async function verifyDraft(page, lst, { tag = "[verify]" } = {}) {
   await gotoStep(page, lst.draftId, "details");
   const d = await page.evaluate(() => {
     const title = document.querySelector("#data-title")?.value || "";
+    const edition = document.querySelector("#data-edition-number")?.value || "";
     const catBtn = (document.querySelector("#categories-modal-button")?.innerText || "").trim();
     // 保存済みの掲載場所は details ページに「Kindle 本 › … › <場所>」のパンくずで並ぶ。
     const crumbs = (document.body?.innerText || "").match(/Kindle 本 › [^\n]+/g) || [];
-    return { title, catBtn, crumbs: crumbs.length };
+    return { title, edition, catBtn, crumbs: crumbs.length };
   });
   r.title = d.title.trim() === lst.title.trim();
   if (!r.title) r.problems.push(`タイトル不一致 (画面 "${d.title.slice(0, 30)}…")`);
+  r.edition = lst.editionNumber ? d.edition.trim() === String(lst.editionNumber) : true;
+  if (!r.edition) r.problems.push(`版番号不一致 (画面 "${d.edition}" / 期待 ${lst.editionNumber})`);
   // ★「保存されている」だけでは足りない。K-S1-05 は同名衝突で 3 枠中 2 枠しか入らないまま
   //   ボタン表示だけ変わり、旧判定 (ボタン文言) を素通りした。**枠数まで一致**を要求する。
   const expected = (lst.categoryPaths ?? []).length || 1;
@@ -140,7 +145,7 @@ export async function verifyDraft(page, lst, { tag = "[verify]" } = {}) {
   r.royalty = p.roy === (lst.royaltyPlan === 70 ? "70_PERCENT" : "35_PERCENT");
   if (!r.royalty) r.problems.push(`ロイヤリティ不一致 (画面 ${p.roy ?? "未選択"})`);
 
-  r.ok = r.title && r.categories && r.manuscript && r.cover && r.drm && r.ai && r.price && r.royalty;
+  r.ok = r.title && r.edition && r.categories && r.manuscript && r.cover && r.drm && r.ai && r.price && r.royalty;
   return r;
 }
 
@@ -170,6 +175,10 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
     const step = await goToNextKdpStep(page, "content", { tag });
     if (!step.ok) {
       warnings.push(`content へ進めず: ${(step.errors || []).join(" / ") || step.reason}`);
+      return false;
+    }
+    if (!writeBackPublicationStage(id, "details_filled", { title: lst.title, editionNumber: lst.editionNumber ?? 1 })) {
+      warnings.push("出版状態 details_filled を台帳へ記録できず");
       return false;
     }
     return true;
@@ -223,6 +232,13 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
       warnings.push(`pricing へ進めず: ${(step.errors || []).join(" / ") || step.reason}`);
       return false;
     }
+    if (!writeBackPublicationStage(id, "files_processed", {
+      manuscriptUploaded: uploadManuscript,
+      coverUploaded: uploadCover,
+    })) {
+      warnings.push("出版状態 files_processed を台帳へ記録できず");
+      return false;
+    }
     currentFilesUploaded = uploadManuscript && uploadCover && !confirmationMissing;
     return true;
   };
@@ -266,7 +282,12 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
     } else {
     // 既存: verify → 欠けたステップだけ。
     const v = await verifyDraft(page, lst, { tag });
-    if (v.ok) return { ok: true, warnings: [], already: true };
+    if (v.ok) {
+      if (!writeBackPublicationStage(id, "verified", { draftId: lst.draftId, existingDraft: true })) {
+        return { ok: false, warnings: ["出版状態 verified を台帳へ記録できず"] };
+      }
+      return { ok: true, warnings: [], already: true };
+    }
     log(`${tag} 既存下書きの欠け: ${v.problems.join(" / ")}`);
     if (!v.title || !v.categories) {
       await gotoStep(page, lst.draftId, "details");
@@ -287,6 +308,10 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll =
 
   // 最終判定は verify (read-back)。ensure 内の ✓ ログは参考でしかない。
   const final = await verifyDraft(page, lst, { tag });
+  if (final.ok && !writeBackPublicationStage(id, "verified", { draftId: lst.draftId })) {
+    final.problems.push("出版状態 verified を台帳へ記録できず");
+    final.ok = false;
+  }
   if (final.ok && currentFilesUploaded && warnings.length === 0) submittedRevisions.set(page, submissionKey(id, lst, archive));
   if (!final.ok) {
     // ★失敗の瞬間の画面を残す (バッチは警告を最後まで印字しないので、これが唯一の一次証拠)。
@@ -419,7 +444,11 @@ export async function publishDraft(page, id, lst, { tag = "[publish]", log = con
     return { ok: false, reason: "本棚の status を読めず (公開確定と言えない・手動確認要)", shelf };
   }
   // 公開が確定してから listings を listed に更新。ASIN は割当まで空のことがある。
-  writeBackListing(id, shelf.asin || null, undefined, shelf.status);
-  log(`${tag} ✅ 公開確定 (本棚 status=${shelf.status}${shelf.asin ? ` / asin=${shelf.asin}` : " / ASIN 割当待ち"})`);
-  return { ok: true, status: shelf.status, asin: shelf.asin };
+  if (!writeBackListing(id, shelf.asin || null, undefined, shelf.status)) {
+    return { ok: false, reason: "本棚状態を出品台帳へ記録できず", shelf };
+  }
+  const operationalStatus = normalizeKdpStatus(shelf.status);
+  const outcome = operationalStatus === "live" ? "販売開始確認" : "審査提出確定";
+  log(`${tag} ✅ ${outcome} (本棚 status=${shelf.status}${shelf.asin ? ` / asin=${shelf.asin}` : " / ASIN 割当待ち"})`);
+  return { ok: true, status: shelf.status, operationalStatus, outcome, asin: shelf.asin };
 }

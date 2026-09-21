@@ -82,3 +82,72 @@ export const KDP_PORTFOLIO_POLICY = {
   resumeCondition: "オーナーの明示承認 + 売上またはKENPの需要証拠",
   source: ".claude/rules/coconala-product-standards.md §8",
 };
+
+/**
+ * KDPの冊数と週次ペース。
+ *
+ * 32冊は企画カタログであって一括出版目標ではない。現在の販売対象はS1 12冊と、
+ * 4週実測後に1冊ずつ試す3パイロットの計15冊。S2/S3/S4の旧設計20冊は未承認。
+ */
+export const KDP_PUBLICATION_PLAN = {
+  registeredCatalogCount: 32,
+  approvedS1Count: 12,
+  evidenceGatedPilotCount: 3,
+  activePublicationTargetCount: 15,
+  maxNewPublicationsPerWeek: 1,
+  cohortMeasurementWeeks: 4,
+  currentGate: {
+    status: "paused-until-measured",
+    decisionDate: "2026-09-27",
+    requirement: "S1 12冊の販売数またはKENPをproducts:salesへ記録し、オーナーが次の1冊を明示承認する",
+  },
+  weeklySequence: [
+    { week: "2026-W38", action: "S1 12冊の審査・販売開始・旧版停止を完了。新規出版なし" },
+    { week: "2026-W39", action: "S1の4週売上/KENPを取込み、継続・修正・停止を判断。新規出版なし" },
+    { week: "2026-W40", action: "需要証拠がある第1パイロットを1冊だけ設計・全章レビュー・Previewer確認" },
+    { week: "2026-W41", action: "全ゲートと個別承認を満たした場合だけ第1パイロットを最大1冊出版" },
+    { week: "2026-W42-W44", action: "第1パイロットを計測。新規出版なし" },
+    { week: "2026-W45", action: "4週実測で需要が確認できた場合だけ第2パイロットを最大1冊出版" },
+    { week: "2026-W49", action: "第2パイロットの4週実測で需要が確認できた場合だけ第3パイロットを最大1冊出版" },
+    { week: "2026-W50〜2027-W01", action: "第3パイロットを4週実測し、15冊ポートフォリオの継続・修正・停止を判断" },
+  ],
+  /**
+   * weekly-review / weekly-plan が読む機械契約。weeklySequence は人間向け表示で、
+   * 判定・上限・停止はこの値と sales-ledger / kdp-listings の実測から決める。
+   */
+  expansionProgramStartsAt: "2026-09-28",
+  baselineCohort: {
+    bookIds: Array.from({ length: 12 }, (_, index) => `K-S1-${String(index + 1).padStart(2, "0")}`),
+    measurementStartsAt: "2026-08-30",
+  },
+  pilots: [
+    {
+      ordinal: 1,
+      concept: "47県庁所在市の食卓・家計ガイド",
+      format: "1県1章",
+      plannedPreparationWeek: "2026-W40",
+      earliestPublicationWeek: "2026-W41",
+    },
+    {
+      ordinal: 2,
+      concept: "意外な1位ストーリー集",
+      format: "見出し駆動の県民性ストーリー",
+      plannedPreparationWeek: "2026-W44",
+      earliestPublicationWeek: "2026-W45",
+    },
+    {
+      ordinal: 3,
+      concept: "47都道府県 総合スコアブック",
+      format: "指標横断の合成スコア",
+      plannedPreparationWeek: "2026-W48",
+      earliestPublicationWeek: "2026-W49",
+    },
+  ],
+  stopConditions: [
+    "売上/KENP未計測",
+    "編集設計または全章critic PASSなし",
+    "Previewer・暗号化archive・KDP read-backのいずれか未完了",
+    "オーナーの当該1冊への明示承認なし",
+  ],
+  source: ".claude/todo/backlog.md KDP-EXPANSION-01",
+} as const;

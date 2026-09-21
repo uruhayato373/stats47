@@ -230,6 +230,7 @@ export async function fillKdpDetails(page, lst, { tag = "[kdp]" } = {}) {
   need((await fillById(page, "data-title", lst.title)) || (await fillByLabel(page, /Book Title|タイトル|Title/i, lst.title)), "タイトル");
   need(await fillById(page, "data-title-pronunciation", lst.titleKana), "タイトルのフリガナ");
   need(await fillById(page, "data-title-romanized", lst.titleRomaji), "タイトルのローマ字");
+  if (lst.editionNumber) need(await fillById(page, "data-edition-number", lst.editionNumber), "版番号");
   if (lst.subtitle) {
     need((await fillById(page, "data-subtitle", lst.subtitle)) || (await fillByLabel(page, /Subtitle|サブタイトル/i, lst.subtitle)), "サブタイトル");
     need(await fillById(page, "data-subtitle-pronunciation", lst.subtitleKana), "サブタイトルのフリガナ");
@@ -374,7 +375,10 @@ export async function goToNextKdpStep(page, expectStep, { tag = "[kdp]" } = {}) 
   return { ok: false, reason: `${expectStep} へ進めず`, errors: [...new Set(errs)].slice(0, 5), url: page.url() };
 }
 
-export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = true, ai = null, tag = "[kdp]" } = {}) {
+export async function uploadKdpContent(
+  page,
+  { epubAbs, coverAbs, applyDrm = true, ai = null, tag = "[kdp]", coverRetryLimit = 1 } = {},
+) {
   const log = [];
   const warnings = [];
   let coverUploaded = false;
@@ -534,9 +538,16 @@ export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = tru
     if (c1 || c2) await sleep(15000);
     // ★read-back: 「表紙がアップロードされていません」が消えたことを確かめる。
     //   「setInputFiles できた」だけでは、拒否されても成功に見える。
-    const stillEmpty = await page
-      .evaluate(() => /表紙がアップロードされていません/.test(document.body?.innerText || ""))
-      .catch(() => true);
+    // 新規タイトルでは file input 受理後も表紙処理が非同期で続く。固定15秒だけで読むと
+    // 「未アップロード」の古い表示を拾い、同じ下書きをもう一度開くまで偽失敗になる。
+    let stillEmpty = true;
+    for (let i = 0; i < 30; i++) {
+      stillEmpty = await page
+        .evaluate(() => /表紙がアップロードされていません/.test(document.body?.innerText || ""))
+        .catch(() => true);
+      if (!stillEmpty) break;
+      await sleep(3000);
+    }
     if ((c1 || c2) && !stillEmpty) {
       coverUploaded = true;
       log.push(`${tag} ✓ カバー アップロード完了`);
@@ -572,6 +583,27 @@ export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = tru
     } catch (e) {
       warnings.push(`確認チェックを入れられず: ${e instanceof Error ? e.message : String(e)}`);
     }
+  }
+
+  if (coverAbs && !coverUploaded && coverRetryLimit > 0) {
+    log.push(`${tag} カバー反映未完了。同じ下書きへ5秒後に1回だけ再アップロード`);
+    await sleep(5000);
+    const retry = await uploadKdpContent(page, {
+      epubAbs: null,
+      coverAbs,
+      applyDrm,
+      ai,
+      tag,
+      coverRetryLimit: coverRetryLimit - 1,
+    });
+    const resolvedWarnings = retry.uploaded.cover
+      ? warnings.filter((warning) => !/^(カバーをアップロードできず|確認チェックを入れられず)/.test(warning))
+      : warnings;
+    return {
+      log: [...log, ...retry.log],
+      warnings: [...resolvedWarnings, ...retry.warnings],
+      uploaded: { manuscript: epubOk, cover: retry.uploaded.cover },
+    };
   }
 
   return { log, warnings, uploaded: { manuscript: epubOk, cover: coverUploaded } };

@@ -5,7 +5,7 @@ import { RailLinksCard } from '../RailLinksCard';
 
 const ITEMS = [
   { id: 'one', label: '項目1', href: '/one', count: 5 },
-  { id: 'two', label: '項目2', href: '/two', count: 3 },
+  { id: 'two', label: '項目2', href: '/two', count: 3, active: true },
 ];
 
 describe('RailLinksCard', () => {
@@ -32,9 +32,33 @@ describe('RailLinksCard', () => {
     );
   });
 
+  it('list の現在地に aria-current と active 表示を付ける', () => {
+    render(
+      <RailLinksCard
+        trackingSurface="geo_sidebar"
+        title="GIS一覧"
+        layout="list"
+        items={ITEMS}
+      />
+    );
+
+    expect(screen.getByRole('link', { name: /項目2/ })).toHaveAttribute(
+      'aria-current',
+      'page'
+    );
+    expect(screen.getByRole('link', { name: /項目1/ })).not.toHaveAttribute(
+      'aria-current'
+    );
+  });
+
   it('長いモバイル導線はカード単位で折りたためる', () => {
     const { container } = render(
-      <RailLinksCard title="カテゴリから探す" items={ITEMS} collapsible trackingSurface="blog_sidebar" />
+      <RailLinksCard
+        title="カテゴリから探す"
+        items={ITEMS}
+        collapsible
+        trackingSurface="blog_sidebar"
+      />
     );
 
     expect(
@@ -97,7 +121,12 @@ describe('RailLinksCard', () => {
 
   it('タグのピルは丸みと小さい余白を使い、モバイルのタップ領域を保つ', () => {
     render(
-      <RailLinksCard title="人気のタグ" layout="chips" items={ITEMS} trackingSurface="blog_sidebar" />
+      <RailLinksCard
+        title="人気のタグ"
+        layout="chips"
+        items={ITEMS}
+        trackingSurface="blog_sidebar"
+      />
     );
 
     expect(screen.getByRole('link', { name: '項目1' })).toHaveClass(

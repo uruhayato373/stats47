@@ -21,6 +21,60 @@ updated: 2026-09-20
 
 ## 🔴 高 — 今月中に着手したい
 
+### [AUTHENTICATED-MEASUREMENT-ACTIVATION-01] 認証付きCIの初期認証と日次起動を完了する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21]
+
+- **owner**: オーナー（初期/期限切れ認証）/ devops-runner（CI検証・release・鮮度監視）
+- **現状**: 2026-09-21に全セッション統合・本番反映の承認済み。CI run `35549710650` はA8成果・ココナラ計測・KDP出版状態が成功。もしも/afb/GSCは`auth_required`、noteは286記事中285記事で`report_incomplete`。失敗は固定Issue #1000で継続管理し、成功へ読み替えない。
+- **次**: `.claude/state/metrics/authenticated/latest.json`の再認証対象を本人の認証で復旧し、CI側の読み取り成功を確認する。noteの欠落1記事は取得契約と公開状態を照合する。PR #999はgreen確認後にmainへ反映し、初回scheduleの記録と48時間鮮度監視を確認する。
+- **完了条件**: 全collectorの実データ取得・private R2 read-back・固定Issueの復旧closeが成立し、mainのschedule起動証拠がある。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。
+- **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookieをgit/ログ/artifactへ出さない。KDP売上/KENP・afb成果の未実装は別途取得契約が必要で、出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
+
+### [AFF-INTENT-FALLBACK-STOP-01] 意図が解決しない面への配信を止め、priority を期待収益順にする
+
+タグ: [収益化] [種類:改善] [実行:対話] [検証:node .claude/scripts/metrics/check-revenue-guards.mjs が exit 0] [起票:2026-09-20] [期日:2026-10-04]
+
+- **owner**: affiliate-manager
+- **正典**: `docs/00_プロジェクト管理/02_収益化戦略.md` §3.2 / `.claude/rules/affiliate-ads-standards.md` §6.1
+- **背景（2026-08-10〜09-06 実測）**: `resolveContentVerticalChain`（`affiliate-category.ts:415`）は
+  tags が 0 件のとき `CATEGORY_AFFILIATE_MAP` の 17 軸写像へ落ちる。この粗い写像が economy への
+  集中（約 7,400 imp / 2 clicks）を作っている。一方で意図が解決した vertical は housing 0.299%
+  (334 imp)・mobility 0.340% (294 imp) と全体 0.049% の 6〜7 倍だが、標本がクリック 1 件ずつなので
+  **[仮説]** の域を出ない。これを検証する。
+- **やること**: ①`affiliate-category.ts:415` の `push("category", …)` と `:443` の `byCategory` 分岐を
+  削除し、鎖を explicit → survey → tags のみにする。②`AffiliateAdSlot.tsx:79` の暗黙フォールバックを
+  塞ぎ `vertical` を必須 prop にする。③priority を期待収益順（`epcYen × confirmRatePct / 100`、
+  出典 `.claude/state/ads/a8-catalog.json` の登録済み 118 件）で vertical ごとに振り直す。
+  `AFFILIATE_DELIVERY_HOLDS` と blocklist を先に確認し、health 軸の不適合案件を上位へ出さない。
+- **[target: CTR +0.10pt 以上（0.049% → 0.15%）]** 根拠: 意図解決済み vertical の観測 CTR 0.30% と
+  現状 0.049% の中間。`epcYen` は A8 のプログラム平均で自サイト実績ではないため、priority の初期値
+  としてのみ使い、自サイトの確定収益が溜まったら置き換える。
+- **境界**: 枠数は変えない（それは `AFF-SLOT-REDUCTION-01`）。同じデプロイに混ぜると
+  「どの広告を出すか」と「いくつ出すか」のどちらが効いたか分離できない（収益化戦略 §7）。
+- **停止条件**: フォールバックを止めると広告が消えるランキングが出る（`MetricConfig.tags` 未記入の
+  ページ）。消えた面の件数を計測し、tags の補完で戻せるかは別カードにする。14 日後に CTR が 0.10% に
+  届かなければ仮説を棄却し、広告レーンへの追加投資を止めて商品レーンへ寄せる。
+
+### [AFF-SLOT-REDUCTION-01] 表示量を減らして視認される位置へ寄せる
+
+タグ: [収益化] [種類:改善] [実行:対話] [検証:GA4 の affiliate impression / pageview が 0.5 未満] [起票:2026-09-20] [期日:2026-10-18]
+
+- **owner**: affiliate-manager
+- **背景（2026-08-10〜09-06 実測）**: 表示 / PV は全体 0.76、デスクトップ 0.84、blog は 1.24。
+  にもかかわらずデスクトップ CTR は 0.0197%（20,325 imp で 4 clicks）でモバイル 0.137% の 7 分の 1。
+  面別では article-end 0.195%（512 imp）・home-left-rail 0.654%（153 imp）に対し、
+  ranking-native 0.030%・blog-sidebar 0.038%・ranking-sidebar 0.043%。**本文内が効き、レールが効かない。**
+- **やること**: `BLOG_IN_BODY_BANNER_COUNT` 4 → 2、blog サイドバー 2 枚 → 1 枚、
+  `RankingPageNativeAffiliateSection` を ranking から外して本文枠を ranking-incontent 1 件に統一、
+  `RankingPageSidebarSection` の `bannerLimit` 2 → 1、`load-ranking-page-model.ts` の解決件数 8 → 2。
+  デバイス分岐は新設しない（削減対象は既に `hidden lg:block` 等でデスクトップ偏重のため）。
+  同じデプロイで `injectAdSlots`（`md-content.tsx`）も撤去する。AdSense 恒久停止で何も描画しないが、
+  除去は本文の挿入位置に影響するので枠数変更とまとめて 1 回で測る。
+- **[target: 表示/PV 0.76 → 0.5 未満]** 根拠: blog の 1.24 は 1 PV に 1 枚以上で過剰。
+- **前提**: `AFF-INTENT-FALLBACK-STOP-01` のデプロイから 7 日以上空けて出す（交絡回避）。
+- **停止条件**: 表示を減らすと短期的には表示も収益も下がる。「減らしたら減った」を効果なしと
+  誤判定しないよう、判定指標は CTR と確定収益 / 1,000 viewable impression に固定する。
 
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
@@ -937,8 +991,8 @@ updated: 2026-09-20
 
 - **status**: pending（期日は計測契約整備の次回確認期限）
 - **owner**: coconala-operator（取得可否確認）／improvement-triage（効果観測の排他writer）
-- **次**: 既存13定型商品＋Geo1商品の閲覧・問い合わせ・購入について、本人アカウントを照合した管理画面で取得可否、商品別／全体別、期間・集計単位をread-onlyで確認する。公開日時・baseline・観測期間・母数・判定条件・観測期限後の次手を定義する。
-- **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・自動監視の開始は行わない。
+- **次**: 既存13定型商品＋Geo1商品の公開日時・baseline・観測期間・母数・判定条件・観測期限後の次手を定義する。本人照合・商品別閲覧/販売件数/お気に入りと全体販売額の収集入口は`measurement/marketplace-status.mjs`、日次証拠はprivate R2。問い合わせ数・商品別販売額は未取得であり、画面に無い指標を推測しない。
+- **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・実験開始は行わない。読み取りの定期収集は2026-09-21の自動化依頼の範囲。
 - **完了条件**: 取得根拠・日時付きbaseline/unknownと計測契約を既存商品stateへ保存し、improvement-triageが別IDのeffect/pendingへ引き継ぐ。引渡し証拠をbacklog-loopへ渡し、以後の観測待ちを本カードに重複保持しない。
 
 ### [GEO-SERVICE-PILOT-01] Geo納品見本の販売条件を確定し1商品だけ出品判断する
@@ -967,18 +1021,6 @@ updated: 2026-09-20
   「調査 null → 広告なし」「調査あり → カテゴリより優先」のケースを追加)。
 - **完了条件**: 週次 `affiliate-dashboard-refresh.yml` の出力で家計調査ページが furusato に、
   学校保健統計ページが `no-intent` (新理由コード) に計上される。
-
-### [AFF-OFFER-LANE-01] offer profile の lane / friction 分類を進めて pilot readiness の blocked を解く
-
-タグ: [収益化] [種類:改善] [実行:対話] [検証:.claude/state/ads/affiliate-pilot-readiness-latest.json の readiness.status が blocked 以外] [起票:2026-09-03] [期日:2026-10-15]
-
-- **owner**: affiliate-manager (排他 writer)
-- **現状**: `affiliate-pilot-readiness-latest.json` は `eligible-lane-pair-missing` で blocked。
-  `affiliate-offer-profiles-data.ts` に discovery / decision の lane と F0〜F4 の行動負担が
-  付いた案件が pilot 可能な組になっていない。
-- **次**: furusato・economy・labor の上位案件から順に、ASP の成果条件 (確認元・確認日つき) を
-  読んで lane / friction を記録する。案件名や報酬額から推測しない (rules §2)。
-- **完了条件**: discovery と decision に 1 件ずつ以上 approved の案件があり、pilot plan を作れる。
 
 ### [AFF-VERTICAL-FIT-02] population / health / education 軸の上位在庫を主題に合わせて入れ替える
 
@@ -1372,23 +1414,6 @@ updated: 2026-09-20
 - **完了条件**: 家計調査系 config の subtitle 行に定型文が 0 件、category / survey 一覧のタイトルに定型文の括弧書きが出ない、
   ranking 詳細ではチャート下の note として表示される。
 
-### [GEO-UX-CLICK-REDUCTION-01] /geo の入口・県選択・着地を 1 本化し、重なり地図までのクリックを減らす
-
-タグ: [UI・UX] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run src/features/geo-analysis src/lib/analytics] [起票:2026-09-16] [期日:2026-09-30]
-
-- **owner**: site-ux-manager (導線・IA) / geo-analysis-curator (lineage 表示が欠けないことの確認)
-- **実測根拠 (2026-09-16 localhost:3000、desktop 1493×1270)**: `/geo` は main 内リンク 21 本で、`/geo/compare`・`/geo/method`・`/geo/data-catalog` が各 2 回、上部ナビ「2. データを重ねて読む」は `#geo-analyses-heading` (直下セクションへのアンカー) で実質無意味。6 カードのうち地価・洪水・駅は `?pref=13&stage=overlap` に着地するが、豪雪・土砂・施設は stage 無しで **「1. 2020年基準人口の分布」タブに着地** (active tab を DOM で確認)。分析ページ (`/geo/population-flood-risk`) は main 内リンク 70・combobox 2・高さ 4,849px。県を選ぶ UI が **3 つ** (地図の Select / 「都道府県を最大3件で比較」の Select+追加ボタン / 47 行テーブルの「○○県の地図」リンク)。`/geo` → 東京以外の重なり地図は 3〜4 クリック。GSC 直近週の `/geo` は impressions 4・clicks 0 (seo-observability 2026-09-06) で検索流入はなく、サイト内回遊用の導線。
-- **次 (実行順・すべて `apps/web/src/app/geo/**` と `apps/web/src/features/geo-analysis/**` の中だけ)**:
-  1. **着地を「重なり」に統一**: `app/geo/[analysisSlug]/page.tsx` の stage 既定 `'population'` → `'overlap'`、`components/GeoCrossAnalysisArticle.tsx` の `initialStage = 'population'` も同様。`components/GeoAnalysisCards.tsx` のプレビュー 3 枚の href `/geo/${slug}?pref=13&stage=overlap` → `/geo/${slug}` (canonical と一致、非プレビュー 3 枚と同形)。`components/GeoSpatialEvidenceExplorer.tsx` の TabsTrigger から `1. `〜`4. ` の番号と `hasFacilities ? '3.' : '2.'` 式を外す (手順ではなく表示切替)。テスト `components/__tests__/GeoSpatialEvidenceExplorer.test.tsx` の `'3. 数値の確かめ方'` 4 箇所を追従。同コンポーネントは theme 埋め込み (`ThemeGeo*Client.tsx`) でも使われるが、それらのテストは番号を見ていない (grep 0 件)。
-  2. **県選択を 1 つに**: `GeoCrossAnalysisArticle.tsx` の `<GeoCrossAnalysisExplorer …/>` を `<SectionHeader title={config.mapTitle} description={config.mapSubtitle} hideRule />` に置換 (見出しは 47 行テーブルの文脈として残す)。`components/GeoCrossAnalysisExplorer.tsx` を削除し `features/geo-analysis/index.ts` の export を外す。`trackGeoCompareAdd` は `GeoPopulationExplorer.tsx` (`/geo/2050-population`) が使うので `lib/analytics/events.ts` とそのテストは触らない。47 行テーブルの「○○県の地図」 (`/geo/${slug}/${NN}/overlap`) は indexable landing 導線なので残す。
-  3. **`/geo` の入口を 1 本に**: `app/geo/page.tsx` の `<nav aria-label="地域データの調べ方">` (「1. GISを探す」「2. データを重ねて読む」) を削除し、`SectionHeader`「調べたい問いから選ぶ」+ `GeoAnalysisCards` を PageHeader 直下へ。rail の `RailLinksCard`「分析方法・出典」に `GISを探す → /geo/layers` を 1 行追加。`ContentDisclosure` 末尾の `/geo/method` リンクは rail と重複なので削除。`CompareLink` は xl 表示と `xl:hidden` の切替で常に 1 回なのでそのまま。
-  4. **地図より上のブロックを減らす**: `GeoCrossAnalysisArticle.tsx` の `<nav aria-label="分析の読み順">` (3 アンカー) を削除。`<nav aria-label="入力データを単体で見る">` (まず単体で見る) は JSX をそのまま `<GeoSpatialEvidenceExplorer>` の**直後**へ移動。洪水の `role="note"` 注意書きは安全情報なので地図の上に残す。`id="prefecture-comparison"` / `id="methods"` は Explorer 内リンク `/geo/${slug}#methods` が使うので残す。
-  5. **「数値の確かめ方」タブを常時表示へ**: `GeoSpatialEvidenceExplorer.tsx` の `<TabsTrigger value="audit">` と `<TabsContent value="audit">` を削除し、中身 (`spatialAuditRows` の 3 カード / `GeoLandslideAudit` / 照合文) を Tabs の直後・地図下リンク行の上に `SectionHeader title="数値の確かめ方" hideRule` 付きで常時描画。`useState(initialView === 'audit' ? 'overlap' : initialView)` で既存 URL (`?stage=audit`, `/geo/<slug>/<NN>/audit`) を重なり表示に読み替える。**`lib/geo-spatial-evidence.ts` の `SpatialView` / `isGeoSpatialView`、`packages/data-configs/src/business-plan/geo-routes.ts` の `GEO_STAGES` は変更しない** (ルート・sitemap・`geo-routes.test.ts` に波及させない)。
-  6. **検証**: `cd apps/web && npx vitest run src/features/geo-analysis src/lib/analytics` → `npm run type-check` → `npm run design-system:check` → `npm run dev:web` で localhost:3000 を実測: (a) `/geo` の 6 カードすべてで着地の active tab が「…重なり」系 (`document.querySelector('[role="tab"][data-state="active"]')`)、(b) 分析ページ main 内の `[role="combobox"]` が 1 個、(c) `/geo` main 内リンクに `#geo-analyses-heading` が無く `/geo/method`・`/geo/compare`・`/geo/data-catalog` が各 1 回 (xl 幅)、(d) `/geo/population-snow-designation/28/audit` と `/geo/population-flood-risk?pref=28&stage=audit` が 200 で地図と検算値の両方が出る、(e) `/themes/*` の Geo 埋め込み (雪・土砂・駅・施設) が崩れない。
-- **停止条件・禁止**: `geo-routes.ts` / `GEO_INDEXABLE_ROUTES` / middleware / sitemap に触る必要が出たら止めて別カードにする。`components/surface`・`components/rail` は別セッション (2026-09-16 時点で `cf1d3c9a`、RailCard/SectionCard タイポグラフィ統一) が編集中なので props・見た目を変えない (使うだけ)。lineage 表示 (検算 3 カード・「再現・検証データ」・47 行テーブル) を削らない (`geo-analysis-standards.md` の canonical 着地契約)。本番デプロイはしない (localhost 確認までで止め、まとめて 1 回・オーナー承認)。広告枠は `AFF-GEO-SLOT-01` (🟣) の判断待ちで触らない。
-- **完了条件**: `/geo` → 任意県の重なり地図が全 6 カードで 3 クリック (カード → Select 開く → 県)、東京都なら 1 クリック。分析ページの県選択 UI が 1 個 (Select) + テーブルリンクのみ。既存 URL (`?stage=audit`, `/NN/audit`, `/NN/population`, `/NN/overlap`) がすべて 200。vitest・type-check・design-system:check 緑。上記 (a)〜(e) を実測した記録をこのカードの削除 commit に残す。
-- **範囲外 (完了後に必要なら別カード)**: `/geo/compare` の「県を 1 つ選ぶ → 4 カード」を `/geo` 先頭に統合し、6 カードに選択県の `pref` を持たせて **2 クリック化**する案。効果は大きいが `/geo/compare` の canonical・`GEO_INDEXABLE_ROUTES`・`middleware.test.ts` (UTM 付き `/geo/compare` の検証) に及ぶ。
-
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [NOTE-PAID-MANUSCRIPT-SYNC-01] API パッチで変えた有料記事 6 本の private R2 原稿を live 本文に追従させる
@@ -1536,6 +1561,8 @@ updated: 2026-09-20
 
 - **owner**: オーナー（実務例・協力者・購入条件） / strategy-advisor（比較と採否） / coconala-product-manager（採択後のサンプル仕様）
 - **正典**: `docs/00_プロジェクト管理/02_収益化戦略.md` §2・§3.4・§5。一般向け統計メディアを維持しながら、議会答弁・計画策定のために各所の統計をExcelへ集める重複作業を減らす。課題はオーナーとの議論で確認したが、対象業務の詳細・削減時間・支払者・価格・購入需要は未検証。
+- **記録先（2026-09-20 新設）**: `.claude/state/products/admin-stat-interviews.json`。聞き取り結果はここへ書く（対象業務・完成条件・使った統計・現行手順・所要時間・手直し・再実施頻度・既存手段で残る作業・支払者・根拠）。**回顧による時間と実測を別フィールドで持つ**（収益化戦略 §5 段階2 の要求）。感想や意欲は記録しない（購入意思の代用にしないため）。
+- **聞き取り相手はすでにサイトへ来ている（2026-09-20 実測）**: 行政実務の文脈にあるページが GSC 上位に並ぶ。`/blog/assembly-answer-chatgpt-5steps`（48 clicks / 366 imp・CTR 13.1%、サイト全体 3.36% の 4 倍）、`/blog/local-government-debt-burden`（425 clicks）、`/blog/local-tax-revenue-gap`（47 clicks）。出典 `.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv`。**相手を探す段階は越えているので、①②に時間をかけすぎない。**
 - **優先・次（実行順）**: ①公開情報で再現できる実際の資料1件について、必要な地域粒度・統計・年次・完成条件・現行手順・再実施頻度を具体化する。②担当者3人を目安に、RESAS・自治体ダッシュボード・書籍・既存Excelでも残る作業と支払者の購入条件を確認する。③同じ仕様で助けられる場合だけ既存資産から無料サンプルを1つ作り、出典照合と利用者のExcel環境での編集を確認し、手直し込みの総時間を比較する。④収益化戦略§5の試用条件を満たした場合に価格・工数上限・時間単価・販売面を定め、有料pilotのGo/Pivot/Stopを判断する。期日は初回の採否・不足証拠確認日であり、未検証でも発売する期限ではない。
 - **既存タスクとの境界**: `PRODUCT-SALES-READINESS-01`等の品質是正・既存購入者への対応は維持するが、全商品完成を本検証の前提にしない。既存パックを利用できるかを先に調べ、用途未確認の新作・販売面を増やさない。採否後の優先順位は事業計画TS・商品カタログの開始条件にも反映する。商品在庫を需要の証拠と扱わない。
 - **停止条件**: 既存手段で十分、担当者ごとに要件が異なり共通化できない、必要な粒度が取得できない、照合・手直しを含む時間が減らない場合は対象変更または見送り。協力者・試用が得られなければ未検証と記録し、次回確認日と再開条件を決める。検索数・DL数・AI作成の架空ペルソナで実務試用を代替しない。実務者への連絡、販売・価格の外部反映はこのカードだけでは実行しない。

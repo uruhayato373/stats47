@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-14T00:15:42.242Z",
+  "generatedAt": "2026-09-21T00:15:58.927Z",
   "status": "incomplete",
   "issues": [
     "source_stale_or_invalid"
   ],
   "articles": [],
   "period": {
-    "start": "2026-08-17",
-    "end": "2026-09-13",
+    "start": "2026-08-24",
+    "end": "2026-09-20",
     "timeZone": "Asia/Tokyo",
     "inclusive": true,
     "label": "カスタム",
-    "display": "2026/8/17〜2026/9/13",
-    "aggregatedAt": "2026-09-14T07:50:00+09:00",
-    "summaryAggregatedAt": "2026-09-14T09:13:00+09:00"
+    "display": "2026/8/24〜2026/9/20",
+    "aggregatedAt": "2026-09-21T07:47:00+09:00",
+    "summaryAggregatedAt": "2026-09-21T09:13:00+09:00"
   },
-  "metricsFetchedAt": "2026-09-14T00:15:42.214Z",
+  "metricsFetchedAt": "2026-09-21T00:15:58.903Z",
   "coverObservedAt": "2026-09-11T23:14:03.193Z",
   "ctr": null,
   "ctrUnavailableReason": "表示に対応するカバークリック数を取得していない"

@@ -11,8 +11,14 @@
  *   2. GA4 管理画面で カスタムディメンション `affiliate_category` / `link_position`
  *      (イベントスコープ) を登録済み。未登録なら eventName 単位の総数のみ取得しフォールバック。
  *
- * 実行: node .claude/scripts/ads/fetch-affiliate-ga4.cjs [days]
- *   days: 集計日数 (デフォルト 28)
+ * 実行:
+ *   node .claude/scripts/ads/fetch-affiliate-ga4.cjs [days]
+ *   node .claude/scripts/ads/fetch-affiliate-ga4.cjs --weekly-finalized
+ *   node .claude/scripts/ads/fetch-affiliate-ga4.cjs --start-date YYYY-MM-DD --end-date YYYY-MM-DD
+ *
+ *   days: 完了済み日だけを対象にする集計日数 (デフォルト 28、昨日まで)
+ *   weekly-finalized: 直近の日曜〜土曜。日曜/翌月曜の再実行でも同じ確定7日を返す。
+ *   固定期間: before / after 比較や過去期間の再取得用。両端を含む。
  *
  * 出力: 標準出力に Markdown テーブル + .claude/state/ads/ga4-affiliate-<date>.json
  */
@@ -37,6 +43,7 @@ const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"
 //   改名日より前の窓を指定しても affiliate_impression は 0 件になる (それが正しい挙動)。
 const EVENTS = [IMPRESSION_EVENT, CLICK_EVENT];
 const REPORT_PAGE_SIZE = 10000;
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 // 既存の pages（ページ単位）を変えず、配置・端末・広告の同時内訳を別reportで保持する。
 const PLACEMENT_DIMENSIONS = [
   "eventName", "pagePath", "deviceCategory", "customEvent:ad_id", "customEvent:link_position",
@@ -52,7 +59,123 @@ function resolveKey() {
   );
 }
 
-async function runReport(analyticsdata, dimensions, days) {
+function assertDate(value, label) {
+  if (!DATE_PATTERN.test(value)) throw new Error(`${label} は YYYY-MM-DD で指定してください: ${value}`);
+  const parsed = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) {
+    throw new Error(`${label} が実在する日付ではありません: ${value}`);
+  }
+  return value;
+}
+
+function addDays(date, delta) {
+  const value = new Date(`${date}T00:00:00Z`);
+  value.setUTCDate(value.getUTCDate() + delta);
+  return value.toISOString().slice(0, 10);
+}
+
+function dateInTimeZone(now, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function inclusiveDays(startDate, endDate) {
+  return Math.floor(
+    (Date.parse(`${endDate}T00:00:00Z`) - Date.parse(`${startDate}T00:00:00Z`)) / 86_400_000,
+  ) + 1;
+}
+
+function finalizedWeeklyWindow(today) {
+  const dayOfWeek = new Date(`${today}T00:00:00Z`).getUTCDay();
+  const rawOffset = (dayOfWeek + 1) % 7;
+  // 土曜日当日はまだ日次値が完了していないため、前週の土曜日を使う。
+  const daysSinceCompletedSaturday = rawOffset === 0 ? 7 : rawOffset;
+  const endDate = addDays(today, -daysSinceCompletedSaturday);
+  return {
+    startDate: addDays(endDate, -6),
+    endDate,
+    days: 7,
+    mode: "weekly-finalized",
+  };
+}
+
+function parseFetchWindow(argv, {
+  now = new Date(),
+  timeZone = "Asia/Tokyo",
+} = {}) {
+  let days = 28;
+  let startDate = null;
+  let endDate = null;
+  let weeklyFinalized = false;
+  let hasDaysArgument = false;
+  let index = 0;
+
+  if (argv[0] && !argv[0].startsWith("--")) {
+    days = Number(argv[0]);
+    hasDaysArgument = true;
+    index = 1;
+  }
+  for (; index < argv.length; index += 1) {
+    const flag = argv[index];
+    if (flag === "--weekly-finalized") {
+      weeklyFinalized = true;
+      continue;
+    }
+    const value = argv[index + 1];
+    if (flag === "--start-date" || flag === "--end-date") {
+      if (!value || value.startsWith("--")) throw new Error(`${flag} の値がありません`);
+      index += 1;
+    }
+    if (flag === "--start-date") startDate = value;
+    else if (flag === "--end-date") endDate = value;
+    else throw new Error(`未対応の引数です: ${flag}`);
+  }
+
+  if (weeklyFinalized) {
+    if (hasDaysArgument || startDate != null || endDate != null) {
+      throw new Error("--weekly-finalized は days / 固定期間と同時指定できません");
+    }
+    return finalizedWeeklyWindow(dateInTimeZone(now, timeZone));
+  }
+  if ((startDate == null) !== (endDate == null)) {
+    throw new Error("--start-date と --end-date は両方指定してください");
+  }
+  if (startDate != null && endDate != null) {
+    assertDate(startDate, "--start-date");
+    assertDate(endDate, "--end-date");
+    if (startDate > endDate) throw new Error("--start-date は --end-date 以前にしてください");
+    const today = dateInTimeZone(now, timeZone);
+    if (endDate >= today) throw new Error(`--end-date は完了済みの日 (昨日以前) にしてください: ${endDate}`);
+    const daysInWindow = inclusiveDays(startDate, endDate);
+    if (daysInWindow > 366) throw new Error(`固定期間は 366 日以内にしてください: ${daysInWindow}日`);
+    return {
+      startDate,
+      endDate,
+      days: daysInWindow,
+      mode: "fixed",
+    };
+  }
+
+  if (!Number.isSafeInteger(days) || days < 1 || days > 366) {
+    throw new Error(`days は 1〜366 の整数で指定してください: ${days}`);
+  }
+  const today = dateInTimeZone(now, timeZone);
+  const completedEnd = addDays(today, -1);
+  return {
+    startDate: addDays(completedEnd, -(days - 1)),
+    endDate: completedEnd,
+    days,
+    mode: "rolling-complete-days",
+  };
+}
+
+async function runReport(analyticsdata, dimensions, dateRange) {
   const rows = [];
   const metadata = [];
   let rowCount = null;
@@ -60,7 +183,7 @@ async function runReport(analyticsdata, dimensions, days) {
     const { data } = await analyticsdata.properties.runReport({
       property: `properties/${PROPERTY_ID}`,
       requestBody: {
-        dateRanges: [{ startDate: `${days}daysAgo`, endDate: "today" }],
+        dateRanges: [{ startDate: dateRange.startDate, endDate: dateRange.endDate }],
         dimensions: dimensions.map((name) => ({ name })),
         metrics: [{ name: "eventCount" }],
         dimensionFilter: {
@@ -92,10 +215,10 @@ async function runReport(analyticsdata, dimensions, days) {
   return { rows, fetchQuality: { rowCount, rowsFetched: rows.length, pagesFetched: metadata.length, metadata } };
 }
 
-async function collectReports(analyticsdata, days) {
+async function collectReports(analyticsdata, dateRange) {
   const qualityByDimensions = new Map();
   const fetchRows = async (dimensions) => {
-    const report = await runReport(analyticsdata, dimensions, days);
+    const report = await runReport(analyticsdata, dimensions, dateRange);
     qualityByDimensions.set(dimensions.slice(1).map(shortName).join("|"), report.fetchQuality);
     return report.rows;
   };
@@ -123,8 +246,8 @@ async function main() {
   });
   const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
 
-  const days = Number(process.argv[2] || 28);
-  const reports = await collectReports(analyticsdata, days);
+  const window = parseFetchWindow(process.argv.slice(2));
+  const reports = await collectReports(analyticsdata, window);
   for (const report of Object.values(reports)) {
     for (const failure of report.failures) {
       process.stderr.write(
@@ -142,7 +265,9 @@ async function main() {
   const pivoted = reports.overview.rows.sort((a, b) => b.impressions - a.impressions);
   const totalImp = pivoted.reduce((s, v) => s + v.impressions, 0);
   const totalClick = pivoted.reduce((s, v) => s + v.clicks, 0);
-  const date = new Date().toISOString().slice(0, 10);
+  // date は履歴上の観測日ではなく「集計期間の終端」。固定期間を再取得しても
+  // generatedAt と混同せず、date + days から期間を再構成できるようにする。
+  const date = window.endDate;
 
   // ── schema v2 (doc 42 §10.1): 認識済み 10 vertical と (unset) の impression 内訳 ──
   // 定数 SSOT は affiliate-operations-core.mjs (ESM)。cjs だが main は async なので dynamic import で読む。
@@ -164,7 +289,10 @@ async function main() {
     eventNames: { impression: IMPRESSION_EVENT, click: CLICK_EVENT },
     generatedAt: new Date().toISOString(),
     date,
-    days,
+    days: window.days,
+    periodStart: window.startDate,
+    periodEnd: window.endDate,
+    windowMode: window.mode,
     dimensions: valueDimNames,
     hasVerticalBreakdown: hasVerticalDims,
     hasCategoryBreakdown: hasCategoryDims,
@@ -205,7 +333,7 @@ async function main() {
   // Markdown 出力
   const pct = (n) => (n == null ? "—" : (n * 100).toFixed(2) + "%");
   const out = [];
-  out.push(`# アフィリエイト GA4 実測 (${date}, 直近 ${snapshot.days} 日)`);
+  out.push(`# アフィリエイト GA4 実測 (${snapshot.periodStart}〜${snapshot.periodEnd}, ${snapshot.days} 日)`);
   out.push("");
   if (!hasCategoryDims) {
     out.push(
@@ -264,7 +392,13 @@ async function main() {
   );
 }
 
-module.exports = { PLACEMENT_DIMENSIONS, REPORT_PAGE_SIZE, collectReports, runReport };
+module.exports = {
+  PLACEMENT_DIMENSIONS,
+  REPORT_PAGE_SIZE,
+  collectReports,
+  parseFetchWindow,
+  runReport,
+};
 
 if (require.main === module) {
   main().catch((e) => {

@@ -50,10 +50,11 @@ export const KDP_AUTHOR = {
 export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
   // ── S1 論点読み物 ──────────────────────────────────────────────
   "K-S1-01": {
-    titleKana: "ショトクトシシュツノチイキサ カケイトウケイヲヒカクスルマエニ",
-    titleRomaji: "Shotoku to Shishutsu no Chiikisa - Kakei Tokei wo Hikaku Suru Mae ni",
-    subtitleKana: "タイショウセタイ ネンジ ブンボカラヨミナオスチイキノスウジ",
-    subtitleRomaji: "Taisho Setai Nenji Bunbo kara Yominaosu Chiiki no Suji",
+    // 2026-09-19 改題 (design.titleCandidates 問い型)。旧読み「ショトクトシシュツノチイキサ…」は v3-20260906 の未公開題。
+    titleKana: "ネンシュウガタカイケンハ クラシモユタカナノカ",
+    titleRomaji: "Nenshu ga Takai Ken wa Kurashi mo Yutaka nano ka",
+    subtitleKana: "ヤチントブッカヲヒイテヨミナオス ヨンジュウナナトドウフケンノカケイ",
+    subtitleRomaji: "Yachin to Bukka wo Hiite Yominaosu 47 Todofuken no Kakei",
   },
   "K-S1-02": {
     titleKana: "ショクタクノシシュツトコウニュウスウリョウ カケイチョウサノチイキサヲヨム",
@@ -68,8 +69,8 @@ export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
     titleRomaji: "Kenko to Iryo no Chizu - Jumyo Jisatsu Kaigo 2040",
   },
   "K-S1-05": {
-    titleKana: "キョウイクトコソダテノチズ キョウイクヒ シンガクリツ タイキジドウ",
-    titleRomaji: "Kyoiku to Kosodate no Chizu - Kyoikuhi Shingakuritsu Taiki Jido",
+    titleKana: "キョウイクトコソダテノチズ キョウイクヒ シンガクリツ コソダテシヒョウ",
+    titleRomaji: "Kyoiku to Kosodate no Chizu - Kyoikuhi Shingakuritsu Kosodate Shihyo",
   },
   "K-S1-06": {
     titleKana: "ジチタイザイセイノチズ ザイセイリョク シャッキン ショウライフタン",
@@ -185,4 +186,46 @@ export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
     titleKana: "ヨンジュウナナトドウフケンランキングタイゼン イガイナイチイ サイカイ",
     titleRomaji: "47 Todofuken Ranking Taizen - Igaina 1-i Saikai",
   },
+};
+
+/**
+ * 読みを人手で確認した時点の表記。
+ *
+ * タイトル変更時にこの snapshot と KDP_READINGS を同時更新しない限りテストが落ちる。
+ * 自動ローマ字変換では検出できない「子育て指標 / 待機児童」のような意味上の読み違いを、
+ * KDP 接続前に止めるための独立した照合点。
+ */
+export const KDP_READING_SOURCES: Readonly<Record<string, { readonly title: string; readonly subtitle?: string }>> = {
+  "K-S1-01": { title: "年収が高い県は、暮らしも豊かなのか", subtitle: "家賃と物価を引いて読み直す47都道府県の家計" },
+  "K-S1-02": { title: "食卓の支出と購入数量 — 家計調査の地域差を読む" },
+  "K-S1-03": { title: "人口減少と世帯の地図 — 未婚・単身・東京集中" },
+  "K-S1-04": { title: "健康と医療の地図 — 寿命・自殺・介護2040" },
+  "K-S1-05": { title: "教育と子育ての地図 — 教育費・進学率・子育て指標" },
+  "K-S1-06": { title: "自治体財政の地図 — 財政力・借金・将来負担" },
+  "K-S1-07": { title: "観光とインバウンドの地図 — 宿泊・国籍・回復" },
+  "K-S1-08": { title: "エネルギーとインフラの地図 — 電力・再エネ・ガス" },
+  "K-S1-09": { title: "産業と地域経済の地図 — 製造・中小・地価" },
+  "K-S1-10": { title: "安全と環境の地図 — 犯罪・労災・公害・防災" },
+  "K-S1-11": { title: "文化・スポーツ・余暇の地図" },
+  "K-S1-12": { title: "デジタル生活の地図 — 通信・PC・テレワーク" },
+  "K-S2-01": { title: "データで見る47都道府県 人口・世帯" },
+  "K-S2-02": { title: "データで見る47都道府県 所得・賃金・採用" },
+  "K-S2-03": { title: "データで見る47都道府県 観光・宿泊" },
+  "K-S2-04": { title: "データで見る47都道府県 自治体財政" },
+  "K-S2-05": { title: "データで見る47都道府県 医療・介護" },
+  "K-S2-06": { title: "データで見る47都道府県 教育・子育て" },
+  "K-S2-07": { title: "データで見る47都道府県 移住・生活" },
+  "K-S2-08": { title: "データで見る47都道府県 出店・商圏" },
+  "K-S2-09": { title: "データで見る47都道府県 産業・経済" },
+  "K-S2-10": { title: "データで見る47都道府県 防災・インフラ" },
+  "K-S2-11": { title: "データで見る47都道府県 家計・消費" },
+  "K-S3-01": { title: "北海道データブック — 統計で読む県の横顔" },
+  "K-S3-02": { title: "東北データブック — 統計で読む県の横顔" },
+  "K-S3-03": { title: "関東データブック — 統計で読む県の横顔" },
+  "K-S3-04": { title: "中部データブック — 統計で読む県の横顔" },
+  "K-S3-05": { title: "近畿データブック — 統計で読む県の横顔" },
+  "K-S3-06": { title: "中国データブック — 統計で読む県の横顔" },
+  "K-S3-07": { title: "四国データブック — 統計で読む県の横顔" },
+  "K-S3-08": { title: "九州・沖縄データブック — 統計で読む県の横顔" },
+  "K-S4-01": { title: "47都道府県ランキング大全 — 意外な1位・最下位" },
 };

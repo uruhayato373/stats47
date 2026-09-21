@@ -135,7 +135,11 @@ node .claude/scripts/note/build-kakei-note-chart-data.mjs --pref 43000          
 node .claude/scripts/note/build-kakei-note-evidence-data.mjs --slug $S            # evidence-data.json + data/*.json
 npx tsx .claude/scripts/blog/generate-article-charts.ts --slug $S --base docs/31_note記事原稿   # data/*.svg (blog 契約)
 node .claude/skills/note/generate-kakei-charts/scripts/generate-charts.js $S     # category-ratio / extreme-items
-cp docs/31_note記事原稿/$S/data/*.svg docs/31_note記事原稿/$S/images/ && rm -f docs/31_note記事原稿/$S/images/*-ig.svg
+# タイルマップは正方形版、根拠ランキング2枚はnoteで読める1080x1350版を採用する
+cp docs/31_note記事原稿/$S/data/*-tile-grid.svg docs/31_note記事原稿/$S/images/
+for f in docs/31_note記事原稿/$S/data/*-prefecture-rankings-ig.svg; do
+  cp "$f" "docs/31_note記事原稿/$S/images/$(basename "${f%-ig.svg}").svg"
+done
 node .claude/scripts/lib/svg-to-png.cjs docs/31_note記事原稿/$S/images
 node .claude/scripts/note/build-kakei-note-draft.mjs --slug $S                    # draft.md (frontmatter 保持)
 node .claude/scripts/note/audit-kakei-note-content.mjs $S                          # 9 チェック。exit 0 のみ公開可
@@ -150,6 +154,7 @@ node .claude/scripts/note/update-published-navigation.mjs --slug $S --commit    
 - `--all` は build-kakei-note-{evidence-data,draft}.mjs と generate-charts.js が対応。公開は 1 本ずつ (Profile 5 排他ロック)。
 - 監査の不変条件と定型文は `.claude/scripts/note/lib/kakei-note-{body,audit}.mjs`。テストは `__tests__/kakei-note-*.test.mjs`。
 - 根拠 3 枚の PNG は SVG から再生成可能なので git に追跡しない (asset policy)。R2 復元後は svg-to-png で作り直す。
+- 根拠ランキング2枚の note 用 canonical は `data/*-prefecture-rankings-ig.svg` (1080x1350)。横長の通常版はブログ用で、note の `images/` へはコピーしない。
 - 商品カード (Kindle) は `/products/<slug>` の固有 OGP (`app/products/<slug>/ogp/ogp.png`、`generate-ogp-images.ts --type products`) が前提。
 
 ## D 記事 (有料データセット `d-kakei-category-dataset`) のサンプル画像と更新 (2026-09-20)

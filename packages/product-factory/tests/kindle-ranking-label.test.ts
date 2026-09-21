@@ -25,6 +25,12 @@ describe("Kindle indicator definitions", () => {
   it("does not invent tables for ordinary pipe characters", () => {
     expect(mdToXhtml('A | B\n続き')).toBe('<p>A | B 続き</p>');
   });
+  it("drops web-only navigation blocks instead of printing them as text", () => {
+    const md = "本文\n\n<related-articles>\n<related-article-link href=\"/blog/x\">関連</related-article-link>\n</related-articles>\n\n<site-link href=\"/ranking/y\">回遊</site-link>";
+    const xhtml = mdToXhtml(md);
+    expect(xhtml).toBe("<p>本文</p>");
+    expect(xhtml).not.toContain("related-articles");
+  });
   it("keeps the official denominator and labels arithmetic mean honestly", async () => {
     mock.fetch.mockResolvedValue({
       year: "2024",

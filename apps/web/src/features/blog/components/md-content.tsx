@@ -65,6 +65,8 @@ interface AffiliateTextAdData {
     title: string;
     href: string;
     trackingPixelUrl?: string | null;
+    /** GA4 `affiliate_vertical` に送る広告自身の意図軸。解決層 (`toTextAd`) が確定させる。 */
+    vertical: AffiliateCategory | null;
 }
 
 interface MDContentProps {
@@ -349,6 +351,8 @@ function makeMdComponents(
                             width={b.width ?? null}
                             height={b.height ?? null}
                             label={b.title ?? ""}
+                            // 台帳の vertical キーをそのまま計測へ渡す (既定 "other" を流さない)。
+                            category={category}
                             position="article-inline"
                             adId={b.id}
                         />
@@ -364,6 +368,7 @@ function makeMdComponents(
                         width={Number(width) || null}
                         height={Number(height) || null}
                         label={label ?? ""}
+                        category={category ?? affiliateVertical ?? "other"}
                         position="article-inline"
                     />
                 </div>

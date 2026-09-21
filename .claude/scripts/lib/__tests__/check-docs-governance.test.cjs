@@ -7,6 +7,7 @@ const path = require("node:path");
 const test = require("node:test");
 
 const {
+  acceptedWeeklyPlanWeeks,
   fixImplementationPlanIndex,
   inspectRepository,
   isIsoDate,
@@ -246,6 +247,24 @@ test("frontmatter parser and ISO week are deterministic", () => {
   assert.equal(isIsoDate("2026-07-30"), true);
   assert.equal(isIsoDate("2026-02-30"), false);
   assert.equal(isoWeek("2026-07-30"), "2026-W31");
+  assert.deepEqual(acceptedWeeklyPlanWeeks("2026-09-20"), ["2026-W38", "2026-W39"]);
+  assert.deepEqual(acceptedWeeklyPlanWeeks("2026-09-21"), ["2026-W39"]);
+});
+
+test("日曜に先行作成した翌週計画はDG032にしない", (t) => {
+  const { root, config } = fixture(t);
+  write(root, ".claude/todo/weekly.md", markdown({
+    title: "Weekly",
+    type: "weekly-plan",
+    extra: "week: 2026-W39\n",
+    body: "今週は `DOCS-FEATURE-01` を扱う。",
+  }));
+
+  const sunday = inspectRepository({ root, config, now: "2026-09-20" });
+  assert.equal(sunday.warnings.some((item) => item.code === "DG032"), false);
+
+  const priorSaturday = inspectRepository({ root, config, now: "2026-09-19" });
+  assert.equal(priorSaturday.warnings.some((item) => item.code === "DG032"), true);
 });
 
 test("missing fixed directory, forbidden nested archive and malformed improvement row fail", (t) => {

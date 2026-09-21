@@ -167,15 +167,24 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 4.5. AdSense snapshot 取得
    `.env.local` に AdSense OAuth クレデンシャル（CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）が揃っている場合のみ実行:
-   `/fetch-adsense-data snapshot <当週 YYYY-Www>` を実行する。
-   保存先: `.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/`
-   取得ファイル: overview / daily / devices / units / formats-platforms / placements-platforms /
-   bid-types-platforms / traffic-sources / countries / pages.csv + `manifest.json`（期間 metadata・status）
-   取得完了後、`/adsense-improvement observe` で閾値と進行中施策を判定し、結果を`.claude/todo/improvements.md`へ反映する。
-   **クレデンシャル未設定時はこのステップをスキップし、レビュー本文に「AdSense OAuth 未設定」と 1 行記載する**。
+   `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <当週 YYYY-Www>` を実行し、
+   「週次収益 (NSM)」節をレビューへ載せる。NSM は AdSense 確定額 + アフィリエイト発生額 + 商品の実売額で、
+   **欠測は 0 円ではなく「判定不能」と出る**。判定不能が出たらその原因（多くは週次 cron の停止）を
+   レビューの課題欄に書き、放置しない。
 
-   **AdSense 週次候補（CI が自動生成）**: `.claude/state/metrics/adsense/candidates-latest.json`
-   （`npm run metrics:adsense-diagnostics -- <week>` で再生成可）をレビューへ載せる。
+   **AdSense は 2026-09-20 に恒久停止した**（正典 `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1）。
+   `/fetch-adsense-data` と `/adsense-improvement` は運用しない。過去の snapshot は
+   `.claude/skills/analytics/adsense-improvement/reference/` に凍結記録として残す。
+
+   **アフィリエイトの週次観測**: `.claude/state/ads/ga4-affiliate-history.csv` と
+   `.claude/state/ads/affiliate-operations-latest.json` を見る。評価の主指標は
+   確定収益 / 1,000 viewable impression で、クリック数だけで勝敗を決めない。
+
+   **計測の健全性は機械が判定する**。`node .claude/scripts/metrics/check-revenue-guards.mjs`
+   を実行し、exit 0 なら健全。破れていたら markdown で理由が出る（観測の鮮度、意図軸が
+   未解決な表示の比率）。週次 cron `fetch-metrics-weekly.yml` が同じ判定を行い、破れていれば
+   `revenue-alert` ラベルの Issue を起票・更新し、回復したら自動クローズする。
+   閾値の SSOT は `.claude/config/revenue-guards.json` で、スクリプトへ直書きしない。
    - 候補は最大3件・**AdSense 実験の採用は最大1件/週・active WIP≤2**。1実験1レバーのみ。
    - CPC は**公式 `cost_per_click`** を使う。`earnings_per_click_legacy`（旧 cpc 列）は公式 CPC ではない。
    - unit/format/placement の比較は `IMPRESSIONS_RPM`（unit の Page RPM は分母0で無意味）。
@@ -537,6 +546,23 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 | Instagram | N | N reach | N |
 
 最終取得日: YYYY-MM-DD（未取得の場合は「`/update-sns-metrics` 未実行」と記載）
+
+### KDP公開ゲート
+
+`.claude/state/products/kdp-weekly-publication.json`を参照し、推測で補完しない。
+
+| 項目 | 実測 |
+|---|---|
+| S1 | live N/12・in_review N |
+| パイロット | live N/3・in_review N |
+| 4週計測 | complete / window-open / not-measured（対象IDも記載） |
+| 需要シグナル | measured-positive / measured-zero / not-measured |
+| 当週ゲート | hold / measure / prepare-one / ready-for-owner-approval / observe / stop-no-demand / complete |
+| 候補 | ID またはなし（最大1冊） |
+
+`ready-for-owner-approval`でもレビューは公開しない。来週への申し送りには候補ID、停止条件、
+`KDP-EXPANSION-01`、対象書籍の読者課題 / HARMと理由 / 支払う理由 / 需要証拠 / 次の検証を短く記す。
+販売数/KENPが未計測なら0件とは書かず`not-measured`とする。
 
 ## 課題・ブロッカー
 

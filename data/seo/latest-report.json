@@ -1,111 +1,117 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-18",
+  "date": "2026-09-20",
   "period": {
-    "periodStart": "2026-09-09",
-    "periodEnd": "2026-09-15",
+    "periodStart": "2026-09-11",
+    "periodEnd": "2026-09-17",
     "windowDays": 7
   },
-  "inputHash": "e2d00caaed35862e4cbe1411a873bcc1fbe0c653945960d821c6c966957f8897",
+  "inputHash": "6ecbcfe9bc94318977cafaee9a29948751c6e9234c8b7aa25d0e35718cf1cf42",
   "movements": [
     {
       "keyword": "漁獲量とは",
       "targetPath": "/japan/fishery-marine",
-      "before": 43,
+      "before": 32.5,
       "after": 99.5,
-      "beforeImpressions": 3,
-      "impressions": 2,
-      "change": -56.5
-    },
-    {
-      "keyword": "漁かく量",
-      "targetPath": "/japan/fishery-marine",
-      "before": 36,
-      "after": 91,
       "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -55
+      "impressions": 2,
+      "change": -67
     },
     {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 36,
-      "after": 79,
-      "beforeImpressions": 7,
-      "impressions": 7,
-      "change": -43
+      "keyword": "完全失業率",
+      "targetPath": "/blog/unemployment-structure",
+      "before": 56,
+      "after": 7,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 49
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/ranking/railway-passengers",
+      "before": 9,
+      "after": 47.791044776119406,
+      "beforeImpressions": 1,
+      "impressions": 67,
+      "change": -38.791044776119406
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/15000",
+      "before": 10,
+      "after": 47.95890410958904,
+      "beforeImpressions": 1,
+      "impressions": 73,
+      "change": -37.95890410958904
+    },
+    {
+      "keyword": "高校先生 年収",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 60,
+      "after": 25,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 35
     },
     {
       "keyword": "任意保険 加入率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 37.93103448275862,
-      "after": 80.61111111111111,
-      "beforeImpressions": 29,
+      "before": 48.17391304347826,
+      "after": 80.88888888888889,
+      "beforeImpressions": 23,
       "impressions": 18,
-      "change": -42.680076628352495
+      "change": -32.71497584541063
     },
     {
-      "keyword": "漁獲量",
-      "targetPath": "/japan/fishery-marine",
-      "before": 11.5,
-      "after": 54,
-      "beforeImpressions": 4,
+      "keyword": "日照時間ランキング",
+      "targetPath": "/blog/annual-sunshine-duration-prefecture-gap",
+      "before": 7.5,
+      "after": 39,
+      "beforeImpressions": 2,
       "impressions": 1,
-      "change": -42.5
+      "change": -31.5
+    },
+    {
+      "keyword": "日本の人口動態",
+      "targetPath": "/japan/population-dynamics",
+      "before": 36,
+      "after": 6,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 30
     },
     {
       "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 69.71428571428571,
-      "after": 36.75,
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 49.42857142857143,
+      "after": 78.75,
       "beforeImpressions": 7,
       "impressions": 8,
-      "change": 32.96428571428571
+      "change": -29.32142857142857
     },
     {
-      "keyword": "中絶 理由 ランキング",
-      "targetPath": "/ranking/abortion-rate",
-      "before": 40,
-      "after": 9.666666666666666,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 30.333333333333336
-    },
-    {
-      "keyword": "デザイン 年収ランキング",
-      "targetPath": "/ranking/designer-annual-income",
-      "before": 20,
-      "after": 48.2,
-      "beforeImpressions": 1,
-      "impressions": 5,
-      "change": -28.200000000000003
-    },
-    {
-      "keyword": "市町村 数",
-      "targetPath": "/blog/municipality-count-prefecture-gap",
-      "before": 30.666666666666668,
-      "after": 3,
-      "beforeImpressions": 3,
-      "impressions": 1,
-      "change": 27.666666666666668
-    },
-    {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/areas/43000",
-      "before": 28,
-      "after": 1,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 27
+      "keyword": "昼間人口",
+      "targetPath": "/blog/day-time-population-prefecture-gap",
+      "before": 44.6,
+      "after": 15.5,
+      "beforeImpressions": 5,
+      "impressions": 12,
+      "change": 29.1
     }
   ],
-  "verdicts": [],
+  "verdicts": [
+    {
+      "keyword": "40代 未婚 割合 日本 国勢調査",
+      "status": "observing",
+      "reason": "post-deployment-window-incomplete"
+    }
+  ],
   "selected": {
-    "keyword": "外国人",
-    "targetPath": "/blog/foreign-residents-diversity-map",
-    "rank": 2.6789087093389297,
-    "impressions": 953,
-    "clicks": 45,
+    "keyword": "住みやすい県ランキング",
+    "targetPath": "/blog/livable-prefecture-composite-ranking",
+    "rank": 6.94949494949495,
+    "impressions": 495,
+    "clicks": 15,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
@@ -116,5 +122,11 @@
       "nextReviewDate": "2026-09-20"
     }
   ],
-  "pendingPublication": []
+  "pendingPublication": [
+    {
+      "keyword": "外国人",
+      "targetPath": "/blog/foreign-residents-diversity-map",
+      "proposalId": "35312684285-1"
+    }
+  ]
 }

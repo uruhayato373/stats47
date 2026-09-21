@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-09-20T10:15:41.746Z",
+  "date": "2026-09-20",
+  "totals": {
+    "entries": 267,
+    "active": 258,
+    "uniqueAdvertisers": 160,
+    "uniqueTitles": 160,
+    "uniquePrograms": 129,
+    "programRefMissing": 0
+  },
+  "byCategory": {
+    "energy": 2,
+    "tourism": 5,
+    "economy": 8,
+    "construction": 3,
+    "(null)": 233,
+    "laborwage": 3,
+    "socialsecurity": 2,
+    "population": 2
+  },
+  "byVertical": {
+    "energy": 30,
+    "travel": 51,
+    "economy": 28,
+    "housing": 25,
+    "education": 26,
+    "labor": 53,
+    "health": 10,
+    "mobility": 13,
+    "population": 18,
+    "furusato": 4
+  },
+  "byLocation": {
+    "blog-bottom": 133,
+    "sidebar-sticky": 2,
+    "sidebar-inline": 1,
+    "sidebar-bottom": 122
+  },
+  "byAdType": {
+    "banner": 138,
+    "text": 120
+  },
+  "coverage": {
+    "categoriesCovered": 7,
+    "categoriesTotal": 17,
+    "gapCategories": [
+      "landweather",
+      "agriculture",
+      "miningindustry",
+      "commercial",
+      "educationsports",
+      "administrativefinancial",
+      "safetyenvironment",
+      "international",
+      "infrastructure",
+      "ict"
+    ],
+    "thinCategories": [
+      "population",
+      "energy",
+      "socialsecurity"
+    ],
+    "verticalsCovered": 10,
+    "verticalsTotal": 10,
+    "gapVerticals": [],
+    "thinVerticals": [],
+    "byVerticalText": {
+      "labor": 25,
+      "energy": 15,
+      "economy": 11,
+      "housing": 13,
+      "population": 8,
+      "education": 13,
+      "mobility": 7,
+      "health": 4,
+      "travel": 22,
+      "furusato": 2
+    },
+    "byVerticalBanner": {
+      "energy": 15,
+      "travel": 29,
+      "economy": 17,
+      "housing": 12,
+      "education": 13,
+      "labor": 28,
+      "health": 6,
+      "mobility": 6,
+      "population": 10,
+      "furusato": 2
+    },
+    "textGapVerticals": [],
+    "bannerGapVerticals": []
+  },
+  "sizeViolations": [
+    {
+      "id": "af_conoha_ai_canvas_001",
+      "size": "336x280",
+      "tier": "legacy"
+    },
+    {
+      "id": "af_conoha_skyscraper_001",
+      "size": "160x600",
+      "tier": "legacy"
+    },
+    {
+      "id": "af_economy_banner_001",
+      "size": "300x300",
+      "tier": "legacy"
+    },
+    {
+      "id": "af_population_banner_001",
+      "size": "320x250",
+      "tier": "legacy"
+    },
+    {
+      "id": "af_sbi_inline_001",
+      "size": "165x120",
+      "tier": "legacy"
+    },
+    {
+      "id": "af_sbi_skyscraper_001",
+      "size": "120x600",
+      "tier": "legacy"
+    }
+  ]
+}

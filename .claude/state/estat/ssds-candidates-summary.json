@@ -1,0 +1,248 @@
+{
+  "generatedAt": "2026-09-19T22:24:55.344Z",
+  "ssdsTablesProbed": 26,
+  "ssdsTablesFound": 26,
+  "totalSsdsIndicators": 5356,
+  "existingPairs": 2200,
+  "newCandidates": 4067,
+  "topUnits": [
+    [
+      "人",
+      1703
+    ],
+    [
+      "％",
+      220
+    ],
+    [
+      "分",
+      206
+    ],
+    [
+      "世帯",
+      190
+    ],
+    [
+      "千円",
+      189
+    ],
+    [
+      "円",
+      169
+    ],
+    [
+      "百万円",
+      167
+    ],
+    [
+      "施設",
+      153
+    ],
+    [
+      "件",
+      140
+    ],
+    [
+      "所",
+      112
+    ],
+    [
+      "千人",
+      107
+    ],
+    [
+      "‐",
+      93
+    ],
+    [
+      "戸",
+      91
+    ],
+    [
+      "ｍ2",
+      60
+    ],
+    [
+      "事業所",
+      57
+    ],
+    [
+      "住宅",
+      43
+    ],
+    [
+      "台",
+      40
+    ],
+    [
+      "ｈａ",
+      28
+    ],
+    [
+      "校",
+      27
+    ],
+    [
+      "学級",
+      26
+    ]
+  ],
+  "perTable": [
+    {
+      "statsDataId": "0000010101",
+      "title": "Ａ　人口・世帯",
+      "indicators": 594,
+      "newCandidates": 506
+    },
+    {
+      "statsDataId": "0000010102",
+      "title": "Ｂ　自然環境",
+      "indicators": 44,
+      "newCandidates": 19
+    },
+    {
+      "statsDataId": "0000010103",
+      "title": "Ｃ　経済基盤",
+      "indicators": 548,
+      "newCandidates": 411
+    },
+    {
+      "statsDataId": "0000010104",
+      "title": "Ｄ　行政基盤",
+      "indicators": 196,
+      "newCandidates": 85
+    },
+    {
+      "statsDataId": "0000010105",
+      "title": "Ｅ　教育",
+      "indicators": 494,
+      "newCandidates": 476
+    },
+    {
+      "statsDataId": "0000010106",
+      "title": "Ｆ　労働",
+      "indicators": 532,
+      "newCandidates": 530
+    },
+    {
+      "statsDataId": "0000010107",
+      "title": "Ｇ　文化・スポーツ",
+      "indicators": 248,
+      "newCandidates": 223
+    },
+    {
+      "statsDataId": "0000010108",
+      "title": "Ｈ　居住",
+      "indicators": 507,
+      "newCandidates": 445
+    },
+    {
+      "statsDataId": "0000010109",
+      "title": "Ｉ　健康・医療",
+      "indicators": 405,
+      "newCandidates": 369
+    },
+    {
+      "statsDataId": "0000010110",
+      "title": "Ｊ　福祉・社会保障",
+      "indicators": 366,
+      "newCandidates": 341
+    },
+    {
+      "statsDataId": "0000010111",
+      "title": "Ｋ　安全",
+      "indicators": 170,
+      "newCandidates": 144
+    },
+    {
+      "statsDataId": "0000010112",
+      "title": "Ｌ　家計",
+      "indicators": 265,
+      "newCandidates": 245
+    },
+    {
+      "statsDataId": "0000010113",
+      "title": "Ｍ　生活時間",
+      "indicators": 214,
+      "newCandidates": 206
+    },
+    {
+      "statsDataId": "0000010201",
+      "title": "Ａ　人口・世帯",
+      "indicators": 106,
+      "newCandidates": 37
+    },
+    {
+      "statsDataId": "0000010202",
+      "title": "Ｂ　自然環境",
+      "indicators": 18,
+      "newCandidates": 9
+    },
+    {
+      "statsDataId": "0000010203",
+      "title": "Ｃ　経済基盤",
+      "indicators": 43,
+      "newCandidates": 0
+    },
+    {
+      "statsDataId": "0000010204",
+      "title": "Ｄ　行政基盤",
+      "indicators": 50,
+      "newCandidates": 3
+    },
+    {
+      "statsDataId": "0000010205",
+      "title": "Ｅ　教育",
+      "indicators": 59,
+      "newCandidates": 0
+    },
+    {
+      "statsDataId": "0000010206",
+      "title": "Ｆ　労働",
+      "indicators": 78,
+      "newCandidates": 2
+    },
+    {
+      "statsDataId": "0000010207",
+      "title": "Ｇ　文化・スポーツ",
+      "indicators": 22,
+      "newCandidates": 0
+    },
+    {
+      "statsDataId": "0000010208",
+      "title": "Ｈ　居住",
+      "indicators": 90,
+      "newCandidates": 3
+    },
+    {
+      "statsDataId": "0000010209",
+      "title": "Ｉ　健康・医療",
+      "indicators": 102,
+      "newCandidates": 8
+    },
+    {
+      "statsDataId": "0000010210",
+      "title": "Ｊ　福祉・社会保障",
+      "indicators": 48,
+      "newCandidates": 0
+    },
+    {
+      "statsDataId": "0000010211",
+      "title": "Ｋ　安全",
+      "indicators": 58,
+      "newCandidates": 0
+    },
+    {
+      "statsDataId": "0000010212",
+      "title": "Ｌ　家計",
+      "indicators": 79,
+      "newCandidates": 5
+    },
+    {
+      "statsDataId": "0000010213",
+      "title": "Ｍ　生活時間",
+      "indicators": 20,
+      "newCandidates": 0
+    }
+  ]
+}

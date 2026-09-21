@@ -36,7 +36,42 @@
           ]
         }
       ],
-      "nextReviewDate": "2026-09-20"
+      "nextReviewDate": "2026-09-20",
+      "reviews": [
+        {
+          "date": "2026-09-20",
+          "outcome": "insufficient-data",
+          "reason": "post-deployment-window-incomplete",
+          "period": {
+            "periodStart": "2026-09-11",
+            "periodEnd": "2026-09-17",
+            "windowDays": 7
+          },
+          "snapshotHash": "7a48b7c977bd83568d0d36fb26006c33cacd8e1da8d834532d21315c24972f78"
+        },
+        {
+          "date": "2026-09-20",
+          "outcome": "insufficient-data",
+          "reason": "post-deployment-window-incomplete",
+          "period": {
+            "periodStart": "2026-09-11",
+            "periodEnd": "2026-09-17",
+            "windowDays": 7
+          },
+          "snapshotHash": "385aac17e6a4378cd24b689331ac49491d6089c462e77bfc2379b4da7d07696a"
+        },
+        {
+          "date": "2026-09-20",
+          "outcome": "insufficient-data",
+          "reason": "post-deployment-window-incomplete",
+          "period": {
+            "periodStart": "2026-09-11",
+            "periodEnd": "2026-09-17",
+            "windowDays": 7
+          },
+          "snapshotHash": "6ecbcfe9bc94318977cafaee9a29948751c6e9234c8b7aa25d0e35718cf1cf42"
+        }
+      ]
     }
   ]
 }

@@ -38,15 +38,15 @@ tags:
 
 添付ファイルの中身は次のとおりです。画像は実データの先頭部分をそのまま切り出したものです。
 
-![47市平均比CSVの先頭6行](./images/sample-ratio-table.png)
+![47市平均比CSVの先頭6行](./images/sample-ratio-table.svg)
 
 1枚目は比率ファイル（kakei-category-ratio-47.csv）の先頭6行です。県コード・県名・県庁所在市・年に続いて、十大費目の47市平均比が並びます。47行で1県1行です。
 
-![時系列CSVの先頭10行](./images/sample-timeseries-table.png)
+![時系列CSVの先頭10行](./images/sample-timeseries-table.svg)
 
 2枚目は時系列ファイル（kakei-category-timeseries.csv）の先頭10行です。年・県・費目を1行にした縦持ちで、金額は円の実額です。全部で8,460行あります。
 
-![十大費目の県間差](./images/category-spread-range.png)
+![十大費目の県間差](./images/category-spread-range.svg)
 
 3枚目は、この比率CSVから十大費目ごとに最小の市と最大の市を拾って並べたものです。教育の8.7倍と食料の1.4倍が同じ物差しに乗ると、費目ごとの散らばりの違いが一目でわかります。
 
