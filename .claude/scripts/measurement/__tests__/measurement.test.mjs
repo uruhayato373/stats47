@@ -6,11 +6,118 @@ import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import yaml from 'js-yaml';
-import { SOURCES, scopedState, sourceFor, failureCode } from '../sources.mjs';
+import { SOURCES, scopedState, sourceFor, failureCode, selectSessionBundle } from '../sources.mjs';
 import { encrypt, decrypt, BUCKET } from '../vault.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
 import { parseCoconalaAnalytics, validateCoconalaCoverage } from '../report-parsers.mjs';
+import ExcelJS from 'exceljs';
+import { kdpAsinMap, parseKdpReport } from '../kdp-reports.mjs';
+import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
+
+test('GSC validates ZIP contents, expected categories, row counts and site ownership', () => {
+  execFileSync('python3', ['.claude/scripts/gsc/__tests__/test_ingest_gsc_export.py']);
+});
+
+test('GSC expands paginated reasons and never swallows a failed detail click', async () => {
+  let failedClick = false, checkedUrl = false;
+  const calls = [];
+  const page = {
+    locator(selector) {
+      assert.equal(selector, '[role="option"][data-value="25"]:visible');
+      calls.push('visible-option');
+      return { click: async () => {} };
+    },
+    getByRole(role) {
+      calls.push(role);
+      const locator = { first: () => locator, getByRole: child => { calls.push(child); return locator; },
+        click: async () => { if (role === 'cell' && failedClick) throw new Error('hidden reason'); },
+        waitFor: async () => {} };
+      return locator;
+    },
+    async waitForURL(predicate) {
+      checkedUrl = true;
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index?resource_id=sc-domain%3Astats47.jp')), false);
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Adoboku-note.com&item_key=test')), false);
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=test')), true);
+    },
+  };
+  await openCoverageReason(page, '検出 - インデックス未登録');
+  assert.deepEqual(calls, ['listbox', 'visible-option', 'cell', 'heading']);
+  assert.equal(checkedUrl, true);
+  checkedUrl = false; failedClick = true;
+  await assert.rejects(openCoverageReason(page, '検出 - インデックス未登録'), /hidden reason/);
+  assert.equal(checkedUrl, false);
+});
+
+test('native Google session export preserves the OS keychain and original profile', () => {
+  const code = readFileSync('.claude/scripts/measurement/bootstrap-session.mjs', 'utf8');
+  assert.match(code, /mkdtempSync/);
+  assert.match(code, /cpSync\(profile, temporaryProfile/);
+  assert.match(code, /launchPersistentContext\(temporaryProfile \?\? profile/);
+  assert.match(code, /ignoreDefaultArgs: \['--password-store=basic', '--use-mock-keychain'\]/);
+  assert.match(code, /const nativeProfile = sourceName === 'gsc';/);
+  assert.match(code, /google_login_requires_native_chrome/);
+  assert.doesNotMatch(code, /AutomationControlled|--enable-automation|navigator\.webdriver/);
+  assert.match(code, /reports_requires_kdp_login/);
+});
+
+test('a later refresh from an old login cannot overwrite a new human login', () => {
+  const seed = { capturedAt: '2026-09-21T02:18:49Z', state: 'new-login' };
+  const legacy = { capturedAt: '2026-09-21T02:30:00Z', state: 'old-login' };
+  assert.equal(selectSessionBundle(seed, legacy).state, 'new-login');
+  const oldGeneration = { ...legacy, bootstrapCapturedAt: '2026-09-20T00:00:00Z' };
+  assert.equal(selectSessionBundle(seed, oldGeneration).state, 'new-login');
+  const sameGeneration = { ...legacy, bootstrapCapturedAt: seed.capturedAt, state: 'valid-refresh' };
+  assert.equal(selectSessionBundle(seed, sameGeneration).state, 'valid-refresh');
+  assert.equal(selectSessionBundle(seed, null).bootstrapCapturedAt, seed.capturedAt);
+  assert.equal(selectSessionBundle(null, sameGeneration).state, 'valid-refresh');
+  assert.equal(selectSessionBundle(null, null), null);
+});
+
+function kdpFixture() {
+  const book = new ExcelJS.Workbook();
+  book.addWorksheet('確定済み注文').addRows([
+    ['日付', 'タイトル', '著者名', 'ASIN', 'マーケットプレイス', '有料ダウンロード数', '無料ダウンロード数'],
+    ['2026-09-20', '統計', 'stats47', 'B0HF17SQ9N', 'Amazon.co.jp', 2, 0],
+    ['2026-09-20', '他サイト', 'doboku-note', 'B0H8HW139T', 'Amazon.co.jp', 100, 0],
+  ]);
+  book.addWorksheet('既読 KENPC').addRows([
+    ['日付', 'タイトル', '著者名', 'ASIN', 'マーケットプレイス', '既読 KENP (Kindle Edition Normalized Pages)'],
+    ['2026-09-20', '統計', 'stats47', 'B0HF17SQ9N', 'Amazon.co.jp', 12],
+  ]);
+  book.addWorksheet('電子書籍のロイヤリティ').addRows([
+    ['ロイヤリティ発生日', 'タイトル', '著者名', 'ASIN', 'マーケットプレイス', 'ロイヤリティの種類', 'コンテンツ区分', '注文数', '払い戻し数', '実質注文数', '平均希望小売価格 (税別)', '平均販売価格 (税別)', '平均ファイルサイズ（MB）', '平均配信コスト', 'ロイヤリティ', '通貨'],
+    ['2026-09-20', '統計', 'stats47', 'B0HF17SQ9N', 'Amazon.co.jp', '70%', '電子書籍', 2, 0, 2, 100, 100, 1, 1, 140, 'JPY'],
+  ]);
+  return book;
+}
+const kdpListings = { 'K-S1-01': { author: 'stats47', asin: null, previousEditions: [{ author: 'stats47', asin: 'B0HF17SQ9N' }] } };
+test('KDP scopes old editions by exact ASIN and never adds shared-account totals', () => {
+  const report = parseKdpReport(kdpFixture(), kdpListings, '2026-09-20');
+  assert.equal(report.records.find(r=>r.kind==='processed-orders').paid, 2);
+  assert.equal(report.records.find(r=>r.kind==='kenp').pages, 12);
+  assert.equal(report.coverage.excludedRows, 1);
+  assert.equal(report.finality, 'provisional');
+  assert.equal(report.period.basis, 'marketplace-local-date');
+  assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.xlsx'), null);
+  assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.json'), '.local/authenticated-measurement/restored/kdp.json');
+});
+test('KDP rejects malformed, wrong-day, unmapped, duplicate and foreign observations', () => {
+  for (const mutate of [
+    w => w.removeWorksheet('既読 KENPC'),
+    w => { w.getWorksheet('確定済み注文').getRow(1).getCell(6).value = '新列'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(1).value = '2026-09-19'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(4).value = 'B0HF17SQ9X'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(3).value = 'doboku-note'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(6).value = ''; },
+    w => { const s=w.getWorksheet('確定済み注文');s.addRow(s.getRow(2).values); },
+  ]) {
+    const w = kdpFixture(); mutate(w);
+    assert.throws(()=>parseKdpReport(w,kdpListings,'2026-09-20'));
+  }
+  assert.throws(()=>kdpAsinMap({ ...kdpListings, other: { author:'stats47',asin:'B0HF17SQ9N' } }));
+});
 
 test('moshimo human login opens the same home as the collector', () => {
   const config = JSON.parse(readFileSync(resolve('.claude/config/affiliate-asp.json'), 'utf8')).asps.moshimo;
@@ -56,13 +163,22 @@ test('restore permits canonical reports only and rejects failed, stale or future
   assert.equal(consumerPath('moshimo', '.claude/state/metrics/affiliate/a8-results.json'), null);
   const now = Date.parse('2026-09-21T00:00:00Z');
   validateAttempt({status:'pass',observedAt:'2026-09-20T00:00:00Z'},now);
+  const gsc = { source: 'gsc', capability: SOURCES.gsc.capability, status: 'pass', observedAt: '2026-09-20T00:00:00Z' };
+  validateAttempt(gsc, now, 'gsc');
+  assert.throws(() => validateAttempt({ ...gsc, capability: 'coverage-export' }, now, 'gsc'), /capability_mismatch/);
+  assert.throws(() => validateAttempt(gsc, now, 'kdp'), /capability_mismatch/);
   for (const attempt of [null, {status:'failed',observedAt:'2026-09-20T00:00:00Z'}, {status:'pass',observedAt:'2026-09-18T00:00:00Z'}, {status:'pass',observedAt:'2026-09-22T00:00:00Z'}]) assert.throws(()=>validateAttempt(attempt,now));
 });
 
 test('independent health detects stalled schedules even when the last run passed', () => {
   const now = Date.parse('2026-09-21T00:00:00Z');
-  const state = {generatedAt:'2026-09-20T00:00:00Z', sources:Object.keys(SOURCES).map(source=>({source,status:'pass',observedAt:'2026-09-20T00:00:00Z',metricsAvailable:true}))};
+  const state = {generatedAt:'2026-09-20T00:00:00Z', sources:Object.keys(SOURCES).map(source=>({source,capability:SOURCES[source].capability,status:'pass',observedAt:'2026-09-20T00:00:00Z',metricsAvailable:true}))};
   assert.equal(measurementHealth(state,now).status,'pass');
+  const kdp = state.sources.find(s=>s.source==='kdp');
+  kdp.capability = 'publication-status';
+  assert.equal(measurementHealth(state,now).sources.find(s=>s.source==='kdp').metricsAvailable,false);
+  assert.equal(measurementHealth(state,now).status,'action_required');
+  kdp.capability = SOURCES.kdp.capability;
   assert.equal(measurementHealth(state,now+3*86400000).status,'action_required');
   state.sources[0].observedAt='2026-09-10T00:00:00Z';
   assert.equal(measurementHealth(state,now).status,'action_required');
@@ -93,7 +209,8 @@ test('missing jobs remain failed and activated consumers never silently fall bac
   const script = resolve('.claude/scripts/measurement/summarize.mjs');
   try {
     const input = join(temp, 'input'); mkdirSync(input);
-    writeFileSync(join(input, 'note.json'), JSON.stringify({ source: 'note', status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString() }));
+    const observation = { source: 'note', capability: SOURCES.note.capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID };
+    writeFileSync(join(input, 'note.json'), JSON.stringify(observation));
     execFileSync(process.execPath, [script, input], { cwd: temp });
     const path = join(temp, '.claude/state/metrics/authenticated/latest.json');
     const first = JSON.parse(readFileSync(path));
@@ -101,11 +218,26 @@ test('missing jobs remain failed and activated consumers never silently fall bac
     assert.equal(first.status, 'action_required');
     assert.equal(first.sources.find(s => s.source === 'note').activated, true);
     assert.equal(first.sources.find(s => s.source === 'a8').code, 'runner_failed');
-    writeFileSync(join(input, 'note.json'), JSON.stringify({ status: 'failed', code: 'auth_required', metricsAvailable: true }));
+    writeFileSync(join(input, 'note.json'), JSON.stringify({ ...observation, status: 'failed', code: 'auth_required', metricsAvailable: true }));
     execFileSync(process.execPath, [script, input], { cwd: temp });
     const second = JSON.parse(readFileSync(path)).sources.find(s => s.source === 'note');
     assert.equal(second.activated, true);
     assert.equal(second.metricsAvailable, false);
+    assert.equal(second.code, 'auth_required');
+    const current = { ...observation, runId: 'current-run' };
+    for (const invalid of [
+      { ...current, source: 'gsc' },
+      { ...current, capability: 'publication-status' },
+      { ...current, observedAt: '2020-01-01T00:00:00Z' },
+      { ...current, runId: 'old-run' }, null,
+    ]) {
+      writeFileSync(join(input, 'note.json'), JSON.stringify(invalid));
+      execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'current-run' } });
+      const rejected = JSON.parse(readFileSync(path)).sources.find(s => s.source === 'note');
+      assert.equal(rejected.code, 'invalid_observation');
+      assert.equal(rejected.status, 'failed');
+      assert.equal(rejected.metricsAvailable, false);
+    }
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
@@ -124,4 +256,16 @@ test('authenticated CI has no PR trigger, no raw artifacts, and includes all con
   assert.equal(workflow.jobs.record.steps.find(s=>s.id==='record').if,'always()');
   assert.match(source,/steps\.artifacts\.outcome/);
   assert.doesNotMatch(source, /pull_request|self-hosted|--commit|publishDraft/);
+});
+
+test('independent health and alert run even if an earlier artifact download failed', () => {
+  const workflow = yaml.load(readFileSync('.github/workflows/workflow-health-daily.yml', 'utf8'));
+  const steps = workflow.jobs.audit.steps;
+  assert.equal(steps.find(s=>s.id==='authenticated').if, 'always()');
+  const alert = steps.find(s=>s.name?.includes('連続失敗を Issue'));
+  assert.match(alert.if, /^always\(\) &&/);
+  for (const id of ['audit', 'freshness', 'affiliate_portfolio', 'authenticated']) {
+    assert.match(alert.if, new RegExp(`steps\\.${id}\\.outputs\\.\\w+ != 'true'`));
+  }
+  assert.match(alert.run, /if \[ -f \/tmp\/authenticated-health.txt \]/);
 });

@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-20
+updated: 2026-09-21
 ---
 
 # バックログ (タスクマスタ)
@@ -26,10 +26,10 @@ updated: 2026-09-20
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21]
 
 - **owner**: オーナー（初期/期限切れ認証）/ devops-runner（CI検証・release・鮮度監視）
-- **現状**: 2026-09-21に全セッション統合・本番反映の承認済み。CI run `35549710650` はA8成果・ココナラ計測・KDP出版状態が成功。もしも/afb/GSCは`auth_required`、noteは286記事中285記事で`report_incomplete`。失敗は固定Issue #1000で継続管理し、成功へ読み替えない。
-- **次**: `.claude/state/metrics/authenticated/latest.json`の再認証対象を本人の認証で復旧し、CI側の読み取り成功を確認する。noteの欠落1記事は取得契約と公開状態を照合する。PR #999はgreen確認後にmainへ反映し、初回scheduleの記録と48時間鮮度監視を確認する。
+- **現状**: CI run `35555921976`（GSC最終検証はattempt 2）でA8成果・もしも成果・ココナラ計測・GSC概要+5分類・KDP出版状態+昨日速報が成功しprivate R2 read-back済み。GSCは概要混入と引用符付きURLの30行脱落を修正し、consumerでも1000/1000/1000/431/21行を保持。旧`coverage-export`成功は無効。KDPは新しい認証世代を優先しReportsまで成功、22 ASINでサイト分離。afbは本人ログイン直後の別プロセスでも`auth_required`、noteは全ページ/合計一致でも286記事中285記事で`report_incomplete`（欠落`n99561600d4fe`）。固定Issue #1000を継続。独立監視run `35556507463`も監査・記録・Issue #763更新まで実証（未解決のため赤、全cron正常ではない）。
+- **次（実行順）**: ①afbは同一headedプロセス/提供元の正式なexport契約を確認し、同じ再ログインを反復しない。②noteは期間別ダッシュボードの欠落を提供元仕様と照合し、必要ならオーナーが問い合わせる。③初回18:20 JST schedule起動と48時間鮮度監視を実測する。④KDP確定ロイヤリティと商品別純収益の取得契約を決め、週次sales-ledgerの空欄を確定データで接続する（速報で代用しない）。
 - **完了条件**: 全collectorの実データ取得・private R2 read-back・固定Issueの復旧closeが成立し、mainのschedule起動証拠がある。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。
-- **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookieをgit/ログ/artifactへ出さない。KDP売上/KENP・afb成果の未実装は別途取得契約が必要で、出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
+- **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookieをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。確定収益台帳への自動記録・afb成果は別途取得契約が必要で、出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 
 ### [AFF-INTENT-FALLBACK-STOP-01] 意図が解決しない面への配信を止め、priority を期待収益順にする
 

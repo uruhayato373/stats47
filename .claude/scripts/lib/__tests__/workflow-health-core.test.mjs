@@ -212,7 +212,7 @@ test('日次 workflow が両方の監査を呼び、片方でも赤なら Issue 
   // どちらか一方でも異常なら Issue (&& にすると片方の異常を見逃す)
   assert.match(
     source,
-    /healthy == 'false' \|\| steps\.freshness\.outputs\.fresh == 'false'/,
+    /healthy != 'true' \|\| steps\.freshness\.outputs\.fresh != 'true'/,
     'Issue の条件が OR でない = 片方の異常を見逃す',
   );
   // 復旧 close は両方 healthy のときだけ (|| にすると異常が残っていても閉じる)
