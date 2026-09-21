@@ -1,6 +1,12 @@
 export { GeoAnalysisTracker } from './components/GeoAnalysisTracker';
 export { GeoAnalysisCards } from './components/GeoAnalysisCards';
+export {
+  GEO_HOME_ANALYSIS_LABELS,
+  GEO_HOME_ANALYSIS_NAV_ITEMS,
+  GEO_HOME_LAYER_NAV_ITEMS,
+} from './lib/geo-home-copy';
 export { GeoLayerCards } from './components/GeoLayerCards';
+export { GeoLayerNavigation } from './components/GeoLayerNavigation';
 export {
   loadGeoSourceCatalog,
   loadGeoSourceItem,

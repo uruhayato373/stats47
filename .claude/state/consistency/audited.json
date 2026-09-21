@@ -1,11 +1,8 @@
 {
-  "hash": "ee722a37014fedab95ed0d47386051dc840fb6c1283200e75021ded5b26f8e66",
-  "audited_at": "2026-09-21T00:32:22",
+  "hash": "3305f9dbdc3b400bc341355b032620cb3fe34d5f96f459e7f7cb8d92823c8ad6",
+  "audited_at": "2026-09-21T01:15:05",
   "files": [
     ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/collect.mjs",
-    ".claude/scripts/measurement/marketplace-status.mjs",
-    ".claude/scripts/measurement/report-parsers.mjs",
-    ".claude/scripts/measurement/summarize.mjs"
+    ".claude/scripts/measurement/bootstrap-session.mjs"
   ]
 }
