@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T01:16:00.249Z",
-  "runId": "35549710650",
+  "generatedAt": "2026-09-21T02:27:01.805Z",
+  "runId": "35553722697",
   "sources": [
     {
       "source": "moshimo",
       "capability": "outcomes",
-      "observedAt": "2026-09-21T01:07:55.104Z",
-      "activated": false,
-      "status": "failed",
-      "code": "auth_required",
-      "runId": "35549710650",
-      "metricsAvailable": false,
+      "observedAt": "2026-09-21T02:20:35.380Z",
+      "activated": true,
+      "status": "pass",
+      "code": null,
+      "runId": "35553722697",
+      "metricsAvailable": true,
       "evidence": {
-        "sha256": "bb61e58a6c4914983c642ece18f9060bc9aac4ff8b6ec72ece9dbec348db1059",
-        "bytes": 299
+        "sha256": "59cc68d4aa4b72541681fffca0ca9672b6d85913bd46b666d98b15615fcb1c74",
+        "bytes": 24044
       },
       "quality": null,
       "remaining": null
@@ -22,14 +22,14 @@
     {
       "source": "a8",
       "capability": "site-outcomes",
-      "observedAt": "2026-09-21T01:07:36.807Z",
+      "observedAt": "2026-09-21T02:21:09.474Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "35549710650",
+      "runId": "35553722697",
       "metricsAvailable": true,
       "evidence": {
-        "sha256": "3b41609b31291328467bf8c2f14891172b18c089682958ed9ed1f588434a82ac",
+        "sha256": "8d59d20d6a96359c358a51d2af1a954ae19c5a78537626a2077487857bd8ae53",
         "bytes": 106178
       },
       "quality": null,
@@ -38,14 +38,14 @@
     {
       "source": "afb",
       "capability": "partnership-status",
-      "observedAt": "2026-09-21T01:07:36.474Z",
+      "observedAt": "2026-09-21T02:20:51.998Z",
       "activated": false,
       "status": "failed",
       "code": "auth_required",
-      "runId": "35549710650",
+      "runId": "35553722697",
       "metricsAvailable": false,
       "evidence": {
-        "sha256": "6c47b427a65db6be781ebd067b34626204ffe81275c1e9ba9bdd5a3555d51c8e",
+        "sha256": "506c083be565929540f782075e0db5d1e81cd02e90b5f2976c5a773972e3cb82",
         "bytes": 917
       },
       "quality": null,
@@ -54,14 +54,14 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-09-21T01:07:36.680Z",
+      "observedAt": "2026-09-21T02:21:07.024Z",
       "activated": false,
       "status": "failed",
       "code": "report_incomplete",
-      "runId": "35549710650",
+      "runId": "35553722697",
       "metricsAvailable": false,
       "evidence": {
-        "sha256": "4f6663c61d092dfae676f765929b5face8baa71c380dae62d8f44daa002e70f1",
+        "sha256": "0bf1b19008bd1c55337d1d3ddf11565adfe4e1d75fdaac7f898ac7bfa823ce4f",
         "bytes": 1698680
       },
       "quality": {
@@ -76,14 +76,14 @@
     {
       "source": "gsc",
       "capability": "coverage-export",
-      "observedAt": "2026-09-21T01:07:40.930Z",
+      "observedAt": "2026-09-21T02:20:51.376Z",
       "activated": false,
       "status": "failed",
       "code": "auth_required",
-      "runId": "35549710650",
+      "runId": "35553722697",
       "metricsAvailable": false,
       "evidence": {
-        "sha256": "700fdfa0c81a4a349662484725577d1a6c17eb691fe09470863607c747241d1f",
+        "sha256": "a646af02e4a63b676ab54c1444642f92dedee2ec27dab75859218d0b50442eb7",
         "bytes": 559
       },
       "quality": null,
@@ -92,14 +92,14 @@
     {
       "source": "kdp",
       "capability": "publication-status",
-      "observedAt": "2026-09-21T01:08:02.946Z",
+      "observedAt": "2026-09-21T02:20:35.425Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "35549710650",
+      "runId": "35553722697",
       "metricsAvailable": false,
       "evidence": {
-        "sha256": "c59b514e17fa89bebc8e9d40dec21d5954b522a367cac093d5778b173583d63a",
+        "sha256": "c01ef3b504928fdcab129b001e80ccbd06c144e00246833408ff6c95db59701a",
         "bytes": 3808
       },
       "quality": null,
@@ -108,14 +108,14 @@
     {
       "source": "coconala",
       "capability": "marketplace-metrics",
-      "observedAt": "2026-09-21T01:07:43.538Z",
+      "observedAt": "2026-09-21T02:20:18.925Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "35549710650",
+      "runId": "35553722697",
       "metricsAvailable": true,
       "evidence": {
-        "sha256": "a9abc43eec5ce5113414525aaaa179cff08446e6312e222d29a99042dd49be86",
+        "sha256": "5b0ad2a9cfc6a2b365288828027004a8c0947003e00b84a05630be22328756ee",
         "bytes": 9160
       },
       "quality": null,
