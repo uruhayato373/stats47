@@ -74,7 +74,7 @@ gitに残すのは`.claude/state/metrics/authenticated/latest.json`の対象別�
 失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の`workflow-health-daily.yml`
 も48時間の鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
 収集範囲（capability）・対象source・実行ID・観測時刻が一致しないstatusは成功にしない。
-再実行は同名artifactが残るため、statusのファイル名を`<source>-<runAttempt>.json`に分離し、集約は最大attemptを選ぶ。最新attemptが失敗・不正なら古い成功に戻さない（2026-09-21の実CIで旧結果への巻き戻りを確認し回帰テスト追加）。
+再実行は同名artifactが残り、download側の同名除去が古い結果を選ぶことがある。対処はartifact名`authenticated-status-<source>-<runAttempt>`と中のファイル名`<source>-<runAttempt>.json`の両方を分離し、集約で最大attemptを選ぶこと。ファイル名だけの変更では未解決。最新attemptが失敗・不正なら古い成功に戻さず、収集jobの失敗中は警告をcloseしない（2026-09-21 CI `35560007703` attempts 3/4のdownloadログとgit記録の不一致で確認、回帰テスト追加）。
 afbは`site-conversion-outcomes`だけを受理し、旧`partnership-status`成功では成果取得を充足しない。
 公式APIは本日から30日以内の参照に限られるため、前日までの28日を毎日2回（発生日/確定日）取得する。
 partner IDは`affiliate-asp.json`の`asps.afb.api`、site IDは同設定の既存`sites.stats47`を使う。
