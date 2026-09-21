@@ -74,10 +74,12 @@ gitに残すのは`.claude/state/metrics/authenticated/latest.json`の対象別�
 失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の`workflow-health-daily.yml`
 も48時間の鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
 収集範囲（capability）・対象source・実行ID・観測時刻が一致しないstatusは成功にしない。
+再実行は同名artifactが残るため、statusのファイル名を`<source>-<runAttempt>.json`に分離し、集約は最大attemptを選ぶ。最新attemptが失敗・不正なら古い成功に戻さない（2026-09-21の実CIで旧結果への巻き戻りを確認し回帰テスト追加）。
 afbは`site-conversion-outcomes`だけを受理し、旧`partnership-status`成功では成果取得を充足しない。
 公式APIは本日から30日以内の参照に限られるため、前日までの28日を毎日2回（発生日/確定日）取得する。
 partner IDは`affiliate-asp.json`の`asps.afb.api`、site IDは同設定の既存`sites.stats47`を使う。
 全行の帰属・成果ID重複・基準日・承認状態・報酬数値・レスポンス形式を検証し、APIエラーを空配列にしない。
+HTTP成功時のJSON本文は配列として扱う。2026-09-21の実応答は`[]`で、仕様表の`response`を外側のJSONキーとは扱わない。エラーobject・不明な形式は停止する。非ゼロ明細の形式は公式仕様に基づくfixtureで検証し、実データが出た時も同じgateを通す。
 `restore.mjs afb`は正規化成果だけを`.local/authenticated-measurement/restored/afb.json`へ復元する。
 APIキーはオーナー承認を得てGitHub Actions Secret `AFB_API_KEY`へ登録し、git・ログ・artifact・vaultへ書かない。
 認証エラーはキーと公式設定を照合する。Cookie再ログインへのfallbackや無断再発行はしない。
