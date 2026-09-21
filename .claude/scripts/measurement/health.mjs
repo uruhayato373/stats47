@@ -9,9 +9,11 @@ export function measurementHealth(state, now = Date.now()) {
     const item = state?.sources?.find(s => s.source === source);
     const sourceAge = now - Date.parse(item?.observedAt);
     const current = fresh && Number.isFinite(sourceAge) && sourceAge >= -300000 && sourceAge <= 2 * 86400000;
-    return { source, capability: config.capability, status: current ? item.status : 'stale',
-      code: !current ? 'measurement_stale' : item.code ?? null, metricsAvailable: current && item.status === 'pass' && item.metricsAvailable === true,
-      remaining: source === 'kdp' ? 'sales_report_adapter_required' : source === 'afb' ? 'outcomes_not_collected' : null };
+    const compatible = item?.capability === config.capability;
+    return { source, capability: config.capability, status: !current ? 'stale' : !compatible ? 'failed' : item.status,
+      code: !current ? 'measurement_stale' : !compatible ? 'capability_mismatch' : item.code ?? null,
+      metricsAvailable: current && compatible && item.status === 'pass' && item.metricsAvailable === true,
+      remaining: source === 'kdp' ? 'finalized_royalties_not_collected' : source === 'afb' ? 'outcomes_not_collected' : null };
   });
   return { fresh, status: sources.every(s => s.status === 'pass') ? 'pass' : 'action_required', sources };
 }

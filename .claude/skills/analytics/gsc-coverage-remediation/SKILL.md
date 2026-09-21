@@ -24,7 +24,7 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
 ## ループ全体図
 
 ```
-[1] ユーザーが GSC UI から export (週次・10分)  → ~/Downloads に zip
+[1] 認証付き日次CIが GSC UI export → private R2（初回/期限切れログインは人間）
        ↓
 [2] ingest-gsc-export.py        cp932 zip を正規化 → coverage-drilldown/<週>/<category>-drilldown.csv + category-totals.json
        ↓
@@ -74,8 +74,9 @@ sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-
 ## 実行手順
 
 ### Phase 0 — 前提確認
-- ユーザーに「GSC UI から export 済みか」を確認。未取得なら `USER_EXPORT_GUIDE.md` Step 2/3 を案内
-  (インデックス作成 > ページ → 各カテゴリを開いて右上エクスポート → `~/Downloads` へ)。
+- まず`.claude/state/metrics/authenticated/latest.json`のGSC成否・鮮度を確認する。CIはprivate R2の最新成功を復元する。
+  認証未有効化/期限切れなら`docs/01_技術設計/07_Playwright認証プロファイル.md`の通常Chromeログイン→専用profile exportで復旧する。
+  手動exportを使う場合だけ`USER_EXPORT_GUIDE.md` Step 2/3を案内する。古い成功へ黙ってfallbackしない。
 - export 不要で「キュー状態だけ見たい」なら Phase 3 の `--no-probe` か `--next` だけ実行。
 
 ### Phase 1 — 取り込み (ingest)
@@ -143,7 +144,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
   URL Inspection / totals-history で確認してからでないと effect/full を付けない。
 
 ### Phase 7 — 経過観測 (次サイクルの起点)
-- 次週ユーザーが再 export → Phase 1-2 を再実行。`coverage-totals-history.csv` に週次の件数が積まれる。
+- 次週CIが認証付きexportを復元 → Phase 2を再実行。`coverage-totals-history.csv` に週次の件数が積まれる。
 - 判定指標: **404・soft404 の総件数が減少**、**登録済みが増加**、**resubmit した URL が indexed 化**。
 - done だった URL が再び壊れて検出されたら自動で再 actionable 化される (5xx 再発は pending に戻す)。
 
@@ -168,14 +169,13 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
 step には `timeout-minutes: 12` を置き、probe が長引いても週次計測本体を道連れにしない。
 
-**手動 (ローカル)**: **Phase 1 の export だけは CI で回せない**。GSC UI export は
-Google ログイン済み Playwright profile を要求し、GitHub Actions に持ち込めないため
-(A8 / note / KDP 系と同じ制約)。月次を目安にオーナーがローカルで
-`export-coverage-playwright.mjs` → `ingest-gsc-export.py` を実行して drilldown を更新する。
+**認証付き日次CI**: `authenticated-measurement.yml`がPhase 1のUI exportとingestを実行し、暗号化private R2へ保存する。
+週次側はsource allowlistで入力だけを復元する。初回成功後は最新試行失敗・48時間超で停止し、古いgit入力へfallbackしない。
+Googleの初回ログイン・期限切れ・2FAは人間工程として残す。APIの検索パフォーマンス取得とは別経路。
 
-- `/weekly-review` 前にユーザーが export (10分) → 本スキルで取り込み・是正。
+- `/weekly-review` 前に認証付き計測の成否と入力鮮度を確認し、未取得は欠測として扱う。
 - 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測) が毎日稼働。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
-  本スキルの週次手動アームは「UI export でしか取れない総件数・未把握URL」を補う (API は自サイト視点のみ)。
+  本スキルのUI export経路は「UI exportでしか取れない総件数・未把握URL」を補う。
 
 ## 関連
 - 運用正典: 本 SKILL（2026-07-12 に旧 GSC カバレッジ是正計画を統合。旧版は Git 履歴）
