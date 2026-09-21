@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-18",
+  "observedAt": "2026-09-21",
   "status": "pass",
   "themeCount": 55,
   "runtime": {
@@ -677,5 +677,5 @@
   "alertBody": "# テーマ継続確認\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
   "reviewInputSha256": "b356170fa8602704242a5778872fe6fb8b45387cea5da90a4502599658c37f29",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/35303333091"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/35558138740"
 }

@@ -27,7 +27,7 @@ jobs:
         include:
           - {source: moshimo, secret: MEASUREMENT_SESSION_MOSHIMO}
           - {source: a8, secret: MEASUREMENT_SESSION_A8}
-          - {source: afb, secret: MEASUREMENT_SESSION_AFB}
+          - {source: afb, secret: AFB_API_KEY}
           - {source: note, secret: MEASUREMENT_SESSION_NOTE}
           - {source: gsc, secret: MEASUREMENT_SESSION_GSC}
           - {source: kdp, secret: MEASUREMENT_SESSION_KDP}
@@ -41,20 +41,27 @@ jobs:
         with: {node-version: '20', cache: npm}
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+        if: matrix.source != 'afb'
       - name: Collect and verify private evidence
         env:
-          MEASUREMENT_SESSION: ${{ secrets[matrix.secret] }}
+          MEASUREMENT_SESSION: ${{ matrix.source != 'afb' && secrets[matrix.secret] || '' }}
+          AFB_API_KEY: ${{ matrix.source == 'afb' && secrets[matrix.secret] || '' }}
           MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
           R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
           SOURCE: ${{ matrix.source }}
-        run: xvfb-run --auto-servernum node .claude/scripts/measurement/collect.mjs "$SOURCE"
+        run: |
+          if [ "$SOURCE" = 'afb' ]; then
+            node .claude/scripts/measurement/collect.mjs "$SOURCE"
+          else
+            xvfb-run --auto-servernum node .claude/scripts/measurement/collect.mjs "$SOURCE"
+          fi
       - name: Upload credential-free status only
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.0
         with:
-          name: authenticated-status-${{ matrix.source }}
+          name: authenticated-status-${{ matrix.source }}-${{ github.run_attempt }}
           path: .local/authenticated-ci-public/*.json
           include-hidden-files: true
           retention-days: 30
@@ -103,7 +110,7 @@ jobs:
           TITLE='認証付き計測に要対応の取得元がある'
           gh label create authenticated-measurement-alert --description 'Authenticated measurement collection or session failure' --color b60205 --force
           EXISTING=$(gh issue list --state open --label authenticated-measurement-alert --limit 1 --json number --jq '.[0].number // empty')
-          if [ '${{ steps.record.outcome }}' = 'success' ] && [ '${{ steps.artifacts.outcome }}' = 'success' ] && jq -e --arg run "$GITHUB_RUN_ID" '.runId == $run and .status == "pass"' .claude/state/metrics/authenticated/latest.json >/dev/null; then
+          if [ '${{ needs.collect.result }}' = 'success' ] && [ '${{ steps.record.outcome }}' = 'success' ] && [ '${{ steps.artifacts.outcome }}' = 'success' ] && jq -e --arg run "$GITHUB_RUN_ID" '.runId == $run and .status == "pass"' .claude/state/metrics/authenticated/latest.json >/dev/null; then
             if [ -n "$EXISTING" ]; then gh issue close "$EXISTING" --comment "取得経路が復旧しました: $RUN_URL"; fi
           else
             if [ ! -f /tmp/authenticated-measurement-summary.md ]; then printf '収集または記録ジョブが完了しませんでした。\n' > /tmp/authenticated-measurement-summary.md; fi

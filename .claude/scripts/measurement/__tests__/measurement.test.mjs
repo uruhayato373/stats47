@@ -241,6 +241,30 @@ test('missing jobs remain failed and activated consumers never silently fall bac
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
+test('rerun artifacts select the latest attempt and never resurrect an older success', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-measurement-rerun-'));
+  const script = resolve('.claude/scripts/measurement/summarize.mjs');
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const observation = { source: 'afb', capability: SOURCES.afb.capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId: 'current-run', runAttempt: 4 };
+    writeFileSync(join(input, 'afb.json'), JSON.stringify({ ...observation, status: 'failed' }));
+    writeFileSync(join(input, 'afb-4.json'), JSON.stringify(observation));
+    const read = () => {
+      execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'current-run', GITHUB_RUN_ATTEMPT: '5' } });
+      return JSON.parse(readFileSync(join(temp, '.claude/state/metrics/authenticated/latest.json'))).sources.find(s => s.source === 'afb');
+    };
+    assert.equal(read().status, 'pass');
+    assert.equal(read().runAttempt, 4);
+    writeFileSync(join(input, 'afb-5.json'), JSON.stringify({ ...observation, runAttempt: 5, status: 'failed', code: 'api_auth_required' }));
+    assert.equal(read().code, 'api_auth_required');
+    for (const bad of ['not JSON', JSON.stringify(observation), JSON.stringify({ ...observation, runAttempt: 5, runId: 'old-run' })]) {
+      writeFileSync(join(input, 'afb-5.json'), bad);
+      assert.equal(read().code, 'invalid_observation');
+      assert.equal(read().metricsAvailable, false);
+    }
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
 test('authenticated CI has no PR trigger, no raw artifacts, and includes all configured services', () => {
   const source = readFileSync('.github/workflows/authenticated-measurement.yml', 'utf8');
   const workflow = yaml.load(source);
@@ -250,11 +274,13 @@ test('authenticated CI has no PR trigger, no raw artifacts, and includes all con
   assert.equal(workflow.permissions.contents, 'read');
   const upload = workflow.jobs.collect.steps.find(s => s.uses?.startsWith('actions/upload-artifact'));
   assert.equal(upload.with.path, '.local/authenticated-ci-public/*.json');
+  assert.equal(upload.with.name, 'authenticated-status-${{ matrix.source }}-${{ github.run_attempt }}', 'artifact identity must also separate attempts; filenames alone cannot prevent download de-duplication');
   assert.match(source, /gh issue close/);
   const download = workflow.jobs.record.steps.find(s=>s.id==='artifacts');
   assert.equal(download['continue-on-error'],undefined);
   assert.equal(workflow.jobs.record.steps.find(s=>s.id==='record').if,'always()');
   assert.match(source,/steps\.artifacts\.outcome/);
+  assert.match(source,/needs\.collect\.result/);
   assert.doesNotMatch(source, /pull_request|self-hosted|--commit|publishDraft/);
 });
 

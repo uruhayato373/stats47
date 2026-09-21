@@ -2,6 +2,7 @@
   "version": 1,
   "description": "Environment variable names and exposure classes. Values must never be stored here.",
   "variables": [
+    { "name": "AFB_API_KEY", "visibility": "secret", "contexts": ["secret", "process"] },
     { "name": "DISPLAY", "visibility": "server", "contexts": ["process"] },
     {
       "name": "MEASUREMENT_BROWSER_SOURCE",
@@ -446,6 +447,13 @@
     },
     {
       "name": "GITHUB_REPOSITORY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_RUN_ATTEMPT",
       "visibility": "server",
       "contexts": [
         "process"

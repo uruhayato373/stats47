@@ -16,6 +16,7 @@ if (!sourceName || args.includes('--help')) {
   process.exit(0);
 }
 const source = sourceFor(sourceName);
+if (source.transport === 'api') throw new Error(`api_source_requires_secret: configure ${source.apiSecret}; browser session export cannot activate this source`);
 if (args.includes('--reports') && (sourceName !== 'kdp' || !args.includes('--login'))) throw new Error('reports_requires_kdp_login');
 if (sourceName === 'gsc' && args.includes('--login')) throw new Error('google_login_requires_native_chrome: run google-admin/cli.mjs login, close that Chrome, then export with --from-profile --publish');
 const rootArg = args.indexOf('--root');

@@ -38,7 +38,8 @@ product code、対応format、scope、必要roleまで確認する。
 | Amazon KDP の出品 | 無い（Amazon が公開 API を提供していない） | Playwright |
 | note の記事投稿 | 公式 API 無し。非公開エンドポイントは note が保証せず規約・アカウントリスクがある | Playwright |
 | A8 の提携申請・広告コード取得 | メディア側の該当 API は見当たらない（A8 の公開 API は広告主・ASP 事業者向けの成果確定／成果連携） | Playwright |
-| ココナラ / もしも / afb | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
+| afb 成果データ取得 | [公式の成果情報API](https://www.afi-b.com/guide/api-linkage/)と[仕様書](https://drive.google.com/file/d/1-k9l9QA16sNhSzxtX7LK1A2szQx25OY7/view)（2023-12-25版、2026-09-21確認） | `AFB_API_KEY` Secretで公式APIを使う。成果取得ではCookieを移送しない。提携操作は別のローカル経路 |
+| ココナラ / もしも | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
 
 ### CI 実行について
 
@@ -56,7 +57,7 @@ product code、対応format、scope、必要roleまで確認する。
 |---|---|---|
 | もしも | site ID照合後の期間別成果 | 帰属不明・確定待ちを確定収益にしない |
 | A8 | 口座照合、サイト別月次CSV、reject検査 | 複数サイト共用口座の全体値をstats47にしない。個別案件EPCは別契約 |
-| afb | サイト帰属照合、提携/申請中一覧 | 成果・売上は未取得。別processへのsession移送を拒否されたら停止 |
+| afb | 公式APIでstats47の直近28日成果を発生日/確定日別に取得。要求site IDと全行のsite IDを照合 | 両系列は重なるため足さない。承認/未承認/却下を分離し、報酬を純収益・入金にしない。提携状態はCIの取得対象外 |
 | note | 帰属・期間・全ページ・合計・公開カタログ・カバーの照合 | 欠落記事はnull。不完全データを全件成功にしない |
 | GSC | property照合、概要と5分類の詳細CSV。ZIP内カテゴリ・件数・URLのサイト帰属をingestで照合 | APIの検索パフォーマンスとは別経路。概要CSVの成功を詳細CSV成功にしない。UI exportの上限は各分類1,000行 |
 | KDP | known ASINで口座照合、登録書籍の出版状態、昨日の注文/KENP/電子書籍ロイヤリティ見積り | Reportsは別認証。現版/旧版ASINと著者名を照合し共用口座の他サイト書籍を除外。確定ロイヤリティ/KU確定額/入金は未取得 |
@@ -73,6 +74,15 @@ gitに残すのは`.claude/state/metrics/authenticated/latest.json`の対象別�
 失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の`workflow-health-daily.yml`
 も48時間の鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
 収集範囲（capability）・対象source・実行ID・観測時刻が一致しないstatusは成功にしない。
+再実行は同名artifactが残り、download側の同名除去が古い結果を選ぶことがある。対処はartifact名`authenticated-status-<source>-<runAttempt>`と中のファイル名`<source>-<runAttempt>.json`の両方を分離し、集約で最大attemptを選ぶこと。ファイル名だけの変更では未解決。最新attemptが失敗・不正なら古い成功に戻さず、収集jobの失敗中は警告をcloseしない（2026-09-21 CI `35560007703` attempts 3/4のdownloadログとgit記録の不一致で確認、回帰テスト追加）。
+afbは`site-conversion-outcomes`だけを受理し、旧`partnership-status`成功では成果取得を充足しない。
+公式APIは本日から30日以内の参照に限られるため、前日までの28日を毎日2回（発生日/確定日）取得する。
+partner IDは`affiliate-asp.json`の`asps.afb.api`、site IDは同設定の既存`sites.stats47`を使う。
+全行の帰属・成果ID重複・基準日・承認状態・報酬数値・レスポンス形式を検証し、APIエラーを空配列にしない。
+HTTP成功時のJSON本文は配列として扱う。2026-09-21の実応答は`[]`で、仕様表の`response`を外側のJSONキーとは扱わない。エラーobject・不明な形式は停止する。非ゼロ明細の形式は公式仕様に基づくfixtureで検証し、実データが出た時も同じgateを通す。
+`restore.mjs afb`は正規化成果だけを`.local/authenticated-measurement/restored/afb.json`へ復元する。
+APIキーはオーナー承認を得てGitHub Actions Secret `AFB_API_KEY`へ登録し、git・ログ・artifact・vaultへ書かない。
+認証エラーはキーと公式設定を照合する。Cookie再ログインへのfallbackや無断再発行はしない。
 復元側もcapabilityを照合する。人間ログイン時刻を`bootstrapCapturedAt`として保持し、古いログイン由来のCI更新が新しいSecretを上書き選択しない。世代情報のない旧sessionはSecretより優先しない。
 KDPの昨日値はマーケットプレイス現地日付・速報値で、遅延や再集計がありうる。日次値の単純合算で確定週次売上を作らない。
 もしも/A8はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
@@ -144,7 +154,7 @@ archive skill だけが参照する profile は Active 一覧へ含めない。�
 同じ ASP アカウント内に複数サイトが存在するため、ログイン成功だけでは安全条件を満たさない。
 
 - もしも: 対象 site ID を config と照合する。
-- afb: storage state の別 process 復元や headless が拒否される場合がある。ログインから対象確認、操作完了まで同一 headed process で行う。
+- afbの提携操作: storage state の別 process 復元や headless が拒否される場合がある。ログインから対象確認、操作完了まで同一 headed process で行う。成果取得は上記の公式API経路へ分離する。
 
 ### ココナラ / KDP
 

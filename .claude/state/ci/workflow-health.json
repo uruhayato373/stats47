@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T03:09:38.965Z",
+  "generatedAt": "2026-09-21T03:26:48.727Z",
   "minStreak": 2,
   "perPage": 12,
   "checked": 46,
@@ -551,7 +551,7 @@
     {
       "workflow": "workflow-health-daily.yml",
       "unhealthy": true,
-      "failureStreak": 12,
+      "failureStreak": 11,
       "lastSuccessAt": null,
       "daysSinceSuccess": null,
       "everSucceeded": false,

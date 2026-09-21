@@ -107,7 +107,7 @@
 - [project_note_paid_landing_patch.md](project_note_paid_landing_patch.md) — 公開済みnote有料記事の無料部分はeditorを使わずPUTパッチで直す(所有者APIが全文・separator=最後の無料要素id・画像はpresigned S3 post)。添付制限に掛からず38商品を同日是正。specの数値は本文実在ゲート
 - [project_note_attachment_upload_limits.md](project_note_attachment_upload_limits.md) — note添付uploadは1日10回/アカウント(画像は別枠)。有料記事の添付再upload flowはdry runを繰り返さず1回で通す。ins_fileはUL直前anchor禁止・逆順挿入・非画像input選択
 - [project_note_update_mode_learnings.md](project_note_update_mode_learnings.md) — カバーはv3詳細eyecatchで監査、画像専用CLIで更新（本文再公開不要）。制作TS/GIS/Satori・保全hash・変更journal。本文updateのeval-click・有料境界・temp profileの注意点
-- [project_asp_site_attribution.md](project_asp_site_attribution.md) — A8/もしも/afb は stats47 と doboku-note が同一口座に同居。サイト帰属assertを通さないと他サイトの数値を誤認(afbで実害)。A8成果でstats47単独と言えるのはsite-rowsのみ
+- [project_asp_site_attribution.md](project_asp_site_attribution.md) — 3 ASP共用口座のサイト帰属assert。A8成果はsite-rows限定、afb成果APIはsite指定＋JSON配列（空応答を実測）、Cookie移送と分離
 - [feedback_playwright_profile_dual_os.md](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂
 - [feedback_windows_script_portability.md](feedback_windows_script_portability.md) — Windowsで落ちる3パターン: URL().pathnameの先頭スラッシュ(C:\C:\)/npxのspawn(ENOENT・Node22は.cmdをEINVAL)/Macパス直書き。node直起動とfileURLToPathで書く
 - [project_affiliate_banner_text_asymmetry.md](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する

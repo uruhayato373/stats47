@@ -7,6 +7,7 @@ import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sources.mjs';
 import { readVault, writeVault } from './vault.mjs';
+import { collectAfbOutcomes } from './afb-outcomes.mjs';
 
 const run = promisify(execFile);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -15,13 +16,15 @@ const source = sourceFor(name);
 const local = process.argv.includes('--local');
 const now = new Date().toISOString();
 const runId = process.env.GITHUB_RUN_ID || String(Date.now());
+const runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT || 1);
+if (!Number.isSafeInteger(runAttempt) || runAttempt < 1) throw new Error('invalid_run_attempt');
 // Bounded private history: one overwritable slot per UTC day in a 30-day ring.
 const historyKey = `${name}/runs/day-${Math.floor(Date.now() / 86400000) % 30}`;
 const work = join(ROOT, '.local/authenticated-measurement', `${name}-${runId}`);
 const publicDir = join(ROOT, '.local/authenticated-ci-public');
 mkdirSync(work, { recursive: true, mode: 0o700 });
 mkdirSync(publicDir, { recursive: true });
-const result = { schemaVersion: 1, source: name, capability: source.capability, observedAt: now, status: 'failed', code: null, runId,
+const result = { schemaVersion: 1, source: name, capability: source.capability, observedAt: now, status: 'failed', code: null, runId, runAttempt,
   metricsAvailable: false, evidence: null };
 let logs = '';
 let bundle;
@@ -52,23 +55,25 @@ async function command(script, args = [], timeout = 360000, acceptedCodes = []) 
   }
 }
 try {
-  let seed;
-  if (local) {
-    const index = process.argv.indexOf('--bootstrap');
-    const path = index < 0 ? null : process.argv[index + 1];
-    if (!path) throw new Error('session_missing');
-    seed = readFileSync(path, 'utf8');
-  } else seed = process.env.MEASUREMENT_SESSION;
-  if (seed) bundle = JSON.parse(gunzipSync(Buffer.from(seed, 'base64'), { maxOutputLength: 4 * 1024 * 1024 }));
-  if (!local) {
-    const remote = await readVault(`${name}/session`);
-    bundle = selectSessionBundle(bundle, remote);
-  }
-  if (!bundle || bundle.source !== name) throw new Error('session_missing');
-  writeFileSync(join(work, 'state.json'), JSON.stringify(scopedState(name, bundle.state)), { mode: 0o600 });
-  if (name === 'kdp') {
-    if (!/^B0[A-Z0-9]{8}$/.test(bundle.account?.knownAsin ?? '')) throw new Error('account_mismatch');
-    writeFileSync(join(ROOT, '.local/kdp-account.local.json'), JSON.stringify(bundle.account), { mode: 0o600 });
+  if (source.transport !== 'api') {
+    let seed;
+    if (local) {
+      const index = process.argv.indexOf('--bootstrap');
+      const path = index < 0 ? null : process.argv[index + 1];
+      if (!path) throw new Error('session_missing');
+      seed = readFileSync(path, 'utf8');
+    } else seed = process.env.MEASUREMENT_SESSION;
+    if (seed) bundle = JSON.parse(gunzipSync(Buffer.from(seed, 'base64'), { maxOutputLength: 4 * 1024 * 1024 }));
+    if (!local) {
+      const remote = await readVault(`${name}/session`);
+      bundle = selectSessionBundle(bundle, remote);
+    }
+    if (!bundle || bundle.source !== name) throw new Error('session_missing');
+    writeFileSync(join(work, 'state.json'), JSON.stringify(scopedState(name, bundle.state)), { mode: 0o600 });
+    if (name === 'kdp') {
+      if (!/^B0[A-Z0-9]{8}$/.test(bundle.account?.knownAsin ?? '')) throw new Error('account_mismatch');
+      writeFileSync(join(ROOT, '.local/kdp-account.local.json'), JSON.stringify(bundle.account), { mode: 0o600 });
+    }
   }
   if (name === 'moshimo') {
     await command('.claude/scripts/ads/moshimo-report.mjs');
@@ -87,8 +92,13 @@ try {
     capture(`.local/a8-ui/${marker.lastRun}`);
     for (const file of ['a8-ui-last-run.json', 'a8-results.json', 'a8-report-log.json']) capture(`.claude/state/metrics/affiliate/${file}`);
   } else if (name === 'afb') {
-    await command('.claude/scripts/ads/affiliate-status.mjs', ['--asp', 'afb']);
-    capture('.local/affiliate-status/latest.json');
+    const config = JSON.parse(readFileSync(join(ROOT, '.claude/config/affiliate-asp.json'), 'utf8'));
+    const outcomes = await collectAfbOutcomes({ config, apiKey: process.env.AFB_API_KEY, now: new Date(now) });
+    for (const [file, value] of Object.entries({ 'outcomes.json': outcomes.report, 'raw.json': outcomes.raw })) {
+      writeFileSync(join(work, file), JSON.stringify(value), { mode: 0o600 });
+      capture(`.local/authenticated-measurement/${name}-${runId}/${file}`);
+    }
+    result.quality = { siteVerified: true, occurrenceRows: outcomes.report.coverage.occurrence, recognitionRows: outcomes.report.coverage.recognition };
   } else if (name === 'note') {
     await command('.claude/scripts/note/audit-note-covers.mjs', [], 360000, [1]);
     await command('.claude/scripts/note/fetch-note-metrics.mjs', ['--output-dir', join(work, 'note')], 360000, [2]);
@@ -145,6 +155,7 @@ if (!local) {
   try { await writeVault(`${name}/latest-attempt`, result); }
   catch { result.status = 'failed'; result.code = 'storage_error'; }
 }
-writeFileSync(join(publicDir, `${name}.json`), JSON.stringify(result, null, 2) + '\n');
+// Re-running a job can retain same-named artifacts. Distinct filenames prevent merge races.
+writeFileSync(join(publicDir, `${name}-${runAttempt}.json`), JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify(result));
 process.exitCode = result.status === 'pass' ? 0 : 1;
