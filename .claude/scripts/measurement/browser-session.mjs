@@ -17,7 +17,9 @@ export async function measurementContext(source, { acceptDownloads = true } = {}
   if (!unattended()) return null;
   if (source !== process.env.MEASUREMENT_BROWSER_SOURCE) throw new Error('session_source_mismatch');
   const state = scopedState(source, JSON.parse(readFileSync(process.env.MEASUREMENT_BROWSER_STATE_PATH, 'utf8')));
-  const browser = await chromium.launch({ headless: !process.env.DISPLAY });
+  // Match the branded browser used by KDP's human bootstrap; do not emulate a UA.
+  const browser = await chromium.launch({ headless: !process.env.DISPLAY, ...(source === 'kdp' ? { channel: 'chrome' } : {}) });
+  if (source === 'kdp') console.log(JSON.stringify({ event: 'kdp_browser', channel: 'chrome', version: browser.version() }));
   let context;
   try {
     context = await browser.newContext({ storageState: state, acceptDownloads, locale: 'ja-JP', timezoneId: 'Asia/Tokyo', viewport: { width: 1440, height: 1000 } });
