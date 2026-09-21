@@ -78,6 +78,7 @@ afbは`site-conversion-outcomes`だけを受理し、旧`partnership-status`成�
 公式APIは本日から30日以内の参照に限られるため、前日までの28日を毎日2回（発生日/確定日）取得する。
 partner IDは`affiliate-asp.json`の`asps.afb.api`、site IDは同設定の既存`sites.stats47`を使う。
 全行の帰属・成果ID重複・基準日・承認状態・報酬数値・レスポンス形式を検証し、APIエラーを空配列にしない。
+HTTP成功時のJSON本文は配列として扱う。2026-09-21の実応答は`[]`で、仕様表の`response`を外側のJSONキーとは扱わない。エラーobject・不明な形式は停止する。非ゼロ明細の形式は公式仕様に基づくfixtureで検証し、実データが出た時も同じgateを通す。
 `restore.mjs afb`は正規化成果だけを`.local/authenticated-measurement/restored/afb.json`へ復元する。
 APIキーはオーナー承認を得てGitHub Actions Secret `AFB_API_KEY`へ登録し、git・ログ・artifact・vaultへ書かない。
 認証エラーはキーと公式設定を照合する。Cookie再ログインへのfallbackや無断再発行はしない。
