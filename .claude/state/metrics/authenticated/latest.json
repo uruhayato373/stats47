@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T04:50:05.572Z",
+  "generatedAt": "2026-09-21T04:54:19.219Z",
   "runId": "35561887453",
   "sources": [
     {
@@ -40,15 +40,15 @@
     {
       "source": "afb",
       "capability": "site-conversion-outcomes",
-      "observedAt": "2026-09-21T04:43:02.642Z",
+      "observedAt": "2026-09-21T04:53:56.937Z",
       "activated": true,
       "status": "pass",
       "code": null,
       "runId": "35561887453",
-      "runAttempt": 1,
+      "runAttempt": 2,
       "metricsAvailable": true,
       "evidence": {
-        "sha256": "86957bb0b8c808417f011f61ac2f41a61d94dae45e83b1437d71109265182d08",
+        "sha256": "e471149f7a8cdfd2e89c4d23af5046052ab62909044a895ecc4564eb4cd83066",
         "bytes": 1409
       },
       "quality": {
