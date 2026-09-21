@@ -8,6 +8,7 @@ export function consumerPath(name, path) {
     if (match) return `.claude/state/metrics/note/dashboard/${match[1]}`;
   }
   if (name === 'coconala' && /^\.local\/authenticated-measurement\/coconala-\d+\/status\.json$/.test(path)) return '.local/authenticated-measurement/restored/coconala.json';
+  if (name === 'kdp' && /^\.local\/authenticated-measurement\/kdp-\d+\/status\.json$/.test(path)) return '.local/authenticated-measurement/restored/kdp.json';
   return null;
 }
 

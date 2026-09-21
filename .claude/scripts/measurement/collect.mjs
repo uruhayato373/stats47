@@ -113,6 +113,7 @@ try {
   } else {
     await command('.claude/scripts/measurement/marketplace-status.mjs', [name, join(work, 'status.json')], 900000);
     capture(`.local/authenticated-measurement/${name}-${runId}/status.json`);
+    if (name === 'kdp') capture(`.local/authenticated-measurement/${name}-${runId}/status.xlsx`);
   }
   const evidence = { schemaVersion: 1, source: name, observedAt: now, files, logs };
   writeFileSync(join(work, 'evidence.json'), JSON.stringify(evidence), { mode: 0o600 });

@@ -104,6 +104,7 @@ jobs:
 
       - name: 認証付き計測の停止・古い成功を検出
         id: authenticated
+        if: always() # earlier audit/artifact failures must not disable this independent check
         run: |
           if node .claude/scripts/measurement/health.mjs --check > /tmp/authenticated-health.txt; then
             echo "fresh=true" >> "$GITHUB_OUTPUT"
@@ -126,7 +127,7 @@ jobs:
           echo "::warning::state の push に失敗した (監査結果自体は job summary にある)"
 
       - name: 🚨 連続失敗を Issue にする
-        if: steps.audit.outputs.healthy == 'false' || steps.freshness.outputs.fresh == 'false' || steps.affiliate_portfolio.outputs.fresh == 'false' || steps.authenticated.outputs.fresh == 'false'
+        if: always() && (steps.audit.outputs.healthy != 'true' || steps.freshness.outputs.fresh != 'true' || steps.affiliate_portfolio.outputs.fresh != 'true' || steps.authenticated.outputs.fresh != 'true')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -139,16 +140,16 @@ jobs:
             echo "実行ログ: ${RUN_URL}"
             echo
             echo '```'
-            cat /tmp/workflow-health.txt
+            if [ -f /tmp/workflow-health.txt ]; then cat /tmp/workflow-health.txt; else echo 'workflow audit did not complete'; fi
             echo '```'
             echo
             echo '```'
-            cat /tmp/r2-freshness.txt
+            if [ -f /tmp/r2-freshness.txt ]; then cat /tmp/r2-freshness.txt; else echo 'R2 freshness audit did not complete'; fi
             echo '```'
             echo
             echo '```'
-            cat /tmp/affiliate-portfolio-freshness.txt
-            cat /tmp/authenticated-health.txt
+            if [ -f /tmp/affiliate-portfolio-freshness.txt ]; then cat /tmp/affiliate-portfolio-freshness.txt; else echo 'affiliate artifact or audit did not complete'; fi
+            if [ -f /tmp/authenticated-health.txt ]; then cat /tmp/authenticated-health.txt; else echo 'authenticated measurement audit did not complete'; fi
             echo '```'
             echo
             echo "## 見かた"

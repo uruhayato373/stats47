@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /** Export only a named service's dedicated session; send through gh stdin, never stdout. */
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, mkdtempSync, cpSync, rmSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
@@ -11,10 +12,11 @@ import { sourceFor, scopedState } from './sources.mjs';
 
 const [sourceName, ...args] = process.argv.slice(2);
 if (!sourceName || args.includes('--help')) {
-  console.log('Usage: bootstrap-session.mjs SOURCE [--root PATH] [--from-profile | --login] [--publish]\nExports a dedicated profile/state. --login opens a dedicated browser for HUMAN login. --publish installs repository Secrets through stdin.');
+  console.log('Usage: bootstrap-session.mjs SOURCE [--root PATH] [--from-profile | --login] [--reports] [--publish]\nExports a dedicated profile/state. --login opens a dedicated browser for HUMAN login. --reports selects the KDP Reports login (KDP only). --publish installs repository Secrets through stdin.');
   process.exit(0);
 }
 const source = sourceFor(sourceName);
+if (args.includes('--reports') && (sourceName !== 'kdp' || !args.includes('--login'))) throw new Error('reports_requires_kdp_login');
 const rootArg = args.indexOf('--root');
 const root = resolve(rootArg < 0 ? process.cwd() : args[rootArg + 1]);
 const publish = args.includes('--publish');
@@ -36,14 +38,25 @@ else {
   const login = args.includes('--login');
   if (!existsSync(profile) && !login) throw new Error('session_missing');
   if (login && !process.stdin.isTTY) throw new Error('login_requires_interactive_terminal');
-  const context = await chromium.launchPersistentContext(profile, { channel: 'chrome', headless: !login });
+  // A normal Chrome profile uses the OS keychain, unlike Playwright's test profile.
+  // Export from a disposable copy: opening with incompatible defaults must never
+  // discard the user's original encrypted cookies.
+  const nativeProfile = sourceName === 'gsc' && args.includes('--from-profile');
+  const temporaryProfile = nativeProfile ? mkdtempSync(join(tmpdir(), 'stats47-measurement-profile-')) : null;
+  let context;
   try {
+    if (temporaryProfile) cpSync(profile, temporaryProfile, { recursive: true,
+      filter: path => !/(?:^|\/)(?:Singleton[^/]*|Cache|Code Cache|GPUCache|Crashpad)(?:\/|$)/.test(path) });
+    context = await chromium.launchPersistentContext(temporaryProfile ?? profile, {
+      channel: 'chrome', headless: !login,
+      ...(nativeProfile ? { ignoreDefaultArgs: ['--password-store=basic', '--use-mock-keychain'] } : {}),
+    });
     if (login) {
       const urls = { a8: 'https://pub.a8.net/', moshimo: 'https://af.moshimo.com/af/shop/index', afb: 'https://www.afi-b.com/pa/',
         note: 'https://note.com/settings/account', gsc: 'https://search.google.com/search-console?resource_id=sc-domain%3Astats47.jp',
         kdp: 'https://kdp.amazon.co.jp/ja_JP/bookshelf', coconala: 'https://coconala.com/mypage/dashboard' };
       const page = context.pages()[0] || await context.newPage();
-      await page.goto(urls[sourceName], { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await page.goto(args.includes('--reports') ? 'https://kdpreports.amazon.co.jp/' : urls[sourceName], { waitUntil: 'domcontentloaded', timeout: 60000 });
       const prompt = createInterface({ input: process.stdin, output: process.stdout });
       try { await prompt.question('専用ブラウザで対象アカウントへのログイン・2FAを完了後、Enterを押してください（10分以内）。パスワードをここへ入力しないでください。', { signal: AbortSignal.timeout(600000) }); }
       finally { prompt.close(); }
@@ -51,7 +64,10 @@ else {
     state = await context.storageState({ indexedDB: true });
     if (login && stateFile) writeFileSync(stateFile, JSON.stringify(scopedState(sourceName, state)), { mode: 0o600 });
   }
-  finally { await context.close(); }
+  finally {
+    try { await context?.close(); }
+    finally { if (temporaryProfile) rmSync(temporaryProfile, { recursive: true, force: true }); }
+  }
 }
 const bundle = { schemaVersion: 1, source: sourceName, capturedAt: new Date().toISOString(), state: scopedState(sourceName, state) };
 if (sourceName === 'kdp') {

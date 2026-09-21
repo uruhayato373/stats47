@@ -5,7 +5,7 @@ export const SOURCES = {
   afb: { domains: ['afi-b.com', 'affiliate-b.com'], profile: 'playwright-afb-profile', state: 'playwright-afb-state.json', secret: 'MEASUREMENT_SESSION_AFB', capability: 'partnership-status' },
   note: { domains: ['note.com'], profile: 'playwright-note-profile', secret: 'MEASUREMENT_SESSION_NOTE', capability: 'dashboard-metrics' },
   gsc: { domains: ['google.com'], profile: 'playwright-google-admin-profile', secret: 'MEASUREMENT_SESSION_GSC', capability: 'coverage-export' },
-  kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', secret: 'MEASUREMENT_SESSION_KDP', capability: 'publication-status' },
+  kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', secret: 'MEASUREMENT_SESSION_KDP', capability: 'publication-and-daily-sales' },
   coconala: { domains: ['coconala.com'], profile: 'playwright-coconala-profile', secret: 'MEASUREMENT_SESSION_COCONALA', capability: 'marketplace-metrics' },
 };
 
