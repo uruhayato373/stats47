@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T05:50:54.755Z",
+  "generatedAt": "2026-09-21T06:23:41.357Z",
   "runId": "35561887453",
   "sources": [
     {
@@ -101,16 +101,16 @@
     {
       "source": "kdp",
       "capability": "publication-and-daily-sales",
-      "observedAt": "2026-09-21T05:49:52.380Z",
+      "observedAt": "2026-09-21T06:17:00.741Z",
       "activated": true,
-      "status": "failed",
-      "code": "collection_failed",
+      "status": "pass",
+      "code": null,
       "runId": "35561887453",
-      "runAttempt": 3,
-      "metricsAvailable": false,
+      "runAttempt": 4,
+      "metricsAvailable": true,
       "evidence": {
-        "sha256": "5c8d8f046c2833fa660b1bddae2e5d0156e83e30615516762ed999060b557682",
-        "bytes": 1407
+        "sha256": "9ddcf1b9cfd263134c075e7300590aa117dec8d602d866e06041e5184f394c66",
+        "bytes": 16374
       },
       "quality": null,
       "remaining": "finalized_royalties_not_collected"
