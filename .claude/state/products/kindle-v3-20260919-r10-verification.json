@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-19T09:27:11.656Z",
+  "version": "v3-20260919-r10",
+  "epubcheckExecuted": true,
+  "books": 3,
+  "totalErrors": 0,
+  "crossBook": [],
+  "report": [
+    {
+      "id": "K-S1-02",
+      "version": "v3-20260919-r10",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-02/v3-20260919-r10/book.epub",
+      "epubSha256": "9cd3e7b501a809cd7dd50ec1081e5a36c3a628533a3b4183f704369d72ca1dc4",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "80d697d393b72c013b1915e993a00f6dcaf9124b6a4fb249468272f7806f0ff6"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "95215e78c156be8fdbadb2dfeacb252ce3e132e01facb8d66499c1c40f5512d3"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "1555153ef2f8ac965b01512e167c572980af3c8ad7a650326525d7a420c68e5d"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "c1b964e6d0b71fb533c5c0e19bb05173356bc395bbf8c4cb752d192099f6ad66"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "c6860f62edf698bde82969bb61464124354fbf5247ae0d450ceb436f9e07ffb5"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "6a8e94e5ead7205f1076602ba40ee843e90dd87bc42d9b36c0a83a289673eeff"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "6a78d8ff1e891d0d1b9419a2f839c052f9bf79e803c3dd7602a3953274862f51"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "47f2ac55584a344e2b87b4b87075cb8a20a0d59e806897d63eb26157b1a2e73a"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "8a748c199c65296ace24efd786ef173c805ce0d9f6d53e91db2d22d9d9b645ef"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e8b7508de3dca56cc67c39a363e609ea48fdd4d944937c4b04ce2bd04aa2a1ed"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "82fab79edf9802e20bdf8f4f489618f20dcf78cd699b1a21a58f318fa617d6ad"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    },
+    {
+      "id": "K-S1-06",
+      "version": "v3-20260919-r10",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-06/v3-20260919-r10/book.epub",
+      "epubSha256": "ef651c21f6857f6c19eb8d0fa1e2cf059be80f92d94512a712430e073036c9c7",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "d9037d526bae3a19beede59af4b93a9d62d69e3e2c852808c1c6e8cefe7bb02f"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "9cc43d8aa4afcb7179933007d8d56f3028abd50743f71ddd39c1147d431923cf"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "0bfa07e914d74201e360cb35a9dd0417741a8dd32294edaf0f235d047547bd61"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "33cb33928a9eb40907376aa3427b6cfaa4e4a3c2ccbbd7f50ffc7e1fbec1619a"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "ed2a3bdd801cc6a9ff8ed7d514b3b0e206cdb9fec3b6fe04e7952a9f796e5577"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "0cb6a7058f8301b5e9643096417c9cce2f9e8bc6e69fe51af5b6e21854850015"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "c3891fe01d875f1882ce29ddadb41698ce2cc46691aa0bfeb8372c020188e0c5"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "1daea16c3a423565ccee3d92e40616a916c7f92c1c0b185d1e5bf902ab8f3366"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "11b0138b4fba0c8ad41e0924273fcfb48579864411d6226dcc1bff14fa6c95dd"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e8b7508de3dca56cc67c39a363e609ea48fdd4d944937c4b04ce2bd04aa2a1ed"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "8b6f1de93d225a2e45c8aae38e7256fa325e96a2853b99f4d8b96f48e1f9e76d"
+        }
+      ],
+      "errors": 0,
+      "warns": 2,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap001.xhtml: 2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap004.xhtml: 1975,1991,2022,2004 が「年」と「年度」の両方で書かれている"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-09",
+      "version": "v3-20260919-r10",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-09/v3-20260919-r10/book.epub",
+      "epubSha256": "f535755d5b2b732d78fe885f8fa6998331310415939d6078438c66191c6556ad",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "9c53ea03b8724a03539e2d5585e3d2b02109dc188fc1db792a9e3d4d67dc7a78"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "283d716d15b013a4352e1e8b3b1ebeedd09b5255f5d5de2707e9ea9b7c45a44c"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "19884d712c356a299be189f421b209a70498557ef07c376faaa597c969017e97"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "ca3d141e55307ed9029f12b0433e89f9267e8f63ebde6c2b7007cf43d1286c06"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "42d69ad6b9aa02b535bb63a0df69f609bf0ce50146075b6038b4c5638f01176f"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "c6bbf7624ea70873fbaaae8480f24d88e2a037991fc4f25910f06dd1fd6f476a"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "fc3bd58e733bbf77255a77fb76bb4708f45b44135a95302f16438e17c38746ec"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "d0a682fb3b7e237cb6c5711d47f93c345f1e051d6870548dedeb8186c28b0b66"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "95aa3d4d6666a2719bc6fe4d9184e29685f1192deaae4355aa17e47d91938f39"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e8b7508de3dca56cc67c39a363e609ea48fdd4d944937c4b04ce2bd04aa2a1ed"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "001646f76da457a30395d8c6cc1ddf3f237b2948aa6cba914b6c0f5a7894a4c2"
+        }
+      ],
+      "errors": 0,
+      "warns": 1,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2020 が「年」と「年度」の両方で書かれている"
+        }
+      ]
+    }
+  ]
+}

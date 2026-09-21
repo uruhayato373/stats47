@@ -60,6 +60,9 @@ export function splitTitle(title: string): { main: string; rest?: string } {
   // 21 文字の塊は下限 96px でも 1 行に収まらず折り返すため (2026-08-12 に 32 冊中 11 冊が該当)。
   const space = t.match(/^(.+?)[ 　]+(.+)$/);
   if (space && t.length > 12) return { main: space[1].trim(), rest: space[2].trim() };
+  // 問い型の書名 (「年収が高い県は、暮らしも豊かなのか」17 字) は読点が自然な折り目 (2026-09-19)。
+  const comma = t.match(/^(.+?、)(.+)$/);
+  if (comma && t.length > 12) return { main: comma[1].trim(), rest: comma[2].trim() };
   return { main: t };
 }
 

@@ -100,6 +100,13 @@ describe("kdp-listings — ★読者が読む文章に社内の言葉を出さ�
     expect(bad).toEqual([]);
   });
 
+  it("ローマ字欄はKDPが許可する英数字・空白・ハイフンだけで書く", () => {
+    const bad = rows
+      .filter((r) => !/^[A-Za-z0-9 -]+$/.test(r.titleRomaji) || (r.subtitleRomaji && !/^[A-Za-z0-9 -]+$/.test(r.subtitleRomaji)))
+      .map((r) => r.id);
+    expect(bad).toEqual([]);
+  });
+
   it("著者は姓に入れて名を空にする (屋号のため)", () => {
     const bad = rows.filter((r) => r.authorLastName !== "stats47" || !r.authorKana?.trim()).map((r) => r.id);
     expect(bad).toEqual([]);

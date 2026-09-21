@@ -1,141 +1,133 @@
 {
-  "generatedAt": "2026-06-08T21:11:20.744Z",
-  "gscWeek": "2026-W23",
+  "generatedAt": "2026-09-20T07:22:36.467Z",
+  "gscWeek": "2026-W38",
   "method": "winner/loser = CTR 三分位 (imp>=15)。主指標 CTR+position、滞在(GA4)は未統合",
   "sample": {
-    "evaluated": 117,
-    "winners": 39,
-    "losers": 39
+    "evaluated": 333,
+    "winners": 111,
+    "losers": 111
   },
   "winnerProfile": {
-    "medianCtr": 0.0645,
-    "medianPosition": 7.38,
+    "medianCtr": 0.0458,
+    "medianPosition": 6.77,
     "topExamples": [
       {
-        "slug": "assembly-answer-chatgpt-5steps",
-        "ctr": 0.1786,
-        "position": 9.5,
+        "slug": "mackerel-expenditure-ranking",
+        "ctr": 0.2105,
+        "position": 7.42,
+        "archetype": "D2"
+      },
+      {
+        "slug": "household-spending-prefecture-gap",
+        "ctr": 0.1597,
+        "position": 5.03,
+        "archetype": "D"
+      },
+      {
+        "slug": "pollution-complaints-regional-map",
+        "ctr": 0.1579,
+        "position": 7.89,
         "archetype": null
       },
       {
-        "slug": "sake-consumption-prefecture-gap",
-        "ctr": 0.1667,
-        "position": 6.92,
+        "slug": "childcare-friendly-prefecture-ranking",
+        "ctr": 0.1457,
+        "position": 3.99,
         "archetype": null
       },
       {
-        "slug": "foreign-population-growth-rate",
-        "ctr": 0.1489,
-        "position": 6.3,
+        "slug": "noodle-consumption-prefecture-character",
+        "ctr": 0.1398,
+        "position": 4.03,
         "archetype": null
       },
       {
         "slug": "engel-coefficient-prefecture-ranking",
-        "ctr": 0.1389,
-        "position": 4.81,
+        "ctr": 0.1369,
+        "position": 5.03,
         "archetype": null
       },
       {
-        "slug": "farmland-crisis-abandoned-land",
-        "ctr": 0.1264,
-        "position": 6.4,
-        "archetype": null
+        "slug": "furikake-expenditure-ranking",
+        "ctr": 0.1351,
+        "position": 6.05,
+        "archetype": "D2"
       },
       {
-        "slug": "ai-claude-code-pref-analysis",
-        "ctr": 0.125,
-        "position": 3.96,
-        "archetype": null
-      },
-      {
-        "slug": "workplace-accident-regional-map",
-        "ctr": 0.125,
-        "position": 5.83,
-        "archetype": null
-      },
-      {
-        "slug": "ict-media-consumption-gender-gap",
-        "ctr": 0.1053,
-        "position": 6.26,
-        "archetype": null
+        "slug": "shiga-food-culture",
+        "ctr": 0.1333,
+        "position": 5.73,
+        "archetype": "E"
       }
     ]
   },
   "loserProfile": {
     "medianCtr": 0,
-    "medianPosition": 8.08
+    "medianPosition": 7.59
   },
   "featureSignals": [
     {
       "feature": "prosePerChart",
       "kind": "num",
-      "winnerMedian": 550,
-      "loserMedian": 914,
-      "delta": -364,
+      "winnerMedian": 1076.5,
+      "loserMedian": 1343,
+      "delta": -266.5,
       "confidence": "hi"
     },
     {
       "feature": "prose",
       "kind": "num",
-      "winnerMedian": 2306,
-      "loserMedian": 2413,
-      "delta": -107,
-      "confidence": "hi"
-    },
-    {
-      "feature": "introChars",
-      "kind": "num",
-      "winnerMedian": 261,
-      "loserMedian": 286,
-      "delta": -25,
-      "confidence": "hi"
-    },
-    {
-      "feature": "hasLine",
-      "kind": "bool",
-      "winnerRate": 23.1,
-      "loserRate": 46.2,
-      "lift": -23.1,
-      "confidence": "hi"
-    },
-    {
-      "feature": "curiosityGap",
-      "kind": "bool",
-      "winnerRate": 28.2,
-      "loserRate": 48.7,
-      "lift": -20.5,
-      "confidence": "hi"
-    },
-    {
-      "feature": "titleLen",
-      "kind": "num",
-      "winnerMedian": 17,
-      "loserMedian": 33,
-      "delta": -16,
+      "winnerMedian": 2959,
+      "loserMedian": 3079,
+      "delta": -120,
       "confidence": "hi"
     },
     {
       "feature": "hasMap",
       "kind": "bool",
-      "winnerRate": 56.4,
-      "loserRate": 41,
-      "lift": 15.4,
+      "winnerRate": 45.9,
+      "loserRate": 27.9,
+      "lift": 18,
       "confidence": "hi"
     },
     {
       "feature": "hasScatter",
       "kind": "bool",
-      "winnerRate": 48.7,
-      "loserRate": 33.3,
-      "lift": 15.4,
+      "winnerRate": 35.1,
+      "loserRate": 24.3,
+      "lift": 10.8,
+      "confidence": "hi"
+    },
+    {
+      "feature": "curiosityGap",
+      "kind": "bool",
+      "winnerRate": 70.3,
+      "loserRate": 65.8,
+      "lift": 4.5,
+      "confidence": "hi"
+    },
+    {
+      "feature": "hasLine",
+      "kind": "bool",
+      "winnerRate": 11.7,
+      "loserRate": 15.3,
+      "lift": -3.6,
+      "confidence": "hi"
+    },
+    {
+      "feature": "titleLen",
+      "kind": "num",
+      "winnerMedian": 22,
+      "loserMedian": 24,
+      "delta": -2,
       "confidence": "hi"
     },
     {
       "feature": "desumasu",
       "kind": "bool",
-      "winnerRate": 69.2,
-      "loserRate": 56.4,
-      "lift": 12.8,
+      "winnerRate": 98.2,
+      "loserRate": 100,
+      "lift": -1.8,
       "confidence": "hi"
     },
     {
@@ -149,16 +141,16 @@
     {
       "feature": "callouts",
       "kind": "num",
-      "winnerMedian": 2,
+      "winnerMedian": 3,
       "loserMedian": 3,
-      "delta": -1,
+      "delta": 0,
       "confidence": "hi"
     },
     {
       "feature": "internalLinks",
       "kind": "num",
-      "winnerMedian": 6,
-      "loserMedian": 6,
+      "winnerMedian": 5,
+      "loserMedian": 5,
       "delta": 0,
       "confidence": "hi"
     },
@@ -169,88 +161,90 @@
       "loserMedian": 6,
       "delta": 0,
       "confidence": "hi"
+    },
+    {
+      "feature": "introChars",
+      "kind": "num",
+      "winnerMedian": 353,
+      "loserMedian": 353,
+      "delta": 0,
+      "confidence": "hi"
     }
   ],
   "confounders": {
     "note": "CTR は掲載順位に強く依存。winner が単に上位表示でないか、特徴が順位統制後も残るかを検証",
-    "medianPositionAll": 7.86,
-    "winnerMedianPosition": 7.38,
-    "loserMedianPosition": 8.13,
-    "corr_titleLen_position": 0.04,
-    "corr_ctr_position": -0.29,
+    "medianPositionAll": 7.16,
+    "winnerMedianPosition": 6.77,
+    "loserMedianPosition": 7.59,
+    "corr_titleLen_position": 0.07,
+    "corr_ctr_position": -0.23,
     "winnerMedianYear": 2026,
     "loserMedianYear": 2026,
     "positionControlledBand": {
-      "q1Position": 7.08,
-      "q3Position": 8.87,
-      "n": 59
+      "q1Position": 6.32,
+      "q3Position": 8.09,
+      "n": 168
     },
     "robustSignals": [
       {
         "feature": "prosePerChart",
-        "rawEffect": -364,
-        "positionControlledEffect": -240,
+        "rawEffect": -266.5,
+        "positionControlledEffect": -142.5,
         "verdict": "robust"
       },
       {
         "feature": "prose",
-        "rawEffect": -107,
-        "positionControlledEffect": -119,
-        "verdict": "robust"
-      },
-      {
-        "feature": "introChars",
-        "rawEffect": -25,
-        "positionControlledEffect": -26,
-        "verdict": "robust"
-      },
-      {
-        "feature": "hasLine",
-        "rawEffect": -23.1,
-        "positionControlledEffect": -24.2,
-        "verdict": "robust"
-      },
-      {
-        "feature": "curiosityGap",
-        "rawEffect": -20.5,
-        "positionControlledEffect": -6.9,
-        "verdict": "weakened"
-      },
-      {
-        "feature": "titleLen",
-        "rawEffect": -16,
-        "positionControlledEffect": -18,
+        "rawEffect": -120,
+        "positionControlledEffect": -156,
         "verdict": "robust"
       },
       {
         "feature": "hasMap",
-        "rawEffect": 15.4,
-        "positionControlledEffect": 6.9,
-        "verdict": "weakened"
+        "rawEffect": 18,
+        "positionControlledEffect": 14.2,
+        "verdict": "robust"
       },
       {
         "feature": "hasScatter",
-        "rawEffect": 15.4,
-        "positionControlledEffect": 10.3,
+        "rawEffect": 10.8,
+        "positionControlledEffect": 7.2,
+        "verdict": "robust"
+      },
+      {
+        "feature": "curiosityGap",
+        "rawEffect": 4.5,
+        "positionControlledEffect": 10.7,
+        "verdict": "robust"
+      },
+      {
+        "feature": "hasLine",
+        "rawEffect": -3.6,
+        "positionControlledEffect": -7.2,
+        "verdict": "robust"
+      },
+      {
+        "feature": "titleLen",
+        "rawEffect": -2,
+        "positionControlledEffect": -2.5,
         "verdict": "robust"
       },
       {
         "feature": "desumasu",
-        "rawEffect": 12.8,
-        "positionControlledEffect": 17.2,
+        "rawEffect": -1.8,
+        "positionControlledEffect": -1.2,
         "verdict": "robust"
       },
       {
         "feature": "chartCount",
         "rawEffect": 1,
-        "positionControlledEffect": 1,
-        "verdict": "robust"
+        "positionControlledEffect": 0,
+        "verdict": "confounded"
       },
       {
         "feature": "callouts",
-        "rawEffect": -1,
-        "positionControlledEffect": -1,
-        "verdict": "robust"
+        "rawEffect": 0,
+        "positionControlledEffect": 0,
+        "verdict": "confounded"
       },
       {
         "feature": "internalLinks",
@@ -261,258 +255,256 @@
       {
         "feature": "h2",
         "rawEffect": 0,
-        "positionControlledEffect": -1,
+        "positionControlledEffect": 0,
+        "verdict": "confounded"
+      },
+      {
+        "feature": "introChars",
+        "rawEffect": 0,
+        "positionControlledEffect": 11.5,
         "verdict": "confounded"
       }
     ]
   },
   "perArticleConformance": [
     {
-      "slug": "library-books-prefecture-gap",
-      "conformance": 0
-    },
-    {
-      "slug": "local-debt-current-ratio-prefecture-gap",
-      "conformance": 0
-    },
-    {
-      "slug": "sake-consumption-prefecture-gap",
-      "conformance": 0
-    },
-    {
-      "slug": "train-commuters-prefecture-gap",
-      "conformance": 0
-    },
-    {
       "slug": "cc-estat-20-publish",
-      "conformance": 0.2
-    },
-    {
-      "slug": "fresh-udon-soba-consumption-prefecture-gap",
-      "conformance": 0.2
-    },
-    {
-      "slug": "outpatient-rate-prefecture-gap",
-      "conformance": 0.2
-    },
-    {
-      "slug": "whisky-consumption-prefecture-gap",
-      "conformance": 0.2
-    },
-    {
-      "slug": "housing-cost-livability-trend",
-      "conformance": 0.21
-    },
-    {
-      "slug": "fishery-catch-aquaculture-shift",
-      "conformance": 0.25
-    },
-    {
-      "slug": "chicken-consumption-quantity",
-      "conformance": 0.29
-    },
-    {
-      "slug": "savings-rate-gap",
-      "conformance": 0.29
-    },
-    {
-      "slug": "aging-rate-akita-vs-okinawa",
-      "conformance": 0.3
-    },
-    {
-      "slug": "beef-consumption-prefecture-gap",
-      "conformance": 0.35
-    },
-    {
-      "slug": "dairy-cattle-hokkaido-monopoly",
-      "conformance": 0.35
-    },
-    {
-      "slug": "unemployment-tertiary-industry-link",
-      "conformance": 0.35
-    },
-    {
-      "slug": "unemployment-structure",
-      "conformance": 0.39
-    },
-    {
-      "slug": "ai-claude-code-pref-analysis",
       "conformance": 0.4
     },
     {
-      "slug": "cc-estat-01-setup",
-      "conformance": 0.4
-    },
-    {
-      "slug": "cc-estat-02-search-skill",
-      "conformance": 0.4
-    },
-    {
-      "slug": "manufacturing-labor-productivity-pref",
-      "conformance": 0.4
-    },
-    {
-      "slug": "marriage-divorce-okinawa",
-      "conformance": 0.4
-    },
-    {
-      "slug": "roadside-station-prefecture-gap",
-      "conformance": 0.4
-    },
-    {
-      "slug": "manufacturing-shipment-prefecture-ranking",
-      "conformance": 0.42
-    },
-    {
-      "slug": "electricity-demand-gap",
-      "conformance": 0.43
-    },
-    {
-      "slug": "sugar-consumption-prefecture-gap",
-      "conformance": 0.43
-    },
-    {
-      "slug": "dual-income-reversal",
+      "slug": "dual-income-childcare-dilemma",
       "conformance": 0.45
-    },
-    {
-      "slug": "fertility-rate-prefecture-gap",
-      "conformance": 0.45
-    },
-    {
-      "slug": "agriculture-hokkaido-dominance",
-      "conformance": 0.46
     },
     {
       "slug": "fishery-species-prefecture-specialty",
-      "conformance": 0.46
+      "conformance": 0.45
     },
     {
-      "slug": "library-museum-cultural-capital",
-      "conformance": 0.46
-    },
-    {
-      "slug": "minimum-wage-gap-regional-economy",
-      "conformance": 0.46
-    },
-    {
-      "slug": "commercial-land-price-trend",
+      "slug": "population-density-urbanization",
       "conformance": 0.48
     },
     {
-      "slug": "local-tax-regional-gap",
-      "conformance": 0.48
-    },
-    {
-      "slug": "software-engineer-salary-prefecture-gap",
+      "slug": "estat-7-techniques-from-unusable-to-usable",
       "conformance": 0.49
     },
     {
-      "slug": "assembly-answer-chatgpt-5steps",
+      "slug": "local-tax-revenue-gap",
       "conformance": 0.5
     },
     {
-      "slug": "brazilian-resident-population-prefecture-gap",
+      "slug": "nursing-care-shortage-2040",
       "conformance": 0.5
     },
     {
-      "slug": "minimum-wage-1000yen-breakthrough",
+      "slug": "udon-soba-food-culture-prefecture-map",
       "conformance": 0.5
     },
     {
-      "slug": "sewerage-water-supply-gap",
+      "slug": "food-spending-pattern",
       "conformance": 0.51
     },
     {
-      "slug": "commercial-sales-productivity-gap",
+      "slug": "small-business-dominance-map",
+      "conformance": 0.51
+    },
+    {
+      "slug": "depopulation-area-medical-facilities",
+      "conformance": 0.52
+    },
+    {
+      "slug": "marriage-divorce-okinawa",
+      "conformance": 0.52
+    },
+    {
+      "slug": "koumuin-claude-code-estat-automation",
       "conformance": 0.53
     },
     {
-      "slug": "curry-roux-consumption-gap",
-      "conformance": 0.53
+      "slug": "marriage-unmarried-crisis",
+      "conformance": 0.55
     },
     {
-      "slug": "prefectural-height-male-female-gap",
-      "conformance": 0.53
+      "slug": "wage-vs-living-cost",
+      "conformance": 0.55
     },
     {
-      "slug": "safe-driving-5-features",
-      "conformance": 0.53
+      "slug": "highway-japan-58years",
+      "conformance": 0.56
     },
     {
-      "slug": "extreme-heat-days-prefecture",
-      "conformance": 0.57
+      "slug": "manufacturing-aichi-dominance",
+      "conformance": 0.56
     },
     {
-      "slug": "wheat-flour-consumption-prefecture",
+      "slug": "wheat-flour-consumption-food-culture-gap",
+      "conformance": 0.56
+    },
+    {
+      "slug": "cc-estat-02-search-skill",
       "conformance": 0.57
     },
     {
       "slug": "konbu-consumption-prefecture-gap",
+      "conformance": 0.57
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "conformance": 0.57
+    },
+    {
+      "slug": "public-phone-prefecture-vanishing",
+      "conformance": 0.57
+    },
+    {
+      "slug": "ai-claude-code-pref-analysis",
       "conformance": 0.58
     },
     {
-      "slug": "pharmacy-count-prefecture-ranking",
+      "slug": "area-ratio-prefecture-gap",
+      "conformance": 0.58
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male",
+      "conformance": 0.58
+    },
+    {
+      "slug": "general-households-prefecture-gap",
+      "conformance": 0.58
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "conformance": 0.58
+    },
+    {
+      "slug": "municipality-count-prefecture-gap",
+      "conformance": 0.58
+    },
+    {
+      "slug": "school-teacher-annual-income",
+      "conformance": 0.58
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "conformance": 0.58
+    },
+    {
+      "slug": "convenience-store-density-map",
       "conformance": 0.59
     },
     {
-      "slug": "recycling-rate-gap",
+      "slug": "day-time-population-prefecture-gap",
       "conformance": 0.59
     },
     {
-      "slug": "population-density-urbanization",
+      "slug": "future-population-tokyo-paradox",
+      "conformance": 0.59
+    },
+    {
+      "slug": "manufacturing-establishments-prefecture-gap",
+      "conformance": 0.59
+    },
+    {
+      "slug": "natural-increase-rate-prefecture-gap",
+      "conformance": 0.59
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "conformance": 0.59
+    },
+    {
+      "slug": "waste-management-recycling-gap",
+      "conformance": 0.59
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
       "conformance": 0.6
     },
     {
-      "slug": "telework-gap-tokyo-6x",
+      "slug": "foreign-residents-diversity-map",
       "conformance": 0.6
     },
     {
-      "slug": "abortion-rate-prefecture-gap",
+      "slug": "ict-media-consumption-gender-gap",
+      "conformance": 0.6
+    },
+    {
+      "slug": "pachinko-participation-prefecture-gap",
+      "conformance": 0.6
+    },
+    {
+      "slug": "rice-consumption-quantity-ranking",
+      "conformance": 0.6
+    },
+    {
+      "slug": "safe-driving-5-features",
+      "conformance": 0.6
+    },
+    {
+      "slug": "tofu-consumption-prefecture-gap",
+      "conformance": 0.6
+    },
+    {
+      "slug": "cc-estat-01-setup",
       "conformance": 0.61
     },
     {
-      "slug": "inflation-rate-prefecture-gap",
+      "slug": "elementary-school-children-count",
       "conformance": 0.61
     },
     {
-      "slug": "precipitation-snow-regional-gap",
+      "slug": "fiscal-self-reliance-gap",
       "conformance": 0.61
     },
     {
-      "slug": "birth-death-gap-decline",
+      "slug": "forest-coverage-woodland-economy",
+      "conformance": 0.61
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "conformance": 0.61
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
       "conformance": 0.62
     },
     {
-      "slug": "bonito-catch-prefecture",
+      "slug": "suicide-rate-aging-nexus",
       "conformance": 0.62
     },
     {
-      "slug": "international-cooperation-volunteer-map",
+      "slug": "wakayama-food-culture",
       "conformance": 0.62
     },
     {
-      "slug": "cpi-change-regional-pattern",
+      "slug": "cc-estat-12-housing-treemap",
       "conformance": 0.63
     },
     {
-      "slug": "crime-rate-regional-gap",
+      "slug": "fukushima-food-culture",
       "conformance": 0.63
     },
     {
-      "slug": "foreign-population-growth-rate",
+      "slug": "highschool-starting-salary-gap",
       "conformance": 0.63
     },
     {
-      "slug": "firefighting-capacity-gap",
+      "slug": "kochi-food-culture",
+      "conformance": 0.63
+    },
+    {
+      "slug": "water-infrastructure-crisis",
+      "conformance": 0.63
+    },
+    {
+      "slug": "cc-estat-09-radar-prefecture",
       "conformance": 0.64
     },
     {
-      "slug": "fiscal-health-50years-trend",
+      "slug": "energy-infrastructure-gas-electricity",
       "conformance": 0.64
     },
     {
-      "slug": "foreign-overnight-guests-prefecture-gap",
+      "slug": "park-green-space-gap",
       "conformance": 0.64
     },
     {
@@ -520,51 +512,191 @@
       "conformance": 0.64
     },
     {
-      "slug": "communication-cost-burden",
+      "slug": "sports-urban-paradox",
+      "conformance": 0.64
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "conformance": 0.64
+    },
+    {
+      "slug": "2050-population-map-reading",
       "conformance": 0.65
     },
     {
-      "slug": "household-spending-prefecture-gap",
+      "slug": "annual-precipitation-rainy-season-gap",
       "conformance": 0.65
     },
     {
-      "slug": "local-government-debt-burden",
+      "slug": "assembly-answer-chatgpt-5steps",
       "conformance": 0.65
     },
     {
-      "slug": "marriage-unmarried-crisis",
+      "slug": "fukuoka-food-culture",
+      "conformance": 0.65
+    },
+    {
+      "slug": "library-books-prefecture-gap",
+      "conformance": 0.65
+    },
+    {
+      "slug": "lotus-root-green-beans-mandarin-consumption",
+      "conformance": 0.65
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "conformance": 0.65
+    },
+    {
+      "slug": "sunshine-pacific-vs-nihonkai",
+      "conformance": 0.65
+    },
+    {
+      "slug": "train-commuters-prefecture-gap",
+      "conformance": 0.65
+    },
+    {
+      "slug": "waiting-children-progress",
+      "conformance": 0.65
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "conformance": 0.65
+    },
+    {
+      "slug": "yogurt-spending-prefecture-gap",
+      "conformance": 0.65
+    },
+    {
+      "slug": "automotive-industry-transformation-map",
       "conformance": 0.66
     },
     {
-      "slug": "forest-coverage-woodland-economy",
+      "slug": "beef-consumption-quantity",
+      "conformance": 0.66
+    },
+    {
+      "slug": "bonito-vs-oyster-fish-map",
+      "conformance": 0.66
+    },
+    {
+      "slug": "habitable-area-land-use",
+      "conformance": 0.66
+    },
+    {
+      "slug": "hama-ura-tsu-coastal-place-names",
+      "conformance": 0.66
+    },
+    {
+      "slug": "renewable-energy-regional-gap",
+      "conformance": 0.66
+    },
+    {
+      "slug": "roadside-station-prefecture-gap",
+      "conformance": 0.66
+    },
+    {
+      "slug": "students-per-teacher-class-size-gap",
+      "conformance": 0.66
+    },
+    {
+      "slug": "advancement-plus-employment-rate-prefecture",
       "conformance": 0.67
     },
     {
-      "slug": "pharma-medical-device-production-map",
+      "slug": "bonito-catch-prefecture",
       "conformance": 0.67
     },
     {
-      "slug": "semiconductor-electronics-regional-map",
+      "slug": "child-height-regional-gap",
       "conformance": 0.67
     },
     {
-      "slug": "water-infrastructure-crisis",
+      "slug": "food-consumption-prefecture-battle",
       "conformance": 0.67
     },
     {
-      "slug": "farmland-crisis-abandoned-land",
+      "slug": "household-structure-transformation",
+      "conformance": 0.67
+    },
+    {
+      "slug": "natto-consumption-east-west-divide",
+      "conformance": 0.67
+    },
+    {
+      "slug": "piano-ownership-prefecture-gap",
+      "conformance": 0.67
+    },
+    {
+      "slug": "temperature-extremes-map",
+      "conformance": 0.67
+    },
+    {
+      "slug": "chicken-consumption-quantity",
       "conformance": 0.68
     },
     {
-      "slug": "prefectural-income-gdp-ranking",
+      "slug": "electricity-bill-hike-impact",
+      "conformance": 0.68
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "conformance": 0.68
+    },
+    {
+      "slug": "local-tax-regional-gap",
+      "conformance": 0.68
+    },
+    {
+      "slug": "pollution-complaints-regional-map",
+      "conformance": 0.68
+    },
+    {
+      "slug": "tutoring-cost-university-advancement-gap",
+      "conformance": 0.68
+    },
+    {
+      "slug": "alcohol-prefecture-map",
       "conformance": 0.69
     },
     {
-      "slug": "vacant-house-crisis",
+      "slug": "barber-beauty-salon-regional-gap",
       "conformance": 0.69
     },
     {
-      "slug": "hospital-bed-utilization-map",
+      "slug": "inpatient-rate-prefecture-gap",
+      "conformance": 0.69
+    },
+    {
+      "slug": "koumuin-ai-tenshoku-1500man",
+      "conformance": 0.69
+    },
+    {
+      "slug": "mayonnaise-consumption-expenditure",
+      "conformance": 0.69
+    },
+    {
+      "slug": "middle-school-height-east-west-puzzle",
+      "conformance": 0.69
+    },
+    {
+      "slug": "pork-consumption-quantity",
+      "conformance": 0.69
+    },
+    {
+      "slug": "carpenter-income-prefecture-gap",
+      "conformance": 0.7
+    },
+    {
+      "slug": "dairy-cattle-count",
+      "conformance": 0.7
+    },
+    {
+      "slug": "development-history-place-name-map",
+      "conformance": 0.7
+    },
+    {
+      "slug": "frozen-gyoza-spending-prefecture-gap",
       "conformance": 0.7
     },
     {
@@ -572,168 +704,900 @@
       "conformance": 0.7
     },
     {
-      "slug": "education-expenses-gap",
-      "conformance": 0.71
+      "slug": "other-bread-consumption-quantity",
+      "conformance": 0.7
     },
     {
-      "slug": "pollution-complaints-regional-map",
-      "conformance": 0.71
+      "slug": "oyster-consumption-prefecture-gap",
+      "conformance": 0.7
     },
     {
       "slug": "road-infrastructure-density",
+      "conformance": 0.7
+    },
+    {
+      "slug": "sushi-dining-consumption-expenditure",
+      "conformance": 0.7
+    },
+    {
+      "slug": "cc-estat-05-medical-cost-choropleth",
       "conformance": 0.71
     },
     {
-      "slug": "childcare-friendly-prefecture-ranking",
-      "conformance": 0.72
+      "slug": "income-quintile-overview",
+      "conformance": 0.71
     },
     {
-      "slug": "gasoline-car-society-map",
-      "conformance": 0.72
+      "slug": "international-cooperation-volunteer-map",
+      "conformance": 0.71
     },
     {
-      "slug": "habitable-area-land-use",
-      "conformance": 0.72
-    },
-    {
-      "slug": "estat-7-techniques-from-unusable-to-usable",
-      "conformance": 0.73
-    },
-    {
-      "slug": "purchasing-power-adjusted",
-      "conformance": 0.73
-    },
-    {
-      "slug": "earthquake-insurance-prefecture-gap",
-      "conformance": 0.74
-    },
-    {
-      "slug": "prefectural-debt-future-burden",
-      "conformance": 0.74
-    },
-    {
-      "slug": "students-per-teacher-class-size-gap",
-      "conformance": 0.74
-    },
-    {
-      "slug": "wage-vs-living-cost",
-      "conformance": 0.74
-    },
-    {
-      "slug": "education-cost-per-child",
-      "conformance": 0.75
-    },
-    {
-      "slug": "manufacturing-aichi-dominance",
-      "conformance": 0.78
-    },
-    {
-      "slug": "overnight-guests-inbound-recovery",
-      "conformance": 0.78
-    },
-    {
-      "slug": "health-life-expectancy-structure",
-      "conformance": 0.79
-    },
-    {
-      "slug": "local-tax-revenue-gap",
-      "conformance": 0.79
-    },
-    {
-      "slug": "workplace-accident-regional-map",
-      "conformance": 0.79
-    },
-    {
-      "slug": "engel-coefficient-prefecture-ranking",
-      "conformance": 0.8
-    },
-    {
-      "slug": "food-spending-pattern",
-      "conformance": 0.8
-    },
-    {
-      "slug": "manufacturing-productivity",
-      "conformance": 0.8
-    },
-    {
-      "slug": "waiting-children-progress",
-      "conformance": 0.8
-    },
-    {
-      "slug": "nursing-care-shortage-2040",
-      "conformance": 0.81
-    },
-    {
-      "slug": "sports-urban-paradox",
-      "conformance": 0.81
-    },
-    {
-      "slug": "household-structure-transformation",
-      "conformance": 0.82
-    },
-    {
-      "slug": "automotive-industry-transformation-map",
-      "conformance": 0.83
-    },
-    {
-      "slug": "consumer-price-regional-gap",
-      "conformance": 0.83
-    },
-    {
-      "slug": "suicide-rate-aging-nexus",
-      "conformance": 0.83
-    },
-    {
-      "slug": "household-spending-before-after-inflation",
-      "conformance": 0.84
-    },
-    {
-      "slug": "population-migration-tokyo-concentration",
-      "conformance": 0.84
-    },
-    {
-      "slug": "aging-solo-living-crisis",
-      "conformance": 0.85
-    },
-    {
-      "slug": "alcohol-prefecture-map",
-      "conformance": 0.85
-    },
-    {
-      "slug": "food-trio-prefecture-map",
-      "conformance": 0.85
-    },
-    {
-      "slug": "ict-media-consumption-gender-gap",
-      "conformance": 0.85
-    },
-    {
-      "slug": "water-sewage-crisis",
-      "conformance": 0.85
-    },
-    {
-      "slug": "noodle-consumption-prefecture-character",
-      "conformance": 0.87
-    },
-    {
-      "slug": "food-consumption-prefecture-battle",
-      "conformance": 0.88
-    },
-    {
-      "slug": "foreign-residents-diversity-map",
-      "conformance": 0.88
-    },
-    {
-      "slug": "barber-beauty-salon-regional-gap",
-      "conformance": 0.9
-    },
-    {
-      "slug": "post-office-last-window",
-      "conformance": 0.9
+      "slug": "manufacturing-shipment-prefecture-ranking",
+      "conformance": 0.71
     },
     {
       "slug": "mobile-contracts-over-population",
+      "conformance": 0.71
+    },
+    {
+      "slug": "natto-consumption-expenditure",
+      "conformance": 0.71
+    },
+    {
+      "slug": "sex-ratio-total-prefecture-gap",
+      "conformance": 0.71
+    },
+    {
+      "slug": "aging-solo-living-crisis",
+      "conformance": 0.72
+    },
+    {
+      "slug": "governor-election-turnout-prefecture-gap",
+      "conformance": 0.72
+    },
+    {
+      "slug": "taxi-driver-income-prefecture-gap",
+      "conformance": 0.72
+    },
+    {
+      "slug": "2050-station-access-population",
+      "conformance": 0.73
+    },
+    {
+      "slug": "bank-deposit-balance-shikoku-anomaly",
+      "conformance": 0.73
+    },
+    {
+      "slug": "commute-by-car-prefecture-gap",
+      "conformance": 0.73
+    },
+    {
+      "slug": "dental-checkup-persons-per-1000-prefecture-gap",
+      "conformance": 0.73
+    },
+    {
+      "slug": "extreme-heat-days-prefecture",
+      "conformance": 0.73
+    },
+    {
+      "slug": "food-trio-prefecture-map",
+      "conformance": 0.73
+    },
+    {
+      "slug": "konbu-consumption-quantity",
+      "conformance": 0.73
+    },
+    {
+      "slug": "municipalities-without-schools",
+      "conformance": 0.73
+    },
+    {
+      "slug": "paved-road-total-length",
+      "conformance": 0.73
+    },
+    {
+      "slug": "precipitation-snow-regional-gap",
+      "conformance": 0.73
+    },
+    {
+      "slug": "dual-income-reversal",
+      "conformance": 0.74
+    },
+    {
+      "slug": "housing-cost-livability-trend",
+      "conformance": 0.74
+    },
+    {
+      "slug": "icecream-consumption-expenditure",
+      "conformance": 0.74
+    },
+    {
+      "slug": "mineral-water-spending-prefecture-gap",
+      "conformance": 0.74
+    },
+    {
+      "slug": "minimum-wage-gap-regional-economy",
+      "conformance": 0.74
+    },
+    {
+      "slug": "pasta-consumption-quantity",
+      "conformance": 0.74
+    },
+    {
+      "slug": "population-decline-land-price-divergence",
+      "conformance": 0.74
+    },
+    {
+      "slug": "prefecture-population-city-concentration",
+      "conformance": 0.74
+    },
+    {
+      "slug": "total-fertility-rate",
+      "conformance": 0.74
+    },
+    {
+      "slug": "banana-consumption-quantity",
+      "conformance": 0.75
+    },
+    {
+      "slug": "brazilian-resident-population-prefecture-gap",
+      "conformance": 0.75
+    },
+    {
+      "slug": "carbonated-drink-spending-prefecture-gap",
+      "conformance": 0.75
+    },
+    {
+      "slug": "commute-by-bicycle-prefecture-gap",
+      "conformance": 0.75
+    },
+    {
+      "slug": "dentist-income-prefecture-gap",
+      "conformance": 0.75
+    },
+    {
+      "slug": "divorces-per-total-population",
+      "conformance": 0.75
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "conformance": 0.75
+    },
+    {
+      "slug": "gifu-food-culture",
+      "conformance": 0.75
+    },
+    {
+      "slug": "green-tea-consumption-quantity",
+      "conformance": 0.75
+    },
+    {
+      "slug": "half-population-elderly-municipalities",
+      "conformance": 0.75
+    },
+    {
+      "slug": "late-elderly-medical-expense-prefecture-gap",
+      "conformance": 0.75
+    },
+    {
+      "slug": "mochi-consumption-prefecture-gap",
+      "conformance": 0.75
+    },
+    {
+      "slug": "shochu-expenditure-vs-sake-ranking",
+      "conformance": 0.75
+    },
+    {
+      "slug": "water-sewage-crisis",
+      "conformance": 0.75
+    },
+    {
+      "slug": "wholesale-annual-sales-amount-prefecture-gap",
+      "conformance": 0.75
+    },
+    {
+      "slug": "chicken-consumption-prefecture-gap",
+      "conformance": 0.76
+    },
+    {
+      "slug": "consumer-price-difference-index-utilities-prefecture-gap",
+      "conformance": 0.76
+    },
+    {
+      "slug": "dairy-cattle-hokkaido-monopoly",
+      "conformance": 0.76
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "conformance": 0.76
+    },
+    {
+      "slug": "fresh-udon-soba-consumption-prefecture-gap",
+      "conformance": 0.76
+    },
+    {
+      "slug": "kagawa-food-culture",
+      "conformance": 0.76
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "conformance": 0.76
+    },
+    {
+      "slug": "post-office-last-window",
+      "conformance": 0.76
+    },
+    {
+      "slug": "wheat-flour-expenditure-vs-quantity",
+      "conformance": 0.76
+    },
+    {
+      "slug": "working-hours-overtime-gap",
+      "conformance": 0.76
+    },
+    {
+      "slug": "education-expenses-gap",
+      "conformance": 0.77
+    },
+    {
+      "slug": "elderly-population-care-capacity-gap",
+      "conformance": 0.77
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "conformance": 0.77
+    },
+    {
+      "slug": "garbage-total-output",
+      "conformance": 0.77
+    },
+    {
+      "slug": "home-ownership-rate-ranking",
+      "conformance": 0.77
+    },
+    {
+      "slug": "katsuobushi-expenditure-ranking",
+      "conformance": 0.77
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "conformance": 0.77
+    },
+    {
+      "slug": "manufacturing-output-outlier-cities",
+      "conformance": 0.77
+    },
+    {
+      "slug": "scallop-expenditure-ranking",
+      "conformance": 0.77
+    },
+    {
+      "slug": "shiga-food-culture",
+      "conformance": 0.77
+    },
+    {
+      "slug": "system-consultant-income-ranking",
+      "conformance": 0.77
+    },
+    {
+      "slug": "yato-yatsu-place-name-boundary",
+      "conformance": 0.77
+    },
+    {
+      "slug": "annual-sunshine-duration-prefecture-gap",
+      "conformance": 0.78
+    },
+    {
+      "slug": "education-cost-per-child",
+      "conformance": 0.78
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "conformance": 0.78
+    },
+    {
+      "slug": "natto-production-vs-consumption",
+      "conformance": 0.78
+    },
+    {
+      "slug": "peach-expenditure-ranking",
+      "conformance": 0.78
+    },
+    {
+      "slug": "potato-consumption-quantity",
+      "conformance": 0.78
+    },
+    {
+      "slug": "welfare-expenses-squeeze",
+      "conformance": 0.78
+    },
+    {
+      "slug": "beef-consumption-prefecture-gap",
+      "conformance": 0.79
+    },
+    {
+      "slug": "campsite-public-vs-road-expressway-length",
+      "conformance": 0.79
+    },
+    {
+      "slug": "chocolate-expenditure-ranking",
+      "conformance": 0.79
+    },
+    {
+      "slug": "curry-roux-consumption-gap",
+      "conformance": 0.79
+    },
+    {
+      "slug": "engineer-telework-prefecture",
+      "conformance": 0.79
+    },
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "conformance": 0.79
+    },
+    {
+      "slug": "food-price-regional-2026",
+      "conformance": 0.79
+    },
+    {
+      "slug": "fukui-food-culture",
+      "conformance": 0.79
+    },
+    {
+      "slug": "household-consumption-expenditure-ranking",
+      "conformance": 0.79
+    },
+    {
+      "slug": "nara-food-culture",
+      "conformance": 0.79
+    },
+    {
+      "slug": "okinawa-food-culture",
+      "conformance": 0.79
+    },
+    {
+      "slug": "professor-income-prefecture-gap",
+      "conformance": 0.79
+    },
+    {
+      "slug": "self-financing-ratio-prefecture-gap",
+      "conformance": 0.79
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-national-medical-expense-per",
+      "conformance": 0.79
+    },
+    {
+      "slug": "bread-vs-rice-expenditure",
+      "conformance": 0.8
+    },
+    {
+      "slug": "castella-expenditure-ranking",
+      "conformance": 0.8
+    },
+    {
+      "slug": "foreign-population-growth-rate",
+      "conformance": 0.8
+    },
+    {
+      "slug": "future-population-change-rate-2050-prefecture-gap",
+      "conformance": 0.8
+    },
+    {
+      "slug": "hokkaido-food-culture",
+      "conformance": 0.8
+    },
+    {
+      "slug": "instant-noodles-consumption-prefecture-gap",
+      "conformance": 0.8
+    },
+    {
+      "slug": "sea-bream-expenditure-ranking",
+      "conformance": 0.8
+    },
+    {
+      "slug": "spinach-consumption-ranking",
+      "conformance": 0.8
+    },
+    {
+      "slug": "academic-achievement-test-prefecture-ranking",
+      "conformance": 0.81
+    },
+    {
+      "slug": "ishikawa-food-culture",
+      "conformance": 0.81
+    },
+    {
+      "slug": "peach-consumption-quantity-vs-disaster-relief-expenses",
+      "conformance": 0.81
+    },
+    {
+      "slug": "sake-consumption-prefecture-gap",
+      "conformance": 0.81
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
+      "conformance": 0.82
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-site-area-per-dwelling",
+      "conformance": 0.82
+    },
+    {
+      "slug": "distinctive-place-name-kanji-by-prefecture",
+      "conformance": 0.82
+    },
+    {
+      "slug": "fishery-catch-aquaculture-shift",
+      "conformance": 0.82
+    },
+    {
+      "slug": "iwate-food-culture",
+      "conformance": 0.82
+    },
+    {
+      "slug": "saitama-food-culture",
+      "conformance": 0.82
+    },
+    {
+      "slug": "semiconductor-electronics-regional-map",
+      "conformance": 0.82
+    },
+    {
+      "slug": "urban-parks-green-infrastructure",
+      "conformance": 0.82
+    },
+    {
+      "slug": "agriculture-hokkaido-dominance",
+      "conformance": 0.83
+    },
+    {
+      "slug": "chiba-food-culture",
+      "conformance": 0.83
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-public-assistance-housing",
+      "conformance": 0.83
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-tatami-per-dwelling-owner",
+      "conformance": 0.83
+    },
+    {
+      "slug": "kyoto-food-culture",
+      "conformance": 0.83
+    },
+    {
+      "slug": "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+      "conformance": 0.83
+    },
+    {
+      "slug": "shumai-consumption-expenditure-vs-main-household-ratio-main",
+      "conformance": 0.83
+    },
+    {
+      "slug": "cheese-expenditure-ranking",
+      "conformance": 0.84
+    },
+    {
+      "slug": "dining-out-expenditure-ranking",
+      "conformance": 0.84
+    },
+    {
+      "slug": "kochi-migration-flow",
+      "conformance": 0.84
+    },
+    {
+      "slug": "mackerel-expenditure-ranking",
+      "conformance": 0.84
+    },
+    {
+      "slug": "okayama-food-culture",
+      "conformance": 0.84
+    },
+    {
+      "slug": "dental-hygienist-income-prefecture-gap",
+      "conformance": 0.85
+    },
+    {
+      "slug": "firefighting-capacity-gap",
+      "conformance": 0.85
+    },
+    {
+      "slug": "manufacturing-labor-productivity-pref",
+      "conformance": 0.85
+    },
+    {
+      "slug": "software-engineer-salary-prefecture-gap",
+      "conformance": 0.85
+    },
+    {
+      "slug": "watermelon-expenditure-ranking",
+      "conformance": 0.85
+    },
+    {
+      "slug": "expenditure-structure-comparison",
+      "conformance": 0.86
+    },
+    {
+      "slug": "it-establishments-prefecture",
+      "conformance": 0.86
+    },
+    {
+      "slug": "necktie-stockings-market-shrink",
+      "conformance": 0.86
+    },
+    {
+      "slug": "prefectural-debt-future-burden",
+      "conformance": 0.86
+    },
+    {
+      "slug": "public-phone-count",
+      "conformance": 0.86
+    },
+    {
+      "slug": "airport-count-prefecture-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "campsite-public-prefecture-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "convenience-store-count-commercial-prefecture-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "designated-difficult-disease-prefecture-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "electricity-demand-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "fertility-rate-prefecture-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "grilled-eel-consumption-expenditure-prefecture-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "heating-cost-vs-disposable-income",
+      "conformance": 0.87
+    },
+    {
+      "slug": "hospital-bed-utilization-map",
+      "conformance": 0.87
+    },
+    {
+      "slug": "mandarin-expenditure-ranking",
+      "conformance": 0.87
+    },
+    {
+      "slug": "melon-expenditure-ranking",
+      "conformance": 0.87
+    },
+    {
+      "slug": "roadside-station-count-prefecture-gap",
+      "conformance": 0.87
+    },
+    {
+      "slug": "ryokan-vs-hotel-overnight-shift",
+      "conformance": 0.87
+    },
+    {
+      "slug": "sixth-industry-direct-sales",
+      "conformance": 0.87
+    },
+    {
+      "slug": "crab-expenditure-ranking",
+      "conformance": 0.88
+    },
+    {
+      "slug": "earthquake-renovation-rate-prefecture-gap",
+      "conformance": 0.88
+    },
+    {
+      "slug": "fishery-workers-prefecture-gap",
+      "conformance": 0.88
+    },
+    {
+      "slug": "households-on-public-assistance-per-1000-prefecture-gap",
+      "conformance": 0.88
+    },
+    {
+      "slug": "information-communication-coefficient-ranking",
+      "conformance": 0.88
+    },
+    {
+      "slug": "physical-therapist-income-prefecture-gap",
+      "conformance": 0.88
+    },
+    {
+      "slug": "prefectural-height-male-female-gap",
+      "conformance": 0.88
+    },
+    {
+      "slug": "price-index-high-low-prefecture",
+      "conformance": 0.88
+    },
+    {
+      "slug": "school-lunch-expenditure-ranking",
+      "conformance": 0.88
+    },
+    {
+      "slug": "voluntary-car-insurance-rate-bodily-injury-prefecture-gap",
+      "conformance": 0.88
+    },
+    {
+      "slug": "air-conditioner-consumption-quantity-prefecture-gap",
+      "conformance": 0.89
+    },
+    {
+      "slug": "consumption-expenditure-multi-person-households-per-month",
+      "conformance": 0.89
+    },
+    {
+      "slug": "delivery-fee-consumption-expenditure-prefecture-gap",
+      "conformance": 0.89
+    },
+    {
+      "slug": "gasoline-expenditure-ranking",
+      "conformance": 0.89
+    },
+    {
+      "slug": "high-school-advancement-rate",
+      "conformance": 0.89
+    },
+    {
+      "slug": "miso-consumption-quantity-prefecture-gap",
+      "conformance": 0.89
+    },
+    {
+      "slug": "movie-theater-expenditure-ranking",
+      "conformance": 0.89
+    },
+    {
+      "slug": "national-pension-payment-rate-prefecture-gap",
+      "conformance": 0.89
+    },
+    {
+      "slug": "soba-udon-dining-consumption-expenditure-prefecture-gap",
+      "conformance": 0.89
+    },
+    {
+      "slug": "tissue-paper-consumption-expenditure-prefecture-gap",
+      "conformance": 0.89
+    },
+    {
+      "slug": "wheat-flour-consumption-prefecture",
+      "conformance": 0.89
+    },
+    {
+      "slug": "white-bread-price-up-quantity-up",
+      "conformance": 0.89
+    },
+    {
+      "slug": "allocation-tax-area",
+      "conformance": 0.9
+    },
+    {
+      "slug": "avg-salary-admin-prefecture-prefecture-gap",
+      "conformance": 0.9
+    },
+    {
+      "slug": "beef-unmarried-ratio",
+      "conformance": 0.9
+    },
+    {
+      "slug": "pachinko-education-cost",
+      "conformance": 0.9
+    },
+    {
+      "slug": "sewage-treatment-coverage-rate-vs-flush-toilet-population",
+      "conformance": 0.9
+    },
+    {
+      "slug": "candy-expenditure-ranking",
       "conformance": 0.91
+    },
+    {
+      "slug": "dual-income-house-size",
+      "conformance": 0.91
+    },
+    {
+      "slug": "ishikawa-municipal-finance",
+      "conformance": 0.91
+    },
+    {
+      "slug": "kawa-gawa-river-place-name-map",
+      "conformance": 0.91
+    },
+    {
+      "slug": "nurse-income-prefecture-gap",
+      "conformance": 0.91
+    },
+    {
+      "slug": "pet-food-consumption-expenditure-prefecture-gap",
+      "conformance": 0.91
+    },
+    {
+      "slug": "real-income-taxpayer",
+      "conformance": 0.91
+    },
+    {
+      "slug": "tuna-medical-expense",
+      "conformance": 0.91
+    },
+    {
+      "slug": "water-sewer-expenditure-ranking",
+      "conformance": 0.91
+    },
+    {
+      "slug": "sweet-potato-expenditure-ranking",
+      "conformance": 0.92
+    },
+    {
+      "slug": "tuna-consumption-medical-expense-correlation",
+      "conformance": 0.92
+    },
+    {
+      "slug": "abortion-rate-prefecture-gap",
+      "conformance": 0.93
+    },
+    {
+      "slug": "furikake-expenditure-ranking",
+      "conformance": 0.93
+    },
+    {
+      "slug": "high-school-teacher-salary-prefecture-gap",
+      "conformance": 0.93
+    },
+    {
+      "slug": "local-government-debt-burden",
+      "conformance": 0.93
+    },
+    {
+      "slug": "police-officer-density-vs-crime-gap",
+      "conformance": 0.93
+    },
+    {
+      "slug": "rice-harvest-volume-prefecture-gap",
+      "conformance": 0.93
+    },
+    {
+      "slug": "wind-power-capacity-prefecture-gap",
+      "conformance": 0.93
+    },
+    {
+      "slug": "engel-coefficient-prefecture-ranking",
+      "conformance": 0.94
+    },
+    {
+      "slug": "konnyaku-expenditure-ranking",
+      "conformance": 0.94
+    },
+    {
+      "slug": "prefectural-income-gdp-ranking",
+      "conformance": 0.94
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-elementary-school-count",
+      "conformance": 0.94
+    },
+    {
+      "slug": "2050-population-flood-exposure",
+      "conformance": 0.95
+    },
+    {
+      "slug": "campsite-public-vs-paved-road-main-length",
+      "conformance": 0.95
+    },
+    {
+      "slug": "healthy-life-expectancy-male-female-gap",
+      "conformance": 0.95
+    },
+    {
+      "slug": "income-quintile-travel",
+      "conformance": 0.95
+    },
+    {
+      "slug": "ehime-migration-flow",
+      "conformance": 0.96
+    },
+    {
+      "slug": "local-allocation-tax-prefecture-vs-total-area-excluding",
+      "conformance": 0.96
+    },
+    {
+      "slug": "tissue-paper-consumption-expenditure-vs-average-weight",
+      "conformance": 0.96
+    },
+    {
+      "slug": "convenience-store-count-commercial-vs-ratio-of-general",
+      "conformance": 0.97
+    },
+    {
+      "slug": "cup-noodles-consumption-expenditure-vs-fire-damage",
+      "conformance": 0.97
+    },
+    {
+      "slug": "cup-noodles-consumption-expenditure-vs-secondary-activity",
+      "conformance": 0.97
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-neighborhood-park-count",
+      "conformance": 0.97
+    },
+    {
+      "slug": "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
+      "conformance": 0.97
+    },
+    {
+      "slug": "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
+      "conformance": 0.98
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
+      "conformance": 0.98
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-sex-ratio-total",
+      "conformance": 0.98
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "conformance": 0.99
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+      "conformance": 0.99
+    },
+    {
+      "slug": "beef-consumption-quantity-vs-municipal-road-paving-rate",
+      "conformance": 0.99
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-final-education-university",
+      "conformance": 0.99
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "conformance": 0.99
+    },
+    {
+      "slug": "natto-child-weight-correlation",
+      "conformance": 0.99
+    },
+    {
+      "slug": "pachinko-shop-density-per-10k-vs-high-school-education-cost",
+      "conformance": 0.99
+    },
+    {
+      "slug": "retail-store-count-vs-nurses-per-100k-population",
+      "conformance": 0.99
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
+      "conformance": 0.99
+    },
+    {
+      "slug": "unemployment-structure",
+      "conformance": 0.99
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-rooms-per-dwelling",
+      "conformance": 1
+    },
+    {
+      "slug": "swimming-pool-public-vs-post-office-count",
+      "conformance": 1
+    },
+    {
+      "slug": "vacant-housing-aging-correlation",
+      "conformance": 1
     }
   ]
 }

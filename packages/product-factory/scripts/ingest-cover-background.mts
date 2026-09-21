@@ -41,11 +41,27 @@ async function main(): Promise<void> {
   );
   mkdirSync(dirname(outputPath), { recursive: true });
 
-  await sharp(inputPath)
-    .resize(W, H, { fit: "cover", position: "centre" })
-    .flatten({ background: "#071426" })
-    .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
-    .toFile(outputPath);
+  // --band: 横長 (例 1536×1024) の画像を **表紙で見える下 42% (1600×1080)** にぴったり入れる。
+  //   cover.ts は上 1480px を文字面で覆うので、縦長画像を cover-fit すると主題が隠れやすい
+  //   (2026-09-19)。横長で描かせて帯に置けば、生成した絵が全部見える。上は隠れるので基調色で埋める。
+  const band = process.argv.includes("--band");
+  if (band) {
+    const BAND_H = H - 1480;
+    const bandBuf = await sharp(inputPath)
+      .resize(W, BAND_H, { fit: "cover", position: "centre" })
+      .flatten({ background: "#071426" })
+      .toBuffer();
+    await sharp({ create: { width: W, height: H, channels: 3, background: "#071426" } })
+      .composite([{ input: bandBuf, top: H - BAND_H, left: 0 }])
+      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
+      .toFile(outputPath);
+  } else {
+    await sharp(inputPath)
+      .resize(W, H, { fit: "cover", position: "centre" })
+      .flatten({ background: "#071426" })
+      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
+      .toFile(outputPath);
+  }
 
   const meta = await sharp(outputPath).metadata();
   if (meta.format !== "jpeg" || meta.width !== W || meta.height !== H) {

@@ -25,6 +25,7 @@ import { readFileSync, existsSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeKdpOperationalState } from "./kdp-status.mjs";
+import { advancePublicationStage } from "./kdp-publication-stage.mjs";
 
 // このファイル: .claude/scripts/kdp/lib/kdp-session.mjs → repo root は 4 つ上。
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
@@ -94,6 +95,20 @@ export function writeBackDraftId(id, draftId) {
     writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
     return true;
   } catch {
+    return false;
+  }
+}
+
+/** Publication workflow stage and its read-back evidence. Backward transitions fail closed. */
+export function writeBackPublicationStage(id, stage, evidence = {}, checkedAt = new Date().toISOString()) {
+  try {
+    const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
+    if (!j.listings || !j.listings[id]) return false;
+    j.listings[id] = advancePublicationStage(j.listings[id], stage, checkedAt, evidence);
+    writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
+    return true;
+  } catch (error) {
+    console.error(`[kdp-stage] ${id}: ${error instanceof Error ? error.message : String(error)}`);
     return false;
   }
 }

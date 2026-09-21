@@ -124,6 +124,14 @@ primary_agent: strategy-advisor
   cat .claude/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
+- **KDP週次公開ゲート**: APIやブラウザは呼ばず、weekly-reviewが同期した状態から決定的stateを再生成して読む。
+  ```bash
+  npm run kdp:weekly -- --week [YYYY-Www] --write
+  jq '{status,portfolio,nextPilot,candidate,cohortMeasurement,blockers,nextAction}' .claude/state/products/kdp-weekly-publication.json
+  ```
+  → `hold|measure|observe|stop-no-demand`は出版タスクを作らず、計測・審査待ち・停止理由だけを計画へ反映する。
+  → `prepare-one`は`KDP-EXPANSION-01`を参照し、候補を**1冊だけ**設計・生成・全章review・Previewer確認へ進める。
+  → `ready-for-owner-approval`だけを当週の出版候補にできる。候補はstateの1冊と完全一致させる。
 - docs/02_実装計画/00_INDEX.md の現在地と、`.claude/todo/04`〜`06` の未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .claude/todo/backlog.md の tier 見出し (🔴🟡🟢🟣) で優先度判定
 
@@ -264,6 +272,9 @@ continue 中の実験の measure 実行予定は Must 候補に加える。
 - 改善・実験・新規探索
 - 各タスクに同上
 
+KDPタスクを採用する場合は、読者の課題 / HARMと理由 / 提供価値・支払う理由 / 需要の実測または未検証 / 次の検証を
+`KindleBook.design`と週次ゲートから短く記載する。売上・KENPが未計測なら公開タスクへ昇格させない。
+
 ### Phase 4: 批判的レビュー（セルフレビュー）
 
 Phase 3 の提案を以下の3つの視点で攻撃する:
@@ -350,6 +361,7 @@ tags: []
 | SNS 投稿済み | N 件 | — |
 | 直近14日 imp (X) | N | — |
 | GSC運用サイクル | PASS/WARN/FAIL | FAIL 0 |
+| KDP公開ゲート | hold/measure/prepare-one/ready-for-owner-approval/observe/stop-no-demand/complete | 最大1冊/週・各コホート4週実測 |
 
 ## トレンド機会
 
@@ -382,6 +394,14 @@ tags: []
 ### Could（余力あれば、1-3 件）
 - [ ] **タスク名** [S/M/L] — 理由 / 成功基準 / 使用スキル
 
+## KDP公開ゲート
+
+- **判定**: `<status>`（`.claude/state/products/kdp-weekly-publication.json`）
+- **候補**: `<ID またはなし>`（最大1冊）
+- **需要証拠**: `<販売数/KENPの4週実測、未計測、または計測済み0>`
+- **停止条件**: `<blockers>`
+- **承認境界**: この計画への記載は公開承認ではない。対象IDの明示承認 + `--commit` が別途必要。
+
 ## 批判的レビュー
 
 <!-- Phase 4 の結果を引用形式で記載 -->
@@ -406,6 +426,19 @@ tags: []
 - 前週の計画で未達のタスクは、自動的に今週の Must 候補に昇格させて検討する
 - 計画ドキュメントのタスク状態（完了/未達）は、**週中にユーザーが checkbox を docs ファイルで編集**して更新する（Edit tool or エディタ）
 - 計画ドキュメントは蓄積せず毎週上書きする。過去の結果は週次レビューと git 履歴に残す
+- KDPは週次ゲートの候補を最大1冊だけ扱う。週次計画の生成・checkbox・過去の包括承認を公開承認に読み替えない
+
+### 対象IDがその場で明示承認された場合だけ公開
+
+`ready-for-owner-approval`の候補について、ユーザーが同じturnで対象IDを指定して公開を明示承認した場合だけ実行する。
+承認が無い場合はコマンドを計画へ記すだけで止める。
+
+```bash
+npm run kdp:weekly-publish -- --week [YYYY-Www] --id <KINDLE_ID> --owner-approved <KINDLE_ID> --commit
+```
+
+専用入口は実行直前に週次ゲートを再生成し、候補ID・4週実測・週1冊上限・対象IDの承認を再照合してから、
+既存のKDP preflight / release archive / verify / 本棚read-backへ渡す。`submitted`は販売開始と報告せず、`live`確認を待つ。
 
 ## 保存先
 

@@ -39,6 +39,8 @@ npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --a
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --probe       # ★初回: 出品フォーム構造を dump (セレクタ調整用)
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01               # 下書き作成のみ (既定・安全)
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (★実公開・要オーナー承認)
+node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --probe  # 取り下げ (withdrawal 付き live 本) の確認ダイアログまで採取・確定しない
+node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit # ★出版停止を実行 (本棚 read-back「下書き」で成功判定・要オーナー指示)
 ```
 
 ## フロー (1 冊を出版する)

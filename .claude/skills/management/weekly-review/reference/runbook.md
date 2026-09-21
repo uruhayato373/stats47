@@ -538,6 +538,23 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 最終取得日: YYYY-MM-DD（未取得の場合は「`/update-sns-metrics` 未実行」と記載）
 
+### KDP公開ゲート
+
+`.claude/state/products/kdp-weekly-publication.json`を参照し、推測で補完しない。
+
+| 項目 | 実測 |
+|---|---|
+| S1 | live N/12・in_review N |
+| パイロット | live N/3・in_review N |
+| 4週計測 | complete / window-open / not-measured（対象IDも記載） |
+| 需要シグナル | measured-positive / measured-zero / not-measured |
+| 当週ゲート | hold / measure / prepare-one / ready-for-owner-approval / observe / stop-no-demand / complete |
+| 候補 | ID またはなし（最大1冊） |
+
+`ready-for-owner-approval`でもレビューは公開しない。来週への申し送りには候補ID、停止条件、
+`KDP-EXPANSION-01`、対象書籍の読者課題 / HARMと理由 / 支払う理由 / 需要証拠 / 次の検証を短く記す。
+販売数/KENPが未計測なら0件とは書かず`not-measured`とする。
+
 ## 課題・ブロッカー
 
 1. **課題名**: 原因分析、影響範囲

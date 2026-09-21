@@ -41,7 +41,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 
 ## Phase 1: 実績収集
 
-収集専用subagentは起動せず、以下5trackを同一セッションの並列tool callで読む。
+収集専用subagentは起動せず、以下のtrackを同一セッションの並列tool callで読む。
 
 | Track | SSOT / command |
 |---|---|
@@ -52,6 +52,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
 | 計画差分 | `.claude/todo/weekly.md` |
 | 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
+| Kindle | `.claude/config/kdp-listings.json` + `.claude/state/products/{sales-ledger,kdp-weekly-publication}.json` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。
@@ -63,6 +64,21 @@ GSC/GA4は次の用途を混在させない。
 - GA4のKPI: Japan-only clean slice。rawは汚染監視だけに使う。
 
 詳細なcommand、field、backlog/alert対応は`reference/runbook.md`のPhase 0〜2だけを参照する。
+
+Kindleの販売対象15冊（S1 12冊 + 実測ゲート付きパイロット3冊）は、週次レビューで次の順に判定する。
+
+```bash
+# draft / in_review がある週はKDP本棚をread-backしてから判定する（書き込みは状態同期だけ、公開しない）
+node .claude/scripts/kdp/kdp-batch.mjs --phase status --ids K-S1-01,K-S1-02,K-S1-03,K-S1-04,K-S1-05,K-S1-06,K-S1-07,K-S1-08,K-S1-09,K-S1-10,K-S1-11,K-S1-12
+
+# listings + sales-ledger から週次ゲートを決定的に再生成
+npm run kdp:weekly -- --week [YYYY-Www] --write
+```
+
+本棚同期がログイン・2FA・UI変更で失敗した場合は、古い状態をfreshとみなさず`Blockers`へ記録する。
+`.claude/state/products/kdp-weekly-publication.json`の`status`をレビューに転載し、未計測を0需要へ変換しない。
+`ready-for-owner-approval`でもレビュー単独では公開しない。公開はPhase 4で週次計画まで依頼され、かつ対象IDを
+オーナーがその場で明示承認した場合だけ`/weekly-plan`の公開工程へ渡す。
 
 ## Phase 2: 差分分析
 
@@ -89,6 +105,7 @@ GSC/GA4は次の用途を混在させない。
 - 来週への申し送り
 - 参照したsnapshot / backlog ID / file
 - 事業計画のready/in-progress、開始ゲート、計測欠損、Go/Pivot/Stop判断
+- KDP公開ゲート（S1 live数、4週販売/KENP計測、需要シグナル、当週候補、停止理由）
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `.claude/todo/weekly.md`はレビュー中に書き換えない。
@@ -114,6 +131,8 @@ FAILが残る場合はレビューを「完了」と報告せず、出力され�
 - search-growth候補は最大3件で、未承認候補を`.claude/todo/improvements.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。
 - 事業計画stateが当週に生成され、未計測・手動・部分計測を区別している。
+- KDP週次stateが当週に生成され、未計測と計測済み0を区別し、候補が最大1冊である。
+- KDPの実公開を週次レビュー単独の副作用として実行していない。
 - GSC証拠がfreshで候補がある場合、approve/dismissが最低1件記録されている。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
 

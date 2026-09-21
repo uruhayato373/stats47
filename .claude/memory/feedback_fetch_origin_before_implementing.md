@@ -18,3 +18,5 @@ metadata:
 4. 触る予定のファイルが既に origin で変更済みでないか `git show origin/develop:<path>` で確認
 
 **Why**: stale ローカル + 並行セッションの組合せで「既デプロイ済みの作業を重複実装→破棄」が起きる。fetch + diff を 1 分かけるだけで丸ごと回避できる。関連: [[feedback_shared_working_copy_git_race]]（2 セッションが同一 working copy を共有する別ケース）。
+
+**2026-09-20 再発 (別形)**: 共有作業ツリーが origin/develop より 38 コミット遅れのまま note の footer を直し、cherry-pick で push した。前日の `ab20af08b` が同じ `navigation-footer.mjs` のサイトカード判定を `hasStats47Url`→`hasUrl(siteUrl)` に変えていたため、ローカル検証 (旧ルール) では 0 本、CI (新ルール) では 22 本 pending になり、原因特定に CI 5 往復かかった。**触るファイルは `git diff origin/develop -- <path>` で上流差分を先に読む**。ローカルで再現できない CI 差は「同じコードか」を最初に疑う。

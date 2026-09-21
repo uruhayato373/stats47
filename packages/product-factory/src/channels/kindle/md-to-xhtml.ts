@@ -49,7 +49,13 @@ function stripCustomTags(md: string): string {
     .replace(/<ad-slot[^>]*>[\s\S]*?<\/ad-slot>/gi, "")
     .replace(/<ad-slot[^>]*\/?>/gi, "")
     .replace(/<affiliate-banner[^>]*>[\s\S]*?<\/affiliate-banner>/gi, "")
-    .replace(/<affiliate-banner[^>]*\/?>/gi, "");
+    .replace(/<affiliate-banner[^>]*\/?>/gi, "")
+    // サイト内回遊タグ (2026-09-19 K-S1-02 で文字列のまま露出)
+    .replace(/<site-link[^>]*>[\s\S]*?<\/site-link>/gi, "")
+    .replace(/<site-link[^>]*\/?>/gi, "")
+    // 関連記事ブロック (2026-09-19 K-S1-11 F00502: sports-participation-map で &lt;related-articles&gt; が本文に露出)
+    .replace(/<related-articles[^>]*>[\s\S]*?<\/related-articles>/gi, "")
+    .replace(/<related-article-link[^>]*>[\s\S]*?<\/related-article-link>/gi, "");
 }
 
 /**
@@ -62,6 +68,8 @@ export function mdToXhtml(mdRaw: string, imgResolver?: (src: string) => string):
   const out: string[] = [];
   let para: string[] = [];
   let list: string[] = [];
+  /** 現在の list が番号付き (1. 2. …) か。ul/ol を混ぜない。 */
+  let listOrdered = false;
   let i = 0;
 
   const flushPara = (): void => {
@@ -72,7 +80,8 @@ export function mdToXhtml(mdRaw: string, imgResolver?: (src: string) => string):
   };
   const flushList = (): void => {
     if (list.length) {
-      out.push(`<ul>${list.map((li) => `<li>${inline(li)}</li>`).join("")}</ul>`);
+      const tag = listOrdered ? "ol" : "ul";
+      out.push(`<${tag}>${list.map((li) => `<li>${inline(li)}</li>`).join("")}</${tag}>`);
       list = [];
     }
   };
@@ -145,11 +154,15 @@ export function mdToXhtml(mdRaw: string, imgResolver?: (src: string) => string):
       continue;
     }
 
-    // 箇条書き
+    // 箇条書き (- / *) と番号付き (1. 2. …)。番号付きを段落扱いすると 1 段落に潰れる (2026-09-19 K-S1-04 で実測)。
     const li = trimmed.match(/^[-*]\s+(.*)$/);
-    if (li) {
+    const oli = trimmed.match(/^\d+\.\s+(.*)$/);
+    if (li || oli) {
       flushPara();
-      list.push(li[1]);
+      const ordered = Boolean(oli);
+      if (list.length > 0 && ordered !== listOrdered) flushList();
+      listOrdered = ordered;
+      list.push((li ?? oli)![1]);
       i += 1;
       continue;
     }
