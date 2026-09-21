@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T02:38:48.947Z",
+  "generatedAt": "2026-09-21T03:09:38.965Z",
   "minStreak": 2,
   "perPage": 12,
   "checked": 46,
@@ -453,7 +453,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-08-02T03:02:11Z",
-      "daysSinceSuccess": 49,
+      "daysSinceSuccess": 50,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12
@@ -542,8 +542,8 @@
       "workflow": "weekly-metrics-issue.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-14T03:09:36Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-09-21T03:06:48Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12
