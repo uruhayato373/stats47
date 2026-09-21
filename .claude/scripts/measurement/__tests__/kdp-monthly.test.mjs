@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto';
 import ExcelJS from 'exceljs';
 import { expectedKdpRoyaltyMonth, kdpMonthlyVaultKey, archivedKdpMonthlyReport, parseKdpMonthlyReport, collectKdpMonthlyReport } from '../kdp-monthly-reports.mjs';
 import { validateAttempt, consumerPath } from '../consumer-paths.mjs';
+import { measurementHealth } from '../health.mjs';
 
 const listings = { 'K-S1-01': { author: 'stats47', asin: null, previousEditions: [{ author: 'stats47', asin: 'B000000001' }] } };
 function fixture() {
@@ -122,6 +123,8 @@ test('monthly collection and private archive are required before success; old da
   assert.match(collector, /capture\(monthlyPath\)/);
   assert.throws(() => validateAttempt({ source: 'kdp', status: 'pass', capability: 'publication-and-daily-sales', observedAt: new Date().toISOString() }, Date.now(), 'kdp'), /capability_mismatch/);
   assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.monthly.xlsx'), null);
+  assert.equal(measurementHealth(null).sources.find(s => s.source === 'kdp').remaining, 'payout_and_net_profit_not_collected');
+  assert.doesNotMatch(readFileSync('.claude/scripts/measurement/summarize.mjs', 'utf8'), /finalized_royalties_not_collected|確定ロイヤリティ・入金は未取得/);
 });
 
 test('historical restore rejects an overwritten slot or a corrupt original and returns only the scoped report', () => {
