@@ -1,0 +1,116 @@
+name: Authenticated measurement
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 9 * * *' # JST 18:20; before weekly metric consumers
+  push:
+    branches: [develop]
+    paths: ['.github/workflows/authenticated-measurement.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: authenticated-measurement
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.repository == 'uruhayato373/stats47' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 7 # separate services and ephemeral runners; no shared browser profile
+      matrix:
+        include:
+          - {source: moshimo, secret: MEASUREMENT_SESSION_MOSHIMO}
+          - {source: a8, secret: MEASUREMENT_SESSION_A8}
+          - {source: afb, secret: MEASUREMENT_SESSION_AFB}
+          - {source: note, secret: MEASUREMENT_SESSION_NOTE}
+          - {source: gsc, secret: MEASUREMENT_SESSION_GSC}
+          - {source: kdp, secret: MEASUREMENT_SESSION_KDP}
+          - {source: coconala, secret: MEASUREMENT_SESSION_COCONALA}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with: {node-version: '20', cache: npm}
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Collect and verify private evidence
+        env:
+          MEASUREMENT_SESSION: ${{ secrets[matrix.secret] }}
+          MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
+          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          SOURCE: ${{ matrix.source }}
+        run: xvfb-run --auto-servernum node .claude/scripts/measurement/collect.mjs "$SOURCE"
+      - name: Upload credential-free status only
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.0
+        with:
+          name: authenticated-status-${{ matrix.source }}
+          path: .local/authenticated-ci-public/*.json
+          include-hidden-files: true
+          retention-days: 30
+          if-no-files-found: warn
+
+  record:
+    needs: collect
+    if: always() && needs.collect.result != 'skipped'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {ref: develop}
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        continue-on-error: true # missing artifacts are recorded as runner_failed by summarize
+        with:
+          pattern: authenticated-status-*
+          path: .local/authenticated-ci-public
+          merge-multiple: true
+      - name: Record all sources, including missing jobs
+        id: record
+        run: |
+          node .claude/scripts/measurement/summarize.mjs
+          cat /tmp/authenticated-measurement-summary.md >> "$GITHUB_STEP_SUMMARY"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .claude/state/metrics/authenticated/latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore(metrics): authenticated measurement status [skip ci]'
+            for attempt in 1 2 3; do
+              if git pull --rebase origin develop && git push origin HEAD:develop; then break; fi
+              if [ "$attempt" = 3 ]; then exit 1; fi
+              sleep 5
+            done
+          fi
+      - name: Alert on failure and close on recovery
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE='認証付き計測に要対応の取得元がある'
+          gh label create authenticated-measurement-alert --description 'Authenticated measurement collection or session failure' --color b60205 --force
+          EXISTING=$(gh issue list --state open --label authenticated-measurement-alert --limit 1 --json number --jq '.[0].number // empty')
+          if [ '${{ steps.record.outcome }}' = 'success' ] && jq -e --arg run "$GITHUB_RUN_ID" '.runId == $run and .status == "pass"' .claude/state/metrics/authenticated/latest.json >/dev/null; then
+            if [ -n "$EXISTING" ]; then gh issue close "$EXISTING" --comment "取得経路が復旧しました: $RUN_URL"; fi
+          else
+            if [ ! -f /tmp/authenticated-measurement-summary.md ]; then printf '収集または記録ジョブが完了しませんでした。\n' > /tmp/authenticated-measurement-summary.md; fi
+            printf '\n実行: %s\n' "$RUN_URL" >> /tmp/authenticated-measurement-summary.md
+            if [ -n "$EXISTING" ]; then
+              gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/authenticated-measurement-summary.md
+            else
+              gh issue create --title "$TITLE" --label 'authenticated-measurement-alert,auto-generated' --body-file /tmp/authenticated-measurement-summary.md
+            fi
+            exit 1
+          fi

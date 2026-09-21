@@ -19,6 +19,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync, statSy
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
+import { measurementContext, unattended } from '../../measurement/browser-session.mjs';
 
 // ─── リポジトリ root の解決 (Mac / Windows 両対応) ──────────────────────────
 //
@@ -128,6 +129,10 @@ export function sha256Buf(buf) {
  * 自動突破はしない (人間が完了する)。
  */
 export async function launchContext(cfg, { headless } = {}) {
+  if (unattended()) {
+    const source = /^\.local\/playwright-(a8|moshimo|afb)-profile$/.exec(cfg.browser.profileDir)?.[1];
+    return measurementContext(source);
+  }
   const dir = profileDir(cfg);
   mkdirSync(dir, { recursive: true });
   const opts = {

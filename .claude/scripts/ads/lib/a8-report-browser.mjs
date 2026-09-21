@@ -29,6 +29,7 @@
  */
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { unattended } from '../../measurement/browser-session.mjs';
 
 import {
   launchContext,
@@ -88,6 +89,7 @@ export function reportUrl(cfg, reportKey) {
  * （scout-asp の asp-browser.mjs と同方式）。プロファイル本体と同じ root 解決を使う。
  */
 export async function restoreA8Session(context, cfg) {
+  if (unattended()) return { ok: true, reason: 'ci-scoped-state' };
   const statePath = join(checkoutRoot(), cfg.browser.stateFile);
   if (!existsSync(statePath)) {
     return { ok: false, statePath, reason: "state-missing" };
@@ -135,6 +137,7 @@ export async function isLoggedInA8(page, cfg) {
  * 収益アカウントのため CAPTCHA/2FA も人間が処理する。成功 true / タイムアウト false。
  */
 export async function waitForHumanLoginA8(page, cfg, { pollMs = 3000 } = {}) {
+  if (unattended()) throw new Error('auth_required');
   const maxWait = cfg.browser.loginMaxWaitMs || 900000;
   const stop = startStatusTicker(
     "A8 ログインを待機（ブラウザでログインしてください）",

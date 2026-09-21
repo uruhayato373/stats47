@@ -20,6 +20,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
+import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -385,6 +386,10 @@ function main() {
   lines.push("## 💰 週次収益（NSM）");
   lines.push("");
   lines.push(revenueSection(week));
+  lines.push('## 認証付き計測の稼働状況');
+  lines.push('');
+  lines.push(formatMeasurementHealth(readMeasurementHealth(PROJECT_ROOT)));
+  lines.push('');
   lines.push("## 🚨 今週の自動起票 Issue（閾値違反）");
   lines.push("");
   lines.push(alertsSection(week));

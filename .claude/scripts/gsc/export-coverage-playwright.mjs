@@ -97,7 +97,10 @@ async function assertNotBlocked(page) {
 async function ensureLoggedIn(page) {
   await page.goto(INDEX_URL, { waitUntil: "domcontentloaded", timeout: 60000 });
   await assertNotBlocked(page);
-  if (!isLoginUrl(page.url())) return true;
+  if (!isLoginUrl(page.url())) {
+    if (new URL(page.url()).searchParams.get('resource_id') !== PROPERTY) throw new Error('account_mismatch');
+    return true;
+  }
   console.log("\n[login] Google 未ログインです。開いた Chrome でログインしてください (最大10分待機)。");
   console.log("        認証情報はスクリプトが一切扱いません。\n");
   const ok = await waitForLogin(page, {
@@ -232,8 +235,9 @@ async function main() {
     for (const r of results) console.log(`${r.ok ? "OK  " : "NG  "} ${r.reason} — ${r.note}`);
     const okCount = results.filter((r) => r.ok).length;
     console.log(`\n${okCount}/${results.length} 件を ${args.dest} に保存`);
-    if (okCount === 0) {
-      console.error("!! 1 件も export できていません。--probe で DOM を確認してください");
+    fs.writeFileSync(path.join(args.dest, 'manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), property: PROPERTY, results, complete: okCount === results.length }, null, 2));
+    if (okCount !== results.length) {
+      console.error(`!! export が不完全です (${okCount}/${results.length})。--probe で DOM を確認してください`);
       process.exitCode = 1;
       return;
     }

@@ -2,6 +2,92 @@
   "version": 1,
   "description": "Environment variable names and exposure classes. Values must never be stored here.",
   "variables": [
+    { "name": "DISPLAY", "visibility": "server", "contexts": ["process"] },
+    {
+      "name": "MEASUREMENT_BROWSER_SOURCE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_BROWSER_STATE_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_BROWSER_OUTPUT_STATE_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION",
+      "visibility": "secret",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_VAULT_KEY",
+      "visibility": "secret",
+      "contexts": [
+        "secret",
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION_A8",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION_MOSHIMO",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION_AFB",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION_NOTE",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION_GSC",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION_KDP",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SESSION_COCONALA",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
     {
       "name": "ACCESSIBILITY_BASELINE",
       "visibility": "server",

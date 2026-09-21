@@ -2,7 +2,7 @@
 title: Playwright認証プロファイル
 type: technical-design
 status: adopted
-updated: 2026-09-07
+updated: 2026-09-21
 ---
 
 # Playwright認証プロファイル
@@ -45,8 +45,50 @@ product code、対応format、scope、必要roleまで確認する。
 **Playwright 自体は CI で動く。** `pr-quality-check.yml` と `post-deploy-smoke.yml` が `ubuntu-latest`（GitHub ホストランナー）で実行している。CI で足りないのは**認証済みセッション**だけで、Playwright の実行環境ではない。
 
 - **セルフホストランナーは本 repo では使えない。** stats47 は PUBLIC で、GitHub 公式が「セルフホストランナーは private repository のみ推奨。public repository の fork が危険なコードをランナー上で実行しうる」と警告している。
-- 認証済みセッションを CI へ渡すなら storage state を Secrets に置く経路になるが、Playwright 公式は state ファイルを「なりすましに使える機密」として repository へのコミットを強く非推奨としている（Secrets については公式ガイダンス無し）。**この方式を採る場合は本書「禁止事項」の Cookie 非 commit 規定との整合を先に決める。**
+- 認証済みセッションはサービス別にdomain allowlistで絞り、圧縮storageStateを`MEASUREMENT_SESSION_<SOURCE>` Secretsへ登録する。Cookieはread-only権限ではなくアカウント操作権限を持ちうるため、実行対象を固定済みの読み取りcollectorに限定する。public repositoryのgit・artifact・ログへstateを出さない。
 - セッションは期限切れするため、この経路でも初回作成と期限切れ時の再作成は人の操作として残る。
+
+`authenticated-measurement.yml`が毎日JST18:20にGitHub hosted Ubuntu + Playwright Chromium + Xvfbで実行する。
+`main`/`develop`だけを許可し、PR/forkではSecrets付きcollectorを起動しない。投稿・申請・出版・振込・設定変更は対象外。
+初回のdevelop workflow変更pushでも起動するが、schedule有効化にはmainへの反映が必要。
+
+| 対象 | 固定の読み取り範囲 | 完了と混同しないもの |
+|---|---|---|
+| もしも | site ID照合後の期間別成果 | 帰属不明・確定待ちを確定収益にしない |
+| A8 | 口座照合、サイト別月次CSV、reject検査 | 複数サイト共用口座の全体値をstats47にしない。個別案件EPCは別契約 |
+| afb | サイト帰属照合、提携/申請中一覧 | 成果・売上は未取得。別processへのsession移送を拒否されたら停止 |
+| note | 帰属・期間・全ページ・合計・公開カタログ・カバーの照合 | 欠落記事はnull。不完全データを全件成功にしない |
+| GSC | property照合、カバレッジCSV、既存ingest | APIの検索パフォーマンスとは別経路 |
+| KDP | known ASINで口座照合、登録書籍の出版状態 | 売上/KENPは未取得。KDP Reportsの別認証・取得器が必要 |
+| ココナラ | seller照合、全サービスの対象期間/閲覧/販売件数/販売額/お気に入り | 有料表示数はnull。ローリング30日を確定7日や手数料控除後収益にしない |
+
+保存先はprivate bucket `stats47-private` の `operations/authenticated-measurement/<source>/`。
+`MEASUREMENT_VAULT_KEY`によるAES-256-GCMでobject addressごとに認証し、PUT後GETの一致を検証する。
+`session.enc`（更新済み認証）、`latest-attempt.enc`、`latest-success.enc`と、UTC日付の剰余による
+`runs/day-0..29.enc`（30日分の循環slot）だけを保持し、無制限に履歴を増やさない。公開custom domainへ置かない。
+vault keyはR2 credentialsとは別Secret。初回端末の`.local/authenticated-measurement/vault-key`を保持し、
+紛失時に無断でrotateしない。認証・生データの漏洩時は本書のSecurity incidentに従う。
+
+gitに残すのは`.claude/state/metrics/authenticated/latest.json`の対象別成否・時刻・固定理由・証跡hashだけ。
+失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の`workflow-health-daily.yml`
+も48時間の鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
+もしも/A8はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
+初回成功後は最新試行の失敗・48時間超で復元を止め、古いgit入力へのfallbackはしない。
+
+```bash
+# ログイン済み専用profile/stateをSecretsへ送る（gh authが必要）。値はstdinで送り表示しない。
+npm run measurement:bootstrap -- note --publish
+# 初回/期限切れは専用ブラウザを開き、人がログイン・2FAを完了する。
+npm run measurement:bootstrap -- gsc --login --publish
+# 保存stateではなくprofileを使う場合
+npm run measurement:bootstrap -- moshimo --from-profile --publish
+npm run measurement:status -- --check
+npm run measurement:test
+```
+
+worktreeから既存profileを更新する場合だけ`--root /path/to/main-checkout`を指定する。同じprofileの別processは閉じる。
+bootstrapはセッション移送であり、取得成功の証明ではない。次のCIでaccount assertと実レポートを確認する。
+Cloudflare Browser Runへ置き換えてもログイン・2FA・Cookieの期限は解消しないため、まず既存CLIを再利用する。
 
 ### Playwright でも取得できないもの（提供側が封じた機能）
 
@@ -101,7 +143,7 @@ archive skill だけが参照する profile は Active 一覧へ含めない。�
 
 ### Google Admin
 
-profile はログイン保持だけに使い、GSC link作成とGA4 Library collection公開に限定する。
+profileはGSC coverageの読み取りと、承認付きGSC link作成・GA4 Library collection公開に使う。
 GA4 Admin API、AdSense read API、CIの承認境界、設定変更のallowlistは
 `.claude/scripts/google-admin/README.md`を正典とする。
 
