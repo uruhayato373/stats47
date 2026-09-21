@@ -1,17 +1,27 @@
 #!/usr/bin/env node
-import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { SOURCES } from './sources.mjs';
 
 const input = process.argv[2] || '.local/authenticated-ci-public';
 const output = '.claude/state/metrics/authenticated/latest.json';
 const previous = existsSync(output) ? JSON.parse(readFileSync(output, 'utf8')) : { sources: [] };
+const filenames = existsSync(input) ? readdirSync(input) : [];
 const sources = Object.entries(SOURCES).map(([source, config]) => {
-  const path = join(input, `${source}.json`);
+  // Highest attempt wins even when failed/malformed; never fall back to an older success.
+  // Legacy source.json: remove after 2026-10-21 (30-day artifact retention).
+  const candidates = filenames.flatMap(file => {
+    const match = new RegExp(`^${source}-([1-9]\\d*)\\.json$`).exec(file);
+    return match ? [{ file, attempt: Number(match[1]) }] : [];
+  }).sort((a, b) => b.attempt - a.attempt);
+  const selected = candidates[0];
+  const path = join(input, selected?.file ?? `${source}.json`);
   let value = {};
   try { if (existsSync(path)) value = JSON.parse(readFileSync(path, 'utf8')); } catch { /* malformed artifacts fail closed */ }
   const age = Date.now() - Date.parse(value?.observedAt);
   const valid = value?.source === source && value.capability === config.capability
+    && (!selected || (Number.isSafeInteger(selected.attempt) && value.runAttempt === selected.attempt
+      && (!process.env.GITHUB_RUN_ATTEMPT || selected.attempt <= Number(process.env.GITHUB_RUN_ATTEMPT))))
     && Number.isFinite(age) && age >= -300000 && age <= 2 * 86400000
     && (!process.env.GITHUB_RUN_ID || value.runId === process.env.GITHUB_RUN_ID);
   if (!valid) value = { code: existsSync(path) ? 'invalid_observation' : 'runner_failed' };
@@ -19,6 +29,7 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     activated: value.status === 'pass' || previous.sources?.some(s => s.source === source && s.activated === true) || false,
     status: value.status === 'pass' ? 'pass' : 'failed', code: value.code ?? (value.status === 'pass' ? null : 'runner_failed'),
     runId: value.runId ?? process.env.GITHUB_RUN_ID ?? null,
+    runAttempt: value.runAttempt ?? null,
     metricsAvailable: value.status === 'pass' && value.metricsAvailable === true,
     evidence: value.evidence ?? null,
     quality: value.quality ?? null,

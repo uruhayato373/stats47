@@ -16,13 +16,15 @@ const source = sourceFor(name);
 const local = process.argv.includes('--local');
 const now = new Date().toISOString();
 const runId = process.env.GITHUB_RUN_ID || String(Date.now());
+const runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT || 1);
+if (!Number.isSafeInteger(runAttempt) || runAttempt < 1) throw new Error('invalid_run_attempt');
 // Bounded private history: one overwritable slot per UTC day in a 30-day ring.
 const historyKey = `${name}/runs/day-${Math.floor(Date.now() / 86400000) % 30}`;
 const work = join(ROOT, '.local/authenticated-measurement', `${name}-${runId}`);
 const publicDir = join(ROOT, '.local/authenticated-ci-public');
 mkdirSync(work, { recursive: true, mode: 0o700 });
 mkdirSync(publicDir, { recursive: true });
-const result = { schemaVersion: 1, source: name, capability: source.capability, observedAt: now, status: 'failed', code: null, runId,
+const result = { schemaVersion: 1, source: name, capability: source.capability, observedAt: now, status: 'failed', code: null, runId, runAttempt,
   metricsAvailable: false, evidence: null };
 let logs = '';
 let bundle;
@@ -153,6 +155,7 @@ if (!local) {
   try { await writeVault(`${name}/latest-attempt`, result); }
   catch { result.status = 'failed'; result.code = 'storage_error'; }
 }
-writeFileSync(join(publicDir, `${name}.json`), JSON.stringify(result, null, 2) + '\n');
+// Re-running a job can retain same-named artifacts. Distinct filenames prevent merge races.
+writeFileSync(join(publicDir, `${name}-${runAttempt}.json`), JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify(result));
 process.exitCode = result.status === 'pass' ? 0 : 1;

@@ -453,6 +453,13 @@
       ]
     },
     {
+      "name": "GITHUB_RUN_ATTEMPT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "GITHUB_RUN_ID",
       "visibility": "server",
       "contexts": [
