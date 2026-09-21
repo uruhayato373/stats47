@@ -71,4 +71,8 @@ test('existing health workflow owns the fixed catch-up and reports failures inde
   assert.match(alert.if, /steps\.measurement_catchup\.outcome != 'success'/);
   assert.ok(collector.on.workflow_dispatch.inputs.catchup_slot);
   assert.match(collector['run-name'], /catch-up/);
+  const quality = yaml.load(readFileSync('.github/workflows/pr-quality-check.yml', 'utf8'));
+  const gate = quality.jobs['contract-tests'].steps.find(step => step.name === 'Authenticated measurement isolation and freshness');
+  assert.match(gate.run, /npm run note:metrics:test/);
+  assert.match(gate.run, /workflow-health-core\.test\.mjs/);
 });
