@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
 import { extractDashboardDom, collectDashboardPages } from "../lib/dashboard-dom.mjs";
-import { buildDashboardSnapshot, buildCoverMetricsReport, coverMetricsCsv, parseCount, defaultPeriod, validatePeriod } from "../lib/dashboard-metrics.mjs";
+import { buildDashboardSnapshot, buildCoverMetricsReport, classifyDashboardInventory, coverMetricsCsv, parseCount, defaultPeriod, validatePeriod } from "../lib/dashboard-metrics.mjs";
 
 const now = "2026-09-12T02:00:00Z";
 const period = { start: "2026-08-15", end: "2026-09-11" };
@@ -93,6 +93,55 @@ test("期間内の欠落行を0にせず、合計一致した記事だけを棚�
   assert.equal(missing.impressions, null); assert.equal(missing.pageViews, null); assert.equal(missing.baselineEligible, false);
   f.raw.summary.ページビュー = "500";
   assert.deepEqual(buildCoverMetricsReport(buildDashboardSnapshot(f), c, now).articles, []);
+});
+test("カバー監査にも無い欠測記事を落とさず、既知の観測記事と区別する", () => {
+  const f = fixture(); const c = covers();
+  for (const id of ["na2", "na3"]) f.catalog.articles.push({ key: id, noteUrl: `https://note.com/stats47/n/${id}` });
+  c.articles.push({ noteKey: "na2", noteUrl: "https://note.com/stats47/n/na2", title: "監査済み欠測記事", cover: { status: "configured" } });
+  const r = buildCoverMetricsReport(buildDashboardSnapshot(f), c, now);
+  assert.equal(r.status, "incomplete");
+  assert.equal(r.summary.published, 3); assert.equal(r.summary.metricsObserved, 1); assert.equal(r.summary.metricsMissing, 2);
+  assert.deepEqual(r.issues, ["metrics_incomplete", "cover_unknown:na3"]);
+  const observed = r.articles.find(a => a.noteId === "na1");
+  assert.equal(observed.metricsAvailability, "observed"); assert.equal(observed.baselineEligible, true);
+  assert.equal(observed.lane, "remediation"); assert.equal(observed.pageViews, 270);
+  for (const id of ["na2", "na3"]) {
+    const a = r.articles.find(article => article.noteId === id);
+    assert.equal(a.metricsAvailability, "missing_period_row"); assert.equal(a.baselineEligible, false);
+    assert.equal(a.fullPeriodExposure, null);
+    for (const key of ["impressions", "pageViews", "likes", "comments", "salesJpy"]) assert.equal(a[key], null);
+  }
+  assert.equal(r.articles.find(a => a.noteId === "na2").lane, "review_existing");
+  const unknown = r.articles.find(a => a.noteId === "na3");
+  assert.deepEqual(unknown.cover, { status: "unknown" }); assert.equal(unknown.lane, "investigate");
+  assert.equal(unknown.url, "https://note.com/stats47/n/na3"); assert.equal(unknown.title, null);
+});
+test("カバー監査の余剰記事があっても別の欠測記事を隠さない", () => {
+  const f = fixture(); const c = covers();
+  f.catalog.articles.push({ key: "article-2", noteUrl: "https://note.com/stats47/n/na2" });
+  c.articles.push({ noteKey: "na3", noteUrl: "https://note.com/stats47/n/na3", cover: { status: "configured" } });
+  const r = buildCoverMetricsReport(buildDashboardSnapshot(f), c, now);
+  assert.equal(r.status, "incomplete");
+  assert.ok(r.issues.includes("cover_unknown:na2")); assert.ok(r.issues.includes("unexpected_cover_article:na3"));
+  assert.ok(r.articles.some(a => a.noteId === "na2" && a.metricsAvailability === "missing_period_row"));
+});
+test("棚卸し分類は完全取得・一覧欠測だけ・利用不可を区別する", () => {
+  const f = fixture();
+  assert.equal(classifyDashboardInventory(buildDashboardSnapshot(f)), "complete");
+  f.catalog.articles.push({ key: "article-2", noteUrl: "https://note.com/stats47/n/na2" });
+  const partial = buildDashboardSnapshot(f);
+  assert.equal(classifyDashboardInventory(partial), "partial");
+  for (const mutate of [
+    s => { s.account = "other"; }, s => { s.schemaVersion = 1; },
+    s => { s.coverage.paginationComplete = false; }, s => { s.coverage.totalsMatched = false; },
+    s => { s.issues.push({ code: "invalid_snapshot" }); },
+    s => { s.coverage.missingFromDashboard = []; },
+  ]) {
+    const s = structuredClone(partial); mutate(s);
+    assert.equal(classifyDashboardInventory(s), "unavailable");
+  }
+  const complete = buildDashboardSnapshot(fixture()); complete.issues.push({ code: "total_mismatch" });
+  assert.equal(classifyDashboardInventory(complete), "unavailable");
 });
 test("未知のカバーと重複監査は比較候補にしない", () => {
   const s = buildDashboardSnapshot(fixture()); const c = covers();

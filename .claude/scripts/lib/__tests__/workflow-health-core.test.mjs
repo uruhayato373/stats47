@@ -5,12 +5,15 @@ import {
   classifyRun,
   evaluateAll,
   evaluateWorkflow,
+  evaluateSchedule,
   formatReport,
+  SCHEDULE_CONTRACTS,
 } from '../workflow-health-core.mjs';
 
 const NOW = Date.parse('2026-08-13T00:00:00Z');
 const run = (over = {}) => ({
   id: 1,
+  event: 'schedule',
   conclusion: 'success',
   createdAt: '2026-08-12T00:00:00Z',
   runStartedAt: '2026-08-12T00:00:00Z',
@@ -87,12 +90,99 @@ test('neutral は streak を切らないが数えもしない', () => {
   assert.equal(r.unhealthy, true);
 });
 
-// run が無い workflow を赤にすると、新設直後の cron が毎回赤くなって
-// 誰も見なくなる。確実に言える形だけを赤にする。
-test('run が 1 件も無ければ unhealthy にしない', () => {
+// 初回予定・周期が未定義のworkflowには日次前提を押し付けない。
+test('schedule契約の無いworkflowはrun未観測だけでunhealthyにしない', () => {
   const r = evaluateWorkflow('new.yml', [], { nowMs: NOW });
   assert.equal(r.unhealthy, false);
   assert.equal(r.runsInspected, 0);
+  assert.equal(r.schedule, null);
+});
+
+const AUTHENTICATED = 'authenticated-measurement.yml';
+const scheduledRun = (createdAt, over = {}) => run({ createdAt, updatedAt: createdAt, ...over });
+
+test('初回予定の前・実測3時間25分遅延・6時間猶予内は未発火を許容する', () => {
+  for (const at of ['2026-09-21T01:40:25Z', '2026-09-21T12:45:00Z', '2026-09-21T15:19:59.999Z']) {
+    const result = evaluateWorkflow(AUTHENTICATED, [], { nowMs: Date.parse(at) });
+    assert.equal(result.unhealthy, false, at);
+    assert.equal(result.schedule.code, null);
+    assert.equal(result.schedule.expectedAt, '2026-09-21T09:20:00.000Z');
+    assert.equal(result.schedule.deadlineAt, '2026-09-21T15:20:00.000Z');
+  }
+});
+
+test('初回予定から6時間経過して未発火なら検出する', () => {
+  const result = evaluateWorkflow(AUTHENTICATED, [], { nowMs: Date.parse('2026-09-21T15:20:00Z') });
+  assert.equal(result.unhealthy, true);
+  assert.equal(result.failureStreak, 0);
+  assert.equal(result.schedule.code, 'scheduled_run_missing');
+  assert.equal(result.schedule.lastRunAt, null);
+});
+
+test('翌日も予定枠から6時間を待ち、前日の遅延で期限を延ばさない', () => {
+  const runs = [scheduledRun('2026-09-21T12:45:00Z')];
+  assert.equal(evaluateWorkflow(AUTHENTICATED, runs, {
+    nowMs: Date.parse('2026-09-22T15:19:59.999Z'),
+  }).unhealthy, false);
+  const result = evaluateWorkflow(AUTHENTICATED, runs, { nowMs: Date.parse('2026-09-22T15:20:00Z') });
+  assert.equal(result.unhealthy, true);
+  assert.equal(result.schedule.code, 'scheduled_run_stale');
+  assert.equal(result.schedule.expectedAt, '2026-09-22T09:20:00.000Z');
+});
+
+test('古いschedule成功を今日再試行してもcreatedAt基準で停止を検出する', () => {
+  const result = evaluateWorkflow(AUTHENTICATED, [scheduledRun('2026-09-21T09:20:00Z', {
+    runStartedAt: '2026-09-23T15:30:00Z', updatedAt: '2026-09-23T15:40:00Z',
+  })], { nowMs: Date.parse('2026-09-23T16:00:00Z') });
+  assert.equal(result.unhealthy, true);
+  assert.equal(result.schedule.code, 'scheduled_run_stale');
+});
+
+test('push/manualの成功は初回未発火・古いschedule・連続失敗を解消しない', () => {
+  const manual = ['push', 'workflow_dispatch'].map(event => scheduledRun('2026-09-23T15:30:00Z', { event }));
+  const nowMs = Date.parse('2026-09-23T16:00:00Z');
+  const missing = evaluateWorkflow(AUTHENTICATED, manual, { nowMs });
+  assert.equal(missing.schedule.code, 'scheduled_run_missing');
+  assert.equal(missing.runsInspected, 0);
+  const stale = evaluateWorkflow(AUTHENTICATED, [...manual, scheduledRun('2026-09-21T09:20:00Z')], { nowMs });
+  assert.equal(stale.schedule.code, 'scheduled_run_stale');
+  const failures = evaluateWorkflow(AUTHENTICATED, [...manual,
+    scheduledRun('2026-09-23T09:20:00Z', { conclusion: 'failure' }),
+    scheduledRun('2026-09-22T09:20:00Z', { conclusion: 'failure' }),
+  ], { nowMs });
+  assert.equal(failures.failureStreak, 2);
+  assert.equal(failures.unhealthy, true);
+});
+
+test('新しいscheduleが実行中なら未発火を解消し、成功で既存失敗判定も復旧する', () => {
+  const nowMs = Date.parse('2026-09-23T16:00:00Z');
+  for (const conclusion of [null, 'success']) {
+    const result = evaluateWorkflow(AUTHENTICATED, [scheduledRun('2026-09-23T15:30:00Z', { conclusion })], { nowMs });
+    assert.equal(result.schedule.code, null);
+    assert.equal(result.unhealthy, false);
+  }
+});
+
+test('欠損・不正・未来のcreatedAtは未発火を隠さない', () => {
+  for (const createdAt of [undefined, 'invalid', '2026-09-24T09:20:00Z']) {
+    assert.equal(evaluateWorkflow(AUTHENTICATED, [scheduledRun(createdAt)], {
+      nowMs: Date.parse('2026-09-23T16:00:00Z'),
+    }).schedule.code, 'scheduled_run_missing');
+  }
+});
+
+test('時刻未指定と契約外cronの古い成功では新規の停止判定を行わない', () => {
+  assert.equal(evaluateWorkflow(AUTHENTICATED, []).schedule, null);
+  assert.equal(evaluateWorkflow('weekly.yml', [run()], {
+    nowMs: Date.parse('2026-09-23T16:00:00Z'),
+  }).unhealthy, false);
+});
+
+test('再利用する予定枠計算も手動runを除外する', () => {
+  const result = evaluateSchedule(AUTHENTICATED, [scheduledRun('2026-09-23T15:30:00Z', {
+    event: 'workflow_dispatch',
+  })], Date.parse('2026-09-23T16:00:00Z'));
+  assert.equal(result.code, 'scheduled_run_missing');
 });
 
 test('1 回だけの失敗では鳴らない (既定 minStreak=2)', () => {
@@ -157,6 +247,39 @@ test('報告に workflow 名・連続回数・run URL が出る', () => {
   assert.match(out, /rakuten\.yml: 2 回連続失敗/);
   assert.match(out, /最終成功から 9 日/);
   assert.match(out, /https:\/\/github\.com\/o\/r\/actions\/runs\/111/);
+});
+
+test('未発火もunhealthy集計と報告へ入り、0回連続失敗と誤表示しない', () => {
+  const summary = evaluateAll([{ workflow: AUTHENTICATED, runs: [] }], {
+    nowMs: Date.parse('2026-09-22T00:00:00Z'),
+  });
+  assert.equal(summary.unhealthy.length, 1);
+  const out = formatReport(summary);
+  assert.match(out, /scheduled_run_missing/);
+  assert.match(out, /2026-09-21T09:20:00.000Z/);
+  assert.match(out, /猶予 6時間/);
+  assert.doesNotMatch(out, /0 回連続失敗/);
+});
+
+test('明示schedule契約は実workflowのUTC日次cronと一致する', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const { fileURLToPath } = await import('node:url');
+  const { default: yaml } = await import('js-yaml');
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
+  for (const [workflow, contract] of Object.entries(SCHEDULE_CONTRACTS)) {
+    const source = yaml.load(fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8'));
+    const first = new Date(contract.firstExpectedAt);
+    assert.equal(contract.intervalHours, 24);
+    assert.deepEqual(source.on.schedule, [{ cron: `${first.getUTCMinutes()} ${first.getUTCHours()} * * *` }]);
+  }
+});
+
+test('API取得はscheduleで絞り込み、eventを判定層まで維持する', async () => {
+  const fs = await import('node:fs');
+  const source = fs.readFileSync(new URL('../../ci/audit-workflow-health.mjs', import.meta.url), 'utf8');
+  assert.match(source, /runs\?event=schedule&per_page=/);
+  assert.match(source, /event: r\.event/);
 });
 
 // ── isScheduled ──────────────────────────────────────────────────────────────

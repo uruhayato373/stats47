@@ -1,7 +1,13 @@
 name: Authenticated measurement
+run-name: "${{ inputs.catchup_slot && format('Authenticated measurement catch-up {0}', inputs.catchup_slot) || 'Authenticated measurement' }}"
 
 on:
   workflow_dispatch:
+    inputs:
+      catchup_slot:
+        description: "Overdue schedule slot recorded by the health watchdog (blank for a manual run)"
+        required: false
+        type: string
   schedule:
     - cron: '20 9 * * *' # JST 18:20; before weekly metric consumers
   push:

@@ -62,6 +62,7 @@ function fetchRuns(repo, workflowFile, perPage) {
     const data = gh(endpoint);
     return (data.workflow_runs ?? []).map((r) => ({
       id: r.id,
+      event: r.event,
       conclusion: r.conclusion,
       createdAt: r.created_at,
       runStartedAt: r.run_started_at,

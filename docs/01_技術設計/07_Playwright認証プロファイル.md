@@ -67,12 +67,14 @@ product code、対応format、scope、必要roleまで確認する。
 `MEASUREMENT_VAULT_KEY`によるAES-256-GCMでobject addressごとに認証し、PUT後GETの一致を検証する。
 `session.enc`（更新済み認証）、`latest-attempt.enc`、`latest-success.enc`と、UTC日付の剰余による
 `runs/day-0..29.enc`（30日分の循環slot）を保持する。KDPの月次だけは`kdp/monthly/month-0..23.enc`に原本XLSX・正規化結果・SHAを24報告月の循環slotとして別保管する（税務帳簿の保存契約ではない）。無制限に履歴を増やさず、公開custom domainへ置かない。
+認証拒否は固定`auth-recovery.enc`へ本人認証世代と失敗時刻を記録する。同じ世代・古い世代ではブラウザを開かず、`collectionAttempted:false`と`recovery:awaiting_reauthentication`を記録する。待機証跡は固定`latest-blocked.enc`に分離し、最後に実際の画面で失敗した日の証跡を待機ログで上書きしない。新しい本人認証の公開後に次回CIで再開し、自動refreshや時間経過だけでは解除しない。他sourceは独立して継続する。
 vault keyはR2 credentialsとは別Secret。初回端末の`.local/authenticated-measurement/vault-key`を保持し、
 紛失時に無断でrotateしない。認証・生データの漏洩時は本書のSecurity incidentに従う。
 
 gitに残すのは`.claude/state/metrics/authenticated/latest.json`の対象別成否・時刻・固定理由・証跡hashだけ。
 失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の`workflow-health-daily.yml`
 も48時間の鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
+さらに同監視は認証付き計測の初回未発火・古いscheduleを予定時刻から6時間の猶予で検知する（GitHubの起動時刻保証ではなく運用上の検知猶予）。push/manualの成功でschedule異常を消さない。翌朝の既存health実行で、期限超過かつ同期間のrun・進行中runが無い場合だけ固定workflowをmainへcatch-up dispatchする。`.claude/state/ci/authenticated-catchup.json`の予定枠をContents APIのSHA比較で先に予約し、API一覧への反映遅延やPOST応答喪失でも同じ枠を再送しない。予約/dispatch失敗は監視Issueへ残し、成功した補完起動もschedule成功とは呼ばない。GitHub全体の停止は同じ基盤の監視では解消できず、外部監視は別の承認・設計が必要。
 収集範囲（capability）・対象source・実行ID・観測時刻が一致しないstatusは成功にしない。
 再実行は同名artifactが残り、download側の同名除去が古い結果を選ぶことがある。対処はartifact名`authenticated-status-<source>-<runAttempt>`と中のファイル名`<source>-<runAttempt>.json`の両方を分離し、集約で最大attemptを選ぶこと。ファイル名だけの変更では未解決。最新attemptが失敗・不正なら古い成功に戻さず、収集jobの失敗中は警告をcloseしない（2026-09-21 CI `35560007703` attempts 3/4のdownloadログとgit記録の不一致で確認、回帰テスト追加）。
 afbは`site-conversion-outcomes`だけを受理し、旧`partnership-status`成功では成果取得を充足しない。
@@ -93,6 +95,7 @@ KDPの昨日値は速報値で、注文等はマーケットプレイス現地�
 過去月は`node .claude/scripts/measurement/restore.mjs kdp --month YYYY-MM`で正規化結果だけを`restored/kdp-monthly-YYYY-MM.json`へ復元する。月の一致と原本SHAを再検査し、循環slotが別月へ上書き済みなら停止する。履歴復元には最新試行の48時間鮮度を要求しないが、現在の収集成功や認証有効性を証明するものではなく、最新結果を上書きしない。
 もしも/A8はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
 初回成功後は最新試行の失敗・48時間超で復元を止め、古いgit入力へのfallbackはしない。
+noteだけは`node .claude/scripts/measurement/restore.mjs note --inventory-only`で棚卸し専用の`restored/note-inventory.json`を復元できる。記事行の欠落以外に異常が無く、帰属・全ページ・合計・24時間鮮度・カバー照合・集合・null保持・最新試行の証跡SHAが一致した場合だけ`inventoryAvailable:true`とする。全体は`report_incomplete`・`metricsAvailable:false`のまま、通常の復元先は更新せず、全件KPI・効果判定には使わない。復元結果の全行も`baselineEligible:false`に固定する。カバー監査に無い欠測記事もplaceholderで保持し、unknown/investigateにする。
 
 ```bash
 # ログイン済み専用profile/stateをSecretsへ送る（gh authが必要）。値はstdinで送り表示しない。

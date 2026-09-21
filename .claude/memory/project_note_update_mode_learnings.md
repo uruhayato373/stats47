@@ -72,6 +72,7 @@ DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operatio
 - **対策**: `npm run note:metrics:fetch`でラベル・期間・時刻・全ページ・合計を検証する。再表示された「もっとみる」は続けて開く。カタログ欠落だけなら他の検証済み行を残し、欠落行はnull、全体はincomplete。新schemaVersion 2は`.claude/state/metrics/note/dashboard/`に保存する。PV/表示回数をCTRにしない。
 - **証拠**: 同ディレクトリの2026-08-15〜09-11履歴は285記事、合計一致、`n99561600d4fe`だけ欠落。2021-05-01からの拡張期間では286記事すべて表示され、同記事も確認できた。短い期間の値を0と推測しない。
 - **終了処理**: `browser-use sessions`が0でも検査用daemonとChromeがOS上に残った。新collectorは一意sessionのPID/子プロセス/複製profileを追跡して停止・削除する。他taskへglobal pkillしない。
+- **欠測集合の再発防止（2026-09-21）**: カバー監査の残余行だけをplaceholder元にすると、後発のカタログ記事が期間一覧とカバー監査の両方に無い場合に欠測自体が消える。`coverage.missingFromDashboard`全件を起点にnull行を保持し、カバー未確認はunknown/investigateにする。`dashboard-metrics.test.mjs`の集合差fixtureと、measurementの用途限定restoreによる証跡SHA・集合・null検査で固定する。
 
 ## カバー SSOT
 
