@@ -84,7 +84,8 @@ HTTP成功時のJSON本文は配列として扱う。2026-09-21の実応答は`[
 APIキーはオーナー承認を得てGitHub Actions Secret `AFB_API_KEY`へ登録し、git・ログ・artifact・vaultへ書かない。
 認証エラーはキーと公式設定を照合する。Cookie再ログインへのfallbackや無断再発行はしない。
 復元側もcapabilityを照合する。人間ログイン時刻を`bootstrapCapturedAt`として保持し、古いログイン由来のCI更新が新しいSecretを上書き選択しない。世代情報のない旧sessionはSecretより優先しない。
-KDPの昨日値はマーケットプレイス現地日付・速報値で、遅延や再集計がありうる。日次値の単純合算で確定週次売上を作らない。
+KDPはknown ASINで本棚の口座を照合後、全書籍の状態巡回より先にReports認証を確認する。巡回後のReports取得・検査まで成功して初めて認証更新を保存する。本棚だけ成功した試行でReports未認証のsessionを保存しない。本人ログインの`--reports`もEnterだけではexportせず、Reportsの表示を確認する。
+KDPの昨日値は速報値で、注文等はマーケットプレイス現地日付、KENPはUTC。正規化は各recordの`dateBasis`に保持する（[公式Dashboard](https://kdp.amazon.com/en_US/help/topic/GX7EGDFGS9CZCA2F)、2026-09-21確認）。遅延や再集計がありうるため、日次値の単純合算で確定週次売上を作らない。確定収益の元資料は毎月15日前後に作成される[月別のロイヤリティ](https://kdp.amazon.co.jp/ja_JP/help/topic/G200641190)。ASIN・通貨別の月次収益であり、共有口座の支払い総額や週次純収益にそのまま転記しない。
 もしも/A8はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
 初回成功後は最新試行の失敗・48時間超で復元を止め、古いgit入力へのfallbackはしない。
 

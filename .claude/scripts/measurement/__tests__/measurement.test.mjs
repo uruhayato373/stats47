@@ -12,7 +12,7 @@ import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
 import { parseCoconalaAnalytics, validateCoconalaCoverage } from '../report-parsers.mjs';
 import ExcelJS from 'exceljs';
-import { kdpAsinMap, parseKdpReport } from '../kdp-reports.mjs';
+import { kdpAsinMap, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
 import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
 
 test('GSC validates ZIP contents, expected categories, row counts and site ownership', () => {
@@ -93,13 +93,44 @@ function kdpFixture() {
   return book;
 }
 const kdpListings = { 'K-S1-01': { author: 'stats47', asin: null, previousEditions: [{ author: 'stats47', asin: 'B0HF17SQ9N' }] } };
+test('KDP Reports readiness rejects login and requires the actual report UI', async () => {
+  let url = 'https://kdpreports.amazon.co.jp/dashboard';
+  let ready = false;
+  const tab = { first: () => tab, waitFor: async options => {
+    assert.equal(options.state, 'visible');
+    if (!ready) throw new Error('report UI unavailable');
+  } };
+  const page = { goto: async target => assert.equal(target, 'https://kdpreports.amazon.co.jp/dashboard'),
+    url: () => url, getByRole: (role, options) => {
+      assert.equal(role, 'tab'); assert.equal(options.name, '昨日'); return tab;
+    } };
+  await assert.rejects(openKdpReports(page), /report UI unavailable/);
+  ready = true;
+  assert.equal(await openKdpReports(page), tab);
+  url = 'https://www.amazon.co.jp/ap/signin';
+  await assert.rejects(openKdpReports(page), /auth_required/);
+});
+test('KDP checks Reports before scanning and verifies refresh only after final collection', () => {
+  const code = readFileSync('.claude/scripts/measurement/marketplace-status.mjs', 'utf8');
+  const identity = code.indexOf('if (!identity.found');
+  const preflight = code.indexOf('await openKdpReports(page)');
+  const report = code.indexOf('sales = await collectKdpReport');
+  const verified = code.indexOf('markMeasurementAuthenticated(source)');
+  const scan = code.indexOf('for (const [id, entry]');
+  assert.ok(identity > 0 && identity < preflight && preflight < scan && scan < report && report < verified);
+  const bootstrap = readFileSync('.claude/scripts/measurement/bootstrap-session.mjs', 'utf8');
+  const readiness = bootstrap.indexOf('await openKdpReports(page)');
+  assert.ok(readiness > 0 && readiness < bootstrap.indexOf('state = await context.storageState'));
+});
 test('KDP scopes old editions by exact ASIN and never adds shared-account totals', () => {
   const report = parseKdpReport(kdpFixture(), kdpListings, '2026-09-20');
   assert.equal(report.records.find(r=>r.kind==='processed-orders').paid, 2);
   assert.equal(report.records.find(r=>r.kind==='kenp').pages, 12);
   assert.equal(report.coverage.excludedRows, 1);
   assert.equal(report.finality, 'provisional');
-  assert.equal(report.period.basis, 'marketplace-local-date');
+  assert.equal(report.period.basis, 'metric-specific-date');
+  assert.equal(report.records.find(r=>r.kind==='processed-orders').dateBasis, 'marketplace-local-date');
+  assert.equal(report.records.find(r=>r.kind==='kenp').dateBasis, 'UTC');
   assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.xlsx'), null);
   assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.json'), '.local/authenticated-measurement/restored/kdp.json');
 });
