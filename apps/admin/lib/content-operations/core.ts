@@ -105,6 +105,12 @@ const SOURCES: Record<ContentChannelDTO, string> = {
     "packages/product-factory/src/channels/kindle/book-catalog.ts + .claude/config/kdp-listings.json",
 };
 
+const KDP_BLOCKED_ACTIONS = new Map([
+  ["blocked-thin", "本文量の不足を是正して再検証"],
+  ["blocked-design", "編集設計を完了して再検証"],
+  ["withdrawn", "取り下げ済み: 再出版には再設計とオーナー承認が必要"],
+]);
+
 function socialStage(status: string): ContentStageDTO {
   if (status === "posted" || status === "published") return "published";
   if (status === "scheduled") return "scheduled";
@@ -221,7 +227,8 @@ export function buildContentOperations(
         message: "title / epubPath / coverPath の必須項目が不足しています",
       });
     }
-    if (!new Set(["draft", "listed"]).has(listing.status)) {
+    const isBlocked = !["draft", "listed"].includes(listing.status);
+    if (isBlocked && !KDP_BLOCKED_ACTIONS.has(listing.status)) {
       findings.push({
         severity: "error",
         code: "KDP_STATUS_INVALID",
@@ -278,7 +285,9 @@ export function buildContentOperations(
           ? "verified"
           : "stale";
     const stage: ContentStageDTO =
-      listing.status === "listed"
+      isBlocked
+        ? "blocked"
+        : listing.status === "listed"
         ? kdpStatus === "live"
           ? "published"
           : kdpStatus === "in_review"
@@ -288,7 +297,9 @@ export function buildContentOperations(
           ? "ready"
           : "draft";
     const nextAction =
-      stage === "published"
+      isBlocked
+        ? KDP_BLOCKED_ACTIONS.get(listing.status) ?? "出品状態を確認する"
+        : stage === "published"
         ? "売上・KENPを計測"
         : stage === "review"
           ? "KDP審査結果を同期"

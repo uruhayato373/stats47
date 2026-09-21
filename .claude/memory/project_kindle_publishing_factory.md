@@ -85,5 +85,13 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 
 セッション scratchpad はセッション終了で消える (`extract-one.mjs` / `book-fix.mjs` / 展開済み章テキストを一度失った)。書籍監査のツールと展開物は **`.local/kindle-audit/`** (git 管理外・永続) に置く: `extract-one.mjs` (EPUB→章テキスト) / `book-fix.mjs` (`map` = review.md の findings を raw markdown の逐語 before に写像・図指定は行削除・callout/箇条書き/見出しの接頭辞を保持・「本章→本記事」の再試行、`emit` = editorial-corrections.ts へ既存保持でマージ+manuscript 直接編集、`prune` = raw に当たらない校訂の掃除、`sources` = 章→素材) / `articles/` (R2 記事のキャッシュ) / `epub-v3/<id>-<version>/` / `defsheet-<id>.md`。critic の after に混じる指示文 (「（削除する）」「〜を明記」) は本文に印字されるので、emit 前後に必ず走査して落とす。
 
+## 出品状態追加時は管理画面の読み取り契約も更新する (2026-09-21)
+
+- **問題**: 全セッション統合のCIで `KDP_STATUS_INVALID` が20冊に発生し、取り下げ済み・設計待ちの本が「公開準備済み」に分類された。
+- **原因**: listings は `withdrawn` / `blocked-design` を保持していたが、`apps/admin/lib/content-operations/core.ts` は `draft` / `listed` だけを認識し、完成物やarchiveの存在でreadyへ進めていた。
+- **対策**: `blocked-thin` / `blocked-design` / `withdrawn` をblockedに正規化し、復元・公開案内より停止理由を優先する。未知の状態は監査エラーとblockedを維持する。状態追加時は同read model・unit test・`npm run audit:content-operations`を一緒に検証する。
+- **証拠**: PR #999 / CI run `35550551365`、`apps/admin/tests/unit/content-operations.test.ts`。
+
 ## 正典
+
 `.claude/rules/coconala-product-standards.md §8` (product-factory同居) / 企画SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts`。初期市場・書籍調査はGit履歴。関連: [[project_coconala_product_factory]] [[project_blog_remediation_loop]]

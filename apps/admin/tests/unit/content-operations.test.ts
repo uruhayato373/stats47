@@ -97,6 +97,42 @@ describe("content operations core", () => {
     );
   });
 
+  it.each([
+    ["blocked-thin", "本文量の不足を是正して再検証"],
+    ["blocked-design", "編集設計を完了して再検証"],
+    ["withdrawn", "取り下げ済み: 再出版には再設計とオーナー承認が必要"],
+  ])("%sは完成物やarchiveがあっても公開準備済みにしない", (status, nextAction) => {
+    const input = fixture();
+    const result = buildContentOperations({
+      ...input,
+      kindleListings: [{
+        ...input.kindleListings[0],
+        status,
+        archiveRevision: "previous-edition",
+      }],
+    });
+
+    expect(result.audit.status).toBe("pass");
+    expect(result.kindle[0]).toMatchObject({ stage: "blocked", nextAction });
+    expect(result.channels.find((x) => x.channel === "kindle")).toMatchObject({
+      ready: 0, published: 0, blocked: 1,
+    });
+  });
+
+  it("未知のKDP状態は拒否し公開を案内しない", () => {
+    const input = fixture();
+    const result = buildContentOperations({
+      ...input,
+      kindleListings: [{ ...input.kindleListings[0], status: "unexpected" }],
+    });
+
+    expect(result.audit.status).toBe("fail");
+    expect(result.audit.findings.map((x) => x.code)).toContain("KDP_STATUS_INVALID");
+    expect(result.kindle[0]).toMatchObject({
+      stage: "blocked", nextAction: "出品状態を確認する",
+    });
+  });
+
   it("審査中を公開済みと誤認せず、ASIN割当前でもreviewにする", () => {
     const input = fixture({
       kindleListings: [
