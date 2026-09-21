@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sources.mjs';
 import { readVault, writeVault } from './vault.mjs';
 import { collectAfbOutcomes } from './afb-outcomes.mjs';
+import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
 
 const run = promisify(execFile);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -123,7 +124,17 @@ try {
   } else {
     await command('.claude/scripts/measurement/marketplace-status.mjs', [name, join(work, 'status.json')], 900000);
     capture(`.local/authenticated-measurement/${name}-${runId}/status.json`);
-    if (name === 'kdp') capture(`.local/authenticated-measurement/${name}-${runId}/status.xlsx`);
+    if (name === 'kdp') {
+      capture(`.local/authenticated-measurement/${name}-${runId}/status.xlsx`);
+      const monthlyPath = `.local/authenticated-measurement/${name}-${runId}/status.monthly.xlsx`;
+      capture(monthlyPath);
+      const monthly = JSON.parse(readFileSync(join(work, 'status.json'), 'utf8')).monthlyRoyalties;
+      if (monthly?.finality !== 'finalized-monthly-royalty' || !monthly.coverage?.complete) throw new Error('report_incomplete: monthly_missing');
+      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true };
+      if (!local) await writeVault(kdpMonthlyVaultKey(monthly.period.month), {
+        schemaVersion: 1, source: 'kdp', observedAt: now, report: monthly, workbook: files[monthlyPath],
+      });
+    }
   }
   const evidence = { schemaVersion: 1, source: name, observedAt: now, files, logs };
   writeFileSync(join(work, 'evidence.json'), JSON.stringify(evidence), { mode: 0o600 });
