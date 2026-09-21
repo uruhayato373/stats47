@@ -1,28 +1,28 @@
 # cron ヘルスチェック
 
-取得: 2026-09-20T03:31:55.278Z
+取得: 2026-09-21T02:38:48.947Z
 
 ```
-scheduled workflow 45 件を検査
+scheduled workflow 46 件を検査
 
 ⚠️ 連続失敗 6 件:
-- workflow-health-daily.yml: 11 回連続失敗 (直近 12 回に成功なし)
+- workflow-health-daily.yml: 12 回連続失敗 (直近 12 回に成功なし)
+    2026-09-20T03:31:13Z failure https://github.com/uruhayato373/stats47/actions/runs/35486784509
     2026-09-19T03:14:06Z failure https://github.com/uruhayato373/stats47/actions/runs/35417967577
     2026-09-18T03:17:47Z failure https://github.com/uruhayato373/stats47/actions/runs/35302666963
-    2026-09-17T03:31:50Z failure https://github.com/uruhayato373/stats47/actions/runs/35178510502
-- ai-content-gemini-daily.yml: 10 回連続失敗 (最終成功から 10 日)
+- ai-content-gemini-daily.yml: 11 回連続失敗 (最終成功から 11 日)
+    2026-09-21T00:14:41Z failure https://github.com/uruhayato373/stats47/actions/runs/35547070398
     2026-09-20T00:08:10Z failure https://github.com/uruhayato373/stats47/actions/runs/35477964730
     2026-09-19T00:19:08Z failure https://github.com/uruhayato373/stats47/actions/runs/35408941371
-    2026-09-18T00:15:38Z failure https://github.com/uruhayato373/stats47/actions/runs/35290425901
-- backlog-loop-daily.yml: 9 回連続失敗 (最終成功から 9 日)
+- backlog-loop-daily.yml: 10 回連続失敗 (最終成功から 10 日)
+    2026-09-20T18:57:54Z failure https://github.com/uruhayato373/stats47/actions/runs/35530735681
     2026-09-19T18:43:06Z failure https://github.com/uruhayato373/stats47/actions/runs/35462088262
     2026-09-18T19:06:27Z failure https://github.com/uruhayato373/stats47/actions/runs/35384062961
-    2026-09-17T19:47:26Z failure https://github.com/uruhayato373/stats47/actions/runs/35266957408
-- ogp-image-audit-weekly.yml: 8 回連続失敗 (最終成功から 56 日)
+- ogp-image-audit-weekly.yml: 8 回連続失敗 (最終成功から 57 日)
     2026-09-19T20:23:37Z failure https://github.com/uruhayato373/stats47/actions/runs/35467246216
     2026-09-12T20:24:39Z failure https://github.com/uruhayato373/stats47/actions/runs/34717006675
     2026-09-05T20:11:12Z failure https://github.com/uruhayato373/stats47/actions/runs/33989340542
-- provenance-audit-weekly.yml: 4 回連続失敗 (最終成功から 28 日)
+- provenance-audit-weekly.yml: 4 回連続失敗 (最終成功から 29 日)
     2026-09-19T21:10:16Z failure https://github.com/uruhayato373/stats47/actions/runs/35469596086
     2026-09-12T21:05:47Z failure https://github.com/uruhayato373/stats47/actions/runs/34718968690
     2026-09-05T20:48:57Z failure https://github.com/uruhayato373/stats47/actions/runs/33991218656
