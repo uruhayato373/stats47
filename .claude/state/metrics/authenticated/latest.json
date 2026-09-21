@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T06:34:45.006Z",
+  "generatedAt": "2026-09-21T06:55:08.753Z",
   "runId": "35561887453",
   "sources": [
     {
@@ -101,19 +101,23 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-09-21T06:34:00.924Z",
+      "observedAt": "2026-09-21T06:48:27.457Z",
       "activated": true,
-      "status": "failed",
-      "code": "auth_required",
+      "status": "pass",
+      "code": null,
       "runId": "35561887453",
-      "runAttempt": 5,
-      "metricsAvailable": false,
+      "runAttempt": 6,
+      "metricsAvailable": true,
       "evidence": {
-        "sha256": "6a06cca25ddbdb2d48364f39ada2f8d0220fadb16d0318f4bcb665d087510791",
-        "bytes": 1467
+        "sha256": "254d945a1523ed03102b3e94fbb3b5c655b2155ff5b5a50942bc9a1b253705b1",
+        "bytes": 28396
       },
-      "quality": null,
-      "remaining": "finalized_royalties_not_collected"
+      "quality": {
+        "monthlyPeriod": "2026-08",
+        "monthlyRows": 1,
+        "monthlyComplete": true
+      },
+      "remaining": "payout_and_net_profit_not_collected"
     },
     {
       "source": "coconala",
