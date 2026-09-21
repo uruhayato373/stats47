@@ -38,7 +38,8 @@ product code、対応format、scope、必要roleまで確認する。
 | Amazon KDP の出品 | 無い（Amazon が公開 API を提供していない） | Playwright |
 | note の記事投稿 | 公式 API 無し。非公開エンドポイントは note が保証せず規約・アカウントリスクがある | Playwright |
 | A8 の提携申請・広告コード取得 | メディア側の該当 API は見当たらない（A8 の公開 API は広告主・ASP 事業者向けの成果確定／成果連携） | Playwright |
-| ココナラ / もしも / afb | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
+| afb 成果データ取得 | [公式の成果情報API](https://www.afi-b.com/guide/api-linkage/)あり。キー発行・仕様書はログイン後の[管理画面](https://www.afi-b.com/pa/tool/api)。2026-09-21確認、当口座の利用条件とキーは未確認 | 成果取得はAPIを優先して契約確認。現行CIは提携状態のみでAPI未接続 |
+| ココナラ / もしも | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
 
 ### CI 実行について
 
