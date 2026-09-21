@@ -48,12 +48,12 @@ export function afbRequest(config, period, basis, now = new Date()) {
   return { url, partnerId, siteId, period: { start, end }, basis, dateField: mode.field };
 }
 export function parseAfbOutcomes(payload, request) {
-  if (!payload || typeof payload !== 'object' || !Array.isArray(payload.response)
-    || (payload.error_message != null && payload.error_message !== '')
-    || Object.keys(payload).some(key => !['response', 'error_message'].includes(key))) throw new Error(`report_schema_changed: envelope ${JSON.stringify(responseShape(payload))}`);
+  // The spec's "response" labels the HTTP body, not a wrapper property.
+  // Verified live on 2026-09-21: successful zero outcomes are the literal JSON [].
+  if (!Array.isArray(payload)) throw new Error(`report_schema_changed: envelope ${JSON.stringify(responseShape(payload))}`);
   const seen = new Set();
   const totals = Object.fromEntries(['pending', 'approved', 'rejected'].map(key => [key, { count: 0, reportedMargin: 0 }]));
-  const records = payload.response.map(row => {
+  const records = payload.map(row => {
     if (!row || typeof row !== 'object') throw new Error('report_schema_changed: row');
     assertSiteOrThrow({ actualSiteId: row.partner_site_id, expectedSiteId: request.siteId });
     const conversionId = id(row.commit_id), promotionId = id(row.adv_id);

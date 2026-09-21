@@ -14,7 +14,7 @@ const request = afbRequest(config, period, 'occurrence', now);
 const row = { commit_id: '123', adv_id: '456', partner_site_id: '959426', partner_site_name: '統計で見る都道府県',
   visit_time: '2026-08-23 09:00:00', commit_time: '2026-09-02 09:01:00', recognition_time: '2026-09-10 10:00:00',
   margin: '100.29', commit_flg: '1', ref: 'private-ref', keyword: 'private-keyword' };
-const payload = (rows = [row]) => ({ response: rows, error_message: '' });
+const payload = (rows = [row]) => rows;
 const fakeKey = 'TEST_ONLY_NOT_A_REAL_KEY_123456789';
 
 test('afb request is an exact partner/site-scoped GET with complete previous 28 dates', () => {
@@ -53,7 +53,7 @@ test('wrong site, missing schema, duplicate IDs, wrong date/status and malformed
     { commit_time: '2026-08-23' }, { commit_time: '2026-09-21' }, { commit_time: '2026-02-30' },
   ]) assert.throws(() => parseAfbOutcomes(payload([{ ...row, ...change }]), request));
   assert.throws(() => parseAfbOutcomes(payload([row, row]), request), /duplicate/);
-  for (const bad of [null, [], {}, { response: null }, { response: [], error_message: 'error' }, { response: [], next_page: 2 }]) {
+  for (const bad of [null, {}, { response: null }, { response: [], error_message: '' }, { error_message: 'error' }, { response: [], next_page: 2 }]) {
     assert.throws(() => parseAfbOutcomes(bad, request), /report_schema_changed/);
   }
   assert.throws(() => parseAfbOutcomes(payload([{ ...row, commit_flg: 0 }]), afbRequest(config, period, 'recognition', now)), /basis_or_period/);
