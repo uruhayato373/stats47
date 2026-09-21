@@ -60,19 +60,21 @@ product code、対応format、scope、必要roleまで確認する。
 | afb | 公式APIでstats47の直近28日成果を発生日/確定日別に取得。要求site IDと全行のsite IDを照合 | 両系列は重なるため足さない。承認/未承認/却下を分離し、報酬を純収益・入金にしない。提携状態はCIの取得対象外 |
 | note | 帰属・期間・全ページ・合計・公開カタログ・カバーの照合 | 欠落記事はnull。不完全データを全件成功にしない |
 | GSC | property照合、概要と5分類の詳細CSV。ZIP内カテゴリ・件数・URLのサイト帰属をingestで照合 | APIの検索パフォーマンスとは別経路。概要CSVの成功を詳細CSV成功にしない。UI exportの上限は各分類1,000行 |
-| KDP | known ASINで口座照合、登録書籍の出版状態、昨日の注文/KENP/電子書籍ロイヤリティ見積り | Reportsは別認証。現版/旧版ASINと著者名を照合し共用口座の他サイト書籍を除外。確定ロイヤリティ/KU確定額/入金は未取得 |
+| KDP | known ASINで口座照合、登録書籍の出版状態、昨日の注文/KENP/電子書籍ロイヤリティ見積り、月別の電子書籍/KENPロイヤリティ | Reportsは別認証。現版/旧版ASINと著者名を照合し共用口座の他サイト書籍を除外。月次ロイヤリティを入金・税引後利益・週次純収益にしない |
 | ココナラ | seller照合、全体と公開商品別の対象期間/閲覧/販売件数/お気に入り、全体販売額、期間と行合計照合 | 有料表示数・商品別販売額・問い合わせ数はnull/未取得。ローリング30日を確定7日や手数料控除後収益にしない |
 
 保存先はprivate bucket `stats47-private` の `operations/authenticated-measurement/<source>/`。
 `MEASUREMENT_VAULT_KEY`によるAES-256-GCMでobject addressごとに認証し、PUT後GETの一致を検証する。
 `session.enc`（更新済み認証）、`latest-attempt.enc`、`latest-success.enc`と、UTC日付の剰余による
-`runs/day-0..29.enc`（30日分の循環slot）だけを保持し、無制限に履歴を増やさない。公開custom domainへ置かない。
+`runs/day-0..29.enc`（30日分の循環slot）を保持する。KDPの月次だけは`kdp/monthly/month-0..23.enc`に原本XLSX・正規化結果・SHAを24報告月の循環slotとして別保管する（税務帳簿の保存契約ではない）。無制限に履歴を増やさず、公開custom domainへ置かない。
+認証拒否は固定`auth-recovery.enc`へ本人認証世代と失敗時刻を記録する。同じ世代・古い世代ではブラウザを開かず、`collectionAttempted:false`と`recovery:awaiting_reauthentication`を記録する。待機証跡は固定`latest-blocked.enc`に分離し、最後に実際の画面で失敗した日の証跡を待機ログで上書きしない。新しい本人認証の公開後に次回CIで再開し、自動refreshや時間経過だけでは解除しない。他sourceは独立して継続する。
 vault keyはR2 credentialsとは別Secret。初回端末の`.local/authenticated-measurement/vault-key`を保持し、
 紛失時に無断でrotateしない。認証・生データの漏洩時は本書のSecurity incidentに従う。
 
 gitに残すのは`.claude/state/metrics/authenticated/latest.json`の対象別成否・時刻・固定理由・証跡hashだけ。
 失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の`workflow-health-daily.yml`
 も48時間の鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
+さらに同監視は認証付き計測の初回未発火・古いscheduleを予定時刻から6時間の猶予で検知する（GitHubの起動時刻保証ではなく運用上の検知猶予）。push/manualの成功でschedule異常を消さない。翌朝の既存health実行で、期限超過かつ同期間のrun・進行中runが無い場合だけ固定workflowをmainへcatch-up dispatchする。`.claude/state/ci/authenticated-catchup.json`の予定枠をContents APIのSHA比較で先に予約し、API一覧への反映遅延やPOST応答喪失でも同じ枠を再送しない。予約/dispatch失敗は監視Issueへ残し、成功した補完起動もschedule成功とは呼ばない。GitHub全体の停止は同じ基盤の監視では解消できず、外部監視は別の承認・設計が必要。
 収集範囲（capability）・対象source・実行ID・観測時刻が一致しないstatusは成功にしない。
 再実行は同名artifactが残り、download側の同名除去が古い結果を選ぶことがある。対処はartifact名`authenticated-status-<source>-<runAttempt>`と中のファイル名`<source>-<runAttempt>.json`の両方を分離し、集約で最大attemptを選ぶこと。ファイル名だけの変更では未解決。最新attemptが失敗・不正なら古い成功に戻さず、収集jobの失敗中は警告をcloseしない（2026-09-21 CI `35560007703` attempts 3/4のdownloadログとgit記録の不一致で確認、回帰テスト追加）。
 afbは`site-conversion-outcomes`だけを受理し、旧`partnership-status`成功では成果取得を充足しない。
@@ -84,10 +86,16 @@ HTTP成功時のJSON本文は配列として扱う。2026-09-21の実応答は`[
 APIキーはオーナー承認を得てGitHub Actions Secret `AFB_API_KEY`へ登録し、git・ログ・artifact・vaultへ書かない。
 認証エラーはキーと公式設定を照合する。Cookie再ログインへのfallbackや無断再発行はしない。
 復元側もcapabilityを照合する。人間ログイン時刻を`bootstrapCapturedAt`として保持し、古いログイン由来のCI更新が新しいSecretを上書き選択しない。世代情報のない旧sessionはSecretより優先しない。
-KDPはknown ASINで本棚の口座を照合後、全書籍の状態巡回より先にReports認証を確認する。巡回後のReports取得・検査まで成功して初めて認証更新を保存する。本棚だけ成功した試行でReports未認証のsessionを保存しない。本人ログインの`--reports`もEnterだけではexportせず、Reportsの表示を確認する。
+KDPはknown ASINで本棚の口座を照合後、全書籍の状態巡回より先にReports認証を確認する。巡回後の日次・月次Reports取得と検査まで成功して初めて認証更新を保存する。本棚だけ成功した試行でReports未認証のsessionを保存しない。本人ログインの`--reports`もEnterだけではexportせず、Reportsの表示を確認する。
+Reportsの遷移直後のURLだけでは認証失敗と断定しない。実画面の「昨日」tabを最大30秒待ち、表示と`https://kdpreports.amazon.co.jp`の完全一致を確認する。待機後もsign-inなら`auth_required`で停止し、初期redirectの有無・最終origin/path・password欄の表示有無だけを暗号化証跡へ記録する。URL query・Cookie・入力値は診断へ含めず、フォーム送信・認証保護の回避は行わない。成功時も初期redirectの有無を記録し、待機処理が成功原因だったかを証拠で区別する。
+認証の継続利用は初回成功だけで完了としない。検証中は同じログイン由来のstateをローカルprobeとCIで並行使用せず、CIを直列に2回実行し、更新済みprivate R2 sessionを次のrunnerで再利用できることを確認する。再ログイン要求を受けたstateを加工したり、認証保護を無効化して継続しない。
 KDPの昨日値は速報値で、注文等はマーケットプレイス現地日付、KENPはUTC。正規化は各recordの`dateBasis`に保持する（[公式Dashboard](https://kdp.amazon.com/en_US/help/topic/GX7EGDFGS9CZCA2F)、2026-09-21確認）。遅延や再集計がありうるため、日次値の単純合算で確定週次売上を作らない。確定収益の元資料は毎月15日前後に作成される[月別のロイヤリティ](https://kdp.amazon.co.jp/ja_JP/help/topic/G200641190)。ASIN・通貨別の月次収益であり、共有口座の支払い総額や週次純収益にそのまま転記しない。
+月次collectorはJST15日以降は前月、14日までは前々月を要求し、実画面の選択月・総収益の`N/A`不在・ダウンロード名・全sheetの販売期間と列を照合する。日付だけで確定とは判定せず、未発行や形式変更なら停止する。現版/旧版ASINと著者を照合し、未写像のstats47書籍・重複・注文数と返品数の不整合を拒否する。通貨を合算せず、KU端数と返品の負額を保持する。Prime Readingボーナス・入金・税引後利益は対象外。未観測の書籍を0埋めせず、`sales-ledger`の週次純収益へ自動転記しない。
+日本語の電子書籍/KENPの2sheetを実機契約とし、紙書籍・未知のボーナス等の新sheetは黙って捨てずschema errorにする。原本はprivate R2だけに残し、`restore.mjs kdp`は日次・月次を分離した正規化`status.json`だけを`.local/authenticated-measurement/restored/kdp.json`へ復元する。旧日次のみのcapabilityは月次取得の成功に流用しない。
+過去月は`node .claude/scripts/measurement/restore.mjs kdp --month YYYY-MM`で正規化結果だけを`restored/kdp-monthly-YYYY-MM.json`へ復元する。月の一致と原本SHAを再検査し、循環slotが別月へ上書き済みなら停止する。履歴復元には最新試行の48時間鮮度を要求しないが、現在の収集成功や認証有効性を証明するものではなく、最新結果を上書きしない。
 もしも/A8はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
 初回成功後は最新試行の失敗・48時間超で復元を止め、古いgit入力へのfallbackはしない。
+noteだけは`node .claude/scripts/measurement/restore.mjs note --inventory-only`で棚卸し専用の`restored/note-inventory.json`を復元できる。記事行の欠落以外に異常が無く、帰属・全ページ・合計・24時間鮮度・カバー照合・集合・null保持・最新試行の証跡SHAが一致した場合だけ`inventoryAvailable:true`とする。全体は`report_incomplete`・`metricsAvailable:false`のまま、通常の復元先は更新せず、全件KPI・効果判定には使わない。復元結果の全行も`baselineEligible:false`に固定する。カバー監査に無い欠測記事もplaceholderで保持し、unknown/investigateにする。
 
 ```bash
 # ログイン済み専用profile/stateをSecretsへ送る（gh authが必要）。値はstdinで送り表示しない。

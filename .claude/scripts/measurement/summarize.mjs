@@ -31,9 +31,14 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     runId: value.runId ?? process.env.GITHUB_RUN_ID ?? null,
     runAttempt: value.runAttempt ?? null,
     metricsAvailable: value.status === 'pass' && value.metricsAvailable === true,
+    inventoryAvailable: source === 'note' && value.inventoryAvailable === true
+      && (value.status === 'pass' || (value.status === 'failed' && value.code === 'report_incomplete')),
+    collectionAttempted: value.collectionAttempted ?? null,
+    recovery: value.recovery?.state === 'awaiting_reauthentication'
+      ? { state: 'awaiting_reauthentication', blockedSince: value.recovery.blockedSince } : null,
     evidence: value.evidence ?? null,
     quality: value.quality ?? null,
-    remaining: source === 'kdp' ? 'finalized_royalties_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null,
+    remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null,
   };
 });
 const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID ?? null, sources,
@@ -42,8 +47,12 @@ mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
 const lines = ['認証付き計測の最新試行。生データと認証状態は暗号化したprivate R2に保存。', '',
   '| 対象 | 収集範囲 | 状態 | 次の操作 |', '|---|---|---|---|',
-  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.source === 'afb' && ['api_key_missing', 'api_auth_required'].includes(s.code) ? 'AFB_API_KEY Secretを公式API設定と照合（Cookie再ログインは不要）' : s.code === 'auth_required' || s.code === 'session_missing' ? `認証プロファイル手順書で${s.source}の認証を復旧し bootstrap-session.mjs ${s.source}${s.source === 'gsc' ? ' --from-profile' : ''} --publish` : s.code ?? s.remaining ?? 'なし'} |`),
-  '', 'KDPは昨日の書籍別注文・KENP・電子書籍ロイヤリティ見積り。確定ロイヤリティ・入金は未取得。afbは発生日/確定日を分けた28日成果で、両系列を足さず、報酬を純収益・入金にしない。提携状態は別の手動経路。ココナラ表示数は有料機能で欠測の場合null。',
+  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.source === 'afb' && ['api_key_missing', 'api_auth_required'].includes(s.code) ? 'AFB_API_KEY Secretを公式API設定と照合（Cookie再ログインは不要）' : s.code === 'auth_required' || s.code === 'session_missing' ? `認証プロファイル手順書で${s.source}の認証を復旧し bootstrap-session.mjs ${s.source}${s.source === 'gsc' ? ' --from-profile' : s.source === 'kdp' ? ' --login --reports' : ''} --publish` : s.code ?? s.remaining ?? 'なし'} |`),
+  ...(sources.some(s => s.source === 'kdp' && s.code === 'auth_required')
+    ? ['', 'KDP: 本棚とReportsの両方を本人が認証する。本人認証後のCI成功に続く再実行で再び認証を要求された場合、再ログインを反復せず停止し、private証跡の確定画面と実行環境を調査する。古いstateの再exportは認証復旧ではない。'] : []),
+  ...(sources.some(s => s.recovery) ? ['', '再認証待ちの対象はブラウザへ再接続せず失敗状態を記録し、他の取得元は継続する。新しい本人認証を公開後、次回CIで再開する。待機チェックの時刻は計測値を取得した時刻ではない。'] : []),
+  ...(sources.some(s => s.inventoryAvailable) ? ['', 'note: 検証済みの記事棚卸しだけ利用可能（restore.mjs note --inventory-only）。欠測はnull、全件KPI・効果判定には利用不可。通常の復元と成功判定は緩和しない。'] : []),
+  '', 'KDPは昨日の書籍別注文・KENP・電子書籍ロイヤリティ見積りと月次ロイヤリティを分離して取得する。月次を週次へ按分せず、入金・税引後純利益にはしない。afbは発生日/確定日を分けた28日成果で、両系列を足さず、報酬を純収益・入金にしない。提携状態は別の手動経路。ココナラ表示数は有料機能で欠測の場合null。',
 ];
 writeFileSync('/tmp/authenticated-measurement-summary.md', lines.join('\n') + '\n');
 console.log(JSON.stringify({ status: state.status, passed: sources.filter(s => s.status === 'pass').length, total: sources.length }));

@@ -29,7 +29,7 @@ on:
 permissions:
   contents: write
   issues: write
-  actions: read
+  actions: write # fixed authenticated-measurement catch-up only; no new credentials
 
 concurrency:
   group: workflow-health
@@ -126,8 +126,18 @@ jobs:
           done
           echo "::warning::state の push に失敗した (監査結果自体は job summary にある)"
 
+      - name: 認証付き計測の未起動を1回だけ補完
+        id: measurement_catchup
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -o pipefail
+          node .claude/scripts/measurement/catch-up.mjs --dispatch | tee /tmp/measurement-catchup.txt
+          cat /tmp/measurement-catchup.txt >> "$GITHUB_STEP_SUMMARY"
+
       - name: 🚨 連続失敗を Issue にする
-        if: always() && (steps.audit.outputs.healthy != 'true' || steps.freshness.outputs.fresh != 'true' || steps.affiliate_portfolio.outputs.fresh != 'true' || steps.authenticated.outputs.fresh != 'true')
+        if: always() && (steps.audit.outputs.healthy != 'true' || steps.freshness.outputs.fresh != 'true' || steps.affiliate_portfolio.outputs.fresh != 'true' || steps.authenticated.outputs.fresh != 'true' || steps.measurement_catchup.outcome != 'success')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -150,6 +160,7 @@ jobs:
             echo '```'
             if [ -f /tmp/affiliate-portfolio-freshness.txt ]; then cat /tmp/affiliate-portfolio-freshness.txt; else echo 'affiliate artifact or audit did not complete'; fi
             if [ -f /tmp/authenticated-health.txt ]; then cat /tmp/authenticated-health.txt; else echo 'authenticated measurement audit did not complete'; fi
+            if [ -f /tmp/measurement-catchup.txt ]; then cat /tmp/measurement-catchup.txt; else echo 'measurement catch-up check did not complete'; fi
             echo '```'
             echo
             echo "## 見かた"
@@ -173,7 +184,7 @@ jobs:
           exit 1
 
       - name: ✅ 復旧したら Issue を閉じる
-        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true' && steps.affiliate_portfolio.outputs.fresh == 'true' && steps.authenticated.outputs.fresh == 'true'
+        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true' && steps.affiliate_portfolio.outputs.fresh == 'true' && steps.authenticated.outputs.fresh == 'true' && steps.measurement_catchup.outcome == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

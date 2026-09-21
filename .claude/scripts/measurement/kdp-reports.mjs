@@ -69,9 +69,23 @@ export function parseKdpReport(workbook, listings, date) {
 export async function openKdpReports(page) {
   // The URL was observed on the account-verified bookshelf's Reports link.
   await page.goto('https://kdpreports.amazon.co.jp/dashboard', { waitUntil: 'domcontentloaded', timeout: 45000 });
-  if (/signin|\/ap\//.test(page.url())) throw new Error('auth_required');
+  const initialAuthRedirect = /signin|\/ap\//.test(page.url());
   const yesterday = page.getByRole('tab', { name: '昨日', exact: true }).first();
-  await yesterday.waitFor({ state: 'visible', timeout: 30000 });
+  try {
+    // domcontentloaded may belong to an intermediate SSO document. Observe the
+    // report UI without submitting credentials or interacting with a challenge.
+    await yesterday.waitFor({ state: 'visible', timeout: 30000 });
+  } catch (error) {
+    const url = new URL(page.url());
+    if (/signin|\/ap\//.test(url.pathname)) {
+      const passwordVisible = await page.locator('input[type="password"]').first().isVisible().catch(() => false);
+      // No query strings, tokens, page text or account identifiers in diagnostics.
+      throw new Error(`auth_required: ${JSON.stringify({ initialAuthRedirect, origin: url.origin, path: url.pathname, passwordVisible })}`);
+    }
+    throw error;
+  }
+  if (new URL(page.url()).origin !== 'https://kdpreports.amazon.co.jp') throw new Error('account_mismatch: reports_origin');
+  console.log(JSON.stringify({ event: 'kdp_reports_ready', initialAuthRedirect }));
   return yesterday;
 }
 

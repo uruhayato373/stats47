@@ -8,6 +8,9 @@ import { fileURLToPath } from 'node:url';
 import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sources.mjs';
 import { readVault, writeVault } from './vault.mjs';
 import { collectAfbOutcomes } from './afb-outcomes.mjs';
+import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
+import { authenticationPause, rejectedAuthentication } from './auth-recovery.mjs';
+import { noteInventoryAvailable } from './note-inventory.mjs';
 
 const run = promisify(execFile);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -25,7 +28,7 @@ const publicDir = join(ROOT, '.local/authenticated-ci-public');
 mkdirSync(work, { recursive: true, mode: 0o700 });
 mkdirSync(publicDir, { recursive: true });
 const result = { schemaVersion: 1, source: name, capability: source.capability, observedAt: now, status: 'failed', code: null, runId, runAttempt,
-  metricsAvailable: false, evidence: null };
+  metricsAvailable: false, inventoryAvailable: false, evidence: null, collectionAttempted: false, recovery: null };
 let logs = '';
 let bundle;
 const files = {};
@@ -69,12 +72,21 @@ try {
       bundle = selectSessionBundle(bundle, remote);
     }
     if (!bundle || bundle.source !== name) throw new Error('session_missing');
+    if (!local) {
+      const pause = authenticationPause(name, bundle, await readVault(`${name}/auth-recovery`), await readVault(`${name}/latest-attempt`));
+      if (pause) {
+        await writeVault(`${name}/auth-recovery`, pause);
+        result.recovery = { state: 'awaiting_reauthentication', blockedSince: pause.blockedSince };
+        throw new Error('auth_required: awaiting_new_human_session');
+      }
+    }
     writeFileSync(join(work, 'state.json'), JSON.stringify(scopedState(name, bundle.state)), { mode: 0o600 });
     if (name === 'kdp') {
       if (!/^B0[A-Z0-9]{8}$/.test(bundle.account?.knownAsin ?? '')) throw new Error('account_mismatch');
       writeFileSync(join(ROOT, '.local/kdp-account.local.json'), JSON.stringify(bundle.account), { mode: 0o600 });
     }
   }
+  result.collectionAttempted = true;
   if (name === 'moshimo') {
     await command('.claude/scripts/ads/moshimo-report.mjs');
     await command('.claude/scripts/ads/moshimo-report.mjs', ['--check']);
@@ -108,6 +120,7 @@ try {
     result.quality = { expectedRows: snapshot.coverage?.catalogPublished ?? null, observedRows: snapshot.coverage?.observed ?? null,
       missingRows: snapshot.coverage?.missingFromDashboard?.length ?? null, totalsMatched: snapshot.coverage?.totalsMatched === true,
       paginationComplete: snapshot.coverage?.paginationComplete === true };
+    result.inventoryAvailable = noteInventoryAvailable(snapshot, cover);
     if (snapshot.status !== 'pass' || cover.status !== 'pass') {
       const messages = JSON.stringify(snapshot.issues);
       const code = failureCode(messages);
@@ -123,7 +136,17 @@ try {
   } else {
     await command('.claude/scripts/measurement/marketplace-status.mjs', [name, join(work, 'status.json')], 900000);
     capture(`.local/authenticated-measurement/${name}-${runId}/status.json`);
-    if (name === 'kdp') capture(`.local/authenticated-measurement/${name}-${runId}/status.xlsx`);
+    if (name === 'kdp') {
+      capture(`.local/authenticated-measurement/${name}-${runId}/status.xlsx`);
+      const monthlyPath = `.local/authenticated-measurement/${name}-${runId}/status.monthly.xlsx`;
+      capture(monthlyPath);
+      const monthly = JSON.parse(readFileSync(join(work, 'status.json'), 'utf8')).monthlyRoyalties;
+      if (monthly?.finality !== 'finalized-monthly-royalty' || !monthly.coverage?.complete) throw new Error('report_incomplete: monthly_missing');
+      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true };
+      if (!local) await writeVault(kdpMonthlyVaultKey(monthly.period.month), {
+        schemaVersion: 1, source: 'kdp', observedAt: now, report: monthly, workbook: files[monthlyPath],
+      });
+    }
   }
   const evidence = { schemaVersion: 1, source: name, observedAt: now, files, logs };
   writeFileSync(join(work, 'evidence.json'), JSON.stringify(evidence), { mode: 0o600 });
@@ -142,7 +165,16 @@ try {
   // Raw diagnostics stay in a private encrypted object. Only fixed codes reach public Actions logs.
   writeFileSync(join(work, 'failure.log'), `${error.message}\n${logs}`, { mode: 0o600 });
   if (!local) {
-    try { result.evidence = await writeVault(historyKey, { source: name, observedAt: now, message: error.message, files, logs }); }
+    try {
+      if (result.code === 'auth_required' && result.collectionAttempted && bundle) {
+        const recovery = rejectedAuthentication(name, bundle, now);
+        await writeVault(`${name}/auth-recovery`, recovery);
+        result.recovery = { state: 'awaiting_reauthentication', blockedSince: recovery.blockedSince };
+      }
+      // Keep the last real browser failure in its history slot while waiting for the owner.
+      result.evidence = await writeVault(result.collectionAttempted ? historyKey : `${name}/latest-blocked`,
+        { source: name, observedAt: now, collectionAttempted: result.collectionAttempted, message: error.message, files, logs });
+    }
     catch { result.code = 'storage_error'; }
   }
 }

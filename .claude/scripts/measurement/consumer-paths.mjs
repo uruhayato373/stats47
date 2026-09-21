@@ -1,5 +1,6 @@
 /** Exact canonical restore allowlist. Sessions, diagnostics and arbitrary paths never leave the vault. */
 import { sourceFor } from './sources.mjs';
+import { createHash } from 'node:crypto';
 export function consumerPath(name, path) {
   if (name === 'afb' && /^\.local\/authenticated-measurement\/afb-\d+\/outcomes\.json$/.test(path)) return '.local/authenticated-measurement/restored/afb.json';
   if (name === 'moshimo' && path === '.claude/state/metrics/affiliate/moshimo-results.json') return path;
@@ -19,4 +20,20 @@ export function validateAttempt(attempt, now = Date.now(), source = null) {
   if (source && (attempt.source !== source || attempt.capability !== sourceFor(source).capability)) throw new Error('capability_mismatch');
   const age = now - Date.parse(attempt.observedAt);
   if (!Number.isFinite(age) || age < -300000 || age > 2 * 86400000) throw new Error('measurement_stale');
+}
+
+export function validateEvidence(attempt, evidence, source) {
+  if (!evidence || evidence.source !== source || evidence.observedAt !== attempt.observedAt
+    || createHash('sha256').update(JSON.stringify(evidence)).digest('hex') !== attempt.evidence?.sha256) {
+    throw new Error('evidence_attempt_mismatch');
+  }
+}
+
+export function validateInventoryAttempt(attempt, now = Date.now()) {
+  if (attempt?.source !== 'note' || attempt.inventoryAvailable !== true
+    || (attempt.status !== 'pass' && !(attempt.status === 'failed' && attempt.code === 'report_incomplete'))) {
+    throw new Error('inventory_unavailable');
+  }
+  // The exception is purpose-specific; the ordinary restore still rejects every failed attempt.
+  validateAttempt({ ...attempt, status: 'pass' }, now, 'note');
 }
