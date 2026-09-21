@@ -34,6 +34,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseCoverageDrilldown } from './lib/coverage-csv.mjs';
 
 import {
   isIntentionallyNonIndexableResource,
@@ -270,14 +271,7 @@ function readDrilldowns() {
   for (const f of files) {
     const category = f.replace(/-drilldown\.csv$/, "");
     const text = fs.readFileSync(path.join(weekDir, f), "utf8");
-    for (const [i, line] of text.split(/\r?\n/).entries()) {
-      if (!line.trim()) continue;
-      if (i === 0 && line.startsWith("URL")) continue;
-      const cols = line.split(",");
-      const url = cols[0]?.trim();
-      if (!url || !url.startsWith("http")) continue;
-      rows.push({ url, category, lastCrawl: cols[1]?.trim() ?? "" });
-    }
+    rows.push(...parseCoverageDrilldown(text, category));
   }
   return rows;
 }

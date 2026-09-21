@@ -17,3 +17,5 @@ type: feedback
 `export-coverage-playwright.mjs`は表示25行へ変更し、詳細URL・property・見出し一致を必須化する。ボタンは自動待機付きlocatorで操作する。概要1個+詳細5個を別々に取得し、`ingest-gsc-export.py --require-actionable`が今回のZIPだけから分類・概要件数（UI上限1000）・重複・stats47.jpドメイン帰属を照合する。`sc-domain`なのでwww/storage等のサブドメインも含むが、類似ドメインは拒否する。欠測を古い出力で補完しない。capabilityを`verified-coverage-export`へ改め、health・restoreとも旧方式の成功を拒否する。
 
 回帰テスト: `npm run measurement:test`（Python内容検査とUI遷移失敗を含む）。取得成功はサンプルURLの完全性までで、GSC上限を超える全URL取得やインデックス改善を意味しない。
+
+同日のR2 read-backで、CSVの引用符付きURLが`startswith("http")`で30行落ちる第2の問題も検出。取り込みはPython csv、後続queueは既存依存csv-parseで読み、カンマを含むURLも件数・値を保存する。取得ZIPの件数だけでなく正規化後とconsumerの保持まで検証する。
