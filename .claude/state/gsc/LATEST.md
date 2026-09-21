@@ -23,18 +23,18 @@
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **3235** / 要対応 pending: **1106**
+- 追跡 URL: **3235** / 要対応 pending: **1107**
 
 | action | 分類総数 | pending | 意味 |
 |---|---:|---:|---|
-| fix-5xx | 1 | 0 | probeで5xx分類。pendingなら実バグ(最優先) |
-| observe-after-fix | 1103 | 1103 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| fix-5xx | 2 | 2 | probeで5xx分類。pendingなら実バグ(最優先) |
+| observe-after-fix | 1102 | 1102 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
 | content-check | 5 | 2 | soft404→現在200=薄さ/描画 未判定 |
 | enrich | 23 | 0 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
 | verify-intent | 4 | 1 | 現在も404=公開漏れ or 死亡の判別 |
 | none | 2099 | 0 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1103 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1102 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 

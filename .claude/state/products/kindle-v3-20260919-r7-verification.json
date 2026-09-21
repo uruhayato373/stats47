@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-19T09:26:06.727Z",
+  "version": "v3-20260919-r7",
+  "epubcheckExecuted": true,
+  "books": 1,
+  "totalErrors": 0,
+  "crossBook": [],
+  "report": [
+    {
+      "id": "K-S1-12",
+      "version": "v3-20260919-r7",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-12/v3-20260919-r7/book.epub",
+      "epubSha256": "1b5aed4ebd6b9a12ba6d4d2455070992e5d9f8bb6320b2fe2b8b35fc693929ee",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "834cefcc640653ac40f861e10c58907c968b9d64efc25a8f54ddc1705e6e6e6a"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "7fb204c6e65e5f218215d7418af0c4d0bff8e0a03dbb45f15a4ea95ee5a40346"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "ed6e841fa53a08c73295f5e3e8358e61b8b1d6fa1cabf5510a9e05cd3176a7c3"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "063a09cb27e8730a06c656c0c64192aa09954be5144a9b22e036ff7894ef4d7b"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "241904ab0d42f0519fe6f1774d0243a058bf9618b1b61a2415d2c96303f69f4f"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "7981af87c8438d8c8a18cdeb9ab8680f187101f5eb68498d3555a7945474dddb"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "c5e590302f28280fdddc7abb7ceec302ba74692d198e5778e9bfa6a8da071e40"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "b16c5bd8cbdaada5b1f80b4ccdfa7f6f7435961a273f3610f154232d406e4abc"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "5f8b5bdc2fb00c387086c5ae6799f5c7c84cd968c5b01066cb916d9eee7fb830"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "218df8f05ab8d626e2773b062923d4c228b7cb6d4923553e6872a59bc3b64253"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e8b7508de3dca56cc67c39a363e609ea48fdd4d944937c4b04ce2bd04aa2a1ed"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "f2d619402672213b20570b4076448ce14e998cfc2fcbd4f555239956740acc00"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    }
+  ]
+}

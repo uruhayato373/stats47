@@ -7,8 +7,10 @@ describe("Kindle source completeness", () => {
 
   it("applies a declared arithmetic correction only to the exact reviewed source", async () => {
     const slug = "engel-coefficient-prefecture-ranking";
-    const correction = KINDLE_EDITORIAL_CORRECTIONS[slug][0];
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(`本文\n${correction.before}`)));
+    const corrections = KINDLE_EDITORIAL_CORRECTIONS[slug];
+    const correction = corrections[0];
+    // 校訂は slug 単位で全件が exact-once を要求するので、mock 本文にも全件の before を 1 回ずつ置く。
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(`本文\n${corrections.map((c) => c.before).join("\n")}`)));
     const article = await fetchBlogArticle(slug);
     expect(article.body).toContain(correction.after);
     expect(article.body).not.toContain(correction.before);

@@ -3,15 +3,19 @@ import { notFound } from 'next/navigation';
 
 import { findGeoLayer } from '@stats47/data-configs/business-plan';
 
-import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import {
+  Breadcrumbs,
+  LEFT_RAIL_NARROW_ONLY_CLASS,
+  PageHeader,
+  PageShell,
+} from '@/components/layout';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
 import {
   GEO_DEFAULT_PREF_CODE,
   GeoLayerExplorer,
-  GeoSourceNavigation,
-  loadGeoSourceCatalog,
+  GeoLayerNavigation,
   projectGeoLayer,
   loadGeoAnalysisPrefBundle,
   loadGeoAnalysisSnapshot,
@@ -43,17 +47,16 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
     /^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(query.pref)
       ? query.pref
       : GEO_DEFAULT_PREF_CODE;
-  const [bundle, snapshot, catalog] = await Promise.all([
+  const [bundle, snapshot] = await Promise.all([
     loadGeoAnalysisPrefBundle(layer.sourceAnalysis, pref),
     loadGeoAnalysisSnapshot(layer.sourceAnalysis),
-    loadGeoSourceCatalog(),
   ]);
   const data = bundle ? projectGeoLayer(layer.slug, bundle.detail) : null;
   return (
     <PageShell
-      rightRail={
-        <GeoSourceNavigation catalog={catalog} currentDataId={layer.dataId} />
-      }
+      leftRail={<GeoLayerNavigation activeLayerSlug={layer.slug} />}
+      leftRailDensity="compact"
+      leftRailNarrowBehavior="hide"
     >
       <Breadcrumbs
         items={[
@@ -68,11 +71,9 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
         description={layer.description}
         meta={layer.representation}
       />
-      <GeoSourceNavigation
-        catalog={catalog}
-        currentDataId={layer.dataId}
-        mobile
-      />
+      <div className={`mb-5 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
+        <GeoLayerNavigation activeLayerSlug={layer.slug} mobile />
+      </div>
       {bundle &&
       data &&
       snapshot &&
@@ -94,7 +95,11 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
       <SurfaceCard className="mt-6 space-y-3">
         <SectionHeader title="この地図で分かること" hideRule className="mb-0" />
         <p className="text-sm leading-relaxed">{layer.reading}</p>
-        <SectionHeader title="表示範囲と読み方の注意" hideRule className="mb-0" />
+        <SectionHeader
+          title="表示範囲と読み方の注意"
+          hideRule
+          className="mb-0"
+        />
         <p className="text-sm leading-relaxed">{layer.limitation}</p>
       </SurfaceCard>
       <SurfaceCard className="mt-6 space-y-3">

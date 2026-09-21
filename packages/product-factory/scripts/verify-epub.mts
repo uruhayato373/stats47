@@ -15,6 +15,8 @@
  *   したがって:
  *     ① 仕様適合   — epubcheck (KDP の受理条件。外部ツール)
  *     ② レイアウト不変量 — 本スクリプトが zip 内の XHTML/OPF を直接検査 (この 3 症状の再発防止)
+ *     ③ 本文不変量   — `content-invariants.ts` (Web 記事の名残・年/年度混在・率系の単位・冊間重複。
+ *                      2026-09-19 の全冊監査で見つかった、①②を通り抜ける欠陥)
  *
  *   ②の不変量は `.claude/rules/coconala-product-standards.md` §8 の表が正典で、
  *   生成器側のユニットテスト (`src/generators/__tests__/epub.test.ts`) と同じことを
@@ -28,6 +30,12 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { assertBookVersion } from "../src/channels/kindle/build-book";
 import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
+import {
+  chapterTextFromXhtml,
+  checkBookContent,
+  checkCrossBookDuplicates,
+  type ChapterText,
+} from "../src/channels/kindle/content-invariants";
 import { xhtmlChapterEvidence, type ReviewedChapter } from "../src/channels/kindle/revision-evidence";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -249,6 +257,7 @@ function main(): void {
     findings: Finding[];
   }> = [];
   let totalErr = 0;
+  const bookTexts = new Map<string, ChapterText[]>();
   for (const id of ids) {
     const epub = join(BOOKS_DIR, id, version, "book.epub");
     let findings: Finding[];
@@ -259,10 +268,15 @@ function main(): void {
     } else {
       epubSha256 = createHash("sha256").update(readFileSync(epub)).digest("hex");
       try {
-        findings = [...checkLayout(epub), ...(hasEpubcheck ? runEpubcheck(epub) : [])];
-        chapters = xhtmlChapterEvidence(listEntries(epub).filter(path => path.endsWith(".xhtml")).map(path => ({
+        const xhtmls = listEntries(epub).filter(path => path.endsWith(".xhtml")).map(path => ({
           fileName: path.replace(/^OEBPS\//, ""), xhtml: unzipText(epub, path) ?? "",
-        })));
+        }));
+        const texts = xhtmls
+          .filter((x) => /^chap/.test(x.fileName))
+          .map((x) => chapterTextFromXhtml(x.fileName, x.xhtml));
+        bookTexts.set(id, texts);
+        findings = [...checkLayout(epub), ...(hasEpubcheck ? runEpubcheck(epub) : []), ...checkBookContent(texts)];
+        chapters = xhtmlChapterEvidence(xhtmls);
       } catch (error) {
         findings = [
           { level: "error", code: "unreadable-epub", msg: error instanceof Error ? error.message : String(error) },
@@ -280,6 +294,10 @@ function main(): void {
     }
   }
 
+  // 冊間重複は複数冊を検査したときだけ意味を持つ (1 冊指定なら空)。
+  const crossBook = checkCrossBookDuplicates(bookTexts);
+  if (!asJson) for (const x of crossBook) console.log(`      [${x.level}] ${x.code}: ${x.msg}`);
+
   const payload = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
@@ -287,6 +305,7 @@ function main(): void {
     epubcheckExecuted: hasEpubcheck,
     books: report.length,
     totalErrors: totalErr,
+    crossBook,
     report,
   };
   const json = JSON.stringify(payload, null, 2);

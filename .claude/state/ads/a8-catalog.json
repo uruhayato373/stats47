@@ -8605,9 +8605,9 @@
         }
       ],
       "lastError": {
-        "step": "check-approval",
+        "step": "harvest",
         "error": "session-expired",
-        "at": "2026-09-12T22:00:12.381Z"
+        "at": "2026-09-19T22:00:19.577Z"
       }
     },
     "s00000019877001": {
@@ -10554,7 +10554,9 @@
           "operationId": "a8-s00000021701002-2026-09-08T02-52-42-796Z",
           "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T02-53-12-533Z/haneda-reconciliation.json"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000027147001": {
       "programId": "s00000027147001",
@@ -10629,7 +10631,9 @@
           "operationId": "a8-s00000020875001-2026-09-08T03-03-39-619Z",
           "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T03-07-00-589Z/s00000020875001-confirmed-detail.txt"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000021814001": {
       "programId": "s00000021814001",
@@ -10668,7 +10672,7 @@
       "company": null,
       "vertical": "mobility",
       "score": null,
-      "status": "approved",
+      "status": "error",
       "source": "existing-partnership",
       "history": [
         {
@@ -10676,6 +10680,13 @@
           "to": "approved",
           "at": "2026-09-08T04:20:11.037Z",
           "note": "Account-scoped partnered-list stocktake; not proof of stats47 placement eligibility."
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-09-19T22:00:19.599Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "lastPartnershipCheck": {
@@ -10686,8 +10697,12 @@
         "checkedAt": "2026-09-08T04:01:21.750Z",
         "sourceURL": "https://media-console.a8.net/program/list/partnered?pageNo=1&pageSize=100&sortKey=APPROVED_DATE&sortOrder=DESC",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/partnered-all.json"
-      }
+      },
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     }
   },
-  "updatedAt": "2026-09-12T22:00:12.394Z"
+  "updatedAt": "2026-09-19T22:00:19.599Z"
 }

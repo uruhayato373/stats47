@@ -2,14 +2,14 @@
  * KINDLE_BOOKS と検証対象の版から、未公開の入稿提案を生成する。
  * 公開台帳 (.claude/config/kdp-listings.json) は参照のみ。過去の公開記録を提案内に保持する。
  *
- * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <版>
- * .local/kindle-listing-revisions/<版>.json を上書き禁止で作成する。--apply は禁止。
+ * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <版> [--id K-S1-01]
+ * .local/kindle-listing-revisions/<版>.json (--id 指定時は <版>.<id>.json) を上書き禁止で作成する。--apply は禁止。
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS } from "./book-catalog";
-import { KDP_AUTHOR, KDP_READINGS } from "./kdp-reading";
+import { KDP_AUTHOR, KDP_READINGS, KDP_READING_SOURCES } from "./kdp-reading";
 import { kdpCategoriesFor } from "./kdp-category";
 import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
 import { assertBookVersion } from "./build-book";
@@ -35,6 +35,9 @@ interface KdpListing {
   titleRomaji: string;
   subtitleKana: string | null;
   subtitleRomaji: string | null;
+  /** 読みを確認した表記 snapshot。タイトル変更時の読み更新漏れをブラウザ前に止める。 */
+  readingSourceTitle: string;
+  readingSourceSubtitle: string | null;
   language: "ja";
   description: string;
   keywords: string[];
@@ -77,8 +80,25 @@ interface KdpListing {
   kuEnrolled: boolean;
   epubPath: string;
   coverPath: string;
-  /** `blocked-thin` = 本文量の床に届かず出品を止めている (blockReason に理由)。 */
-  status: "draft" | "listed" | "blocked-thin";
+  /**
+   * `blocked-thin` = 本文量の床に届かず出品を止めている / `blocked-design` = 編集設計 (design) が無く、
+   * 主題外指標・冊間重複のまま出品できない (2026-09-19)。いずれも blockReason に理由。
+   */
+  /** `withdrawn` = 取り下げ決定のうえ KDP で出版停止を実行し、本棚 read-back が「下書き」になった本 (2026-09-19)。 */
+  status: "draft" | "listed" | "blocked-thin" | "blocked-design" | "withdrawn";
+  /**
+   * 販売中の本を取り下げる決定 (2026-09-19)。決定と理由 (requestedAt / reason) に加え、
+   * `.claude/scripts/kdp/kdp-unpublish.mjs --commit` (オーナー指示) で実行したときの証跡
+   * (unpublishedAt / readBack / evidence) を持つ。kdp-batch はこの本を publish/update の対象にしない。
+   */
+  withdrawal?: {
+    requestedAt: string;
+    reason: string;
+    unpublishedAt?: string;
+    unpublishedVia?: string;
+    readBack?: string;
+    evidence?: string;
+  };
   /**
    * KDP 上の下書き ID (title-setup/kindle/<ここ>/details)。
    *
@@ -93,6 +113,12 @@ interface KdpListing {
   kdpStatus?: "draft" | "in_review" | "live" | "unknown";
   kdpStatusLabel?: string | null;
   kdpStatusCheckedAt?: string | null;
+  publicationStage?: "prepared" | "details_filled" | "files_processed" | "verified" | "submitted" | "live" | "previous_unpublished";
+  publicationStageUpdatedAt?: string | null;
+  publicationStageEvidence?: Readonly<Record<string, Readonly<Record<string, unknown>>>>;
+  editionNumber?: number;
+  replacesAsin?: string;
+  previousEditions?: ReadonlyArray<Readonly<Record<string, unknown>>>;
 }
 
 /**
@@ -130,6 +156,11 @@ function main(): void {
   const versionIndex = process.argv.indexOf("--version");
   const version = versionIndex >= 0 ? process.argv[versionIndex + 1] : "";
   assertBookVersion(version);
+  // 1 冊だけの改訂 (需要ファースト: 1 冊ずつ直して出す)。提案ファイル名に id を含め、全冊台帳と取り違えない。
+  const idIndex = process.argv.indexOf("--id");
+  const onlyId = idIndex >= 0 ? process.argv[idIndex + 1] : "";
+  if (idIndex >= 0 && (!onlyId || onlyId.startsWith("--"))) throw new Error("--id requires a value");
+  if (onlyId && !KINDLE_BOOKS.some((b) => b.id === onlyId)) throw new Error(`unknown book id: ${onlyId}`);
   const existing = readExisting();
   const listings: Record<string, KdpListing> = {};
   let generatedCount = 0;
@@ -137,6 +168,7 @@ function main(): void {
 
   for (const b of KINDLE_BOOKS) {
     if (b.status !== "generated" && b.status !== "published") continue;
+    if (onlyId && b.id !== onlyId) continue;
     const epubPath = join(BOOKS_ROOT, b.id, version, "book.epub");
     // ★KDP は JPEG/TIFF しか受け付けないので出品に使うのは cover.jpg (cover.png は EPUB 用)。
     const coverPath = join(BOOKS_ROOT, b.id, version, "cover.jpg");
@@ -162,6 +194,8 @@ function main(): void {
       titleRomaji: KDP_READINGS[b.id]?.titleRomaji ?? "",
       subtitleKana: KDP_READINGS[b.id]?.subtitleKana ?? null,
       subtitleRomaji: KDP_READINGS[b.id]?.subtitleRomaji ?? null,
+      readingSourceTitle: KDP_READING_SOURCES[b.id]?.title ?? "",
+      readingSourceSubtitle: KDP_READING_SOURCES[b.id]?.subtitle ?? null,
       language: "ja",
       description: buildDescription(b.concept),
       keywords: [...b.keywords].slice(0, 7),
@@ -187,6 +221,12 @@ function main(): void {
       ...(prev?.kdpStatus ? { kdpStatus: prev.kdpStatus } : {}),
       ...(prev?.kdpStatusLabel ? { kdpStatusLabel: prev.kdpStatusLabel } : {}),
       ...(prev?.kdpStatusCheckedAt ? { kdpStatusCheckedAt: prev.kdpStatusCheckedAt } : {}),
+      ...(prev?.publicationStage ? { publicationStage: prev.publicationStage } : {}),
+      ...(prev?.publicationStageUpdatedAt ? { publicationStageUpdatedAt: prev.publicationStageUpdatedAt } : {}),
+      ...(prev?.publicationStageEvidence ? { publicationStageEvidence: { ...prev.publicationStageEvidence } } : {}),
+      ...(prev?.editionNumber ? { editionNumber: prev.editionNumber } : {}),
+      ...(prev?.replacesAsin ? { replacesAsin: prev.replacesAsin } : {}),
+      ...(prev?.previousEditions ? { previousEditions: prev.previousEditions.map((edition) => ({ ...edition })) } : {}),
     };
     generatedCount += 1;
   }
@@ -207,7 +247,7 @@ function main(): void {
 
   console.log(`KDP listings: ${generatedCount} 冊 (generated 済) / 入稿資産不在でスキップ ${missingEpub}`);
   if (missingEpub) throw new Error(`改訂EPUBまたは表紙欠落 ${missingEpub} 冊。部分台帳を出力しません`);
-  const proposalPath = join(REPO_ROOT, ".local/kindle-listing-revisions", `${version}.json`);
+  const proposalPath = join(REPO_ROOT, ".local/kindle-listing-revisions", onlyId ? `${version}.${onlyId}.json` : `${version}.json`);
   mkdirSync(dirname(proposalPath), { recursive: true });
   writeFileSync(proposalPath, JSON.stringify(payload, null, 2) + "\n", { flag: "wx" });
   console.log(`準備用提案を書き出しました（公開台帳は未変更）: ${proposalPath}`);

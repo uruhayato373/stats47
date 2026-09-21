@@ -25,6 +25,11 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01               # 下書き�
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (★実公開・要オーナー承認)
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update      # 既刊の修正下書き（R2 archive一致必須）
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update --commit # 修正版を再申請（要オーナー承認）
+node .claude/scripts/kdp/kdp-reports-probe.mjs                            # 売上ダッシュボードの読み取り専用 probe (アカウント合計。冊別は kdpreports.amazon.co.jp = 人間工程)
+
+# ── 週次レビュー/計画からの新規パイロット（最大1冊/週） ──
+npm run kdp:weekly -- --week 2026-W41 --write                    # listings + sales-ledger から公開ゲート生成（公開なし）
+npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --commit # 対象IDの明示承認後だけ
 ```
 
 `--id` は Kindle 書籍 ID (`K-S1-01` 等・KINDLE_BOOKS と一致)。`--ids A,B` でバッチの対象を絞れる。
@@ -44,6 +49,9 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update --commit # 修正
 - **ドメインは `kdp.amazon.co.jp`**: `.com` のサインインでは同じメールでも「アカウントが見つからない」になる
   (Amazon のアカウントは .com と .co.jp で別登録)。UI も `ja_JP` — フォームのセレクタが日本語ラベルのため。
 - **実公開 (`--commit`) はオーナー承認を要する** — outward-facing・取り下げに時間がかかる。既定の下書き検証まではエージェントが進めてよい。
+- **週次計画は承認ではない**。週次経路の新規パイロットは`kdp-weekly-publication.json`が
+  `ready-for-owner-approval`かつ候補1冊のときだけ進め、対象IDと同じ`--owner-approved <ID>`を
+  ユーザーがその場で明示した場合だけ`kdp-weekly-publish --commit`を使う。
 - **KDP フォームは React SPA で DOM が変わりやすい**。日本語版の実仕様 (id 名指し / CKEditor /
   カテゴリの掲載場所チェック / AUI ボタンは実クリックのみ / 表紙は JPEG) は
   `.claude/rules/coconala-product-standards.md` §KDP 入稿フォームの実仕様 が正典。
@@ -74,6 +82,12 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update --commit # 修正
    (文言 grep は「出版」がどのページにもあるので使わない)。成功時に `status:listed`+asin を書き戻し。
    ASIN 割当が遅れる本は `kdp-drafts.mjs` (一覧) で後追いする。
 8. **状態同期**: `--phase status`はASINの有無に関係なく`draft|in_review|live|unknown`、生表示、確認日時、販売開始日をlistingsへ保存する。
+8b. **止めている本・取り下げる本 (2026-09-19)**: `kdp-listings.json` の `status: "blocked-design"` (編集設計が無い 10 冊) は KDP に作らない。`withdrawal` を持つ販売中の本 (S2/S3/S4 の 10 冊) は `--update` も再申請もせず、オーナー指示のうえ
+    `node .claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --probe` (メニュー・確認ダイアログの採取だけ) →
+    `--commit` で KDP 本棚の「電子書籍の出版停止」を実行する。対象は withdrawal かつ kdpStatus=live かつ ASIN あり
+    に限り、行は ASIN + 題名で特定、成功判定は本棚 read-back が「下書き」になること (押せた = 成功にしない)。
+    1 冊でも失敗したら残りを止める。実行後は listing に `status: "withdrawn"` と `withdrawal.unpublishedAt / readBack / evidence`
+    を残す (2026-09-19 に 10 冊実施、証跡 `.local/kdp-debug/unpublish-<ts>/`)。ストアの商品ページが消えるまで数時間〜72 時間かかる。理由は各 listing の `blockReason` / `withdrawal.reason` にあり、消さない。`kdp-batch` はどちらも draft/verify/publish の対象から外す。
 9. **既刊修正**: 原稿/表紙SSOTを修正・新versionへ生成し、`kindle:archive --push --id <ID> --version <VERSION>`で保全、同版を`--audit --deep --record`で検証してから`--update`。出品台帳のEPUB/表紙パス・保全版・ローカル全必須ファイルのSHAに加え、`kdp-release-gate.mjs`が現行原稿・本文品質・対象版の独立レビューを確認する。未達なら単発でもバッチでも送らない。本文検査だけでオーナー承認を代替しない。
 
 ## ガードレール

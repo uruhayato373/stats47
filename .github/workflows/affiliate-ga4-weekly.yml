@@ -216,7 +216,11 @@ jobs:
 
       - name: 🧮 Build portfolio + operations state (決定的判定 + validate)
         id: operations
+        env:
+          MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
         run: |
+          node .claude/scripts/measurement/restore.mjs moshimo --if-activated
+          node .claude/scripts/measurement/restore.mjs a8 --if-activated
           npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts | tee /tmp/affiliate-portfolio.md
           npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts --check
           npx -y tsx .claude/scripts/ads/build-affiliate-operations-state.ts | tee /tmp/affiliate-operations.md

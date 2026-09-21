@@ -17,6 +17,7 @@
  */
 import { launchContext, waitForLogin, assertAccount, readListings, resolveAsset, writeBackKdpState, sleep } from "./lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft, readBookshelfState } from "./lib/kdp-flow.mjs";
+import { runKdpPreflight, validateKdpListingMetadata } from "./lib/kdp-preflight.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (n) => {
@@ -40,12 +41,28 @@ const ids = Object.keys(listings)
   .filter((id) => (wanted ? wanted.includes(id) : true))
   // status phase は公開済みの後追い (ASIN 回収・審査状態) なので listed も対象。他は触らない。
   .filter((id) => (PHASE === "status" ? true : listings[id].status !== "listed"))
+  // 止めている本 (blocked-thin / blocked-design) と販売停止を求めている本は下書き・公開の対象にしない
+  // (2026-09-19: 旧 filter は status !== "listed" だけで、blocked-* も下書き作成の対象になっていた)。
+  .filter((id) => (PHASE === "status" ? true : !String(listings[id].status).startsWith("blocked-") && !listings[id].withdrawal))
   .sort();
 if (!ids.length) {
   console.log("[batch] 対象なし (全冊 listed か --ids が空集合)");
   process.exit(0);
 }
 console.log(`[batch] phase=${PHASE} 対象 ${ids.length} 冊: ${ids.join(", ")}`);
+
+if (PHASE !== "status") {
+  const metadataErrors = [];
+  for (const id of ids) {
+    const metadata = validateKdpListingMetadata(id, listings[id]);
+    metadata.warnings.forEach((warning) => console.warn(`[preflight] ${id}: ${warning}`));
+    metadata.errors.forEach((error) => metadataErrors.push(`${id}: ${error}`));
+  }
+  if (metadataErrors.length) {
+    console.error(`[preflight] ABORT: ${metadataErrors.join(" / ")}`);
+    process.exit(1);
+  }
+}
 
 const results = [];
 const ctx = await launchContext({ headless: false });
@@ -65,6 +82,14 @@ try {
   if (!acc.ok) {
     console.error("ABORT:", acc.reason);
     process.exit(2);
+  }
+
+  if (PHASE === "draft" || PHASE === "publish") {
+    const preflight = await runKdpPreflight(page, listings, ids, { tag: "[preflight]" });
+    if (!preflight.ok) {
+      console.error(`[preflight] ABORT: ${preflight.errors.join(" / ")}`);
+      process.exit(2);
+    }
   }
 
   let consecutiveFails = 0;
@@ -120,7 +145,7 @@ try {
           continue;
         }
         const pub = await publishDraft(page, id, lst, { tag: "[publish]" });
-        results.push({ id, ok: pub.ok, detail: pub.ok ? `公開確定 (${pub.status}${pub.asin ? ` / ${pub.asin}` : ""})` : pub.reason });
+        results.push({ id, ok: pub.ok, detail: pub.ok ? `${pub.outcome} (${pub.status}${pub.asin ? ` / ${pub.asin}` : ""})` : pub.reason });
       }
     } catch (e) {
       results.push({ id, ok: false, detail: `例外: ${e instanceof Error ? e.message : String(e)}` });

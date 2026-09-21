@@ -160,7 +160,7 @@ jobs:
       # GSC カバレッジ是正キューを本番 HTTP 実測で再構築する
       # (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
       #
-      # export (GSC UI) は Google ログイン済み Playwright profile が要りローカル限定。
+      # 認証付き日次CIのprivate R2を復元。初回成功前だけ既存入力の鮮度ゲートを維持する。
       # commit 済み入力が1週以内なら認証不要で本番 HTTP を再実測する。2週以上古ければ
       # fail-closed で止め、古い母集団を当週の verdict に見せない。
       # 2026-09-06 に W32 入力を当日生成として扱っていた再発防止。
@@ -174,7 +174,14 @@ jobs:
         id: coverage_queue
         continue-on-error: true
         timeout-minutes: 12
-        run: node .claude/scripts/gsc/build-coverage-queue.mjs
+        env:
+          MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
+          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          node .claude/scripts/measurement/restore.mjs gsc --if-activated
+          node .claude/scripts/gsc/build-coverage-queue.mjs
 
       - name: 📄 Summarize coverage queue
         if: always()

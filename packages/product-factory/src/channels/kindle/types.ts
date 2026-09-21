@@ -64,6 +64,47 @@ export interface BookChapter {
   readonly freshFile?: string;
 }
 
+/** 共通事業方針 (.claude/shared-policy/POLICY.md) の HARM 分類。 */
+export type HarmAxis = "H" | "A" | "R" | "M";
+/** note 記事構成 (.claude/shared-policy/STRUCTURE.md) のタイトル 5 型。序列は付けない。 */
+export type TitleType = "検索・選択" | "数字・チェック" | "実証・体験" | "問い・気づき" | "資料・手順";
+/** 同 9 型 (本文の並べ方)。1 冊に複数を重ねてよい。 */
+export type BodyPattern =
+  | "悩み直撃型"
+  | "勘違い破壊型"
+  | "Before→After型"
+  | "失敗談→教訓型"
+  | "ロードマップ型"
+  | "チェックリスト型"
+  | "比較型"
+  | "ケーススタディ型"
+  | "販売導線型";
+
+/**
+ * 書籍の編集設計 (★2026-09-19 新設)。
+ *
+ * 共通事業方針の「判断の問い」5 つ (誰のどんな悩み / HARM と理由 / 提供価値と支払う理由 / 需要の証拠 /
+ * 次の検証) と、記事構成 SSOT のタイトル 5 型・本文 9 型を、書籍ごとに**書く場所**。
+ * 2026-09-19 の監査で、32 冊すべてが「データが何か」(concept) しか持たず、読者の悩み・購入理由・
+ * 需要の証拠・タイトルの型がどこにも無いことが分かった (書名 13 冊が「〇〇の地図 — キーワード列挙」)。
+ * validator が内容を検査し、generate は design の無い書籍を作らない。
+ */
+export interface EditorialDesign {
+  /** 問い 1: 誰の、どんな具体的な悩み・達成したいことを扱うか (読者の言葉で)。 */
+  readonly readerProblem: string;
+  /** 問い 2: HARM のどれに関係するか。対象外なら空配列にして harmReason に理由を書く。 */
+  readonly harm: readonly HarmAxis[];
+  readonly harmReason: string;
+  /** 問い 3・4: 何を提供し読者の判断をどう助けるか。無料 (stats47.jp) で得られる価値と、有料で支払う理由。 */
+  readonly valueAndPayReason: string;
+  /** 問い 5: 需要を示す証拠 (検索・相談・購入)。未確認なら「未検証:」で始め、何を検証するかを書く。 */
+  readonly demandEvidence: string;
+  /** タイトル案。異なる 2 型で 2 案 (STRUCTURE.md「タイトルの型」)。`title` はこのどちらかと一致させる。 */
+  readonly titleCandidates: readonly { readonly type: TitleType; readonly title: string }[];
+  /** 本文で主に使う型 (冒頭・本編・末尾で重ねてよい)。 */
+  readonly bodyPatterns: readonly BodyPattern[];
+}
+
 /** 1 書籍の定義。KINDLE_BOOKS に全登録する。 */
 export interface KindleBook {
   /** 一意 ID。`^K-S[1-4]-\d{2}$` (例 K-S1-01)。 */
@@ -73,8 +114,10 @@ export interface KindleBook {
   readonly title: string;
   /** サブタイトル (任意)。 */
   readonly subtitle?: string;
-  /** 1-2 文の企画意図。 */
+  /** 1-2 文の企画意図 (データ側の説明)。読者側の設計は design に書く。 */
   readonly concept: string;
+  /** 編集設計 (読者の悩み・HARM・支払う理由・需要の証拠・タイトルの型・本文の型)。generate の前提。 */
+  readonly design?: EditorialDesign;
   /** 著者表示名。 */
   readonly author: string;
   /** 章立て (先頭は通例 fresh の「はじめに」、末尾は fresh の「おわりに/横断分析」)。 */

@@ -21,6 +21,16 @@ updated: 2026-09-20
 
 ## 🔴 高 — 今月中に着手したい
 
+### [AUTHENTICATED-MEASUREMENT-ACTIVATION-01] 認証付きCIの初期認証と日次起動を完了する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21]
+
+- **owner**: オーナー（初期/期限切れ認証）/ devops-runner（CI検証・release・鮮度監視）
+- **現状**: 2026-09-21に全セッション統合・本番反映の承認済み。CI run `35549710650` はA8成果・ココナラ計測・KDP出版状態が成功。もしも/afb/GSCは`auth_required`、noteは286記事中285記事で`report_incomplete`。失敗は固定Issue #1000で継続管理し、成功へ読み替えない。
+- **次**: `.claude/state/metrics/authenticated/latest.json`の再認証対象を本人の認証で復旧し、CI側の読み取り成功を確認する。noteの欠落1記事は取得契約と公開状態を照合する。PR #999はgreen確認後にmainへ反映し、初回scheduleの記録と48時間鮮度監視を確認する。
+- **完了条件**: 全collectorの実データ取得・private R2 read-back・固定Issueの復旧closeが成立し、mainのschedule起動証拠がある。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。
+- **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookieをgit/ログ/artifactへ出さない。KDP売上/KENP・afb成果の未実装は別途取得契約が必要で、出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
+
 ### [AFF-INTENT-FALLBACK-STOP-01] 意図が解決しない面への配信を止め、priority を期待収益順にする
 
 タグ: [収益化] [種類:改善] [実行:対話] [検証:node .claude/scripts/metrics/check-revenue-guards.mjs が exit 0] [起票:2026-09-20] [期日:2026-10-04]
@@ -981,8 +991,8 @@ updated: 2026-09-20
 
 - **status**: pending（期日は計測契約整備の次回確認期限）
 - **owner**: coconala-operator（取得可否確認）／improvement-triage（効果観測の排他writer）
-- **次**: 既存13定型商品＋Geo1商品の閲覧・問い合わせ・購入について、本人アカウントを照合した管理画面で取得可否、商品別／全体別、期間・集計単位をread-onlyで確認する。公開日時・baseline・観測期間・母数・判定条件・観測期限後の次手を定義する。
-- **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・自動監視の開始は行わない。
+- **次**: 既存13定型商品＋Geo1商品の公開日時・baseline・観測期間・母数・判定条件・観測期限後の次手を定義する。本人照合・商品別閲覧/販売件数/お気に入りと全体販売額の収集入口は`measurement/marketplace-status.mjs`、日次証拠はprivate R2。問い合わせ数・商品別販売額は未取得であり、画面に無い指標を推測しない。
+- **停止条件**: 公開前baseline不明はunknownとし、公開後の値を公開前の代用にしない。未取得を0とせず、母数0のCVRは未算出とする。認証・権限不足では停止し、売上効果を断定しない。商品変更・実験開始は行わない。読み取りの定期収集は2026-09-21の自動化依頼の範囲。
 - **完了条件**: 取得根拠・日時付きbaseline/unknownと計測契約を既存商品stateへ保存し、improvement-triageが別IDのeffect/pendingへ引き継ぐ。引渡し証拠をbacklog-loopへ渡し、以後の観測待ちを本カードに重複保持しない。
 
 ### [GEO-SERVICE-PILOT-01] Geo納品見本の販売条件を確定し1商品だけ出品判断する

@@ -85,6 +85,16 @@ async function runGenerate(): Promise<number> {
     console.log("生成対象 (status>=manuscript) がありません。");
     return 0;
   }
+  // ★設計の無い本は作らない (2026-09-19)。読者の悩み・支払う理由・需要の証拠・タイトルの型が
+  //   book-catalog.ts の design に無い書籍は、データの束にしかならない (32 冊監査の結論)。
+  const undesigned = targets.filter((b) => !b.design);
+  if (undesigned.length > 0) {
+    console.error(
+      `❌ design (編集設計) が無い書籍は生成しません: ${undesigned.map((b) => b.id).join(", ")}\n` +
+        "   book-catalog.ts の design に 読者の悩み / HARM / 支払う理由 / 需要の証拠 / タイトル案 2 型 / 本文の型 を書いてから再実行してください (types.ts EditorialDesign)。",
+    );
+    return 1;
+  }
   let failures = 0;
   for (const b of targets) {
     console.log(`\n▶ ${b.id} ${b.title} を生成中…`);

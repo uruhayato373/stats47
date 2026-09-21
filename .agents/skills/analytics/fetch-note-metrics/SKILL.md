@@ -85,4 +85,9 @@ session一覧が0でもOSプロセスが残る事例を確認した。OSのPID�
 [アカウント設定](https://note.com/settings/account)を開き、note IDを確認する。再認証はユーザー工程。
 他アカウントにログインしたまま再実行しない。
 
-本CLIはローカルの読み取り専用収集。週次実行や実験の開始は自動登録しない。
+日次の無人収集は`authenticated-measurement.yml`から同じCLIを呼ぶ。CIでは専用note profileの
+storageStateを一時Playwright contextへ読み込み、account/期間/全件ゲートをそのまま適用する。
+生データ・不完全な試行・更新セッションは暗号化private R2、git/artifactには固定コードの成否だけを保存する。
+認証更新は`npm run measurement:bootstrap -- note --login --publish`。詳細は
+[`Playwright認証プロファイル`](../../../../../docs/01_技術設計/07_Playwright認証プロファイル.md#ci-実行について)。
+実験の開始は自動登録しない。

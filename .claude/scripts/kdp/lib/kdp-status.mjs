@@ -1,3 +1,5 @@
+import { advancePublicationStage, stageForKdpStatus } from "./kdp-publication-stage.mjs";
+
 export const KDP_OPERATIONAL_STATUSES = ["draft", "in_review", "live", "unknown"];
 
 export function normalizeKdpStatus(label) {
@@ -13,7 +15,7 @@ export function normalizeKdpStatus(label) {
 export function mergeKdpOperationalState(listing, shelf, checkedAt = new Date().toISOString()) {
   const kdpStatusLabel = String(shelf?.status || "不明");
   const kdpStatus = normalizeKdpStatus(kdpStatusLabel);
-  const next = {
+  let next = {
     ...listing,
     kdpStatus,
     kdpStatusLabel,
@@ -24,5 +26,7 @@ export function mergeKdpOperationalState(listing, shelf, checkedAt = new Date().
   if (kdpStatus === "live" && !next.salesStartedAt) {
     next.salesStartedAt = checkedAt.slice(0, 10);
   }
+  const nextStage = stageForKdpStatus(next, kdpStatus);
+  if (nextStage) next = advancePublicationStage(next, nextStage, checkedAt, { statusLabel: kdpStatusLabel, asin: shelf?.asin || next.asin || null });
   return next;
 }

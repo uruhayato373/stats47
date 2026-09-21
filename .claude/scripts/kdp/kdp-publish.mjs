@@ -6,6 +6,7 @@
  *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --probe     # 出品フォームの構造を dump (セレクタ調整用・書き込みなし)
  *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01             # 下書きを完成させる (既定・冪等)
  *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --verify    # read-back 検証のみ (書き込みなし)
+ *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --preflight # 書誌 + 本棚作成枠の直前検査 (書き込みなし)
  *   node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit    # 公開 (★実公開・要オーナー承認)
  *
  * ★フローの実体は lib/kdp-flow.mjs (kdp-batch.mjs と共有・ドリフト防止)。
@@ -20,12 +21,14 @@ import {
 } from "./lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft } from "./lib/kdp-flow.mjs";
 import { assertKindleReleaseReady } from "./lib/kdp-release-gate.mjs";
+import { runKdpPreflight, validateKdpListingMetadata } from "./lib/kdp-preflight.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
 const ID = getArg("--id");
 const COMMIT = argv.includes("--commit");
 const VERIFY = argv.includes("--verify");
+const PREFLIGHT = argv.includes("--preflight");
 const PROBE = argv.includes("--probe");
 const UPDATE = argv.includes("--update");
 if (!ID) { console.error("--id <K-S1-01> required"); process.exit(1); }
@@ -34,9 +37,18 @@ const listings = readListings();
 const lst = listings[ID];
 if (!lst) { console.error(`ABORT: kdp-listings.json に "${ID}" がありません。明示版の入稿提案を作り、独立レビュー・実機確認・保全・承認後に対象IDの公開台帳を確定してください。`); process.exit(1); }
 if (UPDATE && lst.status !== "listed") { console.error("ABORT: --update は既刊 (status=listed) 専用です"); process.exit(1); }
-if (!UPDATE && lst.status === "listed" && !VERIFY && !PROBE) {
+if (!UPDATE && lst.status === "listed" && !VERIFY && !PREFLIGHT && !PROBE) {
   console.error("ABORT: 既刊を修正する場合は --update を明示してください");
   process.exit(1);
+}
+
+if (!PROBE) {
+  const metadata = validateKdpListingMetadata(ID, lst);
+  metadata.warnings.forEach((warning) => console.warn(`[preflight] ${ID}: ${warning}`));
+  if (!metadata.ok) {
+    console.error(`[preflight] ABORT: ${metadata.errors.join(" / ")}`);
+    process.exit(1);
+  }
 }
 
 // 資産 (EPUB/カバー) の存在をブラウザ起動前に確認 (中断で orphan 下書きを残さない)。
@@ -59,7 +71,7 @@ if (COMMIT || UPDATE) {
   console.log(`[prep] R2 archive revision=${archive.revision} verifiedAt=${archive.verifiedAt}`);
 }
 
-const MODE = PROBE ? "PROBE(構造dump)" : UPDATE ? `UPDATE(${COMMIT ? "再公開" : "修正下書き"})` : COMMIT ? "COMMIT(公開)" : VERIFY ? "VERIFY(検証のみ)" : "DRAFT(下書き)";
+const MODE = PROBE ? "PROBE(構造dump)" : PREFLIGHT ? "PREFLIGHT(書誌・作成枠検査)" : UPDATE ? `UPDATE(${COMMIT ? "再公開" : "修正下書き"})` : COMMIT ? "COMMIT(公開)" : VERIFY ? "VERIFY(検証のみ)" : "DRAFT(下書き)";
 console.log(`[prep] KDP ${MODE} id=${ID} "${lst.title}"`);
 
 const ctx = await launchContext({ headless: false });
@@ -71,6 +83,18 @@ try {
   if (!lg.ok) { console.error("ABORT:", lg.reason); process.exit(2); }
   const acc = await assertAccount(page, { tag: "[kdp]" });
   if (!acc.ok) { console.error("ABORT:", acc.reason); process.exit(2); }
+
+  if (!PROBE && (!VERIFY || PREFLIGHT)) {
+    const preflight = await runKdpPreflight(page, listings, [ID], { tag: "[preflight]" });
+    if (!preflight.ok) {
+      console.error(`[preflight] ABORT: ${preflight.errors.join(" / ")}`);
+      process.exit(2);
+    }
+    if (PREFLIGHT) {
+      console.log("[preflight] ✅ 書誌・本棚作成枠 PASS (書き込みなし)");
+      process.exit(0);
+    }
+  }
 
   if (PROBE) {
     const url = lst.draftId
@@ -130,8 +154,8 @@ try {
   // COMMIT: 公開 (要オーナー承認)。verify PASS は上で確定済み。
   const pub = await publishDraft(page, ID, lst, { tag: "[kdp]" });
   if (pub.ok) {
-    console.log(`[kdp] ✅ 公開手続き完了 (本棚 status=${pub.status}${pub.asin ? ` / asin=${pub.asin}` : " / ASIN 割当待ち"})`);
-    console.log("   ※ KDP の審査 (最大72時間) 後に販売開始。");
+    console.log(`[kdp] ✅ ${pub.outcome} (本棚 status=${pub.status}${pub.asin ? ` / asin=${pub.asin}` : " / ASIN 割当待ち"})`);
+    if (pub.operationalStatus !== "live") console.log("   ※ 現在は販売開始ではありません。KDP 審査後に本棚の「販売中」を再確認します。");
   } else {
     console.error(`[kdp] ⚠ 公開の確定を確認できませんでした (${pub.reason}). 「公開した」とは報告しません。`);
     process.exitCode = 3;

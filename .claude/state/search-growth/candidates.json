@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T08:25:46.760Z",
+  "generatedAt": "2026-09-20T16:25:08.386Z",
   "week": "2026-W38",
   "sourceHealth": {
     "gsc": {
@@ -44,21 +44,21 @@
       ]
     },
     "inspection": {
-      "status": "success",
-      "observedAt": "2026-09-20T00:00:00Z",
-      "count": 2775,
-      "freshness": "fresh",
-      "snapshotFile": ".claude/state/metrics/gsc/url-inspection/2026-09-20.csv",
+      "status": "partial",
+      "observedAt": "2026-09-15T00:00:00Z",
+      "count": 2776,
+      "freshness": "stale",
+      "snapshotFile": ".claude/state/metrics/gsc/url-inspection/2026-09-15.csv",
       "emitsAs": [
         "inspection"
       ]
     },
     "cloudflare": {
-      "status": "success",
-      "observedAt": "2026-09-19T19:29:34.094Z",
+      "status": "partial",
+      "observedAt": "2026-09-02T20:01:54.790Z",
       "count": 2,
-      "freshness": "fresh",
-      "snapshotFile": ".claude/state/metrics/cloudflare/snapshots/2026-09-18.json",
+      "freshness": "stale",
+      "snapshotFile": ".claude/state/metrics/cloudflare/snapshots/2026-09-01.json",
       "emitsAs": [
         "cloudflare"
       ]
@@ -120,9 +120,9 @@
     },
     "ctrRewriteConfidencePenalty": 0.7
   },
-  "count": 1621,
+  "count": 1622,
   "byType": {
-    "server-risk": 1,
+    "server-risk": 2,
     "ctr-opportunity": 125,
     "soft-404-risk": 5,
     "crawled-not-indexed": 275,
@@ -130,6 +130,37 @@
     "measurement-gap": 403
   },
   "candidates": [
+    {
+      "id": "server-risk::/blog/gasoline-consumption-quantity-vs-densely-inhabited-district",
+      "url": "/blog/gasoline-consumption-quantity-vs-densely-inhabited-district",
+      "type": "server-risk",
+      "status": "pending",
+      "score": 0.096,
+      "scoreBreakdown": {
+        "impact": 0.8,
+        "confidence": 0.8,
+        "actionability": 0.9,
+        "freshness": "fresh",
+        "evidenceCoverage": 0.3333,
+        "effort": 2
+      },
+      "evidence": [
+        {
+          "source": "http",
+          "metric": "status",
+          "value": 503,
+          "freshness": "fresh",
+          "periodEnd": null
+        }
+      ],
+      "baselinePeriod": null,
+      "observedAt": "2026-09-20T00:00:00Z",
+      "freshness": "fresh",
+      "limitations": [],
+      "expectedMetric": "5xx / empty 200 の解消",
+      "suggestedVerification": "本番 HTTP を Googlebot UA で再実測 + Cloudflare GraphQL で 5xx 推移確認",
+      "externalActionFlag": false
+    },
     {
       "id": "server-risk::/blog/white-bread-consumption-quantity-prefecture-gap",
       "url": "/blog/white-bread-consumption-quantity-prefecture-gap",

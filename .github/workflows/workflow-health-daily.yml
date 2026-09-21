@@ -102,6 +102,16 @@ jobs:
           { echo '### アフィリエイトportfolioの鮮度'; echo '```'; cat /tmp/affiliate-portfolio-freshness.txt; echo '```'; } \
             >> "$GITHUB_STEP_SUMMARY"
 
+      - name: 認証付き計測の停止・古い成功を検出
+        id: authenticated
+        run: |
+          if node .claude/scripts/measurement/health.mjs --check > /tmp/authenticated-health.txt; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+          fi
+          cat /tmp/authenticated-health.txt >> "$GITHUB_STEP_SUMMARY"
+
       - name: 💾 state を commit-back
         run: |
           git config user.name "github-actions[bot]"
@@ -116,7 +126,7 @@ jobs:
           echo "::warning::state の push に失敗した (監査結果自体は job summary にある)"
 
       - name: 🚨 連続失敗を Issue にする
-        if: steps.audit.outputs.healthy == 'false' || steps.freshness.outputs.fresh == 'false' || steps.affiliate_portfolio.outputs.fresh == 'false'
+        if: steps.audit.outputs.healthy == 'false' || steps.freshness.outputs.fresh == 'false' || steps.affiliate_portfolio.outputs.fresh == 'false' || steps.authenticated.outputs.fresh == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -138,6 +148,7 @@ jobs:
             echo
             echo '```'
             cat /tmp/affiliate-portfolio-freshness.txt
+            cat /tmp/authenticated-health.txt
             echo '```'
             echo
             echo "## 見かた"
@@ -161,7 +172,7 @@ jobs:
           exit 1
 
       - name: ✅ 復旧したら Issue を閉じる
-        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true' && steps.affiliate_portfolio.outputs.fresh == 'true'
+        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true' && steps.affiliate_portfolio.outputs.fresh == 'true' && steps.authenticated.outputs.fresh == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
