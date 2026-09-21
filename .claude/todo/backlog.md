@@ -25,8 +25,9 @@ updated: 2026-09-20
 
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21]
 
-- **owner**: オーナー（初期/期限切れ認証・本番反映承認）/ devops-runner（CI検証・承認後release）
-- **次**: `.claude/state/metrics/authenticated/latest.json`の未設定/再認証対象を、`npm run measurement:bootstrap -- <source> --login --publish`で更新する。認証は本人が行う。PR #999をgreen確認・承認後にmainへ反映し、初回scheduleの記録と48時間鮮度監視を確認する。
+- **owner**: オーナー（初期/期限切れ認証）/ devops-runner（CI検証・release・鮮度監視）
+- **現状**: 2026-09-21に全セッション統合・本番反映の承認済み。CI run `35549710650` はA8成果・ココナラ計測・KDP出版状態が成功。もしも/afb/GSCは`auth_required`、noteは286記事中285記事で`report_incomplete`。失敗は固定Issue #1000で継続管理し、成功へ読み替えない。
+- **次**: `.claude/state/metrics/authenticated/latest.json`の再認証対象を本人の認証で復旧し、CI側の読み取り成功を確認する。noteの欠落1記事は取得契約と公開状態を照合する。PR #999はgreen確認後にmainへ反映し、初回scheduleの記録と48時間鮮度監視を確認する。
 - **完了条件**: 全collectorの実データ取得・private R2 read-back・固定Issueの復旧closeが成立し、mainのschedule起動証拠がある。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookieをgit/ログ/artifactへ出さない。KDP売上/KENP・afb成果の未実装は別途取得契約が必要で、出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 
