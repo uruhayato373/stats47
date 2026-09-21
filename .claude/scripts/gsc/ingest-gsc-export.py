@@ -173,6 +173,17 @@ def validate_actionable_reports(reports):
                 raise ValueError("account_mismatch: drilldown host")
 
 
+def normalize_drilldown(lines):
+    rows = list(csv.reader(lines))
+    if not rows or rows[0] != ["URL", "前回のクロール"]:
+        raise ValueError("report_incomplete: drilldown header")
+    if any(len(row) != 2 or urlparse(row[0]).scheme not in ("http", "https") for row in rows[1:]):
+        raise ValueError("report_incomplete: drilldown row")
+    out = io.StringIO(newline="")
+    csv.writer(out, lineterminator="\n").writerows(rows)
+    return out.getvalue(), len(rows) - 1
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=os.path.expanduser("~/Downloads"), help="GSC zip の取り込み元")
@@ -220,18 +231,11 @@ def main():
             #   死んだ 404 を含む生エクスポートは再送信対象に**しない**。build-coverage-queue.mjs が
             #   本番 HTTP 実測で live を選別し curated `coverage-live-resubmit-urls.csv` に書き出す。
             fname = f"{cat}-drilldown.csv"
-            # drilldown lines はヘッダ込み。URL,前回のクロール 形式に正規化
-            lines = r["drilldown"]
-            body = []
-            for i, l in enumerate(lines):
-                if i == 0 and l.startswith("URL"):
-                    continue
-                if l.startswith("http"):
-                    body.append(l)
+            # Preserve quoted URLs containing commas; never silently drop rows.
+            body, row_count = normalize_drilldown(r["drilldown"])
             with open(os.path.join(out_dir, fname), "w", encoding="utf-8") as f:
-                f.write("URL,前回のクロール\n")
-                f.write("\n".join(body) + ("\n" if body else ""))
-            written.append((fname, len(body)))
+                f.write(body)
+            written.append((fname, row_count))
 
     # 集計 (カテゴリ別総件数) を保存 → 経過観測のトレンド入力
     if aggregate:

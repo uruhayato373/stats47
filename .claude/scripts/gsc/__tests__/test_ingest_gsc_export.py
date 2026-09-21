@@ -1,4 +1,5 @@
 import copy
+import csv
 import importlib.util
 from pathlib import Path
 import sys
@@ -19,6 +20,14 @@ def fixture():
 
 
 class CoverageContract(unittest.TestCase):
+    def test_normalization_preserves_every_quoted_url(self):
+        lines = ['URL,前回のクロール', '"https://stats47.jp/example?a=1,2",2026-09-18', 'https://stats47.jp/,']
+        text, count = ingest.normalize_drilldown(lines)
+        self.assertEqual(count, 2)
+        self.assertEqual(list(csv.reader(text.splitlines())), list(csv.reader(lines)))
+        with self.assertRaisesRegex(ValueError, 'drilldown row'):
+            ingest.normalize_drilldown(['URL,前回のクロール', 'not-a-url,2026-09-18'])
+
     def test_complete(self):
         ingest.validate_actionable_reports(fixture())
 
