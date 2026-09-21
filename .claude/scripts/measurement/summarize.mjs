@@ -31,7 +31,7 @@ mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
 const lines = ['認証付き計測の最新試行。生データと認証状態は暗号化したprivate R2に保存。', '',
   '| 対象 | 収集範囲 | 状態 | 次の操作 |', '|---|---|---|---|',
-  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.code === 'auth_required' || s.code === 'session_missing' ? `専用profileで再ログイン後 bootstrap-session.mjs ${s.source} --publish` : s.code ?? s.remaining ?? 'なし'} |`),
+  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.code === 'auth_required' || s.code === 'session_missing' ? `認証プロファイル手順書で${s.source}の認証を復旧し bootstrap-session.mjs ${s.source}${s.source === 'gsc' ? ' --from-profile' : ''} --publish` : s.code ?? s.remaining ?? 'なし'} |`),
   '', 'KDPは昨日の書籍別注文・KENP・電子書籍ロイヤリティ見積り。確定ロイヤリティ・入金とafb成果は未取得。提携状態の成功を成果計測完了とは扱わない。ココナラ表示数は有料機能で欠測の場合null。',
 ];
 writeFileSync('/tmp/authenticated-measurement-summary.md', lines.join('\n') + '\n');

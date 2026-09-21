@@ -15,6 +15,7 @@ GSC UI (インデックス作成 > ページ) の export は:
 正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md
 """
 import argparse
+import csv
 import datetime as dt
 import io
 import json
@@ -22,6 +23,7 @@ import os
 import sys
 import unicodedata
 import zipfile
+from urllib.parse import urlparse
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 DRILLDOWN_DIR = os.path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/coverage-drilldown")
@@ -150,17 +152,38 @@ def is_gsc_zip(zp: str) -> bool:
     return name.endswith(".zip") and ("インデックス" in name or "カバレッジ" in name or "Coverage" in name)
 
 
+def validate_actionable_reports(reports):
+    """Validate this run's ZIP contents, not stale files already in the destination."""
+    required = {"not-found-404", "soft-404", "server-error-5xx", "crawled-not-indexed", "discovered-not-indexed"}
+    totals = {CATEGORY_MAP.get(k, k): v for r in reports for k, v in (r.get("aggregate") or {}).items()}
+    for category in required:
+        matches = [r for r in reports if r.get("category") == category and r.get("drilldown")]
+        if len(matches) != 1 or category not in totals:
+            raise ValueError(f"report_incomplete: missing or duplicate {category}")
+        rows = list(csv.reader(matches[0]["drilldown"]))
+        if rows[0][0] != "URL" or len(rows) - 1 != min(totals[category], 1000):
+            raise ValueError(f"report_incomplete: row count {category}")
+        urls = [row[0] for row in rows[1:] if row]
+        if len(set(urls)) != len(rows) - 1:
+            raise ValueError(f"report_incomplete: duplicate URL {category}")
+        for value in urls:
+            url = urlparse(value)
+            # sc-domain properties include every subdomain, unlike URL-prefix properties.
+            if url.scheme not in ("http", "https") or not (url.hostname == "stats47.jp" or (url.hostname or "").endswith(".stats47.jp")):
+                raise ValueError("account_mismatch: drilldown host")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=os.path.expanduser("~/Downloads"), help="GSC zip の取り込み元")
     ap.add_argument("--week", default=None, help="保存先 ISO 週 (既定: 今日)")
     ap.add_argument("--date", default=None, help="今日の日付 YYYY-MM-DD (week 自動算出用)")
+    ap.add_argument("--require-actionable", action="store_true", help="概要と5分類の内容・行数・サイト帰属を必須照合")
     args = ap.parse_args()
 
     today = dt.date.fromisoformat(args.date) if args.date else dt.date.today()
     week = args.week or iso_week(today)
     out_dir = os.path.join(DRILLDOWN_DIR, week)
-    os.makedirs(out_dir, exist_ok=True)
 
     if not os.path.isdir(args.src):
         print(f"!! src not found: {args.src}", file=sys.stderr)
@@ -174,17 +197,22 @@ def main():
         print(f"!! {args.src} に GSC zip が見つかりません (ファイル名に 'インデックス'/'カバレッジ'/'Coverage' を含む zip)", file=sys.stderr)
         sys.exit(1)
 
+    reports = [process_zip(zp) for zp in zips]
+    if args.require_actionable:
+        if any(r is None for r in reports):
+            raise ValueError("report_incomplete: invalid ZIP")
+        validate_actionable_reports(reports)
+    os.makedirs(out_dir, exist_ok=True)
     aggregate = {}
     trend_text = None
     written = []
-    for zp in zips:
-        r = process_zip(zp)
+    for r in reports:
         if not r:
             continue
         if r["aggregate"]:
             for k, v in r["aggregate"].items():
                 aggregate[k] = max(aggregate.get(k, 0), v)
-        if r["trend"]:
+        if r["trend"] and not r["category"]:
             trend_text = r["trend"]
         if r["drilldown"] and r["category"]:
             cat = r["category"]

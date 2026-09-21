@@ -5,7 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, lstatSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sourceFor, scopedState, failureCode } from './sources.mjs';
+import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sources.mjs';
 import { readVault, writeVault } from './vault.mjs';
 
 const run = promisify(execFile);
@@ -62,7 +62,7 @@ try {
   if (seed) bundle = JSON.parse(gunzipSync(Buffer.from(seed, 'base64'), { maxOutputLength: 4 * 1024 * 1024 }));
   if (!local) {
     const remote = await readVault(`${name}/session`);
-    if (remote && (!bundle || remote.capturedAt > bundle.capturedAt)) bundle = remote;
+    bundle = selectSessionBundle(bundle, remote);
   }
   if (!bundle || bundle.source !== name) throw new Error('session_missing');
   writeFileSync(join(work, 'state.json'), JSON.stringify(scopedState(name, bundle.state)), { mode: 0o600 });
@@ -107,7 +107,7 @@ try {
     const dest = join(work, 'coverage');
     await command('.claude/scripts/gsc/export-coverage-playwright.mjs', ['--dest', dest], 600000);
     capture(`.local/authenticated-measurement/${name}-${runId}/coverage`);
-    const { stdout, stderr } = await run('python3', ['.claude/scripts/gsc/ingest-gsc-export.py', '--src', dest], { cwd: ROOT, timeout: 60000 });
+    const { stdout, stderr } = await run('python3', ['.claude/scripts/gsc/ingest-gsc-export.py', '--src', dest, '--require-actionable'], { cwd: ROOT, timeout: 60000 });
     logs += stdout + stderr;
     capture('.claude/state/metrics/gsc/coverage-drilldown');
   } else {

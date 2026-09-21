@@ -18,7 +18,7 @@ if (process.argv.includes('--if-activated')) {
 }
 try {
   const attempt = await readVault(`${source}/latest-attempt`);
-  validateAttempt(attempt);
+  validateAttempt(attempt, Date.now(), source);
   const evidence = await readVault(`${source}/latest-success`);
   if (!evidence || evidence.source !== source || evidence.observedAt !== attempt.observedAt) throw new Error('evidence_attempt_mismatch');
   let restored = 0;
