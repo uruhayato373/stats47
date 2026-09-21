@@ -60,7 +60,7 @@ product code、対応format、scope、必要roleまで確認する。
 | note | 帰属・期間・全ページ・合計・公開カタログ・カバーの照合 | 欠落記事はnull。不完全データを全件成功にしない |
 | GSC | property照合、カバレッジCSV、既存ingest | APIの検索パフォーマンスとは別経路 |
 | KDP | known ASINで口座照合、登録書籍の出版状態 | 売上/KENPは未取得。KDP Reportsの別認証・取得器が必要 |
-| ココナラ | seller照合、全サービスの対象期間/閲覧/販売件数/販売額/お気に入り | 有料表示数はnull。ローリング30日を確定7日や手数料控除後収益にしない |
+| ココナラ | seller照合、全体と公開商品別の対象期間/閲覧/販売件数/お気に入り、全体販売額、期間と行合計照合 | 有料表示数・商品別販売額・問い合わせ数はnull/未取得。ローリング30日を確定7日や手数料控除後収益にしない |
 
 保存先はprivate bucket `stats47-private` の `operations/authenticated-measurement/<source>/`。
 `MEASUREMENT_VAULT_KEY`によるAES-256-GCMでobject addressごとに認証し、PUT後GETの一致を検証する。

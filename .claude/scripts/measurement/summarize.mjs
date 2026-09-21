@@ -15,6 +15,7 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     runId: value.runId ?? process.env.GITHUB_RUN_ID ?? null,
     metricsAvailable: value.status === 'pass' && value.metricsAvailable === true,
     evidence: value.evidence ?? null,
+    quality: value.quality ?? null,
     remaining: source === 'kdp' ? 'sales_report_adapter_required' : source === 'afb' ? 'outcomes_not_collected' : null,
   };
 });

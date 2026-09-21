@@ -95,6 +95,9 @@ try {
     capture(`.local/authenticated-measurement/${name}-${runId}/note`);
     const snapshot = JSON.parse(readFileSync(join(work, 'note/latest.json')));
     const cover = JSON.parse(readFileSync(join(work, 'note/cover-metrics-latest.json')));
+    result.quality = { expectedRows: snapshot.coverage?.catalogPublished ?? null, observedRows: snapshot.coverage?.observed ?? null,
+      missingRows: snapshot.coverage?.missingFromDashboard?.length ?? null, totalsMatched: snapshot.coverage?.totalsMatched === true,
+      paginationComplete: snapshot.coverage?.paginationComplete === true };
     if (snapshot.status !== 'pass' || cover.status !== 'pass') {
       const messages = JSON.stringify(snapshot.issues);
       const code = failureCode(messages);

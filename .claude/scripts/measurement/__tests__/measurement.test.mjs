@@ -10,7 +10,7 @@ import { SOURCES, scopedState, sourceFor, failureCode } from '../sources.mjs';
 import { encrypt, decrypt, BUCKET } from '../vault.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
-import { parseCoconalaAnalytics } from '../report-parsers.mjs';
+import { parseCoconalaAnalytics, validateCoconalaCoverage } from '../report-parsers.mjs';
 
 test('session export strips other services and rejects lookalike hosts', () => {
   const state = scopedState('note', { cookies: [
@@ -73,6 +73,13 @@ test('coconala distinguishes observed zero sales from paywalled display counts',
   assert.equal(value.impressions,null);
   assert.throws(()=>parseCoconalaAnalytics(text.replace('販売額','新しい列')),/report_schema_changed/);
   assert.throws(()=>parseCoconalaAnalytics('ログイン'),/report_schema_changed/);
+  const serviceText = text.replace('全出品サービス累計','サービスのパフォーマンス').replace('販売額\n0 円\n','');
+  const service = {...parseCoconalaAnalytics(serviceText,{service:true}),serviceId:'123'};
+  assert.equal(service.grossSalesJpy,null);
+  assert.deepEqual(validateCoconalaCoverage(value,[service]),{complete:true,serviceCount:1,totalsMatched:true});
+  assert.throws(()=>validateCoconalaCoverage(value,[{...service,views:141}]),/collection_incomplete/);
+  assert.throws(()=>validateCoconalaCoverage(value,[service,service]),/collection_incomplete/);
+  assert.throws(()=>validateCoconalaCoverage(value,[{...service,period:{start:'2026-09-20',end:'2026-09-20'}}]),/collection_incomplete/);
 });
 
 test('missing jobs remain failed and activated consumers never silently fall back after failure', () => {
@@ -106,5 +113,9 @@ test('authenticated CI has no PR trigger, no raw artifacts, and includes all con
   const upload = workflow.jobs.collect.steps.find(s => s.uses?.startsWith('actions/upload-artifact'));
   assert.equal(upload.with.path, '.local/authenticated-ci-public/*.json');
   assert.match(source, /gh issue close/);
+  const download = workflow.jobs.record.steps.find(s=>s.id==='artifacts');
+  assert.equal(download['continue-on-error'],undefined);
+  assert.equal(workflow.jobs.record.steps.find(s=>s.id==='record').if,'always()');
+  assert.match(source,/steps\.artifacts\.outcome/);
   assert.doesNotMatch(source, /pull_request|self-hosted|--commit|publishDraft/);
 });

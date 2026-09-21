@@ -1,32 +1,11 @@
 {
-  "hash": "a3e4cd6e635f27bb1cdf2b216ccd2b0cc3acd2d2493302363f8ea9cb5bd3fc5a",
-  "audited_at": "2026-09-21T00:25:08",
+  "hash": "ee722a37014fedab95ed0d47386051dc840fb6c1283200e75021ded5b26f8e66",
+  "audited_at": "2026-09-21T00:32:22",
   "files": [
-    ".agents/skills/analytics/fetch-note-metrics/SKILL.md",
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".agents/skills/sns/sns-weekly-report/reference/reports/2026-W37.md",
-    ".claude/scripts/ads/affiliate-status.mjs",
-    ".claude/scripts/ads/fetch-a8-ui-csv.mjs",
-    ".claude/scripts/ads/lib/a8-report-browser.mjs",
-    ".claude/scripts/ads/lib/asp-browser-base.mjs",
-    ".claude/scripts/ads/lib/asp-browser.mjs",
-    ".claude/scripts/google-admin/browser-context.mjs",
-    ".claude/scripts/gsc/export-coverage-playwright.mjs",
     ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/bootstrap-session.mjs",
-    ".claude/scripts/measurement/browser-session.mjs",
     ".claude/scripts/measurement/collect.mjs",
-    ".claude/scripts/measurement/consumer-paths.mjs",
-    ".claude/scripts/measurement/health.mjs",
     ".claude/scripts/measurement/marketplace-status.mjs",
     ".claude/scripts/measurement/report-parsers.mjs",
-    ".claude/scripts/measurement/restore.mjs",
-    ".claude/scripts/measurement/sources.mjs",
-    ".claude/scripts/measurement/summarize.mjs",
-    ".claude/scripts/measurement/vault.mjs",
-    ".claude/scripts/metrics/generate-weekly-metrics-issue.mjs",
-    ".claude/scripts/note/fetch-note-metrics.mjs",
-    ".claude/skills/analytics/fetch-note-metrics/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/scripts/measurement/summarize.mjs"
   ]
 }
