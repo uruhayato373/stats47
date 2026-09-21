@@ -274,11 +274,13 @@ test('authenticated CI has no PR trigger, no raw artifacts, and includes all con
   assert.equal(workflow.permissions.contents, 'read');
   const upload = workflow.jobs.collect.steps.find(s => s.uses?.startsWith('actions/upload-artifact'));
   assert.equal(upload.with.path, '.local/authenticated-ci-public/*.json');
+  assert.equal(upload.with.name, 'authenticated-status-${{ matrix.source }}-${{ github.run_attempt }}', 'artifact identity must also separate attempts; filenames alone cannot prevent download de-duplication');
   assert.match(source, /gh issue close/);
   const download = workflow.jobs.record.steps.find(s=>s.id==='artifacts');
   assert.equal(download['continue-on-error'],undefined);
   assert.equal(workflow.jobs.record.steps.find(s=>s.id==='record').if,'always()');
   assert.match(source,/steps\.artifacts\.outcome/);
+  assert.match(source,/needs\.collect\.result/);
   assert.doesNotMatch(source, /pull_request|self-hosted|--commit|publishDraft/);
 });
 

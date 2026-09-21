@@ -61,7 +61,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.0
         with:
-          name: authenticated-status-${{ matrix.source }}
+          name: authenticated-status-${{ matrix.source }}-${{ github.run_attempt }}
           path: .local/authenticated-ci-public/*.json
           include-hidden-files: true
           retention-days: 30
@@ -110,7 +110,7 @@ jobs:
           TITLE='認証付き計測に要対応の取得元がある'
           gh label create authenticated-measurement-alert --description 'Authenticated measurement collection or session failure' --color b60205 --force
           EXISTING=$(gh issue list --state open --label authenticated-measurement-alert --limit 1 --json number --jq '.[0].number // empty')
-          if [ '${{ steps.record.outcome }}' = 'success' ] && [ '${{ steps.artifacts.outcome }}' = 'success' ] && jq -e --arg run "$GITHUB_RUN_ID" '.runId == $run and .status == "pass"' .claude/state/metrics/authenticated/latest.json >/dev/null; then
+          if [ '${{ needs.collect.result }}' = 'success' ] && [ '${{ steps.record.outcome }}' = 'success' ] && [ '${{ steps.artifacts.outcome }}' = 'success' ] && jq -e --arg run "$GITHUB_RUN_ID" '.runId == $run and .status == "pass"' .claude/state/metrics/authenticated/latest.json >/dev/null; then
             if [ -n "$EXISTING" ]; then gh issue close "$EXISTING" --comment "取得経路が復旧しました: $RUN_URL"; fi
           else
             if [ ! -f /tmp/authenticated-measurement-summary.md ]; then printf '収集または記録ジョブが完了しませんでした。\n' > /tmp/authenticated-measurement-summary.md; fi
