@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T04:20:02.547Z",
+  "generatedAt": "2026-09-21T04:24:11.625Z",
   "runId": "35560007703",
   "sources": [
     {
@@ -38,15 +38,15 @@
     {
       "source": "afb",
       "capability": "site-conversion-outcomes",
-      "observedAt": "2026-09-21T04:13:12.286Z",
+      "observedAt": "2026-09-21T04:23:46.780Z",
       "activated": false,
       "status": "failed",
       "code": "report_incomplete",
       "runId": "35560007703",
       "metricsAvailable": false,
       "evidence": {
-        "sha256": "55138dd1630b362ae13a5056c298bc0f704d0905799ea6a14ae42f9036b9cfe1",
-        "bytes": 121
+        "sha256": "1d28b6c54a09fd963bcfb647b0857369e4a05a5c3245c5c08107ed4259a74481",
+        "bytes": 169
       },
       "quality": null,
       "remaining": "net_payout_and_partnership_status_not_collected"
