@@ -5,6 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { readVault } from './vault.mjs';
 import { sourceFor } from './sources.mjs';
 import { consumerPath, validateAttempt } from './consumer-paths.mjs';
+import { kdpMonthlyVaultKey, archivedKdpMonthlyReport } from './kdp-monthly-reports.mjs';
 
 const source = process.argv[2];
 const config = sourceFor(source);
@@ -17,6 +18,17 @@ if (process.argv.includes('--if-activated')) {
   }
 }
 try {
+  const monthIndex = process.argv.indexOf('--month');
+  if (monthIndex >= 0) {
+    if (source !== 'kdp') throw new Error('monthly_restore_kdp_only');
+    const month = process.argv[monthIndex + 1];
+    const report = archivedKdpMonthlyReport(await readVault(kdpMonthlyVaultKey(month)), month);
+    const target = resolve(`.local/authenticated-measurement/restored/kdp-monthly-${month}.json`);
+    mkdirSync(dirname(target), { recursive: true });
+    writeFileSync(target, JSON.stringify(report, null, 2) + '\n', { mode: 0o600 });
+    console.log(JSON.stringify({ source, status: 'restored_historical', month, files: 1 }));
+    process.exit(0);
+  }
   const attempt = await readVault(`${source}/latest-attempt`);
   validateAttempt(attempt, Date.now(), source);
   const evidence = await readVault(`${source}/latest-success`);

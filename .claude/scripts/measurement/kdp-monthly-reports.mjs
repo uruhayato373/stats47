@@ -28,6 +28,18 @@ export function kdpMonthlyVaultKey(month) {
   return `kdp/monthly/month-${(year * 12 + number - 1) % 24}`;
 }
 
+/** Historical restores are not a substitute for the fresh daily collector. */
+export function archivedKdpMonthlyReport(archive, month) {
+  monthParts(month);
+  const report = archive?.report;
+  if (archive?.source !== 'kdp' || report?.period?.month !== month || report?.scope !== 'stats47-exact-asin' ||
+      report?.finality !== 'finalized-monthly-royalty' || !report?.coverage?.complete || typeof archive?.workbook !== 'string' ||
+      createHash('sha256').update(Buffer.from(archive.workbook, 'base64')).digest('hex') !== report?.artifact?.sha256) {
+    throw new Error('report_incomplete: monthly_archive_mismatch');
+  }
+  return report;
+}
+
 export function parseKdpMonthlyReport(workbook, listings, month) {
   const [year, number] = monthParts(month);
   const asins = kdpAsinMap(listings);

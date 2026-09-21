@@ -3,8 +3,9 @@ import test from 'node:test';
 import { readFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
 import ExcelJS from 'exceljs';
-import { expectedKdpRoyaltyMonth, kdpMonthlyVaultKey, parseKdpMonthlyReport, collectKdpMonthlyReport } from '../kdp-monthly-reports.mjs';
+import { expectedKdpRoyaltyMonth, kdpMonthlyVaultKey, archivedKdpMonthlyReport, parseKdpMonthlyReport, collectKdpMonthlyReport } from '../kdp-monthly-reports.mjs';
 import { validateAttempt, consumerPath } from '../consumer-paths.mjs';
 
 const listings = { 'K-S1-01': { author: 'stats47', asin: null, previousEditions: [{ author: 'stats47', asin: 'B000000001' }] } };
@@ -121,4 +122,17 @@ test('monthly collection and private archive are required before success; old da
   assert.match(collector, /capture\(monthlyPath\)/);
   assert.throws(() => validateAttempt({ source: 'kdp', status: 'pass', capability: 'publication-and-daily-sales', observedAt: new Date().toISOString() }, Date.now(), 'kdp'), /capability_mismatch/);
   assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.monthly.xlsx'), null);
+});
+
+test('historical restore rejects an overwritten slot or a corrupt original and returns only the scoped report', () => {
+  const bytes = Buffer.from('fixture workbook');
+  const report = { ...parseKdpMonthlyReport(fixture(), listings, '2026-08'), artifact: { sha256: createHash('sha256').update(bytes).digest('hex') } };
+  const archive = { source: 'kdp', report, workbook: bytes.toString('base64') };
+  assert.equal(archivedKdpMonthlyReport(archive, '2026-08'), report);
+  assert.throws(() => archivedKdpMonthlyReport(archive, '2024-08'), /monthly_archive_mismatch/);
+  assert.throws(() => archivedKdpMonthlyReport({ ...archive, workbook: 'Y29ycnVwdA==' }, '2026-08'), /monthly_archive_mismatch/);
+  assert.throws(() => archivedKdpMonthlyReport({ ...archive, report: { ...report, scope: 'account-total' } }, '2026-08'), /monthly_archive_mismatch/);
+  const restore = readFileSync('.claude/scripts/measurement/restore.mjs', 'utf8');
+  assert.match(restore, /monthly_restore_kdp_only/);
+  assert.match(restore, /kdp-monthly-\$\{month\}\.json/);
 });

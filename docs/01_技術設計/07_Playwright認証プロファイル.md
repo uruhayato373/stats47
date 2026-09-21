@@ -88,6 +88,7 @@ KDPはknown ASINで本棚の口座を照合後、全書籍の状態巡回より�
 KDPの昨日値は速報値で、注文等はマーケットプレイス現地日付、KENPはUTC。正規化は各recordの`dateBasis`に保持する（[公式Dashboard](https://kdp.amazon.com/en_US/help/topic/GX7EGDFGS9CZCA2F)、2026-09-21確認）。遅延や再集計がありうるため、日次値の単純合算で確定週次売上を作らない。確定収益の元資料は毎月15日前後に作成される[月別のロイヤリティ](https://kdp.amazon.co.jp/ja_JP/help/topic/G200641190)。ASIN・通貨別の月次収益であり、共有口座の支払い総額や週次純収益にそのまま転記しない。
 月次collectorはJST15日以降は前月、14日までは前々月を要求し、実画面の選択月・総収益の`N/A`不在・ダウンロード名・全sheetの販売期間と列を照合する。日付だけで確定とは判定せず、未発行や形式変更なら停止する。現版/旧版ASINと著者を照合し、未写像のstats47書籍・重複・注文数と返品数の不整合を拒否する。通貨を合算せず、KU端数と返品の負額を保持する。Prime Readingボーナス・入金・税引後利益は対象外。未観測の書籍を0埋めせず、`sales-ledger`の週次純収益へ自動転記しない。
 日本語の電子書籍/KENPの2sheetを実機契約とし、紙書籍・未知のボーナス等の新sheetは黙って捨てずschema errorにする。原本はprivate R2だけに残し、`restore.mjs kdp`は日次・月次を分離した正規化`status.json`だけを`.local/authenticated-measurement/restored/kdp.json`へ復元する。旧日次のみのcapabilityは月次取得の成功に流用しない。
+過去月は`node .claude/scripts/measurement/restore.mjs kdp --month YYYY-MM`で正規化結果だけを`restored/kdp-monthly-YYYY-MM.json`へ復元する。月の一致と原本SHAを再検査し、循環slotが別月へ上書き済みなら停止する。履歴復元には最新試行の48時間鮮度を要求しないが、現在の収集成功や認証有効性を証明するものではなく、最新結果を上書きしない。
 もしも/A8はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
 初回成功後は最新試行の失敗・48時間超で復元を止め、古いgit入力へのfallbackはしない。
 
