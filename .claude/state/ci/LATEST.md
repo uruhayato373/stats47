@@ -1,19 +1,19 @@
 # cron ヘルスチェック
 
-取得: 2026-09-21T03:26:48.727Z
+取得: 2026-09-21T12:51:06.686Z
 
 ```
 scheduled workflow 46 件を検査
 
-⚠️ 連続失敗 6 件:
+⚠️ cron 異常 6 件:
+- workflow-health-daily.yml: 12 回連続失敗 (直近 12 回に成功なし)
+    2026-09-21T03:25:57Z failure https://github.com/uruhayato373/stats47/actions/runs/35557500343
+    2026-09-20T03:31:13Z failure https://github.com/uruhayato373/stats47/actions/runs/35486784509
+    2026-09-19T03:14:06Z failure https://github.com/uruhayato373/stats47/actions/runs/35417967577
 - ai-content-gemini-daily.yml: 11 回連続失敗 (最終成功から 11 日)
     2026-09-21T00:14:41Z failure https://github.com/uruhayato373/stats47/actions/runs/35547070398
     2026-09-20T00:08:10Z failure https://github.com/uruhayato373/stats47/actions/runs/35477964730
     2026-09-19T00:19:08Z failure https://github.com/uruhayato373/stats47/actions/runs/35408941371
-- workflow-health-daily.yml: 11 回連続失敗 (直近 12 回に成功なし)
-    2026-09-20T03:31:13Z failure https://github.com/uruhayato373/stats47/actions/runs/35486784509
-    2026-09-19T03:14:06Z failure https://github.com/uruhayato373/stats47/actions/runs/35417967577
-    2026-09-18T03:17:47Z failure https://github.com/uruhayato373/stats47/actions/runs/35302666963
 - backlog-loop-daily.yml: 10 回連続失敗 (最終成功から 10 日)
     2026-09-20T18:57:54Z failure https://github.com/uruhayato373/stats47/actions/runs/35530735681
     2026-09-19T18:43:06Z failure https://github.com/uruhayato373/stats47/actions/runs/35462088262
