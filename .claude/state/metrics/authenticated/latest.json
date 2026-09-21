@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T04:54:19.219Z",
+  "generatedAt": "2026-09-21T05:50:54.755Z",
   "runId": "35561887453",
   "sources": [
     {
@@ -61,15 +61,15 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-09-21T04:43:32.809Z",
+      "observedAt": "2026-09-21T05:49:36.803Z",
       "activated": false,
       "status": "failed",
       "code": "report_incomplete",
       "runId": "35561887453",
-      "runAttempt": 1,
+      "runAttempt": 3,
       "metricsAvailable": false,
       "evidence": {
-        "sha256": "d87c51998fd29363440b7dc6b0a19858ee30f6679f04a0c26655e9acebb0fd0b",
+        "sha256": "fb5e7e9c28d354207a49426bd5be410d64cb5e0db5ef79a8c5bd7220a3df2f7a",
         "bytes": 1698680
       },
       "quality": {
@@ -101,16 +101,16 @@
     {
       "source": "kdp",
       "capability": "publication-and-daily-sales",
-      "observedAt": "2026-09-21T04:43:34.361Z",
+      "observedAt": "2026-09-21T05:49:52.380Z",
       "activated": true,
       "status": "failed",
-      "code": "auth_required",
+      "code": "collection_failed",
       "runId": "35561887453",
-      "runAttempt": 1,
+      "runAttempt": 3,
       "metricsAvailable": false,
       "evidence": {
-        "sha256": "f0189ab3e758972eeeda880b2d135c0af4160041d19cd4b1818e0b2cdb48988a",
-        "bytes": 1085
+        "sha256": "5c8d8f046c2833fa660b1bddae2e5d0156e83e30615516762ed999060b557682",
+        "bytes": 1407
       },
       "quality": null,
       "remaining": "finalized_royalties_not_collected"
