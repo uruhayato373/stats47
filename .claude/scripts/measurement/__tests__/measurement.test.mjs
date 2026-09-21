@@ -96,19 +96,32 @@ const kdpListings = { 'K-S1-01': { author: 'stats47', asin: null, previousEditio
 test('KDP Reports readiness rejects login and requires the actual report UI', async () => {
   let url = 'https://kdpreports.amazon.co.jp/dashboard';
   let ready = false;
+  let redirect = false;
   const tab = { first: () => tab, waitFor: async options => {
     assert.equal(options.state, 'visible');
+    assert.equal(options.timeout, 30000);
     if (!ready) throw new Error('report UI unavailable');
+    if (redirect) url = 'https://kdpreports.amazon.co.jp/dashboard';
   } };
+  const password = { first: () => password, isVisible: async () => true };
   const page = { goto: async target => assert.equal(target, 'https://kdpreports.amazon.co.jp/dashboard'),
-    url: () => url, getByRole: (role, options) => {
+    url: () => url, locator: () => password, getByRole: (role, options) => {
       assert.equal(role, 'tab'); assert.equal(options.name, '昨日'); return tab;
     } };
   await assert.rejects(openKdpReports(page), /report UI unavailable/);
   ready = true;
   assert.equal(await openKdpReports(page), tab);
-  url = 'https://www.amazon.co.jp/ap/signin';
-  await assert.rejects(openKdpReports(page), /auth_required/);
+  url = 'https://www.amazon.co.jp/ap/signin?private=not-for-logs'; ready = false;
+  await assert.rejects(openKdpReports(page), error => {
+    assert.match(error.message, /auth_required/);
+    assert.match(error.message, /"passwordVisible":true/);
+    assert.doesNotMatch(error.message, /private|not-for-logs/);
+    return true;
+  });
+  ready = true; redirect = true;
+  assert.equal(await openKdpReports(page), tab, 'an intermediate SSO URL must not be mistaken for a settled login form');
+  url = 'https://kdpreports.amazon.co.jp.evil.example/dashboard'; redirect = false;
+  await assert.rejects(openKdpReports(page), /account_mismatch: reports_origin/);
 });
 test('KDP checks Reports before scanning and verifies refresh only after final collection', () => {
   const code = readFileSync('.claude/scripts/measurement/marketplace-status.mjs', 'utf8');
