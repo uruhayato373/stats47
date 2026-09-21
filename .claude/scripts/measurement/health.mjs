@@ -13,7 +13,7 @@ export function measurementHealth(state, now = Date.now()) {
     return { source, capability: config.capability, status: !current ? 'stale' : !compatible ? 'failed' : item.status,
       code: !current ? 'measurement_stale' : !compatible ? 'capability_mismatch' : item.code ?? null,
       metricsAvailable: current && compatible && item.status === 'pass' && item.metricsAvailable === true,
-      remaining: source === 'kdp' ? 'finalized_royalties_not_collected' : source === 'afb' ? 'outcomes_not_collected' : null };
+      remaining: source === 'kdp' ? 'finalized_royalties_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null };
   });
   return { fresh, status: sources.every(s => s.status === 'pass') ? 'pass' : 'action_required', sources };
 }

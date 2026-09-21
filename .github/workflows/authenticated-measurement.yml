@@ -27,7 +27,7 @@ jobs:
         include:
           - {source: moshimo, secret: MEASUREMENT_SESSION_MOSHIMO}
           - {source: a8, secret: MEASUREMENT_SESSION_A8}
-          - {source: afb, secret: MEASUREMENT_SESSION_AFB}
+          - {source: afb, secret: AFB_API_KEY}
           - {source: note, secret: MEASUREMENT_SESSION_NOTE}
           - {source: gsc, secret: MEASUREMENT_SESSION_GSC}
           - {source: kdp, secret: MEASUREMENT_SESSION_KDP}
@@ -41,15 +41,22 @@ jobs:
         with: {node-version: '20', cache: npm}
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+        if: matrix.source != 'afb'
       - name: Collect and verify private evidence
         env:
-          MEASUREMENT_SESSION: ${{ secrets[matrix.secret] }}
+          MEASUREMENT_SESSION: ${{ matrix.source != 'afb' && secrets[matrix.secret] || '' }}
+          AFB_API_KEY: ${{ matrix.source == 'afb' && secrets[matrix.secret] || '' }}
           MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
           R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
           SOURCE: ${{ matrix.source }}
-        run: xvfb-run --auto-servernum node .claude/scripts/measurement/collect.mjs "$SOURCE"
+        run: |
+          if [ "$SOURCE" = 'afb' ]; then
+            node .claude/scripts/measurement/collect.mjs "$SOURCE"
+          else
+            xvfb-run --auto-servernum node .claude/scripts/measurement/collect.mjs "$SOURCE"
+          fi
       - name: Upload credential-free status only
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.0

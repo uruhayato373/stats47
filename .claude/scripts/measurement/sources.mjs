@@ -2,7 +2,7 @@
 export const SOURCES = {
   moshimo: { domains: ['moshimo.com'], profile: 'playwright-moshimo-profile', state: 'playwright-moshimo-state.json', secret: 'MEASUREMENT_SESSION_MOSHIMO', capability: 'outcomes' },
   a8: { domains: ['a8.net'], profile: 'playwright-a8-profile', state: 'playwright-a8-state.json', secret: 'MEASUREMENT_SESSION_A8', capability: 'site-outcomes' },
-  afb: { domains: ['afi-b.com', 'affiliate-b.com'], profile: 'playwright-afb-profile', state: 'playwright-afb-state.json', secret: 'MEASUREMENT_SESSION_AFB', capability: 'partnership-status' },
+  afb: { domains: ['afi-b.com', 'affiliate-b.com'], profile: 'playwright-afb-profile', state: 'playwright-afb-state.json', secret: 'MEASUREMENT_SESSION_AFB', apiSecret: 'AFB_API_KEY', transport: 'api', capability: 'site-conversion-outcomes' },
   note: { domains: ['note.com'], profile: 'playwright-note-profile', secret: 'MEASUREMENT_SESSION_NOTE', capability: 'dashboard-metrics' },
   gsc: { domains: ['google.com'], profile: 'playwright-google-admin-profile', secret: 'MEASUREMENT_SESSION_GSC', capability: 'verified-coverage-export' },
   kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', secret: 'MEASUREMENT_SESSION_KDP', capability: 'publication-and-daily-sales' },
@@ -34,6 +34,7 @@ export function scopedState(name, state) {
 }
 
 export function failureCode(message = '') {
+  for (const code of ['api_key_missing', 'api_auth_required', 'api_rate_limited', 'api_unavailable']) if (message.startsWith(code)) return code;
   if (/session_missing|secret_missing/.test(message)) return 'session_missing';
   if (/auth_required|login_required|未ログイン|ログイン待|not-signed-in|session_expired/.test(message)) return 'auth_required';
   if (/account_mismatch|別アカウント|口座不一致|サイト帰属|不一致.*site|site ID不一致/.test(message)) return 'account_mismatch';
