@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-20",
+  "date": "2026-09-21",
   "period": {
-    "periodStart": "2026-09-11",
-    "periodEnd": "2026-09-17",
+    "periodStart": "2026-09-12",
+    "periodEnd": "2026-09-18",
     "windowDays": 7
   },
-  "inputHash": "6ecbcfe9bc94318977cafaee9a29948751c6e9234c8b7aa25d0e35718cf1cf42",
+  "inputHash": "ef32f7889ae23e0047ef2d3ad6d844d4177ca7723f2c3b63c2fb19833af5a70a",
   "movements": [
     {
       "keyword": "漁獲量とは",
@@ -27,22 +27,31 @@
       "change": 49
     },
     {
+      "keyword": "全国 学力 ランキング",
+      "targetPath": "/blog/academic-achievement-test-prefecture-ranking",
+      "before": 2,
+      "after": 43,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -41
+    },
+    {
       "keyword": "site:stats47.jp",
       "targetPath": "/ranking/railway-passengers",
       "before": 9,
-      "after": 47.791044776119406,
-      "beforeImpressions": 1,
-      "impressions": 67,
-      "change": -38.791044776119406
+      "after": 47.39705882352941,
+      "beforeImpressions": 2,
+      "impressions": 68,
+      "change": -38.39705882352941
     },
     {
       "keyword": "site:stats47.jp",
       "targetPath": "/areas/15000",
       "before": 10,
-      "after": 47.95890410958904,
-      "beforeImpressions": 1,
-      "impressions": 73,
-      "change": -37.95890410958904
+      "after": 47.486486486486484,
+      "beforeImpressions": 2,
+      "impressions": 74,
+      "change": -37.486486486486484
     },
     {
       "keyword": "高校先生 年収",
@@ -54,13 +63,13 @@
       "change": 35
     },
     {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 48.17391304347826,
-      "after": 80.88888888888889,
-      "beforeImpressions": 23,
-      "impressions": 18,
-      "change": -32.71497584541063
+      "keyword": "昼間人口",
+      "targetPath": "/blog/day-time-population-prefecture-gap",
+      "before": 43.285714285714285,
+      "after": 10.6,
+      "beforeImpressions": 7,
+      "impressions": 10,
+      "change": 32.68571428571428
     },
     {
       "keyword": "日照時間ランキング",
@@ -81,22 +90,13 @@
       "change": 30
     },
     {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 49.42857142857143,
-      "after": 78.75,
-      "beforeImpressions": 7,
-      "impressions": 8,
-      "change": -29.32142857142857
-    },
-    {
-      "keyword": "昼間人口",
-      "targetPath": "/blog/day-time-population-prefecture-gap",
-      "before": 44.6,
-      "after": 15.5,
-      "beforeImpressions": 5,
-      "impressions": 12,
-      "change": 29.1
+      "keyword": "うどん 消費量",
+      "targetPath": "/blog/fresh-udon-soba-consumption-prefecture-gap",
+      "before": 39,
+      "after": 11,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 28
     }
   ],
   "verdicts": [
@@ -107,11 +107,11 @@
     }
   ],
   "selected": {
-    "keyword": "住みやすい県ランキング",
-    "targetPath": "/blog/livable-prefecture-composite-ranking",
-    "rank": 6.94949494949495,
-    "impressions": 495,
-    "clicks": 15,
+    "keyword": "高校2年生 平均身長",
+    "targetPath": "/blog/avg-height-high-school-2nd-male",
+    "rank": 7.033653846153846,
+    "impressions": 208,
+    "clicks": 1,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
@@ -127,6 +127,11 @@
       "keyword": "外国人",
       "targetPath": "/blog/foreign-residents-diversity-map",
       "proposalId": "35312684285-1"
+    },
+    {
+      "keyword": "住みやすい県ランキング",
+      "targetPath": "/blog/livable-prefecture-composite-ranking",
+      "proposalId": "35425120722-1"
     }
   ]
 }
