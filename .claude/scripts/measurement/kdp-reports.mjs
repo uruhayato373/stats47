@@ -49,7 +49,10 @@ export function parseKdpReport(workbook, listings, date) {
       const key = JSON.stringify([name, row.ASIN, row['マーケットプレイス'], row['ロイヤリティの種類'], row['コンテンツ区分'], row['通貨']]);
       if (seen.has(key)) throw new Error('report_incomplete: duplicate_row');
       seen.add(key);
-      const common = { id, asin: row.ASIN, date, marketplace: row['マーケットプレイス'] };
+      // KDP documents orders by marketplace-local day, but KENP by UTC.
+      // https://kdp.amazon.com/en_US/help/topic/GX7EGDFGS9CZCA2F
+      const common = { id, asin: row.ASIN, date, marketplace: row['マーケットプレイス'],
+        dateBasis: name === '既読 KENPC' ? 'UTC' : 'marketplace-local-date' };
       if (name === '確定済み注文') records.push({ ...common, kind: 'processed-orders', paid: number(row['有料ダウンロード数']), free: number(row['無料ダウンロード数']) });
       else if (name === '既読 KENPC') records.push({ ...common, kind: 'kenp', pages: number(row['既読 KENP (Kindle Edition Normalized Pages)']) });
       else {
@@ -58,17 +61,23 @@ export function parseKdpReport(workbook, listings, date) {
       }
     }
   }
-  return { schemaVersion: 1, status: 'collected', scope: 'stats47-exact-asin', period: { start: date, end: date, basis: 'marketplace-local-date' },
+  return { schemaVersion: 1, status: 'collected', scope: 'stats47-exact-asin', period: { start: date, end: date, basis: 'metric-specific-date' },
     finality: 'provisional', records, coverage: { complete: true, mappedAsins: asins.size, includedRows: records.length, excludedRows },
     limitations: ['注文は処理遅延、KENPは翌月確定まで変更されうる', '電子書籍ロイヤリティは見積り。KU確定ロイヤリティ・入金・税引後収益ではない', '当日・週次確定値・口座全体の売上へ読み替えない'] };
 }
 
-export async function collectKdpReport(page, listings, outputPath, now = new Date()) {
+export async function openKdpReports(page) {
   // The URL was observed on the account-verified bookshelf's Reports link.
-  const date = new Date(now.getTime() + 9 * 3600000 - 86400000).toISOString().slice(0, 10);
   await page.goto('https://kdpreports.amazon.co.jp/dashboard', { waitUntil: 'domcontentloaded', timeout: 45000 });
   if (/signin|\/ap\//.test(page.url())) throw new Error('auth_required');
   const yesterday = page.getByRole('tab', { name: '昨日', exact: true }).first();
+  await yesterday.waitFor({ state: 'visible', timeout: 30000 });
+  return yesterday;
+}
+
+export async function collectKdpReport(page, listings, outputPath, now = new Date()) {
+  const date = new Date(now.getTime() + 9 * 3600000 - 86400000).toISOString().slice(0, 10);
+  const yesterday = await openKdpReports(page);
   await yesterday.click();
   await page.waitForFunction(() => [...document.querySelectorAll('button[role="tab"]')].find(b => b.textContent.trim() === '昨日')?.getAttribute('aria-selected') === 'true');
   const downloadButton = page.getByRole('button', { name: 'レポートのダウンロード', exact: true });

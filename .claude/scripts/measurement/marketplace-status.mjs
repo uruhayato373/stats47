@@ -3,7 +3,7 @@ import { measurementContext, markMeasurementAuthenticated } from './browser-sess
 import { parseCoconalaAnalytics, validateCoconalaCoverage } from './report-parsers.mjs';
 import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { assertAccount as assertCoconala } from '../coconala/lib/coconala-session.mjs';
-import { collectKdpReport } from './kdp-reports.mjs';
+import { collectKdpReport, openKdpReports } from './kdp-reports.mjs';
 
 const source = process.argv[2];
 const output = process.argv[3];
@@ -21,8 +21,10 @@ try {
     const identity = await readBookshelfState(page, '__identity__', expected);
     if (/signin|\/ap\//.test(page.url())) throw new Error('auth_required');
     if (!identity.found || identity.asin !== expected.asin) throw new Error('account_mismatch');
-    markMeasurementAuthenticated(source);
     const { listings } = JSON.parse(readFileSync('.claude/config/kdp-listings.json', 'utf8'));
+    // Bookshelf and Reports have distinct authentication. Never persist a
+    // bookshelf-only refresh, or spend a full catalog scan before detecting it.
+    await openKdpReports(page);
     for (const [id, entry] of Object.entries(listings)) {
       if (!entry.draftId) continue;
       const value = await readBookshelfState(page, entry.draftId, entry);
@@ -30,6 +32,7 @@ try {
     }
     if (records.length === 0 || records.some(r => !r.found || !r.status || r.status === '不明')) throw new Error('publication_status_incomplete');
     sales = await collectKdpReport(page, listings, output.replace(/\.json$/, '.xlsx'));
+    markMeasurementAuthenticated(source);
   } else if (source === 'coconala') {
     const account = await assertCoconala(page);
     if (/login|auth/.test(page.url())) throw new Error('auth_required');

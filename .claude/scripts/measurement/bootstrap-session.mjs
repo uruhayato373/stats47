@@ -9,6 +9,7 @@ import { gzipSync } from 'node:zlib';
 import { chromium } from 'playwright';
 import { createInterface } from 'node:readline/promises';
 import { sourceFor, scopedState } from './sources.mjs';
+import { openKdpReports } from './kdp-reports.mjs';
 
 const [sourceName, ...args] = process.argv.slice(2);
 if (!sourceName || args.includes('--help')) {
@@ -62,6 +63,8 @@ else {
       const prompt = createInterface({ input: process.stdin, output: process.stdout });
       try { await prompt.question('専用ブラウザで対象アカウントへのログイン・2FAを完了後、Enterを押してください（10分以内）。パスワードをここへ入力しないでください。', { signal: AbortSignal.timeout(600000) }); }
       finally { prompt.close(); }
+      // Enter acknowledges the human step; it is not evidence of Reports access.
+      if (args.includes('--reports')) await openKdpReports(page);
     }
     state = await context.storageState({ indexedDB: true });
     if (login && stateFile) writeFileSync(stateFile, JSON.stringify(scopedState(sourceName, state)), { mode: 0o600 });
