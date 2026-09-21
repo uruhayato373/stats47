@@ -4,6 +4,7 @@ import { parseCoconalaAnalytics, validateCoconalaCoverage } from './report-parse
 import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { assertAccount as assertCoconala } from '../coconala/lib/coconala-session.mjs';
 import { collectKdpReport, openKdpReports } from './kdp-reports.mjs';
+import { collectKdpMonthlyReport } from './kdp-monthly-reports.mjs';
 
 const source = process.argv[2];
 const output = process.argv[3];
@@ -14,6 +15,7 @@ try {
   let analytics = null;
   let coverage = null;
   let sales = null;
+  let monthlyRoyalties = null;
   if (source === 'kdp') {
     const account = JSON.parse(readFileSync('.local/kdp-account.local.json', 'utf8'));
     if (!/^B0[A-Z0-9]{8}$/.test(account.knownAsin ?? '')) throw new Error('account_mismatch: knownAsin missing');
@@ -32,6 +34,7 @@ try {
     }
     if (records.length === 0 || records.some(r => !r.found || !r.status || r.status === '不明')) throw new Error('publication_status_incomplete');
     sales = await collectKdpReport(page, listings, output.replace(/\.json$/, '.xlsx'));
+    monthlyRoyalties = await collectKdpMonthlyReport(page, listings, output.replace(/\.json$/, '.monthly.xlsx'));
     markMeasurementAuthenticated(source);
   } else if (source === 'coconala') {
     const account = await assertCoconala(page);
@@ -57,5 +60,5 @@ try {
     coverage = validateCoconalaCoverage(analytics, records);
   } else throw new Error('unknown_source');
   writeFileSync(output, JSON.stringify({ generatedAt: new Date().toISOString(), source, accountVerified: true, records,
-    analytics, coverage, sales: sales ?? (analytics ? { status: 'collected', scope: 'account-total' } : { status: 'not_collected' }) }, null, 2));
+    analytics, coverage, monthlyRoyalties, sales: sales ?? (analytics ? { status: 'collected', scope: 'account-total' } : { status: 'not_collected' }) }, null, 2));
 } finally { await context.close(); }
