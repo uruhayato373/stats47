@@ -114,6 +114,17 @@
             "windowDays": 7
           },
           "snapshotHash": "9025fe46b02b75f0508424a8b361ad0e8976de9afbd463f86c389382b31654cc"
+        },
+        {
+          "date": "2026-09-21",
+          "outcome": "insufficient-data",
+          "reason": "post-deployment-window-incomplete",
+          "period": {
+            "periodStart": "2026-09-12",
+            "periodEnd": "2026-09-18",
+            "windowDays": 7
+          },
+          "snapshotHash": "2addb6b23b55e0f5a81eb6a7cf87b5758b73f1840a94827108089dbdb725a2ed"
         }
       ]
     }
