@@ -5,6 +5,12 @@ import { assertSiteOrThrow } from '../ads/lib/asp-site-guard.mjs';
 
 const DAY = 86400000;
 const BASIS = { occurrence: { code: '2', field: 'commit_time' }, recognition: { code: '3', field: 'recognition_time' } };
+function responseShape(value, depth = 0) {
+  if (value === null) return 'null';
+  if (Array.isArray(value)) return { type: 'array', length: value.length, item: depth < 2 && value.length ? responseShape(value[0], depth + 1) : null };
+  if (typeof value === 'object' && depth < 2) return Object.fromEntries(Object.entries(value).slice(0, 30).map(([key, child]) => [key, responseShape(child, depth + 1)]));
+  return typeof value;
+}
 function dateOnly(value) {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error('report_schema_changed: date');
   const time = Date.parse(`${value}T00:00:00Z`);
@@ -44,7 +50,7 @@ export function afbRequest(config, period, basis, now = new Date()) {
 export function parseAfbOutcomes(payload, request) {
   if (!payload || typeof payload !== 'object' || !Array.isArray(payload.response)
     || (payload.error_message != null && payload.error_message !== '')
-    || Object.keys(payload).some(key => !['response', 'error_message'].includes(key))) throw new Error('report_schema_changed: envelope');
+    || Object.keys(payload).some(key => !['response', 'error_message'].includes(key))) throw new Error(`report_schema_changed: envelope ${JSON.stringify(responseShape(payload))}`);
   const seen = new Set();
   const totals = Object.fromEntries(['pending', 'approved', 'rejected'].map(key => [key, { count: 0, reportedMargin: 0 }]));
   const records = payload.response.map(row => {

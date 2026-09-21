@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import yaml from 'js-yaml';
 import { afbPeriod, afbRequest, parseAfbOutcomes, collectAfbOutcomes } from '../afb-outcomes.mjs';
 import { SOURCES, failureCode } from '../sources.mjs';
@@ -102,4 +103,10 @@ test('only normalized afb outcomes restore; obsolete partnership-only successes 
   assert.match(collect.env.AFB_API_KEY, /matrix.source == 'afb'/);
   assert.match(collect.env.MEASUREMENT_SESSION, /matrix.source != 'afb'/);
   assert.equal(workflow.jobs.collect.steps.find(s => s.run?.includes('playwright install')).if, "matrix.source != 'afb'");
+});
+
+test('legacy afb browser bootstrap cannot pretend to activate the API collector', () => {
+  const result = spawnSync(process.execPath, ['.claude/scripts/measurement/bootstrap-session.mjs', 'afb', '--publish'], { encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /api_source_requires_secret: configure AFB_API_KEY/);
 });
