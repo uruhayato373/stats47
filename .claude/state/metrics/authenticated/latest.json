@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T04:29:59.421Z",
+  "generatedAt": "2026-09-21T04:38:02.436Z",
   "runId": "35560007703",
   "sources": [
     {
@@ -11,6 +11,7 @@
       "status": "pass",
       "code": null,
       "runId": "35560007703",
+      "runAttempt": null,
       "metricsAvailable": true,
       "evidence": {
         "sha256": "62e1ac4cdfc24b4e692d110501421b29576721160da44249cca72ce926610411",
@@ -27,6 +28,7 @@
       "status": "pass",
       "code": null,
       "runId": "35560007703",
+      "runAttempt": null,
       "metricsAvailable": true,
       "evidence": {
         "sha256": "b2d02ff7e5779556d2fcf8116e33f3cf90b63c1a031d66aa9312e25b265c410d",
@@ -43,6 +45,7 @@
       "status": "failed",
       "code": "report_incomplete",
       "runId": "35560007703",
+      "runAttempt": null,
       "metricsAvailable": false,
       "evidence": {
         "sha256": "1d28b6c54a09fd963bcfb647b0857369e4a05a5c3245c5c08107ed4259a74481",
@@ -59,6 +62,7 @@
       "status": "failed",
       "code": "report_incomplete",
       "runId": "35560007703",
+      "runAttempt": null,
       "metricsAvailable": false,
       "evidence": {
         "sha256": "9ab43fb90e1b4d69267f1809c3035f71ab617f633310d1f86bbec4c497336480",
@@ -81,6 +85,7 @@
       "status": "pass",
       "code": null,
       "runId": "35560007703",
+      "runAttempt": null,
       "metricsAvailable": true,
       "evidence": {
         "sha256": "b31e006dcab3ecbbee1346f42aee5884aa1bc31014202a643d751cfd9f96183d",
@@ -97,6 +102,7 @@
       "status": "failed",
       "code": "auth_required",
       "runId": "35560007703",
+      "runAttempt": null,
       "metricsAvailable": false,
       "evidence": {
         "sha256": "556528927ca80b0a141e0d24080eedf0c991f386d28f8296a21e525084572c2e",
@@ -113,6 +119,7 @@
       "status": "pass",
       "code": null,
       "runId": "35560007703",
+      "runAttempt": null,
       "metricsAvailable": true,
       "evidence": {
         "sha256": "2ca3ab4466218f4d18e6fd1f771aa660a8ba74cefdd1788e204a399814058758",
