@@ -42,7 +42,7 @@ product code、対応format、scope、必要roleまで確認する。
 
 ### CI 実行について
 
-**Playwright 自体は CI で動く。** `pr-quality-check.yml` と `post-deploy-smoke.yml` が `ubuntu-latest`（GitHub ホストランナー）で実行している。CI で足りないのは**認証済みセッション**だけで、Playwright の実行環境ではない。
+**Playwright 自体は CI で動く。** `pr-quality-check.yml` と `post-deploy-smoke.yml` が `ubuntu-latest`（GitHub ホストランナー）で実行している。ただし認証済みセッションを登録しても、別環境への移送可否・Reports等の追加認証・取得内容の完全性はサービス別に検証が必要。ログイン成功だけでCI収集可能とは判定しない。
 
 - **セルフホストランナーは本 repo では使えない。** stats47 は PUBLIC で、GitHub 公式が「セルフホストランナーは private repository のみ推奨。public repository の fork が危険なコードをランナー上で実行しうる」と警告している。
 - 認証済みセッションはサービス別にdomain allowlistで絞り、圧縮storageStateを`MEASUREMENT_SESSION_<SOURCE>` Secretsへ登録する。Cookieはread-only権限ではなくアカウント操作権限を持ちうるため、実行対象を固定済みの読み取りcollectorに限定する。public repositoryのgit・artifact・ログへstateを出さない。
