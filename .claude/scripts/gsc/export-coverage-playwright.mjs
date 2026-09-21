@@ -52,7 +52,6 @@ const DEFAULT_TARGETS = [
  * 実機のメニューは「Google スプレッドシート / Excel としてダウンロード / CSV をダウンロード」の 3 つ。
  * 緩すぎる候補 (単なる "CSV") は他要素に誤マッチするので置かない。
  */
-const EXPORT_BUTTON_LABELS = ["エクスポート", "Export"];
 const CSV_MENU_LABELS = ["CSV をダウンロード", "Download CSV"];
 
 function parseArgs(argv) {
@@ -149,16 +148,26 @@ async function probe(page) {
   buttons.slice(0, 50).forEach((b) => console.log(`   text="${b.text}" aria="${b.aria}"`));
 }
 
-/** 1 カテゴリを export する。成功したら保存パスを返す。 */
-async function exportOne(page, reason, dest) {
-  // 理由行をクリックして drilldown へ
-  const row = await findByText(page, [reason.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")]);
-  if (!row) return { reason, ok: false, note: "理由行が見つからない" };
-  await row.click({ timeout: 15000 }).catch(() => {});
-  await page.waitForTimeout(4000);
+/** Hidden rows must not fall through to an overview export when a click fails. */
+export async function openCoverageReason(page, reason) {
+  const count = page.getByRole('listbox', { name: '1 ページごとの行数', exact: true }).first();
+  await count.click({ timeout: 15000 });
+  // GSC renders the active popup outside the listbox; its original options stay hidden.
+  await page.locator('[role="option"][data-value="25"]:visible').click({ timeout: 15000 });
+  const label = new RegExp(`^${reason.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`);
+  await page.getByRole('cell', { name: label }).first().click({ timeout: 15000 });
+  await page.waitForURL(url => url.hostname === 'search.google.com'
+    && url.pathname === '/search-console/index/drilldown'
+    && url.searchParams.get('resource_id') === PROPERTY && !!url.searchParams.get('item_key'), { timeout: 15000 });
+  await page.getByRole('heading', { name: label, level: 1 }).waitFor({ state: 'visible', timeout: 15000 });
+}
 
-  const exportBtn = await findByText(page, EXPORT_BUTTON_LABELS, "button");
-  if (!exportBtn) return { reason, ok: false, note: "エクスポートボタンが見つからない" };
+/** null reason is an explicitly requested overview, never a failed drilldown fallback. */
+async function exportOne(page, reason, dest) {
+  if (reason) await openCoverageReason(page, reason);
+
+  // The heading appears before this button on SPA drilldown navigation.
+  const exportBtn = page.getByRole('button', { name: /^(エクスポート|Export)$/ }).first();
   await exportBtn.click({ timeout: 15000 });
   await page.waitForTimeout(1500);
 
@@ -172,9 +181,9 @@ async function exportOne(page, reason, dest) {
   ]);
 
   const suggested = download.suggestedFilename();
-  if (!/\.zip$/i.test(suggested)) {
+  if (!/\.zip$/i.test(suggested) || (reason && !/Drilldown/i.test(suggested))) {
     await download.cancel().catch(() => {});
-    return { reason, ok: false, note: `zip でない (${suggested}) ため保存しない` };
+    return { reason, ok: false, note: 'report_incomplete: expected coverage drilldown ZIP' };
   }
   // ★消費側の契約に合わせる: ingest-gsc-export.py の is_gsc_zip() は
   //   NFC 正規化した basename が .zip で終わり、かつ インデックス/カバレッジ/Coverage を
@@ -188,14 +197,12 @@ async function exportOne(page, reason, dest) {
   //   "stats47.jp-Coverage-Drilldown-<日付>.zip" で **理由を含まない**ため、
   //   同日に複数カテゴリを export すると後の 1 件が前を上書きして消える (2026-08-06 実測)。
   //   ingest は zip の中身で分類するので名前は識別子であればよい。
-  const slug = reason.replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "-").slice(0, 40);
+  const slug = (reason ?? '概要').replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "-").slice(0, 40);
   const filename = base.replace(/\.zip$/i, "") + `-${slug}.zip`;
   const target = path.join(dest, filename);
   await download.saveAs(target);
-  await page.goBack({ waitUntil: "domcontentloaded" }).catch(() => {});
-  await page.waitForTimeout(3000);
   return {
-    reason,
+    reason: reason ?? '概要',
     ok: true,
     note: pickedUpByIngest ? target : `${target} (ingest が拾える名前に改名: 元 "${suggested}")`,
   };
@@ -219,7 +226,7 @@ async function main() {
       return;
     }
 
-    const targets = args.only ? [args.only] : DEFAULT_TARGETS;
+    const targets = args.only ? [args.only] : [null, ...DEFAULT_TARGETS];
     const results = [];
     for (const reason of targets) {
       try {

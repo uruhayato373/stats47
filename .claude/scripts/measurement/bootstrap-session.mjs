@@ -17,6 +17,7 @@ if (!sourceName || args.includes('--help')) {
 }
 const source = sourceFor(sourceName);
 if (args.includes('--reports') && (sourceName !== 'kdp' || !args.includes('--login'))) throw new Error('reports_requires_kdp_login');
+if (sourceName === 'gsc' && args.includes('--login')) throw new Error('google_login_requires_native_chrome: run google-admin/cli.mjs login, close that Chrome, then export with --from-profile --publish');
 const rootArg = args.indexOf('--root');
 const root = resolve(rootArg < 0 ? process.cwd() : args[rootArg + 1]);
 const publish = args.includes('--publish');
@@ -41,7 +42,7 @@ else {
   // A normal Chrome profile uses the OS keychain, unlike Playwright's test profile.
   // Export from a disposable copy: opening with incompatible defaults must never
   // discard the user's original encrypted cookies.
-  const nativeProfile = sourceName === 'gsc' && args.includes('--from-profile');
+  const nativeProfile = sourceName === 'gsc';
   const temporaryProfile = nativeProfile ? mkdtempSync(join(tmpdir(), 'stats47-measurement-profile-')) : null;
   let context;
   try {

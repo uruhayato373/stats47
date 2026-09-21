@@ -4,7 +4,7 @@ export const SOURCES = {
   a8: { domains: ['a8.net'], profile: 'playwright-a8-profile', state: 'playwright-a8-state.json', secret: 'MEASUREMENT_SESSION_A8', capability: 'site-outcomes' },
   afb: { domains: ['afi-b.com', 'affiliate-b.com'], profile: 'playwright-afb-profile', state: 'playwright-afb-state.json', secret: 'MEASUREMENT_SESSION_AFB', capability: 'partnership-status' },
   note: { domains: ['note.com'], profile: 'playwright-note-profile', secret: 'MEASUREMENT_SESSION_NOTE', capability: 'dashboard-metrics' },
-  gsc: { domains: ['google.com'], profile: 'playwright-google-admin-profile', secret: 'MEASUREMENT_SESSION_GSC', capability: 'coverage-export' },
+  gsc: { domains: ['google.com'], profile: 'playwright-google-admin-profile', secret: 'MEASUREMENT_SESSION_GSC', capability: 'verified-coverage-export' },
   kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', secret: 'MEASUREMENT_SESSION_KDP', capability: 'publication-and-daily-sales' },
   coconala: { domains: ['coconala.com'], profile: 'playwright-coconala-profile', secret: 'MEASUREMENT_SESSION_COCONALA', capability: 'marketplace-metrics' },
 };
@@ -13,6 +13,12 @@ export function sourceFor(name) {
   const source = Object.hasOwn(SOURCES, name) ? SOURCES[name] : null;
   if (!source) throw new Error('unknown_source');
   return source;
+}
+
+/** A refresh from an older login must never supersede a newly published human login. */
+export function selectSessionBundle(seed, remote) {
+  const bundle = remote && (!seed || (remote.bootstrapCapturedAt === seed.capturedAt && remote.capturedAt >= seed.capturedAt)) ? remote : seed;
+  return bundle ? { ...bundle, bootstrapCapturedAt: bundle.bootstrapCapturedAt ?? bundle.capturedAt } : null;
 }
 
 export function scopedState(name, state) {

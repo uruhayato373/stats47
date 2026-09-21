@@ -6,13 +6,49 @@ import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import yaml from 'js-yaml';
-import { SOURCES, scopedState, sourceFor, failureCode } from '../sources.mjs';
+import { SOURCES, scopedState, sourceFor, failureCode, selectSessionBundle } from '../sources.mjs';
 import { encrypt, decrypt, BUCKET } from '../vault.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
 import { parseCoconalaAnalytics, validateCoconalaCoverage } from '../report-parsers.mjs';
 import ExcelJS from 'exceljs';
 import { kdpAsinMap, parseKdpReport } from '../kdp-reports.mjs';
+import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
+
+test('GSC validates ZIP contents, expected categories, row counts and site ownership', () => {
+  execFileSync('python3', ['.claude/scripts/gsc/__tests__/test_ingest_gsc_export.py']);
+});
+
+test('GSC expands paginated reasons and never swallows a failed detail click', async () => {
+  let failedClick = false, checkedUrl = false;
+  const calls = [];
+  const page = {
+    locator(selector) {
+      assert.equal(selector, '[role="option"][data-value="25"]:visible');
+      calls.push('visible-option');
+      return { click: async () => {} };
+    },
+    getByRole(role) {
+      calls.push(role);
+      const locator = { first: () => locator, getByRole: child => { calls.push(child); return locator; },
+        click: async () => { if (role === 'cell' && failedClick) throw new Error('hidden reason'); },
+        waitFor: async () => {} };
+      return locator;
+    },
+    async waitForURL(predicate) {
+      checkedUrl = true;
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index?resource_id=sc-domain%3Astats47.jp')), false);
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Adoboku-note.com&item_key=test')), false);
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=test')), true);
+    },
+  };
+  await openCoverageReason(page, '検出 - インデックス未登録');
+  assert.deepEqual(calls, ['listbox', 'visible-option', 'cell', 'heading']);
+  assert.equal(checkedUrl, true);
+  checkedUrl = false; failedClick = true;
+  await assert.rejects(openCoverageReason(page, '検出 - インデックス未登録'), /hidden reason/);
+  assert.equal(checkedUrl, false);
+});
 
 test('native Google session export preserves the OS keychain and original profile', () => {
   const code = readFileSync('.claude/scripts/measurement/bootstrap-session.mjs', 'utf8');
@@ -20,8 +56,23 @@ test('native Google session export preserves the OS keychain and original profil
   assert.match(code, /cpSync\(profile, temporaryProfile/);
   assert.match(code, /launchPersistentContext\(temporaryProfile \?\? profile/);
   assert.match(code, /ignoreDefaultArgs: \['--password-store=basic', '--use-mock-keychain'\]/);
+  assert.match(code, /const nativeProfile = sourceName === 'gsc';/);
+  assert.match(code, /google_login_requires_native_chrome/);
   assert.doesNotMatch(code, /AutomationControlled|--enable-automation|navigator\.webdriver/);
   assert.match(code, /reports_requires_kdp_login/);
+});
+
+test('a later refresh from an old login cannot overwrite a new human login', () => {
+  const seed = { capturedAt: '2026-09-21T02:18:49Z', state: 'new-login' };
+  const legacy = { capturedAt: '2026-09-21T02:30:00Z', state: 'old-login' };
+  assert.equal(selectSessionBundle(seed, legacy).state, 'new-login');
+  const oldGeneration = { ...legacy, bootstrapCapturedAt: '2026-09-20T00:00:00Z' };
+  assert.equal(selectSessionBundle(seed, oldGeneration).state, 'new-login');
+  const sameGeneration = { ...legacy, bootstrapCapturedAt: seed.capturedAt, state: 'valid-refresh' };
+  assert.equal(selectSessionBundle(seed, sameGeneration).state, 'valid-refresh');
+  assert.equal(selectSessionBundle(seed, null).bootstrapCapturedAt, seed.capturedAt);
+  assert.equal(selectSessionBundle(null, sameGeneration).state, 'valid-refresh');
+  assert.equal(selectSessionBundle(null, null), null);
 });
 
 function kdpFixture() {
@@ -112,6 +163,10 @@ test('restore permits canonical reports only and rejects failed, stale or future
   assert.equal(consumerPath('moshimo', '.claude/state/metrics/affiliate/a8-results.json'), null);
   const now = Date.parse('2026-09-21T00:00:00Z');
   validateAttempt({status:'pass',observedAt:'2026-09-20T00:00:00Z'},now);
+  const gsc = { source: 'gsc', capability: SOURCES.gsc.capability, status: 'pass', observedAt: '2026-09-20T00:00:00Z' };
+  validateAttempt(gsc, now, 'gsc');
+  assert.throws(() => validateAttempt({ ...gsc, capability: 'coverage-export' }, now, 'gsc'), /capability_mismatch/);
+  assert.throws(() => validateAttempt(gsc, now, 'kdp'), /capability_mismatch/);
   for (const attempt of [null, {status:'failed',observedAt:'2026-09-20T00:00:00Z'}, {status:'pass',observedAt:'2026-09-18T00:00:00Z'}, {status:'pass',observedAt:'2026-09-22T00:00:00Z'}]) assert.throws(()=>validateAttempt(attempt,now));
 });
 
@@ -169,11 +224,12 @@ test('missing jobs remain failed and activated consumers never silently fall bac
     assert.equal(second.activated, true);
     assert.equal(second.metricsAvailable, false);
     assert.equal(second.code, 'auth_required');
+    const current = { ...observation, runId: 'current-run' };
     for (const invalid of [
-      { ...observation, source: 'gsc' },
-      { ...observation, capability: 'publication-status' },
-      { ...observation, observedAt: '2020-01-01T00:00:00Z' },
-      { ...observation, runId: 'old-run' }, null,
+      { ...current, source: 'gsc' },
+      { ...current, capability: 'publication-status' },
+      { ...current, observedAt: '2020-01-01T00:00:00Z' },
+      { ...current, runId: 'old-run' }, null,
     ]) {
       writeFileSync(join(input, 'note.json'), JSON.stringify(invalid));
       execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'current-run' } });
