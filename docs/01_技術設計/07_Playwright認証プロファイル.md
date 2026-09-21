@@ -85,6 +85,7 @@ APIキーはオーナー承認を得てGitHub Actions Secret `AFB_API_KEY`へ登
 認証エラーはキーと公式設定を照合する。Cookie再ログインへのfallbackや無断再発行はしない。
 復元側もcapabilityを照合する。人間ログイン時刻を`bootstrapCapturedAt`として保持し、古いログイン由来のCI更新が新しいSecretを上書き選択しない。世代情報のない旧sessionはSecretより優先しない。
 KDPはknown ASINで本棚の口座を照合後、全書籍の状態巡回より先にReports認証を確認する。巡回後の日次・月次Reports取得と検査まで成功して初めて認証更新を保存する。本棚だけ成功した試行でReports未認証のsessionを保存しない。本人ログインの`--reports`もEnterだけではexportせず、Reportsの表示を確認する。
+認証の継続利用は初回成功だけで完了としない。検証中は同じログイン由来のstateをローカルprobeとCIで並行使用せず、CIを直列に2回実行し、更新済みprivate R2 sessionを次のrunnerで再利用できることを確認する。再ログイン要求を受けたstateを加工したり、認証保護を無効化して継続しない。
 KDPの昨日値は速報値で、注文等はマーケットプレイス現地日付、KENPはUTC。正規化は各recordの`dateBasis`に保持する（[公式Dashboard](https://kdp.amazon.com/en_US/help/topic/GX7EGDFGS9CZCA2F)、2026-09-21確認）。遅延や再集計がありうるため、日次値の単純合算で確定週次売上を作らない。確定収益の元資料は毎月15日前後に作成される[月別のロイヤリティ](https://kdp.amazon.co.jp/ja_JP/help/topic/G200641190)。ASIN・通貨別の月次収益であり、共有口座の支払い総額や週次純収益にそのまま転記しない。
 月次collectorはJST15日以降は前月、14日までは前々月を要求し、実画面の選択月・総収益の`N/A`不在・ダウンロード名・全sheetの販売期間と列を照合する。日付だけで確定とは判定せず、未発行や形式変更なら停止する。現版/旧版ASINと著者を照合し、未写像のstats47書籍・重複・注文数と返品数の不整合を拒否する。通貨を合算せず、KU端数と返品の負額を保持する。Prime Readingボーナス・入金・税引後利益は対象外。未観測の書籍を0埋めせず、`sales-ledger`の週次純収益へ自動転記しない。
 日本語の電子書籍/KENPの2sheetを実機契約とし、紙書籍・未知のボーナス等の新sheetは黙って捨てずschema errorにする。原本はprivate R2だけに残し、`restore.mjs kdp`は日次・月次を分離した正規化`status.json`だけを`.local/authenticated-measurement/restored/kdp.json`へ復元する。旧日次のみのcapabilityは月次取得の成功に流用しない。
