@@ -158,11 +158,13 @@ primary_agent: strategy-advisor
   → CTR候補はpage×query・現行title/content・past effectを確認し、一括title書換えを計画しない。
   → 効果判定日は`npm run search-growth:measure -- --candidate <ID>`（14/28/56日）。
 
-- AdSense収益密度candidate（`.claude/state/metrics/adsense/candidates-latest.json`・運用正典 `/adsense-improvement`）
-  → 週次レビューで審査した最大3件のうち、**人間承認済みを最大1件/週だけ**採用する。AdSense active WIP≤2。
-  → 1実験1レバー（lazy-load・slot・Auto ads・formatを同時に変えない）。rollback・guardrail
-    （収益/GA4 sessions/viewability/LCP/CLS）・14/28日判定日を計画に明記する。
-  → 計測が不完全な間（measurement-gap候補が出ている間）は広告枠を増やさない。
+- アフィリエイト収益密度candidate（`.claude/state/ads/affiliate-portfolio-latest.json`・運用正典 `/affiliate-improvement`）
+  → 週次レビューで審査したもののうち、**人間承認済みを最大1件/週だけ**採用する。アフィリエイト active WIP≤2。
+  → 1実験1レバー（枠数・意図軸の解決・priority・クリエイティブを同時に変えない）。rollback・guardrail
+    （確定収益/1,000 viewable imp・GA4 sessions・LCP/CLS）・14/28日判定日を計画に明記する。
+  → 評価の主指標は確定収益/1,000 viewable impressionで、クリック数だけで勝敗を決めない。
+  → 計測が不完全な間（`ga4-affiliate-history.csv` が10日以上古い間）は広告枠を増やさない。
+  → **AdSenseのcandidateは採用しない。2026-09-20に恒久停止（`docs/00_プロジェクト管理/02_収益化戦略.md` §3.1）。**
 
 - ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
   ```bash

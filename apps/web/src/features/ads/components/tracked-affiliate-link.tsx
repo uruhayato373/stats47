@@ -34,13 +34,26 @@ export function TrackedAffiliateLink({
   className,
   children,
 }: TrackedAffiliateLinkProps) {
+  const isMoshimo = (() => {
+    try {
+      return new URL(href).hostname === "af.moshimo.com";
+    } catch {
+      return false;
+    }
+  })();
+  // もしもの発行原稿は referrerpolicy + attributionsrc を必須とする。
+  // noreferrer は referrerpolicy を無効化するため、もしもだけ nofollow/noopener/sponsored にする。
+  const moshimoAttributes = isMoshimo ? ({ attributionsrc: "" } as const) : {};
   return (
+    // eslint-disable-next-line react/jsx-no-target-blank -- もしも原稿はreferrer送信必須。noopenerは常に維持する。
     <a
       href={href}
       aria-label={label}
       target="_blank"
-      rel="noopener noreferrer sponsored"
+      rel={isMoshimo ? "nofollow noopener sponsored" : "noopener noreferrer sponsored"}
+      referrerPolicy={isMoshimo ? "no-referrer-when-downgrade" : undefined}
       className={className}
+      {...moshimoAttributes}
       onClick={() =>
         trackAffiliateClick({ category, label, position, adId, experimentId, variantId, creativeSize })
       }

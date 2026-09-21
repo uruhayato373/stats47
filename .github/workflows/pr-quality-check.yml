@@ -555,6 +555,9 @@ jobs:
         run: npm run google-admin:test
         continue-on-error: false
 
+      - name: Authenticated measurement isolation and freshness
+        run: npm run measurement:test
+
       - name: 🚦 Preflight Aggregator Contract
         # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
         # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。

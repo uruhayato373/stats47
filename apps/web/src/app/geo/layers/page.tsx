@@ -99,7 +99,7 @@ export default async function GeoLayersPage() {
       <SectionHeader title="人口との重ね合わせに使う3つの表示" />
       <GeoLayerCards />
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        カードは東京都本土（島しょを除く）の表示例です。各地図で47都道府県に切り替えられます。原典から抽出・整理した範囲を表示します。境界：国土数値情報をもとに{' '}
+        カードは兵庫県（淡路島を含む）の表示例です。各地図で47都道府県に切り替えられます。原典から抽出・整理した範囲を表示します。境界：国土数値情報をもとに{' '}
         <a href="https://geoshape.ex.nii.ac.jp/" className="underline">
           NIIが加工
         </a>

@@ -18,6 +18,7 @@ import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { measurementContext, unattended } from '../measurement/browser-session.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -74,6 +75,10 @@ export function releaseLock() {
  *   呼び元は保存先と対象ファイルを自分で限定すること。
  */
 export async function launchAdminContext({ acceptDownloads = false } = {}) {
+  if (unattended()) {
+    const context = await measurementContext('gsc', { acceptDownloads });
+    return { context, page: await context.newPage() };
+  }
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
   const context = await chromium.launchPersistentContext(PROFILE_DIR, {
     channel: "chrome",
@@ -110,6 +115,7 @@ export function isLoginUrl(url) {
  * 対象 URL パターンに戻るまで poll する (突破・自動入力はしない)。
  */
 export async function waitForLogin(page, { doneUrlPattern, timeoutMs = 10 * 60 * 1000, onPrompt = () => {} } = {}) {
+  if (unattended()) throw new Error('auth_required');
   onPrompt();
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {

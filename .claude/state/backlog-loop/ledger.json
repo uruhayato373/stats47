@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-18T09:33:47.235Z",
+  "updatedAt": "2026-09-20T10:48:28.883Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4614,6 +4614,43 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-18T09:33:47.235Z"
+    },
+    "AFF-OFFER-LANE-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "offer profile lane/friction pilot readiness",
+      "attempts": [
+        {
+          "at": "2026-09-20T10:48:28.883Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run type-check",
+              "npx turbo run build --filter=web",
+              "node --test .claude/scripts/ads/__tests__/*.test.mjs",
+              "npx vitest run",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "pilot readiness=ready; operations measurement/publish/portfolio=ready; R2 run 35504821208 success; release PR #993 merged; deploy run 35505409398 success; production DOM and Moshimo impression pixel verified",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-20T10:48:28.883Z"
     }
   }
 }

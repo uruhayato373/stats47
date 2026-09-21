@@ -2,7 +2,7 @@
   "week_id": "2026-W38",
   "year": 2026,
   "week": 38,
-  "generated_at": "2026-09-20T07:15:41.403Z",
+  "generated_at": "2026-09-20T14:26:01.627Z",
   "schemaVersion": 2,
   "weekId": "2026-W38",
   "anchor": "2026-09-20",
@@ -61,7 +61,7 @@
       "periodEnd": "2026-09-17",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-09-20T07:15:41.403Z",
+      "generatedAt": "2026-09-20T14:26:01.627Z",
       "source": "gsc",
       "limitations": [
         "取得遅延 3 日 (anchor=2026-09-20)"
@@ -86,7 +86,7 @@
       "periodEnd": "2026-09-19",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-09-20T07:15:41.403Z",
+      "generatedAt": "2026-09-20T14:26:01.627Z",
       "source": "ga4",
       "limitations": [
         "取得遅延 1 日 (anchor=2026-09-20)",
@@ -111,7 +111,7 @@
       "periodEnd": "2026-09-10",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-09-20T07:15:41.403Z",
+      "generatedAt": "2026-09-20T14:26:01.627Z",
       "source": "gsc",
       "limitations": [
         "取得遅延 3 日 (anchor=2026-09-20)"
@@ -135,7 +135,7 @@
       "periodEnd": "2026-09-12",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-09-20T07:15:41.403Z",
+      "generatedAt": "2026-09-20T14:26:01.627Z",
       "source": "ga4",
       "limitations": [
         "取得遅延 1 日 (anchor=2026-09-20)",

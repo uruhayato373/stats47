@@ -57,6 +57,9 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
+      - name: 📥 Pull current GA4 affiliate snapshots from R2
+        run: npm run state:pull -- ads/ga4-affiliate
+
       - name: 📊 Regenerate inventory audit
         run: npx -y tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json > /dev/null
 

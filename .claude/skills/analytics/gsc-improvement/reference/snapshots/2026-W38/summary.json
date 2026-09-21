@@ -4,13 +4,13 @@
   "weekId": "2026-W38",
   "anchor": "2026-09-20",
   "delayDays": 3,
-  "generatedAt": "2026-09-20T07:17:09.770Z",
+  "generatedAt": "2026-09-20T14:25:46.752Z",
   "finalized7d": {
     "periodStart": "2026-09-11",
     "periodEnd": "2026-09-17",
     "windowDays": 7,
     "isFinalized": true,
-    "generatedAt": "2026-09-20T07:17:09.770Z",
+    "generatedAt": "2026-09-20T14:25:46.752Z",
     "source": "gsc",
     "limitations": [
       "取得遅延 3 日を考慮 (anchor=2026-09-20)",
@@ -34,7 +34,7 @@
     "periodEnd": "2026-09-10",
     "windowDays": 7,
     "isFinalized": true,
-    "generatedAt": "2026-09-20T07:17:09.770Z",
+    "generatedAt": "2026-09-20T14:25:46.752Z",
     "source": "gsc",
     "limitations": [
       "取得遅延 3 日を考慮 (anchor=2026-09-20)",
@@ -58,7 +58,7 @@
     "periodEnd": "2026-09-17",
     "windowDays": 28,
     "isFinalized": true,
-    "generatedAt": "2026-09-20T07:17:09.770Z",
+    "generatedAt": "2026-09-20T14:25:46.752Z",
     "source": "gsc",
     "limitations": [
       "取得遅延 3 日を考慮 (anchor=2026-09-20)",

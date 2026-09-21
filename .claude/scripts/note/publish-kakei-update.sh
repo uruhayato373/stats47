@@ -7,7 +7,8 @@
 #   * 更新後は audit-note-figure-split.mjs と audit-kakei-note-content.mjs --live を必ず実測する。
 # 使い方: publish-kakei-update.sh <slug>         (Profile 5 の Chrome をローカルで操作)
 set -uo pipefail
-ROOT=/Users/minamidaisuke/stats47
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 SLUG="${1:?Usage: publish-kakei-update.sh <slug>}"
 ADIR="$ROOT/docs/31_note記事原稿/$SLUG"
 source "$ROOT/.claude/scripts/note/note-publish-lib.sh"
@@ -58,6 +59,16 @@ TITLE=$(sed -n 's/^title: *"\(.*\)"/\1/p' "$ADIR/draft.md" | head -1)
 [ -n "$TITLE" ] || { echo "FAIL $SLUG no title"; exit 1; }
 
 # ---- ローカル前提の確定 (本文 / 画像 / 期待する figure 数) ----
+# note の本文幅では横長の上位/下位2列チャートが縮みすぎるため、生成済みの
+# 1080x1350版 (-ig.svg) を note 用の正規ファイル名へ昇格してから PNG 化する。
+for MOBILE_SVG in "$ADIR"/data/*-prefecture-rankings-ig.svg; do
+  [ -e "$MOBILE_SVG" ] || continue
+  BASE=$(basename "$MOBILE_SVG" -ig.svg)
+  cp "$MOBILE_SVG" "$ADIR/images/$BASE.svg"
+  node "$ROOT/.claude/scripts/lib/svg-to-png.cjs" \
+    "$ADIR/images/$BASE.svg" "$ADIR/images/$BASE.png" >/dev/null \
+    || { echo "FAIL $SLUG mobile ranking image: $BASE"; exit 1; }
+done
 node "$ROOT/.claude/scripts/note/prepare-article.cjs" "$SLUG" >/dev/null || { echo "FAIL $SLUG prepare"; exit 1; }
 node "$ROOT/.claude/scripts/note/build-body.cjs" "$SLUG" >/dev/null || { echo "FAIL $SLUG body"; exit 1; }
 J="/tmp/note-data-$SLUG.json"

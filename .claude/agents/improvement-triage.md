@@ -6,7 +6,7 @@ model: sonnet
 
 # Improvement Triage Agent
 
-`.claude/todo/improvements.md` の改善バックログを維持する agent。GSC / GA4 / PSI / AdSense / Affiliate / Cloudflare-cost / SNS-metrics 各 analyst から計測結果を受け取り、進行中の施策を更新する。効果判定後は詳細 improvement log に結果を残してTODO行を削除する。改善バックログへの write は本 agent が排他的に行う。
+`.claude/todo/improvements.md` の改善バックログを維持する agent。GSC / GA4 / PSI / Affiliate / Cloudflare-cost / SNS-metrics 各 analyst (AdSense は 2026-09-20 に恒久停止したため受け取り元から外した) から計測結果を受け取り、進行中の施策を更新する。効果判定後は詳細 improvement log に結果を残してTODO行を削除する。改善バックログへの write は本 agent が排他的に行う。
 
 ## 担当範囲
 

@@ -32,7 +32,9 @@ export async function SidebarStickyBannerAd({
   const banner = banners.find((ad) => !isAffiliateDestinationExcluded({ href: ad.htmlContent, programRef: ad.programRef }, excludeAds));
   if (!banner || !banner.imageUrl) return null;
 
-  const affiliateCategory = adVertical(banner);
+  // 変数名をページ文脈値と同じ `affiliateCategory` にしない。ここはバナー自身の意図軸で、
+  // 取り違えると GA4 の affiliate_vertical が壊れる (2026-09-20 の計測欠陥と同じ形)。
+  const bannerVertical = adVertical(banner);
 
   return (
     <div className="hidden lg:block">
@@ -42,7 +44,7 @@ export async function SidebarStickyBannerAd({
         trackingPixelUrl={banner.trackingPixelUrl}
         width={banner.width}
         height={banner.height}
-        category={affiliateCategory ?? "other"}
+        category={bannerVertical ?? "other"}
         label={banner.title}
         position={position}
         adId={banner.id}

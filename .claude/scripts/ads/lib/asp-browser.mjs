@@ -31,6 +31,7 @@ import {
   startStatusTicker,
 } from "./asp-browser-base.mjs";
 import { assertSiteOrThrow, extractSiteId, SiteAttributionError } from "./asp-site-guard.mjs";
+import { unattended } from '../../measurement/browser-session.mjs';
 
 export {
   launchContext,
@@ -80,6 +81,7 @@ export function checkoutRoot() {
 const statePath = (asp) => join(profileRoot(), asp.browser.stateFile);
 
 async function restoreSession(ctx, asp) {
+  if (unattended()) return { ok: true, reason: 'ci-scoped-state' };
   const p = statePath(asp);
   if (!existsSync(p)) return { ok: false, reason: "state-missing" };
   try {
@@ -120,6 +122,7 @@ export async function openAsp(asp, { isReady, label = "ASP" } = {}) {
 
   const ready = isReady ?? (async (p) => !new RegExp(asp.reAuthPattern, "i").test(p.url()));
   if (!(await ready(page).catch(() => false))) {
+    if (unattended()) { await ctx.close(); throw new Error('auth_required'); }
     console.log(`\n■ ブラウザで ${asp.label} にログインしてください (自動入力しません)\n`);
     const stop = startStatusTicker(`${label} ログイン待ち`, 60000);
     const deadline = Date.now() + (asp.browser.loginMaxWaitMs || 600000);

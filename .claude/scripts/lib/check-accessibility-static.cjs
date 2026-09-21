@@ -52,6 +52,24 @@ function literalValue(attribute) {
   const expression = attribute.initializer.expression;
   return expression && ts.isStringLiteralLike(expression) ? expression.text : null;
 }
+function literalValues(attribute) {
+  if (!attribute?.initializer) return [];
+  if (ts.isStringLiteral(attribute.initializer)) return [attribute.initializer.text];
+  const values = [];
+  function collect(node) {
+    if (!node) return;
+    if (ts.isStringLiteralLike(node)) {
+      values.push(node.text);
+      return;
+    }
+    if (ts.isConditionalExpression(node)) {
+      collect(node.whenTrue);
+      collect(node.whenFalse);
+    }
+  }
+  collect(attribute.initializer.expression);
+  return values;
+}
 function location(source, node) {
   const point = source.getLineAndCharacterOfPosition(node.getStart(source));
   return { line: point.line + 1, column: point.character + 1 };
@@ -75,9 +93,15 @@ function inspectFile(file) {
         findings.push(finding("IMAGE_ALT_MISSING", file, source, node, `<${tag}> has no alt`));
       }
       if (map.has("target") && literalValue(map.get("target")) === "_blank") {
-        const relValue = literalValue(map.get("rel"));
-        if (!relValue || !relValue.split(/\s+/).includes("noopener") || !relValue.split(/\s+/).includes("noreferrer")) {
-          findings.push(finding("BLANK_REL_MISSING", file, source, node, 'target="_blank" requires rel="noopener noreferrer"'));
+        const relValues = literalValues(map.get("rel"));
+        const referrerPolicies = literalValues(map.get("referrerPolicy"));
+        const controlsReferrer = referrerPolicies.length > 0;
+        const unsafeRel = relValues.length === 0 || relValues.some((relValue) => {
+          const tokens = relValue.split(/\s+/);
+          return !tokens.includes("noopener") || (!tokens.includes("noreferrer") && !controlsReferrer);
+        });
+        if (unsafeRel) {
+          findings.push(finding("BLANK_REL_MISSING", file, source, node, 'target="_blank" requires noopener and either noreferrer or an explicit referrerPolicy'));
         }
       }
       if (["div", "span", "p", "li"].includes(lower) && map.has("onClick") && !hasSpread) {

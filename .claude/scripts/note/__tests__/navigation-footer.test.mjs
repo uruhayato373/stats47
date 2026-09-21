@@ -82,15 +82,25 @@ test("footer adds note, magazine, site and product cards without UTM", () => {
   assert.doesNotMatch(result.body, /utm_/);
 });
 
-test("an existing stats47 link suppresses a redundant generic site card", () => {
+test("an existing stats47 link does not suppress the catalog-selected site card", () => {
   const result = applyNavigationFooter(
     '<p><a href="https://stats47.jp/ranking/another">既存リンク</a></p>',
     plan,
     { idFactory: ids() },
   );
+  assert.equal(result.addedSite, true);
+  assert.equal(result.addedProduct, true);
+  assert.match(result.body, /annual-sunshine-duration/);
+});
+
+test("the exact catalog-selected site URL remains idempotent", () => {
+  const result = applyNavigationFooter(
+    `<p><a href="${plan.siteUrl}">既存の主着地</a></p>`,
+    plan,
+    { idFactory: ids() },
+  );
   assert.equal(result.addedSite, false);
   assert.equal(result.addedProduct, true);
-  assert.doesNotMatch(result.body, /annual-sunshine-duration/);
 });
 
 test("plain stats47 text is not mistaken for a clickable site link", () => {

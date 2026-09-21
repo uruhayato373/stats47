@@ -26,6 +26,8 @@ interface ArticleRendererProps {
         title: string;
         href: string;
         trackingPixelUrl?: string | null;
+        /** GA4 `affiliate_vertical` に送る広告自身の意図軸 (解決層が確定させる)。 */
+        vertical: AffiliateCategory | null;
     }>;
     /** テキストリンクのテーマ色に使う vertical。 */
     affiliateVertical?: AffiliateCategory | null;

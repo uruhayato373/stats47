@@ -47,9 +47,11 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 |---|---|
 | 開発 | `git log --since`、`git status --short` |
 | コンテンツ | R2 blog/ranking snapshot、topic/remediation queue |
-| 性能・流入 | GSC / GA4の確定7日summary、AdSense / SNSの最新snapshot |
+| 性能・流入 | GSC / GA4の確定7日summary、SNSの最新snapshot |
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
+| 週次収益 (NSM) | `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節。欠測は 0 円ではなく「判定不能」。AdSense は恒久停止で ¥0 固定 |
+| 認証付き計測 | `npm run measurement:status` + `.claude/state/metrics/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
 | 計画差分 | `.claude/todo/weekly.md` |
 | 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 | Kindle | `.claude/config/kdp-listings.json` + `.claude/state/products/{sales-ledger,kdp-weekly-publication}.json` |
@@ -99,7 +101,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - 計画 vs 実績
 - 成果ハイライト
 - 開発・コンテンツ実績
-- NSM / GA4 / GSC / AdSense / SNS
+- NSM（週次収益）/ GA4 / GSC / SNS
 - search-growth候補（期間・証拠・制約・承認待ちを明記）
 - 課題、繰り返しパターン、学び
 - 来週への申し送り

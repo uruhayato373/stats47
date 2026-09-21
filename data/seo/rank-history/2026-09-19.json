@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-09-19",
+  "generatedAt": "2026-09-18T23:35:49.796Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-09-10",
+      "periodEnd": "2026-09-16",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2024,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.6651982378854626,
+        "impressions": 908,
+        "clicks": 45
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 7.061728395061729,
+        "impressions": 486,
+        "clicks": 17
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/future-population-tokyo-paradox",
+        "rank": 2,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 2,
+        "impressions": 1,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-09-03",
+      "periodEnd": "2026-09-09",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1541,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.961734693877551,
+        "impressions": 392,
+        "clicks": 25
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 3.6033519553072626,
+        "impressions": 179,
+        "clicks": 3
+      },
+      {
+        "keyword": "40代 未婚 割合 日本 国勢調査",
+        "targetPath": "/survey/census",
+        "rank": 4.385786802030457,
+        "impressions": 591,
+        "clicks": 0
+      }
+    ]
+  }
+}

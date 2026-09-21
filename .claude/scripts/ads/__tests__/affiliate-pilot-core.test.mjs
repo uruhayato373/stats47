@@ -10,7 +10,10 @@ import {
 } from "../lib/affiliate-pilot-core.mjs";
 
 const plan = {
-  programRef: "a8:s00000000000001",
+  variantProgramRefs: {
+    discovery: "a8:s00000000000001",
+    decision: "a8:s00000000000002",
+  },
   pagePath: "/ranking/example",
   pageType: "ranking",
   variantIds: ["discovery", "decision"],
@@ -27,7 +30,13 @@ const plan = {
   addsMobilePlacement: false,
   ctaCount: 1,
 };
-const readyPortfolio = { gates: { pilot: { status: "ready", reasons: [] } } };
+const readyPortfolio = {
+  gates: { pilot: { status: "ready", reasons: [] } },
+  offers: [
+    { programRef: "a8:s00000000000001", lane: "discovery", vertical: "education" },
+    { programRef: "a8:s00000000000002", lane: "decision", vertical: "education" },
+  ],
+};
 
 test("必要clickを含め最大期間内のpilot実現可能性を事前計算する", () => {
   const result = estimateAffiliatePilotFeasibility({
@@ -119,6 +128,38 @@ test("最大期間到達時のsample不足はinconclusiveになる", () => {
   });
   assert.equal(verdict.status, "inconclusive");
   assert.equal(verdict.winnerVariantId, null);
+});
+
+test("sample・最短期間到達後は勝者判定せず露出停止と成果成熟へ進める", () => {
+  const observation = {
+    startedAt: "2026-08-01T00:00:00.000Z",
+    confounds: [],
+    variants: [
+      { variantId: "discovery", impressions: 1200, clicks: 12, confirmedRevenueYen: 0, outcomesMature: false },
+      { variantId: "decision", impressions: 1100, clicks: 11, confirmedRevenueYen: 0, outcomesMature: false },
+    ],
+  };
+  const exposure = buildAffiliatePilotState({
+    nowIso: "2026-09-01T00:00:00.000Z",
+    portfolio: readyPortfolio,
+    plan,
+    activeExperiments: [],
+    ownerApprovals: { offer: true, page: true, push: true },
+    feasibility: { status: "feasible", reasons: [] },
+    observation,
+  });
+  assert.equal(exposure.recommendedAction.id, "stop-pilot-exposure-and-start-maturation");
+
+  const maturing = buildAffiliatePilotState({
+    nowIso: "2026-09-01T00:00:00.000Z",
+    portfolio: readyPortfolio,
+    plan: { ...plan, exposureEndedAt: "2026-08-29" },
+    activeExperiments: [],
+    ownerApprovals: { offer: true, page: true, push: true },
+    feasibility: { status: "feasible", reasons: [] },
+    observation,
+  });
+  assert.equal(maturing.recommendedAction.id, "collect-mature-pilot-outcomes");
 });
 
 test("現行gateから生成したstateは次の一手を1件だけ持つ", () => {

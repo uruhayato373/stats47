@@ -502,7 +502,8 @@ async function main() {
       console.log(`  ${reportKey}: ${unit.status}${unit.csvRows != null ? ` (${unit.csvRows} 行)` : ""}`);
     }
 
-    manifest.status = "ok";
+    manifest.status = manifest.units.length === reportKeys.length && manifest.units.every(u =>
+      opts.dryRun ? u.status === 'dry-run-ok' : u.status === 'downloaded') ? 'ok' : 'incomplete';
   } catch (e) {
     const page = ctx.pages()[0];
     if (page) await dumpFailure(page, cfg, runId, { step: "unexpected", message: e?.message || String(e) });
@@ -517,6 +518,7 @@ async function main() {
   const ok = manifest.units.filter((u) => u.status === "downloaded").length;
   console.log(`\n完了: status=${manifest.status} / download 成功 ${ok}/${manifest.units.length}`);
   console.log(`manifest: ${join(runDir, "manifest.json")}`);
+  if (manifest.status !== 'ok') process.exitCode = 1;
 }
 
 // import された時点で実行されないよう、直接実行時のみ main() を呼ぶ

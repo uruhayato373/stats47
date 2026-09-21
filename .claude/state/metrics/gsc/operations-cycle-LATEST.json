@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-20T07:27:45.173Z",
-  "stage": "review",
-  "status": "fail",
+  "generatedAt": "2026-09-20T08:36:02.218Z",
+  "stage": "plan",
+  "status": "warn",
   "measurementWeek": "2026-W38",
   "expectedCompletedWeek": "2026-W37",
   "expectedPlanWeek": "2026-W39",
   "currentMonth": "2026-09",
   "summary": {
-    "pass": 8,
+    "pass": 10,
     "warn": 1,
-    "fail": 1
+    "fail": 0
   },
   "checks": [
     {
@@ -51,26 +51,32 @@
     },
     {
       "code": "search-growth-sources",
-      "level": "fail",
-      "detail": "stale/missing: coverage",
-      "action": "npm run search-growth:collect && npm run search-growth:all"
+      "level": "pass",
+      "detail": "gsc/coverage/inspection は利用可能",
+      "action": null
     },
     {
       "code": "search-growth-decision",
       "level": "pass",
-      "detail": "証拠不足または候補0のため判断を強制しない",
+      "detail": "2026-W38 の承認/却下 1件（必要 1件以上）",
       "action": null
     },
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-09-18, age=2d",
+      "detail": "latest=2026-09-20, age=0d",
       "action": null
     },
     {
       "code": "weekly-review",
       "level": "pass",
       "detail": "2026-W38 review の search-growth 節=あり",
+      "action": null
+    },
+    {
+      "code": "weekly-plan",
+      "level": "pass",
+      "detail": "plan=2026-W39, expected=2026-W39",
       "action": null
     }
   ]

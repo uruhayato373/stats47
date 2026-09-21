@@ -148,14 +148,20 @@ export function aggregateVariantMetrics(ga4Rows) {
  */
 export function evaluateExperiments({ registry, ads, variantMetrics, nowIso, measurementGate = null }) {
   const active = [];
+  const maturing = [];
   const readyToDecide = [];
   const invalid = [];
   const inconclusive = [];
   const closed = [];
 
   const ssotByExperiment = new Map();
+  const allSsotByExperiment = new Map();
   for (const ad of ads ?? []) {
-    if (!ad.experimentId || ad.isActive === false) continue;
+    if (!ad.experimentId) continue;
+    const all = allSsotByExperiment.get(ad.experimentId) ?? [];
+    all.push(ad);
+    allSsotByExperiment.set(ad.experimentId, all);
+    if (ad.isActive === false) continue;
     const list = ssotByExperiment.get(ad.experimentId) ?? [];
     list.push(ad);
     ssotByExperiment.set(ad.experimentId, list);
@@ -174,6 +180,21 @@ export function evaluateExperiments({ registry, ads, variantMetrics, nowIso, mea
     const id = exp.experimentId;
     if (exp.status === "closed") {
       closed.push({ experimentId: id, status: "closed", winnerVariantId: exp.winnerVariantId ?? null });
+      continue;
+    }
+
+    if (exp.status === "maturing") {
+      const reasons = [];
+      const variants = allSsotByExperiment.get(id) ?? [];
+      const variantIds = variants.map((variant) => variant.variantId).filter(Boolean);
+      if (!exp.exposureEndedAt || daysBetween(exp.exposureEndedAt, nowIso) == null) reasons.push("exposure-ended-at-invalid");
+      if (variants.some((variant) => variant.isActive !== false)) reasons.push("maturing-variants-still-active");
+      if (!Array.isArray(exp.variantIds) || exp.variantIds.length < 2) reasons.push("registry-variants-insufficient");
+      if (new Set(variantIds).size !== new Set(exp.variantIds ?? []).size || (exp.variantIds ?? []).some((value) => !variantIds.includes(value))) {
+        reasons.push("registry-ssot-variant-mismatch");
+      }
+      if (reasons.length > 0) invalid.push({ experimentId: id, status: "invalid", reasons });
+      else maturing.push({ experimentId: id, status: "maturing", exposureEndedAt: exp.exposureEndedAt, variantIds: exp.variantIds });
       continue;
     }
 
@@ -263,7 +284,7 @@ export function evaluateExperiments({ registry, ads, variantMetrics, nowIso, mea
     }
   }
 
-  return { active, readyToDecide, invalid, inconclusive, closed };
+  return { active, maturing, readyToDecide, invalid, inconclusive, closed };
 }
 
 /**
@@ -352,6 +373,7 @@ export function buildOperationsState({
   };
   const experimentsOut = {
     active: experiments?.active ?? [],
+    maturing: experiments?.maturing ?? [],
     readyToDecide: experiments?.readyToDecide ?? [],
     invalid: experiments?.invalid ?? [],
     inconclusive: experiments?.inconclusive ?? [],
@@ -427,7 +449,7 @@ export function validateOperationsState(state) {
   for (const key of ["orphaned", "missingDisclosure"]) {
     if (!Array.isArray(state.directPlacements?.[key])) push(`directPlacements.${key} が配列でない`);
   }
-  for (const key of ["active", "readyToDecide", "invalid"]) {
+  for (const key of ["active", "maturing", "readyToDecide", "invalid"]) {
     if (!Array.isArray(state.experiments?.[key])) push(`experiments.${key} が配列でない`);
   }
   if (!Array.isArray(state.recommendedActions)) push("recommendedActions が配列でない");

@@ -504,6 +504,13 @@ async function main() {
     }
   }
   console.log(`ログ: ${logPath}`);
+  writeFileSync(join(logDir, 'latest.json'), JSON.stringify({
+    generatedAt: new Date().toISOString(), status: Object.keys(failed).length ? 'incomplete' : 'pass',
+    live: Object.fromEntries(Object.entries(live).map(([name, value]) => [name, {
+      partnered: [...value.partnered.ids], applying: [...value.applying.ids],
+    }])), failed,
+  }, null, 2) + '\n');
+  if (Object.keys(failed).length) process.exitCode = 1;
 }
 
 main().catch((e) => {

@@ -160,7 +160,7 @@ jobs:
       # GSC カバレッジ是正キューを本番 HTTP 実測で再構築する
       # (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
       #
-      # export (GSC UI) は Google ログイン済み Playwright profile が要りローカル限定。
+      # 認証付き日次CIのprivate R2を復元。初回成功前だけ既存入力の鮮度ゲートを維持する。
       # commit 済み入力が1週以内なら認証不要で本番 HTTP を再実測する。2週以上古ければ
       # fail-closed で止め、古い母集団を当週の verdict に見せない。
       # 2026-09-06 に W32 入力を当日生成として扱っていた再発防止。
@@ -174,7 +174,14 @@ jobs:
         id: coverage_queue
         continue-on-error: true
         timeout-minutes: 12
-        run: node .claude/scripts/gsc/build-coverage-queue.mjs
+        env:
+          MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
+          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          node .claude/scripts/measurement/restore.mjs gsc --if-activated
+          node .claude/scripts/gsc/build-coverage-queue.mjs
 
       - name: 📄 Summarize coverage queue
         if: always()
@@ -326,6 +333,54 @@ jobs:
       # 保たれ、partial を green success として隠さない。
       - name: 🧪 Period contract gate (finalized7d/coverage)
         run: npm run metrics:check-period-contract -- ${{ steps.week.outputs.week }} --strict
+
+      # ── 収益計測ガード ────────────────────────────────────────────
+      # 2026-09-20 追加。アフィリエイト観測が 08-28 で止まったまま 3 週間気づかなかった
+      # (週次 cron は success で終わり、止まっていたのは誰も見ない state ファイルの中だけ)。
+      # 同じ期間に検索流入は 4 週で倍増していたので、最も価値の高い時期に
+      # 「収益がいくらか言えない」状態が続いた。見えない劣化を Issue にして毎週目へ入れる。
+      # continue-on-error は使わない (quality-exceptions の baseline は縮小専用)。
+      # ガードの結果は step output に載せ、後続の 2 step が分岐する。
+      - name: 💰 Check revenue guards
+        id: revenue_guards
+        run: |
+          if node .claude/scripts/metrics/check-revenue-guards.mjs > /tmp/revenue-guards.md; then
+            echo "status=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=fail" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 🚨 Raise revenue alert
+        if: always() && steps.revenue_guards.outputs.status != 'pass'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[Revenue Alert] 週次収益 (NSM) の計測が劣化している"
+          {
+            cat /tmp/revenue-guards.md 2>/dev/null || echo "ガードスクリプトの実行自体に失敗しました。"
+            echo ""
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } > /tmp/revenue-issue.md
+
+          gh label create revenue-alert --description "週次収益 (NSM) の計測劣化" --color "b60205" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label revenue-alert --search "\"[Revenue Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/revenue-issue.md
+          else
+            gh issue create --title "$TITLE" --label "revenue-alert,auto-generated" --body-file /tmp/revenue-issue.md
+          fi
+
+      - name: ✅ Close recovered revenue alert
+        if: always() && steps.revenue_guards.outputs.status == 'pass'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label revenue-alert --limit 50 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "収益計測ガードが全て PASS したため自動クローズ (run ${{ github.run_id }})。"
+            done
 
       # ── カバレッジキュー失敗の通知 ────────────────────────────────
       # continue-on-error で週次計測本体は止めないが、失敗を green に隠さない。

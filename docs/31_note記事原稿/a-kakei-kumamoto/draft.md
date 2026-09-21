@@ -4,7 +4,7 @@ description: "熊本市の家計は47市平均に比べ教育が1.44倍と最も
 status: published
 note_url: "https://note.com/stats47/n/n7e98a46bf791"
 published_at: "2026-09-06"
-updated_at: "2026-09-15"
+updated_at: "2026-09-19"
 published: true
 tags:
   - 家計調査

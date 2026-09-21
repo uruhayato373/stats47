@@ -144,3 +144,33 @@ test("未分類profileは可視化するが、別の有効候補までportfolio 
   assert.ok(state.gates.coverage.reasons.includes("offer-profile-unclassified:1"));
   assert.equal(state.gates.portfolio.status, "ready");
 });
+
+test("readyなもしも成果をprogramRefへ結合し、staleなら採用しない", () => {
+  const moshimoProfile = { ...profile, programRef: "moshimo:1863" };
+  const moshimoAd = { ...ad, id: "ad-moshimo", programRef: moshimoProfile.programRef };
+  const source = {
+    source: "moshimo",
+    programRefPrefix: "moshimo:",
+    path: "moshimo.json",
+    gate: ready,
+    data: { updatedAt: "2026-08-28T00:00:00.000Z", records: [{ programRef: "moshimo:1863", clicks: 2, conversions: 1, approved: 1, revenueYen: 900 }] },
+  };
+  const state = build({
+    ads: [moshimoAd],
+    profiles: [moshimoProfile],
+    ga4: { ...ga4, overview: [{ ad_id: "ad-moshimo", impressions: 100, clicks: 2 }] },
+    additionalOutcomeSources: [source],
+  });
+  assert.equal(state.offers[0].metrics.confirmedRevenueYen.value, 900);
+  assert.equal(state.sources.additionalOutcomes[0].status, "ready");
+
+  const stale = build({
+    ads: [moshimoAd],
+    profiles: [moshimoProfile],
+    ga4: { ...ga4, overview: [{ ad_id: "ad-moshimo", impressions: 100, clicks: 2 }] },
+    additionalOutcomeSources: [{ ...source, required: true, gate: { status: "blocked", reasons: ["stale"] } }],
+  });
+  assert.equal(stale.offers[0].metrics.confirmedRevenueYen.value, null);
+  assert.equal(stale.gates.outcome.status, "blocked");
+  assert.deepEqual(stale.gates.outcome.reasons, ["stale"]);
+});

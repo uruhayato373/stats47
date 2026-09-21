@@ -47,7 +47,7 @@ Geo分析を最終順位だけにせず、入力、途中地図、空間演算�
 
    公共施設は`npm run geo:audit-public-facility-access`とWebの`geo-public-facility.integration.test.ts`を使用する。`GEO_ARTIFACT_ROOT`を指定した検査は原典が欠けても合成fixtureへ代替しない。
 
-6. Web parser/type-check/testを通し、`/geo/<slug>?pref=13&stage=population`、`overlap`、`audit`をlocalhostで確認する。
+6. Web parser/type-check/testを通し、`/geo/<slug>`（県未指定＝兵庫県・重なり着地）、`?pref=28&stage=population`、`overlap`、`audit`（重なり地図＋検算）をlocalhostで確認する。
 7. 管理画面`/strategy`で計算入力、補助レイヤー、47県artifact、保存則を確認する。
 8. R2反映は検証結果とexact keyを提示して`r2-publisher`へ委譲する。本skillから直接pushしない。
 9. SNSはmanifest合格後だけ`/operate-geo-content`へ渡す。

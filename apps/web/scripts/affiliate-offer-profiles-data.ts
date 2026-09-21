@@ -2191,6 +2191,82 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
     "allowedPageTypes": []
   },
   {
+    "programRef": "moshimo:1863",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "purchase",
+    "frictionTier": "F4",
+    "conversionCondition": "食べチョクを初めて利用するユーザーによる初回注文の購入完了",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=1863&shop_site_id=638943",
+    "verifiedAt": "2026-09-08",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "moshimo:55",
+    "vertical": "travel",
+    "allowedVerticals": [
+      "travel"
+    ],
+    "lane": "decision",
+    "actionType": "reservation",
+    "frictionTier": "F3",
+    "conversionCondition": "楽天トラベルの予約完了。国内宿泊は成果発生翌々月末までのチェックアウトが承認条件",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=55&shop_site_id=638943",
+    "verifiedAt": "2026-09-08",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "moshimo:2228",
+    "vertical": "labor",
+    "allowedVerticals": [
+      "labor"
+    ],
+    "lane": "discovery",
+    "actionType": "free-registration",
+    "frictionTier": "F2",
+    "conversionCondition": "広告主新規ユーザーによる無料会員登録。過去のJAC転職支援利用者、現在年収600万円以下、転職意思を確認できない方は対象外",
+    "personalDataLevel": "basic",
+    "humanContact": "optional",
+    "conditionSource": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=2228&shop_site_id=638943",
+    "verifiedAt": "2026-09-20",
+    "portfolioStatus": "pilot-ready",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
+    "programRef": "moshimo:6722",
+    "vertical": "labor",
+    "allowedVerticals": [
+      "labor"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規のITエンジニアがWEB申込後30日以内に無料転職相談を完了。MyVision社の他サービス面談済みは対象外",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://af.moshimo.com/af/shop/promotion/detail?promotion_id=6722&shop_site_id=638943",
+    "verifiedAt": "2026-09-20",
+    "portfolioStatus": "pilot-ready",
+    "allowedPageTypes": [
+      "ranking"
+    ]
+  },
+  {
     "programRef": "rakuten:af_rakuten_travel_001",
     "vertical": "travel",
     "allowedVerticals": [

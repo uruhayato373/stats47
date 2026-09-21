@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "$comment": "ADMIN-STAT-PILOT-01 段階1の聞き取り記録。収益化戦略 §5 の『行政向け商品の検証順序』段階1・2 が要求する事実だけを置く。感想や意欲は記録しない (購入意思の代用にしないため)。",
+  "purpose": "議会答弁・計画策定の資料作成で、複数統計の収集・整形・照合に残る作業と、その支払者を確認する",
+  "fieldGuide": {
+    "interviewId": "連番。I-001 から",
+    "interviewedAt": "YYYY-MM-DD。聞き取りを行った日",
+    "role": "職種と担当業務。個人が特定される氏名・所属は書かない",
+    "targetTask": "対象にした実在の業務 1 件 (例: 令和8年度 当初予算の子育て関連 説明資料)",
+    "completionCondition": "その資料の完成条件。何が揃えば提出できるか",
+    "statisticsUsed": "使った統計。名称・調査主体・年次・地理粒度 (県 / 市区町村 / 県庁所在市) まで",
+    "currentSteps": "現行の手順。どこから取り、どう整形し、何と照合したか",
+    "timeSpent": {
+      "recalledMinutes": "本人の記憶による所要時間。これは実測ではない",
+      "measuredMinutes": "実際に計測できた時間。取れなければ null",
+      "$comment": "回顧と実測を混ぜない (収益化戦略 §5 段階2 の要求)"
+    },
+    "reworkDescription": "手直しが発生した箇所。単位・年次・定義のずれなど",
+    "repeatFrequency": "同じ資料を作る頻度 (例: 年2回・議会ごと)",
+    "existingTools": "現在使っている手段 (RESAS / e-Stat / 統計書 / 庁内システム / 外部委託)",
+    "remainingWorkWithExistingTools": "既存手段を使ってもなお残る作業。ここが空なら商品化しない",
+    "payer": {
+      "candidate": "self | organization | external-contractor | unknown",
+      "budgetExists": "true / false / unknown",
+      "purchasePath": "購入までの経路 (立替・物品購入・委託 など)",
+      "$comment": "職員本人の利用意思と、組織の購入判断を分けて記録する"
+    },
+    "evidence": "この記録の根拠 (聞き取りメモ・画面共有・提供資料)。推測で埋めない"
+  },
+  "gate": {
+    "stage1PassCondition": "複数の担当者で同じ収集・整理作業が残り、1 つの納品仕様にできること",
+    "stage1StopCondition": "協力者が集まらない、既存手段で十分、または個別要件ばかりで汎用化できないこと",
+    "targetInterviewCount": 3,
+    "$comment": "3 は市場規模の推定ではなく、判断を先延ばしにしないための実験上限 (収益化戦略 §5)"
+  },
+  "inboundSources": {
+    "$comment": "聞き取り相手を探す段階は越えている。行政実務の文脈にある読者がすでに来ている (GSC 2026-W37 ローリング28日実測)。",
+    "pages": [
+      { "path": "/blog/assembly-answer-chatgpt-5steps", "clicks": 48, "impressions": 366, "ctr": 0.1311 },
+      { "path": "/blog/local-government-debt-burden", "clicks": 425, "impressions": 4703, "ctr": 0.0904 },
+      { "path": "/blog/local-tax-revenue-gap", "clicks": 47, "impressions": 1058, "ctr": 0.0444 }
+    ],
+    "source": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv"
+  },
+  "interviews": []
+}

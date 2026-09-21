@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T07:17:25.318Z",
+  "generatedAt": "2026-09-20T16:25:07.473Z",
   "week": "2026-W38",
   "live": false,
   "sources": [
@@ -27,9 +27,9 @@
       "source": "psi",
       "status": "success",
       "mode": "snapshot",
-      "observedAt": "2026-09-18T19:56:09.972Z",
-      "count": 138,
-      "snapshotFile": ".claude/state/metrics/psi/psi-batch-2026-09-18T19-56-09.json",
+      "observedAt": "2026-09-19T19:39:32.170Z",
+      "count": 216,
+      "snapshotFile": ".claude/state/metrics/psi/psi-batch-2026-09-19T19-39-32.json",
       "secretName": "PSI_API_KEY",
       "secretPresent": false
     },
@@ -37,28 +37,28 @@
       "source": "coverage",
       "status": "success",
       "mode": "snapshot",
-      "observedAt": "2026-09-04",
-      "count": 3916,
+      "observedAt": "2026-09-20",
+      "count": 4325,
       "snapshotFile": ".claude/state/gsc/coverage-remediation-queue.json",
       "secretPresent": false
     },
     {
       "source": "inspection",
-      "status": "success",
+      "status": "partial",
       "mode": "snapshot",
-      "observedAt": "2026-09-18T00:00:00Z",
+      "observedAt": "2026-09-15T00:00:00Z",
       "count": 2776,
-      "snapshotFile": ".claude/state/metrics/gsc/url-inspection/2026-09-18.csv",
+      "snapshotFile": ".claude/state/metrics/gsc/url-inspection/2026-09-15.csv",
       "secretName": "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
       "secretPresent": false
     },
     {
       "source": "cloudflare",
-      "status": "success",
+      "status": "partial",
       "mode": "snapshot",
-      "observedAt": "2026-09-18T19:53:45.755Z",
+      "observedAt": "2026-09-02T20:01:54.790Z",
       "count": 2,
-      "snapshotFile": ".claude/state/metrics/cloudflare/snapshots/2026-09-17.json",
+      "snapshotFile": ".claude/state/metrics/cloudflare/snapshots/2026-09-01.json",
       "secretName": "CLOUDFLARE_API_TOKEN",
       "secretPresent": false
     },

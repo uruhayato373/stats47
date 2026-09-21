@@ -38,6 +38,8 @@ interface ResolvedAffiliateVariant {
   height: number | null;
   /** GA4 creative_size 用 例: "300x250" / "text" */
   creativeSize: string;
+  /** GA4 `affiliate_vertical` 用。variant 自身の意図軸 (ページ文脈値で代用しない)。 */
+  vertical: AffiliateVertical | null;
 }
 
 /** categoryKey (e-Stat 17 軸) → vertical。写像外は undefined。 */
@@ -78,6 +80,31 @@ function toBanner(b: {
 }
 
 /**
+ * テキスト広告行を解決結果へ写す。`toBanner` と同じ規約で vertical を確定させ、
+ * 描画側がページ文脈値で代用できないようにする。
+ */
+function toTextAd(a: {
+  programRef?: string;
+  id: string;
+  title: string;
+  htmlContent: string;
+  trackingPixelUrl: string | null;
+  vertical?: AffiliateVertical | null;
+  categoryKey?: string | null;
+}): ResolvedAffiliateAd {
+  return {
+    ...(a.programRef ? { programRef: a.programRef } : {}),
+    id: a.id,
+    title: a.title,
+    href: a.htmlContent,
+    trackingPixelUrl: a.trackingPixelUrl,
+    vertical:
+      a.vertical ??
+      (a.categoryKey ? (CATEGORY_AFFILIATE_MAP[a.categoryKey] ?? null) : null),
+  };
+}
+
+/**
  * categoryKey に対応するテキスト広告を 1 件解決する。該当なしなら null。
  */
 export async function resolveAffiliateAd(
@@ -88,13 +115,7 @@ export async function resolveAffiliateAd(
   if (!vertical) return null;
   const dbAd = await findActiveTextAdByVertical(vertical, locationCode);
   if (!dbAd) return null;
-  return {
-    ...(dbAd.programRef ? { programRef: dbAd.programRef } : {}),
-    id: dbAd.id,
-    title: dbAd.title,
-    href: dbAd.htmlContent,
-    trackingPixelUrl: dbAd.trackingPixelUrl,
-  };
+  return toTextAd(dbAd);
 }
 
 /**
@@ -114,13 +135,7 @@ export async function resolveAffiliateTextAds(
     limit,
     rankingKey
   );
-  return ads.map((ad) => ({
-    ...(ad.programRef ? { programRef: ad.programRef } : {}),
-    id: ad.id,
-    title: ad.title,
-    href: ad.htmlContent,
-    trackingPixelUrl: ad.trackingPixelUrl,
-  }));
+  return ads.map(toTextAd);
 }
 
 /**
@@ -144,13 +159,7 @@ export async function resolveAffiliateTextAdsByTagKeys(
   for (const ad of ads) {
     if (seen.has(ad.title)) continue;
     seen.add(ad.title);
-    unique.push({
-      ...(ad.programRef ? { programRef: ad.programRef } : {}),
-      id: ad.id,
-      title: ad.title,
-      href: ad.htmlContent,
-      trackingPixelUrl: ad.trackingPixelUrl,
-    });
+    unique.push(toTextAd(ad));
     if (unique.length >= limit) break;
   }
   return unique;
@@ -212,13 +221,7 @@ export async function resolveAffiliateTextAdsByVertical(
     limit,
     rankingKey
   );
-  return ads.map((ad) => ({
-    ...(ad.programRef ? { programRef: ad.programRef } : {}),
-    id: ad.id,
-    title: ad.title,
-    href: ad.htmlContent,
-    trackingPixelUrl: ad.trackingPixelUrl,
-  }));
+  return ads.map(toTextAd);
 }
 
 /**
@@ -272,12 +275,7 @@ export async function resolveAffiliateTextAdsForContent(
     for (const ad of ads) {
       if (seen.has(ad.title)) continue;
       seen.add(ad.title);
-      unique.push({
-        id: ad.id,
-        title: ad.title,
-        href: ad.htmlContent,
-        trackingPixelUrl: ad.trackingPixelUrl,
-      });
+      unique.push(toTextAd(ad));
       if (unique.length >= limit) break;
     }
     if (unique.length > 0) return unique;
@@ -346,6 +344,9 @@ export async function resolveExperimentVariantsByCategoryKey(
         title: r.title,
         href: r.htmlContent,
         trackingPixelUrl: r.trackingPixelUrl,
+        vertical:
+          r.vertical ??
+          (r.categoryKey ? (CATEGORY_AFFILIATE_MAP[r.categoryKey] ?? null) : null),
         imageUrl: adType === 'banner' ? r.imageUrl : null,
         width: r.width,
         height: r.height,
