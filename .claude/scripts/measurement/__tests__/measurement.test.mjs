@@ -309,6 +309,22 @@ test('rerun artifacts select the latest attempt and never resurrect an older suc
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
+test('KDP auth recovery requires human Reports login instead of re-exporting stale state', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-kdp-recovery-test-'));
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    writeFileSync(join(input, 'kdp-2.json'), JSON.stringify({ source: 'kdp', capability: SOURCES.kdp.capability,
+      observedAt: new Date().toISOString(), status: 'failed', code: 'auth_required', runId: 'kdp-recovery', runAttempt: 2 }));
+    execFileSync(process.execPath, [resolve('.claude/scripts/measurement/summarize.mjs'), input], {
+      cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'kdp-recovery', GITHUB_RUN_ATTEMPT: '2' },
+    });
+    const summary = readFileSync('/tmp/authenticated-measurement-summary.md', 'utf8');
+    assert.match(summary, /bootstrap-session\.mjs kdp --login --reports --publish/);
+    assert.doesNotMatch(summary, /bootstrap-session\.mjs kdp --publish/);
+    assert.match(summary, /再ログインを反復せず停止/);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
 test('authenticated CI has no PR trigger, no raw artifacts, and includes all configured services', () => {
   const source = readFileSync('.github/workflows/authenticated-measurement.yml', 'utf8');
   const workflow = yaml.load(source);
