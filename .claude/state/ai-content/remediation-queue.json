@@ -1,23 +1,22 @@
 {
-  "generatedAt": "2026-09-21T00:18:46.935Z",
+  "generatedAt": "2026-09-22T00:52:45.066Z",
   "gscSnapshot": "2026-W38",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2408,
-    "done": 2165,
-    "needsRegen": 243,
+    "done": 2166,
+    "needsRegen": 242,
     "needsByReason": {
       "missing": 241,
-      "incomplete": 1,
-      "fetch-error:TypeError: fetch failed": 1
+      "incomplete": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 88763,
-    "needsImpressions": 934,
+    "doneImpressions": 88770,
+    "needsImpressions": 927,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -9123,13 +9122,20 @@
       "impressions": 7,
       "clicks": 2,
       "position": 3.71,
-      "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
+      "warns": [
+        "causal-insights",
+        "length-short",
+        "pref-count",
+        "pref-len"
+      ],
+      "lastModified": "Wed, 02 Sep 2026 10:53:35 GMT",
+      "updatedAt": "2026-09-02T10:47:44.906Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "manual-escalation"
+      ]
     },
     {
       "rankingKey": "broadband-contract-count-excluding-39-4g",
@@ -9139,7 +9145,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "convenience-store-sales",
