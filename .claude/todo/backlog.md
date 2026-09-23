@@ -21,6 +21,17 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [IG-CAROUSEL-GLYPH-SMEAR-01] 予約中の Instagram カルーセルの見出しが疑似太字で潰れた古い画像のまま
+
+タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/sns/review-sns-images.ts が該当投稿の文字潰れを指摘しない] [起票:2026-09-23] [期日:2026-09-25]
+
+- **owner**: instagram-strategist (再レンダー・R2 差し替え) / sns-renderer
+- **実測 (2026-09-23・週次 SNS 画像確認の初回)**: 白抜き見出しの「何」「稿」「字」「象」「徴」「係」「道」などの内側が埋まり、別の字に見える。原因は見出し書体 Dela Gothic One (400 の単一ウェイト) への太字指定で合成された疑似太字。コードは `15103fcaf` (2026-09-23 18:09 JST) の `IG_HEADLINE_STYLE` で全テンプレートとも直っているが、R2 の画像はその直前 (18:04〜18:05 JST) に上げたもので古い。
+- **対象 (予約日時順)**: 2026-09-25 19:00 `compare-carousel/13000-vs-27000` (4 枚目) / 09-26 19:00 `area-carousel/01000` (全 5 枚) / 09-29 19:00 `area-carousel/47000` / 09-30 19:00 `correlation…/dual-income-household-ratio--floor-area-per-dwelling-owner` (3・4 枚目)。初回の別の実行では `miso-consumption-quantity` (09-27) と `sake-consumption-expenditure` (10-01) も挙がったので、同じ時刻以前に上げた素材はすべて確認する。
+- **次**: 対象の props で現行コードから再レンダーし、`sns/<domain>/<content_key>/instagram/stills/` を差し替える (予約ファイルの slides 名は変えない)。差し替え後に `review-sns-images.ts` を再実行して指摘が消えることを確認する。
+- **停止条件**: 画像以外 (本文・予約時刻・台帳) は変えない。投稿日時までに直せない場合は予約から外すかをオーナーに確認する。
+- **完了条件**: 対象の全スライドで見出しの字が正しく読め、週次 SNS 画像確認が該当投稿を指摘しない。
+
 ### [MAP-BASEMAP-APIKEY-01] ランキング等の地図の背景に CARTO の「API KEY REQUIRED」透かしが全面に出る
 
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:curl -s https://stats47.jp/tiles/light_all/5/28/12.png の画像に透かしが無い] [起票:2026-09-23]
@@ -44,7 +55,7 @@ updated: 2026-09-21
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:check -- --base-url http://localhost:3100 --all で theme の clipped_text が 0] [起票:2026-09-23]
 
 - **owner**: theme-ui-manager
-- **実測 (2026-09-23・本番・幅 390/412px)**: `/themes/population-dynamics` の地図で、出典表記 `.leaflet-control-attribution` (「Leaflet | 国土地理院」) の上端 12415px が、地図を包む `div.h-[360px] lg:h-[400px] overflow-hidden` の下端 12392px より下にあり、切り取られて見えない。地図本体が包みより背が高い。国土地理院タイルは出典表示が利用条件なので、表示崩れではなく条件違反になりうる。週次 page-quality の `clipped_text` が検出する (地図の遅延描画のため回によって検出されないことがある)。
+- **実測 (2026-09-23・本番・幅 390/412/640/768/992px。1024px 以上は `lg:h-[400px]` で起きない)**: `/themes/population-dynamics` の地図で、出典表記 `.leaflet-control-attribution` (「Leaflet | 国土地理院」) の上端 12415px が、地図を包む `div.h-[360px] lg:h-[400px] overflow-hidden` の下端 12392px より下にあり、切り取られて見えない。地図本体が包みより背が高い。国土地理院タイルは出典表示が利用条件なので、表示崩れではなく条件違反になりうる。週次 page-quality の `clipped_text` が検出する (地図の遅延描画のため回によって検出されないことがある)。
 - **次**: 包みの高さと Leaflet コンテナの高さを揃えるか、出典を包みの内側に収める。他の地図 (ranking・geo・areas) も同じ包みを使っていないか確認する。
 - **完了条件**: スマホ幅と PC 幅で出典表記が地図内に見え、代表 URL 検査の `clipped_text` が 0。
 
@@ -718,14 +729,14 @@ updated: 2026-09-21
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [CAROUSEL-ARROW-OVERLAP-01] ホーム・カテゴリのカルーセルの矢印ボタンがカードの数値に重なる (スマホ)
+### [CAROUSEL-ARROW-OVERLAP-01] ホーム・カテゴリのカルーセルの矢印ボタンがカードの数値に重なる (全幅)
 
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:代表 URL 検査の overlapping_tap_targets が home / category で 0] [起票:2026-09-23]
 
 - **owner**: site-ux-manager
-- **実測 (2026-09-23・本番・幅 412px)**: `/` の「注目のランキング」と `/category/population` のカードで、左右の矢印ボタンがカードの上に重なり、1 位の値 (例「19,938人」) の一部を隠している。矢印をタップしようとしてカードを開く/その逆の誤タップも起きうる。週次 page-quality の `overlapping_tap_targets` が検出する。
-- **次**: スマホ幅では矢印をカードの外 (余白) に出すか、非表示にしてスワイプに任せる。
-- **完了条件**: スマホ幅で矢印がカードの文字に重ならず、代表 URL 検査の `overlapping_tap_targets` が home / category で 0。
+- **実測 (2026-09-23・本番)**: `/` の「注目のランキング」と `/category/population` のカードで、左右の矢印ボタンがカードの上に重なり、1 位の値 (例「19,938人」) の一部を隠している。ホームは 390〜1920px の 7 幅すべてで重なりを 3 件ずつ検出 (週次スクショ検査の幅別検査)。矢印をタップしようとしてカードを開く/その逆の誤タップも起きうる。週次 page-quality の `overlapping_tap_targets` が検出する。
+- **次**: 矢印をカードの外 (余白) に出すか、タッチ端末では非表示にしてスワイプに任せる。
+- **完了条件**: 全幅で矢印がカードの文字に重ならず、代表 URL 検査の `overlapping_tap_targets` と `responsive_layout_issues` が home / category で 0。
 
 ### [AREA-SPECIALTY-IMAGES-01] 都道府県ページの特産品画像が未生成で頭文字タイルのまま
 
