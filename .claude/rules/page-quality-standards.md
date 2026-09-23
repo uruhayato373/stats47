@@ -24,9 +24,33 @@ paths:
    既知違反が代表 URL に乗る)、PR #974 で 5 連続失敗・#977 でも赤になった。PR 必須へ戻すのは、R2 を固定
    fixture に差し替えて決定的にできたときだけ (`CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`)。
 2. **週次 (全件)**: `npm run page-quality:audit-weekly` が `sitemap.xml` から公開対象URLを列挙し
-   (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析だけを行う
-   (ブラウザ計測はコストが見合わないため対象外)。`page-quality-audit-weekly.yml` が実行し、
+   (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析を行う。
+   `page-quality-audit-weekly.yml` が `--concurrency 8 --skip-rsc --browser-representative` で実行し、
    error違反があれば `page-quality-alert,auto-generated` ラベルでIssueを起票する。
+   - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`) と空の見出し (`empty_headings`)
+   - **代表URL 11件だけブラウザ**: 文字の切れ (`clipped_text`)・タップ要素の重なり (`overlapping_tap_targets`)・
+     axe-core の WCAG A/AA critical/serious 規則数 (`a11y_violations`)。全URLをブラウザで開くのはコストが見合わない
+   - **RSC は全件では測らない** (`--skip-rsc`): RSC はキャッシュされず 1 件ごとにサーバー描画する
+     (実測 0.5〜3.7 秒/件)。2026-09-19 の初回は RSC 込み並列 4 で 45 分の制限内に 1,200/6,237 URL しか進まず
+     打ち切られた。RSC 抜き並列 8 は 800 URL 122 秒 (全件見積 15 分)。RSC は代表URL検査で測る
+
+## UI 検査の判定 (誤検知を出さないための除外)
+
+実装は `lib/measure-static.ts` (静的) / `lib/check-images.ts` (画像) / `lib/ui-probe.ts` (ブラウザ)。
+除外条件はいずれも 2026-09-23 に本番で誤検知として実測したもので、各条件を外すとテストが落ちる
+(`__tests__/ui-checks.test.mjs`)。
+
+- **画像切れの対象は自サイトと R2 の `<img>` だけ**。ASP の計測ピクセルを取得すると広告の表示回数を水増しするので
+  外部ホストは叩かない。`<picture><source>` はブログ図のスマホ版で、未移行の旧記事は 404 だが
+  `ResponsiveArticleImage` が PC 版へ戻すので対象外 (規約で許容済み)。
+- **代替表示がある画像の欠落は `degraded_images` (warning)**。特産品画像は `SpecialtyImage` が頭文字タイルへ
+  切り替える。代替の実装を変えたら `check-images.ts` の `FALLBACK_IMAGE_PATTERNS` も直す。
+- 空の見出しから読み込み中の仮枠 (`animate-pulse`) を除く (後から中身が差し込まれる)。
+- 文字の切れは、枠の外へ**文字**が出ている場合だけ数える (地図タイルのはみ出しを除く)。ellipsis / line-clamp は意図した省略。
+- タップ要素の重なりから、固定表示 (fixed/sticky。同意バナー等)、親に切り取られて見えない部分、
+  閉じた `<details>` の中身を除く。折り返したインラインリンクは行ごとの矩形で比べる。
+- ブラウザ検査は読み込み完了とフォント適用を待ってから測る (CSS 適用前は PC 用サイドバーが見えている扱いになる)。
+- 関数を `page.evaluate` へそのまま渡すと tsx が差し込む `__name` で落ちるので、`evaluateLayoutIssues` が文字列化して評価する。
 
 ## 判定
 

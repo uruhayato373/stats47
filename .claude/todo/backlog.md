@@ -21,6 +21,15 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [THEME-MAP-ATTRIBUTION-CLIP-01] テーマページの地図で国土地理院・Leaflet の出典表記が枠外に切れて見えない
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:check -- --base-url http://localhost:3100 --all で theme の clipped_text が 0] [起票:2026-09-23]
+
+- **owner**: theme-ui-manager
+- **実測 (2026-09-23・本番・幅 390/412px)**: `/themes/population-dynamics` の地図で、出典表記 `.leaflet-control-attribution` (「Leaflet | 国土地理院」) の上端 12415px が、地図を包む `div.h-[360px] lg:h-[400px] overflow-hidden` の下端 12392px より下にあり、切り取られて見えない。地図本体が包みより背が高い。国土地理院タイルは出典表示が利用条件なので、表示崩れではなく条件違反になりうる。週次 page-quality の `clipped_text` が検出する (地図の遅延描画のため回によって検出されないことがある)。
+- **次**: 包みの高さと Leaflet コンテナの高さを揃えるか、出典を包みの内側に収める。他の地図 (ranking・geo・areas) も同じ包みを使っていないか確認する。
+- **完了条件**: スマホ幅と PC 幅で出典表記が地図内に見え、代表 URL 検査の `clipped_text` が 0。
+
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --limit 1 --dry-run] [起票:2026-09-23] [期日:2026-10-20]
@@ -690,6 +699,33 @@ updated: 2026-09-21
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [CAROUSEL-ARROW-OVERLAP-01] ホーム・カテゴリのカルーセルの矢印ボタンがカードの数値に重なる (スマホ)
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:代表 URL 検査の overlapping_tap_targets が home / category で 0] [起票:2026-09-23]
+
+- **owner**: site-ux-manager
+- **実測 (2026-09-23・本番・幅 412px)**: `/` の「注目のランキング」と `/category/population` のカードで、左右の矢印ボタンがカードの上に重なり、1 位の値 (例「19,938人」) の一部を隠している。矢印をタップしようとしてカードを開く/その逆の誤タップも起きうる。週次 page-quality の `overlapping_tap_targets` が検出する。
+- **次**: スマホ幅では矢印をカードの外 (余白) に出すか、非表示にしてスワイプに任せる。
+- **完了条件**: スマホ幅で矢印がカードの文字に重ならず、代表 URL 検査の `overlapping_tap_targets` が home / category で 0。
+
+### [AREA-SPECIALTY-IMAGES-01] 都道府県ページの特産品画像が未生成で頭文字タイルのまま
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:週次 page-quality の degraded_images が prefecture-detail で 0] [起票:2026-09-23]
+
+- **owner**: area-curator (対象の確定) / image-prompt-curator (画像)
+- **実測 (2026-09-23)**: 600 URL の試運転で 12 県・21 枚の `app/areas/<code>/specialty/*.webp` が R2 で 404 (例: 07000 nameko / 10000 brix-nine・aka-imo / 12000 tomisato-suika・shiro-takenoko / 22000 midori-mai・kajiki / 24000 ise-hijiki・ao-sanori)。画面は `SpecialtyImage` が頭文字タイルに切り替えるので壊れては見えないが、写真が出ていない。全件の件数は次回の週次監査の `degraded_images` で確定する。
+- **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
+- **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
+
+### [A11Y-SERIOUS-01] 代表ページに axe の critical / serious 違反が残る
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:代表 URL 検査の a11y_violations が 0] [起票:2026-09-23]
+
+- **owner**: site-ux-manager (横断) / ranking-ui-manager / theme-ui-manager
+- **実測 (2026-09-23・本番・幅 412px・axe-core WCAG 2 A/AA)**: `/ranking/total-population` に button-name (critical・1 箇所)・color-contrast (serious・16 箇所)・nested-interactive (serious・1 箇所)、`/themes/population-dynamics` に color-contrast (serious・9 箇所)・scrollable-region-focusable (serious・2 箇所)、`/survey/census` に button-name (critical・1 箇所)。
+- **次**: 名前の無いボタン (アイコンだけのボタン) に `aria-label` を付けるのを先に直す。色のコントラストは共通トークンの問題か個別の文字色かを切り分けてから直す。
+- **完了条件**: 代表 URL 検査の `a11y_violations` が 0 (または除外の根拠を規約に記録)。
 
 ### [METRIC-EMPLOYED-OUTSIDE-PREF-YEAR-01] 県外就職者比率の subtitle「〜2020年」と最新値 2024 年が食い違う
 

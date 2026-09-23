@@ -186,6 +186,18 @@ export function writeLatestMarkdown(run: AuditRun): void {
     lines.push("");
   }
 
+  const withFindings = run.results.filter((r) => (r.ui_findings ?? []).length > 0);
+  if (withFindings.length > 0) {
+    lines.push("## UI 指摘の場所");
+    lines.push("");
+    for (const r of withFindings.slice(0, 50)) {
+      lines.push(`- \`${r.path}\``);
+      for (const finding of r.ui_findings ?? []) lines.push(`  - ${finding.replace(/\|/g, "\\|")}`);
+    }
+    if (withFindings.length > 50) lines.push(`- ほか ${withFindings.length - 50} URL (latest.json の ui_findings を参照)`);
+    lines.push("");
+  }
+
   writeFileSync(LATEST_MD, lines.join("\n"), "utf-8");
 }
 

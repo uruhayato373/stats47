@@ -11,6 +11,7 @@
  */
 import { affectedTemplates, PAGE_TEMPLATES } from "./templates";
 import { auditUrl } from "./lib/audit-url";
+import { checkImages } from "./lib/check-images";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
 import { changedFilesSince, currentCommitSha } from "./lib/git-diff";
 import { evaluateAll, loadBudgets } from "./lib/thresholds";
@@ -92,6 +93,8 @@ async function main() {
   } finally {
     await browserSession?.close();
   }
+
+  await checkImages(results);
 
   const budgets = loadBudgets();
   const date = generatedAt.slice(0, 10);

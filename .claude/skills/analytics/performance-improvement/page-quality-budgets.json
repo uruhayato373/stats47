@@ -30,6 +30,12 @@
     { "page_type": "all", "metric_key": "cls", "comparison": "absolute", "threshold": 0.25, "operator": "<=", "severity": "warning" },
     { "page_type": "all", "metric_key": "inp_ms", "comparison": "absolute", "threshold": 500, "operator": "<=", "severity": "warning" },
     { "page_type": "all", "metric_key": "ttfb_ms", "comparison": "absolute", "threshold": 1500, "operator": "<=", "severity": "warning" },
+    { "page_type": "all", "metric_key": "broken_images", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "error", "note": "自サイト/R2 の画像が 4xx/5xx。通信失敗は数えない (未確認として件数だけ出す)" },
+    { "page_type": "all", "metric_key": "degraded_images", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "画面側の代替表示がある画像の欠落 (特産品画像は頭文字タイルに切り替わる)。壊れては見えないが本来の画像が出ていない" },
+    { "page_type": "all", "metric_key": "empty_headings", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "文字も alt も aria-label も無い見出し。読み込み中の仮枠 (animate-pulse) は除外" },
+    { "page_type": "all", "metric_key": "clipped_text", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "代表URLのみ (ブラウザ)。overflow hidden で文字が切れている要素。ellipsis / line-clamp は除外" },
+    { "page_type": "all", "metric_key": "overlapping_tap_targets", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "代表URLのみ (ブラウザ)。タップできる要素どうしが小さい方の面積の25%以上重なる" },
+    { "page_type": "all", "metric_key": "a11y_violations", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "代表URLのみ (ブラウザ)。axe-core WCAG 2 A/AA の critical/serious 規則数" },
 
     { "page_type": "prefecture-detail", "metric_key": "dom_nodes", "comparison": "absolute", "threshold": 3500, "operator": "<=", "severity": "warning", "note": "2026-09 area-all-optimizationでDOM削減対応後の目安。実測で調整する" },
     { "page_type": "ranking", "metric_key": "html_bytes", "comparison": "absolute", "threshold": 700000, "operator": "<=", "severity": "warning", "note": "PERF-RANKING-PAYLOAD-01対応後の目安。実測で調整する" }

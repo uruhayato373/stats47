@@ -55,7 +55,13 @@ export type MetricKey =
   | "console_errors"
   | "page_errors"
   | "mobile_horizontal_scroll"
-  | "small_tap_targets";
+  | "small_tap_targets"
+  | "broken_images"
+  | "degraded_images"
+  | "empty_headings"
+  | "clipped_text"
+  | "overlapping_tap_targets"
+  | "a11y_violations";
 
 export type Comparison = "absolute" | "delta_pct";
 export type Operator = "<=" | ">=" | "<" | ">";
@@ -98,6 +104,10 @@ export interface PageAuditResult {
   /** JSON-LD の @type 別出現数 (PropertyValue 等)。 */
   jsonld_type_counts: Record<string, number>;
   jsonld_errors: string[];
+  /** UI 検査の指摘 (壊れた画像 URL・切れた要素・axe の規則 ID 等)。違反の場所を特定するため。 */
+  ui_findings?: string[];
+  /** 画像切れ検査の入力。検査後に削除し、スナップショットには残さない。 */
+  image_urls?: string[];
 }
 
 export interface Violation {

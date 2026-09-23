@@ -2,10 +2,16 @@
  * 週次の全URL監査。sitemap.xmlから公開対象URLを列挙し、並列数を制限して巡回する。
  * audit-site-links.mjs / smoke-test-routes.sh と同じく本番へ直接アクセスする
  * (5000ページ規模をローカルbuildで賄うのはコストが見合わない)。
- * ブラウザ計測(LCP/CLS/INP等)は重いため既定では静的解析のみ (--with-browser で追加、通常は使わない)。
+ * ブラウザ計測(LCP/CLS/INP等)は重いため既定では静的解析のみ (--with-browser で全URLに追加、通常は使わない)。
+ * --browser-representative はテンプレートごとの代表URLだけをブラウザで開き、文字の切れ・タップ要素の重なり・
+ * アクセシビリティ (axe) を追加で見る (週次の既定)。画像切れは全URLで確認する。
  *
  * Usage:
- *   tsx .claude/scripts/page-quality/run-full.ts --base-url https://stats47.jp [--concurrency 4] [--with-browser] [--runs 3] [--limit 200]
+ * --skip-rsc は全URLで RSC payload の取得を省く (RSC は毎回サーバー描画で 1 件 0.5〜3.7 秒かかり、
+ * 2026-09-19 の週次は 45 分で 1,200/6,237 URL しか進まなかった)。代表URLのブラウザ検査では RSC も測る。
+ *
+ * Usage:
+ *   tsx .claude/scripts/page-quality/run-full.ts --base-url https://stats47.jp [--concurrency 4] [--with-browser | --browser-representative] [--skip-rsc] [--runs 3] [--limit 200]
  *
  * Exit code:
  *   0 = error違反なし
@@ -13,6 +19,8 @@
  *   2 = 入力不備・実行時エラー
  */
 import { auditUrl } from "./lib/audit-url";
+import { checkImages } from "./lib/check-images";
+import { PAGE_TEMPLATES } from "./templates";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
 import { currentCommitSha } from "./lib/git-diff";
 import { enumerateAllUrls } from "./lib/enumerate-urls";
@@ -40,6 +48,8 @@ function parseArgs() {
     baseUrl: get("--base-url") ?? "http://localhost:3100",
     concurrency: Number(get("--concurrency") ?? "4"),
     withBrowser: args.includes("--with-browser"),
+    browserRepresentative: args.includes("--browser-representative"),
+    skipRsc: args.includes("--skip-rsc"),
     browserRuns,
     limit: get("--limit") ? Number(get("--limit")) : undefined,
   };
@@ -60,6 +70,30 @@ async function runWithConcurrency<T, R>(
   }
   await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker));
   return results;
+}
+
+/** 代表URLだけブラウザで開き、静的解析の結果へ UI 指標を足す。代表URLが sitemap に無ければ追加する。 */
+async function measureRepresentativesInBrowser(
+  results: PageAuditResult[],
+  baseUrl: string,
+  runs: number
+): Promise<void> {
+  const session = await createBrowserMeasurementSession();
+  try {
+    for (const template of PAGE_TEMPLATES) {
+      const browserResult = await auditUrl(baseUrl, template.representativeUrl, template.key, {
+        withBrowser: true,
+        browserSession: session,
+        browserRuns: runs,
+      });
+      const index = results.findIndex((r) => r.path === template.representativeUrl);
+      if (index >= 0) results[index] = browserResult;
+      else results.push(browserResult);
+      console.log(`  ブラウザ検査: ${template.key} ${template.representativeUrl}`);
+    }
+  } finally {
+    await session.close();
+  }
 }
 
 async function main() {
@@ -86,6 +120,7 @@ async function main() {
         withBrowser: opts.withBrowser,
         browserSession,
         browserRuns: opts.browserRuns,
+        measureRsc: !opts.skipRsc,
       });
       done += 1;
       if (done % 200 === 0) console.log(`  ${done}/${urls.length}`);
@@ -94,6 +129,15 @@ async function main() {
   } finally {
     await browserSession?.close();
   }
+
+  if (opts.browserRepresentative && !opts.withBrowser) {
+    await measureRepresentativesInBrowser(results, opts.baseUrl, opts.browserRuns);
+  }
+
+  const images = await checkImages(results);
+  console.log(
+    `[page-quality] 画像確認: ${images.checked} 件 / 壊れ ${images.broken} / 通信失敗で未確認 ${images.unverified}`
+  );
 
   const budgets = loadBudgets();
   const date = generatedAt.slice(0, 10);

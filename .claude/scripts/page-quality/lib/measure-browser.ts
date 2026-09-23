@@ -1,6 +1,7 @@
 import { chromium } from "playwright";
 
 import type { MetricValue } from "../types";
+import { probeUi } from "./ui-probe";
 
 export interface BrowserMeasurement {
   lcp_ms: MetricValue;
@@ -13,6 +14,10 @@ export interface BrowserMeasurement {
   page_errors: number;
   mobile_horizontal_scroll: boolean;
   small_tap_targets: number;
+  clipped_text: MetricValue;
+  overlapping_tap_targets: MetricValue;
+  a11y_violations: MetricValue;
+  ui_findings: string[];
 }
 
 const unmeasured = (reason: string): MetricValue => ({ value: null, reason });
@@ -82,6 +87,10 @@ function launchFailure(reason: string): BrowserMeasurement {
     page_errors: 0,
     mobile_horizontal_scroll: false,
     small_tap_targets: 0,
+    clipped_text: unmeasured(reason),
+    overlapping_tap_targets: unmeasured(reason),
+    a11y_violations: unmeasured(reason),
+    ui_findings: [],
   };
 }
 
@@ -110,6 +119,7 @@ async function measureWithBrowser(
     let navigationFailed: string | null = null;
     let horizontalScroll = false;
     let smallTapTargets = 0;
+    let ui: Awaited<ReturnType<typeof probeUi>> | null = null;
 
     for (let i = 0; i < runs; i++) {
       const page = await context.newPage();
@@ -167,6 +177,7 @@ async function measureWithBrowser(
           });
           horizontalScroll = layout.scroll;
           smallTapTargets = layout.small;
+          ui = await probeUi(page);
         }
       } catch (e) {
         navigationFailed = (e as Error).message;
@@ -188,6 +199,10 @@ async function measureWithBrowser(
         page_errors: pageErrors,
         mobile_horizontal_scroll: horizontalScroll,
         small_tap_targets: smallTapTargets,
+        clipped_text: ui?.clipped_text ?? unmeasured(reason),
+        overlapping_tap_targets: ui?.overlapping_tap_targets ?? unmeasured(reason),
+        a11y_violations: ui?.a11y_violations ?? unmeasured(reason),
+        ui_findings: ui?.ui_findings ?? [],
       };
     }
 
@@ -207,6 +222,10 @@ async function measureWithBrowser(
       page_errors: pageErrors,
       mobile_horizontal_scroll: horizontalScroll,
       small_tap_targets: smallTapTargets,
+      clipped_text: ui?.clipped_text ?? unmeasured("first navigation failed before UI probe"),
+      overlapping_tap_targets: ui?.overlapping_tap_targets ?? unmeasured("first navigation failed before UI probe"),
+      a11y_violations: ui?.a11y_violations ?? unmeasured("first navigation failed before UI probe"),
+      ui_findings: ui?.ui_findings ?? [],
     };
   } finally {
     await context.close();

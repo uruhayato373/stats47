@@ -19,9 +19,37 @@ export interface StaticMeasurement {
   jsonld_errors: string[];
   ad_slots: number;
   ad_duplicate_count: number;
+  empty_headings: number;
+  image_urls: string[];
 }
 
 const unmeasured = (reason: string): MetricValue => ({ value: null, reason });
+
+// 画像切れ検査の対象は自サイトと R2 公開 URL の画像だけ。ASP の計測ピクセルを取得すると
+// 広告の表示回数を水増しするので、外部ホストの画像は検査しない。
+const R2_PUBLIC_HOST = new URL(process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp").host;
+
+function firstPartyImageUrl(raw: string, baseUrl: string): string | null {
+  const trimmed = raw.trim();
+  if (!trimmed || trimmed.startsWith("data:")) return null;
+  try {
+    const u = new URL(trimmed, baseUrl);
+    if (u.pathname.startsWith("/_next/")) return null;
+    const siteHost = new URL(baseUrl).host;
+    if (u.host !== siteHost && u.host !== R2_PUBLIC_HOST) return null;
+    u.hash = "";
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
+function srcsetUrls(srcset: string): string[] {
+  return srcset
+    .split(",")
+    .map((candidate) => candidate.trim().split(/\s+/)[0])
+    .filter(Boolean);
+}
 
 function normalizeHref(href: string, baseUrl: string): string {
   try {
@@ -117,6 +145,30 @@ export function analyzeHtml(html: string, baseUrl: string): StaticMeasurement {
     0
   );
 
+  const imageUrls = new Set<string>();
+  $("img[src]").each((_, el) => {
+    const url = firstPartyImageUrl($(el).attr("src") ?? "", baseUrl);
+    if (url) imageUrls.add(url);
+  });
+  // <picture><source> は対象外。ブログ図のスマホ版 (-mobile.svg) は未移行の旧記事で 404 になるが、
+  // ResponsiveArticleImage が onError で PC 版へ戻すので読者には画像切れにならない (規約で許容済み)。
+  $("img[srcset]").each((_, el) => {
+    for (const raw of srcsetUrls($(el).attr("srcset") ?? "")) {
+      const url = firstPartyImageUrl(raw, baseUrl);
+      if (url) imageUrls.add(url);
+    }
+  });
+
+  // 読み込み中の仮枠 (animate-pulse) は後から中身が差し込まれるので空として数えない。
+  const emptyHeadings = $("h1, h2, h3, h4, h5, h6").filter((_, el) => {
+    const heading = $(el);
+    if (heading.text().trim() !== "") return false;
+    if ((heading.attr("aria-label") ?? "").trim() !== "") return false;
+    if (heading.find("img[alt]").filter((_, img) => ($(img).attr("alt") ?? "").trim() !== "").length > 0) return false;
+    if (heading.find(".animate-pulse").length > 0 || heading.hasClass("animate-pulse")) return false;
+    return true;
+  }).length;
+
   return {
     http_status: 0, // 呼び出し側で埋める
     html_bytes: 0, // 呼び出し側で埋める
@@ -133,6 +185,8 @@ export function analyzeHtml(html: string, baseUrl: string): StaticMeasurement {
     jsonld_errors: jsonldErrors,
     ad_slots: adSlots,
     ad_duplicate_count: adDuplicateCount,
+    empty_headings: emptyHeadings,
+    image_urls: [...imageUrls],
   };
 }
 
@@ -165,4 +219,5 @@ export const STATIC_METRIC_KEYS: MetricKey[] = [
   "jsonld_syntax_errors",
   "ad_slots",
   "ad_duplicate_count",
+  "empty_headings",
 ];

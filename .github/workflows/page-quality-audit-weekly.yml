@@ -26,7 +26,7 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -42,11 +42,14 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
+      - name: 🎭 Install Chromium (代表URLのUI検査用)
+        run: npx playwright install --with-deps chromium
+
       - name: 🔍 Run full page-quality audit (production)
         id: audit
         run: |
           set +e
-          npm run page-quality:audit-weekly -- --base-url https://stats47.jp --concurrency 4 2>&1 | tee /tmp/page-quality-audit.log
+          npm run page-quality:audit-weekly -- --base-url https://stats47.jp --concurrency 8 --skip-rsc --browser-representative 2>&1 | tee /tmp/page-quality-audit.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       - name: 🧹 Prune old snapshots
@@ -75,7 +78,7 @@ jobs:
           {
             echo "## ページ品質 週次監査 ($DATE)"
             echo ""
-            echo "HTML/RSC肥大化・DOM過剰・リンク重複・広告重複・構造化データ異常のerror違反を検出しました。"
+            echo "HTML/RSC肥大化・DOM過剰・リンク重複・広告重複・構造化データ異常・画像切れのerror違反を検出しました。"
             echo "詳細は管理コンソール \`/quality/page-audit\` または以下を参照。"
             echo ""
             echo '```'
