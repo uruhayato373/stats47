@@ -21,6 +21,44 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [IG-CAROUSEL-GLYPH-SMEAR-01] 予約中の Instagram カルーセルの見出しが疑似太字で潰れた古い画像のまま
+
+タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/sns/review-sns-images.ts が該当投稿の文字潰れを指摘しない] [起票:2026-09-23] [期日:2026-09-25]
+
+- **owner**: instagram-strategist (再レンダー・R2 差し替え) / sns-renderer
+- **実測 (2026-09-23・週次 SNS 画像確認の初回)**: 白抜き見出しの「何」「稿」「字」「象」「徴」「係」「道」などの内側が埋まり、別の字に見える。原因は見出し書体 Dela Gothic One (400 の単一ウェイト) への太字指定で合成された疑似太字。コードは `15103fcaf` (2026-09-23 18:09 JST) の `IG_HEADLINE_STYLE` で全テンプレートとも直っているが、R2 の画像はその直前 (18:04〜18:05 JST) に上げたもので古い。
+- **対象 (予約日時順)**: 2026-09-25 19:00 `compare-carousel/13000-vs-27000` (4 枚目) / 09-26 19:00 `area-carousel/01000` (全 5 枚) / 09-29 19:00 `area-carousel/47000` / 09-30 19:00 `correlation…/dual-income-household-ratio--floor-area-per-dwelling-owner` (3・4 枚目)。初回の別の実行では `miso-consumption-quantity` (09-27) と `sake-consumption-expenditure` (10-01) も挙がったので、同じ時刻以前に上げた素材はすべて確認する。
+- **次**: 対象の props で現行コードから再レンダーし、`sns/<domain>/<content_key>/instagram/stills/` を差し替える (予約ファイルの slides 名は変えない)。差し替え後に `review-sns-images.ts` を再実行して指摘が消えることを確認する。
+- **停止条件**: 画像以外 (本文・予約時刻・台帳) は変えない。投稿日時までに直せない場合は予約から外すかをオーナーに確認する。
+- **完了条件**: 対象の全スライドで見出しの字が正しく読め、週次 SNS 画像確認が該当投稿を指摘しない。
+
+### [MAP-BASEMAP-APIKEY-01] ランキング等の地図の背景に CARTO の「API KEY REQUIRED」透かしが全面に出る
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:curl -s https://stats47.jp/tiles/light_all/5/28/12.png の画像に透かしが無い] [起票:2026-09-23]
+
+- **owner**: ranking-ui-manager (地図) / site-ux-manager (横断)
+- **実測 (2026-09-23)**: 週次 UI 確認の agent がランキング地図のスクショから検出。`https://stats47.jp/tiles/light_all/5/28/12.png` (プロキシ `apps/web/src/app/tiles/[theme]/[z]/[x]/[ypng]/route.ts`) も、`https://a.basemaps.cartocdn.com/light_all/5/28/12.png` を Referer 有無どちらで直接取得しても、画像に「API KEY REQUIRED / carto.com/basemaps/apikey」の透かしが入る (HTTP 200・6,407 bytes)。CARTO 側がキー無しの basemap 配信に透かしを入れるようになった。全ランキングページの地図と、同じタイルを使う他の地図が対象。
+- **次**: CARTO の API キーを取得して使うか (利用条件・費用の確認はオーナー)、出典条件の明確な別タイル (国土地理院タイル等。テーマページで既に使用) へ切り替えるかを決め、プロキシの上流を差し替える。Cloudflare のエッジキャッシュに透かし入りタイルが残るので切替後にパージする。
+- **完了条件**: 代表ランキングページの地図に透かしが出ず、出典表記が利用条件どおり表示される。
+
+### [GEO-PREVIEW-MISSING-01] /geo の分析カードで地図プレビューがすべて「取得できませんでした」
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:週次 UI 確認の agent 指摘に geo-analysis の地図プレビュー欠落が出ない] [起票:2026-09-23]
+
+- **owner**: geo-analysis-curator
+- **実測 (2026-09-23・本番・スマホ/PC)**: `/geo` の 6 分析カードすべてで、地図プレビューの位置に「地図プレビューを取得できませんでした」と出ている (週次 UI 確認のスクショ `state/page-quality/screenshots/2026-09-23/geo-analysis-mobile.png`)。ページの主要な見どころが全カードで欠けている。
+- **次**: プレビュー画像の取得元 (R2 のキーと生成処理) を特定し、欠落の原因を確かめてから直す。
+- **完了条件**: 6 カードすべてで地図プレビューが表示される。
+
+### [THEME-MAP-ATTRIBUTION-CLIP-01] テーマページの地図で国土地理院・Leaflet の出典表記が枠外に切れて見えない
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:check -- --base-url http://localhost:3100 --all で theme の clipped_text が 0] [起票:2026-09-23]
+
+- **owner**: theme-ui-manager
+- **実測 (2026-09-23・本番・幅 390/412/640/768/992px。1024px 以上は `lg:h-[400px]` で起きない)**: `/themes/population-dynamics` の地図で、出典表記 `.leaflet-control-attribution` (「Leaflet | 国土地理院」) の上端 12415px が、地図を包む `div.h-[360px] lg:h-[400px] overflow-hidden` の下端 12392px より下にあり、切り取られて見えない。地図本体が包みより背が高い。国土地理院タイルは出典表示が利用条件なので、表示崩れではなく条件違反になりうる。週次 page-quality の `clipped_text` が検出する (地図の遅延描画のため回によって検出されないことがある)。
+- **次**: 包みの高さと Leaflet コンテナの高さを揃えるか、出典を包みの内側に収める。他の地図 (ranking・geo・areas) も同じ包みを使っていないか確認する。
+- **完了条件**: スマホ幅と PC 幅で出典表記が地図内に見え、代表 URL 検査の `clipped_text` が 0。
+
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --limit 1 --dry-run] [起票:2026-09-23] [期日:2026-10-20]
@@ -399,31 +437,6 @@ updated: 2026-09-21
 - **停止条件**: サイト・口座帰属を確定できなければ停止し、不在を未提携や終了と推測しない。新規・重複申請、認証回避、成果リンクへの確認クリック、本番変更・deploy・R2 pushは禁止。既存在庫を未確認のまま削除しない。
 - **完了条件**: 各対象の状態・在庫判断を実機証拠へ結び付け、必要なローカル修正と対象の検証が完了する。不明が残る間はカードを維持し、人間作業またはガード復旧による再開条件を明記する。
 
-### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
-
-タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:.github/workflows/generate-article-charts.yml の run で検出 slug 数 > 0] [起票:2026-08-31]
-
-- **owner**: Claude Code
-- **症状**: `generate-article-charts.yml` の PR ゲートが、記事を何本追加しても
-  空の結果表を出して success で終わる。PR #872 (ブログ 20 本追加) の run 33444223980 で実測。
-  ログに `fatal: origin/develop...HEAD: no merge base` が出て検出 slug が 0 件になり、
-  ループが 1 回も回らないまま `FAIL=0` で通っている。
-- **原因は 3 つあり、どれか 1 つを直しても 0 件のまま**:
-  1. `git fetch origin "$base" --depth=1` が shallow ref を作るため 3 点ドット diff に
-     merge base が無い。`actions/checkout` は `fetch-depth: 0` なので、この `--depth=1` を
-     外せば解決する。
-  2. `awk -F/ '{print $2}'` がフォルダ名 (`21_ブログ記事原稿`) を出しており slug ではない。
-     パスは `docs/21_ブログ記事原稿/<slug>/...` なので `$3` が正しい。
-  3. git が非 ASCII パスをクォートするため行頭が `"` になり `/^docs\/21_/` が一致しない。
-     `git -c core.quotepath=false diff` が要る。
-- **実測**: 3 つを直した検出は PR #872 の 20 slug を過不足なく返す。その 20 件に対して
-  `generate-article-charts.ts --slug <s> --validate` を実行すると全件 OK なので、
-  この修正で既存の記事が赤くなることはない。
-- **完了条件**: ブログ記事を含む PR で、結果表に対象 slug が行として並ぶこと。
-  あわせて**壊れたチャートを 1 件混ぜて実際に赤くなることを実測する** (全 PASS は
-  「何も見ていない」と区別がつかないため。`unit-semantics-standards.md` §4.5)。
-- **関連**: `QUALITY-GATE-COVERAGE-01` (CI の実効網羅性の親項目)
-
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 
 タグ: [種類:改善] [実行:対話] [起票:2026-08-13]
@@ -716,6 +729,33 @@ updated: 2026-09-21
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CAROUSEL-ARROW-OVERLAP-01] ホーム・カテゴリのカルーセルの矢印ボタンがカードの数値に重なる (全幅)
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:代表 URL 検査の overlapping_tap_targets が home / category で 0] [起票:2026-09-23]
+
+- **owner**: site-ux-manager
+- **実測 (2026-09-23・本番)**: `/` の「注目のランキング」と `/category/population` のカードで、左右の矢印ボタンがカードの上に重なり、1 位の値 (例「19,938人」) の一部を隠している。ホームは 390〜1920px の 7 幅すべてで重なりを 3 件ずつ検出 (週次スクショ検査の幅別検査)。矢印をタップしようとしてカードを開く/その逆の誤タップも起きうる。週次 page-quality の `overlapping_tap_targets` が検出する。
+- **次**: 矢印をカードの外 (余白) に出すか、タッチ端末では非表示にしてスワイプに任せる。
+- **完了条件**: 全幅で矢印がカードの文字に重ならず、代表 URL 検査の `overlapping_tap_targets` と `responsive_layout_issues` が home / category で 0。
+
+### [AREA-SPECIALTY-IMAGES-01] 都道府県ページの特産品画像が未生成で頭文字タイルのまま
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:週次 page-quality の degraded_images が prefecture-detail で 0] [起票:2026-09-23]
+
+- **owner**: area-curator (対象の確定) / image-prompt-curator (画像)
+- **実測 (2026-09-23)**: 600 URL の試運転で 12 県・21 枚の `app/areas/<code>/specialty/*.webp` が R2 で 404 (例: 07000 nameko / 10000 brix-nine・aka-imo / 12000 tomisato-suika・shiro-takenoko / 22000 midori-mai・kajiki / 24000 ise-hijiki・ao-sanori)。画面は `SpecialtyImage` が頭文字タイルに切り替えるので壊れては見えないが、写真が出ていない。全件の件数は次回の週次監査の `degraded_images` で確定する。
+- **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
+- **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
+
+### [A11Y-SERIOUS-01] 代表ページに axe の critical / serious 違反が残る
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:代表 URL 検査の a11y_violations が 0] [起票:2026-09-23]
+
+- **owner**: site-ux-manager (横断) / ranking-ui-manager / theme-ui-manager
+- **実測 (2026-09-23・本番・幅 412px・axe-core WCAG 2 A/AA)**: `/ranking/total-population` に button-name (critical・1 箇所)・color-contrast (serious・16 箇所)・nested-interactive (serious・1 箇所)、`/themes/population-dynamics` に color-contrast (serious・9 箇所)・scrollable-region-focusable (serious・2 箇所)、`/survey/census` に button-name (critical・1 箇所)。
+- **次**: 名前の無いボタン (アイコンだけのボタン) に `aria-label` を付けるのを先に直す。色のコントラストは共通トークンの問題か個別の文字色かを切り分けてから直す。
+- **完了条件**: 代表 URL 検査の `a11y_violations` が 0 (または除外の根拠を規約に記録)。
+
 ### [METRIC-EMPLOYED-OUTSIDE-PREF-YEAR-01] 県外就職者比率の subtitle「〜2020年」と最新値 2024 年が食い違う
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23]
@@ -744,36 +784,6 @@ updated: 2026-09-21
 - **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。
 - **次**: e-Stat の表で cdCat01=100 が実数か率かを確認し、(a) 実数なら title を「はり師数」に直すか人口で割る計算 metric にする、(b) 率の表を指しているなら取得を直す。同じ「人口10万対」を title に持つ metric で値の桁が実数並みのものを一覧にして同時に確認する。
 - **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
-
-### [BUZZ-MAP-PREF-CODE-01] 地図カードの生成スクリプトが都道府県を5桁コードで書き、地図が1県も塗られない
-
-タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-09-23]
-
-- **owner**: sns-renderer
-- **実測 (2026-09-23)**: `.claude/scripts/sns/build-buzz-map-spec.ts` は R2 観測値の `areaCode` (都道府県は `45000` 形式) をそのまま `data.values` のキーに書く。描画側は `apps/remotion/src/features/buzz-map/types.ts:64` のとおり都道府県を2桁 (`45`) で照合するため、`level` が都道府県のとき凡例には件数が出るのに地図は無塗りになる。同日の IG クイズ試作 (焼酎・上位5県) でレンダーし、凡例に「上位5」と出るのに地図が無塗りになることを確認した。試作ではキーを手で2桁に直して回避した。
-- **次**: 都道府県レベルのときだけキーを2桁に正規化する (市区町村の N03_007 5桁は変えない)。都道府県 spec で `data.values` のキーが2桁になることを固定するテストを足す。
-- **完了条件**: 都道府県 top-n spec をレンダーして上位県が塗られ、テストが「5桁キーのまま」の実装で落ちる。
-
-
-### [IG-LEDGER-FROMLOG-01] IG 投稿3件が投稿台帳に未記録のまま残っている
-
-タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/instagram/record-posted.cjs --from-log --dry-run] [起票:2026-09-23]
-
-- **owner**: sns-metrics-sync
-- **実測 (2026-09-23)**: `record-posted.cjs --from-log --dry-run` が `insert 3 / skip 175` を返す。未記録は `ranking/tourism-resource-count`・`ranking/wind-power-plant-count-facility`・`ranking/nuclear-power-plant-count` (7〜8月の量産実験期間の投稿)。台帳 `posts.json` に無い投稿は `/update-sns-metrics` の対象外になり、実績が計測されない。
-- **次**: `--dry-run` を外して実行し、台帳の差分をコミットする。
-- **完了条件**: 同じ dry-run が `insert 0` を返す。
-
-
-### [IG-LEDGER-TESTS-CI-01] IG 台帳・予約投稿のテストを CI で実行する
-
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/ig-ledger-core.test.cjs .claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs] [起票:2026-09-23]
-
-- **owner**: devops-runner
-- **実測 (2026-09-23)**: `ig-ledger-core.test.cjs` と `ig-post-from-schedule.test.cjs` は `package.json` の test スクリプトにも `.github/workflows/` にも名前が出てこない。PR #1008 でカルーセル投稿と `post_type=carousel` の記録を足したが、その回帰を CI が検出できない。
-- **次**: 既存の test スクリプト群 (`test:content-routines` 等と同じ `node --test` 列挙) のどれかに2ファイルを足すか、IG 用スクリプトを新設して `pr-quality-check.yml` から呼ぶ。`scripts/lib/__tests__` の CI 網羅を検査する既存 gate があればそちらへ登録する。
-- **完了条件**: 2ファイルのどちらかを壊した PR で CI が落ちる。
-
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
 
@@ -1048,15 +1058,6 @@ updated: 2026-09-21
 - **再開材料**: 端末内 .local/resource-health/ の計測・掃除・GIS復元台帳、既存 source-inventory/japan-zue/2025-26/source-bundle-manifest.json。Driveの日本国勢図会/2025・2026年版にmanifestと6分割ファイルの存在・非共有・容量を確認し、ローカル1746ファイルのhash一致と全profileのcoverage 100%は検証済み。Drive connectorのバイナリ返却先はsediment URIで、このWindows端末への復元経路は未確立。
 - **停止条件**: 未検証のDrive原本・GIS・WIP・認証profileを削除しない。既存セッションの一括終了やGit履歴リセットで軽量化しない。Node数・メモリはツール稼働を含む瞬間値であり、条件を合わせず削減効果と断定しない。
 - **完了条件**: 再起動後の同条件計測を保存し、参考文献のDrive復元検証と source-vault:check が通る。GISは回収した各対象から保全先と再生成手順が辿れ、保全できないものには保持理由を残す。導入済み予算・定期点検方式は local-environment.md と自動化インベントリを参照する。
-
-### [RULES-DEMOTE-01] 常時読み込みから外した rule の移設と reference 化
-
-タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:npm run docs:check] [起票:2026-09-08]
-
-- **背景**: 2026-09-08 に 41 rule を `paths:` 条件付き読み込みへ切り替えた (常時 10,461 行 → 584 行、DG070-072 で固定)。本文は不変で、内容の置き場が rule として不適切なものが 3 つ残る。
-- **次**: `blog-remediation-loop.md` → `.claude/skills/blog/brushup-blog/reference/`、`data-sqlite-ssot.md` → `packages/database/README.md` (冒頭で doc 12 が優先と宣言済み)、`evidence-based-judgment.md` の「各種 API での最低検証コマンド」節 (~110 行) → 対応 skill の reference。参照元 (agents / skills / rules) を rg で全置換し、`check-agent-skill-consistency.cjs` を通す。
-- **併記判断**: paths rule は subagent 自身の Read でしか載らない。owner agent が担当 rule を明示 Read しているかを同 checker で検査するかを決める。
-- **完了条件**: 3 ファイルの移設先が実在し、CLAUDE.md の表と DG072 が更新後の集合で green。
 
 ### [COCONALA-MEASUREMENT-CONTRACT-01] 14商品の公開後計測を整え改善台帳へ引き渡す
 
@@ -1627,6 +1628,15 @@ updated: 2026-09-21
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [RULES-OWNER-READ-CHECK-01] owner agent が担当 rule を明示 Read しているかを検査するか決める
+
+タグ: [エージェント・SSOT] [種類:意思決定] [実行:対話] [起票:2026-09-23]
+
+- **owner**: オーナー (採否) / Claude Code (採択後に `check-agent-skill-consistency.cjs` へ実装)
+- **背景**: 2026-09-08 に rule を `paths:` 条件付き読み込みへ切り替えたため、rule は **その agent 自身が一致ファイルを Read したときだけ**載る (`docs-vs-issues.md`「rules の読み込み条件」)。owner agent の手順に担当 rule の Read が無いと、subagent は規約を知らないまま作業する。`RULES-DEMOTE-01` (rule 3 本の移設、2026-09-23 完了) で残った判断。
+- **次**: 採るなら、agent frontmatter / 本文から担当 rule を抽出し、手順に `.claude/rules/<name>.md` の Read が無い agent を warn にする。誤検知の出方を全 agent で実測してから error 化を決める。
+- **完了条件**: 採否と理由が決まる。採る場合は checker の検査が既存 agent で誤検知 0 になり、Read を消すと warn が出ることを確認する。
 
 ### [ADMIN-STAT-PILOT-01] 行政資料1業務の統計整理商品を検証し、有料pilotの採否を決める
 

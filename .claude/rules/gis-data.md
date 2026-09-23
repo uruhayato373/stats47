@@ -189,4 +189,4 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 - Geo分析標準/skill: `.claude/rules/geo-analysis-standards.md` / `.claude/skills/gis/build-geo-analysis/SKILL.md`
 - SNS バズ地図での消費 (KSJ topojson → 点プロット/点→自治体カード): `.claude/rules/buzz-map-standards.md` §4 `ksj`/`mlit-dpf` レーン
 - モジュール設計・使い方: `packages/gis/src/mlit-ksj/README.md` / 登録一覧の真実源: `datasets.ts`
-- データ層: `docs/01_技術設計/02_データアーキテクチャ.md` / `.claude/rules/data-sqlite-ssot.md`
+- データ層: `docs/01_技術設計/02_データアーキテクチャ.md` / `packages/database/README.md`

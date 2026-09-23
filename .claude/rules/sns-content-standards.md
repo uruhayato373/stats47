@@ -498,6 +498,26 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 - 削除済み動画を再投稿したい場合は **Remotion で再レンダー**する (素材は再生成可能な派生物)
 - 背景: R2 は無料枠 10GB を超過し課金中 (2026-07 時点 20.65GB)。動画の無制限保持は肥大の主因になる
 
+## 5.6 予約中の投稿画像の週次確認 (2026-09-23〜)
+
+次の 8 日間に予約・下書きがある X / Threads / Instagram 投稿の画像と本文を、毎週日曜 07:30 に Mac の launchd
+(`scripts/scheduled/sns-image-review.sh` → `.claude/scripts/sns/review-sns-images.ts`) が確認する。
+**CI でなく Mac で動かすのは、X / Threads の画像が投稿時にこの Mac から上げていて `.local/r2/sns/` にしか無いため**
+(R2 には Instagram の素材だけがある)。
+
+1. 機械検査: 画像の欠落・Instagram 画像が 1080x1350 か・本文の長さ (X は重み付き 280、Threads 500 字、Instagram 2200 字)
+2. Claude (sonnet・`Read`/`Glob` だけ) が `.claude/prompts/local/sns-image-review.md` に沿って画像と本文を見て、
+   文字の切れ・画像と本文の数値や県名の食い違い・誤字・注記漏れを構造化出力で返す。見せていない投稿を指す指摘は捨てる
+3. 結果を `.local/sns-review/latest.{json,md}` に置き (git・R2 は触らない)、`sns-review-alert` Issue を作成・更新し、
+   指摘が無くなれば閉じる。macOS の通知も出す
+
+リール (動画) は画像確認の対象外として報告に件数を出す。
+**初回 (2026-09-23) で見つかった実例**: 地域・比較・相関カルーセルの白抜き見出しで「何」「稿」「字」などの内側が埋まり
+別の字に見えていた。見出し書体 Dela Gothic One は 400 の単一ウェイトで、太字指定に疑似太字が合成されていた。
+コードは `IG_HEADLINE_STYLE` (`apps/remotion/src/features/ig-series/tokens.ts`) で同日 18:09 に直っていたが、
+予約中の画像はその 5 分前に R2 へ上げたもので古いまま残っていた。**テンプレートを直したら予約中の素材も再レンダーする。**
+手動実行: `npx tsx .claude/scripts/sns/review-sns-images.ts [--days 8] [--no-agent] [--issue]`。
+
 ---
 
 ## 6. 関連

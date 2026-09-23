@@ -12,7 +12,7 @@ primary_agent: x-strategist
 
 > 設計判断: 瞬発力のボトルネックは DB クエリ速度ではなく「①ネタ→指標の発見」「②指標→ビジュアル生成」だった
 > (完全DBレスのまま解決)。動画 (bar-chart-race) は 1 本 10-20 分レンダリングなので**瞬発力トラックから外す**。
-> 静止画 (X / Instagram / note) が本命。関連: `.claude/rules/data-sqlite-ssot.md`(DBレス正典)。
+> 静止画 (X / Instagram / note) が本命。関連: `packages/database/README.md`(DBレス正典)。
 
 ## 前提 (初回/データ更新時のみ)
 

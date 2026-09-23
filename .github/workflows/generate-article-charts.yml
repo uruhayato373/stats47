@@ -35,9 +35,12 @@ jobs:
       - name: 🔍 Detect changed slugs
         id: slugs
         run: |
-          git fetch origin "${{ github.base_ref }}" --depth=1 || true
-          SLUGS=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- 'docs/21_ブログ記事原稿/' | \
-                  awk -F/ '/^docs\/21_/ {print $2}' | sort -u)
+          # --depth=1 は shallow ref を作り 3 点 diff の merge base が消える (検出 0 件で success になっていた)。
+          # quotepath=false でないと非 ASCII パスが引用符付きで出て /^docs\/21_/ に一致しない。
+          # 公開後の outbox 掃除で消えた原稿は検証対象外 (--diff-filter=d)。
+          git fetch origin "${{ github.base_ref }}"
+          SLUGS=$(git -c core.quotepath=false diff --name-only --diff-filter=d "origin/${{ github.base_ref }}...HEAD" -- 'docs/21_ブログ記事原稿/' | \
+                  awk -F/ '/^docs\/21_/ {print $3}' | sort -u)
           {
             echo "list<<EOF"
             echo "$SLUGS"

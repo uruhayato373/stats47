@@ -49,7 +49,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 > node .claude/scripts/blog/build-remediation-queue.mjs   # コミット済み履歴+公開R2+GSCから再構築 (どこでも可)
 > ```
 > で最新化し `/brushup-blog --target queue --next 3` で週次バッチ是正する。仕組みの正典:
-> **`.claude/rules/blog-remediation-loop.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
+> **`.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
 
 ### critic レビュー成果物 `review.md` (公開の必須条件)
 
@@ -595,7 +595,7 @@ quality-gate は「本文の数値が data/*.json と一致するか」しか見
 本ファイルが禁じているのは「**書いた本人が自己採点して公開する**」ことなので、critic には
 **記事本文だけ**を渡し、ground truth も型の指示も再試行履歴も渡さない。文脈が違えば同じモデルでも
 独立した読者として読める。人間 (または別 agent) のレビューより弱いのは事実なので、公開後の
-GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる。
+GSC 実測と是正ループ (`.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`) で品質を上げる。
 
 ### 型ごとの図の構成
 
@@ -731,7 +731,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 
 - **継続品質ループ (床 × 天井): 本ファイル §継続品質ループ** ★床と天井の全体像
 - **新規記事の戦略 (型ポートフォリオ・ネタ選定・KPI): `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト** ★何を書くかはまずこれ
-- **是正ループの正典 (計画的に順次品質向上): `.claude/rules/blog-remediation-loop.md`** ★既存記事を直すときはまずこれ
+- **是正ループの正典 (計画的に順次品質向上): `.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`** ★既存記事を直すときはまずこれ
 - 勝ち要因分析スキル: `.claude/skills/blog/analyze-winning-patterns/SKILL.md`
 - 親方針: `docs/00_プロジェクト管理/03_マーケティング戦略.md`「成長レバー > SEO品質」
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`

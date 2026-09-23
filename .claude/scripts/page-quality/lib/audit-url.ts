@@ -14,6 +14,11 @@ export interface AuditUrlOptions {
   browserRuns?: number;
   /** URL Policy 上、301/410 が正しい (notFoundやredirectを退行として扱わない)。 */
   expectedRedirectOrGone?: boolean;
+  /**
+   * false なら RSC payload を取得しない。RSC はキャッシュされず 1 件ごとにサーバー描画する
+   * (実測 0.5〜3.7 秒/件) ので、全件監査では省いて代表URL検査だけで測る。
+   */
+  measureRsc?: boolean;
 }
 
 /** 1URLを計測してPageAuditResultを返す。fetch自体が失敗した場合はerrorを記録し他項目はunmeasuredにする。 */
@@ -31,6 +36,8 @@ export async function auditUrl(
   const metrics: PageAuditResult["metrics"] = {};
   let jsonldTypeCounts: Record<string, number> = {};
   let jsonldErrors: string[] = [];
+  let imageUrls: string[] | undefined;
+  let uiFindings: string[] = [];
 
   try {
     const { status, html, bytes } = await fetchHtml(url);
@@ -49,9 +56,14 @@ export async function auditUrl(
       metrics.jsonld_syntax_errors = analysis.jsonld_syntax_errors;
       metrics.ad_slots = analysis.ad_slots;
       metrics.ad_duplicate_count = analysis.ad_duplicate_count;
+      metrics.empty_headings = analysis.empty_headings;
+      imageUrls = analysis.image_urls;
       jsonldTypeCounts = analysis.jsonld_type_counts;
       jsonldErrors = analysis.jsonld_errors;
-      metrics.rsc_bytes = await fetchRscBytes(url);
+      metrics.rsc_bytes =
+        options.measureRsc === false
+          ? { value: null, reason: "全件監査では RSC を取得しない (代表URL検査で計測)" }
+          : await fetchRscBytes(url);
     }
   } catch (e) {
     error = (e as Error).message;
@@ -71,6 +83,10 @@ export async function auditUrl(
     metrics.page_errors = browserMetrics.page_errors;
     metrics.mobile_horizontal_scroll = browserMetrics.mobile_horizontal_scroll;
     metrics.small_tap_targets = browserMetrics.small_tap_targets;
+    metrics.clipped_text = browserMetrics.clipped_text;
+    metrics.overlapping_tap_targets = browserMetrics.overlapping_tap_targets;
+    metrics.a11y_violations = browserMetrics.a11y_violations;
+    uiFindings = browserMetrics.ui_findings;
   }
 
   return {
@@ -84,5 +100,7 @@ export async function auditUrl(
     metrics,
     jsonld_type_counts: jsonldTypeCounts,
     jsonld_errors: jsonldErrors,
+    ...(uiFindings.length > 0 ? { ui_findings: uiFindings } : {}),
+    ...(imageUrls ? { image_urls: imageUrls } : {}),
   };
 }

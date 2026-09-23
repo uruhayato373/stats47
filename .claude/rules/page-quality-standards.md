@@ -24,9 +24,56 @@ paths:
    既知違反が代表 URL に乗る)、PR #974 で 5 連続失敗・#977 でも赤になった。PR 必須へ戻すのは、R2 を固定
    fixture に差し替えて決定的にできたときだけ (`CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`)。
 2. **週次 (全件)**: `npm run page-quality:audit-weekly` が `sitemap.xml` から公開対象URLを列挙し
-   (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析だけを行う
-   (ブラウザ計測はコストが見合わないため対象外)。`page-quality-audit-weekly.yml` が実行し、
+   (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析を行う。
+   `page-quality-audit-weekly.yml` が `--concurrency 12 --skip-rsc --browser-representative` で実行し、
    error違反があれば `page-quality-alert,auto-generated` ラベルでIssueを起票する。
+   - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`) と空の見出し (`empty_headings`)
+   - **代表URL 11件だけブラウザ**: 文字の切れ (`clipped_text`)・タップ要素の重なり (`overlapping_tap_targets`)・
+     axe-core の WCAG A/AA critical/serious 規則数 (`a11y_violations`)。全URLをブラウザで開くのはコストが見合わない
+   - **RSC は全件では測らない** (`--skip-rsc`): RSC はキャッシュされず 1 件ごとにサーバー描画する
+     (実測 0.5〜3.7 秒/件)。2026-09-19 の初回は RSC 込み並列 4 で 45 分の制限内に 1,200/6,237 URL しか進まず
+     打ち切られた。RSC 抜き並列 8 は手元で 800 URL 122 秒だったが、CI では全件 54.5 分かかった (2026-09-23 実測。
+     GitHub のサーバーから本番までが遅い)。並列を 12 に上げ、ジョブの制限時間を 120 分にしている。RSC は代表URL検査で測る
+
+## スクショ保存と週次 agent の確認 (2026-09-23)
+
+代表URL 11 件を、表示が切り替わる幅ごとに 7 幅 (390 / 640 / 768 / 992 / 1024 / 1440 / 1920px。
+`tailwind.config.ts` の sm・md・lg・xl・2xl と左サイドバーの 992px 境界。`lib/screenshots.ts` の `VIEWPORTS` が正典)
+で撮影する。R2 `state/page-quality/screenshots/latest/` に全幅の PNG (翌週の比較元・上書き・約 38MB) を、
+`<date>/` に agent が確認する 3 幅 (390 / 768 / 1440) だけ WebP (約 4.4MB/週) を置く (400 日で自動失効する `state/` prefix)。
+先週の `latest/` と画素比較した変化率 (0〜1、高さの変化も数える) を LATEST.md に出す。
+各幅で横スクロール・文字の切れ・タップ要素の重なりも測り、412px の代表URL検査が見ない幅 (640px 以上) の件数を
+`responsive_layout_issues` (warning) にする。読み込みは load まで必須・通信の落ち着き待ちは 10 秒で打ち切る
+(ホームは networkidle を待つと 45 秒で時間切れになった)。1 幅の失敗は `screenshot_failed@<幅>` として残し、他の幅は捨てない。
+
+続けて Claude (sonnet・`Read`/`Glob` だけ・ファイル書換なし) が `.claude/prompts/ci/page-ui-review.md` に沿って
+3 幅のスクショを確認し、JSON schema の構造化出力で指摘 (最大 10 件) を返す。縦長の全体像は縮小されて文字が
+読めないので、画面 1 枚分ずつ切り出した画像 (`tilePaths`、R2 には上げない) を読ませる。
+**記録と通知の判断はスクリプトが行う** (`record-ui-review.ts`): 撮影していない画面を指す指摘や形の崩れた
+指摘は捨て、結果を `.claude/state/metrics/page-quality/ui-review-latest.json` に残す。
+手元の試行 (2026-09-23) は 73 回のやり取り・2 分半で、`--max-turns 120` はそのための余裕。
+
+**通知**: 「先週の週次結果に無かった UI 違反」と agent の指摘を `ui-review-alert` Issue 1 件へまとめ、
+両方無くなったら閉じる。warning の UI 違反も新しく出た週には通知される (前週から続く同じ違反は再通知しない)。
+直すと決めたものは人がバックログへカードにする (Issue は PR で閉じる改修と機械アラートだけの運用のため)。
+
+## UI 検査の判定 (誤検知を出さないための除外)
+
+実装は `lib/measure-static.ts` (静的) / `lib/check-images.ts` (画像) / `lib/ui-probe.ts` (ブラウザ)。
+除外条件はいずれも 2026-09-23 に本番で誤検知として実測したもので、各条件を外すとテストが落ちる
+(`__tests__/ui-checks.test.mjs`)。
+
+- **画像切れの対象は自サイトと R2 の `<img>` だけ**。ASP の計測ピクセルを取得すると広告の表示回数を水増しするので
+  外部ホストは叩かない。`<picture><source>` はブログ図のスマホ版で、未移行の旧記事は 404 だが
+  `ResponsiveArticleImage` が PC 版へ戻すので対象外 (規約で許容済み)。
+- **代替表示がある画像の欠落は `degraded_images` (warning)**。特産品画像は `SpecialtyImage` が頭文字タイルへ
+  切り替える。代替の実装を変えたら `check-images.ts` の `FALLBACK_IMAGE_PATTERNS` も直す。
+- 空の見出しから読み込み中の仮枠 (`animate-pulse`) を除く (後から中身が差し込まれる)。
+- 文字の切れは、枠の外へ**文字**が出ている場合だけ数える (地図タイルのはみ出しを除く)。ellipsis / line-clamp は意図した省略。
+- タップ要素の重なりから、固定表示 (fixed/sticky。同意バナー等)、親に切り取られて見えない部分、
+  閉じた `<details>` の中身を除く。折り返したインラインリンクは行ごとの矩形で比べる。
+- ブラウザ検査は読み込み完了とフォント適用を待ってから測る (CSS 適用前は PC 用サイドバーが見えている扱いになる)。
+- 関数を `page.evaluate` へそのまま渡すと tsx が差し込む `__name` で落ちるので、`evaluateLayoutIssues` が文字列化して評価する。
 
 ## 判定
 
@@ -39,9 +86,14 @@ paths:
 
 ## 記録
 
-`.claude/state/metrics/page-quality/{history.csv,LATEST.md,latest.json,snapshots/<date>.json}`。
-snapshotsは週次のみ生成し、保持数は `.claude/scripts/lib/prune-state-snapshots.mjs` の
-`RETENTION_POLICIES["page-quality"]` (keep 8) で管理する。
+- **週次全件の生データは R2 `state/page-quality/`** (`latest.json` 約 10MB・URL ごとの `history.csv` は直近 84 日・
+  `index.json`・`screenshots/`)。書き手は CI だけ。ローカルは `npm run state:pull -- page-quality` で
+  `.claude/state/page-quality/live/` (gitignore) に取得し、管理画面と `page-quality:aggregate` は live/ を先に読む。
+  git に置かないのは、2026-09-23 に初めて全件が完了したとき 6,229 URL の結果 (10MB) と同じ内容の snapshot (10MB) が
+  git に書き戻され、リポジトリ衛生の 1MB 上限を超えたため。週次の実行開始時に前回分を R2 から読んで前回比に使う
+- **git (`.claude/state/metrics/page-quality/`)** は集約だけ: `LATEST.md` (違反は上位 100 件まで)・
+  `weekly-summary.csv` (テンプレート別の週次件数)・`ui-review-latest.json`。代表URL検査 (`page-quality:check`) の
+  `latest.json` / `history.csv` はこれまでどおり git 側に書く
 
 ## 管理画面
 

@@ -90,7 +90,6 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `blog-quality-standards.md` | ブログ記事の新規作成 / brushup (curiosity gap・図あたり字数・critic 必須) | docs/21・scripts/blog・skills/blog |
 | `blog-data-schema.md` | ブログ data/*.json の統一 schema・3 点セット系譜・wave 命名 | 同上 |
 | `blog-svg-chart-standards.md` | ブログ SVG チャート (svg-builder カタログ・サイズ gate) | packages/svg-builder・docs/21 data |
-| `blog-remediation-loop.md` | 公開済み記事の是正キュー運用 | scripts/blog・skills/blog |
 | `sns-content-standards.md` | SNS 投稿 (X/IG/YouTube pilot/note) の企画・生成・投稿・計測。管理コンソールは `npm run admin` (skill `/admin-console`) | scripts/sns・skills/sns・apps/remotion・admin |
 | `buzz-map-standards.md` | 日本地図×統計のバズカード (型A〜E・spec・カタログ) | remotion buzz-map・skills/sns/buzz-map |
 | `analytics-event-standards.md` | GA4 計装イベント追加・変更 (custom dimension 登録台帳) | apps/web/src/lib/analytics |
@@ -102,7 +101,6 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |
 | `page-quality-standards.md` | ページ肥大化・重複・速度の継続監視 (変更時代表URL/週次全URL、PSI/Cloudflare監視とは別系統) | .claude/scripts/page-quality・apps/admin/app/quality/page-audit |
 | `data-storage.md` | スキル設計時の記録先判定 (git TS / R2 vs `.claude/` vs `docs/`) | .claude/skills・state・todo・docs |
-| `data-sqlite-ssot.md` | 完全DBレスの用語と決定表 (正典は doc 12) | packages/database |
 | `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / ライセンス境界) | packages/gis・skills/gis |
 | `geo-analysis-standards.md` | Geo/GIS 掛け合わせコンテンツ (lineage / 保存則 / canonical / X・note 境界) | app/geo・features/geo-analysis・skills/gis |
 | `estat-api.md` | e-Stat API 利用 (年の 4 桁正規化・cdArea 禁止) | packages/estat-api・metrics・skills/estat |

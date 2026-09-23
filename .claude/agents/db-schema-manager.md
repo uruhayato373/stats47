@@ -37,7 +37,7 @@ db-manager からスキーマ操作系のみを切り出した。 データ投�
 
 ## 必読 rules
 
-- `.claude/rules/data-sqlite-ssot.md` — D1 SSOT 原則と stats_* 命名規約
+- `packages/database/README.md` — D1 SSOT 原則と stats_* 命名規約
 - `.claude/rules/local-environment.md` — ローカル D1 パス固定値、 better-sqlite3 注意点
 - `.claude/rules/branch-workflow.md` — DB 変更フロー (ローカル D1 → R2 snapshot → 本番)
 

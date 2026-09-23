@@ -1,0 +1,2 @@
+# 週次全件監査の生データは R2 state/page-quality/ が正典 (CI が push)。ローカルは npm run state:pull -- page-quality で live/ に取得する。
+live/

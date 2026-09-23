@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-09-23T14:46:38.027Z",
+  "auditGeneratedAt": "2026-09-23T13:47:54.765Z",
+  "reviewStatus": "reviewed",
+  "reviewError": null,
+  "summary": "geo-analysisページの6枚全ての地図プレビューが取得失敗表示、rankingページの地図に「API KEY REQUIRED」透かしが全面表示、という2件の高severity不具合を発見。加えてthemeページのグラフ空表示・地図読み込み中固定、tagページの内部スラッグ露出、千代田区ページの県名重複表示を中severity/低severityで検出。それ以外の8ページ（home、prefecture-list、prefecture-detail、blog、category、survey）は自動検査済みの重複タップ領域を除き大きな崩れなし。",
+  "findings": [
+    {
+      "template": "geo-analysis",
+      "device": "desktop-1440",
+      "severity": "high",
+      "location": "地図で見る地域の変化ページ、「調べたい問いから選ぶ」の6枚のカードすべて（人口×地価、人口×洪水、人口×駅、豪雪指定×人口、土砂災害×人口・施設、公共施設距離×人口）",
+      "issue": "6つの分析カードの地図プレビュー画像が全て「地図プレビューを取得できませんでした」という表示になっており、実際の地図が一切見えない。mobile-390・tablet-768・desktop-1440の3幅すべてで同じ状態。",
+      "suggestion": "地図プレビュー画像の生成・配信元を確認し、正しいプレビュー画像が表示されるよう修正する。"
+    },
+    {
+      "template": "ranking",
+      "device": "desktop-1440",
+      "severity": "high",
+      "location": "総人口ランキングページの都道府県別地図（地図タブ）、地図全体に斜めの透かし文字",
+      "issue": "地図の背景タイル全体に「API KEY REQUIRED」という英語の透かし文字が繰り返し表示され、日本地図の上に北朝鮮・韓国のハングル地名まで混ざって見えてしまっている。mobile-390・tablet-768・desktop-1440で共通。",
+      "suggestion": "地図タイルプロバイダ（CartoDB/Leaflet）のAPIキー設定を確認し、本番用の正規タイルが読み込まれるようにする。"
+    },
+    {
+      "template": "theme",
+      "device": "mobile-390",
+      "severity": "medium",
+      "location": "テーマページ（人口動態）「出生と死亡・転入と転出の内訳」内、「自然増減：出生数と死亡数」および「外国人の人口移動：転入者数と転出者数」のグラフ枠",
+      "issue": "2つのグラフがどちらも空の灰色ボックスのままでデータの折れ線・棒が描画されていない。mobile-390・desktop-1440で同様に空表示。",
+      "suggestion": "該当チャートコンポーネントのデータ取得・描画処理を確認し、正しく描画されるか検証する。"
+    },
+    {
+      "template": "theme",
+      "device": "desktop-1440",
+      "severity": "medium",
+      "location": "テーマページ「どこからどこへ移動するか」の「都道府県 人口移動フロー」カード内、地図の位置",
+      "issue": "アニメ地図の部分が「読み込み中...」のまま表示されている。mobile-390・tablet-768・desktop-1440の3幅すべてで同じ状態。",
+      "suggestion": "フロー地図の読み込み処理を確認し、スクリーンショット取得タイミングまでに描画が完了するか、あるいは実際に固まっていないか調べる。"
+    },
+    {
+      "template": "other",
+      "device": "desktop-1440",
+      "severity": "medium",
+      "location": "タグページ「人口」の記事カード一覧、各カードのタイトル上にある小さい英字テキスト",
+      "issue": "各記事カードのタイトルの上に「general-households-prefecture-gap」のような内部スラッグがそのまま表示されており、一般読者には意味不明な英字の羅列に見える。mobile-390・tablet-768・desktop-1440で共通。",
+      "suggestion": "スラッグ表示をやめるか、カテゴリ名や更新日など読者に意味のあるラベルに置き換える。"
+    },
+    {
+      "template": "municipality",
+      "device": "mobile-390",
+      "severity": "low",
+      "location": "東京都千代田区ページ、タイトル直下のパンくず的な1行テキスト",
+      "issue": "「東京都 東京都 千代田区」と都道府県名が2回重複して表示されている。tablet-768・desktop-1440でも同様。",
+      "suggestion": "県名結合ロジックの重複を取り除き「東京都 千代田区」の1回表示にする。"
+    }
+  ],
+  "rejected": [],
+  "newViolationCount": 19,
+  "firstRun": true
+}

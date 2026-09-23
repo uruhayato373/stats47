@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-20T10:48:28.883Z",
+  "updatedAt": "2026-09-23T10:43:04.325Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3627,8 +3627,8 @@
       "completedAt": "2026-09-07T11:18:52.097Z"
     },
     "CHART-VALIDATE-GATE-01": {
-      "class": "needs-owner",
-      "status": "open",
+      "class": "mechanical-gate",
+      "status": "completed",
       "sourceFile": null,
       "title": "ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す",
       "attempts": [
@@ -3677,21 +3677,45 @@
           "evidence": "修正は .github/workflows/generate-article-charts.yml の編集を要し、backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ワークフロー無人書き換え禁止) に該当する。前回 run で3つの原因 (--depth=1 削除・awk $2→$3・quotepath=false 追加) を実機コマンドで特定済み。人間の PR で適用する必要がある。",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-09-23T10:39:46.264Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git -c core.quotepath=false diff --name-only --diff-filter=d ded90d84f...bdc98558e -- docs/21_ブログ記事原稿/ | awk -F/ '/^docs\\/21_/ {print $3}' | sort -u | wc -l",
+              "npx tsx .claude/scripts/blog/generate-article-charts.ts --slug air-conditioner-consumption-quantity-prefecture-gap --validate"
+            ],
+            "pass": true
+          },
+          "evidence": "shallow fetch を外し awk $3 + quotepath=false + diff-filter=d。PR #872 範囲で旧ロジック 0 件 → 新ロジック 20 件。validate ループ本体は map SVG の viewBox を消すと FAIL=1、戻すと exit 0。実 PR での run 表示は次にブログ原稿を含む PR で確認",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "検証条件が実PRでのCI run観測(検出slug数>0)を要求するが、本sandboxはgh/PR発火・bash<script>実行を許可しない",
-        "since": "2026-09-01T19:43:39.333Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [
         {
           "from": "impl-small",
           "to": "needs-owner",
           "at": "2026-09-01T19:45:05.145Z"
+        },
+        {
+          "from": "needs-owner",
+          "to": "mechanical-gate",
+          "at": "2026-09-23T10:39:46.264Z"
         }
       ],
-      "completedAt": null
+      "completedAt": "2026-09-23T10:39:46.264Z"
     },
     "BRANCH-CLOUD-CLEANUP-01": {
       "class": "mechanical-gate",
@@ -4651,6 +4675,143 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-20T10:48:28.883Z"
+    },
+    "IG-LEDGER-FROMLOG-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-23T10:35:52.164Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/instagram/record-posted.cjs --from-log --dry-run"
+            ],
+            "pass": true
+          },
+          "evidence": "record-posted --from-log で insert 3 (tourism-resource-count / wind-power-plant-count-facility / nuclear-power-plant-count)。再dry-runは insert 0 / skip 178",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-23T10:35:52.164Z"
+    },
+    "IG-LEDGER-TESTS-CI-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-23T10:36:46.334Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:ig-ledger"
+            ],
+            "pass": true
+          },
+          "evidence": "package.json に test:ig-ledger を追加し pr-quality-check.yml の Contract Tests job へ step 追加。17 tests pass。ig-ledger-core の post_type 既定値を壊すと exit 1、戻すと exit 0 (red-green)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-23T10:36:46.334Z"
+    },
+    "BUZZ-MAP-PREF-CODE-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-23T10:38:05.254Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --import tsx --test .claude/scripts/sns/__tests__/buzz-map-area-code.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "toBuzzMapAreaCode で pref のキーを2桁化。テストは5桁のままの実装で exit 1、修正後 exit 0。shochu-consumption-expenditure の pref top-5 spec が {32,43,44,45,46} を出し、BuzzMap-Still-45 レンダーで5県が塗られることを目視確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-23T10:38:05.254Z"
+    },
+    "RULES-DEMOTE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-23T10:43:04.325Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check",
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check"
+            ],
+            "pass": true
+          },
+          "evidence": "blog-remediation-loop.md → skills/blog/brushup-blog/reference/、data-sqlite-ssot.md → packages/database/README.md の節へ統合、evidence-based-judgment の検証コマンド節 → skills/analytics/seo-audit/reference/verification-commands.md。旧パス参照 0、CLAUDE.md 表から 2 行削除、codex mirror 再生成。docs:check errors 0",
+          "failReason": null,
+          "followUps": [
+            "RULES-OWNER-READ-CHECK-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-23T10:43:04.325Z"
     }
   }
 }

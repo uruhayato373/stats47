@@ -2,8 +2,13 @@ import "server-only";
 
 import { cached, fileExists, readCsv, readJson, TTL } from "./state-io";
 
-const LATEST_PATH = ".claude/state/metrics/page-quality/latest.json";
-const HISTORY_PATH = ".claude/state/metrics/page-quality/history.csv";
+// 週次全件の結果は R2 state/page-quality/ にあり、`npm run state:pull -- page-quality` で live/ に取得する。
+// live/ が無ければ git の代表URL結果 (page-quality:check) を読む。
+const LIVE_LATEST_PATH = ".claude/state/page-quality/live/latest.json";
+const LIVE_HISTORY_PATH = ".claude/state/page-quality/live/history.csv";
+const GIT_LATEST_PATH = ".claude/state/metrics/page-quality/latest.json";
+const GIT_HISTORY_PATH = ".claude/state/metrics/page-quality/history.csv";
+const pick = (live: string, git: string) => (fileExists(live) ? live : git);
 
 export type MetricValue = number | boolean | { value: null; reason: string } | undefined;
 
@@ -46,6 +51,7 @@ export interface HistoryPoint {
 
 /** history.csv から日別のerror/warning件数を集計する (トレンド表示用)。 */
 function readHistoryTrend(limit = 30): HistoryPoint[] {
+  const HISTORY_PATH = pick(LIVE_HISTORY_PATH, GIT_HISTORY_PATH);
   if (!fileExists(HISTORY_PATH)) return [];
   const rows = readCsv(HISTORY_PATH);
   const byDate = new Map<string, { error: number; warning: number }>();
@@ -114,6 +120,7 @@ function emptySummary(error: string): PageQualitySummary {
 }
 
 function buildSummary(): PageQualitySummary {
+  const LATEST_PATH = pick(LIVE_LATEST_PATH, GIT_LATEST_PATH);
   if (!fileExists(LATEST_PATH)) {
     return emptySummary("latest.json が見つかりません (page-quality:check 未実行)");
   }

@@ -94,6 +94,6 @@ exit code: 0 (clean), 1 (warning only), 2 (error)。`--strict` では warning �
 ## 参照
 
 - 実装: `.claude/scripts/db/verify-d1-integrity.mjs` (Phase 2 で新規、Phase 7 で R2 fetch 対応に refactor 予定)
-- 親方針: `.claude/rules/data-sqlite-ssot.md`, `.claude/rules/r2-storage-design.md`
+- 親方針: `packages/database/README.md`, `.claude/rules/r2-storage-design.md`
 - 現行データ設計: `docs/01_技術設計/02_データアーキテクチャ.md`
 - 関連: `/sync-snapshots`, `/export-d1-to-remotion-static`, `/page-data-batch`, `/sync-metrics-cache`

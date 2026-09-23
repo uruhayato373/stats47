@@ -26,4 +26,4 @@ metadata:
 
 **見送り (推奨判断)**: tags恒久バックフィル(2211件) は当面不要。同義語辞書(news-synonyms.json 76語)で語彙ギャップは埋まっており、実運用で0件になるネタが出たら辞書に追記して育てる方が低コスト・低リスク。
 
-正典: `.claude/rules/data-sqlite-ssot.md`(DBレス) / `.claude/rules/blog-svg-chart-standards.md`(図規約)。
+正典: `packages/database/README.md`(DBレス) / `.claude/rules/blog-svg-chart-standards.md`(図規約)。
