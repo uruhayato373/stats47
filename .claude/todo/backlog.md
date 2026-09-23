@@ -21,6 +21,15 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [THREADS-ACTIVATION-01] Threads の認証情報を登録し、10月末までの予約を入れる
+
+タグ: [SNS・マーケ] [種類:改善] [実行:ユーザー] [検証:node .claude/scripts/threads/post-from-schedule.cjs --dry-run] [起票:2026-09-23] [期日:2026-09-30]
+
+- **owner**: オーナー (Meta アプリとトークン) / x-strategist (予約の中身)
+- **現状 (2026-09-23)**: 投稿の仕組みは develop に入っている (`post-threads-scheduled.yml` が毎時 `.claude/state/threads-schedule.json` を読み、時刻を過ぎた 1 件だけ公開)。予約表は空で、Secrets `THREADS_ACCESS_TOKEN` / `THREADS_USER_ID` が未登録。実 API 呼び出しは未検証。
+- **次**: ①オーナーが Meta で Threads ユースケース付きアプリを作り、`threads_basic` と `threads_content_publish` を許可した長期トークンを取得して上記 2 つを GitHub Secrets に登録する (手順は `.claude/scripts/threads/post-from-schedule.cjs` 冒頭と公式 https://developers.facebook.com/docs/threads/get-started )。②X の 9/24〜10/31 予約から 1 日 2 件 (朝・夜、X と 2 時間以上ずらす) を選び、本文の UTM を `utm_source=threads` に替え、画像を R2 `sns/<domain>/<key>/threads/` に上げて予約表に入れる。③最初の 1 件は `workflow_dispatch` の dry_run で確認してから本番に回す。
+- **完了条件**: 最初の Threads 投稿の permalink が posts.json に platform=threads で記録され、10/31 までの予約が入っている。
+
 ### [AUTHENTICATED-MEASUREMENT-ACTIVATION-01] 認証付きCIの日次継続運用を実証する
 
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21]
@@ -707,6 +716,15 @@ updated: 2026-09-21
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [METRIC-EMPLOYED-OUTSIDE-PREF-YEAR-01] 県外就職者比率の subtitle「〜2020年」と最新値 2024 年が食い違う
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23]
+
+- **owner**: data-ingester
+- **実測 (2026-09-23)**: `employed-outside-the-prefecture` の item.json は subtitle が「〜2020年」だが、R2 values.json の最新パーティションは 2024 年 (1 位埼玉県 32.9％・最下位北海道 4.9％)。何を分母にした比率か (新規学卒者か就業者全体か) も item からは読めない。X 投稿の候補から外した。
+- **次**: config の出典表と年の範囲を確認し、subtitle を実データに合わせるか、2021 年以降のパーティションが別定義なら系列を分ける。
+- **完了条件**: subtitle・定義・最新年が一致し、ランキングページの説明で比率の分母がわかる。
+
 
 ### [AREA-DATABOOK-MISSING-VALUES-01] 県データブックの 2 指標 (犯罪率・住宅の床面積) に R2 観測値が無い
 
@@ -723,6 +741,7 @@ updated: 2026-09-21
 
 - **owner**: data-ingester
 - **実測 (2026-09-23)**: `acupuncturist-rate` は title が「人口10万対はり師数」、unit が「人」だが、R2 `app/ranking/acupuncturist-rate/values.json` (2020) の値は東京都 22,314・大阪府 16,049・鳥取県 277 で、人口 10 万人あたりではなく実数。config は `statsDataId: 0004026940` / `cdCat01: 100` / `conversionFactor: 1` で、`normalizationOptions` に「人/10万人」があるのに基底値は正規化されていない。ランキングページもこの名前で実数を並べている。IG 地域カルーセルの試作で東京の「全国 1 位」として拾われて発覚した。
+- **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。
 - **次**: e-Stat の表で cdCat01=100 が実数か率かを確認し、(a) 実数なら title を「はり師数」に直すか人口で割る計算 metric にする、(b) 率の表を指しているなら取得を直す。同じ「人口10万対」を title に持つ metric で値の桁が実数並みのものを一覧にして同時に確認する。
 - **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
 
