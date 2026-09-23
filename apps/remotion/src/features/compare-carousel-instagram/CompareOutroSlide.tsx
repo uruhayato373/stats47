@@ -15,9 +15,9 @@ export const CompareOutroSlide: React.FC<CompareOutroSlideProps> = ({ data }) =>
   <IgSeriesFrame series={SERIES} tag="県どうしの比較" sourceLabel="出典は各項目に記載">
     <div style={{ marginTop: 140 }}>
       <h1 style={{ ...IG_HEADLINE_STYLE, fontSize: 76, lineHeight: 1.4 }}>
-        あなたの地元は
+        あなたの地元の
         <br />
-        何勝でしたか？
+        数字は？
       </h1>
       <p style={{ fontSize: 34, fontWeight: IG_FONT.weight.bold, marginTop: 28, lineHeight: 1.5 }}>
         {data.areaAName}と{data.areaBName}、

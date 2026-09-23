@@ -55,9 +55,9 @@ function DuelRow({ item }: { item: CompareDuelItem }) {
   );
 }
 
-/** 2枚目: 指標ごとの対決。値・単位・順位・年・出典を1件ずつ表示し、勝った方を強調する */
+/** 2枚目: 指標ごとの対決。値・単位・順位・年・出典を1件ずつ表示し、数値が大きい方を強調する */
 export const CompareDuelSlide: React.FC<CompareDuelSlideProps> = ({ data }) => (
-  <IgSeriesFrame series={SERIES} tag="全項目対決" swipeLabel="勝敗まとめは次へ" sourceLabel="出典は各項目に記載">
+  <IgSeriesFrame series={SERIES} tag="項目ごとの比較" swipeLabel="まとめは次へ" sourceLabel="出典は各項目に記載">
     <IgSeriesCard style={{ marginTop: 28, marginBottom: 24, padding: "8px 30px 16px", display: "flex", flexDirection: "column" }}>
       <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 14, fontSize: 22, fontWeight: IG_FONT.weight.black, color: "#64748B" }}>
         <span>{data.areaAName}</span>

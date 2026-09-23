@@ -15,7 +15,7 @@ export const CompareCoverSlide: React.FC<CompareCoverSlideProps> = ({ data }) =>
   <IgSeriesFrame
     series={SERIES}
     tag="県どうしの比較"
-    swipeLabel="対決は次へ"
+    swipeLabel="比較は次へ"
     sourceLabel="出典は各項目に記載"
   >
     <div style={{ marginTop: 150, display: "flex", flexDirection: "column", gap: 28 }}>
@@ -23,7 +23,7 @@ export const CompareCoverSlide: React.FC<CompareCoverSlideProps> = ({ data }) =>
       <div style={{ fontSize: 44, fontWeight: IG_FONT.weight.black, opacity: 0.85 }}>VS</div>
       <div style={{ ...IG_HEADLINE_STYLE, fontSize: 78, lineHeight: 1.35 }}>{data.areaBName}</div>
       <p style={{ fontSize: 34, fontWeight: IG_FONT.weight.bold, marginTop: 20, lineHeight: 1.6, whiteSpace: "pre-line" }}>
-        暮らしの数字、上なのはどっち？
+        暮らしの数字、大きいのはどっち？
       </p>
     </div>
   </IgSeriesFrame>

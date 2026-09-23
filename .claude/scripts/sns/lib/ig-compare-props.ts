@@ -123,7 +123,7 @@ export function selectDuelCandidates(
 
 /** カバーの問いかけ (中立・煽らない語調) */
 export function buildCoverQuestion(areaAName: string, areaBName: string): string {
-  return `${areaAName} vs ${areaBName}\n暮らしの数字、上なのはどっち？`;
+  return `${areaAName} vs ${areaBName}\n暮らしの数字、大きいのはどっち？`;
 }
 
 const CAPITAL_PAREN_RE = /\s*[（(][^）)]*[）)]\s*$/;
@@ -227,13 +227,13 @@ export function buildCompareCaption(input: CompareCaptionInput): string {
   lines.push(`【県どうしの比較】${areaAName} vs ${areaBName}`);
   lines.push("");
   for (const item of items) {
-    const mark = item.winner === "a" ? areaAName : item.winner === "b" ? areaBName : "引き分け";
-    lines.push(`${item.label}: ${mark}が上（${item.year}年・出典: ${item.source}）`);
+    const mark = item.winner === "a" ? areaAName : item.winner === "b" ? areaBName : "同じ値";
+    lines.push(`${item.label}: ${mark}が大きい（${item.year}年・出典: ${item.source}）`);
   }
   lines.push("");
   lines.push(
-    `${items.length}項目中 ${areaAName} ${summary.aWins}勝 / ${areaBName} ${summary.bWins}勝` +
-      (summary.ties > 0 ? ` / 引き分け ${summary.ties}` : ""),
+    `数値が大きかったのは ${areaAName} ${summary.aWins}項目 / ${areaBName} ${summary.bWins}項目` +
+      (summary.ties > 0 ? ` / 同じ値 ${summary.ties}` : ""),
   );
   lines.push("");
   lines.push("保存して後で見返してね📌");
