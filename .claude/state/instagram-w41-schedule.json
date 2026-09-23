@@ -14,6 +14,13 @@
     ]
   },
   {
+    "date": "2026-10-07",
+    "time": "12:00",
+    "type": "reels",
+    "domain": "bar-chart-race",
+    "content_key": "marriages"
+  },
+  {
     "date": "2026-10-08",
     "time": "19:00",
     "type": "carousel",

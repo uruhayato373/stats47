@@ -14,6 +14,13 @@
     ]
   },
   {
+    "date": "2026-09-30",
+    "time": "12:00",
+    "type": "reels",
+    "domain": "ranking-quiz-reel",
+    "content_key": "squid-consumption-expenditure"
+  },
+  {
     "date": "2026-10-01",
     "time": "19:00",
     "type": "carousel",

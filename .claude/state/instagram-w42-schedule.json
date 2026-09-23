@@ -14,6 +14,13 @@
     ]
   },
   {
+    "date": "2026-10-14",
+    "time": "12:00",
+    "type": "reels",
+    "domain": "ranking-quiz-reel",
+    "content_key": "ramen-dining-consumption-expenditure"
+  },
+  {
     "date": "2026-10-15",
     "time": "19:00",
     "type": "carousel",
