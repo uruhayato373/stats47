@@ -55,6 +55,13 @@ export const RankingQuizCarouselSchema = CommonPreviewSchema.extend({
 });
 
 /**
+ * 予想クイズ型リール用スキーマ（カルーセルと同じ props。slide は無い）
+ */
+export const RankingQuizReelSchema = CommonPreviewSchema.extend({
+  quiz: RankingQuizSpecSchema.optional(),
+});
+
+/**
  * サムネイル用スキーマ
  */
 export const ThumbnailPreviewSchema = CommonPreviewSchema.extend({

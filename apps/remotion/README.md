@@ -51,10 +51,11 @@ Studio で表示されるデータは `src/utils/preview-data.ts` が提供す�
 | `Carousel-CTASlide` | 1080x1350 | カルーセル CTA |
 | `Carousel-RankingTableSlide` | 1080x1350 | カルーセルランキングテーブル |
 | `RankingQuizInstagram-Carousel` | 1080x1350 | 予想クイズ型カルーセル（`slide`: question / hint / answer / table / outro） |
+| `RankingQuizInstagram-Reel` | 1080x1920 | 予想クイズ型リール（9:16・音声なし・18秒） |
 
-予想クイズ型は1つの props ファイル（`meta` / `allEntries` / `quiz`）から5枚を出す。
+予想クイズ型は1つの props ファイル（`meta` / `allEntries` / `quiz`）からカルーセル5枚 or リール1本を出す。
 入力例は `src/fixtures/ranking-quiz-sample.json`、型と検証は `src/features/ranking-quiz-instagram/quiz.ts`。
-選択肢・ヒントがデータと矛盾するとレンダーが失敗する。
+選択肢・ヒントがデータと矛盾するとレンダーが失敗する（カルーセル・リールとも同じ `resolveRankingQuiz` を通す）。
 
 ```bash
 cd apps/remotion
@@ -71,6 +72,27 @@ done
 
 出力名は IG cron (`post-from-schedule.cjs`) の carousel エントリがそのまま参照する。
 キャプション・R2 反映・予約エントリの形式は `.claude/rules/sns-content-standards.md` §2-3b。
+
+#### リール (`RankingQuizInstagram-Reel`)
+
+構成（30fps・合計540フレーム=18秒。尺の SSOT は `src/features/ranking-quiz-instagram/reel/timeline.ts`）:
+フック(0-3s) → 選択肢(3-7s) → ヒント+3-2-1カウントダウン(7-10s) → 正解発表(10-13s) → 上位5県の棒グラフ(13-16s) → 締め(16-18s)。
+正解・順位・値・倍率はすべて `allEntries` から導出し、spec には書かせない。IG のボタン列（右約14%）・
+キャプション/プロフィールバー（下約19%）を避ける安全余白は `reel/QuizReelFrame.tsx` が固定する。
+
+```bash
+cd apps/remotion
+KEY=shochu-consumption-expenditure
+npx remotion render src/index.ts RankingQuizInstagram-Reel \
+  "../../.local/r2/sns/ranking-quiz-reel/$KEY/instagram/reel.mp4" \
+  --props=src/fixtures/ranking-quiz-sample.json
+```
+
+**domain は `ranking-quiz-reel`**（カルーセルの `ranking-quiz` とは別。台帳が domain + content_key で
+重複判定するため、同じ指標のカルーセルと分ける）。R2 は `sns/ranking-quiz-reel/<rankingKey>/instagram/` に
+`reel.mp4` と `caption.txt` を置き、schedule JSON に
+`{"type":"reels","domain":"ranking-quiz-reel","content_key":"<rankingKey>",...}` を足すと IG cron が投稿する。
+詳細は `.claude/rules/sns-content-standards.md` §2-4。
 
 ### Social-Media
 

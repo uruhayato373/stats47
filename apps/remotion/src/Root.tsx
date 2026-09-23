@@ -22,6 +22,8 @@ import { CarouselPreview } from './features/ranking-instagram/previews/CarouselP
 import { RankingTableSlidePreview } from './features/ranking-instagram/previews/RankingTableSlidePreview';
 // ranking-quiz-instagram
 import { RankingQuizCarouselPreview } from './features/ranking-quiz-instagram/previews/RankingQuizCarouselPreview';
+import { RankingQuizReelPreview } from './features/ranking-quiz-instagram/reel/previews/RankingQuizReelPreview';
+import { getQuizReelTimeline } from './features/ranking-quiz-instagram/reel/timeline';
 // buzz-map (バズ地図カード)
 import { BuzzMapStillPreview } from './features/buzz-map/previews/BuzzMapStillPreview';
 import {
@@ -98,6 +100,7 @@ import {
   RankCardPreviewSchema,
   RankingShortSchema,
   RankingQuizCarouselSchema,
+  RankingQuizReelSchema,
   RankingTablePreviewSchema,
   ThumbnailPreviewSchema,
   TileGridMapScenePreviewSchema,
@@ -259,6 +262,18 @@ export const RemotionRoot: React.FC = () => {
             defaultProps={{
               slide: 'question' as const,
             }}
+          />
+
+          {/* 予想クイズ型リール (9:16・音声なし・18秒)。カルーセルと同じ props (meta/allEntries/quiz) */}
+          <Composition
+            id="RankingQuizInstagram-Reel"
+            component={RankingQuizReelPreview}
+            durationInFrames={getQuizReelTimeline().totalDuration}
+            fps={VIDEO_CONFIG.fps}
+            width={VIDEO_CONFIG.width}
+            height={VIDEO_CONFIG.height}
+            schema={RankingQuizReelSchema}
+            defaultProps={{}}
           />
         </Folder>
 
