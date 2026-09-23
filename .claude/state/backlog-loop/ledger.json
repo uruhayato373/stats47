@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-23T10:36:46.334Z",
+  "updatedAt": "2026-09-23T10:38:05.254Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4717,6 +4717,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-23T10:36:46.334Z"
+    },
+    "BUZZ-MAP-PREF-CODE-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-23T10:38:05.254Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --import tsx --test .claude/scripts/sns/__tests__/buzz-map-area-code.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "toBuzzMapAreaCode で pref のキーを2桁化。テストは5桁のままの実装で exit 1、修正後 exit 0。shochu-consumption-expenditure の pref top-5 spec が {32,43,44,45,46} を出し、BuzzMap-Still-45 レンダーで5県が塗られることを目視確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-23T10:38:05.254Z"
     }
   }
 }

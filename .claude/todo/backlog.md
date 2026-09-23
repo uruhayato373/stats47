@@ -745,16 +745,6 @@ updated: 2026-09-21
 - **次**: e-Stat の表で cdCat01=100 が実数か率かを確認し、(a) 実数なら title を「はり師数」に直すか人口で割る計算 metric にする、(b) 率の表を指しているなら取得を直す。同じ「人口10万対」を title に持つ metric で値の桁が実数並みのものを一覧にして同時に確認する。
 - **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
 
-### [BUZZ-MAP-PREF-CODE-01] 地図カードの生成スクリプトが都道府県を5桁コードで書き、地図が1県も塗られない
-
-タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-09-23]
-
-- **owner**: sns-renderer
-- **実測 (2026-09-23)**: `.claude/scripts/sns/build-buzz-map-spec.ts` は R2 観測値の `areaCode` (都道府県は `45000` 形式) をそのまま `data.values` のキーに書く。描画側は `apps/remotion/src/features/buzz-map/types.ts:64` のとおり都道府県を2桁 (`45`) で照合するため、`level` が都道府県のとき凡例には件数が出るのに地図は無塗りになる。同日の IG クイズ試作 (焼酎・上位5県) でレンダーし、凡例に「上位5」と出るのに地図が無塗りになることを確認した。試作ではキーを手で2桁に直して回避した。
-- **次**: 都道府県レベルのときだけキーを2桁に正規化する (市区町村の N03_007 5桁は変えない)。都道府県 spec で `data.values` のキーが2桁になることを固定するテストを足す。
-- **完了条件**: 都道府県 top-n spec をレンダーして上位県が塗られ、テストが「5桁キーのまま」の実装で落ちる。
-
-
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug real-disposable-income-reversal] [起票:2026-09-19] [期日:2026-10-17]

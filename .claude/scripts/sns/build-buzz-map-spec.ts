@@ -30,6 +30,8 @@ import { dirname, join } from "node:path";
 
 import { getMetricConfig } from "@stats47/data-configs";
 
+import { toBuzzMapAreaCode } from "./lib/buzz-map-area-code";
+
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
@@ -182,7 +184,7 @@ function main() {
 
     // data.values は hit のみ載せる (非該当は land 既定色 = miss と同色。sample-towns-villages 方式)
     const values: Record<string, string> = {};
-    for (const c of hitCodes) values[c] = "hit";
+    for (const c of hitCodes) values[toBuzzMapAreaCode(c, opts.level)] = "hit";
 
     const sourceName =
       (config.source as { source?: { name?: string }; name?: string }).source?.name ??
