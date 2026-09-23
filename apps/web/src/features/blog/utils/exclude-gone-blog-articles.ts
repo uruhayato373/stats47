@@ -28,5 +28,10 @@ export function excludeGoneBlogArticles(
       surveyArticleIndex: Object.fromEntries(Object.entries(snapshot.surveyArticleIndex)
         .map(([id, slugs]) => [id, slugs.filter((slug) => !isRemoved(slug))])),
     }),
+    ...(snapshot.metricPairArticleIndex === undefined ? {} : {
+      metricPairArticleIndex: Object.fromEntries(Object.entries(snapshot.metricPairArticleIndex)
+        .map(([key, byPair]) => [key, Object.fromEntries(Object.entries(byPair)
+          .map(([pairKey, slugs]) => [pairKey, slugs.filter((slug) => !isRemoved(slug))]))])),
+    }),
   };
 }

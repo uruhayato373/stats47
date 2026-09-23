@@ -151,6 +151,12 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
   SSOT から再取得できないのが正しい。「復元不能」と混同して SSOT から作り直すと**捏造**になる。
 - **複数キーを 1 文字列に連結する規約がある**（`"a + b"` / `"a|b"`、`transform` に式を併記）。
   実在確認するときは分解する（分解しないと必ず 404 になり誤検知する。2026-07-29 に実際に 2 件出した）。
+- **2 指標の図はランキングページへの導線になる (2026-09-23)**。`correlation` (`base`/`pair`) /
+  `scatter` (`xKey`/`yKey`) / `composite` (`xMetric`/`yMetric`) の 2 キーを `export-blog-snapshot.ts` が
+  `metricPairs` と `app/blog/all.json` の `metricPairArticleIndex` に焼き、両方のランキングページの
+  関連記事と「相関が高い指標」の「解説記事」リンクになる (`article-metric-pairs.ts`)。相関記事は
+  tags が空なので**この経路が唯一の導線**。合成キーは 2 指標の関係ではないので対象外。
+  kind や 2 キーのフィールド名を変えるときは `extractChartMetricPair` も同じ差分で直す。
 
 **検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するか、
 `NEXT_PUBLIC_ESTAT_APP_ID` がある CI では statsDataId が e-Stat API に実在するかを見る（最大3回再試行）。

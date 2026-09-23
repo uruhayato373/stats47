@@ -10,6 +10,8 @@ export interface SnapshotArticle extends Omit<ArticleRow, 'tags'> {
   tags: SnapshotArticleTag[];
   /** article chart source.json → survey taxonomy core の派生結果。 */
   surveyIds?: string[];
+  /** 散布図 source.json が示す 2 指標ペア (各ペア昇順・重複なし)。ペアの無い記事は省略。 */
+  metricPairs?: Array<[string, string]>;
 }
 
 export interface SnapshotTagMeta {
@@ -27,6 +29,8 @@ export interface BlogSnapshot {
   tagMeta: SnapshotTagMeta[];
   /** surveyId → 公開記事 slug。article.surveyIds から決定的に派生する逆引き索引。 */
   surveyArticleIndex?: Record<string, string[]>;
+  /** rankingKey → 相手 rankingKey → 公開記事 slug。article.metricPairs から決定的に派生 (両方向)。 */
+  metricPairArticleIndex?: Record<string, Record<string, string[]>>;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -62,6 +66,11 @@ function parseSnapshotArticle(value: unknown, index: number): SnapshotArticle {
     !value.surveyIds.every((surveyId) => typeof surveyId === 'string'))) {
     throw new Error(`${path('surveyIds')} must contain strings`);
   }
+  if (value.metricPairs !== undefined && (!Array.isArray(value.metricPairs) ||
+    !value.metricPairs.every((pair) => Array.isArray(pair) && pair.length === 2 &&
+      pair.every((key) => typeof key === 'string')))) {
+    throw new Error(`${path('metricPairs')} must contain [string, string] pairs`);
+  }
   return {
     slug: value.slug as string,
     title: value.title as string,
@@ -78,6 +87,9 @@ function parseSnapshotArticle(value: unknown, index: number): SnapshotArticle {
     updatedAt: assertNullableString(value.updatedAt, path('updatedAt')),
     tags: value.tags as SnapshotArticleTag[],
     ...(value.surveyIds === undefined ? {} : { surveyIds: value.surveyIds as string[] }),
+    ...(value.metricPairs === undefined
+      ? {}
+      : { metricPairs: value.metricPairs as Array<[string, string]> }),
   };
 }
 
@@ -102,6 +114,13 @@ export function parseBlogSnapshot(value: unknown): BlogSnapshot {
     ))) {
     throw new Error('surveyArticleIndex must map survey IDs to string arrays');
   }
+  if (value.metricPairArticleIndex !== undefined && (!isRecord(value.metricPairArticleIndex) ||
+    !Object.values(value.metricPairArticleIndex).every((byPair) => isRecord(byPair) &&
+      Object.values(byPair).every(
+        (slugs) => Array.isArray(slugs) && slugs.every((slug) => typeof slug === 'string')
+      )))) {
+    throw new Error('metricPairArticleIndex must map ranking keys to pair keys to slug arrays');
+  }
   return {
     ...(value.schemaVersion === 2 ? { schemaVersion: 2 as const } : {}),
     generatedAt: value.generatedAt,
@@ -110,6 +129,12 @@ export function parseBlogSnapshot(value: unknown): BlogSnapshot {
     ...(value.surveyArticleIndex === undefined
       ? {}
       : { surveyArticleIndex: value.surveyArticleIndex as Record<string, string[]> }),
+    ...(value.metricPairArticleIndex === undefined
+      ? {}
+      : {
+          metricPairArticleIndex:
+            value.metricPairArticleIndex as Record<string, Record<string, string[]>>,
+        }),
   };
 }
 
@@ -129,5 +154,37 @@ export function buildSurveyArticleIndex(
     [...index.entries()]
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([surveyId, slugs]) => [surveyId, [...slugs].sort()])
+  );
+}
+
+export function buildMetricPairArticleIndex(
+  articles: readonly SnapshotArticle[]
+): Record<string, Record<string, string[]>> {
+  const index = new Map<string, Map<string, Set<string>>>();
+  const add = (key: string, pairKey: string, slug: string) => {
+    const byPair = index.get(key) ?? new Map<string, Set<string>>();
+    const slugs = byPair.get(pairKey) ?? new Set<string>();
+    slugs.add(slug);
+    byPair.set(pairKey, slugs);
+    index.set(key, byPair);
+  };
+  for (const article of articles) {
+    if (article.published !== true) continue;
+    for (const [a, b] of article.metricPairs ?? []) {
+      add(a, b, article.slug);
+      add(b, a, article.slug);
+    }
+  }
+  return Object.fromEntries(
+    [...index.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, byPair]) => [
+        key,
+        Object.fromEntries(
+          [...byPair.entries()]
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([pairKey, slugs]) => [pairKey, [...slugs].sort()])
+        ),
+      ])
   );
 }

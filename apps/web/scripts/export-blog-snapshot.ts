@@ -31,9 +31,11 @@ import yaml from 'js-yaml';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 
+import { resolveArticleMetricPairs } from '../src/features/blog/services/article-metric-pairs';
 import { resolveArticleSurveyIds } from '../src/features/blog/services/article-survey-taxonomy';
 import {
   BLOG_SNAPSHOT_KEY,
+  buildMetricPairArticleIndex,
   buildSurveyArticleIndex,
   type BlogSnapshot,
   type SnapshotArticle,
@@ -170,6 +172,16 @@ async function main() {
     `📄 対象記事: ${slugs.length} 件 (配信 ${priorBySlug.size} ∪ ローカル ${slugInfo.size})`
   );
 
+  // 図の source.json は surveyIds と metricPairs の両方が読むので、1 run で 1 回だけ取得する。
+  const sourceCache = new Map<string, Promise<unknown | null>>();
+  const fetchSource = (key: string): Promise<unknown | null> => {
+    const cached = sourceCache.get(key);
+    if (cached) return cached;
+    const pending = fetchFromR2AsJson<unknown>(key);
+    sourceCache.set(key, pending);
+    return pending;
+  };
+
   const articles: SnapshotArticle[] = [];
   for (const slug of slugs) {
     const info = slugInfo.get(slug);
@@ -200,7 +212,10 @@ async function main() {
           ? prev.published
           : hasValidPublishedAt(fm.publishedAt);
     const surveyIds = published
-      ? await resolveArticleSurveyIds({ slug, content })
+      ? await resolveArticleSurveyIds({ slug, content }, fetchSource)
+      : [];
+    const metricPairs = published
+      ? await resolveArticleMetricPairs({ slug, content }, fetchSource)
       : [];
     articles.push({
       slug,
@@ -219,6 +234,7 @@ async function main() {
       updatedAt: normalizeDate(fm.updatedAt) ?? prev?.updatedAt ?? null,
       tags,
       surveyIds,
+      ...(metricPairs.length > 0 ? { metricPairs } : {}),
     });
   }
 
@@ -240,6 +256,7 @@ async function main() {
     articles,
     tagMeta,
     surveyArticleIndex: buildSurveyArticleIndex(articles),
+    metricPairArticleIndex: buildMetricPairArticleIndex(articles),
   };
 
   const body = JSON.stringify(snapshot);
@@ -249,7 +266,8 @@ async function main() {
 
   const publishedCount = articles.filter((a) => a.published).length;
   console.log(
-    `✅ blog snapshot: articles=${snapshot.articles.length} published=${publishedCount} tags=${snapshot.tagMeta.length} bytes=${result.size} key=${result.key}`
+    `✅ blog snapshot: articles=${snapshot.articles.length} published=${publishedCount} tags=${snapshot.tagMeta.length} ` +
+      `metricPairArticles=${articles.filter((a) => a.published && a.metricPairs).length} bytes=${result.size} key=${result.key}`
   );
 }
 

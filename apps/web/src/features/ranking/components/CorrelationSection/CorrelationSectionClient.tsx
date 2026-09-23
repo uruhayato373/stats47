@@ -38,10 +38,13 @@ function rColor(r: number): string {
 
 interface CorrelationSectionClientProps {
     correlatedItems: CorrelatedItem[];
+    /** 相手指標 rankingKey → この 2 指標の関係を解説した記事 */
+    articleByPairKey?: Record<string, { slug: string; title: string }>;
 }
 
 export function CorrelationSectionClient({
     correlatedItems,
+    articleByPairKey = {},
 }: CorrelationSectionClientProps) {
     return (
         <SectionCard title="相関が高い指標">
@@ -50,18 +53,33 @@ export function CorrelationSectionClient({
                 人口規模の影響を除いた相関係数
             </p>
             <nav className="flex flex-col">
-                {correlatedItems.map((item) => (
-                    <Link
-                        key={item.rankingKey}
-                        href={`/ranking/${item.rankingKey}`}
-                        className="flex items-center justify-between py-1.5 hover:text-primary transition-colors"
-                    >
-                        <span className="truncate mr-2 text-sm">{item.title}</span>
-                        <span className={`shrink-0 font-mono text-xs tabular-nums ${rColor(item.populationAdjustedR)}`}>
-                            {formatR(item.populationAdjustedR)}
-                        </span>
-                    </Link>
-                ))}
+                {correlatedItems.map((item) => {
+                    const article = articleByPairKey[item.rankingKey];
+                    return (
+                        <div key={item.rankingKey} className="flex items-center justify-between gap-2 py-1.5">
+                            <Link
+                                href={`/ranking/${item.rankingKey}`}
+                                className="truncate text-sm hover:text-primary transition-colors"
+                            >
+                                {item.title}
+                            </Link>
+                            <span className="flex shrink-0 items-center gap-3">
+                                {article && (
+                                    <Link
+                                        href={`/blog/${article.slug}`}
+                                        title={article.title}
+                                        className="text-xs text-primary hover:underline"
+                                    >
+                                        解説記事
+                                    </Link>
+                                )}
+                                <span className={`font-mono text-xs tabular-nums ${rColor(item.populationAdjustedR)}`}>
+                                    {formatR(item.populationAdjustedR)}
+                                </span>
+                            </span>
+                        </div>
+                    );
+                })}
             </nav>
         </SectionCard>
     );

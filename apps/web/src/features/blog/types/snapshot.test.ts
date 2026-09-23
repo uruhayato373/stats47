@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildSurveyArticleIndex, type SnapshotArticle } from './snapshot';
+import {
+  buildMetricPairArticleIndex,
+  buildSurveyArticleIndex,
+  parseBlogSnapshot,
+  type SnapshotArticle,
+} from './snapshot';
 
 function article(
   slug: string,
@@ -38,5 +43,53 @@ describe('buildSurveyArticleIndex', () => {
       census: ['a', 'b'],
       'school-basic-survey': ['a'],
     });
+  });
+});
+
+describe('buildMetricPairArticleIndex', () => {
+  const withPairs = (slug: string, published: boolean, metricPairs: Array<[string, string]>) => ({
+    ...article(slug, published),
+    metricPairs,
+  });
+
+  it('公開記事のペアを両方向から引ける形にし、下書きを含めない', () => {
+    expect(
+      buildMetricPairArticleIndex([
+        withPairs('b', true, [['income', 'savings']]),
+        withPairs('a', true, [['income', 'savings'], ['income', 'rent']]),
+        withPairs('draft', false, [['income', 'savings']]),
+        article('no-pairs', true),
+      ])
+    ).toEqual({
+      income: { rent: ['a'], savings: ['a', 'b'] },
+      rent: { income: ['a'] },
+      savings: { income: ['a', 'b'] },
+    });
+  });
+});
+
+describe('parseBlogSnapshot metric pairs', () => {
+  const base = { generatedAt: '2026-09-23T00:00:00.000Z', tagMeta: [] };
+
+  it('記事のペアと逆引き索引をそのまま通す', () => {
+    const parsed = parseBlogSnapshot({
+      ...base,
+      articles: [{ ...article('a', true), metricPairs: [['income', 'savings']] }],
+      metricPairArticleIndex: { income: { savings: ['a'] }, savings: { income: ['a'] } },
+    });
+    expect(parsed.articles[0].metricPairs).toEqual([['income', 'savings']]);
+    expect(parsed.metricPairArticleIndex?.income).toEqual({ savings: ['a'] });
+  });
+
+  it('壊れたペア・索引は配信境界で拒否する', () => {
+    expect(() => parseBlogSnapshot({
+      ...base,
+      articles: [{ ...article('a', true), metricPairs: [['income']] }],
+    })).toThrow('metricPairs');
+    expect(() => parseBlogSnapshot({
+      ...base,
+      articles: [],
+      metricPairArticleIndex: { income: ['a'] },
+    })).toThrow('metricPairArticleIndex');
   });
 });

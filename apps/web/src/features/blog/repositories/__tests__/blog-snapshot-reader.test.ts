@@ -268,6 +268,46 @@ describe('readArticleSummariesBySurveyIdFromR2', () => {
   });
 });
 
+describe('readMetricPairArticlesFromR2', () => {
+  it('相手指標つきで公開記事だけを新しい順に返す', async () => {
+    loadSnapshot.mockResolvedValueOnce({
+      ...SNAPSHOT,
+      articles: [
+        article('old', '2026-01-01'),
+        article('new', '2026-05-01'),
+        article('draft', '2026-07-01', false),
+      ],
+      metricPairArticleIndex: {
+        income: { savings: ['old', 'draft'], rent: ['new', 'missing'] },
+      },
+    });
+    const { readMetricPairArticlesFromR2 } = await importReader();
+
+    await expect(readMetricPairArticlesFromR2('income')).resolves.toEqual([
+      { pairKey: 'rent', slug: 'new', title: 'new のタイトル', description: null },
+      { pairKey: 'savings', slug: 'old', title: 'old のタイトル', description: null },
+    ]);
+  });
+
+  it('索引を持たない旧 snapshot では空配列を返す', async () => {
+    const { readMetricPairArticlesFromR2 } = await importReader();
+
+    await expect(readMetricPairArticlesFromR2('income')).resolves.toEqual([]);
+  });
+
+  it('終了記事は索引に残っていても返さない', async () => {
+    const gone = 'dam-count-vs-road-expressway-length';
+    loadSnapshot.mockResolvedValueOnce({
+      ...SNAPSHOT,
+      articles: [...SNAPSHOT.articles, article(gone, '2026-09-06')],
+      metricPairArticleIndex: { 'dam-count': { 'road-expressway-length': [gone] } },
+    });
+    const { readMetricPairArticlesFromR2 } = await importReader();
+
+    await expect(readMetricPairArticlesFromR2('dam-count')).resolves.toEqual([]);
+  });
+});
+
 describe('readArticleSummariesByTagKeysFromR2', () => {
   it('複数タグを1回のsnapshot取得で集約し、タグ順・重複除去・上限を守る', async () => {
     loadSnapshot.mockResolvedValueOnce({

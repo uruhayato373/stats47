@@ -4,7 +4,7 @@ import { Newspaper } from "lucide-react";
 
 import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
-import { getRelatedArticleSummaries } from "@/features/blog/server";
+import { getRelatedArticleSummaries, listMetricPairArticles } from "@/features/blog/server";
 
 interface RelatedArticlesCardProps {
   rankingKey: string;
@@ -15,14 +15,24 @@ export async function RelatedArticlesCard({
   rankingKey,
   areaType,
 }: RelatedArticlesCardProps) {
-  const tagsResult = await readTagsForItemFromR2(rankingKey, areaType);
-  if (!isOk(tagsResult) || tagsResult.data.length === 0) return null;
+  // 散布図でこの指標を扱う記事 (相関記事) は都道府県データなので prefecture だけ引く
+  const [tagsResult, pairArticles] = await Promise.all([
+    readTagsForItemFromR2(rankingKey, areaType),
+    areaType === "prefecture" ? listMetricPairArticles(rankingKey) : Promise.resolve([]),
+  ]);
+  const tagKeys = isOk(tagsResult) ? tagsResult.data : [];
 
   // タグ群 → 関連記事を集約（取得+重複除去は共有ロジック、上限3件）
-  const relatedArticles = await getRelatedArticleSummaries(tagsResult.data, {
+  const tagArticles = await getRelatedArticleSummaries(tagKeys, {
     limit: 3,
     perTag: 3,
   });
+
+  // この指標そのものを扱う記事をタグ一致より先に出す。相関記事は tags が空でタグ経由では出ない
+  const seen = new Set<string>();
+  const relatedArticles = [...pairArticles, ...tagArticles]
+    .filter((article) => !seen.has(article.slug) && seen.add(article.slug))
+    .slice(0, 3);
 
   if (relatedArticles.length === 0) return null;
 
