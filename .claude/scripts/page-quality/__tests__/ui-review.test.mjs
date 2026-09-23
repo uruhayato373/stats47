@@ -126,3 +126,25 @@ test("execution file から成功した結果の構造化出力だけを取り�
   writeFileSync(ng, JSON.stringify([{ type: "result", subtype: "error_max_turns", is_error: true }]));
   assert.throws(() => structuredOutput(ng), /did not succeed/);
 });
+
+test("R2 に置く URL ごとの履歴は保持日数より古い行を落とし、今回の行を足す", async () => {
+  const { appendHistory } = await import("../lib/storage.ts");
+  const { readFileSync, writeFileSync } = await import("node:fs");
+  const dir = mkdtempSync(join(tmpdir(), "pq-history-"));
+  const path = join(dir, "history.csv");
+  writeFileSync(
+    path,
+    [
+      "date,mode,url,template",
+      "2026-06-01,full,/old,ranking",
+      "2026-09-01,full,/recent,ranking",
+    ].join("\n") + "\n"
+  );
+  const run = { schemaVersion: 1, mode: "full", generated_at: "2026-09-27T18:00:00Z", commit_sha: null, environment: "x", violations: [], results: [{ url: "https://stats47.jp/new", path: "/new", template: "ranking", metrics: {} }] };
+  appendHistory(run, path, 84);
+  const lines = readFileSync(path, "utf-8").trim().split("\n");
+  assert.equal(lines[0].split(",")[0], "date", "ヘッダーは現行の列で書き直す");
+  assert.ok(!lines.some((l) => l.includes("/old")), "84 日より古い行は落とす");
+  assert.ok(lines.some((l) => l.includes("/recent")));
+  assert.ok(lines.some((l) => l.startsWith("2026-09-27,full,/new,ranking")));
+});

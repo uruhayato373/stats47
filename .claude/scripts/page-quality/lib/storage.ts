@@ -1,14 +1,26 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 
 import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../types";
 import { PROJECT_ROOT } from "./thresholds";
 
 export const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/page-quality");
-export const SNAPSHOTS_DIR = join(STATE_DIR, "snapshots");
 export const HISTORY_CSV = join(STATE_DIR, "history.csv");
 export const LATEST_JSON = join(STATE_DIR, "latest.json");
 export const LATEST_MD = join(STATE_DIR, "LATEST.md");
+/** 週次全件監査のテンプレート別集計 (git に残す小さな履歴)。 */
+export const WEEKLY_SUMMARY_CSV = join(STATE_DIR, "weekly-summary.csv");
+
+/**
+ * 週次全件監査の生データの置き場 (R2 `state/page-quality/`)。全 6,000 URL 超の結果は 10MB になり、
+ * git に置くとリポジトリ衛生の 1MB 上限を超えて毎週膨らむ (2026-09-23 の初回完了で発覚)。
+ * 書き手は CI だけ。ローカルで読むときは `npm run state:pull -- page-quality` → `.claude/state/page-quality/live/`。
+ */
+export const R2_STATE_PREFIX = "state/page-quality";
+export const R2_STAGE_DIR = join(PROJECT_ROOT, ".local/r2", R2_STATE_PREFIX);
+export const LIVE_DIR = join(PROJECT_ROOT, ".claude/state/page-quality/live");
+/** R2 の URL ごとの履歴は直近この日数だけ残す (delta_pct 判定は直前の値しか使わない)。 */
+const FULL_HISTORY_KEEP_DAYS = 84;
 
 const HISTORY_COLUMNS = [
   "date",
@@ -38,21 +50,11 @@ function numOrEmpty(value: unknown): string {
 
 function ensureDirs(): void {
   mkdirSync(STATE_DIR, { recursive: true });
-  mkdirSync(SNAPSHOTS_DIR, { recursive: true });
 }
 
-/** raw run結果を .claude/state/metrics/page-quality/snapshots/<date>.json へ保存する (週次のみ・保持数は prune-state-snapshots.mjs で管理)。 */
-export function saveSnapshot(run: AuditRun): string {
-  ensureDirs();
-  const date = run.generated_at.slice(0, 10);
-  const path = join(SNAPSHOTS_DIR, `${date}.json`);
-  writeFileSync(path, `${JSON.stringify(run, null, 2)}\n`, "utf-8");
-  return path;
-}
-
-/** history.csv へ追記する。1URL 1行、runごとに追記 (時系列)。 */
-export function appendHistory(run: AuditRun): void {
-  ensureDirs();
+/** history.csv へ追記する。1URL 1行、runごとに追記 (時系列)。keepDays を渡すとそれより古い行を落とす。 */
+export function appendHistory(run: AuditRun, historyPath: string = HISTORY_CSV, keepDays?: number): void {
+  mkdirSync(dirname(historyPath), { recursive: true });
   const violationsByUrl = new Map<string, Violation[]>();
   for (const v of run.violations) {
     const list = violationsByUrl.get(v.url) ?? [];
@@ -85,19 +87,22 @@ export function appendHistory(run: AuditRun): void {
   });
 
   const header = HISTORY_COLUMNS.join(",");
-  if (!existsSync(HISTORY_CSV)) {
-    writeFileSync(HISTORY_CSV, `${header}\n${rows.join("\n")}\n`, "utf-8");
-  } else {
-    const existing = readFileSync(HISTORY_CSV, "utf-8");
-    const sep = existing.endsWith("\n") ? "" : "\n";
-    writeFileSync(HISTORY_CSV, `${existing}${sep}${rows.join("\n")}\n`, "utf-8");
-  }
+  const cutoff = keepDays ? new Date(Date.parse(run.generated_at) - keepDays * 86_400_000).toISOString().slice(0, 10) : null;
+  const previousRows = existsSync(historyPath)
+    ? readFileSync(historyPath, "utf-8").trim().split("\n").slice(1).filter((line) => line && (!cutoff || line.slice(0, 10) >= cutoff))
+    : [];
+  writeFileSync(historyPath, `${[header, ...previousRows, ...rows].join("\n")}\n`, "utf-8");
 }
 
 /** history.csv から、指定URL・metric_keyの直近値 (今回runより前) を引く。delta_pct判定用。 */
-export function readPreviousValue(url: string, metricKey: MetricKey, excludeDate: string): number | null {
-  if (!existsSync(HISTORY_CSV)) return null;
-  const lines = readFileSync(HISTORY_CSV, "utf-8").trim().split("\n");
+export function readPreviousValue(
+  url: string,
+  metricKey: MetricKey,
+  excludeDate: string,
+  historyPath: string = HISTORY_CSV
+): number | null {
+  if (!existsSync(historyPath)) return null;
+  const lines = readFileSync(historyPath, "utf-8").trim().split("\n");
   if (lines.length < 2) return null;
   const header = lines[0].split(",");
   const colIndex = header.indexOf(metricKey);
@@ -125,10 +130,73 @@ export function readPreviousValue(url: string, metricKey: MetricKey, excludeDate
   return null;
 }
 
-export function writeLatestJson(run: AuditRun): void {
-  ensureDirs();
-  writeFileSync(LATEST_JSON, `${JSON.stringify(run, null, 2)}\n`, "utf-8");
+export function writeLatestJson(run: AuditRun, path: string = LATEST_JSON): void {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, `${JSON.stringify(run)}\n`, "utf-8");
 }
+
+async function fetchText(url: string): Promise<string | null> {
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(60_000), headers: { "cache-control": "no-cache" } });
+    return res.ok ? await res.text() : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 週次全件監査の前回結果 (latest.json / history.csv) を R2 公開 URL から stage へ取得する。
+ * 取得できなければ初回扱い (前回比の判定と新規 UI 違反の比較をしない)。
+ */
+export async function pullFullState(publicBase = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp"): Promise<AuditRun | null> {
+  mkdirSync(R2_STAGE_DIR, { recursive: true });
+  const [latest, history] = await Promise.all([
+    fetchText(`${publicBase}/${R2_STATE_PREFIX}/latest.json`),
+    fetchText(`${publicBase}/${R2_STATE_PREFIX}/history.csv`),
+  ]);
+  if (history) writeFileSync(join(R2_STAGE_DIR, "history.csv"), history, "utf-8");
+  if (!latest) return null;
+  try {
+    return JSON.parse(latest) as AuditRun;
+  } catch {
+    return null;
+  }
+}
+
+/** 週次全件監査の生データを R2 stage へ書く (CI の diff-push-r2 が push する)。 */
+export function writeFullState(run: AuditRun): void {
+  writeLatestJson(run, join(R2_STAGE_DIR, "latest.json"));
+  appendHistory(run, join(R2_STAGE_DIR, "history.csv"), FULL_HISTORY_KEEP_DAYS);
+  // 公開 R2 は list できないので state:pull 用の一覧を置く (state-pull.mjs の規約)。
+  writeFileSync(join(R2_STAGE_DIR, "index.json"), `${JSON.stringify(["latest.json", "history.csv"])}\n`, "utf-8");
+}
+
+/** git に残すテンプレート別の週次集計 (1 週 11 行程度)。 */
+export function appendWeeklySummary(run: AuditRun): void {
+  ensureDirs();
+  const date = run.generated_at.slice(0, 10);
+  const header = "date,template,urls,errors,warnings";
+  const byTemplate = new Map<string, { urls: number; errors: number; warnings: number }>();
+  for (const r of run.results) {
+    const t = byTemplate.get(r.template) ?? { urls: 0, errors: 0, warnings: 0 };
+    t.urls += 1;
+    byTemplate.set(r.template, t);
+  }
+  for (const v of run.violations) {
+    const t = byTemplate.get(v.template);
+    if (!t) continue;
+    if (v.severity === "error") t.errors += 1;
+    else t.warnings += 1;
+  }
+  const previous = existsSync(WEEKLY_SUMMARY_CSV)
+    ? readFileSync(WEEKLY_SUMMARY_CSV, "utf-8").trim().split("\n").slice(1).filter((l) => l && !l.startsWith(`${date},`))
+    : [];
+  const rows = [...byTemplate].map(([t, c]) => `${date},${t},${c.urls},${c.errors},${c.warnings}`);
+  writeFileSync(WEEKLY_SUMMARY_CSV, `${[header, ...previous, ...rows].join("\n")}\n`, "utf-8");
+}
+
+/** LATEST.md の違反表の上限。全件 (週次は数千件) を載せると 1MB 近くになる。 */
+const MAX_VIOLATIONS_IN_MD = 100;
 
 export function writeLatestMarkdown(run: AuditRun): void {
   ensureDirs();
@@ -161,11 +229,20 @@ export function writeLatestMarkdown(run: AuditRun): void {
   lines.push("");
 
   if (run.violations.length > 0) {
+    const shown = [...run.violations]
+      .sort((a, b) => (a.severity === b.severity ? 0 : a.severity === "error" ? -1 : 1))
+      .slice(0, MAX_VIOLATIONS_IN_MD);
     lines.push("## 違反の詳細");
     lines.push("");
+    if (run.violations.length > shown.length) {
+      lines.push(
+        `上位 ${shown.length} 件 (error を先に) / 全 ${run.violations.length} 件。全件は ${run.mode === "full" ? "R2 `state/page-quality/latest.json` (`npm run state:pull -- page-quality`)" : "latest.json"}。`
+      );
+      lines.push("");
+    }
     lines.push("| URL | metric | 実測 | 前回 | 閾値 | 種別 |");
     lines.push("|---|---|---|---|---|---|");
-    for (const v of run.violations) {
+    for (const v of shown) {
       const path = (() => {
         try {
           return new URL(v.url).pathname;
@@ -217,7 +294,7 @@ export function writeLatestMarkdown(run: AuditRun): void {
   writeFileSync(LATEST_MD, lines.join("\n"), "utf-8");
 }
 
-export function readLatestJson(): AuditRun | null {
-  if (!existsSync(LATEST_JSON)) return null;
-  return JSON.parse(readFileSync(LATEST_JSON, "utf-8")) as AuditRun;
+export function readLatestJson(path: string = LATEST_JSON): AuditRun | null {
+  if (!existsSync(path)) return null;
+  return JSON.parse(readFileSync(path, "utf-8")) as AuditRun;
 }

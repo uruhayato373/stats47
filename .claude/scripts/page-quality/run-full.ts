@@ -31,11 +31,11 @@ import { currentCommitSha } from "./lib/git-diff";
 import { enumerateAllUrls } from "./lib/enumerate-urls";
 import { evaluateAll, loadBudgets } from "./lib/thresholds";
 import {
-  appendHistory,
-  readLatestJson,
+  appendWeeklySummary,
+  pullFullState,
+  R2_STAGE_DIR,
   readPreviousValue,
-  saveSnapshot,
-  writeLatestJson,
+  writeFullState,
   writeLatestMarkdown,
 } from "./lib/storage";
 import type { AuditRun, MetricKey, PageAuditResult } from "./types";
@@ -170,9 +170,12 @@ async function main() {
     `[page-quality] 画像確認: ${images.checked} 件 / 壊れ ${images.broken} / 通信失敗で未確認 ${images.unverified}`
   );
 
+  // 前回の週次結果は R2 にある (git には置かない)。前回比の判定と新規 UI 違反の比較に使う。
+  const previousRun = await pullFullState();
   const budgets = loadBudgets();
   const date = generatedAt.slice(0, 10);
-  const previous = (url: string, metricKey: MetricKey) => readPreviousValue(url, metricKey, date);
+  const stageHistory = join(R2_STAGE_DIR, "history.csv");
+  const previous = (url: string, metricKey: MetricKey) => readPreviousValue(url, metricKey, date, stageHistory);
   const violations = evaluateAll(results, budgets, previous);
 
   const run: AuditRun = {
@@ -185,8 +188,6 @@ async function main() {
     violations,
   };
 
-  // 前回の週次結果は上書き前に読む (新しく出た UI 違反だけを通知するため)。
-  const previousRun = readLatestJson();
   const fresh = newUiViolations(run, previousRun);
   mkdirSync(CI_DIR, { recursive: true });
   writeFileSync(join(CI_DIR, "ui-new-violations.json"), `${JSON.stringify(fresh, null, 2)}\n`);
@@ -202,14 +203,13 @@ async function main() {
   }
   console.log(`[page-quality] UI 違反の新規: ${fresh.violations.length} 件${fresh.firstRun ? " (前回結果なし=初回)" : ""}`);
 
-  const snapshotPath = saveSnapshot(run);
-  appendHistory(run);
-  writeLatestJson(run);
+  writeFullState(run);
+  appendWeeklySummary(run);
   writeLatestMarkdown(run);
 
   const errorCount = violations.filter((v) => v.severity === "error").length;
   const warnCount = violations.length - errorCount;
-  console.log(`[page-quality] スナップショット保存: ${snapshotPath}`);
+  console.log(`[page-quality] 生データ: ${R2_STAGE_DIR} (CI が R2 state/page-quality/ へ push)`);
   console.log(`[page-quality] 違反: error=${errorCount} warning=${warnCount} / 対象 ${results.length} URL`);
   process.exit(errorCount > 0 ? 1 : 0);
 }

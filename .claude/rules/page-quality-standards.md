@@ -86,9 +86,14 @@ paths:
 
 ## 記録
 
-`.claude/state/metrics/page-quality/{history.csv,LATEST.md,latest.json,snapshots/<date>.json}`。
-snapshotsは週次のみ生成し、保持数は `.claude/scripts/lib/prune-state-snapshots.mjs` の
-`RETENTION_POLICIES["page-quality"]` (keep 8) で管理する。
+- **週次全件の生データは R2 `state/page-quality/`** (`latest.json` 約 10MB・URL ごとの `history.csv` は直近 84 日・
+  `index.json`・`screenshots/`)。書き手は CI だけ。ローカルは `npm run state:pull -- page-quality` で
+  `.claude/state/page-quality/live/` (gitignore) に取得し、管理画面と `page-quality:aggregate` は live/ を先に読む。
+  git に置かないのは、2026-09-23 に初めて全件が完了したとき 6,229 URL の結果 (10MB) と同じ内容の snapshot (10MB) が
+  git に書き戻され、リポジトリ衛生の 1MB 上限を超えたため。週次の実行開始時に前回分を R2 から読んで前回比に使う
+- **git (`.claude/state/metrics/page-quality/`)** は集約だけ: `LATEST.md` (違反は上位 100 件まで)・
+  `weekly-summary.csv` (テンプレート別の週次件数)・`ui-review-latest.json`。代表URL検査 (`page-quality:check`) の
+  `latest.json` / `history.csv` はこれまでどおり git 側に書く
 
 ## 管理画面
 
