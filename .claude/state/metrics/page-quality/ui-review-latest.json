@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-09-23T12:57:32.040Z",
+  "auditGeneratedAt": "2026-09-23T12:41:45.231Z",
+  "reviewStatus": "reviewed",
+  "reviewError": null,
+  "summary": "11テンプレート(home/prefecture-list/geo-analysis/theme/prefecture-detail/ranking/blog/category/survey/municipality/other)のmobile+desktopを確認。地域分析ページで地図プレビューが取得失敗のプレースホルダーのまま複数カード表示、ランキングページの選択地図タイル背景に「API KEY」らしき透かし文字、タグページで英語スラッグが読者向けラベルとして露出、の3系統6件を検出。他8ページは崩れ・重なり・可読性の問題なし。自動検出済みの重なりタップ領域・a11y指摘とは別の指摘。",
+  "findings": [
+    {
+      "template": "geo-analysis",
+      "device": "mobile",
+      "severity": "high",
+      "location": "スマホ1枚目下部〜2枚目上部、「調べたい問いから選ぶ」カード一覧の地図プレビュー枠(人口×地価、人口×洪水など)",
+      "issue": "地図プレビューのサムネイルが表示されず「地図プレビューを取得できませんでした」というプレースホルダーテキストのまま。少なくとも2枚のカードで発生しており、地域分析ページの主機能である地図の見た目が伝わらない。",
+      "suggestion": "地図プレビュー画像の生成・取得処理を確認し、失敗時のフォールバック画像か再生成を行う。"
+    },
+    {
+      "template": "geo-analysis",
+      "device": "desktop",
+      "severity": "high",
+      "location": "デスクトップ1枚目、「調べたい問いから選ぶ」の2x2カードグリッド上部2枚のプレビュー枠",
+      "issue": "モバイルと同じく地図プレビューが取得できず、プレースホルダーのまま表示されている。",
+      "suggestion": "地図プレビュー画像の生成・取得処理を確認し、失敗時のフォールバック画像か再生成を行う。"
+    },
+    {
+      "template": "ranking",
+      "device": "mobile",
+      "severity": "medium",
+      "location": "スマホ1枚目、都道府県別選択地図(Leaflet)の背景タイル全体",
+      "issue": "地図タイルの背景に「API KE」「UIRED」のような薄い文字の透かしが繰り返し重なっており、地図が見づらい・未完成な印象を与える。",
+      "suggestion": "地図タイルプロバイダ(CartoDB等)のAPIキー設定・請求プラン状態を確認する。"
+    },
+    {
+      "template": "ranking",
+      "device": "desktop",
+      "severity": "medium",
+      "location": "デスクトップ1枚目、左下の都道府県別選択地図の背景タイル",
+      "issue": "モバイルと同じく地図タイル背景に文字の透かしが重なって見づらい。",
+      "suggestion": "地図タイルプロバイダのAPIキー設定・請求プラン状態を確認する。"
+    },
+    {
+      "template": "other",
+      "device": "mobile",
+      "severity": "low",
+      "location": "スマホ1〜4枚目、タグ「人口」の記事カード各見出し上部の小さいグレー文字",
+      "issue": "各記事カードのタイトル上に英語のケバブケーススラッグ(例: general-households-prefecture-gap)がそのまま表示され、一般読者には意味不明。他ページのカードには無い要素で不揃い。",
+      "suggestion": "スラッグ表示を非表示にするか、カテゴリ名やタグ名など読者に意味のあるラベルに差し替える。"
+    },
+    {
+      "template": "other",
+      "device": "desktop",
+      "severity": "low",
+      "location": "デスクトップ1〜2枚目、記事カードグリッドの各タイトル上",
+      "issue": "モバイルと同じく英語スラッグがそのまま露出している。",
+      "suggestion": "スラッグ表示を非表示にするか、意味のあるラベルに差し替える。"
+    }
+  ],
+  "rejected": [],
+  "newViolationCount": 16,
+  "firstRun": true
+}
