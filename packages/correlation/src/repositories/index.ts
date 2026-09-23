@@ -3,6 +3,7 @@ export {
   readTopCorrelationsFromR2,
 } from "./read-correlation-snapshot";
 export { readHighlyCorrelatedFromR2 } from "./read-correlation-by-key";
+export { readThemeCorrelatedMetricsFromR2 } from "./read-correlation-by-theme";
 
 // Phase 7 (2026-05-28) で削除した D1 用 export 一覧:
 // - findCorrelationPair / findHighlyCorrelated (置換: readHighlyCorrelatedFromR2)

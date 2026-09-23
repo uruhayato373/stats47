@@ -355,7 +355,7 @@ for (const { key: baseKey, json } of corrData) {
   const baseMetric = metrics.get(baseKey);
   if (!baseMetric) continue;
   let pairsFromThisBase = 0;
-  // per-key JSON は人口規模の影響を除いた相関 (populationAdjustedR) の絶対値降順 top-20。
+  // per-key JSON は人口規模の影響を除いた順位相関 (populationAdjustedR) の絶対値降順 top-20。
   // 上から見て base あたり MAX_PAIRS_PER_BASE 件で打ち切る
   for (const p of json.pairs || []) {
     if (pairsFromThisBase >= MAX_PAIRS_PER_BASE) break;

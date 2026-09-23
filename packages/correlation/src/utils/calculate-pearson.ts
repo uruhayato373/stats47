@@ -109,9 +109,9 @@ export function calculatePartialR(
 }
 
 /**
- * 人口規模の影響を除いた相関 (総人口を制御した偏相関。算出不能なら pearsonR)。
- * 実数同士は「人口の多い県ほど両方大きい」だけで r≈0.99 になるため、指標別 by-key の
- * 選定・並び順・表示はこの値で行う。
+ * 人口規模の影響を除いた相関 (総人口を制御した Pearson 偏相関。算出不能なら pearsonR)。
+ * by-key の表示値 populationAdjustedR は順位ベースで builder が焼くため、これは
+ * populationAdjustedR を持たない旧 snapshot を読むときの代替値にだけ使う。
  *
  * 面積・高齢化・人口密度までは除かない。4 つの最小 (top-pairs の effectiveR) で並べると、
  * 粗死亡率 → 自然増減率・人口増減率のような人口構成の関係が消え、電話加入数 (r=0.86→0.54)
@@ -122,6 +122,20 @@ export function calculatePopulationAdjustedR(p: {
   partialRPopulation: number | null;
 }): number {
   return p.partialRPopulation ?? p.pearsonR;
+}
+
+/** 同じ値は平均順位にした 1 始まりの順位。 */
+export function toAverageRanks(values: readonly number[]): number[] {
+  const order = values.map((value, index) => ({ value, index })).sort((a, b) => a.value - b.value);
+  const ranks = new Array<number>(values.length);
+  for (let start = 0; start < order.length; ) {
+    let end = start;
+    while (end + 1 < order.length && order[end + 1].value === order[start].value) end++;
+    const averageRank = (start + end) / 2 + 1;
+    for (let i = start; i <= end; i++) ranks[order[i].index] = averageRank;
+    start = end + 1;
+  }
+  return ranks;
 }
 
 export interface ScatterDataPoint {

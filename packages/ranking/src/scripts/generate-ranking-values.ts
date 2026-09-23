@@ -41,6 +41,7 @@ import {
   type MetricConfig,
   type YearSpec,
   findExpectedEmpty,
+  yearInSpec,
 } from "@stats47/data-configs";
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
@@ -69,16 +70,6 @@ function parseArgs(argv: string[]): Args {
       ? new Set(argv[onlyIdx + 1].split(",").map((s) => s.trim()).filter(Boolean))
       : null;
   return { dryRun, only };
-}
-
-/** yearCode (4桁) が config.years 範囲内か (generate-ranking-items と同一規則) */
-function yearInSpec(yearCode: string, spec: YearSpec): boolean {
-  if (spec === "all") return true;
-  const y = parseInt(yearCode, 10);
-  if (!Number.isFinite(y)) return false;
-  if ("from" in spec) return y >= spec.from && y <= spec.to;
-  if ("years" in spec) return spec.years.includes(y);
-  return false;
 }
 
 /**

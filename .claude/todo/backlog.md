@@ -708,6 +708,24 @@ updated: 2026-09-21
 ## 🟡 中 — 2〜3ヶ月以内
 
 
+### [AREA-DATABOOK-MISSING-VALUES-01] 県データブックの 2 指標 (犯罪率・住宅の床面積) に R2 観測値が無い
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:curl -s -o /dev/null -w '%{http_code}' https://storage.stats47.jp/app/ranking/crime-rate-per-1k/values.json が200を返す] [起票:2026-09-23]
+
+- **owner**: data-ingester (投入) / ranking-publisher (公開)
+- **実測 (2026-09-23)**: `AREA_DATABOOK_TEMPLATE` (`packages/data-configs/src/area-databook/template.ts`) が参照する `crime-rate-per-1k` (statsDataId 0000020311) と `housing-floor-area` (0000020308) は config が `isActive: true` だが、R2 の `app/ranking/<key>/values.json` と `app/stats/<key>/values.json` がどちらも 404 (`item.json` は 200)。`known-ranking-keys.ts` にも `gone-ranking-keys.ts` にも無く、`https://stats47.jp/ranking/crime-rate-per-1k` は 410。IG 地域カルーセルの生成で 47 県すべて取得失敗して発覚した。県ページのデータブックでこの 2 項目が空欄になっているかは未確認。
+- **次**: ①県ページ (例 `/areas/13000`) のデータブックで 2 項目の表示を確認する。②e-Stat から観測値を投入し、memory `project_ranking_publish_pipeline_gap` の手順 (KNOWN/SITEMAP/R2 values/OGP) で公開する。投入できない事情があればテンプレートから外す。
+- **完了条件**: 2 指標の values.json が 200 を返し、県ページのデータブックに値が出る (またはテンプレートから外れている)。
+
+### [METRIC-ACUPUNCTURIST-RATE-UNIT-01] 「人口10万対はり師数」の値が実数になっている
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23]
+
+- **owner**: data-ingester
+- **実測 (2026-09-23)**: `acupuncturist-rate` は title が「人口10万対はり師数」、unit が「人」だが、R2 `app/ranking/acupuncturist-rate/values.json` (2020) の値は東京都 22,314・大阪府 16,049・鳥取県 277 で、人口 10 万人あたりではなく実数。config は `statsDataId: 0004026940` / `cdCat01: 100` / `conversionFactor: 1` で、`normalizationOptions` に「人/10万人」があるのに基底値は正規化されていない。ランキングページもこの名前で実数を並べている。IG 地域カルーセルの試作で東京の「全国 1 位」として拾われて発覚した。
+- **次**: e-Stat の表で cdCat01=100 が実数か率かを確認し、(a) 実数なら title を「はり師数」に直すか人口で割る計算 metric にする、(b) 率の表を指しているなら取得を直す。同じ「人口10万対」を title に持つ metric で値の桁が実数並みのものを一覧にして同時に確認する。
+- **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
+
 ### [BUZZ-MAP-PREF-CODE-01] 地図カードの生成スクリプトが都道府県を5桁コードで書き、地図が1県も塗られない
 
 タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-09-23]

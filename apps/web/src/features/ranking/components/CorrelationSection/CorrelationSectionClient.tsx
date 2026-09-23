@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { SectionCard } from "@/components/surface";
 
+import { correlationColorClass, formatCorrelation } from "@/lib/correlation-display";
+
 interface CorrelatedItem {
     rankingKey: string;
     title: string;
@@ -23,19 +25,6 @@ interface CorrelatedItem {
     }>;
 }
 
-function formatR(r: number): string {
-    const sign = r >= 0 ? "+" : "";
-    return `${sign}${r.toFixed(2)}`;
-}
-
-function rColor(r: number): string {
-    if (r >= 0.7) return "text-red-500";
-    if (r >= 0.4) return "text-orange-500";
-    if (r <= -0.7) return "text-blue-500";
-    if (r <= -0.4) return "text-cyan-500";
-    return "text-muted-foreground";
-}
-
 interface CorrelationSectionClientProps {
     correlatedItems: CorrelatedItem[];
     /** 相手指標 rankingKey → この 2 指標の関係を解説した記事 */
@@ -48,9 +37,9 @@ export function CorrelationSectionClient({
 }: CorrelationSectionClientProps) {
     return (
         <SectionCard title="相関が高い指標">
-            {/* 並び順と数値は snapshot の populationAdjustedR。生の r だと人口規模だけで連動する実数同士が上位を占める */}
+            {/* 並び順と数値は snapshot の populationAdjustedR (人口補正後の順位相関)。生の r だと人口規模や 1 県の外れ値だけで連動する組が上位を占める */}
             <p className="mb-2 text-xs text-muted-foreground">
-                人口規模の影響を除いた相関係数
+                人口規模の影響を除いた順位相関（1県の極端な値に左右されにくい）
             </p>
             <nav className="flex flex-col">
                 {correlatedItems.map((item) => {
@@ -73,8 +62,8 @@ export function CorrelationSectionClient({
                                         解説記事
                                     </Link>
                                 )}
-                                <span className={`font-mono text-xs tabular-nums ${rColor(item.populationAdjustedR)}`}>
-                                    {formatR(item.populationAdjustedR)}
+                                <span className={`font-mono text-xs tabular-nums ${correlationColorClass(item.populationAdjustedR)}`}>
+                                    {formatCorrelation(item.populationAdjustedR)}
                                 </span>
                             </span>
                         </div>

@@ -3,6 +3,7 @@ import {
   calculatePearsonR,
   calculateMatchedPearsonR,
   calculatePartialR,
+  toAverageRanks,
   buildScatterData,
   type RankValueWithArea,
 } from '../calculate-pearson';
@@ -265,5 +266,11 @@ describe('buildScatterData', () => {
     const result = buildScatterData(xData, yData);
 
     expect(result[0].areaName).toBe('X-Name');
+  });
+});
+
+describe('toAverageRanks', () => {
+  it('同じ値は平均順位にする', () => {
+    expect(toAverageRanks([30, 10, 20, 10])).toEqual([4, 1.5, 3, 1.5]);
   });
 });

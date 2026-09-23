@@ -25,7 +25,7 @@ import {
   listAllMetrics,
   type MetricConfig,
   type MetricRegistry,
-  type YearSpec,
+  yearInSpec,
 } from "@stats47/data-configs";
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { isKsjPublicStructuredOutputBlocked } from "@stats47/r2-storage/tooling";
@@ -59,16 +59,6 @@ function parseArgs(argv: string[]): Args {
       ? new Set(argv[onlyIdx + 1].split(",").map((s) => s.trim()).filter(Boolean))
       : null;
   return { dryRun, only };
-}
-
-/** yearCode (4桁) が config.years 範囲内か */
-function yearInSpec(yearCode: string, spec: YearSpec): boolean {
-  if (spec === "all") return true;
-  const y = parseInt(yearCode, 10);
-  if (!Number.isFinite(y)) return false;
-  if ("from" in spec) return y >= spec.from && y <= spec.to;
-  if ("years" in spec) return spec.years.includes(y);
-  return false;
 }
 
 /**
