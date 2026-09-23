@@ -9,6 +9,8 @@ export default defineConfig({
       'src/features/ranking-quiz-instagram/__tests__/**/*.test.ts',
       'src/features/area-instagram/__tests__/**/*.test.ts',
       'src/features/correlation-instagram/__tests__/**/*.test.ts',
+      'src/features/compare-carousel-instagram/__tests__/**/*.test.ts',
+      'src/features/map-carousel-instagram/__tests__/**/*.test.ts',
     ],
   },
 });

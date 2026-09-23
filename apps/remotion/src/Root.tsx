@@ -56,6 +56,10 @@ import { NoteCoverPreview } from './features/ranking-note/previews/NoteCoverPrev
 import { KazuNoteCoverPreview } from './features/kazu-note/previews/KazuNoteCoverPreview';
 // compare-instagram
 import { ComparisonCarouselPreview } from './features/compare-instagram/previews/ComparisonCarouselPreview';
+// compare-carousel-instagram (ig-series 共通デザイン・県どうしの比較)
+import { CompareCarouselInstagramPreview } from './features/compare-carousel-instagram/previews/CompareCarouselInstagramPreview';
+// map-carousel-instagram (ig-series 共通デザイン・地図)
+import { MapCarouselInstagramPreview } from './features/map-carousel-instagram/previews/MapCarouselInstagramPreview';
 // compare-short
 import { ComparisonShortPreview } from './features/compare-short/previews/ComparisonShortPreview';
 import { getComparisonShortTimeline } from './features/compare-short/ComparisonShort';
@@ -95,8 +99,10 @@ import {
   BarChartRaceShortSchema,
   CarouselPreviewSchema,
   CommonPreviewSchema,
+  CompareCarouselInstagramSchema,
   ComparisonCarouselSchema,
   ComparisonShortSchema,
+  MapCarouselInstagramSchema,
   PopulationChoroplethSchema,
   MigrationFlowSchema,
   StationPassengersSchema,
@@ -732,6 +738,20 @@ export const RemotionRoot: React.FC = () => {
               showSafeAreas: false,
             }}
           />
+
+          {/* 県どうしの比較カルーセル (ig-series 共通デザイン・4:5・4枚。金枠 §2-3c) */}
+          <Composition
+            id="CompareCarouselInstagram-Carousel"
+            component={CompareCarouselInstagramPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={CompareCarouselInstagramSchema}
+            defaultProps={{
+              slide: 'cover' as const,
+            }}
+          />
         </Folder>
 
         <Folder name="Short">
@@ -748,6 +768,24 @@ export const RemotionRoot: React.FC = () => {
               theme: 'dark' as const,
               showSafeAreas: false,
               hookText: 'どっちが上？',
+            }}
+          />
+        </Folder>
+      </Folder>
+
+      <Folder name="MapCarousel">
+        <Folder name="Instagram">
+          {/* 地図カルーセル (ig-series 共通デザイン・4:5・4枚。日枠 §2-3c) */}
+          <Composition
+            id="MapCarouselInstagram-Carousel"
+            component={MapCarouselInstagramPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={MapCarouselInstagramSchema}
+            defaultProps={{
+              slide: 'cover' as const,
             }}
           />
         </Folder>

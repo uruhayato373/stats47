@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { COMPARE_CAROUSEL_SLIDES, CompareCarouselDataSchema } from "../features/compare-carousel-instagram/types";
+import { MAP_CAROUSEL_SLIDES, MapCarouselDataSchema } from "../features/map-carousel-instagram/types";
 import { QUIZ_SLIDES, RankingQuizSpecSchema } from "../features/ranking-quiz-instagram/quiz";
 import { AREA_CAROUSEL_SLIDES, AreaCarouselSpecSchema } from "../features/area-instagram/area";
 import {
@@ -211,6 +213,24 @@ export const ComparisonCarouselSchema = CommonPreviewSchema.extend({
     rankA: z.number(),
     rankB: z.number(),
   })).optional(),
+});
+
+/**
+ * 県どうしの比較カルーセル (ig-series 共通デザイン) 用スキーマ。slide で4枚を切替。
+ * data は build-ig-compare-props.ts が書き出す解決済み JSON (省略時は fixture サンプルへ fallback)。
+ */
+export const CompareCarouselInstagramSchema = CommonPreviewSchema.extend({
+  slide: z.enum(COMPARE_CAROUSEL_SLIDES).optional(),
+  data: CompareCarouselDataSchema.optional(),
+});
+
+/**
+ * 地図カルーセル (ig-series 共通デザイン) 用スキーマ。slide で4枚を切替。
+ * data は build-ig-map-props.ts が書き出す解決済み JSON (省略時は fixture サンプルへ fallback)。
+ */
+export const MapCarouselInstagramSchema = CommonPreviewSchema.extend({
+  slide: z.enum(MAP_CAROUSEL_SLIDES).optional(),
+  data: MapCarouselDataSchema.optional(),
 });
 
 /**
