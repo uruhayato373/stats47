@@ -20,7 +20,7 @@ paths:
 
 > **注**: 旧 docs / skill が「D1」「ローカルビルド DB」と呼んでいた層は **SSOT ではない**。
 > Cloudflare D1 サービスではなく、再生成可能な使い捨てビルドキャッシュ / エフェメラル集計エンジン。
-> SSOT は git TS と R2 のみ。用語と決定表: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md) / 正典: doc 12。
+> SSOT は git TS と R2 のみ。用語と決定表: [`packages/database/README.md`](../../packages/database/README.md) / 正典: doc 12。
 
 Phase 6 (2026-05-27) で観測値・相関結果を R2 へ移行、Phase F (2026-05-30) で運用エンティティの SSOT も
 git TS 化し永続 D1 を全廃した。アプリが読む各データの真実源:
@@ -61,7 +61,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 派生 JSON は git tracked でも commit して良い (履歴で差分追跡)。ただし **真実源は git TS / R2** で、生成物を手で編集すると乖離が起きる。
 
-詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
+詳細: [`packages/database/README.md`](../../packages/database/README.md)
 
 ## `docs/` に置くもの — 「人間が読み返す文書」
 
@@ -122,7 +122,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 ```
 スキルが生成するデータの本質は？
   ├─ アプリが読む Authored エンティティ (設定 / 運用)  → git TS が SSOT → 生成スクリプトで R2 JSON
-  │      （詳細・判定は 02_データアーキテクチャ.md「データ分類」/ data-sqlite-ssot.md）
+  │      （詳細・判定は 02_データアーキテクチャ.md「データ分類」/ packages/database/README.md）
   ├─ 観測値から計算できる集計 (Derived)              → エフェメラル計算 → R2 (永続しない)
   ├─ 現在の計画・未完了タスク                        → .claude/todo/
   ├─ 恒久的な戦略・要件                             → docs/ の既存固定SSOT

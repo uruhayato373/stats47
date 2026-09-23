@@ -456,6 +456,7 @@ Phase 1以降へ自動的に進めない。
 - `.claude/state/gsc/LATEST.md` / `.claude/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
 - `.claude/todo/improvements.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
 - `reference/site-navigation-graph.md` — `KAIYU-HUB-01`のサイト横断回遊グラフ・レコメンド実装詳細
+- `reference/verification-commands.md` — GSC / GA4 / PSI / HTTP / 公式ドキュメントの実証コマンド (`evidence-based-judgment.md` の根拠取得)
 
 ## page_components の責務分離監査 (area / theme)
 

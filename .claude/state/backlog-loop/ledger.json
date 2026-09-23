@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-23T10:39:46.264Z",
+  "updatedAt": "2026-09-23T10:43:04.325Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4774,6 +4774,44 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-23T10:38:05.254Z"
+    },
+    "RULES-DEMOTE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-23T10:43:04.325Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check",
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check"
+            ],
+            "pass": true
+          },
+          "evidence": "blog-remediation-loop.md → skills/blog/brushup-blog/reference/、data-sqlite-ssot.md → packages/database/README.md の節へ統合、evidence-based-judgment の検証コマンド節 → skills/analytics/seo-audit/reference/verification-commands.md。旧パス参照 0、CLAUDE.md 表から 2 行削除、codex mirror 再生成。docs:check errors 0",
+          "failReason": null,
+          "followUps": [
+            "RULES-OWNER-READ-CHECK-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-23T10:43:04.325Z"
     }
   }
 }

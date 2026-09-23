@@ -994,15 +994,6 @@ updated: 2026-09-21
 - **停止条件**: 未検証のDrive原本・GIS・WIP・認証profileを削除しない。既存セッションの一括終了やGit履歴リセットで軽量化しない。Node数・メモリはツール稼働を含む瞬間値であり、条件を合わせず削減効果と断定しない。
 - **完了条件**: 再起動後の同条件計測を保存し、参考文献のDrive復元検証と source-vault:check が通る。GISは回収した各対象から保全先と再生成手順が辿れ、保全できないものには保持理由を残す。導入済み予算・定期点検方式は local-environment.md と自動化インベントリを参照する。
 
-### [RULES-DEMOTE-01] 常時読み込みから外した rule の移設と reference 化
-
-タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:npm run docs:check] [起票:2026-09-08]
-
-- **背景**: 2026-09-08 に 41 rule を `paths:` 条件付き読み込みへ切り替えた (常時 10,461 行 → 584 行、DG070-072 で固定)。本文は不変で、内容の置き場が rule として不適切なものが 3 つ残る。
-- **次**: `blog-remediation-loop.md` → `.claude/skills/blog/brushup-blog/reference/`、`data-sqlite-ssot.md` → `packages/database/README.md` (冒頭で doc 12 が優先と宣言済み)、`evidence-based-judgment.md` の「各種 API での最低検証コマンド」節 (~110 行) → 対応 skill の reference。参照元 (agents / skills / rules) を rg で全置換し、`check-agent-skill-consistency.cjs` を通す。
-- **併記判断**: paths rule は subagent 自身の Read でしか載らない。owner agent が担当 rule を明示 Read しているかを同 checker で検査するかを決める。
-- **完了条件**: 3 ファイルの移設先が実在し、CLAUDE.md の表と DG072 が更新後の集合で green。
-
 ### [COCONALA-MEASUREMENT-CONTRACT-01] 14商品の公開後計測を整え改善台帳へ引き渡す
 
 タグ: [インフラ・計測] [種類:改善] [実行:別環境] [起票:2026-09-06] [期日:2026-09-13]
@@ -1572,6 +1563,15 @@ updated: 2026-09-21
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [RULES-OWNER-READ-CHECK-01] owner agent が担当 rule を明示 Read しているかを検査するか決める
+
+タグ: [エージェント・SSOT] [種類:意思決定] [実行:対話] [起票:2026-09-23]
+
+- **owner**: オーナー (採否) / Claude Code (採択後に `check-agent-skill-consistency.cjs` へ実装)
+- **背景**: 2026-09-08 に rule を `paths:` 条件付き読み込みへ切り替えたため、rule は **その agent 自身が一致ファイルを Read したときだけ**載る (`docs-vs-issues.md`「rules の読み込み条件」)。owner agent の手順に担当 rule の Read が無いと、subagent は規約を知らないまま作業する。`RULES-DEMOTE-01` (rule 3 本の移設、2026-09-23 完了) で残った判断。
+- **次**: 採るなら、agent frontmatter / 本文から担当 rule を抽出し、手順に `.claude/rules/<name>.md` の Read が無い agent を warn にする。誤検知の出方を全 agent で実測してから error 化を決める。
+- **完了条件**: 採否と理由が決まる。採る場合は checker の検査が既存 agent で誤検知 0 になり、Read を消すと warn が出ることを確認する。
 
 ### [ADMIN-STAT-PILOT-01] 行政資料1業務の統計整理商品を検証し、有料pilotの採否を決める
 

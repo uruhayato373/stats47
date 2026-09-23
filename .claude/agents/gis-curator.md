@@ -56,7 +56,7 @@ npx tsc --noEmit -p packages/gis/tsconfig.json                              # �
 ## 必読 rules
 
 - `.claude/rules/gis-data.md` — GIS SSOT 構造・新規追加手順・DBレス integrity (★最重要)
-- `.claude/rules/data-sqlite-ssot.md` — git TS = SSOT / ローカル SQLite = 使い捨て
+- `packages/database/README.md` — git TS = SSOT / ローカル SQLite = 使い捨て
 - `.claude/rules/metric-config-standards.md` — category 17 軸 (stats47Category の妥当性)
 - `.claude/rules/estat-api.md` — year 4 桁正規化 (rankingConfig.yearCode)
 

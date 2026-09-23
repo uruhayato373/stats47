@@ -2,7 +2,7 @@
 
 > `/bar-chart-race --step generate` の詳細手順。スキル本体は `../SKILL.md`。
 > **DBレス**: 「D1 から」の記述は旧称。実際は **R2 観測値 `app/stats/<key>/values.json`** を読む
-> (`.claude/rules/data-sqlite-ssot.md`)。無ければ `/page-data-batch --metric <key>` で投入。
+> (`packages/database/README.md`)。無ければ `/page-data-batch --metric <key>` で投入。
 
 R2 観測値から Bar Chart Race 用の全年度データを取得し、`.local/r2/sns/bar-chart-race/<rankingKey>/` に config.json と data.json を保存する。
 

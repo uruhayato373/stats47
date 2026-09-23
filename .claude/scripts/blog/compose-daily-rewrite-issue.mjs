@@ -77,7 +77,7 @@ lines.push("---");
 lines.push(
   "_運用: 是正は Claude セッション (Pro) で実行。critic PASS したものだけ公開され、REVISE はドラフト保留。" +
     "効果は次の週次 GSC で `measure-gsc-impact.mjs` が自動計測。正典: " +
-    "[.claude/rules/blog-remediation-loop.md](../blob/develop/.claude/rules/blog-remediation-loop.md)_",
+    "[.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md](../blob/develop/.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md)_",
 );
 lines.push("");
 lines.push("_Auto-generated daily by `.github/workflows/blog-remediation-daily.yml`_");

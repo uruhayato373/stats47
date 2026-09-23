@@ -11,7 +11,6 @@
     "D1_RUNTIME_RETURN:.claude/memory/project_dbless_migration_2026_05_29.md:- **Part E 未着手**: getDrizzle/drizzle.ts/d1-core/schema + better-sqlite3/drizzle-orm 撤廃 → grep getDrizzle(=0。": 1,
     "D1_RUNTIME_RETURN:.claude/memory/project_dbless_migration_2026_05_29.md:**Phase F (D1コード全削除, 承認プラン=`~/.claude/plans/quiet-forging-flurry.md`)**: 「フル: 生成器DBレス化→全D1削除」をオーナー選択。調査結果: 本番runtimeは getDrizzle()実呼び出し0(型importのみ)。**49ファイルが真のD1 query**、8ファイルはR2-native(getDrizzleは未使用": 1,
     "D1_RUNTIME_RETURN:.claude/memory/project_dbless_migration_2026_05_29.md:**Phase F ✅完了 (2026-05-30, grep getDrizzle( = 0 達成)**: A=master-snapshot生成器DBレス化(categories/surveys/per-url + dead monolith削除, cloud baseline一致) / B=vestigial getDrizzle除去 / C=型relocate(Source→ranking": 1,
-    "D1_RUNTIME_RETURN:.claude/rules/data-sqlite-ssot.md:>   アプリ実行時の `getDrizzle()` query は **0** になり本番デプロイ済。本番 Web app は **R2 snapshot のみ**読む。": 1,
     "D1_RUNTIME_RETURN:.claude/skills/analytics/gsc-improvement/reference/improvement-log.md:- **公開フロー**: ローカル draft → publish-article → sync-articles (ローカル D1) → wrangler r2 object put × 6 ファイル → wrangler d1 execute INSERT (本番 D1) → 本番 origin で HTTP 200 確認": 1,
     "D1_RUNTIME_RETURN:.claude/skills/db/reset-migrations/SKILL.md:| `wrangler d1 migrations apply` が適用しようとする | Phase 5 の `d1_migrations` INSERT が漏れている |": 1,
     "D1_RUNTIME_RETURN:.claude/skills/db/reset-migrations/SKILL.md:cd apps/web && npx wrangler d1 execute stats47_static --remote --env production \\": 4,

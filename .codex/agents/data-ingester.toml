@@ -36,7 +36,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 
 ## 必読 rules
 
-- `.claude/rules/data-sqlite-ssot.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
+- `packages/database/README.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
 - `.claude/rules/estat-api.md` — 全年度取得 + メモリフィルタ、5 桁地域コード
 - `.claude/rules/metric-config-standards.md` — MetricConfig フィールド役割 / category 17 軸 / 量産後 validate:config
 - `.claude/rules/unit-semantics-standards.md` — **単位 (円/千円/％/人口10万対/月額年額) の解釈・換算の正典を所有する**。

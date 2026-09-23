@@ -49,7 +49,7 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 ## 必読 rules
 
 - `.claude/rules/r2-storage-design.md` — R2 キーパス対応表 (URL → app/...)。生成画像 bundle は別契約 (§生成画像の差分反映契約)
-- `.claude/rules/data-sqlite-ssot.md` — git TS + R2 が SSOT (完全DBレス・doc12)。ビルドキャッシュは使い捨て
+- `packages/database/README.md` — git TS + R2 が SSOT (完全DBレス・doc12)。ビルドキャッシュは使い捨て
 - `.claude/rules/nextjs-ssg-preservation.md` — SSG 維持のため snapshot 構造変更時の影響範囲
 - `.claude/rules/ogp-image-standards.md` — 生成画像 bundle の exact plan 反映契約 (本 agent の対象外を確認する用)
 

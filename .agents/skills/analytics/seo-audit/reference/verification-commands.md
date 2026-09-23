@@ -1,0 +1,1 @@
+../../../../../.claude/skills/analytics/seo-audit/reference/verification-commands.md

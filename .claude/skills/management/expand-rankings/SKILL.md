@@ -60,4 +60,4 @@ node .claude/scripts/estat/measure-expansion-impact.mjs [--week YYYY-Www]
 - スクリプト: `.claude/scripts/estat/{build-expansion-queue,gen-ssds-configs,measure-expansion-impact,enumerate-ssds-indicators,fetch-estat-meta}.mjs`
 - 知見/状態: memory `project_estat_expansion_pipeline_2026_07` / `.claude/state/estat/expansion-queue.json`
 - 正典: `.claude/rules/metric-config-standards.md` / `.claude/rules/estat-api.md` / 現在計画は `.claude/todo/weekly.md`
-- 対比: `.claude/rules/blog-remediation-loop.md` (同型の型)
+- 対比: `.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md` (同型の型)
