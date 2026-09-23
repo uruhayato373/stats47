@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2026-10-19",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking-quiz",
+    "content_key": "katsuobushi-consumption-quantity",
+    "slides": [
+      "slide-1-question-1080x1350.png",
+      "slide-2-hint-1080x1350.png",
+      "slide-3-answer-1080x1350.png",
+      "slide-4-table-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-10-22",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "ranking-quiz",
+    "content_key": "whisky-consumption-expenditure",
+    "slides": [
+      "slide-1-question-1080x1350.png",
+      "slide-2-hint-1080x1350.png",
+      "slide-3-answer-1080x1350.png",
+      "slide-4-table-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
+  }
+]
