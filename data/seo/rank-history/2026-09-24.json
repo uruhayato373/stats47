@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-09-24",
+  "generatedAt": "2026-09-23T15:13:00.686Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-09-15",
+      "periodEnd": "2026-09-21",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2055,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.93719806763285,
+        "impressions": 414,
+        "clicks": 38
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 4.215648854961833,
+        "impressions": 524,
+        "clicks": 20
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.576271186440678,
+        "impressions": 236,
+        "clicks": 1
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 8.175182481751825,
+        "impressions": 137,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 28,
+        "impressions": 1,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-09-08",
+      "periodEnd": "2026-09-14",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1906,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.6512166859791426,
+        "impressions": 863,
+        "clicks": 47
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 7.62565445026178,
+        "impressions": 382,
+        "clicks": 10
+      },
+      {
+        "keyword": "40代 未婚 割合 日本 国勢調査",
+        "targetPath": "/survey/census",
+        "rank": 4.464285714285714,
+        "impressions": 448,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/future-population-tokyo-paradox",
+        "rank": 2,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 2,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 6.098039215686274,
+        "impressions": 204,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 14.551724137931034,
+        "impressions": 29,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 58,
+        "impressions": 1,
+        "clicks": 0
+      }
+    ]
+  }
+}
