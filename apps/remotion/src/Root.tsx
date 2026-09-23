@@ -24,6 +24,10 @@ import { RankingTableSlidePreview } from './features/ranking-instagram/previews/
 import { RankingQuizCarouselPreview } from './features/ranking-quiz-instagram/previews/RankingQuizCarouselPreview';
 import { RankingQuizReelPreview } from './features/ranking-quiz-instagram/reel/previews/RankingQuizReelPreview';
 import { getQuizReelTimeline } from './features/ranking-quiz-instagram/reel/timeline';
+// area-instagram (地域カルーセル・火/土枠)
+import { AreaInstagramCarouselPreview } from './features/area-instagram/previews/AreaInstagramCarouselPreview';
+// correlation-instagram (相関カルーセル・水枠)
+import { CorrelationInstagramCarouselPreview } from './features/correlation-instagram/previews/CorrelationInstagramCarouselPreview';
 // buzz-map (バズ地図カード)
 import { BuzzMapStillPreview } from './features/buzz-map/previews/BuzzMapStillPreview';
 import {
@@ -101,6 +105,8 @@ import {
   RankingShortSchema,
   RankingQuizCarouselSchema,
   RankingQuizReelSchema,
+  AreaInstagramCarouselSchema,
+  CorrelationInstagramCarouselSchema,
   RankingTablePreviewSchema,
   ThumbnailPreviewSchema,
   TileGridMapScenePreviewSchema,
@@ -763,6 +769,44 @@ export const RemotionRoot: React.FC = () => {
               theme: 'dark' as const,
               showGuides: false,
               showSafeAreas: false,
+            }}
+          />
+        </Folder>
+      </Folder>
+
+      {/* 地域カルーセル (火・土枠。正典 .claude/rules/sns-content-standards.md §2-3c) */}
+      <Folder name="AreaCarousel">
+        <Folder name="Instagram">
+          {/* 地域カルーセル (4:5・5枚: cover/top/bottom/sources/outro) */}
+          <Composition
+            id="AreaInstagram-Carousel"
+            component={AreaInstagramCarouselPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={AreaInstagramCarouselSchema}
+            defaultProps={{
+              slide: 'cover' as const,
+            }}
+          />
+        </Folder>
+      </Folder>
+
+      {/* 相関カルーセル (水枠。正典 .claude/rules/sns-content-standards.md §2-3c) */}
+      <Folder name="CorrelationCarousel">
+        <Folder name="Instagram">
+          {/* 相関カルーセル (4:5・5枚: cover/scatter/highlights/caution/outro) */}
+          <Composition
+            id="CorrelationInstagram-Carousel"
+            component={CorrelationInstagramCarouselPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={CorrelationInstagramCarouselSchema}
+            defaultProps={{
+              slide: 'cover' as const,
             }}
           />
         </Folder>

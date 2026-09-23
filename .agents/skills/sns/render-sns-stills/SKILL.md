@@ -65,6 +65,17 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 | Instagram（予想クイズ型・5枚） | `RankingQuizInstagram-Carousel`（`slide` で切替） | 本スキル未統合。`apps/remotion/README.md` の手順で `.local/r2/sns/ranking-quiz/<key>/instagram/stills/slide-<n>-<slide>-1080x1350.png` へレンダ（配信は `sns-content-standards.md` §2-3b） |
 | Instagram（リール動画） | `RankingInstagram-Reel` | `instagram/reel.mp4` |
 
+### area-carousel / correlation-carousel ドメイン (火水土枠・§2-3c)
+
+props.json → stills + caption.txt を1本で書き出す (Remotion `AreaInstagram-Carousel` /
+`CorrelationInstagram-Carousel` を内部で呼ぶ。`apps/remotion/README.md`「AreaCarousel /
+CorrelationCarousel」参照):
+
+```bash
+npx tsx .claude/scripts/sns/render-ig-carousel.ts --domain area --props <build-ig-area-props.ts の出力>
+npx tsx .claude/scripts/sns/render-ig-carousel.ts --domain correlation --props <build-ig-correlation-props.ts の出力>
+```
+
 ### compare ドメイン
 
 | SNS | コンポジション | 出力ファイル |
