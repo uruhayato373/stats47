@@ -193,10 +193,55 @@ describe('buildCorrelationSnapshot shape', () => {
     expect(item.rankingKey).not.toBe('metric-a');
     expect(item.scatterData.length).toBeGreaterThanOrEqual(30);
 
-    // by-key は raw ABS(pearsonR) DESC 順 (旧 find-highly-correlated と同じ)。
-    // metric-a と最も raw 相関が高いのは metric-b (r≈0.9) なので先頭に来る。
+    // by-key は人口補正後 |r| の降順。この合成データでは metric-a と metric-b (r≈0.9) の
+    // 連動は人口では説明されないので、補正後も先頭に残る。
     expect(byKey.pairs[0].rankingKey).toBe('metric-b');
     expect(Math.abs(byKey.pairs[0].pearsonR)).toBeGreaterThan(0.7);
+  });
+});
+
+// ランキングページの「相関が高い指標」は by-key の先頭 10 件をそのまま出す。生の |r| 順だと
+// 件数系指標は「人口の多い県ほど両方大きい」だけのペアで埋まるため、人口規模の影響を除いた
+// populationAdjustedR 順で選び・並べる (2026-09-23)。
+describe('buildCorrelationSnapshot by-key order', () => {
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+    fetchFromR2AsJsonMock.mockImplementation(() => null);
+  });
+
+  it('人口規模だけで連動するペアより、人口の影響を除いても残る相関を上に並べる', async () => {
+    const population = STATS['total-population'].map((row) => row.value);
+    const own = (i: number) => (((i * 37) % 47) - 23) * 8; // 人口と無関係な県ごとの差
+    const noise = (i: number) => (((i * 29) % 47) - 23) * 3;
+    const original = { a: STATS['metric-a'], b: STATS['metric-b'], c: STATS['metric-c'] };
+    STATS['metric-a'] = makeRows((i) => population[i] + own(i));
+    STATS['metric-b'] = makeRows((i) => population[i] * 2 + noise(i)); // 人口の代理
+    STATS['metric-c'] = makeRows((i) => own(i) + (i % 3)); // 人口を除いた部分と連動
+    try {
+      const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+      await buildCorrelationSnapshot({ dryRun: false });
+      const byKey = JSON.parse(
+        saved.get('app/correlation/by-ranking-key/metric-a.json')!
+      ) as CorrelationByKeySnapshot;
+      const b = byKey.pairs.find((p) => p.rankingKey === 'metric-b')!;
+      const c = byKey.pairs.find((p) => p.rankingKey === 'metric-c')!;
+
+      // 前提: 生の r なら人口の代理 (b) が上に来る
+      expect(Math.abs(b.pearsonR)).toBeGreaterThan(Math.abs(c.pearsonR));
+      expect(Math.abs(b.partialRPopulation!)).toBeLessThan(0.3);
+
+      const order = byKey.pairs.map((p) => p.rankingKey);
+      expect(order.indexOf('metric-c')).toBeLessThan(order.indexOf('metric-b'));
+      expect(Math.abs(c.populationAdjustedR)).toBeGreaterThan(Math.abs(b.populationAdjustedR));
+      // 画面は先頭から出すので、並びは表示値 (populationAdjustedR) の絶対値の降順でなければならない
+      const shown = byKey.pairs.map((p) => Math.abs(p.populationAdjustedR));
+      expect(shown).toEqual([...shown].sort((x, y) => y - x));
+    } finally {
+      STATS['metric-a'] = original.a;
+      STATS['metric-b'] = original.b;
+      STATS['metric-c'] = original.c;
+    }
   });
 });
 

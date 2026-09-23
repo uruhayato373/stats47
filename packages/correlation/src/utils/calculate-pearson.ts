@@ -108,6 +108,22 @@ export function calculatePartialR(
   return Math.max(-1, Math.min(1, (rAB - rAZ * rBZ) / denominator));
 }
 
+/**
+ * 人口規模の影響を除いた相関 (総人口を制御した偏相関。算出不能なら pearsonR)。
+ * 実数同士は「人口の多い県ほど両方大きい」だけで r≈0.99 になるため、指標別 by-key の
+ * 選定・並び順・表示はこの値で行う。
+ *
+ * 面積・高齢化・人口密度までは除かない。4 つの最小 (top-pairs の effectiveR) で並べると、
+ * 粗死亡率 → 自然増減率・人口増減率のような人口構成の関係が消え、電話加入数 (r=0.86→0.54)
+ * のような弱い残差相関が上位に来た (2026-09-23 に本番データで比較)。
+ */
+export function calculatePopulationAdjustedR(p: {
+  pearsonR: number;
+  partialRPopulation: number | null;
+}): number {
+  return p.partialRPopulation ?? p.pearsonR;
+}
+
 export interface ScatterDataPoint {
   areaCode: string;
   areaName: string;

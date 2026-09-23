@@ -10,6 +10,7 @@ interface CorrelatedItem {
     subtitle: string | null;
     unit: string;
     pearsonR: number;
+    populationAdjustedR: number;
     partialRPopulation: number | null;
     partialRArea: number | null;
     partialRAging: number | null;
@@ -44,6 +45,10 @@ export function CorrelationSectionClient({
 }: CorrelationSectionClientProps) {
     return (
         <SectionCard title="相関が高い指標">
+            {/* 並び順と数値は snapshot の populationAdjustedR。生の r だと人口規模だけで連動する実数同士が上位を占める */}
+            <p className="mb-2 text-xs text-muted-foreground">
+                人口規模の影響を除いた相関係数
+            </p>
             <nav className="flex flex-col">
                 {correlatedItems.map((item) => (
                     <Link
@@ -52,8 +57,8 @@ export function CorrelationSectionClient({
                         className="flex items-center justify-between py-1.5 hover:text-primary transition-colors"
                     >
                         <span className="truncate mr-2 text-sm">{item.title}</span>
-                        <span className={`shrink-0 font-mono text-xs tabular-nums ${rColor(item.pearsonR)}`}>
-                            {formatR(item.pearsonR)}
+                        <span className={`shrink-0 font-mono text-xs tabular-nums ${rColor(item.populationAdjustedR)}`}>
+                            {formatR(item.populationAdjustedR)}
                         </span>
                     </Link>
                 ))}

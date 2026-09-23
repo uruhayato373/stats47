@@ -91,6 +91,32 @@ describe("readHighlyCorrelatedFromR2", () => {
     }
   });
 
+  // 画面は populationAdjustedR を表示する。旧形式 (2026-09-23 以前・再生成されない除外指標) の
+  // snapshot を schema-invalid にするとセクションごと消えるため、人口の偏相関から補う。
+  it("populationAdjustedR を持たない旧 snapshot は人口の偏相関から補って返す", async () => {
+    fetchFromR2AsJsonMock.mockResolvedValueOnce({
+      generatedAt: "2026-09-05T00:00:00Z",
+      rankingKey: "x",
+      pairs: [
+        { ...makePair("proxy", 0.99), partialRPopulation: 0.2, partialRArea: 0.95 },
+        makePair("no-partial", 0.5),
+        { ...makePair("new", -0.6), populationAdjustedR: -0.4 },
+      ],
+    });
+
+    const result = await readHighlyCorrelatedFromR2("x");
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      // 旧 snapshot は生の |r| 順 (0.99, 0.5, -0.6) で並ぶが、表示値の絶対値順に並べ直す
+      expect(result.data.map((p) => [p.rankingKey, p.populationAdjustedR])).toEqual([
+        ["no-partial", 0.5],
+        ["new", -0.4],
+        ["proxy", 0.2],
+      ]);
+    }
+  });
+
   it("fetch が throw した場合は err を返す", async () => {
     fetchFromR2AsJsonMock.mockRejectedValueOnce(new Error("R2 down"));
 

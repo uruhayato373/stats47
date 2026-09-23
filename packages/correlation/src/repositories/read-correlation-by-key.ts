@@ -49,7 +49,12 @@ export async function readHighlyCorrelatedFromR2(
     if (result.status === "source-unavailable" || result.status === "schema-invalid") {
       return err(result.error);
     }
-    return ok(result.data.pairs.slice(0, limit));
+    // 画面は populationAdjustedR を上から出す。新しい snapshot は既にこの順だが、
+    // 2026-09-23 以前の snapshot と再生成されない除外指標の snapshot は生の |r| 順のまま残る。
+    const pairs = [...result.data.pairs].sort(
+      (a, b) => Math.abs(b.populationAdjustedR) - Math.abs(a.populationAdjustedR),
+    );
+    return ok(pairs.slice(0, limit));
   } catch (error) {
     logger.error(
       {

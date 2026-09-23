@@ -13,7 +13,7 @@
  *
  * 計算量: ~2,000 active 指標² ≈ 2M ペア。全ペアでscatter object/配列を作ると
  * allocationとGCでheapを圧迫するため、valueMapからPearson集計値だけを直接計算し、JS側で
- *   - per-key top-20 (ABS pearsonR 降順)
+ *   - per-key top-20 (人口補正後 |r| 降順。calculatePopulationAdjustedR)
  *   - global top-200 候補 (effectiveR 降順)
  *   - 走行中の total / strong(|r|>=0.7) カウント
  * だけを保持する。scatterは候補集合が確定してから候補分だけ作り、
@@ -59,6 +59,7 @@ import {
   buildScatterData,
   calculateMatchedPearsonR,
   calculatePartialR,
+  calculatePopulationAdjustedR,
   type RankValueWithArea,
 } from '../utils/calculate-pearson';
 import {
@@ -430,13 +431,20 @@ function effectiveAbsROf(p: {
   );
 }
 
-/** 候補集合を作るために per-key top-N (ABS pearsonR 降順) を保持する小ヒープ代替。 */
-class TopByAbsPearson {
+const populationAdjustedAbsR = (p: CandidateScore): number =>
+  Math.abs(calculatePopulationAdjustedR(p));
+
+/**
+ * 候補集合を作るために per-key top-N (人口補正後 |r| 降順) を保持する小ヒープ代替。
+ * 2026-09-23 まで ABS(pearsonR) 順で、件数系指標の top-20 が「人口の多い県ほど両方大きい」
+ * だけの r≈0.99 のペアで埋まっていた (例: 救急搬送人員 → K6 推計人数 r=0.99, 人口補正後 0.42)。
+ */
+class TopByPopulationAdjusted {
   private items: CandidateScore[] = [];
   constructor(private readonly limit: number) {}
   add(p: CandidateScore) {
     this.items.push(p);
-    this.items.sort((a, b) => Math.abs(b.pearsonR) - Math.abs(a.pearsonR));
+    this.items.sort((a, b) => populationAdjustedAbsR(b) - populationAdjustedAbsR(a));
     if (this.items.length > this.limit) this.items.length = this.limit;
   }
   values(): CandidateScore[] {
@@ -638,9 +646,12 @@ interface ByKeyRawRow {
   scatterData: string;
 }
 
+const counterpartOf = (row: ByKeyRawRow, rankingKey: string): string =>
+  row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+
 /**
- * 旧 find-highly-correlated.ts を SQLite で再現。
- * 対象 key を含むペアを ABS(pearson_r) DESC で取り、counterpart で dedup → limit。
+ * 対象 key を含む候補ペアを人口補正後 |r| の降順 (同値は counterpart key 昇順) で並べ、
+ * counterpart で dedup → limit。行数は候補集合 (per-key top-N ∪ global top) で上限がある。
  * scatter は X=自身になるよう必要なら x/y を swap。title/subtitle/unit を join。
  */
 function queryByKey(
@@ -649,10 +660,10 @@ function queryByKey(
   limit: number,
   metaMap: Map<string, MetricDisplayMeta>
 ): CorrelatedItem[] {
-  const FETCH_MULTIPLIER = 3;
-  const rawRows = db
-    .prepare(
-      `
+  const rawRows = (
+    db
+      .prepare(
+        `
       SELECT
         metric_key_x AS rankingKeyX,
         metric_key_y AS rankingKeyY,
@@ -664,17 +675,21 @@ function queryByKey(
         scatter_data_json AS scatterData
       FROM correlations
       WHERE metric_key_x = ? OR metric_key_y = ?
-      ORDER BY ABS(pearson_r) DESC
-      LIMIT ?
     `
-    )
-    .all(rankingKey, rankingKey, limit * FETCH_MULTIPLIER) as ByKeyRawRow[];
+      )
+      .all(rankingKey, rankingKey) as ByKeyRawRow[]
+  )
+    .map((row) => ({ row, populationAdjustedR: calculatePopulationAdjustedR(row) }))
+    .sort(
+      (a, b) =>
+        Math.abs(b.populationAdjustedR) - Math.abs(a.populationAdjustedR) ||
+        counterpartOf(a.row, rankingKey).localeCompare(counterpartOf(b.row, rankingKey))
+    );
 
   const seen = new Set<string>();
   const rows = rawRows
-    .filter((row) => {
-      const counterpart =
-        row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+    .filter(({ row }) => {
+      const counterpart = counterpartOf(row, rankingKey);
       if (seen.has(counterpart)) return false;
       seen.add(counterpart);
       return true;
@@ -682,9 +697,8 @@ function queryByKey(
     .slice(0, limit);
 
   const results: CorrelatedItem[] = [];
-  for (const row of rows) {
-    const counterpartKey =
-      row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+  for (const { row, populationAdjustedR } of rows) {
+    const counterpartKey = counterpartOf(row, rankingKey);
     const meta = displayMetaFor(counterpartKey, metaMap);
     if (meta.title === null) continue;
 
@@ -712,6 +726,7 @@ function queryByKey(
       subtitle: meta.subtitle,
       unit: meta.unit,
       pearsonR: row.pearsonR,
+      populationAdjustedR,
       partialRPopulation: row.partialRPopulation,
       partialRArea: row.partialRArea,
       partialRAging: row.partialRAging,
@@ -824,9 +839,9 @@ export async function buildCorrelationSnapshot(
   const getCv = makeCvCorrelationGetter(loaded);
 
   // 3. ペア走査 (i<j)。per-key top-20 と global top-200 候補のみ JS で保持し bound。
-  const perKeyTop = new Map<string, TopByAbsPearson>();
+  const perKeyTop = new Map<string, TopByPopulationAdjusted>();
   for (const k of pairKeys)
-    perKeyTop.set(k, new TopByAbsPearson(CORRELATION_BY_KEY_LIMIT));
+    perKeyTop.set(k, new TopByPopulationAdjusted(CORRELATION_BY_KEY_LIMIT));
   const globalTop = new GlobalTopByEffective(
     CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT
   );

@@ -1,3 +1,5 @@
+import { calculatePopulationAdjustedR } from "../utils/calculate-pearson";
+
 export const CORRELATION_SNAPSHOT_PREFIX = "app/correlation";
 export const CORRELATION_TOP_PAIRS_KEY = `${CORRELATION_SNAPSHOT_PREFIX}/top-pairs.json`;
 export const CORRELATION_STATS_KEY = `${CORRELATION_SNAPSHOT_PREFIX}/stats.json`;
@@ -24,6 +26,8 @@ export interface CorrelatedItem {
   subtitle: string | null;
   unit: string;
   pearsonR: number;
+  /** 並び順と画面表示の基準。人口規模の影響を除いた相関 (calculatePopulationAdjustedR) */
+  populationAdjustedR: number;
   partialRPopulation: number | null;
   partialRArea: number | null;
   partialRAging: number | null;
@@ -145,16 +149,24 @@ function parseCorrelatedItem(value: unknown, index: number): CorrelatedItem {
   if (!isRecord(value) || !Array.isArray(value.scatterData)) {
     throw new Error(`pairs[${index}] is schema-invalid`);
   }
-  return {
-    rankingKey: assertString(value.rankingKey, `pairs[${index}].rankingKey`),
-    title: assertString(value.title, `pairs[${index}].title`),
-    subtitle: assertNullableString(value.subtitle, `pairs[${index}].subtitle`),
-    unit: assertString(value.unit, `pairs[${index}].unit`),
+  const correlations = {
     pearsonR: assertNumber(value.pearsonR, `pairs[${index}].pearsonR`),
     partialRPopulation: assertNullableNumber(value.partialRPopulation, `pairs[${index}].partialRPopulation`),
     partialRArea: assertNullableNumber(value.partialRArea, `pairs[${index}].partialRArea`),
     partialRAging: assertNullableNumber(value.partialRAging, `pairs[${index}].partialRAging`),
     partialRDensity: assertNullableNumber(value.partialRDensity, `pairs[${index}].partialRDensity`),
+  };
+  return {
+    rankingKey: assertString(value.rankingKey, `pairs[${index}].rankingKey`),
+    title: assertString(value.title, `pairs[${index}].title`),
+    subtitle: assertNullableString(value.subtitle, `pairs[${index}].subtitle`),
+    unit: assertString(value.unit, `pairs[${index}].unit`),
+    ...correlations,
+    // 2026-09-23 以前の snapshot と、以後再生成されない除外指標の snapshot は持たない
+    populationAdjustedR:
+      value.populationAdjustedR === undefined
+        ? calculatePopulationAdjustedR(correlations)
+        : assertNumber(value.populationAdjustedR, `pairs[${index}].populationAdjustedR`),
     scatterData: value.scatterData.map((point, pointIndex) => {
       if (!isRecord(point)) throw new Error(`pairs[${index}].scatterData[${pointIndex}] must be an object`);
       return {
