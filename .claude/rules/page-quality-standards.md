@@ -25,14 +25,15 @@ paths:
    fixture に差し替えて決定的にできたときだけ (`CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`)。
 2. **週次 (全件)**: `npm run page-quality:audit-weekly` が `sitemap.xml` から公開対象URLを列挙し
    (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析を行う。
-   `page-quality-audit-weekly.yml` が `--concurrency 8 --skip-rsc --browser-representative` で実行し、
+   `page-quality-audit-weekly.yml` が `--concurrency 12 --skip-rsc --browser-representative` で実行し、
    error違反があれば `page-quality-alert,auto-generated` ラベルでIssueを起票する。
    - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`) と空の見出し (`empty_headings`)
    - **代表URL 11件だけブラウザ**: 文字の切れ (`clipped_text`)・タップ要素の重なり (`overlapping_tap_targets`)・
      axe-core の WCAG A/AA critical/serious 規則数 (`a11y_violations`)。全URLをブラウザで開くのはコストが見合わない
    - **RSC は全件では測らない** (`--skip-rsc`): RSC はキャッシュされず 1 件ごとにサーバー描画する
      (実測 0.5〜3.7 秒/件)。2026-09-19 の初回は RSC 込み並列 4 で 45 分の制限内に 1,200/6,237 URL しか進まず
-     打ち切られた。RSC 抜き並列 8 は 800 URL 122 秒 (全件見積 15 分)。RSC は代表URL検査で測る
+     打ち切られた。RSC 抜き並列 8 は手元で 800 URL 122 秒だったが、CI では全件 54.5 分かかった (2026-09-23 実測。
+     GitHub のサーバーから本番までが遅い)。並列を 12 に上げ、ジョブの制限時間を 120 分にしている。RSC は代表URL検査で測る
 
 ## スクショ保存と週次 agent の確認 (2026-09-23)
 
