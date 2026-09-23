@@ -21,17 +21,6 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
-### [IG-CAROUSEL-GLYPH-SMEAR-01] 予約中の Instagram カルーセルの見出しが疑似太字で潰れた古い画像のまま
-
-タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/sns/review-sns-images.ts が該当投稿の文字潰れを指摘しない] [起票:2026-09-23] [期日:2026-09-25]
-
-- **owner**: instagram-strategist (再レンダー・R2 差し替え) / sns-renderer
-- **実測 (2026-09-23・週次 SNS 画像確認の初回)**: 白抜き見出しの「何」「稿」「字」「象」「徴」「係」「道」などの内側が埋まり、別の字に見える。原因は見出し書体 Dela Gothic One (400 の単一ウェイト) への太字指定で合成された疑似太字。コードは `15103fcaf` (2026-09-23 18:09 JST) の `IG_HEADLINE_STYLE` で全テンプレートとも直っているが、R2 の画像はその直前 (18:04〜18:05 JST) に上げたもので古い。
-- **対象 (予約日時順)**: 2026-09-25 19:00 `compare-carousel/13000-vs-27000` (4 枚目) / 09-26 19:00 `area-carousel/01000` (全 5 枚) / 09-29 19:00 `area-carousel/47000` / 09-30 19:00 `correlation…/dual-income-household-ratio--floor-area-per-dwelling-owner` (3・4 枚目)。初回の別の実行では `miso-consumption-quantity` (09-27) と `sake-consumption-expenditure` (10-01) も挙がったので、同じ時刻以前に上げた素材はすべて確認する。
-- **次**: 対象の props で現行コードから再レンダーし、`sns/<domain>/<content_key>/instagram/stills/` を差し替える (予約ファイルの slides 名は変えない)。差し替え後に `review-sns-images.ts` を再実行して指摘が消えることを確認する。
-- **停止条件**: 画像以外 (本文・予約時刻・台帳) は変えない。投稿日時までに直せない場合は予約から外すかをオーナーに確認する。
-- **完了条件**: 対象の全スライドで見出しの字が正しく読め、週次 SNS 画像確認が該当投稿を指摘しない。
-
 ### [MAP-BASEMAP-APIKEY-01] ランキング等の地図の背景に CARTO の「API KEY REQUIRED」透かしが全面に出る
 
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:curl -s https://stats47.jp/tiles/light_all/5/28/12.png の画像に透かしが無い] [起票:2026-09-23]
