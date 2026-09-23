@@ -1207,6 +1207,40 @@
       ]
     },
     {
+      "name": "THREADS_ACCESS_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ],
+      "note": "Threads 長期アクセストークン (60 日)。post-threads-scheduled.yml が使い、threads-token-refresh.yml が週次で更新する"
+    },
+    {
+      "name": "THREADS_FORCE_NOW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "テスト用: threads/post-from-schedule.cjs の現在時刻を ISO 日時で固定する (--now と同じ)"
+    },
+    {
+      "name": "THREADS_TOKEN_OUT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "threads/refresh-token-ci.cjs が新トークンを書き出すファイルパス (既定 /tmp/threads-new-token.txt)"
+    },
+    {
+      "name": "THREADS_USER_ID",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ],
+      "note": "Threads のユーザー ID。投稿 API のパス /{threads-user-id}/threads に使う"
+    },
+    {
       "name": "USER",
       "visibility": "server",
       "contexts": [

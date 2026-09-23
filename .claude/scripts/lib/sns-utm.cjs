@@ -5,7 +5,7 @@
  * 組み立てていたのを 1 本化する。UTM 規則を変えるときはここだけを直す (ドリフト防止)。
  *
  * 規約 (§4):
- *   utm_source  = x | instagram | youtube
+ *   utm_source  = x | instagram | youtube | threads
  *   utm_medium  = social
  *   utm_campaign= ドメイン別 (ranking=<rankingKey> / compare=compare-<a>-vs-<b> /
  *                 correlation=correlation-<x>--<y> / buzz-map=buzz-map-<ideaId>)
@@ -19,7 +19,7 @@
 "use strict";
 
 const BASE = "https://stats47.jp";
-const VALID_SOURCES = new Set(["x", "instagram", "youtube"]);
+const VALID_SOURCES = new Set(["x", "instagram", "youtube", "threads"]);
 
 /** campaign 名をドメイン別に決定 (§4)。返り値は utm_campaign にそのまま入れる。 */
 function campaignFor(domain, params = {}) {
@@ -47,7 +47,7 @@ function campaignFor(domain, params = {}) {
  * canonical URL に UTM を付ける (§4 / §7.1)。
  * @param {object} p
  * @param {string} p.canonicalUrl UTM なしの canonical (相対 /ranking/... も絶対も可・query 不可)
- * @param {"x"|"instagram"|"youtube"} p.platform
+ * @param {"x"|"instagram"|"youtube"|"threads"} p.platform
  * @param {string} p.campaign 既に決定した utm_campaign (campaignFor で作る)
  * @param {string} p.variant utm_content
  * @param {boolean} [p.pinned] YouTube pinned_comment なら true (variant に -pinned)

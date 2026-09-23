@@ -16,17 +16,18 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 
 ---
 
-## 0. チャネル別の位置づけ (2026-08-23 更新)
+## 0. チャネル別の位置づけ (2026-09-23 更新)
 
 | チャネル | 位置づけ | 目標 | 頻度上限 | 主フォーマット | primary agent |
 |---|---|---|---|---|---|
 | **Instagram** | **主力** | フォロワー 10K (2027-02)・保存率 | カルーセル 1 / 日 (曜日で切り口を回す・§2-3c) + リール 1 / 週 | 切り口別カルーセル / Reels | `instagram-strategist` |
-| **X** | 自動化・トレンド瞬発 | 1-2K 維持・サイト送客 | 予約 2-3 / 週 + 引用RT 随時 (1 日 ≤ 3) | ランキング投稿 / 引用RT | `x-strategist` |
+| **X** | 自動化・トレンド瞬発 | 1-2K 維持・サイト送客 | 予約 3 / 日 (引用RT を含め 1 日 ≤ 3) | ランキング / 地域 / テーマ投稿 / 引用RT | `x-strategist` |
 | **note** | 外部衛星 | stats47 への送客 | 上限なし (2026-08-03 オーナー判断で撤廃・下記) | 広い検索意図の記事 | `note-manager` |
-| **YouTube** | **限定 pilot** | 通常動画の視聴維持・指名/サイト送客を検証 | **6週間で3本まで** | 6〜12分の横型・編集動画 | `strategy-advisor` (実験 owner) |
+| **Threads** | 新規 (2026-09-23〜) | サイト送客・IG 以外の Meta 面の反応検証 | 予約 2 / 日 (X と同じ題材を時間をずらして転用) | テキスト + 画像 1 枚 | `x-strategist` |
+| **YouTube** | **保留 (2026-09-23 オーナー判断)** | — | **新規投稿しない** | — | `strategy-advisor` (実験 owner) |
 | **TikTok** | **撤退 (恒久)** | — | **0 (投稿しない)** | — | — |
 
-### YouTube pilot の方式 (2026-08-23〜、EXP-006)
+### YouTube pilot の方式 (2026-08-23〜、EXP-006・2026-09-23 から保留)
 
 - **通常動画をマスターコンテンツにする**。YouTube 用の 6〜12 分動画を先に編集し、そこから Instagram Reels / X 用に各 2〜4 本を切り出す
   (IG の予想クイズ型リールはこの切り出しとは別枠で、pilot を待たずに出す。§2-4)
@@ -53,8 +54,9 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 | **YouTube 通常動画は pilot 中3本まで** | ≤ 3 / 6週間 | 少量で制作工数・視聴維持・送客を検証する。Shorts 単独量産は禁止 |
 | **YouTube マスター1本からの派生** | Reels / X 各 2〜4 本 | マスター先行。派生は同じ主張・出典を保ち、切り抜きだけで意味を歪めない |
 | **X は 1 日 3 本まで** (`X_DAILY_MAX=3`) | ≤ 3 / 日 | スパム判定回避。予約 + 引用RT + ニュース連動の合算 |
-| **X 定型ストックは週 2-3 本** (`X_WEEKLY_TARGET_MIN=2` / `X_WEEKLY_TARGET_MAX=3`) | 2-3 / 週 | 2026-09-23 に縮小 (オーナー判断)。7〜9 月の週 14-21 本は型を変えても反応が変わらなかった (§2-5 の実測)。量より題材で差をつける |
+| **X 定型ストックは 1 日 3 本** (`X_WEEKLY_TARGET_MIN=21` / `X_WEEKLY_TARGET_MAX=21`) | 21 / 週 | 2026-09-23 夕方のオーナー判断で同日朝の「週 2-3 本」を撤回。1 日の 3 枠は時間をずらし、ランキング・地域・テーマなど型を混ぜる。同じ指標・同じ県・同じテーマを再投稿しない |
 | **X 引用RT は 1 日 3 本まで** | ≤ 3 / 日 | 上記 1 日上限の内数。スパム判定回避 |
+| **Threads は 1 日 3 本まで・運用は 2 本** | ≤ 3 / 日 | 2026-09-23 新設。`threads-core.cjs` が上限を検査し、cron は 1 回に 1 件だけ公開する。本文 500 字以内 |
 | **IG は Graph API 25 件/24h 上限** | ≤ 25 / 24h | Meta 制約 |
 | **IG カルーセルは 1 日 1 本・同じ切り口を 2 日続けない** | 1 / 日 | 2026-09-23 オーナー判断。本数ではなく切り口の変化で伸ばす (§2-3c) |
 | **同一内容の連投禁止 (全チャネル)** | — | インプレッション食い合い。X は `lint-x-captions.cjs` の類似度チェックで機械担保 |
@@ -78,8 +80,8 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 <!-- x-catalog:quota:start -->
 ```
 X_DAILY_MAX=3
-X_WEEKLY_TARGET_MIN=2
-X_WEEKLY_TARGET_MAX=3
+X_WEEKLY_TARGET_MIN=21
+X_WEEKLY_TARGET_MAX=21
 ```
 <!-- x-catalog:quota:end -->
 
@@ -409,7 +411,7 @@ SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない
 
 | パラメータ | 値 |
 |---|---|
-| `utm_source` | `x` / `instagram` / `youtube` |
+| `utm_source` | `x` / `instagram` / `youtube` / `threads` |
 | `utm_medium` | `social` |
 | `utm_campaign` | ranking: `<rankingKey>` / compare: `compare-<areaA>-vs-<areaB>` / correlation: `correlation-<keyX>--<keyY>` / geo: `<analysis contentId>` / theme: `theme-<themeKey>` / area: `area-<areaCode>` |
 | `utm_content` | `<template>` (例: `shock`, `paradox`) |
