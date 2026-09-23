@@ -102,7 +102,7 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 
 - `structure` = キャプションの型 (LLM がこの枠で文章を書く)
 - `image_kind` = §2-9 の画像種 id (投稿添付画像)
-- `char_max` = URL・改行を除く本文の上限文字数
+- `char_max` = URL・改行を除く本文の上限文字数。これとは別に、X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23・絵文字 2。`.claude/scripts/lib/x-weighted-length.cjs`) を lint が検査する。char_max を満たしても日本語が多いと X に弾かれるため (2026-09-23 に重み 284 で実際に弾かれた)
 - `best_time` = 推奨投稿時間帯 (scheduled_at 割付の既定。§2-8 の時間帯表と整合)
 
 <!-- x-catalog:templates:start -->

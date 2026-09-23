@@ -13,6 +13,7 @@
  *   - URL は本文に直書きせず `{{url}}` トークン 1 個 (register が UTM URL へ置換)
  *   - ハッシュタグ 3-5 個
  *   - URL・改行を除く本文が template.char_max 以下
+ *   - X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23。lib/x-weighted-length.cjs)
  *   - NG 語なし / 既存・同バッチとの類似度 < 0.8
  *
  * Usage:
@@ -29,6 +30,9 @@ const catalog = require(
 );
 const store = require(
   path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"),
+);
+const { MAX_WEIGHTED_LENGTH, weightedLength } = require(
+  path.join(PROJECT_ROOT, ".claude/scripts/lib/x-weighted-length.cjs"),
 );
 
 const NG_WORDS = [
@@ -122,6 +126,9 @@ function main() {
       const len = effectiveLength(cap);
       if (len > tmpl.charMax) errs.push(`本文 ${len}字 > 上限 ${tmpl.charMax}字`);
     }
+    // X の重み付き文字数 (日本語 2・URL 23・絵文字 2)。charMax を満たしても X に弾かれるのを防ぐ
+    const weighted = weightedLength(cap);
+    if (weighted > MAX_WEIGHTED_LENGTH) errs.push(`X の重み付き文字数 ${weighted} > ${MAX_WEIGHTED_LENGTH} (日本語は 1 字 2)`);
     // ハッシュタグ 3-5
     const tags = countHashtags(cap);
     if (tags < 3 || tags > 5) errs.push(`ハッシュタグ ${tags} 個 (3-5 が必要)`);
@@ -151,7 +158,7 @@ function main() {
       console.log(`❌ [${it.template}] ${it.key}`);
       for (const e of errs) console.log(`     - ${e}`);
     } else {
-      console.log(`✅ [${it.template}] ${it.key}  (${effectiveLength(cap)}字, #${tags})`);
+      console.log(`✅ [${it.template}] ${it.key}  (${effectiveLength(cap)}字, 重み ${weighted}, #${tags})`);
     }
   }
 

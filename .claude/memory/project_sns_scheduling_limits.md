@@ -16,4 +16,4 @@ metadata:
 
 **Why:** どちらも UI が黙って弾くだけで、スクリプトの成功判定に頼ると「予約できたつもり」になる。
 
-**How to apply:** X の本文を書くときは重み付き長で 280 未満を確認する (lint 改修前は手計算)。Threads は 25 件を超える一括予約を組まず、公開で空いた枠へ数日おきに補充する。関連 [[feedback_x_post_url_integrity]] [[project_sns_reorg_2026_07]]
+**How to apply:** X の本文は `lint-x-captions.cjs` が重み付き長 ≤ 280 を検査する (2026-09-23 に追加、`lib/x-weighted-length.cjs`)。lint を通さずに本文を直すときも同じ関数で測る。Threads は 25 件を超える一括予約を組まず、公開で空いた枠へ数日おきに補充する。関連 [[feedback_x_post_url_integrity]] [[project_sns_reorg_2026_07]]
