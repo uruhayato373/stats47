@@ -183,6 +183,12 @@ jobs:
           node .claude/scripts/measurement/restore.mjs gsc --if-activated
           node .claude/scripts/gsc/build-coverage-queue.mjs
 
+      # 再構築したキューへ直近 14 日の URL Inspection 観測を反映する (登録済み→done)。
+      # 再構築が失敗しても前回のキューに対して反映できるので、outcome に関係なく走らせる。
+      - name: 🔁 Sync coverage queue with URL Inspection
+        if: always()
+        run: node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection || echo "::warning::coverage queue sync failed, continuing"
+
       - name: 📄 Summarize coverage queue
         if: always()
         run: |

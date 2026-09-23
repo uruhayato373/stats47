@@ -147,6 +147,43 @@ def process_zip(zp: str):
     return result
 
 
+# 概要グラフ (日付,未登録,登録済み,表示回数) の列名。カテゴリ別グラフ (日付,該当ページ) は持たない。
+INDEXED_HEADERS = ("登録済み", "インデックス登録済み", "Indexed")
+NOT_INDEXED_HEADERS = ("未登録", "インデックス未登録", "Not indexed")
+
+
+def parse_index_status(trend_text: str):
+    """概要グラフの最新日から登録済み/未登録の件数を返す。登録済み列が無いグラフは None。
+
+    「重大な問題」表は未登録の理由別件数しか持たないため、登録済みの総数はこのグラフにしか無い。
+    以前は読んでいなかったので coverage-totals-history.csv の indexed-submitted 列が常に空だった。
+    """
+    rows = [row for row in csv.reader(trend_text.splitlines()) if row]
+    if len(rows) < 2:
+        return None
+    header = [h.strip() for h in rows[0]]
+    indexed_col = next((header.index(h) for h in INDEXED_HEADERS if h in header), None)
+    if indexed_col is None:
+        return None
+    not_indexed_col = next((header.index(h) for h in NOT_INDEXED_HEADERS if h in header), None)
+    latest = max(rows[1:], key=lambda row: row[0].strip())
+
+    def count(col):
+        try:
+            return int(latest[col].replace(",", "").strip())
+        except (IndexError, TypeError, ValueError):
+            return None
+
+    indexed = count(indexed_col)
+    if indexed is None:
+        return None
+    return {
+        "date": latest[0].strip(),
+        "indexed": indexed,
+        "not_indexed": count(not_indexed_col) if not_indexed_col is not None else None,
+    }
+
+
 def is_gsc_zip(zp: str) -> bool:
     name = unicodedata.normalize("NFC", os.path.basename(zp))
     return name.endswith(".zip") and ("インデックス" in name or "カバレッジ" in name or "Coverage" in name)
@@ -216,6 +253,7 @@ def main():
     os.makedirs(out_dir, exist_ok=True)
     aggregate = {}
     trend_text = None
+    index_status = None
     written = []
     for r in reports:
         if not r:
@@ -224,7 +262,13 @@ def main():
             for k, v in r["aggregate"].items():
                 aggregate[k] = max(aggregate.get(k, 0), v)
         if r["trend"] and not r["category"]:
-            trend_text = r["trend"]
+            # 登録済み列を持つ概要グラフを優先する (カテゴリ別グラフで上書きしない)
+            status = parse_index_status(r["trend"])
+            if status:
+                index_status = status
+                trend_text = r["trend"]
+            elif index_status is None:
+                trend_text = r["trend"]
         if r["drilldown"] and r["category"]:
             cat = r["category"]
             # ★命名規約: 生 drilldown は `-drilldown.csv`。auto-resubmit.mjs は `-urls.csv` だけ拾うため、
@@ -242,8 +286,13 @@ def main():
         totals = {}
         for reason, cnt in aggregate.items():
             totals[CATEGORY_MAP.get(reason, reason)] = cnt
+        if index_status:
+            totals["indexed-submitted"] = index_status["indexed"]
+        else:
+            print("  !! 概要グラフに登録済み件数が無い — indexed-submitted は空のまま", file=sys.stderr)
         with open(os.path.join(out_dir, "category-totals.json"), "w", encoding="utf-8") as f:
-            json.dump({"week": week, "date": today.isoformat(), "totals": totals, "raw": aggregate}, f, ensure_ascii=False, indent=2)
+            json.dump({"week": week, "date": today.isoformat(), "totals": totals, "raw": aggregate,
+                       "index_status": index_status}, f, ensure_ascii=False, indent=2)
         written.append(("category-totals.json", len(totals)))
 
     if trend_text:

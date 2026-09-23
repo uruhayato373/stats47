@@ -51,10 +51,15 @@ const LIMIT_ARG = (() => {
 
 // Phase 8: 対象 URL を 1,500 まで拡張（API quota 2,000/日の 75%）
 const MAX_URLS = 1500;
-const OBSERVED_URL_QUOTA = 500;
-const REMEDIATION_URL_QUOTA = 300;
-const GONE_RANKING_QUOTA = 100;
-const KNOWN_RANKING_QUOTA = 800;
+// 各グループの枠は「その日の検査件数」に対する割合で決める。
+// 以前は 1,500 件前提の固定枠 (検索実績上位 500 が先頭) で並べてから `--limit` で先頭を切っていたため、
+// CI 既定の --limit 500 では検索実績上位だけで枠が埋まり、是正キューが一度も検査されなかった
+// (2026-09-17〜23 の 7 日間、pending 1,133 件中 0 件)。是正キューは「直した後に登録されたか」を
+// 観測する唯一の経路なので最大の割合を充てる。静的ページ・都道府県・sitemap tag は割合を持たず全件入れ、
+// KNOWN_RANKING_KEYS は残り枠を使う。
+const REMEDIATION_URL_SHARE = 0.5;
+const OBSERVED_URL_SHARE = 0.25;
+const GONE_RANKING_SHARE = 0.05;
 const REQUEST_INTERVAL_MS = 300; // ~200 req/min（quota 効率を保ちつつ 1,500 を約 8 分）
 
 function todayInTokyo(date = new Date()) {
@@ -233,13 +238,51 @@ function loadRemediationUrls() {
   }
 }
 
-function buildUrlList() {
+/** 検査件数 maxUrls に対する各グループの枠。 */
+function quotasFor(maxUrls) {
+  return {
+    remediation: Math.floor(maxUrls * REMEDIATION_URL_SHARE),
+    observed: Math.floor(maxUrls * OBSERVED_URL_SHARE),
+    gone: Math.floor(maxUrls * GONE_RANKING_SHARE),
+    known: maxUrls,
+  };
+}
+
+/** 優先度順に並んだ URL を正規化・重複排除し、maxUrls 件で切る。 */
+function capUrls(ordered, maxUrls) {
+  const seen = new Set();
+  const result = [];
+  let collapsed = 0;
+  for (const raw of ordered) {
+    const u = normalizeInspectionUrl(raw);
+    if (!u) continue;
+    if (!seen.has(u)) {
+      seen.add(u);
+      result.push(u);
+    } else {
+      collapsed++;
+    }
+    if (result.length >= maxUrls) break;
+  }
+  return { urls: result, collapsed };
+}
+
+function buildUrlList(maxUrls = MAX_URLS) {
   // Phase 8: sitemap 全件 + KNOWN_RANKING_KEYS 全件 + GONE_RANKING_KEYS（旧 URL 観測用）
   // + GSC pages.csv の URL（観測されている URL を優先補完）
-  // 重複排除後に MAX_URLS で切る
+  // 重複排除後に maxUrls で切る
+  const quota = quotasFor(maxUrls);
   const ordered = []; // 優先度順
 
-  // Priority 1: GSC pages.csv の検索実績上位。fragment は除去してから quota を使う。
+  // Priority 1: 是正キュー。修正後の coverageState 遷移を追う (全件を数日で巡回)。
+  const remediationUrls = rotateDaily(
+    uniqueNormalizedUrls(loadRemediationUrls()),
+    quota.remediation,
+  );
+  ordered.push(...remediationUrls);
+  log(`P1: Added ${remediationUrls.length} URLs from remediation queue`);
+
+  // Priority 2: GSC pages.csv の検索実績上位。fragment は除去してから quota を使う。
   const snapshotDir = getLatestSnapshotDir();
   if (snapshotDir) {
     const pagesCsv = path.join(snapshotDir, "pages.csv");
@@ -252,20 +295,12 @@ function buildUrlList() {
         .sort((a, b) => b.impressions - a.impressions);
       const observed = uniqueNormalizedUrls(
         pages.map((p) => p.url),
-        OBSERVED_URL_QUOTA,
+        quota.observed,
       );
       ordered.push(...observed);
-      log(`P1: Added ${observed.length} normalized URLs from pages.csv`);
+      log(`P2: Added ${observed.length} normalized URLs from pages.csv`);
     }
   }
-
-  // Priority 2: 是正キュー。修正後の coverageState 遷移を日次で追う。
-  const remediationUrls = rotateDaily(
-    uniqueNormalizedUrls(loadRemediationUrls()),
-    REMEDIATION_URL_QUOTA,
-  );
-  ordered.push(...remediationUrls);
-  log(`P2: Added ${remediationUrls.length} URLs from remediation queue`);
 
   // Priority 3: 主要静的ページ
   const staticPages = [
@@ -294,42 +329,28 @@ function buildUrlList() {
   // Priority 6: GONE_RANKING_KEYS（数日で全件を巡回）
   const goneKeys = rotateDaily(
     loadKeysFromTsFile("gone-ranking-keys.ts"),
-    GONE_RANKING_QUOTA,
+    quota.gone,
   );
   for (const k of goneKeys) {
     ordered.push(`${SITE_ORIGIN}/ranking/${k}`);
   }
   log(`P6: Added ${goneKeys.length} rotated URLs from GONE_RANKING_KEYS`);
 
-  // Priority 7: KNOWN_RANKING_KEYS（約3日で全件を巡回）
+  // Priority 7: KNOWN_RANKING_KEYS（残り枠で巡回）
   const knownKeys = rotateDaily(
     loadKeysFromTsFile("known-ranking-keys.ts"),
-    KNOWN_RANKING_QUOTA,
+    quota.known,
   );
   for (const k of knownKeys) {
     ordered.push(`${SITE_ORIGIN}/ranking/${k}`);
   }
   log(`P7: Added ${knownKeys.length} rotated URLs from KNOWN_RANKING_KEYS`);
 
-  // 重複排除（順序保持）+ MAX_URLS で切る
-  const seen = new Set();
-  const result = [];
-  let collapsed = 0;
-  for (const raw of ordered) {
-    const u = normalizeInspectionUrl(raw);
-    if (!u) continue;
-    if (!seen.has(u)) {
-      seen.add(u);
-      result.push(u);
-    } else {
-      collapsed++;
-    }
-    if (result.length >= MAX_URLS) break;
-  }
+  const { urls, collapsed } = capUrls(ordered, maxUrls);
   log(
-    `Total: ${result.length} URLs (capped at MAX_URLS=${MAX_URLS}, raw ${ordered.length}, normalized duplicates ${collapsed})`,
+    `Total: ${urls.length} URLs (capped at ${maxUrls}, raw ${ordered.length}, normalized duplicates ${collapsed})`,
   );
-  return result;
+  return urls;
 }
 
 async function inspect(searchconsole, inspectionUrl) {
@@ -458,8 +479,9 @@ async function main() {
   );
   fs.mkdirSync(outDir, { recursive: true });
 
-  let urls = buildUrlList();
-  if (LIMIT_ARG) urls = urls.slice(0, LIMIT_ARG);
+  const urls = buildUrlList(
+    LIMIT_ARG ? Math.min(LIMIT_ARG, MAX_URLS) : MAX_URLS,
+  );
   log(`Total URLs to inspect: ${urls.length}`);
 
   if (DRY_RUN) {
@@ -783,7 +805,9 @@ if (require.main === module) {
 }
 
 module.exports = {
+  capUrls,
   normalizeInspectionUrl,
+  quotasFor,
   rotateDaily,
   todayInTokyo,
   uniqueNormalizedUrls,

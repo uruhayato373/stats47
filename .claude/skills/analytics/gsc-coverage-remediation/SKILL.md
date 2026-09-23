@@ -37,9 +37,11 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
        fix-5xx             → 実バグ修正 (PR)
        verify-intent(404)  → 旧URL/内部パスか確認。死亡が正なら resolved-by-design でマーク
        ↓
-[5] 記録      improvement-log [COVERAGE-LOOP-01] + 改善バックログ status / build --mark-done
+[5] 記録      日次CIが --sync-inspection で「URL Inspection で登録済み」になった URL を自動で done
+       │         (resolved_by: url-inspection。再び未登録と観測されたら pending に戻る)
+       │         + improvement-log [COVERAGE-LOOP-01] / 人が確定したものは build --mark-done
        ↓
-[6] 経過観測  次週 export → ingest+build で件数減 (8378↓) と登録済↑ を totals-history で追う
+[6] 経過観測  次週 export → ingest+build で件数減と登録済↑ (概要グラフの最新値) を totals-history で追う
 ```
 
 ## A/B 分類ロジック (build-coverage-queue.mjs)
@@ -132,12 +134,16 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 - **live (observe-after-fix) は送信ではなく「直してから観測」**。Indexing API 送信は 2026-07-23 に退役した
   (公式に JobPosting/BroadcastEvent VideoObject 専用・準拠是正)。次を行う:
   1. sitemap 掲載整合 (`SITEMAP_RANKING_KEYS` / `sitemap.ts`)・内部リンク強化・canonical 是正・content 補強
-  2. `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50` で coverageState / lastCrawlTime を観測
+  2. 観測は日次 CI が自動で行う。`url-inspection-daily.cjs` は 1 日の検査件数の 50% を是正キュー
+     (pending / in-progress) に充て、全件を数日で巡回する。登録済みになった URL は
+     `build-coverage-queue.mjs --sync-inspection` が done にする (手動で確かめたいときも同じコマンド)
 - `coverage-live-observe-urls.csv` は観測対象の候補リスト (送信キューではない)。
 - ローカルからの R2 push は禁止 (`_assert-ci-write` で停止)。
 
 ### Phase 6 — 記録 (真実源を更新)
-- 完了した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
+- URL Inspection で登録済みになった URL は日次 CI が自動で done にする (`--sync-inspection`)。
+  累計は LATEST.md の「URL Inspection で登録を確認して done にした URL」、queue の `summary.indexed_by_inspection`。
+- 人が確定した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
 - `improvement-log.md` の `[COVERAGE-LOOP-01]` に「何をやったか」(送信件数・content-check 結果・fix-5xx PR) を追記。
 - 改善バックログ `.claude/todo/improvements.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
 - **effect/* を付ける前に実証チェックリスト** (`evidence-based-judgment.md`): 送信した URL が次週 indexed 化したかを
@@ -145,7 +151,9 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 ### Phase 7 — 経過観測 (次サイクルの起点)
 - 次週CIが認証付きexportを復元 → Phase 2を再実行。`coverage-totals-history.csv` に週次の件数が積まれる。
-- 判定指標: **404・soft404 の総件数が減少**、**登録済みが増加**、**resubmit した URL が indexed 化**。
+- 判定指標: **404・soft404 の総件数が減少**、**登録済み (totals-history の `indexed-submitted`) が増加**、
+  **是正した URL が indexed 化** (`indexed_by_inspection`)。登録済みは ingest が概要グラフ
+  (日付,未登録,登録済み,表示回数) の最新日から取る。概要グラフが無い export では空のまま警告を出す。
 - done だった URL が再び壊れて検出されたら自動で再 actionable 化される (5xx 再発は pending に戻す)。
 
 ## 真実源とファイル
@@ -163,7 +171,9 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 ## cadence (週次)
 
 **自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
-(`build-coverage-queue.mjs` → `.claude/state/gsc/` を develop へ commit-back)。
+(`build-coverage-queue.mjs` → `--sync-inspection` → `.claude/state/gsc/` を develop へ commit-back)。
+**自動化していないもの**: Phase 4 の是正そのもの (sitemap 掲載判断・内部リンク・content 補強・5xx 修正)。
+どれもコード変更と「このページを検索に出すべきか」の判断を伴うため、gsc-analyst が `--next` から拾って進める。
 入力週が 1 週以内なら本番 HTTP を再実測する。新しい export がなく入力週が 2 週以上古い場合は、
 古い母集団を最新と誤認しないよう fail-closed で停止する。失敗時は `[Coverage Alert]` Issue
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
@@ -174,7 +184,9 @@ step には `timeout-minutes: 12` を置き、probe が長引いても週次計�
 Googleの初回ログイン・期限切れ・2FAは人間工程として残す。APIの検索パフォーマンス取得とは別経路。
 
 - `/weekly-review` 前に認証付き計測の成否と入力鮮度を確認し、未取得は欠測として扱う。
-- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測) が毎日稼働。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
+- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測 → `--sync-inspection` で queue 反映) が毎日稼働。
+  2026-09-23 まではCI既定の `--limit 500` が検索実績上位 500 件だけで埋まり、是正キューを 1 件も検査していなかった (7日間 0/1,133)。
+  枠は割合配分に変えた (`url-inspection-daily.cjs` の `*_SHARE`)。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
   本スキルのUI export経路は「UI exportでしか取れない総件数・未把握URL」を補う。
 
 ## 関連

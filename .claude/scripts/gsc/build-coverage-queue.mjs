@@ -28,12 +28,14 @@
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --next 20       # 次にやる actionable を JSONL
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url>
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> [--wave-id 2026-06-16-coverage]
+ *   node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection  # 直近14日の URL Inspection で登録済み→done
  *
  * 正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { parse as parseCsv } from "csv-parse/sync";
 import { parseCoverageDrilldown } from './lib/coverage-csv.mjs';
 
 import {
@@ -45,7 +47,9 @@ import {
   getCoverageSourceFreshness,
 } from "./lib/coverage-source-freshness.mjs";
 import {
+  applyInspectionObservations,
   getObserveAfterFixEntries,
+  normalizeQueueUrl,
   summarizeCoverageQueue,
 } from "./lib/coverage-queue-state.mjs";
 
@@ -73,6 +77,8 @@ const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/gsc");
 const QUEUE_PATH = path.join(STATE_DIR, "coverage-remediation-queue.json");
 const LATEST_PATH = path.join(STATE_DIR, "LATEST.md");
 const TOTALS_HISTORY = path.join(STATE_DIR, "coverage-totals-history.csv");
+const INSPECTION_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/url-inspection");
+const INSPECTION_WINDOW_DAYS = 14;
 
 const GOOGLEBOT_UA =
   "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
@@ -203,6 +209,59 @@ if (markIP || markDone || markDesign) {
   refreshQueueDerivedState(q);
   const state = markIP ? "in-progress" : markDone ? "done" : "resolved-by-design";
   console.log(`[ok] ${changed} 件 → ${state}${waveId ? ` (wave ${waveId})` : ""}`);
+  process.exit(0);
+}
+
+// ── --sync-inspection モード ───────────────────────────────────
+// url-inspection-daily.cjs の日次 CSV (直近 INSPECTION_WINDOW_DAYS 日) から URL ごとに最新の観測を取り、
+// 登録済みになった actionable URL を done にする。export の鮮度に関係なく既存キューだけを更新する。
+function readInspectionObservations() {
+  const observations = new Map();
+  if (!fs.existsSync(INSPECTION_DIR)) return observations;
+  const since = new Date(`${TODAY}T00:00:00Z`);
+  since.setUTCDate(since.getUTCDate() - INSPECTION_WINDOW_DAYS);
+  const sinceDate = since.toISOString().slice(0, 10);
+  // ファイル名 (Asia/Tokyo の日付) の新しい順。同じ URL は最初に見た (=最新の) 観測を採る。
+  const files = fs
+    .readdirSync(INSPECTION_DIR)
+    .filter((f) => /^\d{4}-\d{2}-\d{2}\.csv$/.test(f) && f.slice(0, 10) >= sinceDate)
+    .sort()
+    .reverse();
+  for (const f of files) {
+    const rows = parseCsv(fs.readFileSync(path.join(INSPECTION_DIR, f), "utf8"), {
+      bom: true,
+      columns: true,
+      skip_empty_lines: true,
+      relax_column_count: true,
+    });
+    for (const row of rows) {
+      const url = normalizeQueueUrl(row.url);
+      if (!url || observations.has(url) || !row.verdict || row.verdict === "ERROR") continue;
+      observations.set(url, {
+        date: f.slice(0, 10),
+        verdict: row.verdict,
+        coverageState: row.coverageState ?? "",
+        lastCrawlTime: row.lastCrawlTime ?? "",
+      });
+    }
+  }
+  return observations;
+}
+
+if (hasFlag("--sync-inspection")) {
+  const q = loadQueue();
+  if (!q) {
+    console.error("[err] queue が無い。先に build を実行");
+    process.exit(1);
+  }
+  const observations = readInspectionObservations();
+  const result = applyInspectionObservations(q.queue, observations);
+  refreshQueueDerivedState(q);
+  console.log(
+    `[ok] URL Inspection ${observations.size} URL (直近${INSPECTION_WINDOW_DAYS}日) を照合: ` +
+      `actionable 観測 ${result.observed} / 登録済み→done ${result.indexed} / 再び未登録→pending ${result.reopened} / ` +
+      `累計 done(URL Inspection) ${q.summary.indexed_by_inspection}`
+  );
   process.exit(0);
 }
 
@@ -605,6 +664,8 @@ async function build() {
       first_seen: old?.first_seen ?? TODAY,
       last_checked: noProbe ? old?.last_checked ?? TODAY : TODAY,
       resolved_at: status === "done" ? old?.resolved_at ?? null : null,
+      resolved_by: status === "done" ? old?.resolved_by ?? null : null,
+      inspection: old?.inspection ?? null,
       wave_id: old?.wave_id ?? null,
       content_verdict: contentVerdict,
       content_signal: old?.content_signal ?? null,
@@ -714,7 +775,7 @@ function writeLatest(out, observeCount) {
       "soft-404": ["ソフト404", "live は content-check"],
       "server-error-5xx": ["サーバーエラー5xx", "実測で fix/解消判定"],
       "alt-canonical": ["代替canonical", "正常"],
-      "indexed-submitted": ["登録済み", "—"],
+      "indexed-submitted": ["登録済み", "概要グラフの最新値。増やす対象"],
     };
     for (const [k, v] of Object.entries(t).sort((a, b) => b[1] - a[1])) {
       const meta = label[k] ?? [k, ""];
@@ -725,6 +786,10 @@ function writeLatest(out, observeCount) {
   L.push("## 是正キュー (本番 HTTP 実測ベース)");
   L.push("");
   L.push(`- 追跡 URL: **${s.tracked_urls}** / 要対応 pending: **${s.pending_actionable}**`);
+  L.push(
+    `- URL Inspection で登録を確認して done にした URL: **${s.indexed_by_inspection ?? 0}** ` +
+      "(`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)"
+  );
   L.push("");
   L.push("| action | 分類総数 | pending | 意味 |");
   L.push("|---|---:|---:|---|");
