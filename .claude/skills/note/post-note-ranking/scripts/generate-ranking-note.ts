@@ -284,13 +284,20 @@ function parseArgs() {
   const requireImages = args.includes('--require-images');
   const yearIndex = args.indexOf('--year');
   const year = yearIndex >= 0 ? args[yearIndex + 1] : undefined;
-  const rankingKey = args.find((arg) => !arg.startsWith('--') && arg !== year);
+  const allowIndex = args.indexOf('--allow-tokyo-leader');
+  const allowTokyoLeader = allowIndex >= 0 ? args[allowIndex + 1] : undefined;
+  if (allowIndex >= 0 && (!allowTokyoLeader || allowTokyoLeader.startsWith('--'))) {
+    throw new Error('--allow-tokyo-leader には理由を渡してください');
+  }
+  const rankingKey = args.find(
+    (arg) => !arg.startsWith('--') && arg !== year && arg !== allowTokyoLeader
+  );
   if (!rankingKey) {
     throw new Error(
-      'Usage: npx tsx generate-ranking-note.ts <rankingKey> [--year YYYY] [--check] [--require-images]'
+      'Usage: npx tsx generate-ranking-note.ts <rankingKey> [--year YYYY] [--allow-tokyo-leader <理由>] [--check] [--require-images]'
     );
   }
-  return { rankingKey, year, check, requireImages };
+  return { rankingKey, year, allowTokyoLeader, check, requireImages };
 }
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -381,7 +388,11 @@ function regionalSummary(rows: RankedRow[]) {
     .sort((a, b) => b.median - a.median);
 }
 
-async function build(rankingKey: string, requestedYear?: string) {
+async function build(
+  rankingKey: string,
+  requestedYear?: string,
+  allowTokyoLeader?: string
+) {
   const [itemPayload, valuesPayload, rankingItemsPayload, blogPayload] =
     await Promise.all([
       fetchJson<{ item: RankingItem }>(
@@ -444,6 +455,14 @@ async function build(rankingKey: string, requestedYear?: string) {
     throw new GenerationBlockedError(
       'INVALID_VALUE',
       `欠損または非数値があります: ${rankingKey}/${year}`
+    );
+  }
+  // 1位が東京都の記事は「予想どおり」で読む理由が生まれない (2026-09-06 公開分の多くがこの型だった)。
+  // 人口・経済規模の大きさがそのまま出る指標を量産しないよう、理由を明示した場合だけ通す
+  if (sourceRows[0].areaCode === '13000' && !allowTokyoLeader) {
+    throw new GenerationBlockedError(
+      'PREDICTABLE_LEADER',
+      `1位が東京都のため生成しません: ${rankingKey}/${year}。読者にとって意外な理由があれば --allow-tokyo-leader "<理由>" で再実行する`
     );
   }
   const min = Number(sourceRows.at(-1)?.value);
@@ -903,7 +922,7 @@ async function main() {
   if (args.check) await check(args.rankingKey, args.requireImages);
   else {
     try {
-      await build(args.rankingKey, args.year);
+      await build(args.rankingKey, args.year, args.allowTokyoLeader);
     } catch (error) {
       if (error instanceof GenerationBlockedError) {
         await setBlocker(args.rankingKey, {
