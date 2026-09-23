@@ -84,13 +84,13 @@ updated: 2026-09-21
 
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
-タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-23]
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-30]
 
 - **背景**: 統計そのものより「悩み・不安」起点の記事がSEOに効くという仮説で、白書(NotebookLM)調査+note/X調査の両方で裏付けが取れた5テーマを記事化した。5本とも `quality-gate.mjs` / `article-factual-check.mjs` / blog-critic すべて PASS 済み (`docs/21_ブログ記事原稿/{nursery-shortage-urban-prefecture, vacant-housing-rate-inherited-home-risk, elderly-welfare-expenditure-prefecture-gap, evacuation-plan-coverage-urban-prefecture-gap, intellectual-crime-tokyo-kagawa-gap}/`)。
-- **公開の現在地**: `/publish-bulk-articles` の Phase 1(検証)・Phase 2(staging、`.local/r2/app/blog/<slug>/` に `published: true` で配置済み)までは完了。Phase 3(OGP/カード背景のCodex生成)で停止 — このセッションでは Codex MCP が `CONNECTION_CLOSED` だった。ユーザーが `codex login` を完了させたことは確認済みだが、**MCP再接続には新しいセッション起動が必要**(同一セッション内では再接続できなかった)。
-- **画像生成の準備**: 5本分の背景生成リクエストは `.local/blog-imagegen/requests/<slug>.json` に作成済み (プロンプト・promptHash・出力先 `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` まで確定)。新セッションでCodex MCPが繋がったら `npm run blog-images:codex -- ingest-article --slug <slug> --input <path> --prompt-hash <hash>` → `generate-blog-thumbnails.ts --slug <5slugs>` から Phase 3 を再開し、Phase 4(R2 push・all.json反映・cache purge)→ Phase 5(HTTP検証)へ進める。
+- **公開の現在地 (2026-09-23 再確認)**: 5本とも本番は 410 (未公開)。以前 Phase 2 で作った staging (`.local/r2/app/blog/<slug>/`) と画像リクエスト (`.local/blog-imagegen/requests/<slug>.json`) は消えていたので、画像生成から作り直す。原稿は `docs/21_ブログ記事原稿/<slug>/` に残っている。
+- **止まっている理由**: Codex の利用上限。`codex exec` から組み込み `$imagegen` を呼ぶと「usage limit、再開は 2026-09-26 22:28」で失敗した (Codex MCP もこのセッションでは `CONNECTION_CLOSED`)。Codex CLI の直接実行は `codex-mcp.md` の経路③で許可されている。リクエストは `npm run blog-images:codex -- request-article --slug <slug> --article docs/21_ブログ記事原稿/<slug>/article.md` で決定的に再生成できる。
 - **SNS下書き**: X投稿文5本・Instagramキャプション5本は作成済み、`.claude/state/sns/pain-point-series-drafts.md` に保存済み。**投稿・予約は記事が本番公開されてから、ユーザーの明示許可を得て実施する**(まだ実行していない)。X下書き作成agentの申し送り: 各投稿に添付する画像とチャートSVGの形式一致は未確認、投稿前に要突合。
-- **次**: 新セッションで `codex login status` → MCP接続確認 → 上記Phase 3から再開。
+- **次**: 2026-09-26 22:28 以降に 5 本分の request-article → `$imagegen` (1本1回) → `ingest-article` → `generate-blog-thumbnails.ts --slug <5slugs>` → `/publish-bulk-articles` の Phase 4 (R2 push・all.json・purge) → Phase 5 (HTTP 検証)。公開後に X・IG の下書き (`.claude/state/sns/pain-point-series-drafts.md`) を予約枠 (X は週 2-3 本) へ入れる。
 - **停止条件**: 画像なし(共有背景fallback)でR2にpushしない(OGP/カードが404で公開される事故を防ぐ設計)。
 - **完了条件**: 5記事すべてが本番で200 + OGP/thumbnail画像が正しく出る + SNS投稿(X/IG)まで実施されている。
 
@@ -706,6 +706,36 @@ updated: 2026-09-21
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+
+### [BUZZ-MAP-PREF-CODE-01] 地図カードの生成スクリプトが都道府県を5桁コードで書き、地図が1県も塗られない
+
+タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-09-23]
+
+- **owner**: sns-renderer
+- **実測 (2026-09-23)**: `.claude/scripts/sns/build-buzz-map-spec.ts` は R2 観測値の `areaCode` (都道府県は `45000` 形式) をそのまま `data.values` のキーに書く。描画側は `apps/remotion/src/features/buzz-map/types.ts:64` のとおり都道府県を2桁 (`45`) で照合するため、`level` が都道府県のとき凡例には件数が出るのに地図は無塗りになる。同日の IG クイズ試作 (焼酎・上位5県) でレンダーし、凡例に「上位5」と出るのに地図が無塗りになることを確認した。試作ではキーを手で2桁に直して回避した。
+- **次**: 都道府県レベルのときだけキーを2桁に正規化する (市区町村の N03_007 5桁は変えない)。都道府県 spec で `data.values` のキーが2桁になることを固定するテストを足す。
+- **完了条件**: 都道府県 top-n spec をレンダーして上位県が塗られ、テストが「5桁キーのまま」の実装で落ちる。
+
+
+### [IG-LEDGER-FROMLOG-01] IG 投稿3件が投稿台帳に未記録のまま残っている
+
+タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/instagram/record-posted.cjs --from-log --dry-run] [起票:2026-09-23]
+
+- **owner**: sns-metrics-sync
+- **実測 (2026-09-23)**: `record-posted.cjs --from-log --dry-run` が `insert 3 / skip 175` を返す。未記録は `ranking/tourism-resource-count`・`ranking/wind-power-plant-count-facility`・`ranking/nuclear-power-plant-count` (7〜8月の量産実験期間の投稿)。台帳 `posts.json` に無い投稿は `/update-sns-metrics` の対象外になり、実績が計測されない。
+- **次**: `--dry-run` を外して実行し、台帳の差分をコミットする。
+- **完了条件**: 同じ dry-run が `insert 0` を返す。
+
+
+### [IG-LEDGER-TESTS-CI-01] IG 台帳・予約投稿のテストを CI で実行する
+
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/ig-ledger-core.test.cjs .claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs] [起票:2026-09-23]
+
+- **owner**: devops-runner
+- **実測 (2026-09-23)**: `ig-ledger-core.test.cjs` と `ig-post-from-schedule.test.cjs` は `package.json` の test スクリプトにも `.github/workflows/` にも名前が出てこない。PR #1008 でカルーセル投稿と `post_type=carousel` の記録を足したが、その回帰を CI が検出できない。
+- **次**: 既存の test スクリプト群 (`test:content-routines` 等と同じ `node --test` 列挙) のどれかに2ファイルを足すか、IG 用スクリプトを新設して `pr-quality-check.yml` から呼ぶ。`scripts/lib/__tests__` の CI 網羅を検査する既存 gate があればそちらへ登録する。
+- **完了条件**: 2ファイルのどちらかを壊した PR で CI が落ちる。
 
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える

@@ -3,10 +3,45 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**523 件** (最終更新: 2026-09-05)
+**558 件** (最終更新: 2026-09-23)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-23 | 𝕏 X | ranking/lowest-temperature | なぜ沖縄県の最低気温は15.3℃と際立って高いのか。  黒潮の影響で冬も温暖な海洋性気候が理由です。 2位鹿児島県との差… | [🔗](https://x.com/stats47jp373/status/2102593807414100093) |
+| 2026-09-23 | 𝕏 X | ranking/vegetable-seaweed-tsukudani-consumption-expenditure | つくだ煮は西日本の食文化と思われがちですが、データは逆です。  1位山口県747円、2位秋田県739円。 47位沖縄県は… | [🔗](https://x.com/stats47jp373/status/2102533404957016484) |
+| 2026-09-22 | 𝕏 X | ranking/maritime-import-export-cargo | 海上出入貨物、1位愛知県2億トン vs 2位千葉県1.87億トン。  海に面さない山梨・長野・岐阜・滋賀・奈良は0トン。… | [🔗](https://x.com/stats47jp373/status/2102337120564076865) |
+| 2026-09-22 | 𝕏 X | ranking/port-cargo-total | 港湾統計データの使い方、3ステップで紹介します。  ①上位5県で物流拠点を把握(愛知県2億トン) ②下位県と比較して地域… | [🔗](https://x.com/stats47jp373/status/2102171016537813377) |
+| 2026-09-21 | 𝕏 X | ranking/flood-affected-rivers | もし静岡県に住んでいたら。  水害被災河川・海岸数は全国最多の143延数。 2位兵庫県74、3位京都府49と続きます。 … | [🔗](https://x.com/stats47jp373/status/2101869026343555259) |
+| 2026-09-21 | 𝕏 X | ranking/total-overnight-guests-foreign | 外国人延べ宿泊者数、東京都は約4743万人泊。 47位島根県はわずか約6.8万人泊。  その差、なんと700.9倍。  … | [🔗](https://x.com/stats47jp373/status/2101974730979053983) |
+| 2026-09-21 | 𝕏 X | geo/geo-001-x-11 | 東京都では、駅代表点から直線800m以内に中心点があるメッシュの2050年人口合計は10,196,427人、都人口比70… | [🔗](https://x.com/stats47jp373/status/2101843855595229331) |
+| 2026-09-20 | 𝕏 X | ranking/ritual-goods-tombstone-consumption-expenditure | 都会は墓石消費が少ないと思われがちですが、データは違います。  1位島根県15,531円、2位千葉県13,752円。 4… | [🔗](https://x.com/stats47jp373/status/2101612337996431554) |
+| 2026-09-20 | 𝕏 X | ranking/travel-participation-rate-overseas | 海外旅行の行動者率、京都府0.7％、茨城県0.6％、滋賀県0.6％。  最大格差は7.0倍。1位京都府と47位高知県で開… | [🔗](https://x.com/stats47jp373/status/2101446238680080823) |
+| 2026-09-19 | 𝕏 X | geo/geo-001-x-10 | 駅代表点から直線800m以内に中心点がある1km人口メッシュを集計すると、東京都は2050年人口の70.8%。大阪府65… | [🔗](https://x.com/stats47jp373/status/2101106497019417006) |
+| 2026-09-19 | 𝕏 X | ranking/total-area-excluding-northern-territories-and-takeshima | 総面積、北海道7,841,921ha vs 香川187,686ha。 差は41.8倍。あなたの県の広さは全国何位？👇 … | [🔗](https://x.com/stats47jp373/status/2101249957218910222) |
+| 2026-09-18 | 𝕏 X | ranking/sports-annual-participation-rate-10plus | スポーツ年間行動者率を読む3ステップ。 ①東京74.5% ②神奈川71.8% ③青森52.1%まで全県比較👇 http… | [🔗](https://x.com/stats47jp373/status/2100721465259692189) |
+| 2026-09-18 | 𝕏 X | ranking/building-fire-count-per-100-thousand-people | 人口10万人当たり出火件数は茨城49件、富山17.7件。 建物火災だけではなく全出火を含む指標です。全県比較👇 htt… | [🔗](https://x.com/stats47jp373/status/2100887564333068326) |
+| 2026-09-17 | 𝕏 X | geo/geo-001-x-09 | 北海道では、洪水区域に中心点が入る1kmメッシュの人口比率が2020年49.2%から2050年52.6%へ。表示値の差は… | [🔗](https://x.com/stats47jp373/status/2100557882517590075) |
+| 2026-09-17 | 𝕏 X | ranking/road-prefectural-route-length | 北海道の主要地方道実延長は4,561.5km。 新潟1,931.4km、沖縄412.6kmと比べ、道路網の規模が見えます… | [🔗](https://x.com/stats47jp373/status/2100359073757908994) |
+| 2026-09-17 | 𝕏 X | ranking/waste-recycling-rate | ごみのリサイクル率は岡山29%、鳥取28.2%、東京24.9%。 和歌山11.9%まで2.4倍差。47都道府県を確認👇… | [🔗](https://x.com/stats47jp373/status/2100419485190529475) |
+| 2026-09-16 | 𝕏 X | ranking/criminal-recognition-count-of-violent-crime-rate | 刑法犯認知件数に占める粗暴犯割合、山形16.31% vs 栃木5.03%。 県別の構成比を比べると3.2倍差👇 htt… | [🔗](https://x.com/stats47jp373/status/2099996686961557677) |
+| 2026-09-16 | 𝕏 X | ranking/disaster-recovery-expenditure-ratio-pref-finance | なぜ災害復旧費割合は熊本が5%なのか？ 岩手2.32%、広島2.29%が続き、大阪は0.01%。全県比較👇 https… | [🔗](https://x.com/stats47jp373/status/2100162790858297534) |
+| 2026-09-15 | 𝕏 X | geo/geo-001-x-08 | 東京都では、洪水浸水想定区域に中心点が入る1kmメッシュの2050年人口合計は6,603,525人、都人口比45.9%。… | [🔗](https://x.com/stats47jp373/status/2099639329471787286) |
+| 2026-09-15 | 𝕏 X | ranking/police-department-staff | 警察部門職員数を読む3手順。 ①東京46,929人 ②鳥取1,438人 ③人口規模も見ながら県別実数を比較👇 http… | [🔗](https://x.com/stats47jp373/status/2099694702559678592) |
+| 2026-09-15 | 𝕏 X | ranking/sewage-treatment-coverage-rate | 汚水処理人口普及率は東京99.9%、徳島68.5%。 31.4ポイントの地域差があります。あなたの県の普及率は👇 ht… | [🔗](https://x.com/stats47jp373/status/2099800399012102238) |
+| 2026-09-14 | 𝕏 X | ranking/agricultural-employment-population | 北海道の農業就業人口は96,557人。茨城89,594人、長野82,922人が続きます。 地域を支える人数を全県比較👇… | [🔗](https://x.com/stats47jp373/status/2099271909401866734) |
+| 2026-09-14 | 𝕏 X | ranking/special-law-criminal-arrest-count-per-population | 人口当たり特別法犯検挙件数は東京93.1件、富山77.2件、京都72.4件。 山形22件まで4.2倍差👇 https:… | [🔗](https://x.com/stats47jp373/status/2099438016850780434) |
+| 2026-09-13 | 𝕏 X | geo/geo-001-x-07 | 想定最大規模の洪水区域に中心点が入る1kmメッシュの2050年人口を合計すると、新潟県は62.1%。メッシュ人口全体を中… | [🔗](https://x.com/stats47jp373/status/2098912037183291460) |
+| 2026-09-13 | 𝕏 X | ranking/barrier-free-housing-rate | バリアフリー化住宅率、島根63.3% vs 沖縄36.5%。 あなたの県はどちらに近い？全47都道府県はこちら👇 ht… | [🔗](https://x.com/stats47jp373/status/2098939720277602533) |
+| 2026-09-13 | 𝕏 X | ranking/elderly-couple-only-household-ratio | なぜ高齢夫婦のみ世帯の割合は奈良が15.94%で1位なのか？ 東京7.82%まで地域差は2倍。全県データへ👇 http… | [🔗](https://x.com/stats47jp373/status/2099075623247573220) |
+| 2026-09-12 | 𝕏 X | ranking/agricultural-income-ratio | 農業所得割合を読む3ステップ。 ①北海道46% ②滋賀2.5% ③18.4倍差を全県データで確認。比較用に保存👇 ht… | [🔗](https://x.com/stats47jp373/status/2098547139509162047) |
+| 2026-09-12 | 𝕏 X | ranking/rice-yield-per-10a | 水稲10a当たり収量は青森と山形が627kgで同率首位。 沖縄295kgとの差は2.1倍。全国の収量を一覧で確認👇 h… | [🔗](https://x.com/stats47jp373/status/2098713235625271647) |
+| 2026-09-11 | 𝕏 X | geo/geo-001-x-06 | 大阪府では比較可能な住宅地1,181地点中869地点（73.6%）で、現在の地価上昇と周囲1kmメッシュの将来人口減少が… | [🔗](https://x.com/stats47jp373/status/2098250176376737858) |
+| 2026-09-11 | 𝕏 X | ranking/traffic-accident-casualties-elderly-65plus | 東京都の高齢者交通事故死傷者数は6,346人、鳥取は140人。 人口規模の影響もある実数なので、率と混同せず47都道府県… | [🔗](https://x.com/stats47jp373/status/2098184753363189891) |
+| 2026-09-11 | 𝕏 X | ranking/agricultural-output-per-employed-person | 北海道1,304.2万円、鹿児島840.2万円、宮崎762万円。 就業者1人当たり農業産出額は奈良209.6万円まで6.… | [🔗](https://x.com/stats47jp373/status/2098350843678359637) |
+| 2026-09-10 | 𝕏 X | ranking/clam-consumption-quantity | あさりの消費量トップは山梨県。海に面していない県が1位というのは意外な結果です。  1位 山梨県 474g 47位 和歌… | [🔗](https://x.com/stats47jp373/status/2097822363421479423) |
+| 2026-09-10 | 𝕏 X | ranking/rice-harvest-volume | なぜ水稲収穫量は新潟が1位なのか？ 646,100tで東京519tの約1,245倍。上位と全47都道府県を確認👇 ht… | [🔗](https://x.com/stats47jp373/status/2097988464155500954) |
+| 2026-09-09 | 𝕏 X | geo/geo-001-x-05 | 沖縄県では人口メッシュに接続した住宅地122地点のうち、比較可能119地点が分母です。地価上昇と将来人口減少が重なるのは… | [🔗](https://x.com/stats47jp373/status/2097497719526814166) |
+| 2026-09-07 | 𝕏 X | geo/geo-001-x-04 | 地価が上がる住宅地でも、周囲の人口は減るのか。沖縄県では比較可能119地点中78地点（65.5%）で、2025→2026… | [🔗](https://x.com/stats47jp373/status/2096903804331471076) |
 | 2026-09-05 | 𝕏 X | geo/geo-001-x-03 | 人口の色分け地図だけでは、住みやすさも安全性も分かりません。①人口変化を確認 ②別データを重ねる ③方法と限界を読む。こ… | [🔗](https://x.com/stats47jp373/status/2096030550272418254) |
 | 2026-09-03 | 𝕏 X | geo/geo-001-x-02 | 東京都+2.50%、秋田県-41.59%。同じ2050年推計でも44.09ポイントの幅があります。高低を知るだけで終わら… | [🔗](https://x.com/stats47jp373/status/2095348556827951334) |
 | 2026-09-01 | 𝕏 X | geo/geo-001-x-01 | 2050年の推計人口を2020年と比べると、増加は東京都の+2.50%だけ。46道府県は減少見込みです。これはGeo分析… | [🔗](https://x.com/stats47jp373/status/2094560866867769577) |

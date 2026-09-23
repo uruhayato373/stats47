@@ -118,3 +118,4 @@
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法
 - [two-machine local footprint 2026-09](project_two_machine_local_footprint_2026-09.md) — dotfiles/mirror/state:pull の運用ポインタ、この Windows PC の pre-commit 12 分・vitest フレーク・preflight 環境要因
 - [feedback_worktree_junction_deletes_target.md](feedback_worktree_junction_deletes_target.md) — worktreeへnode_modulesのjunctionを張るとgit worktree remove --forceが本体のapps/*/node_modulesを消す(2026-09-16実害)。junctionはcmd /c rmdirで外してから削除
+- [feedback_x_scheduled_bulk_delete.md](feedback_x_scheduled_bulk_delete.md) — X予約の一括削除は描画中の7〜8件しか消えない。台帳キーで選択→削除→読み直しを残件0まで繰り返す
