@@ -108,6 +108,23 @@ export interface PageAuditResult {
   ui_findings?: string[];
   /** 画像切れ検査の入力。検査後に削除し、スナップショットには残さない。 */
   image_urls?: string[];
+  /** 代表URLのスクショ (スマホ・PC)。週次の --browser-representative のときだけ入る。 */
+  screenshots?: ScreenshotRecord[];
+}
+
+export interface ScreenshotRecord {
+  device: "mobile" | "desktop";
+  /** R2 の key (`state/page-quality/screenshots/<date>/<template>-<device>.png`)。 */
+  key: string;
+  /** CI の同一ジョブ内で agent が読むためのローカルパス。 */
+  localPath: string;
+  width: number;
+  height: number;
+  /** 先週の同じ画面との差 (0〜1)。先週の画像が無ければ null。 */
+  changeRatio: number | null;
+  previousHeight: number | null;
+  /** agent が読む画面 1 枚分ずつの切り出し (縦長の全体像は縮小されて文字が読めないため)。R2 には上げない。 */
+  tilePaths: string[];
 }
 
 export interface Violation {

@@ -1,11 +1,10 @@
 name: 📐 Page Quality Audit (weekly)
 
-# ページの肥大化・重複・表示速度低下を、公開対象の全URLで週次に検知する。
-# 変更時 (PR) の軽量検査は pr-quality-check.yml の page-quality job が代表URLだけを見る。
-# こちらは sitemap.xml から全URLを列挙し、本番へ直接アクセスして静的解析する
-# (audit-site-links.mjs / smoke-test-routes.sh と同じく本番直読み。ローカルbuildは不要)。
-# LCP/CLS/INP等のブラウザ計測は対象外 (5000ページ規模でコストが見合わないため、
-# 代表URLの軽量検査側だけが担当する)。
+# ページの肥大化・重複・画像切れを公開対象の全URLで、文字の切れ・要素の重なり・アクセシビリティを
+# 代表URL 11 件だけブラウザで週次に検知する。代表URLはスマホ・PC のスクショを R2
+# `state/page-quality/screenshots/` へ保存して先週と比べ、Claude (読み取り専用) がスクショを確認する。
+# 新しく出た UI 違反と agent の指摘は `ui-review-alert` Issue 1 件へまとめる (無ければ閉じる)。
+# 肥大化・重複・画像切れの error は従来どおり `page-quality-alert` Issue。
 #
 # 既存の日次PSI (psi-audit-daily.yml) ・Cloudflare監視とは責務が別 (それらは変更・削除しない)。
 # 正典: .claude/rules/page-quality-standards.md
@@ -19,6 +18,14 @@ permissions:
   contents: write
   issues: write
 
+env:
+  # スクショを R2 state/ へ push する diff-push-r2.ts の認証 (affiliate-ga4-weekly.yml と同じ導出)
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
 concurrency:
   group: page-quality-audit-weekly
   cancel-in-progress: false
@@ -26,7 +33,7 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 80
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -53,9 +60,57 @@ jobs:
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       - name: 🧹 Prune old snapshots
+        if: always()
         run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope page-quality
 
+      - name: 🖼️ Push screenshots to R2 state/page-quality/screenshots/
+        id: shots
+        if: always() && hashFiles('.local/r2/state/page-quality/screenshots/latest/index.json') != ''
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/page-quality/screenshots/"
+
+      - name: 🤖 Review screenshots (Claude・読み取り専用)
+        id: review
+        if: always() && hashFiles('.local/ci/page-quality/review-input.json') != ''
+        timeout-minutes: 20
+        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # v2.1.220
+        env:
+          NODE_VERSION: '20.x'
+        with:
+          prompt_file: .claude/prompts/ci/page-ui-review.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: 'false'
+          settings: '{"disableAllHooks":true}'
+          claude_args: |
+            --model sonnet
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["reviewed","no-issues","blocked"]},"summary":{"type":"string","minLength":10,"maxLength":800},"findings":{"type":"array","maxItems":10,"items":{"type":"object","properties":{"template":{"type":"string"},"device":{"type":"string","enum":["mobile","desktop"]},"severity":{"type":"string","enum":["high","medium","low"]},"location":{"type":"string","minLength":5},"issue":{"type":"string","minLength":10},"suggestion":{"type":"string","minLength":5}},"required":["template","device","severity","location","issue","suggestion"],"additionalProperties":false}}},"required":["status","summary","findings"],"additionalProperties":false}'
+            --effort medium
+            --max-turns 120
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Glob"
+            --allowedTools "Read,Glob"
+            --disallowedTools "Bash,Write,Edit,WebFetch,WebSearch,Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+
+      - name: 📝 Record UI review
+        id: uireview
+        if: always() && hashFiles('.local/ci/page-quality/ui-new-violations.json') != ''
+        env:
+          REVIEW_OUTCOME: ${{ steps.review.outcome }}
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: |
+          if [ "$REVIEW_OUTCOME" = success ] && [ -s "$CLAUDE_EXECUTION_FILE" ]; then
+            node .claude/scripts/lib/summarize-claude-execution.mjs "$CLAUDE_EXECUTION_FILE" >> "$GITHUB_STEP_SUMMARY" || true
+            npx tsx .claude/scripts/page-quality/record-ui-review.ts --execution "$CLAUDE_EXECUTION_FILE" --alert-out /tmp/ui-review-alert.md >> "$GITHUB_OUTPUT"
+          else
+            npx tsx .claude/scripts/page-quality/record-ui-review.ts --no-review "agent step: ${REVIEW_OUTCOME:-not-run}" --alert-out /tmp/ui-review-alert.md >> "$GITHUB_OUTPUT"
+          fi
+          if [ -f /tmp/ui-review-alert.md ]; then cat /tmp/ui-review-alert.md >> "$GITHUB_STEP_SUMMARY"; fi
+
       - name: 📤 Commit audit result to develop
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -69,7 +124,7 @@ jobs:
           git push origin develop
 
       - name: 🚨 Open issue on regressions
-        if: steps.audit.outputs.exit_code != '0'
+        if: always() && steps.audit.outputs.exit_code != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -99,7 +154,7 @@ jobs:
           fi
 
       - name: ✅ Close recovered page-quality alert
-        if: steps.audit.outputs.exit_code == '0'
+        if: always() && steps.audit.outputs.exit_code == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -108,3 +163,24 @@ jobs:
               gh issue close "$NUMBER" --reason completed \
                 --comment "ページ品質監査が正常へ復旧したため自動Closeします。"
             done
+
+      - name: 🔔 Update UI review alert
+        if: always() && steps.uireview.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ALERT_OPEN: ${{ steps.uireview.outputs.alert_open }}
+        run: |
+          test "$ALERT_OPEN" = true || test "$ALERT_OPEN" = false
+          gh label create ui-review-alert --description "ページ UI の週次確認 (新しい UI 違反と agent の指摘)" --color "fbca04" --force 2>/dev/null || true
+          gh label create auto-generated --description "機械監査アラート" --color ededed --force 2>/dev/null || true
+          TITLE="[UI Review] ページ UI の確認が必要です"
+          EXISTING=$(gh issue list --state open --label ui-review-alert --json number --jq '.[0].number // empty')
+          if [ "$ALERT_OPEN" = true ]; then
+            if [ -n "$EXISTING" ]; then
+              gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/ui-review-alert.md
+            else
+              gh issue create --title "$TITLE" --label "ui-review-alert,auto-generated" --body-file /tmp/ui-review-alert.md
+            fi
+          elif [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" --reason completed --comment "新しい UI 違反も agent の指摘も無くなったため自動Closeします。"
+          fi

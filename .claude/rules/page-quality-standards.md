@@ -34,6 +34,23 @@ paths:
      (実測 0.5〜3.7 秒/件)。2026-09-19 の初回は RSC 込み並列 4 で 45 分の制限内に 1,200/6,237 URL しか進まず
      打ち切られた。RSC 抜き並列 8 は 800 URL 122 秒 (全件見積 15 分)。RSC は代表URL検査で測る
 
+## スクショ保存と週次 agent の確認 (2026-09-23)
+
+代表URL 11 件をスマホ (幅412) と PC (幅1280) で撮影し、R2 `state/page-quality/screenshots/<date>/` と
+比較元の `latest/` へ保存する (`lib/screenshots.ts`・400 日で自動失効する `state/` prefix。1 週約 10MB)。
+先週の `latest/` と画素比較した変化率 (0〜1、高さの変化も数える) を LATEST.md に出す。
+
+続けて Claude (sonnet・`Read`/`Glob` だけ・ファイル書換なし) が `.claude/prompts/ci/page-ui-review.md` に沿って
+スクショを確認し、JSON schema の構造化出力で指摘 (最大 10 件) を返す。縦長の全体像は縮小されて文字が
+読めないので、画面 1 枚分ずつ切り出した画像 (`tilePaths`、R2 には上げない) を読ませる。
+**記録と通知の判断はスクリプトが行う** (`record-ui-review.ts`): 撮影していない画面を指す指摘や形の崩れた
+指摘は捨て、結果を `.claude/state/metrics/page-quality/ui-review-latest.json` に残す。
+手元の試行 (2026-09-23) は 73 回のやり取り・2 分半で、`--max-turns 120` はそのための余裕。
+
+**通知**: 「先週の週次結果に無かった UI 違反」と agent の指摘を `ui-review-alert` Issue 1 件へまとめ、
+両方無くなったら閉じる。warning の UI 違反も新しく出た週には通知される (前週から続く同じ違反は再通知しない)。
+直すと決めたものは人がバックログへカードにする (Issue は PR で閉じる改修と機械アラートだけの運用のため)。
+
 ## UI 検査の判定 (誤検知を出さないための除外)
 
 実装は `lib/measure-static.ts` (静的) / `lib/check-images.ts` (画像) / `lib/ui-probe.ts` (ブラウザ)。

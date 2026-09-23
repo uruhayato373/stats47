@@ -186,6 +186,22 @@ export function writeLatestMarkdown(run: AuditRun): void {
     lines.push("");
   }
 
+  const withShots = run.results.filter((r) => (r.screenshots ?? []).length > 0);
+  if (withShots.length > 0) {
+    const base = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+    lines.push("## 代表URLのスクショ (先週比の変化)");
+    lines.push("");
+    lines.push("| テンプレート | 端末 | 先週比 | スクショ |");
+    lines.push("|---|---|---|---|");
+    for (const r of withShots) {
+      for (const s of r.screenshots ?? []) {
+        const change = s.changeRatio == null ? "比較元なし" : `${Math.round(s.changeRatio * 100)}%`;
+        lines.push(`| ${r.template} | ${s.device} | ${change} | [${s.key.split("/").pop()}](${base}/${s.key}) |`);
+      }
+    }
+    lines.push("");
+  }
+
   const withFindings = run.results.filter((r) => (r.ui_findings ?? []).length > 0);
   if (withFindings.length > 0) {
     lines.push("## UI 指摘の場所");

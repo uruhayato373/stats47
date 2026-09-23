@@ -19,7 +19,12 @@
  *   2 = 入力不備・実行時エラー
  */
 import { auditUrl } from "./lib/audit-url";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+
 import { checkImages } from "./lib/check-images";
+import { createScreenshotSession, SCREENSHOT_PREFIX } from "./lib/screenshots";
+import { buildReviewInput, newUiViolations } from "./lib/ui-report";
 import { PAGE_TEMPLATES } from "./templates";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
 import { currentCommitSha } from "./lib/git-diff";
@@ -27,6 +32,7 @@ import { enumerateAllUrls } from "./lib/enumerate-urls";
 import { evaluateAll, loadBudgets } from "./lib/thresholds";
 import {
   appendHistory,
+  readLatestJson,
   readPreviousValue,
   saveSnapshot,
   writeLatestJson,
@@ -72,13 +78,21 @@ async function runWithConcurrency<T, R>(
   return results;
 }
 
-/** 代表URLだけブラウザで開き、静的解析の結果へ UI 指標を足す。代表URLが sitemap に無ければ追加する。 */
+/** CI の後続 step (R2 push・agent・Issue) が読む作業ファイルの置き場。git には入れない。 */
+const CI_DIR = ".local/ci/page-quality";
+
+/**
+ * 代表URLだけブラウザで開き、静的解析の結果へ UI 指標とスクショ (スマホ・PC) を足す。
+ * 代表URLが sitemap に無ければ追加する。
+ */
 async function measureRepresentativesInBrowser(
   results: PageAuditResult[],
   baseUrl: string,
-  runs: number
+  runs: number,
+  date: string
 ): Promise<void> {
   const session = await createBrowserMeasurementSession();
+  const shots = await createScreenshotSession({ date });
   try {
     for (const template of PAGE_TEMPLATES) {
       const browserResult = await auditUrl(baseUrl, template.representativeUrl, template.key, {
@@ -86,6 +100,14 @@ async function measureRepresentativesInBrowser(
         browserSession: session,
         browserRuns: runs,
       });
+      try {
+        browserResult.screenshots = await shots.capture(browserResult.url, template.key);
+      } catch (e) {
+        browserResult.ui_findings = [
+          ...(browserResult.ui_findings ?? []),
+          `screenshot_failed: ${(e as Error).message.split("\n")[0]}`,
+        ];
+      }
       const index = results.findIndex((r) => r.path === template.representativeUrl);
       if (index >= 0) results[index] = browserResult;
       else results.push(browserResult);
@@ -93,6 +115,7 @@ async function measureRepresentativesInBrowser(
     }
   } finally {
     await session.close();
+    await shots.close();
   }
 }
 
@@ -131,7 +154,7 @@ async function main() {
   }
 
   if (opts.browserRepresentative && !opts.withBrowser) {
-    await measureRepresentativesInBrowser(results, opts.baseUrl, opts.browserRuns);
+    await measureRepresentativesInBrowser(results, opts.baseUrl, opts.browserRuns, generatedAt.slice(0, 10));
   }
 
   const images = await checkImages(results);
@@ -153,6 +176,23 @@ async function main() {
     results,
     violations,
   };
+
+  // 前回の週次結果は上書き前に読む (新しく出た UI 違反だけを通知するため)。
+  const previousRun = readLatestJson();
+  const fresh = newUiViolations(run, previousRun);
+  mkdirSync(CI_DIR, { recursive: true });
+  writeFileSync(join(CI_DIR, "ui-new-violations.json"), `${JSON.stringify(fresh, null, 2)}\n`);
+  if (opts.browserRepresentative) {
+    const input = buildReviewInput(run);
+    writeFileSync(join(CI_DIR, "review-input.json"), `${JSON.stringify(input, null, 2)}\n`);
+    const latestIndex = join(".local/r2", SCREENSHOT_PREFIX, "latest", "index.json");
+    mkdirSync(join(".local/r2", SCREENSHOT_PREFIX, "latest"), { recursive: true });
+    writeFileSync(
+      latestIndex,
+      `${JSON.stringify({ generatedAt, date, pages: input.pages.map((p) => ({ template: p.template, url: p.url })) }, null, 2)}\n`
+    );
+  }
+  console.log(`[page-quality] UI 違反の新規: ${fresh.violations.length} 件${fresh.firstRun ? " (前回結果なし=初回)" : ""}`);
 
   const snapshotPath = saveSnapshot(run);
   appendHistory(run);

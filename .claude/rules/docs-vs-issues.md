@@ -93,6 +93,7 @@ skill、agent、prompt、READMEへ複製しない。
 | 相関 snapshot 再計算の失敗 | `correlation-alert,auto-generated` | `.github/workflows/correlation-refresh.yml` |
 | GSC カバレッジ是正キューの異常 | `coverage-alert,auto-generated` | `.github/workflows/fetch-metrics-weekly.yml` |
 | ページ肥大化・重複・速度の週次監査でerror違反 | `page-quality-alert,auto-generated` | `.github/workflows/page-quality-audit-weekly.yml` |
+| ページ UI の週次確認 (新しく出た UI 違反 + スクショを見た agent の指摘。直すものはバックログへカード化) | `ui-review-alert,auto-generated` | `.github/workflows/page-quality-audit-weekly.yml` |
 | GSC週次レビュー・候補判断・次週計画の接続異常 | `gsc-cycle-alert,auto-generated` | `.github/workflows/gsc-operations-cycle-weekly.yml` |
 | 国土数値情報カタログの更新検知 | `ksj-catalog,auto-generated` | `.github/workflows/ksj-catalog-monthly.yml` |
 | 本番デプロイ後スモークテスト (health check / Playwright) の失敗 | `post-deploy-alert,auto-generated` | `.github/workflows/post-deploy-smoke.yml` |

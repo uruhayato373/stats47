@@ -48,6 +48,11 @@ export const WATCHED = [
     maxAgeDays: 10,
     why: "affiliate-ga4-weekly.yml (週次+翌日再取得)。古いと収益施策のeffectを判定できない",
   },
+  {
+    key: "state/page-quality/screenshots/latest/index.json",
+    maxAgeDays: 10,
+    why: "page-quality-audit-weekly.yml (週次)。止まると翌週のスクショ比較元と UI 確認が古いまま",
+  },
 ];
 
 async function readGeneratedAt(key) {

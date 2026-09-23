@@ -21,6 +21,24 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [MAP-BASEMAP-APIKEY-01] ランキング等の地図の背景に CARTO の「API KEY REQUIRED」透かしが全面に出る
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:curl -s https://stats47.jp/tiles/light_all/5/28/12.png の画像に透かしが無い] [起票:2026-09-23]
+
+- **owner**: ranking-ui-manager (地図) / site-ux-manager (横断)
+- **実測 (2026-09-23)**: 週次 UI 確認の agent がランキング地図のスクショから検出。`https://stats47.jp/tiles/light_all/5/28/12.png` (プロキシ `apps/web/src/app/tiles/[theme]/[z]/[x]/[ypng]/route.ts`) も、`https://a.basemaps.cartocdn.com/light_all/5/28/12.png` を Referer 有無どちらで直接取得しても、画像に「API KEY REQUIRED / carto.com/basemaps/apikey」の透かしが入る (HTTP 200・6,407 bytes)。CARTO 側がキー無しの basemap 配信に透かしを入れるようになった。全ランキングページの地図と、同じタイルを使う他の地図が対象。
+- **次**: CARTO の API キーを取得して使うか (利用条件・費用の確認はオーナー)、出典条件の明確な別タイル (国土地理院タイル等。テーマページで既に使用) へ切り替えるかを決め、プロキシの上流を差し替える。Cloudflare のエッジキャッシュに透かし入りタイルが残るので切替後にパージする。
+- **完了条件**: 代表ランキングページの地図に透かしが出ず、出典表記が利用条件どおり表示される。
+
+### [GEO-PREVIEW-MISSING-01] /geo の分析カードで地図プレビューがすべて「取得できませんでした」
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:週次 UI 確認の agent 指摘に geo-analysis の地図プレビュー欠落が出ない] [起票:2026-09-23]
+
+- **owner**: geo-analysis-curator
+- **実測 (2026-09-23・本番・スマホ/PC)**: `/geo` の 6 分析カードすべてで、地図プレビューの位置に「地図プレビューを取得できませんでした」と出ている (週次 UI 確認のスクショ `state/page-quality/screenshots/2026-09-23/geo-analysis-mobile.png`)。ページの主要な見どころが全カードで欠けている。
+- **次**: プレビュー画像の取得元 (R2 のキーと生成処理) を特定し、欠落の原因を確かめてから直す。
+- **完了条件**: 6 カードすべてで地図プレビューが表示される。
+
 ### [THEME-MAP-ATTRIBUTION-CLIP-01] テーマページの地図で国土地理院・Leaflet の出典表記が枠外に切れて見えない
 
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:check -- --base-url http://localhost:3100 --all で theme の clipped_text が 0] [起票:2026-09-23]
