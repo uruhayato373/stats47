@@ -49,6 +49,10 @@ product code、対応format、scope、必要roleまで確認する。
 - 認証済みセッションはサービス別にdomain allowlistで絞り、圧縮storageStateを`MEASUREMENT_SESSION_<SOURCE>` Secretsへ登録する。Cookieはread-only権限ではなくアカウント操作権限を持ちうるため、実行対象を固定済みの読み取りcollectorに限定する。public repositoryのgit・artifact・ログへstateを出さない。
 - セッションは期限切れするため、この経路でも初回作成と期限切れ時の再作成は人の操作として残る。
 
+**採択した運用目標（2026-09-21 オーナー合意）**: 通常の取得・保存・記録照合・異常検知はCIで行い、提供元が本人認証を要求した時だけオーナーが対応する。完全な本人操作ゼロを完了条件にはしない。再認証待ちは該当sourceだけを停止し、他sourceの収集を継続する。新しい本人認証の公開後も取得・保存・記録の一致を確認するまで復旧とはしない。
+
+この合意は運用目標の承認であって、認証の復旧や継続取得の実証ではない。欠測を0に置換せず、初回成功だけで継続運用完了にしない。有料環境の新設・外部への問い合わせ送信・アカウント設定変更は別途承認を要し、2FA/CAPTCHAの自動突破や拒否済み認証での再接続反復は行わない。残る受入条件は`.claude/todo/backlog.md`の`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`で管理する。
+
 `authenticated-measurement.yml`が毎日JST18:20にGitHub hosted Ubuntu + Playwright Chromium + Xvfbで実行する。
 `main`/`develop`だけを許可し、PR/forkではSecrets付きcollectorを起動しない。投稿・申請・出版・振込・設定変更は対象外。
 初回のdevelop workflow変更pushでも起動するが、schedule有効化にはmainへの反映が必要。

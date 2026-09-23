@@ -62,6 +62,7 @@ Remotion で SNS 用静止画・動画を生成してローカルに保存する
 | Instagram（カルーセル表紙） | `RankingInstagram-Cover` | `instagram/stills/slide-1-cover-1080x1350.png` |
 | Instagram（全47位テーブル） | `RankingInstagram-Table` | `instagram/stills/slide-2-table-1080x1350.png` |
 | Instagram（CTA） | `RankingInstagram-CTA` | `instagram/stills/slide-3-cta-1080x1350.png` |
+| Instagram（予想クイズ型・5枚） | `RankingQuizInstagram-Carousel`（`slide` で切替） | 本スキル未統合。`apps/remotion/README.md` の手順で `.local/r2/sns/ranking-quiz/<key>/instagram/stills/slide-<n>-<slide>-1080x1350.png` へレンダ（配信は `sns-content-standards.md` §2-3b） |
 | Instagram（リール動画） | `RankingInstagram-Reel` | `instagram/reel.mp4` |
 
 ### compare ドメイン

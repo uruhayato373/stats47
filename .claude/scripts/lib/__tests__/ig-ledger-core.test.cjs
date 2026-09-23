@@ -100,3 +100,27 @@ test("壊れた行があってもログの残りを読める", () => {
   assert.equal(rows.length, 2, "content_key の無い行と壊れた行だけを落とす");
   assert.deepEqual(rows.map((r) => r.content_key), ["a", "b"]);
 });
+
+test("カルーセルは post_type=carousel で記録し、単枚画像と成績を分けて測れるようにする", () => {
+  const r = decideLedgerAction({ ...base, domain: "ranking-quiz", postType: "carousel", existing: [] });
+  assert.equal(r.action, "insert");
+  assert.equal(r.record.post_type, "carousel");
+});
+
+test("予約行の昇格でも実際に投稿した形式で post_type を上書きする", () => {
+  const existing = [
+    { id: 3, platform: "instagram", domain: "ranking", content_key: "vacant-housing-rate", status: "scheduled", post_type: "original" },
+  ];
+  const r = decideLedgerAction({ ...base, postType: "carousel", existing });
+  assert.equal(r.action, "update");
+  assert.equal(r.patch.post_type, "carousel");
+});
+
+test("post_type が無い・空の旧ログ行は従来どおり original で記録し、昇格では既存値を残す", () => {
+  assert.equal(decideLedgerAction({ ...base, existing: [] }).record.post_type, "original");
+  assert.equal(decideLedgerAction({ ...base, postType: "", existing: [] }).record.post_type, "original");
+  const existing = [
+    { id: 4, platform: "instagram", domain: "ranking", content_key: "vacant-housing-rate", status: "draft", post_type: "reel" },
+  ];
+  assert.equal("post_type" in decideLedgerAction({ ...base, postType: "", existing }).patch, false);
+});

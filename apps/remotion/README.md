@@ -50,6 +50,27 @@ Studio で表示されるデータは `src/utils/preview-data.ts` が提供す�
 | `Carousel-CoverSlide` | 1080x1350 | カルーセル表紙 |
 | `Carousel-CTASlide` | 1080x1350 | カルーセル CTA |
 | `Carousel-RankingTableSlide` | 1080x1350 | カルーセルランキングテーブル |
+| `RankingQuizInstagram-Carousel` | 1080x1350 | 予想クイズ型カルーセル（`slide`: question / hint / answer / table / outro） |
+
+予想クイズ型は1つの props ファイル（`meta` / `allEntries` / `quiz`）から5枚を出す。
+入力例は `src/fixtures/ranking-quiz-sample.json`、型と検証は `src/features/ranking-quiz-instagram/quiz.ts`。
+選択肢・ヒントがデータと矛盾するとレンダーが失敗する。
+
+```bash
+cd apps/remotion
+KEY=shochu-consumption-expenditure
+PROPS=src/fixtures/ranking-quiz-sample.json
+OUT="../../.local/r2/sns/ranking-quiz/$KEY/instagram/stills"
+i=1
+for s in question hint answer table outro; do
+  npx remotion still src/index.ts RankingQuizInstagram-Carousel "$OUT/slide-$i-$s-1080x1350.png" \
+    --props="$(jq -c --arg s "$s" '. + {slide: $s}' "$PROPS")"
+  i=$((i+1))
+done
+```
+
+出力名は IG cron (`post-from-schedule.cjs`) の carousel エントリがそのまま参照する。
+キャプション・R2 反映・予約エントリの形式は `.claude/rules/sns-content-standards.md` §2-3b。
 
 ### Social-Media
 

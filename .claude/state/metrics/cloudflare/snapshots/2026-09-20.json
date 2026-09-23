@@ -1,0 +1,94 @@
+{
+  "date": "2026-09-20",
+  "fetched_at": "2026-09-21T21:12:44.530Z",
+  "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
+  "d1": {
+    "readQueries": 0,
+    "writeQueries": 0,
+    "rowsRead": 0,
+    "rowsWritten": 0,
+    "databases": []
+  },
+  "workers": {
+    "totalRequests": 92999,
+    "totalErrors": 25,
+    "totalSubrequests": 2029,
+    "byScript": {
+      "stats47": {
+        "requests": 92262,
+        "errors": 25,
+        "subrequests": 2029,
+        "cpu_p50_us": 6469,
+        "cpu_p99_us": 2692756,
+        "wall_p50_us": 499289,
+        "wall_p99_us": 6432270
+      },
+      "__unknown__": {
+        "requests": 737,
+        "errors": 0,
+        "subrequests": 0,
+        "cpu_p50_us": 585,
+        "cpu_p99_us": 1549,
+        "wall_p50_us": 667604,
+        "wall_p99_us": 1519748
+      }
+    }
+  },
+  "r2_operations": {
+    "classA": 7718,
+    "classB": 262040,
+    "otherOps": 1,
+    "totalEgressBytes": 46472614929,
+    "byBucket": {
+      "stats47": {
+        "classA": 5274,
+        "classB": 237268,
+        "other": 1,
+        "egressBytes": 45104541426
+      },
+      "doboku-note-archive": {
+        "classA": 283,
+        "classB": 723,
+        "other": 0,
+        "egressBytes": 394796974
+      },
+      "doboku-note": {
+        "classA": 2161,
+        "classB": 24049,
+        "other": 0,
+        "egressBytes": 973276529
+      }
+    }
+  },
+  "r2_storage": {
+    "totalBytes": 32951762984,
+    "totalObjects": 111098,
+    "byBucket": {
+      "stats47-private": {
+        "bytes": 36989487,
+        "objects": 664,
+        "uploads": 0
+      },
+      "stats47": {
+        "bytes": 25021912869,
+        "objects": 96506,
+        "uploads": 0
+      },
+      "doboku-note": {
+        "bytes": 899555712,
+        "objects": 10922,
+        "uploads": 0
+      },
+      "stats47-cache": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      },
+      "doboku-note-archive": {
+        "bytes": 6993304916,
+        "objects": 3006,
+        "uploads": 0
+      }
+    }
+  }
+}

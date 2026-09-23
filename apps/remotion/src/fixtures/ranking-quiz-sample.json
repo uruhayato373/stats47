@@ -1,0 +1,319 @@
+{
+  "_source": "r2:app/ranking/shochu-consumption-expenditure/values.json (2024)",
+  "meta": {
+    "title": "焼酎消費支出額",
+    "subtitle": "都道府県庁所在市の二人以上世帯の年間焼酎消費支出額",
+    "unit": "円",
+    "yearName": "2024年"
+  },
+  "allEntries": [
+    {
+      "rank": 1,
+      "areaCode": "45000",
+      "areaName": "宮崎県",
+      "value": 14008
+    },
+    {
+      "rank": 2,
+      "areaCode": "46000",
+      "areaName": "鹿児島県",
+      "value": 10138
+    },
+    {
+      "rank": 3,
+      "areaCode": "43000",
+      "areaName": "熊本県",
+      "value": 8796
+    },
+    {
+      "rank": 4,
+      "areaCode": "44000",
+      "areaName": "大分県",
+      "value": 8199
+    },
+    {
+      "rank": 5,
+      "areaCode": "32000",
+      "areaName": "島根県",
+      "value": 8100
+    },
+    {
+      "rank": 6,
+      "areaCode": "05000",
+      "areaName": "秋田県",
+      "value": 7521
+    },
+    {
+      "rank": 7,
+      "areaCode": "47000",
+      "areaName": "沖縄県",
+      "value": 7433
+    },
+    {
+      "rank": 8,
+      "areaCode": "10000",
+      "areaName": "群馬県",
+      "value": 7192
+    },
+    {
+      "rank": 9,
+      "areaCode": "16000",
+      "areaName": "富山県",
+      "value": 7142
+    },
+    {
+      "rank": 10,
+      "areaCode": "02000",
+      "areaName": "青森県",
+      "value": 7063
+    },
+    {
+      "rank": 11,
+      "areaCode": "41000",
+      "areaName": "佐賀県",
+      "value": 6956
+    },
+    {
+      "rank": 12,
+      "areaCode": "35000",
+      "areaName": "山口県",
+      "value": 6787
+    },
+    {
+      "rank": 13,
+      "areaCode": "39000",
+      "areaName": "高知県",
+      "value": 6378
+    },
+    {
+      "rank": 14,
+      "areaCode": "08000",
+      "areaName": "茨城県",
+      "value": 6078
+    },
+    {
+      "rank": 15,
+      "areaCode": "33000",
+      "areaName": "岡山県",
+      "value": 6067
+    },
+    {
+      "rank": 16,
+      "areaCode": "15000",
+      "areaName": "新潟県",
+      "value": 5845
+    },
+    {
+      "rank": 17,
+      "areaCode": "31000",
+      "areaName": "鳥取県",
+      "value": 5844
+    },
+    {
+      "rank": 18,
+      "areaCode": "34000",
+      "areaName": "広島県",
+      "value": 5826
+    },
+    {
+      "rank": 19,
+      "areaCode": "09000",
+      "areaName": "栃木県",
+      "value": 5770
+    },
+    {
+      "rank": 20,
+      "areaCode": "37000",
+      "areaName": "香川県",
+      "value": 5733
+    },
+    {
+      "rank": 21,
+      "areaCode": "07000",
+      "areaName": "福島県",
+      "value": 5584
+    },
+    {
+      "rank": 22,
+      "areaCode": "40000",
+      "areaName": "福岡県",
+      "value": 5538
+    },
+    {
+      "rank": 23,
+      "areaCode": "03000",
+      "areaName": "岩手県",
+      "value": 5516
+    },
+    {
+      "rank": 24,
+      "areaCode": "28000",
+      "areaName": "兵庫県",
+      "value": 5499
+    },
+    {
+      "rank": 25,
+      "areaCode": "06000",
+      "areaName": "山形県",
+      "value": 5493
+    },
+    {
+      "rank": 26,
+      "areaCode": "12000",
+      "areaName": "千葉県",
+      "value": 5423
+    },
+    {
+      "rank": 27,
+      "areaCode": "13000",
+      "areaName": "東京都",
+      "value": 5404
+    },
+    {
+      "rank": 28,
+      "areaCode": "29000",
+      "areaName": "奈良県",
+      "value": 5343
+    },
+    {
+      "rank": 29,
+      "areaCode": "19000",
+      "areaName": "山梨県",
+      "value": 5331
+    },
+    {
+      "rank": 30,
+      "areaCode": "18000",
+      "areaName": "福井県",
+      "value": 5164
+    },
+    {
+      "rank": 31,
+      "areaCode": "22000",
+      "areaName": "静岡県",
+      "value": 5131
+    },
+    {
+      "rank": 32,
+      "areaCode": "24000",
+      "areaName": "三重県",
+      "value": 5027
+    },
+    {
+      "rank": 33,
+      "areaCode": "23000",
+      "areaName": "愛知県",
+      "value": 4609
+    },
+    {
+      "rank": 34,
+      "areaCode": "42000",
+      "areaName": "長崎県",
+      "value": 4592
+    },
+    {
+      "rank": 35,
+      "areaCode": "36000",
+      "areaName": "徳島県",
+      "value": 4395
+    },
+    {
+      "rank": 36,
+      "areaCode": "01000",
+      "areaName": "北海道",
+      "value": 4337
+    },
+    {
+      "rank": 37,
+      "areaCode": "26000",
+      "areaName": "京都府",
+      "value": 4315
+    },
+    {
+      "rank": 38,
+      "areaCode": "21000",
+      "areaName": "岐阜県",
+      "value": 4108
+    },
+    {
+      "rank": 39,
+      "areaCode": "17000",
+      "areaName": "石川県",
+      "value": 4032
+    },
+    {
+      "rank": 40,
+      "areaCode": "27000",
+      "areaName": "大阪府",
+      "value": 4004
+    },
+    {
+      "rank": 41,
+      "areaCode": "30000",
+      "areaName": "和歌山県",
+      "value": 3928
+    },
+    {
+      "rank": 42,
+      "areaCode": "25000",
+      "areaName": "滋賀県",
+      "value": 3902
+    },
+    {
+      "rank": 43,
+      "areaCode": "14000",
+      "areaName": "神奈川県",
+      "value": 3818
+    },
+    {
+      "rank": 44,
+      "areaCode": "11000",
+      "areaName": "埼玉県",
+      "value": 3805
+    },
+    {
+      "rank": 45,
+      "areaCode": "38000",
+      "areaName": "愛媛県",
+      "value": 3750
+    },
+    {
+      "rank": 46,
+      "areaCode": "20000",
+      "areaName": "長野県",
+      "value": 3354
+    },
+    {
+      "rank": 47,
+      "areaCode": "04000",
+      "areaName": "宮城県",
+      "value": 3179
+    }
+  ],
+  "quiz": {
+    "question": "焼酎に\nいちばんお金を\n使う県は？",
+    "scopeNote": "県庁所在市・二人以上世帯の年間支出（2024年）",
+    "choiceCodes": [
+      "46",
+      "45",
+      "43"
+    ],
+    "hint": {
+      "headline": "上位5県のうち",
+      "accent": "4県が九州",
+      "body": "1位は「?」の4県のどれか。\n残る5位は…なぜか島根県",
+      "maskedCodes": [
+        "45",
+        "46",
+        "43",
+        "44"
+      ],
+      "revealedCodes": [
+        "32"
+      ]
+    },
+    "sourceLabel": "総務省「家計調査」2024年",
+    "footnote": "家計調査は県庁所在市（宮崎市など）の二人以上世帯の値です",
+    "saveReason": "飲み会の小ネタに"
+  }
+}

@@ -10,7 +10,7 @@
  *   # workflow から 1 件記録 (投稿直後)
  *   node .claude/scripts/instagram/record-posted.cjs \
  *     --domain ranking --content-key vacant-housing-rate \
- *     --permalink https://... [--posted-at 2026-08-03T06:23:09Z]
+ *     --permalink https://... [--posted-at 2026-08-03T06:23:09Z] [--post-type carousel]
  *
  *   # ig-posted-log.jsonl から取り残しを一括回収 (冪等)
  *   node .claude/scripts/instagram/record-posted.cjs --from-log [--dry-run]
@@ -104,6 +104,7 @@ function main() {
         contentKey: e.content_key,
         permalink: e.permalink ?? null,
         postedAt: e.posted_at ?? e.date ?? null,
+        postType: e.post_type ?? null,
       }))
     : [
         {
@@ -111,6 +112,7 @@ function main() {
           contentKey: arg("content-key"),
           permalink: arg("permalink", null),
           postedAt: arg("posted-at", new Date().toISOString()),
+          postType: arg("post-type", null),
         },
       ];
 

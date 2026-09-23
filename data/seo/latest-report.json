@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-21",
+  "date": "2026-09-22",
   "period": {
-    "periodStart": "2026-09-12",
-    "periodEnd": "2026-09-18",
+    "periodStart": "2026-09-13",
+    "periodEnd": "2026-09-19",
     "windowDays": 7
   },
-  "inputHash": "c259d8c6c32502849bf1453a5204abcf2e4d2e4fffc4501993a88080c2343fe0",
+  "inputHash": "52d95d6f72d0ad6571327ca290161c9616915124a106a549079bb0d1b4b0dc75",
   "movements": [
     {
       "keyword": "漁獲量とは",
@@ -27,13 +27,13 @@
       "change": 49
     },
     {
-      "keyword": "全国 学力 ランキング",
-      "targetPath": "/blog/academic-achievement-test-prefecture-ranking",
-      "before": 2,
-      "after": 43,
+      "keyword": "うどん 消費量 ランキング",
+      "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
+      "before": 54,
+      "after": 10,
       "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -41
+      "impressions": 2,
+      "change": 44
     },
     {
       "keyword": "site:stats47.jp",
@@ -65,11 +65,11 @@
     {
       "keyword": "昼間人口",
       "targetPath": "/blog/day-time-population-prefecture-gap",
-      "before": 43.285714285714285,
+      "before": 43.333333333333336,
       "after": 10.6,
-      "beforeImpressions": 7,
+      "beforeImpressions": 6,
       "impressions": 10,
-      "change": 32.68571428571428
+      "change": 32.733333333333334
     },
     {
       "keyword": "日照時間ランキング",
@@ -90,13 +90,13 @@
       "change": 30
     },
     {
-      "keyword": "うどん 消費量",
-      "targetPath": "/blog/fresh-udon-soba-consumption-prefecture-gap",
-      "before": 39,
-      "after": 11,
+      "keyword": "日照時間 ランキング",
+      "targetPath": "/blog/annual-sunshine-duration-prefecture-gap",
+      "before": 30,
+      "after": 1,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 28
+      "change": 29
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "高校2年生 平均身長",
     "targetPath": "/blog/avg-height-high-school-2nd-male",
-    "rank": 7.033653846153846,
-    "impressions": 208,
+    "rank": 7.215962441314554,
+    "impressions": 213,
     "clicks": 1,
     "group": 5,
     "previousMethod": null,

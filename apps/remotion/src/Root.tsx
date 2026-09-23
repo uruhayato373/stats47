@@ -20,6 +20,8 @@ import { PortraitPreview } from './features/layouts/previews/PortraitPreview';
 // ranking-instagram
 import { CarouselPreview } from './features/ranking-instagram/previews/CarouselPreview';
 import { RankingTableSlidePreview } from './features/ranking-instagram/previews/RankingTableSlidePreview';
+// ranking-quiz-instagram
+import { RankingQuizCarouselPreview } from './features/ranking-quiz-instagram/previews/RankingQuizCarouselPreview';
 // buzz-map (バズ地図カード)
 import { BuzzMapStillPreview } from './features/buzz-map/previews/BuzzMapStillPreview';
 import {
@@ -95,6 +97,7 @@ import {
   LayoutPreviewSchema,
   RankCardPreviewSchema,
   RankingShortSchema,
+  RankingQuizCarouselSchema,
   RankingTablePreviewSchema,
   ThumbnailPreviewSchema,
   TileGridMapScenePreviewSchema,
@@ -241,6 +244,20 @@ export const RemotionRoot: React.FC = () => {
               theme: 'dark' as const,
               showGuides: false,
               showSafeAreas: false,
+            }}
+          />
+
+          {/* 予想クイズ型カルーセル (4:5)。slide で 出題/ヒント/正解/全47県/締め を切替 */}
+          <Composition
+            id="RankingQuizInstagram-Carousel"
+            component={RankingQuizCarouselPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={RankingQuizCarouselSchema}
+            defaultProps={{
+              slide: 'question' as const,
             }}
           />
         </Folder>
