@@ -53,3 +53,47 @@ test("台帳の post_type はカルーセルだけ carousel、既存の単枚・
   assert.equal(ledgerPostTypeFor({ type: "reels" }), "original");
   assert.equal(ledgerPostTypeFor({}), "original");
 });
+
+const { selectDueEntry, shiftDate } = require("../../instagram/post-from-schedule.cjs");
+
+const e = (date, time, content_key) => ({ date, time, content_key, type: "carousel", domain: "d" });
+const ctx = (nowTime, posted = []) => ({
+  today: "2026-09-25",
+  yesterday: "2026-09-24",
+  nowTime,
+  posted: new Set(posted),
+});
+
+test("夜枠の cron が日付をまたいで遅れても、前日 19:00 の未投稿を翌 01:24 に拾う", () => {
+  const entries = [e("2026-09-24", "19:00", "a"), e("2026-09-25", "19:00", "b")];
+  assert.equal(selectDueEntry(entries, ctx("01:24")).next.content_key, "a");
+});
+
+test("前日分が投稿済みなら拾わず、当日分は時刻が来るまで出さない", () => {
+  const entries = [e("2026-09-24", "19:00", "a"), e("2026-09-25", "19:00", "b")];
+  const { next, upcoming } = selectDueEntry(entries, ctx("01:24", ["2026-09-24|a"]));
+  assert.equal(next, null);
+  assert.deepEqual(upcoming.map((x) => x.content_key), ["b"]);
+  assert.equal(selectDueEntry(entries, ctx("19:05", ["2026-09-24|a"])).next.content_key, "b");
+});
+
+test("前日分と当日分がどちらも出せるときは前日分を先に出す", () => {
+  const entries = [e("2026-09-25", "08:00", "b"), e("2026-09-24", "19:00", "a")];
+  assert.equal(selectDueEntry(entries, ctx("09:00")).next.content_key, "a");
+});
+
+test("2 日以上前の未投稿は拾わない (古い予約を突然出さない)", () => {
+  const entries = [e("2026-09-23", "19:00", "old")];
+  assert.equal(selectDueEntry(entries, ctx("23:00")).next, null);
+});
+
+test("投稿済みの判定は予約日で行う (実行日で記録すると繰り越し分を二重投稿する)", () => {
+  const entries = [e("2026-09-24", "19:00", "a")];
+  assert.equal(selectDueEntry(entries, ctx("01:24", ["2026-09-25|a"])).next.content_key, "a");
+  assert.equal(selectDueEntry(entries, ctx("01:24", ["2026-09-24|a"])).next, null);
+});
+
+test("日付の繰り下げは月・年をまたぐ", () => {
+  assert.equal(shiftDate("2026-10-01", -1), "2026-09-30");
+  assert.equal(shiftDate("2027-01-01", -1), "2026-12-31");
+});

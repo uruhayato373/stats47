@@ -8,21 +8,21 @@
  *
  * 読み込みは `document.fonts.check()` で実際にフォントが使えるかまで検証し、
  * 1 つでも欠けていれば `cancelRender` で render を失敗させる（黙って fallback フォントで
- * 描画を続けない。見出しが Dela Gothic One ではなく別書体で焼かれた静止画を作らないため）。
+ * 描画を続けない。見出しが M PLUS 1p ではなく別書体で焼かれた静止画を作らないため）。
  */
 
 import { useState } from "react";
 import { cancelRender, continueRender, delayRender } from "remotion";
 
 const GOOGLE_FONTS_HREF =
-  "https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Archivo+Black&family=Noto+Sans+JP:wght@700;900&display=swap";
+  "https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@900&family=Archivo+Black&family=Noto+Sans+JP:wght@700;900&display=swap";
 
 /**
  * `document.fonts.load()` / `document.fonts.check()` に渡すフォント指定。
  * ウェイトごとに実在を検証する（Noto Sans JP は 700/900 の両方を要求）。
  */
 const REQUIRED_FONT_SPECS = [
-  "400 40px 'Dela Gothic One'",
+  "900 40px 'M PLUS 1p'",
   "400 40px 'Archivo Black'",
   "700 40px 'Noto Sans JP'",
   "900 40px 'Noto Sans JP'",
