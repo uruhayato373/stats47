@@ -52,7 +52,7 @@ npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue
   (`man launchd.plist` の StartCalendarInterval)。電源を切っていた場合はログイン時に実行される。
   予約は約 12 日分先まで入っているので、12 日以内に一度 Mac を開けば途切れない
 - **git は触らない**: 予約済みは `.local/threads-scheduled.jsonl` (git 管理外) に残り、posts.json は draft のまま。
-  コミットするときに `npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --sync-ledger` で台帳へ反映する
+  公開後は CI の公開確認が draft から直接 posted にする (下記)
 - **失敗時**: macOS の通知を出す。ログは `~/Library/Logs/stats47/threads-topup.log`。ログイン切れならオーナーが
   専用プロファイルでログインし直す
 - 登録 / 解除 (オーナーの操作):
@@ -61,6 +61,20 @@ npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue
   launchctl load ~/Library/LaunchAgents/com.stats47.threads-topup.plist
   launchctl unload ~/Library/LaunchAgents/com.stats47.threads-topup.plist
   ```
+
+## 公開済みの確認 (CI)
+
+`.github/workflows/sns-verify-threads-posted.yml` が毎晩 23:50 JST に
+`node .claude/scripts/sns/verify-threads-posted.cjs --apply` を動かす。ログインせずに公開プロフィール
+(`threads.com/@stats47jp`) を開き、見えた投稿のまとまりの文字が台帳の本文 1 行目を含む行だけ
+`posted` + `post_url` (permalink) にして develop へ戻す。予約時刻を過ぎただけでは posted にしない。
+予約時刻から 24 時間以上たっても見つからない行は警告に出す (Mac を閉じていて補充されなかった下書きなど)。
+台帳の draft も対象にするので、自動補充が台帳を書かなくても公開済みは記録される (`--sync-ledger` は任意)。
+
+- ローカルで確かめる: `node .claude/scripts/sns/verify-threads-posted.cjs --dry-run`
+- 取得経路だけ確かめる (投稿の多い公開アカウント): `... --dry-run --account zuck`
+- 2026-09-23 実測: ログインなしのプロフィールで @zuck の投稿 27 件の permalink・公開時刻・本文が取れた。
+  投稿ページの og:description はリンクプレビュー用の巡回ソフトにしか返らないので使わない
 
 ## 関連
 

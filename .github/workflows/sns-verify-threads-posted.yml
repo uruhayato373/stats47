@@ -1,0 +1,91 @@
+name: 🧵 Threads posted verification (daily)
+
+# Threads の予約は Playwright で Threads Web に入れている (.claude/skills/sns/publish-threads/)。
+# 公開されたかは、ログインせずに @stats47jp の公開プロフィールを開き、見えた投稿の本文と permalink を
+# 台帳 posts.json の Threads 行 (予約時刻を過ぎた draft / scheduled) と本文 1 行目で突き合わせて確かめる。
+# 一致した行だけ posted + post_url にし、台帳を develop へ戻す。時刻の経過だけでは posted にしない。
+# 判定は .claude/scripts/lib/threads-posted-core.cjs (テスト付き)。
+#
+# schedule は既定ブランチ (main) の workflow だけが動く。develop への push では、CI から
+# 公開プロフィールが読めるかの確認 (台帳は書かない dry-run) だけを行う。
+
+on:
+  schedule:
+    - cron: "50 14 * * *" # 23:50 JST
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true なら台帳を書かずに照合結果だけ表示する"
+        type: boolean
+        default: false
+  push:
+    branches: [develop]
+    paths:
+      - .github/workflows/sns-verify-threads-posted.yml
+      - .claude/scripts/sns/verify-threads-posted.cjs
+      - .claude/scripts/lib/threads-posted-core.cjs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sns-verify-threads-posted
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      # 照合ロジックが壊れた状態で台帳を書かない
+      - name: 🧪 Threads posted core tests
+        run: node --test .claude/scripts/lib/__tests__/threads-posted-core.test.cjs
+
+      # push 時は CI から公開プロフィールが読めるかだけを確かめる (投稿の多い公開アカウントで取得経路を見る)
+      - name: 🔎 Probe public profile access
+        if: github.event_name == 'push'
+        run: node .claude/scripts/sns/verify-threads-posted.cjs --dry-run --account zuck
+
+      - name: 🧵 Verify Threads posts
+        env:
+          DRY_RUN: ${{ github.event_name == 'push' || inputs.dry_run == true }}
+        run: |
+          MODE=--apply
+          if [ "${DRY_RUN}" = "true" ]; then MODE=--dry-run; fi
+          node .claude/scripts/sns/verify-threads-posted.cjs "${MODE}" | tee /tmp/verify.log
+          {
+            echo "# Threads posted verification — $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+            echo ""
+            echo '```'
+            cat /tmp/verify.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 📝 Commit ledger (posts.json)
+        if: github.event_name != 'push' && inputs.dry_run != true
+        run: |
+          if git diff --quiet -- .claude/state/sns/posts.json .claude/state/sns/post-log.md; then
+            echo "台帳の変更なし"
+            exit 0
+          fi
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add .claude/state/sns/posts.json .claude/state/sns/post-log.md
+          git commit -m "chore(threads): record posted permalinks [skip ci]"
+          git pull --rebase --autostash origin develop
+          git push origin develop
