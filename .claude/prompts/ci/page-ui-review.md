@@ -6,9 +6,11 @@
 ## 入力
 
 1. `.local/ci/page-quality/review-input.json` を Read する。`pages[]` に、ページの種類 (`template`)・URL・
-   スクショ (`device` は mobile=幅412px / desktop=幅1280px)・先週比の変化
+   スクショ (`device` は撮影した幅の id。`mobile-390` / `sm-640` / `tablet-768` / `rail-992` / `laptop-1024` /
+   `desktop-1440` / `wide-1920`)・先週比の変化
    (`changeRatio`、0〜1。null は比較元なし)・機械検査が既に見つけた指摘 (`automatedFindings`) がある。
-2. 各スクショの `tilePaths` (画面 1 枚分ずつ上から切り出した PNG) を順に Read して画面を見る。
+2. `tilePaths` がある幅 (`mobile-390` / `tablet-768` / `desktop-1440` の 3 幅) だけを確認する。
+   `tilePaths` (画面 1 枚分ずつ上から切り出した PNG) を順に Read して画面を見る。他の幅は機械検査が見ている。
    `tilePaths[0]` が最初に見える画面。`localPath` (縦長の全体像) は縮小されて文字が読めないので読まない。
 
 ## 見る観点
@@ -31,6 +33,6 @@
   medium = 読みにくい・迷う / low = 見た目の軽い違和感。
 - `location` は画面上の位置と要素を具体的に書く (例: 「スマホ 1 枚目の中ほど、注目のランキングのカード左端」)。
 - `suggestion` は直し方を 1 文で書く。
-- `template` と `device` は入力の値をそのまま使う (無い組み合わせの指摘は捨てられる)。
+- `template` と `device` は入力の値をそのまま使い、`device` は確認した 3 幅のどれかにする (他の値の指摘は捨てられる)。
 - 問題が無ければ `status: "no-issues"`、findings を空にする。スクショが読めないなど確認できなければ
   `status: "blocked"` にして理由を `summary` に書く。

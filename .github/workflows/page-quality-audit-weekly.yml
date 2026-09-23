@@ -85,7 +85,7 @@ jobs:
           settings: '{"disableAllHooks":true}'
           claude_args: |
             --model sonnet
-            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["reviewed","no-issues","blocked"]},"summary":{"type":"string","minLength":10,"maxLength":800},"findings":{"type":"array","maxItems":10,"items":{"type":"object","properties":{"template":{"type":"string"},"device":{"type":"string","enum":["mobile","desktop"]},"severity":{"type":"string","enum":["high","medium","low"]},"location":{"type":"string","minLength":5},"issue":{"type":"string","minLength":10},"suggestion":{"type":"string","minLength":5}},"required":["template","device","severity","location","issue","suggestion"],"additionalProperties":false}}},"required":["status","summary","findings"],"additionalProperties":false}'
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["reviewed","no-issues","blocked"]},"summary":{"type":"string","minLength":10,"maxLength":800},"findings":{"type":"array","maxItems":10,"items":{"type":"object","properties":{"template":{"type":"string"},"device":{"type":"string","enum":["mobile-390","tablet-768","desktop-1440"]},"severity":{"type":"string","enum":["high","medium","low"]},"location":{"type":"string","minLength":5},"issue":{"type":"string","minLength":10},"suggestion":{"type":"string","minLength":5}},"required":["template","device","severity","location","issue","suggestion"],"additionalProperties":false}}},"required":["status","summary","findings"],"additionalProperties":false}'
             --effort medium
             --max-turns 120
             --no-session-persistence

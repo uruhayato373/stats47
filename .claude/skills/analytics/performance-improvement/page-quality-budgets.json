@@ -35,6 +35,7 @@
     { "page_type": "all", "metric_key": "empty_headings", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "文字も alt も aria-label も無い見出し。読み込み中の仮枠 (animate-pulse) は除外" },
     { "page_type": "all", "metric_key": "clipped_text", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "代表URLのみ (ブラウザ)。overflow hidden で文字が切れている要素。ellipsis / line-clamp は除外" },
     { "page_type": "all", "metric_key": "overlapping_tap_targets", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "代表URLのみ (ブラウザ)。タップできる要素どうしが小さい方の面積の25%以上重なる" },
+    { "page_type": "all", "metric_key": "responsive_layout_issues", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "代表URLのみ。640/768/992/1024/1440/1920px の各幅での横スクロール・文字の切れ・タップ要素の重なりの合計" },
     { "page_type": "all", "metric_key": "a11y_violations", "comparison": "absolute", "threshold": 0, "operator": "<=", "severity": "warning", "note": "代表URLのみ (ブラウザ)。axe-core WCAG 2 A/AA の critical/serious 規則数" },
 
     { "page_type": "prefecture-detail", "metric_key": "dom_nodes", "comparison": "absolute", "threshold": 3500, "operator": "<=", "severity": "warning", "note": "2026-09 area-all-optimizationでDOM削減対応後の目安。実測で調整する" },

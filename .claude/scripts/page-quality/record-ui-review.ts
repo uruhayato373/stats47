@@ -74,7 +74,7 @@ function main() {
     reviewError,
     input,
     screenshotBaseUrl: process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp",
-    keyOf: (template, device) => `${SCREENSHOT_PREFIX}/${date}/${template}-${device}.png`,
+    keyOf: (template, device) => `${SCREENSHOT_PREFIX}/${date}/${template}-${device}.webp`,
   });
   const alertOut = arg("--alert-out") ?? "/tmp/ui-review-alert.md";
   if (body) {

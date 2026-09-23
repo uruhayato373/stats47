@@ -10,6 +10,7 @@ export const UI_METRIC_KEYS: MetricKey[] = [
   "clipped_text",
   "overlapping_tap_targets",
   "a11y_violations",
+  "responsive_layout_issues",
 ];
 
 /** 前回の週次結果に無かった UI 違反。前回が無ければ全件を新規として返す。 */
@@ -57,7 +58,8 @@ export type ReviewSeverity = "high" | "medium" | "low";
 
 export interface ReviewFinding {
   template: string;
-  device: "mobile" | "desktop";
+  /** agent が確認した幅の id (`mobile-390` / `tablet-768` / `desktop-1440`)。 */
+  device: string;
   severity: ReviewSeverity;
   location: string;
   issue: string;
@@ -77,7 +79,10 @@ export function validateReview(raw: unknown, input: ReviewInput): { report: Revi
   if (!r || typeof r !== "object" || !["reviewed", "no-issues", "blocked"].includes(String(r.status))) {
     throw new Error("review output has no valid status");
   }
-  const shots = new Set(input.pages.flatMap((p) => p.screenshots.map((s) => `${p.template}|${s.device}`)));
+  // agent に見せたのは切り出しのある幅だけ。それ以外の幅を指す指摘は見ていない画面なので捨てる。
+  const shots = new Set(
+    input.pages.flatMap((p) => p.screenshots.filter((s) => (s.tilePaths ?? []).length > 0).map((s) => `${p.template}|${s.device}`))
+  );
   const findings: ReviewFinding[] = [];
   for (const f of Array.isArray(r.findings) ? r.findings : []) {
     const key = `${f?.template}|${f?.device}`;

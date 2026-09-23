@@ -23,7 +23,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { checkImages } from "./lib/check-images";
-import { createScreenshotSession, SCREENSHOT_PREFIX } from "./lib/screenshots";
+import { createScreenshotSession, responsiveFindings, SCREENSHOT_PREFIX } from "./lib/screenshots";
 import { buildReviewInput, newUiViolations } from "./lib/ui-report";
 import { PAGE_TEMPLATES } from "./templates";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
@@ -101,7 +101,15 @@ async function measureRepresentativesInBrowser(
         browserRuns: runs,
       });
       try {
-        browserResult.screenshots = await shots.capture(browserResult.url, template.key);
+        const captured = await shots.capture(browserResult.url, template.key);
+        browserResult.screenshots = captured.records;
+        const responsive = responsiveFindings(captured.records);
+        browserResult.metrics.responsive_layout_issues = responsive.count;
+        browserResult.ui_findings = [
+          ...(browserResult.ui_findings ?? []),
+          ...captured.failures,
+          ...responsive.findings.slice(0, 20),
+        ];
       } catch (e) {
         browserResult.ui_findings = [
           ...(browserResult.ui_findings ?? []),

@@ -37,12 +37,17 @@ paths:
 
 ## スクショ保存と週次 agent の確認 (2026-09-23)
 
-代表URL 11 件をスマホ (幅412) と PC (幅1280) で撮影し、R2 `state/page-quality/screenshots/<date>/` と
-比較元の `latest/` へ保存する (`lib/screenshots.ts`・400 日で自動失効する `state/` prefix。1 週約 10MB)。
+代表URL 11 件を、表示が切り替わる幅ごとに 7 幅 (390 / 640 / 768 / 992 / 1024 / 1440 / 1920px。
+`tailwind.config.ts` の sm・md・lg・xl・2xl と左サイドバーの 992px 境界。`lib/screenshots.ts` の `VIEWPORTS` が正典)
+で撮影する。R2 `state/page-quality/screenshots/latest/` に全幅の PNG (翌週の比較元・上書き・約 38MB) を、
+`<date>/` に agent が確認する 3 幅 (390 / 768 / 1440) だけ WebP (約 4.4MB/週) を置く (400 日で自動失効する `state/` prefix)。
 先週の `latest/` と画素比較した変化率 (0〜1、高さの変化も数える) を LATEST.md に出す。
+各幅で横スクロール・文字の切れ・タップ要素の重なりも測り、412px の代表URL検査が見ない幅 (640px 以上) の件数を
+`responsive_layout_issues` (warning) にする。読み込みは load まで必須・通信の落ち着き待ちは 10 秒で打ち切る
+(ホームは networkidle を待つと 45 秒で時間切れになった)。1 幅の失敗は `screenshot_failed@<幅>` として残し、他の幅は捨てない。
 
 続けて Claude (sonnet・`Read`/`Glob` だけ・ファイル書換なし) が `.claude/prompts/ci/page-ui-review.md` に沿って
-スクショを確認し、JSON schema の構造化出力で指摘 (最大 10 件) を返す。縦長の全体像は縮小されて文字が
+3 幅のスクショを確認し、JSON schema の構造化出力で指摘 (最大 10 件) を返す。縦長の全体像は縮小されて文字が
 読めないので、画面 1 枚分ずつ切り出した画像 (`tilePaths`、R2 には上げない) を読ませる。
 **記録と通知の判断はスクリプトが行う** (`record-ui-review.ts`): 撮影していない画面を指す指摘や形の崩れた
 指摘は捨て、結果を `.claude/state/metrics/page-quality/ui-review-latest.json` に残す。

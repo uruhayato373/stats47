@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { PNG } from "pngjs";
 
-import { compareScreenshots, sliceIntoTiles } from "../lib/screenshots.ts";
+import { compareScreenshots, responsiveFindings, sliceIntoTiles } from "../lib/screenshots.ts";
 import { buildUiAlert, newUiViolations, structuredOutput, validateReview } from "../lib/ui-report.ts";
 
 function png(width, height, paint) {
@@ -42,6 +42,21 @@ test("縦長のスクショを画面 1 枚分ずつ上から切り出し、上�
   assert.equal(sliceIntoTiles(tall, 10, 2).length, 2);
 });
 
+test("幅ごとの崩れは 390px を除いて数え、どの幅の何かを指摘に残す", () => {
+  const records = [
+    { device: "mobile-390", horizontalScroll: true, clipped: ["div"], overlaps: [] },
+    { device: "rail-992", horizontalScroll: true, clipped: ["h3 \"見出し\""], overlaps: ["a ⇄ button"] },
+    { device: "wide-1920", horizontalScroll: false, clipped: [], overlaps: [] },
+  ];
+  const { count, findings } = responsiveFindings(records);
+  assert.equal(count, 3);
+  assert.deepEqual(findings, [
+    "responsive@rail-992: 横スクロールが出る",
+    'responsive@rail-992 clipped_text: h3 "見出し"',
+    "responsive@rail-992 overlapping_tap_target: a ⇄ button",
+  ]);
+});
+
 const violation = (url, metric_key) => ({
   url,
   template: "ranking",
@@ -68,17 +83,24 @@ test("新規の UI 違反は先週に無かった (URL, 指標) だけで、肥�
 
 const input = {
   generatedAt: "2026-09-27T18:00:00Z",
-  pages: [{ template: "home", url: "https://stats47.jp/", screenshots: [{ device: "mobile", localPath: "a.png", changeRatio: 0.35, height: 3000, tilePaths: ["a-1.png"] }], automatedFindings: [] }],
+  pages: [{ template: "home", url: "https://stats47.jp/", screenshots: [
+    { device: "mobile-390", localPath: "a.png", changeRatio: 0.35, height: 3000, tilePaths: ["a-1.png"] },
+    { device: "rail-992", localPath: "b.png", changeRatio: 0.05, height: 2000, tilePaths: [] },
+  ], automatedFindings: [] }],
 };
-const finding = (over = {}) => ({ template: "home", device: "mobile", severity: "medium", location: "上から約 400px のカード", issue: "矢印がカードの数値に重なっている", suggestion: "矢印をカードの外に出す", ...over });
+const finding = (over = {}) => ({ template: "home", device: "mobile-390", severity: "medium", location: "上から約 400px のカード", issue: "矢印がカードの数値に重なっている", suggestion: "矢印をカードの外に出す", ...over });
 
-test("agent の指摘は撮影した画面だけを採用し、存在しない画面や形の崩れた指摘は捨てる", () => {
+test("agent の指摘は見せた幅 (切り出しのある幅) だけを採用し、見せていない幅・無い画面・形の崩れた指摘は捨てる", () => {
   const { report, rejected } = validateReview(
-    { status: "reviewed", summary: "確認した", findings: [finding(), finding({ device: "desktop" }), finding({ template: "blog" }), finding({ severity: "urgent" })] },
+    {
+      status: "reviewed",
+      summary: "確認した",
+      findings: [finding(), finding({ device: "rail-992" }), finding({ device: "desktop-1440" }), finding({ template: "blog" }), finding({ severity: "urgent" })],
+    },
     input
   );
   assert.equal(report.findings.length, 1);
-  assert.equal(rejected.length, 3);
+  assert.equal(rejected.length, 4);
   assert.throws(() => validateReview({ status: "done", findings: [] }, input), /no valid status/);
 });
 
@@ -88,8 +110,9 @@ test("通知本文は新規の機械検出も agent の指摘も無ければ nul
   const body = buildUiAlert({ ...common, newViolations: [violation("https://stats47.jp/ranking/a", "clipped_text")], review: { status: "reviewed", summary: "x", findings: [finding()] } });
   assert.match(body, /`\/ranking\/a` clipped_text/);
   assert.match(body, /矢印がカードの数値に重なっている/);
-  assert.match(body, /\(https:\/\/s\/k\/home-mobile\.png\)/);
-  assert.match(body, /home \/ mobile: 35%/);
+  assert.match(body, /\(https:\/\/s\/k\/home-mobile-390\.png\)/);
+  assert.match(body, /home \/ mobile-390: 35%/);
+  assert.doesNotMatch(body, /rail-992: 5%/, "変化が 20% 未満の幅は一覧に出さない");
   const failed = buildUiAlert({ ...common, newViolations: [], review: null, reviewError: "agent step: failure" });
   assert.match(failed, /agent の確認は実行できなかった/);
 });

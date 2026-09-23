@@ -61,7 +61,8 @@ export type MetricKey =
   | "empty_headings"
   | "clipped_text"
   | "overlapping_tap_targets"
-  | "a11y_violations";
+  | "a11y_violations"
+  | "responsive_layout_issues";
 
 export type Comparison = "absolute" | "delta_pct";
 export type Operator = "<=" | ">=" | "<" | ">";
@@ -113,8 +114,9 @@ export interface PageAuditResult {
 }
 
 export interface ScreenshotRecord {
-  device: "mobile" | "desktop";
-  /** R2 の key (`state/page-quality/screenshots/<date>/<template>-<device>.png`)。 */
+  /** 撮影した幅の id (`mobile-390` / `sm-640` / `tablet-768` / `rail-992` / `laptop-1024` / `desktop-1440` / `wide-1920`)。 */
+  device: string;
+  /** R2 の key。agent が確認する幅は `<date>/<template>-<幅>.webp`、それ以外は `latest/<template>-<幅>.png`。 */
   key: string;
   /** CI の同一ジョブ内で agent が読むためのローカルパス。 */
   localPath: string;
@@ -125,6 +127,11 @@ export interface ScreenshotRecord {
   previousHeight: number | null;
   /** agent が読む画面 1 枚分ずつの切り出し (縦長の全体像は縮小されて文字が読めないため)。R2 には上げない。 */
   tilePaths: string[];
+  /** この幅で横スクロールが出たか。 */
+  horizontalScroll?: boolean;
+  /** この幅で文字が枠外に切れていた要素・重なったタップ要素 (ui-probe と同じ判定)。 */
+  clipped?: string[];
+  overlaps?: string[];
 }
 
 export interface Violation {
