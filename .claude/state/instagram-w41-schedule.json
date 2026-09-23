@@ -14,11 +14,39 @@
     ]
   },
   {
+    "date": "2026-10-06",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "39000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
     "date": "2026-10-07",
     "time": "12:00",
     "type": "reels",
     "domain": "bar-chart-race",
     "content_key": "marriages"
+  },
+  {
+    "date": "2026-10-07",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "correlation-carousel",
+    "content_key": "average-temperature--kerosene-consumption-quantity",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-scatter-1080x1350.png",
+      "slide-3-highlights-1080x1350.png",
+      "slide-4-caution-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
   },
   {
     "date": "2026-10-08",
@@ -32,6 +60,46 @@
       "slide-3-answer-1080x1350.png",
       "slide-4-table-1080x1350.png",
       "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-10-09",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "compare-carousel",
+    "content_key": "23000-vs-40000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-duel-1080x1350.png",
+      "slide-3-summary-1080x1350.png",
+      "slide-4-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-10-10",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "03000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-10-11",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "map-carousel",
+    "content_key": "beef-consumption-expenditure",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-choropleth-1080x1350.png",
+      "slide-3-topbottom-1080x1350.png",
+      "slide-4-outro-1080x1350.png"
     ]
   }
 ]

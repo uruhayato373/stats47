@@ -14,11 +14,39 @@
     ]
   },
   {
+    "date": "2026-09-29",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "47000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
     "date": "2026-09-30",
     "time": "12:00",
     "type": "reels",
     "domain": "ranking-quiz-reel",
     "content_key": "squid-consumption-expenditure"
+  },
+  {
+    "date": "2026-09-30",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "correlation-carousel",
+    "content_key": "dual-income-household-ratio--floor-area-per-dwelling-owner",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-scatter-1080x1350.png",
+      "slide-3-highlights-1080x1350.png",
+      "slide-4-caution-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
   },
   {
     "date": "2026-10-01",
@@ -32,6 +60,46 @@
       "slide-3-answer-1080x1350.png",
       "slide-4-table-1080x1350.png",
       "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-10-02",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "compare-carousel",
+    "content_key": "11000-vs-12000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-duel-1080x1350.png",
+      "slide-3-summary-1080x1350.png",
+      "slide-4-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-10-03",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "13000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-10-04",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "map-carousel",
+    "content_key": "natto-consumption-expenditure",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-choropleth-1080x1350.png",
+      "slide-3-topbottom-1080x1350.png",
+      "slide-4-outro-1080x1350.png"
     ]
   }
 ]

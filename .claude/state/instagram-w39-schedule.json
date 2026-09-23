@@ -12,5 +12,45 @@
       "slide-4-table-1080x1350.png",
       "slide-5-outro-1080x1350.png"
     ]
+  },
+  {
+    "date": "2026-09-25",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "compare-carousel",
+    "content_key": "13000-vs-27000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-duel-1080x1350.png",
+      "slide-3-summary-1080x1350.png",
+      "slide-4-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-09-26",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "area-carousel",
+    "content_key": "01000",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-top-1080x1350.png",
+      "slide-3-bottom-1080x1350.png",
+      "slide-4-sources-1080x1350.png",
+      "slide-5-outro-1080x1350.png"
+    ]
+  },
+  {
+    "date": "2026-09-27",
+    "time": "19:00",
+    "type": "carousel",
+    "domain": "map-carousel",
+    "content_key": "miso-consumption-quantity",
+    "slides": [
+      "slide-1-cover-1080x1350.png",
+      "slide-2-choropleth-1080x1350.png",
+      "slide-3-topbottom-1080x1350.png",
+      "slide-4-outro-1080x1350.png"
+    ]
   }
 ]
