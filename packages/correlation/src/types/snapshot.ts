@@ -64,6 +64,8 @@ export interface CorrelationStatsSnapshot {
   generatedAt: string;
   total: number;
   strong: number;
+  /** 生成時の入力 (観測値・表示メタ・相関コード) の sha256。再計算要否の判定にだけ使う。 */
+  inputFingerprint?: string;
 }
 
 export interface CorrelationByKeySnapshot {

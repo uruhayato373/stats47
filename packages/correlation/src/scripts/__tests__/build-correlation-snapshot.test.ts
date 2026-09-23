@@ -199,3 +199,117 @@ describe('buildCorrelationSnapshot shape', () => {
     expect(Math.abs(byKey.pairs[0].pearsonR)).toBeGreaterThan(0.7);
   });
 });
+
+// 相関 workflow は毎日・データ更新直後に起動される。変更が無ければ 2,000 件の by-key を
+// 書き直さず、部分更新で 1 指標でも値が変われば必ず全件を再計算する、が契約。
+describe('buildCorrelationSnapshot --skip-if-unchanged', () => {
+  const publishedStats = (): string | null => saved.get('app/correlation/stats.json') ?? null;
+
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+  });
+
+  async function publishOnce() {
+    const allJson = {
+      generatedAt: 'x',
+      count: METRICS.length,
+      items: METRICS.map((m) => ({
+        rankingKey: m.key,
+        title: m.title,
+        subtitle: null,
+        unit: m.unit,
+        normalizationBasis: null,
+      })),
+    };
+    fetchFromR2AsJsonMock.mockImplementation((key: string) =>
+      key === 'app/ranking-items/all.json' ? allJson : null
+    );
+    const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+    await buildCorrelationSnapshot({ dryRun: false });
+    const stats = JSON.parse(publishedStats()!) as CorrelationStatsSnapshot;
+    // 前回公開分として R2 から stats.json が読める状態にする
+    fetchFromR2AsJsonMock.mockImplementation((key: string) => {
+      if (key === 'app/ranking-items/all.json') return allJson;
+      if (key === 'app/correlation/stats.json') return stats;
+      return null;
+    });
+    saved.clear();
+    return { buildCorrelationSnapshot, stats };
+  }
+
+  it('入力が前回公開と同じなら何も書かずに skipped を返す', async () => {
+    const { buildCorrelationSnapshot, stats } = await publishOnce();
+    expect(stats.inputFingerprint).toMatch(/^[0-9a-f]{64}$/);
+
+    const result = await buildCorrelationSnapshot({ dryRun: false, skipIfUnchanged: true });
+
+    expect(result.skipped).toBe(true);
+    expect(result.inputFingerprint).toBe(stats.inputFingerprint);
+    expect(saved.size).toBe(0);
+  });
+
+  it('部分更新で 1 指標の値が変わったら再計算して全ファイルを書く', async () => {
+    const { buildCorrelationSnapshot, stats } = await publishOnce();
+    const original = STATS['metric-c'];
+    STATS['metric-c'] = original.map((row, i) => (i === 0 ? { ...row, value: row.value + 1 } : row));
+    try {
+      const result = await buildCorrelationSnapshot({ dryRun: false, skipIfUnchanged: true });
+
+      expect(result.skipped).toBe(false);
+      expect(result.inputFingerprint).not.toBe(stats.inputFingerprint);
+      expect(saved.has('app/correlation/by-ranking-key/metric-a.json')).toBe(true);
+      const next = JSON.parse(publishedStats()!) as CorrelationStatsSnapshot;
+      expect(next.inputFingerprint).toBe(result.inputFingerprint);
+    } finally {
+      STATS['metric-c'] = original;
+    }
+  });
+
+  it('skipIfUnchanged を付けなければ入力が同じでも書き直す (手動 force 用)', async () => {
+    const { buildCorrelationSnapshot } = await publishOnce();
+
+    const result = await buildCorrelationSnapshot({ dryRun: false });
+
+    expect(result.skipped).toBe(false);
+    expect(saved.has('app/correlation/stats.json')).toBe(true);
+  });
+});
+
+describe('computeInputFingerprint', () => {
+  const rows = (values: number[], name = 'pref') =>
+    values.map((value, i) => ({ areaCode: `0${i + 1}000`, areaName: `${name}-${i + 1}`, value }));
+  const meta = (title: string) =>
+    new Map([['metric-a', { title, subtitle: null, unit: '件', normalizationBasis: null }]]);
+
+  it('並列 fetch の完了順 (Map の挿入順・行順) に依存しない', async () => {
+    const { computeInputFingerprint } = await import('../build-correlation-snapshot');
+    const a = { latestYear: '2020', rows: rows([1, 2, 3]) };
+    const b = { latestYear: '2020', rows: rows([4, 5, 6]) };
+    const forward = new Map([['metric-a', a], ['metric-b', b]]);
+    const reversed = new Map([['metric-b', { ...b, rows: [...b.rows].reverse() }], ['metric-a', a]]);
+
+    expect(computeInputFingerprint(forward, ['metric-a'], meta('A'), 'src')).toBe(
+      computeInputFingerprint(reversed, ['metric-a'], meta('A'), 'src')
+    );
+  });
+
+  it('値・県名・表示タイトル・コードのどれが変わっても別の値になる', async () => {
+    const { computeInputFingerprint } = await import('../build-correlation-snapshot');
+    const base = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 3]) }]]);
+    const fp = computeInputFingerprint(base, ['metric-a'], meta('A'), 'src');
+
+    const changedValue = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 4]) }]]);
+    const changedName = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 3], 'x') }]]);
+    const changedYear = new Map([['metric-a', { latestYear: '2021', rows: rows([1, 2, 3]) }]]);
+    for (const other of [
+      computeInputFingerprint(changedValue, ['metric-a'], meta('A'), 'src'),
+      computeInputFingerprint(changedName, ['metric-a'], meta('A'), 'src'),
+      computeInputFingerprint(changedYear, ['metric-a'], meta('A'), 'src'),
+      computeInputFingerprint(base, ['metric-a'], meta('B'), 'src'),
+      computeInputFingerprint(base, ['metric-a'], meta('A'), 'src2'),
+    ]) {
+      expect(other).not.toBe(fp);
+    }
+  });
+});
