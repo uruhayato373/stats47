@@ -19,7 +19,7 @@ primary_agent: x-strategist
 
 | 引数 | 既定 | 説明 |
 |---|---|---|
-| `--count N` | 10 | 生成する本数。週次目安は §1 `X_WEEKLY_TARGET_MIN..MAX` (14-21) |
+| `--count N` | §1 `X_WEEKLY_TARGET_MAX` | 生成する本数。週次目安は §1 `X_WEEKLY_TARGET_MIN..MAX` (2026-09-23 から 2-3) |
 | `--start YYYY-MM-DD` | 翌日 (JST) | 予約割付の開始日。省略時は翌日から |
 | `--rebuild-index` | off | metric 索引を作り直す (metric 追加後) |
 

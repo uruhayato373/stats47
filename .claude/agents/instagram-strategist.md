@@ -23,7 +23,7 @@ Instagram アカウント「統計で見る都道府県 | @stats47jp」の投稿
 | `/post-instagram` | Graph API 経由で stats47jp に画像 / カルーセル / リールを自動投稿（即時投稿のみ） |
 | `/fetch-instagram-data` | Graph API から投稿一覧・アカウントインサイト・投稿別メトリクスを取得 |
 | `/update-sns-metrics --platform instagram` | Graph API で最新メトリクスを取得し posts.json + snapshots CSV に記録 |
-| `/generate-instagram-schedule` | 週次配信スケジュール生成（カルーセル2+リール1・重複防止内蔵）→ GHA cron が自動投稿 |
+| `/generate-instagram-schedule` | 週次配信スケジュール生成（カルーセル 1 / 日の曜日ローテーション + リール 1 / 週・規約 §2-3c・重複防止内蔵）→ GHA cron が自動投稿 |
 | `/post-ig-6angles` | 6 角度フレームで IG カルーセル/画像を量産（角度別キャプション + スライドコピー） |
 | `/react-to-news` | **じじネタ→即SNS の瞬発力パイプライン**。トレンド語→指標発見→ IG縦長 1080×1350 PNG(`<key>-ig.png`)+caption を記事不要で数秒生成（quick-still）。投稿前に `/push-r2` で本番R2へ push（公開URL要求） |
 | `/mark-sns-posted` | 投稿済みステータスを DB に記録、ローカル R2 から削除 |

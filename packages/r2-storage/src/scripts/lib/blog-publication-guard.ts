@@ -13,6 +13,7 @@ const contractFiles = [
   'apps/web/scripts/export-blog-snapshot.ts',
   'apps/web/src/config/gone-blog-slugs.ts',
   'apps/web/src/features/blog/services/article-survey-taxonomy.ts',
+  'apps/web/src/features/blog/services/article-metric-pairs.ts',
   'packages/ranking/src/survey/survey-taxonomy.ts',
   'packages/ranking/src/data/surveys.json',
   'packages/ranking/src/builders/build-ranking-item-from-metric.ts',

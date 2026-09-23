@@ -21,6 +21,7 @@ export {
   readLatestArticlesFromR2 as listLatestArticles,
   readArticleSummariesByTagKeyFromR2 as listArticleSummariesByTagKey,
   readArticleSummariesBySurveyIdFromR2 as listArticleSummariesBySurveyId,
+  readMetricPairArticlesFromR2 as listMetricPairArticles,
   readTagKeysForArticleFromR2 as getTagKeysForArticle,
   readTagsForArticlesFromR2 as getTagsForArticles,
   readBlogSnapshotMetaFromR2,

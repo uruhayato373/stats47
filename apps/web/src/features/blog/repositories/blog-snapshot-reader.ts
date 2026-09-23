@@ -239,6 +239,37 @@ export async function readArticleSummariesBySurveyIdFromR2(
     }));
 }
 
+/**
+ * rankingKey を 2 指標の片方に持つ公開記事 (散布図でその指標と相手指標の関係を扱う記事)。
+ * 相関記事は tags が空なのでタグ経由の関連記事には出ない。この索引が唯一の導線になる。
+ */
+export async function readMetricPairArticlesFromR2(rankingKey: string): Promise<
+  Array<{ pairKey: string; slug: string; title: string; description: string | null }>
+> {
+  const snapshot = await loadSnapshot();
+  const byPair = snapshot.metricPairArticleIndex?.[rankingKey];
+  if (!byPair) return [];
+  const published = new Map(
+    snapshot.articles
+      .filter((article) => article.published === true)
+      .map((article) => [article.slug, article])
+  );
+  return Object.entries(byPair)
+    .flatMap(([pairKey, slugs]) =>
+      slugs.flatMap((slug) => {
+        const article = published.get(slug);
+        return article ? [{ pairKey, article }] : [];
+      })
+    )
+    .sort((a, b) => compareByPublishedAtDesc(a.article, b.article))
+    .map(({ pairKey, article }) => ({
+      pairKey,
+      slug: article.slug,
+      title: article.title,
+      description: article.description,
+    }));
+}
+
 export async function readBlogSnapshotMetaFromR2(): Promise<{
   tagMeta: SnapshotTagMeta[];
   generatedAt: string;
