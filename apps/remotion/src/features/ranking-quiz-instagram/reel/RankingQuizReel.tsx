@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Sequence } from "remotion";
 
+import { useIgSeriesFonts } from "@/features/ig-series";
 import type { RankingEntry, RankingMeta } from "@/shared";
 
 import type { RankingQuizSpec } from "../quiz";
@@ -29,6 +30,7 @@ export interface RankingQuizReelProps {
  * choiceCodes/hint がデータと矛盾する spec はカルーセル同様レンダーを失敗させる。
  */
 export const RankingQuizReel: React.FC<RankingQuizReelProps> = ({ meta, allEntries, quiz }) => {
+  useIgSeriesFonts();
   const { meta: resolvedMeta, precision, resolved } = resolveQuizReelData({ meta, allEntries, quiz });
   const timeline = getQuizReelTimeline();
 

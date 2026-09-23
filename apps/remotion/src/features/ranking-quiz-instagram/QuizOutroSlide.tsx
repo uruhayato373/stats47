@@ -1,45 +1,44 @@
 import React from "react";
 
-import { FONT } from "@/shared";
+import { IG_FONT, IG_HEADLINE_STYLE, IgSeriesCard, IgSeriesEmphasis, IgSeriesFrame } from "@/features/ig-series";
 
-import { QUIZ_COLORS, QuizFrame } from "./QuizFrame";
 import type { RankingQuizSpec } from "./quiz";
 
 interface QuizOutroSlideProps {
   spec: RankingQuizSpec;
 }
 
-const card: React.CSSProperties = {
-  backgroundColor: QUIZ_COLORS.card,
-  border: `2px solid ${QUIZ_COLORS.border}`,
-  borderRadius: 24,
-  padding: "32px 40px",
-  fontSize: 38,
-  fontWeight: FONT.weight.bold,
-};
+const SERIES = "quiz" as const;
 
 /** 5枚目: コメント・保存・プロフィール導線 */
 export const QuizOutroSlide: React.FC<QuizOutroSlideProps> = ({ spec }) => (
-  <QuizFrame pill="都道府県クイズ" sourceLabel={spec.sourceLabel}>
-    <div style={{ marginTop: 150 }}>
-      <h1 style={{ fontSize: 92, fontWeight: FONT.weight.black, lineHeight: 1.3 }}>
+  <IgSeriesFrame series={SERIES} tag="都道府県クイズ" sourceLabel={spec.sourceLabel}>
+    <div style={{ marginTop: 140 }}>
+      <h1
+        style={{
+          ...IG_HEADLINE_STYLE,
+          fontSize: 84,
+          lineHeight: 1.4,
+        }}
+      >
         あなたの県は
         <br />
-        <span style={{ color: QUIZ_COLORS.highlight }}>何位</span>でしたか？
+        何位でしたか？
       </h1>
-      <p style={{ fontSize: 40, marginTop: 36, color: QUIZ_COLORS.muted, lineHeight: 1.5 }}>
+      <p style={{ fontSize: 36, fontWeight: IG_FONT.weight.bold, marginTop: 32, lineHeight: 1.5 }}>
         予想が当たった人も外れた人も
         <br />
         コメントで教えてください
       </p>
-      <div style={{ marginTop: 72, display: "flex", flexDirection: "column", gap: 24 }}>
-        <div style={card}>
-          <span style={{ color: QUIZ_COLORS.highlight }}>保存</span>して、{spec.saveReason ?? "友だちにも出題してみて"}
-        </div>
-        <div style={card}>
-          全47都道府県は<span style={{ color: QUIZ_COLORS.accent }}>プロフィールのリンク</span>から
-        </div>
+      <div style={{ marginTop: 60, display: "flex", flexDirection: "column", gap: 22 }}>
+        <IgSeriesCard style={{ padding: "28px 36px", fontSize: 34, fontWeight: IG_FONT.weight.bold }}>
+          <IgSeriesEmphasis series={SERIES}>保存</IgSeriesEmphasis>して、
+          {spec.saveReason ?? "友だちにも出題してみて"}
+        </IgSeriesCard>
+        <IgSeriesCard style={{ padding: "28px 36px", fontSize: 34, fontWeight: IG_FONT.weight.bold }}>
+          全47都道府県は<IgSeriesEmphasis series={SERIES}>プロフィールのリンク</IgSeriesEmphasis>から
+        </IgSeriesCard>
       </div>
     </div>
-  </QuizFrame>
+  </IgSeriesFrame>
 );

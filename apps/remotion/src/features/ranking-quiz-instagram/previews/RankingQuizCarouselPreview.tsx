@@ -1,17 +1,14 @@
 import React from "react";
 
-import {
-  RankingTableSlide,
-  resolveRankingData,
-  type RankingEntry,
-  type RankingMeta,
-} from "@/shared";
+import { useIgSeriesFonts } from "@/features/ig-series";
+import { resolveRankingData, type RankingEntry, type RankingMeta } from "@/shared";
 import quizSample from "@/fixtures/ranking-quiz-sample.json";
 
 import { QuizAnswerSlide } from "../QuizAnswerSlide";
 import { QuizHintSlide } from "../QuizHintSlide";
 import { QuizOutroSlide } from "../QuizOutroSlide";
 import { QuizQuestionSlide } from "../QuizQuestionSlide";
+import { QuizTableSlide } from "../QuizTableSlide";
 import { resolveRankingQuiz, type QuizSlide, type RankingQuizSpec } from "../quiz";
 
 interface RankingQuizCarouselPreviewProps {
@@ -33,6 +30,7 @@ export const RankingQuizCarouselPreview: React.FC<RankingQuizCarouselPreviewProp
   allEntries,
   quiz,
 }) => {
+  useIgSeriesFonts();
   const useSample = !meta || !allEntries || !quiz;
   const data = resolveRankingData(
     useSample ? { meta: quizSample.meta, allEntries: quizSample.allEntries } : { meta, allEntries },
@@ -48,7 +46,7 @@ export const RankingQuizCarouselPreview: React.FC<RankingQuizCarouselPreviewProp
     case "answer":
       return <QuizAnswerSlide spec={spec} quiz={resolved} meta={data.meta} precision={data.precision} />;
     case "table":
-      return <RankingTableSlide meta={data.meta} entries={data.entries} precision={data.precision} theme="dark" />;
+      return <QuizTableSlide meta={data.meta} entries={data.entries} precision={data.precision} />;
     case "outro":
       return <QuizOutroSlide spec={spec} />;
   }
