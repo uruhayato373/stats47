@@ -755,16 +755,6 @@ updated: 2026-09-21
 - **完了条件**: 都道府県 top-n spec をレンダーして上位県が塗られ、テストが「5桁キーのまま」の実装で落ちる。
 
 
-### [IG-LEDGER-FROMLOG-01] IG 投稿3件が投稿台帳に未記録のまま残っている
-
-タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/instagram/record-posted.cjs --from-log --dry-run] [起票:2026-09-23]
-
-- **owner**: sns-metrics-sync
-- **実測 (2026-09-23)**: `record-posted.cjs --from-log --dry-run` が `insert 3 / skip 175` を返す。未記録は `ranking/tourism-resource-count`・`ranking/wind-power-plant-count-facility`・`ranking/nuclear-power-plant-count` (7〜8月の量産実験期間の投稿)。台帳 `posts.json` に無い投稿は `/update-sns-metrics` の対象外になり、実績が計測されない。
-- **次**: `--dry-run` を外して実行し、台帳の差分をコミットする。
-- **完了条件**: 同じ dry-run が `insert 0` を返す。
-
-
 ### [IG-LEDGER-TESTS-CI-01] IG 台帳・予約投稿のテストを CI で実行する
 
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/ig-ledger-core.test.cjs .claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs] [起票:2026-09-23]
