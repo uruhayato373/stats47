@@ -43,10 +43,24 @@ npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue
 スクリプトは帯の日付・時刻と送信ボタンの文言が予約したい日時と一致しないと送信しない (即時投稿を発火させない)。
 上限の表示が出たら失敗ではなく「満杯」として止まり、その下書きは draft のまま残る。
 
-## 補充
+## 補充 (自動)
 
-25 件の上限があるため、10 月末までの 76 件は一度に入らない。予約済みが公開されて枠が空いたら ③ を再実行する
-(1 日 2 件公開されるので、数日おきに実行すれば途切れない)。台帳の draft が残っている限り、早い順に入る。
+25 件の上限があるため、10 月末までの 76 件は一度に入らない。launchd が 09:30 / 21:30 とログイン時に
+`scripts/scheduled/threads-topup.sh` を動かし、空いた枠だけを入れる (`--fill --no-ledger`)。
+
+- **Mac を閉じていた場合**: スリープ中に時刻が来た回は、次に起きたときに 1 回にまとめて実行される
+  (`man launchd.plist` の StartCalendarInterval)。電源を切っていた場合はログイン時に実行される。
+  予約は約 12 日分先まで入っているので、12 日以内に一度 Mac を開けば途切れない
+- **git は触らない**: 予約済みは `.local/threads-scheduled.jsonl` (git 管理外) に残り、posts.json は draft のまま。
+  コミットするときに `npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --sync-ledger` で台帳へ反映する
+- **失敗時**: macOS の通知を出す。ログは `~/Library/Logs/stats47/threads-topup.log`。ログイン切れならオーナーが
+  専用プロファイルでログインし直す
+- 登録 / 解除 (オーナーの操作):
+  ```bash
+  cp scripts/scheduled/com.stats47.threads-topup.plist ~/Library/LaunchAgents/
+  launchctl load ~/Library/LaunchAgents/com.stats47.threads-topup.plist
+  launchctl unload ~/Library/LaunchAgents/com.stats47.threads-topup.plist
+  ```
 
 ## 関連
 

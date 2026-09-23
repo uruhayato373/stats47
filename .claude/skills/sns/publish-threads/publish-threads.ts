@@ -15,6 +15,13 @@
  *
  * usage:
  *   npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue [--limit N] [--offset N] [--dry-run]
+ *   npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --fill --no-ledger   (launchd の補充)
+ *   npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --sync-ledger                     (記録ファイル → posts.json)
+ *
+ * --fill      : Threads の予約枠 (同時 25 件) の空きだけ入れる。空きは posts.json と記録ファイルの
+ *               「未来の予約済み」から数えるので、上限の表示に当たる前に止まる
+ * --no-ledger : posts.json を書かない。予約済みは .local/threads-scheduled.jsonl (git 管理外) だけに残す。
+ *               無人の定期実行が git の作業ツリーを触らないため。台帳へは --sync-ledger でまとめて反映する
  *
  * 初回・画面変更後は --limit 1 --dry-run で予約モード到達を確認してから本番に回す。
  */
@@ -29,6 +36,10 @@ const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-sto
 
 const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-threads-profile");
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-threads-debug");
+/** 予約済みの記録 (git 管理外)。posts.json が draft のままでも、ここにある下書きは二度と予約しない */
+const SCHEDULED_LOG = path.join(PROJECT_ROOT, ".local/threads-scheduled.jsonl");
+/** Threads が同時に持てる予約の上限 (2026-09-23 実測) */
+const SCHEDULE_CAP = 25;
 const EXPECT_ACCOUNT = "stats47jp";
 const HOME = "https://www.threads.com/";
 /** 予約後の送信ボタンの文言。「投稿」のままなら即時投稿になるので押さない (2026-09-23 実測は「日時を指定」) */
@@ -51,14 +62,43 @@ function args() {
     dryRun: a.includes("--dry-run"),
     limit: limitIdx >= 0 ? Number(a[limitIdx + 1]) : Infinity,
     offset: offsetIdx >= 0 ? Number(a[offsetIdx + 1]) : 0,
+    fill: a.includes("--fill"),
+    noLedger: a.includes("--no-ledger"),
+    syncLedger: a.includes("--sync-ledger"),
   };
+}
+
+interface LogEntry { id: number; content_key: string; scheduled_at: string; at: string }
+
+function readLog(): LogEntry[] {
+  if (!fs.existsSync(SCHEDULED_LOG)) return [];
+  return fs.readFileSync(SCHEDULED_LOG, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
+}
+
+function appendLog(item: QueueItem) {
+  fs.mkdirSync(path.dirname(SCHEDULED_LOG), { recursive: true });
+  const e: LogEntry = { id: item.id, content_key: item.contentKey, scheduled_at: item.scheduledAt.toISOString(), at: new Date().toISOString() };
+  fs.appendFileSync(SCHEDULED_LOG, JSON.stringify(e) + "\n");
+}
+
+/** 未来の予約済み件数 (posts.json の scheduled と記録ファイルの和集合) */
+function futureScheduledCount(): number {
+  const now = Date.now();
+  const ids = new Set<number>();
+  for (const p of store.loadAll()) {
+    if (p.platform === "threads" && p.status === "scheduled" && Date.parse(p.scheduled_at) > now) ids.add(p.id);
+  }
+  for (const e of readLog()) if (Date.parse(e.scheduled_at) > now) ids.add(e.id);
+  return ids.size;
 }
 
 function loadQueue(limit: number, offset = 0): QueueItem[] {
   const now = Date.now();
+  const logged = new Set(readLog().map((e) => e.id));
   return store
     .loadAll()
     .filter((p: any) => p.platform === "threads" && p.status === "draft" && p.scheduled_at && !p.deleted_at)
+    .filter((p: any) => !logged.has(p.id))
     .filter((p: any) => Date.parse(p.scheduled_at) > now + 15 * 60_000) // 15 分以内は予約できないので除外
     .sort((a: any, b: any) => String(a.scheduled_at).localeCompare(String(b.scheduled_at)))
     .slice(offset, offset + limit)
@@ -191,7 +231,7 @@ async function scheduleConfirmed(page: Page, when: Date) {
   return { ok: SCHEDULE_BUTTON.test(label) && dateShown, label, dateShown, banner };
 }
 
-async function publishOne(page: Page, item: QueueItem, dryRun: boolean): Promise<boolean | "full"> {
+async function publishOne(page: Page, item: QueueItem, dryRun: boolean, noLedger: boolean): Promise<boolean | "full"> {
   const t = jstParts(item.scheduledAt);
   console.log(`\n━━━ ${item.contentKey} → ${t.year}/${t.month}/${t.day} ${t.hour}:${t.minute} JST`);
   try {
@@ -226,7 +266,8 @@ async function publishOne(page: Page, item: QueueItem, dryRun: boolean): Promise
     }
     if (outcome !== "closed") throw new Error("送信後に作成画面が閉じませんでした");
     await shot(page, `${item.contentKey}_scheduled`);
-    store.updateById(item.id, { status: "scheduled" });
+    appendLog(item);
+    if (!noLedger) store.updateById(item.id, { status: "scheduled" });
     console.log("✅ 予約完了");
     return true;
   } catch (e) {
@@ -236,12 +277,31 @@ async function publishOne(page: Page, item: QueueItem, dryRun: boolean): Promise
 }
 
 async function main() {
-  const { fromQueue, dryRun, limit, offset } = args();
+  const { fromQueue, dryRun, limit, offset, fill, noLedger, syncLedger } = args();
+  if (syncLedger) {
+    let n = 0;
+    for (const e of readLog()) {
+      const row = store.getById(e.id);
+      if (row && row.platform === "threads" && row.status === "draft") {
+        store.updateById(e.id, { status: "scheduled" });
+        n++;
+      }
+    }
+    console.log(`📝 記録ファイル → posts.json: ${n} 件を scheduled に更新`);
+    return;
+  }
   if (!fromQueue) {
-    console.error("usage: --from-queue [--limit N] [--dry-run]");
+    console.error("usage: --from-queue [--limit N] [--offset N] [--fill] [--no-ledger] [--dry-run] | --sync-ledger");
     process.exit(1);
   }
-  const queue = loadQueue(limit, offset);
+  let max = limit;
+  if (fill) {
+    const free = SCHEDULE_CAP - futureScheduledCount();
+    console.log(`🧮 予約枠: 使用 ${SCHEDULE_CAP - free} / ${SCHEDULE_CAP}、空き ${Math.max(free, 0)}`);
+    if (free <= 0) return;
+    max = Math.min(limit, free);
+  }
+  const queue = loadQueue(max, offset);
   console.log(`🧵 Threads 予約${dryRun ? " (dry-run)" : ""}: ${queue.length} 件`);
   if (!queue.length) return;
 
@@ -259,7 +319,7 @@ async function main() {
   try {
     await ensureLogin(page);
     for (const item of queue) {
-      const r = await publishOne(page, item, dryRun);
+      const r = await publishOne(page, item, dryRun, noLedger);
       if (r === "full") {
         full = true;
         break;

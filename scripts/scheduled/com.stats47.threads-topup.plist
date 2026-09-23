@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Threads 予約の補充 (毎日 09:30 / 21:30 JST + ログイン時)。ローカル Mac 限定。
+  スリープ中に時刻が来た回は、起きたときに 1 回にまとめて実行される。
+  インストール (人間の明示操作。専用プロファイルで @stats47jp にログイン済みであること):
+    cp scripts/scheduled/com.stats47.threads-topup.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.stats47.threads-topup.plist
+  アンインストール:
+    launchctl unload ~/Library/LaunchAgents/com.stats47.threads-topup.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stats47.threads-topup</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/minamidaisuke/stats47/scripts/scheduled/threads-topup.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Hour</key>
+            <integer>9</integer>
+            <key>Minute</key>
+            <integer>30</integer>
+        </dict>
+        <dict>
+            <key>Hour</key>
+            <integer>21</integer>
+            <key>Minute</key>
+            <integer>30</integer>
+        </dict>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/minamidaisuke/stats47</string>
+    <key>StandardOutPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/threads-topup.launchd.out</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/threads-topup.launchd.err</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>
