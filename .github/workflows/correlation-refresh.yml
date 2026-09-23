@@ -1,0 +1,150 @@
+name: 🔗 Correlation Refresh → R2
+
+# 相関 snapshot (app/correlation/{top-pairs,stats}.json と by-ranking-key/<key>.json) を
+# R2 観測値から再計算して公開する。ランキングページの「相関が高い指標」とブログの
+# 相関記事 (topic-queue / fetch-correlation-scatter) がこれを読む。
+#
+# ★観測値 (app/stats) の書き手は data-refresh の全件・部分更新、KSJ 取り込み、ローカル push と
+#   複数ある。9/5〜9/11 に部分更新とワークフロー外 push で入った 244 指標は、9/23 時点でも
+#   相関が付いていなかった (再計算が月次全件 refresh の中にしか無かったため)。書き手ごとに相関計算を足さず、
+#   この workflow が「観測値が変わったら全件再計算」を受け持つ:
+#     - workflow_run: data-refresh / KSJ 取り込みの完了直後
+#     - schedule   : 毎日 1 回 (ワークフロー外の push を拾う網)
+#   入力 (観測値・表示メタ・相関コード) の fingerprint が R2 の stats.json と同じなら何も書かない。
+#   全件計算は約 30〜50 秒 (2026-09-23 実測 2,238 指標・250 万ペア) なので差分計算は持たない。
+#
+# 月次 data-refresh の run.sh も correlation task を実行する。その直後にここが起動しても
+# fingerprint が一致して skip されるだけなので二重 push にはならない。
+#
+# 正典: packages/correlation/src/scripts/build-correlation-snapshot.ts
+
+on:
+  workflow_run:
+    workflows: ["🔄 Data Refresh (e-Stat → R2)", "🗺️ KSJ aggregate ingest → R2"]
+    types: [completed]
+  schedule:
+    - cron: "45 18 * * *" # JST 03:45 daily (UTC 18:45)。他 cron と非重複
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "true: fingerprint が前回と同じでも再計算して push する"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
+  # 定期実行の失敗を Issue で通知する
+  issues: write
+
+concurrency:
+  # ★r2-write group には入れない。GitHub の concurrency は pending を 1 本しか保持しないため、
+  #   同じ group で待つと、後から来たこの run が pending 中の data-refresh を cancel しうる。
+  #   書き込み先は app/correlation だけで、data-refresh 実行中に読んだ入力が古くても、
+  #   その完了時の workflow_run で再計算される。
+  group: correlation-refresh
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # heap は data-refresh と同じ 8 GB (2026-07-05 に既定 4 GB で OOM した実績)。
+      # ★上流 (data-refresh) が失敗した直後は skip しない。run.sh の correlation task は
+      #   stats.json を by-key と同時に push するため、push が一部失敗すると fingerprint だけが
+      #   公開されうる。そのまま skip すると欠けた by-key が次の入力変更まで直らない。
+      - name: 🔗 Build correlation snapshots
+        env:
+          NODE_ENV: production
+          NODE_OPTIONS: --max-old-space-size=8192
+          FORCE: ${{ inputs.force }}
+          UPSTREAM_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          ARGS=()
+          [ "$FORCE" = "true" ] || [ "$UPSTREAM_CONCLUSION" = "failure" ] || ARGS+=(--skip-if-unchanged)
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
+            packages/correlation/src/scripts/build-correlation-snapshot.ts "${ARGS[@]}"
+
+      # ★stats.json (fingerprint を持つ) は最後に push する。diff-push-r2 は 1 件失敗しても
+      #   残りを上げ続けるため、同時に push すると by-key が欠けたまま fingerprint だけ公開され、
+      #   次回以降「変更なし」で永久に skip される。退避 → 本体 push → 戻して同じ prefix で再 push
+      #   (2 回目は manifest 記録済みの本体が skip され stats.json だけが上がる)。
+      - name: ⬆️ Push to R2 (stats.json last)
+        id: push
+        run: |
+          DIR=.local/r2/app/correlation
+          if [ ! -f "$DIR/stats.json" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "変更なし — push しない"
+            exit 0
+          fi
+          mv "$DIR/stats.json" "$RUNNER_TEMP/correlation-stats.json"
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/correlation
+          mv "$RUNNER_TEMP/correlation-stats.json" "$DIR/stats.json"
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/correlation
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # ランキングページの HTML に相関セクションが焼かれているため HTML ごと無効化する。
+      - name: 🧹 Purge Workers Cache
+        if: steps.push.outputs.changed == 'true'
+        run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
+
+      - name: 🚨 Open issue on failure (schedule / workflow_run のみ)
+        if: failure() && github.event_name != 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[Correlation Alert] 相関 snapshot の再計算が失敗した"
+          {
+            echo "## Correlation Refresh 失敗 ($(date -u +%Y-%m-%d))"
+            echo ""
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "- trigger: \`${{ github.event_name }}\`"
+            echo ""
+            echo "新しく公開したランキングに「相関が高い指標」が出ず、既存ランキングの相関も古いままになる。"
+            echo "stats.json は本体の push 成功後にしか上げないので、再実行すれば取りこぼしなく再計算される。"
+            echo ""
+            echo "- Build で落ちた → heap (8 GB) 不足なら streaming 化が要る。ログの metric 数と所要を確認"
+            echo "- Push で落ちた → R2 S3 認証か一時障害。workflow_dispatch で再実行"
+          } > "$RUNNER_TEMP/correlation-issue.md"
+          gh label create correlation-alert --description "相関 snapshot 再計算の失敗" --color "b60205" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label correlation-alert --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file "$RUNNER_TEMP/correlation-issue.md"
+          else
+            gh issue create --title "$TITLE" --label "correlation-alert,auto-generated" --body-file "$RUNNER_TEMP/correlation-issue.md"
+          fi
+
+      - name: ✅ Close recovered correlation alert
+        if: success() && github.event_name != 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label correlation-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "相関 snapshot の再計算が正常完了したため自動Closeします。"
+            done

@@ -193,9 +193,168 @@ describe('buildCorrelationSnapshot shape', () => {
     expect(item.rankingKey).not.toBe('metric-a');
     expect(item.scatterData.length).toBeGreaterThanOrEqual(30);
 
-    // by-key は raw ABS(pearsonR) DESC 順 (旧 find-highly-correlated と同じ)。
-    // metric-a と最も raw 相関が高いのは metric-b (r≈0.9) なので先頭に来る。
+    // by-key は人口補正後 |r| の降順。この合成データでは metric-a と metric-b (r≈0.9) の
+    // 連動は人口では説明されないので、補正後も先頭に残る。
     expect(byKey.pairs[0].rankingKey).toBe('metric-b');
     expect(Math.abs(byKey.pairs[0].pearsonR)).toBeGreaterThan(0.7);
+  });
+});
+
+// ランキングページの「相関が高い指標」は by-key の先頭 10 件をそのまま出す。生の |r| 順だと
+// 件数系指標は「人口の多い県ほど両方大きい」だけのペアで埋まるため、人口規模の影響を除いた
+// populationAdjustedR 順で選び・並べる (2026-09-23)。
+describe('buildCorrelationSnapshot by-key order', () => {
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+    fetchFromR2AsJsonMock.mockImplementation(() => null);
+  });
+
+  it('人口規模だけで連動するペアより、人口の影響を除いても残る相関を上に並べる', async () => {
+    const population = STATS['total-population'].map((row) => row.value);
+    const own = (i: number) => (((i * 37) % 47) - 23) * 8; // 人口と無関係な県ごとの差
+    const noise = (i: number) => (((i * 29) % 47) - 23) * 3;
+    const original = { a: STATS['metric-a'], b: STATS['metric-b'], c: STATS['metric-c'] };
+    STATS['metric-a'] = makeRows((i) => population[i] + own(i));
+    STATS['metric-b'] = makeRows((i) => population[i] * 2 + noise(i)); // 人口の代理
+    STATS['metric-c'] = makeRows((i) => own(i) + (i % 3)); // 人口を除いた部分と連動
+    try {
+      const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+      await buildCorrelationSnapshot({ dryRun: false });
+      const byKey = JSON.parse(
+        saved.get('app/correlation/by-ranking-key/metric-a.json')!
+      ) as CorrelationByKeySnapshot;
+      const b = byKey.pairs.find((p) => p.rankingKey === 'metric-b')!;
+      const c = byKey.pairs.find((p) => p.rankingKey === 'metric-c')!;
+
+      // 前提: 生の r なら人口の代理 (b) が上に来る
+      expect(Math.abs(b.pearsonR)).toBeGreaterThan(Math.abs(c.pearsonR));
+      expect(Math.abs(b.partialRPopulation!)).toBeLessThan(0.3);
+
+      const order = byKey.pairs.map((p) => p.rankingKey);
+      expect(order.indexOf('metric-c')).toBeLessThan(order.indexOf('metric-b'));
+      expect(Math.abs(c.populationAdjustedR)).toBeGreaterThan(Math.abs(b.populationAdjustedR));
+      // 画面は先頭から出すので、並びは表示値 (populationAdjustedR) の絶対値の降順でなければならない
+      const shown = byKey.pairs.map((p) => Math.abs(p.populationAdjustedR));
+      expect(shown).toEqual([...shown].sort((x, y) => y - x));
+    } finally {
+      STATS['metric-a'] = original.a;
+      STATS['metric-b'] = original.b;
+      STATS['metric-c'] = original.c;
+    }
+  });
+});
+
+// 相関 workflow は毎日・データ更新直後に起動される。変更が無ければ 2,000 件の by-key を
+// 書き直さず、部分更新で 1 指標でも値が変われば必ず全件を再計算する、が契約。
+describe('buildCorrelationSnapshot --skip-if-unchanged', () => {
+  const publishedStats = (): string | null => saved.get('app/correlation/stats.json') ?? null;
+
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+  });
+
+  async function publishOnce() {
+    const allJson = {
+      generatedAt: 'x',
+      count: METRICS.length,
+      items: METRICS.map((m) => ({
+        rankingKey: m.key,
+        title: m.title,
+        subtitle: null,
+        unit: m.unit,
+        normalizationBasis: null,
+      })),
+    };
+    fetchFromR2AsJsonMock.mockImplementation((key: string) =>
+      key === 'app/ranking-items/all.json' ? allJson : null
+    );
+    const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+    await buildCorrelationSnapshot({ dryRun: false });
+    const stats = JSON.parse(publishedStats()!) as CorrelationStatsSnapshot;
+    // 前回公開分として R2 から stats.json が読める状態にする
+    fetchFromR2AsJsonMock.mockImplementation((key: string) => {
+      if (key === 'app/ranking-items/all.json') return allJson;
+      if (key === 'app/correlation/stats.json') return stats;
+      return null;
+    });
+    saved.clear();
+    return { buildCorrelationSnapshot, stats };
+  }
+
+  it('入力が前回公開と同じなら何も書かずに skipped を返す', async () => {
+    const { buildCorrelationSnapshot, stats } = await publishOnce();
+    expect(stats.inputFingerprint).toMatch(/^[0-9a-f]{64}$/);
+
+    const result = await buildCorrelationSnapshot({ dryRun: false, skipIfUnchanged: true });
+
+    expect(result.skipped).toBe(true);
+    expect(result.inputFingerprint).toBe(stats.inputFingerprint);
+    expect(saved.size).toBe(0);
+  });
+
+  it('部分更新で 1 指標の値が変わったら再計算して全ファイルを書く', async () => {
+    const { buildCorrelationSnapshot, stats } = await publishOnce();
+    const original = STATS['metric-c'];
+    STATS['metric-c'] = original.map((row, i) => (i === 0 ? { ...row, value: row.value + 1 } : row));
+    try {
+      const result = await buildCorrelationSnapshot({ dryRun: false, skipIfUnchanged: true });
+
+      expect(result.skipped).toBe(false);
+      expect(result.inputFingerprint).not.toBe(stats.inputFingerprint);
+      expect(saved.has('app/correlation/by-ranking-key/metric-a.json')).toBe(true);
+      const next = JSON.parse(publishedStats()!) as CorrelationStatsSnapshot;
+      expect(next.inputFingerprint).toBe(result.inputFingerprint);
+    } finally {
+      STATS['metric-c'] = original;
+    }
+  });
+
+  it('skipIfUnchanged を付けなければ入力が同じでも書き直す (手動 force 用)', async () => {
+    const { buildCorrelationSnapshot } = await publishOnce();
+
+    const result = await buildCorrelationSnapshot({ dryRun: false });
+
+    expect(result.skipped).toBe(false);
+    expect(saved.has('app/correlation/stats.json')).toBe(true);
+  });
+});
+
+describe('computeInputFingerprint', () => {
+  const rows = (values: number[], name = 'pref') =>
+    values.map((value, i) => ({ areaCode: `0${i + 1}000`, areaName: `${name}-${i + 1}`, value }));
+  const meta = (title: string) =>
+    new Map([['metric-a', { title, subtitle: null, unit: '件', normalizationBasis: null }]]);
+
+  it('並列 fetch の完了順 (Map の挿入順・行順) に依存しない', async () => {
+    const { computeInputFingerprint } = await import('../build-correlation-snapshot');
+    const a = { latestYear: '2020', rows: rows([1, 2, 3]) };
+    const b = { latestYear: '2020', rows: rows([4, 5, 6]) };
+    const forward = new Map([['metric-a', a], ['metric-b', b]]);
+    const reversed = new Map([['metric-b', { ...b, rows: [...b.rows].reverse() }], ['metric-a', a]]);
+
+    expect(computeInputFingerprint(forward, ['metric-a'], meta('A'), 'src')).toBe(
+      computeInputFingerprint(reversed, ['metric-a'], meta('A'), 'src')
+    );
+  });
+
+  it('値・県名・表示タイトル・コードのどれが変わっても別の値になる', async () => {
+    const { computeInputFingerprint } = await import('../build-correlation-snapshot');
+    const base = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 3]) }]]);
+    const fp = computeInputFingerprint(base, ['metric-a'], meta('A'), 'src');
+
+    const changedValue = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 4]) }]]);
+    const changedName = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 3], 'x') }]]);
+    const changedYear = new Map([['metric-a', { latestYear: '2021', rows: rows([1, 2, 3]) }]]);
+    for (const other of [
+      computeInputFingerprint(changedValue, ['metric-a'], meta('A'), 'src'),
+      computeInputFingerprint(changedName, ['metric-a'], meta('A'), 'src'),
+      computeInputFingerprint(changedYear, ['metric-a'], meta('A'), 'src'),
+      computeInputFingerprint(base, ['metric-a'], meta('B'), 'src'),
+      computeInputFingerprint(base, ['metric-a'], meta('A'), 'src2'),
+    ]) {
+      expect(other).not.toBe(fp);
+    }
   });
 });

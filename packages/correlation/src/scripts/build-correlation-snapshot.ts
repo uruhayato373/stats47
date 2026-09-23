@@ -13,7 +13,7 @@
  *
  * 計算量: ~2,000 active 指標² ≈ 2M ペア。全ペアでscatter object/配列を作ると
  * allocationとGCでheapを圧迫するため、valueMapからPearson集計値だけを直接計算し、JS側で
- *   - per-key top-20 (ABS pearsonR 降順)
+ *   - per-key top-20 (人口補正後 |r| 降順。calculatePopulationAdjustedR)
  *   - global top-200 候補 (effectiveR 降順)
  *   - 走行中の total / strong(|r|>=0.7) カウント
  * だけを保持する。scatterは候補集合が確定してから候補分だけ作り、
@@ -28,8 +28,13 @@
  *       packages/correlation/src/scripts/build-correlation-snapshot.ts
  *   ... --dry-run            # R2 / .local/r2 に書かず件数のみ
  *   ... --limit-metrics 200  # 先頭 N 指標のみ (デバッグ用)
+ *   ... --skip-if-unchanged  # 入力 fingerprint が R2 の stats.json と同じなら何も書かない
  */
 import 'server-only';
+
+import { createHash } from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import DatabaseConstructor from 'better-sqlite3';
 
@@ -54,6 +59,7 @@ import {
   buildScatterData,
   calculateMatchedPearsonR,
   calculatePartialR,
+  calculatePopulationAdjustedR,
   type RankValueWithArea,
 } from '../utils/calculate-pearson';
 import {
@@ -297,6 +303,59 @@ async function loadMetricsBounded(
   return out;
 }
 
+// ─── 入力 fingerprint ─────────────────────────────────────────────────────────
+//
+// 観測値の書き手は data-refresh (全件・部分更新) / KSJ 取り込み / ローカル push と複数あり、
+// 相関 workflow は「変わったかどうか」を知らずに毎日・更新直後に起動される。出力を決める
+// 入力 (観測値・表示メタ・このパッケージのコード) を hash し、前回公開分と同じなら
+// 2,000 件の by-key を書き直さない (R2 PUT と Workers Cache 全削除を避ける)。
+
+const CORRELATION_SRC_DIR = path.resolve(import.meta.dirname ?? __dirname, '..');
+
+/** 除外リスト・計算式・出力形を持つ src 配下の .ts (テスト除く)。変われば入力が同じでも再計算する。 */
+function hashCorrelationSource(dir = CORRELATION_SRC_DIR): string {
+  const hash = createHash('sha256');
+  const visit = (current: string) => {
+    const entries = fs
+      .readdirSync(current, { withFileTypes: true })
+      .sort((a, b) => a.name.localeCompare(b.name));
+    for (const entry of entries) {
+      if (entry.name === '__tests__') continue;
+      const full = path.join(current, entry.name);
+      if (entry.isDirectory()) visit(full);
+      else if (entry.name.endsWith('.ts')) {
+        hash.update(path.relative(dir, full)).update(fs.readFileSync(full));
+      }
+    }
+  };
+  visit(dir);
+  return hash.digest('hex');
+}
+
+/**
+ * 出力を決める入力の fingerprint。loaded は並列 fetch の完了順で Map に入るため key で整列し、
+ * pairKeys は i<j 走査の X/Y 向きを決めるので与えられた順のまま hash する。
+ */
+export function computeInputFingerprint(
+  loaded: Map<string, Pick<LoadedMetric, 'latestYear' | 'rows'>>,
+  pairKeys: readonly string[],
+  metaMap: Map<string, MetricDisplayMeta>,
+  sourceDigest: string
+): string {
+  const hash = createHash('sha256').update(sourceDigest);
+  for (const key of [...loaded.keys()].sort()) {
+    const metric = loaded.get(key)!;
+    const rows = [...metric.rows]
+      .sort((a, b) => a.areaCode.localeCompare(b.areaCode))
+      .map((r) => [r.areaCode, r.areaName, r.value]);
+    hash.update(JSON.stringify([key, metric.latestYear, rows]));
+  }
+  hash.update(
+    JSON.stringify(pairKeys.map((key) => [key, displayMetaFor(key, metaMap)]))
+  );
+  return hash.digest('hex');
+}
+
 // ─── 自明ペア判定 (旧 isTrivialPair) ──────────────────────────────────────────
 
 function isTrivialPair(
@@ -372,13 +431,20 @@ function effectiveAbsROf(p: {
   );
 }
 
-/** 候補集合を作るために per-key top-N (ABS pearsonR 降順) を保持する小ヒープ代替。 */
-class TopByAbsPearson {
+const populationAdjustedAbsR = (p: CandidateScore): number =>
+  Math.abs(calculatePopulationAdjustedR(p));
+
+/**
+ * 候補集合を作るために per-key top-N (人口補正後 |r| 降順) を保持する小ヒープ代替。
+ * 2026-09-23 まで ABS(pearsonR) 順で、件数系指標の top-20 が「人口の多い県ほど両方大きい」
+ * だけの r≈0.99 のペアで埋まっていた (例: 救急搬送人員 → K6 推計人数 r=0.99, 人口補正後 0.42)。
+ */
+class TopByPopulationAdjusted {
   private items: CandidateScore[] = [];
   constructor(private readonly limit: number) {}
   add(p: CandidateScore) {
     this.items.push(p);
-    this.items.sort((a, b) => Math.abs(b.pearsonR) - Math.abs(a.pearsonR));
+    this.items.sort((a, b) => populationAdjustedAbsR(b) - populationAdjustedAbsR(a));
     if (this.items.length > this.limit) this.items.length = this.limit;
   }
   values(): CandidateScore[] {
@@ -580,9 +646,12 @@ interface ByKeyRawRow {
   scatterData: string;
 }
 
+const counterpartOf = (row: ByKeyRawRow, rankingKey: string): string =>
+  row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+
 /**
- * 旧 find-highly-correlated.ts を SQLite で再現。
- * 対象 key を含むペアを ABS(pearson_r) DESC で取り、counterpart で dedup → limit。
+ * 対象 key を含む候補ペアを人口補正後 |r| の降順 (同値は counterpart key 昇順) で並べ、
+ * counterpart で dedup → limit。行数は候補集合 (per-key top-N ∪ global top) で上限がある。
  * scatter は X=自身になるよう必要なら x/y を swap。title/subtitle/unit を join。
  */
 function queryByKey(
@@ -591,10 +660,10 @@ function queryByKey(
   limit: number,
   metaMap: Map<string, MetricDisplayMeta>
 ): CorrelatedItem[] {
-  const FETCH_MULTIPLIER = 3;
-  const rawRows = db
-    .prepare(
-      `
+  const rawRows = (
+    db
+      .prepare(
+        `
       SELECT
         metric_key_x AS rankingKeyX,
         metric_key_y AS rankingKeyY,
@@ -606,17 +675,21 @@ function queryByKey(
         scatter_data_json AS scatterData
       FROM correlations
       WHERE metric_key_x = ? OR metric_key_y = ?
-      ORDER BY ABS(pearson_r) DESC
-      LIMIT ?
     `
-    )
-    .all(rankingKey, rankingKey, limit * FETCH_MULTIPLIER) as ByKeyRawRow[];
+      )
+      .all(rankingKey, rankingKey) as ByKeyRawRow[]
+  )
+    .map((row) => ({ row, populationAdjustedR: calculatePopulationAdjustedR(row) }))
+    .sort(
+      (a, b) =>
+        Math.abs(b.populationAdjustedR) - Math.abs(a.populationAdjustedR) ||
+        counterpartOf(a.row, rankingKey).localeCompare(counterpartOf(b.row, rankingKey))
+    );
 
   const seen = new Set<string>();
   const rows = rawRows
-    .filter((row) => {
-      const counterpart =
-        row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+    .filter(({ row }) => {
+      const counterpart = counterpartOf(row, rankingKey);
       if (seen.has(counterpart)) return false;
       seen.add(counterpart);
       return true;
@@ -624,9 +697,8 @@ function queryByKey(
     .slice(0, limit);
 
   const results: CorrelatedItem[] = [];
-  for (const row of rows) {
-    const counterpartKey =
-      row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+  for (const { row, populationAdjustedR } of rows) {
+    const counterpartKey = counterpartOf(row, rankingKey);
     const meta = displayMetaFor(counterpartKey, metaMap);
     if (meta.title === null) continue;
 
@@ -654,6 +726,7 @@ function queryByKey(
       subtitle: meta.subtitle,
       unit: meta.unit,
       pearsonR: row.pearsonR,
+      populationAdjustedR,
       partialRPopulation: row.partialRPopulation,
       partialRArea: row.partialRArea,
       partialRAging: row.partialRAging,
@@ -669,6 +742,7 @@ function queryByKey(
 interface Args {
   dryRun: boolean;
   limitMetrics: number;
+  skipIfUnchanged: boolean;
 }
 
 function parseArgs(argv: string[]): Args {
@@ -676,12 +750,15 @@ function parseArgs(argv: string[]): Args {
   const idx = argv.indexOf('--limit-metrics');
   const limitMetrics =
     idx >= 0 && argv[idx + 1] ? Number(argv[idx + 1]) || 0 : 0;
-  return { dryRun, limitMetrics };
+  const skipIfUnchanged = argv.includes('--skip-if-unchanged');
+  return { dryRun, limitMetrics, skipIfUnchanged };
 }
 
 export async function buildCorrelationSnapshot(
-  opts: { dryRun?: boolean; limitMetrics?: number } = {}
+  opts: { dryRun?: boolean; limitMetrics?: number; skipIfUnchanged?: boolean } = {}
 ): Promise<{
+  skipped: boolean;
+  inputFingerprint: string;
   topPairs: number;
   total: number;
   strong: number;
@@ -732,12 +809,39 @@ export async function buildCorrelationSnapshot(
     }/${CONTROL_VARIABLES.length}`
   );
 
+  const inputFingerprint = computeInputFingerprint(
+    loaded,
+    pairKeys,
+    metaMap,
+    hashCorrelationSource()
+  );
+  if (opts.skipIfUnchanged) {
+    const previous = await fetchFromR2AsJson<Partial<CorrelationStatsSnapshot>>(
+      CORRELATION_STATS_KEY
+    );
+    if (previous?.inputFingerprint === inputFingerprint) {
+      console.log(
+        `[correlation] 入力とコードが前回公開 (${previous.generatedAt}) と同一のため再計算しない`
+      );
+      return {
+        skipped: true,
+        inputFingerprint,
+        topPairs: 0,
+        total: 0,
+        strong: 0,
+        perKeyFiles: 0,
+        consideredMetrics: pairKeys.length,
+        durationMs: Date.now() - startedAt,
+      };
+    }
+  }
+
   const getCv = makeCvCorrelationGetter(loaded);
 
   // 3. ペア走査 (i<j)。per-key top-20 と global top-200 候補のみ JS で保持し bound。
-  const perKeyTop = new Map<string, TopByAbsPearson>();
+  const perKeyTop = new Map<string, TopByPopulationAdjusted>();
   for (const k of pairKeys)
-    perKeyTop.set(k, new TopByAbsPearson(CORRELATION_BY_KEY_LIMIT));
+    perKeyTop.set(k, new TopByPopulationAdjusted(CORRELATION_BY_KEY_LIMIT));
   const globalTop = new GlobalTopByEffective(
     CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT
   );
@@ -837,6 +941,7 @@ export async function buildCorrelationSnapshot(
     generatedAt,
     total,
     strong,
+    inputFingerprint,
   };
 
   // 6. R2 書き込み (.local/r2)。
@@ -871,6 +976,8 @@ export async function buildCorrelationSnapshot(
   db.close();
   const durationMs = Date.now() - startedAt;
   return {
+    skipped: false,
+    inputFingerprint,
     topPairs: topPairsSnapshot.pairs.length,
     total,
     strong,
@@ -888,9 +995,16 @@ async function main() {
     }…`
   );
   const result = await buildCorrelationSnapshot(args);
+  if (result.skipped) {
+    console.log(
+      `⏭️ correlation: 変更なし (fingerprint=${result.inputFingerprint.slice(0, 12)} metrics=${result.consideredMetrics})`
+    );
+    return;
+  }
   console.log(
     `✅ correlation: top-pairs=${result.topPairs} total=${result.total} strong=${result.strong} ` +
-      `per-key=${result.perKeyFiles} metrics=${result.consideredMetrics} ${result.durationMs}ms`
+      `per-key=${result.perKeyFiles} metrics=${result.consideredMetrics} ` +
+      `fingerprint=${result.inputFingerprint.slice(0, 12)} ${result.durationMs}ms`
   );
 }
 

@@ -1,14 +1,7 @@
 {
-  "hash": "960cb7ab6631fd73db2ff17be88b2470c8407f6904c5ff72a895b9ad9fc99a62",
-  "audited_at": "2026-09-23T05:14:33",
+  "hash": "91026b0e0dcbbd266a7ff3a4fd6f053563255f16347780c85ee6c980e61ca21c",
+  "audited_at": "2026-09-23T06:03:14",
   "files": [
-    ".agents/skills/sns/render-sns-stills/SKILL.md",
-    ".claude/rules/sns-content-standards.md",
-    ".claude/scripts/instagram/post-from-schedule.cjs",
-    ".claude/scripts/instagram/record-posted.cjs",
-    ".claude/scripts/lib/__tests__/ig-ledger-core.test.cjs",
-    ".claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs",
-    ".claude/scripts/lib/ig-ledger-core.cjs",
-    ".claude/skills/sns/render-sns-stills/SKILL.md"
+    ".claude/rules/docs-vs-issues.md"
   ]
 }

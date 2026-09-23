@@ -38,7 +38,9 @@ docs/31_note記事原稿/a-<rankingKey>/
 npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <rankingKey>
 ```
 
-このコマンドは47県・欠損・ゼロ除算をfail-closedで検査し、`chart-data.json`、`draft.md`、
+このコマンドは47県・欠損・ゼロ除算をfail-closedで検査し、1位が東京都の指標も`PREDICTABLE_LEADER`で止める
+（人口・経済規模がそのまま出る「予想どおり」の記事を量産しないため。読者にとって意外な理由がある場合だけ
+`--allow-tokyo-leader "<理由>"`で通す）。通過すると`chart-data.json`、`draft.md`、
 `data-provenance.json`、`tags.txt`と既存Remotion用の`.local/r2/sns/ranking/<key>/`入力を作る。
 決定的ゲートで停止した場合は`.claude/state/content-operations/note-generation-blockers.json`へ
 理由を機械記録し、管理画面`/content/references`では`blocked`として表示する。成功時は同keyの記録を自動解除する。
