@@ -19,8 +19,11 @@
  * 台帳が二重行で汚れる。IO から切り離してテストで固定する。
  */
 
-/** ログ 1 行 / workflow の出力から、台帳に対して何をすべきかを決める。 */
-function decideLedgerAction({ domain, contentKey, permalink, postedAt, existing }) {
+/**
+ * ログ 1 行 / workflow の出力から、台帳に対して何をすべきかを決める。
+ * postType は実際に投稿した形式 (carousel 等)。省略時は従来どおり "original"。
+ */
+function decideLedgerAction({ domain, contentKey, permalink, postedAt, postType, existing }) {
   if (!domain || !contentKey) {
     return { action: "skip", reason: "missing-key" };
   }
@@ -52,6 +55,7 @@ function decideLedgerAction({ domain, contentKey, permalink, postedAt, existing 
         status: "posted",
         posted_at: postedAt,
         ...(permalink ? { post_url: permalink } : {}),
+        ...(postType ? { post_type: postType } : {}),
       },
       reason: "promote",
     };
@@ -61,7 +65,7 @@ function decideLedgerAction({ domain, contentKey, permalink, postedAt, existing 
     action: "insert",
     record: {
       platform: "instagram",
-      post_type: "original",
+      post_type: postType || "original", // 空文字 (workflow の grep 失敗) も未指定として扱う
       domain,
       content_key: contentKey,
       post_url: permalink ?? null,

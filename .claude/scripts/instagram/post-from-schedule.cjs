@@ -23,6 +23,10 @@
  * 1 日複数本 (2026-07-11〜): エントリに time ("HH:MM" JST) を持たせ、cron を
  * 1 日複数回発火させる。各実行は「time <= 現在時刻 かつ ig-posted-log に無い」
  * 最早の 1 件だけを投稿する (二重投稿は posted-log で防止)。
+ *
+ * type: "image" (既定) | "reels" | "carousel" (2026-09-23〜)。carousel は
+ * slides (instagram/stills/ 直下のファイル名、表示順) を必須とする。R2 は公開 URL で
+ * 一覧できないため、枚数と順序はエントリが明示する。
  */
 
 const fs = require("node:fs");
@@ -144,6 +148,45 @@ async function fetchCaption(domain, contentKey) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`caption fetch failed (${res.status}): ${url}`);
   return (await res.text()).trim();
+}
+
+/** Graph API のカルーセル子要素数 (既存 post-instagram.ts の上限 10 と同じ) */
+const CAROUSEL_MIN_SLIDES = 2;
+const CAROUSEL_MAX_SLIDES = 10;
+/** stills/ 直下のファイル名だけを許す (パス区切り・相対参照で別 prefix を指させない) */
+const SLIDE_FILE_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]*\.(png|jpe?g)$/;
+
+/**
+ * carousel エントリの子画像 URL を表示順で返す。slides が不正なら throw し、
+ * コンテナを 1 つも作らないうちに止める (途中まで作った子コンテナを残さない)。
+ */
+function carouselUrlsFor(entry) {
+  const slides = entry.slides;
+  if (
+    !Array.isArray(slides) ||
+    slides.length < CAROUSEL_MIN_SLIDES ||
+    slides.length > CAROUSEL_MAX_SLIDES
+  ) {
+    throw new Error(
+      `carousel の slides は ${CAROUSEL_MIN_SLIDES}〜${CAROUSEL_MAX_SLIDES} 件必要: ${entry.content_key}`,
+    );
+  }
+  if (new Set(slides).size !== slides.length) {
+    throw new Error(`carousel の slides に重複があります: ${entry.content_key}`);
+  }
+  for (const file of slides) {
+    if (typeof file !== "string" || !SLIDE_FILE_PATTERN.test(file)) {
+      throw new Error(`carousel の slides は stills/ 直下の画像ファイル名のみ: ${file}`);
+    }
+  }
+  return slides.map(
+    (file) => `${PUBLIC_R2_BASE}/sns/${entry.domain}/${entry.content_key}/instagram/stills/${file}`,
+  );
+}
+
+/** 投稿台帳 (posts.json) の post_type。カルーセルと単枚画像の成績を分けて測るために区別する */
+function ledgerPostTypeFor(entry) {
+  return entry.type === "carousel" ? "carousel" : "original";
 }
 
 function mediaUrlFor(type, domain, contentKey) {
@@ -296,6 +339,72 @@ async function postImage({ contentKey, caption, imageUrl }) {
   return { mediaId: publishJson.id, permalink };
 }
 
+/** 子コンテナ → カルーセルコンテナ → FINISHED 待ち → publish (post-instagram.ts と同じ手順) */
+async function postCarousel({ caption, imageUrls }) {
+  const childIds = [];
+  for (const [i, imageUrl] of imageUrls.entries()) {
+    const res = await fetch(`https://graph.instagram.com/v21.0/${IG_USER_ID}/media`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        image_url: imageUrl,
+        is_carousel_item: "true",
+        access_token: TOKEN,
+      }),
+    });
+    const json = await res.json();
+    if (!json.id) throw new Error(`子コンテナ作成失敗 (${i + 1}/${imageUrls.length}): ${JSON.stringify(json)}`);
+    childIds.push(json.id);
+    console.log(`  📸 child ${i + 1}/${imageUrls.length}: ${json.id}`);
+  }
+
+  console.log(`📦 carousel container 作成...`);
+  const containerRes = await fetch(`https://graph.instagram.com/v21.0/${IG_USER_ID}/media`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      media_type: "CAROUSEL",
+      children: childIds.join(","),
+      caption,
+      access_token: TOKEN,
+    }),
+  });
+  const containerJson = await containerRes.json();
+  if (!containerJson.id) {
+    throw new Error(`carousel container 作成失敗: ${JSON.stringify(containerJson)}`);
+  }
+  const containerId = containerJson.id;
+
+  console.log(`⏳ carousel 処理 polling...`);
+  for (let i = 0; i < 30; i++) {
+    await new Promise((r) => setTimeout(r, 5000));
+    const statusRes = await fetch(
+      `https://graph.instagram.com/v21.0/${containerId}?fields=status_code&access_token=${TOKEN}`,
+    );
+    const statusJson = await statusRes.json();
+    console.log(`  status (${i + 1}/30): ${statusJson.status_code}`);
+    if (statusJson.status_code === "FINISHED") break;
+    if (statusJson.status_code === "ERROR" || statusJson.status_code === "EXPIRED") {
+      throw new Error(`carousel 処理失敗: ${JSON.stringify(statusJson)}`);
+    }
+    if (i === 29) throw new Error(`carousel 処理 timeout (150 秒)`);
+  }
+
+  console.log(`🚀 publish...`);
+  const publishRes = await fetch(`https://graph.instagram.com/v21.0/${IG_USER_ID}/media_publish`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ creation_id: containerId, access_token: TOKEN }),
+  });
+  const publishJson = await publishRes.json();
+  if (!publishJson.id) throw new Error(`publish 失敗: ${JSON.stringify(publishJson)}`);
+
+  const permalink = await fetchPermalink(publishJson.id);
+  console.log(`✅ 投稿完了 media id: ${publishJson.id}`);
+  console.log(`PERMALINK=${permalink}`);
+  return { mediaId: publishJson.id, permalink };
+}
+
 async function main() {
   const entry = await findTodayEntry();
   if (!entry) {
@@ -309,17 +418,24 @@ async function main() {
   }
   // GHA が grep で取得できるよう構造化ログを出力
   console.log(`DOMAIN=${entry.domain}`);
+  console.log(`POST_TYPE=${ledgerPostTypeFor(entry)}`);
 
   const caption = await fetchCaption(entry.domain, entry.content_key);
   console.log(`📝 caption (先頭 80): ${caption.slice(0, 80)}...`);
 
-  const mediaUrl = mediaUrlFor(entry.type, entry.domain, entry.content_key);
-  // 公開 URL の到達確認
-  const headRes = await fetch(mediaUrl, { method: "HEAD" });
-  if (!headRes.ok) {
-    throw new Error(`media URL 到達不能 (${headRes.status}): ${mediaUrl}`);
+  const mediaUrls =
+    entry.type === "carousel"
+      ? carouselUrlsFor(entry)
+      : [mediaUrlFor(entry.type, entry.domain, entry.content_key)];
+  // 公開 URL の到達確認 (カルーセルは全枚。1 枚でも欠けたらコンテナを作る前に止める)
+  for (const url of mediaUrls) {
+    const headRes = await fetch(url, { method: "HEAD" });
+    if (!headRes.ok) {
+      throw new Error(`media URL 到達不能 (${headRes.status}): ${url}`);
+    }
+    console.log(`✅ media URL OK: ${url}`);
   }
-  console.log(`✅ media URL OK: ${mediaUrl}`);
+  const [mediaUrl] = mediaUrls;
 
   if (process.env.IG_DRY_RUN) {
     console.log(
@@ -330,12 +446,18 @@ async function main() {
 
   if (entry.type === "reels") {
     await postReels({ contentKey: entry.content_key, caption, videoUrl: mediaUrl, domain: entry.domain });
+  } else if (entry.type === "carousel") {
+    await postCarousel({ caption, imageUrls: mediaUrls });
   } else {
     await postImage({ contentKey: entry.content_key, caption, imageUrl: mediaUrl });
   }
 }
 
-main().catch((err) => {
-  console.error(`❌ ${err.message || err}`);
-  process.exit(1);
-});
+module.exports = { carouselUrlsFor, ledgerPostTypeFor };
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(`❌ ${err.message || err}`);
+    process.exit(1);
+  });
+}

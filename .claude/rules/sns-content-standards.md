@@ -173,6 +173,36 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 ```
 - 2200 字以内。保存・いいね誘導を最優先。スライド最後に必ず保存 CTA
 
+### 2-3b. Instagram 予想クイズ型カルーセル (5 枚・2026-09-23〜)
+
+1位を予想させてから答え合わせする型。スワイプの理由 (答え) と保存の理由 (全47都道府県の表) を1本に持たせる。
+
+| 枚 | 内容 | `slide` |
+|---|---|---|
+| 1 | 出題 + 選択肢 2〜4 (1位の県を必ず含める) | `question` |
+| 2 | ヒント (候補を「?」で伏せたタイル地図。1位の順位は明かさない) | `hint` |
+| 3 | 正解 (1位の値・2位との倍率・上位5・最下位との差) | `answer` |
+| 4 | 全47都道府県の表 | `table` |
+| 5 | コメント・保存・プロフィール導線 | `outro` |
+
+- 生成は Remotion `RankingQuizInstagram-Carousel` (`apps/remotion/src/features/ranking-quiz-instagram/`)。
+  入力はランキングの `meta` / `allEntries` と編集入力 `quiz` (`RankingQuizSpecSchema`)。**正解・順位・値・倍率は
+  データから導出**し、選択肢やヒントがデータと矛盾する spec は描画を失敗させる (出題と答えが食い違う投稿を作らない)
+- 題材は「1位が意外」な指標を選ぶ。総額指標で東京が当然1位になるもの、値の差がほぼ無い指標は使わない
+- 家計調査など県庁所在市の値は `scopeNote` と `footnote` に「県庁所在市」を明記する
+- 入力例: `apps/remotion/src/fixtures/ranking-quiz-sample.json` (焼酎消費支出額 2024年)。レンダ手順は `apps/remotion/README.md`
+- **配信**: domain は `ranking-quiz` (同じ rankingKey を単枚画像で投稿済みでも、台帳の重複判定で記録が落ちないよう分ける)。
+  R2 は `sns/ranking-quiz/<rankingKey>/instagram/` に `caption.txt` と `stills/slide-<n>-<slide>-1080x1350.png` を置き
+  (`.local/r2` へレンダ → `push-exact-r2-assets.ts --prefix sns/ranking-quiz/<rankingKey> --extension png,txt`)、
+  schedule JSON に carousel エントリを足すと IG cron が投稿する。slides は表示順・2〜10 枚で、1 枚でも R2 に無ければ
+  コンテナを作る前に止まる。台帳には `post_type=carousel` で記録される
+
+```json
+{"date":"2026-09-28","time":"12:00","type":"carousel","domain":"ranking-quiz","content_key":"<rankingKey>",
+ "slides":["slide-1-question-1080x1350.png","slide-2-hint-1080x1350.png","slide-3-answer-1080x1350.png",
+           "slide-4-table-1080x1350.png","slide-5-outro-1080x1350.png"]}
+```
+
 ### 2-4. Instagram リール
 
 - **15 字以内のフック**を冒頭に (予測 → 答え合わせ型)。例:「1 位は意外なあの県」
