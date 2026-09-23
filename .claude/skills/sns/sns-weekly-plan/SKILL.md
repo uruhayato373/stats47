@@ -19,7 +19,7 @@ W19-W25 で 6 週連続投稿ゼロになった (計画外タスク優先で SNS
 
 | チャネル | 今週やること |
 |---|---|
-| **Instagram (主力)** | カルーセル 2 + リール 1 を生成・予約 |
+| **Instagram (主力)** | カルーセル 7 (曜日ローテーション §2-3c) + リール 1 を生成・予約 |
 | **X** | 予約 2-3 本 + トレンドがあれば引用RT |
 | **note** | 月 1-2 本ペースで企画 (該当週のみ) |
 
@@ -38,7 +38,7 @@ W19-W25 で 6 週連続投稿ゼロになった (計画外タスク優先で SNS
 - 隔週程度で `/competitor-scan` を挟み、競合の当たり題材も参考にする (煽り追随はしない)
 - 題材は数字の格差でなく**感情トリガー** (財布/地元愛/子育て不安/意外性) から逆算 (rules §0)
 
-### Step 3: Instagram — カルーセル 2 + リール 1 を生成・予約
+### Step 3: Instagram — カルーセル 7 (曜日ローテーション §2-3c) + リール 1 を生成・予約
 
 ```bash
 /generate-instagram-schedule    # 今週枠のスケジュール生成 (重複防止内蔵)
@@ -48,7 +48,7 @@ W19-W25 で 6 週連続投稿ゼロになった (計画外タスク優先で SNS
 自動投稿する。各実行はエントリの `time` (JST、未指定は 08:00 扱い) が現在時刻以前で未投稿の最早 1 件
 だけを投稿する (state: `.claude/state/instagram-*-schedule.json`、二重投稿は ig-posted-log で防止)。
 
-### Step 4: X — 定型ストック量産 (週 14-21 本) + 引用RT
+### Step 4: X — 定型ストック (週 2-3 本) + 引用RT
 
 ```bash
 # ① 量産 (クラウド可): 候補選定→画像→執筆→lint→draft 登録を 1 コマンドで
@@ -61,7 +61,7 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply                        
 /find-quote-rt                 # トレンドがあれば引用RT (1日≤3・72h以内・炎上/政治回避)
 ```
 
-- 頻度上限は rules §1 quota (`X_DAILY_MAX=3` / 週 14-21) が SSOT。ガードは `check-x-post-budget.cjs`。
+- 頻度上限は rules §1 quota (`X_DAILY_MAX=3` / 週 2-3) が SSOT。ガードは `check-x-post-budget.cjs`。
 - 単発だけ作るなら `/post-x --key <rankingKey>` (post-x-batch の N=1 版)。
 
 ### Step 5: 月初のみ — note
@@ -81,7 +81,7 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply                        
 ## やらないこと (意図的)
 
 - **投稿の全自動化はしない** — X 予約は dry-run 確認を残す。IG は GHA cron に委ねるが schedule 生成は人手起点
-- **量産しない** — 頻度上限は rules §1 を厳守 (X 週2-3・IG 週3枠)
+- **量産しない** — 頻度上限は rules §1 を厳守 (X 週 2-3・IG カルーセル 1 / 日 + リール 1 / 週)
 - **TikTok は扱わない** — 撤退恒久
 
 ## 関連

@@ -21,7 +21,7 @@
  *
  * Usage:
  *   node .claude/skills/sns/post-x-batch/scripts/select-candidates.cjs \
- *     --count 10 [--start YYYY-MM-DD] [--out <path>] [--rebuild-index]
+ *     [--count N] [--start YYYY-MM-DD] [--out <path>] [--rebuild-index]
  */
 
 const fs = require("node:fs");
@@ -87,7 +87,8 @@ function parseArgs(argv) {
     return i >= 0 ? args[i + 1] : def;
   };
   return {
-    count: Number(get("--count", "10")),
+    // 既定は週の上限 (§1 X_WEEKLY_TARGET_MAX)。本数を手書きで持たない
+    count: Number(get("--count", String(catalog.getQuota().weeklyTargetMax))),
     start: get("--start", null),
     out: get(
       "--out",

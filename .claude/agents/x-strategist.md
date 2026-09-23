@@ -21,7 +21,7 @@ X (Twitter) アカウント「統計で見る都道府県 | stats47」の投稿�
 
 | スキル | 用途 |
 |---|---|
-| `/post-x-batch` | **X 定型投稿の量産 (主力)**。候補選定→画像→執筆→lint→draft 登録の 5 フェーズ。週次 14-21 本 |
+| `/post-x-batch` | **X 定型投稿の量産 (主力)**。候補選定→画像→執筆→lint→draft 登録の 5 フェーズ。週次 2-3 本 (§1) |
 | `/operate-geo-content` | **Geo専用投稿**。空間分析契約→Geo専用画像→出典SHA→draft同期。一般ランキング量産へ混ぜない |
 | `/operate-site-x-drafts` | **サイト集客投稿**。theme/areaの実在着地→専用OGP→SHA/URL/lint→draft登録。Geo・rankingとは分離 |
 | `/post-x` | X 投稿を 1 本生成 (post-x-batch の N=1 ラッパー) |
@@ -39,7 +39,7 @@ X の主戦は**ランキング定型のストック量産**。Geo投稿はこ�
 以下を週次で回す (頻度・型・画像は §1/§2 が SSOT):
 
 ```
-① 生成 (クラウド可): /post-x-batch --count <14-21>
+① 生成 (クラウド可): /post-x-batch --count <2-3>
      select-candidates (決定的) → quick-still (画像) → キャプション執筆 (LLM, §2-0 structure
      + x-winning-patterns.json 参照) → lint-x-captions (決定的ゲート) → register-drafts (draft 登録)
 ② ユーザー確認: 生成した draft 一覧を Template A で提示 (投稿はまだしない)
@@ -109,7 +109,7 @@ X のエンゲージメントはタイムラインの流速に依存する。フ
 **予約投稿ルール** (頻度上限の SSOT は §1 quota。ここに数値を重複させない):
 - 量産は `/post-x-batch` → `publish-x --from-queue`。select-candidates が §1 `X_DAILY_MAX` を守って
   scheduled_at を割り付け、`check-x-post-budget.cjs` が投稿時にハード上限を再検証する
-- 単発は `/publish-x <key> <date>`。日次・週次の上限は §1 (現行: 1 日 3 / 週 14-21) に従う
+- 単発は `/publish-x <key> <date>`。日次・週次の上限は §1 (現行: 1 日 3 / 週 2-3) に従う
 - 投稿間隔は同日で最低 2-3 時間空ける (select-candidates が時刻をずらす)
 
 ### 4. ストックからの配信管理
@@ -177,7 +177,7 @@ category → template の割付は §2-8 相性表。post-x-batch の select-can
 
 | シナリオ | フロー |
 |---|---|
-| **量産 (主力)** | `/post-x-batch --count 14-21`（候補選定→画像→執筆→lint→draft）→ x-strategist（draft 確認）→ ローカル `/publish-x --from-queue`（予約）→ `promote-scheduled-x`（posted 昇格） |
+| **量産 (主力)** | `/post-x-batch --count 2-3`（候補選定→画像→執筆→lint→draft）→ x-strategist（draft 確認）→ ローカル `/publish-x --from-queue`（予約）→ `promote-scheduled-x`（posted 昇格） |
 | **Geo地域分析** | `/operate-geo-content`（3/9/2/1契約→Geo専用render→SHA監査→draft同期）→ ユーザー明示時のみ `/publish-x` |
 | **テーマ・エリア集客** | `/operate-site-x-drafts`（catalog→landing/画像監査→caption lint→draft）→ ユーザー明示時のみ `/publish-x` |
 | トレンド連動投稿 | x-strategist（トレンド検知 + データマッチング）→ `/react-to-news`（quick-still）→ `/publish-x`（即時投稿） |
