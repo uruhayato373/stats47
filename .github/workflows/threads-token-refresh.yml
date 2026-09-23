@@ -10,8 +10,8 @@ name: 🔄 Threads token refresh (weekly)
 #       default GITHUB_TOKEN は Actions secrets を書き換えられない。
 
 on:
-  schedule:
-    - cron: "30 18 * * 2" # JST 水 03:30 (UTC 火 18:30)。IG の更新 (03:00) と時刻をずらす
+  # 定期実行は止めている (2026-09-23): Threads は Playwright で Threads Web の予約機能を使う運用にした
+  # (.claude/skills/sns/publish-threads/)。Meta のトークンを登録して API 方式に切り替えるときに schedule を戻す。
   workflow_dispatch:
 
 permissions:

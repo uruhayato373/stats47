@@ -21,14 +21,14 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
-### [THREADS-ACTIVATION-01] Threads の認証情報を登録し、10月末までの予約を入れる
+### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
-タグ: [SNS・マーケ] [種類:改善] [実行:ユーザー] [検証:node .claude/scripts/threads/post-from-schedule.cjs --dry-run] [起票:2026-09-23] [期日:2026-09-30]
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --limit 1 --dry-run] [起票:2026-09-23] [期日:2026-10-20]
 
-- **owner**: オーナー (Meta アプリとトークン) / x-strategist (予約の中身)
-- **現状 (2026-09-23)**: 投稿の仕組みは develop に入っている (`post-threads-scheduled.yml` が毎時 `.claude/state/threads-schedule.json` を読み、時刻を過ぎた 1 件だけ公開)。予約表は空で、Secrets `THREADS_ACCESS_TOKEN` / `THREADS_USER_ID` が未登録。実 API 呼び出しは未検証。
-- **次**: ①オーナーが Meta で Threads ユースケース付きアプリを作り、`threads_basic` と `threads_content_publish` を許可した長期トークンを取得して上記 2 つを GitHub Secrets に登録する (手順は `.claude/scripts/threads/post-from-schedule.cjs` 冒頭と公式 https://developers.facebook.com/docs/threads/get-started )。②X の 9/24〜10/31 予約から 1 日 2 件 (朝・夜、X と 2 時間以上ずらす) を選び、本文の UTM を `utm_source=threads` に替え、画像を R2 `sns/<domain>/<key>/threads/` に上げて予約表に入れる。③最初の 1 件は `workflow_dispatch` の dry_run で確認してから本番に回す。
-- **完了条件**: 最初の Threads 投稿の permalink が posts.json に platform=threads で記録され、10/31 までの予約が入っている。
+- **owner**: x-strategist
+- **現状 (2026-09-23)**: Threads は Playwright で Threads Web の予約機能を使う (`/publish-threads`)。9/24〜10/31 の 76 件を posts.json に platform=threads の下書きとして作り、9/24〜10/6 の 25 件を予約済み。Threads の予約は同時 25 件までで、残り 51 件 (10/6 夕方〜10/31) は draft のまま。
+- **次**: 予約済みが公開されて枠が空いたら `npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue` を再実行する。1 日 2 件ずつ空くので、10/5 までに 1 回目、以後 数日おきに実行すれば途切れない。専用プロファイルのログインが切れていたらオーナーがログインし直す。公開済みの確認 (posted への昇格と permalink の記録) は未実装。
+- **完了条件**: 10/31 分まで Threads 側で予約済みになり、posts.json の threads draft が 0 件。
 
 ### [AUTHENTICATED-MEASUREMENT-ACTIVATION-01] 認証付きCIの日次継続運用を実証する
 
