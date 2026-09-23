@@ -48,6 +48,7 @@ import {
 import { PrefectureSelect } from './PrefectureSelect';
 import { ThemeAreaHeader } from './ThemeAreaHeader';
 import { ThemeChapterLinks } from './ThemeChapterLinks';
+import { ThemeCorrelatedMetrics } from './ThemeCorrelatedMetrics';
 import { ThemeDashboardClient } from './ThemeDashboardClient';
 import { ThemeEvidenceTopicsSection } from './ThemeEvidenceTopicsSection';
 import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
@@ -426,6 +427,10 @@ export async function ThemePageLayout({
 
           <Suspense fallback={null}>
             <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
+          </Suspense>
+
+          <Suspense fallback={null}>
+            <ThemeCorrelatedMetrics themeKey={theme.themeKey} />
           </Suspense>
 
           {/*

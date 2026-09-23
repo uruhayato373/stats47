@@ -13,7 +13,7 @@
  *
  * 計算量: ~2,000 active 指標² ≈ 2M ペア。全ペアでscatter object/配列を作ると
  * allocationとGCでheapを圧迫するため、valueMapからPearson集計値だけを直接計算し、JS側で
- *   - per-key top-20 (人口補正後 |r| 降順。calculatePopulationAdjustedR)
+ *   - per-key top-20 (人口補正後の順位相関の絶対値降順。populationAdjustedRankR)
  *   - global top-200 候補 (effectiveR 降順)
  *   - 走行中の total / strong(|r|>=0.7) カウント
  * だけを保持する。scatterは候補集合が確定してから候補分だけ作り、
@@ -41,9 +41,10 @@ import DatabaseConstructor from 'better-sqlite3';
 import {
   listAllMetrics,
   getMetricConfig,
-  getMetricMeta,
+  yearInSpec,
 } from '@stats47/data-configs';
 import type { MetricConfig } from '@stats47/data-configs';
+import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   assertR2WriteAllowed,
   fetchFromR2AsJson,
@@ -59,7 +60,7 @@ import {
   buildScatterData,
   calculateMatchedPearsonR,
   calculatePartialR,
-  calculatePopulationAdjustedR,
+  toAverageRanks,
   type RankValueWithArea,
 } from '../utils/calculate-pearson';
 import {
@@ -68,10 +69,13 @@ import {
   CORRELATION_TOP_PAIRS_KEY,
   CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT,
   correlationByKeyPath,
+  correlationByThemePath,
   type CorrelatedItem,
   type CorrelationByKeySnapshot,
+  type CorrelationByThemeSnapshot,
   type CorrelationStatsSnapshot,
   type CorrelationTopPairsSnapshot,
+  type ThemeCorrelatedMetric,
   type TopCorrelation,
 } from '../types/snapshot';
 
@@ -79,6 +83,7 @@ import {
 
 /** 散布図の最小データ点数。これ未満のペアは採用しない。 */
 const MIN_DATA_POINTS = 30;
+
 
 /** R2 values.json の並列 fetch 上限 (API rate / メモリ保護)。 */
 const FETCH_CONCURRENCY = 16;
@@ -260,18 +265,27 @@ interface LoadedMetric {
   latestYear: string;
   rows: RankValueWithArea[];
   valueMap: Map<string, number>;
+  /** 県ごとの順位 (同値は平均順位)。順位相関を総当たりで出すために 1 度だけ作る */
+  rankRows: RankValueWithArea[];
+  rankMap: Map<string, number>;
 }
 
 /**
  * 1 指標の latestYear prefecture 値を R2 から読む。
  * value=null は除外。MIN_DATA_POINTS 未満は null (相関対象外)。
+ *
+ * latestYear はランキングページ (generate-ranking-items の item.json) と同じく
+ * 「観測値にある年のうち config.years の範囲内で最新」とする。config.years から直接取ると
+ * years:"all" の指標は年が決まらず、years.to がデータより先の指標は存在しない年を探して
+ * 0 件になる (2026-09-23 実測: 前者 49 件・後者 41 件が相関なし/古い相関のまま)。
  */
 async function loadMetric(config: MetricConfig): Promise<LoadedMetric | null> {
-  const latestYear = getMetricMeta(config.key)?.latestYear?.yearCode;
-  if (!latestYear) return null;
-
   const payload = await readStatsValues(config.key, 'prefecture');
   if (!payload || payload.rows.length === 0) return null;
+  const latestYear = [...new Set(payload.rows.map((r) => r.yearCode))]
+    .filter((yearCode) => yearInSpec(yearCode, config.years))
+    .sort((a, b) => parseInt(b, 10) - parseInt(a, 10))[0];
+  if (!latestYear) return null;
 
   const rows: RankValueWithArea[] = [];
   const valueMap = new Map<string, number>();
@@ -282,7 +296,10 @@ async function loadMetric(config: MetricConfig): Promise<LoadedMetric | null> {
     valueMap.set(r.areaCode, r.value);
   }
   if (rows.length < MIN_DATA_POINTS) return null;
-  return { key: config.key, latestYear, rows, valueMap };
+  const ranks = toAverageRanks(rows.map((row) => row.value));
+  const rankRows = rows.map((row, i) => ({ ...row, value: ranks[i] }));
+  const rankMap = new Map(rankRows.map((row) => [row.areaCode, row.value]));
+  return { key: config.key, latestYear, rows, valueMap, rankRows, rankMap };
 }
 
 /** 並列度を制限して loadMetric を流す簡易ワーカープール。 */
@@ -412,6 +429,13 @@ interface CandidateScore {
   partialRDensity: number | null;
   /** effectiveR = sign(pearsonR) × min(|partial*| or |pearsonR|) — 旧 exporter SQL 準拠 */
   effectiveAbsR: number;
+  /**
+   * 人口規模の影響を除いた順位相関。x・y・総人口を県ごとの順位にしてから人口を制御した偏相関
+   * (偏相関を出せないときは補正前の順位相関)。per-key の選定・並び順・画面表示とテーマの関連指標に使う。
+   * Pearson は北海道・東京のような 1 県の極端な値で r≈1 になり、人口補正でも消えない
+   * (2026-09-23 実測: 乳用牛飼養頭数 → 敷物消費支出額 r=0.97 / 順位相関 -0.08)。
+   */
+  populationAdjustedRankR: number;
 }
 
 /** 旧 list-top-correlations.ts の effectiveAbsR を JS で先計算 (候補絞り込み用)。 */
@@ -431,11 +455,9 @@ function effectiveAbsROf(p: {
   );
 }
 
-const populationAdjustedAbsR = (p: CandidateScore): number =>
-  Math.abs(calculatePopulationAdjustedR(p));
 
 /**
- * 候補集合を作るために per-key top-N (人口補正後 |r| 降順) を保持する小ヒープ代替。
+ * 候補集合を作るために per-key top-N (|populationAdjustedRankR| 降順) を保持する小ヒープ代替。
  * 2026-09-23 まで ABS(pearsonR) 順で、件数系指標の top-20 が「人口の多い県ほど両方大きい」
  * だけの r≈0.99 のペアで埋まっていた (例: 救急搬送人員 → K6 推計人数 r=0.99, 人口補正後 0.42)。
  */
@@ -444,12 +466,72 @@ class TopByPopulationAdjusted {
   constructor(private readonly limit: number) {}
   add(p: CandidateScore) {
     this.items.push(p);
-    this.items.sort((a, b) => populationAdjustedAbsR(b) - populationAdjustedAbsR(a));
+    this.items.sort(
+      (a, b) => Math.abs(b.populationAdjustedRankR) - Math.abs(a.populationAdjustedRankR)
+    );
     if (this.items.length > this.limit) this.items.length = this.limit;
   }
   values(): CandidateScore[] {
     return this.items;
   }
+}
+
+// ─── テーマ単位の関連指標 ──────────────────────────────────────────────────────
+
+/**
+ * テーマページ「このテーマと関連の深い指標」の件数と、出す相関の下限 (人口補正後の順位相関の絶対値)。
+ * 0.5 未満は中程度未満の相関で、「関連が深い」と案内できない。
+ */
+const THEME_LINK_LIMIT = 8;
+const THEME_LINK_MIN_ABS_R = 0.5;
+
+/** ThemeCatalog のテーマ → 指標 (テーマページの「全指標」と同じ catalog.metrics)。 */
+function listThemeMembers(): Array<[string, string[]]> {
+  return Object.entries(THEME_CATALOGS)
+    .map(([themeKey, catalog]): [string, string[]] => [
+      themeKey,
+      [...new Set(catalog.metrics.map((metric) => metric.rankingKey))].sort(),
+    ])
+    .sort(([a], [b]) => a.localeCompare(b));
+}
+
+/**
+ * テーマ外の指標を、テーマ内のいずれかの指標との人口補正後の順位相関 (絶対値) が最大のものから並べる。
+ * 候補は各テーマ内指標の per-key top-N (ランキングページの「相関が高い指標」と同じ母集団)。
+ */
+function buildThemeLinks(
+  members: readonly string[],
+  perKeyTop: ReadonlyMap<string, TopByPopulationAdjusted>,
+  metaMap: Map<string, MetricDisplayMeta>
+): ThemeCorrelatedMetric[] {
+  const memberSet = new Set(members);
+  const best = new Map<string, { r: number; via: string }>();
+  for (const member of members) {
+    for (const cand of perKeyTop.get(member)?.values() ?? []) {
+      const other = cand.keyX === member ? cand.keyY : cand.keyX;
+      if (memberSet.has(other)) continue;
+      const r = cand.populationAdjustedRankR;
+      if (Math.abs(r) < THEME_LINK_MIN_ABS_R) continue;
+      const prev = best.get(other);
+      if (
+        !prev ||
+        Math.abs(r) > Math.abs(prev.r) ||
+        (Math.abs(r) === Math.abs(prev.r) && member < prev.via)
+      ) {
+        best.set(other, { r, via: member });
+      }
+    }
+  }
+  return [...best.entries()]
+    .sort(([ka, a], [kb, b]) => Math.abs(b.r) - Math.abs(a.r) || ka.localeCompare(kb))
+    .slice(0, THEME_LINK_LIMIT)
+    .flatMap(([rankingKey, { r, via }]) => {
+      const title = displayMetaFor(rankingKey, metaMap).title;
+      const viaTitle = displayMetaFor(via, metaMap).title;
+      return title && viaTitle
+        ? [{ rankingKey, title, populationAdjustedR: r, via: { rankingKey: via, title: viaTitle } }]
+        : [];
+    });
 }
 
 /** global top-N (effectiveAbsR 降順) を保持。candidates 絞り込みにのみ使う。 */
@@ -502,6 +584,7 @@ function buildMemoryDb(
       partial_r_area REAL,
       partial_r_aging REAL,
       partial_r_density REAL,
+      pop_adj_rank_r REAL NOT NULL,
       scatter_data_json TEXT NOT NULL
     );
     CREATE TABLE metrics (
@@ -528,8 +611,8 @@ function buildMemoryDb(
     INSERT INTO correlations
       (metric_key_x, metric_key_y, pearson_r,
        partial_r_population, partial_r_area, partial_r_aging, partial_r_density,
-       scatter_data_json)
-    VALUES (@keyX, @keyY, @pearsonR, @prPop, @prArea, @prAging, @prDensity, @scatter)
+       pop_adj_rank_r, scatter_data_json)
+    VALUES (@keyX, @keyY, @pearsonR, @prPop, @prArea, @prAging, @prDensity, @popAdjRankR, @scatter)
   `);
   const insCorrTx = db.transaction(() => {
     for (const c of candidates) {
@@ -548,6 +631,7 @@ function buildMemoryDb(
         prArea: c.partialRArea,
         prAging: c.partialRAging,
         prDensity: c.partialRDensity,
+        popAdjRankR: c.populationAdjustedRankR,
         // 候補ごとに生成・直ちに INSERT し、JS 配列と SQLite の二重保持を避ける。
         scatter: JSON.stringify(buildScatterData(x.rows, y.rows)),
       });
@@ -643,6 +727,7 @@ interface ByKeyRawRow {
   partialRArea: number | null;
   partialRAging: number | null;
   partialRDensity: number | null;
+  populationAdjustedRankR: number;
   scatterData: string;
 }
 
@@ -650,7 +735,7 @@ const counterpartOf = (row: ByKeyRawRow, rankingKey: string): string =>
   row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
 
 /**
- * 対象 key を含む候補ペアを人口補正後 |r| の降順 (同値は counterpart key 昇順) で並べ、
+ * 対象 key を含む候補ペアを人口補正後の順位相関の絶対値降順 (同値は counterpart key 昇順) で並べ、
  * counterpart で dedup → limit。行数は候補集合 (per-key top-N ∪ global top) で上限がある。
  * scatter は X=自身になるよう必要なら x/y を swap。title/subtitle/unit を join。
  */
@@ -672,6 +757,7 @@ function queryByKey(
         partial_r_area AS partialRArea,
         partial_r_aging AS partialRAging,
         partial_r_density AS partialRDensity,
+        pop_adj_rank_r AS populationAdjustedRankR,
         scatter_data_json AS scatterData
       FROM correlations
       WHERE metric_key_x = ? OR metric_key_y = ?
@@ -679,7 +765,7 @@ function queryByKey(
       )
       .all(rankingKey, rankingKey) as ByKeyRawRow[]
   )
-    .map((row) => ({ row, populationAdjustedR: calculatePopulationAdjustedR(row) }))
+    .map((row) => ({ row, populationAdjustedR: row.populationAdjustedRankR }))
     .sort(
       (a, b) =>
         Math.abs(b.populationAdjustedR) - Math.abs(a.populationAdjustedR) ||
@@ -763,6 +849,8 @@ export async function buildCorrelationSnapshot(
   total: number;
   strong: number;
   perKeyFiles: number;
+  emptyKeyFiles: number;
+  themeFiles: number;
   consideredMetrics: number;
   durationMs: number;
 }> {
@@ -772,12 +860,14 @@ export async function buildCorrelationSnapshot(
     dryRun: opts.dryRun,
   });
 
-  // 1. 対象 metric: isActive !== false かつ prefecture entity かつ latestYear あり、
-  //    かつ相関ランキング除外キーでない (旧 run-batch と同じ絞り込み)。
+  // 1. 対象 metric: isActive !== false かつ prefecture entity、かつ相関ランキング除外キーでない。
+  //    最新年の有無は観測値から loadMetric が判定する (config.years では判定しない)。
+  const activePrefectureKeys = listAllMetrics()
+    .filter((m) => m.isActive !== false && m.entities.includes('prefecture'))
+    .map((m) => m.key);
   let configs = listAllMetrics().filter((m) => {
     if (m.isActive === false) return false;
     if (!m.entities.includes('prefecture')) return false;
-    if (!getMetricMeta(m.key)?.latestYear?.yearCode) return false;
     if (isExcludedCorrelationKey(m.key)) return false;
     return true;
   });
@@ -809,11 +899,13 @@ export async function buildCorrelationSnapshot(
     }/${CONTROL_VARIABLES.length}`
   );
 
+  // テーマ構成 (ThemeCatalog) は別パッケージのコードなので、source hash とは別に fingerprint へ入れる
+  const themeMembers = listThemeMembers();
   const inputFingerprint = computeInputFingerprint(
     loaded,
     pairKeys,
     metaMap,
-    hashCorrelationSource()
+    `${hashCorrelationSource()}:${createHash('sha256').update(JSON.stringify(themeMembers)).digest('hex')}`
   );
   if (opts.skipIfUnchanged) {
     const previous = await fetchFromR2AsJson<Partial<CorrelationStatsSnapshot>>(
@@ -830,6 +922,8 @@ export async function buildCorrelationSnapshot(
         total: 0,
         strong: 0,
         perKeyFiles: 0,
+        emptyKeyFiles: 0,
+        themeFiles: 0,
         consideredMetrics: pairKeys.length,
         durationMs: Date.now() - startedAt,
       };
@@ -849,6 +943,18 @@ export async function buildCorrelationSnapshot(
   let total = 0;
   let strong = 0;
   let trivialSkipped = 0;
+
+  // 各指標と総人口の順位相関 (偏相関の分母)。指標ごとに 1 回だけ計算する
+  const populationRanks = loaded.get(CONTROL_VARIABLES[0].key)?.rankMap;
+  const rankPopulationCache = new Map<string, number | null>();
+  const rankWithPopulation = (metric: LoadedMetric): number | null => {
+    if (!populationRanks) return null;
+    if (!rankPopulationCache.has(metric.key)) {
+      const matched = calculateMatchedPearsonR(metric.rankRows, populationRanks);
+      rankPopulationCache.set(metric.key, matched.count < MIN_DATA_POINTS ? null : matched.r);
+    }
+    return rankPopulationCache.get(metric.key)!;
+  };
 
   for (let i = 0; i < pairKeys.length; i++) {
     const keyX = pairKeys[i];
@@ -904,8 +1010,14 @@ export async function buildCorrelationSnapshot(
         partialRAging: prAging,
         partialRDensity: prDensity,
         effectiveAbsR: 0,
+        populationAdjustedRankR: 0,
       };
       cand.effectiveAbsR = effectiveAbsROf(cand);
+      const rankR = calculateMatchedPearsonR(mx.rankRows, my.rankMap).r;
+      const rxp = rankWithPopulation(mx);
+      const ryp = rankWithPopulation(my);
+      cand.populationAdjustedRankR =
+        rxp === null || ryp === null ? rankR : (calculatePartialR(rankR, rxp, ryp) ?? rankR);
 
       perKeyTop.get(keyX)!.add(cand);
       perKeyTop.get(keyY)!.add(cand);
@@ -946,6 +1058,8 @@ export async function buildCorrelationSnapshot(
 
   // 6. R2 書き込み (.local/r2)。
   let perKeyFiles = 0;
+  let emptyKeyFiles = 0;
+  let themeFiles = 0;
   if (!opts.dryRun) {
     await saveToR2(
       CORRELATION_TOP_PAIRS_KEY,
@@ -969,6 +1083,32 @@ export async function buildCorrelationSnapshot(
       });
       perKeyFiles++;
     }
+    // 計算できない有効指標 (除外キー・観測値なし・最新年が 30 県未満) にも空の by-key を書く。
+    // 書かないと以前に計算した相関がランキングページに残り続ける (2026-09-23 実測 54 ページ)。
+    // --limit-metrics は先頭 N 件だけの検証用なので、残り全件を空で上書きしない。
+    if (!opts.limitMetrics) {
+      const computed = new Set(pairKeys);
+      for (const key of activePrefectureKeys) {
+        if (computed.has(key)) continue;
+        const snapshot: CorrelationByKeySnapshot = { generatedAt, rankingKey: key, pairs: [] };
+        await saveToR2(correlationByKeyPath(key), JSON.stringify(snapshot), {
+          contentType: 'application/json; charset=utf-8',
+        });
+        emptyKeyFiles++;
+      }
+      // テーマ単位の関連指標。該当なしのテーマも空で書き、古い一覧を残さない
+      for (const [themeKey, members] of themeMembers) {
+        const snapshot: CorrelationByThemeSnapshot = {
+          generatedAt,
+          themeKey,
+          items: buildThemeLinks(members, perKeyTop, metaMap),
+        };
+        await saveToR2(correlationByThemePath(themeKey), JSON.stringify(snapshot), {
+          contentType: 'application/json; charset=utf-8',
+        });
+        themeFiles++;
+      }
+    }
   } else {
     perKeyFiles = pairKeys.length;
   }
@@ -982,6 +1122,8 @@ export async function buildCorrelationSnapshot(
     total,
     strong,
     perKeyFiles,
+    emptyKeyFiles,
+    themeFiles,
     consideredMetrics: pairKeys.length,
     durationMs,
   };
@@ -1003,7 +1145,7 @@ async function main() {
   }
   console.log(
     `✅ correlation: top-pairs=${result.topPairs} total=${result.total} strong=${result.strong} ` +
-      `per-key=${result.perKeyFiles} metrics=${result.consideredMetrics} ` +
+      `per-key=${result.perKeyFiles} empty-key=${result.emptyKeyFiles} themes=${result.themeFiles} metrics=${result.consideredMetrics} ` +
       `fingerprint=${result.inputFingerprint.slice(0, 12)} ${result.durationMs}ms`
   );
 }

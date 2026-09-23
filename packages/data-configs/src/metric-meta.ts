@@ -31,6 +31,19 @@ function enumerateYears(spec: YearSpec): string[] {
   return [];
 }
 
+/**
+ * yearCode (4桁) が config.years の範囲内か。ランキング (item/values) と相関が同じ年集合を見るための
+ * 単一の判定 (以前は generate-ranking-items / generate-ranking-values に同一コードが複製されていた)。
+ */
+export function yearInSpec(yearCode: string, spec: YearSpec): boolean {
+  if (spec === "all") return true;
+  const y = parseInt(yearCode, 10);
+  if (!Number.isFinite(y)) return false;
+  if ("from" in spec) return y >= spec.from && y <= spec.to;
+  if ("years" in spec) return spec.years.includes(y);
+  return false;
+}
+
 function buildMeta(config: MetricConfig): MetricMeta {
   const years = enumerateYears(config.years);
   const availableYears = years.map((yearCode) => ({

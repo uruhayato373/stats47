@@ -9,6 +9,12 @@ export function correlationByKeyPath(rankingKey: string): string {
   return `${CORRELATION_BY_KEY_PREFIX}/${rankingKey}.json`;
 }
 
+export const CORRELATION_BY_THEME_PREFIX = `${CORRELATION_SNAPSHOT_PREFIX}/by-theme`;
+
+export function correlationByThemePath(themeKey: string): string {
+  return `${CORRELATION_BY_THEME_PREFIX}/${themeKey}.json`;
+}
+
 // 上位 200 ペア snapshot 生成時の上限。Web 想定 limit (20) × 10 倍バッファ。
 export const CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT = 200;
 
@@ -26,7 +32,11 @@ export interface CorrelatedItem {
   subtitle: string | null;
   unit: string;
   pearsonR: number;
-  /** 並び順と画面表示の基準。人口規模の影響を除いた相関 (calculatePopulationAdjustedR) */
+  /**
+   * 並び順と画面表示の基準。人口規模の影響を除いた順位相関 (x・y・総人口を県ごとの順位に
+   * してから人口を制御した偏相関)。1 県の極端な値に左右されない。旧 snapshot は
+   * calculatePopulationAdjustedR (Pearson) で補う。
+   */
   populationAdjustedR: number;
   partialRPopulation: number | null;
   partialRArea: number | null;
@@ -76,6 +86,21 @@ export interface CorrelationByKeySnapshot {
   generatedAt: string;
   rankingKey: string;
   pairs: CorrelatedItem[];
+}
+
+/** テーマ外の指標のうち、テーマ内のどれかの指標と人口補正後の順位相関が高いもの。 */
+export interface ThemeCorrelatedMetric {
+  rankingKey: string;
+  title: string;
+  populationAdjustedR: number;
+  /** 最も強く相関するテーマ内の指標 */
+  via: { rankingKey: string; title: string };
+}
+
+export interface CorrelationByThemeSnapshot {
+  generatedAt: string;
+  themeKey: string;
+  items: ThemeCorrelatedMetric[];
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -187,5 +212,27 @@ export function parseCorrelationByKeySnapshot(value: unknown): CorrelationByKeyS
     generatedAt: assertGeneratedAt(value.generatedAt),
     rankingKey: assertString(value.rankingKey, "rankingKey"),
     pairs: value.pairs.map(parseCorrelatedItem),
+  };
+}
+
+export function parseCorrelationByThemeSnapshot(value: unknown): CorrelationByThemeSnapshot {
+  if (!isRecord(value) || !Array.isArray(value.items)) {
+    throw new Error("correlation by-theme snapshot is schema-invalid");
+  }
+  return {
+    generatedAt: assertGeneratedAt(value.generatedAt),
+    themeKey: assertString(value.themeKey, "themeKey"),
+    items: value.items.map((item, index) => {
+      if (!isRecord(item) || !isRecord(item.via)) throw new Error(`items[${index}] is schema-invalid`);
+      return {
+        rankingKey: assertString(item.rankingKey, `items[${index}].rankingKey`),
+        title: assertString(item.title, `items[${index}].title`),
+        populationAdjustedR: assertNumber(item.populationAdjustedR, `items[${index}].populationAdjustedR`),
+        via: {
+          rankingKey: assertString(item.via.rankingKey, `items[${index}].via.rankingKey`),
+          title: assertString(item.via.title, `items[${index}].via.title`),
+        },
+      };
+    }),
   };
 }

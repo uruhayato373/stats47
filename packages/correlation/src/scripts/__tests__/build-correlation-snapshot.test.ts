@@ -39,7 +39,7 @@ function metric(key: string, title: string) {
     unit: '件',
     category: 'population',
     entities: ['prefecture'],
-    years: { from: 2020, to: 2020 },
+    years: { from: 2020, to: 2020 } as unknown,
     isActive: true,
     source: { kind: 'estat' },
   };
@@ -53,6 +53,14 @@ const METRICS = [
 vi.mock('@stats47/data-configs', () => ({
   listAllMetrics: () => METRICS,
   getMetricConfig: (k: string) => METRICS.find((m) => m.key === k),
+  // 本物と同じ判定 (packages/data-configs/src/metric-meta.ts の yearInSpec)
+  yearInSpec: (yearCode: string, spec: unknown) => {
+    if (spec === 'all') return true;
+    const y = parseInt(yearCode, 10);
+    const s = spec as { from?: number; to?: number; years?: number[] };
+    if (s.years) return s.years.includes(y);
+    return y >= (s.from ?? 0) && y <= (s.to ?? 0);
+  },
   getMetricMeta: (k: string) =>
     METRICS.some((m) => m.key === k)
       ? {
@@ -61,6 +69,20 @@ vi.mock('@stats47/data-configs', () => ({
           entities: ['prefecture'],
         }
       : null,
+}));
+
+// ── ThemeCatalog: metric-a だけのテーマと、全指標を含む (テーマ外の候補が無い) テーマ ──────
+vi.mock('@stats47/data-configs/theme-catalog', () => ({
+  THEME_CATALOGS: {
+    'theme-a': { metrics: [{ rankingKey: 'metric-a' }] },
+    'theme-all': {
+      metrics: [
+        'metric-a', 'metric-b', 'metric-c',
+        'total-area-excluding-northern-territories-and-takeshima',
+        'ratio-65-plus', 'population-density-per-km2-total-area',
+      ].map((rankingKey) => ({ rankingKey })),
+    },
+  },
 }));
 
 // ── stats-r2: 47 県の合成観測値。a と b は強相関、c は無相関気味 ──────────────────
@@ -193,7 +215,7 @@ describe('buildCorrelationSnapshot shape', () => {
     expect(item.rankingKey).not.toBe('metric-a');
     expect(item.scatterData.length).toBeGreaterThanOrEqual(30);
 
-    // by-key は人口補正後 |r| の降順。この合成データでは metric-a と metric-b (r≈0.9) の
+    // by-key は人口補正後の順位相関 (絶対値) の降順。この合成データでは metric-a と metric-b (r≈0.9) の
     // 連動は人口では説明されないので、補正後も先頭に残る。
     expect(byKey.pairs[0].rankingKey).toBe('metric-b');
     expect(Math.abs(byKey.pairs[0].pearsonR)).toBeGreaterThan(0.7);
@@ -355,6 +377,125 @@ describe('computeInputFingerprint', () => {
       computeInputFingerprint(base, ['metric-a'], meta('A'), 'src2'),
     ]) {
       expect(other).not.toBe(fp);
+    }
+  });
+});
+
+// ランキングページは観測値にある最新年を表示する。相関がそれと違う年 (や存在しない年) を見ると、
+// 相関が作られないか、古い相関がページに残り続ける (2026-09-23 に 90 指標・54 ページで実測)。
+describe('buildCorrelationSnapshot の対象年と空ファイル', () => {
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+    fetchFromR2AsJsonMock.mockImplementation(() => null);
+  });
+
+  const byKey = (key: string) => {
+    const raw = saved.get(`app/correlation/by-ranking-key/${key}.json`);
+    return raw ? (JSON.parse(raw) as CorrelationByKeySnapshot) : null;
+  };
+
+  it.each([
+    ['config.years がデータより先の年まである', { from: 2020, to: 2023 }],
+    ['config.years が all', 'all'],
+  ])('%s指標も、観測値にある最新年で計算する', async (_label, years) => {
+    const target = METRICS.find((m) => m.key === 'metric-a')!;
+    const original = target.years;
+    target.years = years;
+    try {
+      const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+      const result = await buildCorrelationSnapshot({ dryRun: false });
+
+      expect(result.consideredMetrics).toBe(6);
+      expect(byKey('metric-a')?.pairs.length).toBeGreaterThan(0);
+    } finally {
+      target.years = original;
+    }
+  });
+
+  it('計算できない有効指標には空の by-key を書き、--limit-metrics では書かない', async () => {
+    const original = STATS['metric-c'];
+    STATS['metric-c'] = original.slice(0, 10); // 30 県未満
+    try {
+      const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+      const result = await buildCorrelationSnapshot({ dryRun: false });
+
+      // 30 県未満の metric-c と、相関除外キーの total-population
+      expect(byKey('metric-c')?.pairs).toEqual([]);
+      expect(byKey('total-population')?.pairs).toEqual([]);
+      expect(result.emptyKeyFiles).toBe(2);
+      expect(byKey('metric-a')?.pairs.length).toBeGreaterThan(0);
+
+      saved.clear();
+      await buildCorrelationSnapshot({ dryRun: false, limitMetrics: 3 });
+      expect(byKey('total-population')).toBeNull();
+    } finally {
+      STATS['metric-c'] = original;
+    }
+  });
+});
+
+// テーマページ「このテーマと関連の深い指標」はテーマの外へ出る導線。テーマ内の指標や
+// 弱い相関を出すと導線にならないので、外の指標だけを人口補正後の順位相関 |r| >= 0.5 で並べる。
+describe('buildCorrelationSnapshot by-theme', () => {
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+    fetchFromR2AsJsonMock.mockImplementation(() => null);
+  });
+
+  const byTheme = (themeKey: string) => {
+    const raw = saved.get(`app/correlation/by-theme/${themeKey}.json`);
+    return raw ? JSON.parse(raw) : null;
+  };
+
+  it('テーマ外で最も強く相関する指標を、経由したテーマ内の指標つきで並べる', async () => {
+    const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+    const result = await buildCorrelationSnapshot({ dryRun: false });
+
+    const items = byTheme('theme-a').items as Array<{
+      rankingKey: string;
+      populationAdjustedR: number;
+      via: { rankingKey: string };
+    }>;
+    expect(items[0]).toMatchObject({ rankingKey: 'metric-b', via: { rankingKey: 'metric-a' } });
+    expect(items.map((item) => item.rankingKey)).not.toContain('metric-a');
+    expect(items.every((item) => Math.abs(item.populationAdjustedR) >= 0.5)).toBe(true);
+    const shown = items.map((item) => Math.abs(item.populationAdjustedR));
+    expect(shown).toEqual([...shown].sort((a, b) => b - a));
+
+    // テーマ外の候補が無いテーマも空で書き、古い一覧を残さない
+    expect(byTheme('theme-all').items).toEqual([]);
+    expect(result.themeFiles).toBe(2);
+  });
+});
+
+// 1 県 (北海道の乳用牛・耕地面積のような) の極端な値だけで r≈1 になる組は、順位にすると関係が消える。
+// Pearson の値で並べ・表示すると「無関係な指標が最も関連が深い」と案内してしまう。
+describe('buildCorrelationSnapshot の順位相関', () => {
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+    fetchFromR2AsJsonMock.mockImplementation(() => null);
+  });
+
+  it('1 県の外れ値だけで相関する組は、表示値が低く上位に来ない', async () => {
+    const original = { b: STATS['metric-b'], c: STATS['metric-c'] };
+    STATS['metric-b'] = makeRows((i) => (i === 0 ? 100000 : (i * 17) % 47));
+    STATS['metric-c'] = makeRows((i) => (i === 0 ? 100000 : (i * 23) % 47));
+    try {
+      const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+      await buildCorrelationSnapshot({ dryRun: false });
+      const byKey = JSON.parse(saved.get('app/correlation/by-ranking-key/metric-b.json')!) as CorrelationByKeySnapshot;
+      const c = byKey.pairs.find((pair) => pair.rankingKey === 'metric-c')!;
+
+      // 前提: Pearson は 1 に近い
+      expect(c.pearsonR).toBeGreaterThan(0.99);
+      expect(Math.abs(c.populationAdjustedR)).toBeLessThan(0.4);
+      expect(byKey.pairs[0].rankingKey).not.toBe('metric-c');
+    } finally {
+      STATS['metric-b'] = original.b;
+      STATS['metric-c'] = original.c;
     }
   });
 });

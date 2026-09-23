@@ -77,6 +77,7 @@ export {
   getMetricMetaMap,
   getMetricMeta,
   listMetricKeysByEntity,
+  yearInSpec,
   type MetricMeta,
 } from "./metric-meta";
 export {
