@@ -3,9 +3,12 @@ import { test } from "node:test";
 
 import {
   applyInspectionObservations,
+  findUnhandledBatchUrls,
   getObserveAfterFixEntries,
   normalizeQueueUrl,
+  refineBySitemap,
   RESOLVED_BY_INSPECTION,
+  sitemapKey,
   summarizeCoverageQueue,
 } from "../lib/coverage-queue-state.mjs";
 
@@ -90,4 +93,41 @@ test("自動で done にした URL だけを、再び未登録と観測したら
 test("fragment 付きの URL も同じ URL として照合する", () => {
   assert.equal(normalizeQueueUrl("https://stats47.jp/blog/x#s1"), "https://stats47.jp/blog/x");
   assert.equal(normalizeQueueUrl("not-a-url"), null);
+});
+
+test("sitemap に無い 404 は放置確定、sitemap に無い 200 は掲載判断へ回す", () => {
+  const still404 = { verdict: "still-404", action: "verify-intent", design: false };
+  const live = { verdict: "live-misflagged", action: "observe-after-fix", design: false };
+
+  assert.deepEqual(refineBySitemap(still404, false), { verdict: "dead-unlisted", action: "none", design: true });
+  assert.equal(refineBySitemap(live, false).action, "sitemap-gap");
+  // sitemap に載っている 404 は sitemap の不具合なので確認対象のまま残す
+  assert.equal(refineBySitemap(still404, true), still404);
+  assert.equal(refineBySitemap(live, true), live);
+  // sitemap を全件取れなかったときは判定を変えない
+  assert.equal(refineBySitemap(still404, null), still404);
+  assert.equal(refineBySitemap(live, null), live);
+});
+
+test("sitemap 照合は末尾スラッシュと fragment の差を吸収する", () => {
+  assert.equal(sitemapKey("https://stats47.jp/ranking/a/"), sitemapKey("https://stats47.jp/ranking/a#x"));
+});
+
+test("カードの gate は pending と理由なしの処理を未処理として返す", () => {
+  const queue = [
+    entry({ url: "https://stats47.jp/a", status: "pending" }),
+    entry({ url: "https://stats47.jp/b", status: "in-progress", note: "sitemap へ追加 (commit abc)" }),
+    entry({ url: "https://stats47.jp/c", status: "resolved-by-design", note: "" }),
+    entry({ url: "https://stats47.jp/d", status: "done" }),
+  ];
+  assert.deepEqual(
+    findUnhandledBatchUrls(queue, [
+      "https://stats47.jp/a",
+      "https://stats47.jp/b",
+      "https://stats47.jp/c",
+      "https://stats47.jp/d",
+      "https://stats47.jp/gone-from-export",
+    ]),
+    ["https://stats47.jp/a", "https://stats47.jp/c"],
+  );
 });

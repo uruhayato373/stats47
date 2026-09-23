@@ -29,6 +29,8 @@
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url>
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> [--wave-id 2026-06-16-coverage]
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection  # 直近14日の URL Inspection で登録済み→done
+ *   node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled <file> # バックログカードの対象が処理済みか (gate)
+ *   node .claude/scripts/gsc/build-coverage-queue.mjs --probe <url>      # 本番ページの状態を読むだけ (CI agent 用)
  *
  * 正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md
  */
@@ -37,9 +39,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseCsv } from "csv-parse/sync";
 import { parseCoverageDrilldown } from './lib/coverage-csv.mjs';
+import { extractLocs } from "../search-growth/lib/live-sitemap.mjs";
 
 import {
   isIntentionallyNonIndexableResource,
+  readCanonicalUrl,
   readHtmlIndexSignals,
 } from "./coverage-policy.mjs";
 import {
@@ -48,8 +52,11 @@ import {
 } from "./lib/coverage-source-freshness.mjs";
 import {
   applyInspectionObservations,
+  findUnhandledBatchUrls,
   getObserveAfterFixEntries,
   normalizeQueueUrl,
+  refineBySitemap,
+  sitemapKey,
   summarizeCoverageQueue,
 } from "./lib/coverage-queue-state.mjs";
 
@@ -109,6 +116,7 @@ const ACTION_PRIORITY = {
   "fix-5xx": 1,
   "restore-gone-key": 1, // 410 なのに KNOWN∩isActive = 誤GONE (2026-07-03 の56件障害クラス)
   "observe-after-fix": 2, // 旧 "resubmit"。Indexing API 送信はせず修正後に URL Inspection で観測 (準拠是正 2026-07-23)
+  "sitemap-gap": 3, // 200 で未登録なのに sitemap に無い → sitemap へ載せるか noindex にするかを決める
   deactivate: 3, // データ無しで200を返す空ページ → isActive:false/GONE
   noindex: 4, // 空テンプレ/検索/重複 → robots noindex
   "content-check": 5, // 未判定の soft404→200
@@ -156,6 +164,28 @@ function refreshQueueDerivedState(q) {
   );
   saveQueue(q);
   writeLatest(q, observe.length);
+}
+
+// ── 本番 fetch の proxy 設定 (--probe と build の実測で共有) ────────
+// 社内プロキシ配下では Node の素の fetch が TLS 傍受で落ち、全 URL が status 0 (=recheck) になる。
+// HTTPS_PROXY があれば明示 CONNECT する (前例: packages/ranking/src/scripts/audit-ranking-data-integrity.ts)。
+// CI / 社外では dispatcher を作らず従来どおり。
+// 2026-08-06 実測: これが無いと 2,456 件中 2,375 件が recheck に落ち分類が成立しなかった。
+let cachedDispatcher;
+async function getProxyDispatcher() {
+  if (cachedDispatcher !== undefined) return cachedDispatcher;
+  const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  if (!proxyUrl) {
+    cachedDispatcher = null;
+    return null;
+  }
+  try {
+    const { ProxyAgent } = await import("undici");
+    cachedDispatcher = new ProxyAgent(proxyUrl);
+  } catch {
+    cachedDispatcher = null;
+  }
+  return cachedDispatcher;
 }
 
 // ── --mark-* モード ────────────────────────────────────────────
@@ -265,6 +295,70 @@ if (hasFlag("--sync-inspection")) {
   process.exit(0);
 }
 
+// ── --probe モード (読み取り専用) ──────────────────────────────
+// CI のバックログループは curl / WebFetch を使えないので、content-check / sitemap-gap を判断する
+// agent がページの状態を読む手段としてここを使う。本番へ GET を 1 回送るだけで何も書かない。
+const probeUrl = getArg("--probe", null);
+if (probeUrl) {
+  const dispatcher = await getProxyDispatcher();
+  const res = await fetch(probeUrl, {
+    headers: { "User-Agent": GOOGLEBOT_UA },
+    redirect: "manual",
+    ...(dispatcher ? { dispatcher } : {}),
+  });
+  const html = res.headers.get("content-type")?.includes("text/html") ? await res.text() : "";
+  const pick = (re) => html.match(re)?.[1]?.replace(/\s+/g, " ").trim() ?? null;
+  const text = html
+    .replace(/<(script|style|noscript)\b[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  console.log(
+    JSON.stringify(
+      {
+        url: probeUrl,
+        status: res.status,
+        location: res.headers.get("location"),
+        xRobotsTag: res.headers.get("x-robots-tag"),
+        title: pick(/<title\b[^>]*>([^<]*)<\/title>/i),
+        h1: pick(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.replace(/<[^>]+>/g, "") ?? null,
+        canonical: html ? readCanonicalUrl(html) : null,
+        ...(html ? readHtmlIndexSignals(html, res.headers.get("x-robots-tag") ?? "") : {}),
+        textLength: text.length,
+        textSample: text.slice(0, 400),
+      },
+      null,
+      2
+    )
+  );
+  process.exit(0);
+}
+
+// ── --assert-handled モード (バックログカードの completion gate) ─────────
+// sync-coverage-backlog.mjs が起票したカードの対象 URL がすべて処理済みなら exit 0。
+// 処理済み = pending でない、かつ done 以外は理由 (--note) 付き。
+const assertFile = getArg("--assert-handled", null);
+if (assertFile) {
+  const q = loadQueue();
+  if (!q) {
+    console.error("[err] queue が無い。先に build を実行");
+    process.exit(1);
+  }
+  const urls = fs.readFileSync(assertFile, "utf8").split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+  if (!urls.length) {
+    console.error(`[err] ${assertFile} に URL が無い`);
+    process.exit(1);
+  }
+  const unhandled = findUnhandledBatchUrls(q.queue, urls);
+  if (unhandled.length) {
+    console.error(`[fail] 未処理 ${unhandled.length}/${urls.length} 件 (pending のまま、または理由 note 無し):`);
+    unhandled.forEach((u) => console.error(`   ${u}`));
+    process.exit(1);
+  }
+  console.log(`[ok] ${urls.length} 件すべて処理済み`);
+  process.exit(0);
+}
+
 // ── --next モード ──────────────────────────────────────────────
 // 既存キューの読み取りは、元 export の鮮度に関係なく利用できる。
 const nextN = getArg("--next", null);
@@ -336,27 +430,7 @@ function readDrilldowns() {
 }
 
 // ── 本番 HTTP 実測 (Googlebot UA, redirect manual, 並列) ─────────
-// 社内プロキシ配下では Node の素の fetch が TLS 傍受で落ち、全 URL が status 0 (=recheck) になる。
-// HTTPS_PROXY があれば明示 CONNECT する (前例: packages/ranking/src/scripts/audit-ranking-data-integrity.ts)。
-// CI / 社外では dispatcher を作らず従来どおり。
-// 2026-08-06 実測: これが無いと 2,456 件中 2,375 件が recheck に落ち分類が成立しなかった。
-let cachedDispatcher;
-async function getProxyDispatcher() {
-  if (cachedDispatcher !== undefined) return cachedDispatcher;
-  const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
-  if (!proxyUrl) {
-    cachedDispatcher = null;
-    return null;
-  }
-  try {
-    const { ProxyAgent } = await import("undici");
-    cachedDispatcher = new ProxyAgent(proxyUrl);
-  } catch {
-    cachedDispatcher = null;
-  }
-  return cachedDispatcher;
-}
-
+// proxy dispatcher はファイル冒頭 (--probe モードより前) で定義している。
 async function probe(url) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), 12000);
@@ -397,6 +471,55 @@ async function probeAll(urls, limit) {
   return results;
 }
 
+// 単発の 503 / timeout を実バグとして積まない。2026-09-23 時点の fix-5xx pending 2 件は、
+// どちらも手動の再確認で 200 だった。失敗した URL だけ間隔を空けて測り直し、最後の結果で分類する。
+const REPROBE_DELAYS_MS = [3000, 10000];
+const isProbeFailure = (status) => status === 0 || status >= 500;
+async function reprobeFailures(httpByUrl) {
+  for (const delay of REPROBE_DELAYS_MS) {
+    const failed = [...httpByUrl].filter(([, status]) => isProbeFailure(status)).map(([url]) => url);
+    if (!failed.length) return;
+    console.error(`[probe] 5xx/timeout ${failed.length} URL を ${delay / 1000}s 後に再測定`);
+    await new Promise((resolve) => setTimeout(resolve, delay));
+    for (const [url, status] of await probeAll(failed, null)) httpByUrl.set(url, status);
+  }
+}
+
+// 本番 sitemap の掲載 URL。子 sitemap を 1 つでも取れなければ null を返す
+// (一部だけの集合で「未掲載」と判定すると、生きている URL を放置側へ倒してしまう)。
+async function fetchSitemapKeys() {
+  const dispatcher = await getProxyDispatcher();
+  const get = async (url) => {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 20000);
+    try {
+      const res = await fetch(url, {
+        headers: { "User-Agent": GOOGLEBOT_UA },
+        signal: ctrl.signal,
+        ...(dispatcher ? { dispatcher } : {}),
+      });
+      return res.ok ? await res.text() : null;
+    } catch {
+      return null;
+    } finally {
+      clearTimeout(t);
+    }
+  };
+  const root = await get("https://stats47.jp/sitemap.xml");
+  if (root === null) return null;
+  const pages = /<sitemapindex/i.test(root) ? [] : [root];
+  if (!pages.length) {
+    for (const child of extractLocs(root)) {
+      const xml = await get(child);
+      if (xml === null) return null;
+      pages.push(xml);
+    }
+  }
+  const keys = new Set();
+  for (const xml of pages) for (const loc of extractLocs(xml)) keys.add(sitemapKey(loc));
+  return keys.size ? keys : null;
+}
+
 async function probeHtmlSignals(url) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), 12000);
@@ -412,10 +535,11 @@ async function probeHtmlSignals(url) {
     if (res.status !== 200) return null;
     const contentType = res.headers.get("content-type") ?? "";
     if (!contentType.includes("text/html")) return null;
-    return readHtmlIndexSignals(
-      await res.text(),
-      res.headers.get("x-robots-tag") ?? "",
-    );
+    const html = await res.text();
+    return {
+      ...readHtmlIndexSignals(html, res.headers.get("x-robots-tag") ?? ""),
+      canonical: readCanonicalUrl(html),
+    };
   } catch {
     return null;
   } finally {
@@ -542,6 +666,7 @@ async function build() {
         htmlSignalsByUrl.set(u, {
           robotsNoindex: Boolean(p.robots_noindex),
           softNotFound: Boolean(p.soft_not_found),
+          canonical: p.canonical_url ?? null,
         });
       }
     }
@@ -549,6 +674,7 @@ async function build() {
   } else {
     console.error(`[probe] ${uniqActionable.length} actionable URL を Googlebot UA で実測中...`);
     httpByUrl = await probeAll(uniqActionable, null);
+    await reprobeFailures(httpByUrl);
     const htmlSignalUrls = drilldowns
       .filter(
         (r) =>
@@ -562,6 +688,13 @@ async function build() {
     );
     htmlSignalsByUrl = await probeHtmlSignalsAll([...new Set(htmlSignalUrls)]);
   }
+  // --no-probe では本番を叩かず、前回の in_sitemap を使う
+  const sitemapKeys = noProbe ? null : await fetchSitemapKeys();
+  console.error(
+    sitemapKeys
+      ? `[sitemap] 本番 sitemap ${sitemapKeys.size} URL と照合`
+      : "[sitemap] 全件を取得できなかったため、掲載判定は前回値を使う"
+  );
 
   // upsert
   const seen = new Set();
@@ -584,7 +717,20 @@ async function build() {
       htmlSignals?.robotsNoindex === true &&
       htmlSignals.softNotFound === false;
     const liveSoftNotFound = http === 200 && htmlSignals?.softNotFound === true;
-    const cls = nonIndexableResource
+    // クエリ付きの派生 URL で canonical が正規 URL を指すものは、Google が正規 URL 側を登録するので
+    // 未登録のままが正しい。2026-09-24 の sitemap-gap 94 件中 26 件がこれだった。
+    // クエリの無いページで canonical が別 URL を指すのは canonical の不具合でありうるので、ここでは放置側へ倒さない。
+    const canonicalElsewhere =
+      http === 200 &&
+      new URL(r.url).search !== "" &&
+      Boolean(htmlSignals?.canonical) &&
+      sitemapKey(new URL(htmlSignals.canonical, r.url).href) !== sitemapKey(r.url);
+    const inSitemap = !ACTIONABLE.has(r.category)
+      ? null
+      : sitemapKeys
+        ? sitemapKeys.has(sitemapKey(r.url))
+        : old?.in_sitemap ?? null;
+    const cls = refineBySitemap(nonIndexableResource
       ? {
           verdict: "non-indexable-resource",
           action: "none",
@@ -596,13 +742,19 @@ async function build() {
           action: "none",
           design: true,
         }
+      : canonicalElsewhere
+        ? {
+            verdict: "canonical-elsewhere",
+            action: "none",
+            design: true,
+          }
       : liveSoftNotFound
         ? {
             verdict: "live-soft404",
             action: "deactivate",
             design: false,
           }
-      : classify(r.category, http ?? -1);
+      : classify(r.category, http ?? -1), inSitemap);
 
     // 410 の ranking URL が KNOWN∩isActive なら「誤GONE」— 放置 (now-gone) にせず復帰対象へ
     if (http === 410 && isMisgoneRankingUrl(r.url)) {
@@ -652,10 +804,12 @@ async function build() {
       gsc_category: r.category,
       gsc_last_crawl: r.lastCrawl,
       current_http: http,
+      in_sitemap: inSitemap,
       ...(htmlSignals
         ? {
             robots_noindex: htmlSignals.robotsNoindex,
             soft_not_found: htmlSignals.softNotFound,
+            canonical_url: htmlSignals.canonical ?? null,
           }
         : {}),
       verdict: cls.verdict,
@@ -796,6 +950,7 @@ function writeLatest(out, observeCount) {
   const am = {
     "fix-5xx": "probeで5xx分類。pendingなら実バグ(最優先)",
     "observe-after-fix": "404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測",
+    "sitemap-gap": "現在200で未登録なのに sitemap に無い→sitemap へ載せるか noindex にするかを決める",
     deactivate: "config/データ無しの空200 ranking→KNOWN除去で404/410化",
     noindex: "空テンプレ/検索/未公開blog→noindex or 410",
     enrich: "全国テンプレ重複(area×cat)/未公開md→県別補強・公開",

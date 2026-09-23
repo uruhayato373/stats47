@@ -34,3 +34,12 @@ export function readHtmlIndexSignals(html, xRobotsTag = "") {
     softNotFound: /見つかりません|not\s+found/i.test(title),
   };
 }
+
+/** `<link rel="canonical">` の href。属性の順序は問わない。無ければ null。 */
+export function readCanonicalUrl(html) {
+  for (const tag of html.match(/<link\b[^>]*>/gi) ?? []) {
+    if (!/\brel=["']canonical["']/i.test(tag)) continue;
+    return tag.match(/\bhref=["']([^"']+)["']/i)?.[1] ?? null;
+  }
+  return null;
+}

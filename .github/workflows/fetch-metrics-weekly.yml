@@ -187,7 +187,10 @@ jobs:
       # 再構築が失敗しても前回のキューに対して反映できるので、outcome に関係なく走らせる。
       - name: 🔁 Sync coverage queue with URL Inspection
         if: always()
-        run: node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection || echo "::warning::coverage queue sync failed, continuing"
+        run: |
+          node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection || echo "::warning::coverage queue sync failed, continuing"
+          # 判断が要る pending をバックログカードにする (処理は backlog-loop-daily)
+          node .claude/scripts/gsc/sync-coverage-backlog.mjs || echo "::warning::coverage backlog sync failed, continuing"
 
       - name: 📄 Summarize coverage queue
         if: always()
@@ -312,8 +315,9 @@ jobs:
           git add .claude/state/blog/topic-queue.json 2>/dev/null || true
           # ランキング拡充ループ (計測ゲート付き需要ファースト) の状態SSOT
           git add .claude/state/estat/expansion-queue.json 2>/dev/null || true
-          # GSC カバレッジ是正キュー (再実測で verdict が最新化される)
+          # GSC カバレッジ是正キュー (再実測で verdict が最新化される) + 判断が要る分のバックログカード
           git add .claude/state/gsc 2>/dev/null || true
+          git add .claude/todo/backlog.md 2>/dev/null || true
           git add .claude/state/metrics/gsc/coverage-drilldown 2>/dev/null || true
           git add .claude/skills/analytics/gsc-improvement/reference/improvement-log.md 2>/dev/null || true
           # 効果判定ループの成果物 (verdict JSON + 抑制台帳 + 新規 improvement-log)

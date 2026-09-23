@@ -31,15 +31,18 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
 [3] build-coverage-queue.mjs    本番 HTTP を Googlebot UA で実測 → A/B 分類 → coverage-remediation-queue.json (状態保持)
        │                         + LATEST.md + coverage-totals-history.csv (経過観測) + coverage-live-observe-urls.csv (curated)
        ↓
-[4] 是正 (action 別):
-       observe-after-fix(live) → sitemap/内部リンク/canonical を整備 → url-inspection-daily.cjs で coverageState を観測 (Indexing API 送信はしない・準拠是正 2026-07-23)
-       content-check(soft) → gsc-analyst で薄さ/描画確認 → 補強 or noindex → 良ければ observe-after-fix 格上げ
-       fix-5xx             → 実バグ修正 (PR)
-       verify-intent(404)  → 旧URL/内部パスか確認。死亡が正なら resolved-by-design でマーク
+[4] 是正 (action 別。機械で決まるものは build が自動、判断が要るものは CI の backlog-loop):
+       observe-after-fix(live, sitemap 掲載) → url-inspection-daily.cjs が日次で観測 (Indexing API 送信はしない・準拠是正 2026-07-23)
+       404 & sitemap 未掲載 / クエリ付きで canonical が別 URL → build が resolved-by-design (自動)
+       5xx                 → build が間隔を空けて 2 回再測定。続けば fix-5xx
+       sitemap-gap / content-check / fix-5xx / verify-intent 等 → sync-coverage-backlog.mjs が GSC-COV-* カードを起票
+                             → backlog-loop-daily (CI の Claude) が直して --mark-* → --assert-handled を gate に行を消す
        ↓
-[5] 記録      improvement-log [COVERAGE-LOOP-01] + 改善バックログ status / build --mark-done
+[5] 記録      日次CIが --sync-inspection で「URL Inspection で登録済み」になった URL を自動で done
+       │         (resolved_by: url-inspection。再び未登録と観測されたら pending に戻る)
+       │         + improvement-log [COVERAGE-LOOP-01] / 人が確定したものは build --mark-done
        ↓
-[6] 経過観測  次週 export → ingest+build で件数減 (8378↓) と登録済↑ を totals-history で追う
+[6] 経過観測  次週 export → ingest+build で件数減と登録済↑ (概要グラフの最新値) を totals-history で追う
 ```
 
 ## A/B 分類ロジック (build-coverage-queue.mjs)
@@ -109,14 +112,22 @@ node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
 - `.claude/state/gsc/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
 - `node .claude/scripts/gsc/build-coverage-queue.mjs --next 20` で次にやる actionable を JSONL で取得。
 
-### Phase 4 — 是正 (action 別。gsc-analyst サブエージェントに委譲)
+### Phase 4 — 是正 (action 別)
 
-| action | 対応 | 委譲先 |
+判断が要る action は `sync-coverage-backlog.mjs` が **action ごとに 1 枚ずつ** `GSC-COV-<種類>-<日付>` カード
+(10 URL まで・`[実行:sweep]`) を `.claude/todo/backlog.md` へ起票し、`backlog-loop-daily` (CI の Claude) が処理する。
+対象 URL は `.claude/state/gsc/backlog-batches/<ID>.txt`、completion gate は
+`build-coverage-queue.mjs --assert-handled <batch>` (全 URL が pending でなく、done 以外は理由 note 付き)。
+CI の Claude は curl / WebFetch を使えないので、本番ページは `build-coverage-queue.mjs --probe <url>` で読む。
+カードが消化されると翌日の日次 CI が次の batch を起票する。人がセッションで進めるときも同じカードを使う。
+
+| action | 対応 | 担当 |
 |---|---|---|
-| `resubmit` | 既に curated CSV (`coverage-live-resubmit-urls.csv`) に出力済 → CI に送信を委ねる | (CI) |
-| `content-check` | soft404 の薄さ/描画を確認。本当に thin なら content 補強 or `noindex`、十分なら resubmit 格上げ | **gsc-analyst** |
-| `fix-5xx` | 実バグ。再現確認 → 修正 PR | gsc-analyst → 実装 |
-| `verify-intent` | 旧URL/内部パス (`/tmp/*` `/.local/*` 等) か確認。死亡が正なら放置確定 | gsc-analyst |
+| `sitemap-gap` | 200 で未登録なのに sitemap に無い。除外理由を読み、価値があれば sitemap へ、薄い・重複なら noindex | backlog-loop (`GSC-COV-SITEMAP-*`) |
+| `content-check` | soft404 の薄さ/描画を確認。本当に thin なら content 補強 or `noindex` | backlog-loop (`GSC-COV-SOFT404-*`) |
+| `fix-5xx` | 3 回の測定で 5xx が続いた実バグ。原因を特定して直す | backlog-loop (`GSC-COV-5XX-*`) |
+| `verify-intent` | sitemap に載っているのに 404。ページを戻すか sitemap から外す | backlog-loop (`GSC-COV-404-*`) |
+| `restore-gone-key` / `deactivate` / `noindex` / `enrich` | 各 action の意味どおり (カード本文に手順) | backlog-loop |
 
 `content-check` の大きな独立バッチだけを subagent 最大1体に委譲する (Agent tool,
 `mode: bypassPermissions`)。`.claude/rules/model-prompting.md` と
@@ -132,12 +143,16 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 - **live (observe-after-fix) は送信ではなく「直してから観測」**。Indexing API 送信は 2026-07-23 に退役した
   (公式に JobPosting/BroadcastEvent VideoObject 専用・準拠是正)。次を行う:
   1. sitemap 掲載整合 (`SITEMAP_RANKING_KEYS` / `sitemap.ts`)・内部リンク強化・canonical 是正・content 補強
-  2. `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50` で coverageState / lastCrawlTime を観測
+  2. 観測は日次 CI が自動で行う。`url-inspection-daily.cjs` は 1 日の検査件数の 50% を是正キュー
+     (pending / in-progress) に充て、全件を数日で巡回する。登録済みになった URL は
+     `build-coverage-queue.mjs --sync-inspection` が done にする (手動で確かめたいときも同じコマンド)
 - `coverage-live-observe-urls.csv` は観測対象の候補リスト (送信キューではない)。
 - ローカルからの R2 push は禁止 (`_assert-ci-write` で停止)。
 
 ### Phase 6 — 記録 (真実源を更新)
-- 完了した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
+- URL Inspection で登録済みになった URL は日次 CI が自動で done にする (`--sync-inspection`)。
+  累計は LATEST.md の「URL Inspection で登録を確認して done にした URL」、queue の `summary.indexed_by_inspection`。
+- 人が確定した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
 - `improvement-log.md` の `[COVERAGE-LOOP-01]` に「何をやったか」(送信件数・content-check 結果・fix-5xx PR) を追記。
 - 改善バックログ `.claude/todo/improvements.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
 - **effect/* を付ける前に実証チェックリスト** (`evidence-based-judgment.md`): 送信した URL が次週 indexed 化したかを
@@ -145,7 +160,9 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 ### Phase 7 — 経過観測 (次サイクルの起点)
 - 次週CIが認証付きexportを復元 → Phase 2を再実行。`coverage-totals-history.csv` に週次の件数が積まれる。
-- 判定指標: **404・soft404 の総件数が減少**、**登録済みが増加**、**resubmit した URL が indexed 化**。
+- 判定指標: **404・soft404 の総件数が減少**、**登録済み (totals-history の `indexed-submitted`) が増加**、
+  **是正した URL が indexed 化** (`indexed_by_inspection`)。登録済みは ingest が概要グラフ
+  (日付,未登録,登録済み,表示回数) の最新日から取る。概要グラフが無い export では空のまま警告を出す。
 - done だった URL が再び壊れて検出されたら自動で再 actionable 化される (5xx 再発は pending に戻す)。
 
 ## 真実源とファイル
@@ -163,7 +180,11 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 ## cadence (週次)
 
 **自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
-(`build-coverage-queue.mjs` → `.claude/state/gsc/` を develop へ commit-back)。
+(`build-coverage-queue.mjs` → `--sync-inspection` → `.claude/state/gsc/` を develop へ commit-back)。
+**判断が要る是正も CI で回す (2026-09-24〜)**: 日次 `gsc-url-inspection-daily.yml` と週次の最後に
+`sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、`backlog-loop-daily.yml` (JST 01:30・1 日 2 件・他のカードと共有) が
+直して develop へ push する。本番反映は develop→main の人の PR のまま。ループは `.claude/state/gsc` も commit する
+(是正キューへの `--mark-*` が成果物のため)。
 入力週が 1 週以内なら本番 HTTP を再実測する。新しい export がなく入力週が 2 週以上古い場合は、
 古い母集団を最新と誤認しないよう fail-closed で停止する。失敗時は `[Coverage Alert]` Issue
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
@@ -174,7 +195,9 @@ step には `timeout-minutes: 12` を置き、probe が長引いても週次計�
 Googleの初回ログイン・期限切れ・2FAは人間工程として残す。APIの検索パフォーマンス取得とは別経路。
 
 - `/weekly-review` 前に認証付き計測の成否と入力鮮度を確認し、未取得は欠測として扱う。
-- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測) が毎日稼働。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
+- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測 → `--sync-inspection` で queue 反映) が毎日稼働。
+  2026-09-23 まではCI既定の `--limit 500` が検索実績上位 500 件だけで埋まり、是正キューを 1 件も検査していなかった (7日間 0/1,133)。
+  枠は割合配分に変えた (`url-inspection-daily.cjs` の `*_SHARE`)。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
   本スキルのUI export経路は「UI exportでしか取れない総件数・未把握URL」を補う。
 
 ## 関連

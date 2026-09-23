@@ -31,11 +31,12 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
 [3] build-coverage-queue.mjs    本番 HTTP を Googlebot UA で実測 → A/B 分類 → coverage-remediation-queue.json (状態保持)
        │                         + LATEST.md + coverage-totals-history.csv (経過観測) + coverage-live-observe-urls.csv (curated)
        ↓
-[4] 是正 (action 別):
-       observe-after-fix(live) → sitemap/内部リンク/canonical を整備 → url-inspection-daily.cjs で coverageState を観測 (Indexing API 送信はしない・準拠是正 2026-07-23)
-       content-check(soft) → gsc-analyst で薄さ/描画確認 → 補強 or noindex → 良ければ observe-after-fix 格上げ
-       fix-5xx             → 実バグ修正 (PR)
-       verify-intent(404)  → 旧URL/内部パスか確認。死亡が正なら resolved-by-design でマーク
+[4] 是正 (action 別。機械で決まるものは build が自動、判断が要るものは CI の backlog-loop):
+       observe-after-fix(live, sitemap 掲載) → url-inspection-daily.cjs が日次で観測 (Indexing API 送信はしない・準拠是正 2026-07-23)
+       404 & sitemap 未掲載 / クエリ付きで canonical が別 URL → build が resolved-by-design (自動)
+       5xx                 → build が間隔を空けて 2 回再測定。続けば fix-5xx
+       sitemap-gap / content-check / fix-5xx / verify-intent 等 → sync-coverage-backlog.mjs が GSC-COV-* カードを起票
+                             → backlog-loop-daily (CI の Claude) が直して --mark-* → --assert-handled を gate に行を消す
        ↓
 [5] 記録      日次CIが --sync-inspection で「URL Inspection で登録済み」になった URL を自動で done
        │         (resolved_by: url-inspection。再び未登録と観測されたら pending に戻る)
@@ -111,14 +112,22 @@ node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
 - `.claude/state/gsc/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
 - `node .claude/scripts/gsc/build-coverage-queue.mjs --next 20` で次にやる actionable を JSONL で取得。
 
-### Phase 4 — 是正 (action 別。gsc-analyst サブエージェントに委譲)
+### Phase 4 — 是正 (action 別)
 
-| action | 対応 | 委譲先 |
+判断が要る action は `sync-coverage-backlog.mjs` が **action ごとに 1 枚ずつ** `GSC-COV-<種類>-<日付>` カード
+(10 URL まで・`[実行:sweep]`) を `.claude/todo/backlog.md` へ起票し、`backlog-loop-daily` (CI の Claude) が処理する。
+対象 URL は `.claude/state/gsc/backlog-batches/<ID>.txt`、completion gate は
+`build-coverage-queue.mjs --assert-handled <batch>` (全 URL が pending でなく、done 以外は理由 note 付き)。
+CI の Claude は curl / WebFetch を使えないので、本番ページは `build-coverage-queue.mjs --probe <url>` で読む。
+カードが消化されると翌日の日次 CI が次の batch を起票する。人がセッションで進めるときも同じカードを使う。
+
+| action | 対応 | 担当 |
 |---|---|---|
-| `resubmit` | 既に curated CSV (`coverage-live-resubmit-urls.csv`) に出力済 → CI に送信を委ねる | (CI) |
-| `content-check` | soft404 の薄さ/描画を確認。本当に thin なら content 補強 or `noindex`、十分なら resubmit 格上げ | **gsc-analyst** |
-| `fix-5xx` | 実バグ。再現確認 → 修正 PR | gsc-analyst → 実装 |
-| `verify-intent` | 旧URL/内部パス (`/tmp/*` `/.local/*` 等) か確認。死亡が正なら放置確定 | gsc-analyst |
+| `sitemap-gap` | 200 で未登録なのに sitemap に無い。除外理由を読み、価値があれば sitemap へ、薄い・重複なら noindex | backlog-loop (`GSC-COV-SITEMAP-*`) |
+| `content-check` | soft404 の薄さ/描画を確認。本当に thin なら content 補強 or `noindex` | backlog-loop (`GSC-COV-SOFT404-*`) |
+| `fix-5xx` | 3 回の測定で 5xx が続いた実バグ。原因を特定して直す | backlog-loop (`GSC-COV-5XX-*`) |
+| `verify-intent` | sitemap に載っているのに 404。ページを戻すか sitemap から外す | backlog-loop (`GSC-COV-404-*`) |
+| `restore-gone-key` / `deactivate` / `noindex` / `enrich` | 各 action の意味どおり (カード本文に手順) | backlog-loop |
 
 `content-check` の大きな独立バッチだけを subagent 最大1体に委譲する (Agent tool,
 `mode: bypassPermissions`)。`.claude/rules/model-prompting.md` と
@@ -172,8 +181,10 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 **自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
 (`build-coverage-queue.mjs` → `--sync-inspection` → `.claude/state/gsc/` を develop へ commit-back)。
-**自動化していないもの**: Phase 4 の是正そのもの (sitemap 掲載判断・内部リンク・content 補強・5xx 修正)。
-どれもコード変更と「このページを検索に出すべきか」の判断を伴うため、gsc-analyst が `--next` から拾って進める。
+**判断が要る是正も CI で回す (2026-09-24〜)**: 日次 `gsc-url-inspection-daily.yml` と週次の最後に
+`sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、`backlog-loop-daily.yml` (JST 01:30・1 日 2 件・他のカードと共有) が
+直して develop へ push する。本番反映は develop→main の人の PR のまま。ループは `.claude/state/gsc` も commit する
+(是正キューへの `--mark-*` が成果物のため)。
 入力週が 1 週以内なら本番 HTTP を再実測する。新しい export がなく入力週が 2 週以上古い場合は、
 古い母集団を最新と誤認しないよう fail-closed で停止する。失敗時は `[Coverage Alert]` Issue
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。

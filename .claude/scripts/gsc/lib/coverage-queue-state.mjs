@@ -92,3 +92,43 @@ export function applyInspectionObservations(queue, observations) {
   }
   return { observed, indexed, reopened };
 }
+
+/** sitemap 掲載判定用のキー。末尾スラッシュの有無で取りこぼさない。 */
+export function sitemapKey(raw) {
+  const href = normalizeQueueUrl(raw);
+  return href ? href.replace(/\/$/, "") : null;
+}
+
+/**
+ * sitemap 掲載の有無で HTTP 分類を詰める。inSitemap が null (sitemap を全件取れなかった) なら変えない。
+ * - 現在も 404 で sitemap に無い → 古いリンクから Google が覚えているだけの URL。放置が正しい
+ *   (2026-09-23 の verify-intent 唯一の pending は `/47` だった)
+ * - 現在 200 で未登録なのに sitemap に無い → 載せるか noindex にするかの判断が要る
+ *   (observe-after-fix 1,102 件中 105 件。観測を待っても sitemap 外のままでは状況が変わらない)
+ */
+export function refineBySitemap(cls, inSitemap) {
+  if (inSitemap !== false) return cls;
+  if (cls.verdict === "still-404") {
+    return { verdict: "dead-unlisted", action: "none", design: true };
+  }
+  if (cls.action === "observe-after-fix") {
+    return { verdict: "sitemap-gap", action: "sitemap-gap", design: false };
+  }
+  return cls;
+}
+
+/**
+ * バックログカードの対象 URL のうち、まだ処理されていないものを返す。
+ * 処理済み = pending でない、かつ done 以外は理由 (note) 付き。キューから消えた URL は
+ * GSC の未登録リストに居なくなったので処理済みとして扱う。
+ */
+export function findUnhandledBatchUrls(queue, urls) {
+  const byUrl = new Map(queue.map((entry) => [normalizeQueueUrl(entry.url), entry]));
+  return urls.filter((url) => {
+    const entry = byUrl.get(normalizeQueueUrl(url));
+    if (!entry) return false;
+    if (entry.status === "pending") return true;
+    if (entry.status === "done") return false;
+    return !(entry.note ?? "").trim();
+  });
+}

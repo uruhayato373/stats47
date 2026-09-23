@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   isIntentionallyNonIndexableResource,
+  readCanonicalUrl,
   readHtmlIndexSignals,
 } from "../coverage-policy.mjs";
 
@@ -46,4 +47,16 @@ test("通常の HTML route は対象のままにする", () => {
     isIntentionallyNonIndexableResource("https://stats47.jp/blog/example"),
     false,
   );
+});
+
+test("canonical は属性の順序に関係なく読み、無ければ null", () => {
+  assert.equal(
+    readCanonicalUrl('<link rel="canonical" href="https://stats47.jp/geo/layers/population-mesh">'),
+    "https://stats47.jp/geo/layers/population-mesh",
+  );
+  assert.equal(
+    readCanonicalUrl('<link href="https://stats47.jp/a" rel="canonical"/><link rel="alternate" href="x">'),
+    "https://stats47.jp/a",
+  );
+  assert.equal(readCanonicalUrl('<link rel="alternate" href="https://stats47.jp/a">'), null);
 });
