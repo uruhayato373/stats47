@@ -1,0 +1,105 @@
+{
+  "areaCode": "06000",
+  "prefCode": "06",
+  "areaName": "山形県",
+  "coverHook": "山形県、全国で何位？",
+  "teaser": {
+    "rankingKey": "cherry-consumption-quantity",
+    "label": "さくらんぼ消費量（県庁所在市）",
+    "rank": 1,
+    "value": 4821,
+    "unit": "g"
+  },
+  "canonicalUrl": "https://stats47.jp/areas/06000",
+  "groups": [
+    {
+      "title": "全国トップクラス",
+      "items": [
+        {
+          "rankingKey": "cherry-consumption-quantity",
+          "label": "さくらんぼ消費量（県庁所在市）",
+          "subtitle": "1世帯当たり年間",
+          "value": 4821,
+          "unit": "g",
+          "rank": 1,
+          "year": 2024,
+          "source": "総務省「家計調査」",
+          "scopeNote": "県庁所在市（山形市）の値"
+        },
+        {
+          "rankingKey": "beef-tongue-consumption-expenditure",
+          "label": "そば消費量（県庁所在市）",
+          "value": 3120,
+          "unit": "g",
+          "rank": 2,
+          "year": 2024,
+          "source": "総務省「家計調査」",
+          "scopeNote": "県庁所在市（山形市）の値"
+        },
+        {
+          "rankingKey": "public-library-count-per-population",
+          "label": "人口10万人当たり図書館数",
+          "value": 3.8,
+          "unit": "館",
+          "rank": 3,
+          "year": 2023,
+          "source": "文部科学省「社会教育調査」"
+        },
+        {
+          "rankingKey": "rice-field-ratio",
+          "label": "耕地面積に占める田の割合",
+          "value": 82.4,
+          "unit": "%",
+          "rank": 4,
+          "year": 2023,
+          "source": "農林水産省「耕地及び作付面積統計」"
+        }
+      ]
+    },
+    {
+      "title": "全国では下位",
+      "items": [
+        {
+          "rankingKey": "average-annual-temperature",
+          "label": "年平均気温",
+          "value": 12.1,
+          "unit": "℃",
+          "rank": 44,
+          "year": 2023,
+          "source": "気象庁「気象統計」"
+        },
+        {
+          "rankingKey": "foreign-resident-ratio",
+          "label": "人口に占める外国人の割合",
+          "value": 0.9,
+          "unit": "%",
+          "rank": 45,
+          "year": 2023,
+          "source": "法務省「在留外国人統計」"
+        },
+        {
+          "rankingKey": "night-population-outflow-ratio",
+          "label": "夜間人口の流出割合",
+          "value": 1.2,
+          "unit": "%",
+          "rank": 39,
+          "year": 2020,
+          "source": "総務省「国勢調査」"
+        },
+        {
+          "rankingKey": "convenience-store-count-per-population",
+          "label": "人口10万人当たりコンビニ数",
+          "value": 38.6,
+          "unit": "店",
+          "rank": 40,
+          "year": 2023,
+          "source": "経済産業省「商業統計」"
+        }
+      ]
+    }
+  ],
+  "generatedAt": "2026-09-23T00:00:00.000Z",
+  "sourceKeys": [
+    "https://storage.stats47.jp/app/ranking/cherry-consumption-quantity/item.json"
+  ]
+}

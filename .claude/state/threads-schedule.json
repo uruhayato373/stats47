@@ -1,0 +1,7 @@
+{
+  "_meta": {
+    "description": "Threads 予約投稿の schedule。post-threads-scheduled.yml が毎時 (07:17-23:17 JST) 読み、予定時刻を過ぎて 6 時間以内・台帳未投稿の最早 1 件だけを公開する。形式と検査は .claude/scripts/threads/post-from-schedule.cjs の先頭コメントと lib/threads-core.cjs。追記後は `node .claude/scripts/threads/post-from-schedule.cjs --dry-run` で本文長・UTM・画像 URL を確認する。",
+    "timezone": "Asia/Tokyo"
+  },
+  "entries": []
+}

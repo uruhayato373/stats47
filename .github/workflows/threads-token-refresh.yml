@@ -1,0 +1,85 @@
+name: 🔄 Threads token refresh (weekly)
+
+# Threads 長期トークン (60 日で失効) を th_refresh_token で延長し、GitHub Secret
+# THREADS_ACCESS_TOKEN を差し替える。更新できるのは発行から 24 時間以上・失効前のトークンのみで、
+# 60 日更新しないと失効して以後更新できない
+# (https://developers.facebook.com/docs/threads/get-started/long-lived-tokens ・アクセス日 2026-09-23)。
+# 週次で回せば常に失効前に延長できる。instagram-token-refresh.yml と同じ構成。
+#
+# 前提: secrets.GH_SECRETS_PAT (Secrets: Read and write の fine-grained PAT。IG と共用)。
+#       default GITHUB_TOKEN は Actions secrets を書き換えられない。
+
+on:
+  # 定期実行は止めている (2026-09-23): Threads は Playwright で Threads Web の予約機能を使う運用にした
+  # (.claude/skills/sns/publish-threads/)。Meta のトークンを登録して API 方式に切り替えるときに schedule を戻す。
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: threads-token-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+
+      - name: 🚦 Verify secrets are present
+        env:
+          GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+        run: |
+          MISSING=()
+          [ -n "$GH_SECRETS_PAT" ] || MISSING+=(GH_SECRETS_PAT)
+          [ -n "$THREADS_ACCESS_TOKEN" ] || MISSING+=(THREADS_ACCESS_TOKEN)
+          [ -n "$THREADS_USER_ID" ] || MISSING+=(THREADS_USER_ID)
+          if [ "${#MISSING[@]}" -gt 0 ]; then
+            echo "::error::未設定の secret: ${MISSING[*]}"
+            exit 1
+          fi
+          echo "✓ secrets present"
+
+      - name: 🔄 Refresh Threads token
+        id: refresh
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_TOKEN_OUT: /tmp/threads-new-token.txt
+        run: node .claude/scripts/threads/refresh-token-ci.cjs
+
+      - name: 🔐 Update GitHub Secret
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          NEW="$(cat /tmp/threads-new-token.txt)"
+          echo "::add-mask::$NEW"
+          if [ -z "$NEW" ]; then
+            echo "::error::新トークンが空。secret 更新を中止。"
+            exit 1
+          fi
+          gh secret set THREADS_ACCESS_TOKEN --body "$NEW"
+          echo "✅ Secret THREADS_ACCESS_TOKEN を更新しました"
+
+      - name: 🧹 Cleanup token file
+        if: always()
+        run: rm -f /tmp/threads-new-token.txt
+
+      - name: 📄 Step summary
+        if: always()
+        run: |
+          {
+            echo "# Threads token refresh"
+            echo ""
+            echo "- expires_at: ${{ steps.refresh.outputs.expires_at || 'N/A (失敗)' }}"
+            echo "- expires_in_days: ${{ steps.refresh.outputs.expires_in_days || 'N/A' }}"
+          } >> "$GITHUB_STEP_SUMMARY"

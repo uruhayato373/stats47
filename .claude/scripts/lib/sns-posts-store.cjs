@@ -28,6 +28,7 @@ const PLATFORM_LABEL = {
   youtube: "▶️ YouTube",
   tiktok: "🎵 TikTok",
   note: "📝 note",
+  threads: "🧵 Threads",
 };
 
 function regenerateLog(posts) {
@@ -66,6 +67,13 @@ function isVerifiedXPostUrl(postUrl) {
   );
 }
 
+/** Threads の投稿 permalink (threads.net / threads.com の /@user/post/<code>) か。 */
+function isVerifiedThreadsPostUrl(postUrl) {
+  return /^https:\/\/(?:www\.)?threads\.(?:net|com)\/@[A-Za-z0-9._]+\/post\/[A-Za-z0-9_-]+(?:[/?#]|$)/.test(
+    postUrl || "",
+  );
+}
+
 function assertRecordIntegrity(record) {
   if (
     record.platform === "x" &&
@@ -75,6 +83,18 @@ function assertRecordIntegrity(record) {
   ) {
     throw new Error(
       `X の posted レコードには確認済み post_url が必要です (id=${record.id ?? "new"})`,
+    );
+  }
+  // Threads も X と同じく「API が返した permalink がある行だけを posted にする」
+  // (予約時刻からの推定で posted にしない)
+  if (
+    record.platform === "threads" &&
+    record.status === "posted" &&
+    !record.deleted_at &&
+    !isVerifiedThreadsPostUrl(record.post_url)
+  ) {
+    throw new Error(
+      `Threads の posted レコードには確認済み post_url が必要です (id=${record.id ?? "new"})`,
     );
   }
 }
@@ -166,6 +186,7 @@ module.exports = {
   query,
   getById,
   isVerifiedXPostUrl,
+  isVerifiedThreadsPostUrl,
   assertRecordIntegrity,
   insert,
   updateById,

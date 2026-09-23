@@ -1,8 +1,14 @@
 import React from "react";
 
-import { FONT } from "@/shared";
+import {
+  IG_FONT,
+  IG_HEADLINE_STYLE,
+  IG_PILL_SOLID,
+  IG_SERIES,
+  IgSeriesCard,
+  IgSeriesFrame,
+} from "@/features/ig-series";
 
-import { QUIZ_COLORS, QuizFrame } from "./QuizFrame";
 import type { RankingQuizSpec, ResolvedRankingQuiz } from "./quiz";
 
 interface QuizQuestionSlideProps {
@@ -10,33 +16,35 @@ interface QuizQuestionSlideProps {
   quiz: ResolvedRankingQuiz;
 }
 
+const palette = IG_SERIES.quiz;
+
 /** 1枚目: 出題と選択肢。正解は3枚目で明かす */
 export const QuizQuestionSlide: React.FC<QuizQuestionSlideProps> = ({ spec, quiz }) => (
-  <QuizFrame pill="都道府県クイズ" swipeLabel="答えは3枚目" sourceLabel={spec.sourceLabel}>
+  <IgSeriesFrame series="quiz" tag="都道府県クイズ" swipeLabel="答えは3枚目" sourceLabel={spec.sourceLabel}>
     <h1
       style={{
+        ...IG_HEADLINE_STYLE,
         fontSize: 88,
-        fontWeight: FONT.weight.black,
-        lineHeight: 1.25,
+        lineHeight: 1.4,
         marginTop: 44,
+        letterSpacing: -1,
         whiteSpace: "pre-line",
       }}
     >
       {spec.question}
     </h1>
-    <p style={{ fontSize: 30, color: QUIZ_COLORS.muted, marginTop: 28 }}>{spec.scopeNote}</p>
-    <div style={{ marginTop: 48, display: "flex", flexDirection: "column", gap: 20 }}>
+    <p style={{ fontSize: 30, fontWeight: IG_FONT.weight.bold, marginTop: 24, color: palette.inkSmall }}>
+      {spec.scopeNote}
+    </p>
+    <div style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 20 }}>
       {quiz.choices.map((choice) => (
-        <div
+        <IgSeriesCard
           key={choice.prefCode}
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 36,
-            backgroundColor: QUIZ_COLORS.card,
-            border: `2px solid ${QUIZ_COLORS.border}`,
-            borderRadius: 24,
-            padding: "22px 40px",
+            gap: 28,
+            padding: "18px 32px",
           }}
         >
           <span
@@ -44,21 +52,21 @@ export const QuizQuestionSlide: React.FC<QuizQuestionSlideProps> = ({ spec, quiz
               width: 72,
               height: 72,
               borderRadius: "50%",
-              backgroundColor: QUIZ_COLORS.background,
-              border: `3px solid ${QUIZ_COLORS.highlight}`,
-              color: QUIZ_COLORS.highlight,
+              backgroundColor: IG_PILL_SOLID.background,
+              color: IG_PILL_SOLID.ink,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 40,
-              fontWeight: FONT.weight.black,
+              fontSize: 38,
+              fontWeight: IG_FONT.weight.black,
+              flexShrink: 0,
             }}
           >
             {choice.letter}
           </span>
-          <span style={{ fontSize: 54, fontWeight: FONT.weight.black }}>{choice.name}</span>
-        </div>
+          <span style={{ fontSize: 54, fontWeight: IG_FONT.weight.black }}>{choice.name}</span>
+        </IgSeriesCard>
       ))}
     </div>
-  </QuizFrame>
+  </IgSeriesFrame>
 );

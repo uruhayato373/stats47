@@ -3,11 +3,16 @@ import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 
 import { formatValueWithPrecision } from "@stats47/utils";
 
-import { FONT, type RankingMeta } from "@/shared";
+import {
+  IG_FONT,
+  IG_HEADLINE_STYLE,
+  IG_NUMBER_STYLE,
+  IG_SERIES,
+  IgSeriesReelFrame,
+} from "@/features/ig-series";
+import type { RankingMeta } from "@/shared";
 
-import { QUIZ_COLORS } from "../QuizFrame";
 import type { RankingQuizSpec, ResolvedRankingQuiz } from "../quiz";
-import { QuizReelFrame } from "./QuizReelFrame";
 
 interface QuizReelAnswerProps {
   spec: RankingQuizSpec;
@@ -16,9 +21,7 @@ interface QuizReelAnswerProps {
   precision: number;
 }
 
-const Emph: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <b style={{ color: QUIZ_COLORS.highlight, fontWeight: FONT.weight.black }}>{children}</b>
-);
+const palette = IG_SERIES.quiz;
 
 /** 10-13秒: 正解を発表（1位の県・値・2位との倍率）。scopeNote/footnote は必ず表示する */
 export const QuizReelAnswer: React.FC<QuizReelAnswerProps> = ({ spec, quiz, meta, precision }) => {
@@ -29,12 +32,11 @@ export const QuizReelAnswer: React.FC<QuizReelAnswerProps> = ({ spec, quiz, meta
   const valueSpring = spring({ frame: frame - 12, fps, config: { damping: 12 } });
 
   return (
-    <QuizReelFrame pill={`正解は ${quiz.answerLetter}`} sourceLabel={spec.sourceLabel}>
+    <IgSeriesReelFrame series="quiz" tag={`正解は ${quiz.answerLetter}`} sourceLabel={spec.sourceLabel}>
       <div
         style={{
-          fontSize: 168,
-          fontWeight: FONT.weight.black,
-          color: QUIZ_COLORS.highlight,
+          ...IG_HEADLINE_STYLE,
+          fontSize: 150,
           lineHeight: 1,
           opacity: nameSpring,
           transform: `scale(${interpolate(nameSpring, [0, 1], [0.7, 1])})`,
@@ -44,31 +46,36 @@ export const QuizReelAnswer: React.FC<QuizReelAnswerProps> = ({ spec, quiz, meta
       </div>
       <div
         style={{
-          marginTop: 26,
-          fontSize: 92,
-          fontWeight: FONT.weight.black,
+          marginTop: 24,
+          fontSize: 84,
           opacity: valueSpring,
           transform: `translateY(${interpolate(valueSpring, [0, 1], [24, 0])}px)`,
         }}
       >
-        {formatValueWithPrecision(first.value, precision)}
-        <span style={{ fontSize: 44, color: QUIZ_COLORS.muted, fontWeight: FONT.weight.bold }}>{meta.unit}</span>
+        <span style={{ ...IG_NUMBER_STYLE }}>{formatValueWithPrecision(first.value, precision)}</span>
+        <span style={{ fontSize: 40, fontWeight: IG_FONT.weight.bold }}>{meta.unit}</span>
       </div>
-      <p style={{ fontSize: 36, marginTop: 22, lineHeight: 1.5 }}>
+      <p style={{ fontSize: 34, fontWeight: IG_FONT.weight.bold, marginTop: 20, lineHeight: 1.5 }}>
         2位 {second.areaName}（{formatValueWithPrecision(second.value, precision)}
         {meta.unit}）
-        {quiz.ratioToRunnerUp && (
-          <>
-            の<Emph>約{quiz.ratioToRunnerUp}倍</Emph>
-          </>
-        )}
+        {quiz.ratioToRunnerUp && <>の約{quiz.ratioToRunnerUp}倍</>}
       </p>
-      <p style={{ fontSize: 28, marginTop: 8, color: QUIZ_COLORS.muted }}>{spec.scopeNote}</p>
+      <p style={{ fontSize: 26, fontWeight: IG_FONT.weight.bold, marginTop: 8, color: palette.inkSmall }}>
+        {spec.scopeNote}
+      </p>
       {spec.footnote && (
-        <p style={{ fontSize: 26, marginTop: 56, color: QUIZ_COLORS.muted, lineHeight: 1.6 }}>
+        <p
+          style={{
+            fontSize: 24,
+            fontWeight: IG_FONT.weight.bold,
+            marginTop: 48,
+            lineHeight: 1.6,
+            color: palette.inkSmall,
+          }}
+        >
           ※{spec.footnote}
         </p>
       )}
-    </QuizReelFrame>
+    </IgSeriesReelFrame>
   );
 };

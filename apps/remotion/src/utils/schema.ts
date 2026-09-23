@@ -1,6 +1,13 @@
 import { z } from "zod";
 
+import { COMPARE_CAROUSEL_SLIDES, CompareCarouselDataSchema } from "../features/compare-carousel-instagram/types";
+import { MAP_CAROUSEL_SLIDES, MapCarouselDataSchema } from "../features/map-carousel-instagram/types";
 import { QUIZ_SLIDES, RankingQuizSpecSchema } from "../features/ranking-quiz-instagram/quiz";
+import { AREA_CAROUSEL_SLIDES, AreaCarouselSpecSchema } from "../features/area-instagram/area";
+import {
+  CORRELATION_CAROUSEL_SLIDES,
+  CorrelationCarouselSpecSchema,
+} from "../features/correlation-instagram/correlation";
 
 /**
  * 共通のプレビュー Props スキーマ
@@ -59,6 +66,29 @@ export const RankingQuizCarouselSchema = CommonPreviewSchema.extend({
  */
 export const RankingQuizReelSchema = CommonPreviewSchema.extend({
   quiz: RankingQuizSpecSchema.optional(),
+});
+
+/**
+ * 地域カルーセル用スキーマ（slide で5枚を切替）。
+ *
+ * props.json (`build-ig-area-props.ts` の出力) は AreaCarouselSpecSchema の各フィールドを
+ * ラップせず直接トップレベルに持つため、ここでは `.partial()` した shape をそのまま展開する
+ * (Remotion の Composition schema は未宣言のキーを剥がすため、宣言しないと props が消える)。
+ * 実際の必須検証・矛盾検出は `features/area-instagram/area.ts` の `resolveAreaCarousel` が行う。
+ */
+export const AreaInstagramCarouselSchema = CommonPreviewSchema.extend(
+  AreaCarouselSpecSchema.partial().shape,
+).extend({
+  slide: z.enum(AREA_CAROUSEL_SLIDES).optional(),
+});
+
+/**
+ * 相関カルーセル用スキーマ（slide で5枚を切替）。地域カルーセルと同じ理由でトップレベル展開。
+ */
+export const CorrelationInstagramCarouselSchema = CommonPreviewSchema.extend(
+  CorrelationCarouselSpecSchema.partial().shape,
+).extend({
+  slide: z.enum(CORRELATION_CAROUSEL_SLIDES).optional(),
 });
 
 /**
@@ -183,6 +213,24 @@ export const ComparisonCarouselSchema = CommonPreviewSchema.extend({
     rankA: z.number(),
     rankB: z.number(),
   })).optional(),
+});
+
+/**
+ * 県どうしの比較カルーセル (ig-series 共通デザイン) 用スキーマ。slide で4枚を切替。
+ * data は build-ig-compare-props.ts が書き出す解決済み JSON (省略時は fixture サンプルへ fallback)。
+ */
+export const CompareCarouselInstagramSchema = CommonPreviewSchema.extend({
+  slide: z.enum(COMPARE_CAROUSEL_SLIDES).optional(),
+  data: CompareCarouselDataSchema.optional(),
+});
+
+/**
+ * 地図カルーセル (ig-series 共通デザイン) 用スキーマ。slide で4枚を切替。
+ * data は build-ig-map-props.ts が書き出す解決済み JSON (省略時は fixture サンプルへ fallback)。
+ */
+export const MapCarouselInstagramSchema = CommonPreviewSchema.extend({
+  slide: z.enum(MAP_CAROUSEL_SLIDES).optional(),
+  data: MapCarouselDataSchema.optional(),
 });
 
 /**

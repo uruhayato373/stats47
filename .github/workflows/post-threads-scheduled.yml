@@ -1,0 +1,83 @@
+name: 🧵 Threads scheduled post (hourly)
+
+# Threads API のコンテナ作成に予約公開のパラメータが無いため
+# (https://developers.facebook.com/docs/threads/reference/publishing/ ・アクセス日 2026-09-23)、
+# post-instagram-scheduled.yml と同じく cron で即時公開を発火して予約を代替する。
+# 投稿対象は .claude/state/threads-schedule.json。各実行は「予定時刻 (JST) を過ぎ、遅れ 6 時間以内、
+# 台帳 posts.json に posted が無い」最早の 1 件だけを公開し、台帳へ platform=threads で記録する。
+# 該当なしなら exit 0 で何もしない。判定は .claude/scripts/lib/threads-core.cjs (テスト付き)。
+
+on:
+  # 定期実行は止めている (2026-09-23): Threads は Playwright で Threads Web の予約機能を使う運用にした
+  # (.claude/skills/sns/publish-threads/)。Meta のトークンを登録して API 方式に切り替えるときに schedule を戻す。
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true なら API を呼ばず、投稿予定と本文検査の結果だけを表示する"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: post-threads-scheduled
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+
+      # 判定ロジック (due・二重投稿防止・文字数) が壊れた状態で公開しない
+      - name: 🧪 Threads core tests
+        run: node --test .claude/scripts/lib/__tests__/threads-core.test.cjs
+
+      - name: 🧵 Post to Threads (due entry only)
+        id: post
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          ARGS=()
+          if [ "${DRY_RUN}" = "true" ]; then ARGS+=(--dry-run); fi
+          node .claude/scripts/threads/post-from-schedule.cjs "${ARGS[@]}"
+
+      # 公開後に後段が落ちても、台帳に書けた分は必ず develop へ戻す (always)。
+      # 台帳が戻らなくても、次回実行は自アカウントの直近投稿と本文を照合して再投稿を止める。
+      - name: 📝 Commit ledger (posts.json)
+        if: always() && inputs.dry_run != true
+        run: |
+          if git diff --quiet -- .claude/state/sns/posts.json .claude/state/sns/post-log.md; then
+            echo "台帳の変更なし"
+            exit 0
+          fi
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add .claude/state/sns/posts.json .claude/state/sns/post-log.md
+          git commit -m "chore(threads): record ${{ steps.post.outputs.content_key || 'scheduled post' }} [skip ci]"
+          git pull --rebase --autostash origin develop
+          git push origin develop
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          {
+            echo "# Threads Scheduled Post — $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+            echo ""
+            echo "- dry_run: ${{ inputs.dry_run || false }}"
+            echo "- content_key: ${{ steps.post.outputs.content_key }}"
+            echo "- permalink: ${{ steps.post.outputs.permalink }}"
+          } >> "$GITHUB_STEP_SUMMARY"

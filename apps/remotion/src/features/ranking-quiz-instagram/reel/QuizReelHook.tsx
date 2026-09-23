@@ -1,15 +1,15 @@
 import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 
-import { FONT } from "@/shared";
+import { IG_FONT, IG_HEADLINE_STYLE, IG_SERIES, IgSeriesReelFrame } from "@/features/ig-series";
 
-import { QUIZ_COLORS } from "../QuizFrame";
 import type { RankingQuizSpec } from "../quiz";
-import { QuizReelFrame } from "./QuizReelFrame";
 
 interface QuizReelHookProps {
   spec: RankingQuizSpec;
 }
+
+const palette = IG_SERIES.quiz;
 
 /** 0-3秒: 「予想してみて」の一言 + 出題を大きく見せるフック */
 export const QuizReelHook: React.FC<QuizReelHookProps> = ({ spec }) => {
@@ -19,12 +19,11 @@ export const QuizReelHook: React.FC<QuizReelHookProps> = ({ spec }) => {
   const questionSpring = spring({ frame: frame - 12, fps, config: { damping: 14 } });
 
   return (
-    <QuizReelFrame pill="都道府県クイズ" sourceLabel={spec.sourceLabel}>
+    <IgSeriesReelFrame series="quiz" tag="都道府県クイズ" sourceLabel={spec.sourceLabel}>
       <div
         style={{
           fontSize: 44,
-          fontWeight: FONT.weight.black,
-          color: QUIZ_COLORS.highlight,
+          fontWeight: IG_FONT.weight.black,
           opacity: hookSpring,
           transform: `translateY(${interpolate(hookSpring, [0, 1], [24, 0])}px)`,
         }}
@@ -33,10 +32,10 @@ export const QuizReelHook: React.FC<QuizReelHookProps> = ({ spec }) => {
       </div>
       <h1
         style={{
-          fontSize: 92,
-          fontWeight: FONT.weight.black,
-          lineHeight: 1.28,
-          marginTop: 36,
+          ...IG_HEADLINE_STYLE,
+          fontSize: 84,
+          lineHeight: 1.4,
+          marginTop: 32,
           whiteSpace: "pre-line",
           opacity: questionSpring,
           transform: `translateY(${interpolate(questionSpring, [0, 1], [36, 0])}px)`,
@@ -44,7 +43,9 @@ export const QuizReelHook: React.FC<QuizReelHookProps> = ({ spec }) => {
       >
         {spec.question}
       </h1>
-      <p style={{ fontSize: 32, color: QUIZ_COLORS.muted, marginTop: 28 }}>{spec.scopeNote}</p>
-    </QuizReelFrame>
+      <p style={{ fontSize: 30, fontWeight: IG_FONT.weight.bold, marginTop: 24, color: palette.inkSmall }}>
+        {spec.scopeNote}
+      </p>
+    </IgSeriesReelFrame>
   );
 };

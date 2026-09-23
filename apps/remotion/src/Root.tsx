@@ -24,6 +24,10 @@ import { RankingTableSlidePreview } from './features/ranking-instagram/previews/
 import { RankingQuizCarouselPreview } from './features/ranking-quiz-instagram/previews/RankingQuizCarouselPreview';
 import { RankingQuizReelPreview } from './features/ranking-quiz-instagram/reel/previews/RankingQuizReelPreview';
 import { getQuizReelTimeline } from './features/ranking-quiz-instagram/reel/timeline';
+// area-instagram (地域カルーセル・火/土枠)
+import { AreaInstagramCarouselPreview } from './features/area-instagram/previews/AreaInstagramCarouselPreview';
+// correlation-instagram (相関カルーセル・水枠)
+import { CorrelationInstagramCarouselPreview } from './features/correlation-instagram/previews/CorrelationInstagramCarouselPreview';
 // buzz-map (バズ地図カード)
 import { BuzzMapStillPreview } from './features/buzz-map/previews/BuzzMapStillPreview';
 import {
@@ -52,6 +56,10 @@ import { NoteCoverPreview } from './features/ranking-note/previews/NoteCoverPrev
 import { KazuNoteCoverPreview } from './features/kazu-note/previews/KazuNoteCoverPreview';
 // compare-instagram
 import { ComparisonCarouselPreview } from './features/compare-instagram/previews/ComparisonCarouselPreview';
+// compare-carousel-instagram (ig-series 共通デザイン・県どうしの比較)
+import { CompareCarouselInstagramPreview } from './features/compare-carousel-instagram/previews/CompareCarouselInstagramPreview';
+// map-carousel-instagram (ig-series 共通デザイン・地図)
+import { MapCarouselInstagramPreview } from './features/map-carousel-instagram/previews/MapCarouselInstagramPreview';
 // compare-short
 import { ComparisonShortPreview } from './features/compare-short/previews/ComparisonShortPreview';
 import { getComparisonShortTimeline } from './features/compare-short/ComparisonShort';
@@ -91,8 +99,10 @@ import {
   BarChartRaceShortSchema,
   CarouselPreviewSchema,
   CommonPreviewSchema,
+  CompareCarouselInstagramSchema,
   ComparisonCarouselSchema,
   ComparisonShortSchema,
+  MapCarouselInstagramSchema,
   PopulationChoroplethSchema,
   MigrationFlowSchema,
   StationPassengersSchema,
@@ -101,6 +111,8 @@ import {
   RankingShortSchema,
   RankingQuizCarouselSchema,
   RankingQuizReelSchema,
+  AreaInstagramCarouselSchema,
+  CorrelationInstagramCarouselSchema,
   RankingTablePreviewSchema,
   ThumbnailPreviewSchema,
   TileGridMapScenePreviewSchema,
@@ -726,6 +738,20 @@ export const RemotionRoot: React.FC = () => {
               showSafeAreas: false,
             }}
           />
+
+          {/* 県どうしの比較カルーセル (ig-series 共通デザイン・4:5・4枚。金枠 §2-3c) */}
+          <Composition
+            id="CompareCarouselInstagram-Carousel"
+            component={CompareCarouselInstagramPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={CompareCarouselInstagramSchema}
+            defaultProps={{
+              slide: 'cover' as const,
+            }}
+          />
         </Folder>
 
         <Folder name="Short">
@@ -747,6 +773,24 @@ export const RemotionRoot: React.FC = () => {
         </Folder>
       </Folder>
 
+      <Folder name="MapCarousel">
+        <Folder name="Instagram">
+          {/* 地図カルーセル (ig-series 共通デザイン・4:5・4枚。日枠 §2-3c) */}
+          <Composition
+            id="MapCarouselInstagram-Carousel"
+            component={MapCarouselInstagramPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={MapCarouselInstagramSchema}
+            defaultProps={{
+              slide: 'cover' as const,
+            }}
+          />
+        </Folder>
+      </Folder>
+
       <Folder name="AreaProfile">
         <Folder name="Instagram">
           {/* 地域プロファイル カルーセル (1080x1350) */}
@@ -763,6 +807,44 @@ export const RemotionRoot: React.FC = () => {
               theme: 'dark' as const,
               showGuides: false,
               showSafeAreas: false,
+            }}
+          />
+        </Folder>
+      </Folder>
+
+      {/* 地域カルーセル (火・土枠。正典 .claude/rules/sns-content-standards.md §2-3c) */}
+      <Folder name="AreaCarousel">
+        <Folder name="Instagram">
+          {/* 地域カルーセル (4:5・5枚: cover/top/bottom/sources/outro) */}
+          <Composition
+            id="AreaInstagram-Carousel"
+            component={AreaInstagramCarouselPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={AreaInstagramCarouselSchema}
+            defaultProps={{
+              slide: 'cover' as const,
+            }}
+          />
+        </Folder>
+      </Folder>
+
+      {/* 相関カルーセル (水枠。正典 .claude/rules/sns-content-standards.md §2-3c) */}
+      <Folder name="CorrelationCarousel">
+        <Folder name="Instagram">
+          {/* 相関カルーセル (4:5・5枚: cover/scatter/highlights/caution/outro) */}
+          <Composition
+            id="CorrelationInstagram-Carousel"
+            component={CorrelationInstagramCarouselPreview}
+            width={CANVAS.carousel.width}
+            height={CANVAS.carousel.height}
+            fps={1}
+            durationInFrames={1}
+            schema={CorrelationInstagramCarouselSchema}
+            defaultProps={{
+              slide: 'cover' as const,
             }}
           />
         </Folder>

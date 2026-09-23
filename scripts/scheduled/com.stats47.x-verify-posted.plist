@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  X の公開済み確認 (毎日 23:40 JST + ログイン時)。ローカル Mac 限定。
+  スリープ中に時刻が来た回は、起きたときに 1 回にまとめて実行される。
+  インストール (人間の明示操作。.local/playwright-x-profile で @stats47jp373 にログイン済みであること):
+    cp scripts/scheduled/com.stats47.x-verify-posted.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.stats47.x-verify-posted.plist
+  アンインストール:
+    launchctl unload ~/Library/LaunchAgents/com.stats47.x-verify-posted.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stats47.x-verify-posted</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/minamidaisuke/stats47/scripts/scheduled/x-verify-posted.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>23</integer>
+        <key>Minute</key>
+        <integer>40</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/minamidaisuke/stats47</string>
+    <key>StandardOutPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/x-verify-posted.launchd.out</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/x-verify-posted.launchd.err</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>

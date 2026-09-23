@@ -1,0 +1,347 @@
+{
+  "generatedAt": "2026-09-23T00:00:00.000Z",
+  "x": {
+    "key": "aging-rate",
+    "label": "高齢化率",
+    "unit": "%",
+    "year": "2023",
+    "source": "総務省「人口推計」",
+    "category": "population"
+  },
+  "y": {
+    "key": "clinic-count-per-100k",
+    "label": "人口10万人当たり診療所数",
+    "unit": "施設",
+    "year": "2022",
+    "source": "厚生労働省「医療施設調査」",
+    "category": "socialsecurity"
+  },
+  "points": [
+    {
+      "prefCode": "01",
+      "name": "北海道",
+      "x": 24.3,
+      "y": 51.2
+    },
+    {
+      "prefCode": "02",
+      "name": "青森県",
+      "x": 25.1,
+      "y": 53.2
+    },
+    {
+      "prefCode": "03",
+      "name": "岩手県",
+      "x": 23.1,
+      "y": 46.2
+    },
+    {
+      "prefCode": "04",
+      "name": "宮城県",
+      "x": 23.6,
+      "y": 39.8
+    },
+    {
+      "prefCode": "05",
+      "name": "秋田県",
+      "x": 24.6,
+      "y": 51.7
+    },
+    {
+      "prefCode": "06",
+      "name": "山形県",
+      "x": 25,
+      "y": 47.5
+    },
+    {
+      "prefCode": "07",
+      "name": "福島県",
+      "x": 25.5,
+      "y": 56.6
+    },
+    {
+      "prefCode": "08",
+      "name": "茨城県",
+      "x": 27.4,
+      "y": 62
+    },
+    {
+      "prefCode": "09",
+      "name": "栃木県",
+      "x": 22.9,
+      "y": 38.5
+    },
+    {
+      "prefCode": "10",
+      "name": "群馬県",
+      "x": 26.1,
+      "y": 57.1
+    },
+    {
+      "prefCode": "11",
+      "name": "埼玉県",
+      "x": 23.5,
+      "y": 44.1
+    },
+    {
+      "prefCode": "12",
+      "name": "千葉県",
+      "x": 24.7,
+      "y": 48.6
+    },
+    {
+      "prefCode": "13",
+      "name": "東京都",
+      "x": 27.2,
+      "y": 51.1
+    },
+    {
+      "prefCode": "14",
+      "name": "神奈川県",
+      "x": 26.8,
+      "y": 58.5
+    },
+    {
+      "prefCode": "15",
+      "name": "新潟県",
+      "x": 26.5,
+      "y": 57.2
+    },
+    {
+      "prefCode": "16",
+      "name": "富山県",
+      "x": 25,
+      "y": 54.5
+    },
+    {
+      "prefCode": "17",
+      "name": "石川県",
+      "x": 27.5,
+      "y": 53.7
+    },
+    {
+      "prefCode": "18",
+      "name": "福井県",
+      "x": 30.2,
+      "y": 62.5
+    },
+    {
+      "prefCode": "19",
+      "name": "山梨県",
+      "x": 27.3,
+      "y": 60.1
+    },
+    {
+      "prefCode": "20",
+      "name": "長野県",
+      "x": 27.4,
+      "y": 51.6
+    },
+    {
+      "prefCode": "21",
+      "name": "岐阜県",
+      "x": 31.9,
+      "y": 67.9
+    },
+    {
+      "prefCode": "22",
+      "name": "静岡県",
+      "x": 30.3,
+      "y": 71.9
+    },
+    {
+      "prefCode": "23",
+      "name": "愛知県",
+      "x": 28.5,
+      "y": 62.6
+    },
+    {
+      "prefCode": "24",
+      "name": "三重県",
+      "x": 27.5,
+      "y": 52.4
+    },
+    {
+      "prefCode": "25",
+      "name": "滋賀県",
+      "x": 29.9,
+      "y": 68.7
+    },
+    {
+      "prefCode": "26",
+      "name": "京都府",
+      "x": 33,
+      "y": 73.7
+    },
+    {
+      "prefCode": "27",
+      "name": "大阪府",
+      "x": 31,
+      "y": 64.7
+    },
+    {
+      "prefCode": "28",
+      "name": "兵庫県",
+      "x": 34.1,
+      "y": 80.1
+    },
+    {
+      "prefCode": "29",
+      "name": "奈良県",
+      "x": 30.7,
+      "y": 68.3
+    },
+    {
+      "prefCode": "30",
+      "name": "和歌山県",
+      "x": 32.5,
+      "y": 77.1
+    },
+    {
+      "prefCode": "31",
+      "name": "鳥取県",
+      "x": 32.9,
+      "y": 78
+    },
+    {
+      "prefCode": "32",
+      "name": "島根県",
+      "x": 35.7,
+      "y": 83.4
+    },
+    {
+      "prefCode": "33",
+      "name": "岡山県",
+      "x": 34,
+      "y": 76.1
+    },
+    {
+      "prefCode": "34",
+      "name": "広島県",
+      "x": 34.3,
+      "y": 80.3
+    },
+    {
+      "prefCode": "35",
+      "name": "山口県",
+      "x": 32,
+      "y": 71.9
+    },
+    {
+      "prefCode": "36",
+      "name": "徳島県",
+      "x": 31.4,
+      "y": 64.6
+    },
+    {
+      "prefCode": "37",
+      "name": "香川県",
+      "x": 34.4,
+      "y": 78.2
+    },
+    {
+      "prefCode": "38",
+      "name": "愛媛県",
+      "x": 33.6,
+      "y": 82.6
+    },
+    {
+      "prefCode": "39",
+      "name": "高知県",
+      "x": 32.7,
+      "y": 72
+    },
+    {
+      "prefCode": "40",
+      "name": "福岡県",
+      "x": 35,
+      "y": 81.6
+    },
+    {
+      "prefCode": "41",
+      "name": "佐賀県",
+      "x": 36.5,
+      "y": 82.7
+    },
+    {
+      "prefCode": "42",
+      "name": "長崎県",
+      "x": 34,
+      "y": 78.1
+    },
+    {
+      "prefCode": "43",
+      "name": "熊本県",
+      "x": 38.3,
+      "y": 89.6
+    },
+    {
+      "prefCode": "44",
+      "name": "大分県",
+      "x": 36.6,
+      "y": 87
+    },
+    {
+      "prefCode": "45",
+      "name": "宮崎県",
+      "x": 37.2,
+      "y": 92.7
+    },
+    {
+      "prefCode": "46",
+      "name": "鹿児島県",
+      "x": 40.1,
+      "y": 92.6
+    },
+    {
+      "prefCode": "47",
+      "name": "沖縄県",
+      "x": 36,
+      "y": 82.3
+    }
+  ],
+  "r": 0.62,
+  "rPopulationAdjusted": 0.58,
+  "n": 47,
+  "highlights": {
+    "trendAnchors": [
+      {
+        "areaCode": "47",
+        "name": "沖縄県",
+        "x": 36,
+        "y": 82.3
+      },
+      {
+        "areaCode": "13",
+        "name": "東京都",
+        "x": 27.2,
+        "y": 51.1
+      }
+    ],
+    "outliers": [
+      {
+        "areaCode": "27",
+        "name": "大阪府",
+        "x": 31,
+        "y": 64.7
+      },
+      {
+        "areaCode": "03",
+        "name": "岩手県",
+        "x": 23.1,
+        "y": 46.2
+      }
+    ]
+  },
+  "hook": "高齢化率が高い県ほど、診療所も多い？",
+  "caution": "相関は因果関係を示しません。人口の影響を除くと r=0.58",
+  "blogUrl": "https://stats47.jp/blog/aging-rate-vs-clinic-count-per-100k",
+  "canonicalUrl": {
+    "x": "https://stats47.jp/ranking/aging-rate",
+    "y": "https://stats47.jp/ranking/clinic-count-per-100k"
+  },
+  "provenance": [
+    "https://storage.stats47.jp/app/ranking/aging-rate/item.json",
+    "https://storage.stats47.jp/app/ranking/clinic-count-per-100k/item.json"
+  ]
+}

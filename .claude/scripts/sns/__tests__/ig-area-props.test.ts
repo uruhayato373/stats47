@@ -58,6 +58,20 @@ test("extractCuratedRankingKeys は ranked-kpi-grid と gender-paired-kpi の ra
   assert.deepEqual(keys.sort(), ["a", "b", "c-female", "c-male", "d"]);
 });
 
+test("extractCuratedRankingKeys は未成年の身長・体重・死亡率・自殺率・生活保護を SNS 候補から外す", () => {
+  const keys = extractCuratedRankingKeys({
+    sections: [{ blocks: [{ blockType: "ranked-kpi-grid", metrics: [
+      { rankingKey: "average-weight-high-school-second-grade-female" },
+      { rankingKey: "avg-height-high-school-2nd-male" },
+      { rankingKey: "crude-death-rate" },
+      { rankingKey: "suicide-rate-per-100k" },
+      { rankingKey: "households-on-public-assistance-per-1000" },
+      { rankingKey: "owner-occupied-housing-ratio" },
+    ] }] }],
+  });
+  assert.deepEqual(keys, ["owner-occupied-housing-ratio"]);
+});
+
 test("classifyRank はトップ10以内/下位10以内だけを分類し、中位は null", () => {
   assert.equal(classifyRank(1), "top");
   assert.equal(classifyRank(10), "top");

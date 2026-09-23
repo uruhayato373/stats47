@@ -108,7 +108,7 @@ captions.json の 1 要素例:
 node .claude/skills/sns/post-x-batch/scripts/lint-x-captions.cjs --in .local/r2/sns/_queue/captions.json
 ```
 
-- 検査: 文字数 (≤ charMax) / ハッシュタグ 3-5 / `{{url}}` ちょうど 1・生 URL 禁止 / NG 語 / 既存・同バッチ類似度 < 0.8。
+- 検査: 文字数 (≤ charMax) / X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23) / ハッシュタグ 3-5 / `{{url}}` ちょうど 1・生 URL 禁止 / NG 語 / 既存・同バッチ類似度 < 0.8。
 - **FAIL があれば exit 1**。指摘行を ③ で修正して再 lint。全 PASS まで ⑤ に進めない。
 
 ### ⑤ draft 登録 (決定的)

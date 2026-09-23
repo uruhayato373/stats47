@@ -146,6 +146,14 @@ export interface DatabookTemplateLike {
  * ranked-kpi-grid の metrics と gender-paired-kpi の男女ペアを対象にする
  * (chart ブロックは複数指標の可視化であり、単一の順位カードには使えないため除外)。
  */
+/**
+ * 「全国トップクラス / 全国では下位」の型に載せない指標。県ページのデータブックには出すが、
+ * SNS の地域カルーセルでは県の看板に見えてしまうため候補から外す
+ * (未成年の身長・体重、死亡率・自殺率、生活保護)。2026-09-23 に山形県の表紙が
+ * 「高校2年女子の平均体重 全国1位」、大阪府の表紙が「生活保護世帯 全国1位」になったことで追加。
+ */
+export const SNS_EXCLUDED_KEY_PATTERN = /(^|-)(height|weight)(-|$)|death|suicide|public-assistance/;
+
 export function extractCuratedRankingKeys(template: DatabookTemplateLike): string[] {
   const keys: string[] = [];
   for (const section of template.sections) {
@@ -160,7 +168,7 @@ export function extractCuratedRankingKeys(template: DatabookTemplateLike): strin
       }
     }
   }
-  return [...new Set(keys)];
+  return [...new Set(keys)].filter((k) => !SNS_EXCLUDED_KEY_PATTERN.test(k));
 }
 
 /** グループ間で重複排除するための可変状態 (家族/ラベルは両グループで共有)。 */

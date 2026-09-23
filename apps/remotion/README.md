@@ -94,6 +94,25 @@ npx remotion render src/index.ts RankingQuizInstagram-Reel \
 `{"type":"reels","domain":"ranking-quiz-reel","content_key":"<rankingKey>",...}` を足すと IG cron が投稿する。
 詳細は `.claude/rules/sns-content-standards.md` §2-4。
 
+### AreaCarousel / CorrelationCarousel (地域・相関カルーセル・火水土枠)
+
+| ID | サイズ | 用途 |
+|----|--------|------|
+| `AreaInstagram-Carousel` | 1080x1350 | 地域カルーセル（`slide`: cover / top / bottom / sources / outro） |
+| `CorrelationInstagram-Carousel` | 1080x1350 | 相関カルーセル（`slide`: cover / scatter / highlights / caution / outro） |
+
+props.json はそれぞれ `.claude/scripts/sns/build-ig-area-props.ts` / `build-ig-correlation-props.ts` の
+出力をそのまま渡す（トップレベルのフィールドを直接持ち、`quiz` のようなラップキーは無い）。型と矛盾検出は
+`src/features/area-instagram/area.ts` / `src/features/correlation-instagram/correlation.ts` の
+`resolveAreaCarousel` / `resolveCorrelationCarousel`。props が欠けている・矛盾している場合は throw して
+レンダーを失敗させる。stills + caption.txt の一括書き出しは以下 1 本で完結する
+(`.claude/rules/sns-content-standards.md` §2-3c・出力先は同ファイル参照):
+
+```bash
+npx tsx .claude/scripts/sns/render-ig-carousel.ts --domain area --props <area props.json>
+npx tsx .claude/scripts/sns/render-ig-carousel.ts --domain correlation --props <correlation props.json>
+```
+
 ### Social-Media
 
 | ID | サイズ | 用途 |

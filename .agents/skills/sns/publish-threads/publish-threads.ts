@@ -1,0 +1,1 @@
+../../../../.claude/skills/sns/publish-threads/publish-threads.ts
