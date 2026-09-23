@@ -570,8 +570,9 @@ function checkSnsChannelPolicy(findings, scope) {
   if (!rule) return;
 
   const errors = [];
-  if (!rule.includes("| **YouTube** | **限定 pilot**")) {
-    errors.push([files.rule, "YouTube 限定 pilot のチャネル行が無い"]);
+  // 2026-09-23 オーナー判断で YouTube は「保留 (新規投稿なし)」。pilot より厳しい状態なので同じく許容する
+  if (!rule.includes("| **YouTube** | **限定 pilot**") && !rule.includes("| **YouTube** | **保留")) {
+    errors.push([files.rule, "YouTube 限定 pilot (または保留) のチャネル行が無い"]);
   }
   if (!rule.includes("通常動画をマスターコンテンツにする")) {
     errors.push([files.rule, "YouTube master-first 契約が無い"]);
