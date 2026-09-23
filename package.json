@@ -74,6 +74,7 @@
     "preflight": "node .claude/scripts/lib/preflight-commit.mjs",
     "preflight:pr": "node .claude/scripts/lib/preflight-commit.mjs --pr",
     "test:content-routines": "node --test .claude/scripts/lib/__tests__/content-generation-routine.test.cjs .claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs .claude/scripts/lib/__tests__/record-claude-usage.test.mjs",
+    "test:ig-ledger": "node --test .claude/scripts/lib/__tests__/ig-ledger-core.test.cjs .claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs",
     "note:catalog:validate": "tsx .claude/scripts/note/catalog/validate-note-catalog.ts",
     "note:circulation:audit": "node .claude/scripts/note/audit-note-circulation.mjs",
     "note:covers:audit": "node .claude/scripts/note/audit-note-covers.mjs",

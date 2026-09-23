@@ -755,16 +755,6 @@ updated: 2026-09-21
 - **完了条件**: 都道府県 top-n spec をレンダーして上位県が塗られ、テストが「5桁キーのまま」の実装で落ちる。
 
 
-### [IG-LEDGER-TESTS-CI-01] IG 台帳・予約投稿のテストを CI で実行する
-
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/ig-ledger-core.test.cjs .claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs] [起票:2026-09-23]
-
-- **owner**: devops-runner
-- **実測 (2026-09-23)**: `ig-ledger-core.test.cjs` と `ig-post-from-schedule.test.cjs` は `package.json` の test スクリプトにも `.github/workflows/` にも名前が出てこない。PR #1008 でカルーセル投稿と `post_type=carousel` の記録を足したが、その回帰を CI が検出できない。
-- **次**: 既存の test スクリプト群 (`test:content-routines` 等と同じ `node --test` 列挙) のどれかに2ファイルを足すか、IG 用スクリプトを新設して `pr-quality-check.yml` から呼ぶ。`scripts/lib/__tests__` の CI 網羅を検査する既存 gate があればそちらへ登録する。
-- **完了条件**: 2ファイルのどちらかを壊した PR で CI が落ちる。
-
-
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug real-disposable-income-reversal] [起票:2026-09-19] [期日:2026-10-17]
