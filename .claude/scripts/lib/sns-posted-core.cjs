@@ -1,9 +1,9 @@
 "use strict";
 
 /**
- * Threads の公開済み確認の判定 (純粋関数)。IO は .claude/scripts/sns/verify-threads-posted.cjs が持つ。
+ * SNS の公開済み確認の判定 (純粋関数)。IO は .claude/scripts/sns/verify-{threads,x}-posted.cjs が持つ。
  *
- * 台帳 (posts.json) の Threads 行のうち予約時刻を過ぎたもの (status draft / scheduled) を、
+ * 台帳 (posts.json) の行のうち予約時刻を過ぎたもの (Threads は draft / scheduled、X は scheduled) を、
  * 自アカウントの公開プロフィールで見えた投稿のまとまりの文字 (ユーザー名・時刻の後に本文が続く) が
  * 本文の 1 行目を含むかで突き合わせ、一致したものだけ
  * posted + permalink にする。時刻の経過だけでは posted にしない (X と同じ方針。memory
@@ -32,15 +32,18 @@ function fingerprint(caption) {
  * @param {Array<{id:number,platform:string,status:string,caption:string,scheduled_at:string,deleted_at?:string}>} rows
  * @param {Array<{permalink:string,text:string,publishedAt?:string|null}>} scraped
  * @param {Date} now
+ * @param {{platform?:string,statuses?:string[]}} [opts] 既定は Threads (draft / scheduled)
  * @returns {{ updates: Array<{id:number,post_url:string,posted_at:string}>, overdue: number[] }}
  *   updates: posted にする行 / overdue: 予約時刻から 24 時間以上たっても見つからない行
  */
-function matchPosted(rows, scraped, now) {
+function matchPosted(rows, scraped, now, opts = {}) {
+  const platform = opts.platform || "threads";
+  const statuses = opts.statuses || ["draft", "scheduled"];
   const due = rows.filter(
     (r) =>
-      r.platform === "threads" &&
+      r.platform === platform &&
       !r.deleted_at &&
-      (r.status === "draft" || r.status === "scheduled") &&
+      statuses.includes(r.status) &&
       Date.parse(r.scheduled_at) <= now.getTime(),
   );
   const pool = scraped.map((p) => ({ ...p, norm: normalizeText(p.text), used: false }));

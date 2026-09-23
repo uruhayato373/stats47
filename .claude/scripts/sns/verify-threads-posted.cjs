@@ -5,7 +5,7 @@
  * Threads の公開済み確認。ログインせずに自アカウントの公開プロフィールを開き、見えた投稿の
  * permalink と本文 (描画後の画面の投稿ごとの文字) を集めて、台帳 posts.json の Threads 行と
  * 本文 1 行目で突き合わせる。一致した行だけ status=posted + post_url (permalink) にする。
- * 判定は lib/threads-posted-core.cjs (テスト付き)。
+ * 判定は lib/sns-posted-core.cjs (テスト付き)。
  *
  * CI (.github/workflows/sns-verify-threads-posted.yml) が毎晩動かし、台帳を develop へ戻す。
  * ローカルでも同じコマンドで動く (ログイン不要)。
@@ -22,7 +22,7 @@
 const path = require("node:path");
 const { chromium } = require("playwright");
 const store = require(path.join(__dirname, "../lib/sns-posts-store.cjs"));
-const core = require(path.join(__dirname, "../lib/threads-posted-core.cjs"));
+const core = require(path.join(__dirname, "../lib/sns-posted-core.cjs"));
 
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36";

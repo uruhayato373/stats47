@@ -4,7 +4,7 @@ name: 🧵 Threads posted verification (daily)
 # 公開されたかは、ログインせずに @stats47jp の公開プロフィールを開き、見えた投稿の本文と permalink を
 # 台帳 posts.json の Threads 行 (予約時刻を過ぎた draft / scheduled) と本文 1 行目で突き合わせて確かめる。
 # 一致した行だけ posted + post_url にし、台帳を develop へ戻す。時刻の経過だけでは posted にしない。
-# 判定は .claude/scripts/lib/threads-posted-core.cjs (テスト付き)。
+# 判定は .claude/scripts/lib/sns-posted-core.cjs (テスト付き)。
 #
 # schedule は既定ブランチ (main) の workflow だけが動く。develop への push では、CI から
 # 公開プロフィールが読めるかの確認 (台帳は書かない dry-run) だけを行う。
@@ -23,7 +23,7 @@ on:
     paths:
       - .github/workflows/sns-verify-threads-posted.yml
       - .claude/scripts/sns/verify-threads-posted.cjs
-      - .claude/scripts/lib/threads-posted-core.cjs
+      - .claude/scripts/lib/sns-posted-core.cjs
 
 permissions:
   contents: write
@@ -54,7 +54,7 @@ jobs:
 
       # 照合ロジックが壊れた状態で台帳を書かない
       - name: 🧪 Threads posted core tests
-        run: node --test .claude/scripts/lib/__tests__/threads-posted-core.test.cjs
+        run: node --test .claude/scripts/lib/__tests__/sns-posted-core.test.cjs
 
       # push 時は CI から公開プロフィールが読めるかだけを確かめる (投稿の多い公開アカウントで取得経路を見る)
       - name: 🔎 Probe public profile access

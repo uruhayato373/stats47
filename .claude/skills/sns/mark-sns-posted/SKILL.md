@@ -34,6 +34,11 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply     # scheduled→poste
 
 - X の実投稿 URL (`post_url`) が確認済みの行だけ昇格する。時刻超過だけの行は `HOLD` として保留する。
 - 週次運用では先に X 側で実投稿 URL を照合・記録し、その後に実行する。
+- **自動化 (2026-09-23〜)**: Mac の launchd (`scripts/scheduled/x-verify-posted.sh`、毎晩 23:40) が
+  `node .claude/scripts/sns/verify-x-posted.cjs --record` で X の実投稿 URL を照合し、`.local/x-posted.jsonl` に残す
+  (24 時間たっても見つからない予約は通知)。台帳への反映はコミット時に `--apply` を実行する (本文 1 行目が一致した
+  scheduled 行を posted + status URL にする)。Threads は CI (`sns-verify-threads-posted.yml`) が台帳まで反映し、
+  Instagram は投稿した CI が記録する
 
 ## 手順
 

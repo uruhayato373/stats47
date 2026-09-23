@@ -2,7 +2,7 @@
 
 const assert = require("node:assert/strict");
 const test = require("node:test");
-const { fingerprint, matchPosted } = require("../threads-posted-core.cjs");
+const { fingerprint, matchPosted } = require("../sns-posted-core.cjs");
 
 const NOW = new Date("2026-09-25T00:00:00Z");
 const row = (id, caption, scheduledAt, status = "draft") => ({
@@ -58,4 +58,19 @@ test("同じ公開投稿を 2 行に割り当てない / posted・deleted・他 
   const scraped = [{ permalink: "https://www.threads.com/@stats47jp/post/CCC", text: cap }];
   const { updates } = matchPosted(rows, scraped, NOW);
   assert.deepEqual(updates.map((u) => u.id), [6]);
+});
+
+test("X は platform と statuses を指定して照合し、draft は対象にしない", () => {
+  const cap = "梨にいちばんお金を使う県は鳥取。\n\n1世帯あたり8,846円";
+  const rows = [
+    { ...row(11, cap, "2026-09-23T22:05:00Z", "scheduled"), platform: "x" },
+    { ...row(12, "ぶどうを最も多く買う上位3県は山梨・長野・山形。", "2026-09-24T22:40:00Z", "draft"), platform: "x" },
+    row(13, cap, "2026-09-23T22:05:00Z", "scheduled"),
+  ];
+  const scraped = [
+    { permalink: "https://x.com/stats47jp373/status/2102", text: "統計で見る都道府県 @stats47jp373 梨にいちばんお金を使う県は鳥取。 1世帯あたり", publishedAt: "2026-09-23T22:05:02Z" },
+    { permalink: "https://x.com/stats47jp373/status/2103", text: "ぶどうを最も多く買う上位3県は山梨・長野・山形。", publishedAt: null },
+  ];
+  const { updates } = matchPosted(rows, scraped, NOW, { platform: "x", statuses: ["scheduled"] });
+  assert.deepEqual(updates, [{ id: 11, post_url: "https://x.com/stats47jp373/status/2102", posted_at: "2026-09-23T22:05:02Z" }]);
 });
