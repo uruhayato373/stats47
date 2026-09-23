@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-22",
+  "date": "2026-09-23",
   "period": {
-    "periodStart": "2026-09-13",
-    "periodEnd": "2026-09-19",
+    "periodStart": "2026-09-14",
+    "periodEnd": "2026-09-20",
     "windowDays": 7
   },
-  "inputHash": "52d95d6f72d0ad6571327ca290161c9616915124a106a549079bb0d1b4b0dc75",
+  "inputHash": "48b965ce2c3a8672ab2ef331a262e031b4ce3ebc63d4a8b5d51d37db5a498505",
   "movements": [
     {
       "keyword": "漁獲量とは",
@@ -18,22 +18,22 @@
       "change": -67
     },
     {
-      "keyword": "完全失業率",
-      "targetPath": "/blog/unemployment-structure",
-      "before": 56,
-      "after": 7,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 49
-    },
-    {
       "keyword": "うどん 消費量 ランキング",
       "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
       "before": 54,
       "after": 10,
       "beforeImpressions": 1,
-      "impressions": 2,
+      "impressions": 3,
       "change": 44
+    },
+    {
+      "keyword": "出生率が高い都道府県",
+      "targetPath": "/blog/fertility-rate-prefecture-gap",
+      "before": 43,
+      "after": 1,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 42
     },
     {
       "keyword": "site:stats47.jp",
@@ -65,29 +65,11 @@
     {
       "keyword": "昼間人口",
       "targetPath": "/blog/day-time-population-prefecture-gap",
-      "before": 43.333333333333336,
+      "before": 43.4,
       "after": 10.6,
-      "beforeImpressions": 6,
+      "beforeImpressions": 5,
       "impressions": 10,
-      "change": 32.733333333333334
-    },
-    {
-      "keyword": "日照時間ランキング",
-      "targetPath": "/blog/annual-sunshine-duration-prefecture-gap",
-      "before": 7.5,
-      "after": 39,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -31.5
-    },
-    {
-      "keyword": "日本の人口動態",
-      "targetPath": "/japan/population-dynamics",
-      "before": 36,
-      "after": 6,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 30
+      "change": 32.8
     },
     {
       "keyword": "日照時間 ランキング",
@@ -95,22 +77,40 @@
       "before": 30,
       "after": 1,
       "beforeImpressions": 1,
-      "impressions": 1,
+      "impressions": 3,
       "change": 29
+    },
+    {
+      "keyword": "うどん 消費量",
+      "targetPath": "/blog/fresh-udon-soba-consumption-prefecture-gap",
+      "before": 39,
+      "after": 10.5,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 28.5
+    },
+    {
+      "keyword": "市町村 数",
+      "targetPath": "/blog/municipality-count-prefecture-gap",
+      "before": 30.666666666666668,
+      "after": 3,
+      "beforeImpressions": 3,
+      "impressions": 1,
+      "change": 27.666666666666668
     }
   ],
   "verdicts": [
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
       "status": "observing",
-      "reason": "post-deployment-window-incomplete"
+      "reason": "query-page-not-reported"
     }
   ],
   "selected": {
     "keyword": "高校2年生 平均身長",
     "targetPath": "/blog/avg-height-high-school-2nd-male",
-    "rank": 7.215962441314554,
-    "impressions": 213,
+    "rank": 7.411764705882353,
+    "impressions": 221,
     "clicks": 1,
     "group": 5,
     "previousMethod": null,

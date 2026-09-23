@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-09-23",
+  "generatedAt": "2026-09-23T05:59:27.322Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-09-14",
+      "periodEnd": "2026-09-20",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2084,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.9021739130434785,
+        "impressions": 460,
+        "clicks": 38
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 5.33265306122449,
+        "impressions": 490,
+        "clicks": 15
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.411764705882353,
+        "impressions": 221,
+        "clicks": 1
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-09-07",
+      "periodEnd": "2026-09-13",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1835,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.6729191090269637,
+        "impressions": 853,
+        "clicks": 50
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 7.059171597633136,
+        "impressions": 338,
+        "clicks": 12
+      },
+      {
+        "keyword": "40代 未婚 割合 日本 国勢調査",
+        "targetPath": "/survey/census",
+        "rank": 4.385786802030457,
+        "impressions": 591,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/future-population-tokyo-paradox",
+        "rank": 2,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 2,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 6.046296296296297,
+        "impressions": 216,
+        "clicks": 0
+      }
+    ]
+  }
+}
