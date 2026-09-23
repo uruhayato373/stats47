@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { QUIZ_SLIDES, RankingQuizSpecSchema } from "../features/ranking-quiz-instagram/quiz";
+
 /**
  * 共通のプレビュー Props スキーマ
  */
@@ -42,6 +44,14 @@ export const CarouselPreviewSchema = CommonPreviewSchema.extend({
   slide: z.enum(["cover", "cta"]).optional(),
   displayTitle: z.string().optional(),
   hookText: z.string().optional(),
+});
+
+/**
+ * 予想クイズ型カルーセル用スキーマ（slide で 5 枚を切替）
+ */
+export const RankingQuizCarouselSchema = CommonPreviewSchema.extend({
+  slide: z.enum(QUIZ_SLIDES).optional(),
+  quiz: RankingQuizSpecSchema.optional(),
 });
 
 /**
