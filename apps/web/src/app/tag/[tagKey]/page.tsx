@@ -119,13 +119,6 @@ export default async function TagArticlesPage({ params }: PageProps) {
           >
             <SurfaceCard className="flex h-full flex-col rounded-none transition-colors hover:border-primary/50 hover:shadow-md">
               <div className="py-3 px-4 pb-3 flex flex-col items-start gap-2 space-y-0 border-b border-border">
-                <div className="mb-2 flex items-center gap-2">
-                  {article.description && (
-                    <span className="text-xs text-muted-foreground">
-                      {article.slug}
-                    </span>
-                  )}
-                </div>
                 <h3 className="text-base font-semibold leading-none text-lg transition-colors group-hover:text-primary">
                   {article.title}
                 </h3>

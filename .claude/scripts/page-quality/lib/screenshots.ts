@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 import pixelmatch from "pixelmatch";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 import { PNG } from "pngjs";
 import sharp from "sharp";
 
@@ -148,6 +148,19 @@ export async function createScreenshotSession(options: {
     writeFileSync(path, data);
   };
 
+  /** 撮影範囲をビューポート単位でスクロールし、遅延読み込みの描画を待ってから先頭へ戻る。 */
+  async function scrollThroughCapturedArea(page: Page, maxHeight: number): Promise<void> {
+    const viewportHeight = page.viewportSize()?.height ?? 800;
+    const limit = Math.min(maxHeight, await page.evaluate(() => document.documentElement.scrollHeight));
+    for (let y = 0; y < limit; y += viewportHeight) {
+      await page.evaluate((top) => window.scrollTo(0, top), y);
+      await page.waitForTimeout(250);
+    }
+    await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => undefined);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(300);
+  }
+
   return {
     async capture(url, template) {
       const records: ScreenshotRecord[] = [];
@@ -175,6 +188,10 @@ export async function createScreenshotSession(options: {
             for (const el of Array.from(document.querySelectorAll("a, button"))) el.getBoundingClientRect();
           });
           const layout = await evaluateLayoutIssues(page).catch(() => ({ clipped: [] as string[], overlaps: [] as string[] }));
+          // 画面外のチャートは表示範囲に入ってから描画する (遅延読み込み)。撮る範囲を一度スクロールで
+          // 通過させないと、空の枠や「読み込み中...」のまま写り誤検知になる (2026-09-24 theme の指摘は
+          // 実機でスクロール後に描画されることを確認した)。
+          await scrollThroughCapturedArea(page, spec.maxHeight);
           const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight);
           const png = await page.screenshot({
             fullPage: true,

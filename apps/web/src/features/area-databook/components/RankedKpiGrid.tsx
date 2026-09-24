@@ -33,14 +33,46 @@ const COLS: Record<number, string> = {
   4: "@sm:grid-cols-2 @md:grid-cols-4",
 };
 
+/** 各段数で最終行の空きマスを埋めるのに要る数 (1 段表示では空きが出ない)。 */
+function trailingGaps(count: number, columns: number): number {
+  return (columns - (count % columns)) % columns;
+}
+
+/**
+ * 最終行の空きマス用の埋め草。グリッドは gap-px + bg-border で罫線を描くため、空きマスは
+ * そのまま灰色の箱に見える (2026-09-24 週次 UI 検査)。段数はコンテナ幅で 2 / 3 / 4 に
+ * 変わるので、段数ごとに必要な数だけを表示する。
+ */
+function fillerClassNames(count: number, columns: 2 | 3 | 4): string[] {
+  const gaps2 = trailingGaps(count, 2);
+  const gapsWide = columns === 2 ? gaps2 : trailingGaps(count, columns);
+  const total = Math.max(gaps2, gapsWide);
+  return Array.from({ length: total }, (_, i) =>
+    cn(
+      "hidden bg-card",
+      i < gaps2 ? "@sm:block" : "@sm:hidden",
+      columns !== 2 && (i < gapsWide ? "@md:block" : "@md:hidden"),
+    ),
+  );
+}
+
 /**
  * 値 + 全国順位バッジの KPI グリッド (県データブックの中核ブロック)。
  * 値は R2 databook.json (exporter 焼き込み) から解決する。県軸に閉じ、47 県比較は
  * ラベルの `/ranking/<key>` リンクで回遊させる (情報設計: area は回遊面)。
  */
 export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
-  const hasCapitalCityValue = metrics.some((m) => m.capitalCityValue);
-  const effectiveColumns = Math.min(columns, metrics.length);
+  // 観測値の無い指標は「—」の箱を並べず、項目ごと出さない。
+  const visible = databook
+    ? metrics.filter((m) => databook.metrics[m.rankingKey])
+    : metrics;
+  if (visible.length === 0) return null;
+  const hasCapitalCityValue = visible.some((m) => m.capitalCityValue);
+  const effectiveColumns = Math.min(columns, visible.length) as 1 | 2 | 3 | 4;
+  const fillers =
+    effectiveColumns >= 2
+      ? fillerClassNames(visible.length, effectiveColumns as 2 | 3 | 4)
+      : [];
 
   return (
     <div className="@container">
@@ -52,7 +84,7 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
           ),
         })}
       >
-        {metrics.map((m) => {
+        {visible.map((m) => {
           const v = databook?.metrics[m.rankingKey];
           return (
             <div
@@ -101,6 +133,9 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
             </div>
           );
         })}
+        {fillers.map((className, i) => (
+          <div key={`filler-${i}`} aria-hidden="true" className={className} />
+        ))}
       </dl>
       {hasCapitalCityValue && (
         <p className="mt-1.5 text-[10px] text-muted-foreground">
