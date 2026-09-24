@@ -18,14 +18,17 @@ interface HorizontalCardCarouselProps {
 }
 
 const SCROLL_EDGE_TOLERANCE = 2;
+// 矢印はカード列の上の行に置く。カードに重ねると 1 位の値を隠し、
+// タップがカードのリンクへ抜ける (2026-09-23 週次 UI 検査で全 7 幅に重なりを検出)。
 const NAVIGATION_BUTTON_CLASS =
-  "absolute top-1/2 z-20 h-9 w-9 -translate-y-1/2 rounded-none bg-background shadow-sm transition-opacity after:absolute after:-inset-1.5 after:content-[''] sm:h-8 sm:w-8";
+  'relative h-9 w-9 rounded-none bg-background shadow-sm transition-opacity sm:h-8 sm:w-8';
 
 /**
  * ポータルカード共通の1行カルーセル。
  *
  * mobileは1枚+peek、smは2枚、lgは3枚、xlは4枚を表示する。
  * 左右矢印・keyboard・scroll snapを同じ実装へ集約し、セクションごとの差異を防ぐ。
+ * 矢印はカード列の上に右寄せで置き、どの幅でもカードと重ならない。
  */
 export function HorizontalCardCarousel({
   ariaLabel,
@@ -78,7 +81,41 @@ export function HorizontalCardCarousel({
   }, []);
 
   return (
-    <div className="relative">
+    <div>
+      <div className="mb-2 flex justify-end gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          disabled={!canScrollLeft}
+          aria-label={`${ariaLabel}を左へ`}
+          aria-hidden={!canScrollLeft}
+          tabIndex={canScrollLeft ? 0 : -1}
+          onClick={() => scroll('left')}
+          className={`${NAVIGATION_BUTTON_CLASS} ${
+            canScrollLeft ? 'opacity-100' : 'invisible opacity-0'
+          }`}
+        >
+          <ChevronLeft className="size-4" aria-hidden="true" />
+        </Button>
+
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          disabled={!canScrollRight}
+          aria-label={`${ariaLabel}を右へ`}
+          aria-hidden={!canScrollRight}
+          tabIndex={canScrollRight ? 0 : -1}
+          onClick={() => scroll('right')}
+          className={`${NAVIGATION_BUTTON_CLASS} ${
+            canScrollRight ? 'opacity-100' : 'invisible opacity-0'
+          }`}
+        >
+          <ChevronRight className="size-4" aria-hidden="true" />
+        </Button>
+      </div>
+
       <div
         ref={scrollRef}
         role="region"
@@ -94,38 +131,6 @@ export function HorizontalCardCarousel({
       >
         {children}
       </div>
-
-      <Button
-        type="button"
-        variant="outline"
-        size="icon"
-        disabled={!canScrollLeft}
-        aria-label={`${ariaLabel}を左へ`}
-        aria-hidden={!canScrollLeft}
-        tabIndex={canScrollLeft ? 0 : -1}
-        onClick={() => scroll('left')}
-        className={`${NAVIGATION_BUTTON_CLASS} -left-2 ${
-          canScrollLeft ? 'opacity-100' : 'invisible opacity-0'
-        }`}
-      >
-        <ChevronLeft className="size-4" aria-hidden="true" />
-      </Button>
-
-      <Button
-        type="button"
-        variant="outline"
-        size="icon"
-        disabled={!canScrollRight}
-        aria-label={`${ariaLabel}を右へ`}
-        aria-hidden={!canScrollRight}
-        tabIndex={canScrollRight ? 0 : -1}
-        onClick={() => scroll('right')}
-        className={`${NAVIGATION_BUTTON_CLASS} -right-2 ${
-          canScrollRight ? 'opacity-100' : 'invisible opacity-0'
-        }`}
-      >
-        <ChevronRight className="size-4" aria-hidden="true" />
-      </Button>
     </div>
   );
 }

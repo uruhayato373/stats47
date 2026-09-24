@@ -94,6 +94,7 @@ export function ThemeDepopulatedSettlementsClient({
         <Table
           aria-label={`${region}の集落高齢化プロフィール`}
           className="min-w-96"
+          scrollRegion
           containerClassName="min-w-0 max-w-full"
         >
           <TableCaption>
@@ -147,6 +148,7 @@ export function ThemeDepopulatedSettlementsClient({
           <Table
             aria-label="10地方ブロックの対象集落と高齢化"
             className="min-w-96"
+            scrollRegion
             containerClassName="min-w-0 max-w-full"
           >
             <TableCaption>

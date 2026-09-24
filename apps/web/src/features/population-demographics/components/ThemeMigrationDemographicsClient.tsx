@@ -120,6 +120,7 @@ export function ThemeMigrationDemographicsClient({
         <Table
           aria-label={`${areaLabel}の県間移動・${SEX_LABELS[sex]}・${view.ageLabel}`}
           className="min-w-96"
+          scrollRegion
           containerClassName="min-w-0 max-w-full"
         >
           <TableCaption>

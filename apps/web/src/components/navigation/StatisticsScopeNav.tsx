@@ -69,7 +69,7 @@ export function StatisticsScopeNav({
         ))}
         <span
           className={cn(
-            'text-sm text-muted-foreground/60',
+            'text-sm text-muted-foreground',
             isRail
               ? 'flex min-h-10 items-center px-2'
               : 'shrink-0 border-b-2 border-transparent px-1 py-3'

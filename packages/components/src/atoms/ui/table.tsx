@@ -5,13 +5,33 @@ import { cn } from "../../lib/cn"
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   /** 横スクロールを担う外側コンテナへの追加クラス */
   containerClassName?: string
+  /**
+   * 幅を絞って横スクロールさせる表で true にする。スクロール領域をキーボードで
+   * フォーカス・スクロールできるようにし、表の aria-label を領域名に使う
+   * (axe scrollable-region-focusable / WCAG 2.1.1)。
+   */
+  scrollRegion?: boolean
 }
 
 const Table = React.forwardRef<
   HTMLTableElement,
   TableProps
->(({ className, containerClassName, ...props }, ref) => (
-  <div className={cn("relative w-full overflow-auto", containerClassName)}>
+>(({ className, containerClassName, scrollRegion = false, ...props }, ref) => (
+  <div
+    className={cn(
+      "relative w-full overflow-auto",
+      scrollRegion &&
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+      containerClassName
+    )}
+    {...(scrollRegion
+      ? {
+          role: "region",
+          tabIndex: 0,
+          "aria-label": props["aria-label"] ?? "表",
+        }
+      : {})}
+  >
     <table
       ref={ref}
       className={cn("w-full caption-bottom text-[13px]", className)}

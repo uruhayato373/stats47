@@ -58,7 +58,7 @@ export async function FurusatoNozeiCard({
       >
       <div className={getSurfaceCardClassName({ className: "p-4" })}>
         <div className="mb-3 flex items-center justify-between">
-          <span className="text-xs font-medium text-muted-foreground/70">PR</span>
+          <span className="text-xs font-medium text-muted-foreground">PR</span>
           <TrackedAffiliateLink
             href={areaPageUrl}
             category="furusato"
@@ -107,7 +107,7 @@ export async function FurusatoNozeiCard({
                     寄附額 {item.price.toLocaleString("ja-JP")}円
                   </p>
                   {item.reviewCount > 0 && (
-                    <p className="text-xs text-muted-foreground/70 mt-0.5">
+                    <p className="text-xs text-muted-foreground mt-0.5">
                       ★{item.reviewAverage} ({item.reviewCount})
                     </p>
                   )}
@@ -132,7 +132,7 @@ export async function FurusatoNozeiCard({
     >
     <div className={getSurfaceCardClassName({ className: "p-4" })}>
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-medium text-muted-foreground/70">PR</span>
+        <span className="text-xs font-medium text-muted-foreground">PR</span>
       </div>
       <TrackedAffiliateLink
         href={areaPageUrl}

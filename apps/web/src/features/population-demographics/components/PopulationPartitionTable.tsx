@@ -28,6 +28,7 @@ export function PopulationPartitionTable({
     <Table
       aria-label={`${areaName}の${category}別内訳`}
       className="min-w-96"
+      scrollRegion
       containerClassName="min-w-0 max-w-full"
     >
       <TableCaption>
