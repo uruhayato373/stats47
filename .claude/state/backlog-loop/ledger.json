@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-23T10:43:04.325Z",
+  "updatedAt": "2026-09-23T21:57:18.308Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4812,6 +4812,41 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-23T10:43:04.325Z"
+    },
+    "IG-CAROUSEL-GLYPH-SMEAR-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-23T21:57:18.308Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/sns/review-sns-images.ts --days 8",
+              "node --test .claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs",
+              "npx tsc --noEmit -p apps/remotion"
+            ],
+            "pass": true
+          },
+          "evidence": "Dela Gothic One の字形そのものが原因 (現行コード再レンダーが R2 とバイト一致)。見出しを M PLUS 1p 900 に替え予約中 38 投稿の 141 枚を再レンダーし R2 へ exact push、公開 URL 141/141 SHA 一致。SNS 画像確認で文字潰れの指摘 0 件",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-23T21:57:18.308Z"
     }
   }
 }

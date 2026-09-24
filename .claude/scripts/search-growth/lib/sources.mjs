@@ -74,12 +74,16 @@ function latestWeekDir(dir) {
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d)).sort();
   return weeks.length ? weeks[weeks.length - 1] : null;
 }
+/**
+ * 対象ファイルは全て ISO 日付/時刻をファイル名に持つので、名前の降順で最新を選ぶ。
+ * mtime は使わない: CI の checkout 直後は全ファイルの mtime がほぼ同じになり、古い snapshot を
+ * 最新と誤認していた (2026-09-20 に 09-16〜09-20 の URL Inspection CSV がありながら 09-15 を選び、
+ * inspection / cloudflare を stale と判定 → GSC 運用サイクル監査が FAIL)。
+ */
 function newestFile(dir, re) {
   if (!fs.existsSync(dir)) return null;
-  const files = fs.readdirSync(dir).filter((f) => re.test(f))
-    .map((f) => ({ f, m: fs.statSync(path.join(dir, f)).mtimeMs }))
-    .sort((a, b) => b.m - a.m);
-  return files.length ? path.join(dir, files[0].f) : null;
+  const files = fs.readdirSync(dir).filter((f) => re.test(f)).sort();
+  return files.length ? path.join(dir, files[files.length - 1]) : null;
 }
 const numOrNull = (v) => {
   if (v === undefined || v === null || v === "") return null;

@@ -70,6 +70,15 @@ class CoverageContract(unittest.TestCase):
         reports[-1]["drilldown"] = ["URL,前回のクロール"] + [f"https://stats47.jp/example-{i},2026-09-18" for i in range(1000)]
         ingest.validate_actionable_reports(reports)
 
+    def test_overview_chart_yields_latest_indexed_count(self):
+        chart = "日付,未登録,登録済み,表示回数\n2026-09-19,21000,5100,900\n2026-09-20,20900,5230,950\n"
+        self.assertEqual(ingest.parse_index_status(chart), {"date": "2026-09-20", "indexed": 5230, "not_indexed": 20900})
+
+    def test_category_chart_is_not_mistaken_for_indexed_count(self):
+        # 2026-W38 の coverage-trend.csv はカテゴリ別グラフで、登録済み列を持たない
+        self.assertIsNone(ingest.parse_index_status("日付,該当ページ\n2026-09-14,785\n"))
+        self.assertIsNone(ingest.parse_index_status("日付,未登録,登録済み,表示回数\n"))
+
 
 if __name__ == "__main__":
     unittest.main()

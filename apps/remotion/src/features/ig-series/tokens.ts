@@ -57,7 +57,7 @@ export const IG_PILL_SOLID = { background: "#111111", ink: "#FFFFFF" } as const;
 
 export const IG_FONT = {
   /** 見出し（和文）。Archivo Black は和文グリフを持たないため数字専用 */
-  headline: "'Dela Gothic One', sans-serif",
+  headline: "'M PLUS 1p', sans-serif",
   /** 強調数値（半角数字専用） */
   number: "'Archivo Black', sans-serif",
   /** 本文・注記 */
@@ -66,16 +66,17 @@ export const IG_FONT = {
 } as const;
 
 /**
- * Dela Gothic One / Archivo Black は Google Fonts 上で単一ウェイト（400）のみ配布されている。
- * 親要素の `fontWeight: 700/900` を継承させると Chromium が疑似ボールドを合成し、
- * 画数の多い漢字で線が潰れて読めなくなる（2026-09-23 実測: 見出し・県名が smear した）。
- * 見出し・数値を描画する要素は必ずこの style オブジェクトを展開し、太字を継承させないこと。
+ * 見出しは M PLUS 1p の実ウェイト 900 を使う。2026-09-24 に Dela Gothic One から変更した:
+ * Dela Gothic One は 400 の単一ウェイトでも字面が極端に詰まり、「何」「稿」「徴」「係」など
+ * 画数の多い漢字の内側が埋まって別の字に見えた（疑似太字を止めた後も書体そのものの形として残った）。
+ * Archivo Black は単一ウェイト（400）のみ配布で、太字を継承させると Chromium が疑似ボールドを合成し
+ * 線が潰れる。見出し・数値を描画する要素は必ずこの style オブジェクトを展開し、太字を継承させないこと。
  * Noto Sans JP は実ウェイト 700/900 を配布しているのでこの制約を受けない
  * （`IG_FONT.weight.bold` / `.black` をそのまま使ってよい）。
  */
 export const IG_HEADLINE_STYLE = {
   fontFamily: IG_FONT.headline,
-  fontWeight: 400,
+  fontWeight: 900,
   fontSynthesis: "none",
 } as const;
 

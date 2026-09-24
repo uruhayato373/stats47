@@ -2,7 +2,7 @@
 /**
  * GitHub Actions 用 IG 予約投稿スクリプト
  *
- * `.claude/state/instagram-w18-schedule.json` を読み、今日 (JST) と一致する
+ * `.claude/state/instagram-w*-schedule.json` を読み、前日・今日 (JST) の未投稿
  * エントリがあれば Instagram Graph API で投稿する。
  *
  * 設計:
@@ -23,6 +23,7 @@
  * 1 日複数本 (2026-07-11〜): エントリに time ("HH:MM" JST) を持たせ、cron を
  * 1 日複数回発火させる。各実行は「time <= 現在時刻 かつ ig-posted-log に無い」
  * 最早の 1 件だけを投稿する (二重投稿は posted-log で防止)。
+ * 前日の未投稿も拾う (2026-09-24〜。cron が日付をまたいで遅れた夜枠を落とさないため)。
  *
  * type: "image" (既定) | "reels" | "carousel" (2026-09-23〜)。carousel は
  * slides (instagram/stills/ 直下のファイル名、表示順) を必須とする。R2 は公開 URL で
@@ -55,40 +56,71 @@ function getJstDate() {
   return jst.toISOString().slice(0, 10);
 }
 
+/** JST の日付文字列 (YYYY-MM-DD) を days 日ずらす */
+function shiftDate(date, days) {
+  const d = new Date(`${date}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
 /**
- * スケジュールファイルの解決。
- * - IG_SCHEDULE_FILE があればそれを使う (後方互換・テスト用)
- * - 無ければ instagram-w*-schedule.json を全走査し、当日 (JST) のエントリを
- *   含むファイルを自動選択する。旧実装はデフォルトが特定週 (w19 等) に固定され、
+ * 指定日のエントリを予約ファイルから集める。
+ * - IG_SCHEDULE_FILE があればそれだけを読む (後方互換・テスト用)
+ * - 無ければ instagram-w*-schedule.json を全走査する。旧実装は特定週のファイルに固定され、
  *   週が替わるたびに手編集が必要 = 更新忘れで cron が空振りする事故源だった
  *   (実害: w20 期間中も w19 を読み続け 2026-06-08 以降の自動投稿が発火せず)。
+ *   前日と当日が別の週ファイルにまたがっても拾えるよう、1 ファイルに絞らず集める。
  */
-function resolveScheduleFile(today) {
+function loadScheduleEntries(dates) {
+  const wanted = new Set(dates);
+  let files;
   if (process.env.IG_SCHEDULE_FILE) {
     const f = path.resolve(process.env.IG_SCHEDULE_FILE);
     console.log(`[post-from-schedule] schedule file (env 指定): ${f}`);
-    return fs.existsSync(f) ? f : null;
+    files = fs.existsSync(f) ? [f] : [];
+  } else {
+    files = fs
+      .readdirSync(STATE_DIR)
+      .filter((f) => /^instagram-w\d+-schedule\.json$/.test(f))
+      .sort()
+      .map((f) => path.join(STATE_DIR, f));
   }
-  const candidates = fs
-    .readdirSync(STATE_DIR)
-    .filter((f) => /^instagram-w\d+-schedule\.json$/.test(f))
-    .sort();
-  for (const name of candidates) {
-    const f = path.join(STATE_DIR, name);
+  const entries = [];
+  for (const f of files) {
     try {
-      const entries = JSON.parse(fs.readFileSync(f, "utf-8"));
-      if (Array.isArray(entries) && entries.some((e) => e.date === today)) {
-        console.log(`[post-from-schedule] schedule file (自動選択): ${name}`);
-        return f;
-      }
+      const raw = JSON.parse(fs.readFileSync(f, "utf-8"));
+      const hits = (Array.isArray(raw) ? raw : []).filter((e) => wanted.has(e.date));
+      if (hits.length) console.log(`[post-from-schedule] schedule file: ${path.basename(f)} (${hits.length} 件)`);
+      entries.push(...hits);
     } catch {
-      console.log(`[post-from-schedule] parse 失敗 skip: ${name}`);
+      console.log(`[post-from-schedule] parse 失敗 skip: ${path.basename(f)}`);
     }
   }
-  console.log(
-    `[post-from-schedule] 当日 (${today}) を含む schedule ファイルなし (走査: ${candidates.join(", ") || "0件"})`,
-  );
-  return null;
+  if (!entries.length) {
+    console.log(`[post-from-schedule] ${dates.join(" / ")} を含む schedule エントリなし (走査 ${files.length} ファイル)`);
+  }
+  return entries;
+}
+
+/**
+ * 次に投稿する 1 件を選ぶ (純粋関数)。
+ * - 前日の未投稿は時刻を問わず対象。GitHub Actions の cron は数時間遅れて発火し、夜枠 (19:03) の実行が
+ *   日付をまたぐと当日分だけを見る実装では前日の 19:00 枠が投稿されずに消えていた
+ *   (2026-09 に 3 週で 3 回、00:44〜01:24 JST に発火)。拾うのは前日まで (それより古いものは出さない)
+ * - 当日は time (既定 "08:00") が現在時刻以前のものだけ
+ * - 未投稿 = posted に `date|content_key` が無い。古い日付・早い時刻を先に出す
+ */
+function selectDueEntry(entries, { today, yesterday, nowTime, posted }) {
+  const normalized = entries
+    .map((e) => ({ ...e, time: e.time || "08:00" })) // time 無しの旧形式は朝枠 (08:03 cron) で配信
+    .filter((e) => !posted.has(`${e.date}|${e.content_key}`));
+  const due = normalized
+    .filter((e) => e.date === yesterday || (e.date === today && e.time <= nowTime))
+    .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+  const upcoming = normalized
+    .filter((e) => e.date === today && e.time > nowTime)
+    .sort((a, b) => a.time.localeCompare(b.time));
+  return { next: due[0] ?? null, upcoming };
 }
 
 function getJstTime() {
@@ -113,32 +145,22 @@ function loadPostedSet() {
   return set;
 }
 
-/**
- * 当日エントリのうち「time (JST, 既定 "08:00") が現在時刻以前」かつ「未投稿
- * (ig-posted-log に無い)」の最早 1 件を返す。
- * 1 日複数本対応: cron を 1 日複数回発火させ、各実行が 1 件だけ消化する。
- * 既投稿分は workflow が commit する ig-posted-log で除外されるため二重投稿しない。
- * 失敗した枠は次の cron 実行が繰り上げて消化する (同日中のみ)。
- */
+/** 前日の未投稿と、当日で time が現在時刻以前の未投稿から最早の 1 件を返す (選び方は selectDueEntry)。 */
 async function findTodayEntry() {
   const today = getJstDate();
+  const yesterday = shiftDate(today, -1);
   const nowTime = getJstTime();
   console.log(`[post-from-schedule] today (JST): ${today} ${nowTime}`);
-  const file = resolveScheduleFile(today);
-  if (!file) return null;
-  const posted = loadPostedSet();
-  const due = JSON.parse(fs.readFileSync(file, "utf-8"))
-    .filter((e) => e.date === today)
-    .map((e) => ({ ...e, time: e.time || "08:00" })) // time 無しの旧形式は朝枠 (08:03 cron) で配信
-    .sort((a, b) => a.time.localeCompare(b.time))
-    .filter((e) => !posted.has(`${e.date}|${e.content_key}`));
-  if (!due.length) return null;
-  const next = due.find((e) => e.time <= nowTime);
-  if (!next) {
+  const entries = loadScheduleEntries([yesterday, today]);
+  if (!entries.length) return null;
+  const { next, upcoming } = selectDueEntry(entries, { today, yesterday, nowTime, posted: loadPostedSet() });
+  if (!next && upcoming.length) {
     console.log(
-      `[post-from-schedule] 未投稿 ${due.length} 件はすべて time > ${nowTime} (次: ${due[0].time})、skip`,
+      `[post-from-schedule] 未投稿 ${upcoming.length} 件はすべて time > ${nowTime} (次: ${upcoming[0].time})、skip`,
     );
-    return null;
+  }
+  if (next && next.date !== today) {
+    console.log(`[post-from-schedule] 前日 (${next.date} ${next.time}) の未投稿を繰り越して投稿する`);
   }
   return next;
 }
@@ -417,6 +439,9 @@ async function main() {
     assertToken(); // 投稿実行が確定してからトークン検証 (エントリ無し日はトークン不要)
   }
   // GHA が grep で取得できるよう構造化ログを出力
+  // POST_DATE はエントリの予約日。前日分を繰り越したとき実行日で記録すると、次の実行が
+  // 同じエントリを未投稿と判定して二重投稿するため、posted-log にはこの値を書く
+  console.log(`POST_DATE=${entry.date}`);
   console.log(`DOMAIN=${entry.domain}`);
   console.log(`POST_TYPE=${ledgerPostTypeFor(entry)}`);
 
@@ -453,7 +478,7 @@ async function main() {
   }
 }
 
-module.exports = { carouselUrlsFor, ledgerPostTypeFor };
+module.exports = { carouselUrlsFor, ledgerPostTypeFor, selectDueEntry, shiftDate };
 
 if (require.main === module) {
   main().catch((err) => {

@@ -53,7 +53,8 @@ jobs:
           node .claude/scripts/instagram/post-from-schedule.cjs 2>&1 | tee /tmp/post-output.log
           PERMALINK=$(grep -oE 'PERMALINK=https?://[^ ]+' /tmp/post-output.log | head -1 | cut -d= -f2- || echo "")
           KEY=$(grep -oE 'content_key":"[^"]+' /tmp/post-output.log | head -1 | cut -d'"' -f3 || echo "")
-          DATE=$(grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' /tmp/post-output.log | head -1 || echo "")
+          # エントリの予約日 (前日分の繰り越しでは実行日と違う)。posted-log の重複判定キーになる
+          DATE=$(grep -oE 'POST_DATE=[0-9]{4}-[0-9]{2}-[0-9]{2}' /tmp/post-output.log | head -1 | cut -d= -f2 || echo "")
           DOMAIN=$(grep -oE 'DOMAIN=[a-z0-9-]+' /tmp/post-output.log | head -1 | cut -d= -f2 || echo "")
           # 台帳の post_type (carousel / original)。カルーセルと単枚の成績を分けて測るため記録する
           POST_TYPE=$(grep -oE 'POST_TYPE=[a-z]+' /tmp/post-output.log | head -1 | cut -d= -f2 || echo "")

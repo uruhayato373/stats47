@@ -50,6 +50,18 @@ jobs:
             node .claude/scripts/gsc/url-inspection-daily.cjs
           fi
 
+      # 是正キュー (coverage-remediation-queue.json) へ観測を反映する。登録済みになった URL を done にし、
+      # 「直した URL が登録されたか」を日次で数える (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
+      # 失敗しても当日の検査結果は commit する。
+      - name: 🔁 Sync remediation queue with inspection results
+        run: node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection || echo "::warning::coverage queue sync failed, continuing"
+
+      # 判断が要る pending (sitemap 掲載判断・ソフト404・5xx 等) をバックログカードにする。
+      # 処理は backlog-loop-daily (CI の Claude) が行い、--assert-handled を gate にして行を消す。
+      # action ごとに開いているカードは 1 枚まで。消化された翌日に次の batch を起票する。
+      - name: 🗂 File judgment items to the backlog
+        run: node .claude/scripts/gsc/sync-coverage-backlog.mjs || echo "::warning::coverage backlog sync failed, continuing"
+
       - name: 📅 Resolve date
         id: date
         run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
@@ -63,6 +75,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .claude/state/metrics/gsc/url-inspection/
+          git add .claude/state/gsc/
+          git add .claude/todo/backlog.md
+          git add .claude/state/metrics/gsc/coverage-drilldown/*/coverage-live-observe-urls.csv 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
