@@ -131,6 +131,107 @@ export function summarizeEngine({ verdicts, gscRows }) {
   };
 }
 
+/** 運用系 source の週窓 (asOf を含む直近 7 日) と、最新観測がこれより古ければ stale とする日数。 */
+export const OPS_WINDOW_DAYS = 7;
+export const OPS_STALE_DAYS = 2;
+/** 改善バックログの Metric 列 → 運用系 source の対応 (active 施策数を出すため)。 */
+export const OPS_METRIC_PATTERNS = { psi: /performance|psi|cwv/i, cloudflare: /cloudflare/i, sns: /sns|instagram|threads|youtube|^x$/i };
+
+const addDaysIso = (date, days) => new Date(Date.parse(`${date}T00:00:00Z`) + days * 86400000).toISOString().slice(0, 10);
+const inWindow = (date, asOf) => date <= asOf && date > addDaysIso(asOf, -OPS_WINDOW_DAYS);
+const freshness = (latest, asOf) => (latest == null ? "missing" : latest < addDaysIso(asOf, -OPS_STALE_DAYS) ? "stale" : "ok");
+const median = (values) => {
+  const s = [...values].sort((a, b) => a - b);
+  if (s.length === 0) return null;
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
+/** PSI history.csv (1 行 = 日 × URL × strategy、violations_* は日次 digest が budgets.json で判定済み)。 */
+export function summarizePsi(rows, asOf) {
+  const dates = rows.map((r) => r.date).filter((d) => d <= asOf).sort();
+  const latest = dates[dates.length - 1] ?? null;
+  const today = rows.filter((r) => r.date === latest);
+  // score が空の行は PSI API の計測失敗。0 点として中央値・最低値に混ぜない (2026-09 に /areas/01000 で実際に起きた)
+  const measured = (r) => r.score_performance !== "" && r.score_performance != null;
+  const mobile = today.filter((r) => r.strategy === "mobile" && measured(r));
+  const window = rows.filter((r) => inWindow(r.date, asOf));
+  return {
+    status: freshness(latest, asOf),
+    latestDate: latest,
+    daysInWindow: new Set(window.map((r) => r.date)).size,
+    mobileMedianScore: median(mobile.map((r) => Number(r.score_performance))),
+    urlsWithErrors: today.filter((r) => measured(r) && Number(r.violations_error) > 0).length,
+    urlsMeasured: today.filter(measured).length,
+    measurementFailures: today.filter((r) => !measured(r)).length,
+    worstMobile: mobile
+      .map((r) => ({ url: r.url, score: Number(r.score_performance), lcpMs: Number(r.lcp_ms) }))
+      .sort((a, b) => a.score - b.score)
+      .slice(0, 3),
+  };
+}
+
+/**
+ * Cloudflare history.csv と、日次 snapshot を threshold-check.mjs の evaluateRules で判定した結果。
+ * @param {Array<object>} rows history.csv
+ * @param {Array<{date:string, violations:Array<{severity:string,title:string}>}>} evaluated
+ */
+export function summarizeCloudflare(rows, evaluated, asOf) {
+  const dates = rows.map((r) => r.date).filter((d) => d <= asOf).sort();
+  const latest = dates[dates.length - 1] ?? null;
+  const window = rows.filter((r) => inWindow(r.date, asOf));
+  const total = (key) => sum(window, (r) => r[key]);
+  const requests = total("workers_requests");
+  const violations = evaluated.filter((e) => inWindow(e.date, asOf)).flatMap((e) => e.violations);
+  const bySeverity = {};
+  for (const v of violations) bySeverity[v.severity] = (bySeverity[v.severity] ?? 0) + 1;
+  return {
+    status: freshness(latest, asOf),
+    latestDate: latest,
+    daysInWindow: new Set(window.map((r) => r.date)).size,
+    workersRequests: requests,
+    workersErrorRate: ratio(total("workers_errors"), requests),
+    r2ClassAOps: total("r2_class_a_ops"),
+    r2ClassBOps: total("r2_class_b_ops"),
+    r2EgressMb: Math.round(total("r2_egress_mb")),
+    r2StorageGb: latest ? Number(rows.find((r) => r.date === latest).r2_storage_gb) : null,
+    violationsBySeverity: bySeverity,
+    violationTitles: [...new Set(violations.map((v) => v.title))],
+  };
+}
+
+/** SNS metrics (sns-metrics-store.readByRange の行)。集計の定義は sns-weekly-report.mjs と同じ。 */
+export function summarizeSns(rows) {
+  const eng = (r) => ["likes", "comments", "shares", "saves"].reduce((s, k) => s + (Number(r[k]) || 0), 0);
+  const byPlatform = {};
+  // Instagram は impressions を廃止して reach / views に値が入る。3 つとも持ち、表示側で 0 でないものだけ出す
+  for (const r of rows) {
+    const p = (byPlatform[r.platform || "unknown"] ??= { posts: new Set(), impressions: 0, reach: 0, views: 0, engagements: 0 });
+    p.posts.add(r.content_key || r.sns_post_id);
+    for (const k of ["impressions", "reach", "views"]) p[k] += Number(r[k]) || 0;
+    p.engagements += eng(r);
+  }
+  const platforms = Object.fromEntries(Object.entries(byPlatform).map(([k, { posts, ...rest }]) => [k, { posts: posts.size, ...rest }]));
+  const fetched = rows.map((r) => String(r.fetched_at).slice(0, 10)).sort();
+  return {
+    status: rows.length ? "ok" : "missing",
+    latestDate: fetched[fetched.length - 1] ?? null,
+    platforms,
+    topPosts: rows
+      .map((r) => ({ platform: r.platform, contentKey: r.content_key, engagements: eng(r), impressions: Number(r.impressions) || 0 }))
+      .sort((a, b) => b.engagements - a.engagements || b.impressions - a.impressions)
+      .slice(0, 3),
+  };
+}
+
+/** active 施策を運用系 source ごとに数える (その source の改善がバックログに載っているか)。 */
+export function countOpsImprovements(entries) {
+  return Object.fromEntries(Object.entries(OPS_METRIC_PATTERNS).map(([source, re]) => [
+    source,
+    entries.filter((e) => re.test(e.target_metric ?? "")).map((e) => e.section_id),
+  ]));
+}
+
 const pct = (v) => (v == null ? "—" : `${(v * 100).toFixed(1)}%`);
 
 export function renderCycleMarkdown(state) {
@@ -178,6 +279,27 @@ export function renderCycleMarkdown(state) {
     lines.push(`GSC 施策 ${e.gsc.active} 件中、機械判定できるのは ${e.gsc.judgeable} 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:`);
     lines.push("");
     for (const r of e.gsc.missing) lines.push(`- \`${r.id}\`: ${r.missing.join("・")}`);
+    lines.push("");
+  }
+  if (state.operations) {
+    const { psi, cloudflare, sns, improvements } = state.operations;
+    const ids = (list) => (list.length ? list.map((id) => `\`${id}\``).join(", ") : "なし");
+    lines.push(`**運用系の計測**（直近 ${OPS_WINDOW_DAYS} 日。閾値違反は日次 alert Issue と同じ判定。改善の判断は人）`);
+    lines.push("");
+    lines.push("| 計測 | 状態 | 要約 | 閾値違反 | active 施策 |");
+    lines.push("|---|---|---|---|---|");
+    if (psi) {
+      lines.push(`| PSI | ${psi.status}（最新 ${psi.latestDate ?? "—"}） | モバイル中央値 ${psi.mobileMedianScore ?? "—"} 点・最低 ${psi.worstMobile.map((w) => `${new URL(w.url).pathname} ${w.score}`).join(" / ") || "—"}${psi.measurementFailures ? `・計測失敗 ${psi.measurementFailures}` : ""} | 最新日 ${psi.urlsWithErrors}/${psi.urlsMeasured} 計測で error | ${ids(improvements.psi)} |`);
+    }
+    if (cloudflare) {
+      const sev = Object.entries(cloudflare.violationsBySeverity).map(([k, v]) => `${k} ${v}`).join("・") || "なし";
+      lines.push(`| Cloudflare | ${cloudflare.status}（最新 ${cloudflare.latestDate ?? "—"}） | Workers ${cloudflare.workersRequests} req・error ${pct(cloudflare.workersErrorRate)}・R2 A ${cloudflare.r2ClassAOps} / B ${cloudflare.r2ClassBOps}・保存 ${cloudflare.r2StorageGb ?? "—"} GB | ${sev}${cloudflare.violationTitles.length ? `（${cloudflare.violationTitles.join("、")}）` : ""} | ${ids(improvements.cloudflare)} |`);
+    }
+    if (sns) {
+      const reachText = (v) => ["impressions", "reach", "views"].filter((k) => v[k] > 0).map((k) => `${k} ${v[k]}`).join("・") || "表示指標 0";
+      const per = Object.entries(sns.platforms).map(([p, v]) => `${p} ${v.posts} 投稿・${reachText(v)}・eng ${v.engagements}`).join(" / ") || "—";
+      lines.push(`| SNS | ${sns.status}（最新 ${sns.latestDate ?? "—"}） | ${per} | —（閾値なし） | ${ids(improvements.sns)} |`);
+    }
     lines.push("");
   }
   if (state.improvements) {

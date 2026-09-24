@@ -9,12 +9,19 @@ metadata:
 ---
 
 GA4 実測で止まっていた判定待ちを処理した手順 (計測→improvements.md へ記録→計測基盤の改善) を 2026-09-24 に CI 化した
-(コミット 3ea0fece3 / d297ef217、develop へ push 済み)。
+(コミット 3ea0fece3 / d297ef217 / df5395859 / e6c716f76。main 反映は PR #1022)。GSC も同じ形:
+`gsc-query.mjs` と閾値エンジンの `gsc-improvement` adapter。GSC 施策は行に `[gsc-page: /path]`・`デプロイ済 YYYY-MM-DD`・
+`[target: +N clicks]` が揃ったものだけ機械判定される。2026-W38 時点は 10 件中 0 件 (全件目印なし)。
 
 - 計測: 日曜 20:00 JST `fetch-metrics-weekly.yml` が GA4 snapshot (internal-transitions / landing-context / event-volume) と
-  `build-measurement-cycle.mjs` → `.claude/state/metrics/measurement-cycle/{latest.json,LATEST.md,history.csv}`。
+  `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` → `.claude/state/metrics/measurement-cycle/{latest.json,LATEST.md,history.csv}`。
+  PSI / Cloudflare / SNS も同じ state に入る (閾値は各 source の既存判定を再利用: PSI は history.csv の violations_*、
+  Cloudflare は threshold-check.mjs の evaluateRules、SNS は sns-metrics-store.readByRange)。
+  **月曜 06:00 にも作り直す**: sns-metrics-weekly は fetch-metrics-weekly より後に終わる (2026-09-20: 14:33Z → 14:47Z) ため。
+  PSI の空スコア行は計測失敗 (0 点扱いしない)、Instagram は impressions が 0 で reach / views に値が入る。
 - 記録: 月曜 06:00 JST `improvement-cycle-weekly.yml` が improvement-triage を Claude Code (sonnet) で無人実行。
-  個別の内訳は `ga4-query.mjs`。`verify-improvement-cycle-run.mjs` のゲートを通った差分だけ develop へ push、失敗は `improvement-cycle-alert`。
+  個別の内訳は `ga4-query.mjs` / `gsc-query.mjs`。`verify-improvement-cycle-run.mjs` のゲートを通った差分だけ develop へ push、失敗は `improvement-cycle-alert`。
+  目標値は根拠 (過去事例か計算式) が行か詳細ログにあるときだけ書く指示。無人 run が目標値を捏造していないかは初回数回の差分を人が見る。
 - 表示: 月曜 09:00 JST 週次メトリクス Issue の「🔁 計測→記録→改善サイクル」節と `/weekly-review` Phase 1。
 
 **Why:** 判定待ちが「GA4 creds のある環境で再試行」のまま期限を越えていた。原因は施策固有の内訳を取る手段が CI に無かったこと。

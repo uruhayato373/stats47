@@ -11,12 +11,14 @@
  * --admin-audit は google-admin audit-api の api-latest.json。README の規約で監査 state 自体は commit しないため、
  * CI は /tmp へ退避したものを渡し、ここでは登録済みパラメータ名だけを使う。
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { join } from "node:path";
+import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
 import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
 import {
-  parseCsv, renderCycleMarkdown, summarizeDimensionGaps, summarizeEngine, summarizeJourney, summarizeOverdue,
-  summarizeWorkContext,
+  countOpsImprovements, parseCsv, renderCycleMarkdown, summarizeCloudflare, summarizeDimensionGaps, summarizeEngine,
+  summarizeJourney, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
 } from "./lib/measurement-cycle.mjs";
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
@@ -40,6 +42,35 @@ function readSlice(dir, name) {
   const meta = existsSync(metaPath) ? JSON.parse(readFileSync(metaPath, "utf8")) : null;
   if (meta && meta.status !== "ok") return { status: meta.status, detail: meta.error, rows: null, meta };
   return { status: "ok", rows: parseCsv(readFileSync(csvPath, "utf8")), meta };
+}
+
+const readCsvIfExists = (path) => (existsSync(path) ? parseCsv(readFileSync(path, "utf8")) : null);
+
+/**
+ * 運用系 (PSI / Cloudflare / SNS)。判定ロジックは各 source の既存実装を使い、ここで閾値を持たない:
+ * PSI は日次 digest が history.csv に書いた violations_*、Cloudflare は threshold-check.mjs の evaluateRules、
+ * SNS は sns-weekly-report.mjs と同じ sns-metrics-store.readByRange。
+ */
+function buildOperations(week, asOf, pending) {
+  const psiRows = readCsvIfExists(join(PROJECT_ROOT, ".claude/state/metrics/psi/history.csv"));
+  const cfDir = join(PROJECT_ROOT, ".claude/state/metrics/cloudflare");
+  const cfRows = readCsvIfExists(join(cfDir, "history.csv"));
+  const rules = JSON.parse(readFileSync(join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json"), "utf8")).rules;
+  const snapshotsDir = join(cfDir, "snapshots");
+  const evaluated = existsSync(snapshotsDir)
+    ? readdirSync(snapshotsDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).map((f) => ({
+      date: f.slice(0, 10),
+      violations: evaluateRules(flatten(JSON.parse(readFileSync(join(snapshotsDir, f), "utf8"))), rules).violations,
+    }))
+    : [];
+  const { startDate, endDate } = isoWeekToDateRange(week);
+  const snsStore = createRequire(import.meta.url)("../lib/sns-metrics-store.cjs");
+  return {
+    psi: psiRows ? summarizePsi(psiRows, asOf) : null,
+    cloudflare: cfRows ? summarizeCloudflare(cfRows, evaluated, asOf) : null,
+    sns: summarizeSns(snsStore.readByRange(startDate, endDate)),
+    improvements: countOpsImprovements(pending),
+  };
 }
 
 function main() {
@@ -93,6 +124,7 @@ function main() {
       effectVerdicts: verdicts ? { status: "ok", detail: `verdicts-${week}.json` } : { status: "missing", detail: `verdicts-${week}.json` },
     },
     engine: summarizeEngine({ verdicts, gscRows }),
+    operations: buildOperations(week, asOf, pending),
     journey: transitions.rows && pagesClean ? summarizeJourney({ transitions: transitions.rows, pagesClean }) : null,
     workContext: landing.rows ? summarizeWorkContext(landing.rows) : null,
     dimensionGaps: registeredParams && events.rows

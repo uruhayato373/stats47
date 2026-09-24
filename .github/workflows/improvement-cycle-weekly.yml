@@ -75,6 +75,26 @@ jobs:
             exit 1
           fi
           echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+
+      # 日曜の sns-metrics-weekly は fetch-metrics-weekly より後に終わるので、日曜の state にはその週の SNS が入らない。
+      # triage の前に同じスクリプトで作り直してローカル commit し、ゲートの base をこの commit にする
+      # (ゲートは Claude が変えた差分だけを見る)。push は最後の step がまとめて行う。
+      - name: 🔁 Refresh measurement cycle state
+        id: refresh
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          WEEK: ${{ steps.week.outputs.week }}
+        run: |
+          set -euo pipefail
+          bash .claude/scripts/metrics/refresh-measurement-cycle.sh "$WEEK"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/measurement-cycle
+          if ! git diff --cached --quiet; then
+            git commit -q -m "chore(metrics): refresh measurement cycle state ${WEEK} [skip ci]"
+          fi
+          cat .claude/state/metrics/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: 🔐 Require Claude Code OAuth token
@@ -136,7 +156,7 @@ jobs:
       - name: ✅ Gate the recorded diff
         id: gate
         env:
-          BASE_SHA: ${{ steps.week.outputs.base }}
+          BASE_SHA: ${{ steps.refresh.outputs.base }}
           WEEK: ${{ steps.week.outputs.week }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
@@ -153,13 +173,15 @@ jobs:
           git add -- .claude/todo/improvements.md .claude/todo/backlog.md \
             .claude/skills/analytics/*-improvement/reference/improvement-log.md \
             .claude/state/metrics/measurement-cycle/triage-latest.json
-          if git diff --cached --quiet; then
+          if ! git diff --cached --quiet; then
+            git commit -q -m "chore(improvements): weekly measurement cycle ${WEEK} [skip ci]"
+          fi
+          # triage が何も変えなくても、refresh step の state commit は push する
+          git fetch -q origin develop
+          if [ -z "$(git rev-list origin/develop..HEAD)" ]; then
             echo "変更なし"
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(improvements): weekly measurement cycle ${WEEK} [skip ci]"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ pushed"

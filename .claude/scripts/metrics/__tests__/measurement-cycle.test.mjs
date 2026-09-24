@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
-  MIN_EVENTS_FOR_BREAKDOWN, parseCsv, renderCycleMarkdown, summarizeDimensionGaps, summarizeEngine, summarizeJourney,
-  summarizeOverdue, summarizeWorkContext,
+  countOpsImprovements, MIN_EVENTS_FOR_BREAKDOWN, parseCsv, renderCycleMarkdown, summarizeCloudflare,
+  summarizeDimensionGaps, summarizeEngine, summarizeJourney, summarizeOverdue, summarizePsi, summarizeSns,
+  summarizeWorkContext,
 } from '../lib/measurement-cycle.mjs';
 import { buildQuery, parseFilterExpr } from '../lib/ga4-query.mjs';
 
@@ -82,6 +83,50 @@ test('engine summary counts verdicts per domain and lists GSC rows by the marker
   assert.deepEqual(engine.gsc, { active: 2, judgeable: 1, missing: [{ id: 'B-01', missing: ['デプロイ済 YYYY-MM-DD', '[target: +N clicks]'] }] });
   // verdict が無い週は 0 件ではなく「未生成」と区別できる
   assert.equal(summarizeEngine({ verdicts: null, gscRows: [] }).verdictsWeek, null);
+});
+
+test('PSI rows with an empty score are measurement failures, not 0-point pages', () => {
+  const row = (date, url, score, err = '0') => ({ date, url, strategy: 'mobile', score_performance: score, lcp_ms: '2000', violations_error: err });
+  const psi = summarizePsi([
+    row('2026-09-20', 'https://stats47.jp/a', '90'),
+    row('2026-09-20', 'https://stats47.jp/b', '50', '2'),
+    row('2026-09-20', 'https://stats47.jp/areas/01000', '', '1'),
+    row('2026-09-21', 'https://stats47.jp/a', '10'), // asOf より後の行は今週に含めない
+  ], '2026-09-20');
+  assert.equal(psi.mobileMedianScore, 70);
+  assert.deepEqual(psi.worstMobile.map((w) => w.score), [50, 90]);
+  assert.equal(psi.measurementFailures, 1);
+  assert.equal(psi.urlsWithErrors, 1);
+  assert.equal(summarizePsi([row('2026-09-10', 'https://stats47.jp/a', '90')], '2026-09-20').status, 'stale');
+});
+
+test('Cloudflare counts only violations inside the 7-day window ending at the week end', () => {
+  const cf = summarizeCloudflare(
+    [
+      { date: '2026-09-20', workers_requests: '100', workers_errors: '2', r2_class_a_ops: '1', r2_class_b_ops: '2', r2_egress_mb: '3', r2_storage_gb: '32.9' },
+      { date: '2026-09-10', workers_requests: '999', workers_errors: '999', r2_class_a_ops: '0', r2_class_b_ops: '0', r2_egress_mb: '0', r2_storage_gb: '30' },
+    ],
+    [
+      { date: '2026-09-20', violations: [{ severity: 'warning', title: 'R2 storage > 18GB' }] },
+      { date: '2026-09-10', violations: [{ severity: 'critical', title: 'old' }] },
+    ],
+    '2026-09-20',
+  );
+  assert.equal(cf.workersRequests, 100);
+  assert.equal(cf.workersErrorRate, 0.02);
+  assert.deepEqual(cf.violationsBySeverity, { warning: 1 });
+  assert.equal(cf.r2StorageGb, 32.9);
+});
+
+test('SNS keeps reach and views because Instagram no longer reports impressions', () => {
+  const sns = summarizeSns([
+    { platform: 'instagram', content_key: 'a', fetched_at: '2026-09-20T00:00:00Z', impressions: '', reach: '100', views: '150', likes: '3', comments: '1', shares: '0', saves: '2' },
+    { platform: 'x', content_key: 'b', fetched_at: '2026-09-19T00:00:00Z', impressions: '40', likes: '1' },
+  ]);
+  assert.deepEqual(sns.platforms.instagram, { posts: 1, impressions: 0, reach: 100, views: 150, engagements: 6 });
+  assert.equal(sns.latestDate, '2026-09-20');
+  assert.deepEqual(countOpsImprovements([{ section_id: 'P-01', target_metric: 'performance' }, { section_id: 'C-01', target_metric: 'cloudflare-cost' }]),
+    { psi: ['P-01'], cloudflare: ['C-01'], sns: [] });
 });
 
 test('overdue uses the week end as asOf so the same week always yields the same list', () => {

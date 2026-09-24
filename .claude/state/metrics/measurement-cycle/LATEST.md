@@ -52,6 +52,14 @@ GSC 施策 10 件中、機械判定できるのは 0 件。残りは目印が欠
 - `THEME-EXPANSION-EFFECT-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `STP-AI-WATCH-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 
+**運用系の計測**（直近 7 日。閾値違反は日次 alert Issue と同じ判定。改善の判断は人）
+
+| 計測 | 状態 | 要約 | 閾値違反 | active 施策 |
+|---|---|---|---|---|
+| PSI | ok（最新 2026-09-20） | モバイル中央値 71 点・最低 /ranking/future-population-change-rate-2050 46 / /ranking/total-population 56 / /ranking/agricultural-output 58・計測失敗 3 | 最新日 32/35 計測で error | `PERF-WORKER-P99-01`, `ASSET-POLICY-BURNDOWN-01` |
+| Cloudflare | ok（最新 2026-09-20） | Workers 745661 req・error 0.7%・R2 A 66104 / B 2472549・保存 32.952 GB | warning 17・info 7（Workers error rate > 1%、R2 account storage > 18GB、stats47 bucket storage > 12.5GB、R2 egress > 5GB/日） | `R2-STORAGE-01` |
+| SNS | ok（最新 2026-09-20） | instagram 208 投稿・reach 22427・views 26030・eng 82 | —（閾値なし） | なし |
+
 **期日超過の判定待ち**: active 30 件中 3 件
 
 - `TOKEN-AICONTENT-01` pending（期日 2026-09-07・cost）

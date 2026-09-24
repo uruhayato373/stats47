@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W38",
   "asOf": "2026-09-20",
-  "generatedAt": "2026-09-24T11:17:08.269Z",
+  "generatedAt": "2026-09-24T11:24:55.375Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -118,6 +118,98 @@
           ]
         }
       ]
+    }
+  },
+  "operations": {
+    "psi": {
+      "status": "ok",
+      "latestDate": "2026-09-20",
+      "daysInWindow": 6,
+      "mobileMedianScore": 71,
+      "urlsWithErrors": 32,
+      "urlsMeasured": 35,
+      "measurementFailures": 3,
+      "worstMobile": [
+        {
+          "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
+          "score": 46,
+          "lcpMs": 8344
+        },
+        {
+          "url": "https://stats47.jp/ranking/total-population",
+          "score": 56,
+          "lcpMs": 8328
+        },
+        {
+          "url": "https://stats47.jp/ranking/agricultural-output",
+          "score": 58,
+          "lcpMs": 7624
+        }
+      ]
+    },
+    "cloudflare": {
+      "status": "ok",
+      "latestDate": "2026-09-20",
+      "daysInWindow": 7,
+      "workersRequests": 745661,
+      "workersErrorRate": 0.0065,
+      "r2ClassAOps": 66104,
+      "r2ClassBOps": 2472549,
+      "r2EgressMb": 445748,
+      "r2StorageGb": 32.952,
+      "violationsBySeverity": {
+        "warning": 17,
+        "info": 7
+      },
+      "violationTitles": [
+        "Workers error rate > 1%",
+        "R2 account storage > 18GB",
+        "stats47 bucket storage > 12.5GB",
+        "R2 egress > 5GB/日"
+      ]
+    },
+    "sns": {
+      "status": "ok",
+      "latestDate": "2026-09-20",
+      "platforms": {
+        "instagram": {
+          "posts": 208,
+          "impressions": 0,
+          "reach": 22427,
+          "views": 26030,
+          "engagements": 82
+        }
+      },
+      "topPosts": [
+        {
+          "platform": "instagram",
+          "contentKey": "18127929700542935",
+          "engagements": 6,
+          "impressions": 0
+        },
+        {
+          "platform": "instagram",
+          "contentKey": "18345342865217202",
+          "engagements": 5,
+          "impressions": 0
+        },
+        {
+          "platform": "instagram",
+          "contentKey": "18021002309835733",
+          "engagements": 4,
+          "impressions": 0
+        }
+      ]
+    },
+    "improvements": {
+      "psi": [
+        "PERF-WORKER-P99-01",
+        "ASSET-POLICY-BURNDOWN-01"
+      ],
+      "cloudflare": [
+        "R2-STORAGE-01"
+      ],
+      "sns": []
     }
   },
   "journey": {
