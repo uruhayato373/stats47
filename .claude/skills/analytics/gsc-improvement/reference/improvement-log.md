@@ -800,3 +800,12 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
   2026-09-07 まで進捗が動いていないため、この投資判断としては effect/none 相当でクローズする。
   同エントリが特定した狭い問題 (最新週増分の質・areas市区町村/category/themesのクリック希薄化) は
   独立した継続監視事項として残し、必要なら新規エントリで追跡する。
+
+### [COVERAGE-LOOP-01] 旧市区町村カテゴリsoft404是正の検証完了 (2026-09-24)
+
+- **デプロイ日**: 2026-09-07 (PR #939、main `5d05cd6e1`)
+- **検証対象**: `.claude/todo/improvements.md` の `COVERAGE-LOOP-01` に書かれた検証条件「次回exportで市区町村5→0と全体差分を判定する」(期日 2026-09-14)
+- **検証コマンド**: `rg '"action": "content-check"' -B10 .claude/state/gsc/coverage-remediation-queue.json`（現在のcontent-check対象URL一覧を確認） / `cat .claude/state/gsc/coverage-totals-history.csv`（soft-404総数の週次推移を確認）
+- **実測 (2026-09-24、対象exportの観測日は2026-09-20 = W38)**: `coverage-totals-history.csv` のsoft-404はW36(2026-09-04) 450件 → W38(2026-09-20) 445件 (Δ-5)。`coverage-remediation-queue.json` のcontent-check対象URLはW36時点で11件（うち旧市区町村カテゴリ5件、本ログの2026-09-07エントリに記載）だったが、W38時点では5件（`/areas/17000/safety`、`/blog/apple-expenditure-ranking`、`/areas/24000/labor-mobility`、`/areas/33000/fishery-marine`、`/tag/製造業`）に減り、このいずれも旧市区町村カテゴリのURLではない。旧市区町村カテゴリのsoft-404は1件も残っていない。全体soft-404の減少数(-5)と旧市区町村カテゴリの消失件数(5件)が一致している。
+- **判定**: 行に書かれた検証条件を実測が満たした。旧市区町村カテゴリsoft-404の5→0を確認し、全体soft-404の差分もこれと整合する。`.claude/todo/improvements.md` の `COVERAGE-LOOP-01` 行を削除する。
+- **未確定 / 仮説**: この是正がクリック数・表示回数の増加そのものに寄与したかは別軸であり、gsc-blog-wave以外のGSC施策(本施策を含む)はまだ閾値エンジンの判定対象外（`[gsc-page:]` 等の目印が未設定のため）。COVERAGE-LOOP-01はcoverage是正の技術的な完了確認であり、effect/* ラベルは付与しない。

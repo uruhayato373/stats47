@@ -1,16 +1,37 @@
 {
   "schemaVersion": 1,
   "week": "2026-W38",
-  "base": "5df46d09f372c860bf075510816c1dbef2723295",
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/35996605022",
-  "generatedAt": "2026-09-24T12:12:27.814Z",
+  "base": "51d183c950a945fc08de46623eef887653810bab",
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/35999010240",
+  "generatedAt": "2026-09-24T12:35:26.729Z",
   "gate": "pass",
+  "proposal": {
+    "updated": [
+      "TOKEN-AICONTENT-01",
+      "THEME-EXPANSION-EFFECT-01"
+    ],
+    "deleted": [
+      "COVERAGE-LOOP-01"
+    ],
+    "logs": [
+      "gsc-improvement"
+    ],
+    "cards": []
+  },
   "problems": [],
-  "changedFiles": [],
+  "changedFiles": [
+    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+    ".claude/todo/improvements.md"
+  ],
   "improvements": {
-    "deleted": [],
+    "deleted": [
+      "COVERAGE-LOOP-01"
+    ],
     "added": [],
-    "updated": []
+    "updated": [
+      "TOKEN-AICONTENT-01",
+      "THEME-EXPANSION-EFFECT-01"
+    ]
   },
   "backlogAdded": []
 }
