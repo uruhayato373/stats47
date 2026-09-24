@@ -293,3 +293,53 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - **楽天の新規取得と公開**: run34726845212で510検索（463品目・47県）、有品373・正常空137・失敗0。品質監査49/49、公開先510canonical GETは200・内容・新規取得epochがすべて一致。商品存在と収益効果は別に扱う。
 - **計測境界**: 2026-09-08固定baselineとafter=nullを維持。T48h=9/15 14:02:32 JSTは在庫・DOM・GA4送信の確認、T14d=9/27は明示日付・確定期間・同一cohort/placement・期間とサイトが一致するASP成果を確認する。現行CIのdays=28は29暦日で当日を含む。収益・CTR改善は未判定。
 - **証拠**: `.claude/state/metrics/releases/2026-09-13-all-sessions.json` と `.local/verification/release/2026-09-13-all-sessions/` のapp-deployment・rakuten-publication・affiliate-ga4。代表DOMの初回12件は9 PASS・2 NOT_EXERCISED・1 FAIL（沖縄390の先読み503）。高齢化2幅は表示広告0のため未実施であり、在庫不在とは判定しない。停止案件表示・本文/レール重複・横はみ出し・JS errorは0。アプリのGIS配信だけを修正したPR964後、沖縄390を1回再確認しPASS（主HTML200・終端あり・新build一致、HTTP/JS/配置の異常0）。元の失敗を保持し、1回の全12件PASSとは扱わない。証拠は同ディレクトリのpostdeploy-affiliate-dom-verifier-v2およびpostdeploy-pr964-scoped。ASP画像・GA4送信を遮断した代表DOM検査であり、画像意匠や収益効果の検証ではない。テーマ側の503/Cloudflare1102はIssue957で別途未解決として維持する。
+
+---
+
+## AFF-MEASURE-RECOVER-01 アフィリエイト観測復旧の確認 (improvement-triage)
+
+- **確認日**: 2026-09-24
+- **想定効果**: なし（GA4 計測経路の復旧確認。収益効果は対象外）
+- **検証コマンド**:
+  ```bash
+  curl -sS -o /dev/null -w "%{http_code}" https://storage.stats47.jp/state/ads/ga4-affiliate/index.json
+  git log -1 --date=short -- .claude/state/ads/ga4-affiliate-history.csv
+  ```
+- **実測 (2026-09-24)**:
+  - R2 `state/ads/ga4-affiliate/index.json` は HTTP **200**。
+  - `ga4-affiliate-history.csv` の最終行は `2026-09-19,7,_all,_all,4862,8,0.001645`。commit
+    `2026-09-20 chore(ads): ga4 affiliate weekly aggregate 2026-09-19` で commit-back 済み
+    (schedule run 35523570615、2026-09-20T16:42Z、success)。
+- **判定**: 行の完了条件「09-21 に curl が 200 を返し、history.csv の git log 更新日が 09-20 以降」を
+  満たした。**完了 (GA4 側の計測経路復旧のみ)**。
+- **未確定 / 別問題として分離**: 2026-09-21 の月曜再試行 run (35639065973) は `operations state` step の
+  `node .claude/scripts/measurement/restore.mjs moshimo --if-activated` が
+  `{"source":"moshimo","status":"unavailable"}` を返して exit 1 となり、measurement gate も
+  failure、Issue #1007 が OPEN のまま。原因は `.claude/state/metrics/authenticated/latest.json`
+  (2026-09-23T14:19Z) で moshimo / a8 / kdp が `auth_required`、`recovery.state=awaiting_reauthentication`
+  (2026-09-21〜) であること。これは ASP 側の本人再ログイン待ちで、本行が確認対象とした
+  「GA4 affiliate 観測 history の commit-back 復旧」とは別問題のため、本行の完了条件には含めない。
+  継続追跡は既存の backlog `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`（`AFF-A8-REGISTER-01` も
+  同一ブロッカーで待機中）。
+
+---
+
+## AFF-BRAND-FIT-01 health軸ブランド不適合広告の停止確認 (improvement-triage)
+
+- **停止判断日**: 2026-09-18。**本番反映日**: 2026-09-19 08:23 JST（PR #983 の main マージ、commit `3a859859d`）。
+- **想定効果**: 収益効果は想定しない。目的は停止対象 3 案件
+  (`af_s00000013307001_a8_001` / `af_s00000013307001_a8_text_001` / `af_maca_emperor_001`) の
+  配信 0 を本番反映後に実測すること。
+- **検証コマンド**: GA4 Data API v1beta（property 463218070）、
+  `eventName ∈ {affiliate_impression, affiliate_click}` かつ `customEvent:ad_id` を上記 3 件へ絞り、
+  country=Japan で行数を確認。
+- **実測 (2026-09-24 取得。期間 2026-09-05〜09-23)**: 該当 ad_id 3 件で **0 行**。同期間の `ad_id`
+  次元は `affiliate_impression` で 221 種類を返しており（最多 af_aeon_kyushu_area_001 = 2,026 imp）、
+  次元自体は機能している。
+- **判定**: 行の完了条件「本番反映後に配信 0 を実測」を満たした。**完了**。
+- **留保 (原因推定の範囲を実測の範囲に限定する)**: 反映前の 2026-09-05〜09-18 も同じ 3 案件は
+  0 行だった。したがって「反映後の 0 が停止措置だけの効果である」とは主張しない
+  (`.claude/rules/evidence-based-judgment.md` 状況 3)。0 が反映前から続いていた可能性があり、
+  停止措置の因果効果を確定するには反映前に実際に配信されていたことを示す別の実測 (当時の
+  inventory snapshot や impression ログ) が要るが、それは本施策の完了条件の範囲外。ブランド不適合の
+  禁止事項 (`精力` / `マカ` blocklist 化) は収益化戦略 §8 に恒久化済み。
