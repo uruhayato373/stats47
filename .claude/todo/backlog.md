@@ -21,26 +21,6 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
-### [MAP-BASEMAP-APIKEY-01] ランキング等の地図の背景に CARTO の「API KEY REQUIRED」透かしが全面に出る
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:curl -s https://stats47.jp/tiles/light_all/5/28/12.png の画像に透かしが無い] [起票:2026-09-23]
-
-- **owner**: ranking-ui-manager (地図) / site-ux-manager (横断)
-- **実測 (2026-09-23)**: 週次 UI 確認の agent がランキング地図のスクショから検出。`https://stats47.jp/tiles/light_all/5/28/12.png` (プロキシ `apps/web/src/app/tiles/[theme]/[z]/[x]/[ypng]/route.ts`) も、`https://a.basemaps.cartocdn.com/light_all/5/28/12.png` を Referer 有無どちらで直接取得しても、画像に「API KEY REQUIRED / carto.com/basemaps/apikey」の透かしが入る (HTTP 200・6,407 bytes)。CARTO 側がキー無しの basemap 配信に透かしを入れるようになった。全ランキングページの地図と、同じタイルを使う他の地図が対象。
-- **切替時の注意 (2026-09-24 調査)**: プロキシは `Cache-Control: public, max-age=2592000, immutable` を返すため、利用者のブラウザは透かし入りタイルを同じ URL で最大 30 日使い続ける。エッジのパージだけでは消えないので、切り替えるなら URL を変える (例: プロキシの theme キーを新設)。地理院淡色には暗い配色が無く、ダークモードの地図も淡色になる。ランキングページの LCP 要素はこのタイルの preload (`getInitialMapTileUrls`) なので、`PERF-RANKING-LCP-03` の比較が途切れる。
-- **次**: CARTO の API キーを取得して使うか (利用条件・費用の確認はオーナー)、出典条件の明確な別タイル (国土地理院タイル等。テーマページで既に使用) へ切り替えるかを決め、プロキシの上流を差し替える。Cloudflare のエッジキャッシュに透かし入りタイルが残るので切替後にパージする。
-- **完了条件**: 代表ランキングページの地図に透かしが出ず、出典表記が利用条件どおり表示される。
-
-### [GEO-PREVIEW-MISSING-01] /geo の分析カードで地図プレビューがすべて「取得できませんでした」
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:週次 UI 確認の agent 指摘に geo-analysis の地図プレビュー欠落が出ない] [起票:2026-09-23]
-
-- **owner**: geo-analysis-curator
-- **実測 (2026-09-23・本番・スマホ/PC)**: `/geo` の 6 分析カードすべてで、地図プレビューの位置に「地図プレビューを取得できませんでした」と出ている (週次 UI 確認のスクショ `state/page-quality/screenshots/2026-09-23/geo-analysis-mobile.png`)。ページの主要な見どころが全カードで欠けている。
-- **原因と修正 (2026-09-24・コード修正済み・本番反映待ち)**: R2 の県別 bundle と manifest は 3 分析とも件数・SHA まで一致しており、データは正常。`/geo` は `revalidate` だけを持つ静的 route で、build 時 (R2 を読めない CI) に `○` として prerender され、本番 HTML にフォールバック文言が 6 回焼き込まれていた (`x-nextjs-prerender: 1`)。home `/` と同じ事故型。`apps/web/src/app/geo/page.tsx` を `force-dynamic` にし、`check-r2-route-ssg.cjs` の対象に追加した (外すと exit 1 になることを確認)。localhost の本番ビルドで `/geo` は `ƒ`、フォールバック 0 件・地図 path 72 本。
-- **次**: 次の develop→main デプロイ後に本番 `/geo` を curl し、`地図プレビューを取得できませんでした` が 0 件であることを確認して閉じる。ページが毎リクエスト描画になるため、`CF-CPU-SURGE-01` の route 別 CPU 集計で `/geo` の増分も見る。
-- **完了条件**: 6 カードすべてで地図プレビューが表示される。
-
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --limit 1 --dry-run] [起票:2026-09-23] [期日:2026-10-20]
@@ -292,6 +272,7 @@ updated: 2026-09-21
   09-10 の 1 日を除きベースライン未満だが、完了条件の「3 週連続」には 09-28 まで観測が要る。期日をそこへ動かした (判定は週次レビューで)。
 - **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
 - **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
+- **比較の断絶 (2026-09-25)**: LCP 要素である背景タイルを CARTO (同一 origin の /tiles プロキシ・30 日エッジキャッシュ) から地理院タイル (cyberjapandata.gsi.go.jp を直接取得) へ切り替えた (commit 871096e46、main 95a9971)。9/25 以降の PSI はタイル配信元が別物なので、ベースライン 9,347ms との比較は 9/25 以降の 3 週で改めて判定し、それ以前の推移とつなげない。
 - **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
@@ -741,14 +722,6 @@ updated: 2026-09-21
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
-### [BLOG-REVIEW-AREA-RATIO-01] 面積割合記事の除外定義・同率順位・構造分析を是正する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/quality-gate.mjs area-ratio-prefecture-gap] [起票:2026-08-29] [Codex候補]
-
-- **次**: #B01101の除外範囲をタイトル・description・定義・出典へ反映し、同率順位を未丸め値で確認する。上位・下位差は公的一次資料で実証し、接地できなければ検証論点へ限定する。
-- **禁止**: 未確認の順位や、面積割合だけから行政・インフラへの因果を断定しない。
-- **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [AREA-SPECIALTY-IMAGES-01] 都道府県ページの特産品画像が未生成で頭文字タイルのまま
@@ -760,24 +733,15 @@ updated: 2026-09-21
 - **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 
-### [METRIC-EMPLOYED-OUTSIDE-PREF-YEAR-01] 県外就職者比率の subtitle「〜2020年」と最新値 2024 年が食い違う
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23]
-
-- **owner**: data-ingester
-- **実測 (2026-09-23)**: `employed-outside-the-prefecture` の item.json は subtitle が「〜2020年」だが、R2 values.json の最新パーティションは 2024 年 (1 位埼玉県 32.9％・最下位北海道 4.9％)。何を分母にした比率か (新規学卒者か就業者全体か) も item からは読めない。X 投稿の候補から外した。
-- **config 修正済み (2026-09-24)**: SSDS 0000010206 / #F0310201 は 2019〜2024 年度の 47 県値があり、算式は「他県への就職件数 ÷ 就職件数（一般）× 100」(分母はハローワークの就職件数・新規学卒者を含まない)。2018 年度以前は別算式で既存の pre2018 metric が担う。`employed-outside-the-prefecture.ts` の subtitle を「2019年度〜」、years を 2019〜2024 にし、分母を description に書いた。`validate:config` / `validate:years` / type-check exit 0。
-- **次**: R2 の item.json を再生成する (値は既に 2024 年まで入っているので観測値の再取り込みは不要か、item 再生成で足りるかを確かめる)。本番のランキングページで subtitle と説明の分母を確認して閉じる。
-- **完了条件**: subtitle・定義・最新年が一致し、ランキングページの説明で比率の分母がわかる。
-
-
 ### [AREA-DATABOOK-MISSING-VALUES-01] 県データブックの 2 指標 (犯罪率・住宅の床面積) に R2 観測値が無い
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:curl -s -o /dev/null -w '%{http_code}' https://storage.stats47.jp/app/ranking/crime-rate-per-1k/values.json が200を返す] [起票:2026-09-23]
 
 - **owner**: data-ingester (投入) / ranking-publisher (公開)
 - **実測 (2026-09-23)**: `AREA_DATABOOK_TEMPLATE` (`packages/data-configs/src/area-databook/template.ts`) が参照する `crime-rate-per-1k` (statsDataId 0000020311) と `housing-floor-area` (0000020308) は config が `isActive: true` だが、R2 の `app/ranking/<key>/values.json` と `app/stats/<key>/values.json` がどちらも 404 (`item.json` は 200)。`known-ranking-keys.ts` にも `gone-ranking-keys.ts` にも無く、`https://stats47.jp/ranking/crime-rate-per-1k` は 410。IG 地域カルーセルの生成で 47 県すべて取得失敗して発覚した。県ページのデータブックでこの 2 項目が空欄になっているかは未確認。
-- **次**: ①県ページ (例 `/areas/13000`) のデータブックで 2 項目の表示を確認する。②e-Stat から観測値を投入し、memory `project_ranking_publish_pipeline_gap` の手順 (KNOWN/SITEMAP/R2 values/OGP) で公開する。投入できない事情があればテンプレートから外す。
+- **原因と修正 (2026-09-25・main 反映待ち)**: 2 key はどちらも市区町村専用 config (`entities: city`・2005 年まで) で、都道府県の値は元から存在しない。data-refresh も「Not an active prefecture ranking」で拒否した。テンプレを都道府県の同義指標 `penal-code-offenses-recognized-per-1000` と、全住宅の県指標が無いため持ち家率の隣に `floor-area-per-dwelling-owner` (持ち家の延べ床面積) へ差し替えた (commit 9a4da5dc6)。
+- **残り**: main 反映後に `sync-snapshots` (only=area-profile) で databook.json を再生成し、`/areas/13000` で 2 項目に値が出ることを確かめて閉じる。
+- **旧・次**: ①県ページ (例 `/areas/13000`) のデータブックで 2 項目の表示を確認する。②e-Stat から観測値を投入し、memory `project_ranking_publish_pipeline_gap` の手順 (KNOWN/SITEMAP/R2 values/OGP) で公開する。投入できない事情があればテンプレートから外す。
 - **完了条件**: 2 指標の values.json が 200 を返し、県ページのデータブックに値が出る (またはテンプレートから外れている)。
 
 ### [METRIC-ACUPUNCTURIST-RATE-UNIT-01] 「人口10万対はり師数」の値が実数になっている
@@ -788,7 +752,7 @@ updated: 2026-09-21
 - **実測 (2026-09-23)**: `acupuncturist-rate` は title が「人口10万対はり師数」、unit が「人」だが、R2 `app/ranking/acupuncturist-rate/values.json` (2020) の値は東京都 22,314・大阪府 16,049・鳥取県 277 で、人口 10 万人あたりではなく実数。config は `statsDataId: 0004026940` / `cdCat01: 100` / `conversionFactor: 1` で、`normalizationOptions` に「人/10万人」があるのに基底値は正規化されていない。ランキングページもこの名前で実数を並べている。IG 地域カルーセルの試作で東京の「全国 1 位」として拾われて発覚した。
 - **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。
 - **原因と config 修正 (2026-09-24)**: 0004026940 で config が指していた cdTab=0120 は「はり師数」の実数 (東京都 22,314人)。人口10万対の率は cdTab=0160 (東京都 158.8、1位大阪府 181.6)。同じ誤りが柔道整復師数 (0140→0180) と看護師数 0004026841 (0270→0310) にもあった。3 config を率の列へ直し、二重割りを防ぐため「人口10万人あたり」の換算オプションを外し、seoTitle から古い順位の数値を外した。犯罪 3 件・火災死亡者数は title が実数名で値と一致しているので対象外。`validate:config` / `validate:years` / type-check / vitest 971 件 exit 0。
-- **次**: ① 3 metric (acupuncturist-rate / judo-therapist-rate / nurses-per-100k-population) を R2 へ再取り込みし item / values を再生成する。② 再取り込み後に率の値で seoTitle を作り直す。③ `packages/product-factory/src/data/datasets/nurses-per-100k-population.ts` が看護師の実数を「人口10万人当たり」と表示したまま商品パックに使っているので、R2 修正後に再生成する。
+- **次**: ① 3 metric (acupuncturist-rate / judo-therapist-rate / nurses-per-100k-population) を R2 へ再取り込みし item / values を再生成する。② 再取り込み後に率の値で seoTitle を作り直す。(商品パックの `product-factory/src/data/datasets/nurses-per-100k-population.ts` は既に率の値 (東京都 854.6) を持っており再生成は不要。R2 修正後に東京都が 854.6 になることで一致を確かめる。)
 - **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
