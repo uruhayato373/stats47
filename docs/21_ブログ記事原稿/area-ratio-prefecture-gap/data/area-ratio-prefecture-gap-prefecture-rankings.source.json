@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "area-ratio-of-total",
+  "year": "2023",
+  "unit": "％",
+  "label": "面積割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/area-ratio-of-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug area-ratio-prefecture-gap --keys area-ratio-of-total --data-name area-ratio-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-29T08:13:07.292Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
