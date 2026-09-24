@@ -110,6 +110,20 @@ jobs:
           retention-days: 14
           if-no-files-found: warn
 
+      # 表示が変わった snapshot を読むページだけを purge 対象にする。以前は毎日 --all で全ページの
+      # HTML を消していた (2026-09-11 に purge が HTML へ効くようになってから Workers CPU ms が増えた)。
+      # 本番 R2 の現行版と比べるので Push より前に置く。失敗しても同期は止めない。
+      # 一覧ファイルを残さないことで、purge 側が --all へ倒す。
+      - name: 🔎 Resolve pages whose Rakuten cards changed
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          if ! npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
+            apps/web/scripts/resolve-rakuten-purge-urls.ts \
+            --dir .local/r2/app/rakuten --out .local/ci/rakuten-purge-urls.txt; then
+            echo "::warning::purge 対象を決められなかった。purge は --all で行う"
+            rm -f .local/ci/rakuten-purge-urls.txt
+          fi
+
       # ★ saveToR2 は .local/r2/ に書くだけ。実 R2 への反映は diff-push-r2 (S3 API) が行う
       #   2 段構成 (sync-snapshots/run.sh と同じ)。この段が無いと「書込済」と表示されても
       #   本番には何も反映されない。
@@ -119,7 +133,18 @@ jobs:
 
       - name: 🧹 Purge Workers Cache
         if: ${{ inputs.dry_run != true }}
-        run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
+        run: |
+          # 一覧が無い = 比較できなかった日は従来どおり全ページを消す (古い楽天カードを残さない側へ倒す)
+          if [ ! -f .local/ci/rakuten-purge-urls.txt ]; then
+            npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
+            exit 0
+          fi
+          mapfile -t URLS < .local/ci/rakuten-purge-urls.txt
+          if [ "${#URLS[@]}" -eq 0 ]; then
+            echo "表示が変わった楽天 snapshot なし。purge しない"
+            exit 0
+          fi
+          npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --urls "${URLS[@]}"
 
       # ★失敗を検知できるようにする。この cron が黙って死ぬと R2 が古いまま配信され続け、
       #   楽天アプリの期限切れ (2027-03-07) / スコープ変更 / Allowed IP 変更に気づけない。

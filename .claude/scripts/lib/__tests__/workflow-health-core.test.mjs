@@ -261,7 +261,7 @@ test('未発火もunhealthy集計と報告へ入り、0回連続失敗と誤表�
   assert.doesNotMatch(out, /0 回連続失敗/);
 });
 
-test('明示schedule契約は実workflowのUTC日次cronと一致する', async () => {
+test('明示schedule契約は実workflowのUTC日次/週次cronと一致する', async () => {
   const fs = await import('node:fs');
   const path = await import('node:path');
   const { fileURLToPath } = await import('node:url');
@@ -270,9 +270,42 @@ test('明示schedule契約は実workflowのUTC日次cronと一致する', async 
   for (const [workflow, contract] of Object.entries(SCHEDULE_CONTRACTS)) {
     const source = yaml.load(fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8'));
     const first = new Date(contract.firstExpectedAt);
-    assert.equal(contract.intervalHours, 24);
-    assert.deepEqual(source.on.schedule, [{ cron: `${first.getUTCMinutes()} ${first.getUTCHours()} * * *` }]);
+    assert.ok([24, 168].includes(contract.intervalHours), `${workflow}: 日次か週次だけを契約にする`);
+    const dayOfWeek = contract.intervalHours === 168 ? String(first.getUTCDay()) : '*';
+    assert.deepEqual(
+      source.on.schedule,
+      [{ cron: `${first.getUTCMinutes()} ${first.getUTCHours()} * * ${dayOfWeek}` }],
+      `${workflow}: firstExpectedAt が cron の枠に乗っていない`,
+    );
   }
+});
+
+// スクショ検査 (page-quality-audit-weekly) と週次フル検査は、既定の 2 回連続では 2 週間黙る。
+test('週次契約の workflow は 1 回の失敗 (長時間の cancelled を含む) で unhealthy になる', () => {
+  const nowMs = Date.parse('2026-09-27T00:00:00Z');
+  const timedOut = run({
+    conclusion: 'cancelled',
+    createdAt: '2026-09-26T18:00:00Z',
+    runStartedAt: '2026-09-26T18:00:00Z',
+    updatedAt: '2026-09-26T18:46:00Z',
+  });
+  const weekly = evaluateWorkflow('page-quality-audit-weekly.yml', [timedOut], { nowMs, minStreak: 2 });
+  assert.equal(weekly.failureStreak, 1);
+  assert.equal(weekly.unhealthy, true);
+  // 契約の無い workflow は従来どおり 2 回連続まで鳴らさない
+  assert.equal(evaluateWorkflow('x.yml', [timedOut], { nowMs, minStreak: 2 }).unhealthy, false);
+});
+
+test('週次契約の workflow が予定枠から猶予を過ぎても起動していなければ unhealthy', () => {
+  const lastWeek = run({ createdAt: '2026-09-26T22:31:00Z', updatedAt: '2026-09-26T23:20:00Z' });
+  // 次の枠 (10/03 22:30) + 猶予 6 時間より前は健全
+  assert.equal(
+    evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-10-04T04:00:00Z') }).unhealthy,
+    false,
+  );
+  const missed = evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-10-05T00:00:00Z') });
+  assert.equal(missed.unhealthy, true);
+  assert.equal(evaluateSchedule('quality-suite-weekly.yml', [lastWeek], Date.parse('2026-10-05T00:00:00Z')).code, 'scheduled_run_stale');
 });
 
 test('API取得はscheduleで絞り込み、eventを判定層まで維持する', async () => {

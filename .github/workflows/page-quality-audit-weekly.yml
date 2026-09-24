@@ -114,12 +114,28 @@ jobs:
           fi
           if [ -f /tmp/ui-review-alert.md ]; then cat /tmp/ui-review-alert.md >> "$GITHUB_STEP_SUMMARY"; fi
 
+      # UI の指摘を週をまたいで追跡し、未対応のものを UI-FIX-* カードとして backlog へ起票する。
+      # 修正は backlog-loop-daily (CI の Claude) が行い、本番確認は次の週次がここで行う (消えていれば done、
+      # 本番反映後も残っていれば pending に戻して再起票)。本番反映の判定に origin/main の最新マージ時刻を使う。
+      # 失敗は握りつぶさない (job を赤にして workflow-health-daily の週次契約で翌朝に知らせる)。
+      # 正典: .claude/rules/page-quality-standards.md「UI 指摘のループ」
+      - name: 🗂 Track UI findings and file backlog cards
+        if: always() && hashFiles('.local/r2/state/page-quality/latest.json') != ''
+        run: |
+          git fetch --quiet --depth=1 origin main
+          ARGS=(--sync --run .local/r2/state/page-quality/latest.json)
+          ARGS+=(--review .claude/state/metrics/page-quality/ui-review-latest.json)
+          ARGS+=(--main-deployed-at "$(git log -1 --format=%cI origin/main)")
+          npx tsx .claude/scripts/page-quality/ui-findings.ts "${ARGS[@]}"
+
       - name: 📤 Commit audit result to develop
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .claude/state/metrics/page-quality/
+          # UI 指摘キューと起票したカード (live/ は .gitignore 済み)
+          git add .claude/state/page-quality/ .claude/todo/backlog.md
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0

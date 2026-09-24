@@ -132,6 +132,10 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 是正キューの「判断が要る pending」から起票する (action ごとに 1 枚・10 URL まで・`[実行:sweep]`)。gate は
 `build-coverage-queue.mjs --assert-handled <batch>`。成果物が是正キューへの `--mark-*` なので、commit 対象に
 `.claude/state/gsc` を含める。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+`UI-FIX-*` は週次のページ品質監査 (`page-quality-audit-weekly.yml`) が `.claude/scripts/page-quality/ui-findings.ts --sync` で
+UI 指摘キューの pending から起票する (ページの種類ごとに 1 枚・10 件まで・`[実行:sweep]`)。gate は
+`ui-findings.ts --assert-handled <batch>`、commit 対象に `.claude/state/page-quality` を含める。正典は
+`.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
 
 cloud セッションは `actions:write` が無く dispatch できないため、
 `data/backlog-loop-requests.json` を develop へ push する経路も持つ (request は成否によらず消費する)。

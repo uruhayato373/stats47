@@ -17,6 +17,13 @@ export const BLOG_AFFILIATE_POLICY: Readonly<Record<string, BlogAffiliatePolicyE
   },
 };
 
+/**
+ * 楽天カードを出しうる記事の vertical (`resolveBlogRakutenPlacement` の入口条件)。
+ * 楽天カタログ同期の purge 対象 (`apps/web/scripts/lib/rakuten-purge-targets.ts`) も同じ集合で記事を選ぶ。
+ * CLI から import されるため、このファイルには `@/` alias の import を持ち込まない。
+ */
+export const BLOG_RAKUTEN_VERTICALS: ReadonlySet<AffiliateVertical> = new Set(["furusato", "economy", "travel"]);
+
 export function applyBlogAffiliatePolicy(
   slug: string,
   input: ContentVerticalInput,

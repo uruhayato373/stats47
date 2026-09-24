@@ -1,11 +1,11 @@
 {
-  "hash": "8831f947894fe8a0969eac0080199311d2b1a3f8f827a3036627e9c473568e9a",
-  "audited_at": "2026-09-24T02:25:32",
+  "hash": "e34ec4970ec9647c439a671b83e488d6dc42fe30751b275eaaa595fb5213d862",
+  "audited_at": "2026-09-24T06:18:13",
   "files": [
-    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/scripts/gsc/__tests__/coverage-queue-state.test.mjs",
-    ".claude/scripts/gsc/build-coverage-queue.mjs",
-    ".claude/scripts/gsc/lib/coverage-queue-state.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md"
+    ".claude/rules/backlog-loop.md",
+    ".claude/rules/page-quality-standards.md",
+    ".claude/scripts/page-quality/__tests__/ui-findings.test.mjs",
+    ".claude/scripts/page-quality/lib/ui-findings.ts",
+    ".claude/scripts/page-quality/ui-findings.ts"
   ]
 }

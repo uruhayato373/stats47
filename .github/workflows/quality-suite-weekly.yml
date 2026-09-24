@@ -133,8 +133,10 @@ jobs:
         with:
           node-version: "20"
           cache: npm
+      # job env の NODE_ENV=production だと npm ci が devDependencies を省く (2026-09-20 実測: 722 件のみ・
+      # 他 job は 1661 件)。rimraf が無く build 前の workers:clean が exit 127 で落ち、web E2E が 1 本も動かなかった。
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=dev
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Build web once
@@ -189,7 +191,9 @@ jobs:
           E2E_RESULT: ${{ needs.web-e2e.result }}
         run: |
           TITLE="[Quality Alert] 週次フル検査に失敗があります"
-          gh label create quality-suite-alert --description "週次フル品質検査" --color b60205 --force
+          # この job は checkout しないので、gh には必ず --repo を渡す。無いと "not a git repository" で落ち、
+          # 失敗が Issue にならず誰にも知らされない (2026-09-20 に実際にそうなった)
+          gh label create quality-suite-alert --repo "$GITHUB_REPOSITORY" --description "週次フル品質検査" --color b60205 --force
           existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label quality-suite-alert --json number --jq '.[0].number // empty')
           if [ "$TYPE_RESULT" = success ] && [ "$TEST_RESULT" = success ] && [ "$ADMIN_RESULT" = success ] && [ "$E2E_RESULT" = success ]; then
             if [ -n "$existing" ]; then

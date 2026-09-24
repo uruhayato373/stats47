@@ -55,7 +55,30 @@ paths:
 
 **通知**: 「先週の週次結果に無かった UI 違反」と agent の指摘を `ui-review-alert` Issue 1 件へまとめ、
 両方無くなったら閉じる。warning の UI 違反も新しく出た週には通知される (前週から続く同じ違反は再通知しない)。
-直すと決めたものは人がバックログへカードにする (Issue は PR で閉じる改修と機械アラートだけの運用のため)。
+
+## UI 指摘のループ (検査 → 起票 → 修正 → 本番確認・2026-09-24)
+
+以前は Issue に載るだけで、カードは人が手で起こしていた (2026-09-23 の agent の指摘 6 件のうち 4 件はカードに
+ならなかった)。今は週次監査の中で `ui-findings.ts --sync` が指摘を **UI 指摘キュー**
+(`.claude/state/page-quality/ui-findings-queue.json`) に記録し、未対応のものをカードにする。形は GSC カバレッジ
+是正キュー (`gsc-coverage-remediation` の Phase 4) と同じ。判定は `lib/ui-findings.ts` の純粋関数。
+
+1. **検査**: 機械検出 (`UI_METRIC_KEYS` の違反。key は `machine|<url>|<metric>`) と agent の指摘 (ページの種類ごとに
+   1 件にまとめる。key は `agent|<template>`。表現が週ごとに変わるので文面では同一性を取らない) を取り込む。
+2. **起票**: pending をページの種類ごとに 1 枚の `UI-FIX-<種類>-<日付>` カード (`[実行:sweep]`・10 件まで) にする。
+   その種類のカードが開いている間は次を出さない。対象は `.claude/state/page-quality/backlog-batches/<ID>.txt`。
+3. **修正**: `backlog-loop-daily` (CI の Claude) が直し、`--mark-fixed` / `--mark-by-design` / `--mark-owner` で印を付ける。
+   completion gate は `ui-findings.ts --assert-handled <batch>` (全件が pending でなく、done 以外は理由 note 付き)。
+   オーナー判断が要るもの (デザイン方針・画像制作・外部契約) は `[実行:対話]` のカードを起票し `--card` で紐付ける。
+4. **本番確認**: 次の週次で消えていれば done。`fixed` は **origin/main へのマージが修正より後で、監査の 30 分以上前**
+   なら本番反映済みとみなし、それでも残っていれば pending に戻して再起票する (反映前は fixed のまま待つ)。
+   done が再び出たら再発として pending。agent の by-design は 28 日で見直す (機械検出は観測中は保つ)。
+   agent の確認が走らなかった週は、agent の指摘を「消えた」と扱わない。
+
+同期が失敗したら job を赤にする (握りつぶすと黙って止まる)。`workflow-health-daily` は本 workflow を
+週次契約 (1 回の失敗・予定枠の未起動で通知) で見ている。手動カードが担当する指摘は `owner` + `card` で持ち、
+そのカードが開いている間は起票しない。配線 (週次が同期して commit・ループがキューを commit) は
+`__tests__/ui-findings.test.mjs` が固定する。
 
 ## UI 検査の判定 (誤検知を出さないための除外)
 

@@ -78,6 +78,8 @@ test.describe("/sns ページ内 video の seek", () => {
   test("ローカル mp4 を持つ投稿カードで video.currentTime を設定できる", async ({ page }) => {
     await page.goto("/sns");
     await page.waitForLoadState("networkidle");
+    // 一覧が読み込まれる前に video を探すと、素材があっても「無い」としてスキップしてしまう
+    await expect(page.locator("text=/\\d+ 件/").first()).toHaveText(/^[1-9]\d* 件$/, { timeout: 30_000 });
 
     // ローカル mp4 を持つことが分かっている post (bcr-births-1995-2023, id=580) を検索で絞り込む
     await page.getByPlaceholder("content_key / caption 検索").fill("bcr-births-1995-2023");
@@ -85,14 +87,22 @@ test.describe("/sns ページ内 video の seek", () => {
 
     const video = page.locator("video").first();
     const hasVideo = (await video.count()) > 0;
-    test.skip(!hasVideo, "sns ページ内に video 要素を持つカードが見つからずスキップ");
+    // ローカル素材が無い checkout (CI) では mediaCandidates が R2 URL へ落ちる。投稿済み動画は R2 から
+    // 30 日で消えるため loadedmetadata が来ず、待ち続けて 30 秒で時間切れになっていた (2026-09-20)。
+    // 上の Range 検証と同じく、ローカル配信 (/media/) の video が無ければスキップする。
+    const src = hasVideo ? ((await video.getAttribute("src")) ?? "") : "";
+    const servedLocally = new URL(src || "about:blank", page.url()).pathname.startsWith("/media/");
+    test.skip(!hasVideo || !servedLocally, "ローカル素材 (.local/r2/sns) の video を持つカードが無いためスキップ");
 
     await expect(video).toBeVisible();
-    // メタデータ読み込みを待ってから seek
+    // メタデータ読み込みを待ってから seek。読めない動画は待たずに失敗させる
     await video.evaluate((el: HTMLVideoElement) => {
-      return new Promise<void>((resolve) => {
+      return new Promise<void>((resolve, reject) => {
+        const fail = () => reject(new Error(`video を読み込めない: ${el.currentSrc || el.src}`));
         if (el.readyState >= 1) return resolve();
+        if (el.error) return fail();
         el.addEventListener("loadedmetadata", () => resolve(), { once: true });
+        el.addEventListener("error", fail, { once: true });
       });
     });
     const duration = await video.evaluate((el: HTMLVideoElement) => el.duration);

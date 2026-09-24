@@ -215,8 +215,9 @@ jobs:
           fi
           # .claude/state/gsc: GSC 是正カード (GSC-COV-*) は是正キューへの --mark-* が成果物。
           # ここを commit しないと gate を通って行が消えたのにキューが pending のまま残り、翌日同じ URL が再起票される。
-          git add -- .claude/todo .claude/state/backlog-loop .claude/state/gsc .claude/scripts .claude/rules \
-            .claude/skills .claude/agents packages apps || true
+          # .claude/state/page-quality: UI 是正カード (UI-FIX-*) も同じ。UI 指摘キューへの --mark-* が成果物。
+          git add -- .claude/todo .claude/state/backlog-loop .claude/state/gsc .claude/state/page-quality .claude/scripts \
+            .claude/rules .claude/skills .claude/agents packages apps || true
           if git diff --cached --quiet; then
             echo "変更なし (処理対象 ${TARGET_COUNT} 件・すべて skipped か failed)"
             exit 0
