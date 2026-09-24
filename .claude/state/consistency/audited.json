@@ -1,8 +1,11 @@
 {
-  "hash": "d7c32d0f9a742ff2d60d6af7114f4b15d83d5628f7d40b995e8fb09db41ea61d",
-  "audited_at": "2026-09-24T05:49:33",
+  "hash": "e34ec4970ec9647c439a671b83e488d6dc42fe30751b275eaaa595fb5213d862",
+  "audited_at": "2026-09-24T06:18:13",
   "files": [
-    ".claude/scripts/lib/__tests__/workflow-health-core.test.mjs",
-    ".claude/scripts/lib/workflow-health-core.mjs"
+    ".claude/rules/backlog-loop.md",
+    ".claude/rules/page-quality-standards.md",
+    ".claude/scripts/page-quality/__tests__/ui-findings.test.mjs",
+    ".claude/scripts/page-quality/lib/ui-findings.ts",
+    ".claude/scripts/page-quality/ui-findings.ts"
   ]
 }
