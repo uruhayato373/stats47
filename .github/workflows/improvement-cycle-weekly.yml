@@ -169,9 +169,9 @@ jobs:
           echo "::error::develop への push に 3 回失敗した"
           exit 1
 
+      # 計測のみ。失敗しても本体の成否を変えないよう、push 失敗は warning で終える
       - name: 📊 Record token usage
         if: ${{ always() && steps.claude.outcome != 'skipped' }}
-        continue-on-error: true
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
           RUN_ID: ${{ github.run_id }}
@@ -179,11 +179,14 @@ jobs:
           FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
           # items = この run が削除または更新した施策の数 (ゲート結果から。ゲート前に落ちたら 0)
           ITEMS=$(node -e 'try{const i=require("./.claude/state/metrics/measurement-cycle/triage-latest.json").improvements;process.stdout.write(String(i.deleted.length+i.updated.length))}catch{process.stdout.write("0")}')
-          node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
+          if ! node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
             --workflow improvement-cycle \
             --run-id "$RUN_ID" \
             --limit 8 \
-            --items "$ITEMS"
+            --items "$ITEMS"; then
+            echo "::warning::トークン実績を記録できなかった (計測のみ・本体には影響しない)"
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .claude/state/metrics/claude-usage || true
@@ -197,8 +200,8 @@ jobs:
             fi
             sleep 5
           done
-          echo "::error::トークン実績の push に失敗した (計測のみ・本体には影響しない)"
-          exit 1
+          echo "::warning::トークン実績の push に失敗した (計測のみ・本体には影響しない)"
+          exit 0
 
       - name: 🚨 Upsert failure issue
         if: ${{ failure() && env.DRY_RUN != 'true' }}

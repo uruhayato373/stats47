@@ -237,8 +237,9 @@ jobs:
       # 計測→記録→改善サイクルの週次 state。月曜 06:00 の improvement-cycle-weekly.yml (無人 triage) と
       # 09:00 の週次メトリクス Issue が読む。GA4 Admin API の監査 state は README の規約で repo へ自動 commit しない
       # ので /tmp へ退避し、登録済みパラメータ名だけを builder に渡す。
+      # state が作れなくても週次計測本体は commit する。失敗は warning に出し、月曜の
+      # improvement-cycle-weekly が「state の週が対象週と違う」で止まって improvement-cycle-alert を起票する。
       - name: 🔁 Build measurement cycle state (計測→記録→改善)
-        continue-on-error: true # state が作れなくても週次計測本体は commit する (月曜の triage が週の不一致で止まる)
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
@@ -252,8 +253,11 @@ jobs:
             ARGS+=(--admin-audit /tmp/google-admin-api-latest.json)
           fi
           rm -rf .claude/state/metrics/google-admin
-          node .claude/scripts/metrics/build-measurement-cycle.mjs "${ARGS[@]}"
-          cat .claude/state/metrics/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          if node .claude/scripts/metrics/build-measurement-cycle.mjs "${ARGS[@]}"; then
+            cat .claude/state/metrics/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning::build-measurement-cycle が失敗した (月曜の improvement-cycle-weekly が週の不一致で止まり alert を出す)"
+          fi
 
       # コード側 slot 定数 (apps/web/src/lib/google-adsense/constants.ts) と AdSense 側 ad unit の
       # 突き合わせ検査。ad-units.csv (inventory) は上の fetch-adsense-snapshot が出し、
