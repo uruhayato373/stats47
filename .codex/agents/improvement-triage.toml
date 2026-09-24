@@ -81,7 +81,9 @@ GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス前
 (`.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs`) が週次 snapshot の clicks で判定する。
 欠けている目印は `.claude/state/metrics/measurement-cycle/latest.json` の `engine.gsc.missing` に出る。
 施策固有の内訳の照会は `node .claude/scripts/metrics/gsc-query.mjs` / `ga4-query.mjs` (再現コマンドとしてログに書く)。
-週次の無人 run (`improvement-cycle-weekly.yml`) では Status 列に effect/full|partial|none|adverse を付けない (ゲートで拒否)。
+週次の無人 run (`improvement-cycle-weekly.yml`) は台帳を直接編集せず、`.local/ci/improvement-cycle/proposal.json` に変更提案を書く
+(`.claude/` は Claude Code の保護パスで、`dontAsk` では書き込みが必ず拒否されるため)。適用は
+`verify-improvement-cycle-run.mjs` が決定的に行い、Status 列への effect/full|partial|none|adverse・書き込み拒否・提案ファイル欠落はゲートで拒否する。
 
 ## File Boundary (並行衝突回避)
 

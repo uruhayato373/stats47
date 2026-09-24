@@ -19,7 +19,7 @@ W21-W26 にかけての SEO 向上 × TODO 一元化 × 自動化拡張プラン
 **Phase 1 で deployed (✅)**:
 - 3 metric 新設: `docs/05_改善ログ/{content,indexing,ga4}.md`
 - scan-pending-improvements.mjs ([[reference-scan-pending-improvements]] 参照)
-- `.github/workflows/improvement-log-reminder-weekly.yml` (日曜 22:00 JST、`[Improvement Triage] YYYY-Www` Issue 起票)
+- `.github/workflows/improvement-log-reminder-weekly.yml` (日曜 22:00 JST、`[Improvement Triage] YYYY-Www` Issue 起票。2026-09-24 削除、後継は `improvement-cycle-weekly.yml`)
 - `weekly-plan/SKILL.md` Agent D 改修 (改善ログ自動抽出 + 前週残転載)
 - `ga4-improvement/SKILL.md` observe に raw/clean/pollution 3 系統併記指示
 - automation-backlog #285/#288/#290 に `[in-progress]` マーク、#289 を indexing.md に移行

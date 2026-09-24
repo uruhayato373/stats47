@@ -1,9 +1,11 @@
 name: 🔁 Improvement Cycle Weekly (計測→記録→改善)
 
 # 日曜 20:00 JST の fetch-metrics-weekly が作った計測 state (measurement-cycle/latest.json・effect verdict) を入力に、
-# improvement-triage を無人で走らせて改善バックログを更新する。LLM の判断そのものは検査できないので、
-# 差分は verify-improvement-cycle-run.mjs の決定的ゲート (許可パス・effect 確定禁止・カード削除禁止・秘密の形) を
-# 通ったものだけを develop へ push する。結果は measurement-cycle/triage-latest.json に残り、
+# improvement-triage を無人で走らせて改善バックログを更新する。Claude は判断を .local/ci/improvement-cycle/proposal.json に
+# 書くだけで、台帳へは verify-improvement-cycle-run.mjs が決定的に適用する (`.claude/` は Claude Code の保護パスで、
+# dontAsk では Edit が必ず拒否されるため。2026-09-24 run 35996605022 で実測)。適用後の差分は決定的ゲート
+# (許可パス・effect 確定禁止・カード削除禁止・秘密の形・書き込み拒否) を通ったものだけを develop へ push する。
+# 結果は measurement-cycle/triage-latest.json に残り、
 # 月曜 09:00 JST の週次メトリクス Issue (weekly-metrics-issue.yml) と /weekly-review が読む。
 #
 # ★無人 Claude は対話セッションと同じ Pro/Max 枠を使う (日次生成ループは歩留まりで 2026-08-21 に削除済み)。
@@ -96,6 +98,7 @@ jobs:
           fi
           cat .claude/state/metrics/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          mkdir -p .local/ci/improvement-cycle # Claude が提案を書く場所 (gitignore 済み・保護パス外)
 
       - name: 🔐 Require Claude Code OAuth token
         if: ${{ env.DRY_RUN != 'true' }}
@@ -108,7 +111,8 @@ jobs:
           fi
 
       # 鍵 (GA4 / GSC 共通の service account) は ga4-query.mjs / gsc-query.mjs がメモリで使うだけで一時ファイルに書かない。
-      # Bash は照会・走査・effect-verdict の dry-run・docs 検査だけを許す。
+      # Bash は照会・走査・effect-verdict の dry-run だけを許す。Edit と Agent は渡さない (台帳を直接書けないので不要。
+      # 書けるのは保護外の提案ファイルだけで、それ以外の追跡ファイルへの書き込みはゲートの許可パス検査が止める)。
       - name: 🧾 Record measurements with Claude Code (improvement-triage)
         id: claude
         if: ${{ env.DRY_RUN != 'true' }}
@@ -132,8 +136,8 @@ jobs:
             --no-session-persistence
             --setting-sources project
             --permission-mode dontAsk
-            --tools "Read,Write,Edit,Glob,Grep,Agent,Bash"
-            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Bash(node .claude/scripts/metrics/ga4-query.mjs *),Bash(node .claude/scripts/metrics/gsc-query.mjs *),Bash(node .claude/scripts/lib/scan-pending-improvements.mjs *),Bash(node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run*),Bash(npm run docs:check)"
+            --tools "Read,Write,Glob,Grep,Bash"
+            --allowedTools "Read,Write,Glob,Grep,Bash(node .claude/scripts/metrics/ga4-query.mjs *),Bash(node .claude/scripts/metrics/gsc-query.mjs *),Bash(node .claude/scripts/lib/scan-pending-improvements.mjs *),Bash(node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run*)"
             --disallowedTools "WebFetch,WebSearch,Bash(git *),Bash(gh *),Bash(env *),Bash(printenv *),Bash(cat *),Read(.env*),Read(**/.env*)"
             --strict-mcp-config
             --mcp-config '{"mcpServers":{}}'
@@ -152,17 +156,45 @@ jobs:
             cat .local/ci/claude-diagnosis.txt
             echo '```'
           } | tee -a "$GITHUB_STEP_SUMMARY"
+          # サマリは最終メッセージを 600 字で切るので、全文を伏字処理して artifact に残す。
+          # 公開 repo なので実行ログ全体 (tool 出力を含む) は上げない
+          mkdir -p .local/ci/improvement-cycle
+          node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            import { redact } from "./.claude/scripts/lib/summarize-claude-execution.mjs";
+            const log = JSON.parse(readFileSync(process.argv[1], "utf8"));
+            const result = log.find((e) => e?.type === "result");
+            process.stdout.write(redact(String(result?.result ?? "(result entry なし)")) + "\n");
+          ' "$FILE" > .local/ci/improvement-cycle/final-message.md 2>&1 || true
 
-      - name: ✅ Gate the recorded diff
+      - name: ✅ Apply the proposal and gate the diff
         id: gate
         env:
           BASE_SHA: ${{ steps.refresh.outputs.base }}
           WEEK: ${{ steps.week.outputs.week }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
         run: |
           set -euo pipefail
-          node .claude/scripts/metrics/verify-improvement-cycle-run.mjs --base "$BASE_SHA" --week "$WEEK" --run-url "$RUN_URL"
+          ARGS=(--base "$BASE_SHA" --week "$WEEK" --run-url "$RUN_URL")
+          if [ "$DRY_RUN" != "true" ]; then
+            ARGS+=(--proposal .local/ci/improvement-cycle/proposal.json
+              --execution-file "${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}")
+          fi
+          node .claude/scripts/metrics/verify-improvement-cycle-run.mjs "${ARGS[@]}"
           npm run docs:check
+
+      - name: 🗂️ Preserve proposal and final message
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: improvement-cycle-evidence
+          path: |
+            .local/ci/improvement-cycle/
+            .local/ci/claude-diagnosis.txt
+            .claude/state/metrics/measurement-cycle/triage-latest.json
+          include-hidden-files: true
+          retention-days: 30
 
       - name: 📦 Commit and push
         if: ${{ env.DRY_RUN != 'true' }}

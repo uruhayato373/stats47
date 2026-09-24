@@ -50,7 +50,6 @@ test("作業候補と運用queueはIssue台帳を作らずWorkflow Summaryへ出
   for (const filename of [
     "blog-remediation-daily.yml",
     "ctr-improvement-monthly.yml",
-    "improvement-log-reminder-weekly.yml",
   ]) {
     const source = fs.readFileSync(
       path.join(ROOT, ".github/workflows", filename),

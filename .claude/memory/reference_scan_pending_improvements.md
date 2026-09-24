@@ -53,7 +53,7 @@ node .claude/scripts/lib/scan-pending-improvements.mjs
 - バックログ: `.claude/todo/improvements.md`
 - 可視化: `.claude/scripts/lib/triage-matrix.mjs` (`--format matrix|csv`)
 - 台帳 writer: `.claude/scripts/lib/write-past-effects.mjs` (同じ `parseBacklog` を使う)
-- triage workflow: `.github/workflows/improvement-log-reminder-weekly.yml` (日曜 22:00 JST)
+- 週次の機械 triage: `.github/workflows/improvement-cycle-weekly.yml` (月 06:00 JST。`build-measurement-cycle.mjs` が本スクリプトの `parseBacklog` で期日超過を出す)。旧 `improvement-log-reminder-weekly.yml` は 2026-06-06 から手動専用で放置され、2026-09-24 に削除
 - weekly-plan: `.claude/skills/management/weekly-plan/SKILL.md` Phase 1 Agent D で呼ばれる
 - 設計履歴: Git 履歴の旧 SEO TODO 統合計画
 - 関連プロジェクト: [[project-seo-todo-unify-phase-1]]
