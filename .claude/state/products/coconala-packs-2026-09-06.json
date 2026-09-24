@@ -16,7 +16,65 @@
       "kindergarten-education-diffusion-rate (E0910101/0000010205)",
       "nursery-education-diffusion-rate (E0910102/0000010205)"
     ],
-    "exceptionHandling": "現行APIにない歴史的2指標は既存年次データを保持しSOURCESに再確認未了を注記。最新の意思決定には使用しない。"
+    "exceptionHandling": "現行APIにない歴史的2指標は既存年次データを保持しSOURCESに再確認未了を注記。最新の意思決定には使用しない。",
+    "historicalSourceReconciliation": {
+      "card": "COCONALA-HISTORICAL-SOURCE-01",
+      "reconciledAt": "2026-09-24",
+      "verdict": "47/47 match for both indicators (delivered 2020 values == 原典2020列)",
+      "source": {
+        "edition": "社会生活統計指標－都道府県の指標－2023 (社会・人口統計体系)",
+        "table": "表7 E．教育 (a105 (2023).xls, sheet 'E')",
+        "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040019805&fileKind=0",
+        "datasetPage": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=dataset&toukei=00200502&tstat=000001201620",
+        "eStatPublishedOrUpdated": "2026-05-29 (一覧表示の公開（更新）日)",
+        "downloadedAt": "2026-09-24",
+        "sha256": "3bc103b70474a263bfe6315631557b42caa6ecd43de43ed54711eed1ff67c1f9"
+      },
+      "deliveryCompared": [
+        ".local/coconala-products/P-06/v1/data.csv (列: 教育普及度（％・2020）×2, SOURCES.csv 118・151行)",
+        ".local/coconala-products/P-12/v1/data.csv (SOURCES.csv 911・1183行。P-06と47値同一)"
+      ],
+      "comparison": "都道府県名で突合、数値の完全一致 (差 0)。全国値(12行目)・平均/標準偏差は対象外",
+      "indicators": [
+        {
+          "metric": "kindergarten-education-diffusion-rate",
+          "code": "#E0910101",
+          "sourceLabel": "教育普及度(幼稚園) / Educational diffusion rate (Kindergartens)",
+          "cells": "sheet 'E' DO13:DO59 (列見出し DM10=#E0910101、年 DO11=2020)",
+          "year": 2020,
+          "unit": "％",
+          "numerator": "E1601 幼稚園修了者数 (DM63)",
+          "denominator": "E2502 小学校児童数(第１学年児童数) (DM66)",
+          "sourceRef": "出典番号 33 (DM68)",
+          "match": 47,
+          "mismatch": 0,
+          "missing": 0
+        },
+        {
+          "metric": "nursery-education-diffusion-rate",
+          "code": "#E0910102",
+          "sourceLabel": "教育普及度(保育所等) / Educational diffusion rate (Nursery centers)",
+          "cells": "sheet 'E' DR13:DR59 (列見出し DP10=#E0910102、年 DR11=2020)",
+          "year": 2020,
+          "unit": "％",
+          "numerator": "J2508 保育所等修了者数(詳細票) (DP63)",
+          "denominator": "E2502 小学校児童数(第１学年児童数) (DP66)",
+          "sourceRef": "出典番号 33,34 (DP68)",
+          "match": 47,
+          "mismatch": 0,
+          "missing": 0
+        }
+      ],
+      "otherEditionsChecked": {
+        "2022": "statInfId=000032169029: 同コードあり、最新列は2019 (2020列なし)",
+        "2024": "statInfId=000040133605: '6)教育普及度' 見出しはあるが #E0910101/#E0910102 列なし"
+      },
+      "notes": [
+        "原典の表示名は『保育所等』。納品SOURCESの『教育普及度（保育所）』表記との差は名称のみで、値は一致",
+        "納品SOURCESの statsDataId 0000010205 は現行APIでは2指標を持たない。原典は上記刊行物Excel",
+        "納品物・SOURCES注記・公開内容は変更していない。historicalNotReverified の解除と注記差替えは coconala-product-manager の判断"
+      ]
+    }
   },
   "corrections": [
     "指標数: P01 129 / P12 2076",

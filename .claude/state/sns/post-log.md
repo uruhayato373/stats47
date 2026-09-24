@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**561 件** (最終更新: 2026-09-23)
+**564 件** (最終更新: 2026-09-24)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-24 | 📸 Instagram | ranking-quiz/shochu-consumption-expenditure | 【都道府県クイズ】焼酎にいちばんお金を使う県は？  A 鹿児島県 B 宮崎県 C 熊本県  ヒントは2枚目、答えは3枚目… | [🔗](https://www.instagram.com/p/DdrJkFFFtPC/) |
+| 2026-09-24 | 🧵 Threads | area/area-01000-profile | 北海道を1位・47位だけで語らない。 県木はエゾマツ、県鳥はタンチョウ。人口・産業・暮らしの県データブックへ。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DdqbKCNCDsH) |
+| 2026-09-24 | 🧵 Threads | ranking/pear-consumption-expenditure | 梨にいちばんお金を使う県は鳥取。  1世帯あたり8,846円で、最下位の山梨（625円）の14.2倍。 2位の新潟（4,… | [🔗](https://www.threads.com/@stats47jp/post/DdptWkqEwPS) |
 | 2026-09-23 | 𝕏 X | ranking/lowest-temperature | なぜ沖縄県の最低気温は15.3℃と際立って高いのか。  黒潮の影響で冬も温暖な海洋性気候が理由です。 2位鹿児島県との差… | [🔗](https://x.com/stats47jp373/status/2102593807414100093) |
 | 2026-09-23 | 𝕏 X | ranking/vegetable-seaweed-tsukudani-consumption-expenditure | つくだ煮は西日本の食文化と思われがちですが、データは逆です。  1位山口県747円、2位秋田県739円。 47位沖縄県は… | [🔗](https://x.com/stats47jp373/status/2102533404957016484) |
 | 2026-09-22 | 𝕏 X | ranking/maritime-import-export-cargo | 海上出入貨物、1位愛知県2億トン vs 2位千葉県1.87億トン。  海に面さない山梨・長野・岐阜・滋賀・奈良は0トン。… | [🔗](https://x.com/stats47jp373/status/2102337120564076865) |

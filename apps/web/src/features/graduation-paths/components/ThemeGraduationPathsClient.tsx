@@ -65,6 +65,7 @@ export function ThemeGraduationPathsClient({
         <Table
           aria-label={`${areaLabel}の高校卒業後の進路`}
           className="min-w-96"
+          scrollRegion
           containerClassName="min-w-0 max-w-full"
         >
           <TableCaption>

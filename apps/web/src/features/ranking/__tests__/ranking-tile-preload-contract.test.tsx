@@ -1,8 +1,13 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+import {
+  getInitialMapTileUrls,
+  TILE_PROVIDERS,
+} from "@stats47/visualization/leaflet/constants";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+
 
 import { RankingPageHeadAssets } from "../components/RankingKeyPage/RankingPageHeadAssets";
 
@@ -22,12 +27,20 @@ const LAYOUT = "apps/web/src/app/layout.tsx";
  * media を全枚に戻す変更も、逆に 4 枚すべてをモバイルへ先読みする変更もここで落ちる。
  */
 describe("ranking tile preload contract", () => {
-  const tileUrls = [
-    "/tiles/light_all/5/28/12@2x.png",
-    "/tiles/light_all/5/29/12@2x.png",
-    "/tiles/light_all/5/28/13@2x.png",
-    "/tiles/light_all/5/29/13@2x.png",
-  ];
+  const tileUrls = getInitialMapTileUrls();
+
+  it("preloads exactly the URLs the default basemap requests", () => {
+    // preload と Leaflet の要求 URL が 1 文字でも違うと、先読みは使われず LCP が戻る
+    expect(tileUrls).toEqual([
+      "https://cyberjapandata.gsi.go.jp/xyz/pale/5/28/12.png",
+      "https://cyberjapandata.gsi.go.jp/xyz/pale/5/28/13.png",
+      "https://cyberjapandata.gsi.go.jp/xyz/pale/5/29/12.png",
+      "https://cyberjapandata.gsi.go.jp/xyz/pale/5/29/13.png",
+    ]);
+    expect(TILE_PROVIDERS.light.url).toBe(
+      "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
+    );
+  });
 
   function preloadLinks(): string[] {
     const html = renderToStaticMarkup(
@@ -64,9 +77,8 @@ describe("ranking tile preload contract", () => {
 });
 
 /**
- * タイルは同一 origin の /tiles/* proxy で配信される。cartocdn への接続 hint は
- * 実際の接続先と一致せず、2026-08-05 に削除した。復活させるなら cartocdn を
- * 実際に叩く実装とセットで戻す。
+ * 背景は地理院タイル (2026-09-25 に CARTO から切替)。cartocdn への接続 hint は
+ * 実際の接続先と一致しないので置かない。
  */
 describe("stale tile CDN hints", () => {
   it("does not preconnect to a CDN the browser never contacts", () => {

@@ -59,7 +59,10 @@ function RankingYearSelectorComponent({
   return (
     <div className="flex items-center gap-2">
       <Select value={value} onValueChange={handleYearChange}>
-        <SelectTrigger id="year-select" className="h-6 w-[100px] text-xs rounded-xs">
+        <SelectTrigger
+          aria-label="表示する年度"
+          className="h-6 w-[100px] text-xs rounded-xs"
+        >
           <SelectValue placeholder="年度を選択" />
         </SelectTrigger>
         <SelectContent className="[&_*]:text-xs">

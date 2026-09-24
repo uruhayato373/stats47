@@ -52,7 +52,7 @@ export function AffiliateTextAdList({
             className={`relative rounded-none border ${theme?.border ?? "border-border"} ${theme?.bg ?? "bg-muted/50"} p-4`}
           >
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-medium text-muted-foreground/70">PR</span>
+              <span className="text-xs font-medium text-muted-foreground">PR</span>
             </div>
             <TrackedAffiliateLink
               href={ad.href}
@@ -73,7 +73,7 @@ export function AffiliateTextAdList({
               </p>
               <ExternalLink
                 size={16}
-                className={`shrink-0 ${theme?.icon ?? "text-muted-foreground/70"}`}
+                className={`shrink-0 ${theme?.icon ?? "text-muted-foreground"}`}
               />
             </TrackedAffiliateLink>
             {ad.trackingPixelUrl && (

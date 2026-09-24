@@ -190,8 +190,10 @@ export function RankingMapChartClient({
               {rankingItem.title}の{areaType === "city" ? "市区町村別" : "都道府県別"}カラーマップ。
               値が高いほど濃い色で表示されます。詳細データは下のテーブルを参照してください。
             </p>
+            {/* role="img" は子を装飾扱いにするため、操作できる地図 (ズーム・県クリック) を
+                包むと axe nested-interactive になる。操作可能な図は figure で名前だけ与える。 */}
             <div
-              role="img"
+              role="figure"
               aria-label={`${rankingItem.title}の${areaType === "city" ? "市区町村" : "都道府県"}別カラーマップ`}
             >
               <LeafletChoroplethMap

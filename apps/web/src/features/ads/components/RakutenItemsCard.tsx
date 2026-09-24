@@ -68,7 +68,7 @@ export async function RakutenItemsCard({
     >
     <div className={getSurfaceCardClassName({ className: "p-4" })}>
       <div className="mb-3 flex items-center justify-between">
-        <span className="text-xs font-medium text-muted-foreground/70">PR</span>
+        <span className="text-xs font-medium text-muted-foreground">PR</span>
         {/* 検索URLは未発行の通常リンク。商品affiliateUrlと混ぜて成果クリックを数えない。 */}
         <a
           href={searchUrl}

@@ -24,7 +24,10 @@ import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
 import type { Metadata } from 'next';
 
-export const revalidate = 86400;
+// 分析カードの地図プレビューは R2 の県別 bundle を読む。build 環境は R2 を読めないため、
+// 静的 prerender だと 6 枚とも「地図プレビューを取得できませんでした」が焼き込まれる
+// (2026-09-23 本番で確認)。home `/` と同じくランタイム描画にする。
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: '地域データ分析 | stats47',

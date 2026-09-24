@@ -90,11 +90,9 @@ export default function RootLayout({
     <html lang="ja" suppressHydrationWarning>
       <head>
         {/*
-         * 地図タイル CDN (cartocdn) への preconnect / dns-prefetch は 2026-08-05 に削除した。
-         * タイル URL は getInitialMapTileUrls が返す同一 origin の /tiles/* で、ブラウザは
-         * cartocdn へ接続しない。2026-08-05 の trace でも接続実績が無く、hint は全ページで
-         * 未使用のまま接続予約だけを消費していた。fallback 経路を復活させる場合は、
-         * 実際に cartocdn を叩く実装とセットで戻すこと。
+         * 地図タイルへの preconnect は全ページには置かない。地図のあるランキングページは
+         * getInitialMapTileUrls の preload が地理院タイル (cyberjapandata.gsi.go.jp) への
+         * 接続を document 解析時に始める。旧 cartocdn の hint は 2026-08-05 に削除済み。
          */}
         {/* R2 storage への preconnect（ブログ記事内の SVG/PNG） */}
         <link

@@ -59,6 +59,7 @@ export function ThemeShelterApplicabilityClient({
             <Table
               aria-label={`${row.areaName}の指定緊急避難場所と災害種別`}
               className="min-w-96"
+              scrollRegion
               containerClassName="min-w-0 max-w-full max-h-96"
             >
               <TableCaption>
@@ -105,6 +106,7 @@ export function ThemeShelterApplicabilityClient({
             <Table
               aria-label={`${row.areaName}の指定避難所の掲載件数`}
               className="min-w-96"
+              scrollRegion
               containerClassName="min-w-0 max-w-full"
             >
               <TableCaption>

@@ -128,6 +128,7 @@ export function ThemeFreightOdClient({
           <Table
             aria-label={`${period} ${mode.label} ${area}の${direction === 'outbound' ? '発送先' : '到着元'}`}
             className="min-w-80"
+            scrollRegion
             containerClassName="min-w-0 max-w-full max-h-96"
           >
             <TableCaption>

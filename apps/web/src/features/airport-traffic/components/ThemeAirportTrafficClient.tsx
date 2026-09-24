@@ -74,6 +74,7 @@ export function ThemeAirportTrafficClient({
             <Table
               aria-label={`${area}の空港別旅客取扱い`}
               className="min-w-96"
+              scrollRegion
               containerClassName="min-w-0 max-w-full max-h-96"
             >
               <TableCaption>
@@ -125,6 +126,7 @@ export function ThemeAirportTrafficClient({
             <Table
               aria-label={`${area}の空港別貨物取扱い`}
               className="min-w-96"
+              scrollRegion
               containerClassName="min-w-0 max-w-full max-h-96"
             >
               <TableCaption>

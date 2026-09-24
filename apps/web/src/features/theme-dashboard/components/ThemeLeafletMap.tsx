@@ -70,11 +70,7 @@ export function ThemeLeafletMap({
   enableDrilldown = true,
 }: ThemeLeafletMapProps) {
   const { theme } = useTheme();
-  // 比較地図の背景は地理院淡色に揃える。
-  const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(
-    theme,
-    enableDrilldown ? 0 : 1
-  );
+  const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(theme);
 
   const colorConfig = useMemo(
     () => rankingItemToMapConfig(rankingItem),

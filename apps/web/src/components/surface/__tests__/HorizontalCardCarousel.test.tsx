@@ -35,13 +35,14 @@ describe('HorizontalCardCarousel', () => {
       name: 'テストカードを右へ',
     });
     expect(rightButton).toBeEnabled();
-    expect(rightButton).toHaveClass(
-      'h-9',
-      'w-9',
-      'sm:h-8',
-      'sm:w-8',
-      '-right-2'
-    );
+    expect(rightButton).toHaveClass('h-9', 'w-9', 'sm:h-8', 'sm:w-8');
+    // 矢印はカードに重ねない: カード列の外に置き、絶対配置もしない。
+    expect(region.contains(rightButton)).toBe(false);
+    expect(rightButton).not.toHaveClass('absolute');
+    expect(
+      rightButton.compareDocumentPosition(region) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
     expect(rightButton.querySelector('svg')).toHaveClass('size-4');
     expect(
       screen.queryByRole('button', { name: 'テストカードを左へ' })

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T07:43:12.040Z",
+  "generatedAt": "2026-09-24T20:25:14.227Z",
   "auditAt": "2026-09-24T06:51:27.490Z",
   "findings": [
     {
@@ -44,14 +44,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] タグページの記事一覧、各記事タイトルの直上: 『general-households-prefecture-gap』のような英語の技術的なslug文字列が、記事タイトルの上にそのまま表示されている。一般読者には意味が分からない内部識別子。 → タグ一覧の記事カードからslug表示を削除するか、カテゴリラベルなど読者向けの情報に置き換える。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
+      "fixed_at": "2026-09-24T20:25:13.654Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "2026-09-24 タグページの記事カードが description のある記事で slug を表示していた。表示を削除し page-structure テストで固定"
     },
     {
       "key": "agent|prefecture-detail",
@@ -61,14 +61,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[desktop-1440/low] 2枚目、経済・雇用セクションの『失業率』カード右隣の空白マス: 3列グリッドのうち3列目に対応するデータがない場合、意味のない灰色の空ボックスがそのまま表示され、レイアウトに不自然な空白ができている。3枚目の『延べ床面積』『犯罪認知件数』のダッシュ表示箇所も同様。 → データが存在しない項目は空ボックスを出さずグリッドを詰めるか、項目自体を非表示にする。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
+      "fixed_at": "2026-09-24T20:25:13.943Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "2026-09-24 RankedKpiGrid: 観測値の無い指標は項目ごと出さず、最終行の空きマスを段数ごとにカード地で埋めた (gap-px の灰色が箱に見えていた)"
     },
     {
       "key": "agent|ranking",
@@ -95,14 +95,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] 3枚目、『自然増減：出生数と死亡数』『外国人の人口移動』の2つのグラフ枠: 折れ線・棒グラフが表示されるべき枠が、中身のない灰色の空ボックスのままになっている。同じ画面内の他のグラフ(総人口など)は正常に描画されている。 → チャートの遅延読み込みやデータ取得失敗の原因を確認し、確実に描画されるようにする。\n[desktop-1440/medium] 2枚目、『都道府県 人口移動フロー』のグラフ枠: 『読み込み中...』の表示のままフロー図が描画されていない。tablet-768でも同じ箇所が空の灰色ボックスになっている。 → 人口移動フロー図の初期表示ロジックを見直し、読み込み完了後に確実に描画されるようにする。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
+      "fixed_at": "2026-09-24T20:25:14.220Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "2026-09-24 誤検知: 本番でスクロール後に 3 チャートとも描画されることを確認。撮影前に撮影範囲をスクロールで通過させるよう screenshots.ts を修正"
     },
     {
       "key": "machine|https://stats47.jp/|overlapping_tap_targets",
@@ -112,14 +112,14 @@
       "metric_key": "overlapping_tap_targets",
       "severity": "warning",
       "detail": "overlapping_tap_targets = 3 (閾値 <= 0)",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T13:31:13.087Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "CAROUSEL-ARROW-OVERLAP-01",
-      "note": "手動カード CAROUSEL-ARROW-OVERLAP-01 (カルーセル矢印の重なり) が担当"
+      "note": "2026-09-24 矢印をカード列の上の行へ移動 (HorizontalCardCarousel)。localhost 本番ビルドで 390〜1920px の 8 幅とも重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/|responsive_layout_issues",
@@ -129,14 +129,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 18 (閾値 <= 0)",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T13:31:13.426Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "CAROUSEL-ARROW-OVERLAP-01",
-      "note": "手動カード CAROUSEL-ARROW-OVERLAP-01 (カルーセル矢印の重なり) が担当"
+      "note": "2026-09-24 矢印をカード列の上の行へ移動。8 幅で重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/areas/07000|degraded_images",
@@ -350,14 +350,14 @@
       "metric_key": "overlapping_tap_targets",
       "severity": "warning",
       "detail": "overlapping_tap_targets = 2 (閾値 <= 0)",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T13:31:13.729Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "CAROUSEL-ARROW-OVERLAP-01",
-      "note": "手動カード CAROUSEL-ARROW-OVERLAP-01 (カルーセル矢印の重なり) が担当"
+      "note": "2026-09-24 矢印をカード列の上の行へ移動。8 幅で重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/category/population|responsive_layout_issues",
@@ -367,14 +367,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 12 (閾値 <= 0)",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T13:31:14.029Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "CAROUSEL-ARROW-OVERLAP-01",
-      "note": "手動カード CAROUSEL-ARROW-OVERLAP-01 (カルーセル矢印の重なり) が担当"
+      "note": "2026-09-24 矢印をカード列の上の行へ移動。8 幅で重なり 0"
     },
     {
       "key": "machine|https://stats47.jp/ranking/total-population|a11y_violations",
@@ -384,14 +384,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T13:35:38.098Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "A11Y-SERIOUS-01",
-      "note": "手動カード A11Y-SERIOUS-01 (axe の critical/serious) が担当"
+      "note": "2026-09-24 無名セレクトに aria-label、地図の role=img を figure へ、相関色を 700 番台、広い表を scrollRegion、広告 PR 表記の濃度を上げた。localhost 本番ビルドで代表 11 URL × 412/1440px の axe critical/serious 0"
     },
     {
       "key": "machine|https://stats47.jp/survey/census|a11y_violations",
@@ -401,14 +401,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T13:35:38.379Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "A11Y-SERIOUS-01",
-      "note": "手動カード A11Y-SERIOUS-01 (axe の critical/serious) が担当"
+      "note": "2026-09-24 無名セレクトに aria-label、地図の role=img を figure へ、相関色を 700 番台、広い表を scrollRegion、広告 PR 表記の濃度を上げた。localhost 本番ビルドで代表 11 URL × 412/1440px の axe critical/serious 0"
     },
     {
       "key": "machine|https://stats47.jp/themes/population-dynamics|responsive_layout_issues",
@@ -418,14 +418,14 @@
       "metric_key": "responsive_layout_issues",
       "severity": "warning",
       "detail": "responsive_layout_issues = 3 (閾値 <= 0)",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T13:31:14.344Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "THEME-MAP-ATTRIBUTION-CLIP-01",
-      "note": "手動カード THEME-MAP-ATTRIBUTION-CLIP-01 (地図枠 div.h-[360px] で出典表記が切れる) が担当"
+      "note": "2026-09-24 LeafletChoroplethMap の固定 minHeight:400 を撤去し包みの高さに従わせた。8 幅で出典表記の切れ 0、代表 URL 検査 clipped_text 0"
     }
   ]
 }

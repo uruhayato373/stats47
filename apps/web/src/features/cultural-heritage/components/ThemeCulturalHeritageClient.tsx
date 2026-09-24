@@ -39,6 +39,7 @@ function LocationsTable({
   return (
     <Table
       aria-label={label}
+      scrollRegion
       containerClassName="min-w-0 max-w-full"
       className="min-w-96"
     >

@@ -47,4 +47,47 @@ describe("RankedKpiGrid", () => {
     expect(html).toContain("@md:grid-cols-4");
     expect(html).not.toContain("@lg:grid-cols-4");
   });
+
+  // 2026-09-24 週次 UI 検査: 値の無い指標が「—」の箱で並び、最終行の空きマスが灰色の箱に見えた。
+  it("観測値の無い指標は項目ごと出さない", () => {
+    const html = renderToStaticMarkup(
+      <RankedKpiGrid
+        metrics={[metric("population", "人口"), metric("crime-rate", "犯罪率")]}
+        databook={databook}
+        columns={3}
+      />,
+    );
+    expect(html).toContain("人口");
+    expect(html).not.toContain("犯罪率");
+    expect(html).not.toContain("—");
+  });
+
+  it("最終行の空きマスを段数ごとにカード地で埋める", () => {
+    const full = {
+      metrics: Object.fromEntries(
+        ["a", "b", "c", "d"].map((k) => [
+          k,
+          { value: 1, rank: 1, unit: "人", nationalAvg: 0 },
+        ]),
+      ),
+    } as unknown as Parameters<typeof RankedKpiGrid>[0]["databook"];
+    const html = renderToStaticMarkup(
+      <RankedKpiGrid
+        metrics={["a", "b", "c", "d"].map((k) => metric(k, k.toUpperCase()))}
+        databook={full}
+        columns={3}
+      />,
+    );
+    // 4 件: 2 段では空き 0、3 段では空き 2
+    const fillers = [...html.matchAll(/<div aria-hidden="true" class="([^"]*)"/g)].map(
+      (m) => m[1],
+    );
+    expect(fillers).toHaveLength(2);
+    for (const c of fillers) {
+      expect(c).toContain("hidden");
+      expect(c).toContain("bg-card");
+      expect(c).toContain("@sm:hidden");
+      expect(c).toContain("@md:block");
+    }
+  });
 });

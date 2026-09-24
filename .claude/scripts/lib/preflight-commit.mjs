@@ -27,12 +27,21 @@
  *   並列で回し、落ちたもの全部を 1 回で出す。CI と同じコマンドを呼ぶので判定は一致する。
  *   ネットワーク (R2 公開 URL) を使うゲートを含むので commit ごとではなく push 前に使う。
  *
+ * ★--pr の gate 一覧は registry 由来 (2026-09-24、CI-SPEED-PREFLIGHT-PR-REGISTRY-01 恒久案):
+ *   `.claude/config/quality-gates.json` の `blocking: true` かつ `trigger` に `pull_request` を
+ *   含む gate を SSOT として自動で組み込む。手書き一覧は「登録したのに反映を忘れる」ドリフトが
+ *   必ず起きる (PR #974 で実測: 落ちた 4 gate がどれも手書き一覧に無かった)。
+ *   `networkOrSecrets: "none"` の gate だけを既定に含め、network / secrets を要する gate
+ *   (docs-links 等) は `--with-network` を付けたときだけ追加で走る。
+ *
  * 使い方:
- *   node .claude/scripts/lib/preflight-commit.mjs          # staged ファイルを対象
- *   node .claude/scripts/lib/preflight-commit.mjs --all    # リポジトリ全体を lint
- *   node .claude/scripts/lib/preflight-commit.mjs --pr     # push 前: 生成物の鮮度ゲート
+ *   node .claude/scripts/lib/preflight-commit.mjs                 # staged ファイルを対象
+ *   node .claude/scripts/lib/preflight-commit.mjs --all           # リポジトリ全体を lint
+ *   node .claude/scripts/lib/preflight-commit.mjs --pr             # push 前: 生成物の鮮度ゲート (offline)
+ *   node .claude/scripts/lib/preflight-commit.mjs --pr --with-network  # 上記 + network/secrets 要ゲート
  */
 import { execFile } from "node:child_process";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { promisify } from "node:util";
@@ -93,6 +102,89 @@ async function tryRun(command, args, options = {}) {
   }
 }
 
+/**
+ * registry ("&&" 連結コマンド) をシェル経由で順に実行する。1 つ落ちたら以降を止める
+ * (既存の Quality Gate Ratchet 手書き実装と同じ「途中で止める」意味論を踏襲)。
+ * shell:true を使うので Windows でも npm/npx/node の解決を resolveInvocation に頼らず OS に任せられる。
+ */
+async function tryRunShell(command) {
+  try {
+    const { stdout, stderr } = await execFileAsync(command, [], {
+      cwd: SCAN_ROOT,
+      maxBuffer: 32 * 1024 * 1024,
+      shell: true,
+    });
+    return { ok: true, output: `${stdout}${stderr}` };
+  } catch (error) {
+    return { ok: false, output: `${error.stdout ?? ""}${error.stderr ?? ""}${error.message ?? ""}` };
+  }
+}
+
+async function runRegistryCommand(command) {
+  const steps = command.split(/\s+&&\s+/);
+  let result = { ok: true, output: "" };
+  for (const step of steps) {
+    result = await tryRunShell(step.trim());
+    if (!result.ok) return result;
+  }
+  return result;
+}
+
+/**
+ * CI-SPEED-PREFLIGHT-PR-REGISTRY-01 (恒久案、2026-09-24):
+ * `quality-gates.json` (.claude/config/quality-gates.json) を SSOT として --pr のゲート一覧を導出する。
+ * 手書き 19 件は手同期のたびにドリフトする (memory `feedback_hand_synced_duplication`。PR #974 で実測)。
+ *
+ * 判定: `blocking: true` かつ `trigger` に `pull_request` を含む gate。
+ *   - `networkOrSecrets: "none"` → --pr の既定セットに自動で入る (offline)
+ *   - それ以外 (network / secrets 要) → 既定では走らせず `--with-network` で opt-in
+ *
+ * `affiliate-compliance` / `affiliate-relevance` は registry 上は
+ * `scheduled-network-and-secrets` (schedule トリガーの `--live` 相当を想定した分類) だが、
+ * PR で実際に使う `--check` は offline (audit-affiliate-compliance.ts 冒頭コメント参照)。
+ * 二重実行を避けるため、この 2 id は registry 由来の network セットから除外し、
+ * 既存の手書き「Affiliate Compliance」ゲート (--check、無条件実行) に一本化する。
+ */
+const REGISTRY_MANUAL_NETWORK_GATE_IDS = new Set(["affiliate-compliance", "affiliate-relevance"]);
+/**
+ * 他の gate を自分で走らせて所要時間を測る gate。preflight は gate を並列に回すので、
+ * ここに混ぜると自分の並列負荷で予算を超えて落ちる (2026-09-25 PR #1024 の CI で
+ * docs-links 8.9s / asset-policy 20.2s を計測して失敗)。CI は pr-quality-check.yml の
+ * 単独 step で測る。
+ */
+export const REGISTRY_TIMING_GATE_IDS = new Set(["runtime-budget"]);
+
+export function partitionRegistryGates(registry) {
+  const eligible = (registry.gates ?? []).filter(
+    (gate) => gate.blocking === true && Array.isArray(gate.trigger) && gate.trigger.includes("pull_request"),
+  );
+  const offline = eligible.filter(
+    (gate) => gate.networkOrSecrets === "none" && !REGISTRY_TIMING_GATE_IDS.has(gate.id),
+  );
+  const network = eligible.filter(
+    (gate) => gate.networkOrSecrets !== "none" && !REGISTRY_MANUAL_NETWORK_GATE_IDS.has(gate.id),
+  );
+  return { offline, network };
+}
+
+export function registryGateToPrGate(gate) {
+  return {
+    name: gate.id,
+    why: `registry gate (${gate.owner} / ${gate.scope.join(",")})`,
+    run: () => runRegistryCommand(gate.command),
+    hint: gate.command,
+  };
+}
+
+function loadQualityGatesRegistry() {
+  const registryPath = path.join(REPO_ROOT, ".claude/config/quality-gates.json");
+  return JSON.parse(fs.readFileSync(registryPath, "utf8"));
+}
+
+export const { offline: REGISTRY_OFFLINE_GATES, network: REGISTRY_NETWORK_GATES } = partitionRegistryGates(
+  loadQualityGatesRegistry(),
+);
+
 /** staged な apps/web の TS/TSX を返す。--all なら null (= 全体 lint)。 */
 async function stagedWebFiles() {
   const { ok, output } = await tryRun("git", ["diff", "--cached", "--name-only", "--diff-filter=ACM"]);
@@ -125,33 +217,10 @@ async function eslintGate(all) {
  *   theme catalog / area databook / topic catalog が順に古くなる。
  * 重い vitest・playwright・coverage は含めない (push 前に 1 分で終わることを優先する)。
  */
-const PR_GATES = [
-  // 2026-09-07: 共通レール追加時に3つの独立した不整合を直列CIで発見したため、
-  // 安価な共有UI契約も同時に検査する。1つが落ちても残りを必ず実行する。
-  {
-    name: "Card Census",
-    why: "共有カード追加・廃止時の登録漏れ",
-    run: () => tryRun("node", [checker("check-card-census.cjs")]),
-    hint: "共通surfaceの再利用を確認し、必要なcompositeだけ理由付きで登録する",
-  },
-  {
-    name: "Ad Placement",
-    why: "レール構成変更時の画像広告・配置契約",
-    run: () => tryRun("node", [checker("check-ad-placement.cjs")]),
-    hint: "実描画とguardを突合し、画像広告の配置契約を維持する",
-  },
-  {
-    name: "Static Accessibility",
-    why: "新しいフォーム・画像・操作要素のアクセシビリティ",
-    run: () => tryRun("node", [checker("check-accessibility-static.cjs"), "--baseline"]),
-    hint: "指摘要素の意味と操作性を是正する。baselineは増やさない",
-  },
-  {
-    name: "Repo Hygiene",
-    why: "寿命を宣言しない日付名 state・一時/巨大ファイルの追跡 (ローカル肥大化の入口)",
-    run: () => tryRun("node", [checker("check-repo-hygiene.cjs"), "--baseline"]),
-    hint: "release 証跡は .claude/state/metrics/releases/、生 snapshot は prune 対象ディレクトリへ置く (.claude/rules/data-storage.md)",
-  },
+export const PR_GATES = [
+  // Card Census / Ad Placement / Static Accessibility / Repo Hygiene / Quality Gate Ratchet 4種 /
+  // Checker Wiring / Workspace Contract は 2026-09-24 に registry 由来 (REGISTRY_OFFLINE_GATES、
+  // 下の spread) へ置換した。手書きの重複を残すと二重実行になるためここでは定義しない。
   {
     name: "Metric Registry",
     why: "metric を足す/消すと registry.ts が古くなる",
@@ -235,24 +304,6 @@ const PR_GATES = [
       return { ok: true, output: "sitemap / tag / prominence すべて最新" };
     },
   },
-  // 2026-09-18 (CI-SPEED-PREFLIGHT-PR-REGISTRY-01): PR #974 で実際に落ちた 4 gate は
-  // どれもここに無く、push 前に走らせても防げなかった (6 往復)。CI と同じコマンドで足す。
-  {
-    name: "Quality Gate Ratchet",
-    why: "money unit / quality exceptions / warning / render-ci の baseline は縮小専用 (origin/main 比)",
-    run: async () => {
-      for (const script of [
-        "check-money-unit-audit.cjs",
-        "check-quality-exceptions.cjs",
-        "check-quality-warning-ratchet.cjs",
-        "check-render-ci-contract.cjs",
-      ]) {
-        const r = await tryRun("node", [checker(script), "--base", "origin/main"]);
-        if (!r.ok) return { ...r, hint: `node .claude/scripts/lib/${script} --base origin/main` };
-      }
-      return { ok: true, output: "ratchet 4 種すべて baseline 内" };
-    },
-  },
   {
     name: "Affiliate Compliance",
     why: "直接配置台帳・blog 関連性の構造 error (ネットワーク不要の --check)",
@@ -264,18 +315,11 @@ const PR_GATES = [
       return { ok: true, output: "affiliate compliance / relevance OK" };
     },
   },
-  {
-    name: "Checker Wiring",
-    why: "blocking な checker を足したのに quality-gates.json に宣言していない (2026-09-18 に develop で発生)",
-    run: () => tryRun("node", [checker("check-checker-wiring.cjs"), "--baseline"]),
-    hint: ".claude/config/quality-gates.json に gate を宣言する",
-  },
-  {
-    name: "Workspace Contract",
-    why: "workspace の追加・test/build/lint 方針変更と pr-quality-check.yml の job 配線がずれる",
-    run: () => tryRun("node", [checker("check-workspace-contract.cjs")]),
-    hint: "quality-gates.json の ciProfile.prChecks と pr-quality-check.yml の job を揃える",
-  },
+  // registry (.claude/config/quality-gates.json) の trigger:pull_request かつ
+  // networkOrSecrets:none な blocking gate を全件含める (CI-SPEED-PREFLIGHT-PR-REGISTRY-01 恒久案)。
+  // Card Census / Ad Placement / Static Accessibility / Repo Hygiene / Quality Gate Ratchet 4種 /
+  // Checker Wiring / Workspace Contract はここに含まれる (registry の id がそのまま gate 名になる)。
+  ...REGISTRY_OFFLINE_GATES.map(registryGateToPrGate),
   {
     name: "main 先行チェック",
     why: "main が develop 非経由で進むと PR が競合する (branch-workflow.md の同期規約)",
@@ -353,9 +397,11 @@ export function stagedWebScoped(gate, listStaged = stagedWebFiles) {
 }
 
 // Same gate objects as --pr where applicable; the commit hook keeps its scoped gates.
+// 2026-09-24: registry 由来化で PR_GATES 側の名前が "Card Census" / "Ad Placement" / "Repo Hygiene" から
+// registry id ("card-census" / "ad-placement" / "repository-hygiene") へ変わったため、ここも追従する。
 export const COMMIT_GATES = [
-  ...PR_GATES.filter((gate) => ["Card Census", "Ad Placement"].includes(gate.name)).map((gate) => stagedWebScoped(gate)),
-  ...PR_GATES.filter((gate) => gate.name === "Repo Hygiene"),
+  ...PR_GATES.filter((gate) => ["card-census", "ad-placement"].includes(gate.name)).map((gate) => stagedWebScoped(gate)),
+  ...PR_GATES.filter((gate) => gate.name === "repository-hygiene"),
   { name: "Design System", run: () => tryRun("npm", ["run", "design-system:check"], { cwd: WEB_DIR }) },
   { name: "Source Vault", run: () => tryRun("npm", ["run", "source-vault:check"]) },
   ...[
@@ -387,8 +433,12 @@ export async function runGates(gates, all, concurrency) {
 async function main() {
   const all = process.argv.includes("--all");
   const pr = process.argv.includes("--pr");
+  const withNetwork = process.argv.includes("--with-network");
   const commitStatic = process.argv.includes("--commit-static");
-  const selected = commitStatic ? COMMIT_GATES : pr ? PR_GATES : GATES;
+  // --with-network: registry gate で trigger:pull_request だが networkOrSecrets が none でないもの
+  // (docs-links 等) を追加で opt-in する。push 前ではなく明示要求時だけ走らせる。
+  const prSelected = withNetwork ? [...PR_GATES, ...REGISTRY_NETWORK_GATES.map(registryGateToPrGate)] : PR_GATES;
+  const selected = commitStatic ? COMMIT_GATES : pr ? prSelected : GATES;
   const gates = process.env.CI ? selected.filter((gate) => !gate.skipInCi) : selected;
   const started = Date.now();
 

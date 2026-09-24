@@ -7,54 +7,43 @@ export interface TileProvider {
   maxZoom?: number;
 }
 
+/**
+ * 背景タイルは国土地理院の地理院タイルをブラウザから直接リアルタイム取得する。
+ *
+ * 2026-09-23 に CARTO basemap がキー無し配信へ「API KEY REQUIRED」の透かしを入れ始め、
+ * 同一 origin の /tiles/* プロキシ (30 日 immutable キャッシュ) ごと廃止した。
+ * 地理院タイルはウェブサイト上でリアルタイムに読み込む利用なら出典明示のみで申請不要
+ * (https://maps.gsi.go.jp/development/ichiran.html 2026-09-25 確認)。キャッシュ・
+ * プロキシ配信は同ページに記載が無いため行わない。出典には一覧ページへのリンクが必須。
+ * 地理院タイルに暗色の地図は無いので、ダークモードでも淡色地図を使う。
+ */
+const GSI_ATTRIBUTION =
+  '<a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル</a>';
+
+const GSI_PALE: TileProvider = {
+  url: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
+  attribution: GSI_ATTRIBUTION,
+  label: "淡色地図",
+  maxZoom: 18,
+};
+
+const GSI_STD: TileProvider = {
+  url: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png",
+  attribution: GSI_ATTRIBUTION,
+  label: "標準地図",
+  maxZoom: 18,
+};
+
 /** テーマ別デフォルトタイル（light/dark 自動切替用） */
 export const TILE_PROVIDERS = {
-  light: {
-    url: "/tiles/light_all/{z}/{x}/{y}{r}.png",
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    label: "CartoDB Light",
-  },
-  dark: {
-    url: "/tiles/dark_all/{z}/{x}/{y}{r}.png",
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    label: "CartoDB Dark",
-  },
+  light: GSI_PALE,
+  dark: GSI_PALE,
 } as const;
 
 /** ユーザーが切り替え可能なタイルプロバイダー一覧（light / dark 各セット） */
-export const TILE_OPTIONS_LIGHT: TileProvider[] = [
-  {
-    url: "/tiles/light_all/{z}/{x}/{y}{r}.png",
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    label: "CartoDB",
-  },
-  {
-    url: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
-    attribution:
-      '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>',
-    label: "地理院淡色",
-    maxZoom: 18,
-  },
-];
+export const TILE_OPTIONS_LIGHT: TileProvider[] = [GSI_PALE, GSI_STD];
 
-export const TILE_OPTIONS_DARK: TileProvider[] = [
-  {
-    url: "/tiles/dark_all/{z}/{x}/{y}{r}.png",
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    label: "CartoDB",
-  },
-  {
-    url: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
-    attribution:
-      '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>',
-    label: "地理院淡色",
-    maxZoom: 18,
-  },
-];
+export const TILE_OPTIONS_DARK: TileProvider[] = [GSI_PALE, GSI_STD];
 
 /** @deprecated isDark を渡して TILE_OPTIONS_LIGHT / TILE_OPTIONS_DARK を使うこと */
 export const TILE_OPTIONS: TileProvider[] = TILE_OPTIONS_LIGHT;
@@ -82,18 +71,19 @@ function latLngToTile(lat: number, lng: number, zoom: number): { x: number; y: n
  *
  * 2×2 = 4 タイル（中心タイル + 右・下・右下）を preload 対象とする。
  * mobile viewport (375×500 @2x) で実際にレンダリングされる最小構成。
+ * URL は既定タイル (TILE_PROVIDERS.light) と同じ文字列にする。違うと preload が使われない。
  */
-export function getInitialMapTileUrls(options: {
-  theme: "light_all" | "dark_all";
-  retina?: boolean;
-}): string[] {
-  const { theme, retina = true } = options;
+export function getInitialMapTileUrls(): string[] {
   const { x: cx, y: cy } = latLngToTile(JAPAN_CENTER[0], JAPAN_CENTER[1], JAPAN_ZOOM);
-  const suffix = retina ? "@2x.png" : ".png";
   const urls: string[] = [];
   for (const dx of [0, 1]) {
     for (const dy of [0, 1]) {
-      urls.push(`/tiles/${theme}/${JAPAN_ZOOM}/${cx + dx}/${cy + dy}${suffix}`);
+      urls.push(
+        TILE_PROVIDERS.light.url
+          .replace("{z}", String(JAPAN_ZOOM))
+          .replace("{x}", String(cx + dx))
+          .replace("{y}", String(cy + dy))
+      );
     }
   }
   return urls;

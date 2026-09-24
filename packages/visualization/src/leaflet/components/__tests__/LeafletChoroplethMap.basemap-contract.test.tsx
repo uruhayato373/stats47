@@ -46,7 +46,7 @@ vi.mock("../../hooks/useChoroplethStyle", () => ({
 
 const { LeafletChoroplethMap } = await import("../LeafletChoroplethMap");
 
-const TILE_URL = "/tiles/light_all/{z}/{x}/{y}{r}.png";
+const TILE_URL = "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png";
 
 const COLOR_CONFIG: MapVisualizationConfig = {
   colorSchemeType: "sequential",

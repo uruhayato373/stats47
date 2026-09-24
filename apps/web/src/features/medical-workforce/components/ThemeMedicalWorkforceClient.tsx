@@ -40,6 +40,7 @@ function WorkforceTable({
     <Table
       aria-label={`${areaName}の医師の${kind}別人数と構成割合`}
       className="min-w-96"
+      scrollRegion
       containerClassName="min-w-0 max-w-full"
     >
       <TableCaption>

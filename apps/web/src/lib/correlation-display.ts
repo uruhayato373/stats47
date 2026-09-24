@@ -7,11 +7,14 @@ export function formatCorrelation(r: number): string {
   return `${sign}${r.toFixed(2)}`;
 }
 
-/** 正の相関は赤系・負の相関は青系、|r| 0.7 / 0.4 で濃淡を分ける。 */
+/**
+ * 正の相関は赤系・負の相関は青系、|r| 0.7 / 0.4 で色相を分ける。
+ * 12px の数値なので WCAG AA (4.5:1) を満たす 700 番台を使う (500 番台は白地で 2.4〜3.8:1)。
+ */
 export function correlationColorClass(r: number): string {
-  if (r >= 0.7) return "text-red-500";
-  if (r >= 0.4) return "text-orange-500";
-  if (r <= -0.7) return "text-blue-500";
-  if (r <= -0.4) return "text-cyan-500";
+  if (r >= 0.7) return "text-red-700 dark:text-red-400";
+  if (r >= 0.4) return "text-orange-700 dark:text-orange-400";
+  if (r <= -0.7) return "text-blue-700 dark:text-blue-400";
+  if (r <= -0.4) return "text-cyan-700 dark:text-cyan-400";
   return "text-muted-foreground";
 }

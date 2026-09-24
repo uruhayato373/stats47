@@ -178,6 +178,10 @@ export function LeafletChoroplethMap({
   // 要素が生まれないので paint できず、LCP は 12,650ms と payload 縮小前の baseline
   // 9,347ms より悪化していた。コロプレスは境界ポリゴンの塗りにしか要らないので、
   // topology は届いた時点で重ねる。
+  //
+  // 高さは呼び出し元の className だけが決める。固定の minHeight を持たせると、
+  // 包みより低い高さ (テーマ比較地図の 360px) で地図が包みの下へはみ出し、
+  // overflow-hidden で下端の出典表記 (国土地理院の利用条件) が切れる。
   return (
     <div className={className}>
       <MapContainer
@@ -186,7 +190,7 @@ export function LeafletChoroplethMap({
         minZoom={fitToPrefectures ? JAPAN_MIN_ZOOM - 1 : JAPAN_MIN_ZOOM}
         maxZoom={JAPAN_MAX_ZOOM}
         scrollWheelZoom
-        style={{ height: "100%", width: "100%", minHeight: 400, borderRadius: "0.375rem" }}
+        style={{ height: "100%", width: "100%", borderRadius: "0.375rem" }}
       >
         <TileLayer url={tileUrl} attribution={attribution} />
         {fitToPrefectures && prefGeojson && <FitPrefectureBounds geojson={prefGeojson} />}

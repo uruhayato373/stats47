@@ -77,7 +77,8 @@
         "ルーティン登録の正典: 本エントリの prompt / schedule / notes。旧ブログ自動化設計は 2026-07-12 に廃止し、必要時は Git 履歴を参照",
         "依存: select-conformance-candidates.mjs (GSC非依存) / generate-article-charts.mjs (強化済) / blog-auto-merge.yml / blog-auto-publish.yml (on:push 有効)",
         "雛形: trend pipeline trig_01RaPLqZrP4i7wAnCzQjifWJ の notes",
-        "一巡後は select-brushup-candidates(GSC) ベース週次へ戻す"
+        "一巡後は select-brushup-candidates(GSC) ベース週次へ戻す",
+        "2026-09-24: 3か月以上未登録・無効のまま。前提の .claude/scripts/blog/select-conformance-candidates.mjs は SCRIPT-ORPHAN-DELETE-01 で削除した。再開する場合は git 履歴から復元する。"
       ]
     }
   ]
