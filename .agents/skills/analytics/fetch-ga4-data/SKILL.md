@@ -218,6 +218,8 @@ GA4 データは GSC より遅延が少なく、前日分まで取得可能。
 
 - `overview.csv` / `pages.csv` / `channels.csv` / `devices.csv` / `daily.csv` — raw 値 (bot 込み)
 - `survey-navigation.csv` — Japan-only の `survey_ranking` nav_click (survey portfolio の内部遷移KPI)
+- `internal-transitions.csv` — Japan-only の同一サイト page_view を「参照元セクション → 着地セクション」に集約 (blog→ranking・theme→ranking 等の回遊。nav_click の計装漏れに左右されない)
+- `landing-context.csv` — Japan-only の着地ページ別 sessions / engagement / desktop 比率 / 平日 9–18 時比率 (業務文脈の読者がどの着地に集まるか。10 sessions 未満は出さない)
 - `overview-clean.csv` / `channels-clean.csv` — country=Japan only クリーン値（engagedSessions / engagementRate を含む）
 - `pollution-summary.csv` — bot/spam 推定 (overseas_sessions / overseas_engagedSessions / notSet_sessions) の集計 1 行
 
