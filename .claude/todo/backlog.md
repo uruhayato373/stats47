@@ -1404,7 +1404,7 @@ updated: 2026-09-21
 - **完了条件**: 既存metricの年次更新を検証し、需要確認済みの追加候補だけが小バッチの投入判断に到達する。
 - **正典**: `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md`
 
-### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 13 件
+### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 11 件
 
 タグ: [種類:不具合] [実行:ユーザー] [起票:2026-07-30]
 
@@ -1413,10 +1413,10 @@ updated: 2026-09-21
   そこを**禁止パス**にしている（workflow を書き換えられると allowedTools・許可パス・timeout・
   モデルを自分で緩められるため）。status を pending のままにするとループが毎回 pick して
   `class-needs-pr` で skip し、枠だけを消費する。人間の PR で 3-4 本ずつ進める。
-- **背景**: `${{ inputs.x }}` を `run:` の中へ直接展開している箇所が 13 件残っている。dispatch できる者が任意コードを実行できる類型。private repo で dispatch 権限者は push もできるため実効的な権限昇格ではないが、衛生上の負債。
+- **背景**: `${{ inputs.x }}` を `run:` の中へ直接展開している箇所が 11 件残っている (2026-09-24 に `improvement-log-reminder-weekly` の 2 件を workflow ごと削除)。dispatch できる者が任意コードを実行できる類型。private repo で dispatch 権限者は push もできるため実効的な権限昇格ではないが、衛生上の負債。
 - **★この負債は現在 CodeQL に検出されていない** (2026-07-30 実測): `.github/workflows/security-scan.yml` の init は `languages: javascript,typescript` で、**workflow ファイル自体は走査対象外** (走査には `languages: actions` が要る)。PR #655 で出た CodeQL 3 件はこれとは無関係で、`.claude/scripts/` の `execSync(テンプレート文字列)` = `js/command-line-injection` だった (同 PR で argv 形式へ是正済)。**「CodeQL が出たら workflow の式インジェクション」と早合点しない** — 2 度誤診した。
-- **対象**: `blog-auto-publish` / `blog-remediation-daily` / `fetch-metrics-weekly` / `improvement-log-reminder-weekly` (2) / `migration-flow-weekly` (2) / `publish-ai-content` / `sns-weekly-report` (2) / `sync-snapshots` (3)
-- **次**: 各 step に `env:` ブロックを足し、`run:` はシェル変数だけを参照する形へ書き換える (`data-refresh.yml` が手本)。併せて `languages` に `actions` を足すか判断する (足すと 13 件が一斉に critical で出るため、書き換えを先に済ませる)
+- **対象**: `blog-auto-publish` / `blog-remediation-daily` / `fetch-metrics-weekly` / `migration-flow-weekly` (2) / `publish-ai-content` / `sns-weekly-report` (2) / `sync-snapshots` (3)
+- **次**: 各 step に `env:` ブロックを足し、`run:` はシェル変数だけを参照する形へ書き換える (`data-refresh.yml` が手本)。併せて `languages` に `actions` を足すか判断する (足すと 11 件が一斉に critical で出るため、書き換えを先に済ませる)
 - **完了条件**: 上記走査で 0 件、かつ actionlint exit=0
 - **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
 

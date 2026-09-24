@@ -7,6 +7,8 @@
  *   (effect の確定は閾値エンジンだけが行う。本文中の「付けない」という言及は対象外なので列で見る)
  * - backlog.md のカードを消していない (行削除は backlog-loop の排他) / 新規カードは上限以内
  * - 追加行に秘密情報の形が無い (run は GA4 の鍵を env に持ち、結果は公開 repo へ push される)
+ * - Claude のファイル書き込みが権限で拒否されていない (拒否されたまま「変更 0 件」で通過させない。
+ *   2026-09-24 の初回無人 run は improvements.md への Edit を 3 回拒否され、空の差分でゲートを通過した)
  */
 export const ALLOWED_PATHS = [
   /^\.claude\/todo\/improvements\.md$/,
@@ -14,6 +16,7 @@ export const ALLOWED_PATHS = [
   /^\.claude\/skills\/analytics\/[a-z0-9-]+-improvement\/reference\/improvement-log\.md$/,
 ];
 export const MAX_NEW_BACKLOG_CARDS = 2;
+const WRITE_TOOLS = new Set(["Write", "Edit", "MultiEdit", "NotebookEdit"]);
 /** 公開 repo へ push する前に止める秘密の形 (サービスアカウント鍵・OAuth token)。 */
 const SECRET_PATTERNS = [
   /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
@@ -55,8 +58,14 @@ export function parseCardIds(md) {
   return new Set(Array.from(String(md ?? "").matchAll(/^### \[([A-Z0-9-]+)\]/gm), (m) => m[1]));
 }
 
-export function evaluateRun({ changedFiles, beforeImprovements, afterImprovements, beforeBacklog, afterBacklog, diffText = "" }) {
+/**
+ * @param {object} input
+ * @param {{ tool: string, target: string }[]} [input.denials] summarize-claude-execution の denialRows
+ */
+export function evaluateRun({ changedFiles, beforeImprovements, afterImprovements, beforeBacklog, afterBacklog, diffText = "", denials = [] }) {
   const problems = [];
+  const writeDenials = new Set(denials.filter((d) => WRITE_TOOLS.has(d.tool)).map((d) => `${d.tool} → ${d.target || "(対象不明)"}`));
+  for (const d of writeDenials) problems.push(`ファイル書き込みが権限で拒否された: ${d}`);
   const leaks = findSecretLeaks(diffText);
   if (leaks.length) problems.push(`秘密情報の形を含む追加行が ${leaks.length} 行ある (push しない)`);
   for (const file of changedFiles) {

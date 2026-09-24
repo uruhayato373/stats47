@@ -1,6 +1,6 @@
 ---
 name: project-measurement-cycle-ci
-description: 計測→記録→改善サイクルのCI自動化(2026-09-24)。日曜計測→月曜06:00無人triage→09:00週次Issue。main反映まで日曜側は動かない
+description: 計測→記録→改善サイクルのCI自動化(2026-09-24)。日曜計測→月曜06:00無人triage→09:00週次Issue。main反映まで日曜側は動かない。無人Claudeは.claude/を書けない(保護パス)ので提案JSON→決定的適用
 metadata:
   node_type: memory
   type: project
@@ -20,7 +20,12 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
   **月曜 06:00 にも作り直す**: sns-metrics-weekly は fetch-metrics-weekly より後に終わる (2026-09-20: 14:33Z → 14:47Z) ため。
   PSI の空スコア行は計測失敗 (0 点扱いしない)、Instagram は impressions が 0 で reach / views に値が入る。
 - 記録: 月曜 06:00 JST `improvement-cycle-weekly.yml` が improvement-triage を Claude Code (sonnet) で無人実行。
-  個別の内訳は `ga4-query.mjs` / `gsc-query.mjs`。`verify-improvement-cycle-run.mjs` のゲートを通った差分だけ develop へ push、失敗は `improvement-cycle-alert`。
+  個別の内訳は `ga4-query.mjs` / `gsc-query.mjs`。**Claude は台帳を編集せず `.local/ci/improvement-cycle/proposal.json` に提案を書き**、
+  `verify-improvement-cycle-run.mjs` が決定的に適用 → ゲートを通った差分だけ develop へ push、失敗は `improvement-cycle-alert`。
+  理由: `.claude/` は Claude Code の保護パスで `--permission-mode dontAsk` では allow ルールがあっても書き込みが必ず拒否される
+  (公式 permission-modes#protected-paths、2026-09-24 参照)。初回の無人 run 35996605022 は Edit 3 回拒否のまま「変更 0 件・gate pass」で
+  success になった。今は書き込み拒否・提案ファイル欠落をゲートが fail にする。提案と最終メッセージは artifact `improvement-cycle-evidence`。
+  **同じ構成で `.claude/` を Claude に直接編集させる他の無人 workflow も同じ罠に当たる** (dontAsk なら拒否、bypassPermissions は Bash 許可リストが効かなくなる)。
   目標値は根拠 (過去事例か計算式) が行か詳細ログにあるときだけ書く指示。無人 run が目標値を捏造していないかは初回数回の差分を人が見る。
 - 表示: 月曜 09:00 JST 週次メトリクス Issue の「🔁 計測→記録→改善サイクル」節と `/weekly-review` Phase 1。
 
