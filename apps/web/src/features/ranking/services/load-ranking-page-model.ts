@@ -203,7 +203,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     structuredData,
     breadcrumbStructuredData,
     faqStructuredData,
-    initialTileUrls: getInitialMapTileUrls({ theme: "light_all", retina: true }),
+    initialTileUrls: getInitialMapTileUrls(),
   };
 }
 
