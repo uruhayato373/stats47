@@ -190,6 +190,17 @@ function hasPassingGate(ledger, id) {
 }
 
 /**
+ * 「最新の attempt が gate を通した completed か」— 削除し忘れの判定用。
+ * 過去に completed でも、その後 deferred / failed で戻された ID は行が残るのが正しい
+ * (2026-09-23/24 に過去の completed だけを見て 2 晩連続で run が落ちた)。
+ */
+function latestAttemptPassedGate(ledger, id) {
+  const attempts = ledger.items?.[id]?.attempts ?? [];
+  const last = attempts[attempts.length - 1];
+  return Boolean(last && last.outcome === 'completed' && last.gate && last.gate.pass === true);
+}
+
+/**
  * 「gate を通した completed attempt が名指しした follow-up」の集合。
  * verify が新規追加を許す唯一の根拠で、閉じたエントリ自身の記録にしか現れない。
  */
@@ -237,6 +248,7 @@ module.exports = {
   recordAttempt,
   quarantinedIds,
   hasPassingGate,
+  latestAttemptPassedGate,
   declaredFollowUps,
   summarizeByClassModel,
 };

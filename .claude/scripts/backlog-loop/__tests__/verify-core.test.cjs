@@ -114,6 +114,22 @@ test('gate を通したのに削除し忘れたら落ちる (次の run が同�
   assert.equal(r.findings[0].kind, 'gate-passed-but-not-removed');
 });
 
+// 2026-09-23/24 の backlog-loop-daily が 2 晩連続で落ちた実例。BLOG-REVIEW-AREA-RATIO-01 は
+// 8/31 に gate を通した completed の直後、outbox パス拒否で deferred に戻されカードも戻った。
+// 過去の completed だけを見ると、この card を queue に載せた run は毎回「削除し忘れ」で落ちる。
+test('★過去に gate を通しても、最新 attempt が deferred なら行が残っていてよい', () => {
+  const ledger = ledgerWith([
+    { id: 'A-01', class: 'impl-small', outcome: 'completed', gate: { commands: ['t'], pass: true } },
+    { id: 'A-01', class: 'impl-small', outcome: 'deferred', failReason: 'outbox path rejected' },
+  ]);
+  const r = verifyRemovals({
+    files: [{ sourceFile: FILE, before: doc(['A-01']), after: doc(['A-01']) }],
+    ledger,
+    queuedIds: ['A-01'],
+  });
+  assert.equal(r.ok, true, JSON.stringify(r.findings));
+});
+
 test('宣言していないエントリの新規追加は落ちる (仕事の捏造を止める)', () => {
   const r = verifyRemovals({
     files: [{ sourceFile: FILE, before: doc(['A-01']), after: doc(['A-01', 'NEW-01']) }],

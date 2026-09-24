@@ -19,7 +19,7 @@
  */
 
 const { parseHeadingEntries } = require('./parse-backlog-core.cjs');
-const { hasPassingGate, declaredFollowUps } = require('./ledger-core.cjs');
+const { hasPassingGate, latestAttemptPassedGate, declaredFollowUps } = require('./ledger-core.cjs');
 
 /** ループが触ってよいパス。ここに無いものを触ったら commit させない */
 const ALLOWED_PATH_PATTERNS = [
@@ -134,7 +134,7 @@ function verifyRemovals({ files, ledger, queuedIds = null }) {
       parseHeadingEntries(f.after, f.sourceFile).entries.map((e) => e.id).filter(Boolean),
     );
     for (const id of queued ?? []) {
-      if (afterIds.has(id) && hasPassingGate(ledger, id)) {
+      if (afterIds.has(id) && latestAttemptPassedGate(ledger, id)) {
         findings.push({
           kind: 'gate-passed-but-not-removed',
           id,
