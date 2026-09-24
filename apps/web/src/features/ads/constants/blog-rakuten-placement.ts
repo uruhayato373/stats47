@@ -1,3 +1,4 @@
+import { BLOG_RAKUTEN_VERTICALS } from "./blog-affiliate-policy";
 import { detectSinglePrefCodeFromText } from "./furusato-nozei";
 import { detectProductKeyword } from "./product-keywords";
 
@@ -16,7 +17,7 @@ export function resolveBlogRakutenPlacement({
   vertical: AffiliateVertical | null;
 }): BlogRakutenPlacement | null {
   // 健康・事故・人口等の記事に、偶然含まれた品目だけで商品を勧めない。
-  if (vertical !== "furusato" && vertical !== "economy" && vertical !== "travel") return null;
+  if (!vertical || !BLOG_RAKUTEN_VERTICALS.has(vertical)) return null;
   // 複数調査の相関記事は家計調査が先頭でも健康・事故が主題になり得る。
   // 食品との相関から健康効果等を連想させる購買導線を作らない。
   if (/身長|体重|寿命|死亡|自殺|事故|災害|疾病|感染|中毒|アレルギー/.test(title)) return null;
