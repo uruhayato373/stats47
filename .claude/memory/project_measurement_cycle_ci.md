@@ -25,6 +25,9 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
   理由: `.claude/` は Claude Code の保護パスで `--permission-mode dontAsk` では allow ルールがあっても書き込みが必ず拒否される
   (公式 permission-modes#protected-paths、2026-09-24 参照)。初回の無人 run 35996605022 は Edit 3 回拒否のまま「変更 0 件・gate pass」で
   success になった。今は書き込み拒否・提案ファイル欠落をゲートが fail にする。提案と最終メッセージは artifact `improvement-cycle-evidence`。
+  修正後の初回 run 35999010240 (2026-09-24、W38) で初めて台帳に反映された: 期日超過 3 件のうち COVERAGE-LOOP-01 を削除 (gsc 詳細ログへ判定)、
+  TOKEN-AICONTENT-01 / THEME-EXPANSION-EFFECT-01 を更新。数値 3 点を実データと照合して一致 (billing 開始日を 09-01 と書いたが実際は 08-31 の軽微なずれのみ)。
+  残った権限拒否 3 件は `cat` と `node -e` の探索 (禁止どおり) で、書き込み拒否ではない。1 run $1.82 相当・46 ターン。
   **同じ構成で `.claude/` を Claude に直接編集させる他の無人 workflow も同じ罠に当たる** (dontAsk なら拒否、bypassPermissions は Bash 許可リストが効かなくなる)。
   目標値は根拠 (過去事例か計算式) が行か詳細ログにあるときだけ書く指示。無人 run が目標値を捏造していないかは初回数回の差分を人が見る。
 - 表示: 月曜 09:00 JST 週次メトリクス Issue の「🔁 計測→記録→改善サイクル」節と `/weekly-review` Phase 1。
