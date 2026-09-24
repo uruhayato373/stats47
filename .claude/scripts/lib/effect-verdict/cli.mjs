@@ -32,6 +32,7 @@ import { weekLt } from "./iso-week.mjs";
 import { currentIsoWeek } from "../../search-growth/lib/state.mjs";
 import { createGscBlogWaveAdapter } from "../../blog/measure-gsc-impact.mjs";
 import { createAdsenseAdapter } from "../../metrics/measure-adsense-impact.mjs";
+import { loadGscImprovementsAdapter } from "../../metrics/lib/gsc-improvements-adapter.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,7 +41,11 @@ const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/effect-verdict");
 
 /** 登録済み adapter。増やすときはここに 1 行足す。 */
 export function loadAdapters(opts = {}) {
-  return [createGscBlogWaveAdapter(opts.gsc ?? {}), createAdsenseAdapter(opts.adsense ?? {})];
+  return [
+    createGscBlogWaveAdapter(opts.gsc ?? {}),
+    createAdsenseAdapter(opts.adsense ?? {}),
+    loadGscImprovementsAdapter(opts.gscImprovements ?? {}),
+  ];
 }
 
 /**

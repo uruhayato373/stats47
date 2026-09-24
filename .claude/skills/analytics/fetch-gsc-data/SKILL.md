@@ -11,6 +11,10 @@ Google Search Console API からサイトの検索パフォーマンスデータ
 - **ad hoc モード** (デフォルト) — 指定ディメンションを取得して結果を整形表示する
 - **snapshot モード** — 全ディメンションを全件取得して週次 snapshot ディレクトリに CSV 保存する。`/weekly-review` から呼ばれる
 
+施策の効果判定・原因切り分けで「コピペ再現できる検証コマンド」が要るときは、ad hoc モードの inline 実行ではなく
+`node .claude/scripts/metrics/gsc-query.mjs --start YYYY-MM-DD --end YYYY-MM-DD --dims page --filter 'page*=/path'`
+を使う (read-only・記法はスクリプト冒頭)。週次の無人 improvement triage も同じコマンドを使う。
+
 ## 用途
 
 - 検索クエリ別のクリック数・表示回数・CTR・掲載順位を取得したいとき

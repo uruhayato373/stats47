@@ -1,11 +1,8 @@
 {
-  "hash": "e34ec4970ec9647c439a671b83e488d6dc42fe30751b275eaaa595fb5213d862",
-  "audited_at": "2026-09-24T06:18:13",
+  "hash": "71374f10e4bb17c1e605dc45346a3cf2e6718558e64c450bc781853fab36e8cd",
+  "audited_at": "2026-09-24T06:59:06",
   "files": [
-    ".claude/rules/backlog-loop.md",
-    ".claude/rules/page-quality-standards.md",
-    ".claude/scripts/page-quality/__tests__/ui-findings.test.mjs",
-    ".claude/scripts/page-quality/lib/ui-findings.ts",
-    ".claude/scripts/page-quality/ui-findings.ts"
+    ".claude/rules/affiliate-ads-standards.md",
+    ".claude/scripts/ads/audit-affiliate-relevance.ts"
   ]
 }

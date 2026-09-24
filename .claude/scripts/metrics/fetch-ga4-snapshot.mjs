@@ -8,6 +8,8 @@
  *   - overview/pages/channels/devices/daily.csv … raw ローリング28日 (機会発見 + pollution 監視用)
  *   - pages-clean.csv / theme-navigation.csv + *.meta.json … Japan-only ローリング28日
  *   - survey-navigation.csv … Japan-only の survey→ranking nav_click (ローリング28日)
+ *   - internal-transitions.csv / landing-context.csv / event-volume.csv + *.meta.json … Japan-only ローリング28日
+ *     (参照元セクション→着地セクションの page_view、着地別 desktop・平日業務時間比率、イベント別発火量)
  *   - overview-clean.csv … Japan-only カレンダー週 (GA4-PIPELINE-02 後方互換系列・history.csv 用)
  *   - daily-clean.csv … Japan-only 日別 14 日 (確定7日 KPI の coverage 判定用)
  *   - summary.json … jpFinalized7d/jpPrevious7d KPI + raw pollution (期間 metadata 付き)
@@ -38,6 +40,10 @@ import {
   buildCleanPagesRequest, buildThemeNavigationRequest, buildThemeReportMetadata,
   CLEAN_PAGE_COLUMNS, THEME_NAV_API_DIMENSIONS, THEME_NAV_COLUMNS,
 } from "./lib/theme-ga4-reports.mjs";
+import {
+  aggregateLandingContext, aggregateTransitions, buildEventVolumeRequest, buildInternalTransitionsRequest,
+  buildLandingContextRequests, EVENT_VOLUME_COLUMNS, LANDING_CONTEXT_COLUMNS, TRANSITION_COLUMNS,
+} from "./lib/journey-ga4-reports.mjs";
 
 const DEFAULT_PROPERTY_ID = "463218070";
 const SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"];
@@ -235,6 +241,39 @@ async function main() {
   } catch (e) {
     errors.push(`survey-navigation: ${e.message}`);
     console.error("[ga4-snapshot] survey-navigation failed:", e.message);
+  }
+
+  // Journey slice: nav_click の計装有無に依らない回遊 (referrer) と、着地ページの業務文脈。
+  const landingRequests = buildLandingContextRequests(periods.rolling28d);
+  for (const report of [
+    { name: "internal-transitions", columns: TRANSITION_COLUMNS, fetch: async () => aggregateTransitions(
+      (await runReportPaged(analyticsdata, property, buildInternalTransitionsRequest(periods.rolling28d)))
+        .map((row) => toRow(row, ["pageReferrer", "pagePath"], ["eventCount"]))) },
+    { name: "landing-context", columns: LANDING_CONTEXT_COLUMNS, fetch: async () => aggregateLandingContext({
+      base: (await runReportPaged(analyticsdata, property, landingRequests.base))
+        .map((row) => toRow(row, ["landingPage"], ["sessions", "engagedSessions", "userEngagementDuration", "screenPageViews"])),
+      device: (await runReportPaged(analyticsdata, property, landingRequests.device))
+        .map((row) => toRow(row, ["landingPage", "deviceCategory"], ["sessions"])),
+      hour: (await runReportPaged(analyticsdata, property, landingRequests.hour))
+        .map((row) => toRow(row, ["landingPage", "dayOfWeek", "hour"], ["sessions"])),
+    }) },
+    { name: "event-volume", columns: EVENT_VOLUME_COLUMNS, fetch: async () =>
+      (await runReportPaged(analyticsdata, property, buildEventVolumeRequest(periods.rolling28d)))
+        .map((row) => toRow(row, ["eventName"], EVENT_VOLUME_COLUMNS.slice(1))) },
+  ]) {
+    let metadata;
+    try {
+      const rows = await report.fetch();
+      writeFileSync(join(outDir, `${report.name}.csv`), toCsv(rows, report.columns));
+      metadata = buildThemeReportMetadata({ period: periods.rolling28d, rowCount: rows.length });
+      summaryLines.push(`${report.name}.csv: ${rows.length} rows (Japan-only・rolling28d)`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      metadata = buildThemeReportMetadata({ period: periods.rolling28d, error: message });
+      errors.push(`${report.name}: ${message}`);
+      console.error(`[ga4-snapshot] ${report.name} failed:`, message);
+    }
+    writeFileSync(join(outDir, `${report.name}.meta.json`), JSON.stringify(metadata, null, 2) + "\n");
   }
 
   // channels (raw)

@@ -1,60 +1,76 @@
 {
-  "generatedAt": "2026-09-23T14:46:38.027Z",
-  "auditGeneratedAt": "2026-09-23T13:47:54.765Z",
+  "generatedAt": "2026-09-24T07:43:10.930Z",
+  "auditGeneratedAt": "2026-09-24T06:51:27.490Z",
   "reviewStatus": "reviewed",
   "reviewError": null,
-  "summary": "geo-analysisページの6枚全ての地図プレビューが取得失敗表示、rankingページの地図に「API KEY REQUIRED」透かしが全面表示、という2件の高severity不具合を発見。加えてthemeページのグラフ空表示・地図読み込み中固定、tagページの内部スラッグ露出、千代田区ページの県名重複表示を中severity/低severityで検出。それ以外の8ページ（home、prefecture-list、prefecture-detail、blog、category、survey）は自動検査済みの重複タップ領域を除き大きな崩れなし。",
+  "summary": "10ページ中2ページで重大な表示崩れを発見。geo-analysisは6枚の地図プレビューが全滅、rankingは地図タイルに「API KEY REQUIRED」の透かしが全面表示。theme/prefecture-detailにも軽微な表示問題あり。他ページ(prefecture-list, blog, category, survey, municipality, other)は目立った崩れなし。",
   "findings": [
+    {
+      "template": "geo-analysis",
+      "device": "mobile-390",
+      "severity": "high",
+      "location": "1枚目から2枚目にかけて、6件の分析カード全ての左側プレビュー枠",
+      "issue": "「人口×地価」「人口×洪水」「人口×駅」など6つの分析カードすべてで、地図プレビュー画像の代わりに『地図プレビューを取得できませんでした』というグレーの空枠が表示されている。読者は地図の内容を全く確認できない。",
+      "suggestion": "地図プレビュー画像の生成・配信状況を確認し、失敗時のfallback表示ではなく正常な画像を出すよう修正する。"
+    },
     {
       "template": "geo-analysis",
       "device": "desktop-1440",
       "severity": "high",
-      "location": "地図で見る地域の変化ページ、「調べたい問いから選ぶ」の6枚のカードすべて（人口×地価、人口×洪水、人口×駅、豪雪指定×人口、土砂災害×人口・施設、公共施設距離×人口）",
-      "issue": "6つの分析カードの地図プレビュー画像が全て「地図プレビューを取得できませんでした」という表示になっており、実際の地図が一切見えない。mobile-390・tablet-768・desktop-1440の3幅すべてで同じ状態。",
-      "suggestion": "地図プレビュー画像の生成・配信元を確認し、正しいプレビュー画像が表示されるよう修正する。"
+      "location": "1枚目、6分析カードの左側プレビュー枠(mobile/tabletでも同一現象)",
+      "issue": "デスクトップ幅でも同様に全カードのプレビュー画像が『地図プレビューを取得できませんでした』のまま。3幅すべてで再現するため一時的な読み込み遅延ではなく機能停止と見られる。",
+      "suggestion": "プレビュー画像生成パイプラインの動作を確認し復旧する。"
+    },
+    {
+      "template": "ranking",
+      "device": "mobile-390",
+      "severity": "high",
+      "location": "1枚目、地図タブの日本地図タイル全体",
+      "issue": "地図の背景タイルに『API KEY REQUIRED』の文字が何箇所も斜めに大きく透かし表示されており、地図が正しく読めない。地名(ウラジオストク、ソウルなど本来不要な国外都市名)も表示され、本番用の地図タイルになっていない。",
+      "suggestion": "CartoDBの地図タイルAPIキーを本番環境に設定し、正規のタイルが表示されるようにする。"
     },
     {
       "template": "ranking",
       "device": "desktop-1440",
       "severity": "high",
-      "location": "総人口ランキングページの都道府県別地図（地図タブ）、地図全体に斜めの透かし文字",
-      "issue": "地図の背景タイル全体に「API KEY REQUIRED」という英語の透かし文字が繰り返し表示され、日本地図の上に北朝鮮・韓国のハングル地名まで混ざって見えてしまっている。mobile-390・tablet-768・desktop-1440で共通。",
-      "suggestion": "地図タイルプロバイダ（CartoDB/Leaflet）のAPIキー設定を確認し、本番用の正規タイルが読み込まれるようにする。"
+      "location": "1枚目、地図タブの日本地図タイル(tablet-768でも同一現象)",
+      "issue": "デスクトップでも同様に地図タイル全面に『API KEY REQUIRED』の透かしが表示され、海外の地名や不要な国境線まで見えてしまっている。3幅共通の問題。",
+      "suggestion": "地図タイルAPIキー設定を本番に反映し、全幅で再確認する。"
     },
     {
       "template": "theme",
       "device": "mobile-390",
       "severity": "medium",
-      "location": "テーマページ（人口動態）「出生と死亡・転入と転出の内訳」内、「自然増減：出生数と死亡数」および「外国人の人口移動：転入者数と転出者数」のグラフ枠",
-      "issue": "2つのグラフがどちらも空の灰色ボックスのままでデータの折れ線・棒が描画されていない。mobile-390・desktop-1440で同様に空表示。",
-      "suggestion": "該当チャートコンポーネントのデータ取得・描画処理を確認し、正しく描画されるか検証する。"
+      "location": "3枚目、『自然増減：出生数と死亡数』『外国人の人口移動』の2つのグラフ枠",
+      "issue": "折れ線・棒グラフが表示されるべき枠が、中身のない灰色の空ボックスのままになっている。同じ画面内の他のグラフ(総人口など)は正常に描画されている。",
+      "suggestion": "チャートの遅延読み込みやデータ取得失敗の原因を確認し、確実に描画されるようにする。"
     },
     {
       "template": "theme",
       "device": "desktop-1440",
       "severity": "medium",
-      "location": "テーマページ「どこからどこへ移動するか」の「都道府県 人口移動フロー」カード内、地図の位置",
-      "issue": "アニメ地図の部分が「読み込み中...」のまま表示されている。mobile-390・tablet-768・desktop-1440の3幅すべてで同じ状態。",
-      "suggestion": "フロー地図の読み込み処理を確認し、スクリーンショット取得タイミングまでに描画が完了するか、あるいは実際に固まっていないか調べる。"
+      "location": "2枚目、『都道府県 人口移動フロー』のグラフ枠",
+      "issue": "『読み込み中...』の表示のままフロー図が描画されていない。tablet-768でも同じ箇所が空の灰色ボックスになっている。",
+      "suggestion": "人口移動フロー図の初期表示ロジックを見直し、読み込み完了後に確実に描画されるようにする。"
+    },
+    {
+      "template": "prefecture-detail",
+      "device": "desktop-1440",
+      "severity": "low",
+      "location": "2枚目、経済・雇用セクションの『失業率』カード右隣の空白マス",
+      "issue": "3列グリッドのうち3列目に対応するデータがない場合、意味のない灰色の空ボックスがそのまま表示され、レイアウトに不自然な空白ができている。3枚目の『延べ床面積』『犯罪認知件数』のダッシュ表示箇所も同様。",
+      "suggestion": "データが存在しない項目は空ボックスを出さずグリッドを詰めるか、項目自体を非表示にする。"
     },
     {
       "template": "other",
-      "device": "desktop-1440",
-      "severity": "medium",
-      "location": "タグページ「人口」の記事カード一覧、各カードのタイトル上にある小さい英字テキスト",
-      "issue": "各記事カードのタイトルの上に「general-households-prefecture-gap」のような内部スラッグがそのまま表示されており、一般読者には意味不明な英字の羅列に見える。mobile-390・tablet-768・desktop-1440で共通。",
-      "suggestion": "スラッグ表示をやめるか、カテゴリ名や更新日など読者に意味のあるラベルに置き換える。"
-    },
-    {
-      "template": "municipality",
       "device": "mobile-390",
       "severity": "low",
-      "location": "東京都千代田区ページ、タイトル直下のパンくず的な1行テキスト",
-      "issue": "「東京都 東京都 千代田区」と都道府県名が2回重複して表示されている。tablet-768・desktop-1440でも同様。",
-      "suggestion": "県名結合ロジックの重複を取り除き「東京都 千代田区」の1回表示にする。"
+      "location": "タグページの記事一覧、各記事タイトルの直上",
+      "issue": "『general-households-prefecture-gap』のような英語の技術的なslug文字列が、記事タイトルの上にそのまま表示されている。一般読者には意味が分からない内部識別子。",
+      "suggestion": "タグ一覧の記事カードからslug表示を削除するか、カテゴリラベルなど読者向けの情報に置き換える。"
     }
   ],
   "rejected": [],
-  "newViolationCount": 19,
-  "firstRun": true
+  "newViolationCount": 0,
+  "firstRun": false
 }

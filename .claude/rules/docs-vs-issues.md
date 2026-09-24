@@ -96,6 +96,7 @@ skill、agent、prompt、READMEへ複製しない。
 | ページ UI の週次確認 (新しく出た UI 違反 + スクショを見た agent の指摘。直すものはバックログへカード化) | `ui-review-alert,auto-generated` | `.github/workflows/page-quality-audit-weekly.yml` |
 | 予約中の SNS 投稿画像の週次確認 (機械検査 + 画像を見た agent の指摘) | `sns-review-alert,auto-generated` | Mac の launchd `scripts/scheduled/sns-image-review.sh` (X / Threads の画像がこの Mac にしか無いため CI ではない) |
 | GSC週次レビュー・候補判断・次週計画の接続異常 | `gsc-cycle-alert,auto-generated` | `.github/workflows/gsc-operations-cycle-weekly.yml` |
+| 週次の計測→記録→改善サイクルの無人記録の失敗 (入力週の不一致・ゲート違反・push 失敗) | `improvement-cycle-alert,auto-generated` | `.github/workflows/improvement-cycle-weekly.yml` |
 | 国土数値情報カタログの更新検知 | `ksj-catalog,auto-generated` | `.github/workflows/ksj-catalog-monthly.yml` |
 | 本番デプロイ後スモークテスト (health check / Playwright) の失敗 | `post-deploy-alert,auto-generated` | `.github/workflows/post-deploy-smoke.yml` |
 

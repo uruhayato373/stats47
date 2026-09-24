@@ -70,6 +70,7 @@ updated: 2026-09-21
 - **初回schedule未確認（2026-09-21 19:02 JST）**: 18:20予定の実行はAPI `actions/workflows/authenticated-measurement.yml/runs?event=schedule`で`total_count:0`。workflow `362957799`はactive、default branchはmain、mainのcronは`20 9 * * *`で、main反映は同日14:46 JSTに済んでいる。最新runは引き続き`35561887453`・event=`push`・attempt 10であり、定期実行の成功証拠に流用しない。record job `106253312558`は記録step成功・警告step失敗。developの最新記録（generatedAt=`07:46:36.641Z`）とprivate R2は全7sourceのrun ID/attempt/observedAt/status/code/quality/evidence SHAが一致した。取得済み5sourceはpass、KDPとnoteは上記失敗のまま。未観測の理由は未確定で、遅延/起動停止のどちらとも断定しない。予約した単発確認は実施済みとして停止し、実schedule起動の受入条件は未完了で保持する。
 - **未解決の証拠（2026-09-21）**: noteは同じ13:55 JST集計でも、2026-01-20〜09-20では286/286件・全合計一致・カバー結合PASS、08-24〜09-20では285/286件・全合計一致となる。欠落記事は公開中で、長期窓では表示される。Chrome実画面でインプレッション順に変更して全15ページを表示しても285件・同じ記事が欠落し、末尾に「もっとみる」は無い。期間依存の非表示まで確認できたが、非表示を0とする公式仕様は確認できず、短期窓の値はnullのまま保持する。再現入力は既存`note:metrics:fetch`の`--start`/`--end`、私有証跡は`.local/authenticated-measurement/note-{wide,current}-period/`。問い合わせ先: [note公式窓口](https://www.help-note.com/hc/ja/requests/new)。質問は「公開記事n99561600d4feが同一集計時刻の短期窓だけ一覧に無い。指標が全て0の期間に行を非表示にする仕様か、取得不具合か」。問い合わせ送信はオーナーの承認後。
 - **次（実行順）**: ①KDPは本人ログイン→初回成功の反復やCookie加工で回避しない。提供元への無人取得可否/再認証条件の確認、または専用クラウド環境で本人認証から連続取得まで行う比較検証のどちらに進むかをオーナーと決める。問い合わせ送信・環境新設・常駐費用は承認後。専用環境は解決保証ではなく検証案であり、このPUBLIC repoに個人Macをself-hosted runner登録しない（[GitHub公式の安全要件](https://docs.github.com/en/actions/reference/security/secure-use)）。保護機構のmain反映と全取得元の無人継続運用完了を分け、後者は更新sessionの連続再利用と定期起動を実測して判定する。②noteの上記非表示仕様を提供元へ確認し、回答を根拠に収集契約を更新する（無断の問い合わせ送信・0埋めはしない）。③実schedule runが現れた時点で各source・record・develop/private R2の整合を再確認する。未観測の間はActions履歴・設定・公式障害情報で原因を調査し、手動dispatchを定期起動の代用にしない。48時間鮮度監視も別に確認する。KDP月次収益を週次へ按分せず、入金・手数料・税の帰属が未確認ならsales-ledgerへ入れない。afbは承認済み`AFB_API_KEY` Secretを使用し、Cookie移送の再ログインを反復しない。
+- **アフィリエイト週次への波及（2026-09-24 確認）**: `affiliate-ga4-weekly.yml`のscheduled run `35639065973`（2026-09-21T18:32Z）はfailureだった。GA4取得・R2 read-back・履歴commit-backはsuccessしたが、operations state stepの`restore.mjs moshimo --if-activated`が`unavailable`を返し、measurement gateもfailureとなってIssue #1007がOPENのまま残っている。つまりA8・もしもの再認証が完了するまで、アフィリエイト週次は毎回failureになり、週次収益（NSM）のアフィリエイト確定額は判定不能のまま続く。GA4側の計測経路自体は復旧している。
 - **完了条件**: 全collectorの実データ取得・private R2 read-back・git記録の整合・認証付き計測Issueの復旧closeが成立し、本人の再認証を挟まない別日付のmain scheduleで連続2回以上確認する（恒久的な無人保証とはしない）。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。サイト全体の放置運用判定は、このカードだけでなく横断監視Issue #763の別系統異常の解消も必要。
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookie/APIキーをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。afbの発生日/確定日系列を合算せず、API報酬を純収益・入金へ代入しない。出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 
@@ -320,6 +321,36 @@ updated: 2026-09-21
   main 反映前はワークフローの変更が効かないので、このカードはループに拾わせない (`[実行:対話]`)。
 - **停止条件**: 検査枠を増やすために API quota (2,000/日) の 75% を超えない。Indexing API は使わない。
 - **完了条件**: 上の検証コマンドが exit 0、`indexed-submitted` が 1 週以上記録され、運用サイクル監査の `search-growth-sources` が PASS。
+
+### [UI-REVIEW-LOOP-VERIFY-01] 週次 UI 検査のループが修正と本番確認まで CI で一巡することを確かめる
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/page-quality/ui-findings-queue.json');process.exit(q.findings.some(f=>f.status==='fixed'||f.resolved_by==='weekly-audit')?0:1)"] [起票:2026-09-24] [期日:2026-10-12]
+
+- **背景**: 2026-09-24 に検査 → 起票 → 修正 → 本番確認のループを入れた (`.claude/rules/page-quality-standards.md`「UI 指摘のループ」)。
+  同日の週次 (run 35966300757) で `UI-FIX-THEME` / `UI-FIX-PREFECTURE-DETAIL` / `UI-FIX-OTHER` の 3 枚が起票され、
+  キューと backlog が develop に commit された (`03a02d016`)。起票までは CI で確認済み。
+- **次**: ① `backlog-loop-daily` が UI-FIX カードを処理し、`ui-findings-queue.json` への `--mark-*` が develop に commit
+  されること (1 run 2 件・先行する sweep カードがあるため数日かかる)。② 直した指摘がリリース後の週次で done
+  (`resolved_by: weekly-audit`) になるか、残れば pending に戻って再起票されること。
+- **停止条件**: 本番 deploy はオーナー承認まで行わない。
+- **完了条件**: 検証コマンドが exit 0 (fixed か週次で確認済みの指摘が 1 件以上)、かつループの commit に `.claude/state/page-quality` が含まれている。
+
+### [CF-CPU-SURGE-01] 2026-09-11 以降の Workers CPU 時間の増加原因を特定し、差分 purge とブログ広告変更の効果を測る
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-24] [期日:2026-10-16]
+
+- **背景 (2026-09-24 実測)**: 請求書 6 通 (`cloudflare-cost-improvement/reference/weekly-snapshots/2026-W20〜W38.json`) で、
+  5 月以降の従量課金は毎月 Workers CPU ms の 1 行だけ (9/15 請求は超過 267M ms で $5.36)。9/15〜の請求期間は予算アラート
+  $3.06 に 5 日目で到達 (前 2 期間は 24〜26 日目)。日次 snapshot の CPU p50 は約 8→15〜22ms、p99 は約 1.4→2.8 秒で、
+  9/11〜12 のデプロイ後から増えている。候補は ① purge が HTML キャッシュへ実際に効くようになった (`f3a04de2b`)
+  ② テーマ拡充で 1 ページが重くなった ③ アクセス増。デプロイのたびに HTML キャッシュが消えることも実測した (30 日で 84 回)。
+- **済**: 楽天同期の全体 purge を差分 purge に変更 (`c15ea5708` / `db8c6acf8`、PR #1021 で本番反映済み)。
+  ブログの A8 バナー抑止 (`c9e2b6a93`) は develop のみで未リリース。
+- **次**: ① 9/25 JST 04:00 の `sync-rakuten-catalog` で purge が `--urls` (約 1,900 件) になり `--all` でないことをログで確かめる。
+  ② Cloudflare Observability で route 別の CPU 時間を見て主因を絞る (MCP 認証かダッシュボードのログインが要る)。
+  ③ 日次 snapshot の cpu_p50/p99 と 10/15 の請求書の CPU 行で効果を見る (請求書は invoice モードで記録)。
+- **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
+- **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -737,6 +768,49 @@ updated: 2026-09-21
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [UI-FIX-THEME-20260924] UI 是正: theme の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-THEME-20260924.txt] [起票:2026-09-24]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-THEME-20260924.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|theme` (Claude の確認)
+    - [mobile-390/medium] 3枚目、『自然増減：出生数と死亡数』『外国人の人口移動』の2つのグラフ枠: 折れ線・棒グラフが表示されるべき枠が、中身のない灰色の空ボックスのままになっている。同じ画面内の他のグラフ(総人口など)は正常に描画されている。 → チャートの遅延読み込みやデータ取得失敗の原因を確認し、確実に描画されるようにする。
+    - [desktop-1440/medium] 2枚目、『都道府県 人口移動フロー』のグラフ枠: 『読み込み中...』の表示のままフロー図が描画されていない。tablet-768でも同じ箇所が空の灰色ボックスになっている。 → 人口移動フロー図の初期表示ロジックを見直し、読み込み完了後に確実に描画されるようにする。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-THEME-20260924.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-PREFECTURE-DETAIL-20260924] UI 是正: prefecture-detail の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260924.txt] [起票:2026-09-24]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260924.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|prefecture-detail` (Claude の確認)
+    - [desktop-1440/low] 2枚目、経済・雇用セクションの『失業率』カード右隣の空白マス: 3列グリッドのうち3列目に対応するデータがない場合、意味のない灰色の空ボックスがそのまま表示され、レイアウトに不自然な空白ができている。3枚目の『延べ床面積』『犯罪認知件数』のダッシュ表示箇所も同様。 → データが存在しない項目は空ボックスを出さずグリッドを詰めるか、項目自体を非表示にする。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260924.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-OTHER-20260924] UI 是正: other の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20260924.txt] [起票:2026-09-24]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20260924.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|other` (Claude の確認)
+    - [mobile-390/low] タグページの記事一覧、各記事タイトルの直上: 『general-households-prefecture-gap』のような英語の技術的なslug文字列が、記事タイトルの上にそのまま表示されている。一般読者には意味が分からない内部識別子。 → タグ一覧の記事カードからslug表示を削除するか、カテゴリラベルなど読者向けの情報に置き換える。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20260924.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
 ### [CAROUSEL-ARROW-OVERLAP-01] ホーム・カテゴリのカルーセルの矢印ボタンがカードの数値に重なる (全幅)
 
@@ -1655,6 +1729,7 @@ updated: 2026-09-21
 - **正典**: `docs/00_プロジェクト管理/02_収益化戦略.md` §2・§3.4・§5。一般向け統計メディアを維持しながら、議会答弁・計画策定のために各所の統計をExcelへ集める重複作業を減らす。課題はオーナーとの議論で確認したが、対象業務の詳細・削減時間・支払者・価格・購入需要は未検証。
 - **記録先（2026-09-20 新設）**: `.claude/state/products/admin-stat-interviews.json`。聞き取り結果はここへ書く（対象業務・完成条件・使った統計・現行手順・所要時間・手直し・再実施頻度・既存手段で残る作業・支払者・根拠）。**回顧による時間と実測を別フィールドで持つ**（収益化戦略 §5 段階2 の要求）。感想や意欲は記録しない（購入意思の代用にしないため）。
 - **聞き取り相手はすでにサイトへ来ている（2026-09-20 実測）**: 行政実務の文脈にあるページが GSC 上位に並ぶ。`/blog/assembly-answer-chatgpt-5steps`（48 clicks / 366 imp・CTR 13.1%、サイト全体 3.36% の 4 倍）、`/blog/local-government-debt-burden`（425 clicks）、`/blog/local-tax-revenue-gap`（47 clicks）。出典 `.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv`。**相手を探す段階は越えているので、①②に時間をかけすぎない。**
+- **GA4 の業務文脈シグナル（2026-09-24 実測）**: GA4 Data API で country=Japan、2026-08-27〜09-23 のブログ着地セッションを対象に、PC 比率と平日9〜18時比率を「職場で読まれている」手掛かりとして集計した（行政実務者本人である証明ではなく、祝日は除外していない）。ブログ着地全体は 7,199 セッションで PC 比率 45.0%、平日9〜18時比率 44.4%。この平均を大きく上回る着地は water-sewage-crisis（47 セッション・PC 96%・平日 73%）、estat-7-techniques-from-unusable-to-usable（38・95%・69%）、household-solo-vs-dualincome（36・92%・63%）、rice-harvest-volume-prefecture-gap（163・80%・88%）、farmland-crisis-abandoned-land（94・63%・57%）、aging-solo-living-crisis（73・67%・54%）、automotive-industry-transformation-map（227・67%・53%）だった。一方でこのカードが根拠にしている `/blog/local-government-debt-burden`（606 セッション）は PC 30%・平日 39% で平均を下回り、`/blog/assembly-answer-chatgpt-5steps`（88 セッション）は PC 52%・41% でほぼ平均だった。Microsoft Teams 経由（参照元 teams.public.onecdn.static.microsoft）の流入が 28 日で 17 セッションあり、education-expenses-gap・local-government-debt-burden・estat-7-techniques-from-unusable-to-usable・aging-solo-living-crisis などに着地しており、組織内でリンクが共有されている形跡がある。ランキング CSV のダウンロード（file_download）は 28 日で 193 件・120 ページだが、ブログ着地からのダウンロードは 0 件だった。継続観測先は週次 snapshot の `.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/landing-context.csv`（2026-W38 から、コミット `3ea0fece3`）。**この実測が示すのは、聞き取り①の題材候補として地方財政より上下水道・農業・高齢単身・e-Stat 実務の側に職場からの読者が集まっている可能性であり、標本が小さいため題材決定の決め手ではなく優先順位づけの参考にとどめる。**
 - **優先・次（実行順）**: ①公開情報で再現できる実際の資料1件について、必要な地域粒度・統計・年次・完成条件・現行手順・再実施頻度を具体化する。②担当者3人を目安に、RESAS・自治体ダッシュボード・書籍・既存Excelでも残る作業と支払者の購入条件を確認する。③同じ仕様で助けられる場合だけ既存資産から無料サンプルを1つ作り、出典照合と利用者のExcel環境での編集を確認し、手直し込みの総時間を比較する。④収益化戦略§5の試用条件を満たした場合に価格・工数上限・時間単価・販売面を定め、有料pilotのGo/Pivot/Stopを判断する。期日は初回の採否・不足証拠確認日であり、未検証でも発売する期限ではない。
 - **既存タスクとの境界**: `PRODUCT-SALES-READINESS-01`等の品質是正・既存購入者への対応は維持するが、全商品完成を本検証の前提にしない。既存パックを利用できるかを先に調べ、用途未確認の新作・販売面を増やさない。採否後の優先順位は事業計画TS・商品カタログの開始条件にも反映する。商品在庫を需要の証拠と扱わない。
 - **停止条件**: 既存手段で十分、担当者ごとに要件が異なり共通化できない、必要な粒度が取得できない、照合・手直しを含む時間が減らない場合は対象変更または見送り。協力者・試用が得られなければ未検証と記録し、次回確認日と再開条件を決める。検索数・DL数・AI作成の架空ペルソナで実務試用を代替しない。実務者への連絡、販売・価格の外部反映はこのカードだけでは実行しない。

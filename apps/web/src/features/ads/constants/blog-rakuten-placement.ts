@@ -1,4 +1,4 @@
-import { BLOG_RAKUTEN_VERTICALS } from "./blog-affiliate-policy";
+import { BLOG_RAKUTEN_VERTICALS, isRegionalFoodCultureTitle } from "./blog-affiliate-policy";
 import { detectSinglePrefCodeFromText } from "./furusato-nozei";
 import { detectProductKeyword } from "./product-keywords";
 
@@ -23,7 +23,7 @@ export function resolveBlogRakutenPlacement({
   if (/身長|体重|寿命|死亡|自殺|事故|災害|疾病|感染|中毒|アレルギー/.test(title)) return null;
   const sourceText = [title, subtitle].filter(Boolean).join("\n");
   const areaCode = detectSinglePrefCodeFromText(sourceText);
-  if (areaCode && /食卓|食文化|特産品|返礼品|ふるさと納税/.test(title)) {
+  if (areaCode && isRegionalFoodCultureTitle(title, subtitle)) {
     return { kind: "furusato", areaCode };
   }
   if (vertical !== "travel" && detectProductKeyword(sourceText)) {

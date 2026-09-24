@@ -24,7 +24,7 @@ import {
     OperatorProfileCard,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
-import { applyBlogAffiliatePolicy } from "@/features/ads/constants/blog-affiliate-policy";
+import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
 import { resolveBlogRakutenPlacement } from "@/features/ads/constants/blog-rakuten-placement";
 import { FurusatoNozeiCard, RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
@@ -161,22 +161,30 @@ export default async function BlogPostPage({ params }: PageProps) {
         surveyIds: article.surveyIds,
         tagKeys,
     });
+    // A8 のバナー・テキスト広告は、出典調査だけで furusato になる地域の食卓・特産品以外の記事には出さない
+    //   (ビール記事にふるさと納税ポータルが出ていた。2026-09-24)。楽天カードは affiliateInput のまま判定し、
+    //   主題の品目カードは残す。
+    const bannerInput = resolveBlogBannerInput(
+        slug,
+        { surveyIds: article.surveyIds, tagKeys },
+        { title: article.title, subtitle: article.frontmatter.subtitle },
+    );
     const affiliateTextAds = await resolveAffiliateTextAdsForContent(
-        affiliateInput,
+        bannerInput,
         "sidebar-bottom",
         4,
     );
     // 本文3 + 末尾1 + サイドバー2 = 最大6件を1回で解決し、用途ごとに切り出す。
     //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
-    const affiliateBannerPool = await resolveAffiliateBannersForContent(affiliateInput, BLOG_IN_BODY_BANNER_COUNT + 2);
+    const affiliateBannerPool = await resolveAffiliateBannersForContent(bannerInput, BLOG_IN_BODY_BANNER_COUNT + 2);
     const articleBanners = affiliateBannerPool.slice(0, BLOG_IN_BODY_BANNER_COUNT);
     // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
     const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
-    const affiliateVertical = resolveContentVertical(affiliateInput).vertical;
+    const bannerVertical = resolveContentVertical(bannerInput).vertical;
     const rakutenPlacement = resolveBlogRakutenPlacement({
         title: article.title,
         subtitle: article.frontmatter.subtitle,
-        vertical: affiliateVertical,
+        vertical: resolveContentVertical(affiliateInput).vertical,
     });
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
@@ -238,7 +246,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     width={b.width}
                     height={b.height}
                     label={b.title}
-                    category={b.vertical ?? affiliateVertical ?? "other"}
+                    category={b.vertical ?? bannerVertical ?? "other"}
                     position="blog-sidebar"
                     adId={b.id}
                     creativeSize={`${b.width}x${b.height}`}
@@ -368,7 +376,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 relatedArticleTitles={relatedArticleTitles}
                                 affiliateBannersByCategory={affiliateBannersByCategory}
                                 affiliateTextAds={affiliateTextAds}
-                                affiliateVertical={affiliateVertical}
+                                affiliateVertical={bannerVertical}
                                 affiliateBanners={articleBanners}
                             />
 

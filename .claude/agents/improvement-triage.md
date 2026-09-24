@@ -77,7 +77,14 @@ npm run effect-verdict:test                                 # 閾値ゲートの
 
 想定効果値は `[target: ±N 単位]` を backlog 行またはタイトルに書いたときだけ機械可読になる。
 書かれていない施策は `insufficient-target` で永久に `effect/pending` に留まるので、
-効果を自動確定させたい施策には本 agent が想定値を明記する。
+効果を自動確定させたい施策には本 agent が想定値を明記する (根拠 = 過去事例か計算式が行か詳細ログにあるときだけ)。
+
+GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス前方一致・複数可) と
+`デプロイ済 YYYY-MM-DD` も揃うと `gsc-improvement` adapter
+(`.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs`) が週次 snapshot の clicks で判定する。
+欠けている目印は `.claude/state/metrics/measurement-cycle/latest.json` の `engine.gsc.missing` に出る。
+施策固有の内訳の照会は `node .claude/scripts/metrics/gsc-query.mjs` / `ga4-query.mjs` (再現コマンドとしてログに書く)。
+週次の無人 run (`improvement-cycle-weekly.yml`) では Status 列に effect/full|partial|none|adverse を付けない (ゲートで拒否)。
 
 ## File Boundary (並行衝突回避)
 

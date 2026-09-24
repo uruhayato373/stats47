@@ -1,27 +1,27 @@
-# ページ品質監査 Latest — 2026-09-23
+# ページ品質監査 Latest — 2026-09-24
 
-- モード: full / 対象 6229 URL / commit 11917ff0ea9dc20f45173e80718f834721f11137
-- 違反: **error 2901 / warning 4390**
+- モード: full / 対象 6229 URL / commit 121cbd9dbca42c5f4bb7bb1e66875f4effeb3974
+- 違反: **error 2896 / warning 4397**
 
 ## テンプレート別集計
 
 | テンプレート | URL数 | error | warning |
 |---|---|---|---|
 | home | 1 | 1 | 3 |
-| ranking | 2170 | 679 | 2765 |
-| prefecture-list | 1 | 0 | 0 |
+| ranking | 2170 | 673 | 2771 |
+| prefecture-list | 1 | 0 | 1 |
 | theme | 56 | 32 | 32 |
 | geo-analysis | 71 | 54 | 6 |
 | other | 307 | 3 | 42 |
-| prefecture-detail | 2491 | 1456 | 1328 |
+| prefecture-detail | 2491 | 1458 | 1328 |
 | blog | 606 | 606 | 112 |
 | category | 17 | 11 | 10 |
 | survey | 148 | 58 | 91 |
-| municipality | 361 | 1 | 1 |
+| municipality | 361 | 0 | 1 |
 
 ## 違反の詳細
 
-上位 100 件 (error を先に) / 全 7291 件。全件は R2 `state/page-quality/latest.json` (`npm run state:pull -- page-quality`)。
+上位 100 件 (error を先に) / 全 7293 件。全件は R2 `state/page-quality/latest.json` (`npm run state:pull -- page-quality`)。
 
 | URL | metric | 実測 | 前回 | 閾値 | 種別 |
 |---|---|---|---|---|---|
@@ -130,83 +130,83 @@
 
 | テンプレート | 端末 | 先週比 | スクショ |
 |---|---|---|---|
-| home | mobile-390 | 比較元なし | [home-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/home-mobile-390.webp) |
-| home | sm-640 | 比較元なし | [home-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-sm-640.png) |
-| home | tablet-768 | 比較元なし | [home-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/home-tablet-768.webp) |
-| home | rail-992 | 比較元なし | [home-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-rail-992.png) |
-| home | laptop-1024 | 比較元なし | [home-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-laptop-1024.png) |
-| home | desktop-1440 | 比較元なし | [home-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/home-desktop-1440.webp) |
-| home | wide-1920 | 比較元なし | [home-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-wide-1920.png) |
-| prefecture-list | mobile-390 | 比較元なし | [prefecture-list-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/prefecture-list-mobile-390.webp) |
-| prefecture-list | sm-640 | 比較元なし | [prefecture-list-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-sm-640.png) |
-| prefecture-list | tablet-768 | 比較元なし | [prefecture-list-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/prefecture-list-tablet-768.webp) |
-| prefecture-list | rail-992 | 比較元なし | [prefecture-list-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-rail-992.png) |
-| prefecture-list | laptop-1024 | 比較元なし | [prefecture-list-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-laptop-1024.png) |
-| prefecture-list | desktop-1440 | 比較元なし | [prefecture-list-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/prefecture-list-desktop-1440.webp) |
-| prefecture-list | wide-1920 | 比較元なし | [prefecture-list-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-wide-1920.png) |
-| geo-analysis | mobile-390 | 比較元なし | [geo-analysis-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/geo-analysis-mobile-390.webp) |
-| geo-analysis | sm-640 | 比較元なし | [geo-analysis-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-sm-640.png) |
-| geo-analysis | tablet-768 | 比較元なし | [geo-analysis-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/geo-analysis-tablet-768.webp) |
-| geo-analysis | rail-992 | 比較元なし | [geo-analysis-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-rail-992.png) |
-| geo-analysis | laptop-1024 | 比較元なし | [geo-analysis-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-laptop-1024.png) |
-| geo-analysis | desktop-1440 | 比較元なし | [geo-analysis-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/geo-analysis-desktop-1440.webp) |
-| geo-analysis | wide-1920 | 比較元なし | [geo-analysis-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-wide-1920.png) |
-| theme | mobile-390 | 比較元なし | [theme-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/theme-mobile-390.webp) |
-| theme | sm-640 | 比較元なし | [theme-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-sm-640.png) |
-| theme | tablet-768 | 比較元なし | [theme-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/theme-tablet-768.webp) |
-| theme | rail-992 | 比較元なし | [theme-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-rail-992.png) |
-| theme | laptop-1024 | 比較元なし | [theme-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-laptop-1024.png) |
-| theme | desktop-1440 | 比較元なし | [theme-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/theme-desktop-1440.webp) |
-| theme | wide-1920 | 比較元なし | [theme-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-wide-1920.png) |
-| prefecture-detail | mobile-390 | 比較元なし | [prefecture-detail-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/prefecture-detail-mobile-390.webp) |
-| prefecture-detail | sm-640 | 比較元なし | [prefecture-detail-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-sm-640.png) |
-| prefecture-detail | tablet-768 | 比較元なし | [prefecture-detail-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/prefecture-detail-tablet-768.webp) |
-| prefecture-detail | rail-992 | 比較元なし | [prefecture-detail-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-rail-992.png) |
-| prefecture-detail | laptop-1024 | 比較元なし | [prefecture-detail-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-laptop-1024.png) |
-| prefecture-detail | desktop-1440 | 比較元なし | [prefecture-detail-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/prefecture-detail-desktop-1440.webp) |
-| prefecture-detail | wide-1920 | 比較元なし | [prefecture-detail-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-wide-1920.png) |
-| ranking | mobile-390 | 比較元なし | [ranking-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/ranking-mobile-390.webp) |
-| ranking | sm-640 | 比較元なし | [ranking-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-sm-640.png) |
-| ranking | tablet-768 | 比較元なし | [ranking-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/ranking-tablet-768.webp) |
-| ranking | rail-992 | 比較元なし | [ranking-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-rail-992.png) |
-| ranking | laptop-1024 | 比較元なし | [ranking-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-laptop-1024.png) |
-| ranking | desktop-1440 | 比較元なし | [ranking-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/ranking-desktop-1440.webp) |
-| ranking | wide-1920 | 比較元なし | [ranking-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-wide-1920.png) |
-| blog | mobile-390 | 比較元なし | [blog-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/blog-mobile-390.webp) |
-| blog | sm-640 | 比較元なし | [blog-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-sm-640.png) |
-| blog | tablet-768 | 比較元なし | [blog-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/blog-tablet-768.webp) |
-| blog | rail-992 | 比較元なし | [blog-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-rail-992.png) |
-| blog | laptop-1024 | 比較元なし | [blog-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-laptop-1024.png) |
-| blog | desktop-1440 | 比較元なし | [blog-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/blog-desktop-1440.webp) |
-| blog | wide-1920 | 比較元なし | [blog-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-wide-1920.png) |
-| category | mobile-390 | 比較元なし | [category-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/category-mobile-390.webp) |
-| category | sm-640 | 比較元なし | [category-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-sm-640.png) |
-| category | tablet-768 | 比較元なし | [category-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/category-tablet-768.webp) |
-| category | rail-992 | 比較元なし | [category-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-rail-992.png) |
-| category | laptop-1024 | 比較元なし | [category-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-laptop-1024.png) |
-| category | desktop-1440 | 比較元なし | [category-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/category-desktop-1440.webp) |
-| category | wide-1920 | 比較元なし | [category-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-wide-1920.png) |
-| survey | mobile-390 | 比較元なし | [survey-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/survey-mobile-390.webp) |
-| survey | sm-640 | 比較元なし | [survey-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-sm-640.png) |
-| survey | tablet-768 | 比較元なし | [survey-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/survey-tablet-768.webp) |
-| survey | rail-992 | 比較元なし | [survey-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-rail-992.png) |
-| survey | laptop-1024 | 比較元なし | [survey-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-laptop-1024.png) |
-| survey | desktop-1440 | 比較元なし | [survey-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/survey-desktop-1440.webp) |
-| survey | wide-1920 | 比較元なし | [survey-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-wide-1920.png) |
-| municipality | mobile-390 | 比較元なし | [municipality-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/municipality-mobile-390.webp) |
-| municipality | sm-640 | 比較元なし | [municipality-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-sm-640.png) |
-| municipality | tablet-768 | 比較元なし | [municipality-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/municipality-tablet-768.webp) |
-| municipality | rail-992 | 比較元なし | [municipality-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-rail-992.png) |
-| municipality | laptop-1024 | 比較元なし | [municipality-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-laptop-1024.png) |
-| municipality | desktop-1440 | 比較元なし | [municipality-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/municipality-desktop-1440.webp) |
-| municipality | wide-1920 | 比較元なし | [municipality-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-wide-1920.png) |
-| other | mobile-390 | 比較元なし | [other-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/other-mobile-390.webp) |
-| other | sm-640 | 比較元なし | [other-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-sm-640.png) |
-| other | tablet-768 | 比較元なし | [other-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/other-tablet-768.webp) |
-| other | rail-992 | 比較元なし | [other-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-rail-992.png) |
-| other | laptop-1024 | 比較元なし | [other-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-laptop-1024.png) |
-| other | desktop-1440 | 比較元なし | [other-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-23/other-desktop-1440.webp) |
-| other | wide-1920 | 比較元なし | [other-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-wide-1920.png) |
+| home | mobile-390 | 0% | [home-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/home-mobile-390.webp) |
+| home | sm-640 | 0% | [home-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-sm-640.png) |
+| home | tablet-768 | 0% | [home-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/home-tablet-768.webp) |
+| home | rail-992 | 0% | [home-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-rail-992.png) |
+| home | laptop-1024 | 0% | [home-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-laptop-1024.png) |
+| home | desktop-1440 | 0% | [home-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/home-desktop-1440.webp) |
+| home | wide-1920 | 0% | [home-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-wide-1920.png) |
+| prefecture-list | mobile-390 | 0% | [prefecture-list-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/prefecture-list-mobile-390.webp) |
+| prefecture-list | sm-640 | 0% | [prefecture-list-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-sm-640.png) |
+| prefecture-list | tablet-768 | 0% | [prefecture-list-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/prefecture-list-tablet-768.webp) |
+| prefecture-list | rail-992 | 0% | [prefecture-list-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-rail-992.png) |
+| prefecture-list | laptop-1024 | 0% | [prefecture-list-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-laptop-1024.png) |
+| prefecture-list | desktop-1440 | 0% | [prefecture-list-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/prefecture-list-desktop-1440.webp) |
+| prefecture-list | wide-1920 | 0% | [prefecture-list-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-wide-1920.png) |
+| geo-analysis | mobile-390 | 0% | [geo-analysis-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/geo-analysis-mobile-390.webp) |
+| geo-analysis | sm-640 | 0% | [geo-analysis-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-sm-640.png) |
+| geo-analysis | tablet-768 | 0% | [geo-analysis-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/geo-analysis-tablet-768.webp) |
+| geo-analysis | rail-992 | 0% | [geo-analysis-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-rail-992.png) |
+| geo-analysis | laptop-1024 | 0% | [geo-analysis-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-laptop-1024.png) |
+| geo-analysis | desktop-1440 | 0% | [geo-analysis-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/geo-analysis-desktop-1440.webp) |
+| geo-analysis | wide-1920 | 0% | [geo-analysis-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-wide-1920.png) |
+| theme | mobile-390 | 8% | [theme-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/theme-mobile-390.webp) |
+| theme | sm-640 | 4% | [theme-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-sm-640.png) |
+| theme | tablet-768 | 5% | [theme-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/theme-tablet-768.webp) |
+| theme | rail-992 | 2% | [theme-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-rail-992.png) |
+| theme | laptop-1024 | 2% | [theme-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-laptop-1024.png) |
+| theme | desktop-1440 | 5% | [theme-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/theme-desktop-1440.webp) |
+| theme | wide-1920 | 4% | [theme-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-wide-1920.png) |
+| prefecture-detail | mobile-390 | 0% | [prefecture-detail-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/prefecture-detail-mobile-390.webp) |
+| prefecture-detail | sm-640 | 0% | [prefecture-detail-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-sm-640.png) |
+| prefecture-detail | tablet-768 | 0% | [prefecture-detail-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/prefecture-detail-tablet-768.webp) |
+| prefecture-detail | rail-992 | 0% | [prefecture-detail-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-rail-992.png) |
+| prefecture-detail | laptop-1024 | 0% | [prefecture-detail-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-laptop-1024.png) |
+| prefecture-detail | desktop-1440 | 0% | [prefecture-detail-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/prefecture-detail-desktop-1440.webp) |
+| prefecture-detail | wide-1920 | 0% | [prefecture-detail-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-wide-1920.png) |
+| ranking | mobile-390 | 0% | [ranking-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/ranking-mobile-390.webp) |
+| ranking | sm-640 | 0% | [ranking-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-sm-640.png) |
+| ranking | tablet-768 | 0% | [ranking-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/ranking-tablet-768.webp) |
+| ranking | rail-992 | 0% | [ranking-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-rail-992.png) |
+| ranking | laptop-1024 | 0% | [ranking-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-laptop-1024.png) |
+| ranking | desktop-1440 | 0% | [ranking-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/ranking-desktop-1440.webp) |
+| ranking | wide-1920 | 0% | [ranking-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-wide-1920.png) |
+| blog | mobile-390 | 0% | [blog-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/blog-mobile-390.webp) |
+| blog | sm-640 | 0% | [blog-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-sm-640.png) |
+| blog | tablet-768 | 0% | [blog-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/blog-tablet-768.webp) |
+| blog | rail-992 | 0% | [blog-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-rail-992.png) |
+| blog | laptop-1024 | 0% | [blog-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-laptop-1024.png) |
+| blog | desktop-1440 | 0% | [blog-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/blog-desktop-1440.webp) |
+| blog | wide-1920 | 0% | [blog-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-wide-1920.png) |
+| category | mobile-390 | 0% | [category-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/category-mobile-390.webp) |
+| category | sm-640 | 0% | [category-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-sm-640.png) |
+| category | tablet-768 | 0% | [category-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/category-tablet-768.webp) |
+| category | rail-992 | 0% | [category-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-rail-992.png) |
+| category | laptop-1024 | 0% | [category-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-laptop-1024.png) |
+| category | desktop-1440 | 0% | [category-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/category-desktop-1440.webp) |
+| category | wide-1920 | 0% | [category-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-wide-1920.png) |
+| survey | mobile-390 | 0% | [survey-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/survey-mobile-390.webp) |
+| survey | sm-640 | 0% | [survey-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-sm-640.png) |
+| survey | tablet-768 | 0% | [survey-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/survey-tablet-768.webp) |
+| survey | rail-992 | 0% | [survey-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-rail-992.png) |
+| survey | laptop-1024 | 0% | [survey-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-laptop-1024.png) |
+| survey | desktop-1440 | 0% | [survey-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/survey-desktop-1440.webp) |
+| survey | wide-1920 | 0% | [survey-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-wide-1920.png) |
+| municipality | mobile-390 | 0% | [municipality-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/municipality-mobile-390.webp) |
+| municipality | sm-640 | 0% | [municipality-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-sm-640.png) |
+| municipality | tablet-768 | 0% | [municipality-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/municipality-tablet-768.webp) |
+| municipality | rail-992 | 0% | [municipality-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-rail-992.png) |
+| municipality | laptop-1024 | 0% | [municipality-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-laptop-1024.png) |
+| municipality | desktop-1440 | 0% | [municipality-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/municipality-desktop-1440.webp) |
+| municipality | wide-1920 | 0% | [municipality-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-wide-1920.png) |
+| other | mobile-390 | 0% | [other-mobile-390.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/other-mobile-390.webp) |
+| other | sm-640 | 0% | [other-sm-640.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-sm-640.png) |
+| other | tablet-768 | 0% | [other-tablet-768.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/other-tablet-768.webp) |
+| other | rail-992 | 0% | [other-rail-992.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-rail-992.png) |
+| other | laptop-1024 | 0% | [other-laptop-1024.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-laptop-1024.png) |
+| other | desktop-1440 | 0% | [other-desktop-1440.webp](https://storage.stats47.jp/state/page-quality/screenshots/2026-09-24/other-desktop-1440.webp) |
+| other | wide-1920 | 0% | [other-wide-1920.png](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-wide-1920.png) |
 
 ## UI 指摘の場所
 
