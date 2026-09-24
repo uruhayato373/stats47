@@ -10,6 +10,7 @@ import {
   coverageSourceObservedAt,
   isoWeekEndDate,
   mapCoverageCategory,
+  newestFile,
   parseCsv,
   shouldEmitCoverageCategory,
 } from "../lib/sources.mjs";
@@ -169,4 +170,23 @@ test("no rows と API error を区別: missing vs failed", () => {
   assert.equal(noRows.sources.a.status, "missing"); // 0 行 = データ無し (freshness missing)
   const apiErr = normalizeAll({ now, sources: [throwSource("a")] });
   assert.equal(apiErr.sources.a.status, "failed"); // 例外 = 失敗
+});
+
+test("最新 snapshot は mtime ではなくファイル名の日付で選ぶ (CI checkout で mtime が揃う)", async () => {
+  const fs = await import("node:fs");
+  const os = await import("node:os");
+  const path = await import("node:path");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "sg-newest-"));
+  try {
+    for (const name of ["2026-09-20.csv", "2026-09-15.csv", "notes.txt"]) {
+      fs.writeFileSync(path.join(dir, name), "url\n");
+    }
+    // 古い日付のファイルほど mtime を新しくし、checkout 順で逆転した状況を再現する
+    fs.utimesSync(path.join(dir, "2026-09-20.csv"), new Date("2026-09-01"), new Date("2026-09-01"));
+    fs.utimesSync(path.join(dir, "2026-09-15.csv"), new Date("2026-09-30"), new Date("2026-09-30"));
+    assert.equal(path.basename(newestFile(dir, /^\d{4}-\d{2}-\d{2}\.csv$/)), "2026-09-20.csv");
+    assert.equal(newestFile(path.join(dir, "missing"), /.*/), null);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });

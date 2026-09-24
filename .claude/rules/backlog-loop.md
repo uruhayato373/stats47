@@ -128,6 +128,11 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 | run 本体のモデル | sonnet 固定 | base-action の `--model` は run 全体に効く。難物だけ Agent tool で `model: fable` へ委譲する |
 | draft-pr class | この run では着手しない | `impl-large` / `indicator-expansion` は `skipped` で記録 (quarantine を増やさない) |
 
+**自動起票されるカード**: `GSC-COV-*` は `.claude/scripts/gsc/sync-coverage-backlog.mjs` (GSC の日次・週次 CI) が
+是正キューの「判断が要る pending」から起票する (action ごとに 1 枚・10 URL まで・`[実行:sweep]`)。gate は
+`build-coverage-queue.mjs --assert-handled <batch>`。成果物が是正キューへの `--mark-*` なので、commit 対象に
+`.claude/state/gsc` を含める。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+
 cloud セッションは `actions:write` が無く dispatch できないため、
 `data/backlog-loop-requests.json` を develop へ push する経路も持つ (request は成否によらず消費する)。
 

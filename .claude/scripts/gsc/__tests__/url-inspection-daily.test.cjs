@@ -2,7 +2,9 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 
 const {
+  capUrls,
   normalizeInspectionUrl,
+  quotasFor,
   rotateDaily,
   todayInTokyo,
   uniqueNormalizedUrls,
@@ -50,4 +52,20 @@ test("日次ローテーションは上限を守り、翌日は別区間を返�
 
 test("日次ファイルの日付は Asia/Tokyo を使う", () => {
   assert.equal(todayInTokyo(new Date("2026-08-23T21:30:00.000Z")), "2026-08-24");
+});
+
+test("CI 既定の 500 件でも是正キューに半分の枠を配る", () => {
+  // 2026-09-17〜23: 検索実績上位が先頭 500 件を独占し、是正キューが 0 件しか検査されなかった
+  const quota = quotasFor(500);
+  assert.equal(quota.remediation, 250);
+  assert.ok(quota.observed < quota.remediation);
+});
+
+test("capUrls は正規化後の重複を 1 件として数え上限で切る", () => {
+  const { urls, collapsed } = capUrls(
+    ["https://stats47.jp/a#x", "https://stats47.jp/a", "https://stats47.jp/b", "https://stats47.jp/c"],
+    2,
+  );
+  assert.deepEqual(urls, ["https://stats47.jp/a", "https://stats47.jp/b"]);
+  assert.equal(collapsed, 1);
 });
