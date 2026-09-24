@@ -1,0 +1,44 @@
+# 計測→記録→改善サイクル — 2026-W38
+
+計測週 **2026-W38**（GA4 rolling28d 2026-08-23〜2026-09-19、Japan-only）。前週との差は重複期間なので WoW ではない。
+
+| 入力 | 状態 |
+|---|---|
+| ga4 | ok（transitions=ok landing=ok events=ok pages-clean=ok） |
+| customDimensions | ok（登録済み 16 件） |
+| improvements | ok（active 30 件） |
+
+**回遊（referrer 集計）**
+
+| 遷移 | page_view | 遷移元 PV | 率 |
+|---|---:|---:|---:|
+| blog → ranking | 730 | 9626 | 7.6% |
+| themes → ranking | 66 | 762 | 8.7% |
+| themes → blog | 1 | 762 | 0.1% |
+
+**業務文脈の着地**（平均: PC 49.6%・平日 9–18 時 44.7%。両方が平均超かつ 25 セッション以上。行政実務者である証明ではない）
+
+- `/` — 321 セッション・PC 79.2%・平日業務時間 48.1%
+- `/blog/rice-harvest-volume-prefecture-gap` — 153 セッション・PC 81.7%・平日業務時間 89.5%
+- `/blog/health-life-expectancy-structure` — 280 セッション・PC 66.4%・平日業務時間 46.7%
+- `/blog/livable-prefecture-composite-ranking` — 236 セッション・PC 62.3%・平日業務時間 54.4%
+- `/blog/automotive-industry-transformation-map` — 236 セッション・PC 65.8%・平日業務時間 51.4%
+- `/ranking` — 79 セッション・PC 92.4%・平日業務時間 62.9%
+- `/ranking/rice-consumption-quantity` — 136 セッション・PC 60.3%・平日業務時間 51.4%
+- `/blog/farmland-crisis-abandoned-land` — 106 セッション・PC 65.1%・平日業務時間 58.3%
+
+**未登録の custom dimension**（14 パラメータ。登録はオーナー作業・遡及しない）
+
+- 🟢 登録すれば内訳を読める `home_featured_impression` / `home_featured_click`（28 日 2028 件）: `card_variant`, `slot`, `experiment_variant`
+- ⚪ 発火量不足 `geo_map_interaction`（28 日 56 件）: `interaction_type`, `area_code`
+- ⚪ 発火量不足 `geo_analysis_view`（28 日 35 件）: `analysis_id`, `analysis_slug`, `geography`, `data_version`
+- ⚪ 発火量不足 `cta_click`（28 日 3 件）: `cta_id`, `content_id`, `target_type`, `target_key`
+- ⚪ 発火量不足 `geo_region_select`（28 日 3 件）: `area_code`
+- ⚪ 発火量不足 `geo_compare_add`（28 日 0 件）: `area_code`, `comparison_size`
+
+**期日超過の判定待ち**: active 30 件中 3 件
+
+- `TOKEN-AICONTENT-01` pending（期日 2026-09-07・cost）
+- `COVERAGE-LOOP-01` effect/pending（期日 2026-09-14・gsc）
+- `THEME-EXPANSION-EFFECT-01` effect/pending（期日 2026-09-18・ga4/gsc/theme-quality）
+

@@ -1,0 +1,244 @@
+name: 🔁 Improvement Cycle Weekly (計測→記録→改善)
+
+# 日曜 20:00 JST の fetch-metrics-weekly が作った計測 state (measurement-cycle/latest.json・effect verdict) を入力に、
+# improvement-triage を無人で走らせて改善バックログを更新する。LLM の判断そのものは検査できないので、
+# 差分は verify-improvement-cycle-run.mjs の決定的ゲート (許可パス・effect 確定禁止・カード削除禁止・秘密の形) を
+# 通ったものだけを develop へ push する。結果は measurement-cycle/triage-latest.json に残り、
+# 月曜 09:00 JST の週次メトリクス Issue (weekly-metrics-issue.yml) と /weekly-review が読む。
+#
+# ★無人 Claude は対話セッションと同じ Pro/Max 枠を使う (日次生成ループは歩留まりで 2026-08-21 に削除済み)。
+#   週 1 回・最大 8 件に絞り、トークン実績を claude-usage/history.csv に残して費用対効果を判断できるようにする。
+
+on:
+  schedule:
+    - cron: "0 21 * * 0" # 月 06:00 JST (fetch-metrics-weekly の後、週次メトリクス Issue の前)
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "対象 ISO 週 YYYY-Www (省略時は実行時点の ISO 週)"
+        required: false
+        default: ""
+      dry_run:
+        description: "true: LLM を呼ばず入力とゲートだけ確認する"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: improvement-cycle
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DRY_RUN: ${{ inputs.dry_run || 'false' }}
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 2
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📅 Resolve week and check measurement inputs
+        id: week
+        env:
+          INPUT_WEEK: ${{ inputs.week }}
+        run: |
+          set -euo pipefail
+          WEEK="${INPUT_WEEK:-$(date -u +%G-W%V)}"
+          if ! [[ "$WEEK" =~ ^[0-9]{4}-W[0-9]{2}$ ]]; then
+            echo "::error::week は YYYY-Www: $WEEK"
+            exit 1
+          fi
+          STATE=.claude/state/metrics/measurement-cycle/latest.json
+          if [ ! -f "$STATE" ]; then
+            echo "::error::計測 state が無い ($STATE)。日曜の fetch-metrics-weekly を確認する"
+            exit 1
+          fi
+          GOT=$(node -e 'process.stdout.write(require("./.claude/state/metrics/measurement-cycle/latest.json").week)')
+          if [ "$GOT" != "$WEEK" ]; then
+            echo "::error::計測 state の週 ($GOT) が対象週 ($WEEK) と違う。日曜の取得が失敗したまま記録すると古い計測で判定してしまう"
+            exit 1
+          fi
+          echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+          echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: 🔐 Require Claude Code OAuth token
+        if: ${{ env.DRY_RUN != 'true' }}
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          if [ -z "${CLAUDE_CODE_OAUTH_TOKEN}" ]; then
+            echo "::error::CLAUDE_CODE_OAUTH_TOKEN が未登録です。claude setup-token で発行し Repository Secret へ登録してください"
+            exit 1
+          fi
+
+      # GA4 鍵は ga4-query.mjs がメモリで使うだけで一時ファイルに書かない。Bash は照会・走査・docs 検査だけを許す。
+      - name: 🧾 Record measurements with Claude Code (improvement-triage)
+        id: claude
+        if: ${{ env.DRY_RUN != 'true' }}
+        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        env:
+          NODE_VERSION: "20.x"
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+        with:
+          prompt_file: .claude/prompts/ci/improvement-cycle.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: "false"
+          settings: |
+            {
+              "disableAllHooks": true
+            }
+          claude_args: |
+            --model sonnet
+            --effort high
+            --max-turns 150
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Write,Edit,Glob,Grep,Agent,Bash"
+            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Bash(node .claude/scripts/metrics/ga4-query.mjs *),Bash(node .claude/scripts/lib/scan-pending-improvements.mjs *),Bash(npm run docs:check)"
+            --disallowedTools "WebFetch,WebSearch,Bash(git *),Bash(gh *),Bash(env *),Bash(printenv *),Bash(cat *),Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+
+      - name: 🩺 Summarize Claude execution
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          mkdir -p .local/ci
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$FILE" > .local/ci/claude-diagnosis.txt 2>&1 || true
+          {
+            echo "### Claude 実行サマリ"
+            echo '```'
+            cat .local/ci/claude-diagnosis.txt
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: ✅ Gate the recorded diff
+        id: gate
+        env:
+          BASE_SHA: ${{ steps.week.outputs.base }}
+          WEEK: ${{ steps.week.outputs.week }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          node .claude/scripts/metrics/verify-improvement-cycle-run.mjs --base "$BASE_SHA" --week "$WEEK" --run-url "$RUN_URL"
+          npm run docs:check
+
+      - name: 📦 Commit and push
+        if: ${{ env.DRY_RUN != 'true' }}
+        env:
+          WEEK: ${{ steps.week.outputs.week }}
+        run: |
+          set -euo pipefail
+          git add -- .claude/todo/improvements.md .claude/todo/backlog.md \
+            .claude/skills/analytics/*-improvement/reference/improvement-log.md \
+            .claude/state/metrics/measurement-cycle/triage-latest.json
+          if git diff --cached --quiet; then
+            echo "変更なし"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "chore(improvements): weekly measurement cycle ${WEEK} [skip ci]"
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ pushed"
+              exit 0
+            fi
+            echo "push retry $i"; sleep 5
+          done
+          echo "::error::develop への push に 3 回失敗した"
+          exit 1
+
+      - name: 📊 Record token usage
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
+        continue-on-error: true
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          # items = この run が削除または更新した施策の数 (ゲート結果から。ゲート前に落ちたら 0)
+          ITEMS=$(node -e 'try{const i=require("./.claude/state/metrics/measurement-cycle/triage-latest.json").improvements;process.stdout.write(String(i.deleted.length+i.updated.length))}catch{process.stdout.write("0")}')
+          node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
+            --workflow improvement-cycle \
+            --run-id "$RUN_ID" \
+            --limit 8 \
+            --items "$ITEMS"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/claude-usage || true
+          if git diff --cached --quiet; then echo "記録する変更なし"; exit 0; fi
+          git commit -q -m "chore(metrics): record Claude token usage [skip ci]"
+          git stash push --include-untracked --quiet || true
+          for _ in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ トークン実績を記録した"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::トークン実績の push に失敗した (計測のみ・本体には影響しない)"
+          exit 1
+
+      - name: 🚨 Upsert failure issue
+        if: ${{ failure() && env.DRY_RUN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          WEEK: ${{ steps.week.outputs.week || 'unknown' }}
+        run: |
+          TITLE="🚨 Improvement cycle failed"
+          PROBLEMS="(ゲート結果なし: 入力検査か Claude step で止まった)"
+          if [ -s .claude/state/metrics/measurement-cycle/triage-latest.json ]; then
+            PROBLEMS=$(node -e 'const j=require("./.claude/state/metrics/measurement-cycle/triage-latest.json");process.stdout.write((j.problems||[]).map(p=>"- "+p).join("\n")||"(ゲートは通過。docs:check か push で失敗)")')
+          fi
+          DIAG="(診断なし)"
+          if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi
+          BODY="週次の計測→記録→改善サイクル (${WEEK}) の無人記録が失敗しました。差分は push していません。
+
+          Run: ${RUN_URL}
+
+          ${PROBLEMS}
+
+          <details><summary>Claude 実行の診断</summary>
+
+          \`\`\`
+          ${DIAG}
+          \`\`\`
+
+          </details>"
+          gh label create improvement-cycle-alert --color B60205 --description "週次の計測→記録→改善サイクルの失敗" --force 2>/dev/null || true
+          NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then
+            gh issue edit "$NUMBER" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated,improvement-cycle-alert
+          fi
+
+      - name: 🧹 Close resolved issue
+        if: ${{ success() && env.DRY_RUN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NUMBER=$(gh issue list --search "🚨 Improvement cycle failed in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then gh issue close "$NUMBER" --reason completed; fi

@@ -5,6 +5,7 @@
  *   nav_click の計装漏れに左右されずに blog→ranking / theme→ranking などの回遊を読むため。
  * - landing-context: 着地ページ別に desktop 比率と平日業務時間 (月〜金 9:00–17:59, property TZ) 比率を出す。
  *   行政実務など業務文脈の読者がどの着地に集まるかを見るため。祝日は区別しない。
+ * - event-volume: イベント別の発火量。未登録 custom dimension を登録すると分析できる量があるかの判断に使う。
  */
 const exact = (fieldName, value) => ({ filter: { fieldName, stringFilter: { matchType: 'EXACT', value } } });
 const japan = exact('country', 'Japan');
@@ -15,6 +16,7 @@ export const LANDING_CONTEXT_COLUMNS = [
   'landingPage', 'sessions', 'engagedSessions', 'avgEngagementSec', 'pagesPerSession', 'desktopShare', 'workdayHoursShare',
 ];
 export const LANDING_MIN_SESSIONS = 10;
+export const EVENT_VOLUME_COLUMNS = ['eventName', 'eventCount', 'totalUsers'];
 
 const range = (period) => [{ startDate: period.periodStart, endDate: period.periodEnd }];
 
@@ -50,6 +52,16 @@ export function aggregateTransitions(rows) {
     const [from_section, to_section] = key.split('\t');
     return { from_section, to_section, pageViews };
   }).sort((a, b) => b.pageViews - a.pageViews || a.from_section.localeCompare(b.from_section) || a.to_section.localeCompare(b.to_section));
+}
+
+export function buildEventVolumeRequest(period) {
+  return {
+    dateRanges: range(period),
+    dimensions: [{ name: 'eventName' }],
+    metrics: EVENT_VOLUME_COLUMNS.slice(1).map((name) => ({ name })),
+    dimensionFilter: japan,
+    orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }],
+  };
 }
 
 export function buildLandingContextRequests(period) {

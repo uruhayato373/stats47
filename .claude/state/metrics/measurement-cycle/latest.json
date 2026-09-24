@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-W38",
+  "asOf": "2026-09-20",
+  "generatedAt": "2026-09-24T10:59:57.452Z",
+  "sources": {
+    "ga4": {
+      "status": "ok",
+      "periodStart": "2026-08-23",
+      "periodEnd": "2026-09-19",
+      "detail": "transitions=ok landing=ok events=ok pages-clean=ok"
+    },
+    "customDimensions": {
+      "status": "ok",
+      "detail": "登録済み 16 件"
+    },
+    "improvements": {
+      "status": "ok",
+      "detail": "active 30 件"
+    }
+  },
+  "journey": {
+    "blogToRanking": {
+      "pageViews": 730,
+      "fromPageViews": 9626,
+      "rate": 0.0758
+    },
+    "themesToRanking": {
+      "pageViews": 66,
+      "fromPageViews": 762,
+      "rate": 0.0866
+    },
+    "themesToBlog": {
+      "pageViews": 1,
+      "fromPageViews": 762,
+      "rate": 0.0013
+    },
+    "topCrossSection": [
+      {
+        "from": "ranking",
+        "to": "category",
+        "pageViews": 760
+      },
+      {
+        "from": "blog",
+        "to": "ranking",
+        "pageViews": 730
+      },
+      {
+        "from": "category",
+        "to": "ranking",
+        "pageViews": 716
+      },
+      {
+        "from": "ranking",
+        "to": "blog",
+        "pageViews": 381
+      },
+      {
+        "from": "areas",
+        "to": "ranking",
+        "pageViews": 332
+      },
+      {
+        "from": "ranking",
+        "to": "areas",
+        "pageViews": 325
+      },
+      {
+        "from": "search",
+        "to": "ranking",
+        "pageViews": 280
+      },
+      {
+        "from": "ranking",
+        "to": "search",
+        "pageViews": 260
+      }
+    ]
+  },
+  "workContext": {
+    "baseline": {
+      "sessions": 12326,
+      "desktopShare": 0.496,
+      "workdayHoursShare": 0.447
+    },
+    "top": [
+      {
+        "landingPage": "/",
+        "sessions": 321,
+        "desktopShare": 0.792,
+        "workdayHoursShare": 0.481,
+        "avgEngagementSec": 88.5
+      },
+      {
+        "landingPage": "/blog/rice-harvest-volume-prefecture-gap",
+        "sessions": 153,
+        "desktopShare": 0.817,
+        "workdayHoursShare": 0.895,
+        "avgEngagementSec": 117.2
+      },
+      {
+        "landingPage": "/blog/health-life-expectancy-structure",
+        "sessions": 280,
+        "desktopShare": 0.664,
+        "workdayHoursShare": 0.467,
+        "avgEngagementSec": 66.5
+      },
+      {
+        "landingPage": "/blog/livable-prefecture-composite-ranking",
+        "sessions": 236,
+        "desktopShare": 0.623,
+        "workdayHoursShare": 0.544,
+        "avgEngagementSec": 60.3
+      },
+      {
+        "landingPage": "/blog/automotive-industry-transformation-map",
+        "sessions": 236,
+        "desktopShare": 0.658,
+        "workdayHoursShare": 0.514,
+        "avgEngagementSec": 67
+      },
+      {
+        "landingPage": "/ranking",
+        "sessions": 79,
+        "desktopShare": 0.924,
+        "workdayHoursShare": 0.629,
+        "avgEngagementSec": 153.4
+      },
+      {
+        "landingPage": "/ranking/rice-consumption-quantity",
+        "sessions": 136,
+        "desktopShare": 0.603,
+        "workdayHoursShare": 0.514,
+        "avgEngagementSec": 65.4
+      },
+      {
+        "landingPage": "/blog/farmland-crisis-abandoned-land",
+        "sessions": 106,
+        "desktopShare": 0.651,
+        "workdayHoursShare": 0.583,
+        "avgEngagementSec": 51.7
+      }
+    ]
+  },
+  "dimensionGaps": {
+    "absentParams": 14,
+    "groups": [
+      {
+        "events": [
+          "home_featured_impression",
+          "home_featured_click"
+        ],
+        "params": [
+          "card_variant",
+          "slot",
+          "experiment_variant"
+        ],
+        "eventCount28d": 2028,
+        "breakdownReady": true
+      },
+      {
+        "events": [
+          "geo_map_interaction"
+        ],
+        "params": [
+          "interaction_type",
+          "area_code"
+        ],
+        "eventCount28d": 56,
+        "breakdownReady": false
+      },
+      {
+        "events": [
+          "geo_analysis_view"
+        ],
+        "params": [
+          "analysis_id",
+          "analysis_slug",
+          "geography",
+          "data_version"
+        ],
+        "eventCount28d": 35,
+        "breakdownReady": false
+      },
+      {
+        "events": [
+          "cta_click"
+        ],
+        "params": [
+          "cta_id",
+          "content_id",
+          "target_type",
+          "target_key"
+        ],
+        "eventCount28d": 3,
+        "breakdownReady": false
+      },
+      {
+        "events": [
+          "geo_region_select"
+        ],
+        "params": [
+          "area_code"
+        ],
+        "eventCount28d": 3,
+        "breakdownReady": false
+      },
+      {
+        "events": [
+          "geo_compare_add"
+        ],
+        "params": [
+          "area_code",
+          "comparison_size"
+        ],
+        "eventCount28d": 0,
+        "breakdownReady": false
+      }
+    ]
+  },
+  "improvements": {
+    "active": 30,
+    "overdue": [
+      {
+        "id": "TOKEN-AICONTENT-01",
+        "status": "pending",
+        "due": "2026-09-07",
+        "metric": "cost",
+        "owner": "ranking-content-author"
+      },
+      {
+        "id": "COVERAGE-LOOP-01",
+        "status": "effect/pending",
+        "due": "2026-09-14",
+        "metric": "gsc",
+        "owner": "claude"
+      },
+      {
+        "id": "THEME-EXPANSION-EFFECT-01",
+        "status": "effect/pending",
+        "due": "2026-09-18",
+        "metric": "ga4/gsc/theme-quality",
+        "owner": "theme-portfolio-manager"
+      }
+    ]
+  }
+}
