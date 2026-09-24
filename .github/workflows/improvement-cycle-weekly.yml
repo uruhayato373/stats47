@@ -87,7 +87,8 @@ jobs:
             exit 1
           fi
 
-      # GA4 鍵は ga4-query.mjs がメモリで使うだけで一時ファイルに書かない。Bash は照会・走査・docs 検査だけを許す。
+      # 鍵 (GA4 / GSC 共通の service account) は ga4-query.mjs / gsc-query.mjs がメモリで使うだけで一時ファイルに書かない。
+      # Bash は照会・走査・effect-verdict の dry-run・docs 検査だけを許す。
       - name: 🧾 Record measurements with Claude Code (improvement-triage)
         id: claude
         if: ${{ env.DRY_RUN != 'true' }}
@@ -112,7 +113,7 @@ jobs:
             --setting-sources project
             --permission-mode dontAsk
             --tools "Read,Write,Edit,Glob,Grep,Agent,Bash"
-            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Bash(node .claude/scripts/metrics/ga4-query.mjs *),Bash(node .claude/scripts/lib/scan-pending-improvements.mjs *),Bash(npm run docs:check)"
+            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Bash(node .claude/scripts/metrics/ga4-query.mjs *),Bash(node .claude/scripts/metrics/gsc-query.mjs *),Bash(node .claude/scripts/lib/scan-pending-improvements.mjs *),Bash(node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run*),Bash(npm run docs:check)"
             --disallowedTools "WebFetch,WebSearch,Bash(git *),Bash(gh *),Bash(env *),Bash(printenv *),Bash(cat *),Read(.env*),Read(**/.env*)"
             --strict-mcp-config
             --mcp-config '{"mcpServers":{}}'

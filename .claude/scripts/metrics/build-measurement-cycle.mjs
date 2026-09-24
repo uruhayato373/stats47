@@ -15,15 +15,17 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
 import {
-  parseCsv, renderCycleMarkdown, summarizeDimensionGaps, summarizeJourney, summarizeOverdue, summarizeWorkContext,
+  parseCsv, renderCycleMarkdown, summarizeDimensionGaps, summarizeEngine, summarizeJourney, summarizeOverdue,
+  summarizeWorkContext,
 } from "./lib/measurement-cycle.mjs";
+import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
 import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
 
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const HISTORY_COLUMNS = [
   "week", "periodStart", "periodEnd", "blogToRankingRate", "themesToRankingRate",
-  "workContextPages", "absentParams", "breakdownReadyEvents", "overdueImprovements",
+  "workContextPages", "absentParams", "breakdownReadyEvents", "overdueImprovements", "gscJudgeable", "gscActive",
 ];
 
 function arg(name) {
@@ -70,6 +72,9 @@ function main() {
   const ledgerEntries = parseDimensionLedger(readFileSync(join(PROJECT_ROOT, ".claude/rules/analytics-event-standards.md"), "utf8"));
   const pending = parseBacklog(join(PROJECT_ROOT, ".claude/todo/improvements.md"), new Date(`${asOf}T00:00:00Z`))
     .filter((e) => ACTIVE_STATUSES.has(e.status));
+  const verdictsPath = join(PROJECT_ROOT, ".claude/state/effect-verdict", `verdicts-${week}.json`);
+  const verdicts = existsSync(verdictsPath) ? JSON.parse(readFileSync(verdictsPath, "utf8")) : null;
+  const gscRows = pending.filter((e) => /gsc/i.test(e.target_metric ?? "")).map(judgeability);
 
   const state = {
     schemaVersion: 1,
@@ -85,7 +90,9 @@ function main() {
       },
       customDimensions: adminStatus,
       improvements: { status: "ok", detail: `active ${pending.length} 件` },
+      effectVerdicts: verdicts ? { status: "ok", detail: `verdicts-${week}.json` } : { status: "missing", detail: `verdicts-${week}.json` },
     },
+    engine: summarizeEngine({ verdicts, gscRows }),
     journey: transitions.rows && pagesClean ? summarizeJourney({ transitions: transitions.rows, pagesClean }) : null,
     workContext: landing.rows ? summarizeWorkContext(landing.rows) : null,
     dimensionGaps: registeredParams && events.rows
@@ -110,6 +117,8 @@ function main() {
     absentParams: state.dimensionGaps?.absentParams ?? "",
     breakdownReadyEvents: state.dimensionGaps?.groups.filter((g) => g.breakdownReady).length ?? "",
     overdueImprovements: state.improvements.overdue.length,
+    gscJudgeable: state.engine.gsc.judgeable,
+    gscActive: state.engine.gsc.active,
   });
   history.sort((a, b) => a.week.localeCompare(b.week));
   writeFileSync(historyPath, toCsv(history, HISTORY_COLUMNS));

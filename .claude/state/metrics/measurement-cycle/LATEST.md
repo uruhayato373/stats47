@@ -7,6 +7,7 @@
 | ga4 | ok（transitions=ok landing=ok events=ok pages-clean=ok） |
 | customDimensions | ok（登録済み 16 件） |
 | improvements | ok（active 30 件） |
+| effectVerdicts | ok（verdicts-2026-W38.json） |
 
 **回遊（referrer 集計）**
 
@@ -35,6 +36,21 @@
 - ⚪ 発火量不足 `cta_click`（28 日 3 件）: `cta_id`, `content_id`, `target_type`, `target_key`
 - ⚪ 発火量不足 `geo_region_select`（28 日 3 件）: `area_code`
 - ⚪ 発火量不足 `geo_compare_add`（28 日 0 件）: `area_code`, `comparison_size`
+
+**効果判定エンジン**（2026-W38）: gsc-blog-wave 7 件 {"effect/pending":7}
+
+GSC 施策 10 件中、機械判定できるのは 0 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:
+
+- `SEARCH-GROWTH-CYCLE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `COVERAGE-LOOP-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `RANKING-REINDEX-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `BLOG-SEO-TYPES-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `BLOG-SEO-QUEUE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `BLOG-SEO-PACE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `BLOG-LINKROT-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `SITE-LINKROT-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `THEME-EXPANSION-EFFECT-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
+- `STP-AI-WATCH-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 
 **期日超過の判定待ち**: active 30 件中 3 件
 

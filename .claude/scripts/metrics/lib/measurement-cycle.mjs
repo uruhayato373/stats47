@@ -107,6 +107,30 @@ export function summarizeOverdue(entries, asOf) {
   return { active: entries.length, overdue };
 }
 
+/**
+ * 閾値エンジンの今週の判定と、GSC 施策が機械判定に必要な目印を持っているか。
+ * @param {{ verdicts: object|null, gscRows: Array<{id:string, hasPage:boolean, hasDeploy:boolean, hasTarget:boolean}> }} input
+ */
+export function summarizeEngine({ verdicts, gscRows }) {
+  const byDomain = {};
+  for (const v of verdicts?.verdicts ?? []) {
+    const d = (byDomain[v.domainId] ??= { subjects: 0, byLabel: {} });
+    d.subjects += 1;
+    d.byLabel[v.label] = (d.byLabel[v.label] ?? 0) + 1;
+  }
+  const missing = gscRows
+    .map((r) => ({
+      id: r.id,
+      missing: [!r.hasPage && "[gsc-page: /path]", !r.hasDeploy && "デプロイ済 YYYY-MM-DD", !r.hasTarget && "[target: +N clicks]"].filter(Boolean),
+    }))
+    .filter((r) => r.missing.length > 0);
+  return {
+    verdictsWeek: verdicts?.week ?? null,
+    byDomain,
+    gsc: { active: gscRows.length, judgeable: gscRows.length - missing.length, missing },
+  };
+}
+
 const pct = (v) => (v == null ? "—" : `${(v * 100).toFixed(1)}%`);
 
 export function renderCycleMarkdown(state) {
@@ -144,6 +168,16 @@ export function renderCycleMarkdown(state) {
     for (const g of d.groups) {
       lines.push(`- ${g.breakdownReady ? "🟢 登録すれば内訳を読める" : "⚪ 発火量不足"} \`${g.events.join("` / `")}\`（28 日 ${g.eventCount28d} 件）: ${g.params.map((p) => `\`${p}\``).join(", ")}`);
     }
+    lines.push("");
+  }
+  if (state.engine) {
+    const e = state.engine;
+    const domains = Object.entries(e.byDomain);
+    lines.push(`**効果判定エンジン**（${e.verdictsWeek ?? "verdict 未生成"}）: ${domains.length === 0 ? "判定対象なし" : domains.map(([d, s]) => `${d} ${s.subjects} 件 ${JSON.stringify(s.byLabel)}`).join(" / ")}`);
+    lines.push("");
+    lines.push(`GSC 施策 ${e.gsc.active} 件中、機械判定できるのは ${e.gsc.judgeable} 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:`);
+    lines.push("");
+    for (const r of e.gsc.missing) lines.push(`- \`${r.id}\`: ${r.missing.join("・")}`);
     lines.push("");
   }
   if (state.improvements) {

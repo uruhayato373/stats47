@@ -1,2 +1,2 @@
-week,periodStart,periodEnd,blogToRankingRate,themesToRankingRate,workContextPages,absentParams,breakdownReadyEvents,overdueImprovements
-2026-W38,2026-08-23,2026-09-19,0.0758,0.0866,8,14,1,3
+week,periodStart,periodEnd,blogToRankingRate,themesToRankingRate,workContextPages,absentParams,breakdownReadyEvents,overdueImprovements,gscJudgeable,gscActive
+2026-W38,2026-08-23,2026-09-19,0.0758,0.0866,8,14,1,3,0,10

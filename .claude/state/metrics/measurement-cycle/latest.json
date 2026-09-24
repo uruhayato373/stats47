@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W38",
   "asOf": "2026-09-20",
-  "generatedAt": "2026-09-24T10:59:57.452Z",
+  "generatedAt": "2026-09-24T11:17:08.269Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -17,6 +17,107 @@
     "improvements": {
       "status": "ok",
       "detail": "active 30 件"
+    },
+    "effectVerdicts": {
+      "status": "ok",
+      "detail": "verdicts-2026-W38.json"
+    }
+  },
+  "engine": {
+    "verdictsWeek": "2026-W38",
+    "byDomain": {
+      "gsc-blog-wave": {
+        "subjects": 7,
+        "byLabel": {
+          "effect/pending": 7
+        }
+      }
+    },
+    "gsc": {
+      "active": 10,
+      "judgeable": 0,
+      "missing": [
+        {
+          "id": "SEARCH-GROWTH-CYCLE-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "COVERAGE-LOOP-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "RANKING-REINDEX-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "BLOG-SEO-TYPES-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "BLOG-SEO-QUEUE-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "BLOG-SEO-PACE-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "BLOG-LINKROT-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "SITE-LINKROT-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "THEME-EXPANSION-EFFECT-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        },
+        {
+          "id": "STP-AI-WATCH-01",
+          "missing": [
+            "[gsc-page: /path]",
+            "デプロイ済 YYYY-MM-DD",
+            "[target: +N clicks]"
+          ]
+        }
+      ]
     }
   },
   "journey": {

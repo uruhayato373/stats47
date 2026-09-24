@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
-  MIN_EVENTS_FOR_BREAKDOWN, parseCsv, renderCycleMarkdown, summarizeDimensionGaps, summarizeJourney, summarizeOverdue,
-  summarizeWorkContext,
+  MIN_EVENTS_FOR_BREAKDOWN, parseCsv, renderCycleMarkdown, summarizeDimensionGaps, summarizeEngine, summarizeJourney,
+  summarizeOverdue, summarizeWorkContext,
 } from '../lib/measurement-cycle.mjs';
 import { buildQuery, parseFilterExpr } from '../lib/ga4-query.mjs';
 
@@ -65,6 +65,23 @@ test('dimension gaps group absent params by event and mark which have enough vol
     ['home_featured_impression+home_featured_click', MIN_EVENTS_FOR_BREAKDOWN, true],
     ['cta_click', 3, false],
   ]);
+});
+
+test('engine summary counts verdicts per domain and lists GSC rows by the markers they still lack', () => {
+  const engine = summarizeEngine({
+    verdicts: { week: '2026-W38', verdicts: [
+      { domainId: 'gsc-blog-wave', label: 'effect/pending' },
+      { domainId: 'gsc-improvement', label: 'effect/full' },
+    ] },
+    gscRows: [
+      { id: 'A-01', hasPage: true, hasDeploy: true, hasTarget: true },
+      { id: 'B-01', hasPage: true, hasDeploy: false, hasTarget: false },
+    ],
+  });
+  assert.deepEqual(engine.byDomain['gsc-improvement'], { subjects: 1, byLabel: { 'effect/full': 1 } });
+  assert.deepEqual(engine.gsc, { active: 2, judgeable: 1, missing: [{ id: 'B-01', missing: ['デプロイ済 YYYY-MM-DD', '[target: +N clicks]'] }] });
+  // verdict が無い週は 0 件ではなく「未生成」と区別できる
+  assert.equal(summarizeEngine({ verdicts: null, gscRows: [] }).verdictsWeek, null);
 });
 
 test('overdue uses the week end as asOf so the same week always yields the same list', () => {
