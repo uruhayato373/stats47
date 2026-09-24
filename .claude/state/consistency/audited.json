@@ -1,11 +1,8 @@
 {
-  "hash": "8831f947894fe8a0969eac0080199311d2b1a3f8f827a3036627e9c473568e9a",
-  "audited_at": "2026-09-24T02:25:32",
+  "hash": "d7c32d0f9a742ff2d60d6af7114f4b15d83d5628f7d40b995e8fb09db41ea61d",
+  "audited_at": "2026-09-24T05:49:33",
   "files": [
-    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/scripts/gsc/__tests__/coverage-queue-state.test.mjs",
-    ".claude/scripts/gsc/build-coverage-queue.mjs",
-    ".claude/scripts/gsc/lib/coverage-queue-state.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md"
+    ".claude/scripts/lib/__tests__/workflow-health-core.test.mjs",
+    ".claude/scripts/lib/workflow-health-core.mjs"
   ]
 }
