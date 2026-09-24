@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "period": {
-    "periodStart": "2026-09-15",
-    "periodEnd": "2026-09-21",
+    "periodStart": "2026-09-16",
+    "periodEnd": "2026-09-22",
     "windowDays": 7
   },
-  "inputHash": "b6a1a19c5b5974e27ec4eae08bddcb124919a3633fb0c4f444747b1eec2dad65",
+  "inputHash": "edd75514e1c51908217e360fdc3ac01ff445153c89a2aac7206a1b0c239d7865",
   "movements": [
     {
       "keyword": "うどん 消費量 ランキング",
       "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
       "before": 54,
-      "after": 10,
+      "after": 9.2,
       "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 44
+      "impressions": 5,
+      "change": 44.8
     },
     {
       "keyword": "出生率が高い都道府県",
@@ -27,31 +27,49 @@
       "change": 42
     },
     {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/ranking/railway-passengers",
-      "before": 9,
-      "after": 46.47142857142857,
-      "beforeImpressions": 2,
-      "impressions": 70,
-      "change": -37.47142857142857
+      "keyword": "都道府県",
+      "targetPath": "/",
+      "before": 3,
+      "after": 41,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": -38
+    },
+    {
+      "keyword": "小松 市 人口",
+      "targetPath": "/areas/17000/cities/17203/population",
+      "before": 11,
+      "after": 48,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -37
     },
     {
       "keyword": "site:stats47.jp",
-      "targetPath": "/areas/15000",
-      "before": 10,
-      "after": 46.96,
-      "beforeImpressions": 2,
-      "impressions": 75,
-      "change": -36.96
+      "targetPath": "/ranking/railway-passengers",
+      "before": 9,
+      "after": 42.734177215189874,
+      "beforeImpressions": 1,
+      "impressions": 79,
+      "change": -33.734177215189874
     },
     {
       "keyword": "旭川 人口",
       "targetPath": "/areas/01000/cities/01204/population",
       "before": 42,
-      "after": 8.25,
+      "after": 8.8,
       "beforeImpressions": 1,
-      "impressions": 4,
-      "change": 33.75
+      "impressions": 5,
+      "change": 33.2
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/15000",
+      "before": 10,
+      "after": 43.05952380952381,
+      "beforeImpressions": 1,
+      "impressions": 84,
+      "change": -33.05952380952381
     },
     {
       "keyword": "チーズ 消費量",
@@ -79,24 +97,6 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 30
-    },
-    {
-      "keyword": "市町村 数",
-      "targetPath": "/blog/municipality-count-prefecture-gap",
-      "before": 30.666666666666668,
-      "after": 3,
-      "beforeImpressions": 3,
-      "impressions": 1,
-      "change": 27.666666666666668
-    },
-    {
-      "keyword": "和歌山 年収",
-      "targetPath": "/areas/30000/occupation-salary",
-      "before": 35.75,
-      "after": 9.666666666666666,
-      "beforeImpressions": 4,
-      "impressions": 3,
-      "change": 26.083333333333336
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "高校教師 年収",
-    "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-    "rank": 8.175182481751825,
-    "impressions": 137,
-    "clicks": 0,
+    "keyword": "日照時間 ランキング",
+    "targetPath": "/ranking/annual-sunshine-duration",
+    "rank": 2.89247311827957,
+    "impressions": 93,
+    "clicks": 8,
     "group": 5,
     "previousMethod": null,
-    "editableFile": null
+    "editableFile": "packages/data-configs/src/metrics/annual-sunshine-duration.ts"
   },
   "observing": [
     {
