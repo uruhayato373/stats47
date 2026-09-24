@@ -22,7 +22,7 @@ paths:
    **PR CI の必須 gate ではない (2026-09-18 に外した)**: CI 内で `next start` して本番 R2 を読むため結果が
    PR の差分と独立に変わり (本番データの変化、`SITEWIDE-DUPLICATE-LINK-RATIO-01` のようなサイト横断の
    既知違反が代表 URL に乗る)、PR #974 で 5 連続失敗・#977 でも赤になった。PR 必須へ戻すのは、R2 を固定
-   fixture に差し替えて決定的にできたときだけ (`CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`)。
+   fixture に差し替えて決定的にできたときだけ。
 2. **週次 (全件)**: `npm run page-quality:audit-weekly` が `sitemap.xml` から公開対象URLを列挙し
    (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析を行う。
    `page-quality-audit-weekly.yml` が `--concurrency 12 --skip-rsc --browser-representative` で実行し、

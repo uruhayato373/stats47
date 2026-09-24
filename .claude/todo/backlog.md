@@ -27,6 +27,7 @@ updated: 2026-09-21
 
 - **owner**: ranking-ui-manager (地図) / site-ux-manager (横断)
 - **実測 (2026-09-23)**: 週次 UI 確認の agent がランキング地図のスクショから検出。`https://stats47.jp/tiles/light_all/5/28/12.png` (プロキシ `apps/web/src/app/tiles/[theme]/[z]/[x]/[ypng]/route.ts`) も、`https://a.basemaps.cartocdn.com/light_all/5/28/12.png` を Referer 有無どちらで直接取得しても、画像に「API KEY REQUIRED / carto.com/basemaps/apikey」の透かしが入る (HTTP 200・6,407 bytes)。CARTO 側がキー無しの basemap 配信に透かしを入れるようになった。全ランキングページの地図と、同じタイルを使う他の地図が対象。
+- **切替時の注意 (2026-09-24 調査)**: プロキシは `Cache-Control: public, max-age=2592000, immutable` を返すため、利用者のブラウザは透かし入りタイルを同じ URL で最大 30 日使い続ける。エッジのパージだけでは消えないので、切り替えるなら URL を変える (例: プロキシの theme キーを新設)。地理院淡色には暗い配色が無く、ダークモードの地図も淡色になる。ランキングページの LCP 要素はこのタイルの preload (`getInitialMapTileUrls`) なので、`PERF-RANKING-LCP-03` の比較が途切れる。
 - **次**: CARTO の API キーを取得して使うか (利用条件・費用の確認はオーナー)、出典条件の明確な別タイル (国土地理院タイル等。テーマページで既に使用) へ切り替えるかを決め、プロキシの上流を差し替える。Cloudflare のエッジキャッシュに透かし入りタイルが残るので切替後にパージする。
 - **完了条件**: 代表ランキングページの地図に透かしが出ず、出典表記が利用条件どおり表示される。
 
@@ -36,17 +37,9 @@ updated: 2026-09-21
 
 - **owner**: geo-analysis-curator
 - **実測 (2026-09-23・本番・スマホ/PC)**: `/geo` の 6 分析カードすべてで、地図プレビューの位置に「地図プレビューを取得できませんでした」と出ている (週次 UI 確認のスクショ `state/page-quality/screenshots/2026-09-23/geo-analysis-mobile.png`)。ページの主要な見どころが全カードで欠けている。
-- **次**: プレビュー画像の取得元 (R2 のキーと生成処理) を特定し、欠落の原因を確かめてから直す。
+- **原因と修正 (2026-09-24・コード修正済み・本番反映待ち)**: R2 の県別 bundle と manifest は 3 分析とも件数・SHA まで一致しており、データは正常。`/geo` は `revalidate` だけを持つ静的 route で、build 時 (R2 を読めない CI) に `○` として prerender され、本番 HTML にフォールバック文言が 6 回焼き込まれていた (`x-nextjs-prerender: 1`)。home `/` と同じ事故型。`apps/web/src/app/geo/page.tsx` を `force-dynamic` にし、`check-r2-route-ssg.cjs` の対象に追加した (外すと exit 1 になることを確認)。localhost の本番ビルドで `/geo` は `ƒ`、フォールバック 0 件・地図 path 72 本。
+- **次**: 次の develop→main デプロイ後に本番 `/geo` を curl し、`地図プレビューを取得できませんでした` が 0 件であることを確認して閉じる。ページが毎リクエスト描画になるため、`CF-CPU-SURGE-01` の route 別 CPU 集計で `/geo` の増分も見る。
 - **完了条件**: 6 カードすべてで地図プレビューが表示される。
-
-### [THEME-MAP-ATTRIBUTION-CLIP-01] テーマページの地図で国土地理院・Leaflet の出典表記が枠外に切れて見えない
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:check -- --base-url http://localhost:3100 --all で theme の clipped_text が 0] [起票:2026-09-23]
-
-- **owner**: theme-ui-manager
-- **実測 (2026-09-23・本番・幅 390/412/640/768/992px。1024px 以上は `lg:h-[400px]` で起きない)**: `/themes/population-dynamics` の地図で、出典表記 `.leaflet-control-attribution` (「Leaflet | 国土地理院」) の上端 12415px が、地図を包む `div.h-[360px] lg:h-[400px] overflow-hidden` の下端 12392px より下にあり、切り取られて見えない。地図本体が包みより背が高い。国土地理院タイルは出典表示が利用条件なので、表示崩れではなく条件違反になりうる。週次 page-quality の `clipped_text` が検出する (地図の遅延描画のため回によって検出されないことがある)。
-- **次**: 包みの高さと Leaflet コンテナの高さを揃えるか、出典を包みの内側に収める。他の地図 (ranking・geo・areas) も同じ包みを使っていないか確認する。
-- **完了条件**: スマホ幅と PC 幅で出典表記が地図内に見え、代表 URL 検査の `clipped_text` が 0。
 
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
@@ -196,7 +189,7 @@ updated: 2026-09-21
 - **owner**: ranking-ui-manager (ranking) / theme-ui-manager (theme) / site-ux-manager (共通部品・横断)
 - **実測 (2026-09-18)**: develop→main PR #977 の `page-quality` (representative) が同じ違反で赤 (merge blocker)。
   `/themes/population-dynamics` 0.5081 / `/blog` 0.3235 / `/ranking/total-population` 0.3151 (閾値 0.3)。
-  rail/surface 統一 (1006e1e21) 後の値。CI 側の扱いは `CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01`。
+  rail/surface 統一 (1006e1e21) 後の値。CI 側では 2026-09-18 に PR 必須 gate から外し、週次監査だけが検出する。
   2026-09-18 に page-quality を PR 必須から外したので PR は止まらなくなったが、違反自体は未解消。
   検知は週次 `page-quality-audit-weekly.yml` の alert Issue と、リリース前の `check:release-local` に移った。
 - 2026-09-15、`page-quality:audit-weekly` を本番全 6,237 URL に実行 (初の全件試行)。
@@ -333,6 +326,7 @@ updated: 2026-09-21
   されること (1 run 2 件・先行する sweep カードがあるため数日かかる)。② 直した指摘がリリース後の週次で done
   (`resolved_by: weekly-audit`) になるか、残れば pending に戻って再起票されること。
 - **停止条件**: 本番 deploy はオーナー承認まで行わない。
+- **注意 (2026-09-24)**: 対話セッションで `CAROUSEL-ARROW-OVERLAP-01` / `THEME-MAP-ATTRIBUTION-CLIP-01` / `A11Y-SERIOUS-01` 担当の machine 指摘を `--mark-fixed` にした。検証コマンドの `status==='fixed'` はこれでも真になるので、ループの実証には `UI-FIX-*-20260924` のキー (`agent|theme` / `agent|prefecture-detail` / `agent|other`) がループの commit で処理されたことを見る。
 - **完了条件**: 検証コマンドが exit 0 (fixed か週次で確認済みの指摘が 1 件以上)、かつループの commit に `.claude/state/page-quality` が含まれている。
 
 ### [CF-CPU-SURGE-01] 2026-09-11 以降の Workers CPU 時間の増加原因を特定し、差分 purge とブログ広告変更の効果を測る
@@ -373,7 +367,7 @@ updated: 2026-09-21
 - **再開点（2026-09-06）**: 現行候補は`CURRENT_SALES_REVISIONS`で固定。最終EPUB検査は`kindle-v3-20260906-r4-verification.json`で実本文全章SHAを保持。S2-01だけは当該版の独立review.jsonがあり、他巻へ流用しない。最初の公開前に、固定bytes送信・旧draft再投入・公開直前再照合を認証済み下書きで実測する（コード/モック検査のみでは実UI動作を合格にしない）。新規公開は実機・権利/申告・保全・オーナー承認がそろってから。
 - **次（実行順）**: ①Kindle改訂版を全章で独立意味レビューする。書き下ろしだけでなくブログ/ランキング由来の本文・図を含め、未根拠因果・対象年/地域/分母の違いを是正し、内部比率を再計測する。②確定版のEPUB検査・Previewer・全章SHAに結び付いたreview.json・入稿bundle照合後、明示版指定のarchiveで旧版を保持して暗号化保全する。③note14パックの準備原稿に固有の使い方・図例を追加し、独立レビュー・価格/添付/利用条件確認へ進める。無料P13を含めた固定入力はfree-sample-delivery.jsonと納品manifestで照合する。未制作Geo11企画は原典・再現テスト・読者成果を満たすものから制作する。④商品別の残ゲートが解消してから、承認された対象だけを専用公開フローへ渡す。入稿提案JSONを公開済み記録と扱わない。
 - **Kindle再接地の具体対象**: S1-01のブログ9章は全章の再編集が必要。`per-capita-income-gap`の本文と図の採用年・数値不一致、`heating-cost-vs-disposable-income`の名目支出/実質所得・世帯範囲の不一致、`communication-cost-burden`の交通通信費/通信費混同、`expenditure-structure-comparison`の性質別/目的別混在と因果主張、`black-tea-income-gap`の購入量/飲用量・相関/説明割合混同を残さない。S1-02も食品の支出・購入数量と調査対象都市を元記事の本文・図まで照合する。`editorial-corrections.ts`の部分校訂だけで当該章全体を合格にしない。他冊にも同種の旧断定があるため全章レビューを省略しない。
-- **関連の別owner工程**: Office・本人確認は `COCONALA-PROFILE-OWNER-01`、歴史2指標は `COCONALA-HISTORICAL-SOURCE-01`。公開済みGeo noteの本文・添付再確認は認証済み画面が必要。売上/需要の不明を0扱いしない。
+- **関連の別owner工程**: Office・本人確認は `COCONALA-PROFILE-OWNER-01`、歴史2指標は 2026-09-24 に原典 (社会生活統計指標2023 表7) と 47 県すべて一致を確認済み (`coconala-packs-2026-09-06.json` の `officialDefinitions.historicalSourceReconciliation`。`historicalNotReverified` の解除と納品 SOURCES の注記更新は商品担当の判断で未実施)。公開済みGeo noteの本文・添付再確認は認証済み画面が必要。売上/需要の不明を0扱いしない。
 - **再利用本文の追加是正対象**: S1-03高齢単身の分母・通勤流入と移住、04介護必要数と不足数・化学工業と医薬品・相談窓口の時間、05大学収容力と入学定員・保育利用率と希望充足率、06財政指標の控除/平均期間・目的別と性質別、07宿泊施設範囲/人泊と人数・国籍から嗜好の断定、08供給契約と世帯普及率、09産業出荷/利益/用水効率、10火災地震合算/強度率の労働時間分母、11行動者率/稼働率、12有業者/雇用者を元ブログ・図まで直す。fresh訂正だけでは完了しない。
 - **販売中v1の機械監査 (2026-09-19・全32冊EPUB展開)**: 販売中22冊はarchive `v1` (2026-08-30) と一致し、ランキング章はサイトAI解説の転載のまま。S2/S3/S4のランキング章481件のうち177件 (37%・71指標) が他冊にも載る同一指標で、60字以上の同一段落が2冊以上に532件ある (S3-01↔S4-01で21段落)。S2-01「人口・世帯」に高血圧性疾患/肝疾患/し尿処理/水洗化が入り、S3-01「北海道」の章は祭具・墓石/マフラー/うなぎ等 (地域の極端順位で機械選定)。S1のブログ章に「この記事/本記事」が11〜38件/冊残る。合計特殊出生率に単位「（人）」、同一章で「2023年」と「2023年度」が混在 (S2/S3で9〜19章/冊)。S3-01は「北海道の内訳を見ると、北海道が全国47位」型の定型文が24章。現行コードで再生成した v3 は解説を外して全県表になるが、31章すべてに同じ免責文が付き主題外キー・重複指標 (昼夜間人口比率×2) は残る。監査スクリプトは `verify-epub.mts` に (a)冊間の指標/段落重複 (b)ブログ残語 (c)年/年度混在 (d)率系の単位 の決定的ゲートとして移す。
 - **S1-01 の是正 (2026-09-19 実施)**: v3-20260919-r1 を blog-critic (opus) が全 15 章で独立レビュー → REVISE (BLOCK 8 / MAJOR 19 / MINOR 13。大半が本文と図の年次不一致・名目/実質・世帯範囲・相関→因果)。40 件 + 追加 6 件 (2014 年の別指標図の除外・要約図の見出し誤りの除外・重複節の置換・年度→年) を `editorial-corrections.ts` (ブログ由来章・書籍版のみ) と `manuscripts/K-S1-01/` (書き下ろし) に反映し、`v3-20260919-r3` を生成 (15 章・図 35・書き下ろし 32.7%・verify-epub 3 層 error 0 / warn 0)。findings の記録は `.local/kindle-books/K-S1-01/v3-20260919-r3/review-r1-findings.md`、delta 再審査は同 dir の `review.md`。**同じ誤りは公開ブログ 9 本 (real-disposable-income-reversal / heating-cost-vs-disposable-income / per-capita-income-gap / savings-balance-gap / engel-coefficient-prefecture-ranking / household-spending-prefecture-gap / communication-cost-burden / expenditure-structure-comparison / black-tea-income-gap) に残っている** → blog remediation (`/blog-revise-fix`) で review-r1-findings.md の before/after を must-fix として直す (図の再生成: savings-ranking を 2019 年 financial-assets-balance に、income-summary-findings の heading「約200万円」→「約20万円」)。残り: R2 暗号化保全 (鍵のある環境でオーナー) → `kdp-publish --update` (書名変更 + 本文差替) → オーナー承認で `--commit`。
@@ -418,18 +412,6 @@ updated: 2026-09-21
 - **完了条件**: 本人確認・NDAの公開ステータスと、本人が申告した年数の一致を確認する。修正版13パックのOffice実機検証結果（OS・バージョン・表示・編集・再計算）を記録する。実施しない項目は本人の判断を記録し、未確認表示を維持する。
 - **停止条件**: 2FA・本人確認書類・規約同意はエージェントが代行しない。経験年数・資格は推測しない。Windows/MacのOffice環境が不足する場合は未検証表示を維持する。インボイス登録を売上改善のために自動実施しない。
 - **整備済み範囲の証跡**: `.claude/state/products/coconala-profile-2026-09-06.json`。プロフィール文面・画像・見本の公開更新を再実行しない。
-
-### [COCONALA-HISTORICAL-SOURCE-01] 納品パックの歴史2指標を原典と再照合する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-06] [期日:2026-09-28]
-
-- **status**: 原典特定済み・値の照合待ち（2026-09-18）
-- **owner**: estat-researcher（一次資料照合）／coconala-product-manager（採否判断への引渡し）
-- **対象・根拠**: `.claude/state/products/coconala-packs-2026-09-06.json` の未検証2指標。P-06/P-12に含まれるstatsDataId `0000010205` の `E0910101`（`kindergarten-education-diffusion-rate`）と `E0910102`（`nursery-education-diffusion-rate`）。納品版 (`.local/coconala-products/P-06/v1/SOURCES.csv` 118・151 行) の対象年は両方とも **2020 (基準年固定)**。
-- **2026-09-18 に確定したこと**: ①現行 API 表 `0000010205` の cat01 59 項目 (R2 estat-catalog 2026-09-16 版) に `#E0910101` / `#E0910102` は無く、残るのは `#E0910402 保育所等利用率` だけ → 現行表では照合できない。②e-Stat の統計表検索で「幼稚園教育普及度」は**年版の刊行物**にある: 『統計でみる都道府県のすがた』2007〜2023 年版、『社会生活統計指標－都道府県の指標－』2007〜2024 年版の **表 7 (E 教育)**、定義は「幼稚園修了者数／小学校第1学年児童数」(Excel 配布)。③ローカルには e-Stat appId が無い (CI 専任) ので API 経路は CI か owner 端末。
-- **次**: 『社会生活統計指標－都道府県の指標－2023 (または 2022)』表 7 の Excel を e-Stat (`stat-search/files?…query=社会生活統計指標 都道府県の指標`) から取得し、2020 年度列の 47 県値・定義 (分母 = 小学校第1学年児童数)・単位を納品 CSV と突合する。保育所側 (E0910102) も同表の「教育普及度[保育所]」で同様に照合する。ダウンロードはオーナー承認後 (外部ファイル取得)。
-- **停止条件**: 原典未取得や不一致時は未検証注記を維持する。推測補完、値・公開内容の変更、再出品は行わず、除外／継続の判断材料を商品担当へ渡す。外部変更は別途承認を得る。
-- **完了条件**: 2指標それぞれに原典URL・参照箇所・年・分母・47地域の一致／差異／欠測を既存商品stateへ記録する。確認不能なら探索範囲・不足資料・再開条件・採否判断担当を明示して引き渡し、未確認を確認済みにしない。
 
 ### [AFF-FURUSATO-INVENTORY-01] ふるさと納税ポータルの提携を 2〜3 件足す (furusato 在庫 2 本 / 週 5.4 万 imp)
 
@@ -812,15 +794,6 @@ updated: 2026-09-21
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
-### [CAROUSEL-ARROW-OVERLAP-01] ホーム・カテゴリのカルーセルの矢印ボタンがカードの数値に重なる (全幅)
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:代表 URL 検査の overlapping_tap_targets が home / category で 0] [起票:2026-09-23]
-
-- **owner**: site-ux-manager
-- **実測 (2026-09-23・本番)**: `/` の「注目のランキング」と `/category/population` のカードで、左右の矢印ボタンがカードの上に重なり、1 位の値 (例「19,938人」) の一部を隠している。ホームは 390〜1920px の 7 幅すべてで重なりを 3 件ずつ検出 (週次スクショ検査の幅別検査)。矢印をタップしようとしてカードを開く/その逆の誤タップも起きうる。週次 page-quality の `overlapping_tap_targets` が検出する。
-- **次**: 矢印をカードの外 (余白) に出すか、タッチ端末では非表示にしてスワイプに任せる。
-- **完了条件**: 全幅で矢印がカードの文字に重ならず、代表 URL 検査の `overlapping_tap_targets` と `responsive_layout_issues` が home / category で 0。
-
 ### [AREA-SPECIALTY-IMAGES-01] 都道府県ページの特産品画像が未生成で頭文字タイルのまま
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:週次 page-quality の degraded_images が prefecture-detail で 0] [起票:2026-09-23]
@@ -830,22 +803,14 @@ updated: 2026-09-21
 - **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 
-### [A11Y-SERIOUS-01] 代表ページに axe の critical / serious 違反が残る
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:代表 URL 検査の a11y_violations が 0] [起票:2026-09-23]
-
-- **owner**: site-ux-manager (横断) / ranking-ui-manager / theme-ui-manager
-- **実測 (2026-09-23・本番・幅 412px・axe-core WCAG 2 A/AA)**: `/ranking/total-population` に button-name (critical・1 箇所)・color-contrast (serious・16 箇所)・nested-interactive (serious・1 箇所)、`/themes/population-dynamics` に color-contrast (serious・9 箇所)・scrollable-region-focusable (serious・2 箇所)、`/survey/census` に button-name (critical・1 箇所)。
-- **次**: 名前の無いボタン (アイコンだけのボタン) に `aria-label` を付けるのを先に直す。色のコントラストは共通トークンの問題か個別の文字色かを切り分けてから直す。
-- **完了条件**: 代表 URL 検査の `a11y_violations` が 0 (または除外の根拠を規約に記録)。
-
 ### [METRIC-EMPLOYED-OUTSIDE-PREF-YEAR-01] 県外就職者比率の subtitle「〜2020年」と最新値 2024 年が食い違う
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23]
 
 - **owner**: data-ingester
 - **実測 (2026-09-23)**: `employed-outside-the-prefecture` の item.json は subtitle が「〜2020年」だが、R2 values.json の最新パーティションは 2024 年 (1 位埼玉県 32.9％・最下位北海道 4.9％)。何を分母にした比率か (新規学卒者か就業者全体か) も item からは読めない。X 投稿の候補から外した。
-- **次**: config の出典表と年の範囲を確認し、subtitle を実データに合わせるか、2021 年以降のパーティションが別定義なら系列を分ける。
+- **config 修正済み (2026-09-24)**: SSDS 0000010206 / #F0310201 は 2019〜2024 年度の 47 県値があり、算式は「他県への就職件数 ÷ 就職件数（一般）× 100」(分母はハローワークの就職件数・新規学卒者を含まない)。2018 年度以前は別算式で既存の pre2018 metric が担う。`employed-outside-the-prefecture.ts` の subtitle を「2019年度〜」、years を 2019〜2024 にし、分母を description に書いた。`validate:config` / `validate:years` / type-check exit 0。
+- **次**: R2 の item.json を再生成する (値は既に 2024 年まで入っているので観測値の再取り込みは不要か、item 再生成で足りるかを確かめる)。本番のランキングページで subtitle と説明の分母を確認して閉じる。
 - **完了条件**: subtitle・定義・最新年が一致し、ランキングページの説明で比率の分母がわかる。
 
 
@@ -865,7 +830,8 @@ updated: 2026-09-21
 - **owner**: data-ingester
 - **実測 (2026-09-23)**: `acupuncturist-rate` は title が「人口10万対はり師数」、unit が「人」だが、R2 `app/ranking/acupuncturist-rate/values.json` (2020) の値は東京都 22,314・大阪府 16,049・鳥取県 277 で、人口 10 万人あたりではなく実数。config は `statsDataId: 0004026940` / `cdCat01: 100` / `conversionFactor: 1` で、`normalizationOptions` に「人/10万人」があるのに基底値は正規化されていない。ランキングページもこの名前で実数を並べている。IG 地域カルーセルの試作で東京の「全国 1 位」として拾われて発覚した。
 - **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。
-- **次**: e-Stat の表で cdCat01=100 が実数か率かを確認し、(a) 実数なら title を「はり師数」に直すか人口で割る計算 metric にする、(b) 率の表を指しているなら取得を直す。同じ「人口10万対」を title に持つ metric で値の桁が実数並みのものを一覧にして同時に確認する。
+- **原因と config 修正 (2026-09-24)**: 0004026940 で config が指していた cdTab=0120 は「はり師数」の実数 (東京都 22,314人)。人口10万対の率は cdTab=0160 (東京都 158.8、1位大阪府 181.6)。同じ誤りが柔道整復師数 (0140→0180) と看護師数 0004026841 (0270→0310) にもあった。3 config を率の列へ直し、二重割りを防ぐため「人口10万人あたり」の換算オプションを外し、seoTitle から古い順位の数値を外した。犯罪 3 件・火災死亡者数は title が実数名で値と一致しているので対象外。`validate:config` / `validate:years` / type-check / vitest 971 件 exit 0。
+- **次**: ① 3 metric (acupuncturist-rate / judo-therapist-rate / nurses-per-100k-population) を R2 へ再取り込みし item / values を再生成する。② 再取り込み後に率の値で seoTitle を作り直す。③ `packages/product-factory/src/data/datasets/nurses-per-100k-population.ts` が看護師の実数を「人口10万人当たり」と表示したまま商品パックに使っているので、R2 修正後に再生成する。
 - **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
@@ -879,49 +845,6 @@ updated: 2026-09-21
 - **停止条件**: yearFormat を一括置換しない (SSDS には年度が正しい項目もある)。出典で確認できない key は `未宣言` のまま残し、指標定義シートに出す。
 - **完了条件**: 家計調査由来 metric の yearFormat が出典と一致し、S1-01 の 9 slug で定義シートの「期間の型」が本文と一致する。
 
-
-### [CI-SPEED-PREFLIGHT-PR-REGISTRY-01] `preflight:pr` の gate 一覧を手書き 15 件から registry / workflow 由来に変える
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs] [起票:2026-09-18] [期日:2026-11-15]
-
-- **owner**: devops-runner
-- **実測 (2026-09-16)**: `preflight-commit.mjs` の `PR_GATES` は手書き 15 件、Static Gates は 65 step。
-  PR #974 で実際に落ちた 4 gate (Quality Gate Ratchet Contracts / Affiliate Compliance `--check` /
-  Checker Wiring / Workspace Contract) はどれも `PR_GATES` に無く、push 前に走らせても防げなかった。
-  手同期の一覧は必ずドリフトする (memory `feedback_hand_synced_duplication`)。
-- **次**: 最小案は上の 4 gate を `PR_GATES` に追加する。恒久案は `quality-gates.json` の
-  `trigger: pull_request` かつ `networkOrSecrets: none` の gate を列挙して実行する
-  (registry が SSOT、`preflight-commit.test.mjs` の shared 一覧は registry 由来に置換)。
-  network を要する gate (SEO Meta Factual 等) は `--with-network` opt-in にする。
-- **完了条件**: `preflight:pr` が Static Gates の `networkOrSecrets: none` gate を全件含み、
-  片方から 1 つ落とすとテストが落ちる。
-- **実施 (2026-09-18、最小案)**: PR #974 で落ちた 4 gate (Quality Gate Ratchet 4 種 / Affiliate Compliance +
-  Relevance `--check` / Checker Wiring / Workspace Contract) を `PR_GATES` に追加 (15→19 gate、実測 21 秒)。
-  `preflight-commit.test.mjs` の shared 一覧に 8 コマンドを追加し、CI・ローカルどちらから落としても赤になる。
-  恒久案 (registry 由来) は未着手。残りの `networkOrSecrets: none` な PR gate (route-contract / static-assets /
-  value-format / env-registry / maintenance-debt 等) は pre-commit か fast-gates が既に走らせている。
-
-### [CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01] 本番 R2 に依存して揺れる Page Quality (representative) を必須 gate から外すか決定的にする
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run page-quality:test] [起票:2026-09-18] [期日:2026-10-31]
-
-- **owner**: devops-runner
-- **実測 (2026-09-16、PR #974)**: `page-quality` job は CI 内で `next start` し `storage.stats47.jp` (本番 R2) を
-  読んで代表 URL を検査する。同じ PR で失敗 5 回中 5 回 (「next start did not become ready」
-  「digest-mismatch: error」「違反: error=4 warning=16」)、6 回目でコード変更なく成功。コードではなく
-  環境で落ちている必須 gate。
-- **実測 (2026-09-18、PR #977)**: 今回の失敗は環境ではなく決定的な違反 (`duplicate_link_ratio` 3 URL、
-  `SITEWIDE-DUPLICATE-LINK-RATIO-01` の症状)。つまりこの job は「本番 R2 依存の揺れ」と「diff から選ぶ代表
-  テンプレートに既知のサイト横断違反が乗る」の 2 経路で赤になり、どちらも PR のコード差分と独立に結果が変わる。
-- **次**: 週次の `page-quality:audit-weekly` が既にあるので、PR では必須から外して scheduled に寄せるのが最小。
-  PR に残すなら R2 読みを固定 fixture (build 時に落とした snapshot) に差し替え、readiness 待ちを
-  60 秒から伸ばし、`digest-mismatch` を warning に落として決定的にする。
-- **完了条件**: PR run 5 回連続で page-quality の結果がコード差分以外で変わらない。
-- **実施 (2026-09-18)**: 最小案を採り、`pr-quality-check.yml` から `page-quality` job を削除して `quality-check` の
-  needs から外した (`ci-test-tiering.test.mjs` が PR 必須への復活を拒否)。代表 URL 検査は `check:release-local` /
-  `page-quality:check` の明示実行、全 URL は週次 `page-quality-audit-weekly.yml` + alert Issue が担う。
-  rule (`page-quality-standards.md`)・自動化インベントリ・CI README を追従。PR 必須へ戻す条件 (R2 固定 fixture
-  で決定的にする) は rule に残した。残件はその決定的化のみで、着手するかはオーナー判断。
 
 ### [CI-SPEED-STATIC-GATES-HEAVY-STEPS-01] Static Gates の重い step (Commit-back Contract 115 秒 / SEO Meta Factual 46 秒) を軽くするか scheduled へ寄せる
 
@@ -960,7 +883,7 @@ updated: 2026-09-21
   `docs:check` が発火する。これらは develop-quality-gate / Static Gates でも走るので最大 3 重実行。
 - **次**: pre-commit に残すのは commit-msg / 一時ファイル掃除 / secret 走査 / file-url・import.meta guard /
   `preflight-commit.mjs --commit-static` (7 並列 1 秒) だけにする。metric config 系 6 本は
-  `preflight:pr` に集約し (`CI-SPEED-PREFLIGHT-PR-REGISTRY-01`)、`npx tsx` の起動を 1 プロセスに
+  `preflight:pr` に集約し (gate 一覧は 2026-09-24 に `quality-gates.json` 由来へ変更済み)、`npx tsx` の起動を 1 プロセスに
   まとめる runner を検討する。`package.json` を image pipeline / docs の trigger から外す
   (依存追加のたびに両方が走る理由が無い)。
 - **停止条件**: 外した検査が CI 側 (develop-gate または Static Gates) に無いものは外さない
@@ -1573,6 +1496,60 @@ updated: 2026-09-21
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [SCRIPT-ORPHAN-DELETE-01] orphan スクリプトを紐づけ先カードの完了時に再判定する ((c) 群は 2026-09-24 判定済み)
+
+タグ: [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs で orphan 一覧を再取得] [起票:2026-08-17]
+
+- **owner**: uruhayato373 (削除可否はオーナー判断)
+- **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
+  (下記「orphan 29 本の分類」)。
+- **済 (2026-09-16)**: (a) 群 6 本をオーナー承認で削除。`estat/estimate-city-data-size.mjs` (D1 前提。出力・cache・
+  local-resources / .gitignore 登録も同時撤去) と、`blog/gen-chart-svg.cjs` / `lib/update-skill-primary-agent.cjs`
+  (maintenance-debt baseline の UNBOUNDED_LEGACY 1 件も除去) / `note/generate-remaining-covers.cjs` /
+  `note/inject-affiliate-blocks.mjs` / `sns/backfill-x-templates.cjs`。いずれも他スクリプト・skill・workflow からの参照なし。
+- **trigger**: 下表 (b) の紐づけ先カードが閉じたとき。そのカードに紐づくスクリプトだけを再判定する。
+- **次**: (c) 群は 2026-09-24 に判定・削除済み。残作業は (b) 群と (c) で残した 3 本の、紐づけ先が閉じた時点での再判定だけ。
+- **完了条件**: (b) 群と残した 3 本がすべて、紐づけ先の完了後に削除されるか恒常利用へ移っている。
+- **禁止**: (b) 群を巻き込んで一括削除しない。
+
+#### orphan 29 本の分類 (2026-08-17 実測・`check-agent-skill-consistency.cjs`)
+
+エントリ記載の 20 本は古い。実測は **29 本**。全件に残す/消す理由を付けた。
+
+**(a) 役目が終わっている 6 本** → 2026-09-16 に全て削除済み (上記「済」)
+
+**(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
+
+| 紐づけ先                                                                        | スクリプト                                                                                                                          |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`      | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
+| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                                     | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
+| `NOTE-MAGAZINE-REORG-01` (in-progress)                                          | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
+| `CHART-LINEAGE-RESIDUAL-01` (pending)                                           | `blog/resolve-scatter-axes.mjs`                                                                                                     |
+
+`restore-*-from-svg.mjs` は名前に反して**逆復元をしない** — 旧 SVG の表示値を
+「SSOT が正しいことの照合先」としてのみ使い、≥0.95 一致したときだけ SSOT から再生成する
+(`.claude/rules/blog-data-schema.md` §1.6 の捏造防止規約に適合)。名前だけで消さない。
+
+`probe-*` は note.com の UI が変わったとき再実行する read-only 調査用。note は SPA で
+DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp-publish` と同じ理由)。
+
+**(c) 用途が判断できなかった 9 本** → 2026-09-24 に判定済み (リリース #1021〜#1023 後も未使用を確認)
+
+- 削除 6 本: `blog/prefecture-food-profile.mjs` (一度きりの記事用・入力は /tmp) / `blog/select-conformance-candidates.mjs`
+  (依存する routine は 6 月から未登録・無効。`triggers.json` の該当定義に削除を注記) / `gsc/discover-trends-fetch.cjs`
+  (`/discover-trends` から呼ばれない) / `note/affiliate-incremental.sh` (単一広告・Profile 直書きの一度きり作業) /
+  `note/download-affiliate-banners.mjs` (取得済み・呼び出し元なし) / `note/expand-for-fix.mjs` (/tmp 入力の一度きり作業)
+- 残す 3 本: `blog/build-article-data-from-r2.mjs` (2026-08-26 にも修正あり。R2 から記事 data を作り直す代替手段) /
+  `note/publish-new-note.sh` (publish-note SKILL・テストから参照され使用中。orphan 一覧からも外れた) /
+  `psi/generate-cwv-pr.mjs` (有効な routine `stats47 weekly CWV PR` の手動代替として `triggers.json` に明記)
+
+**なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
+これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。
+warning のまま**理由付きで残す**のが正しい形で、これが本エントリの成果物。
+
+- **完了条件**: orphan 警告が 0 になるか、残るものが「なぜ残すか」を添えて記録されている。
+
 ### [NOTE-PAID-MANUSCRIPT-SYNC-01] API パッチで変えた有料記事 6 本の private R2 原稿を live 本文に追従させる
 
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [起票:2026-09-20]
@@ -1769,58 +1746,6 @@ updated: 2026-09-21
 - **次**: 対象キーが失効・rotation済みかを確認し、秘密検査で現行treeに残存がないことを確定する。
 - **trigger**: 履歴書換えを実施する場合は、全clone・fork・open branchへの影響を合意し、専用maintenance windowを取る。
 - **禁止**: owner承認なしにfilter-repo、force push、branch削除を行わない。
-
-### [SCRIPT-ORPHAN-DELETE-01] 用途を判断できない orphan スクリプト 9 本 ((c) 群) の要否判定
-
-タグ: [種類:意思決定] [実行:対話] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs で orphan 一覧を再取得] [起票:2026-08-17]
-
-- **owner**: uruhayato373 (削除可否はオーナー判断)
-- **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
-  (下記「orphan 29 本の分類」)。
-- **済 (2026-09-16)**: (a) 群 6 本をオーナー承認で削除。`estat/estimate-city-data-size.mjs` (D1 前提。出力・cache・
-  local-resources / .gitignore 登録も同時撤去) と、`blog/gen-chart-svg.cjs` / `lib/update-skill-primary-agent.cjs`
-  (maintenance-debt baseline の UNBOUNDED_LEGACY 1 件も除去) / `note/generate-remaining-covers.cjs` /
-  `note/inject-affiliate-blocks.mjs` / `sns/backfill-x-templates.cjs`。いずれも他スクリプト・skill・workflow からの参照なし。
-- **trigger**: 次のリリース (main マージ) 後。(c) 群 9 本が依然として未使用なら (a) と同じ扱いで削除する。
-- **次**: 検証コマンドで orphan 一覧を再取得し、(c) の 9 本それぞれに「使った / 使っていない」を付けてオーナーへ出す。
-- **完了条件**: (c) 群が削除されるか、(b) 群と同じく残す理由が本エントリに追記されている。
-- **禁止**: (b) 群を巻き込んで一括削除しない。
-
-#### orphan 29 本の分類 (2026-08-17 実測・`check-agent-skill-consistency.cjs`)
-
-エントリ記載の 20 本は古い。実測は **29 本**。全件に残す/消す理由を付けた。
-
-**(a) 役目が終わっている 6 本** → 2026-09-16 に全て削除済み (上記「済」)
-
-**(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
-
-| 紐づけ先                                                                        | スクリプト                                                                                                                          |
-| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`      | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
-| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                                     | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
-| `NOTE-MAGAZINE-REORG-01` (in-progress)                                          | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
-| `CHART-LINEAGE-RESIDUAL-01` (pending)                                           | `blog/resolve-scatter-axes.mjs`                                                                                                     |
-
-`restore-*-from-svg.mjs` は名前に反して**逆復元をしない** — 旧 SVG の表示値を
-「SSOT が正しいことの照合先」としてのみ使い、≥0.95 一致したときだけ SSOT から再生成する
-(`.claude/rules/blog-data-schema.md` §1.6 の捏造防止規約に適合)。名前だけで消さない。
-
-`probe-*` は note.com の UI が変わったとき再実行する read-only 調査用。note は SPA で
-DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp-publish` と同じ理由)。
-
-**(c) 用途が判断できない 9 本** → 1 リリース残して未使用なら (a) 群へ落とす (本カードの残作業)
-
-`blog/build-article-data-from-r2.mjs` / `blog/prefecture-food-profile.mjs` /
-`blog/select-conformance-candidates.mjs` / `gsc/discover-trends-fetch.cjs` /
-`note/affiliate-incremental.sh` / `note/download-affiliate-banners.mjs` /
-`note/expand-for-fix.mjs` / `note/publish-new-note.sh` / `psi/generate-cwv-pr.mjs`
-(元 10 本。`estat/estimate-city-data-size.mjs` は D1 前提が明確なので (a) へ寄せ、2026-09-16 に削除済み)
-
-**なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
-これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。
-warning のまま**理由付きで残す**のが正しい形で、これが本エントリの成果物。
-
-- **完了条件**: orphan 警告が 0 になるか、残るものが「なぜ残すか」を添えて記録されている。
 
 ### [T2-RANKING-NORM-SSG-01] ranking正規化派生のURL方針
 
