@@ -210,13 +210,26 @@ test("--pr は registry の trigger:pull_request かつ networkOrSecrets:none �
     fs.readFileSync(path.join(ROOT, ".claude/config/quality-gates.json"), "utf8"),
   );
   const expected = registry.gates.filter(
-    (gate) => gate.blocking === true && Array.isArray(gate.trigger) && gate.trigger.includes("pull_request") && gate.networkOrSecrets === "none",
+    (gate) =>
+      gate.blocking === true &&
+      Array.isArray(gate.trigger) &&
+      gate.trigger.includes("pull_request") &&
+      gate.networkOrSecrets === "none" &&
+      // 所要時間を測る gate は並列 preflight から外し、CI の単独 step だけで測る
+      gate.id !== "runtime-budget",
   );
   assert.ok(expected.length >= 20, `registry fixture が薄すぎる (${expected.length} 件) — quality-gates.json の読み込み自体が壊れていないか確認`);
   const names = new Set(PR_GATES.map((gate) => gate.name));
   for (const gate of expected) {
     assert.ok(names.has(gate.id), `registry gate ${gate.id} (trigger:pull_request, networkOrSecrets:none) が --pr に無い`);
   }
+});
+
+test("--pr は所要時間を測る runtime-budget を並列実行に混ぜない (自分の並列負荷で予算を超える)", () => {
+  const names = new Set(PR_GATES.map((gate) => gate.name));
+  assert.ok(!names.has("runtime-budget"), "runtime-budget が並列の --pr に入っている");
+  const workflow = fs.readFileSync(path.join(ROOT, ".github/workflows/pr-quality-check.yml"), "utf8");
+  assert.match(workflow, /run: node \.claude\/scripts\/lib\/check-runtime-budget\.cjs/, "CI の単独 step が無いと予算検査がどこでも走らなくなる");
 });
 
 test("--pr は networkOrSecrets が none でない registry gate を既定で実行しない (--with-network で opt-in)", () => {

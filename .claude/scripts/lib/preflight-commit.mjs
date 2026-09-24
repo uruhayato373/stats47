@@ -146,12 +146,21 @@ async function runRegistryCommand(command) {
  * 既存の手書き「Affiliate Compliance」ゲート (--check、無条件実行) に一本化する。
  */
 const REGISTRY_MANUAL_NETWORK_GATE_IDS = new Set(["affiliate-compliance", "affiliate-relevance"]);
+/**
+ * 他の gate を自分で走らせて所要時間を測る gate。preflight は gate を並列に回すので、
+ * ここに混ぜると自分の並列負荷で予算を超えて落ちる (2026-09-25 PR #1024 の CI で
+ * docs-links 8.9s / asset-policy 20.2s を計測して失敗)。CI は pr-quality-check.yml の
+ * 単独 step で測る。
+ */
+export const REGISTRY_TIMING_GATE_IDS = new Set(["runtime-budget"]);
 
 export function partitionRegistryGates(registry) {
   const eligible = (registry.gates ?? []).filter(
     (gate) => gate.blocking === true && Array.isArray(gate.trigger) && gate.trigger.includes("pull_request"),
   );
-  const offline = eligible.filter((gate) => gate.networkOrSecrets === "none");
+  const offline = eligible.filter(
+    (gate) => gate.networkOrSecrets === "none" && !REGISTRY_TIMING_GATE_IDS.has(gate.id),
+  );
   const network = eligible.filter(
     (gate) => gate.networkOrSecrets !== "none" && !REGISTRY_MANUAL_NETWORK_GATE_IDS.has(gate.id),
   );
