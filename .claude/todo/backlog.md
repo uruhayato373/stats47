@@ -321,6 +321,36 @@ updated: 2026-09-21
 - **停止条件**: 検査枠を増やすために API quota (2,000/日) の 75% を超えない。Indexing API は使わない。
 - **完了条件**: 上の検証コマンドが exit 0、`indexed-submitted` が 1 週以上記録され、運用サイクル監査の `search-growth-sources` が PASS。
 
+### [UI-REVIEW-LOOP-VERIFY-01] 週次 UI 検査のループが修正と本番確認まで CI で一巡することを確かめる
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/page-quality/ui-findings-queue.json');process.exit(q.findings.some(f=>f.status==='fixed'||f.resolved_by==='weekly-audit')?0:1)"] [起票:2026-09-24] [期日:2026-10-12]
+
+- **背景**: 2026-09-24 に検査 → 起票 → 修正 → 本番確認のループを入れた (`.claude/rules/page-quality-standards.md`「UI 指摘のループ」)。
+  同日の週次 (run 35966300757) で `UI-FIX-THEME` / `UI-FIX-PREFECTURE-DETAIL` / `UI-FIX-OTHER` の 3 枚が起票され、
+  キューと backlog が develop に commit された (`03a02d016`)。起票までは CI で確認済み。
+- **次**: ① `backlog-loop-daily` が UI-FIX カードを処理し、`ui-findings-queue.json` への `--mark-*` が develop に commit
+  されること (1 run 2 件・先行する sweep カードがあるため数日かかる)。② 直した指摘がリリース後の週次で done
+  (`resolved_by: weekly-audit`) になるか、残れば pending に戻って再起票されること。
+- **停止条件**: 本番 deploy はオーナー承認まで行わない。
+- **完了条件**: 検証コマンドが exit 0 (fixed か週次で確認済みの指摘が 1 件以上)、かつループの commit に `.claude/state/page-quality` が含まれている。
+
+### [CF-CPU-SURGE-01] 2026-09-11 以降の Workers CPU 時間の増加原因を特定し、差分 purge とブログ広告変更の効果を測る
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-24] [期日:2026-10-16]
+
+- **背景 (2026-09-24 実測)**: 請求書 6 通 (`cloudflare-cost-improvement/reference/weekly-snapshots/2026-W20〜W38.json`) で、
+  5 月以降の従量課金は毎月 Workers CPU ms の 1 行だけ (9/15 請求は超過 267M ms で $5.36)。9/15〜の請求期間は予算アラート
+  $3.06 に 5 日目で到達 (前 2 期間は 24〜26 日目)。日次 snapshot の CPU p50 は約 8→15〜22ms、p99 は約 1.4→2.8 秒で、
+  9/11〜12 のデプロイ後から増えている。候補は ① purge が HTML キャッシュへ実際に効くようになった (`f3a04de2b`)
+  ② テーマ拡充で 1 ページが重くなった ③ アクセス増。デプロイのたびに HTML キャッシュが消えることも実測した (30 日で 84 回)。
+- **済**: 楽天同期の全体 purge を差分 purge に変更 (`c15ea5708` / `db8c6acf8`、PR #1021 で本番反映済み)。
+  ブログの A8 バナー抑止 (`c9e2b6a93`) は develop のみで未リリース。
+- **次**: ① 9/25 JST 04:00 の `sync-rakuten-catalog` で purge が `--urls` (約 1,900 件) になり `--all` でないことをログで確かめる。
+  ② Cloudflare Observability で route 別の CPU 時間を見て主因を絞る (MCP 認証かダッシュボードのログインが要る)。
+  ③ 日次 snapshot の cpu_p50/p99 と 10/15 の請求書の CPU 行で効果を見る (請求書は invoice モードで記録)。
+- **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
+- **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している。
+
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中]
