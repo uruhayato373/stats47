@@ -80,8 +80,13 @@ export function resolveRakutenPurgePaths({
 
   const prefCodes = new Set(change.furusatoPrefCodes);
   for (const prefCode of prefCodes) paths.add(`/areas/${prefCode}`);
-  for (const city of fetchCities()) {
-    if (prefCodes.has(city.prefCode)) paths.add(`/areas/${city.prefCode}/cities/${city.cityCode}`);
+  // 政令指定都市・特別区の区は prefCode が親の市 (千代田区 13101 → 13100)。URL の親は常に県なので
+  // もう 1 段たどる (url-policy.ts の prefectureCodeForCity と同じ規則)。直接比べると 194 区が漏れる。
+  const cities = fetchCities();
+  const cityByCode = new Map(cities.map((city) => [city.cityCode, city]));
+  for (const city of cities) {
+    const prefCode = prefCodes.has(city.prefCode) ? city.prefCode : cityByCode.get(city.prefCode)?.prefCode;
+    if (prefCode && prefCodes.has(prefCode)) paths.add(`/areas/${prefCode}/cities/${city.cityCode}`);
   }
 
   return [...paths].sort();

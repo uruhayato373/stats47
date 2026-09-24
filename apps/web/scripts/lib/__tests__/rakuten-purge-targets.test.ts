@@ -56,6 +56,9 @@ describe("resolveRakutenPurgePaths", () => {
     });
     expect(paths).toContain("/areas/13000");
     expect(paths).toContain("/areas/13000/cities/13201"); // 八王子市 (city ページは @stats47/area の CITIES が母集合)
+    // 特別区・政令市の区は prefCode が親の市 (13101 → 13100) なので、1 段たどって県に揃える
+    expect(paths).toContain("/areas/13000/cities/13101"); // 千代田区
+    expect(paths.some((path) => path.startsWith("/areas/13100"))).toBe(false);
     expect(paths.some((path) => path.startsWith("/areas/27000"))).toBe(false);
     expect(paths.filter((path) => path.startsWith("/areas/13000/cities/")).length).toBeGreaterThan(20);
   });
