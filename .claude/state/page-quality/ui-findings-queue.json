@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T20:25:14.227Z",
+  "generatedAt": "2026-09-24T21:08:03.821Z",
   "auditAt": "2026-09-24T06:51:27.490Z",
   "findings": [
     {
@@ -10,14 +10,14 @@
       "metric_key": null,
       "severity": "high",
       "detail": "[mobile-390/high] 1枚目から2枚目にかけて、6件の分析カード全ての左側プレビュー枠: 「人口×地価」「人口×洪水」「人口×駅」など6つの分析カードすべてで、地図プレビュー画像の代わりに『地図プレビューを取得できませんでした』というグレーの空枠が表示されている。読者は地図の内容を全く確認できない。 → 地図プレビュー画像の生成・配信状況を確認し、失敗時のfallback表示ではなく正常な画像を出すよう修正する。\n[desktop-1440/high] 1枚目、6分析カードの左側プレビュー枠(mobile/tabletでも同一現象): デスクトップ幅でも同様に全カードのプレビュー画像が『地図プレビューを取得できませんでした』のまま。3幅すべてで再現するため一時的な読み込み遅延ではなく機能停止と見られる。 → プレビュー画像生成パイプラインの動作を確認し復旧する。",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T21:08:03.814Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "GEO-PREVIEW-MISSING-01",
-      "note": "手動カード GEO-PREVIEW-MISSING-01 (/geo の地図プレビュー欠落) が担当"
+      "note": "2026-09-25 /geo を force-dynamic 化して本番反映。本番でフォールバック 0 件・地図 path 72 本を確認"
     },
     {
       "key": "agent|municipality",
@@ -78,14 +78,14 @@
       "metric_key": null,
       "severity": "high",
       "detail": "[mobile-390/high] 1枚目、地図タブの日本地図タイル全体: 地図の背景タイルに『API KEY REQUIRED』の文字が何箇所も斜めに大きく透かし表示されており、地図が正しく読めない。地名(ウラジオストク、ソウルなど本来不要な国外都市名)も表示され、本番用の地図タイルになっていない。 → CartoDBの地図タイルAPIキーを本番環境に設定し、正規のタイルが表示されるようにする。\n[desktop-1440/high] 1枚目、地図タブの日本地図タイル(tablet-768でも同一現象): デスクトップでも同様に地図タイル全面に『API KEY REQUIRED』の透かしが表示され、海外の地名や不要な国境線まで見えてしまっている。3幅共通の問題。 → 地図タイルAPIキー設定を本番に反映し、全幅で再確認する。",
-      "status": "owner",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-24",
-      "fixed_at": null,
-      "resolved_at": "2026-09-24",
-      "resolved_by": "owner",
+      "fixed_at": "2026-09-24T21:08:03.545Z",
+      "resolved_at": null,
+      "resolved_by": null,
       "card": "MAP-BASEMAP-APIKEY-01",
-      "note": "手動カード MAP-BASEMAP-APIKEY-01 (CARTO の API KEY REQUIRED 透かし) が担当。タイル切替はオーナー判断"
+      "note": "2026-09-25 背景を地理院タイル (直接リアルタイム取得) へ切替、CARTO プロキシ撤去。本番 /ranking/total-population で透かし無し・出典「地理院タイル」を確認"
     },
     {
       "key": "agent|theme",
