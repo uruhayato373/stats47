@@ -733,26 +733,22 @@ updated: 2026-09-21
 - **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 
-### [AREA-DATABOOK-MISSING-VALUES-01] 県データブックの 2 指標 (犯罪率・住宅の床面積) に R2 観測値が無い
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:curl -s -o /dev/null -w '%{http_code}' https://storage.stats47.jp/app/ranking/crime-rate-per-1k/values.json が200を返す] [起票:2026-09-23]
-
-- **owner**: data-ingester (投入) / ranking-publisher (公開)
-- **実測 (2026-09-23)**: `AREA_DATABOOK_TEMPLATE` (`packages/data-configs/src/area-databook/template.ts`) が参照する `crime-rate-per-1k` (statsDataId 0000020311) と `housing-floor-area` (0000020308) は config が `isActive: true` だが、R2 の `app/ranking/<key>/values.json` と `app/stats/<key>/values.json` がどちらも 404 (`item.json` は 200)。`known-ranking-keys.ts` にも `gone-ranking-keys.ts` にも無く、`https://stats47.jp/ranking/crime-rate-per-1k` は 410。IG 地域カルーセルの生成で 47 県すべて取得失敗して発覚した。県ページのデータブックでこの 2 項目が空欄になっているかは未確認。
-- **原因と修正 (2026-09-25・main 反映待ち)**: 2 key はどちらも市区町村専用 config (`entities: city`・2005 年まで) で、都道府県の値は元から存在しない。data-refresh も「Not an active prefecture ranking」で拒否した。テンプレを都道府県の同義指標 `penal-code-offenses-recognized-per-1000` と、全住宅の県指標が無いため持ち家率の隣に `floor-area-per-dwelling-owner` (持ち家の延べ床面積) へ差し替えた (commit 9a4da5dc6)。
-- **残り**: main 反映後に `sync-snapshots` (only=area-profile) で databook.json を再生成し、`/areas/13000` で 2 項目に値が出ることを確かめて閉じる。
-- **旧・次**: ①県ページ (例 `/areas/13000`) のデータブックで 2 項目の表示を確認する。②e-Stat から観測値を投入し、memory `project_ranking_publish_pipeline_gap` の手順 (KNOWN/SITEMAP/R2 values/OGP) で公開する。投入できない事情があればテンプレートから外す。
-- **完了条件**: 2 指標の values.json が 200 を返し、県ページのデータブックに値が出る (またはテンプレートから外れている)。
-
 ### [METRIC-ACUPUNCTURIST-RATE-UNIT-01] 「人口10万対はり師数」の値が実数になっている
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23]
 
 - **owner**: data-ingester
 - **実測 (2026-09-23)**: `acupuncturist-rate` は title が「人口10万対はり師数」、unit が「人」だが、R2 `app/ranking/acupuncturist-rate/values.json` (2020) の値は東京都 22,314・大阪府 16,049・鳥取県 277 で、人口 10 万人あたりではなく実数。config は `statsDataId: 0004026940` / `cdCat01: 100` / `conversionFactor: 1` で、`normalizationOptions` に「人/10万人」があるのに基底値は正規化されていない。ランキングページもこの名前で実数を並べている。IG 地域カルーセルの試作で東京の「全国 1 位」として拾われて発覚した。
-- **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。
+- **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。 → 2026-09-25 確認: config の title は「知能犯認知件数」・unit「件」で実数と一致し、画面表示は正しい。key 名だけが per-100k で、変えると URL が変わるため本カードの対象外 (X 投稿で「10 万人あたり」と書かないことだけ注意)。
 - **原因と config 修正 (2026-09-24)**: 0004026940 で config が指していた cdTab=0120 は「はり師数」の実数 (東京都 22,314人)。人口10万対の率は cdTab=0160 (東京都 158.8、1位大阪府 181.6)。同じ誤りが柔道整復師数 (0140→0180) と看護師数 0004026841 (0270→0310) にもあった。3 config を率の列へ直し、二重割りを防ぐため「人口10万人あたり」の換算オプションを外し、seoTitle から古い順位の数値を外した。犯罪 3 件・火災死亡者数は title が実数名で値と一致しているので対象外。`validate:config` / `validate:years` / type-check / vitest 971 件 exit 0。
-- **次**: ① 3 metric (acupuncturist-rate / judo-therapist-rate / nurses-per-100k-population) を R2 へ再取り込みし item / values を再生成する。② 再取り込み後に率の値で seoTitle を作り直す。(商品パックの `product-factory/src/data/datasets/nurses-per-100k-population.ts` は既に率の値 (東京都 854.6) を持っており再生成は不要。R2 修正後に東京都が 854.6 になることで一致を確かめる。)
+- **進捗 (2026-09-25 07:15 JST 時点・別 PC で続きをやる人向け)**:
+  - 済: config を率の列へ修正 (main 反映済み、PR #1024) / R2 再取り込み (data-refresh run 36056848146 success。はり師 1位大阪府 181.6・柔道整復師 1位大阪府 105.5・看護師 1位高知県 1,623.4、東京都の看護師 854.6 は商品パック値と一致) / seoTitle・seoDescription を新しい値で再作成 (PR #1025 で main 反映、item 再生成 run 36063161344 success、本番 title で確認) / ランキング AI 解説を 3 件再生成 (audit blocker 0・critic PASS、publish-ai-content run 36061846323 success)。
+  - 実行中: `sync-snapshots.yml` only=master (run 36063838343、06:49 JST 開始)。他ページの「関連ランキング」カードが読む `app/category/<key>/items.json` の `top1` がまだ旧実数 (例: 柔道整復師・看護師ページに「1位 東京都 22,314人」) なので、その再生成と、同じ run 内の「変更があった ranking の OGP / カード画像」再生成・known/sitemap 再生成を待っている。
+- **次 (別 PC で再開したら)**:
+  1. `gh run view 36063838343` で success を確認する。failure / cancelled なら `gh workflow run sync-snapshots.yml --ref main -f only=master -f dry_run=false` を再実行する (r2-write の同時実行グループで待機中の run は後続に取り消されるので、他の R2 書き込み workflow と同時に投げない)。
+  2. この run が「keys changed」で PR を作っていたら中身を確認してマージする。
+  3. 確認: `curl -s "https://storage.stats47.jp/app/category/socialsecurity/items.json" | grep -o '"rankingKey":"acupuncturist-rate"[^}]*top1[^}]*}'` が大阪府 181.6 を返し、`curl -s https://stats47.jp/ranking/judo-therapist-rate | grep -c '22,314'` と `.../nurses-per-100k-population` が 0 になること。3 指標の OGP (`https://storage.stats47.jp/app/ranking/<key>/ogp/ogp.png`) も新しい順位で描かれていること。
+  4. すべて満たしたらこのカードを削除する。
 - **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
