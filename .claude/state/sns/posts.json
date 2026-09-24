@@ -18738,9 +18738,9 @@
     },
     {
       "id": 975,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.903Z",
-      "updated_at": "2026-09-23T08:55:22.909Z",
+      "updated_at": "2026-09-24T18:45:43.688Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -18750,13 +18750,15 @@
       "utm_url": "https://stats47.jp/ranking/pear-consumption-expenditure?utm_source=threads&utm_medium=social&utm_campaign=pear-consumption-expenditure&utm_content=shock",
       "template": "shock",
       "metric_keys": "pear-consumption-expenditure",
-      "scheduled_at": "2026-09-24T01:30:00.000Z"
+      "scheduled_at": "2026-09-24T01:30:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DdptWkqEwPS",
+      "posted_at": "2026-09-24T01:30:17.000Z"
     },
     {
       "id": 976,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.922Z",
-      "updated_at": "2026-09-23T08:55:34.814Z",
+      "updated_at": "2026-09-24T18:45:43.708Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -18766,7 +18768,9 @@
       "utm_url": "https://stats47.jp/areas/01000?utm_source=threads&utm_medium=social&utm_campaign=area-01000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-09-24T08:10:00.000Z"
+      "scheduled_at": "2026-09-24T08:10:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DdqbKCNCDsH",
+      "posted_at": "2026-09-24T08:10:32.000Z"
     },
     {
       "id": 977,
