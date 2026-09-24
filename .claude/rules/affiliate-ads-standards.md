@@ -184,7 +184,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 |---|---|
 | ranking | **出典調査 → タグ → categoryKey** (`resolveContentVertical`。2026-09-03) → vertical の banner (priority 上位) → text → AdSense fallback。native 枠とサイドバー (`AffiliateAdSlot vertical=`) は同じ解決結果を使う。**家計調査系 (SURVEY_AFFILIATE_MAP kakei-chousa) の本文中段 native は `RankingPageRakutenNativeSection` に置換** — モバイル(lg未満)=商品軸 `RakutenItemsCard position="rakuten-native"`（品目なしは地域軸で代替）、デスクトップ=地域軸 `FurusatoNozeiCard position="furusato-native"`（1位県、見出し「1位 ◯◯県の人気返礼品」）。右レールの商品カードは `hidden lg:block` でデスクトップ限定。**上段 in-content の A8 も家計調査系では描画しない** (本文の A8 はゼロ)。右レール除外 (`usedAffiliateAds`) は据え置き = 描画しなかった A8 をレールへ流さない (2026-09-16) |
 | category | `categoryKey` → vertical |
-| blog | **記事明示policy → 出典調査 → 記事 `tags`** (`resolveContentVertical`) → vertical の banner/text。明示 `null` は広告なし。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
+| blog | **記事明示policy → 出典調査 → 記事 `tags`** (`resolveContentVertical`) → vertical の banner/text。明示 `null` は広告なし。**出典調査だけで furusato になり、タイトルが単一県の食卓・食文化・特産品・返礼品でない記事は A8 の banner/text を出さない** (`resolveBlogBannerInput`・下記)。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
 | survey | `SURVEY_AFFILIATE_MAP[surveyKey]` → 無ければ所属ランキングの categoryKey 最頻値 |
 | theme | `relatedArticleTagKeys` → vertical、空なら `THEME_AFFILIATE_MAP[themeKey]` → vertical (フォールバック) |
 | area | `locationCode="area-sidebar"` の banner。AdSense停止中の県本文枠は地域意図として `furusato` vertical |
@@ -223,6 +223,14 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
   `.claude/state/ads/relevance-latest.json` へ出し、週次CIで更新する。
 - 監査結果はレビュー候補であり、自動修正しない。`affiliate-manager` が記事意図を確認し、必要な記事だけ
   明示policyへ追加する。広告の有無や vertical をモデルの推測で一括変更しない。
+- **出典調査だけで決まる furusato の決定的規則 (2026-09-24 オーナー判断)**: 家計調査の品目記事 (ビール・エアコン・
+  「身長が高い県ほどせんべい」等) にふるさと納税ポータルが出ていた。出典調査だけで furusato になる記事のうち、
+  タイトルが単一県の食卓・食文化・特産品・返礼品 (`isRegionalFoodCultureTitle`。楽天の県別返礼品カードと同じ判定)
+  でないものは **A8 の banner/text を出さない** (`resolveBlogBannerInput`)。タグへ落とすと economy (FP 相談・NISA) に
+  なりさらに合わないので空にする (§5)。楽天カードの判定は変えず、品目記事の商品カードは残す。
+  実測: 出典調査だけで furusato の 222 本 → 抑止 180 本 / 維持 42 本。成果はふるさと本舗 729 表示・2 クリック、
+  au PAY ふるさと納税 255 表示・1 クリック (4 週)。これはタイトルに対する決定的規則で、モデルの推測による一括変更ではない。
+  `--live` がページと同じ関数で全記事を再計算し、抑止すべき記事にバナーが残れば exit 1 にする (週次 CI)。
 
 ### priority 規約
 
