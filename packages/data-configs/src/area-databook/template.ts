@@ -250,9 +250,9 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               rankingKey: "owner-occupied-housing-ratio",
               shortLabel: "持ち家率",
             },
-            { rankingKey: "housing-floor-area", shortLabel: "延べ床面積" },
+            { rankingKey: "floor-area-per-dwelling-owner", shortLabel: "持ち家の延べ床面積" },
             {
-              rankingKey: "crime-rate-per-1k",
+              rankingKey: "penal-code-offenses-recognized-per-1000",
               shortLabel: "犯罪認知件数(千人比)",
             },
           ],
