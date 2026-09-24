@@ -118,6 +118,20 @@ export function refineBySitemap(cls, inSitemap) {
 }
 
 /**
+ * resolved-by-design と判断済みの URL を、週次の再構築でも by-design のまま保つか。
+ * - 404 のまま → 保つ (人が「この 404 は意図どおり」と確定したもの)
+ * - 判断したときと同じ action に分類される → 保つ。`--mark-by-design` は status と note しか変えないので
+ *   old.action が判断時の分類になる。GSC-COV-* カードで「対応不要」とした 200 の URL (sitemap-gap /
+ *   content-check) をここで保たないと、毎週 pending に戻って同じ URL が再起票される
+ * - 測定できなかった (recheck) → 判断を変える材料が無いので保つ
+ * - 分類が変わった (sitemap に載った・5xx になった等) → 通常分類へ戻して再確認する
+ */
+export function keepsDesignJudgment(old, action, http) {
+  if (old?.status !== "resolved-by-design") return false;
+  return http === 404 || action === old.action || action === "recheck";
+}
+
+/**
  * バックログカードの対象 URL のうち、まだ処理されていないものを返す。
  * 処理済み = pending でない、かつ done 以外は理由 (note) 付き。キューから消えた URL は
  * GSC の未登録リストに居なくなったので処理済みとして扱う。

@@ -54,6 +54,7 @@ import {
   applyInspectionObservations,
   findUnhandledBatchUrls,
   getObserveAfterFixEntries,
+  keepsDesignJudgment,
   normalizeQueueUrl,
   refineBySitemap,
   sitemapKey,
@@ -781,13 +782,9 @@ async function build() {
       status = "resolved-by-design";
     } else if (old && old.status === "in-progress") {
       status = "in-progress"; // 人/agent が作業中 → 触らない
-    } else if (
-      old &&
-      old.status === "resolved-by-design" &&
-      http === 404
-    ) {
-      // 人が「この 404 は意図どおり」と確定した URL は、同じ 404 の間は再オープンしない。
-      // 200/5xx 等へ変化した場合は通常分類へ戻して再確認する。
+    } else if (keepsDesignJudgment(old, cls.action, http)) {
+      // 人/agent が by-design と確定した URL は、404 のまま・同じ分類のままなら再オープンしない。
+      // 分類が変わった場合は通常分類へ戻して再確認する。
       status = "resolved-by-design";
     } else if (old && old.status === "done") {
       // done だが再び壊れて検出された場合のみ pending に戻す

@@ -5,6 +5,7 @@ import {
   applyInspectionObservations,
   findUnhandledBatchUrls,
   getObserveAfterFixEntries,
+  keepsDesignJudgment,
   normalizeQueueUrl,
   refineBySitemap,
   RESOLVED_BY_INSPECTION,
@@ -130,4 +131,20 @@ test("カードの gate は pending と理由なしの処理を未処理とし�
     ]),
     ["https://stats47.jp/a", "https://stats47.jp/c"],
   );
+});
+
+test("カードで対応不要と判断した 200 の URL は、同じ分類のままなら週次の再構築で pending に戻さない", () => {
+  // --mark-by-design は status と note しか変えないので、判断時の action が old に残る
+  const judged = entry({ action: "sitemap-gap", status: "resolved-by-design", note: "意図的に sitemap 外" });
+  assert.equal(keepsDesignJudgment(judged, "sitemap-gap", 200), true);
+  assert.equal(keepsDesignJudgment({ ...judged, action: "content-check" }, "content-check", 200), true);
+  // 測定できなかった週 (recheck) は判断を変える材料が無い
+  assert.equal(keepsDesignJudgment(judged, "recheck", 0), true);
+  // 状況が変わったら通常分類へ戻して再確認する
+  assert.equal(keepsDesignJudgment(judged, "observe-after-fix", 200), false); // sitemap に載った
+  assert.equal(keepsDesignJudgment(judged, "fix-5xx", 503), false);
+  // 従来どおり: 404 のままの by-design は保つ。by-design でない URL は対象外
+  assert.equal(keepsDesignJudgment(entry({ action: "verify-intent", status: "resolved-by-design" }), "verify-intent", 404), true);
+  assert.equal(keepsDesignJudgment(entry({ action: "sitemap-gap", status: "pending" }), "sitemap-gap", 200), false);
+  assert.equal(keepsDesignJudgment(undefined, "sitemap-gap", 200), false);
 });

@@ -107,6 +107,8 @@ node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
 - actionable カテゴリ (404 / soft404 / 5xx / crawled-not-indexed / discovered) のみ実測する。意図的カテゴリは放置。
 - 最新 export の入力週が実行週より 2 週以上古い場合は fail-closed で停止する。履歴診断だけで古い入力を使う場合に限り `--allow-stale-source` を明示する。
 - 状態 (pending / in-progress / done / resolved-by-design) を **upsert で保持**。done を毎回潰さない。
+  `--mark-by-design` した URL は、404 のまま・判断時と同じ action のままなら再構築でも pending に戻さない
+  (`keepsDesignJudgment`。戻すと GSC-COV-* カードで対応不要とした 200 の URL が毎週再起票される)。
 
 ### Phase 3 — 報告
 - `.claude/state/gsc/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
