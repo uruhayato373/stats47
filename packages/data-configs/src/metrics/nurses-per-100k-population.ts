@@ -8,7 +8,7 @@ export const nursesPer100kPopulation: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004026841",
-    "cdTab": "0270",
+    "cdTab": "0310",
     "displayName": "衛生行政報告例",
     "url": "https://www.mhlw.go.jp/toukei/saikin/hw/eisei_houkoku/20/",
   },
@@ -31,24 +31,8 @@ export const nursesPer100kPopulation: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
-  "seoTitle": "人口10万対看護師数 都道府県ランキング【2020年】｜1位東京都（120,049.0人）",
-  "seoDescription": "2020年の人口10万対看護師数を都道府県別に比較。1位は東京都（120,049.0人）、最下位は鳥取県（7,556.0人）、最大と最小の差は15.9倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "人口10万対看護師数 都道府県ランキング【2020年】",
+  "seoDescription": "2020年の人口10万対看護師数（就業看護師数を人口10万人当たりに換算した値）を都道府県別に比較。出典は厚生労働省「衛生行政報告例」。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const employedOutsideThePrefecture: MetricConfig = {
   "key": "employed-outside-the-prefecture",
   "title": "県外就職者比率",
-  "subtitle": "〜2020年",
+  "subtitle": "2019年度〜",
+  "description": "公共職業安定所（ハローワーク）の一般職業紹介（新規学卒者を除く）で成立した就職件数（年度計）のうち、他の都道府県の事業所へ就職した件数の割合。算式は「他県への就職件数 ÷ 就職件数 × 100」で、分母は就職者数ではなく就職件数。2018年度以前は「1 − 県内就職件数 ÷ 就職件数」で算出した別系列（県外就職者比率（～2018年））。",
   "unit": "％",
   "category": "laborwage",
   "source": {
@@ -17,7 +18,7 @@ export const employedOutsideThePrefecture: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2019,
     "to": 2024,
   },
   "yearFormat": "fiscal",
