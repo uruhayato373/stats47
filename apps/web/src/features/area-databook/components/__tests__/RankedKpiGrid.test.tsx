@@ -90,4 +90,25 @@ describe("RankedKpiGrid", () => {
       expect(c).toContain("@md:block");
     }
   });
+
+  // 2026-09-25 UI 全面点検: 県データブックの数値カード約 50 個に年が無く、いつの値か分からなかった。
+  it("値には年を添え、全国平均と並べるときも年を先に出す", () => {
+    const withYear = {
+      metrics: {
+        population: { value: 1_157_000, rank: 31, year: "2023年", unit: "人", nationalAvg: 2_600_000 },
+      },
+    } as unknown as Parameters<typeof RankedKpiGrid>[0]["databook"];
+    const plain = renderToStaticMarkup(
+      <RankedKpiGrid metrics={[metric("population", "人口")]} databook={withYear} />,
+    );
+    expect(plain).toContain("2023年");
+    const withAvg = renderToStaticMarkup(
+      <RankedKpiGrid
+        metrics={[{ ...metric("population", "人口"), compareNationalAvg: true }]}
+        databook={withYear}
+      />,
+    );
+    expect(withAvg).toMatch(/2023年 ・ 全国平均 2,600,000/);
+  });
 });
+

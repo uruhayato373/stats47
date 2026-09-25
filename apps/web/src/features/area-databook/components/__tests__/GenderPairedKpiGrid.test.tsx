@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import { GenderPairedKpiGrid } from "../GenderPairedKpiGrid";
+import { GenderPairedKpiGrid, pairYearLabel } from "../GenderPairedKpiGrid";
 
 /**
  * 男女 KPI の可読性契約。
@@ -67,5 +67,19 @@ describe("GenderPairedKpiGrid", () => {
     const html = markup();
     expect(html.match(/shadow-sm/g)).toHaveLength(1);
     expect(html).toContain("divide-y");
+  });
+});
+
+// 2026-09-25 UI 全面点検: 数値だけではいつの値か分からなかった。男女で年が違えば両方出す。
+describe("pairYearLabel", () => {
+  it("男女が同じ年なら 1 つ", () => {
+    expect(pairYearLabel("2020年", "2020年")).toBe("2020年");
+  });
+  it("年が違えば両方", () => {
+    expect(pairYearLabel("2020年", "2022年")).toBe("男 2020年 / 女 2022年");
+  });
+  it("片方しか値が無ければその年、両方無ければ出さない", () => {
+    expect(pairYearLabel(undefined, "2022年")).toBe("2022年");
+    expect(pairYearLabel(undefined, undefined)).toBeNull();
   });
 });

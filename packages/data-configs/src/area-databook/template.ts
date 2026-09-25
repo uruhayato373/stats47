@@ -487,7 +487,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "education-facility",
       kind: "education-facility",
       title: "学校・施設",
-      description: "人口 10 万人当たりの施設数など",
+      description: "人口当たりの医師数と施設数",
       sortOrder: 70,
       blocks: [
         {
@@ -496,10 +496,13 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
           columns: 3,
           metrics: [
             {
-              rankingKey: "physicians-in-medical-facilities",
+              rankingKey: "physicians-in-medical-facilities-per-100k",
               shortLabel: "医師数(10万人比)",
             },
-            { rankingKey: "general-hospital-count", shortLabel: "一般病院数" },
+            {
+              rankingKey: "general-hospital-count-per-100k",
+              shortLabel: "一般病院数(10万人比)",
+            },
             {
               rankingKey: "general-clinic-count-per-100k",
               shortLabel: "一般診療所数(10万人比)",
@@ -525,7 +528,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "consumption",
       kind: "consumption",
       title: "消費",
-      description: "県庁所在市の 1 世帯当たり年間支出",
+      description: "県庁所在市の二人以上世帯。消費支出は 1 か月当たり、ほかは消費支出に占める割合",
       sortOrder: 140,
       blocks: [
         {
@@ -536,7 +539,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             {
               rankingKey:
                 "consumption-expenditure-multi-person-households-per-month",
-              shortLabel: "消費支出",
+              shortLabel: "消費支出(月額)",
               capitalCityValue: true,
               selection: {
                 proposedBy: BOOK,

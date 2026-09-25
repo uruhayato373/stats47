@@ -87,6 +87,7 @@ export function GenderPairedKpiGrid({ pairs, databook }: Props) {
         const male = databook?.metrics[p.maleKey] ?? null;
         const female = databook?.metrics[p.femaleKey] ?? null;
         const unit = male?.unit ?? female?.unit ?? "";
+        const yearLabel = pairYearLabel(male?.year, female?.year);
         return (
           <div
             key={p.label}
@@ -99,8 +100,11 @@ export function GenderPairedKpiGrid({ pairs, databook }: Props) {
               unit={unit}
               tone="male"
             />
-            <div className="flex w-24 shrink-0 items-center justify-center border-x border-border bg-muted/30 px-2 text-center text-xs font-medium text-muted-foreground">
+            <div className="flex w-24 shrink-0 flex-col items-center justify-center gap-0.5 border-x border-border bg-muted/30 px-2 text-center text-xs font-medium text-muted-foreground">
               {p.label}
+              {yearLabel && (
+                <span className="text-[10px] font-normal tabular-nums">{yearLabel}</span>
+              )}
             </div>
             <GenderCell
               href={`/ranking/${p.femaleKey}`}
@@ -114,4 +118,10 @@ export function GenderPairedKpiGrid({ pairs, databook }: Props) {
       })}
     </div>
   );
+}
+
+/** 男女の値の年。同じなら 1 つ、違えば両方を出す (値だけではいつの値か分からないため) */
+export function pairYearLabel(maleYear?: string, femaleYear?: string): string | null {
+  if (maleYear && femaleYear && maleYear !== femaleYear) return `男 ${maleYear} / 女 ${femaleYear}`;
+  return maleYear ?? femaleYear ?? null;
 }

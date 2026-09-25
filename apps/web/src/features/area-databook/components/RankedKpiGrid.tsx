@@ -112,10 +112,17 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
                   <RankBadge rank={v.rank} tone={rankToneByPosition(v.rank)} />
                 )}
               </dd>
-              {v && m.compareNationalAvg && (
+              {/* 値だけではいつの値か分からないので年を必ず添える (2026-09-25) */}
+              {v && (
                 <dd className="mt-0.5 text-[11px] tabular-nums text-muted-foreground">
-                  全国平均 {formatValue(v.nationalAvg)}
-                  {v.unit}
+                  {v.year}
+                  {m.compareNationalAvg && (
+                    <>
+                      {" ・ 全国平均 "}
+                      {formatValue(v.nationalAvg)}
+                      {v.unit}
+                    </>
+                  )}
                 </dd>
               )}
             </div>
