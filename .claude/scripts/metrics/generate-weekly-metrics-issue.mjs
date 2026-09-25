@@ -21,6 +21,7 @@ import { join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
+import { aspRevenueLines, productRevenueLine } from './nsm-revenue-lines.mjs';
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -208,6 +209,14 @@ function daysBetween(from, to) {
  * ソースが古い項目は「判定不能」と出して毎週目に入るようにする
  * (正典: docs/00_プロジェクト管理/02_収益化戦略.md §1・§3.2)。
  */
+function readJsonOrNull(relativePath) {
+  try {
+    return JSON.parse(readFileSync(join(PROJECT_ROOT, relativePath), "utf-8"));
+  } catch {
+    return null;
+  }
+}
+
 function revenueSection(week) {
   const lines = [];
   const weekMon = monOfWeek(week);
@@ -239,33 +248,36 @@ function revenueSection(week) {
       lines.push(
         `- アフィリエイト: 観測 ${latestAff.date}（${windowDays ?? "?"} 日）imp **${num(imp)}** / click **${num(clicks)}**` +
           `${ctr == null ? "" : ` / CTR **${ctr.toFixed(3)}%**`}。` +
-          "確定発生額は ASP 管理画面が正典で、ここには含めない",
+          "発生・確定の件数と金額は下の ASP 別の行",
       );
     }
   }
 
-  // --- 商品: 実売の台帳。observations が空なら「実売 0 件」と「未計測」を区別して書く。
-  const ledgerPath = join(PROJECT_ROOT, ".claude/state/products/sales-ledger.json");
-  if (!existsSync(ledgerPath)) {
-    lines.push("- 商品: **判定不能**（sales-ledger.json が存在しない）");
-  } else {
-    let ledger = null;
-    try {
-      ledger = JSON.parse(readFileSync(ledgerPath, "utf-8"));
-    } catch {
-      ledger = null;
-    }
-    const obs = Array.isArray(ledger?.observations) ? ledger.observations : null;
-    if (obs == null) {
-      lines.push("- 商品: **判定不能**（sales-ledger.json に observations 配列が無い）");
-    } else if (obs.length === 0) {
-      lines.push("- 商品: **¥0**（実売の観測 0 件。有料 pilot 未開始 = ADMIN-STAT-PILOT-01）");
-    } else {
-      const inWeek = obs.filter((o) => typeof o?.date === "string" && o.date <= sundayStr);
-      const total = inWeek.reduce((sum, o) => sum + (num(o.amountYen) ?? 0), 0);
-      lines.push(`- 商品: **¥${total.toLocaleString("ja-JP")}**（観測 ${inWeek.length} 件）`);
-    }
-  }
+  // --- ASP 別の発生・確定。認証切れ・古い観測は 0 円にせず「判定不能」と書く (nsm-revenue-lines.mjs)。
+  lines.push(
+    ...aspRevenueLines({
+      authLatest: readJsonOrNull(".claude/state/metrics/authenticated/latest.json"),
+      a8Results: readJsonOrNull(".claude/state/metrics/affiliate/a8-results.json"),
+      moshimoResults: readJsonOrNull(".claude/state/metrics/affiliate/moshimo-results.json"),
+      asOf: weekSun,
+    }).map((line) => `  ${line}`),
+  );
+
+  // --- 商品: 実売の台帳。販売中の商品があるのに記録 0 件なら ¥0 ではなく判定不能 (nsm-revenue-lines.mjs)。
+  const kdpPublication = readJsonOrNull(".claude/state/products/kdp-weekly-publication.json");
+  const portfolio = kdpPublication?.portfolio;
+  const liveProductCount =
+    Number.isInteger(portfolio?.s1Live) && Number.isInteger(portfolio?.pilotLive)
+      ? portfolio.s1Live + portfolio.pilotLive
+      : null;
+  lines.push(
+    productRevenueLine({
+      ledger: readJsonOrNull(".claude/state/products/sales-ledger.json"),
+      liveProductCount,
+      weekStart: weekMon.toISOString().slice(0, 10),
+      weekEnd: sundayStr,
+    }),
+  );
 
   lines.push("");
   lines.push(
