@@ -1,19 +1,21 @@
 {
-  "generatedAt": "2026-09-24T00:32:32.046Z",
+  "generatedAt": "2026-09-25T00:36:01.444Z",
   "gscSnapshot": "2026-W38",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2408,
+    "total": 2420,
     "done": 2166,
     "needsRegen": 242,
     "needsByReason": {
       "missing": 241,
       "incomplete": 1
     },
-    "notEligible": 0,
-    "notEligibleByCode": {},
+    "notEligible": 12,
+    "notEligibleByCode": {
+      "no-values": 12
+    },
     "doneButUnhealthy": 0,
     "doneImpressions": 88770,
     "needsImpressions": 927,
@@ -8958,11 +8960,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": [
-        "pref-len"
-      ],
-      "lastModified": "Wed, 02 Sep 2026 11:15:05 GMT",
-      "updatedAt": "2026-09-02T11:10:53.853Z"
+      "warns": [],
+      "lastModified": "Thu, 24 Sep 2026 21:32:22 GMT",
+      "updatedAt": "2026-09-24T21:20:26.331Z"
     },
     {
       "rankingKey": "pharmacist-count",
@@ -14043,8 +14043,8 @@
       "reason": "ok",
       "blockers": [],
       "warns": [],
-      "lastModified": "Sun, 06 Sep 2026 23:12:11 GMT",
-      "updatedAt": "2026-09-06T23:09:28.853Z"
+      "lastModified": "Thu, 24 Sep 2026 21:32:22 GMT",
+      "updatedAt": "2026-09-24T21:20:37.496Z"
     },
     {
       "rankingKey": "junior-high-club-per100-baseball-soft",
@@ -18027,8 +18027,8 @@
       "reason": "ok",
       "blockers": [],
       "warns": [],
-      "lastModified": "Sun, 06 Sep 2026 23:11:59 GMT",
-      "updatedAt": "2026-09-06T23:09:25.405Z"
+      "lastModified": "Thu, 24 Sep 2026 21:32:22 GMT",
+      "updatedAt": "2026-09-24T21:20:26.280Z"
     },
     {
       "rankingKey": "adult-class-lecture-count-per-million",
@@ -18398,6 +18398,34 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:00 GMT",
       "updatedAt": "2026-09-06T23:09:25.613Z"
+    },
+    {
+      "rankingKey": "auto-insurance-penetration-bodily-injury-actual",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
+    },
+    {
+      "rankingKey": "auto-insurance-penetration-bodily-injury-fixed",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
     },
     {
       "rankingKey": "auto-liability-insurance-amount-received-per-payment",
@@ -19254,6 +19282,20 @@
       "updatedAt": "2026-09-06T23:09:25.949Z"
     },
     {
+      "rankingKey": "child-abuse-consultation-cases",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
+    },
+    {
       "rankingKey": "child-rearing-allowance-recipients",
       "impressions": 0,
       "clicks": 0,
@@ -20059,6 +20101,20 @@
       "updatedAt": "2026-09-06T13:04:30.837Z"
     },
     {
+      "rankingKey": "cram-school-establishment-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
+    },
+    {
       "rankingKey": "criminal-arrest-rate",
       "impressions": 0,
       "clicks": 0,
@@ -20287,6 +20343,20 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 21:23:17 GMT",
       "updatedAt": "2026-09-06T14:27:29.836Z"
+    },
+    {
+      "rankingKey": "deaths-cerebral-infarction-per-100k",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
     },
     {
       "rankingKey": "deaths-cerebrovascular-disease-per-100k",
@@ -21689,6 +21759,34 @@
       "updatedAt": "2026-09-06T23:09:27.110Z"
     },
     {
+      "rankingKey": "fire-affected-persons-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
+    },
+    {
+      "rankingKey": "fire-damage-amount",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
+    },
+    {
       "rankingKey": "fire-damage-casualties-per-accident",
       "impressions": 0,
       "clicks": 0,
@@ -22271,6 +22369,20 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:06 GMT",
       "updatedAt": "2026-09-06T23:09:27.550Z"
+    },
+    {
+      "rankingKey": "fresh-vegetables-consumption-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
     },
     {
       "rankingKey": "fulfillment-rate",
@@ -25151,6 +25263,20 @@
       "updatedAt": "2026-09-06T23:09:29.787Z"
     },
     {
+      "rankingKey": "mothers-age-at-first-birth",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
+    },
+    {
       "rankingKey": "movers-in",
       "impressions": 0,
       "clicks": 0,
@@ -25987,6 +26113,20 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:17 GMT",
       "updatedAt": "2026-09-06T23:09:30.439Z"
+    },
+    {
+      "rankingKey": "nursery-waiting-children-count",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
     },
     {
       "rankingKey": "nurses-general-hospital-per-100beds",
@@ -28882,6 +29022,20 @@
       "updatedAt": "2026-09-06T09:52:32.501Z"
     },
     {
+      "rankingKey": "seafood-consumption-expenditure",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
+    },
+    {
       "rankingKey": "secondary-activity-avg-time-employed-female",
       "impressions": 0,
       "clicks": 0,
@@ -29916,6 +30070,20 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:33 GMT",
       "updatedAt": "2026-09-06T23:09:34.157Z"
+    },
+    {
+      "rankingKey": "three-generation-household-members",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "not-eligible",
+      "reason": "data:no-values",
+      "blockers": [],
+      "dataBlockers": [
+        "no-values"
+      ],
+      "dataReason": "values.json が R2 に無い",
+      "dataYear": null
     },
     {
       "rankingKey": "toll-road-fee-consumption-expenditure",
