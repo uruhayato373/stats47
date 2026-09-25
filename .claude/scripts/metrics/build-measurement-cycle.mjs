@@ -18,7 +18,7 @@ import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
 import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
 import {
   countOpsImprovements, parseCsv, renderCycleMarkdown, summarizeCloudflare, summarizeDimensionGaps, summarizeEngine,
-  summarizeJourney, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
+  summarizeJourney, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
 } from "./lib/measurement-cycle.mjs";
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
@@ -83,6 +83,9 @@ function main() {
   const transitions = readSlice(snapshotDir, "internal-transitions");
   const landing = readSlice(snapshotDir, "landing-context");
   const events = readSlice(snapshotDir, "event-volume");
+  // NavClickTracker (2026-09-26) のデプロイ前の週は nav-click-surfaces.csv が無い。無ければ節を出さない
+  const navClicksPath = join(snapshotDir, "nav-click-surfaces.csv");
+  const navClicks = existsSync(navClicksPath) ? parseCsv(readFileSync(navClicksPath, "utf8")) : null;
   const pagesCleanPath = join(snapshotDir, "pages-clean.csv");
   const pagesClean = existsSync(pagesCleanPath) ? parseCsv(readFileSync(pagesCleanPath, "utf8")) : null;
 
@@ -126,6 +129,7 @@ function main() {
     engine: summarizeEngine({ verdicts, gscRows }),
     operations: buildOperations(week, asOf, pending),
     journey: transitions.rows && pagesClean ? summarizeJourney({ transitions: transitions.rows, pagesClean }) : null,
+    navCoverage: transitions.rows && navClicks ? summarizeNavCoverage({ transitions: transitions.rows, navClicks }) : null,
     workContext: landing.rows ? summarizeWorkContext(landing.rows) : null,
     dimensionGaps: registeredParams && events.rows
       ? summarizeDimensionGaps({ ledgerEntries, registeredParams, eventVolume: events.rows })

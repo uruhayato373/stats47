@@ -265,12 +265,8 @@ jobs:
         continue-on-error: true
         run: npm run metrics:adsense-diagnostics -- ${{ steps.week.outputs.week }}
 
-      # AdSense 施策の before/after を surface する（判定はせず improvement-triage に委ねる）。
-      # deploy 済み施策ごとに history.csv + history-devices.csv で差分を出し、交絡/汚染を明示する。
-      # 結果は .claude/state/metrics/adsense/impact-LATEST.md に書かれ、下の git add で commit される。
-      - name: 📐 Surface AdSense 施策 impact (before/after)
-        continue-on-error: true
-        run: node .claude/scripts/metrics/measure-adsense-impact.mjs --out .claude/state/metrics/adsense/impact-LATEST.md
+      # AdSense 施策の before/after (measure-adsense-impact.mjs) は 2026-09-26 に外した。2026-09-20 の恒久停止後も
+      # impact-LATEST.md を毎週書き換え、data-storage.md の「凍結記録」と矛盾したため (ADSENSE-WEEKLY-STEP-01)。
 
       # 「次に何を書くか」(topic-queue) を再構築する。GSC クエリギャップ + R2 相関 snapshot を
       # 入力にした新規記事ネタの状態付きキュー。生産・レビューはローカル/セッションで人が回す。

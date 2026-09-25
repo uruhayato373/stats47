@@ -22,6 +22,7 @@ import { execFileSync } from "node:child_process";
 import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
 import { aspRevenueLines, productRevenueLine } from './nsm-revenue-lines.mjs';
+import { formatCycleHealth, readCycleHealth } from './lib/cycle-health.mjs';
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -446,6 +447,9 @@ function main() {
   lines.push("## 🔁 計測→記録→改善サイクル");
   lines.push("");
   lines.push(cycleSection(week));
+  lines.push("## 🩺 サイクルの健全性（止まっている段）");
+  lines.push("");
+  lines.push(formatCycleHealth(readCycleHealth(PROJECT_ROOT, new Date().toISOString().slice(0, 10))));
   lines.push("## 🚨 今週の自動起票 Issue（閾値違反）");
   lines.push("");
   lines.push(alertsSection(week));

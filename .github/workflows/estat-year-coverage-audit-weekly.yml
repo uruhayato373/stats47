@@ -68,11 +68,15 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # CYCLE-HEALTH-01: 要拡張候補を backlog カードに自動起票する (開いている YEAR-COV カードは 1 枚まで)
+      - name: 🗂️ Sync year coverage backlog card
+        run: node .claude/scripts/data/sync-year-coverage-backlog.mjs || echo "::warning::year coverage backlog sync failed, continuing"
+
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/data/estat-year-coverage
+          git add .claude/state/data/estat-year-coverage .claude/todo/backlog.md
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0

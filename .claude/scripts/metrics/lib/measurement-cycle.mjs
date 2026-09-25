@@ -59,6 +59,31 @@ export function summarizeJourney({ transitions, pagesClean }) {
   };
 }
 
+/**
+ * サイト内クリックの計測の被覆率 (NAV-CLICK-COVERAGE-01 P4)。
+ * 分母はサイト内のページ移動 (referrer 集計・計装に依らない)、分子は導線名の付いた nav_click。
+ * 導線名なし (unlabeled) の上位は、次に導線名を付けるべき行き先のページ種別を示す。
+ * @param {{ transitions: object[], navClicks: object[] }} input  navClicks は nav-click-surfaces.csv (nav_surface, nav_label, eventCount)
+ */
+export function summarizeNavCoverage({ transitions, navClicks }) {
+  const internalTransitions = sum(transitions, (r) => r.pageViews);
+  const total = sum(navClicks, (r) => r.eventCount);
+  const unlabeledRows = navClicks.filter((r) => r.nav_surface === "unlabeled");
+  const unlabeled = sum(unlabeledRows, (r) => r.eventCount);
+  const labeled = total - unlabeled;
+  return {
+    internalTransitions,
+    navClicks: total,
+    labeledClicks: labeled,
+    coverage: ratio(labeled, internalTransitions),
+    unlabeledShare: ratio(unlabeled, total),
+    topUnlabeled: unlabeledRows
+      .map((r) => ({ label: r.nav_label, clicks: Number(r.eventCount) }))
+      .sort((a, b) => b.clicks - a.clicks)
+      .slice(0, TOP_TRANSITIONS),
+  };
+}
+
 export function summarizeWorkContext(landingRows) {
   const rows = landingRows
     .filter((r) => r.landingPage && r.landingPage !== "(not set)")
@@ -252,6 +277,17 @@ export function renderCycleMarkdown(state) {
     lines.push(`| blog → ranking | ${j.blogToRanking.pageViews} | ${j.blogToRanking.fromPageViews} | ${pct(j.blogToRanking.rate)} |`);
     lines.push(`| themes → ranking | ${j.themesToRanking.pageViews} | ${j.themesToRanking.fromPageViews} | ${pct(j.themesToRanking.rate)} |`);
     lines.push(`| themes → blog | ${j.themesToBlog.pageViews} | ${j.themesToBlog.fromPageViews} | ${pct(j.themesToBlog.rate)} |`);
+    lines.push("");
+  }
+  if (state.navCoverage) {
+    const n = state.navCoverage;
+    lines.push(`**サイト内クリックの計測**: 導線名付きクリック ${n.labeledClicks} ÷ サイト内の移動 ${n.internalTransitions} = 被覆率 ${pct(n.coverage)}。` +
+      `nav_click ${n.navClicks} 件のうち導線名なし ${pct(n.unlabeledShare)}`);
+    if (n.topUnlabeled.length > 0) {
+      lines.push("");
+      lines.push("導線名なしの行き先 (上位。次に導線名を付ける候補):");
+      for (const r of n.topUnlabeled) lines.push(`- ${r.label} — ${r.clicks} クリック`);
+    }
     lines.push("");
   }
   if (state.workContext) {

@@ -75,6 +75,15 @@ const SURVEY_RANKING_NAV_FILTER = {
   },
 };
 
+const NAV_CLICK_FILTER = {
+  andGroup: {
+    expressions: [
+      JAPAN_FILTER,
+      { filter: { fieldName: "eventName", stringFilter: { matchType: "EXACT", value: "nav_click" } } },
+    ],
+  },
+};
+
 function toRow(row, dimNames, metricNames) {
   const r = {};
   dimNames.forEach((n, i) => {
@@ -210,6 +219,29 @@ async function main() {
       console.error(`[ga4-snapshot] ${report.name} failed:`, message);
     }
     writeFileSync(join(outDir, `${report.name}.meta.json`), JSON.stringify(metadata, null, 2) + "\n");
+  }
+
+  // nav-click-surfaces: nav_click を導線名 × ラベル別に数える (Japan-only・ローリング28日)。
+  // 計測サイクルが「導線名付きクリック ÷ サイト内の移動」と導線名なし (unlabeled) の上位を出す (NAV-CLICK-COVERAGE-01 P4)
+  try {
+    const apiDims = ["customEvent:nav_surface", "customEvent:nav_label"];
+    const metrics = ["eventCount"];
+    const raw = await runReportPaged(analyticsdata, property, {
+      dateRanges: rollingRange,
+      dimensions: apiDims.map((name) => ({ name })),
+      metrics: metrics.map((name) => ({ name })),
+      dimensionFilter: NAV_CLICK_FILTER,
+      orderBys: [{ metric: { metricName: "eventCount" }, desc: true }],
+    });
+    const rows = raw.map((row) => {
+      const value = toRow(row, apiDims, metrics);
+      return { nav_surface: value["customEvent:nav_surface"], nav_label: value["customEvent:nav_label"], eventCount: value.eventCount };
+    });
+    writeFileSync(join(outDir, "nav-click-surfaces.csv"), toCsv(rows, ["nav_surface", "nav_label", "eventCount"]));
+    summaryLines.push(`nav-click-surfaces.csv: ${rows.length} rows (Japan-only)`);
+  } catch (e) {
+    errors.push(`nav-click-surfaces: ${e.message}`);
+    console.error("[ga4-snapshot] nav-click-surfaces failed:", e.message);
   }
 
   // survey-navigation: 調査ハブ → ranking の内部遷移 (Japan-only)
