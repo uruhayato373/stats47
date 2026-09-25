@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W38",
   "asOf": "2026-09-20",
-  "generatedAt": "2026-09-24T12:28:50.389Z",
+  "generatedAt": "2026-09-25T22:38:11.537Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -11,12 +11,12 @@
       "detail": "transitions=ok landing=ok events=ok pages-clean=ok"
     },
     "customDimensions": {
-      "status": "ok",
-      "detail": "登録済み 16 件"
+      "status": "not-run",
+      "detail": "--admin-audit 未指定"
     },
     "improvements": {
       "status": "ok",
-      "detail": "active 30 件"
+      "detail": "active 29 件"
     },
     "effectVerdicts": {
       "status": "ok",
@@ -34,19 +34,11 @@
       }
     },
     "gsc": {
-      "active": 10,
+      "active": 9,
       "judgeable": 0,
       "missing": [
         {
           "id": "SEARCH-GROWTH-CYCLE-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "COVERAGE-LOOP-01",
           "missing": [
             "[gsc-page: /path]",
             "デプロイ済 YYYY-MM-DD",
@@ -271,6 +263,7 @@
       }
     ]
   },
+  "navCoverage": null,
   "workContext": {
     "baseline": {
       "sessions": 12326,
@@ -336,106 +329,9 @@
       }
     ]
   },
-  "dimensionGaps": {
-    "absentParams": 14,
-    "groups": [
-      {
-        "events": [
-          "home_featured_impression",
-          "home_featured_click"
-        ],
-        "params": [
-          "card_variant",
-          "slot",
-          "experiment_variant"
-        ],
-        "eventCount28d": 2028,
-        "breakdownReady": true
-      },
-      {
-        "events": [
-          "geo_map_interaction"
-        ],
-        "params": [
-          "interaction_type",
-          "area_code"
-        ],
-        "eventCount28d": 56,
-        "breakdownReady": false
-      },
-      {
-        "events": [
-          "geo_analysis_view"
-        ],
-        "params": [
-          "analysis_id",
-          "analysis_slug",
-          "geography",
-          "data_version"
-        ],
-        "eventCount28d": 35,
-        "breakdownReady": false
-      },
-      {
-        "events": [
-          "cta_click"
-        ],
-        "params": [
-          "cta_id",
-          "content_id",
-          "target_type",
-          "target_key"
-        ],
-        "eventCount28d": 3,
-        "breakdownReady": false
-      },
-      {
-        "events": [
-          "geo_region_select"
-        ],
-        "params": [
-          "area_code"
-        ],
-        "eventCount28d": 3,
-        "breakdownReady": false
-      },
-      {
-        "events": [
-          "geo_compare_add"
-        ],
-        "params": [
-          "area_code",
-          "comparison_size"
-        ],
-        "eventCount28d": 0,
-        "breakdownReady": false
-      }
-    ]
-  },
+  "dimensionGaps": null,
   "improvements": {
-    "active": 30,
-    "overdue": [
-      {
-        "id": "TOKEN-AICONTENT-01",
-        "status": "pending",
-        "due": "2026-09-07",
-        "metric": "cost",
-        "owner": "ranking-content-author"
-      },
-      {
-        "id": "COVERAGE-LOOP-01",
-        "status": "effect/pending",
-        "due": "2026-09-14",
-        "metric": "gsc",
-        "owner": "claude"
-      },
-      {
-        "id": "THEME-EXPANSION-EFFECT-01",
-        "status": "effect/pending",
-        "due": "2026-09-18",
-        "metric": "ga4/gsc/theme-quality",
-        "owner": "theme-portfolio-manager"
-      }
-    ]
+    "active": 29,
+    "overdue": []
   }
 }

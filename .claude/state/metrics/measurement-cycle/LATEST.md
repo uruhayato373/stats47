@@ -5,8 +5,8 @@
 | 入力 | 状態 |
 |---|---|
 | ga4 | ok（transitions=ok landing=ok events=ok pages-clean=ok） |
-| customDimensions | ok（登録済み 16 件） |
-| improvements | ok（active 30 件） |
+| customDimensions | not-run（--admin-audit 未指定） |
+| improvements | ok（active 29 件） |
 | effectVerdicts | ok（verdicts-2026-W38.json） |
 
 **回遊（referrer 集計）**
@@ -28,21 +28,11 @@
 - `/ranking/rice-consumption-quantity` — 136 セッション・PC 60.3%・平日業務時間 51.4%
 - `/blog/farmland-crisis-abandoned-land` — 106 セッション・PC 65.1%・平日業務時間 58.3%
 
-**未登録の custom dimension**（14 パラメータ。登録はオーナー作業・遡及しない）
-
-- 🟢 登録すれば内訳を読める `home_featured_impression` / `home_featured_click`（28 日 2028 件）: `card_variant`, `slot`, `experiment_variant`
-- ⚪ 発火量不足 `geo_map_interaction`（28 日 56 件）: `interaction_type`, `area_code`
-- ⚪ 発火量不足 `geo_analysis_view`（28 日 35 件）: `analysis_id`, `analysis_slug`, `geography`, `data_version`
-- ⚪ 発火量不足 `cta_click`（28 日 3 件）: `cta_id`, `content_id`, `target_type`, `target_key`
-- ⚪ 発火量不足 `geo_region_select`（28 日 3 件）: `area_code`
-- ⚪ 発火量不足 `geo_compare_add`（28 日 0 件）: `area_code`, `comparison_size`
-
 **効果判定エンジン**（2026-W38）: gsc-blog-wave 7 件 {"effect/pending":7}
 
-GSC 施策 10 件中、機械判定できるのは 0 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:
+GSC 施策 9 件中、機械判定できるのは 0 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:
 
 - `SEARCH-GROWTH-CYCLE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
-- `COVERAGE-LOOP-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `RANKING-REINDEX-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `BLOG-SEO-TYPES-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `BLOG-SEO-QUEUE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
@@ -60,9 +50,6 @@ GSC 施策 10 件中、機械判定できるのは 0 件。残りは目印が欠
 | Cloudflare | ok（最新 2026-09-20） | Workers 745661 req・error 0.7%・R2 A 66104 / B 2472549・保存 32.952 GB | warning 17・info 7（Workers error rate > 1%、R2 account storage > 18GB、stats47 bucket storage > 12.5GB、R2 egress > 5GB/日） | `R2-STORAGE-01` |
 | SNS | ok（最新 2026-09-20） | instagram 208 投稿・reach 22427・views 26030・eng 82 | —（閾値なし） | なし |
 
-**期日超過の判定待ち**: active 30 件中 3 件
+**期日超過の判定待ち**: active 29 件中 0 件
 
-- `TOKEN-AICONTENT-01` pending（期日 2026-09-07・cost）
-- `COVERAGE-LOOP-01` effect/pending（期日 2026-09-14・gsc）
-- `THEME-EXPANSION-EFFECT-01` effect/pending（期日 2026-09-18・ga4/gsc/theme-quality）
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T14:55:18.125Z",
+  "updatedAt": "2026-09-25T23:01:29.489Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -5222,6 +5222,142 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-25T14:55:18.125Z"
+    },
+    "UI-FULL-SWEEP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T21:42:19.271Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "目視 308 枚 (本番 44 URL×7 幅) と起票の突合"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-09-25 に撮影・目視を終え、指摘を RANKING-LEGEND/CHART-YAXIS/THEME-CHART-LOAD 等のカードへ起票済み (482c7fa61)。継続の仕組みは page-quality 週次 (6c9debf23)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T21:42:19.271Z"
+    },
+    "MAP-INITIAL-EXTENT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T21:49:01.311Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run src/leaflet (11件)",
+              "tsc --noEmit (visualization",
+              "web)"
+            ],
+            "pass": true
+          },
+          "evidence": "ランキング地図に fitToPrefectures を付け、全県に合わせるときは zoomSnap 0.25。localhost ランキング 390/640/1920px で 47 県が枠内 (640px: 幅90%・高さ85%。本番は左-41px・下+45px はみ出し)、/areas/47000/long-term-care 768px も枠内。初期 center/zoom は LCP 先読みタイルと同じまま",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T21:49:01.311Z"
+    },
+    "COUNT-CONSISTENCY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T21:51:44.977Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check:ranking-prominence",
+              "npx vitest run (ranking/category/municipalities 174件)",
+              "tsc --noEmit (web)"
+            ],
+            "pass": true
+          },
+          "evidence": "ranking-prominence の集計元を isActive だけから KNOWN_RANKING_KEYS に揃え、カテゴリ合計 2,449→2,408 (全件数と一致)、landweather 41→40・population 154→149 で本文と一致。副次: 本番で 410 を返す current-balance-ratio-city / foreign-population-per-100k が代表から外れた。municipalities の 1,718/1,717 は総数と値のある数で意味が違うので、テーマのカードを「値のある N 自",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T21:51:44.977Z"
+    },
+    "ADSENSE-WEEKLY-STEP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "AdSense 週次 impact step を外す",
+      "attempts": [
+        {
+          "at": "2026-09-25T23:01:29.489Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "python3 -c \"import yaml;yaml.safe_load(open('.github/workflows/fetch-metrics-weekly.yml'))\""
+            ],
+            "pass": true
+          },
+          "evidence": "fetch-metrics-weekly.yml から measure-adsense-impact step を削除。impact-LATEST.md は恒久停止当日 9/20 の W38 run でも書き換わっており data-storage.md の凍結宣言と矛盾していた。adsense-analyst.md の記述も更新",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T23:01:29.489Z"
     }
   }
 }

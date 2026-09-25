@@ -1,9 +1,24 @@
 {
-  "hash": "adc9f5bfc496e8539b3d4b01a4ec017b9d8285f2b3cdc39c7f19e3929a080c21",
-  "audited_at": "2026-09-25T21:07:32",
+  "hash": "890e63a3563b2ef7986786996809175a5cfedcd471f2348414fc6bdc52552a2a",
+  "audited_at": "2026-09-25T23:08:15",
   "files": [
-    ".claude/scripts/ads/__tests__/a8-append-core.test.mjs",
-    ".claude/scripts/ads/data/a8-curated.json",
-    ".claude/scripts/ads/lib/a8-append-core.mjs"
+    ".agents/skills/management/weekly-plan/SKILL.md",
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".claude/agents/adsense-analyst.md",
+    ".claude/rules/analytics-event-standards.md",
+    ".claude/scripts/data/__tests__/year-coverage-backlog.test.mjs",
+    ".claude/scripts/data/assert-year-coverage-batch.ts",
+    ".claude/scripts/data/lib/year-coverage-backlog.mjs",
+    ".claude/scripts/data/sync-year-coverage-backlog.mjs",
+    ".claude/scripts/metrics/__tests__/cycle-health.test.mjs",
+    ".claude/scripts/metrics/__tests__/measurement-cycle.test.mjs",
+    ".claude/scripts/metrics/build-measurement-cycle.mjs",
+    ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
+    ".claude/scripts/metrics/generate-weekly-metrics-issue.mjs",
+    ".claude/scripts/metrics/lib/cycle-health.mjs",
+    ".claude/scripts/metrics/lib/measurement-cycle.mjs",
+    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+    ".claude/skills/management/weekly-plan/SKILL.md",
+    ".claude/skills/management/weekly-review/SKILL.md"
   ]
 }
