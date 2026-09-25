@@ -745,7 +745,213 @@ updated: 2026-09-21
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
+### [BLOG-CARD-CALLOUT-RELEASE-01] 実装・検証済みで未コミットの「ブログのランキングカード」と「callout 改修・本文部品の角丸トークン」をコミットして本番へ出す
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-09-25]
+
+- **背景 (2026-09-25 セッション 84b4ab41 で実装、作業ツリーに未コミット)**:
+  ① ブログ本文の `<source-link>` を地図 + 上位 3 県のカード (`RankingLinkCard`) にし、`/api/ranking-card/[rankingKey]` (CDN 1 日キャッシュ)
+  から後読みする。クリックは `nav_click` (`nav_surface=blog_ranking_card`、`nav_label`=rankingKey) で送る。
+  ② callout をアイコン + 日本語ラベルの `Callout.tsx` にし (高さ 183→129px、左の色バー廃止)、種類の定義を `callout-config.ts` に集約。
+  ③ 本文の中の部品用の角丸トークン `--content-radius` (6px・`rounded-content`) を新設し、ランキングカード・callout・コードブロックに適用。
+  デザイン検査に 3 規則 (`content-radius-only-in-article-body` / `article-body-parts-use-content-radius` /
+  `content-radius-single-definition`) を追加し、callout の左バー例外を撤去。
+  検証済み: ブログ機能テスト 95 件・`@stats47/ranking` の home-featured テスト 9 件・型チェック (web / ranking / components)・lint・
+  デザイン検査・文書検査が通過。新規 3 規則は違反の注入で検知を確認。localhost で 390px / 1440px 表示とクリック計測を確認。
+- **対象ファイル**: 新規 `apps/web/src/app/api/ranking-card/[rankingKey]/route.ts`、`apps/web/src/features/blog/components/`
+  の `RankingLinkCard.tsx` / `Callout.tsx` / `callout-config.ts` / `__tests__/RankingLinkCard.test.tsx` / `__tests__/Callout.test.tsx`。
+  変更 `md-content.tsx` / `md-preprocessor.ts` / `__tests__/md-preprocessor.test.ts` / `features/blog/index.ts`、
+  `apps/web/src/lib/analytics/events.ts`、`apps/web/src/app/globals.css`、`apps/web/tailwind.config.ts`、
+  `packages/components/src/lib/cn.ts`、`packages/ranking/src/exporters/home-featured.ts` (+ test・`index.ts`、`deriveFeaturedTopList`)、
+  `docs/01_技術設計/04_デザインシステム.md`、`.claude/design-system/prohibited.md`、`.claude/rules/analytics-event-standards.md`、
+  および下記の混在ファイル。
+- **注意 (混在ファイル)**: `.claude/rules/ui-components.md` と `apps/web/scripts/check-design-system.mjs` には並行セッション
+  (順位チップの `RankBadge` 共通化など) の変更も入っている。`git add -A` せず、このカードの差分だけをハンク単位で選んでコミットする。
+- **次**: ① 並行セッションの状況を `npm run agent:session -- --status` で確認し、上記ファイルだけをコミット (develop)。
+  ② `NAV-CLICK-COVERAGE-01` の P1 と同時に出すなら、`RankingLinkCard` の `trackNavClick` を属性方式に揃えてから出す。
+  ③ 本番反映はブログが事前生成のためデプロイが必要。オーナー承認を得て、他の変更とまとめて 1 回で出す。
+- **完了条件**: 上記がコミット済みで本番デプロイされ、本番のブログ記事でランキングカード (地図 + 上位 3 県) と新しい callout が表示され、
+  GA4 に `nav_surface=blog_ranking_card` の `nav_click` が届いている。
+
+### [SITE-DISPLAY-SEMANTICS-AUDIT-01] 表示の「意味」(ラベルと指標・年・単位・用語) を定義・全 URL・代表 URL の 3 層で検査し、週次の UI 指摘キューにつなぐ
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25]
+
+- **背景 (2026-09-25 `/areas/13000` の全面確認)**: 見つかった不具合の大半は URL 単位ではなく定義 (テンプレート・カタログ) 単位で、
+  47 ページ等に一斉に出ていた。既存の週次ページ品質監査はレイアウトの崩れを見るが、ラベルと数値の意味は見ていない。
+  試作の判定規則 (「比・率・割合」ラベル × 総数指標 / 「年間」の節 × 月額指標 / 「10万人当たり」の節 × 総数) を
+  県データブックのテンプレート 47 指標に当てると 4 件を検出し、目視で見つけた 3 件 (医師数・一般病院数・消費支出) と一致した。
+- **次 (層ごと)**:
+  1. **定義の検査** (コミット前・CI): 県データブックのテンプレート、ThemeCatalog、page-components の定義を対象に、
+     ラベルと指標の意味の整合 (単位の正典 `packages/data-configs/src/unit/` で判定し、指標キーの名前推定に頼らない)、
+     数値カードの年表示の必須化、「推移」グラフの最低点数を検査する。
+  2. **全 URL の静的検査** (既存の週次 page-quality): 内部用語の混入 (辞書。例「保存則」)、単位記号の揺れ (%/％)、
+     `<title>` の週次変化、同じ店の広告の重複、`NaN`/`undefined` 等の異常文字を指標に加える。
+  3. **代表 URL のブラウザ検査**: 小さすぎる文字の数、スマホでのページ高さをテンプレート別の予算で見る
+     (グラフ文字の切れは `UI-CHART-TEXT-LOOP-01` が担当)。
+  4. 違反は既存の UI 指摘キュー (`ui-findings.ts`) に流し、`UI-FIX-*` の自動起票とループに乗せる。週次 UI 確認エージェントの
+     プロンプトに「データの意味」の観点を足すのは指摘止まり (関門にしない)。
+- **停止条件**: 誤検知の出る規則を blocker にしない。まず全コーパスで該当率を測り、確実なものだけ blocker、残りは warning。
+  数値そのものの一次統計との照合は既存のランキング整合性監査の担当で、ここでは扱わない。
+- **完了条件**: 3 層の検査が配線され、それぞれ違反を 1 件注入すると検知される。初回実行の検出結果を修正カードへ振り分け済み。
+
+### [AREA-DATABOOK-LABEL-INTEGRITY-01] 県データブックのラベルと指標の食い違い 3 件を直し、数値カードに年を出す
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run validate:area-databook --workspace=@stats47/data-configs] [起票:2026-09-25]
+
+- **背景 (2026-09-25 `/areas/13000` 実測・テンプレート共通なので 47 県すべて)**:
+  ① 「医師数(10万人比) 48,578人」は総数の指標 `physicians-in-medical-facilities` に「10万人比」のラベル
+  (`packages/data-configs/src/area-databook/template.ts:499`)。② 「消費」節の説明は「1 世帯当たり年間支出」だが、
+  消費支出は月額の指標 (`consumption-expenditure-multi-person-households-per-month`、351千円) で約 12 倍の読み違いを招く
+  (同 :528)。③ 「学校・施設」の説明「人口 10 万人当たりの施設数など」の下に総数 (一般病院数 588) が混ざる。
+  ④ データブックの数値カード (約 50 個) に年が表示されず、いつの値か分からない。
+- **次**: ① 医師数を人口 10 万人当たりの指標へ差し替える (実在・isActive を確認。無ければラベルを「医師数」に直す)。
+  ② 消費節の説明を月額に合わせるか、年額の指標へ差し替える。③ 一般病院数を人口当たりへ差し替えるか節の説明を直す。
+  ④ `RankedKpiGrid` / `GenderPairedKpiGrid` に年を出す (databook.json は year を既に持つ)。
+  テンプレート変更後は `generate:area-databook` → `validate:area-databook`。
+- **完了条件**: 上の 4 点が 47 県で解消し、`SITE-DISPLAY-SEMANTICS-AUDIT-01` の定義の検査 (整備後) で 0 件。
+
+### [AREA-HIGHLIGHTS-SSOT-01] 県の「特徴」の候補・値・選び方・表示を 1 系統にまとめ、Web と SNS で共用する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25]
+
+- **背景 (2026-09-25 実測)**: 県の特徴データが 3 系統ある。A `app/areas/<code>/profile.json` (公開中の全約 2,000 指標から
+  5位以内/43位以下を抽出、`packages/area-profile/src/exporters/area-profile-snapshot.ts`) を Web のカード
+  (`AreaRelatedRankingsCard`)・`<title>`/description・OGP 画像 (`AreaOgp`)・関連ブログ記事 (`AreaRelatedBlogArticles`) が
+  それぞれ先頭から切り出す。東京都は上位 893 件 (1位 588 件) で、表示は R2 の読み出し順で決まり、title もこれで決まる。
+  古い値 (上位 85 件・下位 20 件が 2014 年以前、「耕地放棄面積 2014年度」を表示中)、規模効果 (下位表示 4 件が農業の総数)、
+  「下位=赤の下向き矢印」による良否の誤解 (耕作放棄地 47 位 = 最少) を含む。B `databook.json` (人手選定の
+  `AREA_DATABOOK_TEMPLATE` の値・全国順位・年・単位・全国平均) と、C SNS `.claude/scripts/sns/lib/ig-area-props.ts`
+  (同じテンプレートの値・順位を values.json から自前で再計算) が並存する。SNS は 2026-09-23 に A を「品質が悪い」として捨て、
+  中立表現 (強み/弱みと書かない)・サブタイトル込みラベル・家計調査の県庁所在市注記を実装済み。しきい値 5/43/47 は
+  抽出関数・県ページ・市区町村ページに直書き。市区町村は Web が型 (`CityProfileData`) と R2 パスを独自定義
+  (パッケージに `cityProfileKeyPath` がある)。A の `percentile` は未使用。A の生成は sync-snapshots の約 15 分。
+  生成物の検査・週次監視は無い (しきい値関数の単体テストのみ)。
+- **次 (実行順)**:
+  1. 候補を `AREA_DATABOOK_TEMPLATE` の指標に限定し、値・順位に加えて表示ラベル (readerLabel + subtitle)・分野・
+     家計調査判定・決定力 (隣接順位との差) を `databook.json` に焼き込む。SNS の再計算は廃止して `databook.json` を読む。
+  2. SNS の選定純粋関数を `packages/area-profile` へ移し、既存の掲載価値スコア (`packages/data-configs/src/prominence/`、
+     GSC 需要を含み週次再生成) と新しさを加える。Web の 5 か所 (カード・title/description・OGP・関連ブログ記事・
+     市区町村ページ) と SNS が共用し、件数は引数で渡す。1 カード内の分野重複は禁止。
+  3. 「順位 + 指標 + 値」の一覧表示部品を 1 つにし、県カードと市区町村ページで共用する。表現は SNS の中立規約に合わせ、
+     良否の色は `METRIC_POLARITY` で確定した指標だけに付ける。**順位チップは既存の `RankBadge`
+     (`apps/web/src/components/atoms/RankBadge.tsx`、2026-09-25 `52e582d98`) を使い、新しい部品を作らない。** 現在
+     `AreaRelatedRankingsCard` は上位=`tone="positive"`・下位=`tone="negative"` 固定なので、`tone` を極性から決める形に変える
+     (高いほど良い→上位 positive / 下位 negative、高いほど悪い→逆、未確定→`neutral`)。見出しの上向き・下向き矢印の色も同じ規則にする。
+  4. 市区町村の型・R2 パスをパッケージに一本化し、しきい値は選定関数の中だけに置く。
+  5. 契約テストで固定する: 選定関数以外での `strengths` / `weaknesses` / databook 指標の直接切り出し 0・しきい値の直書き 0・
+     同じ値の二重計算 0。生成直後に 47 県を検査し (古い年・分野偏り・非公開指標)、違反で R2 反映を止める。
+     カードのクリックは `NAV-CLICK-COVERAGE-01` の導線名で計測する。
+- **決めること**: 県の `profile.json` を廃止するか (移行後は利用者 0) / 総数指標を人口当たり指標に置き換えるか /
+  掲載価値スコアと順位の極端さの組み合わせ方。
+- **停止条件**: OGP 画像の再生成と R2 反映はオーナー承認まで行わない。候補を絞った結果カードが埋まらない県が出たら、
+  テンプレートの拡充 (`area-databook-designer`) を先に行い、全指標プールへは戻さない。
+- **完了条件**: Web と SNS が同じ選定関数と `databook.json` を使う。47 県すべてでカードが埋まる候補数がある (実測)。
+  古い年 0・分野重複 0・良否の誤表示 0。契約テストと生成時検査が違反の注入で落ちる。title は選定入力が変わるとき以外に変わらない。
+
+### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23]
+
+- **背景 (2026-09-25 実測)**: 2026-08-23〜09-19 の 28 日 (国内) で、サイト内のページ移動は 11,319 件
+  (`internal-transitions.csv`) なのに、部品単位で記録されたクリックは最大 2,124 件 (`nav_click` 1,770 / `rail_click` 310 /
+  `home_featured_click` 41 / `cta_click` 3、`event-volume.csv`) で約 2 割にとどまる。計測は部品ごとの手動追加で、
+  `next/link` を使う 52 ファイルのうち計測呼び出しを持つのは 15 ファイルしかない。ブログ本文の `<source-link>` は
+  2026-09-25 まで無計測だった。外部リンク (GA4 拡張計測の `click` 234 件) とアフィリエイト (`affiliate_click` /
+  `affiliate_impression`) は記録済みなので、欠けているのは「サイト内のどの部品から移動したか」だけ。
+- **方針**: 計測の既定を「全部送る」に反転する。ルートレイアウトに共通のクリック監視を 1 つ置き (capture 登録。
+  Next.js の Link が既定動作を止めるため)、サイト内リンクのクリックを既存の `nav_click` で送る。導線名は外側の
+  `data-nav-surface`、ラベルは `data-nav-label` (無ければページ種別名。URL は `nav_href` が持つ) から取り、
+  導線名が無ければ `unlabeled` で送る。GA4 側の登録作業は不要 (登録済み dimension の値追加)。
+- **次 (実行順)**:
+  1. **P1**: 共通監視、型付き属性関数 (`NavSurface` で縛る)、既存 `trackNavClick` のうちリンクを送る箇所の属性化
+     (導線名・ラベルの値は変えない)。`rail_click` / `cta_click` / `home_featured_click` / `affiliate_click` は専用処理を残し、
+     領域に `data-click-owner` を付けて共通監視から除外する。リンク以外の操作 (チェックボックス・セレクト) は現状維持。
+     未コミットのブログカード (`RankingLinkCard` / `/api/ranking-card`) も属性方式にそろえる。
+     `UI-CARD-HEADER-SIMPLIFY-01` が同じレール部品 (`SurfaceCard.tsx` の `RailCard` 等) のクラスを変えるので、同じコミットに混ぜない
+     (P1 は属性の追加だけ、見出しの見た目は同カードで変える)。
+  2. **P2**: 全ページに出る共通領域 (ヘッダー・フッター・パンくず・ページ送り・タグ・ブログ本文リンク) に導線名を付ける。
+     目標の名前なし割合は代表 URL で実測してから決める。
+  3. **P3**: `page-quality` の全 URL 静的解析に「名前の無いサイト内リンク数」「計測担当の無い広告リンク数」を追加し、
+     テンプレート別に縮小専用の基準線を置いて、違反を既存の UI 指摘キュー (`UI-FIX-*` 起票) に流す。
+     描画後に出るリンクは代表 URL のブラウザ検査で数える。
+     **衝突注意**: `UI-CHART-TEXT-LOOP-01` (stash に途中成果あり) と `SITE-DISPLAY-SEMANTICS-AUDIT-01` も同じファイル群
+     (`.claude/scripts/page-quality/lib/ui-report.ts` の `UI_METRIC_KEYS`・`types.ts`・`page-quality-budgets.json`・`measure-static.ts`) に
+     指標を足す。並行して実装せず、後から入る側が先行分を取り込んでから足す。
+  4. **P4**: `fetch-ga4-snapshot.mjs` の `nav_click` 集計から「テンプレート別の `unlabeled` クリック上位」と
+     「導線名付きクリック ÷ サイト内ページ移動」を計測サイクルと週次レビューに出す。台帳
+     (`.claude/rules/analytics-event-standards.md`) に値追加とデプロイ日の件数不連続を書く。
+- **停止条件・禁止**: クリックを止める処理 (`preventDefault` / `stopPropagation`) を入れない。見た目・マークアップ構造・
+  クラスを変えない。タブ切替・スクロール等の画面内操作とアフィリエイトの表示回数計測は対象外。本番デプロイは P1 と P2 を
+  まとめて 1 回、オーナー承認の上で行う。デプロイ後に `nav_click` が 2 倍近く跳ねたら二重送信を疑い、先に原因を特定する。
+- **完了条件**: ① 単体テストが「1 クリック 1 件」「広告・`data-click-owner` 付きは送らない」「送信時に遷移を止めない」を
+  固定し、localhost の代表 7 種ページで実クリック 1 回につき送信 1 件を確認済み。② 本番デプロイ後の週次 page-quality に
+  新指標が出て、違反を 1 件注入すると検知されることを確認済み。③ 週次の計測サイクル出力に被覆率と `unlabeled` 上位が
+  出ている。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [BLOG-TOC-TOP-ONLY-01] ブログ記事の目次を本文の最上部 1 か所にし、右レールの追従領域を廃止する
+
+タグ: [UI・UX] [種類:改善] [実行:sweep] [起票:2026-09-25]
+
+- **背景 (2026-09-25 実測)**: 公開 606 記事の見出し数 (h2+h3) は中央値 5・90% が 8 以下、h3 を持つ記事は 78 本。
+  PC では目次が右レールの追従領域 (`ArticleShell` の `railSticky`) に固定され、読書中ずっと画面を占めてレールの
+  他の情報が見えにくい。狭い画面では目次が記事カードの外・タイトルより上に出ている。`railSticky` を使うのは
+  ブログ詳細だけで、`ArticleShell` の説明文「レール先頭は追従する目次」は「レールはページと一緒に自然に流れる」
+  規約 (`.claude/rules/ui-components.md`) とずれている。目次のクリックは未計測で、利用度のデータは無い。
+- **次**: ① `apps/web/src/app/blog/[slug]/page.tsx` で `ArticleTableOfContents` を記事ヘッダー (タイトル・
+  サブタイトル・タグ) の直後、本文の前に全幅共通で置き、レールと本文上部の 2 か所出しをやめる。見出しは全件表示し
+  折りたたまない。② `ArticleShell` から `railSticky` を削除し、説明文を規約に合わせる。③ 目次の領域に
+  `NAV-CLICK-COVERAGE-01` の導線名 (`blog_toc`) を付けて計測できるようにする (同カード P1 と同時でもよい)。
+  ④ `.claude/rules/ui-components.md`「Sticky aside の max-h 必須ルール」の適用箇所に `blog/[slug]/page.tsx` の左右 aside が
+  載っているので、追従をやめたら記述を直す。⑤ 本文上部に移した目次は「本文の中に置く部品」になるので、角丸は
+  `rounded-content` (同規約「角丸」の本文内部品) に従う。
+- **停止条件**: 右レールに独立スクロールや別の追従領域を新設しない。
+- **完了条件**: localhost の 390px / 1440px で「タイトル → 目次 → 本文」の順になり、右レールに目次が無く、
+  レールがページと一緒にスクロールする。`railSticky` への参照が 0 件で、型チェックとデザイン検査が通る。
+  `ui-components.md` の Sticky aside ルールの適用箇所が実装と一致している。
+
+### [AREA-DATABOOK-CHART-FIX-01] 県データブックの「推移」グラフの点数不足と、スマホで読めない文字・単位なしの軸を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25]
+
+- **背景 (2026-09-25 `/areas/13000` 実測)**: 「有効求人倍率の推移」は 2022年度の 1 点、「1人当たり県民所得の推移」は
+  2020〜2021年度の 2 点だけで推移として機能していない (e-Stat をその場で読むグラフ。`template.ts` の
+  `area-ov-job-opening` / `area-ov-prefectural-income`、原因は未確認)。390px では高さ 9px 未満のグラフ文字が 80 個あり、
+  「高齢化率・年少人口割合の推移」「高齢者世帯の推移」の縦軸に単位が無い。縦軸目盛りの切れは `UI-CHART-TEXT-LOOP-01` の担当。
+- **次**: ① 点数不足の原因 (statsDataId の年範囲・取得パラメータ・キャッシュ) を実測で特定し、年を揃えた系列に直すか、
+  推移グラフをやめて数値カードにする。② 狭い画面での文字サイズの下限と軸単位の表示を、共通チャート部品側で直す
+  (`chart-component-builder`)。③ 「推移」グラフの最低点数の検査は `SITE-DISPLAY-SEMANTICS-AUDIT-01` に含める。
+  **② は `UI-CHART-TEXT-LOOP-01` の D3 部品の修正 (文字を描画範囲に収める共通処理。14 部品分の途中成果が stash にある) と
+  同じファイル群を触る。** 先に同カードの stash を取り込み、その上で文字サイズの下限と軸単位を足す。
+- **完了条件**: 県データブックの推移グラフがすべて 3 点以上、390px でグラフ文字が 10px 以上、縦軸に単位がある。
+
+### [AREA-PAGE-LAYOUT-01] 県ページの長さと節構成を整理し、内部用語と表記揺れを除く
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25]
+
+- **背景 (2026-09-25 `/areas/13000` 実測)**: 390px でページ高 13,174px。データブックの数値カードがスマホで 1 行 1 個に並ぶため。
+  「地価」「旅行者」は数値 1 個、「産業」は 2 個で全幅の節を使い、「暮らし」(犯罪) と「安全・くらし」(交通事故) の分け方が
+  分かりにくい。空間分析カードに内部用語「保存則 47/47」がそのまま出る。「%」と「％」の混在、「11％」と「11.2％」の小数桁の不揃い、
+  見出し「東京都の市区町村40 件」の空白抜け。交通事故グラフの横軸は「年度」だが、元統計は暦年の可能性がある (未確認)。
+- **次**: ① スマホでも数値カードを 2 列にする。② 数値の少ない節を統合し、「暮らし」と「安全・くらし」の区分を決め直す
+  (`area-databook-designer`)。③ 「保存則」を読者向けの表現に直す。④ 単位記号・小数桁を共通の書式に揃える。
+  ⑤ 交通事故の年の型を出典で確かめる。
+- **完了条件**: 390px のページ高が現状比で大きく減り (目標値は ① の実装後に実測で決める)、1 指標だけの節が無く、
+  内部用語と表記揺れが 0 件。
+
+### [AFF-FURUSATO-SHOP-DIVERSITY-01] ふるさと納税・楽天の商品カードで同じ店の商品が並ぶのを避ける
+
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-25]
+
+- **背景 (2026-09-25 `/areas/13000` 実測)**: 「東京都の人気返礼品」の 4 件がすべて同じ店 (魚久) の商品だった。
+  同一案件の重複を避ける方針 (auto memory `affiliate-strategy`) に反し、読者には選択肢が 1 つに見える。
+  カード側に店単位の重複除去は見当たらない (`FurusatoNozeiCard` と楽天カタログ同期で店名・店コードによる除外の実装を確認できず)。
+- **次**: 楽天カタログのデータに店の識別子があるか確かめ、1 カード内は 1 店 1 件までにする。在庫が足りない県の扱い
+  (件数を減らすか、同じ店を許すか) を決める。
+- **停止条件**: 表示件数を減らす変更は `AFF-SLOT-REDUCTION-01` の計測と混ぜない。計測の区切り日を記録する。
+- **完了条件**: 47 県の返礼品カードで同じ店の商品が 2 件以上並ばない (在庫不足の県は決めた方針どおり)。
 
 ### [UI-CHART-TEXT-LOOP-01] チャートの文字のはみ出し・重なりを座標で検出し、起票から修正・本番確認までのループに乗せる
 
@@ -786,6 +992,8 @@ updated: 2026-09-21
   ③公開済み記事 SVG の該当件数を実測し、公開前 gate (`quality-gate.mjs`) を error にするか件数固定の baseline にするか決める
   ④`line.ts` を直してビール SVG を作り直す ⑤D3 の共通処理を型チェック・テストし、localhost の `/areas/13000` で
   `chart_text_issues` が 0 になることを確かめる ⑥残りのテスト ⑦週次監査を 1 回手動で流し、カードに手順が載ることを確かめる。
+- **関係するカード**: `AREA-DATABOOK-CHART-FIX-01` ② (狭い画面の文字サイズ・軸単位) は同じ D3 部品を触るので、こちらの stash を先に
+  取り込ませる。`NAV-CLICK-COVERAGE-01` P3 と `SITE-DISPLAY-SEMANTICS-AUDIT-01` も週次監査の同じファイル群に指標を足すので並行実装しない。
 - **停止条件・禁止**: R2 反映・ワークフローの dispatch・本番デプロイはオーナー承認。公開済み SVG の該当が多い場合、
   gate を error にして無関係なコミットを止めない (新規・再生成分だけ止める)。
 - **完了条件**: 週次監査が 2 指標を計測して UI-FIX カードに振り分け手順が載り、`/areas/13000` の縦軸切れとビール SVG の
@@ -813,6 +1021,7 @@ updated: 2026-09-21
   `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」の見出し・本文余白の記述。
 - **既存カードとの関係**: `UI-CARD-TYPOGRAPHY-UNIFY-01` の「契約」にある RailCard の見出し (灰色・中太・`border-b`) と本文余白 (`pb-4`) を
   **このカードが改訂する**。同カード C-1 の `no-manual-card-header` (手書きヘッダ禁止) は、新しい見出しの形を基準に書く。
+  `NAV-CLICK-COVERAGE-01` P1 が同じレール部品に計測用の属性を足すので、同じコミットに混ぜない。
 - **次 (実行順)**: ①`SurfaceCard.tsx` の見出しと本文余白を変える (RailCard と SectionCard が同時に変わる) ②`ChartPanel` の見出しを同じ定数へ
   ③`RailSearchCard` からカードと見出しを外す ④契約テストを「見出しの下に線が無い・行の間だけに線がある」形で固定し直し、デザインシステム文書を改訂
   ⑤localhost で代表ページ (`/` `/ranking/total-population` `/areas/13000` `/themes/population-dynamics` `/category/population` `/blog`
@@ -1861,6 +2070,20 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [AREA-TOC-MOBILE-01] 県ページの目次をスマホでも本文上部に出すか、16 項目をどう見せるかを決める
+
+タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-09-25]
+
+- **背景 (2026-09-25 localhost `/areas/13000` 実測)**: 「〇〇の目次」(県データブックの 16 節へのリンク、
+  `AREA_DATABOOK_TOC_ITEMS`) は PC では右レール最上部 (追従なし) にあるが、375px では 1 件も表示されない
+  (リンクの表示幅 0)。スマホには県ページの目次が実質無い。ブログと違い 16 項目あるので、本文上部へ縦に並べると
+  画面を大きく占める。
+- **決めること**: ① スマホで本文上部に目次を出すか。② 出すなら見せ方 (折り返す横並びのリンク / 主要節だけ /
+  その他)。表示領域に収まるリンク一覧は折りたたまない規約 (`.claude/rules/ui-components.md`) を前提にする。
+  ③ PC の右レールの目次を残すか、本文上部へ統一するか (`BLOG-TOC-TOP-ONLY-01` の「目次は本文最上部 1 か所」と
+  そろえるか)。判断材料に `NAV-CLICK-COVERAGE-01` の導線名で目次のクリックを数週観測してもよい。
+- **完了条件**: 採否と見せ方を決め、採るなら実装カードへ置き換える。見送るならカードを削除する。
 
 ### [RANKING-SOURCE-TRIPLE-01] ランキングページで出典が 3 か所に出る (ヒーロー行・ページ末尾・サイドバー) のを整理するか決める
 
