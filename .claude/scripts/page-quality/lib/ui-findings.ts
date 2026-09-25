@@ -111,6 +111,11 @@ export interface SyncContext {
   openCardIds: readonly string[];
   /** Claude の確認が今週実行されたか。されていなければ Claude の指摘は「消えた」と扱わない */
   agentReviewed: boolean;
+  /**
+   * 今週 Claude が確認したページ (`page_key`)。variants は数週で 1 巡するので、確認しなかったページの指摘は
+   * 「消えた」と扱わない。未指定 (旧形式の記録) なら全ページを確認したとみなす。
+   */
+  agentReviewedPages?: readonly string[];
 }
 
 export interface SyncCounts {
@@ -128,6 +133,7 @@ export function syncFindings(
 ): { queue: UiFinding[]; counts: SyncCounts } {
   const counts: SyncCounts = { added: 0, reopened: 0, resolved: 0, confirmedFixed: 0 };
   const openCards = new Set(ctx.openCardIds);
+  const reviewedPages = ctx.agentReviewedPages ? new Set(ctx.agentReviewedPages) : null;
   const seen = new Map(observed.map((o) => [o.key, o]));
   const reopen = (f: UiFinding, why: string): UiFinding => {
     counts.reopened += 1;
@@ -156,8 +162,8 @@ export function syncFindings(
       } else next.push(current);
       continue;
     }
-    // 今週観測されなかった。Claude の確認が走っていない週は Claude の指摘を判定しない
-    if (f.source === "agent" && !ctx.agentReviewed) next.push(f);
+    // 今週観測されなかった。Claude の確認が走っていない週・そのページを確認しなかった週は Claude の指摘を判定しない
+    if (f.source === "agent" && (!ctx.agentReviewed || (reviewedPages && !reviewedPages.has(f.template)))) next.push(f);
     else if (f.status === "fixed") {
       counts.confirmedFixed += 1;
       next.push(resolve(f, "weekly-audit"));
@@ -228,7 +234,8 @@ export function planUiCards({
   const cards: PlannedCard[] = [];
   for (const [template, findings] of [...pendingByTemplate].sort(([a], [b]) => a.localeCompare(b))) {
     const prefix = `${CARD_PREFIX}-${cardSlug(template)}-`;
-    if (openIds.some((id) => id.startsWith(prefix))) continue;
+    // 前方一致にしない: `UI-FIX-RANKING-` は variants のカード `UI-FIX-RANKING-OLD-2YEARS-<日付>` にも一致してしまう
+    if (openIds.some((id) => id.startsWith(prefix) && /^\d{8}$/.test(id.slice(prefix.length)))) continue;
     const picked = findings
       .sort((a, b) => (SEVERITY_RANK[b.severity] ?? 0) - (SEVERITY_RANK[a.severity] ?? 0) || a.key.localeCompare(b.key))
       .slice(0, BATCH_SIZE);
@@ -254,7 +261,7 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
   return [
     `### [${id}] UI 是正: ${template} の週次 UI 検査の指摘 ${findings.length} 件を直す`,
     "",
-    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}]`,
+    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}] [レーン:UI・回遊]`,
     "",
     `- **自動起票**: 週次のページ品質監査 (\`page-quality-audit-weekly.yml\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`.claude/state/page-quality/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
     `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`.claude/state/metrics/page-quality/LATEST.md\`。`,

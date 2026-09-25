@@ -141,6 +141,14 @@ test("Claude の確認が走らなかった週は、Claude の指摘を消えた
   assert.equal(queue[0].status, "pending");
 });
 
+test("variants の巡回で今週確認しなかったページの Claude の指摘は消えた扱いにせず、確認したページの指摘だけ閉じる", () => {
+  const unreviewed = finding({ key: "agent|ranking--old-2years", source: "agent", template: "ranking--old-2years", url: null, metric_key: null });
+  const reviewed = finding({ key: "agent|ranking", source: "agent", template: "ranking", url: null, metric_key: null });
+  const { queue } = syncFindings([unreviewed, reviewed], [], ctx({ agentReviewedPages: ["ranking"] }));
+  assert.equal(statusOf(queue, "agent|ranking--old-2years"), "pending");
+  assert.equal(statusOf(queue, "agent|ranking"), "done");
+});
+
 test("Claude の指摘の by-design は期限付き、機械検出の by-design は観測中は保つ", () => {
   const observed = observeFindings({ violations: [violation()] }, [agent()]);
   const agentDesign = (resolvedAt) =>
@@ -181,6 +189,20 @@ test("pending をページの種類ごとに 1 枚のカードにし、開いて
 });
 
 // ループ (build-backlog-queue) はバックログのパーサーでカードを読む。読めない形で起票すると誰も処理しない。
+test("variants のカードが開いていても代表URLのカードは止めず、ID はページの識別子から作る", () => {
+  const rep = finding({ key: "agent|ranking", source: "agent", template: "ranking", url: null, metric_key: null });
+  const variant = finding({ key: "agent|ranking--old-2years", source: "agent", template: "ranking--old-2years", url: null, metric_key: null });
+  const cards = planUiCards({
+    queue: [rep, variant],
+    openIds: ["UI-FIX-RANKING-OLD-2YEARS-20260927"],
+    today: "2026-10-04",
+    screenshotBaseUrl: "https://storage.stats47.jp",
+  });
+  assert.deepEqual(cards.map((c) => c.id), ["UI-FIX-RANKING-20261004"]);
+  const blocked = planUiCards({ queue: [rep, variant], openIds: ["UI-FIX-RANKING-20260927"], today: "2026-10-04", screenshotBaseUrl: "x" });
+  assert.deepEqual(blocked.map((c) => c.id), ["UI-FIX-RANKING-OLD-2YEARS-20261004"]);
+});
+
 test("起票したカードはバックログのパーサーで ID・sweep 実行・検証コマンドが読める", () => {
   const [card] = planUiCards({ queue: [finding()], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
   const backlog = "# backlog\n\n## 🔴 急ぎ\n\n## 🟡 通常\n\n### [OTHER-01] 既存\n\nタグ: [種類:改善] [実行:対話]\n";
