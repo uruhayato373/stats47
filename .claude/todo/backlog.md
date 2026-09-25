@@ -71,37 +71,6 @@ updated: 2026-09-21
   「2 週連続未達は分割か降格」「完了済み ID を計画に残さない」を入れる。
 - **完了条件**: 週次メトリクス Issue に 6 信号が 4 週続けて出て、検出 → 起票の未結び件数と Due 超過が減り、Must の連続未達が 2 週以内に解消されている。
 
-### [RANKING-LEGEND-DIRECTION-01] ランキングの地図の凡例と棒グラフが、値の大小・正負を逆に読ませる
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
-
-- **証拠 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: ① 全ランキング・全幅で、地図は濃い色 = 大きい値なのに、凡例は左端の濃い色に最小値を付けている
-  (例: `/ranking/national-pension-full-exemption-rate` の凡例「19.0 … 41.0%」。濃い赤の沖縄・九州が上位)。② `/ranking/population-growth-rate` の
-  「上位 3 県と最下位」の棒が負の値も絶対値の長さで描かれ、-18.7 の秋田県の棒が 2 位より長く見える。
-- **影響**: 色と棒の意味を逆に読ませる。ランキングは PV の約半分を占める最大の面。
-- **完了条件**: 凡例の色の並びが地図の配色と一致し、負の値を含む指標の棒が 0 を基準に左右へ伸びる。390 / 768 / 1440px の撮影で確認する。
-
-### [CHART-YAXIS-LABEL-CLIP-01] 県データブックのグラフで縦軸ラベルの先頭の桁が切れ、値を誤読させる
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
-
-- **証拠 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: `/areas/13000`・`/areas/01000`・`/areas/47000` の「年齢3区分人口の推移」で、縦軸の「1,400.0万」などが先頭の桁を失い
-  「400.0万」「00.0万」と表示される (全幅)。東京都の人口 1,400 万人が 400 万人に読める。
-- **次**: 軸ラベルの幅を値の桁数から確保し、「万人」単位で短く表記する。同じ部品を使う他のグラフも確認する。
-  県データブックのグラフ全般の改善は `AREA-DATABOOK-CHART-FIX-01`。
-- **完了条件**: 47 県すべてで縦軸ラベルが欠けずに出ることを、代表 3 県の 390 / 768 / 1440px 撮影と DOM の測定で確認する。
-
-### [THEME-CHART-LOAD-LATENCY-01] テーマと県×テーマのページでグラフが 10 秒以上空の枠のまま表示される
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
-
-- **証拠 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: `/themes/population-dynamics`・`/themes/real-income`・`/areas/13000/population-dynamics` で、「自然増減」「外国人の人口移動」
-  「実収入比較」「物価指数」などのグラフが灰色の空枠、「人口移動フロー」が「読み込み中…」のまま写った (全幅)。2026-09-25 に本番を
-  ブラウザで開き、全体をスクロールして 6 秒待った時点でも空で、その後に描画された。同じページで POST `/themes/population-dynamics`
-  (サーバーアクション) が約 40 件続けて発行されていた (`read_network_requests`)。**壊れてはいないが、描画まで 10 秒以上かかる**。
-- **経緯**: 2026-09-24 の週次で同じ空枠が指摘され、「本番でスクロール後に描画される誤検知」として撮影前にスクロールを通す修正で閉じた
-  (`ui-findings-queue.json` の `agent|theme`)。表示の不具合ではないが、読者に空枠が 10 秒以上見えることは体験の問題として残る。
-- **範囲**: テーマ 55 ページと県×テーマ 2,444 ページ (sitemap 実測) が同じ部品を使う。
-- **次**: 1 グラフ 1 リクエストの直列取得をまとめるか、サーバー側で先に解決して初期 HTML に含める。空枠の代わりに読み込み中の表示を出す。
-- **完了条件**: 代表ページで、画面に入ったグラフが 3 秒以内に描画される (撮影と計測で確認)。
-
 ### [UI-FULL-SWEEP-01] 全テンプレートをデータの型の違いごとに 7 幅で撮影・目視し、UI の問題をすべてバックログへ起票する
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
 
@@ -139,28 +108,6 @@ updated: 2026-09-21
   消えた扱いにしない (`agentReviewedPages`)。指摘は既存のループ (`ui-findings.ts --sync` → `UI-FIX-*` 自動起票 → backlog-loop が修正 →
   次の週次で本番確認) に乗る。初回の CI 実行 (2026-09-27 03:00 JST) の確認は `UI-REVIEW-LOOP-VERIFY-01` で行う。
   このカードは完了条件を満たしたので、backlog-loop の削除対象。
-
-### [DATA-SOURCE-ROLLOUT-01] 出典表示の統一を本番へ反映し、既存記事の本文移行と監査 ratchet を完了する
-
-タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [レーン:データ品質]
-
-- **状態 (2026-09-25 実施済み)**: PR #1027 マージ・デプロイ成功。`blog-data-source-migration.yml` で displaySources 16/16 と本文 531/531 を R2 へ書き戻し (put 後 GET 照合済み)、sync-snapshots で all.json に sources を焼いた。
-  週次監査の実測: 手書き節 67 (Kindle 章 61 + 出典を導出できない読み物 6) / 出典 0 件の図付き記事 1 (cc-estat-17 の架空値の説明図) / sources 未焼き込み 0。この値で ratchet の 3 上限を設定済み。本番の出典リンク先 (/survey/kakei-chousa・e-Stat dbview) は 200。
-- **残るもの**: 本文は SSG なので次回デプロイで R2 の移行後本文に置き換わる (描画時の変換で見た目は同じ)。docs/21 の原稿 27 本は次に公開・改稿するとき quality-gate が止めるので `migrate-data-source-sections.ts --outbox --apply` で変換する (カードの対象外)。
-- **完了条件**: 検証コマンドが exit 0 (ratchet の 3 上限を含む)。満たしているので backlog-loop が ledger 付きで削除してよい。
-
-### [GSC-COV-5XX-20260925] GSC 是正: 本番で 5xx を返し続ける 2 URL を直す
-
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt] [起票:2026-09-25] [レーン:SEO・ブログ]
-
-- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
-- **対象**:
-  - https://stats47.jp/blog/gasoline-consumption-quantity-vs-densely-inhabited-district (HTTP 503 / GSC: discovered-not-indexed / 最終クロール 1970-01-01)
-  - https://stats47.jp/blog/white-bread-consumption-quantity-prefecture-gap (HTTP 503 / GSC: discovered-not-indexed / 最終クロール 1970-01-01)
-- **次**: `--probe <url>` で 5xx が続くことを確かめ、該当ルート (`apps/web/src/app/`) と R2 データの読み込みから原因を特定して直す。3 回の再測定を経ても 5xx なので単発の障害ではない。
-- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
-- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
 
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
@@ -473,11 +420,19 @@ updated: 2026-09-21
   ブログの A8 バナー抑止 (`c9e2b6a93`) は develop のみで未リリース。
 - **次**: ① 9/25 JST 04:00 の `sync-rakuten-catalog` で purge が `--urls` (約 1,900 件) になり `--all` でないことをログで確かめる。
   ② Cloudflare Observability で route 別の CPU 時間を見て主因を絞る (MCP 認証かダッシュボードのログインが要る)。
+     2026-09-25 のセッションでも `cloudflare-observability` / `cloudflare-graphql` MCP は未認証だった。
+     再認証は対話セッションの `/mcp` でユーザーが行う。
   ③ 日次 snapshot の cpu_p50/p99 と 10/15 の請求書の CPU 行で効果を見る (請求書は invoice モードで記録)。
 - **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
 - **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している。
 - **観測の追記 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: 本番の撮影 308 回のうち 3 回で一時的な HTTP 503 (`/areas/29000/cities/29363` の 390・640px、`/category/landweather` の 390px)。
   同じ URL は直後の再取得で 3 回とも 200。
+  GSC 是正キューでも `/blog/gasoline-consumption-quantity-vs-densely-inhabited-district` (9/7・9/20) と
+  `/blog/white-bread-consumption-quantity-prefecture-gap` (9/20) が 503 と記録された。9/25 はキャッシュ迂回を含む 5 回すべて 200
+  (1 回目の描画は 2〜3 秒)。`GSC-COV-5XX-20260925` はこのカードへ原因調査を寄せて閉じた。
+- **関連する変更 (2026-09-25 夜・未リリース)**: `THEME-CHART-LOAD-LATENCY-01` で、テーマページの時系列取得を 1 回のサーバーアクションに
+  束ね、同じ指標の「選択県」と「全国」を R2 の 1 回の読み込みから作るようにした (リクエスト 48 → 2、R2 読み込みは指標数分)。
+  [仮説] テーマページ 1 表示あたりの Workers CPU 時間が減る。検証: リリース後の日次 snapshot の cpu_p50 / p99 を前週と比べる。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -926,22 +881,9 @@ updated: 2026-09-21
 - **停止条件**: 誤検知の出る規則を blocker にしない。まず全コーパスで該当率を測り、確実なものだけ blocker、残りは warning。
   数値そのものの一次統計との照合は既存のランキング整合性監査の担当で、ここでは扱わない。
 - **完了条件**: 3 層の検査が配線され、それぞれ違反を 1 件注入すると検知される。初回実行の検出結果を修正カードへ振り分け済み。
-
-### [AREA-DATABOOK-LABEL-INTEGRITY-01] 県データブックのラベルと指標の食い違い 3 件を直し、数値カードに年を出す
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run validate:area-databook --workspace=@stats47/data-configs] [起票:2026-09-25] [レーン:データ品質]
-
-- **背景 (2026-09-25 `/areas/13000` 実測・テンプレート共通なので 47 県すべて)**:
-  ① 「医師数(10万人比) 48,578人」は総数の指標 `physicians-in-medical-facilities` に「10万人比」のラベル
-  (`packages/data-configs/src/area-databook/template.ts:499`)。② 「消費」節の説明は「1 世帯当たり年間支出」だが、
-  消費支出は月額の指標 (`consumption-expenditure-multi-person-households-per-month`、351千円) で約 12 倍の読み違いを招く
-  (同 :528)。③ 「学校・施設」の説明「人口 10 万人当たりの施設数など」の下に総数 (一般病院数 588) が混ざる。
-  ④ データブックの数値カード (約 50 個) に年が表示されず、いつの値か分からない。
-- **次**: ① 医師数を人口 10 万人当たりの指標へ差し替える (実在・isActive を確認。無ければラベルを「医師数」に直す)。
-  ② 消費節の説明を月額に合わせるか、年額の指標へ差し替える。③ 一般病院数を人口当たりへ差し替えるか節の説明を直す。
-  ④ `RankedKpiGrid` / `GenderPairedKpiGrid` に年を出す (databook.json は year を既に持つ)。
-  テンプレート変更後は `generate:area-databook` → `validate:area-databook`。
-- **完了条件**: 上の 4 点が 47 県で解消し、`SITE-DISPLAY-SEMANTICS-AUDIT-01` の定義の検査 (整備後) で 0 件。
+- **検知すべき実例 (2026-09-25 に `AREA-DATABOOK-LABEL-INTEGRITY-01` で直した 4 件。定義の検査の回帰テストに使う)**:
+  ① 総数の指標に「10万人比」のラベル (医師数) ② 月額の指標を「年間支出」と説明 (消費支出) ③「人口当たり」と説明した節に
+  総数の指標 (一般病院数) ④ 数値カードに年が無い。
 
 ### [AREA-HIGHLIGHTS-SSOT-01] 県の「特徴」の候補・値・選び方・表示を 1 系統にまとめ、Web と SNS で共用する
 
@@ -1023,8 +965,22 @@ updated: 2026-09-21
   固定し、localhost の代表 7 種ページで実クリック 1 回につき送信 1 件を確認済み。② 本番デプロイ後の週次 page-quality に
   新指標が出て、違反を 1 件注入すると検知されることを確認済み。③ 週次の計測サイクル出力に被覆率と `unlabeled` 上位が
   出ている。
+- **先に付けた導線名 (2026-09-25)**: ブログの目次 (`ArticleTableOfContents`) に `data-nav-surface="blog_toc"` を付けた
+  (`BLOG-TOC-TOP-ONLY-01`)。この属性を読む仕組みはまだ無いので、目次のクリック数はこのカードの実装後に取れる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [NOTE-PLAN-DBLESS-01] note 企画 (docs/30) に残る「D1 にデータがある」前提を現行の R2 に直し、F-3 記事の扱いを決める
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:note・商品販売]
+
+- **背景 (2026-09-25 の docs 監査)**: 完全 DB レス (永続 D1 なし) へ移った後も、note 企画が D1 を現行の置き場として書いている。
+  agent が企画を読んで制作に入ると、存在しない D1 を探すか、廃止した構成を記事にする。
+  - `membership-articles/series-A-half-century.md` (7 箇所)・`series-C-practical.md`・`series-D-cross-analysis.md`: 「データは D1 にあり」
+  - `membership-articles/series-F-behind-the-scenes.md` の F-3「D1 + R2 で大量統計データを月¥5 で運用する」と `INDEX.md`・`membership-strategy.md` の同記事行: 記事の主題そのものが廃止した構成
+  - `backlog/A-localfinance-theme.md` の更新手順: 「ローカル D1 へ INSERT」
+- **次**: ① A/C/D は各指標の R2 `app/stats/<key>/values.json` と年数を確かめてから置き場の記述を直す (年数は検証せずに書き写さない)。
+  ② F-3 は「DB レスへ移った経緯」の記事に作り替えるか、企画から外すかをオーナーが決める。③ 手順書は git TS → R2 の現行経路に直す。
+- **完了条件**: `grep -rnE "(^|[^A-Za-z0-9])D1([^0-9A-Za-z]|$)" docs/30_note記事企画` の結果が、経緯として「旧」「廃止」を明記した行だけになる。
 
 ### [STRATEGY-FOCUS-2026-10-01] 10月の重点を「計測・データ品質・UI・回遊」の3レーンにし、週次 Must を各レーン1件に絞る
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-01] [レーン:計測]
@@ -1066,6 +1022,15 @@ updated: 2026-09-21
   - 中: 1440px の右レールで指標名が括弧の途中で切れ、同名に見える行を区別できない。
   - 低: 出典の下に単独の「総数」ラベル / 「46 神奈川県」で 47 位が無い理由 (同率) が出ない / 長い指標名がパンくずで 2 行になる。
   - 凡例の向きと負の値の棒は別カード `RANKING-LEGEND-DIRECTION-01` (🔴) で先に直す。
+- **このリリースに相乗りする未反映の修正 (2026-09-25 夜、localhost で確認済み・未コミット)**:
+  `RANKING-LEGEND-DIRECTION-01` (凡例の向き・0 基準の棒) / `CHART-YAXIS-LABEL-CLIP-01` (縦軸の省略表記と左余白) /
+  `AREA-DATABOOK-LABEL-INTEGRITY-01` (県データブックの指標差し替え・年の表示) /
+  `THEME-CHART-LOAD-LATENCY-01` (テーマのサーバーアクションを束ねる。localhost で 48 件直列 → 2 件・約 1.5 秒)。
+  **デプロイ後に本番で測り直す**: `/themes/population-dynamics?pref=13000` を開いて最後までスクロールし、
+  `performance.getEntriesByType('resource')` の POST が 2〜3 件、画面に入ったグラフが 3 秒以内に描かれること
+  (修正前の本番実測は POST 48 件・重なり 0 件・約 19 秒)。
+  **県データブックはデプロイ後に `sync-snapshots` を回して `app/areas/<code>/databook.json` を作り直す**。
+  差し替えた 2 指標 (医師数・一般病院数の人口 10 万人当たり) は作り直すまで値が無く、カードごと表示されない。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
@@ -1124,6 +1089,14 @@ updated: 2026-09-21
   - 中: `/themes/real-income` の物価地域差指数の縦軸が 0 始まりで 100 前後の変化が平らに見える。
 - **関連**: 検出と修正を回す仕組みは `UI-CHART-TEXT-LOOP-01`、県データブックのグラフは `AREA-DATABOOK-CHART-FIX-01`、縦軸の桁欠けは `CHART-YAXIS-LABEL-CLIP-01`。
 - **完了条件**: 軸の文字が 390px で 10px 以上、全グラフの縦軸に単位があり、上記ページで切れ・重なりが無い。
+- **済 (2026-09-25 夜・未コミット)**: 縦軸ラベルの左端の切れ。`leftMarginForTickLabels` (`packages/visualization/src/shared/layout.ts`) で
+  積み上げ面・折れ線・複合グラフの左余白を目盛りの文字列から決めるようにした。localhost `/areas/13000` 390px で 6 グラフとも最左ラベルが左端から 2px 以上内側。
+  縦軸の省略表記も「1400.0万」→「1,400万」に短くした (`compactAxisFormat`)。
+- **残りの本丸 (設計が要る)**: D3 のグラフは幅 800 の viewBox で描いて縮小表示するため、390px では文字が約 4 割 (実測 5px) になる。
+  文字を 10px 以上にするには、表示幅を ResizeObserver で測り viewBox 単位の文字サイズを逆算する必要がある。ただし文字を大きくすると
+  横軸の年ラベル (今はデータ数で 5 年ごとに間引き) が重なるので、**間引きもラベル幅と表示幅から決め直す**必要がある。
+  チャート部品の設計なので `chart-component-builder` の範囲で、積み上げ面・折れ線・複合・ヒストグラムを同じ仕組みで直す。
+- **別経路のもの**: ブログの図は静的 SVG なので、直すには図の再生成と R2 反映 (承認が要る) が要る。サンキー図・物価指数の縦軸 (0 始まり) は部品ごとの修正。
 
 ### [MUNI-PAGE-QUALITY-01] 市区町村のページが薄く、強みの選び方・一覧・ナビに誤りがある
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:ランキング]
@@ -1153,17 +1126,6 @@ updated: 2026-09-21
 - **次**: 表示用の単位整形を 1 か所 (`packages/data-configs/src/unit/` の正典) に寄せ、kg・ha・m²・km² と半角の空白規則をそろえる。大きな金額は億円・兆円に換算する。
 - **完了条件**: 県ページ・カテゴリ・テーマ・survey の代表ページで表記がそろう。
 
-### [UI-SITEWIDE-MINOR-01] サイト共通の小さな崩れ・未公開要素をまとめて直す
-タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
-
-- **証拠 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**:
-  - 未公開の「世界（準備中）」タブが `/japan`・`/themes`・`/municipalities` に出ている。
-  - 992px でヘッダーは折りたたみなのに左のカテゴリ欄が出て本文が狭くなる (ホーム・カテゴリ)。
-  - Cookie 同意バナーが最初の画面の下部 (地図の凡例・ボタン) に重なる。
-  - 390px でパンくずの最後の項目だけ次の行に落ち、見出しと重複して見える。`/about` にパンくずが無い。
-  - 「他県と比較」「公式サイト ↗」などのボタン文字が 2 行に折れる。見出し上の「ディスカバリー」など意味の伝わらないラベル。
-- **完了条件**: 上記が直り、代表ページの撮影で再発していない。
-
 ### [HUB-LIST-FINDABILITY-01] 一覧ページで目的のものを探しにくい (分類・検索・並び順・日付)
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
 
@@ -1191,19 +1153,6 @@ updated: 2026-09-21
 - **注意**: note・商品販売レーンは「維持」。新作や新チャネルは足さず、既存商品の説明の是正だけを行う。
 - **完了条件**: 各商品に固有の内容紹介と収録内容・見本があり、定型文だけのカードが 0 件。
 
-### [NSM-ASP-REVENUE-01] 週次収益 (NSM) の報告に ASP の発生額・確定額を入れる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:計測]
-
-- **問題 (2026-09-25 確認)**: 収益化戦略 §1 は「週次収益 = AdSense 確定額 + アフィリエイト発生額 + 商品の実売額」と定めているが、
-  週次メトリクス Issue の `revenueSection()` (`.claude/scripts/metrics/generate-weekly-metrics-issue.mjs`) はアフィリエイトを
-  GA4 の表示・クリックだけで出し、「確定発生額は ASP 管理画面が正典で、ここには含めない」と明記して金額を読まない。
-  一方、認証付き収集 (`.claude/state/metrics/authenticated/latest.json`) は ASP の成果を取得している
-  (2026-09-24 時点で afb は pass・`occurrenceRows 0`、A8・もしもは `auth_required`)。つまり **A8 に再ログインしても NSM は数字にならない**。
-- **次**: ① 認証付き収集が保存している成果の置き場と形式 (発生・確定・金額の列) を読む。② `revenueSection()` がそれを読み、ASP ごとに
-  発生額・確定額と観測日を出す。認証切れ・古い観測は 0 円ではなく「判定不能」と出す。③ 商品の実売 (`sales-ledger.json`) が
-  ココナラ・KDP の収集結果から更新されているかを確認する (未確認)。
-- **完了条件**: 週次メトリクス Issue の NSM 節に ASP 別の発生額・確定額 (または理由付きの判定不能) が出て、テストが欠測と 0 円を区別して固定する。
-
 ### [GA4-DIMENSION-PRIORITY-01] GA4 カスタムディメンションは発火量の多い `home_featured_*` から登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-09-25] [レーン:計測]
 
@@ -1225,27 +1174,6 @@ updated: 2026-09-21
 - **次**: improvement-triage (improvements.md の排他 writer) が 1 行ずつ、根拠のある目印を足すか、目標値を後付けせず終了または
   事前 target 付きの新規計測へ移すかを決める (`evidence-based-judgment.md` 状況 4: 根拠のない想定値を書かない)。
 - **完了条件**: 計測サイクルの「GSC 施策 N 件中、機械判定できるのは M 件」で、残る行がすべて理由付きで終了または目印付きになる。
-
-### [BLOG-TOC-TOP-ONLY-01] ブログ記事の目次を本文の最上部 1 か所にし、右レールの追従領域を廃止する
-
-タグ: [UI・UX] [種類:改善] [実行:sweep] [起票:2026-09-25] [レーン:UI・回遊]
-
-- **背景 (2026-09-25 実測)**: 公開 606 記事の見出し数 (h2+h3) は中央値 5・90% が 8 以下、h3 を持つ記事は 78 本。
-  PC では目次が右レールの追従領域 (`ArticleShell` の `railSticky`) に固定され、読書中ずっと画面を占めてレールの
-  他の情報が見えにくい。狭い画面では目次が記事カードの外・タイトルより上に出ている。`railSticky` を使うのは
-  ブログ詳細だけで、`ArticleShell` の説明文「レール先頭は追従する目次」は「レールはページと一緒に自然に流れる」
-  規約 (`.claude/rules/ui-components.md`) とずれている。目次のクリックは未計測で、利用度のデータは無い。
-- **次**: ① `apps/web/src/app/blog/[slug]/page.tsx` で `ArticleTableOfContents` を記事ヘッダー (タイトル・
-  サブタイトル・タグ) の直後、本文の前に全幅共通で置き、レールと本文上部の 2 か所出しをやめる。見出しは全件表示し
-  折りたたまない。② `ArticleShell` から `railSticky` を削除し、説明文を規約に合わせる。③ 目次の領域に
-  `NAV-CLICK-COVERAGE-01` の導線名 (`blog_toc`) を付けて計測できるようにする (同カード P1 と同時でもよい)。
-  ④ `.claude/rules/ui-components.md`「Sticky aside の max-h 必須ルール」の適用箇所に `blog/[slug]/page.tsx` の左右 aside が
-  載っているので、追従をやめたら記述を直す。⑤ 本文上部に移した目次は「本文の中に置く部品」になるので、角丸は
-  `rounded-content` (同規約「角丸」の本文内部品) に従う。
-- **停止条件**: 右レールに独立スクロールや別の追従領域を新設しない。
-- **完了条件**: localhost の 390px / 1440px で「タイトル → 目次 → 本文」の順になり、右レールに目次が無く、
-  レールがページと一緒にスクロールする。`railSticky` への参照が 0 件で、型チェックとデザイン検査が通る。
-  `ui-components.md` の Sticky aside ルールの適用箇所が実装と一致している。
 
 ### [AREA-DATABOOK-CHART-FIX-01] 県データブックの「推移」グラフの点数不足と、スマホで読めない文字・単位なしの軸を直す
 
@@ -1607,31 +1535,6 @@ updated: 2026-09-21
   このカードの範囲外。書籍の本文・出典の表記を変える版は再校閲を経てから出す。
 - **完了条件**: 全 64 記事で校正指示が当たり書籍を生成でき、61 本の本文から手書き節が消え、ratchet の上限が 6 で検証コマンドが exit 0。
 
-### [GSC-COV-SOFT404-20260925] GSC 是正: Google がソフト 404 と見ている 2 ページの中身を補強するか noindex にする
-
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt] [起票:2026-09-25] [レーン:SEO・ブログ]
-
-- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
-- **対象**:
-  - https://stats47.jp/areas/17000/safety (HTTP 200 / GSC: soft-404 / 最終クロール 2026-07-28)
-  - https://stats47.jp/blog/apple-expenditure-ranking (HTTP 200 / GSC: soft-404 / 最終クロール 2026-07-28)
-- **次**: `--probe <url>` で本文量と見出しを見て、県・指標に固有の値が本文にあるかを確かめる。無ければ補強し、補強できないなら noindex にする。
-- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
-- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
-
-### [GSC-COV-404-20260925] GSC 是正: sitemap に載っているのに 404 を返す 1 URL を直す
-
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt] [起票:2026-09-25] [レーン:SEO・ブログ]
-
-- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
-- **対象**:
-  - https://stats47.jp/47 (HTTP 404 / GSC: not-found-404 / 最終クロール 2026-09-11)
-- **次**: sitemap が 404 の URL を載せている。ページを復活させるか、sitemap の生成元 (`apps/web/src/app/sitemap.ts` と参照している config) から外す。
-- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
-- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
-
 ### [TOOL-MATERIAL-BUILDER-01] 資料ビルダー（指標×地域を出典付き Excel へ持ち出す無料ツール）の最小版を作る
 
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-09-24] [レーン:行政資料]
@@ -1684,6 +1587,8 @@ updated: 2026-09-21
 - **範囲の拡張 (2026-09-19 追記)**: S1 12 冊の図 120 枚を `.local/kindle-audit/fig-years.ts` (図の年表記 × source.json の rankingKey × config yearFormat) で実測すると、国勢調査 (未婚率・単独世帯 2020)、社会生活基本調査 (行動者率 2021)、住宅・土地統計、宿泊旅行統計 (2024) まで一律 `fiscal` だった。家計調査に限らず「調査の集計期間が暦年・時点のもの」を一次資料で確定して直す。書籍側は `figure-corrections.ts` で本文に合わせて図の年表記を当てているが、config が直ればその校訂は不要になる。
 - **停止条件**: yearFormat を一括置換しない (SSDS には年度が正しい項目もある)。出典で確認できない key は `未宣言` のまま残し、指標定義シートに出す。
 - **完了条件**: 家計調査由来 metric の yearFormat が出典と一致し、S1-01 の 9 slug で定義シートの「期間の型」が本文と一致する。
+- **画面への影響 (2026-09-25 追記)**: 県データブックの数値カードに年を出したため (`AREA-DATABOOK-LABEL-INTEGRITY-01`)、
+  「消費」節の家計調査 5 指標が「2024年度」と表示されるようになった。yearFormat を直すとここも暦年表記に揃う。
 
 
 ### [CI-SPEED-STATIC-GATES-HEAVY-STEPS-01] Static Gates の重い step (Commit-back Contract 115 秒 / SEO Meta Factual 46 秒) を軽くするか scheduled へ寄せる
@@ -2354,6 +2259,16 @@ updated: 2026-09-21
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [ADSENSE-WEEKLY-STEP-01] AdSense 恒久停止後も週次計測が AdSense 施策の before/after を作る step を外すか決める
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-09-25] [レーン:計測]
+
+- **背景 (2026-09-25 の docs 監査)**: `fetch-metrics-weekly.yml` の「Surface AdSense 施策 impact」step が
+  `measure-adsense-impact.mjs` を毎週実行し、`.claude/state/metrics/adsense/impact-LATEST.md` へ書く。
+  `data-storage.md` はこのファイルを「2026-09-20 の恒久停止で更新されない凍結記録」と宣言している。最終変更は 9/20 の W38 snapshot。
+- **trigger**: 9/27 (日) の週次 run 後に `git log -1 -- .claude/state/metrics/adsense/impact-LATEST.md` を見る。
+  内容が変わっていれば凍結宣言と矛盾するので step を外す。変わっていなければ、何も更新しない step として外すかを決める。
+- **完了条件**: 週次 workflow に AdSense の step が無いか、残す理由をこのカードでなく `data-storage.md` に書いている。
+
 ### [CHART-SOURCE-DERIVE-01] 図ごとの出典 (ブログの `<data-source>` タグ・機能別 ChartFooter の固定値) をデータから導出する
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
@@ -2573,6 +2488,17 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [LEFT-RAIL-992-HEADER-DECISION-01] 992〜1023px で「ヘッダーは折りたたみ・左レールは表示」になる食い違いをどう揃えるか決める
+タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
+
+- **観測 (UI 全面点検 2026-09-25・`UI-SITEWIDE-MINOR-01` から切り出し)**: 992px でヘッダーのナビは折りたたみ (ハンバーガー) なのに、
+  ホーム・カテゴリの左のカテゴリ欄が出て本文が狭くなる。
+- **判断が要る理由**: `.claude/rules/ui-components.md` は「全ページの左レールは共通境界 992px から出す。992px でも本文幅 656px を
+  確保でき、1024px 未満のアプリ内ブラウザでも横幅を使える」と意図した設計として定めている。直すには次のどちらかを選ぶ必要がある。
+- **選択肢**: ① 左レールの境界を 1024px (ヘッダーの展開と同じ) へ上げる (規約と `LeftRailLayout` の変更。アプリ内ブラウザで左レールが消える)。
+  ② 今のまま (本文 656px を許容し、食い違いは仕様として記録する)。
+- **完了条件**: どちらかを決め、① なら規約・`LeftRailLayout`・契約テストを同じ変更で直し、② なら規約に理由を追記してこのカードを消す。
 
 ### [AFF-PR-LABEL-DECISION-01] アフィリエイトのバナーに「PR」「広告」の表示を付けるかを決める
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-09-25] [レーン:収益導線]

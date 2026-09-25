@@ -21,7 +21,7 @@
   },
   "summary": {
     "tracked_urls": 3235,
-    "pending_actionable": 1037,
+    "pending_actionable": 1032,
     "by_action": {
       "observe-after-fix": 1102,
       "none": 2099,
@@ -31,17 +31,14 @@
       "enrich": 23
     },
     "by_status": {
-      "pending": 1037,
-      "resolved-by-design": 2102,
+      "pending": 1032,
+      "resolved-by-design": 2103,
       "done": 71,
-      "in-progress": 25
+      "in-progress": 29
     },
     "indexed_by_inspection": 71,
     "pending_by_action": {
-      "observe-after-fix": 1032,
-      "fix-5xx": 2,
-      "verify-intent": 1,
-      "content-check": 2
+      "observe-after-fix": 1032
     },
     "by_verdict": {
       "live-misflagged": 1099,
@@ -17762,14 +17759,14 @@
       "current_http": 503,
       "verdict": "still-5xx",
       "action": "fix-5xx",
-      "status": "pending",
+      "status": "in-progress",
       "first_seen": "2026-09-07",
       "last_checked": "2026-09-20",
       "resolved_at": null,
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
-      "note": "",
+      "note": "2026-09-25: コード変更なし。本番で通常取得 2 回 + キャッシュ迂回 (cf MISS) 3 回がすべて 200、--probe も 200。503 は 9/7・9/20 の測定のみで再現しない。[仮説] Workers CPU 上限による一時 503 (1 回目の描画 2〜3 秒)。原因調査は CF-CPU-SURGE-01 に一本化。日次 URL Inspection の登録確認を待つ",
       "inspection": {
         "observed_at": "2026-09-25",
         "verdict": "NEUTRAL",
@@ -19484,14 +19481,14 @@
       "current_http": 503,
       "verdict": "still-5xx",
       "action": "fix-5xx",
-      "status": "pending",
+      "status": "in-progress",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-20",
       "resolved_at": null,
       "wave_id": "2026-09-20-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": "Googlebot UAで3回再確認し全て200、210284 bytes、canonical一致。単発503のためsearch-growth候補をdismiss。再発時のみ再開。",
+      "note": "2026-09-25: コード変更なし。本番で通常取得 2 回 + キャッシュ迂回 (cf MISS) 3 回がすべて 200、--probe も 200。503 は 9/7・9/20 の測定のみで再現しない。[仮説] Workers CPU 上限による一時 503 (1 回目の描画 2〜3 秒)。原因調査は CF-CPU-SURGE-01 に一本化。日次 URL Inspection の登録確認を待つ",
       "inspection": {
         "observed_at": "2026-09-25",
         "verdict": "NEUTRAL",
@@ -34473,14 +34470,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-20",
-      "resolved_at": null,
+      "resolved_at": "2026-09-25",
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "2026-09-25: /47 は route として一度も存在しない (git log で apps/web/src/app に該当なし)。現行 sitemap 11 ファイルに含まれず、apps/web/src のリテラル検索でも内部リンクは見つからない。外部の誤リンク由来と判断し 404 のままにする"
     },
     {
       "url": "https://stats47.jp/areas/02210/labor-wages",
@@ -49051,14 +49048,14 @@
       "soft_not_found": false,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "in-progress",
       "first_seen": "2026-08-06",
       "last_checked": "2026-09-20",
       "resolved_at": null,
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "2026-09-25: コード変更なし。本文はストリーミングの隠し要素 S:0 で同じ HTML に 10,472 字・数値 547 個 (石川県固有の指標値) が届く。main 直下は loading.tsx の骨組みだが Google は JS 実行後の本文を見る。GSC の最終取得 7/28 時点の中身は不明。再クロール後の URL Inspection で判定"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb061007",
@@ -49085,14 +49082,14 @@
       "soft_not_found": false,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "in-progress",
       "first_seen": "2026-08-06",
       "last_checked": "2026-09-20",
       "resolved_at": null,
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "2026-09-25: コード変更なし。本文 2,603 字・数値 45 個 (県別の支出額と順位) で薄くない。GSC の最終取得 7/28 時点の中身は不明。再クロール後の URL Inspection で判定"
     },
     {
       "url": "https://stats47.jp/ranking/household-expenditure",
