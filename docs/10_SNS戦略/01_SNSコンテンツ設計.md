@@ -1,7 +1,7 @@
 ---
 title: SNSコンテンツ設計
 created: 2026-02-20
-updated: 2026-08-23
+updated: 2026-09-25
 ---
 
 # SNSコンテンツ設計
@@ -39,7 +39,7 @@ SNS展開における戦略・テーマ選定・投稿設計を定義する。
 1. **マスターを先に作る** — YouTube の6〜12分通常動画を一次コンテンツとし、主張と出典を保った2〜4本の短尺を Instagram / X へ派生する。各PFを別々に量産しない
 2. **テーマは人間の感情から逆算する** — 「数字の格差が大きい=面白い」ではない。金・ステータス・地元愛/自虐・子育ての不安など、人が反応する欲望・コンプレックスから逆算してデータを当てはめる
 3. **AI をフル活用し、人間は判断と改善に集中する** — キャプション執筆・テーマ選定・トレンド分析を AI に任せ、人間は「何を投稿しないか」の判断とエンゲージメント分析に注力する
-4. **6切り口で物語的深度を持たせる** — shock/versus/question/paradox（エンゲージメントメカニクス層）に加え、結論/理由/体験/反論/数字/ハウツーの **6切り口**でトレンドに乗せた量産を実施。X は `/post-x-6angles`、Instagram は `/post-ig-6angles` が主力（2026-06〜）
+4. **6切り口で物語的深度を持たせる** — shock/versus/question/paradox（エンゲージメントメカニクス層）に加え、結論/理由/体験/反論/数字/ハウツーの **6切り口**でトレンドに乗せた量産を実施。Instagram は `/post-ig-6angles` が主力。X の量産は `/post-x-batch` で行い、6切り口は手動時に使う（旧 `post-x-6angles` は廃止し、切り口の表は `.claude/rules/sns-content-standards.md` §2-8 へ吸収）
 
 ### 0.2 YouTube pilot のフェーズ設計
 
@@ -96,11 +96,11 @@ SNS展開における戦略・テーマ選定・投稿設計を定義する。
 
 | スキル | 用途 |
 |---|---|
-| **`/post-x-6angles`** | **X 用 6切り口量産**（scout→media→writer→reviewer→scheduler の5フェーズ、トレンド連動）★主力 |
+| **`/post-x-batch`** | **X 用量産**（候補選定→画像→執筆→lint→draft 登録。投稿は `/publish-x --from-queue`）★主力 |
 | **`/post-ig-6angles`** | **Instagram 用 6切り口量産**（カルーセル or リール判定付き、スライドコピー生成）★主力 |
 | `/post-x` | X 向けテキスト+画像を生成。domain / template パラメータで全データドメイン対応 |
 | `/post-instagram` | Instagram Graph API 経由で即時投稿（`/post-ig-6angles` 生成物の配信に使う） |
-| `/post-note` | note.com 有料記事を作成（無料部+有料部） |
+| `/publish-note` | note.com 記事を公開（本文の執筆は `/write-note-section`・`/edit-note-draft`） |
 | `/render-sns-stills` | Remotion で図表・地図・短いアニメーション素材を生成。YouTube master の編集器ではない |
 | `/nsm-experiment` | EXP-006 の基準・進捗・結果を管理。pilot 成功までは YouTube 専用 skill を新設しない |
 

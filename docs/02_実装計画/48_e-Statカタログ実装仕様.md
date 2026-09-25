@@ -2,7 +2,7 @@
 title: e-Statカタログ実装仕様
 type: implementation-spec
 status: active
-updated: 2026-09-16
+updated: 2026-09-25
 related_backlog: ESTAT-CATALOG-01
 tags: [estat, r2, catalog, ci, data-discovery]
 ---
@@ -14,7 +14,7 @@ tags: [estat, r2, catalog, ci, data-discovery]
 stats47には「e-Statにどんなデータがあるか (statsDataId / 分類コード / 年次 / エリア)」の統一カタログが
 無く、theme-researcher / estat-researcher / survey-curator / `/search-estat` `/inspect-estat-meta` は
 毎回e-Stat生APIを叩いて調べ直していた。部分カタログが4つ散在していた
-(`.claude/state/estat/prefecture-candidates.json` 8,706表・statsDataId止まり・git 3.1MB /
+(旧 `.claude/state/estat/prefecture-candidates.json` 8,706表・statsDataId止まり・git 3.1MB /
 `ssds-candidates.json` SSDS 35表のcdCat01 4,114件 / `estat-city-discovery.json` 市区町村3,361表・
 7月版 / `meta/` 要約77件)。`packages/database/src/schema/estat_catalog.ts` はschema型だけ残り、
 再生成の仕組みが無かった。

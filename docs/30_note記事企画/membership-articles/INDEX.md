@@ -100,7 +100,7 @@ related: docs/30_note記事企画/membership-strategy.md
    - ※汎用 Remotion composition が未実装、F-1 で公開予定の generator が必要
 3. **YouTube アップロード**: `bash apps/remotion/out/<name>-upload.sh`
 4. **本文執筆**: このディレクトリのドラフトに肉付け
-5. **note 投稿**: `npx tsx .claude/skills/sns/publish-note/publish-note.ts <article-path>`
+5. **note 投稿**: `/publish-note` スキル（`.claude/skills/note/publish-note/SKILL.md`）
 6. **X / Instagram 連動投稿**: `npx tsx .claude/skills/sns/publish-x/publish-x.ts ...`
 
 ## 関連ドキュメント

@@ -2,7 +2,7 @@
 title: アフィリエイト Playwright 継続運用・安全化実装仕様
 type: implementation-spec
 date: 2026-07-28
-updated: 2026-08-04
+updated: 2026-09-25
 status: in-progress
 related_backlog: ASP-CONTINUITY-01
 tags: [affiliate, Playwright, automation, operations, safety, measurement]
@@ -193,7 +193,7 @@ analytics
 | 3 ASP 共通 CLI                   | `.claude/scripts/ads/`                  |
 | A8 固有 UI adapter               | `.claude/skills/ads/scout-asp/scripts/` |
 | OS の定期実行 wrapper            | `scripts/scheduled/`                    |
-| synthetic DOM fixture            | `.claude/scripts/ads/__fixtures__/`     |
+| synthetic DOM fixture (未実装)   | `.claude/scripts/ads/__fixtures__/`     |
 | 単体テスト                       | `.claude/scripts/ads/__tests__/`        |
 | ローカル journal / lock / health | `.local/affiliate-ops/`                 |
 
@@ -388,7 +388,7 @@ eligible impressions
 - `targetRankingKeys` が設定済みなら hard allowlist とする。
 - rankingKey がない blog 等で `targetRankingKeys` を無視しない。
 - blog tag が未解決、または該当 vertical の在庫がない場合に `economy` へ fallback しない。
-- 不一致時は空配列を返し、既存の AdSense fallback または無表示へ委ねる。
+- 不一致時は空配列を返し、無表示へ委ねる (AdSense fallback は 2026-09-20 の恒久停止で撤去済み)。
 - home の既存方針は別ルールで意図的に固定されているため、本変更で推測拡張しない。
 
 ## 8. ASP adapter と reconciliation
@@ -678,7 +678,7 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 想定する新規 pure core。Phase 0 で既存 core に収まるなら統合し、ファイルを増やさない。
 
 - `.claude/scripts/ads/lib/asp-operation-core.mjs`
-- `.claude/scripts/ads/lib/asp-reconciliation-core.mjs`
+- `.claude/scripts/ads/lib/asp-reconciliation-core.mjs` (未実装)
 - `.claude/scripts/ads/lib/affiliate-eligibility-core.mjs`
 
 ## 15. 実装フェーズ

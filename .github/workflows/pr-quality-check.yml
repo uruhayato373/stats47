@@ -494,11 +494,12 @@ jobs:
 
       - name: 📚 Docs Governance and Link Guard
         # 固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOTを検査。
-        # 鮮度は週次で通知し、PRでは構造errorと新規broken linkだけをブロックする。
+        # 鮮度は週次で通知し、PRでは構造error・新規broken link・docsからの削除済みコード参照をブロックする。
         run: |
-          node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/strategy-lanes.test.cjs .claude/scripts/lib/__tests__/check-docs-links.test.cjs
+          node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/strategy-lanes.test.cjs .claude/scripts/lib/__tests__/check-docs-links.test.cjs .claude/scripts/lib/__tests__/check-docs-code-refs.test.cjs
           node .claude/scripts/lib/check-docs-governance.cjs
           node .claude/scripts/lib/check-docs-links.cjs --baseline
+          node .claude/scripts/lib/check-docs-code-refs.cjs
         continue-on-error: false
 
       - name: 📝 Blog Quality Gate Self-Test

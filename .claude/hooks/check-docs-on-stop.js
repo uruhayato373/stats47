@@ -16,7 +16,7 @@ const { fingerprint, readSuccess, writeSuccess } = require("../scripts/lib/stop-
 
 const projectDir = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..");
 const relevant =
-  /^(?:docs\/|\.claude\/todo\/|CLAUDE\.md$|AGENTS\.md$|\.claude\/(?:config\/docs-governance\.json|rules\/docs-vs-issues\.md|skills\/management\/maintain-docs\/|scripts\/lib\/check-docs-(?:governance|links)\.cjs|hooks\/check-docs-on-stop\.js))/;
+  /^(?:docs\/|\.claude\/todo\/|CLAUDE\.md$|AGENTS\.md$|\.claude\/(?:config\/docs-governance\.json|rules\/docs-vs-issues\.md|skills\/management\/maintain-docs\/|scripts\/lib\/check-docs-(?:governance|links|code-refs)\.cjs|hooks\/check-docs-on-stop\.js))/;
 
 function input() {
   try {
@@ -82,16 +82,17 @@ async function main() {
   const cacheEnabled = !Object.keys(process.env).some((key) => key.startsWith("DOCS_"));
   const before = cacheEnabled ? fingerprint(projectDir) : null;
   if (readSuccess(cacheFile, before)) return;
-  const [governance, links] = await Promise.all([
+  const [governance, links, codeRefs] = await Promise.all([
     run(".claude/scripts/lib/check-docs-governance.cjs", []),
     run(".claude/scripts/lib/check-docs-links.cjs", ["--baseline"]),
+    run(".claude/scripts/lib/check-docs-code-refs.cjs", []),
   ]);
-  if (governance.ok && links.ok) {
+  if (governance.ok && links.ok && codeRefs.ok) {
     writeSuccess(cacheFile, before, cacheEnabled ? fingerprint(projectDir) : null);
     return;
   }
 
-  const failed = [governance, links].filter((result) => !result.ok);
+  const failed = [governance, links, codeRefs].filter((result) => !result.ok);
   const details = failed
     .map((result) => result.output)
     .filter(Boolean)

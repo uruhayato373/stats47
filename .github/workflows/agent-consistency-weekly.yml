@@ -96,6 +96,7 @@ jobs:
             .claude/scripts/lib/__tests__/check-docs-governance.test.cjs \
             .claude/scripts/lib/__tests__/strategy-lanes.test.cjs \
             .claude/scripts/lib/__tests__/check-docs-links.test.cjs \
+            .claude/scripts/lib/__tests__/check-docs-code-refs.test.cjs \
             > /tmp/docs-test-report.txt 2>&1
           TEST_EXIT=$?
           node .claude/scripts/lib/check-docs-governance.cjs --fail-on-warn \
@@ -104,10 +105,13 @@ jobs:
           node .claude/scripts/lib/check-docs-links.cjs --baseline --orphans \
             > /tmp/docs-links-report.txt 2>&1
           LINKS_EXIT=$?
+          node .claude/scripts/lib/check-docs-code-refs.cjs > /tmp/docs-code-refs-report.txt 2>&1
+          CODE_REFS_EXIT=$?
           cat /tmp/docs-test-report.txt
           cat /tmp/docs-governance-report.txt
           cat /tmp/docs-links-report.txt
-          if [ "$TEST_EXIT" -ne 0 ] || [ "$GOVERNANCE_EXIT" -ne 0 ] || [ "$LINKS_EXIT" -ne 0 ]; then
+          cat /tmp/docs-code-refs-report.txt
+          if [ "$TEST_EXIT" -ne 0 ] || [ "$GOVERNANCE_EXIT" -ne 0 ] || [ "$LINKS_EXIT" -ne 0 ] || [ "$CODE_REFS_EXIT" -ne 0 ]; then
             echo "exit_code=1" >> "$GITHUB_OUTPUT"
           else
             echo "exit_code=0" >> "$GITHUB_OUTPUT"
@@ -129,6 +133,7 @@ jobs:
             echo '```'
             head -80 /tmp/docs-governance-report.txt
             head -40 /tmp/docs-links-report.txt
+            head -40 /tmp/docs-code-refs-report.txt
             echo '```'
           } > /tmp/docs-governance-issue.md
           if [ -n "$EXISTING" ]; then

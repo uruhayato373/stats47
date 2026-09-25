@@ -200,7 +200,7 @@ updated: 2026-MM-DD
 | 層 | コマンド・入口 | 責務 |
 |---|---|---|
 | 自動修正 | `npm run docs:fix` | 生成マーカー内の実装計画INDEXだけを実ファイルから再生成 |
-| ローカル検査 | `npm run docs:check` | 構造、frontmatter、固定構成、TODO、INDEX、リンク悪化 |
+| ローカル検査 | `npm run docs:check` | 構造、frontmatter、固定構成、TODO、INDEX、リンク悪化、docsから削除済みコード(path・npm script・`/skill`)への参照 |
 | 完全棚卸し | `npm run docs:check:all` | テスト、構造、鮮度、リンク、orphan候補 |
 | agent運用 | `/maintain-docs` | 重複、統合先、削除可否を意味レビュー |
 | Claude Stop hook | `.claude/hooks/check-docs-on-stop.js` | 文書差分があるturnの終了前に構造・リンクerrorを差し戻す |
