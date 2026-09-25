@@ -11,7 +11,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { RankingBarList } from "../RankingBarList";
+import { barGeometry, RankingBarList } from "../RankingBarList";
 
 const items = (values: number[]) =>
   values.map((value, i) => ({ key: `k${i}`, label: `県${i}`, value, rank: i + 1 }));
@@ -55,5 +55,47 @@ describe("RankingBarList の桁揃え", () => {
   it("単位は値の後ろに出る", () => {
     render(<RankingBarList items={items([2309, 2285.4])} unit="時間" valueMaximumFractionDigits={1} />);
     expect(screen.getAllByText("時間").length).toBeGreaterThan(0);
+  });
+});
+
+/**
+ * 負の値を含む指標の棒 (2026-09-25)。
+ *
+ * 棒の長さを絶対値で決めていたため、人口増減率 -18.7 の秋田県の棒が 2 位 (正の小さな値) より
+ * 長く右へ伸び、値の大小を逆に読ませていた。0 を基準に正は右・負は左へ伸ばす。
+ */
+describe("barGeometry (0 基準の棒)", () => {
+  it("すべて正の値なら従来どおり左端から伸びる", () => {
+    expect(barGeometry(50, { min: 0, max: 100 })).toEqual({ leftPercent: 0, widthPercent: 50, zeroPercent: 0 });
+  });
+
+  it("負の値は 0 の位置から左へ伸びる", () => {
+    const scale = { min: -20, max: 5 };
+    const neg = barGeometry(-18.7, scale);
+    const pos = barGeometry(2, scale);
+    expect(neg.zeroPercent).toBeCloseTo(80);
+    expect(neg.leftPercent + neg.widthPercent).toBeCloseTo(neg.zeroPercent);
+    expect(pos.leftPercent).toBeCloseTo(pos.zeroPercent);
+  });
+
+  it("棒の長さは値の差に比例し、負の大きな値が正の小さな値より右へ長く伸びない", () => {
+    const scale = { min: -20, max: 5 };
+    const neg = barGeometry(-18.7, scale);
+    expect(neg.leftPercent).toBeLessThan(neg.zeroPercent);
+    expect(neg.widthPercent).toBeCloseTo((18.7 / 25) * 100);
+  });
+
+  it("目盛りの幅が 0 なら棒を描かない", () => {
+    expect(barGeometry(0, { min: 0, max: 0 })).toEqual({ leftPercent: 0, widthPercent: 0, zeroPercent: 0 });
+  });
+});
+
+describe("RankingBarList の 0 基準線", () => {
+  it("負の値を含むと 0 の基準線を出し、正の値だけなら出さない", () => {
+    const withNeg = render(<RankingBarList items={items([3, -18.7])} />);
+    expect(withNeg.getAllByTestId("ranking-bar-zero-line").length).toBe(2);
+    withNeg.unmount();
+    const allPos = render(<RankingBarList items={items([3, 1])} />);
+    expect(allPos.queryAllByTestId("ranking-bar-zero-line").length).toBe(0);
   });
 });

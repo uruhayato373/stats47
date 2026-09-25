@@ -32,7 +32,7 @@ function toBarItem(entry: RankingHeaderEntry, tone: "top" | "bottom") {
 /**
  * 上位 3 件と最下位を 1 枚にまとめたリスト。
  *
- * 上位と最下位で同じ max (1 位の値) を渡し、バー長を共通スケールにする。
+ * 上位と最下位で同じ目盛り (表示する全件の最小値・最大値と 0) を渡し、バー長を共通スケールにする。
  * これをしないと最下位のバーが常に全長になり、幅が広いほど値が大きいという
  * 読み方が崩れる。
  */
@@ -40,13 +40,16 @@ export function RankingTopThreeList({ stats, unit, precision }: RankingTopThreeL
   const { top3, last } = stats;
   if (top3.length === 0) return null;
 
-  const scaleMax = Math.max(...top3.map((e) => Math.abs(e.value)), 1);
   // 最下位が上位 3 件に含まれる (県数が極端に少ない指標) なら重複表示しない
   const showLast = last != null && !top3.some((e) => e.areaCode === last.areaCode);
+  // 目盛りは表示する全件から決める。負の値を含む指標は 0 を基準に左右へ伸ばすので、
+  // 最下位の負の値も下端に入れないと、上位と最下位で目盛りが食い違う。
+  const shownValues = [...top3, ...(showLast ? [last] : [])].map((e) => e.value);
 
-  // 上位と最下位で同じ設定を使う (max を共有しないとバー長のスケールが揃わない)
+  // 上位と最下位で同じ設定を使う (目盛りを共有しないとバー長のスケールが揃わない)
   const listProps = {
-    max: scaleMax,
+    min: Math.min(0, ...shownValues),
+    max: Math.max(0, ...shownValues),
     unit,
     showRank: true,
     valueMaximumFractionDigits: precision,
