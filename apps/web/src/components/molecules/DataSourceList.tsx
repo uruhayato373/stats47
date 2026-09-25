@@ -65,9 +65,13 @@ function SourceName({
   const nameClass = "font-medium text-foreground underline-offset-2 hover:text-primary hover:underline";
   if (entry.surveyId && isLinkableSurveyId(entry.surveyId)) {
     const href = `/survey/${entry.surveyId}`;
+    // 出典を確かめに行った読者が本文へ戻れるよう、サイト内の調査ページも新しいタブで開く
     return (
       <Link
         href={href}
+        target="_blank"
+        rel="noopener"
+        aria-label={`${entry.label}（新しいタブで開く）`}
         className={nameClass}
         onClick={() => trackNavClick({ label: entry.surveyId ?? entry.label, href, surface })}
       >
