@@ -17,10 +17,8 @@ import type { LineChartData } from '@/components/stat-charts/types/visualization
 
 import { trackNavClick } from '@/lib/analytics/events';
 
-import {
-  fetchMetricTimeseriesAction,
-  type MetricTimeseriesResult,
-} from '../actions';
+import { type MetricTimeseriesResult } from '../actions';
+import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 
 import { ChartEmptyState, ChartLoading } from './ChartState';
 import { ScrollableRow } from './ScrollableRow';
@@ -281,7 +279,7 @@ export function MetricSwitcherPanel({
     let cancelled = false;
     void Promise.all(
       missing.map(async ([key, code]) => {
-        const result = await fetchMetricTimeseriesAction(key, code).catch(
+        const result = await fetchMetricTimeseriesBatched(key, code).catch(
           () => null
         );
         return [cacheKey(key, code), result] as const;

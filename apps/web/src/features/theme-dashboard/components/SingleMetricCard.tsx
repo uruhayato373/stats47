@@ -6,10 +6,8 @@ import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 import { MiniLineChart } from '@/components/charts/MiniCharts';
 
-import {
-  fetchMetricTimeseriesAction,
-  type MetricTimeseriesResult,
-} from '../actions';
+import { type MetricTimeseriesResult } from '../actions';
+import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 
 import { nationalSeriesName } from './MetricSwitcherPanel';
 
@@ -78,7 +76,7 @@ export function SingleMetricCard({
     let cancelled = false;
     void Promise.all(
       missing.map(async (code) => {
-        const result = await fetchMetricTimeseriesAction(
+        const result = await fetchMetricTimeseriesBatched(
           metric.metricKey,
           code
         ).catch(() => null);

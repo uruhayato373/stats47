@@ -9,7 +9,7 @@ import {
 } from './SingleYearSeriesTable';
 
 
-import type { ThemeChartResult } from './theme-chart-result';
+import type { ThemeChartResult } from '../lib/theme-chart-result';
 
 type NonNullThemeChartResult = NonNullable<ThemeChartResult>;
 type LineResult = Extract<NonNullThemeChartResult, { type: 'line' }>;

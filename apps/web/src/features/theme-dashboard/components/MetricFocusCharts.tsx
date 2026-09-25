@@ -14,7 +14,8 @@ import type { LineChartData } from "@/components/stat-charts/types/visualization
 
 import { trackNavClick } from "@/lib/analytics/events";
 
-import { fetchMetricTimeseriesAction, type MetricTimeseriesPoint } from "../actions";
+import { type MetricTimeseriesPoint } from "../actions";
+import { fetchMetricTimeseriesBatched } from "../lib/batched-metric-timeseries";
 
 import { ChartEmptyState, ChartLoading } from "./ChartState";
 
@@ -68,7 +69,7 @@ export function MetricFocusCharts({
         if (!cancelled) setTimeseries([]);
         return;
       }
-      const { points } = await fetchMetricTimeseriesAction(
+      const { points } = await fetchMetricTimeseriesBatched(
         metricKey,
         selectedPrefectureCode,
       );

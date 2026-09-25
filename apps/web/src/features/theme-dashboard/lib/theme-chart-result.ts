@@ -8,7 +8,8 @@ import {
   type PopulationPyramidResult,
   type ThemeDbChartResult,
 } from "../actions";
-import { NATIONAL_AREA_CODE } from "../lib/select-national-series";
+
+import { NATIONAL_AREA_CODE } from "./select-national-series";
 
 export type ThemeChartResult =
   | NonNullable<ThemeDbChartResult>
