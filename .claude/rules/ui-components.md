@@ -37,7 +37,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - **削除した事例**: 2026-06-06、subagent が blog/category/ranking ページの aside から `max-h` を除去してフッターが非表示になった（commit `5d9afb24`、revert `a2c76216`・`b18be52a`）。
 
 ```tsx
-// ✅ 必須パターン (blog/[slug]/page.tsx の右 aside)
+// ✅ 必須パターン (3 カラムの grid で aside を追従させる場合)
 <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20
                   lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
 
@@ -50,8 +50,9 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 適用箇所:
 
-- `apps/web/src/app/blog/[slug]/page.tsx` — 左・右 aside
 - `apps/web/src/app/category/[categoryKey]/page.tsx` — 右 aside
+- (ブログ詳細 `blog/[slug]/page.tsx` は `ArticleShell` の flex レールで、追従する aside を持たない。
+  目次は 2026-09-25 に本文上部へ移し、レールの追従領域を廃止した)
 - 3カラムレイアウトを持つすべての新規ページ
 
 独立スクロール禁止の適用箇所:

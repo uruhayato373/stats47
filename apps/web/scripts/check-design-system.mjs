@@ -17,6 +17,7 @@ const ARTICLE_BODY_COMPONENT_FILES = [
   'src/features/blog/components/md-content.tsx',
   'src/features/blog/components/Callout.tsx',
   'src/features/blog/components/RankingLinkCard.tsx',
+  'src/features/blog/components/ArticleTableOfContents.tsx',
 ];
 const extensions = new Set(['.ts', '.tsx']);
 

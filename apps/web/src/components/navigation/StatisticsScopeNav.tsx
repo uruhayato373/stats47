@@ -67,16 +67,7 @@ export function StatisticsScopeNav({
             {item.label}
           </Link>
         ))}
-        <span
-          className={cn(
-            'text-sm text-muted-foreground',
-            isRail
-              ? 'flex min-h-10 items-center px-2'
-              : 'shrink-0 border-b-2 border-transparent px-1 py-3'
-          )}
-        >
-          世界（準備中）
-        </span>
+        {/* 未公開の「世界」はページができるまで項目を出さない (2026-09-25 UI 全面点検) */}
       </div>
     </nav>
   );
