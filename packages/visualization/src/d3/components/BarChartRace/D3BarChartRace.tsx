@@ -10,6 +10,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { BarChartRaceProps, RankedBarItem } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * Bar Chart Race — 時系列でカテゴリ別の順位変動をアニメーション表示する D3 チャート
@@ -136,9 +137,10 @@ export function BarChartRace({
             .append("clipPath")
             .attr("id", clipId)
             .append("rect")
-            .attr("x", 0)
+            // 横方向は切らない (縦の exit だけが目的)。左ラベルが viewBox 拡張分へ出ても見切れないよう広く取る
+            .attr("x", -viewWidth)
             .attr("y", barsTop)
-            .attr("width", viewWidth)
+            .attr("width", viewWidth * 3)
             .attr("height", barsBottom - barsTop + y.bandwidth());
 
         const g = svg.append("g").attr("clip-path", `url(#${clipId})`);
@@ -290,6 +292,23 @@ export function BarChartRace({
 
         // Initial paint
         update(dateIndexRef.current);
+
+        // 全フレームの項目名を、左ラベルと同じ位置・書式で不可視の測定用 text として置く。
+        // 後のフレームで現れる長い名前も含めて viewBox に収めるため (visibility:hidden でも実寸は測れる)
+        svg.append("g")
+            .attr("class", "viewbox-fit-probe")
+            .attr("visibility", "hidden")
+            .attr("aria-hidden", "true")
+            .selectAll("text")
+            .data(allNames)
+            .join("text")
+            .attr("text-anchor", "end")
+            .attr("x", x(0) - 6)
+            .attr("y", barsTop + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("font-size", axisFontSize)
+            .text((name) => name);
+        fitSvgViewBox(svgRef.current, viewWidth, viewHeight);
     }, [data, viewWidth, viewHeight, topN, duration, marginTop, marginRight, marginBottom, marginLeft, innerWidth, axisFontSize, dateLabelFontSize, unit, formatValue, showTooltip, hideTooltip, updateTooltipPosition]);
 
     // Timer Loop

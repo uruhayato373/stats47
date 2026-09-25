@@ -11,6 +11,8 @@ export const UI_METRIC_KEYS: MetricKey[] = [
   "external_links_same_tab",
   "clipped_text",
   "overlapping_tap_targets",
+  "chart_text_issues",
+  "blog_svg_text_issues",
   "a11y_violations",
   "responsive_layout_issues",
 ];

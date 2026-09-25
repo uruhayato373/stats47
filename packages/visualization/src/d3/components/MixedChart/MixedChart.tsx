@@ -13,6 +13,7 @@ import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { MixedChartProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * MixedChart - 棒グラフ（左Y軸）+ 折れ線グラフ（右Y軸）の2軸チャート
@@ -261,6 +262,8 @@ export function MixedChart({
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").remove())
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", lines[0]?.color ?? "#666"));
+
+    fitSvgViewBox(svgRef.current, width, height);
   }, [
     data, categoryKey, columns, lines, width, height,
     marginTop, marginRight, marginBottom, marginLeft,

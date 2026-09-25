@@ -838,3 +838,393 @@ export function lintFindingsParity(filename, svgContent, jsonData) {
   }
   return { errors, warnings };
 }
+
+// ---------- チャート文字のはみ出し・重なり (2026-09-25) ----------
+//
+// 背景: 折れ線 (line.ts) の下部凡例が斜めの X 軸ラベルに重なり、Y 軸タイトル (チャート題名
+// そのもの) がプロット高より長くキャンバス外へはみ出していた
+// (docs/31_note記事原稿/b-kakei-beer-peak-month/data/beer-months-by-year-timeseries.svg)。
+// 既存 lint は tile-grid の右端しか見ておらず、どちらも検出できなかった。
+//
+// 推定は findTextOverflows と同じ文字幅ヒューリスティック (半角 0.55em / 全角 1.0em)、
+// ベースライン ≈ y・ascent 0.8em・descent 0.2em。グリフ実測ではないので閾値は寛容にする
+// (目的は「ラベルがまるごと切れる」「凡例と軸ラベルが衝突する」級の検出。1px の精度ではない。
+// 誤検知のあるゲートは無効化されるだけ — blog-svg-chart-standards.md §6-2)。
+
+/** 文字配置 lint の閾値 (SSOT)。 */
+export const CHART_TEXT_LAYOUT = Object.freeze({
+  /** viewBox からのはみ出しを許容する量 (px)。幅推定の誤差吸収。 */
+  overflowTolerancePx: 2,
+  /** 重なりと判定する交差面積の下限 (小さい方の箱に対する比)。 */
+  overlapMinFraction: 0.25,
+  /** 重なりと判定する交差領域の下限 (px、x/y 両方)。 */
+  overlapMinPx: 4,
+  ascentEm: 0.8,
+  descentEm: 0.2,
+  /** font-size 未指定時の既定 (SVG/CSS の medium)。 */
+  defaultFontSize: 16,
+});
+
+const SKIP_TEXT_CONTAINERS = new Set([
+  'title',
+  'desc',
+  'style',
+  'script',
+  'defs',
+  'clippath',
+  'mask',
+  'symbol',
+  'pattern',
+  'marker',
+  'metadata',
+  'lineargradient',
+  'radialgradient',
+  'filter',
+]);
+
+function decodeXmlEntities(s) {
+  return s
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&');
+}
+
+/** 文字列の概算幅 (em)。svg-builder の textUnits と同一のヒューリスティック。 */
+export function estimateTextUnits(text) {
+  return [...String(text)].reduce(
+    (w, ch) => w + (/[ -~｡-ﾟ]/.test(ch) ? 0.55 : 1.0),
+    0
+  );
+}
+
+function readAttr(attrs, name) {
+  const m = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)')`).exec(attrs);
+  return m ? (m[1] ?? m[2]) : undefined;
+}
+function firstNumber(v) {
+  if (v === undefined) return undefined;
+  const n = parseFloat(String(v).trim().split(/[\s,]+/)[0]);
+  return Number.isFinite(n) ? n : undefined;
+}
+function styleProp(attrs, prop) {
+  const style = readAttr(attrs, 'style');
+  if (!style) return undefined;
+  const m = new RegExp(`(?:^|;)\\s*${prop}\\s*:\\s*([^;]+)`).exec(style);
+  return m ? m[1].trim() : undefined;
+}
+function attrOrStyle(attrs, name) {
+  return styleProp(attrs, name) ?? readAttr(attrs, name);
+}
+
+// 2D アフィン行列 [a, b, c, d, e, f]: x' = a x + c y + e, y' = b x + d y + f
+const IDENTITY = [1, 0, 0, 1, 0, 0];
+function mulMatrix(m, n) {
+  return [
+    m[0] * n[0] + m[2] * n[1],
+    m[1] * n[0] + m[3] * n[1],
+    m[0] * n[2] + m[2] * n[3],
+    m[1] * n[2] + m[3] * n[3],
+    m[0] * n[4] + m[2] * n[5] + m[4],
+    m[1] * n[4] + m[3] * n[5] + m[5],
+  ];
+}
+function parseTransform(str) {
+  let m = IDENTITY;
+  if (!str) return m;
+  for (const t of String(str).matchAll(
+    /(matrix|translate|scale|rotate|skewX|skewY)\s*\(([^)]*)\)/g
+  )) {
+    const v = t[2]
+      .trim()
+      .split(/[\s,]+/)
+      .map(Number)
+      .filter(Number.isFinite);
+    let n = IDENTITY;
+    if (t[1] === 'matrix' && v.length === 6) n = v;
+    else if (t[1] === 'translate') n = [1, 0, 0, 1, v[0] ?? 0, v[1] ?? 0];
+    else if (t[1] === 'scale') n = [v[0] ?? 1, 0, 0, v[1] ?? v[0] ?? 1, 0, 0];
+    else if (t[1] === 'rotate') {
+      const r = ((v[0] ?? 0) * Math.PI) / 180;
+      const rot = [Math.cos(r), Math.sin(r), -Math.sin(r), Math.cos(r), 0, 0];
+      const cx = v[1] ?? 0;
+      const cy = v[2] ?? 0;
+      n = mulMatrix(mulMatrix([1, 0, 0, 1, cx, cy], rot), [1, 0, 0, 1, -cx, -cy]);
+    } else if (t[1] === 'skewX')
+      n = [1, 0, Math.tan(((v[0] ?? 0) * Math.PI) / 180), 1, 0, 0];
+    else if (t[1] === 'skewY')
+      n = [1, Math.tan(((v[0] ?? 0) * Math.PI) / 180), 0, 1, 0, 0];
+    m = mulMatrix(m, n);
+  }
+  return m;
+}
+const applyMatrix = (m, x, y) => [
+  m[0] * x + m[2] * y + m[4],
+  m[1] * x + m[3] * y + m[5],
+];
+
+/**
+ * SVG 内の描画される文字行を、変換 (rotate 等) 適用後の四角形 (4 頂点) として列挙する。
+ * 1 つの `<text>` が複数行 (x/y 付き `<tspan>`) を持つ場合は行ごとに箱を作る。
+ * x/y を持たない `<tspan>` (タイトル横の小さい補足など) は同じ行の続きとして幅に足す。
+ *
+ * @param {string} svgContent
+ * @returns {{ viewBox: {x:number,y:number,w:number,h:number}|null,
+ *             boxes: Array<{label:string, el:number, poly:number[][]}> }}
+ */
+export function extractTextBoxes(svgContent) {
+  const svg = String(svgContent);
+  const vbm = /<svg\b[^>]*\bviewBox\s*=\s*"([^"]+)"/.exec(svg);
+  let viewBox = null;
+  if (vbm) {
+    const v = vbm[1].trim().split(/[\s,]+/).map(Number);
+    if (v.length === 4 && v.every(Number.isFinite))
+      viewBox = { x: v[0], y: v[1], w: v[2], h: v[3] };
+  }
+  const L = CHART_TEXT_LAYOUT;
+  const boxes = [];
+  const stack = [
+    { tag: '#root', m: IDENTITY, fs: L.defaultFontSize, anchor: 'start', baseline: 'auto', skip: false },
+  ];
+  let text = null; // 現在の <text> の収集状態
+  let elId = 0;
+  const tokenRe =
+    /<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>|<(\/?)([a-zA-Z][\w:.-]*)((?:[^>"']|"[^"]*"|'[^']*')*?)(\/?)>|([^<]+)/g;
+
+  const flushLine = () => {
+    if (!text || !text.cur) return;
+    const line = text.cur;
+    text.cur = null;
+    // SVG 既定の空白処理 (xml:space="default"): 改行は除去、タブは空白、連続空白は 1 つ、
+    // 行の前後の空白は除去。これをしないと <tspan> 間のインデントが幅に数えられる。
+    const chars = [];
+    for (const s of line.segs) {
+      for (const ch of s.t.replace(/[\r\n]/g, '').replace(/\t/g, ' ')) {
+        if (ch === ' ' && (chars.length === 0 || chars[chars.length - 1].ch === ' ')) continue;
+        chars.push({ ch, fs: s.fs });
+      }
+    }
+    while (chars.length && chars[chars.length - 1].ch === ' ') chars.pop();
+    const label = chars.map((c) => c.ch).join('');
+    if (!label) return;
+    const w = chars.reduce((acc, c) => acc + estimateTextUnits(c.ch) * c.fs, 0);
+    const fs = Math.max(...chars.map((c) => c.fs));
+    const x0 =
+      text.anchor === 'end' ? line.x - w : text.anchor === 'middle' ? line.x - w / 2 : line.x;
+    let top = line.y - L.ascentEm * fs;
+    let bottom = line.y + L.descentEm * fs;
+    if (/^(middle|central)$/.test(text.baseline)) {
+      top = line.y - fs / 2;
+      bottom = line.y + fs / 2;
+    } else if (/^(hanging|text-before-edge)$/.test(text.baseline)) {
+      top = line.y;
+      bottom = line.y + fs;
+    }
+    const poly = [
+      [x0, top],
+      [x0 + w, top],
+      [x0 + w, bottom],
+      [x0, bottom],
+    ].map(([px, py]) => applyMatrix(text.m, px, py));
+    boxes.push({ label, el: text.id, poly });
+  };
+
+  for (const tok of svg.matchAll(tokenRe)) {
+    const top = stack[stack.length - 1];
+    if (tok[5] !== undefined) {
+      // 文字ノード
+      if (text && !top.skip) {
+        const t = decodeXmlEntities(tok[5]);
+        if (t.length) {
+          if (!text.cur) text.cur = { x: text.nextX, y: text.nextY, segs: [] };
+          text.cur.segs.push({ t, fs: top.fs });
+        }
+      }
+      continue;
+    }
+    if (tok[2] === undefined) continue; // コメント / CDATA
+    const isClosing = tok[1] === '/';
+    const tag = tok[2].toLowerCase();
+    const attrs = tok[3] || '';
+    const isSelfClosing = tok[4] === '/';
+    if (isClosing) {
+      // 対応する開きタグまで戻す (壊れた入れ子に寛容)
+      for (let i = stack.length - 1; i > 0; i--) {
+        if (stack[i].tag === tag) {
+          stack.length = i;
+          break;
+        }
+      }
+      if (tag === 'text' && text) {
+        flushLine();
+        text = null;
+      }
+      continue;
+    }
+    const fsAttr = attrOrStyle(attrs, 'font-size');
+    const fsNum = fsAttr !== undefined ? parseFloat(fsAttr) : NaN;
+    const isHidden =
+      (attrOrStyle(attrs, 'display') ?? '') === 'none' ||
+      /^(hidden|collapse)$/.test(attrOrStyle(attrs, 'visibility') ?? '') ||
+      parseFloat(attrOrStyle(attrs, 'opacity') ?? '1') === 0;
+    const frame = {
+      tag,
+      m: mulMatrix(top.m, parseTransform(readAttr(attrs, 'transform'))),
+      fs: Number.isFinite(fsNum) ? fsNum : top.fs,
+      anchor: attrOrStyle(attrs, 'text-anchor') ?? top.anchor,
+      baseline: attrOrStyle(attrs, 'dominant-baseline') ?? top.baseline,
+      skip: top.skip || SKIP_TEXT_CONTAINERS.has(tag) || isHidden,
+    };
+    if (tag === 'text' && !frame.skip && !isSelfClosing) {
+      const x =
+        (firstNumber(readAttr(attrs, 'x')) ?? 0) + (firstNumber(readAttr(attrs, 'dx')) ?? 0);
+      const y =
+        (firstNumber(readAttr(attrs, 'y')) ?? 0) + (firstNumber(readAttr(attrs, 'dy')) ?? 0);
+      text = {
+        id: elId++,
+        m: frame.m,
+        anchor: frame.anchor,
+        baseline: frame.baseline,
+        nextX: x,
+        nextY: y,
+        cur: null,
+      };
+    } else if (tag === 'tspan' && text) {
+      const tx = firstNumber(readAttr(attrs, 'x'));
+      const ty = firstNumber(readAttr(attrs, 'y'));
+      const dy = firstNumber(readAttr(attrs, 'dy')) ?? 0;
+      if (tx !== undefined || ty !== undefined) {
+        // 新しい行: 絶対位置 (x/y) か、x 付きの dy 改行
+        const baseY = ty ?? (text.cur ? text.cur.y : text.nextY);
+        flushLine();
+        text.nextX = tx ?? text.nextX;
+        text.nextY = baseY + dy;
+      }
+    }
+    if (!isSelfClosing) stack.push(frame);
+  }
+  return { viewBox, boxes };
+}
+
+function polygonArea(p) {
+  let a = 0;
+  for (let i = 0; i < p.length; i++) {
+    const [x1, y1] = p[i];
+    const [x2, y2] = p[(i + 1) % p.length];
+    a += x1 * y2 - x2 * y1;
+  }
+  return a / 2;
+}
+function polygonBBox(p) {
+  const xs = p.map((q) => q[0]);
+  const ys = p.map((q) => q[1]);
+  return { x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) };
+}
+/** 凸多角形 subject を凸多角形 clip で切り取る (Sutherland–Hodgman)。 */
+function clipConvexPolygon(subject, clip) {
+  const sign = Math.sign(polygonArea(clip)) || 1;
+  const isInside = (p, a, b) =>
+    sign * ((b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0])) >= 0;
+  const intersect = (p, q, a, b) => {
+    const den = (p[0] - q[0]) * (a[1] - b[1]) - (p[1] - q[1]) * (a[0] - b[0]);
+    if (den === 0) return q;
+    const t = ((p[0] - a[0]) * (a[1] - b[1]) - (p[1] - a[1]) * (a[0] - b[0])) / den;
+    return [p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])];
+  };
+  let out = subject;
+  for (let i = 0; i < clip.length && out.length; i++) {
+    const a = clip[i];
+    const b = clip[(i + 1) % clip.length];
+    const input = out;
+    out = [];
+    for (let j = 0; j < input.length; j++) {
+      const cur = input[j];
+      const prev = input[(j + input.length - 1) % input.length];
+      const isCurIn = isInside(cur, a, b);
+      const isPrevIn = isInside(prev, a, b);
+      if (isCurIn) {
+        if (!isPrevIn) out.push(intersect(prev, cur, a, b));
+        out.push(cur);
+      } else if (isPrevIn) {
+        out.push(intersect(prev, cur, a, b));
+      }
+    }
+  }
+  return out;
+}
+
+const shortLabel = (s) => (s.length > 20 ? `${[...s].slice(0, 19).join('')}…` : s);
+
+/**
+ * チャート SVG の文字が viewBox をはみ出すもの・他の文字と重なるものを返す。
+ *
+ * - overflows: 推定 bbox (text-anchor / font-size / transform=rotate を反映) が viewBox の
+ *   どれかの辺を overflowTolerancePx 超えてはみ出す文字。例 `"12月" right +6px`
+ * - overlaps: 別の `<text>` 同士で、推定箱の交差面積が小さい方の箱の overlapMinFraction 以上
+ *   かつ交差領域が x/y とも overlapMinPx 以上のペア。例 `"2000年" ⇄ "4月"`
+ *
+ * `<title>`/`<desc>`/`<defs>` 等の中の文字は描画されないので除外。同じ `<text>` 内の行同士
+ * (タイルの県名と値など、意図的に積んだもの) は比較しない。同一文字列・同一位置の 2 枚重ね
+ * (縁取り halo の描画手法) も重なりに数えない。
+ *
+ * @param {string} svgContent
+ * @returns {{ overflows: string[], overlaps: string[] }}
+ */
+export function findChartTextIssues(svgContent) {
+  const L = CHART_TEXT_LAYOUT;
+  const { viewBox, boxes } = extractTextBoxes(svgContent);
+  const overflows = [];
+  const overlaps = [];
+  const measured = boxes.map((b) => ({
+    ...b,
+    bb: polygonBBox(b.poly),
+    area: Math.abs(polygonArea(b.poly)),
+  }));
+
+  if (viewBox) {
+    const vx1 = viewBox.x + viewBox.w;
+    const vy1 = viewBox.y + viewBox.h;
+    for (const b of measured) {
+      const [side, amount] = [
+        ['left', viewBox.x - b.bb.x0],
+        ['right', b.bb.x1 - vx1],
+        ['top', viewBox.y - b.bb.y0],
+        ['bottom', b.bb.y1 - vy1],
+      ].sort((p, q) => q[1] - p[1])[0];
+      if (amount > L.overflowTolerancePx) {
+        overflows.push(`"${shortLabel(b.label)}" ${side} +${Math.round(amount)}px`);
+      }
+    }
+  }
+
+  for (let i = 0; i < measured.length; i++) {
+    const a = measured[i];
+    for (let j = i + 1; j < measured.length; j++) {
+      const b = measured[j];
+      if (a.el === b.el) continue;
+      if (a.bb.x1 <= b.bb.x0 || b.bb.x1 <= a.bb.x0 || a.bb.y1 <= b.bb.y0 || b.bb.y1 <= a.bb.y0)
+        continue;
+      // 縁取り (halo) の 2 枚重ね: 同じ文字列をほぼ同じ位置に描く
+      if (
+        a.label === b.label &&
+        a.poly.every((p, k) => Math.hypot(p[0] - b.poly[k][0], p[1] - b.poly[k][1]) < 1)
+      )
+        continue;
+      const inter = clipConvexPolygon(a.poly, b.poly);
+      if (inter.length < 3) continue;
+      const area = Math.abs(polygonArea(inter));
+      const ib = polygonBBox(inter);
+      if (
+        area >= L.overlapMinFraction * Math.min(a.area, b.area) &&
+        ib.x1 - ib.x0 >= L.overlapMinPx &&
+        ib.y1 - ib.y0 >= L.overlapMinPx
+      ) {
+        overlaps.push(`"${shortLabel(a.label)}" ⇄ "${shortLabel(b.label)}"`);
+      }
+    }
+  }
+  return { overflows, overlaps };
+}

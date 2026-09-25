@@ -78,6 +78,8 @@ export type MetricKey =
   | "external_links_same_tab"
   | "clipped_text"
   | "overlapping_tap_targets"
+  | "chart_text_issues"
+  | "blog_svg_text_issues"
   | "a11y_violations"
   | "responsive_layout_issues";
 
@@ -154,6 +156,8 @@ export interface ScreenshotRecord {
   /** この幅で文字が枠外に切れていた要素・重なったタップ要素 (ui-probe と同じ判定)。 */
   clipped?: string[];
   overlaps?: string[];
+  /** この幅でチャートの文字が切れた・重なった箇所 (遅延描画のためスクロール後に測る)。 */
+  chartText?: string[];
 }
 
 export interface Violation {

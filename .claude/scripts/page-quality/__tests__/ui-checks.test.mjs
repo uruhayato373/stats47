@@ -135,6 +135,36 @@ test("文字が枠からはみ出して切れている要素を検出し、ellip
   );
 });
 
+test("SVG チャートの文字の切れと重なりを検出し、overflow:visible・アイコン・title は数えない", async (t) => {
+  // 2026-09-25 実測: /areas/13000 の積み上げ面グラフで縦軸の目盛りが左に 4〜12px 切れていた (x < 0)。
+  // ビールの折れ線では下の凡例と斜めの月ラベルが同じ帯に重なっていた。
+  await withPage(
+    t,
+    `<body style="margin:0">
+      <svg id="clip" width="300" height="200" viewBox="0 0 300 200" aria-label="積み上げ面グラフ">
+        <title>1400.0万 を含むグラフ</title>
+        <text x="-12" y="40" font-size="14">1400.0万</text>
+        <text x="100" y="40" font-size="14">中央の文字</text>
+      </svg>
+      <svg id="overlap" width="300" height="200" viewBox="0 0 300 200" aria-label="月別パターン">
+        <text x="100" y="180" font-size="14">2000年</text>
+        <text x="110" y="182" font-size="14">4月</text>
+        <text x="200" y="40" font-size="14">離れた文字</text>
+      </svg>
+      <svg width="300" height="200" viewBox="0 0 300 200" style="overflow:visible" aria-label="意図的に外へ出す">
+        <text x="-30" y="40" font-size="14">外へ出す</text>
+      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>
+    </body>`,
+    async (page) => {
+      const { chartText } = await evaluateLayoutIssues(page);
+      assert.equal(chartText.length, 2, JSON.stringify(chartText));
+      assert.match(chartText[0], /積み上げ面グラフ.*"1400\.0万".*はみ出して切れている/);
+      assert.match(chartText[1], /月別パターン.*"2000年".*"4月".*重なっている/);
+    }
+  );
+});
+
 test("タップできる要素の重なりを検出し、入れ子と離れた要素は数えない", async (t) => {
   await withPage(
     t,

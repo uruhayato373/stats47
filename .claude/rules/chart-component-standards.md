@@ -254,6 +254,7 @@ const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = 
 
 - ミニチャート: `viewBox="0 0 260 84"` を基準に `width="100%"` でレスポンシブ
 - フルサイズ: `packages/visualization` の各 Props 型に従う
+- 軸・軸タイトル・SVG 内凡例を描く D3 チャートは、描画 effect の末尾で `fitSvgViewBox(svg, width, height)`（`packages/visualization/src/d3/utils/fit-svg-viewbox.ts`）を必ず呼び、はみ出したテキスト分だけ viewBox を広げる。比率マージンの調整で見切れを直さない（契約テスト `fit-svg-viewbox.test.tsx` が未呼び出しを検出する）
 
 ### アクセシビリティ
 

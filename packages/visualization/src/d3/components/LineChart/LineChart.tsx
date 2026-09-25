@@ -13,6 +13,7 @@ import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3LineChartProps, TimeSeriesDataNode } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 const DEFAULT_COLORS = schemeTableau10 as readonly string[];
 
@@ -390,6 +391,7 @@ export function LineChart({
       });
 
     // 凡例は SVG 外に HTML で描画（重なり防止）
+    fitSvgViewBox(svgRef.current, width, height);
   }, [
     data,
     categoryKey,
