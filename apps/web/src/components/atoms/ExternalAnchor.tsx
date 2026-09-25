@@ -12,6 +12,8 @@ type ExternalAnchorProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "target
  * 正典: `docs/01_技術設計/04_デザインシステム.md`「外部リンク」
  */
 export function ExternalAnchor({ rel, ...props }: ExternalAnchorProps) {
-  const relValues = new Set(["noopener", "noreferrer", ...(rel ?? "").split(/\s+/).filter(Boolean)]);
-  return <a {...props} target="_blank" rel={[...relValues].join(" ")} />;
+  const extra = [...new Set((rel ?? "").split(/\s+/).filter((v) => v && v !== "noopener" && v !== "noreferrer"))].join(" ");
+  // 静的アクセシビリティ検査 (check-accessibility-static の BLANK_REL_MISSING) が読めるよう、
+  // noopener noreferrer は組み立てずに文字列リテラルで書く
+  return <a {...props} target="_blank" rel={extra ? `noopener noreferrer ${extra}` : "noopener noreferrer"} />;
 }

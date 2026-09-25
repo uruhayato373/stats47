@@ -71,6 +71,9 @@ function SourceName({
         href={href}
         target="_blank"
         rel="noopener"
+        // サイト内の遷移なので noreferrer は付けない (参照元で数える回遊の計測が消える)。
+        // 既定値の参照元ポリシーを明示して、静的アクセシビリティ検査の条件を満たす
+        referrerPolicy="strict-origin-when-cross-origin"
         aria-label={`${entry.label}（新しいタブで開く）`}
         className={nameClass}
         onClick={() => trackNavClick({ label: entry.surveyId ?? entry.label, href, surface })}
