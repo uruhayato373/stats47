@@ -1,8 +1,9 @@
 {
-  "hash": "bda4251db80b309d74d81b10fd3ee0ce5fe8bfab1cabbb436b22998985ca539a",
-  "audited_at": "2026-09-25T06:20:31",
+  "hash": "e31635af27968534a1964e36445e42bfb7e39494660d99327eab663ff271362d",
+  "audited_at": "2026-09-25T07:19:08",
   "files": [
     ".claude/rules/analytics-event-standards.md",
-    ".claude/rules/ui-components.md"
+    ".claude/rules/ui-components.md",
+    ".claude/scripts/lib/check-card-census.cjs"
   ]
 }
