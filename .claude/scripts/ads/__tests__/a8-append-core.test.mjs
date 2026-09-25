@@ -55,6 +55,13 @@ test("validateTail: 正常な配列 → ok", () => {
   assert.equal(v.isEmpty, false);
 });
 
+test("validateTail: 配列後の派生コードにある `];` を閉じ括弧と取り違えない", () => {
+  const src = `${SRC}\nexport const X = BASE.map((ad) => {\n  const r = MAP[ad.id];\n  return r;\n});\n`;
+  const v = validateTail(src);
+  assert.equal(v.ok, true);
+  assert.equal(v.closeIndex, SRC.indexOf("\n];") + 1);
+});
+
 test("validateTail: 空配列 → ok isEmpty", () => {
   const v = validateTail(EMPTY_SRC);
   assert.equal(v.ok, true);
