@@ -279,6 +279,14 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 登録済み `nav_surface` / `nav_label` の**値追加**で新しい custom dimension は無い。
 > `nav_label` は調査なら surveyId、統計表・データセットなら表名 (外部 URL は `nav_href` に入る)。
 >
+> **nav_surface の値追加 (2026-09-25・ブログ本文のランキングカード)**: 記事の図の直下に置く
+> `<source-link>` を地図 + 上位3県のカード (`RankingLinkCard`) に変え、クリックを
+> `blog_ranking_card` で送る。`nav_label` は rankingKey。登録済み `nav_surface` / `nav_label` の
+> **値追加**で新しい custom dimension は無い。変更前はこのカードに計装が無かったので、
+> 変更前後の比較は GA4 の値ではなく週次 `internal-transitions.csv` (referrer) の
+> `blog,ranking` 行で行う (2026-W38 実測 730)。この行はページ種別単位の集計で、右レールの
+> 関連ランキング等からの遷移も含むため、カード単独の効果ではなく blog → ranking 全体の変化として読む。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

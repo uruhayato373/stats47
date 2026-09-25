@@ -23,6 +23,7 @@ paths:
   - カード外枠・その仮表示・地図/チャート枠 → `rounded-card`（`--card-radius`）。カード本体は `CARD_SURFACE_CLASS`（`@stats47/components`）を使い、`SurfaceCard` 系もこれを合成している
   - ボタン・ボタン風リンク・ドロップダウン → `rounded-md`、カード内の小タイル・バッジ・サムネ → `rounded-sm`（どちらも `--radius`）
   - 形として四角であるべきもの（凡例の色見本・タイル地図のマス・下線タブ・一覧行）だけ `rounded-none`。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）
+  - **本文の中に置く部品**（callout・本文内のランキングカード・コードブロック）→ `rounded-content`（`--content-radius` = 6px）。レイアウトのカード外枠とは役割が別なので別トークン。使えるファイルは `check-design-system.mjs` の `ARTICLE_BODY_COMPONENT_FILES` に限り、そのファイルでは `rounded-card` / `rounded-lg` を使わない（`content-radius-only-in-article-body` / `article-body-parts-use-content-radius`）。callout の種類の定義は `callout-config.ts`、表示は `Callout.tsx`（左の色バーなし）
   - `rounded-xl`/`2xl`/任意値の手動付与は禁止。角丸を採用するときは `globals.css` のトークンと `check-design-system.mjs` の `no-nonzero-radius-token` 許容値を同じ差分で変える
 - **カード外枠の線と地**: ライトモードのページ地は記事ゾーンを含めサイト全体で薄グレー（`--background`）1 値（dark の記事ゾーンは `.dark .reading-zone` の別値）。カード外枠の線色は `--card-outline`（Web は `transparent`、管理画面は `--border`）で、白カードとの明暗で区切る。影は `shadow-sm`。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。

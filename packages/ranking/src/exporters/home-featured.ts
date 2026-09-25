@@ -40,18 +40,27 @@ function formatValue(value: number | null): string | null {
 export function deriveFeaturedTop(
   values: readonly HomeFeaturedValueRow[],
 ): FeaturedValue | null {
-  const usable = values
+  return deriveFeaturedTopList(values, 1)[0] ?? null;
+}
+
+/**
+ * 上位 N 件を rank 昇順で導出する (ブログ本文のランキングカードが上位3県に使う)。
+ * 除外・並び・整形の規則は deriveFeaturedTop と同一。
+ */
+export function deriveFeaturedTopList(
+  values: readonly HomeFeaturedValueRow[],
+  limit: number,
+): FeaturedValue[] {
+  return values
     .filter((v) => v.value !== null && v.rank !== null)
     .slice()
-    .sort((a, b) => (a.rank as number) - (b.rank as number));
-
-  const toFeatured = (row: HomeFeaturedValueRow): FeaturedValue => ({
-    rank: row.rank as number,
-    areaName: row.areaName,
-    value: formatValue(row.value),
-  });
-
-  return usable.length > 0 ? toFeatured(usable[0]) : null;
+    .sort((a, b) => (a.rank as number) - (b.rank as number))
+    .slice(0, limit)
+    .map((row) => ({
+      rank: row.rank as number,
+      areaName: row.areaName,
+      value: formatValue(row.value),
+    }));
 }
 
 export interface ResolvedHomeFeatured {

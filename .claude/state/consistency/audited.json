@@ -1,7 +1,8 @@
 {
-  "hash": "1491f00bc28813c1220798a4e0072a13295ef17f3fc7fbeed86513a5d80c432e",
-  "audited_at": "2026-09-25T03:36:27",
+  "hash": "bda4251db80b309d74d81b10fd3ee0ce5fe8bfab1cabbb436b22998985ca539a",
+  "audited_at": "2026-09-25T06:20:31",
   "files": [
+    ".claude/rules/analytics-event-standards.md",
     ".claude/rules/ui-components.md"
   ]
 }

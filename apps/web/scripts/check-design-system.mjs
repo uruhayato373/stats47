@@ -10,6 +10,14 @@ const cwd = process.cwd();
 // app も全ルール対象に昇格。components / features / app を一律で検査する。
 // 2026-07-11 (DR-AUDIT-03): src/lib も走査対象に追加 (CookieConsentBanner 等のサイト chrome)。
 const scanRoots = ['src/components', 'src/features', 'src/app', 'src/lib'];
+
+// ブログ記事の本文 (Markdown) の中に描く部品。角丸は rounded-content (--content-radius) を使う。
+// 本文の中に置く部品を増やしたらここへ足す (足さないと rounded-content が検査で拒否される)。
+const ARTICLE_BODY_COMPONENT_FILES = [
+  'src/features/blog/components/md-content.tsx',
+  'src/features/blog/components/Callout.tsx',
+  'src/features/blog/components/RankingLinkCard.tsx',
+];
 const extensions = new Set(['.ts', '.tsx']);
 
 const rules = [
@@ -130,8 +138,25 @@ const rules = [
   {
     id: 'no-rounded-xl',
     message:
-      'Do not hand-add rounded-xl/2xl/3xl. Cards use rounded-card, controls rounded-md/sm (both token-driven); rounded-full only for circular elements.',
+      'Do not hand-add rounded-xl/2xl/3xl. Cards use rounded-card, in-article parts rounded-content, controls rounded-md/sm (all token-driven); rounded-full only for circular elements.',
     pattern: /\brounded-(?:xl|2xl|3xl)\b/,
+  },
+  {
+    // 角丸は役割で分ける: ページを区切るカード外枠 = rounded-card (--card-radius)、
+    // 本文の中に置く部品 = rounded-content (--content-radius)。rounded-content を本文外で使うと
+    // レイアウトのカードまで丸くなり役割の区別が崩れるので、本文を描く部品のファイルに限る。
+    id: 'content-radius-only-in-article-body',
+    message:
+      'rounded-content is for parts placed inside article body text. Layout cards use rounded-card. Add the file to ARTICLE_BODY_COMPONENT_FILES only if it renders inside the article body.',
+    pattern: /\brounded-content\b/,
+    allow: (relativePath) => ARTICLE_BODY_COMPONENT_FILES.includes(relativePath),
+  },
+  {
+    id: 'article-body-parts-use-content-radius',
+    message:
+      'Parts inside the article body use rounded-content, not rounded-card/rounded-lg (layout card radius). Nested white cards are also prohibited there.',
+    pattern: /\brounded-(?:card|lg)\b/,
+    allow: (relativePath) => !ARTICLE_BODY_COMPONENT_FILES.includes(relativePath),
   },
   {
     id: 'no-arbitrary-radius',
@@ -157,7 +182,8 @@ const rules = [
   },
   {
     // 4px アクセントバー (カラーバー) は melta-ui で禁止 (全周 border / 余白 / 背景差で表現する)。
-    // 例外は Markdown 散文中の引用/注記の左バーのみ (ブランドアクセントではなく typography)。
+    // 例外は Markdown 散文中の引用の左バーのみ (ブランドアクセントではなく typography)。
+    // callout は 2026-09-25 に左バーをやめ、地の色 + アイコン + ラベルで種類を示す (Callout.tsx)。
     // 正典: .claude/design-system/prohibited.md
     id: 'no-thick-accent-border',
     message:
@@ -166,7 +192,6 @@ const rules = [
     allow: (relativePath) =>
       [
         'src/features/blog/components/md-content.tsx', // blockquote 左バー = Markdown 引用の一般 typography
-        'src/features/blog/components/md-preprocessor.ts', // callout ([!NOTE] 等) の admonition 左バー
       ].includes(relativePath),
   },
   {
@@ -416,6 +441,7 @@ if (!surveyNavSource.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) {
 
 // 角丸の SSOT は globals.css の --radius (操作部品) と --card-radius (カード外枠) で、どちらも 0。
 // 角丸を採用する判断をしたら、この検査の許容値を同じ差分で変える (トークンだけ変えると落ちる)。
+// 本文の中に置く部品の --content-radius (2026-09-25 採択) は別の役割なので 0 でなくてよく、下で個別に見る。
 // 通常領域・reading-zone のどちらかへ非ゼロ値が再導入された場合、見た目がページ種別で
 // ドリフトするため、class 名の静的検査とは別にトークン自体を決定的に検査する。
 const globalsPath = 'src/app/globals.css';
@@ -432,6 +458,19 @@ for (const match of globalsText.matchAll(radiusPattern)) {
     file: globalsPath,
     lineNumber,
     line: match[0],
+  });
+}
+
+// 本文の中に置く部品の角丸 (--content-radius) は 1 か所だけで定義する。ページ種別ごと
+// (.reading-zone / .dark 等) に上書きすると、同じ部品が画面によって違う形になる。
+const contentRadiusDefinitions = [...globalsText.matchAll(/--content-radius:\s*([^;]+);/g)];
+if (contentRadiusDefinitions.length !== 1) {
+  violations.push({
+    ruleId: 'content-radius-single-definition',
+    message: `--content-radius must be defined exactly once in :root (found ${contentRadiusDefinitions.length}).`,
+    file: globalsPath,
+    lineNumber: 1,
+    line: '--content-radius',
   });
 }
 

@@ -3,15 +3,15 @@ import { describe, it, expect } from "vitest";
 import { migrateLegacyDataSourceSection, preprocessCallouts } from "../md-preprocessor";
 
 describe("preprocessCallouts", () => {
-  it("NOTE callout を HTML div に変換する", () => {
+  it("NOTE callout を callout 要素に変換し、本文を Markdown として残す", () => {
     const source = `> [!NOTE]
 > これは注記です。
 > 2行目です。`;
 
     const result = preprocessCallouts(source);
 
-    expect(result).toContain('class="-mt-1 mb-4 border-l-4');
-    expect(result).toContain("NOTE");
+    expect(result).toContain('<callout type="note">');
+    expect(result).not.toContain("class=");
     expect(result).toContain("これは注記です。");
     expect(result).toContain("2行目です。");
   });
@@ -22,8 +22,7 @@ describe("preprocessCallouts", () => {
 
     const result = preprocessCallouts(source);
 
-    expect(result).toContain("TIP");
-    expect(result).toContain("border-positive");
+    expect(result).toContain('<callout type="tip">');
   });
 
   it("WARNING callout を変換する", () => {
@@ -32,8 +31,7 @@ describe("preprocessCallouts", () => {
 
     const result = preprocessCallouts(source);
 
-    expect(result).toContain("WARNING");
-    expect(result).toContain("border-warning");
+    expect(result).toContain('<callout type="warning">');
   });
 
   it("IMPORTANT callout を変換する", () => {
@@ -42,8 +40,7 @@ describe("preprocessCallouts", () => {
 
     const result = preprocessCallouts(source);
 
-    expect(result).toContain("IMPORTANT");
-    expect(result).toContain("border-primary");
+    expect(result).toContain('<callout type="important">');
   });
 
   it("CAUTION callout を変換する", () => {
@@ -52,8 +49,14 @@ describe("preprocessCallouts", () => {
 
     const result = preprocessCallouts(source);
 
-    expect(result).toContain("CAUTION");
-    expect(result).toContain("border-negative");
+    expect(result).toContain('<callout type="caution">');
+  });
+
+  it("段落の直後に続く callout も前後に空行を置いて独立したブロックにする", () => {
+    // 独自タグの HTML ブロックは段落の途中から始められない (CommonMark type 7)。空行が無いと段落に吸収される
+    const result = preprocessCallouts(["本文の段落", "> [!NOTE]", "> 注記", "続く段落"].join("\n"));
+
+    expect(result).toContain(["本文の段落", "", '<callout type="note">', "", "注記", "", "</callout>", ""].join("\n"));
   });
 
   it("callout でない通常行はそのまま保持する", () => {
@@ -99,7 +102,7 @@ describe("preprocessCallouts", () => {
     const result = preprocessCallouts(source);
 
     expect(result).toContain("前のテキスト");
-    expect(result).toContain("NOTE");
+    expect(result).toContain('<callout type="note">');
     expect(result).toContain("後のテキスト");
   });
 
@@ -112,8 +115,8 @@ describe("preprocessCallouts", () => {
 
     const result = preprocessCallouts(source);
 
-    expect(result.match(/border-l-4/g)).toHaveLength(1);
-    expect(result).toContain(">WARNING</p>");
+    expect(result.match(/<callout /g)).toHaveLength(1);
+    expect(result).toContain('<callout type="warning">');
     expect(result).toContain("**読み解きのポイント:** 読み方です。");
   });
 
@@ -129,9 +132,9 @@ describe("preprocessCallouts", () => {
 
     const result = preprocessCallouts(source);
 
-    expect(result.match(/border-l-4/g)).toHaveLength(1);
+    expect(result.match(/<callout /g)).toHaveLength(1);
     expect(result).toContain("**補足:** 定義です。");
-    expect(result).toContain(">WARNING</p>");
+    expect(result).toContain('<callout type="warning">');
     expect(result).toContain("**読み解きのポイント:** 読み方です。");
   });
 
@@ -146,7 +149,7 @@ describe("preprocessCallouts", () => {
 
     const result = preprocessCallouts(source);
 
-    expect(result.match(/border-l-4/g)).toHaveLength(2);
+    expect(result.match(/<callout /g)).toHaveLength(2);
   });
 });
 

@@ -61,7 +61,10 @@ const BASELINE = new Set([
   // GET 検索フォーム・hidden query・検索ラベルを複数ページで共有する。
   "RailSearchCard",
   "RankingDefinitionCard",
-  "RankingSourceCard",
+  // ブログ本文の <source-link> を地図 + 上位 3 県で見せる本文内の埋め込み (2026-09-25)。本文内の部品は
+  // rounded-content を使う規則 (check-design-system の article-body-parts-use-content-radius) で、
+  // レイアウト用の SurfaceCard (rounded-card) を本文に置けないため独自に持つ。
+  "RankingLinkCard",
   // 見出し付き本文カード (2026-09-16)。RailCard と同じ HeaderedSurfaceCard 実装で variant だけが違う
   // (h3 text-sm font-semibold / body p-4)。非チャートの本文カードが ChartPanel を借用したり
   // feature 内で SurfaceCard p-0 + 手書きヘッダを再実装するのを止めるための共有 composite。

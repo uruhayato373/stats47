@@ -33,7 +33,10 @@ import {
 import { buildHeadingSlug } from "../lib/heading-slug";
 import { type InlineAffiliateBanner } from "../utils";
 
+import { Callout } from "./Callout";
+import { toCalloutType } from "./callout-config";
 import { preprocessCallouts } from "./md-preprocessor";
+import { RankingLinkCard } from "./RankingLinkCard";
 import { ResponsiveArticleImage } from "./ResponsiveArticleImage";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
 
@@ -191,7 +194,7 @@ function makeMdComponents(
 
         pre: ({ children, ...props }: ComponentProps) => (
             <pre
-                className="my-4 overflow-x-auto rounded-lg border border-border bg-muted p-4 text-sm leading-relaxed text-foreground shadow-sm"
+                className="my-4 overflow-x-auto rounded-content border border-border bg-muted p-4 text-sm leading-relaxed text-foreground shadow-sm"
                 {...props}
             >
                 {children}
@@ -282,19 +285,13 @@ function makeMdComponents(
             </span>
         ),
 
-        "source-link": ({ href, children }: ComponentProps & { href?: string }) => (
-            <span className="my-4 block not-prose">
-                <SurfaceLinkCard
-                    href={href ?? "#"}
-                    className="flex items-center justify-between border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10"
-                >
-                    <span className="flex items-center gap-2">
-                        {children}
-                    </span>
-                    <ArrowRight className="h-4 w-4 shrink-0" />
-                </SurfaceLinkCard>
-            </span>
-        ),
+        // 図に属する導線なので上は詰め (直上の図・出典行との間)、下は次の本文と切り離す。
+        "source-link": ({ href, children }: ComponentProps & { href?: string }) =>
+            href ? (
+                <span className="mb-8 mt-4 block not-prose">
+                    <RankingLinkCard href={href}>{children}</RankingLinkCard>
+                </span>
+            ) : null,
 
         // 本文インラインのテキストリンク広告。index 属性 (0 始まり) で解決済み配列から 1 件消費する。
         // 描画は既存 AffiliateTextAdList を再利用 (PR ラベル / rel="sponsored" / GA4 計装が入っている)。
@@ -373,6 +370,12 @@ function makeMdComponents(
                     />
                 </div>
             );
+        },
+
+        // `> [!NOTE]` 等 (md-preprocessor が <callout type="note"> に変換)。見た目は Callout が持つ。
+        callout: ({ type, children }: ComponentProps & { type?: string }) => {
+            const calloutType = toCalloutType(type);
+            return calloutType ? <Callout type={calloutType}>{children}</Callout> : <>{children}</>;
         },
 
         "related-articles": ({ children }: ComponentProps) => (

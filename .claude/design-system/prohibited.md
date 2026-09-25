@@ -56,14 +56,17 @@
 > 横幅・レール・余白は `PageShell` / `ArticleShell`（`@/components/layout`）経由で統一（1280px / 右レール 316px / lg+ 左右 40px）。左レールの列と 992px 境界は `LeftRailLayout` だけが所有する。
 > PC の常設左サイドバーは廃止し、ナビはヘッダー（カテゴリはメガメニュー）＋モバイルドロワーに集約。
 >
-> **例外: reading zone（記事系ページ・2026-07-11）**: 記事系ページ（blog 詳細 / ranking 詳細 / survey /
-> terms / privacy）は `ArticleShell` の `.reading-zone` 内でのみ Soft Editorial（`--radius: 14px`・薄グレー地・
-> 2 層ソフトシャドウ）を採用する。これは上記フラット方針の**唯一の例外**（`ArticleCard` / `.blog-news-article`）。
-> home/category/themes/areas/一覧はフラットのまま。正典: `docs/01_技術設計/04_デザインシステム.md`「ArticleShell」。
+> **記事ゾーン（2026-09-25 更新）**: 記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）の
+> `.reading-zone` もカード外枠はフラット（`--radius: 0` / `--card-radius: 0`）。2026-07-11 に置いた「記事ゾーンだけ
+> `--radius: 14px`」の例外は廃止済み。**本文の中に置く部品**（callout・本文内のランキングカード・コードブロック）だけ
+> 役割トークン `--content-radius`（`rounded-content`、6px）で少し丸める。レイアウトのカード外枠とは別の役割で、
+> 使えるファイルは `check-design-system.mjs` の `ARTICLE_BODY_COMPONENT_FILES` に限る。
+> 正典: `docs/01_技術設計/04_デザインシステム.md`「Surface」の角丸の項。
 
 | 禁止                                                | 理由                                                 | 代替                                                                                                          |
 | --------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| カードへの個別角丸（`rounded-xl`/`rounded-2xl` 等） | フラット採用（`--radius:0`）。手動角丸は統一感を崩す | `rounded-none`（既定）。円形のみ `rounded-full`                                                               |
+| カードへの個別角丸（`rounded-xl`/`rounded-2xl` 等） | フラット採用（`--radius:0`）。手動角丸は統一感を崩す | `rounded-card`（= 0）。本文内の部品は `rounded-content`。円形のみ `rounded-full`                              |
+| callout・注記の左の色バー（`border-l-4`）           | 4px アクセントバーは禁止。種類は色だけに頼らない     | 地の色 + アイコン + 日本語ラベル（`Callout.tsx`）。Markdown の引用の左バーだけ typography として残す          |
 | `shadow-lg` / `shadow-2xl`                          | 影が強すぎてノイズになる                             | `shadow-sm` 〜 `shadow-md`（オーバーレイ: `shadow-xl`）                                                       |
 | `py-0.5` for buttons                                | タップターゲットが小さすぎる                         | `h-8` 以上（S: `h-8` / M: `h-10` / L: `h-12`）                                                                |
 | `p-0` on cards                                      | コンテンツが窮屈になる                               | `RailCard` 既定 padding（`px-4 pb-4 pt-3`）。正典 `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」          |

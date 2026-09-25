@@ -14,6 +14,7 @@ export {
 export {
   bakeHomeFeaturedItem,
   deriveFeaturedTop,
+  deriveFeaturedTopList,
   resolveHomeFeaturedItems,
   type HomeFeaturedValueRow,
 } from "./exporters/home-featured";

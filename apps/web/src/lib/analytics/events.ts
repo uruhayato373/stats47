@@ -235,6 +235,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * - `blog_source` / `ranking_source` / `municipality_source` / `geo_source`:
  *   ページ末尾「データ出典」(`DataSourceList`) から調査ハブ・統計表・データセットへの導線。
  *   右レールの調査カード (`*_survey`) と混ぜないため別の値にする (2026-09-25 値追加)
+ * - `blog_ranking_card`: ブログ本文の図の直下にあるランキングカード (地図 + 上位3県)。
+ *   `nav_label` は rankingKey (2026-09-25 値追加)
  * - `theme_evidence`: 白書・統計の論点からランキング・関連テーマ・記事へ進む導線。
  *   `nav_label` は `<topic-key>:<target-type>:<target-key>`。
  * - `theme_ranking` / `theme_blog`: テーマページの指標一覧・比較表・詳細チャートから
@@ -302,7 +304,10 @@ export type NavSurface =
   | 'blog_source'
   | 'ranking_source'
   | 'municipality_source'
-  | 'geo_source';
+  | 'geo_source'
+  // ブログ本文の図の直下にあるランキングカード (`<source-link>`・地図 + 上位3県)。
+  // nav_label は rankingKey (2026-09-25 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
+  | 'blog_ranking_card';
 
 export function trackNavClick(params: {
   label: string;

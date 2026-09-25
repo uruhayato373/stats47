@@ -101,6 +101,8 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
         card: "var(--card-radius)",
+        // 本文の中に置く部品 (callout・本文内カード・コードブロック)。レイアウトのカード外枠とは別の役割
+        content: "var(--content-radius)",
       },
       keyframes: {
         fadeIn: {

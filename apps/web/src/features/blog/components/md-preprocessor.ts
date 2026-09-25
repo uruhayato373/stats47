@@ -3,31 +3,9 @@
  * callout 記法と関連記事セクションを HTML カスタム要素に変換する。
  */
 
-const CALLOUT_TYPES: Record<string, { className: string; titleClassName: string }> = {
-    NOTE:      { className: "border-info bg-info-soft",         titleClassName: "text-info"     },
-    TIP:       { className: "border-positive bg-positive-soft", titleClassName: "text-positive" },
-    WARNING:   { className: "border-warning bg-warning-soft",   titleClassName: "text-warning"  },
-    IMPORTANT: { className: "border-primary bg-primary/10",     titleClassName: "text-primary"  },
-    CAUTION:   { className: "border-negative bg-negative-soft", titleClassName: "text-negative" },
-};
+import { CALLOUT_DEFINITIONS, toCalloutType, type CalloutType } from "./callout-config";
 
-const CALLOUT_PRIORITY: Record<string, number> = {
-    TIP: 1,
-    NOTE: 2,
-    IMPORTANT: 3,
-    WARNING: 4,
-    CAUTION: 5,
-};
-
-const CALLOUT_INLINE_LABELS: Record<string, string> = {
-    NOTE: "補足",
-    TIP: "読み解きのポイント",
-    WARNING: "注意",
-    IMPORTANT: "重要",
-    CAUTION: "要注意",
-};
-
-type CalloutMarker = { index: number; type: string };
+type CalloutMarker = { index: number; type: CalloutType };
 
 /**
  * 旧記事に残る連続 callout では、最も重要な注意だけをカード表示し、他を通常本文へ戻す。
@@ -37,7 +15,8 @@ function findDemotedCalloutLines(lines: string[]): Set<number> {
     const markers: CalloutMarker[] = [];
     for (let index = 0; index < lines.length; index++) {
         const match = lines[index].match(/^\s*>\s*\[!(NOTE|TIP|WARNING|IMPORTANT|CAUTION)\]\s*$/i);
-        if (match) markers.push({ index, type: match[1].toUpperCase() });
+        const type = match ? toCalloutType(match[1]) : null;
+        if (type) markers.push({ index, type });
     }
 
     const demoted = new Set<number>();
@@ -45,7 +24,7 @@ function findDemotedCalloutLines(lines: string[]): Set<number> {
     const flush = () => {
         if (cluster.length < 2) return;
         const keeper = cluster.reduce((best, marker) =>
-            CALLOUT_PRIORITY[marker.type] > CALLOUT_PRIORITY[best.type] ? marker : best,
+            CALLOUT_DEFINITIONS[marker.type].priority > CALLOUT_DEFINITIONS[best.type].priority ? marker : best,
         );
         for (const marker of cluster) {
             if (marker !== keeper) demoted.add(marker.index);
@@ -70,8 +49,9 @@ function findDemotedCalloutLines(lines: string[]): Set<number> {
 }
 
 /**
- * Markdown ソースの callout 記法（> [!NOTE] ...）を HTML div に変換する。
+ * Markdown ソースの callout 記法（> [!NOTE] ...）を `<callout type="note">` 要素に変換する。
  * remark が [!NOTE] をリンク参照としてパースしてしまう問題を回避する。
+ * 見た目は md-content の `callout` → `Callout.tsx` が持ち、ここではクラスを書かない。
  */
 export function preprocessCallouts(source: string, relatedArticleTitles?: Record<string, string>): string {
     const lines = source.split("\n");
@@ -84,9 +64,8 @@ export function preprocessCallouts(source: string, relatedArticleTitles?: Record
         const match = line.match(/^>\s*\[!(NOTE|TIP|WARNING|IMPORTANT|CAUTION)\]\s*$/i);
 
         if (match) {
-            const type = match[1].toUpperCase();
-            const config = CALLOUT_TYPES[type];
-            if (config) {
+            const type = toCalloutType(match[1]);
+            if (type) {
                 const bodyLines: string[] = [];
                 i++;
                 while (i < lines.length && lines[i].startsWith(">")) {
@@ -96,19 +75,13 @@ export function preprocessCallouts(source: string, relatedArticleTitles?: Record
                 const body = bodyLines.join("\n");
 
                 if (demotedCalloutLines.has(i - bodyLines.length - 1)) {
-                    const label = CALLOUT_INLINE_LABELS[type] ?? "補足";
-                    result.push(`**${label}:** ${body}`, "");
+                    result.push(`**${CALLOUT_DEFINITIONS[type].label}:** ${body}`, "");
                     continue;
                 }
 
-                result.push(
-                    `<div class="-mt-1 mb-4 border-l-4 px-4 py-2 ${config.className}">`,
-                    `<p class="mb-1 text-xs font-bold uppercase tracking-widest ${config.titleClassName}">${type}</p>`,
-                    "",
-                    body,
-                    "",
-                    "</div>",
-                );
+                // 開始タグの後と終了タグの前の空行で HTML ブロックを閉じ、本文を Markdown として解釈させる。
+                // 独自タグの HTML ブロックは段落の途中から始められない (CommonMark type 7) ので前後にも空行を置く。
+                result.push("", `<callout type="${type.toLowerCase()}">`, "", body, "", "</callout>", "");
                 continue;
             }
         }

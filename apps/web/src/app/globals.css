@@ -47,6 +47,10 @@
     --card-radius: 0px; /* rounded-card */
     --card-outline: transparent; /* border-card-outline。区切りは地 (--background) と白カードの明暗で出す */
 
+    /* 本文の中に置く部品 (callout・本文内のランキングカード・コードブロック)。ページを区切るカード外枠
+       (--card-radius) とは役割が別で、フラットなレイアウトの中で「本文の一部」と分かるよう少し丸める */
+    --content-radius: 6px; /* rounded-content */
+
     /* データの状態色 (上位・良い値 / 下位・悪い値 / 注意 / 補足)。text-positive, bg-positive-soft 等 */
     --positive: 161 94% 30%;
     --positive-soft: 152 81% 96%;

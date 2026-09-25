@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   bakeHomeFeaturedItem,
   deriveFeaturedTop,
+  deriveFeaturedTopList,
   resolveHomeFeaturedItems,
   type HomeFeaturedValueRow,
 } from "../home-featured";
@@ -66,6 +67,35 @@ describe("deriveFeaturedTop", () => {
 
   it("有効な行がなければnullを返す", () => {
     expect(deriveFeaturedTop([row(1, "東京都", null)])).toBeNull();
+  });
+});
+
+describe("deriveFeaturedTopList", () => {
+  it("rank昇順で上位N件だけを返し、同順位の県も落とさない", () => {
+    expect(
+      deriveFeaturedTopList(
+        [
+          row(3, "大阪府", 900),
+          row(1, "東京都", 3400),
+          row(2, "神奈川県", 1200),
+          row(2, "愛知県", 1200),
+          row(5, "福岡県", 500),
+        ],
+        3,
+      ),
+    ).toEqual([
+      { rank: 1, areaName: "東京都", value: "3,400" },
+      { rank: 2, areaName: "神奈川県", value: "1,200" },
+      { rank: 2, areaName: "愛知県", value: "1,200" },
+    ]);
+  });
+
+  it("除外規則はderiveFeaturedTopと同じ (value/rankがnullの行は数えない)", () => {
+    const list = deriveFeaturedTopList(
+      [row(1, "調査対象外", null), row(null, "順位なし", 50), row(2, "大阪府", 80)],
+      3,
+    );
+    expect(list.map((v) => v.areaName)).toEqual(["大阪府"]);
   });
 });
 
