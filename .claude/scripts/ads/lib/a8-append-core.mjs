@@ -19,8 +19,13 @@ export function validateTail(src) {
   if (!/AFFILIATE_ADS_BASE\s*:\s*AffiliateAd\[\]\s*=\s*\[/.test(src)) {
     return { ok: false, error: "array-decl-not-found" };
   }
-  // 最後の `];` を探す (配列の閉じ)。
-  const idx = src.lastIndexOf("];");
+  // 宣言後で最初の行頭 `];` を配列の閉じとする。配列の後に続く派生コード
+  // (`AFFILIATE_PROGRAM_REF_BY_AD_ID[ad.id];` 等) の `];` を拾わないため lastIndexOf は使わない。
+  const decl = /AFFILIATE_ADS_BASE\s*:\s*AffiliateAd\[\]\s*=\s*\[/.exec(src);
+  const open = decl.index + decl[0].length;
+  const empty = /^\s*\];/.exec(src.slice(open));
+  const m = empty ? null : /^\];/m.exec(src.slice(open));
+  const idx = empty ? open + empty[0].length - 2 : m ? open + m.index : -1;
   if (idx < 0) return { ok: false, error: "closing-bracket-not-found" };
   // `];` の直前 (空白除く) は `,`/`}` (末尾要素・現行は末尾カンマ付き) か `[` (空配列) であること。
   const before = src.slice(0, idx).replace(/\s+$/, "");
