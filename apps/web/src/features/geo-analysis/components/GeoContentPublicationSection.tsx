@@ -6,6 +6,7 @@ import {
   type GeoAnalysisEvidenceManifest,
 } from '@stats47/gis';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -84,20 +85,20 @@ export function GeoContentPublicationSection({
           <h3 className="text-sm font-bold">検証用データ</h3>
           <ul className="mt-2 space-y-2 text-sm">
             <li>
-              <a
+              <ExternalAnchor
                 className="font-medium text-primary underline"
                 href={geoAnalysisPublicDataUrl(aggregateKey)}
               >
                 47都道府県の集計JSON
-              </a>
+              </ExternalAnchor>
             </li>
             <li>
-              <a
+              <ExternalAnchor
                 className="font-medium text-primary underline"
                 href={geoAnalysisPublicDataUrl(manifestKey)}
               >
                 入力SHA・処理・検算manifest
-              </a>
+              </ExternalAnchor>
             </li>
             <li>
               <Link
@@ -111,12 +112,12 @@ export function GeoContentPublicationSection({
               </span>
             </li>
             <li>
-              <a
+              <ExternalAnchor
                 className="font-medium text-primary underline"
                 href={geoAnalysisPublicDataUrl(detailKey)}
               >
                 初期表示県の途中artifact JSON
-              </a>
+              </ExternalAnchor>
             </li>
           </ul>
         </div>

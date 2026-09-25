@@ -20,6 +20,18 @@ test("空の見出しを数え、読み込み中の仮枠・alt・aria-label 付
   assert.equal(analyzeHtml(html, BASE).empty_headings, 2);
 });
 
+test("外部サイトへのリンクで新しいタブを指定しないものだけを数える (自サイト・相対・新しいタブは数えない)", () => {
+  const html = `<html><body>
+    <a href="https://www.e-stat.go.jp/dbview?sid=1" target="_blank" rel="noopener noreferrer">統計表</a>
+    <a href="https://nlftp.mlit.go.jp/ksj/">国土数値情報</a>
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_self">CC BY-SA</a>
+    <a href="https://stats47.jp/ranking/total-population">自サイト (絶対 URL)</a>
+    <a href="/survey/census">相対リンク</a>
+    <a href="mailto:info@example.com">メール</a>
+  </body></html>`;
+  assert.equal(analyzeHtml(html, "https://stats47.jp").external_links_same_tab, 2);
+});
+
 test("「データ出典」見出しが 2 つ並ぶ (本文の手書き節 + DataSourceList) と重複として数える", () => {
   const single = `<html><body><article><h2>まとめ</h2></article>
     <section data-testid="data-source-section"><h2>データ出典</h2></section></body></html>`;

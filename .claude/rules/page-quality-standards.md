@@ -27,7 +27,9 @@ paths:
    (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析を行う。
    `page-quality-audit-weekly.yml` が `--concurrency 12 --skip-rsc --browser-representative` で実行し、
    error違反があれば `page-quality-alert,auto-generated` ラベルでIssueを起票する。
-   - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`) と空の見出し (`empty_headings`)
+   - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`)・空の見出し (`empty_headings`)・
+     「データ出典」見出しの重複 (`duplicate_data_source_sections`)・新しいタブで開かない外部リンク
+     (`external_links_same_tab`。規約は `docs/01_技術設計/04_デザインシステム.md`「外部リンク」)
    - **代表URL 11件だけブラウザ**: 文字の切れ (`clipped_text`)・タップ要素の重なり (`overlapping_tap_targets`)・
      axe-core の WCAG A/AA critical/serious 規則数 (`a11y_violations`)。全URLをブラウザで開くのはコストが見合わない
    - **RSC は全件では測らない** (`--skip-rsc`): RSC はキャッシュされず 1 件ごとにサーバー描画する

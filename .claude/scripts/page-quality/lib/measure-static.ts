@@ -21,6 +21,7 @@ export interface StaticMeasurement {
   ad_duplicate_count: number;
   empty_headings: number;
   duplicate_data_source_sections: number;
+  external_links_same_tab: number;
   image_urls: string[];
 }
 
@@ -175,6 +176,21 @@ export function analyzeHtml(html: string, baseUrl: string): StaticMeasurement {
   const dataSourceHeadings = $("h2, h3, h4").filter((_, el) => $(el).text().trim() === "データ出典").length;
   const duplicateDataSourceSections = Math.max(0, dataSourceHeadings - 1);
 
+  // 外部サイトへのリンクは新しいタブで開く (サイト共通の規約。コード側は ExternalAnchor + 契約テスト)。
+  // 描画後の HTML で数えるので、記事本文・変数で渡した URL・広告も含めて漏れを拾える。
+  const siteHosts = new Set([new URL(baseUrl).host, "stats47.jp", "www.stats47.jp"]);
+  const externalLinksSameTab = $("a[href]").filter((_, el) => {
+    const raw = ($(el).attr("href") ?? "").trim();
+    if (!/^https?:\/\//i.test(raw)) return false;
+    let host: string;
+    try {
+      host = new URL(raw).host;
+    } catch {
+      return false;
+    }
+    return !siteHosts.has(host) && ($(el).attr("target") ?? "") !== "_blank";
+  }).length;
+
   return {
     http_status: 0, // 呼び出し側で埋める
     html_bytes: 0, // 呼び出し側で埋める
@@ -193,6 +209,7 @@ export function analyzeHtml(html: string, baseUrl: string): StaticMeasurement {
     ad_duplicate_count: adDuplicateCount,
     empty_headings: emptyHeadings,
     duplicate_data_source_sections: duplicateDataSourceSections,
+    external_links_same_tab: externalLinksSameTab,
     image_urls: [...imageUrls],
   };
 }
@@ -228,4 +245,5 @@ export const STATIC_METRIC_KEYS: MetricKey[] = [
   "ad_duplicate_count",
   "empty_headings",
   "duplicate_data_source_sections",
+  "external_links_same_tab",
 ];

@@ -61,6 +61,7 @@ export type MetricKey =
   | "degraded_images"
   | "empty_headings"
   | "duplicate_data_source_sections"
+  | "external_links_same_tab"
   | "clipped_text"
   | "overlapping_tap_targets"
   | "a11y_violations"

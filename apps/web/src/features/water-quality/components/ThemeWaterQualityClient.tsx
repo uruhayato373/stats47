@@ -19,6 +19,7 @@ import {
 } from '@stats47/components/atoms/ui/table';
 import { WATER_QUALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 
@@ -155,12 +156,12 @@ export function ThemeWaterQualityClient({
               {rows.map((r) => (
                 <TableRow key={r.id} data-water-row={r.id}>
                   <TableHead scope="row">
-                    <a
+                    <ExternalAnchor
                       href={`${WATER_QUALITY_SOURCE.url}#page=${r.page}`}
                       className="underline underline-offset-2"
                     >
                       {r.name}
-                    </a>
+                    </ExternalAnchor>
                     {r.relatedAreaCodes.length > 1 ? (
                       <span className="block text-xs text-muted-foreground">
                         {r.relatedAreaCodes
@@ -210,19 +211,19 @@ export function ThemeWaterQualityClient({
           ))}
         </ul>
         <p className="text-xs">
-          <a
+          <ExternalAnchor
             href={`${WATER_QUALITY_SOURCE.mainUrl}#page=13`}
             className="underline underline-offset-2"
           >
             全国集計の原表
-          </a>
+          </ExternalAnchor>
           {' · '}
-          <a
+          <ExternalAnchor
             href={WATER_QUALITY_SOURCE.anomaly.prefecturalSourceUrl}
             className="underline underline-offset-2"
           >
             香川県の類型確認資料
-          </a>
+          </ExternalAnchor>
         </p>
       </ChartPanel>
     </div>

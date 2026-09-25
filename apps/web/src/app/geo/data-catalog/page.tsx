@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
@@ -44,7 +45,7 @@ export default async function GeoDataCatalogPage() {
     </SurfaceSection>)}</div>
     <SurfaceSection className="mt-6"><SectionHeader title="背景地図は計算とは別" hideRule />
       <p className="text-sm leading-relaxed text-muted-foreground">地図の背景は国土地理院の淡色タイルをリアルタイムで読み込み、stats47が地点・人口メッシュ・判定結果を重ねています。背景の道路や地形は分析計算には使わず、配布データにも含めません。</p>
-      <a href="https://maps.gsi.go.jp/development/ichiran.html" className="mt-3 inline-block text-sm text-primary underline">地理院タイルの出典・利用条件</a>
+      <ExternalAnchor href="https://maps.gsi.go.jp/development/ichiran.html" className="mt-3 inline-block text-sm text-primary underline">地理院タイルの出典・利用条件</ExternalAnchor>
     </SurfaceSection>
     <SurfaceSection className="mt-6"><SectionHeader title="再利用するときに" hideRule />
       <p className="text-sm leading-relaxed text-muted-foreground">出典、対象年度、stats47による加工を明記し、各データの個別利用条件を確認してください。人口推計、地価観測、洪水想定、駅位置は基準時点が異なります。組み合わせた結果は将来の価格・安全・交通サービスを保証するものではありません。</p>

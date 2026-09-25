@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 import { ArrowRight, MapPin } from 'lucide-react';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ContentDisclosure } from '@/components/content';
 import {
   Breadcrumbs,
@@ -126,16 +127,16 @@ export default function GeoPage() {
         </p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
           境界：国土交通省「国土数値情報（行政区域データ）」をもとに{' '}
-          <a href="https://geoshape.ex.nii.ac.jp/" className="underline">
+          <ExternalAnchor href="https://geoshape.ex.nii.ac.jp/" className="underline">
             NIIが加工
-          </a>
+          </ExternalAnchor>
           （2023年）。表示用に加工。{' '}
-          <a
+          <ExternalAnchor
             href="https://creativecommons.org/licenses/by-sa/4.0/"
             className="underline"
           >
             CC BY-SA 4.0
-          </a>
+          </ExternalAnchor>
           。
           駅名・位置は分析の駅データ（「使用データ・年度・利用条件」に記載）を使用。
         </p>

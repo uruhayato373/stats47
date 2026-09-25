@@ -10,6 +10,8 @@ import {
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
+
 import { GeoSourceLinkCard } from './GeoSourceLinkCard';
 type Entry = {
   dataId: string;
@@ -107,12 +109,12 @@ export function GeoSourceDirectory({ entries }: { entries: Entry[] }) {
                 ・登録版 {d.latestVersion ?? '未記録'}
               </span>
               {d.sourcePageUrl && (
-                <a
+                <ExternalAnchor
                   href={d.sourcePageUrl}
                   className="inline-flex min-h-11 items-center text-primary underline"
                 >
                   原典・利用条件
-                </a>
+                </ExternalAnchor>
               )}
             </li>
           )
