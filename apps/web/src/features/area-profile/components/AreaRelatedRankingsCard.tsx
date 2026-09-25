@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
 import { RankBadge } from '@/components/atoms/RankBadge';
@@ -77,7 +78,7 @@ export function AreaRelatedRankingsCard({
                     </Link>
                     <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
                       {item.value.toLocaleString('ja-JP')}
-                      {item.unit}（{item.year}）
+                      {formatUnitForDisplay(item.unit)}（{item.year}）
                     </p>
                   </div>
                 </li>
@@ -117,7 +118,7 @@ export function AreaRelatedRankingsCard({
                     </Link>
                     <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
                       {item.value.toLocaleString('ja-JP')}
-                      {item.unit}（{item.year}）
+                      {formatUnitForDisplay(item.unit)}（{item.year}）
                     </p>
                   </div>
                 </li>

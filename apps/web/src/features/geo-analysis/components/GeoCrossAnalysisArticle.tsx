@@ -175,7 +175,9 @@ export async function GeoCrossAnalysisArticle({
               空間判定の主指標が高い順です。横にスクロールすると、人口変化や標本数などの補助指標も確認できます。
             </p>
             <div className="mt-4 overflow-x-auto">
-              <Table>
+              {/* 折り返させると表が枠の幅まで縮み、390〜768px で県名が 1 文字ずつ縦に並んだ (2026-09-25)。
+                  折り返さずに横へスクロールさせる */}
+              <Table className="whitespace-nowrap" scrollRegion aria-label="47都道府県の全データ">
                 <TableHeader>
                   <TableRow>
                     <TableHead>表示順</TableHead>

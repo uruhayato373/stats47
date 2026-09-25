@@ -2,6 +2,7 @@ import Link from "next/link";
 
 
 import { cn } from "@stats47/components";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
 import { getSurfaceCardClassName } from "@/components/surface";
@@ -102,7 +103,7 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
                       <span className="text-base font-bold tabular-nums text-foreground">
                         {formatValue(v.value)}
                       </span>
-                      <span className="ml-1 text-[11px] text-muted-foreground">{v.unit}</span>
+                      <span className="ml-1 text-[11px] text-muted-foreground">{formatUnitForDisplay(v.unit)}</span>
                     </>
                   ) : (
                     <span className="text-sm text-muted-foreground">—</span>
@@ -120,7 +121,7 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
                     <>
                       {" ・ 全国平均 "}
                       {formatValue(v.nationalAvg)}
-                      {v.unit}
+                      {formatUnitForDisplay(v.unit)}
                     </>
                   )}
                 </dd>

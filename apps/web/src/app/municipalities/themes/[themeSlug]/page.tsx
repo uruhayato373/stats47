@@ -110,7 +110,8 @@ export default async function MunicipalityThemePage({
                 />
               )}
               <p className="mt-2 text-sm text-muted-foreground">
-                {item.latestYear.yearName}・
+                {/* 総数 (ハブの「N 自治体を比較」) ではなく、この指標で値のある自治体の数 */}
+                {item.latestYear.yearName}・値のある
                 {item.valueCount.toLocaleString('ja-JP')}自治体
               </p>
               <p className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">

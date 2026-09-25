@@ -1,5 +1,6 @@
 import { lookupArea } from "@stats47/area";
 import { cn } from "@stats47/components";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
 export interface RankingBarListItem {
@@ -150,7 +151,7 @@ function RankingBarRow({
         {formatValueWithPrecision(item.value, precision)}
         {unit && (
           <span className="ml-0.5 font-normal text-muted-foreground">
-            {unit}
+            {formatUnitForDisplay(unit)}
           </span>
         )}
       </span>

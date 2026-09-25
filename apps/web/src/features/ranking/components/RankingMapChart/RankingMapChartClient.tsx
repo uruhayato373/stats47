@@ -19,6 +19,7 @@ import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
@@ -203,11 +204,12 @@ export function RankingMapChartClient({
                 colorConfig={mapConfig}
                 tileUrl={currentTile.url}
                 attribution={currentTile.attribution}
-                unit={rankingItem.unit}
+                unit={formatUnitForDisplay(rankingItem.unit)}
                 onPrefectureClick={areaType === "prefecture" ? handlePrefectureClick : undefined}
                 selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
                 borderColor={getLeafletBorderColor(theme)}
                 className="h-[500px]"
+                fitToPrefectures
                 valueDisplay={rankingItem.valueDisplay ?? undefined}
                 showNoDataLabel={areaType === "prefecture" && filteredData.length < 47}
               />

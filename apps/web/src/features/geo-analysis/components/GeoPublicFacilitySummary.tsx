@@ -150,7 +150,7 @@ export function GeoPublicFacilitySummary({
         。全国比率は人口の合算から計算します。表示時に丸めるため、比率の合計が100%にならない場合があります。
       </p>
       <div className="mt-5 min-w-0 overflow-x-auto">
-        <Table aria-label="47都道府県の距離帯別人口">
+        <Table className="whitespace-nowrap" scrollRegion aria-label="47都道府県の距離帯別人口">
           <TableHeader>
             <TableRow>
               <TableHead scope="col">都道府県</TableHead>

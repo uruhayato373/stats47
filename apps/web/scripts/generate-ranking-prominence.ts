@@ -29,6 +29,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { listAllMetrics, listCategories } from "@stats47/data-configs";
+import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 import {
   auditDerivedHooks,
   computeProminenceScores,
@@ -132,8 +133,11 @@ function readImpressionsByRankingKey(filePath: string): Map<string, number> {
 }
 
 function buildInputs(impressions: Map<string, number>): ProminenceInput[] {
+  // 公開中の都道府県ランキング (KNOWN_RANKING_KEYS) だけを数える。isActive だけで絞ると市区町村専用・港湾・
+  // 未公開の指標 41 件まで入り、/ranking の「全 2,408 ランキング」に対しカテゴリ別の合計が 2,449 になっていた。
+  // 代表ランキングに選ばれれば存在しないページへのリンクにもなる (2026-09-25 COUNT-CONSISTENCY-01)。
   return (listAllMetrics() as unknown as MetricLike[])
-    .filter((metric) => metric.isActive)
+    .filter((metric) => metric.isActive && KNOWN_RANKING_KEYS.has(metric.key))
     .map((metric) => {
       const { yearSpan, latestYear } = readYearSignals(metric.years);
       return {

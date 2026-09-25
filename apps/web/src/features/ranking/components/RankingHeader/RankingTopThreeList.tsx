@@ -1,5 +1,7 @@
 "use client";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { RankingBarList } from "@/components/charts/RankingBarList";
 import { SurfaceCard } from "@/components/surface";
 
@@ -65,7 +67,7 @@ export function RankingTopThreeList({ stats, unit, precision }: RankingTopThreeL
           上位3県{showLast ? "と最下位" : ""}
         </span>
         {unit && (
-          <span className="text-xs text-muted-foreground">単位: {unit}</span>
+          <span className="text-xs text-muted-foreground">単位: {formatUnitForDisplay(unit)}</span>
         )}
       </div>
       <RankingBarList items={top3.map((e) => toBarItem(e, "top"))} {...listProps} />

@@ -1,5 +1,7 @@
 "use client";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { ChartEmptyState } from "@/components/charts/ChartState";
 import { MiniLineChart } from "@/components/charts/MiniCharts";
 import { SurfaceCard } from "@/components/surface";
@@ -55,7 +57,7 @@ export function RankingNationalAverageStat({
           </span>
           <span className="text-xl font-bold text-foreground">
             {formatRankingValue(average, precision)}
-            {unit}
+            {formatUnitForDisplay(unit)}
           </span>
         </div>
 

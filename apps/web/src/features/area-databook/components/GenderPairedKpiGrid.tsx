@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import { GENDER_TONE_TEXT } from "./gender-tone.palette";
@@ -56,7 +58,7 @@ function GenderCell({
         <>
           <span className={`text-base font-bold tabular-nums ${color}`}>
             {fmt(value)}
-            <span className="ml-0.5 text-[11px] text-muted-foreground">{unit}</span>
+            <span className="ml-0.5 text-[11px] text-muted-foreground">{formatUnitForDisplay(unit)}</span>
           </span>
           {rank !== null && rank >= 1 && rank <= 47 && (
             <span className="text-[10px] text-muted-foreground tabular-nums">

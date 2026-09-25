@@ -168,7 +168,7 @@ export function GeoPopulationExplorer({
 
         {comparisons.length > 0 ? (
           <div className="mt-4 overflow-x-auto">
-            <Table>
+            <Table className="whitespace-nowrap">
               <TableHeader>
                 <TableRow>
                   <TableHead>都道府県</TableHead>

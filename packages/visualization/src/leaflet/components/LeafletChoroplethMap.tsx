@@ -67,6 +67,9 @@ export interface LeafletChoroplethMapProps {
   fitToPrefectures?: boolean;
 }
 
+/** 全都道府県に合わせるときのズームの刻み */
+export const FIT_ZOOM_SNAP = 0.25;
+
 function FitPrefectureBounds({ geojson }: { geojson: FeatureCollection<Geometry> }) {
   const map = useMap();
   useEffect(() => {
@@ -188,6 +191,10 @@ export function LeafletChoroplethMap({
         center={JAPAN_CENTER}
         zoom={JAPAN_ZOOM}
         minZoom={fitToPrefectures ? JAPAN_MIN_ZOOM - 1 : JAPAN_MIN_ZOOM}
+        // 全都道府県に合わせるときは 0.25 刻みにする。整数ズームだと 640〜768px で日本が収まる段の
+        // 1 つ下 (東アジア全体) まで下がり、沖縄が小さく外国の地名が並んだ (2026-09-25 UI 全面点検)。
+        // 初期の center/zoom は LCP 用に先読みしたタイルと揃えたまま、topology 到着後に合わせ直す。
+        zoomSnap={fitToPrefectures ? FIT_ZOOM_SNAP : 1}
         maxZoom={JAPAN_MAX_ZOOM}
         scrollWheelZoom
         style={{ height: "100%", width: "100%", borderRadius: "0.375rem" }}

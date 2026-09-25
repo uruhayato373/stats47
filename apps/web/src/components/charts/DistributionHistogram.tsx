@@ -9,6 +9,7 @@
 
 import { useCallback, useRef } from 'react';
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision } from '@stats47/utils';
 import { useD3Tooltip } from '@stats47/visualization';
 
@@ -83,11 +84,12 @@ export function DistributionHistogram({
   bins,
   median,
   precision,
-  unit,
+  unit: rawUnit,
   prefLabel,
   prefValues = [],
   ariaLabel,
 }: Props) {
+  const unit = formatUnitForDisplay(rawUnit);
   const svgRef = useRef<SVGSVGElement>(null);
   const { showStackedTooltip, hideTooltip } = useD3Tooltip();
 

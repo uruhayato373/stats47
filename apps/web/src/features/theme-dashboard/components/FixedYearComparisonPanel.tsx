@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 import { lookupArea } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
@@ -107,12 +108,12 @@ export function FixedYearComparisonPanel({
       {values.length > 0 ? (
         view === 'map' && showMap ? (
           <div role="img" aria-label={`${comparisonYear}年の${metric.title}・47都道府県のタイル地図`}>
-            <TileGridMap data={cohort.map((row) => ({ areaCode: row.areaCode, value: row.value as number }))} colorConfig={MAP_COLORS} width={600} height={720} unit={metric.unit} selectedPrefectureCode={selectedPrefectureCode ?? undefined} />
-            <p className="text-xs text-muted-foreground">{cohort[0]?.yearName ?? `${comparisonYear}年`}。淡い色から濃い色へ：{Math.min(...cohort.map((row) => row.value as number))}〜{Math.max(...cohort.map((row) => row.value as number))} {metric.unit}。位置は模式的に示しています。</p>
+            <TileGridMap data={cohort.map((row) => ({ areaCode: row.areaCode, value: row.value as number }))} colorConfig={MAP_COLORS} width={600} height={720} unit={formatUnitForDisplay(metric.unit)} selectedPrefectureCode={selectedPrefectureCode ?? undefined} />
+            <p className="text-xs text-muted-foreground">{cohort[0]?.yearName ?? `${comparisonYear}年`}。淡い色から濃い色へ：{Math.min(...cohort.map((row) => row.value as number))}〜{Math.max(...cohort.map((row) => row.value as number))} {formatUnitForDisplay(metric.unit)}。位置は模式的に示しています。</p>
           </div>
         ) : view === 'bar' ? (
           <div className="max-h-96 overflow-y-auto" tabIndex={0} role="region" aria-label={`${comparisonYear}年の${metric.title}の棒グラフ`}>
-            <RankingBarList items={values.map((row) => ({ key: row.areaCode, areaCode: row.areaCode, value: row.value as number, rank: row.rank }))} max={Math.max(...cohort.map((row) => row.value as number))} unit={metric.unit} valueMaximumFractionDigits={2} valueClassName="w-36" />
+            <RankingBarList items={values.map((row) => ({ key: row.areaCode, areaCode: row.areaCode, value: row.value as number, rank: row.rank }))} max={Math.max(...cohort.map((row) => row.value as number))} unit={formatUnitForDisplay(metric.unit)} valueMaximumFractionDigits={2} valueClassName="w-36" />
           </div>
         ) : <div className="max-h-96 overflow-y-auto" tabIndex={0} role="region" aria-label={`${metric.title}の県別比較表`}>
           <SingleYearSeriesTable

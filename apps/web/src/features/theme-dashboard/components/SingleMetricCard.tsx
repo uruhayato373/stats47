@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 import { MiniLineChart } from '@/components/charts/MiniCharts';
@@ -164,7 +166,7 @@ export function SingleMetricCard({
               : '—'}
             {metric.unit ? (
               <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
-                {metric.unit}
+                {formatUnitForDisplay(metric.unit)}
               </span>
             ) : null}
           </span>
@@ -189,7 +191,7 @@ export function SingleMetricCard({
             <MiniLineChart
               points={trend.points}
               seriesName={trend.seriesName}
-              unit={metric.unit}
+              unit={formatUnitForDisplay(metric.unit)}
             />
           </div>
         ) : trend.kind === 'single-year' ? (

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
 
@@ -89,7 +90,7 @@ export async function RelatedRankingsGrid({
                   {item.top1.areaName}{" "}
                   {item.top1.value ? (
                     <span className="font-semibold text-foreground">
-                      {item.top1.value}{item.unit}
+                      {item.top1.value}{formatUnitForDisplay(item.unit)}
                     </span>
                   ) : null}
                 </span>
