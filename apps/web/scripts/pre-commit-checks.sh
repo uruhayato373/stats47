@@ -419,7 +419,7 @@ if [ -n "$STAGED_ARTICLES" ]; then
 
   # 6.1 構造品質ゲート (2026-06-02 追加)
   # published: true のドラフトだけを対象に quality-gate.mjs を適用する。
-  # 薄い記事 (charCount<3000 / internalLinks<3 / H2<4 / データ出典欠落 / NG word 等) を
+  # 薄い記事 (charCount<3000 / internalLinks<3 / H2<4 / 手書きの出典節 / NG word 等) を
   # public 公開前にコミット段階で止める。published: false の作業中ドラフトは対象外。
   # 経緯: GSC高インプレ10記事を published: true の薄い状態で投入した再発防止 (factual gate のみで素通りした)。
   echo -e "${GREEN}🧱 ブログ記事 構造品質ゲート (published のみ)...${NC}"

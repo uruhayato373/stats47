@@ -15,6 +15,11 @@
       "import": "./src/registry.ts",
       "require": "./src/registry.ts"
     },
+    "./data-source": {
+      "types": "./src/provenance/data-source-entry.ts",
+      "import": "./src/provenance/data-source-entry.ts",
+      "require": "./src/provenance/data-source-entry.ts"
+    },
     "./topics": {
       "types": "./src/topics/index.ts",
       "import": "./src/topics/index.ts",

@@ -54,6 +54,7 @@ async function main() {
       "theme",
       "ranking",
       "blog",
+      "blog-article",
       "geo-analysis",
       "prefecture-list",
       "municipality",

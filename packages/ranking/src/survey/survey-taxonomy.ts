@@ -298,7 +298,7 @@ function splitReferenceValues(value: unknown): string[] {
     .filter(Boolean);
 }
 
-function splitStatsDataIds(value: unknown): string[] {
+export function splitStatsDataIds(value: unknown): string[] {
   if (Array.isArray(value)) return value.flatMap(splitStatsDataIds);
   if (typeof value !== 'string') return [];
   return value
@@ -311,7 +311,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-function nestedRecords(
+export function nestedRecords(
   source: Record<string, unknown>
 ): Record<string, unknown>[] {
   const records: Record<string, unknown>[] = [];

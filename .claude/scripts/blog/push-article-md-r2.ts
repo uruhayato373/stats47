@@ -18,6 +18,8 @@
  *
  * --src で変換出力ディレクトリを切り替える (既定は source-link 配置是正の出力)。
  * どちらも `<dir>/<slug>/article.md` の構造であることが前提。
+ * `<dir>/<slug>/data/*.source.json` があればそれも push する (出典 displaySources の補完用。
+ * `backfill-display-sources.ts` の出力)。それ以外のファイルは対象にしない。
  */
 
 import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -36,8 +38,10 @@ const OUT_DIR =
   srcArgIdx >= 0 && process.argv[srcArgIdx + 1]
     ? path.resolve(PROJECT_ROOT, process.argv[srcArgIdx + 1])
     : path.join(PROJECT_ROOT, ".local/blog-srclink-fix/out");
-// live と同じ content-type を維持する (既存 app/blog/<slug>/article.md は octet-stream)
+// live と同じ content-type を維持する (既存 app/blog/<slug>/article.md は octet-stream、
+// data/*.source.json は application/json。2026-09-25 に本番の HEAD で確認)
 const CONTENT_TYPE = "application/octet-stream";
+const SOURCE_JSON_CONTENT_TYPE = "application/json";
 const CONCURRENCY = 8;
 
 const argv = process.argv.slice(2);
@@ -66,21 +70,35 @@ async function streamToString(body: unknown): Promise<string> {
   return Buffer.concat(chunks).toString("utf8");
 }
 
+/** slug 配下の push 対象 (article.md と data/*.source.json のみ)。R2 と同じ相対パスで返す。 */
+function listPushFiles(slug: string): string[] {
+  const dir = path.join(OUT_DIR, slug);
+  const files = fs.existsSync(path.join(dir, "article.md")) ? ["article.md"] : [];
+  const dataDir = path.join(dir, "data");
+  if (fs.existsSync(dataDir)) {
+    for (const name of fs.readdirSync(dataDir).sort()) {
+      if (name.endsWith(".source.json")) files.push(`data/${name}`);
+    }
+  }
+  return files;
+}
+
 async function main() {
   if (!fs.existsSync(OUT_DIR)) {
     throw new Error(`変換出力が見つかりません: ${OUT_DIR} (先に fix-source-link-placement.mjs --apply を実行)`);
   }
   let slugs = fs
     .readdirSync(OUT_DIR, { withFileTypes: true })
-    .filter((d) => d.isDirectory() && fs.existsSync(path.join(OUT_DIR, d.name, "article.md")))
+    .filter((d) => d.isDirectory() && listPushFiles(d.name).length > 0)
     .map((d) => d.name);
   if (SLUG_FILTER) slugs = slugs.filter((s) => SLUG_FILTER.has(s));
+  const targets = slugs.flatMap((slug) => listPushFiles(slug).map((file) => ({ slug, file })));
 
-  assertR2WriteAllowed({ op: "push blog article.md", dryRun: !APPLY });
+  assertR2WriteAllowed({ op: "push blog article.md / source.json", dryRun: !APPLY });
   console.log(`mode   : ${APPLY ? "APPLY" : "DRY-RUN"}`);
-  console.log(`対象   : ${slugs.length} 記事 (app/blog/<slug>/article.md)`);
+  console.log(`対象   : ${slugs.length} 記事 / ${targets.length} ファイル (app/blog/<slug>/{article.md,data/*.source.json})`);
   if (!APPLY) {
-    console.log(slugs.slice(0, 10).map((s) => `  - ${s}`).join("\n"));
+    console.log(targets.slice(0, 10).map((t) => `  - ${t.slug}/${t.file}`).join("\n"));
     console.log(`  ... (--apply で実際に push)`);
     return;
   }
@@ -90,29 +108,30 @@ async function main() {
   let done = 0;
   let i = 0;
   await Promise.all(
-    Array.from({ length: Math.min(CONCURRENCY, slugs.length) }, async () => {
-      while (i < slugs.length) {
-        const slug = slugs[i++];
-        const key = `app/blog/${slug}/article.md`;
-        const body = fs.readFileSync(path.join(OUT_DIR, slug, "article.md"), "utf8");
+    Array.from({ length: Math.min(CONCURRENCY, targets.length) }, async () => {
+      while (i < targets.length) {
+        const { slug, file } = targets[i++];
+        const key = `app/blog/${slug}/${file}`;
+        const body = fs.readFileSync(path.join(OUT_DIR, slug, file), "utf8");
+        const contentType = file.endsWith(".source.json") ? SOURCE_JSON_CONTENT_TYPE : CONTENT_TYPE;
         try {
           await client.send(
-            new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: body, ContentType: CONTENT_TYPE }),
+            new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: body, ContentType: contentType }),
           );
           // 事後検証: 実際に永続化され、内容が一致しているか
           const got = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: key }));
           const remote = await streamToString(got.Body);
           if (remote !== body) throw new Error("put 後の内容が一致しません");
           done++;
-          if (done % 25 === 0) console.log(`  ${done}/${slugs.length} …`);
+          if (done % 25 === 0) console.log(`  ${done}/${targets.length} …`);
         } catch (e) {
-          failed.push(`${slug}: ${(e as Error).message}`);
+          failed.push(`${slug}/${file}: ${(e as Error).message}`);
         }
       }
     }),
   );
 
-  console.log(`push 完了: ${done}/${slugs.length}`);
+  console.log(`push 完了: ${done}/${targets.length}`);
   if (failed.length) {
     console.error(`失敗 ${failed.length} 件:`);
     failed.forEach((f) => console.error(`  ${f}`));

@@ -1,3 +1,4 @@
+import { type DataSourceEntry } from "@stats47/data-configs";
 import { type AffiliateProduct, type ArticleFrontmatter } from "@stats47/types";
 
 /**
@@ -21,6 +22,8 @@ export interface ArticleRow {
   updatedAt: string | null;
   /** chart source lineage から派生した survey master id。独立 SSOT ではない。 */
   surveyIds?: string[];
+  /** 記事末尾「データ出典」の行。chart source lineage から exporter が派生する。独立 SSOT ではない。 */
+  sources?: DataSourceEntry[];
 }
 
 export interface Article extends ArticleRow {

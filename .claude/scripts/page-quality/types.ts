@@ -14,6 +14,7 @@ export type PageTemplateKey =
   | "theme"
   | "geo-analysis"
   | "blog"
+  | "blog-article"
   | "survey"
   | "other";
 
@@ -59,6 +60,7 @@ export type MetricKey =
   | "broken_images"
   | "degraded_images"
   | "empty_headings"
+  | "duplicate_data_source_sections"
   | "clipped_text"
   | "overlapping_tap_targets"
   | "a11y_violations"

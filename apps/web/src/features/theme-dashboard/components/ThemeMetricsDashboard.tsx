@@ -5,6 +5,7 @@ import { useMemo, type ReactNode } from 'react';
 import Link from 'next/link';
 
 import { lookupArea } from '@stats47/area';
+import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { ArrowRight } from 'lucide-react';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -142,13 +143,12 @@ export function ThemeMetricsDashboard({
     return keys.map((key) => {
       const d = indicatorDataMap[key];
       const total = d.rankingValues.length;
+      const configSource = readSourceConfigRef(d.rankingItem.sourceConfig);
       const source = {
         sourceName:
-          d.rankingItem.attribution?.compilation?.name ??
-          d.rankingItem.source?.name,
+          d.rankingItem.attribution?.compilation?.name ?? configSource.name,
         sourceLink:
-          d.rankingItem.attribution?.compilation?.url ??
-          d.rankingItem.source?.url,
+          d.rankingItem.attribution?.compilation?.url ?? configSource.url,
         sourceLinks: (d.rankingItem.originalSurveys ?? []).map((survey) => ({
           label: survey.name,
           url: `/survey/${survey.id}`,

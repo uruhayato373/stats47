@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
+import { buildEstatTableUrl } from "@stats47/data-configs/data-source";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
@@ -71,7 +72,7 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
       footer={
         <ChartFooter
           source="住民基本台帳人口移動報告"
-          sourceLink="https://www.e-stat.go.jp/dbview?sid=0003423613"
+          sourceLink={buildEstatTableUrl("0003423613")}
           rankingLink="/ranking/moving-in-excess-rate"
           rankingLabel="ランキングを見る"
         />

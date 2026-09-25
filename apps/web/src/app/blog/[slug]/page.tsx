@@ -15,6 +15,7 @@ import {
 import { CATEGORIES } from "@stats47/data-configs";
 
 import { ArticleShell } from "@/components/layout";
+import { DataSourceList } from "@/components/molecules/DataSourceList";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { RailDataDiscoveryCards, RailLinksCard, RailSearchCard } from "@/components/rail";
 import { ArticleCard } from "@/components/surface";
@@ -27,7 +28,7 @@ import { resolveContentVertical } from "@/features/ads/constants/affiliate-categ
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
 import { resolveBlogRakutenPlacement } from "@/features/ads/constants/blog-rakuten-placement";
 import { FurusatoNozeiCard, RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
-import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
+import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
     listLatestArticles,
@@ -36,6 +37,7 @@ import {
     findArticleTitlesBySlugs,
     getTagKeysForArticle,
     articleService,
+    resolveArticleDataSources,
     resolveArticleSurveyTaxonomy,
 } from "@/features/blog/server";
 import { BlogProductCta } from "@/features/products";
@@ -132,6 +134,17 @@ export default async function BlogPostPage({ params }: PageProps) {
     if (!article) {
         notFound();
     }
+
+    // snapshot に sources が焼かれていれば追加 R2 read なし。旧 snapshot だけ source.json から解決する
+    const dataSources =
+        article.sources ?? (await resolveArticleDataSources({ slug, content: article.content }));
+    // 手書きの旧「データ出典」節は DataSourceList と重複するので、描画時にも一括移行と同じ変換
+    // (引用だけなら除去 / 説明を含めば「データについて」へ改名) をかける。Kindle 書籍の章に使う記事は
+    // 本文を変えられないので、この変換が恒久的に表示をそろえる。出典を解決できない記事は手書き節を残す。
+    const renderedArticle =
+        dataSources.length > 0
+            ? { ...article, content: migrateLegacyDataSourceSection(article.content).content }
+            : article;
 
     // 記事本文中の /blog/{slug} リンクからスラッグを抽出し、DB からタイトルを取得
     const blogLinkSlugs = [...article.content.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)]
@@ -297,7 +310,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     // レール末尾の sticky クラスタ: PCでTOCが読中に追従する。モバイルは本文冒頭だけを使う。
     const railSticky = (
         <div className="hidden lg:block">
-            <ArticleTableOfContents content={article.content} />
+            <ArticleTableOfContents content={renderedArticle.content} />
         </div>
     );
 
@@ -335,7 +348,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <div className="space-y-6">
                     {/* TOC (lg 未満で記事冒頭に表示。lg 以上は右 rail に表示) */}
                     <div className="lg:hidden">
-                        <ArticleTableOfContents content={article.content} />
+                        <ArticleTableOfContents content={renderedArticle.content} />
                     </div>
 
                     <ArticleCard>
@@ -371,7 +384,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                             {/* 記事本文 */}
                             <ArticleRenderer
-                                article={article}
+                                article={renderedArticle}
                                 slug={slug}
                                 relatedArticleTitles={relatedArticleTitles}
                                 affiliateBannersByCategory={affiliateBannersByCategory}
@@ -379,6 +392,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 affiliateVertical={bannerVertical}
                                 affiliateBanners={articleBanners}
                             />
+
+                            {/* データ出典 (chart source.json から派生。本文に手書きしない) */}
+                            <DataSourceList sources={dataSources} surface="blog_source" />
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">

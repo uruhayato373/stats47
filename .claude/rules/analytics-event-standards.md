@@ -272,6 +272,13 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 週次 GA4 snapshot は Japan-only の `survey_ranking` を `survey-navigation.csv` に保存し、
 > survey portfolio の `metrics.internalNav.rankingOutboundClicks` を非重複56日で集計する。
 >
+> **nav_surface の値追加 (2026-09-25・データ出典の統一)**: ページ末尾の「データ出典」
+> (`DataSourceList`) から調査ページ・e-Stat 統計表・外部データセットへ進む導線に
+> `blog_source` / `ranking_source` / `municipality_source` / `geo_source` を追加した。
+> 右レールの調査カード (`*_survey`) と混ぜると「出典欄から一次資料を開いたか」が読めなくなるため別の値にした。
+> 登録済み `nav_surface` / `nav_label` の**値追加**で新しい custom dimension は無い。
+> `nav_label` は調査なら surveyId、統計表・データセットなら表名 (外部 URL は `nav_href` に入る)。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

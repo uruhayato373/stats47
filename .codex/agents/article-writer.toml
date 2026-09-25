@@ -122,8 +122,8 @@ node .claude/scripts/lib/article-factual-check.mjs \
 ### Phase 3: 本文執筆 (アーキタイプを選ぶ → 章構成に従う)
 
 > ★**文体は「ですます調」で書く** (正典 `.claude/rules/blog-quality-standards.md`「文体」)。本文の地の文に
-> である調 (である。/だ。/だった。/ではない。/だろう。/のだ。/動詞終止形) を混在させない。callout・引用・
-> データ出典の体言止めは常体可。`quality-gate.mjs` が である調 copula 文末を **blocker** で検出するため、
+> である調 (である。/だ。/だった。/ではない。/だろう。/のだ。/動詞終止形) を混在させない。callout・引用の
+> 体言止めは常体可。`quality-gate.mjs` が である調 copula 文末を **blocker** で検出するため、
 > である調で書くと公開できない。最初から ですます で書くこと。
 
 > ★まず**記事アーキタイプを 1 つ選ぶ** (正典 `.claude/rules/blog-quality-standards.md`「記事アーキタイプ」)。
@@ -179,7 +179,10 @@ node .claude/scripts/lib/article-factual-check.mjs \
 5. **H2: まとめ** (箇条書き 5 項目)
    - 1位・最下位・倍率・地域パターン・特筆点
 
-6. **データ出典** (出典機関名 + 集計年 + e-Stat 経由整備の旨)
+6. **出典は本文に書かない** (★2026-09-25〜)
+   - ページ末尾の「データ出典」は図の `source.json` から自動表示される (`DataSourceList`)。
+     本文に `## データ出典` を書くと `quality-gate.mjs` が blocker で止める。出典は図の `source.json` に記録する
+   - 計算方法・定義・対象の限定など読者に要る説明があれば `## データについて` 節に書く
    - ★**記事内に「関連ランキング」「関連記事」セクションを書かない** (見出しごと不可)。
      関連はページ側 `RelatedRankingsSection` / `BlogRelatedArticlesSection` が tag 駆動で描画する正典 (二重表示防止・`quality-gate.mjs` が blocker)。
    - ランキング詳細への誘導は各図直下の `<source-link href="/ranking/<key>">` (本文インライン) で行う

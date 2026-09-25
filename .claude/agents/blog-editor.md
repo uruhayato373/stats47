@@ -84,6 +84,29 @@ DB (articles テーブル)           ← サイトに反映
 
 **重要**: 記事の新規作成・編集は必ず `docs/21_ブログ記事原稿/` で行うこと。`.local/r2/app/blog/` に直接書かない。
 
+## 公開済み記事の出典表示 (2026-09-25〜)
+
+出典はページ末尾の「データ出典」(`DataSourceList`) が図の `source.json` から自動表示する。本文に手書きの
+`## データ出典` 節は書かない (`quality-gate.mjs` が blocker)。既存記事を直すときの手順:
+
+R2 の書込資格は CI にしか無いので、既存記事の書き戻しは `blog-data-source-migration.yml` で行う
+(既定 dry_run=true。中身は下の 3 スクリプト):
+
+```bash
+# 1. 出典を導出できない図に displaySources を足す (置換表 data/display-sources-backfill.json)
+gh workflow run blog-data-source-migration.yml --ref main -f mode=backfill-display-sources -f dry_run=false
+# 2. all.json に sources を焼く (sync-snapshots は main のコードで動く)
+gh workflow run sync-snapshots.yml -f only=blog
+# 3. 本文の手書き節を移行する (引用だけ → 削除 / 計算方法・定義を含む → 「データについて」へ改名。Kindle 書籍の章は据え置き)
+gh workflow run blog-data-source-migration.yml --ref main -f mode=migrate-bodies -f dry_run=false
+```
+
+ローカルで試すときは `backfill-display-sources.ts` / `migrate-data-source-sections.ts` を dry-run で実行する。
+`docs/21` の原稿は `migrate-data-source-sections.ts --outbox --apply` で変換する (push すると公開が走るので、その原稿を公開する作業の一部として行う)。
+
+Kindle 書籍の章に使う記事は本文を変えない (書籍の校正指示が本文の文字列に固定されているため)。
+Web の表示は描画時の同じ変換でそろう。正典: `docs/01_技術設計/04_デザインシステム.md`「データ出典」。
+
 ## OGP・画像生成の役割分担
 
 このエージェントが扱う画像の方式割当（OGP 画像の正典は `.claude/rules/ogp-image-standards.md`）:

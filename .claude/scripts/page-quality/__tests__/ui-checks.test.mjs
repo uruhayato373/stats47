@@ -20,6 +20,15 @@ test("空の見出しを数え、読み込み中の仮枠・alt・aria-label 付
   assert.equal(analyzeHtml(html, BASE).empty_headings, 2);
 });
 
+test("「データ出典」見出しが 2 つ並ぶ (本文の手書き節 + DataSourceList) と重複として数える", () => {
+  const single = `<html><body><article><h2>まとめ</h2></article>
+    <section data-testid="data-source-section"><h2>データ出典</h2></section></body></html>`;
+  const duplicated = `<html><body><article><h2>まとめ</h2><h2>データ出典</h2></article>
+    <section data-testid="data-source-section"><h2>データ出典</h2></section></body></html>`;
+  assert.equal(analyzeHtml(single, BASE).duplicate_data_source_sections, 0);
+  assert.equal(analyzeHtml(duplicated, BASE).duplicate_data_source_sections, 1);
+});
+
 test("画像確認の対象は自サイトと R2 の <img> だけで、ASP の計測画像・_next・data URI・代替のある <source> は含めない", () => {
   const html = `<html><body>
     <img src="https://storage.stats47.jp/app/blog/sample/data/map.svg">

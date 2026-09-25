@@ -21,7 +21,6 @@ export { RankingDataTable } from "./components/RankingDataTable";
 export { RankingMapChartClient } from "./components/RankingMapChart/RankingMapChartClient";
 export { RankingYearSelector } from "./components/RankingPageHeader/RankingYearSelector";
 export { RankingDefinitionCard } from "./components/RankingDefinitionCard";
-export { RankingSourceCard } from "./components/RankingSourceCard";
 export { FeaturedRankingCard } from "./components/FeaturedRankingCard";
 export {
   getFeaturedRankingCardDefinition,

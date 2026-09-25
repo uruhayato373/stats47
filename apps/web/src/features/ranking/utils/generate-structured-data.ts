@@ -5,6 +5,7 @@
  */
 
 
+import { buildEstatTableUrl, readSourceConfigRef } from "@stats47/data-configs/data-source";
 import { filterOutNationalArea, getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
 
 import { getRequiredBaseUrl } from "@/lib/env";
@@ -236,6 +237,23 @@ function buildTemporalCoverage(
   return undefined;
 }
 
+/**
+ * JSON-LD の isBasedOn / citation に使う一次データ。item.json に焼き込まれた sourceConfig から取る
+ * (`item.source` は builder が出力しない旧フィールドで、参照すると常に空だった)。
+ * e-Stat の表なら統計表そのものの URL を指す。
+ */
+function resolvePrimarySource(
+  rankingItem: RankingItem,
+): { name: string; url: string } | null {
+  const config = rankingItem.sourceConfig;
+  const source = readSourceConfigRef(config);
+  const name = source.name ?? rankingItem.attribution?.compilation?.name;
+  if (!name) return null;
+  if (config?.statsDataId) return { name, url: buildEstatTableUrl(config.statsDataId) };
+  const url = source.url ?? rankingItem.attribution?.compilation?.url;
+  return url ? { name, url } : null;
+}
+
 export function generateRankingPageStructuredData({
   rankingItem,
   rankingValues,
@@ -248,7 +266,8 @@ export function generateRankingPageStructuredData({
   const baseUrl = getRequiredBaseUrl();
   const itemName = getRankingTitle(rankingItem);
   const unit = rankingItem.unit || "";
-  const sourceName = rankingItem.source?.name || "e-Stat";
+  const primarySource = resolvePrimarySource(rankingItem);
+  const sourceName = primarySource?.name ?? "e-Stat";
 
   const url = `${baseUrl}/ranking/${rankingItem.rankingKey}`;
 
@@ -295,18 +314,18 @@ export function generateRankingPageStructuredData({
       name: "政府統計の利用規約",
       description: "総務省統計局が定める政府統計の利用規約",
     },
-    ...(rankingItem?.source && {
+    ...(primarySource && {
       isBasedOn: {
         "@type": "Dataset",
-        name: rankingItem.source.name,
-        url: rankingItem.source.url ,
-        description: `${rankingItem.source.name || "e-Stat"}が提供する政府統計データセット。${rankingItem.source.name || "e-Stat"}は、日本の政府統計を統合的に提供するポータルサイトです。`,
+        name: primarySource.name,
+        url: primarySource.url,
+        description: `${primarySource.name}の統計表。stats47 はこの表の値を都道府県ランキングに整理しています。`,
       },
       // E-E-A-T: 一次データの出典を明示
       citation: {
         "@type": "CreativeWork",
-        name: rankingItem.source.name,
-        url: rankingItem.source.url,
+        name: primarySource.name,
+        url: primarySource.url,
       },
     }),
     ...(temporalCoverage && { temporalCoverage }),

@@ -168,19 +168,17 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 - `data/*.svg` の `<svg>` タグに `width`/`height` 属性が明示されているか
   - 修正ルール: 横長は `width="780" height="{round(780*H/W)}"`、 縦長は元寸法維持、 正方形は `width="700" height="700"`
 - `data/*.svg` のサブタイトル行に出典・データソース名・年度が埋め込まれていないか
-  - 出典情報は SVG に含めず、 md 側の `<data-source>` で記載する
+  - 出典情報は SVG に含めず、 図の `source.json` に記録する (ページ末尾の「データ出典」に自動表示される)
 
 #### 3. データ注記・出典
 
 - 年次ズレ (主要指標と比べて 2 年以上古い) があるデータの散布図・チャート直下に `> [!NOTE]` コールアウトが付いているか
-- 各チャート (`![...](data/...)` の画像) の直下に `<data-source>` コンポーネントがあるか
-  - 形式: `<data-source url="..." label="..." note="..."></data-source>`
-  - `url` と `label` は必須、 `note` は任意、 `year` 属性は **使用しない**
-  - **`url` 属性の欠落チェック**: `<data-source label="..."` のみで `url=` がない場合は ❌ として報告し、 DB から `statsDataId` を取得して `https://www.e-stat.go.jp/dbview?sid={statsDataId}` を設定
-  - `label` は `e-Stat {source.name}` の形式に統一 (例: `e-Stat 社会・人口統計体系`)
-  - 旧形式 (`> 出典：[...](URL)` / `**データ出典:**` 等) は `<data-source>` に変換
-- 記事末尾に冗長な全体出典 `<data-source>` が残っていないか
-  - 各チャート直下に個別出典がある場合、 末尾の汎用出典は **不要** (削除)
+- **出典は本文に書かれていないか** (★2026-09-25〜)。ページ末尾の「データ出典」は図の `source.json` から
+  `DataSourceList` が自動表示する。本文の `## データ出典` 節は削除し、計算方法・定義などの説明だけを
+  `## データについて` 節に残す (`quality-gate.mjs` が手書きの出典節を blocker で止める)
+- 各図の `source.json` から出典を導出できるか (`rankingKey` / `statsDataId` / `sourceName`、GIS 派生は
+  `displaySources`)。導出できない図は出典が表示されないので `source.json` を補う
+- 図の直下の `<data-source>` タグは新規に足さない (既存タグは残してよい。表示は `ChartFooter` と同じ)
 
 #### 4. サイト内リンク
 

@@ -57,6 +57,7 @@ export async function auditUrl(
       metrics.ad_slots = analysis.ad_slots;
       metrics.ad_duplicate_count = analysis.ad_duplicate_count;
       metrics.empty_headings = analysis.empty_headings;
+      metrics.duplicate_data_source_sections = analysis.duplicate_data_source_sections;
       imageUrls = analysis.image_urls;
       jsonldTypeCounts = analysis.jsonld_type_counts;
       jsonldErrors = analysis.jsonld_errors;

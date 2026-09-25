@@ -7,6 +7,7 @@ export const UI_METRIC_KEYS: MetricKey[] = [
   "broken_images",
   "degraded_images",
   "empty_headings",
+  "duplicate_data_source_sections",
   "clipped_text",
   "overlapping_tap_targets",
   "a11y_violations",

@@ -25,6 +25,7 @@ import { ChevronDown } from 'lucide-react';
 
 import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
 
@@ -427,14 +428,13 @@ export default async function MunicipalityRankingPage({
         </div>
       )}
 
-      <footer className="mt-8 border-t border-border pt-5 text-sm leading-relaxed text-muted-foreground">
+      {/* 市区町村 snapshot に焼き込まれた出典 (都道府県 metric の統計表とは別の表を使う指標がある) */}
+      <DataSourceList
+        sources={[{ label: item.source.name, url: item.source.url, tables: [] }]}
+        surface="municipality_source"
+      />
+      <footer className="mt-4 text-sm leading-relaxed text-muted-foreground">
         <p>
-          出典：
-          <a href={item.source.url} className="text-primary hover:underline">
-            {item.source.name}
-          </a>
-        </p>
-        <p className="mt-1">
           比較対象は市・町・村です。政令指定都市の行政区と「特別区部」の集約行を除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>
       </footer>

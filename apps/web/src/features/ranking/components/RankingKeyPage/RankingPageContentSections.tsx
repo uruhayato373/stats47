@@ -6,7 +6,6 @@ import type { AreaType } from "@/features/area";
 import {
     DataUsageCard,
     RankingDefinitionCard,
-    RankingSourceCard,
 } from "@/features/ranking";
 
 import {
@@ -24,6 +23,8 @@ export interface RankingPageSections {
     insights?: ReactNode;
     regionalAnalysis?: ReactNode;
     faq?: ReactNode;
+    /** ページ末尾「データ出典」(server で item.json の lineage から解決した DataSourceList) */
+    dataSources?: ReactNode;
     /** 統計→公務員AI ファネル CTA — 出典カードの直後・footer 広告の前に表示 */
     funnelCta?: ReactNode;
     /** AdSense停止中に本文中段へ出す文脈一致バナー（画像のみ） */
@@ -103,13 +104,10 @@ export function RankingPageContentSections({
             {displayInfo.description && (
                 <RankingDefinitionCard
                     definition={displayInfo.description}
-                    itemDetail={rankingItem}
                 />
             )}
 
-            {rankingItem?.source && (
-                <RankingSourceCard source={rankingItem.source} />
-            )}
+            {sections.dataSources}
 
             {sections.funnelCta}
 

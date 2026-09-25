@@ -21,6 +21,35 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [DATA-SOURCE-ROLLOUT-01] 出典表示の統一を本番へ反映し、既存記事の本文移行と監査 ratchet を完了する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts] [起票:2026-09-25]
+
+- **背景**: commit e236f902f で出典表示を `DataSourceList` に統一した (正典 `docs/01_技術設計/04_デザインシステム.md`「データ出典」)。
+  本番反映前の実測: 公開 606 本中、本文の手書き「データ出典」節 598 本、snapshot の sources 未焼き込み 606 本。
+  コードは旧 snapshot でも描画時に source.json から出典を解決し、手書き節を同じ変換で隠すので、以下の順序のどこで止めても表示は壊れない。
+- **次 (実行順)**: ① develop→main (PR #1027) をマージしてデプロイ (2026-09-25 オーナー承認済み)。R2 書込資格は CI にしか無いので②④は `blog-data-source-migration.yml` で行う。
+  ② `mode=backfill-display-sources dry_run=false` で出典を導出できない 7 記事 16 件の source.json に displaySources を付ける。③ `sync-snapshots.yml only=blog` で all.json に sources を焼く (main のコードで動く)。
+  ④ `mode=migrate-bodies dry_run=false` で本文を移行する (ローカル dry-run 実測: 削除 390 / 改名 134 / Kindle 章で据え置き 61 / 出典未解決 13)。本文は SSG なので次のデプロイで反映 (描画時の変換で見た目は既に同じ)。
+  ⑤ 週次監査を実行し、実測値で `.claude/config/survey-taxonomy-ratchet.json` の blog に `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` / `requireSnapshotSources: true` を設定する。
+- **原稿 (docs/21)**: 手書き節を持つ原稿 27 本 (published:true 19 本) は変換していない。push すると公開 workflow が動き、公開を保留している理由を確認できていないため。
+  次にその原稿を公開・改稿するとき quality-gate が止めるので、`migrate-data-source-sections.ts --outbox --apply` で変換してから進める。
+- **停止条件**: Kindle 書籍の章の記事 (KINDLE_BOOKS の blogSlug) は本文を変えない (校正指示が外れて書籍を再生成できなくなる。校正指示を持つ 64 記事中 23 記事で実測)。URL を確認できない出典は displaySources に url を書かない。
+- **完了条件**: 週次監査で「sources 未焼き込み 0」かつ手書き節が Kindle 章 + 図の無い読み物だけになり、3 つの ratchet が設定済み。本番の `/blog/beer-peak-month-july-to-december` で出典節が 1 つ・調査ページと e-Stat へのリンクが 200。
+
+### [GSC-COV-5XX-20260925] GSC 是正: 本番で 5xx を返し続ける 2 URL を直す
+
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt] [起票:2026-09-25]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/blog/gasoline-consumption-quantity-vs-densely-inhabited-district (HTTP 503 / GSC: discovered-not-indexed / 最終クロール 1970-01-01)
+  - https://stats47.jp/blog/white-bread-consumption-quantity-prefecture-gap (HTTP 503 / GSC: discovered-not-indexed / 最終クロール 1970-01-01)
+- **次**: `--probe <url>` で 5xx が続くことを確かめ、該当ルート (`apps/web/src/app/`) と R2 データの読み込みから原因を特定して直す。3 回の再測定を経ても 5xx なので単発の障害ではない。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --limit 1 --dry-run] [起票:2026-09-23] [期日:2026-10-20]
@@ -724,6 +753,46 @@ updated: 2026-09-21
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [GSC-COV-SOFT404-20260925] GSC 是正: Google がソフト 404 と見ている 2 ページの中身を補強するか noindex にする
+
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt] [起票:2026-09-25]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/areas/17000/safety (HTTP 200 / GSC: soft-404 / 最終クロール 2026-07-28)
+  - https://stats47.jp/blog/apple-expenditure-ranking (HTTP 200 / GSC: soft-404 / 最終クロール 2026-07-28)
+- **次**: `--probe <url>` で本文量と見出しを見て、県・指標に固有の値が本文にあるかを確かめる。無ければ補強し、補強できないなら noindex にする。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+
+### [GSC-COV-404-20260925] GSC 是正: sitemap に載っているのに 404 を返す 1 URL を直す
+
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt] [起票:2026-09-25]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/47 (HTTP 404 / GSC: not-found-404 / 最終クロール 2026-09-11)
+- **次**: sitemap が 404 の URL を載せている。ページを復活させるか、sitemap の生成元 (`apps/web/src/app/sitemap.ts` と参照している config) から外す。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+
+### [TOOL-MATERIAL-BUILDER-01] 資料ビルダー（指標×地域を出典付き Excel へ持ち出す無料ツール）の最小版を作る
+
+タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-09-24]
+
+- **owner**: Claude Code（実装） / strategy-advisor（有料化の採否は `ADMIN-STAT-PILOT-01` 側）
+- **正典**: 境界と実装契約は `docs/01_技術設計/03_情報設計.md`「ページとツールの境界」、保存先は `docs/01_技術設計/02_データアーキテクチャ.md`「ツールと利用者データ」。利用者が選んだ指標 N 個×地域 M 個を、年次・単位・出典を揃えた一つの Excel にする。既存ページ（`/areas/[code]/[themeSlug]` 等）の一覧表示は複製しない。
+- **根拠（2026-09-24 時点）**: ランキング CSV のダウンロードは 28 日で 193 件・120 ページ（`ADMIN-STAT-PILOT-01` の GA4 実測）。データを持ち出す利用はあるが、複数指標をまとめて持ち出す需要・支払意思は未検証。
+- **開始条件**: `ADMIN-STAT-PILOT-01` の①で対象資料 1 件の指標・地域粒度・年次が具体化されたら着手し、その資料を初期プリセットにする。聞き取り前に汎用の指標選択 UI を作り込まない。
+- **次（実行順）**: ①都道府県粒度だけで、指標と地域の上限を入力検証で固定した R2 オンザフライ生成の API を `api/ranking/[rankingKey]/download` と同じ構成で作る ②`/tools/<slug>` の route を url-policy・middleware・sitemap とその test に登録し、結果を noindex にする ③入口のページから条件入力済みで開く導線を 1 か所だけ置く ④利用・出力の GA4 イベントを analytics-event-standards の台帳に登録してから配線する。
+- **禁止**: ログイン・保存・決済・会員を作らない（データアーキテクチャの改訂と収益化戦略 §5 のゲートが先）。都道府県と市区町村を一つの出力に混ぜない。年次・定義を揃えられない値を揃えたことにしない。
+- **DB は不要（2026-09-24 確認）**: 指標の選択はキー参照（`app/stats/<key>/values.json` を N 個読む）で、検索ではない。都道府県の実測は有効求人倍率 6KB・総人口（全年）294KB で、20 指標でも数 MB に収まる。
+- **市区町村へ広げるとき**: 総人口の `cities.json`（全年）は 2.7MB あり、大きな指標を 10 個選ぶと数十 MB になる。Workers のメモリ・CPU 上限は未計測。対策は DB ではなく、最新年だけを切り出した派生 snapshot を R2 に作るか、選べる指標数の上限を下げること。拡張前に 1 リクエストのメモリと実行時間を計測する。
+- **停止条件**: `ADMIN-STAT-PILOT-01` が Stop になった、または対象資料の指標が R2 の都道府県データで揃わない場合は着手しない。
+- **完了条件**: localhost でプリセットの Excel が生成され、全セルに指標名・年次・単位・出典が付き、利用者の Excel 環境で開いて編集できる。route の test と `npm run type-check` が通る。
+
 ### [AREA-SPECIALTY-IMAGES-01] 都道府県ページの特産品画像が未生成で頭文字タイルのまま
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:週次 page-quality の degraded_images が prefecture-detail で 0] [起票:2026-09-23]
@@ -733,26 +802,22 @@ updated: 2026-09-21
 - **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 
-### [AREA-DATABOOK-MISSING-VALUES-01] 県データブックの 2 指標 (犯罪率・住宅の床面積) に R2 観測値が無い
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:curl -s -o /dev/null -w '%{http_code}' https://storage.stats47.jp/app/ranking/crime-rate-per-1k/values.json が200を返す] [起票:2026-09-23]
-
-- **owner**: data-ingester (投入) / ranking-publisher (公開)
-- **実測 (2026-09-23)**: `AREA_DATABOOK_TEMPLATE` (`packages/data-configs/src/area-databook/template.ts`) が参照する `crime-rate-per-1k` (statsDataId 0000020311) と `housing-floor-area` (0000020308) は config が `isActive: true` だが、R2 の `app/ranking/<key>/values.json` と `app/stats/<key>/values.json` がどちらも 404 (`item.json` は 200)。`known-ranking-keys.ts` にも `gone-ranking-keys.ts` にも無く、`https://stats47.jp/ranking/crime-rate-per-1k` は 410。IG 地域カルーセルの生成で 47 県すべて取得失敗して発覚した。県ページのデータブックでこの 2 項目が空欄になっているかは未確認。
-- **原因と修正 (2026-09-25・main 反映待ち)**: 2 key はどちらも市区町村専用 config (`entities: city`・2005 年まで) で、都道府県の値は元から存在しない。data-refresh も「Not an active prefecture ranking」で拒否した。テンプレを都道府県の同義指標 `penal-code-offenses-recognized-per-1000` と、全住宅の県指標が無いため持ち家率の隣に `floor-area-per-dwelling-owner` (持ち家の延べ床面積) へ差し替えた (commit 9a4da5dc6)。
-- **残り**: main 反映後に `sync-snapshots` (only=area-profile) で databook.json を再生成し、`/areas/13000` で 2 項目に値が出ることを確かめて閉じる。
-- **旧・次**: ①県ページ (例 `/areas/13000`) のデータブックで 2 項目の表示を確認する。②e-Stat から観測値を投入し、memory `project_ranking_publish_pipeline_gap` の手順 (KNOWN/SITEMAP/R2 values/OGP) で公開する。投入できない事情があればテンプレートから外す。
-- **完了条件**: 2 指標の values.json が 200 を返し、県ページのデータブックに値が出る (またはテンプレートから外れている)。
-
 ### [METRIC-ACUPUNCTURIST-RATE-UNIT-01] 「人口10万対はり師数」の値が実数になっている
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23]
 
 - **owner**: data-ingester
 - **実測 (2026-09-23)**: `acupuncturist-rate` は title が「人口10万対はり師数」、unit が「人」だが、R2 `app/ranking/acupuncturist-rate/values.json` (2020) の値は東京都 22,314・大阪府 16,049・鳥取県 277 で、人口 10 万人あたりではなく実数。config は `statsDataId: 0004026940` / `cdCat01: 100` / `conversionFactor: 1` で、`normalizationOptions` に「人/10万人」があるのに基底値は正規化されていない。ランキングページもこの名前で実数を並べている。IG 地域カルーセルの試作で東京の「全国 1 位」として拾われて発覚した。
-- **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。
+- **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。 → 2026-09-25 確認: config の title は「知能犯認知件数」・unit「件」で実数と一致し、画面表示は正しい。key 名だけが per-100k で、変えると URL が変わるため本カードの対象外 (X 投稿で「10 万人あたり」と書かないことだけ注意)。
 - **原因と config 修正 (2026-09-24)**: 0004026940 で config が指していた cdTab=0120 は「はり師数」の実数 (東京都 22,314人)。人口10万対の率は cdTab=0160 (東京都 158.8、1位大阪府 181.6)。同じ誤りが柔道整復師数 (0140→0180) と看護師数 0004026841 (0270→0310) にもあった。3 config を率の列へ直し、二重割りを防ぐため「人口10万人あたり」の換算オプションを外し、seoTitle から古い順位の数値を外した。犯罪 3 件・火災死亡者数は title が実数名で値と一致しているので対象外。`validate:config` / `validate:years` / type-check / vitest 971 件 exit 0。
-- **次**: ① 3 metric (acupuncturist-rate / judo-therapist-rate / nurses-per-100k-population) を R2 へ再取り込みし item / values を再生成する。② 再取り込み後に率の値で seoTitle を作り直す。(商品パックの `product-factory/src/data/datasets/nurses-per-100k-population.ts` は既に率の値 (東京都 854.6) を持っており再生成は不要。R2 修正後に東京都が 854.6 になることで一致を確かめる。)
+- **進捗 (2026-09-25 07:15 JST 時点・別 PC で続きをやる人向け)**:
+  - 済: config を率の列へ修正 (main 反映済み、PR #1024) / R2 再取り込み (data-refresh run 36056848146 success。はり師 1位大阪府 181.6・柔道整復師 1位大阪府 105.5・看護師 1位高知県 1,623.4、東京都の看護師 854.6 は商品パック値と一致) / seoTitle・seoDescription を新しい値で再作成 (PR #1025 で main 反映、item 再生成 run 36063161344 success、本番 title で確認) / ランキング AI 解説を 3 件再生成 (audit blocker 0・critic PASS、publish-ai-content run 36061846323 success)。
+  - 実行中: `sync-snapshots.yml` only=master (run 36063838343、06:49 JST 開始)。他ページの「関連ランキング」カードが読む `app/category/<key>/items.json` の `top1` がまだ旧実数 (例: 柔道整復師・看護師ページに「1位 東京都 22,314人」) なので、その再生成と、同じ run 内の「変更があった ranking の OGP / カード画像」再生成・known/sitemap 再生成を待っている。
+- **次 (別 PC で再開したら)**:
+  1. `gh run view 36063838343` で success を確認する。failure / cancelled なら `gh workflow run sync-snapshots.yml --ref main -f only=master -f dry_run=false` を再実行する (r2-write の同時実行グループで待機中の run は後続に取り消されるので、他の R2 書き込み workflow と同時に投げない)。
+  2. この run が「keys changed」で PR を作っていたら中身を確認してマージする。
+  3. 確認: `curl -s "https://storage.stats47.jp/app/category/socialsecurity/items.json" | grep -o '"rankingKey":"acupuncturist-rate"[^}]*top1[^}]*}'` が大阪府 181.6 を返し、`curl -s https://stats47.jp/ranking/judo-therapist-rate | grep -c '22,314'` と `.../nurses-per-100k-population` が 0 になること。3 指標の OGP (`https://storage.stats47.jp/app/ranking/<key>/ogp/ogp.png`) も新しい順位で描かれていること。
+  4. すべて満たしたらこのカードを削除する。
 - **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
@@ -1627,6 +1692,7 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 - **正典**: `docs/00_プロジェクト管理/02_収益化戦略.md` §2・§3.4・§5。一般向け統計メディアを維持しながら、議会答弁・計画策定のために各所の統計をExcelへ集める重複作業を減らす。課題はオーナーとの議論で確認したが、対象業務の詳細・削減時間・支払者・価格・購入需要は未検証。
 - **記録先（2026-09-20 新設）**: `.claude/state/products/admin-stat-interviews.json`。聞き取り結果はここへ書く（対象業務・完成条件・使った統計・現行手順・所要時間・手直し・再実施頻度・既存手段で残る作業・支払者・根拠）。**回顧による時間と実測を別フィールドで持つ**（収益化戦略 §5 段階2 の要求）。感想や意欲は記録しない（購入意思の代用にしないため）。
 - **聞き取り相手はすでにサイトへ来ている（2026-09-20 実測）**: 行政実務の文脈にあるページが GSC 上位に並ぶ。`/blog/assembly-answer-chatgpt-5steps`（48 clicks / 366 imp・CTR 13.1%、サイト全体 3.36% の 4 倍）、`/blog/local-government-debt-burden`（425 clicks）、`/blog/local-tax-revenue-gap`（47 clicks）。出典 `.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W37/pages.csv`。**相手を探す段階は越えているので、①②に時間をかけすぎない。**
+- **①の途中経過（2026-09-25・オーナー指示で一時停止）**: 題材は「都道府県の介護保険事業支援計画（第9期・2024〜2026年度）の高齢者の現状分析章」にオーナーが決めた（比較した候補は水道広域化推進プラン・農業振興計画）。理由は、3年ごとに47県すべてが策定し、第10期（2027年度〜）の策定作業が今年度にあたること、metric 定義が最も厚いこと（`elderly-population-ratio`・`elderly-single-person-households`・`single-households-age65plus-{male,female}`・`long-term-care-certified-persons`・`nursing-home-capacity-per-1000-65plus`・`nursing-home-staff-per-100k-65plus` など）。対象資料の第一候補は岡山県「第９期 岡山県高齢者保健福祉計画・介護保険事業支援計画（案）」令和6年2月（https://www.pref.okayama.jp/uploaded/attachment/363015.pdf 、14.3MB を取得済み）。**案の段階の版なので、確定版の公開 URL を探して差し替える。** 既定の `pdftotext`（mingw64）は日本語を出力しなかったため、指標の抜き出しは未着手。**R2 の都道府県データで揃う指標・揃わない指標の実測も未着手**で、どの指標も揃ったとはまだ言えない。再開時の次の一手は、①確定版 PDF から現状分析章の図表を列挙し（指標名・地域粒度・年次・出典）、②各指標の R2 `app/stats/<key>/values.json` の有無と最新年を確認して表にし、③揃わない指標が完成条件に必須なら TOOL-MATERIAL-BUILDER-01 の停止条件に当たるとして報告する。
 - **GA4 の業務文脈シグナル（2026-09-24 実測）**: GA4 Data API で country=Japan、2026-08-27〜09-23 のブログ着地セッションを対象に、PC 比率と平日9〜18時比率を「職場で読まれている」手掛かりとして集計した（行政実務者本人である証明ではなく、祝日は除外していない）。ブログ着地全体は 7,199 セッションで PC 比率 45.0%、平日9〜18時比率 44.4%。この平均を大きく上回る着地は water-sewage-crisis（47 セッション・PC 96%・平日 73%）、estat-7-techniques-from-unusable-to-usable（38・95%・69%）、household-solo-vs-dualincome（36・92%・63%）、rice-harvest-volume-prefecture-gap（163・80%・88%）、farmland-crisis-abandoned-land（94・63%・57%）、aging-solo-living-crisis（73・67%・54%）、automotive-industry-transformation-map（227・67%・53%）だった。一方でこのカードが根拠にしている `/blog/local-government-debt-burden`（606 セッション）は PC 30%・平日 39% で平均を下回り、`/blog/assembly-answer-chatgpt-5steps`（88 セッション）は PC 52%・41% でほぼ平均だった。Microsoft Teams 経由（参照元 teams.public.onecdn.static.microsoft）の流入が 28 日で 17 セッションあり、education-expenses-gap・local-government-debt-burden・estat-7-techniques-from-unusable-to-usable・aging-solo-living-crisis などに着地しており、組織内でリンクが共有されている形跡がある。ランキング CSV のダウンロード（file_download）は 28 日で 193 件・120 ページだが、ブログ着地からのダウンロードは 0 件だった。継続観測先は週次 snapshot の `.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/landing-context.csv`（2026-W38 から、コミット `3ea0fece3`）。**この実測が示すのは、聞き取り①の題材候補として地方財政より上下水道・農業・高齢単身・e-Stat 実務の側に職場からの読者が集まっている可能性であり、標本が小さいため題材決定の決め手ではなく優先順位づけの参考にとどめる。**
 - **優先・次（実行順）**: ①公開情報で再現できる実際の資料1件について、必要な地域粒度・統計・年次・完成条件・現行手順・再実施頻度を具体化する。②担当者3人を目安に、RESAS・自治体ダッシュボード・書籍・既存Excelでも残る作業と支払者の購入条件を確認する。③同じ仕様で助けられる場合だけ既存資産から無料サンプルを1つ作り、出典照合と利用者のExcel環境での編集を確認し、手直し込みの総時間を比較する。④収益化戦略§5の試用条件を満たした場合に価格・工数上限・時間単価・販売面を定め、有料pilotのGo/Pivot/Stopを判断する。期日は初回の採否・不足証拠確認日であり、未検証でも発売する期限ではない。
 - **既存タスクとの境界**: `PRODUCT-SALES-READINESS-01`等の品質是正・既存購入者への対応は維持するが、全商品完成を本検証の前提にしない。既存パックを利用できるかを先に調べ、用途未確認の新作・販売面を増やさない。採否後の優先順位は事業計画TS・商品カタログの開始条件にも反映する。商品在庫を需要の証拠と扱わない。

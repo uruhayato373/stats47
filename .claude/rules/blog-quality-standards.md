@@ -394,7 +394,7 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 | 関連記事 | ページ側 `BlogRelatedArticlesSection` (tag 駆動) | ❌ 記事内 `## 関連記事` / `### 関連記事` を書かない |
 | AI スクール広告 | (コードから除去済・2026-06-02) | 記事に書かない |
 | 関連データ DL | (コードから除去済・2026-06-02) | 記事に書かない |
-| 出典 | `## データ出典` テキスト または `<data-source>` タグ | ✅ どちらか (本文末) |
+| 出典 | **ページ側 `DataSourceList`** (図の `source.json` から自動表示。調査名 → `/survey/<id>`、統計表 → e-Stat) | ❌ 本文に `## データ出典` を書かない (★2026-09-25〜 `quality-gate.mjs` が blocker)。出典は図の `source.json` に記録し、GIS 派生などは `displaySources` で明示する。計算方法・定義の説明が要るときだけ `## データについて` 節を書く |
 | ランキング詳細への誘導 | `<source-link href="/ranking/{key}">` | ✅ **各図の直下にインライン**配置 (末尾集約禁止) |
 | ~~AdSense 枠~~ | `<ad-slot></ad-slot>` は **2026-09-20 の恒久停止で無効**。`ADSENSE_DISPLAY_ENABLED=false` なので何も描画されない。新規記事に書かない (既存記事の残存タグは無害) | ❌ 使わない |
 
@@ -667,6 +667,8 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | 記事アーキタイプ (A/B/C/D/D2/E/F/G/H) の必須分析視点 | **critic** | — | 型は宣言できるが「視点を満たしたか」は意味判断 |
 | 読者価値・冗長・図表重複・curiosity gap の真正性 | **critic** | — | review.md verdict PASS が公開の必須条件 |
 | critic レビュー通過 (review.md PASS) | 機械 | blocker | `hasCriticPass` |
+| 本文に手書きの「データ出典」節を書かない | 機械 | blocker | `hasLegacyDataSourceSection` |
+| 出典を導出できる (図の source.json か /ranking/ リンク) | 機械 | warn | `hasSourceLineage`。公開後は日次 `audit-published-blog.mjs` が出典 0 件の図付き記事を数える |
 
 **ゲートを足す前に必ずコーパスで該当率を測る。** 「括弧に数字があれば違反」と広げた lint は
 公開済み 424 記事の 97.6% を弾き、`(人口10万人当たり)` のような正当な注記まで巻き込んだ

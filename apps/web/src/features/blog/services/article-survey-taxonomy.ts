@@ -1,10 +1,18 @@
 import "server-only";
 
-import { METRICS_REGISTRY } from "@stats47/data-configs";
+import {
+  METRICS_REGISTRY,
+  mergeDataSourceEntries,
+  type DataSourceEntry,
+} from "@stats47/data-configs";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import {
+  extractGeoAnalysisSlugs,
   getSurveyTaxonomyEntries,
+  resolveBlogChartDataSources,
   resolveBlogChartSurveyTaxonomy,
+  resolveGeoItemDataSources,
+  resolveMetricDataSources,
   resolveSurveyTaxonomy,
 } from "@stats47/ranking";
 
@@ -60,4 +68,35 @@ export async function resolveArticleSurveyIds(
 ): Promise<string[]> {
   const surveys = await resolveArticleSurveyTaxonomy(input, fetchSource);
   return surveys.map((survey) => survey.id);
+}
+
+/**
+ * 記事末尾「データ出典」の行。図の source.json (と参照先の geo item) から派生し、exporter が
+ * snapshot の `sources` へ焼く。図が出典を持たない記事だけ本文の ranking リンクへ fallback する。
+ * 正典: `.claude/rules/survey-linkage-standards.md` §2
+ */
+export async function resolveArticleDataSources(
+  input: { slug: string; content: string },
+  fetchSource: SourceFetcher = fetchFromR2AsJson,
+): Promise<DataSourceEntry[]> {
+  const bases = extractArticleChartBases(input.content);
+  const perChart = await Promise.all(
+    bases.map(async (base) => {
+      const source = await fetchSource(`app/blog/${input.slug}/data/${base}.source.json`);
+      const geoEntries = await Promise.all(
+        extractGeoAnalysisSlugs(source).map(async (geoSlug) =>
+          resolveGeoItemDataSources(await fetchSource(`app/geo/${geoSlug}/item.json`)),
+        ),
+      );
+      return [...resolveBlogChartDataSources(source, METRICS_REGISTRY), ...geoEntries.flat()];
+    }),
+  );
+  const fromCharts = mergeDataSourceEntries(perChart.flat());
+  if (fromCharts.length > 0) return fromCharts;
+  return mergeDataSourceEntries(
+    extractArticleRankingKeys(input.content).flatMap((key) => {
+      const metric = METRICS_REGISTRY[key];
+      return metric ? resolveMetricDataSources(metric, METRICS_REGISTRY) : [];
+    }),
+  );
 }

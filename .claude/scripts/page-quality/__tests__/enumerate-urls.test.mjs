@@ -22,8 +22,10 @@ test("/ranking/xxx は ranking", () => {
   assert.equal(classifyPath("/ranking/total-population"), "ranking");
 });
 
-test("/blog/xxx は blog", () => {
-  assert.equal(classifyPath("/blog/some-article"), "blog");
+test("/blog/<slug> は記事詳細 (blog-article)、一覧と /blog/tags は blog", () => {
+  assert.equal(classifyPath("/blog/some-article"), "blog-article");
+  assert.equal(classifyPath("/blog"), "blog");
+  assert.equal(classifyPath("/blog/tags"), "blog");
 });
 
 test("/survey/xxx は survey", () => {

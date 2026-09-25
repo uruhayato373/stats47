@@ -1,3 +1,7 @@
+import { resolveRankingItemDataSources } from "@stats47/ranking";
+
+import { DataSourceList } from "@/components/molecules/DataSourceList";
+
 import { BannerAd, isLandscapeBanner } from "@/features/ads";
 import { detectProductKeyword } from "@/features/ads/constants/product-keywords";
 
@@ -21,6 +25,14 @@ import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsS
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
 
 import type { RankingPageModel } from "../../services/load-ranking-page-model";
+
+/** 地図の行政区域データ。値の出典ではないので note で区別して同じ「データ出典」に並べる */
+const MAP_DATA_SOURCE = {
+  label: "『歴史的行政区域データセットβ版』（CODH作成）",
+  url: "https://geoshape.ex.nii.ac.jp/city/",
+  tables: [],
+  note: "地図データ",
+};
 
 interface RankingPageClientShellProps {
   rankingKey: string;
@@ -90,6 +102,13 @@ export function RankingPageClientShell({
           <RankingPageSupplementCardsSection
             key="ranking-page-cards"
             rankingKey={rankingKey}
+          />
+        ),
+        dataSources: (
+          <DataSourceList
+            key="data-sources"
+            sources={[...resolveRankingItemDataSources(model.rankingItem), MAP_DATA_SOURCE]}
+            surface="ranking_source"
           />
         ),
         funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (

@@ -1,3 +1,5 @@
+import { type DataSourceEntry } from '@stats47/data-configs';
+
 import { type ArticleRow } from './article.types';
 
 export const BLOG_SNAPSHOT_KEY = 'app/blog/all.json';
@@ -10,6 +12,8 @@ export interface SnapshotArticle extends Omit<ArticleRow, 'tags'> {
   tags: SnapshotArticleTag[];
   /** article chart source.json → survey taxonomy core の派生結果。 */
   surveyIds?: string[];
+  /** 記事末尾「データ出典」の行 (chart source.json / geo item から派生)。 */
+  sources?: DataSourceEntry[];
   /** 散布図 source.json が示す 2 指標ペア (各ペア昇順・重複なし)。ペアの無い記事は省略。 */
   metricPairs?: Array<[string, string]>;
 }
@@ -49,6 +53,16 @@ function assertNullableBoolean(value: unknown, path: string): boolean | null {
   return value;
 }
 
+function isDataSourceEntry(value: unknown): value is DataSourceEntry {
+  return isRecord(value) && typeof value.label === 'string' && value.label.length > 0 &&
+    Array.isArray(value.tables) && value.tables.every(
+      (table) => isRecord(table) && typeof table.label === 'string' && typeof table.url === 'string'
+    ) &&
+    (['organization', 'surveyId', 'url', 'license', 'note'] as const).every(
+      (field) => value[field] === undefined || typeof value[field] === 'string'
+    );
+}
+
 function parseSnapshotArticle(value: unknown, index: number): SnapshotArticle {
   if (!isRecord(value)) throw new Error(`articles[${index}] must be an object`);
   const path = (field: string) => `articles[${index}].${field}`;
@@ -65,6 +79,10 @@ function parseSnapshotArticle(value: unknown, index: number): SnapshotArticle {
   if (value.surveyIds !== undefined && (!Array.isArray(value.surveyIds) ||
     !value.surveyIds.every((surveyId) => typeof surveyId === 'string'))) {
     throw new Error(`${path('surveyIds')} must contain strings`);
+  }
+  if (value.sources !== undefined && (!Array.isArray(value.sources) ||
+    !value.sources.every(isDataSourceEntry))) {
+    throw new Error(`${path('sources')} must contain data source entries`);
   }
   if (value.metricPairs !== undefined && (!Array.isArray(value.metricPairs) ||
     !value.metricPairs.every((pair) => Array.isArray(pair) && pair.length === 2 &&
@@ -87,6 +105,7 @@ function parseSnapshotArticle(value: unknown, index: number): SnapshotArticle {
     updatedAt: assertNullableString(value.updatedAt, path('updatedAt')),
     tags: value.tags as SnapshotArticleTag[],
     ...(value.surveyIds === undefined ? {} : { surveyIds: value.surveyIds as string[] }),
+    ...(value.sources === undefined ? {} : { sources: value.sources as DataSourceEntry[] }),
     ...(value.metricPairs === undefined
       ? {}
       : { metricPairs: value.metricPairs as Array<[string, string]> }),

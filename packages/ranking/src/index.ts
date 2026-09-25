@@ -25,3 +25,4 @@ export {
   type ValuesContext,
 } from "./builders/build-ranking-item-from-metric";
 export * from "./survey/survey-taxonomy";
+export * from "./survey/data-source-entries";
