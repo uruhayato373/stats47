@@ -21,6 +21,19 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [GSC-COV-5XX-20260925] GSC 是正: 本番で 5xx を返し続ける 2 URL を直す
+
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt] [起票:2026-09-25]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/blog/gasoline-consumption-quantity-vs-densely-inhabited-district (HTTP 503 / GSC: discovered-not-indexed / 最終クロール 1970-01-01)
+  - https://stats47.jp/blog/white-bread-consumption-quantity-prefecture-gap (HTTP 503 / GSC: discovered-not-indexed / 最終クロール 1970-01-01)
+- **次**: `--probe <url>` で 5xx が続くことを確かめ、該当ルート (`apps/web/src/app/`) と R2 データの読み込みから原因を特定して直す。3 回の再測定を経ても 5xx なので単発の障害ではない。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue --limit 1 --dry-run] [起票:2026-09-23] [期日:2026-10-20]
@@ -723,6 +736,31 @@ updated: 2026-09-21
 - **正典**: `.claude/rules/blog-data-schema.md`
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [GSC-COV-SOFT404-20260925] GSC 是正: Google がソフト 404 と見ている 2 ページの中身を補強するか noindex にする
+
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt] [起票:2026-09-25]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/areas/17000/safety (HTTP 200 / GSC: soft-404 / 最終クロール 2026-07-28)
+  - https://stats47.jp/blog/apple-expenditure-ranking (HTTP 200 / GSC: soft-404 / 最終クロール 2026-07-28)
+- **次**: `--probe <url>` で本文量と見出しを見て、県・指標に固有の値が本文にあるかを確かめる。無ければ補強し、補強できないなら noindex にする。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+
+### [GSC-COV-404-20260925] GSC 是正: sitemap に載っているのに 404 を返す 1 URL を直す
+
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt] [起票:2026-09-25]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`.claude/state/gsc/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `.claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/47 (HTTP 404 / GSC: not-found-404 / 最終クロール 2026-09-11)
+- **次**: sitemap が 404 の URL を載せている。ページを復活させるか、sitemap の生成元 (`apps/web/src/app/sitemap.ts` と参照している config) から外す。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@.claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
 
 ### [TOOL-MATERIAL-BUILDER-01] 資料ビルダー（指標×地域を出典付き Excel へ持ち出す無料ツール）の最小版を作る
 
