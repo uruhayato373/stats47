@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-24T01:00:51.443Z",
+  "generatedAt": "2026-09-25T01:04:35.255Z",
   "gscWeek": "2026-W38",
-  "auditGeneratedAt": "2026-09-24T01:00:51.416Z",
+  "auditGeneratedAt": "2026-09-25T01:04:35.229Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
@@ -9165,9 +9165,9 @@
       "quality": {
         "blockers": 0,
         "warnings": 0,
-        "prose": 2906,
+        "prose": 3617,
         "chartCount": 1,
-        "prosePerChart": 2906,
+        "prosePerChart": 3617,
         "conformance": 0.58,
         "flags": []
       },
