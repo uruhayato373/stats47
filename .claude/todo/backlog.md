@@ -21,6 +21,22 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [DATA-SOURCE-ROLLOUT-01] 出典表示の統一を本番へ反映し、既存記事の本文移行と監査 ratchet を完了する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts] [起票:2026-09-25]
+
+- **背景**: commit e236f902f で出典表示を `DataSourceList` に統一した (正典 `docs/01_技術設計/04_デザインシステム.md`「データ出典」)。
+  本番反映前の実測: 公開 606 本中、本文の手書き「データ出典」節 598 本、snapshot の sources 未焼き込み 606 本。
+  コードは旧 snapshot でも描画時に source.json から出典を解決し、手書き節を同じ変換で隠すので、以下の順序のどこで止めても表示は壊れない。
+- **次 (実行順)**: ① develop→main (PR #1027) をマージしてデプロイ (2026-09-25 オーナー承認済み)。R2 書込資格は CI にしか無いので②④は `blog-data-source-migration.yml` で行う。
+  ② `mode=backfill-display-sources dry_run=false` で出典を導出できない 7 記事 16 件の source.json に displaySources を付ける。③ `sync-snapshots.yml only=blog` で all.json に sources を焼く (main のコードで動く)。
+  ④ `mode=migrate-bodies dry_run=false` で本文を移行する (ローカル dry-run 実測: 削除 390 / 改名 134 / Kindle 章で据え置き 61 / 出典未解決 13)。本文は SSG なので次のデプロイで反映 (描画時の変換で見た目は既に同じ)。
+  ⑤ 週次監査を実行し、実測値で `.claude/config/survey-taxonomy-ratchet.json` の blog に `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` / `requireSnapshotSources: true` を設定する。
+- **原稿 (docs/21)**: 手書き節を持つ原稿 27 本 (published:true 19 本) は変換していない。push すると公開 workflow が動き、公開を保留している理由を確認できていないため。
+  次にその原稿を公開・改稿するとき quality-gate が止めるので、`migrate-data-source-sections.ts --outbox --apply` で変換してから進める。
+- **停止条件**: Kindle 書籍の章の記事 (KINDLE_BOOKS の blogSlug) は本文を変えない (校正指示が外れて書籍を再生成できなくなる。校正指示を持つ 64 記事中 23 記事で実測)。URL を確認できない出典は displaySources に url を書かない。
+- **完了条件**: 週次監査で「sources 未焼き込み 0」かつ手書き節が Kindle 章 + 図の無い読み物だけになり、3 つの ratchet が設定済み。本番の `/blog/beer-peak-month-july-to-december` で出典節が 1 つ・調査ページと e-Stat へのリンクが 200。
+
 ### [GSC-COV-5XX-20260925] GSC 是正: 本番で 5xx を返し続ける 2 URL を直す
 
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt] [起票:2026-09-25]

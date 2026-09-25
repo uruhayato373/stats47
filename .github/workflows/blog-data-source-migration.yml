@@ -1,0 +1,103 @@
+name: 🧾 Blog data source migration (source.json / article.md → R2)
+
+# ブログ出典表示の統一 (2026-09-25) に伴う既存記事の書き戻し。R2 書込資格は CI にしか無いのでここで実行する。
+# 正典: docs/01_技術設計/04_デザインシステム.md「データ出典」/ backlog DATA-SOURCE-ROLLOUT-01
+#
+# mode:
+#   backfill-display-sources … 出典を導出できない図の source.json に displaySources を足す
+#                               (置換表 .claude/scripts/blog/data/display-sources-backfill.json)
+#   migrate-bodies           … 本文の手書き「データ出典」節を移行する (引用のみ → 削除 / 説明を含む → 改名)。
+#                               R2 の all.json に sources が焼かれている必要がある (先に sync-snapshots only=blog)。
+#                               Kindle 書籍の章の記事は本文を変えない (スクリプト側で除外)
+#
+# 安全設計:
+# - dry_run 既定 true。書き込みは dry_run=false を明示したときだけ。put 後に GET で内容を照合する
+# - 書き込むのは app/blog/<slug>/{article.md,data/*.source.json} だけ (push-article-md-r2.ts の対象制限)
+# - 原本は artifact に保存する (ロールバックは同じスクリプトに --src _src で書き戻す)
+# - concurrency group r2-write で他の R2 writer と直列化する
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "実行内容"
+        required: true
+        type: choice
+        default: backfill-display-sources
+        options:
+          - backfill-display-sources
+          - migrate-bodies
+      dry_run:
+        description: "true: R2 に書かず対象一覧のみ"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout dispatch revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧾 Build outputs
+        env:
+          MODE: ${{ inputs.mode }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          case "$MODE" in
+            backfill-display-sources)
+              npx tsx .claude/scripts/blog/backfill-display-sources.ts --apply 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+              ;;
+            migrate-bodies)
+              npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --apply 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+              ;;
+            *) echo "::error::unknown mode: $MODE"; exit 1 ;;
+          esac
+
+      - name: 📤 Push to R2
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          ARGS=(--src .local/blog-datasource-fix/out)
+          if [ "$DRY_RUN" = "false" ]; then
+            ARGS+=(--apply)
+          fi
+          npx tsx .claude/scripts/blog/push-article-md-r2.ts "${ARGS[@]}" 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: 🗂️ Keep originals and report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: blog-data-source-migration-${{ inputs.mode }}-${{ github.run_id }}
+          path: .local/blog-datasource-fix/
+          if-no-files-found: ignore
+          retention-days: 30
