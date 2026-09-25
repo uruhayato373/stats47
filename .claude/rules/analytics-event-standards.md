@@ -287,6 +287,16 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > `blog,ranking` 行で行う (2026-W38 実測 730)。この行はページ種別単位の集計で、右レールの
 > 関連ランキング等からの遷移も含むため、カード単独の効果ではなく blog → ranking 全体の変化として読む。
 >
+> **nav_click の既定を「全部送る」に反転 (2026-09-26・NAV-CLICK-COVERAGE-01、未デプロイ)**: ルートレイアウトの
+> `NavClickTracker` が、サイト内リンクのクリックを 1 か所で拾って `nav_click` を送る。導線名は外側の `data-nav-surface`
+> (無ければ `unlabeled`)、ラベルは `data-nav-label` (無ければ行き先のページ種別)。部品側が同じクリックで
+> `trackNavClick` を送ったときは重ねて送らない。`data-click-owner` の領域 (`rail_click` / `cta_click` /
+> `home_featured_click`) と外部リンクは送らない。`nav_surface` に `blog_toc` / `unlabeled` と、全ページ共通の領域の
+> `footer` / `breadcrumb` / `tag` / `blog_body` (ブログ本文中のサイト内リンク) を追加 (登録済み dimension の値追加)。
+> **デプロイ日を境に `nav_click` の件数は大きく増える** (これまで記録されていなかったリンクが数えられるため。
+> 2026-08-23〜09-19 の実測でサイト内移動 11,319 件に対し記録は約 2 割)。デプロイ前後の件数を単純比較しない。
+> 増え方がサイト内移動 (`internal-transitions.csv`) を大きく超えたら二重送信を疑う。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

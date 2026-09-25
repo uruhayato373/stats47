@@ -44,6 +44,7 @@ export function RankingFunnelCta({ rankingKey }: RankingFunnelCtaProps) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        data-click-owner="cta"
         onClick={() =>
           trackCtaClick({
             ctaId: "ranking_to_komuin_ai_guide",

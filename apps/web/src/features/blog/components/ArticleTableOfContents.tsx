@@ -46,6 +46,7 @@ export function ArticleTableOfContents({
             >
               <a
                 href={`#${h.id}`}
+                data-nav-label={h.text}
                 className={
                   "block leading-snug transition-colors hover:text-primary " +
                   (h.level === 2

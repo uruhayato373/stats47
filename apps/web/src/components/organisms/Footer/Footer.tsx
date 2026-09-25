@@ -16,6 +16,7 @@ const SITE_LINKS = [
 export function Footer() {
   return (
     <footer
+      data-nav-surface="footer"
       className="w-full border-t border-border bg-muted/30 py-4 pb-[calc(1rem+var(--safe-area-bottom))]"
       suppressHydrationWarning
     >

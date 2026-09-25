@@ -307,13 +307,48 @@ export type NavSurface =
   | 'geo_source'
   // ブログ本文の図の直下にあるランキングカード (`<source-link>`・地図 + 上位3県)。
   // nav_label は rankingKey (2026-09-25 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
-  | 'blog_ranking_card';
+  | 'blog_ranking_card'
+  // 共通のクリック監視 (NavClickTracker) が拾うもの (2026-09-26 値追加。登録済み dimension の値追加):
+  // ブログの目次 / 導線名の付いていないサイト内リンク
+  | 'blog_toc'
+  | 'unlabeled'
+  // 全ページ共通の領域 (2026-09-26 値追加・NAV-CLICK-COVERAGE-01 P2。登録済み dimension の値追加)
+  | 'footer'
+  | 'breadcrumb'
+  | 'tag'
+  | 'blog_body';
+
+/** 直近に部品側で送った nav_click。共通のクリック監視が同じクリックを二重に送らないための記録 */
+let lastManualNavClick: { href: string; at: number } | null = null;
+
+/**
+ * 同じクリックで部品側がすでに nav_click を送ったか。共通の監視は送信を 1 tick 遅らせてからこれで確かめる
+ * (部品の onClick は同じクリックの処理中に同期で走るので、1 tick 後には記録が残っている)。
+ */
+export function wasNavClickSentSince(href: string, since: number): boolean {
+  return lastManualNavClick !== null && lastManualNavClick.at >= since && lastManualNavClick.href === href;
+}
 
 export function trackNavClick(params: {
   label: string;
   href: string;
   surface: NavSurface;
 }): void {
+  lastManualNavClick = { href: params.href, at: performance.now() };
+  sendEvent('nav_click', {
+    event_category: 'navigation',
+    event_label: params.label,
+    nav_label: params.label,
+    nav_href: params.href,
+    nav_surface: params.surface,
+  });
+}
+
+/**
+ * 共通のクリック監視 (NavClickTracker) が送る nav_click。部品側の送信記録 (二重送信の判定) は更新しない。
+ * 値の意味は trackNavClick と同じ。
+ */
+export function trackAutoNavClick(params: { label: string; href: string; surface: string }): void {
   sendEvent('nav_click', {
     event_category: 'navigation',
     event_label: params.label,

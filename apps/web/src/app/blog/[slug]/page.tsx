@@ -317,7 +317,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <ArticleShell
                 rail={rail}
                 breadcrumb={
-                    <Breadcrumb className="mb-4">
+                    <Breadcrumb className="mb-4" data-nav-surface="breadcrumb">
                         <BreadcrumbList>
                             <BreadcrumbItem>
                                 <BreadcrumbLink asChild>

@@ -70,7 +70,8 @@ export function RankingSidebarClient({
             ) : undefined}
         >
                 {/* 関連ランキング: コンパクトリスト */}
-                <RailLinkList>
+                {/* rail_click で計測するので、共通のクリック監視 (NavClickTracker) からは外す */}
+                <RailLinkList data-click-owner="rail">
                     {displayOthers.map((item, index) => (
                         <RailNavRow
                             key={`${item.rankingKey}-${item.areaType}`}

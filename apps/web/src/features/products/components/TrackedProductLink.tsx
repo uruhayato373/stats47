@@ -60,6 +60,7 @@ export function TrackedProductOutboundLink({
       target="_blank"
       rel="noopener noreferrer"
       className={className}
+      data-click-owner="cta"
       onClick={() =>
         trackCtaClick({
           ctaId: `product_${channel}_${productId.toLowerCase()}`,

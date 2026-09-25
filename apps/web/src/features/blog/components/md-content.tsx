@@ -130,7 +130,7 @@ function makeMdComponents(
                 );
             }
             return (
-                <Link href={typeof href === "string" ? href : "#"}>
+                <Link href={typeof href === "string" ? href : "#"} data-nav-surface="blog_body">
                     {children}
                 </Link>
             );

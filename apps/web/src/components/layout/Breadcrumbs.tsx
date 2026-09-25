@@ -62,7 +62,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Breadcrumb className={className ?? "mb-4"}>
+      <Breadcrumb className={className ?? "mb-4"} data-nav-surface="breadcrumb">
         <BreadcrumbList>
           {items.map((item, i) => {
             const isLast = i === items.length - 1;

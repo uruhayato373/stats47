@@ -78,6 +78,7 @@ export function TrackedFeaturedRankingCard({
     <div
       ref={ref}
       className="h-full"
+      data-click-owner="home-featured"
       onClickCapture={() => trackHomeFeaturedClick(paramsRef.current)}
     >
       {children}
