@@ -1,9 +1,29 @@
 {
-  "hash": "e31635af27968534a1964e36445e42bfb7e39494660d99327eab663ff271362d",
-  "audited_at": "2026-09-25T07:19:08",
+  "hash": "3bb2b015296c5cdfdf66289c0e5b632a7adc1de930c8b0a382f436adfee24e0c",
+  "audited_at": "2026-09-25T12:33:05",
   "files": [
-    ".claude/rules/analytics-event-standards.md",
-    ".claude/rules/ui-components.md",
-    ".claude/scripts/lib/check-card-census.cjs"
+    ".agents/skills/management/monthly-plan/SKILL.md",
+    ".agents/skills/management/weekly-plan/SKILL.md",
+    ".claude/agents/todo-curator.md",
+    ".claude/rules/docs-vs-issues.md",
+    ".claude/rules/page-quality-standards.md",
+    ".claude/rules/todo-standards.md",
+    ".claude/scripts/gsc/lib/coverage-backlog.mjs",
+    ".claude/scripts/lib/__tests__/strategy-lanes.test.cjs",
+    ".claude/scripts/lib/backlog-lib.cjs",
+    ".claude/scripts/lib/check-docs-governance.cjs",
+    ".claude/scripts/lib/strategy-lanes.cjs",
+    ".claude/scripts/page-quality/__tests__/templates.test.mjs",
+    ".claude/scripts/page-quality/__tests__/ui-findings.test.mjs",
+    ".claude/scripts/page-quality/__tests__/ui-review.test.mjs",
+    ".claude/scripts/page-quality/lib/ui-findings.ts",
+    ".claude/scripts/page-quality/lib/ui-report.ts",
+    ".claude/scripts/page-quality/record-ui-review.ts",
+    ".claude/scripts/page-quality/run-full.ts",
+    ".claude/scripts/page-quality/templates.ts",
+    ".claude/scripts/page-quality/types.ts",
+    ".claude/scripts/page-quality/ui-findings.ts",
+    ".claude/skills/management/monthly-plan/SKILL.md",
+    ".claude/skills/management/weekly-plan/SKILL.md"
   ]
 }
