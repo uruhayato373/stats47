@@ -20,7 +20,7 @@ interface ChartMessageStateProps extends ChartStateProps {
 export function ChartLoading({ height, className }: ChartStateProps) {
   return (
     <Skeleton
-      className={cn("w-full rounded-none", height == null && "h-[200px]", className)}
+      className={cn("w-full rounded-card", height == null && "h-[200px]", className)}
       style={height == null ? undefined : { height }}
     />
   );

@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { getSurfaceCardClassName } from "@/components/surface";
 
+import { GENDER_TONE_TEXT } from "./gender-tone.palette";
+
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";
 import type { DatabookGenderPair } from "@stats47/data-configs";
 
@@ -40,10 +42,7 @@ function GenderCell({
   unit: string;
   tone: "male" | "female";
 }) {
-  const color =
-    tone === "male"
-      ? "text-blue-700 dark:text-blue-400"
-      : "text-pink-700 dark:text-pink-400";
+  const color = GENDER_TONE_TEXT[tone];
   const genderLabel = tone === "male" ? "男性" : "女性";
   return (
     <Link

@@ -11,6 +11,8 @@ import { trackRailClick } from "@/lib/analytics/events";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
+import { RANK_GOLD_TEXT } from "../../utils/rank-medal.palette";
+
 import { getSidebarDetail, type SidebarRankingItem } from "./select-sidebar-items";
 
 
@@ -98,7 +100,7 @@ export function RankingSidebarClient({
                                 </span>
                                 {item.top1 ? (
                                     <span className="line-clamp-1 text-xs leading-snug text-muted-foreground">
-                                        <span className="font-semibold text-amber-600">
+                                        <span className={`font-semibold ${RANK_GOLD_TEXT}`}>
                                             {item.top1.rank ?? 1}位
                                         </span>{" "}
                                         {item.top1.areaName}{" "}

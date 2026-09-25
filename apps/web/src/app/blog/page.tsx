@@ -150,13 +150,13 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
               href={
                 currentPage === 2 ? '/blog' : `/blog?page=${currentPage - 1}`
               }
-              className="rounded-none border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
+              className="rounded-md border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
             >
               ← 前のページ
             </Link>
           ) : (
             <span
-              className="rounded-none border border-border px-4 py-2 text-sm font-medium text-muted-foreground cursor-not-allowed"
+              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground cursor-not-allowed"
               aria-disabled="true"
             >
               ← 前のページ
@@ -168,12 +168,12 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
           {hasNextPage ? (
             <Link
               href={`/blog?page=${currentPage + 1}`}
-              className="rounded-none border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
+              className="rounded-md border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
             >
               次のページ →
             </Link>
           ) : (
-            <span className="rounded-none border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
+            <span className="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
               次のページ →
             </span>
           )}

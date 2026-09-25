@@ -12,6 +12,8 @@ import {
   resolveSchemeInterpolator,
 } from "../../utils/color-scale/legend-gradient";
 
+import { DIVERGING_DIRECTION_TEXT_CLASS } from "./diverging-choropleth.palette";
+
 import type { Feature, FeatureCollection } from "geojson";
 import type { GeometryCollection, Topology } from "topojson-specification";
 
@@ -235,7 +237,9 @@ export function DivergingChoroplethMap({
             <div className="font-bold text-foreground">{hover.name}</div>
             <div
               className={`tabular-nums ${
-                hover.ratio >= 1 ? "text-blue-600" : "text-red-600"
+                hover.ratio >= 1
+                  ? DIVERGING_DIRECTION_TEXT_CLASS.increase
+                  : DIVERGING_DIRECTION_TEXT_CLASS.decrease
               }`}
             >
               {valueFormatter(hover.ratio)}
@@ -246,12 +250,12 @@ export function DivergingChoroplethMap({
 
       {showLegend && (
         <div className="flex items-center gap-2 text-xs justify-center">
-          <span className="font-medium text-red-600">← 減少</span>
+          <span className={`font-medium ${DIVERGING_DIRECTION_TEXT_CLASS.decrease}`}>← 減少</span>
           <div
             className="h-2 w-32 rounded-sm"
             style={{ background: legendGradientCss(colorScheme, { reverse: true }) }}
           />
-          <span className="font-medium text-blue-600">増加 →</span>
+          <span className={`font-medium ${DIVERGING_DIRECTION_TEXT_CLASS.increase}`}>増加 →</span>
           <span className="text-muted-foreground">
             ±{(colorClamp * 100).toFixed(1)}%
           </span>

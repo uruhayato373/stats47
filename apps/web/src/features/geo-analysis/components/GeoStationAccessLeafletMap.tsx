@@ -17,6 +17,7 @@ import {
 import { buildGeoStationAccessMapModel } from '../lib/build-geo-station-access-map-model';
 import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 
 import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
 import type { GeoStationAccessPrefDetail } from '@stats47/gis';
@@ -37,11 +38,11 @@ function FitBounds({ bounds }: { bounds: LatLngBoundsExpression }) {
 }
 
 function populationColor(changeRate: number | null): string {
-  if (changeRate === null) return '#94a3b8';
-  if (changeRate >= 0) return '#0f766e';
-  if (changeRate >= -15) return '#67a9cf';
-  if (changeRate >= -30) return '#fdbb84';
-  return '#b91c1c';
+  if (changeRate === null) return GEO_MAP_COLORS.populationChange.missing;
+  if (changeRate >= 0) return GEO_MAP_COLORS.populationChange.growing;
+  if (changeRate >= -15) return GEO_MAP_COLORS.populationChange.mildDecline;
+  if (changeRate >= -30) return GEO_MAP_COLORS.populationChange.moderateDecline;
+  return GEO_MAP_COLORS.populationChange.severeDecline;
 }
 
 function escapeHtml(value: string): string {
@@ -77,15 +78,15 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
     const fillColor =
       view === 'overlap'
         ? accessible
-          ? '#0f766e'
-          : '#cbd5e1'
+          ? GEO_MAP_COLORS.stationAccess.accessible
+          : GEO_MAP_COLORS.stationAccess.outside
         : populationColor(
             typeof properties?.changeRate === 'number'
               ? properties.changeRate
               : null
           );
     return {
-      color: '#ffffff',
+      color: GEO_MAP_COLORS.outline,
       weight: 0.35,
       fillColor,
       fillOpacity: view === 'overlap' ? (accessible ? 0.78 : 0.28) : 0.72,
@@ -104,7 +105,7 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
       minZoom={GEO_BASEMAP.minZoom}
       maxZoom={14}
       scrollWheelZoom={false}
-      className="isolate h-[480px] overflow-hidden rounded-none lg:h-[620px]"
+      className="isolate h-[480px] overflow-hidden rounded-card lg:h-[620px]"
       aria-label={`${detail.areaName}の1kmメッシュ分析地図`}
     >
       <TileLayer url={GEO_BASEMAP.url} attribution={GEO_BASEMAP.attribution} />
@@ -130,8 +131,8 @@ export function GeoStationAccessLeafletMap({ detail, view }: Props) {
               center={[latitudeE6 / 1_000_000, longitudeE6 / 1_000_000]}
               radius={3.5}
               pathOptions={{
-                color: '#0f172a',
-                fillColor: '#f8fafc',
+                color: GEO_MAP_COLORS.pointMarker.stroke,
+                fillColor: GEO_MAP_COLORS.pointMarker.fill,
                 fillOpacity: 1,
                 weight: 1.5,
               }}

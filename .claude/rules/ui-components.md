@@ -19,7 +19,12 @@ paths:
   - **全ページの左レールは共通境界 `992px` から出す**。992px 時も本文幅 656px を確保でき、1024px 未満になりやすいアプリ内ブラウザでも横幅を有効利用できる。列幅・gap・表示境界・自然スクロールは `LeftRailLayout` だけが持ち、Shell や feature に複製しない。右レールの `lg` / `xl` 境界は別契約として維持する。境界は別だが、Surface・見出し・リンク行・余白の視覚契約は左右共通（正典 04「レール UI 契約」）。部品は `RailStack` / `RailCard` / `RailNavRow` / `RailCategoryList`。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
   - **992px 未満で操作ナビを隠す場合は、同等の操作を本文上部へ置く**。PageShell は `leftRailNarrowBehavior="hide"`、ArticleShell は feature の狭幅ナビを使い、どちらも代替 UI に `LEFT_RAIL_NARROW_ONLY_CLASS` を付ける。関連リンク型の PageShell 左レールは既定 `stack` で本文後へ積んでよい。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
-- **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
+- **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0` / `--card-radius: 0`）。値はトークンだけで決め、クラスを役割で選ぶ（2026-09-25）**:
+  - カード外枠・その仮表示・地図/チャート枠 → `rounded-card`（`--card-radius`）。カード本体は `CARD_SURFACE_CLASS`（`@stats47/components`）を使い、`SurfaceCard` 系もこれを合成している
+  - ボタン・ボタン風リンク・ドロップダウン → `rounded-md`、カード内の小タイル・バッジ・サムネ → `rounded-sm`（どちらも `--radius`）
+  - 形として四角であるべきもの（凡例の色見本・タイル地図のマス・下線タブ・一覧行）だけ `rounded-none`。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）
+  - `rounded-xl`/`2xl`/任意値の手動付与は禁止。角丸を採用するときは `globals.css` のトークンと `check-design-system.mjs` の `no-nonzero-radius-token` 許容値を同じ差分で変える
+- **カード外枠の線と地**: ライトモードのページ地は記事ゾーンを含めサイト全体で薄グレー（`--background`）1 値（dark の記事ゾーンは `.dark .reading-zone` の別値）。カード外枠の線色は `--card-outline`（Web は `transparent`、管理画面は `--border`）で、白カードとの明暗で区切る。影は `shadow-sm`。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
 
 ## Sticky aside の max-h 必須ルール（★削除禁止・2026-06-06）
@@ -90,11 +95,12 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 詳細は `.claude/design-system/prohibited.md` を参照。以下は特に重要な禁止項目:
 
-- `text-black` 禁止 → `text-slate-900` or `text-foreground`
+- `text-black` 禁止 → `text-foreground`
 - `shadow-lg` / `shadow-2xl` 禁止 → `shadow-sm`（デフォルト）/ `shadow-md`（hover）
 - `tracking-tight` 禁止 → 日本語の可読性低下のため削除
 - カラーバー（`border-t-4`, `border-l-4` + 色付き）禁止 → 全周 `border` で統一
-- `text-gray-400` を本文に使用禁止 → `text-muted-foreground` or `text-slate-500`
+- `text-gray-400` を本文に使用禁止 → `text-muted-foreground`
+- **生パレット色（`slate-500` / `emerald-600` 等）を UI に直書きしない** → 意味トークン（`foreground` / `muted-foreground` / `border` / `positive` / `negative` / `warning` / `info` と各 `-soft`）。カテゴリ・性別・メダル等の識別配色だけ `*.palette.ts` に集める。`design-system:check` の `no-raw-palette-color` が web と packages/components・visualization を検査する
 - カード hover: `hover:shadow-md` まで（`hover:shadow-lg` 禁止）
 
 デザインレビュー: `/design-review` スキルで違反チェック可能

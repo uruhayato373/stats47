@@ -33,8 +33,8 @@ interface RankingBarListProps {
 
 const TONE_BAR_CLASS = {
   primary: "bg-primary/70",
-  top: "bg-blue-500",
-  bottom: "bg-slate-400",
+  top: "bg-info",
+  bottom: "bg-muted-foreground",
   muted: "bg-muted-foreground/60",
 } satisfies Record<NonNullable<RankingBarListItem["tone"]>, string>;
 

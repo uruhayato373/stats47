@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { cn } from "@stats47/components";
 
-import { regionStyle } from "../constants/region-styles";
+import { regionStyle } from "../constants/region-styles.palette";
 
 import type { AreaRegionGroup } from "../utils";
 
@@ -81,7 +81,7 @@ export function AreaDirectoryList({
                     className={cn(
                       compact
                         ? "inline-flex min-h-8 items-center px-1.5 text-sm text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
-                        : "flex min-h-11 items-center justify-between gap-2 rounded-none border border-border bg-card px-3 text-sm text-foreground transition-colors hover:bg-muted",
+                        : "flex min-h-11 items-center justify-between gap-2 rounded-md border border-border bg-card px-3 text-sm text-foreground transition-colors hover:bg-muted",
                       FOCUS_RING,
                     )}
                   >

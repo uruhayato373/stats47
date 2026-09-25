@@ -73,7 +73,9 @@ const rules = [
     message:
       'Avoid hardcoded surface card classes. Use SurfaceCard/SurfaceLinkCard/getSurfaceCardClassName/ChartPanel.',
     pattern:
-      /rounded-none\s+border\s+bg-card\s+p-4\s+shadow-sm|bg-card\s+border\s+rounded|rounded-(?:lg|md)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-sm/,
+      // rounded-md/sm は操作部品 (ボタン・ドロップダウン) の角丸なので対象外。カード外枠の角丸は
+      // rounded-card (= CARD_SURFACE_CLASS) で、それを手書きした行を捕まえる。
+      /rounded-(?:none|card)\s+border\s+(?:border-\S+\s+)?bg-card\s+p-4\s+shadow-sm|bg-card\s+border\s+rounded|rounded-(?:lg|card)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-sm/,
     // SurfaceCard 実装本体は許可。また rounded-full 要素はカードでなくピル/トグル/アバターなので除外
     // (コンテンツカードは rounded-full にしない)。
     allow: (relativePath, line) =>
@@ -111,6 +113,15 @@ const rules = [
       relativePath === 'src/features/ogp/brand.ts',
   },
   {
+    id: 'no-geo-raw-color-outside-palette',
+    message:
+      'Geo map colors (Leaflet/SVG attributes need hex) must live in features/geo-analysis/components/geo-map.palette.ts (GEO_MAP_COLORS).',
+    pattern: /['"`]#[0-9A-Fa-f]{3,8}['"`]/,
+    allow: (relativePath) =>
+      !relativePath.startsWith('src/features/geo-analysis/') ||
+      relativePath.endsWith('.palette.ts'),
+  },
+  {
     id: 'no-large-card-shadow',
     message:
       'Avoid large shadows on normal cards. Use no shadow, shadow-sm, or shadow-md.',
@@ -119,19 +130,19 @@ const rules = [
   {
     id: 'no-rounded-xl',
     message:
-      'Flat design (--radius:0). Do not hand-add rounded-xl/2xl/3xl. Use rounded-none, or rounded-full only for circular elements.',
+      'Do not hand-add rounded-xl/2xl/3xl. Cards use rounded-card, controls rounded-md/sm (both token-driven); rounded-full only for circular elements.',
     pattern: /\brounded-(?:xl|2xl|3xl)\b/,
   },
   {
     id: 'no-arbitrary-radius',
     message:
-      'Do not add arbitrary rounded-[…] values. Cards and panels use rounded-none; circular UI uses rounded-full.',
+      'Do not add arbitrary rounded-[…] values. Cards and panels use rounded-card (--card-radius); circular UI uses rounded-full.',
     pattern: /\brounded-\[[^\]]+\]/,
   },
   {
     id: 'no-text-black',
     message:
-      'Avoid text-black. Use text-foreground or text-slate-900 (see .claude/design-system/prohibited.md).',
+      'Avoid text-black. Use text-foreground (see .claude/design-system/prohibited.md).',
     pattern: /\btext-black\b/,
   },
   {
@@ -403,12 +414,13 @@ if (!surveyNavSource.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) {
   });
 }
 
-// カード角丸の SSOT は globals.css の --radius: 0。
+// 角丸の SSOT は globals.css の --radius (操作部品) と --card-radius (カード外枠) で、どちらも 0。
+// 角丸を採用する判断をしたら、この検査の許容値を同じ差分で変える (トークンだけ変えると落ちる)。
 // 通常領域・reading-zone のどちらかへ非ゼロ値が再導入された場合、見た目がページ種別で
 // ドリフトするため、class 名の静的検査とは別にトークン自体を決定的に検査する。
 const globalsPath = 'src/app/globals.css';
 const globalsText = readFileSync(path.join(cwd, globalsPath), 'utf8');
-const radiusPattern = /--radius:\s*([^;]+);/g;
+const radiusPattern = /--(?:card-)?radius:\s*([^;]+);/g;
 for (const match of globalsText.matchAll(radiusPattern)) {
   const value = match[1].trim();
   if (/^0(?:px|rem)?$/.test(value)) continue;
@@ -446,18 +458,19 @@ for (const match of globalsText.matchAll(cssBorderRadiusPattern)) {
   });
 }
 
-// ArticleCard は本文カードの正典。CSS token に加えて明示的 rounded-none を要求し、
-// reading-zone のみ角丸へ戻る再発を二重に防ぐ。
+// ArticleCard は本文カードの正典。外枠を独自クラスで書かず、通常カードと同じ
+// CARD_SURFACE_CLASS (角丸・線色をトークンで決める単一定義) を使うことを要求する。
+// クラス名の完全一致では判定しない (意図が同じでも 1 語足すだけで落ちるため)。
 const surfacePath = 'src/components/surface/SurfaceCard.tsx';
 const surfaceText = readFileSync(path.join(cwd, surfacePath), 'utf8');
 const articleCardBody = surfaceText.match(
   /export function ArticleCard[\s\S]*?(?=\nexport function RailCard)/
 )?.[0];
-if (!articleCardBody?.includes('rounded-none border bg-card shadow-sm')) {
+if (!articleCardBody || !/\bCARD_SURFACE_CLASS\b/.test(articleCardBody)) {
   violations.push({
-    ruleId: 'article-card-must-be-square',
+    ruleId: 'article-card-must-use-shared-surface',
     message:
-      'ArticleCard must explicitly use rounded-none so article pages follow the site-wide square-card policy.',
+      'ArticleCard must compose CARD_SURFACE_CLASS so article pages follow the same card radius/outline tokens as every other card.',
     file: surfacePath,
     lineNumber: 1,
     line: 'ArticleCard',
@@ -578,6 +591,36 @@ violations.push(
     .flatMap((root) => listFiles(root))
     .flatMap((file) => checkFixedHeightChartWrapper(file, aspectRatioCharts))
 );
+
+// --- Tailwind の生パレット色 (slate-500, emerald-600 …) を UI に直書きしない ---
+//
+// 生パレットは light/dark と配色変更に追従しない。UI の色は意味トークン
+// (foreground / muted-foreground / border / positive / negative / warning / info …) を使う。
+// カテゴリ・性別・メダルのように「見分けるための配色」は *.palette.ts に集め、そこだけで許可する。
+// 既存ルールと違い packages/components・packages/visualization も走査する (共有 UI も対象)。
+const rawPaletteRoots = [
+  ...scanRoots,
+  '../../packages/components/src',
+  '../../packages/visualization/src',
+];
+const RAW_PALETTE_PATTERN =
+  /(?<![\w-])(?:[a-z-]+:)*(?:text|bg|border|fill|stroke|from|via|to|ring|divide|outline|decoration|placeholder|accent|caret)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3}\b/;
+for (const file of rawPaletteRoots.flatMap((root) => listFiles(root))) {
+  if (file.endsWith('.palette.ts')) continue;
+  const lines = readFileSync(path.join(cwd, file), 'utf8').split(/\r?\n/);
+  lines.forEach((line, index) => {
+    const match = line.match(RAW_PALETTE_PATTERN);
+    if (!match) return;
+    violations.push({
+      ruleId: 'no-raw-palette-color',
+      message:
+        'Use semantic color tokens (text-muted-foreground, text-positive, bg-negative-soft …). Identification palettes (category/gender/medal) belong in a *.palette.ts module.',
+      file,
+      lineNumber: index + 1,
+      line: match[0],
+    });
+  });
+}
 
 if (violations.length > 0) {
   console.error('Design system check failed:');

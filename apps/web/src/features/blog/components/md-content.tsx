@@ -191,27 +191,27 @@ function makeMdComponents(
 
         pre: ({ children, ...props }: ComponentProps) => (
             <pre
-                className="my-4 overflow-x-auto rounded-lg border border-slate-700 bg-slate-900 p-4 text-sm leading-relaxed text-slate-100 shadow-sm"
+                className="my-4 overflow-x-auto rounded-lg border border-border bg-muted p-4 text-sm leading-relaxed text-foreground shadow-sm"
                 {...props}
             >
                 {children}
             </pre>
         ),
         code: ({ children, className: codeClassName, ...props }: ComponentProps & { className?: string }) => {
-            // インラインコード: 明るい灰色背景 + 濃い赤茶系文字 (本文との対比を確保)
+            // インラインコード: muted 背景 + 枠線 + 等幅で本文と区別する
             if (!codeClassName) {
                 return (
                     <code
-                        className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[0.92em] font-mono text-red-700"
+                        className="rounded border border-border bg-muted px-1.5 py-0.5 text-[0.92em] font-mono text-foreground"
                         {...props}
                     >
                         {children}
                     </code>
                 );
             }
-            // コードブロック内の <code>: 親 <pre> の dark 配色を継承 (text-slate-100)
+            // コードブロック内の <code>: 親 <pre> の配色を継承
             return (
-                <code className={`${codeClassName} text-slate-100`} {...props}>
+                <code className={codeClassName} {...props}>
                     {children}
                 </code>
             );
@@ -561,7 +561,7 @@ export function MDContent({
     );
     return (
         <article
-            className="blog-news-article prose prose-zinc dark:prose-invert max-w-none prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
+            className="blog-news-article prose prose-zinc dark:prose-invert max-w-none prose-pre:my-4 prose-pre:bg-muted prose-pre:text-foreground prose-pre:border prose-pre:border-border prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
             suppressHydrationWarning
         >
             <ReactMarkdown

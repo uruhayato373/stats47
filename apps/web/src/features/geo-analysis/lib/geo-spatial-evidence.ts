@@ -1,3 +1,4 @@
+import { GEO_MAP_COLORS } from './geo-map.palette';
 import { publicFacilityAuditRows } from './geo-public-facility-evidence';
 
 import type { GeoAnalysisPrefDetail } from '@stats47/gis';
@@ -31,17 +32,17 @@ export function landPointCategory(
   const point = detail.landPricePoints[index];
   const id = detail.pointMeshIds[index];
   const mesh = id ? meshes.get(id) : undefined;
-  if (!point || !mesh) return { label: '人口メッシュ未接続', color: '#64748b' };
+  if (!point || !mesh) return { label: '人口メッシュ未接続', color: GEO_MAP_COLORS.landPriceCategory.unlinked };
   if (point[4] === null || mesh[5] <= 0)
-    return { label: '比較対象外', color: '#64748b' };
+    return { label: '比較対象外', color: GEO_MAP_COLORS.landPriceCategory.unlinked };
   const rising = point[4] > 0;
   const declining = mesh[6] < mesh[5];
   if (rising && declining)
-    return { label: '地価上昇 × 人口減少', color: '#b91c1c' };
-  if (rising) return { label: '地価上昇 × 人口維持・増加', color: '#0f766e' };
+    return { label: '地価上昇 × 人口減少', color: GEO_MAP_COLORS.landPriceCategory.risingDecline };
+  if (rising) return { label: '地価上昇 × 人口維持・増加', color: GEO_MAP_COLORS.landPriceCategory.risingGrowth };
   if (declining)
-    return { label: '地価横ばい・下落 × 人口減少', color: '#b45309' };
-  return { label: '地価横ばい・下落 × 人口維持・増加', color: '#1d4ed8' };
+    return { label: '地価横ばい・下落 × 人口減少', color: GEO_MAP_COLORS.landPriceCategory.flatDecline };
+  return { label: '地価横ばい・下落 × 人口維持・増加', color: GEO_MAP_COLORS.landPriceCategory.flatGrowth };
 }
 
 export function buildSpatialMeshMap(

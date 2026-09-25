@@ -9,15 +9,14 @@
 
 | 禁止                               | 理由                                                 | 代替                          |
 | ---------------------------------- | ---------------------------------------------------- | ----------------------------- |
-| `text-black`                       | 純黒はコントラストが強すぎて長時間の利用で目が疲れる | `text-slate-900`（#0f172a）   |
+| `text-black`                       | 純黒はコントラストが強すぎて長時間の利用で目が疲れる | `text-foreground`             |
+| 生パレット色の直書き（`text-slate-500` / `bg-emerald-50` 等） | light/dark と配色変更に追従しない。`design-system:check` の `no-raw-palette-color` が拒否 | 意味トークン（`foreground` / `muted-foreground` / `border` / `positive` / `negative` / `warning` / `info` と各 `-soft`）。カテゴリ・性別・メダル等の識別配色だけ `*.palette.ts` に集める |
 | `bg-gray-300` 以上の暗い背景       | テキストのコントラスト確保が困難になる               | semantic token `bg-muted` / `bg-accent`（hover・選択中・補助要素のみ。正典 `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」） |
-| `bg-primary-400`（薄いアクセント） | CTAとして弱く、目立たない                            | `bg-primary-500`              |
-| `text-gray-400` for body text      | WCAG不適合（コントラスト比不足）                     | `text-body`（#3d4b5f）        |
-| `border-gray-100`                  | 薄すぎて境界が見えない                               | `border-slate-200`（#e2e8f0） |
-| `bg-green-*`                       | emeraldで統一する                                    | `bg-emerald-*`                |
-| `bg-yellow-*`                      | amberで統一する                                      | `bg-amber-*`                  |
-| `bg-rose-*`                        | redで統一する                                        | `bg-red-*`                    |
-| `text-blue-*` for links            | primaryで統一する                                    | `text-primary-500`            |
+| `bg-primary-400`（薄いアクセント） | CTAとして弱く、目立たない                            | `bg-primary`                  |
+| `text-gray-400` for body text      | WCAG不適合（コントラスト比不足）                     | `text-muted-foreground`       |
+| `border-gray-100`                  | 薄すぎて境界が見えない                               | `border-border`               |
+| 状態を生の緑・黄・赤で表す         | 配色変更と dark に追従しない                         | `positive` / `warning` / `negative`（`-soft` は淡い地） |
+| `text-blue-*` for links            | primaryで統一する                                    | `text-primary`                |
 | 色だけで情報伝達                   | 色覚多様性への非対応。アクセシビリティ違反           | アイコン/テキストを必ず併用   |
 
 ---
@@ -97,7 +96,7 @@
 
 | 禁止                                                       | 理由                                           | 代替                                                        |
 | ---------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------- |
-| カード上部/左部のカラーバー（`border-t-4` や色付き `div`） | AI生成UIの典型パターン。装飾過剰で汎用性が低い | ボーダー（`border border-slate-200`）のみでカードを構成する |
+| カード上部/左部のカラーバー（`border-t-4` や色付き `div`） | AI生成UIの典型パターン。装飾過剰で汎用性が低い | 共通カード（`SurfaceCard` 系 / `CARD_SURFACE_CLASS`）で構成する。装飾バーを足さない |
 | 左端/上端のカラーストライプ（`border-l-4 border-*-500`）   | Alert含め全コンポーネントで禁止                | `border border-*-200 rounded-lg` で全周ボーダー             |
 
 > **正式例外 (2026-07-11・機械検査 `no-thick-accent-border` の allowlist と同期)**: Markdown 散文中の
@@ -164,14 +163,14 @@
 | 禁止                              | 理由                     | 代替                         |
 | --------------------------------- | ------------------------ | ---------------------------- |
 | `<div>` + `border-b` で水平区切り | セマンティクス違反       | `<hr>` or `role="separator"` |
-| `border-gray-100` でディバイダー  | 薄すぎて境界が見えない   | `border-slate-200`           |
-| `border-slate-400` 以上の区切り線 | 線が強すぎてノイズになる | `border-slate-200`（標準）   |
+| `border-gray-100` でディバイダー  | 薄すぎて境界が見えない   | `border-border`              |
+| `border-slate-400` 以上の区切り線 | 線が強すぎてノイズになる | `border-border`（標準）      |
 
 ### スケルトン・ローディング
 
 | 禁止                                 | 理由                                               | 代替                                            |
 | ------------------------------------ | -------------------------------------------------- | ----------------------------------------------- |
-| スケルトンに `bg-slate-200` 以外の色 | DS統一から外れる                                   | `bg-slate-200` 固定                             |
+| スケルトンに `bg-slate-200` 以外の色 | DS統一から外れる                                   | `bg-muted`（`Skeleton` 部品）                   |
 | `aria-busy="true"` の省略            | スクリーンリーダーがローディング状態を認識できない | コンテナに `aria-busy="true"` + `role="status"` |
 
 ---

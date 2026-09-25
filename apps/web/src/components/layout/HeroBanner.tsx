@@ -27,7 +27,7 @@ interface HeroBannerProps {
  * left=テキスト / right=画像 の side-by-side (モバイルは画像上・テキスト下)。
  * 見出し・タグラインは実 DOM テキストで、画像に文字を焼き込まない
  * (dark mode でも text-foreground が効く。OGP と同じ家ルール)。
- * フラット枠 (rounded-none)・トークン配色で design-system 準拠。
+ * 角丸クラスを持たず (既定で角なし)、トークン配色で design-system 準拠。
  * hero を出すページ (テーマ / カテゴリ) だけが使う (全ページ既定は PageHeader)。
  */
 export function HeroBanner({

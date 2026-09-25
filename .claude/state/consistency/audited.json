@@ -1,8 +1,7 @@
 {
-  "hash": "71374f10e4bb17c1e605dc45346a3cf2e6718558e64c450bc781853fab36e8cd",
-  "audited_at": "2026-09-24T06:59:06",
+  "hash": "1491f00bc28813c1220798a4e0072a13295ef17f3fc7fbeed86513a5d80c432e",
+  "audited_at": "2026-09-25T03:36:27",
   "files": [
-    ".claude/rules/affiliate-ads-standards.md",
-    ".claude/scripts/ads/audit-affiliate-relevance.ts"
+    ".claude/rules/ui-components.md"
   ]
 }

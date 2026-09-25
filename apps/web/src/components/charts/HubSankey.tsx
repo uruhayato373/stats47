@@ -207,7 +207,7 @@ export function HubSankey({
   return (
     <div
       className={
-        bare ? "w-full" : "w-full overflow-hidden rounded-none border bg-card"
+        bare ? "w-full" : "w-full overflow-hidden rounded-card border bg-card"
       }
     >
       <svg
@@ -224,7 +224,7 @@ export function HubSankey({
               textAnchor="middle"
               fontSize={22}
               fontWeight={700}
-              className="fill-slate-900 dark:fill-slate-100"
+              className="fill-foreground"
             >
               {title}
             </text>
@@ -233,7 +233,7 @@ export function HubSankey({
               y={52}
               textAnchor="middle"
               fontSize={13}
-              className="fill-slate-500 dark:fill-slate-400"
+              className="fill-muted-foreground"
             >
               {subtitle}
             </text>
@@ -253,7 +253,7 @@ export function HubSankey({
           width={FOCUS_W}
           height={model.focusH}
           rx={3}
-          className="fill-slate-800 dark:fill-slate-200"
+          className="fill-foreground"
         />
         <text
           x={model.xFocusLeft + FOCUS_W / 2}
@@ -261,7 +261,7 @@ export function HubSankey({
           textAnchor="middle"
           fontSize={FONT + 3}
           fontWeight={700}
-          className="fill-slate-900 dark:fill-slate-100"
+          className="fill-foreground"
         >
           {centerLabel}
         </text>
@@ -291,10 +291,10 @@ export function HubSankey({
               y={n.y + n.h / 2 + FONT * 0.35}
               textAnchor="end"
               fontSize={FONT}
-              className="fill-slate-700 dark:fill-slate-300"
+              className="fill-foreground"
             >
               {n.name}{" "}
-              <tspan className="fill-slate-400 dark:fill-slate-500">
+              <tspan className="fill-muted-foreground">
                 {formatValue(n.value)}
               </tspan>
             </text>
@@ -316,10 +316,10 @@ export function HubSankey({
               y={n.y + n.h / 2 + FONT * 0.35}
               textAnchor="start"
               fontSize={FONT}
-              className="fill-slate-700 dark:fill-slate-300"
+              className="fill-foreground"
             >
               {n.name}{" "}
-              <tspan className="fill-slate-400 dark:fill-slate-500">
+              <tspan className="fill-muted-foreground">
                 {formatValue(n.value)}
               </tspan>
             </text>
@@ -332,7 +332,7 @@ export function HubSankey({
             y={model.viewH - 16}
             textAnchor="middle"
             fontSize={12}
-            className="fill-slate-400 dark:fill-slate-500"
+            className="fill-muted-foreground"
           >
             {footer}
           </text>

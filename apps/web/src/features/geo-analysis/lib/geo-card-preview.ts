@@ -1,4 +1,5 @@
 import { populationLayerColor } from './geo-layer-data';
+import { GEO_MAP_COLORS } from './geo-map.palette';
 import { landPointCategory } from './geo-spatial-evidence';
 
 import type { GeoCardGeography, geoCardLandmarks } from './geo-card-geography';
@@ -50,10 +51,10 @@ export function buildGeoCardPreview(
       singleLayer === 'population'
         ? populationLayerColor(mesh[6])
         : detail.slug === 'population-land-price' || !included
-          ? '#cbd5e1'
+          ? GEO_MAP_COLORS.cardPreview.meshNeutral
           : detail.slug === 'population-flood-risk'
-            ? '#b91c1c'
-            : '#0f766e';
+            ? GEO_MAP_COLORS.cardPreview.meshFlood
+            : GEO_MAP_COLORS.cardPreview.meshDefault;
     const group = paths.get(color) ?? [];
     group.push(
       `M${left.toFixed(1)},${top.toFixed(1)}H${right.toFixed(1)}V${bottom.toFixed(1)}H${left.toFixed(1)}Z`
@@ -70,16 +71,16 @@ export function buildGeoCardPreview(
             // Only highlight the question on the card; full categories live on the detail map.
             color:
               singleLayer === 'land-price'
-                ? '#7c3aed'
-                : landPointCategory(detail, index, byId).color === '#b91c1c'
-                  ? '#b91c1c'
-                  : '#64748b',
+                ? GEO_MAP_COLORS.cardPreview.landPriceLayerPoint
+                : landPointCategory(detail, index, byId).color === GEO_MAP_COLORS.landPriceCategory.risingDecline
+                  ? GEO_MAP_COLORS.landPriceCategory.risingDecline
+                  : GEO_MAP_COLORS.cardPreview.mutedPoint,
           }))
         : detail.slug === 'population-station-access'
           ? detail.stations.map((station) => ({
               x: x(station[2]),
               y: y(station[3]),
-              color: '#f8fafc',
+              color: GEO_MAP_COLORS.cardPreview.stationPoint,
             }))
           : [];
   return {

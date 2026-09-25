@@ -124,7 +124,7 @@ export function ShareButtons({
               <span className="flex items-center justify-center w-full h-full">
                 {copied ? (
                   <Check
-                    className={`text-emerald-500 ${isProminent ? "h-5 w-5" : "h-4 w-4"
+                    className={`text-positive ${isProminent ? "h-5 w-5" : "h-4 w-4"
                       }`}
                   />
                 ) : (

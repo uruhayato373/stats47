@@ -140,7 +140,7 @@ export function AreaSearch({ prefectures, className }: AreaSearchProps) {
           id={listboxId}
           role="listbox"
           aria-label="都道府県の検索候補"
-          className="absolute z-20 mt-1 max-h-72 w-full overflow-y-auto rounded-none border border-border bg-card shadow-md"
+          className="absolute z-20 mt-1 max-h-72 w-full overflow-y-auto rounded-md border border-border bg-card shadow-md"
         >
           {results.map((pref, i) => (
             <li
@@ -177,7 +177,7 @@ export function AreaSearch({ prefectures, className }: AreaSearchProps) {
       {showEmpty && (
         <div
           role="status"
-          className="absolute z-20 mt-1 w-full rounded-none border border-border bg-card px-3 py-2 text-sm text-muted-foreground shadow-md"
+          className="absolute z-20 mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-muted-foreground shadow-md"
         >
           該当する都道府県がありません
         </div>

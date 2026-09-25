@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { cn } from "@stats47/components";
 
-import { regionStyle } from "../constants/region-styles";
+import { regionStyle } from "../constants/region-styles.palette";
 
 import type { AreaTile } from "../utils";
 

@@ -9,4 +9,4 @@
 export { CategoryIcon } from "./components/CategoryIcon";
 
 // ユーティリティ
-export { getCategoryColor } from "./utils/category-colors";
+export { getCategoryColor } from "./utils/category-colors.palette";

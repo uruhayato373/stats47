@@ -6,7 +6,13 @@
  * @see https://ui.shadcn.com/docs/installation
  */
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+/**
+ * アプリ独自の radius トークン (rounded-card = var(--card-radius)) を角丸として登録する。
+ * 未登録だと cn("rounded-card", "rounded-none") が両方残り、どちらが効くかが CSS の順序任せになる。
+ */
+const twMerge = extendTailwindMerge({ extend: { theme: { radius: ["card"] } } });
 
 /**
  * クラス名を条件付きで結合し、Tailwind CSS のクラスをマージする

@@ -56,6 +56,10 @@
   --input: 218 25% 86%;
   --ring: 213 74% 47%;
   --radius: 0.5rem;
+  /* @stats47/components の Card 外枠 (CARD_SURFACE_CLASS)。管理画面は線ありの角丸カード。
+     --border は .dark で上書きされるので、線色は dark にも追従する */
+  --card-radius: calc(var(--radius) - 4px);
+  --card-outline: hsl(var(--border));
 }
 
 .dark {

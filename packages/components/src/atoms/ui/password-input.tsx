@@ -37,11 +37,11 @@ export function PasswordInput({
   };
 
   const strengthColors = [
-    "bg-red-500",
-    "bg-orange-500",
-    "bg-yellow-500",
-    "bg-lime-500",
-    "bg-green-500",
+    "bg-negative",
+    "bg-negative/70",
+    "bg-warning",
+    "bg-positive/70",
+    "bg-positive",
   ];
   const strengthLabels = ["弱い", "やや弱い", "普通", "やや強い", "強い"];
 

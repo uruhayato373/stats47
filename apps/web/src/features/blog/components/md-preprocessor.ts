@@ -4,11 +4,11 @@
  */
 
 const CALLOUT_TYPES: Record<string, { className: string; titleClassName: string }> = {
-    NOTE:      { className: "border-blue-400 bg-blue-50 dark:bg-blue-950/30",   titleClassName: "text-blue-700 dark:text-blue-300"   },
-    TIP:       { className: "border-green-400 bg-green-50 dark:bg-green-950/30", titleClassName: "text-green-700 dark:text-green-300"  },
-    WARNING:   { className: "border-amber-400 bg-amber-50 dark:bg-amber-950/30", titleClassName: "text-amber-700 dark:text-amber-300"  },
-    IMPORTANT: { className: "border-purple-400 bg-purple-50 dark:bg-purple-950/30", titleClassName: "text-purple-700 dark:text-purple-300" },
-    CAUTION:   { className: "border-red-400 bg-red-50 dark:bg-red-950/30",     titleClassName: "text-red-700 dark:text-red-300"     },
+    NOTE:      { className: "border-info bg-info-soft",         titleClassName: "text-info"     },
+    TIP:       { className: "border-positive bg-positive-soft", titleClassName: "text-positive" },
+    WARNING:   { className: "border-warning bg-warning-soft",   titleClassName: "text-warning"  },
+    IMPORTANT: { className: "border-primary bg-primary/10",     titleClassName: "text-primary"  },
+    CAUTION:   { className: "border-negative bg-negative-soft", titleClassName: "text-negative" },
 };
 
 const CALLOUT_PRIORITY: Record<string, number> = {

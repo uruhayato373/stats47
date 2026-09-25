@@ -11,10 +11,10 @@ export function ComparisonEmpty() {
     return (
         <div className="flex flex-col items-center justify-center px-4 py-16 text-center">
             <div className="relative mb-6">
-                <div className="h-24 w-24 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
+                <div className="h-24 w-24 rounded-full bg-info-soft flex items-center justify-center text-info">
                     <MapPin size={48} />
                 </div>
-                <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-amber-400 text-white shadow-sm">
+                <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-warning text-background shadow-sm">
                     <span className="text-xl font-bold">?</span>
                 </div>
             </div>
@@ -28,7 +28,7 @@ export function ComparisonEmpty() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 text-left max-w-lg">
                 <SurfaceCard className="flex gap-3 bg-muted/50 shadow-none">
-                    <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                    <div className="h-8 w-8 shrink-0 rounded-full bg-positive-soft flex items-center justify-center text-positive">
                         <Users size={18} />
                     </div>
                     <div>
@@ -37,7 +37,7 @@ export function ComparisonEmpty() {
                     </div>
                 </SurfaceCard>
                 <SurfaceCard className="flex gap-3 bg-muted/50 shadow-none">
-                    <div className="h-8 w-8 shrink-0 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+                    <div className="h-8 w-8 shrink-0 rounded-full bg-warning-soft flex items-center justify-center text-warning">
                         <Lightbulb size={18} />
                     </div>
                     <div>

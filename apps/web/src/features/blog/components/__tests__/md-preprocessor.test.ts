@@ -23,7 +23,7 @@ describe("preprocessCallouts", () => {
     const result = preprocessCallouts(source);
 
     expect(result).toContain("TIP");
-    expect(result).toContain("border-green-400");
+    expect(result).toContain("border-positive");
   });
 
   it("WARNING callout を変換する", () => {
@@ -33,7 +33,7 @@ describe("preprocessCallouts", () => {
     const result = preprocessCallouts(source);
 
     expect(result).toContain("WARNING");
-    expect(result).toContain("border-amber-400");
+    expect(result).toContain("border-warning");
   });
 
   it("IMPORTANT callout を変換する", () => {
@@ -43,7 +43,7 @@ describe("preprocessCallouts", () => {
     const result = preprocessCallouts(source);
 
     expect(result).toContain("IMPORTANT");
-    expect(result).toContain("border-purple-400");
+    expect(result).toContain("border-primary");
   });
 
   it("CAUTION callout を変換する", () => {
@@ -53,7 +53,7 @@ describe("preprocessCallouts", () => {
     const result = preprocessCallouts(source);
 
     expect(result).toContain("CAUTION");
-    expect(result).toContain("border-red-400");
+    expect(result).toContain("border-negative");
   });
 
   it("callout でない通常行はそのまま保持する", () => {

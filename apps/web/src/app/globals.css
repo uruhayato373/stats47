@@ -9,7 +9,7 @@
      * Core Colors - Indigo & Slate 
      * Using HSL values for Tailwind opacity support 
      */
-    --background: 225 33% 99%; /* わずかに青みを含む白 */
+    --background: 220 16% 95%; /* 薄グレー地。白カード (--card) との明暗でカードを区切る (枠線は透明) */
     --foreground: 224 48% 12%; /* Ink navy */
     
     --card: 0 0% 100%; /* Pure White */
@@ -41,7 +41,21 @@
     --input: 225 24% 88%;
     --ring: 232 63% 48%;
     
-    --radius: 0px; /* フラットデザイン: 角丸なし (rounded-sm/md/lg はすべて 0) */
+    --radius: 0px; /* フラットデザイン: 角丸なし (rounded-sm/md/lg はすべて 0)。ボタン・入力欄など操作部品の角丸 */
+
+    /* カード外枠 (@stats47/components の CARD_SURFACE_CLASS が参照)。角丸・線色の変更はここだけで行う */
+    --card-radius: 0px; /* rounded-card */
+    --card-outline: transparent; /* border-card-outline。区切りは地 (--background) と白カードの明暗で出す */
+
+    /* データの状態色 (上位・良い値 / 下位・悪い値 / 注意 / 補足)。text-positive, bg-positive-soft 等 */
+    --positive: 161 94% 30%;
+    --positive-soft: 152 81% 96%;
+    --negative: 0 72% 51%;
+    --negative-soft: 0 86% 97%;
+    --warning: 26 90% 37%;
+    --warning-soft: 48 100% 96%;
+    --info: 224 76% 48%;
+    --info-soft: 214 100% 97%;
 
     /* Header height: mobile compact / desktop portal navigation */
     --header-height: 56px;
@@ -122,6 +136,15 @@
   --input: 217 33% 17.5%;
   --ring: 232 72% 68%;
 
+  --positive: 158 64% 52%;
+  --positive-soft: 166 91% 9%;
+  --negative: 0 91% 71%;
+  --negative-soft: 0 75% 15%;
+  --warning: 43 96% 56%;
+  --warning-soft: 21 92% 14%;
+  --info: 213 94% 68%;
+  --info-soft: 226 57% 21%;
+
   --sidebar-background: 222 47% 11%;
   --sidebar-foreground: 240 4.8% 95.9%;
   --sidebar-primary: 232 72% 68%;
@@ -148,7 +171,6 @@
  * .dark と同じく @layer 外に置き、zone 内の shadcn 部品へ変数を波及させる。
  */
 .reading-zone {
-  --background: 220 20% 97%; /* 薄グレー地 (#f6f7f9 相当)。白カードとの対比で紙面感を出す */
   --radius: 0px; /* カードは記事ページを含めサイト全体で角丸なし */
   --article-accent: var(--primary);
   --article-accent-fill: 214 45% 96%; /* callout / 表ヘッダの淡色地 */

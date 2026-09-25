@@ -14,6 +14,8 @@ import {
   TableRow,
 } from "@stats47/components/atoms/ui/table";
 
+import { LEAFLET_MAP_COLORS } from "@/features/map-visualization/client";
+
 import { fetchPrefDetail } from "../actions";
 
 import type {
@@ -24,6 +26,9 @@ import type { TopoJSONTopology } from "@stats47/types";
 
 
 
+
+/** 凡例は地図 (PrefectureOverlayMap) と同じ識別配色を参照して色ずれを防ぐ */
+const OVERLAY_COLORS = LEAFLET_MAP_COLORS.depopulationMedical;
 
 const DepopulationChoroplethMap = dynamic(
   () =>
@@ -147,12 +152,12 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
                     key={p.prefCode}
                     className={`cursor-pointer ${
                       p.prefCode === selectedPrefCode5
-                        ? "bg-slate-100"
+                        ? "bg-muted"
                         : ""
                     }`}
                     onClick={() => selectPrefecture(p.prefCode)}
                   >
-                    <TableCell className="text-slate-500">{i + 1}</TableCell>
+                    <TableCell className="text-muted-foreground">{i + 1}</TableCell>
                     <TableCell>{p.prefName}</TableCell>
                     <TableCell className="text-right tabular-nums">
                       {p.depopulationFacilities}/{p.totalFacilities}
@@ -183,20 +188,23 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
         )}
         {selectedPrefCode5 && selectedSummary && (
           <div className="space-y-2">
-            <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
               <span>
-                <span className="text-slate-400 mr-1">過疎地域内</span>
-                <span className="font-bold text-red-600">
+                <span className="text-muted-foreground mr-1">過疎地域内</span>
+                <span
+                  className="font-bold"
+                  style={{ color: OVERLAY_COLORS.insideArea }}
+                >
                   {selectedSummary.depopulationFacilities}
                 </span>{" "}
                 施設
               </span>
               <span>
-                <span className="text-slate-400 mr-1">県内全体</span>
+                <span className="text-muted-foreground mr-1">県内全体</span>
                 {selectedSummary.totalFacilities} 施設
               </span>
               <span>
-                <span className="text-slate-400 mr-1">比率</span>
+                <span className="text-muted-foreground mr-1">比率</span>
                 {pct(selectedSummary.ratio)}
               </span>
             </div>
@@ -206,9 +214,9 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
               <>
                 <PrefectureOverlayMap detail={prefDetail} />
                 <p className="text-xs text-muted-foreground">
-                  <span className="text-red-600">●</span> 過疎地域内の医療機関 /{" "}
-                  <span className="text-slate-400">●</span> 過疎地域外 /{" "}
-                  <span className="text-orange-500">■</span> 過疎地域
+                  <span style={{ color: OVERLAY_COLORS.insideArea }}>●</span> 過疎地域内の医療機関 /{" "}
+                  <span style={{ color: OVERLAY_COLORS.outsideArea }}>●</span> 過疎地域外 /{" "}
+                  <span style={{ color: OVERLAY_COLORS.areaPolygon }}>■</span> 過疎地域
                 </p>
               </>
             )}

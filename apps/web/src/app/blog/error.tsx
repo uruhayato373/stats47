@@ -21,7 +21,7 @@ export default function BlogError({
     return (
         <PageShell variant="reading">
             <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-none border border-red-200 bg-red-50 text-red-500">
+                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-card border border-negative/30 bg-negative-soft text-negative">
                     <AlertCircle size={40} />
                 </div>
                 <h1 className="mb-4 text-lg font-bold text-foreground">

@@ -28,7 +28,7 @@ export function AreaProfilePageClient({ profile }: Props) {
             actions={
                 <Link
                     href={`/category/population/compare?areas=${profile.areaCode}`}
-                    className="inline-flex items-center gap-1.5 rounded-none border bg-card px-3 py-2 text-sm font-semibold shadow-sm transition-colors hover:bg-accent/40 hover:shadow-md"
+                    className="inline-flex items-center gap-1.5 rounded-md border bg-card px-3 py-2 text-sm font-semibold shadow-sm transition-colors hover:bg-accent/40 hover:shadow-md"
                 >
                     <ArrowLeftRight className="h-4 w-4" />
                     他県と比較

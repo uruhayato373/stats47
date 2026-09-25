@@ -14,7 +14,9 @@ import {
   GEO_DEFAULT_PREF_LABEL,
 } from '../lib/geo-default-prefecture';
 import { GEO_HOME_ANALYSIS_LABELS } from '../lib/geo-home-copy';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import { loadGeoAnalysisPrefBundle } from '../lib/load-geo-analysis-evidence';
+
 
 const cardCopy = {
   'population-land-price': {
@@ -81,11 +83,11 @@ export async function GeoAnalysisCards() {
                     viewBox="0 0 640 360"
                     role="img"
                     aria-label={`${GEO_DEFAULT_PREF_LABEL}の行政界と${config.overlapLabel}`}
-                    className="absolute inset-0 block h-full w-full overflow-hidden bg-slate-50"
+                    className="absolute inset-0 block h-full w-full overflow-hidden bg-muted"
                   >
                     <path
                       d={preview.boundary}
-                      fill="#f1f5f9"
+                      fill={GEO_MAP_COLORS.cardPreview.prefectureFill}
                       fillRule="evenodd"
                     />
                     {preview.paths.map((path) => (
@@ -93,7 +95,7 @@ export async function GeoAnalysisCards() {
                         key={path.color}
                         d={path.d}
                         fill={path.color}
-                        stroke="#ffffff"
+                        stroke={GEO_MAP_COLORS.cardPreview.halo}
                         strokeWidth="0.7"
                       />
                     ))}
@@ -106,8 +108,8 @@ export async function GeoAnalysisCards() {
                         fill={point.color}
                         stroke={
                           slug === 'population-land-price'
-                            ? '#ffffff'
-                            : '#0f172a'
+                            ? GEO_MAP_COLORS.cardPreview.halo
+                            : GEO_MAP_COLORS.cardPreview.landmark
                         }
                         strokeWidth="0.8"
                       />
@@ -115,7 +117,7 @@ export async function GeoAnalysisCards() {
                     <path
                       d={preview.boundary}
                       fill="none"
-                      stroke="#475569"
+                      stroke={GEO_MAP_COLORS.cardPreview.prefectureStroke}
                       strokeWidth="2"
                       strokeLinejoin="round"
                     />
@@ -125,8 +127,8 @@ export async function GeoAnalysisCards() {
                           cx={place.x}
                           cy={place.y}
                           r="5"
-                          fill="#0f172a"
-                          stroke="#ffffff"
+                          fill={GEO_MAP_COLORS.cardPreview.landmark}
+                          stroke={GEO_MAP_COLORS.cardPreview.halo}
                           strokeWidth="2"
                         />
                         <text
@@ -135,8 +137,8 @@ export async function GeoAnalysisCards() {
                           textAnchor="middle"
                           fontSize="28"
                           fontWeight="600"
-                          fill="#0f172a"
-                          stroke="#ffffff"
+                          fill={GEO_MAP_COLORS.cardPreview.landmark}
+                          stroke={GEO_MAP_COLORS.cardPreview.halo}
                           strokeWidth="5"
                           paintOrder="stroke"
                           strokeLinejoin="round"

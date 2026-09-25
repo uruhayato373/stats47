@@ -7,6 +7,7 @@ import { SectionCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/server";
 
+import { RANK_GOLD_TEXT } from "../../utils/rank-medal.palette";
 import { getSidebarDetail } from "../RankingSidebar/select-sidebar-items";
 
 interface RelatedRankingsGridProps {
@@ -82,7 +83,7 @@ export async function RelatedRankingsGrid({
               )}
               {item.top1 && (
                 <span className="line-clamp-1 text-xs text-muted-foreground">
-                  <span className="font-semibold text-amber-600">
+                  <span className={`font-semibold ${RANK_GOLD_TEXT}`}>
                     {item.top1.rank ?? 1}位
                   </span>{" "}
                   {item.top1.areaName}{" "}

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { getCategoryColor } from "../utils/category-colors";
+import { getCategoryColor } from "../utils/category-colors.palette";
 
 describe("getCategoryColor", () => {
   it("既知のカテゴリキーに対応するカラーを返す", () => {

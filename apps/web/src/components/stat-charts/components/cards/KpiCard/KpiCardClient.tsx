@@ -39,9 +39,9 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
 
   const trendColor =
     changeDirection === "increase"
-      ? "text-emerald-600 dark:text-emerald-400"
+      ? "text-positive"
       : changeDirection === "decrease"
-        ? "text-red-600 dark:text-red-400"
+        ? "text-negative"
         : "text-muted-foreground";
 
   const TrendIcon =

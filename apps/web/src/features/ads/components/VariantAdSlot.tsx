@@ -143,7 +143,7 @@ export function VariantAdSlot({ variants, pageVertical, position }: VariantAdSlo
       creativeSize={chosen.creativeSize}
     >
     <div style={minHeight ? { minHeight } : undefined} className="flex flex-col gap-1">
-      <span className="self-start rounded bg-slate-200 px-1.5 py-0.5 text-xs font-bold text-slate-500">
+      <span className="self-start rounded bg-muted px-1.5 py-0.5 text-xs font-bold text-muted-foreground">
         PR
       </span>
       <TrackedAffiliateLink
@@ -155,7 +155,7 @@ export function VariantAdSlot({ variants, pageVertical, position }: VariantAdSlo
         experimentId={chosen.experimentId}
         variantId={chosen.variantId}
         creativeSize={chosen.creativeSize}
-        className="text-sm text-teal-700 underline underline-offset-2 hover:text-teal-800"
+        className="text-sm text-primary underline underline-offset-2 hover:text-primary/80"
       >
         {chosen.title}
       </TrackedAffiliateLink>

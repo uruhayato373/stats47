@@ -79,7 +79,7 @@ export function DataTable<TData>({
             {enableFiltering && <DataTableToolbar table={table} />}
             <div
                 className={cn(
-                    "flex min-h-0 flex-1 flex-col rounded-none",
+                    "flex min-h-0 flex-1 flex-col rounded-card",
                     showBorder && "border"
                 )}
             >

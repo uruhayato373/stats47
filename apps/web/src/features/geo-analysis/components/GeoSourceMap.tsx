@@ -17,10 +17,12 @@ import {
   GEO_BASEMAP,
   GEO_BASEMAP_SHORELINE_ATTRIBUTION,
 } from '../lib/geo-basemap';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import {
   formatGeoSourceProperty,
   visibleGeoSourceFields,
 } from '../lib/geo-source-properties';
+
 
 import type { GeoSourceField } from '@stats47/data-configs/business-plan';
 import type { FeatureCollection } from 'geojson';
@@ -126,15 +128,15 @@ function SourceContent({
           key={result.revision}
           data={result.collection}
           style={{
-            color: '#2563eb',
+            color: GEO_MAP_COLORS.sourceResult.stroke,
             weight: 1.5,
-            fillColor: '#60a5fa',
+            fillColor: GEO_MAP_COLORS.sourceResult.fill,
             fillOpacity: 0.35,
           }}
           pointToLayer={(_f, ll) =>
             L.circleMarker(ll, {
               radius: 5,
-              color: '#1e40af',
+              color: GEO_MAP_COLORS.sourceResult.point,
               weight: 1,
               fillOpacity: 0.8,
             })
