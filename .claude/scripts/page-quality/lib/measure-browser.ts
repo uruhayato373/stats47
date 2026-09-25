@@ -16,6 +16,7 @@ export interface BrowserMeasurement {
   small_tap_targets: number;
   clipped_text: MetricValue;
   overlapping_tap_targets: MetricValue;
+  chart_text_issues: MetricValue;
   a11y_violations: MetricValue;
   ui_findings: string[];
 }
@@ -89,6 +90,7 @@ function launchFailure(reason: string): BrowserMeasurement {
     small_tap_targets: 0,
     clipped_text: unmeasured(reason),
     overlapping_tap_targets: unmeasured(reason),
+    chart_text_issues: unmeasured(reason),
     a11y_violations: unmeasured(reason),
     ui_findings: [],
   };
@@ -201,6 +203,7 @@ async function measureWithBrowser(
         small_tap_targets: smallTapTargets,
         clipped_text: ui?.clipped_text ?? unmeasured(reason),
         overlapping_tap_targets: ui?.overlapping_tap_targets ?? unmeasured(reason),
+        chart_text_issues: ui?.chart_text_issues ?? unmeasured(reason),
         a11y_violations: ui?.a11y_violations ?? unmeasured(reason),
         ui_findings: ui?.ui_findings ?? [],
       };
@@ -224,6 +227,7 @@ async function measureWithBrowser(
       small_tap_targets: smallTapTargets,
       clipped_text: ui?.clipped_text ?? unmeasured("first navigation failed before UI probe"),
       overlapping_tap_targets: ui?.overlapping_tap_targets ?? unmeasured("first navigation failed before UI probe"),
+      chart_text_issues: ui?.chart_text_issues ?? unmeasured("first navigation failed before UI probe"),
       a11y_violations: ui?.a11y_violations ?? unmeasured("first navigation failed before UI probe"),
       ui_findings: ui?.ui_findings ?? [],
     };

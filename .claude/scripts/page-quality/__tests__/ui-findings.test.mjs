@@ -8,6 +8,7 @@ import {
   insertCards,
   isFixLive,
   observeFindings,
+  chartFixGuide,
   planUiCards,
   staleBatchFiles,
   syncFindings,
@@ -206,4 +207,20 @@ test("週次監査が同期と起票を行い、週次と backlog-loop の両方
   assert.match(weekly, /git add \.claude\/state\/page-quality\/ \.claude\/todo\/backlog\.md/);
   const loop = readFileSync(new URL(".github/workflows/backlog-loop-daily.yml", root), "utf8");
   assert.match(loop, /git add -- [^\n]*\.claude\/state\/page-quality/);
+});
+
+// チャートの文字の指摘は直し方が分かれる (部品を直す agent / 作り直すだけのスクリプト)。
+// 手順がカードに無いと、ループが SVG を 1 枚ずつ手で直したり R2 へ勝手に反映したりする。
+test("チャートの文字の指摘を含むカードには、種類ごとの振り分け手順を書く", () => {
+  const blog = finding({ key: "machine|https://stats47.jp/blog/beer|blog_svg_text_issues", metric_key: "blog_svg_text_issues", template: "blog-detail" });
+  const d3 = finding({ key: "machine|https://stats47.jp/areas/13000|chart_text_issues", metric_key: "chart_text_issues", template: "area" });
+  const [blogCard] = planUiCards({ queue: [blog], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  assert.match(blogCard.markdown, /plan-svg-text-fix\.ts @\.claude\/state\/page-quality\/backlog-batches\/UI-FIX-BLOG-DETAIL-20261004\.txt/);
+  assert.match(blogCard.markdown, /regen-fixes.*オーナー承認.*\[実行:ユーザー\]/);
+  assert.match(blogCard.markdown, /generator-fix.*packages\/svg-builder/);
+  const [areaCard] = planUiCards({ queue: [d3], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  assert.match(areaCard.markdown, /packages\/visualization\/src\/d3\/components/);
+  assert.doesNotMatch(areaCard.markdown, /plan-svg-text-fix/);
+  // チャート以外の指摘だけのカードには足さない
+  assert.deepEqual(chartFixGuide([finding()], "x.txt"), []);
 });

@@ -29,8 +29,10 @@ paths:
    error違反があれば `page-quality-alert,auto-generated` ラベルでIssueを起票する。
    - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`)・空の見出し (`empty_headings`)・
      「データ出典」見出しの重複 (`duplicate_data_source_sections`)・新しいタブで開かない外部リンク
-     (`external_links_same_tab`。規約は `docs/01_技術設計/04_デザインシステム.md`「外部リンク」)
+     (`external_links_same_tab`。規約は `docs/01_技術設計/04_デザインシステム.md`「外部リンク」)・
+     記事チャート SVG の文字のはみ出し・重なり (`blog_svg_text_issues`。下記「チャートの文字の検査」)
    - **代表URL 11件だけブラウザ**: 文字の切れ (`clipped_text`)・タップ要素の重なり (`overlapping_tap_targets`)・
+     SVG チャートの文字の切れ・重なり (`chart_text_issues`)・
      axe-core の WCAG A/AA critical/serious 規則数 (`a11y_violations`)。全URLをブラウザで開くのはコストが見合わない
    - **RSC は全件では測らない** (`--skip-rsc`): RSC はキャッシュされず 1 件ごとにサーバー描画する
      (実測 0.5〜3.7 秒/件)。2026-09-19 の初回は RSC 込み並列 4 で 45 分の制限内に 1,200/6,237 URL しか進まず
@@ -81,6 +83,31 @@ paths:
 週次契約 (1 回の失敗・予定枠の未起動で通知) で見ている。手動カードが担当する指摘は `owner` + `card` で持ち、
 そのカードが開いている間は起票しない。配線 (週次が同期して commit・ループがキューを commit) は
 `__tests__/ui-findings.test.mjs` が固定する。
+
+## チャートの文字の検査と修正の振り分け (2026-09-25)
+
+目盛りの数値が画面から切れる・凡例と目盛りが重なる・単位が重複する、といったチャートの崩れは
+スクショを agent に見せるだけでは取りこぼす (縮小した全体像では 1 文字の欠けが読めず、判断も週ごとに揺れる)。
+**文字の外枠の座標で機械的に判定し、UI 指摘のループに乗せる。** 検出は 2 系統:
+
+| 指標 | 対象 | 判定 |
+|---|---|---|
+| `chart_text_issues` | ページに直接描く SVG チャート (D3・代表URL・ブラウザ) | 実フォントで描画された `<text>` の外接矩形が SVG の描画範囲から 2px 超出る (overflow: visible の SVG は除外) / 同じ SVG 内の文字どうしが小さい方の 25% 以上かつ 3px 四方以上重なる。チャートは画面に入ってから描かれるので `scrollThroughPage` で描かせてから測る (幅ごとの `responsive_layout_issues` も同じ) |
+| `blog_svg_text_issues` | 記事に `<img>` で埋め込んだ静的 SVG (全記事・静的) | svg-lint の `findChartTextIssues` (文字幅の推定・回転と text-anchor を反映)。`lib/check-svg-text.ts` が記事チャート SVG を 1 枚ずつ取得して検査する。`<img>` の中身はブラウザ検査から見えないため |
+
+2026-09-25 の本番実測 (代表URL 12 件 × 412/1440px): `/areas/13000` の積み上げ面グラフで縦軸の目盛りが
+左に 4〜12px 切れているのを検出し、他の 11 ページは 0 件 (誤検知なし)。
+
+**修正は 2 種類に分かれ、カード本文 (`chartFixGuide`) に手順を書く:**
+
+- **部品を直す (agent)**: `chart_text_issues` は共有チャート部品の不具合で、1 部品を直せば同じ部品を使う全ページが直る。
+  ページ単位ではなく部品単位で直し、長いラベルで描く回帰テストを足す。生成器が原因の `blog_svg_text_issues`
+  (`generator-fix`) も同じで、`packages/svg-builder` を直す。
+- **作り直すだけ (スクリプト)**: 生成器が既に正しい記事 SVG は、data JSON から作り直せば直る (`regen-fixes`)。
+  `npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @<batch>` が公開中の SVG と作り直した SVG の両方を検査して
+  `regen-fixes` / `generator-fix` / `no-data` / `clean` に振り分け、反映コマンド
+  (`regenerate-blog-svgs.yml` の slug 指定) を出力する。**R2 への反映はオーナー承認が要る**ので、ループは
+  `[実行:ユーザー]` カードを起票して `--mark-owner` で紐付ける (勝手に dispatch しない)。
 
 ## UI 検査の判定 (誤検知を出さないための除外)
 

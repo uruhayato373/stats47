@@ -14,6 +14,7 @@ import type { D3PyramidChartProps } from "../../types/d3";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { select, rollup, sum, stack, stackOffsetDiverging, max, scaleLinear, scaleBand, scaleOrdinal } from "d3";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 
 
@@ -233,6 +234,7 @@ export function PyramidChart({
       });
 
     // 軸・ラベルなし（男性=青、女性=ピンクの色で判別）
+    fitSvgViewBox(svgRef.current, width, height);
 
     // クリーンアップ関数
     return () => {

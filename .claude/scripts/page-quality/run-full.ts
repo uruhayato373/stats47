@@ -23,6 +23,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { checkImages } from "./lib/check-images";
+import { checkSvgText } from "./lib/check-svg-text";
 import { createScreenshotSession, responsiveFindings, SCREENSHOT_PREFIX } from "./lib/screenshots";
 import { buildReviewInput, newUiViolations } from "./lib/ui-report";
 import { PAGE_TEMPLATES } from "./templates";
@@ -165,6 +166,11 @@ async function main() {
     await measureRepresentativesInBrowser(results, opts.baseUrl, opts.browserRuns, generatedAt.slice(0, 10));
   }
 
+  // checkImages が image_urls を消す前に、記事チャート SVG の文字を検査する
+  const svgText = await checkSvgText(results);
+  console.log(
+    `[page-quality] 記事チャートSVG: ${svgText.checked} 枚 / 文字の不具合 ${svgText.withIssues} / 取得失敗で未確認 ${svgText.unverified}`
+  );
   const images = await checkImages(results);
   console.log(
     `[page-quality] 画像確認: ${images.checked} 件 / 壊れ ${images.broken} / 通信失敗で未確認 ${images.unverified}`

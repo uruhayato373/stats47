@@ -8,6 +8,7 @@ import { computeAxisDomain } from "../../../shared";
 import { CHART_STYLES } from "../../constants";
 import { getThemeColors } from "../../utils/get-theme-colors";
 import type { BoxplotChartProps, PrefectureData } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 const CONFIG = {
   boxWidthRatio: 0.5,
@@ -228,6 +229,7 @@ export function BoxplotChart({
     yAxis.selectAll("text").style("font-size", `${14 * scale}px`).style("fill", TEXT_MUTED);
     yAxis.selectAll("line, path").style("stroke", TEXT_MUTED);
 
+    fitSvgViewBox(svgEl, width, height);
   }, [data, decimalPlaces, yAxisMin, yAxisMax, minValueType, width, height]);
 
   return (

@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { computeChartLayout, computeMarginsByRatio } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { CategoryHeatmapProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * CategoryHeatmap — 年×品目のヒートマップ
@@ -154,6 +155,8 @@ export function CategoryHeatmap({
         .attr("font-size", "8px")
         .text((d) => d.value.toFixed(1));
     }
+
+    fitSvgViewBox(svgRef.current, width, height);
   }, [data, baseline, positiveColor, negativeColor, unit, width, height, innerWidth, innerHeight, marginTop, marginLeft, showTooltip, hideTooltip, updateTooltipPosition]);
 
   if (data.length === 0) {

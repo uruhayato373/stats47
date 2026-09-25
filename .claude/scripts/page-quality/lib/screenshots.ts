@@ -8,7 +8,7 @@ import sharp from "sharp";
 
 import type { ScreenshotRecord } from "../types";
 import { resolveDispatcher } from "./http-dispatcher";
-import { evaluateLayoutIssues } from "./ui-probe";
+import { evaluateLayoutIssues, scrollThroughPage } from "./ui-probe";
 
 /** R2 上の保存先。`latest/` は全幅の最新版 (翌週の比較元)、`<date>/` は agent が確認した幅の履歴。 */
 export const SCREENSHOT_PREFIX = "state/page-quality/screenshots";
@@ -104,6 +104,10 @@ export function responsiveFindings(records: ScreenshotRecord[]): { count: number
       count += 1;
       findings.push(`responsive@${r.device} overlapping_tap_target: ${o}`);
     }
+    for (const t of r.chartText ?? []) {
+      count += 1;
+      findings.push(`responsive@${r.device} chart_text: ${t}`);
+    }
   }
   return { count, findings };
 }
@@ -148,19 +152,6 @@ export async function createScreenshotSession(options: {
     writeFileSync(path, data);
   };
 
-  /** 撮影範囲をビューポート単位でスクロールし、遅延読み込みの描画を待ってから先頭へ戻る。 */
-  async function scrollThroughCapturedArea(page: Page, maxHeight: number): Promise<void> {
-    const viewportHeight = page.viewportSize()?.height ?? 800;
-    const limit = Math.min(maxHeight, await page.evaluate(() => document.documentElement.scrollHeight));
-    for (let y = 0; y < limit; y += viewportHeight) {
-      await page.evaluate((top) => window.scrollTo(0, top), y);
-      await page.waitForTimeout(250);
-    }
-    await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => undefined);
-    await page.evaluate(() => window.scrollTo(0, 0));
-    await page.waitForTimeout(300);
-  }
-
   return {
     async capture(url, template) {
       const records: ScreenshotRecord[] = [];
@@ -191,7 +182,9 @@ export async function createScreenshotSession(options: {
           // 画面外のチャートは表示範囲に入ってから描画する (遅延読み込み)。撮る範囲を一度スクロールで
           // 通過させないと、空の枠や「読み込み中...」のまま写り誤検知になる (2026-09-24 theme の指摘は
           // 実機でスクロール後に描画されることを確認した)。
-          await scrollThroughCapturedArea(page, spec.maxHeight);
+          await scrollThroughPage(page, spec.maxHeight);
+          // チャートは遅延描画なので、文字の切れ・重なりはスクロールで描かせた後に測る
+          const chartText = (await evaluateLayoutIssues(page).catch(() => null))?.chartText ?? [];
           const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight);
           const png = await page.screenshot({
             fullPage: true,
@@ -235,6 +228,7 @@ export async function createScreenshotSession(options: {
             horizontalScroll,
             clipped: layout.clipped,
             overlaps: layout.overlaps,
+            chartText,
           });
         } catch (e) {
           failures.push(`screenshot_failed@${spec.id}: ${(e as Error).message.split("\n")[0]}`);

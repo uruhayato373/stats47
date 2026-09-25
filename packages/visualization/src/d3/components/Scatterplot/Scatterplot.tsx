@@ -7,6 +7,7 @@ import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../.
 import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { ScatterplotProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * Scatterplot - 点の集まりとしてデータを表示する D3 チャート
@@ -147,6 +148,9 @@ export function Scatterplot({
                 .attr("text-anchor", "start")
                 .attr("font-size", baseFontSize)
                 .text(yLabel || ""));
+
+        // 軸ラベルは同期描画済み。点・回帰線は描画領域内なので測定を待たない
+        fitSvgViewBox(svgRef.current, width, height);
 
         // Defer interactive elements to next frame to reduce TBT
         const rafId = requestAnimationFrame(() => {

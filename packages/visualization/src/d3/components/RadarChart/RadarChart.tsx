@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { computeFontSize } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { D3RadarChartProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 const DEFAULT_COLORS = schemeTableau10 as readonly string[];
 
@@ -211,6 +212,9 @@ export function RadarChart({
         xOffset += 16 + textWidth + 16;
       });
     }
+
+    // 軸ラベル・凡例が viewBox 外へはみ出した分だけ viewBox を広げる
+    fitSvgViewBox(svgRef.current, width, height);
   }, [
     axes,
     data,

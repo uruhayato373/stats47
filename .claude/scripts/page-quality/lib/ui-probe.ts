@@ -4,10 +4,14 @@ import type { Page } from "playwright";
 import type { MetricValue } from "../types";
 
 export const MAX_UI_FINDINGS = 10;
+/** 検査前に遅延描画を起こすためにスクロールする深さの上限 (撮影の maxHeight と同程度) */
+const PROBE_SCROLL_LIMIT_PX = 12_000;
 
 export interface LayoutIssues {
   clipped: string[];
   overlaps: string[];
+  /** SVG チャートの文字 (目盛り・凡例・単位・軸タイトル) の切れと重なり */
+  chartText: string[];
 }
 
 /**
@@ -15,6 +19,9 @@ export interface LayoutIssues {
  * - clipped: overflow を hidden/clip にした要素で、中の文字が枠からはみ出して切れているもの
  *   (text-overflow: ellipsis と line-clamp は意図した省略なので除外)
  * - overlaps: タップできる要素どうしが、小さい方の面積の 25% 以上重なっているもの (入れ子は除外)
+ * - chartText: ページに直接描かれた SVG チャートの <text> が、SVG の描画範囲の外へ出て切れているもの
+ *   (overflow: visible の SVG は切れないので除外) と、同じ SVG 内の <text> どうしが重なっているもの。
+ *   <img> で埋め込んだ静的 SVG は DOM から中身が見えないので、静的検査 (findChartTextIssues) が見る
  */
 export function collectLayoutIssues(): LayoutIssues {
   const describe = (el: Element): string => {
@@ -144,7 +151,60 @@ export function collectLayoutIssues(): LayoutIssues {
     }
   }
 
-  return { clipped, overlaps };
+  // SVG チャートの文字。実フォントで描画された座標 (回転・text-anchor 反映済み) で判定する。
+  // 文字の外接矩形は推定より正確だが字形の余白を含むので、切れは 2px・重なりは 25% かつ 3px 四方の許容を置く。
+  const chartText: string[] = [];
+  const label = (t: Element) => `"${(t.textContent ?? "").trim().slice(0, 16)}"`;
+  const describeSvg = (svg: Element): string => {
+    const aria = svg.getAttribute("aria-label") ?? svg.querySelector("title")?.textContent ?? "";
+    const owner = svg.closest("[class]");
+    const cls = (owner?.getAttribute("class") ?? "").trim().split(/\s+/).filter(Boolean).slice(0, 2).join(".");
+    return `svg${aria ? `[${aria.trim().slice(0, 24)}]` : cls ? `(in .${cls})` : ""}`;
+  };
+  for (const svg of Array.from(document.body.querySelectorAll("svg"))) {
+    if (svg.parentElement?.closest("svg")) continue; // 入れ子の svg は外側でまとめて見る
+    if (inClosedDetails(svg) || !isVisible(svg)) continue;
+    const texts = Array.from(svg.querySelectorAll("text")).filter(
+      (t) => (t.textContent ?? "").trim() !== "" && !t.closest("title, desc, defs, clipPath, mask") && isVisible(t)
+    );
+    if (texts.length === 0) continue; // アイコン等の文字を持たない svg
+    const frame = svg.getBoundingClientRect();
+    const clipsContent = getComputedStyle(svg).overflow !== "visible";
+    const rects = texts.map((t) => t.getBoundingClientRect());
+    const where = describeSvg(svg);
+    texts.forEach((t, i) => {
+      const r = rects[i];
+      if (!clipsContent) return;
+      const out = Math.max(frame.left - r.left, r.right - frame.right, frame.top - r.top, r.bottom - frame.bottom);
+      if (out > 2) chartText.push(`${where} ${label(t)} が描画範囲から ${Math.round(out)}px はみ出して切れている`);
+    });
+    for (let i = 0; i < texts.length; i++) {
+      for (let j = i + 1; j < texts.length; j++) {
+        const a = rects[i];
+        const b = rects[j];
+        const w = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+        const h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+        if (w < 3 || h < 3) continue;
+        const smaller = Math.min(a.width * a.height, b.width * b.height);
+        if (smaller > 0 && w * h >= smaller * 0.25) chartText.push(`${where} ${label(texts[i])} と ${label(texts[j])} が重なっている`);
+      }
+    }
+  }
+
+  return { clipped, overlaps, chartText };
+}
+
+/** ページをビューポート単位でスクロールし、遅延読み込み (画面に入ってから描くチャート等) を描かせてから先頭へ戻る。 */
+export async function scrollThroughPage(page: Page, maxHeight: number): Promise<void> {
+  const viewportHeight = page.viewportSize()?.height ?? 800;
+  const limit = Math.min(maxHeight, await page.evaluate(() => document.documentElement.scrollHeight));
+  for (let y = 0; y < limit; y += viewportHeight) {
+    await page.evaluate((top) => window.scrollTo(0, top), y);
+    await page.waitForTimeout(250);
+  }
+  await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => undefined);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(300);
 }
 
 /**
@@ -160,6 +220,7 @@ export function evaluateLayoutIssues(page: Page): Promise<LayoutIssues> {
 export interface UiProbeResult {
   clipped_text: MetricValue;
   overlapping_tap_targets: MetricValue;
+  chart_text_issues: MetricValue;
   a11y_violations: MetricValue;
   ui_findings: string[];
 }
@@ -171,18 +232,24 @@ export async function probeUi(page: Page): Promise<UiProbeResult> {
   // CSS・Web フォントの適用前に測ると、非表示のはずの要素 (PC 用サイドバー等) が見えている扱いになる。
   await page.waitForLoadState("load").catch(() => undefined);
   await page.evaluate("document.fonts.ready.then(() => true)").catch(() => undefined);
+  // 画面外のチャートは表示範囲に入ってから描かれる。描かせてから測らないとチャートの文字を見逃す
+  await scrollThroughPage(page, PROBE_SCROLL_LIMIT_PX).catch(() => undefined);
   let clipped: MetricValue;
   let overlapping: MetricValue;
+  let chartText: MetricValue;
   try {
     const layout = await evaluateLayoutIssues(page);
     clipped = layout.clipped.length;
     overlapping = layout.overlaps.length;
+    chartText = layout.chartText.length;
     findings.push(...layout.clipped.slice(0, MAX_UI_FINDINGS).map((d) => `clipped_text: ${d}`));
     findings.push(...layout.overlaps.slice(0, MAX_UI_FINDINGS).map((d) => `overlapping_tap_target: ${d}`));
+    findings.push(...layout.chartText.slice(0, MAX_UI_FINDINGS).map((d) => `chart_text: ${d}`));
   } catch (e) {
     const reason = `layout probe failed: ${(e as Error).message}`;
     clipped = { value: null, reason };
     overlapping = { value: null, reason };
+    chartText = { value: null, reason };
   }
 
   let a11y: MetricValue;
@@ -197,5 +264,11 @@ export async function probeUi(page: Page): Promise<UiProbeResult> {
     a11y = { value: null, reason: `axe failed: ${(e as Error).message}` };
   }
 
-  return { clipped_text: clipped, overlapping_tap_targets: overlapping, a11y_violations: a11y, ui_findings: findings };
+  return {
+    clipped_text: clipped,
+    overlapping_tap_targets: overlapping,
+    chart_text_issues: chartText,
+    a11y_violations: a11y,
+    ui_findings: findings,
+  };
 }

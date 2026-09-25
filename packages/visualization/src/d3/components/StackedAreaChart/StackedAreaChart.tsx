@@ -13,6 +13,7 @@ import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3StackedAreaChartProps, StackedAreaDataNode } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 function defaultFormat(value: number): string {
   return value.toLocaleString();
@@ -256,6 +257,9 @@ export function StackedAreaChart({
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
+
+    // 目盛ラベル (例: "1,400.0万") が比率マージンより長いと負の x にはみ出すので viewBox を広げる
+    fitSvgViewBox(svgRef.current, width, height);
 
     // Legend is rendered as HTML below the SVG
   }, [

@@ -240,6 +240,31 @@ export function planUiCards({
 
 const CLI = "npx tsx .claude/scripts/page-quality/ui-findings.ts";
 
+const hasMetric = (findings: readonly UiFinding[], metric: string) =>
+  findings.some((f) => f.metric_key === metric || f.key.endsWith(`|${metric}`));
+
+/**
+ * チャートの文字の指摘は、直し方が「部品を直す (agent)」と「作り直すだけ (スクリプト)」に分かれる。
+ * 判断をカードの読み手に委ねず、振り分けの手順をカード本文に書く。正典: page-quality-standards.md
+ */
+export function chartFixGuide(findings: readonly UiFinding[], batchFile: string): string[] {
+  const lines: string[] = [];
+  if (hasMetric(findings, "chart_text_issues")) {
+    lines.push(
+      "- **チャートの文字 (ページに描く D3 チャート・agent が直す)**: 指摘の `svg[…]` から部品 (`packages/visualization/src/d3/components/*`) を特定し、部品を直す。1 部品を直せば同じ部品を使う全ページが直るので、ページ単位で直さない。描画範囲の外へ出る文字は共通の仕組み (`.claude/rules/chart-component-standards.md`) で収め、長いラベル (「1,400.0万」・47 都道府県名・6 系列の凡例) で描く回帰テストを足す。"
+    );
+  }
+  if (hasMetric(findings, "blog_svg_text_issues")) {
+    lines.push(
+      `- **記事チャート SVG (振り分けてから直す)**: まず \`npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @${batchFile}\` を実行する。` +
+        "`regen-fixes` は生成器が既に正しく、R2 の SVG を作り直すだけで直る (コード変更なし)。R2 への反映はオーナー承認が要るので、出力された `gh workflow run regenerate-blog-svgs.yml …` を書いた `[実行:ユーザー]` カードを起票し、対象を `--mark-owner` で紐付ける。" +
+        "`generator-fix` は `packages/svg-builder` の該当チャートを直し、長いラベルの fixture テストを足してから再実行して `regen-fixes` になることを確かめる (以降は同じ手順)。" +
+        "`no-data` は data JSON が無く作り直せないので、手作業の brushup を依頼するカードを起票して `--mark-owner`。`clean` は既に直っているので `--mark-fixed`。"
+    );
+  }
+  return lines;
+}
+
 function renderCard(id: string, template: string, findings: UiFinding[], today: string, screenshotBaseUrl: string): string {
   const file = batchPath(id);
   const shots = ["mobile-390", "desktop-1440"]
@@ -260,6 +285,7 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
     `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`.claude/state/metrics/page-quality/LATEST.md\`。`,
     "- **対象**:",
     ...findings.flatMap(target),
+    ...chartFixGuide(findings, file),
     "- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。",
     `- **記録**: 直した指摘は \`${CLI} --mark-fixed <key> --note "<何を変えたか>"\`、直さないと判断した指摘は \`--mark-by-design <key> --note "<理由>"\`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた \`[実行:対話]\` のカードを backlog に起票してから \`--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"\` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは \`@${file}\`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。`,
     "- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。",

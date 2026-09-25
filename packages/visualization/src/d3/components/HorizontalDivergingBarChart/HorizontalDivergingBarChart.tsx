@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { computeChartLayout, computeMarginsByRatio } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { HorizontalDivergingBarChartProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * HorizontalDivergingBarChart — 基準値からの乖離を水平バーで表示
@@ -168,6 +169,8 @@ export function HorizontalDivergingBarChart({
       .attr("fill", "hsl(var(--muted-foreground))")
       .attr("font-size", "10px")
       .text((d) => d.value.toFixed(1));
+
+    fitSvgViewBox(svgRef.current, width, height);
   }, [data, baseline, positiveColor, negativeColor, unit, width, height, innerWidth, innerHeight, marginTop, marginLeft, showTooltip, hideTooltip, updateTooltipPosition]);
 
   if (data.length === 0) {

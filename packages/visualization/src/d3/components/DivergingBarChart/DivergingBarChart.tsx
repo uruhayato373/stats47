@@ -11,6 +11,7 @@ import {
 import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { DivergingBarChartProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * DivergingBarChart - 上下に分かれた縦棒グラフ
@@ -196,6 +197,8 @@ export function DivergingBarChart({
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
+
+    fitSvgViewBox(svgRef.current, width, height);
   }, [
     data,
     categoryKey,
