@@ -232,6 +232,9 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  *   各コンテンツ面から、そのデータを生成した調査ハブへの導線
  * - `survey_ranking` / `survey_theme` / `survey_blog` / `survey_category`:
  *   調査ハブから、その調査を使う各コンテンツ面への逆方向導線
+ * - `blog_source` / `ranking_source` / `municipality_source` / `geo_source`:
+ *   ページ末尾「データ出典」(`DataSourceList`) から調査ハブ・統計表・データセットへの導線。
+ *   右レールの調査カード (`*_survey`) と混ぜないため別の値にする (2026-09-25 値追加)
  * - `theme_evidence`: 白書・統計の論点からランキング・関連テーマ・記事へ進む導線。
  *   `nav_label` は `<topic-key>:<target-type>:<target-key>`。
  * - `theme_ranking` / `theme_blog`: テーマページの指標一覧・比較表・詳細チャートから
@@ -294,7 +297,12 @@ export type NavSurface =
   // レール UI 契約統一 (2026-09-17 値追加。登録済み dimension の値追加なので GA4 側の作業は不要):
   // /ranking の左レールのカテゴリ導線 (従来は home_category に混入していた) / /geo の右レール
   | 'ranking_category'
-  | 'geo_sidebar';
+  | 'geo_sidebar'
+  // ページ末尾「データ出典」(2026-09-25 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
+  | 'blog_source'
+  | 'ranking_source'
+  | 'municipality_source'
+  | 'geo_source';
 
 export function trackNavClick(params: {
   label: string;

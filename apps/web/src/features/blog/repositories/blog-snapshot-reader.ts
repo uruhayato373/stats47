@@ -57,6 +57,8 @@ function toArticle(row: SnapshotArticle): Article {
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
     surveyIds: row.surveyIds ?? [],
+    // undefined = 旧 snapshot (未焼き込み)。page が source.json から fallback 解決するので [] に丸めない
+    ...(row.sources === undefined ? {} : { sources: row.sources }),
     tags: JSON.stringify(row.tags ?? []),
     content: '',
     frontmatter,

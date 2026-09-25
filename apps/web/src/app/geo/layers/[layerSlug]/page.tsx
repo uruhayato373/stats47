@@ -9,6 +9,7 @@ import {
   PageHeader,
   PageShell,
 } from '@/components/layout';
+import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -102,19 +103,18 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
         />
         <p className="text-sm leading-relaxed">{layer.limitation}</p>
       </SurfaceCard>
-      <SurfaceCard className="mt-6 space-y-3">
-        <SectionHeader title="出典・データ年度" hideRule className="mb-0" />
-        {snapshot?.sources
+      <DataSourceList
+        sources={(snapshot?.sources ?? [])
           .filter((s) => s.datasetId === layer.dataId)
-          .map((s) => (
-            <p key={s.datasetId} className="break-words text-sm">
-              <a href={s.url} className="text-primary underline">
-                {s.name}
-              </a>
-              <br />
-              原典バージョン：{s.version}／{s.license}
-            </p>
-          ))}
+          .map((s) => ({
+            label: `${s.name}（原典バージョン ${s.version}）`,
+            url: s.url,
+            tables: [],
+            license: s.license,
+          }))}
+        surface="geo_source"
+      />
+      <SurfaceCard className="mt-6 space-y-3">
         <p className="text-xs text-muted-foreground">
           {bundle
             ? `表示データ作成：${bundle.manifest.generatedAt.slice(0, 10)}`

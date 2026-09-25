@@ -27,6 +27,8 @@ export function classifyPath(path: string): PageTemplateKey {
   if (path.startsWith("/category")) return "category";
   if (path.startsWith("/themes")) return "theme";
   if (path.startsWith("/geo")) return "geo-analysis";
+  // 記事詳細 (/blog/<slug>) は一覧 (/blog・/blog/tags) と別レイアウト。予約パスの tags だけ一覧側
+  if (/^\/blog\/(?!tags\/?$)[^/]+\/?$/.test(path)) return "blog-article";
   if (path.startsWith("/blog")) return "blog";
   if (path.startsWith("/survey")) return "survey";
   return "other";

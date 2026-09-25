@@ -81,6 +81,24 @@ DB (articles テーブル)           ← サイトに反映
 
 **重要**: 記事の新規作成・編集は必ず `docs/21_ブログ記事原稿/` で行うこと。`.local/r2/app/blog/` に直接書かない。
 
+## 公開済み記事の出典表示 (2026-09-25〜)
+
+出典はページ末尾の「データ出典」(`DataSourceList`) が図の `source.json` から自動表示する。本文に手書きの
+`## データ出典` 節は書かない (`quality-gate.mjs` が blocker)。既存記事を直すときの手順:
+
+```bash
+# 1. 出典を導出できない図に displaySources を足す (置換表 data/display-sources-backfill.json)
+npx tsx .claude/scripts/blog/backfill-display-sources.ts --apply
+# 2. sources を焼いた snapshot を使って、本文の手書き節を移行する
+#    (引用だけ → 削除 / 計算方法・定義を含む → 「データについて」へ改名。Kindle 書籍の章は据え置き)
+npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --snapshot <all.json> --apply
+# 3. 本文と source.json を R2 へ (put 後に GET で照合)
+npx tsx .claude/scripts/blog/push-article-md-r2.ts --src .local/blog-datasource-fix/out --apply
+```
+
+Kindle 書籍の章に使う記事は本文を変えない (書籍の校正指示が本文の文字列に固定されているため)。
+Web の表示は描画時の同じ変換でそろう。正典: `docs/01_技術設計/04_デザインシステム.md`「データ出典」。
+
 ## OGP・画像生成の役割分担
 
 このエージェントが扱う画像の方式割当（OGP 画像の正典は `.claude/rules/ogp-image-standards.md`）:

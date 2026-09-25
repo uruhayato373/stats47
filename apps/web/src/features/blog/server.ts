@@ -29,6 +29,7 @@ export {
 export {
   resolveArticleSurveyTaxonomy,
   resolveArticleSurveyIds,
+  resolveArticleDataSources,
 } from "./services/article-survey-taxonomy";
 
 // サービス

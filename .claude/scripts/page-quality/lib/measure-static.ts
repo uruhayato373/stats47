@@ -20,6 +20,7 @@ export interface StaticMeasurement {
   ad_slots: number;
   ad_duplicate_count: number;
   empty_headings: number;
+  duplicate_data_source_sections: number;
   image_urls: string[];
 }
 
@@ -169,6 +170,11 @@ export function analyzeHtml(html: string, baseUrl: string): StaticMeasurement {
     return true;
   }).length;
 
+  // ページ末尾の「データ出典」は DataSourceList の 1 つだけ。本文の手書き節が残って並ぶと 2 つになる
+  // (2026-09-25 出典表示の統一。Kindle 章の記事は描画時に手書き節を変換して 1 つに保つ)。
+  const dataSourceHeadings = $("h2, h3, h4").filter((_, el) => $(el).text().trim() === "データ出典").length;
+  const duplicateDataSourceSections = Math.max(0, dataSourceHeadings - 1);
+
   return {
     http_status: 0, // 呼び出し側で埋める
     html_bytes: 0, // 呼び出し側で埋める
@@ -186,6 +192,7 @@ export function analyzeHtml(html: string, baseUrl: string): StaticMeasurement {
     ad_slots: adSlots,
     ad_duplicate_count: adDuplicateCount,
     empty_headings: emptyHeadings,
+    duplicate_data_source_sections: duplicateDataSourceSections,
     image_urls: [...imageUrls],
   };
 }
@@ -220,4 +227,5 @@ export const STATIC_METRIC_KEYS: MetricKey[] = [
   "ad_slots",
   "ad_duplicate_count",
   "empty_headings",
+  "duplicate_data_source_sections",
 ];

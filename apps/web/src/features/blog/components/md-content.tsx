@@ -12,7 +12,7 @@ import {
     TableHeader,
     TableRow,
 } from "@stats47/components";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, BookOpenText } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
@@ -266,7 +266,7 @@ function makeMdComponents(
         "data-source": ({ url, label, year, note }: ComponentProps & { url?: string; label?: string; year?: string; note?: string }) => (
             <span className="-mt-1 mb-6 flex justify-end not-prose">
                 <span className="inline-flex items-start gap-1.5 text-xs text-muted-foreground">
-                    <ExternalLink className="mt-0.5 h-3 w-3 shrink-0" />
+                    <BookOpenText className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
                     <span>
                         出典：{url ? (
                             <a href={url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground">

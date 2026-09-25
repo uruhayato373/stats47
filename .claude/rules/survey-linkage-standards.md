@@ -69,6 +69,16 @@ config.surveyId (手動オーバーライド・先頭固定)
 | `/category/<key>` サイドバー `SurveyCard` | そのカテゴリの active item の出典調査のみ | `app/category/<key>/items.json` の `sourceSurveys` 焼き込み (exporter が survey バケットと同じ導出で集計。**全調査リストを出さない** — 旧実装が all.json 全件を無関係に表示していた 2026-07-14 是正) |
 | `/themes/<key>` 本文 | 「このテーマの出典調査」 | ThemeCatalog 全 chart + indicator item の lineage から request 時に派生 |
 | `/blog/<slug>` 右レール | 「この記事の出典調査」 | `all.json.surveyIds`、旧 snapshot は chart source.json を fallback 解決 |
+| `/blog/<slug>` 本文末 | 「データ出典」(`DataSourceList`)。調査名 → `/survey/<id>`、統計表 → e-Stat | `all.json.sources` (exporter が `resolveBlogChartDataSources` + geo item の sources から焼く)、旧 snapshot は同じ関数で fallback 解決 |
+| `/ranking/<key>` 本文末 | 「データ出典」(`DataSourceList`)。SSDS は編成統計の行に統計表、原典調査は調査ページへ | item.json の `sourceConfig` + `attribution` を `resolveRankingItemDataSources` が runtime で変換 |
+
+出典の行 (`DataSourceEntry`) は survey taxonomy と同じ解決関数 (`resolveProvenanceByParams` /
+`resolveSourceProvenance` / source-name 辞書) から作り、別の対応表を持たない
+(`packages/ranking/src/survey/data-source-entries.ts`)。表示部品と層の分担は
+`docs/01_技術設計/04_デザインシステム.md`「データ出典」が正典。週次の横断監査は
+`blog.dataSources` (手書き節・出典 0 件の図付き記事・sources 未焼き込み) を記録し、
+ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` / `requireSnapshotSources`
+が設定されていれば悪化を失敗にする。
 | `/survey` 一覧 | 調査カード + 件数 | all.json (`itemCount` 焼き込み、force-dynamic) |
 | `/survey/<id>` | 調査ハブ + 代表/全ランキング / 関連カテゴリ / テーマ / ブログ記事 | survey items + ThemeCatalog 逆引き + `app/blog/all.json.surveyArticleIndex` (ƒ オンデマンド ISR) |
 
@@ -91,7 +101,8 @@ config.surveyId (手動オーバーライド・先頭固定)
   「snapshot が stale (r2-drift)」と混同して sync や公開を要求しない (実例: population-projection)。
 - **焼き込み層** (R2 live): `audit-survey-linkage.ts --compare-r2 [--sample N]` が active 全 item の
   live item.json `surveyIds` を git 導出と item 単位で突合 + 調査集合 (all.json vs git-active) を照合。
-  月次のポートフォリオ監査 (`/manage-survey-portfolio`) で実行する (ネットワーク必須のため PR CI には
+  週次 workflow (`survey-taxonomy-audit-weekly.yml` → `run-survey-portfolio-audit.sh` の step 2) と
+  ポートフォリオ監査 (`/manage-survey-portfolio`) で実行する (ネットワーク必須のため PR CI には
   入れない)。初回全件実測 2026-07-14: active 2,159 件 一致 100%・欠落 0・調査集合一致。
 - **横断層**: `audit-survey-taxonomy.ts` が ranking / ThemeCatalog 全 chart / 公開 blog 全 SVG を
   同じ core で監査し、`.claude/state/surveys/taxonomy.json` に逆引き索引も保存する。配信中 blog snapshot の

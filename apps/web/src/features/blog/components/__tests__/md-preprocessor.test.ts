@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { preprocessCallouts } from "../md-preprocessor";
+import { migrateLegacyDataSourceSection, preprocessCallouts } from "../md-preprocessor";
 
 describe("preprocessCallouts", () => {
   it("NOTE callout を HTML div に変換する", () => {
@@ -149,3 +149,68 @@ describe("preprocessCallouts", () => {
     expect(result.match(/border-l-4/g)).toHaveLength(2);
   });
 });
+
+describe("migrateLegacyDataSourceSection", () => {
+  it("末尾の手書きデータ出典節を見出しごと除く", () => {
+    const source = [
+      "本文です。",
+      "",
+      "## データ出典",
+      "",
+      "- 総務省統計局「家計調査」",
+      "- 集計期間は2000年〜2024年",
+      "",
+    ].join("\n");
+    expect(migrateLegacyDataSourceSection(source).content).toBe("本文です。\n");
+  });
+
+  it("次の見出しの手前で止め、後続の節は残す", () => {
+    const source = [
+      "本文",
+      "",
+      "### データ出典",
+      "",
+      "出典: 社会・人口統計体系",
+      "",
+      "## まとめ",
+      "",
+      "まとめ本文",
+      "",
+    ].join("\n");
+    expect(migrateLegacyDataSourceSection(source).content).toBe(
+      ["本文", "", "## まとめ", "", "まとめ本文", ""].join("\n"),
+    );
+  });
+
+  it("節の直前の区切り線も除き、末尾に水平線だけが残らないようにする", () => {
+    const source = ["本文", "", "---", "", "## データ出典", "", "- e-Stat", ""].join("\n");
+    expect(migrateLegacyDataSourceSection(source).content).toBe("本文\n");
+  });
+
+  it("データ出典の節が無い本文は変更しない", () => {
+    const source = ["本文", "", "## 出典の読み方", "", "解説", ""].join("\n");
+    expect(migrateLegacyDataSourceSection(source)).toEqual({ content: source, action: "none" });
+  });
+
+  it("計算方法や定義を含む節は削除せず「データについて」へ改名して説明を残す", () => {
+    const source = [
+      "本文",
+      "",
+      "### データ出典",
+      "",
+      "- 厚生労働省「賃金構造基本統計調査」(2023年)",
+      "- 平均年収は、きまって支給する現金給与額×12＋年間賞与で算出",
+      "",
+    ].join("\n");
+    expect(migrateLegacyDataSourceSection(source)).toEqual({
+      content: source.replace("### データ出典", "### データについて"),
+      action: "renamed",
+    });
+  });
+
+  it("注記 callout を含む節も改名して残す", () => {
+    const source = ["本文", "", "## データ出典", "", "> [!NOTE]", "> 金額の指標です。", ""].join("\n");
+    expect(migrateLegacyDataSourceSection(source).action).toBe("renamed");
+  });
+});
+

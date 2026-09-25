@@ -26,7 +26,11 @@ const mockItem: Partial<RankingItem> = {
         { yearCode: "2018", yearName: "2018年度" },
         { yearCode: "2021", yearName: "2021年度" },
     ],
-    source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
+    // 本番 item.json と同じ形 (builder は top-level の `source` を出力しない)
+    sourceConfig: {
+        statsDataId: "0000010103",
+        source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
+    },
     updatedAt: "2026-05-17T01:23:45.000Z",
 };
 
@@ -110,7 +114,7 @@ describe("generateRankingPageStructuredData", () => {
         expect(result.dateModified).toBe("2026-05-17T01:23:45.000Z");
     });
 
-    it("citation が source URL を指し示すこと (E-E-A-T)", () => {
+    it("citation が値を引いた e-Stat の統計表を指し示すこと (E-E-A-T)", () => {
         const result = generateRankingPageStructuredData({
             rankingItem: mockItem as RankingItem,
             rankingValues: mockValues as RankingValue[],
@@ -120,7 +124,20 @@ describe("generateRankingPageStructuredData", () => {
         const citation = result.citation as JsonLd;
         expect(citation["@type"]).toBe("CreativeWork");
         expect(citation.name).toBe("社会・人口統計体系");
-        expect(citation.url).toBe("https://www.stat.go.jp/data/ssds/index.htm");
+        expect(citation.url).toBe("https://www.e-stat.go.jp/dbview?sid=0000010103");
+    });
+
+    it("statsDataId が無い出典は sourceConfig.source の URL を使うこと", () => {
+        const result = generateRankingPageStructuredData({
+            rankingItem: {
+                ...mockItem,
+                sourceConfig: { source: { name: "国土数値情報", url: "https://nlftp.mlit.go.jp/ksj/" } },
+            } as RankingItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        }) as JsonLd;
+
+        expect((result.citation as JsonLd).url).toBe("https://nlftp.mlit.go.jp/ksj/");
     });
 
     it("availableYears が複数年あれば temporalCoverage が ISO 期間表記になること", () => {

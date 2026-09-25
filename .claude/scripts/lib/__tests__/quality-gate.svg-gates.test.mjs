@@ -64,9 +64,9 @@ published: false
 
 [カテゴリ一覧](/category/miningindustry)から関連指標をたどれます。
 
-## データ出典
+## データについて
 
-経済センサス活動調査
+経済センサス活動調査の事業所単位の値です。
 `;
 
 /** 正常なドラフトを temp dir に作る。mutate で 1 箇所だけ壊す。 */
@@ -223,6 +223,27 @@ test('県名直後の括弧に値 → paren-number blocker', (dirs) => {
     b.some((x) => x.includes('paren-number')),
     `検出されず: ${b.join(' / ')}`
   );
+});
+
+test('手書きの「データ出典」節 → 出典節 blocker (出典は DataSourceList が自動表示する)', (dirs) => {
+  const b = newBlockers((f) => {
+    f.article = f.article.replace(
+      '## データについて\n\n経済センサス活動調査の事業所単位の値です。\n',
+      '## データ出典\n\n- 総務省・経済産業省「経済センサス活動調査」\n'
+    );
+  }, dirs);
+  assert.ok(
+    b.some((x) => x.includes('手書きの「データ出典」節')),
+    `検出されず: ${b.join(' / ')}`
+  );
+});
+
+test('「データについて」節 (計算方法などの説明) は出典節 blocker を発火させない', (dirs) => {
+  const dir = makeFixture();
+  dirs.push(dir);
+  const r = runGate(dir);
+  assert.strictEqual(r.checks.hasLegacyDataSourceSection, false);
+  assert.ok(!r.blockers.some((x) => x.includes('データ出典')), r.blockers.join(' / '));
 });
 
 test('参照 SVG が存在しない → 画像切れ blocker', (dirs) => {

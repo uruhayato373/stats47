@@ -1,0 +1,36 @@
+{
+  "$comment": "chart source.json から出典を導出できない公開記事に displaySources を付ける置換表。backfill-display-sources.ts が R2 の source.json に書き足す。URL は実到達を確認できたものだけ書き、確認できないものは書かない (2026-09-25)。",
+  "articles": {
+    "development-history-place-name-map": {
+      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "evidence": "記事本文の旧データ出典節 + .claude/rules/buzz-map-standards.md (R2 gis/gsi-pni の取得元・PDL1.0)。www.gsi.go.jp はこの環境から到達不可のため URL は付けない"
+    },
+    "distinctive-place-name-kanji-by-prefecture": {
+      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "evidence": "同上"
+    },
+    "hama-ura-tsu-coastal-place-names": {
+      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "evidence": "同上"
+    },
+    "kawa-gawa-river-place-name-map": {
+      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "evidence": "同上"
+    },
+    "yato-yatsu-place-name-boundary": {
+      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "evidence": "同上"
+    },
+    "depopulation-area-medical-facilities": {
+      "displaySources": [
+        { "label": "国土交通省『国土数値情報（過疎地域 A17）』", "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17.html" },
+        { "label": "国土交通省『国土数値情報（医療機関 P04）』", "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html" }
+      ],
+      "evidence": "記事本文の data-source タグ。A17 は HTTP 200、P04 は本文の旧 URL が 404 のため国土数値情報の一覧にある現行ページ (2026-09-25 に HTTP 200 を確認) を使う"
+    },
+    "income-1000man-which-prefecture": {
+      "displaySources": [{ "label": "賃金構造基本統計調査", "surveyId": "wage-structure-survey" }],
+      "evidence": "source.json の source 文字列「厚生労働省『賃金構造基本統計調査』」。調査マスタ wage-structure-survey に解決する"
+    }
+  }
+}

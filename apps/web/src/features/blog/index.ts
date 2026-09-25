@@ -15,6 +15,7 @@ export { TagBadge } from './components/tag-badge';
 export { BlogArticleGrid } from './components/blog-article-grid';
 export { TagCloud } from './components/tag-cloud';
 export { ArticleRenderer } from './components/article-renderer';
+export { migrateLegacyDataSourceSection } from './components/md-preprocessor';
 export { ArticleTableOfContents } from './components/ArticleTableOfContents';
 
 // ユーティリティ

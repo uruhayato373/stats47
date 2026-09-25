@@ -67,3 +67,22 @@ test.describe("ブログ記事詳細ページ", () => {
     expect(naturalWidth).toBeGreaterThan(0);
   });
 });
+
+/**
+ * ページ末尾の「データ出典」(DataSourceList)。出典は図の source.json から導出し、
+ * 調査名はサイト内の調査ページへ、統計表は e-Stat へリンクする (2026-09-25 出典表示の統一)。
+ * 家計調査の記事を固定で使う (図の source.json が e-Stat の表を 2 つ持つ)。
+ */
+test.describe("ブログ記事のデータ出典", () => {
+  test("データ出典は 1 つだけで、調査ページと e-Stat 統計表へリンクする", async ({ page }) => {
+    await page.goto("/blog/beer-peak-month-july-to-december", { waitUntil: "domcontentloaded" });
+
+    const sections = page.getByTestId("data-source-section");
+    await expect(sections).toHaveCount(1, { timeout: 10000 });
+    await expect(page.getByRole("heading", { name: "データ出典", exact: true })).toHaveCount(1);
+
+    const section = sections.first();
+    await expect(section.locator("a[href='/survey/kakei-chousa']")).toHaveCount(1);
+    await expect(section.locator("a[href^='https://www.e-stat.go.jp/dbview?sid=']")).toHaveCount(2);
+  });
+});

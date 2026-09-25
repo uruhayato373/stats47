@@ -146,3 +146,55 @@ export function preprocessCallouts(source: string, relatedArticleTitles?: Record
 
     return result.join("\n");
 }
+
+const LEGACY_DATA_SOURCE_HEADING = /^(#{2,4})\s*データ出典\s*$/;
+const MARKDOWN_HEADING = /^#{1,6}\s/;
+
+/**
+ * 旧「データ出典」節が出典の引用以外 (計算方法・定義・除外条件・ライセンス・注記 callout・表) を
+ * 含むかの判定語彙。含む節は削除せず「データについて」へ改名して本文に残す。
+ * 2026-09-25 に公開 606 本で実測: 引用のみ 444 本 / 説明を含む 141 本。
+ */
+export const LEGACY_DATA_SOURCE_NOTE_PATTERN =
+    /算出|計算|[×÷＋]|統制|除外|換算|定義|補正|推計方法|ライセンス|CC ?BY|PDL|利用条件|出典明示|加工|集計し|再集計|按分|平均し|合算|推定|> ?\[!|^\s*\|/m;
+
+export const LEGACY_DATA_SOURCE_NOTES_HEADING = "データについて";
+
+export type LegacyDataSourceMigration = "none" | "removed" | "renamed";
+
+/**
+ * 本文に手書きされた旧「## データ出典」節 (見出しから次の見出し / 末尾まで) を移行する。
+ *
+ * 出典の一覧は記事末尾の `DataSourceList` が chart lineage から描画する。
+ * - 引用だけの節 → 節ごと除く (直前の区切り線も除く)
+ * - 計算方法・定義などを含む節 → 見出しを「データについて」に改名して残す (説明を失わない)
+ *
+ * 既存記事の本文は `.claude/scripts/blog/migrate-data-source-sections.ts` がこの関数で一括変換する。
+ * ただし Kindle 書籍の章に使われている記事は、書籍の校正指示が本文の文字列に固定されているため
+ * 本文を変えない。それらの記事でも同じ出典が二重表示されないよう、描画時にも同じ変換をかける
+ * (移行済みの本文には節が無いので action は "none" になり、何も変わらない)。
+ * 呼び出し側は記事の出典が 1 件以上あるときだけ使う (出典を解決できない記事は手書き節が唯一の表記)。
+ */
+export function migrateLegacyDataSourceSection(source: string): {
+    content: string;
+    action: LegacyDataSourceMigration;
+} {
+    const lines = source.split("\n");
+    const start = lines.findIndex((line) => LEGACY_DATA_SOURCE_HEADING.test(line.trimEnd()));
+    if (start < 0) return { content: source, action: "none" };
+    let end = start + 1;
+    while (end < lines.length && !MARKDOWN_HEADING.test(lines[end])) end++;
+
+    if (LEGACY_DATA_SOURCE_NOTE_PATTERN.test(lines.slice(start + 1, end).join("\n"))) {
+        const level = LEGACY_DATA_SOURCE_HEADING.exec(lines[start].trimEnd())?.[1] ?? "##";
+        const renamed = [...lines];
+        renamed[start] = `${level} ${LEGACY_DATA_SOURCE_NOTES_HEADING}`;
+        return { content: renamed.join("\n"), action: "renamed" };
+    }
+
+    let head = start;
+    while (head > 0 && lines[head - 1].trim() === "") head--;
+    if (head > 0 && /^-{3,}\s*$/.test(lines[head - 1])) head--;
+    const kept = [...lines.slice(0, head), ...(end < lines.length ? ["", ...lines.slice(end)] : [])];
+    return { content: kept.join("\n").replace(/\n*$/, "\n"), action: "removed" };
+}

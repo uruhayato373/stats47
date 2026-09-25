@@ -191,10 +191,17 @@ function hasDescription(text) {
   return /^description:\s*["']?.{50,}/m.test(text);
 }
 
-function hasDataSource(text) {
-  return /## データ出典|## 出典|^- 農林水産省|^- 総務省|^- 厚生労働省|^- 国土交通省|^- e-Stat/m.test(
-    text
-  );
+// 出典はページ末尾の DataSourceList が chart source.json から描画する (2026-09-25〜)。
+// 本文に手書きの「データ出典」節を書くと表記が記事ごとにばらけ、タクソノミーとも接続されない。
+// 計算方法・定義などの説明は「## データについて」節に書く。正典: blog-quality-standards.md「出典」
+function hasLegacyDataSourceSection(text) {
+  return /^#{2,4}\s*データ出典\s*$/m.test(text);
+}
+
+// 出典を導出できる手掛かり (図の source.json か本文の /ranking/ リンク)。どちらも無いと
+// DataSourceList が何も出せない。図の source.json 自体の有無は系譜 gate が別に見る。
+function hasSourceLineage(text) {
+  return /\]\(data\/[^)]+?\.svg/.test(text) || /\]\(\/ranking\/[a-z0-9-]+/.test(text);
 }
 
 // 文体チェック (2026-06-08): 本文は ですます調 に統一する (正典: blog-quality-standards.md「文体」)。
@@ -251,7 +258,8 @@ const checks = {
   h2Count: getH2Count(content),
   hasSeoTitle: hasSeoTitle(content),
   hasDescription: hasDescription(content),
-  hasDataSource: hasDataSource(content),
+  hasLegacyDataSourceSection: hasLegacyDataSourceSection(content),
+  hasSourceLineage: hasSourceLineage(content),
   dearuEndings: countDearuEndings(content).count,
 };
 
@@ -275,8 +283,14 @@ if (!checks.hasSeoTitle) {
 if (!checks.hasDescription) {
   blockers.push('description frontmatter 欠落 or 短すぎる (< 50 chars)');
 }
-if (!checks.hasDataSource) {
-  blockers.push('「データ出典」section 欠落');
+if (checks.hasLegacyDataSourceSection) {
+  blockers.push(
+    '手書きの「データ出典」節 — 出典はページ末尾に chart source.json から自動表示される。節を削除し、' +
+      '出典は図の source.json に記録する (計算方法・定義などの説明は「## データについて」節へ)'
+  );
+}
+if (!checks.hasSourceLineage) {
+  warnings.push('出典を導出できない (図も /ranking/ リンクも無い) — ページ末尾の「データ出典」が表示されない');
 }
 if (checks.charCount < 1600) {
   blockers.push(

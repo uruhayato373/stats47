@@ -36,6 +36,8 @@ interface BlogSnapshotArticle {
   published?: boolean | null;
   hasCharts?: boolean | null;
   surveyIds?: string[];
+  /** 記事末尾「データ出典」の行 (export-blog-snapshot が chart lineage から焼く)。未定義 = 旧 snapshot */
+  sources?: unknown[];
 }
 
 interface BlogSnapshot {
@@ -62,6 +64,15 @@ interface RatchetConfig {
     minCoveragePct: number;
     maxUnresolvedCharts: number;
     maxMissingLineageCharts: number;
+    /**
+     * 出典表示の悪化防止 (2026-09-25〜)。未設定の間は計測と表示だけ行う。
+     * - 本文に手書きの「データ出典」節が残る公開記事 (Kindle 書籍の章は本文を変えないので残る)
+     * - 図があるのに出典を 1 件も出せない公開記事
+     * - snapshot に sources が焼かれていない公開記事 (true で 0 件を要求)
+     */
+    maxLegacyDataSourceSectionArticles?: number;
+    maxSourcelessChartArticles?: number;
+    requireSnapshotSources?: boolean;
   };
 }
 
@@ -300,6 +311,9 @@ function chartBases(content: string): string[] {
   ];
 }
 
+/** 本文に手書きされた旧「データ出典」節。出典はページ末尾の DataSourceList が chart lineage から出す */
+const LEGACY_DATA_SOURCE_HEADING = /^#{2,4}\s*データ出典\s*$/m;
+
 function articleRankingKeys(content: string): string[] {
   return [
     ...new Set(
@@ -328,6 +342,9 @@ async function auditBlog() {
         slug: article.slug,
         snapshotSurveyIds: article.surveyIds ?? [],
         rankingSurveyIds: [] as string[],
+        legacyDataSourceSection: false,
+        sourcesBaked: article.sources !== undefined,
+        sourceCount: article.sources?.length ?? 0,
         charts: [
           {
             base: '(article)',
@@ -357,6 +374,9 @@ async function auditBlog() {
       slug: article.slug,
       snapshotSurveyIds: article.surveyIds ?? [],
       rankingSurveyIds,
+      legacyDataSourceSection: LEGACY_DATA_SOURCE_HEADING.test(content),
+      sourcesBaked: article.sources !== undefined,
+      sourceCount: article.sources?.length ?? 0,
       charts,
     };
   });
@@ -420,6 +440,25 @@ async function auditBlog() {
       )
       .map(({ slug, base, status }) => ({ slug, base, status })),
     snapshotSchemaVersion: snapshot?.schemaVersion ?? 1,
+    dataSources: {
+      legacySectionArticles: articleRows
+        .filter((article) => article.legacyDataSourceSection)
+        .map((article) => article.slug)
+        .sort(),
+      sourcelessChartArticles: articleRows
+        .filter(
+          (article) =>
+            article.sourcesBaked &&
+            article.sourceCount === 0 &&
+            article.charts.some((chart) => chart.base !== '(article)')
+        )
+        .map((article) => article.slug)
+        .sort(),
+      snapshotSourcesMissingArticles: articleRows
+        .filter((article) => !article.sourcesBaked)
+        .map((article) => article.slug)
+        .sort(),
+    },
     snapshotLineageMissingArticles,
     snapshotIndexMissingArticles,
     perSurveyBlogs: Object.fromEntries(
@@ -438,6 +477,18 @@ function loadState(): TaxonomyState | null {
 function loadRatchet(): RatchetConfig | null {
   if (!fs.existsSync(RATCHET_PATH)) return null;
   return JSON.parse(fs.readFileSync(RATCHET_PATH, 'utf8')) as RatchetConfig;
+}
+
+/** 設定済みの上限だけを改善方向へ詰める。未設定 (導入前) の上限は勝手に作らない。 */
+function tightenOptionalMax<K extends string>(
+  key: K,
+  current: number | undefined,
+  observed: number | undefined
+): Partial<Record<K, number>> {
+  if (current === undefined) return {};
+  return { [key]: observed === undefined ? current : Math.min(current, observed) } as Partial<
+    Record<K, number>
+  >;
 }
 
 /** 改善値だけを ratchet へ反映する。既存下限を緩める更新は行わない。 */
@@ -491,6 +542,19 @@ function tightenRatchetConfig(state: TaxonomyState): void {
         current.blog.maxMissingLineageCharts,
         state.blog.byStatus['missing-lineage']
       ),
+      ...tightenOptionalMax(
+        'maxLegacyDataSourceSectionArticles',
+        current.blog.maxLegacyDataSourceSectionArticles,
+        state.blog.dataSources?.legacySectionArticles.length
+      ),
+      ...tightenOptionalMax(
+        'maxSourcelessChartArticles',
+        current.blog.maxSourcelessChartArticles,
+        state.blog.dataSources?.sourcelessChartArticles.length
+      ),
+      ...(current.blog.requireSnapshotSources !== undefined
+        ? { requireSnapshotSources: current.blog.requireSnapshotSources }
+        : {}),
     },
   };
   fs.writeFileSync(RATCHET_PATH, JSON.stringify(next, null, 2) + '\n');
@@ -610,6 +674,35 @@ function validateState(
         '(schemaVersion 2 snapshot を再生成)'
     );
   }
+  const dataSources = state.blog.dataSources;
+  if (dataSources) {
+    const { maxLegacyDataSourceSectionArticles, maxSourcelessChartArticles, requireSnapshotSources } =
+      ratchet.blog;
+    if (
+      maxLegacyDataSourceSectionArticles !== undefined &&
+      dataSources.legacySectionArticles.length > maxLegacyDataSourceSectionArticles
+    ) {
+      errors.push(
+        `blog 手書きのデータ出典節 ${dataSources.legacySectionArticles.length}記事 > ${maxLegacyDataSourceSectionArticles} ` +
+          '(migrate-data-source-sections.ts で移行。出典は chart source.json に記録)'
+      );
+    }
+    if (
+      maxSourcelessChartArticles !== undefined &&
+      dataSources.sourcelessChartArticles.length > maxSourcelessChartArticles
+    ) {
+      errors.push(
+        `blog 出典 0 件の図付き記事 ${dataSources.sourcelessChartArticles.length}記事 > ${maxSourcelessChartArticles} ` +
+          '(source.json に displaySources を付ける: backfill-display-sources.ts)'
+      );
+    }
+    if (requireSnapshotSources && dataSources.snapshotSourcesMissingArticles.length > 0) {
+      errors.push(
+        `blog snapshot sources 未焼き込み ${dataSources.snapshotSourcesMissingArticles.length}記事 ` +
+          '(export-blog-snapshot.ts を再実行)'
+      );
+    }
+  }
   return errors;
 }
 
@@ -662,6 +755,23 @@ async function main() {
     console.log(
       `blog charts ${blog.charts}: resolved ${blog.byStatus.resolved} / unresolved ${blog.byStatus.unresolved} / missing ${blog.byStatus['missing-lineage']} / n/a ${blog.byStatus['not-applicable']} / coverage ${blog.coveragePct}%`
     );
+    // 週次 Issue はこのログ末尾を載せる。件数だけだと直す対象が分からないので図を名指しする
+    for (const chart of blog.unresolvedCharts.slice(0, 20)) {
+      console.log(`  ✗ blog ${chart.status}: ${chart.slug} / ${chart.base}`);
+    }
+    if (blog.unresolvedCharts.length > 20) {
+      console.log(`  … 他 ${blog.unresolvedCharts.length - 20} 件 (state の blog.unresolvedCharts)`);
+    }
+    if (blog.dataSources) {
+      const { legacySectionArticles, sourcelessChartArticles, snapshotSourcesMissingArticles } =
+        blog.dataSources;
+      console.log(
+        `blog data sources: 手書き節 ${legacySectionArticles.length} / 出典 0 件の図付き記事 ${sourcelessChartArticles.length} / sources 未焼き込み ${snapshotSourcesMissingArticles.length}`
+      );
+      for (const slug of sourcelessChartArticles.slice(0, 20)) {
+        console.log(`  ✗ blog sourceless: ${slug}`);
+      }
+    }
     console.log(
       `blog snapshot v${blog.snapshotSchemaVersion ?? 1}: surveyIds missing ${blog.snapshotLineageMissingArticles?.length ?? 0} / reverse-index missing ${blog.snapshotIndexMissingArticles?.length ?? 0}`
     );

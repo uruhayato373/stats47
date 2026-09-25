@@ -123,6 +123,24 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 { "kind": "manual", "sourceName": "過去の気象データ", "source": "気象庁の公式URL" }
 ```
 
+### 表示用の出典 `displaySources` (2026-09-25)
+
+記事末尾の「データ出典」(`DataSourceList`) は source.json から自動で作る。`rankingKey` / `statsDataId` /
+`sourceName` があれば調査マスタへ解決し、`app/geo/<slug>/` を参照する図は geo item.json の `sources` を引く。
+**どれからも出典を導出できない図** (国土地理院の地名情報のような GIS 派生・manual の自由記述) だけ、
+source.json に表示用の出典を明示する:
+
+```jsonc
+{ "kind": "derived", "surveyScope": "not-applicable", "surveyScopeReason": "…",
+  "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }] }
+// 調査マスタにある調査なら surveyId を書く (調査ページへリンクされる)
+{ "kind": "manual", "displaySources": [{ "label": "賃金構造基本統計調査", "surveyId": "wage-structure-survey" }] }
+```
+
+- `displaySources` があると他の参照より優先して表示に使う (調査への紐付け = taxonomy の判定は変えない)
+- `url` は実際に到達を確認できたものだけ書く。確認できないときは書かない (リンクなしで名前だけ出る)
+- 既存記事への補完は `.claude/scripts/blog/backfill-display-sources.ts` (置換表 `data/display-sources-backfill.json`)
+
 ### source.json の `kind` 語彙 + 「再取得できるか」の機械検査 (2026-07-29)
 
 `kind` は当初 `ranking` / `estat` / `manual` の 3 種として書かれていたが、**実装は 14 種まで増えていた**

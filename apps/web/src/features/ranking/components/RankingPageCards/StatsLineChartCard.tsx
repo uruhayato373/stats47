@@ -1,3 +1,5 @@
+import { buildEstatTableUrl } from "@stats47/data-configs/data-source";
+
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { LineChartClient, toLineChartData } from "@/components/stat-charts";
@@ -49,7 +51,7 @@ export async function StatsLineChartCard({
       footer={
         <ChartFooter
           source="社会・人口統計体系"
-          sourceLink={`https://www.e-stat.go.jp/dbview?sid=${statParams.statsDataId}`}
+          sourceLink={buildEstatTableUrl(statParams.statsDataId)}
         />
       }
     >

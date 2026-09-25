@@ -184,7 +184,16 @@ MDX 不要。HTML カスタムタグとして `react-markdown` の `components` 
 
 ### データ出典
 
-チャート画像の直下に配置し、データの出典を右寄せで表示する。
+**記事の出典は本文に書かない (2026-09-25〜)。** ページ末尾の「データ出典」は、図の `source.json`
+(と参照先の geo item) から `DataSourceList` が自動で描画する。調査名はサイト内の調査ページへ、
+統計表は e-Stat へリンクする。本文に `## データ出典` 節を書くと `quality-gate.mjs` が blocker で止める。
+
+- 出典は図の `source.json` に記録する (`rankingKey` / `statsDataId` / `sourceName`)。調査を原典としない
+  GIS 派生などは `displaySources: [{ label, url?, license? }]` を明示する (`.claude/rules/blog-data-schema.md` §1.5)
+- 計算方法・定義・対象の限定など読者に要る説明は `## データについて` 節に書く
+
+以下の `<data-source>` タグは既存記事の図の直下に残っているもの。**新規記事では使わない**
+(表示は `ChartFooter` と同じ出典アイコンにそろえてある)。
 
 ```html
 <data-source url="https://www.e-stat.go.jp/..." label="e-Stat 社会生活統計指標"></data-source>

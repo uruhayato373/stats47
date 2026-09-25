@@ -32,7 +32,10 @@ import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 
 import { resolveArticleMetricPairs } from '../src/features/blog/services/article-metric-pairs';
-import { resolveArticleSurveyIds } from '../src/features/blog/services/article-survey-taxonomy';
+import {
+  resolveArticleDataSources,
+  resolveArticleSurveyIds,
+} from '../src/features/blog/services/article-survey-taxonomy';
 import {
   BLOG_SNAPSHOT_KEY,
   buildMetricPairArticleIndex,
@@ -183,6 +186,8 @@ async function main() {
   };
 
   const articles: SnapshotArticle[] = [];
+  // 記事末尾「データ出典」を出せない公開記事。止めずに列挙し、日次の blog 監査 (ratchet) が増加を拒否する
+  const sourcelessSlugs: string[] = [];
   for (const slug of slugs) {
     const info = slugInfo.get(slug);
     const prev = priorBySlug.get(slug);
@@ -217,6 +222,10 @@ async function main() {
     const metricPairs = published
       ? await resolveArticleMetricPairs({ slug, content }, fetchSource)
       : [];
+    const sources = published
+      ? await resolveArticleDataSources({ slug, content }, fetchSource)
+      : [];
+    if (published && sources.length === 0) sourcelessSlugs.push(slug);
     articles.push({
       slug,
       title: fm.title ?? slug,
@@ -234,8 +243,15 @@ async function main() {
       updatedAt: normalizeDate(fm.updatedAt) ?? prev?.updatedAt ?? null,
       tags,
       surveyIds,
+      sources,
       ...(metricPairs.length > 0 ? { metricPairs } : {}),
     });
+  }
+
+  if (sourcelessSlugs.length > 0) {
+    console.warn(
+      `⚠️  データ出典を解決できない公開記事 ${sourcelessSlugs.length} 件 (source.json に displaySources を付ける): ${sourcelessSlugs.join(', ')}`
+    );
   }
 
   const tagMetaCounter = new Map<string, number>();
