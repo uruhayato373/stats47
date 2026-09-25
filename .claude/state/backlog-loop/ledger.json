@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-23T21:57:18.308Z",
+  "updatedAt": "2026-09-25T20:10:40.528Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4847,6 +4847,67 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-23T21:57:18.308Z"
+    },
+    "DATA-SOURCE-ROLLOUT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T20:10:36.622Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check"
+            ],
+            "pass": true
+          },
+          "evidence": "検証コマンドを実行し exit 0 (最終行 '✓ taxonomy state / freshness / ratchet 違反なし'、コード上 errors.length===0 のときのみ出力・exitCode既定0を確認)。カード記載の状態(PR#1027済み・sources焼込済み)通りで追加実装は不要、diffはbacklog.mdの行削除のみ。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T20:10:36.622Z"
+    },
+    "AREA-DATABOOK-LABEL-INTEGRITY-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T20:10:40.528Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "県データブックの共通テンプレート(template.ts)で指標差し替え3件+RankedKpiGrid/GenderPairedKpiGridへの年表示追加が必要。47県横断・複数指標のisActive実在確認を伴う複数ファイル変更で、backlog-loop.mdの class定義上 impl-large (draft-PR要)。この run (sonnet固定・direct-push系)では着手しない。",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }

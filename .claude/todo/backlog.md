@@ -140,15 +140,6 @@ updated: 2026-09-21
   次の週次で本番確認) に乗る。初回の CI 実行 (2026-09-27 03:00 JST) の確認は `UI-REVIEW-LOOP-VERIFY-01` で行う。
   このカードは完了条件を満たしたので、backlog-loop の削除対象。
 
-### [DATA-SOURCE-ROLLOUT-01] 出典表示の統一を本番へ反映し、既存記事の本文移行と監査 ratchet を完了する
-
-タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [レーン:データ品質]
-
-- **状態 (2026-09-25 実施済み)**: PR #1027 マージ・デプロイ成功。`blog-data-source-migration.yml` で displaySources 16/16 と本文 531/531 を R2 へ書き戻し (put 後 GET 照合済み)、sync-snapshots で all.json に sources を焼いた。
-  週次監査の実測: 手書き節 67 (Kindle 章 61 + 出典を導出できない読み物 6) / 出典 0 件の図付き記事 1 (cc-estat-17 の架空値の説明図) / sources 未焼き込み 0。この値で ratchet の 3 上限を設定済み。本番の出典リンク先 (/survey/kakei-chousa・e-Stat dbview) は 200。
-- **残るもの**: 本文は SSG なので次回デプロイで R2 の移行後本文に置き換わる (描画時の変換で見た目は同じ)。docs/21 の原稿 27 本は次に公開・改稿するとき quality-gate が止めるので `migrate-data-source-sections.ts --outbox --apply` で変換する (カードの対象外)。
-- **完了条件**: 検証コマンドが exit 0 (ratchet の 3 上限を含む)。満たしているので backlog-loop が ledger 付きで削除してよい。
-
 ### [GSC-COV-5XX-20260925] GSC 是正: 本番で 5xx を返し続ける 2 URL を直す
 
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt] [起票:2026-09-25] [レーン:SEO・ブログ]
