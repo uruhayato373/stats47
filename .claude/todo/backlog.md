@@ -139,6 +139,7 @@ updated: 2026-09-21
   並立させコード正典 `SurfaceCard p-4` と食い違う。計測方法: DOM で `border`+`bg-card` を持つ最外郭要素ごとに最初の見出し
   (h2-h4 / font-weight≥600) の font-size/weight、本文の最頻 font-size、padding を集計。
 - **契約 (確定。数値はコードが正典・文書へ二重管理しない)**:
+  - ※ 見出しの色・太さ・下線と本文の下余白は `UI-CARD-HEADER-SIMPLIFY-01` (2026-09-25 決定) で改訂する。以下の数値はそれまでの現行値
   - レール/リンク一覧カード = `RailCard` 既定 (h3 `text-sm font-medium text-muted-foreground`・ヘッダ `px-4 py-3`・本文 `px-4 pb-4 pt-3`)、
     リンク行 = `RailLinkItem` (`py-1.5 text-sm`、2026-09-16 に text-xs から統一)、2 行目 `text-xs`
   - 見出し付き本文カード = `SectionCard` (`components/surface/SurfaceCard.tsx`、RailCard と同じ HeaderedSurfaceCard の variant。
@@ -789,6 +790,38 @@ updated: 2026-09-21
   gate を error にして無関係なコミットを止めない (新規・再生成分だけ止める)。
 - **完了条件**: 週次監査が 2 指標を計測して UI-FIX カードに振り分け手順が載り、`/areas/13000` の縦軸切れとビール SVG の
   重なりが本番で 0 件になっている。
+
+### [UI-CARD-HEADER-SIMPLIFY-01] カードの見出しを「白いカードのまま・見出しの下に線を引かない」形にそろえ、検索窓はカードで包まない
+
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-09-25]
+
+- **背景 (2026-09-25・スクショ 2 枚 = 左レールのカテゴリ / ブログの右レール)**: 見出しの下の区切り線 (`border-b`) のすぐ下で
+  一覧の各行にも線があり、見出し直下に線が 2 本近接して見える。本文の下余白が固定 (`pb-4`) なので一覧の最後の行の下に空白が残る。
+  見出しは灰色の小さい文字 (`text-muted-foreground`) で、見出しとしての強さが弱いのに線と余白で面積を取っている。
+  「記事検索」は入力欄 1 つのためにカードと見出しを持っている。
+- **決定 (2026-09-25 オーナー)**: 3 案のモック (A 見出しをカードの外へ / B カードは残し見出しの線をなくす / C カードをなくす) から **B**。
+  A はレールに 5〜6 ブロック並ぶと見出しが灰色の地に浮いて帰属が曖昧、C は地の上に一覧がむき出しになりレール契約も変わるため不採用。
+  - 見出し: 濃い色の太字の小見出し (`text-foreground` + `font-semibold`、大きさは `text-sm` のまま)。**見出しの下に線を引かない**
+  - 区切り線は一覧の行と行の間だけ (最初の行の上には引かない)
+  - 本文の下余白を固定しない (一覧は行の余白だけで閉じ、一覧でない本文だけ小さな下余白を持つ)
+  - 検索窓 (`RailSearchCard`) はカードと見出しをやめ、レールの先頭に入力欄とボタンだけを置く。読み上げ用ラベル (`ariaLabel`) は既にあり維持する
+- **範囲 (2026-09-25 のコード検索)**: 見出しの作りは 3 系統。`RailCard` (左右レール・23 ファイル) と `SectionCard` (本文の見出し付きカード・
+  10 ファイル) は `apps/web/src/components/surface/SurfaceCard.tsx` の `HEADER_CLASS` を共有。`ChartPanel` (本文のチャート枠・76 ファイル) は
+  同じ見た目 (`border-b border-border px-4 py-3`) を `components/charts/ChartPanel.tsx` に**重複して**書いている → 同じ定数を使わせて 1 か所にする。
+  `RailSearchCard` は 2 か所 (`features/blog/components/BlogNavigationCards.tsx` / `app/blog/[slug]/page.tsx`)。
+  見出しの下線を前提にしているもの: `components/surface/__tests__/rail-card-contract.test.tsx` の「ヘッダーは border-b を持つ」と、
+  `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」の見出し・本文余白の記述。
+- **既存カードとの関係**: `UI-CARD-TYPOGRAPHY-UNIFY-01` の「契約」にある RailCard の見出し (灰色・中太・`border-b`) と本文余白 (`pb-4`) を
+  **このカードが改訂する**。同カード C-1 の `no-manual-card-header` (手書きヘッダ禁止) は、新しい見出しの形を基準に書く。
+- **次 (実行順)**: ①`SurfaceCard.tsx` の見出しと本文余白を変える (RailCard と SectionCard が同時に変わる) ②`ChartPanel` の見出しを同じ定数へ
+  ③`RailSearchCard` からカードと見出しを外す ④契約テストを「見出しの下に線が無い・行の間だけに線がある」形で固定し直し、デザインシステム文書を改訂
+  ⑤localhost で代表ページ (`/` `/ranking/total-population` `/areas/13000` `/themes/population-dynamics` `/category/population` `/blog`
+  `/blog/<記事>` `/survey/census`) をライト・ダーク・390px で撮り、変更前と並べて確認 ⑥チャート枠は見出しとチャートの間隔が変わるので、
+  76 か所のうち代表的なチャートの種類ごとに目視する。
+- **未決 (オーナー判断・実装前に決める)**: チャート枠の下部 (出典・ランキングの開閉) の上線を残すか。推奨は残す (本文と補助情報の区切り)。
+- **停止条件・禁止**: 契約テストを弱めない (線の有無を消すのではなく、新しい形を固定し直す)。本番デプロイは他の変更とまとめて 1 回・オーナー承認。
+- **完了条件**: 3 部品が同じ見出しの定数を使い、見出しの下の線と一覧末尾の固定余白が無い / 検索窓がカードで包まれていない /
+  代表ページの撮り比べで確認済み / `npm run design-system:check -w apps/web` と対象の vitest が緑。
 
 ### [BLOG-OUTBOX-DATA-SOURCE-01] docs/21 に滞留した公開フラグ付き原稿 19 本の理由を確かめ、手書き出典節を移行する
 
