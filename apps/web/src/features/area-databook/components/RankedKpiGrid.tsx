@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { cn } from "@stats47/components";
 
+import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";
@@ -18,12 +19,6 @@ function formatValue(value: number): string {
   // 小数を持つ指標 (割合・倍率) は 1 桁まで、整数系は桁区切り。
   if (Number.isInteger(value)) return value.toLocaleString("ja-JP");
   return value.toLocaleString("ja-JP", { maximumFractionDigits: 1 });
-}
-
-function rankTone(rank: number): string {
-  if (rank >= 1 && rank <= 10) return "bg-primary/10 text-primary";
-  if (rank >= 38 && rank <= 47) return "bg-muted text-muted-foreground";
-  return "bg-accent/40 text-foreground";
 }
 
 const COLS: Record<number, string> = {
@@ -114,14 +109,7 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
                   )}
                 </span>
                 {v && v.rank >= 1 && v.rank <= 47 && (
-                  <span
-                    className={cn(
-                      "shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums",
-                      rankTone(v.rank),
-                    )}
-                  >
-                    {v.rank}位
-                  </span>
+                  <RankBadge rank={v.rank} tone={rankToneByPosition(v.rank)} />
                 )}
               </dd>
               {v && m.compareNationalAvg && (

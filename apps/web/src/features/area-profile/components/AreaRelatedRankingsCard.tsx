@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
+import { RankBadge } from '@/components/atoms/RankBadge';
 import { SectionCard } from '@/components/surface';
 
 import { selectDistinctProfileItems } from '../utils';
@@ -66,9 +67,7 @@ export function AreaRelatedRankingsCard({
                   key={`${item.rankingKey}-${idx}`}
                   className="flex items-baseline gap-2"
                 >
-                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-sm bg-positive-soft text-xs font-bold text-positive">
-                    {item.rank}位
-                  </span>
+                  <RankBadge rank={item.rank} tone="positive" />
                   <div className="min-w-0 flex-1">
                     <Link
                       href={`/ranking/${item.rankingKey}`}
@@ -108,9 +107,7 @@ export function AreaRelatedRankingsCard({
                   key={`${item.rankingKey}-${idx}`}
                   className="flex items-baseline gap-2"
                 >
-                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-sm bg-negative-soft text-xs font-bold text-negative">
-                    {item.rank}位
-                  </span>
+                  <RankBadge rank={item.rank} tone="negative" />
                   <div className="min-w-0 flex-1">
                     <Link
                       href={`/ranking/${item.rankingKey}`}

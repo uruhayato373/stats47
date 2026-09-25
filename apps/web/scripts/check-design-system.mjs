@@ -622,6 +622,33 @@ for (const file of rawPaletteRoots.flatMap((root) => listFiles(root))) {
   });
 }
 
+// --- 順位チップ (背景色つきの「N位」) は RankBadge だけで描く ---
+//
+// 手書きのチップは幅を固定しがちで、「47位」「1741位」が折り返す (2026-09-25 /areas/13000 で発生)。
+// 「{…}位」だけの JSX 行の直前 4 行 (または同じ行) に bg- を持つ className があればチップとみなす。
+// 表のセル・補足の文字・文章中の「N位」は背景色を持たないので対象外。
+const RANK_TEXT_LINE = /^\s*\{[^{}]+\}位\s*$/;
+const RANK_INLINE_CHIP = /className=["{`][^>]*\bbg-[^>]*>\s*\{[^{}]+\}位\s*</;
+for (const file of scanRoots.flatMap((root) => listFiles(root))) {
+  if (file === 'src/components/atoms/RankBadge.tsx' || !file.endsWith('.tsx')) continue;
+  const lines = readFileSync(path.join(cwd, file), 'utf8').split(/\r?\n/);
+  lines.forEach((line, index) => {
+    const isChip =
+      RANK_INLINE_CHIP.test(line) ||
+      (RANK_TEXT_LINE.test(line) &&
+        lines.slice(Math.max(0, index - 4), index).some((prev) => /className=.*\bbg-/.test(prev)));
+    if (!isChip) return;
+    violations.push({
+      ruleId: 'rank-chip-must-use-rank-badge',
+      message:
+        'Render colored rank chips with RankBadge (@/components/atoms/RankBadge). It keeps a min width, never wraps, and grows for long ranks.',
+      file,
+      lineNumber: index + 1,
+      line: line.trim(),
+    });
+  });
+}
+
 if (violations.length > 0) {
   console.error('Design system check failed:');
   for (const violation of violations) {
