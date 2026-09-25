@@ -39,7 +39,10 @@
     "minResolvedCharts": 1460,
     "minCoveragePct": 100,
     "maxUnresolvedCharts": 0,
-    "maxMissingLineageCharts": 0
+    "maxMissingLineageCharts": 0,
+    "maxLegacyDataSourceSectionArticles": 67,
+    "maxSourcelessChartArticles": 1,
+    "requireSnapshotSources": true
   },
   "themeBaselineAdjustment": {
     "date": "2026-09-09",
