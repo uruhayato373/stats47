@@ -85,7 +85,7 @@ node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metric
 - **可視化は SVG 図のみ・markdown 表は全面禁止**。ランキングは **上位5+下位5 のカード型**（`generate-article-charts` が横長 columns `<name>.svg`(本文) + 縦長 portrait `<name>-ig.svg`(IG) を自動両出力）、地理は tile-grid 地図、時系列は折れ線、相関は散布図。
 - **チャート参照**: `![alt](data/<name>-prefecture-rankings.svg)` (生成は Step 4)。`<chart-placeholder>` とインライン `<svg>` は禁止。
 - **source-link**: `<source-link href="/ranking/<key>">` を**各図の直下にインライン**配置 (末尾集約禁止)。
-- **callout 3〜4 個**: 記事固有の読み違い防止知識 (`[!NOTE]`定義 / `[!WARNING]`限界・相関≠因果 / `[!TIP]`読み筋)。
+- **callout**: 通常本文と役割が違う記事固有の読み違い防止知識だけに使う。数合わせせず目安は 0-3 個、連続配置しない (`[!NOTE]`定義 / `[!WARNING]`限界・相関≠因果 / `[!TIP]`読み筋)。
 - **内部リンク 3〜5**: `/ranking/<key>` `/areas/<code>` `/blog/<slug>` `/category/<key>`。
 - 記事内に「関連ランキング/関連記事」見出しを書かない (ページ側が tag 駆動で描画)。
 

@@ -100,7 +100,7 @@ if [ "$DRY_RUN" = 0 ]; then
   # 親 Claude Code セッションの CLAUDE_* を子に継がせない (継ぐと Keychain を読まず「Not logged in」・generate-parallel と同じ規律)
   # shellcheck disable=SC2046
   if printf 'JSON {"ok":true} だけを返してください。' | env $(env | awk -F= '/^(CLAUDE_|CLAUDECODE=)/{printf "-u %s ", $1}') -u NODE_OPTIONS "$CLAUDE_BIN" -p "" \
-      --output-format json --model claude-haiku-4-5-20251001 --tools "" --strict-mcp-config \
+      --output-format json --model claude-haiku-4-5 --tools "" --strict-mcp-config \
       --no-session-persistence --setting-sources local --system-prompt "要求された JSON だけを出力する。" \
       > "$PREFLIGHT_OUT" 2>/dev/null \
     && node -e "const r=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'));if(r.is_error){console.error(String(r.result).slice(0,200));process.exit(1)}" "$PREFLIGHT_OUT"; then

@@ -11,8 +11,7 @@ primary_agent: ranking-content-author
 `regionalAnalysis`=地域別の傾向 / `faq` / `prefectureCommentary`=県別解説）を生成し、
 決定的ゲートを通して R2 `app/ranking/<key>/ai-content.json` に反映する。
 
-> **2026-06-21 DBレス再構築済**。旧版は D1 (`ai_content` テーブル + 生成 CLI + D1→R2 exporter) に依存し
-> commit `7569bd5c` "dbless Part D" で削除されていたが、**D1 非依存で再構築**した。D1 は一切使わない。
+> D1 は使わない (入力は R2、出力は staging→R2)。
 > 担当 agent: `ranking-content-author`。品質ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`。
 > モデル選択とagent起動promptは `.claude/rules/model-prompting.md` /
 > `.claude/rules/agent-output-contract.md` を正典とする。
@@ -59,12 +58,6 @@ R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server'
 
 > **現在の日次正典**: `.github/workflows/ai-content-gemini-daily.yml` (07:15 JST、既定3件)。
 > 件数は `.claude/state/metrics/ai-content/history.csv` で 7 run 以上を観測した後だけ見直す。
-
-> **2026-08-21 当時の経緯**: 件数を決めるのは週次計画 (`.claude/todo/weekly.md` の Must) だった。月間目標は
-> `.claude/todo/monthly.md` が持つ。日次 CI (`ai-content-generate-daily.yml`) は
-> 2026-08-21 に削除した — 対話セッションと同じ Pro/Max 利用枠を食う一方で歩留まりが
-> 08-19 に 0/5 ($87.31)、08-20 に 1/5 ($21.33) まで落ちたため。
-> **当時は生成を対話セッションが行っていた**。現在の定期経路は Gemini API。
 
 > Claude Code の Bash から `generate-parallel.ts` の claude CLI 子プロセスを起動しない。
 > 大きい stdin が詰まるため、対話セッションでは agent 生成、端末では CLI、日次は workflow と経路を混在させない。

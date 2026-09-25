@@ -331,7 +331,7 @@ dark mode 非対応 / theme 色 inline の 2 つは 140 枚該当のため warni
 > 右端ラベルは svg-builder 側で **実測幅ぶん内側に寄せる**（固定マージンだと
 > `legendLabels` のカスタム値で再発する）。
 
-#### ゲート自体の検証（2026-07-31 実測・★数値は実データ）
+#### ゲート自体の検証
 
 全 PASS は「ゲートが何も見ていない」状態と区別がつかないため、**両方向**を実測する。
 
@@ -354,7 +354,7 @@ flag は個別に metric→key を特定する必要があり、**SVG の絵か�
 - `packages/svg-builder/src/charts/__tests__/choropleth.gate.test.ts` — 生成器の**実出力**がゲートを通ることを
   固定（**配線**）。片方だけ更新すると「生成した瞬間に公開できない SVG」ができる
 
-### カタログ別サイズ統一 gate（`lintSvgSize` / 2026-06-21 追加・★再発防止）
+### カタログ別サイズ統一 gate（`lintSvgSize`）
 
 `lintSvgSize(filename, content)` が **filename→chartType→正規 viewBox 幅（§5）** を照合する。
 新規記事・校正で非正規サイズの SVG が混入するのを公開前に止める（ranking が 760×532 / 960×624（旧10+10）等に

@@ -37,12 +37,12 @@ const getArg = (flag) => {
 };
 const URL_ARG = getArg("--url");
 const DRY_RUN = !args.includes("--execute");
-const MAX_TOKENS = Number(getArg("--max-tokens") || 2000);
-const MODEL = getArg("--model") || "claude-sonnet-4-6";
+const MAX_TOKENS = Number(getArg("--max-tokens") || 16000);
+const MODEL = getArg("--model") || "claude-sonnet-5";
 
 if (!URL_ARG) {
   console.error(
-    "Usage: --url <URL> [--dry-run|--execute] [--max-tokens 2000] [--model claude-sonnet-4-6]"
+    "Usage: --url <URL> [--dry-run|--execute] [--max-tokens 16000] [--model claude-sonnet-5]"
   );
   process.exit(1);
 }
@@ -97,7 +97,7 @@ try {
 log(`[3/5] ファイル読み込み完了 (${fileBody.split("\n").length} lines, ${fileBody.length} chars)`);
 
 // -------- 4. prompt 構築 --------
-const systemPrompt = `あなたは Next.js (App Router) + Cloudflare Pages 環境の LCP 改善エキスパートです。
+const systemPrompt = `あなたは Next.js (App Router) + Cloudflare Workers (OpenNext) 環境の LCP 改善エキスパートです。
 以下のコンポーネントに対し、LCP < 3.5s (mobile) を達成するための改修案を unified diff 形式 (\`diff --git a/...\` から始まる形式) で提案してください。
 
 採用してよい技術:
@@ -112,7 +112,7 @@ NG:
 - アーキテクチャ大幅変更 (server→client 切替等)
 - 既存 props 互換性破壊
 
-出力は \`\`\`diff ... \`\`\` の 1 ブロックのみ。説明文は前後に書かない。`;
+改修案の unified diff を diff フィールドに入れて返す。`;
 
 const userPrompt = `URL: ${URL_ARG}
 改修対象ファイル: ${picked.file}
@@ -163,16 +163,32 @@ const response = await client.messages.create({
   max_tokens: MAX_TOKENS,
   system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
   messages: [{ role: "user", content: userPrompt }],
+  // 構造化出力で diff だけを受け取る (書式指示 + 正規表現抽出の代わり)
+  output_config: {
+    format: {
+      type: "json_schema",
+      schema: {
+        type: "object",
+        properties: { diff: { type: "string" } },
+        required: ["diff"],
+        additionalProperties: false,
+      },
+    },
+  },
 });
+
+if (response.stop_reason === "refusal" || response.stop_reason === "max_tokens") {
+  warn(`[error] Claude の応答が完結しなかった (stop_reason=${response.stop_reason})`);
+  process.exit(1);
+}
 
 const responseText = response.content
   .filter((b) => b.type === "text")
   .map((b) => b.text)
-  .join("\n");
+  .join("");
 
-// -------- diff 抽出 --------
-const diffMatch = responseText.match(/```diff\n([\s\S]*?)```/);
-const diff = diffMatch ? diffMatch[1] : responseText;
+// -------- diff 取得 --------
+const { diff } = JSON.parse(responseText);
 log("");
 log("--- Claude 改修案 (unified diff) ---");
 log(diff);

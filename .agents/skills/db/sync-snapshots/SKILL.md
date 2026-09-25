@@ -9,7 +9,7 @@ co_agents: [article-writer, theme-designer, note-manager]
 
 git TS / R2 観測値から R2 上の全 snapshot を一括 export するオーケストレーションスキル。
 
-データ変更 (`/page-data-batch`, `/sync-articles`, AI コンテンツ生成 等) のたびに、対応する snapshot を更新しないと本番で古いデータが配信される。
+データ変更 (`/page-data-batch`, ブログ記事の公開・改稿, AI コンテンツ生成 等) のたびに、対応する snapshot を更新しないと本番で古いデータが配信される。
 
 本スキルは **全 snapshot を順次 export** する。各 export はべき等なので何度実行しても安全。
 
@@ -75,7 +75,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | station-passengers | `apps/web/scripts/export-station-passengers-snapshot.ts` | `app/station-passengers/{NN}/{stations,lines}.json` ・ `app/station-passengers/index.json` | ~10MB (95 files) |
 | correlation (Derived・エフェメラル計算) | `packages/correlation/src/scripts/build-correlation-snapshot.ts` | `app/correlation/top-pairs.json` ・ `stats.json` ・ `by-ranking-key/{key}.json` — R2 観測値を使い捨て `:memory:` SQLite で集計 (Pearson r / 偏相関 / effectiveR)。`/recompute-correlations` の実体 | ~2000+ files |
 
-## R2 push は CI / クラウド専用 (★重要)
+## R2 push は CI / クラウド専用
 
 **R2 書き込みはローカルから行わない。** 本 run.sh をローカルで実行すると snapshot は
 `.local/r2` に生成されるが、末尾の R2 push は自動でスキップされる (`CI` 外 + `ALLOW_LOCAL_R2_WRITE`
@@ -95,7 +95,7 @@ gh run watch                                                        # 進捗確�
 どうしてもローカルから push する場合のみ `ALLOW_LOCAL_R2_WRITE=1` を付与 (非推奨)。
 方針: `.claude/rules/local-environment.md` / `.claude/rules/r2-storage-design.md`。
 
-### 1 task が失敗しても成功分は push する (★2026-08-17 変更)
+### 1 task が失敗しても成功分は push する
 
 以前は失敗が 1 件でもあると**末尾の push に到達せず、成功した task の成果物ごと捨てられていた**。
 生成物は runner の `.local/r2` にあり runner は破棄されるので復旧手段も無い。
@@ -125,7 +125,7 @@ master が旧 remote item で上書きした。このため `run.sh` は ranking
 中間pushが1件でも失敗した場合は master を走らせず fail closed とする。順序・dry-run・失敗停止は
 `sync-snapshots-run-contract.test.mjs`、read tier は `fetch-priority.test.ts` が固定する。
 
-### timeout は 120 分 (★2026-08-17 変更・45 分では完走しない)
+### timeout は 120 分 (45 分では完走しない)
 
 同じ「成果を落とす」型がもう 1 つあった。sync job は `timeout-minutes: 45` だったが、
 フル run はそれより長くかかるので**構造的に完走できなかった**。
@@ -185,7 +185,7 @@ bash .claude/skills/db/sync-snapshots/run.sh --dry-run
 | **計算型 metric の分子・分母を更新** (例 `disposable-income-worker-households`) | **calculated-stats → ranking-values** (この順)。分子だけ更新しても計算型の正典 `app/stats/{計算型key}` は追従しないため。`data-refresh.yml` は run.sh をフル実行するので自動で入る |
 | `/sync-metrics-cache` 完了 (新規 metric 追加後) | master + ranking-values |
 | 市区町村観測値 / catalog 更新 | municipality-ranking |
-| `/sync-articles` 完了 | blog |
+| ブログ記事の公開・改稿 | blog |
 | AI コンテンツ生成完了 | ai-content |
 | ダッシュボード設定変更 | page-components |
 | area_profile バッチ完了 | area-profile |

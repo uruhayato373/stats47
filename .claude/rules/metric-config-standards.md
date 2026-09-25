@@ -114,7 +114,7 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 
 `--strict` で warn も exit 1 (現在 warn は 0 件のため実質 no-op、将来用)。
 
-## `years` は最新年だけに絞らない (★再発防止・2026-09-15)
+## `years` は最新年だけに絞らない
 
 `years: {from,to}` を「最新年 1 件」で登録し、e-Stat には実際にもっと古い年の実データが
 あるのに反映し忘れる事故が **active metric 2,445 件中 755 件 (31%)** の規模で確認された
@@ -145,7 +145,7 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
 
-## 分類軸は必ず 1 系列に絞る（形状ゲート・★再発防止 2026-07-30）
+## 分類軸は必ず 1 系列に絞る（形状ゲート）
 
 **e-Stat の統計表は多次元クロス集計なので、config で軸を絞りきらないと同じ県が複数行になる。**
 `page-data-batch.ts` は重複を落とさず `assignRanks` が通し番号を振るため、
@@ -191,7 +191,7 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 - `zero-heavy` 最新年のゼロ率 ≥ 90% → **warn**
 - `negative-count` 個数を数える unit (`COUNT_UNITS`) に負値 → **warn**
 
-### 値の分布を見る理由 (★2026-08-04)
+### 値の分布を見る理由
 
 `bowling-alley-public` (公共ボウリング場数) は 47 行 1 系列で**器の形は完璧なまま、全 47 県の値が 0**
 だった。順位が存在しないので ranking として成立しないが、取り込み・週次監査・走査のどれも素通りし、
@@ -220,7 +220,7 @@ valueMin/valueMax を既に計算していて `min === max` は 1 行で判定�
 「既存を是正して空いた枠に新しい壊れ方を入れる」ができてしまう。常に warn の 2 種
 (`WARN_ONLY_CHECKS`) は何も fail させないので allowlist に載せない (`area-coverage` と同じ理由)。
 
-### 検証済みプロファイル方式 (★2026-08-05・二層 SSOT)
+### 検証済みプロファイル方式 (二層 SSOT)
 
 上の閾値は「確実に壊れている」ものだけを拾うので、**判断が割れる帯を捨てていた**
 (ゼロ率 50-90% の 16 件など)。そこを埋めるのがこの方式で、**広く疑い、agent が中身を
@@ -261,7 +261,7 @@ agent 検証なしで壊れだけ取れる」を試して失敗した — 壊れ
 内陸 8 県と完全一致しており、素朴な「47 県必須」は `port-*` / `fishery-*` 系 15 件を誤検知する。
 誤検知を出すゲートは運用で無効化されるので、確実に欠陥と言えるものだけを error にする。
 
-### 「config は直ったのに配信が古い」を検出する (★2026-07-31 追加)
+### 「config は直ったのに配信が古い」を検出する
 
 上の 3 層はどれも **「いま R2 にあるデータが壊れている」** しか言わない。config を是正しても
 **再取り込みが走らなければ配信は古いまま**で、その状態を指す仕組みが無かった。
@@ -349,7 +349,7 @@ buildRecipe(config)  ←─ page-data-batch (値を書く)   → app/stats/<key>
 `configHash` は **クエリと変換だけ**の指紋。`years` や `title` は含めない
 (年を伸ばしただけで全件不整合になるのを避ける。カバレッジは shape-gate が別に見る)。
 
-### item.json `sourceConfig` の形 (★丸ごと spread しない)
+### item.json `sourceConfig` の形 (丸ごと spread しない)
 
 ```jsonc
 {
@@ -378,7 +378,7 @@ cdCat03 以降が落ちて多系列が混入し、`source`/`note` が param に�
 分子・分母キーがそろって初めて機能する。型だけ立てても
 `calculate-ranking-values.ts` の `if (!calculation.type) return []` で**必ず空になる**。
 
-## 計算型 metric (`fetcherKey:"calculated"`) — 生成工程と期間の宣言 (★2026-08-05 新設)
+## 計算型 metric (`fetcherKey:"calculated"`) — 生成工程と期間の宣言
 
 分子・分母から計算して作る metric。現在 3 件 (`disposable-income-after-rent` /
 `real-disposable-income` / `engel-coefficient`)。
@@ -444,7 +444,7 @@ generator と同じ `expectedCalculatedYears` で導出するので、監査が�
 | ×100 を生成器にハードコードする              | `scaleFactor: 100` を config に宣言                       |
 | 計算型でない metric にも `ops.calc` を広げる | calculated fetcher のみ (2,000 件超の一斉 drift を避ける) |
 
-## isActive:true ≠ 本番公開（多段依存・★再発防止 2026-06-03）
+## isActive:true ≠ 本番公開（多段依存）
 
 `MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と
 派生リスト（`KNOWN_RANKING_KEYS` / `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` / R2 `app/ranking-items/all.json`）

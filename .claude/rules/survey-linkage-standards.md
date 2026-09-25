@@ -92,7 +92,7 @@ ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` 
 
 ## 3. 編集フロー
 
-### 監査の 2 層 (導出 × 焼き込み) と active/total の区別 ★誤診防止 (2026-07-14)
+### 監査の 2 層 (導出 × 焼き込み) と active/total の区別
 
 - **導出層** (git): `audit-survey-linkage.ts` が本番と同一コードで全 metric を集計。`perSurvey` =
   総数 (inactive 含む在庫)、`perSurveyActive` = isActive のみ (= 配信されるべき数)。

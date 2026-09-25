@@ -165,13 +165,13 @@ abandoned  abandoned  running (re-measure)
 
 - **同時 active 実験 ≤ 2 件**（rubric 原則）: `listActive()` が 2 件以上返す場合、新規 start 時に警告
 - **started_at + 10 日未満の measure は警告**: GSC 3 日遅延 + 短期ノイズを除外
-- **実行（実ファイル編集）は担当外**: 本スキルは lifecycle 管理専任。実コンテンツ編集は既存の blog-editor 系・theme-enhancer 系スキルに委譲
+- **実行（実ファイル編集）は担当外**: 本スキルは lifecycle 管理専任。実コンテンツ編集は既存の blog-editor 系・theme-component-builder 系スキルに委譲
 - **自己評価の禁止**: 「この learning で playbook を直接書き換える」ような Generator 行為はしない。提案までが責務
 
 ## 担当外
 
 - **NSM 定義の変更**: `docs/00_プロジェクト管理/02_収益化戦略.md` の更新は `/north-star-metric` スキルの担当
-- **コンテンツそのものの編集**: blog-editor / theme-enhancer 配下のスキルが担当
+- **コンテンツそのものの編集**: blog-editor / theme-component-builder 配下のスキルが担当
 - **週次レポート生成**: `/weekly-review` の担当（本スキルは experiments-state を提供するのみ）
 
 ## 連携スキル・コンポーネント

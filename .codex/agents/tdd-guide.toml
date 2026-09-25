@@ -32,13 +32,9 @@ npx vitest run <対象テストファイル> --reporter=verbose 2>&1 | tail -5
 
 範囲は `.claude/rules/local-environment.md`「検証コマンドの粒度」に従う。
 
-### 2. Green（最小限のコードで通す）
+### 2. Green → 3. Refactor
 
-テストを通す最小限の実装を書く。完璧でなくてよい。
-
-### 3. Refactor（コードを整理する）
-
-テストが通った状態を維持しながらコードを改善する。
+通したあとの整理でも、上の対象テストだけを再実行する。
 
 ## テスト分類（stats47 準拠）
 
@@ -55,10 +51,10 @@ npx vitest run <対象テストファイル> --reporter=verbose 2>&1 | tail -5
 
 ## モック戦略
 
-### D1 データベース
+### DB (型ソース・テスト用 SQLite)
 
-- **ユニットテスト**: `better-sqlite3` でインメモリ DB を作成し、Drizzle スキーマを適用
-- `.local/d1/` のローカル SQLite は結合テスト用（dev server 経由）
+- 永続 D1 は無い (完全 DB レス)。integration テストは `better-sqlite3` のインメモリ DB に
+  `packages/database/src/testing/apply-schema.ts` で Drizzle スキーマを適用して使う
 
 ### e-Stat API
 
@@ -86,13 +82,6 @@ npx vitest run <対象テストファイル> --reporter=verbose 2>&1 | tail -5
 4. **境界値**: 0, -1, MAX_VALUE, 空文字列
 5. **エラーパス**: ネットワーク障害、DB タイムアウト
 6. **大量データ**: 47 都道府県 × 数百ランキング
-
-## アンチパターン
-
-- 実装詳細のテスト（振る舞いをテストする）
-- 共有 state による テスト間依存
-- 意味のない assertion（`expect(true).toBe(true)`）
-- 外部サービスのモック漏れ
 
 ## 参照
 

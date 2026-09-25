@@ -296,7 +296,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 `/goal cycle` が内部で Agent ツールを呼ぶときは、prompt の **冒頭**で OUTPUT FORMAT を必ず固定する(`.claude/rules/agent-output-contract.md` 準拠):
 
 ```
-OUTPUT FORMAT: 1 markdown table or short bullet list (≤ 200 words total).
+OUTPUT FORMAT: 1 markdown table or short bullet list, only as long as the findings require.
 No prose before/after. No section headers.
 If verdict needs justification, add a Reason column with ≤ 8 words.
 ```

@@ -251,7 +251,7 @@ export const <THEME>_CATALOG: ThemeCatalog = {
 | シナリオ       | フロー                                                                                                |
 | -------------- | ----------------------------------------------------------------------------------------------------- |
 | 新規テーマ作成 | theme-designer → data-ingester（TS-config + page-data-batch）→ code-reviewer（IndicatorSet レビュー） |
-| 既存テーマ改善 | seo-auditor（GSC 分析）→ theme-designer（指標追加・チャート変更）→ ui-reviewer                        |
+| 既存テーマ改善 | gsc-analyst（GSC 分析）→ theme-designer（指標追加・チャート変更）→ ui-reviewer                        |
 | トレンド起点   | blog-editor（トレンド検出）→ theme-designer（関連テーマの強化）                                       |
 
 ## Output Contract

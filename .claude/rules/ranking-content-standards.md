@@ -18,7 +18,7 @@ critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧
 > memory `project_ai_content_remediation_queue`) と backlog (AICONTENT-02 / RANK-WAVE) が持つ。
 > 本 rule は「どう構成し・どの品質床で・どう生成するか」の運用正典。
 
-## スコープ境界 — 本パイプラインは 47 都道府県ランキング専用 (★2026-08-31 宣言)
+## スコープ境界 — 本パイプラインは 47 都道府県ランキング専用 (宣言)
 
 地理スコープの分離 (doc 43 = 全国 `/japan`、doc 44 = 市区町村 `/municipalities`) 以降、
 ランキングページは **全国 / 都道府県 / 市区町村の 3 面**になった。本 rule と ai-content
@@ -88,7 +88,7 @@ GSC 表示のあるランキングは全キーの ~40% で、imp の大半は He
   禁止ルールを冒頭の絶対ルールへ昇格させた (`model-prompting.md`: 制約は末尾ではなく冒頭)。
   再発防止は `ranking-content-prompt.test.ts` (テンプレートに全角括弧が戻ると落ちる)。
 
-### 実データ照合の設計 (★安いモデルで量産する前提の砦・2026-07-30 実装)
+### 実データ照合の設計 (安いモデルで量産する前提の砦・実装)
 
 プロンプトは「括弧による数値挿入」を全面禁止するが、**FAQ の answer は実値必須・insights は倍率や
 構成比を書く仕様**なので「数値を書かせない」ことでは捏造を防げない。括弧外の裸の数値を実データ
@@ -136,7 +136,7 @@ node --test .claude/scripts/ai-content/__tests__/*.test.mjs                  # �
 values.json が取得できない場合は照合をスキップする (fail-open) が、**スキップしたことを出力に明示する**
 (合格と誤読させない)。
 
-### 接地データの健全性ゲート (★生成物ではなく素材を見る・2026-08-04 実装)
+### 接地データの健全性ゲート (生成物ではなく素材を見る・実装)
 
 上の照合は **生成物しか見ない**。「そもそも論じるに足るデータか」を誰も見ていなかったため、
 **全 47 県が 0** の `bowling-alley-public` (公共ボウリング場数) に FAQ 5 問 + 県別解説 47 件が
@@ -191,7 +191,7 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
 `data/ai-content-staging/*.json` なので `app/ranking/<key>/` 配下に置くと拾われない)。
 `--out data/ai-content-staging` では階層が付くため公開されない → **`--outbox` を使う**。
 
-### ★1 回の push で公開できるのは「その push の差分 × MAX_PUBLISH 件」まで (2026-09-02 実測)
+### 1 回の push で公開できるのは「その push の差分 × MAX_PUBLISH 件」まで
 
 push トリガーの対象選定は `git diff HEAD~1 HEAD` で、さらに `MAX_PUBLISH` (現在 40) で
 上限を掛ける。**50 件を 1 つの PR で載せると 40 件しか公開されず、残りは outbox に滞留する**
@@ -213,7 +213,7 @@ push トリガーの対象選定は `git diff HEAD~1 HEAD` で、さらに `MAX_
   **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
   必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
 
-### ★2026-08-07: バッチは partial-publish (1 件の失敗で全件を止めない)
+### バッチは partial-publish (1 件の失敗で全件を止めない)
 
 バッチで複数件を回すときは **オールオアナッシングにしない**。以前は対象 N 件のうち 1 件でも
 audit / critic に落ちると `GENERATED != EXPECTED` で run 全体を fail させ、後続の publish
@@ -242,7 +242,7 @@ quarantine は持たない。
 (quarantine の積み上げ・PASS でのリセット) / `packages/ai-content/src/services/__tests__/`
 (Gemini API・structured output・preflight・生成 0 件 gate)。
 
-### ★2026-08-30: Gemini 無料枠の日次 CI を正典にする
+### Gemini 無料枠の日次 CI を正典にする
 
 `ai-content-gemini-daily.yml` を日次 07:15 JST に実行する。既定 3 件、並列数 1、
 `gemini-2.5-flash-lite` 固定で開始し、クォータ実測なしに件数を上げない。実行経路は次の通り。
@@ -265,7 +265,7 @@ Claude Code/OAuth を使う日次 CI は復活させない。**Agent tool 経路
 入った高流入 key など、例外的な手動是正にだけ使う。**headless `claude -p` 経路**によるローカル量産は
 次節のとおり別扱いにする (2026-09-05)。
 
-### ★2026-09-05: ローカル量産は headless `claude -p` 経路 (Agent tool は使わない)
+### ローカル量産は headless `claude -p` 経路 (Agent tool は使わない)
 
 Gemini 日次 CI は 2026-08-30 から鍵の前払いクレジット枯渇 (`preflight_status=billing`) で 8 run 連続
 PASS 0 のまま止まり、残 1,445 件 (2026-09-04 キュー) の在庫を消化する経路が無かった。
@@ -288,7 +288,7 @@ headless `claude -p` を子プロセスで呼ぶ。prompt は約 5,000 字 (dry-
 | 公開 | outbox → **1 push = 1 commit ≤ 35 件** → develop → `publish-ai-content.yml` (人間 / セッションの push は発火する)。公開確認は R2 の内容一致で行う |
 | 記録 | `--output-format json` の usage / `total_cost_usd` を `history.csv` (`cost_usd` 列・末尾追加) と report に残す。inputTokens は cache を含む合算 = **1 request で 40K を超えたら rules が漏れ込んでいる**合図 |
 | quarantine | `failed` に載せるのは `status=rejected` (ゲート / critic 落ち) のみ。skip や CLI 障害・429 を数えると 3 run で大量 quarantine になる |
-| 分業 | author / critic = **Sonnet 5** (`--effort low`)。Haiku 4.5 は pilot 1 で **0/10** (括弧数値 4・数値範囲外 3・JSON 崩れ 1・京都府を中部に置く等の事実誤り) で author 不適。**Opus 5 は manual-escalation 30 件 + quarantine のみ** Agent tool 経由。量産に Opus を使わない |
+| 分業 | author / critic = **Sonnet 5** (`--effort low`)。Haiku 4.5 は pilot 1 で **0/10** (括弧数値 4・数値範囲外 3・JSON 崩れ 1・京都府を中部に置く等の事実誤り) で author 不適。**Opus は manual-escalation 30 件 + quarantine のみ** Agent tool 経由。量産に Opus を使わない |
 | 運転設定 | `--model claude-sonnet --critic claude-sonnet --retries 1 --concurrency 2 --limit 35` (= `run-claude-batch.sh` 既定)。verify1 実測: 6/6 通過 (1 回目 4・2 回目 2)、**$0.51/件・43K トークン/件・6 件 8 分** |
 | 不変 | Claude を CI cron で無人実行しない。量と時期は人が決める (月次 / 週次計画) |
 
@@ -401,7 +401,7 @@ push トリガーは**発火しない**。初めて生成が成功した回に 2
 | 失敗の扱い | 429/5xx/timeout は client がバックオフ再試行 (429 は 15s 起点)、`truncated`/4xx は再試行しない |
 | 費用 | flash 系に無料 tier があるが、**キーが有料課金に紐づく場合は 1 件あたり入力 ~5K / 出力 ~8K トークン相当が課金される**。件数で管理する |
 
-#### ★件数はクォータ実測で決める (2026-07-31 に矛盾が判明)
+#### 件数はクォータ実測で決める
 
 **既定 40 件/日はクォータを測らずに置いた数字で、成り立つ保証がない。**
 
@@ -419,7 +419,7 @@ preflight が 429** で落ちた。1 日 10 件強で枯れているなら 40 �
 **実測が出るまで件数を上げない。** 40 と 2 は暫定値で、`quotaValue` を見てから
 「ai-content と blog の合計が 1 日の上限に収まる」ように配分し直す。
 
-#### ★429 には対処が正反対の 2 種が同居する (2026-07-31 に本文を実測)
+#### 429 には対処が正反対の 2 種が同居する
 
 本文を出して分かったのは、**この 429 はレート制限ではなかった**ということ:
 
@@ -459,7 +459,7 @@ exit 3 で PR を止めると、モデルが健全でも課金が尽きている
 **したがって「1 日何件回せるか」はまだ実測できていない。** クレジット補充後に初めて
 `quotaValue` が観測できる。40 / 2 は依然として根拠のない暫定値。
 
-#### ★モデル提供終了と silent green の再発防止 (2026-07-30 の障害)
+#### モデル提供終了と silent green の再発防止
 
 日次 cron の初回実行は **40 件すべて HTTP 404** で失敗し、生成 0 件で終わった。原因はキーでも
 配線でもなく「設定モデルが API に存在しない」ことだった。しかも `generate-parallel.ts` が

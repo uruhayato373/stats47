@@ -27,7 +27,7 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
     `.claude/rules/metric-config-standards.md`「計算型 metric」を正典とする
 - → `apps/remotion/public/<feature>/*.json` (動画用 static JSON、 `/export-d1-to-remotion-static`)
 - 相関分析 (`/recompute-correlations`: R2 観測値からエフェメラル計算 → R2)
-- ブログ記事 article.md → R2 同期 (`/sync-articles` の派生フェーズ、 push は委譲)
+- ブログ記事一覧 `app/blog/all.json` の生成 (`export-blog-snapshot.ts`・`/sync-snapshots --only blog`。push は委譲)
 
 > page_components 検証は完全DBレス (doc12 Phase E) で git TS SSOT 化済。
 > `/verify-component-data` (D1 検証) は廃止 → `verify-page-components-snapshot.ts` (git SSOT vs cloud 一致検証)。
@@ -39,11 +39,10 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 | `/sync-snapshots` | git TS / R2 → `.local/r2/app/` snapshot 生成 (R2 push 前段) |
 | `/export-d1-to-remotion-static` | → `apps/remotion/public/<feature>/*.json` |
 | `/recompute-correlations` | 指標間相関分析 (R2 観測値からエフェメラル計算 → R2) |
-| `/sync-articles` | article.md → blog 記事 JSON 派生 |
 
 ## 担当外
 
-- D1 への write → `data-ingester` / `db-schema-manager` に委譲
+- 観測値の投入 → `data-ingester`、schema (型ソース) → `db-schema-manager` に委譲
 - R2 push (upload) → `r2-publisher` に委譲
 - e-Stat 探索 → `estat-researcher` に委譲
 - ブログ記事の本文編集 → `blog-editor` / `article-writer` に委譲
@@ -58,17 +57,17 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 
 ## 触る state / files
 
-- D1: read only
+- 永続 DB なし (使い捨てビルドキャッシュ SQLite の read のみ)
 - `.local/r2/app/` — snapshot JSON write (排他、 後で r2-publisher が push)
 - `apps/remotion/public/<feature>/*.json` — 動画用 static JSON write
 - `packages/area/src/data/{prefectures,cities}.json` — area npm パッケージ static export
 
 ## File Boundary (並行衝突回避)
 
-- D1 への write 一切なし (read のみ)
+- 永続 DB への write なし
 - `.local/r2/app/` への write は本 agent と `chart-author` のみ。 同 path への 2 体同時 write NG
 - 並行起動可能 agent: estat-researcher, gsc/ga4-analyst, x/IG-strategist, r2-publisher (本 agent の出力を消費)
-- 並行起動 NG: data-ingester (D1 schema が動的に変わると export 不整合)
+- 並行起動 NG: data-ingester (同一 metric の R2 観測値を書き換え中だと export が不整合になる)
 
 ## Output Contract
 

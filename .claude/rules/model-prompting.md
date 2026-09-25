@@ -40,13 +40,13 @@ paths:
   推測で埋めず、`unknown` とする。
 - 異なる解釈で成果物が実質的に変わる場合だけ確認する。通常の判断は scope 内で行う。
 
-## Claude Opus 5
+## Claude Opus (`opus` alias)
 
 - 難しい coding / review では、断片的な追加指示を繰り返さず、完全な task specification を最初に渡す。
 - visible response の長さは effort ではなく `output_format` で制御する。
-- 最初の tool call 前は一文、作業中は重要な発見か方針変更時だけ、最後は結果から報告する。
+- 最初の tool call 前に一文で方針を述べる。長い作業では数分おきに実測ベースの進捗を一文で伝え、最後は結果から報告する。
 - 「double-check」「自己検証」「答える前に再確認」「検証用 subagent」の指示を加えない。
-  Opus 5 自身の検証傾向と重なり、token と待ち時間だけを増やす。
+  Opus 自身の検証傾向と重なり、token と待ち時間だけを増やす。
 - lint、test、schema validation、HTTP probe のような**成果物を判定する決定的 gate**は残す。
   同じ入力へ根拠なく同じ gate を繰り返さない。
 - code review は最初の pass でseverityを狭めず、具体的な全 findings を出させる。採否・優先度は
@@ -54,14 +54,14 @@ paths:
 - routine task は low / medium、通常の coding / review は high、最難関だけ xhigh を候補にする。
   effort は固定信仰ではなく repo 固有 eval の結果で選ぶ。thinking は有効のまま effort で費用を調整する。
 
-## Claude Sonnet 5
+## Claude Sonnet (`sonnet` alias)
 
 - 明確な単一 work package、機械的編集、対象テスト、データ収集の既定 executor とする。
 - routine は medium、通常実装は high、難しい multi-file coding だけ xhigh を候補にする。
 - low / medium で複数段推論が必要な場合は、必要な判断点を task capsule に明示する。
 - tool を使う作業は「提案」か「実装」かを goal で明示する。曖昧な「改善して」でscopeを広げない。
 
-## Claude Fable 5
+## Claude Fable (`fable` alias)
 
 - 長期・複数 work package・曖昧性の高い end-to-end taskの orchestrator に限定する。
 - 情報が揃ったら実行し、確定済み事実の再導出、採らない選択肢の列挙、周辺refactorを行わない。

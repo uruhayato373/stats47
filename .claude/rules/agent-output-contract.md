@@ -15,30 +15,30 @@ Agent tool 経由で subagent を呼ぶ際は `.claude/rules/model-prompting.md`
 ```
 
 - 制約は prompt 末尾ではなく **冒頭**（長い prompt の中に埋もれた指示は効きが弱い。実測では末尾指定が丸ごと無視された）
-- 行数 / word 数 / 列構造を具体的に書く（「concise」「short」だけでは効かない。**出力の長さは effort を下げても減らないので、長さは明示的に指定する**）
-- agent が「説明欲」を満たす逃げ道として `Reason` カラムを許容するなど、contract 内で明示する
+- 列構造・件数の単位・読み手の用途を具体的に書く（「concise」「short」だけでは効かない。**出力の長さは effort を下げても減らないので、形式で指定する**）
+- 判定に理由が要る場合は `Reason` 列を用意し、contract 内で明示する
 
 ## Template A: table-only（推奨デフォルト）
 
 ```
 OUTPUT FORMAT: 1 markdown table only.
 Columns: <列名>
-Cell content: ≤ 10 words each.
+Cell content: one short phrase per cell; the table is scanned, not read.
 No prose before/after. No section headers.
-If verdict needs justification, add a Reason column with ≤ 8 words.
+If verdict needs justification, add a Reason column (one phrase).
 ```
 
 ## Template B: bullet list（列挙のみ）
 
 ```
-OUTPUT FORMAT: bullet list only, ≤ N items.
-Each bullet: ≤ 12 words. No nested bullets. No prose.
+OUTPUT FORMAT: bullet list only, one item per finding.
+Each bullet is one plain sentence. No nested bullets. No prose.
 ```
 
 ## Template C: report（調査の文章まとめが必要な場合のみ）
 
 ```
-OUTPUT FORMAT: ≤ N words total. No headers.
+OUTPUT FORMAT: only as long as the findings require; the caller reads it to decide the next action. No headers.
 Structure: 1 paragraph (findings) + 1 paragraph (recommendation).
 ```
 
@@ -48,20 +48,18 @@ Structure: 1 paragraph (findings) + 1 paragraph (recommendation).
 ```
 docs/01_技術設計/ の 11 ファイルを KEEP/DELETE/MOVE-TO-REFERENCE に分類して。
 ... (中略) ...
-Report concisely — under 600 words.
+Report concisely.
 ```
-→ 実測 ~2,200 words 返ってきた
 
 ✅ OK（冒頭に format を固定）:
 ```
 OUTPUT FORMAT: 1 markdown table only.
 Columns: File | Verdict | Reason
-Cell content: ≤ 10 words. Reason ≤ 8 words.
+Cell content: one short phrase. Reason: one phrase.
 No prose before/after.
 
 TASK: docs/01_技術設計/ の 11 ファイルを KEEP/DELETE/MOVE-TO-REFERENCE に分類。
 ```
-→ ~150 words に収まる
 
 各 custom agent の Output Contract セクション (`.claude/agents/*.md`) も併せて参照すること。
 

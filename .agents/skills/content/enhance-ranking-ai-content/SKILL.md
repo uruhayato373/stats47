@@ -11,10 +11,8 @@ disable-model-invocation: true
 primary_agent: ranking-content-author
 ---
 
-> **2026-06-21 DBレス化**。本スキルは旧版で D1 (`ai_content` SELECT/UPDATE + R2 exporter) に依存していたが、
-> writer が DBレス再構築された（`packages/ai-content/src/scripts/{build-input,generate-parallel}.ts` +
-> 決定的ゲート `audit-ai-content.mjs` + staging→R2）。以下の手順は **D1 を R2 読み + staging 書きに置換済**。
-> NotebookLM 補強（Steps 2-5）と extraContext 注入の中核は不変。担当 `ranking-content-author`。
+> 入力は R2 観測値、生成は `packages/ai-content/src/scripts/{build-input,generate-parallel}.ts`、決定的ゲート
+> `audit-ai-content.mjs` を通して staging→R2 に反映する。NotebookLM 補強 (Steps 2-5) は extraContext 経由。担当 `ranking-content-author`。
 
 # /enhance-ranking-ai-content — ranking_key の ai_content を NotebookLM 補強でリライト
 
@@ -22,7 +20,7 @@ primary_agent: ranking-content-author
 
 **棲み分け**:
 - 本スキル: **リライト専用** (既存 ai-content.json が存在する前提)、NotebookLM 出典で内容深化
-- `/generate-ai-content`: **初回生成専用** (未生成 → 値、Claude/Gemini 並列、`--limit N --force`)
+- `/generate-ai-content`: **初回生成専用** (未生成 → 値。日次の定期経路は Gemini、手動の量産は headless `claude -p`)
 - `/notebooklm-research`: **公開済ブログ記事 (`article.md`) 補強専用** (対象が異なる)
 - `/brushup-blog --target article`: **GSC ベース seoTitle / description 改訂** (メタ改訂、内容深化とは別軸)
 

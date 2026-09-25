@@ -34,7 +34,7 @@ codex login status         # → "Logged in using ChatGPT" なら準備完了
   未インストールのマシンでは MCP 接続が失敗するだけで、他のツールには影響しない。
 - 認証は `~/.codex/auth.json`。**このファイルを読まない・コピーしない・ログに出さない。**
 
-### ★会社 Windows PC (兵庫県庁ネットワーク) — 実行できることがある (2026-08-28 実測で解禁)
+### 会社 Windows PC (兵庫県庁ネットワーク) — 実行できることがある
 
 > **2026-08-28 更新**: 同じ会社 PC で `mcp__codex__codex` (built-in imagegen 含む) が
 > **6 回連続成功**した (ブログ OGP 背景 6 枚の生成)。2026-08-06 の 503 は恒常ではなく、
@@ -94,7 +94,7 @@ exact bytesのSSOTは `apps/web/scripts/lib/assets/blog-codex-backgrounds/*.jpg`
 MCP prompt、自由入力prompt、生成済み画像をskill/ruleへ複製しない。Codex MCPが使えない場合に
 Geminiへ暗黙fallbackしない。R2 push / deployはCodexへ委譲しない。
 
-## 3. パラメータ規律 (★これが git 混入を防ぐ主装置)
+## 3. パラメータ規律 (これが git 混入を防ぐ主装置)
 
 | パラメータ | 既定 | 規律 |
 |---|---|---|

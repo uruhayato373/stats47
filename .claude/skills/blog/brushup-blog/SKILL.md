@@ -140,7 +140,7 @@ curl -s "https://storage.stats47.jp/app/blog/all.json" \
 | スコア | `CTR ギャップ × log10(impressions + 1)` | 両指標の積 (log スケール) |
 
 スコア降順でソートし上位 20 本を選定する。
-GSC データは実測値。 D1 の `articles` テーブルの `updated_at` が古い記事はボーナス +0.2 を加算。
+GSC データは実測値。
 
 #### Step 4: brushup-queue.md 出力
 
@@ -217,18 +217,11 @@ curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
 
 「面積 vs 効率」「平均 vs 中央値」「総量 vs 比率」「TOP1 単独 vs TOP10 集中度」等の **対比軸** を 1-2 個発見する。
 
-#### C-2. 5 案 framing 生成 → 4 軸採点 → best 選択
+#### C-2. framing を比較して選ぶ
 
-1 記事に対し **必ず 5 つの framing 案**を内的に生成し、各案を 4 軸で 0-10 点採点:
-
-| 評価軸 | 内容 | 重み |
-|---|---|---|
-| practical_value | 読者が明日使える知識か | 30% |
-| structural_finding | データから読み解ける構造的発見か | 30% |
-| data_grounding | データを正確に反映しているか (誇張なし) | 25% |
-| non_sensational | 扇情的でなく curiosity gap が本質的か | 15% |
-
-**合計 30 点以上**の案がなければこの記事を skip (batch 時は次候補へ)。`rice-harvest` の「X倍格差」失敗事例 (本質的価値ゼロの数値倍率) を再発させない。
+複数の framing を比較し、実用性 (読者が明日使える知識か)・データから読める構造的発見・データへの忠実さ (誇張なし)・
+扇情的でない curiosity gap をすべて満たす案を採る。忠実さか非扇情のどちらかを満たす案が無ければ、この記事は skip する
+(batch 時は次候補へ)。数値倍率だけの framing (本質的な価値の無い「X倍格差」) は採らない。
 
 #### C-3. best framing で全文 reframe
 
@@ -339,7 +332,7 @@ quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の da
 ```
 === /brushup-blog --target article: <slug> 完了 ===
 focus: <CTR-reframe | エキスパート視点追加 | 最新データ更新 | CTA強化>
-採用 framing: <CTR-reframe 時、best 案 + 採点。それ以外は「-」>
+採用 framing: <CTR-reframe 時、採用案と選んだ理由。それ以外は「-」>
 参照ノートブック: <エキスパート視点追加 時のみ。それ以外は「-」>
 変更内容: <1-2 行で要約>
 factual-check: ✅ exit 0 / quality-gate: ✅ exit 0 / bold lint: ✅ exit 0
@@ -371,7 +364,7 @@ node .claude/scripts/blog/select-brushup-candidates.mjs --count 5 > /tmp/candida
 各候補 slug に対し `--target article <slug> --focus CTR-reframe` のフロー (共通 Step A → C-1〜C-3 → 共通 Step B/C) を実行する。
 
 - リライト前に `cp .local/r2/app/blog/<slug>/article.md /tmp/brushup-backup-<slug>.md`
-- 5 案採点で合計 30 点未満なら skip
+- 忠実さと非扇情を満たす framing が無ければ skip
 - `node .claude/scripts/blog/quality-gate.mjs <slug>` が exit 1 なら revert (`cp /tmp/brushup-backup-<slug>.md .local/r2/app/blog/<slug>/article.md`) + skip-log
 
 `--dry-run` の場合はここで停止し、候補一覧 + 各 framing スコアを report 出力 (書込・commit なし)。
@@ -379,7 +372,6 @@ node .claude/scripts/blog/select-brushup-candidates.mjs --count 5 > /tmp/candida
 ### Step 3: sync + commit + PR (通過 ≥ 1 件時のみ)
 
 ```bash
-npm run articles:sync-from-r2 --workspace=packages/database
 bash .claude/skills/db/sync-snapshots/run.sh --only blog
 
 git checkout -b feature/brushup-batch-YYYY-MM-DD develop

@@ -28,7 +28,7 @@ paths:
 - **カード外枠の線と地**: ライトモードのページ地は記事ゾーンを含めサイト全体で薄グレー（`--background`）1 値（dark の記事ゾーンは `.dark .reading-zone` の別値）。カード外枠の線色は `--card-outline`（Web は `transparent`、管理画面は `--border`）で、白カードとの明暗で区切る。影は `shadow-sm`。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
 
-## Sticky aside の max-h 必須ルール（★削除禁止・2026-06-06）
+## Sticky aside の max-h 必須ルール（削除禁止）
 
 CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-h-[calc(100vh-5.5rem)]` と `overflow-hidden` または `overflow-y-auto` を付ける**。
 
@@ -60,7 +60,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - `apps/web/src/components/rail/RightRailWidgets.tsx`
 - 右レールに渡す widget
 
-## コンポーネント配置の 3 tier（★新規コンポーネント追加前に必読・配置の SSOT）
+## コンポーネント配置の 3 tier（新規コンポーネント追加前に必読・配置の SSOT）
 
 新規 UI を作るときは、まず**どの tier に置くか**を決める。下位 tier に既にあるものを feature 内に再実装しない
 （再実装が共通化を阻む最大要因。実測で feature 層の重複が散在 → 恒久ルールは `docs/01_技術設計/04_デザインシステム.md` に集約）。
@@ -83,7 +83,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - **色付きの順位チップ（「N位」）は `RankBadge`（`@/components/atoms/RankBadge`）だけで描く。** 幅を固定せず最小幅で揃え、折り返さない（市区町村の「1741位」も伸びて収まる）。色は `tone`（`positive` / `negative`、向きのない順位は `rankToneByPosition(rank, total)`）で選ぶ。表のセル・補足の小さな文字・文章中の「N位」はチップにせず文字のまま書く。`design-system:check` の `rank-chip-must-use-rank-badge` が背景色つきの手書き「N位」を拒否する。メダルのアイコン表示（`RankingRankBadge`）は別部品。
 - **FAQ / 定義 / AI考察など本文の開閉 UI は `@/components/content` を再利用する。** 複数FAQ=`FaqSection`、単一本文=`ContentDisclosure`。feature 内の独自 Radix Accordion、`▼` / `▲` 文字、`text-lg` 見出しを追加しない。表示契約と機械ゲートの正典は `docs/01_技術設計/04_デザインシステム.md`。
 
-## チャートコンポーネント（★新規追加前に必読）
+## チャートコンポーネント（新規追加前に必読）
 
 チャート・グラフを追加するときは先に **`.claude/rules/chart-component-standards.md`** のカタログを確認する。
 既存の `MiniLineChart` / `MiniBarChart` / `ChartCard` 等が使えるケースでは再実装しない。

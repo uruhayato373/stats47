@@ -45,12 +45,12 @@ prompt 冒頭にTask Capsuleと **OUTPUT FORMAT** を含め、その後にタス
   <done_when>factual checkと記事quality gateが成功する</done_when>
   <authorization>ローカル原稿の作成まで</authorization>
 </task>
-<output_format>Result | Draft path | Data evidence | Gates | Unverified の1表のみ</output_format>
+<output_format>Result | Files | Gates | Unverified の1表のみ</output_format>
 ```
 
-## 絶対遵守 (2026-05-25 追加)
+## 数値は data ファイルからのみ書く
 
-### Data → 書く、の順序を厳守
+### Data → 書く、の順序を守る
 
 **rule**: 本文・SVG に書く全ての数値 / rank は **data ファイルを Read した値のみ** 使う。memory から類推して書かない。
 
@@ -83,9 +83,9 @@ node .claude/scripts/lib/article-factual-check.mjs \
 
 ## 手順
 
-### Phase 1: データ取得 ★まず必ずやる
+### Phase 1: データ取得 (タイトル・framing より先に行う)
 
-**順序が重要**: タイトルや framing を考える前に、必ず以下を完了する。
+タイトルや framing を考える前に、以下を完了する。
 
 > ★**データ取得は公開 R2 URL を既定とする**（完全DBレス / 認証不要）。`.env.local` の S3 creds も無い前提。**`sqlite3`/D1 直読は廃止**。
 > PATH が壊れている環境があるので **curl は絶対パス `/usr/bin/curl`** で叩く。
@@ -105,14 +105,14 @@ node .claude/scripts/lib/article-factual-check.mjs \
 
 ### Phase 2: タイトル設計 ★正典 = `.claude/rules/blog-quality-standards.md` (必読)
 
-**curiosity gap を必ず入れる** (事実羅列型は CTR 0% の実測あり → 正典参照):
+**curiosity gap は 1 要素だけ入れる** (事実羅列は CTR 0%、過剰な gap も逆効果 → 正典参照):
 
 - 構造: `{主要 fact + curiosity gap}｜{追加情報 (年・対象)}`
 - gap 要素のいずれか: 疑問形/なぜ? ・矛盾/逆説 ・真因/構造 ・比較対比 (vs) ・倍率+意外性
 - 「○○ランキング」「○○の地域差」「○○格差」だけで終わるテンプレ禁止
 - 数値・県名・倍率のいずれかを 1 つ以上含める
-- ✅「中学生の身長は県で3.9cm違う｜秋田163.6cm・高知159.7cm、なぜ東北が高い? (2023)」
-- ✅「財政力指数1位は東京1.06 vs 島根0.25｜唯一「自立」できる47都道府県は (2022年度)」
+- ✅「中学生の身長、なぜ東北が高い?」(title 本体は ~17 字・gap 1 要素。年・県名・数値は seoTitle 側へ)
+- ✅「自立できるのは東京だけ?」(財政力指数。比較の数値は seoTitle と本文へ)
 - ❌ CTR 0%:「砂糖消費量1位は三重5kg・最下位東京」(事実羅列・gap なし)
 
 **subtitle** (OGP 画像の小文字、20-25 全角): フック・数値比較・意外性を 1 文で。
@@ -238,14 +238,14 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
    読者価値の観点 (冗長・図表重複・truncated 表・CTA過多・curiosity gap の真正性) で review してもらう。
    blog-critic が `docs/21_ブログ記事原稿/<slug>/review.md` (`verdict: PASS`) を出すまで、指摘を修正して反復する。
    **自分 (article-writer) が書いた記事を自分で採点して公開してはならない。**
-3. 呼び元に「ドラフト完成 (critic PASS 済): `docs/21_ブログ記事原稿/<slug>/`」と返す (最終行に `DRAFT: <path>`)
+3. 呼び元へ Output Contract の1表で返す (Files に `docs/21_ブログ記事原稿/<slug>/` を含める)
 4. **公開は CI / develop push で行う (本 agent はやらない)**。`quality-gate.mjs` は `published:true` かつ
    `review.md` (verdict: PASS) が無いと公開を blocker で止める (自己採点公開を構造的に防止)。
 5. 公開確認後、`docs/21` のドラフトは削除する (lifecycle、`check-published-drafts.cjs` が残骸を検出)
 
 ## 決定的品質ゲート
 
-- [ ] タイトル 17 全角以内
+- [ ] タイトル本体は ~17 字目標 (critic 判定・禁止ではない)
 - [ ] 「○○ランキング」「○○格差」テンプレを使っていない
 - [ ] seo_title に「1位X・最下位Y・N倍差」が含まれる
 - [ ] (表を置く場合のみ) 全件表である / 図と重複する truncated 表 (… 省略) でない。数値は values.json と一致

@@ -45,7 +45,7 @@ export function createUtf8Collector(): {
  * ここに無い alias は拒否する (旧実装は `startsWith("claude")` で未知 alias を黙って haiku に倒していた)。
  */
 export const CLAUDE_CLI_MODELS = {
-  "claude-haiku": "claude-haiku-4-5-20251001",
+  "claude-haiku": "claude-haiku-4-5",
   "claude-sonnet": "claude-sonnet-5",
   "claude-opus": "claude-opus-5",
 } as const;

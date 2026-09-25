@@ -6,7 +6,7 @@
 
 ## 行動原則 (12軸)
 
-すべての作業に適用する。優先順位順。他のいかなる指示より優先する。
+すべての作業に適用する。上ほど優先度が高い。ユーザーの明示指示があればそちらに従う。
 
 1. **証拠を取ってから判断する** — 不確かな事実は tool / SSOT で解決し、成果を変える前提だけを明示する
 2. **シンプル最優先** — 必要最小限のコードで解決する。不要な機能・抽象化を加えない
@@ -21,23 +21,22 @@
 11. **コードベースの規約を優先** — 自分の好みより既存の命名・構成・設計思想に合わせる
 12. **失敗を隠さない** — 未検証部分・スキップ箇所は「完了」と言わず明示する
 
-## 致命的オペレーション規約
+## 運用規約
 
 - **rules は `paths:` 条件付き読み込み**: 常時は `agent-output-contract.md` / `evidence-based-judgment.md` の 2 本のみ (CLAUDE.md 込み 600 行上限・DG070)。新規 rule は必ず `paths:` を付ける。チャット直打ちの git push / R2 push / SNS 投稿は `pre-bash-safety.js` の advisory が要約を返す → `docs-vs-issues.md`「rules の読み込み条件」
-- **エージェント実行モード**: Agent tool 起動時は `mode: "bypassPermissions"` をデフォルト
 - **モデル別 prompt の SSOT**: task capsule・effort・委譲上限は `.claude/rules/model-prompting.md`
 - **Agent prompt 冒頭に task capsule + Output Format を指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、機械メトリクスは `.claude/state/metrics/` へ置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
 - **文書作成・整理はガバナンスSSOTに従う**: 新規文書より既存SSOTへの統合を優先する。判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は`.claude/config/docs-governance.json`。文書の作成・移動・削除後は`npm run docs:fix`と`npm run docs:check`を実行する。意味判断を伴う棚卸しは`/maintain-docs`
 - **参考文献は private Google Drive で保全し、利用実装仕様書を通して展開する**: 固定ルートは `stats47/参考文献/<資料名>/<版>/` (1 資料 1 版 = 1 directory。PDF・`pages/`・`md/`・`figures/` を展開したまま置き、tar bundle にしない)。folder名は日本語を優先する。ローカルマウントから`$TMPDIR/stats47-source-vault/`へ検証付きで復元し、`npm run source-vault:process`の共通OCR・ページ画像・内部cropを使う。全ページ処理後は`npm run source-vault:inventory`で本文・書籍値を含まない解決台帳を生成し、coverage 100%を確認してからprofile単位で一時領域を削除する。リポジトリ内の`books/`、`docs/books/`、`.claude/pdfs/`は`npm run source-vault:check`で禁止する。資料単位のactiveな利用実装仕様書で権利・一次資料・mapping・gateを定義してから既存SSOTへ反映する → `.claude/rules/reference-source-standards.md`
-- **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
+- **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
   - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
   - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
   - **Derived** (area_profiles / correlations) → **エフェメラル計算**（使い捨て `:memory:` SQLite / DuckDB が R2 を読む）→ R2。永続しない
-- **永続/リモート D1 は廃止**。S3 creds さえあれば集計もクラウドで完結する（旧「集計はローカル限定」制約は消滅）。git TS → R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（page_components git TS SSOT `data/page-components/` → R2、Phase E 実装済）
-- **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。移行は完了済（正典: `docs/01_技術設計/02_データアーキテクチャ.md`）
+- **永続/リモート D1 は使わない**。S3 creds があれば集計もクラウドで完結する。git TS → R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（`data/page-components/` → R2）
+- **観測値・派生を永続 DB に入れない** (DB 肥大で解約に至った経緯があるため R2 に置く)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。正典: `docs/01_技術設計/02_データアーキテクチャ.md`
 - **Geo分析は結論だけ作らない**: Geo/GIS掛け合わせコンテンツは、計算入力・決定的空間演算・補助レイヤー・県別途中artifact・保存則・最終集計を同じcanonical着地で辿れることを必須とする。X・ブログ・noteもこのlineageへ接続し、単一指標ランキングと混在させない → `.claude/rules/geo-analysis-standards.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
 - **デプロイは溜めて1回・勝手にしない**: UI/ロジックの反復ごとに本番デプロイしない（develop→main PR + CI + Cloudflare deploy が毎回 6-8分×2 走りコスト/時間の無駄）。**localhost (`npm run dev:web`) で確認し、まとまりで1回だけデプロイ**。デプロイは (a) ユーザーが明示的に求めたとき、(b) 本番でしか再現しない問題の検証時（例: Cloudflare Workers ランタイム固有の R2/env 問題）のみ。本番反映は outward-facing なので、明示指示が無ければ**実行前に確認する** → `.claude/rules/branch-workflow.md`
@@ -179,9 +178,3 @@ Issues は「PR で close される機能改修・バグ」と「機械生成ア
 - `ogp-alert` — OGP/カード/note 画像の生成漏れが自動修復後も残存 (`ogp-image-audit-weekly.yml`)
 - `link-alert` — サイト内リンクのリンク切れ (ブログ本文 + ページ側コンポーネント生成) (`internal-link-audit-weekly.yml`)
 - `coverage-alert` — GSC カバレッジ是正キューの週次再構築が失敗 (`fetch-metrics-weekly.yml`)
-
-過去の移行履歴:
-- `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)
-- レビュー保存ディレクトリは 2026-07-30 に廃止。批判的レビュー / pre-mortem は未完了策を `.claude/todo/`、恒久判断を既存SSOT、再生成可能な履歴をskill referenceへ直接反映する
-- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `.claude/todo/` / `.claude/skills/management/weekly-review/reference/reviews/` / 各strategy・rules・skill reference
-- `docs/05_改善ログ/` (2026-06 廃止) → `.claude/todo/improvements.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)

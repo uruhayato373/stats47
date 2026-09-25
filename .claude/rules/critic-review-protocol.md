@@ -11,10 +11,6 @@ blog-critic / note-critic / ranking-content-critic (および今後の critic �
 **レビューの共通プロトコル**。各 agent はドメイン固有のルーブリック (何を審査するか) を自ファイルに持ち、
 「どうレビューするか」の型は本ファイルを正典とする。
 
-> 経緯 (2026-07-03 運営総点検): 3 critic がほぼ同型のプロトコル記述を各自コピーしておりドリフトの温床
-> だった。agent 統合は AGENT-L3-CONSOLIDATE-01 で KEEP-SKIP 判定済み (責務分離が適切) のため、
-> **agent は分離を維持しつつプロトコルだけ単一ソース化**する。
-
 ## 原則 (全 critic 共通)
 
 1. **author / critic の分離**: 書いた本人が自己採点して公開しない。critic は必ず author とは

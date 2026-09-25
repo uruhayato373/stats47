@@ -5,7 +5,7 @@
 <done_when>`.local/ci/improvement-cycle/proposal.json` に、対象の各施策を「削除する」か「行を更新する」かの提案が書かれている。削除する施策には詳細ログへの追記（判定・根拠データ（数値・期間）・再現コマンド・日付）が提案に含まれている。変更が 1 件も要らない週でも、空の配列を持つ提案ファイルを必ず書く（ファイルが無い run は失敗として扱われる）。</done_when>
 <authorization>書き込んでよいのは `.local/ci/improvement-cycle/proposal.json` だけ。`.claude/` 配下は Claude Code の保護パスなので、この run では編集できない（試みると権限で拒否され、run は失敗扱いになる）。台帳への反映は後段の CI が提案を決定的に適用し、ゲートを通った差分だけを push する。git・gh・外部送信・R2・本番操作は禁止。</authorization>
 </task>
-<output_format>提案ファイルを書いた後の最終メッセージは 1 markdown table only. Columns: ID | Action (deleted/updated/skipped) | Evidence (≤20 words). No prose before/after.</output_format>
+<output_format>提案ファイルを書いた後の最終メッセージは 1 markdown table only. Columns: ID | Action (deleted/updated/skipped) | Evidence (one phrase). No prose before/after.</output_format>
 
 ## 提案ファイルの形
 

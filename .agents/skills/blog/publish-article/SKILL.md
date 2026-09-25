@@ -1,6 +1,6 @@
 ---
 name: publish-article
-description: 下書き記事を公開フォルダへコピーし publishedAt を設定する。Use when user says "記事公開", "publish", "公開する". /sync-articles で DB 反映.
+description: 下書き記事を公開フォルダへコピーし publishedAt を設定する。Use when user says "記事公開", "publish", "公開する". 本番反映は /sync-snapshots --only blog (all.json 生成).
 disable-model-invocation: true
 primary_agent: blog-editor
 ---
@@ -102,7 +102,7 @@ date +%Y-%m-%d
 #### 5-3. `published` フィールドの確認
 
 `published: false` または `published` フィールドがない場合: **そのまま放置**。
-`/sync-articles` 実行時に `publishedAt` の日付に基づいて公開状態が制御されるため、明示的な変更は不要。
+all.json 生成 (`export-blog-snapshot.ts`) が前回の公開状態を保持するため、明示的な変更は不要。
 
 ### 5.5. Factual cross-check (必須、2026-05-25 追加)
 
@@ -164,10 +164,9 @@ node .claude/scripts/lib/check-published-drafts.cjs
   publishedAt: <設定した日付>
 
 次のステップ:
-  1. /sync-articles  →  DB を更新（ローカル確認）
-  2. localhost:3000/blog/<slug> でプレビュー確認
-  3. exact image plan publisher → 画像bundleをR2へ反映
-  4. /sync-snapshots →  blog スナップショット更新・本番反映
+  1. localhost:3000/blog/<slug> でプレビュー確認
+  2. exact image plan publisher → 画像bundleをR2へ反映
+  3. /sync-snapshots --only blog →  blog スナップショット (all.json) 更新・本番反映
 ```
 
 ## 関連

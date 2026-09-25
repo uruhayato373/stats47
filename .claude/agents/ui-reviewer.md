@@ -44,7 +44,7 @@ melta-ui デザインシステム準拠と UI/UX 品質評価を担当するエ�
 
 - コードレベルのレビュー（code-reviewer）
 - コンテンツレビュー（blog-editor）
-- SEO 監査（seo-auditor）
+- SEO 監査（gsc-analyst / performance-auditor）
 
 ## Output Contract
 

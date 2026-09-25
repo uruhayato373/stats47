@@ -239,7 +239,6 @@ gh pr create --base main --head develop --title "Release: <短い要約>" --body
 - [x] tsc --noEmit pass
 - [x] eslint pass
 - [x] vitest run pass
-- [x] D1 sync OK（ローカルに未 push 差分なし / 別 PR で同期予定）
 - [x] R2 sync OK（.local/r2/ に 24h 以内の未 push ファイルなし）
 - [ ] Playwright E2E（該当なら）
 
@@ -268,7 +267,7 @@ gh pr merge <PR_NUMBER> --merge
   `sleep` で待たない (前面 sleep は禁止・Monitor か次ターンで再確認する)。
 - `failure` を見たら **`cancelled` でないか**必ず確認する (superseded の判定は前掲)。
 - マージ: `mcp__github__merge_pull_request`。
-- マージ後 Cloudflare Pages が自動デプロイをトリガー。
+- マージ後 `deploy-workers.yml` (push main) が Cloudflare Workers へ自動デプロイする。
 - マージできない場合 (CI 失敗 / conflict) → ユーザーに報告
 
 ### Step 6: 元のブランチに戻る & 後処理
@@ -284,7 +283,7 @@ git push origin --delete $CURRENT_BRANCH 2>/dev/null || true  # リモート削�
 
 - マージしたブランチ名
 - テスト・型チェック・ESLint の結果サマリ
-- **D1 / R2 sync の実行有無**
+- **R2 sync の実行有無**
 - develop, main それぞれの push 結果
 - PR URL とマージ時刻
 - Cloudflare デプロイ完了確認
