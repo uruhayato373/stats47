@@ -116,7 +116,7 @@ function renderCard({ id, def, urls, queue, today }) {
   return [
     `### [${id}] GSC 是正: ${def.title(urls.length)}`,
     "",
-    `タグ: [インフラ・計測] [種類:${def.kind}] [実行:sweep] [検証:${QUEUE_CLI} --assert-handled ${file}] [起票:${today}]`,
+    `タグ: [インフラ・計測] [種類:${def.kind}] [実行:sweep] [検証:${QUEUE_CLI} --assert-handled ${file}] [起票:${today}] [レーン:SEO・ブログ]`,
     "",
     `- **自動起票**: \`sync-coverage-backlog.mjs\` が是正キュー (\`.claude/state/gsc/coverage-remediation-queue.json\`) の pending から作った。対象 URL の一覧は \`${file}\`。手順の正典は \`${RUNBOOK}\` Phase 4。`,
     "- **対象**:",

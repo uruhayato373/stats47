@@ -29,9 +29,19 @@ function isActive(
   return pathname === path || pathname.startsWith(path + "/");
 }
 
+/** 前方一致の親 (/strategy) は、より具体的な項目 (/strategy/lanes) も一致するときは譲る */
+function hasMoreSpecificMatch(pathname: string, href: string, hrefs: readonly string[]): boolean {
+  const path = href.split("?")[0];
+  return hrefs.some((other) => {
+    const o = other.split("?")[0];
+    return o.startsWith(path + "/") && (pathname === o || pathname.startsWith(o + "/"));
+  });
+}
+
 export function ConsoleNavLinks({ groups }: { groups: readonly NavGroup[] }) {
   const pathname = usePathname() ?? "";
   const searchParams = useSearchParams();
+  const hrefs = groups.flatMap((g) => g.items.map((i) => i.href));
 
   return (
     <nav className="flex flex-col gap-4">
@@ -43,7 +53,9 @@ export function ConsoleNavLinks({ groups }: { groups: readonly NavGroup[] }) {
             </span>
           ) : null}
           {group.items.map((item) => {
-            const active = isActive(pathname, searchParams, item.href);
+            const active =
+              isActive(pathname, searchParams, item.href) &&
+              !hasMoreSpecificMatch(pathname, item.href, hrefs);
             return (
               <a
                 key={item.href}

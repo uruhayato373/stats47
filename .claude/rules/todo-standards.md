@@ -64,6 +64,7 @@ doboku-note = `scripts/lib/backlog-lib.mjs` (admin・CI・検査はすべてこ�
 | `[検証:cmd]` | 任意 | 完了を判定できる決定的コマンド (自動処理の gate 第一候補) |
 | `[起票:YYYY-MM-DD]` | 任意 | 鮮度測定 |
 | `[期日:YYYY-MM-DD]` | 任意 | 期限。超過は admin がバッジで出す |
+| `[レーン:X]` | **stats47 のみ**。語彙は `docs/00_プロジェクト管理/02_収益化戦略.md` §5 のレーン表 | 戦略レーン (収益までの流れの上の所属)。月次 `focus_lanes`・週次 Must との整合を `strategy-lanes.cjs` が検査 (DG074〜078)。未設定は集計 warning |
 | `[Codex候補]` | flag | バルク処理向き |
 | `[進行中]` | flag | 作業中 (人または別 run)。**自動処理はこのカードに触らない** |
 

@@ -20,6 +20,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const backlogLib = require("./backlog-lib.cjs");
+const strategyLanes = require("./strategy-lanes.cjs");
 
 const DEFAULT_ROOT =
   process.env.DOCS_GOVERNANCE_ROOT ||
@@ -737,6 +738,12 @@ function inspectRepository({
         "月次・週次計画にカード構文を複製できない。backlog / improvements の既存IDだけを参照する",
       );
     }
+  }
+
+  // 戦略レーン (収益化戦略の優先順位表) → 月次 focus_lanes → 週次 Must → backlog [レーン:] の配線。
+  // 判定規則は strategy-lanes.cjs、レーンの語彙は収益化戦略の表だけが持つ。
+  for (const issue of strategyLanes.laneBoard(root).issues) {
+    add(issue.level, issue.code, issue.file, issue.message);
   }
 
   const definitionOwners = new Map();

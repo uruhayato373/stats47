@@ -29,6 +29,7 @@ const NAV_GROUPS: readonly NavGroup[] = [
   {
     title: "戦略・収益化",
     items: [
+      { href: "/strategy/lanes", label: "戦略レーン" },
       { href: "/strategy/policy", label: "共通方針" },
       { href: "/strategy", label: "方針・事業計画" },
       { href: "/research", label: "調査カタログ" },

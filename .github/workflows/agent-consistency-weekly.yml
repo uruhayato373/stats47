@@ -94,6 +94,7 @@ jobs:
           set +e
           node --test \
             .claude/scripts/lib/__tests__/check-docs-governance.test.cjs \
+            .claude/scripts/lib/__tests__/strategy-lanes.test.cjs \
             .claude/scripts/lib/__tests__/check-docs-links.test.cjs \
             > /tmp/docs-test-report.txt 2>&1
           TEST_EXIT=$?
