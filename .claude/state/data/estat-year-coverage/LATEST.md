@@ -1,16 +1,16 @@
 # e-Stat 年カバレッジ監査 (LATEST)
 
-- 生成: 2026-09-19T22:19:37.890Z
-- 対象母集団: 単年設定の active e-Stat metric 582 件 (今回確認 100 件)
+- 生成: 2026-09-26T22:38:05.201Z
+- 対象母集団: 単年設定の active e-Stat metric 581 件 (今回確認 100 件)
 - 判定: 都道府県1件 (北海道) をサンプルに `getStatsData` を実測し、値が non-null な年の件数を
   config の `years` と比較する。全 47 都道府県の精査ではなく代表 1 件によるスクリーニング
 
 ## サマリ
 
-- **要拡張候補 (extend-candidate)**: 87 件
-- 単年で確定 (confirmed-single-year): 13 件
+- **要拡張候補 (extend-candidate)**: 159 件
+- 単年で確定 (confirmed-single-year): 41 件
 - 取得失敗 (fetch-failed・次回再試行): 0 件
-- 未確認 (次回以降のバッチで確認): 482 件
+- 未確認 (次回以降のバッチで確認): 381 件
 
 ## 要拡張候補 (config の years を広げて再取り込みする)
 
@@ -101,7 +101,40 @@
 - `building-fire-count-per-100-thousand-people` — config 1年 → e-Stat実在 49年 (1975-2023)
 - `building-fire-damage-amount-per-building-fire` — config 1年 → e-Stat実在 49年 (1975-2023)
 - `building-fire-damage-amount-per-person` — config 1年 → e-Stat実在 49年 (1975-2023)
-
+- `bus-operators` — config 1年 → e-Stat実在 39年 (1975-2013)
+- `business-tax` — config 1年 → e-Stat実在 48年 (1975-2022)
+- `car-ownership-multi-person-households-per-1000` — config 1年 → e-Stat実在 8年 (1979-2014)
+- `carried-forward-income-prefecture` — config 1年 → e-Stat実在 18年 (2005-2022)
+- `carryover-income-prefecture` — config 1年 → e-Stat実在 18年 (2005-2022)
+- `certified-childcare-center-count-per-100k-0-5` — config 1年 → e-Stat実在 10年 (2015-2024)
+- `certified-childcare-center-education-cost-per-student` — config 1年 → e-Stat実在 8年 (2015-2022)
+- `charcoal-production` — config 1年 → e-Stat実在 33年 (1975-2007)
+- `child-consultation-center-cases-per-1000` — config 1年 → e-Stat実在 24年 (2000-2023)
+- `child-rearing-allowance-recipients` — config 1年 → e-Stat実在 49年 (1975-2023)
+- `child-welfare-expenditure-ratio-pref-finance` — config 1年 → e-Stat実在 48年 (1975-2022)
+- `child-welfare-expenses-prefecture` — config 1年 → e-Stat実在 48年 (1975-2022)
+- `child-welfare-facility-count-per-100k` — config 1年 → e-Stat実在 49年 (1975-2023)
+- `child-welfare-facility-staff-per-100k` — config 1年 → e-Stat実在 22年 (2002-2023)
+- `city-gas-meter-count` — config 1年 → e-Stat実在 12年 (2005-2016)
+- `city-gas-sales-volume` — config 1年 → e-Stat実在 18年 (1999-2016)
+- `city-gas-supply-area-household-ratio` — config 1年 → e-Stat実在 21年 (1980-2016)
+- `city-gas-supply-area-households` — config 1年 → e-Stat実在 42年 (1975-2016)
+- `city-ward-assembly-members` — config 1年 → e-Stat実在 24年 (2001-2024)
+- `cleaning-expenses-prefecture` — config 1年 → e-Stat実在 48年 (1975-2022)
+- `cleaning-shop-count-per-100k` — config 1年 → e-Stat実在 49年 (1975-2023)
+- `clothing-footwear-expenditure-ratio-multi-person-households` — config 1年 → e-Stat実在 25年 (2000-2024)
+- `cod-pollution-load` — config 1年 → e-Stat実在 5年 (2011-2019)
+- `comprehensive-park-count` — config 1年 → e-Stat実在 33年 (1975-2007)
+- `compulsory-education-school-count-per-100k-6-14` — config 1年 → e-Stat実在 7年 (2018-2024)
+- `construction-industry-count` — config 1年 → e-Stat実在 24年 (2000-2023)
+- `construction-private-employees` — config 1年 → e-Stat実在 4年 (2011-2021)
+- `consumer-price-difference-index-clothing-footwear` — config 1年 → e-Stat実在 12年 (2013-2024)
+- `consumer-price-difference-index-culture-recreation` — config 1年 → e-Stat実在 12年 (2013-2024)
+- `consumer-price-difference-index-education` — config 1年 → e-Stat実在 12年 (2013-2024)
+- `consumer-price-difference-index-food` — config 1年 → e-Stat実在 12年 (2013-2024)
+- `consumer-price-difference-index-furniture-household` — config 1年 → e-Stat実在 12年 (2013-2024)
+- `consumer-price-difference-index-healthcare` — config 1年 → e-Stat実在 12年 (2013-2024)
+- … 他 39 件 (全件は queue.json)
 
 ## 直し方
 
