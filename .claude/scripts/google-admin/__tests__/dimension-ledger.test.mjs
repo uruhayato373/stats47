@@ -121,15 +121,15 @@ test("extractObservedParams: 単語境界で照合し部分一致で誤検出し
   assert.deepEqual(extractObservedParams("", known), []);
 });
 
-test("実台帳をパースでき、登録済みと要登録を区別できる", () => {
+test("実台帳をパースでき、状態を分類できない行が無い", () => {
   const md = fs.readFileSync(LEDGER_PATH, "utf-8");
   const entries = parseDimensionLedger(md);
   assert.ok(entries.length >= 10, `台帳の行数が少なすぎる: ${entries.length}`);
 
   const registered = entries.filter((e) => e.statusKind === LEDGER_STATUS_KINDS.REGISTERED);
-  const needsRegistration = entries.filter((e) => e.statusKind === LEDGER_STATUS_KINDS.NEEDS_REGISTRATION);
   assert.ok(registered.length > 0, "登録済みの行を1つも検出できていない");
-  assert.ok(needsRegistration.length > 0, "要登録の行を1つも検出できていない");
+  // 実台帳に要登録の行が残っているかは運用状態であって不変条件ではない (2026-09-26 に全件登録済みになった)。
+  // 要登録の判定そのものは classifyLedgerStatus のテストで合成値により固定する。
   assert.equal(
     entries.filter((e) => e.statusKind === LEDGER_STATUS_KINDS.UNKNOWN).length,
     0,
