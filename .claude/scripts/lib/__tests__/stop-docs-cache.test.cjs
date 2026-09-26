@@ -39,18 +39,19 @@ test('Stop reuses only success; validator edits and failures force validation', 
   fs.writeFileSync(path.join(root, 'docs/a.md'), 'draft');
   fs.mkdirSync(path.join(root, '.claude/scripts/lib'), { recursive: true });
   const validator = `const fs=require('fs');fs.mkdirSync('.local',{recursive:true});fs.appendFileSync('.local/runs','x');`;
-  for (const name of ['governance', 'links'])
+  for (const name of ['governance', 'links', 'code-refs'])
     fs.writeFileSync(path.join(root, `.claude/scripts/lib/check-docs-${name}.cjs`), validator);
   const hook = path.resolve(__dirname, '../../../hooks/check-docs-on-stop.js');
   const invoke = () => spawnSync(process.execPath, [hook], {
     cwd: root, input: '{}', encoding: 'utf8', env: { ...process.env, CLAUDE_PROJECT_DIR: root },
   });
+  // 検査は governance / links / code-refs の 3 本を並行で 1 回ずつ実行する
   assert.equal(invoke().status, 0);
-  assert.equal(fs.readFileSync(path.join(root, '.local/runs'), 'utf8').length, 2);
+  assert.equal(fs.readFileSync(path.join(root, '.local/runs'), 'utf8').length, 3);
   assert.equal(invoke().stdout, '');
-  assert.equal(fs.readFileSync(path.join(root, '.local/runs'), 'utf8').length, 2);
+  assert.equal(fs.readFileSync(path.join(root, '.local/runs'), 'utf8').length, 3);
   fs.writeFileSync(path.join(root, '.claude/scripts/lib/check-docs-links.cjs'), validator + 'process.exit(1)');
   assert.equal(JSON.parse(invoke().stdout).decision, 'block');
   assert.equal(JSON.parse(invoke().stdout).decision, 'block');
-  assert.equal(fs.readFileSync(path.join(root, '.local/runs'), 'utf8').length, 6);
+  assert.equal(fs.readFileSync(path.join(root, '.local/runs'), 'utf8').length, 9);
 });
