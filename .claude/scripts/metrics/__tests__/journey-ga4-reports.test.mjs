@@ -63,3 +63,24 @@ test('landing context computes shares per landing page and hides unstable small 
     pagesPerSession: 2, desktopShare: 0.75, workdayHoursShare: 0.6,
   }]);
 });
+
+test('Phase 5 slices: every request is Japan-only and filters to its own event', async () => {
+  const { MEASUREMENT_REPORTS, KEY_EVENT_NAMES } = await import('../lib/journey-ga4-reports.mjs');
+  const expectEvent = { interactions: 'ui_interaction', 'read-progress': 'read_progress', 'download-purpose': 'csv_download_purpose' };
+  for (const [name, report] of Object.entries(MEASUREMENT_REPORTS)) {
+    const req = report.request(period);
+    const filters = req.dimensionFilter.andGroup?.expressions ?? [req.dimensionFilter];
+    assert.equal(filters[0].filter.stringFilter.value, 'Japan', `${name} は Japan-only`);
+    if (expectEvent[name]) assert.equal(filters[1].filter.stringFilter.value, expectEvent[name]);
+    assert.equal(report.columns.length, report.dims.length + report.metrics.length, `${name} の列数`);
+  }
+  // key event の集合は google-admin の AUTHORED_KEY_EVENTS と一致させる (片方だけ増やすと成果が数えられない)
+  const { AUTHORED_KEY_EVENTS } = await import('../../google-admin/apply-allowlisted-settings.mjs');
+  assert.deepEqual([...KEY_EVENT_NAMES].sort(), AUTHORED_KEY_EVENTS.map((k) => k.eventName).sort());
+});
+
+test('measurementRow maps customEvent:* dimensions to plain CSV column names', async () => {
+  const { MEASUREMENT_REPORTS, measurementRow } = await import('../lib/journey-ga4-reports.mjs');
+  const row = measurementRow({ 'customEvent:ui_action': 'tab_switch', 'customEvent:ui_target': 'table', contentGroup: 'ranking', eventCount: '4' }, MEASUREMENT_REPORTS.interactions);
+  assert.deepEqual(row, { ui_action: 'tab_switch', ui_target: 'table', contentGroup: 'ranking', eventCount: '4' });
+});

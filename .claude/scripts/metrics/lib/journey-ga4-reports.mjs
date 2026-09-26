@@ -110,3 +110,79 @@ export function aggregateLandingContext({ base, device, hour }, { minSessions = 
     })
     .sort((a, b) => b.sessions - a.sessions || a.landingPage.localeCompare(b.landingPage));
 }
+
+// ── GA4-FULL-MEASUREMENT-01 Phase 5: 2026-09-26 に登録した dimension の週次スライス ──────────────
+// どれも Japan-only・rolling28d。値の語彙は apps/web/src/lib/analytics の固定語彙に従う。
+// 登録日 (2026-09-26) より前の期間は (not set) が混ざるため、読む側は meta の periodStart を確認する。
+const japanAnd = (...rest) => ({ andGroup: { expressions: [japan, ...rest] } });
+const eventIs = (name) => exact('eventName', name);
+const eventIn = (names) => ({ filter: { fieldName: 'eventName', inListFilter: { values: names } } });
+
+/** 成果として定義した key event (google-admin AUTHORED_KEY_EVENTS と同じ集合)。 */
+export const KEY_EVENT_NAMES = ['affiliate_click', 'contact_click', 'cta_click', 'file_download'];
+
+export const MEASUREMENT_REPORTS = Object.freeze({
+  'content-group': {
+    columns: ['contentGroup', 'sessionDefaultChannelGroup', 'deviceCategory', 'screenPageViews', 'engagedSessions', 'keyEvents'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['contentGroup', 'sessionDefaultChannelGroup', 'deviceCategory'].map((name) => ({ name })),
+      metrics: ['screenPageViews', 'engagedSessions', 'keyEvents'].map((name) => ({ name })),
+      dimensionFilter: japan,
+    }),
+    dims: ['contentGroup', 'sessionDefaultChannelGroup', 'deviceCategory'],
+    metrics: ['screenPageViews', 'engagedSessions', 'keyEvents'],
+  },
+  'key-events': {
+    columns: ['eventName', 'landingPage', 'contentGroup', 'eventCount'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['eventName', 'landingPage', 'contentGroup'].map((name) => ({ name })),
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: japanAnd(eventIn(KEY_EVENT_NAMES)),
+    }),
+    dims: ['eventName', 'landingPage', 'contentGroup'],
+    metrics: ['eventCount'],
+  },
+  interactions: {
+    columns: ['ui_action', 'ui_target', 'contentGroup', 'eventCount'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['customEvent:ui_action', 'customEvent:ui_target', 'contentGroup'].map((name) => ({ name })),
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: japanAnd(eventIs('ui_interaction')),
+    }),
+    dims: ['customEvent:ui_action', 'customEvent:ui_target', 'contentGroup'],
+    metrics: ['eventCount'],
+  },
+  'read-progress': {
+    columns: ['pagePath', 'progress', 'eventCount'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['pagePath', 'customEvent:progress'].map((name) => ({ name })),
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: japanAnd(eventIs('read_progress')),
+    }),
+    dims: ['pagePath', 'customEvent:progress'],
+    metrics: ['eventCount'],
+  },
+  'download-purpose': {
+    columns: ['ranking_key', 'download_purpose', 'eventCount'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['customEvent:ranking_key', 'customEvent:download_purpose'].map((name) => ({ name })),
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: japanAnd(eventIs('csv_download_purpose')),
+    }),
+    dims: ['customEvent:ranking_key', 'customEvent:download_purpose'],
+    metrics: ['eventCount'],
+  },
+});
+
+/** GA4 の dimension 名 (customEvent:xxx) を CSV の列名 (xxx) に揃える。 */
+export function measurementRow(row, report) {
+  const out = {};
+  report.dims.forEach((d, i) => { out[report.columns[i]] = row[d]; });
+  report.metrics.forEach((m) => { out[m] = row[m]; });
+  return out;
+}

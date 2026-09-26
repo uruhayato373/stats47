@@ -43,6 +43,8 @@ import {
 import {
   aggregateLandingContext, aggregateTransitions, buildEventVolumeRequest, buildInternalTransitionsRequest,
   buildLandingContextRequests, EVENT_VOLUME_COLUMNS, LANDING_CONTEXT_COLUMNS, TRANSITION_COLUMNS,
+  MEASUREMENT_REPORTS,
+  measurementRow,
 } from "./lib/journey-ga4-reports.mjs";
 
 const DEFAULT_PROPERTY_ID = "463218070";
@@ -293,6 +295,14 @@ async function main() {
     { name: "event-volume", columns: EVENT_VOLUME_COLUMNS, fetch: async () =>
       (await runReportPaged(analyticsdata, property, buildEventVolumeRequest(periods.rolling28d)))
         .map((row) => toRow(row, ["eventName"], EVENT_VOLUME_COLUMNS.slice(1))) },
+    // GA4-FULL-MEASUREMENT-01 Phase 5: 2026-09-26 登録の dimension / key event を読むスライス
+    ...Object.entries(MEASUREMENT_REPORTS).map(([name, report]) => ({
+      name,
+      columns: report.columns,
+      fetch: async () =>
+        (await runReportPaged(analyticsdata, property, report.request(periods.rolling28d)))
+          .map((row) => measurementRow(toRow(row, report.dims, report.metrics), report)),
+    })),
   ]) {
     let metadata;
     try {

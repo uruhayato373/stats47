@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-26T06:55:00Z",
+  "release": {
+    "pr": "https://github.com/uruhayato373/stats47/pull/1029",
+    "mergedAt": "2026-09-26T06:36:35Z",
+    "deployRun": 36224274042,
+    "backlog": "GA4-FULL-MEASUREMENT-01"
+  },
+  "discontinuity": {
+    "date": "2026-09-26",
+    "reason": "サイト内遷移の page_view が 2 件 (アプリ手動送信 + 拡張計測の履歴変更) だったものを 1 件にした。2026-09-26 以前の PV はサイト内遷移 1 回につき 2 件で数えられている。サイト内遷移の参照元もこの日から正しくなる (以前はアプリ送信分の参照元が空)。",
+    "changes": [
+      "拡張計測 pageChangesEnabled: true → false (Admin API updateEnhancedMeasurementSettings)",
+      "page_view に pv_trigger / content_group / ranking_key / theme_slug / area_code / category_key を付与",
+      "page_referrer を直前のサイト内 URL に変更"
+    ],
+    "doNotCompareAcross": ["screenPageViews", "internal-transitions.csv の遷移件数", "pageReferrer 由来の回遊率"]
+  },
+  "verification": {
+    "production": "2026-09-26 stats47.jp で /ranking/total-population 着地 → /ranking/births へ遷移し、page_view が landing 1 件 + navigation 1 件 (参照元 = 移動元) であることを /g/collect の送信で観測",
+    "ga4Admin": "npm run google-admin:audit-api — custom dimensions 34 件 (EVENT 33 / USER 1)、key events affiliate_click / contact_click / cta_click / file_download / purchase、台帳突合 confirmed-registered 49、拡張計測 warnings なし"
+  }
+}

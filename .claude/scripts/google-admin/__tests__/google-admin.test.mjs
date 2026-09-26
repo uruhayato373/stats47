@@ -434,3 +434,24 @@ test("collectAdUnits: ページングを辿る", async () => {
   assert.deepEqual(units.map((u) => u.id), ["1", "2"]);
   assert.equal(units[0].slotId, "12345");
 });
+
+test("AUTHORED_DIMENSIONS の parameterName は Web のコードが実際に送っている (改名で登録済み dimension が空になるのを防ぐ)", async () => {
+  const { readFileSync, readdirSync, statSync } = await import("node:fs");
+  const { join } = await import("node:path");
+  const root = join(import.meta.dirname, "../../../../apps/web/src");
+  const files = [];
+  const walk = (d) => {
+    for (const n of readdirSync(d)) {
+      const p = join(d, n);
+      if (statSync(p).isDirectory()) { if (n !== "__tests__" && n !== "node_modules") walk(p); }
+      else if (/\.(ts|tsx)$/.test(n) && !/\.test\./.test(n)) files.push(p);
+    }
+  };
+  walk(root);
+  const source = files.map((f) => readFileSync(f, "utf8")).join("\n");
+  // 送信されるのは object key (param: / "param": / 'param':) の形。コメントだけの出現は数えない。
+  const missing = AUTHORED_DIMENSIONS.map((d) => d.parameterName)
+    .filter((p) => !new RegExp(`(^|[\\s{,])["']?${p}["']?\\s*:`, "m").test(source)
+      && !new RegExp(`[{,]\\s*${p}\\s*[,}]`).test(source)); // 省略記法 { progress, ... }
+  assert.deepEqual(missing, [], `Web から送られていない parameter: ${missing.join(", ")}`);
+});

@@ -323,6 +323,17 @@
             "windowDays": 7
           },
           "snapshotHash": "461e1ae83db5582e44a92ae0bfeee54b5c0eeabba7c301925ba9e5d1cc9ed09b"
+        },
+        {
+          "date": "2026-09-26",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-17",
+            "periodEnd": "2026-09-23",
+            "windowDays": 7
+          },
+          "snapshotHash": "5dd0fe28927f5d0496ad4c360da58c66edb738742cb0040823233eca1723e4c1"
         }
       ]
     }

@@ -35,7 +35,7 @@
 ## 判断の規則
 
 - 施策固有の内訳が snapshot に無いときだけ照会する。GA4 は `node .claude/scripts/metrics/ga4-query.mjs --start YYYY-MM-DD --end YYYY-MM-DD --dims ... --metrics ... --filter 'field==v' --japan`、GSC は `node .claude/scripts/metrics/gsc-query.mjs --start YYYY-MM-DD --end YYYY-MM-DD --dims page --filter 'page*=/path'`（記法は各スクリプト冒頭。GSC は取得遅延があるので週次 snapshot と同じ rolling28d の期間に合わせる）。両方合わせて 1 run で 15 回まで。使ったコマンドはそのまま詳細ログの再現コマンドに書く。
-- GSC 施策を閾値エンジンで判定できるようにする目印は 3 つ: `[gsc-page: /path]`（対象ページのパス前方一致、複数可）・`デプロイ済 YYYY-MM-DD`・`[target: +N clicks]`。`latest.json` の `engine.gsc.missing` にある行のうち、対象ページとデプロイ日が行・詳細ログ・git 履歴から事実として確定できるものは目印を行に書き足す（`update` の `row` に含める）。目標値は、行か詳細ログに根拠（過去事例か計算式）付きの想定値が既に書かれているときだけ書き、根拠が無ければ書かずに不足として残す。提案は適用前なので `effect-verdict/cli.mjs --dry-run` には反映されない。目印を書いた施策は翌週から判定対象に入る。
+- GSC 施策を閾値エンジンで判定できるようにする目印は 3 つ: `[gsc-page: /path]`（対象ページのパス前方一致、複数可）・`デプロイ済 YYYY-MM-DD`・`[target: +N clicks]`。`latest.json` の `engine.gsc.missing` にある行のうち、対象ページとデプロイ日が行・詳細ログ・git 履歴から事実として確定できるものは目印を行に書き足す（`update` の `row` に含める）。目標値は、行か詳細ログに根拠（過去事例か計算式）付きの想定値が既に書かれているときだけ書き、根拠が無ければ書かずに不足として残す。提案は適用前なので `effect-verdict/cli.mjs --dry-run` には反映されない。目印を書いた施策は翌週から判定対象に入る。GA4 施策の目印は `[ga4-page: /path]`・`デプロイ済 YYYY-MM-DD`・`[target: +N pageviews]` で、書き足す条件は GSC と同じ。
 - Status 列に `effect/full`・`effect/partial`・`effect/none`・`effect/adverse` を付けない。効果の確定は閾値エンジンだけが行う。エンジンが確定した施策は、その verdict を詳細ログに転記して行を削除する。エンジンを通らない施策で効果を断定しない。
 - 行を削除してよいのは、行に書かれた完了条件・検証条件を実測が満たしたときだけ。満たさないときは evidence-based-judgment の状況 5 に従い、新しい期日・その期日に見る指標・動かなかった場合の次の一手を行に書く。
 - 認証切れ（`auth_required`）・入力の欠落・`insufficient-sample` で判定できないときは 0 や「効果なし」に読み替えず、判定不能の理由と再判定の条件を書く。
