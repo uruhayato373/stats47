@@ -1,56 +1,64 @@
 {
   "schemaVersion": 1,
-  "id": "35963238547-1",
-  "status": "implementation-needed",
-  "keyword": "高校教師 年収",
-  "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-  "needs": "「高校教師 年収」で検索する人は、教師を目指す学生・転職検討者・現職教員で、公立/私立を含めた一般的な平均年収の目安、初任給、手取り額を知りたくて検索している。都道府県別の格差そのものを目的に検索している可能性は低い。",
-  "gap": "対象記事(target-page.txt=タイトル/説明文、WebFetch確認=本文)は2023年都道府県別年収格差(和歌山1位894.2万円・秋田最下位369.5万円)の独自分析で、上位5県比較・地理分布・小中学校教員比較は詳しいが、検索者が最初に求める「全国平均はいくらか」「初任給・手取り」「公立/私立の違い」が本文に明記されていない。競合2ページはこれらを一次資料付きで明示しており、平均順位8.18・表示137に対しクリック0という乖離の一因と考えられる。",
-  "done": "記事冒頭(intro)に全国平均年収(出典:文部科学省「学校教員統計調査」等)と公立/私立の違いを1〜2文で追記する。本記事はブログ本文でeditableFileがnull(article.mdはR2 SSOTのため既存文字列置換の自動適用対象外)。実装は`.claude/skills/blog/brushup-blog`(`/brushup-blog --target queue`)経由でarticle.mdを編集し、quality-gate通過後R2 push・再デプロイ。完了条件: 本文冒頭に出典付き全国平均年収が掲載され、publish-blog.ymlのblockerがゼロ。",
-  "method": "intro",
+  "id": "36222910740-1",
+  "status": "no-change",
+  "keyword": "道の駅多い県",
+  "targetPath": "/blog/roadside-station-count-prefecture-gap",
+  "needs": "「道の駅多い県」を検索する人は、都道府県別の道の駅登録数で1位がどこか、上位・下位の具体的な数値を短時間で知りたい層。旅行前の下調べとしてクリック単位の実用情報(個別駅名・営業時間)まで求める層も一部いる。",
+  "gap": "WebSearch上位3件と比較: uub.jpは全47都道府県の順位表+面積/人口あたり正規化+棒グラフ。tabizine.jpは全県順位+個別駅の観光情報(旅行ガイド形式)。nlab.itmediaは上位3位の速報値のみで因果解説なし。対象ページ(target-page.txt/htmlで実測)は既に北海道128・岐阜55・長野54・東京1など上位下位の具体数値を本文冒頭で提示し、47都道府県を色分けした地図で全県比較を提供し、面積あたり密度を扱う関連記事へ内部リンクも設置済み。制度目的の解説と「数だけでは使いやすさは分からない」という独自の注意喚起もあり、検索意図に対する情報欠落は見当たらない。個別施設名・営業時間などtabizine/nlab型の旅行ガイド情報は、統計解説というサイトの編集方針上意図的に対象外。",
+  "done": "具体的な情報不足が見つからないため変更なし。直近7日でGSC平均掲載順位8.3・表示586・クリック1という観測はあるが、previousMethodがnull(このキーワードの初回評価)であり、CTRの低さだけを理由に文章を増やす根拠にはしない(順位のための増量は規約で禁止)。加えてselected.editableFileがnullで、docs/21_ブログ記事原稿/roadside-station-count-prefecture-gap/配下はREADME.mdのみでR2移行済みのため、記事本文ソースがこのリポジトリ内に存在しない。仮に追加提案があっても本パイプラインの文字列置換では自動適用できない状態。",
+  "method": "content",
   "competitors": [
     {
-      "url": "https://teachforjapan.org/journal/28878/",
-      "findings": "公立高校教師の平均年収680万円、初任給21〜23万円/月、手取り目安(年収500万で約390万)、公私の違い(公務員条例vs学校法人規程で初任給270〜590万円の幅)を文科省・総務省・人事院の一次資料付きで明示。FAQ6項目(残業代・部活手当等)も網羅し一般的な『いくらもらえるか』に直接回答する構成。"
+      "url": "https://uub.jp/pdr/t/r.html",
+      "findings": "全47都道府県の道の駅登録数を降順表で網羅し、面積1000km²あたり・人口100万人あたりの正規化指標と棒グラフも併載。ランキングそのものへの回答は最も網羅的だが、差が生じる理由の解説はほぼ無い。"
     },
     {
-      "url": "https://xn--pckua2a7gp15o89zb.com/%E9%AB%98%E6%A0%A1%E6%95%99%E5%93%A1%E3%81%AE%E5%B9%B4%E5%8F%8E%E3%83%BB%E6%99%82%E7%B5%A6",
-      "findings": "求人統計ベースの平均年収395万円、月給33万円、初任給25万円、時給(バイト1,196円/派遣1,500円)を掲載。国税庁『民間給与実態統計調査』と比較しつつ、地域別最高(大阪479万円)・最低(宮城354万円)の実額を提示する一般向け回答形式。"
+      "url": "https://tabizine.jp/article/632753/",
+      "findings": "47都道府県の順位を全て列挙し、上位県(北海道128・岐阜56・長野54)ごとに人気の個別道の駅(飲食・温泉・サウナ等)を紹介する旅行ガイド形式。ランキングと個別施設の実用情報まで扱うが、差の要因分析はほぼ無い。"
+    },
+    {
+      "url": "https://nlab.itmedia.co.jp/research/articles/474815/",
+      "findings": "国交省公開データ(2021年6月時点)に基づく上位3位(北海道129・岐阜56・長野52)の速報的ランキング記事。読者アンケートではなく統計集計で、各県の特性を一言添えるが因果分析は無く下位県の数値は非公開。"
     }
   ],
   "patches": [],
   "research": {
     "targetPage": {
-      "url": "https://stats47.jp/blog/high-school-teacher-salary-prefecture-gap",
+      "url": "https://stats47.jp/blog/roadside-station-count-prefecture-gap",
       "status": 200,
-      "fetchedAt": "2026-09-24T06:11:52.574Z",
-      "inputHash": "61a00f85d3aa07fbfe27e9572f0da2baf8cbf65da3834bcf473826fac04b1f2c",
+      "fetchedAt": "2026-09-26T06:10:51.116Z",
+      "inputHash": "461e1ae83db5582e44a92ae0bfeee54b5c0eeabba7c301925ba9e5d1cc9ed09b",
       "htmlFile": ".local/seo-rank-watch/target-page.html",
-      "htmlSha256": "bcd6d91bf51f5fb9613697118e11a3f3d788adfa0910157b9ba0bed41250baf1",
+      "htmlSha256": "6ae802cf49a97c0c249085004fe4060a9102185191ebf5ef0997b1892d96f122",
       "textFile": ".local/seo-rank-watch/target-page.txt",
-      "textSha256": "7b03b2446a7bd343c2a302fd1c007940a538cee36d8102b938d8b52e76c767fc"
+      "textSha256": "eb97a3a22d7b4c0b4be26a691dce6cad0c024350c2fe0168f0a1c986c6ce0b3d"
     },
     "toolCalls": [
       {
         "name": "WebSearch",
-        "target": "高校教師 年収"
+        "target": "道の駅多い県"
       },
       {
         "name": "WebFetch",
-        "target": "https://stats47.jp/blog/high-school-teacher-salary-prefecture-gap"
+        "target": "https://uub.jp/pdr/t/r.html"
       },
       {
         "name": "WebFetch",
-        "target": "https://teachforjapan.org/journal/28878/"
+        "target": "https://tabizine.jp/article/632753/"
       },
       {
         "name": "WebFetch",
-        "target": "https://xn--pckua2a7gp15o89zb.com/%E9%AB%98%E6%A0%A1%E6%95%99%E5%93%A1%E3%81%AE%E5%B9%B4%E5%8F%8E%E3%83%BB%E6%99%82%E7%B5%A6"
+        "target": "https://nlab.itmedia.co.jp/research/articles/474815/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/blog/roadside-station-count-prefecture-gap"
       }
     ]
   },
-  "selectedAt": "2026-09-24",
-  "inputHash": "61a00f85d3aa07fbfe27e9572f0da2baf8cbf65da3834bcf473826fac04b1f2c",
+  "selectedAt": "2026-09-26",
+  "inputHash": "461e1ae83db5582e44a92ae0bfeee54b5c0eeabba7c301925ba9e5d1cc9ed09b",
   "methods": [],
   "files": []
 }
