@@ -33,6 +33,7 @@ import { currentIsoWeek } from "../../search-growth/lib/state.mjs";
 import { createGscBlogWaveAdapter } from "../../blog/measure-gsc-impact.mjs";
 import { createAdsenseAdapter } from "../../metrics/measure-adsense-impact.mjs";
 import { loadGscImprovementsAdapter } from "../../metrics/lib/gsc-improvements-adapter.mjs";
+import { loadGa4ImprovementsAdapter } from "../../metrics/lib/ga4-improvements-adapter.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,6 +46,7 @@ export function loadAdapters(opts = {}) {
     createGscBlogWaveAdapter(opts.gsc ?? {}),
     createAdsenseAdapter(opts.adsense ?? {}),
     loadGscImprovementsAdapter(opts.gscImprovements ?? {}),
+    loadGa4ImprovementsAdapter(opts.ga4Improvements ?? {}),
   ];
 }
 
