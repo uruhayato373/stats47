@@ -145,7 +145,17 @@ test("missing を 0 と混同しない: CTR 欠損 → 候補なし / 需要あ�
   assert.ok(!t.includes("ctr-opportunity"), "欠損を 0 CTR として候補化してはいけない");
   assert.ok(t.includes("measurement-gap"), "需要ありでデータ欠損なら measurement-gap を出す");
   const mg = cands.find((c) => c.type === "measurement-gap");
-  assert.match(mg.expectedMetric, /ga4:sessions/);
+  assert.match(mg.expectedMetric, /ga4:pageviews/);
+});
+
+test("measurement-gap: GA4 source が出す pageviews があれば GA4 欠損として数えない", () => {
+  const url = "/ranking/has-ga4";
+  const cands = buildCandidates([
+    obs("gsc", "impressions", 200, { page: url }),
+    obs("ga4", "pageviews", 50, { page: url }),
+  ]);
+  const mg = cands.find((c) => c.type === "measurement-gap" && c.url === url);
+  assert.ok(!mg || !/ga4:/.test(mg.expectedMetric), "GA4 の値がある URL を ga4 欠損にしない");
 });
 
 test("server-risk: 5xx を検出し externalActionFlag は false (read-only 提案)", () => {

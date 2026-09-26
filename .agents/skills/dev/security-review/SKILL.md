@@ -53,7 +53,7 @@ rg -n "console\.(log|info|debug).*\b(key|token|secret|password|apiKey)\b" apps/w
 - [ ] URL パラメータ（`searchParams`）がサニタイズされている
 - [ ] ファイルアップロード（R2 連携）にサイズ・型チェックがある
 
-### Phase 3: SQL インジェクション防止（D1）
+### Phase 3: SQL インジェクション防止（Drizzle / エフェメラル SQLite・DuckDB）
 
 ```bash
 # Drizzle ORM 外の生 SQL を検出
@@ -73,11 +73,11 @@ rg -n "sql\`.*\$\{" packages/ apps/ --glob '*.ts' | grep -v "correlationAnalysis
 - [ ] ブログ記事の Markdown レンダリングが `react-markdown` 経由（raw HTML 無効）
 - [ ] 外部リンクに `rel="noopener noreferrer"` がある
 
-### Phase 5: Cloudflare Pages / R2 固有
+### Phase 5: Cloudflare Workers (OpenNext) / R2 固有
 
 **チェック項目:**
 - [ ] R2 パブリック URL（`storage.stats47.jp`）経由で非公開データが露出していない
-- [ ] Cloudflare Pages の環境変数が `NEXT_PUBLIC_` プレフィックスで適切に分離
+- [ ] Workers の環境変数が `NEXT_PUBLIC_` プレフィックスで適切に分離
 - [ ] Server Component からのみアクセスすべきデータが Client Component に漏洩していない
 - [ ] middleware.ts でのリクエストヘッダー検証が適切
 

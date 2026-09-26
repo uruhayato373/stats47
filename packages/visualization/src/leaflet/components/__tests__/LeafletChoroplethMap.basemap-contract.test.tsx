@@ -26,8 +26,8 @@ const mapApi = vi.hoisted(() => ({
 }));
 
 vi.mock("react-leaflet", () => ({
-  MapContainer: ({ children }: { children?: React.ReactNode }) => (
-    <div data-testid="map-container">{children}</div>
+  MapContainer: ({ children, zoomSnap }: { children?: React.ReactNode; zoomSnap?: number }) => (
+    <div data-testid="map-container" data-zoom-snap={zoomSnap}>{children}</div>
   ),
   TileLayer: ({ url }: { url: string }) => <div data-testid="tile-layer" data-url={url} />,
   GeoJSON: () => <div data-testid="geojson-layer" />,
@@ -100,6 +100,14 @@ describe("leaflet choropleth base map contract", () => {
     renderMap(TOPOLOGY, true);
     await waitFor(() => expect(mapApi.fitBounds).toHaveBeenCalled());
     expect(mapApi.on).toHaveBeenCalledWith('resize', expect.any(Function));
+  });
+  // 2026-09-25 UI 全面点検: 整数ズームだと 640〜768px で日本が収まる段の 1 つ下 (東アジア全体) まで下がった
+  it("uses fractional zoom only when fitting the full prefecture extent", () => {
+    const fitted = renderMap(TOPOLOGY, true);
+    expect(fitted.getByTestId("map-container").dataset.zoomSnap).toBe("0.25");
+    fitted.unmount();
+    const plain = renderMap(TOPOLOGY, false);
+    expect(plain.getByTestId("map-container").dataset.zoomSnap).toBe("1");
   });
   it("renders the base tile layer while the topology is still loading", () => {
     renderMap(null);

@@ -7,8 +7,8 @@ const { loadThemeChartResult } = vi.hoisted(() => ({
   loadThemeChartResult: vi.fn(),
 }));
 
-vi.mock('../theme-chart-result', () => ({
-  loadThemeChartResult: (...args: unknown[]) => loadThemeChartResult(...args),
+vi.mock('../../lib/batched-theme-chart-result', () => ({
+  loadThemeChartResultBatched: (...args: unknown[]) => loadThemeChartResult(...args),
 }));
 vi.mock('../ThemeChartResultRenderer', () => ({
   ThemeChartResultRenderer: () => <div data-testid="chart" />,

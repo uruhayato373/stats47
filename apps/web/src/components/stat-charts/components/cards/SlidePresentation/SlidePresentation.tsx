@@ -92,7 +92,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
           {/* フッター */}
           <div className="mt-6 pt-4 border-t border-border flex justify-between items-end">
             <div className="flex items-center gap-3">
-              <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center text-white text-xs font-bold">
+              <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center text-background text-xs font-bold">
                 {slide.id}
               </div>
               <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest leading-tight">
@@ -132,7 +132,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
               onClick={() => setCurrentSlide(slides.indexOf(s))}
               className={`h-2 rounded-full transition-all ${
                 slides.indexOf(s) === currentSlide
-                  ? "w-8 bg-blue-600"
+                  ? "w-8 bg-primary"
                   : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
               }`}
             />

@@ -19,6 +19,12 @@ declare global {
 }
 
 /**
+ * page_view の送信理由。landing = 着地、navigation = サイト内のページ移動、
+ * query_change = 同じページでクエリだけ変わった (年度・県・基準の切替など)。
+ */
+export type PageViewTrigger = "landing" | "navigation" | "query_change";
+
+/**
  * ページビューのパラメータ
  */
 export interface PageViewParams {

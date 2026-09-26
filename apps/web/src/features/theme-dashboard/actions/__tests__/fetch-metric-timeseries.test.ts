@@ -39,7 +39,10 @@ vi.mock("@/components/stat-charts/server", () => ({
   getEstatCacheStorage: vi.fn(async () => undefined),
 }));
 
-import { fetchMetricTimeseriesAction } from "../fetch-metric-timeseries";
+import {
+  fetchMetricTimeseriesAction,
+  fetchMetricTimeseriesBatchAction,
+} from "../fetch-metric-timeseries";
 
 /** 全国行を持たない 47 県観測 (平均で全国系列を作る形) */
 function rows(years: string[]) {
@@ -161,4 +164,35 @@ it('暦年の気象指標は旧snapshotの年度ラベルを補正する', async
   const result = await fetchMetricTimeseriesAction('average-temperature', '13000');
   expect(result.points).toEqual([{ year: '2024100000', yearName: '2024年（暫定値）', value: 18.5 }]);
   expect(fetchFormattedStats).not.toHaveBeenCalled();
+});
+
+/**
+ * まとめて取る経路 (2026-09-25)。指標カードごとに 1 件ずつ呼ぶと、ブラウザがサーバーアクションを
+ * 順番に処理するためテーマページで 48 件が一列に並び約 19 秒かかった。束ねた要求は
+ * 指標ごとに R2 を 1 回だけ読み、選択県と全国を同じ読み込みから作る。
+ */
+describe("fetchMetricTimeseriesBatchAction — まとめて取る", () => {
+  it("同じ指標の選択県と全国は R2 を 1 回だけ読み、要求と同じ順で返す", async () => {
+    readRankingItemFromR2.mockResolvedValue(item(ESTAT_CONFIG));
+
+    const results = await fetchMetricTimeseriesBatchAction([
+      { rankingKey: "total-population", areaCode: "13000" },
+      { rankingKey: "births", areaCode: "00000" },
+      { rankingKey: "total-population", areaCode: "00000" },
+    ]);
+
+    expect(readStatsValues).toHaveBeenCalledTimes(2);
+    expect(results).toHaveLength(3);
+    expect(results[0].points.map((p) => p.value)).toEqual([100, 100, 100]);
+    expect(results[2].points.map((p) => p.value)).toEqual([150, 150, 150]);
+    expect(results[0]).toEqual(await fetchMetricTimeseriesAction("total-population", "13000"));
+  });
+
+  it("上限を超える件数と不正な要求は受け付けない", async () => {
+    const tooMany = Array.from({ length: 61 }, (_, i) => ({ rankingKey: `k${i}`, areaCode: "00000" }));
+    await expect(fetchMetricTimeseriesBatchAction(tooMany)).rejects.toThrow();
+    await expect(
+      fetchMetricTimeseriesBatchAction([{ rankingKey: 1, areaCode: "00000" } as never]),
+    ).rejects.toThrow();
+  });
 });

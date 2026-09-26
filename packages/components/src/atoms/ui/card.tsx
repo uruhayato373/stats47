@@ -2,16 +2,21 @@ import * as React from "react";
 
 import { cn } from "../../lib/cn";
 
+/**
+ * カード外枠の単一定義。角丸と線色は各アプリの CSS 変数 (--card-radius / --card-outline) で決め、
+ * ここにはリテラル値を書かない。apps/web の SurfaceCard 系もこの定数を合成して使う。
+ * 各アプリの tailwind config に borderRadius.card と colors.card.outline が必要。
+ */
+export const CARD_SURFACE_CLASS =
+  "rounded-card border border-card-outline bg-card text-card-foreground shadow-sm";
+
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "bg-card text-card-foreground rounded-sm border border-border shadow-sm",
-      className
-    )}
+    className={cn(CARD_SURFACE_CLASS, className)}
     {...props}
   />
 ));

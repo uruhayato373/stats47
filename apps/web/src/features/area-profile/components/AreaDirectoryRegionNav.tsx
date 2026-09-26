@@ -5,7 +5,7 @@ import { cn } from '@stats47/components';
 import { SectionHeader } from '@/components/section';
 import { RailNavRowButton } from '@/components/surface';
 
-import { regionStyle } from '../constants/region-styles';
+import { regionStyle } from '../constants/region-styles.palette';
 
 import { useAreaDirectoryRegion } from './AreaDirectoryRegionContext';
 

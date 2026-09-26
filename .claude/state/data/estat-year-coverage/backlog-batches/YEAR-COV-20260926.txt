@@ -1,0 +1,10 @@
+actual-income-worker-households-per-month
+annual-precipitation
+annual-precipitation-days
+annual-sunshine-duration
+area-ratio-of-total
+average-relative-humidity
+average-temperature
+avg-propensity-to-consume-worker-households
+avg-savings-rate-worker-households
+bank-deposit-balance-per-person

@@ -15,11 +15,13 @@ import {
 import { buildGeoPublicFacilityMapModel } from '../lib/build-geo-public-facility-map-model';
 import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import {
   PUBLIC_FACILITY_BAND_COLORS,
   PUBLIC_FACILITY_BAND_LABELS,
   type PublicFacilityGroup,
 } from '../lib/geo-public-facility-evidence';
+
 
 import type { GeoPublicFacilityPrefDetail } from '@stats47/gis';
 import type { Feature, Geometry } from 'geojson';
@@ -34,14 +36,14 @@ function FitBounds({ bounds }: { bounds: LatLngBoundsExpression }) {
 }
 const populationColor = (change: number | null) =>
   change === null
-    ? '#94a3b8'
+    ? GEO_MAP_COLORS.populationChange.missing
     : change >= 0
-      ? '#0f766e'
+      ? GEO_MAP_COLORS.populationChange.growing
       : change >= -15
-        ? '#67a9cf'
+        ? GEO_MAP_COLORS.populationChange.mildDecline
         : change >= -30
-          ? '#fdbb84'
-          : '#b91c1c';
+          ? GEO_MAP_COLORS.populationChange.moderateDecline
+          : GEO_MAP_COLORS.populationChange.severeDecline;
 
 export function GeoPublicFacilityLeafletMap({
   detail,
@@ -66,13 +68,13 @@ export function GeoPublicFacilityLeafletMap({
   const style = (
     feature?: Feature<Geometry, Record<string, unknown>>
   ): PathOptions => ({
-    color: '#ffffff',
+    color: GEO_MAP_COLORS.outline,
     weight: 0.35,
     fillOpacity: 0.72,
     fillColor:
       view === 'overlap'
         ? (PUBLIC_FACILITY_BAND_COLORS[Number(feature?.properties.band)] ??
-          '#94a3b8')
+          GEO_MAP_COLORS.publicFacilityBandFallback)
         : populationColor(
             typeof feature?.properties.change === 'number'
               ? feature.properties.change
@@ -90,7 +92,7 @@ export function GeoPublicFacilityLeafletMap({
       minZoom={GEO_BASEMAP.minZoom}
       maxZoom={14}
       scrollWheelZoom={false}
-      className="isolate h-[480px] overflow-hidden rounded-none lg:h-[620px]"
+      className="isolate h-[480px] overflow-hidden rounded-card lg:h-[620px]"
       aria-label={`${detail.areaName}の公共施設と人口メッシュ`}
     >
       <TileLayer url={GEO_BASEMAP.url} attribution={GEO_BASEMAP.attribution} />
@@ -117,8 +119,8 @@ export function GeoPublicFacilityLeafletMap({
           center={[latitude, longitude]}
           radius={3.5}
           pathOptions={{
-            color: '#0f172a',
-            fillColor: '#f8fafc',
+            color: GEO_MAP_COLORS.pointMarker.stroke,
+            fillColor: GEO_MAP_COLORS.pointMarker.fill,
             fillOpacity: 1,
             weight: 1.5,
           }}

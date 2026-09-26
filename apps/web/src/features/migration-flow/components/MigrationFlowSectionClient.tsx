@@ -92,7 +92,7 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
             <MigrationFlowPlayer prefCode={prefCode} showSelector={false} />
           ) : (
             <div
-              className="w-full rounded-none border bg-muted"
+              className="w-full rounded-card border bg-muted"
               style={{ aspectRatio: "16 / 9" }}
             />
           )}

@@ -9,6 +9,7 @@ import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { ChartDataNode } from "../../types/base";
 import type { BarChartProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * BarChart - 横型の棒グラフ（単一系列 or 積み上げ）
@@ -278,6 +279,9 @@ export function BarChart({
                     .attr("font-size", baseFontSize)
                     .text(yLabel || ""));
         }
+
+        // 目盛ラベル・軸タイトルが viewBox 外へはみ出した分だけ viewBox を広げる
+        fitSvgViewBox(svgRef.current, width, height);
     }, [data, keys, valueKey, indexBy, width, height, marginTop, marginRight, marginBottom, marginLeft, xLabel, yLabel, colors, valueFormat, unit, showTooltip, hideTooltip, updateTooltipPosition, innerWidth, baseFontSize, hasKeys, showLegend, xDomainProp, mode]);
 
     return (

@@ -113,7 +113,7 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
 
       {/* 未選択時のガイドテキスト */}
       {(!codeA || !codeB) && (
-        <p className="mt-4 text-center text-sm text-amber-600">
+        <p className="mt-4 text-center text-sm text-warning">
           2つの都道府県を選択してください
         </p>
       )}

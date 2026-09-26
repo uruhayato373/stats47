@@ -10,6 +10,8 @@ import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 const CONSENT_COOKIE_NAME = "stats47_consent";
 const CONSENT_LS_KEY = "stats47_cookie_consent";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+/** バナーの高さ。スマホで文章が 2 行になっても収まる値 (余白と共有する) */
+const BANNER_HEIGHT_CLASS = "h-14";
 
 function setConsentCookie(value: string) {
   document.cookie = `${CONSENT_COOKIE_NAME}=${value}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
@@ -68,10 +70,15 @@ export function CookieConsentBanner() {
 
   if (!visible) return null;
 
+  // 最初の画面の下端 (地図の凡例・ボタン) に重なる面積を小さくするため、スマホでも文章とボタンを
+  // 1 行に並べる (縦積みで約 2 倍の高さになっていた。2026-09-25 UI 全面点検)。
+  // 固定表示なのでページ末尾が隠れないよう、同じ高さの余白を流れの中にも置く。
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 py-3 bg-background/95 backdrop-blur-sm border-t shadow-sm">
-      <div className={cn(SHELL_WIDTH_CLASS, "flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground")}>
-        <p>
+    <>
+    <div aria-hidden="true" className={BANNER_HEIGHT_CLASS} />
+    <div className={cn("fixed bottom-0 left-0 right-0 z-50 flex items-center bg-background/95 backdrop-blur-sm border-t shadow-sm", BANNER_HEIGHT_CLASS)}>
+      <div className={cn(SHELL_WIDTH_CLASS, "flex flex-row items-center justify-between gap-2 text-xs text-muted-foreground")}>
+        <p className="min-w-0 leading-snug">
           当サイトでは、利用状況の分析のために Cookie を使用しています。
         </p>
         <div className="flex items-center gap-2 shrink-0">
@@ -93,5 +100,6 @@ export function CookieConsentBanner() {
         </div>
       </div>
     </div>
+    </>
   );
 }

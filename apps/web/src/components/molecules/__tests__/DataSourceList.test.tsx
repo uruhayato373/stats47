@@ -24,10 +24,10 @@ describe("DataSourceList", () => {
 
     const section = screen.getByTestId("data-source-section");
     expect(within(section).getByRole("heading", { name: "データ出典" })).toBeInTheDocument();
-    expect(within(section).getByRole("link", { name: "家計調査（品目別）" })).toHaveAttribute(
-      "href",
-      "/survey/kakei-chousa",
-    );
+    const surveyLink = within(section).getByRole("link", { name: /^家計調査（品目別）/ });
+    expect(surveyLink).toHaveAttribute("href", "/survey/kakei-chousa");
+    // 出典の確認から本文へ戻れるよう、サイト内の調査ページも新しいタブで開く
+    expect(surveyLink).toHaveAttribute("target", "_blank");
     expect(section).toHaveTextContent("（総務省統計局）");
     const tables = within(section).getAllByRole("link", { name: /家計調査 月次/ });
     expect(tables.map((link) => link.getAttribute("href"))).toEqual([

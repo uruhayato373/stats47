@@ -57,6 +57,8 @@ function main() {
     auditGeneratedAt: input.generatedAt,
     reviewStatus: report?.status ?? "not-run",
     reviewError,
+    /** この週に agent が確認したページ (`page_key`)。確認しなかったページの指摘を「消えた」と扱わないために使う */
+    reviewedPages: input.pages.map((p) => p.template),
     summary: report?.summary ?? null,
     findings: report?.findings ?? [],
     rejected,

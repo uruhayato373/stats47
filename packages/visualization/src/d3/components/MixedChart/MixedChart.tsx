@@ -7,11 +7,13 @@ import {
   computeChartLayout,
   computeFontSize,
   computeMarginsByRatio,
+  leftMarginForTickLabels,
 } from "../../../shared/layout";
 import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { MixedChartProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * MixedChart - 棒グラフ（左Y軸）+ 折れ線グラフ（右Y軸）の2軸チャート
@@ -101,12 +103,6 @@ export function MixedChart({
 
     const catValues = data.map((d) => String(d[categoryKey] ?? ""));
 
-    // X軸: バンドスケール（棒の幅用）
-    const x = scaleBand()
-      .domain(catValues)
-      .range([marginLeft, width - marginRight])
-      .padding(0.2);
-
     // 左Y軸: 棒グラフ用
     const colKeys = columns.map((c) => c.dataKey);
     const colValues = data.flatMap((d) =>
@@ -126,6 +122,21 @@ export function MixedChart({
       .domain([0, max(lineValues) ?? 0])
       .nice()
       .range([height - marginBottom, marginTop]);
+
+    // 左軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
+    // (StackedAreaChart / LineChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
+    const leftTicks = yLeft.ticks(innerHeight / 40);
+    const plotLeft = leftMarginForTickLabels(
+      leftTicks.map((v) => leftAxisFormatter(Number(v))),
+      baseFontSize,
+      marginLeft,
+    );
+
+    // X軸: バンドスケール（棒の幅用）
+    const x = scaleBand()
+      .domain(catValues)
+      .range([plotLeft, width - marginRight])
+      .padding(0.2);
 
     // --- 棒グラフ描画 ---
     const barWidth = x.bandwidth() / Math.max(columns.length, 1);
@@ -226,15 +237,15 @@ export function MixedChart({
     // --- 左Y軸 ---
     svg
       .append("g")
-      .attr("transform", `translate(${marginLeft},0)`)
+      .attr("transform", `translate(${plotLeft},0)`)
       .call(
         axisLeft(yLeft)
-          .ticks(innerHeight / 40)
+          .tickValues(leftTicks)
           .tickFormat((v) => leftAxisFormatter(Number(v)))
       )
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
-          .attr("x2", innerWidth)
+          .attr("x2", width - plotLeft - marginRight)
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", columns[0]?.color ?? "#666").attr("dx", "-4"));
@@ -251,6 +262,8 @@ export function MixedChart({
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").remove())
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", lines[0]?.color ?? "#666"));
+
+    fitSvgViewBox(svgRef.current, width, height);
   }, [
     data, categoryKey, columns, lines, width, height,
     marginTop, marginRight, marginBottom, marginLeft,

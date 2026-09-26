@@ -2316,6 +2316,346 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
     "verifiedAt": null,
     "portfolioStatus": "pending-classification",
     "allowedPageTypes": []
+  },
+  {
+    "programRef": "a8:s00000009633001",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で資料の受取り完了（同月1件）",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633001",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633003",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で資料の受取り完了",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633003",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633004",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で資料の受取り完了",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633004",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633006",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "通信制高校の新規資料請求（15〜19歳）",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633006",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633007",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で通信制大学の新規資料請求",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633007",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633010",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "専門学校の資料請求（13〜22歳）",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633010",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633011",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "通信制高校の資料請求（13〜22歳）",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633011",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000009633012",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で大学の資料請求（中高生・保護者等）",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000009633012",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000011766001",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で工務店一括資料請求し、電話等で不正でないことを確認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000011766001",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000024982001",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規で蓄電池の無料見積り申込後30日以内に電話・メールで氏名と連絡先を確認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000024982001",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000023754003",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "document-request",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規でマンション投資資料請求後10日以内に電話本人確認（年収500万以上・23歳以上）",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000023754003",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000019724003",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規の法人がWEB問い合わせ後30日以内に氏名・住所・希望条件を確認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000019724003",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000026172001",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F3",
+    "conversionCondition": "広告主新規でゴルフ会員権のWEB問い合わせ後30日以内に内容確認",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000026172001",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000017718010",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規の事業者がPOSレジ導入のWEB申込後45日以内に無料相談完了",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000017718010",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000020187006",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規の法人・個人事業主が問い合わせ後60日以内に業務用カラオケを設置・導入",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000020187006",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000012553003",
+    "vertical": "economy",
+    "allowedVerticals": [
+      "economy"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規でブランド品のWEB査定申込後30日以内に買取成立",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000012553003",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
+  },
+  {
+    "programRef": "a8:s00000015223034",
+    "vertical": "population",
+    "allowedVerticals": [
+      "population"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "広告主新規で遺品整理のWEB・電話申込後30日以内に加盟店の手配完了",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000015223034",
+    "verifiedAt": "2026-09-25",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
   }
 ];
 
@@ -2583,5 +2923,6 @@ export const AFFILIATE_PROGRAM_REF_BY_AD_ID: Readonly<Record<string, string>> = 
   "af_60-oh-ya_a8_text_001": "a8:s00000023754006",
   "af_afb_14567_001": "afb:J14567N",
   "af_afb_15743_001": "afb:Q15743i",
-  "af_afb_16683_001": "afb:b16683T"
+  "af_afb_16683_001": "afb:b16683T",
+  "af_navi_a8_text_002": "a8:s00000020187006"
 };

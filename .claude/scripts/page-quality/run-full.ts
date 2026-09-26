@@ -23,9 +23,10 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { checkImages } from "./lib/check-images";
+import { checkSvgText } from "./lib/check-svg-text";
 import { createScreenshotSession, responsiveFindings, SCREENSHOT_PREFIX } from "./lib/screenshots";
 import { buildReviewInput, newUiViolations } from "./lib/ui-report";
-import { PAGE_TEMPLATES } from "./templates";
+import { browserPages, reviewPageKeys, type BrowserPage } from "./templates";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
 import { currentCommitSha } from "./lib/git-diff";
 import { enumerateAllUrls } from "./lib/enumerate-urls";
@@ -81,11 +82,15 @@ async function runWithConcurrency<T, R>(
 /** CI の後続 step (R2 push・agent・Issue) が読む作業ファイルの置き場。git には入れない。 */
 const CI_DIR = ".local/ci/page-quality";
 
+/** ブラウザ検査・撮影を同時に進めるページ数。1 ページ約 70 秒 (7 幅の撮影) なので 44 ページを直列だと 50 分かかる。 */
+const BROWSER_PAGE_CONCURRENCY = 3;
+
 /**
- * 代表URLだけブラウザで開き、静的解析の結果へ UI 指標とスクショ (スマホ・PC) を足す。
- * 代表URLが sitemap に無ければ追加する。
+ * 代表URLと「データの型の違い」(variants) をブラウザで開き、静的解析の結果へ UI 指標とスクショ (7 幅) を足す。
+ * 機械検査は毎週全ページを見る。agent の確認は `reviewPageKeys()` で代表URL + variants の 1/4 に絞る。
+ * 対象が sitemap に無ければ追加する。
  */
-async function measureRepresentativesInBrowser(
+async function measureBrowserPages(
   results: PageAuditResult[],
   baseUrl: string,
   runs: number,
@@ -93,34 +98,36 @@ async function measureRepresentativesInBrowser(
 ): Promise<void> {
   const session = await createBrowserMeasurementSession();
   const shots = await createScreenshotSession({ date });
-  try {
-    for (const template of PAGE_TEMPLATES) {
-      const browserResult = await auditUrl(baseUrl, template.representativeUrl, template.key, {
-        withBrowser: true,
-        browserSession: session,
-        browserRuns: runs,
-      });
-      try {
-        const captured = await shots.capture(browserResult.url, template.key);
-        browserResult.screenshots = captured.records;
-        const responsive = responsiveFindings(captured.records);
-        browserResult.metrics.responsive_layout_issues = responsive.count;
-        browserResult.ui_findings = [
-          ...(browserResult.ui_findings ?? []),
-          ...captured.failures,
-          ...responsive.findings.slice(0, 20),
-        ];
-      } catch (e) {
-        browserResult.ui_findings = [
-          ...(browserResult.ui_findings ?? []),
-          `screenshot_failed: ${(e as Error).message.split("\n")[0]}`,
-        ];
-      }
-      const index = results.findIndex((r) => r.path === template.representativeUrl);
-      if (index >= 0) results[index] = browserResult;
-      else results.push(browserResult);
-      console.log(`  ブラウザ検査: ${template.key} ${template.representativeUrl}`);
+  const measureOne = async (page: BrowserPage) => {
+    const browserResult = await auditUrl(baseUrl, page.url, page.template, {
+      withBrowser: true,
+      browserSession: session,
+      browserRuns: runs,
+    });
+    browserResult.page_key = page.key;
+    try {
+      const captured = await shots.capture(browserResult.url, page.key);
+      browserResult.screenshots = captured.records;
+      const responsive = responsiveFindings(captured.records);
+      browserResult.metrics.responsive_layout_issues = responsive.count;
+      browserResult.ui_findings = [
+        ...(browserResult.ui_findings ?? []),
+        ...captured.failures,
+        ...responsive.findings.slice(0, 20),
+      ];
+    } catch (e) {
+      browserResult.ui_findings = [
+        ...(browserResult.ui_findings ?? []),
+        `screenshot_failed: ${(e as Error).message.split("\n")[0]}`,
+      ];
     }
+    const index = results.findIndex((r) => r.path === page.url);
+    if (index >= 0) results[index] = browserResult;
+    else results.push(browserResult);
+    console.log(`  ブラウザ検査: ${page.key} ${page.url}`);
+  };
+  try {
+    await runWithConcurrency(browserPages(), BROWSER_PAGE_CONCURRENCY, measureOne);
   } finally {
     await session.close();
     await shots.close();
@@ -162,9 +169,14 @@ async function main() {
   }
 
   if (opts.browserRepresentative && !opts.withBrowser) {
-    await measureRepresentativesInBrowser(results, opts.baseUrl, opts.browserRuns, generatedAt.slice(0, 10));
+    await measureBrowserPages(results, opts.baseUrl, opts.browserRuns, generatedAt.slice(0, 10));
   }
 
+  // checkImages が image_urls を消す前に、記事チャート SVG の文字を検査する
+  const svgText = await checkSvgText(results);
+  console.log(
+    `[page-quality] 記事チャートSVG: ${svgText.checked} 枚 / 文字の不具合 ${svgText.withIssues} / 取得失敗で未確認 ${svgText.unverified}`
+  );
   const images = await checkImages(results);
   console.log(
     `[page-quality] 画像確認: ${images.checked} 件 / 壊れ ${images.broken} / 通信失敗で未確認 ${images.unverified}`
@@ -192,13 +204,13 @@ async function main() {
   mkdirSync(CI_DIR, { recursive: true });
   writeFileSync(join(CI_DIR, "ui-new-violations.json"), `${JSON.stringify(fresh, null, 2)}\n`);
   if (opts.browserRepresentative) {
-    const input = buildReviewInput(run);
+    const input = buildReviewInput(run, reviewPageKeys(generatedAt.slice(0, 10)));
     writeFileSync(join(CI_DIR, "review-input.json"), `${JSON.stringify(input, null, 2)}\n`);
     const latestIndex = join(".local/r2", SCREENSHOT_PREFIX, "latest", "index.json");
     mkdirSync(join(".local/r2", SCREENSHOT_PREFIX, "latest"), { recursive: true });
     writeFileSync(
       latestIndex,
-      `${JSON.stringify({ generatedAt, date, pages: input.pages.map((p) => ({ template: p.template, url: p.url })) }, null, 2)}\n`
+      `${JSON.stringify({ generatedAt, date, pages: run.results.filter((r) => r.page_key).map((r) => ({ template: r.page_key, url: r.url })) }, null, 2)}\n`
     );
   }
   console.log(`[page-quality] UI 違反の新規: ${fresh.violations.length} 件${fresh.firstRun ? " (前回結果なし=初回)" : ""}`);

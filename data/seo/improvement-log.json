@@ -290,6 +290,39 @@
             "windowDays": 7
           },
           "snapshotHash": "edd75514e1c51908217e360fdc3ac01ff445153c89a2aac7206a1b0c239d7865"
+        },
+        {
+          "date": "2026-09-25",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-16",
+            "periodEnd": "2026-09-22",
+            "windowDays": 7
+          },
+          "snapshotHash": "3f03bd020097fee0a0cf2a4b5eb96964d2f7ae9c747c7cd3bf7edcf30359df6a"
+        },
+        {
+          "date": "2026-09-25",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-16",
+            "periodEnd": "2026-09-22",
+            "windowDays": 7
+          },
+          "snapshotHash": "950876f59ed4706e070e36090af39cbf9966cc5692fe7c77707ceb959c94f4ab"
+        },
+        {
+          "date": "2026-09-26",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-09-17",
+            "periodEnd": "2026-09-23",
+            "windowDays": 7
+          },
+          "snapshotHash": "461e1ae83db5582e44a92ae0bfeee54b5c0eeabba7c301925ba9e5d1cc9ed09b"
         }
       ]
     }

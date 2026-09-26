@@ -82,3 +82,30 @@ export function computeFontSize(
   const base = Math.min(width, height);
   return Math.max(minFontSize, Math.round(base * ratio));
 }
+
+/**
+ * 文字列の描画幅をフォントサイズから見積もる。
+ * 英数字・記号は 0.6em、それ以外 (万・億・％ などの全角) は 1em とする。
+ * SSR では getComputedTextLength が使えないため、実測ではなく見積もりで余白を決める。
+ */
+export function estimateTextWidth(text: string, fontSize: number): number {
+  let em = 0;
+  for (const ch of text) em += /[\x20-\x7e]/.test(ch) ? 0.6 : 1;
+  return em * fontSize;
+}
+
+/** d3 の axisLeft がラベルを軸から離す距離 (tickSize 6 + tickPadding 3) に、各チャートの dx -4 と余裕 3 を足した値 */
+const LEFT_AXIS_LABEL_OFFSET = 16;
+
+/**
+ * 縦軸の目盛りラベルが左端で切れない左余白を返す。比率で決めた余白が足りるならそのまま使う。
+ * 幅の狭いグラフで「1,400万」の先頭が切れて「400万」と読めた (2026-09-25) ための下限。
+ */
+export function leftMarginForTickLabels(
+  labels: string[],
+  fontSize: number,
+  minimum: number,
+): number {
+  const widest = Math.max(0, ...labels.map((label) => estimateTextWidth(label, fontSize)));
+  return Math.max(minimum, Math.ceil(widest + LEFT_AXIS_LABEL_OFFSET));
+}

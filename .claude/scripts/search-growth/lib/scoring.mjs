@@ -367,7 +367,9 @@ function measurementGap(bucket, cfg) {
   const imp = num(val(bucket, "gsc", "impressions"));
   if (imp == null || imp < cfg.minImpressionsForCtr) return [];
   const missing = [];
-  if (val(bucket, "ga4", "sessions") === undefined) missing.push("ga4:sessions");
+  // GA4 source (sources.mjs) が出すのは pageviews / users / avgSessionDuration / engagementRate。
+  // 出力されない sessions を見ると、表示のある URL がすべて measurement-gap になる。
+  if (val(bucket, "ga4", "pageviews") === undefined) missing.push("ga4:pageviews");
   if (val(bucket, "psi", "lcp_ms", "mobile") === undefined) missing.push("psi:lcp_ms(mobile)");
   if (val(bucket, "crux", "lcp_p75_category") === undefined) missing.push("crux:lcp_p75");
   if (missing.length === 0) return [];

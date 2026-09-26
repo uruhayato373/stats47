@@ -19,10 +19,16 @@ paths:
   - **全ページの左レールは共通境界 `992px` から出す**。992px 時も本文幅 656px を確保でき、1024px 未満になりやすいアプリ内ブラウザでも横幅を有効利用できる。列幅・gap・表示境界・自然スクロールは `LeftRailLayout` だけが持ち、Shell や feature に複製しない。右レールの `lg` / `xl` 境界は別契約として維持する。境界は別だが、Surface・見出し・リンク行・余白の視覚契約は左右共通（正典 04「レール UI 契約」）。部品は `RailStack` / `RailCard` / `RailNavRow` / `RailCategoryList`。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
   - **992px 未満で操作ナビを隠す場合は、同等の操作を本文上部へ置く**。PageShell は `leftRailNarrowBehavior="hide"`、ArticleShell は feature の狭幅ナビを使い、どちらも代替 UI に `LEFT_RAIL_NARROW_ONLY_CLASS` を付ける。関連リンク型の PageShell 左レールは既定 `stack` で本文後へ積んでよい。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
-- **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
+- **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0` / `--card-radius: 0`）。値はトークンだけで決め、クラスを役割で選ぶ（2026-09-25）**:
+  - カード外枠・その仮表示・地図/チャート枠 → `rounded-card`（`--card-radius`）。カード本体は `CARD_SURFACE_CLASS`（`@stats47/components`）を使い、`SurfaceCard` 系もこれを合成している
+  - ボタン・ボタン風リンク・ドロップダウン → `rounded-md`、カード内の小タイル・バッジ・サムネ → `rounded-sm`（どちらも `--radius`）
+  - 形として四角であるべきもの（凡例の色見本・タイル地図のマス・下線タブ・一覧行）だけ `rounded-none`。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）
+  - **本文の中に置く部品**（callout・本文内のランキングカード・コードブロック）→ `rounded-content`（`--content-radius` = 6px）。レイアウトのカード外枠とは役割が別なので別トークン。使えるファイルは `check-design-system.mjs` の `ARTICLE_BODY_COMPONENT_FILES` に限り、そのファイルでは `rounded-card` / `rounded-lg` を使わない（`content-radius-only-in-article-body` / `article-body-parts-use-content-radius`）。callout の種類の定義は `callout-config.ts`、表示は `Callout.tsx`（左の色バーなし）
+  - `rounded-xl`/`2xl`/任意値の手動付与は禁止。角丸を採用するときは `globals.css` のトークンと `check-design-system.mjs` の `no-nonzero-radius-token` 許容値を同じ差分で変える
+- **カード外枠の線と地**: ライトモードのページ地は記事ゾーンを含めサイト全体で薄グレー（`--background`）1 値（dark の記事ゾーンは `.dark .reading-zone` の別値）。カード外枠の線色は `--card-outline`（Web は `transparent`、管理画面は `--border`）で、白カードとの明暗で区切る。影は `shadow-sm`。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
 
-## Sticky aside の max-h 必須ルール（★削除禁止・2026-06-06）
+## Sticky aside の max-h 必須ルール（削除禁止）
 
 CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-h-[calc(100vh-5.5rem)]` と `overflow-hidden` または `overflow-y-auto` を付ける**。
 
@@ -31,7 +37,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - **削除した事例**: 2026-06-06、subagent が blog/category/ranking ページの aside から `max-h` を除去してフッターが非表示になった（commit `5d9afb24`、revert `a2c76216`・`b18be52a`）。
 
 ```tsx
-// ✅ 必須パターン (blog/[slug]/page.tsx の右 aside)
+// ✅ 必須パターン (3 カラムの grid で aside を追従させる場合)
 <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20
                   lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
 
@@ -44,8 +50,9 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 適用箇所:
 
-- `apps/web/src/app/blog/[slug]/page.tsx` — 左・右 aside
 - `apps/web/src/app/category/[categoryKey]/page.tsx` — 右 aside
+- (ブログ詳細 `blog/[slug]/page.tsx` は `ArticleShell` の flex レールで、追従する aside を持たない。
+  目次は 2026-09-25 に本文上部へ移し、レールの追従領域を廃止した)
 - 3カラムレイアウトを持つすべての新規ページ
 
 独立スクロール禁止の適用箇所:
@@ -54,7 +61,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - `apps/web/src/components/rail/RightRailWidgets.tsx`
 - 右レールに渡す widget
 
-## コンポーネント配置の 3 tier（★新規コンポーネント追加前に必読・配置の SSOT）
+## コンポーネント配置の 3 tier（新規コンポーネント追加前に必読・配置の SSOT）
 
 新規 UI を作るときは、まず**どの tier に置くか**を決める。下位 tier に既にあるものを feature 内に再実装しない
 （再実装が共通化を阻む最大要因。実測で feature 層の重複が散在 → 恒久ルールは `docs/01_技術設計/04_デザインシステム.md` に集約）。
@@ -74,9 +81,10 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
   Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
 - **Card は基底（① `Card` / ② `SurfaceCard`）から作る。** feature 内に独自カード枠を新規定義しない（Card 乱立の解消は Phase 0-1）。
 - **カード内カードは禁止。** `SurfaceCard` / `SurfaceSection` / `SurfaceLinkCard` / `RailCard` / `ChartPanel` 等の外枠を相互にネストしない。外側を通常の `section` にするか、内側を border と shadow のない list / table / link row にする。`npm run design-system:check -w apps/web` の `no-nested-card-surfaces` が JSX 親子関係と `getSurfaceCardClassName` のネストを検査する。レール契約の機械ゲート = `rail-*` rule（`rail-contract-audit.mjs`）。
+- **色付きの順位チップ（「N位」）は `RankBadge`（`@/components/atoms/RankBadge`）だけで描く。** 幅を固定せず最小幅で揃え、折り返さない（市区町村の「1741位」も伸びて収まる）。色は `tone`（`positive` / `negative`、向きのない順位は `rankToneByPosition(rank, total)`）で選ぶ。表のセル・補足の小さな文字・文章中の「N位」はチップにせず文字のまま書く。`design-system:check` の `rank-chip-must-use-rank-badge` が背景色つきの手書き「N位」を拒否する。メダルのアイコン表示（`RankingRankBadge`）は別部品。
 - **FAQ / 定義 / AI考察など本文の開閉 UI は `@/components/content` を再利用する。** 複数FAQ=`FaqSection`、単一本文=`ContentDisclosure`。feature 内の独自 Radix Accordion、`▼` / `▲` 文字、`text-lg` 見出しを追加しない。表示契約と機械ゲートの正典は `docs/01_技術設計/04_デザインシステム.md`。
 
-## チャートコンポーネント（★新規追加前に必読）
+## チャートコンポーネント（新規追加前に必読）
 
 チャート・グラフを追加するときは先に **`.claude/rules/chart-component-standards.md`** のカタログを確認する。
 既存の `MiniLineChart` / `MiniBarChart` / `ChartCard` 等が使えるケースでは再実装しない。
@@ -90,11 +98,12 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 詳細は `.claude/design-system/prohibited.md` を参照。以下は特に重要な禁止項目:
 
-- `text-black` 禁止 → `text-slate-900` or `text-foreground`
+- `text-black` 禁止 → `text-foreground`
 - `shadow-lg` / `shadow-2xl` 禁止 → `shadow-sm`（デフォルト）/ `shadow-md`（hover）
 - `tracking-tight` 禁止 → 日本語の可読性低下のため削除
 - カラーバー（`border-t-4`, `border-l-4` + 色付き）禁止 → 全周 `border` で統一
-- `text-gray-400` を本文に使用禁止 → `text-muted-foreground` or `text-slate-500`
+- `text-gray-400` を本文に使用禁止 → `text-muted-foreground`
+- **生パレット色（`slate-500` / `emerald-600` 等）を UI に直書きしない** → 意味トークン（`foreground` / `muted-foreground` / `border` / `positive` / `negative` / `warning` / `info` と各 `-soft`）。カテゴリ・性別・メダル等の識別配色だけ `*.palette.ts` に集める。`design-system:check` の `no-raw-palette-color` が web と packages/components・visualization を検査する
 - カード hover: `hover:shadow-md` まで（`hover:shadow-lg` 禁止）
 
 デザインレビュー: `/design-review` スキルで違反チェック可能

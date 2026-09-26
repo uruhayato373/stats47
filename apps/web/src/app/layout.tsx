@@ -36,7 +36,9 @@ import { MobileNavDrawer } from "@/components/organisms/MobileNavDrawer";
 
 import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
 import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
+import { NavClickTracker } from "@/lib/analytics/components/NavClickTracker";
 import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
+import { ReadProgressTracker } from "@/lib/analytics/components/ReadProgressTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
 import { getRequiredBaseUrl } from "@/lib/env";
 import {
@@ -138,6 +140,8 @@ export default function RootLayout({
         {/* ページビュートラッカー（ルート変更を検知して自動トラッキング） */}
         <Suspense fallback={null}>
           <PageViewTracker />
+          <NavClickTracker />
+          <ReadProgressTracker />
         </Suspense>
         {/* テーマプロバイダー（ダークモード対応） */}
         <ThemeProvider>

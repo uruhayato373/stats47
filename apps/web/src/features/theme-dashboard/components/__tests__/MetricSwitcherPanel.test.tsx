@@ -17,8 +17,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  */
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
-vi.mock("../../actions", () => ({
-  fetchMetricTimeseriesAction: (...args: unknown[]) => fetchMock(...args),
+vi.mock("../../lib/batched-metric-timeseries", () => ({
+  fetchMetricTimeseriesBatched: (...args: unknown[]) => fetchMock(...args),
 }));
 
 const { trackNavClickMock } = vi.hoisted(() => ({ trackNavClickMock: vi.fn() }));

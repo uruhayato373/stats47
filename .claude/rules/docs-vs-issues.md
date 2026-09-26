@@ -179,6 +179,7 @@ updated: 2026-MM-DD
 - backlog のカードは tier セクション（🔴🟡🟢🟣）の中に置き、`タグ:` 行（カテゴリ/種類/実行/検証/起票/期日）を付ける。タグ無しは分類待ちとして検査が集計する。
 - 実行中のカードには完了条件を本文に付ける。外部変更や破壊的操作には停止条件・禁止・承認境界も付ける。作業中は `[進行中]` を立てる。
 - 月次・週次計画はカードのIDを参照し、タグや詳細を複製しない。
+- 戦略レーン: 優先順位の正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §5 のレーン表。backlog の `[レーン:]`・月次 `focus_lanes`・週次 Must の整合は `strategy-lanes.cjs` が DG073〜078 で検査する (管理画面 `/strategy/lanes`)。
 - 完了・撤退・supersededはカードまたは行を削除し、Git履歴へ委ねる。
 
 ## 整理・削除契約
@@ -199,7 +200,7 @@ updated: 2026-MM-DD
 | 層 | コマンド・入口 | 責務 |
 |---|---|---|
 | 自動修正 | `npm run docs:fix` | 生成マーカー内の実装計画INDEXだけを実ファイルから再生成 |
-| ローカル検査 | `npm run docs:check` | 構造、frontmatter、固定構成、TODO、INDEX、リンク悪化 |
+| ローカル検査 | `npm run docs:check` | 構造、frontmatter、固定構成、TODO、INDEX、リンク悪化、docsから削除済みコード(path・npm script・`/skill`)への参照 |
 | 完全棚卸し | `npm run docs:check:all` | テスト、構造、鮮度、リンク、orphan候補 |
 | agent運用 | `/maintain-docs` | 重複、統合先、削除可否を意味レビュー |
 | Claude Stop hook | `.claude/hooks/check-docs-on-stop.js` | 文書差分があるturnの終了前に構造・リンクerrorを差し戻す |

@@ -44,6 +44,7 @@ export function RankingFunnelCta({ rankingKey }: RankingFunnelCtaProps) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        data-click-owner="cta"
         onClick={() =>
           trackCtaClick({
             ctaId: "ranking_to_komuin_ai_guide",
@@ -52,7 +53,7 @@ export function RankingFunnelCta({ rankingKey }: RankingFunnelCtaProps) {
             rankingKey,
           })
         }
-        className="mt-3 inline-flex items-center gap-1 rounded-none border border-primary/30 bg-card px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/10"
+        className="mt-3 inline-flex items-center gap-1 rounded-md border border-primary/30 bg-card px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/10"
       >
         e-Stat × Claude Code 完全ガイドを見る
         <ArrowRight className="h-3.5 w-3.5" />

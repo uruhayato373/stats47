@@ -2,6 +2,8 @@
  * GA4 カスタムイベントトラッキング
  */
 
+import { currentPageContext } from './page-context';
+
 function sendEvent(name: string, params: Record<string, unknown>): void {
   if (typeof window === 'undefined' || !window.gtag) return;
   window.gtag('event', name, params);
@@ -90,6 +92,91 @@ export function trackCsvDownload(params: {
     file_extension: 'csv',
     ranking_key: params.rankingKey,
     year_code: params.yearCode,
+  });
+}
+
+export const CSV_DOWNLOAD_PURPOSES = ['work', 'study', 'media', 'personal', 'other'] as const;
+export type CsvDownloadPurpose = (typeof CSV_DOWNLOAD_PURPOSES)[number];
+
+/**
+ * CSV ダウンロード後の任意アンケート (用途 1 問) の回答を GA4 に送信する。
+ * 個人情報は送らない。行政実務の利用者を見つける入口 (CSV-DL-INTENT-SURVEY-01)。
+ */
+export function trackCsvDownloadPurpose(params: {
+  rankingKey: string;
+  purpose: CsvDownloadPurpose;
+}): void {
+  sendEvent('csv_download_purpose', {
+    ranking_key: params.rankingKey,
+    download_purpose: params.purpose,
+  });
+}
+
+/** 利用者の用途 (CSV 後アンケートの回答) をユーザー単位で保存する。以後の全イベントを用途別に分けられる。 */
+export function setDeclaredPurpose(purpose: CsvDownloadPurpose): void {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  window.gtag('set', 'user_properties', { declared_purpose: purpose });
+}
+
+/** お問い合わせフォームへの遷移 (key event)。行政資料レーンの聞き取り相手を見つける入口。 */
+export function trackContactClick(params: { source: string }): void {
+  sendEvent('contact_click', { link_position: params.source, ...currentPageContext() });
+}
+
+// ─── 画面内の操作 (固定語彙) ─────────────────────────────────
+
+export const UI_ACTIONS = [
+  'tab_switch',
+  'year_change',
+  'basis_change',
+  'area_type_change',
+  'region_select',
+  'expand',
+  'filter',
+] as const;
+export type UiAction = (typeof UI_ACTIONS)[number];
+
+export const UI_TARGETS = [
+  'map',
+  'table',
+  'chart',
+  'metric',
+  'faq',
+  'ai_insight',
+  'search',
+] as const;
+export type UiTarget = (typeof UI_TARGETS)[number];
+
+/**
+ * 画面内の操作 (タブ・年度・基準・地域選択・開閉・絞り込み) を固定語彙で送る。
+ * 値の語彙を増やすときは UI_ACTIONS / UI_TARGETS と台帳を同時に更新する (自由入力を送らない)。
+ */
+export function trackUiInteraction(params: {
+  action: UiAction;
+  target: UiTarget;
+  areaCode?: string;
+}): void {
+  sendEvent('ui_interaction', {
+    ui_action: params.action,
+    ui_target: params.target,
+    ...(params.areaCode ? { area_code: params.areaCode } : {}),
+    ...currentPageContext(),
+  });
+}
+
+export const READ_PROGRESS_STEPS = [25, 50, 75, 100] as const;
+export type ReadProgressStep = (typeof READ_PROGRESS_STEPS)[number];
+
+/** 本文をどこまで読んだか (1 ページにつき各段階 1 回)。 */
+export function trackReadProgress(progress: ReadProgressStep): void {
+  sendEvent('read_progress', { progress, ...currentPageContext() });
+}
+
+/** 検索結果のクリック。result_position は 1 始まりの表示順位。 */
+export function trackSearchResultClick(params: { resultType: string; resultPosition: number }): void {
+  sendEvent('search_result_click', {
+    result_type: params.resultType,
+    result_position: params.resultPosition,
   });
 }
 
@@ -235,6 +322,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * - `blog_source` / `ranking_source` / `municipality_source` / `geo_source`:
  *   ページ末尾「データ出典」(`DataSourceList`) から調査ハブ・統計表・データセットへの導線。
  *   右レールの調査カード (`*_survey`) と混ぜないため別の値にする (2026-09-25 値追加)
+ * - `blog_ranking_card`: ブログ本文の図の直下にあるランキングカード (地図 + 上位3県)。
+ *   `nav_label` は rankingKey (2026-09-25 値追加)
  * - `theme_evidence`: 白書・統計の論点からランキング・関連テーマ・記事へ進む導線。
  *   `nav_label` は `<topic-key>:<target-type>:<target-key>`。
  * - `theme_ranking` / `theme_blog`: テーマページの指標一覧・比較表・詳細チャートから
@@ -302,13 +391,51 @@ export type NavSurface =
   | 'blog_source'
   | 'ranking_source'
   | 'municipality_source'
-  | 'geo_source';
+  | 'geo_source'
+  // ブログ本文の図の直下にあるランキングカード (`<source-link>`・地図 + 上位3県)。
+  // nav_label は rankingKey (2026-09-25 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
+  | 'blog_ranking_card'
+  // 共通のクリック監視 (NavClickTracker) が拾うもの (2026-09-26 値追加。登録済み dimension の値追加):
+  // ブログの目次 / 導線名の付いていないサイト内リンク
+  | 'blog_toc'
+  | 'unlabeled'
+  // 全ページ共通の領域 (2026-09-26 値追加・NAV-CLICK-COVERAGE-01 P2。登録済み dimension の値追加)
+  | 'footer'
+  | 'breadcrumb'
+  | 'tag'
+  | 'blog_body';
+
+/** 直近に部品側で送った nav_click。共通のクリック監視が同じクリックを二重に送らないための記録 */
+let lastManualNavClick: { href: string; at: number } | null = null;
+
+/**
+ * 同じクリックで部品側がすでに nav_click を送ったか。共通の監視は送信を 1 tick 遅らせてからこれで確かめる
+ * (部品の onClick は同じクリックの処理中に同期で走るので、1 tick 後には記録が残っている)。
+ */
+export function wasNavClickSentSince(href: string, since: number): boolean {
+  return lastManualNavClick !== null && lastManualNavClick.at >= since && lastManualNavClick.href === href;
+}
 
 export function trackNavClick(params: {
   label: string;
   href: string;
   surface: NavSurface;
 }): void {
+  lastManualNavClick = { href: params.href, at: performance.now() };
+  sendEvent('nav_click', {
+    event_category: 'navigation',
+    event_label: params.label,
+    nav_label: params.label,
+    nav_href: params.href,
+    nav_surface: params.surface,
+  });
+}
+
+/**
+ * 共通のクリック監視 (NavClickTracker) が送る nav_click。部品側の送信記録 (二重送信の判定) は更新しない。
+ * 値の意味は trackNavClick と同じ。
+ */
+export function trackAutoNavClick(params: { label: string; href: string; surface: string }): void {
   sendEvent('nav_click', {
     event_category: 'navigation',
     event_label: params.label,

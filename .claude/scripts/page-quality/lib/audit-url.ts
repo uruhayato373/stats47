@@ -58,6 +58,7 @@ export async function auditUrl(
       metrics.ad_duplicate_count = analysis.ad_duplicate_count;
       metrics.empty_headings = analysis.empty_headings;
       metrics.duplicate_data_source_sections = analysis.duplicate_data_source_sections;
+      metrics.external_links_same_tab = analysis.external_links_same_tab;
       imageUrls = analysis.image_urls;
       jsonldTypeCounts = analysis.jsonld_type_counts;
       jsonldErrors = analysis.jsonld_errors;
@@ -86,6 +87,7 @@ export async function auditUrl(
     metrics.small_tap_targets = browserMetrics.small_tap_targets;
     metrics.clipped_text = browserMetrics.clipped_text;
     metrics.overlapping_tap_targets = browserMetrics.overlapping_tap_targets;
+    metrics.chart_text_issues = browserMetrics.chart_text_issues;
     metrics.a11y_violations = browserMetrics.a11y_violations;
     uiFindings = browserMetrics.ui_findings;
   }

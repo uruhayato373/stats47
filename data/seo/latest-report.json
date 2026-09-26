@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-25",
+  "date": "2026-09-26",
   "period": {
-    "periodStart": "2026-09-16",
-    "periodEnd": "2026-09-22",
+    "periodStart": "2026-09-17",
+    "periodEnd": "2026-09-23",
     "windowDays": 7
   },
-  "inputHash": "edd75514e1c51908217e360fdc3ac01ff445153c89a2aac7206a1b0c239d7865",
+  "inputHash": "461e1ae83db5582e44a92ae0bfeee54b5c0eeabba7c301925ba9e5d1cc9ed09b",
   "movements": [
     {
-      "keyword": "うどん 消費量 ランキング",
-      "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
-      "before": 54,
-      "after": 9.2,
-      "beforeImpressions": 1,
-      "impressions": 5,
-      "change": 44.8
+      "keyword": "日本人口ランキング",
+      "targetPath": "/municipalities/ranking/japanese-population",
+      "before": 47,
+      "after": 94,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -47
     },
     {
       "keyword": "出生率が高い都道府県",
@@ -23,8 +23,17 @@
       "before": 43,
       "after": 1,
       "beforeImpressions": 1,
-      "impressions": 1,
+      "impressions": 3,
       "change": 42
+    },
+    {
+      "keyword": "日照時間ランキング",
+      "targetPath": "/blog/annual-sunshine-duration-prefecture-gap",
+      "before": 39,
+      "after": 1,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 38
     },
     {
       "keyword": "都道府県",
@@ -45,15 +54,6 @@
       "change": -37
     },
     {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/ranking/railway-passengers",
-      "before": 9,
-      "after": 42.734177215189874,
-      "beforeImpressions": 1,
-      "impressions": 79,
-      "change": -33.734177215189874
-    },
-    {
       "keyword": "旭川 人口",
       "targetPath": "/areas/01000/cities/01204/population",
       "before": 42,
@@ -64,39 +64,39 @@
     },
     {
       "keyword": "site:stats47.jp",
-      "targetPath": "/areas/15000",
-      "before": 10,
-      "after": 43.05952380952381,
+      "targetPath": "/ranking/railway-passengers",
+      "before": 9,
+      "after": 41.91358024691358,
       "beforeImpressions": 1,
-      "impressions": 84,
-      "change": -33.05952380952381
+      "impressions": 81,
+      "change": -32.91358024691358
     },
     {
-      "keyword": "チーズ 消費量",
-      "targetPath": "/ranking/cheese-consumption-quantity",
-      "before": 39.5,
-      "after": 7,
-      "beforeImpressions": 2,
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/15000",
+      "before": 10,
+      "after": 42.22093023255814,
+      "beforeImpressions": 1,
+      "impressions": 86,
+      "change": -32.22093023255814
+    },
+    {
+      "keyword": "高校 教師 年収",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 62.666666666666664,
+      "after": 31,
+      "beforeImpressions": 6,
       "impressions": 2,
-      "change": 32.5
+      "change": 31.666666666666664
     },
     {
       "keyword": "ふるさと納税 募集費用",
       "targetPath": "/ranking/furusato-fundraising-cost-prefecture",
-      "before": 32,
-      "after": 62,
-      "beforeImpressions": 2,
+      "before": 42,
+      "after": 73,
+      "beforeImpressions": 3,
       "impressions": 1,
-      "change": -30
-    },
-    {
-      "keyword": "高校教師 年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 58,
-      "after": 28,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 30
+      "change": -31
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "日照時間 ランキング",
-    "targetPath": "/ranking/annual-sunshine-duration",
-    "rank": 2.89247311827957,
-    "impressions": 93,
-    "clicks": 8,
+    "keyword": "道の駅多い県",
+    "targetPath": "/blog/roadside-station-count-prefecture-gap",
+    "rank": 8.320819112627987,
+    "impressions": 586,
+    "clicks": 1,
     "group": 5,
     "previousMethod": null,
-    "editableFile": "packages/data-configs/src/metrics/annual-sunshine-duration.ts"
+    "editableFile": null
   },
   "observing": [
     {
@@ -137,6 +137,11 @@
       "keyword": "高校2年生 平均身長",
       "targetPath": "/blog/avg-height-high-school-2nd-male",
       "proposalId": "35568037372-1"
+    },
+    {
+      "keyword": "高校教師 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "proposalId": "35963238547-1"
     }
   ]
 }

@@ -8,7 +8,9 @@ import {
   GEO_DEFAULT_PREF_CODE,
   GEO_DEFAULT_PREF_LABEL,
 } from '../lib/geo-default-prefecture';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import { loadGeoAnalysisPrefBundle } from '../lib/load-geo-analysis-evidence';
+
 
 export async function GeoLayerCards() {
   const geography = getPrefectureCardGeography(GEO_DEFAULT_PREF_CODE);
@@ -39,11 +41,11 @@ export async function GeoLayerCards() {
                   viewBox="0 0 640 360"
                   role="img"
                   aria-label={`${layer.name}・${GEO_DEFAULT_PREF_LABEL}の表示例`}
-                  className="absolute inset-0 h-full w-full bg-slate-50"
+                  className="absolute inset-0 h-full w-full bg-muted"
                 >
                   <path
                     d={preview.boundary}
-                    fill="#f1f5f9"
+                    fill={GEO_MAP_COLORS.cardPreview.prefectureFill}
                     fillRule="evenodd"
                   />
                   {preview.paths.map((p) => (
@@ -51,7 +53,7 @@ export async function GeoLayerCards() {
                       key={p.color}
                       d={p.d}
                       fill={p.color}
-                      stroke="#fff"
+                      stroke={GEO_MAP_COLORS.cardPreview.halo}
                       strokeWidth="0.5"
                     />
                   ))}
@@ -62,14 +64,14 @@ export async function GeoLayerCards() {
                       cy={p.y}
                       r="3"
                       fill={p.color}
-                      stroke="#475569"
+                      stroke={GEO_MAP_COLORS.cardPreview.prefectureStroke}
                       strokeWidth="0.8"
                     />
                   ))}
                   <path
                     d={preview.boundary}
                     fill="none"
-                    stroke="#475569"
+                    stroke={GEO_MAP_COLORS.cardPreview.prefectureStroke}
                     strokeWidth="2"
                   />
                 </svg>

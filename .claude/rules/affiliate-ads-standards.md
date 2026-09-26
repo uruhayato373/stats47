@@ -114,7 +114,7 @@ active広告の新規登録は、参照先profileが存在し、未分類/blocke
 案件名から行動負担を推測してprofile/stateを書き換えない。公開pilotはmeasurement・outcome・profile・実現可能性・
 既存実験なし・ownerの案件/ページ/push承認をすべて満たした1件だけとする。
 
-### 提携状況の真実源 (★2026-08-04 に一本化)
+### 提携状況の真実源
 
 **どの案件をどの ASP で提携済み / 申請中かの真実源は state ファイルであって、本表ではない。**
 
@@ -249,7 +249,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 | 意図不一致の汎用広告を特化ページ上位に置く | ページ意図適合プログラムを上位 priority |
 | `vertical` を 10 軸外の値にする | `AffiliateVertical` の 10 軸から選ぶ (export validation が弾く) |
 
-## 6. GA4 計測 (custom dimension 登録) ★ユーザー操作が必要
+## 6. GA4 計測 (custom dimension 登録・ユーザー操作が必要)
 
 イベントは実装済 (`affiliate_impression` / `affiliate_click`。impression は 2026-07-28 に `ad_impression`
 から改名 — AdSense 自動生成イベントとの衝突解消。正典 `analytics-event-standards.md`)。
@@ -272,7 +272,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 `affiliate_vertical` 内訳 (行が vertical 別に分かれる) が取れること。取れたら effect 判定を意図軸ベースで行える。
 それまで `/affiliate-improvement` の効果判定は総数ベースと明記する (`.claude/rules/evidence-based-judgment.md`)。
 
-### 6.1 `affiliate_vertical` は広告自身の vertical を送る (★2026-09-20 に実際に壊れていた)
+### 6.1 `affiliate_vertical` は広告自身の vertical を送る
 
 **描画コンポーネントがページ文脈の値 (`affiliateCategory` prop) を計測値として送らないこと。**
 広告の意図軸は解決層 (`resolve-affiliate-ad.ts` の `toBanner` / `toTextAd`) が確定させ、
@@ -383,7 +383,7 @@ vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ad
 | **SSOT 追記は 4 ゲート通過必須** | `append-affiliate-ads.ts` が tsc → audit `--check-size` → export `--validate-only` → compliance `--check`。1 つでも fail で `git checkout` 復元 |
 | **セッション失効で cron を壊さない** | isLoggedIn 失敗は catalog に error 記録して正常終了 (exit 0)。再ログインは人間 |
 
-### 実行形態 (★ローカル限定・Mac / Windows 両対応)
+### 実行形態 (ローカル限定・Mac / Windows 両対応)
 
 - Playwright プロファイル (`.local/playwright-a8-profile`) がローカルにあるため **GitHub Actions では動かない**。
   週次 cron は launchd (`scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist`、日曜 07:00 JST。
@@ -485,7 +485,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 「自社がどの案件をどの ASP で運用するか」** を扱う。doboku-note で 2026-07-27 に実機確定した実装を
 2026-07-28 に移植し、対象サイトを stats47 側へ反転させた。
 
-### ★不変条件: 3 ASP すべてで stats47 と doboku-note が同一口座に同居する
+### 不変条件: 3 ASP すべてで stats47 と doboku-note が同一口座に同居する
 
 切り替えずに読むと**他サイトのデータを自分のものと誤認する**。doboku-note では afb の走査で SID 不一致を
 「警告して続行」した結果、別サイトの一覧を読んで「該当 0 件」と誤報告した事故が起きた。

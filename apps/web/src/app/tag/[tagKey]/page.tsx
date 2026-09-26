@@ -117,7 +117,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
             href={`/blog/${article.slug}`}
             className="group block h-full"
           >
-            <SurfaceCard className="flex h-full flex-col rounded-none transition-colors hover:border-primary/50 hover:shadow-md">
+            <SurfaceCard className="flex h-full flex-col transition-colors hover:border-primary/50 hover:shadow-md">
               <div className="py-3 px-4 pb-3 flex flex-col items-start gap-2 space-y-0 border-b border-border">
                 <h3 className="text-base font-semibold leading-none text-lg transition-colors group-hover:text-primary">
                   {article.title}

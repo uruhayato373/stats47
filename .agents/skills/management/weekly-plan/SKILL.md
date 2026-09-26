@@ -124,6 +124,14 @@ primary_agent: strategy-advisor
   cat .claude/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
+  → **戦略レーンの配線**: Must の各項目は backlog / improvements の既存 ID をバッククォートで参照し、その ID のレーン
+    (backlog は `[レーン:]` タグ、improvements は Metric 列から `strategy-lanes.cjs` が引く) が `focus_lanes` に入るか、
+    `[種類:不具合]` のカードであること。凍結レーンの不具合以外は Should / Could にも入れない。
+    `npm run docs:check` の DG077 (warning) / DG078 (error) が検査し、管理画面 `/strategy/lanes` に同じ結果が出る。
+    定常 Must (ブログ是正・新規記事) も対応する backlog / improvements の ID を付ける。
+  → **連続未達の扱い (CYCLE-HEALTH-01)**: 週次メトリクス Issue の「サイクルの健全性」で連続未達が 2 週以上なら、
+    前週から残った Must は同じ形で再掲しない。完了条件を 1 週で届く大きさに分割するか、Should へ降格する。
+    同じ表の「完了済みなのに週次計画が参照する ID」に出た ID は計画に残さない。
 - **KDP週次公開ゲート**: APIやブラウザは呼ばず、weekly-reviewが同期した状態から決定的stateを再生成して読む。
   ```bash
   npm run kdp:weekly -- --week [YYYY-Www] --write

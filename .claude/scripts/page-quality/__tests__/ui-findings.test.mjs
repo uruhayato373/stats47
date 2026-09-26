@@ -8,6 +8,7 @@ import {
   insertCards,
   isFixLive,
   observeFindings,
+  chartFixGuide,
   planUiCards,
   staleBatchFiles,
   syncFindings,
@@ -141,6 +142,14 @@ test("Claude の確認が走らなかった週は、Claude の指摘を消えた
   assert.equal(queue[0].status, "pending");
 });
 
+test("variants の巡回で今週確認しなかったページの Claude の指摘は消えた扱いにせず、確認したページの指摘だけ閉じる", () => {
+  const unreviewed = finding({ key: "agent|ranking--old-2years", source: "agent", template: "ranking--old-2years", url: null, metric_key: null });
+  const reviewed = finding({ key: "agent|ranking", source: "agent", template: "ranking", url: null, metric_key: null });
+  const { queue } = syncFindings([unreviewed, reviewed], [], ctx({ agentReviewedPages: ["ranking"] }));
+  assert.equal(statusOf(queue, "agent|ranking--old-2years"), "pending");
+  assert.equal(statusOf(queue, "agent|ranking"), "done");
+});
+
 test("Claude の指摘の by-design は期限付き、機械検出の by-design は観測中は保つ", () => {
   const observed = observeFindings({ violations: [violation()] }, [agent()]);
   const agentDesign = (resolvedAt) =>
@@ -181,6 +190,20 @@ test("pending をページの種類ごとに 1 枚のカードにし、開いて
 });
 
 // ループ (build-backlog-queue) はバックログのパーサーでカードを読む。読めない形で起票すると誰も処理しない。
+test("variants のカードが開いていても代表URLのカードは止めず、ID はページの識別子から作る", () => {
+  const rep = finding({ key: "agent|ranking", source: "agent", template: "ranking", url: null, metric_key: null });
+  const variant = finding({ key: "agent|ranking--old-2years", source: "agent", template: "ranking--old-2years", url: null, metric_key: null });
+  const cards = planUiCards({
+    queue: [rep, variant],
+    openIds: ["UI-FIX-RANKING-OLD-2YEARS-20260927"],
+    today: "2026-10-04",
+    screenshotBaseUrl: "https://storage.stats47.jp",
+  });
+  assert.deepEqual(cards.map((c) => c.id), ["UI-FIX-RANKING-20261004"]);
+  const blocked = planUiCards({ queue: [rep, variant], openIds: ["UI-FIX-RANKING-20260927"], today: "2026-10-04", screenshotBaseUrl: "x" });
+  assert.deepEqual(blocked.map((c) => c.id), ["UI-FIX-RANKING-OLD-2YEARS-20261004"]);
+});
+
 test("起票したカードはバックログのパーサーで ID・sweep 実行・検証コマンドが読める", () => {
   const [card] = planUiCards({ queue: [finding()], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
   const backlog = "# backlog\n\n## 🔴 急ぎ\n\n## 🟡 通常\n\n### [OTHER-01] 既存\n\nタグ: [種類:改善] [実行:対話]\n";
@@ -206,4 +229,20 @@ test("週次監査が同期と起票を行い、週次と backlog-loop の両方
   assert.match(weekly, /git add \.claude\/state\/page-quality\/ \.claude\/todo\/backlog\.md/);
   const loop = readFileSync(new URL(".github/workflows/backlog-loop-daily.yml", root), "utf8");
   assert.match(loop, /git add -- [^\n]*\.claude\/state\/page-quality/);
+});
+
+// チャートの文字の指摘は直し方が分かれる (部品を直す agent / 作り直すだけのスクリプト)。
+// 手順がカードに無いと、ループが SVG を 1 枚ずつ手で直したり R2 へ勝手に反映したりする。
+test("チャートの文字の指摘を含むカードには、種類ごとの振り分け手順を書く", () => {
+  const blog = finding({ key: "machine|https://stats47.jp/blog/beer|blog_svg_text_issues", metric_key: "blog_svg_text_issues", template: "blog-detail" });
+  const d3 = finding({ key: "machine|https://stats47.jp/areas/13000|chart_text_issues", metric_key: "chart_text_issues", template: "area" });
+  const [blogCard] = planUiCards({ queue: [blog], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  assert.match(blogCard.markdown, /plan-svg-text-fix\.ts @\.claude\/state\/page-quality\/backlog-batches\/UI-FIX-BLOG-DETAIL-20261004\.txt/);
+  assert.match(blogCard.markdown, /regen-fixes.*オーナー承認.*\[実行:ユーザー\]/);
+  assert.match(blogCard.markdown, /generator-fix.*packages\/svg-builder/);
+  const [areaCard] = planUiCards({ queue: [d3], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  assert.match(areaCard.markdown, /packages\/visualization\/src\/d3\/components/);
+  assert.doesNotMatch(areaCard.markdown, /plan-svg-text-fix/);
+  // チャート以外の指摘だけのカードには足さない
+  assert.deepEqual(chartFixGuide([finding()], "x.txt"), []);
 });

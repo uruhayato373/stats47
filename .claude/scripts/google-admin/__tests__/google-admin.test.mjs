@@ -13,11 +13,14 @@ import {
   assertAllowed,
   decideScActions,
   planCustomDimension,
+  planKeyEvents,
+  MAX_ITEMS_PER_APPROVAL,
+  AUTHORED_KEY_EVENTS,
   plannedActionToken,
   requireCommit,
 } from "../apply-allowlisted-settings.mjs";
 import { assertAdSenseAccount, collectAdUnits, deriveDesiredAdUnits } from "../audit-adsense.mjs";
-import { assertPropertyId, assertStreamHost, summarizeCustomDimensions } from "../audit-ga4-api.mjs";
+import { assertPropertyId, assertStreamHost, summarizeCustomDimensions, summarizeEnhancedMeasurement } from "../audit-ga4-api.mjs";
 import { sanitize, sanitizeObject, redactEmail, redactHelpToken } from "../redact.mjs";
 import { acquireLock, releaseLock, LOCK_FILE, isLoginUrl } from "../browser-context.mjs";
 
@@ -99,20 +102,65 @@ test("AUTHORED_DIMENSIONS: ad_id を含み、全て EVENT scope・parameterName 
   const params = AUTHORED_DIMENSIONS.map((d) => d.parameterName);
   assert.ok(params.includes("ad_id"));
   assert.deepEqual([...new Set(params)].length, params.length, "parameterName が重複している");
-  for (const d of AUTHORED_DIMENSIONS) assert.equal(d.scope, "EVENT");
+  for (const d of AUTHORED_DIMENSIONS) assert.ok(d.scope === "EVENT" || d.scope === "USER", `${d.parameterName} の scope`);
 });
 
-test("planCustomDimension: ⏳要登録 + authored + 未登録 + 空き枠 → 1 件だけ plan (安定順)", () => {
+test("planCustomDimension: ⏳要登録 + authored + 未登録 + 空き枠 → 安定順で最大 maxItems 件、超過分は繰り越す", () => {
   const d = planCustomDimension({
-    needsRegistrationParams: ["cta_id", "content_id"],
+    needsRegistrationParams: ["cta_id", "content_id", "slot"],
     existingParams: [],
     eventScopedCount: 5,
+    maxItems: 2,
   });
-  // 安定順 (昇順): content_id が先
+  assert.deepEqual(d.plans.map((p) => p.parameterName), ["content_id", "cta_id"]);
   assert.equal(d.plan.parameterName, "content_id");
-  assert.equal(d.plan.action, "create-ga4-custom-dimension");
-  assert.equal(d.plan.scope, "EVENT");
-  assert.ok(d.noops.some((n) => n.parameterName === "cta_id" && /繰り越す/.test(n.reason)));
+  assert.equal(d.plans[0].scope, "EVENT");
+  assert.ok(d.noops.some((n) => n.parameterName === "slot" && /繰り越す/.test(n.reason)));
+});
+
+test("planCustomDimension: 1 承認の上限は 10 件 (オーナー判断 2026-09-26)", () => {
+  assert.equal(MAX_ITEMS_PER_APPROVAL, 10);
+});
+
+test("planCustomDimension: 対象外 parameter の blocker は返すが、候補の計画は止めない", () => {
+  const d = planCustomDimension({ needsRegistrationParams: ["analysis_id_unknown", "cta_id"], existingParams: [], eventScopedCount: 5 });
+  assert.deepEqual(d.plans.map((p) => p.parameterName), ["cta_id"]);
+  assert.ok(d.blockers.some((b) => b.code === "authored-definition-missing" && b.parameterName === "analysis_id_unknown"));
+});
+
+test("planCustomDimension: 空き枠が残り 1 なら 1 件だけ計画し、残りは no-capacity", () => {
+  const d = planCustomDimension({ needsRegistrationParams: ["cta_id", "content_id"], existingParams: [], eventScopedCount: EVENT_SCOPED_DIMENSION_CAP - 1 });
+  assert.equal(d.plans.length, 1);
+  assert.ok(d.blockers.some((b) => b.code === "no-capacity" && b.parameterName === "cta_id"));
+});
+
+test("planKeyEvents: authored で未作成のものだけ・key events が読めなければ作らない", () => {
+  const d = planKeyEvents({ existingEventNames: ["file_download"] });
+  const names = d.plans.map((p) => p.eventName);
+  assert.ok(!names.includes("file_download"));
+  assert.deepEqual(names, [...names].sort());
+  assert.ok(d.plans.every((p) => p.action === "create-ga4-key-event" && p.countingMethod === "ONCE_PER_EVENT"));
+  assert.deepEqual(names.sort(), AUTHORED_KEY_EVENTS.map((k) => k.eventName).filter((n) => n !== "file_download").sort());
+  const unreadable = planKeyEvents({ existingEventNames: null });
+  assert.equal(unreadable.plans.length, 0);
+  assert.ok(unreadable.blockers.some((b) => b.code === "key-events-unreadable"));
+});
+
+test("plannedActionToken: 複数件の計画は 1 件でも変われば token が変わる", () => {
+  const a = { action: "create-ga4-custom-dimension", parameterName: "cta_id", scope: "EVENT" };
+  const b = { action: "create-ga4-key-event", eventName: "cta_click", countingMethod: "ONCE_PER_EVENT" };
+  const t = plannedActionToken({ site: "stats47.jp", propertyId: "1", plan: [a, b] });
+  assert.equal(t, plannedActionToken({ site: "stats47.jp", propertyId: "1", plan: [a, b] }));
+  assert.notEqual(t, plannedActionToken({ site: "stats47.jp", propertyId: "1", plan: [a] }));
+  assert.notEqual(t, plannedActionToken({ site: "stats47.jp", propertyId: "1", plan: [a, { ...b, eventName: "file_download" }] }));
+});
+
+test("summarizeEnhancedMeasurement: 履歴変更の page_view が ON なら二重計測として警告", () => {
+  const on = summarizeEnhancedMeasurement({ streamEnabled: true, pageChangesEnabled: true, outboundClicksEnabled: true });
+  assert.ok(on.warnings.includes("page-changes-double-count"));
+  const off = summarizeEnhancedMeasurement({ streamEnabled: true, pageChangesEnabled: false, outboundClicksEnabled: true });
+  assert.deepEqual(off.warnings, []);
+  assert.ok(summarizeEnhancedMeasurement({ streamEnabled: true, pageChangesEnabled: false, outboundClicksEnabled: false }).warnings.includes("outbound-clicks-off"));
 });
 
 test("planCustomDimension: 既存 parameter は作成しない・EVENT 以外の scope なら blocker", () => {

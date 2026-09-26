@@ -8,7 +8,7 @@ user-invocable: false
 
 ## ルーティングルール
 
-### コンテンツ制作系 → content-orchestrator
+### コンテンツ制作系 → article-writer / x-strategist / instagram-strategist / note-manager
 
 | キーワード・文脈 | スキル | 例 |
 |---|---|---|

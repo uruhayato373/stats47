@@ -30,6 +30,8 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { useSidebarStore } from '@/store/sidebar-store';
 
+import { NAV_ACCENT_PALETTE } from './nav-accent.palette';
+
 /** ドロワーに出す curated テーマの最小ナビ情報。 */
 interface ThemeNavItem {
   themeKey: string;
@@ -49,51 +51,49 @@ const NAV_LINKS = [
     href: '/',
     label: 'ホーム',
     icon: Home,
-    color: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+    color: NAV_ACCENT_PALETTE.home,
   },
   {
     href: '/ranking',
     label: 'ランキング',
     icon: TrendingUp,
-    color: 'bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400',
+    color: NAV_ACCENT_PALETTE.ranking,
   },
   {
     href: '/areas',
     label: '都道府県',
     icon: MapPin,
-    color:
-      'bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400',
+    color: NAV_ACCENT_PALETTE.areas,
   },
   {
     href: '/municipalities',
     label: '市区町村',
     icon: Building2,
-    color:
-      'bg-indigo-100 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400',
+    color: NAV_ACCENT_PALETTE.municipalities,
   },
   {
     href: '/geo',
     label: '地域分析',
     icon: Map,
-    color: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-400',
+    color: NAV_ACCENT_PALETTE.geo,
   },
   {
     href: '/blog',
     label: '統計ブログ',
     icon: BookOpen,
-    color: 'bg-pink-100 text-pink-600 dark:bg-pink-950 dark:text-pink-400',
+    color: NAV_ACCENT_PALETTE.blog,
   },
   {
     href: '/category/population/compare',
     label: '地域間比較',
     icon: ArrowLeftRight,
-    color: 'bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400',
+    color: NAV_ACCENT_PALETTE.compare,
   },
   {
     href: '/search',
     label: '検索',
     icon: Search,
-    color: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+    color: NAV_ACCENT_PALETTE.search,
   },
 ] as const;
 

@@ -4,6 +4,8 @@ import {
   type GeoPublicFacilityPrefDetail,
 } from '@stats47/gis';
 
+import { GEO_MAP_COLORS } from './geo-map.palette';
+
 export const PUBLIC_FACILITY_GROUPS = {
   administrative: '市町村役場・支所・行政サービス施設',
   meeting: '公民館・公的集会施設',
@@ -16,13 +18,7 @@ export const PUBLIC_FACILITY_BAND_LABELS = [
   '3km超〜5km以内',
   '5km超',
 ] as const;
-export const PUBLIC_FACILITY_BAND_COLORS = [
-  '#0f766e',
-  '#0284c7',
-  '#d97706',
-  '#c2410c',
-  '#7f1d1d',
-] as const;
+export const PUBLIC_FACILITY_BAND_COLORS = GEO_MAP_COLORS.publicFacilityBands;
 export const PUBLIC_FACILITY_LIMIT =
   '1km人口メッシュ中心から原典施設地点までの大円距離です。500m帯は粗い近似で、各住居からの道路距離・徒歩時間ではありません。施設位置は2022年4月固定、2020年人口と2050年推計人口を比較します。県外の最寄り施設を含み、窓口の利用資格・業務・開館時間・将来の施設存続は判定しません。';
 

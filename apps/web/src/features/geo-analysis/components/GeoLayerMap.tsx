@@ -8,6 +8,7 @@ import { GeoJSON, MapContainer, TileLayer } from 'react-leaflet';
 
 import { GEO_BASEMAP } from '../lib/geo-basemap';
 import { populationLayerColor, type GeoLayerData } from '../lib/geo-layer-data';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 
 import type { Feature, FeatureCollection, Point, Polygon } from 'geojson';
 
@@ -94,13 +95,13 @@ export function GeoLayerMap({
         style={(feature) =>
           data.kind !== 'population'
             ? {
-                color: data.kind === 'stations' ? '#0f172a' : '#ffffff',
+                color: data.kind === 'stations' ? GEO_MAP_COLORS.pointMarker.stroke : GEO_MAP_COLORS.outline,
                 weight: 1.3,
-                fillColor: data.kind === 'stations' ? '#f8fafc' : '#7c3aed',
+                fillColor: data.kind === 'stations' ? GEO_MAP_COLORS.pointMarker.fill : GEO_MAP_COLORS.layerFeatureFill,
                 fillOpacity: 0.9,
               }
             : {
-                color: '#ffffff',
+                color: GEO_MAP_COLORS.outline,
                 weight: 0.5,
                 fillColor: populationLayerColor(
                   Number(feature?.properties?.value ?? 0)
@@ -111,9 +112,9 @@ export function GeoLayerMap({
         pointToLayer={(_feature, latlng) =>
           L.circleMarker(latlng, {
             radius: 5,
-            color: data.kind === 'stations' ? '#0f172a' : '#ffffff',
+            color: data.kind === 'stations' ? GEO_MAP_COLORS.pointMarker.stroke : GEO_MAP_COLORS.outline,
             weight: 1.3,
-            fillColor: data.kind === 'stations' ? '#f8fafc' : '#7c3aed',
+            fillColor: data.kind === 'stations' ? GEO_MAP_COLORS.pointMarker.fill : GEO_MAP_COLORS.layerFeatureFill,
             fillOpacity: 0.9,
           })
         }

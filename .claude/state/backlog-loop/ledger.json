@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-23T21:57:18.308Z",
+  "updatedAt": "2026-09-25T23:01:29.489Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -4847,6 +4847,548 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-23T21:57:18.308Z"
+    },
+    "DATA-SOURCE-ROLLOUT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T13:45:13.487Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-09-25 exit 0 (直接実行)。手書き節67/sourceless 1/未焼き込み0 で ratchet 3 上限内。PR #1027 本番反映済み",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-09-25T20:10:36.622Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check"
+            ],
+            "pass": true
+          },
+          "evidence": "検証コマンドを実行し exit 0 (最終行 '✓ taxonomy state / freshness / ratchet 違反なし'、コード上 errors.length===0 のときのみ出力・exitCode既定0を確認)。カード記載の状態(PR#1027済み・sources焼込済み)通りで追加実装は不要、diffはbacklog.mdの行削除のみ。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T20:10:36.622Z"
+    },
+    "GSC-COV-404-20260925": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T13:46:01.381Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-404-20260925.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "/47 を resolved-by-design (route 履歴なし・sitemap 非掲載・内部リンク未検出)。gate exit 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T13:46:01.381Z"
+    },
+    "GSC-COV-5XX-20260925": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T13:47:07.234Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-5XX-20260925.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2 URL とも 9/25 に通常2回+cf MISS 3回で200。コード変更なしで in-progress (URL Inspection 待ち)。一時503の原因調査は CF-CPU-SURGE-01 へ集約",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T13:47:07.234Z"
+    },
+    "GSC-COV-SOFT404-20260925": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T13:48:11.059Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled .claude/state/gsc/backlog-batches/GSC-COV-SOFT404-20260925.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2 URL とも本文に固有値あり (safety: ストリーミング S:0 に10,472字/数値547、blog: 2,603字/数値45)。コード変更なしで in-progress (再クロール後の Inspection 待ち)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T13:48:11.059Z"
+    },
+    "RANKING-LEGEND-DIRECTION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T13:52:11.368Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run (visualization MapColorLegend.order / web RankingBarList)",
+              "tsc --noEmit (visualization",
+              "web)"
+            ],
+            "pass": true
+          },
+          "evidence": "凡例を値の昇順で色取り (本番は左端=最大値色、localhost は左端=最小値色を DOM で確認)。棒を 0 基準に (秋田 -18.7 は left0/width73.9%、東京 6.6 は left73.9%)。390/768/1440px で確認。本番反映は未 (デプロイ承認待ち)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T13:52:11.368Z"
+    },
+    "CHART-YAXIS-LABEL-CLIP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T14:01:23.253Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run (visualization 全 190 件)",
+              "tsc --noEmit (visualization)"
+            ],
+            "pass": true
+          },
+          "evidence": "compactAxisFormat を整数は .0 なし・3桁区切りに (1400.0万→1,400万)。StackedAreaChart の左余白を目盛りラベル幅から確保 (leftMarginForTickLabels)。localhost 13000/01000/47000 @390 で最左ラベルが左端+2〜3px、13000 @768/1440 で +4/+5px (修正前 -5px)。LineChart/MixedChart の同種余白は CHART-AXIS-READABILITY-01 で対応",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T14:01:23.253Z"
+    },
+    "AREA-DATABOOK-LABEL-INTEGRITY-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T14:03:52.823Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:area-databook --workspace=@stats47/data-configs",
+              "npx vitest run src/features/area-databook (web 15件)"
+            ],
+            "pass": true
+          },
+          "evidence": "医師数/一般病院数を per-100k 指標へ差し替え (R2 values に 13000 の値・順位あり: 324.6人5位 / 4.2施設40位)、消費は月額と明記、施設節の説明を人口当たりへ。KPI 2 部品に年を表示 (localhost 13000 で確認)。databook.json の再書き出しはデプロイ後 sync-snapshots (RANKING-FIRST-VIEW-RELEASE-01 に記録)。定義検査での 0 件確認は SITE-DISPLAY-SEMANTICS-AUDIT-01 の回帰例へ移管",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-09-25T20:10:40.528Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "県データブックの共通テンプレート(template.ts)で指標差し替え3件+RankedKpiGrid/GenderPairedKpiGridへの年表示追加が必要。47県横断・複数指標のisActive実在確認を伴う複数ファイル変更で、backlog-loop.mdの class定義上 impl-large (draft-PR要)。この run (sonnet固定・direct-push系)では着手しない。",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "THEME-CHART-LOAD-LATENCY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T14:29:46.960Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run src/features/theme-dashboard (42 files/325 tests)",
+              "tsc --noEmit (web)"
+            ],
+            "pass": true
+          },
+          "evidence": "原因: 指標カード24枚×(選択県+全国)=48件のサーバーアクションがブラウザで直列 (本番実測 重なり0・約19秒)。createActionBatcher で同時要求を1回に束ね、時系列は指標ごとにR2を1回だけ読む。localhost /themes/population-dynamics?pref=13000 と /areas/13000/population-dynamics で POST 2件・約1.5秒、29要素すべて ready。mutation 2件で test red を確認。本番の再計測は RANKING-FIRST-VIEW-R",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T14:29:46.960Z"
+    },
+    "BLOG-TOC-TOP-ONLY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T14:34:00.730Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run src/components/layout src/features/blog src/app/blog (109件)",
+              "npm run design-system:check",
+              "tsc --noEmit (web)"
+            ],
+            "pass": true
+          },
+          "evidence": "目次をヘッダー直後・本文前の1か所に (RailCard→本文内 nav・rounded-content・data-nav-surface=blog_toc)。ArticleShell の追従領域を廃止し契約テストで固定、ui-components.md の適用箇所を更新。localhost 1440: h1 209→目次 392→本文 1068、右レールに目次・sticky 0。390: h1 263→目次 529→本文 1537、横スクロールなし。クリック計測は NAV-CLICK-COVERAGE-01 実装後",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T14:34:00.730Z"
+    },
+    "UI-SITEWIDE-MINOR-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T14:51:32.348Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run (navigation/layout/analytics/about 35件)",
+              "npm run design-system:check",
+              "tsc --noEmit (web)"
+            ],
+            "pass": true
+          },
+          "evidence": "世界(準備中)タブ削除/eyebrow ディスカバリー→指標の横断比較/他県と比較・公式サイト↗ を nowrap (390px で高さ38/30px=1行)/パンくず末尾を sm 未満で非表示 (Breadcrumbs 共通+blog、/themes 390 で1行20px)/about にパンくず追加 (JSON-LD あり)/Cookie バナーを1行化+余白 (390px で 93→56px)。992px の左レール食い違いは規約上の設計のため LEFT-RAIL-992-HEADER-DECISION-01 (🟣) へ切り出し",
+          "failReason": null,
+          "followUps": [
+            "LEFT-RAIL-992-HEADER-DECISION-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T14:51:32.348Z"
+    },
+    "NSM-ASP-REVENUE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T14:55:18.125Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run metrics:test (126件)",
+              "node --test nsm-revenue-lines.test.mjs (9件)"
+            ],
+            "pass": true
+          },
+          "evidence": "nsm-revenue-lines.mjs を新設し週次 Issue の NSM 節に A8/もしも/afb の発生・確定 (件数・金額) を追加。認証切れ・古い観測・範囲不完全は判定不能、afb の件数 0 成功だけ ¥0。W39 実出力: A8/もしも 判定不能 (認証切れ 9/21〜)、afb ¥0。③の確認で商品行の誤りを発見・是正: 台帳空→¥0 と書いていた & 存在しない date/amountYen を読んでいた → 販売中が少なくとも3点ある限り判定不能、periodEnd/netRevenueYen で週内合計。mutation 2件",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T14:55:18.125Z"
+    },
+    "UI-FULL-SWEEP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T21:42:19.271Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "目視 308 枚 (本番 44 URL×7 幅) と起票の突合"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-09-25 に撮影・目視を終え、指摘を RANKING-LEGEND/CHART-YAXIS/THEME-CHART-LOAD 等のカードへ起票済み (482c7fa61)。継続の仕組みは page-quality 週次 (6c9debf23)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T21:42:19.271Z"
+    },
+    "MAP-INITIAL-EXTENT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T21:49:01.311Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run src/leaflet (11件)",
+              "tsc --noEmit (visualization",
+              "web)"
+            ],
+            "pass": true
+          },
+          "evidence": "ランキング地図に fitToPrefectures を付け、全県に合わせるときは zoomSnap 0.25。localhost ランキング 390/640/1920px で 47 県が枠内 (640px: 幅90%・高さ85%。本番は左-41px・下+45px はみ出し)、/areas/47000/long-term-care 768px も枠内。初期 center/zoom は LCP 先読みタイルと同じまま",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T21:49:01.311Z"
+    },
+    "COUNT-CONSISTENCY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-09-25T21:51:44.977Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check:ranking-prominence",
+              "npx vitest run (ranking/category/municipalities 174件)",
+              "tsc --noEmit (web)"
+            ],
+            "pass": true
+          },
+          "evidence": "ranking-prominence の集計元を isActive だけから KNOWN_RANKING_KEYS に揃え、カテゴリ合計 2,449→2,408 (全件数と一致)、landweather 41→40・population 154→149 で本文と一致。副次: 本番で 410 を返す current-balance-ratio-city / foreign-population-per-100k が代表から外れた。municipalities の 1,718/1,717 は総数と値のある数で意味が違うので、テーマのカードを「値のある N 自",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T21:51:44.977Z"
+    },
+    "ADSENSE-WEEKLY-STEP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "AdSense 週次 impact step を外す",
+      "attempts": [
+        {
+          "at": "2026-09-25T23:01:29.489Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "python3 -c \"import yaml;yaml.safe_load(open('.github/workflows/fetch-metrics-weekly.yml'))\""
+            ],
+            "pass": true
+          },
+          "evidence": "fetch-metrics-weekly.yml から measure-adsense-impact step を削除。impact-LATEST.md は恒久停止当日 9/20 の W38 run でも書き換わっており data-storage.md の凍結宣言と矛盾していた。adsense-analyst.md の記述も更新",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-09-25T23:01:29.489Z"
     }
   }
 }

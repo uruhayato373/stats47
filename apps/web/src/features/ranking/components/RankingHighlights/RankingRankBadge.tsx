@@ -3,21 +3,15 @@ import type { ReactNode } from "react";
 import { cn } from "@stats47/components";
 import { Medal } from "lucide-react";
 
+import { RANK_MEDAL_BADGE } from "../../utils/rank-medal.palette";
+
 
 /**
  * ランクに応じたカラークラスを取得する (内部用)
  */
 function lookupRankColor(rank: number): string {
-    switch (rank) {
-        case 1:
-            return "text-amber-500 bg-amber-500/10 border-amber-500/20";
-        case 2:
-            return "text-slate-400 bg-slate-400/10 border-slate-400/20";
-        case 3:
-            return "text-amber-700 bg-amber-700/10 border-amber-700/20";
-        default:
-            return "text-muted-foreground bg-muted border-border";
-    }
+    if (rank === 1 || rank === 2 || rank === 3) return RANK_MEDAL_BADGE[rank];
+    return "text-muted-foreground bg-muted border-border";
 }
 
 /**

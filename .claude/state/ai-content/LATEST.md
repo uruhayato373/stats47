@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-09-25T00:36:01.444Z
+- 生成: 2026-09-26T00:40:18.289Z
 - GSC snapshot: 2026-W38 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 171 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
@@ -34,7 +34,7 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **34.6 件/日** (2026-07-30 からの平均)
+- 消化ペース: **34.0 件/日** (2026-07-30 からの平均)
 - 残り 242 件 → **完了見込み 約 8 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)

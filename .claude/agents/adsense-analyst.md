@@ -69,7 +69,7 @@ RPM は `(imp/PV) × CTR × CPC` の掛け算。**CPC は公式 `cost_per_click`
 ## 触る state / files
 
 - `.claude/state/metrics/adsense/` — AdSense 週次 history (CRUD)。`history.csv` (account) / `history-devices.csv` (デバイス別・`metrics:digest` が生成) / `LATEST.md` (デバイス表+退行アラート) / `impact-LATEST.md` (施策 before/after・`metrics:adsense-impact` が生成)
-- `.claude/scripts/metrics/{update-history-csv,measure-adsense-impact}.mjs` — 計測パイプライン (run)。cron `fetch-metrics-weekly.yml` が週次で両方実行
+- `.claude/scripts/metrics/{update-history-csv,measure-adsense-impact}.mjs` — 計測パイプライン (run)。`measure-adsense-impact` は 2026-09-26 に週次 cron から外した (恒久停止後の凍結記録を書き換えないため)。必要なときだけ手動で実行する
 - `.claude/skills/analytics/adsense-improvement/reference/` — agent 用詳細層 (CRUD)
 - `.claude/todo/improvements.md` — read only (improvement-triage 経由)
 - `.claude/scripts/ads/` — 棚卸し / 管理画面 (`/tmp/stats47-affiliate-dashboard.html` 生成) スクリプト (run)。台帳 SSOT・規約の管理は affiliate-manager が排他

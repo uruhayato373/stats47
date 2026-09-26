@@ -27,9 +27,16 @@ paths:
    (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析を行う。
    `page-quality-audit-weekly.yml` が `--concurrency 12 --skip-rsc --browser-representative` で実行し、
    error違反があれば `page-quality-alert,auto-generated` ラベルでIssueを起票する。
-   - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`) と空の見出し (`empty_headings`)
-   - **代表URL 11件だけブラウザ**: 文字の切れ (`clipped_text`)・タップ要素の重なり (`overlapping_tap_targets`)・
-     axe-core の WCAG A/AA critical/serious 規則数 (`a11y_violations`)。全URLをブラウザで開くのはコストが見合わない
+   - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`)・空の見出し (`empty_headings`)・
+     「データ出典」見出しの重複 (`duplicate_data_source_sections`)・新しいタブで開かない外部リンク
+     (`external_links_same_tab`。規約は `docs/01_技術設計/04_デザインシステム.md`「外部リンク」)・
+     記事チャート SVG の文字のはみ出し・重なり (`blog_svg_text_issues`。下記「チャートの文字の検査」)
+   - **代表URL 12 件とデータの型の違い (variants) 32 件だけブラウザ**: 文字の切れ (`clipped_text`)・タップ要素の重なり
+     (`overlapping_tap_targets`)・
+     SVG チャートの文字の切れ・重なり (`chart_text_issues`)・axe-core の WCAG A/AA critical/serious 規則数 (`a11y_violations`)。全URLをブラウザで開くのは
+     コストが見合わない。variants は `templates.ts` の `variants` に持つ (観測 1 年だけ・古い年・長い名前・負の値・県庁所在市・
+     市区町村・Geo の各ページ型など)。同じテンプレートでも崩れはデータの形から出るため、2026-09-25 の UI 全面点検
+     (44 ページ × 7 幅・211 件の指摘) の対象をそのまま週次に移した。44 ページを並列 3 で撮影する (`BROWSER_PAGE_CONCURRENCY`)
    - **RSC は全件では測らない** (`--skip-rsc`): RSC はキャッシュされず 1 件ごとにサーバー描画する
      (実測 0.5〜3.7 秒/件)。2026-09-19 の初回は RSC 込み並列 4 で 45 分の制限内に 1,200/6,237 URL しか進まず
      打ち切られた。RSC 抜き並列 8 は手元で 800 URL 122 秒だったが、CI では全件 54.5 分かかった (2026-09-23 実測。
@@ -37,9 +44,9 @@ paths:
 
 ## スクショ保存と週次 agent の確認 (2026-09-23)
 
-代表URL 11 件を、表示が切り替わる幅ごとに 7 幅 (390 / 640 / 768 / 992 / 1024 / 1440 / 1920px。
+代表URL 12 件と variants 32 件を、表示が切り替わる幅ごとに 7 幅 (390 / 640 / 768 / 992 / 1024 / 1440 / 1920px。
 `tailwind.config.ts` の sm・md・lg・xl・2xl と左サイドバーの 992px 境界。`lib/screenshots.ts` の `VIEWPORTS` が正典)
-で撮影する。R2 `state/page-quality/screenshots/latest/` に全幅の PNG (翌週の比較元・上書き・約 38MB) を、
+で撮影する。R2 `state/page-quality/screenshots/latest/` に全幅の PNG (翌週の比較元・上書き・11 ページで約 38MB、44 ページで約 150MB の見込み) を、
 `<date>/` に agent が確認する 3 幅 (390 / 768 / 1440) だけ WebP (約 4.4MB/週) を置く (400 日で自動失効する `state/` prefix)。
 先週の `latest/` と画素比較した変化率 (0〜1、高さの変化も数える) を LATEST.md に出す。
 各幅で横スクロール・文字の切れ・タップ要素の重なりも測り、412px の代表URL検査が見ない幅 (640px 以上) の件数を
@@ -47,11 +54,14 @@ paths:
 (ホームは networkidle を待つと 45 秒で時間切れになった)。1 幅の失敗は `screenshot_failed@<幅>` として残し、他の幅は捨てない。
 
 続けて Claude (sonnet・`Read`/`Glob` だけ・ファイル書換なし) が `.claude/prompts/ci/page-ui-review.md` に沿って
-3 幅のスクショを確認し、JSON schema の構造化出力で指摘 (最大 10 件) を返す。縦長の全体像は縮小されて文字が
+3 幅のスクショを確認し、JSON schema の構造化出力で指摘 (最大 20 件) を返す。確認するのは代表URL 12 件を毎週と、
+variants を key 順に 4 つへ分けたうちの 1 組 (ISO 週番号で決める。`reviewPageKeys()`・`REVIEW_ROTATION_WEEKS`) で、
+約 20 ページ。variants は 4 週で 1 巡する。撮影ファイル名・指摘の `template` はページの識別子 (`page_key`。variants は
+`<種類>--<id>`) を使う。縦長の全体像は縮小されて文字が
 読めないので、画面 1 枚分ずつ切り出した画像 (`tilePaths`、R2 には上げない) を読ませる。
 **記録と通知の判断はスクリプトが行う** (`record-ui-review.ts`): 撮影していない画面を指す指摘や形の崩れた
 指摘は捨て、結果を `.claude/state/metrics/page-quality/ui-review-latest.json` に残す。
-手元の試行 (2026-09-23) は 73 回のやり取り・2 分半で、`--max-turns 120` はそのための余裕。
+手元の試行 (2026-09-23) は 11 ページで 73 回のやり取り・2 分半だった。約 20 ページを見るため `--max-turns 200`・step の制限時間 30 分にしている。
 
 **通知**: 「先週の週次結果に無かった UI 違反」と agent の指摘を `ui-review-alert` Issue 1 件へまとめ、
 両方無くなったら閉じる。warning の UI 違反も新しく出た週には通知される (前週から続く同じ違反は再通知しない)。
@@ -73,12 +83,38 @@ paths:
 4. **本番確認**: 次の週次で消えていれば done。`fixed` は **origin/main へのマージが修正より後で、監査の 30 分以上前**
    なら本番反映済みとみなし、それでも残っていれば pending に戻して再起票する (反映前は fixed のまま待つ)。
    done が再び出たら再発として pending。agent の by-design は 28 日で見直す (機械検出は観測中は保つ)。
-   agent の確認が走らなかった週は、agent の指摘を「消えた」と扱わない。
+   agent の確認が走らなかった週と、巡回でそのページを確認しなかった週 (`ui-review-latest.json` の `reviewedPages` に
+   無いページ) は、agent の指摘を「消えた」と扱わない。
 
 同期が失敗したら job を赤にする (握りつぶすと黙って止まる)。`workflow-health-daily` は本 workflow を
 週次契約 (1 回の失敗・予定枠の未起動で通知) で見ている。手動カードが担当する指摘は `owner` + `card` で持ち、
 そのカードが開いている間は起票しない。配線 (週次が同期して commit・ループがキューを commit) は
 `__tests__/ui-findings.test.mjs` が固定する。
+
+## チャートの文字の検査と修正の振り分け (2026-09-25)
+
+目盛りの数値が画面から切れる・凡例と目盛りが重なる・単位が重複する、といったチャートの崩れは
+スクショを agent に見せるだけでは取りこぼす (縮小した全体像では 1 文字の欠けが読めず、判断も週ごとに揺れる)。
+**文字の外枠の座標で機械的に判定し、UI 指摘のループに乗せる。** 検出は 2 系統:
+
+| 指標 | 対象 | 判定 |
+|---|---|---|
+| `chart_text_issues` | ページに直接描く SVG チャート (D3・代表URL・ブラウザ) | 実フォントで描画された `<text>` の外接矩形が SVG の描画範囲から 2px 超出る (overflow: visible の SVG は除外) / 同じ SVG 内の文字どうしが小さい方の 25% 以上かつ 3px 四方以上重なる。チャートは画面に入ってから描かれるので `scrollThroughPage` で描かせてから測る (幅ごとの `responsive_layout_issues` も同じ) |
+| `blog_svg_text_issues` | 記事に `<img>` で埋め込んだ静的 SVG (全記事・静的) | svg-lint の `findChartTextIssues` (文字幅の推定・回転と text-anchor を反映)。`lib/check-svg-text.ts` が記事チャート SVG を 1 枚ずつ取得して検査する。`<img>` の中身はブラウザ検査から見えないため |
+
+2026-09-25 の本番実測 (代表URL 12 件 × 412/1440px): `/areas/13000` の積み上げ面グラフで縦軸の目盛りが
+左に 4〜12px 切れているのを検出し、他の 11 ページは 0 件 (誤検知なし)。
+
+**修正は 2 種類に分かれ、カード本文 (`chartFixGuide`) に手順を書く:**
+
+- **部品を直す (agent)**: `chart_text_issues` は共有チャート部品の不具合で、1 部品を直せば同じ部品を使う全ページが直る。
+  ページ単位ではなく部品単位で直し、長いラベルで描く回帰テストを足す。生成器が原因の `blog_svg_text_issues`
+  (`generator-fix`) も同じで、`packages/svg-builder` を直す。
+- **作り直すだけ (スクリプト)**: 生成器が既に正しい記事 SVG は、data JSON から作り直せば直る (`regen-fixes`)。
+  `npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @<batch>` が公開中の SVG と作り直した SVG の両方を検査して
+  `regen-fixes` / `generator-fix` / `no-data` / `clean` に振り分け、反映コマンド
+  (`regenerate-blog-svgs.yml` の slug 指定) を出力する。**R2 への反映はオーナー承認が要る**ので、ループは
+  `[実行:ユーザー]` カードを起票して `--mark-owner` で紐付ける (勝手に dispatch しない)。
 
 ## UI 検査の判定 (誤検知を出さないための除外)
 

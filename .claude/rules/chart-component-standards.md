@@ -143,7 +143,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `DistributionHistogram` | `@/components/charts/DistributionHistogram` | 全国分布ヒストグラム（市区町村ランキング 1,718 自治体用）。**サーバー側でビン化済みの集計配列**（`binMunicipalityValues`、右裾は overflow ビンへ畳む）だけを受け取り、生の観測行は受け取らない。選択都道府県は基線上のラグ（縦ティック）で重ねる（全国と地域は件数スケールが 2 桁違うため棒の重ね描きは不可視になる）。中央値の破線・`useD3Tooltip`（ビン範囲 + 全国/県の件数）付き |
 | `MiniDistributionBars` | `@/components/charts/MiniDistributionBars` | カード内埋め込みの分布スパークバー（市区町村テーマ一覧カード用）。item.json に**焼き込み済みの分布ビン**（builder が `binMunicipalityValues` で生成）を描くだけの装飾チャート。カード全体がリンクのため**非インタラクティブ・aria-hidden**（tooltip をリンク内に置かない。数値情報はカードのテキストが持つ） |
 
-#### カードフレームの役割分担（★重複と誤判定しないこと）
+#### カードフレームの役割分担（重複と誤判定しないこと）
 
 `@/components/charts` のカード枠は**基盤 `SurfaceCard` を共有しつつ、用途別に明確な役割を持つ**。
 表層が似ている（どれも `SurfaceCard` を p-0 でラップ）が**重複ではない**。マージは leaky abstraction を生むため禁止。
@@ -254,6 +254,7 @@ const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = 
 
 - ミニチャート: `viewBox="0 0 260 84"` を基準に `width="100%"` でレスポンシブ
 - フルサイズ: `packages/visualization` の各 Props 型に従う
+- 軸・軸タイトル・SVG 内凡例を描く D3 チャートは、描画 effect の末尾で `fitSvgViewBox(svg, width, height)`（`packages/visualization/src/d3/utils/fit-svg-viewbox.ts`）を必ず呼び、はみ出したテキスト分だけ viewBox を広げる。比率マージンの調整で見切れを直さない（契約テスト `fit-svg-viewbox.test.tsx` が未呼び出しを検出する）
 
 ### アクセシビリティ
 

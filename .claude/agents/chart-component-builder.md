@@ -68,7 +68,7 @@ No prose before/after.
 
 監査レポート時は **Template C（report）**:
 ```
-≤ 400 words. Structure:
+Only as long as the findings require. Structure:
 1. 違反件数サマリ（箇条書き）
 2. 優先是正リスト（影響大順）
 3. 推奨アクション

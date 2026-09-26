@@ -15,7 +15,7 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 
 PR は **develop → main の 1 段階のみ**。feature/* → develop は直 merge で可 (個人開発、self-review 前提)。
 
-## 実行環境による差分 (web / クラウド) ★
+## 実行環境による差分 (web / クラウド)
 
 `gh` CLI と GitHub Actions の起動可否が環境で異なる。混同すると「dispatch できるはず」と誤認する (2026-06-02 発生)。
 
@@ -26,7 +26,7 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 
 > **データ公開は develop 経由**: `blog-auto-publish.yml` / `publish-affiliate-ads.yml` / `publish-blog.yml` は **develop を checkout** する。feature を main へ直接 squash しただけだと記事/広告が develop に乗らず公開されない。記事を含むデプロイは必ず develop を経由させる (feature → develop で公開発火 → develop → main の PR でコードデプロイ)。
 
-### ★`[skip ci]` の commit-back がヘッドになると PR に check が 1 つも付かない
+### `[skip ci]` の commit-back がヘッドになると PR に check が 1 つも付かない
 
 CI が develop へ書き戻す commit は `[skip ci]` を持つ。**それが develop の HEAD になった状態で
 develop→main の PR を開く / 既に開いていると、その commit を head に持つ PR に check が
@@ -44,7 +44,7 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 (`git log --oneline -1 origin/develop`)。**後続の実コミットを push すれば CI が発火する**。
 空コミットで済ませず、その時点で残っている本来の作業 (規約の追記・是正など) を載せるとよい。
 
-#### ★commit 件名にトークンを書かない (2026-08-05 に実際に踏んだ)
+#### commit 件名にトークンを書かない
 
 GitHub は **commit メッセージ内のどこにあっても** skip トークン (`[skip ci]` / `[ci skip]` /
 `[no ci]` / `***NO_CI***`) を拾う。件名の一部として引用したつもりでも run は作られない。
@@ -85,7 +85,7 @@ grep で追える監査可能な逃げ道で、うっかりでは書けない (�
 - **main**: 本番デプロイブランチ。**develop → main の PR 経由でのみ更新**。`gh pr create --base main --head develop` で CI (`.github/workflows/pr-quality-check.yml`) を発火 → green を確認してマージ → Cloudflare Pages 自動デプロイ
 - main への直接コミット / push / force push は禁止
 
-## hotfix / main 直行を入れたら main → develop を即同期する（★分岐再発防止・2026-06-08）
+## hotfix / main 直行を入れたら main → develop を即同期する（分岐再発防止）
 
 緊急 hotfix を `hotfix/* → main` の PR で入れる等、**develop を経由せず main に commit が乗った場合**、main が develop より先行して **main/develop が分岐**する。同じ内容を develop でも別 SHA で持っていると、次の `develop → main` PR が **重複コミット込みで巨大化・コンフリクト化**する（2026-06-08 実際に発生: PR が 2955 ファイル diff になり手作業 reconcile が必要だった）。
 
@@ -101,7 +101,7 @@ git push origin develop
 
 原則は「main に入るものは必ず develop を先に通す」。hotfix もできる限り `feature → develop → PR develop→main` に乗せ、緊急で main 直行した場合のみ上記で即同期する。`/deploy` は Step 1 で `origin/develop..origin/main` を必ずチェックする。
 
-## ★scheduled workflow は default branch (main) の定義で発火する (2026-08-21 実測)
+## scheduled workflow は default branch (main) の定義で発火する
 
 **cron を止めたいのに develop から workflow を消しても止まらない。** GitHub Actions は
 schedule を **default branch のファイルから読む**ので、main に残っている限り発火し続ける。
@@ -127,7 +127,7 @@ schedule を **default branch のファイルから読む**ので、main に残�
 - feature/* → develop の PR は self-merge → PR 自体を作る価値がない (オーバーヘッドだけ)
 - develop → main の PR を「本番デプロイの最終ゲート」に集約することで、CI green + 履歴境界 + ロールバック単位の 3 つを 1 箇所で確保
 
-## develop への push も高速ゲートを通る (★2026-08-20 新設)
+## develop への push も高速ゲートを通る
 
 **「develop は完全に無検査」ではなくなった。** `develop-quality-gate.yml` が push ごとに
 fast-gates (ESLint / env registry / maintenance debt / warning ratchet / card census / design system /
@@ -166,7 +166,7 @@ npm run preflight
 pre-commit の代替ではない (型・docs・画像 pipeline の深い検査は含まない)。
 **通っても commit が通る保証はしないが、ここで落ちれば確実に落ちる。**
 
-### push 前に「生成物の鮮度」をまとめて確認する (★2026-09-06 追加)
+### push 前に「生成物の鮮度」をまとめて確認する
 
 PR CI の静的検査 (2026-09-18 から Static Gates / Contract Tests / Catalog Gates の 3 job 並列、各 job 内は直列) は
 **最初の失敗で同じ job の残りを実行しない**。
@@ -190,7 +190,7 @@ Workspace Contract) を追加した。それまでは一覧に無く、push 前�
 `.claude/scripts/lib/__tests__/preflight-commit.test.mjs` が静的に固定する
 (片方から 1 つ落とすとテストが落ちることを実測済み)。
 
-### ★merge commit の後に rebase しない (2026-09-06 に実際に壊した)
+### merge commit の後に rebase しない
 
 `git merge origin/main` の後に `git rebase origin/develop` を実行すると、rebase が
 **merge を平坦化**しようとして main 側の commit を 1 つずつ replay し、途中で競合して停止する。
@@ -217,7 +217,7 @@ origin 側に既に違反があれば継承 (直して commit に含めてよい
 - `/deploy` スキルで実行
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
 
-### デプロイ頻度の規律 ★毎回デプロイしない（2026-06-20 追加）
+### デプロイ頻度の規律 — 毎回デプロイしない
 
 **変更のたびに本番デプロイ（develop→main PR → CI → merge → Cloudflare deploy）を回さない。** CI（6-8分）+ Cloudflare ビルド/デプロイ（6-8分）が毎回走り、時間もコストも無駄になる。
 
@@ -241,7 +241,7 @@ Reference (metrics/articles)          : git TS / article.md ──再生成─�
 Derived (area_profiles/相関)          : R2 観測値をエフェメラル計算 (:memory:/DuckDB) ──▶ R2 snapshot
 ```
 
-### ★R2 反映は `main` のコードで動く — 生成ロジックを変えたら**デプロイが先** (2026-09-07 実測)
+### R2 反映は `main` のコードで動く — 生成ロジックを変えたら**デプロイが先**
 
 `sync-snapshots.yml` の sync job は **`ref: main` を checkout する**。`workflow_dispatch` の
 `ref` にも proxy の `ref` にも従わない (`ref: develop` を指定しても main で動く)。

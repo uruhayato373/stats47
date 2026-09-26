@@ -82,7 +82,11 @@ function sync(): void {
   const run = JSON.parse(readFileSync(runPath, "utf8")) as AuditRun;
   const review =
     reviewPath && existsSync(reviewPath)
-      ? (JSON.parse(readFileSync(reviewPath, "utf8")) as { reviewStatus?: string; findings?: AgentFinding[] })
+      ? (JSON.parse(readFileSync(reviewPath, "utf8")) as {
+          reviewStatus?: string;
+          findings?: AgentFinding[];
+          reviewedPages?: string[];
+        })
       : { reviewStatus: "not-run", findings: [] };
   const agentReviewed = review.reviewStatus === "reviewed" || review.reviewStatus === "no-issues";
 
@@ -94,6 +98,7 @@ function sync(): void {
     mainDeployedAt: arg("--main-deployed-at") ?? null,
     openCardIds: openIds,
     agentReviewed,
+    agentReviewedPages: "reviewedPages" in review ? review.reviewedPages : undefined,
   });
   const cards = planUiCards({ queue: findings, openIds, today: today(), screenshotBaseUrl: SCREENSHOT_BASE_URL });
 

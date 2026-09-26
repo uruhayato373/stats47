@@ -52,7 +52,7 @@ R2 gis/mlit-ksj/{dataId}/{version}/  →  build-data-catalog.tsが実査 → 本
 R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 ```
 
-## 新規データセット追加手順 (★手動 SQLite INSERT は禁止)
+## 新規データセット追加手順 (手動 SQLite INSERT は禁止)
 
 1. `datasets.ts` の `GIS_DATASETS` にエントリ追加 (メタ + ranking 定義)
 2. `registry.ts` の `KSJ_CODE_CONFIG` に技術設定 (downloadUrlPattern 等) 追加。
@@ -94,7 +94,7 @@ sourceを書き換えただけでは同じkeyの旧values.jsonを公開できな
 公開時の出典は「データ名、国土交通省、個別ページURL、取得日、stats47が加工した事実」を最低限表示し、
 個別データページの条件が一般規約より優先される。利用範囲が曖昧なら推測せず国土数値情報運営事務局へ確認する。
 
-## 県の帰属 — 属性 → 空間結合 → 距離上限つき許容 (★2026-08-17 新設)
+## 県の帰属 — 属性 → 空間結合 → 距離上限つき許容
 
 ShapefileのDBFは `.cpg` を確認し、Shift_JIS / CP932 / Windows-31Jを正規化して初回読取時に指定する。`.cpg` が欠ける旧配布（W09/05など）は `registry.ts` の `shapefileEncoding` を明示する。読取後の再デコードでは欠損文字を復元できない。原典から再生成し、件数と非文字属性の一致・置換文字の不存在を確認する。ZIPの指定 `UTF-8/` がない場合も、同梱GeoJSONを先に探してUTF-8を厳格検証し、存在するのにDBFへ切り替えない（L01/26・L02/25で文字化けを実測）。
 

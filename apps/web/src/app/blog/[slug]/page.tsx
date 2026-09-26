@@ -14,7 +14,7 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { CATEGORIES } from "@stats47/data-configs";
 
-import { ArticleShell } from "@/components/layout";
+import { ArticleShell, CURRENT_ITEM_CLASS } from "@/components/layout";
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { RailDataDiscoveryCards, RailLinksCard, RailSearchCard } from "@/components/rail";
@@ -306,13 +306,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <OperatorProfileCard />
         </>
     );
-
-    // レール末尾の sticky クラスタ: PCでTOCが読中に追従する。モバイルは本文冒頭だけを使う。
-    const railSticky = (
-        <div className="hidden lg:block">
-            <ArticleTableOfContents content={renderedArticle.content} />
-        </div>
-    );
+    // レール末尾: ここまでが右レールの静的範囲 (check-ad-placement.cjs と広告配置の契約テストが範囲の終わりの目印に使う)
 
     return (
         <>
@@ -322,9 +316,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             />
             <ArticleShell
                 rail={rail}
-                railSticky={railSticky}
                 breadcrumb={
-                    <Breadcrumb className="mb-4">
+                    <Breadcrumb className="mb-4" data-nav-surface="breadcrumb">
                         <BreadcrumbList>
                             <BreadcrumbItem>
                                 <BreadcrumbLink asChild>
@@ -337,8 +330,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     <Link href="/blog">ブログ</Link>
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
+                            {/* 狭い画面では記事名を出さない (見出しと重なるため。Breadcrumbs と同じ扱い) */}
+                            <BreadcrumbSeparator className={CURRENT_ITEM_CLASS} />
+                            <BreadcrumbItem className={CURRENT_ITEM_CLASS}>
                                 <BreadcrumbPage>{article.title}</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
@@ -346,11 +340,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                 }
             >
                 <div className="space-y-6">
-                    {/* TOC (lg 未満で記事冒頭に表示。lg 以上は右 rail に表示) */}
-                    <div className="lg:hidden">
-                        <ArticleTableOfContents content={renderedArticle.content} />
-                    </div>
-
                     <ArticleCard>
                             {/* 記事ヘッダー */}
                             <header className="mb-8 border-b border-border pb-6 font-news-article">
@@ -381,6 +370,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     </div>
                                 </div>
                             </header>
+
+                            {/* 目次 (全幅共通でタイトルの後・本文の前に 1 か所だけ) */}
+                            <ArticleTableOfContents content={renderedArticle.content} />
 
                             {/* 記事本文 */}
                             <ArticleRenderer

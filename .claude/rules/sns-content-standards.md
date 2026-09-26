@@ -93,7 +93,7 @@ X_WEEKLY_TARGET_MAX=21
 (スキル内にテンプレを重複させない = ドリフト防止)。**post-x / post-x-batch / x-strategist は
 テンプレ本文を自前で持たず、必ず本節を参照する** (過去に 4 箇所へドリフトした反省)。
 
-### 2-0. X テンプレ機械カタログ (★SSOT・template id)
+### 2-0. X テンプレ機械カタログ (SSOT・template id)
 
 X 投稿の「型」は下表を単一ソースとする。各投稿は `template` id を 1 つ持ち、posts.json の
 `template` 列に**必ず記録する** (勝ちパターン分析 `analyze-x-winning-patterns.mjs` の前提)。
@@ -293,7 +293,7 @@ node .claude/scripts/note/patch-note-paid-landing.mjs --all --commit          # 
 添付を再アップロードする editor 経路 (`publish-kakei-paid-update.sh`) は本文全体を作り直すときだけ使う。note の
 **添付アップロード 1 日 10 回**制限に掛かるので dry run を繰り返さず、ゲートをスクリプト内に置いて 1 回で通す。
 
-### 2-8. 角度 × カテゴリ相性表 (★SSOT・旧 post-x-6angles/reference から吸収)
+### 2-8. 角度 × カテゴリ相性表 (SSOT・旧 post-x-6angles/reference から吸収)
 
 ランキングの categoryKey (17 軸) ごとに、どの切り口が効くかの早見表。`select-candidates.cjs` が
 `.claude/scripts/lib/x-catalog.cjs` の `getAffinity()` 経由でこれを読み、§2-0 の template を割り付ける。
@@ -328,7 +328,7 @@ node .claude/scripts/note/patch-note-paid-landing.mjs --all --commit          # 
 - 文例集は旧 `post-x-6angles/reference/angle-templates.md` を本表の下位資料として保持しない
   (LLM が §2-0 structure + §2-8 相性 + 勝ちパターンから執筆する)。
 
-### 2-9. X 画像カタログ (★SSOT・添付画像の種類)
+### 2-9. X 画像カタログ (SSOT・添付画像の種類)
 
 X 投稿に添付できる画像種を単一ソース化する。`.claude/scripts/lib/x-catalog.cjs` の `getImageKinds()`
 が下記アンカーをパースする。§2-0 の `image_kind` 列がここを参照する。**出力パスは publish-x が読む
@@ -353,7 +353,7 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
   流用しない。15件構成はbaseline 3 / spatial cross 9 / method 2 / decision 1を機械検証する。
 - SVG→PNG 変換は `.claude/scripts/lib/svg-to-png.cjs` に一本化 (sharp 失敗時は exit≠0 で確実化)。
 
-### 2-10. カタログ改訂手順 (★人間承認ゲート)
+### 2-10. カタログ改訂手順 (人間承認ゲート)
 
 §2-0 / §2-8 / §2-9 / §1 quota の改訂は**実測と競合観測に基づく**こと (`evidence-based-judgment.md`)。
 
@@ -491,7 +491,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
   拾うのは前日まで。posted-log の日付はスクリプトが出す `POST_DATE` (エントリの予約日) で記録し、
   実行日で記録しない (実行日だと繰り越し分を次の実行が再投稿する)
 
-### R2 素材保持ポリシー (★コスト対策)
+### R2 素材保持ポリシー (コスト対策)
 
 **投稿済み (posted) の派生 SNS 動画 (.mp4) は投稿後 30 日で R2 から自動削除する**
 (`cleanup-posted-sns-videos.ts` + `.github/workflows/cleanup-r2-sns-videos.yml` weekly)。

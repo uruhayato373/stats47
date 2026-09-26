@@ -21,7 +21,7 @@ const SCROLL_EDGE_TOLERANCE = 2;
 // 矢印はカード列の上の行に置く。カードに重ねると 1 位の値を隠し、
 // タップがカードのリンクへ抜ける (2026-09-23 週次 UI 検査で全 7 幅に重なりを検出)。
 const NAVIGATION_BUTTON_CLASS =
-  'relative h-9 w-9 rounded-none bg-background shadow-sm transition-opacity sm:h-8 sm:w-8';
+  'relative h-9 w-9 rounded-md bg-background shadow-sm transition-opacity sm:h-8 sm:w-8';
 
 /**
  * ポータルカード共通の1行カルーセル。

@@ -22,7 +22,7 @@ import { Button } from "@stats47/components/atoms/ui/button";
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "lucide-react";
 
-import { PageShell, PageHeader } from "@/components/layout";
+import { Breadcrumbs, PageShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
 
@@ -119,6 +119,9 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
       />
 
+      <Breadcrumbs
+        items={[{ label: "ホーム", href: "/" }, { label: "このサイトについて" }]}
+      />
       <PageHeader
         title="このサイトについて"
         description="統計で見る都道府県（stats47）は、47 都道府県の公的統計データを「誰でも使える形」にリデザインする個人運営サイトです。県庁職員を約 20 年務めたのち、在職中に独学で AI を学び、IT・データ業界へ転職・独立した運営者が、e-Stat などの一次データを可視化し、独自の分析と解説を添えてお届けします。"
@@ -176,7 +179,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-2">
             <a href={OPERATOR_PROFILE.links.note} target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="w-full gap-2">
-                <span className="font-bold text-[#147d6f] dark:text-[#65d7c5]">note</span>
+                <span className="font-bold text-[#12766a] dark:text-[#65d7c5]">note</span>
                 <span className="text-xs">統計の読み方を解説</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>

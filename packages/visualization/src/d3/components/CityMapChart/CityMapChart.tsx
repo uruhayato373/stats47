@@ -309,8 +309,8 @@ export function CityMapChart({
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2" />
-            <p className="text-sm text-gray-600">読み込み中...</p>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2" />
+            <p className="text-sm text-muted-foreground">読み込み中...</p>
           </div>
         </div>
       </div>
@@ -325,10 +325,10 @@ export function CityMapChart({
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <p className="text-red-500 mb-2 font-semibold">
+            <p className="text-negative mb-2 font-semibold">
               地図の読み込みに失敗しました
             </p>
-            <p className="text-sm text-gray-500">{error}</p>
+            <p className="text-sm text-muted-foreground">{error}</p>
           </div>
         </div>
       </div>

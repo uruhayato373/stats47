@@ -3,12 +3,15 @@ import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import Link from "next/link";
 
 
-import { cn } from "@stats47/components";
+import { CARD_SURFACE_CLASS, cn } from "@stats47/components";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
-/* カード外枠はトークン解決に依存せず、サイト全体で明示的に角丸なし。 */
-const surfaceCardClass =
-  "rounded-none border bg-card p-4 shadow-sm transition-colors";
+/*
+ * カード外枠の角丸・線色・地は CARD_SURFACE_CLASS (@stats47/components) の単一定義に従い、
+ * 値は globals.css の --card-radius / --card-outline で決める。ここでは余白と遷移だけを足す。
+ * border は幅だけ残るので、レイアウトと interactive の hover 枠色が保たれる。
+ */
+const surfaceCardClass = cn(CARD_SURFACE_CLASS, "p-4 transition-colors");
 
 const interactiveSurfaceClass =
   "hover:border-primary/40 hover:bg-accent/40 hover:shadow-md";
@@ -95,7 +98,7 @@ export function SurfaceLinkCard({
 
 /**
  * 記事本文を包むカード (reading zone 専用・Soft Editorial)。
- * 角丸なし + 通常カードと同じ shadow-sm。モバイル (sm 未満) では画面端までフルブリード。
+ * 外枠は通常カードと同じ CARD_SURFACE_CLASS。モバイル (sm 未満) では画面端までフルブリード。
  * ArticleShell のコンテナ px-4 を負マージンで打ち消して端まで届かせる。
  */
 export function ArticleCard({
@@ -106,7 +109,7 @@ export function ArticleCard({
   return (
     <div
       className={cn(
-        "rounded-none border bg-card shadow-sm",
+        CARD_SURFACE_CLASS,
         "px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12",
         "max-sm:-mx-4 max-sm:rounded-none max-sm:border-x-0",
         className,
@@ -228,7 +231,7 @@ interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title
 
 /**
  * レール内の独立したまとまり 1 つ = RailCard 1 枚 (左右レール共通の Surface 契約)。
- * 外枠 (bg-card / 全周 border / shadow-sm / rounded-none)、見出し、本文 padding、
+ * 外枠 (CARD_SURFACE_CLASS)、見出し、本文 padding、
  * 折りたたみの見た目をここだけが持つ。レール側で独自の枠・背景・padding を足さない。
  * 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」
  */

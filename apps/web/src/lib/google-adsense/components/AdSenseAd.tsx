@@ -197,7 +197,7 @@ export function AdSenseAd({
         // 遅延ロード中のスペース確保（CLSの防止）
         <div
           style={{ width: "100%", minHeight: `${reservedMinHeight}px` }}
-          className="bg-gray-100"
+          className="bg-muted"
         />
       )}
     </div>

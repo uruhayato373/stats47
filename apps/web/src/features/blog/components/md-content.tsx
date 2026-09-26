@@ -33,7 +33,10 @@ import {
 import { buildHeadingSlug } from "../lib/heading-slug";
 import { type InlineAffiliateBanner } from "../utils";
 
+import { Callout } from "./Callout";
+import { toCalloutType } from "./callout-config";
 import { preprocessCallouts } from "./md-preprocessor";
+import { RankingLinkCard } from "./RankingLinkCard";
 import { ResponsiveArticleImage } from "./ResponsiveArticleImage";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
 
@@ -127,7 +130,7 @@ function makeMdComponents(
                 );
             }
             return (
-                <Link href={typeof href === "string" ? href : "#"}>
+                <Link href={typeof href === "string" ? href : "#"} data-nav-surface="blog_body">
                     {children}
                 </Link>
             );
@@ -191,27 +194,27 @@ function makeMdComponents(
 
         pre: ({ children, ...props }: ComponentProps) => (
             <pre
-                className="my-4 overflow-x-auto rounded-lg border border-slate-700 bg-slate-900 p-4 text-sm leading-relaxed text-slate-100 shadow-sm"
+                className="my-4 overflow-x-auto rounded-content border border-border bg-muted p-4 text-sm leading-relaxed text-foreground shadow-sm"
                 {...props}
             >
                 {children}
             </pre>
         ),
         code: ({ children, className: codeClassName, ...props }: ComponentProps & { className?: string }) => {
-            // インラインコード: 明るい灰色背景 + 濃い赤茶系文字 (本文との対比を確保)
+            // インラインコード: muted 背景 + 枠線 + 等幅で本文と区別する
             if (!codeClassName) {
                 return (
                     <code
-                        className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[0.92em] font-mono text-red-700"
+                        className="rounded border border-border bg-muted px-1.5 py-0.5 text-[0.92em] font-mono text-foreground"
                         {...props}
                     >
                         {children}
                     </code>
                 );
             }
-            // コードブロック内の <code>: 親 <pre> の dark 配色を継承 (text-slate-100)
+            // コードブロック内の <code>: 親 <pre> の配色を継承
             return (
-                <code className={`${codeClassName} text-slate-100`} {...props}>
+                <code className={codeClassName} {...props}>
                     {children}
                 </code>
             );
@@ -282,19 +285,13 @@ function makeMdComponents(
             </span>
         ),
 
-        "source-link": ({ href, children }: ComponentProps & { href?: string }) => (
-            <span className="my-4 block not-prose">
-                <SurfaceLinkCard
-                    href={href ?? "#"}
-                    className="flex items-center justify-between border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10"
-                >
-                    <span className="flex items-center gap-2">
-                        {children}
-                    </span>
-                    <ArrowRight className="h-4 w-4 shrink-0" />
-                </SurfaceLinkCard>
-            </span>
-        ),
+        // 図に属する導線なので上は詰め (直上の図・出典行との間)、下は次の本文と切り離す。
+        "source-link": ({ href, children }: ComponentProps & { href?: string }) =>
+            href ? (
+                <span className="mb-8 mt-4 block not-prose">
+                    <RankingLinkCard href={href}>{children}</RankingLinkCard>
+                </span>
+            ) : null,
 
         // 本文インラインのテキストリンク広告。index 属性 (0 始まり) で解決済み配列から 1 件消費する。
         // 描画は既存 AffiliateTextAdList を再利用 (PR ラベル / rel="sponsored" / GA4 計装が入っている)。
@@ -373,6 +370,12 @@ function makeMdComponents(
                     />
                 </div>
             );
+        },
+
+        // `> [!NOTE]` 等 (md-preprocessor が <callout type="note"> に変換)。見た目は Callout が持つ。
+        callout: ({ type, children }: ComponentProps & { type?: string }) => {
+            const calloutType = toCalloutType(type);
+            return calloutType ? <Callout type={calloutType}>{children}</Callout> : <>{children}</>;
         },
 
         "related-articles": ({ children }: ComponentProps) => (
@@ -561,7 +564,7 @@ export function MDContent({
     );
     return (
         <article
-            className="blog-news-article prose prose-zinc dark:prose-invert max-w-none prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
+            className="blog-news-article prose prose-zinc dark:prose-invert max-w-none prose-pre:my-4 prose-pre:bg-muted prose-pre:text-foreground prose-pre:border prose-pre:border-border prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
             suppressHydrationWarning
         >
             <ReactMarkdown

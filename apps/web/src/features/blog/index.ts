@@ -9,6 +9,7 @@
 
 // 型定義
 export type { Article } from './types/article.types';
+export type { RankingLinkCardData } from './components/RankingLinkCard';
 
 // クライアントセーフなコンポーネント
 export { TagBadge } from './components/tag-badge';

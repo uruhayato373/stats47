@@ -89,7 +89,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 2. Must / Should / Couldごとに完了・未完了・計画外を分ける。
 3. KPI変化は同じ定義・同じ期間のsnapshotだけで比較する。
 4. effect判定が必要な施策は`.claude/rules/evidence-based-judgment.md`に従う。
-5. 未完了は削除せず、次週へ渡す理由とownerを記録する。
+5. 未完了は削除せず、次週へ渡す理由とownerを記録する。Mustの達成数は「Must N/M」の形で書く（週次メトリクスIssueの連続未達計測がこの形を読む）。2週連続で残ったMustは、申し送りに分割案か降格を書く。申し送りの各項目にはbacklog / improvementsのIDを付ける。
 6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
 7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
 8. 候補は人間承認前に改善バックログへ追加しない。active施策のWIPは5以下を守る。

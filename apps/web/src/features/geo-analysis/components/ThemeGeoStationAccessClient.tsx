@@ -80,7 +80,7 @@ export function ThemeGeoStationAccessClient({
           description="駅の位置を固定し、駅代表点から直線800m以内に中心がある1kmメッシュの人口を比較します。2050年は将来推計人口です。"
           hideRule
         />
-        <Table aria-label="駅800m圏人口の都道府県別集計">
+        <Table className="whitespace-nowrap" scrollRegion aria-label="駅800m圏人口の都道府県別集計">
           <TableHeader>
             <TableRow>
               <TableHead scope="col" className="whitespace-nowrap">

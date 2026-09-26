@@ -25,6 +25,8 @@ import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
 
 import { RankingYearSelector } from "@/features/ranking";
 
+import { trackUiInteraction } from "@/lib/analytics/events";
+
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { fetchIndicatorForYearAction } from "../actions";
@@ -203,7 +205,13 @@ export function ThemeDashboardTabbed({
   // --- 共通パーツ ---
 
   const indicatorTabs = (
-    <Tabs value={selectedTabKey} onValueChange={setSelectedTabKey}>
+    <Tabs
+      value={selectedTabKey}
+      onValueChange={(value) => {
+        trackUiInteraction({ action: "tab_switch", target: "metric" });
+        setSelectedTabKey(value);
+      }}
+    >
       <ScrollableTabsList tabs={tabIndicators} />
     </Tabs>
   );
@@ -462,6 +470,7 @@ function DeferredTabs({
   );
 
   const handleTabChange = (value: string) => {
+    trackUiInteraction({ action: "tab_switch", target: value === "table" ? "table" : value === "stats" ? "chart" : "map" });
     setActiveTab(value);
     setMountedTabs((prev) => {
       if (prev.has(value)) return prev;

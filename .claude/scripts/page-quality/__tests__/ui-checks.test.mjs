@@ -20,6 +20,18 @@ test("空の見出しを数え、読み込み中の仮枠・alt・aria-label 付
   assert.equal(analyzeHtml(html, BASE).empty_headings, 2);
 });
 
+test("外部サイトへのリンクで新しいタブを指定しないものだけを数える (自サイト・相対・新しいタブは数えない)", () => {
+  const html = `<html><body>
+    <a href="https://www.e-stat.go.jp/dbview?sid=1" target="_blank" rel="noopener noreferrer">統計表</a>
+    <a href="https://nlftp.mlit.go.jp/ksj/">国土数値情報</a>
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_self">CC BY-SA</a>
+    <a href="https://stats47.jp/ranking/total-population">自サイト (絶対 URL)</a>
+    <a href="/survey/census">相対リンク</a>
+    <a href="mailto:info@example.com">メール</a>
+  </body></html>`;
+  assert.equal(analyzeHtml(html, "https://stats47.jp").external_links_same_tab, 2);
+});
+
 test("「データ出典」見出しが 2 つ並ぶ (本文の手書き節 + DataSourceList) と重複として数える", () => {
   const single = `<html><body><article><h2>まとめ</h2></article>
     <section data-testid="data-source-section"><h2>データ出典</h2></section></body></html>`;
@@ -119,6 +131,36 @@ test("文字が枠からはみ出して切れている要素を検出し、ellip
       const { clipped } = await evaluateLayoutIssues(page);
       assert.equal(clipped.length, 1, JSON.stringify(clipped));
       assert.match(clipped[0], /^div/);
+    }
+  );
+});
+
+test("SVG チャートの文字の切れと重なりを検出し、overflow:visible・アイコン・title は数えない", async (t) => {
+  // 2026-09-25 実測: /areas/13000 の積み上げ面グラフで縦軸の目盛りが左に 4〜12px 切れていた (x < 0)。
+  // ビールの折れ線では下の凡例と斜めの月ラベルが同じ帯に重なっていた。
+  await withPage(
+    t,
+    `<body style="margin:0">
+      <svg id="clip" width="300" height="200" viewBox="0 0 300 200" aria-label="積み上げ面グラフ">
+        <title>1400.0万 を含むグラフ</title>
+        <text x="-12" y="40" font-size="14">1400.0万</text>
+        <text x="100" y="40" font-size="14">中央の文字</text>
+      </svg>
+      <svg id="overlap" width="300" height="200" viewBox="0 0 300 200" aria-label="月別パターン">
+        <text x="100" y="180" font-size="14">2000年</text>
+        <text x="110" y="182" font-size="14">4月</text>
+        <text x="200" y="40" font-size="14">離れた文字</text>
+      </svg>
+      <svg width="300" height="200" viewBox="0 0 300 200" style="overflow:visible" aria-label="意図的に外へ出す">
+        <text x="-30" y="40" font-size="14">外へ出す</text>
+      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>
+    </body>`,
+    async (page) => {
+      const { chartText } = await evaluateLayoutIssues(page);
+      assert.equal(chartText.length, 2, JSON.stringify(chartText));
+      assert.match(chartText[0], /積み上げ面グラフ.*"1400\.0万".*はみ出して切れている/);
+      assert.match(chartText[1], /月別パターン.*"2000年".*"4月".*重なっている/);
     }
   );
 });

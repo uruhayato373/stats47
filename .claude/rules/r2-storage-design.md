@@ -18,7 +18,7 @@ paths:
 - reader 関数に module-level メモリキャッシュを持たせない。各リクエストが対応する小さい JSON を直接 fetch する
 - `compare/` は `category/` と同じデータを使う。R2 ファイルは `app/category/[key]/items.json` に統一し reader 側で両方から参照する
 
-## R2 読み書き — ローカル / CI 両方から remote が唯一の真実源 ★
+## R2 読み書き — ローカル / CI 両方から remote が唯一の真実源
 
 - **読み取り**はローカル可 (公開 URL `https://storage.stats47.jp`、認証不要)。
 - **書き込み**はローカル / CI 両方から remote R2 へ直接可能。常駐するローカル R2 ミラーは廃止済み
@@ -132,7 +132,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 - asset失敗を`continue-on-error` / `|| true`で隠す
 - 画像R2 writerで共通`concurrency: r2-write`を使わない
 
-## e-Stat API キャッシュ (`estat-api/`) — 復元可能・出典再現可能が要件 (★2026-08-04)
+## e-Stat API キャッシュ (`estat-api/`) — 復元可能・出典再現可能が要件
 
 テーマページ・area ページの**ライブチャート**が読む e-Stat レスポンスのキャッシュ。
 配信 snapshot (`app/`) ではなく、失っても e-Stat から再取得できる派生物。
@@ -150,7 +150,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 **禁止**: 整形後 (`StatsSchema[]`) だけを保存する / `params` を省く / TTL 無しで書き込む /
 `app/` 配下にキャッシュを置く（配信 snapshot と混ざる）。
 
-## R2 保持・削除ポリシー (★2026-07-27 新設)
+## R2 保持・削除ポリシー
 
 無料枠は 10 GB (アカウント合算)。R2 は「配信データを増やし続けるが自動で減らない」ため、
 放置すると必ず無料枠を超過する。削除可否と削除の唯一の入口を以下に固定する。

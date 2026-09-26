@@ -75,8 +75,8 @@ developer_instructions = '''
 docs/21_ブログ記事原稿/<slug>/  ← 下書き作成・チャート生成・レビューはここで行う
         ↓ /publish-article
 .local/r2/app/blog/<slug>/      ← 公開staging（publishedAt 設定）
-        ↓ /sync-articles
-DB (articles テーブル)           ← サイトに反映
+        ↓ publish-blog.yml (CI) / /sync-snapshots --only blog
+R2 app/blog/<slug>/ + all.json  ← サイトに反映 (all.json は export-blog-snapshot.ts が frontmatter から生成)
 ```
 
 **重要**: 記事の新規作成・編集は必ず `docs/21_ブログ記事原稿/` で行うこと。`.local/r2/app/blog/` に直接書かない。

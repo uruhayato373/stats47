@@ -1,5 +1,7 @@
 import { findGeoLayer } from '@stats47/data-configs/business-plan';
 
+import { GEO_MAP_COLORS } from './geo-map.palette';
+
 import type { GeoAnalysisPrefDetail } from '@stats47/gis';
 
 type Base = { areaCode: string; areaName: string; generatedAt: string };
@@ -62,12 +64,12 @@ export function projectGeoLayer(
 
 export function populationLayerColor(value: number) {
   return value === 0
-    ? '#e2e8f0'
+    ? GEO_MAP_COLORS.populationLayerScale[0]
     : value < 100
-      ? '#c6dbef'
+      ? GEO_MAP_COLORS.populationLayerScale[1]
       : value < 1000
-        ? '#6baed6'
+        ? GEO_MAP_COLORS.populationLayerScale[2]
         : value < 5000
-          ? '#2171b5'
-          : '#08306b';
+          ? GEO_MAP_COLORS.populationLayerScale[3]
+          : GEO_MAP_COLORS.populationLayerScale[4];
 }

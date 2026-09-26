@@ -267,22 +267,8 @@ export function adVertical(ad: {
   return undefined;
 }
 
-/** カテゴリ別テーマカラー（Tailwind クラス: border / bg / icon） */
-export const AFFILIATE_THEME: Record<
-  AffiliateVertical,
-  { border: string; bg: string; icon: string; emoji: string }
-> = {
-  labor:      { border: "border-blue-100",   bg: "bg-blue-50/50",   icon: "text-blue-400",   emoji: "💼" },
-  housing:    { border: "border-orange-100", bg: "bg-orange-50/50", icon: "text-orange-400", emoji: "🏠" },
-  population: { border: "border-pink-100",   bg: "bg-pink-50/50",   icon: "text-pink-400",   emoji: "💑" },
-  economy:    { border: "border-green-100",  bg: "bg-green-50/50",  icon: "text-green-500",  emoji: "💰" },
-  health:     { border: "border-teal-100",   bg: "bg-teal-50/50",   icon: "text-teal-500",   emoji: "💪" },
-  energy:     { border: "border-cyan-100",   bg: "bg-cyan-50/50",   icon: "text-cyan-500",   emoji: "💧" },
-  travel:     { border: "border-amber-100",  bg: "bg-amber-50/50",  icon: "text-amber-500",  emoji: "✈️" },
-  furusato:   { border: "border-red-100",    bg: "bg-red-50/50",    icon: "text-red-400",    emoji: "🎁" },
-  education:  { border: "border-indigo-100", bg: "bg-indigo-50/50", icon: "text-indigo-400", emoji: "📚" },
-  mobility:   { border: "border-slate-200",  bg: "bg-slate-50/50",  icon: "text-slate-500",  emoji: "🚗" },
-};
+/** カテゴリ別テーマカラー (識別パレット) は affiliate-category.palette.ts が正典。互換のため再 export。 */
+export { AFFILIATE_THEME } from "./affiliate-category.palette";
 
 /**
  * 出典調査 (surveys.json の id) → vertical。**カテゴリより細かい主題**で意図を決める最上位の写像。

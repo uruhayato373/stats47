@@ -1,7 +1,9 @@
 import Link from 'next/link';
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
+import { RankBadge } from '@/components/atoms/RankBadge';
 import { SectionCard } from '@/components/surface';
 
 import { selectDistinctProfileItems } from '../utils';
@@ -49,7 +51,7 @@ export function AreaRelatedRankingsCard({
         {strengths.length > 0 && (
           <SectionCard
             title={`${profile.areaName}が上位`}
-            icon={<TrendingUp className="h-4 w-4 text-emerald-600" />}
+            icon={<TrendingUp className="h-4 w-4 text-positive" />}
             headerAction={
               <Link
                 href="/themes"
@@ -66,9 +68,7 @@ export function AreaRelatedRankingsCard({
                   key={`${item.rankingKey}-${idx}`}
                   className="flex items-baseline gap-2"
                 >
-                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-emerald-50 text-xs font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
-                    {item.rank}位
-                  </span>
+                  <RankBadge rank={item.rank} tone="positive" />
                   <div className="min-w-0 flex-1">
                     <Link
                       href={`/ranking/${item.rankingKey}`}
@@ -78,7 +78,7 @@ export function AreaRelatedRankingsCard({
                     </Link>
                     <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
                       {item.value.toLocaleString('ja-JP')}
-                      {item.unit}（{item.year}）
+                      {formatUnitForDisplay(item.unit)}（{item.year}）
                     </p>
                   </div>
                 </li>
@@ -91,7 +91,7 @@ export function AreaRelatedRankingsCard({
         {weaknesses.length > 0 && (
           <SectionCard
             title={`${profile.areaName}が下位`}
-            icon={<TrendingDown className="h-4 w-4 text-red-600" />}
+            icon={<TrendingDown className="h-4 w-4 text-negative" />}
             headerAction={
               <Link
                 href="/themes"
@@ -108,9 +108,7 @@ export function AreaRelatedRankingsCard({
                   key={`${item.rankingKey}-${idx}`}
                   className="flex items-baseline gap-2"
                 >
-                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded-none bg-red-50 text-xs font-bold text-red-700 dark:bg-red-950 dark:text-red-400">
-                    {item.rank}位
-                  </span>
+                  <RankBadge rank={item.rank} tone="negative" />
                   <div className="min-w-0 flex-1">
                     <Link
                       href={`/ranking/${item.rankingKey}`}
@@ -120,7 +118,7 @@ export function AreaRelatedRankingsCard({
                     </Link>
                     <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
                       {item.value.toLocaleString('ja-JP')}
-                      {item.unit}（{item.year}）
+                      {formatUnitForDisplay(item.unit)}（{item.year}）
                     </p>
                   </div>
                 </li>

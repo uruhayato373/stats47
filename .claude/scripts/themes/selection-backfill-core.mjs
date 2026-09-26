@@ -213,8 +213,7 @@ export const OUTPUT_SCHEMA = {
 
 export const SYSTEM_PROMPT =
   "あなたは統計テーマの指標選定根拠を一次資料で裏付ける調査員です。ユーザーメッセージの指示だけに従い、" +
-  "WebSearch / WebFetch で実際に読んだ資料だけを根拠にして、要求された JSON を返してください。" +
-  "前置き・補足説明・確認の質問は書かないでください。";
+  "WebSearch / WebFetch で実際に読んだ資料だけを根拠にしてください。";
 
 function metricBlock(m) {
   const f = m.facts;
@@ -249,7 +248,7 @@ export function buildPrompt(target, { surveyedAt }) {
   <authorization>読み取りのみ。書き込み・投稿・購入は一切しない</authorization>
 </task>
 <output_format>
-JSON 1 個のみ (前後に文章を書かない)。スキーマ:
+--json-schema の構造化出力で返す。各フィールドの意味:
 {
   "theme": "${target.themeKey}",
   "entries": [{

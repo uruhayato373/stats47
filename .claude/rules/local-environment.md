@@ -38,7 +38,7 @@ packages/
 - **R2 読み取り (標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
   `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可）+ `NODE_OPTIONS='--conditions react-server'`。
 
-## R2 読み書き — ローカル / CI 両方から remote R2 が唯一の真実源 ★
+## R2 読み書き — ローカル / CI 両方から remote R2 が唯一の真実源
 
 **読み取り・書き込みともにローカルから remote R2 へ直接可能。ローカル R2 ミラー (`.local/r2`) は廃止。**
 `_assert-ci-write.ts` はデフォルト許可に変更済み。ローカル書き込み時は `console.warn` を出すだけで続行する。
@@ -69,7 +69,7 @@ packages/database/.data/stats47.sqlite
 
 - **プロキシ制約**: 企業ネットワークで S3 API が HTTP 407/503 でブロックされる場合あり。`/push-r2` スキルが wrangler CLI フォールバックを案内する
 
-### ★turbo は環境変数を落とす — TLS 傍受プロキシ配下で dev が壊れる (2026-08-04)
+### turbo は環境変数を落とす — TLS 傍受プロキシ配下で dev が壊れる
 
 **turbo 2.x は既定が strict env mode** で、`turbo.json` に宣言しない環境変数を子プロセスへ渡さない
 (実測: `npm run dev:web` で起動した dev サーバーの env は 42 個だけ)。落ちるものの中に
@@ -99,7 +99,7 @@ cd apps/web && npm run dev
 > `curl` や素の `node` が通るのに dev だけ落ちるのが特徴。**ネットワーク障害と誤診しないこと**
 > (シェルには `NODE_EXTRA_CA_CERTS` があるため手元の検証コマンドは全部通ってしまう)。
 
-### ★会社 Windows PC の dev は Windows R2 gateway を使う (2026-08-19)
+### 会社 Windows PC の dev は Windows R2 gateway を使う
 
 会社ネットワーク (兵庫県庁) は **i-FILTER (Digital Arts) が透過型 TLS 傍受**をしている。実測で確定した挙動:
 
@@ -222,7 +222,7 @@ codex mcp add notebooklm --env 'PYTHONIOENCODING=utf-8' --env 'NO_PROXY=localhos
 [Windows 証明書ストア](https://truststore.readthedocs.io/en/latest/) /
 [Codex MCP 設定](https://developers.openai.com/codex/mcp/)。
 
-### ★Windows では `next build` が完走しない (2026-08-05)
+### Windows では `next build` が完走しない
 
 `npm run build --workspace apps/web` は `/themes/[themeSlug]/opengraph-image` の prerender で
 必ず落ちる。原因は vendored な `next/dist/compiled/@vercel/og/index.node.js` が
@@ -239,7 +239,7 @@ fileURLToPath(join(import.meta.url, "../noto-sans-v27-latin-regular.ttf"))
 - **`npm run build | tail` の終了コードを成功判定に使わない**。`tail` の exit code が返るため
   build の失敗が隠れる (2026-08-05 に実際に「exit 0」と誤報した)。判定は出力本文を読む。
 
-### ★Windows の型検査と古い生成型 (2026-09-08)
+### Windows の型検査と古い生成型
 
 - **問題**: npm は Windows で `cmd.exe` を使うため、`NODE_OPTIONS=... tsc` という
   POSIX の環境変数前置は型検査を起動できない。
@@ -254,7 +254,7 @@ fileURLToPath(join(import.meta.url, "../noto-sans-v27-latin-regular.ttf"))
 - **判定**: コマンド本体の exit code と全 workspace / scripts の完走を確認する。
   パイプ末尾や背景ラッパーの exit 0 を成功の根拠にしない。
 
-### ★ファイルを書くときは Write/Edit を使う。heredoc で内容を流し込まない (2026-08-21)
+### ファイルを書くときは Write/Edit を使う。heredoc で内容を流し込まない
 
 Git Bash + Python/シェルの heredoc で**ファイル本文を書こうとすると壊れる**。同じセッションで
 3 回踏んだので手順として固定する。
@@ -276,7 +276,7 @@ Edit ツールで書き直している。
 - **アンカーは記憶で書かない**。`sed -n 'N,Mp'` や `cat -A` で**実バイトを読んでから**
   置換文字列を組む。`assert old in s` が落ちる原因はほぼこれ。
 
-### ★`file://` URL を文字列連結しない (2026-08-05)
+### `file://` URL を文字列連結しない
 
 `` `file://${process.argv[1]}` `` は Windows で必ず不一致になる。Node は `argv[1]` を絶対パスへ
 解決するが Windows では `C:\path\x.mjs` の形で、`import.meta.url` の `file:///C:/path/x.mjs` と
@@ -290,7 +290,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
 
 機械チェック: `npm run check:file-url-guard` (pre-commit + `pr-quality-check.yml`)。
 
-### ★Windows で clone した直後は `core.symlinks` を有効にする (2026-08-05)
+### Windows で clone した直後は `core.symlinks` を有効にする
 
 git for Windows の既定は `core.symlinks=false` で、**symlink がリンク先パスだけを中身に持つ
 通常ファイルとして checkout される**。このリポジトリは 2 つの symlink を持つ:
@@ -314,7 +314,7 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
   になり、「symlink 不可」と誤診する (2026-08-05 に実際に誤診した)。判定するなら
   `node -e 'require("fs").symlinkSync(...)'` を使う。
 
-### ★2 台 (会社 Windows / 自宅 Mac) で同じ形にする手順 (2026-09-14)
+### 2 台 (会社 Windows / 自宅 Mac) で同じ形にする手順
 
 個人設定は private リポジトリ `uruhayato373/dotfiles` (秘密値なし)、プロジェクト設定は本リポジトリが運ぶ。
 どちらの PC も次の順で 1 回だけ実行する。
@@ -341,7 +341,7 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
   gitignore 済みの `.claude/settings.local.json` に置く。
 - Mac 固有の罠はまだ実測が無い。最初に Mac で動かしたときに本節へ追記する。
 
-## dev サーバー起動 ★ルート `npm run dev` を使わない
+## dev サーバー起動 — ルート `npm run dev` を使わない
 
 **Web サイトの動作確認は必ず web 単体で起動する。ルート `npm run dev`（= `turbo run dev`）を使わない。**
 
@@ -515,7 +515,7 @@ R2成果物・provenanceと原典の再取得手段を検証したら、原典ZI
 共有npm cacheは必要時に `npm cache verify` で整合性確認・不要blob回収を行う。uv・ブラウザの共有cacheは
 利用元と再取得コストを調べてから扱い、定期的な全消去はしない。worktreeは必要時だけ作り、未完了変更を統合してから閉じる。
 
-### ★worktree の後始末は bash の `rm -rf` を使わない (2026-09-14)
+### worktree の後始末は bash の `rm -rf` を使わない
 
 `git worktree remove` がディレクトリを消せずに終わることがある (Windows のファイルロック等)。
 その後始末を Git Bash (MSYS) の `rm -rf` に任せると、**MSYS のパス変換が意図しないパスへ

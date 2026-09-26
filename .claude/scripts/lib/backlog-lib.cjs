@@ -69,7 +69,8 @@ const KINDS = ['不具合', '改善', '意思決定', '制作', '定期'];
 const DEFECT_KIND = '不具合';
 
 /** タグ行の kv キー → カード側のフィールド名 (期日 は stats47 発の拡張・doboku にも移植済み) */
-const TAG_KEYS = { 種類: 'kind', 実行: 'executor', 検証: 'verify', 起票: 'filed', 期日: 'due' };
+// レーン は stats47 拡張 (値の語彙は収益化戦略のレーン表 → strategy-lanes.cjs が検査する)
+const TAG_KEYS = { 種類: 'kind', 実行: 'executor', 検証: 'verify', 起票: 'filed', 期日: 'due', レーン: 'lane' };
 
 /** この環境 (AI セッション / CI) が単独で消化できる executor */
 const SELF_EXECUTABLE = new Set(['sweep', '機械']);
@@ -120,6 +121,7 @@ function parseTagLine(raw) {
     verify: null,
     filed: null,
     due: null,
+    lane: null,
     unknownKeys: [],
     unknownCategories: [],
   };
@@ -156,7 +158,7 @@ function splitHeadingId(headingText) {
  * @param {string} text backlog.md の中身
  * @returns {Array<{line:number,startLine:number,endLine:number,id:string|null,tier:string,
  *                  title:string,category:string,kind:string|null,codex:boolean,wip:boolean,
- *                  executor:string|null,verify:string|null,filed:string|null,due:string|null,
+ *                  executor:string|null,verify:string|null,filed:string|null,due:string|null,lane:string|null,
  *                  hasTagLine:boolean,tokens:string[],extraCategories:string[],
  *                  unknownKeys:Array<{key:string,value:string,raw:string}>,
  *                  unknownCategories:string[],body:string}>}
@@ -202,6 +204,7 @@ function parseBacklog(text) {
           verify: null,
           filed: null,
           due: null,
+          lane: null,
           hasTagLine: false,
           tokens: [],
           extraCategories: [],

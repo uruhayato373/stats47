@@ -338,7 +338,7 @@ export default async function SurveyPage({ params }: PageProps) {
               href={survey.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-none border px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent/50"
+              className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-md border px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent/50"
             >
               公式サイト ↗
             </a>

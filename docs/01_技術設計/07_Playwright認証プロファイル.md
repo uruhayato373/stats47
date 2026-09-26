@@ -15,6 +15,8 @@ Playwright を使う運用スクリプトのログイン状態、アカウント
 - サービスとアカウント用途ごとに profile を分離する。
 - 投稿、申請、公開、購入に関わる操作は実行前に対象アカウントを照合する。
 - 認証失敗を自動再登録や別アカウントで回避しない。人が headed browser で復旧する。
+- 例外: A8 / もしもの計測ログインだけは、オーナー承認 (2026-09-26) により Mac 上で macOS キーチェーンの ID/PW による再ログインを 1 回だけ許す (`.claude/scripts/measurement/refresh-session.mjs`)。失敗・2FA・CAPTCHA は突破せず失敗印を残して停止し、人が確認して印を消すまで再試行しない。ID/PW を CI・git・ログへ置かない。
+- A8 / もしもの state (`playwright-{a8,moshimo}-state.json`) は stats47 と doboku-note で共用する (2026-09-26)。実体は `~/.local/share/asp-sessions/{a8,moshimo}-state.json` (mode 600) で、両リポジトリの `.local/` にはそこへの symlink を置く。ログインするのは stats47 の launchd (`refresh-session.mjs`) だけで、doboku-note は読むだけにする (同じ口座へ別々にログインすると互いのセッションを切る恐れがある)。新しいマシンでは symlink を張り直す。state を rename で置き換える書き方は symlink を壊すので使わない。
 - 2FA、CAPTCHA、税務・銀行情報、規約同意は人の操作として残す。
 - 実行後は `.claude/rules/browser-use-cleanup.md` に従い browser / daemon / tab を閉じる。
 

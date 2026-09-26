@@ -1,7 +1,5 @@
 import { List } from "lucide-react";
 
-import { RailCard } from "@/components/surface";
-
 import { extractHeadings } from "../lib/heading-slug";
 
 interface ArticleTableOfContentsProps {
@@ -16,6 +14,11 @@ interface ArticleTableOfContentsProps {
  * MDContent 側で同じ slug ルールで h2/h3 に id を付与する必要がある。
  *
  * 見出しが 2 件未満の短い記事では何も描画しない。
+ *
+ * 記事ヘッダーの直後・本文の前に全幅共通で 1 か所だけ置く (2026-09-25)。以前は PC で右レールの
+ * 追従領域に固定され、読書中ずっとレールの他の情報を隠していた。記事カードの中に置く本文内の部品なので
+ * カードで包まず、角丸は `rounded-content` を使う (カード内カード禁止)。見出しは全件表示し折りたたまない。
+ * 導線名 `blog_toc` を付け、目次からのクリックを nav_click で数えられるようにする。
  */
 export function ArticleTableOfContents({
   content,
@@ -26,12 +29,16 @@ export function ArticleTableOfContents({
   if (headings.length < 2) return null;
 
   return (
-    <RailCard
-      title="目次"
-      icon={<List className="h-4 w-4 text-muted-foreground" />}
+    <nav
+      aria-label="記事の目次"
+      data-nav-surface="blog_toc"
+      className="mb-8 rounded-content border border-border bg-muted/30 px-4 py-3"
     >
-      <nav aria-label="記事の目次">
-        <ol className="space-y-1.5 text-sm">
+      <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-foreground">
+        <List className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+        目次
+      </p>
+      <ol className="space-y-1.5 text-sm">
           {headings.map((h, idx) => (
             <li
               key={`${h.id}-${idx}`}
@@ -39,6 +46,7 @@ export function ArticleTableOfContents({
             >
               <a
                 href={`#${h.id}`}
+                data-nav-label={h.text}
                 className={
                   "block leading-snug transition-colors hover:text-primary " +
                   (h.level === 2
@@ -50,8 +58,7 @@ export function ArticleTableOfContents({
               </a>
             </li>
           ))}
-        </ol>
-      </nav>
-    </RailCard>
+      </ol>
+    </nav>
   );
 }

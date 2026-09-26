@@ -31,7 +31,7 @@ export function SpecialtyList({ editorial }: Props) {
               key={sp.slug}
               className={getSurfaceCardClassName({ className: "flex gap-3 p-3" })}
             >
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-none bg-muted">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-sm bg-muted">
                 <SpecialtyImage
                   src={imgUrl}
                   alt={sp.name}

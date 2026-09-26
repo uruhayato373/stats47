@@ -21,6 +21,14 @@ primary_agent: knowledge-curator
 6. `npm run docs:fix` で生成管理された実装計画INDEXを同期する。
 7. `npm run docs:check` を通す。
 8. `npm run docs:check:all` のwarningを意味レビューし、誤検知でなければ同じ変更で是正する。
+9. 棚卸しでは、機械で拾えない陳腐化を対象文書ごとに読む。agentはCLAUDE.mdから設計書を必読として辿るため、
+   docsに残る古い前提はrulesを直しても手順を逆戻りさせる。
+   - 廃止した前提を現行として書いていないか。照合先はCLAUDE.md「運用規約」と
+     `docs/01_技術設計/02_データアーキテクチャ.md`（永続D1、ローカルR2ミラー、AdSense配信など）。
+   - 名前は実在するが役割が変わったskill・agent・scriptを、旧い役割で案内していないか。
+   - 過去の経緯として残す記述は「旧」「廃止」「していた」を行に明記し、現行手順と区別する。
+   削除・改名済みのpath、npm script、`/skill` への参照は `check-docs-code-refs.cjs`（`docs:check`に含む）が
+   機械で落とすので、ここでは読まない。
 
 Claude Codeでは`.claude/hooks/check-docs-on-stop.js`が文書差分のあるturnを自動検査する。
 Codexを含む他の編集経路は共通`AGENTS.md`、pre-commit、PR gateで同じ契約を通る。

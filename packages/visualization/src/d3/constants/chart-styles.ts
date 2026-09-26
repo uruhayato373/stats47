@@ -1,3 +1,5 @@
+import { formatValueWithPrecision } from "@stats47/utils";
+
 /**
  * 全 D3 チャートコンポーネントの共通スタイル定数
  *
@@ -80,11 +82,20 @@ export const CROSSHAIR = {
  */
 export function compactAxisFormat(value: number): string {
   const abs = Math.abs(value);
-  if (abs >= 100_000_000) return `${(value / 100_000_000).toFixed(1)}億`;
-  if (abs >= 10_000) return `${(value / 10_000).toFixed(1)}万`;
-  if (abs >= 1_000) return `${(value / 1_000).toFixed(1)}千`;
+  if (abs >= 100_000_000) return `${compactNumber(value / 100_000_000)}億`;
+  if (abs >= 10_000) return `${compactNumber(value / 10_000)}万`;
+  if (abs >= 1_000) return `${compactNumber(value / 1_000)}千`;
   if (Number.isInteger(value)) return value.toLocaleString();
   return value.toFixed(1);
+}
+
+/**
+ * 単位換算後の値を 3 桁区切りで出す。整数なら「.0」を付けず、端数があれば小数ちょうど 1 桁。
+ * 常に toFixed(1) だった旧実装は「1400.0万」と長くなり、狭いグラフで縦軸の先頭の桁が切れていた (2026-09-25)。
+ */
+function compactNumber(value: number): string {
+  const rounded = Math.round(value * 10) / 10;
+  return formatValueWithPrecision(rounded, Number.isInteger(rounded) ? 0 : 1);
 }
 
 /**

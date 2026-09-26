@@ -8,4 +8,4 @@ export {
 export { ArticleShell } from './ArticleShell';
 export { PageHeader } from './PageHeader';
 export { HeroBanner } from './HeroBanner';
-export { Breadcrumbs, type BreadcrumbTrailItem } from './Breadcrumbs';
+export { Breadcrumbs, CURRENT_ITEM_CLASS, type BreadcrumbTrailItem } from './Breadcrumbs';

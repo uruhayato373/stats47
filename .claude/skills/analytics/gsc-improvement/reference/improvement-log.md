@@ -809,3 +809,23 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **実測 (2026-09-24、対象exportの観測日は2026-09-20 = W38)**: `coverage-totals-history.csv` のsoft-404はW36(2026-09-04) 450件 → W38(2026-09-20) 445件 (Δ-5)。`coverage-remediation-queue.json` のcontent-check対象URLはW36時点で11件（うち旧市区町村カテゴリ5件、本ログの2026-09-07エントリに記載）だったが、W38時点では5件（`/areas/17000/safety`、`/blog/apple-expenditure-ranking`、`/areas/24000/labor-mobility`、`/areas/33000/fishery-marine`、`/tag/製造業`）に減り、このいずれも旧市区町村カテゴリのURLではない。旧市区町村カテゴリのsoft-404は1件も残っていない。全体soft-404の減少数(-5)と旧市区町村カテゴリの消失件数(5件)が一致している。
 - **判定**: 行に書かれた検証条件を実測が満たした。旧市区町村カテゴリsoft-404の5→0を確認し、全体soft-404の差分もこれと整合する。`.claude/todo/improvements.md` の `COVERAGE-LOOP-01` 行を削除する。
 - **未確定 / 仮説**: この是正がクリック数・表示回数の増加そのものに寄与したかは別軸であり、gsc-blog-wave以外のGSC施策(本施策を含む)はまだ閾値エンジンの判定対象外（`[gsc-page:]` 等の目印が未設定のため）。COVERAGE-LOOP-01はcoverage是正の技術的な完了確認であり、effect/* ラベルは付与しない。
+
+### [SEARCH-GROWTH-CYCLE-01] 効果判定エンジン適用不可のためクローズ (2026-09-26)
+
+- **対象**: `.claude/todo/improvements.md` の `SEARCH-GROWTH-CYCLE-01` (finalized 7日でKPI判定・rolling 28日で候補発見・週1〜2件採択の運用サイクル)
+- **判定不能の理由 (effect/* を付けず行削除)**: 本行が測っているのは「候補の週次採択件数」というオーナー承認の運用cadenceであり、`.claude/scripts/lib/effect-verdict/` に登録済みの3 adapter (gsc-blog-wave / adsense / gsc-improvements) はいずれも単一ページまたはURL prefixのGSC clicks差分を判定する設計 (`gsc-improvements-adapter.mjs`は`[gsc-page:]`prefix必須)。承認件数はページ単位のGSC実測ではないため、この行に`[gsc-page:]`や`[target:]`を付けても`extractGscPages`の対象にならず、engineが未来永劫`skipped`にすらならず「対象外」のまま放置される。
+- **決着**: 効果判定バックログ (improvements.md) からは削除する。運用cadence自体の追跡は既に `weekly.md` / `monthly.md` (2026-09-06時点で「候補3件が承認待ち」の記載あり) で継続しており、二重管理にしない。
+- **再開条件**: オーナー承認が進み週次採択が始まった後、`search_growth_status` / `search_growth_measure` (seo-observability) の実測で個別採択施策がページ単位のGSC効果を持つ場合は、その施策単位で新規に`[gsc-page:]`付き行をimprovements.mdへ起票する。
+
+### [BLOG-SEO-PACE-01] 効果判定対象外 (プロセス規律違反) としてクローズ (2026-09-26)
+
+- **対象**: `.claude/todo/improvements.md` の `BLOG-SEO-PACE-01` (月15〜20本上限内での需要確認済み候補の小バッチ公開)
+- **判定不能の理由**: 2026-09-07実測で確認された事実は「月85本公開という上限運用の規律違反」であり、GSC clicks/impressionsのbefore/after比較で判定する効果ではない。是正すべきは公開ペースの実行統制であって、ページ単位のGSC効果ではないため、本エンジンの`[gsc-page:]`+`デプロイ済`+`[target:]`の3点セットが原理的に成立しない (どのページ・どの日のデプロイを指すか対応が無い)。
+- **決着**: improvements.mdから削除する。行が既に指摘していたとおり、月次配分の再設計と実行統制はstrategy-advisorの月次計画 (`.claude/todo/monthly.md`) の担当範囲であり、improvement-triageのeffect判定バックログには残さない。
+- **再開条件**: 公開ペースの規律が守られるようになった後、特定バッチ (型ポートフォリオ・topic-queue起点) の記事群がGSC表示を得たかは既存の`BLOG-SEO-TYPES-01`/`BLOG-SEO-QUEUE-01`が引き続き追跡する (重複起票しない)。
+
+### [SITE-LINKROT-01] BLOG-LINKROT-01への統合によりクローズ (2026-09-26)
+
+- **対象**: `.claude/todo/improvements.md` の `SITE-LINKROT-01`
+- **統合理由**: 2026-09-07実測の内容が `BLOG-LINKROT-01` と同一の `.claude/state/site/link-audit.json` (2026-09-05生成、壊れリンク6件) を参照する完全な重複行だった (行内に「同上」と明記)。片方だけを更新すると台帳がドリフトするため、`BLOG-LINKROT-01` 側に一本化する。
+- **決着**: improvements.mdから本行を削除。以後の壊れリンク是正判定・目印付与 (`[gsc-page:]`等) は `BLOG-LINKROT-01` に記録する。

@@ -5,12 +5,11 @@ import { useEffect, useState, useTransition } from 'react';
 import { ChartErrorState } from '@/components/charts/ChartState';
 import type { PageComponent } from '@/components/stat-charts';
 
+import { loadThemeChartResultBatched } from '../lib/batched-theme-chart-result';
+import { type ThemeChartLoadResult } from '../lib/theme-chart-result';
+
 import { ChartEmptyState, ChartLoading } from './ChartState';
 import { MarkdownSectionRenderer } from './MarkdownSectionRenderer';
-import {
-  loadThemeChartResult,
-  type ThemeChartLoadResult,
-} from './theme-chart-result';
 import { ThemeChartResultRenderer } from './ThemeChartResultRenderer';
 
 import type { MarkdownSectionComponentProps } from '../types';
@@ -40,7 +39,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
     setLoadResult(undefined);
 
     startTransition(async () => {
-      const result = await loadThemeChartResult(chart, prefCode);
+      const result = await loadThemeChartResultBatched(chart, prefCode);
       if (!cancelled) {
         setLoadResult(result);
       }
@@ -226,7 +225,7 @@ function parseMarkdownSources(
 
 /** Show the actual available period instead of implying every chart uses the page's latest year. */
 function observationPeriod(
-  result: import('./theme-chart-result').ThemeChartResult
+  result: import('../lib/theme-chart-result').ThemeChartResult
 ): string {
   if (result.type === 'line' || result.type === 'mixed') {
     const years = [

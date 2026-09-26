@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { findGeoSourcePage } from '@stats47/data-configs/business-plan';
 import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
@@ -42,6 +43,7 @@ export default async function GeoDatasetPage({ params }: Props) {
     loadGeoSourceItem(dataId),
   ]);
   const content = findGeoSourcePage(dataId, meta.latestVersion);
+  const sourcePageHref = item?.sourceUrl || meta.sourcePageUrl;
   return (
     <PageShell
       className="py-4 sm:py-5"
@@ -113,22 +115,22 @@ export default async function GeoDatasetPage({ params }: Props) {
             : '商用利用可能（原典の個別条件を確認）'}
           。初回取得日時はこの一覧では確認できません。原典版と一覧の検証日を区別して掲載しています。
         </p>
-        {(item?.sourceUrl || meta.sourcePageUrl) && (
-          <a
-            href={item?.sourceUrl || meta.sourcePageUrl}
+        {sourcePageHref && (
+          <ExternalAnchor
+            href={sourcePageHref}
             className="inline-flex min-h-11 items-center text-sm text-primary underline"
           >
             原典・属性項目・利用条件を確認する
-          </a>
+          </ExternalAnchor>
         )}
         {content?.additionalSources?.map((source) => (
-          <a
+          <ExternalAnchor
             key={source.url}
             href={source.url}
             className="flex min-h-11 items-center text-sm text-primary underline"
           >
             {source.label}
-          </a>
+          </ExternalAnchor>
         ))}
         <p className="text-xs text-muted-foreground">
           一覧検証日：{catalog?.generatedAt.slice(0, 10) ?? '不明'}

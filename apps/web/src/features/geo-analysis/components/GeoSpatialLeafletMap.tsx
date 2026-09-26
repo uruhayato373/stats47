@@ -16,11 +16,13 @@ import {
 
 import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 import {
   buildSpatialMeshMap,
   landPointCategory,
   type SpatialView,
 } from '../lib/geo-spatial-evidence';
+
 
 import type { GeoAnalysisPrefDetail } from '@stats47/gis';
 import type { LatLngBoundsExpression } from 'leaflet';
@@ -112,7 +114,7 @@ export function GeoSpatialLeafletMap({
         minZoom={GEO_BASEMAP.minZoom}
         maxZoom={GEO_BASEMAP.maxZoom}
         scrollWheelZoom={false}
-        className="isolate h-[480px] rounded-none lg:h-[620px]"
+        className="isolate h-[480px] rounded-card lg:h-[620px]"
         aria-label={`${detail.areaName}の地点・1kmメッシュ地図`}
       >
         <TileLayer
@@ -127,19 +129,19 @@ export function GeoSpatialLeafletMap({
             const fillColor =
               view === 'overlap' && !isLand
                 ? feature?.properties?.included
-                  ? '#b91c1c'
-                  : '#cbd5e1'
+                  ? GEO_MAP_COLORS.spatialInclusion.included
+                  : GEO_MAP_COLORS.spatialInclusion.excluded
                 : typeof change !== 'number'
-                  ? '#94a3b8'
+                  ? GEO_MAP_COLORS.populationChange.missing
                   : change >= 0
-                    ? '#0f766e'
+                    ? GEO_MAP_COLORS.populationChange.growing
                     : change >= -15
-                      ? '#67a9cf'
+                      ? GEO_MAP_COLORS.populationChange.mildDecline
                       : change >= -30
-                        ? '#fdbb84'
-                        : '#b91c1c';
+                        ? GEO_MAP_COLORS.populationChange.moderateDecline
+                        : GEO_MAP_COLORS.populationChange.severeDecline;
             return {
-              color: '#ffffff',
+              color: GEO_MAP_COLORS.outline,
               weight: 0.3,
               fillColor,
               fillOpacity: isLand && view === 'overlap' ? 0.25 : 0.7,
@@ -164,7 +166,7 @@ export function GeoSpatialLeafletMap({
                   center={[point[2] / 1e6, point[1] / 1e6]}
                   radius={5}
                   pathOptions={{
-                    color: '#ffffff',
+                    color: GEO_MAP_COLORS.outline,
                     weight: 1,
                     fillColor: category.color,
                     fillOpacity: 1,

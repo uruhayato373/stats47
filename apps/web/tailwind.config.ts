@@ -87,12 +87,22 @@ const config: Config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+          // 完全な色値 (transparent を取れるよう hsl で包まない)。opacity 修飾子は使わない
+          outline: "var(--card-outline)",
         },
+        // データの状態色。生の emerald/red/amber/blue-NNN の代わりに使う
+        positive: { DEFAULT: "hsl(var(--positive))", soft: "hsl(var(--positive-soft))" },
+        negative: { DEFAULT: "hsl(var(--negative))", soft: "hsl(var(--negative-soft))" },
+        warning: { DEFAULT: "hsl(var(--warning))", soft: "hsl(var(--warning-soft))" },
+        info: { DEFAULT: "hsl(var(--info))", soft: "hsl(var(--info-soft))" },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        card: "var(--card-radius)",
+        // 本文の中に置く部品 (callout・本文内カード・コードブロック)。レイアウトのカード外枠とは別の役割
+        content: "var(--content-radius)",
       },
       keyframes: {
         fadeIn: {

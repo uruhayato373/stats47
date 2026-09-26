@@ -8,8 +8,11 @@ export const UI_METRIC_KEYS: MetricKey[] = [
   "degraded_images",
   "empty_headings",
   "duplicate_data_source_sections",
+  "external_links_same_tab",
   "clipped_text",
   "overlapping_tap_targets",
+  "chart_text_issues",
+  "blog_svg_text_issues",
   "a11y_violations",
   "responsive_layout_issues",
 ];
@@ -35,13 +38,19 @@ export interface ReviewInput {
 }
 
 /** agent に渡す入力。スクショのローカルパスと、機械検査が既に見つけた指摘 (重複報告を避けるため)。 */
-export function buildReviewInput(run: AuditRun): ReviewInput {
+/**
+ * agent に渡す確認対象。`reviewKeys` を渡すとその週に確認するページ (`reviewPageKeys()`) だけに絞る。
+ * `template` にはページの識別子 (`page_key`。variants は `<template>--<id>`) を入れ、指摘・撮影ファイル名と揃える。
+ */
+export function buildReviewInput(run: AuditRun, reviewKeys?: readonly string[]): ReviewInput {
+  const keep = reviewKeys ? new Set(reviewKeys) : null;
   return {
     generatedAt: run.generated_at,
     pages: run.results
       .filter((r): r is PageAuditResult & { screenshots: ScreenshotRecord[] } => (r.screenshots ?? []).length > 0)
+      .filter((r) => !keep || keep.has(r.page_key ?? r.template))
       .map((r) => ({
-        template: r.template,
+        template: r.page_key ?? r.template,
         url: r.url,
         screenshots: r.screenshots.map(({ device, localPath, changeRatio, height, tilePaths }) => ({
           device,

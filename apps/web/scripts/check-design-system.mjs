@@ -10,6 +10,15 @@ const cwd = process.cwd();
 // app も全ルール対象に昇格。components / features / app を一律で検査する。
 // 2026-07-11 (DR-AUDIT-03): src/lib も走査対象に追加 (CookieConsentBanner 等のサイト chrome)。
 const scanRoots = ['src/components', 'src/features', 'src/app', 'src/lib'];
+
+// ブログ記事の本文 (Markdown) の中に描く部品。角丸は rounded-content (--content-radius) を使う。
+// 本文の中に置く部品を増やしたらここへ足す (足さないと rounded-content が検査で拒否される)。
+const ARTICLE_BODY_COMPONENT_FILES = [
+  'src/features/blog/components/md-content.tsx',
+  'src/features/blog/components/Callout.tsx',
+  'src/features/blog/components/RankingLinkCard.tsx',
+  'src/features/blog/components/ArticleTableOfContents.tsx',
+];
 const extensions = new Set(['.ts', '.tsx']);
 
 const rules = [
@@ -73,7 +82,9 @@ const rules = [
     message:
       'Avoid hardcoded surface card classes. Use SurfaceCard/SurfaceLinkCard/getSurfaceCardClassName/ChartPanel.',
     pattern:
-      /rounded-none\s+border\s+bg-card\s+p-4\s+shadow-sm|bg-card\s+border\s+rounded|rounded-(?:lg|md)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-sm/,
+      // rounded-md/sm は操作部品 (ボタン・ドロップダウン) の角丸なので対象外。カード外枠の角丸は
+      // rounded-card (= CARD_SURFACE_CLASS) で、それを手書きした行を捕まえる。
+      /rounded-(?:none|card)\s+border\s+(?:border-\S+\s+)?bg-card\s+p-4\s+shadow-sm|bg-card\s+border\s+rounded|rounded-(?:lg|card)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-sm/,
     // SurfaceCard 実装本体は許可。また rounded-full 要素はカードでなくピル/トグル/アバターなので除外
     // (コンテンツカードは rounded-full にしない)。
     allow: (relativePath, line) =>
@@ -111,6 +122,15 @@ const rules = [
       relativePath === 'src/features/ogp/brand.ts',
   },
   {
+    id: 'no-geo-raw-color-outside-palette',
+    message:
+      'Geo map colors (Leaflet/SVG attributes need hex) must live in features/geo-analysis/components/geo-map.palette.ts (GEO_MAP_COLORS).',
+    pattern: /['"`]#[0-9A-Fa-f]{3,8}['"`]/,
+    allow: (relativePath) =>
+      !relativePath.startsWith('src/features/geo-analysis/') ||
+      relativePath.endsWith('.palette.ts'),
+  },
+  {
     id: 'no-large-card-shadow',
     message:
       'Avoid large shadows on normal cards. Use no shadow, shadow-sm, or shadow-md.',
@@ -119,19 +139,36 @@ const rules = [
   {
     id: 'no-rounded-xl',
     message:
-      'Flat design (--radius:0). Do not hand-add rounded-xl/2xl/3xl. Use rounded-none, or rounded-full only for circular elements.',
+      'Do not hand-add rounded-xl/2xl/3xl. Cards use rounded-card, in-article parts rounded-content, controls rounded-md/sm (all token-driven); rounded-full only for circular elements.',
     pattern: /\brounded-(?:xl|2xl|3xl)\b/,
+  },
+  {
+    // 角丸は役割で分ける: ページを区切るカード外枠 = rounded-card (--card-radius)、
+    // 本文の中に置く部品 = rounded-content (--content-radius)。rounded-content を本文外で使うと
+    // レイアウトのカードまで丸くなり役割の区別が崩れるので、本文を描く部品のファイルに限る。
+    id: 'content-radius-only-in-article-body',
+    message:
+      'rounded-content is for parts placed inside article body text. Layout cards use rounded-card. Add the file to ARTICLE_BODY_COMPONENT_FILES only if it renders inside the article body.',
+    pattern: /\brounded-content\b/,
+    allow: (relativePath) => ARTICLE_BODY_COMPONENT_FILES.includes(relativePath),
+  },
+  {
+    id: 'article-body-parts-use-content-radius',
+    message:
+      'Parts inside the article body use rounded-content, not rounded-card/rounded-lg (layout card radius). Nested white cards are also prohibited there.',
+    pattern: /\brounded-(?:card|lg)\b/,
+    allow: (relativePath) => !ARTICLE_BODY_COMPONENT_FILES.includes(relativePath),
   },
   {
     id: 'no-arbitrary-radius',
     message:
-      'Do not add arbitrary rounded-[…] values. Cards and panels use rounded-none; circular UI uses rounded-full.',
+      'Do not add arbitrary rounded-[…] values. Cards and panels use rounded-card (--card-radius); circular UI uses rounded-full.',
     pattern: /\brounded-\[[^\]]+\]/,
   },
   {
     id: 'no-text-black',
     message:
-      'Avoid text-black. Use text-foreground or text-slate-900 (see .claude/design-system/prohibited.md).',
+      'Avoid text-black. Use text-foreground (see .claude/design-system/prohibited.md).',
     pattern: /\btext-black\b/,
   },
   {
@@ -146,7 +183,8 @@ const rules = [
   },
   {
     // 4px アクセントバー (カラーバー) は melta-ui で禁止 (全周 border / 余白 / 背景差で表現する)。
-    // 例外は Markdown 散文中の引用/注記の左バーのみ (ブランドアクセントではなく typography)。
+    // 例外は Markdown 散文中の引用の左バーのみ (ブランドアクセントではなく typography)。
+    // callout は 2026-09-25 に左バーをやめ、地の色 + アイコン + ラベルで種類を示す (Callout.tsx)。
     // 正典: .claude/design-system/prohibited.md
     id: 'no-thick-accent-border',
     message:
@@ -155,7 +193,6 @@ const rules = [
     allow: (relativePath) =>
       [
         'src/features/blog/components/md-content.tsx', // blockquote 左バー = Markdown 引用の一般 typography
-        'src/features/blog/components/md-preprocessor.ts', // callout ([!NOTE] 等) の admonition 左バー
       ].includes(relativePath),
   },
   {
@@ -403,12 +440,14 @@ if (!surveyNavSource.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) {
   });
 }
 
-// カード角丸の SSOT は globals.css の --radius: 0。
+// 角丸の SSOT は globals.css の --radius (操作部品) と --card-radius (カード外枠) で、どちらも 0。
+// 角丸を採用する判断をしたら、この検査の許容値を同じ差分で変える (トークンだけ変えると落ちる)。
+// 本文の中に置く部品の --content-radius (2026-09-25 採択) は別の役割なので 0 でなくてよく、下で個別に見る。
 // 通常領域・reading-zone のどちらかへ非ゼロ値が再導入された場合、見た目がページ種別で
 // ドリフトするため、class 名の静的検査とは別にトークン自体を決定的に検査する。
 const globalsPath = 'src/app/globals.css';
 const globalsText = readFileSync(path.join(cwd, globalsPath), 'utf8');
-const radiusPattern = /--radius:\s*([^;]+);/g;
+const radiusPattern = /--(?:card-)?radius:\s*([^;]+);/g;
 for (const match of globalsText.matchAll(radiusPattern)) {
   const value = match[1].trim();
   if (/^0(?:px|rem)?$/.test(value)) continue;
@@ -420,6 +459,19 @@ for (const match of globalsText.matchAll(radiusPattern)) {
     file: globalsPath,
     lineNumber,
     line: match[0],
+  });
+}
+
+// 本文の中に置く部品の角丸 (--content-radius) は 1 か所だけで定義する。ページ種別ごと
+// (.reading-zone / .dark 等) に上書きすると、同じ部品が画面によって違う形になる。
+const contentRadiusDefinitions = [...globalsText.matchAll(/--content-radius:\s*([^;]+);/g)];
+if (contentRadiusDefinitions.length !== 1) {
+  violations.push({
+    ruleId: 'content-radius-single-definition',
+    message: `--content-radius must be defined exactly once in :root (found ${contentRadiusDefinitions.length}).`,
+    file: globalsPath,
+    lineNumber: 1,
+    line: '--content-radius',
   });
 }
 
@@ -446,18 +498,19 @@ for (const match of globalsText.matchAll(cssBorderRadiusPattern)) {
   });
 }
 
-// ArticleCard は本文カードの正典。CSS token に加えて明示的 rounded-none を要求し、
-// reading-zone のみ角丸へ戻る再発を二重に防ぐ。
+// ArticleCard は本文カードの正典。外枠を独自クラスで書かず、通常カードと同じ
+// CARD_SURFACE_CLASS (角丸・線色をトークンで決める単一定義) を使うことを要求する。
+// クラス名の完全一致では判定しない (意図が同じでも 1 語足すだけで落ちるため)。
 const surfacePath = 'src/components/surface/SurfaceCard.tsx';
 const surfaceText = readFileSync(path.join(cwd, surfacePath), 'utf8');
 const articleCardBody = surfaceText.match(
   /export function ArticleCard[\s\S]*?(?=\nexport function RailCard)/
 )?.[0];
-if (!articleCardBody?.includes('rounded-none border bg-card shadow-sm')) {
+if (!articleCardBody || !/\bCARD_SURFACE_CLASS\b/.test(articleCardBody)) {
   violations.push({
-    ruleId: 'article-card-must-be-square',
+    ruleId: 'article-card-must-use-shared-surface',
     message:
-      'ArticleCard must explicitly use rounded-none so article pages follow the site-wide square-card policy.',
+      'ArticleCard must compose CARD_SURFACE_CLASS so article pages follow the same card radius/outline tokens as every other card.',
     file: surfacePath,
     lineNumber: 1,
     line: 'ArticleCard',
@@ -578,6 +631,63 @@ violations.push(
     .flatMap((root) => listFiles(root))
     .flatMap((file) => checkFixedHeightChartWrapper(file, aspectRatioCharts))
 );
+
+// --- Tailwind の生パレット色 (slate-500, emerald-600 …) を UI に直書きしない ---
+//
+// 生パレットは light/dark と配色変更に追従しない。UI の色は意味トークン
+// (foreground / muted-foreground / border / positive / negative / warning / info …) を使う。
+// カテゴリ・性別・メダルのように「見分けるための配色」は *.palette.ts に集め、そこだけで許可する。
+// 既存ルールと違い packages/components・packages/visualization も走査する (共有 UI も対象)。
+const rawPaletteRoots = [
+  ...scanRoots,
+  '../../packages/components/src',
+  '../../packages/visualization/src',
+];
+const RAW_PALETTE_PATTERN =
+  /(?<![\w-])(?:[a-z-]+:)*(?:text|bg|border|fill|stroke|from|via|to|ring|divide|outline|decoration|placeholder|accent|caret)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3}\b/;
+for (const file of rawPaletteRoots.flatMap((root) => listFiles(root))) {
+  if (file.endsWith('.palette.ts')) continue;
+  const lines = readFileSync(path.join(cwd, file), 'utf8').split(/\r?\n/);
+  lines.forEach((line, index) => {
+    const match = line.match(RAW_PALETTE_PATTERN);
+    if (!match) return;
+    violations.push({
+      ruleId: 'no-raw-palette-color',
+      message:
+        'Use semantic color tokens (text-muted-foreground, text-positive, bg-negative-soft …). Identification palettes (category/gender/medal) belong in a *.palette.ts module.',
+      file,
+      lineNumber: index + 1,
+      line: match[0],
+    });
+  });
+}
+
+// --- 順位チップ (背景色つきの「N位」) は RankBadge だけで描く ---
+//
+// 手書きのチップは幅を固定しがちで、「47位」「1741位」が折り返す (2026-09-25 /areas/13000 で発生)。
+// 「{…}位」だけの JSX 行の直前 4 行 (または同じ行) に bg- を持つ className があればチップとみなす。
+// 表のセル・補足の文字・文章中の「N位」は背景色を持たないので対象外。
+const RANK_TEXT_LINE = /^\s*\{[^{}]+\}位\s*$/;
+const RANK_INLINE_CHIP = /className=["{`][^>]*\bbg-[^>]*>\s*\{[^{}]+\}位\s*</;
+for (const file of scanRoots.flatMap((root) => listFiles(root))) {
+  if (file === 'src/components/atoms/RankBadge.tsx' || !file.endsWith('.tsx')) continue;
+  const lines = readFileSync(path.join(cwd, file), 'utf8').split(/\r?\n/);
+  lines.forEach((line, index) => {
+    const isChip =
+      RANK_INLINE_CHIP.test(line) ||
+      (RANK_TEXT_LINE.test(line) &&
+        lines.slice(Math.max(0, index - 4), index).some((prev) => /className=.*\bbg-/.test(prev)));
+    if (!isChip) return;
+    violations.push({
+      ruleId: 'rank-chip-must-use-rank-badge',
+      message:
+        'Render colored rank chips with RankBadge (@/components/atoms/RankBadge). It keeps a min width, never wraps, and grows for long ranks.',
+      file,
+      lineNumber: index + 1,
+      line: line.trim(),
+    });
+  });
+}
 
 if (violations.length > 0) {
   console.error('Design system check failed:');

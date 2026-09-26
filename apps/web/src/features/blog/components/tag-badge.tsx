@@ -15,7 +15,11 @@ export function TagBadge({ tag, tagKey, static: isStatic }: TagBadgeProps) {
   }
 
   return (
-    <Link href={`/tag/${tagKey ?? encodeURIComponent(tag)}`}>
+    <Link
+      href={`/tag/${tagKey ?? encodeURIComponent(tag)}`}
+      data-nav-surface="tag"
+      data-nav-label={tagKey ?? tag}
+    >
       <Badge variant="secondary">{tag}</Badge>
     </Link>
   );

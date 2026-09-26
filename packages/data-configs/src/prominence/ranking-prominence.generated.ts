@@ -41,7 +41,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "landweather",
     "categoryName": "国土・気象",
-    "count": 41,
+    "count": 40,
     "representatives": [
       {
         "rankingKey": "road-length-per-km2",
@@ -84,7 +84,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 154,
+    "count": 149,
     "representatives": [
       {
         "rankingKey": "crude-birth-rate",
@@ -213,7 +213,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "miningindustry",
     "categoryName": "鉱工業",
-    "count": 13,
+    "count": 9,
     "representatives": [
       {
         "rankingKey": "manufacturing-shipment-amount",
@@ -256,7 +256,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "commercial",
     "categoryName": "商業・サービス業",
-    "count": 78,
+    "count": 77,
     "representatives": [
       {
         "rankingKey": "convenience-store-count-commercial",
@@ -299,7 +299,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 872,
+    "count": 868,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
@@ -342,7 +342,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "construction",
     "categoryName": "住宅・土地・建設",
-    "count": 84,
+    "count": 83,
     "representatives": [
       {
         "rankingKey": "ordinary-construction-expenses-prefecture",
@@ -428,7 +428,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "tourism",
     "categoryName": "運輸・観光",
-    "count": 53,
+    "count": 44,
     "representatives": [
       {
         "rankingKey": "total-overnight-guests",
@@ -514,7 +514,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "administrativefinancial",
     "categoryName": "行財政",
-    "count": 147,
+    "count": 142,
     "representatives": [
       {
         "rankingKey": "local-allocation-tax-prefecture",
@@ -547,17 +547,17 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "補助費等が最も多い県は？"
       },
       {
-        "rankingKey": "current-balance-ratio-city",
-        "title": "経常収支比率（市町村財政）",
-        "readerLabel": "経常収支比率（市町村財政）",
-        "hook": "経常収支比率（市町村財政）が最も高い県は？"
+        "rankingKey": "local-allocation-tax-ratio-pref-finance",
+        "title": "地方交付税割合",
+        "readerLabel": "地方交付税割合",
+        "hook": "地方交付税割合が最も高い県は？"
       }
     ]
   },
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 147,
+    "count": 141,
     "representatives": [
       {
         "rankingKey": "per-capita-police-expenditure-pref-municipal",
@@ -600,7 +600,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 289,
+    "count": 285,
     "representatives": [
       {
         "rankingKey": "physical-disability-certificates-issued",
@@ -643,19 +643,13 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "international",
     "categoryName": "国際",
-    "count": 8,
+    "count": 7,
     "representatives": [
       {
         "rankingKey": "resident-foreigner-china",
         "title": "在留外国人数（中国）",
         "readerLabel": "在留外国人数（中国）",
         "hook": "在留外国人数（中国）が最も多い県は？"
-      },
-      {
-        "rankingKey": "foreign-population-per-100k",
-        "title": "外国人人口（人口10万人当たり）",
-        "readerLabel": "外国人人口（人口10万人当たり）",
-        "hook": "外国人人口（人口10万人当たり）が最も多い県は？"
       }
     ]
   },
@@ -895,7 +889,7 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "national-treasury-disbursement-prefecture",
   "avg-salary-police-prefecture",
   "subsidy-expenses-prefecture",
-  "current-balance-ratio-city",
+  "local-allocation-tax-ratio-pref-finance",
   "per-capita-police-expenditure-pref-municipal",
   "theft-offenses-recognized",
   "fire-department-pump-car-count-per-100-thousand-people",
@@ -909,7 +903,6 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "abortion-rate",
   "death-count",
   "resident-foreigner-china",
-  "foreign-population-per-100k",
   "main-road-paving-rate",
   "port-inbound-ships",
   "railway-passengers",

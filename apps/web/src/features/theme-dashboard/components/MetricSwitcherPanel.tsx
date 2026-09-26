@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 // 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
 // client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
-import { classifyUnitComparability } from '@stats47/data-configs/unit';
+import { classifyUnitComparability, formatUnitForDisplay } from '@stats47/data-configs/unit';
 import { Check } from 'lucide-react';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -17,10 +17,8 @@ import type { LineChartData } from '@/components/stat-charts/types/visualization
 
 import { trackNavClick } from '@/lib/analytics/events';
 
-import {
-  fetchMetricTimeseriesAction,
-  type MetricTimeseriesResult,
-} from '../actions';
+import { type MetricTimeseriesResult } from '../actions';
+import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 
 import { ChartEmptyState, ChartLoading } from './ChartState';
 import { ScrollableRow } from './ScrollableRow';
@@ -281,7 +279,7 @@ export function MetricSwitcherPanel({
     let cancelled = false;
     void Promise.all(
       missing.map(async ([key, code]) => {
-        const result = await fetchMetricTimeseriesAction(key, code).catch(
+        const result = await fetchMetricTimeseriesBatched(key, code).catch(
           () => null
         );
         return [cacheKey(key, code), result] as const;
@@ -625,7 +623,7 @@ export function MetricSwitcherPanel({
                             : '—'}
                           {m.unit ? (
                             <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
-                              {m.unit}
+                              {formatUnitForDisplay(m.unit)}
                             </span>
                           ) : null}
                         </span>
@@ -647,7 +645,7 @@ export function MetricSwitcherPanel({
                             : '—'}
                           {m.unit ? (
                             <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
-                              {m.unit}
+                              {formatUnitForDisplay(m.unit)}
                             </span>
                           ) : null}
                         </span>

@@ -12,6 +12,7 @@ import {
 } from '../lib/build-geo-snow-map-model';
 import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 
 import type {
   GeoSnowPrefDetail,
@@ -127,7 +128,7 @@ export function GeoSnowDesignationLeafletMap({
         minZoom={GEO_BASEMAP.minZoom}
         maxZoom={GEO_BASEMAP.maxZoom}
         scrollWheelZoom={false}
-        className="isolate h-[480px] rounded-none lg:h-[620px]"
+        className="isolate h-[480px] rounded-card lg:h-[620px]"
         aria-label={`${detail.areaName}の豪雪指定区域と250m人口メッシュ`}
       >
         <TileLayer
@@ -138,19 +139,19 @@ export function GeoSnowDesignationLeafletMap({
           key={`${detail.areaCode}-${view}`}
           data={model.collection}
           style={(f) => ({
-            color: f?.properties?.boundaryCell ? '#334155' : '#ffffff',
+            color: f?.properties?.boundaryCell ? GEO_MAP_COLORS.designationBoundaryCell : GEO_MAP_COLORS.outline,
             weight: f?.properties?.boundaryCell ? 0.6 : 0.2,
             fillOpacity: 0.65,
             fillColor:
               view === 'overlap'
-                ? (['#cbd5e1', '#2563eb', '#7e22ce'][
+                ? (GEO_MAP_COLORS.designationClass[
                     Number(f?.properties?.centerClass)
-                  ] ?? '#cbd5e1')
+                  ] ?? GEO_MAP_COLORS.designationClass[0])
                 : Number(f?.properties?.population2020) >= 1000
-                  ? '#1e3a8a'
+                  ? GEO_MAP_COLORS.designationPopulation.high
                   : Number(f?.properties?.population2020) >= 100
-                    ? '#2563eb'
-                    : '#93c5fd',
+                    ? GEO_MAP_COLORS.designationPopulation.medium
+                    : GEO_MAP_COLORS.designationPopulation.low,
           })}
           onEachFeature={(f, layer) => {
             const p = f.properties,
@@ -165,7 +166,7 @@ export function GeoSnowDesignationLeafletMap({
             key={`source-${detail.areaCode}`}
             data={source}
             style={(f) => ({
-              color: Number(f?.properties?.class) === 2 ? '#7e22ce' : '#1e40af',
+              color: Number(f?.properties?.class) === 2 ? GEO_MAP_COLORS.designationSourceOutline.special : GEO_MAP_COLORS.designationSourceOutline.standard,
               weight: 1.5,
               fill: false,
               interactive: false,

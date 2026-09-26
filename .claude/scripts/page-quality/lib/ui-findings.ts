@@ -111,6 +111,11 @@ export interface SyncContext {
   openCardIds: readonly string[];
   /** Claude の確認が今週実行されたか。されていなければ Claude の指摘は「消えた」と扱わない */
   agentReviewed: boolean;
+  /**
+   * 今週 Claude が確認したページ (`page_key`)。variants は数週で 1 巡するので、確認しなかったページの指摘は
+   * 「消えた」と扱わない。未指定 (旧形式の記録) なら全ページを確認したとみなす。
+   */
+  agentReviewedPages?: readonly string[];
 }
 
 export interface SyncCounts {
@@ -128,6 +133,7 @@ export function syncFindings(
 ): { queue: UiFinding[]; counts: SyncCounts } {
   const counts: SyncCounts = { added: 0, reopened: 0, resolved: 0, confirmedFixed: 0 };
   const openCards = new Set(ctx.openCardIds);
+  const reviewedPages = ctx.agentReviewedPages ? new Set(ctx.agentReviewedPages) : null;
   const seen = new Map(observed.map((o) => [o.key, o]));
   const reopen = (f: UiFinding, why: string): UiFinding => {
     counts.reopened += 1;
@@ -156,8 +162,8 @@ export function syncFindings(
       } else next.push(current);
       continue;
     }
-    // 今週観測されなかった。Claude の確認が走っていない週は Claude の指摘を判定しない
-    if (f.source === "agent" && !ctx.agentReviewed) next.push(f);
+    // 今週観測されなかった。Claude の確認が走っていない週・そのページを確認しなかった週は Claude の指摘を判定しない
+    if (f.source === "agent" && (!ctx.agentReviewed || (reviewedPages && !reviewedPages.has(f.template)))) next.push(f);
     else if (f.status === "fixed") {
       counts.confirmedFixed += 1;
       next.push(resolve(f, "weekly-audit"));
@@ -228,7 +234,8 @@ export function planUiCards({
   const cards: PlannedCard[] = [];
   for (const [template, findings] of [...pendingByTemplate].sort(([a], [b]) => a.localeCompare(b))) {
     const prefix = `${CARD_PREFIX}-${cardSlug(template)}-`;
-    if (openIds.some((id) => id.startsWith(prefix))) continue;
+    // 前方一致にしない: `UI-FIX-RANKING-` は variants のカード `UI-FIX-RANKING-OLD-2YEARS-<日付>` にも一致してしまう
+    if (openIds.some((id) => id.startsWith(prefix) && /^\d{8}$/.test(id.slice(prefix.length)))) continue;
     const picked = findings
       .sort((a, b) => (SEVERITY_RANK[b.severity] ?? 0) - (SEVERITY_RANK[a.severity] ?? 0) || a.key.localeCompare(b.key))
       .slice(0, BATCH_SIZE);
@@ -239,6 +246,31 @@ export function planUiCards({
 }
 
 const CLI = "npx tsx .claude/scripts/page-quality/ui-findings.ts";
+
+const hasMetric = (findings: readonly UiFinding[], metric: string) =>
+  findings.some((f) => f.metric_key === metric || f.key.endsWith(`|${metric}`));
+
+/**
+ * チャートの文字の指摘は、直し方が「部品を直す (agent)」と「作り直すだけ (スクリプト)」に分かれる。
+ * 判断をカードの読み手に委ねず、振り分けの手順をカード本文に書く。正典: page-quality-standards.md
+ */
+export function chartFixGuide(findings: readonly UiFinding[], batchFile: string): string[] {
+  const lines: string[] = [];
+  if (hasMetric(findings, "chart_text_issues")) {
+    lines.push(
+      "- **チャートの文字 (ページに描く D3 チャート・agent が直す)**: 指摘の `svg[…]` から部品 (`packages/visualization/src/d3/components/*`) を特定し、部品を直す。1 部品を直せば同じ部品を使う全ページが直るので、ページ単位で直さない。描画範囲の外へ出る文字は共通の仕組み (`.claude/rules/chart-component-standards.md`) で収め、長いラベル (「1,400.0万」・47 都道府県名・6 系列の凡例) で描く回帰テストを足す。"
+    );
+  }
+  if (hasMetric(findings, "blog_svg_text_issues")) {
+    lines.push(
+      `- **記事チャート SVG (振り分けてから直す)**: まず \`npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @${batchFile}\` を実行する。` +
+        "`regen-fixes` は生成器が既に正しく、R2 の SVG を作り直すだけで直る (コード変更なし)。R2 への反映はオーナー承認が要るので、出力された `gh workflow run regenerate-blog-svgs.yml …` を書いた `[実行:ユーザー]` カードを起票し、対象を `--mark-owner` で紐付ける。" +
+        "`generator-fix` は `packages/svg-builder` の該当チャートを直し、長いラベルの fixture テストを足してから再実行して `regen-fixes` になることを確かめる (以降は同じ手順)。" +
+        "`no-data` は data JSON が無く作り直せないので、手作業の brushup を依頼するカードを起票して `--mark-owner`。`clean` は既に直っているので `--mark-fixed`。"
+    );
+  }
+  return lines;
+}
 
 function renderCard(id: string, template: string, findings: UiFinding[], today: string, screenshotBaseUrl: string): string {
   const file = batchPath(id);
@@ -254,12 +286,13 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
   return [
     `### [${id}] UI 是正: ${template} の週次 UI 検査の指摘 ${findings.length} 件を直す`,
     "",
-    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}]`,
+    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}] [レーン:UI・回遊]`,
     "",
     `- **自動起票**: 週次のページ品質監査 (\`page-quality-audit-weekly.yml\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`.claude/state/page-quality/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
     `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`.claude/state/metrics/page-quality/LATEST.md\`。`,
     "- **対象**:",
     ...findings.flatMap(target),
+    ...chartFixGuide(findings, file),
     "- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。",
     `- **記録**: 直した指摘は \`${CLI} --mark-fixed <key> --note "<何を変えたか>"\`、直さないと判断した指摘は \`--mark-by-design <key> --note "<理由>"\`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた \`[実行:対話]\` のカードを backlog に起票してから \`--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"\` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは \`@${file}\`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。`,
     "- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。",

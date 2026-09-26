@@ -2,6 +2,12 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 import {
   trackCsvDownload,
+  trackCsvDownloadPurpose,
+  trackUiInteraction,
+  trackReadProgress,
+  trackSearchResultClick,
+  trackContactClick,
+  setDeclaredPurpose,
   trackAffiliateClick,
   trackHomeFeaturedImpression,
   trackHomeFeaturedClick,
@@ -96,6 +102,41 @@ describe("GA4 カスタムイベント", () => {
       file_name: "total-population-2023.csv",
       file_extension: "csv",
     }));
+  });
+
+  it("trackCsvDownloadPurpose は用途を固定語彙で送り、個人情報を含めない", () => {
+    trackCsvDownloadPurpose({ rankingKey: "total-population", purpose: "work" });
+
+    expect(mockGtag).toHaveBeenCalledWith("event", "csv_download_purpose", {
+      ranking_key: "total-population",
+      download_purpose: "work",
+    });
+  });
+
+  it("trackUiInteraction は固定語彙の操作とページ文脈を送る", () => {
+    vi.stubGlobal("window", { gtag: mockGtag, location: { pathname: "/ranking/births" } });
+    trackUiInteraction({ action: "tab_switch", target: "table" });
+    expect(mockGtag).toHaveBeenCalledWith("event", "ui_interaction", {
+      ui_action: "tab_switch",
+      ui_target: "table",
+      content_group: "ranking",
+      ranking_key: "births",
+    });
+  });
+
+  it("trackReadProgress / trackSearchResultClick / trackContactClick がイベントを送る", () => {
+    vi.stubGlobal("window", { gtag: mockGtag, location: { pathname: "/blog/x" } });
+    trackReadProgress(50);
+    expect(mockGtag).toHaveBeenCalledWith("event", "read_progress", { progress: 50, content_group: "blog" });
+    trackSearchResultClick({ resultType: "ranking", resultPosition: 3 });
+    expect(mockGtag).toHaveBeenCalledWith("event", "search_result_click", { result_type: "ranking", result_position: 3 });
+    trackContactClick({ source: "csv-download-survey" });
+    expect(mockGtag).toHaveBeenCalledWith("event", "contact_click", expect.objectContaining({ link_position: "csv-download-survey" }));
+  });
+
+  it("setDeclaredPurpose はユーザー単位のプロパティとして保存する", () => {
+    setDeclaredPurpose("work");
+    expect(mockGtag).toHaveBeenCalledWith("set", "user_properties", { declared_purpose: "work" });
   });
 
   it("trackAffiliateClick がイベントを送信する", () => {

@@ -19,6 +19,7 @@ import {
 } from '../lib/build-geo-landslide-map-model';
 import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
 import { GEO_BASEMAP } from '../lib/geo-basemap';
+import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 
 import type {
   GeoLandslidePrefDetail,
@@ -56,7 +57,7 @@ function SourceViewport({bounds,generatedAt}:{bounds:readonly [number,number,num
   }, [bounds, generatedAt]);
   return <>
     {source ? <GeoJSON data={source} style={(f) => ({
-      color: Number(f?.properties?.mask) >= 8 ? '#7e22ce' : '#1e40af',
+      color: Number(f?.properties?.mask) >= 8 ? GEO_MAP_COLORS.designationSourceOutline.special : GEO_MAP_COLORS.designationSourceOutline.standard,
       weight: 1.2, fill: false, interactive: false,
     })} /> : null}
     <SourceStatus>{status}</SourceStatus>
@@ -142,7 +143,7 @@ export function GeoLandslideLeafletMap({
         minZoom={GEO_BASEMAP.minZoom}
         maxZoom={GEO_BASEMAP.maxZoom}
         scrollWheelZoom={false}
-        className="isolate h-[480px] rounded-none lg:h-[620px]"
+        className="isolate h-[480px] rounded-card lg:h-[620px]"
         aria-label={`${detail.areaName}の指定区域面と人口・公共施設`}
       >
         <TileLayer
@@ -153,17 +154,17 @@ export function GeoLandslideLeafletMap({
           key={`${detail.areaCode}-${view}`}
           data={model.collection}
           style={(f) => ({
-            color: '#ffffff',
+            color: GEO_MAP_COLORS.outline,
             weight: 0.2,
             fillOpacity: 0.6,
             fillColor:
               view === 'population'
                 ? Number(f?.properties?.population2020) >= 1000
-                  ? '#1e3a8a'
+                  ? GEO_MAP_COLORS.designationPopulation.high
                   : Number(f?.properties?.population2020) >= 100
-                    ? '#2563eb'
-                    : '#93c5fd'
-                : ['#cbd5e1', '#2563eb', '#7e22ce'][
+                    ? GEO_MAP_COLORS.designationPopulation.medium
+                    : GEO_MAP_COLORS.designationPopulation.low
+                : GEO_MAP_COLORS.designationClass[
                     Number(f?.properties?.centerClass)
                   ],
           })}
@@ -183,7 +184,7 @@ export function GeoLandslideLeafletMap({
               circleMarker(ll, {
                 renderer,
                 radius: 4,
-                color: Number(f.properties?.mask) ? '#7e22ce' : '#334155',
+                color: Number(f.properties?.mask) ? GEO_MAP_COLORS.designationFacility.inside : GEO_MAP_COLORS.designationFacility.outside,
                 fillOpacity: 0.8,
               })
             }

@@ -88,7 +88,7 @@ export default function RankingIndexPage() {
       {/*
         eyebrow と description は置かない。
         - eyebrow「ランキング」は直上のパンくず末尾と完全に同じ語で情報が増えない
-          (他ハブは /themes「ディスカバリー」/survey「政府統計」のようにパンくずと別の語を足している)。
+          (他ハブは /themes「指標の横断比較」/survey「政府統計」のようにパンくずと別の語を足している)。
         - description は「カテゴリを選ぶとランキングが見られる」というページを見れば分かる説明にしかならず、
           その分だけ索引が fold の下へ押し出される。索引そのものが答えなので h1 と規模だけ出す。
       */}

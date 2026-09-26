@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**564 件** (最終更新: 2026-09-24)
+**567 件** (最終更新: 2026-09-25)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-25 | 📸 Instagram | compare-carousel/13000-vs-27000 |  | [🔗](https://www.instagram.com/p/Ddtv7fKm3XY/) |
+| 2026-09-25 | 🧵 Threads | area/area-02000-profile | 青森の「らしさ」をデータでたどる。 県花リンゴの花、ふじりんごと初雪たけ、統計ランキングを1ページに整理しました。 続き… | [🔗](https://www.threads.com/@stats47jp/post/DdtCSEAjvDz) |
+| 2026-09-25 | 🧵 Threads | ranking/grape-consumption-quantity | 3,937g・2,926g・2,913g。  ぶどうを最も多く買う上位3県は山梨・長野・山形。 最下位の沖縄（658g）… | [🔗](https://www.threads.com/@stats47jp/post/DdsT6HWkbFV) |
 | 2026-09-24 | 📸 Instagram | ranking-quiz/shochu-consumption-expenditure | 【都道府県クイズ】焼酎にいちばんお金を使う県は？  A 鹿児島県 B 宮崎県 C 熊本県  ヒントは2枚目、答えは3枚目… | [🔗](https://www.instagram.com/p/DdrJkFFFtPC/) |
 | 2026-09-24 | 🧵 Threads | area/area-01000-profile | 北海道を1位・47位だけで語らない。 県木はエゾマツ、県鳥はタンチョウ。人口・産業・暮らしの県データブックへ。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DdqbKCNCDsH) |
 | 2026-09-24 | 🧵 Threads | ranking/pear-consumption-expenditure | 梨にいちばんお金を使う県は鳥取。  1世帯あたり8,846円で、最下位の山梨（625円）の14.2倍。 2位の新潟（4,… | [🔗](https://www.threads.com/@stats47jp/post/DdptWkqEwPS) |

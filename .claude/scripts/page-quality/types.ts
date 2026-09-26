@@ -25,6 +25,20 @@ export interface PageTemplate {
   representativeUrl: string;
   /** このテンプレートに影響するファイルパスの glob (git diff との照合用)。 */
   changedPathGlobs: string[];
+  /**
+   * 週次で代表URLと一緒にブラウザ検査・撮影する「データの型が違う」ページ。同じテンプレートでも崩れはデータの形
+   * (観測 1 年だけ・古い年・長い名前・負の値・市区町村単位など) から出るので、代表URL 1 件では拾えない
+   * (2026-09-25 の UI 全面点検で 211 件の指摘の大半が代表URL以外から出た)。
+   */
+  variants?: readonly PageVariant[];
+}
+
+/** テンプレート内の「データの型の違い」を代表するページ。`id` は撮影ファイル名と指摘の key に使う。 */
+export interface PageVariant {
+  id: string;
+  url: string;
+  /** 何の違いを見るためのページか (観測 1 年だけ、など) */
+  why: string;
 }
 
 /** 全テンプレートへ波及する共通ファイルの glob (layout / 広告 / データ取得層等)。 */
@@ -61,8 +75,11 @@ export type MetricKey =
   | "degraded_images"
   | "empty_headings"
   | "duplicate_data_source_sections"
+  | "external_links_same_tab"
   | "clipped_text"
   | "overlapping_tap_targets"
+  | "chart_text_issues"
+  | "blog_svg_text_issues"
   | "a11y_violations"
   | "responsive_layout_issues";
 
@@ -113,6 +130,11 @@ export interface PageAuditResult {
   image_urls?: string[];
   /** 代表URLのスクショ (スマホ・PC)。週次の --browser-representative のときだけ入る。 */
   screenshots?: ScreenshotRecord[];
+  /**
+   * 撮影ファイル名・agent の確認・UI 指摘の key に使うページの識別子。代表URLは `template`、
+   * データの型の違い (variants) は `<template>--<variant id>`。ブラウザ検査したページだけに入る。
+   */
+  page_key?: string;
 }
 
 export interface ScreenshotRecord {
@@ -134,6 +156,8 @@ export interface ScreenshotRecord {
   /** この幅で文字が枠外に切れていた要素・重なったタップ要素 (ui-probe と同じ判定)。 */
   clipped?: string[];
   overlaps?: string[];
+  /** この幅でチャートの文字が切れた・重なった箇所 (遅延描画のためスクロール後に測る)。 */
+  chartText?: string[];
 }
 
 export interface Violation {

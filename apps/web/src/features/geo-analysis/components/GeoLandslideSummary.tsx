@@ -64,7 +64,7 @@ export function GeoLandslideSummary({
         tabIndex={0}
         aria-label="人口と施設の表。横方向にスクロールできます"
       >
-        <Table aria-label="指定区域面と人口・公共施設の県別集計">
+        <Table className="whitespace-nowrap" scrollRegion aria-label="指定区域面と人口・公共施設の県別集計">
           <TableHeader>
             <TableRow>
               <TableHead>地域</TableHead>

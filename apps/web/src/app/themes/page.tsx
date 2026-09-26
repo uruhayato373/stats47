@@ -35,7 +35,7 @@ export default function ThemesPage() {
       />
       <StatisticsScopeNav current="prefectures" />
       <PageHeader
-        eyebrow="ディスカバリー"
+        eyebrow="指標の横断比較"
         title="テーマダッシュボード"
         description={`テーマ別に複数の指標を横断して都道府県を比較できます。少子高齢化・労働・医療・観光・物価など、社会課題に直結するダッシュボードを ${ALL_THEMES.length} 種類。`}
         stats={`全 ${ALL_THEMES.length} テーマ ・ 指標 ${totalRankings} 件 ・ 47 都道府県`}

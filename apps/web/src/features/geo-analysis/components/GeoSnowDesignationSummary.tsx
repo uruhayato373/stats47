@@ -13,6 +13,7 @@ import {
 } from '@stats47/components/atoms/ui/table';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 
@@ -138,12 +139,12 @@ export function GeoSnowDesignationSummary({
           指定区域・人口メッシュ・計算の根拠を見る
         </Link>
         {' · '}
-        <a
+        <ExternalAnchor
           className="underline underline-offset-2"
           href={SNOW_DESIGNATION_SOURCE.population.pageUrl}
         >
           人口メッシュの出典
-        </a>
+        </ExternalAnchor>
       </p>
     </ChartPanel>
   );

@@ -149,8 +149,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 ### 1. メタデータ（完全DBレス: DB 登録はしない）
 
-> ★**note は完全DBレス。D1 `note_articles` テーブルは廃止済（使わない）。** 状態は **draft.md の frontmatter** と
-> **`.claude/state/note-published-urls.json`** で表す。旧版の「ローカル D1 に INSERT」手順は無効。
+> 記事の状態は **draft.md の frontmatter** と **`.claude/state/note-published-urls.json`** で表す。
 
 編集完了したら draft.md の frontmatter を整える（`title` / `is_paid` / `price_jpy` / `published: false`）。
 ハッシュタグは同ディレクトリ `hashtags.txt`。DB への登録・INSERT は一切不要。

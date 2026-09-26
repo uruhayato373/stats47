@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import Link from "next/link";
 
 import { DataTable, cn } from "@stats47/components";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   rankByValue,
   computeRankingStats,
@@ -140,7 +141,7 @@ export function RankingDataTable({
         header: () => <div className="text-right">値</div>,
         meta: { width: "120px" },
         cell: ({ row }) => {
-          const unit = rankingItem?.unit || processedData[0]?.unit || "";
+          const unit = formatUnitForDisplay(rankingItem?.unit || processedData[0]?.unit || "");
           return (
             <div className="text-right font-mono whitespace-nowrap">
               {formatRankingValue(row.getValue<number>("value"), precision)}

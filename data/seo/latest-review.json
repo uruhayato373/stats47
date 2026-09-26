@@ -1,56 +1,64 @@
 {
   "schemaVersion": 1,
-  "id": "35568037372-1",
-  "status": "implementation-needed",
-  "keyword": "高校2年生 平均身長",
-  "targetPath": "/blog/avg-height-high-school-2nd-male",
-  "needs": "「高校2年生 平均身長」で検索する人は、都道府県別ランキングよりもまず全国の目安となる平均身長を1つの数値で知りたい(自分の子や自分の身長が標準的か確かめたい)。語に男女の指定が無いため、男子だけでなく女子の数値や男女比較も期待する検索者が一定数含まれる。",
-  "gap": "対象記事(target-page.txtのmain部分は空でJSで後付けhydrateされるが、target-page.htmlのSuspense後ブロックで本文を確認)は新潟・沖縄など都道府県別ランキングに特化し、高校2年生男子のみを扱う。本文をgrepしても「全国平均は◯◯cm」のような直接回答文が0件で、47位分の個別値と地域背景の考察はあるが、検索意図に最短で応える単一の全国平均値の明記が無い。上位表示のsuku-noppo.jp(17歳男子170.5cm、厚労省+文科省出典)とtfp-group.co.jp(16歳男子169.8cm/女子157.6cm、文科省出典、パーセンタイル表・成長解説付き)はどちらもこの数値を冒頭で明示し、男女両方または年齢別の早見表を持つ。",
-  "done": "e-Stat「学校保健統計調査」(statsDataId 0000010209, cdCat01 #I0210105)の都道府県別データとは別に、全国計(全国平均行)の値が同一表内にあるかをdata-ingester/estat-researcherが確認・取得する。確認できた全国平均値(年度・出典明記)をarticle-writerが本文冒頭(上位5県リストの前)に1文で追加し、blog-quality-standards.md/blog-data-schema.mdの数値記載規約に従う。完了条件: 検証済みの全国平均値が出典年度付きで本文に追加され、article-factual-checkの値照合(VALUE_MISMATCH)が0件で通ること。既存文字列の置換だけでは実装できないため、この案件は本CIのproposedでは適用できない(selected.editableFileがnull=/blog/配下はeditableFile解決対象外)。",
-  "method": "intro",
+  "id": "36222910740-1",
+  "status": "no-change",
+  "keyword": "道の駅多い県",
+  "targetPath": "/blog/roadside-station-count-prefecture-gap",
+  "needs": "「道の駅多い県」を検索する人は、都道府県別の道の駅登録数で1位がどこか、上位・下位の具体的な数値を短時間で知りたい層。旅行前の下調べとしてクリック単位の実用情報(個別駅名・営業時間)まで求める層も一部いる。",
+  "gap": "WebSearch上位3件と比較: uub.jpは全47都道府県の順位表+面積/人口あたり正規化+棒グラフ。tabizine.jpは全県順位+個別駅の観光情報(旅行ガイド形式)。nlab.itmediaは上位3位の速報値のみで因果解説なし。対象ページ(target-page.txt/htmlで実測)は既に北海道128・岐阜55・長野54・東京1など上位下位の具体数値を本文冒頭で提示し、47都道府県を色分けした地図で全県比較を提供し、面積あたり密度を扱う関連記事へ内部リンクも設置済み。制度目的の解説と「数だけでは使いやすさは分からない」という独自の注意喚起もあり、検索意図に対する情報欠落は見当たらない。個別施設名・営業時間などtabizine/nlab型の旅行ガイド情報は、統計解説というサイトの編集方針上意図的に対象外。",
+  "done": "具体的な情報不足が見つからないため変更なし。直近7日でGSC平均掲載順位8.3・表示586・クリック1という観測はあるが、previousMethodがnull(このキーワードの初回評価)であり、CTRの低さだけを理由に文章を増やす根拠にはしない(順位のための増量は規約で禁止)。加えてselected.editableFileがnullで、docs/21_ブログ記事原稿/roadside-station-count-prefecture-gap/配下はREADME.mdのみでR2移行済みのため、記事本文ソースがこのリポジトリ内に存在しない。仮に追加提案があっても本パイプラインの文字列置換では自動適用できない状態。",
+  "method": "content",
   "competitors": [
     {
-      "url": "https://www.suku-noppo.jp/data/average_height_boy_17.html",
-      "findings": "17歳男子の平均身長170.5cmを厚労省・文科省データから即座に明示。表とグラフで月齢ごとの推移も併記し、対象は男子のみ・年齢基準(学年ではなく歳)。"
+      "url": "https://uub.jp/pdr/t/r.html",
+      "findings": "全47都道府県の道の駅登録数を降順表で網羅し、面積1000km²あたり・人口100万人あたりの正規化指標と棒グラフも併載。ランキングそのものへの回答は最も網羅的だが、差が生じる理由の解説はほぼ無い。"
     },
     {
-      "url": "https://tfp-group.co.jp/kodomo-shincho/column/nenreibetsu-heikin-shincho",
-      "findings": "16歳男子169.8cm/女子157.6cmを文科省学校保健統計調査から明示。男女両方・年齢別一覧表・パーセンタイル分布・成長スパート解説まで含み、検索意図に単一ページで幅広く回答。"
+      "url": "https://tabizine.jp/article/632753/",
+      "findings": "47都道府県の順位を全て列挙し、上位県(北海道128・岐阜56・長野54)ごとに人気の個別道の駅(飲食・温泉・サウナ等)を紹介する旅行ガイド形式。ランキングと個別施設の実用情報まで扱うが、差の要因分析はほぼ無い。"
+    },
+    {
+      "url": "https://nlab.itmedia.co.jp/research/articles/474815/",
+      "findings": "国交省公開データ(2021年6月時点)に基づく上位3位(北海道129・岐阜56・長野52)の速報的ランキング記事。読者アンケートではなく統計集計で、各県の特性を一言添えるが因果分析は無く下位県の数値は非公開。"
     }
   ],
   "patches": [],
   "research": {
     "targetPage": {
-      "url": "https://stats47.jp/blog/avg-height-high-school-2nd-male",
+      "url": "https://stats47.jp/blog/roadside-station-count-prefecture-gap",
       "status": 200,
-      "fetchedAt": "2026-09-21T06:21:41.968Z",
-      "inputHash": "c259d8c6c32502849bf1453a5204abcf2e4d2e4fffc4501993a88080c2343fe0",
+      "fetchedAt": "2026-09-26T06:10:51.116Z",
+      "inputHash": "461e1ae83db5582e44a92ae0bfeee54b5c0eeabba7c301925ba9e5d1cc9ed09b",
       "htmlFile": ".local/seo-rank-watch/target-page.html",
-      "htmlSha256": "04a4a21eea717e2a9fa193ed50967c249e8bd753541d80597ade8924baac03c4",
+      "htmlSha256": "6ae802cf49a97c0c249085004fe4060a9102185191ebf5ef0997b1892d96f122",
       "textFile": ".local/seo-rank-watch/target-page.txt",
-      "textSha256": "1064e39c525825042c9ffbe14e47d333a7b409ec46a64d7e57992f66a5c33f1f"
+      "textSha256": "eb97a3a22d7b4c0b4be26a691dce6cad0c024350c2fe0168f0a1c986c6ce0b3d"
     },
     "toolCalls": [
       {
         "name": "WebSearch",
-        "target": "高校2年生 平均身長"
+        "target": "道の駅多い県"
       },
       {
         "name": "WebFetch",
-        "target": "https://stats47.jp/blog/avg-height-high-school-2nd-male"
+        "target": "https://uub.jp/pdr/t/r.html"
       },
       {
         "name": "WebFetch",
-        "target": "https://www.suku-noppo.jp/data/average_height_boy_17.html"
+        "target": "https://tabizine.jp/article/632753/"
       },
       {
         "name": "WebFetch",
-        "target": "https://tfp-group.co.jp/kodomo-shincho/column/nenreibetsu-heikin-shincho"
+        "target": "https://nlab.itmedia.co.jp/research/articles/474815/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/blog/roadside-station-count-prefecture-gap"
       }
     ]
   },
-  "selectedAt": "2026-09-21",
-  "inputHash": "c259d8c6c32502849bf1453a5204abcf2e4d2e4fffc4501993a88080c2343fe0",
+  "selectedAt": "2026-09-26",
+  "inputHash": "461e1ae83db5582e44a92ae0bfeee54b5c0eeabba7c301925ba9e5d1cc9ed09b",
   "methods": [],
   "files": []
 }

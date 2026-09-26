@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { PNG } from "pngjs";
 
 import { compareScreenshots, responsiveFindings, sliceIntoTiles } from "../lib/screenshots.ts";
-import { buildUiAlert, newUiViolations, structuredOutput, validateReview } from "../lib/ui-report.ts";
+import { buildReviewInput, buildUiAlert, newUiViolations, structuredOutput, validateReview } from "../lib/ui-report.ts";
 
 function png(width, height, paint) {
   const img = new PNG({ width, height });
@@ -147,4 +147,21 @@ test("R2 に置く URL ごとの履歴は保持日数より古い行を落とし
   assert.ok(!lines.some((l) => l.includes("/old")), "84 日より古い行は落とす");
   assert.ok(lines.some((l) => l.includes("/recent")));
   assert.ok(lines.some((l) => l.startsWith("2026-09-27,full,/new,ranking")));
+});
+
+test("agent への入力はその週に確認するページだけに絞り、ページの識別子 (variants は <種類>--<違い>) で渡す", () => {
+  const shot = { device: "mobile-390", localPath: "x.png", changeRatio: null, height: 800, tilePaths: ["t.png"] };
+  const result = (path, template, page_key) => ({ url: `https://stats47.jp${path}`, path, template, page_key, screenshots: [shot] });
+  const run = {
+    generated_at: "2026-09-27T18:00:00.000Z",
+    results: [
+      result("/ranking/total-population", "ranking", "ranking"),
+      result("/ranking/population-growth-rate", "ranking", "ranking--negative"),
+      result("/ranking/natto-consumption-expenditure", "ranking", "ranking--kakei-city"),
+      { url: "https://stats47.jp/blog/x", path: "/blog/x", template: "blog-article" },
+    ],
+  };
+  const input = buildReviewInput(run, ["ranking", "ranking--negative"]);
+  assert.deepEqual(input.pages.map((p) => p.template), ["ranking", "ranking--negative"]);
+  assert.equal(buildReviewInput(run).pages.length, 3, "絞り込み無しなら撮影した全ページ");
 });

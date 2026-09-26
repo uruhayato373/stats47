@@ -70,7 +70,7 @@ npm run google-admin:audit-api
 
 ---
 
-## 2. イベント × パラメータ × 登録状況 台帳 (★真実源)
+## 2. イベント × パラメータ × 登録状況 台帳 (真実源)
 
 凡例: **登録** = GA4 カスタムディメンション登録が必要 / **要否×** = GA4 標準パラメータ or 登録不要 /
 状態 `✅登録済 (日付)` = 実登録を確認済 / `⏳要登録` = 登録が要るが未登録 / `❓要確認` = コード上は登録前提だが GA4 実登録を未確認。
@@ -102,15 +102,22 @@ npm run google-admin:audit-api
 > 増え、CTR は下がる)。2026-08-04 より前の窓と比較しないこと。効果判定は是正後 2 週間の
 > 実測が揃ってから行う (`.claude/rules/evidence-based-judgment.md`)。
 | `cta_click` | `trackCtaClick` | `link_position` | ✅登録済 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
-| `cta_click` | `trackCtaClick` | `cta_id` / `content_id` / `target_type` / `target_key` | ⏳要登録 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
+| `cta_click` | `trackCtaClick` | `cta_id` / `target_type`（content_id・target_key はどの呼び出し元も送っていないので登録しない。2026-09-26 確認） | ⏳要登録 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `experiment_id` | ✅登録済 (2026-07-31 API確認) | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_variant` | ⏳要登録 (2026-07-31 API確認) | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
 | `ranking_view` | `trackRankingView` | `ranking_key` / `category_key` / `area_type` / `year_code` | ✅登録済 (2026-07-31 API確認) | ranking |
 | `file_download` | `trackCsvDownload` | `ranking_key` / `year_code`（`file_name`/`file_extension` は GA4 標準） | ✅登録済 (2026-07-31 API確認) | ranking |
-| `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_id` / `analysis_slug` / `geography` / `data_version` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
-| `geo_map_interaction` | `trackGeoMapInteraction` | 上記共通4項目 / `interaction_type` / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
-| `geo_region_select` | `trackGeoRegionSelect` | 上記共通4項目 / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
-| `geo_compare_add` | `trackGeoCompareAdd` | 上記共通4項目 / `area_code` / `comparison_size` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `csv_download_purpose` | `trackCsvDownloadPurpose` | `download_purpose`（値は work・study・media・personal・other の固定語彙。`ranking_key` は登録済み） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | ranking / 行政資料 (`CSV-DL-INTENT-SURVEY-01`) |
+| `page_view` | `pageview` (`pageview.ts`) | `pv_trigger` / `theme_slug` / `area_code`（`content_group` は GA4 標準、`ranking_key`・`category_key` は登録済み） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 全ページ (`GA4-FULL-MEASUREMENT-01`) |
+| `ui_interaction` | `trackUiInteraction` | `ui_action` / `ui_target`（値は `UI_ACTIONS`・`UI_TARGETS` の固定語彙） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 全ページ |
+| `read_progress` | `trackReadProgress` | `progress`（25・50・75・100） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 全ページ |
+| `search_result_click` | `trackSearchResultClick` | `result_type` / `result_position` | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 検索 |
+| `contact_click` | `trackContactClick` | `link_position` は登録済み（key event 候補） | 要否× | 行政資料 |
+| ユーザー単位 `declared_purpose` | `setDeclaredPurpose` | `declared_purpose`（USER scope。値は CSV 後アンケートの固定語彙） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 行政資料 |
+| `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_slug` / `geography`（`analysis_id` は slug と重複、`data_version` は分析価値が低いので登録しない） | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `geo_map_interaction` | `trackGeoMapInteraction` | `analysis_slug` / `geography` / `interaction_type` / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `geo_region_select` | `trackGeoRegionSelect` | `analysis_slug` / `geography` / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `geo_compare_add` | `trackGeoCompareAdd` | 登録しない（送信元の `GeoPopulationExplorer` がどのページにも置かれていない。2026-09-26 確認） | 要否× | geo M1 |
 
 `geo_map_interaction.interaction_type`は県地図の`select-prefecture` / `clear-prefecture`に加え、
 Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共施設分析専用の`stage-facilities`を許可する。自由入力値は送らない。
@@ -278,6 +285,24 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 右レールの調査カード (`*_survey`) と混ぜると「出典欄から一次資料を開いたか」が読めなくなるため別の値にした。
 > 登録済み `nav_surface` / `nav_label` の**値追加**で新しい custom dimension は無い。
 > `nav_label` は調査なら surveyId、統計表・データセットなら表名 (外部 URL は `nav_href` に入る)。
+>
+> **nav_surface の値追加 (2026-09-25・ブログ本文のランキングカード)**: 記事の図の直下に置く
+> `<source-link>` を地図 + 上位3県のカード (`RankingLinkCard`) に変え、クリックを
+> `blog_ranking_card` で送る。`nav_label` は rankingKey。登録済み `nav_surface` / `nav_label` の
+> **値追加**で新しい custom dimension は無い。変更前はこのカードに計装が無かったので、
+> 変更前後の比較は GA4 の値ではなく週次 `internal-transitions.csv` (referrer) の
+> `blog,ranking` 行で行う (2026-W38 実測 730)。この行はページ種別単位の集計で、右レールの
+> 関連ランキング等からの遷移も含むため、カード単独の効果ではなく blog → ranking 全体の変化として読む。
+>
+> **nav_click の既定を「全部送る」に反転 (2026-09-26・NAV-CLICK-COVERAGE-01、未デプロイ)**: ルートレイアウトの
+> `NavClickTracker` が、サイト内リンクのクリックを 1 か所で拾って `nav_click` を送る。導線名は外側の `data-nav-surface`
+> (無ければ `unlabeled`)、ラベルは `data-nav-label` (無ければ行き先のページ種別)。部品側が同じクリックで
+> `trackNavClick` を送ったときは重ねて送らない。`data-click-owner` の領域 (`rail_click` / `cta_click` /
+> `home_featured_click`) と外部リンクは送らない。`nav_surface` に `blog_toc` / `unlabeled` と、全ページ共通の領域の
+> `footer` / `breadcrumb` / `tag` / `blog_body` (ブログ本文中のサイト内リンク) を追加 (登録済み dimension の値追加)。
+> **デプロイ日を境に `nav_click` の件数は大きく増える** (これまで記録されていなかったリンクが数えられるため。
+> 2026-08-23〜09-19 の実測でサイト内移動 11,319 件に対し記録は約 2 割)。デプロイ前後の件数を単純比較しない。
+> 増え方がサイト内移動 (`internal-transitions.csv`) を大きく超えたら二重送信を疑う。
 >
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、

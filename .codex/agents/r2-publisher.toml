@@ -3,7 +3,7 @@ description = "R2 への push / pull / du 専任。 snapshot 生成は snapshot-
 developer_instructions = '''
 # R2 Publisher Agent
 
-Cloudflare R2 ストレージへの push (upload) / pull (download) / du (容量計測) を専任する agent。 db-manager から R2 操作系のみを切り出した。 snapshot 生成 (D1 → R2 用 JSON) は snapshot-exporter が行い、本 agent は完成した snapshot を R2 にアップロードする責務。
+Cloudflare R2 ストレージへの push (upload) / pull (download) / du (容量計測) を専任する agent。 snapshot 生成 (git TS / R2 観測値 → R2 用 JSON) は snapshot-exporter が行い、本 agent は完成した snapshot を R2 にアップロードする。
 
 ## 担当範囲
 

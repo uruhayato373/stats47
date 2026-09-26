@@ -1,15 +1,26 @@
+import { CARD_SURFACE_CLASS } from '@stats47/components';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { RailCard, RailNavRow, RailNavRowButton } from '../SurfaceCard';
 
 describe('RailCard', () => {
-  it('外枠は rounded-none border bg-card shadow-sm を持つ', () => {
+  it('外枠は共通の CARD_SURFACE_CLASS (角丸・線色をトークンで決める) を持つ', () => {
     const { container } = render(
       <RailCard title="タイトル">本文</RailCard>
     );
     const root = container.firstElementChild as HTMLElement;
-    expect(root).toHaveClass('rounded-none', 'border', 'bg-card', 'shadow-sm');
+    expect(root).toHaveClass(...CARD_SURFACE_CLASS.split(' '));
+  });
+
+  it('外枠に角丸・線色のリテラルを持たず、トークン (rounded-card / border-card-outline) だけで決まる', () => {
+    const { container } = render(
+      <RailCard title="タイトル">本文</RailCard>
+    );
+    const root = container.firstElementChild as HTMLElement;
+    // リテラルが混ざると --card-radius / --card-outline を変えてもカードが追従しない
+    expect(root).toHaveClass('rounded-card', 'border-card-outline');
+    expect(root).not.toHaveClass('rounded-none', 'border-border', 'border-transparent');
   });
 
   it('ヘッダーは border-b を持つ', () => {

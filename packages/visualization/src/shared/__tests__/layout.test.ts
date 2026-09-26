@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../layout";
+import {
+  computeChartLayout,
+  computeFontSize,
+  computeMarginsByRatio,
+  estimateTextWidth,
+  leftMarginForTickLabels,
+} from "../layout";
 
 describe("layout utilities", () => {
   describe("computeChartLayout", () => {
@@ -55,5 +61,22 @@ describe("layout utilities", () => {
       const ratio = 1 / 10000; // micro ratio
       expect(computeFontSize(100, 100, ratio, 12)).toBe(12);
     });
+  });
+});
+
+describe("leftMarginForTickLabels (縦軸ラベルが切れない左余白)", () => {
+  // 幅の狭い県データブックのグラフで「1,400万」の先頭が切れ「400万」と読めた (2026-09-25)
+  it("比率の余白より長いラベルがあれば、ラベル幅に合わせて広げる", () => {
+    const margin = leftMarginForTickLabels(["0", "1,400万", "1,600万"], 12, 20);
+    expect(margin).toBeGreaterThanOrEqual(Math.ceil(estimateTextWidth("1,600万", 12)));
+    expect(margin).toBeGreaterThan(20);
+  });
+
+  it("比率の余白で足りる短いラベルなら余白を変えない", () => {
+    expect(leftMarginForTickLabels(["0", "5", "10"], 12, 55)).toBe(55);
+  });
+
+  it("全角の単位は英数字より広く見積もる", () => {
+    expect(estimateTextWidth("万", 10)).toBeGreaterThan(estimateTextWidth("1", 10));
   });
 });

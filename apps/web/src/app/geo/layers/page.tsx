@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { GIS_DATASETS } from '@stats47/gis/mlit-ksj';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -75,16 +76,16 @@ export default async function GeoLayersPage() {
           </p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
             出典：各GISの国土交通省「国土数値情報」（原典・利用条件はリンク先に掲載）。stats47が表示範囲・配色を加工。背景の境界：
-            <a className="underline" href="https://geoshape.ex.nii.ac.jp/">
+            <ExternalAnchor className="underline" href="https://geoshape.ex.nii.ac.jp/">
               NII 日本の行政区画（2023年）
-            </a>
+            </ExternalAnchor>
             を加工（
-            <a
+            <ExternalAnchor
               className="underline"
               href="https://creativecommons.org/licenses/by-sa/4.0/"
             >
               CC BY-SA 4.0
-            </a>
+            </ExternalAnchor>
             ）。
           </p>
         </ContentDisclosure>
@@ -100,16 +101,16 @@ export default async function GeoLayersPage() {
       <GeoLayerCards />
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         カードは兵庫県（淡路島を含む）の表示例です。各地図で47都道府県に切り替えられます。原典から抽出・整理した範囲を表示します。境界：国土数値情報をもとに{' '}
-        <a href="https://geoshape.ex.nii.ac.jp/" className="underline">
+        <ExternalAnchor href="https://geoshape.ex.nii.ac.jp/" className="underline">
           NIIが加工
-        </a>
+        </ExternalAnchor>
         （2023年、表示用に加工、
-        <a
+        <ExternalAnchor
           href="https://creativecommons.org/licenses/by-sa/4.0/"
           className="underline"
         >
           CC BY-SA 4.0
-        </a>
+        </ExternalAnchor>
         ）。
       </p>
       <SurfaceCard className="mt-6">

@@ -10,6 +10,7 @@ import { DEFAULT_DIVERGING_SCHEME } from "@stats47/types";
 
 import { legendGradientCss } from "../../utils/color-scale/legend-gradient";
 import { DivergingChoroplethMap } from "../DivergingChoroplethMap";
+import { DIVERGING_DIRECTION_TEXT_CLASS } from "../DivergingChoroplethMap/diverging-choropleth.palette";
 import type {
   DivergingChoroplethMapFixedProjection,
   DivergingChoroplethMapProjection,
@@ -186,7 +187,7 @@ export function TimelineChoroplethMap({
       {showLegend && (
         <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border pt-2 text-xs">
           <div className="flex items-center gap-2">
-            <span className="font-medium text-red-600">← 減少</span>
+            <span className={`font-medium ${DIVERGING_DIRECTION_TEXT_CLASS.decrease}`}>← 減少</span>
             <div
               className="h-2 w-32 rounded-sm"
               style={{
@@ -194,7 +195,7 @@ export function TimelineChoroplethMap({
                   legendGradientCss(colorScheme, { reverse: true }),
               }}
             />
-            <span className="font-medium text-blue-600">増加 →</span>
+            <span className={`font-medium ${DIVERGING_DIRECTION_TEXT_CLASS.increase}`}>増加 →</span>
             <span className="text-muted-foreground">
               ±{(colorClamp * 100).toFixed(1)}%
             </span>
@@ -204,7 +205,9 @@ export function TimelineChoroplethMap({
               {resolvedHighlightLabel}:{" "}
               <span
                 className={`font-bold tabular-nums ${
-                  highlightRec.ratio >= 1 ? "text-blue-600" : "text-red-600"
+                  highlightRec.ratio >= 1
+                    ? DIVERGING_DIRECTION_TEXT_CLASS.increase
+                    : DIVERGING_DIRECTION_TEXT_CLASS.decrease
                 }`}
               >
                 {highlightRec.ratio >= 1 ? "+" : ""}

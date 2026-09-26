@@ -1,8 +1,9 @@
 name: 📐 Page Quality Audit (weekly)
 
 # ページの肥大化・重複・画像切れを公開対象の全URLで、文字の切れ・要素の重なり・アクセシビリティを
-# 代表URL 11 件だけブラウザで週次に検知する。代表URLはスマホ・PC のスクショを R2
-# `state/page-quality/screenshots/` へ保存して先週と比べ、Claude (読み取り専用) がスクショを確認する。
+# 代表URL 12 件とデータの型の違い (variants) 32 件だけブラウザで週次に検知する (templates.ts)。7 幅のスクショを R2
+# `state/page-quality/screenshots/` へ保存して先週と比べ、Claude (読み取り専用) が代表URLと variants の 1/4 を確認する
+# (variants は 4 週で 1 巡。reviewPageKeys)。
 # 新しく出た UI 違反と agent の指摘は `ui-review-alert` Issue 1 件へまとめる (無ければ閉じる)。
 # 肥大化・重複・画像切れの error は従来どおり `page-quality-alert` Issue。
 #
@@ -76,7 +77,8 @@ jobs:
       - name: 🤖 Review screenshots (Claude・読み取り専用)
         id: review
         if: always() && hashFiles('.local/ci/page-quality/review-input.json') != ''
-        timeout-minutes: 20
+        # 代表URL 12 件 + データの型の違い (variants) 8 件 = 約 20 ページ。2026-09-23 の試行は 11 ページで 73 回のやり取り
+        timeout-minutes: 30
         uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # v2.1.220
         env:
           NODE_VERSION: '20.x'
@@ -87,9 +89,9 @@ jobs:
           settings: '{"disableAllHooks":true}'
           claude_args: |
             --model sonnet
-            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["reviewed","no-issues","blocked"]},"summary":{"type":"string","minLength":10,"maxLength":800},"findings":{"type":"array","maxItems":10,"items":{"type":"object","properties":{"template":{"type":"string"},"device":{"type":"string","enum":["mobile-390","tablet-768","desktop-1440"]},"severity":{"type":"string","enum":["high","medium","low"]},"location":{"type":"string","minLength":5},"issue":{"type":"string","minLength":10},"suggestion":{"type":"string","minLength":5}},"required":["template","device","severity","location","issue","suggestion"],"additionalProperties":false}}},"required":["status","summary","findings"],"additionalProperties":false}'
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["reviewed","no-issues","blocked"]},"summary":{"type":"string","minLength":10,"maxLength":800},"findings":{"type":"array","maxItems":20,"items":{"type":"object","properties":{"template":{"type":"string"},"device":{"type":"string","enum":["mobile-390","tablet-768","desktop-1440"]},"severity":{"type":"string","enum":["high","medium","low"]},"location":{"type":"string","minLength":5},"issue":{"type":"string","minLength":10},"suggestion":{"type":"string","minLength":5}},"required":["template","device","severity","location","issue","suggestion"],"additionalProperties":false}}},"required":["status","summary","findings"],"additionalProperties":false}'
             --effort medium
-            --max-turns 120
+            --max-turns 200
             --no-session-persistence
             --setting-sources project
             --permission-mode dontAsk

@@ -9,15 +9,14 @@
 
 | 禁止                               | 理由                                                 | 代替                          |
 | ---------------------------------- | ---------------------------------------------------- | ----------------------------- |
-| `text-black`                       | 純黒はコントラストが強すぎて長時間の利用で目が疲れる | `text-slate-900`（#0f172a）   |
+| `text-black`                       | 純黒はコントラストが強すぎて長時間の利用で目が疲れる | `text-foreground`             |
+| 生パレット色の直書き（`text-slate-500` / `bg-emerald-50` 等） | light/dark と配色変更に追従しない。`design-system:check` の `no-raw-palette-color` が拒否 | 意味トークン（`foreground` / `muted-foreground` / `border` / `positive` / `negative` / `warning` / `info` と各 `-soft`）。カテゴリ・性別・メダル等の識別配色だけ `*.palette.ts` に集める |
 | `bg-gray-300` 以上の暗い背景       | テキストのコントラスト確保が困難になる               | semantic token `bg-muted` / `bg-accent`（hover・選択中・補助要素のみ。正典 `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」） |
-| `bg-primary-400`（薄いアクセント） | CTAとして弱く、目立たない                            | `bg-primary-500`              |
-| `text-gray-400` for body text      | WCAG不適合（コントラスト比不足）                     | `text-body`（#3d4b5f）        |
-| `border-gray-100`                  | 薄すぎて境界が見えない                               | `border-slate-200`（#e2e8f0） |
-| `bg-green-*`                       | emeraldで統一する                                    | `bg-emerald-*`                |
-| `bg-yellow-*`                      | amberで統一する                                      | `bg-amber-*`                  |
-| `bg-rose-*`                        | redで統一する                                        | `bg-red-*`                    |
-| `text-blue-*` for links            | primaryで統一する                                    | `text-primary-500`            |
+| `bg-primary-400`（薄いアクセント） | CTAとして弱く、目立たない                            | `bg-primary`                  |
+| `text-gray-400` for body text      | WCAG不適合（コントラスト比不足）                     | `text-muted-foreground`       |
+| `border-gray-100`                  | 薄すぎて境界が見えない                               | `border-border`               |
+| 状態を生の緑・黄・赤で表す         | 配色変更と dark に追従しない                         | `positive` / `warning` / `negative`（`-soft` は淡い地） |
+| `text-blue-*` for links            | primaryで統一する                                    | `text-primary`                |
 | 色だけで情報伝達                   | 色覚多様性への非対応。アクセシビリティ違反           | アイコン/テキストを必ず併用   |
 
 ---
@@ -57,14 +56,17 @@
 > 横幅・レール・余白は `PageShell` / `ArticleShell`（`@/components/layout`）経由で統一（1280px / 右レール 316px / lg+ 左右 40px）。左レールの列と 992px 境界は `LeftRailLayout` だけが所有する。
 > PC の常設左サイドバーは廃止し、ナビはヘッダー（カテゴリはメガメニュー）＋モバイルドロワーに集約。
 >
-> **例外: reading zone（記事系ページ・2026-07-11）**: 記事系ページ（blog 詳細 / ranking 詳細 / survey /
-> terms / privacy）は `ArticleShell` の `.reading-zone` 内でのみ Soft Editorial（`--radius: 14px`・薄グレー地・
-> 2 層ソフトシャドウ）を採用する。これは上記フラット方針の**唯一の例外**（`ArticleCard` / `.blog-news-article`）。
-> home/category/themes/areas/一覧はフラットのまま。正典: `docs/01_技術設計/04_デザインシステム.md`「ArticleShell」。
+> **記事ゾーン（2026-09-25 更新）**: 記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）の
+> `.reading-zone` もカード外枠はフラット（`--radius: 0` / `--card-radius: 0`）。2026-07-11 に置いた「記事ゾーンだけ
+> `--radius: 14px`」の例外は廃止済み。**本文の中に置く部品**（callout・本文内のランキングカード・コードブロック）だけ
+> 役割トークン `--content-radius`（`rounded-content`、6px）で少し丸める。レイアウトのカード外枠とは別の役割で、
+> 使えるファイルは `check-design-system.mjs` の `ARTICLE_BODY_COMPONENT_FILES` に限る。
+> 正典: `docs/01_技術設計/04_デザインシステム.md`「Surface」の角丸の項。
 
 | 禁止                                                | 理由                                                 | 代替                                                                                                          |
 | --------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| カードへの個別角丸（`rounded-xl`/`rounded-2xl` 等） | フラット採用（`--radius:0`）。手動角丸は統一感を崩す | `rounded-none`（既定）。円形のみ `rounded-full`                                                               |
+| カードへの個別角丸（`rounded-xl`/`rounded-2xl` 等） | フラット採用（`--radius:0`）。手動角丸は統一感を崩す | `rounded-card`（= 0）。本文内の部品は `rounded-content`。円形のみ `rounded-full`                              |
+| callout・注記の左の色バー（`border-l-4`）           | 4px アクセントバーは禁止。種類は色だけに頼らない     | 地の色 + アイコン + 日本語ラベル（`Callout.tsx`）。Markdown の引用の左バーだけ typography として残す          |
 | `shadow-lg` / `shadow-2xl`                          | 影が強すぎてノイズになる                             | `shadow-sm` 〜 `shadow-md`（オーバーレイ: `shadow-xl`）                                                       |
 | `py-0.5` for buttons                                | タップターゲットが小さすぎる                         | `h-8` 以上（S: `h-8` / M: `h-10` / L: `h-12`）                                                                |
 | `p-0` on cards                                      | コンテンツが窮屈になる                               | `RailCard` 既定 padding（`px-4 pb-4 pt-3`）。正典 `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」          |
@@ -97,7 +99,7 @@
 
 | 禁止                                                       | 理由                                           | 代替                                                        |
 | ---------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------- |
-| カード上部/左部のカラーバー（`border-t-4` や色付き `div`） | AI生成UIの典型パターン。装飾過剰で汎用性が低い | ボーダー（`border border-slate-200`）のみでカードを構成する |
+| カード上部/左部のカラーバー（`border-t-4` や色付き `div`） | AI生成UIの典型パターン。装飾過剰で汎用性が低い | 共通カード（`SurfaceCard` 系 / `CARD_SURFACE_CLASS`）で構成する。装飾バーを足さない |
 | 左端/上端のカラーストライプ（`border-l-4 border-*-500`）   | Alert含め全コンポーネントで禁止                | `border border-*-200 rounded-lg` で全周ボーダー             |
 
 > **正式例外 (2026-07-11・機械検査 `no-thick-accent-border` の allowlist と同期)**: Markdown 散文中の
@@ -164,14 +166,14 @@
 | 禁止                              | 理由                     | 代替                         |
 | --------------------------------- | ------------------------ | ---------------------------- |
 | `<div>` + `border-b` で水平区切り | セマンティクス違反       | `<hr>` or `role="separator"` |
-| `border-gray-100` でディバイダー  | 薄すぎて境界が見えない   | `border-slate-200`           |
-| `border-slate-400` 以上の区切り線 | 線が強すぎてノイズになる | `border-slate-200`（標準）   |
+| `border-gray-100` でディバイダー  | 薄すぎて境界が見えない   | `border-border`              |
+| `border-slate-400` 以上の区切り線 | 線が強すぎてノイズになる | `border-border`（標準）      |
 
 ### スケルトン・ローディング
 
 | 禁止                                 | 理由                                               | 代替                                            |
 | ------------------------------------ | -------------------------------------------------- | ----------------------------------------------- |
-| スケルトンに `bg-slate-200` 以外の色 | DS統一から外れる                                   | `bg-slate-200` 固定                             |
+| スケルトンに `bg-slate-200` 以外の色 | DS統一から外れる                                   | `bg-muted`（`Skeleton` 部品）                   |
 | `aria-busy="true"` の省略            | スクリーンリーダーがローディング状態を認識できない | コンテナに `aria-busy="true"` + `role="status"` |
 
 ---

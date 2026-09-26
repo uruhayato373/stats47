@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
 
@@ -7,6 +8,7 @@ import { SectionCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/server";
 
+import { RANK_GOLD_TEXT } from "../../utils/rank-medal.palette";
 import { getSidebarDetail } from "../RankingSidebar/select-sidebar-items";
 
 interface RelatedRankingsGridProps {
@@ -82,13 +84,13 @@ export async function RelatedRankingsGrid({
               )}
               {item.top1 && (
                 <span className="line-clamp-1 text-xs text-muted-foreground">
-                  <span className="font-semibold text-amber-600">
+                  <span className={`font-semibold ${RANK_GOLD_TEXT}`}>
                     {item.top1.rank ?? 1}位
                   </span>{" "}
                   {item.top1.areaName}{" "}
                   {item.top1.value ? (
                     <span className="font-semibold text-foreground">
-                      {item.top1.value}{item.unit}
+                      {item.top1.value}{formatUnitForDisplay(item.unit)}
                     </span>
                   ) : null}
                 </span>

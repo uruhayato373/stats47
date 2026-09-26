@@ -23,12 +23,12 @@ describe("right rail scroll contract", () => {
       'className="hidden w-[316px] shrink-0 lg:flex lg:self-stretch lg:flex-col lg:gap-3"',
     );
 
+    // レールはページと一緒に流れる。追従する領域 (旧 railSticky) を戻さない (2026-09-25)。
     const asideStart = source.indexOf('<aside className="hidden w-[316px]');
     const asideEnd = source.indexOf('</aside>', asideStart);
     const asideSource = source.slice(asideStart, asideEnd);
-    expect(asideSource.indexOf('{railSticky &&')).toBeLessThan(
-      asideSource.lastIndexOf('{rail}')
-    );
+    expect(asideSource).not.toContain("sticky");
+    expect(source).not.toContain("railSticky");
   });
 
   it("RightRailWidgets cannot opt into an independent rail scroll", () => {

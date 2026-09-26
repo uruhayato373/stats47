@@ -7,11 +7,13 @@ import {
   computeChartLayout,
   computeFontSize,
   computeMarginsByRatio,
+  leftMarginForTickLabels,
 } from "../../../shared/layout";
 import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3LineChartProps, TimeSeriesDataNode } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 const DEFAULT_COLORS = schemeTableau10 as readonly string[];
 
@@ -120,11 +122,6 @@ export function LineChart({
     const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const catValues = data.map((d) => String(d[categoryKey] ?? ""));
-    const x = scalePoint()
-      .domain(catValues)
-      .range([marginLeft, width - marginRight]);
-
     const isMulti = !!(seriesConfig && seriesConfig.length > 0);
     const seriesToDraw = isMulti
       ? seriesConfig!
@@ -156,6 +153,21 @@ export function LineChart({
           .nice()
           .range([height - marginBottom, marginTop])
       : null;
+
+    // 縦軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
+    // (StackedAreaChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
+    const yTicks = y.ticks(innerHeight / 40);
+    const plotLeft = leftMarginForTickLabels(
+      yTicks.map((v) => yAxisFormatter(Number(v))),
+      baseFontSize,
+      marginLeft,
+    );
+    const plotWidth = width - plotLeft - marginRight;
+
+    const catValues = data.map((d) => String(d[categoryKey] ?? ""));
+    const x = scalePoint()
+      .domain(catValues)
+      .range([plotLeft, width - marginRight]);
 
     /** 系列が載る軸のスケール。右軸が無い場合は常に左。 */
     const scaleFor = (s: { yAxis?: "left" | "right" }) =>
@@ -209,15 +221,15 @@ export function LineChart({
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
     const yAxis = axisLeft(y)
-      .ticks(innerHeight / 40, "s")
+      .tickValues(yTicks)
       .tickFormat((v) => yAxisFormatter(Number(v)));
     svg
       .append("g")
-      .attr("transform", `translate(${marginLeft},0)`)
+      .attr("transform", `translate(${plotLeft},0)`)
       .call(yAxis)
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
-          .attr("x2", width - marginLeft - marginRight)
+          .attr("x2", plotWidth)
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
@@ -258,7 +270,7 @@ export function LineChart({
       if (unit) {
         svg
           .append("text")
-          .attr("x", marginLeft)
+          .attr("x", plotLeft)
           .attr("y", marginTop - 8)
           .attr("text-anchor", "start")
           .attr("font-size", baseFontSize)
@@ -314,9 +326,9 @@ export function LineChart({
     // 透明オーバーレイ
     svg
       .append("rect")
-      .attr("x", marginLeft)
+      .attr("x", plotLeft)
       .attr("y", marginTop)
-      .attr("width", innerWidth)
+      .attr("width", plotWidth)
       .attr("height", innerHeight)
       .attr("fill", "transparent")
       .style("cursor", "crosshair")
@@ -379,6 +391,7 @@ export function LineChart({
       });
 
     // 凡例は SVG 外に HTML で描画（重なり防止）
+    fitSvgViewBox(svgRef.current, width, height);
   }, [
     data,
     categoryKey,

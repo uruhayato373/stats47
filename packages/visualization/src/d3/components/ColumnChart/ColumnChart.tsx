@@ -8,6 +8,7 @@ import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../.
 import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { ColumnChartProps } from "./types";
+import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
 
 /**
  * ColumnChart - 垂直方向の積み上げ棒グラフ
@@ -113,6 +114,7 @@ export function ColumnChart({
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 
+    fitSvgViewBox(svgRef.current, width, height);
   }, [data, indexBy, keys, width, height, yAxisFormatter, colors, marginTop, marginBottom, marginLeft, marginRight, baseFontSize, innerHeight, unit, showTooltip, hideTooltip, updateTooltipPosition]);
 
   return (

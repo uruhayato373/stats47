@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "35963238547-1",
+  "status": "implementation-needed",
+  "keyword": "高校教師 年収",
+  "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+  "needs": "「高校教師 年収」で検索する人は、教師を目指す学生・転職検討者・現職教員で、公立/私立を含めた一般的な平均年収の目安、初任給、手取り額を知りたくて検索している。都道府県別の格差そのものを目的に検索している可能性は低い。",
+  "gap": "対象記事(target-page.txt=タイトル/説明文、WebFetch確認=本文)は2023年都道府県別年収格差(和歌山1位894.2万円・秋田最下位369.5万円)の独自分析で、上位5県比較・地理分布・小中学校教員比較は詳しいが、検索者が最初に求める「全国平均はいくらか」「初任給・手取り」「公立/私立の違い」が本文に明記されていない。競合2ページはこれらを一次資料付きで明示しており、平均順位8.18・表示137に対しクリック0という乖離の一因と考えられる。",
+  "done": "記事冒頭(intro)に全国平均年収(出典:文部科学省「学校教員統計調査」等)と公立/私立の違いを1〜2文で追記する。本記事はブログ本文でeditableFileがnull(article.mdはR2 SSOTのため既存文字列置換の自動適用対象外)。実装は`.claude/skills/blog/brushup-blog`(`/brushup-blog --target queue`)経由でarticle.mdを編集し、quality-gate通過後R2 push・再デプロイ。完了条件: 本文冒頭に出典付き全国平均年収が掲載され、publish-blog.ymlのblockerがゼロ。",
+  "method": "intro",
+  "competitors": [
+    {
+      "url": "https://teachforjapan.org/journal/28878/",
+      "findings": "公立高校教師の平均年収680万円、初任給21〜23万円/月、手取り目安(年収500万で約390万)、公私の違い(公務員条例vs学校法人規程で初任給270〜590万円の幅)を文科省・総務省・人事院の一次資料付きで明示。FAQ6項目(残業代・部活手当等)も網羅し一般的な『いくらもらえるか』に直接回答する構成。"
+    },
+    {
+      "url": "https://xn--pckua2a7gp15o89zb.com/%E9%AB%98%E6%A0%A1%E6%95%99%E5%93%A1%E3%81%AE%E5%B9%B4%E5%8F%8E%E3%83%BB%E6%99%82%E7%B5%A6",
+      "findings": "求人統計ベースの平均年収395万円、月給33万円、初任給25万円、時給(バイト1,196円/派遣1,500円)を掲載。国税庁『民間給与実態統計調査』と比較しつつ、地域別最高(大阪479万円)・最低(宮城354万円)の実額を提示する一般向け回答形式。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/blog/high-school-teacher-salary-prefecture-gap",
+      "status": 200,
+      "fetchedAt": "2026-09-24T06:11:52.574Z",
+      "inputHash": "61a00f85d3aa07fbfe27e9572f0da2baf8cbf65da3834bcf473826fac04b1f2c",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "bcd6d91bf51f5fb9613697118e11a3f3d788adfa0910157b9ba0bed41250baf1",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "7b03b2446a7bd343c2a302fd1c007940a538cee36d8102b938d8b52e76c767fc"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "高校教師 年収"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/blog/high-school-teacher-salary-prefecture-gap"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://teachforjapan.org/journal/28878/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://xn--pckua2a7gp15o89zb.com/%E9%AB%98%E6%A0%A1%E6%95%99%E5%93%A1%E3%81%AE%E5%B9%B4%E5%8F%8E%E3%83%BB%E6%99%82%E7%B5%A6"
+      }
+    ]
+  },
+  "selectedAt": "2026-09-24",
+  "inputHash": "61a00f85d3aa07fbfe27e9572f0da2baf8cbf65da3834bcf473826fac04b1f2c",
+  "methods": [],
+  "files": []
+}

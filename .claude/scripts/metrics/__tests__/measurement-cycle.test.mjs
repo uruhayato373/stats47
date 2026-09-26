@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
   countOpsImprovements, MIN_EVENTS_FOR_BREAKDOWN, parseCsv, renderCycleMarkdown, summarizeCloudflare,
-  summarizeDimensionGaps, summarizeEngine, summarizeJourney, summarizeOverdue, summarizePsi, summarizeSns,
+  summarizeDimensionGaps, summarizeEngine, summarizeJourney, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns,
   summarizeWorkContext,
 } from '../lib/measurement-cycle.mjs';
 import { buildQuery, parseFilterExpr } from '../lib/ga4-query.mjs';
@@ -157,4 +157,21 @@ test('ga4-query filter mini-language maps to Data API filters and rejects ambigu
   const { request } = buildQuery(['--metrics', 'sessions', '--japan', '--filter', 'pagePath==/']);
   assert.equal(request.dimensionFilter.andGroup.expressions.length, 2);
   assert.deepEqual(request.dateRanges, [{ startDate: '28daysAgo', endDate: 'yesterday' }]);
+});
+
+// NAV-CLICK-COVERAGE-01 P4 (2026-09-26): 分母は計装に依らないサイト内の移動、分子は導線名の付いたクリック
+test('nav coverage divides labeled nav clicks by internal transitions and ranks unlabeled destinations', () => {
+  const nav = summarizeNavCoverage({
+    transitions: [{ from_section: 'blog', to_section: 'ranking', pageViews: '600' }, { from_section: 'ranking', to_section: 'ranking', pageViews: '400' }],
+    navClicks: [
+      { nav_surface: 'desktop-header', nav_label: 'ランキング', eventCount: '200' },
+      { nav_surface: 'unlabeled', nav_label: 'ranking', eventCount: '150' },
+      { nav_surface: 'unlabeled', nav_label: 'areas', eventCount: '50' },
+    ],
+  });
+  assert.equal(nav.internalTransitions, 1000);
+  assert.equal(nav.labeledClicks, 200);
+  assert.equal(nav.coverage, 0.2);
+  assert.equal(nav.unlabeledShare, 0.5);
+  assert.deepEqual(nav.topUnlabeled.map((r) => r.label), ['ranking', 'areas']);
 });

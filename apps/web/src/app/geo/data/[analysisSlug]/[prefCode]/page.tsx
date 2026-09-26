@@ -16,6 +16,7 @@ import {
   type GeoAnalysisPrefDetail,
 } from '@stats47/gis';
 
+import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
@@ -240,44 +241,44 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
         <SectionHeader title="全件データと出典の取得" hideRule />
         <ul className="mt-3 space-y-2 text-sm">
           <li>
-            <a
+            <ExternalAnchor
               className="font-medium text-primary underline"
               href={geoAnalysisPublicDataUrl(detailKey)}
             >
               {detail.areaName}の途中artifact JSON
-            </a>
+            </ExternalAnchor>
           </li>
           <li>
-            <a
+            <ExternalAnchor
               className="font-medium text-primary underline"
               href={geoAnalysisPublicDataUrl(
                 `app/geo/${analysisSlug}/item.json`
               )}
             >
               47都道府県aggregate JSON
-            </a>
+            </ExternalAnchor>
           </li>
           <li>
-            <a
+            <ExternalAnchor
               className="font-medium text-primary underline"
               href={geoAnalysisPublicDataUrl(
                 geoAnalysisManifestKey(analysisSlug)
               )}
             >
               入力SHA・空間演算・保存則manifest
-            </a>
+            </ExternalAnchor>
           </li>
           {manifest.stages
             .find((stage) => stage.id === 'public-facility-points')
             ?.outputs.filter((output) => output.areaCode === detail.areaCode)
             .map((output) => (
               <li key={output.key}>
-                <a
+                <ExternalAnchor
                   className="font-medium text-primary underline"
                   href={geoAnalysisPublicDataUrl(output.key)}
                 >
                   この県の全原典施設・検証済みJSON
-                </a>
+                </ExternalAnchor>
               </li>
             ))}
           <li>

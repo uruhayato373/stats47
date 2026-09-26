@@ -64,18 +64,16 @@ export function MapColorLegend({
         div.style.cssText =
           "background:rgba(255,255,255,0.92);padding:6px 10px;border-radius:6px;font-size:11px;line-height:1.4;box-shadow:0 1px 4px rgba(0,0,0,0.15);backdrop-filter:blur(4px);min-width:180px;";
 
-        // 10段階グラデーション
+        // 10段階グラデーション。左端のラベルが最小値なので、色も値の小さい順に取る。
+        // data はランキング順 (1 位 = 最大値が先頭) で渡るため、配列順のまま取ると
+        // 左端に最大値の色が来て、地図と凡例の向きが逆になっていた (2026-09-25)。
+        const ascending = sortByValueAscending(data);
         const steps = 10;
         const gradientParts: string[] = [];
         for (let i = 0; i < steps; i++) {
           const ratio = i / (steps - 1);
-          const val = min + (max - min) * ratio;
-          const fakeCode = `__legend_${i}`;
-          // ダミーの colorMapper 呼び出し用にデータの中間値を使う
-          const idx = Math.round(ratio * (data.length - 1));
-          const code = data[idx]?.areaCode ?? fakeCode;
-          const color = colorMapper(code);
-          gradientParts.push(color);
+          const idx = Math.round(ratio * (ascending.length - 1));
+          gradientParts.push(colorMapper(ascending[idx].areaCode));
         }
 
         const factor = valueDisplay?.conversionFactor ?? 1;
@@ -119,4 +117,11 @@ function formatValue(value: number, decimalPlaces?: number): string {
   }
   if (Number.isInteger(value)) return value.toLocaleString();
   return value.toFixed(1);
+}
+
+/** 値のある県だけを値の小さい順に並べる (凡例の色を左 = 最小値から取るため) */
+export function sortByValueAscending(data: MapDataPoint[]): MapDataPoint[] {
+  return data
+    .filter((d) => d.value != null && Number.isFinite(d.value))
+    .sort((a, b) => a.value - b.value);
 }

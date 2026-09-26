@@ -50,17 +50,30 @@ function ga4ReadClients() {
   };
 }
 
-/** apply 用 admin credential (analytics.edit)。専用鍵の env が無ければ null。 */
+/**
+ * apply 用 admin client (analytics.edit)。専用鍵 GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON があればそれを使い、
+ * 無ければ通常の鍵 (GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル stats47-*.json) を使う。
+ * 2026-09-26 オーナー判断: どの workflow・PC からでも GA4 設定を変えられるよう、通常の SA にも GA4 編集者を付ける。
+ * 誤操作の歯止めは plan token + --confirm-site + --commit + --approve (requireCommit) が担う。
+ * 鍵が GA4 編集者でなければ create が権限エラーで失敗する (fail closed)。
+ */
 export function adminEditClient() {
   const json = process.env.GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON;
-  if (!json) return null;
-  let credentials;
+  if (json) {
+    try {
+      const auth = new google.auth.GoogleAuth({ credentials: JSON.parse(json), scopes: [GA4_EDIT_SCOPE] });
+      return google.analyticsadmin({ version: "v1beta", auth });
+    } catch {
+      return null;
+    }
+  }
+  let keyFile;
   try {
-    credentials = JSON.parse(json);
+    keyFile = resolveServiceAccountKeyFile();
   } catch {
     return null;
   }
-  const auth = new google.auth.GoogleAuth({ credentials, scopes: [GA4_EDIT_SCOPE] });
+  const auth = new google.auth.GoogleAuth({ keyFile, scopes: [GA4_EDIT_SCOPE] });
   return google.analyticsadmin({ version: "v1beta", auth });
 }
 
@@ -122,14 +135,38 @@ export function summarizeCustomDimensions(dims) {
   const params = [];
   const scopeByParam = {};
   let eventScopedCount = 0;
+  let userScopedCount = 0;
   for (const d of dims ?? []) {
     const p = d?.parameterName;
     if (!p) continue;
     params.push(p);
     scopeByParam[p] = d?.scope ?? null;
     if (d?.scope === "EVENT") eventScopedCount += 1;
+    if (d?.scope === "USER") userScopedCount += 1;
   }
-  return { params, scopeByParam, eventScopedCount, count: (dims ?? []).length };
+  return { params, scopeByParam, eventScopedCount, userScopedCount, count: (dims ?? []).length };
+}
+
+/**
+ * 拡張計測の設定を監査用に要約する (pure)。
+ * pageChangesEnabled (履歴変更で page_view) は、アプリが page_view を手動送信しているので ON だと二重計測になる。
+ */
+export function summarizeEnhancedMeasurement(settings) {
+  if (!settings) return { status: "missing" };
+  const pick = (k) => (typeof settings[k] === "boolean" ? settings[k] : null);
+  const out = {
+    status: "ok",
+    streamEnabled: pick("streamEnabled"),
+    pageChangesEnabled: pick("pageChangesEnabled"),
+    scrollsEnabled: pick("scrollsEnabled"),
+    outboundClicksEnabled: pick("outboundClicksEnabled"),
+    siteSearchEnabled: pick("siteSearchEnabled"),
+    fileDownloadsEnabled: pick("fileDownloadsEnabled"),
+  };
+  out.warnings = [];
+  if (out.streamEnabled && out.pageChangesEnabled) out.warnings.push("page-changes-double-count");
+  if (out.streamEnabled === false || out.outboundClicksEnabled === false) out.warnings.push("outbound-clicks-off");
+  return out;
 }
 
 // ── read-only inventory (Phase 1) ─────────────────────────────────────────────
@@ -209,6 +246,9 @@ export async function auditGa4Api({ ledgerMd = null } = {}) {
     out.adsenseLinks = { status: "error", detail: sanitizeErr(e) };
   }
 
+  // 4b. プロパティ設定 (read-only・各項目は独立に status を持つ)
+  out.settings = await auditPropertySettings(clients, propertyId);
+
   // 5. GSC property
   out.gsc = await auditGscProperty();
 
@@ -230,6 +270,60 @@ export async function auditGa4Api({ ledgerMd = null } = {}) {
   }
 
   return out;
+}
+
+/** section を 1 つ読み、失敗を ok へ読み替えない。 */
+async function readSection(fn) {
+  try {
+    return { status: "ok", ...(await fn()) };
+  } catch (e) {
+    return { status: "error", detail: sanitizeErr(e) };
+  }
+}
+
+/**
+ * key events / custom metrics / 保持期間 / Google signals / 拡張計測 / BigQuery link / audiences を読む。
+ * 設定の変更はしない。値は判定に要る最小限だけ残す。
+ */
+async function auditPropertySettings(clients, propertyId) {
+  const parent = `properties/${propertyId}`;
+  const list = (api, key) => listAllPages((p) => api.list(p), { parent, pageSize: 200 }, key);
+  return {
+    keyEvents: await readSection(async () => {
+      const items = await list(clients.beta.properties.keyEvents, "keyEvents");
+      return { eventNames: items.map((k) => k.eventName).filter(Boolean).sort() };
+    }),
+    customMetrics: await readSection(async () => {
+      const items = await list(clients.beta.properties.customMetrics, "customMetrics");
+      return { count: items.length, params: items.map((m) => m.parameterName).filter(Boolean).sort() };
+    }),
+    dataRetention: await readSection(async () => {
+      const res = await clients.beta.properties.getDataRetentionSettings({ name: `${parent}/dataRetentionSettings` });
+      return { eventDataRetention: res.data?.eventDataRetention ?? null, resetUserDataOnNewActivity: res.data?.resetUserDataOnNewActivity ?? null };
+    }),
+    googleSignals: await readSection(async () => {
+      const res = await clients.alpha.properties.getGoogleSignalsSettings({ name: `${parent}/googleSignalsSettings` });
+      return { state: res.data?.state ?? null };
+    }),
+    enhancedMeasurement: await readSection(async () => {
+      const streams = await listAllPages((p) => clients.beta.properties.dataStreams.list(p), { parent, pageSize: 200 }, "dataStreams");
+      const web = streams.find((s) => /stats47\.jp/.test(s?.webStreamData?.defaultUri ?? ""));
+      if (!web?.name) return { stream: "not-found" };
+      const res = await clients.alpha.properties.dataStreams.getEnhancedMeasurementSettings({ name: `${web.name}/enhancedMeasurementSettings` });
+      return summarizeEnhancedMeasurement(res.data);
+    }),
+    bigQueryLinks: await readSection(async () => {
+      const items = await list(clients.alpha.properties.bigQueryLinks, "bigqueryLinks");
+      return {
+        linkCount: items.length,
+        links: items.map((l) => ({ dailyExportEnabled: l.dailyExportEnabled ?? null, streamingExportEnabled: l.streamingExportEnabled ?? null, datasetLocation: l.datasetLocation ?? null })),
+      };
+    }),
+    audiences: await readSection(async () => {
+      const items = await list(clients.alpha.properties.audiences, "audiences");
+      return { count: items.length };
+    }),
+  };
 }
 
 /** AdSense account 照合 + unit inventory。gate は accounts.list 成功のみ。 */
@@ -262,15 +356,15 @@ export async function applyCreateCustomDimension(plan, { propertyId }) {
   if (!plan || plan.action !== "create-ga4-custom-dimension" || !plan.parameterName) {
     return { status: "blocked", reason: "plan が create-ga4-custom-dimension でない" };
   }
-  if (plan.scope !== "EVENT") {
-    return { status: "blocked", reason: `plan の scope が EVENT でない (${plan.scope})` };
+  if (plan.scope !== "EVENT" && plan.scope !== "USER") {
+    return { status: "blocked", reason: `plan の scope が EVENT/USER でない (${plan.scope})` };
   }
   if (!propertyId) {
     return { status: "blocked", reason: "propertyId 未確定" };
   }
   const admin = adminEditClient();
   if (!admin) {
-    return { status: "admin-credential-missing", reason: "GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON が無い (Environment secret・人間工程)" };
+    return { status: "admin-credential-missing", reason: "GA4 を編集できる鍵が無い (GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON / GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル鍵)" };
   }
   const parent = `properties/${propertyId}`;
 
@@ -296,7 +390,7 @@ export async function applyCreateCustomDimension(plan, { propertyId }) {
       requestBody: {
         displayName: plan.displayName,
         parameterName: plan.parameterName,
-        scope: "EVENT",
+        scope: plan.scope,
         description: plan.description,
       },
     });
@@ -313,10 +407,52 @@ export async function applyCreateCustomDimension(plan, { propertyId }) {
       "customDimensions",
     );
     const found = after.find((d) => d?.parameterName === plan.parameterName);
-    if (found && found.scope === "EVENT" && found.name) {
+    if (found && found.scope === plan.scope && found.name) {
       return { status: "applied", verified: true, resourceName: found.name };
     }
     return { status: "mutation-unknown", reason: "作成後に parameterName/scope/name を verify できない — 再試行しない", resourceName: created?.name ?? null };
+  } catch (e) {
+    return { status: "mutation-unknown", reason: `verify list に失敗: ${sanitizeErr(e)} — 再試行しない`, resourceName: created?.name ?? null };
+  }
+}
+
+/**
+ * GA4 key event を 1 件作成する (I/O・admin credential 必須)。custom dimension と同じく、作成直前に
+ * 重複を確認し、作成後に list で verify する。verify 不能なら mutation-unknown で止め、再試行しない。
+ * @param {{action:string, eventName:string, countingMethod:string}} plan
+ */
+export async function applyCreateKeyEvent(plan, { propertyId }) {
+  if (!plan || plan.action !== "create-ga4-key-event" || !plan.eventName) {
+    return { status: "blocked", reason: "plan が create-ga4-key-event でない" };
+  }
+  if (!propertyId) return { status: "blocked", reason: "propertyId 未確定" };
+  const admin = adminEditClient();
+  if (!admin) {
+    return { status: "admin-credential-missing", reason: "GA4 を編集できる鍵が無い (GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON / GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル鍵)" };
+  }
+  const parent = `properties/${propertyId}`;
+  const listKeyEvents = () => listAllPages((p) => admin.properties.keyEvents.list(p), { parent, pageSize: 200 }, "keyEvents");
+  try {
+    if ((await listKeyEvents()).some((k) => k?.eventName === plan.eventName)) {
+      return { status: "no-op", reason: "作成直前に同 eventName を確認 (重複作成しない)" };
+    }
+  } catch (e) {
+    return { status: "blocked", reason: `直前確認に失敗: ${sanitizeErr(e)}` };
+  }
+  let created;
+  try {
+    const res = await admin.properties.keyEvents.create({
+      parent,
+      requestBody: { eventName: plan.eventName, countingMethod: plan.countingMethod },
+    });
+    created = res.data;
+  } catch (e) {
+    return { status: "error", reason: sanitizeErr(e) };
+  }
+  try {
+    const found = (await listKeyEvents()).find((k) => k?.eventName === plan.eventName);
+    if (found?.name) return { status: "applied", verified: true, resourceName: found.name };
+    return { status: "mutation-unknown", reason: "作成後に eventName を verify できない — 再試行しない", resourceName: created?.name ?? null };
   } catch (e) {
     return { status: "mutation-unknown", reason: `verify list に失敗: ${sanitizeErr(e)} — 再試行しない`, resourceName: created?.name ?? null };
   }
