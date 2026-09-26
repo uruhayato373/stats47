@@ -1,0 +1,10 @@
+machine|https://stats47.jp/blog/alcohol-prefecture-map|blog_svg_text_issues
+machine|https://stats47.jp/blog/allocation-tax-area|blog_svg_text_issues
+machine|https://stats47.jp/blog/automotive-industry-transformation-map|blog_svg_text_issues
+machine|https://stats47.jp/blog/beer-peak-month-july-to-december|a11y_violations
+machine|https://stats47.jp/blog/beer-peak-month-july-to-december|blog_svg_text_issues
+machine|https://stats47.jp/blog/birth-death-gap-decline|blog_svg_text_issues
+machine|https://stats47.jp/blog/cc-estat-07-birthrate-line|blog_svg_text_issues
+machine|https://stats47.jp/blog/cc-estat-08-bar-chart-race|blog_svg_text_issues
+machine|https://stats47.jp/blog/cc-estat-14-energy-area-chart|blog_svg_text_issues
+machine|https://stats47.jp/blog/cc-estat-16-commerce-bubble|blog_svg_text_issues

@@ -21,3 +21,15 @@ date,template,urls,errors,warnings
 2026-09-24,category,17,11,10
 2026-09-24,survey,148,58,91
 2026-09-24,municipality,361,0,1
+2026-09-26,home,1,1,1
+2026-09-26,ranking,2409,888,2879
+2026-09-26,prefecture-list,1,0,1
+2026-09-26,theme,56,33,34
+2026-09-26,geo-analysis,71,57,13
+2026-09-26,other,307,3,50
+2026-09-26,prefecture-detail,2491,1521,1313
+2026-09-26,blog,1,1,1
+2026-09-26,blog-article,605,605,225
+2026-09-26,category,17,12,12
+2026-09-26,survey,148,58,92
+2026-09-26,municipality,361,0,3

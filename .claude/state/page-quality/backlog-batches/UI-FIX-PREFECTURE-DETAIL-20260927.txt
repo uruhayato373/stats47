@@ -1,0 +1,4 @@
+machine|https://stats47.jp/areas/01000|a11y_violations
+machine|https://stats47.jp/areas/02000/landslide-exposure|a11y_violations
+machine|https://stats47.jp/areas/13000|a11y_violations
+machine|https://stats47.jp/areas/47000|a11y_violations

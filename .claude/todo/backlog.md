@@ -954,6 +954,45 @@ updated: 2026-09-21
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UI-FIX-PREFECTURE-DETAIL-20260927] UI 是正: prefecture-detail の週次 UI 検査の指摘 4 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260927.txt] [起票:2026-09-27] [レーン:UI・回遊]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260927.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/areas/01000|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/areas/02000/landslide-exposure|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/areas/13000|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/areas/47000|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260927.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-BLOG-ARTICLE-20260927] UI 是正: blog-article の週次 UI 検査の指摘 10 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt] [起票:2026-09-27] [レーン:UI・回遊]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/blog/alcohol-prefecture-map|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/allocation-tax-area|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/automotive-industry-transformation-map|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/beer-peak-month-july-to-december|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/beer-peak-month-july-to-december|blog_svg_text_issues` — blog_svg_text_issues = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/birth-death-gap-decline|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/cc-estat-07-birthrate-line|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/cc-estat-08-bar-chart-race|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/cc-estat-14-energy-area-chart|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/blog/cc-estat-16-commerce-bubble|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
+- **記事チャート SVG (振り分けてから直す)**: まず `npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt` を実行する。`regen-fixes` は生成器が既に正しく、R2 の SVG を作り直すだけで直る (コード変更なし)。R2 への反映はオーナー承認が要るので、出力された `gh workflow run regenerate-blog-svgs.yml …` を書いた `[実行:ユーザー]` カードを起票し、対象を `--mark-owner` で紐付ける。`generator-fix` は `packages/svg-builder` の該当チャートを直し、長いラベルの fixture テストを足してから再実行して `regen-fixes` になることを確かめる (以降は同じ手順)。`no-data` は data JSON が無く作り直せないので、手作業の brushup を依頼するカードを起票して `--mark-owner`。`clean` は既に直っているので `--mark-fixed`。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
 ### [CSV-DL-INTENT-SURVEY-01] CSV ダウンロード後に用途 1 問と任意の連絡口を置き、実務利用者を見つける
 
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-26] [レーン:行政資料]

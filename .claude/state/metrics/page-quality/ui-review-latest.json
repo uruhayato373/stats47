@@ -1,76 +1,33 @@
 {
-  "generatedAt": "2026-09-24T07:43:10.930Z",
-  "auditGeneratedAt": "2026-09-24T06:51:27.490Z",
-  "reviewStatus": "reviewed",
+  "generatedAt": "2026-09-26T21:39:12.357Z",
+  "auditGeneratedAt": "2026-09-26T20:40:40.413Z",
+  "reviewStatus": "no-issues",
   "reviewError": null,
-  "summary": "10ページ中2ページで重大な表示崩れを発見。geo-analysisは6枚の地図プレビューが全滅、rankingは地図タイルに「API KEY REQUIRED」の透かしが全面表示。theme/prefecture-detailにも軽微な表示問題あり。他ページ(prefecture-list, blog, category, survey, municipality, other)は目立った崩れなし。",
-  "findings": [
-    {
-      "template": "geo-analysis",
-      "device": "mobile-390",
-      "severity": "high",
-      "location": "1枚目から2枚目にかけて、6件の分析カード全ての左側プレビュー枠",
-      "issue": "「人口×地価」「人口×洪水」「人口×駅」など6つの分析カードすべてで、地図プレビュー画像の代わりに『地図プレビューを取得できませんでした』というグレーの空枠が表示されている。読者は地図の内容を全く確認できない。",
-      "suggestion": "地図プレビュー画像の生成・配信状況を確認し、失敗時のfallback表示ではなく正常な画像を出すよう修正する。"
-    },
-    {
-      "template": "geo-analysis",
-      "device": "desktop-1440",
-      "severity": "high",
-      "location": "1枚目、6分析カードの左側プレビュー枠(mobile/tabletでも同一現象)",
-      "issue": "デスクトップ幅でも同様に全カードのプレビュー画像が『地図プレビューを取得できませんでした』のまま。3幅すべてで再現するため一時的な読み込み遅延ではなく機能停止と見られる。",
-      "suggestion": "プレビュー画像生成パイプラインの動作を確認し復旧する。"
-    },
-    {
-      "template": "ranking",
-      "device": "mobile-390",
-      "severity": "high",
-      "location": "1枚目、地図タブの日本地図タイル全体",
-      "issue": "地図の背景タイルに『API KEY REQUIRED』の文字が何箇所も斜めに大きく透かし表示されており、地図が正しく読めない。地名(ウラジオストク、ソウルなど本来不要な国外都市名)も表示され、本番用の地図タイルになっていない。",
-      "suggestion": "CartoDBの地図タイルAPIキーを本番環境に設定し、正規のタイルが表示されるようにする。"
-    },
-    {
-      "template": "ranking",
-      "device": "desktop-1440",
-      "severity": "high",
-      "location": "1枚目、地図タブの日本地図タイル(tablet-768でも同一現象)",
-      "issue": "デスクトップでも同様に地図タイル全面に『API KEY REQUIRED』の透かしが表示され、海外の地名や不要な国境線まで見えてしまっている。3幅共通の問題。",
-      "suggestion": "地図タイルAPIキー設定を本番に反映し、全幅で再確認する。"
-    },
-    {
-      "template": "theme",
-      "device": "mobile-390",
-      "severity": "medium",
-      "location": "3枚目、『自然増減：出生数と死亡数』『外国人の人口移動』の2つのグラフ枠",
-      "issue": "折れ線・棒グラフが表示されるべき枠が、中身のない灰色の空ボックスのままになっている。同じ画面内の他のグラフ(総人口など)は正常に描画されている。",
-      "suggestion": "チャートの遅延読み込みやデータ取得失敗の原因を確認し、確実に描画されるようにする。"
-    },
-    {
-      "template": "theme",
-      "device": "desktop-1440",
-      "severity": "medium",
-      "location": "2枚目、『都道府県 人口移動フロー』のグラフ枠",
-      "issue": "『読み込み中...』の表示のままフロー図が描画されていない。tablet-768でも同じ箇所が空の灰色ボックスになっている。",
-      "suggestion": "人口移動フロー図の初期表示ロジックを見直し、読み込み完了後に確実に描画されるようにする。"
-    },
-    {
-      "template": "prefecture-detail",
-      "device": "desktop-1440",
-      "severity": "low",
-      "location": "2枚目、経済・雇用セクションの『失業率』カード右隣の空白マス",
-      "issue": "3列グリッドのうち3列目に対応するデータがない場合、意味のない灰色の空ボックスがそのまま表示され、レイアウトに不自然な空白ができている。3枚目の『延べ床面積』『犯罪認知件数』のダッシュ表示箇所も同様。",
-      "suggestion": "データが存在しない項目は空ボックスを出さずグリッドを詰めるか、項目自体を非表示にする。"
-    },
-    {
-      "template": "other",
-      "device": "mobile-390",
-      "severity": "low",
-      "location": "タグページの記事一覧、各記事タイトルの直上",
-      "issue": "『general-households-prefecture-gap』のような英語の技術的なslug文字列が、記事タイトルの上にそのまま表示されている。一般読者には意味が分からない内部識別子。",
-      "suggestion": "タグ一覧の記事カードからslug表示を削除するか、カテゴリラベルなど読者向けの情報に置き換える。"
-    }
+  "reviewedPages": [
+    "home",
+    "prefecture-list",
+    "geo-analysis",
+    "geo-analysis--analysis-pref",
+    "other--product-item",
+    "theme",
+    "theme--real-income",
+    "prefecture-detail",
+    "prefecture-detail--theme-care",
+    "ranking--single-year",
+    "ranking--kakei-city",
+    "ranking",
+    "blog",
+    "blog-article",
+    "category",
+    "survey",
+    "municipality--designated-city",
+    "other--japan-theme",
+    "municipality",
+    "other"
   ],
+  "summary": "17テンプレート×3幅(mobile-390/tablet-768/desktop-1440)を確認したが、レイアウト崩れ・重なり・はみ出し・読みにくい文字などの新規指摘は見つからなかった。blog-articleテンプレートについては機械検査で既に検出済みのSVG内テキスト重なり(beer-months-by-year-timeseries.svg等)とa11yのcolor-contrast、prefecture-detailテンプレートのcolor-contrastが既知の問題として残っているが、これらは automatedFindings に含まれているため重複報告しない。各ページとも初見の読者が「何のページか」「次に何をすべきか」を1枚目のスクロールで把握でき、年・単位の表記も一貫していた。",
+  "findings": [],
   "rejected": [],
-  "newViolationCount": 0,
+  "newViolationCount": 116,
   "firstRun": false
 }
