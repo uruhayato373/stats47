@@ -1,13 +1,7 @@
 {
-  "hash": "6d8da39815f2359d7bac100f7ca12ee6911ad8df1add9c630480d834a8b0dc5a",
-  "audited_at": "2026-09-26T07:08:47",
+  "hash": "9dd1e52da94ba31dc665ad48f0dd82e5dfd24f6f7b177f515516478630443171",
+  "audited_at": "2026-09-26T07:16:40",
   "files": [
-    ".claude/agents/improvement-triage.md",
-    ".claude/scripts/lib/effect-verdict/cli.mjs",
-    ".claude/scripts/metrics/__tests__/ga4-improvements-adapter.test.mjs",
-    ".claude/scripts/metrics/__tests__/journey-ga4-reports.test.mjs",
-    ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
-    ".claude/scripts/metrics/lib/ga4-improvements-adapter.mjs",
-    ".claude/scripts/metrics/lib/journey-ga4-reports.mjs"
+    ".claude/scripts/google-admin/__tests__/google-admin.test.mjs"
   ]
 }
